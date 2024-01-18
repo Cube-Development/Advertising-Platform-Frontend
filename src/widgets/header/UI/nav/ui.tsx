@@ -23,7 +23,6 @@ export const Nav = () => {
     const newRole = currentRole === "blogger" ? "advertiser" : "blogger";
     switchRole(newRole);
   };
-
   return (
     <nav className={styles.nav}>
       <div
