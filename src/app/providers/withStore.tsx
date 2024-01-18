@@ -1,4 +1,4 @@
-import { Provider } from "react-redux";
+// import { Provider } from "react-redux";
 // import { store } from "../../shared/store";
 
 // export const withStore = (Component: React.FC) => {
@@ -8,3 +8,4 @@ import { Provider } from "react-redux";
 //     </Provider>
 //   );
 // };
+export const a = 5

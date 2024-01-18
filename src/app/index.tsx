@@ -1,6 +1,6 @@
-import { withProviders } from "./providers";
 import { FC, ReactElement } from "react";
 import Routing from "../pages";
+import { withProviders } from "./providers";
 
 const App: FC = (): ReactElement => {
   return <Routing/>;

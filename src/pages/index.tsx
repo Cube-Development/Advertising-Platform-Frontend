@@ -1,5 +1,5 @@
 import { Route, Routes} from 'react-router-dom';
-import { privateRoutes, publicRoutes } from '../shared/config';
+import { privateRoutes, publicRoutes } from './routes';
 
 const Routing = () => {
     const isAuth = false
