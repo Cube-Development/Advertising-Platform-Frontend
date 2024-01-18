@@ -1,12 +1,11 @@
 import {FC} from 'react';
-import { MainLayout } from '../../../widgets/layouts';
 
 
 export const CatalogPage: FC = () => {
 
     return (
-        <MainLayout>
+        <div>
             Catalog PAGE
-        </MainLayout>
+        </div>
     );
 };

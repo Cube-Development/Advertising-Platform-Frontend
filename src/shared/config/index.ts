@@ -1,10 +1,10 @@
 import * as React from "react";
-import { CatalogPage } from "../../pages/Catalog";
-import { LoginPage } from "../../pages/Login";
-import { MainPage } from "../../pages/Main";
-import { MainBloggerPage } from "../../pages/MainBlogger";
-import { NotFoundPage } from "../../pages/NotFound";
-import { ProfilePage } from "../../pages/Profile";
+import { CatalogPage } from "pages/catalog";
+import { LoginPage } from "pages/login";
+import { MainPage } from "pages/main";
+import { MainBloggerPage } from "pages/mainBlogger";
+import { NotFoundPage } from "pages/notFound";
+import { ProfilePage } from "pages/profile";
 import { RouteNames } from "./routes";
 
 
