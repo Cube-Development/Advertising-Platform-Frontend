@@ -1,10 +1,10 @@
 import * as React from "react";
-import { CatalogPage } from "./catalog";
-import { LoginPage } from "./login";
-import { MainPage } from "./main";
-import { MainBloggerPage } from "./mainBlogger";
-import { NotFoundPage } from "./notFound";
-import { ProfilePage } from "./profile";
+import { CatalogPage } from "./Catalog";
+import { LoginPage } from "./Login";
+import { MainPage } from "./Main";
+import { MainBloggerPage } from "./MainBlogger";
+import { NotFoundPage } from "./NotFound";
+import { ProfilePage } from "./Profile";
 import { paths } from "../shared/routing";
 
 
