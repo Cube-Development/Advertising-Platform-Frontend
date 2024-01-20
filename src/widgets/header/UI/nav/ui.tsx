@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useState , useContext} from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { items } from "./config";
+import { useAuth } from "./../../../../shared/context/AuthContext";
+import { roles, advertiserNavbar, bloggerNavbar , nonAuthNavbar} from "./config";
 import styles from "./styles.module.scss";
 
 export const Nav = () => {
-  //   const { pathname } = useRouter();
   const router = useNavigate();
   const location = useLocation();
 
@@ -12,49 +12,96 @@ export const Nav = () => {
     router(href);
   };
 
-  const [currentRole, setCurrentRole] = useState("blogger");
+  const [currentRole, setCurrentRole] = useState(roles.advertiser);
 
-  const switchRole = (role: "blogger" | "advertiser") => {
-    console.log(role);
-    setCurrentRole(role);
-  };
+  const {isAuth, toggleAuth} = useAuth();
+
+  // const [isAuth, setIsAuth] = useState(JSON.parse(localStorage.getItem("isAuth") ?? "false"));
+
 
   const toggleRole = () => {
-    const newRole = currentRole === "blogger" ? "advertiser" : "blogger";
-    switchRole(newRole);
+    const newRole = currentRole === roles.blogger ? roles.advertiser : roles.blogger;
+    setCurrentRole(newRole);
+    localStorage.setItem('role', newRole);
+    console.log(newRole);
   };
 
-  return (
-    <nav className={styles.nav}>
-      <div
-        id="blogger"
-        className={`role-switcher ${currentRole === "blogger" ? "active" : ""}`}
-        onClick={() => switchRole("blogger")}
-      >
-        Blogger
-      </div>
-      <div id="switcher" className="role-switcher" onClick={toggleRole}>
-        Switcher
-      </div>
-      <div
-        id="advertiser"
-        className={`role-switcher ${
-          currentRole === "advertiser" ? "active" : ""
-        }`}
-        onClick={() => switchRole("advertiser")}
-      >
-        Advertiser
-      </div>
+  // const toggleAuth = () => {
+  //   setAuth(!isAuth);
+  //   localStorage.setItem('isAuth', JSON.stringify(!isAuth));
+  // };
 
-      {items.map((item, index) => (
-        <div
-          key={index}
-          onClick={() => handleNavigation(item.href)}
-          className={location.pathname === item.href ? styles.active : ""}
-        >
-          {item.text}
-        </div>
-      ))}
+  return (
+    <nav className={styles.wrapper}>
+      {isAuth
+        ?
+
+        <>
+          <h1 className={`${currentRole === roles.blogger ? styles.active: styles.no__active}`}>
+            Blogger
+          </h1>
+
+          <div 
+            className={`${styles.role__switcher} ${currentRole === roles.advertiser ? styles.role__advertiser : styles.role__blogger}`}
+            onClick={() => { toggleRole(); }}
+              >
+              SWITCH
+          </div>
+
+          <h1 className={`${currentRole === roles.advertiser ? styles.active: styles.no__active}`} >
+            Advertiser
+          </h1>
+
+          {
+            currentRole === roles.advertiser
+
+            ? 
+            advertiserNavbar.map((item, index) => (
+                <div
+                  key={index}
+                  onClick={() => handleNavigation(item.href)}
+                  className={location.pathname === item.href ? styles.active : ""}
+                >
+                  {item.text}
+                </div>
+              ))
+
+            : 
+            bloggerNavbar.map((item, index) => (
+                <div
+                  key={index}
+                  onClick={() => handleNavigation(item.href)}
+                  className={location.pathname === item.href ? styles.active : ""}
+                >
+                  {item.text}
+                </div>
+              ))}
+
+          {/* to delete bellow */}
+          <div 
+            onClick={toggleAuth}
+              >
+              LOGOUT
+          </div>
+        </>
+
+        :
+        <>
+          {nonAuthNavbar.map((item, index) => (
+            <div
+              key={index}
+              onClick={() => handleNavigation(item.href)}
+              className={location.pathname === item.href ? styles.active : ""}
+            >
+              {item.text}
+            </div>
+          ))}
+          {/* to delete bellow */}
+          <div onClick={toggleAuth}>LOGIN</div>
+        </>
+
+      }
+
     </nav>
   );
 };

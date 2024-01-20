@@ -1,8 +1,9 @@
 import { Route, Routes } from "react-router-dom";
+import { useAuth } from "./../shared/context/AuthContext";
 import { privateRoutes, publicRoutes } from "./routes";
 
 export const Routing = () => {
-  const isAuth = false;
+  const { isAuth } = useAuth();;
   return isAuth ? (
     <Routes>
       {privateRoutes.map((route) => (
