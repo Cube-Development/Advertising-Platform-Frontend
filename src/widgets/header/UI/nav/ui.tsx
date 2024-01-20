@@ -1,35 +1,23 @@
-import { useState , useContext} from "react";
+import { FC } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { useAuth } from "./../../../../shared/context/AuthContext";
-import { roles, advertiserNavbar, bloggerNavbar , nonAuthNavbar} from "./config";
+import { roles } from "shared/config/roles";
+import { advertiserNavbar, bloggerNavbar, nonAuthNavbar } from "./config";
 import styles from "./styles.module.scss";
 
-export const Nav = () => {
+interface NavProps {
+  isAuth: boolean;
+  toggleAuth: () => void;
+  currentRole: string;
+  toggleRole: () => void;
+}
+
+export const Nav: FC<NavProps> = ({ isAuth, toggleAuth, currentRole, toggleRole}) => {
   const router = useNavigate();
   const location = useLocation();
 
   const handleNavigation = (href: string) => {
     router(href);
   };
-
-  const [currentRole, setCurrentRole] = useState(roles.advertiser);
-
-  const {isAuth, toggleAuth} = useAuth();
-
-  // const [isAuth, setIsAuth] = useState(JSON.parse(localStorage.getItem("isAuth") ?? "false"));
-
-
-  const toggleRole = () => {
-    const newRole = currentRole === roles.blogger ? roles.advertiser : roles.blogger;
-    setCurrentRole(newRole);
-    localStorage.setItem('role', newRole);
-    console.log(newRole);
-  };
-
-  // const toggleAuth = () => {
-  //   setAuth(!isAuth);
-  //   localStorage.setItem('isAuth', JSON.stringify(!isAuth));
-  // };
 
   return (
     <nav className={styles.wrapper}>

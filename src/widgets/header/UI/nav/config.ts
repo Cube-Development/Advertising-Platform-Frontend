@@ -20,8 +20,3 @@ export const bloggerNavbar = [
   { text: 'Кошелек', href: paths.wallet },
   { text: 'Языки', href: '' },
 ];
-
-export enum roles  {
-  advertiser = 'advertiser',
-  blogger = 'blogger',
-}

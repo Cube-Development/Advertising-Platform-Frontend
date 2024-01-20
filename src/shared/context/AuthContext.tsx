@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useContext, useEffect, useState, FC, ReactNode, SetStateAction, Dispatch } from "react";
+import { FC, ReactNode, useEffect, useState } from "react";
 
 export interface AuthContextType {
   isAuth: boolean;
@@ -12,8 +12,6 @@ const initialAuthContext: AuthContextType = {
 };
 
 export const AuthContext = React.createContext(initialAuthContext);
-
-export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [isAuth, setAuth] = useState<boolean>(JSON.parse(localStorage.getItem('isAuth') ?? 'false'));
