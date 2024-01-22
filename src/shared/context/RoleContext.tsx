@@ -15,11 +15,11 @@ const initialRoleContext: RoleContextType = {
 export const RoleContext = React.createContext(initialRoleContext);
 
 export const RoleProvider: FC<{ children: ReactNode }> = ({ children }) => {
-  const [currentRole, setCurrentRole] = useState(roles.advertiser);
+  const [currentRole, setCurrentRole] = useState<string>(roles.advertiser);
 
   const initializeRole = async () => {
     console.log('useEffect toggleRole 222');
-    const roleValue = await JSON.parse(localStorage.getItem("role") ?? roles.advertiser);
+    const roleValue = localStorage.getItem("role") ?? roles.advertiser;
     setCurrentRole(roleValue);
   };
 

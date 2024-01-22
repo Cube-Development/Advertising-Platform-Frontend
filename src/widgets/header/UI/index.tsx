@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import { useRole } from './../../../shared/hooks/useRole';
 import { useAuth } from './../../../shared/hooks/useAuth';
-import { Login } from './login';
+import { LoginBtn } from './loginBtn';
 import { Logo } from './logo';
 import { Nav } from './nav';
 import { Profile } from './profile';
@@ -14,13 +14,16 @@ export const Header: FC = () => {
     return (
         <header className={styles.wrapper}>
                 <Logo currentRole={currentRole}/>
-                <Nav isAuth={isAuth} toggleAuth={toggleAuth} currentRole={currentRole} toggleRole={toggleRole}/>
+                <Nav 
+                    isAuth={isAuth} toggleAuth={toggleAuth} 
+                    currentRole={currentRole} toggleRole={toggleRole}
+                />
                 {
                     isAuth
                     ?
                     <Profile/>
                     :
-                    <Login/>
+                    <LoginBtn/>
                     
                 }
                 

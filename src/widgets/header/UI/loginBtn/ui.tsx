@@ -3,7 +3,7 @@ import styles from './styles.module.scss';
 import { Link } from 'react-router-dom';
 import { paths } from '../../../../shared/routing';
 
-export const Login: FC = () => {
+export const LoginBtn: FC = () => {
 
     return (
         <div>

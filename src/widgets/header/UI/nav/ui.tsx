@@ -1,6 +1,7 @@
 import { FC } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
-import { roles } from "shared/config/roles";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { roles } from "./../../../../shared/config/roles";
+import { paths } from "./../../../../shared/routing";
 import { advertiserNavbar, bloggerNavbar, nonAuthNavbar } from "./config";
 import styles from "./styles.module.scss";
 
@@ -29,12 +30,14 @@ export const Nav: FC<NavProps> = ({ isAuth, toggleAuth, currentRole, toggleRole}
             Blogger
           </h1>
 
-          <div 
-            className={`${styles.role__switcher} ${currentRole === roles.advertiser ? styles.role__advertiser : styles.role__blogger}`}
-            onClick={() => { toggleRole(); }}
-              >
-              SWITCH
-          </div>
+          <Link to={currentRole === roles.blogger  ? paths.main : paths.mainBlogger}>
+            <div 
+              className={`${styles.role__switcher} ${currentRole === roles.advertiser ? styles.role__advertiser : styles.role__blogger}`}
+              onClick={() => { toggleRole(); }}
+                >
+                SWITCH
+            </div>
+          </Link>
 
           <h1 className={`${currentRole === roles.advertiser ? styles.active: styles.no__active}`} >
             Advertiser

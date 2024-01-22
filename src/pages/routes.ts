@@ -44,12 +44,3 @@ export const publicRoutes: IRoute[] = [
     {path: paths.catalog, component: CatalogPage},
 ]
 
-// export const privateRoutes: IRoute[] = [
-//     {path: paths.main, component: MainPage},
-//     {path: paths.mainBlogger, component: MainBloggerPage},
-//     {path: paths.profile, component: ProfilePage},
-//     {path: paths.notFound, component: NotFoundPage},
-//     {path: paths.catalog, component: CatalogPage},
-//     {path: paths.fullServise, component: FullServicePage},
-//     {path: paths.platformOwner, component: PlatformOwnerPage},
-// ]
