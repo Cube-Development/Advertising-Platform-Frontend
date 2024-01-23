@@ -8,14 +8,14 @@ import { Profile } from './profile';
 import styles from './styles.module.scss';
 
 export const Header: FC = () => {
-    const { isAuth, toggleAuth } = useAuth();
+    const { isAuth, toggleLogin, toggleLogout } = useAuth();
     const { currentRole, toggleRole } = useRole();
 
     return (
         <header className={styles.wrapper}>
                 <Logo currentRole={currentRole}/>
                 <Nav 
-                    isAuth={isAuth} toggleAuth={toggleAuth} 
+                    isAuth={isAuth} toggleLogin={toggleLogin} toggleLogout={toggleLogout} 
                     currentRole={currentRole} toggleRole={toggleRole}
                 />
                 {

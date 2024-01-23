@@ -7,12 +7,13 @@ import styles from "./styles.module.scss";
 
 interface NavProps {
   isAuth: boolean;
-  toggleAuth: () => void;
+  toggleLogin: () => void;
+  toggleLogout: () => void;
   currentRole: string;
   toggleRole: () => void;
 }
 
-export const Nav: FC<NavProps> = ({ isAuth, toggleAuth, currentRole, toggleRole}) => {
+export const Nav: FC<NavProps> = ({ isAuth, toggleLogin, toggleLogout, currentRole, toggleRole}) => {
   const router = useNavigate();
   const location = useLocation();
 
@@ -70,7 +71,7 @@ export const Nav: FC<NavProps> = ({ isAuth, toggleAuth, currentRole, toggleRole}
 
           {/* to delete bellow */}
           <div 
-            onClick={toggleAuth}
+            onClick={toggleLogout}
               >
               LOGOUT
           </div>
@@ -88,7 +89,7 @@ export const Nav: FC<NavProps> = ({ isAuth, toggleAuth, currentRole, toggleRole}
             </div>
           ))}
           {/* to delete bellow */}
-          <div onClick={toggleAuth}>LOGIN</div>
+          <div onClick={toggleLogin}>LOGIN</div>
         </>
 
       }

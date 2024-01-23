@@ -1,69 +1,27 @@
-import { LoginForm } from 'features/LoginForm';
-import {FC} from 'react';
+import { LoginForm } from './../../../features/LoginForm';
+import {FC, useState} from 'react';
+import { MyModal } from './../../../shared/ui';
+import { LoginCode } from './../../../features/LoginCode';
+import { ILogin } from './../../../shared/types/login';
 
 
 export const LoginPage: FC = () => {
-
-    // return  <LoginForm/>;
-    return  <div>Login</div>;
-};
-
-// import React, { useState } from 'react';
-// import styles from "./styles.module.scss";
-
-// interface FormState {
-//   name: string;
-//   email: string;
-// }
-
-// export const LoginPage: React.FC = () => {
-//   const [formData, setFormData] = useState<FormState>({
-//     name: '',
-//     email: '',
-//   });
-
-//   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-//     const { name, value } = e.target;
-//     setFormData((prevData) => ({
-//       ...prevData,
-//       [name]: value,
-//     }));
-//   };
-
-//   const handleSubmit = (e: React.FormEvent): void => {
-//     e.preventDefault();
-//     console.log('Отправленная форма:', formData);
-//     // Добавьте свой код для отправки данных на сервер или выполнения других действий по вашему выбору.
-//   };
-
-//   return (
-//     <form className={styles.form} onSubmit={handleSubmit}>
-//       <div className={styles.formGroup}>
-//         <label htmlFor="name">Имя:</label>
-//         <input
-//           type="text"
-//           id="name"
-//           name="name"
-//           value={formData.name}
-//           onChange={handleChange}
-//           className={styles.input}
-//         />
-//       </div>
-//       <div className={styles.formGroup}>
-//         <label htmlFor="email">Email:</label>
-//         <input
-//           type="email"
-//           id="email"
-//           name="email"
-//           value={formData.email}
-//           onChange={handleChange}
-//           className={styles.input}
-//         />
-//       </div>
-//       <button type="submit" className={styles.submitButton}>
-//         Отправить
-//       </button>
-//     </form>
-//   );
-// };
-
+    const [modal, setModal] = useState(false);
+    const [formData, setFormData] = useState({ name: '', email: '' });
+  
+    const changeModal: ILogin = (vision, data) => {
+        setModal(vision);
+        if (data) {
+          setFormData(data);
+        }
+      };
+  
+    return (
+      <>
+        <LoginForm setModal={changeModal} />
+        <MyModal visible={modal} setVisible={setModal}>
+          <LoginCode email={formData.email} changeModal={changeModal} />
+        </MyModal>
+      </>
+    );
+  };

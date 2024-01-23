@@ -1,16 +1,14 @@
-import React, { useState } from 'react';
+import React, { FC, useState } from 'react';
+import { ILogin } from './../../../shared/types/login';
+import { MyButton, MyForm, MyInput } from './../../../shared/ui';
 import styles from "./styles.module.scss";
 
-interface FormState {
-  name: string;
-  email: string;
+interface LoginFormProps {
+  setModal: ILogin;
 }
 
-export const LoginForm: React.FC = () => {
-  const [formData, setFormData] = useState<FormState>({
-    name: '',
-    email: '',
-  });
+export const LoginForm: FC<LoginFormProps> = ({ setModal }) => {
+  const [formData, setFormData] = useState({ name: '', email: '' });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target;
@@ -22,38 +20,20 @@ export const LoginForm: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent): void => {
     e.preventDefault();
-    console.log('Отправленная форма:', formData);
-    // Добавьте свой код для отправки данных на сервер или выполнения других действий по вашему выбору.
+    setModal(true, formData);
   };
 
   return (
-    <form className={styles.form} onSubmit={handleSubmit}>
+    <MyForm onSubmit={handleSubmit}>
       <div className={styles.formGroup}>
         <label htmlFor="name">Имя:</label>
-        <input
-          type="text"
-          id="name"
-          name="name"
-          value={formData.name}
-          onChange={handleChange}
-          className={styles.input}
-        />
+        <MyInput type="text" id="name" name="name" value={formData.name} onChange={handleChange} />
       </div>
       <div className={styles.formGroup}>
         <label htmlFor="email">Email:</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          value={formData.email}
-          onChange={handleChange}
-          className={styles.input}
-        />
+        <MyInput type="text" id="email" name="email" value={formData.email} onChange={handleChange} />
       </div>
-      <button type="submit" className={styles.submitButton}>
-        Отправить
-      </button>
-    </form>
+      <MyButton type="submit">Отправить</MyButton>
+    </MyForm>
   );
 };
-

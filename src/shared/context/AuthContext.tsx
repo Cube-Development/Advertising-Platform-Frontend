@@ -3,17 +3,18 @@ import { FC, ReactNode, useEffect, useState } from "react";
 import Cookies from 'js-cookie';
 // import { useGetPostsQuery } from "shared/store/reducers/cards";
 import { useGetPostsQuery } from "./../../shared/store/reducers/cards";
-
-const token = 'YOUR_JWT_TOKEN 128888';
+import { getAuthTokens } from "./../../shared/store/reducers/auth";
 
 export interface AuthContextType {
   isAuth: boolean;
-  toggleAuth: () => void;
+  toggleLogin: () => void;
+  toggleLogout: () => void;
 }
 
 const initialAuthContext: AuthContextType = {
   isAuth: false,
-  toggleAuth: () => {},
+  toggleLogin: () => {},
+  toggleLogout: () => {},
 };
 
 export const AuthContext = React.createContext(initialAuthContext);
@@ -21,11 +22,9 @@ export const AuthContext = React.createContext(initialAuthContext);
 export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [isAuth, setAuth] = useState<boolean>(JSON.parse(localStorage.getItem('isAuth') ?? 'false'));
 
-  const { data: fetchDataResult, refetch } = useGetPostsQuery(); // Используйте useFetchDataQuery
-
+  const { refetch } = useGetPostsQuery();
 
   const initializeAuth = async () => {
-    console.log('useEffect toggleAuth222');
     const authValue = await JSON.parse(localStorage.getItem("isAuth") ?? 'false');
     setAuth(authValue);
   };
@@ -35,28 +34,47 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
     initializeAuth();
   }, []);
 
-  const toggleAuth = async () => {
-    console.log('toggleAuth')
 
-    Cookies.set('token', token, {   secure: true, // Только по HTTPS
-    httpOnly: true, // Доступ только через HTTP
-    sameSite: 'None', 
-    expires: 7}) // Время жизни куки в днях});
-    // console.log(Cookies.get('token'))
+  const getAndSetAuthTokens = async () => {
+    const tokens = await getAuthTokens();
+    console.log('tokens', tokens)
 
+    if (tokens) {
+      Cookies.set('accessToken', tokens.accessToken, { secure: true, httpOnly: false, sameSite: 'None', expires: 7 });
+
+    } else {
+      console.error('Не удалось получить токены.');
+    }
+  };
+
+  const toggleLogin = async () => {
+
+    await getAndSetAuthTokens();
     await refetch();
 
-    // Cookies.remove('token')
     setAuth((prevIsAuth) => {
       const newIsAuth = !prevIsAuth;
       localStorage.setItem('isAuth', JSON.stringify(newIsAuth));
       localStorage.removeItem('role');
       return newIsAuth;
     });
+
+  };
+
+  const toggleLogout = () => {
+
+    setAuth((prevIsAuth) => {
+      const newIsAuth = !prevIsAuth;
+      localStorage.setItem('isAuth', 'false');
+      localStorage.removeItem('role');
+      Cookies.remove('accessToken');
+      return newIsAuth;
+    });
+
   };
 
   return (
-    <AuthContext.Provider value={{ isAuth, toggleAuth }}>
+    <AuthContext.Provider value={{ isAuth, toggleLogin, toggleLogout }}>
       {children}
     </AuthContext.Provider>
   );

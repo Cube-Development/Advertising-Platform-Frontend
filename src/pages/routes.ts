@@ -28,10 +28,10 @@ export const privateBloggerRoutes: IRoute[] = [
 ]
 
 export const privateAdvertiserRoutes: IRoute[] = [
+    {path: paths.main, component: MainPage},
     {path: paths.profile, component: ProfilePage},
     {path: paths.notFound, component: NotFoundPage},
     {path: paths.fullServise, component: FullServicePage},
-    {path: paths.main, component: MainPage},
     {path: paths.catalog, component: CatalogPage},
     {path: paths.wallet, component: WalletPage},
 ]
