@@ -89,7 +89,7 @@ export const Nav: FC<NavProps> = ({ isAuth, toggleLogin, toggleLogout, currentRo
             </div>
           ))}
           {/* to delete bellow */}
-          <div onClick={toggleLogin}>LOGIN</div>
+          {/* <div onClick={toggleLogin}>LOGIN</div> */}
         </>
 
       }

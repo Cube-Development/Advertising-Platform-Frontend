@@ -27,7 +27,7 @@ function generateRandomString(length: number): string {
 export async function getAuthTokens(): Promise<Tokens | null> {
   try {
     // перделать заменить на пост запрос к беку и accessToken / refreshToken брать из response
-    const response: AxiosResponse<ApiResponse> = await axios.get(baseUrl);
+    const response: AxiosResponse<ApiResponse> = await axios.get(baseUrl + '/posts');
 
     if (response.status === 200) {
       // Генерация случайных строк фиксированной длины
@@ -41,6 +41,7 @@ export async function getAuthTokens(): Promise<Tokens | null> {
       return null;
     }
   } catch (error: any) {
+    console.log(error)
     return null;
   }
 }

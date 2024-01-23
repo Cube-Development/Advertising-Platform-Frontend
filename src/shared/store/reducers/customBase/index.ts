@@ -5,7 +5,6 @@ const baseUrl = import.meta.env.VITE_BASE_URL;
 
 const getAccessToken = () => {
     const accessToken = Cookies.get('token');
-    console.log('accessToken', accessToken)
     return accessToken || null;
   };
   
@@ -15,5 +14,6 @@ export const customBaseQuery = fetchBaseQuery({
   mode: 'cors',
   headers: {
       Authorization: `Bearer ${getAccessToken()}`, // Вставляем access token в заголовок запроса
+  
 },
 });

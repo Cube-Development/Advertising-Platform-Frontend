@@ -1,11 +1,9 @@
-import React, { FC, ChangeEvent, FormEvent, useState, useEffect } from 'react';
-import { ILogin } from './../../../shared/types/login';
+import { ChangeEvent, FC, FormEvent, useEffect, useState } from 'react';
+import { useAuth } from './../../../shared/hooks/useAuth';
 import { postCode } from './../../../shared/store/reducers/auth';
+import { ILogin } from './../../../shared/types/login';
 import { MyButton, MyInput } from './../../../shared/ui';
 import styles from './styles.module.scss';
-import { useNavigate } from 'react-router-dom';
-import { paths } from './../../../shared/routing';
-import { roles } from 'shared/config/roles';
 
 interface LoginCodeProps {
   email: string;
@@ -16,7 +14,8 @@ export const LoginCode: FC<LoginCodeProps> = ({ email, changeModal }) => {
     const [verificationCode, setVerificationCode] = useState('');
     const [countdown, setCountdown] = useState(120);
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
-    const router = useNavigate();
+
+    const { toggleLogin} = useAuth();
 
     useEffect(() => {
       let timerId: NodeJS.Timeout;
@@ -38,7 +37,7 @@ export const LoginCode: FC<LoginCodeProps> = ({ email, changeModal }) => {
   
     const handleSubmit = async (e: FormEvent): Promise<void> => {
       e.preventDefault(); // Предотвращение стандартного действия по умолчанию (перезагрузки страницы)
-        console.log('handleSubmit')
+      console.log('handleSubmit')
       // Проверка длины кода перед отправкой
       if (verificationCode.length < 5) {
         return;
@@ -49,13 +48,14 @@ export const LoginCode: FC<LoginCodeProps> = ({ email, changeModal }) => {
         console.log(response)
         if (response?.status === 'Success') {
           // Закрыть модальное окно или выполнить другие действия после успешной отправки
-          localStorage.setItem('isAuth', 'true')
-          localStorage.setItem('role', roles.advertiser)
-          router(paths.profile)
+          toggleLogin(response);
+          
         } else if (response?.status === 'Invalid Code') {
+          // Показать сообщение об ошибке
           setErrorMessage('Неверный код. Пожалуйста, проверьте введенный код и попробуйте снова.');
         }
       } catch (error) {
+        // Показать общее сообщение об ошибке
         setErrorMessage('Произошла ошибка. Пожалуйста, попробуйте еще раз.');
       }
     };

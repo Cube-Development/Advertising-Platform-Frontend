@@ -1,13 +1,13 @@
+import Cookies from 'js-cookie';
 import * as React from "react";
 import { FC, ReactNode, useEffect, useState } from "react";
-import Cookies from 'js-cookie';
-// import { useGetPostsQuery } from "shared/store/reducers/cards";
-import { useGetPostsQuery } from "./../../shared/store/reducers/cards";
-import { getAuthTokens } from "./../../shared/store/reducers/auth";
+import { useNavigate } from "react-router-dom";
+import { roles } from "./../../shared/config/roles";
+import { paths } from "./../../shared/routing";
 
 export interface AuthContextType {
   isAuth: boolean;
-  toggleLogin: () => void;
+  toggleLogin: (tokens: any) => void;
   toggleLogout: () => void;
 }
 
@@ -22,7 +22,7 @@ export const AuthContext = React.createContext(initialAuthContext);
 export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [isAuth, setAuth] = useState<boolean>(JSON.parse(localStorage.getItem('isAuth') ?? 'false'));
 
-  const { refetch } = useGetPostsQuery();
+  const router = useNavigate();
 
   const initializeAuth = async () => {
     const authValue = await JSON.parse(localStorage.getItem("isAuth") ?? 'false');
@@ -35,27 +35,15 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
   }, []);
 
 
-  const getAndSetAuthTokens = async () => {
-    const tokens = await getAuthTokens();
-    console.log('tokens', tokens)
+  const toggleLogin = (tokens: any) => {
 
-    if (tokens) {
-      Cookies.set('accessToken', tokens.accessToken, { secure: true, httpOnly: false, sameSite: 'None', expires: 7 });
-
-    } else {
-      console.error('Не удалось получить токены.');
-    }
-  };
-
-  const toggleLogin = async () => {
-
-    await getAndSetAuthTokens();
-    await refetch();
+    router(paths.profile);
 
     setAuth((prevIsAuth) => {
       const newIsAuth = !prevIsAuth;
       localStorage.setItem('isAuth', JSON.stringify(newIsAuth));
-      localStorage.removeItem('role');
+      localStorage.setItem('role', roles.advertiser);
+      Cookies.set('accessToken', tokens.accessToken, { secure: true, httpOnly: false, sameSite: 'None', expires: 7 });
       return newIsAuth;
     });
 
