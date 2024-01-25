@@ -1,9 +1,5 @@
-import {FC} from 'react';
-
+import { FC } from "react";
 
 export const PlatformOwnerPage: FC = () => {
-
-    return (
-        <div>PlatformOwnerPage</div>
-    );
+  return <div>PlatformOwnerPage</div>;
 };

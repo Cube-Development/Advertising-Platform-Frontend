@@ -1,9 +1,12 @@
 import { Route, Routes } from "react-router-dom";
-import { useRole } from "./../shared/hooks/useRole";
-import { useAuth } from "./../shared/hooks/useAuth";
-import { roles } from "./../shared/config/roles";
-import { privateBloggerRoutes, privateAdvertiserRoutes, publicRoutes } from "./routes";
-
+import {
+  privateBloggerRoutes,
+  privateAdvertiserRoutes,
+  publicRoutes,
+} from "./routes";
+import { useAuth } from "@shared/hooks/useAuth";
+import { useRole } from "@shared/hooks/useRole";
+import { roles } from "@shared/config/roles";
 
 export const Routing = () => {
   const { isAuth } = useAuth();

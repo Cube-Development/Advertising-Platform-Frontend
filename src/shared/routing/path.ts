@@ -9,5 +9,6 @@ export enum paths  {
     turnkey = '/turnkey',
     wallet = '/wallet',
     addPlatform = '/addplatform',
+    fullServise = '/fullServise'
 }
 

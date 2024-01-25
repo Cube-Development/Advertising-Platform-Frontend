@@ -1,18 +1,18 @@
-import { OptionCard } from '../../../../entities/mainPage';
-import {FC} from 'react';
-import { IOption } from '../../../../shared/types/language';
+import { FC } from "react";
 import styles from "./styles.module.scss";
+import { IOption } from "@shared/types/language";
+import { OptionCard } from "@entities/mainPage";
 
 interface OptionListProps {
-    options: IOption[];
+  options: IOption[];
 }
 
-export const OptionList: FC<OptionListProps> = ({options}) => {
-
-    return (
-        <div className={styles.options}>
-            {options.map((option, index) =>
-                <OptionCard key={index} option={option}/>)}
-        </div>
-    );
+export const OptionList: FC<OptionListProps> = ({ options }) => {
+  return (
+    <div className={styles.options}>
+      {options.map((option, index) => (
+        <OptionCard key={index} option={option} />
+      ))}
+    </div>
+  );
 };

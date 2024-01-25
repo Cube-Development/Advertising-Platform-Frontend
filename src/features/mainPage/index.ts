@@ -1,5 +1,5 @@
-export * from './optionList';
-export * from './basicInfoList';
-export * from './partnerList';
-export * from './priceList';
-export * from './accommList';
+export { OptionList } from './optionList';
+export { BasicInfoList } from './basicInfoList';
+export { PartnerList } from './partnerList';
+export { PriceList } from './priceList';
+export { AccommList } from './accommList';

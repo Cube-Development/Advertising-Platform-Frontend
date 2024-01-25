@@ -1,5 +1,5 @@
+import { Routing } from "@pages/index";
 import { withProviders } from "./providers";
-import { Routing } from "pages";
 
 const App: React.FC = () => {
   return <Routing />;

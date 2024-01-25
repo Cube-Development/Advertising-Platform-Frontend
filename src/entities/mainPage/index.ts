@@ -1,4 +1,4 @@
-export * from './optionCard';
-export * from './infoCard';
-export * from './priceCard';
-export * from './accommCard';
+export { OptionCard } from './optionCard';
+export { InfoCard } from './infoCard';
+export { PriceCard } from './priceCard';
+export { AccommCard } from './accommCard';

@@ -1,16 +1,16 @@
-import {FC} from 'react';
-import { IOption } from '../../../../shared/types/language';
+import { FC } from "react";
 import styles from "./styles.module.scss";
+import { IOption } from "@shared/types/language";
 
 interface OptionCardProps {
-    option: IOption;
+  option: IOption;
 }
 
-export const OptionCard: FC<OptionCardProps> = ({option}) => {
-    return (
-        <div className={styles.option}>
-            <img src={`./../../../../../public/images/options/${option.img}`} alt="" />
-            <h4>{option.option}</h4>
-        </div>
-    );
+export const OptionCard: FC<OptionCardProps> = ({ option }) => {
+  return (
+    <div className={styles.option}>
+      <img src={`images/options/${option.img}`} alt="" />
+      <h4>{option.option}</h4>
+    </div>
+  );
 };

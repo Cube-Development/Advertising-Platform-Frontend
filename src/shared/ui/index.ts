@@ -1,4 +1,4 @@
-export * from './MyBtn';
-export * from './MyInput';
-export * from './MyModal';
-export * from './MyForm';
+export { MyButton } from './MyBtn';
+export { MyInput } from './MyInput';
+export { MyModal } from './MyModal';
+export { MyForm } from './MyForm';

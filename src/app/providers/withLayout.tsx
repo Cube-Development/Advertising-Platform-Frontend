@@ -1,9 +1,9 @@
-import { MainLayout } from "../../widgets/layouts";
+import { MainLayout } from "@widgets/layouts";
 
 export const withLayout = (Component: React.FC) => {
   return () => (
     <MainLayout>
-        <Component />
+      <Component />
     </MainLayout>
   );
 };

@@ -1,19 +1,26 @@
 import { FC } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import { roles } from "./../../../../shared/config/roles";
-import { paths } from "./../../../../shared/routing";
 import { advertiserNavbar, bloggerNavbar, nonAuthNavbar } from "./config";
 import styles from "./styles.module.scss";
+import { roles } from "@shared/config/roles";
+import { paths } from "@shared/routing";
+import { useTranslation } from "react-i18next";
 
 interface NavProps {
   isAuth: boolean;
-  toggleLogin: (tokens: any)  => void;
+  toggleLogin: (tokens: any) => void;
   toggleLogout: () => void;
   currentRole: string;
   toggleRole: () => void;
 }
 
-export const Nav: FC<NavProps> = ({ isAuth, toggleLogin, toggleLogout, currentRole, toggleRole}) => {
+export const Nav: FC<NavProps> = ({
+  isAuth,
+  toggleLogin,
+  toggleLogout,
+  currentRole,
+  toggleRole,
+}) => {
   const router = useNavigate();
   const location = useLocation();
 
@@ -21,64 +28,94 @@ export const Nav: FC<NavProps> = ({ isAuth, toggleLogin, toggleLogout, currentRo
     router(href);
   };
 
+  const { t } = useTranslation();
+
   return (
     <nav className={styles.wrapper}>
-      {isAuth
-        ?
-
+      {isAuth ? (
         <>
-          <h1 className={`${currentRole === roles.blogger ? styles.active: styles.no__active}`}>
+          <h1
+            className={`${
+              currentRole === roles.blogger ? styles.active : styles.no__active
+            }`}
+          >
             Blogger
           </h1>
 
-          <Link to={currentRole === roles.blogger  ? paths.main : paths.mainBlogger}>
-            <div 
-              className={`${styles.role__switcher} ${currentRole === roles.advertiser ? styles.role__advertiser : styles.role__blogger}`}
-              onClick={() => { toggleRole(); }}
-                >
-                SWITCH
+          <Link
+            to={currentRole === roles.blogger ? paths.main : paths.mainBlogger}
+          >
+            <div
+              className={`${styles.role__switcher} ${
+                currentRole === roles.advertiser
+                  ? styles.role__advertiser
+                  : styles.role__blogger
+              }`}
+              onClick={() => {
+                toggleRole();
+              }}
+            >
+              SWITCH
             </div>
           </Link>
 
-          <h1 className={`${currentRole === roles.advertiser ? styles.active: styles.no__active}`} >
+          <h1
+            className={`${
+              currentRole === roles.advertiser
+                ? styles.active
+                : styles.no__active
+            }`}
+          >
             Advertiser
           </h1>
 
-          {
-            currentRole === roles.advertiser
-
-            ? 
-            advertiserNavbar.map((item, index) => (
+          {currentRole === roles.advertiser
+            ? advertiserNavbar.map((item, index) => (
                 <div
                   key={index}
                   onClick={() => handleNavigation(item.href)}
-                  className={location.pathname === item.href ? styles.active : ""}
+                  className={
+                    location.pathname === item.href ? styles.active : ""
+                  }
                 >
-                  {item.text}
+                  {t(
+                    `${
+                      item.href === paths.turnkey
+                        ? "pages.turnkey"
+                        : item.href === paths.catalog
+                        ? "pages.catalog"
+                        : "pages.platformOwner"
+                    }`
+                  )}
                 </div>
               ))
-
-            : 
-            bloggerNavbar.map((item, index) => (
+            : bloggerNavbar.map((item, index) => (
                 <div
                   key={index}
                   onClick={() => handleNavigation(item.href)}
-                  className={location.pathname === item.href ? styles.active : ""}
+                  className={
+                    location.pathname === item.href ? styles.active : ""
+                  }
                 >
-                  {item.text}
+                  {t(
+                    `${
+                      item.href === paths.turnkey
+                        ? "pages.turnkey"
+                        : item.href === paths.catalog
+                        ? "pages.catalog"
+                        : item.href === paths.wallet
+                        ? "pages.wallet"
+                        : "pages.languages"
+                    }`
+                  )}
                 </div>
               ))}
 
-          <div 
-            onClick={toggleLogout}
-              >
-              LOGOUT
-          </div>
+          <div onClick={toggleLogout}>LOGOUT</div>
         </>
-
-        :
+      ) : (
         <>
-          <img src="./../../../../public/images/common/key.svg" alt="" />
+          <img src="images/common/key.svg" alt="" />
 
           {nonAuthNavbar.map((item, index) => (
             <li
@@ -86,13 +123,19 @@ export const Nav: FC<NavProps> = ({ isAuth, toggleLogin, toggleLogout, currentRo
               onClick={() => handleNavigation(item.href)}
               className={location.pathname === item.href ? styles.active : ""}
             >
-              {item.text}
+              {t(
+                `${
+                  item.href === paths.addPlatform
+                    ? "pages.addPlatform"
+                    : item.href === paths.wallet
+                    ? "pages.wallet"
+                    : "pages.calculateIncome"
+                }`
+              )}
             </li>
           ))}
         </>
-
-      }
-
+      )}
     </nav>
   );
 };

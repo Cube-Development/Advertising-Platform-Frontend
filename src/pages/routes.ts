@@ -5,11 +5,11 @@ import { MainPage } from "./Main";
 import { MainBloggerPage } from "./MainBlogger";
 import { NotFoundPage } from "./NotFound";
 import { ProfilePage } from "./Profile";
-import { paths } from "../shared/routing";
 import { FullServicePage } from "./FullService";
 import { PlatformOwnerPage } from "./PlatformOwner";
 import { WalletPage } from "./Wallet";
 import { AddPlatformPage } from "./AddPlatform";
+import { paths } from "@shared/routing";
 
 
 export interface IRoute {

@@ -1,20 +1,21 @@
-import {FC} from 'react';
-import { MyButton } from '../../../../shared/ui';
-import { IAccomm } from '../../../../shared/types/language';
+import { FC } from "react";
 import styles from "./styles.module.scss";
+import { IAccomm } from "@shared/types/language";
+import { MyButton } from "@shared/ui";
 
 interface AccommCardProps {
-    accomm: IAccomm;
+  accomm: IAccomm;
 }
 
-export const AccommCard: FC<AccommCardProps> = ({ accomm}) => {
-  const subclass = accomm.type === 'vencom' ? styles.vencom : '';
-
+export const AccommCard: FC<AccommCardProps> = ({ accomm }) => {
+  const subclass = accomm.type === "vencom" ? styles.vencom : "";
 
   return (
     <div className={`${styles.accomms} ${subclass}`}>
       <div className={styles.accomms__row}>
-        {accomm.type === 'vencom' && <img src="./../../../public/images/common/quality.svg" alt="" />}
+        {accomm.type === "vencom" && (
+          <img src="images/common/quality.svg" alt="" />
+        )}
         <h1 className={styles.title}>{accomm.title}</h1>
       </div>
 
@@ -26,15 +27,15 @@ export const AccommCard: FC<AccommCardProps> = ({ accomm}) => {
         ))}
       </ul>
 
-
-      {accomm.type === 'vencom' &&
+      {accomm.type === "vencom" && (
         <div className={styles.bottom__row}>
           <MyButton customClass={styles.button}>{accomm.btn_start}</MyButton>
           <div className={styles.save__row}>
-            <img src="./../../../public/images/common/protect.svg" alt="" />
+            <img src="images/common/protect.svg" alt="" />
             <h4>{accomm.save}</h4>
           </div>
-        </div>}
+        </div>
+      )}
     </div>
   );
 };

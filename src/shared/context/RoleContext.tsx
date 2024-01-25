@@ -1,15 +1,15 @@
+import { roles } from "@shared/config/roles";
 import * as React from "react";
 import { FC, ReactNode, useEffect, useState } from "react";
-import { roles } from "./../config/roles";
 
 export interface RoleContextType {
-    currentRole: string;
-    toggleRole: () => void;
+  currentRole: string;
+  toggleRole: () => void;
 }
 
 const initialRoleContext: RoleContextType = {
-    currentRole: roles.advertiser,
-    toggleRole: () => {},
+  currentRole: roles.advertiser,
+  toggleRole: () => {},
 };
 
 export const RoleContext = React.createContext(initialRoleContext);
@@ -18,7 +18,7 @@ export const RoleProvider: FC<{ children: ReactNode }> = ({ children }) => {
   const [currentRole, setCurrentRole] = useState<string>(roles.advertiser);
 
   const initializeRole = async () => {
-    console.log('useEffect toggleRole 222');
+    console.log("useEffect toggleRole 222");
     const roleValue = localStorage.getItem("role") ?? roles.advertiser;
     setCurrentRole(roleValue);
   };
@@ -28,9 +28,10 @@ export const RoleProvider: FC<{ children: ReactNode }> = ({ children }) => {
   }, []);
 
   const toggleRole = () => {
-    const newRole = currentRole === roles.blogger ? roles.advertiser : roles.blogger;
+    const newRole =
+      currentRole === roles.blogger ? roles.advertiser : roles.blogger;
     setCurrentRole(newRole);
-    localStorage.setItem('role', newRole);
+    localStorage.setItem("role", newRole);
     console.log(newRole);
   };
 

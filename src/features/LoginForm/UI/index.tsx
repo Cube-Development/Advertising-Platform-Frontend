@@ -1,14 +1,14 @@
-import React, { FC, useState } from 'react';
-import { ILogin } from './../../../shared/types/login';
-import { MyButton, MyForm, MyInput } from './../../../shared/ui';
+import React, { FC, useState } from "react";
 import styles from "./styles.module.scss";
+import { ILogin } from "@shared/types/login";
+import { MyButton, MyForm, MyInput } from "@shared/ui";
 
 interface LoginFormProps {
   setModal: ILogin;
 }
 
 export const LoginForm: FC<LoginFormProps> = ({ setModal }) => {
-  const [formData, setFormData] = useState({ name: '', email: '' });
+  const [formData, setFormData] = useState({ name: "", email: "" });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target;
@@ -27,11 +27,23 @@ export const LoginForm: FC<LoginFormProps> = ({ setModal }) => {
     <MyForm onSubmit={handleSubmit}>
       <div className={styles.formGroup}>
         <label htmlFor="name">Имя:</label>
-        <MyInput type="text" id="name" name="name" value={formData.name} onChange={handleChange} />
+        <MyInput
+          type="text"
+          id="name"
+          name="name"
+          value={formData.name}
+          onChange={handleChange}
+        />
       </div>
       <div className={styles.formGroup}>
         <label htmlFor="email">Email:</label>
-        <MyInput type="text" id="email" name="email" value={formData.email} onChange={handleChange} />
+        <MyInput
+          type="text"
+          id="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
       </div>
       <MyButton type="submit">Отправить</MyButton>
     </MyForm>

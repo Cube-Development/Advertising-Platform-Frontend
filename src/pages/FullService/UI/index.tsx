@@ -1,9 +1,5 @@
-import {FC} from 'react';
-
+import { FC } from "react";
 
 export const FullServicePage: FC = () => {
-
-    return (
-        <div>FullServicePage</div>
-    );
+  return <div>FullServicePage</div>;
 };
