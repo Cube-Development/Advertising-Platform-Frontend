@@ -6,7 +6,7 @@ export enum paths  {
     notFound = '/*',
     catalog = '/catalog',
     platformOwner = '/platformowner',
-    fullServise = '/fullservice',
+    turnkey = '/turnkey',
     wallet = '/wallet',
     addPlatform = '/addplatform',
 }

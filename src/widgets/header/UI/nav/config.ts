@@ -1,15 +1,18 @@
 import { paths } from "../../../../shared/routing";
+import * as data from './../../../../../public/locales/ru/translation.json';
+
+const text = data.pages
 
 export const nonAuthNavbar = [
-  { text: 'Размещение под ключ', href: paths.fullServise },
-  { text: 'Каталог площадок', href: paths.catalog },
-  { text: 'Владельцу площадки', href: paths.platformOwner },
+  { text: text.turnkey, href: paths.turnkey },
+  { text: text.catalog, href: paths.catalog },
+  { text: text.platformOwner, href: paths.platformOwner },
 ];
 
 
 export const advertiserNavbar = [
-  { text: 'Каталог площадок', href: paths.catalog },
-  { text: 'Размещение под ключ', href: paths.fullServise },
+  { text: text.turnkey, href: paths.turnkey },
+  { text: text.catalog, href: paths.catalog },
   { text: 'Кошелек', href: paths.wallet },
   { text: 'Языки', href: '' },
 ];

@@ -3,16 +3,24 @@
     justify-content: space-around;
     align-items: center;
     list-style: none;
-    padding: 0;
+    padding: 0 100px 0 30px;
     margin: 0;
+
+    color: var(--first-text);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
   
-    div {
+    li {
       cursor: pointer;
       padding: 8px;
-      color: #000; /* Цвет текста по умолчанию */
+      color: #000; 
+
   
       &:hover {
-        background-color: #f0f0f0; /* Цвет фона при наведении */
+        background-color: #f0f0f0;
+        border-radius: 15px;
       }
   
       &.active {
@@ -33,40 +41,6 @@
   .no__active {
     color: grey;
   }
-
-
-
-  // .switcher {
-  //   cursor: pointer;
-  //   position: relative;
-  //   width: 50px;
-  //   height: 30px;
-  //   background-color: #f0f0f0;
-  //   border-radius: 15px;
-  //   display: flex;
-  //   align-items: center;
-  //   padding: 5px;
-  // }
-  
-  // .inner__circle {
-  //   width: 20px;
-  //   height: 20px;
-  //   border-radius: 50%;
-  //   background-color: #0074cc;
-  //   position: absolute;
-  //   transition: transform 0.3s ease-in-out;
-  // }
-  
-  // .role__blogger .inner__circle {
-  //   transform: translateX(0);
-  // }
-  
-  // .role__advertiser .inner__circle {
-  //   transform: translateX(100%);
-  // }
-
-
-
 
 
 

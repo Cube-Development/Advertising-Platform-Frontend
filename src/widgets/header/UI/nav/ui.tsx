@@ -7,7 +7,7 @@ import styles from "./styles.module.scss";
 
 interface NavProps {
   isAuth: boolean;
-  toggleLogin: () => void;
+  toggleLogin: (tokens: any)  => void;
   toggleLogout: () => void;
   currentRole: string;
   toggleRole: () => void;
@@ -69,7 +69,6 @@ export const Nav: FC<NavProps> = ({ isAuth, toggleLogin, toggleLogout, currentRo
                 </div>
               ))}
 
-          {/* to delete bellow */}
           <div 
             onClick={toggleLogout}
               >
@@ -79,17 +78,17 @@ export const Nav: FC<NavProps> = ({ isAuth, toggleLogin, toggleLogout, currentRo
 
         :
         <>
+          <img src="./../../../../public/images/common/key.svg" alt="" />
+
           {nonAuthNavbar.map((item, index) => (
-            <div
+            <li
               key={index}
               onClick={() => handleNavigation(item.href)}
               className={location.pathname === item.href ? styles.active : ""}
             >
               {item.text}
-            </div>
+            </li>
           ))}
-          {/* to delete bellow */}
-          {/* <div onClick={toggleLogin}>LOGIN</div> */}
         </>
 
       }

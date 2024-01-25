@@ -1,5 +1,5 @@
 import {FC} from 'react';
-import logo from './logo.png';
+import logo from './logo.svg';
 import styles from './styles.module.scss';
 import { Link } from 'react-router-dom';
 import { paths } from '../../../../shared/routing';

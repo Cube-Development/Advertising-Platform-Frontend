@@ -3,6 +3,7 @@ import styles from './styles.module.scss';
 
 interface MyButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
 
-export const MyButton: FC<MyButtonProps> = (props) => {
-  return <button className={styles.button} {...props} />;
+export const MyButton: FC<MyButtonProps & { customClass?: string }> = ({ customClass, ...props }) => {
+  const combinedClassName = `${styles.button} ${customClass || ''}`;
+  return <button className={combinedClassName} {...props} />;
 };
