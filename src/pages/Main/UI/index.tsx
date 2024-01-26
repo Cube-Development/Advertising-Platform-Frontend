@@ -6,6 +6,7 @@ import {
   OptionList,
   PartnerList,
   PriceList,
+  ReviewList
 } from "@features/mainPage";
 import { MyButton } from "@shared/ui";
 import { useTranslation } from "react-i18next";
@@ -58,7 +59,14 @@ export const MainPage: FC = () => {
         </div>
       </section>
 
-      <section className={styles.how__wrapper}></section>
+      <section className={styles.how__wrapper}>
+        <div className="container">
+          <h1 className={styles.how__title}>{t("main_page_advertiser.how_it_work")}</h1>
+          {/* <img src="./images/assets/RoadBlock.png" alt="" /> */}
+          <MyButton customClass={styles.registr_btn}>{t("main_page_advertiser.btn_registration")}</MyButton>
+        </div>
+
+      </section>
 
       <section className={styles.why__wrapper}>
         <div className="container">
@@ -86,6 +94,13 @@ export const MainPage: FC = () => {
           </div>
 
           <PriceList tarifs={t("main_page_advertiser.tarifs", { returnObjects: true })} />
+        </div>
+      </section>
+
+      <section className={styles.customers__wrapper}>
+        <div className="container">
+            <h1 className={styles.customer__title}>{t("main_page_advertiser.customers")}</h1>
+            <ReviewList reviews={t("main_page_advertiser.reviews", { returnObjects: true })} />
         </div>
       </section>
     </>

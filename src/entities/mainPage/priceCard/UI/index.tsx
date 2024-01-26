@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
-import { IPrice } from "@shared/types/mainPage";
+import { IPrice } from "@shared/types/translate";
 import { MyButton } from "@shared/ui";
 
 interface PriceCardProps {

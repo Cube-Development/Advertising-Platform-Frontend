@@ -36,3 +36,11 @@ export interface Option {
     available: boolean
 }
   
+export interface IReview {
+    name: string
+    workplace: string
+    rate: number
+    img: string
+    text: string
+  }
+  

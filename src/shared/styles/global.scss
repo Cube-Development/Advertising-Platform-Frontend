@@ -4,13 +4,14 @@
 
 
 body {
+  font-family: 'Montserrat', sans-serif;
   display: flex;
   justify-content: space-around;
 }
 
 .container {
   max-width: var(--container-width);
-  padding: 0 40px;
+  padding: 0 50px;
 }
 
 

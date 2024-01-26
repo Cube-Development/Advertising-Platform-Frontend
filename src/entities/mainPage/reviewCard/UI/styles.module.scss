@@ -1,0 +1,42 @@
+.review{
+    width: 400px;
+    border-radius: 12px 12px 0px 12px;
+    background: linear-gradient(90deg, rgba(71, 113, 230, 0.1) 0.03%, rgba(142, 84, 233, 0.1) 100.36%);
+    padding: 20px;
+}
+
+.logo{
+    width: 35px;
+    height: 35px; 
+    border-radius: 50%;
+}
+
+.review__row{
+    display: flex;
+    column-gap: 10px;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.title{
+    color: var(--first-text);
+
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 10px;
+}
+
+.text{
+    color: var(--secondary-text);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.rating{
+    width: 98.75px;
+    height: 15px;
+}

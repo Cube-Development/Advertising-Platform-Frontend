@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
-import { IOption } from "@shared/types/mainPage";
+import { IOption } from "@shared/types/translate";
 import { OptionCard } from "@entities/mainPage";
 
 interface OptionListProps {
