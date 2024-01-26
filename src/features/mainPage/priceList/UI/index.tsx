@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
-import { IPrice } from "@shared/types/language";
+import { IPrice } from "@shared/types/mainPage";
 import { PriceCard } from "@entities/mainPage";
 
 interface PriceListProps {

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { AccommCard } from "@entities/mainPage";
-import { IAccomm } from "@shared/types/language";
+import { IAccomm } from "@shared/types/mainPage";
 
 interface AccommProps {
   accomms: IAccomm[];

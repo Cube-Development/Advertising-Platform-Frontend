@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
-import { IAccomm } from "@shared/types/language";
+import { IAccomm } from "@shared/types/mainPage";
 import { MyButton } from "@shared/ui";
 
 interface AccommCardProps {

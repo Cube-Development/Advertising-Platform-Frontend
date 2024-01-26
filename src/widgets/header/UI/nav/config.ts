@@ -1,22 +1,20 @@
 import { paths } from '@shared/routing';
 
 export const nonAuthNavbar = [
-  {href: paths.turnkey },
-  {href: paths.catalog },
-  {href: paths.platformOwner },
+  {text: "pages.turnkey", href: paths.turnkey },
+  {text: "pages.catalog", href: paths.catalog },
+  {text: "pages.platformOwner", href: paths.platformOwner },
 ];
 
 
 export const advertiserNavbar = [
-  {href: paths.turnkey },
-  {href: paths.catalog },
-  {href: paths.wallet },
-  {href: '' },
+  {text: "pages.turnkey", href: paths.turnkey },
+  {text: "pages.catalog", href: paths.catalog },
+  {text: "pages.wallet", href: paths.wallet },
 ];
 
 export const bloggerNavbar = [
-  { text: 'Добавить канал', href: paths.addPlatform  },
-  { text: 'Расчитать доход', href: '' },
-  { text: 'Кошелек', href: paths.wallet },
-  { text: 'Языки', href: '' },
+  {text: "pages.addPlatform",  href: paths.addPlatform  },
+  {text: "pages.catalog",  href: '' },
+  {text: "pages.wallet",  href: paths.wallet },
 ];

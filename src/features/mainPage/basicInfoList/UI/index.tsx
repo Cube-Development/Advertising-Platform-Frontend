@@ -1,6 +1,6 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
-import { IBasicInfo } from "@shared/types/language";
+import { IBasicInfo } from "@shared/types/mainPage";
 import { InfoCard } from "@entities/mainPage";
 
 interface BasicInfoProps {

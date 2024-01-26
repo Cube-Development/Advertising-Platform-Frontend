@@ -16,7 +16,6 @@ interface NavProps {
 
 export const Nav: FC<NavProps> = ({
   isAuth,
-  toggleLogin,
   toggleLogout,
   currentRole,
   toggleRole,
@@ -78,15 +77,7 @@ export const Nav: FC<NavProps> = ({
                     location.pathname === item.href ? styles.active : ""
                   }
                 >
-                  {t(
-                    `${
-                      item.href === paths.turnkey
-                        ? "pages.turnkey"
-                        : item.href === paths.catalog
-                        ? "pages.catalog"
-                        : "pages.platformOwner"
-                    }`
-                  )}
+                  {t(item.text)}
                 </div>
               ))
             : bloggerNavbar.map((item, index) => (
@@ -97,17 +88,7 @@ export const Nav: FC<NavProps> = ({
                     location.pathname === item.href ? styles.active : ""
                   }
                 >
-                  {t(
-                    `${
-                      item.href === paths.turnkey
-                        ? "pages.turnkey"
-                        : item.href === paths.catalog
-                        ? "pages.catalog"
-                        : item.href === paths.wallet
-                        ? "pages.wallet"
-                        : "pages.languages"
-                    }`
-                  )}
+                    {t(item.text)}
                 </div>
               ))}
 
@@ -123,15 +104,7 @@ export const Nav: FC<NavProps> = ({
               onClick={() => handleNavigation(item.href)}
               className={location.pathname === item.href ? styles.active : ""}
             >
-              {t(
-                `${
-                  item.href === paths.addPlatform
-                    ? "pages.addPlatform"
-                    : item.href === paths.wallet
-                    ? "pages.wallet"
-                    : "pages.calculateIncome"
-                }`
-              )}
+              {t(item.text)}
             </li>
           ))}
         </>

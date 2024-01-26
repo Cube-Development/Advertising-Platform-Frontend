@@ -12,6 +12,7 @@ import { useTranslation } from "react-i18next";
 
 export const MainPage: FC = () => {
   const { t } = useTranslation();
+
   return (
     <>
       <section className={styles.top__wrapper}>
@@ -24,8 +25,10 @@ export const MainPage: FC = () => {
               <h3 className={styles.top__subtitle}>
                 {t("main_page_advertiser.subtitle")}
               </h3>
-              <OptionList options={t("main_page_advertiser.options")} />
+
+              <OptionList options={t("main_page_advertiser.options", { returnObjects: true })} />
               <MyButton>{t("main_page_advertiser.btn_catalog")}</MyButton>
+
             </div>
 
             <div>
@@ -40,7 +43,7 @@ export const MainPage: FC = () => {
           <h2 className={styles.services__title}>
             {t("main_page_advertiser.services")}
           </h2>
-          <BasicInfoList infos={t("main_page_advertiser.basic_information")} />
+          <BasicInfoList infos={t("main_page_advertiser.basic_information", { returnObjects: true })} />
         </div>
       </section>
 
@@ -50,8 +53,8 @@ export const MainPage: FC = () => {
         </h1>
 
         <div className={styles.partners__block}>
-          <PartnerList partners={t("main_page_advertiser.partners")} />
-          <PartnerList partners={t("main_page_advertiser.partners")} />
+          <PartnerList partners={t("main_page_advertiser.partners", { returnObjects: true })} />
+          <PartnerList partners={t("main_page_advertiser.partners", { returnObjects: true })} />
         </div>
       </section>
 
@@ -60,7 +63,7 @@ export const MainPage: FC = () => {
       <section className={styles.why__wrapper}>
         <div className="container">
           <h1 className={styles.why__title}>{t("main_page_advertiser.why")}</h1>
-          <AccommList accomms={t("main_page_advertiser.accomms")} />
+          <AccommList accomms={t("main_page_advertiser.accomms", { returnObjects: true })} />
         </div>
       </section>
 
@@ -82,7 +85,7 @@ export const MainPage: FC = () => {
             </p>
           </div>
 
-          <PriceList tarifs={t("main_page_advertiser.tarifs")} />
+          <PriceList tarifs={t("main_page_advertiser.tarifs", { returnObjects: true })} />
         </div>
       </section>
     </>
