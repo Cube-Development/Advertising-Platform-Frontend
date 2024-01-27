@@ -1,11 +1,9 @@
-.wrapper{
-}
-.profile {
+.profile{
+  padding: 10px;
+  .img {
     margin: 20px;
     width: 40px;
     height: 40px;
-    border-radius: 50%; /* Делаем изображение круглым */
-    border: 2px solid blue; /* Добавляем белую обводку толщиной 2px */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Добавляем небольшую тень */
-    background-color: yellow;
   }
+
+}

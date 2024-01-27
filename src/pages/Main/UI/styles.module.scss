@@ -95,8 +95,8 @@
     top: 170px;
     left: 50px;
     width: 100%;
-    height: 70%;
-    z-index: 10;
+    height: 71%;
+    z-index: 1;
   }
 }
 
@@ -109,7 +109,6 @@
   padding-top: 50px;
   margin-bottom: 323px;
 
-
 }
 
 
@@ -120,6 +119,7 @@
   font-weight: 600;
   line-height: normal;
   padding: 12px 43px;
+  z-index: 2;
 }
 
 
@@ -188,7 +188,6 @@
 
 .cta__text{
   color: #303030;
-
   font-size: 20px;
   font-style: normal;
   font-weight: 600;

@@ -7,6 +7,7 @@ import styles from "./styles.module.scss";
 import { Lang } from "./lang";
 import { useAuth } from "@shared/hooks/useAuth";
 import { useRole } from "@shared/hooks/useRole";
+import { DropdownMenu } from "./dropdownMenu";
 
 export const Header: FC = () => {
   const { isAuth, toggleLogin, toggleLogout } = useAuth();
@@ -14,6 +15,7 @@ export const Header: FC = () => {
 
   return (
     <header className={styles.wrapper}>
+      <DropdownMenu currentRole={currentRole} toggleRole={toggleRole}/>
       <Logo currentRole={currentRole} />
       <Nav
         isAuth={isAuth}

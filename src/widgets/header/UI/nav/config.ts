@@ -15,6 +15,6 @@ export const advertiserNavbar = [
 
 export const bloggerNavbar = [
   {text: "pages.addPlatform",  href: paths.addPlatform  },
-  {text: "pages.catalog",  href: '' },
+  {text: "pages.catalog",  href: paths.catalog },
   {text: "pages.wallet",  href: paths.wallet },
 ];

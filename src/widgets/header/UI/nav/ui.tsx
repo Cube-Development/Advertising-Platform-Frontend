@@ -70,7 +70,7 @@ export const Nav: FC<NavProps> = ({
 
           {currentRole === roles.advertiser
             ? advertiserNavbar.map((item, index) => (
-                <div
+                <li
                   key={index}
                   onClick={() => handleNavigation(item.href)}
                   className={
@@ -78,10 +78,10 @@ export const Nav: FC<NavProps> = ({
                   }
                 >
                   {t(item.text)}
-                </div>
+                </li>
               ))
             : bloggerNavbar.map((item, index) => (
-                <div
+                <li
                   key={index}
                   onClick={() => handleNavigation(item.href)}
                   className={
@@ -89,7 +89,7 @@ export const Nav: FC<NavProps> = ({
                   }
                 >
                     {t(item.text)}
-                </div>
+                </li>
               ))}
 
           <div onClick={toggleLogout}>LOGOUT</div>
