@@ -20,8 +20,8 @@ export const PriceCard: FC<PriceCardProps> = ({ price, index }) => {
       <MyButton customClass={styles.button}>{price.btn}</MyButton>
       <p className={styles.text}>{price.info}</p>
       <ul className={styles.options}>
-        {price.options.map((option) => (
-          <div className={styles.option__row}>
+        {price.options.map((option, index) => (
+          <div key={index} className={styles.option__row}>
             {option.available ? (
               <img src={`images/common/yes.svg`} alt="" />
             ) : (

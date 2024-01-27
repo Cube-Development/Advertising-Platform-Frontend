@@ -1,10 +1,12 @@
 .wrapper {
-    display: flex;
-    justify-content: space-around;
+
+    display: grid;
+    grid-template-columns: repeat(3, minmax(150px, 1fr));
+    gap: 10px;
     align-items: center;
     list-style: none;
-    padding: 0 100px 0 30px;
     margin: 0;
+    text-align: center;
 
     color: var(--first-text);
     font-size: 14px;
@@ -14,19 +16,27 @@
   
     li {
       cursor: pointer;
-      padding: 8px;
+      padding: 5px;
       color: #000; 
 
   
       &:hover {
         background-color: #f0f0f0;
-        border-radius: 15px;
+        border-radius: 10px;
       }
   
       &.active {
         color: blue; /* Цвет текста на текущей странице */
       }
+
+
+    img{
+      margin-right: 5px;
     }
+
+    }
+
+
 
 
 

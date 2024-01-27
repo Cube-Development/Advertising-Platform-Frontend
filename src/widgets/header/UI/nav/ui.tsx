@@ -8,17 +8,14 @@ import { useTranslation } from "react-i18next";
 
 interface NavProps {
   isAuth: boolean;
-  toggleLogin: (tokens: any) => void;
   toggleLogout: () => void;
   currentRole: string;
-  toggleRole: () => void;
 }
 
 export const Nav: FC<NavProps> = ({
   isAuth,
   toggleLogout,
   currentRole,
-  toggleRole,
 }) => {
   const router = useNavigate();
   const location = useLocation();
@@ -31,45 +28,10 @@ export const Nav: FC<NavProps> = ({
 
   return (
     <nav className={styles.wrapper}>
-      {isAuth ? (
         <>
-          <h1
-            className={`${
-              currentRole === roles.blogger ? styles.active : styles.no__active
-            }`}
-          >
-            Blogger
-          </h1>
-
-          <Link
-            to={currentRole === roles.blogger ? paths.main : paths.mainBlogger}
-          >
-            <div
-              className={`${styles.role__switcher} ${
-                currentRole === roles.advertiser
-                  ? styles.role__advertiser
-                  : styles.role__blogger
-              }`}
-              onClick={() => {
-                toggleRole();
-              }}
-            >
-              SWITCH
-            </div>
-          </Link>
-
-          <h1
-            className={`${
-              currentRole === roles.advertiser
-                ? styles.active
-                : styles.no__active
-            }`}
-          >
-            Advertiser
-          </h1>
-
-          {currentRole === roles.advertiser
+          {isAuth && currentRole === roles.advertiser
             ? advertiserNavbar.map((item, index) => (
+                
                 <li
                   key={index}
                   onClick={() => handleNavigation(item.href)}
@@ -77,10 +39,13 @@ export const Nav: FC<NavProps> = ({
                     location.pathname === item.href ? styles.active : ""
                   }
                 >
+                  {item.img && <img src={`images/common/${item.img}`} alt="" />}
                   {t(item.text)}
                 </li>
               ))
-            : bloggerNavbar.map((item, index) => (
+            : isAuth && currentRole === roles.blogger 
+            ?
+             bloggerNavbar.map((item, index) => (
                 <li
                   key={index}
                   onClick={() => handleNavigation(item.href)}
@@ -88,27 +53,25 @@ export const Nav: FC<NavProps> = ({
                     location.pathname === item.href ? styles.active : ""
                   }
                 >
+                    {item.img && <img src={`images/common/${item.img}`} alt="" />}
                     {t(item.text)}
                 </li>
-              ))}
-
-          <div onClick={toggleLogout}>LOGOUT</div>
-        </>
-      ) : (
-        <>
-          <img src="images/common/key.svg" alt="" />
-
-          {nonAuthNavbar.map((item, index) => (
+              ))
+          : 
+          nonAuthNavbar.map((item, index) => (
             <li
               key={index}
               onClick={() => handleNavigation(item.href)}
               className={location.pathname === item.href ? styles.active : ""}
             >
+              {item.img && <img src={`images/common/${item.img}`} alt="" />}
               {t(item.text)}
             </li>
           ))}
+
         </>
-      )}
     </nav>
   );
 };
+
+{/* <img src="images/common/key.svg" alt="" /> */}

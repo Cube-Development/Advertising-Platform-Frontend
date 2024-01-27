@@ -1,7 +1,8 @@
 import { roles } from '@shared/config/roles';
 import { paths } from '@shared/routing';
-import React, { useState, FC } from 'react';
+import { useState, FC, useEffect, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 import styles from "./styles.module.scss";
 
 interface DropdownMenuProps {
@@ -16,6 +17,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
   const { t } = useTranslation();
 
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
@@ -25,28 +27,50 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
     setMenuOpen(false);
   };
 
+  const handleClickOutside = (event: MouseEvent) => {
+    if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+      closeMenu();
+    }
+  };
+
+  const handleButtonClick = () => {
+    toggleMenu();
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+
   return (
-    <div className={styles.dropdown}>
-      <button onClick={toggleMenu}>|||</button>
+    <div className={styles.dropdown}  ref={menuRef}>
+      <button onClick={handleButtonClick} className={styles.burger__icon_btn}>
+        <div  className={styles.burger__icon}/>
+      </button>
 
       {isMenuOpen && (
-        <div className={styles.menu} onBlur={closeMenu} tabIndex={0}>
+        <div className={styles.menu}>
           <div className={styles.switcher__row}>
             <h1>
               {currentRole === roles.blogger ? t("roles.blogger") : t("roles.advertiser")}
             </h1>
 
-            <div className={styles.switcher}
-              onClick={() => {
-                toggleRole();
-              }}
+            <Link
+              to={currentRole === roles.blogger ? paths.main : paths.mainBlogger}
             >
-              SWITCH
+              <div
+                className={styles.switcher}
+                onClick={() => {
+                  toggleRole();
+                }}
+              >
+                SWITCH
+              </div>
+            </Link>
           </div>
-
-
-          </div>
-
 
           <ul>
             <li>Пункт меню 1</li>

@@ -1,7 +1,6 @@
 .dropdown {
-    position: relative;
-
-  }
+  position: relative;
+}
   
   .menu {
     display: block;
@@ -57,3 +56,47 @@
     }
 
   }
+
+
+
+
+
+  .burger__icon_btn {
+    --width: 40px;
+    --height: 40px;
+    --line-height: 2px;
+    --color: var(--Gradient-1, linear-gradient(90deg, #4772E6 0.03%, #8E54E9 100.36%));;
+  
+    height: var(--height);
+    width: var(--width);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+.burger__icon {
+  position: relative;
+  width: var(--width);
+  height: var(--line-height);
+  background-color: var(--color);
+
+  &::before,
+  &::after {
+      content: '';
+      display: block;
+      position: absolute;
+      left: 0;
+      width: var(--width);
+      height: var(--line-height);
+      background-color: var(--color);
+
+    }
+
+    &::before{
+      top: calc(var(--line-height) * -6);
+    }
+
+    &::after{
+      top: calc(var(--line-height) * 6);
+    }
+}

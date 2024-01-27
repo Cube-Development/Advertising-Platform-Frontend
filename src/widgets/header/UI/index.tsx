@@ -10,22 +10,20 @@ import { useRole } from "@shared/hooks/useRole";
 import { DropdownMenu } from "./dropdownMenu";
 
 export const Header: FC = () => {
-  const { isAuth, toggleLogin, toggleLogout } = useAuth();
+  const { isAuth, toggleLogout } = useAuth();
   const { currentRole, toggleRole } = useRole();
 
   return (
-    <header className={styles.wrapper}>
-      <DropdownMenu currentRole={currentRole} toggleRole={toggleRole}/>
-      <Logo currentRole={currentRole} />
-      <Nav
-        isAuth={isAuth}
-        toggleLogin={toggleLogin}
-        toggleLogout={toggleLogout}
-        currentRole={currentRole}
-        toggleRole={toggleRole}
-      />
-      <Lang />
-      {isAuth ? <Profile /> : <LoginBtn />}
+    <header className={`${styles.wrapper}`}>
+        {isAuth && <DropdownMenu currentRole={currentRole} toggleRole={toggleRole}/>}
+        <Logo currentRole={currentRole} />
+        <Nav
+          isAuth={isAuth}
+          toggleLogout={toggleLogout}
+          currentRole={currentRole}
+        />
+        <Lang />
+        {isAuth ? <Profile toggleLogout={toggleLogout} /> : <LoginBtn />}
     </header>
   );
 };

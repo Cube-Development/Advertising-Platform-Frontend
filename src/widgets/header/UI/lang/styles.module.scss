@@ -1,13 +1,45 @@
-.lang{
+.lang {
     width: 35px;
-    height: 25px;   
+    height: auto;
     border-radius: 12px;
     border: 1px solid var(--Gradient-1, #4772E6);
     color: var(--first-text);
     font-size: 14px;
     font-style: normal;
     font-weight: 600;
-    line-height: 12px; 
+    line-height: 12px;
     padding: 6px;
+    margin: 0 10px;
     cursor: pointer;
-}
+    position: relative;
+  }
+
+
+.menu {
+    display: block;
+    padding: 30px;
+    position: absolute;
+    top: 100%;
+    right: 10%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    width: 150px;
+    border-radius: 20px;
+  
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+  
+    li {
+      padding: 8px;
+      cursor: pointer;
+  
+      &:hover {
+        background-color: #f0f0f0;
+      }
+    }
+  }

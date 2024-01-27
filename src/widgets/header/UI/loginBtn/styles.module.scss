@@ -1,8 +1,8 @@
 .wrapper {
-    display: flex;
+    display: grid;
+    grid-auto-flow: column;
     align-items: center;
     column-gap: 30px;
-    padding: 0 40px 0 5px;
 }
 
 .loginBtn{
