@@ -7,6 +7,7 @@
 
 .loginBtn{
   cursor: pointer;
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
   column-gap: 5px;
 }

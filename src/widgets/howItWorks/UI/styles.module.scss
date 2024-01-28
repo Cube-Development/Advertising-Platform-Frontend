@@ -1,0 +1,36 @@
+.how__wrapper{
+    max-width: var(--container-width);
+    height: 749px;
+    background: #4772E6;
+    border-radius: 50px;
+    margin-bottom: 100px;
+    position: relative;
+    z-index: -1;
+  
+  
+    &::before{
+      content: '';
+      background-image: url('images/assets/RoadBlock.png') ;
+      background-size: contain; 
+      background-repeat: no-repeat;
+      position: absolute;
+      top: 170px;
+      left: 50px;
+      width: 100%;
+      height: 71%;
+      z-index: 1;
+    }
+  }
+  
+  .how__title{
+    color: #FFF;
+    font-size: 44px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    padding-top: 50px;
+    margin-bottom: 323px;
+  
+  }
+  
+  

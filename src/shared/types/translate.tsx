@@ -36,7 +36,7 @@ export interface Option {
     available: boolean
 }
   
-export interface IReview {
+export interface ICustomer {
     name: string
     workplace: string
     rate: number

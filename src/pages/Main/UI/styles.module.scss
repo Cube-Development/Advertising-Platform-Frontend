@@ -5,7 +5,8 @@
 }
 
 .top__row{
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
   column-gap: 5px;
   justify-content: space-between;
 
@@ -155,7 +156,8 @@
 
 
 .cta__row{
-  display: flex;
+  display: grid;
+  grid-auto-flow: column;
   column-gap: 20px;
   align-items: center;
   margin-bottom: 20px;

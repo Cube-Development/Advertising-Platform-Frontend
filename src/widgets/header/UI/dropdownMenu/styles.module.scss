@@ -33,7 +33,8 @@
   
 
   .switcher__row{
-    display: flex;
+    display: grid;
+    grid-auto-flow: column;
     column-gap: 10px;
     align-items: center;
     margin-bottom: 20px;
@@ -69,7 +70,8 @@
   
     height: var(--height);
     width: var(--width);
-    display: flex;
+    display: grid;
+    grid-auto-flow: column;
     justify-content: center;
     align-items: center;
   }
