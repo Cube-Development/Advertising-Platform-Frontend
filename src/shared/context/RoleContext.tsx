@@ -4,7 +4,7 @@ import { FC, ReactNode, useEffect, useState } from "react";
 
 export interface RoleContextType {
   currentRole: string;
-  toggleRole: () => void;
+  toggleRole: (role: roles) => void;
 }
 
 const initialRoleContext: RoleContextType = {
@@ -27,12 +27,13 @@ export const RoleProvider: FC<{ children: ReactNode }> = ({ children }) => {
     initializeRole();
   }, []);
 
-  const toggleRole = () => {
-    const newRole =
-      currentRole === roles.blogger ? roles.advertiser : roles.blogger;
-    setCurrentRole(newRole);
-    localStorage.setItem("role", newRole);
-    console.log(newRole);
+  const toggleRole = (role: roles) => {
+    if (role !== currentRole) { 
+      const newRole =
+        currentRole === roles.blogger ? roles.advertiser : roles.blogger;
+      setCurrentRole(newRole);
+      localStorage.setItem("role", newRole);
+    }
   };
 
   return (

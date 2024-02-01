@@ -1,6 +1,6 @@
 import React, { FC, useState } from "react";
 import styles from "./styles.module.scss";
-import { ILogin } from "@shared/types/login";
+import { ILogin } from "@shared/types/common";
 import { MyButton, MyForm, MyInput } from "@shared/ui";
 
 interface LoginFormProps {

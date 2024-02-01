@@ -4,10 +4,10 @@ import { IAccomm } from "@shared/types/translate";
 
 interface AccommCardProps {
   accomm: IAccomm;
-  startAdvBtn: ReactElement,
+  toDoBtn: ReactElement,
 }
 
-export const AccommCard: FC<AccommCardProps> = ({ accomm, startAdvBtn }) => {
+export const AccommCard: FC<AccommCardProps> = ({ accomm, toDoBtn }) => {
   const subclass = accomm.type === "vencom" ? styles.vencom : "";
 
   return (
@@ -29,7 +29,7 @@ export const AccommCard: FC<AccommCardProps> = ({ accomm, startAdvBtn }) => {
 
       {accomm.type === "vencom" && (
         <div className={styles.bottom__row}>
-          {startAdvBtn}
+          {toDoBtn}
           <div className={styles.save__row}>
             <img src="images/common/protect.svg" alt="" />
             <h4>{accomm.save}</h4>

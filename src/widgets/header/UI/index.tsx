@@ -8,6 +8,7 @@ import { Lang } from "./lang";
 import { useAuth } from "@shared/hooks/useAuth";
 import { useRole } from "@shared/hooks/useRole";
 import { DropdownMenu } from "./dropdownMenu";
+import { Wallet } from "./wallet";
 
 export const Header: FC = () => {
   const { isAuth, toggleLogout } = useAuth();
@@ -22,8 +23,10 @@ export const Header: FC = () => {
           toggleLogout={toggleLogout}
           currentRole={currentRole}
         />
+        {isAuth && <Wallet />}
         <Lang />
         {isAuth ? <Profile toggleLogout={toggleLogout} /> : <LoginBtn />}
+        
     </header>
   );
 };

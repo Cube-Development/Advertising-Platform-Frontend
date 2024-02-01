@@ -1,0 +1,107 @@
+.calculate__wrapper {
+    background-image: url('images/assets/background2.png');
+    background-size: cover;
+    background-position: center;
+    border-radius: 50px 50px 50px 50px; 
+    padding: 40px 0; 
+    max-width: var(--container-width);
+    margin-bottom: 150px;
+  }
+
+  .calculate__column{
+
+
+  }
+
+
+.calculate__row{
+  max-width: 870px;
+  display: grid;
+  grid-auto-flow: column;
+  column-gap: 20px;
+  align-items: center;
+  margin-bottom: 20px;
+
+  img{
+    width: 40px;
+    height: 40px;
+  }
+}
+
+
+.calculate__title{
+  color: var(--first-text);
+  font-size: 44px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+}
+
+.calculate__subtitle{
+    max-width: 1000px;
+    color: #FFF;
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    padding: 12px 20px 15px 20px;
+    border-radius: 12px;
+    background: var(--Gradient-1, linear-gradient(90deg, #4772E6 0.03%, #8E54E9 100.36%));
+    margin-bottom: 20px;
+}
+
+.calculate__text{
+    color: #303030;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 50px;
+    max-width: 812px;
+}
+
+.card__wrapper{
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 50px;
+}
+
+.card{
+  max-width: 800px;
+  white-space: nowrap;
+  flex-shrink: 0;
+  border-radius: 40px 40px 0px 40px;
+  border: 2px solid var(--Gradient-1, #4772E6);
+  background: rgba(255, 255, 255, 0.85);
+  padding: 50px;
+}
+
+.card__content{
+  display: grid;
+  grid-template-rows: auto auto; /* Две строки */
+  grid-template-columns: auto auto;
+  column-gap: 50px;
+  row-gap: 40px;
+}
+
+.card__title{
+  text-align: center;
+  margin-bottom: 65px;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  color: var(--Gradient-1, linear-gradient(93deg, #4772E6 2.37%, #8E54E9 52.62%));
+}
+
+.button{
+  background: radial-gradient(419.34% 136.52% at 0% 100%, rgba(255, 255, 255, 0.20) 0%, rgba(125, 117, 117, 0.00) 100%), linear-gradient(90deg, #FF2F66 0%, rgba(254, 110, 48, 0.99) 100%);
+  color: #FFF;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  width: 100%;
+}
+

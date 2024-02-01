@@ -1,4 +1,5 @@
 import { AccommList } from '@features/accommList';
+import { AddPlatform } from '@features/addPlatform';
 import { StartAdv } from '@features/startAdv';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -16,7 +17,12 @@ export const WhyChooseUs: FC<WhyChooseUsProps> = ({page}) => {
           <h1 className={styles.why__title}>
             {t(`${page}.why_title`)}
             </h1>
-          <AccommList accomms={t(`${page}.accomms_list`, { returnObjects: true })} startAdvBtn={<StartAdv/>}/>
+          <AccommList accomms={t(`${page}.accomms_list`, { returnObjects: true })} 
+                      toDoBtn={page === 'main_page_advertiser' 
+                      ? 
+                      <StartAdv props={{className: styles.button}} /> 
+                      : 
+                      <AddPlatform props={{className: styles.button}} />}/>
         </div>
       </section>
     );

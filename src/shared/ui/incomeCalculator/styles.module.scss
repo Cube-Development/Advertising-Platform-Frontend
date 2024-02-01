@@ -1,0 +1,22 @@
+.income__wrapper{
+    display: grid;
+  }
+  
+  
+  .income__title{
+    color: #000;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+  
+  .income__cash{
+    color: #000;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    display: grid;
+    align-items: flex-end;
+  }

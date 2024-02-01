@@ -1,4 +1,5 @@
 import { OptionCard } from '@entities/optionCard';
+import { AddPlatform } from '@features/addPlatform';
 import { SeeCatalog } from '@features/seeCatalog';
 import { IOption } from '@shared/types/translate';
 import {FC} from 'react';
@@ -29,10 +30,10 @@ export const Cta: FC<CtaProps> = ({page}) => {
                             <OptionCard key={index} option={option} />
                         ))}
                         </div>
-                    <SeeCatalog />
+                    {page === 'main_page_advertiser' ? <SeeCatalog /> : <AddPlatform />}
                 </div>
                 <div>
-                    <img src="images/assets/MainImage.png" alt="" />
+                    <img src={`images/assets/${t(`${page}.main_img`)}`} alt="" />
                 </div>
             </div>
             </div>

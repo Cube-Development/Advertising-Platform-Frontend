@@ -5,15 +5,15 @@ import { AccommCard } from "@entities/accommCard";
 
 interface AccommProps {
   accomms: IAccomm[];
-  startAdvBtn: ReactElement,
+  toDoBtn: ReactElement,
 
 }
 
-export const AccommList: FC<AccommProps> = ({ accomms, startAdvBtn }) => {
+export const AccommList: FC<AccommProps> = ({ accomms, toDoBtn }) => {
   return (
     <div className={styles.why__row}>
       {accomms.map((accomm, index) => (
-        <AccommCard key={index} accomm={accomm} startAdvBtn={startAdvBtn}/>
+        <AccommCard key={index} accomm={accomm} toDoBtn={toDoBtn}/>
       ))}
     </div>
   );

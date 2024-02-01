@@ -1,0 +1,68 @@
+.wallet {
+    max-width: 225px;
+    height: auto;
+
+    border-radius: 12px;
+    border: 1px solid var(--Gradient-1, #4772E6);
+    background: var(--Gradient-1, linear-gradient(93deg, #4772E6 2.37%, #8E54E9 52.62%));
+    color: #fff;
+   
+    padding: 20px  10px ;
+    cursor: pointer;
+    position: relative;
+    line-height: 0;
+
+    p{
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      line-height: 0.75;
+    }
+
+    button{
+      display: grid;
+      grid-auto-flow: column;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+ }
+
+ .plus__icon {
+  width: 32px;
+  height: 32px;
+  position: relative;
+  background-color: #00ff00;
+  border-radius: 50%;
+}
+
+
+.menu {
+    display: block;
+    padding: 30px;
+    position: absolute;
+    top: 100%;
+    right: 10%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    width: 150px;
+    border-radius: 20px;
+  
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+  
+    li {
+      padding: 8px;
+      cursor: pointer;
+  
+      &:hover {
+        background-color: #f0f0f0;
+      }
+    }
+  }

@@ -11,7 +11,7 @@ export const Registration: FC = () => {
 
     return (
         <Link to={paths.login} >
-            <MyButton customClass={styles.button}>
+            <MyButton className={styles.button}>
                 {t(`registration`)}
             </MyButton>
         </Link>

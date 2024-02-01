@@ -1,6 +1,6 @@
 import { LoginCode } from "@features/LoginCode";
 import { LoginForm } from "@features/LoginForm";
-import { ILogin } from "@shared/types/login";
+import { ILogin } from "@shared/types/common";
 import { MyModal } from "@shared/ui";
 import { FC, useState } from "react";
 

@@ -15,10 +15,12 @@
 
 a, a:link, a:visited  {
     text-decoration: none;
+    color: inherit;
 }
 
 a:hover  {
     text-decoration: none;
+	color: inherit;
 }
 
 /* Common */
@@ -30,6 +32,8 @@ aside, nav, footer, header, section, main {
 h1, h2, h3, h4, h5, h6, p {
     font-size: inherit;
 	font-weight: inherit;
+	margin: 0;
+  	padding: 0;
 }
 
 ul, ul li {

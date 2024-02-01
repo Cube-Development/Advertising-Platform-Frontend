@@ -4,6 +4,7 @@ import styles from "./styles.module.scss";
 export const Lang: FC = () => {
 
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const [language, setLanguage] = useState("RU");
   const menuRef = useRef<HTMLDivElement>(null);
 
   const toggleMenu = () => {
@@ -31,23 +32,32 @@ export const Lang: FC = () => {
     };
   }, []);
 
+  const handleLanguageSelect = (language: string) => {
+    setMenuOpen(false);
+    setLanguage(language);
+  };
 
   return (
-      <div className={styles.lang} ref={menuRef}>
-        <button onClick={handleButtonClick}>RU</button>
+      <div className={styles.wrapper} ref={menuRef}>
+        <button onClick={handleButtonClick}>{language}</button>
 
         {isMenuOpen && (
           <div  className={styles.menu}>
             <ul>
-              <li>RU</li>
-              <li>UZB</li>
-              <li>EN</li>
+              <li onClick={() => handleLanguageSelect('RU')}>
+                RU <img src="images/languages/ru.svg" alt="Russian Flag" />
+              </li>
+              <li onClick={() => handleLanguageSelect('EN')}>
+                EN <img src="images/languages/en.svg" alt="English Flag" />
+              </li>
+              <li onClick={() => handleLanguageSelect('UZ')}>
+                UZ <img src="images/languages/uz.svg" alt="Uzbek Flag" />
+              </li>
             </ul>
           </div>
       )}
 
       </div>
     )
-      
       
 };

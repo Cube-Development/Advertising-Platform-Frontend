@@ -1,0 +1,32 @@
+.theme__wrapper{
+    display: grid;
+
+    h2{
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      color: var(--Gradient-2, linear-gradient(90deg, #FF2F66 0%, rgba(254, 110, 48, 0.99) 100%));
+      margin-bottom: 10px;
+    }
+    
+    select{
+      width: 390px;
+      height: 60px;
+      border-radius: 12px;
+      border: 1px solid var(--Gradient-1, #4772E6);
+      padding: 20px;
+      color: rgba(0, 0, 0, 0.5);
+      cursor: pointer;
+    }
+  
+    option{
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+
+}
+  
+  
