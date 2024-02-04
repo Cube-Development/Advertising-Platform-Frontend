@@ -1,10 +1,11 @@
+import { CalculatorIcon } from "@shared/assets/icons/calculator";
+import { KeyIcon } from "@shared/assets/icons/key";
+import { roles } from "@shared/config/roles";
 import { FC } from "react";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import { useLocation, useNavigate } from "react-router-dom";
 import { advertiserNavbar, bloggerNavbar, nonAuthNavbar } from "./config";
 import styles from "./styles.module.scss";
-import { roles } from "@shared/config/roles";
-import { paths } from "@shared/routing";
-import { useTranslation } from "react-i18next";
 
 interface NavProps {
   isAuth: boolean;
@@ -39,7 +40,7 @@ export const Nav: FC<NavProps> = ({
                     location.pathname === item.href ? styles.active : ""
                   }
                 >
-                  {item.img && <img src={`images/common/${item.img}`} alt="" />}
+                  {item.img && <KeyIcon />}
                   {t(item.text)}
                 </li>
               ))
@@ -53,7 +54,7 @@ export const Nav: FC<NavProps> = ({
                     location.pathname === item.href ? styles.active : ""
                   }
                 >
-                    {item.img && <img src={`images/common/${item.img}`} alt="" />}
+                    {item.img && <CalculatorIcon />}
                     {t(item.text)}
                 </li>
               ))
@@ -64,7 +65,7 @@ export const Nav: FC<NavProps> = ({
               onClick={() => handleNavigation(item.href)}
               className={location.pathname === item.href ? styles.active : ""}
             >
-              {item.img && <img src={`images/common/${item.img}`} alt="" />}
+              {item.img && <KeyIcon />}
               {t(item.text)}
             </li>
           ))}
@@ -73,5 +74,3 @@ export const Nav: FC<NavProps> = ({
     </nav>
   );
 };
-
-{/* <img src="images/common/key.svg" alt="" /> */}

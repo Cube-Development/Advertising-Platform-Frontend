@@ -1,9 +1,15 @@
 .wrapper {
     display: grid;
+    padding: 0 20px;
+    justify-content: space-between;
     grid-auto-flow: column;
-    column-gap: 10px;
     align-items: center;
-    // padding: 20px;
-    position: relative;
+    height: 80px;
     border-bottom: 0.5px solid rgba(0, 0, 0, 0.30);
+}
+
+.row{
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
 }

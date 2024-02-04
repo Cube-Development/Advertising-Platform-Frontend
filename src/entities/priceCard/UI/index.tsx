@@ -1,6 +1,8 @@
 import { FC, ReactElement } from "react";
 import styles from "./styles.module.scss";
 import { IPrice } from "@shared/types/translate";
+import { YesIcon } from "@shared/assets/icons/yes";
+import { NoIcon } from "@shared/assets/icons/no";
 
 interface PriceCardProps {
   price: IPrice;
@@ -14,21 +16,17 @@ export const PriceCard: FC<PriceCardProps> = ({ price, index, buyBtn }) => {
 
   return (
     <div className={`${styles.price__card} ${borderClass}`}>
-      <h1 className={styles.title}>{price.name}</h1>
-      <h2 className={styles.views}>{price.views}</h2>
-      <h4 className={styles.price}>{price.price}</h4>
+      <p className={styles.title}>{price.name}</p>
+      <p className={styles.views}>{price.views}</p>
+      <p className={styles.price}>{price.price}</p>
       {buyBtn}
       <p className={styles.text}>{price.info}</p>
-      <ul className={styles.options}>
+      <ul>
         {price.options.map((option, index) => (
-          <div key={index} className={styles.option__row}>
-            {option.available ? (
-              <img src={`images/common/yes.svg`} alt="" />
-            ) : (
-              <img src={`images/common/no.svg`} alt="" />
-            )}
-            <li>{option.option}</li>
-          </div>
+            <li key={index}>
+              {option.available ? <YesIcon/> : <NoIcon/>}
+              {option.option}
+            </li>
         ))}
       </ul>
     </div>

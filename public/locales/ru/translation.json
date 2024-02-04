@@ -33,8 +33,8 @@
 
     "wallet": {
         "balance": "Баланс",
-        "add_funds": "Пополнить",
-        "withdraw ": "Вывести",
+        "add_funds": "Пополнить кошелёк",
+        "withdraw": "Вывести средства",
         "history": "История транзакций",
         "invoice": "Счета и договора"
     },
@@ -355,6 +355,9 @@
 
         "work_title": "Уже зарабатывают с нами",
         "work_list": [
+            {"img": "channel1.svg"},
+            {"img": "channel1.svg"},
+            {"img": "channel1.svg"},
             {"img": "channel1.svg"},
             {"img": "channel1.svg"},
             {"img": "channel1.svg"},

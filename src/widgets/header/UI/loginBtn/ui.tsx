@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { MyButton } from "@shared/ui";
 import { paths } from "@shared/routing";
 import { useTranslation } from "react-i18next";
+import { LoginIcon } from "@shared/assets/icons/login";
 
 export const LoginBtn: FC = () => {
   const { t } = useTranslation();
@@ -14,7 +15,7 @@ export const LoginBtn: FC = () => {
 
       <div className={styles.loginBtn}>
         <button>{t("login")}</button>
-        <img src="images/common/login.svg" alt="" />
+        <LoginIcon /> 
       </div>
     </Link>
   );

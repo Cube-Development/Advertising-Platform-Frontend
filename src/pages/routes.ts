@@ -10,6 +10,7 @@ import { PlatformOwnerPage } from "./PlatformOwner";
 import { WalletPage } from "./Wallet";
 import { AddPlatformPage } from "./AddPlatform";
 import { paths } from "@shared/routing";
+import { TurnkeyPage } from "./TurnkeyPage";
 
 
 export interface IRoute {
@@ -25,6 +26,7 @@ export const privateBloggerRoutes: IRoute[] = [
     {path: paths.notFound, component: NotFoundPage},
     {path: paths.wallet, component: WalletPage},
     {path: paths.addPlatform, component: AddPlatformPage},
+    {path: paths.turnkey, component: TurnkeyPage},
 ]
 
 export const privateAdvertiserRoutes: IRoute[] = [
@@ -34,13 +36,16 @@ export const privateAdvertiserRoutes: IRoute[] = [
     {path: paths.fullServise, component: FullServicePage},
     {path: paths.catalog, component: CatalogPage},
     {path: paths.wallet, component: WalletPage},
+    {path: paths.turnkey, component: TurnkeyPage},
 ]
 
 
 export const publicRoutes: IRoute[] = [
+    {path: paths.mainBlogger, component: MainBloggerPage},
     {path: paths.main, component: MainPage},
     {path: paths.login, component: LoginPage},
     {path: paths.notFound, component: NotFoundPage},
     {path: paths.catalog, component: CatalogPage},
+    {path: paths.turnkey, component: TurnkeyPage},
 ]
 

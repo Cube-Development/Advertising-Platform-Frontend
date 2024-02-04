@@ -1,12 +1,17 @@
-import React, {FC} from 'react';
+import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import styles from './styles.module.scss'
+import SwiperCore from 'swiper';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import 'swiper/css';
+import { Navigation, Pagination, Scrollbar, Autoplay, EffectFade  } from 'swiper/modules';
+import styles from './styles.module.scss';
 
 interface WorkWithUsProps {
     page: string;
 }
+import 'swiper/css';
+import 'swiper/css/autoplay';
+
+SwiperCore.use([Navigation, Pagination, Scrollbar, Autoplay, EffectFade]);
 
 export const WorkWithUs: FC<WorkWithUsProps> = ({page}) => {
     const { t } = useTranslation();
@@ -17,11 +22,14 @@ export const WorkWithUs: FC<WorkWithUsProps> = ({page}) => {
             <h1 className={styles.work__title}>
                 {t(`${page}.work_title`)}
             </h1>
-
-            <Swiper
-                spaceBetween={60}
-                slidesPerView={6} 
-                loop={true} 
+            <Swiper 
+                module={[Autoplay]}
+                    spaceBetween={130}
+                    slidesPerView={6}
+                    speed={800} 
+                    delay={0}
+                    autoplay={{ delay: 500 }}
+                    loop={true}
                 >
                 {channels.map((channel, index) => (
                     <SwiperSlide key={index}>

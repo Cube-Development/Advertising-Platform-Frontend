@@ -15,19 +15,20 @@
 
         text-align: left;
         padding-left: 20px;
+
+        li{
+            margin-bottom: 30px;
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 700;
+            line-height: normal;
+            list-style: disc;
+        }
     }
 
 }
 
 
-.accomm{
-    margin-bottom: 30px;
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    list-style: disc;
-}
 
 .accomms__row{
     display: grid;

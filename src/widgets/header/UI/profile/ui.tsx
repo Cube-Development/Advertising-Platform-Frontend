@@ -1,3 +1,4 @@
+import { ProfileIcon } from "@shared/assets/icons/profile";
 import { FC, useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -41,16 +42,15 @@ export const Profile: FC<ProfileProps> = ({ toggleLogout }) => {
   return (
     <div className={styles.profile} ref={menuRef}>
       <button onClick={handleButtonClick}>
-        <img src="./images/common/profile.svg" alt="" />
+        <ProfileIcon />
       </button>
 
       {isMenuOpen && (
         <div className={styles.menu}>
           <ul>
-            <li>{t("profile.messages")}</li>
             <li>{t("profile.data")}</li>
             <li>{t("profile.settings")}</li>
-            <li onClick={toggleLogout}>{t("logout")}</li>
+            <li className={styles.logout} onClick={toggleLogout}>{t("logout")}</li>
           </ul>
         </div>
       )}

@@ -1,5 +1,6 @@
 import { BuyTarif } from '@features/buyTarif';
 import { PriceList } from '@features/priceList';
+import { KeyIcon } from '@shared/assets/icons/key';
 import {FC} from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './styles.module.scss'
@@ -13,9 +14,9 @@ export const Turnkey: FC<TurnkeyProps> = ({page}) => {
 
     return (
         <section className={styles.turnkey__wrapper}>
-          <div className={styles.turnkey__column}>
+          <div className='container'>
             <div className={styles.turnkey__row}>
-              <img src="images/common/key.svg" alt="" />
+              <KeyIcon />
               <h1 className={styles.turnkey__title}>
                 {t(`${page}.turnkey_title`)}
               </h1>
@@ -27,8 +28,8 @@ export const Turnkey: FC<TurnkeyProps> = ({page}) => {
             <p className={styles.turnkey__text}>
               {t(`${page}.turnkey_text`)}
             </p>
+            <PriceList tarifs={t(`${page}.tarifs_list`, { returnObjects: true })}  buyBtn={<BuyTarif/>} />
           </div>
-          <PriceList tarifs={t(`${page}.tarifs_list`, { returnObjects: true })}  buyBtn={<BuyTarif/>} />
       </section>
     );
 };

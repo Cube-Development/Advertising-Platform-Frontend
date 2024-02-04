@@ -1,7 +1,12 @@
+import { CloseIcon } from "@shared/assets/icons/close";
+import { PlusIcon } from "@shared/assets/icons/plus";
 import { FC, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
 export const Wallet: FC = () => {
+  const { t } = useTranslation();
+  const wallet = 1000000
 
   const [isMenuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -33,20 +38,20 @@ export const Wallet: FC = () => {
 
 
   return (
-      <div className={styles.wallet} ref={menuRef}>
-        <button onClick={handleButtonClick}>
+      <div className={`${styles.wallet} ${isMenuOpen && styles.active__wallet}`} ref={menuRef}>
+        <button className={styles.roww} onClick={handleButtonClick}>
           <p>
-            100000000 сум
+            {wallet.toLocaleString()} {t("symbol")}
           </p>
-          <div className={styles.plus__icon}/>
+          {isMenuOpen ? <CloseIcon /> : <PlusIcon/>}
         </button>
-
         {isMenuOpen && (
           <div  className={styles.menu}>
             <ul>
-              <li>RU</li>
-              <li>UZB</li>
-              <li>EN</li>
+              <li>{t("wallet.add_funds")}</li>
+              <li>{t("wallet.withdraw")}</li>
+              <li>{t("wallet.history")}</li>
+              <li>{t("wallet.invoice")}</li>
             </ul>
           </div>
       )}

@@ -3,6 +3,7 @@
   font-style: normal;
   font-weight: 600;
   line-height: 12px;
+  margin-right: 40px;
 
   button {
     display: grid;
@@ -30,6 +31,7 @@
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 1;
     border-radius: 12px;
+    overflow: hidden;
   
     li {
       padding: 8px;
@@ -40,6 +42,7 @@
   
       &:hover {
         background-color: #f0f0f0;
+        color: var(--Gradient-1, linear-gradient(93deg, #4772E6 2.37%, #8E54E9 52.62%));
       }
     }
   }

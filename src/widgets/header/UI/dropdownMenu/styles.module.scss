@@ -1,18 +1,19 @@
 .dropdown {
   position: relative;
+  margin-right: 20px;
 }
   
 .menu {
   padding: 15px;
   width: 470px;
-  height: 720px;
+  min-height: 720px;
 
   position: fixed; 
   top: 0;
   background-color: #fff;
   border: 1px solid #ccc;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 1;
+  z-index: 10;
 
   ul {
     color: var(--first-text);
@@ -25,11 +26,18 @@
     line-height: normal;
     cursor: pointer;
 
+    display: grid;
+    align-items: center;
+    
+    min-height: 70px;
   }
 
   li {
     padding: 10px;
     cursor: pointer;
+    min-height: 70px;
+    display: grid;
+    align-items: center;
 
     &:hover {
       background-color: #f0f0f0;
@@ -47,7 +55,8 @@
   --width: 40px;
   --height: 40px;
   --line-height: 2px;
-  --color: var(--Gradient-1, linear-gradient(90deg, #4772E6 0.03%, #8E54E9 100.36%));;
+  // --color: var(--Gradient-1, linear-gradient(90deg, #4772E6 0.03%, #8E54E9 100.36%));;
+  --color: var(--first-text);;
 
   height: var(--height);
   width: var(--width);

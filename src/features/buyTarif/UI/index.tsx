@@ -9,7 +9,7 @@ export const BuyTarif: FC = () => {
     const { t } = useTranslation();
 
     return (
-        <Link to={paths.login} >
+        <Link to={paths.turnkey} >
             <MyButton className={styles.button}>
                 {t(`buy`)}
             </MyButton>

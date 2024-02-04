@@ -1,9 +1,14 @@
+import { BookIcon } from '@shared/assets/icons/book';
+import { CampaignIcon } from '@shared/assets/icons/campaign';
+import { TemplateIcon } from '@shared/assets/icons/template';
+import { WalletIcon } from '@shared/assets/icons/wallet';
 import { roles } from '@shared/config/roles';
 import { paths } from '@shared/routing';
 import { MenuItem } from '@shared/ui/menuItem';
-import { useState, FC, useEffect, useRef } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
+import { advertiserMenu, bloggerMenu, commonMenu } from './config';
 import styles from "./styles.module.scss";
 
 interface DropdownMenuProps {
@@ -45,6 +50,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
     };
   }, []);
 
+  const combinedMenu = currentRole === roles.advertiser ? [...advertiserMenu, ...commonMenu] : [...bloggerMenu, ...commonMenu];
 
   return (
     <div className={styles.dropdown}  ref={menuRef}>
@@ -64,13 +70,6 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
 
           <div className={styles.menu__switcher}>
             <div className={styles.switcher__row}>
-              <Link to={paths.mainBlogger}>
-                <p 
-                  className={`${currentRole === roles.blogger ? styles.active : ''}`}
-                  onClick={() => { toggleRole(roles.blogger)}}>
-                  {t("roles.blogger")}
-                </p>
-              </Link>
               <Link to={paths.main}>
                 <p 
                   className={`${currentRole === roles.advertiser ? styles.active : ''}`}
@@ -78,45 +77,21 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
                   { t("roles.advertiser")}
                 </p>
               </Link>
+              <Link to={paths.mainBlogger}>
+                <p 
+                  className={`${currentRole === roles.blogger ? styles.active : ''}`}
+                  onClick={() => { toggleRole(roles.blogger)}}>
+                  {t("roles.blogger")}
+                </p>
+              </Link>
             </div>
           </div>
           <div>
-            {
-                currentRole === roles.advertiser
-                ?
-                <>
-                <MenuItem title={{ title: t("burger_menu.services")}} 
-                                  subItems={[
-                                    { title: t("burger_menu.catalog"), path: paths.main},
-                                    { title: t("burger_menu.turnkey"), path: paths.main}
-                                    ]} />
-                <MenuItem title={{ title: t("burger_menu.campaign"), path: paths.main}} />
-                <MenuItem title={{ title: t("burger_menu.saved"), path: paths.main}} />
-                <MenuItem title={{ title: t("burger_menu.manager"), path: paths.main}} />
-                <MenuItem title={{ title: t("burger_menu.template"), path: paths.main}} />
-                </>
-                :
-                <>
-                <MenuItem title={{ title: t("burger_menu.services")}} 
-                                  subItems={[
-                                    { title: t("burger_menu.addPlatform"), path: paths.main},
-                                    { title: t("burger_menu.calculateIncome"), path: paths.main}
-                                    ]} />
-                <MenuItem title={{ title: t("burger_menu.channels"), path: paths.main}} />
-                <MenuItem title={{ title: t("burger_menu.offers"), path: paths.main}} />
-                </>
-            }
-
-            <MenuItem title={{ title: t("burger_menu.wallet")}} 
-                      subItems={[
-                        { title: t("burger_menu.add_funds"), path: paths.main},
-                        { title: t("burger_menu.withdraw"), path: paths.main},
-                        { title: t("burger_menu.history"), path: paths.main},
-                        { title: t("burger_menu.invoice"), path: paths.main}
-                      ]} />
-
-            <MenuItem title={{ title: t("burger_menu.base"), path: paths.main}} />
-
+              {
+                combinedMenu.map((item, index) =>
+                  <MenuItem key={index} item={item.item} subItems={item.subItems} />
+                )
+              }
           </div>
 
         </div>

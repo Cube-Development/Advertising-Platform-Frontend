@@ -1,39 +1,45 @@
-import { IMenuItem, IMenuSubItem } from '@shared/types/common';
+import { ArrowIcon } from '@shared/assets/icons/arrow';
+import { IMenuItems } from '@shared/types/common';
 import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import styles from './styles.module.scss';
 
-interface MenuItemProps {
-  title: IMenuItem;
-  subItems?: IMenuSubItem[];
-}
 
-export const MenuItem: React.FC<MenuItemProps> = ({ title, subItems }) => {
+export const MenuItem: React.FC<IMenuItems> = ({ item, subItems }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-
+  const { t } = useTranslation();
   const handleToggle = () => {
     setIsExpanded(!isExpanded);
   };
 
   return (
     <ul onClick={handleToggle}>
-        {/* <img src="/images/common/star.svg" alt="" /> */}
-        {title.path ? (
-            <Link to={title.path}>
-                    {title.title}
-            </Link>
-        ) : (
-            <div className={styles.row}>
-              {title.title}
-                <img src="/images/common/arrow.svg" alt="" />
+        <div className={styles.row}>
+          {item.path 
+          ? 
+          <Link to={item.path}>
+            <div className={styles.row__title}>
+              {item.img && <item.img />}
+              {t(item.title)}
             </div>
-        )}
+          </Link>
+          : 
+          <>
+            <div className={styles.row__title}>
+              {item.img && <item.img />}
+              {t(item.title)}
+            </div>
+            <ArrowIcon />
+          </>
+          }
+        </div>
       {subItems && isExpanded && (
         <>
             {subItems.map((item, index) => (
                 <Link to={item.path}>
                     <li key={index}>
-                        {item.title}
+                        {t(item.title)}
                     </li>
                 </Link>
             ))}

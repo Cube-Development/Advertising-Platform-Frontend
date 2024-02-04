@@ -1,6 +1,7 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { ICustomer } from "@shared/types/translate";
+import { RatingIcon } from "@shared/assets/icons/rating";
 
 interface CustomerCardProps {
   customer: ICustomer;
@@ -13,8 +14,8 @@ export const CustomerCard: FC<CustomerCardProps> = ({ customer }) => {
       <div className={styles.customer__row}>
         <img  className={styles.logo} src={`images/customers/${customer.img}`} alt="" />
         <div className={styles.customer__column}>
-          <h4 className={styles.title}>{customer.name}, {customer.workplace}</h4>
-          <img className={styles.rating} src={`images/common/rating.svg`} alt="" />
+          <p className={styles.title}>{customer.name}, {customer.workplace}</p>
+          <RatingIcon />
         </div>
       </div>
       <p className={styles.text}>{customer.text}</p>

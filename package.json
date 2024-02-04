@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^2.0.1",
+    "@types/swiper": "^6.0.0",
     "axios": "^1.6.5",
     "compose-function": "^3.0.3",
     "i18next": "^23.7.19",

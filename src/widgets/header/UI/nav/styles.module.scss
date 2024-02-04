@@ -1,8 +1,7 @@
 .wrapper {
 
     display: grid;
-    grid-template-columns: repeat(3, minmax(150px, 1fr));
-    gap: 10px;
+    grid-auto-flow: column;
     align-items: center;
     list-style: none;
     margin: 0;
@@ -13,13 +12,17 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    white-space: nowrap;
   
     li {
-      cursor: pointer;
-      padding: 5px;
-      color: #000; 
+      display: grid;
+      grid-auto-flow: column;
+      align-items: center;
 
-  
+      cursor: pointer;
+      padding: 5px  10px ;
+      color: var(--first-text); 
+
       &:hover {
         background-color: #f0f0f0;
         border-radius: 10px;
@@ -29,20 +32,13 @@
         color: blue; /* Цвет текста на текущей странице */
       }
 
+    }
 
-    img{
+    svg{
       margin-right: 5px;
     }
 
-    }
-
-
-
-
-
   }
-  
-
 
   .active {
     color: blue;
@@ -51,8 +47,6 @@
   .no__active {
     color: grey;
   }
-
-
 
   .switch input
 {

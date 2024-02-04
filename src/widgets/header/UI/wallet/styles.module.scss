@@ -1,56 +1,66 @@
 .wallet {
-    max-width: 225px;
-    height: auto;
+    margin-right: 30px;
 
     border-radius: 12px;
     border: 1px solid var(--Gradient-1, #4772E6);
     background: var(--Gradient-1, linear-gradient(93deg, #4772E6 2.37%, #8E54E9 52.62%));
+    transition: background 0.3s ease, color 0.3s ease; /* Плавная смена цвета */
     color: #fff;
    
-    padding: 20px  10px ;
     cursor: pointer;
     position: relative;
-    line-height: 0;
 
-    p{
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: normal;
-      line-height: 0.75;
-    }
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
 
-    button{
+    button {
+      width: 225px;
+      height: auto;
+      padding: 12px 10px;
       display: grid;
-      grid-auto-flow: column;
+      column-gap: 10px;
+      grid-template-columns: 1fr auto; /* Одна часть для текста, вторая для иконки */
       align-items: center;
-      justify-content: space-between;
-    }
+  }
 
+  p {
+      margin: 0;
+      text-align: center;
+  }
  }
 
- .plus__icon {
-  width: 32px;
-  height: 32px;
-  position: relative;
-  background-color: #00ff00;
-  border-radius: 50%;
+
+.active__wallet{
+  border: 1px solid var(--Gradient-1, #4772E6);
+  background: rgba(255, 255, 255, 0.25);
+  color: var(--first-text);
+  transition: background 0.3s ease, color 0.3s ease; /* Плавная смена цвета */
 }
 
 
+
 .menu {
+    margin-top: 25px;
     display: block;
-    padding: 30px;
     position: absolute;
-    top: 100%;
-    right: 10%;
+    left: 0;
     background-color: #fff;
     border: 1px solid #ccc;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 1;
-    width: 150px;
+    width: 225px;
     border-radius: 20px;
-  
+
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 0.75;
+    color: var(--first-text);
+
+    overflow: hidden;
+
     ul {
       list-style: none;
       padding: 0;
@@ -58,11 +68,13 @@
     }
   
     li {
-      padding: 8px;
+      padding: 12px;
       cursor: pointer;
+
   
       &:hover {
         background-color: #f0f0f0;
+        color: var(--Gradient-1, linear-gradient(93deg, #4772E6 2.37%, #8E54E9 52.62%));
       }
     }
   }

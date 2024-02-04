@@ -1,5 +1,6 @@
 import { AddPlatform } from '@features/addPlatform';
 import { WorkWithUs } from '@features/workWithUs';
+import { CalculatorIcon } from '@shared/assets/icons/calculator';
 import { IncomeCalculator } from '@shared/ui/incomeCalculator';
 import { SliderSubs } from '@shared/ui/sliderSubs';
 import { ThemeChanger } from '@shared/ui/themeChanger';
@@ -24,9 +25,8 @@ export const CalculateIncome: FC<CalculateIncomeProps> = ({page}) => {
     return (
         <section className={styles.calculate__wrapper}>
             <div className="container">
-            <div className={styles.calculate__column}>
                 <div className={styles.calculate__row}>
-                    <img src="images/common/calculator.svg" alt="" />
+                    <CalculatorIcon />
                     <h1 className={styles.calculate__title}>
                         {t(`${page}.calculate_title`)}
                     </h1>
@@ -53,7 +53,6 @@ export const CalculateIncome: FC<CalculateIncomeProps> = ({page}) => {
 
                 </div>
                 <WorkWithUs page={page} />
-            </div>
             </div>
         </section>
     );

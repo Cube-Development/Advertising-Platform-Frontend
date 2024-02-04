@@ -3,12 +3,20 @@ export interface ILogin {
   }
   
 
-export interface IMenuItem{
+
+export interface IMenuItems {
+  item: IMenuItem;
+  subItems?: IMenuSubItem[];
+}
+
+interface IMenuItem{
   title: string;
+  img?: React.FC;
   path?: string;
 }
 
-export interface IMenuSubItem{
+interface IMenuSubItem{
   title: string;
   path: string;
 }
+
