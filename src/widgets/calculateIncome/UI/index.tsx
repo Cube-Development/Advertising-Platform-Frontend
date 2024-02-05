@@ -23,7 +23,7 @@ export const CalculateIncome: FC<CalculateIncomeProps> = ({page}) => {
     };
 
     return (
-        <section className={styles.calculate__wrapper}>
+        <section id='calculateIncome' className={styles.calculate__wrapper}>
             <div className="container">
                 <div className={styles.calculate__row}>
                     <CalculatorIcon />

@@ -12,6 +12,6 @@ export const advertiserNavbar = [
 ];
 
 export const bloggerNavbar = [
-  {text: "pages.calculateIncome",  href: paths.mainBlogger ,  img: 'calculator.svg'},
+  {text: "pages.calculateIncome",  href: `${paths.mainBlogger}#calculateIncome` ,  img: 'calculator.svg'},
   {text: "pages.addPlatform",  href: paths.addPlatform  },
 ];
