@@ -18,7 +18,7 @@ export const Partners: FC<PartnersProps> = ({page}) => {
 
         <div className={styles.partners__block}>
           <PartnerList partners={t(`${page}.partners_list`, { returnObjects: true })} />
-          <PartnerList partners={t(`${page}.partners_list`, { returnObjects: true })} />
+          <PartnerList partners={t(`${page}.partners_list`, { returnObjects: true })} isLeft={true}/>
         </div>
       </section>
     );
