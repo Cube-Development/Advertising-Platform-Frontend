@@ -1,0 +1,21 @@
+.top{
+    margin: 40px 25px;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    p{
+        color: var(--first-text);
+        font-size: 26px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+    }
+    div{
+        display: grid;
+        grid-auto-flow: column;
+        justify-content: space-between;
+        column-gap: 10px;
+    }
+}

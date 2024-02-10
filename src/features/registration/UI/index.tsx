@@ -21,7 +21,7 @@ export const Registration: FC = () => {
     return (
         <>
             {isAuth ? (
-                <ScrollLink to='registration' smooth={true} duration={5000}>{registrationButton}</ScrollLink>
+                <ScrollLink to='registration' smooth={true} duration={500}>{registrationButton}</ScrollLink>
             ) : (
                 <Link to={paths.login}>{registrationButton}</Link>
             )}

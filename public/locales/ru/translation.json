@@ -412,5 +412,44 @@
             }
         ]
 
+    },
+
+    "profile_advertiser": {
+        "my_campaign": "Мои Рекламные кампании",
+        "new_project": "Создать проект",
+        "start_new_project": "Начать рекламную кампанию",
+        "turnkey_project": "Под ключ",
+        "start_turnkey_project": "Запустить рекламу под ключ",
+        "or": "Или",
+        "no_project": "На данный момент у вас нет проектов",
+        "project_types": [
+            {"name": "Мои проекты", "type":"my_project"},
+            {"name": "Проекты с менеджерами", "type":"manager_project"},
+            {"name": "Сохраненные", "type":"saved_project"}
+        ],
+        "subtype_filter": [
+            {"name": "Активные", "type":"active"},
+            {"name": "Выполненные", "type":"complite"}
+        ],
+        "sorting": "Сортировака:",
+        "date": "По дате",
+
+        "card": {
+            "status": {
+                "1": "В работе"
+            },
+            "channels": "Каналы",
+            "views": "Просмотры",
+            "cost": "Бюджет",
+            "see_more": "Развернуть",
+            "see_less": "Свернуть"
+        },
+        "subcard":{
+            "date": "Дата",
+            "accommodation": "Формат размещения",
+            "time": "Время размещения",
+            "price": "Цена"
+        }
+
     }
 }

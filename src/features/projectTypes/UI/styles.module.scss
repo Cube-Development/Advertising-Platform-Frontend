@@ -1,0 +1,27 @@
+.project__types{
+    margin-top: 15px;
+    margin-bottom: 20px;
+    ul{
+        display: grid;
+        grid-auto-flow: column;
+        column-gap: 25px;
+        justify-content: start;
+
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        color: var(--first-text);
+        line-height: 0.75;
+    }
+
+    li{
+        cursor: pointer;
+    }
+}
+
+.active{
+    color: var(--Gradient-1, linear-gradient(45deg, #4772E6 23.91%, #8E54E9 75.06%));
+    border-bottom: 3px solid var(--Gradient-1, linear-gradient(45deg, #4772E6 23.91%, #8E54E9 75.06%));
+    padding-bottom: 10px; 
+}

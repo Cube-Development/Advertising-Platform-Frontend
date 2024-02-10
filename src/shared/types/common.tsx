@@ -20,3 +20,45 @@ interface IMenuSubItem{
   path: string;
 }
 
+export interface ITypeFilter{
+  name: string;
+  type: string;
+}
+
+
+export interface IStartProjectProps {
+  isZeroProject: boolean;
+}
+
+
+export interface IItemCard {
+  id: number
+  date: string
+  channels: number
+  views: number
+  cost: number
+  complite: number
+  cancel: number
+  wait: number
+  start: number
+  consideration: number
+  status: number
+  channels_list: ISubitemCard[]
+}
+
+export interface ISubitemCard {
+  img: string
+  name: string
+  category: string
+  date_from: string
+  date_to: string
+  accommodation: string
+  time_from: string
+  time_to: string
+  price: number
+  subs: number
+  views: number
+  ER: number
+  CPV: number
+  sex: number
+}
