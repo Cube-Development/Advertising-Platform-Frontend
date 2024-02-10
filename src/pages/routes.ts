@@ -1,6 +1,5 @@
 import * as React from "react";
 import { CatalogPage } from "./Catalog";
-import { LoginPage } from "./Login";
 import { MainPage } from "./Main";
 import { MainBloggerPage } from "./MainBlogger";
 import { NotFoundPage } from "./NotFound";
@@ -42,7 +41,6 @@ export const privateAdvertiserRoutes: IRoute[] = [
 export const publicRoutes: IRoute[] = [
     {path: paths.mainBlogger, component: MainBloggerPage},
     {path: paths.main, component: MainPage},
-    {path: paths.login, component: LoginPage},
     {path: paths.notFound, component: NotFoundPage},
     {path: paths.catalog, component: CatalogPage},
     {path: paths.turnkey, component: TurnkeyPage},
