@@ -6,15 +6,13 @@ import styles from "./styles.module.scss";
 
 export const Wallet: FC = () => {
   const { t } = useTranslation();
-  const wallet = 1000000
-
+  const wallet = 1000000;
   const [isMenuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
-
   const closeMenu = () => {
     setMenuOpen(false);
   };
@@ -25,10 +23,6 @@ export const Wallet: FC = () => {
     }
   };
 
-  const handleButtonClick = () => {
-    toggleMenu();
-  };
-
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
     return () => {
@@ -36,28 +30,27 @@ export const Wallet: FC = () => {
     };
   }, []);
 
-
   return (
-      <div className={`${styles.wallet} ${isMenuOpen && styles.active__wallet}`} ref={menuRef}>
-        <button className={styles.roww} onClick={handleButtonClick}>
-          <p>
-            {wallet.toLocaleString()} {t("symbol")}
-          </p>
-          {isMenuOpen ? <CloseIcon /> : <PlusIcon/>}
-        </button>
-        {isMenuOpen && (
-          <div  className={styles.menu}>
-            <ul>
-              <li>{t("wallet.add_funds")}</li>
-              <li>{t("wallet.withdraw")}</li>
-              <li>{t("wallet.history")}</li>
-              <li>{t("wallet.invoice")}</li>
-            </ul>
-          </div>
+    <div
+      className={`${styles.wallet} ${isMenuOpen && styles.active__wallet}`}
+      ref={menuRef}
+    >
+      <button className={styles.roww} onClick={toggleMenu}>
+        <p>
+          {wallet.toLocaleString()} {t("symbol")}
+        </p>
+        {isMenuOpen ? <CloseIcon /> : <PlusIcon />}
+      </button>
+      {isMenuOpen && (
+        <div className={styles.menu}>
+          <ul>
+            <li>{t("wallet.add_funds")}</li>
+            <li>{t("wallet.withdraw")}</li>
+            <li>{t("wallet.history")}</li>
+            <li>{t("wallet.invoice")}</li>
+          </ul>
+        </div>
       )}
-
-      </div>
-    )
-      
-      
+    </div>
+  );
 };

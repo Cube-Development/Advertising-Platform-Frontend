@@ -5,7 +5,7 @@ import { roles } from "@shared/config/roles";
 import { paths } from "@shared/routing";
 
 interface LogoProps {
-  currentRole: string;
+  currentRole: roles;
 }
 
 export const Logo: FC<LogoProps> = ({ currentRole }) => {

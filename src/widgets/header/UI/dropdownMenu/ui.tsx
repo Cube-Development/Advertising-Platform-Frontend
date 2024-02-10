@@ -1,18 +1,14 @@
-import { BookIcon } from '@shared/assets/icons/book';
-import { CampaignIcon } from '@shared/assets/icons/campaign';
-import { TemplateIcon } from '@shared/assets/icons/template';
-import { WalletIcon } from '@shared/assets/icons/wallet';
-import { roles } from '@shared/config/roles';
-import { paths } from '@shared/routing';
-import { MenuItem } from '@shared/ui/menuItem';
-import { FC, useEffect, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
-import { advertiserMenu, bloggerMenu, commonMenu } from './config';
+import { roles } from "@shared/config/roles";
+import { paths } from "@shared/routing";
+import { MenuItem } from "@shared/ui/menuItem";
+import { FC, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { advertiserMenu, bloggerMenu, commonMenu } from "./config";
 import styles from "./styles.module.scss";
 
 interface DropdownMenuProps {
-  currentRole: string;
+  currentRole: roles;
   toggleRole: (role: roles) => void;
 }
 
@@ -29,18 +25,10 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
     setMenuOpen(!isMenuOpen);
   };
 
-  const closeMenu = () => {
-    setMenuOpen(false);
-  };
-
   const handleClickOutside = (event: MouseEvent) => {
     if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-      closeMenu();
+      setMenuOpen(false);
     }
-  };
-
-  const handleButtonClick = () => {
-    toggleMenu();
   };
 
   useEffect(() => {
@@ -50,12 +38,14 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
     };
   }, []);
 
-  const combinedMenu = currentRole === roles.advertiser ? [...advertiserMenu, ...commonMenu] : [...bloggerMenu, ...commonMenu];
-
+  const combinedMenu =
+    currentRole === roles.advertiser
+      ? [...advertiserMenu, ...commonMenu]
+      : [...bloggerMenu, ...commonMenu];
   return (
-    <div className={styles.dropdown}  ref={menuRef}>
-      <button onClick={handleButtonClick} className={styles.burger__icon_btn}>
-        <div className={styles.burger__icon}/>
+    <div className={styles.dropdown} ref={menuRef}>
+      <button onClick={toggleMenu} className={styles.burger__icon_btn}>
+        <div className={styles.burger__icon} />
       </button>
 
       {isMenuOpen && (
@@ -63,37 +53,44 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
           <div className={styles.menu__top}>
             <img src="/images/assets/logo.svg" alt="" />
 
-            <button onClick={handleButtonClick}>
-              <div  className={styles.close__icon}/>
+            <button onClick={toggleMenu}>
+              <div className={styles.close__icon} />
             </button>
           </div>
 
           <div className={styles.menu__switcher}>
             <div className={styles.switcher__row}>
               <Link to={paths.main}>
-                <p 
-                  className={`${currentRole === roles.advertiser ? styles.active : ''}`}
-                  onClick={() => { toggleRole(roles.advertiser)}}>
-                  { t("roles.advertiser")}
+                <p
+                  className={`${
+                    currentRole === roles.advertiser ? styles.active : ""
+                  }`}
+                  onClick={() => {
+                    toggleRole(roles.advertiser);
+                  }}
+                >
+                  {t("roles.advertiser")}
                 </p>
               </Link>
               <Link to={paths.mainBlogger}>
-                <p 
-                  className={`${currentRole === roles.blogger ? styles.active : ''}`}
-                  onClick={() => { toggleRole(roles.blogger)}}>
+                <p
+                  className={`${
+                    currentRole === roles.blogger ? styles.active : ""
+                  }`}
+                  onClick={() => {
+                    toggleRole(roles.blogger);
+                  }}
+                >
                   {t("roles.blogger")}
                 </p>
               </Link>
             </div>
           </div>
           <div>
-              {
-                combinedMenu.map((item, index) =>
-                  <MenuItem key={index} item={item.item} subItems={item.subItems} />
-                )
-              }
+            {combinedMenu.map((item, index) => (
+              <MenuItem key={index} item={item.item} subItems={item.subItems} />
+            ))}
           </div>
-
         </div>
       )}
     </div>

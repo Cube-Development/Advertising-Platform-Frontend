@@ -12,7 +12,6 @@ import { AddPlatformPage } from "./AddPlatform";
 import { paths } from "@shared/routing";
 import { TurnkeyPage } from "./TurnkeyPage";
 
-
 export interface IRoute {
     path: string;
     component: React.ComponentType;

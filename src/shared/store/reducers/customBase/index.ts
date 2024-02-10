@@ -1,4 +1,4 @@
-import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
+import {fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 import Cookies from 'js-cookie';
 
 const baseUrl = import.meta.env.VITE_BASE_URL;
@@ -14,6 +14,5 @@ export const customBaseQuery = fetchBaseQuery({
   mode: 'cors',
   headers: {
       Authorization: `Bearer ${getAccessToken()}`, // Вставляем access token в заголовок запроса
-  
 },
 });

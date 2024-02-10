@@ -4,17 +4,19 @@ import {
   privateAdvertiserRoutes,
   publicRoutes,
 } from "./routes";
-import { useAuth } from "@shared/hooks/useAuth";
+// import { useAuth } from "@shared/hooks/useAuth";
 import { useRole } from "@shared/hooks/useRole";
 import { roles } from "@shared/config/roles";
+import { useAppSelector } from "@shared/store";
 
 export const Routing = () => {
-  const { isAuth } = useAuth();
-  const { currentRole } = useRole();
+  // const { isAuth } = useAuth();
+  const { isAuth, role } = useAppSelector((state) => state.userReducer);
+  // const { currentRole } = useRole();
 
   return (
     <Routes>
-      {isAuth && currentRole === roles.blogger
+      {isAuth && role === roles.blogger
         ? privateBloggerRoutes.map((route) => (
             <Route
               path={route.path}
@@ -22,7 +24,7 @@ export const Routing = () => {
               key={route.path}
             />
           ))
-        : isAuth && currentRole === roles.advertiser
+        : isAuth && role === roles.advertiser
         ? privateAdvertiserRoutes.map((route) => (
             <Route
               path={route.path}

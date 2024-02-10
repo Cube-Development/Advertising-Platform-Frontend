@@ -2,7 +2,7 @@ import { ChangeEvent, FC, FormEvent, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import { ILogin } from "@shared/types/common";
 import { useAuth } from "@shared/hooks/useAuth";
-import { postCode } from "@shared/store/reducers/auth";
+import { postCode } from "@shared/auth";
 import { MyButton, MyInput } from "@shared/ui";
 
 interface LoginCodeProps {

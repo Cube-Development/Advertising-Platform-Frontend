@@ -13,6 +13,7 @@
     "@reduxjs/toolkit": "^2.0.1",
     "@types/react-scroll": "^1.8.10",
     "@types/swiper": "^6.0.0",
+    "async-mutex": "^0.4.1",
     "axios": "^1.6.5",
     "compose-function": "^3.0.3",
     "i18next": "^23.7.19",

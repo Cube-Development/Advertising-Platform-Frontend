@@ -1,8 +1,8 @@
-import { roles } from "@shared/config/roles";
 import { paths } from "@shared/routing";
+import { IToken } from "@shared/types/tokens";
 import Cookies from "js-cookie";
 import * as React from "react";
-import { FC, ReactNode, useEffect, useState } from "react";
+import { FC, ReactNode, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 export interface AuthContextType {
@@ -33,36 +33,36 @@ export const AuthProvider: FC<{ children: ReactNode }> = ({ children }) => {
     setAuth(authValue);
   };
 
-  useEffect(() => {
-    console.log("useEffect toggleAuth");
-    initializeAuth();
-  }, []);
+  // useEffect(() => {
+  //   console.log("useEffect toggleAuth");
+  //   initializeAuth();
+  // }, []);
 
-  const toggleLogin = (tokens: any) => {
+  const toggleLogin = (tokens: IToken) => {
     router(paths.profile);
-
-    setAuth((prevIsAuth) => {
-      const newIsAuth = !prevIsAuth;
-      localStorage.setItem("isAuth", JSON.stringify(newIsAuth));
-      localStorage.setItem("role", roles.advertiser);
-      Cookies.set("accessToken", tokens.accessToken, {
-        secure: true,
-        httpOnly: false,
-        sameSite: "None",
-        expires: 7,
-      });
-      return newIsAuth;
+    setAuth(true);
+    localStorage.setItem("isAuth", JSON.stringify(isAuth));
+    // localStorage.setItem("role", roles.advertiser);
+    Cookies.set("accessToken", tokens.access_token, {
+      secure: true,
+      httpOnly: false,
+      sameSite: "None",
+      // expires: 7,
+    });
+    Cookies.set("refreshToken", tokens.refresh_token, {
+      secure: true,
+      httpOnly: false,
+      sameSite: "None",
+      // expires: 7,
     });
   };
 
   const toggleLogout = () => {
-    setAuth((prevIsAuth) => {
-      const newIsAuth = !prevIsAuth;
-      localStorage.setItem("isAuth", "false");
-      localStorage.removeItem("role");
-      Cookies.remove("accessToken");
-      return newIsAuth;
-    });
+    setAuth(false);
+    localStorage.setItem("isAuth", "false");
+    // localStorage.removeItem("role");
+    Cookies.remove("accessToken");
+    Cookies.remove("refreshToken");
   };
 
   return (

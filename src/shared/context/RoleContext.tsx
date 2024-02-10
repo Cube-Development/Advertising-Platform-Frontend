@@ -23,12 +23,12 @@ export const RoleProvider: FC<{ children: ReactNode }> = ({ children }) => {
     setCurrentRole(roleValue);
   };
 
-  useEffect(() => {
-    initializeRole();
-  }, []);
+  // useEffect(() => {
+  //   initializeRole();
+  // }, []);
 
   const toggleRole = (role: roles) => {
-    if (role !== currentRole) { 
+    if (role !== currentRole) {
       const newRole =
         currentRole === roles.blogger ? roles.advertiser : roles.blogger;
       setCurrentRole(newRole);
