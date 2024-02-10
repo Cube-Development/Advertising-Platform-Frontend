@@ -2,7 +2,6 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { roles } from '@shared/config/roles';
 import { IToken } from '@shared/types/tokens';
 import Cookies from 'js-cookie';
-import { useNavigate } from 'react-router-dom';
 
 interface UserState {
     isAuth: boolean;
