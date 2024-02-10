@@ -1,0 +1,13 @@
+.wrapper {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    column-gap: 30px;
+}
+
+.loginBtn{
+  cursor: pointer;
+  display: grid;
+  grid-auto-flow: column;
+  column-gap: 5px;
+}

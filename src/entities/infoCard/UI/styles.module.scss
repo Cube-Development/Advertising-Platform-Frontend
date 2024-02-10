@@ -1,0 +1,28 @@
+.info{
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    row-gap: 15px;
+
+    .img{
+        max-width: 50px;
+        max-height: 50px;
+    }
+
+}
+
+.count{
+    color: var(--first-text);
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.text{
+    color: var(--secondary-text);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}

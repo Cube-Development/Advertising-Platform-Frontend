@@ -1,0 +1,29 @@
+.button{
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 10px;
+    align-items: center;
+
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--Gradient-1, #4772E6);
+    background: none;
+    color: var(--Gradient-1, linear-gradient(45deg, #4772E6 23.91%, #8E54E9 75.06%));
+
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+
+    svg{
+        width: 21px;
+        height: 21px;
+    }
+}
+
+
+.new__turnkey{
+    border: none;
+    color: #fff;
+    background: radial-gradient(419.34% 136.52% at 0% 100%, rgba(255, 255, 255, 0.20) 0%, rgba(125, 117, 117, 0.00) 100%), linear-gradient(90deg, #FF2F66 0%, rgba(254, 110, 48, 0.99) 100%);
+  }

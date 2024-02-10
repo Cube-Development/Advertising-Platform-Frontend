@@ -1,0 +1,46 @@
+.cta__wrapper{
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+  
+.cta__row{
+  display: grid;
+  grid-auto-flow: column;
+  column-gap: 5px;
+  justify-content: space-between;
+
+  img{
+      max-width: 550px;
+  }
+}
+
+.cta__right{
+max-width: 595px;
+}
+
+.cta__title{
+color: var(--first-text);
+font-size: 44px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+margin-bottom: 30px;
+}
+
+.cta__subtitle{
+
+font-size: 24px;
+font-style: normal;
+font-weight: 700;
+line-height: normal;
+color: var(--Gradient-1, linear-gradient(90deg, #4772E6 0.03%, #8E54E9 100.36%));
+background-clip: text;
+margin-bottom: 50px;
+
+}
+
+.options{
+  max-width: 450px;
+  color: var(--secondary-text);
+  margin-bottom: 46px;
+}

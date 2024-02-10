@@ -1,0 +1,1 @@
+export { AccommCard } from "./UI"

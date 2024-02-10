@@ -1,0 +1,1 @@
+export { AddPlatformPage } from "./UI";

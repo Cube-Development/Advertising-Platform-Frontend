@@ -1,8 +1,16 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap');
 @import "reset.scss";
 @import "variables.scss";
 
 
 body {
-//    background: blue;
-  }
-  
+  font-family: 'Montserrat', sans-serif;
+  display: flex;
+  justify-content: space-around;
+}
+
+.container {
+  max-width: var(--container-width);
+  padding: 0 50px;
+  // display: grid;
+}

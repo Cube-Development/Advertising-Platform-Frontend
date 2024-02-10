@@ -1,11 +1,12 @@
-// import { Provider } from "react-redux";
-// import { store } from "../../shared/store";
+import { setupStore } from "@shared/store/store";
+import { Provider } from "react-redux";
 
-// export const withStore = (Component: React.FC) => {
-//   return () => (
-//     <Provider store={store}>
-//       <Component />
-//     </Provider>
-//   );
-// };
-export const a = 5
+const store = setupStore();
+
+export const withStore = (Component: React.FC) => {
+  return () => (
+    <Provider store={store}>
+      <Component />
+    </Provider>
+  );
+};

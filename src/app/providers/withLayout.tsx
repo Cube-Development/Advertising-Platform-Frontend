@@ -1,9 +1,11 @@
-import { MainLayout } from "../../widgets/layouts";
+import { HandleAuth } from "@widgets/handleAuth";
+import { MainLayout } from "@widgets/layouts";
 
 export const withLayout = (Component: React.FC) => {
   return () => (
     <MainLayout>
-        <Component />
+      <HandleAuth />
+      <Component />
     </MainLayout>
   );
 };

@@ -1,0 +1,33 @@
+.work__wrapper{
+    text-align: center;
+}
+
+.work__title{
+    color: var(--first-text);
+    font-size: 36px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    margin-bottom: 40px;
+}
+
+.channel{
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    width: 150px;
+    height: 150px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    border: 1px solid var(--Gradient-1, #4772E6);
+    background: #FFF;
+
+
+    img{
+        width: 80px;
+        height: 80px;
+        flex-shrink: 0;
+        border-radius: 50%;
+        border: 1px solid var(--Gradient-1, #4772E6);
+    }
+}

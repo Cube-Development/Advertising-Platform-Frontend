@@ -1,0 +1,24 @@
+.row{
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.row__title{
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: start;
+    column-gap: 10px;
+    align-items: center;
+}
+
+.title__img{
+    width: 25px;
+    height: auto;
+}
+
+.arrow__img{
+    width: 14px;
+    height: auto;
+}

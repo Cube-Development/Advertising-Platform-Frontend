@@ -1,11 +1,5 @@
-import {FC} from 'react';
-
+import { FC } from "react";
 
 export const CatalogPage: FC = () => {
-
-    return (
-        <div>
-            Catalog PAGE
-        </div>
-    );
+  return <div>Catalog PAGE</div>;
 };

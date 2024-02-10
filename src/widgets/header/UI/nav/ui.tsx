@@ -1,10 +1,17 @@
-import { useState } from "react";
+import { CalculatorIcon, KeyIcon } from "@shared/assets";
+import { roles } from "@shared/config/roles";
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
-import { items } from "./config";
+import { advertiserNavbar, bloggerNavbar, nonAuthNavbar } from "./config";
 import styles from "./styles.module.scss";
 
-export const Nav = () => {
-  //   const { pathname } = useRouter();
+interface NavProps {
+  isAuth: boolean;
+  currentRole: roles;
+}
+
+export const Nav: FC<NavProps> = ({ isAuth, currentRole }) => {
   const router = useNavigate();
   const location = useLocation();
 
@@ -12,48 +19,42 @@ export const Nav = () => {
     router(href);
   };
 
-  const [currentRole, setCurrentRole] = useState("blogger");
+  const { t } = useTranslation();
 
-  const switchRole = (role: "blogger" | "advertiser") => {
-    console.log(role);
-    setCurrentRole(role);
-  };
-
-  const toggleRole = () => {
-    const newRole = currentRole === "blogger" ? "advertiser" : "blogger";
-    switchRole(newRole);
-  };
   return (
-    <nav className={styles.nav}>
-      <div
-        id="blogger"
-        className={`role-switcher ${currentRole === "blogger" ? "active" : ""}`}
-        onClick={() => switchRole("blogger")}
-      >
-        Blogger
-      </div>
-      <div id="switcher" className="role-switcher" onClick={toggleRole}>
-        Switcher
-      </div>
-      <div
-        id="advertiser"
-        className={`role-switcher ${
-          currentRole === "advertiser" ? "active" : ""
-        }`}
-        onClick={() => switchRole("advertiser")}
-      >
-        Advertiser
-      </div>
-
-      {items.map((item, index) => (
-        <div
-          key={index}
-          onClick={() => handleNavigation(item.href)}
-          className={location.pathname === item.href ? styles.active : ""}
-        >
-          {item.text}
-        </div>
-      ))}
+    <nav className={styles.wrapper}>
+      {isAuth && currentRole === roles.advertiser
+        ? advertiserNavbar.map((item, index) => (
+            <li
+              key={index}
+              onClick={() => handleNavigation(item.href)}
+              className={location.pathname === item.href ? styles.active : ""}
+            >
+              {item.img && <KeyIcon />}
+              {t(item.text)}
+            </li>
+          ))
+        : isAuth && currentRole === roles.blogger
+        ? bloggerNavbar.map((item, index) => (
+            <li
+              key={index}
+              onClick={() => handleNavigation(item.href)}
+              className={location.pathname === item.href ? styles.active : ""}
+            >
+              {item.img && <CalculatorIcon />}
+              {t(item.text)}
+            </li>
+          ))
+        : nonAuthNavbar.map((item, index) => (
+            <li
+              key={index}
+              onClick={() => handleNavigation(item.href)}
+              className={location.pathname === item.href ? styles.active : ""}
+            >
+              {item.img && <KeyIcon />}
+              {t(item.text)}
+            </li>
+          ))}
     </nav>
   );
 };
