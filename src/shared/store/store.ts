@@ -1,13 +1,15 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { authAPI } from "./services/authService";
-import userReducer from "./reducers/userSlice"
+import userReducer from "./reducers/userSlice";
+import filterReducer from "./reducers/filterSlice";
 import { legalAPI } from "./services/legalService";
 
 
 const rootReducer = combineReducers({
   [authAPI.reducerPath]: authAPI.reducer,
   [legalAPI.reducerPath]: legalAPI.reducer,
-  userReducer
+  userReducer,
+  filterReducer,
 });
 
 export const setupStore = () => {

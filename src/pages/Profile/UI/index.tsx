@@ -1,3 +1,6 @@
+import { advertiserProjectTypes } from "@features/projectTypesFilter/UI/config";
+import { projectStatus, projectTypes } from "@shared/config/filter";
+import { useAppSelector } from "@shared/store";
 import { MyProjectAdv } from "@widgets/myProjectAdv";
 import { ProfileFilter } from "@widgets/profileFilter";
 import { FC } from "react";
@@ -93,10 +96,22 @@ const sexType = {
 
 export const ProfilePage: FC = () => {
   const page = "profile_advertiser";
+  const { typeFilter, statusFilter } = useAppSelector((state) => state.filterReducer);
+  const { role} = useAppSelector((state) => state.userReducer);
+
   return (
     <>
       <ProfileFilter page={page} />
+      {typeFilter === projectTypes.myProject && statusFilter === projectStatus.active
+      ? 
       <MyProjectAdv cards={itemCards} />
+      : typeFilter === projectTypes.managerProject 
+      ?
+      <></>
+      : 
+      <></>
+      }
+      
     </>
   );
 };
