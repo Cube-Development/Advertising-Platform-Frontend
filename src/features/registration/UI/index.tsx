@@ -1,11 +1,10 @@
-import { paths } from "@shared/routing";
 import { MyButton } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import { Link as ScrollLink } from "react-scroll";
 import styles from "./styles.module.scss";
 import { useAppSelector } from "@shared/store";
+import { AuthStateGenerator } from "@features/authStateGenerator";
 
 export const Registration: FC = () => {
   const { t } = useTranslation();
@@ -15,6 +14,11 @@ export const Registration: FC = () => {
     <MyButton className={styles.button}>{t(`registration`)}</MyButton>
   );
 
+  const handleRegistration = () => {
+    const { loginLink } = AuthStateGenerator();
+    window.location.href = loginLink;
+  };
+
   return (
     <>
       {isAuth ? (
@@ -22,7 +26,7 @@ export const Registration: FC = () => {
           {registrationButton}
         </ScrollLink>
       ) : (
-        <Link to={paths.main}>{registrationButton}</Link>
+        <a onClick={handleRegistration}>{registrationButton}</a>
       )}
     </>
   );

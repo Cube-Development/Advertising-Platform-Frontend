@@ -5,9 +5,13 @@ import {
     FetchBaseQueryError,
   } from '@reduxjs/toolkit/query/react';
 import { Mutex } from 'async-mutex';
-import { authAPI } from './authService';
 import Cookies from 'js-cookie';
 import { userSlice } from '../reducers';
+import { IToken } from '@shared/types/tokens';
+
+interface ITokenResponse {
+  data?: IToken;
+}
   
   const baseUrl = `${import.meta.env.VITE_BASE_URL}`;
 
@@ -42,16 +46,20 @@ import { userSlice } from '../reducers';
             },
             api,
             extraOptions
-          );
+          ) as ITokenResponse;
 
           if (refreshResult.data) {
-            result = await baseQuery(args, api, extraOptions);
+            const newAccessToken = refreshResult.data.access_token;
+            Cookies.set('accessToken', newAccessToken);
+            const newRefreshToken = refreshResult.data.refresh_token;
+            Cookies.set('refreshToken', newRefreshToken);
+            const newBaseQuery = fetchBaseQuery({baseUrl, headers: {
+              Authorization: `Bearer ${newAccessToken}`
+            }});
+            result = await newBaseQuery(args, api, extraOptions)
           } else {
             console.log("refreshError")
             api.dispatch(userSlice.actions.logout());
-            // const [logout] = authAPI.useLogoutMutation();
-            // refreshToken && logout(refreshToken);
-            // window.location.href = '/';
           }
         } finally {
           release();
@@ -66,4 +74,3 @@ import { userSlice } from '../reducers';
   };
   
   export default authBaseQuery;
-  
