@@ -6,13 +6,15 @@ import styles from "./styles.module.scss";
 
 export const Wallet: FC = () => {
   const { t } = useTranslation();
-  const wallet = 1000000;
+  const wallet = 1000000000;
   const [isMenuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
-  const toggleMenu = () => {
+  const toggleMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     setMenuOpen(!isMenuOpen);
   };
+
   const closeMenu = () => {
     setMenuOpen(false);
   };
@@ -35,9 +37,12 @@ export const Wallet: FC = () => {
       className={`${styles.wallet} ${isMenuOpen && styles.active__wallet}`}
       ref={menuRef}
     >
-      <button className={styles.roww} onClick={toggleMenu}>
+      <button className={styles.roww} onClick={(e) => toggleMenu(e)}>
         <p>
-          {wallet.toLocaleString()} {t("symbol")}
+          {`${wallet.toLocaleString()} `}
+          <span>
+             {t("symbol")}
+          </span>
         </p>
         {isMenuOpen ? <CloseIcon /> : <PlusIcon />}
       </button>
@@ -51,6 +56,6 @@ export const Wallet: FC = () => {
           </ul>
         </div>
       )}
-    </div>
+  </div>
   );
 };

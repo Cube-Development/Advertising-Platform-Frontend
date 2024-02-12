@@ -17,7 +17,7 @@ export const CustomerList: FC<CustomerListProps> = ({ customers }) => {
   return (
       <Swiper
         modules={[Navigation]}
-        spaceBetween={100}
+        spaceBetween={50}
         slidesPerView={3} 
         navigation={{
           nextEl: '.swiper-button-next',

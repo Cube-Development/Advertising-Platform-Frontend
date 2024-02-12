@@ -9,7 +9,8 @@
     display: grid;
     align-content: center;
     justify-content: center;
-    width: 65px;
+    // width: 65px;
+    padding: 0 22px;
     height: 25px;
     border-radius: 12px;
     border: 1px solid var(--Gradient-1, #4772E6);
@@ -24,7 +25,6 @@
 .menu {
     margin-top: 5px;
     display: block;
-    width: 65px;
     position: absolute;
     background-color: #fff;
     border: 1px solid #ccc;
@@ -34,7 +34,7 @@
     overflow: hidden;
   
     li {
-      padding: 8px;
+      padding: 8px 15px;
       cursor: pointer;
       display: grid;
       grid-auto-flow: column;
