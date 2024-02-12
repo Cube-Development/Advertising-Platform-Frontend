@@ -4,6 +4,8 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { authAPI } from "@shared/store/services/authService";
 import Cookies from "js-cookie";
+import { Link } from "react-router-dom";
+import { paths } from "@shared/routing";
 
 interface ProfileProps {
   toggleLogout: () => void;
@@ -49,8 +51,12 @@ export const Profile: FC<ProfileProps> = ({ toggleLogout }) => {
       {isMenuOpen && (
         <div className={styles.menu}>
           <ul>
-            <li>{t("profile.data")}</li>
-            <li>{t("profile.settings")}</li>
+            <Link to={paths.profile}>
+                <li onClick={handleButtonClick}>{t("profile.data")}</li>
+            </Link>
+            <Link to={paths.profile}>
+                <li onClick={handleButtonClick}>{t("profile.settings")}</li>
+            </Link>
             <li className={styles.logout} onClick={handleLogout}>
               {t("logout")}
             </li>

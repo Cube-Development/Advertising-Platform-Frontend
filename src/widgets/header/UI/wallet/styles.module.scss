@@ -16,13 +16,25 @@
     line-height: normal;
 
     button {
-      width: 225px;
+      min-width: 200px;
       height: auto;
       padding: 12px 10px;
       display: grid;
       column-gap: 10px;
       grid-template-columns: 1fr auto; /* Одна часть для текста, вторая для иконки */
       align-items: center;
+
+      svg{
+        margin-left: 10px;
+      }
+
+
+      span{
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
   }
 
   p {
@@ -37,12 +49,18 @@
   background: rgba(255, 255, 255, 0.25);
   color: var(--first-text);
   transition: background 0.3s ease, color 0.3s ease; /* Плавная смена цвета */
+
+
+  svg{
+    border-left: rgba(255, 255, 255, 0.25);
+  }
+
 }
 
 
 
 .menu {
-    margin-top: 25px;
+    margin-top: 5px;
     display: block;
     position: absolute;
     left: 0;
@@ -50,7 +68,7 @@
     border: 1px solid #ccc;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 1;
-    width: 225px;
+    min-width: 200px;
     border-radius: 20px;
 
     font-size: 12px;

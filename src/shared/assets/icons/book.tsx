@@ -1,7 +1,7 @@
 export const BookIcon = () => (
     <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
     <rect width="25" height="25" fill="#6D6D6D"/>
-    <g id="Main Page | Desktop" clip-path="url(#clip0_0_1)">
+    <g id="Main Page | Desktop" clipPath="url(#clip0_0_1)">
     <rect width="1280" height="5078" transform="translate(-30 -659)" fill="white"/>
     <g id="First block">
     </g>
