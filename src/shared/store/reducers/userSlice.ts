@@ -10,7 +10,7 @@ interface UserState {
   
   const initialState: UserState = {
     isAuth: Cookies.get("isAuth") === "true" ? true : false,
-    role: Cookies.get("role") === `${roles.advertiser}` ? roles.advertiser : roles.blogger
+    role: Cookies.get("role") === `${roles.blogger}` ? roles.blogger : roles.advertiser
   };
 
 export const userSlice = createSlice({
@@ -26,7 +26,7 @@ export const userSlice = createSlice({
             sameSite: "None",
             // expires: 7,
           });
-          Cookies.set("refreshToken", action.payload.refresh_token, {
+        Cookies.set("refreshToken", action.payload.refresh_token, {
             secure: true,
             httpOnly: false,
             sameSite: "None",
@@ -39,7 +39,6 @@ export const userSlice = createSlice({
         Cookies.set("isAuth", "false");
         state.isAuth = false;
         state.role = roles.advertiser
-        console.log("logout")
         window.location.href = '/'
     },
     setAuth: (state, action: PayloadAction<boolean>) => {
@@ -48,7 +47,6 @@ export const userSlice = createSlice({
     toggleRole: (state, action: PayloadAction<roles>) => {
       state.role = action.payload;
       Cookies.set("role", `${action.payload}`);
-      console.log("toggleRole")
     },
   },
 });
