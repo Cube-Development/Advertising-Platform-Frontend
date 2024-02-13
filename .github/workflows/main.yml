@@ -22,5 +22,5 @@ jobs:
         run: npm install
       - name: Build Project
         run: npm run build
-      - name: Deploy to Vercel
-        run: npm run preview
+      # - name: Deploy to Vercel
+      #   run: npm run preview
