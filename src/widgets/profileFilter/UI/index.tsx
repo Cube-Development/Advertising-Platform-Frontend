@@ -22,13 +22,6 @@ export const ProfileFilter: FC<ProfileFilterProps> = ({page}) => {
                 <hr />
                 <ProjectTypesFilter />
                 <ProjectStatusFilter />
-                {isZeroProject
-                ?
-                <ZeroProject NewProjectBtn={NewProject} TurnkeyProjectBtn={TurnkeyProject}/>
-                :
-                <></>
-                }
-
             </div>
            
         </section>

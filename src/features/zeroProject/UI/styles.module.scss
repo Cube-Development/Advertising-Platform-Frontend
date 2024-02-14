@@ -6,7 +6,6 @@
     align-items: center;
     row-gap: 60px;
     margin-bottom: 170px;
-
 }
 
 
@@ -31,6 +30,7 @@
     justify-content: center;
     align-items: center;
     row-gap: 30px;
+    text-align: center;
 
     div{
         display: grid;
@@ -43,7 +43,9 @@
         font-style: normal;
         font-weight: 400;
         line-height: normal;
+        max-width: 510px;
     }
+    
     svg{
         width: 185px;
         height: 185px;

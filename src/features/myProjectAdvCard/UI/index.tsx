@@ -1,15 +1,30 @@
 import { MyProjectAdvSubcard } from '@entities/myProjectAdvSubcard';
 import { CancelIcon, CompliteIcon, MoreIcon, RocketIcon, SearchIcon, WaitIcon } from '@shared/assets';
-import { IItemCard } from '@shared/types/common';
+import { orderStatus } from '@shared/config/status';
+import { IChannelChat, IItemCard } from '@shared/types/common';
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './styles.module.scss';
 
 interface MyProjectAdvCardProps {
     card: IItemCard;
+    FeedbackBtn: FC,
+    AcceptBtn: FC,
+    RejectBtn: FC,
+    CheckBtn: FC,
+    SeeBtn: FC,
+    ChannelChatBtn: FC<IChannelChat>,
 }
 
-export const MyProjectAdvCard: FC<MyProjectAdvCardProps> = ({card}) => {
+export const MyProjectAdvCard: FC<MyProjectAdvCardProps> = ({
+    card, 
+    FeedbackBtn, 
+    AcceptBtn,
+    RejectBtn,
+    CheckBtn,
+    SeeBtn,
+    ChannelChatBtn,
+}) => {
     const [isSubcardOpen, setSubcardOpen] = useState(false);
     const { t } = useTranslation();
 
@@ -35,7 +50,12 @@ export const MyProjectAdvCard: FC<MyProjectAdvCardProps> = ({card}) => {
                 <hr />
                 <div>
                     <p>
-                        В работе
+                        {card.status === orderStatus.completed
+                        ?
+                        t('profile_advertiser.card.status.complited')
+                        :
+                        t('profile_advertiser.card.status.active')
+                        }
                     </p>
                 </div>
 
@@ -90,7 +110,16 @@ export const MyProjectAdvCard: FC<MyProjectAdvCardProps> = ({card}) => {
         
         <div className={styles.subcard}>
             {card.channels_list.map((subcard, index) =>
-                <MyProjectAdvSubcard key={index} subcard={subcard} />
+                <MyProjectAdvSubcard key={index} 
+                    subcard={subcard} 
+                    FeedbackBtn={FeedbackBtn} 
+                    AcceptBtn={AcceptBtn}
+                    RejectBtn={RejectBtn}
+                    CheckBtn={CheckBtn}
+                    SeeBtn={SeeBtn}
+                    ChannelChatBtn={ChannelChatBtn}
+                    status={card.status}
+                />
             )}
         </div>
         } 
