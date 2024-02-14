@@ -1,11 +1,12 @@
 import { EyeIcon, ManIcon, SubsIcon, WomanIcon } from '@shared/assets';
+import { projectTypes } from '@shared/config/filter';
 import { chating, orderStatus } from '@shared/config/status';
 import { IChannelChat, ISubitemCard } from '@shared/types/common';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './styles.module.scss';
 
-interface MyProjectAdvSubcardProps {
+interface ProjectAdvSubcardProps {
     subcard: ISubitemCard;
     FeedbackBtn: FC,
     AcceptBtn: FC,
@@ -14,10 +15,11 @@ interface MyProjectAdvSubcardProps {
     SeeBtn: FC,
     ChannelChatBtn: FC<IChannelChat>,
     status: number
+    typeFilter: string
 }
 
 
-export const MyProjectAdvSubcard: FC<MyProjectAdvSubcardProps> = ({
+export const ProjectAdvSubcard: FC<ProjectAdvSubcardProps> = ({
     subcard, 
     FeedbackBtn, 
     AcceptBtn,
@@ -25,7 +27,8 @@ export const MyProjectAdvSubcard: FC<MyProjectAdvSubcardProps> = ({
     CheckBtn,
     SeeBtn,
     ChannelChatBtn,
-    status
+    status,
+    typeFilter
 }) => {
     const { t } = useTranslation();
 
@@ -140,7 +143,11 @@ export const MyProjectAdvSubcard: FC<MyProjectAdvSubcardProps> = ({
                 ?
                 <div>
                     <p>{t(`profile_advertiser.order_status.rejected.title`)}</p>
-                    {status === orderStatus.completed || <span>{t(`profile_advertiser.order_status.rejected.text`)}</span>}
+                    {
+                    typeFilter === projectTypes.managerProject 
+                    ? <span>{t(`profile_advertiser.order_status.rejected.text2`)}</span>
+                    : status === orderStatus.completed || <span>{t(`profile_advertiser.order_status.rejected.text`)}</span>
+                    }
                     
                 </div>
                 : subcard.status === orderStatus.completed
@@ -153,19 +160,23 @@ export const MyProjectAdvSubcard: FC<MyProjectAdvSubcardProps> = ({
                 ?
                 <div>
                     <p>{t(`profile_advertiser.order_status.posted.title`)}</p>
-                    <span>{t(`profile_advertiser.order_status.posted.text`)}</span>
-                    
-                    <div>
-                        <AcceptBtn />
-                        <RejectBtn />
-                    </div>
-                        <CheckBtn />
+                    {typeFilter === projectTypes.managerProject ||
+                    <>
+                        <span>{t(`profile_advertiser.order_status.posted.text`)}</span>
+                        <div>
+                            <AcceptBtn />
+                            <RejectBtn />
+                        </div>
+                            
+                    </>
+                    }
+                    <CheckBtn />
                 </div>
                 :  subcard.status === orderStatus.accepted
                 ?
                 <div>
                     <p>{t(`profile_advertiser.order_status.accepted.title`)}</p>
-                    <span>{t(`profile_advertiser.order_status.accepted.text`)}</span>
+                    {typeFilter === projectTypes.managerProject || <span>{t(`profile_advertiser.order_status.accepted.text`)}</span>}
                     {<SeeBtn/>}
                 </div>
                 : subcard.status === orderStatus.moderation
@@ -179,18 +190,27 @@ export const MyProjectAdvSubcard: FC<MyProjectAdvSubcardProps> = ({
                         </small>
                     </span>
                 </div>
+                : subcard.status === orderStatus.waiting
+                ?
+                <div>
+                    <p>{t(`profile_advertiser.order_status.waiting.title`)}</p>
+                    {<SeeBtn/>}
+                </div>
                 :
                 <></>
                 }
             </div>   
-            <div  className={styles.subcard__right}>
+            {typeFilter !== projectTypes.managerProject && 
+                <div  className={styles.subcard__right}>
                 {
                 chating.includes(subcard.status) && 
                     <div>
                         <ChannelChatBtn id={1} />
                     </div>
                 }
-            </div>
+                </div>
+            }
+            
         </div>
     );
 };

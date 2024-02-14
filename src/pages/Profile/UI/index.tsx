@@ -1,7 +1,6 @@
-import { advertiserProjectTypes } from "@features/projectTypesFilter/UI/config";
-import { projectStatus, projectTypes } from "@shared/config/filter";
+import { myProjectStatus, managerProjectStatus, projectTypes } from "@shared/config/filter";
 import { useAppSelector } from "@shared/store";
-import { MyProjectAdv } from "@widgets/myProjectAdv";
+import { ProjectAdv } from "@widgets/ProjectAdv";
 import { ProfileFilter } from "@widgets/profileFilter";
 import { FC } from "react";
 
@@ -22,9 +21,20 @@ const MyProjectAdvCardComplited = {
   ],
 };
 
+
+const ManagerProjectAdvCardComplited = {
+  id: 31231132,  date: "20.01.2024",  channels: 999,  views: 99999999,  cost: 99999999,  complite: 999,  cancel: 999,  wait: 999,  start: 999,  consideration: 999,  status: 0,  channels_list: [
+    {status: 0, img: "partner1.svg", name: "MDK", category: "Юмор и развлечения", date_from: "11.11.2024", date_to: "15.12.2024", accommodation: "1/24", time_from: "17:00", time_to: "17:00", price: 1500000000, subs: 301975, views: 34975, ER: 27.3, CPV: 121, sex: 0, },
+    {status: 1, img: "partner1.svg", name: "MDK", category: "Юмор и развлечения", date_from: "11.11.2024", date_to: "15.12.2024", accommodation: "1/24", time_from: "17:00", time_to: "17:00", price: 1500000000, subs: 301975, views: 34975, ER: 27.3, CPV: 121, sex: 0, },
+    {status: 5, img: "partner1.svg", name: "MDK", category: "Юмор и развлечения", date_from: "11.11.2024", date_to: "15.12.2024", accommodation: "1/24", time_from: "17:00", time_to: "17:00", price: 1500000000, subs: 301975, views: 34975, ER: 27.3, CPV: 121, sex: 0, },
+    {status: 2, img: "partner1.svg", name: "MDK", category: "Юмор и развлечения", date_from: "11.11.2024", date_to: "15.12.2024", accommodation: "1/24", time_from: "17:00", time_to: "17:00", price: 1500000000, subs: 301975, views: 34975, ER: 27.3, CPV: 121, sex: 0, },
+    {status: 3, img: "partner1.svg", name: "MDK", category: "Юмор и развлечения", date_from: "11.11.2024", date_to: "15.12.2024", accommodation: "1/24", time_from: "17:00", time_to: "17:00", price: 1500000000, subs: 301975, views: 34975, ER: 27.3, CPV: 121, sex: 0, },
+  ],
+};
+
 const MyProjectCards = [MyProjectAdvCard, MyProjectAdvCard, MyProjectAdvCard];
 const MyProjectCardsComplited = [MyProjectAdvCardComplited];
-const ManagerProjectCards = [MyProjectAdvCard, MyProjectAdvCard];
+const ManagerProjectCards = [ManagerProjectAdvCardComplited, ManagerProjectAdvCardComplited];
 
 const sexType = {
   0: { man: 0, woman: 100 },
@@ -41,14 +51,17 @@ export const ProfilePage: FC = () => {
   return (
     <>
       <ProfileFilter page={page} />
-      {typeFilter === projectTypes.myProject && statusFilter === projectStatus.active
+      {typeFilter === projectTypes.myProject && statusFilter === myProjectStatus.active
       ? 
-      <MyProjectAdv cards={MyProjectCards} />
-      : typeFilter === projectTypes.myProject && statusFilter === projectStatus.complite 
+      <ProjectAdv cards={MyProjectCards} />
+      : typeFilter === projectTypes.myProject && statusFilter === myProjectStatus.complite 
       ?
-      <MyProjectAdv cards={MyProjectCardsComplited} />
-      : 
-      <MyProjectAdv cards={[]} />
+      <ProjectAdv cards={MyProjectCardsComplited} />
+      : typeFilter === projectTypes.managerProject && statusFilter === managerProjectStatus.active 
+      ?
+      <ProjectAdv cards={ManagerProjectCards} />
+      :
+      <></>
       }
       
     </>

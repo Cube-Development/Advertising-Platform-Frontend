@@ -42,11 +42,15 @@ ul, ul li {
 
 img {
 	vertical-align: top;
+	padding: 0px;
+	margin: 0px;
 }
 
 img, svg {
 	max-width: 100%;
 	height: auto;
+	padding: 0px;
+	margin: 0px;
 }
 
 address {
@@ -60,6 +64,8 @@ input, textarea, button, select {
     font-size: inherit;
     color: inherit;
     background-color: transparent;
+	padding: 0px;
+	margin: 0px;
 }
 
 input::-ms-clear {
@@ -72,6 +78,8 @@ button, input[type="submit"] {
     background-color: transparent;
     background: none;
     cursor: pointer;
+	padding: 0px;
+	margin: 0px;
 }
 
 input:focus, input:active,

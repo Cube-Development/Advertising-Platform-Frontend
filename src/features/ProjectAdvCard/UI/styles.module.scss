@@ -148,12 +148,26 @@
 .card__more{
     padding: 0 15px;
     display: grid;
-    grid-auto-flow: column;
-    align-items: start;
+    grid-auto-flow: row;
+    justify-content: space-between;
+
     svg{
-        width: 24px;
+        width: 30px;
     }
+
 }
+// .more__btn{
+//     display: grid;
+//     align-items: flex-start;
+//     margin-top: 10px;
+// }
+
+.chat__btn{
+    display: grid;
+    align-items: flex-end;
+    margin-bottom: 10px;
+}
+
 .card__btn{
     padding: 11px 0;
     width: 100%;

@@ -1,12 +1,15 @@
-import { MyProjectAdvSubcard } from '@entities/myProjectAdvSubcard';
+import { ProjectAdvSubcard } from '@entities/ProjectAdvSubcard';
 import { CancelIcon, CompliteIcon, MoreIcon, RocketIcon, SearchIcon, WaitIcon } from '@shared/assets';
+import { ChatIcon } from '@shared/assets/icons/chat';
+import { projectTypes } from '@shared/config/filter';
 import { orderStatus } from '@shared/config/status';
+import { useAppSelector } from '@shared/store';
 import { IChannelChat, IItemCard } from '@shared/types/common';
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './styles.module.scss';
 
-interface MyProjectAdvCardProps {
+interface ProjectAdvCardProps {
     card: IItemCard;
     FeedbackBtn: FC,
     AcceptBtn: FC,
@@ -16,7 +19,7 @@ interface MyProjectAdvCardProps {
     ChannelChatBtn: FC<IChannelChat>,
 }
 
-export const MyProjectAdvCard: FC<MyProjectAdvCardProps> = ({
+export const ProjectAdvCard: FC<ProjectAdvCardProps> = ({
     card, 
     FeedbackBtn, 
     AcceptBtn,
@@ -31,6 +34,8 @@ export const MyProjectAdvCard: FC<MyProjectAdvCardProps> = ({
     const handleChangeOpenSubcard = (): void => {
         setSubcardOpen(!isSubcardOpen);
     };
+
+    const { typeFilter } = useAppSelector((state) => state.filterReducer);
 
     return (
         <div className={styles.card}>
@@ -100,9 +105,18 @@ export const MyProjectAdvCard: FC<MyProjectAdvCardProps> = ({
                 </div>
             </div>
             <div className={styles.card__more}>
-                <button>
-                    <MoreIcon />
-                </button>
+                <div>
+                    <button>
+                        <MoreIcon />
+                    </button>
+                </div>
+                {typeFilter === projectTypes.managerProject &&
+                <div className={styles.chat__btn}>
+                    <button>
+                        <ChatIcon />
+                    </button>
+                </div>
+                }
             </div>
         </div>
 
@@ -110,7 +124,7 @@ export const MyProjectAdvCard: FC<MyProjectAdvCardProps> = ({
         
         <div className={styles.subcard}>
             {card.channels_list.map((subcard, index) =>
-                <MyProjectAdvSubcard key={index} 
+                <ProjectAdvSubcard key={index} 
                     subcard={subcard} 
                     FeedbackBtn={FeedbackBtn} 
                     AcceptBtn={AcceptBtn}
@@ -119,10 +133,12 @@ export const MyProjectAdvCard: FC<MyProjectAdvCardProps> = ({
                     SeeBtn={SeeBtn}
                     ChannelChatBtn={ChannelChatBtn}
                     status={card.status}
+                    typeFilter={typeFilter}
                 />
             )}
         </div>
         } 
+
         <button className={`${styles.card__btn} ${isSubcardOpen ? styles.less : styles.more }`}
             onClick={() => handleChangeOpenSubcard()}>
             {isSubcardOpen ? t(`profile_advertiser.card.see_less`) :  t(`profile_advertiser.card.see_more`)}

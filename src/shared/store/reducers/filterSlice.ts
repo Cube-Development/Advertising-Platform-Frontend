@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { projectStatus, projectTypes } from '@shared/config/filter';
+import { myProjectStatus, projectTypes } from '@shared/config/filter';
 
 interface FilterState {
     typeFilter: string;
@@ -8,7 +8,7 @@ interface FilterState {
   
 const initialState: FilterState = {
     typeFilter: projectTypes.myProject,
-    statusFilter: projectStatus.active
+    statusFilter: myProjectStatus.active
 };
 
 export const filterSlice = createSlice({
