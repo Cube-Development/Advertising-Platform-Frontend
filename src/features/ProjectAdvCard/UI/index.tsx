@@ -1,7 +1,7 @@
-import { ProjectAdvSubcard } from '@entities/ProjectAdvSubcard';
+import { ProjectAdvSubcard } from '@entities/projectAdvSubcard';
 import { CancelIcon, CompliteIcon, MoreIcon, RocketIcon, SearchIcon, WaitIcon } from '@shared/assets';
 import { ChatIcon } from '@shared/assets/icons/chat';
-import { projectTypes } from '@shared/config/filter';
+import { managerProjectStatus, projectTypes } from '@shared/config/filter';
 import { orderStatus } from '@shared/config/status';
 import { useAppSelector } from '@shared/store';
 import { IChannelChat, IItemCard } from '@shared/types/common';
@@ -13,20 +13,25 @@ interface ProjectAdvCardProps {
     card: IItemCard;
     FeedbackBtn: FC,
     AcceptBtn: FC,
+    AcceptProjectBtn: FC,
     RejectBtn: FC,
     CheckBtn: FC,
     SeeBtn: FC,
     ChannelChatBtn: FC<IChannelChat>,
+    ChangeChannelBtn: FC,
 }
 
 export const ProjectAdvCard: FC<ProjectAdvCardProps> = ({
     card, 
     FeedbackBtn, 
     AcceptBtn,
+    AcceptProjectBtn,
     RejectBtn,
     CheckBtn,
     SeeBtn,
     ChannelChatBtn,
+    ChangeChannelBtn
+
 }) => {
     const [isSubcardOpen, setSubcardOpen] = useState(false);
     const { t } = useTranslation();
@@ -35,7 +40,7 @@ export const ProjectAdvCard: FC<ProjectAdvCardProps> = ({
         setSubcardOpen(!isSubcardOpen);
     };
 
-    const { typeFilter } = useAppSelector((state) => state.filterReducer);
+    const { typeFilter, statusFilter } = useAppSelector((state) => state.filterReducer);
 
     return (
         <div className={styles.card}>
@@ -82,26 +87,33 @@ export const ProjectAdvCard: FC<ProjectAdvCardProps> = ({
                 </div>
                 <hr />
                 <div className={styles.card__info}>
-                    <div>
-                        <CompliteIcon />
-                        <p>{card.complite.toLocaleString()}</p>
-                    </div>
-                    <div>
-                        <CancelIcon />
-                        <p>{card.cancel.toLocaleString()}</p>
-                    </div>
-                    <div>
-                        <WaitIcon />
-                        <p>{card.wait.toLocaleString()}</p>
-                    </div>
-                    <div>
-                        <RocketIcon />
-                        <p>{card.start.toLocaleString()}</p>
-                    </div>
-                    <div>
-                        <SearchIcon />
-                        <p>{card.consideration.toLocaleString()}</p>
-                    </div>
+                    {typeFilter === projectTypes.managerProject && statusFilter === managerProjectStatus.agreed
+                    ?
+                        < AcceptProjectBtn />
+                    :
+                    <>
+                        <div>
+                            <CompliteIcon />
+                            <p>{card.complite.toLocaleString()}</p>
+                        </div>
+                        <div>
+                            <CancelIcon />
+                            <p>{card.cancel.toLocaleString()}</p>
+                        </div>
+                        <div>
+                            <WaitIcon />
+                            <p>{card.wait.toLocaleString()}</p>
+                        </div>
+                        <div>
+                            <RocketIcon />
+                            <p>{card.start.toLocaleString()}</p>
+                        </div>
+                        <div>
+                            <SearchIcon />
+                            <p>{card.consideration.toLocaleString()}</p>
+                        </div>
+                    </>
+                    }
                 </div>
             </div>
             <div className={styles.card__more}>
@@ -132,6 +144,7 @@ export const ProjectAdvCard: FC<ProjectAdvCardProps> = ({
                     CheckBtn={CheckBtn}
                     SeeBtn={SeeBtn}
                     ChannelChatBtn={ChannelChatBtn}
+                    ChangeChannelBtn={ChangeChannelBtn}
                     status={card.status}
                     typeFilter={typeFilter}
                 />
