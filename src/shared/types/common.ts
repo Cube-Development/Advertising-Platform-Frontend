@@ -61,4 +61,10 @@ export interface ISubitemCard {
   ER: number
   CPV: number
   sex: number
+  status: number
+}
+
+
+export interface IChannelChat {
+  id: number
 }

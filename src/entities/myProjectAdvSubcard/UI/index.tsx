@@ -1,14 +1,32 @@
 import { EyeIcon, ManIcon, SubsIcon, WomanIcon } from '@shared/assets';
-import { ISubitemCard } from '@shared/types/common';
+import { chating, orderStatus } from '@shared/config/status';
+import { IChannelChat, ISubitemCard } from '@shared/types/common';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './styles.module.scss';
 
 interface MyProjectAdvSubcardProps {
     subcard: ISubitemCard;
+    FeedbackBtn: FC,
+    AcceptBtn: FC,
+    RejectBtn: FC,
+    CheckBtn: FC,
+    SeeBtn: FC,
+    ChannelChatBtn: FC<IChannelChat>,
+    status: number
 }
 
-export const MyProjectAdvSubcard: FC<MyProjectAdvSubcardProps> = ({subcard}) => {
+
+export const MyProjectAdvSubcard: FC<MyProjectAdvSubcardProps> = ({
+    subcard, 
+    FeedbackBtn, 
+    AcceptBtn,
+    RejectBtn,
+    CheckBtn,
+    SeeBtn,
+    ChannelChatBtn,
+    status
+}) => {
     const { t } = useTranslation();
 
     return (
@@ -117,9 +135,62 @@ export const MyProjectAdvSubcard: FC<MyProjectAdvSubcardProps> = ({subcard}) => 
                     </div>
                 </div>
             </div>    
-            <div className={styles.subcard__right}>
-                kkkk
+            <div className={styles.subcard__status}>
+                {subcard.status === orderStatus.rejected
+                ?
+                <div>
+                    <p>{t(`profile_advertiser.order_status.rejected.title`)}</p>
+                    {status === orderStatus.completed || <span>{t(`profile_advertiser.order_status.rejected.text`)}</span>}
+                    
+                </div>
+                : subcard.status === orderStatus.completed
+                ?
+                <div>
+                    <p>{t(`profile_advertiser.order_status.completed.title`)}</p>
+                    <FeedbackBtn/>
+                </div>
+                : subcard.status === orderStatus.posted
+                ?
+                <div>
+                    <p>{t(`profile_advertiser.order_status.posted.title`)}</p>
+                    <span>{t(`profile_advertiser.order_status.posted.text`)}</span>
+                    
+                    <div>
+                        <AcceptBtn />
+                        <RejectBtn />
+                    </div>
+                        <CheckBtn />
+                </div>
+                :  subcard.status === orderStatus.accepted
+                ?
+                <div>
+                    <p>{t(`profile_advertiser.order_status.accepted.title`)}</p>
+                    <span>{t(`profile_advertiser.order_status.accepted.text`)}</span>
+                    {<SeeBtn/>}
+                </div>
+                : subcard.status === orderStatus.moderation
+                ?
+                <div>
+                    <p>{t(`profile_advertiser.order_status.moderation.title`)}</p>
+                    <span>
+                        {t(`profile_advertiser.order_status.moderation.text`)}
+                        <small>
+                        {t(`profile_advertiser.order_status.moderation.small`)}
+                        </small>
+                    </span>
+                </div>
+                :
+                <></>
+                }
             </div>   
+            <div  className={styles.subcard__right}>
+                {
+                chating.includes(subcard.status) && 
+                    <div>
+                        <ChannelChatBtn id={1} />
+                    </div>
+                }
+            </div>
         </div>
     );
 };
