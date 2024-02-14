@@ -6,6 +6,8 @@ import { TurnkeyProject } from '@features/turnkeyProject';
 import { ZeroProject } from '@features/zeroProject';
 import { FC, useState } from 'react';
 import styles from './styles.module.scss';
+import { useAppSelector } from '@shared/store';
+import { projectTypes } from '@shared/config/filter';
 
 interface ProfileFilterProps {
     page: string;
@@ -14,6 +16,7 @@ interface ProfileFilterProps {
 
 export const ProfileFilter: FC<ProfileFilterProps> = ({page}) => {
     const [isZeroProject, setZeroProject] = useState(true);
+    const { typeFilter } = useAppSelector((state) => state.filterReducer);
 
     return (
         <section className={styles.profile__filter}>
@@ -21,7 +24,7 @@ export const ProfileFilter: FC<ProfileFilterProps> = ({page}) => {
                 <ProfileTop isZeroProject={isZeroProject} NewProjectBtn={NewProject} TurnkeyProjectBtn={TurnkeyProject} />
                 <hr />
                 <ProjectTypesFilter />
-                <ProjectStatusFilter />
+                {typeFilter === projectTypes.savedProject || <ProjectStatusFilter />}
             </div>
            
         </section>

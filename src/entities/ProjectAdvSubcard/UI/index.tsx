@@ -13,6 +13,7 @@ interface ProjectAdvSubcardProps {
     RejectBtn: FC,
     CheckBtn: FC,
     SeeBtn: FC,
+    ChangeChannelBtn: FC,
     ChannelChatBtn: FC<IChannelChat>,
     status: number
     typeFilter: string
@@ -27,8 +28,9 @@ export const ProjectAdvSubcard: FC<ProjectAdvSubcardProps> = ({
     CheckBtn,
     SeeBtn,
     ChannelChatBtn,
+    ChangeChannelBtn,
     status,
-    typeFilter
+    typeFilter    
 }) => {
     const { t } = useTranslation();
 
@@ -195,6 +197,13 @@ export const ProjectAdvSubcard: FC<ProjectAdvSubcardProps> = ({
                 <div>
                     <p>{t(`profile_advertiser.order_status.waiting.title`)}</p>
                     {<SeeBtn/>}
+                </div>
+                : subcard.status === orderStatus.agreed
+                ?
+                <div>
+                    <p>{t(`profile_advertiser.order_status.agreed.title`)}</p>
+                    {<ChangeChannelBtn/>}
+                    {<CheckBtn/>}
                 </div>
                 :
                 <></>

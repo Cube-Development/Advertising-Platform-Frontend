@@ -1,24 +1,19 @@
-import { AcceptPost } from '@features/acceptPost';
-import { ChannelChat } from '@features/channelChat';
-import { CheckPost } from '@features/checkPost';
-import { Feedback } from '@features/feedback';
-// import { DevProjectAdvCard } from '@features/devProjectAdvCard';
+import { DevProjectAdvCard } from '@entities/devProjectAdvCard';
+import { ContinueTemplate } from '@features/continueTemplate';
 import { NewProject } from '@features/newProject';
-import { RejectPost } from '@features/rejectPost';
-import { SeePost } from '@features/seePost';
 import { TurnkeyProject } from '@features/turnkeyProject';
 import { ZeroProject } from '@features/zeroProject';
-import { IItemCard } from '@shared/types/common';
+import { IDevItemCard } from '@shared/types/common';
 import { FC } from 'react';
 
 interface DevProjectAdvProps {
-    cards: IItemCard[];
+    cards: IDevItemCard[];
 }
 
 export const DevProjectAdv: FC<DevProjectAdvProps> = ({cards}) => {
     return (
         <div className='container'>
-            {/* {cards.length === 0
+            {cards.length === 0
             ?
             <ZeroProject NewProjectBtn={NewProject} TurnkeyProjectBtn={TurnkeyProject}/>
             :
@@ -26,9 +21,10 @@ export const DevProjectAdv: FC<DevProjectAdvProps> = ({cards}) => {
                 <DevProjectAdvCard 
                     key={index} 
                     card={card} 
+                    ContinueBtn={ContinueTemplate}
                 />
             )
-            } */}
+            }
         </div>
     );
 };
