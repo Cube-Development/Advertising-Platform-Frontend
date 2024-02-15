@@ -1,4 +1,4 @@
-import { DevProjectAdvCard } from '@entities/devProjectAdvCard';
+import { AdvDevProjectCard } from '@entities/advDevProjectCard';
 import { ContinueTemplate } from '@features/continueTemplate';
 import { NewProject } from '@features/newProject';
 import { TurnkeyProject } from '@features/turnkeyProject';
@@ -6,11 +6,11 @@ import { ZeroProject } from '@features/zeroProject';
 import { IDevItemCard } from '@shared/types/common';
 import { FC } from 'react';
 
-interface DevProjectAdvProps {
+interface AdvDevProjectProps {
     cards: IDevItemCard[];
 }
 
-export const DevProjectAdv: FC<DevProjectAdvProps> = ({cards}) => {
+export const AdvDevProject: FC<AdvDevProjectProps> = ({cards}) => {
     return (
         <div className='container'>
             {cards.length === 0
@@ -18,7 +18,7 @@ export const DevProjectAdv: FC<DevProjectAdvProps> = ({cards}) => {
             <ZeroProject NewProjectBtn={NewProject} TurnkeyProjectBtn={TurnkeyProject}/>
             :
             cards.map((card, index) =>
-                <DevProjectAdvCard 
+                <AdvDevProjectCard 
                     key={index} 
                     card={card} 
                     ContinueBtn={ContinueTemplate}

@@ -6,12 +6,12 @@ import {FC} from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './styles.module.scss'
 
-interface DevProjectAdvCardProps {
+interface AdvDevProjectCardProps {
     card: IDevItemCard;
     ContinueBtn: FC
 }
 
-export const DevProjectAdvCard: FC<DevProjectAdvCardProps> = ({card, ContinueBtn}) => {
+export const AdvDevProjectCard: FC<AdvDevProjectCardProps> = ({card, ContinueBtn}) => {
     const { t } = useTranslation();
     const { typeFilter } = useAppSelector((state) => state.filterReducer);
     

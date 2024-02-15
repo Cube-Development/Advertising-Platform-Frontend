@@ -1,8 +1,8 @@
 import { myProjectStatus, managerProjectStatus, projectTypes, platformStatus } from "@shared/config/filter";
 import { useAppSelector } from "@shared/store";
-import { ProjectAdv } from "@widgets/projectAdv";
+import { AdvProject } from "@widgets/advProject";
 import { BarFilter } from "@widgets/barFilter";
-import { DevProjectAdv } from "@widgets/devProjectAdv";
+import { AdvDevProject } from "@widgets/advDevProject";
 import { FC } from "react";
 
 const MyProjectAdvCard = {
@@ -70,26 +70,26 @@ export const OrdersPage: FC = () => {
       
       {typeFilter === projectTypes.myProject && statusFilter === myProjectStatus.active 
       ? 
-      <ProjectAdv cards={MyProjectCards} />
+      <AdvProject cards={MyProjectCards} />
       : typeFilter === projectTypes.myProject && statusFilter === myProjectStatus.complite 
       ?
-      <ProjectAdv cards={MyProjectCardsComplited} />
+      <AdvProject cards={MyProjectCardsComplited} />
       : typeFilter === projectTypes.managerProject && statusFilter === managerProjectStatus.active 
       ?
-      <ProjectAdv cards={ManagerProjectCards} />
+      <AdvProject cards={ManagerProjectCards} />
       : typeFilter === projectTypes.managerProject && statusFilter === managerProjectStatus.develop 
       ?
-      <DevProjectAdv cards={ManagerProjectAdvCardsDev} />
+      <AdvDevProject cards={ManagerProjectAdvCardsDev} />
       : typeFilter === projectTypes.managerProject && statusFilter === managerProjectStatus.agreed 
       ?
-      <ProjectAdv cards={ManagerProjectCardsAgreed} />
+      <AdvProject cards={ManagerProjectCardsAgreed} />
       : typeFilter === projectTypes.managerProject && statusFilter === managerProjectStatus.complite 
       ?
       // <DevProjectAdv cards={ManagerProjectAdvCardsDev} />
       <></>
       : typeFilter === projectTypes.savedProject
       ?
-      <DevProjectAdv cards={ManagerProjectAdvCardsDev} />
+      <AdvDevProject cards={ManagerProjectAdvCardsDev} />
       : 
       <></>
 

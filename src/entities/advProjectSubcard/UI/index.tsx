@@ -6,7 +6,7 @@ import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './styles.module.scss';
 
-interface ProjectAdvSubcardProps {
+interface AdvProjectSubcardProps {
     subcard: ISubitemCard;
     FeedbackBtn: FC,
     AcceptBtn: FC,
@@ -20,7 +20,7 @@ interface ProjectAdvSubcardProps {
 }
 
 
-export const ProjectAdvSubcard: FC<ProjectAdvSubcardProps> = ({
+export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
     subcard, 
     FeedbackBtn, 
     AcceptBtn,
