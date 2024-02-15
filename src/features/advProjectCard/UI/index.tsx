@@ -1,4 +1,4 @@
-import { ProjectAdvSubcard } from '@entities/projectAdvSubcard';
+import { AdvProjectSubcard } from '@entities/advProjectSubcard';
 import { CancelIcon, CompliteIcon, MoreIcon, RocketIcon, SearchIcon, WaitIcon } from '@shared/assets';
 import { ChatIcon } from '@shared/assets';
 import { managerProjectStatus, projectTypes } from '@shared/config/filter';
@@ -9,7 +9,7 @@ import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './styles.module.scss';
 
-interface ProjectAdvCardProps {
+interface AdvProjectCardProps {
     card: IItemCard;
     FeedbackBtn: FC,
     AcceptBtn: FC,
@@ -21,7 +21,7 @@ interface ProjectAdvCardProps {
     ChangeChannelBtn: FC,
 }
 
-export const ProjectAdvCard: FC<ProjectAdvCardProps> = ({
+export const AdvProjectCard: FC<AdvProjectCardProps> = ({
     card, 
     FeedbackBtn, 
     AcceptBtn,
@@ -136,7 +136,7 @@ export const ProjectAdvCard: FC<ProjectAdvCardProps> = ({
         
         <div className={styles.subcard}>
             {card.channels_list.map((subcard, index) =>
-                <ProjectAdvSubcard key={index} 
+                <AdvProjectSubcard key={index} 
                     subcard={subcard} 
                     FeedbackBtn={FeedbackBtn} 
                     AcceptBtn={AcceptBtn}
