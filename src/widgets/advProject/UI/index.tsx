@@ -3,7 +3,7 @@ import { AcceptProject } from '@features/acceptProject';
 import { ChannelChat } from '@features/channelChat';
 import { CheckPost } from '@features/checkPost';
 import { Feedback } from '@features/feedback';
-import { ProjectAdvCard } from '@features/projectAdvCard';
+import { AdvProjectCard } from '@features/advProjectCard';
 import { NewProject } from '@features/newProject';
 import { RejectPost } from '@features/rejectPost';
 import { SeePost } from '@features/seePost';
@@ -13,11 +13,11 @@ import { IItemCard } from '@shared/types/common';
 import { FC } from 'react';
 import { ChangeChannel } from '@features/changeChannel';
 
-interface ProjectAdvProps {
+interface AdvProjectProps {
     cards: IItemCard[];
 }
 
-export const ProjectAdv: FC<ProjectAdvProps> = ({cards}) => {
+export const AdvProject: FC<AdvProjectProps> = ({cards}) => {
     return (
         <div className='container'>
             {cards.length === 0
@@ -25,7 +25,7 @@ export const ProjectAdv: FC<ProjectAdvProps> = ({cards}) => {
             <ZeroProject NewProjectBtn={NewProject} TurnkeyProjectBtn={TurnkeyProject}/>
             :
             cards.map((card, index) =>
-                <ProjectAdvCard 
+                <AdvProjectCard 
                     key={index} 
                     card={card} 
                     FeedbackBtn={Feedback}
