@@ -54,7 +54,7 @@ export const ProjectAdvSubcard: FC<ProjectAdvSubcardProps> = ({
                 <div className={styles.channel__column}>
                     <div>
                         <p>
-                            {t(`profile_advertiser.subcard.date`)}
+                            {t(`orders_advertiser.subcard.date`)}
                         </p>
                         <span>
                             {subcard.date_from} - {subcard.date_to}
@@ -63,7 +63,7 @@ export const ProjectAdvSubcard: FC<ProjectAdvSubcardProps> = ({
                     <hr />
                     <div>
                         <p>
-                            {t(`profile_advertiser.subcard.accommodation`)}
+                            {t(`orders_advertiser.subcard.accommodation`)}
                         </p>
                         <span>
                             {subcard.accommodation}
@@ -73,7 +73,7 @@ export const ProjectAdvSubcard: FC<ProjectAdvSubcardProps> = ({
                 <div className={styles.channel__column}>
                     <div>
                         <p>
-                            {t(`profile_advertiser.subcard.time`)}
+                            {t(`orders_advertiser.subcard.time`)}
                         </p>
                         <span>
                             {subcard.time_from} - {subcard.time_to}
@@ -82,7 +82,7 @@ export const ProjectAdvSubcard: FC<ProjectAdvSubcardProps> = ({
                     <hr />
                     <div>
                         <p>
-                            {t(`profile_advertiser.subcard.price`)}
+                            {t(`orders_advertiser.subcard.price`)}
                         </p>
                         <span>
                             {subcard.price.toLocaleString()} {t(`symbol`)}
@@ -144,27 +144,27 @@ export const ProjectAdvSubcard: FC<ProjectAdvSubcardProps> = ({
                 {subcard.status === orderStatus.rejected
                 ?
                 <div>
-                    <p>{t(`profile_advertiser.order_status.rejected.title`)}</p>
+                    <p>{t(`orders_advertiser.order_status.rejected.title`)}</p>
                     {
                     typeFilter === projectTypes.managerProject 
-                    ? <span>{t(`profile_advertiser.order_status.rejected.text2`)}</span>
-                    : status === orderStatus.completed || <span>{t(`profile_advertiser.order_status.rejected.text`)}</span>
+                    ? <span>{t(`orders_advertiser.order_status.rejected.text2`)}</span>
+                    : status === orderStatus.completed || <span>{t(`orders_advertiser.order_status.rejected.text`)}</span>
                     }
                     
                 </div>
                 : subcard.status === orderStatus.completed
                 ?
                 <div>
-                    <p>{t(`profile_advertiser.order_status.completed.title`)}</p>
+                    <p>{t(`orders_advertiser.order_status.completed.title`)}</p>
                     <FeedbackBtn/>
                 </div>
                 : subcard.status === orderStatus.posted
                 ?
                 <div>
-                    <p>{t(`profile_advertiser.order_status.posted.title`)}</p>
+                    <p>{t(`orders_advertiser.order_status.posted.title`)}</p>
                     {typeFilter === projectTypes.managerProject ||
                     <>
-                        <span>{t(`profile_advertiser.order_status.posted.text`)}</span>
+                        <span>{t(`orders_advertiser.order_status.posted.text`)}</span>
                         <div>
                             <AcceptBtn />
                             <RejectBtn />
@@ -177,31 +177,31 @@ export const ProjectAdvSubcard: FC<ProjectAdvSubcardProps> = ({
                 :  subcard.status === orderStatus.accepted
                 ?
                 <div>
-                    <p>{t(`profile_advertiser.order_status.accepted.title`)}</p>
-                    {typeFilter === projectTypes.managerProject || <span>{t(`profile_advertiser.order_status.accepted.text`)}</span>}
+                    <p>{t(`orders_advertiser.order_status.accepted.title`)}</p>
+                    {typeFilter === projectTypes.managerProject || <span>{t(`orders_advertiser.order_status.accepted.text`)}</span>}
                     {<SeeBtn/>}
                 </div>
                 : subcard.status === orderStatus.moderation
                 ?
                 <div>
-                    <p>{t(`profile_advertiser.order_status.moderation.title`)}</p>
+                    <p>{t(`orders_advertiser.order_status.moderation.title`)}</p>
                     <span>
-                        {t(`profile_advertiser.order_status.moderation.text`)}
+                        {t(`orders_advertiser.order_status.moderation.text`)}
                         <small>
-                        {t(`profile_advertiser.order_status.moderation.small`)}
+                        {t(`orders_advertiser.order_status.moderation.small`)}
                         </small>
                     </span>
                 </div>
                 : subcard.status === orderStatus.waiting
                 ?
                 <div>
-                    <p>{t(`profile_advertiser.order_status.waiting.title`)}</p>
+                    <p>{t(`orders_advertiser.order_status.waiting.title`)}</p>
                     {<SeeBtn/>}
                 </div>
                 : subcard.status === orderStatus.agreed
                 ?
                 <div>
-                    <p>{t(`profile_advertiser.order_status.agreed.title`)}</p>
+                    <p>{t(`orders_advertiser.order_status.agreed.title`)}</p>
                     {<ChangeChannelBtn/>}
                     {<CheckBtn/>}
                 </div>

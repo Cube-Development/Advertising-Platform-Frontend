@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { ICustomer } from "@shared/types/translate";
-import { RatingIcon } from "@shared/assets/icons/rating";
+import { RatingIcon } from "@shared/assets";
 
 interface CustomerCardProps {
   customer: ICustomer;
