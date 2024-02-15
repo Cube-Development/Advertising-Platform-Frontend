@@ -33,6 +33,7 @@ export interface IStartProjectProps {
 
 export interface IItemCard {
   id: number
+  name?: string
   date: string
   channels: number
   views: number
@@ -45,6 +46,16 @@ export interface IItemCard {
   status: number
   channels_list: ISubitemCard[]
 }
+
+export interface IDevItemCard {
+  id: number
+  name: string
+  date: string
+  tarif: number
+  cost: number
+  status: number
+}
+
 
 export interface ISubitemCard {
   img: string
@@ -61,4 +72,10 @@ export interface ISubitemCard {
   ER: number
   CPV: number
   sex: number
+  status: number
+}
+
+
+export interface IChannelChat {
+  id: number
 }

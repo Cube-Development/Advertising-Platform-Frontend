@@ -1,9 +1,11 @@
 export enum orderStatus  {
-    rejected = 'rejected',
-    completed = 'completed',
-    posted = 'posted',
-    accepted = 'accepted',
-    moderation = 'moderation',
+    rejected = 0,
+    completed = 1,
+    posted = 2,
+    accepted = 3,
+    moderation = 4,
+    waiting = 5,
+    agreed = 6,
 }
 
 export const chating = [orderStatus.posted, orderStatus.accepted]

@@ -1,4 +1,5 @@
 export { ArrowIcon } from './arrow';
+export { ArrowIcon2 } from './arrow2';
 export { BookIcon } from './book';
 export { CalculatorIcon } from './calculator';
 export { CampaignIcon } from './campaign';
@@ -21,8 +22,11 @@ export { RocketIcon } from './rocket';
 export { SearchIcon } from './search';
 export { SmileIcon } from './smile';
 export { StarIcon } from './star';
+export { StarIcon2 } from './star2';
+export { StarIcon3 } from './star3';
 export { SubsIcon } from './subs';
 export { TemplateIcon } from './template';
+export { TemplateIcon2 } from './template2';
 export { WaitIcon } from './wait';
 export { WalletIcon } from './wallet';
 export { WomanIcon } from './woman';

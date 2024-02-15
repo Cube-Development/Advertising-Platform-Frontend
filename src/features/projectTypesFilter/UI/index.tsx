@@ -12,18 +12,20 @@ export const ProjectTypesFilter: FC = () => {
     const { typeFilter } = useAppSelector((state) => state.filterReducer);
     const { role } = useAppSelector((state) => state.userReducer);
     const dispatch = useAppDispatch();
-    const toggleType = (type: string) => {
+    const toggleType = (type: string, status: string) => {
         dispatch(filterSlice.actions.setTypeFilter(type));
-      };
+        dispatch(filterSlice.actions.setStatusFilter(status));
+    };
+
     const projectTypes = role === roles.advertiser ? advertiserProjectTypes : bloggerProjectTypes
-    // const currentType = typeFilter === '' ? projectTypes[0].type : typeFilter
+
     return (
         <div className={styles.project__types}>
             <ul>
                 {projectTypes.map((type, index) => (
                     <li key={index} 
                         className={typeFilter === type.type ? styles.active : ''} 
-                        onClick={() => toggleType(type.type)}>
+                        onClick={() => toggleType(type.type, type.status)}>
                         {t(type.name)}
                     </li>
                 ))}
