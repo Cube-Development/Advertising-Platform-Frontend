@@ -1,0 +1,17 @@
+.button{
+    border-radius: 8px;
+    padding: 10px;
+
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+
+    div{
+        display: grid;
+        grid-auto-flow: column;
+        column-gap: 10px;
+        justify-content: center;
+
+    }
+}

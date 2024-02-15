@@ -1,4 +1,4 @@
-import { ProfileIcon } from "@shared/assets/icons/profile";
+import { ProfileIcon } from "@shared/assets";
 import { FC, useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";

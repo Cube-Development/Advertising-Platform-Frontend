@@ -1,4 +1,4 @@
-import { ChatIcon } from '@shared/assets/icons/chat';
+import { ChatIcon } from '@shared/assets';
 import { FC } from 'react';
 import styles from './styles.module.scss';
 

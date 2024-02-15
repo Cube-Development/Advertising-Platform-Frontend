@@ -1,6 +1,6 @@
 import { BuyTarif } from '@features/buyTarif';
 import { PriceList } from '@features/priceList';
-import { KeyIcon } from '@shared/assets/icons/key';
+import { KeyIcon } from '@shared/assets';
 import {FC} from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './styles.module.scss'

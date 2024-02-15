@@ -1,6 +1,6 @@
 import { AddPlatform } from '@features/addPlatform';
 import { WorkWithUs } from '@features/workWithUs';
-import { CalculatorIcon } from '@shared/assets/icons/calculator';
+import { CalculatorIcon } from '@shared/assets';
 import { IncomeCalculator } from '@shared/ui/incomeCalculator';
 import { SliderSubs } from '@shared/ui/sliderSubs';
 import { ThemeChanger } from '@shared/ui/themeChanger';

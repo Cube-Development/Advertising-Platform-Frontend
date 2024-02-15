@@ -88,7 +88,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
           </div>
           <div>
             {combinedMenu.map((item, index) => (
-              <MenuItem key={index} item={item.item} subItems={item.subItems} />
+              <MenuItem key={index} item={item.item} subItems={[]} />
             ))}
           </div>
         </div>

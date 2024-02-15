@@ -1,5 +1,4 @@
-import { CloseIcon } from "@shared/assets/icons/close";
-import { PlusIcon } from "@shared/assets/icons/plus";
+import { CloseIcon, PlusIcon } from "@shared/assets";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
