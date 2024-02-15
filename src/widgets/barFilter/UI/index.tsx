@@ -12,7 +12,7 @@ import { AddPlatform } from '@features/addPlatform';
 import { roles } from '@shared/config/roles';
 
 
-export const ProfileFilter: FC = () => {
+export const BarFilter: FC = () => {
     const [isZeroProject, setZeroProject] = useState(true);
     const { typeFilter } = useAppSelector((state) => state.filterReducer);
     const { role } = useAppSelector((state) => state.userReducer);

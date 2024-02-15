@@ -1,6 +1,6 @@
 import { platformStatus } from "@shared/config/filter";
 import { useAppSelector } from "@shared/store";
-import { ProfileFilter } from "@widgets/profileFilter";
+import { BarFilter } from "@widgets/barFilter";
 import { FC } from "react";
 
 const MyProjectAdvCard = {
@@ -58,7 +58,7 @@ export const PlatformsPage: FC = () => {
 
     return (
         <>
-        <ProfileFilter />
+        <BarFilter />
         
         {statusFilter === platformStatus.active 
         ?
