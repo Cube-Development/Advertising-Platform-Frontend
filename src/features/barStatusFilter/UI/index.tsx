@@ -4,11 +4,11 @@ import { useAppDispatch, useAppSelector } from '@shared/store';
 import { filterSlice } from '@shared/store/reducers';
 import  {FC} from 'react';
 import { useTranslation } from 'react-i18next';
-import { advMyProjectStatus, advManagerProjectStatus, bloggerProjectStatus } from './config';
+import { advMyProjectStatus, advManagerProjectStatus, bloggerPlatformStatus } from './config';
 import styles from './styles.module.scss'
 
 
-export const ProjectStatusFilter: FC = () => {
+export const BarStatusFilter: FC = () => {
     const { t } = useTranslation();
     const { statusFilter, typeFilter } = useAppSelector((state) => state.filterReducer);
     const { role } = useAppSelector((state) => state.userReducer);
@@ -22,7 +22,7 @@ export const ProjectStatusFilter: FC = () => {
         ? advMyProjectStatus
         : (role === roles.advertiser && typeFilter === projectTypes.managerProject)
         ? advManagerProjectStatus
-        : bloggerProjectStatus;
+        : bloggerPlatformStatus;
 
     console.log(projectStatus, role, typeFilter)
     return (

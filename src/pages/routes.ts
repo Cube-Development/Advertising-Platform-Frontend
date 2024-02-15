@@ -10,12 +10,14 @@ import { WalletPage } from "./Wallet";
 import { AddPlatformPage } from "./AddPlatform";
 import { paths } from "@shared/routing";
 import { TurnkeyPage } from "./TurnkeyPage";
+import { PlatformsPage } from "./Platforms";
+import { OffersPage } from "./Offers";
+import { OrdersPage } from "./Orders";
 
 export interface IRoute {
     path: string;
     component: React.ComponentType;
 }
-
 
 export const privateBloggerRoutes: IRoute[] = [
     {path: paths.mainBlogger, component: MainBloggerPage},
@@ -25,6 +27,8 @@ export const privateBloggerRoutes: IRoute[] = [
     {path: paths.wallet, component: WalletPage},
     {path: paths.addPlatform, component: AddPlatformPage},
     {path: paths.turnkey, component: TurnkeyPage},
+    {path: paths.platforms, component: PlatformsPage},
+    {path: paths.offers, component: OffersPage},
 ]
 
 export const privateAdvertiserRoutes: IRoute[] = [
@@ -35,6 +39,7 @@ export const privateAdvertiserRoutes: IRoute[] = [
     {path: paths.catalog, component: CatalogPage},
     {path: paths.wallet, component: WalletPage},
     {path: paths.turnkey, component: TurnkeyPage},
+    {path: paths.orders, component: OrdersPage},
 ]
 
 

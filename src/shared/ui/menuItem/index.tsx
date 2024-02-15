@@ -1,4 +1,4 @@
-import { ArrowIcon } from '@shared/assets/icons/arrow';
+import { ArrowIcon } from '@shared/assets';
 import { IMenuItems } from '@shared/types/common';
 import React, { useState } from 'react';
 import { useTranslation } from 'react-i18next';

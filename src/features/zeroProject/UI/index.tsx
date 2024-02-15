@@ -1,5 +1,4 @@
-import { StarIcon3 } from '@shared/assets';
-import { SmileIcon } from '@shared/assets/icons/smile';
+import { StarIcon3, SadSmileIcon } from '@shared/assets';
 import { projectTypes } from '@shared/config/filter';
 import { useAppSelector } from '@shared/store';
 import { IStartProjectProps } from '@shared/types/common';
@@ -25,20 +24,20 @@ export const ZeroProject: FC<ZeroProjectProps> = ({NewProjectBtn, TurnkeyProject
                     <div>
                         <StarIcon3 />
                     </div>
-                    <p>{t(`profile_advertiser.no_template`)}</p>
+                    <p>{t(`orders_advertiser.no_template`)}</p>
                     </>
                     :
                     <>
                     <div>
-                        <SmileIcon />
+                        <SadSmileIcon />
                     </div>
-                    <p>{t(`profile_advertiser.no_project`)}</p>
+                    <p>{t(`orders_advertiser.no_project`)}</p>
                     </>
                     }
                 </div>
                 <div className={styles.buttons}>
                     <NewProjectBtn isZeroProject={true}/>
-                    <p>{t(`profile_advertiser.or`)}</p>
+                    <p>{t(`orders_advertiser.or`)}</p>
                     <TurnkeyProjectBtn isZeroProject={true}/>
                 </div>
             </div>

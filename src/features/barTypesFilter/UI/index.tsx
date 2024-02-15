@@ -1,23 +1,21 @@
-import { roles } from '@shared/config/roles';
 import { useAppDispatch, useAppSelector } from '@shared/store';
 import { filterSlice } from '@shared/store/reducers';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { advertiserProjectTypes, bloggerProjectTypes } from './config';
+import { advertiserProjectTypes } from './config';
 import styles from './styles.module.scss';
 
 
-export const ProjectTypesFilter: FC = () => {
+export const BarTypesFilter: FC = () => {
     const { t } = useTranslation();
     const { typeFilter } = useAppSelector((state) => state.filterReducer);
-    const { role } = useAppSelector((state) => state.userReducer);
     const dispatch = useAppDispatch();
     const toggleType = (type: string, status: string) => {
         dispatch(filterSlice.actions.setTypeFilter(type));
         dispatch(filterSlice.actions.setStatusFilter(status));
     };
 
-    const projectTypes = role === roles.advertiser ? advertiserProjectTypes : bloggerProjectTypes
+    const projectTypes = advertiserProjectTypes
 
     return (
         <div className={styles.project__types}>
