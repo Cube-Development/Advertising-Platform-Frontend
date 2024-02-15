@@ -1,7 +1,7 @@
 import { myProjectStatus, managerProjectStatus, projectTypes, platformStatus } from "@shared/config/filter";
 import { useAppSelector } from "@shared/store";
 import { ProjectAdv } from "@widgets/projectAdv";
-import { ProfileFilter } from "@widgets/profileFilter";
+import { BarFilter } from "@widgets/barFilter";
 import { DevProjectAdv } from "@widgets/devProjectAdv";
 import { FC } from "react";
 
@@ -66,7 +66,7 @@ export const OrdersPage: FC = () => {
 
   return (
     <>
-      <ProfileFilter />
+      <BarFilter />
       
       {typeFilter === projectTypes.myProject && statusFilter === myProjectStatus.active 
       ? 
