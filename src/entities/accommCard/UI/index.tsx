@@ -1,8 +1,7 @@
 import { FC, ReactElement } from "react";
 import styles from "./styles.module.scss";
 import { IAccomm } from "@shared/types/translate";
-import { QualityIcon } from "@shared/assets/icons/quality";
-import { ProtectIcon } from "@shared/assets/icons/protect";
+import { QualityIcon, ProtectIcon } from "@shared/assets";
 
 interface AccommCardProps {
   accomm: IAccomm;

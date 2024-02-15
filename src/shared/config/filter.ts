@@ -16,3 +16,12 @@ export enum managerProjectStatus  {
     develop = 'develop',
     agreed = 'agreed',
 }
+
+
+export enum platformStatus  {
+    active = 'active',
+    moderation = 'moderation',
+    cancel = 'cancel',
+    deactivate = 'deactivate',
+    ban = 'ban',
+}

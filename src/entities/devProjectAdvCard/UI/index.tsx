@@ -33,7 +33,7 @@ export const DevProjectAdvCard: FC<DevProjectAdvCardProps> = ({card, ContinueBtn
 
             <div className={styles.info}>
                 <p>
-                    {t('profile_advertiser.card.tarif')}:
+                    {t('orders_advertiser.card.tarif')}:
                 </p>
                 <span>
                     {card.tarif}
@@ -42,7 +42,7 @@ export const DevProjectAdvCard: FC<DevProjectAdvCardProps> = ({card, ContinueBtn
 
             <div className={styles.info}>
                 <p>
-                    {t('profile_advertiser.card.cost')}:
+                    {t('orders_advertiser.card.cost')}:
                 </p>
                 <span>
                     {card.cost.toLocaleString()}  {t('symbol')}
@@ -54,7 +54,7 @@ export const DevProjectAdvCard: FC<DevProjectAdvCardProps> = ({card, ContinueBtn
             <>
                 <div className={styles.status}>
                     <TemplateIcon2 />
-                    {t('profile_advertiser.order_status.template.title')}
+                    {t('orders_advertiser.order_status.template.title')}
                 </div>
                 <ContinueBtn />
             </>

@@ -1,6 +1,6 @@
 import { ProjectAdvSubcard } from '@entities/projectAdvSubcard';
 import { CancelIcon, CompliteIcon, MoreIcon, RocketIcon, SearchIcon, WaitIcon } from '@shared/assets';
-import { ChatIcon } from '@shared/assets/icons/chat';
+import { ChatIcon } from '@shared/assets';
 import { managerProjectStatus, projectTypes } from '@shared/config/filter';
 import { orderStatus } from '@shared/config/status';
 import { useAppSelector } from '@shared/store';
@@ -62,9 +62,9 @@ export const ProjectAdvCard: FC<ProjectAdvCardProps> = ({
                     <p>
                         {card.status === orderStatus.completed
                         ?
-                        t('profile_advertiser.card.status.complited')
+                        t('orders_advertiser.card.status.complited')
                         :
-                        t('profile_advertiser.card.status.active')
+                        t('orders_advertiser.card.status.active')
                         }
                     </p>
                 </div>
@@ -73,15 +73,15 @@ export const ProjectAdvCard: FC<ProjectAdvCardProps> = ({
             <div className={styles.card__right}>
                 <div className={styles.card__data}>
                     <div>
-                        <p>{t('profile_advertiser.card.channels')}:</p>
+                        <p>{t('orders_advertiser.card.channels')}:</p>
                         <span>{card.channels.toLocaleString()}</span>
                     </div>
                     <div>
-                        <p>{t('profile_advertiser.card.views')}:</p>
+                        <p>{t('orders_advertiser.card.views')}:</p>
                         <span>~ {card.views.toLocaleString()}</span>
                     </div>
                     <div>
-                        <p>{t('profile_advertiser.card.cost')}:</p>
+                        <p>{t('orders_advertiser.card.cost')}:</p>
                         <span>{card.cost.toLocaleString()} {t('symbol')}</span>
                     </div>
                 </div>
@@ -154,7 +154,7 @@ export const ProjectAdvCard: FC<ProjectAdvCardProps> = ({
 
         <button className={`${styles.card__btn} ${isSubcardOpen ? styles.less : styles.more }`}
             onClick={() => handleChangeOpenSubcard()}>
-            {isSubcardOpen ? t(`profile_advertiser.card.see_less`) :  t(`profile_advertiser.card.see_more`)}
+            {isSubcardOpen ? t(`orders_advertiser.card.see_less`) :  t(`orders_advertiser.card.see_more`)}
         </button>
     </div>
     );

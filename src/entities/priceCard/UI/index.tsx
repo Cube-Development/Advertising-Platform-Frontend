@@ -1,8 +1,7 @@
 import { FC, ReactElement } from "react";
 import styles from "./styles.module.scss";
 import { IPrice } from "@shared/types/translate";
-import { YesIcon } from "@shared/assets/icons/yes";
-import { NoIcon } from "@shared/assets/icons/no";
+import { YesIcon, NoIcon } from "@shared/assets";
 
 interface PriceCardProps {
   price: IPrice;
