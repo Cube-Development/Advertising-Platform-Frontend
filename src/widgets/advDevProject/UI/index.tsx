@@ -3,11 +3,11 @@ import { ContinueTemplate } from '@features/continueTemplate';
 import { NewProject } from '@features/newProject';
 import { TurnkeyProject } from '@features/turnkeyProject';
 import { ZeroProject } from '@features/zeroProject';
-import { IDevItemCard } from '@shared/types/common';
+import { IAdvDevProjectCard } from '@shared/types/common';
 import { FC } from 'react';
 
 interface AdvDevProjectProps {
-    cards: IDevItemCard[];
+    cards: IAdvDevProjectCard[];
 }
 
 export const AdvDevProject: FC<AdvDevProjectProps> = ({cards}) => {

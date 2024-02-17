@@ -9,12 +9,12 @@ import { RejectPost } from '@features/rejectPost';
 import { SeePost } from '@features/seePost';
 import { TurnkeyProject } from '@features/turnkeyProject';
 import { ZeroProject } from '@features/zeroProject';
-import { IItemCard } from '@shared/types/common';
+import { IAdvProjectCard } from '@shared/types/common';
 import { FC } from 'react';
 import { ChangeChannel } from '@features/changeChannel';
 
 interface AdvProjectProps {
-    cards: IItemCard[];
+    cards: IAdvProjectCard[];
 }
 
 export const AdvProject: FC<AdvProjectProps> = ({cards}) => {

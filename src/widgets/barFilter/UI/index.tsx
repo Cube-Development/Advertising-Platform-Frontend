@@ -7,7 +7,7 @@ import { ZeroProject } from '@features/zeroProject';
 import { FC, useState } from 'react';
 import styles from './styles.module.scss';
 import { useAppSelector } from '@shared/store';
-import { projectTypes } from '@shared/config/filter';
+import { projectTypesFilter } from '@shared/config/filter';
 import { AddPlatform } from '@features/addPlatform';
 import { roles } from '@shared/config/roles';
 
@@ -21,7 +21,7 @@ export const BarFilter: FC = () => {
         <section className={styles.profile__filter}>
             <div className='container'>
                 <BarTop isZeroProject={isZeroProject} 
-                            isZeroPlatform={isZeroProject} 
+                            isZeroPlatform={true} 
                             NewProjectBtn={NewProject} 
                             TurnkeyProjectBtn={TurnkeyProject} 
                             AddPlatformBtn={AddPlatform}/>
@@ -31,7 +31,7 @@ export const BarFilter: FC = () => {
                 ?
                 <>
                     <BarTypesFilter />
-                    {typeFilter === projectTypes.savedProject || <BarStatusFilter />}
+                    {typeFilter === projectTypesFilter.savedProject || <BarStatusFilter />}
                 </>
                 :
                 <BarStatusFilter />

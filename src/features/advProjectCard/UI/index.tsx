@@ -1,16 +1,16 @@
 import { AdvProjectSubcard } from '@entities/advProjectSubcard';
 import { CancelIcon, CompliteIcon, MoreIcon, RocketIcon, SearchIcon, WaitIcon } from '@shared/assets';
 import { ChatIcon } from '@shared/assets';
-import { managerProjectStatus, projectTypes } from '@shared/config/filter';
-import { orderStatus } from '@shared/config/status';
+import { managerProjectStatusFilter, projectTypesFilter } from '@shared/config/filter';
+import { orderStatus } from '@shared/config/order';
 import { useAppSelector } from '@shared/store';
-import { IChannelChat, IItemCard } from '@shared/types/common';
+import { IChannelChat, IAdvProjectCard } from '@shared/types/common';
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './styles.module.scss';
 
 interface AdvProjectCardProps {
-    card: IItemCard;
+    card: IAdvProjectCard;
     FeedbackBtn: FC,
     AcceptBtn: FC,
     AcceptProjectBtn: FC,
@@ -87,7 +87,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
                 </div>
                 <hr />
                 <div className={styles.card__info}>
-                    {typeFilter === projectTypes.managerProject && statusFilter === managerProjectStatus.agreed
+                    {typeFilter === projectTypesFilter.managerProject && statusFilter === managerProjectStatusFilter.agreed
                     ?
                         < AcceptProjectBtn />
                     :
@@ -122,7 +122,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
                         <MoreIcon />
                     </button>
                 </div>
-                {typeFilter === projectTypes.managerProject &&
+                {typeFilter === projectTypesFilter.managerProject &&
                 <div className={styles.chat__btn}>
                     <button>
                         <ChatIcon />

@@ -1,13 +1,13 @@
 import { EyeIcon, ManIcon, SubsIcon, WomanIcon } from '@shared/assets';
-import { projectTypes } from '@shared/config/filter';
-import { chating, orderStatus } from '@shared/config/status';
-import { IChannelChat, ISubitemCard } from '@shared/types/common';
+import { projectTypesFilter } from '@shared/config/filter';
+import { chating, orderStatus } from '@shared/config/order';
+import { IChannelChat, IAdvProjectSubcard } from '@shared/types/common';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './styles.module.scss';
 
 interface AdvProjectSubcardProps {
-    subcard: ISubitemCard;
+    subcard: IAdvProjectSubcard;
     FeedbackBtn: FC,
     AcceptBtn: FC,
     RejectBtn: FC,
@@ -146,7 +146,7 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
                 <div>
                     <p>{t(`orders_advertiser.order_status.rejected.title`)}</p>
                     {
-                    typeFilter === projectTypes.managerProject 
+                    typeFilter === projectTypesFilter.managerProject 
                     ? <span>{t(`orders_advertiser.order_status.rejected.text2`)}</span>
                     : status === orderStatus.completed || <span>{t(`orders_advertiser.order_status.rejected.text`)}</span>
                     }
@@ -162,7 +162,7 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
                 ?
                 <div>
                     <p>{t(`orders_advertiser.order_status.posted.title`)}</p>
-                    {typeFilter === projectTypes.managerProject ||
+                    {typeFilter === projectTypesFilter.managerProject ||
                     <>
                         <span>{t(`orders_advertiser.order_status.posted.text`)}</span>
                         <div>
@@ -178,7 +178,7 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
                 ?
                 <div>
                     <p>{t(`orders_advertiser.order_status.accepted.title`)}</p>
-                    {typeFilter === projectTypes.managerProject || <span>{t(`orders_advertiser.order_status.accepted.text`)}</span>}
+                    {typeFilter === projectTypesFilter.managerProject || <span>{t(`orders_advertiser.order_status.accepted.text`)}</span>}
                     {<SeeBtn/>}
                 </div>
                 : subcard.status === orderStatus.moderation
@@ -209,7 +209,7 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
                 <></>
                 }
             </div>   
-            {typeFilter !== projectTypes.managerProject && 
+            {typeFilter !== projectTypesFilter.managerProject && 
                 <div  className={styles.subcard__right}>
                 {
                 chating.includes(subcard.status) && 

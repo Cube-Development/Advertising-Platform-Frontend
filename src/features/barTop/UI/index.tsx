@@ -34,7 +34,7 @@ export const BarTop: FC<BarTopProps> = ({isZeroProject, isZeroPlatform, NewProje
                 <>
                     <p>{t(`platforms_blogger.my_platform`)}</p>
 
-                    {!isZeroPlatform &&
+                    {isZeroPlatform &&
                     (<div>
                         {<AddPlatformBtn />}
                     </div>)}

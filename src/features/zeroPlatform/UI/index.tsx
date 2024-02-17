@@ -1,5 +1,5 @@
 import { SadSmileIcon, HappySmileIcon } from '@shared/assets';
-import { platformStatus } from '@shared/config/filter';
+import { platformStatusFilter } from '@shared/config/filter';
 import { useAppSelector } from '@shared/store';
 import {FC} from 'react';
 import { useTranslation } from 'react-i18next';
@@ -16,7 +16,7 @@ export const ZeroPlatform: FC<ZeroPlatformProps> = ({AddPlatformBtn}) => {
     return (
         <div className={styles.no__project}>
             <div className={styles.smile}>
-                {statusFilter === platformStatus.active
+                {statusFilter === platformStatusFilter.active
                 ?
                 <>
                 <div>
@@ -24,13 +24,13 @@ export const ZeroPlatform: FC<ZeroPlatformProps> = ({AddPlatformBtn}) => {
                 </div>
                 <p>{t(`platforms_blogger.no_platform`)}</p>
                 </>
-                : statusFilter === platformStatus.ban
+                : statusFilter === platformStatusFilter.ban
                 ?
                 <>
                 <div>
                     <HappySmileIcon />
                 </div>
-                <p>{t(`orders_advertiser.no_banned`)}</p>
+                <p>{t(`platforms_blogger.no_banned`)}</p>
                 </>
                 :
                 <></>

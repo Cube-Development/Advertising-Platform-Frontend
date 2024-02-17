@@ -7,7 +7,7 @@ export const advertiserMenu = [
   ];
   
   export const bloggerMenu = [
-    { item: {title: "burger_menu.platforms", path: paths.main}},
+    { item: {title: "burger_menu.platforms", path: paths.platforms}},
     { item: {title: "burger_menu.offers", path: paths.offers}},
 
   ];
