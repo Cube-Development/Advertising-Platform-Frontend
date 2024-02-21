@@ -1,4 +1,4 @@
-import { platformStatusFilter } from "@shared/config/filter";
+import { pageFilter, platformStatusFilter } from "@shared/config/filter";
 import { useAppSelector } from "@shared/store";
 import { BarFilter } from "@widgets/barFilter";
 import { BloggerModPlatform } from "@widgets/bloggerModPlatform";
@@ -38,10 +38,11 @@ const BloggerModPlatformCards = [BloggerModPlatformCard, BloggerModPlatformCard,
 
 export const PlatformsPage: FC = () => {
     const { statusFilter } = useAppSelector((state) => state.filterReducer);
+    const page = pageFilter.platform
 
     return (
-        <>
-        <BarFilter />
+      <>
+        <BarFilter page={page}/>
         
         {statusFilter === platformStatusFilter.active 
         ?

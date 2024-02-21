@@ -5,3 +5,9 @@ export enum platformStatus  {
     deactivate = 3,
     ban = 4,
 }
+
+export enum platformType {
+    telegram = 'telegram',
+    instagram = 'instagram',
+    youtube = 'youtube',
+}

@@ -585,6 +585,21 @@
 
     },
 
+    "add_platform": {
+        "add_platform": "Добавление канала",
+        "identification": "Идентификация канала",
+        "channel_info": "Информация о площадке",
+        "choose_platform": "Выберите платформу",
+        "paste_link": "Ссылка на площадку"
+    },
+
+    "add_platform_btn": {
+        "telegram": "Telegram",
+        "instagram": "Instagram",
+        "youtube": "Youtube",
+        "check": "Проверить"
+    },
+
     "order_btn": {
         "feedback": "Оставить отзыв",
         "accept": "Принять",

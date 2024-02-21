@@ -1,4 +1,4 @@
-import { myProjectStatusFilter, managerProjectStatusFilter, projectTypesFilter, platformStatusFilter } from "@shared/config/filter";
+import { myProjectStatusFilter, managerProjectStatusFilter, projectTypesFilter, platformStatusFilter, pageFilter } from "@shared/config/filter";
 import { useAppSelector } from "@shared/store";
 import { AdvProject } from "@widgets/advProject";
 import { BarFilter } from "@widgets/barFilter";
@@ -63,10 +63,11 @@ const sexType = {
 
 export const OrdersPage: FC = () => {
   const { typeFilter, statusFilter } = useAppSelector((state) => state.filterReducer);
+  const page = pageFilter.order
 
   return (
     <>
-      <BarFilter />
+      <BarFilter page={page}/>
       
       {typeFilter === projectTypesFilter.myProject && statusFilter === myProjectStatusFilter.active 
       ? 

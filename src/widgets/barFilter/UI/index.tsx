@@ -3,38 +3,41 @@ import { BarTop } from '@features/barTop';
 import { BarTypesFilter } from '@features/barTypesFilter';
 import { BarStatusFilter } from '@features/barStatusFilter';
 import { TurnkeyProject } from '@features/turnkeyProject';
-import { ZeroProject } from '@features/zeroProject';
 import { FC, useState } from 'react';
 import styles from './styles.module.scss';
 import { useAppSelector } from '@shared/store';
-import { projectTypesFilter } from '@shared/config/filter';
+import { pageFilter, projectTypesFilter } from '@shared/config/filter';
 import { AddPlatform } from '@features/addPlatform';
-import { roles } from '@shared/config/roles';
 
 
-export const BarFilter: FC = () => {
+interface BarFilterProps{
+    page: pageFilter
+}
+
+export const BarFilter: FC<BarFilterProps> = ({page}) => {
     const [isZeroProject, setZeroProject] = useState(true);
     const { typeFilter } = useAppSelector((state) => state.filterReducer);
-    const { role } = useAppSelector((state) => state.userReducer);
 
     return (
         <section className={styles.profile__filter}>
             <div className='container'>
                 <BarTop isZeroProject={isZeroProject} 
-                            isZeroPlatform={true} 
-                            NewProjectBtn={NewProject} 
-                            TurnkeyProjectBtn={TurnkeyProject} 
-                            AddPlatformBtn={AddPlatform}/>
+                        isZeroPlatform={true} 
+                        NewProjectBtn={NewProject} 
+                        TurnkeyProjectBtn={TurnkeyProject} 
+                        AddPlatformBtn={AddPlatform}
+                        page={page}/>
                 <hr />
+
                 {
-                role === roles.advertiser 
-                ?
-                <>
-                    <BarTypesFilter />
-                    {typeFilter === projectTypesFilter.savedProject || <BarStatusFilter />}
-                </>
-                :
-                <BarStatusFilter />
+                    page === pageFilter.order
+                    ?
+                    <>
+                        <BarTypesFilter />
+                        {typeFilter === projectTypesFilter.savedProject || <BarStatusFilter  page={page} />}
+                    </>
+                    :
+                    <BarStatusFilter page={page}/>
                 }
                 
             </div>

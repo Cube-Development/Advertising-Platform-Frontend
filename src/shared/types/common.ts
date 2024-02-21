@@ -124,3 +124,4 @@ export interface IBloggerOfferCard {
   price: number
   status: number
 }
+

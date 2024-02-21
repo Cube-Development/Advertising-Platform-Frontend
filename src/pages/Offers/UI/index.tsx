@@ -1,4 +1,4 @@
-import { offerStatusFilter } from "@shared/config/filter";
+import { offerStatusFilter, pageFilter } from "@shared/config/filter";
 import { useAppSelector } from "@shared/store";
 import { BarFilter } from "@widgets/barFilter";
 import { BloggerOffer } from "@widgets/bloggerOffer";
@@ -22,9 +22,11 @@ const BlogggerActiveCards = [
 export const OffersPage: FC = () => {
   const { statusFilter } = useAppSelector((state) => state.filterReducer);
 
+  const page = pageFilter.offer
+
   return (
     <>
-      <BarFilter />
+      <BarFilter page={page}/>
     
     {statusFilter === offerStatusFilter.active 
     ?

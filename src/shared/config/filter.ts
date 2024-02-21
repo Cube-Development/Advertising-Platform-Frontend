@@ -34,3 +34,10 @@ export enum offerStatusFilter  {
     moderation = 'moderation',
     uncomplite = 'uncomplite',
 }
+
+
+export enum pageFilter  {
+    order = 'order',
+    offer = 'offer',
+    platform = 'platform',
+}

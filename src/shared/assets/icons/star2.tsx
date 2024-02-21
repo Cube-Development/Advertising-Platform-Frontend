@@ -5,16 +5,16 @@ export const StarIcon2 = () => (
     <path d="M12.7896 2.74978H14.2632M13.5264 3.49977V1.99979" stroke="url(#paint2_linear_931_1526)" stroke-width="0.8" stroke-linecap="round"/>
     <defs>
         <linearGradient id="paint0_linear_931_1526" x1="2.21625" y1="9.12502" x2="8.75378" y2="2.73488" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#4772E6"/>
-        <stop offset="1" stop-color="#8E54E9"/>
+        <stop stopColor="#4772E6"/>
+        <stop offset="1" stopColor="#8E54E9"/>
         </linearGradient>
         <linearGradient id="paint1_linear_931_1526" x1="0.9094" y1="2.74996" x2="3.21674" y2="0.494586" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#4772E6"/>
-        <stop offset="1" stop-color="#8E54E9"/>
+        <stop stopColor="#4772E6"/>
+        <stop offset="1" stopColor="#8E54E9"/>
         </linearGradient>
         <linearGradient id="paint2_linear_931_1526" x1="12.7593" y1="2.74978" x2="13.5284" y2="1.99799" gradientUnits="userSpaceOnUse">
-        <stop stop-color="#4772E6"/>
-        <stop offset="1" stop-color="#8E54E9"/>
+        <stop stopColor="#4772E6"/>
+        <stop offset="1" stopColor="#8E54E9"/>
         </linearGradient>
     </defs>
     </svg>
