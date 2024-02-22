@@ -45,8 +45,8 @@ jobs:
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.DROPLET_IP }}
-          username: root
-          password: ${{ secrets.DROPLET_PASSWORD }}
+          username: cube
+          key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
             docker stop test-app || true
