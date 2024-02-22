@@ -1,16 +1,16 @@
-export enum projectTypes  {
+export enum projectTypesFilter  {
     myProject = 'myProject',
     managerProject = 'managerProject',
     savedProject = 'savedProject',
 }
 
-export enum myProjectStatus  {
+export enum myProjectStatusFilter  {
     active = 'active',
     complite = 'complite',
 
 }
 
-export enum managerProjectStatus  {
+export enum managerProjectStatusFilter  {
     active = 'active',
     complite = 'complite',
     develop = 'develop',
@@ -18,10 +18,26 @@ export enum managerProjectStatus  {
 }
 
 
-export enum platformStatus  {
+export enum platformStatusFilter  {
     active = 'active',
     moderation = 'moderation',
-    cancel = 'cancel',
+    reject = 'reject',
     deactivate = 'deactivate',
     ban = 'ban',
+}
+
+export enum offerStatusFilter  {
+    active = 'active',
+    waiting = 'waiting',
+    complite = 'complite',
+    reject = 'reject',
+    moderation = 'moderation',
+    uncomplite = 'uncomplite',
+}
+
+
+export enum pageFilter  {
+    order = 'order',
+    offer = 'offer',
+    platform = 'platform',
 }

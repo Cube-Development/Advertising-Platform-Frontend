@@ -31,7 +31,7 @@ export interface IStartProjectProps {
 }
 
 
-export interface IItemCard {
+export interface IAdvProjectCard {
   id: number
   name?: string
   date: string
@@ -44,10 +44,10 @@ export interface IItemCard {
   start: number
   consideration: number
   status: number
-  channels_list: ISubitemCard[]
+  channels_list: IAdvProjectSubcard[]
 }
 
-export interface IDevItemCard {
+export interface IAdvDevProjectCard {
   id: number
   name: string
   date: string
@@ -57,7 +57,7 @@ export interface IDevItemCard {
 }
 
 
-export interface ISubitemCard {
+export interface IAdvProjectSubcard {
   img: string
   name: string
   category: string
@@ -78,4 +78,64 @@ export interface ISubitemCard {
 
 export interface IChannelChat {
   id: number
+}
+
+
+export interface IBloggerPlatformCard {
+  id: number
+  img: string
+  name: string
+  author?: boolean
+  verified?: boolean
+  partner?: boolean
+  date_event?: string
+  date?: string
+  category: string
+  offers?: number
+  complite?: number
+  cancel?: number
+  wait?: number
+  start?: number
+  status: number
+}
+
+
+// export interface IBloggerModPlatformCard {
+//   id: number
+//   img: string
+//   name: string
+//   date: string
+//   category: string
+//   status: number
+// }
+
+
+export interface IBloggerOfferCard {
+  id: number
+  img: string
+  name: string
+  category: string
+  date: string
+  date_from: string
+  date_to: string
+  accommodation: string
+  time_from: string
+  time_to: string
+  price: number
+  status: number
+}
+
+
+
+export interface IOption {
+  label: string;
+  value: string;
+}
+
+export interface IOptions {
+  category: IOption[];
+  languages: IOption[];
+  region: IOption[];
+  sex: IOption[];
+  age: IOption[];
 }

@@ -1,6 +1,8 @@
 export { ArrowIcon } from './arrow';
 export { ArrowIcon2 } from './arrow2';
+export { ArrowIcon3 } from './arrow3';
 export { BookIcon } from './book';
+export { BackIcon } from './back';
 export { ChatIcon } from './chat';
 export { CalculatorIcon } from './calculator';
 export { CampaignIcon } from './campaign';
@@ -17,6 +19,7 @@ export { PlusIcon } from './plus';
 export { PlusIcon2 } from './plus2';
 export { ProfileIcon } from './profile';
 export { ProtectIcon } from './protect';
+export { ProtectIcon2 } from './protect2';
 export { QualityIcon } from './quality';
 export { RatingIcon } from './rating';
 export { RocketIcon } from './rocket';

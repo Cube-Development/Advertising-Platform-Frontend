@@ -1,80 +1,64 @@
-import { platformStatus } from "@shared/config/filter";
+import { pageFilter, platformStatusFilter } from "@shared/config/filter";
 import { useAppSelector } from "@shared/store";
 import { BarFilter } from "@widgets/barFilter";
+import { BloggerModPlatform } from "@widgets/bloggerModPlatform";
+import { BloggerPlatform } from "@widgets/bloggerPlatform";
 import { FC } from "react";
 
-const MyProjectAdvCard = {
-  id: 31231132,  date: "20.01.2024",  channels: 999,  views: 99999999,  cost: 99999999,  complite: 999,  cancel: 999,  wait: 999,  start: 999,  consideration: 999,  status: 0,  channels_list: [
-    {status: 0, img: "partner1.svg", name: "MDK", category: "Юмор и развлечения", date_from: "11.11.2024", date_to: "15.12.2024", accommodation: "1/24", time_from: "17:00", time_to: "17:00", price: 1500000000, subs: 301975, views: 34975, ER: 27.3, CPV: 121, sex: 0, },
-    {status: 1, img: "partner1.svg", name: "MDK", category: "Юмор и развлечения", date_from: "11.11.2024", date_to: "15.12.2024", accommodation: "1/24", time_from: "17:00", time_to: "17:00", price: 1500000000, subs: 301975, views: 34975, ER: 27.3, CPV: 121, sex: 0, },
-    {status: 2, img: "partner1.svg", name: "MDK", category: "Юмор и развлечения", date_from: "11.11.2024", date_to: "15.12.2024", accommodation: "1/24", time_from: "17:00", time_to: "17:00", price: 1500000000, subs: 301975, views: 34975, ER: 27.3, CPV: 121, sex: 0, },
-    {status: 3, img: "partner1.svg", name: "MDK", category: "Юмор и развлечения", date_from: "11.11.2024", date_to: "15.12.2024", accommodation: "1/24", time_from: "17:00", time_to: "17:00", price: 1500000000, subs: 301975, views: 34975, ER: 27.3, CPV: 121, sex: 0, },
-    {status: 4, img: "partner1.svg", name: "MDK", category: "Юмор и развлечения", date_from: "11.11.2024", date_to: "15.12.2024", accommodation: "1/24", time_from: "17:00", time_to: "17:00", price: 1500000000, subs: 301975, views: 34975, ER: 27.3, CPV: 121, sex: 0, },
-  ],
-};
+const BloggerPlatformCard = [
+  {id: 31231132, author: true, verified: true, partner: true,  img: "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",name: "Uzbek MDK", category: "Юмор и развлечения", offers: 5, complite: 999,  cancel: 999,  wait: 999,  start: 999,  status: 0},
+  {id: 31231132, verified: true, partner: true,  img: "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",name: "Uzbek MDK", category: "Юмор и развлечения", offers: 5, complite: 999,  cancel: 999,  wait: 999,  start: 999,  status: 0},
+  {id: 31231132, partner: true,  img: "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",name: "Uzbek MDK", category: "Юмор и развлечения", offers: 5, complite: 999,  cancel: 999,  wait: 999,  start: 999,  status: 0},
+]
 
-const MyProjectAdvCardComplited = {
-  id: 31231132,  date: "20.01.2024",  channels: 999,  views: 99999999,  cost: 99999999,  complite: 999,  cancel: 999,  wait: 999,  start: 999,  consideration: 999,  status: 1,  channels_list: [
-    {status: 0, img: "partner1.svg", name: "MDK", category: "Юмор и развлечения", date_from: "11.11.2024", date_to: "15.12.2024", accommodation: "1/24", time_from: "17:00", time_to: "17:00", price: 1500000000, subs: 301975, views: 34975, ER: 27.3, CPV: 121, sex: 0, },
-    {status: 1, img: "partner1.svg", name: "MDK", category: "Юмор и развлечения", date_from: "11.11.2024", date_to: "15.12.2024", accommodation: "1/24", time_from: "17:00", time_to: "17:00", price: 1500000000, subs: 301975, views: 34975, ER: 27.3, CPV: 121, sex: 0, },
-  ],
+const BloggerCancelPlatformCard =[ 
+{id: 31231132, date_event: "22/01/2024", img: "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",name: "Uzbek MDK", category: "Юмор и развлечения", offers: 5, complite: 999,  cancel: 999,  wait: 999,  start: 999,  status: 2},
+{id: 31231132, date_event: "22/01/2024", date: "22/01/2024", img: "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",name: "Uzbek MDK", category: "Юмор и развлечения", offers: 5, complite: 999,  cancel: 999,  wait: 999,  start: 999,  status: 2},
+]
+const BloggerModPlatformCard = {
+  id: 31231132, img: "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg", name: "Uzbek MDK", date: "22/01/2024", category: "Юмор и развлечения", status: 0
 };
 
 
-const ManagerProjectAdvCardComplited = {
-  id: 31231132,  date: "20.01.2024",  channels: 999,  views: 99999999,  cost: 99999999,  complite: 999,  cancel: 999,  wait: 999,  start: 999,  consideration: 999,  status: 0,  channels_list: [
-    {status: 0, img: "partner1.svg", name: "MDK", category: "Юмор и развлечения", date_from: "11.11.2024", date_to: "15.12.2024", accommodation: "1/24", time_from: "17:00", time_to: "17:00", price: 1500000000, subs: 301975, views: 34975, ER: 27.3, CPV: 121, sex: 0, },
-    {status: 1, img: "partner1.svg", name: "MDK", category: "Юмор и развлечения", date_from: "11.11.2024", date_to: "15.12.2024", accommodation: "1/24", time_from: "17:00", time_to: "17:00", price: 1500000000, subs: 301975, views: 34975, ER: 27.3, CPV: 121, sex: 0, },
-    {status: 5, img: "partner1.svg", name: "MDK", category: "Юмор и развлечения", date_from: "11.11.2024", date_to: "15.12.2024", accommodation: "1/24", time_from: "17:00", time_to: "17:00", price: 1500000000, subs: 301975, views: 34975, ER: 27.3, CPV: 121, sex: 0, },
-    {status: 2, img: "partner1.svg", name: "MDK", category: "Юмор и развлечения", date_from: "11.11.2024", date_to: "15.12.2024", accommodation: "1/24", time_from: "17:00", time_to: "17:00", price: 1500000000, subs: 301975, views: 34975, ER: 27.3, CPV: 121, sex: 0, },
-    {status: 3, img: "partner1.svg", name: "MDK", category: "Юмор и развлечения", date_from: "11.11.2024", date_to: "15.12.2024", accommodation: "1/24", time_from: "17:00", time_to: "17:00", price: 1500000000, subs: 301975, views: 34975, ER: 27.3, CPV: 121, sex: 0, },
-  ],
-};
+const BloggerDeactivatePlatformCard =[ 
+  {id: 31231132, author: true, verified: true, partner: true,   date_event: "22/01/2024", img: "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",name: "Uzbek MDK", category: "Юмор и развлечения", complite: 999,  cancel: 999,  wait: 999,  start: 999,  status: 3},
+  {id: 31231132, verified: true, partner: true,  date_event: "22/01/2024", img: "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",name: "Uzbek MDK", category: "Юмор и развлечения", complite: 999,  cancel: 999,  wait: 999,  start: 999,  status: 3},
+  {id: 31231132,  partner: true,  date_event: "22/01/2024", img: "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",name: "Uzbek MDK", category: "Юмор и развлечения", complite: 999,  cancel: 999,  wait: 999,  start: 999,  status: 3},
+  ]
 
-const ManagerProjectAdvCardAgreed = {
-  id: 31231132,  date: "20.01.2024",  channels: 999,  views: 99999999,  cost: 99999999,  complite: 999,  cancel: 999,  wait: 999,  start: 999,  consideration: 999,  status: 0,  channels_list: [
-    {status: 6, img: "partner1.svg", name: "MDK", category: "Юмор и развлечения", date_from: "11.11.2024", date_to: "15.12.2024", accommodation: "1/24", time_from: "17:00", time_to: "17:00", price: 1500000000, subs: 301975, views: 34975, ER: 27.3, CPV: 121, sex: 0, },
-    {status: 6, img: "partner1.svg", name: "MDK", category: "Юмор и развлечения", date_from: "11.11.2024", date_to: "15.12.2024", accommodation: "1/24", time_from: "17:00", time_to: "17:00", price: 1500000000, subs: 301975, views: 34975, ER: 27.3, CPV: 121, sex: 0, },
-    {status: 6, img: "partner1.svg", name: "MDK", category: "Юмор и развлечения", date_from: "11.11.2024", date_to: "15.12.2024", accommodation: "1/24", time_from: "17:00", time_to: "17:00", price: 1500000000, subs: 301975, views: 34975, ER: 27.3, CPV: 121, sex: 0, },
-    {status: 6, img: "partner1.svg", name: "MDK", category: "Юмор и развлечения", date_from: "11.11.2024", date_to: "15.12.2024", accommodation: "1/24", time_from: "17:00", time_to: "17:00", price: 1500000000, subs: 301975, views: 34975, ER: 27.3, CPV: 121, sex: 0, },
-    {status: 6, img: "partner1.svg", name: "MDK", category: "Юмор и развлечения", date_from: "11.11.2024", date_to: "15.12.2024", accommodation: "1/24", time_from: "17:00", time_to: "17:00", price: 1500000000, subs: 301975, views: 34975, ER: 27.3, CPV: 121, sex: 0, },
-  ],
-};
+const BloggerBanPlatformCard =[ 
+  {id: 31231132,  date_event: "22/01/2024", img: "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",name: "Uzbek MDK", category: "Юмор и развлечения", complite: 999,  cancel: 999,  wait: 999,  start: 999,  status: 4},
+  {id: 31231132,  date_event: "22/01/2024", img: "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",name: "Uzbek MDK", category: "Юмор и развлечения", complite: 999,  cancel: 999,  wait: 999,  start: 999,  status: 4},
+  ]
 
-const ManagerProjectAdvCardDev = {
-  id: 31231132,  date: "20.01.2024", cost: 99999999, status: 0, name: "Рекламная кампания", tarif: 1
-};
+const BloggerPlatformCards = BloggerPlatformCard;
+const BloggerModPlatformCards = [BloggerModPlatformCard, BloggerModPlatformCard, BloggerModPlatformCard];
 
-const MyProjectCards = [MyProjectAdvCard, MyProjectAdvCard, MyProjectAdvCard];
-const MyProjectCardsComplited = [MyProjectAdvCardComplited];
-const ManagerProjectAdvCardsDev = [ManagerProjectAdvCardDev, ManagerProjectAdvCardDev, ManagerProjectAdvCardDev];
-const ManagerProjectCards = [ManagerProjectAdvCardComplited, ManagerProjectAdvCardComplited];
-const ManagerProjectCardsAgreed = [ManagerProjectAdvCardAgreed, ManagerProjectAdvCardAgreed];
 
 
 export const PlatformsPage: FC = () => {
     const { statusFilter } = useAppSelector((state) => state.filterReducer);
-    const { role } = useAppSelector((state) => state.userReducer);
+    const page = pageFilter.platform
 
     return (
-        <>
-        <BarFilter />
+      <>
+        <BarFilter page={page}/>
         
-        {statusFilter === platformStatus.active 
+        {statusFilter === platformStatusFilter.active 
         ?
-        <>active</>
-        : statusFilter === platformStatus.moderation 
+        <BloggerPlatform cards={BloggerPlatformCards} />
+        : statusFilter === platformStatusFilter.moderation 
         ?
-        <>moderation</>
-        : statusFilter === platformStatus.cancel 
+        <BloggerModPlatform cards={BloggerModPlatformCards}/>
+        : statusFilter === platformStatusFilter.reject 
         ?
-        <>cancel</>
-        : statusFilter === platformStatus.deactivate 
+        <BloggerPlatform cards={BloggerCancelPlatformCard}/>
+        : statusFilter === platformStatusFilter.deactivate 
         ?
-        <>deactivate</>
-        : statusFilter === platformStatus.ban 
+        <BloggerPlatform cards={BloggerDeactivatePlatformCard}/>
+        : statusFilter === platformStatusFilter.ban 
         ?
-        <>ban</>
+        <BloggerPlatform cards={BloggerBanPlatformCard}/>
         :
         <></>
         }

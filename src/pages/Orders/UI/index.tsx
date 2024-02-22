@@ -1,4 +1,4 @@
-import { myProjectStatus, managerProjectStatus, projectTypes, platformStatus } from "@shared/config/filter";
+import { myProjectStatusFilter, managerProjectStatusFilter, projectTypesFilter, platformStatusFilter, pageFilter } from "@shared/config/filter";
 import { useAppSelector } from "@shared/store";
 import { AdvProject } from "@widgets/advProject";
 import { BarFilter } from "@widgets/barFilter";
@@ -63,31 +63,32 @@ const sexType = {
 
 export const OrdersPage: FC = () => {
   const { typeFilter, statusFilter } = useAppSelector((state) => state.filterReducer);
+  const page = pageFilter.order
 
   return (
     <>
-      <BarFilter />
+      <BarFilter page={page}/>
       
-      {typeFilter === projectTypes.myProject && statusFilter === myProjectStatus.active 
+      {typeFilter === projectTypesFilter.myProject && statusFilter === myProjectStatusFilter.active 
       ? 
       <AdvProject cards={MyProjectCards} />
-      : typeFilter === projectTypes.myProject && statusFilter === myProjectStatus.complite 
+      : typeFilter === projectTypesFilter.myProject && statusFilter === myProjectStatusFilter.complite 
       ?
       <AdvProject cards={MyProjectCardsComplited} />
-      : typeFilter === projectTypes.managerProject && statusFilter === managerProjectStatus.active 
+      : typeFilter === projectTypesFilter.managerProject && statusFilter === managerProjectStatusFilter.active 
       ?
       <AdvProject cards={ManagerProjectCards} />
-      : typeFilter === projectTypes.managerProject && statusFilter === managerProjectStatus.develop 
+      : typeFilter === projectTypesFilter.managerProject && statusFilter === managerProjectStatusFilter.develop 
       ?
       <AdvDevProject cards={ManagerProjectAdvCardsDev} />
-      : typeFilter === projectTypes.managerProject && statusFilter === managerProjectStatus.agreed 
+      : typeFilter === projectTypesFilter.managerProject && statusFilter === managerProjectStatusFilter.agreed 
       ?
       <AdvProject cards={ManagerProjectCardsAgreed} />
-      : typeFilter === projectTypes.managerProject && statusFilter === managerProjectStatus.complite 
+      : typeFilter === projectTypesFilter.managerProject && statusFilter === managerProjectStatusFilter.complite 
       ?
       // <DevProjectAdv cards={ManagerProjectAdvCardsDev} />
       <></>
-      : typeFilter === projectTypes.savedProject
+      : typeFilter === projectTypesFilter.savedProject
       ?
       <AdvDevProject cards={ManagerProjectAdvCardsDev} />
       : 
