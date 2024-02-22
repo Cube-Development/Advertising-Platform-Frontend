@@ -52,5 +52,5 @@ jobs:
             docker stop test-app || true
             docker rm test-app || true
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/test-app:latest
-            docker run -d --name test-app -v /apps/adv-blog/ui:/usr/share/nginx/html -p 3000:80 ${{ secrets.DOCKERHUB_USERNAME }}/test-app:latest
+            docker run -d -p 3000:4173 ${{ secrets.DOCKERHUB_USERNAME }}/test-app:latest
             docker ps
