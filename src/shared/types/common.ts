@@ -125,3 +125,17 @@ export interface IBloggerOfferCard {
   status: number
 }
 
+
+
+export interface IOption {
+  label: string;
+  value: string;
+}
+
+export interface IOptions {
+  category: IOption[];
+  languages: IOption[];
+  region: IOption[];
+  sex: IOption[];
+  age: IOption[];
+}

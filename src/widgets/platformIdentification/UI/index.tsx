@@ -6,22 +6,22 @@ import { useTranslation } from 'react-i18next';
 import styles from './styles.module.scss';
 
 
-interface FormData {
+interface FormDataIden {
     platform: platformType;
     link: string;
 }
 
 
 export const PlatformIdentification: FC = () => {
-    const isVisible = false
+    const isVisible = true
     const { t } = useTranslation();
     const {
         register,
         handleSubmit,
         formState: { errors },
-      } = useForm<FormData>();
+      } = useForm<FormDataIden>();
 
-    const onSubmit: SubmitHandler<FormData> = (data) => {
+    const onSubmit: SubmitHandler<FormDataIden> = (data) => {
     console.log(data);
     };
 

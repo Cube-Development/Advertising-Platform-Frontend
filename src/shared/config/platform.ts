@@ -11,3 +11,4 @@ export enum platformType {
     instagram = 'instagram',
     youtube = 'youtube',
 }
+
