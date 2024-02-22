@@ -49,12 +49,8 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            docker-compose -f docker-compose.yml pull
-            docker-compose -f docker-compose.yml down
-            docker-compose -f docker-compose.yml up
-          # script: |
-          #   docker stop test-app || true
-          #   docker rm test-app || true
-          #   docker pull ${{ secrets.DOCKERHUB_USERNAME }}/test-app:latest
-          #   docker run -d --name test-app -v /apps/adv-blog/ui:/usr/share/nginx/html -p 3000:80 ${{ secrets.DOCKERHUB_USERNAME }}/test-app:latest
-          #   docker ps
+            docker stop test-app || true
+            docker rm test-app || true
+            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/test-app:latest
+            docker run -d --name test-app -v /apps/adv-blog/ui:/usr/share/nginx/html -p 3000:80 ${{ secrets.DOCKERHUB_USERNAME }}/test-app:latest
+            docker ps
