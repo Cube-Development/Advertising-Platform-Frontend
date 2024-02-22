@@ -1,13 +1,13 @@
 import { TemplateIcon2 } from '@shared/assets';
-import { projectTypes } from '@shared/config/filter';
+import { projectTypesFilter } from '@shared/config/filter';
 import { useAppSelector } from '@shared/store';
-import { IDevItemCard } from '@shared/types/common';
+import { IAdvDevProjectCard } from '@shared/types/common';
 import {FC} from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './styles.module.scss'
 
 interface AdvDevProjectCardProps {
-    card: IDevItemCard;
+    card: IAdvDevProjectCard;
     ContinueBtn: FC
 }
 
@@ -49,7 +49,7 @@ export const AdvDevProjectCard: FC<AdvDevProjectCardProps> = ({card, ContinueBtn
                 </span>
             </div>
 
-            {typeFilter === projectTypes.savedProject
+            {typeFilter === projectTypesFilter.savedProject
             ?
             <>
                 <div className={styles.status}>

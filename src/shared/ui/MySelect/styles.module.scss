@@ -1,0 +1,16 @@
+.wrapper{
+    display: grid;
+    align-items: center;
+    padding: 20px 25px;
+
+    border-radius: 12px;
+    border: 1px solid var(--Inside-container, #BDBDBD);
+    background: var(--Personal-colors-White, #FFF);
+
+
+    color: #A3A0A0;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

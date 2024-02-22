@@ -1,5 +1,5 @@
 import { StarIcon3, SadSmileIcon } from '@shared/assets';
-import { projectTypes } from '@shared/config/filter';
+import { projectTypesFilter } from '@shared/config/filter';
 import { useAppSelector } from '@shared/store';
 import { IStartProjectProps } from '@shared/types/common';
 import { FC } from 'react';
@@ -18,7 +18,7 @@ export const ZeroProject: FC<ZeroProjectProps> = ({NewProjectBtn, TurnkeyProject
     return (
             <div className={styles.no__project}>
                 <div className={styles.smile}>
-                    {typeFilter === projectTypes.savedProject
+                    {typeFilter === projectTypesFilter.savedProject
                     ?
                     <>
                     <div>

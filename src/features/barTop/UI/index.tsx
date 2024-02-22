@@ -1,3 +1,4 @@
+import { pageFilter } from '@shared/config/filter';
 import { roles } from '@shared/config/roles';
 import { useAppSelector } from '@shared/store';
 import { IStartProjectProps } from '@shared/types/common';
@@ -11,15 +12,17 @@ interface BarTopProps {
     NewProjectBtn: FC<IStartProjectProps>;
     TurnkeyProjectBtn: FC<IStartProjectProps>,
     AddPlatformBtn: FC,
+    page: pageFilter,
 }
 
-export const BarTop: FC<BarTopProps> = ({isZeroProject, isZeroPlatform, NewProjectBtn, TurnkeyProjectBtn, AddPlatformBtn}) => {
+export const BarTop: FC<BarTopProps> = ({isZeroProject, isZeroPlatform, NewProjectBtn, TurnkeyProjectBtn, AddPlatformBtn, page}) => {
     const { t } = useTranslation();
-    const { role } = useAppSelector((state) => state.userReducer);
+    // const { role } = useAppSelector((state) => state.userReducer);
     return (
         <div className={styles.top}>
             {
-                role === roles.advertiser
+                // role === roles.advertiser
+                page === pageFilter.order
                 ?
                 <>
                     <p>{t(`orders_advertiser.my_campaign`)}</p>
@@ -30,16 +33,30 @@ export const BarTop: FC<BarTopProps> = ({isZeroProject, isZeroPlatform, NewProje
                         {<TurnkeyProjectBtn isZeroProject={isZeroProject} />}
                     </div>)}
                 </>
-                :
+                : page === pageFilter.platform
+                ?
                 <>
                     <p>{t(`platforms_blogger.my_platform`)}</p>
 
-                    {!isZeroPlatform &&
+                    {isZeroPlatform &&
                     (<div>
                         {<AddPlatformBtn />}
                     </div>)}
 
                 </>
+
+                : page === pageFilter.offer && 
+
+                <>
+                    <p>{t(`offers_blogger.my_offers`)}</p>
+
+                    {isZeroPlatform &&
+                    (<div>
+                        {<AddPlatformBtn />}
+                    </div>)}
+
+                </>
+                
             }
                 
         </div>
