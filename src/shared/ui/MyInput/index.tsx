@@ -3,6 +3,7 @@ import styles from './styles.module.scss';
 
 interface MyInputProps extends InputHTMLAttributes<HTMLInputElement> {}
 
-export const MyInput: FC<MyInputProps> = (props) => {
-  return <input className={styles.input} {...props} />;
+export const MyInput: FC<MyInputProps> = ({...props }) => {
+  props.className = `${styles.input} ${props.className}`;
+  return <input {...props} />;
 };

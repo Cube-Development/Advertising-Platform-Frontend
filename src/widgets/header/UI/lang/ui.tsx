@@ -7,10 +7,6 @@ export const Lang: FC = () => {
   const [language, setLanguage] = useState("RU");
   const menuRef = useRef<HTMLDivElement>(null);
 
-  const toggleMenu = () => {
-    setMenuOpen(!isMenuOpen);
-  };
-
   const closeMenu = () => {
     setMenuOpen(false);
   };
@@ -22,7 +18,7 @@ export const Lang: FC = () => {
   };
 
   const handleButtonClick = () => {
-    toggleMenu();
+    setMenuOpen(!isMenuOpen);
   };
 
   useEffect(() => {
