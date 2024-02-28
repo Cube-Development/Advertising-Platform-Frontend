@@ -106,6 +106,14 @@
     }
 }
 
+.platform__active{
+    color: var(--Personal-colors-White, #FFF);
+    border: 1px solid var(--Gradient-1, #4772E6);
+    background: var(--Gradient-1, linear-gradient(45deg, #4772E6 23.91%, #8E54E9 75.06%));
+    
+}
+
+
 .platform__input{
     border-radius: 12px;
     padding: 20px;

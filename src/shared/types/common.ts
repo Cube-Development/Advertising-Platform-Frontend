@@ -139,3 +139,21 @@ export interface IOptions {
   sex: IOption[];
   age: IOption[];
 }
+
+
+export interface IAccomm{
+  accomm: string
+}
+
+
+export interface IAddPLatformData {
+  category: number[];
+  languages: number[];
+  region: number[];
+  male: number;
+  female: number;
+  age: number[];
+  description: string;
+  text_limit: number;
+}
+

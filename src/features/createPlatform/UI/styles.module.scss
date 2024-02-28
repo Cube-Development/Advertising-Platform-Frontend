@@ -1,0 +1,103 @@
+.button{
+    border-radius: 8px;
+    padding: 10px;
+
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    position: relative;
+    div{
+        display: grid;
+        grid-auto-flow: column;
+        align-items: center;
+        column-gap: 10px;
+        justify-content: center;
+
+    }
+}
+
+
+.modal {
+    position: fixed;  
+    z-index: 1;  
+    left: 0;
+    top: 0;
+    width: 100%;  
+    height: 100%;  
+    overflow: auto;  
+    background-color: rgba(0, 0, 0, 0.5); 
+    backdrop-filter: blur(5px); 
+  }
+  
+  .modalContent {
+    display: grid;
+    align-items: center;
+    grid-auto-flow: row;
+    justify-content: center;
+    row-gap: 40px;
+    background-color: white;
+    margin: 15% auto;  
+    padding: 30px 60px;
+    border: 1px solid #888;
+
+    border-radius: 40px 40px 0px 40px;
+    max-width: 500px;
+    box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);  
+
+    color: var(--Personal-colors-black, #000);
+
+    div{
+        display: grid;
+        align-items: center;
+        grid-auto-flow: row;
+        justify-content: center;
+        justify-items: center;
+        text-align: center;
+        svg{
+            margin-bottom: 10px;
+        }
+
+        h1{
+            font-size: 20px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: normal;
+        }
+
+        p{
+            color: var(--Personal-colors-black, #000);
+            font-size: 14px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }
+        span{
+            font-weight: 600;
+        }
+    }
+
+
+  }
+
+  .text{
+    display: grid;
+    align-items: center;
+    grid-auto-flow: row;
+    row-gap: 20px;
+  }
+
+
+  .accept__btn{
+    padding: 10px;
+    width: auto;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--Gradients-Gradient-1, #4772E6);
+    color: var(--Gradients-Gradient-1, linear-gradient(45deg, #4772E6 23.91%, #8E54E9 75.06%));
+    background: #fff;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }

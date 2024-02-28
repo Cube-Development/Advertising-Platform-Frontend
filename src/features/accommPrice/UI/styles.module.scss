@@ -1,0 +1,67 @@
+.wrapper{
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 25px;
+    align-items: center;
+    text-align: center;
+}
+
+
+.input{
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: space-between;
+
+    border-radius: 12px;
+    border: 1px solid var(--Inside-container, #BDBDBD);
+    background: var(--Personal-colors-White, #FFF);
+
+    border-radius: 12px;
+    align-items: center;
+    position: relative;
+    padding-right: 20px;
+    
+    color: var(--Personal-colors-black, #000);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    
+    input{
+        padding: 20px 15px;
+        &::placeholder{
+            color: var(--Text-sample, #A3A0A0);
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: normal;
+        }            
+    }
+}
+
+// .input::after {
+//     content: "USD";
+//     position: absolute;
+//     right: 10px;
+//     top: 50%;
+//     transform: translateY(-50%);
+//     color: #777;
+//   }
+
+.no__active{
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: var(--Gradient-1, linear-gradient(45deg, #4772E6 23.91%, #8E54E9 75.06%));
+    border: 1px solid var(--Gradients-Gradient-1, #4772E6);
+    background: var(--Personal-colors-White, #FFF);
+}
+
+.active{
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
