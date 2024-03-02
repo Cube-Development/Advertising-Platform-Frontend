@@ -24,7 +24,7 @@ export const Header: FC = () => {
 
   return (
     <header className={`${styles.wrapper}`}>
-      <div className={`${styles.row}`}>
+      <div className={`${styles.row__left}`}>
         {isAuth && <DropdownMenu currentRole={role} toggleRole={toggleRole} />}
         <Logo currentRole={role} />
         <Nav isAuth={isAuth} currentRole={role} />
@@ -35,6 +35,7 @@ export const Header: FC = () => {
         <Lang />
         {isAuth ? (
           <>
+            <div className={styles.separator}></div>
             <Chat />
             <Profile toggleLogout={toggleLogout} />
           </>

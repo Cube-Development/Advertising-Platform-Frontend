@@ -45,7 +45,7 @@
     max-width: 500px;
     box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.2);  
 
-    color: var(--Personal-colors-black, #000);
+    color: var(--Personal-colors-black);
 
     div{
         display: grid;
@@ -66,7 +66,7 @@
         }
 
         p{
-            color: var(--Personal-colors-black, #000);
+            color: var(--Personal-colors-black);
             font-size: 14px;
             font-style: normal;
             font-weight: 400;
@@ -93,8 +93,8 @@
     width: auto;
     justify-content: center;
     align-items: center;
-    border: 1px solid var(--Gradients-Gradient-1, #4772E6);
-    color: var(--Gradients-Gradient-1, linear-gradient(45deg, #4772E6 23.91%, #8E54E9 75.06%));
+    border: 1px solid #4772E6;
+    color: var(--Gradients-Gradient-1);
     background: #fff;
     font-size: 16px;
     font-style: normal;

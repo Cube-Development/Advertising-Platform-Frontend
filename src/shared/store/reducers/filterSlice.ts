@@ -1,14 +1,16 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { myProjectStatusFilter, projectTypesFilter } from '@shared/config/filter';
+import { myProjectStatusFilter, profileFilter, projectTypesFilter } from '@shared/config/filter';
 
 interface FilterState {
     typeFilter: string;
     statusFilter: string;
+    profileFilter: string;
 };
   
 const initialState: FilterState = {
     typeFilter: projectTypesFilter.myProject,
-    statusFilter: myProjectStatusFilter.active
+    statusFilter: myProjectStatusFilter.active,
+    profileFilter: profileFilter.selfEmployed,
 };
 
 export const filterSlice = createSlice({
@@ -21,6 +23,10 @@ export const filterSlice = createSlice({
     setStatusFilter: (state, action: PayloadAction<string>) => {
         state.statusFilter = action.payload;
     },
+    setProfileFilter: (state, action: PayloadAction<string>) => {
+        state.profileFilter = action.payload;
+    },
+
   },
 });
 

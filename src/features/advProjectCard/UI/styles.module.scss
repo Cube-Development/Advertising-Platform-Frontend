@@ -4,7 +4,7 @@
     grid-auto-flow: row;
 
     border-radius: 12px;
-    border: 1px solid var(--Gradients-Gradient-1, #4772E6);
+    border: 1px solid #4772E6;
     padding-top: 20px ;
     margin-bottom: 10px;
     // max-width: 1105px;
@@ -32,7 +32,7 @@
         font-style: normal;
         font-weight: 600;
         line-height: normal;
-        color: var(--first-text);
+        color: var(--Personal-colors-black);
     }
 
     span{
@@ -71,7 +71,7 @@
             font-style: normal;
             font-weight: 600;
             line-height: normal;
-            color: var(--first-text);
+            color: var(--Personal-colors-black);
         }
     }
 }
@@ -100,7 +100,7 @@
         display: grid;
         grid-auto-flow: column;
         column-gap: 10px;
-        color: car(--first-text);
+        color: car(--Personal-colors-black);
 
         p{
 
@@ -111,7 +111,7 @@
         }
 
         span{
-            color: #000;
+            color: var(--Personal-colors-black);
             font-size: 14px;
             font-style: normal;
             font-weight: 500;
@@ -127,7 +127,7 @@
     grid-auto-flow: column;
     align-items: center;
     justify-content: space-between;
-    color: var(--first-text);
+    color: var(--Personal-colors-black);
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -141,7 +141,7 @@
 
         padding: 10px 20px;
         border-radius: 8px;
-        border: 1px solid var(--Gradients-Gradient-1, #4772E6); 
+        border: 1px solid #4772E6; 
     }
 }
 
@@ -178,11 +178,11 @@
 
 .more{
     margin-top: 20px;
-    background: var(--Gradient-1, linear-gradient(45deg, #4772E6 23.91%, #8E54E9 75.06%));
+    background: var(--Gradients-Gradient-1);
 }
 
 .less{
-    color: var(--Gradient-1, linear-gradient(45deg, #4772E6 23.91%, #8E54E9 75.06%));
+    color: var(--Gradients-Gradient-1);
     background: #FFF;
 }
 
@@ -195,6 +195,6 @@
     margin-top: 20px;
     padding: 10px 10px 0 10px;
     border-radius: 12px 12px 0 0;
-    border-top: 1px solid var(--Gradient-1, #4772E6);
-    background: var(--Personal-colors-White, #FFF);
+    border-top: 1px solid var(--Gradients-Gradient-1);
+    background: var(--Personal-colors-White);
 }

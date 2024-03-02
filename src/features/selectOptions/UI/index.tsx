@@ -1,10 +1,9 @@
 import { IAddPLatformData, IOption } from '@shared/types/common';
-import { MySelect } from '@shared/ui/MySelect';
 import { FC, useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import styles from './styles.module.scss'
 import { InfoIcon } from '@shared/assets';
-import { UseFormRegister, UseFormSetValue } from 'react-hook-form';
+import { UseFormSetValue } from 'react-hook-form';
 
 
 interface SelectOptionsProps {
@@ -36,7 +35,6 @@ export const SelectOptions: FC<SelectOptionsProps> = ({title, text, defaultValue
     //             defaultValue={defaultValue}/>
     //     </div>
     // );
-
 
 
   const [selectedOptions, setSelectedOptions] = useState<(string | null)[]>([]);

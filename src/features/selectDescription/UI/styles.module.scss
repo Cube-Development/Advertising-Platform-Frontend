@@ -5,7 +5,7 @@
     row-gap: 50px;
 
     p{
-        color: var(--Personal-colors-black, #000);
+        color: var(--Personal-colors-black);
         font-size: 16px;
         font-style: normal;
         font-weight: 500;
@@ -43,8 +43,8 @@
     border-radius: 12px;
     padding: 30px 20px;
     margin: 0 100px;
-    border: 1px solid var(--Inside-container, #BDBDBD);
-    background: var(--Personal-colors-White, #FFF);
+    border: 1px solid var(--Inside-container);
+    background: var(--Personal-colors-White);
     height: 250px;
     overflow: hidden; 
     color: #A3A0A0;

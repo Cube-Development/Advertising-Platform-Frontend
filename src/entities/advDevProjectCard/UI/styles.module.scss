@@ -4,7 +4,7 @@
     padding: 10px 30px;
     border-radius: 12px;
     margin-bottom: 10px;
-    border: 1px solid var(--Gradient-1, #4772E6);
+    border: 1px solid #4772E6;
 }
 
 .title{
@@ -22,7 +22,7 @@
         font-style: normal;
         font-weight: 600;
         line-height: normal;
-        color: var(--first-text);
+        color: var(--Personal-colors-black);
     }
     span{
         display: grid;
@@ -52,7 +52,7 @@
     max-width: 200px;
 
     line-height: normal;
-    color: var(--first-text);
+    color: var(--Personal-colors-black);
 
     border-right:  1px solid #D9D9D9;
     padding: 0 20px;

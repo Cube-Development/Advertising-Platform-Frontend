@@ -2,9 +2,10 @@
     background-image: url('images/assets/background2.png');
     background-size: cover;
     background-position: center;
-    border-radius: 50px; 
+    border-radius: 50px 50px 0 0 ; 
     padding: 40px 0; 
-    margin-bottom: 150px;
+    max-width: var(--container-width);
+    margin: 0 auto 150px auto;
 
     svg{
       width: 40px;
@@ -27,7 +28,7 @@
 
 
 .calculate__title{
-  color: var(--first-text);
+  color: var(--Personal-colors-black);
   font-size: 44px;
   font-style: normal;
   font-weight: 700;
@@ -43,7 +44,7 @@
     line-height: normal;
     padding: 12px 20px 15px 20px;
     border-radius: 12px;
-    background: var(--Gradient-1, linear-gradient(90deg, #4772E6 0.03%, #8E54E9 100.36%));
+    background: var(--Gradients-Gradient-1);
     margin-bottom: 20px;
 }
 
@@ -69,7 +70,7 @@
   white-space: nowrap;
   flex-shrink: 0;
   border-radius: 40px 40px 0px 40px;
-  border: 2px solid var(--Gradient-1, #4772E6);
+  border: 2px solid var(--Gradients-Gradient-1);
   background: rgba(255, 255, 255, 0.85);
   padding: 50px;
 }
@@ -89,7 +90,7 @@
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  color: var(--Gradient-1, linear-gradient(93deg, #4772E6 2.37%, #8E54E9 52.62%));
+  color: var(--Gradients-Gradient-1);
 }
 
 .button{

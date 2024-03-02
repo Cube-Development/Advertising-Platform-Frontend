@@ -5,7 +5,7 @@
     justify-content: space-between;
 
     p{
-        color: var(--Personal-colors-black, #000);
+        color: var(--Personal-colors-black);
         font-size: 16px;
         font-style: normal;
         font-weight: 500;
@@ -53,7 +53,7 @@
         padding: 10px 15px;
         border-radius: 5px;
         border: 1px solid #61A5F5;
-        color: var(--first-text);
+        color: var(--Personal-colors-black);
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
