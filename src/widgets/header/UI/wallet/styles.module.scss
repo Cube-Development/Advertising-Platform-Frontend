@@ -1,9 +1,7 @@
 .wallet {
-    margin-right: 30px;
-
     border-radius: 12px;
-    border: 1px solid var(--Gradient-1, #4772E6);
-    background: var(--Gradient-1, linear-gradient(93deg, #4772E6 2.37%, #8E54E9 52.62%));
+    border: 1px solid #4772E6;
+    background: var(--Gradients-Gradient-1);
     transition: background 0.3s ease, color 0.3s ease; /* Плавная смена цвета */
     color: #fff;
    
@@ -45,11 +43,10 @@
 
 
 .active__wallet{
-  border: 1px solid var(--Gradient-1, #4772E6);
+  border: 1px solid #4772E6;
   background: rgba(255, 255, 255, 0.25);
-  color: var(--first-text);
+  color: var(--Personal-colors-black);
   transition: background 0.3s ease, color 0.3s ease; /* Плавная смена цвета */
-
 
   svg{
     border-left: rgba(255, 255, 255, 0.25);
@@ -65,7 +62,6 @@
     position: absolute;
     left: 0;
     background-color: #fff;
-    border: 1px solid #ccc;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 1;
     min-width: 200px;
@@ -75,8 +71,7 @@
     font-style: normal;
     font-weight: 500;
     line-height: 0.75;
-    color: var(--first-text);
-
+    color: var(--Personal-colors-black);
     overflow: hidden;
 
     ul {
@@ -92,7 +87,7 @@
   
       &:hover {
         background-color: #f0f0f0;
-        color: var(--Gradient-1, linear-gradient(93deg, #4772E6 2.37%, #8E54E9 52.62%));
+        color: var(--Gradients-Gradient-1);
       }
     }
   }

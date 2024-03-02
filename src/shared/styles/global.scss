@@ -5,12 +5,39 @@
 
 body {
   font-family: 'Montserrat', sans-serif;
-  display: flex;
-  justify-content: space-around;
+  
+  &.sidebar-open {
+    overflow: hidden;
+
+    &::after{
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      transition: opacity 1s ease-in;
+      
+      backdrop-filter: blur(3px); 
+    }
+  }
+  
 }
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: var(--modal-z-index - 1);
+}
+
 
 .container {
   max-width: var(--container-width);
-  padding: 0 50px;
-  // display: grid;
+  padding: 0 var(--container-padding-side);
+  margin: 0 auto;
 }

@@ -10,12 +10,10 @@ export const PlatformTop: FC = () => {
             <button>
                 <BackIcon/>
             </button>
-
             <div>
                 <p>{t(`add_platform.add_platform`)}</p>
                 <ArrowIcon3/>
             </div>
-            
         </div>
     );
 };

@@ -7,7 +7,7 @@
     height: 3px;
     border-radius: 10px;
     opacity: 0.65;
-    background: var(--Gradient-1, linear-gradient(93deg, #4772E6 2.37%, #8E54E9 52.62%));
+    background: var(--Gradients-Gradient-1);
     outline: none;
     transition: background 0.2s;
 }
@@ -17,7 +17,7 @@
     appearance: none;
     width: 15px;
     height: 15px;
-    background: var(--Gradient-2, radial-gradient(419.34% 136.52% at 0% 100%, rgba(255, 255, 255, 0.20) 0%, rgba(125, 117, 117, 0.00) 100%), linear-gradient(90deg, #FF2F66 0%, rgba(254, 110, 48, 0.99) 100%));
+    background: var(--Gradients-Gradient-2);
     border-radius: 50%;
     cursor: pointer;
   }
@@ -28,7 +28,7 @@
 }
 
 .value {
-    color: var(--first-text);
+    color: var(--Personal-colors-black);
     font-size: 20px;
     font-style: normal;
     font-weight: 600;
@@ -41,5 +41,5 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    color: var(--Gradient-2, linear-gradient(90deg, #FF2F66 0%, rgba(254, 110, 48, 0.99) 100%));
+    color: var(--Gradients-Gradient-2);
   }

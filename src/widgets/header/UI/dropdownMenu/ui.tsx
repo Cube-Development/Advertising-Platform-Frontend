@@ -16,6 +16,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
   currentRole,
   toggleRole,
 }) => {
+
   const { t } = useTranslation();
 
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -31,17 +32,32 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
     }
   };
 
+  // useEffect(() => {
+  //   document.addEventListener("click", handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener("click", handleClickOutside);
+  //   };
+  // }, []);
+
+
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
+    if (isMenuOpen) {
+      document.body.classList.add("sidebar-open");
+    } else {
+      document.body.classList.remove("sidebar-open");
+    }
     return () => {
+      document.body.classList.remove("sidebar-open");
       document.removeEventListener("click", handleClickOutside);
     };
-  }, []);
+  }, [isMenuOpen]);
 
   const combinedMenu =
     currentRole === roles.advertiser
       ? [...advertiserMenu, ...commonMenu]
       : [...bloggerMenu, ...commonMenu];
+
   return (
     <div className={styles.dropdown} ref={menuRef}>
       <button onClick={toggleMenu} className={styles.burger__icon_btn}>
@@ -57,7 +73,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
               <div className={styles.close__icon} />
             </button>
           </div>
-
+          <hr />
           <div className={styles.menu__switcher}>
             <div className={styles.switcher__row}>
               <Link to={paths.main}>
@@ -96,5 +112,3 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
     </div>
   );
 };
-
-export default DropdownMenu;

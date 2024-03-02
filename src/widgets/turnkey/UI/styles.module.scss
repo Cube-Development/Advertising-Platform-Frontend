@@ -2,9 +2,10 @@
   background-image: url('images/assets/background2.png');
   background-size: cover;
   background-position: center;
-  border-radius: 50px; 
+  border-radius: 50px 50px 0 0 ; 
   padding: 40px 0; 
-  margin-bottom: 150px;
+  max-width: var(--container-width);
+  margin: 0 auto 150px auto;
 
   svg{
     width: 40px;
@@ -30,7 +31,7 @@
   }
   
   .turnkey__title{
-    color: var(--first-text);
+    color: var(--Personal-colors-black);
     font-size: 44px;
     font-style: normal;
     font-weight: 700;
@@ -45,7 +46,7 @@
     line-height: normal;
     padding: 12px 20px 15px 20px;
     border-radius: 12px;
-    background: var(--Gradient-1, linear-gradient(90deg, #4772E6 0.03%, #8E54E9 100.36%));
+    background: var(--Gradients-Gradient-1);
     margin-bottom: 20px;
   }
   

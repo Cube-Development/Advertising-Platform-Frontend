@@ -1,10 +1,9 @@
 .wrapper{
-
-    max-width: 1133px;
+    max-width: var(--container-width);
     border-radius: 40px;
-    border: 1px solid var(--Personal-colors-grey, #BDBDBD);
-    background: var(--Personal-colors-White, #FFF);
-    margin-bottom: 50px;
+    border: 1px solid var(--Personal-colors-grey);
+    background: var(--Personal-colors-White);
+    margin: 0 auto 50px auto;
 }
 
 .top{
@@ -15,7 +14,7 @@
 
     padding: 50px 40px;
     border-radius: 40px 40px 0px 40px;
-    background: var(--Gradient-1, linear-gradient(45deg, #4772E6 23.91%, #8E54E9 75.06%));
+    background: var(--Gradients-Gradient-1);
 
     justify-content: start;
     color: #FFF;
@@ -54,12 +53,12 @@
 
 .complite{
     border-radius: 40px;
-    color: var(--Gradient-1, linear-gradient(45deg, #4772E6 23.91%, #8E54E9 75.06%));
-    border: 1px solid var(--Gradient-1, #4772E6);
-    background: var(--Personal-colors-White, #FFF);
+    color: var(--Gradients-Gradient-1);
+    border: 1px solid #4772E6;
+    background: var(--Personal-colors-White);
 
     span {
-        border: 4px solid var(--Gradient-1, #4772E6);
+        border: 4px solid var(--Gradients-Gradient-1);
     }
 }
 

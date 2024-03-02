@@ -34,7 +34,7 @@ export const Lang: FC = () => {
   };
 
   return (
-      <div className={styles.wrapper} ref={menuRef}>
+      <div className={`${styles.wrapper} ${isMenuOpen && styles.active}`} ref={menuRef}>
         <button onClick={handleButtonClick}>{language}</button>
 
         {isMenuOpen && (
