@@ -1,0 +1,35 @@
+.types{
+    border-radius: 18px;
+    border: 1px solid var(--Gradient-1, #4772E6);
+    width: 100%;
+
+
+    ul{
+        display: grid;
+        grid-auto-flow: column;
+        column-gap: 25px;
+        justify-content: center;
+        align-items: center;
+
+        font-size: 28px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        line-height: 0.75;
+        color: var(--Gradient-1, linear-gradient(45deg, #4772E6 23.91%, #8E54E9 75.06%));
+    }
+
+    li{
+        text-align: center;
+        padding: 10px;
+        min-width: 100px;
+        cursor: pointer;
+    }
+
+}
+
+.active{
+    border-radius: 12px;
+    background: var(--Gradient-1, linear-gradient(45deg, #4772E6 23.91%, #8E54E9 75.06%));
+    color: #fff;
+}

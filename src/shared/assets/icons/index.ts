@@ -19,6 +19,7 @@ export { NoIcon } from './no';
 export { PlusIcon } from './plus';
 export { PlusIcon2 } from './plus2';
 export { ProfileIcon } from './profile';
+export { ProfileIcon2 } from './profile2';
 export { ProtectIcon } from './protect';
 export { ProtectIcon2 } from './protect2';
 export { QualityIcon } from './quality';
