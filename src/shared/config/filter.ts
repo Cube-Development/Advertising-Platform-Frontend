@@ -41,3 +41,9 @@ export enum pageFilter  {
     offer = 'offer',
     platform = 'platform',
 }
+
+export enum profileFilter  {
+    individual = 'individual',
+    entity = 'entity',
+    selfEmployed = 'selfEmployed',
+}

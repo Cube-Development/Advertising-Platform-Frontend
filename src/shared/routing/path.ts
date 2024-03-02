@@ -8,6 +8,7 @@ export enum paths  {
     turnkey = '/turnkey',
     wallet = '/wallet',
     addPlatform = '/addplatform',
+    addProfile = '/addprofile',
     fullServise = '/fullServise',
     orders = '/orders',
     offers = '/offers',

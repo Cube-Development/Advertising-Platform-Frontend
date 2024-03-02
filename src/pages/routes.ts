@@ -13,6 +13,7 @@ import { TurnkeyPage } from "./TurnkeyPage";
 import { PlatformsPage } from "./Platforms";
 import { OffersPage } from "./Offers";
 import { OrdersPage } from "./Orders";
+import { AddProfilePage } from "./AddProfile";
 
 export interface IRoute {
     path: string;
@@ -26,6 +27,7 @@ export const privateBloggerRoutes: IRoute[] = [
     {path: paths.notFound, component: NotFoundPage},
     {path: paths.wallet, component: WalletPage},
     {path: paths.addPlatform, component: AddPlatformPage},
+    {path: paths.addProfile, component: AddProfilePage},
     {path: paths.turnkey, component: TurnkeyPage},
     {path: paths.platforms, component: PlatformsPage},
     {path: paths.offers, component: OffersPage},
@@ -35,6 +37,7 @@ export const privateAdvertiserRoutes: IRoute[] = [
     {path: paths.main, component: MainPage},
     {path: paths.profile, component: ProfilePage},
     {path: paths.notFound, component: NotFoundPage},
+    {path: paths.addProfile, component: AddProfilePage},
     {path: paths.fullServise, component: FullServicePage},
     {path: paths.catalog, component: CatalogPage},
     {path: paths.wallet, component: WalletPage},

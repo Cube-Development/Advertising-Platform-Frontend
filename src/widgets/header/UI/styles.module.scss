@@ -6,11 +6,25 @@
     align-items: center;
     height: 80px;
     border-bottom: 0.5px solid rgba(0, 0, 0, 0.30);
-    // max-width: var(--container-width);
+    width: 100%;
 }
 
 .row{
     display: grid;
     grid-auto-flow: column;
+    column-gap: 20px;
     align-items: center;
 }
+
+.row__left{
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 50px;
+    align-items: center;
+}
+
+.separator{
+    height: 100%;
+    border-right: 0.5px solid #B2B2B2;;
+}
+  

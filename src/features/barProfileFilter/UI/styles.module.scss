@@ -1,0 +1,35 @@
+.types{
+    border-radius: 18px;
+    border: 1px solid #4772E6;
+    width: 100%;
+
+
+    ul{
+        display: grid;
+        grid-auto-flow: column;
+        column-gap: 25px;
+        justify-content: center;
+        align-items: center;
+
+        font-size: 28px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+        line-height: 0.75;
+        color: var(--Gradients-Gradient-1);
+    }
+
+    li{
+        text-align: center;
+        padding: 10px;
+        min-width: 100px;
+        cursor: pointer;
+    }
+
+}
+
+.active{
+    border-radius: 12px;
+    background: var(--Gradients-Gradient-1);
+    color: #fff;
+}

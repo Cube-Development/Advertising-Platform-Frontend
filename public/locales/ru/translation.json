@@ -640,6 +640,106 @@
             }
         }
     },
+    "add_profile": {
+        "add_profile": "Добавление данных",
+        "types": {
+            "selfemployedaccount": "Самозанятый",
+            "entity": "Юридическое лицо",
+            "individual": "ИП"
+        },
+        "basic_info": {
+            "basic_info": "Общие данные",
+            "name": {
+                "title": "Ф.И.О",
+                "default_value": "sample",
+                 "text": ""
+            },
+            "registration_number": {
+                "title": "Номер регистрации", 
+                "default_value": "sample",
+                "text": ""
+            },
+            "registration_date": {
+                "title": "Дата регистрации", 
+                "default_value": "sample",
+                "text": ""
+            },      
+            "PNFL": {
+                "title": "ПИНФЛ",
+                "default_value": "sample",
+                 "text": ""
+                },
+            "company_name": {
+                "title": "Наименование фирмы", 
+                "default_value": "sample",
+                "text": ""
+            },
+            "company_address": {
+                "title": "Юридический адрес", 
+                "default_value": "sample",
+                "text": ""
+            },
+            "INN": {
+                "title": "ИНН", 
+                "default_value": "sample",
+                "text": ""
+            },
+            "individual_name": {
+                "title": "Наименование ИП", 
+                "default_value": "sample",
+                "text": ""
+            }
+        },
+        "bank_data": {
+            "bank_data": "Банковские данные",
+            "bank_mfo": {
+                "title": "МФО банка", 
+                "default_value": "sample",
+                "text": ""
+            },
+            "bank_name": {
+                "title": "Наименование банка", 
+                "default_value": "sample",
+                "text": ""
+            },
+            "checking_account": {
+                "title": "Расчетный счёт", 
+                "default_value": "sample",
+                "text": ""
+            },
+            "transit_account": {
+                "title": "Транзитный счёт", 
+                "default_value": "sample",
+                "text": ""
+            },
+            "card_data": {
+                "title": "Данные карты", 
+                "default_value": "sample",
+                "text": ""
+            }
+        },
+        "contact": {
+            "contact": "Контактные данные",
+            "phone": {
+                "title": "Номер телефона", 
+                "default_value": "sample",
+                "text": ""
+            },
+            "email": {
+                "title": "E-mail", 
+                "default_value": "sample",
+                "text": ""
+            }
+        },
+
+        "accept": {
+            "text1" : "Достоверность данных подтверждаю, с",
+            "span1" : "условиями сервиса",
+            "and": "и",
+            "span2" : "правилами оферты",
+            "text2" : "ознакомлен и принимаю их."
+        }
+    },
 
     "add_platform_btn": {
         "telegram": "Telegram",

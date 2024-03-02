@@ -12,7 +12,7 @@
 //     }
 
 //     p{
-//         color: var(--Personal-colors-black, #000);
+//         color: var(--Personal-colors-black);
 //         font-size: 16px;
 //         font-style: normal;
 //         font-weight: 500;
@@ -46,7 +46,7 @@
 
     
     p{
-        color: var(--Personal-colors-black, #000);
+        color: var(--Personal-colors-black);
         font-size: 16px;
         font-style: normal;
         font-weight: 500;
@@ -61,9 +61,9 @@
         border-radius: 12px;
         min-width: 400px;
 
-        border: 1px solid var(--Gradient-1, #4772E6);
-        background: var(--Personal-colors-White, #FFF);
-        color: var(--Gradient-1, linear-gradient(45deg, #4772E6 23.91%, #8E54E9 75.06%));
+        border: 1px solid #4772E6;
+        background: var(--Personal-colors-White);
+        color: var(--Gradients-Gradient-1);
 
         cursor: pointer;
         position: relative;

@@ -1,0 +1,10 @@
+.wrapper{
+    display: grid;
+    grid-auto-flow: row;
+    align-items: center;
+    padding: 40px 50px 50px 50px;
+    margin-bottom: 150px;
+    border-radius: 40px;
+    border: 1px solid var(--Inside-container);
+    background: var(--Personal-colors-White);
+}

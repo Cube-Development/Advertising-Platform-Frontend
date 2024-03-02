@@ -13,7 +13,7 @@
         font-weight: 500;
         line-height: normal;
         line-height: 0.75;
-        color: var(--first-text);
+        color: var(--Personal-colors-black);
     }
 
     li{
@@ -28,6 +28,6 @@
 .active{
 
     border-radius: 12px;
-    background: var(--Gradient-1, linear-gradient(45deg, #4772E6 23.91%, #8E54E9 75.06%));
+    background: var(--Gradients-Gradient-1);
     color: #fff;
 }

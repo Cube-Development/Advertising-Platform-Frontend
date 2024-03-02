@@ -34,15 +34,15 @@
 }
 
 .standard{
-    border: 2px solid var(--Gradient-1, #4772E6);
+    border: 2px solid var(--Gradients-Gradient-1);
 }
 
 .complex{
-    border: 2px solid var(--Gradient-2, #FF2F66);
+    border: 2px solid var(--Gradients-Gradient-2);
 }
 
 .title{
-    color: var(--first-text);
+    color: var(--Personal-colors-black);
     font-size: 24px;
     font-style: normal;
     font-weight: 600;
@@ -60,7 +60,7 @@
 }
 
 .price{
-    color: var(--first-text);
+    color: var(--Personal-colors-black);
     font-size: 24px;
     font-style: normal;
     font-weight: 700;
@@ -69,7 +69,7 @@
 }
 
 .text{
-    color: var(--first-text);
+    color: var(--Personal-colors-black);
     text-align: center;
     font-size: 12px;
     font-style: normal;
