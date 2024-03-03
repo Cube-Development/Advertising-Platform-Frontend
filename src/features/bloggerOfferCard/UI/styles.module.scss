@@ -1,20 +1,19 @@
-.card{
+.card {
     display: grid;
     grid-auto-flow: column;
-
     border-radius: 12px;
     border: 1px solid #4772E6;
     padding: 20px 0;
     margin-bottom: 10px;
-    max-width: 1105px;;
+    width: 100%;
 
-    hr{
+    hr {
         height: 1px;
         background: #D9D9D9;
         margin-bottom: 20px;
     }
 
-    img{
+    img {
         width: 30px;
         height: 30px;
         border-radius: 30px;
@@ -24,31 +23,31 @@
 
 
 
-.channel__preview{
+.channel__preview {
     display: grid;
     grid-auto-flow: row;
-    border-right:  1px solid #D9D9D9;
+    border-right: 1px solid #D9D9D9;
     padding: 0 20px;
 
-    div{
+    div {
         display: grid;
         grid-auto-flow: column;
 
-        div{
+        div {
 
             display: grid;
             grid-auto-flow: row;
 
 
-            p{
+            p {
                 color: var(--Personal-colors-black);
                 font-size: 12px;
                 font-style: normal;
                 font-weight: 600;
-                line-height: normal; 
+                line-height: normal;
             }
-        
-            span{
+
+            span {
                 color: #9E9E9E;
                 font-size: 10px;
                 font-style: normal;
@@ -60,7 +59,7 @@
 }
 
 
-.status{
+.status {
     display: grid;
     align-items: center;
     justify-content: center;
@@ -68,7 +67,7 @@
     background: rgba(15, 105, 201, 0.10);
     padding: 20px 0;
 
-    p{
+    p {
         color: var(--Personal-colors-black);
         font-size: 20px;
         font-style: normal;
@@ -78,12 +77,12 @@
 }
 
 
-.channel__column{
+.channel__column {
     color: var(--Personal-colors-black);
-    border-right:  1px solid #D9D9D9;
+    border-right: 1px solid #D9D9D9;
     padding: 0 15px;
 
-    div{
+    div {
         display: grid;
         grid-auto-flow: row;
         align-items: center;
@@ -92,19 +91,19 @@
         padding: 10px 0;
     }
 
-    hr{
+    hr {
         height: 1px;
         background: #D9D9D9;
     }
 
-    p{
+    p {
         font-size: 10px;
         font-style: normal;
         font-weight: 600;
         line-height: normal;
     }
 
-    span{
+    span {
         font-size: 12px;
         font-style: normal;
         font-weight: 400;
@@ -112,7 +111,7 @@
     }
 }
 
-.card__info{
+.card__info {
     display: grid;
     grid-auto-flow: row;
     margin-left: 20px;
@@ -124,19 +123,19 @@
 
 
 
-.card__more{
+.card__more {
     padding: 0 15px;
     display: grid;
     grid-auto-flow: row;
     justify-content: space-between;
 
-    svg{
+    svg {
         width: 30px;
     }
 
 }
 
-.chat__btn{
+.chat__btn {
     display: grid;
     align-items: flex-end;
     margin-bottom: 10px;
