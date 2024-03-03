@@ -5,14 +5,14 @@ import { PriceCard } from "@entities/priceCard";
 
 interface PriceListProps {
   tarifs: IPrice[];
-  buyBtn: ReactElement,
+  buyBtn: ReactElement;
 }
 
 export const PriceList: FC<PriceListProps> = ({ tarifs, buyBtn }) => {
   return (
     <div className={styles.tarifs}>
       {tarifs.map((tarif, index) => (
-        <PriceCard key={index} price={tarif} index={index} buyBtn={buyBtn}/>
+        <PriceCard key={index} price={tarif} index={index} buyBtn={buyBtn} />
       ))}
     </div>
   );

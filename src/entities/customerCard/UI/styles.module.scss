@@ -1,44 +1,67 @@
-.customer{
-    max-width: 400px;
-    border-radius: 12px 12px 0px 12px;
-    background: linear-gradient(90deg, rgba(71, 113, 230, 0.1) 0.03%, rgba(142, 84, 233, 0.1) 100.36%);
-    padding: 20px;
-    min-height: 300px;
-}
-
-.logo{
-    width: 35px;
-    height: 35px; 
-    border-radius: 50%;
-}
-
-.customer__row{
+.customer {
     display: grid;
-    grid-auto-flow: column;
-    column-gap: 10px;
-    align-items: center;
-    margin-bottom: 20px;
-}
+    grid-template: 0.3fr 1fr / 1fr;
+    align-content: space-between;
+    align-items: start;
+    border-radius: 12px 12px 0px 12px;
+    background: linear-gradient(90deg,
+            rgba(71, 113, 230, 0.1) 0.03%,
+            rgba(142, 84, 233, 0.1) 100.36%);
+    padding: 20px;
 
-.title{
-    color: var(--Personal-colors-black);
+    .customer__row {
+        display: grid;
+        grid-template: 1fr / 35px 1fr;
+        column-gap: 10px;
+        align-items: center;
+        margin-bottom: 10px;
 
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    margin-bottom: 10px;
-}
+        .logo {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+        }
 
-.text{
-    color: var(--secondary-text);
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-}
+        .customer__column {
 
-.rating{
-    width: 98.75px;
-    height: 15px;
+            white-space: nowrap;
+            overflow: hidden;
+
+            .title {
+                color: var(--Personal-colors-black);
+                font-size: 14px;
+                font-style: normal;
+                font-weight: 600;
+                line-height: normal;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .workplace {
+                font-size: 12px;
+                font-weight: 500;
+                font-style: italic;
+                margin-bottom: 5px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+
+            .rating {
+                width: 98.75px;
+                height: 15px;
+            }
+        }
+    }
+
+    .text {
+        color: var(--secondary-text);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        height: 150px;
+        overflow: auto;
+    }
 }

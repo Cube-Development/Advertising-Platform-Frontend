@@ -1,22 +1,19 @@
-.accomms{
+.accomms {
     background: linear-gradient(90deg, rgba(71, 114, 230, 0.1) 0.03%, rgba(142, 84, 233, 0.1) 100.36%);
     border-radius: 40px 40px 0px 40px;
     padding: 30px 40px 30px 30px;
-    max-width: 510px;
+    width: 100%;
 
     &.vencom {
         color: #FFF;
         background: var(--Gradients-Gradient-1);
-    
+    }
 
-      }
-
-    ul{
-
+    ul {
         text-align: left;
         padding-left: 20px;
 
-        li{
+        li {
             margin-bottom: 30px;
             font-size: 14px;
             font-style: normal;
@@ -30,7 +27,7 @@
 
 
 
-.accomms__row{
+.accomms__row {
     display: grid;
     grid-auto-flow: column;
     justify-content: center;
@@ -39,7 +36,7 @@
     margin-bottom: 30px;
 }
 
-.title{
+.title {
     text-align: center;
     font-size: 24px;
     font-style: normal;
@@ -47,13 +44,13 @@
     line-height: normal;
 }
 
-.bottom__row{
+.bottom__row {
     display: grid;
     grid-auto-flow: column;
     column-gap: 30px;
 }
 
-.save__row{
+.save__row {
     display: grid;
     grid-auto-flow: column;
     column-gap: 15px;
@@ -65,4 +62,3 @@
     line-height: normal;
     max-width: 180px;
 }
-
