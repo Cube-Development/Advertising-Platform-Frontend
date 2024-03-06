@@ -1,5 +1,5 @@
 import { ChatIcon, HappySmileIcon, MoreIcon } from '@shared/assets';
-import { offerStatus } from '@shared/config/offer';
+import { offerStatus } from '@shared/config/offerFilter';
 import { IBloggerOfferCard } from '@shared/types/common';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';

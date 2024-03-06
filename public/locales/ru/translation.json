@@ -5,6 +5,7 @@
     "buy": "Купить",
     "btn_catalog": "Каталог площадок",
     "btn_add_platform": "Добавить канал",
+    "btn_add_profile": "Добавить",
     "btn_start_adv": "Запустить рекламу",
 
 
@@ -47,6 +48,7 @@
         "calculateIncome": "Рассчет доход",
 
         "orders": "Мои Рекламные компании",
+        
         "saved": "Сохранненые",
         "manager": "Работа с менеджерами",
         "template": "Шаблоны постов",
@@ -647,6 +649,10 @@
             "entity": "Юридическое лицо",
             "individual": "ИП"
         },
+        "subtypes": {
+            "account": "Расчетный счет",
+            "card": "Транзитный счёт (Humo|UzCard)"
+        },
         "basic_info": {
             "basic_info": "Общие данные",
             "name": {
@@ -669,12 +675,12 @@
                 "default_value": "sample",
                  "text": ""
                 },
-            "company_name": {
+            "entity": {
                 "title": "Наименование фирмы", 
                 "default_value": "sample",
                 "text": ""
             },
-            "company_address": {
+            "address": {
                 "title": "Юридический адрес", 
                 "default_value": "sample",
                 "text": ""
@@ -684,7 +690,7 @@
                 "default_value": "sample",
                 "text": ""
             },
-            "individual_name": {
+            "individual": {
                 "title": "Наименование ИП", 
                 "default_value": "sample",
                 "text": ""

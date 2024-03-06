@@ -3,22 +3,24 @@ export interface ILogin {
   }
   
 
-
 export interface IMenuItems {
   item: IMenuItem;
-  subItems?: IMenuSubItem[];
+  toggleMenu?: ()=> void;
+  chapter?: string;
+  changeCharper: (title: string, haveSubitems: boolean) => void
 }
 
 interface IMenuItem{
+  item: IMenuItemParams;
+  subItems?: IMenuItemParams[];
+}
+
+interface IMenuItemParams{
   title: string;
   img?: React.FC;
   path?: string;
 }
 
-interface IMenuSubItem{
-  title: string;
-  path: string;
-}
 
 export interface ITypeFilter{
   name: string;
@@ -157,15 +159,13 @@ export interface IAddPLatformData {
   text_limit: number;
 }
 
-
-
 export interface IBlockData{
     title: string;
-    parametr: IBlockData[]
+    parameters: IRowData[]
 }
 
-export interface IBlockData {
-  data: IParameterData,
+export interface IRowData {
+  data: string,
   type: keyof IAddProfileData; 
 }
 

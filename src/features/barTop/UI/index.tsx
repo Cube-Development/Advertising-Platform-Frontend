@@ -1,4 +1,4 @@
-import { pageFilter } from '@shared/config/filter';
+import { pageFilter } from '@shared/config/pageFilter';
 import { roles } from '@shared/config/roles';
 import { useAppSelector } from '@shared/store';
 import { IStartProjectProps } from '@shared/types/common';

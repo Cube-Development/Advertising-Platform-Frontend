@@ -1,5 +1,5 @@
 import { StarIcon3, SadSmileIcon } from '@shared/assets';
-import { projectTypesFilter } from '@shared/config/filter';
+import { projectTypesFilter } from "@shared/config/projectFilter";
 import { useAppSelector } from '@shared/store';
 import { IStartProjectProps } from '@shared/types/common';
 import { FC } from 'react';

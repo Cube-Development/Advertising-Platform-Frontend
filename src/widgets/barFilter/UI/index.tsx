@@ -6,7 +6,8 @@ import { TurnkeyProject } from '@features/turnkeyProject';
 import { FC, useState } from 'react';
 import styles from './styles.module.scss';
 import { useAppSelector } from '@shared/store';
-import { pageFilter, projectTypesFilter } from '@shared/config/filter';
+import { pageFilter } from '@shared/config/pageFilter';
+import { projectTypesFilter } from "@shared/config/projectFilter";
 import { AddPlatform } from '@features/addPlatform';
 
 
@@ -20,7 +21,7 @@ export const BarFilter: FC<BarFilterProps> = ({page}) => {
 
     return (
         <section className={styles.profile__filter}>
-            <div className='container'>
+            <div className='container sidebar'>
                 <BarTop isZeroProject={isZeroProject} 
                         isZeroPlatform={true} 
                         NewProjectBtn={NewProject} 

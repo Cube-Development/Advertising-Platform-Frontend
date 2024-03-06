@@ -2,8 +2,8 @@ import { useAppDispatch, useAppSelector } from '@shared/store';
 import { filterSlice } from '@shared/store/reducers';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { profileTypes } from './config';
 import styles from './styles.module.scss';
+import { profileTypes } from '@shared/config/profileFilter';
 
 
 export const BarProfileFilter: FC = () => {
