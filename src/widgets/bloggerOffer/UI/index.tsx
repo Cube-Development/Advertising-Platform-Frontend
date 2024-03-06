@@ -18,7 +18,7 @@ export const BloggerOffer: FC<BloggerOfferProps> = ({
 }) => {
 
     return (
-        <div className='container'>
+        <div className='container sidebar'>
             {
             // cards.length === 0
             // ?

@@ -1,6 +1,6 @@
 import { CancelIcon, CompliteIcon, MoreIcon, ProtectIcon, ProtectIcon2, RatingIcon, RocketIcon, StarIcon4, WaitIcon } from '@shared/assets';
 import { FeatherIcon } from '@shared/assets/icons/feather';
-import { platformStatus } from '@shared/config/platform';
+import { platformStatus } from '@shared/config/platformFilter';
 import { IBloggerPlatformCard } from '@shared/types/common';
 import { FC, useState } from 'react';
 import { useTranslation } from 'react-i18next';

@@ -1,5 +1,5 @@
 import { InfoIcon } from '@shared/assets';
-import { IAddProfileData, IBlockData } from '@shared/types/common';
+import { IAddProfileData, IBlockData, IParameterData } from '@shared/types/common';
 import { MyInput } from '@shared/ui';
 import { FC } from 'react';
 import { UseFormSetValue } from 'react-hook-form';
@@ -8,7 +8,7 @@ import styles from './styles.module.scss';
 
 
 interface ProfileDataProps {
-    data: IBlockData[];
+    data: IBlockData;
     onChange:  UseFormSetValue<IAddProfileData>;
 }
 
@@ -21,27 +21,31 @@ export const ProfileData: FC<ProfileDataProps> = ({data, onChange}) => {
   };
 
   return (
-        <div className={styles.wrapper} >
-            {/* {
-                data.map((row) => {
+      <div className={styles.wrapper} >
+        <div>
+            <p>{t(data.title)}</p>
+        </div>
+            <div className={styles.parameters}>
+                {
+                    data.parameters.map((row, index) => {
+                        const row_dict: IParameterData = t(row.data, {returnObjects: true});
+                        
+                        return (
+                            <div className={styles.row} key={index}>
+                                    <div className={styles.left}>
+                                        <span>{row_dict.title}</span>
+                                        <InfoIcon />
+                                    </div>
 
-                    const row_dict: IParametraData = t(row.parametr, {returnObjects: true});
-
-                    return (
-                            <div className={styles.wrapper} >
-                                <div className={styles.left}>
-                                    <p>{t(row_dict.title)}</p>
-                                    <InfoIcon />
+                                    <div className={styles.right}>
+                                        <MyInput onChange={(event) => handleDataChange(event, row.type)} placeholder={row_dict.default_value} />
+                                    </div>            
                                 </div>
-
-                                <div>
-                                    <MyInput onChange={(event) => handleDataChange(event, row.type)} placeholder={row_dict.default_value} />
-                                </div>            
-                            </div>
+                                )
+                            }
                             )
                         }
-                    )
-            } */}
+            </div>
         </div>
     )
 };

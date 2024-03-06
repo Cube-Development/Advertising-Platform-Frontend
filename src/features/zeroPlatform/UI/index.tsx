@@ -1,5 +1,5 @@
 import { SadSmileIcon, HappySmileIcon } from '@shared/assets';
-import { platformStatusFilter } from '@shared/config/filter';
+import { platformStatusFilter } from "@shared/config/platformFilter";
 import { useAppSelector } from '@shared/store';
 import {FC} from 'react';
 import { useTranslation } from 'react-i18next';

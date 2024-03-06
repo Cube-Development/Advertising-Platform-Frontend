@@ -2,7 +2,7 @@ import { useAppDispatch, useAppSelector } from '@shared/store';
 import { filterSlice } from '@shared/store/reducers';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';
-import { advertiserProjectTypes } from './config';
+import { advertiserProjectTypes } from "@shared/config/projectFilter";
 import styles from './styles.module.scss';
 
 

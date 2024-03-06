@@ -1,4 +1,5 @@
-import { pageFilter, platformStatusFilter } from "@shared/config/filter";
+import { pageFilter } from "@shared/config/pageFilter";
+import { platformStatusFilter } from "@shared/config/platformFilter";
 import { useAppSelector } from "@shared/store";
 import { BarFilter } from "@widgets/barFilter";
 import { BloggerModPlatform } from "@widgets/bloggerModPlatform";

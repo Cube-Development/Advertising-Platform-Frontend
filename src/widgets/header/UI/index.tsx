@@ -23,14 +23,14 @@ export const Header: FC = () => {
   };
 
   return (
-    <header className={`${styles.wrapper}`}>
-      <div className={`${styles.row__left}`}>
+    <header className={styles.wrapper}>
+      <div className={styles.row__left}>
         {isAuth && <DropdownMenu currentRole={role} toggleRole={toggleRole} />}
         <Logo currentRole={role} />
         <Nav isAuth={isAuth} currentRole={role} />
       </div>
 
-      <div className={`${styles.row}`}>
+      <div className={styles.row}>
         {isAuth && <Wallet />}
         <Lang />
         {isAuth ? (

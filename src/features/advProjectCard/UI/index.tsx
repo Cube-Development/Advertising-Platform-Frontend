@@ -1,8 +1,8 @@
 import { AdvProjectSubcard } from '@entities/advProjectSubcard';
 import { CancelIcon, CompliteIcon, MoreIcon, RocketIcon, SearchIcon, WaitIcon } from '@shared/assets';
 import { ChatIcon } from '@shared/assets';
-import { managerProjectStatusFilter, projectTypesFilter } from '@shared/config/filter';
-import { orderStatus } from '@shared/config/order';
+import { managerProjectStatusFilter, projectTypesFilter } from "@shared/config/projectFilter";
+import { orderStatus } from '@shared/config/orderFilter';
 import { useAppSelector } from '@shared/store';
 import { IChannelChat, IAdvProjectCard } from '@shared/types/common';
 import { FC, useState } from 'react';
