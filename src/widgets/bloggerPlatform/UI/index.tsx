@@ -14,27 +14,24 @@ interface BloggerPlatformProps {
   cards: IBloggerPlatformCard[];
 }
 
-export const BloggerPlatform: FC<BloggerPlatformProps> = ({cards}) => {
-
-    return (
-        <div className='container sidebar'>
-            {cards.length === 0
-            ?
-            <ZeroPlatform AddPlatformBtn={AddPlatform}/>
-            :
-            cards.map((card, index) =>
-                <BloggerPlatformCard 
-                    key={index} 
-                    card={card} 
-                    SeeOffersBtn={SeeOffers}
-                    SeeReasonBtn={SeeReason}
-                    RepeatOfferBtn={RepeatOffer}
-                    ActivateBtn={ActivatePlatform}
-                    SupportBtn={Support}
-                />
-            )
-            }
-        </div>
-    );
+export const BloggerPlatform: FC<BloggerPlatformProps> = ({ cards }) => {
+  return (
+    <div className="container sidebar">
+      {cards.length === 0 ? (
+        <ZeroPlatform AddPlatformBtn={AddPlatform} />
+      ) : (
+        cards.map((card, index) => (
+          <BloggerPlatformCard
+            key={index}
+            card={card}
+            SeeOffersBtn={SeeOffers}
+            SeeReasonBtn={SeeReason}
+            RepeatOfferBtn={RepeatOffer}
+            ActivateBtn={ActivatePlatform}
+            SupportBtn={Support}
+          />
+        ))
+      )}
+    </div>
+  );
 };
-

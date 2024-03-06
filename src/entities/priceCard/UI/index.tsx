@@ -6,7 +6,7 @@ import { YesIcon, NoIcon } from "@shared/assets";
 interface PriceCardProps {
   price: IPrice;
   index: number;
-  buyBtn: ReactElement,
+  buyBtn: ReactElement;
 }
 
 export const PriceCard: FC<PriceCardProps> = ({ price, index, buyBtn }) => {
@@ -22,10 +22,10 @@ export const PriceCard: FC<PriceCardProps> = ({ price, index, buyBtn }) => {
       <p className={styles.text}>{price.info}</p>
       <ul>
         {price.options.map((option, index) => (
-            <li key={index}>
-              {option.available ? <YesIcon/> : <NoIcon/>}
-              {option.option}
-            </li>
+          <li key={index}>
+            {option.available ? <YesIcon /> : <NoIcon />}
+            {option.option}
+          </li>
         ))}
       </ul>
     </div>

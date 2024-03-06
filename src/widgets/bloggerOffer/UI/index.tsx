@@ -12,30 +12,26 @@ interface BloggerOfferProps {
   cards: IBloggerOfferCard[];
 }
 
-export const BloggerOffer: FC<BloggerOfferProps> = ({
-    cards,    
-}) => {
-
-    return (
-        <div className='container sidebar'>
-            {
-            // cards.length === 0
-            // ?
-            // <ZeroPlatform AddPlatformBtn={AddPlatform}/>
-            // :
-            cards.map((card, index) =>
-                <BloggerOfferCard 
-                    key={index} 
-                    card={card} 
-                    SeeLinkBtn={SeeLink}
-                    SendLinkBtn={SendLink}
-                    AcceptOfferBtn={AcceptOffer}
-                    RejectOfferBtn={RejectOffer}
-                    SeeReasonBtn={SeeReason}
-                />
-            )
-            }
-        </div>
-    );
+export const BloggerOffer: FC<BloggerOfferProps> = ({ cards }) => {
+  return (
+    <div className="container sidebar">
+      {
+        // cards.length === 0
+        // ?
+        // <ZeroPlatform AddPlatformBtn={AddPlatform}/>
+        // :
+        cards.map((card, index) => (
+          <BloggerOfferCard
+            key={index}
+            card={card}
+            SeeLinkBtn={SeeLink}
+            SendLinkBtn={SendLink}
+            AcceptOfferBtn={AcceptOffer}
+            RejectOfferBtn={RejectOffer}
+            SeeReasonBtn={SeeReason}
+          />
+        ))
+      }
+    </div>
+  );
 };
-
