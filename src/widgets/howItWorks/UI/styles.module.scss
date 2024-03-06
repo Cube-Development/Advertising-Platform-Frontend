@@ -1,35 +1,32 @@
-.how__wrapper{
-    max-width: var(--container-width);
-    height: 749px;
-    background: var(--Gradients-Gradient-1);
-    border-radius: 50px 50px 0 50px;
-    position: relative;
-    margin: 0 auto 100px auto;
+.how__wrapper {
+  max-width: var(--container-width);
+  height: 749px;
+  background: var(--Gradients-Gradient-1);
+  border-radius: 50px 50px 0 50px;
+  position: relative;
+  margin: 0 auto 100px auto;
+  overflow: hidden;
+
+  &::before {
+    content: "";
+    background-image: url("/images/assets/steps.svg");
+    background-size: contain;
+    background-repeat: no-repeat;
+    position: absolute;
+    top: 170px;
+    left: 50px;
+    width: calc(100% - var(--container-padding-side));
+    height: 71%;
     overflow: hidden;
-  
-    &::before{
-      content: '';
-      background-image: url('/images/assets/steps.svg') ;
-      background-size: contain; 
-      background-repeat: no-repeat;
-      position: absolute;
-      top: 170px;
-      left: 50px;
-      width: calc(100% - var(--container-padding-side));
-      height: 71%;
-      overflow: hidden;
-    }
   }
-  
-  .how__title{
-    color: #FFF;
-    font-size: 44px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    padding-top: 50px;
-    margin-bottom: 323px;
-  
-  }
-  
-  
+}
+
+.how__title {
+  color: #fff;
+  font-size: 44px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  padding-top: 50px;
+  margin-bottom: 323px;
+}

@@ -1,62 +1,57 @@
-.wrapper{
-    display: grid;
-    grid-auto-flow: column;
-    align-items: center;
-    justify-content: space-between;
+.wrapper {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: space-between;
 
-    p{
-        color: var(--Personal-colors-black);
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
+  p {
+    color: var(--Personal-colors-black);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  svg {
+    &:hover .text {
+      display: block;
     }
 
-    svg {
-        &:hover .text {
-            display: block;
-        }
-        
-        .text {
-            display: none;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        }
+    .text {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
 }
 
-  
-
-.title{
-    display: grid;
-    grid-auto-flow: column;
-    align-items: center;
-    column-gap: 10px;
+.title {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  column-gap: 10px;
 }
-
 
 .slider {
-    width: 300px;
-    margin: 20px auto;
+  width: 300px;
+  margin: 20px auto;
+}
+
+.position {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+
+  p {
+    color: var(--Personal-colors-black);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    line-height: 0.75;
   }
-  
-
-.position{
-    display: grid;
-    grid-auto-flow: column;
-    justify-content: space-between;
-    align-items: center;
-    text-align: center;
-
-    p{
-        color: var(--Personal-colors-black);
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-        line-height: 0.75;
-    }
-
 }

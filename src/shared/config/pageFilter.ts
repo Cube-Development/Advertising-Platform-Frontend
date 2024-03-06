@@ -1,6 +1,5 @@
-export enum pageFilter  {
-    order = 'order',
-    offer = 'offer',
-    platform = 'platform',
+export enum pageFilter {
+  order = "order",
+  offer = "offer",
+  platform = "platform",
 }
-

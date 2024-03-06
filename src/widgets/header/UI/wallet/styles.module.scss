@@ -1,93 +1,91 @@
 .wallet {
-    border-radius: 12px;
-    border: 1px solid #4772E6;
-    background: var(--Gradients-Gradient-1);
-    transition: background 0.3s ease, color 0.3s ease; /* Плавная смена цвета */
-    color: #fff;
-   
-    cursor: pointer;
-    position: relative;
+  border-radius: 12px;
+  border: 1px solid #4772e6;
+  background: var(--Gradients-Gradient-1);
+  transition:
+    background 0.3s ease,
+    color 0.3s ease; /* Плавная смена цвета */
+  color: #fff;
 
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
+  cursor: pointer;
+  position: relative;
 
-    button {
-      min-width: 200px;
-      height: auto;
-      padding: 12px 10px;
-      display: grid;
-      column-gap: 10px;
-      grid-template-columns: 1fr auto; /* Одна часть для текста, вторая для иконки */
-      align-items: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
 
-      svg{
-        margin-left: 10px;
-      }
+  button {
+    min-width: 200px;
+    height: auto;
+    padding: 12px 10px;
+    display: grid;
+    column-gap: 10px;
+    grid-template-columns: 1fr auto; /* Одна часть для текста, вторая для иконки */
+    align-items: center;
 
+    svg {
+      margin-left: 10px;
+    }
 
-      span{
-        font-size: 12px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-      }
+    span {
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+    }
   }
 
   p {
-      margin: 0;
-      text-align: center;
+    margin: 0;
+    text-align: center;
   }
- }
-
-
-.active__wallet{
-  border: 1px solid #4772E6;
-  background: rgba(255, 255, 255, 0.25);
-  color: var(--Personal-colors-black);
-  transition: background 0.3s ease, color 0.3s ease; /* Плавная смена цвета */
-
-  svg{
-    border-left: rgba(255, 255, 255, 0.25);
-  }
-
 }
 
+.active__wallet {
+  border: 1px solid #4772e6;
+  background: rgba(255, 255, 255, 0.25);
+  color: var(--Personal-colors-black);
+  transition:
+    background 0.3s ease,
+    color 0.3s ease; /* Плавная смена цвета */
 
+  svg {
+    border-left: rgba(255, 255, 255, 0.25);
+  }
+}
 
 .menu {
-    margin-top: 5px;
-    display: block;
-    position: absolute;
-    left: 0;
-    background-color: #fff;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 1;
-    min-width: 200px;
-    border-radius: 20px;
+  margin-top: 5px;
+  display: block;
+  position: absolute;
+  left: 0;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  min-width: 200px;
+  border-radius: 20px;
 
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 0.75;
-    color: var(--Personal-colors-black);
-    overflow: hidden;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 0.75;
+  color: var(--Personal-colors-black);
+  overflow: hidden;
 
-    ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-  
-    li {
-      padding: 12px;
-      cursor: pointer;
+  ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
 
-  
-      &:hover {
-        background-color: #f0f0f0;
-        color: var(--Gradients-Gradient-1);
-      }
+  li {
+    padding: 12px;
+    cursor: pointer;
+
+    &:hover {
+      background-color: #f0f0f0;
+      color: var(--Gradients-Gradient-1);
     }
   }
+}

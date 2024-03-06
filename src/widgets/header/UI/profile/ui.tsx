@@ -52,10 +52,10 @@ export const Profile: FC<ProfileProps> = ({ toggleLogout }) => {
         <div className={styles.menu}>
           <ul>
             <Link to={paths.profile}>
-                <li onClick={handleButtonClick}>{t("profile.data")}</li>
+              <li onClick={handleButtonClick}>{t("profile.data")}</li>
             </Link>
             <Link to={paths.profile}>
-                <li onClick={handleButtonClick}>{t("profile.settings")}</li>
+              <li onClick={handleButtonClick}>{t("profile.settings")}</li>
             </Link>
             <li className={styles.logout} onClick={handleLogout}>
               {t("logout")}

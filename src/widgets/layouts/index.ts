@@ -1,2 +1,2 @@
-export { MainLayout } from './mainLayout';
-export { SideBarLayout } from './sideBarLayout';
+export { MainLayout } from "./mainLayout";
+export { SideBarLayout } from "./sideBarLayout";

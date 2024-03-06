@@ -15,43 +15,43 @@ export const Routing = () => {
     <Routes>
       {isAuth && role === roles.blogger
         ? privateBloggerRoutes.map((route) => (
-          <Route
-          path={route.path}
-          element={
-              route.sidebar ?
-              <SideBarLayout>
-                <route.component />
-              </SideBarLayout>
-            :
-              <route.component />
-          
-        }
-          key={route.path}
-        />
-          ))
-        : isAuth && role === roles.advertiser
-        ? privateAdvertiserRoutes.map((route) => (
             <Route
               path={route.path}
               element={
-                route.sidebar ?
-                <SideBarLayout>
+                route.sidebar ? (
+                  <SideBarLayout>
+                    <route.component />
+                  </SideBarLayout>
+                ) : (
                   <route.component />
-                </SideBarLayout>
-              :
-                <route.component />
-            
-          }
+                )
+              }
               key={route.path}
             />
           ))
-        : publicRoutes.map((route) => (
-            <Route
-              path={route.path}
-              element={<route.component />}
-              key={route.path}
-            />
-          ))}
+        : isAuth && role === roles.advertiser
+          ? privateAdvertiserRoutes.map((route) => (
+              <Route
+                path={route.path}
+                element={
+                  route.sidebar ? (
+                    <SideBarLayout>
+                      <route.component />
+                    </SideBarLayout>
+                  ) : (
+                    <route.component />
+                  )
+                }
+                key={route.path}
+              />
+            ))
+          : publicRoutes.map((route) => (
+              <Route
+                path={route.path}
+                element={<route.component />}
+                key={route.path}
+              />
+            ))}
     </Routes>
   );
 };

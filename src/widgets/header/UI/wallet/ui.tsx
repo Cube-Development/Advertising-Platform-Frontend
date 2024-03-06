@@ -39,9 +39,7 @@ export const Wallet: FC = () => {
       <button className={styles.roww} onClick={(e) => toggleMenu(e)}>
         <p>
           {`${wallet.toLocaleString()} `}
-          <span>
-             {t("symbol")}
-          </span>
+          <span>{t("symbol")}</span>
         </p>
         {isMenuOpen ? <CloseIcon /> : <PlusIcon />}
       </button>
@@ -55,6 +53,6 @@ export const Wallet: FC = () => {
           </ul>
         </div>
       )}
-  </div>
+    </div>
   );
 };

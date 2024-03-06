@@ -1,1 +1,1 @@
-export { AccommCard } from "./UI"
+export { AccommCard } from "./UI";
