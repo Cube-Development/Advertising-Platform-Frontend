@@ -16,41 +16,39 @@ import { OrdersPage } from "./Orders";
 import { AddProfilePage } from "./AddProfile";
 
 export interface IRoute {
-    path: string;
-    component: React.ComponentType;
-    sidebar?: boolean;
+  path: string;
+  component: React.ComponentType;
+  sidebar?: boolean;
 }
 
 export const privateBloggerRoutes: IRoute[] = [
-    {path: paths.mainBlogger, component: MainBloggerPage},
-    {path: paths.profile, component: ProfilePage, sidebar: true},
-    {path: paths.platformOwner, component: PlatformOwnerPage, sidebar: true},
-    {path: paths.notFound, component: NotFoundPage},
-    {path: paths.wallet, component: WalletPage, sidebar: true},
-    {path: paths.addPlatform, component: AddPlatformPage, sidebar: true},
-    {path: paths.addProfile, component: AddProfilePage, sidebar: true},
-    {path: paths.platforms, component: PlatformsPage, sidebar: true},
-    {path: paths.offers, component: OffersPage, sidebar: true},
-]
+  { path: paths.mainBlogger, component: MainBloggerPage },
+  { path: paths.profile, component: ProfilePage, sidebar: true },
+  { path: paths.platformOwner, component: PlatformOwnerPage, sidebar: true },
+  { path: paths.notFound, component: NotFoundPage },
+  { path: paths.wallet, component: WalletPage, sidebar: true },
+  { path: paths.addPlatform, component: AddPlatformPage, sidebar: true },
+  { path: paths.addProfile, component: AddProfilePage, sidebar: true },
+  { path: paths.platforms, component: PlatformsPage, sidebar: true },
+  { path: paths.offers, component: OffersPage, sidebar: true },
+];
 
 export const privateAdvertiserRoutes: IRoute[] = [
-    {path: paths.main, component: MainPage},
-    {path: paths.profile, component: ProfilePage, sidebar: true},
-    {path: paths.notFound, component: NotFoundPage},
-    {path: paths.addProfile, component: AddProfilePage, sidebar: true},
-    {path: paths.fullServise, component: FullServicePage, sidebar: true},
-    {path: paths.catalog, component: CatalogPage, sidebar: true},
-    {path: paths.wallet, component: WalletPage, sidebar: true},
-    {path: paths.turnkey, component: TurnkeyPage, sidebar: true},
-    {path: paths.orders, component: OrdersPage, sidebar: true},
-]
-
+  { path: paths.main, component: MainPage },
+  { path: paths.profile, component: ProfilePage, sidebar: true },
+  { path: paths.notFound, component: NotFoundPage },
+  { path: paths.addProfile, component: AddProfilePage, sidebar: true },
+  { path: paths.fullServise, component: FullServicePage, sidebar: true },
+  { path: paths.catalog, component: CatalogPage, sidebar: true },
+  { path: paths.wallet, component: WalletPage, sidebar: true },
+  { path: paths.turnkey, component: TurnkeyPage, sidebar: true },
+  { path: paths.orders, component: OrdersPage, sidebar: true },
+];
 
 export const publicRoutes: IRoute[] = [
-    {path: paths.mainBlogger, component: MainBloggerPage},
-    {path: paths.main, component: MainPage},
-    {path: paths.notFound, component: NotFoundPage},
-    {path: paths.catalog, component: CatalogPage},
-    {path: paths.turnkey, component: TurnkeyPage},
-]
-
+  { path: paths.mainBlogger, component: MainBloggerPage },
+  { path: paths.main, component: MainPage },
+  { path: paths.notFound, component: NotFoundPage },
+  { path: paths.catalog, component: CatalogPage },
+  { path: paths.turnkey, component: TurnkeyPage },
+];

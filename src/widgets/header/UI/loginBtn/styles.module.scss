@@ -1,11 +1,11 @@
 .wrapper {
-    display: grid;
-    grid-auto-flow: column;
-    align-items: center;
-    column-gap: 30px;
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  column-gap: 30px;
 }
 
-.loginBtn{
+.loginBtn {
   cursor: pointer;
   display: grid;
   grid-auto-flow: column;

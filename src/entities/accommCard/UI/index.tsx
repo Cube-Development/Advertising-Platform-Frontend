@@ -5,7 +5,7 @@ import { QualityIcon, ProtectIcon } from "@shared/assets";
 
 interface AccommCardProps {
   accomm: IAccomm;
-  toDoBtn: ReactElement,
+  toDoBtn: ReactElement;
 }
 
 export const AccommCard: FC<AccommCardProps> = ({ accomm, toDoBtn }) => {
@@ -14,15 +14,13 @@ export const AccommCard: FC<AccommCardProps> = ({ accomm, toDoBtn }) => {
   return (
     <div className={`${styles.accomms} ${subclass}`}>
       <div className={styles.accomms__row}>
-        {accomm.type === "vencom" && <QualityIcon/>}
+        {accomm.type === "vencom" && <QualityIcon />}
         <h1 className={styles.title}>{accomm.title}</h1>
       </div>
 
       <ul>
         {accomm.stages.map((item, index) => (
-          <li key={index}>
-            {item.stage}
-          </li>
+          <li key={index}>{item.stage}</li>
         ))}
       </ul>
 

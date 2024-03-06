@@ -1,1 +1,1 @@
-export { Lang } from './ui';
+export { Lang } from "./ui";

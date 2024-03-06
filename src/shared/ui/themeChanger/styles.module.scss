@@ -1,32 +1,29 @@
-.theme__wrapper{
-    display: grid;
+.theme__wrapper {
+  display: grid;
 
-    h2{
-      font-size: 18px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: normal;
-      color: var(--Gradients-Gradient-2);
-      margin-bottom: 10px;
-    }
-    
-    select{
-      width: 390px;
-      height: 60px;
-      border-radius: 12px;
-      border: 1px solid #4772E6;
-      padding: 20px;
-      color: rgba(0, 0, 0, 0.5);
-      cursor: pointer;
-    }
-  
-    option{
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: normal;
-    }
+  h2 {
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    color: var(--Gradients-Gradient-2);
+    margin-bottom: 10px;
+  }
 
+  select {
+    width: 390px;
+    height: 60px;
+    border-radius: 12px;
+    border: 1px solid #4772e6;
+    padding: 20px;
+    color: rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+  }
+
+  option {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
 }
-  
-  

@@ -4,7 +4,6 @@ import userReducer from "./reducers/userSlice";
 import filterReducer from "./reducers/filterSlice";
 import { legalAPI } from "./services/legalService";
 
-
 const rootReducer = combineReducers({
   [authAPI.reducerPath]: authAPI.reducer,
   [legalAPI.reducerPath]: legalAPI.reducer,
