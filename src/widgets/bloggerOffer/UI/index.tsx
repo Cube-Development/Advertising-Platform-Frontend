@@ -4,7 +4,6 @@ import { RejectOffer } from "@features/rejectOffer";
 import { SeeLink } from "@features/seeLink";
 import { SeeReason } from "@features/seeReason";
 import { SendLink } from "@features/sendLink";
-import { ZeroPlatform } from "@features/zeroPlatform";
 import { IBloggerOfferCard } from "@shared/types/common";
 import { FC } from "react";
 import styles from "./styles.module.scss";
