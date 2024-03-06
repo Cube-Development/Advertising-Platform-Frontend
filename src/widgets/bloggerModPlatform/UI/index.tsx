@@ -12,7 +12,7 @@ interface BloggerModPlatformProps {
 export const BloggerModPlatform: FC<BloggerModPlatformProps> = ({cards}) => {
 
     return (
-        <div className='container'>
+        <div className='container sidebar'>
             {cards.length === 0
             ?
             <ZeroPlatform AddPlatformBtn={AddPlatform}/>

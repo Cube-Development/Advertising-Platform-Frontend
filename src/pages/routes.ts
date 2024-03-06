@@ -18,31 +18,31 @@ import { AddProfilePage } from "./AddProfile";
 export interface IRoute {
     path: string;
     component: React.ComponentType;
+    sidebar?: boolean;
 }
 
 export const privateBloggerRoutes: IRoute[] = [
     {path: paths.mainBlogger, component: MainBloggerPage},
-    {path: paths.profile, component: ProfilePage},
-    {path: paths.platformOwner, component: PlatformOwnerPage},
+    {path: paths.profile, component: ProfilePage, sidebar: true},
+    {path: paths.platformOwner, component: PlatformOwnerPage, sidebar: true},
     {path: paths.notFound, component: NotFoundPage},
-    {path: paths.wallet, component: WalletPage},
-    {path: paths.addPlatform, component: AddPlatformPage},
-    {path: paths.addProfile, component: AddProfilePage},
-    {path: paths.turnkey, component: TurnkeyPage},
-    {path: paths.platforms, component: PlatformsPage},
-    {path: paths.offers, component: OffersPage},
+    {path: paths.wallet, component: WalletPage, sidebar: true},
+    {path: paths.addPlatform, component: AddPlatformPage, sidebar: true},
+    {path: paths.addProfile, component: AddProfilePage, sidebar: true},
+    {path: paths.platforms, component: PlatformsPage, sidebar: true},
+    {path: paths.offers, component: OffersPage, sidebar: true},
 ]
 
 export const privateAdvertiserRoutes: IRoute[] = [
     {path: paths.main, component: MainPage},
-    {path: paths.profile, component: ProfilePage},
+    {path: paths.profile, component: ProfilePage, sidebar: true},
     {path: paths.notFound, component: NotFoundPage},
-    {path: paths.addProfile, component: AddProfilePage},
-    {path: paths.fullServise, component: FullServicePage},
-    {path: paths.catalog, component: CatalogPage},
-    {path: paths.wallet, component: WalletPage},
-    {path: paths.turnkey, component: TurnkeyPage},
-    {path: paths.orders, component: OrdersPage},
+    {path: paths.addProfile, component: AddProfilePage, sidebar: true},
+    {path: paths.fullServise, component: FullServicePage, sidebar: true},
+    {path: paths.catalog, component: CatalogPage, sidebar: true},
+    {path: paths.wallet, component: WalletPage, sidebar: true},
+    {path: paths.turnkey, component: TurnkeyPage, sidebar: true},
+    {path: paths.orders, component: OrdersPage, sidebar: true},
 ]
 
 

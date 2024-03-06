@@ -1,4 +1,6 @@
-import { myProjectStatusFilter, managerProjectStatusFilter, projectTypesFilter, platformStatusFilter, pageFilter } from "@shared/config/filter";
+import { pageFilter } from "@shared/config/pageFilter";
+import { myProjectStatusFilter, managerProjectStatusFilter, projectTypesFilter } from "@shared/config/projectFilter";
+import { platformStatusFilter } from "@shared/config/platformFilter";
 import { useAppSelector } from "@shared/store";
 import { AdvProject } from "@widgets/advProject";
 import { BarFilter } from "@widgets/barFilter";

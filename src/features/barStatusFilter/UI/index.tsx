@@ -1,10 +1,11 @@
-import { pageFilter, projectTypesFilter } from '@shared/config/filter';
-import { roles } from '@shared/config/roles';
+import { pageFilter } from '@shared/config/pageFilter';
+import { advManagerProjectStatus, advMyProjectStatus, projectTypesFilter } from "@shared/config/projectFilter";
 import { useAppDispatch, useAppSelector } from '@shared/store';
 import { filterSlice } from '@shared/store/reducers';
 import  {FC} from 'react';
 import { useTranslation } from 'react-i18next';
-import { advMyProjectStatus, advManagerProjectStatus, bloggerPlatformStatus, bloggerOfferStatus } from './config';
+import { bloggerPlatformStatus } from "@shared/config/platformFilter";
+import { bloggerOfferStatus } from "@shared/config/offerFilter";
 import styles from './styles.module.scss'
 
 interface BarStatusFilterProps{

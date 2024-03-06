@@ -1,25 +1,17 @@
 .dropdown {
   position: relative;
-  // margin-right: 20px;
 }
   
 .menu {
   padding: 25px 20px;
   height: 100%;
-
   position: fixed; 
   top: 0;
-  left: 0;
+  left: 0; /* Скрываем за пределами экрана */
   background-color: #fff;
   border: 1px solid #ccc;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   z-index: 10;
-
-  hr{
-      height: 1px;
-      background: #D9D9D9;
-      margin: 25px 0;
-  }
 
   ul {
     color: var(--Personal-colors-black);
@@ -58,8 +50,8 @@
 }
 
 .burger__icon_btn {
-  --width: 40px;
-  --height: 40px;
+  --width: 32px;
+  --height: 32px;
   --line-height: 2px;
   // --color: var(--Gradients-1);;
   --color: var(--Personal-colors-black);;
@@ -101,8 +93,9 @@
 
 .menu__top{
   display: grid;
-  // margin-bottom: 15px;
-  // border-bottom: 0.5px solid rgba(0, 0, 0, 0.30);
+  padding-bottom: 15px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #D9D9D9;
   grid-auto-flow: column;
   justify-content: space-between;
   align-items: center;
@@ -136,7 +129,7 @@
 }
 
 .switcher__row{
-  margin-top: 15px;
+  // margin-top: 15px;
   padding: 5px;
   justify-content: center;
   border-radius: 25px;
@@ -168,4 +161,33 @@
 
 
 
+@keyframes slideIn {
+  from {
+    // opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    // opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    // opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    // opacity: 0;
+    transform: translateX(-100%);
+  }
+}
+
+.menu_enter {
+  animation: slideIn 1s forwards;
+}
+
+.menu_exit {
+  animation: slideOut 1s forwards;
+}
 

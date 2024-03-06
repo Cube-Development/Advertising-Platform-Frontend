@@ -1,5 +1,5 @@
 import { TemplateIcon2 } from '@shared/assets';
-import { projectTypesFilter } from '@shared/config/filter';
+import { projectTypesFilter } from "@shared/config/projectFilter";
 import { useAppSelector } from '@shared/store';
 import { IAdvDevProjectCard } from '@shared/types/common';
 import {FC} from 'react';

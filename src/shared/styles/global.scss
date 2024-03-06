@@ -5,6 +5,7 @@
 
 body {
   font-family: 'Montserrat', sans-serif;
+  padding-top: var(--container-padding-top);
   
   &.sidebar-open {
     overflow: hidden;
@@ -55,4 +56,8 @@ body {
   max-width: var(--container-width);
   padding: 0 var(--container-padding-side);
   margin: 0 auto;
+}
+
+.sidebar{
+  padding-left: 75px;
 }

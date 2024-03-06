@@ -3,7 +3,6 @@
     grid-template: 1fr / minmax(40px, 50px) 1fr;
     align-items: center;
     margin: 50px auto;
-    max-width: var(--container-width);
 
     button {
         display: flex;
@@ -31,7 +30,7 @@
             font-size: 44px;
             font-style: normal;
             font-weight: 600;
-            color: var(--Gradients-Gradient-1);
+            color: #4772E6;
         }
 
         svg{

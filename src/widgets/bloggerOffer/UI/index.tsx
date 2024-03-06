@@ -15,7 +15,7 @@ interface BloggerOfferProps {
 
 export const BloggerOffer: FC<BloggerOfferProps> = ({ cards }) => {
   return (
-    <div className="container">
+    <div className="container sidebar">
       {
         // cards.length === 0
         // ?

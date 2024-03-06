@@ -1,4 +1,5 @@
-import { offerStatusFilter, pageFilter } from "@shared/config/filter";
+import { pageFilter } from "@shared/config/pageFilter";
+import { offerStatusFilter } from "@shared/config/offerFilter";
 import { useAppSelector } from "@shared/store";
 import { BarFilter } from "@widgets/barFilter";
 import { BloggerOffer } from "@widgets/bloggerOffer";

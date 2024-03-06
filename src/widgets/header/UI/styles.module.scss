@@ -7,6 +7,11 @@
     height: 80px;
     border-bottom: 0.5px solid rgba(0, 0, 0, 0.30);
     width: 100%;
+    z-index: 10;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background: #fff;
 }
 
 .row{
