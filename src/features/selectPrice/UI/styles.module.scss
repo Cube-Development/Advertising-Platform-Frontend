@@ -1,68 +1,66 @@
-.wrapper{
-    display: grid;
-    grid-auto-flow: row;
-    align-items: center;
-    justify-content: space-between;
+.wrapper {
+  display: grid;
+  grid-auto-flow: row;
+  align-items: center;
+  justify-content: space-between;
 
-    hr{
-        height: 2px;
-        margin-bottom: 20px;
-        background: linear-gradient(to right, transparent, #D9D9D9, transparent);
+  hr {
+    height: 2px;
+    margin-bottom: 20px;
+    background: linear-gradient(to right, transparent, #d9d9d9, transparent);
+  }
+
+  p {
+    color: var(--Personal-colors-black);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  svg {
+    &:hover .text {
+      display: block;
     }
 
-    p{
-        color: var(--Personal-colors-black);
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
+    .text {
+      display: none;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
-
-    svg {
-        &:hover .text {
-            display: block;
-        }
-        
-        .text {
-            display: none;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-        }
+  }
 }
 
-  
-
-.title{
-    display: grid;
-    grid-auto-flow: column;
-    align-items: center;
-    justify-content: center;
-    column-gap: 10px;
-    margin-bottom: 30px;
+.title {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: center;
+  column-gap: 10px;
+  margin-bottom: 30px;
 }
 
-.accomms{
-    display: grid;
-    grid-auto-flow: column;
-    justify-content: space-between;
-    column-gap: 40px;
+.accomms {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+  column-gap: 40px;
 }
 
-.info{
-    display: grid;
-    grid-auto-flow: column;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: 40px;
+.info {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
 
-    p{
-        color: var(--Personal-colors-black);
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-    }
+  p {
+    color: var(--Personal-colors-black);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+  }
 }

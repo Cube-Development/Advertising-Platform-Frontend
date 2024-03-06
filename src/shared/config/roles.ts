@@ -1,5 +1,4 @@
-export enum roles  {
-    advertiser = 'advertiser',
-    blogger = 'blogger',
-  }
-  
+export enum roles {
+  advertiser = "advertiser",
+  blogger = "blogger",
+}

@@ -1,29 +1,28 @@
 .types {
-    border-radius: 18px;
-    border: 1px solid #4772E6;
-    overflow: hidden;
-  
-    ul {
-      display: flex; /* Используем flex контейнер */
-      font-size: 28px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: normal;
-      line-height: 0.75;
-      color: #4772E6;
-  
-      li {
-        text-align: center;
-        padding: 20px 0;
-        cursor: pointer;
-        flex: 1; /* Равномерно распределить пространство между элементами */
-        max-width: 33.33%; /* Ограничить каждый элемент шириной трети родителя */
-      }
+  border-radius: 18px;
+  border: 1px solid #4772e6;
+  overflow: hidden;
+
+  ul {
+    display: flex; /* Используем flex контейнер */
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    line-height: 0.75;
+    color: #4772e6;
+
+    li {
+      text-align: center;
+      padding: 20px 0;
+      cursor: pointer;
+      flex: 1; /* Равномерно распределить пространство между элементами */
+      max-width: 33.33%; /* Ограничить каждый элемент шириной трети родителя */
     }
   }
-  
-  .active {
-    background: var(--Gradients-Gradient-1);
-    color: #fff;
-  }
-  
+}
+
+.active {
+  background: var(--Gradients-Gradient-1);
+  color: #fff;
+}

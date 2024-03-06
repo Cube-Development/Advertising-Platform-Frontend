@@ -1,22 +1,21 @@
-.income__wrapper{
-    display: grid;
-  }
-  
-  
-  .income__title{
-    color: var(--Personal-colors-black);
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-  }
-  
-  .income__cash{
-    color: var(--Personal-colors-black);
-    font-size: 32px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    display: grid;
-    align-items: flex-end;
-  }
+.income__wrapper {
+  display: grid;
+}
+
+.income__title {
+  color: var(--Personal-colors-black);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+}
+
+.income__cash {
+  color: var(--Personal-colors-black);
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  display: grid;
+  align-items: flex-end;
+}

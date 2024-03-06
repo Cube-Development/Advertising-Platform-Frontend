@@ -35,26 +35,26 @@ export const Nav: FC<NavProps> = ({ isAuth, currentRole }) => {
             </li>
           ))
         : isAuth && currentRole === roles.blogger
-        ? bloggerNavbar.map((item, index) => (
-            <li
-              key={index}
-              onClick={() => handleNavigation(item.href)}
-              className={location.pathname === item.href ? styles.active : ""}
-            >
-              {item.img && <CalculatorIcon />}
-              {t(item.text)}
-            </li>
-          ))
-        : nonAuthNavbar.map((item, index) => (
-            <li
-              key={index}
-              onClick={() => handleNavigation(item.href)}
-              className={location.pathname === item.href ? styles.active : ""}
-            >
-              {item.img && <KeyIcon />}
-              {t(item.text)}
-            </li>
-          ))}
+          ? bloggerNavbar.map((item, index) => (
+              <li
+                key={index}
+                onClick={() => handleNavigation(item.href)}
+                className={location.pathname === item.href ? styles.active : ""}
+              >
+                {item.img && <CalculatorIcon />}
+                {t(item.text)}
+              </li>
+            ))
+          : nonAuthNavbar.map((item, index) => (
+              <li
+                key={index}
+                onClick={() => handleNavigation(item.href)}
+                className={location.pathname === item.href ? styles.active : ""}
+              >
+                {item.img && <KeyIcon />}
+                {t(item.text)}
+              </li>
+            ))}
     </nav>
   );
 };

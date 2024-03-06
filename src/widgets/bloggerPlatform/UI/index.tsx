@@ -8,7 +8,7 @@ import { Support } from "@features/support";
 import { ZeroPlatform } from "@features/zeroPlatform";
 import { IBloggerPlatformCard } from "@shared/types/common";
 import { FC } from "react";
-import styles from "./styles.module.scss";
+// import styles from "./styles.module.scss";
 
 interface BloggerPlatformProps {
   cards: IBloggerPlatformCard[];

@@ -1,84 +1,77 @@
-.price__card{
-    width: 100%;
-    padding: 20px 20px 20px 20px;
-    border-radius: 40px 40px 0px 40px;
-    background: rgba(255, 255, 255, 0.85);
-    text-align: center;
-    align-items: center;
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+.price__card {
+  width: 100%;
+  padding: 20px 20px 20px 20px;
+  border-radius: 40px 40px 0px 40px;
+  background: rgba(255, 255, 255, 0.85);
+  text-align: center;
+  align-items: center;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 
-    ul{
-        color: rgba(0, 0, 0, 0.70);
-        text-align: left;
-        
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: normal;
+  ul {
+    color: rgba(0, 0, 0, 0.7);
+    text-align: left;
 
-
-        li{
-            display: grid;
-            grid-auto-flow: column;
-            justify-content: start;
-            column-gap: 10px;
-            margin-bottom: 20px;
-        
-            svg{
-                width: 15px;
-                height: 15px;
-            }
-        }
-        
-    }
-}
-
-.standard{
-    border: 2px solid #4772E6;
-}
-
-.complex{
-    border: 2px solid #FF2F66;
-}
-
-.title{
-    color: var(--Personal-colors-black);
-    font-size: 24px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    margin-bottom: 10px;
+
+    li {
+      display: grid;
+      grid-auto-flow: column;
+      justify-content: start;
+      column-gap: 10px;
+      margin-bottom: 20px;
+
+      svg {
+        width: 15px;
+        height: 15px;
+      }
+    }
+  }
 }
 
-.views{
-    color: rgba(0, 0, 0, 0.50);
-    font-size: 20px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    margin-bottom: 20px;
+.standard {
+  border: 2px solid #4772e6;
 }
 
-.price{
-    color: var(--Personal-colors-black);
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-    margin-bottom: 20px;
+.complex {
+  border: 2px solid #ff2f66;
 }
 
-.text{
-    color: var(--Personal-colors-black);
-    text-align: center;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: normal;
-    margin-bottom: 22px;
+.title {
+  color: var(--Personal-colors-black);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  margin-bottom: 10px;
 }
 
+.views {
+  color: rgba(0, 0, 0, 0.5);
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  margin-bottom: 20px;
+}
 
+.price {
+  color: var(--Personal-colors-black);
+  font-size: 24px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: normal;
+  margin-bottom: 20px;
+}
 
-
-
+.text {
+  color: var(--Personal-colors-black);
+  text-align: center;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+  margin-bottom: 22px;
+}

@@ -12,7 +12,7 @@ export const InfoCard: FC<InfoCardProps> = ({ info }) => {
     <div className={styles.info}>
       <img src={`/images/basicInfo/${info.img}`} alt="" />
       <h4 className={styles.count}>
-        <Counter  val={info.count} time={2}/>
+        <Counter val={info.count} time={2} />
       </h4>
       <p className={styles.text}>{info.info}</p>
     </div>

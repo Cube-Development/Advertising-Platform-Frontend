@@ -1,11 +1,11 @@
 .dropdown {
   position: relative;
 }
-  
+
 .menu {
   padding: 25px 20px;
   height: 100%;
-  position: fixed; 
+  position: fixed;
   top: 0;
   left: 0; /* Скрываем за пределами экрана */
   background-color: #fff;
@@ -26,7 +26,7 @@
 
     display: grid;
     align-items: center;
-    
+
     min-height: 70px;
   }
 
@@ -43,8 +43,7 @@
   }
 }
 
-
-.menu__switcher{
+.menu__switcher {
   display: grid;
   justify-content: center;
 }
@@ -54,7 +53,7 @@
   --height: 32px;
   --line-height: 2px;
   // --color: var(--Gradients-1);;
-  --color: var(--Personal-colors-black);;
+  --color: var(--Personal-colors-black);
 
   height: var(--height);
   width: var(--width);
@@ -63,7 +62,7 @@
   justify-content: center;
   align-items: center;
 }
-  
+
 .burger__icon {
   position: relative;
   width: var(--width);
@@ -72,30 +71,29 @@
 
   &::before,
   &::after {
-      content: '';
-      display: block;
-      position: absolute;
-      left: 0;
-      width: var(--width);
-      height: var(--line-height);
-      background-color: var(--color);
+    content: "";
+    display: block;
+    position: absolute;
+    left: 0;
+    width: var(--width);
+    height: var(--line-height);
+    background-color: var(--color);
+  }
 
-    }
+  &::before {
+    top: calc(var(--line-height) * -6);
+  }
 
-    &::before{
-      top: calc(var(--line-height) * -6);
-    }
-
-    &::after{
-      top: calc(var(--line-height) * 6);
-    }
+  &::after {
+    top: calc(var(--line-height) * 6);
+  }
 }
 
-.menu__top{
+.menu__top {
   display: grid;
   padding-bottom: 15px;
   margin-bottom: 25px;
-  border-bottom: 1px solid #D9D9D9;
+  border-bottom: 1px solid #d9d9d9;
   grid-auto-flow: column;
   justify-content: space-between;
   align-items: center;
@@ -109,7 +107,7 @@
 
   &::before,
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     width: 100%;
     height: 2px;
@@ -128,17 +126,17 @@
   }
 }
 
-.switcher__row{
+.switcher__row {
   // margin-top: 15px;
   padding: 5px;
   justify-content: center;
   border-radius: 25px;
-  border: 0.1px solid #4772E6;
+  border: 0.1px solid #4772e6;
   display: inline-flex;
   align-items: center;
   margin-bottom: 20px;
 
-  p{
+  p {
     text-align: center;
     min-width: 150px;
     font-size: 18px;
@@ -153,13 +151,10 @@
   }
 }
 
-.active{
-
+.active {
   background: var(--Gradients-Gradient-1);
   color: #fff;
 }
-
-
 
 @keyframes slideIn {
   from {
@@ -190,4 +185,3 @@
 .menu_exit {
   animation: slideOut 1s forwards;
 }
-

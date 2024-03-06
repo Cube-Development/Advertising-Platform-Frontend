@@ -1,1 +1,1 @@
-export { AuthStateGenerator } from "./authStateGenerator"
+export { AuthStateGenerator } from "./authStateGenerator";

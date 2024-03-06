@@ -1,1 +1,1 @@
-export { HandleAuth } from "./handleAuth"
+export { HandleAuth } from "./handleAuth";

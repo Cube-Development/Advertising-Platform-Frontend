@@ -16,10 +16,9 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
   currentRole,
   toggleRole,
 }) => {
-
   const { t } = useTranslation();
   const [isMenuOpen, setMenuOpen] = useState<null | boolean>(null);
-  const [chapter, setCharper] = useState('');
+  const [chapter, setCharper] = useState("");
   const menuRef = useRef<HTMLDivElement>(null);
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
@@ -28,23 +27,27 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
   const changeCharper = (title: string, haveSubitems?: boolean) => {
     let newCharper;
     if (title === chapter) {
-      newCharper = '';
+      newCharper = "";
     } else {
       newCharper = title;
     }
     setCharper(newCharper);
-    
+
     if (!haveSubitems) {
-      console.log(haveSubitems)
+      console.log(haveSubitems);
       setMenuOpen(false);
-      setCharper('');
+      setCharper("");
     }
   };
 
-  console.log(isMenuOpen)
+  console.log(isMenuOpen);
 
   const handleClickOutside = (event: MouseEvent) => {
-    if (menuRef.current && !menuRef.current.contains(event.target as Node) && isMenuOpen !== null) {
+    if (
+      menuRef.current &&
+      !menuRef.current.contains(event.target as Node) &&
+      isMenuOpen !== null
+    ) {
       setMenuOpen(false);
     }
   };
@@ -72,52 +75,57 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
       <button onClick={toggleMenu} className={styles.burger__icon_btn}>
         <div className={styles.burger__icon} />
       </button>
-      {
-        isMenuOpen !== null &&
+      {isMenuOpen !== null && (
+        <div
+          className={`${styles.menu} ${isMenuOpen ? styles.menu_enter : styles.menu_exit}`}
+        >
+          <div className={styles.menu__top}>
+            <img src="/images/assets/logo.svg" alt="" />
 
-      <div className={`${styles.menu} ${isMenuOpen ? styles.menu_enter : styles.menu_exit}`}>
-        <div className={styles.menu__top}>
-          <img src="/images/assets/logo.svg" alt="" />
-
-          <button onClick={toggleMenu}>
-            <div className={styles.close__icon} />
-          </button>
-        </div>
-        <div className={styles.menu__switcher}>
-          <div className={styles.switcher__row}>
-            <Link to={paths.main}>
-              <p
-                className={`${
-                  currentRole === roles.advertiser ? styles.active : ""
-                }`}
-                onClick={() => {
-                  toggleRole(roles.advertiser);
-                }}
-              >
-                {t("roles.advertiser")}
-              </p>
-            </Link>
-            <Link to={paths.mainBlogger}>
-              <p
-                className={`${
-                  currentRole === roles.blogger ? styles.active : ""
-                }`}
-                onClick={() => {
-                  toggleRole(roles.blogger);
-                }}
-              >
-                {t("roles.blogger")}
-              </p>
-            </Link>
+            <button onClick={toggleMenu}>
+              <div className={styles.close__icon} />
+            </button>
+          </div>
+          <div className={styles.menu__switcher}>
+            <div className={styles.switcher__row}>
+              <Link to={paths.main}>
+                <p
+                  className={`${
+                    currentRole === roles.advertiser ? styles.active : ""
+                  }`}
+                  onClick={() => {
+                    toggleRole(roles.advertiser);
+                  }}
+                >
+                  {t("roles.advertiser")}
+                </p>
+              </Link>
+              <Link to={paths.mainBlogger}>
+                <p
+                  className={`${
+                    currentRole === roles.blogger ? styles.active : ""
+                  }`}
+                  onClick={() => {
+                    toggleRole(roles.blogger);
+                  }}
+                >
+                  {t("roles.blogger")}
+                </p>
+              </Link>
+            </div>
+          </div>
+          <div>
+            {combinedMenu.map((item, index) => (
+              <MenuItem
+                key={item.item.title}
+                item={item}
+                changeCharper={changeCharper}
+                chapter={chapter}
+              />
+            ))}
           </div>
         </div>
-        <div>
-          {combinedMenu.map((item, index) => (
-            <MenuItem key={item.item.title} item={item} changeCharper={changeCharper} chapter={chapter} />
-            ))}
-        </div>
-      </div>
-      }
+      )}
     </div>
   );
 };
