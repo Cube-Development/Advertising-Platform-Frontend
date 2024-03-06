@@ -101,86 +101,86 @@ export const PlatformInfo: FC = () => {
   };
 
   return (
-    <>
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.wrapper}>
-      <div className={`${styles.top} ${isVisible || styles.complite}`}>
-        <span>2</span>
-        <p>{t('add_platform.channel_info')}</p>
-      </div>
-      {
-        isVisible && 
-            <div className={styles.form}>
-              <SelectOptions 
-                  onChange={setValue} 
-                  options={options.category} 
-                  single={true}
-                  type={"category"} 
-                  defaultValue={'add_platform.default_value'} 
-                  title={'add_platform.category.title'} 
-                  text={'add_platform.category.text'}
-                  />
-              <SelectOptions 
-                  onChange={setValue} 
-                  options={options.languages} 
-                  single={false}
-                  type={"languages"} 
-                  defaultValue={'add_platform.default_value'} 
-                  title={'add_platform.languages.title'} 
-                  text={'add_platform.languages.text'}
-              />
-              <SelectOptions 
-                  onChange={setValue} 
-                  options={options.region} 
-                  single={false}
-                  type={"region"} 
-                  defaultValue={'add_platform.default_value'} 
-                  title={'add_platform.region.title'} 
-                  text={'add_platform.region.text'}
-                  />
-              <SelectSex 
-                  onChange={setValue} 
-                  register={register} 
-                  title={'add_platform.sex.title'} 
-                  text={'add_platform.sex.text'}
-                  />
-              <SelectOptions 
-                  onChange={setValue} 
-                  options={options.age} 
-                  single={false}
-                  type={"age"} 
-                  defaultValue={'add_platform.default_value'} 
-                  title={'add_platform.age.title'} 
-                  text={'add_platform.age.text'}
-                  />
-              <SelectDescription  
-                  onChange={setValue} 
-                  title={'add_platform.description.title'} 
-                  text={'add_platform.description.text'}
-                  />
-              <SelectPrice 
-                  accomms={accommList} 
-                  AccommPrice={AccommPrice}  
-                  title={'add_platform.price.title'} 
-                  text={'add_platform.price.text'}  
-                  info={'add_platform.price.info'}/>
-              <SelectSymbol 
-                  onChange={setValue} 
-                  type={"text_limit"} 
-                  title={'add_platform.symbol.title'} 
-                  text={'add_platform.symbol.text'}/>
-              <SavePlatform />
+    <div className='container sidebar'>
+      <form onSubmit={handleSubmit(onSubmit)} className={styles.wrapper}>
+        <div className={`${styles.top} ${isVisible || styles.complite}`}>
+          <span>2</span>
+          <p>{t('add_platform.channel_info')}</p>
+        </div>
+        {
+          isVisible && 
+              <div className={styles.form}>
+                <SelectOptions 
+                    onChange={setValue} 
+                    options={options.category} 
+                    single={true}
+                    type={"category"} 
+                    defaultValue={'add_platform.default_value'} 
+                    title={'add_platform.category.title'} 
+                    text={'add_platform.category.text'}
+                    />
+                <SelectOptions 
+                    onChange={setValue} 
+                    options={options.languages} 
+                    single={false}
+                    type={"languages"} 
+                    defaultValue={'add_platform.default_value'} 
+                    title={'add_platform.languages.title'} 
+                    text={'add_platform.languages.text'}
+                />
+                <SelectOptions 
+                    onChange={setValue} 
+                    options={options.region} 
+                    single={false}
+                    type={"region"} 
+                    defaultValue={'add_platform.default_value'} 
+                    title={'add_platform.region.title'} 
+                    text={'add_platform.region.text'}
+                    />
+                <SelectSex 
+                    onChange={setValue} 
+                    register={register} 
+                    title={'add_platform.sex.title'} 
+                    text={'add_platform.sex.text'}
+                    />
+                <SelectOptions 
+                    onChange={setValue} 
+                    options={options.age} 
+                    single={false}
+                    type={"age"} 
+                    defaultValue={'add_platform.default_value'} 
+                    title={'add_platform.age.title'} 
+                    text={'add_platform.age.text'}
+                    />
+                <SelectDescription  
+                    onChange={setValue} 
+                    title={'add_platform.description.title'} 
+                    text={'add_platform.description.text'}
+                    />
+                <SelectPrice 
+                    accomms={accommList} 
+                    AccommPrice={AccommPrice}  
+                    title={'add_platform.price.title'} 
+                    text={'add_platform.price.text'}  
+                    info={'add_platform.price.info'}/>
+                <SelectSymbol 
+                    onChange={setValue} 
+                    type={"text_limit"} 
+                    title={'add_platform.symbol.title'} 
+                    text={'add_platform.symbol.text'}/>
+                <SavePlatform />
+              </div>
+        }
+        
+      </form>
+
+        {
+          isVisible || 
+
+            <div className={styles.send}>
+              <CreatePlatform />
             </div>
-      }
-      
-    </form>
-
-      {
-        isVisible || 
-
-          <div className={styles.send}>
-            <CreatePlatform />
-          </div>
-      }
-    </>
+        }
+    </div>
   );
 };

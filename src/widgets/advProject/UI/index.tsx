@@ -19,7 +19,7 @@ interface AdvProjectProps {
 
 export const AdvProject: FC<AdvProjectProps> = ({cards}) => {
     return (
-        <div className='container'>
+        <div className='container sidebar'>
             {cards.length === 0
             ?
             <ZeroProject NewProjectBtn={NewProject} TurnkeyProjectBtn={TurnkeyProject}/>

@@ -18,27 +18,36 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
 }) => {
 
   const { t } = useTranslation();
-
-  const [isMenuOpen, setMenuOpen] = useState(false);
+  const [isMenuOpen, setMenuOpen] = useState<null | boolean>(null);
+  const [chapter, setCharper] = useState('');
   const menuRef = useRef<HTMLDivElement>(null);
-
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
   };
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+  const changeCharper = (title: string, haveSubitems?: boolean) => {
+    let newCharper;
+    if (title === chapter) {
+      newCharper = '';
+    } else {
+      newCharper = title;
+    }
+    setCharper(newCharper);
+    
+    if (!haveSubitems) {
+      console.log(haveSubitems)
       setMenuOpen(false);
+      setCharper('');
     }
   };
 
-  // useEffect(() => {
-  //   document.addEventListener("click", handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener("click", handleClickOutside);
-  //   };
-  // }, []);
+  console.log(isMenuOpen)
 
+  const handleClickOutside = (event: MouseEvent) => {
+    if (menuRef.current && !menuRef.current.contains(event.target as Node) && isMenuOpen !== null) {
+      setMenuOpen(false);
+    }
+  };
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
@@ -63,52 +72,52 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
       <button onClick={toggleMenu} className={styles.burger__icon_btn}>
         <div className={styles.burger__icon} />
       </button>
+      {
+        isMenuOpen !== null &&
 
-      {isMenuOpen && (
-        <div className={styles.menu}>
-          <div className={styles.menu__top}>
-            <img src="/images/assets/logo.svg" alt="" />
+      <div className={`${styles.menu} ${isMenuOpen ? styles.menu_enter : styles.menu_exit}`}>
+        <div className={styles.menu__top}>
+          <img src="/images/assets/logo.svg" alt="" />
 
-            <button onClick={toggleMenu}>
-              <div className={styles.close__icon} />
-            </button>
-          </div>
-          <hr />
-          <div className={styles.menu__switcher}>
-            <div className={styles.switcher__row}>
-              <Link to={paths.main}>
-                <p
-                  className={`${
-                    currentRole === roles.advertiser ? styles.active : ""
-                  }`}
-                  onClick={() => {
-                    toggleRole(roles.advertiser);
-                  }}
-                >
-                  {t("roles.advertiser")}
-                </p>
-              </Link>
-              <Link to={paths.mainBlogger}>
-                <p
-                  className={`${
-                    currentRole === roles.blogger ? styles.active : ""
-                  }`}
-                  onClick={() => {
-                    toggleRole(roles.blogger);
-                  }}
-                >
-                  {t("roles.blogger")}
-                </p>
-              </Link>
-            </div>
-          </div>
-          <div>
-            {combinedMenu.map((item, index) => (
-              <MenuItem key={index} item={item.item} subItems={[]} />
-            ))}
+          <button onClick={toggleMenu}>
+            <div className={styles.close__icon} />
+          </button>
+        </div>
+        <div className={styles.menu__switcher}>
+          <div className={styles.switcher__row}>
+            <Link to={paths.main}>
+              <p
+                className={`${
+                  currentRole === roles.advertiser ? styles.active : ""
+                }`}
+                onClick={() => {
+                  toggleRole(roles.advertiser);
+                }}
+              >
+                {t("roles.advertiser")}
+              </p>
+            </Link>
+            <Link to={paths.mainBlogger}>
+              <p
+                className={`${
+                  currentRole === roles.blogger ? styles.active : ""
+                }`}
+                onClick={() => {
+                  toggleRole(roles.blogger);
+                }}
+              >
+                {t("roles.blogger")}
+              </p>
+            </Link>
           </div>
         </div>
-      )}
+        <div>
+          {combinedMenu.map((item, index) => (
+            <MenuItem key={item.item.title} item={item} changeCharper={changeCharper} chapter={chapter} />
+            ))}
+        </div>
+      </div>
+      }
     </div>
   );
 };

@@ -6,6 +6,7 @@ import {
 } from "./routes";
 import { roles } from "@shared/config/roles";
 import { useAppSelector } from "@shared/store";
+import { SideBarLayout } from "@widgets/layouts";
 
 export const Routing = () => {
   const { isAuth, role } = useAppSelector((state) => state.userReducer);
@@ -14,17 +15,33 @@ export const Routing = () => {
     <Routes>
       {isAuth && role === roles.blogger
         ? privateBloggerRoutes.map((route) => (
-            <Route
-              path={route.path}
-              element={<route.component />}
-              key={route.path}
-            />
+          <Route
+          path={route.path}
+          element={
+              route.sidebar ?
+              <SideBarLayout>
+                <route.component />
+              </SideBarLayout>
+            :
+              <route.component />
+          
+        }
+          key={route.path}
+        />
           ))
         : isAuth && role === roles.advertiser
         ? privateAdvertiserRoutes.map((route) => (
             <Route
               path={route.path}
-              element={<route.component />}
+              element={
+                route.sidebar ?
+                <SideBarLayout>
+                  <route.component />
+                </SideBarLayout>
+              :
+                <route.component />
+            
+          }
               key={route.path}
             />
           ))

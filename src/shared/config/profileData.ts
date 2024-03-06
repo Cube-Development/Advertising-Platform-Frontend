@@ -18,17 +18,9 @@ enum profileData{
 } 
 
 
-
-export const entityData = {
-    title: "add_profile.basic_info.basic_info",
-    parametr: [
-    {data: "add_profile.basic_info.FIO", type: profileData.name},  
-    {data: "add_profile.basic_info.registration_number", type: profileData.registration_number},  
-]}
-
 export const selfEmployed = {
     title: "add_profile.basic_info.basic_info",
-    parametr: [
+    parameters: [
         {data: "add_profile.basic_info.name", type: profileData.name},  
         {data: "add_profile.basic_info.registration_number", type: profileData.registration_number},  
         {data: "add_profile.basic_info.registration_date", type: profileData.registration_date},  
@@ -36,17 +28,43 @@ export const selfEmployed = {
 ]}
 
 
+export const entity = {
+    title: "add_profile.basic_info.basic_info",
+    parameters: [
+        {data: "add_profile.basic_info.entity", type: profileData.name},  
+        {data: "add_profile.basic_info.address", type: profileData.registration_date},  
+        {data: "add_profile.basic_info.INN", type: profileData.INN},  
+]}
+
+
+export const individual = {
+    title: "add_profile.basic_info.basic_info",
+    parameters: [
+        {data: "add_profile.basic_info.individual", type: profileData.name},  
+        {data: "add_profile.basic_info.address", type: profileData.registration_date},  
+        {data: "add_profile.basic_info.INN", type: profileData.INN},  
+]}
+
 export const bank = {
     title: "add_profile.bank_data.bank_data",
-    parametr: [
+    parameters: [
         {data: "add_profile.bank_data.bank_name", type: profileData.bank_name},  
         {data: "add_profile.bank_data.bank_mfo", type: profileData.bank_mfo},  
         {data: "add_profile.bank_data.checking_account", type: profileData.checking_account},  
 ]}
 
+export const bankCard = {
+    title: "add_profile.bank_data.bank_data",
+    parameters: [
+        {data: "add_profile.bank_data.bank_name", type: profileData.bank_name},  
+        {data: "add_profile.bank_data.bank_mfo", type: profileData.bank_mfo},  
+        {data: "add_profile.bank_data.transit_account", type: profileData.transit_account},  
+        {data: "add_profile.bank_data.card_data", type: profileData.card_number},  
+]}
+
 export const contact = {
     title: "add_profile.contact.contact",
-    parametr: [
+    parameters: [
         {data: "add_profile.contact.phone", type: profileData.phone},  
         {data: "add_profile.contact.email", type: profileData.email},  
     ]
@@ -55,6 +73,24 @@ export const contact = {
 
 export const SelfEmployedData = [
     selfEmployed,
+    bank,
+    contact
+]
+
+export const SelfEmployedCardData = [
+    selfEmployed,
+    bankCard,
+    contact
+]
+
+export const EntityData = [
+    entity,
+    bank,
+    contact
+]
+
+export const IndividualData = [
+    individual,
     bank,
     contact
 ]

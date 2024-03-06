@@ -1,6 +1,6 @@
 import { EyeIcon, ManIcon, SubsIcon, WomanIcon } from '@shared/assets';
-import { projectTypesFilter } from '@shared/config/filter';
-import { chating, orderStatus } from '@shared/config/order';
+import { projectTypesFilter } from "@shared/config/projectFilter";
+import { chating, orderStatus } from '@shared/config/orderFilter';
 import { IChannelChat, IAdvProjectSubcard } from '@shared/types/common';
 import { FC } from 'react';
 import { useTranslation } from 'react-i18next';

@@ -7,14 +7,12 @@
     border: 1px solid #4772E6;
     padding-top: 20px ;
     margin-bottom: 10px;
-    // max-width: 1105px;
-
+    
 }
 
 .card__top{
-    display: grid;
-    grid-auto-flow: column;
-
+    display: flex;
+    // grid-auto-flow: column;
 
 }
 
@@ -22,7 +20,8 @@
     display: grid;
     grid-auto-flow: row;
     row-gap: 10px;
-    max-width: 345px;
+    // max-width: 345px;
+    width: 35%;
     border-right:  1px solid #D9D9D9;
     padding: 0 20px 0 30px;
 
@@ -79,7 +78,7 @@
 .card__right{
     display: grid;
     grid-auto-flow: row;
-
+    width: 65%;
     border-right:  1px solid #D9D9D9;
     padding: 0 20px;
 
@@ -150,6 +149,8 @@
     display: grid;
     grid-auto-flow: row;
     justify-content: space-between;
+    width: 5%;
+    // width: 54px;
 
     svg{
         width: 30px;
