@@ -1,6 +1,5 @@
 .why__row{
   display: grid;
-  grid-auto-flow: column;
-  justify-content: center;
+  grid-template: 1fr / repeat(2, 1fr);
   column-gap: 50px;
 }

@@ -1,17 +1,17 @@
-import { ActivatePlatform } from '@features/activatePlatform';
-import { AddPlatform } from '@features/addPlatform';
-import { BloggerPlatformCard } from '@features/bloggerPlatformCard';
-import { RepeatOffer } from '@features/repeatOffer';
-import { SeeOffers } from '@features/seeOffers';
-import { SeeReason } from '@features/seeReason';
-import { Support } from '@features/support';
-import { ZeroPlatform } from '@features/zeroPlatform';
-import { IBloggerPlatformCard } from '@shared/types/common';
-import {FC} from 'react';
-import styles from './styles.module.scss'
+import { ActivatePlatform } from "@features/activatePlatform";
+import { AddPlatform } from "@features/addPlatform";
+import { BloggerPlatformCard } from "@features/bloggerPlatformCard";
+import { RepeatOffer } from "@features/repeatOffer";
+import { SeeOffers } from "@features/seeOffers";
+import { SeeReason } from "@features/seeReason";
+import { Support } from "@features/support";
+import { ZeroPlatform } from "@features/zeroPlatform";
+import { IBloggerPlatformCard } from "@shared/types/common";
+import { FC } from "react";
+// import styles from "./styles.module.scss";
 
 interface BloggerPlatformProps {
-    cards: IBloggerPlatformCard[];
+  cards: IBloggerPlatformCard[];
 }
 
 export const BloggerPlatform: FC<BloggerPlatformProps> = ({cards}) => {
@@ -37,3 +37,4 @@ export const BloggerPlatform: FC<BloggerPlatformProps> = ({cards}) => {
         </div>
     );
 };
+
