@@ -91,9 +91,12 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
             <div>
               <ManIcon />
             </div>
-            <div className={styles.colorline} style={{}}>
-              22
-            </div>
+            <div
+              className={styles.colorline}
+              style={{ "--male": `${20}%` } as React.CSSProperties}
+              data-male={`${20}%`}
+              data-female={`${80}%`}
+            />
             <div>
               <WomanIcon />
             </div>

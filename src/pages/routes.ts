@@ -39,7 +39,7 @@ export const privateAdvertiserRoutes: IRoute[] = [
   { path: paths.notFound, component: NotFoundPage },
   { path: paths.addProfile, component: AddProfilePage, sidebar: true },
   { path: paths.fullServise, component: FullServicePage, sidebar: true },
-  { path: paths.catalog, component: CatalogPage, sidebar: true },
+  { path: paths.catalog, component: CatalogPage },
   { path: paths.wallet, component: WalletPage, sidebar: true },
   { path: paths.turnkey, component: TurnkeyPage, sidebar: true },
   { path: paths.orders, component: OrdersPage, sidebar: true },

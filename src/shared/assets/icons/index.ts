@@ -1,6 +1,7 @@
 export { ArrowIcon } from "./arrow";
 export { ArrowIcon2 } from "./arrow2";
 export { ArrowIcon3 } from "./arrow3";
+export { BasketIcon } from "./basket";
 export { BookIcon } from "./book";
 export { BackIcon } from "./back";
 export { ChatIcon } from "./chat";

@@ -747,6 +747,41 @@
         }
     },
 
+    "platform": {
+        "cross": "Совпадение"
+    },
+    "catalog": {
+        "catalog": "Каталог площадок", 
+        "search": {
+            "parameters": "Параметры поиска",
+            "AI": "Автоподбор с ИИ"
+        },
+
+        "category":{
+            "title": "Категория бизнеса:",
+            "default_value": "sample"
+        },
+        "age":{
+            "title": "Возраст:",
+            "default_value": "sample"
+        },
+        "sex":{
+            "title": "Пол:",
+            "default_value": "sample"
+        },
+        "region":{
+            "title": "Регион:",
+            "default_value": "sample"
+        },
+        "languages": {
+            "title": "Язык:",
+            "default_value": "sample"
+        },
+        "recommendation": "Рекомендованные ЦА"
+
+
+    },
+
     "add_platform_btn": {
         "telegram": "Telegram",
         "instagram": "Instagram",

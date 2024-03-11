@@ -1,3 +1,5 @@
+import { IProfileData } from "./profile";
+
 export interface ILogin {
   (vision: boolean, data?: { name: string; email: string }): void;
 }
@@ -153,30 +155,11 @@ export interface IBlockData {
 
 export interface IRowData {
   data: string;
-  type: keyof IAddProfileData;
+  type: keyof IProfileData;
 }
 
 export interface IParameterData {
   title: string;
   default_value?: string;
   text: string;
-}
-
-export interface IAddProfileData {
-  type_legal: number;
-  name: string;
-  address: string;
-  INN: number;
-  checking_account: string;
-  bank_name: string;
-  bank_mfo: number;
-  phone: string;
-  email: string;
-  PNFL: number;
-  registration_number: number;
-  registration_date: string;
-  transit_account: string;
-  card_number: number;
-  card_date_year: number;
-  card_date_month: number;
 }

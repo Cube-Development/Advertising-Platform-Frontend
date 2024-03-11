@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { BarProfileFilter } from "@features/barProfileFilter/UI";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { IAddProfileData } from "@shared/types/common";
+import { IProfileData } from "@shared/types/profile";
 import {
   SelfEmployedData,
   EntityData,
@@ -16,6 +16,7 @@ import { useAppSelector } from "@shared/store";
 import { profileTypes } from "@shared/config/profileFilter";
 import { profileFilter, subprofileFilter } from "@shared/config/profileFilter";
 import { BarSubrofileFilter } from "@features/barSubprofileFilter";
+import { pageFilter } from "@shared/config/pageFilter";
 
 export const ProfileCard: FC = () => {
   const { t } = useTranslation();
@@ -24,7 +25,7 @@ export const ProfileCard: FC = () => {
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<IAddProfileData>();
+  } = useForm<IProfileData>();
 
   const { profileFilter: profile } = useAppSelector(
     (state) => state.filterReducer,
@@ -43,14 +44,14 @@ export const ProfileCard: FC = () => {
           ? SelfEmployedData
           : SelfEmployedCardData;
 
-  const onSubmit: SubmitHandler<IAddProfileData> = (data) => {
+  const onSubmit: SubmitHandler<IProfileData> = (data) => {
     console.log(data);
   };
 
   return (
     <div className="container sidebar">
       <form onSubmit={handleSubmit(onSubmit)} className={styles.wrapper}>
-        <BarProfileFilter />
+        <BarProfileFilter page={pageFilter.profile} />
 
         <div className={styles.block}>
           {profile === profileFilter.selfEmployed && <BarSubrofileFilter />}

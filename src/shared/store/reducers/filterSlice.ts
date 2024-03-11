@@ -5,12 +5,14 @@ import {
 } from "@shared/config/projectFilter";
 import { subprofileFilter } from "@shared/config/profileFilter";
 import { profileFilter } from "@shared/config/profileFilter";
+import { catalogFilter } from "@shared/config/catalogFilter";
 
 interface FilterState {
   typeFilter: string;
   statusFilter: string;
   profileFilter: string;
   subprofileFilter: string;
+  catalogFilter: string;
 }
 
 const initialState: FilterState = {
@@ -18,6 +20,7 @@ const initialState: FilterState = {
   statusFilter: myProjectStatusFilter.active,
   profileFilter: profileFilter.selfEmployed,
   subprofileFilter: subprofileFilter.account,
+  catalogFilter: catalogFilter.parameters,
 };
 
 export const filterSlice = createSlice({
@@ -36,6 +39,9 @@ export const filterSlice = createSlice({
     },
     setSubprofileFilter: (state, action: PayloadAction<string>) => {
       state.subprofileFilter = action.payload;
+    },
+    setCatalogFilter: (state, action: PayloadAction<string>) => {
+      state.catalogFilter = action.payload;
     },
   },
 });

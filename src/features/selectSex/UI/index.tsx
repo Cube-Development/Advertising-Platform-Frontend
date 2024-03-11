@@ -8,17 +8,11 @@ import { UseFormRegister, UseFormSetValue } from "react-hook-form";
 
 interface SelectSexProps {
   title: string;
-  text: string;
-  register: UseFormRegister<IAddPLatformData>;
+  text?: string;
   onChange: UseFormSetValue<any>;
 }
 
-export const SelectSex: FC<SelectSexProps> = ({
-  title,
-  text,
-  register,
-  onChange,
-}) => {
+export const SelectSex: FC<SelectSexProps> = ({ title, text, onChange }) => {
   const { t } = useTranslation();
 
   const [position, setPosition] = useState(50);
@@ -33,7 +27,7 @@ export const SelectSex: FC<SelectSexProps> = ({
     <div className={styles.wrapper}>
       <div className={styles.title}>
         <p>{t(title)}</p>
-        <InfoIcon />
+        {text && <InfoIcon />}
       </div>
       <div className={styles.slider}>
         <MySlider

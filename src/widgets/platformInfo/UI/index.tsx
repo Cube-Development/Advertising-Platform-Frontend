@@ -93,7 +93,6 @@ export const PlatformInfo: FC = () => {
 
   const { t } = useTranslation();
   const {
-    register,
     handleSubmit,
     setValue,
     formState: { errors },
@@ -142,7 +141,6 @@ export const PlatformInfo: FC = () => {
             />
             <SelectSex
               onChange={setValue}
-              register={register}
               title={"add_platform.sex.title"}
               text={"add_platform.sex.text"}
             />
