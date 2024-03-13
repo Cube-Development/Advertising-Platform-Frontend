@@ -13,6 +13,8 @@ interface FilterState {
   profileFilter: string;
   subprofileFilter: string;
   catalogFilter: string;
+  networkFilter: string;
+  sortingFilter: string;
 }
 
 const initialState: FilterState = {
@@ -21,6 +23,8 @@ const initialState: FilterState = {
   profileFilter: profileFilter.selfEmployed,
   subprofileFilter: subprofileFilter.account,
   catalogFilter: catalogFilter.parameters,
+  networkFilter: "",
+  sortingFilter: "",
 };
 
 export const filterSlice = createSlice({
@@ -42,6 +46,12 @@ export const filterSlice = createSlice({
     },
     setCatalogFilter: (state, action: PayloadAction<string>) => {
       state.catalogFilter = action.payload;
+    },
+    setNetworkFilter: (state, action: PayloadAction<string>) => {
+      state.networkFilter = action.payload;
+    },
+    setSortingFilter: (state, action: PayloadAction<string>) => {
+      state.sortingFilter = action.payload;
     },
   },
 });

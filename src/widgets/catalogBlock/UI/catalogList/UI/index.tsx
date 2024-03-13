@@ -3,6 +3,10 @@ import styles from "./styles.module.scss";
 import { CatalogCard } from "@features/catalogCard";
 import { AddToBasket } from "@features/addToBasket";
 import { FormatList } from "@features/formatList";
+import { NetworkFilter } from "@features/networkFilter";
+import { SortingFilter } from "@features/sortingFilter";
+import { useTranslation } from "react-i18next";
+import { SearchFilter } from "@features/searchFilter";
 
 const cards = [
   {
@@ -54,9 +58,20 @@ const cards = [
 ];
 
 export const CatalogList: FC = () => {
+  const { t } = useTranslation();
+
   return (
     <div className="container">
       <div className={styles.wrapper}>
+        <div className={styles.filters}>
+          <span>
+            {t("catalog.all_platform")}: {cards.length}
+          </span>
+          <NetworkFilter />
+          <SortingFilter />
+        </div>
+
+        <SearchFilter />
         {cards.map((card, index) => (
           <CatalogCard
             card={card}

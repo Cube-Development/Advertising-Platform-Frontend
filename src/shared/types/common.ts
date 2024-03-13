@@ -163,3 +163,11 @@ export interface IParameterData {
   default_value?: string;
   text: string;
 }
+
+export interface IFilerData {
+  name: string;
+  img?: JSX.Element;
+  type: string;
+  platform?: number;
+  sort?: number;
+}

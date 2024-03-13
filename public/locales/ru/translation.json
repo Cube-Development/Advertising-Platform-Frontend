@@ -437,8 +437,7 @@
             "agreed": "На согласовании"
         },
 
-        "sorting": "Сортировака:",
-        "date": "По дате",
+
 
         "card": {
             "status": {
@@ -752,6 +751,7 @@
     },
     "catalog": {
         "catalog": "Каталог площадок", 
+        "all_platform": "Площадки",
         "search": {
             "parameters": "Параметры поиска",
             "AI": "Автоподбор с ИИ"
@@ -780,6 +780,20 @@
         "recommendation": "Рекомендованные ЦА"
 
 
+    },
+
+    "filter": {
+        "title": "Соцсеть",
+        "telegram": "Telegram",
+        "instagram": "Instagram",
+        "youtube": "Youtube"
+    },
+
+
+    "sorting": {
+        "title": "Сортировака",
+        "date":"По дате",
+        "subscribers":"По подписчикам"
     },
 
     "add_platform_btn": {
