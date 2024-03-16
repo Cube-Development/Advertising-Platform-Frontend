@@ -157,6 +157,7 @@ export const PlatformInfo: FC = () => {
               onChange={setValue}
               title={"add_platform.description.title"}
               text={"add_platform.description.text"}
+              placeholder={"add_platform.default_input"}
             />
             <SelectPrice
               accomms={accommList}

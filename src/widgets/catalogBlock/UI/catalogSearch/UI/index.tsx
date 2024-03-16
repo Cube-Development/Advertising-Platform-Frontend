@@ -8,6 +8,10 @@ import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { IAddPLatformData, IOptions } from "@shared/types/common";
 import { QualityIcon } from "@shared/assets";
+import { useAppSelector } from "@shared/store";
+import { catalogFilter } from "@shared/config/catalogFilter";
+import { SelectDescription } from "@features/selectDescription";
+import { AiFilter } from "@features/aiFilter";
 
 const options: IOptions = {
   category: [
@@ -74,7 +78,10 @@ export const CatalogSearch: FC = () => {
   const [selectedLanguage, setSelectedLanguage] = useState("");
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedAge, setSelectedAge] = useState("");
-  const [isVisible, setVisible] = useState(true);
+
+  const { catalogFilter: filter } = useAppSelector(
+    (state) => state.filterReducer
+  );
 
   useEffect(() => {
     setSelectedCategory(options.category[0].value);
@@ -93,43 +100,56 @@ export const CatalogSearch: FC = () => {
     <div className={styles.wrapper}>
       <BarProfileFilter page={pageFilter.catalog} />
       <div className={styles.options}>
-        <SelectOptions
-          onChange={setValue}
-          options={options.category}
-          single={true}
-          type={"category"}
-          defaultValue={"catalog.category.default_value"}
-          title={"catalog.category.title"}
-          isRow={true}
-        />
-        <SelectOptions
-          onChange={setValue}
-          options={options.age}
-          single={false}
-          type={"age"}
-          defaultValue={"catalog.age.default_value"}
-          title={"catalog.age.title"}
-          isRow={true}
-        />
-        <SelectSex onChange={setValue} title={"catalog.sex.title"} />
-        <SelectOptions
-          onChange={setValue}
-          options={options.languages}
-          single={false}
-          type={"languages"}
-          defaultValue={"catalog.languages.default_value"}
-          title={"catalog.languages.title"}
-          isRow={true}
-        />
-        <SelectOptions
-          onChange={setValue}
-          options={options.region}
-          single={false}
-          type={"region"}
-          defaultValue={"catalog.region.default_value"}
-          title={"catalog.region.title"}
-          isRow={true}
-        />
+        {filter === catalogFilter.parameters ? (
+          <>
+            <SelectOptions
+              onChange={setValue}
+              options={options.category}
+              single={true}
+              type={"category"}
+              defaultValue={"catalog.category.default_value"}
+              title={"catalog.category.title"}
+              isRow={true}
+            />
+            <SelectOptions
+              onChange={setValue}
+              options={options.age}
+              single={false}
+              type={"age"}
+              defaultValue={"catalog.age.default_value"}
+              title={"catalog.age.title"}
+              isRow={true}
+            />
+            <SelectSex onChange={setValue} title={"catalog.sex.title"} />
+            <SelectOptions
+              onChange={setValue}
+              options={options.languages}
+              single={false}
+              type={"languages"}
+              defaultValue={"catalog.languages.default_value"}
+              title={"catalog.languages.title"}
+              isRow={true}
+            />
+            <SelectOptions
+              onChange={setValue}
+              options={options.region}
+              single={false}
+              type={"region"}
+              defaultValue={"catalog.region.default_value"}
+              title={"catalog.region.title"}
+              isRow={true}
+            />
+          </>
+        ) : (
+          <>
+            <SelectDescription
+              onChange={setValue}
+              title={"catalog.ai.title"}
+              placeholder={"catalog.ai.default_input"}
+            />
+            <AiFilter />
+          </>
+        )}
         <div className={styles.recommendation}>
           <QualityIcon />
           <p>{t("catalog.recommendation")}</p>

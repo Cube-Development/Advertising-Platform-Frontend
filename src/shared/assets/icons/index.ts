@@ -27,6 +27,7 @@ export { ProtectIcon } from "./protect";
 export { ProtectIcon2 } from "./protect2";
 export { QualityIcon } from "./quality";
 export { RatingIcon } from "./rating";
+export { RobotIcon } from "./robot";
 export { RocketIcon } from "./rocket";
 export { SearchIcon } from "./search";
 export { SortUpIcon } from "./sortUp";
