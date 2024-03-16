@@ -80,7 +80,7 @@ export const CatalogSearch: FC = () => {
   const [selectedAge, setSelectedAge] = useState("");
 
   const { catalogFilter: filter } = useAppSelector(
-    (state) => state.filterReducer
+    (state) => state.filterReducer,
   );
 
   useEffect(() => {
@@ -150,9 +150,9 @@ export const CatalogSearch: FC = () => {
             <AiFilter />
           </>
         )}
-        <div className={styles.recommendation}>
+        <div className={styles.recomendation}>
           <QualityIcon />
-          <p>{t("catalog.recommendation")}</p>
+          <p>{t("catalog.recomendation")}</p>
         </div>
       </div>
     </div>

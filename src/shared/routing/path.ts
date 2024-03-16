@@ -4,6 +4,7 @@ export enum paths {
   profile = "/profile",
   notFound = "/*",
   catalog = "/catalog",
+  cart = "/cart",
   platformOwner = "/platformowner",
   turnkey = "/turnkey",
   wallet = "/wallet",

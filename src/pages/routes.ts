@@ -14,6 +14,7 @@ import { PlatformsPage } from "./Platforms";
 import { OffersPage } from "./Offers";
 import { OrdersPage } from "./Orders";
 import { AddProfilePage } from "./AddProfile";
+import { CartPage } from "./Cart";
 
 export interface IRoute {
   path: string;
@@ -40,6 +41,7 @@ export const privateAdvertiserRoutes: IRoute[] = [
   { path: paths.addProfile, component: AddProfilePage, sidebar: true },
   { path: paths.fullServise, component: FullServicePage, sidebar: true },
   { path: paths.catalog, component: CatalogPage },
+  { path: paths.cart, component: CartPage },
   { path: paths.wallet, component: WalletPage, sidebar: true },
   { path: paths.turnkey, component: TurnkeyPage, sidebar: true },
   { path: paths.orders, component: OrdersPage, sidebar: true },
@@ -50,5 +52,6 @@ export const publicRoutes: IRoute[] = [
   { path: paths.main, component: MainPage },
   { path: paths.notFound, component: NotFoundPage },
   { path: paths.catalog, component: CatalogPage },
+  { path: paths.cart, component: CartPage },
   { path: paths.turnkey, component: TurnkeyPage },
 ];
