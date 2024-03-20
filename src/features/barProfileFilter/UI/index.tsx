@@ -3,7 +3,7 @@ import { filterSlice } from "@shared/store/reducers";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { profileTypes } from "@shared/config/profileFilter";
+import { profileTypes, walletTopUpTypes } from "@shared/config/profileFilter";
 import { catalogTypes } from "@shared/config/catalogFilter";
 import { pageFilter } from "@shared/config/pageFilter";
 
@@ -17,17 +17,23 @@ export const BarProfileFilter: FC<BarProfileFilterProps> = ({ page }) => {
   const { profileFilter, catalogFilter } = useAppSelector(
     (state) => state.filterReducer,
   );
-  const [types, filter, spisok] =
-    page === pageFilter.profile
-      ? [profileTypes, profileFilter, styles.profile]
+  const [types, filter] =
+    page === pageFilter.profile || page === pageFilter.walletWithdraw
+      ? [profileTypes, profileFilter]
       : page === pageFilter.catalog
-        ? [catalogTypes, catalogFilter, styles.catalog]
-        : [[], "", ""];
+        ? [catalogTypes, catalogFilter]
+        : page === pageFilter.walletTopUp
+          ? [walletTopUpTypes, profileFilter]
+          : [[], "", ""];
 
   const dispatch = useAppDispatch();
 
   const toggleBar = (type: string) => {
-    if (page === pageFilter.profile) {
+    if (
+      page === pageFilter.profile ||
+      page === pageFilter.walletWithdraw ||
+      page === pageFilter.walletTopUp
+    ) {
       dispatch(filterSlice.actions.setProfileFilter(type));
     } else if (page === pageFilter.catalog) {
       dispatch(filterSlice.actions.setCatalogFilter(type));
@@ -36,7 +42,7 @@ export const BarProfileFilter: FC<BarProfileFilterProps> = ({ page }) => {
 
   return (
     <div className={styles.types}>
-      <ul className={spisok}>
+      <ul className={styles.profile}>
         {types.map((type, index) => (
           <li
             key={index}

@@ -17,6 +17,6 @@ export const bloggerMenu = [
 ];
 
 export const commonMenu = [
-  { item: { path: paths.wallet, img: WalletIcon } },
+  { item: { path: paths.main, img: WalletIcon } },
   { item: { path: paths.main, img: BookIcon } },
 ];

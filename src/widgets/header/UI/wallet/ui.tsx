@@ -46,10 +46,10 @@ export const Wallet: FC = () => {
       {isMenuOpen && (
         <div className={styles.menu}>
           <ul>
-            <li>{t("wallet.add_funds")}</li>
-            <li>{t("wallet.withdraw")}</li>
-            <li>{t("wallet.history")}</li>
-            <li>{t("wallet.invoice")}</li>
+            <li>{t("wallet_menu.top_up")}</li>
+            <li>{t("wallet_menu.withdraw")}</li>
+            <li>{t("wallet_menu.history")}</li>
+            <li>{t("wallet_menu.invoice")}</li>
           </ul>
         </div>
       )}

@@ -1,0 +1,62 @@
+.wrapper {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: space-between;
+  padding: 30px;
+  align-items: center;
+  border-radius: 12px;
+  border: 1px solid var(--Containers, #8c8c8c);
+  background: var(--Personal-colors-White);
+  cursor: pointer;
+}
+
+.active__account {
+  border: 1px solid #4772e6;
+}
+
+.content {
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 10px;
+  align-items: center;
+
+  p {
+    color: var(--Personal-color-black);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 0.75;
+  }
+
+  span {
+    color: var(--Containers, #8c8c8c);
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+}
+
+.outer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: 0.2px solid #000;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 0.2px solid #000;
+}
+
+.active {
+  background: var(--Gradients-Gradient-1);
+}

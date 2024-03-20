@@ -1,6 +1,8 @@
 export { ArrowIcon } from "./arrow";
 export { ArrowIcon2 } from "./arrow2";
 export { ArrowIcon3 } from "./arrow3";
+export { ArrowIcon4 } from "./arrow4";
+export { ArrowIcon5 } from "./arrow5";
 export { BasketIcon } from "./basket";
 export { BookIcon } from "./book";
 export { BackIcon } from "./back";
@@ -9,6 +11,7 @@ export { CalculatorIcon } from "./calculator";
 export { CampaignIcon } from "./campaign";
 export { CancelIcon } from "./cancel";
 export { CartIcon } from "./cart";
+export { CardIcon } from "./card";
 export { CloseIcon } from "./close";
 export { CompliteIcon } from "./complite";
 export { EyeIcon } from "./eye";

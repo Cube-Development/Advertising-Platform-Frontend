@@ -55,10 +55,10 @@ export const commonMenu = [
   {
     item: { title: "burger_menu.wallet", img: WalletIcon },
     subItems: [
-      { title: "burger_menu.add_funds", path: paths.wallet },
-      { title: "burger_menu.withdraw", path: paths.wallet },
-      { title: "burger_menu.history", path: paths.wallet },
-      { title: "burger_menu.invoice", path: paths.wallet },
+      { title: "burger_menu.top_up", path: paths.walletTopUp },
+      { title: "burger_menu.withdraw", path: paths.walletWithdraw },
+      { title: "burger_menu.history", path: paths.wallethistory },
+      { title: "burger_menu.invoice", path: paths.main },
     ],
   },
   { item: { title: "burger_menu.base", path: paths.main, img: BookIcon } },

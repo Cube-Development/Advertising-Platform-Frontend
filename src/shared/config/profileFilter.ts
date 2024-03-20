@@ -2,6 +2,7 @@ export enum profileFilter {
   individual = "individual",
   entity = "entity",
   selfEmployed = "selfEmployed",
+  selfemployedaccount = "selfemployedaccount",
 }
 export enum subprofileFilter {
   account = "account",
@@ -31,5 +32,20 @@ export const subprofileTypes = [
   {
     name: "add_profile.subtypes.card",
     type: subprofileFilter.card,
+  },
+];
+
+export const walletTopUpTypes = [
+  {
+    name: "wallet.types.selfemployed",
+    type: profileFilter.selfEmployed,
+  },
+  {
+    name: "wallet.types.entity",
+    type: profileFilter.entity,
+  },
+  {
+    name: "wallet.types.individual",
+    type: profileFilter.individual,
   },
 ];

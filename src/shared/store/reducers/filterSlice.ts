@@ -6,6 +6,7 @@ import {
 import { subprofileFilter } from "@shared/config/profileFilter";
 import { profileFilter } from "@shared/config/profileFilter";
 import { catalogFilter } from "@shared/config/catalogFilter";
+// import { walletFilter } from "@shared/config/walletFilter";
 
 interface FilterState {
   typeFilter: string;
@@ -15,6 +16,7 @@ interface FilterState {
   catalogFilter: string;
   networkFilter: string;
   sortingFilter: string;
+  // walletFilter: string;
 }
 
 const initialState: FilterState = {
@@ -25,6 +27,7 @@ const initialState: FilterState = {
   catalogFilter: catalogFilter.parameters,
   networkFilter: "",
   sortingFilter: "",
+  // walletFilter: walletFilter.selfEmployed,
 };
 
 export const filterSlice = createSlice({
@@ -53,6 +56,9 @@ export const filterSlice = createSlice({
     setSortingFilter: (state, action: PayloadAction<string>) => {
       state.sortingFilter = action.payload;
     },
+    // setWalletFilter: (state, action: PayloadAction<string>) => {
+    //   state.walletFilter = action.payload;
+    // },
   },
 });
 

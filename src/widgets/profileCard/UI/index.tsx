@@ -13,7 +13,6 @@ import {
 import { ProfileData } from "@features/profileData/UI";
 import { CreateProfile } from "@features/createProfile/UI";
 import { useAppSelector } from "@shared/store";
-import { profileTypes } from "@shared/config/profileFilter";
 import { profileFilter, subprofileFilter } from "@shared/config/profileFilter";
 import { BarSubrofileFilter } from "@features/barSubprofileFilter";
 import { pageFilter } from "@shared/config/pageFilter";
@@ -27,12 +26,8 @@ export const ProfileCard: FC = () => {
     formState: { errors },
   } = useForm<IProfileData>();
 
-  const { profileFilter: profile } = useAppSelector(
-    (state) => state.filterReducer,
-  );
-  const { subprofileFilter: subprofile } = useAppSelector(
-    (state) => state.filterReducer,
-  );
+  const { profileFilter: profile, subprofileFilter: subprofile } =
+    useAppSelector((state) => state.filterReducer);
 
   const typeLegal =
     profile === profileFilter.entity
