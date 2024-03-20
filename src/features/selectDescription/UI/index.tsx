@@ -7,13 +7,15 @@ import { IAddPLatformData } from "@shared/types/common";
 
 interface SelectDescriptionProps {
   title: string;
-  text: string;
+  text?: string;
+  placeholder: string;
   onChange: UseFormSetValue<IAddPLatformData>;
 }
 
 export const SelectDescription: FC<SelectDescriptionProps> = ({
   title,
   text,
+  placeholder,
   onChange,
 }) => {
   const { t } = useTranslation();
@@ -31,7 +33,7 @@ export const SelectDescription: FC<SelectDescriptionProps> = ({
     <div className={styles.wrapper}>
       <div className={styles.title}>
         <p>{t(title)}</p>
-        <InfoIcon />
+        {text && <InfoIcon />}
       </div>
       <div className={styles.field}>
         <textarea
@@ -40,7 +42,7 @@ export const SelectDescription: FC<SelectDescriptionProps> = ({
           rows={10}
           onChange={handleChange}
           maxLength={1000}
-          placeholder={t("add_platform.default_input")}
+          placeholder={t(placeholder)}
         />
         <div>
           {remainingCharacters}/{1000}

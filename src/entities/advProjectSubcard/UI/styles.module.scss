@@ -106,6 +106,7 @@
 .channel__info_row {
   display: grid;
   grid-auto-flow: column;
+  align-items: center;
   justify-content: space-between;
 }
 
@@ -143,6 +144,9 @@
 .channel__info_middle {
   display: grid;
   grid-auto-flow: column;
+  column-gap: 5px;
+  align-items: center;
+  justify-content: center;
 
   div {
     display: grid;
@@ -204,34 +208,52 @@
   }
 }
 
-// .buttons_row{
-//     display: grid;
-//     grid-auto-flow: row;
-//     row-gap: 5px;
-//     align-items: center;
-//     text-align: center;
-//     justify-content: space-between;
-//     div{
-//         display: grid;
-//         grid-auto-flow: column;
-//         column-gap: 5px;
-//         align-items: center;
-//         text-align: center;
-//         justify-content: space-between;
-//     }
-// }
-
 .colorline {
-  height: 20px;
-  // width: 100%;
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: center;
+  height: 3px;
+  border-radius: 15px;
   max-width: 200px;
   min-width: 100px;
   background: linear-gradient(
     to right,
-    blue var(--color1, 0%),
-    pink var(--color2, 100%)
+    #5c89ff var(--male),
+    #fc65ff var(--male) 100%
   );
-  // background: linear-gradient(to right, blue 50%, pink var(--women));
+
+  &::before {
+    // content: var(--male) " " var(--female);
+    content: attr(data-male);
+    background-size: contain;
+    background-repeat: no-repeat;
+    bottom: 8px;
+    overflow: hidden;
+    position: relative;
+
+    color: var(--Subtitle-text);
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-right: 12px;
+  }
+
+  &::after {
+    content: attr(data-female);
+    background-size: contain;
+    background-repeat: no-repeat;
+    bottom: 8px;
+    overflow: hidden;
+    position: relative;
+
+    color: var(--Subtitle-text);
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
 }
 
 .subcard__right {

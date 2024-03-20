@@ -1,9 +1,6 @@
 import { InfoIcon } from "@shared/assets";
-import {
-  IAddProfileData,
-  IBlockData,
-  IParameterData,
-} from "@shared/types/common";
+import { IBlockData, IParameterData } from "@shared/types/common";
+import { IProfileData } from "@shared/types/profile";
 import { MyInput } from "@shared/ui";
 import { FC } from "react";
 import { UseFormSetValue } from "react-hook-form";
@@ -12,7 +9,7 @@ import styles from "./styles.module.scss";
 
 interface ProfileDataProps {
   data: IBlockData;
-  onChange: UseFormSetValue<IAddProfileData>;
+  onChange: UseFormSetValue<IProfileData>;
 }
 
 export const ProfileData: FC<ProfileDataProps> = ({ data, onChange }) => {
@@ -20,7 +17,7 @@ export const ProfileData: FC<ProfileDataProps> = ({ data, onChange }) => {
 
   const handleDataChange = (
     event: React.ChangeEvent<HTMLInputElement>,
-    type: keyof IAddProfileData,
+    type: keyof IProfileData,
   ) => {
     const selectedValue = event.target.value;
     onChange(type, selectedValue);

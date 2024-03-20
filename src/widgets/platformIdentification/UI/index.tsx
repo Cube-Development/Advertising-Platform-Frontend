@@ -1,4 +1,4 @@
-import { platformType } from "@shared/config/platformFilter";
+import { platformType } from "@shared/config/platformTypes";
 import { MyButton, MyInput } from "@shared/ui";
 import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";

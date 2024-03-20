@@ -1,0 +1,43 @@
+.wrapper {
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 30px;
+}
+
+.cards {
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 10px;
+}
+
+.top {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.title {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  column-gap: 25px;
+
+  svg {
+    height: 40px;
+    width: auto;
+  }
+  h1 {
+    color: var(--Personal-colors-black);
+    font-size: 44px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+}
+.buttons {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  column-gap: 10px;
+}

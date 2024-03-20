@@ -10,14 +10,12 @@
 
 .card__top {
   display: flex;
-  // grid-auto-flow: column;
 }
 
 .card__left {
   display: grid;
   grid-auto-flow: row;
   row-gap: 10px;
-  // max-width: 345px;
   width: 35%;
   border-right: 1px solid #d9d9d9;
   padding: 0 20px 0 30px;
@@ -141,7 +139,6 @@
   grid-auto-flow: row;
   justify-content: space-between;
   width: 5%;
-  // width: 54px;
 
   svg {
     width: 30px;

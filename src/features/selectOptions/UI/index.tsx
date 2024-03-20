@@ -7,12 +7,13 @@ import { UseFormSetValue } from "react-hook-form";
 
 interface SelectOptionsProps {
   title: string;
-  text: string;
+  text?: string;
   defaultValue: string;
   options: IOption[];
   type: keyof IAddPLatformData;
   onChange: UseFormSetValue<IAddPLatformData>;
   single: boolean;
+  isRow?: boolean;
 }
 
 export const SelectOptions: FC<SelectOptionsProps> = ({
@@ -23,25 +24,8 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
   type,
   onChange,
   single,
+  isRow,
 }) => {
-  // const { t } = useTranslation();
-
-  // return (
-  //     <div className={styles.wrapper}>
-  //         <div>
-  //             <p>{t(title)}</p>
-  //             <InfoIcon />
-  //         </div>
-  //         <MySelect
-  //             onChange={(e) => {
-  //                 const selectedValue = e.target.value;
-  //                 console.log("Selected value:", selectedValue);
-  //                 onChange(type, selectedValue) }}
-  //             options={options}
-  //             defaultValue={defaultValue}/>
-  //     </div>
-  // );
-
   const [selectedOptions, setSelectedOptions] = useState<(string | null)[]>([]);
   const [selectedOption, setSelectedOption] = useState<string | number>("");
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -67,7 +51,6 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
         ? selectedOptions.filter((value) => value !== selectedValue)
         : [...selectedOptions, selectedValue];
       setSelectedOptions(newOptions);
-      console.log(newOptions);
       onChange(type, newOptions as []);
     }
   };
@@ -101,10 +84,10 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
   }, []);
 
   return (
-    <div className={styles.wrapper} ref={menuRef}>
+    <div className={isRow ? styles.wrapper__row : styles.wrapper} ref={menuRef}>
       <div className={styles.left}>
         <p>{t(title)}</p>
-        <InfoIcon />
+        {text && <InfoIcon />}
       </div>
 
       <div>

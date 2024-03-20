@@ -7,6 +7,7 @@ export enum offerStatus {
   uncomplite = 5,
   check = 6,
 }
+
 export enum offerStatusFilter {
   active = "active",
   waiting = "waiting",

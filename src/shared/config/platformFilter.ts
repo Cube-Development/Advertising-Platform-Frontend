@@ -6,12 +6,6 @@ export enum platformStatus {
   ban = 4,
 }
 
-export enum platformType {
-  telegram = "telegram",
-  instagram = "instagram",
-  youtube = "youtube",
-}
-
 export enum platformStatusFilter {
   active = "active",
   moderation = "moderation",

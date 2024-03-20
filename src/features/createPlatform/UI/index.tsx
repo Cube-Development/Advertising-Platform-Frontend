@@ -1,4 +1,4 @@
-import { ArrowIcon2, TelegramIcon } from "@shared/assets";
+import { ArrowIcon2, PaperAirplaneIcon } from "@shared/assets";
 import { MyButton } from "@shared/ui";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -30,7 +30,7 @@ export const CreatePlatform: FC = () => {
         <div className={styles.modal}>
           <div className={styles.modalContent}>
             <div>
-              <TelegramIcon />
+              <PaperAirplaneIcon />
               <h1>{t("add_platform.create.send")}</h1>
             </div>
             <div className={styles.text}>
