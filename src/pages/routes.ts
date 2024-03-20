@@ -6,7 +6,6 @@ import { NotFoundPage } from "./NotFound";
 import { ProfilePage } from "./Profile";
 import { FullServicePage } from "./FullService";
 import { PlatformOwnerPage } from "./PlatformOwner";
-import { WalletPage } from "./Wallet";
 import { AddPlatformPage } from "./AddPlatform";
 import { paths } from "@shared/routing";
 import { TurnkeyPage } from "./TurnkeyPage";
@@ -14,6 +13,9 @@ import { PlatformsPage } from "./Platforms";
 import { OffersPage } from "./Offers";
 import { OrdersPage } from "./Orders";
 import { AddProfilePage } from "./AddProfile";
+import { CartPage } from "./Cart";
+import { WalletTopUpPage } from "./WalletTopUp";
+import { WalletWithdrawPage } from "./WalletWithdraw";
 
 export interface IRoute {
   path: string;
@@ -26,7 +28,8 @@ export const privateBloggerRoutes: IRoute[] = [
   { path: paths.profile, component: ProfilePage, sidebar: true },
   { path: paths.platformOwner, component: PlatformOwnerPage, sidebar: true },
   { path: paths.notFound, component: NotFoundPage },
-  { path: paths.wallet, component: WalletPage, sidebar: true },
+  { path: paths.walletTopUp, component: WalletTopUpPage, sidebar: true },
+  { path: paths.walletWithdraw, component: WalletWithdrawPage, sidebar: true },
   { path: paths.addPlatform, component: AddPlatformPage, sidebar: true },
   { path: paths.addProfile, component: AddProfilePage, sidebar: true },
   { path: paths.platforms, component: PlatformsPage, sidebar: true },
@@ -39,8 +42,10 @@ export const privateAdvertiserRoutes: IRoute[] = [
   { path: paths.notFound, component: NotFoundPage },
   { path: paths.addProfile, component: AddProfilePage, sidebar: true },
   { path: paths.fullServise, component: FullServicePage, sidebar: true },
-  { path: paths.catalog, component: CatalogPage, sidebar: true },
-  { path: paths.wallet, component: WalletPage, sidebar: true },
+  { path: paths.catalog, component: CatalogPage },
+  { path: paths.cart, component: CartPage },
+  { path: paths.walletTopUp, component: WalletTopUpPage, sidebar: true },
+  { path: paths.walletWithdraw, component: WalletWithdrawPage, sidebar: true },
   { path: paths.turnkey, component: TurnkeyPage, sidebar: true },
   { path: paths.orders, component: OrdersPage, sidebar: true },
 ];
@@ -50,5 +55,9 @@ export const publicRoutes: IRoute[] = [
   { path: paths.main, component: MainPage },
   { path: paths.notFound, component: NotFoundPage },
   { path: paths.catalog, component: CatalogPage },
+  { path: paths.cart, component: CartPage },
   { path: paths.turnkey, component: TurnkeyPage },
+  { path: paths.walletTopUp, component: WalletTopUpPage, sidebar: true },
+  { path: paths.walletWithdraw, component: WalletWithdrawPage, sidebar: true },
+  { path: paths.addProfile, component: AddProfilePage, sidebar: true },
 ];

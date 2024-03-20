@@ -32,9 +32,9 @@
 
     "symbol": "сум",
 
-    "wallet": {
+    "wallet_menu": {
         "balance": "Баланс",
-        "add_funds": "Пополнить кошелёк",
+        "top_up": "Пополнить кошелёк",
         "withdraw": "Вывести средства",
         "history": "История транзакций",
         "invoice": "Счета и договора"
@@ -58,7 +58,7 @@
 
         "wallet": "Кошелёк",
 
-        "add_funds": "Пополнение кошелька",
+        "top_up": "Пополнение кошелька",
         "withdraw": "Вывести деньги",
         "history": "История транзакций",
         "invoice": "Счета и договора",
@@ -437,8 +437,7 @@
             "agreed": "На согласовании"
         },
 
-        "sorting": "Сортировака:",
-        "date": "По дате",
+
 
         "card": {
             "status": {
@@ -747,6 +746,130 @@
         }
     },
 
+    "platform": {
+        "cross": "Совпадение"
+    },
+    "catalog": {
+        "catalog": "Каталог площадок", 
+        "all_platform": "Площадки",
+        
+        "search": {
+            "parameters": "Параметры поиска",
+            "AI": "Автоподбор с ИИ"
+        },
+
+        "ai": {
+            "title": "Опишите вашу рекламную компанию",
+            "default_input": "Расскажите о вашем брэнде и о продукте , который вы планируете рекламировать"
+        },
+
+        "category":{
+            "title": "Категория бизнеса:",
+            "default_value": "sample"
+        },
+        "age":{
+            "title": "Возраст:",
+            "default_value": "sample"
+        },
+        "sex":{
+            "title": "Пол:",
+            "default_value": "sample"
+        },
+        "region":{
+            "title": "Регион:",
+            "default_value": "sample"
+        },
+        "languages": {
+            "title": "Язык:",
+            "default_value": "sample"
+        },
+        "recomendation": "Рекомендованные ЦА",
+        
+        "generation_btn": "Сгенерировать"
+
+    },
+
+    "cart": {
+        "cart": "Корзина",
+
+        "create_post": {
+            "title": "Заказ защищён безопасной сделкой",
+            "text": "Владелец площадки получит оплату только после вашего подтверждения об успешном размещении", 
+            "subscribers": "Всего подписчиков",
+            "views": "Всего просмотров",
+            "commission": "Комиссия сервиса",
+            "finnaly": "Итоговая сумма"
+        },
+
+        "recomendation": "Рекомендуемые площадки",
+        "hide": "скрыть",
+        "show": "показать"
+    },
+
+    "wallet": {
+        "replenishment": {
+            "title": "Пополнение баланса",
+            "offer": "Заявка на пополнение баланса"
+        },
+        "withdraw": {
+            "title": "Вывод средств",
+            "offer": "Заявка на вывод средств"
+        },
+        "types": {
+            "selfemployed": "Физ. лицо",
+            "entity": "Юридическое лицо",
+            "individual": "ИП",
+            "selfemployedaccount": "Самозанятый"
+        },
+        "subtypes": {
+            "account": "Расчетный счет",
+            "card": "Транзитный счёт (Humo|UzCard)"
+        },
+        "choose": "Выберите способ оплаты",
+        "ammount": {
+            "title": "Cумма пополнения",
+            "text": "введите сумму на которую нужно увеличить баланс"
+        },
+        "conditions": {
+            "commission": "Комиссия",
+            "min": "Минимальная сумма",
+            "max": "Максимальная сумма"
+        },
+        "guide": {
+            "entity": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc.",
+            "individual": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc."
+        },
+        "pay": {
+            "title": "К оплате",
+            "text": "С учетом комиссии"
+        },
+        "accept": {
+            "text1" : "Достоверность данных подтверждаю, с",
+            "span1" : "условиями сервиса",
+            "and": "и",
+            "span2" : "правилами оферты",
+            "text2" : "ознакомлен и принимаю их."
+        },
+
+        "use_data": "Вы хотите использовать сохраненные данные?", 
+        "save_data": "Сохранить данные для дальнейшего использования", 
+        "finally": "Итоговая сумма"
+    },
+
+    "filter": {
+        "title": "Соцсеть",
+        "telegram": "Telegram",
+        "instagram": "Instagram",
+        "youtube": "Youtube"
+    },
+
+
+    "sorting": {
+        "title": "Сортировака",
+        "date":"По дате",
+        "subscribers":"По подписчикам"
+    },
+
     "add_platform_btn": {
         "telegram": "Telegram",
         "instagram": "Instagram",
@@ -785,7 +908,17 @@
         "repeat": "Повторить заявку",
         "activate": "Активировать",
         "support": "Техническая поддержка"
-    }
+    },
 
+    "cart_btn": {
+        "save": "Сохранить",
+        "add": "Добавить ещё",
+        "create_post": "Создать пост"
+    },
+
+    "replenishment_btn": {
+        "replenish" : "Пополнить",
+        "send" : "Отправить"
+    }
 }
 

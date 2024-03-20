@@ -170,11 +170,10 @@ const BloggerModPlatformCards = [
 
 export const PlatformsPage: FC = () => {
   const { statusFilter } = useAppSelector((state) => state.filterReducer);
-  const page = pageFilter.platform;
 
   return (
     <>
-      <BarFilter page={page} />
+      <BarFilter page={pageFilter.platform} />
       {statusFilter === platformStatusFilter.active ? (
         <BloggerPlatform cards={BloggerPlatformCards} />
       ) : statusFilter === platformStatusFilter.moderation ? (
