@@ -58,7 +58,7 @@ export const WalletTopUp: FC = () => {
   } = useForm<IProfileData>();
 
   const { profileFilter: filter } = useAppSelector(
-    (state) => state.filterReducer
+    (state) => state.filterReducer,
   );
 
   const handleOnchange = (account: any) => {

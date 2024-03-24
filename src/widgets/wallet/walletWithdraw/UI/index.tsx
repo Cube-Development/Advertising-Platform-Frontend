@@ -58,7 +58,7 @@ export const WalletWithdraw: FC = () => {
   } = useForm<IProfileData>();
 
   const { profileFilter: profile } = useAppSelector(
-    (state) => state.filterReducer
+    (state) => state.filterReducer,
   );
 
   const handleOnchange = (account: any) => {
