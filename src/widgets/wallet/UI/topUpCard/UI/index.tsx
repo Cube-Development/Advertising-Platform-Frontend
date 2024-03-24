@@ -1,6 +1,6 @@
 import { PaymentCard } from "@features/paymentCard";
 import { CardIcon, InfoIcon } from "@shared/assets";
-import { REPLENISHMENT } from "@shared/config/common";
+import { topup } from "@shared/config/common";
 import { paymentTypes } from "@shared/config/payment";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -63,14 +63,14 @@ export const TopUpCard: FC = () => {
               <div>
                 <p>
                   {t("wallet.conditions.commission")}{" "}
-                  <span>{REPLENISHMENT.commission} %</span>
+                  <span>{topup.commission} %</span>
                 </p>
               </div>
               <div>
                 <p>
                   {t("wallet.conditions.min")}{" "}
                   <span>
-                    {REPLENISHMENT.min.toLocaleString()} {t("symbol")}
+                    {topup.min.toLocaleString()} {t("symbol")}
                   </span>
                 </p>
               </div>
@@ -78,7 +78,7 @@ export const TopUpCard: FC = () => {
                 <p>
                   {t("wallet.conditions.max")}{" "}
                   <span>
-                    {REPLENISHMENT.max.toLocaleString()} {t("symbol")}
+                    {topup.max.toLocaleString()} {t("symbol")}
                   </span>
                 </p>
               </div>

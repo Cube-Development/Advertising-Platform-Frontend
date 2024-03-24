@@ -1,4 +1,4 @@
-export const enum REPLENISHMENT {
+export const enum topup {
   commission = 3,
   min = 50000,
   max = 10000000,

@@ -4,12 +4,13 @@ import {
   projectTypesFilter,
 } from "@shared/config/projectFilter";
 import { subprofileFilter } from "@shared/config/profileFilter";
+// import { profileFilter } from "@shared/config/profileFilter";
 import { catalogFilter } from "@shared/config/catalogFilter";
-import { platformFilter } from "@shared/config/postFilter";
 import {
   profileTypesName,
   profileTypesNum,
 } from "@shared/config/profileFilter";
+// import { walletFilter } from "@shared/config/walletFilter";
 
 interface FilterState {
   typeFilter: string;
@@ -28,6 +29,7 @@ interface FilterState {
 const initialState: FilterState = {
   typeFilter: projectTypesFilter.myProject,
   statusFilter: myProjectStatusFilter.active,
+  // profileFilter: profileFilter.selfEmployed,
   profileFilter: {
     type: profileTypesName.selfEmployedAccounts,
     id: profileTypesNum.selfEmployedAccounts,
