@@ -9,7 +9,7 @@ export const PaymentDidox: FC = () => {
   return (
     <MyButton className={styles.button}>
       <div>
-        {t(`replenishment_btn.send`)}
+        {t(`topup_btn.send`)}
         <ArrowIcon2 />
       </div>
     </MyButton>

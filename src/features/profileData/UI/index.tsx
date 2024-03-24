@@ -3,25 +3,24 @@ import { IBlockData, IParameterData } from "@shared/types/common";
 import { IProfileData } from "@shared/types/profile";
 import { MyInput } from "@shared/ui";
 import { FC } from "react";
-import { UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { getInputLegalType } from "@features/getInputType";
 
 interface ProfileDataProps {
   data: IBlockData;
-  onChange: UseFormSetValue<IProfileData>;
+  register?: any;
+  inputError?: any;
+  isCreateProfile?: boolean;
 }
 
-export const ProfileData: FC<ProfileDataProps> = ({ data, onChange }) => {
+export const ProfileData: FC<ProfileDataProps> = ({
+  data,
+  register,
+  inputError,
+  isCreateProfile,
+}) => {
   const { t } = useTranslation();
-
-  const handleDataChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-    type: keyof IProfileData,
-  ) => {
-    const selectedValue = event.target.value;
-    onChange(type, selectedValue);
-  };
 
   return (
     <div className={styles.wrapper}>
@@ -30,20 +29,37 @@ export const ProfileData: FC<ProfileDataProps> = ({ data, onChange }) => {
       </div>
       <div className={styles.parameters}>
         {data.parameters.map((row, index) => {
-          const row_dict: IParameterData = t(row.data, { returnObjects: true });
-
+          const newValidate = {
+            ...row.validate,
+            required: t(row.validate.required),
+          };
+          const row_dict: IParameterData = t(row.label, {
+            returnObjects: true,
+          });
           return (
-            <div className={styles.row} key={index}>
+            <div
+              className={`${styles.row} ${isCreateProfile ? styles.createProfile : ""}`}
+              key={index}
+            >
               <div className={styles.left}>
                 <span>{row_dict.title}</span>
                 <InfoIcon />
               </div>
-
               <div className={styles.right}>
-                <MyInput
+                <input
+                  placeholder={
+                    inputError[row.type]
+                      ? newValidate.required
+                      : row_dict.default_value
+                  }
+                  className={`${styles.input} ${inputError[row.type] && styles.error}`}
+                  {...register(row.type, newValidate)}
+                  type={getInputLegalType(row.type)}
+                />
+                {/* <MyInput
                   onChange={(event) => handleDataChange(event, row.type)}
                   placeholder={row_dict.default_value}
-                />
+                /> */}
               </div>
             </div>
           );

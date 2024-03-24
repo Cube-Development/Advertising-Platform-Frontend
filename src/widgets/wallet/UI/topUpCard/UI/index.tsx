@@ -1,6 +1,6 @@
 import { PaymentCard } from "@features/paymentCard";
 import { CardIcon, InfoIcon } from "@shared/assets";
-import { replenishment } from "@shared/config/common";
+import { topup } from "@shared/config/common";
 import { paymentTypes } from "@shared/config/payment";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -49,8 +49,7 @@ export const TopUpCard: FC = () => {
             </div>
           </div>
           <div className={styles.ammount}>
-            <p>{t("wallet.ammount.title")}</p>
-            <span>{t("wallet.ammount.text")}</span>
+            <p>{t("wallet.topup.amount")}</p>
             <div>
               <input type="text" />
               <small>{t("symbol")}</small>
@@ -64,14 +63,14 @@ export const TopUpCard: FC = () => {
               <div>
                 <p>
                   {t("wallet.conditions.commission")}{" "}
-                  <span>{replenishment.commission} %</span>
+                  <span>{topup.commission} %</span>
                 </p>
               </div>
               <div>
                 <p>
                   {t("wallet.conditions.min")}{" "}
                   <span>
-                    {replenishment.min.toLocaleString()} {t("symbol")}
+                    {topup.min.toLocaleString()} {t("symbol")}
                   </span>
                 </p>
               </div>
@@ -79,7 +78,7 @@ export const TopUpCard: FC = () => {
                 <p>
                   {t("wallet.conditions.max")}{" "}
                   <span>
-                    {replenishment.max.toLocaleString()} {t("symbol")}
+                    {topup.max.toLocaleString()} {t("symbol")}
                   </span>
                 </p>
               </div>

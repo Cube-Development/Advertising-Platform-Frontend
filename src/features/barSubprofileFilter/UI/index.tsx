@@ -5,11 +5,18 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { subprofileTypes } from "@shared/config/profileFilter";
 
-export const BarSubrofileFilter: FC = () => {
+interface BarSubrofileFilterProps {
+  resetValues: () => void;
+}
+
+export const BarSubrofileFilter: FC<BarSubrofileFilterProps> = ({
+  resetValues,
+}) => {
   const { t } = useTranslation();
   const { subprofileFilter } = useAppSelector((state) => state.filterReducer);
   const dispatch = useAppDispatch();
   const toggleProfile = (type: string) => {
+    resetValues();
     dispatch(filterSlice.actions.setSubprofileFilter(type));
   };
 

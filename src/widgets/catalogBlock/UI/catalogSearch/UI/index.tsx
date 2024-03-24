@@ -92,13 +92,14 @@ export const CatalogSearch: FC = () => {
 
   const { t } = useTranslation();
   const {
+    reset,
     handleSubmit,
     setValue,
     formState: { errors },
   } = useForm<IAddPLatformData>();
   return (
     <div className={styles.wrapper}>
-      <BarProfileFilter page={pageFilter.catalog} />
+      <BarProfileFilter resetValues={reset} page={pageFilter.catalog} />
       <div className={styles.options}>
         {filter === catalogFilter.parameters ? (
           <>

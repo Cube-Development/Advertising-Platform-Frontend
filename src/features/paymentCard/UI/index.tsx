@@ -6,8 +6,6 @@ import styles from "./styles.module.scss";
 export const PaymentCard: FC = () => {
   const { t } = useTranslation();
   return (
-    <MyButton className={styles.button}>
-      {t(`replenishment_btn.replenish`)}
-    </MyButton>
+    <MyButton className={styles.button}>{t(`topup_btn.replenish`)}</MyButton>
   );
 };

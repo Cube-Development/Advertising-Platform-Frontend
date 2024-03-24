@@ -25,7 +25,7 @@ export const CloseIcon = () => (
         gradientUnits="userSpaceOnUse"
       >
         <stop stopColor="#FF2F66" />
-        <stop offset="1" stopColor="#FE6E30" stop-opacity="0.99" />
+        <stop offset="1" stopColor="#FE6E30" stopOpacity="0.99" />
       </linearGradient>
       <radialGradient
         id="paint1_radial_446_4708"
@@ -36,7 +36,7 @@ export const CloseIcon = () => (
         gradientTransform="translate(-5.17767 12.4999) rotate(2.09675) scale(34.1295 90.6996)"
       >
         <stop stopColor="white" />
-        <stop offset="1" stopColor="#7D7575" stop-opacity="0" />
+        <stop offset="1" stopColor="#7D7575" stopOpacity="0" />
       </radialGradient>
     </defs>
   </svg>

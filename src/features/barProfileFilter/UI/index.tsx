@@ -3,53 +3,69 @@ import { filterSlice } from "@shared/store/reducers";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { profileTypes, walletTopUpTypes } from "@shared/config/profileFilter";
-import { catalogTypes } from "@shared/config/catalogFilter";
+import {
+  profileTypes,
+  profileTypesName,
+  profileTypesNum,
+  walletTopUpTypes,
+} from "@shared/config/profileFilter";
+import { catalogFilter, catalogTypes } from "@shared/config/catalogFilter";
 import { pageFilter } from "@shared/config/pageFilter";
 
 interface BarProfileFilterProps {
   page: pageFilter;
+  resetValues: () => void;
 }
 
-export const BarProfileFilter: FC<BarProfileFilterProps> = ({ page }) => {
+interface IFilterOption {
+  type: profileTypesName | catalogFilter;
+  id?: profileTypesNum;
+}
+
+export const BarProfileFilter: FC<BarProfileFilterProps> = ({
+  page,
+  resetValues,
+}) => {
   const { t } = useTranslation();
 
   const { profileFilter, catalogFilter } = useAppSelector(
     (state) => state.filterReducer,
   );
-  const [types, filter] =
+  const [options, filter] =
     page === pageFilter.profile || page === pageFilter.walletWithdraw
-      ? [profileTypes, profileFilter]
+      ? [profileTypes, profileFilter.type]
       : page === pageFilter.catalog
         ? [catalogTypes, catalogFilter]
         : page === pageFilter.walletTopUp
-          ? [walletTopUpTypes, profileFilter]
+          ? [walletTopUpTypes, profileFilter.type]
           : [[], "", ""];
 
   const dispatch = useAppDispatch();
 
-  const toggleBar = (type: string) => {
+  const toggleBar = (option: IFilterOption) => {
     if (
       page === pageFilter.profile ||
       page === pageFilter.walletWithdraw ||
       page === pageFilter.walletTopUp
     ) {
-      dispatch(filterSlice.actions.setProfileFilter(type));
+      const newFilter = { type: option.type, id: option.id };
+      dispatch(filterSlice.actions.setProfileFilter(newFilter));
     } else if (page === pageFilter.catalog) {
-      dispatch(filterSlice.actions.setCatalogFilter(type));
+      dispatch(filterSlice.actions.setCatalogFilter(option.type));
     }
+    resetValues();
   };
 
   return (
     <div className={styles.types}>
       <ul className={styles.profile}>
-        {types.map((type, index) => (
+        {options.map((option, index) => (
           <li
             key={index}
-            className={filter === type.type ? styles.active : ""}
-            onClick={() => toggleBar(type.type)}
+            className={filter === option.type ? styles.active : ""}
+            onClick={() => toggleBar(option)}
           >
-            {t(type.name)}
+            {t(option.name)}
           </li>
         ))}
       </ul>

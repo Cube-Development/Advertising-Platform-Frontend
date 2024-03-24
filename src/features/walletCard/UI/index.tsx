@@ -1,13 +1,13 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
 
-interface WalelletCardProps {
+interface WalletCardProps {
   account: any;
   isActive: boolean;
   onChange: (account: any) => void;
 }
 
-export const WalelletCard: FC<WalelletCardProps> = ({
+export const WalletCard: FC<WalletCardProps> = ({
   account,
   isActive,
   onChange,

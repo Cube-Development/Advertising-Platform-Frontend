@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { useAppSelector } from "@shared/store";
-import { profileFilter } from "@shared/config/profileFilter";
+import { profileTypesName } from "@shared/config/profileFilter";
 import { useTranslation } from "react-i18next";
 
 interface GuideProps {}
@@ -14,7 +14,7 @@ export const Guide: FC<GuideProps> = () => {
 
   return (
     <div className={styles.guide}>
-      {filter === profileFilter.entity
+      {filter.type === profileTypesName.entities
         ? t("wallet.guide.entity")
         : t("wallet.guide.individual")}
     </div>

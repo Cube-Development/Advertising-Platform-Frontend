@@ -40,8 +40,6 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
     }
   };
 
-  console.log(isMenuOpen);
-
   const handleClickOutside = (event: MouseEvent) => {
     if (
       menuRef.current &&
