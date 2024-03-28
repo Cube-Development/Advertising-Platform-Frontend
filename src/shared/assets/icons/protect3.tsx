@@ -13,16 +13,16 @@ export const ProtectIcon3 = () => (
     <path
       d="M121.628 7.0789L125.43 12.3807L131.626 14.4477L131.591 20.9365L135.414 26.2242L131.555 31.4213L131.546 37.9102L125.337 39.8308L121.499 45.0431L115.311 42.9535L109.111 44.8977L105.308 39.5959L99.1127 37.529L99.1476 31.0402L95.3246 25.7524L99.1827 20.5553L99.1923 14.0664L105.401 12.1459L109.239 6.93351L115.427 9.02314L121.628 7.0789Z"
       stroke="#7CF08A"
-      stroke-width="4"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <path
       d="M108.71 23.7526L111.903 30.0697L124.54 23.819"
       stroke="#7CF08A"
-      stroke-width="4"
-      stroke-linecap="round"
-      stroke-linejoin="round"
+      strokeWidth="4"
+      strokeLinecap="round"
+      strokeLinejoin="round"
     />
     <defs>
       <linearGradient
@@ -33,8 +33,8 @@ export const ProtectIcon3 = () => (
         y2="17.3281"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#4772E6" />
-        <stop offset="1" stop-color="#8E54E9" />
+        <stop stopColor="#4772E6" />
+        <stop offset="1" stopColor="#8E54E9" />
       </linearGradient>
     </defs>
   </svg>

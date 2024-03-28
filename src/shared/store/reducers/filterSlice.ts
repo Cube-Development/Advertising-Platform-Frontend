@@ -6,6 +6,7 @@ import {
 import { subprofileFilter } from "@shared/config/profileFilter";
 import { profileFilter } from "@shared/config/profileFilter";
 import { catalogFilter } from "@shared/config/catalogFilter";
+import { platformFilter } from "@shared/config/postFilter";
 // import { walletFilter } from "@shared/config/walletFilter";
 
 interface FilterState {
@@ -16,6 +17,7 @@ interface FilterState {
   catalogFilter: string;
   networkFilter: string;
   sortingFilter: string;
+  platformFilter: string;
   // walletFilter: string;
 }
 
@@ -27,6 +29,7 @@ const initialState: FilterState = {
   catalogFilter: catalogFilter.parameters,
   networkFilter: "",
   sortingFilter: "",
+  platformFilter: platformFilter.telegram,
   // walletFilter: walletFilter.selfEmployed,
 };
 
@@ -56,9 +59,9 @@ export const filterSlice = createSlice({
     setSortingFilter: (state, action: PayloadAction<string>) => {
       state.sortingFilter = action.payload;
     },
-    // setWalletFilter: (state, action: PayloadAction<string>) => {
-    //   state.walletFilter = action.payload;
-    // },
+    setPlatformFilter: (state, action: PayloadAction<string>) => {
+      state.platformFilter = action.payload;
+    },
   },
 });
 

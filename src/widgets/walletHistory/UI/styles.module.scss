@@ -1,0 +1,31 @@
+.wrapper{
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 30px;
+    margin-top: 40px;
+}
+
+.top{
+    border-bottom: 2px solid #D9D9D9;
+    padding-bottom: 40px;
+
+    p{
+
+        color: var(--Personal-colors-black);
+        font-size: 32px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+    }
+}
+
+.filter{
+    display: grid;
+    justify-content: start;
+}
+
+.cards{
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 10px;
+}

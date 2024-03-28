@@ -4,8 +4,8 @@
 <rect width="1280" height="260" fill="black" fill-opacity="0.25"/>
 </mask>
 <g mask="url(#mask0_1288_560)">
-<circle cx="1072.5" cy="-422.5" r="510.875" stroke="url(#paint1_linear_1288_560)" stroke-width="2"/>
-<circle cx="1072.5" cy="-422.5" r="681.5" stroke="url(#paint2_linear_1288_560)" stroke-width="2"/>
+<circle cx="1072.5" cy="-422.5" r="510.875" stroke="url(#paint1_linear_1288_560)" strokeWidth="2"/>
+<circle cx="1072.5" cy="-422.5" r="681.5" stroke="url(#paint2_linear_1288_560)" strokeWidth="2"/>
 </g>
 <defs>
 <linearGradient id="paint0_linear_1288_560" x1="-1.51695e-06" y1="127.917" x2="1284.99" y2="132.238" gradientUnits="userSpaceOnUse">
