@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
 import { MyButton } from "@shared/ui";
-import { AddIcon, BasketIcon, CancelIcon2 } from "@shared/assets";
+import { AddIcon, CancelIcon2 } from "@shared/assets";
 
 interface PostButtonsProps {}
 
@@ -98,7 +98,7 @@ export const PostButtons: FC<PostButtonsProps> = () => {
             >
               {buttons.length ? (
                 buttons.map((button, index) => (
-                  <div className={styles.row__button}>
+                  <div className={styles.row__button} key={index}>
                     <div>
                       <span>№ {index}</span>
                       <p>

@@ -938,6 +938,82 @@
     "finally": "Итоговая сумма"
   },
 
+  "wallet_history": {
+    "wallet_history": "История транзакций",
+    "tab": {
+      "date": "Дата и время",
+      "purpose": "Назначение",
+      "method": "Способ",
+      "ammount": "Сумма",
+      "status": "Статус"
+    }
+  },
+
+  "create_order": {
+    "create_order": "Оформление заказа",
+    "name": {
+      "title": "Как назовём рекламную кампанию?",
+      "default_value": "Введите название..."
+    },
+    "create": {
+      "title": "Создание рекламного поста",
+      "text": "Текст рекламного поста...",
+      "generation": "AI Генерация",
+      "add_file": "Загрузить файл",
+      "comment": "Комментарий блогеру...",
+      "result": "Результат",
+      "post": "Начните заполнять рекламный пост чтобы увидеть результат",
+      "template": "Загрузить шаблон",
+
+      "filter": {
+        "telegram": "Telegram",
+        "instagram": "Instagram",
+        "youtube": "Youtube"
+      },
+      "add_button": {
+        "title": "Добавить кнопку",
+        "zero": "Можно добавить до 3 кнопок",
+        "button": "Кнопка",
+        "name": {
+          "title": "Название кнопки",
+          "default_value": "sample name"
+        },
+        "link": {
+          "title": "Ссылка для кнопки",
+          "default_value": "sample link"
+        },
+        "add_button": "Добавить кнопку"
+      }
+    },
+
+    "datetime": {
+      "title": "Дата и время"
+    },
+
+    "payment": {
+      "title": "Оплата заказа"
+    }
+  },
+
+  "calendar": {
+    "choose": "Выберите дату",
+    "confirm": "Потдвердить",
+    "range": "Выбрать диапазон",
+    "until": "до"
+  },
+
+  "chat": {
+    "my_messages": "Мои сообщения",
+    "types": {
+      "blogger": "От блогеров",
+      "manager": "От менеджеров",
+      "administration": "Администрация серсива"
+    },
+    "campaign": "РК",
+    "channel": "канал",
+    "new_message": "Написать сообщение..."
+  },
+
   "filter": {
     "title": "Соцсеть",
     "telegram": "Telegram",
