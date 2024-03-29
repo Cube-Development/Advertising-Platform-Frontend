@@ -4,13 +4,12 @@ import {
   projectTypesFilter,
 } from "@shared/config/projectFilter";
 import { subprofileFilter } from "@shared/config/profileFilter";
-// import { profileFilter } from "@shared/config/profileFilter";
 import { catalogFilter } from "@shared/config/catalogFilter";
 import {
   profileTypesName,
   profileTypesNum,
 } from "@shared/config/profileFilter";
-// import { walletFilter } from "@shared/config/walletFilter";
+import { platformFilter } from "@shared/config/postFilter";
 
 interface FilterState {
   typeFilter: string;
@@ -56,7 +55,7 @@ export const filterSlice = createSlice({
       action: PayloadAction<{
         type: profileTypesName | catalogFilter;
         id?: profileTypesNum;
-      }>
+      }>,
     ) => {
       state.profileFilter.type = action.payload.type;
       state.profileFilter.id = action.payload.id;

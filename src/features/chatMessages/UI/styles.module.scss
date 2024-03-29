@@ -18,12 +18,12 @@
       border: 0.5px solid #4772e6;
     }
   }
-  
+
   .description {
     display: grid;
     grid-auto-flow: row;
     row-gap: 10px;
-  
+
     p {
       color: var(--Sub-text);
       font-size: 12px;
@@ -36,7 +36,6 @@
     }
   }
 }
-
 
 .all__messages {
   display: grid;
