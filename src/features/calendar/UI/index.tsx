@@ -1,0 +1,183 @@
+import "./styles.scss";
+import styles from "./styles.module.scss";
+import { useEffect, useRef, useState } from "react";
+import { motion } from "framer-motion";
+import Calendar from "react-calendar";
+import { useTranslation } from "react-i18next";
+import { MyButton } from "@shared/ui";
+import { CalendarIcon, CancelIcon2 } from "@shared/assets";
+import { CALENDAR } from "@shared/config/common";
+
+interface IDate {
+  date: any;
+  dateString: string | null | any;
+}
+
+const disabledDatesStrings = ["2024-04-10", "2024-04-11", "2024-04-12"];
+const advDatesStrings = ["2024-04-1", "2024-04-2", "2024-04-3"];
+const disabledDates = disabledDatesStrings.map(
+  (dateString) => new Date(dateString),
+);
+const advDates = advDatesStrings.map((dateString) => new Date(dateString));
+
+export const CustomCalendar = () => {
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isSelectRange, setIsSelectRange] = useState(false);
+  const [dateOject, setDateOject] = useState<IDate>({
+    date: null,
+    dateString: null,
+  });
+  const { t } = useTranslation();
+  const menuRef = useRef<HTMLDivElement>(null);
+
+  const handleOnChange = (newDate: any) => {
+    console.log("newDate", newDate);
+
+    if (Array.isArray(newDate)) {
+      // if (){
+
+      // }
+
+      const newDateString = newDate.map(
+        (date: Date) =>
+          `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`,
+      );
+      setDateOject({ date: newDate, dateString: newDateString });
+      // setIsSelectRange(false)
+    } else {
+      const newDateString = `${newDate.getDate()}/${newDate.getMonth()}/${newDate.getFullYear()}`;
+      // setIsSelectRange(true)
+      setDateOject({ date: [newDate], dateString: newDateString });
+    }
+  };
+
+  const handleChangeRange = () => {
+    setIsSelectRange(!isSelectRange);
+    setDateOject({ date: null, dateString: null });
+  };
+
+  const handleOpenModal = () => {
+    setIsModalOpen(!isModalOpen);
+  };
+  const handleCloseModal = () => {
+    setIsModalOpen(!isModalOpen);
+    setDateOject({ date: null, dateString: null });
+  };
+
+  const handleClickOutside = (event: MouseEvent) => {
+    // console.log("handleClickOutside", isModalOpen);
+    // console.log("menuRef.current", menuRef.current);
+    // // console.log("menuRef.current", menuRef.current.contains(event.target as Node));
+    // if (menuRef.current && !menuRef.current.contains(event.target as Node) && isModalOpen) {
+    //   console.log("gete",isModalOpen, menuRef.current)
+    //   setIsModalOpen(false);
+    // }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
+  // useEffect(() => {
+  //   if (menuRef.current) {
+  //     console.log("menuRef is not null", menuRef.current);
+  //     // Делайте что-то с menuRef.current
+  //   }
+  // }, [menuRef.current]);
+
+  const tileClassName = ({
+    date,
+    view,
+  }: {
+    date: Date;
+    view: string;
+  }): string | null => {
+    if (view === "month") {
+      const minSelectableDate = new Date();
+      minSelectableDate.setDate(new Date().getDate() + CALENDAR.disabledDays);
+      if (
+        disabledDates.some(
+          (disabledDate) => date.toDateString() === disabledDate.toDateString(),
+        ) ||
+        date < minSelectableDate
+      ) {
+        return styles.disabledDate;
+      }
+      if (
+        advDates.some(
+          (advDate) => date.toDateString() === advDate.toDateString(),
+        )
+      ) {
+        return styles.advDate;
+      }
+    }
+    return null;
+  };
+
+  return (
+    <div>
+      <button className={styles.wrapper} onClick={handleOpenModal}>
+        <CalendarIcon />
+        {dateOject.dateString && !isModalOpen ? (
+          dateOject.dateString.length === 2 ? (
+            <p className={styles.range}>
+              {dateOject.dateString[0]}
+              <br />
+              {t("calendar.until")}
+              <br />
+              {dateOject.dateString[1]}
+            </p>
+          ) : (
+            <p>{dateOject.dateString}</p>
+          )
+        ) : (
+          <p>-- / -- / ----</p>
+        )}
+      </button>
+
+      {isModalOpen && (
+        <div className={styles.modal}>
+          <div className={styles.modalContent}>
+            <div
+              className={`${styles.calendar} shake__animation`}
+              ref={menuRef}
+            >
+              <div className={styles.top}>
+                <p>{t("calendar.choose")}</p>
+                <button onClick={handleCloseModal}>
+                  <CancelIcon2 />
+                </button>
+              </div>
+              <div>
+                <Calendar
+                  onChange={handleOnChange}
+                  value={
+                    isSelectRange
+                      ? dateOject.date
+                      : dateOject.date
+                        ? dateOject.date[0]
+                        : dateOject.date
+                  }
+                  tileClassName={tileClassName}
+                  selectRange={isSelectRange}
+                />
+              </div>
+
+              <div className={styles.bottom}>
+                <MyButton className={styles.button} onClick={handleChangeRange}>
+                  <p>{t("calendar.range")}</p>
+                </MyButton>
+                <MyButton className={styles.button} onClick={handleOpenModal}>
+                  <p>{t("calendar.confirm")}</p>
+                </MyButton>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+};

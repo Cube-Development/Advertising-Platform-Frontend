@@ -1,9 +1,17 @@
-export enum profileFilter {
-  individual = "individual",
-  entity = "entity",
-  selfEmployed = "selfEmployed",
-  selfemployedaccount = "selfemployedaccount",
+export enum profileTypesName {
+  individuals = "individuals",
+  entities = "entities",
+  selfEmployedTransits = "selfEmployedTransits",
+  selfEmployedAccounts = "selfEmployedAccounts",
 }
+
+export enum profileTypesNum {
+  individuals = 2,
+  entities = 1,
+  selfEmployedTransits = 4,
+  selfEmployedAccounts = 3,
+}
+
 export enum subprofileFilter {
   account = "account",
   card = "card",
@@ -12,15 +20,18 @@ export enum subprofileFilter {
 export const profileTypes = [
   {
     name: "add_profile.types.selfemployedaccount",
-    type: profileFilter.selfEmployed,
+    type: profileTypesName.selfEmployedAccounts,
+    id: profileTypesNum.selfEmployedAccounts,
   },
   {
     name: "add_profile.types.entity",
-    type: profileFilter.entity,
+    type: profileTypesName.entities,
+    id: profileTypesNum.entities,
   },
   {
     name: "add_profile.types.individual",
-    type: profileFilter.individual,
+    type: profileTypesName.individuals,
+    id: profileTypesNum.individuals,
   },
 ];
 
@@ -38,14 +49,17 @@ export const subprofileTypes = [
 export const walletTopUpTypes = [
   {
     name: "wallet.types.selfemployed",
-    type: profileFilter.selfEmployed,
+    type: profileTypesName.selfEmployedAccounts,
+    id: profileTypesNum.selfEmployedAccounts,
   },
   {
     name: "wallet.types.entity",
-    type: profileFilter.entity,
+    type: profileTypesName.entities,
+    id: profileTypesNum.entities,
   },
   {
     name: "wallet.types.individual",
-    type: profileFilter.individual,
+    type: profileTypesName.individuals,
+    id: profileTypesNum.individuals,
   },
 ];

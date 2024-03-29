@@ -10,6 +10,7 @@ export enum paths {
   walletTopUp = "/wallet/topup",
   walletWithdraw = "/wallet/withdraw",
   wallethistory = "/wallet/history",
+  createOrder = "/createorder",
   addPlatform = "/addplatform",
   addProfile = "/addprofile",
   fullServise = "/fullServise",

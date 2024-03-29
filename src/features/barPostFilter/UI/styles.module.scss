@@ -1,0 +1,36 @@
+.types {
+  ul {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: space-between;
+
+    font-size: 26px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 0.75;
+    color: #4772e6;
+  }
+
+  li {
+    text-align: center;
+    padding: 15px;
+    width: 200px;
+    cursor: pointer;
+  }
+}
+
+.active {
+  border-radius: 12px;
+  border: 2.5px solid #4772e6;
+}
+
+.non__active {
+  border-radius: 12px;
+  border: 2.5px dashed #4772e6;
+}
+
+.disabled {
+  color: var(--Text-sample, #a3a0a0);
+  pointer-events: none;
+}

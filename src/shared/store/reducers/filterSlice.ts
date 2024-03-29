@@ -4,30 +4,39 @@ import {
   projectTypesFilter,
 } from "@shared/config/projectFilter";
 import { subprofileFilter } from "@shared/config/profileFilter";
-import { profileFilter } from "@shared/config/profileFilter";
 import { catalogFilter } from "@shared/config/catalogFilter";
-// import { walletFilter } from "@shared/config/walletFilter";
+import {
+  profileTypesName,
+  profileTypesNum,
+} from "@shared/config/profileFilter";
+import { platformFilter } from "@shared/config/postFilter";
 
 interface FilterState {
   typeFilter: string;
   statusFilter: string;
-  profileFilter: string;
+  profileFilter: {
+    type: profileTypesName | catalogFilter;
+    id?: profileTypesNum;
+  };
   subprofileFilter: string;
   catalogFilter: string;
   networkFilter: string;
   sortingFilter: string;
-  // walletFilter: string;
+  platformFilter: string;
 }
 
 const initialState: FilterState = {
   typeFilter: projectTypesFilter.myProject,
   statusFilter: myProjectStatusFilter.active,
-  profileFilter: profileFilter.selfEmployed,
+  profileFilter: {
+    type: profileTypesName.selfEmployedAccounts,
+    id: profileTypesNum.selfEmployedAccounts,
+  },
   subprofileFilter: subprofileFilter.account,
   catalogFilter: catalogFilter.parameters,
   networkFilter: "",
   sortingFilter: "",
-  // walletFilter: walletFilter.selfEmployed,
+  platformFilter: platformFilter.telegram,
 };
 
 export const filterSlice = createSlice({
@@ -41,8 +50,15 @@ export const filterSlice = createSlice({
     setStatusFilter: (state, action: PayloadAction<string>) => {
       state.statusFilter = action.payload;
     },
-    setProfileFilter: (state, action: PayloadAction<string>) => {
-      state.profileFilter = action.payload;
+    setProfileFilter: (
+      state,
+      action: PayloadAction<{
+        type: profileTypesName | catalogFilter;
+        id?: profileTypesNum;
+      }>,
+    ) => {
+      state.profileFilter.type = action.payload.type;
+      state.profileFilter.id = action.payload.id;
     },
     setSubprofileFilter: (state, action: PayloadAction<string>) => {
       state.subprofileFilter = action.payload;
@@ -56,9 +72,9 @@ export const filterSlice = createSlice({
     setSortingFilter: (state, action: PayloadAction<string>) => {
       state.sortingFilter = action.payload;
     },
-    // setWalletFilter: (state, action: PayloadAction<string>) => {
-    //   state.walletFilter = action.payload;
-    // },
+    setPlatformFilter: (state, action: PayloadAction<string>) => {
+      state.platformFilter = action.payload;
+    },
   },
 });
 

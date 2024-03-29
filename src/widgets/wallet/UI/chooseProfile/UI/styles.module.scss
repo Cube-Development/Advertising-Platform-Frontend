@@ -20,12 +20,13 @@
   padding: 30px;
   border-radius: 25px;
   border: 1px solid #bdbdbd;
+  box-shadow: 0px 5px 20px rgba(0, 0, 0, 0.2);
   background: var(--Personal-colors-White);
 }
 
 .scroll {
   overflow-y: scroll;
-  max-height: 450px;
+  max-height: 600px;
 
   &::-webkit-scrollbar {
     display: none;

@@ -1,5 +1,5 @@
 export interface IProfileData {
-  type_legal: number;
+  type_legal?: number;
   name: string;
   address: string;
   INN: number;
@@ -13,6 +13,23 @@ export interface IProfileData {
   registration_date: string;
   transit_account: string;
   card_number: number;
-  card_date_year: number;
-  card_date_month: number;
+  card_date: string;
 }
+
+// export interface IProfileData {
+//   type_legal?: number;
+//   name: string;
+//   address?: string;
+//   INN?: number;
+//   checking_account?: string;
+//   bank_name: string;
+//   bank_mfo: number;
+//   phone: string;
+//   email: string;
+//   PNFL?: number;
+//   registration_numbe?: number;
+//   registration_date?: string;
+//   transit_account?: string;
+//   card_number?: number;
+//   card_date?: string;
+// }
