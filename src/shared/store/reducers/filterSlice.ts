@@ -29,7 +29,6 @@ interface FilterState {
 const initialState: FilterState = {
   typeFilter: projectTypesFilter.myProject,
   statusFilter: myProjectStatusFilter.active,
-  // profileFilter: profileFilter.selfEmployed,
   profileFilter: {
     type: profileTypesName.selfEmployedAccounts,
     id: profileTypesNum.selfEmployedAccounts,
@@ -57,7 +56,7 @@ export const filterSlice = createSlice({
       action: PayloadAction<{
         type: profileTypesName | catalogFilter;
         id?: profileTypesNum;
-      }>,
+      }>
     ) => {
       state.profileFilter.type = action.payload.type;
       state.profileFilter.id = action.payload.id;

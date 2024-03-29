@@ -13,8 +13,7 @@ export enum profileData {
   registration_date = "registration_date",
   transit_account = "transit_account",
   card_number = "card_number",
-  card_date_year = "card_date_year",
-  card_date_month = "card_date_month",
+  card_date = "card_date",
 }
 
 export const selfEmployed = {
@@ -145,6 +144,13 @@ export const bankCard = {
       type: profileData.card_number,
       validate: {
         required: "add_profile.bank_data.card_number.error.required",
+      },
+    },
+    {
+      label: "add_profile.bank_data.card_date",
+      type: profileData.card_date,
+      validate: {
+        required: "add_profile.bank_data.card_date.error.required",
       },
     },
   ],

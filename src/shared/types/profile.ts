@@ -13,8 +13,7 @@ export interface IProfileData {
   registration_date: string;
   transit_account: string;
   card_number: number;
-  card_date_year: number;
-  card_date_month: number;
+  card_date: string;
 }
 
 // export interface IProfileData {
@@ -32,6 +31,5 @@ export interface IProfileData {
 //   registration_date?: string;
 //   transit_account?: string;
 //   card_number?: number;
-//   card_date_year?: number;
-//   card_date_month?: number;
+//   card_date?: string;
 // }
