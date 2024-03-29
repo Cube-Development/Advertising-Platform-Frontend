@@ -66,7 +66,7 @@ export const PostButtons: FC<PostButtonsProps> = () => {
                   id="nameInput"
                   type="text"
                   placeholder={t(
-                    "create_order.create.add_button.name.default_value"
+                    "create_order.create.add_button.name.default_value",
                   )}
                   onChange={(e) => handleOnChange("name", e.target.value)}
                 />
@@ -77,7 +77,7 @@ export const PostButtons: FC<PostButtonsProps> = () => {
                   id="linkInput"
                   type="text"
                   placeholder={t(
-                    "create_order.create.add_button.link.default_value"
+                    "create_order.create.add_button.link.default_value",
                   )}
                   onChange={(e) => handleOnChange("link", e.target.value)}
                 />

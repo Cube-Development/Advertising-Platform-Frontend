@@ -1,3 +1,3 @@
-export enum orderData  {
-    name = "name"
+export enum orderData {
+  name = "name",
 }

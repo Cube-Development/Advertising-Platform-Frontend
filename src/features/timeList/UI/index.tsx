@@ -46,27 +46,36 @@ export const TimeList: FC<TimeListProps> = () => {
   ];
 
   const selectTime = (timeIndex: number) => {
-    if (selectedTimesObject.timeIndexList.length === 0 || selectedTimesObject.timeIndexList.includes(timeIndex)) {
-        setSelectedTimeObject({
-            timeIndexList: selectedTimesObject.timeIndexList.length === 1 ? [] : [timeIndex],
-            timeStringList: selectedTimesObject.timeIndexList.length === 1 ? [] : timeSlots[timeIndex].split(" - "),
-        });
+    if (
+      selectedTimesObject.timeIndexList.length === 0 ||
+      selectedTimesObject.timeIndexList.includes(timeIndex)
+    ) {
+      setSelectedTimeObject({
+        timeIndexList:
+          selectedTimesObject.timeIndexList.length === 1 ? [] : [timeIndex],
+        timeStringList:
+          selectedTimesObject.timeIndexList.length === 1
+            ? []
+            : timeSlots[timeIndex].split(" - "),
+      });
     } else if (selectedTimesObject.timeIndexList.length < 2) {
-        const newIndex = [...selectedTimesObject.timeIndexList, timeIndex].sort((a, b) => a - b);
-        setSelectedTimeObject({
-            timeIndexList: newIndex,
-            timeStringList: [timeSlots[newIndex[0]].split(" - ")[0], timeSlots[newIndex[1]].split(" - ")[1]],
-        });
-    }else {
-          setSelectedTimeObject({
-            timeIndexList: [timeIndex],
-            timeStringList: timeSlots[timeIndex].split(" - "),
-          });
-        }
-}
-
-
-  
+      const newIndex = [...selectedTimesObject.timeIndexList, timeIndex].sort(
+        (a, b) => a - b,
+      );
+      setSelectedTimeObject({
+        timeIndexList: newIndex,
+        timeStringList: [
+          timeSlots[newIndex[0]].split(" - ")[0],
+          timeSlots[newIndex[1]].split(" - ")[1],
+        ],
+      });
+    } else {
+      setSelectedTimeObject({
+        timeIndexList: [timeIndex],
+        timeStringList: timeSlots[timeIndex].split(" - "),
+      });
+    }
+  };
 
   // const selectTime = (timeIndex: number) => {
   //   if (selectedTimesObject.timeIndexList.length === 0) {
@@ -164,7 +173,7 @@ export const TimeList: FC<TimeListProps> = () => {
                           ? styles.active
                           : index >
                                 Math.min(
-                                  ...selectedTimesObject.timeIndexList
+                                  ...selectedTimesObject.timeIndexList,
                                 ) &&
                               index <
                                 Math.max(...selectedTimesObject.timeIndexList)

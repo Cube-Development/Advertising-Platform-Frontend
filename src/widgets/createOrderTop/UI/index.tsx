@@ -23,7 +23,7 @@ export const CreateOrderTop: FC<CreateOrderTopProps> = ({ onChange }) => {
   const handleDataChange = (type: keyof IOrder) => {
     if (currentName !== "") {
       onChange(type, currentName);
-      console.log("clicked name")
+      console.log("clicked name");
     }
   };
 

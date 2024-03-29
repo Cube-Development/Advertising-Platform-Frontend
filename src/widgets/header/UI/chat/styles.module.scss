@@ -4,12 +4,11 @@
   cursor: pointer;
 }
 
-
 .modal {
   display: grid;
   align-items: center;
   justify-content: center;
-  
+
   position: fixed;
   z-index: 10;
   left: 0;
@@ -21,7 +20,7 @@
   backdrop-filter: blur(5px);
 }
 
-.modalContent{
+.modalContent {
   display: grid;
   // width: 650px;
   align-items: center;
@@ -34,82 +33,79 @@
   background: #fff;
 }
 
-
-.top{
+.top {
   display: grid;
   grid-auto-flow: column;
   align-items: center;
   justify-content: space-between;
 
-  p{
-      font-size: 24px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 12px; /* 50% */
-      color: #4772E6;
+  p {
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 12px; /* 50% */
+    color: #4772e6;
   }
 
-  svg{
-      width: 20px;
-      height: 20px;
+  svg {
+    width: 20px;
+    height: 20px;
   }
 }
 
-.content{
+.content {
   display: grid;
   grid-auto-flow: column;
   column-gap: 10px;
-
 }
-.content__left{
+.content__left {
   display: grid;
   grid-auto-flow: row;
   align-content: start;
   max-width: 370px;
 
-  big{
+  big {
     font-size: 24px;
     font-style: normal;
     font-weight: 400;
-    line-height: 0.75; 
-    color: #4772E6;
+    line-height: 0.75;
+    color: #4772e6;
     padding: 25px 0;
     text-align: center;
   }
-
 }
 
-.administration{
+.administration {
   display: grid;
   grid-auto-flow: column;
   align-items: center;
   justify-content: space-between;
-  padding: 10px 10px 10px 35px ;
+  padding: 10px 10px 10px 35px;
   cursor: pointer;
 
-  div{
+  div {
     display: grid;
     justify-content: center;
     align-content: center;
 
-    img{
-        width: 25px;
-        height: 25px;
-        border-radius: 50%;
-        border: 0.5px solid #4772E6;
+    img {
+      width: 25px;
+      height: 25px;
+      border-radius: 50%;
+      border: 0.5px solid #4772e6;
     }
   }
 
-  p{
+  p {
     color: var(--Sub-text);
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
-    line-height: 0.75; 
+    line-height: 0.75;
   }
 }
 
-.all_chats{
+.all_chats {
   display: grid;
   grid-auto-flow: row;
   align-content: start;
@@ -125,7 +121,7 @@
   }
 }
 
-.content__right{
+.content__right {
   display: grid;
   grid-auto-flow: row;
   align-content: space-between;
@@ -134,18 +130,15 @@
   padding-bottom: 10px;
 }
 
-.top{
-
+.top {
   display: grid;
   align-items: center;
   justify-content: end;
   padding: 25px 30px 20px 30px;
-  button{
-    
-      svg{
-        width: 20px;
-        height: 20px;
+  button {
+    svg {
+      width: 20px;
+      height: 20px;
     }
   }
-
 }

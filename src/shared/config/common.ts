@@ -5,5 +5,5 @@ export const enum REPLENISHMENT {
 }
 
 export const enum CALENDAR {
-  disabledDays = 2
+  disabledDays = 2,
 }

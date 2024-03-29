@@ -11,10 +11,13 @@ import { IPostChannel } from "@shared/types/createPost";
 
 interface CreateOrderPostProps {
   cards: IPostChannel[];
-  isBlur?: boolean
+  isBlur?: boolean;
 }
 
-export const CreateOrderPost: FC<CreateOrderPostProps> = ({ cards, isBlur }) => {
+export const CreateOrderPost: FC<CreateOrderPostProps> = ({
+  cards,
+  isBlur,
+}) => {
   const { t } = useTranslation();
 
   const platforms: number[] = [...new Set(cards.map((card) => card.platform))];

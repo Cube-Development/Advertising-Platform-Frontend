@@ -7,64 +7,68 @@ import { ChatMessages } from "@features/chatMessages";
 import { IChat } from "@shared/types/chat";
 import { SendMessage } from "@features/sendMessage";
 
-const AdministrationChat = 
-  {
-    name: "Administration",
-    avatar:
-      "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",
-    messages: [
-      {
-        type: "sender",
-        message: "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
-        date: "28.03.2024",
-        time: "18:00",
-      },
-      {
-        type: "recipient",
-        message: "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
-        date: "28.03.2024",
-        time: "18:02",
-      },
+const AdministrationChat = {
+  name: "Administration",
+  avatar:
+    "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",
+  messages: [
+    {
+      type: "sender",
+      message:
+        "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
+      date: "28.03.2024",
+      time: "18:00",
+    },
+    {
+      type: "recipient",
+      message:
+        "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
+      date: "28.03.2024",
+      time: "18:02",
+    },
 
-      {
-        type: "sender",
-        message: "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
-        date: "28.03.2024",
-        time: "18:10",
-      },
-      {
-        type: "sender",
-        message: "Lorem ipsum dolor sit amet consectetur.",
-        date: "28.03.2024",
-        time: "18:12",
-      },
-      {
-        type: "sender",
-        message: "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
-        date: "29.03.2024",
-        time: "15:00",
-      },
-      {
-        type: "sender",
-        message: "Lorem ipsum dolor ",
-        date: "29.03.2024",
-        time: "15:05",
-      },
-      {
-        type: "recipient",
-        message: "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
-        date: "28.03.2024",
-        time: "18:02",
-      },
-      {
-        type: "recipient",
-        message: "Lorem ipsum dolor sit amet consectetur.m dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
-        date: "28.03.2024",
-        time: "18:12",
-      },
-    
-    ],
-  }
+    {
+      type: "sender",
+      message:
+        "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
+      date: "28.03.2024",
+      time: "18:10",
+    },
+    {
+      type: "sender",
+      message: "Lorem ipsum dolor sit amet consectetur.",
+      date: "28.03.2024",
+      time: "18:12",
+    },
+    {
+      type: "sender",
+      message:
+        "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
+      date: "29.03.2024",
+      time: "15:00",
+    },
+    {
+      type: "sender",
+      message: "Lorem ipsum dolor ",
+      date: "29.03.2024",
+      time: "15:05",
+    },
+    {
+      type: "recipient",
+      message:
+        "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
+      date: "28.03.2024",
+      time: "18:02",
+    },
+    {
+      type: "recipient",
+      message:
+        "Lorem ipsum dolor sit amet consectetur.m dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
+      date: "28.03.2024",
+      time: "18:12",
+    },
+  ],
+};
 
 const AllChats = [
   {
@@ -88,13 +92,15 @@ const AllChats = [
 
       {
         type: "sender",
-        message: "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
+        message:
+          "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
         date: "28.03.2024",
         time: "18:10",
       },
       {
         type: "sender",
-        message: "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit ame",
+        message:
+          "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit ame",
         date: "28.03.2024",
         time: "18:12",
       },
@@ -118,11 +124,11 @@ const AllChats = [
       },
       {
         type: "recipient",
-        message: "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
+        message:
+          "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
         date: "28.03.2024",
         time: "18:12",
       },
-    
     ],
   },
   {
@@ -146,13 +152,15 @@ const AllChats = [
 
       {
         type: "sender",
-        message: "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
+        message:
+          "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
         date: "28.03.2024",
         time: "18:10",
       },
       {
         type: "sender",
-        message: "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit ame",
+        message:
+          "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit ame",
         date: "28.03.2024",
         time: "18:12",
       },
@@ -176,11 +184,11 @@ const AllChats = [
       },
       {
         type: "recipient",
-        message: "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
+        message:
+          "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
         date: "28.03.2024",
         time: "18:12",
       },
-    
     ],
   },
   {
@@ -204,13 +212,15 @@ const AllChats = [
 
       {
         type: "sender",
-        message: "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
+        message:
+          "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
         date: "28.03.2024",
         time: "18:10",
       },
       {
         type: "sender",
-        message: "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit ame",
+        message:
+          "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit ame",
         date: "28.03.2024",
         time: "18:12",
       },
@@ -234,11 +244,11 @@ const AllChats = [
       },
       {
         type: "recipient",
-        message: "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
+        message:
+          "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
         date: "28.03.2024",
         time: "18:12",
       },
-    
     ],
   },
   {
@@ -262,13 +272,15 @@ const AllChats = [
 
       {
         type: "sender",
-        message: "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
+        message:
+          "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
         date: "28.03.2024",
         time: "18:10",
       },
       {
         type: "sender",
-        message: "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit ame",
+        message:
+          "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit ame",
         date: "28.03.2024",
         time: "18:12",
       },
@@ -292,11 +304,11 @@ const AllChats = [
       },
       {
         type: "recipient",
-        message: "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
+        message:
+          "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
         date: "28.03.2024",
         time: "18:12",
       },
-    
     ],
   },
   {
@@ -320,13 +332,15 @@ const AllChats = [
 
       {
         type: "sender",
-        message: "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
+        message:
+          "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
         date: "28.03.2024",
         time: "18:10",
       },
       {
         type: "sender",
-        message: "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit ame",
+        message:
+          "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit ame",
         date: "28.03.2024",
         time: "18:12",
       },
@@ -350,11 +364,11 @@ const AllChats = [
       },
       {
         type: "recipient",
-        message: "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
+        message:
+          "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
         date: "28.03.2024",
         time: "18:12",
       },
-    
     ],
   },
   {
@@ -378,13 +392,15 @@ const AllChats = [
 
       {
         type: "sender",
-        message: "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
+        message:
+          "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
         date: "28.03.2024",
         time: "18:10",
       },
       {
         type: "sender",
-        message: "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit ame",
+        message:
+          "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit ame",
         date: "28.03.2024",
         time: "18:12",
       },
@@ -408,11 +424,11 @@ const AllChats = [
       },
       {
         type: "recipient",
-        message: "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
+        message:
+          "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
         date: "28.03.2024",
         time: "18:12",
       },
-    
     ],
   },
   {
@@ -436,13 +452,15 @@ const AllChats = [
 
       {
         type: "sender",
-        message: "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
+        message:
+          "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
         date: "28.03.2024",
         time: "18:10",
       },
       {
         type: "sender",
-        message: "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit ame",
+        message:
+          "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit ame",
         date: "28.03.2024",
         time: "18:12",
       },
@@ -466,14 +484,13 @@ const AllChats = [
       },
       {
         type: "recipient",
-        message: "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
+        message:
+          "Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.Lorem ipsum dolor sit amet consectetur.",
         date: "28.03.2024",
         time: "18:12",
       },
-    
     ],
   },
-  
 ];
 
 export const Chat: FC = () => {
@@ -510,7 +527,10 @@ export const Chat: FC = () => {
                     />
                   ))}
                 </div>
-                <div className={styles.administration} onClick={() => handleChangeChat(AdministrationChat)}>
+                <div
+                  className={styles.administration}
+                  onClick={() => handleChangeChat(AdministrationChat)}
+                >
                   <div>
                     <img src={AdministrationChat.avatar} alt="" />
                   </div>
@@ -524,7 +544,7 @@ export const Chat: FC = () => {
                   </button>
                 </div>
                 {currentChat && <ChatMessages card={currentChat} />}
-                {currentChat && <SendMessage/>}
+                {currentChat && <SendMessage />}
               </div>
             </div>
           </div>

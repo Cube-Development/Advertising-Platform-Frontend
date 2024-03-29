@@ -105,7 +105,6 @@ export const PlatformInfo: FC = () => {
 
   return (
     <div className="container sidebar">
-
       <form onSubmit={handleSubmit(onSubmit)} className={styles.wrapper}>
         <div className={`${styles.top} ${isVisible || styles.complite}`}>
           <span>2</span>

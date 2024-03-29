@@ -34,7 +34,6 @@ export const PostFiles: FC<PostFilesProps> = () => {
               </button>
             </div>
             {/* <BarProfileFilter /> */}
-            
           </div>
         </div>
       )}

@@ -5,14 +5,17 @@ import { IChat } from "@shared/types/chat";
 
 interface ChatCardProps {
   card: IChat;
-  isActive: boolean, 
-  onChange: (card: IChat) => void
+  isActive: boolean;
+  onChange: (card: IChat) => void;
 }
 
 export const ChatCard: FC<ChatCardProps> = ({ card, isActive, onChange }) => {
   const { t } = useTranslation();
   return (
-    <div className={`${styles.channel} ${isActive ? styles.active : ""}`} onClick={()=> onChange(card)}>
+    <div
+      className={`${styles.channel} ${isActive ? styles.active : ""}`}
+      onClick={() => onChange(card)}
+    >
       <div className={styles.info}>
         <div className={styles.logo}>
           <div>

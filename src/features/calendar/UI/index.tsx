@@ -16,7 +16,7 @@ interface IDate {
 const disabledDatesStrings = ["2024-04-10", "2024-04-11", "2024-04-12"];
 const advDatesStrings = ["2024-04-1", "2024-04-2", "2024-04-3"];
 const disabledDates = disabledDatesStrings.map(
-  (dateString) => new Date(dateString)
+  (dateString) => new Date(dateString),
 );
 const advDates = advDatesStrings.map((dateString) => new Date(dateString));
 
@@ -40,7 +40,7 @@ export const CustomCalendar = () => {
 
       const newDateString = newDate.map(
         (date: Date) =>
-          `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`
+          `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`,
       );
       setDateOject({ date: newDate, dateString: newDateString });
       // setIsSelectRange(false)
@@ -100,7 +100,7 @@ export const CustomCalendar = () => {
       minSelectableDate.setDate(new Date().getDate() + CALENDAR.disabledDays);
       if (
         disabledDates.some(
-          (disabledDate) => date.toDateString() === disabledDate.toDateString()
+          (disabledDate) => date.toDateString() === disabledDate.toDateString(),
         ) ||
         date < minSelectableDate
       ) {
@@ -108,7 +108,7 @@ export const CustomCalendar = () => {
       }
       if (
         advDates.some(
-          (advDate) => date.toDateString() === advDate.toDateString()
+          (advDate) => date.toDateString() === advDate.toDateString(),
         )
       ) {
         return styles.advDate;
@@ -121,25 +121,21 @@ export const CustomCalendar = () => {
     <div>
       <button className={styles.wrapper} onClick={handleOpenModal}>
         <CalendarIcon />
-          {dateOject.dateString && !isModalOpen ? (
-            dateOject.dateString.length === 2 ? (
-              <p className={styles.range}>
-                {dateOject.dateString[0]}
-                <br />
-                {t('calendar.until')}
-                <br />
-                {dateOject.dateString[1]}
-              </p>
-            ) : (
-              <p>
-                {dateOject.dateString}
-              </p>
-            )
-          ) : (
-            <p>
-              -- / -- / ----
+        {dateOject.dateString && !isModalOpen ? (
+          dateOject.dateString.length === 2 ? (
+            <p className={styles.range}>
+              {dateOject.dateString[0]}
+              <br />
+              {t("calendar.until")}
+              <br />
+              {dateOject.dateString[1]}
             </p>
-          )}
+          ) : (
+            <p>{dateOject.dateString}</p>
+          )
+        ) : (
+          <p>-- / -- / ----</p>
+        )}
       </button>
 
       {isModalOpen && (
@@ -171,15 +167,12 @@ export const CustomCalendar = () => {
               </div>
 
               <div className={styles.bottom}>
-                  <MyButton
-                    className={styles.button}
-                    onClick={handleChangeRange}
-                  >
-                    <p>{t("calendar.range")}</p>
-                  </MyButton>
-                  <MyButton className={styles.button} onClick={handleOpenModal}>
-                    <p>{t("calendar.confirm")}</p>
-                  </MyButton>
+                <MyButton className={styles.button} onClick={handleChangeRange}>
+                  <p>{t("calendar.range")}</p>
+                </MyButton>
+                <MyButton className={styles.button} onClick={handleOpenModal}>
+                  <p>{t("calendar.confirm")}</p>
+                </MyButton>
               </div>
             </div>
           </div>

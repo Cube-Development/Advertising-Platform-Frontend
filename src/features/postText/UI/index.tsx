@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 
 interface PostTextProps {
   placeholder: string;
-//   onChange: any;
+  //   onChange: any;
 }
 
 export const PostText: FC<PostTextProps> = ({ placeholder }) => {
