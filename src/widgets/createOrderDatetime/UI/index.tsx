@@ -5,6 +5,7 @@ import { PostPlatform } from "@features/postPlatform";
 import { IPostChannel } from "@shared/types/createPost";
 import { CustomCalendar } from "@features/calendar";
 import { TimeList } from "@features/timeList";
+import { Chat } from "@widgets/header/UI/chat";
 
 interface CreateOrderDatetimeProps {
   cards: IPostChannel[];
@@ -21,6 +22,7 @@ export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
 
   return (
     <div className={`container ${isBlur ? "blur" : ""}`}>
+      <Chat/>
       <div className={styles.wrapper}>
         <div className={styles.content}>
           <div className={styles.title}>

@@ -921,6 +921,19 @@
         "until": "до"
     },
 
+    "chat": {
+        "my_messages": "Мои сообщения",
+        "types": {
+            "blogger": "От блогеров",
+            "manager": "От менеджеров",
+            "administration": "Администрация серсива"
+        },
+        "campaign": "РК",
+        "channel": "канал",
+        "new_message": "Написать сообщение..."
+    },
+
+
     "filter": {
         "title": "Соцсеть",
         "telegram": "Telegram",

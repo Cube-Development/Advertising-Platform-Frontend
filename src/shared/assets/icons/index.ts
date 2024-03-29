@@ -43,6 +43,7 @@ export { RatingIcon } from "./rating";
 export { RobotIcon } from "./robot";
 export { RocketIcon } from "./rocket";
 export { SearchIcon } from "./search";
+export { SendIcon } from "./send";
 export { SortUpIcon } from "./sortUp";
 export { SadSmileIcon } from "./sadSmile";
 export { StarIcon } from "./star";
