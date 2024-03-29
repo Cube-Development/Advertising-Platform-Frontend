@@ -27,7 +27,7 @@ export const PostText: FC<PostTextProps> = ({ placeholder }) => {
         id="input"
         value={description}
         rows={10}
-        // onChange={handleChange}
+        onChange={handleChange}
         maxLength={200}
         placeholder={t(placeholder)}
       />
