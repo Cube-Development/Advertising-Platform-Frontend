@@ -1,0 +1,1 @@
+export { getInputLegalType } from "./getInputType";

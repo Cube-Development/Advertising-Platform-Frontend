@@ -37,9 +37,8 @@ export const MenuItem: React.FC<IMenuItems> = ({
       {item.subItems && chapter === item.item.title && (
         <ul>
           {item.subItems.map((subItem, index) => (
-            <Link to={subItem.path!}>
+            <Link to={subItem.path!} key={subItem.title}>
               <li
-                key={subItem.title}
                 onClick={() => changeCharper(item.item.title, !!item.subItems)}
               >
                 {t(subItem.title)}

@@ -1,0 +1,23 @@
+.wrapper {
+  display: grid;
+  grid-auto-flow: column;
+  column-gap: 5px;
+  align-items: center;
+  justify-content: start;
+  padding: 20px;
+  color: var(--Text-sample, #a3a0a0);
+  border-radius: 15px;
+  border: 1px solid var(--Containers, #8c8c8c);
+  background: #fff;
+
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+
+  textarea {
+    width: 100%;
+    resize: none;
+    outline: none;
+  }
+}

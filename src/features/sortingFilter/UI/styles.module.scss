@@ -1,6 +1,7 @@
 .wrapper {
   display: grid;
   grid-auto-flow: column;
+  column-gap: 10px;
   align-items: center;
   justify-content: space-between;
 
@@ -15,7 +16,6 @@
   button {
     display: grid;
     align-content: center;
-    //   justify-content: center;
     padding: 10px;
     min-width: 150px;
 
@@ -33,6 +33,7 @@
 .filter {
   display: grid;
   grid-auto-flow: column;
+
   align-items: center;
   justify-content: space-between;
 

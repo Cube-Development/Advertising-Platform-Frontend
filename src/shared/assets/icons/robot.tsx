@@ -19,8 +19,8 @@ export const RobotIcon = () => (
         y2="0.418153"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#4772E6" />
-        <stop offset="1" stop-color="#8E54E9" />
+        <stop stopColor="#4772E6" />
+        <stop offset="1" stopColor="#8E54E9" />
       </linearGradient>
     </defs>
   </svg>

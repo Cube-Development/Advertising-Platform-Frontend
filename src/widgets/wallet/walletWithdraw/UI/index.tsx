@@ -1,7 +1,7 @@
 import { BarProfileFilter } from "@features/barProfileFilter/UI";
 import { ArrowIcon5 } from "@shared/assets";
 import { pageFilter } from "@shared/config/pageFilter";
-import { profileFilter } from "@shared/config/profileFilter";
+import { profileTypesName } from "@shared/config/profileFilter";
 import { useAppSelector } from "@shared/store";
 import { IProfileData } from "@shared/types/profile";
 import { ChooseProfile } from "@widgets/wallet/UI/chooseProfile";
@@ -51,8 +51,9 @@ export const WalletWithdraw: FC = () => {
   const [activeAccount, setActiveAccount] = useState(Accounts[0]);
 
   const {
+    reset,
+    register,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm<IProfileData>();
 
@@ -71,20 +72,26 @@ export const WalletWithdraw: FC = () => {
           <p>{t("wallet.withdraw.title")}</p>
           <ArrowIcon5 />
         </div>
-        <BarProfileFilter page={pageFilter.walletWithdraw} />
+        <BarProfileFilter
+          resetValues={reset}
+          page={pageFilter.walletWithdraw}
+        />
         <div>
           <div className={styles.top}>
             <p>{t("wallet.withdraw.offer")}</p>
           </div>
-          {profile === profileFilter.selfEmployed && (
+          {profile.type === profileTypesName.selfEmployedAccounts && (
             <div className={styles.subbar}>
-              <BarSubrofileFilter />
+              <BarSubrofileFilter resetValues={reset} />
             </div>
           )}
           <div className={styles.content}>
-            <PaymentData account={Accounts[0]} />
+            <PaymentData
+              amountTitle={t("wallet.withdraw.amount")}
+              account={Accounts[0]}
+            />
             <div>
-              <div className={styles.content__left}>
+              <div className={styles.content__right}>
                 <ChooseProfile
                   accounts={Accounts}
                   onChange={handleOnchange}

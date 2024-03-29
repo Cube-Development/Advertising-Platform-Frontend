@@ -1,0 +1,123 @@
+.wrapper {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  column-gap: 10px;
+  justify-content: space-between;
+
+  p {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    color: #4772e6;
+    // overflow-wrap: break-word;
+  }
+
+  .range {
+    font-size: 12px;
+  }
+}
+
+.calendar {
+  display: grid;
+  grid-auto-flow: row;
+  align-items: center;
+  justify-content: center;
+  padding: 35px;
+  border-radius: 25px;
+  background: #fff;
+  // animation: slideInFromRight 0.3s ease-in-out forwards, shake 0.3s ease-in-out 0.1s forwards;
+}
+
+.top {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 25px;
+
+  p {
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 12px; /* 50% */
+    color: #4772e6;
+  }
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.modal {
+  display: grid;
+  align-items: center;
+  justify-content: center;
+
+  position: fixed;
+  z-index: 10;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+}
+
+.modalContent {
+  display: grid;
+  align-items: center;
+  grid-auto-flow: row;
+  justify-content: center;
+  position: relative;
+  margin: 15% auto;
+  padding: 30px 60px;
+  // top: 50%;
+}
+
+.bottom {
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 20px;
+  align-items: center;
+  justify-content: stretch;
+}
+
+.button {
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid #4772e6;
+  background: #fff;
+  p {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    color: #4772e6;
+  }
+}
+
+.advDate {
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    bottom: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 5px;
+    height: 5px;
+    background-color: orange;
+    border-radius: 50%;
+  }
+}
+
+.disabledDate {
+  cursor: none;
+  pointer-events: none;
+  color: var(--Text-sample);
+}

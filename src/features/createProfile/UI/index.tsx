@@ -1,8 +1,6 @@
-import { paths } from "@shared/routing";
 import { MyButton } from "@shared/ui";
 import { ButtonHTMLAttributes, FC } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
 
 interface CreateProfileProps {
@@ -12,5 +10,9 @@ interface CreateProfileProps {
 export const CreateProfile: FC<CreateProfileProps> = ({ props }) => {
   const { t } = useTranslation();
 
-  return <MyButton {...props}>{t(`btn_add_profile`)}</MyButton>;
+  return (
+    <MyButton type="submit" {...props}>
+      {t(`btn_add_profile`)}
+    </MyButton>
+  );
 };

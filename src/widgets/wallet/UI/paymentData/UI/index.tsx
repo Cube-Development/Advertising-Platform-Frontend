@@ -6,7 +6,7 @@ import {
   SelfEmployedCardData,
   SelfEmployedData,
 } from "@shared/config/profileData";
-import { profileFilter } from "@shared/config/profileFilter";
+import { profileTypesName } from "@shared/config/profileFilter";
 import { useAppSelector } from "@shared/store";
 import { IProfileData } from "@shared/types/profile";
 import { FC, useState } from "react";
@@ -17,15 +17,17 @@ import { subprofileFilter } from "@shared/config/profileFilter";
 
 interface PaymentDataProps {
   account: any;
+  amountTitle: string;
 }
 
-export const PaymentData: FC<PaymentDataProps> = ({ account }) => {
+export const PaymentData: FC<PaymentDataProps> = ({ account, amountTitle }) => {
   const { t } = useTranslation();
   const [activeAccount, setActiveAccount] = useState(account);
 
   const {
+    reset,
+    register,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm<IProfileData>();
 
@@ -33,11 +35,11 @@ export const PaymentData: FC<PaymentDataProps> = ({ account }) => {
     useAppSelector((state) => state.filterReducer);
 
   const typeLegal =
-    filter === profileFilter.entity
+    filter.type === profileTypesName.entities
       ? EntityData
-      : filter === profileFilter.individual
+      : filter.type === profileTypesName.individuals
         ? IndividualData
-        : filter === profileFilter.selfEmployed &&
+        : filter.type === profileTypesName.selfEmployedAccounts &&
             subprofile === subprofileFilter.account
           ? SelfEmployedData
           : SelfEmployedCardData;
@@ -46,15 +48,19 @@ export const PaymentData: FC<PaymentDataProps> = ({ account }) => {
     <form className={styles.payment__data} action="">
       <div className={styles.block}>
         <div className={styles.ammount}>
-          <p>{t("wallet.ammount.title")}</p>
-          <span>{t("wallet.ammount.text")}</span>
+          <p>{amountTitle}</p>
           <div>
             <input type="text" />
             <small>{t("symbol")}</small>
           </div>
         </div>
         {typeLegal.map((block, index) => (
-          <ProfileData data={block} onChange={setValue} key={index} />
+          <ProfileData
+            data={block}
+            inputError={errors}
+            register={register}
+            key={index}
+          />
         ))}
       </div>
       <div className={styles.payment}>
@@ -62,7 +68,7 @@ export const PaymentData: FC<PaymentDataProps> = ({ account }) => {
           <p>{t("wallet.pay.title")}:</p>
         </div>
         <div>
-          <p>12151515 {t("symbol")}</p>
+          <p>12 151 515 {t("symbol")}</p>
           <span>{t("wallet.pay.text")}</span>
         </div>
       </div>

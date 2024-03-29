@@ -1,7 +1,7 @@
 import { BarProfileFilter } from "@features/barProfileFilter/UI";
 import { ArrowIcon4 } from "@shared/assets";
 import { pageFilter } from "@shared/config/pageFilter";
-import { profileFilter } from "@shared/config/profileFilter";
+import { profileTypesName } from "@shared/config/profileFilter";
 import { useAppSelector } from "@shared/store";
 import { IProfileData } from "@shared/types/profile";
 import { ChooseProfile } from "@widgets/wallet/UI/chooseProfile";
@@ -51,8 +51,9 @@ export const WalletTopUp: FC = () => {
   const [activeAccount, setActiveAccount] = useState(Accounts[0]);
 
   const {
+    reset,
+    register,
     handleSubmit,
-    setValue,
     formState: { errors },
   } = useForm<IProfileData>();
 
@@ -68,21 +69,24 @@ export const WalletTopUp: FC = () => {
     <div className="container sidebar">
       <div className={styles.wrapper}>
         <div className={styles.title}>
-          <p>{t("wallet.replenishment.title")}</p>
+          <p>{t("wallet.topup.title")}</p>
           <ArrowIcon4 />
         </div>
-        <BarProfileFilter page={pageFilter.walletTopUp} />
-        {filter === profileFilter.selfEmployed ? (
+        <BarProfileFilter resetValues={reset} page={pageFilter.walletTopUp} />
+        {filter.type === profileTypesName.selfEmployedAccounts ? (
           <TopUpCard />
         ) : (
           <div>
             <div className={styles.top}>
-              <p>{t("wallet.replenishment.offer")}</p>
+              <p>{t("wallet.topup.offer")}</p>
             </div>
             <div className={styles.content}>
-              <PaymentData account={Accounts[0]} />
+              <PaymentData
+                account={Accounts[0]}
+                amountTitle={t("wallet.topup.amount")}
+              />
               <div>
-                <div className={styles.content__left}>
+                <div className={styles.content__right}>
                   <ChooseProfile
                     accounts={Accounts}
                     onChange={handleOnchange}

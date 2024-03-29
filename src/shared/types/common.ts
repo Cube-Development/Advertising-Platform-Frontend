@@ -154,14 +154,28 @@ export interface IBlockData {
 }
 
 export interface IRowData {
-  data: string;
+  label: string;
   type: keyof IProfileData;
+  validate: {
+    required: string;
+  };
 }
 
 export interface IParameterData {
   title: string;
   default_value?: string;
-  text: string;
+  description: string;
+  // error: {
+  //   required?: string;
+  //   date?: string;
+  //   PNFL?: string;
+  //   INN?: string;
+  //   mfo?: string;
+  //   account?: string;
+  //   card?: string;
+  //   contact?: string;
+  //   email?: string;
+  // };
 }
 
 export interface IFilerData {
