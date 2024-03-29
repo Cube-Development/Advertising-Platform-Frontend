@@ -49,8 +49,7 @@ export const TopUpCard: FC = () => {
             </div>
           </div>
           <div className={styles.ammount}>
-            <p>{t("wallet.ammount.title")}</p>
-            <span>{t("wallet.ammount.text")}</span>
+            <p>{t("wallet.topup.amount")}</p>
             <div>
               <input type="text" />
               <small>{t("symbol")}</small>

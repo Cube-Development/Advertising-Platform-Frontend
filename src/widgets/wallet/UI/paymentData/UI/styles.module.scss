@@ -26,6 +26,7 @@
     font-style: normal;
     font-weight: 600;
     line-height: 0.75;
+    margin-bottom: 10px;
   }
   span {
     color: var(--choosen-text, #808080);
@@ -74,6 +75,7 @@
       font-style: normal;
       font-weight: 600;
       line-height: 0.75;
+      white-space: nowrap;
     }
 
     span {

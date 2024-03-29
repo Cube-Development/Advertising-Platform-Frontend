@@ -36,7 +36,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
       </div>
       <div className={styles.all__messages}>
         {card.messages.map((message, index) => (
-          <>
+          <div key={index} className={styles.messages_wrapper}>
             {message.date !== currentDate &&
               ((currentDate = message.date),
               (
@@ -56,7 +56,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
                 <span>{message.time}</span>
               </div>
             </div>
-          </>
+          </div>
         ))}
       </div>
     </div>

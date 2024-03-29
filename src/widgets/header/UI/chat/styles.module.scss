@@ -55,14 +55,15 @@
 
 .content {
   display: grid;
-  grid-auto-flow: column;
+  grid-template: 1fr / 0.7fr 1fr;
+  max-width: 40vw;
   column-gap: 10px;
 }
 .content__left {
   display: grid;
   grid-auto-flow: row;
   align-content: start;
-  max-width: 370px;
+  border: 0.5px solid rgba(0, 0, 0, 0.3);
 
   big {
     font-size: 24px;
@@ -125,7 +126,6 @@
   display: grid;
   grid-auto-flow: row;
   align-content: space-between;
-  width: 460px;
   padding-right: 10px;
   padding-bottom: 10px;
 }
