@@ -1,5 +1,9 @@
-export const ArrowIcon = () => (
+import * as React from "react";
+import { SVGProps } from "react";
+
+export const ArrowIcon = (props: SVGProps<SVGSVGElement>) => (
   <svg
+    {...props}
     width="10"
     height="7"
     viewBox="0 0 10 7"

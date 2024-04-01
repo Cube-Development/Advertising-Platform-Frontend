@@ -35,12 +35,14 @@ export const CatalogCard: FC<CatalogCardProps> = ({
 
   return (
     <div className={styles.channel}>
-      <div className={styles.channel_top}>
+      <div className={styles.channel__top}>
         <div className={styles.channel__logo}>
-          <div className={styles.logo}>
+          <div>
             <img src={card.avatar} alt="" />
           </div>
-          <RatingIcon />
+          <div className={styles.rate}>
+            <RatingIcon />
+          </div>
         </div>
 
         <div className={styles.channel__description}>
@@ -71,7 +73,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
               <ManIcon />
             </div>
             <div
-              className={styles.colorline}
+              className="colorline"
               style={{ "--male": `${card.male}%` } as React.CSSProperties}
               data-male={`${card.male}%`}
               data-female={`${card.female}%`}
@@ -104,14 +106,14 @@ export const CatalogCard: FC<CatalogCardProps> = ({
         </div>
       </div>
 
-      <div className={styles.channel_bottom}>
-        <AddToBasketBtn
-          selectedFormat={selectedFormat}
-          FormatList={FormatList}
-          formats={card.format}
-          changeFormat={handleChangeFormat}
-        />
-      </div>
+      {/* <div className={styles.channel_bottom}> */}
+      <AddToBasketBtn
+        selectedFormat={selectedFormat}
+        FormatList={FormatList}
+        formats={card.format}
+        changeFormat={handleChangeFormat}
+      />
+      {/* </div> */}
     </div>
   );
 };

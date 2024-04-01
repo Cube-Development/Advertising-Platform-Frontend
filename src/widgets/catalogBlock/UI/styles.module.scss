@@ -20,6 +20,7 @@
 
 .content {
   display: grid;
-  grid-auto-flow: column;
+  // grid-auto-flow: column;
+  grid-template: 1fr / 1fr 2fr;
   column-gap: 30px;
 }

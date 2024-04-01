@@ -2,13 +2,13 @@ import { IAddPLatformData, IOption } from "@shared/types/common";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { InfoIcon } from "@shared/assets";
+import { ArrowIcon, InfoIcon } from "@shared/assets";
 import { UseFormSetValue } from "react-hook-form";
+import { SELECTOPTIONS } from "@shared/config/common";
+import { ISelectOption } from "@shared/types/translate";
 
 interface SelectOptionsProps {
-  title: string;
-  text?: string;
-  defaultValue: string;
+  textData: string;
   options: IOption[];
   type: keyof IAddPLatformData;
   onChange: UseFormSetValue<IAddPLatformData>;
@@ -17,21 +17,21 @@ interface SelectOptionsProps {
 }
 
 export const SelectOptions: FC<SelectOptionsProps> = ({
-  title,
-  text,
-  defaultValue,
   options,
   type,
   onChange,
   single,
   isRow,
+  textData,
 }) => {
   const [selectedOptions, setSelectedOptions] = useState<(string | null)[]>([]);
   const [selectedOption, setSelectedOption] = useState<string | number>("");
   const [isMenuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
-
+  console.log(textData);
+  const allText: ISelectOption = t(`${textData}`, { returnObjects: true });
+  console.log(allText);
   const closeMenu = () => {
     setMenuOpen(false);
   };
@@ -86,31 +86,46 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
   return (
     <div className={isRow ? styles.wrapper__row : styles.wrapper} ref={menuRef}>
       <div className={styles.left}>
-        <p>{t(title)}</p>
-        {text && <InfoIcon />}
+        <p>{t(allText.title)}</p>
+        {allText.text && <InfoIcon />}
       </div>
 
-      <div>
-        <button type="button" onClick={handleButtonClick}>
-          {single ? (
-            <>{selectedOption === "" ? t(defaultValue) : selectedOption}</>
-          ) : (
-            <>
-              {selectedOptions.length === 0 ? (
-                t(defaultValue)
-              ) : (
-                <>
-                  {t("add_platform.choosed")}: {selectedOptions.length}{" "}
-                  {t("add_platform.from")} {options.length}
-                </>
-              )}
-            </>
-          )}
+      <div className={styles.menu}>
+        <button
+          type="button"
+          onClick={handleButtonClick}
+          className={isMenuOpen ? styles.active : ""}
+        >
+          <div>
+            {single ? (
+              <>
+                {selectedOption === ""
+                  ? t(allText.default_value)
+                  : selectedOption}
+              </>
+            ) : (
+              <>
+                {selectedOptions.length === 0 ? (
+                  t(allText.default_value)
+                ) : (
+                  <>
+                    {t("add_platform.choosed")}: {selectedOptions.length} /{" "}
+                    {options.length}
+                  </>
+                )}
+              </>
+            )}
+            <ArrowIcon />
+          </div>
         </button>
 
         {isMenuOpen && (
-          <div className={styles.menu}>
-            <ul className={options.length > 5 ? styles.scroll : ""}>
+          <div className={styles.options}>
+            <ul
+              className={
+                options.length > SELECTOPTIONS.scrollAddLen ? styles.scroll : ""
+              }
+            >
               {single ? (
                 <>
                   {options.map((option) => (

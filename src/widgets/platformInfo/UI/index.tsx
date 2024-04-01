@@ -16,6 +16,7 @@ import { SelectPrice } from "@features/selectPrice/UI";
 import { SelectSymbol } from "@features/selectSymbols";
 import { SavePlatform } from "@features/savePlatform";
 import { CreatePlatform } from "@features/createPlatform";
+import { platformData } from "@shared/config/platformData";
 
 const options: IOptions = {
   category: [
@@ -112,67 +113,63 @@ export const PlatformInfo: FC = () => {
         </div>
         {isVisible && (
           <div className={styles.form}>
-            <SelectOptions
-              onChange={setValue}
-              options={options.category}
-              single={true}
-              type={"category"}
-              defaultValue={"add_platform.default_value"}
-              title={"add_platform.category.title"}
-              text={"add_platform.category.text"}
-            />
-            <SelectOptions
-              onChange={setValue}
-              options={options.languages}
-              single={false}
-              type={"languages"}
-              defaultValue={"add_platform.default_value"}
-              title={"add_platform.languages.title"}
-              text={"add_platform.languages.text"}
-            />
-            <SelectOptions
-              onChange={setValue}
-              options={options.region}
-              single={false}
-              type={"region"}
-              defaultValue={"add_platform.default_value"}
-              title={"add_platform.region.title"}
-              text={"add_platform.region.text"}
-            />
-            <SelectSex
-              onChange={setValue}
-              title={"add_platform.sex.title"}
-              text={"add_platform.sex.text"}
-            />
-            <SelectOptions
-              onChange={setValue}
-              options={options.age}
-              single={false}
-              type={"age"}
-              defaultValue={"add_platform.default_value"}
-              title={"add_platform.age.title"}
-              text={"add_platform.age.text"}
-            />
-            <SelectDescription
-              onChange={setValue}
-              title={"add_platform.description.title"}
-              text={"add_platform.description.text"}
-              placeholder={"add_platform.default_input"}
-            />
-            <SelectPrice
-              accomms={accommList}
-              AccommPrice={AccommPrice}
-              title={"add_platform.price.title"}
-              text={"add_platform.price.text"}
-              info={"add_platform.price.info"}
-            />
-            <SelectSymbol
-              onChange={setValue}
-              type={"text_limit"}
-              title={"add_platform.symbol.title"}
-              text={"add_platform.symbol.text"}
-            />
-            <SavePlatform />
+            <div className={styles.form__top}>
+              <SelectOptions
+                onChange={setValue}
+                options={options.category}
+                single={true}
+                type={platformData.category}
+                textData={"add_platform.category"}
+              />
+              <SelectOptions
+                onChange={setValue}
+                options={options.languages}
+                single={false}
+                type={platformData.languages}
+                textData={"add_platform.languages"}
+              />
+              <SelectOptions
+                onChange={setValue}
+                options={options.region}
+                single={false}
+                type={platformData.region}
+                textData={"add_platform.region"}
+              />
+              <SelectSex
+                onChange={setValue}
+                title={"add_platform.sex.title"}
+                text={"add_platform.sex.text"}
+              />
+              <SelectOptions
+                onChange={setValue}
+                options={options.age}
+                single={false}
+                type={platformData.age}
+                textData={"add_platform.age"}
+              />
+            </div>
+            <div className={styles.form__bottom}>
+              <SelectDescription
+                onChange={setValue}
+                title={"add_platform.description.title"}
+                text={"add_platform.description.text"}
+                placeholder={"add_platform.default_input"}
+              />
+              <SelectPrice
+                accomms={accommList}
+                AccommPrice={AccommPrice}
+                title={"add_platform.price.title"}
+                text={"add_platform.price.text"}
+                info={"add_platform.price.info"}
+              />
+              <SelectSymbol
+                onChange={setValue}
+                type={"text_limit"}
+                title={"add_platform.symbol.title"}
+                text={"add_platform.symbol.text"}
+              />
+              <SavePlatform />
+            </div>
           </div>
         )}
       </form>

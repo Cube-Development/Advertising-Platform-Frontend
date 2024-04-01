@@ -17,8 +17,6 @@ export const BarPostFilter: FC<BarPostFilterProps> = ({ platforms }) => {
     dispatch(filterSlice.actions.setPlatformFilter(type));
   };
 
-  console.log("platforms", platforms);
-
   return (
     <div className={styles.types}>
       <ul>

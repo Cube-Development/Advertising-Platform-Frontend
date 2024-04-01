@@ -1,8 +1,7 @@
 .wrapper {
   display: grid;
-  grid-auto-flow: column;
+  grid-template: 1fr/ 0.9fr 1fr;
   align-items: center;
-  justify-content: space-between;
 
   p {
     color: var(--Personal-colors-black);
@@ -32,11 +31,13 @@
   grid-auto-flow: column;
   align-items: center;
   column-gap: 10px;
+  justify-content: start;
 }
 
 .slider {
-  width: 300px;
-  margin: 20px auto;
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 10px;
 }
 
 .position {

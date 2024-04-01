@@ -11,6 +11,8 @@ import {
 } from "@shared/config/profileFilter";
 import { catalogFilter, catalogTypes } from "@shared/config/catalogFilter";
 import { pageFilter } from "@shared/config/pageFilter";
+import { chatFilter, chatTypes } from "@shared/config/chatFilter";
+import { addFileFilter, addFileTypes } from "@shared/config/addFileFilter";
 
 interface BarProfileFilterProps {
   page: pageFilter;
@@ -18,7 +20,7 @@ interface BarProfileFilterProps {
 }
 
 interface IFilterOption {
-  type: profileTypesName | catalogFilter;
+  type: profileTypesName | catalogFilter | chatFilter | addFileFilter;
   id?: profileTypesNum;
 }
 
@@ -28,9 +30,8 @@ export const BarProfileFilter: FC<BarProfileFilterProps> = ({
 }) => {
   const { t } = useTranslation();
 
-  const { profileFilter, catalogFilter } = useAppSelector(
-    (state) => state.filterReducer,
-  );
+  const { profileFilter, catalogFilter, chatFilter, addFileFilter } =
+    useAppSelector((state) => state.filterReducer);
   const [options, filter] =
     page === pageFilter.profile || page === pageFilter.walletWithdraw
       ? [profileTypes, profileFilter.type]
@@ -38,7 +39,11 @@ export const BarProfileFilter: FC<BarProfileFilterProps> = ({
         ? [catalogTypes, catalogFilter]
         : page === pageFilter.walletTopUp
           ? [walletTopUpTypes, profileFilter.type]
-          : [[], "", ""];
+          : page === pageFilter.chat
+            ? [chatTypes, chatFilter]
+            : page === pageFilter.createOrderFiles
+              ? [addFileTypes, addFileFilter]
+              : [[], "", ""];
 
   const dispatch = useAppDispatch();
 
@@ -52,6 +57,10 @@ export const BarProfileFilter: FC<BarProfileFilterProps> = ({
       dispatch(filterSlice.actions.setProfileFilter(newFilter));
     } else if (page === pageFilter.catalog) {
       dispatch(filterSlice.actions.setCatalogFilter(option.type));
+    } else if (page === pageFilter.chat) {
+      dispatch(filterSlice.actions.setChatFilter(option.type));
+    } else if (page === pageFilter.createOrderFiles) {
+      dispatch(filterSlice.actions.setAddFileFilter(option.type));
     }
     resetValues();
   };

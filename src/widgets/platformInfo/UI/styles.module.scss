@@ -43,9 +43,21 @@
   display: grid;
   grid-auto-flow: row;
   padding: 50px;
-
-  row-gap: 30px;
+  row-gap: 50px;
   align-items: center;
+
+  .form__top {
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 30px;
+    align-items: center;
+  }
+  .form__bottom {
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 50px;
+    align-items: center;
+  }
 }
 
 .complite {

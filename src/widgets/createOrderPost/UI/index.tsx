@@ -8,6 +8,8 @@ import { PostButtons } from "@features/postButtons";
 import { PostDispay } from "@features/postDispay";
 import { BarPostFilter } from "@features/barPostFilter";
 import { IPostChannel } from "@shared/types/createPost";
+import { AddFiles } from "@features/addFiles";
+import { AddMediaFiles } from "@features/addMediaFiles";
 
 interface CreateOrderPostProps {
   cards: IPostChannel[];
@@ -42,7 +44,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                 <PostText placeholder={"create_order.create.text"} />
               </div>
               <div className={styles.block}>
-                <PostFiles />
+                <PostFiles AddFiles={AddFiles} AddMediaFiles={AddMediaFiles} />
                 <PostButtons />
                 <PostText placeholder={"create_order.create.comment"} />
               </div>

@@ -1,6 +1,7 @@
 .wrapper {
   display: grid;
   grid-auto-flow: column;
+  column-gap: 10px;
   align-items: center;
   justify-content: space-between;
 
@@ -15,18 +16,17 @@
   button {
     display: grid;
     align-content: center;
-    //   justify-content: center;
     padding: 10px;
     min-width: 150px;
 
     border-radius: 10px;
-    border: 0.5px solid var(--Containers, #8c8c8c);
-
+    border: 0.5px solid var(--Inside-container, #bdbdbd);
     background: var(--Personal-colors-White);
-    color: var(--Gradients-Gradient-1);
-
-    cursor: pointer;
     position: relative;
+
+    &:hover {
+      background: rgba(189, 189, 189, 0.15);
+    }
   }
 }
 
@@ -72,4 +72,6 @@
       border-radius: 8px;
     }
   }
+}
+.active {
 }

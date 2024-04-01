@@ -12,6 +12,7 @@ import { useAppSelector } from "@shared/store";
 import { catalogFilter } from "@shared/config/catalogFilter";
 import { SelectDescription } from "@features/selectDescription";
 import { AiFilter } from "@features/aiFilter";
+import { platformData } from "@shared/config/platformData";
 
 const options: IOptions = {
   category: [
@@ -107,18 +108,16 @@ export const CatalogSearch: FC = () => {
               onChange={setValue}
               options={options.category}
               single={true}
-              type={"category"}
-              defaultValue={"catalog.category.default_value"}
-              title={"catalog.category.title"}
+              type={platformData.category}
+              textData={"catalog.category"}
               isRow={true}
             />
             <SelectOptions
               onChange={setValue}
               options={options.age}
               single={false}
-              type={"age"}
-              defaultValue={"catalog.age.default_value"}
-              title={"catalog.age.title"}
+              type={platformData.age}
+              textData={"catalog.age"}
               isRow={true}
             />
             <SelectSex onChange={setValue} title={"catalog.sex.title"} />
@@ -126,18 +125,16 @@ export const CatalogSearch: FC = () => {
               onChange={setValue}
               options={options.languages}
               single={false}
-              type={"languages"}
-              defaultValue={"catalog.languages.default_value"}
-              title={"catalog.languages.title"}
+              type={platformData.languages}
+              textData={"catalog.languages"}
               isRow={true}
             />
             <SelectOptions
               onChange={setValue}
               options={options.region}
               single={false}
-              type={"region"}
-              defaultValue={"catalog.region.default_value"}
-              title={"catalog.region.title"}
+              type={platformData.region}
+              textData={"catalog.region"}
               isRow={true}
             />
           </>

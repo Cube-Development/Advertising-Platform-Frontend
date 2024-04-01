@@ -4,8 +4,16 @@ import { MyButton } from "@shared/ui";
 import { CancelIcon2, ImageIcon } from "@shared/assets";
 import { useTranslation } from "react-i18next";
 import { BarProfileFilter } from "@features/barProfileFilter/UI";
+import { pageFilter } from "@shared/config/pageFilter";
+import { useAppSelector } from "@shared/store";
+import { addFileFilter } from "@shared/config/addFileFilter";
+import { AddFiles } from "@features/addFiles";
+import { AddMediaFiles } from "@features/addMediaFiles";
 
-interface PostFilesProps {}
+interface PostFilesProps {
+  AddMediaFiles: FC;
+  AddFiles: FC;
+}
 
 export const PostFiles: FC<PostFilesProps> = () => {
   const { t } = useTranslation();
@@ -14,6 +22,12 @@ export const PostFiles: FC<PostFilesProps> = () => {
   const handleOpenModal = () => {
     setIsModalOpen(!isModalOpen);
   };
+
+  const { addFileFilter: filter } = useAppSelector(
+    (state) => state.filterReducer,
+  );
+
+  const handle = () => {};
 
   return (
     <div>
@@ -33,7 +47,11 @@ export const PostFiles: FC<PostFilesProps> = () => {
                 <CancelIcon2 />
               </button>
             </div>
-            {/* <BarProfileFilter /> */}
+            <BarProfileFilter
+              page={pageFilter.createOrderFiles}
+              resetValues={handle}
+            />
+            {filter === addFileFilter.file ? <AddFiles /> : <AddMediaFiles />}
           </div>
         </div>
       )}

@@ -1,5 +1,4 @@
 import { TelegramIcon } from "@shared/assets";
-import { IFilerData } from "@shared/types/common";
 
 export enum networkFilter {
   telegram = "telegram",

@@ -96,15 +96,6 @@ export interface IBloggerPlatformCard {
   status: number;
 }
 
-// export interface IBloggerModPlatformCard {
-//   id: number
-//   img: string
-//   name: string
-//   date: string
-//   category: string
-//   status: number
-// }
-
 export interface IBloggerOfferCard {
   id: number;
   img: string;

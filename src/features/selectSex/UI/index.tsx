@@ -37,6 +37,7 @@ export const SelectSex: FC<SelectSexProps> = ({ title, text, onChange }) => {
           max={100}
           value={position}
           onChange={handleChange}
+          className={styles.band}
         />
         <div className={styles.position}>
           <p>{100 - position} %</p>

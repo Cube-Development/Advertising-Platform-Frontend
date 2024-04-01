@@ -16,15 +16,16 @@ const cards = [
       "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",
     name: "MDK",
     category: "Юмор и развлечения",
-    description: "fdkmfdslmsl",
+    description:
+      "Канал с развлекательными видео, актуальными новостями об Узбекистане и мире, также с познавательными лайфхаками и тд",
     format: [
       { format: 0, views: 32222, price: 150000, er: 27, cpv: 121 },
       { format: 1, views: 42222, price: 250000, er: 37, cpv: 221 },
       { format: 2, views: 52222, price: 350000, er: 47, cpv: 321 },
     ],
     subscribers: 301975,
-    male: 50,
-    female: 50,
+    male: 10,
+    female: 90,
     platform: 1,
   },
   {
@@ -34,7 +35,8 @@ const cards = [
       "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",
     name: "MDK",
     category: "Юмор и развлечения",
-    description: "fdkmfdslmsl",
+    description:
+      "fdkmfdsКанал с развлекательными видео, актуальными новостями об Узбекистане и мире, также с познавательными лайфхаками и тдlmsl",
     format: [{ format: 0, views: 32222, price: 150000, er: 27, cpv: 121 }],
     subscribers: 301975,
     male: 50,
@@ -51,8 +53,8 @@ const cards = [
     description: "fdkmfdslmsl",
     format: [{ format: 0, views: 32222, price: 150000, er: 27, cpv: 121 }],
     subscribers: 301975,
-    male: 50,
-    female: 50,
+    male: 70,
+    female: 30,
     platform: 1,
   },
 ];
@@ -61,26 +63,28 @@ export const CatalogList: FC = () => {
   const { t } = useTranslation();
 
   return (
-    <div className="container">
-      <div className={styles.wrapper}>
+    // <div className="container">
+    <div className={styles.wrapper}>
+      <div className={styles.filters__row}>
+        <span>
+          {t("catalog.all_platform")}: {cards.length}
+        </span>
         <div className={styles.filters}>
-          <span>
-            {t("catalog.all_platform")}: {cards.length}
-          </span>
           <NetworkFilter />
           <SortingFilter />
         </div>
-
-        <SearchFilter />
-        {cards.map((card, index) => (
-          <CatalogCard
-            card={card}
-            key={index}
-            AddToBasketBtn={AddToBasket}
-            FormatList={FormatList}
-          />
-        ))}
       </div>
+
+      <SearchFilter />
+      {cards.map((card, index) => (
+        <CatalogCard
+          card={card}
+          key={index}
+          AddToBasketBtn={AddToBasket}
+          FormatList={FormatList}
+        />
+      ))}
     </div>
+    // </div>
   );
 };

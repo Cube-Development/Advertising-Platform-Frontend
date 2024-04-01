@@ -4,12 +4,13 @@
   align-items: center;
   text-align: center;
   justify-content: space-between;
-}
+  padding: 5px 15px;
 
-.price {
-  display: grid;
-  grid-auto-flow: column;
-  align-items: center;
-  text-align: center;
-  column-gap: 10px;
+  .price {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    text-align: center;
+    column-gap: 10px;
+  }
 }

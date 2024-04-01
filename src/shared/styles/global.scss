@@ -18,7 +18,6 @@ body {
       height: 100%;
       background: rgba(0, 0, 0, 0.5);
       transition: opacity 1s ease-in;
-
       backdrop-filter: blur(3px);
     }
   }
@@ -105,5 +104,51 @@ body {
 
   100% {
     transform: translateX(0);
+  }
+}
+
+.colorline {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  justify-content: center;
+  height: 3px;
+  border-radius: 15px;
+  min-width: 60px;
+  background: linear-gradient(
+    to right,
+    #5c89ff var(--male),
+    #fc65ff var(--male) 100%
+  );
+
+  &::before {
+    content: attr(data-male);
+    background-size: contain;
+    background-repeat: no-repeat;
+    bottom: 8px;
+    overflow: hidden;
+    position: relative;
+
+    color: var(--Subtitle-text);
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-right: 12px;
+  }
+
+  &::after {
+    content: attr(data-female);
+    background-size: contain;
+    background-repeat: no-repeat;
+    bottom: 8px;
+    overflow: hidden;
+    position: relative;
+
+    color: var(--Subtitle-text);
+    font-size: 8px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
   }
 }

@@ -1,6 +1,7 @@
 import React, { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss"; // Подключаем файл со стилями
+import { MySlider } from "../slider";
 
 interface SliderSubsProps {
   onUserCountChange: (userCount: number) => void;
@@ -22,13 +23,13 @@ export const SliderSubs: FC<SliderSubsProps> = ({ onUserCountChange }) => {
         <h2 className={styles.title}>{t(`main_page_blogger.card.subs`)}</h2>
         <h2 className={styles.value}>{value.toLocaleString()}</h2>
       </div>
-      <input
+      <MySlider
         type="range"
         min={1000}
         max={10000000}
         value={value}
         onChange={handleChange}
-        className={styles.slider}
+        // className={styles.slider}
       />
     </div>
   );

@@ -1,3 +1,5 @@
+import { chatRoles } from "@shared/config/roles";
+
 export interface IChat {
   campaign?: string;
   name: string;

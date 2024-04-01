@@ -6,24 +6,34 @@
   font-weight: 500;
   line-height: normal;
 
-  p {
-    color: var(--Personal-colors-black);
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-  }
-
   button {
     display: grid;
-    align-content: center;
-    justify-content: center;
+    grid-auto-flow: column;
+    column-gap: 10px;
+    align-items: center;
+    justify-content: start;
     padding: 10px;
     border-radius: 10px;
     background: #fff;
     cursor: pointer;
     position: relative;
+
+    p {
+      color: var(--Personal-colors-black);
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 0.75;
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
   }
+}
+
+.arrow {
+  fill: blue;
 }
 
 .menu {
@@ -31,12 +41,15 @@
   display: block;
   position: absolute;
   background-color: #fff;
-  border: 1px solid #ccc;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
   padding: 5px;
   overflow: hidden;
   z-index: 1;
+
+  border-radius: 10px;
+  border: 0.5px solid #4772e6;
+
+  background: #fff;
 
   li {
     display: grid;
@@ -47,8 +60,17 @@
     padding: 10px;
 
     &:hover {
-      background: rgba(189, 189, 189, 0.25);
       border-radius: 8px;
+      background: rgba(189, 189, 189, 0.25);
+    }
+
+    &.active {
+      border-radius: 8px;
+      background: linear-gradient(
+        45deg,
+        rgba(71, 114, 230, 0.25) 23.91%,
+        rgba(142, 84, 233, 0.25) 75.06%
+      );
     }
   }
 }

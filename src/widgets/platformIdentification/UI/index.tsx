@@ -4,6 +4,7 @@ import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { InfoIcon } from "@shared/assets";
 
 interface FormDataIden {
   platform: platformType;
@@ -37,23 +38,26 @@ export const PlatformIdentification: FC = () => {
         {isVisible && (
           <>
             <div className={styles.form}>
-              <div>
-                <p>{t("add_platform.choose_platform")}</p>
-                <div>
+              <div className={styles.form__row}>
+                <div className={styles.form__text}>
+                  <p>{t("add_platform.choose_platform")}</p>
+                  <InfoIcon />
+                </div>
+                <div className={styles.choose_platform}>
                   <MyButton
-                    className={`${styles.platform__btn} ${getValues("platform") === platformType.telegram ? styles.platform__active : ""}`}
+                    className={`${styles.platform__btn} ${getValues("platform") === platformType.telegram ? styles.active : ""}`}
                     onClick={() => setValue("platform", platformType.telegram)}
                   >
                     {t("add_platform_btn.telegram")}
                   </MyButton>
                   <MyButton
-                    className={`${styles.platform__btn} ${getValues("platform") === platformType.instagram ? styles.platform__active : ""}`}
+                    className={`${styles.platform__btn} ${getValues("platform") === platformType.instagram ? styles.active : ""}`}
                     onClick={() => setValue("platform", platformType.instagram)}
                   >
                     {t("add_platform_btn.instagram")}
                   </MyButton>
                   <MyButton
-                    className={`${styles.platform__btn} ${getValues("platform") === platformType.youtube ? styles.platform__active : ""}`}
+                    className={`${styles.platform__btn} ${getValues("platform") === platformType.youtube ? styles.active : ""}`}
                     onClick={() => setValue("platform", platformType.youtube)}
                   >
                     {t("add_platform_btn.youtube")}
@@ -61,9 +65,12 @@ export const PlatformIdentification: FC = () => {
                 </div>
               </div>
 
-              <div>
-                <p>{t("add_platform.paste_link")}</p>
-                <div>
+              <div className={styles.form__row}>
+                <div className={styles.form__text}>
+                  <p>{t("add_platform.paste_link")}</p>
+                  <InfoIcon />
+                </div>
+                <div className={styles.paste_link}>
                   <input
                     className={styles.platform__input}
                     {...register("link", { required: "Это поле обязательно" })}

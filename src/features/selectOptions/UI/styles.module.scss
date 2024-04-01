@@ -1,32 +1,12 @@
 .wrapper {
   display: grid;
-  grid-auto-flow: column;
+  grid-template: 1fr/ 0.9fr 1fr;
   align-items: center;
-  justify-content: space-between;
 
-  p {
-    color: var(--Personal-colors-black);
-    font-size: 16px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-  }
-
-  button {
-    display: grid;
-    align-content: center;
-    justify-content: center;
-    padding: 20px 25px;
-    border-radius: 12px;
-    min-width: 400px;
-
-    border: 1px solid #4772e6;
-    background: var(--Personal-colors-White);
-    color: var(--Gradients-Gradient-1);
-
-    cursor: pointer;
-    position: relative;
-  }
+  // column-gap: 10px;
+  // align-items: center;
+  // justify-content: space-between;
+  // position: relative;
 }
 
 .wrapper__row {
@@ -34,7 +14,27 @@
   grid-auto-flow: row;
   row-gap: 15px;
   align-items: center;
+}
 
+.left {
+  display: grid;
+  grid-auto-flow: column;
+  align-items: center;
+  column-gap: 10px;
+  justify-content: start;
+
+  p {
+    color: var(--Personal-colors-black);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+}
+
+.menu {
+  width: 100%;
+  // position: relative;
   p {
     color: var(--Personal-colors-black);
     font-size: 16px;
@@ -46,68 +46,88 @@
   button {
     display: grid;
     align-content: center;
-    justify-content: center;
+    // justify-content: center;
     padding: 20px 25px;
     border-radius: 12px;
-    min-width: 400px;
+    width: 100%;
 
-    border: 1px solid #4772e6;
+    border: 1px solid var(--Inside-container, #bdbdbd);
     background: var(--Personal-colors-White);
-    color: var(--Gradients-Gradient-1);
+    color: #a3a0a0;
 
-    cursor: pointer;
-    position: relative;
-  }
-}
-
-.menu {
-  margin-top: 5px;
-  display: block;
-  position: absolute;
-  background-color: #fff;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 12px;
-  padding: 5px;
-  overflow: hidden;
-  z-index: 1;
-  min-width: 400px;
-
-  li {
-    display: grid;
-    grid-auto-flow: column;
-    align-items: center;
-    justify-content: space-between;
-    cursor: pointer;
-    padding: 10px;
+    div {
+      display: grid;
+      grid-auto-flow: column;
+      align-items: center;
+      justify-content: space-between;
+    }
 
     &:hover {
+      border: 1px solid var(--Inside-container, #bdbdbd);
       background: rgba(189, 189, 189, 0.25);
-      border-radius: 8px;
+    }
+
+    &.active {
+      color: #4772e6;
+      border: 1px solid #4772e6;
+      background: var(--Personal-colors-White);
     }
   }
-}
 
-.scroll {
-  overflow-y: scroll;
-  max-height: 150px;
+  .scroll {
+    overflow-y: scroll;
+    max-height: 150px;
 
-  &::-webkit-scrollbar {
-    width: 5px;
-    height: 5px;
-    background-color: #ccc;
-    border-radius: 5px;
-    cursor: pointer;
+    &::-webkit-scrollbar {
+      width: 5px;
+      height: 5px;
+      background-color: #ccc;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      cursor: pointer;
+      background-color: #999;
+      border-radius: 5px;
+    }
+
+    li {
+      margin-right: 10px;
+    }
   }
 
-  &::-webkit-scrollbar-thumb {
-    cursor: pointer;
-    background-color: #999;
-    border-radius: 5px;
-  }
+  .options {
+    margin-top: 5px;
+    display: block;
+    position: absolute;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 12px;
+    padding: 5px;
+    overflow: hidden;
+    z-index: 1;
+    // width: 100%;
+    // min-width: 400px;
 
-  li {
-    margin-right: 10px;
+    ul {
+      width: 100%;
+    }
+
+    li {
+      display: grid;
+      grid-auto-flow: column;
+      align-items: center;
+      justify-content: space-between;
+      cursor: pointer;
+      padding: 10px;
+
+      &:hover {
+        background: rgba(189, 189, 189, 0.25);
+        border-radius: 8px;
+      }
+    }
   }
 }
 
@@ -118,12 +138,4 @@
     rgba(142, 84, 233, 0.25) 75.06%
   );
   border-radius: 8px;
-}
-
-.left {
-  display: grid;
-  grid-auto-flow: column;
-  align-items: center;
-  column-gap: 10px;
-  justify-content: start;
 }
