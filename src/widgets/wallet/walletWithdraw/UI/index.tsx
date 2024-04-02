@@ -86,7 +86,10 @@ export const WalletWithdraw: FC = () => {
   const onSubmit: SubmitHandler<IExtendedProfileData> = async (formData) => {
     const dataWithLegalType = {
       ...formData,
-      type_legal: filter.id,
+      type_legal:
+        filter.type === profileTypesName.selfEmployedAccounts
+          ? subprofileFilter.id
+          : filter.id,
     };
     createLegal(dataWithLegalType)
       .unwrap()
