@@ -1,3 +1,4 @@
+import { platformFilter } from "@shared/config/postFilter";
 import { FC } from "react";
 
 export interface IPlatform {
@@ -33,4 +34,16 @@ export interface IAddToBasketProps {
   formats: IFormat[];
   FormatList: FC<IFormatListProps>;
   changeFormat: (selectedValue: IFormat) => void;
+}
+
+export interface IPlatformLink {
+  name: string;
+  type: platformFilter;
+  default_value: string;
+  id: number;
+}
+
+export interface IAddPlatformBlur {
+  link: boolean;
+  parameters: boolean;
 }

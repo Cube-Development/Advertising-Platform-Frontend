@@ -1,14 +1,10 @@
-import { PlatformIdentification } from "@widgets/platformIdentification";
-import { PlatformInfo } from "@widgets/platformInfo";
-import { PlatformTop } from "@widgets/platformTop";
-import { FC, useState } from "react";
+import { AddPlatformBlock } from "@widgets/addPlatformBlock";
+import { FC } from "react";
 
 export const AddPlatformPage: FC = () => {
   return (
     <>
-      <PlatformTop />
-      <PlatformIdentification />
-      <PlatformInfo />
+      <AddPlatformBlock />
     </>
   );
 };

@@ -1,22 +1,34 @@
-import { platformType } from "@shared/config/platformTypes";
-import { MyButton, MyInput } from "@shared/ui";
+import { MyButton } from "@shared/ui";
 import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { InfoIcon } from "@shared/assets";
+import { IAddPlatformBlur, IPlatformLink } from "@shared/types/platform";
+import { platformFilter, platformTypes } from "@shared/config/postFilter";
+import { platformData } from "@shared/config/platformData";
 
 interface FormDataIden {
-  platform: platformType;
+  platform: platformFilter;
   link: string;
 }
 
-export const PlatformIdentification: FC = () => {
-  const [isVisible, setVisible] = useState(true);
+interface PlatformLinkProps {
+  blur: IAddPlatformBlur;
+  onChangeBlur: (newBlur: IAddPlatformBlur) => void;
+}
+
+export const PlatformLink: FC<PlatformLinkProps> = ({ blur, onChangeBlur }) => {
+  // const [isVisible, setVisible] = useState(true);
+  const [currentPlatform, setPlatform] = useState<IPlatformLink>(
+    platformTypes[0],
+  );
   const { t } = useTranslation();
   const {
+    reset,
     register,
     handleSubmit,
+    unregister,
     setValue,
     getValues,
     formState: { errors },
@@ -24,18 +36,34 @@ export const PlatformIdentification: FC = () => {
 
   const onSubmit: SubmitHandler<FormDataIden> = (data) => {
     console.log(data);
-    setVisible(false);
+    onChangeBlur({ link: true, parameters: false });
+  };
+
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value;
+    console.log("registe link", newValue);
+    register(platformData.link, { value: newValue });
+    console.log(getValues());
+  };
+
+  const changePlatform = (platform: IPlatformLink) => {
+    console.log("registe", platform.type);
+    unregister(platformData.platform);
+    register(platformData.platform, { value: platform.type });
+    console.log(getValues());
+    setPlatform(platform);
+    reset();
   };
 
   return (
     <div className="container sidebar">
       <form onSubmit={handleSubmit(onSubmit)} className={styles.wrapper}>
-        <div className={`${styles.top} ${isVisible || styles.complite}`}>
+        <div className={`${styles.top} ${blur.link && styles.complite}`}>
           <span>1</span>
           <p>{t("add_platform.identification")}</p>
         </div>
 
-        {isVisible && (
+        {blur.link || (
           <>
             <div className={styles.form}>
               <div className={styles.form__row}>
@@ -44,24 +72,16 @@ export const PlatformIdentification: FC = () => {
                   <InfoIcon />
                 </div>
                 <div className={styles.choose_platform}>
-                  <MyButton
-                    className={`${styles.platform__btn} ${getValues("platform") === platformType.telegram ? styles.active : ""}`}
-                    onClick={() => setValue("platform", platformType.telegram)}
-                  >
-                    {t("add_platform_btn.telegram")}
-                  </MyButton>
-                  <MyButton
-                    className={`${styles.platform__btn} ${getValues("platform") === platformType.instagram ? styles.active : ""}`}
-                    onClick={() => setValue("platform", platformType.instagram)}
-                  >
-                    {t("add_platform_btn.instagram")}
-                  </MyButton>
-                  <MyButton
-                    className={`${styles.platform__btn} ${getValues("platform") === platformType.youtube ? styles.active : ""}`}
-                    onClick={() => setValue("platform", platformType.youtube)}
-                  >
-                    {t("add_platform_btn.youtube")}
-                  </MyButton>
+                  {platformTypes.map((platform, index) => (
+                    <MyButton
+                      key={index}
+                      type="button"
+                      className={`${styles.platform__btn} ${currentPlatform.type === platform.type ? styles.active : ""}`}
+                      onClick={() => changePlatform(platform)}
+                    >
+                      {t(platform.name)}
+                    </MyButton>
+                  ))}
                 </div>
               </div>
 
@@ -72,9 +92,9 @@ export const PlatformIdentification: FC = () => {
                 </div>
                 <div className={styles.paste_link}>
                   <input
-                    className={styles.platform__input}
-                    {...register("link", { required: "Это поле обязательно" })}
-                    placeholder="Https//t.me/channel_name..."
+                    className={`${styles.platform__input}`}
+                    onChange={handleInput}
+                    placeholder={t(currentPlatform.default_value)}
                   />
 
                   <MyButton

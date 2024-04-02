@@ -19,12 +19,12 @@ export const AccommPrice: FC<IAccomm> = ({ accomm }) => {
 
   return (
     <div className={styles.wrapper}>
-      <MyButton
-        type="button"
-        className={price === "" ? styles.no__active : styles.active}
+      <div
+        // className={price === "" ? styles.no__active : styles.active}
+        className={`${styles.button}  ${price === "" ? styles.no__active : styles.active}`}
       >
         {accomm}
-      </MyButton>
+      </div>
       <div className={styles.input}>
         <input
           value={formattedPrice}

@@ -664,7 +664,6 @@
       "title": "Количество символов в посту",
       "text": ""
     },
-    "default_value": "Не выбрано",
     "choosed": "Выбрано",
     "from": "из",
     "default_input": "Опишите особенности, которые будут выделять ваш канал среди других. ",
@@ -1073,10 +1072,13 @@
     "subscribers": "По подписчикам"
   },
 
+  "platform_types": {
+    "telegram": {"name": "Telegram", "default_value": "Https//t.me/channel_name..."},
+    "instagram": {"name": "Instagram", "default_value": "Https//instagram/channel_name..."},
+    "youtube": {"name": "Youtube", "default_value": "Https//youtube/channel_name..."}
+  },
+
   "add_platform_btn": {
-    "telegram": "Telegram",
-    "instagram": "Instagram",
-    "youtube": "Youtube",
     "check": "Проверить",
     "save": "Сохранить",
     "create": "Отправить заявку",

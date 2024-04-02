@@ -24,14 +24,12 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
   isRow,
   textData,
 }) => {
-  const [selectedOptions, setSelectedOptions] = useState<(string | null)[]>([]);
-  const [selectedOption, setSelectedOption] = useState<string | number>("");
+  const [selectedOptions, setSelectedOptions] = useState<(number | null)[]>([]);
+  const [selectedOption, setSelectedOption] = useState<IOption | null>(null);
   const [isMenuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const { t } = useTranslation();
-  console.log(textData);
-  const allText: ISelectOption = t(`${textData}`, { returnObjects: true });
-  console.log(allText);
+  const allText: ISelectOption = t(textData, { returnObjects: true });
   const closeMenu = () => {
     setMenuOpen(false);
   };
@@ -41,28 +39,28 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
       | React.MouseEvent<HTMLLIElement | EventTarget>
       | React.ChangeEvent<HTMLInputElement>,
   ) => {
-    const selectedValue =
+    const selectedValue = Number(
       event.target instanceof HTMLLIElement
         ? (event.target as HTMLLIElement).getAttribute("data-value")
-        : (event.target as HTMLInputElement).value;
-
-    if (selectedValue) {
-      const newOptions = selectedOptions.includes(selectedValue)
-        ? selectedOptions.filter((value) => value !== selectedValue)
-        : [...selectedOptions, selectedValue];
-      setSelectedOptions(newOptions);
-      onChange(type, newOptions as []);
-    }
+        : (event.target as HTMLInputElement).value,
+    );
+    const newOptions = selectedOptions.includes(selectedValue)
+      ? selectedOptions.filter((value) => value !== selectedValue)
+      : [...selectedOptions, selectedValue];
+    setSelectedOptions(newOptions);
+    onChange(type, newOptions as []);
   };
 
   const handleOptionChange = (
     event: React.MouseEvent<HTMLLIElement | EventTarget>,
   ) => {
-    const selectedValue = Number(
+    const selectedId = Number(
       (event.target as HTMLLIElement).getAttribute("data-value"),
     );
-    setSelectedOption(selectedValue);
-    onChange(type, selectedValue);
+
+    const option: IOption = options.find((option) => option.id === selectedId)!;
+    setSelectedOption(option);
+    onChange(type, selectedId);
     closeMenu();
   };
 
@@ -84,34 +82,36 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
   }, []);
 
   return (
-    <div className={isRow ? styles.wrapper__row : styles.wrapper} ref={menuRef}>
+    <div className={isRow ? styles.wrapper__row : styles.wrapper}>
       <div className={styles.left}>
-        <p>{t(allText.title)}</p>
+        <p>{allText.title}</p>
         {allText.text && <InfoIcon />}
       </div>
 
-      <div className={styles.menu}>
+      <div className={styles.menu} ref={menuRef}>
         <button
           type="button"
           onClick={handleButtonClick}
-          className={isMenuOpen ? styles.active : ""}
+          className={
+            isMenuOpen || selectedOption || selectedOptions.length
+              ? styles.active
+              : ""
+          }
         >
           <div>
             {single ? (
               <>
-                {selectedOption === ""
-                  ? t(allText.default_value)
-                  : selectedOption}
+                {selectedOption ? selectedOption.name : allText.default_value}
               </>
             ) : (
               <>
-                {selectedOptions.length === 0 ? (
-                  t(allText.default_value)
-                ) : (
+                {selectedOptions.length ? (
                   <>
                     {t("add_platform.choosed")}: {selectedOptions.length} /{" "}
                     {options.length}
                   </>
+                ) : (
+                  allText.default_value
                 )}
               </>
             )}
@@ -128,38 +128,36 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
             >
               {single ? (
                 <>
-                  {options.map((option) => (
+                  {options.map((option, index) => (
                     <li
-                      key={option.value}
+                      key={index}
                       onClick={handleOptionChange}
-                      data-value={option.value}
+                      data-value={option.id}
                       className={
-                        selectedOption == option.value ? styles.active : ""
+                        selectedOption?.id === option.id ? styles.active : ""
                       }
                     >
-                      {option.label}
+                      {option.name}
                     </li>
                   ))}
                 </>
               ) : (
                 <>
-                  {options.map((option) => (
+                  {options.map((option, index) => (
                     <li
-                      key={option.value}
+                      key={index}
                       onClick={handleOptionsChange}
-                      data-value={option.value}
+                      data-value={option.id}
                       className={
-                        selectedOptions.includes(option.value)
-                          ? styles.active
-                          : ""
+                        selectedOptions.includes(option.id) ? styles.active : ""
                       }
                     >
-                      {option.label}
+                      {option.name}
                       <input
                         type="checkbox"
-                        value={option.value}
+                        value={option.id}
                         onChange={handleOptionsChange}
-                        checked={selectedOptions.includes(option.value)}
+                        checked={selectedOptions.includes(option.id)}
                       />
                     </li>
                   ))}

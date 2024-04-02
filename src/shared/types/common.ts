@@ -112,15 +112,15 @@ export interface IBloggerOfferCard {
 }
 
 export interface IOption {
-  label: string;
-  value: string;
+  id: number;
+  name: string;
 }
 
 export interface IOptions {
   category: IOption[];
   languages: IOption[];
   region: IOption[];
-  sex: IOption[];
+  sex?: IOption[];
   age: IOption[];
 }
 
