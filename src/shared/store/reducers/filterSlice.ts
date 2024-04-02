@@ -20,7 +20,10 @@ interface FilterState {
     type: profileTypesName | catalogFilter | chatFilter | addFileFilter;
     id?: profileTypesNum;
   };
-  subprofileFilter: string;
+  subprofileFilter: {
+    type: subprofileFilter;
+    id: profileTypesNum;
+  };
   catalogFilter: string;
   networkFilter: string;
   sortingFilter: string;
@@ -36,7 +39,10 @@ const initialState: FilterState = {
     type: profileTypesName.selfEmployedAccounts,
     id: profileTypesNum.selfEmployedAccounts,
   },
-  subprofileFilter: subprofileFilter.account,
+  subprofileFilter: {
+    type: subprofileFilter.account,
+    id: profileTypesNum.selfEmployedAccounts,
+  },
   catalogFilter: catalogFilter.parameters,
   networkFilter: "",
   sortingFilter: "",
@@ -66,8 +72,12 @@ export const filterSlice = createSlice({
       state.profileFilter.type = action.payload.type;
       state.profileFilter.id = action.payload.id;
     },
-    setSubprofileFilter: (state, action: PayloadAction<string>) => {
-      state.subprofileFilter = action.payload;
+    setSubprofileFilter: (
+      state,
+      action: PayloadAction<{ type: subprofileFilter; id: profileTypesNum }>,
+    ) => {
+      state.subprofileFilter.type = action.payload.type;
+      state.subprofileFilter.id = action.payload.id;
     },
     setCatalogFilter: (state, action: PayloadAction<string>) => {
       state.catalogFilter = action.payload;

@@ -20,25 +20,23 @@ export const HandleAuth = () => {
   const navigate = useNavigate();
 
   const handleAuthTokens = async (code: string) => {
-    try {
-      const genState = Cookies.get("genState");
-      if (state === genState) {
-        const result = await getTokens({ authorization_code: code });
-        if ("data" in result) {
-          const tokenData = result.data;
-          dispatch(userSlice.actions.login(tokenData));
-          const decoded: DecodedToken = jwtDecode(tokenData.access_token);
+    const genState = Cookies.get("genState");
+    if (state === genState) {
+      getTokens({ authorization_code: code })
+        .unwrap()
+        .then((data) => {
+          dispatch(userSlice.actions.login(data));
+          const decoded: DecodedToken = jwtDecode(data.access_token);
+          dispatch(userSlice.actions.login(data));
           navigate(
             decoded.role === roles.advertiser ? paths.main : paths.mainBlogger,
           );
           dispatch(userSlice.actions.toggleRole(decoded?.role));
           Cookies.remove("genState");
-        } else {
-          console.error("Ошибка получения токена:", result.error);
-        }
-      }
-    } catch (error) {
-      console.log(error);
+        })
+        .catch((error) => {
+          console.error("Ошибка получения токена:", error);
+        });
     }
   };
 
@@ -46,7 +44,7 @@ export const HandleAuth = () => {
     if (code && state) {
       handleAuthTokens(code);
     }
-  }, []);
+  }, [code, state]);
 
   return <></>;
 };

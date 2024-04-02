@@ -17,6 +17,7 @@ import { addFileFilter, addFileTypes } from "@shared/config/addFileFilter";
 interface BarProfileFilterProps {
   page: pageFilter;
   resetValues: () => void;
+  resetActiveAccount?: (account: null) => void;
 }
 
 interface IFilterOption {
@@ -27,6 +28,7 @@ interface IFilterOption {
 export const BarProfileFilter: FC<BarProfileFilterProps> = ({
   page,
   resetValues,
+  resetActiveAccount,
 }) => {
   const { t } = useTranslation();
 
@@ -55,6 +57,7 @@ export const BarProfileFilter: FC<BarProfileFilterProps> = ({
     ) {
       const newFilter = { type: option.type, id: option.id };
       dispatch(filterSlice.actions.setProfileFilter(newFilter));
+      resetActiveAccount && resetActiveAccount(null);
     } else if (page === pageFilter.catalog) {
       dispatch(filterSlice.actions.setCatalogFilter(option.type));
     } else if (page === pageFilter.chat) {

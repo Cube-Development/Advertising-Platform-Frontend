@@ -4,11 +4,26 @@
   row-gap: 20px;
   align-items: start;
 
-  p {
+  .title {
     color: var(--Personal-colors-black);
     font-size: 20px;
     font-style: normal;
     font-weight: 500;
+    text-align: center;
+  }
+
+  .empty {
+    display: grid;
+    row-gap: 20px;
+    justify-content: center;
+    align-items: center;
+
+    &__text {
+      font-size: 20px;
+      font-weight: 500;
+      text-align: center;
+      color: rgba(0, 0, 0, 0.5);
+    }
   }
 }
 

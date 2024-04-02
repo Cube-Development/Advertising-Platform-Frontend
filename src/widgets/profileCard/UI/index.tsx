@@ -38,7 +38,7 @@ export const ProfileCard: FC = () => {
       : filter.type === profileTypesName.individuals
         ? IndividualData
         : filter.type === profileTypesName.selfEmployedAccounts &&
-            subprofile === subprofileFilter.account
+            subprofile.type === subprofileFilter.account
           ? SelfEmployedData
           : SelfEmployedCardData;
 
@@ -50,15 +50,14 @@ export const ProfileCard: FC = () => {
       ...data,
       type_legal: filter.id,
     };
-    // кастомный обработчик ошибок сделал если че переделаем
-    await createLegal(dataWithLegalType).then((data: any) => {
-      if (data.error) {
-        alert("ПРОИЗОШЛА ОШИБКА ПРИ ЗАПОЛНЕНИИ ДАННЫХ");
-      } else {
-        console.log("Данные успешно добавлены.");
-        reset();
-      }
-    });
+    createLegal(dataWithLegalType)
+      .unwrap()
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error("Ошибка при заполнении данных", error);
+      });
   };
 
   return (

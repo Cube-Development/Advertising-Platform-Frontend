@@ -20,7 +20,13 @@
   grid-auto-flow: row;
   row-gap: 10px;
 
-  p {
+  .error {
+    &::placeholder {
+      color: red;
+    }
+  }
+
+  .card_name {
     color: var(--Personal-colors-black);
     font-size: 16px;
     font-style: normal;
@@ -38,8 +44,8 @@
 
   div {
     display: grid;
-    grid-auto-flow: column;
-    justify-content: space-between;
+    grid-template: 1fr / 1fr minmax(20px, 30px);
+    gap: 10px;
     padding: 15px 30px;
     border-radius: 12px;
     border: 1px solid var(--Inside-container, #bdbdbd);
@@ -76,6 +82,7 @@
       font-weight: 600;
       line-height: 0.75;
       white-space: nowrap;
+      text-align: end;
     }
 
     span {
@@ -84,6 +91,7 @@
       font-style: normal;
       font-weight: 400;
       line-height: 0.75;
+      white-space: nowrap;
     }
   }
 }

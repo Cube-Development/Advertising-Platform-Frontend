@@ -3,10 +3,12 @@ import { authAPI } from "./services/authService";
 import userReducer from "./reducers/userSlice";
 import filterReducer from "./reducers/filterSlice";
 import { legalAPI } from "./services/legalService";
+import { walletAPI } from "./services/walletService";
 
 const rootReducer = combineReducers({
   [authAPI.reducerPath]: authAPI.reducer,
   [legalAPI.reducerPath]: legalAPI.reducer,
+  [walletAPI.reducerPath]: walletAPI.reducer,
   userReducer,
   filterReducer,
 });
@@ -15,7 +17,11 @@ export const setupStore = () => {
   return configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(authAPI.middleware, legalAPI.middleware),
+      getDefaultMiddleware().concat(
+        authAPI.middleware,
+        legalAPI.middleware,
+        walletAPI.middleware,
+      ),
   });
 };
 

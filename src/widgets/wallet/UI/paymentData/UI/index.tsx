@@ -8,28 +8,31 @@ import {
 } from "@shared/config/profileData";
 import { profileTypesName } from "@shared/config/profileFilter";
 import { useAppSelector } from "@shared/store";
-import { IProfileData } from "@shared/types/profile";
-import { FC, useState } from "react";
-import { useForm } from "react-hook-form";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { subprofileFilter } from "@shared/config/profileFilter";
 
 interface PaymentDataProps {
-  account: any;
   amountTitle: string;
+  register?: any;
+  errors?: any;
+  watch?: any;
+  handleSubmit?: any;
+  onSubmit?: any;
 }
 
-export const PaymentData: FC<PaymentDataProps> = ({ account, amountTitle }) => {
+export const PaymentData: FC<PaymentDataProps> = ({
+  amountTitle,
+  register,
+  errors,
+  handleSubmit,
+  watch,
+  onSubmit,
+}) => {
   const { t } = useTranslation();
-  const [activeAccount, setActiveAccount] = useState(account);
 
-  const {
-    reset,
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm<IProfileData>();
+  const amount = watch("amount", 0);
 
   const { profileFilter: filter, subprofileFilter: subprofile } =
     useAppSelector((state) => state.filterReducer);
@@ -40,17 +43,35 @@ export const PaymentData: FC<PaymentDataProps> = ({ account, amountTitle }) => {
       : filter.type === profileTypesName.individuals
         ? IndividualData
         : filter.type === profileTypesName.selfEmployedAccounts &&
-            subprofile === subprofileFilter.account
+            subprofile.type === subprofileFilter.account
           ? SelfEmployedData
           : SelfEmployedCardData;
 
   return (
-    <form className={styles.payment__data} action="">
+    <form className={styles.payment__data} onSubmit={handleSubmit(onSubmit)}>
       <div className={styles.block}>
         <div className={styles.ammount}>
           <p>{amountTitle}</p>
           <div>
-            <input type="text" />
+            <input
+              {...register("amount", {
+                required: t("wallet.topup.required"),
+              })}
+              type="number"
+              placeholder={
+                errors["amount"]
+                  ? errors["amount"].message
+                  : t("wallet.topup.placeholder")
+              }
+              // пример ограничения инпута
+              maxLength={10}
+              onInput={(e) => {
+                const target = e.target as HTMLInputElement;
+                target.value = target.value.slice(0, target.maxLength);
+                target.value = target.value.replace(/\D/g, "");
+              }}
+              className={errors["amount"] && styles.error}
+            />
             <small>{t("symbol")}</small>
           </div>
         </div>
@@ -68,7 +89,10 @@ export const PaymentData: FC<PaymentDataProps> = ({ account, amountTitle }) => {
           <p>{t("wallet.pay.title")}:</p>
         </div>
         <div>
-          <p>12 151 515 {t("symbol")}</p>
+          <p>
+            {amount != 0 ? parseFloat(amount).toLocaleString() : 0}{" "}
+            {t("symbol")}
+          </p>
           <span>{t("wallet.pay.text")}</span>
         </div>
       </div>

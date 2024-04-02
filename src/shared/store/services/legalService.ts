@@ -1,13 +1,12 @@
 import { createApi } from "@reduxjs/toolkit/query/react";
 import authBaseQuery from "./authBaseQuery";
-import { UUID } from "crypto";
-import { IProfileData } from "@shared/types/profile";
-import { profileTypesName } from "@shared/config/profileFilter";
+import {
+  IProfileData,
+  ILegalCard,
+  ILegalCardShort,
+} from "@shared/types/profile";
+import { profileTypesNum } from "@shared/config/profileFilter";
 
-type CreateLegalResponse = IProfileData & {
-  user_id: UUID;
-  legal_id: UUID;
-};
 type DeleteLegalResponse = {
   success?: boolean;
   detail?: [
@@ -18,41 +17,35 @@ type DeleteLegalResponse = {
     },
   ];
 };
-type ReadLegalsByType = {
-  [key in profileTypesName]: {
-    legal_id: string;
-    type_legal: number;
-    name: string;
-    INN?: number;
-    PNFL?: number;
-  }[];
-};
 
 export const legalAPI = createApi({
   reducerPath: "legalAPI",
   baseQuery: authBaseQuery,
   endpoints: (build) => ({
-    createLegal: build.mutation<CreateLegalResponse, IProfileData>({
+    createLegal: build.mutation<ILegalCard, IProfileData>({
       query: (BodyParams) => ({
         url: `/legal/create`,
         method: `POST`,
         body: BodyParams,
       }),
     }),
-    editLegal: build.mutation<CreateLegalResponse, IProfileData>({
+    editLegal: build.mutation<ILegalCard, IProfileData>({
       query: (BodyParams) => ({
         url: `/legal/edit`,
         method: `PUT`,
         body: BodyParams,
       }),
     }),
-    deleteLegal: build.query<DeleteLegalResponse, UUID>({
+    deleteLegal: build.query<DeleteLegalResponse, string>({
       query: (legal_id) => `/legal/delete/${legal_id}`,
     }),
-    readLegalsByType: build.query<ReadLegalsByType, number>({
+    readLegalsByType: build.query<
+      ILegalCardShort[],
+      profileTypesNum | undefined
+    >({
       query: (type_legal) => `/legal/read/?type_legal=${type_legal}`,
     }),
-    readOneLegal: build.query<CreateLegalResponse, UUID>({
+    readOneLegal: build.mutation<ILegalCard, string>({
       query: (legal_id) => `/legal/read/${legal_id}`,
     }),
   }),

@@ -66,6 +66,10 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     transition: border-color 0.5s;
+
+    &::placeholder {
+      color: rgba(0, 0, 0, 0.3);
+    }
   }
 
   .error {
