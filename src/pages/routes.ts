@@ -37,7 +37,7 @@ export const privateBloggerRoutes: IRoute[] = [
   { path: paths.addProfile, component: AddProfilePage, sidebar: true },
   { path: paths.platforms, component: PlatformsPage, sidebar: true },
   { path: paths.offers, component: OffersPage, sidebar: true },
-  { path: paths.createOrder, component: CreateOrderPage, sidebar: true },
+  { path: paths.createOrder, component: CreateOrderPage, sidebar: false },
 ];
 
 export const privateAdvertiserRoutes: IRoute[] = [
@@ -53,7 +53,7 @@ export const privateAdvertiserRoutes: IRoute[] = [
   { path: paths.wallethistory, component: WalletHistoryPage, sidebar: true },
   { path: paths.turnkey, component: TurnkeyPage, sidebar: true },
   { path: paths.orders, component: OrdersPage, sidebar: true },
-  { path: paths.createOrder, component: CreateOrderPage, sidebar: true },
+  { path: paths.createOrder, component: CreateOrderPage, sidebar: false },
 ];
 
 export const publicRoutes: IRoute[] = [
@@ -69,5 +69,5 @@ export const publicRoutes: IRoute[] = [
   { path: paths.wallethistory, component: WalletHistoryPage, sidebar: true },
   { path: paths.addProfile, component: AddProfilePage, sidebar: true },
   { path: paths.addPlatform, component: AddPlatformPage, sidebar: true },
-  { path: paths.createOrder, component: CreateOrderPage, sidebar: true },
+  { path: paths.createOrder, component: CreateOrderPage, sidebar: false },
 ];

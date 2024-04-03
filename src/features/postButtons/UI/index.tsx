@@ -41,7 +41,7 @@ export const PostButtons: FC<PostButtonsProps> = () => {
   };
 
   return (
-    <div>
+    <>
       <MyButton className={styles.wrapper} onClick={handleOpenModal}>
         <div>
           <AddIcon />
@@ -118,6 +118,6 @@ export const PostButtons: FC<PostButtonsProps> = () => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };

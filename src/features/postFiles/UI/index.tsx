@@ -30,7 +30,7 @@ export const PostFiles: FC<PostFilesProps> = () => {
   const handle = () => {};
 
   return (
-    <div>
+    <>
       <MyButton className={styles.wrapper} onClick={handleOpenModal}>
         <div>
           <ImageIcon />
@@ -55,6 +55,6 @@ export const PostFiles: FC<PostFilesProps> = () => {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };

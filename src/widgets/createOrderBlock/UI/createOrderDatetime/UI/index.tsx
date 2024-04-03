@@ -6,21 +6,27 @@ import { IPostChannel } from "@shared/types/createPost";
 import { CustomCalendar } from "@features/calendar";
 import { TimeList } from "@features/timeList";
 import { Chat } from "@widgets/header/UI/chat";
+import { ICreateOrderBlur } from "@shared/types/platform";
 
 interface CreateOrderDatetimeProps {
   cards: IPostChannel[];
   isBlur?: boolean;
+  onChangeBlur: (key: keyof ICreateOrderBlur) => void;
 }
 
 export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
   cards,
   isBlur,
+  onChangeBlur,
 }) => {
   const { t } = useTranslation();
 
+  const handleOnChangeBlur = () => {
+    onChangeBlur("payment");
+  };
+
   return (
     <div className={`container ${isBlur ? "blur" : ""}`}>
-      <Chat />
       <div className={styles.wrapper}>
         <div className={styles.content}>
           <div className={styles.title}>

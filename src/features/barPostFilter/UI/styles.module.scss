@@ -1,7 +1,8 @@
 .types {
   ul {
     display: grid;
-    grid-auto-flow: column;
+    grid-template: 1fr / 1fr 1fr 1fr;
+    column-gap: 100px;
     align-items: center;
     justify-content: space-between;
 
@@ -15,7 +16,6 @@
   li {
     text-align: center;
     padding: 15px;
-    width: 200px;
     cursor: pointer;
   }
 }

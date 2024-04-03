@@ -22,3 +22,8 @@ export const enum FILES {
 export const enum SELECTOPTIONS {
   scrollAddLen = 5,
 }
+
+export const enum POST {
+  postLenght = 200,
+  commentLenght = 200,
+}

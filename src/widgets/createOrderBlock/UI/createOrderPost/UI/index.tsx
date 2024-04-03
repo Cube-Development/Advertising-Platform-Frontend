@@ -10,19 +10,33 @@ import { BarPostFilter } from "@features/barPostFilter";
 import { IPostChannel } from "@shared/types/createPost";
 import { AddFiles } from "@features/addFiles";
 import { AddMediaFiles } from "@features/addMediaFiles";
+import { ICreateOrderBlur } from "@shared/types/platform";
+import { useAppSelector } from "@shared/store";
+import { platformFilter } from "@shared/config/postFilter";
+import { POST } from "@shared/config/common";
 
 interface CreateOrderPostProps {
   cards: IPostChannel[];
   isBlur?: boolean;
+  onChangeBlur: (key: keyof ICreateOrderBlur) => void;
 }
 
 export const CreateOrderPost: FC<CreateOrderPostProps> = ({
   cards,
   isBlur,
+  onChangeBlur,
 }) => {
   const { t } = useTranslation();
 
   const platforms: number[] = [...new Set(cards.map((card) => card.platform))];
+
+  const handleOnChangeBlur = () => {
+    onChangeBlur("datetime");
+  };
+
+  const { platformFilter: filter } = useAppSelector(
+    (state) => state.filterReducer,
+  );
 
   return (
     <div className={`container ${isBlur ? "blur" : ""}`}>
@@ -41,12 +55,21 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
           <div className={styles.data}>
             <div className={styles.post_data}>
               <div className={styles.block}>
-                <PostText placeholder={"create_order.create.text"} />
+                <PostText
+                  placeholder={"create_order.create.text"}
+                  maxLength={POST.postLenght}
+                  rows={10}
+                />
               </div>
               <div className={styles.block}>
                 <PostFiles AddFiles={AddFiles} AddMediaFiles={AddMediaFiles} />
-                <PostButtons />
-                <PostText placeholder={"create_order.create.comment"} />
+                {filter === platformFilter.telegram && <PostButtons />}
+
+                <PostText
+                  placeholder={"create_order.create.comment"}
+                  maxLength={POST.commentLenght}
+                  rows={4}
+                />
               </div>
             </div>
             <div className={styles.display}>
@@ -54,7 +77,6 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
             </div>
           </div>
         </div>
-        Creat post
       </div>
     </div>
   );
