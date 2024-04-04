@@ -10,9 +10,15 @@ interface SelectSexProps {
   title: string;
   text?: string;
   onChange: UseFormSetValue<any>;
+  isRow?: boolean;
 }
 
-export const SelectSex: FC<SelectSexProps> = ({ title, text, onChange }) => {
+export const SelectSex: FC<SelectSexProps> = ({
+  title,
+  text,
+  onChange,
+  isRow,
+}) => {
   const { t } = useTranslation();
 
   const [position, setPosition] = useState(50);
@@ -24,7 +30,7 @@ export const SelectSex: FC<SelectSexProps> = ({ title, text, onChange }) => {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div className={isRow ? styles.wrapper__row : styles.wrapper}>
       <div className={styles.title}>
         <p>{t(title)}</p>
         {text && <InfoIcon />}
@@ -37,7 +43,6 @@ export const SelectSex: FC<SelectSexProps> = ({ title, text, onChange }) => {
           max={100}
           value={position}
           onChange={handleChange}
-          className={styles.band}
         />
         <div className={styles.position}>
           <p>{100 - position} %</p>

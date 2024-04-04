@@ -5,6 +5,7 @@
   border-radius: 15px;
   border: 0.5px solid #8c8c8c;
   background: #fff;
+  position: relative;
 
   .channel__top {
     padding: 15px;
@@ -81,8 +82,10 @@
 
       .channel__info_row {
         display: grid;
-        grid-auto-flow: column;
-        justify-content: space-between;
+        // grid-auto-flow: column;
+        // justify-content: space-between;
+        grid-template: 1fr / 1fr 1fr;
+        column-gap: 50px;
 
         .info {
           display: grid;
@@ -143,8 +146,17 @@
       // align-items: center;
       text-align: center;
 
+      .platform__icon {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        svg {
+          width: 15px;
+          height: 15px;
+        }
+      }
+
       p {
-        margin-bottom: 10px;
         color: #000;
         text-align: center;
         font-size: 10px;
@@ -154,16 +166,33 @@
       }
 
       .circle {
-        display: flex;
-        // align-items: center;
+        display: grid;
+
+        align-items: center;
         justify-content: center;
-        width: 50px;
-        height: 50px;
+        font-family: Montserrat;
+        width: 60px;
+        height: 60px;
         border-radius: 50%;
-        background: conic-gradient(
-          #4772e6 0% var(--percentage),
-          transparent var(--percentage) 100%
-        );
+        // background: conic-gradient(
+        //   #4772e6 0% var(--percentage),
+        //   transparent var(--percentage) 100%
+        // );
+        // border: 5px solid conic-gradient(
+        //   #4772e6 0% var(--percentage),
+        //   transparent var(--percentage) 100%
+        // );
+
+        border: 3px solid #4772e6;
+        border-width: 50%;
+
+        span {
+          color: var(--Personal-colors-main);
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
+        }
 
         // &::after {
         //   content: "";

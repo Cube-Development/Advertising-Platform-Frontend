@@ -10,10 +10,15 @@ export const AddToBasket: FC<IAddToBasketProps> = ({
   selectedFormat,
   formats,
   changeFormat,
+  сhangeCard,
+  isCart,
 }) => {
   const { t } = useTranslation();
   return (
-    <MyButton>
+    <MyButton
+      className={`${styles.button} ${isCart ? styles.cart : ""}`}
+      onClick={сhangeCard}
+    >
       <div className={styles.wrapper}>
         <FormatList
           selectedFormat={selectedFormat}

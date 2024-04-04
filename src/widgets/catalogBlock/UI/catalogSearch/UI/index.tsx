@@ -72,10 +72,11 @@ export const CatalogSearch: FC = () => {
   const { t } = useTranslation();
   const {
     reset,
-    handleSubmit,
     setValue,
     formState: { errors },
+    getValues,
   } = useForm<IAddPLatformData>();
+
   return (
     <div className={styles.wrapper}>
       <BarProfileFilter resetValues={reset} page={pageFilter.catalog} />
@@ -85,7 +86,7 @@ export const CatalogSearch: FC = () => {
             <SelectOptions
               onChange={setValue}
               options={options.category}
-              single={true}
+              single={false}
               type={platformData.category}
               textData={"catalog.category"}
               isRow={true}
@@ -98,7 +99,11 @@ export const CatalogSearch: FC = () => {
               textData={"catalog.age"}
               isRow={true}
             />
-            <SelectSex onChange={setValue} title={"catalog.sex.title"} />
+            <SelectSex
+              onChange={setValue}
+              title={"catalog.sex.title"}
+              isRow={true}
+            />
             <SelectOptions
               onChange={setValue}
               options={options.languages}

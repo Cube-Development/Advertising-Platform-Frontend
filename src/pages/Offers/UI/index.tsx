@@ -18,7 +18,7 @@ const BlogggerActiveCards = [
     time_from: "17:00",
     time_to: "17:00",
     price: 1500000000,
-    img: "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
   },
   {
     id: 31231132,
@@ -32,7 +32,7 @@ const BlogggerActiveCards = [
     time_from: "17:00",
     time_to: "17:00",
     price: 1500000000,
-    img: "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
   },
   {
     id: 31231132,
@@ -46,7 +46,7 @@ const BlogggerActiveCards = [
     time_from: "17:00",
     time_to: "17:00",
     price: 1500000000,
-    img: "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
   },
   {
     id: 31231132,
@@ -60,7 +60,7 @@ const BlogggerActiveCards = [
     time_from: "17:00",
     time_to: "17:00",
     price: 1500000000,
-    img: "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
   },
   {
     id: 31231132,
@@ -74,7 +74,7 @@ const BlogggerActiveCards = [
     time_from: "17:00",
     time_to: "17:00",
     price: 1500000000,
-    img: "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
   },
   {
     id: 31231132,
@@ -88,7 +88,7 @@ const BlogggerActiveCards = [
     time_from: "17:00",
     time_to: "17:00",
     price: 1500000000,
-    img: "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
   },
   {
     id: 31231132,
@@ -102,7 +102,7 @@ const BlogggerActiveCards = [
     time_from: "17:00",
     time_to: "17:00",
     price: 1500000000,
-    img: "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",
+    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
   },
 ];
 

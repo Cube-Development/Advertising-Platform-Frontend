@@ -46,5 +46,5 @@ export interface ICustomer {
 export interface ISelectOption {
   title: string;
   text?: string;
-  default_value: string;
+  default_value?: string;
 }

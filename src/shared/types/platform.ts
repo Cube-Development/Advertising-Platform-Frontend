@@ -1,4 +1,5 @@
 import { platformFilter } from "@shared/config/postFilter";
+import exp from "constants";
 import { FC } from "react";
 
 export interface IPlatform {
@@ -23,17 +24,48 @@ export interface IFormat {
   cpv: number;
 }
 
+export interface IAddCart {
+  channel_id: string;
+  format: number;
+}
+
+export interface IToCart {
+  channel: IAddCart;
+  format: IFormat;
+}
+
+export interface IChangeCards {
+  onChangeCard: (cart: IToCart) => void;
+}
+
+export interface ICatalogCards extends IChangeCards {
+  cards: IPlatform[];
+}
+
 export interface IFormatListProps {
-  selectedFormat: IFormat;
   formats: IFormat[];
+  selectedFormat: IFormat;
   changeFormat: (selectedValue: IFormat) => void;
 }
 
-export interface IAddToBasketProps {
-  selectedFormat: IFormat;
-  formats: IFormat[];
+interface Components {
   FormatList: FC<IFormatListProps>;
-  changeFormat: (selectedValue: IFormat) => void;
+  сhangeCard?: () => void;
+  isCart?: boolean;
+}
+
+export interface IAddToBasketProps extends IFormatListProps, Components {
+  // selectedFormat: IFormat;
+  // formats: IFormat[];
+  // changeFormat: (selectedValue: IFormat) => void;
+  // AddToBasketBtn?: FC<IAddToBasketProps>;
+  // FormatList: FC<IFormatListProps>;
+  // onChangeCard?: () => void
+  // isCart?: boolean
+}
+
+export interface ICatalogCard extends IChangeCards, Components {
+  AddToBasketBtn: FC<IAddToBasketProps>;
 }
 
 export interface IPlatformLink {

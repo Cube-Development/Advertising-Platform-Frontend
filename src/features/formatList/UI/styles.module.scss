@@ -5,6 +5,7 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+  position: relative;
 
   button {
     display: grid;
@@ -16,7 +17,6 @@
     border-radius: 10px;
     background: #fff;
     cursor: pointer;
-    position: relative;
 
     p {
       color: var(--Personal-colors-black);
@@ -40,6 +40,7 @@
   margin-top: 5px;
   display: block;
   position: absolute;
+  width: 100%;
   background-color: #fff;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   padding: 5px;

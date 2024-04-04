@@ -3,13 +3,7 @@ import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { platformFormats } from "@shared/config/formatTypes";
-import {
-  ArrowIcon,
-  ArrowIcon2,
-  ArrowIcon3,
-  ArrowIcon4,
-  ArrowIcon5,
-} from "@shared/assets";
+import { ArrowIcon } from "@shared/assets";
 
 export const FormatList: FC<IFormatListProps> = ({
   selectedFormat,
@@ -27,6 +21,7 @@ export const FormatList: FC<IFormatListProps> = ({
   const handleOptionChange = (
     event: React.MouseEvent<HTMLLIElement | EventTarget>,
   ) => {
+    event.stopPropagation();
     const selectedValue: IFormat = JSON.parse(
       (event.target as HTMLLIElement).getAttribute("data-value")!,
     );
@@ -41,7 +36,8 @@ export const FormatList: FC<IFormatListProps> = ({
     }
   };
 
-  const handleButtonClick = () => {
+  const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     setMenuOpen(!isMenuOpen);
   };
 
@@ -54,7 +50,7 @@ export const FormatList: FC<IFormatListProps> = ({
 
   return (
     <div className={styles.wrapper} ref={menuRef}>
-      <button type="button" onClick={handleButtonClick}>
+      <button type="button" onClick={(e) => handleButtonClick(e)}>
         <ArrowIcon color="blue" />
         <p>{platformFormats[selectedFormat.format]}</p>
       </button>
@@ -67,7 +63,9 @@ export const FormatList: FC<IFormatListProps> = ({
                 key={format.format}
                 onClick={handleOptionChange}
                 data-value={JSON.stringify(format)}
-                className={selectedFormat === format ? styles.active : ""}
+                className={
+                  selectedFormat.format === format.format ? styles.active : ""
+                }
               >
                 {platformFormats[format.format]}
               </li>

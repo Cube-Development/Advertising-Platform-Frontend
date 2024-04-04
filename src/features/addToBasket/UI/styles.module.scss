@@ -4,7 +4,6 @@
   align-items: center;
   text-align: center;
   justify-content: space-between;
-  padding: 5px 15px;
 
   .price {
     display: grid;
@@ -12,5 +11,13 @@
     align-items: center;
     text-align: center;
     column-gap: 10px;
+  }
+}
+
+.button {
+  padding: 5px 15px;
+
+  &.cart {
+    background: var(--Orange);
   }
 }

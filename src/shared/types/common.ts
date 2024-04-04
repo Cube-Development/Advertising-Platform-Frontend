@@ -1,4 +1,5 @@
 import { IProfileData } from "./profile";
+import { ISelectOption } from "./translate";
 
 export interface ILogin {
   (vision: boolean, data?: { name: string; email: string }): void;
@@ -114,6 +115,8 @@ export interface IBloggerOfferCard {
 export interface IOption {
   id: number;
   name: string;
+  img?: () => JSX.Element;
+  type?: string;
 }
 
 export interface IOptions {
@@ -156,23 +159,8 @@ export interface IParameterData {
   title: string;
   default_value?: string;
   description: string;
-  // error: {
-  //   required?: string;
-  //   date?: string;
-  //   PNFL?: string;
-  //   INN?: string;
-  //   mfo?: string;
-  //   account?: string;
-  //   card?: string;
-  //   contact?: string;
-  //   email?: string;
-  // };
 }
 
-export interface IFilerData {
-  name: string;
-  img?: JSX.Element;
-  type: string;
-  platform?: number;
-  sort?: number;
+export interface IFilter extends ISelectOption {
+  types: IOption[];
 }

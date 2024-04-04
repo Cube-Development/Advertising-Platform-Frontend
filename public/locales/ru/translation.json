@@ -880,7 +880,14 @@
     },
     "recomendation": "Рекомендованные ЦА",
 
-    "generation_btn": "Сгенерировать"
+    "generation_btn": "Сгенерировать",
+
+    "current_cart": {
+      "channels": "Каналов",
+      "views": "Охват",
+      "cost": "Сумма",
+      "cart": "В корзину"
+    }
   },
 
   "cart": {
@@ -1067,7 +1074,7 @@
   },
 
   "sorting": {
-    "title": "Сортировака",
+    "title": "Сортировка",
     "date": "По дате",
     "subscribers": "По подписчикам"
   },

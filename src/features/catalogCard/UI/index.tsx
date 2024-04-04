@@ -1,7 +1,10 @@
 import { FC, ReactElement, useState } from "react";
 import styles from "./styles.module.scss";
 import {
+  IAddCart,
   IAddToBasketProps,
+  ICatalogCard,
+  IChangeCards,
   IFormat,
   IFormatListProps,
   IPlatform,
@@ -14,23 +17,38 @@ import {
   WomanIcon,
 } from "@shared/assets";
 import { useTranslation } from "react-i18next";
+import { platformToIcon } from "@shared/config/platformData";
 
-interface CatalogCardProps {
+interface CatalogCardProps extends IChangeCards, ICatalogCard {
   card: IPlatform;
-  AddToBasketBtn: FC<IAddToBasketProps>;
-  FormatList: FC<IFormatListProps>;
+  // onChangeCard: (channel: IAddCart) => void;
+  // AddToBasketBtn: FC<IAddToBasketProps>;
+  // FormatList: FC<IFormatListProps>;
+  // isCart?: boolean;
 }
 
 export const CatalogCard: FC<CatalogCardProps> = ({
   card,
   AddToBasketBtn,
   FormatList,
+  onChangeCard,
+  isCart,
 }) => {
   const { t } = useTranslation();
   const [selectedFormat, setSelectedFormat] = useState<IFormat>(card.format[0]);
 
   const handleChangeFormat = (selectedValue: IFormat) => {
     setSelectedFormat(selectedValue);
+  };
+
+  const handleChangeCard = () => {
+    onChangeCard({
+      channel: {
+        channel_id: card.id,
+        format: selectedFormat.format,
+      },
+      format: selectedFormat,
+    });
   };
 
   return (
@@ -101,17 +119,24 @@ export const CatalogCard: FC<CatalogCardProps> = ({
             className={styles.circle}
             style={{ "--percentage": `${89}%` } as React.CSSProperties}
           >
-            89 %
+            <span>89 %</span>
+          </div>
+          <div className={styles.platform__icon}>
+            {platformToIcon.hasOwnProperty(card.platform)
+              ? platformToIcon[card.platform]()
+              : null}
           </div>
         </div>
       </div>
 
       {/* <div className={styles.channel_bottom}> */}
       <AddToBasketBtn
+        formats={card.format}
         selectedFormat={selectedFormat}
         FormatList={FormatList}
-        formats={card.format}
         changeFormat={handleChangeFormat}
+        сhangeCard={handleChangeCard}
+        isCart={isCart}
       />
       {/* </div> */}
     </div>

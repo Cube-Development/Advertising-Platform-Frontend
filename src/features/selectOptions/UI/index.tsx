@@ -1,4 +1,9 @@
-import { IAddPLatformData, IOption } from "@shared/types/common";
+import {
+  IAddPLatformData,
+  IFilter,
+  IOption,
+  IOptions,
+} from "@shared/types/common";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -10,10 +15,13 @@ import { ISelectOption } from "@shared/types/translate";
 interface SelectOptionsProps {
   textData: string;
   options: IOption[];
-  type: keyof IAddPLatformData;
-  onChange: UseFormSetValue<IAddPLatformData>;
+  // type: keyof IAddPLatformData;
+  // onChange: UseFormSetValue<IAddPLatformData>;
+  type: any;
+  onChange: UseFormSetValue<any>;
   single: boolean;
   isRow?: boolean;
+  isFilter?: boolean;
 }
 
 export const SelectOptions: FC<SelectOptionsProps> = ({
@@ -23,13 +31,27 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
   single,
   isRow,
   textData,
+  isFilter,
 }) => {
+  const { t } = useTranslation();
+  const allOptions: IOption[] = isFilter
+    ? options.map((option) => ({
+        ...option,
+        name: t(option.name),
+      }))
+    : options;
+
   const [selectedOptions, setSelectedOptions] = useState<(number | null)[]>([]);
-  const [selectedOption, setSelectedOption] = useState<IOption | null>(null);
+  const [selectedOption, setSelectedOption] = useState<IOption | null>(
+    isFilter ? allOptions[0] : null,
+  );
   const [isMenuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
-  const { t } = useTranslation();
-  const allText: ISelectOption = t(textData, { returnObjects: true });
+
+  const allText: ISelectOption = isFilter
+    ? { title: t(textData) }
+    : t(textData!, { returnObjects: true });
+
   const closeMenu = () => {
     setMenuOpen(false);
   };
@@ -58,7 +80,9 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
       (event.target as HTMLLIElement).getAttribute("data-value"),
     );
 
-    const option: IOption = options.find((option) => option.id === selectedId)!;
+    const option: IOption = allOptions!.find(
+      (option) => option.id === selectedId,
+    )!;
     setSelectedOption(option);
     onChange(type, selectedId);
     closeMenu();
@@ -82,38 +106,51 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
   }, []);
 
   return (
-    <div className={isRow ? styles.wrapper__row : styles.wrapper}>
+    <div
+      className={`${isFilter ? styles.filter__wrapper : styles.parameters} ${isRow ? styles.wrapper__row : styles.wrapper}`}
+    >
       <div className={styles.left}>
-        <p>{allText.title}</p>
-        {allText.text && <InfoIcon />}
+        {isFilter ? (
+          <>
+            <p>{allText.title}:</p>
+          </>
+        ) : (
+          <>
+            <p>{allText.title}</p>
+            {allText.text && <InfoIcon />}
+          </>
+        )}
       </div>
 
       <div className={styles.menu} ref={menuRef}>
         <button
           type="button"
           onClick={handleButtonClick}
-          className={
+          className={`${isFilter ? styles.filter : ""} ${
             isMenuOpen || selectedOption || selectedOptions.length
               ? styles.active
               : ""
-          }
+          }`}
         >
           <div>
             {single ? (
-              <>
-                {selectedOption ? selectedOption.name : allText.default_value}
-              </>
+              <div className={styles.filter}>
+                {selectedOption?.img ? <selectedOption.img /> : null}
+                <span>
+                  {selectedOption ? selectedOption.name : allText.default_value}
+                </span>
+              </div>
             ) : (
-              <>
+              <span>
                 {selectedOptions.length ? (
                   <>
                     {t("add_platform.choosed")}: {selectedOptions.length} /{" "}
-                    {options.length}
+                    {allOptions.length}
                   </>
                 ) : (
                   allText.default_value
                 )}
-              </>
+              </span>
             )}
             <ArrowIcon />
           </div>
@@ -123,27 +160,28 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
           <div className={styles.options}>
             <ul
               className={
-                options.length > SELECTOPTIONS.scrollAddLen ? styles.scroll : ""
+                allOptions.length > SELECTOPTIONS.scrollAddLen
+                  ? styles.scroll
+                  : ""
               }
             >
               {single ? (
                 <>
-                  {options.map((option, index) => (
+                  {allOptions.map((option, index) => (
                     <li
                       key={index}
                       onClick={handleOptionChange}
                       data-value={option.id}
-                      className={
-                        selectedOption?.id === option.id ? styles.active : ""
-                      }
+                      className={`${isFilter ? styles.filter : ""} ${selectedOption?.id === option.id ? styles.active : ""}`}
                     >
+                      {option.img ? <option.img /> : null}
                       {option.name}
                     </li>
                   ))}
                 </>
               ) : (
                 <>
-                  {options.map((option, index) => (
+                  {allOptions.map((option, index) => (
                     <li
                       key={index}
                       onClick={handleOptionsChange}

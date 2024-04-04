@@ -14,7 +14,7 @@ import { chatFilter } from "@shared/config/chatFilter";
 const AdministrationChat = {
   name: "Administration",
   avatar:
-    "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
   messages: [
     {
       type: "sender",
@@ -79,7 +79,7 @@ const AllChats = [
     campaign: "Cubinc",
     name: "UzNews",
     avatar:
-      "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
     messages: [
       {
         type: "sender",
@@ -139,7 +139,7 @@ const AllChats = [
     campaign: "Cubinc111",
     name: "UzNews33",
     avatar:
-      "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
     messages: [
       {
         type: "sender",
@@ -199,7 +199,7 @@ const AllChats = [
     campaign: "Cubinc244r",
     name: "UzNews24erwe",
     avatar:
-      "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
     messages: [
       {
         type: "sender",
@@ -259,7 +259,7 @@ const AllChats = [
     campaign: "Cubinc4242",
     name: "UzNews24242",
     avatar:
-      "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
     messages: [
       {
         type: "sender",
@@ -319,7 +319,7 @@ const AllChats = [
     campaign: "Cubinc333",
     name: "UzNews55",
     avatar:
-      "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
     messages: [
       {
         type: "sender",
@@ -379,7 +379,7 @@ const AllChats = [
     campaign: "Cubinc4",
     name: "UzNews3",
     avatar:
-      "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
     messages: [
       {
         type: "sender",
@@ -439,7 +439,7 @@ const AllChats = [
     campaign: "Cubinc2",
     name: "UzNews2",
     avatar:
-      "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
     messages: [
       {
         type: "sender",
@@ -502,7 +502,7 @@ const ManagerChats = [
     campaign: "Cubinc111",
     name: "UzNews33",
     avatar:
-      "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
     messages: [
       {
         type: "sender",
@@ -563,7 +563,7 @@ const ManagerChats = [
     campaign: "Cubinc4242",
     name: "UzNews24242",
     avatar:
-      "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
     messages: [
       {
         type: "sender",
@@ -623,7 +623,7 @@ const ManagerChats = [
     campaign: "Cubinc333",
     name: "UzNews55",
     avatar:
-      "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
     messages: [
       {
         type: "sender",
