@@ -4,6 +4,10 @@ export const enum topup {
   max = 10000000,
 }
 
+export const enum CART {
+  commission = 3,
+}
+
 export const enum CALENDAR {
   disabledDays = 2,
 }

@@ -25,10 +25,10 @@ export const CartList: FC<ICatalogCards> = ({ cards, onChangeCard }) => {
         </div>
       </div>
       <div className={styles.cards}>
-        {cards.map((card, index) => (
+        {cards.map((card) => (
           <CatalogCard
             card={card}
-            key={index}
+            key={card.id}
             AddToBasketBtn={AddToBasket}
             FormatList={FormatList}
             onChangeCard={onChangeCard}

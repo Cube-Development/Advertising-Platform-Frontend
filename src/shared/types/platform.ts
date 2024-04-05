@@ -14,6 +14,7 @@ export interface IPlatform {
   male: number;
   female: number;
   platform: number;
+  selected_format?: number;
 }
 
 export interface IFormat {

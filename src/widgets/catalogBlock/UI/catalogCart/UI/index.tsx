@@ -39,7 +39,7 @@ export const CatalogCart: FC<CatalogCartProps> = ({ currentCart }) => {
       </div>
       <div className={styles.cart}>
         <Link to={paths.cart}>
-          <MyButton>
+          <MyButton className={styles.button}>
             <p>{t("catalog.current_cart.cart")}</p>
           </MyButton>
         </Link>

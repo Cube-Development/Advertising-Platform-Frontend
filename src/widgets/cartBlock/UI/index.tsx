@@ -5,7 +5,7 @@ import { CreatePost } from "./createPost";
 import { RecomendationList } from "@widgets/cartBlock/UI/recomendationList";
 import { IPlatform, IToCart } from "@shared/types/platform";
 
-const cards = [
+const cards: IPlatform[] = [
   {
     id: "1",
     rate: 4,
@@ -23,6 +23,7 @@ const cards = [
     male: 50,
     female: 50,
     platform: 1,
+    selected_format: 2,
   },
   {
     id: "2",
@@ -37,6 +38,7 @@ const cards = [
     male: 50,
     female: 50,
     platform: 2,
+    selected_format: 0,
   },
   {
     id: "3",
@@ -51,6 +53,7 @@ const cards = [
     male: 50,
     female: 50,
     platform: 1,
+    selected_format: 0,
   },
 ];
 
@@ -80,11 +83,11 @@ const reccartCards = [
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
     name: "MDK",
     category: "Юмор и развлечения",
-    description: "fdkmfdslmsl",
+    description: "fdkmfdslmkfdjkdgjkfdhgjkdhkjfdhgjkfdhgkjfdsl",
     format: [{ format: 0, views: 32222, price: 150000, er: 27, cpv: 121 }],
     subscribers: 301975,
-    male: 50,
-    female: 50,
+    male: 70,
+    female: 30,
     platform: 2,
   },
   {
@@ -94,7 +97,7 @@ const reccartCards = [
       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
     name: "MDK",
     category: "Юмор и развлечения",
-    description: "fdkmfdslmsl",
+    description: "111111111111111111111111111111111kmfdslmsl",
     format: [{ format: 0, views: 32222, price: 150000, er: 27, cpv: 121 }],
     subscribers: 301975,
     male: 50,
@@ -124,6 +127,7 @@ export const CartBlock: FC = () => {
       (card) => card.id === cart.channel.channel_id,
     );
     if (recommendedCard) {
+      recommendedCard.selected_format = cart.format.format;
       setCartCards([...cartCards, recommendedCard]);
     }
     // запрос в бек
@@ -142,7 +146,7 @@ export const CartBlock: FC = () => {
             />
           </div>
         </div>
-        <CreatePost />
+        <CreatePost cards={cartCards} />
       </div>
     </div>
   );

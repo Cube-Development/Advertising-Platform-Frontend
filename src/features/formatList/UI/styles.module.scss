@@ -52,6 +52,12 @@
 
   background: #fff;
 
+  ul {
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 2px;
+  }
+
   li {
     display: grid;
     grid-auto-flow: column;

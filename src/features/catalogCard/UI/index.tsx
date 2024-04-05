@@ -35,7 +35,10 @@ export const CatalogCard: FC<CatalogCardProps> = ({
   isCart,
 }) => {
   const { t } = useTranslation();
-  const [selectedFormat, setSelectedFormat] = useState<IFormat>(card.format[0]);
+  const startFormat: IFormat = card.selected_format
+    ? card.format.find((format) => format.format === card.selected_format)!
+    : card.format[0];
+  const [selectedFormat, setSelectedFormat] = useState<IFormat>(startFormat);
 
   const handleChangeFormat = (selectedValue: IFormat) => {
     setSelectedFormat(selectedValue);

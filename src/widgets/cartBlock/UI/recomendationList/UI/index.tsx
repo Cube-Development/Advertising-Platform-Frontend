@@ -1,17 +1,12 @@
-import { FC, useState } from "react";
-import styles from "./styles.module.scss";
-import { useTranslation } from "react-i18next";
-import { CatalogCard } from "@features/catalogCard";
 import { AddToBasket } from "@features/addToBasket";
+import { CatalogCard } from "@features/catalogCard";
 import { FormatList } from "@features/formatList";
-import { CartIcon } from "@shared/assets";
-import { IChangeCards, IPlatform } from "@shared/types/platform";
+import { ICatalogCards } from "@shared/types/platform";
+import { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
-interface RecomendationListProps extends IChangeCards {
-  cards: IPlatform[];
-}
-
-export const RecomendationList: FC<RecomendationListProps> = ({
+export const RecomendationList: FC<ICatalogCards> = ({
   cards,
   onChangeCard,
 }) => {
@@ -32,10 +27,10 @@ export const RecomendationList: FC<RecomendationListProps> = ({
 
       {isVisible && (
         <div className={styles.cards}>
-          {cards.map((card, index) => (
+          {cards.map((card) => (
             <CatalogCard
               card={card}
-              key={index}
+              key={card.id}
               AddToBasketBtn={AddToBasket}
               FormatList={FormatList}
               onChangeCard={onChangeCard}
