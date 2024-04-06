@@ -169,7 +169,7 @@ const BloggerModPlatformCards = [
 ];
 
 export const PlatformsPage: FC = () => {
-  const { statusFilter } = useAppSelector((state) => state.filterReducer);
+  const { statusFilter } = useAppSelector((state) => state.filter);
 
   return (
     <>

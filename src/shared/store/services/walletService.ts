@@ -1,5 +1,4 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
-import authBaseQuery from "./authBaseQuery";
+import { authApi } from "@shared/api";
 
 type PaymentOrderResponse = {
   success?: boolean;
@@ -29,9 +28,7 @@ type PaymentDepositReq = {
   legal_id: string;
 };
 
-export const walletAPI = createApi({
-  reducerPath: "walletAPI",
-  baseQuery: authBaseQuery,
+export const walletAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
     paymentProject: build.mutation<PaymentOrderResponse, string>({
       query: (BodyParams) => ({
@@ -69,3 +66,11 @@ export const walletAPI = createApi({
     }),
   }),
 });
+
+export const {
+  useGetBalanceQuery,
+  usePaymentDepositMutation,
+  usePaymentOrderMutation,
+  usePaymentProjectMutation,
+  usePaymentWithdrawalMutation,
+} = walletAPI;

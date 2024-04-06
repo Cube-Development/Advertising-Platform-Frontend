@@ -712,7 +712,7 @@ export const Chat: FC = () => {
     setChats([newChat, ...chats.filter((chat) => chat !== currentChat)]);
   };
 
-  const { chatFilter: filter } = useAppSelector((state) => state.filterReducer);
+  const { chatFilter: filter } = useAppSelector((state) => state.filter);
 
   const handle = () => {
     if (filter === chatFilter.blogger) {

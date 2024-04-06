@@ -8,7 +8,7 @@ import { AuthStateGenerator } from "@features/authStateGenerator";
 
 export const Registration: FC = () => {
   const { t } = useTranslation();
-  const { isAuth } = useAppSelector((state) => state.userReducer);
+  const { isAuth } = useAppSelector((state) => state.user);
 
   const registrationButton = (
     <MyButton className={styles.button}>{t(`registration`)}</MyButton>

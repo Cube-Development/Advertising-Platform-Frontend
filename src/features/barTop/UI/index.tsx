@@ -24,7 +24,7 @@ export const BarTop: FC<BarTopProps> = ({
   page,
 }) => {
   const { t } = useTranslation();
-  // const { role } = useAppSelector((state) => state.userReducer);
+  // const { role } = useAppSelector((state) => state.user);
   return (
     <div className={styles.top}>
       {

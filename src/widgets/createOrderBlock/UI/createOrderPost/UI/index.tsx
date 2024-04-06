@@ -34,9 +34,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
     onChangeBlur("datetime");
   };
 
-  const { platformFilter: filter } = useAppSelector(
-    (state) => state.filterReducer,
-  );
+  const { platformFilter: filter } = useAppSelector((state) => state.filter);
 
   return (
     <div className={`container ${isBlur ? "blur" : ""}`}>

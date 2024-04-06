@@ -35,7 +35,7 @@ export const PaymentData: FC<PaymentDataProps> = ({
   const amount = watch("amount", 0);
 
   const { profileFilter: filter, subprofileFilter: subprofile } =
-    useAppSelector((state) => state.filterReducer);
+    useAppSelector((state) => state.filter);
 
   const typeLegal =
     filter.type === profileTypesName.entities

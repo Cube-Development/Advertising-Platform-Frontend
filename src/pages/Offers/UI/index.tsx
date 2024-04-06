@@ -107,7 +107,7 @@ const BlogggerActiveCards = [
 ];
 
 export const OffersPage: FC = () => {
-  const { statusFilter } = useAppSelector((state) => state.filterReducer);
+  const { statusFilter } = useAppSelector((state) => state.filter);
 
   const page = pageFilter.offer;
 

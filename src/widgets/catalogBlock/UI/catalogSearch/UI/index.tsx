@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import styles from "./styles.module.scss";
 import { BarProfileFilter } from "@features/barProfileFilter/UI";
 import { pageFilter } from "@shared/config/pageFilter";
@@ -65,9 +65,12 @@ const options: IOptions = {
 };
 
 export const CatalogSearch: FC = () => {
-  const { catalogFilter: filter } = useAppSelector(
-    (state) => state.filterReducer,
-  );
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedLanguage, setSelectedLanguage] = useState("");
+  const [selectedRegion, setSelectedRegion] = useState("");
+  const [selectedAge, setSelectedAge] = useState("");
+
+  const { catalogFilter: filter } = useAppSelector((state) => state.filter);
 
   const { t } = useTranslation();
   const {

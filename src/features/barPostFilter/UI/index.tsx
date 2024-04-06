@@ -11,7 +11,7 @@ interface BarPostFilterProps {
 
 export const BarPostFilter: FC<BarPostFilterProps> = ({ platforms }) => {
   const { t } = useTranslation();
-  const { platformFilter } = useAppSelector((state) => state.filterReducer);
+  const { platformFilter } = useAppSelector((state) => state.filter);
   const dispatch = useAppDispatch();
   const toggleProfile = (type: string) => {
     dispatch(filterSlice.actions.setPlatformFilter(type));

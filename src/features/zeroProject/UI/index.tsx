@@ -16,7 +16,7 @@ export const ZeroProject: FC<ZeroProjectProps> = ({
   TurnkeyProjectBtn,
 }) => {
   const { t } = useTranslation();
-  const { typeFilter } = useAppSelector((state) => state.filterReducer);
+  const { typeFilter } = useAppSelector((state) => state.filter);
 
   return (
     <div className={styles.no__project}>

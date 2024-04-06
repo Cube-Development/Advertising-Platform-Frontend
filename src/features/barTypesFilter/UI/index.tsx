@@ -7,7 +7,7 @@ import styles from "./styles.module.scss";
 
 export const BarTypesFilter: FC = () => {
   const { t } = useTranslation();
-  const { typeFilter } = useAppSelector((state) => state.filterReducer);
+  const { typeFilter } = useAppSelector((state) => state.filter);
   const dispatch = useAppDispatch();
   const toggleType = (type: string, status: string) => {
     dispatch(filterSlice.actions.setTypeFilter(type));

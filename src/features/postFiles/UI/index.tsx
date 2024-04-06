@@ -23,9 +23,7 @@ export const PostFiles: FC<PostFilesProps> = () => {
     setIsModalOpen(!isModalOpen);
   };
 
-  const { addFileFilter: filter } = useAppSelector(
-    (state) => state.filterReducer,
-  );
+  const { addFileFilter: filter } = useAppSelector((state) => state.filter);
 
   const handle = () => {};
 

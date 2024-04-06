@@ -24,7 +24,7 @@ export const BarSubrofileFilter: FC<BarSubrofileFilterProps> = ({
   resetActiveAccount,
 }) => {
   const { t } = useTranslation();
-  const { subprofileFilter } = useAppSelector((state) => state.filterReducer);
+  const { subprofileFilter } = useAppSelector((state) => state.filter);
   const dispatch = useAppDispatch();
   const toggleProfile = (option: ISubFilterOption) => {
     const newFilter = { type: option.type, id: option.id };

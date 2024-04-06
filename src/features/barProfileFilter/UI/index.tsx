@@ -33,7 +33,7 @@ export const BarProfileFilter: FC<BarProfileFilterProps> = ({
   const { t } = useTranslation();
 
   const { profileFilter, catalogFilter, chatFilter, addFileFilter } =
-    useAppSelector((state) => state.filterReducer);
+    useAppSelector((state) => state.filter);
   const [options, filter] =
     page === pageFilter.profile || page === pageFilter.walletWithdraw
       ? [profileTypes, profileFilter.type]

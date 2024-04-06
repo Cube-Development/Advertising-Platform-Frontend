@@ -8,9 +8,7 @@ interface GuideProps {}
 
 export const Guide: FC<GuideProps> = () => {
   const { t } = useTranslation();
-  const { profileFilter: filter } = useAppSelector(
-    (state) => state.filterReducer,
-  );
+  const { profileFilter: filter } = useAppSelector((state) => state.filter);
 
   return (
     <div className={styles.guide}>

@@ -1,11 +1,10 @@
-import { createApi } from "@reduxjs/toolkit/query/react";
-import authBaseQuery from "./authBaseQuery";
 import {
   IProfileData,
   ILegalCard,
   ILegalCardShort,
 } from "@shared/types/profile";
 import { profileTypesNum } from "@shared/config/profileFilter";
+import { authApi } from "@shared/api";
 
 type DeleteLegalResponse = {
   success?: boolean;
@@ -18,9 +17,7 @@ type DeleteLegalResponse = {
   ];
 };
 
-export const legalAPI = createApi({
-  reducerPath: "legalAPI",
-  baseQuery: authBaseQuery,
+export const legalAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
     createLegal: build.mutation<ILegalCard, IProfileData>({
       query: (BodyParams) => ({
@@ -50,3 +47,10 @@ export const legalAPI = createApi({
     }),
   }),
 });
+export const {
+  useCreateLegalMutation,
+  useDeleteLegalQuery,
+  useEditLegalMutation,
+  useReadLegalsByTypeQuery,
+  useReadOneLegalMutation,
+} = legalAPI;

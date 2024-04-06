@@ -2,10 +2,10 @@ import { ProfileIcon } from "@shared/assets";
 import { FC, useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { authAPI } from "@shared/store/services/authService";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
 import { paths } from "@shared/routing";
+import { useLogoutMutation } from "@shared/store/services/authService";
 
 interface ProfileProps {
   toggleLogout: () => void;
@@ -15,7 +15,7 @@ export const Profile: FC<ProfileProps> = ({ toggleLogout }) => {
   const { t } = useTranslation();
   const [isMenuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
-  const [logout] = authAPI.useLogoutMutation();
+  const [logout] = useLogoutMutation();
 
   const handleClickOutside = (event: MouseEvent) => {
     if (menuRef.current && !menuRef.current.contains(event.target as Node)) {

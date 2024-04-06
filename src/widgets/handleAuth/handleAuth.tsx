@@ -1,20 +1,20 @@
 import { QueryParams } from "@features/queryParams";
 import { useAppDispatch } from "@shared/store";
 import { userSlice } from "@shared/store/reducers";
-import { authAPI } from "@shared/store/services/authService";
 import Cookies from "js-cookie";
 import { useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { roles } from "@shared/config/roles";
 import { useNavigate } from "react-router-dom";
 import { paths } from "@shared/routing";
+import { useGetTokensMutation } from "@shared/store/services/authService";
 
 type DecodedToken = {
   role: roles;
 };
 
 export const HandleAuth = () => {
-  const [getTokens] = authAPI.useGetTokensMutation();
+  const [getTokens] = useGetTokensMutation();
   const dispatch = useAppDispatch();
   const { code, state } = QueryParams();
   const navigate = useNavigate();

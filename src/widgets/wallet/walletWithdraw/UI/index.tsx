@@ -16,8 +16,13 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { BarSubrofileFilter } from "@features/barSubprofileFilter";
-import { legalAPI } from "@shared/store/services/legalService";
-import { walletAPI } from "@shared/store/services/walletService";
+import {
+  useCreateLegalMutation,
+  useEditLegalMutation,
+  useReadLegalsByTypeQuery,
+  useReadOneLegalMutation,
+} from "@shared/store/services/legalService";
+import { usePaymentDepositMutation } from "@shared/store/services/walletService";
 
 interface IExtendedProfileData extends IProfileData {
   amount: number;
@@ -37,21 +42,21 @@ export const WalletWithdraw: FC = () => {
   } = useForm<IExtendedProfileData>();
 
   const { profileFilter: filter, subprofileFilter } = useAppSelector(
-    (state) => state.filterReducer,
+    (state) => state.filter,
   );
 
   const {
     data: legalsByType,
     isLoading: isReadLegalsLoading,
     error: readLegalsError,
-  } = legalAPI.useReadLegalsByTypeQuery(
+  } = useReadLegalsByTypeQuery(
     filter.type === profileTypesName.selfEmployedAccounts
       ? subprofileFilter.id
       : filter.id,
   );
 
   const [readOneLegal, { isLoading: isOneLegalLoading, error: oneLegalError }] =
-    legalAPI.useReadOneLegalMutation();
+    useReadOneLegalMutation();
 
   const changeActiveAccount = async (account: ILegalCardShort) => {
     if (activeAccount && account.legal_id === activeAccount.legal_id) {
@@ -75,13 +80,13 @@ export const WalletWithdraw: FC = () => {
   };
 
   const [createLegal, { isLoading: isCreateLoading, error: createError }] =
-    legalAPI.useCreateLegalMutation();
+    useCreateLegalMutation();
 
   const [editLegal, { isLoading: isEditLoading, error: editError }] =
-    legalAPI.useEditLegalMutation();
+    useEditLegalMutation();
 
   const [paymentDeposit, { isLoading: isTopupLoading, error: topupError }] =
-    walletAPI.usePaymentDepositMutation();
+    usePaymentDepositMutation();
 
   const onSubmit: SubmitHandler<IExtendedProfileData> = async (formData) => {
     const dataWithLegalType = {
@@ -105,7 +110,10 @@ export const WalletWithdraw: FC = () => {
       .catch((error) => {
         console.error("Ошибка в createLegal", error);
         if (error.status === 400 && error.data.value) {
-          const newFormData = { ...formData, legal_id: error.data.value };
+          const newFormData = {
+            ...dataWithLegalType,
+            legal_id: error.data.value,
+          };
           editLegal(newFormData)
             .unwrap()
             .then((editRes) => {
