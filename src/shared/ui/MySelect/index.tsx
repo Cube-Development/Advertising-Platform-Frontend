@@ -14,16 +14,13 @@ export const MySelect: FC<MySelectProps> = ({
   ...rest
 }) => {
   const { t } = useTranslation();
-  const optionsWithDefault = [
-    { label: t(defaultValue), value: "" },
-    ...options,
-  ];
+  const optionsWithDefault = [{ name: t(defaultValue), id: 0 }, ...options];
 
   return (
     <select {...rest} className={styles.wrapper}>
       {optionsWithDefault.map((option, index) => (
-        <option key={index} value={option.value}>
-          {option.label}
+        <option key={index} value={option.id}>
+          {option.name}
         </option>
       ))}
     </select>

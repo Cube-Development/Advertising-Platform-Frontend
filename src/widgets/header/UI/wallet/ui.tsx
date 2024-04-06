@@ -2,6 +2,8 @@ import { CloseIcon, PlusIcon } from "@shared/assets";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { Link } from "react-router-dom";
+import { paths } from "@shared/routing";
 
 export const Wallet: FC = () => {
   const { t } = useTranslation();
@@ -46,10 +48,18 @@ export const Wallet: FC = () => {
       {isMenuOpen && (
         <div className={styles.menu}>
           <ul>
-            <li>{t("wallet_menu.top_up")}</li>
-            <li>{t("wallet_menu.withdraw")}</li>
-            <li>{t("wallet_menu.history")}</li>
-            <li>{t("wallet_menu.invoice")}</li>
+            <Link to={paths.walletTopUp} onClick={closeMenu}>
+              <li>{t("wallet_menu.top_up")}</li>
+            </Link>
+            <Link to={paths.walletWithdraw} onClick={closeMenu}>
+              <li>{t("wallet_menu.withdraw")}</li>
+            </Link>
+            <Link to={paths.wallethistory} onClick={closeMenu}>
+              <li>{t("wallet_menu.history")}</li>
+            </Link>
+            <Link to={paths.main} onClick={closeMenu}>
+              <li>{t("wallet_menu.invoice")}</li>
+            </Link>
           </ul>
         </div>
       )}

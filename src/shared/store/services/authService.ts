@@ -1,15 +1,11 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { baseApi } from "@shared/api";
 import { IToken } from "@shared/types/tokens";
 
 type AuthParams = {
   authorization_code: string;
 };
 
-export const authAPI = createApi({
-  reducerPath: "authAPI",
-  baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_BASE_URL + "/auth",
-  }),
+export const authorizatioAPI = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getTokens: build.mutation<IToken, AuthParams>({
       query: (BodyParams) => ({
@@ -29,3 +25,4 @@ export const authAPI = createApi({
     }),
   }),
 });
+export const { useGetTokensMutation, useLogoutMutation } = authorizatioAPI;

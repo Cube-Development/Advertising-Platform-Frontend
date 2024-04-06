@@ -16,7 +16,7 @@ interface BarFilterProps {
 
 export const BarFilter: FC<BarFilterProps> = ({ page }) => {
   const [isZeroProject, setZeroProject] = useState(true);
-  const { typeFilter } = useAppSelector((state) => state.filterReducer);
+  const { typeFilter } = useAppSelector((state) => state.filter);
 
   return (
     <section className={styles.profile__filter}>

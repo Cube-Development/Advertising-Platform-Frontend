@@ -5,13 +5,11 @@
     display: grid;
     grid-auto-flow: column;
     column-gap: 25px;
-    justify-content: start;
     align-items: center;
-
+    justify-content: start;
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
-    line-height: normal;
     line-height: 0.75;
     color: var(--Personal-colors-black);
   }
@@ -21,6 +19,7 @@
     padding: 10px;
     min-width: 100px;
     cursor: pointer;
+    white-space: nowrap;
   }
 }
 

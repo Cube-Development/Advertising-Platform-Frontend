@@ -1,63 +1,15 @@
-import { FC, useState } from "react";
-import styles from "./styles.module.scss";
-import { SaveCart } from "@features/saveCart";
-import { AddCart } from "@features/addCart";
-import { useTranslation } from "react-i18next";
-import { CatalogCard } from "@features/catalogCard";
 import { AddToBasket } from "@features/addToBasket";
+import { CatalogCard } from "@features/catalogCard";
 import { FormatList } from "@features/formatList";
-import { CartIcon } from "@shared/assets";
+import { ICatalogCards } from "@shared/types/platform";
+import { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
-const cards = [
-  {
-    id: "fdsfsdfsfd",
-    rate: 4,
-    avatar:
-      "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",
-    name: "MDK",
-    category: "Юмор и развлечения",
-    description: "fdkmfdslmsl",
-    format: [
-      { format: 0, views: 32222, price: 150000, er: 27, cpv: 121 },
-      { format: 1, views: 42222, price: 250000, er: 37, cpv: 221 },
-      { format: 2, views: 52222, price: 350000, er: 47, cpv: 321 },
-    ],
-    subscribers: 301975,
-    male: 50,
-    female: 50,
-    platform: 1,
-  },
-  {
-    id: "fdsfsdfsfd",
-    rate: 4,
-    avatar:
-      "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",
-    name: "MDK",
-    category: "Юмор и развлечения",
-    description: "fdkmfdslmsl",
-    format: [{ format: 0, views: 32222, price: 150000, er: 27, cpv: 121 }],
-    subscribers: 301975,
-    male: 50,
-    female: 50,
-    platform: 2,
-  },
-  {
-    id: "fdsfsdfsfd",
-    rate: 4,
-    avatar:
-      "https://png.pngtree.com/background/20230611/original/pngtree-picture-of-a-blue-bird-on-a-black-background-picture-image_3124189.jpg",
-    name: "MDK",
-    category: "Юмор и развлечения",
-    description: "fdkmfdslmsl",
-    format: [{ format: 0, views: 32222, price: 150000, er: 27, cpv: 121 }],
-    subscribers: 301975,
-    male: 50,
-    female: 50,
-    platform: 1,
-  },
-];
-
-export const RecomendationList: FC = () => {
+export const RecomendationList: FC<ICatalogCards> = ({
+  cards,
+  onChangeCard,
+}) => {
   const { t } = useTranslation();
   const [isVisible, setVisible] = useState(true);
   const handleChange = () => {
@@ -75,12 +27,13 @@ export const RecomendationList: FC = () => {
 
       {isVisible && (
         <div className={styles.cards}>
-          {cards.map((card, index) => (
+          {cards.map((card) => (
             <CatalogCard
               card={card}
-              key={index}
+              key={card.id}
               AddToBasketBtn={AddToBasket}
               FormatList={FormatList}
+              onChangeCard={onChangeCard}
             />
           ))}
         </div>

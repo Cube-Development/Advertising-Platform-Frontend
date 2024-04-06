@@ -9,7 +9,7 @@ import { useAppSelector } from "@shared/store";
 import { SideBarLayout } from "@widgets/layouts";
 
 export const Routing = () => {
-  const { isAuth, role } = useAppSelector((state) => state.userReducer);
+  const { isAuth, role } = useAppSelector((state) => state.user);
 
   return (
     <Routes>

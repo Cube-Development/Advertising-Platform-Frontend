@@ -10,11 +10,9 @@ export const CreatePlatform: FC = () => {
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
-    console.log("handleOpenModal");
   };
   const handleCloseModal = () => {
     setIsModalOpen(false);
-    console.log("handleCloseModal");
   };
 
   return (

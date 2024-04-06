@@ -4,63 +4,66 @@
   row-gap: 25px;
   align-items: center;
   text-align: center;
-}
 
-.input {
-  display: grid;
-  grid-auto-flow: column;
-  align-items: center;
-  justify-content: space-between;
+  .button {
+    border-radius: 12px;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    color: #4772e6;
+    border: 1px solid #4772e6;
+    background: var(--Personal-colors-White);
+    padding: 20px 0;
 
-  border-radius: 12px;
-  border: 1px solid var(--Inside-container);
-  background: var(--Personal-colors-White);
+    &.active {
+      border: none;
+      color: var(--Personal-colors-White);
+      background: var(
+        --Gradients-Gradient-1,
+        linear-gradient(45deg, #4772e6 23.91%, #8e54e9 75.06%)
+      );
+    }
+  }
 
-  border-radius: 12px;
-  align-items: center;
-  position: relative;
-  padding-right: 20px;
+  .input {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: space-between;
 
-  color: var(--Personal-colors-black);
-  font-size: 18px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
+    border-radius: 12px;
+    border: 1px solid var(--Inside-container);
+    background: var(--Personal-colors-White);
 
-  input {
-    padding: 20px 15px;
-    &::placeholder {
-      color: var(--Text-sample);
-      font-size: 12px;
+    border-radius: 12px;
+    align-items: center;
+    position: relative;
+    padding-right: 20px;
+
+    input {
+      color: var(--Personal-colors-black);
+      font-size: 18px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
+      padding: 20px 15px;
+
+      &::placeholder {
+        color: var(--Text-sample);
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+      }
+    }
+
+    p {
+      color: var(--Personal-colors-black);
+      font-size: 16px;
       font-style: normal;
       font-weight: 400;
       line-height: normal;
     }
   }
-}
-
-// .input::after {
-//     content: "USD";
-//     position: absolute;
-//     right: 10px;
-//     top: 50%;
-//     transform: translateY(-50%);
-//     color: #777;
-//   }
-
-.no__active {
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-  color: var(--Gradients-Gradient-1);
-  border: 1px solid #4772e6;
-  background: var(--Personal-colors-White);
-}
-
-.active {
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
 }

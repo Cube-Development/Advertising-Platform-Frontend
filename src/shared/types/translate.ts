@@ -42,3 +42,9 @@ export interface ICustomer {
   img: string;
   text: string;
 }
+
+export interface ISelectOption {
+  title: string;
+  text?: string;
+  default_value?: string;
+}

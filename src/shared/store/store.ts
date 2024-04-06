@@ -1,21 +1,19 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { authAPI } from "./services/authService";
-import userReducer from "./reducers/userSlice";
-import filterReducer from "./reducers/filterSlice";
-import { legalAPI } from "./services/legalService";
+import { authApi, baseApi } from "@shared/api";
+import { filterSlice, userSlice } from "./reducers";
 
 const rootReducer = combineReducers({
-  [authAPI.reducerPath]: authAPI.reducer,
-  [legalAPI.reducerPath]: legalAPI.reducer,
-  userReducer,
-  filterReducer,
+  [baseApi.reducerPath]: baseApi.reducer,
+  [authApi.reducerPath]: authApi.reducer,
+  [userSlice.reducerPath]: userSlice.reducer,
+  [filterSlice.reducerPath]: filterSlice.reducer,
 });
 
 export const setupStore = () => {
   return configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(authAPI.middleware, legalAPI.middleware),
+      getDefaultMiddleware().concat(authApi.middleware, baseApi.middleware),
   });
 };
 

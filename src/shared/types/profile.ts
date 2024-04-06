@@ -33,3 +33,16 @@ export interface IProfileData {
 //   card_number?: number;
 //   card_date?: string;
 // }
+
+export interface ILegalCardShort {
+  legal_id: string;
+  type_legal: number;
+  name: string;
+  INN?: number;
+  PNFL?: number;
+}
+
+export interface ILegalCard extends IProfileData {
+  user_id: string;
+  legal_id: string;
+}

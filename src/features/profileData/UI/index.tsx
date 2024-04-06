@@ -1,7 +1,5 @@
 import { InfoIcon } from "@shared/assets";
 import { IBlockData, IParameterData } from "@shared/types/common";
-import { IProfileData } from "@shared/types/profile";
-import { MyInput } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -56,10 +54,6 @@ export const ProfileData: FC<ProfileDataProps> = ({
                   {...register(row.type, newValidate)}
                   type={getInputLegalType(row.type)}
                 />
-                {/* <MyInput
-                  onChange={(event) => handleDataChange(event, row.type)}
-                  placeholder={row_dict.default_value}
-                /> */}
               </div>
             </div>
           );

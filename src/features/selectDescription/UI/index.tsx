@@ -44,9 +44,9 @@ export const SelectDescription: FC<SelectDescriptionProps> = ({
           maxLength={1000}
           placeholder={t(placeholder)}
         />
-        <div>
+        <p>
           {remainingCharacters}/{1000}
-        </div>
+        </p>
       </div>
     </div>
   );

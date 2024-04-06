@@ -9,7 +9,6 @@ export function getInputLegalType(inputType: keyof IProfileData): string {
     case profileData.PNFL:
     case profileData.registration_number:
     case profileData.card_number:
-    case profileData.card_date:
       return "number";
     case profileData.name:
     case profileData.address:
@@ -17,6 +16,7 @@ export function getInputLegalType(inputType: keyof IProfileData): string {
     case profileData.bank_name:
     case profileData.registration_date:
     case profileData.transit_account:
+    case profileData.card_date:
       return "text";
     case profileData.email:
       return "email";

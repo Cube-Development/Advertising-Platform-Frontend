@@ -10,19 +10,26 @@ import {
   profileTypesNum,
 } from "@shared/config/profileFilter";
 import { platformFilter } from "@shared/config/postFilter";
+import { chatFilter } from "@shared/config/chatFilter";
+import { addFileFilter } from "@shared/config/addFileFilter";
 
 interface FilterState {
   typeFilter: string;
   statusFilter: string;
   profileFilter: {
-    type: profileTypesName | catalogFilter;
+    type: profileTypesName | catalogFilter | chatFilter | addFileFilter;
     id?: profileTypesNum;
   };
-  subprofileFilter: string;
+  subprofileFilter: {
+    type: subprofileFilter;
+    id: profileTypesNum;
+  };
   catalogFilter: string;
   networkFilter: string;
   sortingFilter: string;
   platformFilter: string;
+  chatFilter: string;
+  addFileFilter: string;
 }
 
 const initialState: FilterState = {
@@ -32,11 +39,16 @@ const initialState: FilterState = {
     type: profileTypesName.selfEmployedAccounts,
     id: profileTypesNum.selfEmployedAccounts,
   },
-  subprofileFilter: subprofileFilter.account,
+  subprofileFilter: {
+    type: subprofileFilter.account,
+    id: profileTypesNum.selfEmployedAccounts,
+  },
   catalogFilter: catalogFilter.parameters,
   networkFilter: "",
   sortingFilter: "",
   platformFilter: platformFilter.telegram,
+  chatFilter: chatFilter.blogger,
+  addFileFilter: addFileFilter.mediafile,
 };
 
 export const filterSlice = createSlice({
@@ -53,15 +65,19 @@ export const filterSlice = createSlice({
     setProfileFilter: (
       state,
       action: PayloadAction<{
-        type: profileTypesName | catalogFilter;
+        type: profileTypesName | catalogFilter | chatFilter | addFileFilter;
         id?: profileTypesNum;
       }>,
     ) => {
       state.profileFilter.type = action.payload.type;
       state.profileFilter.id = action.payload.id;
     },
-    setSubprofileFilter: (state, action: PayloadAction<string>) => {
-      state.subprofileFilter = action.payload;
+    setSubprofileFilter: (
+      state,
+      action: PayloadAction<{ type: subprofileFilter; id: profileTypesNum }>,
+    ) => {
+      state.subprofileFilter.type = action.payload.type;
+      state.subprofileFilter.id = action.payload.id;
     },
     setCatalogFilter: (state, action: PayloadAction<string>) => {
       state.catalogFilter = action.payload;
@@ -75,7 +91,11 @@ export const filterSlice = createSlice({
     setPlatformFilter: (state, action: PayloadAction<string>) => {
       state.platformFilter = action.payload;
     },
+    setChatFilter: (state, action: PayloadAction<string>) => {
+      state.chatFilter = action.payload;
+    },
+    setAddFileFilter: (state, action: PayloadAction<string>) => {
+      state.addFileFilter = action.payload;
+    },
   },
 });
-
-export default filterSlice.reducer;

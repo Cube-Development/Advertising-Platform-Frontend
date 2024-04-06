@@ -16,7 +16,7 @@ export const AdvDevProjectCard: FC<AdvDevProjectCardProps> = ({
   ContinueBtn,
 }) => {
   const { t } = useTranslation();
-  const { typeFilter } = useAppSelector((state) => state.filterReducer);
+  const { typeFilter } = useAppSelector((state) => state.filter);
 
   return (
     <div className={styles.card}>

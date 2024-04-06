@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import styles from "./styles.module.scss";
 import { BarProfileFilter } from "@features/barProfileFilter/UI";
 import { pageFilter } from "@shared/config/pageFilter";
@@ -12,66 +12,57 @@ import { useAppSelector } from "@shared/store";
 import { catalogFilter } from "@shared/config/catalogFilter";
 import { SelectDescription } from "@features/selectDescription";
 import { AiFilter } from "@features/aiFilter";
+import { platformData } from "@shared/config/platformData";
 
 const options: IOptions = {
   category: [
-    { label: "Категория 1", value: "1" },
-    { label: "Другая категория", value: "2" },
-    { label: "Бизнес", value: "3" },
-    { label: "Искусство", value: "4" },
-    { label: "Спорт", value: "5" },
-    { label: "Музыка", value: "6" },
-    { label: "Наука", value: "7" },
-    { label: "Технологии", value: "8" },
+    { name: "Категория 1", id: 1 },
+    { name: "Другая категория", id: 2 },
+    { name: "Бизнес", id: 3 },
+    { name: "Искусство", id: 4 },
+    { name: "Спорт", id: 5 },
+    { name: "Музыка", id: 6 },
+    { name: "Наука", id: 7 },
+    { name: "Технологии", id: 8 },
   ],
   languages: [
-    { label: "Русский", value: "0" },
-    { label: "Spanish", value: "1" },
-    { label: "French", value: "2" },
-    { label: "German", value: "3" },
-    { label: "Chinese", value: "4" },
-    { label: "Japanese", value: "5" },
-    { label: "Korean", value: "6" },
-    { label: "Italian", value: "7" },
-    { label: "Portuguese", value: "8" },
-    { label: "Arabic", value: "9" },
-    { label: "Hindi", value: "10" },
-    { label: "Turkish", value: "11" },
+    { name: "Русский", id: 0 },
+    { name: "Spanish", id: 1 },
+    { name: "French", id: 2 },
+    { name: "German", id: 3 },
+    { name: "Chinese", id: 4 },
+    { name: "Japanese", id: 5 },
+    { name: "Korean", id: 6 },
+    { name: "Italian", id: 7 },
+    { name: "Portuguese", id: 8 },
+    { name: "Arabic", id: 9 },
+    { name: "Hindi", id: 10 },
+    { name: "Turkish", id: 11 },
   ],
   region: [
-    { label: "Москва", value: "0" },
-    { label: "Санкт-Петербург", value: "1" },
-    { label: "Краснодар", value: "2" },
-    { label: "Екатеринбург", value: "3" },
-    { label: "Новосибирск", value: "4" },
-    { label: "Казань", value: "5" },
-    { label: "Нижний Новгород", value: "6" },
-    { label: "Челябинск", value: "7" },
-    { label: "Самара", value: "8" },
-    { label: "Уфа", value: "9" },
-    { label: "Ростов-на-Дону", value: "10" },
-    { label: "Омск", value: "11" },
-    { label: "Украина", value: "12" },
-  ],
-  sex: [
-    { label: "Мужчины", value: "male" },
-    { label: "Женщины", value: "female" },
+    { name: "Москва", id: 0 },
+    { name: "Санкт-Петербург", id: 1 },
+    { name: "Краснодар", id: 2 },
+    { name: "Екатеринбург", id: 3 },
+    { name: "Новосибирск", id: 4 },
+    { name: "Казань", id: 5 },
+    { name: "Нижний Новгород", id: 6 },
+    { name: "Челябинск", id: 7 },
+    { name: "Самара", id: 8 },
+    { name: "Уфа", id: 9 },
+    { name: "Ростов-на-Дону", id: 10 },
+    { name: "Омск", id: 11 },
+    { name: "Украина", id: 12 },
   ],
   age: [
-    { label: "18-24", value: "0" },
-    { label: "25-34", value: "1" },
-    { label: "35-44", value: "2" },
-    { label: "45-54", value: "3" },
-    { label: "55-64", value: "4" },
-    { label: "65+", value: "5" },
+    { name: "18-24", id: 0 },
+    { name: "25-34", id: 1 },
+    { name: "35-44", id: 2 },
+    { name: "45-54", id: 3 },
+    { name: "55-64", id: 4 },
+    { name: "65+", id: 5 },
   ],
 };
-
-const accommList = [
-  { accomm: "1 час в топе 24 часа в ленте" },
-  { accomm: "2 час в топе 24 часа в ленте" },
-  { accomm: "3 час в топе 24 часа в ленте" },
-];
 
 export const CatalogSearch: FC = () => {
   const [selectedCategory, setSelectedCategory] = useState("");
@@ -79,24 +70,16 @@ export const CatalogSearch: FC = () => {
   const [selectedRegion, setSelectedRegion] = useState("");
   const [selectedAge, setSelectedAge] = useState("");
 
-  const { catalogFilter: filter } = useAppSelector(
-    (state) => state.filterReducer,
-  );
-
-  useEffect(() => {
-    setSelectedCategory(options.category[0].value);
-    setSelectedLanguage(options.languages[0].value);
-    setSelectedRegion(options.region[0].value);
-    setSelectedAge(options.age[0].value);
-  }, []);
+  const { catalogFilter: filter } = useAppSelector((state) => state.filter);
 
   const { t } = useTranslation();
   const {
     reset,
-    handleSubmit,
     setValue,
     formState: { errors },
+    getValues,
   } = useForm<IAddPLatformData>();
+
   return (
     <div className={styles.wrapper}>
       <BarProfileFilter resetValues={reset} page={pageFilter.catalog} />
@@ -106,38 +89,38 @@ export const CatalogSearch: FC = () => {
             <SelectOptions
               onChange={setValue}
               options={options.category}
-              single={true}
-              type={"category"}
-              defaultValue={"catalog.category.default_value"}
-              title={"catalog.category.title"}
+              single={false}
+              type={platformData.category}
+              textData={"catalog.category"}
               isRow={true}
             />
             <SelectOptions
               onChange={setValue}
               options={options.age}
               single={false}
-              type={"age"}
-              defaultValue={"catalog.age.default_value"}
-              title={"catalog.age.title"}
+              type={platformData.age}
+              textData={"catalog.age"}
               isRow={true}
             />
-            <SelectSex onChange={setValue} title={"catalog.sex.title"} />
+            <SelectSex
+              onChange={setValue}
+              title={"catalog.sex.title"}
+              isRow={true}
+            />
             <SelectOptions
               onChange={setValue}
               options={options.languages}
               single={false}
-              type={"languages"}
-              defaultValue={"catalog.languages.default_value"}
-              title={"catalog.languages.title"}
+              type={platformData.languages}
+              textData={"catalog.languages"}
               isRow={true}
             />
             <SelectOptions
               onChange={setValue}
               options={options.region}
               single={false}
-              type={"region"}
-              defaultValue={"catalog.region.default_value"}
-              title={"catalog.region.title"}
+              type={platformData.region}
+              textData={"catalog.region"}
               isRow={true}
             />
           </>

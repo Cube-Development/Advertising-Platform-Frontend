@@ -3,66 +3,127 @@ import { ArrowIcon4 } from "@shared/assets";
 import { pageFilter } from "@shared/config/pageFilter";
 import { profileTypesName } from "@shared/config/profileFilter";
 import { useAppSelector } from "@shared/store";
-import { IProfileData } from "@shared/types/profile";
+import {
+  IProfileData,
+  ILegalCard,
+  ILegalCardShort,
+} from "@shared/types/profile";
 import { ChooseProfile } from "@widgets/wallet/UI/chooseProfile";
 import { Guide } from "@widgets/wallet/UI/guide";
 import { PaymentData } from "@widgets/wallet/UI/paymentData/UI";
 import { TopUpCard } from "@widgets/wallet/UI/topUpCard";
 import { FC, useState } from "react";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import {
+  useCreateLegalMutation,
+  useEditLegalMutation,
+  useReadLegalsByTypeQuery,
+  useReadOneLegalMutation,
+} from "@shared/store/services/legalService";
+import { usePaymentDepositMutation } from "@shared/store/services/walletService";
 
-const Accounts = [
-  {
-    title: "Card name 1",
-    info: "Information Information Information",
-    index: 0,
-  },
-  {
-    title: "Card name 1",
-    info: "Information Information Information",
-    index: 1,
-  },
-  {
-    title: "Card name 1",
-    info: "Information Information Information",
-    index: 2,
-  },
-  {
-    title: "Card name 1",
-    info: "Information Information Information",
-    index: 3,
-  },
-  {
-    title: "Card name 1",
-    info: "Information Information Information",
-    index: 4,
-  },
-  {
-    title: "Card name 1",
-    info: "Information Information Information",
-    index: 5,
-  },
-];
+interface IExtendedProfileData extends IProfileData {
+  amount: number;
+}
 
 export const WalletTopUp: FC = () => {
   const { t } = useTranslation();
-  const [activeAccount, setActiveAccount] = useState(Accounts[0]);
+  const [activeAccount, setActiveAccount] = useState<ILegalCard | null>(null);
 
   const {
+    setValue,
+    watch,
     reset,
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<IProfileData>();
+  } = useForm<IExtendedProfileData>();
 
-  const { profileFilter: filter } = useAppSelector(
-    (state) => state.filterReducer,
-  );
+  const { profileFilter: filter } = useAppSelector((state) => state.filter);
 
-  const handleOnchange = (account: any) => {
-    setActiveAccount(account);
+  const {
+    data: legalsByType,
+    isLoading: isReadLegalsLoading,
+    error: readLegalsError,
+  } = useReadLegalsByTypeQuery(filter.id);
+
+  const [readOneLegal, { isLoading: isOneLegalLoading, error: oneLegalError }] =
+    useReadOneLegalMutation();
+
+  const changeActiveAccount = async (account: ILegalCardShort) => {
+    if (activeAccount && account.legal_id === activeAccount.legal_id) {
+      setActiveAccount(null);
+      reset();
+    } else {
+      readOneLegal(account.legal_id)
+        .unwrap()
+        .then((data) => {
+          setActiveAccount(data);
+          (Object.keys(data) as Array<keyof IProfileData>).forEach(
+            (value: keyof IProfileData) => {
+              setValue(value, data[value]);
+            },
+          );
+        })
+        .catch((error) => {
+          console.error("Ошибка при заполнении данных", error);
+        });
+    }
+  };
+
+  const [createLegal, { isLoading: isCreateLoading, error: createError }] =
+    useCreateLegalMutation();
+
+  const [editLegal, { isLoading: isEditLoading, error: editError }] =
+    useEditLegalMutation();
+
+  const [paymentDeposit, { isLoading: isTopupLoading, error: topupError }] =
+    usePaymentDepositMutation();
+
+  const onSubmit: SubmitHandler<IExtendedProfileData> = async (formData) => {
+    const dataWithLegalType = {
+      ...formData,
+      type_legal: filter.id,
+    };
+    createLegal(dataWithLegalType)
+      .unwrap()
+      .then((createRes) => {
+        const paymentReq = {
+          amount: formData.amount,
+          legal_id: createRes.legal_id,
+        };
+        paymentDeposit(paymentReq)
+          .unwrap()
+          .then(() => reset());
+      })
+      .catch((error) => {
+        console.error("Ошибка в createLegal", error);
+        if (error.status === 400 && error.data.value) {
+          const newFormData = {
+            ...dataWithLegalType,
+            legal_id: error.data.value,
+          };
+          editLegal(newFormData)
+            .unwrap()
+            .then((editRes) => {
+              const paymentReq = {
+                amount: Number(formData.amount),
+                legal_id: editRes.legal_id,
+              };
+              paymentDeposit(paymentReq)
+                .unwrap()
+                .then(() => reset())
+                .catch((error) =>
+                  console.error("Ошибка payment/deposit: ", error),
+                );
+            })
+            .catch((error) => {
+              console.error("Ошибка в editLegal", error);
+            });
+        }
+      });
   };
 
   return (
@@ -72,7 +133,11 @@ export const WalletTopUp: FC = () => {
           <p>{t("wallet.topup.title")}</p>
           <ArrowIcon4 />
         </div>
-        <BarProfileFilter resetValues={reset} page={pageFilter.walletTopUp} />
+        <BarProfileFilter
+          resetValues={reset}
+          page={pageFilter.walletTopUp}
+          resetActiveAccount={setActiveAccount}
+        />
         {filter.type === profileTypesName.selfEmployedAccounts ? (
           <TopUpCard />
         ) : (
@@ -82,15 +147,23 @@ export const WalletTopUp: FC = () => {
             </div>
             <div className={styles.content}>
               <PaymentData
-                account={Accounts[0]}
                 amountTitle={t("wallet.topup.amount")}
+                register={register}
+                errors={errors}
+                handleSubmit={handleSubmit}
+                onSubmit={onSubmit}
+                watch={watch}
               />
               <div>
                 <div className={styles.content__right}>
                   <ChooseProfile
-                    accounts={Accounts}
-                    onChange={handleOnchange}
+                    accounts={legalsByType}
+                    changeActiveAccount={changeActiveAccount}
                     activeAccount={activeAccount}
+                    isReadLegalsLoading={isReadLegalsLoading}
+                    isOneLegalLoading={isOneLegalLoading}
+                    readLegalsError={readLegalsError}
+                    oneLegalError={oneLegalError}
                   />
                   <Guide />
                 </div>
@@ -99,6 +172,7 @@ export const WalletTopUp: FC = () => {
           </div>
         )}
       </div>
+      {topupError ? <h1>ОШИБКА В ЗАПРОСЕ</h1> : ""}
     </div>
   );
 };

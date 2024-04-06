@@ -11,7 +11,7 @@ interface ZeroPlatformProps {
 
 export const ZeroPlatform: FC<ZeroPlatformProps> = ({ AddPlatformBtn }) => {
   const { t } = useTranslation();
-  const { statusFilter } = useAppSelector((state) => state.filterReducer);
+  const { statusFilter } = useAppSelector((state) => state.filter);
 
   return (
     <div className={styles.no__project}>
