@@ -22,7 +22,11 @@ import {
   useReadLegalsByTypeQuery,
   useReadOneLegalMutation,
 } from "@shared/store/services/legalService";
-import { usePaymentDepositMutation } from "@shared/store/services/walletService";
+import {
+  usePaymentDepositMutation,
+  usePaymentWithdrawalMutation,
+} from "@shared/store/services/walletService";
+import { paymentTypes } from "@shared/config/payment";
 
 interface IExtendedProfileData extends IProfileData {
   amount: number;
@@ -38,6 +42,7 @@ export const WalletWithdraw: FC = () => {
     reset,
     register,
     handleSubmit,
+    clearErrors,
     formState: { errors },
   } = useForm<IExtendedProfileData>();
 
@@ -72,6 +77,7 @@ export const WalletWithdraw: FC = () => {
               setValue(value, data[value]);
             },
           );
+          clearErrors();
         })
         .catch((error) => {
           console.error("Ошибка при заполнении данных", error);
@@ -85,8 +91,10 @@ export const WalletWithdraw: FC = () => {
   const [editLegal, { isLoading: isEditLoading, error: editError }] =
     useEditLegalMutation();
 
-  const [paymentDeposit, { isLoading: isTopupLoading, error: topupError }] =
-    usePaymentDepositMutation();
+  const [
+    paymentWithdrawal,
+    { isLoading: withdrowIsLoading, error: withdrowError },
+  ] = usePaymentWithdrawalMutation();
 
   const onSubmit: SubmitHandler<IExtendedProfileData> = async (formData) => {
     const dataWithLegalType = {
@@ -103,9 +111,12 @@ export const WalletWithdraw: FC = () => {
           amount: formData.amount,
           legal_id: createRes.legal_id,
         };
-        paymentDeposit(paymentReq)
+        paymentWithdrawal(paymentReq)
           .unwrap()
-          .then(() => reset());
+          .then(() => reset())
+          .catch((error) =>
+            console.error("Ошибка payment/paymentWithdrawal: ", error),
+          );
       })
       .catch((error) => {
         console.error("Ошибка в createLegal", error);
@@ -121,11 +132,11 @@ export const WalletWithdraw: FC = () => {
                 amount: Number(formData.amount),
                 legal_id: editRes.legal_id,
               };
-              paymentDeposit(paymentReq)
+              paymentWithdrawal(paymentReq)
                 .unwrap()
                 .then(() => reset())
                 .catch((error) =>
-                  console.error("Ошибка payment/deposit: ", error),
+                  console.error("Ошибка payment/paymentWithdrawal: ", error),
                 );
             })
             .catch((error) => {
@@ -137,6 +148,7 @@ export const WalletWithdraw: FC = () => {
 
   return (
     <div className="container sidebar">
+      {withdrowError ? <h1>ОШИБКА В ЗАПРОСЕ</h1> : ""}
       <div className={styles.wrapper}>
         <div className={styles.title}>
           <p>{t("wallet.withdraw.title")}</p>

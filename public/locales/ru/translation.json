@@ -913,7 +913,9 @@
       "offer": "Заявка на пополнение баланса",
       "amount": "Сумма пополнения",
       "required": "Введите сумму",
-      "placeholder": "Введите сумму"
+      "placeholder": "Введите сумму",
+      "payment_method": "Выберите способ оплаты",
+      "fetch_error": "Ошибка запроса"
     },
     "withdraw": {
       "title": "Вывод средств",
@@ -1037,7 +1039,7 @@
         }
       },
 
-      "add":{
+      "add": {
         "text": "Перетащите сюда файл",
         "span": "или",
         "choose": "Выберите файл"
@@ -1088,9 +1090,18 @@
   },
 
   "platform_types": {
-    "telegram": {"name": "Telegram", "default_value": "Https//t.me/channel_name..."},
-    "instagram": {"name": "Instagram", "default_value": "Https//instagram/channel_name..."},
-    "youtube": {"name": "Youtube", "default_value": "Https//youtube/channel_name..."}
+    "telegram": {
+      "name": "Telegram",
+      "default_value": "Https//t.me/channel_name..."
+    },
+    "instagram": {
+      "name": "Instagram",
+      "default_value": "Https//instagram/channel_name..."
+    },
+    "youtube": {
+      "name": "Youtube",
+      "default_value": "Https//youtube/channel_name..."
+    }
   },
 
   "add_platform_btn": {

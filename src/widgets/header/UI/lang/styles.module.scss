@@ -3,8 +3,9 @@
   font-style: normal;
   font-weight: 600;
   line-height: 12px;
+  position: relative;
 
-  button {
+  .lang__button {
     display: grid;
     align-content: center;
     justify-content: center;
@@ -14,34 +15,35 @@
     border: 1px solid #4772e6;
     color: var(--first-text);
     cursor: pointer;
-    position: relative;
     font-weight: inherit;
   }
-}
 
-.menu {
-  margin-top: 5px;
-  display: block;
-  position: absolute;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 1;
-  border-radius: 12px;
-  overflow: hidden;
+  .menu {
+    margin-top: 5px;
+    display: block;
+    position: absolute;
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    border-radius: 12px;
+    overflow: hidden;
 
-  li {
-    padding: 8px;
-    cursor: pointer;
-    display: grid;
-    grid-auto-flow: column;
-    align-items: center;
+    .menu__item {
+      padding: 8px;
+      cursor: pointer;
+      display: grid;
+      grid-auto-flow: column;
+      gap: 5px;
+      align-items: center;
 
-    &:hover {
-      background-color: #f0f0f0;
-      color: var(
-        --Gradient-1,
-        linear-gradient(93deg, #4772e6 2.37%, #8e54e9 52.62%)
-      );
+      &:hover {
+        background-color: #f0f0f0;
+        color: var(
+          --Gradient-1,
+          linear-gradient(93deg, #4772e6 2.37%, #8e54e9 52.62%)
+        );
+      }
     }
   }
 }

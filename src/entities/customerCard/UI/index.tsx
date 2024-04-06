@@ -13,7 +13,7 @@ export const CustomerCard: FC<CustomerCardProps> = ({ customer }) => {
       <div className={styles.customer__row}>
         <img
           className={styles.logo}
-          src={`images/customers/${customer.img}`}
+          src={`/images/customers/${customer.img}`}
           alt=""
         />
         <div className={styles.customer__column}>
