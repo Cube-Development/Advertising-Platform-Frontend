@@ -18,9 +18,7 @@ interface BarStatusFilterProps {
 
 export const BarStatusFilter: FC<BarStatusFilterProps> = ({ page }) => {
   const { t } = useTranslation();
-  const { statusFilter, typeFilter } = useAppSelector(
-    (state) => state.filterReducer,
-  );
+  const { statusFilter, typeFilter } = useAppSelector((state) => state.filter);
   const dispatch = useAppDispatch();
   const toggleStatus = (type: string) => {
     dispatch(filterSlice.actions.setStatusFilter(type));

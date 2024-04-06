@@ -3,21 +3,34 @@ import { filterSlice } from "@shared/store/reducers";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { subprofileTypes } from "@shared/config/profileFilter";
+import {
+  profileTypesNum,
+  subprofileFilter,
+  subprofileTypes,
+} from "@shared/config/profileFilter";
+
+interface ISubFilterOption {
+  type: subprofileFilter;
+  id: profileTypesNum;
+}
 
 interface BarSubrofileFilterProps {
   resetValues: () => void;
+  resetActiveAccount?: (account: null) => void;
 }
 
 export const BarSubrofileFilter: FC<BarSubrofileFilterProps> = ({
   resetValues,
+  resetActiveAccount,
 }) => {
   const { t } = useTranslation();
-  const { subprofileFilter } = useAppSelector((state) => state.filterReducer);
+  const { subprofileFilter } = useAppSelector((state) => state.filter);
   const dispatch = useAppDispatch();
-  const toggleProfile = (type: string) => {
+  const toggleProfile = (option: ISubFilterOption) => {
+    const newFilter = { type: option.type, id: option.id };
     resetValues();
-    dispatch(filterSlice.actions.setSubprofileFilter(type));
+    dispatch(filterSlice.actions.setSubprofileFilter(newFilter));
+    resetActiveAccount && resetActiveAccount(null);
   };
 
   return (
@@ -26,12 +39,12 @@ export const BarSubrofileFilter: FC<BarSubrofileFilterProps> = ({
         {subprofileTypes.map((subtype, index) => (
           <li
             className={styles.subtypes}
-            onClick={() => toggleProfile(subtype.type)}
+            onClick={() => toggleProfile(subtype)}
             key={index}
           >
             <div className={styles.outer}>
               <div
-                className={`${styles.inner} ${subprofileFilter === subtype.type ? styles.active : ""}`}
+                className={`${styles.inner} ${subprofileFilter.type === subtype.type ? styles.active : ""}`}
               ></div>
             </div>
             <p>{t(subtype.name)}</p>

@@ -1,6 +1,7 @@
 .wrapper {
   display: grid;
-  grid-auto-flow: column;
+  grid-template: 1fr / 1fr 0.1fr;
+  column-gap: 10px;
   justify-content: space-between;
   padding: 30px;
   align-items: center;
@@ -20,12 +21,16 @@
   row-gap: 10px;
   align-items: center;
 
-  p {
+  .card_name {
     color: var(--Personal-color-black);
     font-size: 16px;
     font-style: normal;
     font-weight: 600;
     line-height: 0.75;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: start;
   }
 
   span {

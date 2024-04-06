@@ -398,9 +398,7 @@ const sexType = {
 };
 
 export const OrdersPage: FC = () => {
-  const { typeFilter, statusFilter } = useAppSelector(
-    (state) => state.filterReducer,
-  );
+  const { typeFilter, statusFilter } = useAppSelector((state) => state.filter);
   const page = pageFilter.order;
 
   return (

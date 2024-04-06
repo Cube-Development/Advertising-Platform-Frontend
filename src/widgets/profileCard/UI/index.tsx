@@ -16,8 +16,8 @@ import { useAppSelector } from "@shared/store";
 import { subprofileFilter } from "@shared/config/profileFilter";
 import { BarSubrofileFilter } from "@features/barSubprofileFilter";
 import { pageFilter } from "@shared/config/pageFilter";
-import { legalAPI } from "@shared/store/services/legalService";
 import { profileTypesName } from "@shared/config/profileFilter";
+import { useCreateLegalMutation } from "@shared/store/services/legalService";
 
 export const ProfileCard: FC = () => {
   const { t } = useTranslation();
@@ -30,7 +30,7 @@ export const ProfileCard: FC = () => {
   } = useForm<IProfileData>();
 
   const { profileFilter: filter, subprofileFilter: subprofile } =
-    useAppSelector((state) => state.filterReducer);
+    useAppSelector((state) => state.filter);
 
   const typeLegal =
     filter.type === profileTypesName.entities
@@ -38,27 +38,26 @@ export const ProfileCard: FC = () => {
       : filter.type === profileTypesName.individuals
         ? IndividualData
         : filter.type === profileTypesName.selfEmployedAccounts &&
-            subprofile === subprofileFilter.account
+            subprofile.type === subprofileFilter.account
           ? SelfEmployedData
           : SelfEmployedCardData;
 
   const [createLegal, { isLoading, error, isError, isSuccess }] =
-    legalAPI.useCreateLegalMutation();
+    useCreateLegalMutation();
 
   const onSubmit: SubmitHandler<IProfileData> = async (data) => {
     const dataWithLegalType = {
       ...data,
       type_legal: filter.id,
     };
-    // кастомный обработчик ошибок сделал если че переделаем
-    await createLegal(dataWithLegalType).then((data: any) => {
-      if (data.error) {
-        alert("ПРОИЗОШЛА ОШИБКА ПРИ ЗАПОЛНЕНИИ ДАННЫХ");
-      } else {
-        console.log("Данные успешно добавлены.");
-        reset();
-      }
-    });
+    createLegal(dataWithLegalType)
+      .unwrap()
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => {
+        console.error("Ошибка при заполнении данных", error);
+      });
   };
 
   return (

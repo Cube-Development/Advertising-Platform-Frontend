@@ -1,9 +1,11 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
-import { SortingFilter } from "@features/sortingFilter";
 import { BarHistory } from "@features/barHistory";
 import { HistoryCard } from "@features/historyCard";
+import { filterData, sortingTypes } from "@shared/config/platformData";
+import { SelectOptions } from "@features/selectOptions";
+import { useForm } from "react-hook-form";
 
 const History = [
   {
@@ -45,6 +47,14 @@ const History = [
 
 export const WalletHistory: FC = () => {
   const { t } = useTranslation();
+
+  const {
+    reset,
+    setValue,
+    formState: { errors },
+    getValues,
+  } = useForm<any>();
+
   return (
     <div className="container sidebar">
       <div className={styles.wrapper}>
@@ -52,7 +62,14 @@ export const WalletHistory: FC = () => {
           <p>{t("wallet_history.wallet_history")}</p>
         </div>
         <div className={styles.filter}>
-          <SortingFilter />
+          <SelectOptions
+            onChange={setValue}
+            options={sortingTypes}
+            textData="sorting.title"
+            single={true}
+            type={filterData.sort}
+            isFilter={true}
+          />
         </div>
         <BarHistory />
         <div className={styles.cards}>

@@ -626,27 +626,33 @@
     "paste_link": "Ссылка на площадку",
     "category": {
       "title": "Выберите категорию площадки",
-      "text": ""
+      "default_value": "Не выбрано",
+      "text": "аа"
     },
     "languages": {
       "title": "Выберите язык",
-      "text": ""
+      "default_value": "Не выбрано",
+      "text": "аа"
     },
     "region": {
       "title": "Выберите регион",
-      "text": ""
+      "default_value": "Не выбрано",
+      "text": "аа"
     },
     "sex": {
       "title": "Соотношение полов вашей аудитории, %",
-      "text": ""
+      "default_value": "Не выбрано",
+      "text": "аа"
     },
     "age": {
       "title": "Выберите возраст вашей аудитории",
-      "text": ""
+      "default_value": "Не выбрано",
+      "text": "аа"
     },
     "description": {
       "title": "Описание вашей площадки",
-      "text": ""
+      "default_value": "Не выбрано",
+      "text": "аа"
     },
     "price": {
       "title": "Выбери формат размещения и  укажите цену",
@@ -658,7 +664,6 @@
       "title": "Количество символов в посту",
       "text": ""
     },
-    "default_value": "Не выбрано",
     "choosed": "Выбрано",
     "from": "из",
     "default_input": "Опишите особенности, которые будут выделять ваш канал среди других. ",
@@ -681,8 +686,8 @@
       "individual": "ИП"
     },
     "subtypes": {
-      "account": "Расчетный счет",
-      "card": "Транзитный счёт (Humo|UzCard)"
+      "account": "Расчетный счёт",
+      "card": "Транзитный счёт"
     },
     "basic_info": {
       "basic_info": "Общие данные",
@@ -850,27 +855,39 @@
 
     "category": {
       "title": "Категория бизнеса:",
-      "default_value": "sample"
+      "text": "",
+      "default_value": "Не выбрано"
     },
     "age": {
       "title": "Возраст:",
-      "default_value": "sample"
+      "text": "",
+      "default_value": "Не выбрано"
     },
     "sex": {
       "title": "Пол:",
-      "default_value": "sample"
+      "text": "",
+      "default_value": "Не выбрано"
     },
     "region": {
       "title": "Регион:",
-      "default_value": "sample"
+      "text": "",
+      "default_value": "Не выбрано"
     },
     "languages": {
       "title": "Язык:",
-      "default_value": "sample"
+      "text": "",
+      "default_value": "Не выбрано"
     },
     "recomendation": "Рекомендованные ЦА",
 
-    "generation_btn": "Сгенерировать"
+    "generation_btn": "Сгенерировать",
+
+    "current_cart": {
+      "channels": "Каналов",
+      "views": "Охват",
+      "cost": "Сумма",
+      "cart": "В корзину"
+    }
   },
 
   "cart": {
@@ -894,12 +911,16 @@
     "topup": {
       "title": "Пополнение баланса",
       "offer": "Заявка на пополнение баланса",
-      "amount": "Сумма пополнения"
+      "amount": "Сумма пополнения",
+      "required": "Введите сумму",
+      "placeholder": "Введите сумму"
     },
     "withdraw": {
       "title": "Вывод средств",
       "offer": "Заявка на вывод средств",
-      "amount": "Сумма вывода"
+      "amount": "Сумма вывода",
+      "required": "Введите сумму",
+      "placeholder": "Введите сумму"
     },
     "types": {
       "selfemployed": "Физ. лицо",
@@ -933,9 +954,11 @@
       "text2": "ознакомлен и принимаю их."
     },
 
-    "use_data": "Вы хотите использовать сохраненные данные?",
+    "use_data": "Ваши сохраненные данные:",
     "save_data": "Сохранить данные для дальнейшего использования",
-    "finally": "Итоговая сумма"
+    "finally": "Итоговая сумма",
+    "inn": "ИНН:",
+    "pnfl": "ПИНФЛ:"
   },
 
   "wallet_history": {
@@ -983,6 +1006,41 @@
           "default_value": "sample link"
         },
         "add_button": "Добавить кнопку"
+      },
+
+      "add_files": {
+        "add_files": "Загрузка файлов",
+        "types": {
+          "file": "Загрузить файл",
+          "mediafile": "Загрузить медиафайл"
+        },
+        "mediafile": {
+          "formats": {
+            "title": "Поддерживаемые форматы:",
+            "text": "JPG/JPEG, PNG,MP4, MOV, AVI, WMV, WEBM"
+          },
+          "size": {
+            "title": "Максимальный размер:",
+            "text": "50 мб"
+          }
+        },
+        "file": {
+          "file": "Вы можете загрузить лишь один файл, например техническое задание для блогера, если ваш файл больше разрешенного размера, вы можете загрузить его на гугл или яндекс диск и передать ссылку в комментарии для блогера",
+          "formats": {
+            "title": "Поддерживаемые форматы:",
+            "text": "DOC, DOCX, ZIP, PDF, XLS, XLSX, TXT"
+          },
+          "size": {
+            "title": "Максимальный размер:",
+            "text": "50 мб"
+          }
+        }
+      },
+
+      "add":{
+        "text": "Перетащите сюда файл",
+        "span": "или",
+        "choose": "Выберите файл"
       }
     },
 
@@ -1022,15 +1080,18 @@
   },
 
   "sorting": {
-    "title": "Сортировака",
+    "title": "Сортировка",
     "date": "По дате",
     "subscribers": "По подписчикам"
   },
 
+  "platform_types": {
+    "telegram": {"name": "Telegram", "default_value": "Https//t.me/channel_name..."},
+    "instagram": {"name": "Instagram", "default_value": "Https//instagram/channel_name..."},
+    "youtube": {"name": "Youtube", "default_value": "Https//youtube/channel_name..."}
+  },
+
   "add_platform_btn": {
-    "telegram": "Telegram",
-    "instagram": "Instagram",
-    "youtube": "Youtube",
     "check": "Проверить",
     "save": "Сохранить",
     "create": "Отправить заявку",
@@ -1076,5 +1137,11 @@
   "topup_btn": {
     "replenish": "Пополнить",
     "send": "Отправить"
+  },
+
+  "amount": {
+    "error": {
+      "required": "Введите сумму"
+    }
   }
 }

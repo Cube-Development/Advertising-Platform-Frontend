@@ -9,7 +9,7 @@ import { paths } from "@shared/routing";
 import { useTranslation } from "react-i18next";
 
 export const SideBar: FC = () => {
-  const { isAuth, role } = useAppSelector((state) => state.userReducer);
+  const { isAuth, role } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const toggleRole = (role: roles) => {

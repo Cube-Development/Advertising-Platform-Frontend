@@ -39,10 +39,12 @@ export const subprofileTypes = [
   {
     name: "add_profile.subtypes.account",
     type: subprofileFilter.account,
+    id: profileTypesNum.selfEmployedAccounts,
   },
   {
     name: "add_profile.subtypes.card",
     type: subprofileFilter.card,
+    id: profileTypesNum.selfEmployedTransits,
   },
 ];
 

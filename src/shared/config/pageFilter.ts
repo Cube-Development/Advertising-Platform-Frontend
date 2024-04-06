@@ -7,4 +7,5 @@ export enum pageFilter {
   walletTopUp = "walletTopUp",
   walletWithdraw = "walletWithdraw",
   createOrderFiles = "createOrderFiles",
+  chat = "chat",
 }

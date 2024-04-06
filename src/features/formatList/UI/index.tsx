@@ -3,6 +3,7 @@ import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { platformFormats } from "@shared/config/formatTypes";
+import { ArrowIcon } from "@shared/assets";
 
 export const FormatList: FC<IFormatListProps> = ({
   selectedFormat,
@@ -20,11 +21,11 @@ export const FormatList: FC<IFormatListProps> = ({
   const handleOptionChange = (
     event: React.MouseEvent<HTMLLIElement | EventTarget>,
   ) => {
+    event.stopPropagation();
     const selectedValue: IFormat = JSON.parse(
       (event.target as HTMLLIElement).getAttribute("data-value")!,
     );
 
-    console.log(selectedValue);
     changeFormat(selectedValue);
     closeMenu();
   };
@@ -35,7 +36,8 @@ export const FormatList: FC<IFormatListProps> = ({
     }
   };
 
-  const handleButtonClick = () => {
+  const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     setMenuOpen(!isMenuOpen);
   };
 
@@ -48,27 +50,33 @@ export const FormatList: FC<IFormatListProps> = ({
 
   return (
     <div className={styles.wrapper} ref={menuRef}>
-      <div>
-        <button type="button" onClick={handleButtonClick}>
-          {platformFormats[selectedFormat.format]}
-        </button>
+      <button type="button" onClick={(e) => handleButtonClick(e)}>
+        <div className={isMenuOpen ? "rotate" : "rotate__down"}>
+          <ArrowIcon
+            className={isMenuOpen ? "active__icon" : "default__icon"}
+          />
+        </div>
+        <p>{platformFormats[selectedFormat.format]}</p>
+      </button>
 
-        {isMenuOpen && (
-          <div className={styles.menu}>
-            <ul>
-              {formats.map((format) => (
-                <li
-                  key={format.format}
-                  onClick={handleOptionChange}
-                  data-value={JSON.stringify(format)}
-                >
-                  {platformFormats[format.format]}
-                </li>
-              ))}
-            </ul>
-          </div>
-        )}
-      </div>
+      {isMenuOpen && (
+        <div className={`${styles.menu} show`}>
+          <ul>
+            {formats.map((format) => (
+              <li
+                key={format.format}
+                onClick={handleOptionChange}
+                data-value={JSON.stringify(format)}
+                className={
+                  selectedFormat.format === format.format ? styles.active : ""
+                }
+              >
+                {platformFormats[format.format]}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
     </div>
   );
 };

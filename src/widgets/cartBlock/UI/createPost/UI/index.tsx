@@ -3,9 +3,31 @@ import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
 import { ProtectIcon3 } from "@shared/assets";
 import { CreatePosts } from "@features/createPost";
+import { IPlatform } from "@shared/types/platform";
+import { CART } from "@shared/config/common";
 
-export const CreatePost: FC = () => {
+interface CreatePostProps {
+  cards: IPlatform[];
+}
+
+export const CreatePost: FC<CreatePostProps> = ({ cards }) => {
   const { t } = useTranslation();
+
+  let { views, cost, subs } = cards.reduce(
+    (totals, channel) => {
+      const selected_format = channel.format.find(
+        (format) => format.format === channel.selected_format,
+      )!;
+      totals.views += selected_format.views;
+      totals.cost += selected_format.price;
+      totals.subs += channel.subscribers;
+      return totals;
+    },
+    { views: 0, cost: 0, subs: 0 },
+  );
+
+  cost = Math.round(cost * (1 + CART.commission / 100));
+
   return (
     <div>
       <div className={styles.wrapper}>
@@ -19,20 +41,22 @@ export const CreatePost: FC = () => {
         <div className={styles.data}>
           <div className={styles.data__row}>
             <p>{t("cart.create_post.subscribers")}</p>
-            <span>2 083 015</span>
+            <span>{subs.toLocaleString()}</span>
           </div>
           <div className={styles.data__row}>
             <p>{t("cart.create_post.views")}</p>
-            <span>218 000</span>
+            <span>{views.toLocaleString()}</span>
           </div>
           <div className={styles.data__row}>
             <p>{t("cart.create_post.commission")}</p>
-            <span>3%</span>
+            <span>{CART.commission}%</span>
           </div>
         </div>
         <div className={styles.finnaly}>
           <p>{t("cart.create_post.commission")}:</p>
-          <span>6 870 000 {t("symbol")}</span>
+          <span>
+            {cost.toLocaleString()} {t("symbol")}
+          </span>
         </div>
         <div className={styles.button}>
           <CreatePosts />

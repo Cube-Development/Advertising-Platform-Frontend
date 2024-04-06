@@ -1,4 +1,5 @@
 import { IProfileData } from "./profile";
+import { ISelectOption } from "./translate";
 
 export interface ILogin {
   (vision: boolean, data?: { name: string; email: string }): void;
@@ -96,15 +97,6 @@ export interface IBloggerPlatformCard {
   status: number;
 }
 
-// export interface IBloggerModPlatformCard {
-//   id: number
-//   img: string
-//   name: string
-//   date: string
-//   category: string
-//   status: number
-// }
-
 export interface IBloggerOfferCard {
   id: number;
   img: string;
@@ -121,15 +113,17 @@ export interface IBloggerOfferCard {
 }
 
 export interface IOption {
-  label: string;
-  value: string;
+  id: number;
+  name: string;
+  img?: () => JSX.Element;
+  type?: string;
 }
 
 export interface IOptions {
   category: IOption[];
   languages: IOption[];
   region: IOption[];
-  sex: IOption[];
+  sex?: IOption[];
   age: IOption[];
 }
 
@@ -165,23 +159,8 @@ export interface IParameterData {
   title: string;
   default_value?: string;
   description: string;
-  // error: {
-  //   required?: string;
-  //   date?: string;
-  //   PNFL?: string;
-  //   INN?: string;
-  //   mfo?: string;
-  //   account?: string;
-  //   card?: string;
-  //   contact?: string;
-  //   email?: string;
-  // };
 }
 
-export interface IFilerData {
-  name: string;
-  img?: JSX.Element;
-  type: string;
-  platform?: number;
-  sort?: number;
+export interface IFilter extends ISelectOption {
+  types: IOption[];
 }

@@ -2,7 +2,6 @@
   display: grid;
   grid-auto-flow: row;
   align-items: center;
-  justify-content: space-between;
 
   hr {
     height: 2px;
@@ -44,9 +43,9 @@
 
 .accomms {
   display: grid;
-  grid-auto-flow: column;
-  justify-content: space-between;
+  grid-template: 1fr / 1fr 1fr 1fr;
   column-gap: 40px;
+  // padding: 0 50px;
 }
 
 .info {

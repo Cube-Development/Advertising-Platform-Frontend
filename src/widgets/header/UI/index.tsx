@@ -13,7 +13,7 @@ import { userSlice } from "@shared/store/reducers";
 import { roles } from "@shared/config/roles";
 
 export const Header: FC = () => {
-  const { isAuth, role } = useAppSelector((state) => state.userReducer);
+  const { isAuth, role } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const toggleLogout = () => {
     dispatch(userSlice.actions.logout());

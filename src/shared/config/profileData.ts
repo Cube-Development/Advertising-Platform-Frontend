@@ -56,9 +56,9 @@ export const entity = {
     },
     {
       label: "add_profile.basic_info.address",
-      type: profileData.registration_date,
+      type: profileData.address,
       validate: {
-        required: "add_profile.basic_info.registration_date.error.required",
+        required: "add_profile.basic_info.address.error.required",
       },
     },
     {
@@ -83,7 +83,7 @@ export const individual = {
       label: "add_profile.basic_info.address",
       type: profileData.address,
       validate: {
-        required: "add_profile.basic_info.registration_date.error.required",
+        required: "add_profile.basic_info.address.error.required",
       },
     },
     {

@@ -1,6 +1,6 @@
 .wrapper {
   display: grid;
-  grid-auto-flow: column;
+  grid-template: 1fr / 1fr 1fr 1fr 1fr 1.5fr;
   align-items: center;
   border-radius: 12px;
   border: 1px solid var(--Containers, #8c8c8c);

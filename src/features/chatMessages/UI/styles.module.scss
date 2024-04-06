@@ -3,45 +3,45 @@
   grid-auto-flow: row;
 }
 
-.info {
-  display: grid;
-  grid-auto-flow: column;
-  column-gap: 10px;
-  justify-content: start;
-  padding: 10px;
+// .info {
+//   display: grid;
+//   grid-auto-flow: column;
+//   column-gap: 10px;
+//   justify-content: start;
+//   padding: 10px;
 
-  .logo {
-    img {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      border: 0.5px solid #4772e6;
-    }
-  }
+//   .logo {
+//     img {
+//       width: 40px;
+//       height: 40px;
+//       border-radius: 50%;
+//       border: 0.5px solid #4772e6;
+//     }
+//   }
 
-  .description {
-    display: grid;
-    grid-auto-flow: row;
-    row-gap: 10px;
+//   .description {
+//     display: grid;
+//     grid-auto-flow: row;
+//     row-gap: 10px;
 
-    p {
-      color: var(--Sub-text);
-      font-size: 12px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: 0.75;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-    }
-  }
-}
+//     p {
+//       color: var(--Sub-text);
+//       font-size: 12px;
+//       font-style: normal;
+//       font-weight: 600;
+//       line-height: 0.75;
+//       overflow: hidden;
+//       text-overflow: ellipsis;
+//       white-space: nowrap;
+//     }
+//   }
+// }
 
 .all__messages {
   display: grid;
   grid-auto-flow: row;
   row-gap: 15px;
-  height: 350px;
+  height: 460px;
   overflow-y: scroll;
 
   &::-webkit-scrollbar {
@@ -80,6 +80,7 @@
   font-weight: 500;
   max-width: 80%;
   row-gap: 5px;
+  overflow-wrap: anywhere;
 
   span {
     text-align: end;

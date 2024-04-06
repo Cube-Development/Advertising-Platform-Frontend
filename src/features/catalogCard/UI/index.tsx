@@ -1,7 +1,10 @@
 import { FC, ReactElement, useState } from "react";
 import styles from "./styles.module.scss";
 import {
+  IAddCart,
   IAddToBasketProps,
+  ICatalogCard,
+  IChangeCards,
   IFormat,
   IFormatListProps,
   IPlatform,
@@ -14,33 +17,53 @@ import {
   WomanIcon,
 } from "@shared/assets";
 import { useTranslation } from "react-i18next";
+import { platformToIcon } from "@shared/config/platformData";
 
-interface CatalogCardProps {
+interface CatalogCardProps extends IChangeCards, ICatalogCard {
   card: IPlatform;
-  AddToBasketBtn: FC<IAddToBasketProps>;
-  FormatList: FC<IFormatListProps>;
+  // onChangeCard: (channel: IAddCart) => void;
+  // AddToBasketBtn: FC<IAddToBasketProps>;
+  // FormatList: FC<IFormatListProps>;
+  // isCart?: boolean;
 }
 
 export const CatalogCard: FC<CatalogCardProps> = ({
   card,
   AddToBasketBtn,
   FormatList,
+  onChangeCard,
+  isCart,
 }) => {
   const { t } = useTranslation();
-  const [selectedFormat, setSelectedFormat] = useState<IFormat>(card.format[0]);
+  const startFormat: IFormat = card.selected_format
+    ? card.format.find((format) => format.format === card.selected_format)!
+    : card.format[0];
+  const [selectedFormat, setSelectedFormat] = useState<IFormat>(startFormat);
 
   const handleChangeFormat = (selectedValue: IFormat) => {
     setSelectedFormat(selectedValue);
   };
 
+  const handleChangeCard = () => {
+    onChangeCard({
+      channel: {
+        channel_id: card.id,
+        format: selectedFormat.format,
+      },
+      format: selectedFormat,
+    });
+  };
+
   return (
     <div className={styles.channel}>
-      <div className={styles.channel_top}>
+      <div className={styles.channel__top}>
         <div className={styles.channel__logo}>
-          <div className={styles.logo}>
+          <div>
             <img src={card.avatar} alt="" />
           </div>
-          <RatingIcon />
+          <div className={styles.rate}>
+            <RatingIcon />
+          </div>
         </div>
 
         <div className={styles.channel__description}>
@@ -71,7 +94,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
               <ManIcon />
             </div>
             <div
-              className={styles.colorline}
+              className="colorline"
               style={{ "--male": `${card.male}%` } as React.CSSProperties}
               data-male={`${card.male}%`}
               data-female={`${card.female}%`}
@@ -99,19 +122,26 @@ export const CatalogCard: FC<CatalogCardProps> = ({
             className={styles.circle}
             style={{ "--percentage": `${89}%` } as React.CSSProperties}
           >
-            89 %
+            <span>89 %</span>
+          </div>
+          <div className={styles.platform__icon}>
+            {platformToIcon.hasOwnProperty(card.platform)
+              ? platformToIcon[card.platform]()
+              : null}
           </div>
         </div>
       </div>
 
-      <div className={styles.channel_bottom}>
-        <AddToBasketBtn
-          selectedFormat={selectedFormat}
-          FormatList={FormatList}
-          formats={card.format}
-          changeFormat={handleChangeFormat}
-        />
-      </div>
+      {/* <div className={styles.channel_bottom}> */}
+      <AddToBasketBtn
+        formats={card.format}
+        selectedFormat={selectedFormat}
+        FormatList={FormatList}
+        changeFormat={handleChangeFormat}
+        сhangeCard={handleChangeCard}
+        isCart={isCart}
+      />
+      {/* </div> */}
     </div>
   );
 };

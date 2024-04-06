@@ -49,9 +49,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
     setSubcardOpen(!isSubcardOpen);
   };
 
-  const { typeFilter, statusFilter } = useAppSelector(
-    (state) => state.filterReducer,
-  );
+  const { typeFilter, statusFilter } = useAppSelector((state) => state.filter);
 
   return (
     <div className={styles.card}>
