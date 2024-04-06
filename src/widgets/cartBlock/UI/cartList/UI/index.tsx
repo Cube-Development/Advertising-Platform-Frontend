@@ -3,11 +3,11 @@ import { AddToBasket } from "@features/addToBasket";
 import { CatalogCard } from "@features/catalogCard";
 import { FormatList } from "@features/formatList";
 import { SaveCart } from "@features/saveCart";
-import { CartIcon } from "@shared/assets";
 import { ICatalogCards } from "@shared/types/platform";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { CartIcon } from "@shared/assets";
 
 export const CartList: FC<ICatalogCards> = ({ cards, onChangeCard }) => {
   const { t } = useTranslation();

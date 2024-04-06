@@ -12,6 +12,7 @@ import { useAppSelector } from "@shared/store";
 import { chatFilter } from "@shared/config/chatFilter";
 
 const AdministrationChat = {
+  id: "999",
   name: "Administration",
   avatar:
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
@@ -76,6 +77,7 @@ const AdministrationChat = {
 
 const AllChats = [
   {
+    id: "1",
     campaign: "Cubinc",
     name: "UzNews",
     avatar:
@@ -136,6 +138,7 @@ const AllChats = [
     ],
   },
   {
+    id: "2",
     campaign: "Cubinc111",
     name: "UzNews33",
     avatar:
@@ -196,6 +199,7 @@ const AllChats = [
     ],
   },
   {
+    id: "3",
     campaign: "Cubinc244r",
     name: "UzNews24erwe",
     avatar:
@@ -256,6 +260,7 @@ const AllChats = [
     ],
   },
   {
+    id: "4",
     campaign: "Cubinc4242",
     name: "UzNews24242",
     avatar:
@@ -316,6 +321,7 @@ const AllChats = [
     ],
   },
   {
+    id: "5",
     campaign: "Cubinc333",
     name: "UzNews55",
     avatar:
@@ -376,6 +382,7 @@ const AllChats = [
     ],
   },
   {
+    id: "6",
     campaign: "Cubinc4",
     name: "UzNews3",
     avatar:
@@ -436,6 +443,7 @@ const AllChats = [
     ],
   },
   {
+    id: "7",
     campaign: "Cubinc2",
     name: "UzNews2",
     avatar:
@@ -499,6 +507,7 @@ const AllChats = [
 
 const ManagerChats = [
   {
+    id: "100",
     campaign: "Cubinc111",
     name: "UzNews33",
     avatar:
@@ -560,6 +569,7 @@ const ManagerChats = [
   },
 
   {
+    id: "101",
     campaign: "Cubinc4242",
     name: "UzNews24242",
     avatar:
@@ -620,6 +630,7 @@ const ManagerChats = [
     ],
   },
   {
+    id: "102",
     campaign: "Cubinc333",
     name: "UzNews55",
     avatar:

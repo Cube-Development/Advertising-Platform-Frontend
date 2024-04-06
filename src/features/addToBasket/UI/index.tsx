@@ -1,4 +1,4 @@
-import { BasketIcon } from "@shared/assets";
+import { CartIcon, CartMinusIcon, CartPlusIcon } from "@shared/assets";
 import { IAddToBasketProps, IFormat } from "@shared/types/platform";
 import { MyButton } from "@shared/ui";
 import { FC, useState } from "react";
@@ -28,7 +28,7 @@ export const AddToBasket: FC<IAddToBasketProps> = ({
 
         <div className={styles.price}>
           {selectedFormat.price.toLocaleString()} {t("symbol")}
-          <BasketIcon />
+          {isCart ? <CartMinusIcon /> : <CartPlusIcon />}
         </div>
       </div>
     </MyButton>

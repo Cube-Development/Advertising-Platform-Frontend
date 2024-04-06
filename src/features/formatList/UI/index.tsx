@@ -51,12 +51,16 @@ export const FormatList: FC<IFormatListProps> = ({
   return (
     <div className={styles.wrapper} ref={menuRef}>
       <button type="button" onClick={(e) => handleButtonClick(e)}>
-        <ArrowIcon color="blue" />
+        <div className={isMenuOpen ? "rotate" : "rotate__down"}>
+          <ArrowIcon
+            className={isMenuOpen ? "active__icon" : "default__icon"}
+          />
+        </div>
         <p>{platformFormats[selectedFormat.format]}</p>
       </button>
 
       {isMenuOpen && (
-        <div className={styles.menu}>
+        <div className={`${styles.menu} show`}>
           <ul>
             {formats.map((format) => (
               <li

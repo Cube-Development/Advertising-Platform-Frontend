@@ -1,7 +1,11 @@
 import * as React from "react";
 import { SVGProps } from "react";
 
-export const ArrowIcon = (props: SVGProps<SVGSVGElement>) => (
+interface ArrowIconProps extends SVGProps<SVGSVGElement> {
+  color?: string;
+}
+
+export const ArrowIcon = ({ ...props }: ArrowIconProps) => (
   <svg
     {...props}
     width="10"
@@ -12,7 +16,7 @@ export const ArrowIcon = (props: SVGProps<SVGSVGElement>) => (
   >
     <path
       d="M9.59746 1.76966C9.81999 1.53857 9.81365 1.17102 9.58329 0.947746C9.35296 0.724507 8.98546 0.729612 8.76142 0.959163L5.32883 4.47625C5.14853 4.66099 4.85147 4.66099 4.67117 4.47625L1.23858 0.959164C1.01454 0.729613 0.647039 0.724507 0.416713 0.947746C0.186351 1.17102 0.180012 1.53857 0.402538 1.76966L4.60058 6.12916C4.81869 6.35567 5.18131 6.35567 5.39942 6.12916L9.59746 1.76966Z"
-      fill="black"
+      fill="current"
     />
   </svg>
 );

@@ -157,6 +157,43 @@ body {
   }
 }
 
+.rotate {
+  fill: var(--Personal-colors-main);
+  transform: rotate(180deg);
+  transition: transform 0.5s ease;
+}
+
+.rotate__down {
+  transform: rotate(0deg);
+  transition: transform 0.5s ease;
+}
+
+.active__icon {
+  fill: var(--Personal-colors-main);
+}
+
+.non__active__icon {
+  fill: var(--choosen-text);
+}
+
+.default__icon {
+  fill: var(--Personal-colors-black);
+}
+
+.show {
+  opacity: 0;
+  animation: fadeIn 0.5s ease forwards;
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+}
+
 // .scroll {
 //   overflow-y: scroll;
 

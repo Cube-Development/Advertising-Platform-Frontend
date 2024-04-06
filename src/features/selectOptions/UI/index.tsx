@@ -11,6 +11,7 @@ import { ArrowIcon, InfoIcon } from "@shared/assets";
 import { UseFormSetValue } from "react-hook-form";
 import { SELECTOPTIONS } from "@shared/config/common";
 import { ISelectOption } from "@shared/types/translate";
+import { color } from "framer-motion";
 
 interface SelectOptionsProps {
   textData: string;
@@ -152,12 +153,21 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
                 )}
               </span>
             )}
-            <ArrowIcon />
+            <div className={isMenuOpen ? "rotate" : "rotate__down"}>
+              <ArrowIcon
+                className={
+                  (isMenuOpen || selectedOption || selectedOptions.length) &&
+                  !isFilter
+                    ? "active__icon"
+                    : "non__active__icon"
+                }
+              />
+            </div>
           </div>
         </button>
 
         {isMenuOpen && (
-          <div className={styles.options}>
+          <div className={`${styles.options} show`}>
             <ul
               className={
                 allOptions.length > SELECTOPTIONS.scrollAddLen
