@@ -92,10 +92,10 @@ export const PostPlatform: FC<PostPlatformProps> = ({
           ? platformToIcon[card.platform]()
           : null}
       </div>
-      <div>
+      <div className={styles.type}>
         <CustomCalendar onChange={handleChangeDate} />
       </div>
-      <div>
+      <div className={styles.type}>
         <TimeList onChange={handleChangeTime} />
       </div>
       <div className={styles.data}>

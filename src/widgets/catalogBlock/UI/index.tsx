@@ -365,8 +365,8 @@ export const CatalogBlock: FC = () => {
 
           ((newCards = cards.map((item) => {
             if (item.id === cart.channel.channel_id) {
-              item.inCart = undefined;
-              item.selected_format = undefined;
+              delete item.inCart;
+              delete item.selected_format;
             }
             return item;
           })),

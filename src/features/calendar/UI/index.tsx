@@ -160,7 +160,9 @@ export const CustomCalendar: FC<DateListProps> = ({ onChange }) => {
 
               <div className={styles.bottom}>
                 <MyButton className={styles.button} onClick={handleChangeRange}>
-                  <p>{t("calendar.range")}</p>
+                  <p>
+                    {isSelectRange ? t("calendar.date") : t("calendar.range")}
+                  </p>
                 </MyButton>
                 <MyButton className={styles.button} onClick={continueAction}>
                   <p>{t("calendar.confirm")}</p>
