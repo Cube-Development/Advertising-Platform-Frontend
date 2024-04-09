@@ -1,5 +1,4 @@
 import { platformFilter } from "@shared/config/postFilter";
-import exp from "constants";
 import { FC } from "react";
 
 export interface IPlatform {
@@ -15,6 +14,7 @@ export interface IPlatform {
   female: number;
   platform: number;
   selected_format?: number;
+  inCart?: boolean;
 }
 
 export interface IFormat {
@@ -53,6 +53,7 @@ interface Components {
   FormatList: FC<IFormatListProps>;
   сhangeCard?: () => void;
   isCart?: boolean;
+  inCart?: boolean;
 }
 
 export interface IAddToBasketProps extends IFormatListProps, Components {

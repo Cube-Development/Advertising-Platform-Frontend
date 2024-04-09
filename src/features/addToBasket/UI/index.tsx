@@ -12,11 +12,12 @@ export const AddToBasket: FC<IAddToBasketProps> = ({
   changeFormat,
   сhangeCard,
   isCart,
+  inCart,
 }) => {
   const { t } = useTranslation();
   return (
     <MyButton
-      className={`${styles.button} ${isCart ? styles.cart : ""}`}
+      className={`${styles.button} ${isCart ? styles.cart : ""} ${inCart ? styles.catalog__cart : ""}`}
       onClick={сhangeCard}
     >
       <div className={styles.wrapper}>
@@ -28,7 +29,7 @@ export const AddToBasket: FC<IAddToBasketProps> = ({
 
         <div className={styles.price}>
           {selectedFormat.price.toLocaleString()} {t("symbol")}
-          {isCart ? <CartMinusIcon /> : <CartPlusIcon />}
+          {isCart || inCart ? <CartMinusIcon /> : <CartPlusIcon />}
         </div>
       </div>
     </MyButton>

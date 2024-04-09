@@ -1,17 +1,16 @@
-import { FC, useState } from "react";
-import styles from "./styles.module.scss";
 import { CancelIcon2, ClockIcon } from "@shared/assets";
-import { useTranslation } from "react-i18next";
+import { TimeListProps } from "@shared/types/createPost";
 import { MyButton } from "@shared/ui";
-
-interface TimeListProps {}
+import { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 interface ITIme {
   timeIndexList: number[];
   timeStringList: string[];
 }
 
-export const TimeList: FC<TimeListProps> = () => {
+export const TimeList: FC<TimeListProps> = ({ onChange }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedTimesObject, setSelectedTimeObject] = useState<ITIme>({
     timeIndexList: [],
@@ -46,87 +45,38 @@ export const TimeList: FC<TimeListProps> = () => {
   ];
 
   const selectTime = (timeIndex: number) => {
+    let newTimeIndexList: number[] = [];
+    let newTimeList: string[] = [];
+
     if (
       selectedTimesObject.timeIndexList.length === 0 ||
       selectedTimesObject.timeIndexList.includes(timeIndex)
     ) {
-      setSelectedTimeObject({
-        timeIndexList:
-          selectedTimesObject.timeIndexList.length === 1 ? [] : [timeIndex],
-        timeStringList:
-          selectedTimesObject.timeIndexList.length === 1
-            ? []
-            : timeSlots[timeIndex].split(" - "),
-      });
+      newTimeIndexList =
+        selectedTimesObject.timeIndexList.length === 1 ? [] : [timeIndex];
+      newTimeList =
+        selectedTimesObject.timeIndexList.length === 1
+          ? []
+          : timeSlots[timeIndex].split(" - ");
     } else if (selectedTimesObject.timeIndexList.length < 2) {
-      const newIndex = [...selectedTimesObject.timeIndexList, timeIndex].sort(
+      newTimeIndexList = [...selectedTimesObject.timeIndexList, timeIndex].sort(
         (a, b) => a - b,
       );
-      setSelectedTimeObject({
-        timeIndexList: newIndex,
-        timeStringList: [
-          timeSlots[newIndex[0]].split(" - ")[0],
-          timeSlots[newIndex[1]].split(" - ")[1],
-        ],
-      });
+      newTimeList = [
+        timeSlots[newTimeIndexList[0]].split(" - ")[0],
+        timeSlots[newTimeIndexList[1]].split(" - ")[1],
+      ];
     } else {
-      setSelectedTimeObject({
-        timeIndexList: [timeIndex],
-        timeStringList: timeSlots[timeIndex].split(" - "),
-      });
+      newTimeIndexList = [timeIndex];
+      newTimeList = timeSlots[timeIndex].split(" - ");
     }
+
+    setSelectedTimeObject({
+      timeIndexList: newTimeIndexList,
+      timeStringList: newTimeList,
+    });
+    console.log(newTimeList);
   };
-
-  // const selectTime = (timeIndex: number) => {
-  //   if (selectedTimesObject.timeIndexList.length === 0) {
-  //     setSelectedTimeObject({
-  //       timeIndexList: [timeIndex],
-  //       timeStringList: timeSlots[timeIndex].split(" - "),
-  //     });
-  //   } else if (
-  //     !selectedTimesObject.timeIndexList.includes(timeIndex) &&
-  //     selectedTimesObject.timeIndexList.length !== 2
-  //   ) {
-  //     const newIndex = [...selectedTimesObject.timeIndexList, timeIndex].sort(
-  //       (a, b) => a - b
-  //     );
-  //     const firstPart: string = timeSlots[newIndex[0]].split(" - ")[0];
-  //     const secondPart: string = timeSlots[newIndex[1]].split(" - ")[1];
-  //     setSelectedTimeObject({
-  //       timeIndexList: newIndex,
-  //       timeStringList: [firstPart, secondPart],
-  //     });
-  //   } else if (
-  //     selectedTimesObject.timeIndexList.includes(timeIndex) &&
-  //     selectedTimesObject.timeIndexList.length === 1
-  //   ) {
-  //     setSelectedTimeObject({
-  //       timeIndexList: [],
-  //       timeStringList: [],
-  //     });
-  //   } else {
-  //     setSelectedTimeObject({
-  //       timeIndexList: [timeIndex],
-  //       timeStringList: timeSlots[timeIndex].split(" - "),
-  //     });
-  //   }
-
-  //   // if (selectedTimesIndex.includes(timeIndex) ){
-  //   //     setSelectedTimesIndex(
-
-  //   //           );
-  //   // } else{
-  //   //     setSelectedTimesIndex([...selectedTimesIndex, timeIndex].sort((a, b) => a - b))
-  //   // }
-
-  //   // if (selectedTimes.includes(timeSlot)) {
-  //   //   setSelectedTimes(
-  //   //     selectedTimes.filter((selectedTime) => selectedTime !== timeSlot)
-  //   //   );
-  //   // } else {
-  //   //   setSelectedTimes([...selectedTimes, timeSlot]);
-  //   // }
-  // };
 
   const handleOpenModal = () => {
     setIsModalOpen(true);
@@ -140,6 +90,7 @@ export const TimeList: FC<TimeListProps> = () => {
   };
   const continueAction = () => {
     setIsModalOpen(false);
+    onChange(selectedTimesObject.timeStringList);
   };
 
   return (

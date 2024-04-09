@@ -9,9 +9,10 @@ import {
   profileTypesName,
   profileTypesNum,
 } from "@shared/config/profileFilter";
-import { platformFilter } from "@shared/config/postFilter";
+import { platformFilter, platformTypes } from "@shared/config/postFilter";
 import { chatFilter } from "@shared/config/chatFilter";
 import { addFileFilter } from "@shared/config/addFileFilter";
+import { IPlatformLink } from "@shared/types/platform";
 
 interface FilterState {
   typeFilter: string;
@@ -27,7 +28,7 @@ interface FilterState {
   catalogFilter: string;
   networkFilter: string;
   sortingFilter: string;
-  platformFilter: string;
+  platformFilter: IPlatformLink;
   chatFilter: string;
   addFileFilter: string;
 }
@@ -46,7 +47,7 @@ const initialState: FilterState = {
   catalogFilter: catalogFilter.parameters,
   networkFilter: "",
   sortingFilter: "",
-  platformFilter: platformFilter.telegram,
+  platformFilter: platformTypes[0],
   chatFilter: chatFilter.blogger,
   addFileFilter: addFileFilter.mediafile,
 };
@@ -88,7 +89,7 @@ export const filterSlice = createSlice({
     setSortingFilter: (state, action: PayloadAction<string>) => {
       state.sortingFilter = action.payload;
     },
-    setPlatformFilter: (state, action: PayloadAction<string>) => {
+    setPlatformFilter: (state, action: PayloadAction<IPlatformLink>) => {
       state.platformFilter = action.payload;
     },
     setChatFilter: (state, action: PayloadAction<string>) => {

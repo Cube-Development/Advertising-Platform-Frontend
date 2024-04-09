@@ -23,6 +23,7 @@ export { CompliteIcon } from "./complite";
 export { CreateIcon } from "./create";
 export { EyeIcon } from "./eye";
 export { InfoIcon } from "./info";
+export { InstagramIcon } from "./instagram";
 export { FileIcon } from "./file";
 export { HappySmileIcon } from "./happySmile";
 export { ImageIcon } from "./image";

@@ -45,12 +45,17 @@
     height: 44px;
     margin-bottom: 1em;
 
+    &__label {
+      pointer-events: none;
+    }
+
     button {
       color: var(--Gradients-Gradient-1);
       min-width: 44px;
       background: none;
       font-size: 16px;
       margin-top: 8px;
+      border-radius: 6px;
 
       &:disabled {
         background-color: #f0f0f0;

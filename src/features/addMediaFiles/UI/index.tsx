@@ -1,5 +1,3 @@
-import { FC, useState } from "react";
-import styles from "./styles.module.scss";
 import {
   AddFileIcon,
   FileIcon,
@@ -7,27 +5,46 @@ import {
   TrashBasketIcon,
   YesIcon,
 } from "@shared/assets";
-import { useTranslation } from "react-i18next";
-import { IFile } from "@shared/types/file";
+import { ContentNum } from "@shared/config/createPostData";
+import { FileProps } from "@shared/types/createPost";
+import { IAddFile } from "@shared/types/file";
 import { formatFileSize } from "@shared/ui/formatFileSize";
+import { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 interface AddMediaFilesProps {}
 
-export const AddMediaFiles: FC<AddMediaFilesProps> = () => {
+export const AddMediaFiles: FC<FileProps> = ({ onChange }) => {
   const { t } = useTranslation();
-  const [files, setFiles] = useState<IFile[]>([]);
+  const [files, setFiles] = useState<IAddFile[]>([]);
+  // const [uploadFiles, setUploadFiles] = useState<string[]>([]);
   const [dragActive, setDragActive] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (e.target.files && e.target.files[0]) {
       console.log("e.target.files", e.target.files);
-      setFiles([...e.target.files]);
+      var newFiles: IAddFile[] = [...e.target.files];
+      newFiles.map(
+        (file) => (file.path = file.name + new Date().toISOString()),
+      );
+      console.log(newFiles);
+      setFiles([...newFiles]);
+      onChange(newFiles, ContentNum.photo);
+
+      // Запрос в бек на загрузку файла или файлов
+      // может быть mapping на загрузку в бек
+      // в uploadFiles записываются стринги пути к файлу на сервере, чтобы при удалении этого файла с Фронта в useForm найти этот обьект в files: [] с content: string = file_server_path и удалить
+      // const newFiles: IFile[] = [... e.target.files]
+      // const paths = newFiles.map((file) => file.name + new Date().toISOString())  // new Date().toISOString(); -> дает моковую уникальность при загрузке одного и того же файла
+      // setUploadFiles([...paths])
     }
   };
 
   const handleReset = () => {
     setFiles([]);
+    // setUploadFiles([])
   };
 
   const handleDrag = function (e: React.DragEvent<HTMLDivElement>) {
@@ -44,12 +61,28 @@ export const AddMediaFiles: FC<AddMediaFilesProps> = () => {
     e.preventDefault();
     setDragActive(false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      setFiles([...files, ...e.dataTransfer.files]);
+      var newFiles: IAddFile[] = [...e.dataTransfer.files];
+      newFiles.map(
+        (file) => (file.path = file.name + new Date().toISOString()),
+      );
+      console.log(newFiles);
+      setFiles([...files, ...newFiles]);
+      onChange(newFiles, ContentNum.photo);
+
+      // Запрос в бек на загрузку файла или файлов
+      // может быть mapping на загрузку в бек
+      // в uploadFiles записываются стринги пути к файлу на сервере, чтобы при удалении этого файла с Фронта в useForm найти этот обьект в files: [] с content: string = file_server_path и удалить
+
+      // const newFiles: IFile[] = [... e.dataTransfer.files]
+      // const paths = newFiles.map((file) => file.name + new Date().toISOString())
+      // setUploadFiles([...uploadFiles, ...paths])
     }
   };
 
-  const handleRemoveFile = (file: IFile) => {
-    setFiles(files.filter((item) => item !== file));
+  const handleRemoveFile = (file: IAddFile) => {
+    const newFiles = files.filter((item) => item !== file);
+    setFiles(newFiles);
+    onChange(newFiles, ContentNum.photo);
   };
 
   return (
@@ -92,7 +125,12 @@ export const AddMediaFiles: FC<AddMediaFilesProps> = () => {
           </div>
           <label className={styles.button}>
             <span>{t("create_order.create.add.choose")}</span>
-            <input type="file" multiple={true} onChange={handleChange} />
+            <input
+              type="file"
+              multiple={true}
+              onChange={handleChange}
+              accept=".jpg, .jpeg, .png, .mp4, .mov, .avi, .wmv, .webm"
+            />
           </label>
         </div>
       </div>

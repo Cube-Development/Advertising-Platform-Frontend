@@ -276,10 +276,108 @@ export const CatalogBlock: FC = () => {
 
   const { t } = useTranslation();
 
+  // const handleChangeCards = (cart: IToCart) => {
+  //   // setCards([...cards.filter((card) => card.id !== cart.channel.channel_id)]);
+  //   // setCart([...currentCart, cart]);
+  //   let a
+  //   let newCards
+
+  //   //необходимо определить есть ли канал в списке / сравнение по айди канала и айди формата размещения ( формат размешения не должен совпадать с текущим существующим)
+  //   // const Card = cards.find((card) => card.id === cart.channel.channel_id && card.selected_format !== cart.format.format)
+  //   const Card = cards.find((card) => card.id === cart.channel.channel_id)
+  //   const isMatch = Card?.selected_format !== cart.format.format // проверка новый ли формат приходит, ( если приходит тот же формат, не должно быть лже запроса в бд)
+
+  //   // теперь если существует то запрос в бек на удаление из бд
+  //   isMatch ?
+
+  //   // запрос в бек на удаление / и удаление из кеша
+  //   newCards = cards.map((card) => {
+  //     if (card.id === cart.channel.channel_id) {
+  //         card.selected_format = cart.format.format;
+  //     }
+  //     return card;
+  // })
+  //   // запрос на добавление в корзину
+
+  //   newCards.push()
+
+  //   setCards([
+  //     ...cards.map((card) => {
+  //       if (card.id === cart.channel.channel_id) {
+  //         card.inCart = !(card.inCart ?? false);
+  //       }
+  //       return card;
+  //     }),
+  //   ]);
+
+  //   const newCart = currentCart.some(
+  //     (card) => card.channel.channel_id === cart.channel.channel_id
+  //   )
+  //     ? currentCart.filter(
+  //         (card) => card.channel.channel_id !== cart.channel.channel_id
+  //       )
+  //     : [...currentCart, cart];
+
+  //   setCart([...newCart]);
+  //   console.log(cart.channel);
+  // };
+
   const handleChangeCards = (cart: IToCart) => {
-    setCards([...cards.filter((card) => card.id !== cart.channel.channel_id)]);
-    setCart([...currentCart, cart]);
-    // запрос в бек
+    let newCards: IPlatform[];
+    let newCart: IToCart[];
+    //необходимо определить есть ли канал в списке / сравнение по айди канала и айди формата размещения ( формат размешения не должен совпадать с текущим существующим)
+    // проверяем находится ли канал в корзине // если нет то запрос в бек на добавление + в кеш флаг труе
+    const currentCard = cards.find(
+      (card) => card.id === cart.channel.channel_id,
+    );
+
+    !currentCard?.inCart
+      ? // запрос в бек на добавление + + в кеш флаг труе
+        ((newCards = cards.map((item) => {
+          if (item.id === cart.channel.channel_id) {
+            item.selected_format = cart.format.format;
+            item.inCart = true;
+          }
+          return item;
+        })),
+        (newCart = [...currentCart, cart]),
+        console.log("!currentCard?.inCart"))
+      : // если есть в корзине и selected format не совпадает с входящим формат
+        currentCard.selected_format !== cart.format.format
+        ? // действие пришло со списка форматов
+          // запрос в бек на удаление предыдущего формата из БД и добавление нового формата в БД и перезапись в кеше (меняем selected_format)
+          // currentCard.selected_format = cart.format.format
+          ((newCards = cards.map((card) => {
+            if (card.id === cart.channel.channel_id) {
+              card.selected_format = cart.format.format;
+            }
+            return card;
+          })),
+          (newCart = currentCart.map((item) => {
+            if (item.channel.channel_id === cart.channel.channel_id) {
+              item.format = cart.format;
+            }
+            return item;
+          })),
+          console.log("currentCard.selected_format !== cart.format.format"))
+        : // currentCard.selected_format === cart.format.format
+          // значит currentCard.selected_format === cart.format.format -> Действие пришло с кноки и значит просто удаляем канал из бд и убираем флаги с кеша
+
+          ((newCards = cards.map((item) => {
+            if (item.id === cart.channel.channel_id) {
+              item.inCart = undefined;
+              item.selected_format = undefined;
+            }
+            return item;
+          })),
+          (newCart = currentCart.filter(
+            (item) => item.channel.channel_id !== cart.channel.channel_id,
+          )),
+          console.log("currentCard.selected_format === cart.format.format"));
+
+    setCards(newCards);
+
+    setCart([...newCart]);
     console.log(cart.channel);
   };
 

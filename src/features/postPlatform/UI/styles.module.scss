@@ -1,9 +1,10 @@
 .wrapper {
   display: grid;
-  grid-auto-flow: column;
+  grid-template: 1fr / 3fr 1fr 3fr 2.5fr 2.5fr;
+  justify-items: center;
   align-items: center;
   border-radius: 10px;
-  border: 0.5px solid var(--Containers, #8c8c8c);
+  border: 0.5px solid var(--Containers);
   background: rgba(255, 255, 255, 0);
   padding: 10px;
 }
@@ -14,6 +15,7 @@
   align-items: center;
   justify-content: start;
   column-gap: 10px;
+  // border-right: 0.5px solid var(--Containers);
 }
 
 .logo {
@@ -50,6 +52,7 @@
 .type {
   display: grid;
   align-items: center;
+  // border-right: 0.5px solid var(--Containers);
   svg {
     width: 30px;
     height: 30px;

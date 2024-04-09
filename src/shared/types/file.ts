@@ -1,5 +1,6 @@
-export interface IFile {
+export interface IAddFile {
   name: string;
   size: number;
   type: string;
+  path?: string;
 }
