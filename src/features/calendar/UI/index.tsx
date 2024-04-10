@@ -138,7 +138,7 @@ export const CustomCalendar: FC<DateListProps> = ({ onChange }) => {
               ref={menuRef}
             >
               <div className={styles.top}>
-                <p>{t("calendar.choose")}</p>
+                <p>{t("calendar.choose_date")}</p>
                 <button onClick={handleCloseModal}>
                   <CancelIcon2 />
                 </button>

@@ -108,7 +108,7 @@ export const TimeList: FC<TimeListProps> = ({ onChange }) => {
         <div className={styles.modal}>
           <div className={`${styles.modalContent} shake__animation`}>
             <div className={styles.top}>
-              <p>{t("calendar.choose")}</p>
+              <p>{t("calendar.choose_time")}</p>
               <button onClick={handleCloseModal}>
                 <CancelIcon2 />
               </button>

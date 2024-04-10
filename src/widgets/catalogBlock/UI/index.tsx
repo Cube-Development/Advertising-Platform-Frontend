@@ -386,10 +386,10 @@ export const CatalogBlock: FC = () => {
       <div className={`${styles.wrapper}`}>
         <div className={styles.title}>{t("catalog.catalog")}</div>
         <div className={styles.content}>
-          <div>
+          <div className={styles.left}>
             <CatalogSearch />
           </div>
-          <div>
+          <div className={styles.right}>
             <div className={styles.content__right}>
               <CatalogList cards={cards} onChangeCard={handleChangeCards} />
               <div className={styles.cart}>

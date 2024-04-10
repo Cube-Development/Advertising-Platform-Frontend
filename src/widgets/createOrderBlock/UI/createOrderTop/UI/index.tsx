@@ -16,20 +16,6 @@ export const CreateOrderTop: FC<CreateOrderTopProps> = ({
   register,
 }) => {
   const { t } = useTranslation();
-  // const [currentName, setName] = useState("");
-
-  // const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-  //   const selectedValue = event.target.value;
-  //   setName(selectedValue);
-  //   console.log(selectedValue);
-  // };
-
-  // const handleDataChange = (type: keyof IOrder) => {
-  //   if (currentName !== "") {
-  //     // onChange(type, currentName);
-  //     console.log("clicked name");
-  //   }
-  // };
 
   const handleOnChangeBlur = () => {
     onChangeBlur("post");
@@ -54,7 +40,6 @@ export const CreateOrderTop: FC<CreateOrderTopProps> = ({
                   <PencilIcon />
                   <input
                     type="text"
-                    // onChange={(event) => {const values =  getValues("name")}}
                     placeholder={t("create_order.name.default_value")}
                     onKeyDown={(event) => {
                       event.key === "Enter" && handleOnChangeBlur();
