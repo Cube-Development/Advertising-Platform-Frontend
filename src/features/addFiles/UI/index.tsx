@@ -9,14 +9,15 @@ import {
 } from "@shared/assets";
 import { useTranslation } from "react-i18next";
 import { FILES } from "@shared/config/common";
-import { IFile } from "@shared/types/file";
+import { IAddFile } from "@shared/types/file";
 import { formatFileSize } from "@shared/ui/formatFileSize";
+import { DateListProps, FileProps } from "@shared/types/createPost";
 
 interface AddFilesProps {}
 
-export const AddFiles: FC<AddFilesProps> = () => {
+export const AddFiles: FC<FileProps> = ({ onChange }) => {
   const { t } = useTranslation();
-  const [files, setFiles] = useState<IFile[]>([]);
+  const [files, setFiles] = useState<IAddFile[]>([]);
   const [dragActive, setDragActive] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -49,7 +50,7 @@ export const AddFiles: FC<AddFilesProps> = () => {
     }
   };
 
-  const handleRemoveFile = (file: IFile) => {
+  const handleRemoveFile = (file: IAddFile) => {
     setFiles(files.filter((item) => item !== file));
   };
 
@@ -122,7 +123,12 @@ export const AddFiles: FC<AddFilesProps> = () => {
 
             <label className={styles.button}>
               <span>{t("create_order.create.add.choose")}</span>
-              <input type="file" multiple={true} onChange={handleChange} />
+              <input
+                type="file"
+                multiple={true}
+                onChange={handleChange}
+                accept=".doc, .docx, .zip, .pdf, .xls, .xlsx, .txt"
+              />
             </label>
           </div>
         </div>

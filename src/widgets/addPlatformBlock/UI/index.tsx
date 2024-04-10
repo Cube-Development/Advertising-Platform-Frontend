@@ -3,7 +3,8 @@ import styles from "./styles.module.scss";
 import { PlatformLink } from "./platformLink";
 import { PlatformParameters } from "./platformParameters";
 import { PlatformTop } from "./platformTop";
-import { IAddPlatformBlur } from "@shared/types/platform";
+import { IAddPlatformBlur, IPlatformLink } from "@shared/types/platform";
+import { platformTypes } from "@shared/config/postFilter";
 
 interface AddPlatformBlockProps {}
 
@@ -15,12 +16,25 @@ export const AddPlatformBlock: FC<AddPlatformBlockProps> = () => {
     setBlur(newBlur);
   };
 
+  const [currentPlatform, setCurrentPlatform] = useState<IPlatformLink>(
+    platformTypes[0],
+  );
+
   return (
     <div>
       <PlatformTop />
-      <PlatformLink blur={blur} onChangeBlur={handleOnChangeBlur} />
+      <PlatformLink
+        currentPlatform={currentPlatform}
+        setCurrentPlatform={setCurrentPlatform}
+        blur={blur}
+        onChangeBlur={handleOnChangeBlur}
+      />
       {blur.link && (
-        <PlatformParameters blur={blur} onChangeBlur={handleOnChangeBlur} />
+        <PlatformParameters
+          currentPlatform={currentPlatform}
+          blur={blur}
+          onChangeBlur={handleOnChangeBlur}
+        />
       )}
     </div>
   );

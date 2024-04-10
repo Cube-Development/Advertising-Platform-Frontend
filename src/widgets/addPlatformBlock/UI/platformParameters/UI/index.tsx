@@ -3,93 +3,66 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { SelectOptions } from "@features/selectOptions";
-import { IAddPLatformData, IOptions } from "@shared/types/common";
 import { SelectSex } from "@features/selectSex";
 import { SelectDescription } from "@features/selectDescription";
-import { AccommPrice } from "@features/accommPrice";
+import { FormatPrice } from "@features/accommPrice";
 import { SelectPrice } from "@features/selectPrice/UI";
 import { SelectSymbol } from "@features/selectSymbols";
 import { SavePlatform } from "@features/savePlatform";
 import { CreatePlatform } from "@features/createPlatform";
 import { platformData } from "@shared/config/platformData";
-import { IAddPlatformBlur } from "@shared/types/platform";
-
-const options: IOptions = {
-  category: [
-    { name: "Категория 1", id: 1 },
-    { name: "Другая категория", id: 2 },
-    { name: "Бизнес", id: 3 },
-    { name: "Искусство", id: 4 },
-    { name: "Спорт", id: 5 },
-    { name: "Музыка", id: 6 },
-    { name: "Наука", id: 7 },
-    { name: "Технологии", id: 8 },
-  ],
-  languages: [
-    { name: "Русский", id: 0 },
-    { name: "Spanish", id: 1 },
-    { name: "French", id: 2 },
-    { name: "German", id: 3 },
-    { name: "Chinese", id: 4 },
-    { name: "Japanese", id: 5 },
-    { name: "Korean", id: 6 },
-    { name: "Italian", id: 7 },
-    { name: "Portuguese", id: 8 },
-    { name: "Arabic", id: 9 },
-    { name: "Hindi", id: 10 },
-    { name: "Turkish", id: 11 },
-  ],
-  region: [
-    { name: "Москва", id: 0 },
-    { name: "Санкт-Петербург", id: 1 },
-    { name: "Краснодар", id: 2 },
-    { name: "Екатеринбург", id: 3 },
-    { name: "Новосибирск", id: 4 },
-    { name: "Казань", id: 5 },
-    { name: "Нижний Новгород", id: 6 },
-    { name: "Челябинск", id: 7 },
-    { name: "Самара", id: 8 },
-    { name: "Уфа", id: 9 },
-    { name: "Ростов-на-Дону", id: 10 },
-    { name: "Омск", id: 11 },
-    { name: "Украина", id: 12 },
-  ],
-  age: [
-    { name: "18-24", id: 0 },
-    { name: "25-34", id: 1 },
-    { name: "35-44", id: 2 },
-    { name: "45-54", id: 3 },
-    { name: "55-64", id: 4 },
-    { name: "65+", id: 5 },
-  ],
-};
-
-const accommList = [
-  { accomm: "1 час в топе 24 часа в ленте" },
-  { accomm: "2 час в топе 24 часа в ленте" },
-  { accomm: "3 час в топе 24 часа в ленте" },
-];
+import {
+  IAddChannelData,
+  IAddPlatformBlur,
+  IPlatformLink,
+} from "@shared/types/platform";
+import { Languages } from "@shared/config/languages";
+import {
+  useGetChannelAgesQuery,
+  useGetChannelCategoriesQuery,
+  useGetChannelFormatsQuery,
+  useGetChannelLanguagesQuery,
+  useGetChannelRegionsQuery,
+} from "@shared/store/services/contentService";
 
 interface PlatformParametersProps {
   blur: IAddPlatformBlur;
   onChangeBlur: (newBlur: IAddPlatformBlur) => void;
+  currentPlatform: IPlatformLink;
 }
 
 export const PlatformParameters: FC<PlatformParametersProps> = ({
   blur,
   onChangeBlur,
+  currentPlatform,
 }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const language = Languages.find((lang) => {
+    return i18n.language === lang.name;
+  });
+
   const {
     handleSubmit,
     setValue,
     formState: { errors },
-  } = useForm<IAddPLatformData>();
+  } = useForm<IAddChannelData>();
 
-  const onSubmit: SubmitHandler<IAddPLatformData> = (data) => {
+  const onSubmit: SubmitHandler<IAddChannelData> = (data) => {
     console.log(data);
     onChangeBlur({ link: true, parameters: true });
   };
+
+  const contentRes = {
+    language: language?.id,
+    page: 1,
+  };
+  const formatsRes = { ...contentRes, platform: currentPlatform.id };
+  const { data: formats } = useGetChannelFormatsQuery(formatsRes);
+
+  const { data: ages } = useGetChannelAgesQuery(contentRes);
+  const { data: channelCategories } = useGetChannelCategoriesQuery(contentRes);
+  const { data: languages } = useGetChannelLanguagesQuery(contentRes);
+  const { data: regions } = useGetChannelRegionsQuery(contentRes);
 
   return (
     <div className="container sidebar">
@@ -103,21 +76,21 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
             <div className={styles.form__top}>
               <SelectOptions
                 onChange={setValue}
-                options={options.category}
+                options={channelCategories?.contents || []}
                 single={true}
                 type={platformData.category}
                 textData={"add_platform.category"}
               />
               <SelectOptions
                 onChange={setValue}
-                options={options.languages}
+                options={languages?.contents || []}
                 single={false}
                 type={platformData.languages}
                 textData={"add_platform.languages"}
               />
               <SelectOptions
                 onChange={setValue}
-                options={options.region}
+                options={regions?.contents || []}
                 single={false}
                 type={platformData.region}
                 textData={"add_platform.region"}
@@ -129,7 +102,7 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
               />
               <SelectOptions
                 onChange={setValue}
-                options={options.age}
+                options={ages?.contents || []}
                 single={false}
                 type={platformData.age}
                 textData={"add_platform.age"}
@@ -143,8 +116,8 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
                 placeholder={"add_platform.default_input"}
               />
               <SelectPrice
-                accomms={accommList}
-                AccommPrice={AccommPrice}
+                formats={formats?.contents}
+                AccommPrice={FormatPrice}
                 title={"add_platform.price.title"}
                 text={"add_platform.price.text"}
                 info={"add_platform.price.info"}

@@ -26,7 +26,7 @@ export const PartnerList: FC<PartnerListProps> = ({ partners, isLeft }) => {
       >
         {partners.map((partner, index) => (
           <SwiperSlide key={index}>
-            <img src={`images/partners/${partner.img}`} alt="" />
+            <img src={`/images/partners/${partner.img}`} alt="" />
           </SwiperSlide>
         ))}
       </Swiper>

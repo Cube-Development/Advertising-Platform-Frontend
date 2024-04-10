@@ -536,9 +536,10 @@
     "status_filter": {
       "active": "Активные",
       "moderation": "На модерации",
-      "reject": "Отклоненные",
-      "deactivate": "Деактивированные",
-      "ban": "Заблокированные"
+      "moderation_reject": "Отклоненные",
+      "inactive": "Деактивированные",
+      "banned": "Заблокированные",
+      "deleted": "Удаленные"
     },
 
     "no_platform": "На данный момент у вас нет каналов",
@@ -624,6 +625,8 @@
     "channel_info": "Информация о площадке",
     "choose_platform": "Выберите платформу",
     "paste_link": "Ссылка на площадку",
+    "link_requerd": "Введите ссылку на канал",
+    "link_invalid": "Ссылка недействительна",
     "category": {
       "title": "Выберите категорию площадки",
       "default_value": "Не выбрано",
@@ -913,7 +916,9 @@
       "offer": "Заявка на пополнение баланса",
       "amount": "Сумма пополнения",
       "required": "Введите сумму",
-      "placeholder": "Введите сумму"
+      "placeholder": "Введите сумму",
+      "payment_method": "Выберите способ оплаты",
+      "fetch_error": "Ошибка запроса"
     },
     "withdraw": {
       "title": "Вывод средств",
@@ -1037,7 +1042,7 @@
         }
       },
 
-      "add":{
+      "add": {
         "text": "Перетащите сюда файл",
         "span": "или",
         "choose": "Выберите файл"
@@ -1054,9 +1059,11 @@
   },
 
   "calendar": {
-    "choose": "Выберите дату",
+    "choose_date": "Выберите дату",
+    "choose_time": "Выберите время",
     "confirm": "Потдвердить",
     "range": "Выбрать диапазон",
+    "date": "Выбрать дату",
     "until": "до"
   },
 
@@ -1086,13 +1093,24 @@
   },
 
   "platform_types": {
-    "telegram": {"name": "Telegram", "default_value": "Https//t.me/channel_name..."},
-    "instagram": {"name": "Instagram", "default_value": "Https//instagram/channel_name..."},
-    "youtube": {"name": "Youtube", "default_value": "Https//youtube/channel_name..."}
+    "telegram": {
+      "name": "Telegram",
+      "default_value": "Https//t.me/channel_name..."
+    },
+    "instagram": {
+      "name": "Instagram",
+      "default_value": "Https//instagram/channel_name..."
+    },
+    "youtube": {
+      "name": "Youtube",
+      "default_value": "Https//youtube/channel_name..."
+    }
   },
 
   "add_platform_btn": {
     "check": "Проверить",
+    "checked": "Проверено",
+    "checked_error": "Ошибка...",
     "save": "Сохранить",
     "create": "Отправить заявку",
     "accept": "Принять"

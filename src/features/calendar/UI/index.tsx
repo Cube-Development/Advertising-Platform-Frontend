@@ -1,12 +1,12 @@
-import "./styles.scss";
-import styles from "./styles.module.scss";
-import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
-import Calendar from "react-calendar";
-import { useTranslation } from "react-i18next";
-import { MyButton } from "@shared/ui";
 import { CalendarIcon, CancelIcon2 } from "@shared/assets";
 import { CALENDAR } from "@shared/config/common";
+import { DateListProps } from "@shared/types/createPost";
+import { MyButton } from "@shared/ui";
+import { FC, useEffect, useRef, useState } from "react";
+import Calendar from "react-calendar";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
+import "./styles.scss";
 
 interface IDate {
   date: any;
@@ -20,7 +20,7 @@ const disabledDates = disabledDatesStrings.map(
 );
 const advDates = advDatesStrings.map((dateString) => new Date(dateString));
 
-export const CustomCalendar = () => {
+export const CustomCalendar: FC<DateListProps> = ({ onChange }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isSelectRange, setIsSelectRange] = useState(false);
   const [dateOject, setDateOject] = useState<IDate>({
@@ -34,19 +34,13 @@ export const CustomCalendar = () => {
     console.log("newDate", newDate);
 
     if (Array.isArray(newDate)) {
-      // if (){
-
-      // }
-
       const newDateString = newDate.map(
         (date: Date) =>
           `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`,
       );
       setDateOject({ date: newDate, dateString: newDateString });
-      // setIsSelectRange(false)
     } else {
       const newDateString = `${newDate.getDate()}/${newDate.getMonth()}/${newDate.getFullYear()}`;
-      // setIsSelectRange(true)
       setDateOject({ date: [newDate], dateString: newDateString });
     }
   };
@@ -81,12 +75,10 @@ export const CustomCalendar = () => {
     };
   }, []);
 
-  // useEffect(() => {
-  //   if (menuRef.current) {
-  //     console.log("menuRef is not null", menuRef.current);
-  //     // Делайте что-то с menuRef.current
-  //   }
-  // }, [menuRef.current]);
+  const continueAction = () => {
+    setIsModalOpen(false);
+    onChange(dateOject.date);
+  };
 
   const tileClassName = ({
     date,
@@ -146,7 +138,7 @@ export const CustomCalendar = () => {
               ref={menuRef}
             >
               <div className={styles.top}>
-                <p>{t("calendar.choose")}</p>
+                <p>{t("calendar.choose_date")}</p>
                 <button onClick={handleCloseModal}>
                   <CancelIcon2 />
                 </button>
@@ -168,9 +160,11 @@ export const CustomCalendar = () => {
 
               <div className={styles.bottom}>
                 <MyButton className={styles.button} onClick={handleChangeRange}>
-                  <p>{t("calendar.range")}</p>
+                  <p>
+                    {isSelectRange ? t("calendar.date") : t("calendar.range")}
+                  </p>
                 </MyButton>
-                <MyButton className={styles.button} onClick={handleOpenModal}>
+                <MyButton className={styles.button} onClick={continueAction}>
                   <p>{t("calendar.confirm")}</p>
                 </MyButton>
               </div>

@@ -4,12 +4,13 @@ import styles from "./styles.module.scss";
 import { InfoIcon } from "@shared/assets";
 import { UseFormSetValue } from "react-hook-form";
 import { IAddPLatformData } from "@shared/types/common";
+import { IAddChannelData } from "@shared/types/platform";
 
 interface SelectDescriptionProps {
   title: string;
   text?: string;
   placeholder: string;
-  onChange: UseFormSetValue<IAddPLatformData>;
+  onChange: UseFormSetValue<any>;
 }
 
 export const SelectDescription: FC<SelectDescriptionProps> = ({

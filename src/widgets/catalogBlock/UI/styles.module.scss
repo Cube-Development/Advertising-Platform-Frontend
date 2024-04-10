@@ -25,14 +25,18 @@
     .content__right {
       display: grid;
       grid-auto-flow: row;
-      position: relative;
+      // position: relative;
     }
   }
 }
 
 .cart {
   position: fixed;
-  overflow: hidden;
+  // overflow: hidden;
   bottom: 0;
-  // width: 100%;
+  width: 100%;
+}
+
+.right {
+  position: relative;
 }

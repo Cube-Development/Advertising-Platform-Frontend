@@ -5,24 +5,64 @@ import { paymentTypes } from "@shared/config/payment";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { usePaymentDepositMutation } from "@shared/store/services/walletService";
+
+interface IOnlineBankingData {
+  legal_id: string;
+  way_type: paymentTypes;
+  amount: number;
+}
 
 export const TopUpCard: FC = () => {
   const { t } = useTranslation();
-  const [paymentType, setpaymentType] = useState("");
+  const [paymentType, setPaymentType] = useState<paymentTypes>(
+    paymentTypes.payme,
+  );
+
+  const {
+    watch,
+    reset,
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<IOnlineBankingData>();
 
   const handlePaymentType = (type: paymentTypes) => {
-    setpaymentType(type);
+    setPaymentType(type);
   };
+
+  const [paymentDeposit, { isLoading, error }] = usePaymentDepositMutation();
+
+  const onSubmit: SubmitHandler<IOnlineBankingData> = async (data) => {
+    const formData = {
+      ...data,
+      legal_id: "3754ba1c-132e-4c2d-b4fd-943c32de8a0c",
+      amount: Number(data.amount),
+      way_type: paymentType,
+    };
+    paymentDeposit(formData)
+      .unwrap()
+      .then(() => {
+        reset();
+        alert(`Баланс успешно пополнен на сумму: ${formData.amount}`);
+      })
+      .catch((error) => console.error("Ошибка payment/deposit: ", error));
+  };
+
+  const amount = watch("amount", 0);
 
   return (
     <div className={styles.card}>
-      <form>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className={styles.icon}>
           <CardIcon />
         </div>
         <div className={styles.data}>
           <div className={styles.payment__card}>
-            <p>{t("wallet.choose")}</p>
+            <p className={errors["way_type"] && styles.form_error}>
+              {t("wallet.choose")}
+            </p>
             <div>
               <button
                 type="button"
@@ -30,10 +70,10 @@ export const TopUpCard: FC = () => {
                 className={
                   paymentType === paymentTypes.payme
                     ? styles.active__payment
-                    : ""
+                    : styles.payment_item
                 }
               >
-                <img src="./../images/payment/payme.svg" alt="" />
+                <img src="/images/payment/payme.svg" alt="" />
               </button>
               <button
                 type="button"
@@ -41,17 +81,37 @@ export const TopUpCard: FC = () => {
                 className={
                   paymentType === paymentTypes.click
                     ? styles.active__payment
-                    : ""
+                    : styles.payment_item
                 }
               >
-                <img src="./../images/payment/click.svg" alt="" />
+                <img src="/images/payment/click.svg" alt="" />
               </button>
             </div>
           </div>
           <div className={styles.ammount}>
-            <p>{t("wallet.topup.amount")}</p>
+            <p className={errors["amount"] && styles.form_error}>
+              {t("wallet.topup.amount")}
+            </p>
             <div>
-              <input type="text" />
+              <input
+                {...register("amount", {
+                  required: t("wallet.topup.required"),
+                })}
+                type="number"
+                placeholder={
+                  errors["amount"]
+                    ? errors["amount"].message
+                    : t("wallet.topup.placeholder")
+                }
+                // пример ограничения инпута
+                maxLength={10}
+                onInput={(e) => {
+                  const target = e.target as HTMLInputElement;
+                  target.value = target.value.slice(0, target.maxLength);
+                  target.value = target.value.replace(/\D/g, "");
+                }}
+                className={errors["amount"] && styles.form_error}
+              />
               <small>{t("symbol")}</small>
             </div>
           </div>
@@ -86,11 +146,13 @@ export const TopUpCard: FC = () => {
           </div>
           <div className={styles.finally}>
             <p>{t("wallet.finally")}</p>
-            <span>6 870 000 {t("symbol")}</span>
+            <span>
+              {amount != 0 ? Number(amount).toLocaleString() : 0} {t("symbol")}
+            </span>
           </div>
         </div>
         <div className={styles.button}>
-          <PaymentCard />
+          <PaymentCard error={error && true} isLoading={isLoading} />
         </div>
       </form>
     </div>

@@ -11,6 +11,11 @@
     align-items: center;
     text-align: center;
     column-gap: 10px;
+
+    svg {
+      width: 22.5px;
+      height: 20px;
+    }
   }
 }
 
@@ -19,5 +24,9 @@
 
   &.cart {
     background: var(--Orange);
+  }
+
+  &.catalog__cart {
+    background: var(--Personal-colors-Green);
   }
 }

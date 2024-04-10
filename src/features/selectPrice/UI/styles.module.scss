@@ -44,8 +44,7 @@
 .accomms {
   display: grid;
   grid-template: 1fr / 1fr 1fr 1fr;
-  column-gap: 40px;
-  // padding: 0 50px;
+  gap: 40px;
 }
 
 .info {

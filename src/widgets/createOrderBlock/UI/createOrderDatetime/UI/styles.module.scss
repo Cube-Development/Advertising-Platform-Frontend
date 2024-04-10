@@ -3,8 +3,8 @@
   grid-auto-flow: row;
   row-gap: 30px;
   padding-top: 30px;
-  margin-bottom: 100px;
-  .content {
+  padding-bottom: 100px;
+  .top {
     display: grid;
     grid-auto-flow: column;
     align-items: center;
@@ -41,11 +41,23 @@
     }
   }
 
-  .cards {
+  .content {
     display: grid;
     grid-auto-flow: row;
-    row-gap: 15px;
+    row-gap: 30px;
     padding-left: 110px;
-    max-width: 850px;
+
+    .cards {
+      display: grid;
+      grid-auto-flow: row;
+      row-gap: 15px;
+      max-width: 850px;
+    }
+
+    .continue {
+      display: grid;
+      align-items: center;
+      justify-content: start;
+    }
   }
 }

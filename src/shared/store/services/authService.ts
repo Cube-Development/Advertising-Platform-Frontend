@@ -9,14 +9,14 @@ export const authorizatioAPI = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getTokens: build.mutation<IToken, AuthParams>({
       query: (BodyParams) => ({
-        url: `/token`,
+        url: `/auth/token`,
         method: `POST`,
         body: BodyParams,
       }),
     }),
     logout: build.mutation<void, string>({
       query: (refrechToken) => ({
-        url: `/logout`,
+        url: `/auth/logout`,
         method: `POST`,
         body: {
           refresh_token: refrechToken,

@@ -23,6 +23,7 @@ import {
   useReadOneLegalMutation,
 } from "@shared/store/services/legalService";
 import { usePaymentDepositMutation } from "@shared/store/services/walletService";
+import { paymentTypes } from "@shared/config/payment";
 
 interface IExtendedProfileData extends IProfileData {
   amount: number;
@@ -38,6 +39,7 @@ export const WalletTopUp: FC = () => {
     reset,
     register,
     handleSubmit,
+    clearErrors,
     formState: { errors },
   } = useForm<IExtendedProfileData>();
 
@@ -66,6 +68,7 @@ export const WalletTopUp: FC = () => {
               setValue(value, data[value]);
             },
           );
+          clearErrors();
         })
         .catch((error) => {
           console.error("Ошибка при заполнении данных", error);
@@ -93,10 +96,15 @@ export const WalletTopUp: FC = () => {
         const paymentReq = {
           amount: formData.amount,
           legal_id: createRes.legal_id,
+          way_type: paymentTypes.didox,
         };
         paymentDeposit(paymentReq)
           .unwrap()
-          .then(() => reset());
+          .then(() => {
+            reset();
+            alert(`Баланс успешно пополнен на сумму: ${paymentReq.amount}`);
+          })
+          .catch((error) => console.error("Ошибка payment/deposit: ", error));
       })
       .catch((error) => {
         console.error("Ошибка в createLegal", error);
@@ -111,10 +119,16 @@ export const WalletTopUp: FC = () => {
               const paymentReq = {
                 amount: Number(formData.amount),
                 legal_id: editRes.legal_id,
+                way_type: paymentTypes.didox,
               };
               paymentDeposit(paymentReq)
                 .unwrap()
-                .then(() => reset())
+                .then(() => {
+                  reset();
+                  alert(
+                    `Баланс успешно пополнен на сумму: ${paymentReq.amount}`,
+                  );
+                })
                 .catch((error) =>
                   console.error("Ошибка payment/deposit: ", error),
                 );
@@ -128,6 +142,7 @@ export const WalletTopUp: FC = () => {
 
   return (
     <div className="container sidebar">
+      {topupError ? <h1>ОШИБКА В ЗАПРОСЕ</h1> : ""}
       <div className={styles.wrapper}>
         <div className={styles.title}>
           <p>{t("wallet.topup.title")}</p>
@@ -172,7 +187,6 @@ export const WalletTopUp: FC = () => {
           </div>
         )}
       </div>
-      {topupError ? <h1>ОШИБКА В ЗАПРОСЕ</h1> : ""}
     </div>
   );
 };

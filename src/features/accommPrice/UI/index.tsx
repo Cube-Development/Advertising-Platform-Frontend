@@ -1,10 +1,9 @@
 import { FC, useState } from "react";
 import styles from "./styles.module.scss";
-import { MyButton, MyInput } from "@shared/ui";
-import { IAccomm } from "@shared/types/common";
 import { useTranslation } from "react-i18next";
+import { IChannelFormat } from "@shared/types/platform";
 
-export const AccommPrice: FC<IAccomm> = ({ accomm }) => {
+export const FormatPrice: FC<IChannelFormat> = ({ big, small, id }) => {
   const { t } = useTranslation();
   const [price, setPrice] = useState("");
 
@@ -23,7 +22,7 @@ export const AccommPrice: FC<IAccomm> = ({ accomm }) => {
         // className={price === "" ? styles.no__active : styles.active}
         className={`${styles.button}  ${price === "" ? styles.no__active : styles.active}`}
       >
-        {accomm}
+        {big}
       </div>
       <div className={styles.input}>
         <input

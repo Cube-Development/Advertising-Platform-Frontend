@@ -1,33 +1,21 @@
-import { FC, useState } from "react";
-import styles from "./styles.module.scss";
-import { useTranslation } from "react-i18next";
 import { ArrowIcon2, CreateIcon, PencilIcon } from "@shared/assets";
-import { UseFormSetValue } from "react-hook-form";
-import { IOrder } from "@shared/types/createPost";
-import { orderData } from "@shared/config/orderData";
+import { CreatePostData } from "@shared/config/createPostData";
 import { ICreateOrderBlur } from "@shared/types/platform";
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 interface CreateOrderTopProps {
   // onChange: UseFormSetValue<IOrder>;
   onChangeBlur: (key: keyof ICreateOrderBlur) => void;
+  register: any;
 }
 
-export const CreateOrderTop: FC<CreateOrderTopProps> = ({ onChangeBlur }) => {
+export const CreateOrderTop: FC<CreateOrderTopProps> = ({
+  onChangeBlur,
+  register,
+}) => {
   const { t } = useTranslation();
-  const [currentName, setName] = useState("");
-
-  const handleOnChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const selectedValue = event.target.value;
-    setName(selectedValue);
-    console.log(selectedValue);
-  };
-
-  const handleDataChange = (type: keyof IOrder) => {
-    if (currentName !== "") {
-      // onChange(type, currentName);
-      console.log("clicked name");
-    }
-  };
 
   const handleOnChangeBlur = () => {
     onChangeBlur("post");
@@ -52,11 +40,14 @@ export const CreateOrderTop: FC<CreateOrderTopProps> = ({ onChangeBlur }) => {
                   <PencilIcon />
                   <input
                     type="text"
-                    onChange={(event) => handleOnChange(event)}
                     placeholder={t("create_order.name.default_value")}
+                    onKeyDown={(event) => {
+                      event.key === "Enter" && handleOnChangeBlur();
+                    }}
+                    {...register(CreatePostData.name)}
                   />
                 </div>
-                <button onClick={() => handleDataChange(orderData.name)}>
+                <button onClick={handleOnChangeBlur}>
                   <ArrowIcon2 />
                 </button>
               </div>

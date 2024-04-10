@@ -27,15 +27,15 @@ export const CatalogCart: FC<CatalogCartProps> = ({ currentCart }) => {
     <div className={styles.wrapper}>
       <div className={styles.info}>
         <p>{t("catalog.current_cart.channels")}</p>
-        <span>{channels}</span>
+        <span>{channels.toLocaleString()}</span>
       </div>
       <div className={styles.info}>
         <p>{t("catalog.current_cart.views")}</p>
-        <span>{views}</span>
+        <span>{views.toLocaleString()}</span>
       </div>
       <div className={styles.info}>
         <p>{t("catalog.current_cart.cost")}</p>
-        <span>{cost}</span>
+        <span>{cost.toLocaleString()}</span>
       </div>
       <div className={styles.cart}>
         <Link to={paths.cart}>

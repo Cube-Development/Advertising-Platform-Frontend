@@ -36,7 +36,7 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
 }) => {
   const { t } = useTranslation();
   const allOptions: IOption[] = isFilter
-    ? options.map((option) => ({
+    ? options?.map((option) => ({
         ...option,
         name: t(option.name),
       }))

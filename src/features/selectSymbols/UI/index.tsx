@@ -23,7 +23,7 @@ export const SelectSymbol: FC<SelectSymbolProps> = ({
   const min = 100;
   const max = 4096;
 
-  const [position, setPosition] = useState(min);
+  const [position, setPosition] = useState(max);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newPosition = parseInt(e.target.value);
     setPosition(newPosition);
@@ -45,8 +45,8 @@ export const SelectSymbol: FC<SelectSymbolProps> = ({
           onChange={handleChange}
         />
         <div className={styles.position}>
+          <p>{min}</p>
           <p>{position}</p>
-          <p>{max}</p>
         </div>
       </div>
     </div>

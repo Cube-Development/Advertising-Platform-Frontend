@@ -164,6 +164,10 @@
       cursor: pointer;
       padding: 10px;
 
+      input {
+        cursor: pointer;
+      }
+
       &.filter {
         column-gap: 5px;
         justify-content: start;
