@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -24,6 +24,8 @@ import {
   useGetChannelLanguagesQuery,
   useGetChannelRegionsQuery,
 } from "@shared/store/services/contentService";
+import { MyButton } from "@shared/ui";
+import { ArrowIcon2, PaperAirplaneIcon } from "@shared/assets";
 
 interface PlatformParametersProps {
   blur: IAddPlatformBlur;
@@ -44,11 +46,19 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
   const {
     handleSubmit,
     setValue,
+    getValues,
     formState: { errors },
   } = useForm<IAddChannelData>();
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+  };
+
   const onSubmit: SubmitHandler<IAddChannelData> = (data) => {
     console.log(data);
+    setIsModalOpen(true);
     onChangeBlur({ link: true, parameters: true });
   };
 
@@ -116,8 +126,11 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
                 placeholder={"add_platform.default_input"}
               />
               <SelectPrice
+                onChange={setValue}
+                getValues={getValues}
                 formats={formats?.contents}
                 AccommPrice={FormatPrice}
+                type={platformData.format}
                 title={"add_platform.price.title"}
                 text={"add_platform.price.text"}
                 info={"add_platform.price.info"}
@@ -128,17 +141,19 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
                 title={"add_platform.symbol.title"}
                 text={"add_platform.symbol.text"}
               />
-              <SavePlatform />
+
+              <MyButton className={styles.button}>
+                <div>
+                  {t("add_platform_btn.create")}
+                  <ArrowIcon2 />
+                </div>
+              </MyButton>
             </div>
           </div>
         )}
       </form>
 
-      {blur.parameters && (
-        <div className={styles.send}>
-          <CreatePlatform />
-        </div>
-      )}
+      <CreatePlatform isModalOpen={isModalOpen} onChange={handleCloseModal} />
     </div>
   );
 };

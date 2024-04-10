@@ -7,6 +7,7 @@ export enum platformData {
   age = "age",
   languages = "languages",
   region = "region",
+  format = "format",
 }
 
 export enum filterData {

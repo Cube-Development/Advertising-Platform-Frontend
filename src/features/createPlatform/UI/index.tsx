@@ -4,26 +4,19 @@ import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
-export const CreatePlatform: FC = () => {
-  const { t } = useTranslation();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+interface CreatePlatformProps {
+  isModalOpen: boolean;
+  onChange: () => void;
+}
 
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
+export const CreatePlatform: FC<CreatePlatformProps> = ({
+  isModalOpen,
+  onChange,
+}) => {
+  const { t } = useTranslation();
 
   return (
     <div>
-      <MyButton className={styles.button} onClick={handleOpenModal}>
-        <div>
-          {t("add_platform_btn.create")}
-          <ArrowIcon2 />
-        </div>
-      </MyButton>
-
       {isModalOpen && (
         <div className={styles.modal}>
           <div className={styles.modalContent}>
@@ -39,7 +32,7 @@ export const CreatePlatform: FC = () => {
                 {t("add_platform.create.answer.text2")}
               </p>
             </div>
-            <MyButton className={styles.accept__btn} onClick={handleCloseModal}>
+            <MyButton className={styles.accept__btn} onClick={onChange}>
               {t("add_platform_btn.accept")}
             </MyButton>
           </div>

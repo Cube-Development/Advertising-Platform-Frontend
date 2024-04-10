@@ -115,6 +115,10 @@ export interface ICreateOrderBlur {
   payment: boolean;
 }
 
+export interface IFormatPriceProps extends IChannelFormat {
+  onChange: (format: IAddFormat) => void;
+}
+
 export interface IChannelFormat {
   id: number;
   small: string;

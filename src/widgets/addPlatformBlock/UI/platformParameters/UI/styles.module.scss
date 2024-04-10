@@ -67,6 +67,24 @@
       grid-auto-flow: row;
       row-gap: 50px;
       align-items: center;
+
+      .button {
+        border-radius: 8px;
+        padding: 10px;
+        width: 100%;
+        font-size: 26px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        position: relative;
+        div {
+          display: grid;
+          grid-auto-flow: column;
+          align-items: center;
+          column-gap: 10px;
+          justify-content: center;
+        }
+      }
     }
   }
 }
