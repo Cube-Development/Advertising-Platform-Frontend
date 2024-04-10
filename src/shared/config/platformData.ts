@@ -5,7 +5,7 @@ export enum platformData {
   link = "link",
   category = "category",
   age = "age",
-  languages = "languages",
+  language = "language",
   region = "region",
   format = "format",
 }

@@ -21,6 +21,7 @@ interface PlatformLinkProps {
   onChangeBlur: (newBlur: IAddPlatformBlur) => void;
   currentPlatform: IPlatformLink;
   setCurrentPlatform: (platform: IPlatformLink) => void;
+  setInserCode: (code: string) => void;
 }
 
 export const PlatformLink: FC<PlatformLinkProps> = ({
@@ -28,15 +29,13 @@ export const PlatformLink: FC<PlatformLinkProps> = ({
   onChangeBlur,
   currentPlatform,
   setCurrentPlatform,
+  setInserCode,
 }) => {
   const { t } = useTranslation();
   const {
     reset,
     register,
     handleSubmit,
-    setValue,
-    getValues,
-    clearErrors,
     formState: { errors },
   } = useForm<IAddChannelIdentification>();
 
@@ -54,10 +53,17 @@ export const PlatformLink: FC<PlatformLinkProps> = ({
       channelVerify(formData)
         .unwrap()
         .then((data) => {
-          console.log(data);
+          setInserCode(data.insertion_code);
           onChangeBlur({ link: true, parameters: false });
         })
-        .catch((error) => console.error("Ошибка: ", error));
+        .catch((error) => {
+          console.error("Ошибка: ", error);
+          if (error.status === 400) {
+            alert(
+              "К сожалению время истекло, обновите страницу и попробуйте заново",
+            );
+          }
+        });
     }
   };
 

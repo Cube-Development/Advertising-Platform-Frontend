@@ -111,7 +111,7 @@ export const CatalogSearch: FC = () => {
               onChange={setValue}
               options={options.languages}
               single={false}
-              type={platformData.languages}
+              type={platformData.language}
               textData={"catalog.languages"}
               isRow={true}
             />

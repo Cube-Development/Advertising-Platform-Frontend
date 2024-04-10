@@ -6,21 +6,31 @@ import { SeeOffers } from "@features/seeOffers";
 import { SeeReason } from "@features/seeReason";
 import { Support } from "@features/support";
 import { ZeroPlatform } from "@features/zeroPlatform";
-import { IBloggerPlatformCard } from "@shared/types/common";
+import {
+  IActiveChannelBlogger,
+  IBlockedChannelBlogger,
+  IInactiveChannelBlogger,
+  IModerationChannelBlogger,
+  IModerationRejectChannelBlogger,
+} from "@shared/types/channelStatus";
 import { FC } from "react";
-// import styles from "./styles.module.scss";
 
 interface BloggerPlatformProps {
-  cards: IBloggerPlatformCard[];
+  cards:
+    | IActiveChannelBlogger
+    | IInactiveChannelBlogger
+    | IModerationRejectChannelBlogger
+    | IBlockedChannelBlogger
+    | IModerationChannelBlogger;
 }
 
 export const BloggerPlatform: FC<BloggerPlatformProps> = ({ cards }) => {
   return (
     <div className="container sidebar">
-      {cards.length === 0 ? (
+      {cards?.channels.length === 0 ? (
         <ZeroPlatform AddPlatformBtn={AddPlatform} />
       ) : (
-        cards.map((card, index) => (
+        cards?.channels.map((card, index) => (
           <BloggerPlatformCard
             key={index}
             card={card}

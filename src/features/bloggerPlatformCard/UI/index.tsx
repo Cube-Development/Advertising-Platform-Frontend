@@ -10,13 +10,25 @@ import {
 } from "@shared/assets";
 import { FeatherIcon } from "@shared/assets/icons/feather";
 import { platformStatus } from "@shared/config/platformFilter";
-import { IBloggerPlatformCard } from "@shared/types/common";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import {
+  IActiveChannel,
+  IBlockedChannel,
+  IInactiveChannel,
+  IModerationChannel,
+  IModerationRejectChannel,
+} from "@shared/types/channelStatus";
+import { useAppSelector } from "@shared/store";
 
 interface BloggerPlatformCardProps {
-  card: IBloggerPlatformCard;
+  card:
+    | IActiveChannel
+    | IInactiveChannel
+    | IModerationRejectChannel
+    | IBlockedChannel
+    | IModerationChannel;
   SeeOffersBtn: FC;
   SeeReasonBtn: FC;
   RepeatOfferBtn: FC;
@@ -40,13 +52,15 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
     setSubcardOpen(!isSubcardOpen);
   };
 
+  const { statusFilter } = useAppSelector((state) => state.filter);
+
   return (
     <div className={styles.card}>
-      <div className={styles.card__top}>
+      {/* <div className={styles.card__top}>
         <div className={styles.channel__logo}>
-          <img src={card.img} alt="" />
-          {card.status === platformStatus.active ||
-          card.status === platformStatus.inactive ? (
+          <img src={card.avatar} alt="" />
+          {statusFilter === platformStatus.active ||
+          statusFilter === platformStatus.inactive ? (
             <RatingIcon />
           ) : (
             <></>
@@ -59,9 +73,9 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
               <span>{card.category}</span>
             </div>
             <div>
-              {card.status === platformStatus.moderationReject ||
-              card.status === platformStatus.banned ? (
-                <p>{card.date_event}</p>
+              {statusFilter === platformStatus.moderationReject ||
+              statusFilter === platformStatus.banned ? (
+                <p>{card. .date_event}</p>
               ) : (
                 <div>
                   {card.author && <FeatherIcon />}
@@ -74,13 +88,13 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
           <hr />
           <div className={styles.status}>
             <p>
-              {card.status === platformStatus.active ? (
+              {statusFilter === platformStatus.active ? (
                 t(`platforms_blogger.card.status.active`)
-              ) : card.status === platformStatus.moderationReject ? (
+              ) : statusFilter === platformStatus.moderationReject ? (
                 t(`platforms_blogger.card.status.reject`)
-              ) : card.status === platformStatus.inactive ? (
+              ) : statusFilter === platformStatus.inactive ? (
                 t(`platforms_blogger.card.status.deactivate`)
-              ) : card.status === platformStatus.banned ? (
+              ) : statusFilter === platformStatus.banned ? (
                 t(`platforms_blogger.card.status.ban`)
               ) : (
                 <></>
@@ -91,7 +105,7 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
 
         <div className={styles.card__right}>
           <div className={styles.card__offers}>
-            {card.status === platformStatus.active ? (
+            {statusFilter === platformStatus.active ? (
               <>
                 <p>
                   {t(`platforms_blogger.offers_count`)}
@@ -104,16 +118,16 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
                 </p>
                 <SeeOffersBtn />
               </>
-            ) : card.status === platformStatus.moderationReject && card.date ? (
+            ) : statusFilter === platformStatus.moderationReject && card.date ? (
               <small>
                 {t(`platforms_blogger.repeat_date`)} - {card.date}
               </small>
-            ) : card.status === platformStatus.moderationReject &&
+            ) : statusFilter === platformStatus.moderationReject &&
               !card.date ? (
               <small>{t(`platforms_blogger.repeat`)}</small>
-            ) : card.status === platformStatus.inactive ? (
+            ) : statusFilter === platformStatus.inactive ? (
               <ActivateBtn />
-            ) : card.status === platformStatus.banned ? (
+            ) : statusFilter === platformStatus.banned ? (
               <small>{t(`platforms_blogger.ban`)}</small>
             ) : (
               <></>
@@ -121,12 +135,12 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
           </div>
           <hr />
 
-          {card.status === platformStatus.moderationReject ? (
+          {statusFilter === platformStatus.moderationReject ? (
             <div className={styles.card__info2}>
               <SeeReasonBtn />
               <RepeatOfferBtn />
             </div>
-          ) : card.status === platformStatus.banned ? (
+          ) : statusFilter === platformStatus.banned ? (
             <div className={styles.card__info2}>
               <SeeReasonBtn />
               <SupportBtn />
@@ -183,7 +197,7 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
         {isSubcardOpen
           ? t(`orders_advertiser.card.see_less`)
           : t(`orders_advertiser.card.see_more`)}
-      </button>
+      </button> */}
     </div>
   );
 };

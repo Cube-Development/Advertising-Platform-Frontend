@@ -69,21 +69,22 @@
       align-items: center;
 
       .button {
-        border-radius: 8px;
+        border-radius: 10px;
         padding: 10px;
         width: 100%;
-        font-size: 26px;
+        font-size: 22px;
         font-style: normal;
         font-weight: 500;
         line-height: normal;
         position: relative;
-        div {
-          display: grid;
-          grid-auto-flow: column;
-          align-items: center;
-          column-gap: 10px;
-          justify-content: center;
-        }
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+      }
+
+      .error {
+        background: red;
       }
     }
   }

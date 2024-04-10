@@ -90,6 +90,7 @@ export interface IChannelChat {
   id: number;
 }
 
+// УБРАТЬ ЭТОТ ТИП ИЗ ПРОЕКТА
 export interface IBloggerPlatformCard {
   id: number;
   img: string;

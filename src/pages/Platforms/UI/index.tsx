@@ -1,10 +1,16 @@
+import { Languages } from "@shared/config/languages";
 import { pageFilter } from "@shared/config/pageFilter";
 import { platformStatusFilter } from "@shared/config/platformFilter";
 import { useAppSelector } from "@shared/store";
+import {
+  getChannelsByStatusReq,
+  useGetChannelsByStatusQuery,
+} from "@shared/store/services/channelService";
 import { BarFilter } from "@widgets/barFilter";
 import { BloggerModPlatform } from "@widgets/bloggerModPlatform";
 import { BloggerPlatform } from "@widgets/bloggerPlatform";
 import { FC } from "react";
+import { useTranslation } from "react-i18next";
 
 const BloggerPlatformCard = [
   {
@@ -169,24 +175,46 @@ const BloggerModPlatformCards = [
 ];
 
 export const PlatformsPage: FC = () => {
+  const { t, i18n } = useTranslation();
+  const language = Languages.find((lang) => {
+    return i18n.language === lang.name;
+  });
+
   const { statusFilter } = useAppSelector((state) => state.filter);
+
+  const getParams: getChannelsByStatusReq = {
+    platform: 1,
+    language: language?.id || Languages[0].id,
+    page: 1,
+    date_sort: "increase",
+    status_type: statusFilter,
+  };
+
+  const {
+    data: channels,
+    isLoading,
+    error,
+  } = useGetChannelsByStatusQuery(getParams);
+
+  console.log(channels);
 
   return (
     <>
-      <BarFilter page={pageFilter.platform} />
+      {/* <BarFilter page={pageFilter.platform} />
+
       {statusFilter === platformStatusFilter.active ? (
-        <BloggerPlatform cards={BloggerPlatformCards} />
+        <BloggerPlatform cards={channels!} />
       ) : statusFilter === platformStatusFilter.moderation ? (
-        <BloggerModPlatform cards={BloggerModPlatformCards} />
+        <BloggerModPlatform cards={channels!} />
       ) : statusFilter === platformStatusFilter.moderationReject ? (
-        <BloggerPlatform cards={BloggerCancelPlatformCard} />
+        <BloggerPlatform cards={channels!} />
       ) : statusFilter === platformStatusFilter.inactive ? (
-        <BloggerPlatform cards={BloggerDeactivatePlatformCard} />
+        <BloggerPlatform cards={channels!} />
       ) : (
         statusFilter === platformStatusFilter.banned && (
-          <BloggerPlatform cards={BloggerBanPlatformCard} />
+          <BloggerPlatform cards={channels!} />
         )
-      )}
+      )} */}
     </>
   );
 };

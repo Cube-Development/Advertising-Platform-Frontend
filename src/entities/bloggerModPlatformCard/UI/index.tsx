@@ -1,10 +1,10 @@
-import { IBloggerPlatformCard } from "@shared/types/common";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { IModerationChannel } from "@shared/types/channelStatus";
 
 interface BloggerModPlatformCardProps {
-  card: IBloggerPlatformCard;
+  card: IModerationChannel;
 }
 
 export const BloggerModPlatformCard: FC<BloggerModPlatformCardProps> = ({
@@ -17,7 +17,7 @@ export const BloggerModPlatformCard: FC<BloggerModPlatformCardProps> = ({
       <div>
         <div className={styles.channel__preview}>
           <div className={styles.channel__logo}>
-            <img src={card.img} alt="" />
+            <img src={card.avatar} alt="" />
           </div>
           <div>
             <p>{card.name}</p>
@@ -26,7 +26,7 @@ export const BloggerModPlatformCard: FC<BloggerModPlatformCardProps> = ({
         </div>
       </div>
       <div className={styles.card__date}>
-        <p>{card.date}</p>
+        <p>{card.created}</p>
       </div>
       <div className={styles.card__status}>
         <p>{t(`platforms_blogger.card.status.moderation`)}</p>

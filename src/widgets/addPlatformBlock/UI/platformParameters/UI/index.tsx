@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -8,7 +8,6 @@ import { SelectDescription } from "@features/selectDescription";
 import { FormatPrice } from "@features/accommPrice";
 import { SelectPrice } from "@features/selectPrice/UI";
 import { SelectSymbol } from "@features/selectSymbols";
-import { SavePlatform } from "@features/savePlatform";
 import { CreatePlatform } from "@features/createPlatform";
 import { platformData } from "@shared/config/platformData";
 import {
@@ -25,18 +24,21 @@ import {
   useGetChannelRegionsQuery,
 } from "@shared/store/services/contentService";
 import { MyButton } from "@shared/ui";
-import { ArrowIcon2, PaperAirplaneIcon } from "@shared/assets";
+import { useCreateChannelMutation } from "@shared/store/services/channelService";
+import { AccountsLoader } from "@shared/ui/accountsLoader";
 
 interface PlatformParametersProps {
   blur: IAddPlatformBlur;
   onChangeBlur: (newBlur: IAddPlatformBlur) => void;
   currentPlatform: IPlatformLink;
+  inserCode: string;
 }
 
 export const PlatformParameters: FC<PlatformParametersProps> = ({
   blur,
   onChangeBlur,
   currentPlatform,
+  inserCode,
 }) => {
   const { t, i18n } = useTranslation();
   const language = Languages.find((lang) => {
@@ -48,7 +50,20 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
     setValue,
     getValues,
     formState: { errors },
-  } = useForm<IAddChannelData>();
+  } = useForm<IAddChannelData>({
+    defaultValues: {
+      insertion_code: inserCode,
+      male: 50,
+      female: 50,
+      category: undefined,
+      description: undefined,
+      text_limit: 4096,
+      region: [],
+      language: [],
+      age: [],
+      format: [],
+    },
+  });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
@@ -56,14 +71,35 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
     setIsModalOpen(false);
   };
 
+  const [createChannel, { isLoading, error }] = useCreateChannelMutation();
+
   const onSubmit: SubmitHandler<IAddChannelData> = (data) => {
-    console.log(data);
-    setIsModalOpen(true);
-    onChangeBlur({ link: true, parameters: true });
+    if (
+      inserCode &&
+      data.age.length > 0 &&
+      data.category &&
+      data.description &&
+      data.language.length > 0 &&
+      data.region.length > 0 &&
+      data.format.length > 0
+    ) {
+      createChannel(data)
+        .unwrap()
+        .then((data) => {
+          console.log(data.status);
+          setIsModalOpen(true);
+          onChangeBlur({ link: true, parameters: true });
+        })
+        .catch((error) =>
+          console.error("Ошибка при добавлении канала...", error),
+        );
+    } else {
+      alert("Заполните все поля...");
+    }
   };
 
   const contentRes = {
-    language: language?.id,
+    language: language?.id || Languages[0].id,
     page: 1,
   };
   const formatsRes = { ...contentRes, platform: currentPlatform.id };
@@ -95,7 +131,7 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
                 onChange={setValue}
                 options={languages?.contents || []}
                 single={false}
-                type={platformData.languages}
+                type={platformData.language}
                 textData={"add_platform.languages"}
               />
               <SelectOptions
@@ -142,11 +178,8 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
                 text={"add_platform.symbol.text"}
               />
 
-              <MyButton className={styles.button}>
-                <div>
-                  {t("add_platform_btn.create")}
-                  <ArrowIcon2 />
-                </div>
+              <MyButton className={`${styles.button} ${error && styles.error}`}>
+                {isLoading ? <AccountsLoader /> : t("add_platform_btn.create")}
               </MyButton>
             </div>
           </div>
