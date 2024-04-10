@@ -178,12 +178,12 @@ export const PlatformsPage: FC = () => {
         <BloggerPlatform cards={BloggerPlatformCards} />
       ) : statusFilter === platformStatusFilter.moderation ? (
         <BloggerModPlatform cards={BloggerModPlatformCards} />
-      ) : statusFilter === platformStatusFilter.reject ? (
+      ) : statusFilter === platformStatusFilter.moderationReject ? (
         <BloggerPlatform cards={BloggerCancelPlatformCard} />
-      ) : statusFilter === platformStatusFilter.deactivate ? (
+      ) : statusFilter === platformStatusFilter.inactive ? (
         <BloggerPlatform cards={BloggerDeactivatePlatformCard} />
       ) : (
-        statusFilter === platformStatusFilter.ban && (
+        statusFilter === platformStatusFilter.banned && (
           <BloggerPlatform cards={BloggerBanPlatformCard} />
         )
       )}

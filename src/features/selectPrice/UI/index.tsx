@@ -2,20 +2,20 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { InfoIcon } from "@shared/assets";
-import { IAccomm } from "@shared/types/common";
+import { IChannelFormat } from "@shared/types/platform";
 
 interface SelectPriceProps {
   title: string;
   text: string;
   info: string;
-  accomms: IAccomm[];
-  AccommPrice: FC<IAccomm>;
+  formats?: IChannelFormat[];
+  AccommPrice: FC<IChannelFormat>;
 }
 
 export const SelectPrice: FC<SelectPriceProps> = ({
   title,
   text,
-  accomms,
+  formats,
   AccommPrice,
   info,
 }) => {
@@ -31,9 +31,15 @@ export const SelectPrice: FC<SelectPriceProps> = ({
         <p>{t(info)}</p>
       </div>
       <div className={styles.accomms}>
-        {accomms.map((accomm, index) => (
-          <AccommPrice accomm={accomm.accomm} key={index} />
-        ))}
+        {formats &&
+          formats.map((format, index) => (
+            <AccommPrice
+              small={format.small}
+              id={format.id}
+              big={format.big}
+              key={index}
+            />
+          ))}
       </div>
     </div>
   );

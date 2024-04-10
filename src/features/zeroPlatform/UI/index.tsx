@@ -23,7 +23,7 @@ export const ZeroPlatform: FC<ZeroPlatformProps> = ({ AddPlatformBtn }) => {
             </div>
             <p>{t(`platforms_blogger.no_platform`)}</p>
           </>
-        ) : statusFilter === platformStatusFilter.ban ? (
+        ) : statusFilter === platformStatusFilter.banned ? (
           <>
             <div>
               <HappySmileIcon />

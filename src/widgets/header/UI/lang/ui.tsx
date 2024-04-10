@@ -1,10 +1,14 @@
 import { FC, useEffect, useRef, useState } from "react";
 import styles from "./styles.module.scss";
+import { Languages, languages } from "@shared/config/languages";
+import { useTranslation } from "react-i18next";
 
 export const Lang: FC = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [language, setLanguage] = useState("RU");
   const menuRef = useRef<HTMLDivElement>(null);
+
+  const { i18n } = useTranslation();
 
   const closeMenu = () => {
     setMenuOpen(false);
@@ -27,9 +31,10 @@ export const Lang: FC = () => {
     };
   }, []);
 
-  const handleLanguageSelect = (language: string) => {
+  const handleLanguageSelect = (lang: languages) => {
+    i18n.changeLanguage(lang);
     setMenuOpen(false);
-    setLanguage(language);
+    setLanguage(lang);
   };
 
   return (
@@ -37,20 +42,22 @@ export const Lang: FC = () => {
       className={`${styles.wrapper} ${isMenuOpen && styles.active}`}
       ref={menuRef}
     >
-      <button onClick={handleButtonClick}>{language}</button>
+      <button className={styles.lang__button} onClick={handleButtonClick}>
+        {language}
+      </button>
 
       {isMenuOpen && (
         <div className={styles.menu}>
           <ul>
-            <li onClick={() => handleLanguageSelect("RU")}>
-              RU <img src="images/languages/ru.svg" alt="Russian Flag" />
-            </li>
-            <li onClick={() => handleLanguageSelect("EN")}>
-              EN <img src="images/languages/en.svg" alt="English Flag" />
-            </li>
-            <li onClick={() => handleLanguageSelect("UZ")}>
-              UZ <img src="images/languages/uz.svg" alt="Uzbek Flag" />
-            </li>
+            {Languages.map((lang) => (
+              <li
+                className={styles.menu__item}
+                key={lang.id}
+                onClick={() => handleLanguageSelect(lang.name)}
+              >
+                <span>{lang.name}</span> <lang.icon />
+              </li>
+            ))}
           </ul>
         </div>
       )}

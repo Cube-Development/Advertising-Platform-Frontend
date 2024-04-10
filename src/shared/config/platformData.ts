@@ -1,4 +1,4 @@
-import { SortUpIcon, TelegramIcon } from "@shared/assets";
+import { InstagramIcon, SortUpIcon, TelegramIcon } from "@shared/assets";
 
 export enum platformData {
   platform = "platform",

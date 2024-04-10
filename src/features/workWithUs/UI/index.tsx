@@ -33,7 +33,7 @@ export const WorkWithUs: FC<WorkWithUsProps> = ({ page }) => {
         {channels.map((channel, index) => (
           <SwiperSlide key={index}>
             <div className={styles.channel}>
-              <img src={`images/workWithUs/${channel.img}`} alt="" />
+              <img src={`/images/workWithUs/${channel.img}`} alt="" />
             </div>
           </SwiperSlide>
         ))}

@@ -38,7 +38,7 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
       <div className={styles.subcard__left}>
         <div className={styles.channel__preview}>
           <div className={styles.channel__logo}>
-            <img src={`images/partners/${subcard.img}`} alt="" />
+            <img src={`/images/partners/${subcard.img}`} alt="" />
           </div>
           <div className={styles.channel__rate}></div>
           <p>{subcard.name}</p>

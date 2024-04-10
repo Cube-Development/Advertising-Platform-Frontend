@@ -1,0 +1,28 @@
+.button {
+  border-radius: 12px;
+  background: var(
+    --Gradients-Gradient-1,
+    linear-gradient(45deg, #4772e6 23.91%, #8e54e9 75.06%)
+  );
+
+  padding: 15px;
+  color: var(--Personal-colors-White);
+  font-size: 26px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 0.75;
+  width: 300px;
+
+  div {
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 10px;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}

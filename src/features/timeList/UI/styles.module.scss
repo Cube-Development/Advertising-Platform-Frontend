@@ -1,6 +1,7 @@
 .wrapper {
   display: grid;
-  grid-auto-flow: column;
+  grid-template: 1fr / 1fr 3.5fr;
+  justify-content: start;
   align-items: center;
   column-gap: 10px;
   justify-content: space-between;

@@ -1,29 +1,27 @@
 import { authApi } from "@shared/api";
+import { paymentTypes } from "@shared/config/payment";
 
 type PaymentOrderResponse = {
-  success?: boolean;
-  detail?: [
-    {
-      loc: ["string"];
-      msg: "string";
-      type: "string";
-    },
-  ];
+  success: boolean;
 };
 
 type PaymentDepositResponse = {
-  account_id?: string;
-  balance?: number;
-  detail?: [
-    {
-      loc: ["string"];
-      msg: "string";
-      type: "string";
-    },
-  ];
+  account_id: string;
+  balance: number;
 };
 
 type PaymentDepositReq = {
+  amount: number;
+  legal_id: string;
+  way_type: paymentTypes;
+};
+
+type PaymentWithdrawResponse = {
+  account_id: string;
+  balance: number;
+};
+
+type PaymentWithdrawReq = {
   amount: number;
   legal_id: string;
 };
@@ -48,20 +46,18 @@ export const walletAPI = authApi.injectEndpoints({
       query: (BodyParams) => ({
         url: `/wallet/payment/deposit?legal_id=${BodyParams.legal_id}&amount=${BodyParams.amount}`,
         method: `POST`,
-        // body: BodyParams,
       }),
     }),
     paymentWithdrawal: build.mutation<
-      PaymentDepositResponse,
-      PaymentDepositReq
+      PaymentWithdrawResponse,
+      PaymentWithdrawReq
     >({
       query: (BodyParams) => ({
-        url: `/wallet/payment/deposit`,
+        url: `/wallet/payment/withdrawal?legal_id=${BodyParams.legal_id}&amount=${BodyParams.amount}`,
         method: `POST`,
-        body: BodyParams,
       }),
     }),
-    getBalance: build.query<PaymentDepositResponse, any>({
+    getBalance: build.query<PaymentDepositResponse, void>({
       query: () => `/wallet/balance`,
     }),
   }),

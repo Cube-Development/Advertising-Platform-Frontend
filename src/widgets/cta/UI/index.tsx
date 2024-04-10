@@ -37,7 +37,7 @@ export const Cta: FC<CtaProps> = ({ page }) => {
               )}
             </div>
             <div>
-              <img src={`images/assets/${t(`${page}.main_img`)}`} alt="" />
+              <img src={`/images/assets/${t(`${page}.main_img`)}`} alt="" />
             </div>
           </div>
         </div>

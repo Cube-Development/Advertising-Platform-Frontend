@@ -1,29 +1,93 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import { ArrowIcon, PencilIcon } from "@shared/assets";
 import { useTranslation } from "react-i18next";
+import { ICreatePost, ICreatePostForm, IFile } from "@shared/types/createPost";
+import { CreatePostFormData } from "@shared/config/createPostData";
 
 interface PostTextProps {
   placeholder: string;
   rows: number;
   maxLength: number;
-  //   onChange: any;
+  setValue: any;
+  type: CreatePostFormData;
+  getValues: any;
+  contentId?: number;
+  platformId: number;
 }
 
 export const PostText: FC<PostTextProps> = ({
   placeholder,
   rows,
   maxLength,
+  setValue,
+  type,
+  getValues,
+  contentId,
+  platformId,
 }) => {
   const { t } = useTranslation();
-  const [description, setDescription] = useState("");
-  const [remainingCharacters, setRemainingCharacters] = useState(0);
+
+  // const form: ICreatePostForm = { ...getValues() };
+  // const currentPost = (form.posts || []).find(
+  //   (item) => item.platform === platformId
+  // ) || {
+  //   project_id: form.project_id,
+  //   platform: platformId,
+  // };
+
+  // const startText = contentId
+  //   ? (currentPost.files || []).find((item) => item.content_type === contentId)
+  //       ?.content || ""
+  //   : currentPost.comment || "";
+
+  const [description, setDescription] = useState<string>("");
+
+  useEffect(() => {
+    // Установка начального значения при монтировании компонента
+    const form: ICreatePostForm = { ...getValues() };
+    const currentPost = (form.posts || []).find(
+      (item) => item.platform === platformId,
+    ) || {
+      project_id: form.project_id,
+      platform: platformId,
+    };
+    const startText = contentId
+      ? (currentPost.files || []).find(
+          (item) => item.content_type === contentId,
+        )?.content || ""
+      : currentPost.comment || "";
+    setDescription(startText);
+  }, [getValues, platformId, contentId]);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    const newDescription = e.target.value;
-    setDescription(newDescription);
-    setRemainingCharacters(newDescription.length);
-    // onChange("description", newDescription);
+    const newText = e.target.value;
+    setDescription(newText);
+    const form: ICreatePostForm = { ...getValues() };
+    const posts: ICreatePost[] = (form.posts || []).filter(
+      (item) => item.platform !== platformId,
+    );
+
+    const currentPost = (form.posts || []).find(
+      (item) => item.platform === platformId,
+    ) || {
+      project_id: form.project_id,
+      platform: platformId,
+    };
+
+    if (contentId) {
+      const files: IFile[] = (currentPost.files || []).filter(
+        (item) => item.content_type !== contentId,
+      );
+      currentPost.files = [
+        ...files,
+        { content_type: contentId, content: newText },
+      ];
+    } else {
+      currentPost.comment = newText;
+    }
+    console.log(currentPost);
+    setValue(type, [...posts, currentPost]);
   };
 
   return (

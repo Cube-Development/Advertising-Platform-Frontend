@@ -42,6 +42,20 @@ export const CatalogCard: FC<CatalogCardProps> = ({
 
   const handleChangeFormat = (selectedValue: IFormat) => {
     setSelectedFormat(selectedValue);
+    console.log("handleChangeFormat", selectedFormat, card);
+    // если канал в корзине и выбранный новый формат не равен selected_format должен быть запрос
+    //если selected_format === selectedValue.format - значит юзер просто развернул список и свернул обратно - не должно быть запросов
+
+    if (card.inCart && card.selected_format !== selectedValue.format) {
+      console.log("onChangeCard should be called");
+      onChangeCard({
+        channel: {
+          channel_id: card.id,
+          format: selectedValue.format,
+        },
+        format: selectedValue,
+      });
+    }
   };
 
   const handleChangeCard = () => {
@@ -140,6 +154,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
         changeFormat={handleChangeFormat}
         сhangeCard={handleChangeCard}
         isCart={isCart}
+        inCart={card.inCart}
       />
       {/* </div> */}
     </div>
