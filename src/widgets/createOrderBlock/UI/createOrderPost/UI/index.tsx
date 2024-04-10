@@ -12,14 +12,10 @@ import { AddFiles } from "@features/addFiles";
 import { AddMediaFiles } from "@features/addMediaFiles";
 import { ICreateOrderBlur, IPlatformLink } from "@shared/types/platform";
 import { useAppDispatch, useAppSelector } from "@shared/store";
-import { platformFilter, platformTypes } from "@shared/config/postFilter";
+import { platformTypes } from "@shared/config/postFilter";
+import { platformTypesStr } from "@shared/config/platformTypes";
 import { POST } from "@shared/config/common";
-import {
-  FileData,
-  CreatePostData,
-  CreatePostFormData,
-  ContentNum,
-} from "@shared/config/createPostData";
+import { CreatePostFormData, ContentNum } from "@shared/config/createPostData";
 import { ContinueOrder } from "@features/continueOrder";
 import { filterSlice } from "@shared/store/reducers";
 
@@ -95,7 +91,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                   />
                 </div>
                 <div
-                  className={`${styles.block__bottom} ${filter.type !== platformFilter.telegram ? styles.filter : ""}`}
+                  className={`${styles.block__bottom} ${filter.type !== platformTypesStr.telegram ? styles.filter : ""}`}
                 >
                   <PostFiles
                     AddFiles={AddFiles}
@@ -104,7 +100,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                     getValues={getValues}
                     platformId={filter.id}
                   />
-                  {filter.type === platformFilter.telegram && <PostButtons />}
+                  {filter.type === platformTypesStr.telegram && <PostButtons />}
                   <PostText
                     placeholder={"create_order.create.comment"}
                     maxLength={POST.commentLenght}

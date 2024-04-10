@@ -17,7 +17,7 @@ interface IOnlineBankingData {
 export const TopUpCard: FC = () => {
   const { t } = useTranslation();
   const [paymentType, setPaymentType] = useState<paymentTypes>(
-    paymentTypes.payme
+    paymentTypes.payme,
   );
 
   const {
@@ -110,7 +110,7 @@ export const TopUpCard: FC = () => {
                   target.value = target.value.slice(0, target.maxLength);
                   target.value = target.value.replace(/\D/g, "");
                 }}
-                className={errors["amount"] && styles.error}
+                className={errors["amount"] && styles.form_error}
               />
               <small>{t("symbol")}</small>
             </div>

@@ -4,61 +4,78 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { InfoIcon } from "@shared/assets";
-import { IAddPlatformBlur, IPlatformLink } from "@shared/types/platform";
-import { platformFilter, platformTypes } from "@shared/config/postFilter";
-import { platformData } from "@shared/config/platformData";
-
-interface FormDataIden {
-  platform: platformFilter;
-  link: string;
-}
+import {
+  IAddChannelIdentification,
+  IAddPlatformBlur,
+  IPlatformLink,
+} from "@shared/types/platform";
+import {
+  useChannelVerifyMutation,
+  useCreateCodeQuery,
+} from "@shared/store/services/channelService";
+import { AccountsLoader } from "@shared/ui/accountsLoader";
+import { platformTypes } from "@shared/config/postFilter";
 
 interface PlatformLinkProps {
   blur: IAddPlatformBlur;
   onChangeBlur: (newBlur: IAddPlatformBlur) => void;
+  currentPlatform: IPlatformLink;
+  setCurrentPlatform: (platform: IPlatformLink) => void;
 }
 
-export const PlatformLink: FC<PlatformLinkProps> = ({ blur, onChangeBlur }) => {
-  // const [isVisible, setVisible] = useState(true);
-  const [currentPlatform, setPlatform] = useState<IPlatformLink>(
-    platformTypes[0],
-  );
+export const PlatformLink: FC<PlatformLinkProps> = ({
+  blur,
+  onChangeBlur,
+  currentPlatform,
+  setCurrentPlatform,
+}) => {
   const { t } = useTranslation();
   const {
     reset,
     register,
     handleSubmit,
-    unregister,
     setValue,
     getValues,
+    clearErrors,
     formState: { errors },
-  } = useForm<FormDataIden>();
+  } = useForm<IAddChannelIdentification>();
 
-  const onSubmit: SubmitHandler<FormDataIden> = (data) => {
-    console.log(data);
-    onChangeBlur({ link: true, parameters: false });
-  };
+  const { data: code } = useCreateCodeQuery();
+  const [channelVerify, { isLoading, error, isSuccess }] =
+    useChannelVerifyMutation();
 
-  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    console.log("registe link", newValue);
-    register(platformData.link, { value: newValue });
-    console.log(getValues());
+  const onSubmit: SubmitHandler<IAddChannelIdentification> = (data) => {
+    if (code) {
+      const formData = {
+        ...data,
+        platform: currentPlatform.id,
+        verification_code: code.verification_code,
+      };
+      channelVerify(formData)
+        .unwrap()
+        .then((data) => {
+          console.log(data);
+          onChangeBlur({ link: true, parameters: false });
+        })
+        .catch((error) => console.error("Ошибка: ", error));
+    }
   };
 
   const changePlatform = (platform: IPlatformLink) => {
-    console.log("registe", platform.type);
-    unregister(platformData.platform);
-    register(platformData.platform, { value: platform.type });
-    console.log(getValues());
-    setPlatform(platform);
+    setCurrentPlatform(platform);
     reset();
+  };
+
+  const isValidURL = (url: string) => {
+    // Регулярное выражение для проверки URL
+    const pattern = /^(https?:\/\/)?[\w-]+(\.[\w-]+)+([/?#].*)?$/;
+    return pattern.test(url);
   };
 
   return (
     <div className="container sidebar">
       <form onSubmit={handleSubmit(onSubmit)} className={styles.wrapper}>
-        <div className={`${styles.top} ${blur.link && styles.complite}`}>
+        <div className={`${styles.top} ${blur.link && styles.complete}`}>
           <span>1</span>
           <p>{t("add_platform.identification")}</p>
         </div>
@@ -92,16 +109,31 @@ export const PlatformLink: FC<PlatformLinkProps> = ({ blur, onChangeBlur }) => {
                 </div>
                 <div className={styles.paste_link}>
                   <input
-                    className={`${styles.platform__input}`}
-                    onChange={handleInput}
-                    placeholder={t(currentPlatform.default_value)}
+                    {...register("url", {
+                      required: t("add_platform.link_requerd"),
+                      validate: {
+                        validURL: (value) =>
+                          isValidURL(value) || t("add_platform.link_invalid"),
+                      },
+                    })}
+                    placeholder={
+                      errors["url"]
+                        ? errors["url"].message
+                        : t(currentPlatform.default_value)
+                    }
+                    className={`${styles.platform__input} ${errors["url"] && styles.form_error}`}
                   />
-
                   <MyButton
                     type="submit"
-                    className={`${styles.platform__btn} ${styles.check}`}
+                    className={`${styles.submit__btn} ${isSuccess && styles.submit__checked} ${error && styles.submit__error}`}
                   >
-                    {t("add_platform_btn.check")}
+                    {!isSuccess &&
+                      !error &&
+                      !isLoading &&
+                      t("add_platform_btn.check")}
+                    {error && t("add_platform_btn.checked_error")}
+                    {isSuccess && t("add_platform_btn.checked")}
+                    {isLoading && <AccountsLoader />}
                   </MyButton>
                 </div>
               </div>

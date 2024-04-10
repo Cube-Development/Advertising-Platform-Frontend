@@ -1,5 +1,14 @@
-import { platformFilter } from "@shared/config/postFilter";
+import {
+  platformTypesStr,
+  platformTypesNum,
+} from "@shared/config/platformTypes";
 import { FC } from "react";
+
+export interface IAddChannelIdentification {
+  platform: platformTypesNum;
+  url: string;
+  verification_code: number;
+}
 
 export interface IPlatform {
   id: string;
@@ -15,6 +24,24 @@ export interface IPlatform {
   platform: number;
   selected_format?: number;
   inCart?: boolean;
+}
+
+export interface IAddChannelData {
+  insertion_code: string;
+  male: number;
+  female: number;
+  category: number;
+  description: string;
+  text_limit: number;
+  region: number[];
+  language: number[];
+  age: number[];
+  format: IAddFormat[];
+}
+
+export interface IAddFormat {
+  name: number;
+  price: number;
 }
 
 export interface IFormat {
@@ -72,9 +99,9 @@ export interface ICatalogCard extends IChangeCards, Components {
 
 export interface IPlatformLink {
   name: string;
-  type: platformFilter;
+  type: platformTypesStr;
   default_value: string;
-  id: number;
+  id: platformTypesNum;
 }
 
 export interface IAddPlatformBlur {
@@ -86,4 +113,10 @@ export interface ICreateOrderBlur {
   post: boolean;
   datetime: boolean;
   payment: boolean;
+}
+
+export interface IChannelFormat {
+  id: number;
+  small: string;
+  big: string;
 }

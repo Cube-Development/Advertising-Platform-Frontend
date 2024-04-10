@@ -32,10 +32,9 @@ export const Lang: FC = () => {
   }, []);
 
   const handleLanguageSelect = (lang: languages) => {
+    i18n.changeLanguage(lang);
     setMenuOpen(false);
     setLanguage(lang);
-    i18n.changeLanguage(lang);
-    console.log(i18n.language);
   };
 
   return (

@@ -7,20 +7,26 @@ export enum languages {
   uz = "UZ",
 }
 
+export enum languagesNum {
+  ru = 1,
+  uz = 2,
+  en = 3,
+}
+
 export const Languages: Language[] = [
   {
     name: languages.ru,
-    id: 1,
+    id: languagesNum.ru,
     icon: LangRuIcon,
   },
   {
     name: languages.uz,
-    id: 2,
+    id: languagesNum.uz,
     icon: LangUzIcon,
   },
   {
     name: languages.en,
-    id: 3,
+    id: languagesNum.en,
     icon: LangEnIcon,
   },
 ];
