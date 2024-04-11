@@ -9,6 +9,9 @@ import { useAppSelector } from "@shared/store";
 import { pageFilter } from "@shared/config/pageFilter";
 import { projectTypesFilter } from "@shared/config/projectFilter";
 import { AddPlatform } from "@features/addPlatform";
+import { filterData, networkTypes } from "@shared/config/platformData";
+import { useForm } from "react-hook-form";
+import { SelectOptions } from "@features/selectOptions";
 
 interface BarFilterProps {
   page: pageFilter;
@@ -17,6 +20,11 @@ interface BarFilterProps {
 export const BarFilter: FC<BarFilterProps> = ({ page }) => {
   const [isZeroProject, setZeroProject] = useState(true);
   const { typeFilter } = useAppSelector((state) => state.filter);
+
+  const {
+    setValue,
+    formState: { errors },
+  } = useForm<any>();
 
   return (
     <section className={styles.profile__filter}>
@@ -29,8 +37,18 @@ export const BarFilter: FC<BarFilterProps> = ({ page }) => {
           AddPlatformBtn={AddPlatform}
           page={page}
         />
-        <hr />
 
+        <hr />
+        <div>
+          <SelectOptions
+            onChange={setValue}
+            options={networkTypes}
+            textData="filter.title"
+            single={true}
+            type={filterData.platform}
+            isFilter={true}
+          />
+        </div>
         {page === pageFilter.order ? (
           <>
             <BarTypesFilter />

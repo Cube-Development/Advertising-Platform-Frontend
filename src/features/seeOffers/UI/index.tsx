@@ -7,11 +7,9 @@ import styles from "./styles.module.scss";
 export const SeeOffers: FC = () => {
   const { t } = useTranslation();
   return (
-    <MyButton className={styles.button}>
-      <div>
-        {t(`platform_btn.offer`)}
-        <ArrowIcon2 />
-      </div>
+    <MyButton buttons_type="button__blue" className={styles.button}>
+      {t(`platform_btn.offer`)}
+      <ArrowIcon2 />
     </MyButton>
   );
 };

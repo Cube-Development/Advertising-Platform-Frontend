@@ -1,4 +1,6 @@
 import {
+  ArrowIcon,
+  ArrowIcon2,
   CancelIcon,
   CompliteIcon,
   MoreIcon,
@@ -9,7 +11,10 @@ import {
   WaitIcon,
 } from "@shared/assets";
 import { FeatherIcon } from "@shared/assets/icons/feather";
-import { platformStatus } from "@shared/config/platformFilter";
+import {
+  platformStatus,
+  platformStatusFilter,
+} from "@shared/config/platformFilter";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -21,6 +26,7 @@ import {
   IModerationRejectChannel,
 } from "@shared/types/channelStatus";
 import { useAppSelector } from "@shared/store";
+import { MyButton } from "@shared/ui";
 
 interface BloggerPlatformCardProps {
   card:
@@ -45,7 +51,6 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
   SupportBtn,
 }) => {
   const { t } = useTranslation();
-
   const [isSubcardOpen, setSubcardOpen] = useState(false);
 
   const handleChangeOpenSubcard = (): void => {
@@ -54,47 +59,55 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
 
   const { statusFilter } = useAppSelector((state) => state.filter);
 
+  function getRandomValues() {
+    // Предположим, что здесь получаются произвольные значения
+    return {
+      author: Math.random() < 0.5, // Пример: вероятность 50%
+      verified: Math.random() < 0.5, // Пример: вероятность 50%
+      partner: Math.random() < 0.5, // Пример: вероятность 50%
+    };
+  }
+  const { author, verified, partner } = getRandomValues();
+
   return (
     <div className={styles.card}>
-      {/* <div className={styles.card__top}>
+      <div className={styles.card__top}>
         <div className={styles.channel__logo}>
           <img src={card.avatar} alt="" />
-          {statusFilter === platformStatus.active ||
-          statusFilter === platformStatus.inactive ? (
+          {statusFilter === platformStatusFilter.active ||
+          statusFilter === platformStatusFilter.inactive ? (
             <RatingIcon />
           ) : (
             <></>
           )}
         </div>
         <div className={styles.card__description}>
-          <div>
-            <div>
+          <div className={styles.card__description__top}>
+            <div className={styles.card__description__top__text}>
               <p>{card.name}</p>
               <span>{card.category}</span>
             </div>
-            <div>
-              {statusFilter === platformStatus.moderationReject ||
-              statusFilter === platformStatus.banned ? (
-                <p>{card. .date_event}</p>
+            <div className={styles.card__description__top__icons}>
+              {statusFilter === platformStatusFilter.banned ? (
+                <p>{(card as IBlockedChannel).blocked_date}</p>
               ) : (
                 <div>
-                  {card.author && <FeatherIcon />}
-                  {card.verified && <ProtectIcon2 />}
-                  {card.partner && <StarIcon4 />}
+                  {author && <FeatherIcon />}
+                  {verified && <ProtectIcon2 />}
+                  {partner && <StarIcon4 />}
                 </div>
               )}
             </div>
           </div>
-          <hr />
           <div className={styles.status}>
             <p>
-              {statusFilter === platformStatus.active ? (
+              {statusFilter === platformStatusFilter.active ? (
                 t(`platforms_blogger.card.status.active`)
-              ) : statusFilter === platformStatus.moderationReject ? (
+              ) : statusFilter === platformStatusFilter.moderationReject ? (
                 t(`platforms_blogger.card.status.reject`)
-              ) : statusFilter === platformStatus.inactive ? (
+              ) : statusFilter === platformStatusFilter.inactive ? (
                 t(`platforms_blogger.card.status.deactivate`)
-              ) : statusFilter === platformStatus.banned ? (
+              ) : statusFilter === platformStatusFilter.banned ? (
                 t(`platforms_blogger.card.status.ban`)
               ) : (
                 <></>
@@ -103,65 +116,82 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
           </div>
         </div>
 
-        <div className={styles.card__right}>
-          <div className={styles.card__offers}>
-            {statusFilter === platformStatus.active ? (
-              <>
-                <p>
-                  {t(`platforms_blogger.offers_count`)}
-                  {": "}
-                  <span
-                    className={card.offers !== 0 ? styles.offers_exist : ""}
-                  >
-                    {card.offers}
-                  </span>
-                </p>
+        <div className={styles.card__info}>
+          <>
+            {statusFilter === platformStatusFilter.active ? (
+              <div className={styles.card__info__offers}>
+                <span></span>
                 <SeeOffersBtn />
-              </>
-            ) : statusFilter === platformStatus.moderationReject && card.date ? (
-              <small>
-                {t(`platforms_blogger.repeat_date`)} - {card.date}
-              </small>
-            ) : statusFilter === platformStatus.moderationReject &&
-              !card.date ? (
-              <small>{t(`platforms_blogger.repeat`)}</small>
-            ) : statusFilter === platformStatus.inactive ? (
-              <ActivateBtn />
-            ) : statusFilter === platformStatus.banned ? (
-              <small>{t(`platforms_blogger.ban`)}</small>
+              </div>
+            ) : statusFilter === platformStatusFilter.moderationReject &&
+              new Date((card as IModerationRejectChannel).reapplication_date) <
+                new Date() ? (
+              <div className={styles.card__info__top}>
+                <span>
+                  {t(`platforms_blogger.repeat_date`)} -{" "}
+                  {(card as IModerationRejectChannel).reapplication_date}
+                </span>
+              </div>
+            ) : statusFilter === platformStatusFilter.moderationReject ? (
+              <div className={styles.card__info__top}>
+                <span>{t(`platforms_blogger.repeat`)}</span>
+              </div>
+            ) : statusFilter === platformStatusFilter.inactive ? (
+              <div className={styles.card__info__top}>
+                <ActivateBtn />
+              </div>
+            ) : statusFilter === platformStatusFilter.banned ? (
+              <div className={styles.card__info__top}>
+                <span>{t(`platforms_blogger.ban`)}</span>
+              </div>
             ) : (
               <></>
             )}
-          </div>
-          <hr />
+          </>
 
-          {statusFilter === platformStatus.moderationReject ? (
-            <div className={styles.card__info2}>
+          {statusFilter === platformStatusFilter.moderationReject ? (
+            <div className={styles.card__info__bottom2}>
               <SeeReasonBtn />
               <RepeatOfferBtn />
             </div>
-          ) : statusFilter === platformStatus.banned ? (
-            <div className={styles.card__info2}>
+          ) : statusFilter === platformStatusFilter.banned ? (
+            <div className={styles.card__info__bottom2}>
               <SeeReasonBtn />
               <SupportBtn />
             </div>
           ) : (
-            <div className={styles.card__info}>
+            <div className={styles.card__info__bottom}>
               <div>
                 <RocketIcon />
-                <p>{card.start!.toLocaleString()}</p>
+                <p>
+                  {(
+                    card as IActiveChannel
+                  ).channel_orders.in_progress.toLocaleString()}
+                </p>
               </div>
               <div>
                 <WaitIcon />
-                <p>{card.wait!.toLocaleString()}</p>
+                <p>
+                  {(
+                    card as IActiveChannel
+                  ).channel_orders.wait.toLocaleString()}
+                </p>
               </div>
               <div>
                 <CompliteIcon />
-                <p>{card.complite!.toLocaleString()}</p>
+                <p>
+                  {(
+                    card as IActiveChannel
+                  ).channel_orders.completed.toLocaleString()}
+                </p>
               </div>
               <div>
                 <CancelIcon />
-                <p>{card.cancel!.toLocaleString()}</p>
+                <p>
+                  {(
+                    card as IActiveChannel
+                  ).channel_orders.canceled_rejected.toLocaleString()}
+                </p>
               </div>
             </div>
           )}
@@ -188,16 +218,18 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
         </div>
       )}
 
-      <button
-        className={`${styles.card__btn} ${
-          isSubcardOpen ? styles.less : styles.more
-        }`}
+      <MyButton
+        buttons_type={isSubcardOpen ? "button__white" : "button__blue"}
+        className={styles.card__btn}
         onClick={() => handleChangeOpenSubcard()}
       >
         {isSubcardOpen
           ? t(`orders_advertiser.card.see_less`)
           : t(`orders_advertiser.card.see_more`)}
-      </button> */}
+        <div className={isSubcardOpen ? "rotate" : "rotate_down"}>
+          {/* <ArrowIcon2 /> */}
+        </div>
+      </MyButton>
     </div>
   );
 };

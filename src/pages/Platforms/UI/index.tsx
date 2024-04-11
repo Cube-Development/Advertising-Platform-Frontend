@@ -6,6 +6,7 @@ import {
   getChannelsByStatusReq,
   useGetChannelsByStatusQuery,
 } from "@shared/store/services/channelService";
+import { IModerationChannelBlogger } from "@shared/types/channelStatus";
 import { BarFilter } from "@widgets/barFilter";
 import { BloggerModPlatform } from "@widgets/bloggerModPlatform";
 import { BloggerPlatform } from "@widgets/bloggerPlatform";
@@ -200,12 +201,12 @@ export const PlatformsPage: FC = () => {
 
   return (
     <>
-      {/* <BarFilter page={pageFilter.platform} />
+      <BarFilter page={pageFilter.platform} />
 
       {statusFilter === platformStatusFilter.active ? (
         <BloggerPlatform cards={channels!} />
       ) : statusFilter === platformStatusFilter.moderation ? (
-        <BloggerModPlatform cards={channels!} />
+        <BloggerModPlatform cards={channels! as IModerationChannelBlogger} />
       ) : statusFilter === platformStatusFilter.moderationReject ? (
         <BloggerPlatform cards={channels!} />
       ) : statusFilter === platformStatusFilter.inactive ? (
@@ -214,7 +215,7 @@ export const PlatformsPage: FC = () => {
         statusFilter === platformStatusFilter.banned && (
           <BloggerPlatform cards={channels!} />
         )
-      )} */}
+      )}
     </>
   );
 };

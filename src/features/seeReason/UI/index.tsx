@@ -6,6 +6,8 @@ import styles from "./styles.module.scss";
 export const SeeReason: FC = () => {
   const { t } = useTranslation();
   return (
-    <MyButton className={styles.button}>{t(`platform_btn.reason`)}</MyButton>
+    <MyButton buttons_type="button__white" className={styles.button}>
+      {t(`platform_btn.reason`)}
+    </MyButton>
   );
 };
