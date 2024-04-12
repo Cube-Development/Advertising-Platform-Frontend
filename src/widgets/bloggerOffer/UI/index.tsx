@@ -20,17 +20,20 @@ export const BloggerOffer: FC<BloggerOfferProps> = ({ cards }) => {
         // ?
         // <ZeroPlatform AddPlatformBtn={AddPlatform}/>
         // :
-        cards.map((card, index) => (
-          <BloggerOfferCard
-            key={index}
-            card={card}
-            SeeLinkBtn={SeeLink}
-            SendLinkBtn={SendLink}
-            AcceptOfferBtn={AcceptOffer}
-            RejectOfferBtn={RejectOffer}
-            SeeReasonBtn={SeeReason}
-          />
-        ))
+
+        <div className={styles.wrapper}>
+          {cards.map((card, index) => (
+            <BloggerOfferCard
+              key={index}
+              card={card}
+              SeeLinkBtn={SeeLink}
+              SendLinkBtn={SendLink}
+              AcceptOfferBtn={AcceptOffer}
+              RejectOfferBtn={RejectOffer}
+              SeeReasonBtn={SeeReason}
+            />
+          ))}
+        </div>
       }
     </div>
   );

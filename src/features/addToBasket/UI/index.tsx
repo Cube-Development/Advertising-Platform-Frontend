@@ -17,20 +17,25 @@ export const AddToBasket: FC<IAddToBasketProps> = ({
   const { t } = useTranslation();
   return (
     <MyButton
-      className={`${styles.button} ${isCart ? styles.cart : ""} ${inCart ? styles.catalog__cart : ""}`}
+      buttons_type={
+        !inCart && !isCart
+          ? "button__blue"
+          : isCart
+            ? "button__yellow"
+            : "button__green"
+      }
+      className={styles.button}
       onClick={сhangeCard}
     >
-      <div className={styles.wrapper}>
-        <FormatList
-          selectedFormat={selectedFormat}
-          changeFormat={changeFormat}
-          formats={formats}
-        />
+      <FormatList
+        selectedFormat={selectedFormat}
+        changeFormat={changeFormat}
+        formats={formats}
+      />
 
-        <div className={styles.price}>
-          {selectedFormat.price.toLocaleString()} {t("symbol")}
-          {isCart || inCart ? <CartMinusIcon /> : <CartPlusIcon />}
-        </div>
+      <div className={styles.price}>
+        {selectedFormat.price.toLocaleString()} {t("symbol")}
+        {isCart || inCart ? <CartMinusIcon /> : <CartPlusIcon />}
       </div>
     </MyButton>
   );

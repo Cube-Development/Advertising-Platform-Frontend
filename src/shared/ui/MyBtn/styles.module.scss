@@ -38,7 +38,26 @@
     background: var(--Gradients-Gradient-2);
 
     &:hover {
-      background: rgb(237, 237, 237);
+      opacity: 0.8;
+      background: var(--Gradients-Gradient-2);
+    }
+  }
+
+  &__green {
+    color: var(--Personal-colors-White);
+    background: var(--Personal-colors-Green);
+    // &:hover {
+    //   opacity: 0.8;
+    //   background: var(--Personal-colors-Green);
+    // }
+  }
+
+  &__yellow {
+    color: var(--Personal-colors-White);
+    background: var(--Orange);
+    &:hover {
+      opacity: 0.8;
+      background: var(--Orange);
     }
   }
 }

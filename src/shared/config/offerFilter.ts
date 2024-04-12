@@ -43,3 +43,5 @@ export const bloggerOfferStatus = [
     type: offerStatusFilter.uncomplite,
   },
 ];
+
+export const offerStatusChat = [offerStatus.active, offerStatus.wait];

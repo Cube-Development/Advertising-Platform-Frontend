@@ -1,9 +1,10 @@
-.wrapper {
+.button {
   display: grid;
   grid-auto-flow: column;
   align-items: center;
   text-align: center;
   justify-content: space-between;
+  padding: 5px 15px;
 
   .price {
     display: grid;
@@ -16,17 +17,5 @@
       width: 22.5px;
       height: 20px;
     }
-  }
-}
-
-.button {
-  padding: 5px 15px;
-
-  &.cart {
-    background: var(--Orange);
-  }
-
-  &.catalog__cart {
-    background: var(--Personal-colors-Green);
   }
 }
