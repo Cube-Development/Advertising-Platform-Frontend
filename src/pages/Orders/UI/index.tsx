@@ -403,7 +403,7 @@ export const OrdersPage: FC = () => {
 
   return (
     <>
-      <BarFilter page={page} />
+      <BarFilter page={page} listLength={true} />
 
       {typeFilter === projectTypesFilter.myProject &&
       statusFilter === myProjectStatusFilter.active ? (

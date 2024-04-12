@@ -113,7 +113,7 @@ export const OffersPage: FC = () => {
 
   return (
     <>
-      <BarFilter page={page} />
+      <BarFilter page={page} listLength={!BlogggerActiveCards.length} />
 
       {statusFilter === offerStatusFilter.active ? (
         <BloggerOffer cards={BlogggerActiveCards} />

@@ -70,9 +70,9 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
   const { author, verified, partner } = getRandomValues();
 
   return (
-    <div className={styles.card}>
-      <div className={styles.card__top}>
-        <div className={styles.channel__logo}>
+    <div className={styles.wrapper}>
+      <div className={styles.card}>
+        <div className={styles.card__logo}>
           <img src={card.avatar} alt="" />
           {statusFilter === platformStatusFilter.active ||
           statusFilter === platformStatusFilter.inactive ? (
@@ -205,7 +205,7 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
         </div>
       </div>
       {isSubcardOpen && (
-        <div className={styles.platform_events}>
+        <div className={styles.platform__events}>
           <button>
             <p>{t(`platform_btn.description`)}</p>
           </button>

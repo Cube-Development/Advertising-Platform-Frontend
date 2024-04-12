@@ -17,28 +17,32 @@ export const Cta: FC<CtaProps> = ({ page }) => {
 
   return (
     <Element name="registration">
-      <section id="registration" className={styles.cta__wrapper}>
-        <div className="container">
-          <div className={styles.cta__row}>
-            <div className={styles.cta__right}>
-              <h1 className={styles.cta__title}>{t(`${page}.cta_title`)}</h1>
-              <h3 className={styles.cta__subtitle}>
+      <section className="container">
+        <div id="registration" className={styles.wrapper}>
+          <div className={styles.cta}>
+            <div className={styles.cta__content}>
+              <h1 className={styles.cta__content__title}>
+                {t(`${page}.cta_title`)}
+              </h1>
+              <h2 className={styles.cta__content__subtitle}>
                 {t(`${page}.cta_subtitle`)}
-              </h3>
-              <div className={styles.options}>
-                {options.map((option, index) => (
-                  <OptionCard key={index} option={option} />
-                ))}
-              </div>
+              </h2>
+            </div>
+            <div className={styles.cta__options}>
+              {options.map((option, index) => (
+                <OptionCard key={index} option={option} />
+              ))}
+            </div>
+            <div className={styles.cta__button}>
               {page === "main_page_advertiser" ? (
                 <SeeCatalog />
               ) : (
                 <AddPlatform />
               )}
             </div>
-            <div>
-              <img src={`/images/assets/${t(`${page}.main_img`)}`} alt="" />
-            </div>
+          </div>
+          <div>
+            <img src={`/images/assets/${t(`${page}.main_img`)}`} alt="" />
           </div>
         </div>
       </section>

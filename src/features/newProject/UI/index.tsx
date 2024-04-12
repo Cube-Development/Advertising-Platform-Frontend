@@ -7,21 +7,13 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
 
-export const NewProject: FC<IStartProjectProps> = ({ isZeroProject }) => {
+export const NewProject: FC<IStartProjectProps> = ({ listLength }) => {
   const { t } = useTranslation();
-  const a = isZeroProject
-    ? t(`orders_advertiser.start_new_project`)
-    : t(`orders_advertiser.new_project`);
-  console.log(
-    a,
-    isZeroProject,
-    t(`orders_advertiser.start_new_project`),
-    t(`orders_advertiser.new_project`),
-  );
+
   return (
     <Link to={paths.catalog}>
       <MyButton className={styles.button}>
-        {isZeroProject
+        {listLength
           ? t(`orders_advertiser.start_new_project`)
           : t(`orders_advertiser.new_project`)}
         <PlusIcon2 />

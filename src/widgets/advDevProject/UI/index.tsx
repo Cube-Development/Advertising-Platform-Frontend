@@ -15,6 +15,7 @@ export const AdvDevProject: FC<AdvDevProjectProps> = ({ cards }) => {
     <div className="container">
       {cards.length === 0 ? (
         <ZeroProject
+          listLength={true}
           NewProjectBtn={NewProject}
           TurnkeyProjectBtn={TurnkeyProject}
         />

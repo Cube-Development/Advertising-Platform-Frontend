@@ -201,7 +201,10 @@ export const PlatformsPage: FC = () => {
 
   return (
     <>
-      <BarFilter page={pageFilter.platform} />
+      <BarFilter
+        page={pageFilter.platform}
+        listLength={!!channels?.channels.length}
+      />
 
       {statusFilter === platformStatusFilter.active ? (
         <BloggerPlatform cards={channels!} />

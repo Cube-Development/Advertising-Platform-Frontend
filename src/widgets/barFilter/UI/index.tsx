@@ -1,24 +1,24 @@
-import { NewProject } from "@features/newProject";
+import { AddPlatform } from "@features/addPlatform";
+import { BarStatusFilter } from "@features/barStatusFilter";
 import { BarTop } from "@features/barTop";
 import { BarTypesFilter } from "@features/barTypesFilter";
-import { BarStatusFilter } from "@features/barStatusFilter";
-import { TurnkeyProject } from "@features/turnkeyProject";
-import { FC, useState } from "react";
-import styles from "./styles.module.scss";
-import { useAppSelector } from "@shared/store";
-import { pageFilter } from "@shared/config/pageFilter";
-import { projectTypesFilter } from "@shared/config/projectFilter";
-import { AddPlatform } from "@features/addPlatform";
-import { filterData, networkTypes } from "@shared/config/platformData";
-import { useForm } from "react-hook-form";
+import { NewProject } from "@features/newProject";
 import { SelectOptions } from "@features/selectOptions";
+import { TurnkeyProject } from "@features/turnkeyProject";
+import { pageFilter } from "@shared/config/pageFilter";
+import { filterData, networkTypes } from "@shared/config/platformData";
+import { projectTypesFilter } from "@shared/config/projectFilter";
+import { useAppSelector } from "@shared/store";
+import { FC } from "react";
+import { useForm } from "react-hook-form";
+import styles from "./styles.module.scss";
 
 interface BarFilterProps {
   page: pageFilter;
+  listLength: boolean;
 }
 
-export const BarFilter: FC<BarFilterProps> = ({ page }) => {
-  const [isZeroProject, setZeroProject] = useState(true);
+export const BarFilter: FC<BarFilterProps> = ({ page, listLength }) => {
   const { typeFilter } = useAppSelector((state) => state.filter);
 
   const {
@@ -27,28 +27,16 @@ export const BarFilter: FC<BarFilterProps> = ({ page }) => {
   } = useForm<any>();
 
   return (
-    <section className={styles.profile__filter}>
-      <div className="container sidebar">
+    <section className="container sidebar">
+      <section className={styles.wrapper}>
         <BarTop
-          isZeroProject={isZeroProject}
-          isZeroPlatform={true}
+          listLength={listLength}
           NewProjectBtn={NewProject}
           TurnkeyProjectBtn={TurnkeyProject}
           AddPlatformBtn={AddPlatform}
           page={page}
         />
 
-        <hr />
-        <div>
-          <SelectOptions
-            onChange={setValue}
-            options={networkTypes}
-            textData="filter.title"
-            single={true}
-            type={filterData.platform}
-            isFilter={true}
-          />
-        </div>
         {page === pageFilter.order ? (
           <>
             <BarTypesFilter />
@@ -59,7 +47,17 @@ export const BarFilter: FC<BarFilterProps> = ({ page }) => {
         ) : (
           <BarStatusFilter page={page} />
         )}
-      </div>
+        <div className={styles.filter}>
+          <SelectOptions
+            onChange={setValue}
+            options={networkTypes}
+            textData="filter.title"
+            single={true}
+            type={filterData.platform}
+            isFilter={true}
+          />
+        </div>
+      </section>
     </section>
   );
 };

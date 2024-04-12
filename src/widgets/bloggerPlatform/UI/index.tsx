@@ -27,7 +27,7 @@ interface BloggerPlatformProps {
 
 export const BloggerPlatform: FC<BloggerPlatformProps> = ({ cards }) => {
   return (
-    <div className="container sidebar">
+    <section className="container sidebar">
       {cards?.channels.length === 0 ? (
         <ZeroPlatform AddPlatformBtn={AddPlatform} />
       ) : (
@@ -45,6 +45,6 @@ export const BloggerPlatform: FC<BloggerPlatformProps> = ({ cards }) => {
           ))}
         </div>
       )}
-    </div>
+    </section>
   );
 };

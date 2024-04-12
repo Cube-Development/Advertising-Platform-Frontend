@@ -32,6 +32,15 @@
       background: rgb(237, 237, 237);
     }
   }
+
+  &__orange {
+    color: var(--Personal-colors-White);
+    background: var(--Gradients-Gradient-2);
+
+    &:hover {
+      background: rgb(237, 237, 237);
+    }
+  }
 }
 
 // .button_white {

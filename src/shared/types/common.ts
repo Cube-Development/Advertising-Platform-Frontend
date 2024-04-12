@@ -29,7 +29,7 @@ export interface ITypeFilter {
 }
 
 export interface IStartProjectProps {
-  isZeroProject: boolean;
+  listLength: boolean;
 }
 
 export interface IAddPLatformData {

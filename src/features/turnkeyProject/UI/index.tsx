@@ -7,15 +7,15 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
 
-export const TurnkeyProject: FC<IStartProjectProps> = ({ isZeroProject }) => {
+export const TurnkeyProject: FC<IStartProjectProps> = ({ listLength }) => {
   const { t } = useTranslation();
 
   return (
     <Link to={paths.catalog}>
       <MyButton
-        className={`${styles.button} ${isZeroProject ? styles.new__turnkey : ""}`}
+        className={`${styles.button} ${listLength ? styles.new__turnkey : ""}`}
       >
-        {isZeroProject
+        {listLength
           ? t(`orders_advertiser.start_turnkey_project`)
           : t(`orders_advertiser.turnkey_project`)}
         <KeyIcon />

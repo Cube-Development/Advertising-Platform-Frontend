@@ -22,6 +22,7 @@ export const AdvProject: FC<AdvProjectProps> = ({ cards }) => {
     <div className="container sidebar">
       {cards.length === 0 ? (
         <ZeroProject
+          listLength={false}
           NewProjectBtn={NewProject}
           TurnkeyProjectBtn={TurnkeyProject}
         />
