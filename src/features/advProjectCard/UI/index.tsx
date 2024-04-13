@@ -60,7 +60,11 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
     page: 1,
   };
 
+<<<<<<< HEAD
   const [getAdvSubprojects, { data: subcards }] =
+=======
+  const [getAdvSubprojects, { data: subcards, isLoading, error }] =
+>>>>>>> e799383 (feat: project rtk)
     useGetAdvSubprojectsMutation();
 
   const handleChangeOpenSubcard = (): void => {
@@ -82,7 +86,11 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
               <span>НАчальный</span>
             </div>
             <div className={styles.card__description__data__date}>
+<<<<<<< HEAD
               {/* <span>№{card.id}</span> */}
+=======
+              <span>№{card.id}</span>
+>>>>>>> e799383 (feat: project rtk)
               <span>{card.created}</span>
             </div>
           </div>
@@ -132,11 +140,19 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
                 </div>
                 <div>
                   <RocketIcon />
+<<<<<<< HEAD
                   <p>{card.in_progress?.toLocaleString()}</p>
                 </div>
                 <div>
                   <SearchIcon />
                   <p>{card.moderation?.toLocaleString()}</p>
+=======
+                  <p>{card.in_progress.toLocaleString()}</p>
+                </div>
+                <div>
+                  <SearchIcon />
+                  <p>{card.moderation.toLocaleString()}</p>
+>>>>>>> e799383 (feat: project rtk)
                 </div>
               </div>
             )}
@@ -160,7 +176,11 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
 
       {isSubcardOpen && (
         <div className={styles.subcard}>
+<<<<<<< HEAD
           {subcards?.orders.map((subcard, index) => (
+=======
+          {/* {subcards?.orders.map((subcard, index) => (
+>>>>>>> e799383 (feat: project rtk)
             <AdvProjectSubcard
               key={index}
               subcard={subcard}
@@ -173,7 +193,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
               ChangeChannelBtn={ChangeChannelBtn}
               typeFilter={typeFilter}
             />
-          ))}
+          ))} */}
         </div>
       )}
 

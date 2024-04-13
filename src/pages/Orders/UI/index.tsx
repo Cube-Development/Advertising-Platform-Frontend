@@ -22,7 +22,15 @@ export const OrdersPage: FC = () => {
     status: statusFilter,
   };
 
+<<<<<<< HEAD
   const { data: projects } = useGetAdvProjectsQuery(getParams);
+=======
+  const {
+    data: projects,
+    isLoading,
+    error,
+  } = useGetAdvProjectsQuery(getParams);
+>>>>>>> e799383 (feat: project rtk)
 
   return (
     <>

@@ -6,16 +6,23 @@ import {
   WomanIcon,
 } from "@shared/assets";
 import { orderStatus, orderStatusChat } from "@shared/config/orderFilter";
+<<<<<<< HEAD
 import {
   myProjectStatusFilter,
   projectTypesFilter,
 } from "@shared/config/projectFilter";
+=======
+import { projectTypesFilter } from "@shared/config/projectFilter";
+>>>>>>> e799383 (feat: project rtk)
 import { IChannelChat } from "@shared/types/common";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { IAdvProjectSubcard } from "@shared/types/advProject";
+<<<<<<< HEAD
 import { useAppSelector } from "@shared/store";
+=======
+>>>>>>> e799383 (feat: project rtk)
 
 interface AdvProjectSubcardProps {
   subcard: IAdvProjectSubcard;
@@ -26,6 +33,10 @@ interface AdvProjectSubcardProps {
   SeeBtn: FC;
   ChangeChannelBtn: FC;
   ChannelChatBtn: FC<IChannelChat>;
+<<<<<<< HEAD
+=======
+  status: orderStatus;
+>>>>>>> e799383 (feat: project rtk)
   typeFilter: string;
 }
 
