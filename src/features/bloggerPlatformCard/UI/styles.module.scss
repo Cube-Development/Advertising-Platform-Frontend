@@ -16,8 +16,7 @@
       align-items: center;
       justify-items: center;
       border-right: 1px solid var(--Card-separator);
-      margin-left: 20px;
-      padding-right: 20px;
+      padding: 0 20px;
 
       img {
         width: 64px;
@@ -35,8 +34,7 @@
       display: grid;
       grid-auto-flow: row;
       border-right: 1px solid var(--Card-separator);
-      margin-left: 20px;
-      padding-right: 20px;
+      padding: 0 20px;
 
       &__top {
         display: grid;
@@ -112,8 +110,7 @@
       display: grid;
       grid-template: 1fr 0.5fr / 1fr;
       border-right: 1px solid var(--Card-separator);
-      margin-left: 20px;
-      padding-right: 20px;
+      padding: 0 20px;
 
       &__top {
         display: grid;

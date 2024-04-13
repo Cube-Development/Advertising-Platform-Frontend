@@ -1,20 +1,20 @@
 import { AdvProjectSubcard } from "@entities/advProjectSubcard";
 import {
   CancelIcon,
+  ChatIcon,
   CompliteIcon,
   MoreIcon,
   RocketIcon,
   SearchIcon,
   WaitIcon,
 } from "@shared/assets";
-import { ChatIcon } from "@shared/assets";
+import { orderStatus } from "@shared/config/orderFilter";
 import {
   managerProjectStatusFilter,
   projectTypesFilter,
 } from "@shared/config/projectFilter";
-import { orderStatus } from "@shared/config/orderFilter";
 import { useAppSelector } from "@shared/store";
-import { IChannelChat, IAdvProjectCard } from "@shared/types/common";
+import { IAdvProjectCard, IChannelChat } from "@shared/types/common";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -52,16 +52,20 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
   const { typeFilter, statusFilter } = useAppSelector((state) => state.filter);
 
   return (
-    <div className={styles.card}>
-      <div className={styles.card__top}>
-        <div className={styles.card__left}>
-          <p>Кампания для Сubeinc</p>
-          <span>
-            <small>№{card.id}</small>
-            <small>{card.date}</small>
-          </span>
-          <hr />
-          <div>
+    <div className={styles.wrapper}>
+      <div className={styles.card}>
+        <div className={styles.card__description}>
+          <div className={styles.card__description__data}>
+            <div className={styles.card__description__data__title}>
+              <p>Кампания для Сubeinc</p>
+              <span>НАчальный</span>
+            </div>
+            <div className={styles.card__description__data__date}>
+              <span>№{card.id}</span>
+              <span>{card.date}</span>
+            </div>
+          </div>
+          <div className={styles.card__description__status}>
             <p>
               {card.status === orderStatus.completed
                 ? t("orders_advertiser.card.status.complited")
@@ -69,8 +73,8 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
             </p>
           </div>
         </div>
-        <div className={styles.card__right}>
-          <div className={styles.card__data}>
+        <div className={styles.card__info}>
+          <div className={styles.card__info__data}>
             <div>
               <p>{t("orders_advertiser.card.channels")}:</p>
               <span>{card.channels.toLocaleString()}</span>
@@ -82,12 +86,12 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
             <div>
               <p>{t("orders_advertiser.card.cost")}:</p>
               <span>
-                {card.cost.toLocaleString()} {t("symbol")}
+                <span>{card.cost.toLocaleString()}</span>
+                <small>{t("symbol")}</small>
               </span>
             </div>
           </div>
-          <hr />
-          <div className={styles.card__info}>
+          <div className={styles.card__info__icons}>
             {typeFilter === projectTypesFilter.managerProject &&
             statusFilter === managerProjectStatusFilter.agreed ? (
               <AcceptProjectBtn />

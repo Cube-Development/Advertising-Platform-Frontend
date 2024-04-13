@@ -4,8 +4,8 @@ import { SeeCatalog } from "@features/seeCatalog";
 import { IOption } from "@shared/types/translate";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
 import { Element } from "react-scroll";
+import styles from "./styles.module.scss";
 
 interface CtaProps {
   page: string;
