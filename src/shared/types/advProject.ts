@@ -1,3 +1,5 @@
+import { orderStatus } from "@shared/config/orderFilter";
+
 export interface IAdvProjects {
   page: number;
   elements: number;
@@ -11,20 +13,6 @@ export interface IAdvSubprojects {
 }
 
 export interface IAdvProjectCard {
-  // id: number;
-  // name?: string;
-  // date: string;
-  // channels: number;
-  // views: number;
-  // cost: number;
-  // complite: number;
-  // cancel: number;
-  // wait: number;
-  // start: number;
-  // consideration: number;
-  // status: number;
-  // channels_list: IAdvProjectSubcard[];
-
   id: string;
   created: string;
   name: string;
@@ -33,34 +21,18 @@ export interface IAdvProjectCard {
   budget: number;
   completed: number;
   canceled_rejected: number;
-  wait: number;
-  in_progress: number;
-  moderation: number;
+  wait?: number;
+  in_progress?: number;
+  moderation?: number;
 }
 
 export interface IAdvProjectSubcard {
-  //   img: string;
-  //   name: string;
-  //   category: string;
-  //   date_from: string;
-  //   date_to: string;
-  //   accommodation: string;
-  //   time_from: string;
-  //   time_to: string;
-  //   price: number;
-  //   subs: number;
-  //   views: number;
-  //   ER: number;
-  //   CPV: number;
-  //   sex: number;
-  //   status: number;
-
   id: string;
   date_coming: string;
   name: string;
   category: string;
   avatar: string;
-  order_status: string;
+  order_status: orderStatus;
   publish_date:
     | {
         date_from: string;
@@ -76,4 +48,10 @@ export interface IAdvProjectSubcard {
     big: string;
   };
   price: number;
+  subscribers: number;
+  views: number;
+  er: number;
+  cpv: number;
+  male: number;
+  female: number;
 }

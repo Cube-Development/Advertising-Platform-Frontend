@@ -1,13 +1,11 @@
 import { pageFilter } from "@shared/config/pageFilter";
 import {
   myProjectStatusFilter,
-  managerProjectStatusFilter,
   projectTypesFilter,
 } from "@shared/config/projectFilter";
 import { useAppSelector } from "@shared/store";
 import { AdvProject } from "@widgets/advProject";
 import { BarFilter } from "@widgets/barFilter";
-import { AdvDevProject } from "@widgets/advDevProject";
 import { FC } from "react";
 import {
   getProjectsCardReq,
@@ -24,11 +22,7 @@ export const OrdersPage: FC = () => {
     status: statusFilter,
   };
 
-  const {
-    data: projects,
-    isLoading,
-    error,
-  } = useGetAdvProjectsQuery(getParams);
+  const { data: projects } = useGetAdvProjectsQuery(getParams);
 
   return (
     <>

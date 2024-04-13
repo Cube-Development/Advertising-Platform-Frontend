@@ -6,12 +6,16 @@ import {
   WomanIcon,
 } from "@shared/assets";
 import { orderStatus, orderStatusChat } from "@shared/config/orderFilter";
-import { projectTypesFilter } from "@shared/config/projectFilter";
+import {
+  myProjectStatusFilter,
+  projectTypesFilter,
+} from "@shared/config/projectFilter";
 import { IChannelChat } from "@shared/types/common";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { IAdvProjectSubcard } from "@shared/types/advProject";
+import { useAppSelector } from "@shared/store";
 
 interface AdvProjectSubcardProps {
   subcard: IAdvProjectSubcard;
@@ -22,7 +26,6 @@ interface AdvProjectSubcardProps {
   SeeBtn: FC;
   ChangeChannelBtn: FC;
   ChannelChatBtn: FC<IChannelChat>;
-  status: orderStatus;
   typeFilter: string;
 }
 
@@ -35,17 +38,17 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
   SeeBtn,
   ChannelChatBtn,
   ChangeChannelBtn,
-  status,
   typeFilter,
 }) => {
   const { t } = useTranslation();
+  const { statusFilter } = useAppSelector((state) => state.filter);
 
   return (
     <div className={styles.subcard}>
       <div className={styles.subcard__left}>
         <div className={styles.subcard__left__description}>
           <div className={styles.subcard__left__description__logo}>
-            <img src={`/images/partners/${subcard.img}`} alt="" />
+            <img src={subcard.avatar} alt="" />
           </div>
           <div className={styles.subcard__left__description__rate}>
             <RatingIcon />
@@ -59,19 +62,23 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
           <div className={styles.subcard__left__info__top}>
             <p>{t(`orders_advertiser.subcard.date`)}</p>
             <span>
-              {subcard.date_from} - {subcard.date_to}
+              {typeof subcard.publish_date === "object"
+                ? subcard.publish_date.date_from +
+                  " - " +
+                  subcard.publish_date.date_to
+                : subcard.publish_date}
             </span>
           </div>
           <div>
             <p>{t(`orders_advertiser.subcard.accommodation`)}</p>
-            <span>{subcard.accommodation}</span>
+            <span>{subcard.format.small}</span>
           </div>
         </div>
         <div className={styles.subcard__left__info}>
           <div className={styles.subcard__left__info__top}>
             <p>{t(`orders_advertiser.subcard.time`)}</p>
             <span>
-              {subcard.time_from} - {subcard.time_to}
+              {subcard.publish_time.time_from} - {subcard.publish_time.time_to}
             </span>
           </div>
           <div>
@@ -87,7 +94,7 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
               <div>
                 <SubsIcon />
               </div>
-              <span>{subcard.subs.toLocaleString()}</span>
+              <span>{subcard.subscribers.toLocaleString()}</span>
             </div>
             <div className={styles.info}>
               <div>
@@ -102,9 +109,9 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
             </div>
             <div
               className="colorline"
-              style={{ "--male": `${20}%` } as React.CSSProperties}
-              data-male={`${20}%`}
-              data-female={`${80}%`}
+              style={{ "--male": `${subcard.male}%` } as React.CSSProperties}
+              data-male={`${subcard.male}%`}
+              data-female={`${subcard.female}%`}
             />
             <div>
               <WomanIcon />
@@ -113,38 +120,38 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
           <div className={styles.subcard__left__data__row}>
             <div className={styles.info}>
               <p>ER:</p>
-              <span>{subcard.ER}%</span>
+              <span>{subcard.er}%</span>
             </div>
             <div className={styles.info}>
               <p>CPV:</p>
               <span>
-                {subcard.CPV.toLocaleString()} {t(`symbol`)}
+                {subcard.cpv.toLocaleString()} {t(`symbol`)}
               </span>
             </div>
           </div>
         </div>
       </div>
       <>
-        {subcard.status === orderStatus.rejected ? (
+        {subcard.order_status === orderStatus.rejected ? (
           <div className={styles.subcard__active}>
             <div>
               <p>{t(`orders_advertiser.order_status.rejected.title`)}</p>
               <span>
                 {typeFilter === projectTypesFilter.managerProject
                   ? t(`orders_advertiser.order_status.rejected.text2`)
-                  : status === orderStatus.completed ||
+                  : statusFilter === myProjectStatusFilter.completed ||
                     t(`orders_advertiser.order_status.rejected.text`)}
               </span>
             </div>
           </div>
-        ) : subcard.status === orderStatus.completed ? (
+        ) : subcard.order_status === orderStatus.completed ? (
           <div className={styles.subcard__completed}>
             <div>
               <p>{t(`orders_advertiser.order_status.completed.title`)}</p>
               <FeedbackBtn />
             </div>
           </div>
-        ) : subcard.status === orderStatus.post_review ? (
+        ) : subcard.order_status === orderStatus.post_review ? (
           <div className={styles.subcard__posted}>
             <div className={styles.subcard__posted__title}>
               <p>{t(`orders_advertiser.order_status.posted.title`)}</p>
@@ -162,7 +169,7 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
               <CheckBtn />
             </div>
           </div>
-        ) : subcard.status === orderStatus.in_progress ? (
+        ) : subcard.order_status === orderStatus.in_progress ? (
           <div className={styles.subcard__accepted}>
             <p>{t(`orders_advertiser.order_status.accepted.title`)}</p>
             {typeFilter === projectTypesFilter.managerProject || (
@@ -170,7 +177,7 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
             )}
             <SeeBtn />
           </div>
-        ) : subcard.status === orderStatus.moderation ? (
+        ) : subcard.order_status === orderStatus.moderation ? (
           <div className={styles.subcard__moderation}>
             <div>
               <p>{t(`orders_advertiser.order_status.moderation.title`)}</p>
@@ -182,29 +189,31 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
               </span>
             </div>
           </div>
-        ) : subcard.status === orderStatus.post_review ? (
-          <div className={styles.subcard__waiting}>
-            <div>
-              <p>{t(`orders_advertiser.order_status.waiting.title`)}</p>
-              <SeeBtn />
-            </div>
-          </div>
-        ) : subcard.status === orderStatus.post_review ? (
-          <div className={styles.subcard__agreed}>
-            <div>
-              <p>{t(`orders_advertiser.order_status.agreed.title`)}</p>
-              <div>
-                <ChangeChannelBtn />
-                <CheckBtn />
-              </div>
-            </div>
-          </div>
         ) : (
+          // : subcard.order_status === orderStatus.post_review ? (
+          //   <div className={styles.subcard__waiting}>
+          //     <div>
+          //       <p>{t(`orders_advertiser.order_status.waiting.title`)}</p>
+          //       <SeeBtn />
+          //     </div>
+          //   </div>
+          // )
+          // : subcard.order_status === orderStatus.post_review ? (
+          //   <div className={styles.subcard__agreed}>
+          //     <div>
+          //       <p>{t(`orders_advertiser.order_status.agreed.title`)}</p>
+          //       <div>
+          //         <ChangeChannelBtn />
+          //         <CheckBtn />
+          //       </div>
+          //     </div>
+          //   </div>
+          // )
           <></>
         )}
       </>
       {typeFilter !== projectTypesFilter.managerProject &&
-        orderStatusChat.includes(subcard.status) && (
+        orderStatusChat.includes(subcard.order_status) && (
           <div className={styles.subcard__chat}>
             <ChannelChatBtn id={1} />
           </div>

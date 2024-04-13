@@ -8,7 +8,6 @@ import {
   SearchIcon,
   WaitIcon,
 } from "@shared/assets";
-import { orderStatus } from "@shared/config/orderFilter";
 import {
   managerProjectStatusFilter,
   myProjectStatusFilter,
@@ -61,7 +60,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
     page: 1,
   };
 
-  const [getAdvSubprojects, { data: subcards, isLoading, error }] =
+  const [getAdvSubprojects, { data: subcards }] =
     useGetAdvSubprojectsMutation();
 
   const handleChangeOpenSubcard = (): void => {
@@ -83,7 +82,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
               <span>НАчальный</span>
             </div>
             <div className={styles.card__description__data__date}>
-              <span>№{card.id}</span>
+              {/* <span>№{card.id}</span> */}
               <span>{card.created}</span>
             </div>
           </div>
@@ -129,15 +128,15 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
                 </div>
                 <div>
                   <WaitIcon />
-                  <p>{card.wait.toLocaleString()}</p>
+                  <p>{card.wait?.toLocaleString()}</p>
                 </div>
                 <div>
                   <RocketIcon />
-                  <p>{card.in_progress.toLocaleString()}</p>
+                  <p>{card.in_progress?.toLocaleString()}</p>
                 </div>
                 <div>
                   <SearchIcon />
-                  <p>{card.moderation.toLocaleString()}</p>
+                  <p>{card.moderation?.toLocaleString()}</p>
                 </div>
               </div>
             )}
@@ -161,7 +160,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
 
       {isSubcardOpen && (
         <div className={styles.subcard}>
-          {/* {subcards?.orders.map((subcard, index) => (
+          {subcards?.orders.map((subcard, index) => (
             <AdvProjectSubcard
               key={index}
               subcard={subcard}
@@ -172,10 +171,9 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
               SeeBtn={SeeBtn}
               ChannelChatBtn={ChannelChatBtn}
               ChangeChannelBtn={ChangeChannelBtn}
-              status={card.status}
               typeFilter={typeFilter}
             />
-          ))} */}
+          ))}
         </div>
       )}
 
