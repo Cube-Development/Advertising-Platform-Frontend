@@ -43,22 +43,6 @@ export interface IAddPLatformData {
   text_limit: number;
 }
 
-export interface IAdvProjectCard {
-  id: number;
-  name?: string;
-  date: string;
-  channels: number;
-  views: number;
-  cost: number;
-  complite: number;
-  cancel: number;
-  wait: number;
-  start: number;
-  consideration: number;
-  status: number;
-  channels_list: IAdvProjectSubcard[];
-}
-
 export interface IAdvDevProjectCard {
   id: number;
   name: string;
@@ -68,45 +52,8 @@ export interface IAdvDevProjectCard {
   status: number;
 }
 
-export interface IAdvProjectSubcard {
-  img: string;
-  name: string;
-  category: string;
-  date_from: string;
-  date_to: string;
-  accommodation: string;
-  time_from: string;
-  time_to: string;
-  price: number;
-  subs: number;
-  views: number;
-  ER: number;
-  CPV: number;
-  sex: number;
-  status: number;
-}
-
 export interface IChannelChat {
   id: number;
-}
-
-// УБРАТЬ ЭТОТ ТИП ИЗ ПРОЕКТА
-export interface IBloggerPlatformCard {
-  id: number;
-  img: string;
-  name: string;
-  author?: boolean;
-  verified?: boolean;
-  partner?: boolean;
-  date_event?: string;
-  date?: string;
-  category: string;
-  offers?: number;
-  complite?: number;
-  cancel?: number;
-  wait?: number;
-  start?: number;
-  status: number;
 }
 
 export interface IOption {

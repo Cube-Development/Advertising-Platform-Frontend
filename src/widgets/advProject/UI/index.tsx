@@ -10,18 +10,18 @@ import { RejectPost } from "@features/rejectPost";
 import { SeePost } from "@features/seePost";
 import { TurnkeyProject } from "@features/turnkeyProject";
 import { ZeroProject } from "@features/zeroProject";
-import { IAdvProjectCard } from "@shared/types/common";
 import { FC } from "react";
 import styles from "./styles.module.scss";
+import { IAdvProjects } from "@shared/types/advProject";
 
 interface AdvProjectProps {
-  cards: IAdvProjectCard[];
+  projects: IAdvProjects;
 }
 
-export const AdvProject: FC<AdvProjectProps> = ({ cards }) => {
+export const AdvProject: FC<AdvProjectProps> = ({ projects }) => {
   return (
     <div className="container sidebar">
-      {cards.length === 0 ? (
+      {projects?.projects?.length === 0 ? (
         <ZeroProject
           listLength={false}
           NewProjectBtn={NewProject}
@@ -29,7 +29,7 @@ export const AdvProject: FC<AdvProjectProps> = ({ cards }) => {
         />
       ) : (
         <div className={styles.wrapper}>
-          {cards.map((card, index) => (
+          {projects?.projects?.map((card, index) => (
             <AdvProjectCard
               key={index}
               card={card}

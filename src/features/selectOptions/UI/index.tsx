@@ -1,9 +1,4 @@
-import {
-  IAddPLatformData,
-  IFilter,
-  IOption,
-  IOptions,
-} from "@shared/types/common";
+import { IOption } from "@shared/types/common";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -11,7 +6,6 @@ import { ArrowIcon, InfoIcon } from "@shared/assets";
 import { UseFormSetValue } from "react-hook-form";
 import { SELECTOPTIONS } from "@shared/config/common";
 import { ISelectOption } from "@shared/types/translate";
-import { color } from "framer-motion";
 
 interface SelectOptionsProps {
   textData: string;

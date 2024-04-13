@@ -16,7 +16,7 @@ import { NewProject } from "@features/newProject";
 interface BarFilterProps {
   page: pageFilter;
   listLength: boolean;
-  setValue: UseFormSetValue<any>;
+  setValue?: UseFormSetValue<any>;
 }
 
 export const BarFilter: FC<BarFilterProps> = ({
@@ -46,16 +46,18 @@ export const BarFilter: FC<BarFilterProps> = ({
         ) : (
           <BarStatusFilter page={page} />
         )}
-        <div className={styles.filter}>
-          <SelectOptions
-            onChange={setValue}
-            options={networkTypes}
-            textData="filter.title"
-            single={true}
-            type={filterData.platform}
-            isFilter={true}
-          />
-        </div>
+        {page !== pageFilter.order && (
+          <div className={styles.filter}>
+            <SelectOptions
+              onChange={setValue!}
+              options={networkTypes}
+              textData="filter.title"
+              single={true}
+              type={filterData.platform}
+              isFilter={true}
+            />
+          </div>
+        )}
       </section>
     </section>
   );

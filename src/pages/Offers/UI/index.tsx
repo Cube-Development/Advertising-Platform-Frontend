@@ -10,7 +10,7 @@ import { platformTypesNum } from "@shared/config/platformTypes";
 import { networkTypes } from "@shared/config/platformData";
 import { useForm } from "react-hook-form";
 import {
-  getOrderssByStatusReq,
+  getOrdersByStatusReq,
   useGetBloggerOrdersQuery,
 } from "@shared/store/services/bloggerOrdersService";
 
@@ -36,7 +36,7 @@ export const OffersPage: FC = () => {
 
   const platformType = watch("platform");
 
-  const getParams: getOrderssByStatusReq = {
+  const getParams: getOrdersByStatusReq = {
     platform: platformType,
     language: language?.id || Languages[0].id,
     page: 1,

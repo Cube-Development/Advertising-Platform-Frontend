@@ -4,7 +4,7 @@ import { offerStatusFilter } from "@shared/config/offerFilter";
 import { platformTypesNum } from "@shared/config/platformTypes";
 import { IBloggerOffers } from "@shared/types/bloggerOffer";
 
-export interface getOrderssByStatusReq {
+export interface getOrdersByStatusReq {
   platform: platformTypesNum;
   language: languagesNum;
   page: number;
@@ -15,7 +15,7 @@ export interface getOrderssByStatusReq {
 
 export const bloggerOrdersAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
-    getBloggerOrders: build.query<IBloggerOffers, getOrderssByStatusReq>({
+    getBloggerOrders: build.query<IBloggerOffers, getOrdersByStatusReq>({
       query: (BodyParams) => ({
         url: `/order/get/blogger`,
         method: `POST`,

@@ -23,7 +23,7 @@ export interface getChannelsByStatusReq {
   page: number;
   date_sort: string;
   elements_on_page?: number;
-  status_type: platformStatusFilter | string;
+  status: platformStatusFilter | string;
 }
 
 export const channelAPI = authApi.injectEndpoints({
@@ -60,7 +60,7 @@ export const channelAPI = authApi.injectEndpoints({
       getChannelsByStatusReq
     >({
       query: (params) => ({
-        url: "/channel/active",
+        url: "/channel/blogger",
         method: "GET",
         params: params,
       }),

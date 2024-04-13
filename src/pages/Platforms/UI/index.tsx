@@ -41,7 +41,7 @@ export const PlatformsPage: FC = () => {
     language: language?.id || Languages[0].id,
     page: 1,
     date_sort: "increase",
-    status_type: statusFilter,
+    status: statusFilter,
   };
 
   const {

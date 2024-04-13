@@ -7,10 +7,11 @@ import {
 } from "@shared/assets";
 import { orderStatus, orderStatusChat } from "@shared/config/orderFilter";
 import { projectTypesFilter } from "@shared/config/projectFilter";
-import { IAdvProjectSubcard, IChannelChat } from "@shared/types/common";
+import { IChannelChat } from "@shared/types/common";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { IAdvProjectSubcard } from "@shared/types/advProject";
 
 interface AdvProjectSubcardProps {
   subcard: IAdvProjectSubcard;
@@ -21,7 +22,7 @@ interface AdvProjectSubcardProps {
   SeeBtn: FC;
   ChangeChannelBtn: FC;
   ChannelChatBtn: FC<IChannelChat>;
-  status: number;
+  status: orderStatus;
   typeFilter: string;
 }
 
