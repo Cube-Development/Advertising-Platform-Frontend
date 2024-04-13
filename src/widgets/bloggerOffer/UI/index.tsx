@@ -4,15 +4,15 @@ import { RejectOffer } from "@features/rejectOffer";
 import { SeeLink } from "@features/seeLink";
 import { SeeReason } from "@features/seeReason";
 import { SendLink } from "@features/sendLink";
-import { IBloggerOfferCard } from "@shared/types/common";
 import { FC } from "react";
+import { IBloggerOffers } from "@shared/types/bloggerOffer";
 import styles from "./styles.module.scss";
 
 interface BloggerOfferProps {
-  cards: IBloggerOfferCard[];
+  offers: IBloggerOffers;
 }
 
-export const BloggerOffer: FC<BloggerOfferProps> = ({ cards }) => {
+export const BloggerOffer: FC<BloggerOfferProps> = ({ offers }) => {
   return (
     <div className="container sidebar">
       {
@@ -22,7 +22,7 @@ export const BloggerOffer: FC<BloggerOfferProps> = ({ cards }) => {
         // :
 
         <div className={styles.wrapper}>
-          {cards.map((card, index) => (
+          {offers?.orders?.map((card, index) => (
             <BloggerOfferCard
               key={index}
               card={card}

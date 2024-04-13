@@ -11,10 +11,7 @@ import {
   WaitIcon,
 } from "@shared/assets";
 import { FeatherIcon } from "@shared/assets/icons/feather";
-import {
-  platformStatus,
-  platformStatusFilter,
-} from "@shared/config/platformFilter";
+import { platformStatusFilter } from "@shared/config/platformFilter";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -27,6 +24,10 @@ import {
 } from "@shared/types/channelStatus";
 import { useAppSelector } from "@shared/store";
 import { MyButton } from "@shared/ui";
+import {
+  useActivateChannelMutation,
+  useDeactivateChannelMutation,
+} from "@shared/store/services/channelService";
 
 interface BloggerPlatformCardProps {
   card:
@@ -68,6 +69,9 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
     };
   }
   const { author, verified, partner } = getRandomValues();
+
+  const [activateChannel] = useActivateChannelMutation();
+  const [deactivateChannel] = useDeactivateChannelMutation();
 
   return (
     <div className={styles.wrapper}>
@@ -137,7 +141,12 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
                 <span>{t(`platforms_blogger.repeat`)}</span>
               </div>
             ) : statusFilter === platformStatusFilter.inactive ? (
-              <div className={styles.card__info__top}>
+              <div
+                className={styles.card__info__top}
+                onClick={() => {
+                  activateChannel(card.id);
+                }}
+              >
                 <ActivateBtn />
               </div>
             ) : statusFilter === platformStatusFilter.banned ? (

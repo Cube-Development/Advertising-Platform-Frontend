@@ -109,21 +109,6 @@ export interface IBloggerPlatformCard {
   status: number;
 }
 
-export interface IBloggerOfferCard {
-  id: number;
-  img: string;
-  name: string;
-  category: string;
-  date: string;
-  date_from: string;
-  date_to: string;
-  accommodation: string;
-  time_from: string;
-  time_to: string;
-  price: number;
-  status: number;
-}
-
 export interface IOption {
   id: number;
   name: string;

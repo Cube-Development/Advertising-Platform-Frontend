@@ -23,7 +23,7 @@ export interface getChannelsByStatusReq {
   page: number;
   date_sort: string;
   elements_on_page?: number;
-  status_type: platformStatus | string;
+  status_type: platformStatusFilter | string;
 }
 
 export const channelAPI = authApi.injectEndpoints({
@@ -59,13 +59,23 @@ export const channelAPI = authApi.injectEndpoints({
       | IBlockedChannelBlogger,
       getChannelsByStatusReq
     >({
-      query: (params) =>
-        // `/channel/blogger?platform=${params.platform}&language=${params.language}&page=${params.page}&date_sort=${params.date_sort}&status_type=${params.status_type}`,
-        ({
-          url: "/channel/active",
-          method: "GET",
-          params: params,
-        }),
+      query: (params) => ({
+        url: "/channel/active",
+        method: "GET",
+        params: params,
+      }),
+    }),
+    activateChannel: build.mutation<void, string>({
+      query: (channel_id) => ({
+        url: `/channel/activate/${channel_id}`,
+        method: `PUT`,
+      }),
+    }),
+    deactivateChannel: build.mutation<void, string>({
+      query: (channel_id) => ({
+        url: `/channel/deactivate/${channel_id}`,
+        method: `PUT`,
+      }),
     }),
   }),
 });
@@ -75,4 +85,6 @@ export const {
   useChannelVerifyMutation,
   useCreateChannelMutation,
   useGetChannelsByStatusQuery,
+  useActivateChannelMutation,
+  useDeactivateChannelMutation,
 } = channelAPI;

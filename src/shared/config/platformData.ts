@@ -1,4 +1,4 @@
-import { InstagramIcon, SortUpIcon, TelegramIcon } from "@shared/assets";
+import { SortUpIcon, TelegramIcon } from "@shared/assets";
 
 export enum platformData {
   platform = "platform",
@@ -44,13 +44,13 @@ export const sortToIcon: { [key: number]: () => JSX.Element } = {
 export const networkTypes = [
   {
     name: "filter.telegram",
-    id: 0,
+    id: 1,
     type: networkFilter.telegram,
     img: TelegramIcon,
   },
   {
     name: "filter.instagram",
-    id: 1,
+    id: 3,
     type: networkFilter.instagram,
     img: TelegramIcon,
   },

@@ -1,9 +1,14 @@
 import { ChatIcon, HappySmileIcon, MoreIcon } from "@shared/assets";
-import { offerStatus, offerStatusChat } from "@shared/config/offerFilter";
-import { IBloggerOfferCard } from "@shared/types/common";
+import {
+  offerStatus,
+  offerStatusChat,
+  offerStatusFilter,
+} from "@shared/config/offerFilter";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { IBloggerOfferCard } from "@shared/types/bloggerOffer";
+import { useAppSelector } from "@shared/store";
 
 interface BloggerOfferCardProps {
   card: IBloggerOfferCard;
@@ -23,14 +28,15 @@ export const BloggerOfferCard: FC<BloggerOfferCardProps> = ({
   SeeReasonBtn,
 }) => {
   const { t } = useTranslation();
+  const { statusFilter } = useAppSelector((state) => state.filter);
   return (
     <div
-      className={`${styles.card} ${offerStatusChat.includes(card.status) ? styles.chat : styles.no__chat}`}
+      className={`${styles.card} ${offerStatusChat.includes(statusFilter as offerStatusFilter) ? styles.chat : styles.no__chat}`}
     >
       <div className={styles.card__info}>
         <div className={styles.card__info__data}>
           <div className={styles.card__info__data__description}>
-            <img src={card.img} alt="" />
+            <img src={card.avatar} alt="" />
             <div>
               <p>{card.name}</p>
               <span>{card.category}</span>
@@ -38,29 +44,11 @@ export const BloggerOfferCard: FC<BloggerOfferCardProps> = ({
           </div>
           <div className={styles.card__info__data__date}>
             <span>№{card.id}</span>
-            <span>{card.date}</span>
+            <span>{card.date_coming}</span>
           </div>
         </div>
         <div className={styles.card__info__status}>
-          <p>
-            {card.status === offerStatus.active ? (
-              t(`offers_blogger.card.status.active`)
-            ) : card.status === offerStatus.check ? (
-              t(`offers_blogger.card.status.check`)
-            ) : card.status === offerStatus.wait ? (
-              t(`offers_blogger.card.status.wait`)
-            ) : card.status === offerStatus.complite ? (
-              t(`offers_blogger.card.status.complite`)
-            ) : card.status === offerStatus.cancel ? (
-              t(`offers_blogger.card.status.cancel`)
-            ) : card.status === offerStatus.moderation ? (
-              t(`offers_blogger.card.status.moderation`)
-            ) : card.status === offerStatus.uncomplite ? (
-              t(`offers_blogger.card.status.reject`)
-            ) : (
-              <></>
-            )}
-          </p>
+          <p>{card.order_status}</p>
         </div>
       </div>
 
@@ -68,19 +56,21 @@ export const BloggerOfferCard: FC<BloggerOfferCardProps> = ({
         <div className={styles.card__column__top}>
           <p>{t(`offers_blogger.card.date`)}</p>
           <span>
-            {card.date_from} - {card.date_to}
+            {typeof card.publish_date === "object"
+              ? card.publish_date.date_from + " - " + card.publish_date.date_to
+              : card.publish_date}
           </span>
         </div>
         <div>
           <p>{t(`offers_blogger.card.accommodation`)}</p>
-          <span>{card.accommodation}</span>
+          <span>{card.format.small}</span>
         </div>
       </div>
       <div className={styles.card__column}>
         <div className={styles.card__column__top}>
           <p>{t(`offers_blogger.card.time`)}</p>
           <span>
-            {card.time_from} - {card.time_to}
+            {card.publish_time.time_from} - {card.publish_time.time_to}
           </span>
         </div>
         <div>
@@ -91,25 +81,35 @@ export const BloggerOfferCard: FC<BloggerOfferCardProps> = ({
         </div>
       </div>
       <>
-        {card.status === offerStatus.active ? (
+        {statusFilter === offerStatusFilter.active &&
+        card.api_status === offerStatus.in_progress ? (
           <div className={styles.card__active}>
             <div className={styles.card__active__title}>
               <p>{t(`offers_blogger.offer_status.active.title`)}</p>
-              <span>11.11.2024 с 17:00 до 19:00 (UTC +5)</span>
+              <span>
+                {typeof card.publish_date === "object"
+                  ? card.publish_date.date_from +
+                    " - " +
+                    card.publish_date.date_to
+                  : card.publish_date}{" "}
+                {card.publish_time.time_from} - {card.publish_time.time_to} (UTC
+                +5)
+              </span>
             </div>
             <div className={styles.card__active__buttons}>
               <SeeLinkBtn />
               <SendLinkBtn />
             </div>
           </div>
-        ) : card.status === offerStatus.check ? (
+        ) : statusFilter === offerStatusFilter.active &&
+          card.api_status === offerStatus.post_review ? (
           <div className={styles.card__check}>
             <div>
               <p>{t(`offers_blogger.offer_status.check.title`)}</p>
               <span>{t(`offers_blogger.offer_status.check.text`)}</span>
             </div>
           </div>
-        ) : card.status === offerStatus.wait ? (
+        ) : statusFilter === offerStatusFilter.wait ? (
           <div className={styles.card__wait}>
             <div className={styles.card__wait__title}>
               <p>{t(`offers_blogger.offer_status.wait.title`)}</p>
@@ -123,26 +123,26 @@ export const BloggerOfferCard: FC<BloggerOfferCardProps> = ({
               <SeeLinkBtn />
             </div>
           </div>
-        ) : card.status === offerStatus.complite ? (
+        ) : statusFilter === offerStatusFilter.completed ? (
           <div className={styles.card__complite}>
             <div>
               <HappySmileIcon />
             </div>
           </div>
-        ) : card.status === offerStatus.cancel ? (
+        ) : statusFilter === offerStatusFilter.canceled ? (
           <div className={styles.card__cancel}>
             <div>
               <p>{t(`offers_blogger.offer_status.cancel.title`)}</p>
               <span>{t(`offers_blogger.offer_status.cancel.text`)}</span>
             </div>
           </div>
-        ) : card.status === offerStatus.moderation ? (
+        ) : statusFilter === offerStatusFilter.moderation ? (
           <div className={styles.card__moderation}>
             <div>
               <span>{t(`offers_blogger.offer_status.moderation.text`)}</span>
             </div>
           </div>
-        ) : card.status === offerStatus.uncomplite ? (
+        ) : statusFilter === offerStatusFilter.unfulfilled ? (
           <div className={styles.card__uncomplite}>
             <div className={styles.card__uncomplite__title}>
               <p>{t(`offers_blogger.offer_status.reject.title`)}</p>
@@ -156,7 +156,7 @@ export const BloggerOfferCard: FC<BloggerOfferCardProps> = ({
           <></>
         )}
       </>
-      {offerStatusChat.includes(card.status) && (
+      {offerStatusChat.includes(statusFilter as offerStatusFilter) && (
         <div className={styles.card__more}>
           <div>
             <button>

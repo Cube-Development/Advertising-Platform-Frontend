@@ -10,6 +10,9 @@ import { AdvProject } from "@widgets/advProject";
 import { BarFilter } from "@widgets/barFilter";
 import { AdvDevProject } from "@widgets/advDevProject";
 import { FC } from "react";
+import { useForm } from "react-hook-form";
+import { platformTypesNum } from "@shared/config/platformTypes";
+import { networkTypes } from "@shared/config/platformData";
 
 const MyProjectAdvCard = {
   id: 31231132,
@@ -401,9 +404,19 @@ export const OrdersPage: FC = () => {
   const { typeFilter, statusFilter } = useAppSelector((state) => state.filter);
   const page = pageFilter.order;
 
+  const {
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm<{ platform: platformTypesNum }>({
+    defaultValues: {
+      platform: networkTypes[0].id,
+    },
+  });
+
   return (
     <>
-      <BarFilter page={page} listLength={true} />
+      <BarFilter setValue={setValue} page={page} listLength={true} />
 
       {typeFilter === projectTypesFilter.myProject &&
       statusFilter === myProjectStatusFilter.active ? (
