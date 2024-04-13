@@ -20,20 +20,20 @@ export const AdvDevProjectCard: FC<AdvDevProjectCardProps> = ({
 
   return (
     <div className={styles.card}>
-      <div className={styles.title}>
+      <div className={styles.card__title}>
         <p>{card.name}</p>
-        <span>
-          <small>№{card.id}</small>
-          <small>{card.date}</small>
-        </span>
+        <div>
+          <span>№{card.id}</span>
+          <span>{card.date}</span>
+        </div>
       </div>
 
-      <div className={styles.info}>
+      <div className={styles.card__info}>
         <p>{t("orders_advertiser.card.tarif")}:</p>
         <span>{card.tarif}</span>
       </div>
 
-      <div className={styles.info}>
+      <div className={styles.card__info}>
         <p>{t("orders_advertiser.card.cost")}:</p>
         <span>
           {card.cost.toLocaleString()} {t("symbol")}
@@ -41,15 +41,15 @@ export const AdvDevProjectCard: FC<AdvDevProjectCardProps> = ({
       </div>
 
       {typeFilter === projectTypesFilter.savedProject ? (
-        <>
-          <div className={styles.status}>
+        <div className={styles.card__template}>
+          <div>
             <TemplateIcon2 />
             {t("orders_advertiser.order_status.template.title")}
           </div>
           <ContinueBtn />
-        </>
+        </div>
       ) : (
-        <div className={styles.status}>{card.status}</div>
+        <div className={styles.card__status}>{card.status}</div>
       )}
     </div>
   );

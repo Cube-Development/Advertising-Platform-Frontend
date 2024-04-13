@@ -1,14 +1,10 @@
 .button {
-  border-radius: 8px;
-  border: 1px solid #4772e6;
   padding: 10px;
-
+  border-radius: 8px;
   font-size: 14px;
   font-style: normal;
   font-weight: 500;
-  line-height: normal;
-  color: var(--Gradients-Gradient-1);
-  background: none;
+  line-height: 0.75;
 
   div {
     display: grid;

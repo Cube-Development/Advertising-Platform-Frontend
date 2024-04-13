@@ -8,12 +8,12 @@ export const Feedback: FC = () => {
   const { t } = useTranslation();
 
   return (
-    <MyButton className={styles.button}>
+    <MyButton buttons_type="button__white" className={styles.button}>
       <div>
         {t(`order_btn.feedback`)}
         <StarIcon2 />
-        <ArrowIcon2 />
       </div>
+      <ArrowIcon2 />
     </MyButton>
   );
 };

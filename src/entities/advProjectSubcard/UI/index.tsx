@@ -1,7 +1,13 @@
-import { EyeIcon, ManIcon, SubsIcon, WomanIcon } from "@shared/assets";
+import {
+  EyeIcon,
+  ManIcon,
+  RatingIcon,
+  SubsIcon,
+  WomanIcon,
+} from "@shared/assets";
+import { orderStatus, orderStatusChat } from "@shared/config/orderFilter";
 import { projectTypesFilter } from "@shared/config/projectFilter";
-import { chating, orderStatus } from "@shared/config/orderFilter";
-import { IChannelChat, IAdvProjectSubcard } from "@shared/types/common";
+import { IAdvProjectSubcard, IChannelChat } from "@shared/types/common";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -34,37 +40,39 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
   const { t } = useTranslation();
 
   return (
-    <div className={styles.subcard__row}>
+    <div className={styles.subcard}>
       <div className={styles.subcard__left}>
-        <div className={styles.channel__preview}>
-          <div className={styles.channel__logo}>
+        <div className={styles.subcard__left__description}>
+          <div className={styles.subcard__left__description__logo}>
             <img src={`/images/partners/${subcard.img}`} alt="" />
           </div>
-          <div className={styles.channel__rate}></div>
-          <p>{subcard.name}</p>
-          <span>{subcard.category}</span>
+          <div className={styles.subcard__left__description__rate}>
+            <RatingIcon />
+          </div>
+          <div className={styles.subcard__left__description__title}>
+            <p>{subcard.name}</p>
+            <span>{subcard.category}</span>
+          </div>
         </div>
-        <div className={styles.channel__column}>
-          <div>
+        <div className={styles.subcard__left__info}>
+          <div className={styles.subcard__left__info__top}>
             <p>{t(`orders_advertiser.subcard.date`)}</p>
             <span>
               {subcard.date_from} - {subcard.date_to}
             </span>
           </div>
-          <hr />
           <div>
             <p>{t(`orders_advertiser.subcard.accommodation`)}</p>
             <span>{subcard.accommodation}</span>
           </div>
         </div>
-        <div className={styles.channel__column}>
-          <div>
+        <div className={styles.subcard__left__info}>
+          <div className={styles.subcard__left__info__top}>
             <p>{t(`orders_advertiser.subcard.time`)}</p>
             <span>
               {subcard.time_from} - {subcard.time_to}
             </span>
           </div>
-          <hr />
           <div>
             <p>{t(`orders_advertiser.subcard.price`)}</p>
             <span>
@@ -72,8 +80,8 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
             </span>
           </div>
         </div>
-        <div className={styles.channel__info}>
-          <div className={styles.channel__info_row}>
+        <div className={styles.subcard__left__data}>
+          <div className={styles.subcard__left__data__row}>
             <div className={styles.info}>
               <div>
                 <SubsIcon />
@@ -87,12 +95,12 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
               <span>{subcard.views.toLocaleString()}</span>
             </div>
           </div>
-          <div className={styles.channel__info_middle}>
+          <div className={styles.subcard__left__data__middle}>
             <div>
               <ManIcon />
             </div>
             <div
-              className={styles.colorline}
+              className="colorline"
               style={{ "--male": `${20}%` } as React.CSSProperties}
               data-male={`${20}%`}
               data-female={`${80}%`}
@@ -101,7 +109,7 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
               <WomanIcon />
             </div>
           </div>
-          <div className={styles.channel__info_row}>
+          <div className={styles.subcard__left__data__row}>
             <div className={styles.info}>
               <p>ER:</p>
               <span>{subcard.ER}%</span>
@@ -115,79 +123,91 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
           </div>
         </div>
       </div>
-      <div className={styles.subcard__status}>
+      <>
         {subcard.status === orderStatus.rejected ? (
-          <div>
-            <p>{t(`orders_advertiser.order_status.rejected.title`)}</p>
-            {typeFilter === projectTypesFilter.managerProject ? (
-              <span>{t(`orders_advertiser.order_status.rejected.text2`)}</span>
-            ) : (
-              status === orderStatus.completed || (
-                <span>{t(`orders_advertiser.order_status.rejected.text`)}</span>
-              )
-            )}
+          <div className={styles.subcard__active}>
+            <div>
+              <p>{t(`orders_advertiser.order_status.rejected.title`)}</p>
+              <span>
+                {typeFilter === projectTypesFilter.managerProject
+                  ? t(`orders_advertiser.order_status.rejected.text2`)
+                  : status === orderStatus.completed ||
+                    t(`orders_advertiser.order_status.rejected.text`)}
+              </span>
+            </div>
           </div>
         ) : subcard.status === orderStatus.completed ? (
-          <div>
-            <p>{t(`orders_advertiser.order_status.completed.title`)}</p>
-            <FeedbackBtn />
+          <div className={styles.subcard__completed}>
+            <div>
+              <p>{t(`orders_advertiser.order_status.completed.title`)}</p>
+              <FeedbackBtn />
+            </div>
           </div>
-        ) : subcard.status === orderStatus.posted ? (
-          <div>
-            <p>{t(`orders_advertiser.order_status.posted.title`)}</p>
-            {typeFilter === projectTypesFilter.managerProject || (
-              <>
+        ) : subcard.status === orderStatus.post_review ? (
+          <div className={styles.subcard__posted}>
+            <div className={styles.subcard__posted__title}>
+              <p>{t(`orders_advertiser.order_status.posted.title`)}</p>
+              {typeFilter === projectTypesFilter.managerProject || (
                 <span>{t(`orders_advertiser.order_status.posted.text`)}</span>
-                <div>
+              )}
+            </div>
+            <div className={styles.subcard__posted__buttons}>
+              {typeFilter === projectTypesFilter.managerProject || (
+                <div className={styles.subcard__posted__buttons__top}>
                   <AcceptBtn />
                   <RejectBtn />
                 </div>
-              </>
-            )}
-            <CheckBtn />
+              )}
+              <CheckBtn />
+            </div>
           </div>
-        ) : subcard.status === orderStatus.accepted ? (
-          <div>
+        ) : subcard.status === orderStatus.in_progress ? (
+          <div className={styles.subcard__accepted}>
             <p>{t(`orders_advertiser.order_status.accepted.title`)}</p>
             {typeFilter === projectTypesFilter.managerProject || (
               <span>{t(`orders_advertiser.order_status.accepted.text`)}</span>
             )}
-            {<SeeBtn />}
+            <SeeBtn />
           </div>
         ) : subcard.status === orderStatus.moderation ? (
-          <div>
-            <p>{t(`orders_advertiser.order_status.moderation.title`)}</p>
-            <span>
-              {t(`orders_advertiser.order_status.moderation.text`)}
-              <small>
-                {t(`orders_advertiser.order_status.moderation.small`)}
-              </small>
-            </span>
+          <div className={styles.subcard__moderation}>
+            <div>
+              <p>{t(`orders_advertiser.order_status.moderation.title`)}</p>
+              <span>
+                {t(`orders_advertiser.order_status.moderation.text`)}
+                <small>
+                  {t(`orders_advertiser.order_status.moderation.small`)}
+                </small>
+              </span>
+            </div>
           </div>
-        ) : subcard.status === orderStatus.waiting ? (
-          <div>
-            <p>{t(`orders_advertiser.order_status.waiting.title`)}</p>
-            {<SeeBtn />}
+        ) : subcard.status === orderStatus.post_review ? (
+          <div className={styles.subcard__waiting}>
+            <div>
+              <p>{t(`orders_advertiser.order_status.waiting.title`)}</p>
+              <SeeBtn />
+            </div>
           </div>
-        ) : subcard.status === orderStatus.agreed ? (
-          <div>
-            <p>{t(`orders_advertiser.order_status.agreed.title`)}</p>
-            {<ChangeChannelBtn />}
-            {<CheckBtn />}
+        ) : subcard.status === orderStatus.post_review ? (
+          <div className={styles.subcard__agreed}>
+            <div>
+              <p>{t(`orders_advertiser.order_status.agreed.title`)}</p>
+              <div>
+                <ChangeChannelBtn />
+                <CheckBtn />
+              </div>
+            </div>
           </div>
         ) : (
           <></>
         )}
-      </div>
-      {typeFilter !== projectTypesFilter.managerProject && (
-        <div className={styles.subcard__right}>
-          {chating.includes(subcard.status) && (
-            <div>
-              <ChannelChatBtn id={1} />
-            </div>
-          )}
-        </div>
-      )}
+      </>
+      {typeFilter !== projectTypesFilter.managerProject &&
+        orderStatusChat.includes(subcard.status) && (
+          <div className={styles.subcard__chat}>
+            <ChannelChatBtn id={1} />
+          </div>
+        )}
     </div>
   );
 };

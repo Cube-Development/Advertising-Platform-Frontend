@@ -91,12 +91,12 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
               </span>
             </div>
           </div>
-          <div className={styles.card__info__icons}>
+          <>
             {typeFilter === projectTypesFilter.managerProject &&
             statusFilter === managerProjectStatusFilter.agreed ? (
               <AcceptProjectBtn />
             ) : (
-              <>
+              <div className={styles.card__info__icons}>
                 <div>
                   <CompliteIcon />
                   <p>{card.complite.toLocaleString()}</p>
@@ -117,9 +117,9 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
                   <SearchIcon />
                   <p>{card.consideration.toLocaleString()}</p>
                 </div>
-              </>
+              </div>
             )}
-          </div>
+          </>
         </div>
         <div className={styles.card__more}>
           <div>
