@@ -12,10 +12,10 @@ export const NewProject: FC<IStartProjectProps> = ({ listLength }) => {
 
   return (
     <Link to={paths.catalog}>
-      <MyButton className={styles.button}>
+      <MyButton buttons_type="button__blue" className={styles.button}>
         {listLength
-          ? t(`orders_advertiser.start_new_project`)
-          : t(`orders_advertiser.new_project`)}
+          ? t(`orders_advertiser.new_project`)
+          : t(`orders_advertiser.start_new_project`)}
         <PlusIcon2 />
       </MyButton>
     </Link>

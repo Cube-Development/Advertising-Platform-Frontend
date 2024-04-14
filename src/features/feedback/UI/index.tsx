@@ -1,4 +1,4 @@
-import { ArrowIcon2, StarIcon2 } from "@shared/assets";
+import { ArrowLongHorizontalIcon, StarIcon2 } from "@shared/assets";
 import { MyButton } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -13,7 +13,7 @@ export const Feedback: FC = () => {
         {t(`order_btn.feedback`)}
         <StarIcon2 />
       </div>
-      <ArrowIcon2 />
+      <ArrowLongHorizontalIcon className="active__icon" />
     </MyButton>
   );
 };

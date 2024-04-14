@@ -2,7 +2,7 @@ import { IOption } from "@shared/types/common";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { ArrowIcon, InfoIcon } from "@shared/assets";
+import { ArrowSmallVerticalIcon, InfoIcon } from "@shared/assets";
 import { UseFormSetValue } from "react-hook-form";
 import { SELECTOPTIONS } from "@shared/config/common";
 import { ISelectOption } from "@shared/types/translate";
@@ -148,12 +148,12 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
               </span>
             )}
             <div className={isMenuOpen ? "rotate" : "rotate__down"}>
-              <ArrowIcon
+              <ArrowSmallVerticalIcon
                 className={
                   (isMenuOpen || selectedOption || selectedOptions.length) &&
                   !isFilter
                     ? "active__icon"
-                    : "non__active__icon"
+                    : "default__icon__grey"
                 }
               />
             </div>

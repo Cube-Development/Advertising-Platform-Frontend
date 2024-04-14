@@ -3,7 +3,7 @@ import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { platformFormats } from "@shared/config/formatTypes";
-import { ArrowIcon } from "@shared/assets";
+import { ArrowSmallVerticalIcon } from "@shared/assets";
 
 export const FormatList: FC<IFormatListProps> = ({
   selectedFormat,
@@ -52,8 +52,8 @@ export const FormatList: FC<IFormatListProps> = ({
     <div className={styles.wrapper} ref={menuRef}>
       <button type="button" onClick={(e) => handleButtonClick(e)}>
         <div className={isMenuOpen ? "rotate" : "rotate__down"}>
-          <ArrowIcon
-            className={isMenuOpen ? "active__icon" : "default__icon"}
+          <ArrowSmallVerticalIcon
+            className={isMenuOpen ? "active__icon" : "default__icon__black"}
           />
         </div>
         <p>{platformFormats[selectedFormat.format]}</p>

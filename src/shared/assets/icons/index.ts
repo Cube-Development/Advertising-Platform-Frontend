@@ -1,7 +1,7 @@
 export { AddIcon } from "./add";
 export { AddFileIcon } from "./addFile";
-export { ArrowIcon } from "./arrow";
-export { ArrowIcon2 } from "./arrow2";
+export { ArrowSmallVerticalIcon } from "./arrowSmallVertical";
+export { ArrowLongHorizontalIcon } from "./arrowLongHorizontalIcon";
 export { ArrowIcon3 } from "./arrow3";
 export { ArrowIcon4 } from "./arrow4";
 export { ArrowIcon5 } from "./arrow5";

@@ -26,7 +26,7 @@ export const OrdersPage: FC = () => {
 
   return (
     <>
-      <BarFilter page={page} listLength={true} />
+      <BarFilter page={page} listLength={!!projects?.projects.length} />
 
       {/* {typeFilter === projectTypesFilter.myProject &&
       statusFilter === myProjectStatusFilter.active ? (

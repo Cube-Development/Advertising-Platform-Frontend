@@ -23,7 +23,7 @@ export const AdvProject: FC<AdvProjectProps> = ({ projects }) => {
     <div className="container sidebar">
       {projects?.projects?.length === 0 ? (
         <ZeroProject
-          listLength={false}
+          listLength={!!projects?.projects?.length}
           NewProjectBtn={NewProject}
           TurnkeyProjectBtn={TurnkeyProject}
         />

@@ -40,6 +40,7 @@ export const PlatformsPage: FC = () => {
     platform: platformType,
     language: language?.id || Languages[0].id,
     page: 1,
+    elements_on_page: 3,
     date_sort: "increase",
     status: statusFilter,
   };

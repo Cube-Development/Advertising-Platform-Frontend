@@ -1,5 +1,6 @@
 import { AdvProjectSubcard } from "@entities/advProjectSubcard";
 import {
+  ArrowSmallVerticalIcon,
   CancelIcon,
   ChatIcon,
   CompliteIcon,
@@ -184,6 +185,14 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
         {isSubcardOpen
           ? t(`orders_advertiser.card.see_less`)
           : t(`orders_advertiser.card.see_more`)}
+
+        <ArrowSmallVerticalIcon
+          className={
+            isSubcardOpen
+              ? "active__icon rotate"
+              : "default__icon__white rotate_down"
+          }
+        />
       </button>
     </div>
   );

@@ -158,7 +158,7 @@ body {
 }
 
 .rotate {
-  fill: var(--Personal-colors-main);
+  stroke: var(--Personal-colors-main);
   transform: rotate(180deg);
   transition: transform 0.5s ease;
 }
@@ -169,15 +169,19 @@ body {
 }
 
 .active__icon {
-  fill: var(--Personal-colors-main);
+  stroke: var(--Personal-colors-main);
 }
 
-.non__active__icon {
-  fill: var(--choosen-text);
+.default__icon__grey {
+  stroke: var(--choosen-text);
 }
 
-.default__icon {
-  fill: var(--Personal-colors-black);
+.default__icon__black {
+  stroke: var(--Personal-colors-black);
+}
+
+.default__icon__white {
+  stroke: var(--Personal-colors-White);
 }
 
 .show {

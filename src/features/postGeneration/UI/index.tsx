@@ -2,18 +2,16 @@ import { FC } from "react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
 import { MyButton } from "@shared/ui";
-import { ArrowIcon2 } from "@shared/assets";
+import { ArrowLongHorizontalIcon } from "@shared/assets";
 
 interface PostGenerationProps {}
 
 export const PostGeneration: FC<PostGenerationProps> = () => {
   const { t } = useTranslation();
   return (
-    <MyButton className={styles.button}>
-      <div>
-        {t(`create_order.create.generation`)}
-        <ArrowIcon2 />
-      </div>
+    <MyButton buttons_type="button_white" className={styles.button}>
+      {t(`create_order.create.generation`)}
+      <ArrowLongHorizontalIcon className="active__icon" />
     </MyButton>
   );
 };

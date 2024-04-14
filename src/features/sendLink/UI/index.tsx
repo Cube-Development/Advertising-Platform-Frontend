@@ -1,4 +1,4 @@
-import { ArrowIcon2 } from "@shared/assets";
+import { ArrowLongHorizontalIcon } from "@shared/assets";
 import { MyButton } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -9,7 +9,7 @@ export const SendLink: FC = () => {
   return (
     <MyButton buttons_type="button__blue" className={styles.button}>
       {t(`offer_btn.send_link`)}
-      <ArrowIcon2 />
+      <ArrowLongHorizontalIcon className="default__icon__white" />
     </MyButton>
   );
 };

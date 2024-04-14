@@ -1,6 +1,6 @@
 import {
-  ArrowIcon,
-  ArrowIcon2,
+  ArrowSmallVerticalIcon,
+  ArrowLongHorizontalIcon,
   CancelIcon,
   CompliteIcon,
   MoreIcon,
@@ -235,9 +235,13 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
         {isSubcardOpen
           ? t(`orders_advertiser.card.see_less`)
           : t(`orders_advertiser.card.see_more`)}
-        <div className={isSubcardOpen ? "rotate" : "rotate_down"}>
-          {/* <ArrowIcon2 /> */}
-        </div>
+        <ArrowSmallVerticalIcon
+          className={
+            isSubcardOpen
+              ? "active__icon rotate"
+              : "default__icon__white rotate_down"
+          }
+        />
       </MyButton>
     </div>
   );

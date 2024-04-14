@@ -1,4 +1,4 @@
-import { ArrowIcon2 } from "@shared/assets";
+import { ArrowLongHorizontalIcon } from "@shared/assets";
 import { MyButton } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -9,7 +9,7 @@ export const ChangeChannel: FC = () => {
   return (
     <MyButton buttons_type="button__white" className={styles.button}>
       {t(`order_btn.change`)}
-      <ArrowIcon2 />
+      <ArrowLongHorizontalIcon className="active__icon" />
     </MyButton>
   );
 };

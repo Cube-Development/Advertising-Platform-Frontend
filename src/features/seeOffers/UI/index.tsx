@@ -1,4 +1,4 @@
-import { ArrowIcon2 } from "@shared/assets";
+import { ArrowLongHorizontalIcon } from "@shared/assets";
 import { MyButton } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -12,7 +12,7 @@ export const SeeOffers: FC = () => {
     <Link to={paths.offers}>
       <MyButton buttons_type="button__blue" className={styles.button}>
         {t(`platform_btn.offer`)}
-        <ArrowIcon2 />
+        <ArrowLongHorizontalIcon className="default__icon__white" />
       </MyButton>
     </Link>
   );
