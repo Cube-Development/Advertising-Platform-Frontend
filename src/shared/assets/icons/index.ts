@@ -53,6 +53,8 @@ export { SearchIcon } from "./search";
 export { SendIcon } from "./send";
 export { SortUpIcon } from "./sortUp";
 export { SadSmileIcon } from "./sadSmile";
+export { Spline } from "./spline";
+export { Spline2 } from "./spline2";
 export { StarIcon } from "./star";
 export { StarIcon2 } from "./star2";
 export { StarIcon3 } from "./star3";
