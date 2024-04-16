@@ -8,12 +8,15 @@ interface UserState {
   role: roles;
 }
 
+const roleFromCookies = Cookies.get("role");
+const getRole: roles =
+  roleFromCookies && Object.values(roles).includes(roleFromCookies as roles)
+    ? (roleFromCookies as roles)
+    : roles.advertiser;
+
 const initialState: UserState = {
   isAuth: Cookies.get("isAuth") === "true" ? true : false,
-  role:
-    Cookies.get("role") === `${roles.blogger}`
-      ? roles.blogger
-      : roles.advertiser,
+  role: getRole,
 };
 
 export const userSlice = createSlice({

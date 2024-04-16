@@ -25,35 +25,43 @@ export interface IRoute {
   sidebar?: boolean;
 }
 
-export const privateBloggerRoutes: IRoute[] = [
-  { path: paths.mainBlogger, component: MainBloggerPage },
-  { path: paths.profile, component: ProfilePage, sidebar: true },
-  { path: paths.platformOwner, component: PlatformOwnerPage, sidebar: true },
-  { path: paths.notFound, component: NotFoundPage },
+export const privateCommonRoutes: IRoute[] = [
   { path: paths.walletTopUp, component: WalletTopUpPage, sidebar: true },
   { path: paths.walletWithdraw, component: WalletWithdrawPage, sidebar: true },
   { path: paths.wallethistory, component: WalletHistoryPage, sidebar: true },
-  { path: paths.addPlatform, component: AddPlatformPage, sidebar: true },
+  { path: paths.profile, component: ProfilePage, sidebar: true },
   { path: paths.addProfile, component: AddProfilePage, sidebar: true },
+  { path: paths.notFound, component: NotFoundPage },
+];
+
+export const privateBloggerRoutes: IRoute[] = [
+  { path: paths.mainBlogger, component: MainBloggerPage },
+  { path: paths.platformOwner, component: PlatformOwnerPage, sidebar: true },
+  { path: paths.notFound, component: NotFoundPage },
+  { path: paths.addPlatform, component: AddPlatformPage, sidebar: true },
   { path: paths.platforms, component: PlatformsPage, sidebar: true },
   { path: paths.offers, component: OffersPage, sidebar: true },
-  { path: paths.createOrder, component: CreateOrderPage, sidebar: false },
 ];
 
 export const privateAdvertiserRoutes: IRoute[] = [
   { path: paths.main, component: MainPage },
-  { path: paths.profile, component: ProfilePage, sidebar: true },
-  { path: paths.notFound, component: NotFoundPage },
-  { path: paths.addProfile, component: AddProfilePage, sidebar: true },
   { path: paths.fullServise, component: FullServicePage, sidebar: true },
   { path: paths.catalog, component: CatalogPage },
   { path: paths.cart, component: CartPage },
-  { path: paths.walletTopUp, component: WalletTopUpPage, sidebar: true },
-  { path: paths.walletWithdraw, component: WalletWithdrawPage, sidebar: true },
-  { path: paths.wallethistory, component: WalletHistoryPage, sidebar: true },
-  { path: paths.turnkey, component: TurnkeyPage, sidebar: true },
+  { path: paths.turnkey, component: TurnkeyPage, sidebar: false },
   { path: paths.orders, component: OrdersPage, sidebar: true },
   { path: paths.createOrder, component: CreateOrderPage, sidebar: false },
+];
+
+export const privateManagerRoutes: IRoute[] = [
+  ...privateBloggerRoutes,
+  ...privateAdvertiserRoutes,
+  ...privateCommonRoutes,
+];
+export const privateAdministratorRoutes: IRoute[] = [
+  ...privateBloggerRoutes,
+  ...privateAdvertiserRoutes,
+  ...privateCommonRoutes,
 ];
 
 export const publicRoutes: IRoute[] = [
@@ -63,11 +71,4 @@ export const publicRoutes: IRoute[] = [
   { path: paths.catalog, component: CatalogPage },
   { path: paths.cart, component: CartPage },
   { path: paths.turnkey, component: TurnkeyPage },
-
-  { path: paths.walletTopUp, component: WalletTopUpPage, sidebar: true },
-  { path: paths.walletWithdraw, component: WalletWithdrawPage, sidebar: true },
-  { path: paths.wallethistory, component: WalletHistoryPage, sidebar: true },
-  { path: paths.addProfile, component: AddProfilePage, sidebar: true },
-  { path: paths.addPlatform, component: AddPlatformPage, sidebar: true },
-  { path: paths.createOrder, component: CreateOrderPage, sidebar: false },
 ];
