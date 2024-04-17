@@ -3,15 +3,15 @@ import { paths } from "@shared/routing";
 import { SideBarLayout } from "@widgets/layouts";
 import { RootLayout } from "@widgets/layouts/rootLayout/ui";
 import { RouteObject, createBrowserRouter } from "react-router-dom";
-import { ProtectedRoutes } from "./ProtectedRoutes";
+import { CheckRoutes, routerType } from "./CheckRoutes";
 import {
   IRoute,
-  privateAdministratorRoutes,
   privateAdvertiserRoutes,
   privateBloggerRoutes,
   privateCommonRoutes,
-  privateManagerRoutes,
-  publicRoutes,
+  publicAdvertiserRoutes,
+  publicBloggerRoutes,
+  publicCommonRoutes,
 } from "./routes";
 
 const handleLayout = (route: IRoute) => {
@@ -32,16 +32,16 @@ const handleRouter = (routes: IRoute[]) => {
   return router;
 };
 
-const bloggerRouter: RouteObject[] = handleRouter(privateBloggerRoutes);
-const advertiserRouter: RouteObject[] = handleRouter(privateAdvertiserRoutes);
-const commonRouter: RouteObject[] = handleRouter(privateCommonRoutes);
-
-const managerRouter: RouteObject[] = handleRouter(privateManagerRoutes);
-const administratorRouter: RouteObject[] = handleRouter(
-  privateAdministratorRoutes,
+const privateBloggerRouter: RouteObject[] = handleRouter(privateBloggerRoutes);
+const privateAdvertiserRouter: RouteObject[] = handleRouter(
+  privateAdvertiserRoutes,
 );
-
-const publicRouter: RouteObject[] = handleRouter(publicRoutes);
+const privateCommonRouter: RouteObject[] = handleRouter(privateCommonRoutes);
+const publicAdvertisserRouter: RouteObject[] = handleRouter(
+  publicAdvertiserRoutes,
+);
+const publicBloggerRouter: RouteObject[] = handleRouter(publicBloggerRoutes);
+const publicCommonRouter: RouteObject[] = handleRouter(publicCommonRoutes);
 
 export const router = createBrowserRouter([
   {
@@ -50,33 +50,38 @@ export const router = createBrowserRouter([
     children: [
       {
         path: paths.main,
-        children: publicRouter,
+        element: (
+          <CheckRoutes checkRole={roles.advertiser} type={routerType.public} />
+        ),
+        children: publicAdvertisserRouter,
       },
       {
         path: paths.main,
-        element: <ProtectedRoutes checkRole={roles.advertiser} />,
-        children: advertiserRouter,
+        element: (
+          <CheckRoutes checkRole={roles.blogger} type={routerType.public} />
+        ),
+        children: publicBloggerRouter,
       },
       {
         path: paths.main,
-        element: <ProtectedRoutes checkRole={roles.blogger} />,
-        children: bloggerRouter,
+        element: (
+          <CheckRoutes checkRole={roles.advertiser} type={routerType.private} />
+        ),
+        children: privateAdvertiserRouter,
       },
       {
         path: paths.main,
-        element: <ProtectedRoutes />,
-        children: commonRouter,
+        element: (
+          <CheckRoutes checkRole={roles.blogger} type={routerType.private} />
+        ),
+        children: privateBloggerRouter,
       },
       {
         path: paths.main,
-        element: <ProtectedRoutes checkRole={roles.manager} />,
-        children: managerRouter,
+        element: <CheckRoutes type={routerType.private} />,
+        children: privateCommonRouter,
       },
-      {
-        path: paths.main,
-        element: <ProtectedRoutes checkRole={roles.administrator} />,
-        children: administratorRouter,
-      },
+      ...publicCommonRouter,
     ],
   },
 ]);
