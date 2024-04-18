@@ -1,9 +1,30 @@
 import { authApi } from "@shared/api";
-import { platformStatus } from "@shared/config/platformFilter";
+import { languagesNum } from "@shared/config/languages";
+import {
+  platformStatus,
+  platformStatusFilter,
+} from "@shared/config/platformFilter";
+import { platformTypesNum } from "@shared/config/platformTypes";
+import {
+  IActiveChannelBlogger,
+  IBlockedChannelBlogger,
+  IInactiveChannelBlogger,
+  IModerationChannelBlogger,
+  IModerationRejectChannelBlogger,
+} from "@shared/types/channelStatus";
 import {
   IAddChannelData,
   IAddChannelIdentification,
 } from "@shared/types/platform";
+
+export interface getChannelsByStatusReq {
+  platform: platformTypesNum;
+  language: languagesNum;
+  page: number;
+  date_sort: string;
+  elements_on_page?: number;
+  status: platformStatusFilter | string;
+}
 
 export const channelAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
@@ -30,15 +51,40 @@ export const channelAPI = authApi.injectEndpoints({
         body: BodyParams,
       }),
     }),
-
-    // getBalance: build.query<PaymentDepositResponse, void>({
-    //   query: () => `/wallet/balance`,
-    // }),
+    getChannelsByStatus: build.query<
+      | IActiveChannelBlogger
+      | IInactiveChannelBlogger
+      | IModerationChannelBlogger
+      | IModerationRejectChannelBlogger
+      | IBlockedChannelBlogger,
+      getChannelsByStatusReq
+    >({
+      query: (params) => ({
+        url: "/channel/blogger",
+        method: "GET",
+        params: params,
+      }),
+    }),
+    activateChannel: build.mutation<void, string>({
+      query: (channel_id) => ({
+        url: `/channel/activate/${channel_id}`,
+        method: `PUT`,
+      }),
+    }),
+    deactivateChannel: build.mutation<void, string>({
+      query: (channel_id) => ({
+        url: `/channel/deactivate/${channel_id}`,
+        method: `PUT`,
+      }),
+    }),
   }),
 });
 
 export const {
+  useCreateCodeQuery,
   useChannelVerifyMutation,
   useCreateChannelMutation,
-  useCreateCodeQuery,
+  useGetChannelsByStatusQuery,
+  useActivateChannelMutation,
+  useDeactivateChannelMutation,
 } = channelAPI;

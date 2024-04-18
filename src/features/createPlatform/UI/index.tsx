@@ -1,29 +1,24 @@
-import { ArrowIcon2, PaperAirplaneIcon } from "@shared/assets";
+import { PaperAirplaneIcon } from "@shared/assets";
 import { MyButton } from "@shared/ui";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { Link } from "react-router-dom";
+import { paths } from "@shared/routing";
 
-export const CreatePlatform: FC = () => {
+interface CreatePlatformProps {
+  isModalOpen: boolean;
+  onChange: () => void;
+}
+
+export const CreatePlatform: FC<CreatePlatformProps> = ({
+  isModalOpen,
+  onChange,
+}) => {
   const { t } = useTranslation();
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const handleOpenModal = () => {
-    setIsModalOpen(true);
-  };
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-  };
 
   return (
     <div>
-      <MyButton className={styles.button} onClick={handleOpenModal}>
-        <div>
-          {t("add_platform_btn.create")}
-          <ArrowIcon2 />
-        </div>
-      </MyButton>
-
       {isModalOpen && (
         <div className={styles.modal}>
           <div className={styles.modalContent}>
@@ -39,9 +34,11 @@ export const CreatePlatform: FC = () => {
                 {t("add_platform.create.answer.text2")}
               </p>
             </div>
-            <MyButton className={styles.accept__btn} onClick={handleCloseModal}>
-              {t("add_platform_btn.accept")}
-            </MyButton>
+            <Link to={paths.platforms}>
+              <MyButton className={styles.accept__btn} onClick={onChange}>
+                {t("add_platform_btn.accept")}
+              </MyButton>
+            </Link>
           </div>
         </div>
       )}

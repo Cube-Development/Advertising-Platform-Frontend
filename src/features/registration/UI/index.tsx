@@ -11,7 +11,9 @@ export const Registration: FC = () => {
   const { isAuth } = useAppSelector((state) => state.user);
 
   const registrationButton = (
-    <MyButton className={styles.button}>{t(`registration`)}</MyButton>
+    <MyButton buttons_type="button__orange" className={styles.button}>
+      {t(`registration`)}
+    </MyButton>
   );
 
   const handleRegistration = () => {

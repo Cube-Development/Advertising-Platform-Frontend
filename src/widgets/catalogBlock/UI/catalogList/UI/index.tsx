@@ -8,27 +8,31 @@ import {
   networkTypes,
   sortingTypes,
 } from "@shared/config/platformData";
-import { ICatalogCards } from "@shared/types/platform";
+import { IPlatform } from "@shared/types/platform";
 import { FC } from "react";
-import { useForm } from "react-hook-form";
+import { UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { getCatalogReq } from "@shared/store/services/catalogService";
 
-export const CatalogList: FC<ICatalogCards> = ({ cards, onChangeCard }) => {
+interface CatalogListProps {
+  channels: IPlatform[];
+  setValue: UseFormSetValue<getCatalogReq>;
+  onChangeCard: (cart: IPlatform) => void;
+}
+
+export const CatalogList: FC<CatalogListProps> = ({
+  channels,
+  setValue,
+  onChangeCard,
+}) => {
   const { t } = useTranslation();
-
-  const {
-    reset,
-    setValue,
-    formState: { errors },
-    getValues,
-  } = useForm<any>();
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.filters__row}>
         <big>
-          {t("catalog.all_platform")}: {cards.length}
+          {t("catalog.all_platform")}: {channels.length}
         </big>
         <div className={styles.filters}>
           <SelectOptions
@@ -46,12 +50,13 @@ export const CatalogList: FC<ICatalogCards> = ({ cards, onChangeCard }) => {
             single={true}
             type={filterData.sort}
             isFilter={true}
+            isCatalogSorting={true}
           />
         </div>
       </div>
 
       <SearchFilter />
-      {cards.map((card) => (
+      {channels.map((card) => (
         <CatalogCard
           card={card}
           key={card.id}

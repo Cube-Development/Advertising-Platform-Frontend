@@ -6,6 +6,8 @@ import styles from "./styles.module.scss";
 export const Support: FC = () => {
   const { t } = useTranslation();
   return (
-    <MyButton className={styles.button}>{t(`platform_btn.support`)}</MyButton>
+    <MyButton buttons_type="button__blue" className={styles.button}>
+      {t(`platform_btn.support`)}
+    </MyButton>
   );
 };

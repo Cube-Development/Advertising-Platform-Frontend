@@ -2,14 +2,24 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { InfoIcon } from "@shared/assets";
-import { IChannelFormat } from "@shared/types/platform";
+import {
+  IAddChannelData,
+  IAddFormat,
+  IChannelFormat,
+  IFormatPriceProps,
+} from "@shared/types/platform";
+import { UseFormSetValue } from "react-hook-form";
+import { platformData } from "@shared/config/platformData";
 
 interface SelectPriceProps {
   title: string;
   text: string;
   info: string;
+  type: platformData;
   formats?: IChannelFormat[];
-  AccommPrice: FC<IChannelFormat>;
+  AccommPrice: FC<IFormatPriceProps>;
+  onChange: UseFormSetValue<any>;
+  getValues: any;
 }
 
 export const SelectPrice: FC<SelectPriceProps> = ({
@@ -18,8 +28,22 @@ export const SelectPrice: FC<SelectPriceProps> = ({
   formats,
   AccommPrice,
   info,
+  onChange,
+  getValues,
+  type,
 }) => {
   const { t } = useTranslation();
+
+  const handleChangeFormatPrice = (format: IAddFormat) => {
+    const form: IAddChannelData = { ...getValues() };
+    const currentFormats = [...(form.format || [])];
+    const newFormats = currentFormats.filter(
+      (item) => item.name !== format.name,
+    );
+    format.price !== 0 && newFormats.push(format);
+    onChange(type, newFormats);
+  };
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.title}>
@@ -38,6 +62,7 @@ export const SelectPrice: FC<SelectPriceProps> = ({
               id={format.id}
               big={format.big}
               key={index}
+              onChange={handleChangeFormatPrice}
             />
           ))}
       </div>

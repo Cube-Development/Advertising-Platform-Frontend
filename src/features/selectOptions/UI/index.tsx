@@ -1,17 +1,11 @@
-import {
-  IAddPLatformData,
-  IFilter,
-  IOption,
-  IOptions,
-} from "@shared/types/common";
+import { IOption } from "@shared/types/common";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { ArrowIcon, InfoIcon } from "@shared/assets";
-import { UseFormSetValue } from "react-hook-form";
+import { ArrowSmallVerticalIcon, InfoIcon } from "@shared/assets";
+import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { SELECTOPTIONS } from "@shared/config/common";
 import { ISelectOption } from "@shared/types/translate";
-import { color } from "framer-motion";
 
 interface SelectOptionsProps {
   textData: string;
@@ -23,6 +17,9 @@ interface SelectOptionsProps {
   single: boolean;
   isRow?: boolean;
   isFilter?: boolean;
+  isCatalog?: boolean;
+  isCatalogSorting?: boolean;
+  getValues?: UseFormGetValues<any>;
 }
 
 export const SelectOptions: FC<SelectOptionsProps> = ({
@@ -33,6 +30,9 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
   isRow,
   textData,
   isFilter,
+  isCatalog,
+  isCatalogSorting,
+  getValues,
 }) => {
   const { t } = useTranslation();
   const allOptions: IOption[] = isFilter
@@ -71,7 +71,15 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
       ? selectedOptions.filter((value) => value !== selectedValue)
       : [...selectedOptions, selectedValue];
     setSelectedOptions(newOptions);
-    onChange(type, newOptions as []);
+    // catalog
+    const { filter } = getValues && getValues();
+    const updatedFilter = {
+      ...filter,
+      [type]: newOptions,
+    };
+    isCatalog
+      ? onChange("filter", updatedFilter)
+      : onChange(type, newOptions as []);
   };
 
   const handleOptionChange = (
@@ -80,12 +88,11 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
     const selectedId = Number(
       (event.target as HTMLLIElement).getAttribute("data-value"),
     );
-
     const option: IOption = allOptions!.find(
       (option) => option.id === selectedId,
     )!;
     setSelectedOption(option);
-    onChange(type, selectedId);
+    onChange(type, isCatalogSorting ? option.type : selectedId);
     closeMenu();
   };
 
@@ -154,12 +161,12 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
               </span>
             )}
             <div className={isMenuOpen ? "rotate" : "rotate__down"}>
-              <ArrowIcon
+              <ArrowSmallVerticalIcon
                 className={
                   (isMenuOpen || selectedOption || selectedOptions.length) &&
                   !isFilter
                     ? "active__icon"
-                    : "non__active__icon"
+                    : "default__icon__grey"
                 }
               />
             </div>

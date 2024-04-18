@@ -5,5 +5,9 @@ import styles from "./styles.module.scss";
 
 export const RejectPost: FC = () => {
   const { t } = useTranslation();
-  return <MyButton className={styles.button}>{t(`order_btn.reject`)}</MyButton>;
+  return (
+    <MyButton buttons_type="button__white" className={styles.button}>
+      {t(`order_btn.reject`)}
+    </MyButton>
+  );
 };

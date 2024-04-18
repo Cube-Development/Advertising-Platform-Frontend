@@ -1,4 +1,4 @@
-import { ArrowIcon } from "@shared/assets";
+import { ArrowSmallVerticalIcon } from "@shared/assets";
 import { IMenuItems } from "@shared/types/common";
 import React from "react";
 import { useTranslation } from "react-i18next";
@@ -23,7 +23,7 @@ export const MenuItem: React.FC<IMenuItems> = ({
               {item.item.img && <item.item.img />}
               {t(item.item.title)}
             </div>
-            <ArrowIcon />
+            <ArrowSmallVerticalIcon className="default__icon__grey" />
           </>
         ) : (
           <Link to={item.item.path!}>

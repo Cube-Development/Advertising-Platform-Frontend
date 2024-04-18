@@ -1,20 +1,23 @@
 export enum offerStatus {
-  active = 0,
   wait = 1,
-  complite = 2,
-  cancel = 3,
-  moderation = 4,
-  uncomplite = 5,
-  check = 6,
+  in_progress = 2,
+  completed = 3,
+  canceled = 4,
+  rejected = 5,
+  post_matched = 6,
+  date_interval = 7,
+  date_constant = 8,
+  post_review = 9,
+  moderation = 10,
 }
 
 export enum offerStatusFilter {
   active = "active",
-  waiting = "waiting",
-  complite = "complite",
-  reject = "reject",
+  wait = "wait",
+  completed = "completed",
+  canceled = "canceled",
   moderation = "moderation",
-  uncomplite = "uncomplite",
+  unfulfilled = "unfulfilled",
 }
 
 export const bloggerOfferStatus = [
@@ -24,15 +27,15 @@ export const bloggerOfferStatus = [
   },
   {
     name: "offers_blogger.status_filter.waiting",
-    type: offerStatusFilter.waiting,
+    type: offerStatusFilter.wait,
   },
   {
     name: "offers_blogger.status_filter.complite",
-    type: offerStatusFilter.complite,
+    type: offerStatusFilter.completed,
   },
   {
     name: "offers_blogger.status_filter.reject",
-    type: offerStatusFilter.reject,
+    type: offerStatusFilter.canceled,
   },
   {
     name: "offers_blogger.status_filter.moderation",
@@ -40,6 +43,11 @@ export const bloggerOfferStatus = [
   },
   {
     name: "offers_blogger.status_filter.uncomplite",
-    type: offerStatusFilter.uncomplite,
+    type: offerStatusFilter.unfulfilled,
   },
+];
+
+export const offerStatusChat = [
+  offerStatusFilter.active,
+  offerStatusFilter.wait,
 ];

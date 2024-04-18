@@ -1,84 +1,57 @@
-import { FC, useState } from "react";
+import { FC } from "react";
 import styles from "./styles.module.scss";
 import { BarProfileFilter } from "@features/barProfileFilter/UI";
 import { pageFilter } from "@shared/config/pageFilter";
 import { SelectOptions } from "@features/selectOptions";
 import { SelectSex } from "@features/selectSex";
 import { useTranslation } from "react-i18next";
-import { useForm } from "react-hook-form";
-import { IAddPLatformData, IOptions } from "@shared/types/common";
+import {
+  UseFormGetValues,
+  UseFormReset,
+  UseFormSetValue,
+} from "react-hook-form";
 import { QualityIcon } from "@shared/assets";
 import { useAppSelector } from "@shared/store";
 import { catalogFilter } from "@shared/config/catalogFilter";
 import { SelectDescription } from "@features/selectDescription";
 import { AiFilter } from "@features/aiFilter";
 import { platformData } from "@shared/config/platformData";
+import { getCatalogReq } from "@shared/store/services/catalogService";
+import {
+  useGetChannelAgesQuery,
+  useGetChannelLanguagesQuery,
+  useGetChannelRegionsQuery,
+  useGetCompanyCategoriesQuery,
+} from "@shared/store/services/contentService";
+import { Languages } from "@shared/config/languages";
 
-const options: IOptions = {
-  category: [
-    { name: "Категория 1", id: 1 },
-    { name: "Другая категория", id: 2 },
-    { name: "Бизнес", id: 3 },
-    { name: "Искусство", id: 4 },
-    { name: "Спорт", id: 5 },
-    { name: "Музыка", id: 6 },
-    { name: "Наука", id: 7 },
-    { name: "Технологии", id: 8 },
-  ],
-  languages: [
-    { name: "Русский", id: 0 },
-    { name: "Spanish", id: 1 },
-    { name: "French", id: 2 },
-    { name: "German", id: 3 },
-    { name: "Chinese", id: 4 },
-    { name: "Japanese", id: 5 },
-    { name: "Korean", id: 6 },
-    { name: "Italian", id: 7 },
-    { name: "Portuguese", id: 8 },
-    { name: "Arabic", id: 9 },
-    { name: "Hindi", id: 10 },
-    { name: "Turkish", id: 11 },
-  ],
-  region: [
-    { name: "Москва", id: 0 },
-    { name: "Санкт-Петербург", id: 1 },
-    { name: "Краснодар", id: 2 },
-    { name: "Екатеринбург", id: 3 },
-    { name: "Новосибирск", id: 4 },
-    { name: "Казань", id: 5 },
-    { name: "Нижний Новгород", id: 6 },
-    { name: "Челябинск", id: 7 },
-    { name: "Самара", id: 8 },
-    { name: "Уфа", id: 9 },
-    { name: "Ростов-на-Дону", id: 10 },
-    { name: "Омск", id: 11 },
-    { name: "Украина", id: 12 },
-  ],
-  age: [
-    { name: "18-24", id: 0 },
-    { name: "25-34", id: 1 },
-    { name: "35-44", id: 2 },
-    { name: "45-54", id: 3 },
-    { name: "55-64", id: 4 },
-    { name: "65+", id: 5 },
-  ],
-};
+interface CatalogSearchProps {
+  setValue: UseFormSetValue<getCatalogReq>;
+  reset: UseFormReset<getCatalogReq>;
+  getValues: UseFormGetValues<getCatalogReq>;
+}
 
-export const CatalogSearch: FC = () => {
-  const [selectedCategory, setSelectedCategory] = useState("");
-  const [selectedLanguage, setSelectedLanguage] = useState("");
-  const [selectedRegion, setSelectedRegion] = useState("");
-  const [selectedAge, setSelectedAge] = useState("");
-
+export const CatalogSearch: FC<CatalogSearchProps> = ({
+  setValue,
+  reset,
+  getValues,
+}) => {
   const { catalogFilter: filter } = useAppSelector((state) => state.filter);
 
-  const { t } = useTranslation();
-  const {
-    reset,
-    setValue,
-    formState: { errors },
-    getValues,
-  } = useForm<IAddPLatformData>();
+  const { t, i18n } = useTranslation();
+  const language = Languages.find((lang) => {
+    return i18n.language === lang.name;
+  });
+
+  const contentRes = {
+    language: language?.id || Languages[0].id,
+    page: 1,
+  };
+
+  const { data: categories } = useGetCompanyCategoriesQuery(contentRes);
+  const { data: ages } = useGetChannelAgesQuery(contentRes);
+  const { data: regions } = useGetChannelRegionsQuery(contentRes);
+  const { data: languages } = useGetChannelLanguagesQuery(contentRes);
 
   return (
     <div className={styles.wrapper}>
@@ -88,40 +61,50 @@ export const CatalogSearch: FC = () => {
           <>
             <SelectOptions
               onChange={setValue}
-              options={options.category}
+              getValues={getValues}
+              options={categories?.contents || []}
               single={false}
-              type={platformData.category}
+              type={platformData.business}
               textData={"catalog.category"}
               isRow={true}
+              isCatalog={true}
             />
             <SelectOptions
               onChange={setValue}
-              options={options.age}
+              getValues={getValues}
+              options={ages?.contents || []}
               single={false}
               type={platformData.age}
               textData={"catalog.age"}
               isRow={true}
+              isCatalog={true}
             />
             <SelectSex
               onChange={setValue}
+              getValues={getValues}
               title={"catalog.sex.title"}
               isRow={true}
+              isCatalog={true}
             />
             <SelectOptions
               onChange={setValue}
-              options={options.languages}
+              getValues={getValues}
+              options={languages?.contents || []}
               single={false}
-              type={platformData.languages}
+              type={platformData.language}
               textData={"catalog.languages"}
               isRow={true}
+              isCatalog={true}
             />
             <SelectOptions
               onChange={setValue}
-              options={options.region}
+              getValues={getValues}
+              options={regions?.contents || []}
               single={false}
               type={platformData.region}
               textData={"catalog.region"}
               isRow={true}
+              isCatalog={true}
             />
           </>
         ) : (

@@ -4,7 +4,7 @@ import { platformTypesNum } from "@shared/config/platformTypes";
 import { IChannelFormat } from "@shared/types/platform";
 
 type GetContentReq = {
-  language?: languagesNum;
+  language: languagesNum;
   page: number;
   elements_on_page?: number;
   platform?: platformTypesNum;

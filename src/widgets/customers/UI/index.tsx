@@ -11,7 +11,7 @@ export const Customers: FC<CustomersProps> = ({ page }) => {
   const { t } = useTranslation();
 
   return (
-    <section className={styles.customers__wrapper}>
+    <section className={styles.customer}>
       <div className="container">
         <h1 className={styles.customer__title}>
           {t(`${page}.customers_title`)}

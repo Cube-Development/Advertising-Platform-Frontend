@@ -1,6 +1,4 @@
 .subtypes {
-  margin-bottom: 30px;
-
   ul {
     display: grid;
     grid-auto-flow: column;
@@ -20,11 +18,11 @@
     min-width: 100px;
     cursor: pointer;
     white-space: nowrap;
-  }
-}
 
-.active {
-  border-radius: 12px;
-  background: var(--Gradients-Gradient-1);
-  color: #fff;
+    &.active {
+      border-radius: 12px;
+      background: var(--Gradients-Gradient-1);
+      color: var(--Personal-colors-White);
+    }
+  }
 }

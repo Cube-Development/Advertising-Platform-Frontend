@@ -14,16 +14,9 @@ export const ZeroPlatform: FC<ZeroPlatformProps> = ({ AddPlatformBtn }) => {
   const { statusFilter } = useAppSelector((state) => state.filter);
 
   return (
-    <div className={styles.no__project}>
+    <div className={styles.wrapper}>
       <div className={styles.smile}>
-        {statusFilter === platformStatusFilter.active ? (
-          <>
-            <div>
-              <SadSmileIcon />
-            </div>
-            <p>{t(`platforms_blogger.no_platform`)}</p>
-          </>
-        ) : statusFilter === platformStatusFilter.banned ? (
+        {statusFilter === platformStatusFilter.banned ? (
           <>
             <div>
               <HappySmileIcon />
@@ -31,12 +24,17 @@ export const ZeroPlatform: FC<ZeroPlatformProps> = ({ AddPlatformBtn }) => {
             <p>{t(`platforms_blogger.no_banned`)}</p>
           </>
         ) : (
-          <></>
+          <>
+            <div>
+              <SadSmileIcon />
+            </div>
+            <p>{t(`platforms_blogger.no_platform`)}</p>
+          </>
         )}
       </div>
-      <div className={styles.buttons}>
-        <AddPlatformBtn />
-      </div>
+      <AddPlatformBtn />
+      {/* <div className={styles.buttons}>
+      </div> */}
     </div>
   );
 };

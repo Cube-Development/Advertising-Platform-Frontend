@@ -1,44 +1,88 @@
-.cta__wrapper {
-  margin-top: 50px;
-  margin-bottom: 50px;
-}
-
-.cta__row {
+.wrapper {
   display: grid;
-  grid-auto-flow: column;
   column-gap: 5px;
-  justify-content: space-between;
+  margin: 50px 0;
+  grid-template: 1fr / 1fr 1fr;
 
-  img {
-    max-width: 550px;
+  .cta {
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 50px;
+
+    &__content {
+      display: grid;
+      grid-auto-flow: row;
+      row-gap: 30px;
+
+      &__title {
+        color: var(--Personal-colors-black);
+        font-size: 44px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+      }
+
+      &____subtitle {
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+        color: var(--Personal-colors-main);
+        background-clip: text;
+      }
+    }
+
+    &__options {
+      display: grid;
+      grid-auto-flow: row;
+      row-gap: 20px;
+      max-width: 450px;
+      color: var(--secondary-text);
+    }
+
+    &__button {
+      display: grid;
+      grid-template: 1fr / 1fr 1fr;
+    }
   }
-}
 
-.cta__right {
-  max-width: 595px;
-}
+  // .cta__row {
+  //   display: grid;
+  //   grid-auto-flow: column;
 
-.cta__title {
-  color: var(--Personal-colors-black);
-  font-size: 44px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  margin-bottom: 30px;
-}
+  //   column-gap: 5px;
+  //   justify-content: space-between;
 
-.cta__subtitle {
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  color: var(--Gradients-Gradient-1);
-  background-clip: text;
-  margin-bottom: 50px;
-}
+  //   img {
+  //     max-width: 550px;
+  //   }
+  // }
 
-.options {
-  max-width: 450px;
-  color: var(--secondary-text);
-  margin-bottom: 46px;
+  // .cta__right {
+  //   max-width: 595px;
+  // }
+  // .cta__title {
+  //   color: var(--Personal-colors-black);
+  //   font-size: 44px;
+  //   font-style: normal;
+  //   font-weight: 700;
+  //   line-height: normal;
+  //   margin-bottom: 30px;
+  // }
+
+  // .cta__subtitle {
+  //   font-size: 24px;
+  //   font-style: normal;
+  //   font-weight: 700;
+  //   line-height: normal;
+  //   color: var(--Gradients-Gradient-1);
+  //   background-clip: text;
+  //   margin-bottom: 50px;
+  // }
+
+  // .options {
+  //   max-width: 450px;
+  //   color: var(--secondary-text);
+  //   margin-bottom: 46px;
+  // }
 }

@@ -7,11 +7,13 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
 interface ZeroProjectProps {
+  listLength: boolean;
   NewProjectBtn: FC<IStartProjectProps>;
   TurnkeyProjectBtn: FC<IStartProjectProps>;
 }
 
 export const ZeroProject: FC<ZeroProjectProps> = ({
+  listLength,
   NewProjectBtn,
   TurnkeyProjectBtn,
 }) => {
@@ -38,9 +40,9 @@ export const ZeroProject: FC<ZeroProjectProps> = ({
         )}
       </div>
       <div className={styles.buttons}>
-        <NewProjectBtn isZeroProject={true} />
+        <NewProjectBtn listLength={listLength} />
         <p>{t(`orders_advertiser.or`)}</p>
-        <TurnkeyProjectBtn isZeroProject={true} />
+        <TurnkeyProjectBtn listLength={listLength} />
       </div>
     </div>
   );

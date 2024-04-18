@@ -1,15 +1,6 @@
 .button {
-  display: grid;
-  grid-auto-flow: column;
-  column-gap: 10px;
-  align-items: center;
-
   padding: 15px;
   border-radius: 8px;
-  border: 1px solid #4772e6;
-  background: none;
-  color: var(--Gradients-Gradient-1);
-
   font-size: 26px;
   font-style: normal;
   font-weight: 500;
@@ -19,15 +10,4 @@
     width: 21px;
     height: 21px;
   }
-}
-
-.new__turnkey {
-  border: none;
-  color: #fff;
-  background: radial-gradient(
-      419.34% 136.52% at 0% 100%,
-      rgba(255, 255, 255, 0.2) 0%,
-      rgba(125, 117, 117, 0) 100%
-    ),
-    linear-gradient(90deg, #ff2f66 0%, rgba(254, 110, 48, 0.99) 100%);
 }

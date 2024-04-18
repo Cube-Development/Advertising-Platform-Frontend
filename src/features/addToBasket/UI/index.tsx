@@ -1,36 +1,40 @@
-import { CartIcon, CartMinusIcon, CartPlusIcon } from "@shared/assets";
-import { IAddToBasketProps, IFormat } from "@shared/types/platform";
+import { CartMinusIcon, CartPlusIcon } from "@shared/assets";
+import { IAddToBasketProps } from "@shared/types/platform";
 import { MyButton } from "@shared/ui";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
 export const AddToBasket: FC<IAddToBasketProps> = ({
   FormatList,
-  selectedFormat,
-  formats,
   changeFormat,
-  сhangeCard,
-  isCart,
-  inCart,
+  changeCard,
+  card,
+  page,
+  selectedFormat,
 }) => {
   const { t } = useTranslation();
   return (
     <MyButton
-      className={`${styles.button} ${isCart ? styles.cart : ""} ${inCart ? styles.catalog__cart : ""}`}
-      onClick={сhangeCard}
+      buttons_type={
+        !card.selected_format && !page
+          ? "button__blue"
+          : page
+            ? "button__yellow"
+            : "button__green"
+      }
+      className={styles.button}
+      onClick={changeCard}
     >
-      <div className={styles.wrapper}>
-        <FormatList
-          selectedFormat={selectedFormat}
-          changeFormat={changeFormat}
-          formats={formats}
-        />
+      <FormatList
+        selectedFormat={selectedFormat}
+        changeFormat={changeFormat}
+        card={card}
+      />
 
-        <div className={styles.price}>
-          {selectedFormat.price.toLocaleString()} {t("symbol")}
-          {isCart || inCart ? <CartMinusIcon /> : <CartPlusIcon />}
-        </div>
+      <div className={styles.price}>
+        {selectedFormat.price.toLocaleString()} {t("symbol")}
+        {page || card.selected_format ? <CartMinusIcon /> : <CartPlusIcon />}
       </div>
     </MyButton>
   );

@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
-import { ArrowIcon, PencilIcon } from "@shared/assets";
+import { ArrowSmallVerticalIcon, PencilIcon } from "@shared/assets";
 import { useTranslation } from "react-i18next";
 import { ICreatePost, ICreatePostForm, IFile } from "@shared/types/createPost";
 import { CreatePostFormData } from "@shared/config/createPostData";

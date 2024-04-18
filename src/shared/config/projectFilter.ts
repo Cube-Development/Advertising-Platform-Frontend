@@ -6,12 +6,12 @@ export enum projectTypesFilter {
 
 export enum myProjectStatusFilter {
   active = "active",
-  complite = "complite",
+  completed = "completed",
 }
 
 export enum managerProjectStatusFilter {
   active = "active",
-  complite = "complite",
+  completed = "completed",
   develop = "develop",
   agreed = "agreed",
 }
@@ -23,7 +23,7 @@ export const advMyProjectStatus = [
   },
   {
     name: "orders_advertiser.status_filter.complite",
-    type: myProjectStatusFilter.complite,
+    type: myProjectStatusFilter.completed,
   },
 ];
 
@@ -42,7 +42,7 @@ export const advManagerProjectStatus = [
   },
   {
     name: "orders_advertiser.status_filter.complite",
-    type: managerProjectStatusFilter.complite,
+    type: managerProjectStatusFilter.completed,
   },
 ];
 
