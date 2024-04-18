@@ -8,4 +8,5 @@ export enum pageFilter {
   walletWithdraw = "walletWithdraw",
   createOrderFiles = "createOrderFiles",
   chat = "chat",
+  cart = "cart",
 }

@@ -8,6 +8,7 @@ import { roles } from "@shared/config/roles";
 import { useNavigate } from "react-router-dom";
 import { paths } from "@shared/routing";
 import { useGetTokensMutation } from "@shared/store/services/authService";
+import { useTransferPublicMutation } from "@shared/store/services/cartService";
 
 type DecodedToken = {
   role: roles;
@@ -19,6 +20,18 @@ export const HandleAuth = () => {
   const { code, state } = QueryParams();
   const navigate = useNavigate();
 
+  // transfer Public Cart
+  const guestId = Cookies.get("guest_id");
+  const transferCart = (id: string) => {
+    transferPublic({ guest_id: id })
+      .unwrap()
+      .then(() => {
+        Cookies.remove("guest_id");
+      })
+      .catch((error) => console.error("Ошибка при трансфере корзины", error));
+  };
+  const [transferPublic] = useTransferPublicMutation();
+
   const handleAuthTokens = async (code: string) => {
     const genState = Cookies.get("genState");
     if (state === genState) {
@@ -29,10 +42,11 @@ export const HandleAuth = () => {
           const decoded: DecodedToken = jwtDecode(data.access_token);
           dispatch(userSlice.actions.login(data));
           navigate(
-            decoded.role === roles.advertiser ? paths.main : paths.mainBlogger,
+            decoded.role === roles.advertiser ? paths.main : paths.mainBlogger
           );
           dispatch(userSlice.actions.toggleRole(decoded?.role));
           Cookies.remove("genState");
+          guestId && transferCart(guestId);
         })
         .catch((error) => {
           console.error("Ошибка получения токена:", error);

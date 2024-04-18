@@ -1,12 +1,9 @@
-import { FC, ReactElement, useState } from "react";
+import { FC, useState } from "react";
 import styles from "./styles.module.scss";
 import {
-  IAddCart,
-  IAddToBasketProps,
   ICatalogCard,
   IChangeCards,
   IFormat,
-  IFormatListProps,
   IPlatform,
 } from "@shared/types/platform";
 import {
@@ -18,13 +15,11 @@ import {
 } from "@shared/assets";
 import { useTranslation } from "react-i18next";
 import { platformToIcon } from "@shared/config/platformData";
+import { pageFilter } from "@shared/config/pageFilter";
 
 interface CatalogCardProps extends IChangeCards, ICatalogCard {
   card: IPlatform;
-  // onChangeCard: (channel: IAddCart) => void;
-  // AddToBasketBtn: FC<IAddToBasketProps>;
-  // FormatList: FC<IFormatListProps>;
-  // isCart?: boolean;
+  page?: pageFilter.cart;
 }
 
 export const CatalogCard: FC<CatalogCardProps> = ({
@@ -32,11 +27,13 @@ export const CatalogCard: FC<CatalogCardProps> = ({
   AddToBasketBtn,
   FormatList,
   onChangeCard,
-  isCart,
+  page,
 }) => {
   const { t } = useTranslation();
   const startFormat: IFormat = card.selected_format
-    ? card.format.find((format) => format.format === card.selected_format)!
+    ? card.format.find(
+        (format) => format.format === card.selected_format?.format
+      )!
     : card.format[0];
   const [selectedFormat, setSelectedFormat] = useState<IFormat>(startFormat);
 
@@ -46,25 +43,22 @@ export const CatalogCard: FC<CatalogCardProps> = ({
     // если канал в корзине и выбранный новый формат не равен selected_format должен быть запрос
     //если selected_format === selectedValue.format - значит юзер просто развернул список и свернул обратно - не должно быть запросов
 
-    if (card.inCart && card.selected_format !== selectedValue.format) {
+    if (
+      card.selected_format &&
+      card.selected_format.format !== selectedValue.format
+    ) {
       console.log("onChangeCard should be called");
       onChangeCard({
-        channel: {
-          channel_id: card.id,
-          format: selectedValue.format,
-        },
-        format: selectedValue,
+        ...card,
+        selected_format: selectedValue,
       });
     }
   };
 
   const handleChangeCard = () => {
     onChangeCard({
-      channel: {
-        channel_id: card.id,
-        format: selectedFormat.format,
-      },
-      format: selectedFormat,
+      ...card,
+      selected_format: selectedFormat,
     });
   };
 
@@ -134,29 +128,25 @@ export const CatalogCard: FC<CatalogCardProps> = ({
           <p>{t("platform.cross")}</p>
           <div
             className={styles.circle}
-            style={{ "--percentage": `${89}%` } as React.CSSProperties}
+            style={{ "--percentage": `${card.match}%` } as React.CSSProperties}
           >
-            <span>89 %</span>
+            <span>{card.match}%</span>
           </div>
           <div className={styles.platform__icon}>
-            {platformToIcon.hasOwnProperty(card.platform)
-              ? platformToIcon[card.platform]()
-              : null}
+            {card.platform && card.platform in platformToIcon
+              ? platformToIcon[card.platform!]()
+              : "..."}
           </div>
         </div>
       </div>
-
-      {/* <div className={styles.channel_bottom}> */}
       <AddToBasketBtn
-        formats={card.format}
         selectedFormat={selectedFormat}
         FormatList={FormatList}
         changeFormat={handleChangeFormat}
-        сhangeCard={handleChangeCard}
-        isCart={isCart}
-        inCart={card.inCart}
+        changeCard={handleChangeCard}
+        card={card}
+        page={page}
       />
-      {/* </div> */}
     </div>
   );
 };

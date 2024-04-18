@@ -1,152 +1,159 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import { CartList } from "./cartList";
 import { CreatePost } from "./createPost";
 import { RecomendationList } from "@widgets/cartBlock/UI/recomendationList";
-import { IPlatform, IToCart } from "@shared/types/platform";
-
-const cards: IPlatform[] = [
-  {
-    id: "1",
-    rate: 4,
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-    name: "MDK",
-    category: "Юмор и развлечения",
-    description: "fdkmfdslmsl",
-    format: [
-      { format: 0, views: 32222, price: 150000, er: 27, cpv: 121 },
-      { format: 1, views: 42222, price: 250000, er: 37, cpv: 221 },
-      { format: 2, views: 52222, price: 350000, er: 47, cpv: 321 },
-    ],
-    subscribers: 301975,
-    male: 50,
-    female: 50,
-    platform: 1,
-    selected_format: 2,
-  },
-  {
-    id: "2",
-    rate: 4,
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-    name: "MDK",
-    category: "Юмор и развлечения",
-    description: "fdkmfdslmsl",
-    format: [{ format: 0, views: 32222, price: 150000, er: 27, cpv: 121 }],
-    subscribers: 301975,
-    male: 50,
-    female: 50,
-    platform: 2,
-    selected_format: 0,
-  },
-  {
-    id: "3",
-    rate: 4,
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-    name: "MDK",
-    category: "Юмор и развлечения",
-    description: "fdkmfdslmsl",
-    format: [{ format: 0, views: 32222, price: 150000, er: 27, cpv: 121 }],
-    subscribers: 301975,
-    male: 50,
-    female: 50,
-    platform: 1,
-    selected_format: 0,
-  },
-];
-
-const reccartCards = [
-  {
-    id: "4",
-    rate: 4,
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-    name: "MDK",
-    category: "Юмор и развлечения",
-    description: "fdkmfdslmsl",
-    format: [
-      { format: 0, views: 32222, price: 150000, er: 27, cpv: 121 },
-      { format: 1, views: 42222, price: 250000, er: 37, cpv: 221 },
-      { format: 2, views: 52222, price: 350000, er: 47, cpv: 321 },
-    ],
-    subscribers: 301975,
-    male: 50,
-    female: 50,
-    platform: 1,
-  },
-  {
-    id: "5",
-    rate: 4,
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-    name: "MDK",
-    category: "Юмор и развлечения",
-    description: "fdkmfdslmkfdjkdgjkfdhgjkdhkjfdhgjkfdhgkjfdsl",
-    format: [{ format: 0, views: 32222, price: 150000, er: 27, cpv: 121 }],
-    subscribers: 301975,
-    male: 70,
-    female: 30,
-    platform: 2,
-  },
-  {
-    id: "6",
-    rate: 4,
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-    name: "MDK",
-    category: "Юмор и развлечения",
-    description: "111111111111111111111111111111111kmfdslmsl",
-    format: [{ format: 0, views: 32222, price: 150000, er: 27, cpv: 121 }],
-    subscribers: 301975,
-    male: 50,
-    female: 50,
-    platform: 1,
-  },
-];
+import { IPlatform } from "@shared/types/platform";
+import {
+  useAddToCommonCartMutation,
+  useAddToPublicCartMutation,
+  useReadCommonCartQuery,
+  useReadPublicCartQuery,
+  useRemoveFromCommonCartMutation,
+  useRemoveFromPublicCartMutation,
+} from "@shared/store/services/cartService";
+import { ICart } from "@shared/types/cart";
+import { useAppSelector } from "@shared/store";
+import Cookies from "js-cookie";
+import { GenerateGuestId } from "@features/generateGuestId";
 
 export const CartBlock: FC = () => {
-  const [cartCards, setCartCards] = useState<IPlatform[]>(cards);
-  const [recomendCards, setRecomendCards] = useState<IPlatform[]>(reccartCards);
+  const { isAuth } = useAppSelector((state) => state.user);
 
-  const handleChangeCartCards = (cart: IToCart) => {
-    setCartCards([
-      ...cartCards.filter((card) => card.id !== cart.channel.channel_id),
-    ]);
-    // запрос в бек
-    console.log(cart.channel);
-  };
+  const { data: cart } = useReadCommonCartQuery("", { skip: !isAuth });
 
-  const handleChangeRecomendCards = (cart: IToCart) => {
-    setRecomendCards([
-      ...recomendCards.filter((card) => card.id !== cart.channel.channel_id),
-    ]);
+  const guestId = Cookies.get("guest_id");
+  if (!guestId) {
+    GenerateGuestId();
+  }
 
-    const recommendedCard = recomendCards.find(
-      (card) => card.id === cart.channel.channel_id,
-    );
-    if (recommendedCard) {
-      recommendedCard.selected_format = cart.format.format;
-      setCartCards([...cartCards, recommendedCard]);
+  const { data: cartPub } = useReadPublicCartQuery(
+    { guest_id: guestId },
+    { skip: !guestId || isAuth }
+  );
+
+  useEffect(() => {
+    if (isAuth && cart) {
+      setCurrentCart(cart);
     }
-    // запрос в бек
-    console.log(cart.channel);
+  }, [cart]);
+  useEffect(() => {
+    if (!isAuth && guestId && cartPub) {
+      setCurrentCart(cartPub);
+    }
+  }, [cartPub]);
+
+  // const [cartCards, setCartCards] = useState<ICart>(cart);
+  const [currentCart, setCurrentCart] = useState<ICart>(
+    cartPub ? cartPub : cart!
+  );
+  // const [recomendCards, setRecomendCards] = useState<IPlatform[]>(reccartCards);
+
+  // commonCart
+  const [addToCommonCart] = useAddToCommonCartMutation();
+  const [removeFromCommonCart] = useRemoveFromCommonCartMutation();
+  // publicCart
+  const [addToPublicCart] = useAddToPublicCartMutation();
+  const [removeFromPublicCart] = useRemoveFromPublicCartMutation();
+
+  const handleChangeCartCards = (cartChannel: IPlatform) => {
+    const currentCard = currentCart.channels?.find(
+      (card) => card.id === cartChannel.id
+    );
+    if (cartChannel.selected_format && currentCard) {
+      const addReq = {
+        channel_id: cartChannel.id,
+        format: cartChannel.selected_format.format,
+        match: cartChannel.match,
+      };
+      if (
+        currentCard.selected_format?.format ===
+        cartChannel.selected_format?.format
+      ) {
+        if (!isAuth && guestId) {
+          removeFromPublicCart({ ...addReq, guest_id: guestId })
+            .unwrap()
+            .then((data) => {
+              setCurrentCart(data);
+            })
+            .catch((error) =>
+              console.error("Ошибка при удалении с корзины", error)
+            );
+        } else if (isAuth) {
+          removeFromCommonCart(addReq)
+            .unwrap()
+            .then((data) => {
+              setCurrentCart(data);
+            })
+            .catch((error) =>
+              console.error("Ошибка при удалении с корзины", error)
+            );
+        }
+      } else if (
+        currentCard.selected_format?.format !==
+        cartChannel.selected_format?.format
+      ) {
+        if (!isAuth && guestId) {
+          addToPublicCart({ ...addReq, guest_id: guestId })
+            .unwrap()
+            .then((data) => {
+              setCurrentCart(data);
+            })
+            .catch((error) =>
+              console.error("Ошибка при добавлении в корзину", error)
+            );
+        } else if (isAuth) {
+          addToCommonCart(addReq)
+            .unwrap()
+            .then((data) => {
+              setCurrentCart(data);
+            })
+            .catch((error) =>
+              console.error("Ошибка при добавлении в корзину", error)
+            );
+        }
+      }
+      //       setCurrentCart({
+      //   ...currentCart,
+      //   channels: [
+      //     ...currentCart.channels.filter((card) => card.id !== cartChannel.id),
+      //   ],
+      // });
+    }
   };
+
+  // const handleChangeRecomendCards = (cart: IToCart) => {
+  //   setRecomendCards([
+  //     ...recomendCards.filter((card) => card.id !== cart.channel.channel_id),
+  //   ]);
+
+  //   const recommendedCard = recomendCards.find(
+  //     (card) => card.id === cart.channel.channel_id
+  //   );
+  //   if (recommendedCard) {
+  //     recommendedCard.selected_format = cart.format.format;
+  //     setCartCards([...cartCards, recommendedCard]);
+  //   }
+  //   // запрос в бек
+  //   console.log(cart.channel);
+  // };
 
   return (
     <div className="container">
       <div className={styles.wrapper}>
         <div>
           <div className={styles.cards}>
-            <CartList cards={cartCards} onChangeCard={handleChangeCartCards} />
-            <RecomendationList
+            <CartList
+              channels={currentCart?.channels || []}
+              onChangeCard={handleChangeCartCards}
+            />
+            {/* <RecomendationList
               cards={recomendCards}
               onChangeCard={handleChangeRecomendCards}
-            />
+            /> */}
           </div>
         </div>
-        <CreatePost cards={cartCards} />
+        <CreatePost cart={currentCart} />
       </div>
     </div>
   );

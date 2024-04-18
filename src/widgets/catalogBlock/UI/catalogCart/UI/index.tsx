@@ -1,41 +1,31 @@
 import { paths } from "@shared/routing";
-import { IToCart } from "@shared/types/platform";
 import { MyButton } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
+import { ICart } from "@shared/types/cart";
 
 interface CatalogCartProps {
-  currentCart: IToCart[];
+  cart: ICart;
 }
 
-export const CatalogCart: FC<CatalogCartProps> = ({ currentCart }) => {
+export const CatalogCart: FC<CatalogCartProps> = ({ cart }) => {
   const { t } = useTranslation();
-
-  const channels = currentCart.length;
-  const { views, cost } = currentCart.reduce(
-    (totals, channel) => {
-      totals.views += channel.format.views;
-      totals.cost += channel.format.price;
-      return totals;
-    },
-    { views: 0, cost: 0 },
-  );
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.info}>
         <p>{t("catalog.current_cart.channels")}</p>
-        <span>{channels.toLocaleString()}</span>
+        <span>{cart?.count.toLocaleString()}</span>
       </div>
       <div className={styles.info}>
         <p>{t("catalog.current_cart.views")}</p>
-        <span>{views.toLocaleString()}</span>
+        <span>{cart?.coverage.toLocaleString()}</span>
       </div>
       <div className={styles.info}>
         <p>{t("catalog.current_cart.cost")}</p>
-        <span>{cost.toLocaleString()}</span>
+        <span>{cart?.amount.toLocaleString()}</span>
       </div>
       <div className={styles.cart}>
         <Link to={paths.cart}>

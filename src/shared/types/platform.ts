@@ -1,3 +1,4 @@
+import { pageFilter } from "@shared/config/pageFilter";
 import {
   platformTypesStr,
   platformTypesNum,
@@ -8,22 +9,6 @@ export interface IAddChannelIdentification {
   platform: platformTypesNum;
   url: string;
   verification_code: number;
-}
-
-export interface IPlatform {
-  id: string;
-  name: string;
-  description: string;
-  rate: number;
-  category: string;
-  avatar: string;
-  format: IFormat[];
-  subscribers: number;
-  male: number;
-  female: number;
-  platform: number;
-  selected_format?: number;
-  inCart?: boolean;
 }
 
 export interface IAddChannelData {
@@ -44,8 +29,43 @@ export interface IAddFormat {
   price: number;
 }
 
+export interface IFormatPriceProps extends IChannelFormat {
+  onChange: (format: IAddFormat) => void;
+}
+
+export interface IChannelFormat {
+  id: number;
+  small: string;
+  big: string;
+}
+
+export interface IAddPlatformBlur {
+  link: boolean;
+  parameters: boolean;
+}
+
+export interface IPlatform {
+  id: string;
+  match: number;
+  name: string;
+  description: string;
+  rate: number;
+  category: string;
+  avatar: string;
+  subscribers: number;
+  male: number;
+  female: number;
+  format: IFormat[];
+  selected_format?: IFormat;
+  platform?: platformTypesNum;
+}
+
 export interface IFormat {
   format: number;
+  format_name: {
+    small: string;
+    big: string;
+  };
   price: number;
   views: number;
   er: number;
@@ -63,35 +83,29 @@ export interface IToCart {
 }
 
 export interface IChangeCards {
-  onChangeCard: (cart: IToCart) => void;
+  onChangeCard: (cart: IPlatform) => void;
 }
 
 export interface ICatalogCards extends IChangeCards {
-  cards: IPlatform[];
+  page: number;
+  elements: number;
+  channels: IPlatform[];
 }
 
 export interface IFormatListProps {
-  formats: IFormat[];
   selectedFormat: IFormat;
   changeFormat: (selectedValue: IFormat) => void;
+  card: IPlatform;
 }
 
 interface Components {
   FormatList: FC<IFormatListProps>;
-  сhangeCard?: () => void;
-  isCart?: boolean;
-  inCart?: boolean;
+  changeCard?: () => void;
+  page?: pageFilter.cart;
+  card: IPlatform;
 }
 
-export interface IAddToBasketProps extends IFormatListProps, Components {
-  // selectedFormat: IFormat;
-  // formats: IFormat[];
-  // changeFormat: (selectedValue: IFormat) => void;
-  // AddToBasketBtn?: FC<IAddToBasketProps>;
-  // FormatList: FC<IFormatListProps>;
-  // onChangeCard?: () => void
-  // isCart?: boolean
-}
+export interface IAddToBasketProps extends IFormatListProps, Components {}
 
 export interface ICatalogCard extends IChangeCards, Components {
   AddToBasketBtn: FC<IAddToBasketProps>;
@@ -104,23 +118,8 @@ export interface IPlatformLink {
   id: platformTypesNum;
 }
 
-export interface IAddPlatformBlur {
-  link: boolean;
-  parameters: boolean;
-}
-
 export interface ICreateOrderBlur {
   post: boolean;
   datetime: boolean;
   payment: boolean;
-}
-
-export interface IFormatPriceProps extends IChannelFormat {
-  onChange: (format: IAddFormat) => void;
-}
-
-export interface IChannelFormat {
-  id: number;
-  small: string;
-  big: string;
 }

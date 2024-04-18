@@ -4,13 +4,19 @@ import styles from "./styles.module.scss";
 import { InfoIcon } from "@shared/assets";
 import { MySlider } from "@shared/ui/slider";
 import { IAddPLatformData } from "@shared/types/common";
-import { UseFormRegister, UseFormSetValue } from "react-hook-form";
+import {
+  UseFormGetValues,
+  UseFormRegister,
+  UseFormSetValue,
+} from "react-hook-form";
 
 interface SelectSexProps {
   title: string;
   text?: string;
   onChange: UseFormSetValue<any>;
   isRow?: boolean;
+  isCatalog?: boolean;
+  getValues?: UseFormGetValues<any>;
 }
 
 export const SelectSex: FC<SelectSexProps> = ({
@@ -18,6 +24,8 @@ export const SelectSex: FC<SelectSexProps> = ({
   text,
   onChange,
   isRow,
+  isCatalog,
+  getValues,
 }) => {
   const { t } = useTranslation();
 
@@ -25,8 +33,19 @@ export const SelectSex: FC<SelectSexProps> = ({
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newPosition = parseInt(e.target.value);
     setPosition(newPosition);
-    onChange("male", newPosition);
-    onChange("female", 100 - newPosition);
+    // catalog
+    if (isCatalog) {
+      const { filter } = getValues && getValues();
+      const updatedFilter = {
+        ...filter,
+        ["male"]: newPosition,
+        ["female"]: 100 - newPosition,
+      };
+      onChange("filter", updatedFilter);
+    } else {
+      onChange("male", newPosition);
+      onChange("female", 100 - newPosition);
+    }
   };
 
   return (

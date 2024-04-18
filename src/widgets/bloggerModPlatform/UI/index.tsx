@@ -12,11 +12,11 @@ interface BloggerModPlatformProps {
 export const BloggerModPlatform: FC<BloggerModPlatformProps> = ({ cards }) => {
   return (
     <section className="container sidebar">
-      {cards.channels.length === 0 ? (
+      {cards?.channels?.length === 0 ? (
         <ZeroPlatform AddPlatformBtn={AddPlatform} />
       ) : (
         <div className={styles.wrapper}>
-          {cards.channels.map((card, index: number) => (
+          {cards?.channels?.map((card, index: number) => (
             <BloggerModPlatformCard key={index} card={card} />
           ))}
         </div>

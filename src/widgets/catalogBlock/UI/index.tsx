@@ -1,384 +1,203 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import { CatalogSearch } from "./catalogSearch";
 import { CatalogList } from "./catalogList";
 import { useTranslation } from "react-i18next";
-import { IAddCart, IToCart, IFormat, IPlatform } from "@shared/types/platform";
+import { IPlatform } from "@shared/types/platform";
 import { CatalogCart } from "./catalogCart";
-
-const allcards = [
-  {
-    id: "1",
-    rate: 4,
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-    name: "MDK",
-    category: "Юмор и развлечения",
-    description:
-      "Канал с развлекательными видео, актуальными новостями об Узбекистане и мире, также с познавательными лайфхаками и тд",
-    format: [
-      { format: 0, views: 32222, price: 150000, er: 27, cpv: 121 },
-      { format: 1, views: 42222, price: 250000, er: 37, cpv: 221 },
-      { format: 2, views: 52222, price: 350000, er: 47, cpv: 321 },
-    ],
-    subscribers: 301975,
-    male: 10,
-    female: 90,
-    platform: 1,
-  },
-  {
-    id: "2",
-    rate: 4,
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-    name: "MDK",
-    category: "Юмор и развлечения",
-    description:
-      "Канал с развлекательными видео, актуальными новостями об Узбекистане и мире, также с познавательными лайфхаками и тд",
-    format: [
-      { format: 0, views: 32222, price: 150000, er: 27, cpv: 121 },
-      { format: 1, views: 42222, price: 250000, er: 37, cpv: 221 },
-      { format: 2, views: 52222, price: 350000, er: 47, cpv: 321 },
-    ],
-    subscribers: 301975,
-    male: 10,
-    female: 90,
-    platform: 1,
-  },
-  {
-    id: "3",
-    rate: 4,
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-    name: "MDK",
-    category: "Юмор и развлечения",
-    description:
-      "Канал с развлекательными видео, актуальными новостями об Узбекистане и мире, также с познавательными лайфхаками и тд",
-    format: [
-      { format: 0, views: 32222, price: 150000, er: 27, cpv: 121 },
-      { format: 1, views: 42222, price: 250000, er: 37, cpv: 221 },
-      { format: 2, views: 52222, price: 350000, er: 47, cpv: 321 },
-    ],
-    subscribers: 301975,
-    male: 10,
-    female: 90,
-    platform: 1,
-  },
-  {
-    id: "4",
-    rate: 4,
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-    name: "MDK",
-    category: "Юмор и развлечения",
-    description:
-      "Канал с развлекательными видео, актуальными новостями об Узбекистане и мире, также с познавательными лайфхаками и тд",
-    format: [
-      { format: 0, views: 32222, price: 150000, er: 27, cpv: 121 },
-      { format: 1, views: 42222, price: 250000, er: 37, cpv: 221 },
-      { format: 2, views: 52222, price: 350000, er: 47, cpv: 321 },
-    ],
-    subscribers: 301975,
-    male: 10,
-    female: 90,
-    platform: 1,
-  },
-  {
-    id: "5",
-    rate: 4,
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-    name: "MDK",
-    category: "Юмор и развлечения",
-    description:
-      "Канал с развлекательными видео, актуальными новостями об Узбекистане и мире, также с познавательными лайфхаками и тд",
-    format: [
-      { format: 0, views: 32222, price: 150000, er: 27, cpv: 121 },
-      { format: 1, views: 42222, price: 250000, er: 37, cpv: 221 },
-      { format: 2, views: 52222, price: 350000, er: 47, cpv: 321 },
-    ],
-    subscribers: 301975,
-    male: 10,
-    female: 90,
-    platform: 1,
-  },
-  {
-    id: "6",
-    rate: 4,
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-    name: "MDK",
-    category: "Юмор и развлечения",
-    description:
-      "Канал с развлекательными видео, актуальными новостями об Узбекистане и мире, также с познавательными лайфхаками и тд",
-    format: [
-      { format: 0, views: 32222, price: 150000, er: 27, cpv: 121 },
-      { format: 1, views: 42222, price: 250000, er: 37, cpv: 221 },
-      { format: 2, views: 52222, price: 350000, er: 47, cpv: 321 },
-    ],
-    subscribers: 301975,
-    male: 10,
-    female: 90,
-    platform: 1,
-  },
-  {
-    id: "7",
-    rate: 4,
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-    name: "MDK",
-    category: "Юмор и развлечения",
-    description:
-      "Канал с развлекательными видео, актуальными новостями об Узбекистане и мире, также с познавательными лайфхаками и тд",
-    format: [
-      { format: 0, views: 32222, price: 150000, er: 27, cpv: 121 },
-      { format: 1, views: 42222, price: 250000, er: 37, cpv: 221 },
-      { format: 2, views: 52222, price: 350000, er: 47, cpv: 321 },
-    ],
-    subscribers: 301975,
-    male: 10,
-    female: 90,
-    platform: 1,
-  },
-  {
-    id: "8",
-    rate: 4,
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-    name: "MDK",
-    category: "Юмор и развлечения",
-    description:
-      "Канал с развлекательными видео, актуальными новостями об Узбекистане и мире, также с познавательными лайфхаками и тд",
-    format: [
-      { format: 0, views: 32222, price: 150000, er: 27, cpv: 121 },
-      { format: 1, views: 42222, price: 250000, er: 37, cpv: 221 },
-      { format: 2, views: 52222, price: 350000, er: 47, cpv: 321 },
-    ],
-    subscribers: 301975,
-    male: 10,
-    female: 90,
-    platform: 1,
-  },
-  {
-    id: "9",
-    rate: 4,
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-    name: "MDK",
-    category: "Юмор и развлечения",
-    description:
-      "Канал с развлекательными видео, актуальными новостями об Узбекистане и мире, также с познавательными лайфхаками и тд",
-    format: [
-      { format: 0, views: 32222, price: 150000, er: 27, cpv: 121 },
-      { format: 1, views: 42222, price: 250000, er: 37, cpv: 221 },
-      { format: 2, views: 52222, price: 350000, er: 47, cpv: 321 },
-    ],
-    subscribers: 301975,
-    male: 10,
-    female: 90,
-    platform: 1,
-  },
-  {
-    id: "10",
-    rate: 4,
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-    name: "MDK",
-    category: "Юмор и развлечения",
-    description:
-      "Канал с развлекательными видео, актуальными новостями об Узбекистане и мире, также с познавательными лайфхаками и тд",
-    format: [
-      { format: 0, views: 32222, price: 150000, er: 27, cpv: 121 },
-      { format: 1, views: 42222, price: 250000, er: 37, cpv: 221 },
-      { format: 2, views: 52222, price: 350000, er: 47, cpv: 321 },
-    ],
-    subscribers: 301975,
-    male: 10,
-    female: 90,
-    platform: 1,
-  },
-  {
-    id: "11",
-    rate: 4,
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-    name: "MDK",
-    category: "Юмор и развлечения",
-    description:
-      "Канал с развлекательными видео, актуальными новостями об Узбекистане и мире, также с познавательными лайфхаками и тд",
-    format: [
-      { format: 0, views: 32222, price: 150000, er: 27, cpv: 121 },
-      { format: 1, views: 42222, price: 250000, er: 37, cpv: 221 },
-      { format: 2, views: 52222, price: 350000, er: 47, cpv: 321 },
-    ],
-    subscribers: 301975,
-    male: 10,
-    female: 90,
-    platform: 1,
-  },
-  {
-    id: "12",
-    rate: 4,
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-    name: "MDK",
-    category: "Юмор и развлечения",
-    description:
-      "Канал с развлекательными видео, актуальными новостями об Узбекистане и мире, также с познавательными лайфхаками и тд",
-    format: [
-      { format: 0, views: 32222, price: 150000, er: 27, cpv: 121 },
-      { format: 1, views: 42222, price: 250000, er: 37, cpv: 221 },
-      { format: 2, views: 52222, price: 350000, er: 47, cpv: 321 },
-    ],
-    subscribers: 301975,
-    male: 10,
-    female: 90,
-    platform: 1,
-  },
-  {
-    id: "13",
-    rate: 4,
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-    name: "MDK",
-    category: "Юмор и развлечения",
-    description:
-      "fdkmfdsКанал с развлекательными видео, актуальными новостями об Узбекистане и мире, также с познавательными лайфхаками и тдlmsl",
-    format: [{ format: 0, views: 32222, price: 150000, er: 27, cpv: 121 }],
-    subscribers: 301975,
-    male: 50,
-    female: 50,
-    platform: 2,
-  },
-  {
-    id: "14",
-    rate: 4,
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-    name: "MDK",
-    category: "Юмор и развлечения",
-    description: "fdkmfdslmsl",
-    format: [{ format: 0, views: 32222, price: 150000, er: 27, cpv: 121 }],
-    subscribers: 301975,
-    male: 70,
-    female: 30,
-    platform: 1,
-  },
-];
-
-const filter = { platform: 0 };
+import {
+  getCatalogReq,
+  useGetCatalogQuery,
+} from "@shared/store/services/catalogService";
+import { Languages } from "@shared/config/languages";
+import { useForm } from "react-hook-form";
+import { platformTypesNum } from "@shared/config/platformTypes";
+import { sortingFilter } from "@shared/config/platformData";
+import {
+  useAddToCommonCartMutation,
+  useAddToPublicCartMutation,
+  useReadCommonCartQuery,
+  useReadPublicCartQuery,
+  useRemoveFromCommonCartMutation,
+  useRemoveFromPublicCartMutation,
+} from "@shared/store/services/cartService";
+import { useAppSelector } from "@shared/store";
+import Cookies from "js-cookie";
+import { ICart } from "@shared/types/cart";
+import { GenerateGuestId } from "@features/generateGuestId";
 
 export const CatalogBlock: FC = () => {
-  const [cards, setCards] = useState<IPlatform[]>(allcards);
-  const [currentCart, setCart] = useState<IToCart[]>([]);
+  const { t, i18n } = useTranslation();
+  const language = Languages.find((lang) => {
+    return i18n.language === lang.name;
+  });
 
-  const [currentFilters, setFilters] = useState();
+  const { watch, reset, setValue, getValues } = useForm<getCatalogReq>({
+    defaultValues: {
+      language: language?.id || Languages[0].id,
+      page: 1,
+      elements_on_page: 10,
+      filter: {
+        platform: platformTypesNum.telegram,
+        business: [],
+        age: [],
+        language: [],
+        region: [],
+      },
+      sort: sortingFilter.subscribers_down,
+    },
+  });
 
-  const { t } = useTranslation();
+  const { isAuth } = useAppSelector((state) => state.user);
 
-  // const handleChangeCards = (cart: IToCart) => {
-  //   // setCards([...cards.filter((card) => card.id !== cart.channel.channel_id)]);
-  //   // setCart([...currentCart, cart]);
-  //   let a
-  //   let newCards
+  const formFields = watch();
+  const { data: catalog } = useGetCatalogQuery(formFields);
+  const { data: cart } = useReadCommonCartQuery("", { skip: !isAuth });
+  const guestId = Cookies.get("guest_id");
+  if (!guestId) {
+    GenerateGuestId();
+  }
+  const { data: cartPub } = useReadPublicCartQuery(
+    { guest_id: guestId },
+    { skip: !guestId || isAuth }
+  );
 
-  //   //необходимо определить есть ли канал в списке / сравнение по айди канала и айди формата размещения ( формат размешения не должен совпадать с текущим существующим)
-  //   // const Card = cards.find((card) => card.id === cart.channel.channel_id && card.selected_format !== cart.format.format)
-  //   const Card = cards.find((card) => card.id === cart.channel.channel_id)
-  //   const isMatch = Card?.selected_format !== cart.format.format // проверка новый ли формат приходит, ( если приходит тот же формат, не должно быть лже запроса в бд)
+  const [cards, setCards] = useState<IPlatform[]>(catalog?.channels || []);
+  useEffect(() => {
+    if (catalog) {
+      setCards(catalog.channels);
+    }
+  }, [catalog]);
 
-  //   // теперь если существует то запрос в бек на удаление из бд
-  //   isMatch ?
+  const [currentCart, setCurrentCart] = useState<ICart>(
+    cartPub ? cartPub : cart!
+  );
+  useEffect(() => {
+    if (isAuth && cart) {
+      setCurrentCart(cart);
+    }
+  }, [cart]);
+  useEffect(() => {
+    if (!isAuth && guestId && cartPub) {
+      setCurrentCart(cartPub);
+    }
+  }, [cartPub]);
 
-  //   // запрос в бек на удаление / и удаление из кеша
-  //   newCards = cards.map((card) => {
-  //     if (card.id === cart.channel.channel_id) {
-  //         card.selected_format = cart.format.format;
-  //     }
-  //     return card;
-  // })
-  //   // запрос на добавление в корзину
+  // commonCart
+  const [addToCommonCart] = useAddToCommonCartMutation();
+  const [removeFromCommonCart] = useRemoveFromCommonCartMutation();
+  // publicCart
+  const [addToPublicCart] = useAddToPublicCartMutation();
+  const [removeFromPublicCart] = useRemoveFromPublicCartMutation();
 
-  //   newCards.push()
+  const handleChangeCards = (cartChannel: IPlatform) => {
+    let newCards: IPlatform[] = [];
+    const currentCard = cards?.find((card) => card.id === cartChannel.id);
 
-  //   setCards([
-  //     ...cards.map((card) => {
-  //       if (card.id === cart.channel.channel_id) {
-  //         card.inCart = !(card.inCart ?? false);
-  //       }
-  //       return card;
-  //     }),
-  //   ]);
+    if (cartChannel.selected_format) {
+      const addReq = {
+        channel_id: cartChannel.id,
+        format: cartChannel.selected_format.format,
+        match: cartChannel.match,
+      };
 
-  //   const newCart = currentCart.some(
-  //     (card) => card.channel.channel_id === cart.channel.channel_id
-  //   )
-  //     ? currentCart.filter(
-  //         (card) => card.channel.channel_id !== cart.channel.channel_id
-  //       )
-  //     : [...currentCart, cart];
-
-  //   setCart([...newCart]);
-  //   console.log(cart.channel);
-  // };
-
-  const handleChangeCards = (cart: IToCart) => {
-    let newCards: IPlatform[];
-    let newCart: IToCart[];
-    //необходимо определить есть ли канал в списке / сравнение по айди канала и айди формата размещения ( формат размешения не должен совпадать с текущим существующим)
-    // проверяем находится ли канал в корзине // если нет то запрос в бек на добавление + в кеш флаг труе
-    const currentCard = cards.find(
-      (card) => card.id === cart.channel.channel_id,
-    );
-
-    !currentCard?.inCart
-      ? // запрос в бек на добавление + + в кеш флаг труе
-        ((newCards = cards.map((item) => {
-          if (item.id === cart.channel.channel_id) {
-            item.selected_format = cart.format.format;
-            item.inCart = true;
+      if (
+        currentCard &&
+        !currentCard.selected_format &&
+        cartChannel.selected_format
+      ) {
+        newCards = cards.map((item) => {
+          if (item.id === cartChannel.id) {
+            const newItem = {
+              ...item,
+              selected_format: cartChannel.selected_format,
+            };
+            return newItem;
           }
           return item;
-        })),
-        (newCart = [...currentCart, cart]),
-        console.log("!currentCard?.inCart"))
-      : // если есть в корзине и selected format не совпадает с входящим формат
-        currentCard.selected_format !== cart.format.format
-        ? // действие пришло со списка форматов
-          // запрос в бек на удаление предыдущего формата из БД и добавление нового формата в БД и перезапись в кеше (меняем selected_format)
-          // currentCard.selected_format = cart.format.format
-          ((newCards = cards.map((card) => {
-            if (card.id === cart.channel.channel_id) {
-              card.selected_format = cart.format.format;
-            }
-            return card;
-          })),
-          (newCart = currentCart.map((item) => {
-            if (item.channel.channel_id === cart.channel.channel_id) {
-              item.format = cart.format;
-            }
-            return item;
-          })),
-          console.log("currentCard.selected_format !== cart.format.format"))
-        : // currentCard.selected_format === cart.format.format
-          // значит currentCard.selected_format === cart.format.format -> Действие пришло с кноки и значит просто удаляем канал из бд и убираем флаги с кеша
-
-          ((newCards = cards.map((item) => {
-            if (item.id === cart.channel.channel_id) {
-              delete item.inCart;
-              delete item.selected_format;
-            }
-            return item;
-          })),
-          (newCart = currentCart.filter(
-            (item) => item.channel.channel_id !== cart.channel.channel_id,
-          )),
-          console.log("currentCard.selected_format === cart.format.format"));
-
-    setCards(newCards);
-
-    setCart([...newCart]);
-    console.log(cart.channel);
+        });
+        if (!isAuth && guestId) {
+          addToPublicCart({ ...addReq, guest_id: guestId })
+            .unwrap()
+            .then((data) => {
+              setCurrentCart(data);
+            })
+            .catch((error) =>
+              console.error("Ошибка при добавлении в корзину", error)
+            );
+        } else if (isAuth) {
+          addToCommonCart(addReq)
+            .unwrap()
+            .then((data) => {
+              setCurrentCart(data);
+            })
+            .catch((error) =>
+              console.error("Ошибка при добавлении в корзину", error)
+            );
+        }
+      } else if (
+        currentCard?.selected_format?.format !==
+          cartChannel.selected_format?.format &&
+        cartChannel.selected_format
+      ) {
+        if (!isAuth && guestId) {
+          addToPublicCart({ ...addReq, guest_id: guestId })
+            .unwrap()
+            .then((data) => {
+              setCurrentCart(data);
+            })
+            .catch((error) =>
+              console.error("Ошибка при добавлении в корзину", error)
+            );
+        } else if (isAuth) {
+          addToCommonCart(addReq)
+            .unwrap()
+            .then((data) => {
+              setCurrentCart(data);
+            })
+            .catch((error) =>
+              console.error("Ошибка при добавлении в корзину", error)
+            );
+        }
+        newCards = cards.map((card) => {
+          if (
+            card.id === cartChannel.id &&
+            card.selected_format &&
+            cartChannel.selected_format
+          ) {
+            card.selected_format = cartChannel.selected_format;
+          }
+          return card;
+        });
+      } else {
+        if (!isAuth && guestId) {
+          removeFromPublicCart({ ...addReq, guest_id: guestId })
+            .unwrap()
+            .then((data) => {
+              setCurrentCart(data);
+            })
+            .catch((error) =>
+              console.error("Ошибка при удалении с корзины", error)
+            );
+        } else if (isAuth) {
+          removeFromCommonCart(addReq)
+            .unwrap()
+            .then((data) => {
+              setCurrentCart(data);
+            })
+            .catch((error) =>
+              console.error("Ошибка при удалении с корзины", error)
+            );
+        }
+        newCards = cards.map((item) => {
+          if (item.id === cartChannel.id) {
+            delete item.selected_format;
+          }
+          return item;
+        });
+      }
+      setCards(newCards);
+    }
   };
 
   return (
@@ -387,16 +206,27 @@ export const CatalogBlock: FC = () => {
         <div className={styles.title}>{t("catalog.catalog")}</div>
         <div className={styles.content}>
           <div className={styles.left}>
-            <CatalogSearch />
+            <CatalogSearch
+              getValues={getValues}
+              reset={reset}
+              setValue={setValue}
+            />
           </div>
           <div className={styles.right}>
             <div className={styles.content__right}>
-              <CatalogList cards={cards} onChangeCard={handleChangeCards} />
+              <CatalogList
+                setValue={setValue}
+                channels={cards.length > 0 ? cards : catalog?.channels || []}
+                onChangeCard={handleChangeCards}
+              />
               <div className={styles.cart}>
-                {currentCart.length ? (
-                  <CatalogCart currentCart={currentCart} />
+                {cartPub && currentCart?.channels.length ? (
+                  <CatalogCart cart={currentCart!} />
                 ) : (
-                  <></>
+                  cart &&
+                  currentCart?.channels.length && (
+                    <CatalogCart cart={currentCart!} />
+                  )
                 )}
               </div>
             </div>

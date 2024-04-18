@@ -3,7 +3,7 @@ import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { ArrowSmallVerticalIcon, InfoIcon } from "@shared/assets";
-import { UseFormSetValue } from "react-hook-form";
+import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { SELECTOPTIONS } from "@shared/config/common";
 import { ISelectOption } from "@shared/types/translate";
 
@@ -17,6 +17,9 @@ interface SelectOptionsProps {
   single: boolean;
   isRow?: boolean;
   isFilter?: boolean;
+  isCatalog?: boolean;
+  isCatalogSorting?: boolean;
+  getValues?: UseFormGetValues<any>;
 }
 
 export const SelectOptions: FC<SelectOptionsProps> = ({
@@ -27,6 +30,9 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
   isRow,
   textData,
   isFilter,
+  isCatalog,
+  isCatalogSorting,
+  getValues,
 }) => {
   const { t } = useTranslation();
   const allOptions: IOption[] = isFilter
@@ -38,7 +44,7 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
 
   const [selectedOptions, setSelectedOptions] = useState<(number | null)[]>([]);
   const [selectedOption, setSelectedOption] = useState<IOption | null>(
-    isFilter ? allOptions[0] : null,
+    isFilter ? allOptions[0] : null
   );
   const [isMenuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -54,32 +60,39 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
   const handleOptionsChange = (
     event:
       | React.MouseEvent<HTMLLIElement | EventTarget>
-      | React.ChangeEvent<HTMLInputElement>,
+      | React.ChangeEvent<HTMLInputElement>
   ) => {
     const selectedValue = Number(
       event.target instanceof HTMLLIElement
         ? (event.target as HTMLLIElement).getAttribute("data-value")
-        : (event.target as HTMLInputElement).value,
+        : (event.target as HTMLInputElement).value
     );
     const newOptions = selectedOptions.includes(selectedValue)
       ? selectedOptions.filter((value) => value !== selectedValue)
       : [...selectedOptions, selectedValue];
     setSelectedOptions(newOptions);
-    onChange(type, newOptions as []);
+    // catalog
+    const { filter } = getValues && getValues();
+    const updatedFilter = {
+      ...filter,
+      [type]: newOptions,
+    };
+    isCatalog
+      ? onChange("filter", updatedFilter)
+      : onChange(type, newOptions as []);
   };
 
   const handleOptionChange = (
-    event: React.MouseEvent<HTMLLIElement | EventTarget>,
+    event: React.MouseEvent<HTMLLIElement | EventTarget>
   ) => {
     const selectedId = Number(
-      (event.target as HTMLLIElement).getAttribute("data-value"),
+      (event.target as HTMLLIElement).getAttribute("data-value")
     );
-
     const option: IOption = allOptions!.find(
-      (option) => option.id === selectedId,
+      (option) => option.id === selectedId
     )!;
     setSelectedOption(option);
-    onChange(type, selectedId);
+    onChange(type, isCatalogSorting ? option.type : selectedId);
     closeMenu();
   };
 
