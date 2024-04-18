@@ -16,11 +16,11 @@ export const FormatList: FC<IFormatListProps> = ({
   };
 
   const handleOptionChange = (
-    event: React.MouseEvent<HTMLLIElement | EventTarget>
+    event: React.MouseEvent<HTMLLIElement | EventTarget>,
   ) => {
     event.stopPropagation();
     const selectedValue: IFormat = JSON.parse(
-      (event.target as HTMLLIElement).getAttribute("data-value")!
+      (event.target as HTMLLIElement).getAttribute("data-value")!,
     );
 
     changeFormat(selectedValue);

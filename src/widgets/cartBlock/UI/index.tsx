@@ -2,7 +2,7 @@ import { FC, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import { CartList } from "./cartList";
 import { CreatePost } from "./createPost";
-import { RecomendationList } from "@widgets/cartBlock/UI/recomendationList";
+// import { RecomendationList } from "@widgets/cartBlock/UI/recomendationList";
 import { IPlatform } from "@shared/types/platform";
 import {
   useAddToCommonCartMutation,
@@ -29,7 +29,7 @@ export const CartBlock: FC = () => {
 
   const { data: cartPub } = useReadPublicCartQuery(
     { guest_id: guestId },
-    { skip: !guestId || isAuth }
+    { skip: !guestId || isAuth },
   );
 
   useEffect(() => {
@@ -45,7 +45,7 @@ export const CartBlock: FC = () => {
 
   // const [cartCards, setCartCards] = useState<ICart>(cart);
   const [currentCart, setCurrentCart] = useState<ICart>(
-    cartPub ? cartPub : cart!
+    cartPub ? cartPub : cart!,
   );
   // const [recomendCards, setRecomendCards] = useState<IPlatform[]>(reccartCards);
 
@@ -58,7 +58,7 @@ export const CartBlock: FC = () => {
 
   const handleChangeCartCards = (cartChannel: IPlatform) => {
     const currentCard = currentCart.channels?.find(
-      (card) => card.id === cartChannel.id
+      (card) => card.id === cartChannel.id,
     );
     if (cartChannel.selected_format && currentCard) {
       const addReq = {
@@ -77,7 +77,7 @@ export const CartBlock: FC = () => {
               setCurrentCart(data);
             })
             .catch((error) =>
-              console.error("Ошибка при удалении с корзины", error)
+              console.error("Ошибка при удалении с корзины", error),
             );
         } else if (isAuth) {
           removeFromCommonCart(addReq)
@@ -86,7 +86,7 @@ export const CartBlock: FC = () => {
               setCurrentCart(data);
             })
             .catch((error) =>
-              console.error("Ошибка при удалении с корзины", error)
+              console.error("Ошибка при удалении с корзины", error),
             );
         }
       } else if (
@@ -100,7 +100,7 @@ export const CartBlock: FC = () => {
               setCurrentCart(data);
             })
             .catch((error) =>
-              console.error("Ошибка при добавлении в корзину", error)
+              console.error("Ошибка при добавлении в корзину", error),
             );
         } else if (isAuth) {
           addToCommonCart(addReq)
@@ -109,7 +109,7 @@ export const CartBlock: FC = () => {
               setCurrentCart(data);
             })
             .catch((error) =>
-              console.error("Ошибка при добавлении в корзину", error)
+              console.error("Ошибка при добавлении в корзину", error),
             );
         }
       }
