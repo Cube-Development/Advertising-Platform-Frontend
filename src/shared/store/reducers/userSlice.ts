@@ -1,5 +1,6 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { roles } from "@shared/config/roles";
+import { paths } from "@shared/routing";
 import { IToken } from "@shared/types/tokens";
 import Cookies from "js-cookie";
 
@@ -8,12 +9,15 @@ interface UserState {
   role: roles;
 }
 
+const roleFromCookies = Cookies.get("role");
+const getRole: roles =
+  roleFromCookies && Object.values(roles).includes(roleFromCookies as roles)
+    ? (roleFromCookies as roles)
+    : roles.advertiser;
+
 const initialState: UserState = {
   isAuth: Cookies.get("isAuth") === "true" ? true : false,
-  role:
-    Cookies.get("role") === `${roles.blogger}`
-      ? roles.blogger
-      : roles.advertiser,
+  role: getRole,
 };
 
 export const userSlice = createSlice({
@@ -41,8 +45,11 @@ export const userSlice = createSlice({
       Cookies.remove("refreshToken");
       Cookies.set("isAuth", "false");
       state.isAuth = false;
-      state.role = roles.advertiser;
-      window.location.href = "/";
+      if (state.role === roles.advertiser) {
+        window.location.href = paths.main;
+      } else if (state.role === roles.blogger) {
+        window.location.href = paths.mainBlogger;
+      }
     },
     setAuth: (state, action: PayloadAction<boolean>) => {
       state.isAuth = action.payload;

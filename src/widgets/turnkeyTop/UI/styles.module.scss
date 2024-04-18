@@ -1,0 +1,29 @@
+.wrapper {
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 50px;
+  margin: 50px 0;
+
+  .title {
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 30px;
+
+    h1 {
+      padding-right: 60px;
+      color: var(--Personal-colors-black);
+      font-size: 44px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+    h2 {
+      padding-right: 500px;
+      color: var(--Personal-colors-main);
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+    }
+  }
+}

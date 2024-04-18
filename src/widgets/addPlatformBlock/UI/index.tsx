@@ -19,6 +19,7 @@ export const AddPlatformBlock: FC<AddPlatformBlockProps> = () => {
   const [currentPlatform, setCurrentPlatform] = useState<IPlatformLink>(
     platformTypes[0],
   );
+  const [inserCode, setInserCode] = useState<string>("");
 
   return (
     <div>
@@ -28,12 +29,14 @@ export const AddPlatformBlock: FC<AddPlatformBlockProps> = () => {
         setCurrentPlatform={setCurrentPlatform}
         blur={blur}
         onChangeBlur={handleOnChangeBlur}
+        setInserCode={setInserCode}
       />
       {blur.link && (
         <PlatformParameters
           currentPlatform={currentPlatform}
           blur={blur}
           onChangeBlur={handleOnChangeBlur}
+          inserCode={inserCode}
         />
       )}
     </div>

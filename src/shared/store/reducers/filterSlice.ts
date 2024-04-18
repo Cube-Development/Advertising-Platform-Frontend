@@ -13,10 +13,12 @@ import { platformTypes } from "@shared/config/postFilter";
 import { chatFilter } from "@shared/config/chatFilter";
 import { addFileFilter } from "@shared/config/addFileFilter";
 import { IPlatformLink } from "@shared/types/platform";
+import { platformStatusFilter } from "@shared/config/platformFilter";
+import { offerStatusFilter } from "@shared/config/offerFilter";
 
 interface FilterState {
   typeFilter: string;
-  statusFilter: string;
+  statusFilter: platformStatusFilter | offerStatusFilter | string;
   profileFilter: {
     type: profileTypesName | catalogFilter | chatFilter | addFileFilter;
     id?: profileTypesNum;

@@ -1,4 +1,8 @@
-import { ArrowIcon2, CreateIcon, PencilIcon } from "@shared/assets";
+import {
+  ArrowLongHorizontalIcon,
+  CreateIcon,
+  PencilIcon,
+} from "@shared/assets";
 import { CreatePostData } from "@shared/config/createPostData";
 import { ICreateOrderBlur } from "@shared/types/platform";
 import { FC } from "react";
@@ -48,7 +52,7 @@ export const CreateOrderTop: FC<CreateOrderTopProps> = ({
                   />
                 </div>
                 <button onClick={handleOnChangeBlur}>
-                  <ArrowIcon2 />
+                  <ArrowLongHorizontalIcon />
                 </button>
               </div>
             </div>

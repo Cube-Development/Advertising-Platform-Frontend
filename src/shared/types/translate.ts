@@ -48,3 +48,7 @@ export interface ISelectOption {
   text?: string;
   default_value?: string;
 }
+
+export interface IStep {
+  text: string;
+}

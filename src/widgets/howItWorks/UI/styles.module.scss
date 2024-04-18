@@ -1,4 +1,4 @@
-.how__wrapper {
+.wrapper {
   max-width: var(--container-width);
   height: 749px;
   background: var(--Gradients-Gradient-1);
@@ -19,14 +19,13 @@
     height: 71%;
     overflow: hidden;
   }
-}
-
-.how__title {
-  color: #fff;
-  font-size: 44px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-  padding-top: 50px;
-  margin-bottom: 323px;
+  .how__title {
+    color: #fff;
+    font-size: 44px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    padding-top: 50px;
+    margin-bottom: 323px;
+  }
 }

@@ -3,30 +3,30 @@ import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
 import { ProtectIcon3 } from "@shared/assets";
 import { CreatePosts } from "@features/createPost";
-import { IPlatform } from "@shared/types/platform";
 import { CART } from "@shared/config/common";
+import { ICart } from "@shared/types/cart";
 
 interface CreatePostProps {
-  cards: IPlatform[];
+  cart: ICart;
 }
 
-export const CreatePost: FC<CreatePostProps> = ({ cards }) => {
+export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
   const { t } = useTranslation();
 
-  let { views, cost, subs } = cards.reduce(
-    (totals, channel) => {
-      const selected_format = channel.format.find(
-        (format) => format.format === channel.selected_format,
-      )!;
-      totals.views += selected_format.views;
-      totals.cost += selected_format.price;
-      totals.subs += channel.subscribers;
-      return totals;
-    },
-    { views: 0, cost: 0, subs: 0 },
-  );
+  // let { views, cost, subs } = cards.reduce(
+  //   (totals, channel) => {
+  //     const selected_format = channel.format.find(
+  //       (format) => format.format === channel.selected_format,
+  //     )!;
+  //     totals.views += selected_format.views;
+  //     totals.cost += selected_format.price;
+  //     totals.subs += channel.subscribers;
+  //     return totals;
+  //   },
+  //   { views: 0, cost: 0, subs: 0 },
+  // );
 
-  cost = Math.round(cost * (1 + CART.commission / 100));
+  // cost = Math.round(cost * (1 + CART.commission / 100));
 
   return (
     <div>
@@ -41,11 +41,11 @@ export const CreatePost: FC<CreatePostProps> = ({ cards }) => {
         <div className={styles.data}>
           <div className={styles.data__row}>
             <p>{t("cart.create_post.subscribers")}</p>
-            <span>{subs.toLocaleString()}</span>
+            <span>{cart?.channels?.length?.toLocaleString()}</span>
           </div>
           <div className={styles.data__row}>
             <p>{t("cart.create_post.views")}</p>
-            <span>{views.toLocaleString()}</span>
+            <span>{cart?.coverage?.toLocaleString()}</span>
           </div>
           <div className={styles.data__row}>
             <p>{t("cart.create_post.commission")}</p>
@@ -55,7 +55,7 @@ export const CreatePost: FC<CreatePostProps> = ({ cards }) => {
         <div className={styles.finnaly}>
           <p>{t("cart.create_post.commission")}:</p>
           <span>
-            {cost.toLocaleString()} {t("symbol")}
+            {cart?.amount?.toLocaleString()} {t("symbol")}
           </span>
         </div>
         <div className={styles.button}>

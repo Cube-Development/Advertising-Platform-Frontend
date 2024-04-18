@@ -5,16 +5,24 @@ import { YesIcon, NoIcon } from "@shared/assets";
 
 interface PriceCardProps {
   price: IPrice;
-  index: number;
+  currentTarif: number;
   buyBtn: ReactElement;
+  tarifType: number;
+  onChange: (tarif: number) => void;
 }
 
-export const PriceCard: FC<PriceCardProps> = ({ price, index, buyBtn }) => {
-  const borderClass =
-    index === 1 ? styles.standard : index === 2 ? styles.complex : "";
-
+export const PriceCard: FC<PriceCardProps> = ({
+  price,
+  currentTarif,
+  tarifType,
+  buyBtn,
+  onChange,
+}) => {
   return (
-    <div className={`${styles.price__card} ${borderClass}`}>
+    <div
+      className={`${styles.price__card} ${currentTarif === tarifType ? styles.active : ""}`}
+      onClick={() => onChange(tarifType)}
+    >
       <p className={styles.title}>{price.name}</p>
       <p className={styles.views}>{price.views}</p>
       <p className={styles.price}>{price.price}</p>

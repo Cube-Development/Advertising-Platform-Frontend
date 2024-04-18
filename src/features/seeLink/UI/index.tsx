@@ -6,6 +6,8 @@ import styles from "./styles.module.scss";
 export const SeeLink: FC = () => {
   const { t } = useTranslation();
   return (
-    <MyButton className={styles.button}>{t(`offer_btn.see_link`)}</MyButton>
+    <MyButton buttons_type="button__white" className={styles.button}>
+      {t(`offer_btn.see_link`)}
+    </MyButton>
   );
 };

@@ -43,7 +43,7 @@
 
     input {
       color: var(--Personal-colors-black);
-      font-size: 18px;
+      font-size: 16px;
       font-style: normal;
       font-weight: 400;
       line-height: normal;
@@ -51,7 +51,6 @@
 
       &::placeholder {
         color: var(--Text-sample);
-        font-size: 12px;
         font-style: normal;
         font-weight: 400;
         line-height: normal;

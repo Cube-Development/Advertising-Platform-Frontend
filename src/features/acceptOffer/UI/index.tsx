@@ -5,5 +5,9 @@ import styles from "./styles.module.scss";
 
 export const AcceptOffer: FC = () => {
   const { t } = useTranslation();
-  return <MyButton className={styles.button}>{t(`offer_btn.accept`)}</MyButton>;
+  return (
+    <MyButton buttons_type="button__white" className={styles.button}>
+      {t(`offer_btn.accept`)}
+    </MyButton>
+  );
 };

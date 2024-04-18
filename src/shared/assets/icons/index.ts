@@ -1,7 +1,7 @@
 export { AddIcon } from "./add";
 export { AddFileIcon } from "./addFile";
-export { ArrowIcon } from "./arrow";
-export { ArrowIcon2 } from "./arrow2";
+export { ArrowSmallVerticalIcon } from "./arrowSmallVertical";
+export { ArrowLongHorizontalIcon } from "./arrowLongHorizontalIcon";
 export { ArrowIcon3 } from "./arrow3";
 export { ArrowIcon4 } from "./arrow4";
 export { ArrowIcon5 } from "./arrow5";
@@ -53,6 +53,8 @@ export { SearchIcon } from "./search";
 export { SendIcon } from "./send";
 export { SortUpIcon } from "./sortUp";
 export { SadSmileIcon } from "./sadSmile";
+export { Spline } from "./spline";
+export { Spline2 } from "./spline2";
 export { StarIcon } from "./star";
 export { StarIcon2 } from "./star2";
 export { StarIcon3 } from "./star3";

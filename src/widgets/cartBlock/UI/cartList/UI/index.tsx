@@ -3,13 +3,20 @@ import { AddToBasket } from "@features/addToBasket";
 import { CatalogCard } from "@features/catalogCard";
 import { FormatList } from "@features/formatList";
 import { SaveCart } from "@features/saveCart";
-import { ICatalogCards } from "@shared/types/platform";
+import { IPlatform } from "@shared/types/platform";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { CartIcon } from "@shared/assets";
+import { pageFilter } from "@shared/config/pageFilter";
 
-export const CartList: FC<ICatalogCards> = ({ cards, onChangeCard }) => {
+interface CartListProps {
+  channels: IPlatform[];
+  // setValue: UseFormSetValue<getCatalogReq>;
+  onChangeCard: (cart: IPlatform) => void;
+}
+
+export const CartList: FC<CartListProps> = ({ channels, onChangeCard }) => {
   const { t } = useTranslation();
 
   return (
@@ -25,16 +32,16 @@ export const CartList: FC<ICatalogCards> = ({ cards, onChangeCard }) => {
         </div>
       </div>
       <div className={styles.cards}>
-        {cards.map((card) => (
+        {/* {channels?.map((card) => (
           <CatalogCard
             card={card}
             key={card.id}
             AddToBasketBtn={AddToBasket}
             FormatList={FormatList}
             onChangeCard={onChangeCard}
-            isCart={true}
+            page={pageFilter.cart}
           />
-        ))}
+        ))} */}
       </div>
     </div>
   );

@@ -4,119 +4,61 @@ import { useAppSelector } from "@shared/store";
 import { BarFilter } from "@widgets/barFilter";
 import { BloggerOffer } from "@widgets/bloggerOffer";
 import { FC } from "react";
-
-const BlogggerActiveCards = [
-  {
-    id: 31231132,
-    status: 0,
-    name: "MDK",
-    category: "Юмор и развлечения",
-    date: "20.01.2024",
-    date_from: "11.11.2024",
-    date_to: "15.12.2024",
-    accommodation: "1/24",
-    time_from: "17:00",
-    time_to: "17:00",
-    price: 1500000000,
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-  },
-  {
-    id: 31231132,
-    status: 1,
-    name: "MDK",
-    category: "Юмор и развлечения",
-    date: "20.01.2024",
-    date_from: "11.11.2024",
-    date_to: "15.12.2024",
-    accommodation: "1/24",
-    time_from: "17:00",
-    time_to: "17:00",
-    price: 1500000000,
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-  },
-  {
-    id: 31231132,
-    status: 2,
-    name: "MDK",
-    category: "Юмор и развлечения",
-    date: "20.01.2024",
-    date_from: "11.11.2024",
-    date_to: "15.12.2024",
-    accommodation: "1/24",
-    time_from: "17:00",
-    time_to: "17:00",
-    price: 1500000000,
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-  },
-  {
-    id: 31231132,
-    status: 3,
-    name: "MDK",
-    category: "Юмор и развлечения",
-    date: "20.01.2024",
-    date_from: "11.11.2024",
-    date_to: "15.12.2024",
-    accommodation: "1/24",
-    time_from: "17:00",
-    time_to: "17:00",
-    price: 1500000000,
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-  },
-  {
-    id: 31231132,
-    status: 4,
-    name: "MDK",
-    category: "Юмор и развлечения",
-    date: "20.01.2024",
-    date_from: "11.11.2024",
-    date_to: "15.12.2024",
-    accommodation: "1/24",
-    time_from: "17:00",
-    time_to: "17:00",
-    price: 1500000000,
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-  },
-  {
-    id: 31231132,
-    status: 5,
-    name: "MDK",
-    category: "Юмор и развлечения",
-    date: "20.01.2024",
-    date_from: "11.11.2024",
-    date_to: "15.12.2024",
-    accommodation: "1/24",
-    time_from: "17:00",
-    time_to: "17:00",
-    price: 1500000000,
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-  },
-  {
-    id: 31231132,
-    status: 6,
-    name: "MDK",
-    category: "Юмор и развлечения",
-    date: "20.01.2024",
-    date_from: "11.11.2024",
-    date_to: "15.12.2024",
-    accommodation: "1/24",
-    time_from: "17:00",
-    time_to: "17:00",
-    price: 1500000000,
-    img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-  },
-];
+import { Languages } from "@shared/config/languages";
+import { useTranslation } from "react-i18next";
+import { platformTypesNum } from "@shared/config/platformTypes";
+import { networkTypes } from "@shared/config/platformData";
+import { useForm } from "react-hook-form";
+import {
+  getOrdersByStatusReq,
+  useGetBloggerOrdersQuery,
+} from "@shared/store/services/bloggerOrdersService";
 
 export const OffersPage: FC = () => {
   const { statusFilter } = useAppSelector((state) => state.filter);
 
   const page = pageFilter.offer;
 
+  const { i18n } = useTranslation();
+  const language = Languages.find((lang) => {
+    return i18n.language === lang.name;
+  });
+
+  const {
+    setValue,
+    watch,
+    formState: { errors },
+  } = useForm<{ platform: platformTypesNum }>({
+    defaultValues: {
+      platform: networkTypes[0].id,
+    },
+  });
+
+  const platformType = watch("platform");
+
+  const getParams: getOrdersByStatusReq = {
+    platform: platformType,
+    language: language?.id || Languages[0].id,
+    page: 1,
+    date_sort: "increase",
+    status: statusFilter,
+  };
+
+  const {
+    data: offers,
+    isLoading,
+    error,
+  } = useGetBloggerOrdersQuery(getParams);
+
   return (
     <>
-      <BarFilter page={page} />
-
+      <BarFilter
+        page={page}
+        listLength={!offers?.orders.length}
+        setValue={setValue}
+      />
       {statusFilter === offerStatusFilter.active ? (
-        <BloggerOffer cards={BlogggerActiveCards} />
+        <BloggerOffer offers={offers!} />
       ) : (
         <></>
       )}

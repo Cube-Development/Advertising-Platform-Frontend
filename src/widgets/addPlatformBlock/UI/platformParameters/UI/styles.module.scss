@@ -67,6 +67,25 @@
       grid-auto-flow: row;
       row-gap: 50px;
       align-items: center;
+
+      .button {
+        border-radius: 10px;
+        padding: 10px;
+        width: 100%;
+        font-size: 22px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 50px;
+      }
+
+      .error {
+        background: red;
+      }
     }
   }
 }

@@ -22,7 +22,7 @@ export const CustomerCard: FC<CustomerCardProps> = ({ customer }) => {
           <RatingIcon />
         </div>
       </div>
-      <p className={styles.text}>{customer.text}</p>
+      <p className={`${styles.text} scroll`}>{customer.text}</p>
     </div>
   );
 };

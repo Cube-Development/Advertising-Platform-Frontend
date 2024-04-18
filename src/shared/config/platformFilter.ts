@@ -4,16 +4,14 @@ export enum platformStatus {
   moderationReject = 5,
   inactive = 2,
   banned = 3,
-  deleted = 4,
 }
 
 export enum platformStatusFilter {
   active = "active",
   moderation = "moderation",
-  moderationReject = "moderation_reject",
+  moderationReject = "rejected",
   inactive = "inactive",
   banned = "banned",
-  deleted = "deleted",
 }
 
 export const bloggerPlatformStatus = [
@@ -41,10 +39,5 @@ export const bloggerPlatformStatus = [
     name: "platforms_blogger.status_filter.banned",
     type: platformStatusFilter.banned,
     id: platformStatus.banned,
-  },
-  {
-    name: "platforms_blogger.status_filter.deleted",
-    type: platformStatusFilter.deleted,
-    id: platformStatus.deleted,
   },
 ];

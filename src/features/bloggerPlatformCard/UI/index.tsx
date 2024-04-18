@@ -1,4 +1,6 @@
 import {
+  ArrowSmallVerticalIcon,
+  ArrowLongHorizontalIcon,
   CancelIcon,
   CompliteIcon,
   MoreIcon,
@@ -9,14 +11,31 @@ import {
   WaitIcon,
 } from "@shared/assets";
 import { FeatherIcon } from "@shared/assets/icons/feather";
-import { platformStatus } from "@shared/config/platformFilter";
-import { IBloggerPlatformCard } from "@shared/types/common";
+import { platformStatusFilter } from "@shared/config/platformFilter";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import {
+  IActiveChannel,
+  IBlockedChannel,
+  IInactiveChannel,
+  IModerationChannel,
+  IModerationRejectChannel,
+} from "@shared/types/channelStatus";
+import { useAppSelector } from "@shared/store";
+import { MyButton } from "@shared/ui";
+import {
+  useActivateChannelMutation,
+  useDeactivateChannelMutation,
+} from "@shared/store/services/channelService";
 
 interface BloggerPlatformCardProps {
-  card: IBloggerPlatformCard;
+  card:
+    | IActiveChannel
+    | IInactiveChannel
+    | IModerationRejectChannel
+    | IBlockedChannel
+    | IModerationChannel;
   SeeOffersBtn: FC;
   SeeReasonBtn: FC;
   RepeatOfferBtn: FC;
@@ -33,54 +52,66 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
   SupportBtn,
 }) => {
   const { t } = useTranslation();
-
   const [isSubcardOpen, setSubcardOpen] = useState(false);
 
   const handleChangeOpenSubcard = (): void => {
     setSubcardOpen(!isSubcardOpen);
   };
 
+  const { statusFilter } = useAppSelector((state) => state.filter);
+
+  function getRandomValues() {
+    // Предположим, что здесь получаются произвольные значения
+    return {
+      author: Math.random() < 0.5, // Пример: вероятность 50%
+      verified: Math.random() < 0.5, // Пример: вероятность 50%
+      partner: Math.random() < 0.5, // Пример: вероятность 50%
+    };
+  }
+  const { author, verified, partner } = getRandomValues();
+
+  const [activateChannel] = useActivateChannelMutation();
+  const [deactivateChannel] = useDeactivateChannelMutation();
+
   return (
-    <div className={styles.card}>
-      <div className={styles.card__top}>
-        <div className={styles.channel__logo}>
-          <img src={card.img} alt="" />
-          {card.status === platformStatus.active ||
-          card.status === platformStatus.inactive ? (
+    <div className={styles.wrapper}>
+      <div className={styles.card}>
+        <div className={styles.card__logo}>
+          <img src={card.avatar} alt="" />
+          {statusFilter === platformStatusFilter.active ||
+          statusFilter === platformStatusFilter.inactive ? (
             <RatingIcon />
           ) : (
             <></>
           )}
         </div>
         <div className={styles.card__description}>
-          <div>
-            <div>
+          <div className={styles.card__description__top}>
+            <div className={styles.card__description__top__text}>
               <p>{card.name}</p>
               <span>{card.category}</span>
             </div>
-            <div>
-              {card.status === platformStatus.moderationReject ||
-              card.status === platformStatus.banned ? (
-                <p>{card.date_event}</p>
+            <div className={styles.card__description__top__icons}>
+              {statusFilter === platformStatusFilter.banned ? (
+                <p>{(card as IBlockedChannel).blocked_date}</p>
               ) : (
                 <div>
-                  {card.author && <FeatherIcon />}
-                  {card.verified && <ProtectIcon2 />}
-                  {card.partner && <StarIcon4 />}
+                  {author && <FeatherIcon />}
+                  {verified && <ProtectIcon2 />}
+                  {partner && <StarIcon4 />}
                 </div>
               )}
             </div>
           </div>
-          <hr />
           <div className={styles.status}>
             <p>
-              {card.status === platformStatus.active ? (
+              {statusFilter === platformStatusFilter.active ? (
                 t(`platforms_blogger.card.status.active`)
-              ) : card.status === platformStatus.moderationReject ? (
+              ) : statusFilter === platformStatusFilter.moderationReject ? (
                 t(`platforms_blogger.card.status.reject`)
-              ) : card.status === platformStatus.inactive ? (
+              ) : statusFilter === platformStatusFilter.inactive ? (
                 t(`platforms_blogger.card.status.deactivate`)
-              ) : card.status === platformStatus.banned ? (
+              ) : statusFilter === platformStatusFilter.banned ? (
                 t(`platforms_blogger.card.status.ban`)
               ) : (
                 <></>
@@ -89,65 +120,87 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
           </div>
         </div>
 
-        <div className={styles.card__right}>
-          <div className={styles.card__offers}>
-            {card.status === platformStatus.active ? (
-              <>
-                <p>
-                  {t(`platforms_blogger.offers_count`)}
-                  {": "}
-                  <span
-                    className={card.offers !== 0 ? styles.offers_exist : ""}
-                  >
-                    {card.offers}
-                  </span>
-                </p>
+        <div className={styles.card__info}>
+          <>
+            {statusFilter === platformStatusFilter.active ? (
+              <div className={styles.card__info__offers}>
+                <span></span>
                 <SeeOffersBtn />
-              </>
-            ) : card.status === platformStatus.moderationReject && card.date ? (
-              <small>
-                {t(`platforms_blogger.repeat_date`)} - {card.date}
-              </small>
-            ) : card.status === platformStatus.moderationReject &&
-              !card.date ? (
-              <small>{t(`platforms_blogger.repeat`)}</small>
-            ) : card.status === platformStatus.inactive ? (
-              <ActivateBtn />
-            ) : card.status === platformStatus.banned ? (
-              <small>{t(`platforms_blogger.ban`)}</small>
+              </div>
+            ) : statusFilter === platformStatusFilter.moderationReject &&
+              new Date((card as IModerationRejectChannel).reapplication_date) <
+                new Date() ? (
+              <div className={styles.card__info__top}>
+                <span>
+                  {t(`platforms_blogger.repeat_date`)} -{" "}
+                  {(card as IModerationRejectChannel).reapplication_date}
+                </span>
+              </div>
+            ) : statusFilter === platformStatusFilter.moderationReject ? (
+              <div className={styles.card__info__top}>
+                <span>{t(`platforms_blogger.repeat`)}</span>
+              </div>
+            ) : statusFilter === platformStatusFilter.inactive ? (
+              <div
+                className={styles.card__info__top}
+                onClick={() => {
+                  activateChannel(card.id);
+                }}
+              >
+                <ActivateBtn />
+              </div>
+            ) : statusFilter === platformStatusFilter.banned ? (
+              <div className={styles.card__info__top}>
+                <span>{t(`platforms_blogger.ban`)}</span>
+              </div>
             ) : (
               <></>
             )}
-          </div>
-          <hr />
+          </>
 
-          {card.status === platformStatus.moderationReject ? (
-            <div className={styles.card__info2}>
+          {statusFilter === platformStatusFilter.moderationReject ? (
+            <div className={styles.card__info__bottom2}>
               <SeeReasonBtn />
               <RepeatOfferBtn />
             </div>
-          ) : card.status === platformStatus.banned ? (
-            <div className={styles.card__info2}>
+          ) : statusFilter === platformStatusFilter.banned ? (
+            <div className={styles.card__info__bottom2}>
               <SeeReasonBtn />
               <SupportBtn />
             </div>
           ) : (
-            <div className={styles.card__info}>
+            <div className={styles.card__info__bottom}>
               <div>
                 <RocketIcon />
-                <p>{card.start!.toLocaleString()}</p>
+                <p>
+                  {(
+                    card as IActiveChannel
+                  ).channel_orders.in_progress.toLocaleString()}
+                </p>
               </div>
               <div>
                 <WaitIcon />
-                <p>{card.wait!.toLocaleString()}</p>
+                <p>
+                  {(
+                    card as IActiveChannel
+                  ).channel_orders.wait.toLocaleString()}
+                </p>
               </div>
               <div>
                 <CompliteIcon />
-                <p>{card.complite!.toLocaleString()}</p>
+                <p>
+                  {(
+                    card as IActiveChannel
+                  ).channel_orders.completed.toLocaleString()}
+                </p>
               </div>
               <div>
                 <CancelIcon />
-                <p>{card.cancel!.toLocaleString()}</p>
+                <p>
+                  {(
+                    card as IActiveChannel
+                  ).channel_orders.canceled_rejected.toLocaleString()}
+                </p>
               </div>
             </div>
           )}
@@ -161,7 +214,7 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
         </div>
       </div>
       {isSubcardOpen && (
-        <div className={styles.platform_events}>
+        <div className={styles.platform__events}>
           <button>
             <p>{t(`platform_btn.description`)}</p>
           </button>
@@ -174,16 +227,22 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
         </div>
       )}
 
-      <button
-        className={`${styles.card__btn} ${
-          isSubcardOpen ? styles.less : styles.more
-        }`}
+      <MyButton
+        buttons_type={isSubcardOpen ? "button__white" : "button__blue"}
+        className={styles.card__btn}
         onClick={() => handleChangeOpenSubcard()}
       >
         {isSubcardOpen
           ? t(`orders_advertiser.card.see_less`)
           : t(`orders_advertiser.card.see_more`)}
-      </button>
+        <ArrowSmallVerticalIcon
+          className={
+            isSubcardOpen
+              ? "active__icon rotate"
+              : "default__icon__white rotate_down"
+          }
+        />
+      </MyButton>
     </div>
   );
 };
