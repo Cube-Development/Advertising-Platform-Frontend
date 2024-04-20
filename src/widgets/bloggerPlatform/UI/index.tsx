@@ -15,6 +15,9 @@ import {
 } from "@shared/types/channelStatus";
 import { FC } from "react";
 import styles from "./styles.module.scss";
+import { ChannelDescription } from "@features/channelDescription";
+import { BloggerPlatformCardMenu } from "@features/bloggerPlatformCardMenu";
+import { DeleteChannel } from "@features/deleteChannel";
 
 interface BloggerPlatformProps {
   cards:
@@ -32,10 +35,13 @@ export const BloggerPlatform: FC<BloggerPlatformProps> = ({ cards }) => {
         <ZeroPlatform AddPlatformBtn={AddPlatform} />
       ) : (
         <div className={styles.wrapper}>
-          {cards?.channels.map((card, index) => (
+          {cards?.channels.map((card) => (
             <BloggerPlatformCard
-              key={index}
+              key={card.id}
               card={card}
+              DeleteChannel={DeleteChannel}
+              ChannelDescriptionBtn={ChannelDescription}
+              BloggerPlatformCardMenu={BloggerPlatformCardMenu}
               SeeOffersBtn={SeeOffers}
               SeeReasonBtn={SeeReason}
               RepeatOfferBtn={RepeatOffer}

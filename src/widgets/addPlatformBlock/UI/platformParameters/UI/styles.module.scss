@@ -1,7 +1,7 @@
 .wrapper {
   max-width: var(--container-width);
   border-radius: 40px;
-  border: 1px solid var(--Personal-colors-grey);
+  box-shadow: inset 0px 0px 0px 1px var(--Personal-colors-grey);
   background: var(--Personal-colors-White);
   margin: 0 auto 50px auto;
 

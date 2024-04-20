@@ -11,19 +11,21 @@ interface SelectSymbolProps {
   text: string;
   type: keyof IAddPLatformData;
   onChange: UseFormSetValue<any>;
+  defaultValues?: number;
 }
 
 export const SelectSymbol: FC<SelectSymbolProps> = ({
   title,
   text,
   onChange,
+  defaultValues,
 }) => {
   const { t } = useTranslation();
 
   const min = 100;
   const max = 4096;
 
-  const [position, setPosition] = useState(max);
+  const [position, setPosition] = useState(defaultValues || max);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newPosition = parseInt(e.target.value);
     setPosition(newPosition);

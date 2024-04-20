@@ -20,6 +20,7 @@ interface SelectPriceProps {
   AccommPrice: FC<IFormatPriceProps>;
   onChange: UseFormSetValue<any>;
   getValues: any;
+  defaultValues?: IAddFormat[];
 }
 
 export const SelectPrice: FC<SelectPriceProps> = ({
@@ -31,6 +32,7 @@ export const SelectPrice: FC<SelectPriceProps> = ({
   onChange,
   getValues,
   type,
+  defaultValues,
 }) => {
   const { t } = useTranslation();
 
@@ -63,6 +65,9 @@ export const SelectPrice: FC<SelectPriceProps> = ({
               big={format.big}
               key={index}
               onChange={handleChangeFormatPrice}
+              defaultValue={
+                defaultValues?.find((value) => value.name === format.id)?.price
+              }
             />
           ))}
       </div>

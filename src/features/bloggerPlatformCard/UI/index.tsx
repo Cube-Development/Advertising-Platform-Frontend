@@ -1,9 +1,7 @@
 import {
   ArrowSmallVerticalIcon,
-  ArrowLongHorizontalIcon,
   CancelIcon,
   CompliteIcon,
-  MoreIcon,
   ProtectIcon2,
   RatingIcon,
   RocketIcon,
@@ -12,9 +10,11 @@ import {
 } from "@shared/assets";
 import { FeatherIcon } from "@shared/assets/icons/feather";
 import { platformStatusFilter } from "@shared/config/platformFilter";
-import { FC, useState } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
+import { useAppSelector } from "@shared/store";
+import {
+  useActivateChannelMutation,
+  useDeactivateChannelMutation,
+} from "@shared/store/services/channelService";
 import {
   IActiveChannel,
   IBlockedChannel,
@@ -22,12 +22,10 @@ import {
   IModerationChannel,
   IModerationRejectChannel,
 } from "@shared/types/channelStatus";
-import { useAppSelector } from "@shared/store";
 import { MyButton } from "@shared/ui";
-import {
-  useActivateChannelMutation,
-  useDeactivateChannelMutation,
-} from "@shared/store/services/channelService";
+import { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 interface BloggerPlatformCardProps {
   card:
@@ -37,6 +35,12 @@ interface BloggerPlatformCardProps {
     | IBlockedChannel
     | IModerationChannel;
   SeeOffersBtn: FC;
+  ChannelDescriptionBtn: FC<{ channelId: string }>;
+  BloggerPlatformCardMenu: FC<{
+    channelId: string;
+    DeleteChannel: FC<{ channelId: string; onChange: () => void }>;
+  }>;
+  DeleteChannel: FC<{ channelId: string; onChange: () => void }>;
   SeeReasonBtn: FC;
   RepeatOfferBtn: FC;
   ActivateBtn: FC;
@@ -45,6 +49,9 @@ interface BloggerPlatformCardProps {
 
 export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
   card,
+  ChannelDescriptionBtn,
+  DeleteChannel,
+  BloggerPlatformCardMenu,
   SeeOffersBtn,
   SeeReasonBtn,
   RepeatOfferBtn,
@@ -207,17 +214,16 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
         </div>
         <div className={styles.card__more}>
           <div>
-            <button>
-              <MoreIcon />
-            </button>
+            <BloggerPlatformCardMenu
+              channelId={card.id}
+              DeleteChannel={DeleteChannel}
+            />
           </div>
         </div>
       </div>
       {isSubcardOpen && (
         <div className={styles.platform__events}>
-          <button>
-            <p>{t(`platform_btn.description`)}</p>
-          </button>
+          <ChannelDescriptionBtn channelId={card.id} />
           <button>
             <p>{t(`platform_btn.calendar`)}</p>
           </button>

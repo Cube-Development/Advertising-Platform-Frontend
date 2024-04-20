@@ -562,7 +562,32 @@
 
       "see_more": "Развернуть",
       "see_less": "Свернуть"
+    },
+
+    "menu": {
+      "title": "Действия над каналом",
+      "edit" : "Редактировать",
+      "activate": "Активировать",
+      "deactivate": "Деактивировать",
+      "delete": "Удалить"
+    },
+
+    "delete_channel": {
+      "title": "Вы точно хотите удалить канал?",
+      "yes": "Да",
+      "no": "Нет"
     }
+
+  },
+
+  "platform_description": {
+    "platform_description": "Описание канала",
+    "language": "Язык аудиториии",
+    "age": "Возраст аудитории",
+    "sex": "Соотношение полов",
+    "region": "Регион",
+    "edit_btn": "Pедактировать",
+    "okey_btn": "Понятно"
   },
 
   "offers_blogger": {

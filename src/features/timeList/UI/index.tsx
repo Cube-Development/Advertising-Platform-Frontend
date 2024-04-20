@@ -1,7 +1,7 @@
 import { CancelIcon2, ClockIcon } from "@shared/assets";
 import { TimeListProps } from "@shared/types/createPost";
-import { MyButton } from "@shared/ui";
-import { FC, useState } from "react";
+import { MyButton, MyModal } from "@shared/ui";
+import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
@@ -12,6 +12,7 @@ interface ITIme {
 
 export const TimeList: FC<TimeListProps> = ({ onChange }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
   const [selectedTimesObject, setSelectedTimeObject] = useState<ITIme>({
     timeIndexList: [],
     timeStringList: [],
@@ -78,9 +79,11 @@ export const TimeList: FC<TimeListProps> = ({ onChange }) => {
     console.log(newTimeList);
   };
 
-  const handleOpenModal = () => {
+  const handleOpenModal = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
     setIsModalOpen(true);
   };
+
   const handleCloseModal = () => {
     setSelectedTimeObject({
       timeIndexList: [],
@@ -93,9 +96,22 @@ export const TimeList: FC<TimeListProps> = ({ onChange }) => {
     onChange(selectedTimesObject.timeStringList);
   };
 
+  const handleClickOutside = (event: MouseEvent) => {
+    if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+      setIsModalOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
+
   return (
     <div>
-      <button className={styles.wrapper} onClick={handleOpenModal}>
+      <button className={styles.wrapper} onClick={(e) => handleOpenModal(e)}>
         <ClockIcon />
         <p>
           {selectedTimesObject.timeIndexList.length && !isModalOpen
@@ -105,8 +121,8 @@ export const TimeList: FC<TimeListProps> = ({ onChange }) => {
       </button>
 
       {isModalOpen && (
-        <div className={styles.modal}>
-          <div className={`${styles.modalContent} shake__animation`}>
+        <MyModal>
+          <div className={styles.content} ref={menuRef}>
             <div className={styles.top}>
               <p>{t("calendar.choose_time")}</p>
               <button onClick={handleCloseModal}>
@@ -138,29 +154,18 @@ export const TimeList: FC<TimeListProps> = ({ onChange }) => {
                   ))}
                 </div>
                 <div className={styles.bottom}>
-                  <MyButton className={styles.button} onClick={continueAction}>
+                  <MyButton
+                    buttons_type="button__white"
+                    className={styles.button}
+                    onClick={continueAction}
+                  >
                     <p>{t("calendar.confirm")}</p>
                   </MyButton>
                 </div>
               </div>
-
-              {/* <div className={styles.rightColumn}>
-                <div
-                  className={`${styles.rightGrid} ${selectedTimes.length > 12 ? styles.scroll : ""}`}
-                >
-                  {selectedTimes.map((selectedTime) => (
-                    <div
-                      key={selectedTime}
-                      className={`${styles.timeSlot} ${styles.active}`}
-                    >
-                      <p>{selectedTime}</p>
-                    </div>
-                  ))}
-                </div>
-              </div> */}
             </div>
           </div>
-        </div>
+        </MyModal>
       )}
     </div>
   );

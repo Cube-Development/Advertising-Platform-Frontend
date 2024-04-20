@@ -8,9 +8,10 @@ export const FormatPrice: FC<IFormatPriceProps> = ({
   small,
   id,
   onChange,
+  defaultValue,
 }) => {
   const { t } = useTranslation();
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState(defaultValue || "");
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value.replace(/[^0-9.]/g, "");

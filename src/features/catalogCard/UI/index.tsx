@@ -94,7 +94,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
               <div>
                 <EyeIcon />
               </div>
-              <span>{selectedFormat.views.toLocaleString()}</span>
+              <span>{selectedFormat.views!.toLocaleString()}</span>
             </div>
           </div>
           <div className={styles.channel__info_middle}>
@@ -119,7 +119,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
             <div className={styles.info}>
               <p>CPV:</p>
               <span>
-                {selectedFormat.cpv.toLocaleString()} {t(`symbol`)}
+                {selectedFormat.cpv!.toLocaleString()} {t(`symbol`)}
               </span>
             </div>
           </div>

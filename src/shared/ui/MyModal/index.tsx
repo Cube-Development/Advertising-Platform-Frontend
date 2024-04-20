@@ -1,28 +1,21 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import styles from "./styles.module.scss";
 
 interface MyModalProps {
   children: React.ReactNode;
-  visible: boolean;
-  setVisible: (bool: boolean) => void;
 }
 
-export const MyModal: FC<MyModalProps> = ({
-  children,
-  visible,
-  setVisible,
-}) => {
-  const rootClasses = [styles.myModal];
-  if (visible) {
-    rootClasses.push(styles.active);
-  }
+export const MyModal: FC<MyModalProps> = ({ children }) => {
+  useEffect(() => {
+    document.body.classList.add(styles.no__scroll);
+    return () => {
+      document.body.classList.remove(styles.no__scroll);
+    };
+  }, []);
 
   return (
-    <div className={rootClasses.join(" ")} onClick={() => setVisible(false)}>
-      <div
-        className={styles.myModalContent}
-        onClick={(e) => e.stopPropagation()}
-      >
+    <div className={styles.modal}>
+      <div className={`${styles.modalContent} shake__animation`}>
         {children}
       </div>
     </div>
