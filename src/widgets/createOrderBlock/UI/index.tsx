@@ -1,14 +1,17 @@
-import { FC, useEffect, useState } from "react";
-import styles from "./styles.module.scss";
+import { FC, useState } from "react";
 import { CreateOrderTop } from "./createOrderTop";
 import { CreateOrderPost } from "./createOrderPost";
 import { CreateOrderDatetime } from "./createOrderDatetime";
 import { CreateOrderPayment } from "./createOrderPayment";
 import { ICreateOrderBlur } from "@shared/types/platform";
-import { useForm } from "react-hook-form";
-import { ICreatePost, ICreatePostForm } from "@shared/types/createPost";
-import { platform } from "os";
-import { CreatePostData } from "@shared/config/createPostData";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { ICreatePostForm } from "@shared/types/createPost";
+import Cookies from "js-cookie";
+import {
+  useCreateOrderDatesMutation,
+  useCreatePostMutation,
+} from "@shared/store/services/advOrdersService";
+import { usePaymentProjectMutation } from "@shared/store/services/walletService";
 
 const ChannelCards = [
   {
@@ -59,51 +62,72 @@ const ChannelCards = [
 
 interface CreateOrderBlockProps {}
 
-const onBlur = { post: true, datetime: true, payment: true };
-
 export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
+  const onBlur = { post: true, datetime: true, payment: true };
   const [blur, setBlur] = useState<ICreateOrderBlur>(onBlur);
   const handleOnChangeBlur = (key: keyof ICreateOrderBlur) => {
     const newBlur = { ...blur };
     newBlur[key] = false;
-    console.log(newBlur);
     setBlur(newBlur);
   };
 
-  const project_id = "1111";
+  const project_id = Cookies.get("project_id");
 
-  const {
-    register,
-    getValues,
-    reset,
-    handleSubmit,
-    setValue,
-    formState: { errors },
-  } = useForm<ICreatePostForm>({
-    defaultValues: {
-      project_id: project_id,
-      posts: [],
-      datetime: { project_id: project_id, orders: [] },
-    },
-  });
+  const { register, getValues, reset, handleSubmit, setValue } =
+    useForm<ICreatePostForm>({
+      defaultValues: {
+        project_id: project_id,
+        posts: [],
+        datetime: { project_id: project_id, orders: [] },
+      },
+    });
 
-  // const platforms: number[] = [
-  //   ...new Set(ChannelCards.map((card) => card.platform)),
-  // ];
+  const [createPost] = useCreatePostMutation();
+  const [createOrderDates] = useCreateOrderDatesMutation();
+  const [paymentProject] = usePaymentProjectMutation();
 
-  // register(createPostData.project_id, {value: project_id})
-
-  //   const posts: ICreatePost[] = platforms.map((platform) => ({
-  //     project_id: project_id,
-  //     platform: platform
-  // }));
-
-  //   const mainForm = {
-  //   }
+  const onSubmit: SubmitHandler<ICreatePostForm> = async (formData) => {
+    if (
+      project_id &&
+      formData.posts.length &&
+      formData.datetime.orders.length
+    ) {
+      createOrderDates(formData.datetime)
+        .unwrap()
+        .then(() => {
+          formData.posts.map((post, index) => {
+            const postReq = { ...post, project_id: project_id };
+            createPost(postReq)
+              .unwrap()
+              .then(() => {
+                console.log("Пост: ", index);
+              })
+              .catch(() => {
+                alert("Ошибка в создании поста");
+              });
+          });
+        })
+        .then(() =>
+          paymentProject(project_id)
+            .unwrap()
+            .then((data) => {
+              console.log(data.success);
+            })
+            .catch(() => alert("Ошибка в оплате заказа")),
+        )
+        .catch(() => {
+          alert("Ошибка в создании дат для каналов");
+        });
+    }
+  };
 
   return (
-    <div>
-      <CreateOrderTop onChangeBlur={handleOnChangeBlur} register={register} />
+    <form onSubmit={handleSubmit(onSubmit)}>
+      <CreateOrderTop
+        onChangeBlur={handleOnChangeBlur}
+        register={register}
+        getValues={getValues}
+      />
       <CreateOrderPost
         cards={ChannelCards}
         isBlur={blur.post}
@@ -119,6 +143,6 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
         getValues={getValues}
       />
       <CreateOrderPayment isBlur={blur.payment} />
-    </div>
+    </form>
   );
 };

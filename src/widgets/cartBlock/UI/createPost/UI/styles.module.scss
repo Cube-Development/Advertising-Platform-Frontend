@@ -104,4 +104,9 @@
   margin-top: 30px;
   display: grid;
   justify-content: stretch;
+
+  &.deactive {
+    pointer-events: none;
+    filter: grayscale(100%);
+  }
 }

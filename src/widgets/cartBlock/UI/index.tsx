@@ -16,11 +16,20 @@ import { ICart } from "@shared/types/cart";
 import { useAppSelector } from "@shared/store";
 import Cookies from "js-cookie";
 import { GenerateGuestId } from "@features/generateGuestId";
+import { useTranslation } from "react-i18next";
+import { Languages } from "@shared/config/languages";
 
 export const CartBlock: FC = () => {
+  const { i18n } = useTranslation();
+  const language = Languages.find((lang) => {
+    return i18n.language === lang.name;
+  });
   const { isAuth } = useAppSelector((state) => state.user);
 
-  const { data: cart } = useReadCommonCartQuery("", { skip: !isAuth });
+  const { data: cart } = useReadCommonCartQuery(
+    { language: language?.id || Languages[0].id },
+    { skip: !isAuth },
+  );
 
   const guestId = Cookies.get("guest_id");
   if (!guestId) {
@@ -28,7 +37,7 @@ export const CartBlock: FC = () => {
   }
 
   const { data: cartPub } = useReadPublicCartQuery(
-    { guest_id: guestId },
+    { guest_id: guestId, language: language?.id || Languages[0].id },
     { skip: !guestId || isAuth },
   );
 
@@ -43,7 +52,6 @@ export const CartBlock: FC = () => {
     }
   }, [cartPub]);
 
-  // const [cartCards, setCartCards] = useState<ICart>(cart);
   const [currentCart, setCurrentCart] = useState<ICart>(
     cartPub ? cartPub : cart!,
   );
@@ -65,13 +73,19 @@ export const CartBlock: FC = () => {
         channel_id: cartChannel.id,
         format: cartChannel.selected_format.format,
         match: cartChannel.match,
+        language: language?.id || Languages[0].id,
+      };
+
+      const removeReq = {
+        channel_id: cartChannel.id,
+        language: language?.id || Languages[0].id,
       };
       if (
         currentCard.selected_format?.format ===
         cartChannel.selected_format?.format
       ) {
         if (!isAuth && guestId) {
-          removeFromPublicCart({ ...addReq, guest_id: guestId })
+          removeFromPublicCart({ ...removeReq, guest_id: guestId })
             .unwrap()
             .then((data) => {
               setCurrentCart(data);
@@ -80,7 +94,7 @@ export const CartBlock: FC = () => {
               console.error("Ошибка при удалении с корзины", error),
             );
         } else if (isAuth) {
-          removeFromCommonCart(addReq)
+          removeFromCommonCart(removeReq)
             .unwrap()
             .then((data) => {
               setCurrentCart(data);

@@ -65,13 +65,15 @@
       max-width: 450px;
       justify-content: space-between;
       border-radius: 30px;
-      // border: 1px solid #fff;
       box-shadow: inset 0px 0px 0px 1px #fff;
       background: rgba(255, 255, 255, 0);
 
       button {
         border-radius: 50%;
         background: #fff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
         width: 60px;
         height: 60px;
       }

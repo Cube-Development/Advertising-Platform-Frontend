@@ -7,7 +7,7 @@
   line-height: normal;
   position: relative;
 
-  button {
+  .selects {
     display: grid;
     grid-auto-flow: column;
     column-gap: 10px;
@@ -48,8 +48,6 @@
 
   border-radius: 10px;
   border: 0.5px solid #4772e6;
-
-  background: #fff;
 
   ul {
     display: grid;

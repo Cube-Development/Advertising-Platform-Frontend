@@ -56,15 +56,17 @@ export const CatalogList: FC<CatalogListProps> = ({
       </div>
 
       <SearchFilter />
-      {channels.map((card) => (
-        <CatalogCard
-          card={card}
-          key={card.id}
-          AddToBasketBtn={AddToBasket}
-          FormatList={FormatList}
-          onChangeCard={onChangeCard}
-        />
-      ))}
+      <div className={styles.card__list}>
+        {channels?.map((card) => (
+          <CatalogCard
+            card={card}
+            key={card.id}
+            AddToBasketBtn={AddToBasket}
+            FormatList={FormatList}
+            onChangeCard={onChangeCard}
+          />
+        ))}
+      </div>
     </div>
   );
 };

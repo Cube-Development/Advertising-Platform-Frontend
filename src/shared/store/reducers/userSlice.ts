@@ -1,6 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { roles } from "@shared/config/roles";
-import { paths } from "@shared/routing";
 import { IToken } from "@shared/types/tokens";
 import Cookies from "js-cookie";
 
@@ -45,11 +44,6 @@ export const userSlice = createSlice({
       Cookies.remove("refreshToken");
       Cookies.set("isAuth", "false");
       state.isAuth = false;
-      if (state.role === roles.advertiser) {
-        window.location.href = paths.main;
-      } else if (state.role === roles.blogger) {
-        window.location.href = paths.mainBlogger;
-      }
     },
     setAuth: (state, action: PayloadAction<boolean>) => {
       state.isAuth = action.payload;

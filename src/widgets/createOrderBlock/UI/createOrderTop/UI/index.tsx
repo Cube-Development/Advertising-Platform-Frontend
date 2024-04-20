@@ -8,21 +8,26 @@ import { ICreateOrderBlur } from "@shared/types/platform";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { UseFormGetValues, UseFormRegister } from "react-hook-form";
+import { ICreatePostForm } from "@shared/types/createPost";
 
 interface CreateOrderTopProps {
-  // onChange: UseFormSetValue<IOrder>;
   onChangeBlur: (key: keyof ICreateOrderBlur) => void;
-  register: any;
+  register: UseFormRegister<ICreatePostForm>;
+  getValues: UseFormGetValues<ICreatePostForm>;
 }
 
 export const CreateOrderTop: FC<CreateOrderTopProps> = ({
   onChangeBlur,
   register,
+  getValues,
 }) => {
   const { t } = useTranslation();
 
   const handleOnChangeBlur = () => {
-    onChangeBlur("post");
+    if (getValues("name")) {
+      onChangeBlur("post");
+    }
   };
 
   return (
@@ -41,18 +46,20 @@ export const CreateOrderTop: FC<CreateOrderTopProps> = ({
             <div>
               <div className={styles.wrapper__input}>
                 <div className={styles.input}>
-                  <PencilIcon />
+                  <PencilIcon stroke="#fff" />
                   <input
                     type="text"
                     placeholder={t("create_order.name.default_value")}
                     onKeyDown={(event) => {
                       event.key === "Enter" && handleOnChangeBlur();
                     }}
-                    {...register(CreatePostData.name)}
+                    {...register(CreatePostData.name, {
+                      required: "Поля обязательное",
+                    })}
                   />
                 </div>
                 <button onClick={handleOnChangeBlur}>
-                  <ArrowLongHorizontalIcon />
+                  <ArrowLongHorizontalIcon className="active__icon" />
                 </button>
               </div>
             </div>

@@ -7,13 +7,14 @@ import { ICreateOrderBlur } from "@shared/types/platform";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 
 interface CreateOrderDatetimeProps {
   cards: IPostChannel[];
   isBlur?: boolean;
   onChangeBlur: (key: keyof ICreateOrderBlur) => void;
-  setValue: any;
-  getValues: any;
+  setValue: UseFormSetValue<ICreatePostForm>;
+  getValues: UseFormGetValues<ICreatePostForm>;
 }
 
 export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({

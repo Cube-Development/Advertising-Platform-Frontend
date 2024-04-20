@@ -1,21 +1,35 @@
 import { authApi, baseApi } from "@shared/api";
+import { languagesNum } from "@shared/config/languages";
 import { ICart } from "@shared/types/cart";
 
 interface AddChannelReq {
   guest_id?: string;
   channel_id: string;
   format: number;
-  match?: number;
+  match: number;
+  language: languagesNum;
+}
+
+interface RemoveChannelReq {
+  guest_id?: string;
+  channel_id: string;
+  language: languagesNum;
+}
+
+interface ReadCartReq {
+  language: languagesNum;
+  guest_id?: string;
 }
 
 // Авторизованные запросы
 
 export const authCartAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
-    readCommonCart: build.query<ICart, string>({
-      query: () => ({
+    readCommonCart: build.query<ICart, ReadCartReq>({
+      query: (params) => ({
         url: `/cart/common`,
         method: `GET`,
+        params: params,
       }),
     }),
     addToCommonCart: build.mutation<ICart, AddChannelReq>({
@@ -25,7 +39,7 @@ export const authCartAPI = authApi.injectEndpoints({
         params: params,
       }),
     }),
-    removeFromCommonCart: build.mutation<ICart, AddChannelReq>({
+    removeFromCommonCart: build.mutation<ICart, RemoveChannelReq>({
       query: (params) => ({
         url: `/cart/common/remove`,
         method: `POST`,
@@ -60,7 +74,7 @@ export const {
 
 export const publicCartAPI = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    readPublicCart: build.query<ICart, { guest_id: string | undefined }>({
+    readPublicCart: build.query<ICart, ReadCartReq>({
       query: (params) => ({
         url: `/cart/public`,
         method: `GET`,
@@ -74,7 +88,7 @@ export const publicCartAPI = baseApi.injectEndpoints({
         params: params,
       }),
     }),
-    removeFromPublicCart: build.mutation<ICart, AddChannelReq>({
+    removeFromPublicCart: build.mutation<ICart, RemoveChannelReq>({
       query: (params) => ({
         url: `/cart/public/remove`,
         method: `POST`,

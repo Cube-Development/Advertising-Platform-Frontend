@@ -8,7 +8,7 @@ import {
   IChannelFormat,
   IFormatPriceProps,
 } from "@shared/types/platform";
-import { UseFormSetValue } from "react-hook-form";
+import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { platformData } from "@shared/config/platformData";
 
 interface SelectPriceProps {
@@ -19,8 +19,8 @@ interface SelectPriceProps {
   formats?: IChannelFormat[];
   AccommPrice: FC<IFormatPriceProps>;
   onChange: UseFormSetValue<any>;
-  getValues: any;
   defaultValues?: IAddFormat[];
+  getValues: UseFormGetValues<any>;
 }
 
 export const SelectPrice: FC<SelectPriceProps> = ({
@@ -40,7 +40,7 @@ export const SelectPrice: FC<SelectPriceProps> = ({
     const form: IAddChannelData = { ...getValues() };
     const currentFormats = [...(form.format || [])];
     const newFormats = currentFormats.filter(
-      (item) => item.name !== format.name,
+      (item) => item.name !== format.name
     );
     format.price !== 0 && newFormats.push(format);
     onChange(type, newFormats);

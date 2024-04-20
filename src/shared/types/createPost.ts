@@ -1,4 +1,4 @@
-import { ContentNum } from "@shared/config/createPostData";
+import { ContentType } from "@shared/config/createPostData";
 import { IAddFile } from "./file";
 
 export interface IPostChannel {
@@ -53,5 +53,5 @@ export interface TimeListProps {
 }
 
 export interface FileProps {
-  onChange: (file: IAddFile[], type: ContentNum) => void;
+  onChange: (file: IAddFile[], type: ContentType) => void;
 }

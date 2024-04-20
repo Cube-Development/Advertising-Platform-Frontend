@@ -7,19 +7,17 @@ import {
   IPostChannel,
   TimeListProps,
 } from "@shared/types/createPost";
-import { ClockIcon, PostIcon, TelegramIcon } from "@shared/assets";
-import {
-  CreatePostFormData,
-  DatetimeData,
-} from "@shared/config/createPostData";
+import { PostIcon } from "@shared/assets";
+import { CreatePostFormData } from "@shared/config/createPostData";
 import { platformToIcon } from "@shared/config/platformData";
+import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 
 interface PostPlatformProps {
   card: IPostChannel;
   CustomCalendar: FC<DateListProps>;
   TimeList: FC<TimeListProps>;
-  setValue: any;
-  getValues: any;
+  setValue: UseFormSetValue<ICreatePostForm>;
+  getValues: UseFormGetValues<ICreatePostForm>;
 }
 
 export const PostPlatform: FC<PostPlatformProps> = ({

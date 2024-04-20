@@ -42,6 +42,18 @@ export interface IReadChannelData {
   format: IFormat[];
 }
 
+export interface IEditChannelData {
+  channel_id: string;
+  male: number;
+  female: number;
+  description: string;
+  text_limit: number;
+  region: number[];
+  language: number[];
+  age: number[];
+  format: IAddFormat[];
+}
+
 export interface IAddFormat {
   name: number;
   price: number;

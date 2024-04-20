@@ -25,6 +25,7 @@ import { useAppSelector } from "@shared/store";
 import Cookies from "js-cookie";
 import { ICart } from "@shared/types/cart";
 import { GenerateGuestId } from "@features/generateGuestId";
+import { GetUserId } from "@features/getUserId";
 
 export const CatalogBlock: FC = () => {
   const { t, i18n } = useTranslation();
@@ -49,25 +50,47 @@ export const CatalogBlock: FC = () => {
   });
 
   const { isAuth } = useAppSelector((state) => state.user);
-
-  const formFields = watch();
-  const { data: catalog } = useGetCatalogQuery(formFields);
-  const { data: cart } = useReadCommonCartQuery("", { skip: !isAuth });
   const guestId = Cookies.get("guest_id");
   if (!guestId) {
     GenerateGuestId();
   }
+  const userId = GetUserId();
+
+  const formFields = watch();
+
+  const { data: cart } = useReadCommonCartQuery(
+    { language: language?.id || Languages[0].id },
+    { skip: !isAuth },
+  );
+  const { data: catalogAuth } = useGetCatalogQuery(
+    { ...formFields, user_id: userId },
+    {
+      skip: !userId,
+    },
+  );
+  const { data: catalog } = useGetCatalogQuery(
+    { ...formFields, guest_id: guestId },
+    { skip: isAuth },
+  );
+
   const { data: cartPub } = useReadPublicCartQuery(
-    { guest_id: guestId },
+    { guest_id: guestId, language: language?.id || Languages[0].id },
     { skip: !guestId || isAuth },
   );
 
-  const [cards, setCards] = useState<IPlatform[]>(catalog?.channels || []);
+  const [cards, setCards] = useState<IPlatform[]>(
+    catalogAuth?.channels ? catalogAuth?.channels : catalog?.channels || [],
+  );
   useEffect(() => {
     if (catalog) {
-      setCards(catalog.channels);
+      setCards(catalog?.channels);
     }
   }, [catalog]);
+  useEffect(() => {
+    if (catalogAuth) {
+      setCards(catalogAuth?.channels);
+    }
+  }, [catalogAuth]);
 
   const [currentCart, setCurrentCart] = useState<ICart>(
     cartPub ? cartPub : cart!,
@@ -99,6 +122,12 @@ export const CatalogBlock: FC = () => {
         channel_id: cartChannel.id,
         format: cartChannel.selected_format.format,
         match: cartChannel.match,
+        language: language?.id || Languages[0].id,
+      };
+
+      const removeReq = {
+        channel_id: cartChannel.id,
+        language: language?.id || Languages[0].id,
       };
 
       if (
@@ -171,7 +200,7 @@ export const CatalogBlock: FC = () => {
         });
       } else {
         if (!isAuth && guestId) {
-          removeFromPublicCart({ ...addReq, guest_id: guestId })
+          removeFromPublicCart({ ...removeReq, guest_id: guestId })
             .unwrap()
             .then((data) => {
               setCurrentCart(data);
@@ -180,7 +209,7 @@ export const CatalogBlock: FC = () => {
               console.error("Ошибка при удалении с корзины", error),
             );
         } else if (isAuth) {
-          removeFromCommonCart(addReq)
+          removeFromCommonCart(removeReq)
             .unwrap()
             .then((data) => {
               setCurrentCart(data);
@@ -216,7 +245,7 @@ export const CatalogBlock: FC = () => {
             <div className={styles.content__right}>
               <CatalogList
                 setValue={setValue}
-                channels={cards.length > 0 ? cards : catalog?.channels || []}
+                channels={cards || []}
                 onChangeCard={handleChangeCards}
               />
               <div className={styles.cart}>

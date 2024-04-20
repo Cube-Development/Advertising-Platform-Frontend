@@ -23,7 +23,7 @@ import { IAdvProjectCard } from "@shared/types/advProject";
 import {
   getProjectSubcardReq,
   useGetAdvSubprojectsMutation,
-} from "@shared/store/services/advProjectsService";
+} from "@shared/store/services/advOrdersService";
 import { Languages } from "@shared/config/languages";
 
 interface AdvProjectCardProps {

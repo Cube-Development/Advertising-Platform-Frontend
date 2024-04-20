@@ -15,6 +15,7 @@ import {
 import {
   IAddChannelData,
   IAddChannelIdentification,
+  IEditChannelData,
 } from "@shared/types/platform";
 
 export interface getChannelsByStatusReq {
@@ -75,6 +76,13 @@ export const channelAPI = authApi.injectEndpoints({
       query: (channel_id) => ({
         url: `/channel/deactivate/${channel_id}`,
         method: `PUT`,
+      }),
+    }),
+    editChannel: build.mutation<{ status: platformStatus }, IEditChannelData>({
+      query: (body) => ({
+        url: "/channel/edit",
+        method: "PUT",
+        body: body,
       }),
     }),
   }),

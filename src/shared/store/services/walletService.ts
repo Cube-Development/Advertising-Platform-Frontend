@@ -35,13 +35,6 @@ export const walletAPI = authApi.injectEndpoints({
         body: BodyParams,
       }),
     }),
-    paymentOrder: build.mutation<PaymentOrderResponse, string>({
-      query: (BodyParams) => ({
-        url: `/wallet/payment/order`,
-        method: `POST`,
-        body: BodyParams,
-      }),
-    }),
     paymentDeposit: build.mutation<PaymentDepositResponse, PaymentDepositReq>({
       query: (BodyParams) => ({
         url: `/wallet/payment/deposit?legal_id=${BodyParams.legal_id}&amount=${BodyParams.amount}`,
@@ -66,7 +59,6 @@ export const walletAPI = authApi.injectEndpoints({
 export const {
   useGetBalanceQuery,
   usePaymentDepositMutation,
-  usePaymentOrderMutation,
   usePaymentProjectMutation,
   usePaymentWithdrawalMutation,
 } = walletAPI;

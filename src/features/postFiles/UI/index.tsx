@@ -1,7 +1,7 @@
 import { BarProfileFilter } from "@features/barProfileFilter/UI";
 import { CancelIcon2, ImageIcon } from "@shared/assets";
 import { addFileFilter } from "@shared/config/addFileFilter";
-import { ContentNum, CreatePostFormData } from "@shared/config/createPostData";
+import { ContentType, CreatePostFormData } from "@shared/config/createPostData";
 import { pageFilter } from "@shared/config/pageFilter";
 import { useAppSelector } from "@shared/store";
 import {
@@ -15,12 +15,13 @@ import { MyButton } from "@shared/ui";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 
 interface PostFilesProps {
   AddMediaFiles: FC<FileProps>;
   AddFiles: FC<FileProps>;
-  setValue: any;
-  getValues: any;
+  setValue: UseFormSetValue<ICreatePostForm>;
+  getValues: UseFormGetValues<ICreatePostForm>;
   platformId: number;
 }
 
@@ -42,7 +43,7 @@ export const PostFiles: FC<PostFilesProps> = ({
 
   const handle = () => {};
 
-  const handleAddMediaFile = (files: IAddFile[], contentId: ContentNum) => {
+  const handleAddMediaFile = (files: IAddFile[], contentId: ContentType) => {
     const form: ICreatePostForm = { ...getValues() };
     const posts: ICreatePost[] = (form.posts || []).filter(
       (item) => item.platform !== platformId,

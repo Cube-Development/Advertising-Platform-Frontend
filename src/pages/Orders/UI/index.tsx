@@ -10,7 +10,7 @@ import { FC } from "react";
 import {
   getProjectsCardReq,
   useGetAdvProjectsQuery,
-} from "@shared/store/services/advProjectsService";
+} from "@shared/store/services/advOrdersService";
 
 export const OrdersPage: FC = () => {
   const { typeFilter, statusFilter } = useAppSelector((state) => state.filter);

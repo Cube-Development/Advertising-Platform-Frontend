@@ -61,7 +61,7 @@ export const TimeList: FC<TimeListProps> = ({ onChange }) => {
           : timeSlots[timeIndex].split(" - ");
     } else if (selectedTimesObject.timeIndexList.length < 2) {
       newTimeIndexList = [...selectedTimesObject.timeIndexList, timeIndex].sort(
-        (a, b) => a - b,
+        (a, b) => a - b
       );
       newTimeList = [
         timeSlots[newTimeIndexList[0]].split(" - ")[0],
@@ -111,7 +111,11 @@ export const TimeList: FC<TimeListProps> = ({ onChange }) => {
 
   return (
     <div>
-      <button className={styles.wrapper} onClick={(e) => handleOpenModal(e)}>
+      <button
+        type="button"
+        className={styles.wrapper}
+        onClick={(e) => handleOpenModal(e)}
+      >
         <ClockIcon />
         <p>
           {selectedTimesObject.timeIndexList.length && !isModalOpen
@@ -140,7 +144,7 @@ export const TimeList: FC<TimeListProps> = ({ onChange }) => {
                           ? styles.active
                           : index >
                                 Math.min(
-                                  ...selectedTimesObject.timeIndexList,
+                                  ...selectedTimesObject.timeIndexList
                                 ) &&
                               index <
                                 Math.max(...selectedTimesObject.timeIndexList)
@@ -156,6 +160,7 @@ export const TimeList: FC<TimeListProps> = ({ onChange }) => {
                 <div className={styles.bottom}>
                   <MyButton
                     buttons_type="button__white"
+                    type="button"
                     className={styles.button}
                     onClick={continueAction}
                   >

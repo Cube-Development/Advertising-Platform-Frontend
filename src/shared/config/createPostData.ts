@@ -14,7 +14,7 @@ export enum CreatePostFormData {
   datetime = "datetime",
 }
 
-export enum ContentNum {
+export enum ContentType {
   text = 1,
   photo = 2,
   video = 3,
