@@ -40,7 +40,7 @@ export const SelectPrice: FC<SelectPriceProps> = ({
     const form: IAddChannelData = { ...getValues() };
     const currentFormats = [...(form.format || [])];
     const newFormats = currentFormats.filter(
-      (item) => item.name !== format.name
+      (item) => item.name !== format.name,
     );
     format.price !== 0 && newFormats.push(format);
     onChange(type, newFormats);
