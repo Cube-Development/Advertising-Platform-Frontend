@@ -5,7 +5,7 @@ import {
   TrashBasketIcon,
   YesIcon,
 } from "@shared/assets";
-import { ContentNum } from "@shared/config/createPostData";
+import { ContentType } from "@shared/config/createPostData";
 import { FileProps } from "@shared/types/createPost";
 import { IAddFile } from "@shared/types/file";
 import { formatFileSize } from "@shared/ui/formatFileSize";
@@ -31,7 +31,7 @@ export const AddMediaFiles: FC<FileProps> = ({ onChange }) => {
       );
       console.log(newFiles);
       setFiles([...newFiles]);
-      onChange(newFiles, ContentNum.photo);
+      onChange(newFiles, ContentType.photo);
 
       // Запрос в бек на загрузку файла или файлов
       // может быть mapping на загрузку в бек
@@ -67,7 +67,7 @@ export const AddMediaFiles: FC<FileProps> = ({ onChange }) => {
       );
       console.log(newFiles);
       setFiles([...files, ...newFiles]);
-      onChange(newFiles, ContentNum.photo);
+      onChange(newFiles, ContentType.photo);
 
       // Запрос в бек на загрузку файла или файлов
       // может быть mapping на загрузку в бек
@@ -82,7 +82,7 @@ export const AddMediaFiles: FC<FileProps> = ({ onChange }) => {
   const handleRemoveFile = (file: IAddFile) => {
     const newFiles = files.filter((item) => item !== file);
     setFiles(newFiles);
-    onChange(newFiles, ContentNum.photo);
+    onChange(newFiles, ContentType.photo);
   };
 
   return (

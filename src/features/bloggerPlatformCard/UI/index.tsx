@@ -1,9 +1,7 @@
 import {
   ArrowSmallVerticalIcon,
-  ArrowLongHorizontalIcon,
   CancelIcon,
   CompliteIcon,
-  MoreIcon,
   ProtectIcon2,
   RatingIcon,
   RocketIcon,
@@ -12,9 +10,8 @@ import {
 } from "@shared/assets";
 import { FeatherIcon } from "@shared/assets/icons/feather";
 import { platformStatusFilter } from "@shared/config/platformFilter";
-import { FC, useState } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
+import { useAppSelector } from "@shared/store";
+import { useActivateChannelMutation } from "@shared/store/services/channelService";
 import {
   IActiveChannel,
   IBlockedChannel,
@@ -22,12 +19,10 @@ import {
   IModerationChannel,
   IModerationRejectChannel,
 } from "@shared/types/channelStatus";
-import { useAppSelector } from "@shared/store";
 import { MyButton } from "@shared/ui";
-import {
-  useActivateChannelMutation,
-  useDeactivateChannelMutation,
-} from "@shared/store/services/channelService";
+import { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 interface BloggerPlatformCardProps {
   card:
@@ -37,6 +32,12 @@ interface BloggerPlatformCardProps {
     | IBlockedChannel
     | IModerationChannel;
   SeeOffersBtn: FC;
+  ChannelDescriptionBtn: FC<{ channel_id: string }>;
+  BloggerPlatformCardMenu: FC<{
+    channel_id: string;
+    DeleteChannel: FC<{ channel_id: string; onChange: () => void }>;
+  }>;
+  DeleteChannel: FC<{ channel_id: string; onChange: () => void }>;
   SeeReasonBtn: FC;
   RepeatOfferBtn: FC;
   ActivateBtn: FC;
@@ -45,6 +46,9 @@ interface BloggerPlatformCardProps {
 
 export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
   card,
+  ChannelDescriptionBtn,
+  DeleteChannel,
+  BloggerPlatformCardMenu,
   SeeOffersBtn,
   SeeReasonBtn,
   RepeatOfferBtn,
@@ -71,7 +75,14 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
   const { author, verified, partner } = getRandomValues();
 
   const [activateChannel] = useActivateChannelMutation();
-  const [deactivateChannel] = useDeactivateChannelMutation();
+  const handleActiveChannel = () => {
+    activateChannel(card.id)
+      .unwrap()
+      .then(() => {
+        console.log("Успешная активация");
+      })
+      .catch((error) => console.error("Ошибка при активации канала: ", error));
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -88,12 +99,12 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
         <div className={styles.card__description}>
           <div className={styles.card__description__top}>
             <div className={styles.card__description__top__text}>
-              <p>{card.name}</p>
-              <span>{card.category}</span>
+              <p>{card?.name}</p>
+              <span>{card?.category}</span>
             </div>
             <div className={styles.card__description__top__icons}>
               {statusFilter === platformStatusFilter.banned ? (
-                <p>{(card as IBlockedChannel).blocked_date}</p>
+                <p>{(card as IBlockedChannel)?.blocked_date}</p>
               ) : (
                 <div>
                   {author && <FeatherIcon />}
@@ -128,12 +139,12 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
                 <SeeOffersBtn />
               </div>
             ) : statusFilter === platformStatusFilter.moderationReject &&
-              new Date((card as IModerationRejectChannel).reapplication_date) <
+              new Date((card as IModerationRejectChannel)?.reapplication_date) <
                 new Date() ? (
               <div className={styles.card__info__top}>
                 <span>
                   {t(`platforms_blogger.repeat_date`)} -{" "}
-                  {(card as IModerationRejectChannel).reapplication_date}
+                  {(card as IModerationRejectChannel)?.reapplication_date}
                 </span>
               </div>
             ) : statusFilter === platformStatusFilter.moderationReject ? (
@@ -143,9 +154,7 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
             ) : statusFilter === platformStatusFilter.inactive ? (
               <div
                 className={styles.card__info__top}
-                onClick={() => {
-                  activateChannel(card.id);
-                }}
+                onClick={handleActiveChannel}
               >
                 <ActivateBtn />
               </div>
@@ -175,7 +184,7 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
                 <p>
                   {(
                     card as IActiveChannel
-                  ).channel_orders.in_progress.toLocaleString()}
+                  )?.channel_orders?.in_progress?.toLocaleString()}
                 </p>
               </div>
               <div>
@@ -183,7 +192,7 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
                 <p>
                   {(
                     card as IActiveChannel
-                  ).channel_orders.wait.toLocaleString()}
+                  )?.channel_orders?.wait?.toLocaleString()}
                 </p>
               </div>
               <div>
@@ -191,7 +200,7 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
                 <p>
                   {(
                     card as IActiveChannel
-                  ).channel_orders.completed.toLocaleString()}
+                  )?.channel_orders?.completed?.toLocaleString()}
                 </p>
               </div>
               <div>
@@ -199,7 +208,7 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
                 <p>
                   {(
                     card as IActiveChannel
-                  ).channel_orders.canceled_rejected.toLocaleString()}
+                  )?.channel_orders?.canceled_rejected?.toLocaleString()}
                 </p>
               </div>
             </div>
@@ -207,17 +216,16 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
         </div>
         <div className={styles.card__more}>
           <div>
-            <button>
-              <MoreIcon />
-            </button>
+            <BloggerPlatformCardMenu
+              channel_id={card?.id}
+              DeleteChannel={DeleteChannel}
+            />
           </div>
         </div>
       </div>
       {isSubcardOpen && (
         <div className={styles.platform__events}>
-          <button>
-            <p>{t(`platform_btn.description`)}</p>
-          </button>
+          <ChannelDescriptionBtn channel_id={card?.id} />
           <button>
             <p>{t(`platform_btn.calendar`)}</p>
           </button>
@@ -230,7 +238,7 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
       <MyButton
         buttons_type={isSubcardOpen ? "button__white" : "button__blue"}
         className={styles.card__btn}
-        onClick={() => handleChangeOpenSubcard()}
+        onClick={handleChangeOpenSubcard}
       >
         {isSubcardOpen
           ? t(`orders_advertiser.card.see_less`)

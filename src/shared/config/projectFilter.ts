@@ -9,11 +9,18 @@ export enum myProjectStatusFilter {
   completed = "completed",
 }
 
-export enum managerProjectStatusFilter {
+export enum advManagerProjectStatusFilter {
   active = "active",
-  completed = "completed",
   develop = "develop",
   agreed = "agreed",
+  completed = "completed",
+}
+
+export enum managerProjectStatusFilter {
+  active = "active",
+  agreed = "agreed",
+  new = "new",
+  completed = "completed",
 }
 
 export const advMyProjectStatus = [
@@ -30,18 +37,37 @@ export const advMyProjectStatus = [
 export const advManagerProjectStatus = [
   {
     name: "orders_advertiser.status_filter.active",
-    type: managerProjectStatusFilter.active,
+    type: advManagerProjectStatusFilter.active,
   },
   {
     name: "orders_advertiser.status_filter.develop",
-    type: managerProjectStatusFilter.develop,
+    type: advManagerProjectStatusFilter.develop,
   },
   {
     name: "orders_advertiser.status_filter.agreed",
-    type: managerProjectStatusFilter.agreed,
+    type: advManagerProjectStatusFilter.agreed,
   },
   {
     name: "orders_advertiser.status_filter.complite",
+    type: advManagerProjectStatusFilter.completed,
+  },
+];
+
+export const managerProjectStatus = [
+  {
+    name: "orders_manager.status_filter.active",
+    type: managerProjectStatusFilter.active,
+  },
+  {
+    name: "orders_manager.status_filter.agreed",
+    type: managerProjectStatusFilter.agreed,
+  },
+  {
+    name: "orders_manager.status_filter.new",
+    type: managerProjectStatusFilter.new,
+  },
+  {
+    name: "orders_manager.status_filter.complite",
     type: managerProjectStatusFilter.completed,
   },
 ];
@@ -55,7 +81,7 @@ export const advertiserProjectTypes = [
   {
     name: "orders_advertiser.type_filter.manager_project",
     type: projectTypesFilter.managerProject,
-    status: managerProjectStatusFilter.active,
+    status: advManagerProjectStatusFilter.active,
   },
   {
     name: "orders_advertiser.type_filter.saved_project",

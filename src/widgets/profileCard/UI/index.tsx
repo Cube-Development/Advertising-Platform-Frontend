@@ -42,8 +42,7 @@ export const ProfileCard: FC = () => {
           ? SelfEmployedData
           : SelfEmployedCardData;
 
-  const [createLegal, { isLoading, error, isError, isSuccess }] =
-    useCreateLegalMutation();
+  const [createLegal, { isLoading, error }] = useCreateLegalMutation();
 
   const onSubmit: SubmitHandler<IProfileData> = async (data) => {
     const dataWithLegalType = {

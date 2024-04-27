@@ -3,9 +3,10 @@ import { paths } from "@shared/routing";
 import { SideBarLayout } from "@widgets/layouts";
 import { RootLayout } from "@widgets/layouts/rootLayout/ui";
 import { RouteObject, createBrowserRouter } from "react-router-dom";
-import { CheckRoutes, routerType } from "./CheckRoutes";
+import { CheckProjectId, CheckRoutes, routerType } from "./CheckRoutes";
 import {
   IRoute,
+  createOrderRoutes,
   privateAdvertiserRoutes,
   privateBloggerRoutes,
   privateCommonRoutes,
@@ -42,6 +43,8 @@ const publicAdvertisserRouter: RouteObject[] = handleRouter(
 );
 const publicBloggerRouter: RouteObject[] = handleRouter(publicBloggerRoutes);
 const publicCommonRouter: RouteObject[] = handleRouter(publicCommonRoutes);
+
+const createOrderRouter: RouteObject[] = handleRouter(createOrderRoutes);
 
 export const router = createBrowserRouter([
   {
@@ -80,6 +83,11 @@ export const router = createBrowserRouter([
         path: paths.main,
         element: <CheckRoutes type={routerType.private} />,
         children: privateCommonRouter,
+      },
+      {
+        path: paths.main,
+        element: <CheckProjectId />,
+        children: createOrderRouter,
       },
       ...publicCommonRouter,
     ],

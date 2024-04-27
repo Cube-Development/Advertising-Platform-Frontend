@@ -15,16 +15,17 @@ import { useAppDispatch, useAppSelector } from "@shared/store";
 import { platformTypes } from "@shared/config/postFilter";
 import { platformTypesStr } from "@shared/config/platformTypes";
 import { POST } from "@shared/config/common";
-import { CreatePostFormData, ContentNum } from "@shared/config/createPostData";
+import { CreatePostFormData, ContentType } from "@shared/config/createPostData";
 import { ContinueOrder } from "@features/continueOrder";
 import { filterSlice } from "@shared/store/reducers";
+import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 
 interface CreateOrderPostProps {
   cards: IPostChannel[];
   isBlur?: boolean;
   onChangeBlur: (key: keyof ICreateOrderBlur) => void;
-  setValue: any;
-  getValues: any;
+  setValue: UseFormSetValue<ICreatePostForm>;
+  getValues: UseFormGetValues<ICreatePostForm>;
 }
 
 export const CreateOrderPost: FC<CreateOrderPostProps> = ({
@@ -81,12 +82,12 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                 <div className={styles.block}>
                   <PostText
                     placeholder={"create_order.create.text"}
-                    maxLength={POST.postLenght}
+                    maxLength={POST.postLength}
                     rows={10}
                     setValue={setValue}
                     getValues={getValues}
                     type={CreatePostFormData.posts}
-                    contentId={ContentNum.text}
+                    contentId={ContentType.text}
                     platformId={filter.id}
                   />
                 </div>
@@ -103,7 +104,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                   {filter.type === platformTypesStr.telegram && <PostButtons />}
                   <PostText
                     placeholder={"create_order.create.comment"}
-                    maxLength={POST.commentLenght}
+                    maxLength={POST.commentLength}
                     rows={4}
                     setValue={setValue}
                     type={CreatePostFormData.posts}
@@ -114,12 +115,12 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
               </div>
               <div className={styles.display}>
                 <PostDispay />
+                <div className={styles.continue}>
+                  <ContinueOrder onClick={handleCheckPosts} />
+                </div>
               </div>
             </div>
           </div>
-        </div>
-        <div className={styles.continue}>
-          <ContinueOrder onClick={handleCheckPosts} />
         </div>
       </div>
     </div>

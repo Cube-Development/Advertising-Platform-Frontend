@@ -4,10 +4,12 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { Link } from "react-router-dom";
 import { paths } from "@shared/routing";
+import { useGetBalanceQuery } from "@shared/store/services/walletService";
 
 export const Wallet: FC = () => {
   const { t } = useTranslation();
-  const wallet = 1000000000;
+  // const wallet = 1000000000;
+  const { data: balance } = useGetBalanceQuery();
   const [isMenuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -39,10 +41,13 @@ export const Wallet: FC = () => {
       ref={menuRef}
     >
       <button className={styles.roww} onClick={(e) => toggleMenu(e)}>
-        <p>
-          {`${wallet.toLocaleString()} `}
-          <span>{t("symbol")}</span>
-        </p>
+        {balance ? (
+          <p>
+            {balance.balance.toLocaleString()} <span>{t("symbol")}</span>
+          </p>
+        ) : (
+          ""
+        )}
         {isMenuOpen ? <CloseIcon /> : <PlusIcon />}
       </button>
       {isMenuOpen && (

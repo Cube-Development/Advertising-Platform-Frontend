@@ -6,9 +6,10 @@
   font-weight: 500;
   line-height: 0.75;
 
-  div {
+  .content {
     display: grid;
     grid-auto-flow: column;
+    align-items: center;
     column-gap: 10px;
     justify-content: center;
   }

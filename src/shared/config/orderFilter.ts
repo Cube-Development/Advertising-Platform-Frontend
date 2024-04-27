@@ -9,6 +9,9 @@ export enum orderStatus {
   date_constant = 8,
   post_review = 9,
   moderation = 10,
+  order_review = 11,
+  channel_agreed = 12,
+  adv_comment = 13,
 }
 
 export const orderStatusChat = [

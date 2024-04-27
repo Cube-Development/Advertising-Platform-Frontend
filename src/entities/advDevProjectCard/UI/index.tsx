@@ -1,13 +1,13 @@
 import { TemplateIcon2 } from "@shared/assets";
 import { projectTypesFilter } from "@shared/config/projectFilter";
 import { useAppSelector } from "@shared/store";
+import { IAdvManagerProjectsDevCard } from "@shared/types/advProject";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { IAdvDevProjectCard } from "@shared/types/common";
 
 interface AdvDevProjectCardProps {
-  card: IAdvDevProjectCard;
+  card: IAdvManagerProjectsDevCard;
   ContinueBtn: FC;
 }
 
@@ -24,7 +24,7 @@ export const AdvDevProjectCard: FC<AdvDevProjectCardProps> = ({
         <p>{card.name}</p>
         <div>
           <span>№{card.id}</span>
-          <span>{card.date}</span>
+          <span>{card.created}</span>
         </div>
       </div>
 
@@ -36,7 +36,7 @@ export const AdvDevProjectCard: FC<AdvDevProjectCardProps> = ({
       <div className={styles.card__info}>
         <p>{t("orders_advertiser.card.cost")}:</p>
         <span>
-          {card.cost.toLocaleString()} {t("symbol")}
+          {card.budget.toLocaleString()} {t("symbol")}
         </span>
       </div>
 
@@ -49,7 +49,7 @@ export const AdvDevProjectCard: FC<AdvDevProjectCardProps> = ({
           <ContinueBtn />
         </div>
       ) : (
-        <div className={styles.card__status}>{card.status}</div>
+        <div className={styles.card__status}>fffff</div>
       )}
     </div>
   );

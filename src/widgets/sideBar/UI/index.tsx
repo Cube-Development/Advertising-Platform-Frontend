@@ -44,7 +44,11 @@ export const SideBar: FC = () => {
               >
                 {role === roles.advertiser
                   ? t("roles.advertiser")[0]
-                  : t("roles.blogger")[0]}
+                  : role === roles.blogger
+                    ? t("roles.blogger")[0]
+                    : role === roles.manager
+                      ? t("roles.manager")[0]
+                      : t("roles.administrator")[0]}
               </p>
             </Link>
           </div>

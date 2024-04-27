@@ -5,6 +5,8 @@ import { platformTypesNum } from "@shared/config/platformTypes";
 import { ICatalogCards } from "@shared/types/platform";
 
 export interface getCatalogReq {
+  user_id?: string;
+  guest_id?: string;
   language: languagesNum;
   page: number;
   elements_on_page?: number;

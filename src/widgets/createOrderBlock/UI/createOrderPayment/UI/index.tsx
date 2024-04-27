@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
-import { ICreateOrderBlur } from "@shared/types/platform";
+import { CreateOrder } from "@features/createOrder";
 
 interface CreateOrderPaymentProps {
   isBlur?: boolean;
@@ -18,6 +18,9 @@ export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({ isBlur }) => {
             <div className={styles.title}>
               <span>4</span>
               <p>{t("create_order.payment.title")}</p>
+            </div>
+            <div className={styles.pay_btn}>
+              <CreateOrder />
             </div>
           </div>
         </div>

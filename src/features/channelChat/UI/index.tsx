@@ -5,8 +5,8 @@ import styles from "./styles.module.scss";
 
 export const ChannelChat: FC<IChannelChat> = ({ id }) => {
   return (
-    <div>
+    <button>
       <ChatIcon />
-    </div>
+    </button>
   );
 };

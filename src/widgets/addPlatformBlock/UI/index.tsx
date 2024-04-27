@@ -1,15 +1,20 @@
 import { FC, useState } from "react";
-import styles from "./styles.module.scss";
 import { PlatformLink } from "./platformLink";
 import { PlatformParameters } from "./platformParameters";
 import { PlatformTop } from "./platformTop";
 import { IAddPlatformBlur, IPlatformLink } from "@shared/types/platform";
 import { platformTypes } from "@shared/config/postFilter";
+import { QueryParams } from "@features/queryParams";
 
 interface AddPlatformBlockProps {}
 
 export const AddPlatformBlock: FC<AddPlatformBlockProps> = () => {
-  const onBlur = { link: false, parameters: true };
+  let onBlur;
+  const { channel_id } = QueryParams();
+
+  channel_id
+    ? (onBlur = { link: true, parameters: false })
+    : (onBlur = { link: false, parameters: true });
   const [blur, setBlur] = useState<IAddPlatformBlur>(onBlur);
 
   const handleOnChangeBlur = (newBlur: IAddPlatformBlur) => {
@@ -23,13 +28,14 @@ export const AddPlatformBlock: FC<AddPlatformBlockProps> = () => {
 
   return (
     <div>
-      <PlatformTop />
+      <PlatformTop channel_id={channel_id!} />
       <PlatformLink
         currentPlatform={currentPlatform}
         setCurrentPlatform={setCurrentPlatform}
         blur={blur}
         onChangeBlur={handleOnChangeBlur}
         setInserCode={setInserCode}
+        channel_id={channel_id!}
       />
       {blur.link && (
         <PlatformParameters
@@ -37,6 +43,7 @@ export const AddPlatformBlock: FC<AddPlatformBlockProps> = () => {
           blur={blur}
           onChangeBlur={handleOnChangeBlur}
           inserCode={inserCode}
+          channel_id={channel_id!}
         />
       )}
     </div>

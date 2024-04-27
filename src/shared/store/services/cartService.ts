@@ -1,22 +1,37 @@
 import { authApi, baseApi } from "@shared/api";
+import { languagesNum } from "@shared/config/languages";
 import { ICart } from "@shared/types/cart";
 
 interface AddChannelReq {
   guest_id?: string;
   channel_id: string;
   format: number;
-  match?: number;
+  match: number;
+  language: languagesNum;
+}
+
+interface RemoveChannelReq {
+  guest_id?: string;
+  channel_id: string;
+  language: languagesNum;
+}
+
+interface ReadCartReq {
+  language: languagesNum;
+  guest_id?: string;
 }
 
 // Авторизованные запросы
 
 export const authCartAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
-    readCommonCart: build.query<ICart, string>({
-      query: () => ({
+    readCommonCart: build.query<ICart, ReadCartReq>({
+      query: (params) => ({
         url: `/cart/common`,
         method: `GET`,
+        params: params,
       }),
+      // providesTags: [CART_PUB, CART],
     }),
     addToCommonCart: build.mutation<ICart, AddChannelReq>({
       query: (params) => ({
@@ -24,13 +39,15 @@ export const authCartAPI = authApi.injectEndpoints({
         method: `POST`,
         params: params,
       }),
+      // invalidatesTags: [CART_PUB, CART],
     }),
-    removeFromCommonCart: build.mutation<ICart, AddChannelReq>({
+    removeFromCommonCart: build.mutation<ICart, RemoveChannelReq>({
       query: (params) => ({
         url: `/cart/common/remove`,
         method: `POST`,
         params: params,
       }),
+      // invalidatesTags: [CART_PUB, CART],
     }),
     saveCart: build.mutation<{ success: boolean }, void>({
       query: () => ({
@@ -60,12 +77,13 @@ export const {
 
 export const publicCartAPI = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    readPublicCart: build.query<ICart, { guest_id: string | undefined }>({
+    readPublicCart: build.query<ICart, ReadCartReq>({
       query: (params) => ({
         url: `/cart/public`,
         method: `GET`,
         params: params,
       }),
+      // providesTags: [CART_PUB, CART],
     }),
     addToPublicCart: build.mutation<ICart, AddChannelReq>({
       query: (params) => ({
@@ -73,13 +91,15 @@ export const publicCartAPI = baseApi.injectEndpoints({
         method: `POST`,
         params: params,
       }),
+      // invalidatesTags: [CART_PUB, CART],
     }),
-    removeFromPublicCart: build.mutation<ICart, AddChannelReq>({
+    removeFromPublicCart: build.mutation<ICart, RemoveChannelReq>({
       query: (params) => ({
         url: `/cart/public/remove`,
         method: `POST`,
         params: params,
       }),
+      // invalidatesTags: [CART_PUB, CART],
     }),
   }),
 });

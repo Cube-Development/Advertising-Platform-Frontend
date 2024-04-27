@@ -12,6 +12,7 @@ import { filterData, networkTypes } from "@shared/config/platformData";
 import { SelectOptions } from "@features/selectOptions";
 import { UseFormSetValue } from "react-hook-form";
 import { NewProject } from "@features/newProject";
+import { roles } from "@shared/config/roles";
 
 interface BarFilterProps {
   page: pageFilter;
@@ -25,6 +26,7 @@ export const BarFilter: FC<BarFilterProps> = ({
   listLength,
 }) => {
   const { typeFilter } = useAppSelector((state) => state.filter);
+  const { role } = useAppSelector((state) => state.user);
 
   return (
     <section className="container sidebar">
@@ -37,13 +39,27 @@ export const BarFilter: FC<BarFilterProps> = ({
           page={page}
         />
         {page === pageFilter.order ? (
-          <>
-            <BarTypesFilter />
-            {typeFilter === projectTypesFilter.savedProject || (
-              <BarStatusFilter page={page} />
-            )}
-          </>
+          role === roles.advertiser ? (
+            <>
+              <BarTypesFilter />
+              {typeFilter === projectTypesFilter.savedProject || (
+                <BarStatusFilter page={page} />
+              )}
+            </>
+          ) : (
+            role === roles.manager && (
+              <>
+                <BarStatusFilter page={page} />
+              </>
+            )
+          )
         ) : (
+          // <>
+          //   <BarTypesFilter />
+          //   {typeFilter === projectTypesFilter.savedProject || (
+          //     <BarStatusFilter page={page} />
+          //   )}
+          // </>
           <BarStatusFilter page={page} />
         )}
         {page !== pageFilter.order && (

@@ -7,7 +7,7 @@ import { IPlatform } from "@shared/types/platform";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { CartIcon } from "@shared/assets";
+import { CartIcon, SadSmileIcon } from "@shared/assets";
 import { pageFilter } from "@shared/config/pageFilter";
 
 interface CartListProps {
@@ -32,16 +32,25 @@ export const CartList: FC<CartListProps> = ({ channels, onChangeCard }) => {
         </div>
       </div>
       <div className={styles.cards}>
-        {/* {channels?.map((card) => (
-          <CatalogCard
-            card={card}
-            key={card.id}
-            AddToBasketBtn={AddToBasket}
-            FormatList={FormatList}
-            onChangeCard={onChangeCard}
-            page={pageFilter.cart}
-          />
-        ))} */}
+        {channels?.length ? (
+          channels?.map((card) => (
+            <CatalogCard
+              page={pageFilter.cart}
+              card={card}
+              key={card.id}
+              AddToBasketBtn={AddToBasket}
+              FormatList={FormatList}
+              onChangeCard={onChangeCard}
+            />
+          ))
+        ) : (
+          <div className={styles.empty__block}>
+            <div className={styles.icon}>
+              <SadSmileIcon />
+            </div>
+            <h3 className={styles.title}>{t("cart.empty")}</h3>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -76,14 +76,11 @@ export const WalletTopUp: FC = () => {
     }
   };
 
-  const [createLegal, { isLoading: isCreateLoading, error: createError }] =
-    useCreateLegalMutation();
+  const [createLegal] = useCreateLegalMutation();
 
-  const [editLegal, { isLoading: isEditLoading, error: editError }] =
-    useEditLegalMutation();
+  const [editLegal] = useEditLegalMutation();
 
-  const [paymentDeposit, { isLoading: isTopupLoading, error: topupError }] =
-    usePaymentDepositMutation();
+  const [paymentDeposit, { error: topupError }] = usePaymentDepositMutation();
 
   const onSubmit: SubmitHandler<IExtendedProfileData> = async (formData) => {
     const dataWithLegalType = {

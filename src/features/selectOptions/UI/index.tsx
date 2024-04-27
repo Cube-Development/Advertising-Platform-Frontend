@@ -6,6 +6,7 @@ import { ArrowSmallVerticalIcon, InfoIcon } from "@shared/assets";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { SELECTOPTIONS } from "@shared/config/common";
 import { ISelectOption } from "@shared/types/translate";
+import { platformData } from "@shared/config/platformData";
 
 interface SelectOptionsProps {
   textData: string;
@@ -20,6 +21,7 @@ interface SelectOptionsProps {
   isCatalog?: boolean;
   isCatalogSorting?: boolean;
   getValues?: UseFormGetValues<any>;
+  defaultValues?: IOption | number[];
 }
 
 export const SelectOptions: FC<SelectOptionsProps> = ({
@@ -33,6 +35,7 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
   isCatalog,
   isCatalogSorting,
   getValues,
+  defaultValues,
 }) => {
   const { t } = useTranslation();
   const allOptions: IOption[] = isFilter
@@ -42,10 +45,17 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
       }))
     : options;
 
-  const [selectedOptions, setSelectedOptions] = useState<(number | null)[]>([]);
-  const [selectedOption, setSelectedOption] = useState<IOption | null>(
-    isFilter ? allOptions[0] : null,
+  const [selectedOptions, setSelectedOptions] = useState<(number | null)[]>(
+    !single && defaultValues ? (defaultValues as unknown as number[]) : [],
   );
+  const [selectedOption, setSelectedOption] = useState<IOption | null>(
+    isFilter
+      ? allOptions[0]
+      : single && defaultValues
+        ? (defaultValues as unknown as IOption)
+        : null,
+  );
+
   const [isMenuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
 
@@ -134,11 +144,17 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
         <button
           type="button"
           onClick={handleButtonClick}
-          className={`${isFilter ? styles.filter : ""} ${
-            isMenuOpen || selectedOption || selectedOptions.length
-              ? styles.active
-              : ""
-          }`}
+          className={`
+          ${isFilter ? styles.filter : ""}  
+          
+          ${
+            type === platformData.category && defaultValues
+              ? styles.disabled__menu
+              : isMenuOpen || selectedOption || selectedOptions.length
+                ? styles.active
+                : ""
+          }
+          `}
         >
           <div>
             {single ? (
@@ -163,10 +179,14 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
             <div className={isMenuOpen ? "rotate" : "rotate__down"}>
               <ArrowSmallVerticalIcon
                 className={
-                  (isMenuOpen || selectedOption || selectedOptions.length) &&
-                  !isFilter
-                    ? "active__icon"
-                    : "default__icon__grey"
+                  type === platformData.category && defaultValues
+                    ? "default__icon__grey"
+                    : (isMenuOpen ||
+                          selectedOption ||
+                          selectedOptions.length) &&
+                        !isFilter
+                      ? "active__icon"
+                      : "default__icon__grey"
                 }
               />
             </div>

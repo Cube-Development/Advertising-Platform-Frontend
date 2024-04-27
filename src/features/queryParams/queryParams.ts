@@ -2,6 +2,7 @@ type QueryParams = {
   code?: string | null;
   sessionState?: string | null;
   state?: string | null;
+  channel_id?: string | null;
 };
 
 export const QueryParams = () => {
@@ -17,6 +18,9 @@ export const QueryParams = () => {
   }
   if (urlParams.has("state")) {
     queryParams.state = urlParams.get("state");
+  }
+  if (urlParams.has("channel_id")) {
+    queryParams.channel_id = urlParams.get("channel_id");
   }
 
   return queryParams;

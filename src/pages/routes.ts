@@ -4,7 +4,6 @@ import { MainPage } from "./Main";
 import { MainBloggerPage } from "./MainBlogger";
 import { NotFoundPage } from "./NotFound";
 import { ProfilePage } from "./Profile";
-import { FullServicePage } from "./FullService";
 import { PlatformOwnerPage } from "./PlatformOwner";
 import { AddPlatformPage } from "./AddPlatform";
 import { paths } from "@shared/routing";
@@ -50,7 +49,6 @@ export const publicBloggerRoutes: IRoute[] = [
 
 export const privateAdvertiserRoutes: IRoute[] = [
   { path: paths.orders, component: OrdersPage, sidebar: true },
-  { path: paths.createOrder, component: CreateOrderPage, sidebar: false },
 ];
 
 export const publicAdvertiserRoutes: IRoute[] = [
@@ -68,4 +66,8 @@ export const publicRoutes: IRoute[] = [
   { path: paths.catalog, component: CatalogPage },
   { path: paths.cart, component: CartPage },
   { path: paths.turnkey, component: TurnkeyPage },
+];
+
+export const createOrderRoutes: IRoute[] = [
+  { path: paths.createOrder, component: CreateOrderPage, sidebar: false },
 ];

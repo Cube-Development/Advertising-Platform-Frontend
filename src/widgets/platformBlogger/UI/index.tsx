@@ -1,5 +1,4 @@
 import React, { FC } from "react";
-import styles from "./styles.module.scss";
 
 interface PlatformBloggerProps {
   children: React.ReactNode;

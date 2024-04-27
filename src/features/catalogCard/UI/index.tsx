@@ -39,15 +39,10 @@ export const CatalogCard: FC<CatalogCardProps> = ({
 
   const handleChangeFormat = (selectedValue: IFormat) => {
     setSelectedFormat(selectedValue);
-    console.log("handleChangeFormat", selectedFormat, card);
-    // если канал в корзине и выбранный новый формат не равен selected_format должен быть запрос
-    //если selected_format === selectedValue.format - значит юзер просто развернул список и свернул обратно - не должно быть запросов
-
     if (
       card.selected_format &&
       card.selected_format.format !== selectedValue.format
     ) {
-      console.log("onChangeCard should be called");
       onChangeCard({
         ...card,
         selected_format: selectedValue,
@@ -73,7 +68,6 @@ export const CatalogCard: FC<CatalogCardProps> = ({
             <RatingIcon />
           </div>
         </div>
-
         <div className={styles.channel__description}>
           <div className={styles.description}>
             <h1>{card.name}</h1>
@@ -81,7 +75,6 @@ export const CatalogCard: FC<CatalogCardProps> = ({
             <span>{card.description}</span>
           </div>
         </div>
-
         <div className={styles.channel__info}>
           <div className={styles.channel__info_row}>
             <div className={styles.info}>
@@ -94,7 +87,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
               <div>
                 <EyeIcon />
               </div>
-              <span>{selectedFormat.views.toLocaleString()}</span>
+              <span>{selectedFormat.views!.toLocaleString()}</span>
             </div>
           </div>
           <div className={styles.channel__info_middle}>
@@ -119,7 +112,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
             <div className={styles.info}>
               <p>CPV:</p>
               <span>
-                {selectedFormat.cpv.toLocaleString()} {t(`symbol`)}
+                {selectedFormat.cpv!.toLocaleString()} {t(`symbol`)}
               </span>
             </div>
           </div>

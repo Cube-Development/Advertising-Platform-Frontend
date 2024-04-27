@@ -6,6 +6,7 @@
   box-shadow: inset 0px 0px 0px 1px var(--Personal-colors-main);
   padding-top: 20px;
   width: 100%;
+  position: relative;
 
   .card {
     display: grid;
@@ -218,18 +219,17 @@
     border-radius: 12px;
     border-top: 1px solid var(--Gradients-Gradient-1);
 
-    button {
-      border-radius: 8px;
-      border: 1px solid var(--Personal-colors-main);
+    // button {
+    //   border-radius: 8px;
+    //   border: 1px solid var(--Personal-colors-main);
 
-      p {
-        color: var(--Gradients-Gradient-1);
-        font-size: 20px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: normal;
-        padding: 10px;
-      }
-    }
+    //   p {
+    //     font-size: 20px;
+    //     font-style: normal;
+    //     font-weight: 500;
+    //     line-height: normal;
+    //     // padding: 10px;
+    //   }
+    // }
   }
 }

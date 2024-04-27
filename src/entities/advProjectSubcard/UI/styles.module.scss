@@ -1,14 +1,23 @@
 .subcard {
   display: grid;
-  grid-template: 1fr / 12fr 6fr 1fr;
-  column-gap: 5px;
+  // grid-template: 1fr / 12fr 6fr 1fr;
+  // column-gap: 5px;
   align-items: center;
+
+  &.grid__active {
+    grid-template: 1fr / 12fr 6fr 1fr;
+  }
+
+  &.grid {
+    grid-template: 1fr / 12fr 7fr;
+  }
 
   &__left {
     display: grid;
     grid-template: 1fr / 0.8fr 0.8fr 0.8fr 1fr;
     border-radius: 15px;
     border: 1px solid var(--Card-separator);
+    margin-right: 5px;
     padding: 10px 0;
     white-space: nowrap;
 
@@ -173,63 +182,53 @@
     }
   }
 
-  &__active {
+  &__cancel {
     display: grid;
+    grid-auto-flow: row;
+    row-gap: 10px;
     border-radius: 15px;
     border: 1px solid var(--Card-separator);
     align-items: center;
+    text-align: center;
+    align-content: center;
     padding: 0 50px;
     height: 100%;
 
-    div {
-      display: grid;
-      grid-auto-flow: row;
-      row-gap: 10px;
-      align-items: center;
-      text-align: center;
-      justify-content: space-between;
+    p {
+      padding: 0 20px;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
 
-      p {
-        padding: 0 20px;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: normal;
-      }
-
-      span {
-        padding: 0 30px;
-        font-size: 10px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: normal;
-      }
+    span {
+      padding: 0 30px;
+      font-size: 10px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: normal;
     }
   }
 
   &__completed {
     display: grid;
+    grid-auto-flow: row;
+    row-gap: 10px;
+    align-items: center;
+    align-content: center;
+    text-align: center;
     border-radius: 15px;
     border: 1px solid var(--Card-separator);
-    align-items: center;
     padding: 0 50px;
     height: 100%;
 
-    div {
-      display: grid;
-      grid-auto-flow: row;
-      row-gap: 10px;
-      align-items: center;
-      text-align: center;
-      justify-content: space-between;
-
-      p {
-        padding: 0 30px;
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 0.75;
-      }
+    p {
+      padding: 0 30px;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 0.75;
     }
   }
 
@@ -403,6 +402,7 @@
     display: grid;
     border-radius: 15px;
     border: 1px solid var(--Card-separator);
+    margin-left: 5px;
     height: 100%;
     justify-content: center;
     align-items: center;
