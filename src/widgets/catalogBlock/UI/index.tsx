@@ -62,26 +62,26 @@ export const CatalogBlock: FC = () => {
 
   const { data: cart } = useReadCommonCartQuery(
     { language: language?.id || Languages[0].id },
-    { skip: !isAuth },
+    { skip: !isAuth }
   );
   const { data: catalogAuth } = useGetCatalogQuery(
     { ...formFields, user_id: userId },
     {
       skip: !userId,
-    },
+    }
   );
   const { data: catalog } = useGetCatalogQuery(
     { ...formFields, guest_id: guestId },
-    { skip: isAuth },
+    { skip: isAuth }
   );
 
   const { data: cartPub } = useReadPublicCartQuery(
     { guest_id: guestId, language: language?.id || Languages[0].id },
-    { skip: !guestId || isAuth },
+    { skip: !guestId || isAuth }
   );
 
   const [cards, setCards] = useState<IPlatform[]>(
-    catalogAuth?.channels ? catalogAuth?.channels : catalog?.channels || [],
+    catalogAuth?.channels ? catalogAuth?.channels : catalog?.channels || []
   );
   useEffect(() => {
     if (catalog) {
@@ -95,7 +95,7 @@ export const CatalogBlock: FC = () => {
   }, [catalogAuth]);
 
   const [currentCart, setCurrentCart] = useState<ICart>(
-    cartPub ? cartPub : cart!,
+    cartPub ? cartPub : cart!
   );
   useEffect(() => {
     if (isAuth && cart) {
@@ -154,7 +154,7 @@ export const CatalogBlock: FC = () => {
               setCurrentCart(data);
             })
             .catch((error) =>
-              console.error("Ошибка при добавлении в корзину", error),
+              console.error("Ошибка при добавлении в корзину", error)
             );
         } else if (isAuth) {
           addToCommonCart(addReq)
@@ -163,7 +163,7 @@ export const CatalogBlock: FC = () => {
               setCurrentCart(data);
             })
             .catch((error) =>
-              console.error("Ошибка при добавлении в корзину", error),
+              console.error("Ошибка при добавлении в корзину", error)
             );
         }
       } else if (
@@ -178,7 +178,7 @@ export const CatalogBlock: FC = () => {
               setCurrentCart(data);
             })
             .catch((error) =>
-              console.error("Ошибка при добавлении в корзину", error),
+              console.error("Ошибка при добавлении в корзину", error)
             );
         } else if (isAuth) {
           addToCommonCart(addReq)
@@ -187,7 +187,7 @@ export const CatalogBlock: FC = () => {
               setCurrentCart(data);
             })
             .catch((error) =>
-              console.error("Ошибка при добавлении в корзину", error),
+              console.error("Ошибка при добавлении в корзину", error)
             );
         }
         newCards = cards.map((card) => {
@@ -208,7 +208,7 @@ export const CatalogBlock: FC = () => {
               setCurrentCart(data);
             })
             .catch((error) =>
-              console.error("Ошибка при удалении с корзины", error),
+              console.error("Ошибка при удалении с корзины", error)
             );
         } else if (isAuth) {
           removeFromCommonCart(removeReq)
@@ -217,12 +217,14 @@ export const CatalogBlock: FC = () => {
               setCurrentCart(data);
             })
             .catch((error) =>
-              console.error("Ошибка при удалении с корзины", error),
+              console.error("Ошибка при удалении с корзины", error)
             );
         }
         newCards = cards.map((item) => {
           if (item.id === cartChannel.id) {
-            delete item.selected_format;
+            const { selected_format, ...newItem } = item;
+            console.log(selected_format);
+            return newItem;
           }
           return item;
         });

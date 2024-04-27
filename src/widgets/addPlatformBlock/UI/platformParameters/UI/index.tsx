@@ -13,7 +13,7 @@ import { platformData } from "@shared/config/platformData";
 import {
   IAddChannelData,
   IAddPlatformBlur,
-  IReadChannelData,
+  IFormat,
   IPlatformLink,
 } from "@shared/types/platform";
 import { Languages } from "@shared/config/languages";
@@ -25,7 +25,11 @@ import {
   useGetChannelRegionsQuery,
 } from "@shared/store/services/contentService";
 import { MyButton } from "@shared/ui";
-import { useCreateChannelMutation } from "@shared/store/services/channelService";
+import {
+  useCreateChannelMutation,
+  useEditChannelMutation,
+  useGetChannelByIdQuery,
+} from "@shared/store/services/channelService";
 import { AccountsLoader } from "@shared/ui/accountsLoader";
 
 interface PlatformParametersProps {
@@ -33,7 +37,7 @@ interface PlatformParametersProps {
   onChangeBlur: (newBlur: IAddPlatformBlur) => void;
   currentPlatform: IPlatformLink;
   inserCode: string;
-  channel?: IReadChannelData;
+  channel_id: string;
 }
 
 export const PlatformParameters: FC<PlatformParametersProps> = ({
@@ -41,25 +45,29 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
   onChangeBlur,
   currentPlatform,
   inserCode,
-  channel,
+  channel_id,
 }) => {
   const { t, i18n } = useTranslation();
   const language = Languages.find((lang) => {
     return i18n.language === lang.name;
   });
+  const { data: channel } = useGetChannelByIdQuery(
+    { channel_id: channel_id, language: language?.id || Languages[0].id },
+    { skip: !channel_id }
+  );
+
   let defaultValues;
   channel
     ? (defaultValues = {
-        insertion_code: inserCode,
-        male: channel.male,
-        female: channel.female,
-        category: channel.category.id,
-        description: channel.description,
-        text_limit: channel.text_limit,
-        region: channel.region.map((item) => item.id),
-        language: channel.language.map((item) => item.id),
-        age: channel.age.map((item) => item.id),
-        format: channel.format.map((format: any) => ({
+        male: channel?.male,
+        female: channel?.female,
+        category: channel?.category.id,
+        description: channel?.description,
+        text_limit: channel?.text_limit,
+        region: channel?.region.map((item) => item.id),
+        language: channel?.language.map((item) => item.id),
+        age: channel?.age.map((item) => item.id),
+        format: channel?.format.map((format: IFormat) => ({
           name: format.format,
           price: format.price,
         })),
@@ -77,12 +85,7 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
         format: [],
       });
   console.log(defaultValues);
-  const {
-    handleSubmit,
-    setValue,
-    getValues,
-    formState: { errors },
-  } = useForm<IAddChannelData>({
+  const { handleSubmit, setValue, getValues } = useForm<IAddChannelData>({
     defaultValues: defaultValues,
   });
 
@@ -93,10 +96,10 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
   };
 
   const [createChannel, { isLoading, error }] = useCreateChannelMutation();
+  const [editChannel] = useEditChannelMutation();
 
   const onSubmit: SubmitHandler<IAddChannelData> = (data) => {
     if (
-      inserCode &&
       data.age.length > 0 &&
       data.category &&
       data.description &&
@@ -104,16 +107,31 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
       data.region.length > 0 &&
       data.format.length > 0
     ) {
-      createChannel(data)
-        .unwrap()
-        .then((data) => {
-          console.log(data.status);
-          setIsModalOpen(true);
-          onChangeBlur({ link: true, parameters: true });
-        })
-        .catch((error) =>
-          console.error("Ошибка при добавлении канала...", error),
-        );
+      if (channel) {
+        const { insertion_code, category, ...editData } = data;
+        console.log(insertion_code, category);
+        editChannel({ ...editData, channel_id: channel.id })
+          .unwrap()
+          .then((data) => {
+            console.log(data);
+            setIsModalOpen(true);
+            onChangeBlur({ link: true, parameters: true });
+          })
+          .catch((error) =>
+            console.error("Ошибка при добавлении канала...", error)
+          );
+      } else {
+        createChannel(data)
+          .unwrap()
+          .then((data) => {
+            console.log(data.status);
+            setIsModalOpen(true);
+            onChangeBlur({ link: true, parameters: true });
+          })
+          .catch((error) =>
+            console.error("Ошибка при добавлении канала...", error)
+          );
+      }
     } else {
       alert("Заполните все поля...");
     }

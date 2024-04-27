@@ -1,20 +1,22 @@
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useRef } from "react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
-import { CancelIcon, CancelIcon2, CloseIcon, YesIcon } from "@shared/assets";
+import { CancelIcon2, CloseIcon, YesIcon } from "@shared/assets";
 import { MyModal } from "@shared/ui";
 
 interface DeleteChannelProps {
-  channelId: string;
+  channel_id: string;
   onChange: () => void;
 }
 
 export const DeleteChannel: FC<DeleteChannelProps> = ({
-  channelId,
+  channel_id,
   onChange,
 }) => {
   const { t } = useTranslation();
-  const handleDeleteChannel = () => {};
+  const handleDeleteChannel = () => {
+    console.log(channel_id, "--> delete req");
+  };
   const menuRef = useRef<HTMLDivElement>(null);
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -40,7 +42,7 @@ export const DeleteChannel: FC<DeleteChannelProps> = ({
           </button>
         </div>
         <div className={styles.buttons}>
-          <button>
+          <button onClick={handleDeleteChannel}>
             <p>{t("platforms_blogger.delete_channel.yes")}</p>
             <YesIcon />
           </button>

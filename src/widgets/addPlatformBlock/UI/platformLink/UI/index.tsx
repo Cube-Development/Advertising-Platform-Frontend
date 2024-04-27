@@ -1,5 +1,5 @@
 import { MyButton } from "@shared/ui";
-import { FC, useState } from "react";
+import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -22,6 +22,7 @@ interface PlatformLinkProps {
   currentPlatform: IPlatformLink;
   setCurrentPlatform: (platform: IPlatformLink) => void;
   setInserCode: (code: string) => void;
+  channel_id?: string;
 }
 
 export const PlatformLink: FC<PlatformLinkProps> = ({
@@ -30,6 +31,7 @@ export const PlatformLink: FC<PlatformLinkProps> = ({
   currentPlatform,
   setCurrentPlatform,
   setInserCode,
+  channel_id,
 }) => {
   const { t } = useTranslation();
   const {
@@ -39,7 +41,9 @@ export const PlatformLink: FC<PlatformLinkProps> = ({
     formState: { errors },
   } = useForm<IAddChannelIdentification>();
 
-  const { data: code } = useCreateCodeQuery();
+  const { data: code } = useCreateCodeQuery("", {
+    skip: channel_id ? true : undefined,
+  });
   const [channelVerify, { isLoading, error, isSuccess }] =
     useChannelVerifyMutation();
 
@@ -60,7 +64,7 @@ export const PlatformLink: FC<PlatformLinkProps> = ({
           console.error("Ошибка: ", error);
           if (error.status === 400) {
             alert(
-              "К сожалению время истекло, обновите страницу и попробуйте заново",
+              "К сожалению время истекло, обновите страницу и попробуйте заново"
             );
           }
         });

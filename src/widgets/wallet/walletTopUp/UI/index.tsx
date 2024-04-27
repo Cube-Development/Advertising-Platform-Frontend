@@ -66,7 +66,7 @@ export const WalletTopUp: FC = () => {
           (Object.keys(data) as Array<keyof IProfileData>).forEach(
             (value: keyof IProfileData) => {
               setValue(value, data[value]);
-            },
+            }
           );
           clearErrors();
         })
@@ -76,14 +76,11 @@ export const WalletTopUp: FC = () => {
     }
   };
 
-  const [createLegal, { isLoading: isCreateLoading, error: createError }] =
-    useCreateLegalMutation();
+  const [createLegal] = useCreateLegalMutation();
 
-  const [editLegal, { isLoading: isEditLoading, error: editError }] =
-    useEditLegalMutation();
+  const [editLegal] = useEditLegalMutation();
 
-  const [paymentDeposit, { isLoading: isTopupLoading, error: topupError }] =
-    usePaymentDepositMutation();
+  const [paymentDeposit, { error: topupError }] = usePaymentDepositMutation();
 
   const onSubmit: SubmitHandler<IExtendedProfileData> = async (formData) => {
     const dataWithLegalType = {
@@ -126,11 +123,11 @@ export const WalletTopUp: FC = () => {
                 .then(() => {
                   reset();
                   alert(
-                    `Баланс успешно пополнен на сумму: ${paymentReq.amount}`,
+                    `Баланс успешно пополнен на сумму: ${paymentReq.amount}`
                   );
                 })
                 .catch((error) =>
-                  console.error("Ошибка payment/deposit: ", error),
+                  console.error("Ошибка payment/deposit: ", error)
                 );
             })
             .catch((error) => {

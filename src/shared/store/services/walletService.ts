@@ -1,4 +1,5 @@
 import { authApi } from "@shared/api";
+import { BALANCE } from "@shared/api/tags";
 import { paymentTypes } from "@shared/config/payment";
 
 type PaymentOrderResponse = {
@@ -29,29 +30,34 @@ type PaymentWithdrawReq = {
 export const walletAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
     paymentProject: build.mutation<PaymentOrderResponse, string>({
-      query: (BodyParams) => ({
-        url: `/wallet/payment/project`,
+      query: (params) => ({
+        url: `/wallet/payment/project?project_id=${params}`,
         method: `POST`,
-        body: BodyParams,
       }),
+      invalidatesTags: [BALANCE],
     }),
     paymentDeposit: build.mutation<PaymentDepositResponse, PaymentDepositReq>({
-      query: (BodyParams) => ({
-        url: `/wallet/payment/deposit?legal_id=${BodyParams.legal_id}&amount=${BodyParams.amount}`,
+      query: (params) => ({
+        url: `/wallet/payment/deposit`,
         method: `POST`,
+        params: params,
       }),
+      invalidatesTags: [BALANCE],
     }),
     paymentWithdrawal: build.mutation<
       PaymentWithdrawResponse,
       PaymentWithdrawReq
     >({
-      query: (BodyParams) => ({
-        url: `/wallet/payment/withdrawal?legal_id=${BodyParams.legal_id}&amount=${BodyParams.amount}`,
+      query: (params) => ({
+        url: `/wallet/payment/withdrawal`,
         method: `POST`,
+        params: params,
       }),
+      invalidatesTags: [BALANCE],
     }),
     getBalance: build.query<PaymentDepositResponse, void>({
       query: () => `/wallet/balance`,
+      providesTags: [BALANCE],
     }),
   }),
 });

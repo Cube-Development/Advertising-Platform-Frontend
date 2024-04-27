@@ -57,7 +57,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
   });
 
   const getParams: getProjectSubcardReq = {
-    project_id: card.id,
+    project_id: card?.id,
     language: language?.id || Languages[0].id,
     page: 1,
   };
@@ -83,12 +83,11 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
               <p>
                 {t("orders_advertiser.card.campaign")} {card.name}
               </p>
-              <span>{card.tarif}</span>
+              <span>{card?.tarif}</span>
             </div>
             <div className={styles.card__description__data__date}>
-              {/* <span>№{card.id}</span> */}
-              <span>№31231132</span>
-              <span>{card.created}</span>
+              {/* <span>№{card?.id}</span> */}
+              <span>{card?.created}</span>
             </div>
           </div>
           <div className={styles.card__description__status}>
@@ -103,16 +102,16 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
           <div className={styles.card__info__data}>
             <div>
               <p>{t("orders_advertiser.card.channels")}:</p>
-              <span>{card.count_channels.toLocaleString()}</span>
+              <span>{card?.count_channels?.toLocaleString()}</span>
             </div>
             <div>
               <p>{t("orders_advertiser.card.views")}:</p>
-              <span>~ {card.views.toLocaleString()}</span>
+              <span>~ {card?.views?.toLocaleString()}</span>
             </div>
             <div>
               <p>{t("orders_advertiser.card.cost")}:</p>
               <span>
-                <span>{card.budget.toLocaleString()}</span>
+                <span>{card?.budget?.toLocaleString()}</span>
                 <small>{t("symbol")}</small>
               </span>
             </div>
@@ -126,34 +125,34 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
               <div className={styles.card__info__icons_completed}>
                 <div>
                   <CompliteIcon />
-                  <p>{card.completed.toLocaleString()}</p>
+                  <p>{card?.completed.toLocaleString()}</p>
                 </div>
                 <div>
                   <CancelIcon />
-                  <p>{card.canceled_rejected.toLocaleString()}</p>
+                  <p>{card?.canceled_rejected.toLocaleString()}</p>
                 </div>
               </div>
             ) : (
               <div className={styles.card__info__icons}>
                 <div>
                   <CompliteIcon />
-                  <p>{card.completed.toLocaleString()}</p>
+                  <p>{card?.completed?.toLocaleString()}</p>
                 </div>
                 <div>
                   <CancelIcon />
-                  <p>{card.canceled_rejected.toLocaleString()}</p>
+                  <p>{card?.canceled_rejected?.toLocaleString()}</p>
                 </div>
                 <div>
                   <WaitIcon />
-                  <p>{card.wait?.toLocaleString()}</p>
+                  <p>{card?.wait?.toLocaleString()}</p>
                 </div>
                 <div>
                   <RocketIcon />
-                  <p>{card.in_progress?.toLocaleString()}</p>
+                  <p>{card?.in_progress?.toLocaleString()}</p>
                 </div>
                 <div>
                   <SearchIcon />
-                  <p>{card.moderation?.toLocaleString()}</p>
+                  <p>{card?.moderation?.toLocaleString()}</p>
                 </div>
               </div>
             )}

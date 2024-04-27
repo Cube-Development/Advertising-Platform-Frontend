@@ -1,5 +1,4 @@
 import { pageFilter } from "@shared/config/pageFilter";
-import { offerStatusFilter } from "@shared/config/offerFilter";
 import { useAppSelector } from "@shared/store";
 import { BarFilter } from "@widgets/barFilter";
 import { BloggerOffer } from "@widgets/bloggerOffer";
@@ -49,11 +48,7 @@ export const OffersPage: FC = () => {
         listLength={!offers?.orders.length}
         setValue={setValue}
       />
-      {statusFilter === offerStatusFilter.active ? (
-        <BloggerOffer offers={offers!} />
-      ) : (
-        <></>
-      )}
+      <BloggerOffer offers={offers!} />
     </>
   );
 };

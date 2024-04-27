@@ -42,7 +42,7 @@ export const TimeList: FC<TimeListProps> = ({ onChange }) => {
     "20:00 - 21:00",
     "21:00 - 22:00",
     "22:00 - 23:00",
-    "23:00 - 24:00",
+    "23:00 - 23:59",
   ];
 
   const selectTime = (timeIndex: number) => {
@@ -61,7 +61,7 @@ export const TimeList: FC<TimeListProps> = ({ onChange }) => {
           : timeSlots[timeIndex].split(" - ");
     } else if (selectedTimesObject.timeIndexList.length < 2) {
       newTimeIndexList = [...selectedTimesObject.timeIndexList, timeIndex].sort(
-        (a, b) => a - b,
+        (a, b) => a - b
       );
       newTimeList = [
         timeSlots[newTimeIndexList[0]].split(" - ")[0],
@@ -144,7 +144,7 @@ export const TimeList: FC<TimeListProps> = ({ onChange }) => {
                           ? styles.active
                           : index >
                                 Math.min(
-                                  ...selectedTimesObject.timeIndexList,
+                                  ...selectedTimesObject.timeIndexList
                                 ) &&
                               index <
                                 Math.max(...selectedTimesObject.timeIndexList)

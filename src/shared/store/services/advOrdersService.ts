@@ -1,7 +1,11 @@
 import { authApi } from "@shared/api";
 import { languagesNum } from "@shared/config/languages";
 import { IAdvProjects, IAdvSubprojects } from "@shared/types/advProject";
-import { ICreateDate, ICreatePost } from "@shared/types/createPost";
+import {
+  ICreateDate,
+  ICreatePost,
+  IPostChannel,
+} from "@shared/types/createPost";
 
 export interface getProjectsCardReq {
   page: number;
@@ -17,6 +21,12 @@ export interface getProjectSubcardReq {
   elements_on_page?: number;
 }
 
+export interface getProjectOrdersRes {
+  page: number;
+  elements: number;
+  orders: IPostChannel[];
+}
+
 export const advProjectsAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
     createCart: build.mutation<{ project_id: string }, void>({
@@ -30,6 +40,13 @@ export const advProjectsAPI = authApi.injectEndpoints({
         url: `/order/post`,
         method: "POST",
         body: body,
+      }),
+    }),
+    projectOrders: build.query<getProjectOrdersRes, getProjectSubcardReq>({
+      query: (params) => ({
+        url: `/order/datetime-setup`,
+        method: "GET",
+        params: params,
       }),
     }),
     createOrderDates: build.mutation<{ success: boolean }, ICreateDate>({
@@ -73,8 +90,9 @@ export const advProjectsAPI = authApi.injectEndpoints({
 export const {
   useAcceptOrderMutation,
   useCreateCartMutation,
-  useCreateOrderDatesMutation,
+  useProjectOrdersQuery,
   useCreatePostMutation,
+  useCreateOrderDatesMutation,
   useRejectOrderMutation,
   useGetAdvProjectsQuery,
   useGetAdvSubprojectsMutation,

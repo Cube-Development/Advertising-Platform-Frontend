@@ -1,3 +1,5 @@
+import { offerStatus } from "@shared/config/offerFilter";
+
 export interface IBloggerOfferCard {
   id: string;
   date_coming: string;
@@ -5,7 +7,7 @@ export interface IBloggerOfferCard {
   category: string;
   avatar: string;
   order_status: string;
-  api_status?: number;
+  api_status: offerStatus;
   publish_date:
     | {
         date_from: string;

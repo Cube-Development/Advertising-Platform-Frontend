@@ -6,14 +6,15 @@ import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
+import { useDeactivateChannelMutation } from "@shared/store/services/channelService";
 
 interface BloggerPlatformCardMenuProps {
-  channelId: string;
-  DeleteChannel: FC<{ channelId: string; onChange: () => void }>;
+  channel_id: string;
+  DeleteChannel: FC<{ channel_id: string; onChange: () => void }>;
 }
 
 export const BloggerPlatformCardMenu: FC<BloggerPlatformCardMenuProps> = ({
-  channelId,
+  channel_id,
   DeleteChannel,
 }) => {
   const { t } = useTranslation();
@@ -27,8 +28,6 @@ export const BloggerPlatformCardMenu: FC<BloggerPlatformCardMenuProps> = ({
   };
 
   const handleClickOutside = (event: MouseEvent) => {
-    console.log(menuRef);
-    console.log(menuRef.current);
     // console.log(!menuRef.current.contains(event.target as Node))
     if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
       setMenuOpen(false);
@@ -53,6 +52,18 @@ export const BloggerPlatformCardMenu: FC<BloggerPlatformCardMenuProps> = ({
     setModalOpen(false);
   };
 
+  const [deactivateChannel] = useDeactivateChannelMutation();
+
+  const handleDeactiveChannel = () => {
+    deactivateChannel(channel_id)
+      .unwrap()
+      .then(() => {
+        handleModalClose();
+        console.log("Канал деактивирован");
+      })
+      .catch((error) => console.error("Ошибка деактивации: ", error));
+  };
+
   return (
     <div className={styles.wrapper} ref={menuRef}>
       <button onClick={(e) => toggleMenu(e)}>
@@ -68,11 +79,13 @@ export const BloggerPlatformCardMenu: FC<BloggerPlatformCardMenuProps> = ({
             </button>
           </div>
           <ul>
-            <Link to={paths.addPlatform}>
+            <Link to={`${paths.addPlatform}?channel_id=${channel_id}`}>
               <li>{t("platforms_blogger.menu.edit")}</li>
             </Link>
             {statusFilter === platformStatusFilter.active && (
-              <li>{t("platforms_blogger.menu.deactivate")}</li>
+              <li onClick={handleDeactiveChannel}>
+                {t("platforms_blogger.menu.deactivate")}
+              </li>
             )}
             <li className={styles.delete} onClick={(e) => handleModalOpen(e)}>
               {t("platforms_blogger.menu.delete")}
@@ -82,7 +95,7 @@ export const BloggerPlatformCardMenu: FC<BloggerPlatformCardMenuProps> = ({
       )}
 
       {isModalOpen && (
-        <DeleteChannel channelId={channelId} onChange={handleModalClose} />
+        <DeleteChannel channel_id={channel_id} onChange={handleModalClose} />
       )}
     </div>
   );

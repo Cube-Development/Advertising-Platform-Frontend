@@ -10,55 +10,13 @@ import Cookies from "js-cookie";
 import {
   useCreateOrderDatesMutation,
   useCreatePostMutation,
+  useProjectOrdersQuery,
 } from "@shared/store/services/advOrdersService";
 import { usePaymentProjectMutation } from "@shared/store/services/walletService";
-
-const ChannelCards = [
-  {
-    order_id: "101",
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-    name: "MDK",
-    category: "Юмор и развлечения",
-    date: null,
-    time: null,
-    post: null,
-    platform: 1,
-  },
-  {
-    order_id: "102",
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-    name: "MDK",
-    category: "Юмор и развлечения",
-    date: "09/03/2025",
-    time: ["16:00-21:00"],
-    post: null,
-    platform: 2,
-  },
-  {
-    order_id: "103",
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-    name: "MDK",
-    category: "Юмор и развлечения",
-    date: "09/03/2025",
-    time: ["16:00-21:00"],
-    post: null,
-    platform: 2,
-  },
-  {
-    order_id: "104",
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-    name: "MDK",
-    category: "Юмор и развлечения",
-    date: "09/03/2025",
-    time: ["16:00-21:00"],
-    post: null,
-    platform: 2,
-  },
-];
+import { useTranslation } from "react-i18next";
+import { Languages } from "@shared/config/languages";
+import { useNavigate } from "react-router-dom";
+import { paths } from "@shared/routing";
 
 interface CreateOrderBlockProps {}
 
@@ -71,9 +29,16 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
     setBlur(newBlur);
   };
 
+  const navigate = useNavigate();
+
+  const { i18n } = useTranslation();
+  const language = Languages.find((lang) => {
+    return i18n.language === lang.name;
+  });
+
   const project_id = Cookies.get("project_id");
 
-  const { register, getValues, reset, handleSubmit, setValue } =
+  const { register, getValues, handleSubmit, setValue } =
     useForm<ICreatePostForm>({
       defaultValues: {
         project_id: project_id,
@@ -81,6 +46,16 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
         datetime: { project_id: project_id, orders: [] },
       },
     });
+
+  const projectChannelsReq = {
+    project_id: project_id!,
+    language: language?.id || Languages[0].id,
+    page: 1,
+    // elements_on_page: 100,
+  };
+  const { data: projectChannels } = useProjectOrdersQuery(projectChannelsReq, {
+    skip: !project_id,
+  });
 
   const [createPost] = useCreatePostMutation();
   const [createOrderDates] = useCreateOrderDatesMutation();
@@ -92,12 +67,11 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
       formData.posts.length &&
       formData.datetime.orders.length
     ) {
-      createOrderDates(formData.datetime)
-        .unwrap()
-        .then(() => {
+      try {
+        await Promise.all(
           formData.posts.map((post, index) => {
             const postReq = { ...post, project_id: project_id };
-            createPost(postReq)
+            return createPost(postReq)
               .unwrap()
               .then(() => {
                 console.log("Пост: ", index);
@@ -105,19 +79,24 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
               .catch(() => {
                 alert("Ошибка в создании поста");
               });
+          })
+        );
+        await createOrderDates(formData.datetime)
+          .unwrap()
+          .then(() => {
+            paymentProject(project_id)
+              .unwrap()
+              .then(() => {
+                navigate(paths.orders);
+              })
+              .catch(() => alert("Ошибка в оплате заказа"));
+          })
+          .catch(() => {
+            alert("Ошибка в создании дат для каналов");
           });
-        })
-        .then(() =>
-          paymentProject(project_id)
-            .unwrap()
-            .then((data) => {
-              console.log(data.success);
-            })
-            .catch(() => alert("Ошибка в оплате заказа")),
-        )
-        .catch(() => {
-          alert("Ошибка в создании дат для каналов");
-        });
+      } catch (error) {
+        alert("Произошла ошибка: " + error);
+      }
     }
   };
 
@@ -129,14 +108,14 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
         getValues={getValues}
       />
       <CreateOrderPost
-        cards={ChannelCards}
+        cards={projectChannels?.orders || []}
         isBlur={blur.post}
         onChangeBlur={handleOnChangeBlur}
         setValue={setValue}
         getValues={getValues}
       />
       <CreateOrderDatetime
-        cards={ChannelCards}
+        cards={projectChannels?.orders || []}
         isBlur={blur.datetime}
         onChangeBlur={handleOnChangeBlur}
         setValue={setValue}

@@ -82,7 +82,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                 <div className={styles.block}>
                   <PostText
                     placeholder={"create_order.create.text"}
-                    maxLength={POST.postLenght}
+                    maxLength={POST.postLength}
                     rows={10}
                     setValue={setValue}
                     getValues={getValues}
@@ -104,7 +104,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                   {filter.type === platformTypesStr.telegram && <PostButtons />}
                   <PostText
                     placeholder={"create_order.create.comment"}
-                    maxLength={POST.commentLenght}
+                    maxLength={POST.commentLength}
                     rows={4}
                     setValue={setValue}
                     type={CreatePostFormData.posts}

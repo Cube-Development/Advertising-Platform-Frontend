@@ -31,6 +31,7 @@ export const authCartAPI = authApi.injectEndpoints({
         method: `GET`,
         params: params,
       }),
+      // providesTags: [CART_PUB, CART],
     }),
     addToCommonCart: build.mutation<ICart, AddChannelReq>({
       query: (params) => ({
@@ -38,6 +39,7 @@ export const authCartAPI = authApi.injectEndpoints({
         method: `POST`,
         params: params,
       }),
+      // invalidatesTags: [CART_PUB, CART],
     }),
     removeFromCommonCart: build.mutation<ICart, RemoveChannelReq>({
       query: (params) => ({
@@ -45,6 +47,7 @@ export const authCartAPI = authApi.injectEndpoints({
         method: `POST`,
         params: params,
       }),
+      // invalidatesTags: [CART_PUB, CART],
     }),
     saveCart: build.mutation<{ success: boolean }, void>({
       query: () => ({
@@ -80,6 +83,7 @@ export const publicCartAPI = baseApi.injectEndpoints({
         method: `GET`,
         params: params,
       }),
+      // providesTags: [CART_PUB, CART],
     }),
     addToPublicCart: build.mutation<ICart, AddChannelReq>({
       query: (params) => ({
@@ -87,6 +91,7 @@ export const publicCartAPI = baseApi.injectEndpoints({
         method: `POST`,
         params: params,
       }),
+      // invalidatesTags: [CART_PUB, CART],
     }),
     removeFromPublicCart: build.mutation<ICart, RemoveChannelReq>({
       query: (params) => ({
@@ -94,6 +99,7 @@ export const publicCartAPI = baseApi.injectEndpoints({
         method: `POST`,
         params: params,
       }),
+      // invalidatesTags: [CART_PUB, CART],
     }),
   }),
 });

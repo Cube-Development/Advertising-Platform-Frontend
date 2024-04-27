@@ -2,7 +2,7 @@ import { ContentType } from "@shared/config/createPostData";
 import { IAddFile } from "./file";
 
 export interface IPostChannel {
-  order_id: string;
+  id: string;
   avatar: string;
   name: string;
   category: string;
@@ -21,7 +21,7 @@ export interface ICreatePostForm extends IProjectId {
 
 export interface ICreatePost extends IProjectId {
   platform?: number;
-  name?: string;
+  // name?: string;
   comment?: string;
   files?: IFile[];
 }

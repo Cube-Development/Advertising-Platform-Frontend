@@ -28,6 +28,6 @@ export const enum SELECTOPTIONS {
 }
 
 export const enum POST {
-  postLenght = 200,
-  commentLenght = 200,
+  postLength = 200,
+  commentLength = 300,
 }
