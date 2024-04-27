@@ -9,7 +9,7 @@ export const Feedback: FC = () => {
 
   return (
     <MyButton buttons_type="button__white" className={styles.button}>
-      <div>
+      <div className={styles.content}>
         {t(`order_btn.feedback`)}
         <StarIcon2 />
       </div>

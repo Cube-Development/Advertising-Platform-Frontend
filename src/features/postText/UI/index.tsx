@@ -1,17 +1,18 @@
 import { FC, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
-import { ArrowSmallVerticalIcon, PencilIcon } from "@shared/assets";
+import { PencilIcon } from "@shared/assets";
 import { useTranslation } from "react-i18next";
 import { ICreatePost, ICreatePostForm, IFile } from "@shared/types/createPost";
 import { CreatePostFormData } from "@shared/config/createPostData";
+import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 
 interface PostTextProps {
   placeholder: string;
   rows: number;
   maxLength: number;
-  setValue: any;
   type: CreatePostFormData;
-  getValues: any;
+  setValue: UseFormSetValue<ICreatePostForm>;
+  getValues: UseFormGetValues<ICreatePostForm>;
   contentId?: number;
   platformId: number;
 }
@@ -46,7 +47,7 @@ export const PostText: FC<PostTextProps> = ({
   useEffect(() => {
     // Установка начального значения при монтировании компонента
     const form: ICreatePostForm = { ...getValues() };
-    const currentPost = (form.posts || []).find(
+    const currentPost = form.posts.find(
       (item) => item.platform === platformId,
     ) || {
       project_id: form.project_id,

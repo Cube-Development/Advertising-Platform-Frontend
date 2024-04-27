@@ -111,7 +111,11 @@ export const CustomCalendar: FC<DateListProps> = ({ onChange }) => {
 
   return (
     <div>
-      <button className={styles.wrapper} onClick={handleOpenModal}>
+      <button
+        type="button"
+        className={styles.wrapper}
+        onClick={handleOpenModal}
+      >
         <CalendarIcon />
         {dateOject.dateString && !isModalOpen ? (
           dateOject.dateString.length === 2 ? (
@@ -139,7 +143,7 @@ export const CustomCalendar: FC<DateListProps> = ({ onChange }) => {
             >
               <div className={styles.top}>
                 <p>{t("calendar.choose_date")}</p>
-                <button onClick={handleCloseModal}>
+                <button type="button" onClick={handleCloseModal}>
                   <CancelIcon2 />
                 </button>
               </div>
@@ -159,12 +163,20 @@ export const CustomCalendar: FC<DateListProps> = ({ onChange }) => {
               </div>
 
               <div className={styles.bottom}>
-                <MyButton className={styles.button} onClick={handleChangeRange}>
+                <MyButton
+                  type="button"
+                  className={styles.button}
+                  onClick={handleChangeRange}
+                >
                   <p>
                     {isSelectRange ? t("calendar.date") : t("calendar.range")}
                   </p>
                 </MyButton>
-                <MyButton className={styles.button} onClick={continueAction}>
+                <MyButton
+                  type="button"
+                  className={styles.button}
+                  onClick={continueAction}
+                >
                   <p>{t("calendar.confirm")}</p>
                 </MyButton>
               </div>

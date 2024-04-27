@@ -1,5 +1,4 @@
 import { pageFilter } from "@shared/config/pageFilter";
-import { offerStatusFilter } from "@shared/config/offerFilter";
 import { useAppSelector } from "@shared/store";
 import { BarFilter } from "@widgets/barFilter";
 import { BloggerOffer } from "@widgets/bloggerOffer";
@@ -12,7 +11,7 @@ import { useForm } from "react-hook-form";
 import {
   getOrdersByStatusReq,
   useGetBloggerOrdersQuery,
-} from "@shared/store/services/bloggerOrdersService";
+} from "@shared/store/services/bloggerOffersService";
 
 export const OffersPage: FC = () => {
   const { statusFilter } = useAppSelector((state) => state.filter);
@@ -24,11 +23,7 @@ export const OffersPage: FC = () => {
     return i18n.language === lang.name;
   });
 
-  const {
-    setValue,
-    watch,
-    formState: { errors },
-  } = useForm<{ platform: platformTypesNum }>({
+  const { setValue, watch } = useForm<{ platform: platformTypesNum }>({
     defaultValues: {
       platform: networkTypes[0].id,
     },
@@ -44,11 +39,7 @@ export const OffersPage: FC = () => {
     status: statusFilter,
   };
 
-  const {
-    data: offers,
-    isLoading,
-    error,
-  } = useGetBloggerOrdersQuery(getParams);
+  const { data: offers } = useGetBloggerOrdersQuery(getParams);
 
   return (
     <>
@@ -57,11 +48,7 @@ export const OffersPage: FC = () => {
         listLength={!offers?.orders.length}
         setValue={setValue}
       />
-      {statusFilter === offerStatusFilter.active ? (
-        <BloggerOffer offers={offers!} />
-      ) : (
-        <></>
-      )}
+      <BloggerOffer offers={offers!} />
     </>
   );
 };

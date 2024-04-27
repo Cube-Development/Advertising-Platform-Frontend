@@ -15,7 +15,10 @@ import {
 import {
   IAddChannelData,
   IAddChannelIdentification,
+  IEditChannelData,
+  IReadChannelData,
 } from "@shared/types/platform";
+import { BLOGGER_CHANNELS } from "../../api/tags";
 
 export interface getChannelsByStatusReq {
   platform: platformTypesNum;
@@ -28,7 +31,7 @@ export interface getChannelsByStatusReq {
 
 export const channelAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
-    createCode: build.query<{ verification_code: number }, void>({
+    createCode: build.query<{ verification_code: number }, string>({
       query: () => ({
         url: `/channel/create/code`,
         method: `POST`,
@@ -64,18 +67,39 @@ export const channelAPI = authApi.injectEndpoints({
         method: "GET",
         params: params,
       }),
+      providesTags: [BLOGGER_CHANNELS],
+    }),
+    getChannelById: build.query<
+      IReadChannelData,
+      { channel_id: string; language: languagesNum }
+    >({
+      query: (params) => ({
+        url: "/channel/",
+        method: "GET",
+        params: params,
+      }),
     }),
     activateChannel: build.mutation<void, string>({
       query: (channel_id) => ({
         url: `/channel/activate/${channel_id}`,
         method: `PUT`,
       }),
+      invalidatesTags: [BLOGGER_CHANNELS],
     }),
     deactivateChannel: build.mutation<void, string>({
       query: (channel_id) => ({
         url: `/channel/deactivate/${channel_id}`,
         method: `PUT`,
       }),
+      invalidatesTags: [BLOGGER_CHANNELS],
+    }),
+    editChannel: build.mutation<{ status: platformStatus }, IEditChannelData>({
+      query: (body) => ({
+        url: "/channel/edit",
+        method: "PUT",
+        body: body,
+      }),
+      invalidatesTags: [BLOGGER_CHANNELS],
     }),
   }),
 });
@@ -87,4 +111,6 @@ export const {
   useGetChannelsByStatusQuery,
   useActivateChannelMutation,
   useDeactivateChannelMutation,
+  useEditChannelMutation,
+  useGetChannelByIdQuery,
 } = channelAPI;

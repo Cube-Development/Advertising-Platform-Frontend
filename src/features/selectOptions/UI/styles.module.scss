@@ -101,6 +101,12 @@
       background: var(--Personal-colors-White);
     }
 
+    &.disabled__menu {
+      pointer-events: none;
+      color: var(--choosen-text);
+      border: 1px solid var(--Inside-container);
+    }
+
     &.filter {
       span {
         color: rgba(0, 0, 0, 0.6);

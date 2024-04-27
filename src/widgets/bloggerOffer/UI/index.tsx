@@ -7,6 +7,8 @@ import { SendLink } from "@features/sendLink";
 import { FC } from "react";
 import { IBloggerOffers } from "@shared/types/bloggerOffer";
 import styles from "./styles.module.scss";
+import { ZeroPlatform } from "@features/zeroPlatform";
+import { AddPlatform } from "@features/addPlatform";
 
 interface BloggerOfferProps {
   offers: IBloggerOffers;
@@ -15,12 +17,9 @@ interface BloggerOfferProps {
 export const BloggerOffer: FC<BloggerOfferProps> = ({ offers }) => {
   return (
     <div className="container sidebar">
-      {
-        // cards.length === 0
-        // ?
-        // <ZeroPlatform AddPlatformBtn={AddPlatform}/>
-        // :
-
+      {offers?.orders.length === 0 ? (
+        <ZeroPlatform AddPlatformBtn={AddPlatform} />
+      ) : (
         <div className={styles.wrapper}>
           {offers?.orders?.map((card, index) => (
             <BloggerOfferCard
@@ -34,7 +33,7 @@ export const BloggerOffer: FC<BloggerOfferProps> = ({ offers }) => {
             />
           ))}
         </div>
-      }
+      )}
     </div>
   );
 };

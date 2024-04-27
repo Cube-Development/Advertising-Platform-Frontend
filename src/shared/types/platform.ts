@@ -4,6 +4,7 @@ import {
   platformTypesNum,
 } from "@shared/config/platformTypes";
 import { FC } from "react";
+import { IOption } from "./common";
 
 export interface IAddChannelIdentification {
   platform: platformTypesNum;
@@ -24,6 +25,35 @@ export interface IAddChannelData {
   format: IAddFormat[];
 }
 
+export interface IReadChannelData {
+  id: string;
+  name: string;
+  url: string;
+  avatar: string;
+  platform: number;
+  male: number;
+  female: number;
+  category: IOption;
+  description: string;
+  text_limit: number;
+  region: IOption[];
+  language: IOption[];
+  age: IOption[];
+  format: IFormat[];
+}
+
+export interface IEditChannelData {
+  channel_id: string;
+  male: number;
+  female: number;
+  description: string;
+  text_limit: number;
+  region: number[];
+  language: number[];
+  age: number[];
+  format: IAddFormat[];
+}
+
 export interface IAddFormat {
   name: number;
   price: number;
@@ -31,6 +61,7 @@ export interface IAddFormat {
 
 export interface IFormatPriceProps extends IChannelFormat {
   onChange: (format: IAddFormat) => void;
+  defaultValue?: number;
 }
 
 export interface IChannelFormat {
@@ -67,9 +98,9 @@ export interface IFormat {
     big: string;
   };
   price: number;
-  views: number;
-  er: number;
-  cpv: number;
+  views?: number;
+  er?: number;
+  cpv?: number;
 }
 
 export interface IAddCart {

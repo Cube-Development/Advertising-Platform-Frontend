@@ -11,6 +11,7 @@ interface SelectDescriptionProps {
   text?: string;
   placeholder: string;
   onChange: UseFormSetValue<any>;
+  defaultValues?: string;
 }
 
 export const SelectDescription: FC<SelectDescriptionProps> = ({
@@ -18,10 +19,13 @@ export const SelectDescription: FC<SelectDescriptionProps> = ({
   text,
   placeholder,
   onChange,
+  defaultValues,
 }) => {
   const { t } = useTranslation();
-  const [description, setDescription] = useState("");
-  const [remainingCharacters, setRemainingCharacters] = useState(0);
+  const [description, setDescription] = useState(defaultValues || "");
+  const [remainingCharacters, setRemainingCharacters] = useState(
+    defaultValues ? defaultValues.length : 0,
+  );
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newDescription = e.target.value;

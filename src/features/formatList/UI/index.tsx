@@ -33,7 +33,7 @@ export const FormatList: FC<IFormatListProps> = ({
     }
   };
 
-  const handleButtonClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const handleButtonClick = (event: React.MouseEvent) => {
     event.stopPropagation();
     setMenuOpen(!isMenuOpen);
   };
@@ -47,14 +47,14 @@ export const FormatList: FC<IFormatListProps> = ({
 
   return (
     <div className={styles.wrapper} ref={menuRef}>
-      <button type="button" onClick={(e) => handleButtonClick(e)}>
+      <div className={styles.selects} onClick={(e) => handleButtonClick(e)}>
         <div className={isMenuOpen ? "rotate" : "rotate__down"}>
           <ArrowSmallVerticalIcon
             className={isMenuOpen ? "active__icon" : "default__icon__black"}
           />
         </div>
         <p>{selectedFormat?.format_name.big}</p>
-      </button>
+      </div>
 
       {isMenuOpen && (
         <div className={`${styles.menu} show`}>

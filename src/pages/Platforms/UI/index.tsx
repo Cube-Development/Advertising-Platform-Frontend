@@ -24,11 +24,7 @@ export const PlatformsPage: FC = () => {
 
   const { statusFilter } = useAppSelector((state) => state.filter);
 
-  const {
-    setValue,
-    watch,
-    formState: { errors },
-  } = useForm<{ platform: platformTypesNum }>({
+  const { setValue, watch } = useForm<{ platform: platformTypesNum }>({
     defaultValues: {
       platform: networkTypes[0].id,
     },
@@ -45,11 +41,7 @@ export const PlatformsPage: FC = () => {
     status: statusFilter,
   };
 
-  const {
-    data: channels,
-    isLoading,
-    error,
-  } = useGetChannelsByStatusQuery(getParams);
+  const { data: channels } = useGetChannelsByStatusQuery(getParams);
 
   return (
     <>

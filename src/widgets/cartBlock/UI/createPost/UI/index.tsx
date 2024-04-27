@@ -5,6 +5,11 @@ import { ProtectIcon3 } from "@shared/assets";
 import { CreatePosts } from "@features/createPost";
 import { CART } from "@shared/config/common";
 import { ICart } from "@shared/types/cart";
+import { useCreateCartMutation } from "@shared/store/services/advOrdersService";
+import { useAppSelector } from "@shared/store";
+import { useNavigate } from "react-router-dom";
+import { paths } from "@shared/routing";
+import Cookies from "js-cookie";
 
 interface CreatePostProps {
   cart: ICart;
@@ -27,6 +32,27 @@ export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
   // );
 
   // cost = Math.round(cost * (1 + CART.commission / 100));
+
+  const { isAuth } = useAppSelector((state) => state.user);
+  const navigate = useNavigate();
+  const [createCart] = useCreateCartMutation();
+
+  const handleCreateCart = () => {
+    if (isAuth) {
+      createCart()
+        .unwrap()
+        .then((data) => {
+          Cookies.set("project_id", data.project_id);
+          navigate(paths.createOrder);
+        })
+        .catch((error) => {
+          console.error("Ошибка во время создания корзины", error);
+          alert("У вас недостаточно средств, нужно пополнить баланс");
+        });
+    } else {
+      alert("Нужно авторизоваться чтобы продолжить");
+    }
+  };
 
   return (
     <div>
@@ -58,8 +84,10 @@ export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
             {cart?.amount?.toLocaleString()} {t("symbol")}
           </span>
         </div>
-        <div className={styles.button}>
-          <CreatePosts />
+        <div
+          className={`${styles.button} ${!cart?.channels?.length && "deactive"}`}
+        >
+          <CreatePosts onClick={handleCreateCart} />
         </div>
       </div>
     </div>

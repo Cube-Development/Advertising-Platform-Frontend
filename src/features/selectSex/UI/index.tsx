@@ -1,14 +1,9 @@
-import { FC, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
 import { InfoIcon } from "@shared/assets";
 import { MySlider } from "@shared/ui/slider";
-import { IAddPLatformData } from "@shared/types/common";
-import {
-  UseFormGetValues,
-  UseFormRegister,
-  UseFormSetValue,
-} from "react-hook-form";
+import { FC, useState } from "react";
+import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 interface SelectSexProps {
   title: string;
@@ -17,6 +12,7 @@ interface SelectSexProps {
   isRow?: boolean;
   isCatalog?: boolean;
   getValues?: UseFormGetValues<any>;
+  defaultValues?: number;
 }
 
 export const SelectSex: FC<SelectSexProps> = ({
@@ -26,10 +22,11 @@ export const SelectSex: FC<SelectSexProps> = ({
   isRow,
   isCatalog,
   getValues,
+  defaultValues,
 }) => {
   const { t } = useTranslation();
 
-  const [position, setPosition] = useState(50);
+  const [position, setPosition] = useState(defaultValues || 50);
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newPosition = parseInt(e.target.value);
     setPosition(newPosition);

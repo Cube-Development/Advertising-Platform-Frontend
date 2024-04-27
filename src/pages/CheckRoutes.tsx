@@ -1,12 +1,23 @@
 import { managmentRoles, roles, userRoles } from "@shared/config/roles";
 import { paths } from "@shared/routing";
 import { useAppSelector } from "@shared/store";
+import Cookies from "js-cookie";
 import { Navigate, Outlet } from "react-router-dom";
 
 export enum routerType {
   public = "public",
   private = "private",
 }
+
+export const CheckProjectId = () => {
+  const projectId = Cookies.get("project_id");
+  console.log("CheckProjectId");
+  if (projectId) {
+    return <Outlet />;
+  } else {
+    return <Navigate to={paths.cart} replace />;
+  }
+};
 
 export const CheckRoutes = ({
   checkRole,

@@ -8,8 +8,7 @@ export const CheckPost: FC = () => {
   const { t } = useTranslation();
   return (
     <MyButton buttons_type="button__white" className={styles.button}>
-      {t(`order_btn.check`)}
-      <ArrowLongHorizontalIcon className="active__icon" />
+      {t(`order_btn.checkPost`)}
     </MyButton>
   );
 };

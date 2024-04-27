@@ -13,6 +13,7 @@ import { platformData } from "@shared/config/platformData";
 import {
   IAddChannelData,
   IAddPlatformBlur,
+  IFormat,
   IPlatformLink,
 } from "@shared/types/platform";
 import { Languages } from "@shared/config/languages";
@@ -24,7 +25,11 @@ import {
   useGetChannelRegionsQuery,
 } from "@shared/store/services/contentService";
 import { MyButton } from "@shared/ui";
-import { useCreateChannelMutation } from "@shared/store/services/channelService";
+import {
+  useCreateChannelMutation,
+  useEditChannelMutation,
+  useGetChannelByIdQuery,
+} from "@shared/store/services/channelService";
 import { AccountsLoader } from "@shared/ui/accountsLoader";
 
 interface PlatformParametersProps {
@@ -32,6 +37,7 @@ interface PlatformParametersProps {
   onChangeBlur: (newBlur: IAddPlatformBlur) => void;
   currentPlatform: IPlatformLink;
   inserCode: string;
+  channel_id: string;
 }
 
 export const PlatformParameters: FC<PlatformParametersProps> = ({
@@ -39,30 +45,48 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
   onChangeBlur,
   currentPlatform,
   inserCode,
+  channel_id,
 }) => {
   const { t, i18n } = useTranslation();
   const language = Languages.find((lang) => {
     return i18n.language === lang.name;
   });
+  const { data: channel } = useGetChannelByIdQuery(
+    { channel_id: channel_id, language: language?.id || Languages[0].id },
+    { skip: !channel_id },
+  );
 
-  const {
-    handleSubmit,
-    setValue,
-    getValues,
-    formState: { errors },
-  } = useForm<IAddChannelData>({
-    defaultValues: {
-      insertion_code: inserCode,
-      male: 50,
-      female: 50,
-      category: undefined,
-      description: undefined,
-      text_limit: 4096,
-      region: [],
-      language: [],
-      age: [],
-      format: [],
-    },
+  let defaultValues;
+  channel
+    ? (defaultValues = {
+        male: channel?.male,
+        female: channel?.female,
+        category: channel?.category.id,
+        description: channel?.description,
+        text_limit: channel?.text_limit,
+        region: channel?.region.map((item) => item.id),
+        language: channel?.language.map((item) => item.id),
+        age: channel?.age.map((item) => item.id),
+        format: channel?.format.map((format: IFormat) => ({
+          name: format.format,
+          price: format.price,
+        })),
+      })
+    : (defaultValues = {
+        insertion_code: inserCode,
+        male: 50,
+        female: 50,
+        category: undefined,
+        description: undefined,
+        text_limit: 4096,
+        region: [],
+        language: [],
+        age: [],
+        format: [],
+      });
+  console.log(defaultValues);
+  const { handleSubmit, setValue, getValues } = useForm<IAddChannelData>({
+    defaultValues: defaultValues,
   });
 
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -72,10 +96,10 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
   };
 
   const [createChannel, { isLoading, error }] = useCreateChannelMutation();
+  const [editChannel] = useEditChannelMutation();
 
   const onSubmit: SubmitHandler<IAddChannelData> = (data) => {
     if (
-      inserCode &&
       data.age.length > 0 &&
       data.category &&
       data.description &&
@@ -83,16 +107,31 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
       data.region.length > 0 &&
       data.format.length > 0
     ) {
-      createChannel(data)
-        .unwrap()
-        .then((data) => {
-          console.log(data.status);
-          setIsModalOpen(true);
-          onChangeBlur({ link: true, parameters: true });
-        })
-        .catch((error) =>
-          console.error("Ошибка при добавлении канала...", error),
-        );
+      if (channel) {
+        const { insertion_code, category, ...editData } = data;
+        console.log(insertion_code, category);
+        editChannel({ ...editData, channel_id: channel.id })
+          .unwrap()
+          .then((data) => {
+            console.log(data);
+            setIsModalOpen(true);
+            onChangeBlur({ link: true, parameters: true });
+          })
+          .catch((error) =>
+            console.error("Ошибка при добавлении канала...", error),
+          );
+      } else {
+        createChannel(data)
+          .unwrap()
+          .then((data) => {
+            console.log(data.status);
+            setIsModalOpen(true);
+            onChangeBlur({ link: true, parameters: true });
+          })
+          .catch((error) =>
+            console.error("Ошибка при добавлении канала...", error),
+          );
+      }
     } else {
       alert("Заполните все поля...");
     }
@@ -104,7 +143,6 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
   };
   const formatsRes = { ...contentRes, platform: currentPlatform.id };
   const { data: formats } = useGetChannelFormatsQuery(formatsRes);
-
   const { data: ages } = useGetChannelAgesQuery(contentRes);
   const { data: channelCategories } = useGetChannelCategoriesQuery(contentRes);
   const { data: languages } = useGetChannelLanguagesQuery(contentRes);
@@ -126,6 +164,7 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
                 single={true}
                 type={platformData.category}
                 textData={"add_platform.category"}
+                defaultValues={channel?.category}
               />
               <SelectOptions
                 onChange={setValue}
@@ -133,6 +172,7 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
                 single={false}
                 type={platformData.language}
                 textData={"add_platform.languages"}
+                defaultValues={defaultValues.language}
               />
               <SelectOptions
                 onChange={setValue}
@@ -140,11 +180,13 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
                 single={false}
                 type={platformData.region}
                 textData={"add_platform.region"}
+                defaultValues={defaultValues.region}
               />
               <SelectSex
                 onChange={setValue}
                 title={"add_platform.sex.title"}
                 text={"add_platform.sex.text"}
+                defaultValues={defaultValues.male}
               />
               <SelectOptions
                 onChange={setValue}
@@ -152,6 +194,7 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
                 single={false}
                 type={platformData.age}
                 textData={"add_platform.age"}
+                defaultValues={defaultValues.age}
               />
             </div>
             <div className={styles.form__bottom}>
@@ -160,6 +203,7 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
                 title={"add_platform.description.title"}
                 text={"add_platform.description.text"}
                 placeholder={"add_platform.default_input"}
+                defaultValues={defaultValues.description}
               />
               <SelectPrice
                 onChange={setValue}
@@ -170,12 +214,14 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
                 title={"add_platform.price.title"}
                 text={"add_platform.price.text"}
                 info={"add_platform.price.info"}
+                defaultValues={defaultValues.format}
               />
               <SelectSymbol
                 onChange={setValue}
                 type={"text_limit"}
                 title={"add_platform.symbol.title"}
                 text={"add_platform.symbol.text"}
+                defaultValues={defaultValues.text_limit}
               />
 
               <MyButton className={`${styles.button} ${error && styles.error}`}>
