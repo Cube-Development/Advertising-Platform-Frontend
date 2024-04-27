@@ -8,8 +8,7 @@ export const ChangeChannel: FC = () => {
   const { t } = useTranslation();
   return (
     <MyButton buttons_type="button__white" className={styles.button}>
-      {t(`order_btn.change`)}
-      <ArrowLongHorizontalIcon className="active__icon" />
+      {t(`order_btn.changeChannel`)}
     </MyButton>
   );
 };

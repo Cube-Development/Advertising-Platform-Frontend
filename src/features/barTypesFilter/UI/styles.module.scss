@@ -1,6 +1,4 @@
 .project__types {
-  margin-top: 15px;
-  margin-bottom: 20px;
   ul {
     display: grid;
     grid-auto-flow: column;
@@ -17,12 +15,11 @@
 
   li {
     cursor: pointer;
-  }
-}
 
-.active {
-  // color: var(--Gradients-Gradient-1);
-  color: #4772e6;
-  border-bottom: 3px solid #4772e6;
-  padding-bottom: 10px;
+    &.active {
+      color: var(--Personal-colors-main);
+      border-bottom: 3px solid var(--Personal-colors-main);
+      padding-bottom: 10px;
+    }
+  }
 }

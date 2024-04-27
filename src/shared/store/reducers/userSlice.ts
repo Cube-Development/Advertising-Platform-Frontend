@@ -42,6 +42,7 @@ export const userSlice = createSlice({
     logout: (state) => {
       Cookies.remove("accessToken");
       Cookies.remove("refreshToken");
+      Cookies.remove("project_id");
       Cookies.set("isAuth", "false");
       state.isAuth = false;
     },

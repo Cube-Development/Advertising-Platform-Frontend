@@ -3,6 +3,8 @@ import { IStartProjectProps } from "@shared/types/common";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { useAppSelector } from "@shared/store";
+import { roles } from "@shared/config/roles";
 
 interface BarTopProps {
   listLength: boolean;
@@ -20,18 +22,28 @@ export const BarTop: FC<BarTopProps> = ({
   page,
 }) => {
   const { t } = useTranslation();
+  const { role } = useAppSelector((state) => state.user);
+
   return (
     <div className={styles.top}>
       {page === pageFilter.order ? (
-        <>
-          <p>{t(`orders_advertiser.my_campaign`)}</p>
-          {listLength && (
-            <div>
-              {<NewProjectBtn listLength={listLength} />}
-              {<TurnkeyProjectBtn listLength={listLength} />}
-            </div>
-          )}
-        </>
+        role === roles.advertiser ? (
+          <>
+            <p>{t(`orders_advertiser.my_campaign`)}</p>
+            {listLength && (
+              <div>
+                {<NewProjectBtn listLength={listLength} />}
+                {<TurnkeyProjectBtn listLength={listLength} />}
+              </div>
+            )}
+          </>
+        ) : (
+          role === roles.manager && (
+            <>
+              <p>{t(`orders_manager.orders`)}</p>
+            </>
+          )
+        )
       ) : page === pageFilter.platform ? (
         <>
           <p>{t(`platforms_blogger.my_platform`)}</p>

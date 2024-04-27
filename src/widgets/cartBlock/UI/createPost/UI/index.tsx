@@ -85,7 +85,7 @@ export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
           </span>
         </div>
         <div
-          className={`${styles.button} ${!cart?.channels?.length && styles.deactive}`}
+          className={`${styles.button} ${!cart?.channels?.length && "deactive"}`}
         >
           <CreatePosts onClick={handleCreateCart} />
         </div>

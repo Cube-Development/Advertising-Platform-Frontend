@@ -10,9 +10,9 @@ import { RejectPost } from "@features/rejectPost";
 import { SeePost } from "@features/seePost";
 import { TurnkeyProject } from "@features/turnkeyProject";
 import { ZeroProject } from "@features/zeroProject";
+import { IAdvProjects } from "@shared/types/advProject";
 import { FC } from "react";
 import styles from "./styles.module.scss";
-import { IAdvProjects } from "@shared/types/advProject";
 
 interface AdvProjectProps {
   projects: IAdvProjects;

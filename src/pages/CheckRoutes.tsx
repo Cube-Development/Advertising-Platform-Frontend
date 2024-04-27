@@ -11,6 +11,7 @@ export enum routerType {
 
 export const CheckProjectId = () => {
   const projectId = Cookies.get("project_id");
+  console.log("CheckProjectId");
   if (projectId) {
     return <Outlet />;
   } else {

@@ -7,15 +7,17 @@ import {
 } from "@shared/assets";
 import { orderStatus, orderStatusChat } from "@shared/config/orderFilter";
 import {
+  advManagerProjectStatusFilter,
+  managerProjectStatusFilter,
   myProjectStatusFilter,
   projectTypesFilter,
 } from "@shared/config/projectFilter";
+import { useAppSelector } from "@shared/store";
+import { IAdvProjectSubcard } from "@shared/types/advProject";
 import { IChannelChat } from "@shared/types/common";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { IAdvProjectSubcard } from "@shared/types/advProject";
-import { useAppSelector } from "@shared/store";
 
 interface AdvProjectSubcardProps {
   subcard: IAdvProjectSubcard;
@@ -26,7 +28,6 @@ interface AdvProjectSubcardProps {
   SeeBtn: FC;
   ChangeChannelBtn: FC;
   ChannelChatBtn: FC<IChannelChat>;
-  typeFilter: string;
 }
 
 export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
@@ -38,13 +39,14 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
   SeeBtn,
   ChannelChatBtn,
   ChangeChannelBtn,
-  typeFilter,
 }) => {
   const { t } = useTranslation();
-  const { statusFilter } = useAppSelector((state) => state.filter);
+  const { typeFilter, statusFilter } = useAppSelector((state) => state.filter);
 
   return (
-    <div className={styles.subcard}>
+    <div
+      className={`${styles.subcard} ${typeFilter === projectTypesFilter.myProject && statusFilter === advManagerProjectStatusFilter.active ? styles.grid__active : styles.grid}`}
+    >
       <div className={styles.subcard__left}>
         <div className={styles.subcard__left__description}>
           <div className={styles.subcard__left__description__logo}>
@@ -132,24 +134,35 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
         </div>
       </div>
       <>
-        {subcard.order_status === orderStatus.rejected ? (
-          <div className={styles.subcard__active}>
-            <div>
-              <p>{t(`orders_advertiser.order_status.rejected.title`)}</p>
-              <span>
-                {typeFilter === projectTypesFilter.managerProject
-                  ? t(`orders_advertiser.order_status.rejected.text2`)
-                  : statusFilter === myProjectStatusFilter.completed ||
-                    t(`orders_advertiser.order_status.rejected.text`)}
-              </span>
-            </div>
+        {subcard.order_status === orderStatus.canceled ||
+        subcard.order_status === orderStatus.rejected ? (
+          <div className={styles.subcard__cancel}>
+            {typeFilter === projectTypesFilter.managerProject &&
+            statusFilter === managerProjectStatusFilter.completed ? (
+              <p>{t(`orders_advertiser.order_status.rejected.title2`)}</p>
+            ) : (
+              <>
+                <p>{t(`orders_advertiser.order_status.rejected.title`)}</p>
+                <span>
+                  {typeFilter === projectTypesFilter.managerProject
+                    ? t(`orders_advertiser.order_status.rejected.text2`)
+                    : statusFilter === myProjectStatusFilter.completed ||
+                      t(`orders_advertiser.order_status.rejected.text`)}
+                </span>
+              </>
+            )}
           </div>
         ) : subcard.order_status === orderStatus.completed ? (
           <div className={styles.subcard__completed}>
-            <div>
-              <p>{t(`orders_advertiser.order_status.completed.title`)}</p>
-              <FeedbackBtn />
-            </div>
+            {typeFilter === projectTypesFilter.managerProject &&
+            statusFilter === managerProjectStatusFilter.completed ? (
+              <p>{t(`orders_advertiser.order_status.completed.title2`)}</p>
+            ) : (
+              <>
+                <p>{t(`orders_advertiser.order_status.completed.title`)}</p>
+                <FeedbackBtn />
+              </>
+            )}
           </div>
         ) : subcard.order_status === orderStatus.post_review ? (
           <div className={styles.subcard__posted}>
@@ -189,32 +202,32 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
               </span>
             </div>
           </div>
+        ) : subcard.order_status === orderStatus.wait ? (
+          <div className={styles.subcard__waiting}>
+            <div>
+              <p>{t(`orders_advertiser.order_status.waiting.title`)}</p>
+              <SeeBtn />
+            </div>
+          </div>
+        ) : subcard.order_status === orderStatus.order_review ? (
+          <div className={styles.subcard__agreed}>
+            <div>
+              <p>{t(`orders_advertiser.order_status.agreed.title`)}</p>
+              <div>
+                <ChangeChannelBtn />
+                <CheckBtn />
+              </div>
+            </div>
+          </div>
         ) : (
-          // : subcard.order_status === orderStatus.post_review ? (
-          //   <div className={styles.subcard__waiting}>
-          //     <div>
-          //       <p>{t(`orders_advertiser.order_status.waiting.title`)}</p>
-          //       <SeeBtn />
-          //     </div>
-          //   </div>
-          // )
-          // : subcard.order_status === orderStatus.post_review ? (
-          //   <div className={styles.subcard__agreed}>
-          //     <div>
-          //       <p>{t(`orders_advertiser.order_status.agreed.title`)}</p>
-          //       <div>
-          //         <ChangeChannelBtn />
-          //         <CheckBtn />
-          //       </div>
-          //     </div>
-          //   </div>
-          // )
           <></>
         )}
       </>
-      {typeFilter !== projectTypesFilter.managerProject &&
-        orderStatusChat.includes(subcard.order_status) && (
-          <div className={styles.subcard__chat}>
+      {typeFilter === projectTypesFilter.myProject &&
+        statusFilter === advManagerProjectStatusFilter.active && (
+          <div
+            className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard.order_status) ? "" : "deactive"}`}
+          >
             <ChannelChatBtn id={1} />
           </div>
         )}

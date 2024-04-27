@@ -53,11 +53,6 @@ export const router = createBrowserRouter([
     children: [
       {
         path: paths.main,
-        element: <CheckProjectId />,
-        children: createOrderRouter,
-      },
-      {
-        path: paths.main,
         element: (
           <CheckRoutes checkRole={roles.advertiser} type={routerType.public} />
         ),
@@ -88,6 +83,11 @@ export const router = createBrowserRouter([
         path: paths.main,
         element: <CheckRoutes type={routerType.private} />,
         children: privateCommonRouter,
+      },
+      {
+        path: paths.main,
+        element: <CheckProjectId />,
+        children: createOrderRouter,
       },
       ...publicCommonRouter,
     ],

@@ -13,6 +13,7 @@ export interface IAdvSubprojects {
 
 export interface IAdvProjectCard {
   id: string;
+  tarif?: string;
   created: string;
   name: string;
   count_channels: number;
@@ -23,6 +24,7 @@ export interface IAdvProjectCard {
   wait?: number;
   in_progress?: number;
   moderation?: number;
+  subcard?: IAdvProjectSubcard[];
 }
 
 export interface IAdvProjectSubcard {
@@ -53,4 +55,18 @@ export interface IAdvProjectSubcard {
   cpv: number;
   male: number;
   female: number;
+}
+
+export interface IAdvManagerProjectsDev {
+  page: number;
+  elements: number;
+  projects: IAdvManagerProjectsDevCard[];
+}
+
+export interface IAdvManagerProjectsDevCard {
+  id: string;
+  tarif?: string;
+  created: string;
+  name: string;
+  budget: number;
 }

@@ -3,18 +3,18 @@ import { ContinueTemplate } from "@features/continueTemplate";
 import { NewProject } from "@features/newProject";
 import { TurnkeyProject } from "@features/turnkeyProject";
 import { ZeroProject } from "@features/zeroProject";
-import { IAdvDevProjectCard } from "@shared/types/common";
+import { IAdvManagerProjectsDev } from "@shared/types/advProject";
 import { FC } from "react";
 import styles from "./styles.module.scss";
 
 interface AdvDevProjectProps {
-  cards: IAdvDevProjectCard[];
+  projects: IAdvManagerProjectsDev;
 }
 
-export const AdvDevProject: FC<AdvDevProjectProps> = ({ cards }) => {
+export const AdvDevProject: FC<AdvDevProjectProps> = ({ projects }) => {
   return (
     <div className="container">
-      {cards.length === 0 ? (
+      {projects.projects.length === 0 ? (
         <ZeroProject
           listLength={true}
           NewProjectBtn={NewProject}
@@ -22,7 +22,7 @@ export const AdvDevProject: FC<AdvDevProjectProps> = ({ cards }) => {
         />
       ) : (
         <div className={styles.wrapper}>
-          {cards.map((card, index) => (
+          {projects.projects.map((card, index) => (
             <AdvDevProjectCard
               key={index}
               card={card}
