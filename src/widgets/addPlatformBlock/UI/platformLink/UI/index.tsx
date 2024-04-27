@@ -64,7 +64,7 @@ export const PlatformLink: FC<PlatformLinkProps> = ({
           console.error("Ошибка: ", error);
           if (error.status === 400) {
             alert(
-              "К сожалению время истекло, обновите страницу и попробуйте заново"
+              "К сожалению время истекло, обновите страницу и попробуйте заново",
             );
           }
         });

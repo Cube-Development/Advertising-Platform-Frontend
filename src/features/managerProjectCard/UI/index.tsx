@@ -158,7 +158,7 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
               <div
                 className={
                   subcard.filter(
-                    (item) => item.order_status !== orderStatus.channel_agreed,
+                    (item) => item?.api_status !== orderStatus.channel_agreed,
                   ).length
                     ? "deactive"
                     : ""

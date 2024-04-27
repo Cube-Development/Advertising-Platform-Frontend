@@ -53,7 +53,7 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
   });
   const { data: channel } = useGetChannelByIdQuery(
     { channel_id: channel_id, language: language?.id || Languages[0].id },
-    { skip: !channel_id }
+    { skip: !channel_id },
   );
 
   let defaultValues;
@@ -118,7 +118,7 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
             onChangeBlur({ link: true, parameters: true });
           })
           .catch((error) =>
-            console.error("Ошибка при добавлении канала...", error)
+            console.error("Ошибка при добавлении канала...", error),
           );
       } else {
         createChannel(data)
@@ -129,7 +129,7 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
             onChangeBlur({ link: true, parameters: true });
           })
           .catch((error) =>
-            console.error("Ошибка при добавлении канала...", error)
+            console.error("Ошибка при добавлении канала...", error),
           );
       }
     } else {

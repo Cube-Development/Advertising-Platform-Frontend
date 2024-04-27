@@ -45,7 +45,8 @@ export interface IManagerProjectSubcard {
   name: string;
   category: string;
   avatar: string;
-  order_status: orderStatus;
+  order_status: string;
+  api_status: orderStatus;
   publish_date:
     | {
         date_from: string;

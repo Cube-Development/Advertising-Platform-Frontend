@@ -66,7 +66,7 @@ export const WalletTopUp: FC = () => {
           (Object.keys(data) as Array<keyof IProfileData>).forEach(
             (value: keyof IProfileData) => {
               setValue(value, data[value]);
-            }
+            },
           );
           clearErrors();
         })
@@ -123,11 +123,11 @@ export const WalletTopUp: FC = () => {
                 .then(() => {
                   reset();
                   alert(
-                    `Баланс успешно пополнен на сумму: ${paymentReq.amount}`
+                    `Баланс успешно пополнен на сумму: ${paymentReq.amount}`,
                   );
                 })
                 .catch((error) =>
-                  console.error("Ошибка payment/deposit: ", error)
+                  console.error("Ошибка payment/deposit: ", error),
                 );
             })
             .catch((error) => {

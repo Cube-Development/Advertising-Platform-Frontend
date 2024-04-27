@@ -31,12 +31,12 @@ export const PostPlatform: FC<PostPlatformProps> = ({
     const form: ICreatePostForm = getValues();
     const datetime = form.datetime;
     const currentCard: IDatetime = (datetime.orders || []).find(
-      (item) => item.order_id === card.id
+      (item) => item.order_id === card.id,
     ) || {
       order_id: card.id,
     };
     const allCards = (datetime.orders || []).filter(
-      (item) => item.order_id !== card.id
+      (item) => item.order_id !== card.id,
     );
     currentCard.time_from = timeList[0];
     currentCard.time_to = timeList[1];
@@ -51,12 +51,12 @@ export const PostPlatform: FC<PostPlatformProps> = ({
     const form: ICreatePostForm = getValues();
     const datetime = form.datetime;
     const currentCard: IDatetime = (datetime.orders || []).find(
-      (item) => item.order_id === card.id
+      (item) => item.order_id === card.id,
     ) || {
       order_id: card.id,
     };
     const allCards = (datetime.orders || []).filter(
-      (item) => item.order_id !== card.id
+      (item) => item.order_id !== card.id,
     );
 
     if (dateList.length === 1) {

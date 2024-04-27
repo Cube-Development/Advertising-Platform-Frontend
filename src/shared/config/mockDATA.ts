@@ -1,11 +1,6 @@
-import {
-  IAdvManagerProjectsDev,
-  IAdvProjectCard as IAdvMyProjectCard,
-  IAdvProjects,
-} from "@shared/types/advProject";
+import { IAdvManagerProjectsDev, IAdvProjects } from "@shared/types/advProject";
 import {
   IManagerNewProjects,
-  IManagerProjectCard,
   IManagerProjects,
 } from "@shared/types/managerProjects";
 
@@ -31,10 +26,11 @@ export const managerActiveCARDS: IManagerProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 4,
+          api_status: 4,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -59,10 +55,11 @@ export const managerActiveCARDS: IManagerProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 3,
+          api_status: 3,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -87,10 +84,11 @@ export const managerActiveCARDS: IManagerProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 1,
+          api_status: 1,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -115,10 +113,11 @@ export const managerActiveCARDS: IManagerProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 9,
+          api_status: 9,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -143,10 +142,11 @@ export const managerActiveCARDS: IManagerProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 2,
+          api_status: 2,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -171,10 +171,11 @@ export const managerActiveCARDS: IManagerProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 10,
+          api_status: 10,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -223,10 +224,11 @@ export const managerCompletedCARDS: IManagerProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 4,
+          api_status: 4,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -251,10 +253,11 @@ export const managerCompletedCARDS: IManagerProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 3,
+          api_status: 3,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -279,10 +282,11 @@ export const managerCompletedCARDS: IManagerProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 5,
+          api_status: 5,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -323,10 +327,11 @@ export const managerCompletedCARDS: IManagerProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 4,
+          api_status: 4,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -351,10 +356,11 @@ export const managerCompletedCARDS: IManagerProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 3,
+          api_status: 3,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -379,10 +385,11 @@ export const managerCompletedCARDS: IManagerProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 5,
+          api_status: 5,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -430,10 +437,11 @@ export const managerAgreedCARDS: IManagerProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 11,
+          api_status: 11,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -458,10 +466,11 @@ export const managerAgreedCARDS: IManagerProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 13,
+          api_status: 13,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -503,10 +512,11 @@ export const managerAgreedCARDS: IManagerProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 12,
+          api_status: 12,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -531,10 +541,11 @@ export const managerAgreedCARDS: IManagerProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 12,
+          api_status: 12,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -608,10 +619,11 @@ export const advMyProjectActiveCARDS: IAdvProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 4,
+          api_status: 4,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -636,10 +648,11 @@ export const advMyProjectActiveCARDS: IAdvProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 3,
+          api_status: 3,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -664,10 +677,11 @@ export const advMyProjectActiveCARDS: IAdvProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 9,
+          api_status: 9,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -692,10 +706,11 @@ export const advMyProjectActiveCARDS: IAdvProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 2,
+          api_status: 2,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -720,10 +735,11 @@ export const advMyProjectActiveCARDS: IAdvProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 10,
+          api_status: 10,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -771,10 +787,11 @@ export const advMyProjectCompleteCARDS: IAdvProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 4,
+          api_status: 4,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -799,10 +816,11 @@ export const advMyProjectCompleteCARDS: IAdvProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 3,
+          api_status: 3,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -850,10 +868,11 @@ export const advManagerProjectActiveCARDS: IAdvProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 4,
+          api_status: 4,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -878,10 +897,11 @@ export const advManagerProjectActiveCARDS: IAdvProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 3,
+          api_status: 3,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -906,10 +926,11 @@ export const advManagerProjectActiveCARDS: IAdvProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 9,
+          api_status: 9,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -934,10 +955,11 @@ export const advManagerProjectActiveCARDS: IAdvProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 1,
+          api_status: 1,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -962,10 +984,11 @@ export const advManagerProjectActiveCARDS: IAdvProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 2,
+          api_status: 2,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -1013,10 +1036,11 @@ export const advManagerProjectAgreedCARDS: IAdvProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 11,
+          api_status: 11,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -1064,10 +1088,11 @@ export const advManagerProjectCompleteCARDS: IAdvProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 4,
+          api_status: 4,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -1092,10 +1117,11 @@ export const advManagerProjectCompleteCARDS: IAdvProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 3,
+          api_status: 3,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -1178,10 +1204,11 @@ export const advSavedProjectCompleteCARDS: IAdvProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 4,
+          api_status: 4,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",
@@ -1206,10 +1233,11 @@ export const advSavedProjectCompleteCARDS: IAdvProjects = {
           id: "1",
           date_coming: "22.10.2022",
           name: "BVZ",
+          order_status: "BVZ",
           category: "CAtegory",
           avatar:
             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          order_status: 3,
+          api_status: 3,
           publish_date: {
             date_from: "20.10.2023",
             date_to: "22.10.2023",

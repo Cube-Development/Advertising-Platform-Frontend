@@ -22,7 +22,7 @@ export const AddPlatformBlock: FC<AddPlatformBlockProps> = () => {
   };
 
   const [currentPlatform, setCurrentPlatform] = useState<IPlatformLink>(
-    platformTypes[0]
+    platformTypes[0],
   );
   const [inserCode, setInserCode] = useState<string>("");
 

@@ -17,7 +17,7 @@ interface IOnlineBankingData {
 export const TopUpCard: FC = () => {
   const { t } = useTranslation();
   const [paymentType, setPaymentType] = useState<paymentTypes>(
-    paymentTypes.payme
+    paymentTypes.payme,
   );
 
   const {

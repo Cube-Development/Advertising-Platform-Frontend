@@ -22,7 +22,7 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
   });
   const { data: card } = useGetChannelByIdQuery(
     { channel_id: channel_id, language: language?.id || Languages[0].id },
-    { skip: !channel_id }
+    { skip: !channel_id },
   );
 
   const menuRef = useRef<HTMLDivElement>(null);

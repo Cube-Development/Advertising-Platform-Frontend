@@ -129,8 +129,8 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
         </div>
       </div>
       <>
-        {subcard.order_status === orderStatus.canceled ||
-        subcard.order_status === orderStatus.rejected ? (
+        {subcard?.api_status === orderStatus.canceled ||
+        subcard?.api_status === orderStatus.rejected ? (
           <div className={styles.subcard__cancel}>
             {statusFilter === managerProjectStatusFilter.completed ? (
               <p>{t(`orders_manager.order_status.rejected.title2`)}</p>
@@ -141,7 +141,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
               </>
             )}
           </div>
-        ) : subcard.order_status === orderStatus.completed ? (
+        ) : subcard?.api_status === orderStatus.completed ? (
           <div className={styles.subcard__completed}>
             {statusFilter === managerProjectStatusFilter.completed ? (
               <p>{t(`orders_manager.order_status.completed.title2`)}</p>
@@ -152,7 +152,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
               </>
             )}
           </div>
-        ) : subcard.order_status === orderStatus.post_review ? (
+        ) : subcard?.api_status === orderStatus.post_review ? (
           <div className={styles.subcard__posted}>
             <div className={styles.subcard__posted__title}>
               <p>{t(`orders_manager.order_status.posted.title`)}</p>
@@ -166,13 +166,13 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
               <CheckBtn />
             </div>
           </div>
-        ) : subcard.order_status === orderStatus.in_progress ? (
+        ) : subcard?.api_status === orderStatus.in_progress ? (
           <div className={styles.subcard__accepted}>
             <p>{t(`orders_manager.order_status.accepted.title`)}</p>
             <span>{t(`orders_manager.order_status.accepted.text`)}</span>
             <SeePostBtn />
           </div>
-        ) : subcard.order_status === orderStatus.moderation ? (
+        ) : subcard?.api_status === orderStatus.moderation ? (
           <div className={styles.subcard__moderation}>
             <div>
               <p>{t(`orders_manager.order_status.moderation.title`)}</p>
@@ -184,14 +184,14 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
               </span>
             </div>
           </div>
-        ) : subcard.order_status === orderStatus.wait ? (
+        ) : subcard?.api_status === orderStatus.wait ? (
           <div className={styles.subcard__waiting}>
             <div>
               <p>{t(`orders_manager.order_status.waiting.title`)}</p>
               <SeePostBtn />
             </div>
           </div>
-        ) : subcard.order_status === orderStatus.order_review ? (
+        ) : subcard?.api_status === orderStatus.order_review ? (
           <div className={styles.subcard__agreed}>
             <div>
               <p>{t(`orders_manager.order_status.agreed.title`)}</p>
@@ -200,7 +200,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
               </div>
             </div>
           </div>
-        ) : subcard.order_status === orderStatus.adv_comment ? (
+        ) : subcard?.api_status === orderStatus.adv_comment ? (
           <div className={styles.subcard__posted}>
             <div className={styles.subcard__posted__title}>
               <p>{t(`orders_manager.order_status.comment.title`)}</p>
@@ -213,7 +213,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
               <CheckBtn />
             </div>
           </div>
-        ) : subcard.order_status === orderStatus.channel_agreed ? (
+        ) : subcard?.api_status === orderStatus.channel_agreed ? (
           <div className={styles.subcard__channel_agreed}>
             <p>{t(`orders_manager.order_status.channel_agreed.title`)}</p>
           </div>
@@ -223,7 +223,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
       </>
       {statusFilter === managerProjectStatusFilter.active && (
         <div
-          className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard.order_status) ? "" : "deactive"}`}
+          className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : "deactive"}`}
         >
           <ChannelChatBtn id={1} />
         </div>

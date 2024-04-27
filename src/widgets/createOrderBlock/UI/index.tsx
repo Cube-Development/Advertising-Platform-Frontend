@@ -79,7 +79,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
               .catch(() => {
                 alert("Ошибка в создании поста");
               });
-          })
+          }),
         );
         await createOrderDates(formData.datetime)
           .unwrap()

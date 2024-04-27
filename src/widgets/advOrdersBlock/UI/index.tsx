@@ -35,7 +35,9 @@ export const AdvOrdersBlock: FC = () => {
   //   status: statusFilter,
   // };
 
-  // const { data: projects } = useGetAdvProjectsQuery(getParams);
+  // fetch1 --> const { data: projects } = useGetAdvProjectsQuery(getParams);
+  // data: projectsMan fetch2
+  // data: projectsManDev fetch3
 
   const projects =
     typeFilter === projectTypesFilter.myProject &&
