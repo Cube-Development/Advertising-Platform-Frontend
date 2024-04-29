@@ -265,16 +265,16 @@ export const CatalogBlock: FC = () => {
                 channels={cards || []}
                 onChangeCard={handleChangeCards}
               />
-              <div className={styles.cart}>
-                {cartPub && currentCart?.channels.length ? (
+            </div>
+            <div className={styles.cart}>
+              {cartPub && currentCart?.channels.length ? (
+                <CatalogCart cart={currentCart!} />
+              ) : (
+                cart &&
+                currentCart?.channels.length && (
                   <CatalogCart cart={currentCart!} />
-                ) : (
-                  cart &&
-                  currentCart?.channels.length && (
-                    <CatalogCart cart={currentCart!} />
-                  )
-                )}
-              </div>
+                )
+              )}
             </div>
           </div>
         </div>

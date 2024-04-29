@@ -42,7 +42,7 @@ export const ProfileCard: FC = () => {
           ? SelfEmployedData
           : SelfEmployedCardData;
 
-  const [createLegal, { isLoading, error }] = useCreateLegalMutation();
+  const [createLegal, { isLoading }] = useCreateLegalMutation();
 
   const onSubmit: SubmitHandler<IProfileData> = async (data) => {
     const dataWithLegalType = {
@@ -61,11 +61,6 @@ export const ProfileCard: FC = () => {
 
   return (
     <div className="container sidebar">
-      {error && (
-        <h1 style={{ fontSize: "50px", color: "red", fontWeight: "700" }}>
-          ОШИБКА БОЛДИКОООО АКАААААА!!!!
-        </h1>
-      )}
       {isLoading ? (
         "LOADING..."
       ) : (

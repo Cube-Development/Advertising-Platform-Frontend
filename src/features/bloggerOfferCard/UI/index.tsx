@@ -9,13 +9,14 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { IBloggerOfferCard } from "@shared/types/bloggerOffer";
 import { useAppSelector } from "@shared/store";
+import { IOrderFeature } from "@shared/types/order";
 
 interface BloggerOfferCardProps {
   card: IBloggerOfferCard;
   SeeLinkBtn: FC;
-  SendLinkBtn: FC;
-  AcceptOfferBtn: FC;
-  RejectOfferBtn: FC;
+  SendLinkBtn: FC<IOrderFeature>;
+  AcceptOfferBtn: FC<IOrderFeature>;
+  RejectOfferBtn: FC<IOrderFeature>;
   SeeReasonBtn: FC;
 }
 
@@ -36,19 +37,19 @@ export const BloggerOfferCard: FC<BloggerOfferCardProps> = ({
       <div className={styles.card__info}>
         <div className={styles.card__info__data}>
           <div className={styles.card__info__data__description}>
-            <img src={card.avatar} alt="" />
+            <img src={card?.avatar} alt="" />
             <div>
-              <p>{card.name}</p>
+              <p>{card?.name}</p>
               <span>{card.category}</span>
             </div>
           </div>
           <div className={styles.card__info__data__date}>
-            <span>№{card.id}</span>
-            <span>{card.date_coming}</span>
+            {/* <span>№{card.id}</span> */}
+            <span>{card?.date_coming}</span>
           </div>
         </div>
         <div className={styles.card__info__status}>
-          <p>{card.order_status}</p>
+          <p>{card?.order_status}</p>
         </div>
       </div>
 
@@ -57,20 +58,22 @@ export const BloggerOfferCard: FC<BloggerOfferCardProps> = ({
           <p>{t(`offers_blogger.card.date`)}</p>
           <span>
             {typeof card.publish_date === "object"
-              ? card.publish_date.date_from + " - " + card.publish_date.date_to
-              : card.publish_date}
+              ? card?.publish_date?.date_from +
+                " - " +
+                card?.publish_date.date_to
+              : card?.publish_date}
           </span>
         </div>
         <div>
           <p>{t(`offers_blogger.card.accommodation`)}</p>
-          <span>{card.format.small}</span>
+          <span>{card?.format?.small}</span>
         </div>
       </div>
       <div className={styles.card__column}>
         <div className={styles.card__column__top}>
           <p>{t(`offers_blogger.card.time`)}</p>
           <span>
-            {card.publish_time.time_from} - {card.publish_time.time_to}
+            {card?.publish_time?.time_from} - {card?.publish_time?.time_to}
           </span>
         </div>
         <div>
@@ -87,18 +90,18 @@ export const BloggerOfferCard: FC<BloggerOfferCardProps> = ({
             <div className={styles.card__active__title}>
               <p>{t(`offers_blogger.offer_status.active.title`)}</p>
               <span>
-                {typeof card.publish_date === "object"
-                  ? card.publish_date.date_from +
+                {typeof card?.publish_date === "object"
+                  ? card?.publish_date?.date_from +
                     " - " +
-                    card.publish_date.date_to
-                  : card.publish_date}{" "}
-                {card.publish_time.time_from} - {card.publish_time.time_to} (UTC
-                +5)
+                    card?.publish_date?.date_to
+                  : card?.publish_date}{" "}
+                {card?.publish_time?.time_from} - {card?.publish_time?.time_to}{" "}
+                (UTC +5)
               </span>
             </div>
             <div className={styles.card__active__buttons}>
               <SeeLinkBtn />
-              <SendLinkBtn />
+              <SendLinkBtn order_id={card?.id} url="https://t.me/abdsh/12311" />
             </div>
           </div>
         ) : statusFilter === offerStatusFilter.active &&
@@ -117,8 +120,8 @@ export const BloggerOfferCard: FC<BloggerOfferCardProps> = ({
             </div>
             <div className={styles.card__wait__buttons}>
               <div>
-                <RejectOfferBtn />
-                <AcceptOfferBtn />
+                <RejectOfferBtn order_id={card?.id} />
+                <AcceptOfferBtn order_id={card?.id} />
               </div>
               <SeeLinkBtn />
             </div>

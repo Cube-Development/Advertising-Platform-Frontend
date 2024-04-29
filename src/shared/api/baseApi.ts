@@ -1,5 +1,13 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
-import { BALANCE, BLOGGER_CHANNELS, CART, CART_PUB } from "@shared/api/tags";
+import {
+  ADV_PROJECTS,
+  BALANCE,
+  BLOGGER_CHANNELS,
+  BLOGGER_OFFERS,
+  CART,
+  CART_PUB,
+  LEGALS,
+} from "@shared/api/tags";
 
 export const baseApi = createApi({
   baseQuery: fetchBaseQuery({
@@ -7,5 +15,13 @@ export const baseApi = createApi({
   }),
   reducerPath: "api",
   endpoints: () => ({}),
-  tagTypes: [CART_PUB, BLOGGER_CHANNELS, CART, BALANCE],
+  tagTypes: [
+    CART_PUB,
+    BLOGGER_CHANNELS,
+    CART,
+    BALANCE,
+    BLOGGER_OFFERS,
+    ADV_PROJECTS,
+    LEGALS,
+  ],
 });

@@ -67,6 +67,9 @@ export const CatalogList: FC<CatalogListProps> = ({
           />
         ))}
       </div>
+      <div className={styles.card__loader}>
+        ЭЛЕМЕНТ ДЛЯ БЕСКОНЕЧНОЙ ПОДГРУЗКИ
+      </div>
     </div>
   );
 };

@@ -5,6 +5,7 @@
   align-items: center;
   justify-content: center;
   margin: 50px 0 100px 0;
+  max-height: 300px;
 
   .title {
     display: flex;
@@ -22,21 +23,20 @@
     grid-template: 1fr / 1fr 2fr;
     column-gap: 30px;
 
-    .content__right {
-      display: grid;
-      grid-auto-flow: row;
-      // position: relative;
+    .left {
+    }
+
+    .right {
+      .content__right {
+        display: grid;
+        grid-auto-flow: row;
+      }
+
+      .cart {
+        position: sticky;
+        bottom: 0;
+        width: 100%;
+      }
     }
   }
-}
-
-.cart {
-  position: fixed;
-  // overflow: hidden;
-  bottom: 0;
-  // width: 100%;
-}
-
-.right {
-  position: relative;
 }
