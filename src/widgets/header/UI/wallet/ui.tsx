@@ -8,7 +8,6 @@ import { useGetBalanceQuery } from "@shared/store/services/walletService";
 
 export const Wallet: FC = () => {
   const { t } = useTranslation();
-  // const wallet = 1000000000;
   const { data: balance } = useGetBalanceQuery();
   const [isMenuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -43,7 +42,7 @@ export const Wallet: FC = () => {
       <button className={styles.roww} onClick={(e) => toggleMenu(e)}>
         {balance ? (
           <p>
-            {balance.balance.toLocaleString()} <span>{t("symbol")}</span>
+            {balance?.balance?.toLocaleString()} <span>{t("symbol")}</span>
           </p>
         ) : (
           ""

@@ -25,7 +25,7 @@ interface AdvProjectSubcardProps {
   FeedbackBtn: FC;
   AcceptBtn: FC<IOrderFeature>;
   RejectBtn: FC<IOrderFeature>;
-  CheckBtn: FC;
+  CheckBtn: FC<IOrderFeature>;
   SeeBtn: FC;
   ChangeChannelBtn: FC;
   ChannelChatBtn: FC<IChannelChat>;
@@ -181,7 +181,7 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
                   <RejectBtn order_id={subcard.id} />
                 </div>
               )}
-              <CheckBtn />
+              <CheckBtn url={subcard.post_url} />
             </div>
           </div>
         ) : subcard?.api_status === orderStatus.in_progress ? (

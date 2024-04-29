@@ -9,14 +9,15 @@ export const RejectOffer: FC<IOrderFeature> = ({ order_id }) => {
   const { t } = useTranslation();
   const [cancelOffer] = useCancelOfferMutation();
   const handleOnClick = () => {
-    cancelOffer({ order_id })
-      .unwrap()
-      .then(() => {
-        console.log("success");
-      })
-      .catch((error) => {
-        console.error("error: ", error);
-      });
+    order_id &&
+      cancelOffer({ order_id })
+        .unwrap()
+        .then(() => {
+          console.log("success");
+        })
+        .catch((error) => {
+          console.error("error: ", error);
+        });
   };
   return (
     <MyButton

@@ -26,6 +26,7 @@ import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { IOrderFeature } from "@shared/types/order";
+import { AccountsLoader } from "@shared/ui/accountsLoader";
 
 interface AdvProjectCardProps {
   card: IAdvProjectCard;
@@ -33,7 +34,7 @@ interface AdvProjectCardProps {
   AcceptBtn: FC<IOrderFeature>;
   AcceptProjectBtn: FC;
   RejectBtn: FC<IOrderFeature>;
-  CheckBtn: FC;
+  CheckBtn: FC<IOrderFeature>;
   SeeBtn: FC;
   ChannelChatBtn: FC<IChannelChat>;
   ChangeChannelBtn: FC;
@@ -62,7 +63,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
     page: 1,
   };
 
-  const [getAdvSubprojects, { data: subcards }] =
+  const [getAdvSubprojects, { data: subcards, isLoading }] =
     useGetAdvSubprojectsMutation();
   // const subcards = card.subcard!;
   const handleChangeOpenSubcard = (): void => {
@@ -195,17 +196,22 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
         className={`${styles.card__btn} ${isSubcardOpen ? styles.less : styles.more}`}
         onClick={() => handleChangeOpenSubcard()}
       >
-        {isSubcardOpen
-          ? t(`orders_advertiser.card.see_less`)
-          : t(`orders_advertiser.card.see_more`)}
-
-        <ArrowSmallVerticalIcon
-          className={
-            isSubcardOpen
-              ? "active__icon rotate"
-              : "default__icon__white rotate_down"
-          }
-        />
+        {isLoading ? (
+          <AccountsLoader />
+        ) : isSubcardOpen ? (
+          t(`orders_advertiser.card.see_less`)
+        ) : (
+          t(`orders_advertiser.card.see_more`)
+        )}
+        {!isLoading && (
+          <ArrowSmallVerticalIcon
+            className={
+              isSubcardOpen
+                ? "active__icon rotate"
+                : "default__icon__white rotate_down"
+            }
+          />
+        )}
       </button>
     </div>
   );

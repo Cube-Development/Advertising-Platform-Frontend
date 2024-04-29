@@ -1,5 +1,5 @@
 import { authApi } from "@shared/api";
-import { BALANCE, LEGALS } from "@shared/api/tags";
+import { ADV_PROJECTS, BALANCE, LEGALS } from "@shared/api/tags";
 import { paymentTypes } from "@shared/config/payment";
 
 type PaymentOrderResponse = {
@@ -34,7 +34,7 @@ export const walletAPI = authApi.injectEndpoints({
         url: `/wallet/payment/project?project_id=${params}`,
         method: `POST`,
       }),
-      invalidatesTags: [BALANCE, LEGALS],
+      invalidatesTags: [BALANCE, LEGALS, ADV_PROJECTS],
     }),
     paymentDeposit: build.mutation<PaymentDepositResponse, PaymentDepositReq>({
       query: (params) => ({

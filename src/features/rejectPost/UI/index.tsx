@@ -9,14 +9,15 @@ export const RejectPost: FC<IOrderFeature> = ({ order_id }) => {
   const [rejectOrder] = useRejectOrderMutation();
   const { t } = useTranslation();
   const handleOnClick = () => {
-    rejectOrder({ order_id })
-      .unwrap()
-      .then(() => {
-        console.log("success");
-      })
-      .catch((error) => {
-        console.error("error: ", error);
-      });
+    order_id &&
+      rejectOrder({ order_id })
+        .unwrap()
+        .then(() => {
+          console.log("success");
+        })
+        .catch((error) => {
+          console.error("error: ", error);
+        });
   };
   return (
     <MyButton

@@ -9,14 +9,15 @@ export const AcceptPost: FC<IOrderFeature> = ({ order_id }) => {
   const { t } = useTranslation();
   const [acceptOrder] = useAcceptOrderMutation();
   const handleOnClick = () => {
-    acceptOrder({ order_id })
-      .unwrap()
-      .then(() => {
-        console.log("success");
-      })
-      .catch((error) => {
-        console.error("error: ", error);
-      });
+    order_id &&
+      acceptOrder({ order_id })
+        .unwrap()
+        .then(() => {
+          console.log("success");
+        })
+        .catch((error) => {
+          console.error("error: ", error);
+        });
   };
   return (
     <MyButton

@@ -26,8 +26,6 @@ import Cookies from "js-cookie";
 import { ICart } from "@shared/types/cart";
 import { GenerateGuestId } from "@features/generateGuestId";
 import { GetUserId } from "@features/getUserId";
-import { Toast, ToastAction } from "@radix-ui/react-toast";
-import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 
 export const CatalogBlock: FC = () => {
   const { t, i18n } = useTranslation();
@@ -258,23 +256,10 @@ export const CatalogBlock: FC = () => {
     }
   };
 
-  // const { toast } = useToast();
-
-  // const showToast = () => {
-  //   toast({
-  //     title: "Scheduled: Catch up ",
-  //     description: "Friday, February 10, 2023 at 5:57 PM",
-  //     action: (
-  //       <ToastAction altText="Goto schedule to undo">Undo</ToastAction>
-  //     ),
-  //   })
-  // };
-
   return (
     <div className="container">
       <div className={`${styles.wrapper}`}>
         <div className={styles.title}>{t("catalog.catalog")}</div>
-        {/* <button onClick={showToast}>Показать уведомление</button> */}
         <div className={styles.content}>
           <div className={styles.left}>
             <CatalogSearch
@@ -295,16 +280,16 @@ export const CatalogBlock: FC = () => {
                 )}
               />
             </div>
-            {/* <div className={styles.cart}>
+            <div className={styles.cart}>
               {cartPub && currentCart?.channels.length ? (
                 <CatalogCart cart={currentCart!} />
               ) : (
                 cart &&
-                currentCart?.channels.length && (
+                currentCart?.channels?.length > 0 && (
                   <CatalogCart cart={currentCart!} />
                 )
               )}
-            </div> */}
+            </div>
           </div>
         </div>
       </div>
