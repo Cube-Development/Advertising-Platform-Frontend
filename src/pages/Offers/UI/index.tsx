@@ -45,7 +45,7 @@ export const OffersPage: FC = () => {
     <>
       <BarFilter
         page={page}
-        listLength={!offers?.orders.length}
+        listLength={!!offers?.orders.length}
         setValue={setValue}
       />
       <BloggerOffer offers={offers!} />

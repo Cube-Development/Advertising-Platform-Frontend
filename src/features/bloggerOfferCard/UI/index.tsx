@@ -10,6 +10,8 @@ import styles from "./styles.module.scss";
 import { IBloggerOfferCard } from "@shared/types/bloggerOffer";
 import { useAppSelector } from "@shared/store";
 import { IOrderFeature } from "@shared/types/order";
+import { CheckDate } from "@shared/functions/checkDate";
+import { CountdownTimer } from "@features/countdownTimer";
 
 interface BloggerOfferCardProps {
   card: IBloggerOfferCard;
@@ -48,9 +50,33 @@ export const BloggerOfferCard: FC<BloggerOfferCardProps> = ({
             <span>{card?.date_coming}</span>
           </div>
         </div>
-        <div className={styles.card__info__status}>
-          <p>{card?.order_status}</p>
-        </div>
+        {statusFilter === offerStatusFilter.active ||
+        statusFilter === offerStatusFilter.wait ? (
+          <div className={styles.card__info__timer}>
+            <div className={styles.card__info__status}>
+              <p>{card?.order_status}</p>
+            </div>
+            <div className={styles.timer}>
+              <CountdownTimer date_to={card.date_coming} time="23:59" />
+              {/* {statusFilter !== offerStatusFilter.wait ? (
+              <CountdownTimer date_to={card.date_coming} time="24:00" />
+              ) : (
+                <CountdownTimer
+                  date_to={
+                    typeof card?.publish_date === "object"
+                      ? card?.publish_date.date_to
+                      : card?.publish_date
+                  }
+                  time={card.publish_time.time_from}
+                />
+              )} */}
+            </div>
+          </div>
+        ) : (
+          <div className={styles.card__info__status}>
+            <p>{card?.order_status}</p>
+          </div>
+        )}
       </div>
 
       <div className={styles.card__column}>
@@ -101,7 +127,14 @@ export const BloggerOfferCard: FC<BloggerOfferCardProps> = ({
             </div>
             <div className={styles.card__active__buttons}>
               <SeeLinkBtn />
-              <SendLinkBtn order_id={card?.id} url="https://t.me/abdsh/12311" />
+              <div
+                className={`${CheckDate(typeof card?.publish_date === "object" ? card?.publish_date.date_to : card?.publish_date) ? "" : "deactive"}`}
+              >
+                <SendLinkBtn
+                  order_id={card?.id}
+                  url="https://t.me/abdsh/12311"
+                />
+              </div>
             </div>
           </div>
         ) : statusFilter === offerStatusFilter.active &&

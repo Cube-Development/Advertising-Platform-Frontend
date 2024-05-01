@@ -4,12 +4,17 @@ import { useAppSelector } from "@shared/store";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { pageFilter } from "@shared/config/pageFilter";
 
 interface ZeroPlatformProps {
   AddPlatformBtn: FC;
+  page: pageFilter;
 }
 
-export const ZeroPlatform: FC<ZeroPlatformProps> = ({ AddPlatformBtn }) => {
+export const ZeroPlatform: FC<ZeroPlatformProps> = ({
+  AddPlatformBtn,
+  page,
+}) => {
   const { t } = useTranslation();
   const { statusFilter } = useAppSelector((state) => state.filter);
 
@@ -28,7 +33,11 @@ export const ZeroPlatform: FC<ZeroPlatformProps> = ({ AddPlatformBtn }) => {
             <div>
               <SadSmileIcon />
             </div>
-            <p>{t(`platforms_blogger.no_platform`)}</p>
+            {page === pageFilter.offer ? (
+              <p>{t(`offers_blogger.no_offers`)}</p>
+            ) : (
+              <p>{t(`platforms_blogger.no_platform`)}</p>
+            )}
           </>
         )}
       </div>

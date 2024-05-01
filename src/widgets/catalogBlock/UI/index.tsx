@@ -12,7 +12,7 @@ import {
 import { Languages } from "@shared/config/languages";
 import { useForm } from "react-hook-form";
 import { platformTypesNum } from "@shared/config/platformTypes";
-import { sortingFilter } from "@shared/config/platformData";
+import { platformData, sortingFilter } from "@shared/config/platformData";
 import {
   useAddToCommonCartMutation,
   useAddToPublicCartMutation,
@@ -34,12 +34,13 @@ export const CatalogBlock: FC = () => {
   const language = Languages.find((lang) => {
     return i18n.language === lang.name;
   });
+  const elements = 5;
 
   const { watch, reset, setValue, getValues } = useForm<getCatalogReq>({
     defaultValues: {
       language: language?.id || Languages[0].id,
       page: 1,
-      elements_on_page: 10,
+      elements_on_page: elements,
       filter: {
         platform: platformTypesNum.telegram,
         business: [],
@@ -59,6 +60,8 @@ export const CatalogBlock: FC = () => {
   const userId = GetUserId();
 
   const formFields = watch();
+
+  const { filter, sort, language: lang } = formFields;
 
   const { data: cart } = useReadCommonCartQuery(
     { language: language?.id || Languages[0].id },
@@ -83,14 +86,36 @@ export const CatalogBlock: FC = () => {
   const [cards, setCards] = useState<IPlatform[]>(
     catalogAuth?.channels ? catalogAuth?.channels : catalog?.channels || [],
   );
+
+  useEffect(() => {
+    console.log("setValue('page', 1)", cards.length);
+    console.log("catalogAuth?.channels", catalogAuth?.channels);
+    setValue(platformData.page, 1);
+    setCards(
+      catalogAuth?.channels ? catalogAuth?.channels : catalog?.channels || [],
+    );
+  }, [filter, sort, lang]);
+
   useEffect(() => {
     if (catalog) {
       setCards(catalog?.channels);
     }
   }, [catalog]);
+
   useEffect(() => {
+    console.log("catalogAuth", cards);
     if (catalogAuth) {
-      setCards(catalogAuth?.channels);
+      // const cardsEnd = cards.slice(-elements);
+      // console.log("cards", cards);
+      // console.log("cardsEnd", cardsEnd);
+      // console.log("catalogAuthEND", catalogAuth.channels);
+
+      const isIncluded = catalogAuth.channels.every((item) =>
+        cards.includes(item),
+      );
+      if (!isIncluded) {
+        setCards([...cards, ...catalogAuth.channels]);
+      }
     }
   }, [catalogAuth]);
 
@@ -262,11 +287,15 @@ export const CatalogBlock: FC = () => {
             <div className={styles.content__right}>
               <CatalogList
                 setValue={setValue}
+                page={formFields.page}
                 channels={cards || []}
                 onChangeCard={handleChangeCards}
+                isPagination={Boolean(
+                  catalogAuth?.channels.length || catalog?.channels.length,
+                )}
               />
             </div>
-            <div className={styles.cart}>
+            {/* <div className={styles.cart}>
               {cartPub && currentCart?.channels.length ? (
                 <CatalogCart cart={currentCart!} />
               ) : (
@@ -275,7 +304,7 @@ export const CatalogBlock: FC = () => {
                   <CatalogCart cart={currentCart!} />
                 )
               )}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

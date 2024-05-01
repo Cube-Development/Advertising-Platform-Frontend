@@ -18,6 +18,7 @@ import styles from "./styles.module.scss";
 import { ChannelDescription } from "@features/channelDescription";
 import { BloggerPlatformCardMenu } from "@features/bloggerPlatformCardMenu";
 import { DeleteChannel } from "@features/deleteChannel";
+import { pageFilter } from "@shared/config/pageFilter";
 
 interface BloggerPlatformProps {
   cards:
@@ -32,7 +33,7 @@ export const BloggerPlatform: FC<BloggerPlatformProps> = ({ cards }) => {
   return (
     <section className="container sidebar">
       {cards?.channels.length === 0 ? (
-        <ZeroPlatform AddPlatformBtn={AddPlatform} />
+        <ZeroPlatform AddPlatformBtn={AddPlatform} page={pageFilter.platform} />
       ) : (
         <div className={styles.wrapper}>
           {cards?.channels.map((card) => (

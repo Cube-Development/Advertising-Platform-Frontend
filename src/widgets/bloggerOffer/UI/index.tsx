@@ -9,6 +9,7 @@ import { IBloggerOffers } from "@shared/types/bloggerOffer";
 import styles from "./styles.module.scss";
 import { ZeroPlatform } from "@features/zeroPlatform";
 import { AddPlatform } from "@features/addPlatform";
+import { pageFilter } from "@shared/config/pageFilter";
 
 interface BloggerOfferProps {
   offers: IBloggerOffers;
@@ -18,7 +19,7 @@ export const BloggerOffer: FC<BloggerOfferProps> = ({ offers }) => {
   return (
     <div className="container sidebar">
       {offers?.orders.length === 0 ? (
-        <ZeroPlatform AddPlatformBtn={AddPlatform} />
+        <ZeroPlatform AddPlatformBtn={AddPlatform} page={pageFilter.offer} />
       ) : (
         <div className={styles.wrapper}>
           {offers?.orders?.map((card, index) => (
