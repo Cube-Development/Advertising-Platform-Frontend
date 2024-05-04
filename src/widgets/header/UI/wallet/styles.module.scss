@@ -21,7 +21,7 @@
     padding: 12px 10px;
     display: grid;
     column-gap: 10px;
-    grid-template-columns: 1fr auto; /* Одна часть для текста, вторая для иконки */
+    grid-template-columns: 1fr auto;
     align-items: center;
 
     svg {
@@ -34,11 +34,45 @@
       font-weight: 400;
       line-height: normal;
     }
+
+    p {
+      text-align: end;
+    }
   }
 
-  p {
-    margin: 0;
-    text-align: center;
+  .menu {
+    margin-top: 5px;
+    display: block;
+    position: absolute;
+    left: 0;
+    background-color: #fff;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    min-width: 200px;
+    border-radius: 20px;
+
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 0.75;
+    color: var(--Personal-colors-black);
+    overflow: hidden;
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+
+      li {
+        padding: 12px;
+        cursor: pointer;
+
+        &:hover {
+          background-color: #f0f0f0;
+          color: var(--Gradients-Gradient-1);
+        }
+      }
+    }
   }
 }
 
@@ -52,40 +86,5 @@
 
   svg {
     border-left: rgba(255, 255, 255, 0.25);
-  }
-}
-
-.menu {
-  margin-top: 5px;
-  display: block;
-  position: absolute;
-  left: 0;
-  background-color: #fff;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 1;
-  min-width: 200px;
-  border-radius: 20px;
-
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: 0.75;
-  color: var(--Personal-colors-black);
-  overflow: hidden;
-
-  ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-
-  li {
-    padding: 12px;
-    cursor: pointer;
-
-    &:hover {
-      background-color: #f0f0f0;
-      color: var(--Gradients-Gradient-1);
-    }
   }
 }

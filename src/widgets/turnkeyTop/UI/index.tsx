@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
 import { PriceList } from "@features/priceList";
@@ -8,6 +8,12 @@ interface TurnkeyTopProps {}
 
 export const TurnkeyTop: FC<TurnkeyTopProps> = () => {
   const { t } = useTranslation();
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, []);
   return (
     <section className="container">
       <div className={styles.wrapper}>

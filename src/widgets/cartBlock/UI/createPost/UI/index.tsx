@@ -55,7 +55,7 @@ export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
   };
 
   return (
-    <div>
+    <div className={styles.sticky_block}>
       <div className={styles.wrapper}>
         <div className={styles.top}>
           <div>

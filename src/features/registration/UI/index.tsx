@@ -24,7 +24,12 @@ export const Registration: FC = () => {
   return (
     <>
       {isAuth ? (
-        <ScrollLink to="registration" smooth={true} duration={500}>
+        <ScrollLink
+          to="registration"
+          smooth={true}
+          duration={500}
+          offset={-200}
+        >
           {registrationButton}
         </ScrollLink>
       ) : (

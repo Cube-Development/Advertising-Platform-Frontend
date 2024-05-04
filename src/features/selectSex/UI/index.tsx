@@ -1,6 +1,8 @@
 import { InfoIcon } from "@shared/assets";
+import { DEBOUNCE } from "@shared/config/common";
+import { useDebounce } from "@shared/store/hooks";
 import { MySlider } from "@shared/ui/slider";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -27,10 +29,9 @@ export const SelectSex: FC<SelectSexProps> = ({
   const { t } = useTranslation();
 
   const [position, setPosition] = useState(defaultValues || 50);
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newPosition = parseInt(e.target.value);
-    setPosition(newPosition);
-    // catalog
+  const debouncedPosition = useDebounce(position, DEBOUNCE.sex);
+
+  const handleChange = (newPosition: number) => {
     if (isCatalog) {
       const { filter } = getValues && getValues();
       const updatedFilter = {
@@ -45,6 +46,10 @@ export const SelectSex: FC<SelectSexProps> = ({
     }
   };
 
+  useEffect(() => {
+    handleChange(debouncedPosition as number);
+  }, [debouncedPosition]);
+
   return (
     <div className={isRow ? styles.wrapper__row : styles.wrapper}>
       <div className={styles.title}>
@@ -58,7 +63,7 @@ export const SelectSex: FC<SelectSexProps> = ({
           step={5}
           max={100}
           value={position}
-          onChange={handleChange}
+          onChange={(e) => setPosition(parseInt(e.target.value))}
         />
         <div className={styles.position}>
           <p>{100 - position} %</p>

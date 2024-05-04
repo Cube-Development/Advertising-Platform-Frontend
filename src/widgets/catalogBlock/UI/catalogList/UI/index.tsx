@@ -6,6 +6,7 @@ import { SelectOptions } from "@features/selectOptions";
 import {
   filterData,
   networkTypes,
+  platformData,
   sortingTypes,
 } from "@shared/config/platformData";
 import { IPlatform } from "@shared/types/platform";
@@ -14,19 +15,28 @@ import { UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { getCatalogReq } from "@shared/store/services/catalogService";
+import { DinamicPagination } from "@features/dinamicPagination";
 
 interface CatalogListProps {
   channels: IPlatform[];
   setValue: UseFormSetValue<getCatalogReq>;
+  page: number;
   onChangeCard: (cart: IPlatform) => void;
+  isPagination: boolean;
 }
 
 export const CatalogList: FC<CatalogListProps> = ({
   channels,
   setValue,
+  page,
+  isPagination,
   onChangeCard,
 }) => {
   const { t } = useTranslation();
+
+  const handleOnChangePage = () => {
+    setValue(platformData.page, page + 1);
+  };
 
   return (
     <div className={styles.wrapper}>
@@ -67,6 +77,7 @@ export const CatalogList: FC<CatalogListProps> = ({
           />
         ))}
       </div>
+      {isPagination && <DinamicPagination onChange={handleOnChangePage} />}
     </div>
   );
 };

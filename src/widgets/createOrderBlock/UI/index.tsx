@@ -17,6 +17,7 @@ import { useTranslation } from "react-i18next";
 import { Languages } from "@shared/config/languages";
 import { useNavigate } from "react-router-dom";
 import { paths } from "@shared/routing";
+import { scroller } from "react-scroll";
 
 interface CreateOrderBlockProps {}
 
@@ -27,6 +28,27 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
     const newBlur = { ...blur };
     newBlur[key] = false;
     setBlur(newBlur);
+
+    switch (key) {
+      case "post":
+        scroller.scrollTo("post", {
+          smooth: true,
+          offset: -80,
+        });
+        break;
+      case "datetime":
+        scroller.scrollTo("datetime", {
+          smooth: true,
+        });
+        break;
+      case "payment":
+        scroller.scrollTo("payment", {
+          smooth: true,
+        });
+        break;
+      default:
+        break;
+    }
   };
 
   const navigate = useNavigate();

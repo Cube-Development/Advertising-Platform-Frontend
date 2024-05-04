@@ -1,4 +1,5 @@
 import { authApi } from "@shared/api";
+import { ADV_PROJECTS, BLOGGER_OFFERS } from "@shared/api/tags";
 import { languagesNum } from "@shared/config/languages";
 import { IAdvProjects, IAdvSubprojects } from "@shared/types/advProject";
 import {
@@ -62,6 +63,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
         method: "PUT",
         params: params,
       }),
+      invalidatesTags: [BLOGGER_OFFERS, ADV_PROJECTS],
     }),
     rejectOrder: build.mutation<{ success: boolean }, { order_id: string }>({
       query: (params) => ({
@@ -69,6 +71,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
         method: "PUT",
         params: params,
       }),
+      invalidatesTags: [BLOGGER_OFFERS, ADV_PROJECTS],
     }),
     getAdvProjects: build.query<IAdvProjects, getProjectsCardReq>({
       query: (BodyParams) => ({
@@ -76,13 +79,15 @@ export const advProjectsAPI = authApi.injectEndpoints({
         method: `POST`,
         body: BodyParams,
       }),
+      providesTags: [ADV_PROJECTS],
     }),
-    getAdvSubprojects: build.mutation<IAdvSubprojects, getProjectSubcardReq>({
+    getAdvSubprojects: build.query<IAdvSubprojects, getProjectSubcardReq>({
       query: (BodyParams) => ({
         url: `/order/project/orders`,
         method: `POST`,
         body: BodyParams,
       }),
+      providesTags: [ADV_PROJECTS],
     }),
   }),
 });
@@ -95,5 +100,5 @@ export const {
   useCreateOrderDatesMutation,
   useRejectOrderMutation,
   useGetAdvProjectsQuery,
-  useGetAdvSubprojectsMutation,
+  useGetAdvSubprojectsQuery,
 } = advProjectsAPI;

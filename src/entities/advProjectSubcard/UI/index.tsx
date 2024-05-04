@@ -18,13 +18,14 @@ import { IChannelChat } from "@shared/types/common";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { IOrderFeature } from "@shared/types/order";
 
 interface AdvProjectSubcardProps {
   subcard: IAdvProjectSubcard;
   FeedbackBtn: FC;
-  AcceptBtn: FC;
-  RejectBtn: FC;
-  CheckBtn: FC;
+  AcceptBtn: FC<IOrderFeature>;
+  RejectBtn: FC<IOrderFeature>;
+  CheckBtn: FC<IOrderFeature>;
   SeeBtn: FC;
   ChangeChannelBtn: FC;
   ChannelChatBtn: FC<IChannelChat>;
@@ -176,11 +177,11 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
             <div className={styles.subcard__posted__buttons}>
               {typeFilter === projectTypesFilter.managerProject || (
                 <div className={styles.subcard__posted__buttons__top}>
-                  <AcceptBtn />
-                  <RejectBtn />
+                  <AcceptBtn order_id={subcard.id} />
+                  <RejectBtn order_id={subcard.id} />
                 </div>
               )}
-              <CheckBtn />
+              <CheckBtn url={subcard.post_url} />
             </div>
           </div>
         ) : subcard?.api_status === orderStatus.in_progress ? (

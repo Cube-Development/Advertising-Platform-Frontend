@@ -1,16 +1,17 @@
 import { authApi } from "@shared/api";
+import { IOrderFeature } from "@shared/types/order";
 
 export const moderatorAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
     // orders
-    orderAccept: build.mutation<{ success: boolean }, { order_id: string }>({
+    orderAccept: build.mutation<{ success: boolean }, IOrderFeature>({
       query: (params) => ({
         url: `/order/moderation/accept`,
         method: "PUT",
         params: params,
       }),
     }),
-    orderReject: build.mutation<{ success: boolean }, { order_id: string }>({
+    orderReject: build.mutation<{ success: boolean }, IOrderFeature>({
       query: (params) => ({
         url: `/order/moderation/reject`,
         method: "PUT",

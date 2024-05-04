@@ -15,7 +15,7 @@ import { managerProjectStatusFilter } from "@shared/config/projectFilter";
 import { useAppSelector } from "@shared/store";
 import {
   getProjectSubcardReq,
-  useGetAdvSubprojectsMutation,
+  useGetAdvSubprojectsQuery,
 } from "@shared/store/services/advOrdersService";
 import { IManagerProjectCard } from "@shared/types/managerProjects";
 import { IChannelChat } from "@shared/types/common";
@@ -23,12 +23,13 @@ import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { orderStatus } from "@shared/config/orderFilter";
+import { IOrderFeature } from "@shared/types/order";
 
 interface ManagerProjectCardProps {
   card: IManagerProjectCard;
   FeedbackBtn: FC;
-  AcceptBtn: FC;
-  RejectBtn: FC;
+  AcceptBtn: FC<IOrderFeature>;
+  RejectBtn: FC<IOrderFeature>;
   CheckBtn: FC;
   SeeBtn: FC;
   ChannelChatBtn: FC<IChannelChat>;
@@ -61,14 +62,12 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
     page: 1,
   };
 
-  // const [getAdvSubprojects, { data: subcards }] =
-  //   useGetAdvSubprojectsMutation();
+  // const { data: subcards } = useGetAdvSubprojectsQuery(getParams, {
+  //   skip: !isSubcardOpen,
+  // });
   const subcard = card.subcards!;
 
   const handleChangeOpenSubcard = (): void => {
-    // if (!isSubcardOpen) {
-    //   getAdvSubprojects(getParams);
-    // }
     setSubcardOpen(!isSubcardOpen);
   };
 
@@ -82,9 +81,7 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
         <div className={styles.card__description}>
           <div className={styles.card__description__data}>
             <div className={styles.card__description__data__title}>
-              <p>
-                {t("orders_advertiser.card.campaign")} {card.name}
-              </p>
+              <p>{card.name}</p>
               <span>{card.tarif}</span>
             </div>
             <div className={styles.card__description__data__date}>

@@ -1,4 +1,5 @@
 import { authApi, baseApi } from "@shared/api";
+import { CART, CART_PUB, CATALOG } from "@shared/api/tags";
 import { languagesNum } from "@shared/config/languages";
 import { ICart } from "@shared/types/cart";
 
@@ -31,7 +32,7 @@ export const authCartAPI = authApi.injectEndpoints({
         method: `GET`,
         params: params,
       }),
-      // providesTags: [CART_PUB, CART],
+      providesTags: [CART_PUB, CART],
     }),
     addToCommonCart: build.mutation<ICart, AddChannelReq>({
       query: (params) => ({
@@ -39,7 +40,7 @@ export const authCartAPI = authApi.injectEndpoints({
         method: `POST`,
         params: params,
       }),
-      // invalidatesTags: [CART_PUB, CART],
+      invalidatesTags: [CART_PUB, CART, CATALOG],
     }),
     removeFromCommonCart: build.mutation<ICart, RemoveChannelReq>({
       query: (params) => ({
@@ -47,7 +48,7 @@ export const authCartAPI = authApi.injectEndpoints({
         method: `POST`,
         params: params,
       }),
-      // invalidatesTags: [CART_PUB, CART],
+      invalidatesTags: [CART_PUB, CART, CATALOG],
     }),
     saveCart: build.mutation<{ success: boolean }, void>({
       query: () => ({
@@ -83,7 +84,7 @@ export const publicCartAPI = baseApi.injectEndpoints({
         method: `GET`,
         params: params,
       }),
-      // providesTags: [CART_PUB, CART],
+      providesTags: [CART_PUB, CART],
     }),
     addToPublicCart: build.mutation<ICart, AddChannelReq>({
       query: (params) => ({
@@ -91,7 +92,7 @@ export const publicCartAPI = baseApi.injectEndpoints({
         method: `POST`,
         params: params,
       }),
-      // invalidatesTags: [CART_PUB, CART],
+      invalidatesTags: [CART_PUB, CART, CATALOG],
     }),
     removeFromPublicCart: build.mutation<ICart, RemoveChannelReq>({
       query: (params) => ({
@@ -99,7 +100,7 @@ export const publicCartAPI = baseApi.injectEndpoints({
         method: `POST`,
         params: params,
       }),
-      // invalidatesTags: [CART_PUB, CART],
+      invalidatesTags: [CART_PUB, CART, CATALOG],
     }),
   }),
 });

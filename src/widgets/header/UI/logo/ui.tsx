@@ -9,8 +9,16 @@ interface LogoProps {
 }
 
 export const Logo: FC<LogoProps> = ({ currentRole }) => {
+  const handleLogoClick = () => {
+    if (
+      window.location.pathname === paths.mainBlogger ||
+      window.location.pathname === paths.main
+    ) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  };
   return (
-    <div>
+    <div onClick={handleLogoClick}>
       <Link to={currentRole === roles.blogger ? paths.mainBlogger : paths.main}>
         <img src="/images/assets/logo.svg" className={styles.logo} alt="/" />
       </Link>

@@ -12,28 +12,29 @@ import {
 import { Languages } from "@shared/config/languages";
 import {
   advManagerProjectStatusFilter,
-  advMyProjectStatus,
   myProjectStatusFilter,
   projectTypesFilter,
 } from "@shared/config/projectFilter";
 import { useAppSelector } from "@shared/store";
 import {
   getProjectSubcardReq,
-  useGetAdvSubprojectsMutation,
+  useGetAdvSubprojectsQuery,
 } from "@shared/store/services/advOrdersService";
 import { IAdvProjectCard } from "@shared/types/advProject";
 import { IChannelChat } from "@shared/types/common";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { IOrderFeature } from "@shared/types/order";
+import { AccountsLoader } from "@shared/ui/accountsLoader";
 
 interface AdvProjectCardProps {
   card: IAdvProjectCard;
   FeedbackBtn: FC;
-  AcceptBtn: FC;
+  AcceptBtn: FC<IOrderFeature>;
   AcceptProjectBtn: FC;
-  RejectBtn: FC;
-  CheckBtn: FC;
+  RejectBtn: FC<IOrderFeature>;
+  CheckBtn: FC<IOrderFeature>;
   SeeBtn: FC;
   ChannelChatBtn: FC<IChannelChat>;
   ChangeChannelBtn: FC;
@@ -62,13 +63,11 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
     page: 1,
   };
 
-  // const [getAdvSubprojects, { data: subcards }] =
-  //   useGetAdvSubprojectsMutation();
-  const subcards = card.subcard!;
+  const { data: subcards, isLoading } = useGetAdvSubprojectsQuery(getParams, {
+    skip: !isSubcardOpen,
+  });
+  // const subcards = card.subcard!;
   const handleChangeOpenSubcard = (): void => {
-    // if (!isSubcardOpen) {
-    //   getAdvSubprojects(getParams);
-    // }
     setSubcardOpen(!isSubcardOpen);
   };
 
@@ -80,9 +79,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
         <div className={styles.card__description}>
           <div className={styles.card__description__data}>
             <div className={styles.card__description__data__title}>
-              <p>
-                {t("orders_advertiser.card.campaign")} {card.name}
-              </p>
+              <p>{card.name}</p>
               <span>{card?.tarif}</span>
             </div>
             <div className={styles.card__description__data__date}>
@@ -176,8 +173,8 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
 
       {isSubcardOpen && (
         <div className={styles.subcard}>
-          {/* {subcards?.orders.map((subcard, index) => ( */}
-          {subcards.map((subcard, index) => (
+          {/* {subcards.map((subcard, index) => ( */}
+          {subcards?.orders.map((subcard, index) => (
             <AdvProjectSubcard
               key={index}
               subcard={subcard}
@@ -197,17 +194,22 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
         className={`${styles.card__btn} ${isSubcardOpen ? styles.less : styles.more}`}
         onClick={() => handleChangeOpenSubcard()}
       >
-        {isSubcardOpen
-          ? t(`orders_advertiser.card.see_less`)
-          : t(`orders_advertiser.card.see_more`)}
-
-        <ArrowSmallVerticalIcon
-          className={
-            isSubcardOpen
-              ? "active__icon rotate"
-              : "default__icon__white rotate_down"
-          }
-        />
+        {isLoading ? (
+          <AccountsLoader />
+        ) : isSubcardOpen ? (
+          t(`orders_advertiser.card.see_less`)
+        ) : (
+          t(`orders_advertiser.card.see_more`)
+        )}
+        {!isLoading && (
+          <ArrowSmallVerticalIcon
+            className={
+              isSubcardOpen
+                ? "active__icon rotate"
+                : "default__icon__white rotate_down"
+            }
+          />
+        )}
       </button>
     </div>
   );
