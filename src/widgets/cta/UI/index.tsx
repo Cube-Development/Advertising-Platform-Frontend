@@ -6,6 +6,8 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Element } from "react-scroll";
 import styles from "./styles.module.scss";
+import { addChannelQueries } from "@shared/config/addChannelQueries";
+import { paths } from "@shared/routing";
 
 interface CtaProps {
   page: string;
@@ -37,7 +39,9 @@ export const Cta: FC<CtaProps> = ({ page }) => {
               {page === "main_page_advertiser" ? (
                 <SeeCatalog />
               ) : (
-                <AddPlatform />
+                <AddPlatform
+                  path={`${paths.addPlatform}?add_channel=${addChannelQueries.main}`}
+                />
               )}
             </div>
           </div>

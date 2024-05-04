@@ -6,6 +6,7 @@ import {
   BLOGGER_OFFERS,
   CART,
   CART_PUB,
+  CATALOG,
   LEGALS,
 } from "@shared/api/tags";
 
@@ -19,6 +20,7 @@ export const baseApi = createApi({
     CART_PUB,
     BLOGGER_CHANNELS,
     CART,
+    CATALOG,
     BALANCE,
     BLOGGER_OFFERS,
     ADV_PROJECTS,

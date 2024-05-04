@@ -5,13 +5,16 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { useAppSelector } from "@shared/store";
 import { roles } from "@shared/config/roles";
+import { IAddChannelQuery } from "@shared/types/platform";
+import { addChannelQueries } from "@shared/config/addChannelQueries";
+import { paths } from "@shared/routing";
 
 interface BarTopProps {
   listLength: boolean;
   page: pageFilter;
   NewProjectBtn: FC<IStartProjectProps>;
   TurnkeyProjectBtn: FC<IStartProjectProps>;
-  AddPlatformBtn: FC;
+  AddPlatformBtn: FC<IAddChannelQuery>;
 }
 
 export const BarTop: FC<BarTopProps> = ({
@@ -47,14 +50,30 @@ export const BarTop: FC<BarTopProps> = ({
       ) : page === pageFilter.platform ? (
         <>
           <p>{t(`platforms_blogger.my_platform`)}</p>
-          {!listLength && <div>{<AddPlatformBtn />}</div>}
+          {!listLength && (
+            <div>
+              {
+                <AddPlatformBtn
+                  path={`${paths.addPlatform}?add_channel=${addChannelQueries.platforms}`}
+                />
+              }
+            </div>
+          )}
         </>
       ) : (
         page === pageFilter.offer && (
           <>
             <p>{t(`offers_blogger.my_offers`)}</p>
 
-            {listLength && <div>{<AddPlatformBtn />}</div>}
+            {listLength && (
+              <div>
+                {
+                  <AddPlatformBtn
+                    path={`${paths.addPlatform}?add_channel=${addChannelQueries.offers}`}
+                  />
+                }
+              </div>
+            )}
           </>
         )
       )}

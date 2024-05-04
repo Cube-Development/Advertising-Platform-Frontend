@@ -7,6 +7,7 @@ import {
   BLOGGER_OFFERS,
   CART,
   CART_PUB,
+  CATALOG,
   LEGALS,
 } from "@shared/api/tags";
 
@@ -16,6 +17,7 @@ export const authApi = createApi({
   endpoints: () => ({}),
   tagTypes: [
     CART,
+    CATALOG,
     BLOGGER_CHANNELS,
     CART_PUB,
     BALANCE,

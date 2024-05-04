@@ -81,12 +81,13 @@ export const advProjectsAPI = authApi.injectEndpoints({
       }),
       providesTags: [ADV_PROJECTS],
     }),
-    getAdvSubprojects: build.mutation<IAdvSubprojects, getProjectSubcardReq>({
+    getAdvSubprojects: build.query<IAdvSubprojects, getProjectSubcardReq>({
       query: (BodyParams) => ({
         url: `/order/project/orders`,
         method: `POST`,
         body: BodyParams,
       }),
+      providesTags: [ADV_PROJECTS],
     }),
   }),
 });
@@ -99,5 +100,5 @@ export const {
   useCreateOrderDatesMutation,
   useRejectOrderMutation,
   useGetAdvProjectsQuery,
-  useGetAdvSubprojectsMutation,
+  useGetAdvSubprojectsQuery,
 } = advProjectsAPI;

@@ -1,4 +1,5 @@
 import { baseApi } from "@shared/api";
+import { CATALOG } from "@shared/api/tags";
 import { languagesNum } from "@shared/config/languages";
 import { sortingFilter } from "@shared/config/platformData";
 import { platformTypesNum } from "@shared/config/platformTypes";
@@ -30,6 +31,7 @@ export const catalogAPI = baseApi.injectEndpoints({
         method: "POST",
         body: BodyParams,
       }),
+      providesTags: [CATALOG],
     }),
   }),
 });

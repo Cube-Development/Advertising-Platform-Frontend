@@ -1,3 +1,4 @@
+import { addChannelQueries } from "@shared/config/addChannelQueries";
 import { paths } from "@shared/routing";
 
 export const nonAuthNavbar = [
@@ -17,5 +18,8 @@ export const bloggerNavbar = [
     href: `${paths.mainBlogger}#calculateIncome`,
     img: "calculator.svg",
   },
-  { text: "pages.addPlatform", href: paths.addPlatform },
+  {
+    text: "pages.addPlatform",
+    href: `${paths.addPlatform}?add_channel=${addChannelQueries.main}`,
+  },
 ];

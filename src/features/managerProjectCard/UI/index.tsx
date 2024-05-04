@@ -15,7 +15,7 @@ import { managerProjectStatusFilter } from "@shared/config/projectFilter";
 import { useAppSelector } from "@shared/store";
 import {
   getProjectSubcardReq,
-  useGetAdvSubprojectsMutation,
+  useGetAdvSubprojectsQuery,
 } from "@shared/store/services/advOrdersService";
 import { IManagerProjectCard } from "@shared/types/managerProjects";
 import { IChannelChat } from "@shared/types/common";
@@ -62,14 +62,12 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
     page: 1,
   };
 
-  // const [getAdvSubprojects, { data: subcards }] =
-  //   useGetAdvSubprojectsMutation();
+  // const { data: subcards } = useGetAdvSubprojectsQuery(getParams, {
+  //   skip: !isSubcardOpen,
+  // });
   const subcard = card.subcards!;
 
   const handleChangeOpenSubcard = (): void => {
-    // if (!isSubcardOpen) {
-    //   getAdvSubprojects(getParams);
-    // }
     setSubcardOpen(!isSubcardOpen);
   };
 

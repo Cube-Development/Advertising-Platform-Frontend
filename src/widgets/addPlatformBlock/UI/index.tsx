@@ -10,7 +10,7 @@ interface AddPlatformBlockProps {}
 
 export const AddPlatformBlock: FC<AddPlatformBlockProps> = () => {
   let onBlur;
-  const { channel_id } = QueryParams();
+  const { channel_id, add_channel } = QueryParams();
 
   channel_id
     ? (onBlur = { link: true, parameters: false })
@@ -28,7 +28,7 @@ export const AddPlatformBlock: FC<AddPlatformBlockProps> = () => {
 
   return (
     <div>
-      <PlatformTop channel_id={channel_id!} />
+      <PlatformTop channel_id={channel_id!} query={add_channel!} />
       <PlatformLink
         currentPlatform={currentPlatform}
         setCurrentPlatform={setCurrentPlatform}

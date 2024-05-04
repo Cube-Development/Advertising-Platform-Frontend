@@ -36,7 +36,7 @@ export const BloggerPlatform: FC<BloggerPlatformProps> = ({ cards }) => {
         <ZeroPlatform AddPlatformBtn={AddPlatform} page={pageFilter.platform} />
       ) : (
         <div className={styles.wrapper}>
-          {cards?.channels.map((card) => (
+          {cards?.channels?.map((card) => (
             <BloggerPlatformCard
               key={card.id}
               card={card}

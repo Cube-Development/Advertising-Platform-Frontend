@@ -18,7 +18,7 @@ import {
 import { useAppSelector } from "@shared/store";
 import {
   getProjectSubcardReq,
-  useGetAdvSubprojectsMutation,
+  useGetAdvSubprojectsQuery,
 } from "@shared/store/services/advOrdersService";
 import { IAdvProjectCard } from "@shared/types/advProject";
 import { IChannelChat } from "@shared/types/common";
@@ -63,13 +63,11 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
     page: 1,
   };
 
-  const [getAdvSubprojects, { data: subcards, isLoading }] =
-    useGetAdvSubprojectsMutation();
+  const { data: subcards, isLoading } = useGetAdvSubprojectsQuery(getParams, {
+    skip: !isSubcardOpen,
+  });
   // const subcards = card.subcard!;
   const handleChangeOpenSubcard = (): void => {
-    if (!isSubcardOpen) {
-      getAdvSubprojects(getParams);
-    }
     setSubcardOpen(!isSubcardOpen);
   };
 
