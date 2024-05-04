@@ -28,7 +28,6 @@ export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
 
   const handleCheckDatetimes = () => {
     const form: ICreatePostForm = getValues();
-    console.log(form.datetime);
     if (cards.length === form.datetime.orders.length) {
       const condition = form.datetime.orders.reduce((acc, item) => {
         return (
@@ -39,7 +38,6 @@ export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
             (Boolean(item.date_from) && Boolean(item.date_to)))
         );
       }, true);
-      console.log(condition);
       if (condition) {
         onChangeBlur("payment");
       }
@@ -47,7 +45,7 @@ export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
   };
 
   return (
-    <div className={`container ${isBlur ? "blur" : ""}`}>
+    <div id="datetime" className={`container ${isBlur ? "blur" : ""}`}>
       <div className={styles.wrapper}>
         <div className={styles.top}>
           <div className={styles.title}>

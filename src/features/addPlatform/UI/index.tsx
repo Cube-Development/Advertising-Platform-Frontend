@@ -1,19 +1,14 @@
-import { paths } from "@shared/routing";
+import { IAddChannelQuery } from "@shared/types/platform";
 import { MyButton } from "@shared/ui";
-import { ButtonHTMLAttributes, FC } from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import styles from "./styles.module.scss";
 
-interface AddPlatformProps {
-  props?: ButtonHTMLAttributes<HTMLButtonElement>;
-}
-
-export const AddPlatform: FC<AddPlatformProps> = ({ props }) => {
+export const AddPlatform: FC<IAddChannelQuery> = ({ props, path }) => {
   const { t } = useTranslation();
 
   return (
-    <Link to={paths.addPlatform}>
+    <Link to={path}>
       <MyButton {...props}>{t(`btn_add_platform`)}</MyButton>
     </Link>
   );

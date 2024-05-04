@@ -4,9 +4,11 @@ import { CalculatorIcon } from "@shared/assets";
 import { IncomeCalculator } from "@shared/ui/incomeCalculator";
 import { SliderSubs } from "@shared/ui/sliderSubs";
 import { ThemeChanger } from "@shared/ui/themeChanger";
-import { FC, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { paths } from "@shared/routing";
+import { addChannelQueries } from "@shared/config/addChannelQueries";
 
 interface CalculateIncomeProps {
   page: string;
@@ -22,8 +24,22 @@ export const CalculateIncome: FC<CalculateIncomeProps> = ({ page }) => {
     setThemeCoefficient(coefficient);
   };
 
+  const calculateIncomeRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (window.location.hash === "#calculateIncome") {
+      calculateIncomeRef.current?.scrollIntoView({
+        behavior: "smooth",
+      });
+    }
+  }, []);
+
   return (
-    <section id="calculateIncome" className={styles.calculate__wrapper}>
+    <section
+      id="calculateIncome"
+      ref={calculateIncomeRef}
+      className={styles.calculate__wrapper}
+    >
       <div className="container">
         <div className={styles.calculate__row}>
           <CalculatorIcon />
@@ -46,7 +62,10 @@ export const CalculateIncome: FC<CalculateIncomeProps> = ({ page }) => {
                 calculatedIncome={calculatedIncome}
               />
               <SliderSubs onUserCountChange={setUserCount} />
-              <AddPlatform props={{ className: styles.button }} />
+              <AddPlatform
+                path={`${paths.addPlatform}?add_channel=${addChannelQueries.main}`}
+                props={{ className: styles.button }}
+              />
             </div>
           </div>
         </div>

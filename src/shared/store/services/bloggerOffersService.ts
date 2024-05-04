@@ -1,13 +1,10 @@
 import { authApi } from "@shared/api";
+import { ADV_PROJECTS, BLOGGER_OFFERS } from "@shared/api/tags";
 import { languagesNum } from "@shared/config/languages";
 import { offerStatusFilter } from "@shared/config/offerFilter";
 import { platformTypesNum } from "@shared/config/platformTypes";
 import { IBloggerOffers } from "@shared/types/bloggerOffer";
-
-export interface PublishPostReq {
-  order_id: string;
-  url: string;
-}
+import { IOrderFeature } from "@shared/types/order";
 
 interface OrderDate {
   date: string;
@@ -21,11 +18,6 @@ interface OrderDates {
   ];
 }
 
-interface AcceptOrderReq {
-  order_id: string;
-  date?: string;
-}
-
 export interface getOrdersByStatusReq {
   platform: platformTypesNum;
   language: languagesNum;
@@ -37,12 +29,13 @@ export interface getOrdersByStatusReq {
 
 export const bloggerOffersAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
-    publishPostBlogger: build.mutation<{ success: boolean }, PublishPostReq>({
+    publishPostBlogger: build.mutation<{ success: boolean }, IOrderFeature>({
       query: (body) => ({
         url: `/order/post/published`,
         method: "POST",
         body: body,
       }),
+      invalidatesTags: [BLOGGER_OFFERS, ADV_PROJECTS],
     }),
     checkOrderDates: build.mutation<
       OrderDate | OrderDates,
@@ -54,12 +47,13 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
         params: params,
       }),
     }),
-    acceptOffer: build.mutation<{ success: boolean }, AcceptOrderReq>({
+    acceptOffer: build.mutation<{ success: boolean }, IOrderFeature>({
       query: (body) => ({
         url: `/order/blogger/accept`,
         method: "PUT",
         body: body,
       }),
+      invalidatesTags: [BLOGGER_OFFERS, ADV_PROJECTS],
     }),
     cancelOffer: build.mutation<{ success: boolean }, { order_id: string }>({
       query: (params) => ({
@@ -67,13 +61,7 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
         method: "PUT",
         params: params,
       }),
-    }),
-    rejectOffer: build.mutation<{ success: boolean }, { order_id: string }>({
-      query: (params) => ({
-        url: `/order/blogger/reject`,
-        method: "PUT",
-        params: params,
-      }),
+      invalidatesTags: [BLOGGER_OFFERS, ADV_PROJECTS],
     }),
     getBloggerOrders: build.query<IBloggerOffers, getOrdersByStatusReq>({
       query: (BodyParams) => ({
@@ -81,6 +69,7 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
         method: `POST`,
         body: BodyParams,
       }),
+      providesTags: [BLOGGER_OFFERS],
     }),
   }),
 });
@@ -90,6 +79,5 @@ export const {
   useCancelOfferMutation,
   useCheckOrderDatesMutation,
   usePublishPostBloggerMutation,
-  useRejectOfferMutation,
   useGetBloggerOrdersQuery,
 } = bloggerOffersAPI;

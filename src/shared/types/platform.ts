@@ -3,7 +3,7 @@ import {
   platformTypesStr,
   platformTypesNum,
 } from "@shared/config/platformTypes";
-import { FC } from "react";
+import { ButtonHTMLAttributes, FC } from "react";
 import { IOption } from "./common";
 
 export interface IAddChannelIdentification {
@@ -153,4 +153,9 @@ export interface ICreateOrderBlur {
   post: boolean;
   datetime: boolean;
   payment: boolean;
+}
+
+export interface IAddChannelQuery {
+  props?: ButtonHTMLAttributes<HTMLButtonElement>;
+  path: string;
 }

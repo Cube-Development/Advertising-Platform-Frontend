@@ -3,6 +3,7 @@ type QueryParams = {
   sessionState?: string | null;
   state?: string | null;
   channel_id?: string | null;
+  add_channel?: string | null;
 };
 
 export const QueryParams = () => {
@@ -21,6 +22,9 @@ export const QueryParams = () => {
   }
   if (urlParams.has("channel_id")) {
     queryParams.channel_id = urlParams.get("channel_id");
+  }
+  if (urlParams.has("add_channel")) {
+    queryParams.add_channel = urlParams.get("add_channel");
   }
 
   return queryParams;

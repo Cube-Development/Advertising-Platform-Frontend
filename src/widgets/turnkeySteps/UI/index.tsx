@@ -21,6 +21,13 @@ export const TurnkeySteps: FC<TurnkeyStepsProps> = () => {
     returnObjects: true,
   });
 
+  const handleClick = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <section className="layout">
       <div className="container">
@@ -77,7 +84,7 @@ export const TurnkeySteps: FC<TurnkeyStepsProps> = () => {
               </big>
             </div>
           </div>
-          <div className={styles.bottom}>
+          <div className={styles.bottom} onClick={handleClick}>
             <MyButton buttons_type="button__orange" className={styles.button}>
               {t("turnkey.how_it_works.choose_tarif")}
             </MyButton>

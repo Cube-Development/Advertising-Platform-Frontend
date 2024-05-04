@@ -31,3 +31,7 @@ export const enum POST {
   postLength = 200,
   commentLength = 300,
 }
+
+export const enum DEBOUNCE {
+  sex = 1000,
+}

@@ -17,6 +17,15 @@ export const Nav: FC<NavProps> = ({ isAuth, currentRole }) => {
 
   const handleNavigation = (href: string) => {
     router(href);
+    if (href.includes("#calculateIncome")) {
+      const calculateIncomeElement = document.getElementById("calculateIncome");
+      if (calculateIncomeElement) {
+        calculateIncomeElement.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+        });
+      }
+    }
   };
 
   const { t } = useTranslation();

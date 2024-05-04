@@ -11,7 +11,7 @@ export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({ isBlur }) => {
   const { t } = useTranslation();
 
   return (
-    <div className={`layout ${isBlur ? "blur" : ""}`}>
+    <div id="payment" className={`layout ${isBlur ? "blur" : ""}`}>
       <div className="container">
         <div className={styles.wrapper}>
           <div className={styles.content}>

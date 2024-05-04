@@ -29,36 +29,36 @@ export const AdvOrdersBlock: FC = () => {
   const { typeFilter, statusFilter } = useAppSelector((state) => state.filter);
   const page = pageFilter.order;
 
-  // const getParams: getProjectsCardReq = {
-  //   page: 1,
-  //   date_sort: "increase",
-  //   status: statusFilter,
-  // };
+  const getParams: getProjectsCardReq = {
+    page: 1,
+    date_sort: "increase",
+    status: statusFilter,
+  };
 
-  // fetch1 --> const { data: projects } = useGetAdvProjectsQuery(getParams);
+  const { data: projects } = useGetAdvProjectsQuery(getParams);
   // data: projectsMan fetch2
   // data: projectsManDev fetch3
 
-  const projects =
-    typeFilter === projectTypesFilter.myProject &&
-    statusFilter === myProjectStatusFilter.active
-      ? advMyProjectActiveCARDS
-      : typeFilter === projectTypesFilter.myProject &&
-          statusFilter === myProjectStatusFilter.completed
-        ? advMyProjectCompleteCARDS
-        : typeFilter === projectTypesFilter.managerProject &&
-            statusFilter === advManagerProjectStatusFilter.active
-          ? advManagerProjectActiveCARDS
-          : typeFilter === projectTypesFilter.managerProject &&
-              statusFilter === advManagerProjectStatusFilter.agreed
-            ? advManagerProjectAgreedCARDS
-            : typeFilter === projectTypesFilter.managerProject &&
-                statusFilter === advManagerProjectStatusFilter.completed
-              ? advManagerProjectCompleteCARDS
-              : typeFilter === projectTypesFilter.managerProject &&
-                  statusFilter === advManagerProjectStatusFilter.develop
-                ? advManagerProjectOnDevelopCARDS
-                : advManagerProjectCompleteCARDS;
+  // const projects =
+  //   typeFilter === projectTypesFilter.myProject &&
+  //   statusFilter === myProjectStatusFilter.active
+  //     ? advMyProjectActiveCARDS
+  //     : typeFilter === projectTypesFilter.myProject &&
+  //         statusFilter === myProjectStatusFilter.completed
+  //       ? advMyProjectCompleteCARDS
+  //       : typeFilter === projectTypesFilter.managerProject &&
+  //           statusFilter === advManagerProjectStatusFilter.active
+  //         ? advManagerProjectActiveCARDS
+  //         : typeFilter === projectTypesFilter.managerProject &&
+  //             statusFilter === advManagerProjectStatusFilter.agreed
+  //           ? advManagerProjectAgreedCARDS
+  //           : typeFilter === projectTypesFilter.managerProject &&
+  //               statusFilter === advManagerProjectStatusFilter.completed
+  //             ? advManagerProjectCompleteCARDS
+  //             : typeFilter === projectTypesFilter.managerProject &&
+  //                 statusFilter === advManagerProjectStatusFilter.develop
+  //               ? advManagerProjectOnDevelopCARDS
+  //               : advManagerProjectCompleteCARDS;
 
   return (
     <>

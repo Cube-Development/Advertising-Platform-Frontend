@@ -56,6 +56,7 @@ export interface IAdvProjectSubcard {
   cpv: number;
   male: number;
   female: number;
+  post_url?: string;
 }
 
 export interface IAdvManagerProjectsDev {

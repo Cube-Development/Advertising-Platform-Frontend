@@ -13,12 +13,13 @@ import { IManagerProjectSubcard } from "@shared/types/managerProjects";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { IOrderFeature } from "@shared/types/order";
 
 interface ManagerProjectSubcardProps {
   subcard: IManagerProjectSubcard;
   FeedbackBtn: FC;
-  AcceptBtn: FC;
-  RejectBtn: FC;
+  AcceptBtn: FC<IOrderFeature>;
+  RejectBtn: FC<IOrderFeature>;
   CheckBtn: FC;
   SeePostBtn: FC;
   ChangeChannelBtn: FC;
@@ -160,8 +161,8 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
             </div>
             <div className={styles.subcard__posted__buttons}>
               <div className={styles.subcard__posted__buttons__top}>
-                <AcceptBtn />
-                <RejectBtn />
+                <AcceptBtn order_id={subcard.id} />
+                <RejectBtn order_id={subcard.id} />
               </div>
               <CheckBtn />
             </div>
@@ -207,7 +208,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
             </div>
             <div className={styles.subcard__posted__buttons}>
               <div className={styles.subcard__posted__buttons__top}>
-                <AcceptBtn />
+                <AcceptBtn order_id={subcard.id} />
                 <ChangeChannelBtn />
               </div>
               <CheckBtn />

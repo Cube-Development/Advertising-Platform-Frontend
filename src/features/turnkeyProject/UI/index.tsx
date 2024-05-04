@@ -11,7 +11,7 @@ export const TurnkeyProject: FC<IStartProjectProps> = ({ listLength }) => {
   const { t } = useTranslation();
 
   return (
-    <Link to={paths.catalog}>
+    <Link to={paths.turnkey}>
       <MyButton
         buttons_type={listLength ? "button__white" : "button__orange"}
         className={styles.button}
