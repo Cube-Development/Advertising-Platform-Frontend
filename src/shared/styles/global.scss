@@ -27,6 +27,64 @@ body {
   }
 }
 
+.button {
+  display: grid;
+  grid-auto-flow: column;
+  column-gap: 10px;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
+  width: 100%;
+
+  padding: 15px 31px 15px 31px;
+  cursor: pointer;
+  border-radius: 12px;
+
+  &__blue {
+    color: var(--Personal-colors-White);
+    background: var(--Gradients-Gradient-1);
+    &:hover {
+      background: #005aa5;
+    }
+  }
+
+  &__white {
+    color: var(--Personal-colors-main);
+    border: 1px solid var(--Personal-colors-main);
+    background: var(--Personal-colors-White);
+    &:hover {
+      background: rgb(237, 237, 237);
+    }
+  }
+
+  &__orange {
+    color: var(--Personal-colors-White);
+    background: var(--Gradients-Gradient-2);
+
+    &:hover {
+      background: var(--Gradients-Gradient-2);
+    }
+  }
+
+  &__green {
+    color: var(--Personal-colors-White);
+    background: var(--Personal-colors-Green);
+  }
+
+  &__yellow {
+    color: var(--Personal-colors-White);
+    background: var(--Orange);
+    &:hover {
+      background: var(--Orange);
+    }
+  }
+}
+
 .main_layout {
   display: flex;
   flex-direction: column;
@@ -221,7 +279,8 @@ body {
 
 .deactive {
   pointer-events: none;
-  filter: grayscale(100%);
+  background: var(--Inside-container);
+  // filter: grayscale(100%);
 }
 
 @layer base {

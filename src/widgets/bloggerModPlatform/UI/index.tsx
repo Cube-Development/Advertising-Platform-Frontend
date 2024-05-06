@@ -1,10 +1,10 @@
 import { BloggerModPlatformCard } from "@entities/bloggerModPlatformCard";
 import { AddPlatform } from "@features/addPlatform";
 import { ZeroPlatform } from "@features/zeroPlatform";
+import { pageFilter } from "@shared/config/pageFilter";
 import { IModerationChannelBlogger } from "@shared/types/channelStatus";
 import { FC } from "react";
 import styles from "./styles.module.scss";
-import { pageFilter } from "@shared/config/pageFilter";
 
 interface BloggerModPlatformProps {
   cards: IModerationChannelBlogger;

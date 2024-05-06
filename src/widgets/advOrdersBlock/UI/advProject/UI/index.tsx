@@ -13,6 +13,7 @@ import { ZeroProject } from "@features/zeroProject";
 import { IAdvProjects } from "@shared/types/advProject";
 import { FC } from "react";
 import styles from "./styles.module.scss";
+import { Accordion } from "@shared/ui/shadcn-ui/ui/accordion";
 
 interface AdvProjectProps {
   projects: IAdvProjects;
@@ -28,22 +29,24 @@ export const AdvProject: FC<AdvProjectProps> = ({ projects }) => {
           TurnkeyProjectBtn={TurnkeyProject}
         />
       ) : (
-        <div className={styles.wrapper}>
-          {projects?.projects?.map((card, index) => (
-            <AdvProjectCard
-              key={index}
-              card={card}
-              FeedbackBtn={Feedback}
-              AcceptBtn={AcceptPost}
-              RejectBtn={RejectPost}
-              CheckBtn={CheckPost}
-              SeeBtn={SeePost}
-              ChannelChatBtn={ChannelChat}
-              AcceptProjectBtn={AcceptProject}
-              ChangeChannelBtn={ChangeChannel}
-            />
-          ))}
-        </div>
+        <Accordion type="single" collapsible>
+          <div className={styles.wrapper}>
+            {projects?.projects?.map((card, index) => (
+              <AdvProjectCard
+                key={index}
+                card={card}
+                FeedbackBtn={Feedback}
+                AcceptBtn={AcceptPost}
+                RejectBtn={RejectPost}
+                CheckBtn={CheckPost}
+                SeeBtn={SeePost}
+                ChannelChatBtn={ChannelChat}
+                AcceptProjectBtn={AcceptProject}
+                ChangeChannelBtn={ChangeChannel}
+              />
+            ))}
+          </div>
+        </Accordion>
       )}
     </div>
   );

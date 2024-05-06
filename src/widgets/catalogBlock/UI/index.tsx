@@ -1,18 +1,9 @@
-import { FC, useEffect, useState } from "react";
-import styles from "./styles.module.scss";
-import { CatalogSearch } from "./catalogSearch";
-import { CatalogList } from "./catalogList";
-import { useTranslation } from "react-i18next";
-import { IPlatform } from "@shared/types/platform";
-import { CatalogCart } from "./catalogCart";
-import {
-  getCatalogReq,
-  useGetCatalogQuery,
-} from "@shared/store/services/catalogService";
+import { GenerateGuestId } from "@features/generateGuestId";
+import { GetUserId } from "@features/getUserId";
 import { Languages } from "@shared/config/languages";
-import { useForm } from "react-hook-form";
-import { platformTypesNum } from "@shared/config/platformTypes";
 import { platformData, sortingFilter } from "@shared/config/platformData";
+import { platformTypesNum } from "@shared/config/platformTypes";
+import { useAppSelector } from "@shared/store";
 import {
   useAddToCommonCartMutation,
   useAddToPublicCartMutation,
@@ -21,11 +12,20 @@ import {
   useRemoveFromCommonCartMutation,
   useRemoveFromPublicCartMutation,
 } from "@shared/store/services/cartService";
-import { useAppSelector } from "@shared/store";
-import Cookies from "js-cookie";
+import {
+  getCatalogReq,
+  useGetCatalogQuery,
+} from "@shared/store/services/catalogService";
 import { ICart } from "@shared/types/cart";
-import { GenerateGuestId } from "@features/generateGuestId";
-import { GetUserId } from "@features/getUserId";
+import { IPlatform } from "@shared/types/platform";
+import Cookies from "js-cookie";
+import { FC, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { CatalogCart } from "./catalogCart";
+import { CatalogList } from "./catalogList";
+import { CatalogSearch } from "./catalogSearch";
+import styles from "./styles.module.scss";
 
 export const CatalogBlock: FC = () => {
   const { t, i18n } = useTranslation();

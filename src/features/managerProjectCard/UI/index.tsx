@@ -19,11 +19,17 @@ import {
 } from "@shared/store/services/advOrdersService";
 import { IManagerProjectCard } from "@shared/types/managerProjects";
 import { IChannelChat } from "@shared/types/common";
-import { FC, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { orderStatus } from "@shared/config/orderFilter";
 import { IOrderFeature } from "@shared/types/order";
+import { accordionTypes } from "@shared/config/accordion";
+import {
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@shared/ui/shadcn-ui/ui/accordion";
 
 interface ManagerProjectCardProps {
   card: IManagerProjectCard;
@@ -72,6 +78,24 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
   };
 
   const { statusFilter } = useAppSelector((state) => state.filter);
+
+  const accordionRef = useRef(null);
+
+  const handleClickOutside = () => {
+    const state = (accordionRef.current! as HTMLElement).getAttribute(
+      "data-state",
+    );
+    state === accordionTypes.open
+      ? setSubcardOpen(true)
+      : setSubcardOpen(false);
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className={styles.wrapper}>
@@ -232,41 +256,44 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
         </div>
       </div>
 
-      {isSubcardOpen && (
-        <div className={styles.subcard}>
-          {/* {subcards?.orders.map((subcard, index) => ( */}
-          {subcard.map((subcard, index) => (
-            <ManagerProjectSubcard
-              key={index}
-              subcard={subcard}
-              FeedbackBtn={FeedbackBtn}
-              AcceptBtn={AcceptBtn}
-              RejectBtn={RejectBtn}
-              CheckBtn={CheckBtn}
-              SeePostBtn={SeeBtn}
-              ChannelChatBtn={ChannelChatBtn}
-              ChangeChannelBtn={ChangeChannelBtn}
+      <AccordionItem value={`item-${card.id}`} ref={accordionRef}>
+        <AccordionContent>
+          <div className={styles.subcard}>
+            {subcard.map((subcard, index) => (
+              <ManagerProjectSubcard
+                key={index}
+                subcard={subcard}
+                FeedbackBtn={FeedbackBtn}
+                AcceptBtn={AcceptBtn}
+                RejectBtn={RejectBtn}
+                CheckBtn={CheckBtn}
+                SeePostBtn={SeeBtn}
+                ChannelChatBtn={ChannelChatBtn}
+                ChangeChannelBtn={ChangeChannelBtn}
+              />
+            ))}
+          </div>
+        </AccordionContent>
+
+        <AccordionTrigger onClick={() => handleChangeOpenSubcard()}>
+          <div
+            className={styles.card__btn}
+            onClick={() => handleChangeOpenSubcard()}
+          >
+            {isSubcardOpen
+              ? t(`orders_manager.card.see_less`)
+              : t(`orders_manager.card.see_more`)}
+
+            <ArrowSmallVerticalIcon
+              className={
+                isSubcardOpen
+                  ? "default__icon__white rotate"
+                  : "default__icon__white rotate__down"
+              }
             />
-          ))}
-        </div>
-      )}
-
-      <button
-        className={`${styles.card__btn} ${isSubcardOpen ? styles.less : styles.more}`}
-        onClick={() => handleChangeOpenSubcard()}
-      >
-        {isSubcardOpen
-          ? t(`orders_manager.card.see_less`)
-          : t(`orders_manager.card.see_more`)}
-
-        <ArrowSmallVerticalIcon
-          className={
-            isSubcardOpen
-              ? "active__icon rotate"
-              : "default__icon__white rotate_down"
-          }
-        />
-      </button>
+          </div>
+        </AccordionTrigger>
+      </AccordionItem>
     </div>
   );
 };

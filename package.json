@@ -11,6 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@radix-ui/react-accordion": "^1.1.2",
     "@radix-ui/react-alert-dialog": "^1.0.5",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-toast": "^1.1.5",
@@ -22,6 +23,7 @@
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.0",
     "compose-function": "^3.0.3",
+    "embla-carousel-autoplay": "^8.0.2",
     "embla-carousel-react": "^8.0.2",
     "framer-motion": "^11.0.20",
     "i18next": "^23.7.19",

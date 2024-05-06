@@ -11,11 +11,16 @@ import {
   IFile,
 } from "@shared/types/createPost";
 import { IAddFile } from "@shared/types/file";
-import { MyButton } from "@shared/ui";
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogTrigger,
+} from "@shared/ui/shadcn-ui/ui/alert-dialog";
 import { FC, useState } from "react";
+import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 
 interface PostFilesProps {
   AddMediaFiles: FC<FileProps>;
@@ -35,9 +40,9 @@ export const PostFiles: FC<PostFilesProps> = ({
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const handleOpenModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
+  // const handleOpenModal = () => {
+  //   setIsModalOpen(!isModalOpen);
+  // };
 
   const { addFileFilter: filter } = useAppSelector((state) => state.filter);
 
@@ -72,7 +77,35 @@ export const PostFiles: FC<PostFilesProps> = ({
 
   return (
     <>
-      <MyButton className={styles.wrapper} onClick={handleOpenModal}>
+      <AlertDialog>
+        <AlertDialogTrigger>
+          <div className={`${styles.open} button `}>
+            <ImageIcon />
+            <p>{t("create_order.create.add_file")}</p>
+          </div>
+        </AlertDialogTrigger>
+        <AlertDialogContent>
+          <div className={styles.modalContent}>
+            <div className={styles.top}>
+              <p>{t("create_order.create.add_button.title")}</p>
+              <AlertDialogCancel>
+                <CancelIcon2 />
+              </AlertDialogCancel>
+            </div>
+            <BarProfileFilter
+              page={pageFilter.createOrderFiles}
+              resetValues={handle}
+            />
+            {filter === addFileFilter.file ? (
+              <AddFiles onChange={handleAddMediaFile} />
+            ) : (
+              <AddMediaFiles onChange={handleAddMediaFile} />
+            )}
+          </div>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* <MyButton className={styles.wrapper} onClick={handleOpenModal}>
         <div>
           <ImageIcon />
           <p>{t("create_order.create.add_file")}</p>
@@ -99,7 +132,7 @@ export const PostFiles: FC<PostFilesProps> = ({
             )}
           </div>
         </div>
-      )}
+      )} */}
     </>
   );
 };
