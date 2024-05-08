@@ -16,6 +16,9 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { getCatalogReq } from "@shared/store/services/catalogService";
 import { DinamicPagination } from "@features/dinamicPagination";
+import { SadSmileIcon } from "@shared/assets";
+import { ShowMoreBtn } from "@features/showMore";
+import { SpinnerLoader } from "@shared/ui/spinnerLoader";
 
 interface CatalogListProps {
   channels: IPlatform[];
@@ -23,6 +26,7 @@ interface CatalogListProps {
   page: number;
   onChangeCard: (cart: IPlatform) => void;
   isPagination: boolean;
+  isLoading?: boolean;
 }
 
 export const CatalogList: FC<CatalogListProps> = ({
@@ -31,6 +35,7 @@ export const CatalogList: FC<CatalogListProps> = ({
   page,
   isPagination,
   onChangeCard,
+  isLoading,
 }) => {
   const { t } = useTranslation();
 
@@ -77,7 +82,16 @@ export const CatalogList: FC<CatalogListProps> = ({
           />
         ))}
       </div>
-      {isPagination && <DinamicPagination onChange={handleOnChangePage} />}
+      {isPagination ? (
+        // <DinamicPagination onChange={handleOnChangePage} />
+        <div className={styles.show_more} onClick={handleOnChangePage}>
+          {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
+        </div>
+      ) : (
+        <div className={styles.empty}>
+          <SadSmileIcon />
+        </div>
+      )}
     </div>
   );
 };

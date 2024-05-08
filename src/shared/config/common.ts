@@ -33,5 +33,11 @@ export const enum POST {
 }
 
 export const enum DEBOUNCE {
-  sex = 1000,
+  sex = 500,
+}
+
+export const enum INTERSECTION_ELEMENTS {
+  catalog = 10,
+  orders = 5,
+  channels = 15,
 }

@@ -1327,5 +1327,9 @@
     "error": {
       "required": "Введите сумму"
     }
+  },
+
+  "pagination": {
+    "show_more": "Показать ещё"
   }
 }

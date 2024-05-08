@@ -12,7 +12,7 @@ import {
   useGetAdvProjectsQuery,
 } from "@shared/store/services/advOrdersService";
 import { BarFilter } from "@widgets/barFilter";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { AdvProject } from "./advProject";
 import {
   advManagerProjectActiveCARDS,
@@ -23,21 +23,43 @@ import {
   advMyProjectCompleteCARDS,
 } from "@shared/config/mockDATA";
 import { AdvDevProject } from "./advDevProject";
-import { IAdvProjects } from "@shared/types/advProject";
+import { IAdvProjectCard } from "@shared/types/advProject";
+import { INTERSECTION_ELEMENTS } from "@shared/config/common";
 
 export const AdvOrdersBlock: FC = () => {
   const { typeFilter, statusFilter } = useAppSelector((state) => state.filter);
   const page = pageFilter.order;
-
-  const getParams: getProjectsCardReq = {
-    page: 1,
-    date_sort: "increase",
-    status: statusFilter,
+  const [currentPage, setCurrentPage] = useState(1);
+  const handleOnChangePage = () => {
+    setCurrentPage(currentPage + 1);
   };
 
-  const { data: projects } = useGetAdvProjectsQuery(getParams);
+  const getParams: getProjectsCardReq = {
+    page: currentPage,
+    date_sort: "increase",
+    status: statusFilter,
+    elements_on_page: INTERSECTION_ELEMENTS.orders,
+  };
+
+  const { data, isFetching } = useGetAdvProjectsQuery(getParams);
   // data: projectsMan fetch2
   // data: projectsManDev fetch3
+
+  const [projects, setProjects] = useState<IAdvProjectCard[]>(
+    data?.projects ? data?.projects : [],
+  );
+
+  useEffect(() => {
+    if (data && currentPage !== 1) {
+      setProjects([...projects, ...data.projects]);
+    } else {
+      data && setProjects(data.projects);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [statusFilter]);
 
   // const projects =
   //   typeFilter === projectTypesFilter.myProject &&
@@ -62,7 +84,7 @@ export const AdvOrdersBlock: FC = () => {
 
   return (
     <>
-      <BarFilter page={page} listLength={!!projects?.projects.length} />
+      <BarFilter page={page} listLength={!!projects?.length} />
 
       {/* {typeFilter === projectTypesFilter.myProject &&
       statusFilter === myProjectStatusFilter.active ? (
@@ -93,9 +115,19 @@ export const AdvOrdersBlock: FC = () => {
 
       {typeFilter === projectTypesFilter.managerProject &&
       statusFilter === advManagerProjectStatusFilter.develop ? (
-        <AdvDevProject projects={projects!} />
+        <AdvDevProject
+          projects={projects!}
+          handleOnChangePage={handleOnChangePage}
+          isLoading={isFetching}
+          isNotEmpty={data ? data?.projects?.length > 0 : false}
+        />
       ) : (
-        <AdvProject projects={projects! as IAdvProjects} />
+        <AdvProject
+          projects={projects!}
+          handleOnChangePage={handleOnChangePage}
+          isLoading={isFetching}
+          isNotEmpty={data ? data?.projects?.length > 0 : false}
+        />
       )}
     </>
   );
