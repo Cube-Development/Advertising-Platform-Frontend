@@ -1,7 +1,8 @@
 export interface IWalletHistory {
-  date: string;
-  purpose: number;
-  method: string;
-  ammount: number;
+  id: string;
+  transaction_datetime: string;
+  transaction_type: string;
+  way_type: string;
+  amount: number;
   status: string;
 }

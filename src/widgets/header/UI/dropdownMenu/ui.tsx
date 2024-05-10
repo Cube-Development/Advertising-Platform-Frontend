@@ -6,6 +6,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { advertiserMenu, bloggerMenu, commonMenu } from "./config";
 import styles from "./styles.module.scss";
+import { Accordion } from "@shared/ui/shadcn-ui/ui/accordion";
 
 interface DropdownMenuProps {
   currentRole: roles;
@@ -75,7 +76,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
       </button>
       {isMenuOpen !== null && (
         <div
-          className={`${styles.menu} ${isMenuOpen ? styles.menu_enter : styles.menu_exit}`}
+          className={`${styles.menu} ${isMenuOpen ? styles.menu__enter : styles.menu__exit}`}
         >
           <div className={styles.menu__top}>
             <img src="/images/assets/logo.svg" alt="" />
@@ -85,7 +86,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
             </button>
           </div>
           <div className={styles.menu__switcher}>
-            <div className={styles.switcher__row}>
+            <div className={styles.menu__switcher__row}>
               <Link to={paths.main}>
                 <p
                   className={`${
@@ -113,14 +114,11 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
             </div>
           </div>
           <div>
-            {combinedMenu.map((item, index) => (
-              <MenuItem
-                key={item.item.title}
-                item={item}
-                changeCharper={changeCharper}
-                chapter={chapter}
-              />
-            ))}
+            <Accordion type="single" collapsible>
+              {combinedMenu.map((item) => (
+                <MenuItem key={item.item.title} item={item} />
+              ))}
+            </Accordion>
           </div>
         </div>
       )}

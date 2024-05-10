@@ -2,43 +2,45 @@
   border-radius: 20px;
   border: 1px solid #4772e6;
   overflow: hidden;
-}
 
-.profile {
-  display: flex; /* Используем flex контейнер */
-  align-items: center;
-  justify-content: center;
-  font-size: 28px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  line-height: 0.75;
-  color: #4772e6;
+  .profile {
+    display: flex; /* Используем flex контейнер */
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    line-height: 0.75;
+    color: #4772e6;
 
-  li {
-    text-align: center;
-    padding: 20px 0;
-    cursor: pointer;
-    flex: 1; /* Равномерно распределить пространство между элементами */
+    li {
+      text-align: center;
+      padding: 20px 0;
+      cursor: pointer;
+      white-space: nowrap;
+      flex: 1; /* Равномерно распределить пространство между элементами */
+    }
   }
-}
 
-.catalog {
-  display: flex; /* Используем flex контейнер */
-  align-items: center;
-  justify-content: center;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 500;
-  line-height: normal;
-  line-height: 0.75;
-  color: #4772e6;
+  .catalog {
+    display: flex; /* Используем flex контейнер */
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    line-height: 0.75;
+    color: #4772e6;
 
-  li {
-    text-align: center;
-    padding: 20px 0;
-    cursor: pointer;
-    flex: 1; /* Равномерно распределить пространство между элементами */
+    li {
+      text-align: center;
+      padding: 20px 10px;
+      cursor: pointer;
+      flex: 1; /* Равномерно распределить пространство между элементами */
+      white-space: nowrap;
+    }
   }
 }
 

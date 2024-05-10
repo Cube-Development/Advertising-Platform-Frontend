@@ -11,19 +11,19 @@ export const HistoryCard: FC<HistoryCardProps> = ({ card }) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.info}>
-        <p>{card.date}</p>
+        <p>{card?.transaction_datetime}</p>
       </div>
       <div className={styles.info}>
-        <p>{card.purpose}</p>
+        <p>{card?.transaction_type}</p>
       </div>
       <div className={styles.info}>
-        <p>{card.method}</p>
+        <p>{card?.way_type}</p>
       </div>
       <div className={styles.info}>
-        <p>{card.ammount.toLocaleString()}</p>
+        <p>{card?.amount?.toLocaleString()}</p>
       </div>
       <div className={styles.status}>
-        <p>{card.status}</p>
+        <p>{card?.status}</p>
         <MoreIcon />
       </div>
     </div>

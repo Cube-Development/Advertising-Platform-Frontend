@@ -24,7 +24,36 @@
 }
 
 .cards {
-  display: grid;
-  grid-auto-flow: row;
-  row-gap: 10px;
+  .cards__list {
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 10px;
+    align-items: stretch;
+
+    .show_more {
+      margin: 10px auto;
+    }
+  }
+
+  .empty__block {
+    margin-top: 15%;
+
+    .icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      svg {
+        width: 15vw;
+        height: 15vw;
+      }
+    }
+
+    .title {
+      font-size: 26px;
+      text-align: center;
+      margin-top: 50px;
+      color: #bbbbbb;
+    }
+  }
 }

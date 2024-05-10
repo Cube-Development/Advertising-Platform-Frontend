@@ -1,8 +1,9 @@
 .wrapper {
   display: grid;
   grid-auto-flow: row;
+  row-gap: 20px;
   border-radius: 12px;
-  box-shadow: inset 0px 0px 0px 1px var(--Personal-colors-main);
+  box-shadow: inset 0px 0px 0px 1.5px var(--Personal-colors-main);
   // border: 1px solid var(--Personal-colors-main);
   padding-top: 20px;
 
@@ -182,11 +183,10 @@
     display: grid;
     grid-auto-flow: row;
     align-items: center;
-    border-right: 1px solid var(--Personal-colors-main);
-    border-left: 1px solid var(--Personal-colors-main);
-    border-top: 1px solid var(--Personal-colors-main);
+    border-right: 0.5px solid var(--Personal-colors-main);
+    border-left: 0.5px solid var(--Personal-colors-main);
+    border-top: 0.5px solid var(--Personal-colors-main);
     row-gap: 10px;
-    margin-top: 20px;
     padding: 10px 10px 0 10px;
     border-radius: 12px 12px 0 0;
   }
@@ -225,13 +225,6 @@
   line-height: normal;
   line-height: 0.75;
   border-radius: 12px;
-}
 
-.more {
-  margin-top: 20px;
   background: var(--Gradients-Gradient-1);
-}
-
-.less {
-  color: var(--Personal-colors-main);
 }

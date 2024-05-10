@@ -38,7 +38,6 @@
     background: var(--Gradients-Gradient-2);
 
     &:hover {
-      // opacity: 0.8;
       background: var(--Gradients-Gradient-2);
     }
   }
@@ -46,42 +45,13 @@
   &__green {
     color: var(--Personal-colors-White);
     background: var(--Personal-colors-Green);
-    // &:hover {
-    //   opacity: 0.8;
-    //   background: var(--Personal-colors-Green);
-    // }
   }
 
   &__yellow {
     color: var(--Personal-colors-White);
     background: var(--Orange);
     &:hover {
-      // opacity: 0.8;
       background: var(--Orange);
     }
   }
 }
-
-// .button_white {
-//   display: grid;
-//   grid-auto-flow: column;
-//   column-gap: 10px;
-//   justify-content: center;
-
-//   color: var(--Personal-colors-main);
-//   font-size: 16px;
-//   font-style: normal;
-//   font-weight: 600;
-//   line-height: normal;
-//   width: 100%;
-
-//   padding: 15px 31px 15px 31px;
-//   cursor: pointer;
-//   border-radius: 12px;
-//   border: 1px solid var(--Personal-colors-main);
-//   background: var(--Personal-colors-White);
-
-//   &:hover{
-//     background-color: grey;
-//   }
-// }

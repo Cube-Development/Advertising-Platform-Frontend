@@ -29,7 +29,7 @@ export const ChooseProfile: FC<ChooseProfileProps> = ({
     <div className={styles.profile}>
       <p className={styles.title}>{t("wallet.use_data")}</p>
       <div
-        className={`${styles.all__profile} ${accounts && accounts.length > 5 ? styles.scroll : ""}`}
+        className={`${styles.all__profile} ${accounts && accounts?.length > 5 ? styles.scroll : ""}`}
       >
         {accounts &&
         accounts?.length > 0 &&
@@ -41,20 +41,21 @@ export const ChooseProfile: FC<ChooseProfileProps> = ({
                 account={account}
                 key={index}
                 changeActiveAccount={() => changeActiveAccount(account)}
-                isActive={activeAccount?.legal_id === account.legal_id}
+                isActive={activeAccount?.legal_id === account?.legal_id}
                 isOneLegalLoading={isOneLegalLoading}
                 oneLegalError={oneLegalError}
               />
             ))}
           </>
+        ) : isReadLegalsLoading && !readLegalsError ? (
+          <h1>Loading...</h1>
         ) : (
           <div className={styles.empty}>
             <SadSmileIcon />
             <p className={styles.empty__text}>Список пуст...</p>
+            {readLegalsError && <h1>Ошибка запроса...</h1>}
           </div>
         )}
-        {isReadLegalsLoading && !readLegalsError && <h1>Loading...</h1>}
-        {readLegalsError && <h1>Ошибка запроса...</h1>}
       </div>
     </div>
   );

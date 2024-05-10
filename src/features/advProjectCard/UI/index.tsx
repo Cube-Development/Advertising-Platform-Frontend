@@ -22,11 +22,17 @@ import {
 } from "@shared/store/services/advOrdersService";
 import { IAdvProjectCard } from "@shared/types/advProject";
 import { IChannelChat } from "@shared/types/common";
-import { FC, useState } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
 import { IOrderFeature } from "@shared/types/order";
 import { AccountsLoader } from "@shared/ui/accountsLoader";
+import { FC, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { accordionTypes } from "@shared/config/accordion";
+import {
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@shared/ui/shadcn-ui/ui/accordion";
+import styles from "./styles.module.scss";
 
 interface AdvProjectCardProps {
   card: IAdvProjectCard;
@@ -70,6 +76,24 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
   const handleChangeOpenSubcard = (): void => {
     setSubcardOpen(!isSubcardOpen);
   };
+
+  const accordionRef = useRef(null);
+
+  const handleClickOutside = () => {
+    const state = (accordionRef.current! as HTMLElement).getAttribute(
+      "data-state",
+    );
+    state === accordionTypes.open
+      ? setSubcardOpen(true)
+      : setSubcardOpen(false);
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   const { typeFilter, statusFilter } = useAppSelector((state) => state.filter);
 
@@ -171,46 +195,46 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
         </div>
       </div>
 
-      {isSubcardOpen && (
-        <div className={styles.subcard}>
-          {/* {subcards.map((subcard, index) => ( */}
-          {subcards?.orders.map((subcard, index) => (
-            <AdvProjectSubcard
-              key={index}
-              subcard={subcard}
-              FeedbackBtn={FeedbackBtn}
-              AcceptBtn={AcceptBtn}
-              RejectBtn={RejectBtn}
-              CheckBtn={CheckBtn}
-              SeeBtn={SeeBtn}
-              ChannelChatBtn={ChannelChatBtn}
-              ChangeChannelBtn={ChangeChannelBtn}
-            />
-          ))}
-        </div>
-      )}
+      <AccordionItem value={`item-${card.id}`} ref={accordionRef}>
+        <AccordionContent>
+          <div className={styles.subcard}>
+            {subcards?.orders.map((subcard, index) => (
+              <AdvProjectSubcard
+                key={index}
+                subcard={subcard}
+                FeedbackBtn={FeedbackBtn}
+                AcceptBtn={AcceptBtn}
+                RejectBtn={RejectBtn}
+                CheckBtn={CheckBtn}
+                SeeBtn={SeeBtn}
+                ChannelChatBtn={ChannelChatBtn}
+                ChangeChannelBtn={ChangeChannelBtn}
+              />
+            ))}
+          </div>
+        </AccordionContent>
 
-      <button
-        className={`${styles.card__btn} ${isSubcardOpen ? styles.less : styles.more}`}
-        onClick={() => handleChangeOpenSubcard()}
-      >
-        {isLoading ? (
-          <AccountsLoader />
-        ) : isSubcardOpen ? (
-          t(`orders_advertiser.card.see_less`)
-        ) : (
-          t(`orders_advertiser.card.see_more`)
-        )}
-        {!isLoading && (
-          <ArrowSmallVerticalIcon
-            className={
-              isSubcardOpen
-                ? "active__icon rotate"
-                : "default__icon__white rotate_down"
-            }
-          />
-        )}
-      </button>
+        <AccordionTrigger onClick={() => handleChangeOpenSubcard()}>
+          <div className={styles.card__btn}>
+            {isLoading ? (
+              <AccountsLoader />
+            ) : isSubcardOpen ? (
+              t(`orders_advertiser.card.see_less`)
+            ) : (
+              t(`orders_advertiser.card.see_more`)
+            )}
+            {!isLoading && (
+              <ArrowSmallVerticalIcon
+                className={
+                  isSubcardOpen
+                    ? "default__icon__white rotate"
+                    : "default__icon__white rotate__down"
+                }
+              />
+            )}
+          </div>
+        </AccordionTrigger>
+      </AccordionItem>
     </div>
   );
 };

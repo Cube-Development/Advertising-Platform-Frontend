@@ -41,7 +41,7 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
   const allOptions: IOption[] = isFilter
     ? options?.map((option) => ({
         ...option,
-        name: t(option.name),
+        name: t(option?.name),
       }))
     : options;
 
@@ -81,15 +81,16 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
       ? selectedOptions.filter((value) => value !== selectedValue)
       : [...selectedOptions, selectedValue];
     setSelectedOptions(newOptions);
-    // catalog
-    const { filter } = getValues && getValues();
-    const updatedFilter = {
-      ...filter,
-      [type]: newOptions,
-    };
-    isCatalog
-      ? onChange("filter", updatedFilter)
-      : onChange(type, newOptions as []);
+    if (isCatalog) {
+      const { filter } = isCatalog && getValues && getValues();
+      const updatedFilter = {
+        ...filter,
+        [type]: newOptions,
+      };
+      onChange("filter", updatedFilter);
+    } else {
+      onChange(type, newOptions as []);
+    }
   };
 
   const handleOptionChange = (
@@ -99,10 +100,10 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
       (event.target as HTMLLIElement).getAttribute("data-value"),
     );
     const option: IOption = allOptions!.find(
-      (option) => option.id === selectedId,
+      (option) => option?.id === selectedId,
     )!;
     setSelectedOption(option);
-    onChange(type, isCatalogSorting ? option.type : selectedId);
+    onChange(type, isCatalogSorting ? option?.type : selectedId);
     closeMenu();
   };
 
@@ -130,12 +131,12 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
       <div className={styles.left}>
         {isFilter ? (
           <>
-            <p>{allText.title}:</p>
+            <p>{allText?.title}:</p>
           </>
         ) : (
           <>
-            <p>{allText.title}</p>
-            {allText.text && <InfoIcon />}
+            <p>{allText?.title}</p>
+            {allText?.text && <InfoIcon />}
           </>
         )}
       </div>
@@ -150,7 +151,7 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
           ${
             type === platformData.category && defaultValues
               ? styles.disabled__menu
-              : isMenuOpen || selectedOption || selectedOptions.length
+              : isMenuOpen || selectedOption || selectedOptions?.length
                 ? styles.active
                 : ""
           }
@@ -161,18 +162,20 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
               <div className={styles.filter}>
                 {selectedOption?.img ? <selectedOption.img /> : null}
                 <span>
-                  {selectedOption ? selectedOption.name : allText.default_value}
+                  {selectedOption
+                    ? selectedOption?.name
+                    : allText.default_value}
                 </span>
               </div>
             ) : (
               <span>
-                {selectedOptions.length ? (
+                {selectedOptions?.length ? (
                   <>
-                    {t("add_platform.choosed")}: {selectedOptions.length} /{" "}
-                    {allOptions.length}
+                    {t("add_platform.choosed")}: {selectedOptions?.length} /{" "}
+                    {allOptions?.length}
                   </>
                 ) : (
-                  allText.default_value
+                  allText?.default_value
                 )}
               </span>
             )}
@@ -183,7 +186,7 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
                     ? "default__icon__grey"
                     : (isMenuOpen ||
                           selectedOption ||
-                          selectedOptions.length) &&
+                          selectedOptions?.length) &&
                         !isFilter
                       ? "active__icon"
                       : "default__icon__grey"
@@ -208,11 +211,11 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
                     <li
                       key={index}
                       onClick={handleOptionChange}
-                      data-value={option.id}
-                      className={`${isFilter ? styles.filter : ""} ${selectedOption?.id === option.id ? styles.active : ""}`}
+                      data-value={option?.id}
+                      className={`${isFilter ? styles.filter : ""} ${selectedOption?.id === option?.id ? styles.active : ""}`}
                     >
-                      {option.img ? <option.img /> : null}
-                      {option.name}
+                      {option?.img ? <option.img /> : null}
+                      {option?.name}
                     </li>
                   ))}
                 </>
@@ -222,17 +225,19 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
                     <li
                       key={index}
                       onClick={handleOptionsChange}
-                      data-value={option.id}
+                      data-value={option?.id}
                       className={
-                        selectedOptions.includes(option.id) ? styles.active : ""
+                        selectedOptions.includes(option?.id)
+                          ? styles.active
+                          : ""
                       }
                     >
-                      {option.name}
+                      {option?.name}
                       <input
                         type="checkbox"
-                        value={option.id}
+                        value={option?.id}
                         onChange={handleOptionsChange}
-                        checked={selectedOptions.includes(option.id)}
+                        checked={selectedOptions.includes(option?.id)}
                       />
                     </li>
                   ))}

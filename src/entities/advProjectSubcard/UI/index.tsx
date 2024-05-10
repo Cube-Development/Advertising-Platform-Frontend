@@ -177,11 +177,11 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
             <div className={styles.subcard__posted__buttons}>
               {typeFilter === projectTypesFilter.managerProject || (
                 <div className={styles.subcard__posted__buttons__top}>
-                  <AcceptBtn order_id={subcard.id} />
-                  <RejectBtn order_id={subcard.id} />
+                  <AcceptBtn order_id={subcard?.id} />
+                  <RejectBtn order_id={subcard?.id} />
                 </div>
               )}
-              <CheckBtn url={subcard.post_url} />
+              <CheckBtn url={subcard?.post_url} />
             </div>
           </div>
         ) : subcard?.api_status === orderStatus.in_progress ? (

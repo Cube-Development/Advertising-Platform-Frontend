@@ -2,7 +2,7 @@
   display: grid;
   grid-auto-flow: row;
   border-radius: 12px;
-  box-shadow: inset 0px 0px 0px 1px var(--Personal-colors-main);
+  box-shadow: inset 0px 0px 0px 1.5px var(--Personal-colors-main);
   padding-top: 15px;
 
   .card {
@@ -55,8 +55,10 @@
     display: grid;
     grid-template: 1fr / 1fr 1fr;
     column-gap: 55px;
-    border-radius: 12px;
-    box-shadow: inset 0px 0px 0px 1px var(--Personal-colors-main);
+    border-radius: 12px 12px 0 0;
+    border-right: 1px solid var(--Personal-colors-main);
+    border-left: 1px solid var(--Personal-colors-main);
+    border-top: 1px solid var(--Personal-colors-main);
     padding: 30px 40px 0 40px;
 
     &__left {
@@ -167,12 +169,5 @@
   line-height: normal;
   line-height: 0.75;
   border-radius: 12px;
-}
-
-.more {
   background: var(--Gradients-Gradient-1);
-}
-
-.less {
-  color: var(--Personal-colors-main);
 }

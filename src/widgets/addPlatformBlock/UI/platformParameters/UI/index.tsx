@@ -84,7 +84,6 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
         age: [],
         format: [],
       });
-  console.log(defaultValues);
   const { handleSubmit, setValue, getValues } = useForm<IAddChannelData>({
     defaultValues: defaultValues,
   });
@@ -108,8 +107,7 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
       data.format.length > 0
     ) {
       if (channel) {
-        const { insertion_code, category, ...editData } = data;
-        console.log(insertion_code, category);
+        const { ...editData } = data;
         editChannel({ ...editData, channel_id: channel.id })
           .unwrap()
           .then((data) => {
@@ -123,8 +121,7 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
       } else {
         createChannel(data)
           .unwrap()
-          .then((data) => {
-            console.log(data.status);
+          .then(() => {
             setIsModalOpen(true);
             onChangeBlur({ link: true, parameters: true });
           })

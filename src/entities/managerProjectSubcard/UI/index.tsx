@@ -46,37 +46,38 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
       <div className={styles.subcard__left}>
         <div className={styles.subcard__left__description}>
           <div className={styles.subcard__left__description__logo}>
-            <img src={subcard.avatar} alt="" />
+            <img src={subcard?.avatar} alt="" />
           </div>
           <div className={styles.subcard__left__description__rate}>
             <RatingIcon />
           </div>
           <div className={styles.subcard__left__description__title}>
-            <p>{subcard.name}</p>
-            <span>{subcard.category}</span>
+            <p>{subcard?.name}</p>
+            <span>{subcard?.category}</span>
           </div>
         </div>
         <div className={styles.subcard__left__info}>
           <div className={styles.subcard__left__info__top}>
             <p>{t(`orders_manager.subcard.date`)}</p>
             <span>
-              {typeof subcard.publish_date === "object"
-                ? subcard.publish_date.date_from +
+              {typeof subcard?.publish_date === "object"
+                ? subcard?.publish_date?.date_from +
                   " - " +
-                  subcard.publish_date.date_to
-                : subcard.publish_date}
+                  subcard?.publish_date?.date_to
+                : subcard?.publish_date}
             </span>
           </div>
           <div>
             <p>{t(`orders_manager.subcard.accommodation`)}</p>
-            <span>{subcard.format.small}</span>
+            <span>{subcard?.format?.small}</span>
           </div>
         </div>
         <div className={styles.subcard__left__info}>
           <div className={styles.subcard__left__info__top}>
             <p>{t(`orders_manager.subcard.time`)}</p>
             <span>
-              {subcard.publish_time.time_from} - {subcard.publish_time.time_to}
+              {subcard?.publish_time?.time_from} -{" "}
+              {subcard?.publish_time?.time_to}
             </span>
           </div>
           <div>
@@ -92,13 +93,13 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
               <div>
                 <SubsIcon />
               </div>
-              <span>{subcard.subscribers.toLocaleString()}</span>
+              <span>{subcard?.subscribers?.toLocaleString()}</span>
             </div>
             <div className={styles.info}>
               <div>
                 <EyeIcon />
               </div>
-              <span>{subcard.views.toLocaleString()}</span>
+              <span>{subcard?.views?.toLocaleString()}</span>
             </div>
           </div>
           <div className={styles.subcard__left__data__middle}>
@@ -107,9 +108,9 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
             </div>
             <div
               className="colorline"
-              style={{ "--male": `${subcard.male}%` } as React.CSSProperties}
-              data-male={`${subcard.male}%`}
-              data-female={`${subcard.female}%`}
+              style={{ "--male": `${subcard?.male}%` } as React.CSSProperties}
+              data-male={`${subcard?.male}%`}
+              data-female={`${subcard?.female}%`}
             />
             <div>
               <WomanIcon />
@@ -118,12 +119,12 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
           <div className={styles.subcard__left__data__row}>
             <div className={styles.info}>
               <p>ER:</p>
-              <span>{subcard.er}%</span>
+              <span>{subcard?.er}%</span>
             </div>
             <div className={styles.info}>
               <p>CPV:</p>
               <span>
-                {subcard.cpv.toLocaleString()} {t(`symbol`)}
+                {subcard?.cpv?.toLocaleString()} {t(`symbol`)}
               </span>
             </div>
           </div>
@@ -208,7 +209,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
             </div>
             <div className={styles.subcard__posted__buttons}>
               <div className={styles.subcard__posted__buttons__top}>
-                <AcceptBtn order_id={subcard.id} />
+                <AcceptBtn order_id={subcard?.id} />
                 <ChangeChannelBtn />
               </div>
               <CheckBtn />
