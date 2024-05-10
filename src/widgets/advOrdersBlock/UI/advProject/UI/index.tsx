@@ -10,40 +10,58 @@ import { RejectPost } from "@features/rejectPost";
 import { SeePost } from "@features/seePost";
 import { TurnkeyProject } from "@features/turnkeyProject";
 import { ZeroProject } from "@features/zeroProject";
-import { IAdvProjects } from "@shared/types/advProject";
+import { IAdvProjectCard } from "@shared/types/advProject";
 import { FC } from "react";
 import styles from "./styles.module.scss";
+import { Accordion } from "@shared/ui/shadcn-ui/ui/accordion";
+import { SpinnerLoader } from "@shared/ui/spinnerLoader";
+import { ShowMoreBtn } from "@features/showMore";
 
 interface AdvProjectProps {
-  projects: IAdvProjects;
+  projects: IAdvProjectCard[];
+  handleOnChangePage: () => void;
+  isLoading: boolean;
+  isNotEmpty: boolean;
 }
 
-export const AdvProject: FC<AdvProjectProps> = ({ projects }) => {
+export const AdvProject: FC<AdvProjectProps> = ({
+  projects,
+  handleOnChangePage,
+  isLoading,
+  isNotEmpty,
+}) => {
   return (
     <div className="container sidebar">
-      {projects?.projects?.length === 0 ? (
+      {projects?.length === 0 ? (
         <ZeroProject
-          listLength={!!projects?.projects?.length}
+          listLength={!!projects?.length}
           NewProjectBtn={NewProject}
           TurnkeyProjectBtn={TurnkeyProject}
         />
       ) : (
-        <div className={styles.wrapper}>
-          {projects?.projects?.map((card, index) => (
-            <AdvProjectCard
-              key={index}
-              card={card}
-              FeedbackBtn={Feedback}
-              AcceptBtn={AcceptPost}
-              RejectBtn={RejectPost}
-              CheckBtn={CheckPost}
-              SeeBtn={SeePost}
-              ChannelChatBtn={ChannelChat}
-              AcceptProjectBtn={AcceptProject}
-              ChangeChannelBtn={ChangeChannel}
-            />
-          ))}
-        </div>
+        <Accordion type="single" collapsible>
+          <div className={styles.wrapper}>
+            {projects?.map((card, index) => (
+              <AdvProjectCard
+                key={index}
+                card={card}
+                FeedbackBtn={Feedback}
+                AcceptBtn={AcceptPost}
+                RejectBtn={RejectPost}
+                CheckBtn={CheckPost}
+                SeeBtn={SeePost}
+                ChannelChatBtn={ChannelChat}
+                AcceptProjectBtn={AcceptProject}
+                ChangeChannelBtn={ChangeChannel}
+              />
+            ))}
+            {isNotEmpty && (
+              <div className={styles.show_more} onClick={handleOnChangePage}>
+                {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
+              </div>
+            )}
+          </div>
+        </Accordion>
       )}
     </div>
   );

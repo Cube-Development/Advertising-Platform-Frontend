@@ -1,15 +1,23 @@
 .wrapper {
   display: grid;
-  grid-template: 1fr / 1fr 1fr 1fr 1fr 1.5fr;
+  grid-template: 1fr / minmax(10vw, 15vw) minmax(10vw, 15vw) minmax(10vw, 15vw) minmax(
+      10vw,
+      15vw
+    ) minmax(20vw, 30vw);
   align-items: center;
   border-radius: 12px;
   border: 1px solid var(--Containers, #8c8c8c);
   background: var(--Personal-colors-White);
   padding: 10px 0;
+  font-weight: 600;
+  color: #8e54e9;
 
   div {
     p {
       padding: 10px 30px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 }

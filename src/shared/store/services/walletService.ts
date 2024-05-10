@@ -1,14 +1,24 @@
 import { authApi } from "@shared/api";
 import { ADV_PROJECTS, BALANCE, LEGALS } from "@shared/api/tags";
+import { languagesNum } from "@shared/config/languages";
 import { paymentTypes } from "@shared/config/payment";
+import { IWalletHistory } from "@shared/types/history";
 
 type PaymentOrderResponse = {
   success: boolean;
 };
 
-type PaymentDepositResponse = {
-  account_id: string;
-  balance: number;
+export type HistoryReq = {
+  language: languagesNum;
+  page: number;
+  date_sort: "increase" | "decrease";
+  elements_on_page?: number;
+};
+
+type HistoryResponse = {
+  page: number;
+  elements: number;
+  transactions: IWalletHistory[];
 };
 
 type PaymentDepositReq = {
@@ -36,7 +46,7 @@ export const walletAPI = authApi.injectEndpoints({
       }),
       invalidatesTags: [BALANCE, LEGALS, ADV_PROJECTS],
     }),
-    paymentDeposit: build.mutation<PaymentDepositResponse, PaymentDepositReq>({
+    paymentDeposit: build.mutation<PaymentWithdrawResponse, PaymentDepositReq>({
       query: (params) => ({
         url: `/wallet/payment/deposit`,
         method: `POST`,
@@ -51,12 +61,20 @@ export const walletAPI = authApi.injectEndpoints({
       query: (params) => ({
         url: `/wallet/payment/withdrawal`,
         method: `POST`,
-        params: params,
+        params,
       }),
       invalidatesTags: [BALANCE, LEGALS],
     }),
-    getBalance: build.query<PaymentDepositResponse, void>({
+    getBalance: build.query<PaymentWithdrawResponse, void>({
       query: () => `/wallet/balance`,
+      providesTags: [BALANCE],
+    }),
+    getHistory: build.query<HistoryResponse, HistoryReq>({
+      query: (params) => ({
+        url: "wallet/transaction/user/history",
+        method: "POST",
+        params,
+      }),
       providesTags: [BALANCE],
     }),
   }),
@@ -67,4 +85,5 @@ export const {
   usePaymentDepositMutation,
   usePaymentProjectMutation,
   usePaymentWithdrawalMutation,
+  useGetHistoryQuery,
 } = walletAPI;

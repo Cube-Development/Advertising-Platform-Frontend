@@ -1,57 +1,74 @@
 .dropdown {
   position: relative;
-}
+  .menu {
+    padding: 25px 20px;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0; /* Скрываем за пределами экрана */
+    background-color: #fff;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 10;
 
-.menu {
-  padding: 25px 20px;
-  height: 100%;
-  position: fixed;
-  top: 0;
-  left: 0; /* Скрываем за пределами экрана */
-  background-color: #fff;
-  border: 1px solid #ccc;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  z-index: 10;
+    &__enter {
+      animation: slideIn 0.25s forwards;
+    }
 
-  ul {
-    color: var(--Personal-colors-black);
-    list-style: none;
-    padding: 10px;
+    &__exit {
+      animation: slideOut 0.25s forwards;
+    }
 
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
-    cursor: pointer;
+    &__switcher {
+      display: grid;
+      justify-content: center;
 
-    display: grid;
-    align-items: center;
+      &__row {
+        padding: 5px;
+        justify-content: center;
+        border-radius: 25px;
+        border: 0.1px solid var(--Personal-colors-main);
+        display: inline-flex;
+        align-items: center;
+        margin-bottom: 20px;
 
-    min-height: 70px;
-  }
+        p {
+          text-align: center;
+          min-width: 150px;
+          font-size: 18px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 0.75;
+          padding: 10px;
+          justify-content: center;
+          align-items: center;
+          align-self: stretch;
+          border-radius: 20px;
+        }
 
-  li {
-    padding: 10px;
-    cursor: pointer;
-    min-height: 70px;
-    display: grid;
-    align-items: center;
+        .active {
+          background: var(--Gradients-Gradient-1);
+          color: #fff;
+        }
+      }
+    }
 
-    &:hover {
-      background-color: #f0f0f0;
+    &__top {
+      display: grid;
+      padding-bottom: 15px;
+      margin-bottom: 25px;
+      border-bottom: 1px solid #d9d9d9;
+      grid-auto-flow: column;
+      justify-content: space-between;
+      align-items: center;
     }
   }
-}
-
-.menu__switcher {
-  display: grid;
-  justify-content: center;
 }
 
 .burger__icon_btn {
   --width: 32px;
   --height: 32px;
-  --line-height: 2px;
+  --line-height: 1.5px;
   // --color: var(--Gradients-1);;
   --color: var(--Personal-colors-black);
 
@@ -68,6 +85,7 @@
   width: var(--width);
   height: var(--line-height);
   background-color: var(--color);
+  border-radius: 5px;
 
   &::before,
   &::after {
@@ -76,8 +94,9 @@
     position: absolute;
     left: 0;
     width: var(--width);
-    height: var(--line-height);
+    height: 2px;
     background-color: var(--color);
+    border-radius: 5px;
   }
 
   &::before {
@@ -87,16 +106,6 @@
   &::after {
     top: calc(var(--line-height) * 6);
   }
-}
-
-.menu__top {
-  display: grid;
-  padding-bottom: 15px;
-  margin-bottom: 25px;
-  border-bottom: 1px solid #d9d9d9;
-  grid-auto-flow: column;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .close__icon {
@@ -126,62 +135,20 @@
   }
 }
 
-.switcher__row {
-  // margin-top: 15px;
-  padding: 5px;
-  justify-content: center;
-  border-radius: 25px;
-  border: 0.1px solid #4772e6;
-  display: inline-flex;
-  align-items: center;
-  margin-bottom: 20px;
-
-  p {
-    text-align: center;
-    min-width: 150px;
-    font-size: 18px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: 0.75;
-    padding: 10px;
-    justify-content: center;
-    align-items: center;
-    align-self: stretch;
-    border-radius: 20px;
-  }
-}
-
-.active {
-  background: var(--Gradients-Gradient-1);
-  color: #fff;
-}
-
 @keyframes slideIn {
   from {
-    // opacity: 0;
     transform: translateX(-100%);
   }
   to {
-    // opacity: 1;
     transform: translateX(0);
   }
 }
 
 @keyframes slideOut {
   from {
-    // opacity: 1;
     transform: translateX(0);
   }
   to {
-    // opacity: 0;
     transform: translateX(-100%);
   }
-}
-
-.menu_enter {
-  animation: slideIn 0.25s forwards;
-}
-
-.menu_exit {
-  animation: slideOut 0.25s forwards;
 }

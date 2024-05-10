@@ -3,7 +3,9 @@ import styles from "./styles.module.scss"; // Подключаем файл со
 
 interface MyInputProps extends InputHTMLAttributes<HTMLInputElement> {}
 
-export const MySlider: FC<MyInputProps> = ({ ...props }) => {
-  props.className = `${styles.slider} ${props.className}`;
-  return <input {...props} />;
+export const MySliderLimit: FC<MyInputProps> = ({ ...props }) => {
+  props.className = `${styles.slider}`;
+  const gradientColor = `#4772e6`;
+
+  return <input {...props} style={{ background: gradientColor }} />;
 };

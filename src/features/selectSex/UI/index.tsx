@@ -1,11 +1,11 @@
 import { InfoIcon } from "@shared/assets";
 import { DEBOUNCE } from "@shared/config/common";
 import { useDebounce } from "@shared/store/hooks";
-import { MySlider } from "@shared/ui/slider";
 import { FC, useEffect, useState } from "react";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { MySliderSex } from "@shared/ui";
 
 interface SelectSexProps {
   title: string;
@@ -57,7 +57,8 @@ export const SelectSex: FC<SelectSexProps> = ({
         {text && <InfoIcon />}
       </div>
       <div className={styles.slider}>
-        <MySlider
+        <p className={styles.man}>{100 - position}%</p>
+        <MySliderSex
           type="range"
           min={0}
           step={5}
@@ -65,10 +66,7 @@ export const SelectSex: FC<SelectSexProps> = ({
           value={position}
           onChange={(e) => setPosition(parseInt(e.target.value))}
         />
-        <div className={styles.position}>
-          <p>{100 - position} %</p>
-          <p>{position} %</p>
-        </div>
+        <p className={styles.woman}>{position}%</p>
       </div>
     </div>
   );

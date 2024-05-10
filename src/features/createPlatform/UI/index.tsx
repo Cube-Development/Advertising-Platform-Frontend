@@ -35,7 +35,11 @@ export const CreatePlatform: FC<CreatePlatformProps> = ({
               </p>
             </div>
             <Link to={paths.platforms}>
-              <MyButton className={styles.accept__btn} onClick={onChange}>
+              <MyButton
+                className={styles.accept__btn}
+                buttons_type="button__white"
+                onClick={onChange}
+              >
                 {t("add_platform_btn.accept")}
               </MyButton>
             </Link>

@@ -5,6 +5,7 @@ import {
   WalletIcon,
   BookIcon,
 } from "@shared/assets";
+import { projectTypesFilter } from "@shared/config/projectFilter";
 
 export const advertiserMenu = [
   {
@@ -14,14 +15,17 @@ export const advertiserMenu = [
       img: CampaignIcon,
     },
     subItems: [
-      { title: "orders_advertiser.type_filter.my_project", path: paths.orders },
+      {
+        title: "orders_advertiser.type_filter.my_project",
+        path: `${paths.orders}?order_type=${projectTypesFilter.myProject}`,
+      },
       {
         title: "orders_advertiser.type_filter.manager_project",
-        path: paths.orders,
+        path: `${paths.orders}?order_type=${projectTypesFilter.managerProject}`,
       },
       {
         title: "orders_advertiser.type_filter.saved_project",
-        path: paths.orders,
+        path: `${paths.orders}?order_type=${projectTypesFilter.savedProject}`,
       },
     ],
   },
@@ -61,5 +65,5 @@ export const commonMenu = [
       { title: "burger_menu.invoice", path: paths.main },
     ],
   },
-  { item: { title: "burger_menu.base", path: paths.main, img: BookIcon } },
+  { item: { title: "burger_menu.base", path: paths.faq, img: BookIcon } },
 ];

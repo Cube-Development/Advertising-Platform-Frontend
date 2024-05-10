@@ -1,9 +1,9 @@
 .wrapper {
-  display: grid;
-  grid-auto-flow: row;
-  row-gap: 50px;
-  align-items: center;
-  justify-content: center;
+  // display: grid;
+  // grid-auto-flow: row;
+  // row-gap: 50px;
+  // align-items: center;
+  // justify-content: center;
   margin: 50px 0 100px 0;
   max-height: 300px;
 
@@ -16,6 +16,7 @@
     line-height: normal;
     align-content: center;
     justify-content: center;
+    margin-bottom: 50px;
   }
 
   .content {

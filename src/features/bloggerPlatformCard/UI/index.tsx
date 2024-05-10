@@ -9,6 +9,7 @@ import {
   WaitIcon,
 } from "@shared/assets";
 import { FeatherIcon } from "@shared/assets/icons/feather";
+import { accordionTypes } from "@shared/config/accordion";
 import { platformStatusFilter } from "@shared/config/platformFilter";
 import { useAppSelector } from "@shared/store";
 import { useActivateChannelMutation } from "@shared/store/services/channelService";
@@ -19,8 +20,12 @@ import {
   IModerationChannel,
   IModerationRejectChannel,
 } from "@shared/types/channelStatus";
-import { MyButton } from "@shared/ui";
-import { FC, useState } from "react";
+import {
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@shared/ui/shadcn-ui/ui/accordion";
+import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
@@ -83,6 +88,24 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
       })
       .catch((error) => console.error("Ошибка при активации канала: ", error));
   };
+
+  const accordionRef = useRef(null);
+
+  const handleClickOutside = () => {
+    const state = (accordionRef.current! as HTMLElement).getAttribute(
+      "data-state",
+    );
+    state === accordionTypes.open
+      ? setSubcardOpen(true)
+      : setSubcardOpen(false);
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   return (
     <div className={styles.wrapper}>
@@ -223,34 +246,35 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
           </div>
         </div>
       </div>
-      {isSubcardOpen && (
-        <div className={styles.platform__events}>
-          <ChannelDescriptionBtn channel_id={card?.id} />
-          <button>
-            <p>{t(`platform_btn.calendar`)}</p>
-          </button>
-          <button>
-            <p>{t(`platform_btn.reviews`)}</p>
-          </button>
-        </div>
-      )}
 
-      <MyButton
-        buttons_type={isSubcardOpen ? "button__white" : "button__blue"}
-        className={styles.card__btn}
-        onClick={handleChangeOpenSubcard}
-      >
-        {isSubcardOpen
-          ? t(`orders_advertiser.card.see_less`)
-          : t(`orders_advertiser.card.see_more`)}
-        <ArrowSmallVerticalIcon
-          className={
-            isSubcardOpen
-              ? "active__icon rotate"
-              : "default__icon__white rotate_down"
-          }
-        />
-      </MyButton>
+      <AccordionItem value={`item-${card.id}`} ref={accordionRef}>
+        <AccordionContent>
+          <div className={styles.platform__events}>
+            <ChannelDescriptionBtn channel_id={card?.id} />
+            <button>
+              <p>{t(`platform_btn.calendar`)}</p>
+            </button>
+            <button>
+              <p>{t(`platform_btn.reviews`)}</p>
+            </button>
+          </div>
+        </AccordionContent>
+
+        <AccordionTrigger onClick={() => handleChangeOpenSubcard()}>
+          <div className={styles.card__btn}>
+            {isSubcardOpen
+              ? t(`platforms_blogger.card.see_less`)
+              : t(`platforms_blogger.card.see_more`)}
+            <ArrowSmallVerticalIcon
+              className={
+                isSubcardOpen
+                  ? "default__icon__white rotate"
+                  : "default__icon__white rotate__down"
+              }
+            />
+          </div>
+        </AccordionTrigger>
+      </AccordionItem>
     </div>
   );
 };

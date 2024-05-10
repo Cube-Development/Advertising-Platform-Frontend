@@ -1,6 +1,12 @@
 import { CancelIcon2, ClockIcon } from "@shared/assets";
 import { TimeListProps } from "@shared/types/createPost";
-import { MyButton, MyModal } from "@shared/ui";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogTrigger,
+} from "@shared/ui/shadcn-ui/ui/alert-dialog";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -79,99 +85,152 @@ export const TimeList: FC<TimeListProps> = ({ onChange }) => {
     console.log(newTimeList);
   };
 
-  const handleOpenModal = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-    setIsModalOpen(true);
-  };
+  // const handleOpenModal = (event: React.MouseEvent<HTMLButtonElement>) => {
+  //   event.stopPropagation();
+  //   setIsModalOpen(true);
+  // };
 
   const handleCloseModal = () => {
     setSelectedTimeObject({
       timeIndexList: [],
       timeStringList: [],
     });
-    setIsModalOpen(false);
+    // setIsModalOpen(false);
   };
   const continueAction = () => {
-    setIsModalOpen(false);
+    // setIsModalOpen(false);
     onChange(selectedTimesObject.timeStringList);
   };
 
-  const handleClickOutside = (event: MouseEvent) => {
-    if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-      setIsModalOpen(false);
-    }
-  };
+  // const handleClickOutside = (event: MouseEvent) => {
+  //   if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
+  //     setIsModalOpen(false);
+  //   }
+  // };
 
-  useEffect(() => {
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
+  // useEffect(() => {
+  //   document.addEventListener("click", handleClickOutside);
+  //   return () => {
+  //     document.removeEventListener("click", handleClickOutside);
+  //   };
+  // }, []);
 
   return (
-    <div>
-      <button
-        type="button"
-        className={styles.wrapper}
-        onClick={(e) => handleOpenModal(e)}
-      >
-        <ClockIcon />
-        <p>
-          {selectedTimesObject.timeIndexList.length && !isModalOpen
-            ? `${selectedTimesObject.timeStringList[0]} - ${selectedTimesObject.timeStringList[1]}`
-            : "--:-- - --:--"}
-        </p>
-      </button>
-
-      {isModalOpen && (
-        <MyModal>
-          <div className={styles.content} ref={menuRef}>
+    <>
+      <AlertDialog>
+        <AlertDialogTrigger>
+          <div className={styles.open}>
+            <ClockIcon />
+            <p>
+              {selectedTimesObject.timeIndexList.length && !isModalOpen
+                ? `${selectedTimesObject.timeStringList[0]} - ${selectedTimesObject.timeStringList[1]}`
+                : "--:-- - --:--"}
+            </p>
+          </div>
+        </AlertDialogTrigger>
+        <AlertDialogContent>
+          <div className={styles.content}>
             <div className={styles.top}>
               <p>{t("calendar.choose_time")}</p>
-              <button onClick={handleCloseModal}>
+              <AlertDialogCancel type="button" onClick={handleCloseModal}>
                 <CancelIcon2 />
-              </button>
+              </AlertDialogCancel>
             </div>
             <div className={styles.timeList}>
-              <div className={styles.leftColumn}>
-                <div className={styles.leftGrid}>
-                  {timeSlots.map((timeSlot, index) => (
-                    <div
-                      key={timeSlot}
-                      className={`${styles.timeSlot} ${
-                        selectedTimesObject.timeIndexList.includes(index)
-                          ? styles.active
-                          : index >
-                                Math.min(
-                                  ...selectedTimesObject.timeIndexList,
-                                ) &&
-                              index <
-                                Math.max(...selectedTimesObject.timeIndexList)
-                            ? styles.active__in
-                            : ""
-                      }`}
-                      onClick={() => selectTime(index)}
-                    >
-                      <p>{timeSlot}</p>
-                    </div>
-                  ))}
-                </div>
-                <div className={styles.bottom}>
-                  <MyButton
-                    buttons_type="button__white"
-                    type="button"
-                    className={styles.button}
-                    onClick={continueAction}
+              <div className={styles.leftGrid}>
+                {timeSlots.map((timeSlot, index) => (
+                  <div
+                    key={timeSlot}
+                    className={`${styles.timeSlot} ${
+                      selectedTimesObject.timeIndexList.includes(index)
+                        ? styles.active
+                        : index >
+                              Math.min(...selectedTimesObject.timeIndexList) &&
+                            index <
+                              Math.max(...selectedTimesObject.timeIndexList)
+                          ? styles.active__in
+                          : ""
+                    }`}
+                    onClick={() => selectTime(index)}
                   >
+                    <p>{timeSlot}</p>
+                  </div>
+                ))}
+              </div>
+              <div className={styles.bottom}>
+                <AlertDialogAction type="button" onClick={continueAction}>
+                  <div className={`${styles.confirm} button button__white`}>
                     <p>{t("calendar.confirm")}</p>
-                  </MyButton>
-                </div>
+                  </div>
+                </AlertDialogAction>
               </div>
             </div>
           </div>
-        </MyModal>
-      )}
-    </div>
+        </AlertDialogContent>
+      </AlertDialog>
+      {/* <div>
+        <button
+          type="button"
+          className={styles.wrapper}
+          onClick={(e) => handleOpenModal(e)}
+        >
+          <ClockIcon />
+          <p>
+            {selectedTimesObject.timeIndexList.length && !isModalOpen
+              ? `${selectedTimesObject.timeStringList[0]} - ${selectedTimesObject.timeStringList[1]}`
+              : "--:-- - --:--"}
+          </p>
+        </button>
+
+        {isModalOpen && (
+          <MyModal>
+            <div className={styles.content} ref={menuRef}>
+              <div className={styles.top}>
+                <p>{t("calendar.choose_time")}</p>
+                <button onClick={handleCloseModal}>
+                  <CancelIcon2 />
+                </button>
+              </div>
+              <div className={styles.timeList}>
+                <div className={styles.leftColumn}>
+                  <div className={styles.leftGrid}>
+                    {timeSlots.map((timeSlot, index) => (
+                      <div
+                        key={timeSlot}
+                        className={`${styles.timeSlot} ${
+                          selectedTimesObject.timeIndexList.includes(index)
+                            ? styles.active
+                            : index >
+                                  Math.min(
+                                    ...selectedTimesObject.timeIndexList
+                                  ) &&
+                                index <
+                                  Math.max(...selectedTimesObject.timeIndexList)
+                              ? styles.active__in
+                              : ""
+                        }`}
+                        onClick={() => selectTime(index)}
+                      >
+                        <p>{timeSlot}</p>
+                      </div>
+                    ))}
+                  </div>
+                  <div className={styles.bottom}>
+                    <MyButton
+                      buttons_type="button__white"
+                      type="button"
+                      className={styles.button}
+                      onClick={continueAction}
+                    >
+                      <p>{t("calendar.confirm")}</p>
+                    </MyButton>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </MyModal>
+        )}
+      </div> */}
+    </>
   );
 };

@@ -1,4 +1,6 @@
-import { FC, useEffect, useState } from "react";
+import { GenerateGuestId } from "@features/generateGuestId";
+import { GetUserId } from "@features/getUserId";
+import { FC, useEffect, useRef, useState } from "react";
 import styles from "./styles.module.scss";
 import { CatalogSearch } from "./catalogSearch";
 import { CatalogList } from "./catalogList";
@@ -10,9 +12,9 @@ import {
   useGetCatalogQuery,
 } from "@shared/store/services/catalogService";
 import { Languages } from "@shared/config/languages";
-import { useForm } from "react-hook-form";
-import { platformTypesNum } from "@shared/config/platformTypes";
 import { platformData, sortingFilter } from "@shared/config/platformData";
+import { platformTypesNum } from "@shared/config/platformTypes";
+import { useAppSelector } from "@shared/store";
 import {
   useAddToCommonCartMutation,
   useAddToPublicCartMutation,
@@ -21,18 +23,16 @@ import {
   useRemoveFromCommonCartMutation,
   useRemoveFromPublicCartMutation,
 } from "@shared/store/services/cartService";
-import { useAppSelector } from "@shared/store";
-import Cookies from "js-cookie";
 import { ICart } from "@shared/types/cart";
-import { GenerateGuestId } from "@features/generateGuestId";
-import { GetUserId } from "@features/getUserId";
-
+import Cookies from "js-cookie";
+import { useForm } from "react-hook-form";
+import { INTERSECTION_ELEMENTS } from "@shared/config/common";
 export const CatalogBlock: FC = () => {
   const { t, i18n } = useTranslation();
   const language = Languages.find((lang) => {
     return i18n.language === lang.name;
   });
-  const elements = 5;
+  const elements = INTERSECTION_ELEMENTS.catalog;
 
   const { watch, reset, setValue, getValues } = useForm<getCatalogReq>({
     defaultValues: {
@@ -46,7 +46,7 @@ export const CatalogBlock: FC = () => {
         language: [],
         region: [],
       },
-      sort: sortingFilter.subscribers_down,
+      sort: sortingFilter.price_down,
     },
   });
 
@@ -56,26 +56,25 @@ export const CatalogBlock: FC = () => {
     GenerateGuestId();
   }
   const userId = GetUserId();
-
   const formFields = watch();
-
   const { filter, sort, language: lang } = formFields;
+
+  const { data: catalogAuth, isFetching: isCatalogAuthLoading } =
+    useGetCatalogQuery(
+      { ...formFields, user_id: userId },
+      {
+        skip: !userId,
+      },
+    );
+  const { data: catalog, isFetching: isCatalogLoading } = useGetCatalogQuery(
+    { ...formFields, guest_id: guestId },
+    { skip: isAuth },
+  );
 
   const { data: cart } = useReadCommonCartQuery(
     { language: language?.id || Languages[0].id },
     { skip: !isAuth },
   );
-  const { data: catalogAuth } = useGetCatalogQuery(
-    { ...formFields, user_id: userId },
-    {
-      skip: !userId,
-    },
-  );
-  const { data: catalog } = useGetCatalogQuery(
-    { ...formFields, guest_id: guestId },
-    { skip: isAuth },
-  );
-
   const { data: cartPub } = useReadPublicCartQuery(
     { guest_id: guestId, language: language?.id || Languages[0].id },
     { skip: !guestId || isAuth },
@@ -85,35 +84,31 @@ export const CatalogBlock: FC = () => {
     catalogAuth?.channels ? catalogAuth?.channels : catalog?.channels || [],
   );
 
+  const catalogTopRef = useRef<HTMLDivElement>(null);
+
   useEffect(() => {
-    console.log("setValue('page', 1)", cards.length);
-    console.log("catalogAuth?.channels", catalogAuth?.channels);
-    setValue(platformData.page, 1);
     setCards(
       catalogAuth?.channels ? catalogAuth?.channels : catalog?.channels || [],
     );
+    setValue(platformData.page, 1);
+    catalogTopRef.current?.scrollIntoView({
+      behavior: "smooth",
+    });
   }, [filter, sort, lang]);
 
   useEffect(() => {
-    if (catalog) {
-      setCards(catalog?.channels);
+    if (catalog && formFields.page !== 1) {
+      setCards([...cards, ...catalog.channels]);
+    } else if (catalog) {
+      setCards(catalog.channels);
     }
   }, [catalog]);
 
   useEffect(() => {
-    console.log("catalogAuth", cards);
-    if (catalogAuth) {
-      // const cardsEnd = cards.slice(-elements);
-      // console.log("cards", cards);
-      // console.log("cardsEnd", cardsEnd);
-      // console.log("catalogAuthEND", catalogAuth.channels);
-
-      const isIncluded = catalogAuth.channels.every((item) =>
-        cards.includes(item),
-      );
-      if (!isIncluded) {
-        setCards([...cards, ...catalogAuth.channels]);
-      }
+    if (catalogAuth && formFields.page !== 1) {
+      setCards([...cards, ...catalogAuth.channels]);
+    } else if (catalogAuth && formFields.page === 1) {
+      setCards(catalogAuth.channels);
     }
   }, [catalogAuth]);
 
@@ -269,19 +264,25 @@ export const CatalogBlock: FC = () => {
             />
           </div>
           <div className={styles.right}>
-            <div className={styles.content__right}>
+            <div className={styles.content__right} ref={catalogTopRef}>
               <CatalogList
                 setValue={setValue}
                 page={formFields.page}
                 channels={cards || []}
                 onChangeCard={handleChangeCards}
-                isPagination={Boolean(
-                  catalogAuth?.channels.length || catalog?.channels.length,
+                isNotEmpty={Boolean(
+                  (catalogAuth &&
+                    catalogAuth?.channels.length ===
+                      INTERSECTION_ELEMENTS.catalog) ||
+                    (catalog &&
+                      catalog?.channels.length ===
+                        INTERSECTION_ELEMENTS.catalog),
                 )}
+                isLoading={isCatalogAuthLoading || isCatalogLoading}
               />
             </div>
             <div className={styles.cart}>
-              {cartPub && currentCart?.channels.length ? (
+              {cartPub && currentCart?.channels.length > 0 ? (
                 <CatalogCart cart={currentCart!} />
               ) : (
                 cart &&

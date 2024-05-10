@@ -7,9 +7,9 @@ export interface ILogin {
 
 export interface IMenuItems {
   item: IMenuItem;
-  toggleMenu?: () => void;
-  chapter?: string;
-  changeCharper: (title: string, haveSubitems: boolean) => void;
+  // toggleMenu?: () => void;
+  // chapter?: string;
+  // changeCharper: (title: string, haveSubitems: boolean) => void;
 }
 
 interface IMenuItem {

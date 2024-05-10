@@ -4,6 +4,13 @@ export interface IActiveChannelBlogger {
   channels: IActiveChannel[];
 }
 
+export type AllChannelTypes =
+  | IActiveChannel
+  | IInactiveChannel
+  | IModerationChannel
+  | IModerationRejectChannel
+  | IBlockedChannel;
+
 export interface IActiveChannel {
   id: string;
   name: string;

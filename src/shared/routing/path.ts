@@ -17,4 +17,5 @@ export enum paths {
   orders = "/orders",
   offers = "/offers",
   platforms = "/platforms",
+  faq = "/faq",
 }

@@ -7,8 +7,12 @@
   img {
     align-items: center;
   }
-}
 
-.isLeft {
-  margin: 0 -80px;
+  &.isLeft {
+    margin-left: -250px;
+  }
+
+  &.isRight {
+    margin-right: -250px;
+  }
 }

@@ -17,6 +17,7 @@ import { WalletTopUpPage } from "./WalletTopUp";
 import { WalletWithdrawPage } from "./WalletWithdraw";
 import { WalletHistoryPage } from "./WalletHistory";
 import { CreateOrderPage } from "./CreateOrder/UI";
+import { FAQPage } from "./FAQ";
 
 export interface IRoute {
   path: string;
@@ -34,6 +35,7 @@ export const privateCommonRoutes: IRoute[] = [
 
 export const publicCommonRoutes: IRoute[] = [
   { path: paths.notFound, component: NotFoundPage },
+  { path: paths.faq, component: FAQPage },
 ];
 
 export const privateBloggerRoutes: IRoute[] = [
