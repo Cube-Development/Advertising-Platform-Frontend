@@ -135,7 +135,10 @@
     }
 
     li {
-      margin-right: 10px;
+      // margin-right: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
   }
 
@@ -169,6 +172,9 @@
       justify-content: space-between;
       cursor: pointer;
       padding: 10px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
 
       input {
         cursor: pointer;

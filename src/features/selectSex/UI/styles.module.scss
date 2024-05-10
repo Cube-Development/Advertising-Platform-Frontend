@@ -43,26 +43,27 @@
 
 .slider {
   display: grid;
-  grid-auto-flow: row;
+  grid-template: 1fr / 50px 1fr 50px;
+  align-items: center;
   row-gap: 10px;
+  font-size: 16px;
+  font-weight: 500;
 
-  .position {
+  .man {
+    color: #5c89ff;
     display: grid;
     grid-auto-flow: column;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    text-align: center;
+    white-space: nowrap;
+  }
 
-    p {
-      padding: 10px 15px;
-      border-radius: 5px;
-      border: 1px solid #61a5f5;
-      color: var(--Personal-colors-black);
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: normal;
-      line-height: 0.75;
-    }
+  .woman {
+    color: #fc65ff;
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+    align-items: center;
+    white-space: nowrap;
   }
 }

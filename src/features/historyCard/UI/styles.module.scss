@@ -1,7 +1,9 @@
 .wrapper {
   display: grid;
-  // grid-auto-flow: column;
-  grid-template: 1fr / 1fr 1fr 1fr 1fr 1.5fr;
+  grid-template: 1fr / minmax(10vw, 15vw) minmax(10vw, 15vw) minmax(10vw, 15vw) minmax(
+      10vw,
+      15vw
+    ) minmax(20vw, 30vw);
   align-items: center;
 
   border-radius: 12px;
@@ -16,6 +18,9 @@
       font-size: 16px;
       font-style: normal;
       font-weight: 500;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
   }
 }

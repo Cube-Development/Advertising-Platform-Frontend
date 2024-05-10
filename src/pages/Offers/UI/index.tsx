@@ -76,7 +76,9 @@ export const OffersPage: FC = () => {
         offers={offers!}
         handleOnChangePage={handleOnChangePage}
         isLoading={isFetching}
-        isNotEmpty={data ? data?.orders?.length > 0 : false}
+        isNotEmpty={
+          data ? data?.orders?.length === INTERSECTION_ELEMENTS.orders : false
+        }
       />
     </>
   );

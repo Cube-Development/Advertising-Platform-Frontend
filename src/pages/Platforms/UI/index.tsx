@@ -80,28 +80,44 @@ export const PlatformsPage: FC = () => {
           cards={channels!}
           handleOnChangePage={handleOnChangePage}
           isLoading={isFetching}
-          isNotEmpty={data ? data?.channels?.length > 0 : false}
+          isNotEmpty={
+            data
+              ? data?.channels?.length === INTERSECTION_ELEMENTS.orders
+              : false
+          }
         />
       ) : statusFilter === platformStatusFilter.moderation ? (
         <BloggerModPlatform
           cards={channels! as IModerationChannel[]}
           handleOnChangePage={handleOnChangePage}
           isLoading={isFetching}
-          isNotEmpty={data ? data?.channels?.length > 0 : false}
+          isNotEmpty={
+            data
+              ? data?.channels?.length === INTERSECTION_ELEMENTS.orders
+              : false
+          }
         />
       ) : statusFilter === platformStatusFilter.moderationReject ? (
         <BloggerPlatform
           cards={channels!}
           handleOnChangePage={handleOnChangePage}
           isLoading={isFetching}
-          isNotEmpty={data ? data?.channels?.length > 0 : false}
+          isNotEmpty={
+            data
+              ? data?.channels?.length === INTERSECTION_ELEMENTS.orders
+              : false
+          }
         />
       ) : statusFilter === platformStatusFilter.inactive ? (
         <BloggerPlatform
           cards={channels!}
           handleOnChangePage={handleOnChangePage}
           isLoading={isFetching}
-          isNotEmpty={data ? data?.channels?.length > 0 : false}
+          isNotEmpty={
+            data
+              ? data?.channels?.length === INTERSECTION_ELEMENTS.orders
+              : false
+          }
         />
       ) : (
         statusFilter === platformStatusFilter.banned && (
@@ -109,7 +125,11 @@ export const PlatformsPage: FC = () => {
             cards={channels!}
             handleOnChangePage={handleOnChangePage}
             isLoading={isFetching}
-            isNotEmpty={data ? data?.channels?.length > 0 : false}
+            isNotEmpty={
+              data
+                ? data?.channels?.length === INTERSECTION_ELEMENTS.orders
+                : false
+            }
           />
         )
       )}

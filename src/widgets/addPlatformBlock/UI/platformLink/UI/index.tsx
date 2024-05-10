@@ -13,8 +13,8 @@ import {
   useChannelVerifyMutation,
   useCreateCodeQuery,
 } from "@shared/store/services/channelService";
-import { AccountsLoader } from "@shared/ui/accountsLoader";
 import { platformTypes } from "@shared/config/postFilter";
+import { SpinnerLoaderSmall } from "@shared/ui/spinnerLoader";
 
 interface PlatformLinkProps {
   blur: IAddPlatformBlur;
@@ -133,18 +133,23 @@ export const PlatformLink: FC<PlatformLinkProps> = ({
                     }
                     className={`${styles.platform__input} ${errors["url"] && styles.form_error}`}
                   />
-                  <MyButton
-                    type="submit"
-                    className={`${styles.submit__btn} ${isSuccess && styles.submit__checked} ${error && styles.submit__error}`}
-                  >
-                    {!isSuccess &&
-                      !error &&
-                      !isLoading &&
-                      t("add_platform_btn.check")}
-                    {error && t("add_platform_btn.checked_error")}
-                    {isSuccess && t("add_platform_btn.checked")}
-                    {isLoading && <AccountsLoader />}
-                  </MyButton>
+                  {isLoading ? (
+                    <div>
+                      <SpinnerLoaderSmall />
+                    </div>
+                  ) : (
+                    <MyButton
+                      type="submit"
+                      className={`${styles.submit__btn} ${isSuccess && styles.submit__checked} ${error && styles.submit__error}`}
+                    >
+                      {!isSuccess &&
+                        !error &&
+                        !isLoading &&
+                        t("add_platform_btn.check")}
+                      {error && t("add_platform_btn.checked_error")}
+                      {isSuccess && t("add_platform_btn.checked")}
+                    </MyButton>
+                  )}
                 </div>
               </div>
             </div>

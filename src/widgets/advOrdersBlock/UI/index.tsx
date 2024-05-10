@@ -1,12 +1,13 @@
 import { pageFilter } from "@shared/config/pageFilter";
 import {
   advManagerProjectStatusFilter,
+  advertiserProjectTypes,
   managerProjectStatus,
   managerProjectStatusFilter,
   myProjectStatusFilter,
   projectTypesFilter,
 } from "@shared/config/projectFilter";
-import { useAppSelector } from "@shared/store";
+import { useAppDispatch, useAppSelector } from "@shared/store";
 import {
   getProjectsCardReq,
   useGetAdvProjectsQuery,
@@ -25,14 +26,39 @@ import {
 import { AdvDevProject } from "./advDevProject";
 import { IAdvProjectCard } from "@shared/types/advProject";
 import { INTERSECTION_ELEMENTS } from "@shared/config/common";
+import { QueryParams } from "@features/queryParams";
+import { filterSlice } from "@shared/store/reducers";
 
 export const AdvOrdersBlock: FC = () => {
+  const { order_type } = QueryParams();
+  const dispatch = useAppDispatch();
+
   const { typeFilter, statusFilter } = useAppSelector((state) => state.filter);
   const page = pageFilter.order;
   const [currentPage, setCurrentPage] = useState(1);
   const handleOnChangePage = () => {
     setCurrentPage(currentPage + 1);
   };
+
+  // check queries for project types to show current orders
+  useEffect(() => {
+    if (order_type) {
+      console.log(order_type);
+      advertiserProjectTypes.map((type) => {
+        if (order_type === type.type) {
+          dispatch(filterSlice.actions.setTypeFilter(type.type));
+          dispatch(filterSlice.actions.setStatusFilter(type.status));
+        }
+      });
+    } else {
+      dispatch(
+        filterSlice.actions.setTypeFilter(advertiserProjectTypes[0].type),
+      );
+      dispatch(
+        filterSlice.actions.setStatusFilter(advertiserProjectTypes[0].status),
+      );
+    }
+  }, [order_type]);
 
   const getParams: getProjectsCardReq = {
     page: currentPage,
@@ -119,14 +145,22 @@ export const AdvOrdersBlock: FC = () => {
           projects={projects!}
           handleOnChangePage={handleOnChangePage}
           isLoading={isFetching}
-          isNotEmpty={data ? data?.projects?.length > 0 : false}
+          isNotEmpty={
+            data
+              ? data?.projects?.length === INTERSECTION_ELEMENTS.orders
+              : false
+          }
         />
       ) : (
         <AdvProject
           projects={projects!}
           handleOnChangePage={handleOnChangePage}
           isLoading={isFetching}
-          isNotEmpty={data ? data?.projects?.length > 0 : false}
+          isNotEmpty={
+            data
+              ? data?.projects?.length === INTERSECTION_ELEMENTS.orders
+              : false
+          }
         />
       )}
     </>

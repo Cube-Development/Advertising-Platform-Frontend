@@ -2,9 +2,9 @@ import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { InfoIcon } from "@shared/assets";
-import { MySlider } from "@shared/ui/slider";
 import { IAddPLatformData } from "@shared/types/common";
-import { UseFormRegister, UseFormSetValue } from "react-hook-form";
+import { UseFormSetValue } from "react-hook-form";
+import { MySliderLimit } from "@shared/ui";
 
 interface SelectSymbolProps {
   title: string;
@@ -39,7 +39,7 @@ export const SelectSymbol: FC<SelectSymbolProps> = ({
         <InfoIcon />
       </div>
       <div className={styles.slider}>
-        <MySlider
+        <MySliderLimit
           type="range"
           min={min}
           max={max}

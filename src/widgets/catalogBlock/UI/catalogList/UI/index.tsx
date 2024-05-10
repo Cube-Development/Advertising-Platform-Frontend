@@ -25,7 +25,7 @@ interface CatalogListProps {
   setValue: UseFormSetValue<getCatalogReq>;
   page: number;
   onChangeCard: (cart: IPlatform) => void;
-  isPagination: boolean;
+  isNotEmpty: boolean;
   isLoading?: boolean;
 }
 
@@ -33,7 +33,7 @@ export const CatalogList: FC<CatalogListProps> = ({
   channels,
   setValue,
   page,
-  isPagination,
+  isNotEmpty,
   onChangeCard,
   isLoading,
 }) => {
@@ -82,7 +82,7 @@ export const CatalogList: FC<CatalogListProps> = ({
           />
         ))}
       </div>
-      {isPagination ? (
+      {isNotEmpty ? (
         // <DinamicPagination onChange={handleOnChangePage} />
         <div className={styles.show_more} onClick={handleOnChangePage}>
           {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}

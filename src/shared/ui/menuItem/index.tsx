@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
 import { accordionTypes } from "@shared/config/accordion";
+import { paths } from "@shared/routing";
 
 export const MenuItem: React.FC<IMenuItems> = ({ item }) => {
   const { t } = useTranslation();
@@ -53,7 +54,9 @@ export const MenuItem: React.FC<IMenuItems> = ({ item }) => {
         ) : (
           <Link to={item.item.path!}>
             <AccordionTrigger>
-              <div className={`${styles.row} ${isActive ? styles.active : ""}`}>
+              <div
+                className={`${styles.row} ${isActive ? styles.active : ""} ${item.item.path === paths.faq && styles.faq}`}
+              >
                 <div className={styles.row__title}>
                   {item.item.img && <item.item.img />}
                   {t(item.item.title)}
@@ -66,7 +69,7 @@ export const MenuItem: React.FC<IMenuItems> = ({ item }) => {
         {item.subItems && (
           <AccordionContent>
             <ul>
-              {item.subItems.map((subItem, index) => (
+              {item.subItems.map((subItem) => (
                 <Link to={subItem.path!} key={subItem.title}>
                   <li>{t(subItem.title)}</li>
                 </Link>

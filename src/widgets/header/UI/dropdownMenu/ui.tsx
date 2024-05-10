@@ -115,7 +115,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
           </div>
           <div>
             <Accordion type="single" collapsible>
-              {combinedMenu.map((item, index) => (
+              {combinedMenu.map((item) => (
                 <MenuItem key={item.item.title} item={item} />
               ))}
             </Accordion>

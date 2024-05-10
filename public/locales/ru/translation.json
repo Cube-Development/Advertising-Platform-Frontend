@@ -64,7 +64,7 @@
     "history": "История транзакций",
     "invoice": "Счета и договора",
 
-    "base": "База знаний (гайды-URL)"
+    "base": "База знаний"
   },
 
   "main_page_advertiser": {
@@ -1258,15 +1258,15 @@
   "platform_types": {
     "telegram": {
       "name": "Telegram",
-      "default_value": "Https//t.me/channel_name..."
+      "default_value": "https//t.me/channel_name..."
     },
     "instagram": {
       "name": "Instagram",
-      "default_value": "Https//instagram/channel_name..."
+      "default_value": "https//instagram.com/channel_name..."
     },
     "youtube": {
       "name": "Youtube",
-      "default_value": "Https//youtube/channel_name..."
+      "default_value": "https//youtube.com/channel_name..."
     }
   },
 

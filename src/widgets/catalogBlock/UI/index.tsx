@@ -64,31 +64,31 @@ export const CatalogBlock: FC = () => {
       { ...formFields, user_id: userId },
       {
         skip: !userId,
-      }
+      },
     );
   const { data: catalog, isFetching: isCatalogLoading } = useGetCatalogQuery(
     { ...formFields, guest_id: guestId },
-    { skip: isAuth }
+    { skip: isAuth },
   );
 
   const { data: cart } = useReadCommonCartQuery(
     { language: language?.id || Languages[0].id },
-    { skip: !isAuth }
+    { skip: !isAuth },
   );
   const { data: cartPub } = useReadPublicCartQuery(
     { guest_id: guestId, language: language?.id || Languages[0].id },
-    { skip: !guestId || isAuth }
+    { skip: !guestId || isAuth },
   );
 
   const [cards, setCards] = useState<IPlatform[]>(
-    catalogAuth?.channels ? catalogAuth?.channels : catalog?.channels || []
+    catalogAuth?.channels ? catalogAuth?.channels : catalog?.channels || [],
   );
 
   const catalogTopRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setCards(
-      catalogAuth?.channels ? catalogAuth?.channels : catalog?.channels || []
+      catalogAuth?.channels ? catalogAuth?.channels : catalog?.channels || [],
     );
     setValue(platformData.page, 1);
     catalogTopRef.current?.scrollIntoView({
@@ -113,7 +113,7 @@ export const CatalogBlock: FC = () => {
   }, [catalogAuth]);
 
   const [currentCart, setCurrentCart] = useState<ICart>(
-    cartPub ? cartPub : cart!
+    cartPub ? cartPub : cart!,
   );
   useEffect(() => {
     if (isAuth && cart) {
@@ -172,7 +172,7 @@ export const CatalogBlock: FC = () => {
               setCurrentCart(data);
             })
             .catch((error) =>
-              console.error("Ошибка при добавлении в корзину", error)
+              console.error("Ошибка при добавлении в корзину", error),
             );
         } else if (isAuth) {
           addToCommonCart(addReq)
@@ -181,7 +181,7 @@ export const CatalogBlock: FC = () => {
               setCurrentCart(data);
             })
             .catch((error) =>
-              console.error("Ошибка при добавлении в корзину", error)
+              console.error("Ошибка при добавлении в корзину", error),
             );
         }
       } else if (
@@ -196,7 +196,7 @@ export const CatalogBlock: FC = () => {
               setCurrentCart(data);
             })
             .catch((error) =>
-              console.error("Ошибка при добавлении в корзину", error)
+              console.error("Ошибка при добавлении в корзину", error),
             );
         } else if (isAuth) {
           addToCommonCart(addReq)
@@ -205,7 +205,7 @@ export const CatalogBlock: FC = () => {
               setCurrentCart(data);
             })
             .catch((error) =>
-              console.error("Ошибка при добавлении в корзину", error)
+              console.error("Ошибка при добавлении в корзину", error),
             );
         }
         newCards = cards.map((card) => {
@@ -226,7 +226,7 @@ export const CatalogBlock: FC = () => {
               setCurrentCart(data);
             })
             .catch((error) =>
-              console.error("Ошибка при удалении с корзины", error)
+              console.error("Ошибка при удалении с корзины", error),
             );
         } else if (isAuth) {
           removeFromCommonCart(removeReq)
@@ -235,7 +235,7 @@ export const CatalogBlock: FC = () => {
               setCurrentCart(data);
             })
             .catch((error) =>
-              console.error("Ошибка при удалении с корзины", error)
+              console.error("Ошибка при удалении с корзины", error),
             );
         }
         newCards = cards.map((item) => {
@@ -270,12 +270,13 @@ export const CatalogBlock: FC = () => {
                 page={formFields.page}
                 channels={cards || []}
                 onChangeCard={handleChangeCards}
-                isPagination={Boolean(
+                isNotEmpty={Boolean(
                   (catalogAuth &&
-                    catalogAuth?.channels.length >=
+                    catalogAuth?.channels.length ===
                       INTERSECTION_ELEMENTS.catalog) ||
                     (catalog &&
-                      catalog?.channels.length >= INTERSECTION_ELEMENTS.catalog)
+                      catalog?.channels.length ===
+                        INTERSECTION_ELEMENTS.catalog),
                 )}
                 isLoading={isCatalogAuthLoading || isCatalogLoading}
               />

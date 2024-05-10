@@ -1,1 +1,1 @@
-export { SpinnerLoader } from "./ui/index";
+export { SpinnerLoader, SpinnerLoaderSmall } from "./ui/index";
