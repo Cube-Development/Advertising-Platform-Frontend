@@ -1,12 +1,12 @@
 import { roles } from "@shared/config/roles";
 import { paths } from "@shared/routing";
-import { MenuItem } from "@shared/ui/menuItem";
+import { MenuItem } from "@widgets/header/UI/dropdownMenu/UI/menuItem";
+import { Accordion } from "@shared/ui/shadcn-ui/ui/accordion";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { advertiserMenu, bloggerMenu, commonMenu } from "./config";
 import styles from "./styles.module.scss";
-import { Accordion } from "@shared/ui/shadcn-ui/ui/accordion";
 
 interface DropdownMenuProps {
   currentRole: roles;
@@ -19,26 +19,9 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
 }) => {
   const { t } = useTranslation();
   const [isMenuOpen, setMenuOpen] = useState<null | boolean>(null);
-  const [chapter, setCharper] = useState("");
   const menuRef = useRef<HTMLDivElement>(null);
   const toggleMenu = () => {
     setMenuOpen(!isMenuOpen);
-  };
-
-  const changeCharper = (title: string, haveSubitems?: boolean) => {
-    let newCharper;
-    if (title === chapter) {
-      newCharper = "";
-    } else {
-      newCharper = title;
-    }
-    setCharper(newCharper);
-
-    if (!haveSubitems) {
-      console.log(haveSubitems);
-      setMenuOpen(false);
-      setCharper("");
-    }
   };
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -116,7 +99,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
           <div>
             <Accordion type="single" collapsible>
               {combinedMenu.map((item) => (
-                <MenuItem key={item.item.title} item={item} />
+                <MenuItem key={item.item.title} item={item} onChange={toggleMenu}/>
               ))}
             </Accordion>
           </div>

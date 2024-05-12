@@ -2,11 +2,13 @@ import { CancelIcon2, MoreIcon } from "@shared/assets";
 import { platformStatusFilter } from "@shared/config/platformFilter";
 import { paths } from "@shared/routing";
 import { useAppSelector } from "@shared/store";
+import { useDeactivateChannelMutation } from "@shared/store/services/channelService";
+import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
+import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
-import { useDeactivateChannelMutation } from "@shared/store/services/channelService";
 
 interface BloggerPlatformCardMenuProps {
   channel_id: string;
@@ -17,6 +19,7 @@ export const BloggerPlatformCardMenu: FC<BloggerPlatformCardMenuProps> = ({
   channel_id,
   DeleteChannel,
 }) => {
+  const { toast } = useToast();
   const { t } = useTranslation();
   const menuRef = useRef<HTMLDivElement>(null);
   const [isMenuOpen, setMenuOpen] = useState<boolean>(false);
@@ -59,9 +62,21 @@ export const BloggerPlatformCardMenu: FC<BloggerPlatformCardMenuProps> = ({
       .unwrap()
       .then(() => {
         handleModalClose();
+        toast({
+          variant: "success",
+          title: t("toasts.offers_blogger.channel.deactivate.success"),
+        });
         console.log("Канал деактивирован");
       })
-      .catch((error) => console.error("Ошибка деактивации: ", error));
+      .catch((error) => {
+        toast({
+          variant: "error",
+          title: t("toasts.offers_blogger.channel.activate.error"),
+          description: error,
+          action: <ToastAction altText="Ok">Ok</ToastAction>,
+        });
+        console.error("Ошибка деактивации: ", error);
+      });
   };
 
   return (

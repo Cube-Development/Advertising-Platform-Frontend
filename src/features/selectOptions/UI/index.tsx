@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { ArrowSmallVerticalIcon, InfoIcon } from "@shared/assets";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
-import { SELECTOPTIONS } from "@shared/config/common";
+import { PLATFORM_PARAMETERS } from "@shared/config/common";
 import { ISelectOption } from "@shared/types/translate";
 import { platformData } from "@shared/config/platformData";
 
@@ -46,14 +46,15 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
     : options;
 
   const [selectedOptions, setSelectedOptions] = useState<(number | null)[]>(
-    !single && defaultValues ? (defaultValues as unknown as number[]) : [],
+    !single && defaultValues ? (defaultValues as unknown as number[]) : []
   );
+
   const [selectedOption, setSelectedOption] = useState<IOption | null>(
     isFilter
       ? allOptions[0]
       : single && defaultValues
         ? (defaultValues as unknown as IOption)
-        : null,
+        : null
   );
 
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -70,12 +71,12 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
   const handleOptionsChange = (
     event:
       | React.MouseEvent<HTMLLIElement | EventTarget>
-      | React.ChangeEvent<HTMLInputElement>,
+      | React.ChangeEvent<HTMLInputElement>
   ) => {
     const selectedValue = Number(
       event.target instanceof HTMLLIElement
         ? (event.target as HTMLLIElement).getAttribute("data-value")
-        : (event.target as HTMLInputElement).value,
+        : (event.target as HTMLInputElement).value
     );
     const newOptions = selectedOptions.includes(selectedValue)
       ? selectedOptions.filter((value) => value !== selectedValue)
@@ -94,13 +95,13 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
   };
 
   const handleOptionChange = (
-    event: React.MouseEvent<HTMLLIElement | EventTarget>,
+    event: React.MouseEvent<HTMLLIElement | EventTarget>
   ) => {
     const selectedId = Number(
-      (event.target as HTMLLIElement).getAttribute("data-value"),
+      (event.target as HTMLLIElement).getAttribute("data-value")
     );
     const option: IOption = allOptions!.find(
-      (option) => option?.id === selectedId,
+      (option) => option?.id === selectedId
     )!;
     setSelectedOption(option);
     onChange(type, isCatalogSorting ? option?.type : selectedId);
@@ -123,6 +124,10 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    setSelectedOptions(defaultValues as number[]);
+  }, [defaultValues]);
 
   return (
     <div
@@ -200,7 +205,7 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
           <div className={`${styles.options} show`}>
             <ul
               className={
-                allOptions.length > SELECTOPTIONS.scrollAddLen
+                allOptions.length > PLATFORM_PARAMETERS.scrollAddLen
                   ? styles.scroll
                   : ""
               }

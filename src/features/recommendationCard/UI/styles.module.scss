@@ -1,0 +1,42 @@
+.wrapper{
+    display: grid;
+    grid-template: 1fr / 14fr 1fr;
+    border-radius: 10px;
+    align-content: start;
+    border: 0.25px solid var(--Containers);
+    padding: 10px;
+    cursor: pointer;
+
+    .card{
+        display: grid;
+        grid-auto-flow: row;
+        row-gap: 15px;
+        color: var(--Personal-colors-black);
+        padding: 5px;
+
+        &__row{
+            // display: grid;
+            // grid-auto-flow: column;
+            // column-gap: 10px;
+            // justify-content: start;
+            font-size: 12px;
+            font-style: normal;
+            line-height: normal;
+            p{
+                font-weight: 600;
+                span{
+                    font-weight: 400;
+                }
+            }
+        }
+    }
+    .checkbox{
+        display: grid;
+        align-items: start;
+
+        input{
+            width: 20px;
+            height: 20px;
+        }
+    }
+}

@@ -18,10 +18,14 @@ import { Languages } from "@shared/config/languages";
 import { useNavigate } from "react-router-dom";
 import { paths } from "@shared/routing";
 import { scroller } from "react-scroll";
+import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
+import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
 
 interface CreateOrderBlockProps {}
 
 export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
+  const { toast } = useToast();
+  const { t } = useTranslation();
   const onBlur = { post: true, datetime: true, payment: true };
   const [blur, setBlur] = useState<ICreateOrderBlur>(onBlur);
   const handleOnChangeBlur = (key: keyof ICreateOrderBlur) => {
@@ -96,12 +100,22 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
             return createPost(postReq)
               .unwrap()
               .then(() => {
+                toast({
+                  variant: "success",
+                  title: `${t("toasts.create_order.post.success")}: ${index}`,
+                });
                 console.log("Пост: ", index);
               })
-              .catch(() => {
-                alert("Ошибка в создании поста");
+              .catch((error) => {
+                toast({
+                  variant: "error",
+                  title: t("toasts.create_order.post.error"),
+                  description: error,
+                  action: <ToastAction altText="Ok">Ok</ToastAction>,
+                });
+                // alert("Ошибка в создании поста");
               });
-          }),
+          })
         );
         await createOrderDates(formData.datetime)
           .unwrap()
@@ -111,13 +125,33 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
               .then(() => {
                 navigate(paths.orders);
               })
-              .catch(() => alert("Ошибка в оплате заказа"));
+              .catch((error) => {
+                toast({
+                  variant: "error",
+                  title: t("toasts.create_order.payment.error"),
+                  description: error,
+                  action: <ToastAction altText="Ok">Ok</ToastAction>,
+                });
+                // alert("Ошибка в оплате заказа");
+              });
           })
-          .catch(() => {
-            alert("Ошибка в создании дат для каналов");
+          .catch((error) => {
+            toast({
+              variant: "error",
+              title: t("toasts.create_order.date.error"),
+              description: error,
+              action: <ToastAction altText="Ok">Ok</ToastAction>,
+            });
+            // alert("Ошибка в создании дат для каналов");
           });
       } catch (error) {
-        alert("Произошла ошибка: " + error);
+        toast({
+          variant: "error",
+          title: t("toasts.create_order.post.error"),
+          description: String(error),
+          action: <ToastAction altText="Ok">Ok</ToastAction>,
+        });
+        // alert("Произошла ошибка: " + error);
       }
     }
   };

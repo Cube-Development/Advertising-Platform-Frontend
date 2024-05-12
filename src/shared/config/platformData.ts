@@ -10,6 +10,7 @@ export enum platformData {
   format = "format",
   business = "business",
   page = "page",
+  description = "description",
 }
 
 export enum filterData {

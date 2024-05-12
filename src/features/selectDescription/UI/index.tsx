@@ -1,8 +1,9 @@
+import { InfoIcon } from "@shared/assets";
+import { platformData } from "@shared/config/platformData";
 import { FC, useState } from "react";
+import { UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { InfoIcon } from "@shared/assets";
-import { UseFormSetValue } from "react-hook-form";
 
 interface SelectDescriptionProps {
   title: string;
@@ -10,6 +11,7 @@ interface SelectDescriptionProps {
   placeholder: string;
   onChange: UseFormSetValue<any>;
   defaultValues?: string;
+  type: platformData
 }
 
 export const SelectDescription: FC<SelectDescriptionProps> = ({
@@ -18,6 +20,7 @@ export const SelectDescription: FC<SelectDescriptionProps> = ({
   placeholder,
   onChange,
   defaultValues,
+  type
 }) => {
   const { t } = useTranslation();
   const [description, setDescription] = useState(defaultValues || "");
@@ -29,7 +32,7 @@ export const SelectDescription: FC<SelectDescriptionProps> = ({
     const newDescription = e.target.value;
     setDescription(newDescription);
     setRemainingCharacters(newDescription.length);
-    onChange("description", newDescription);
+    onChange(type, newDescription);
   };
 
   return (

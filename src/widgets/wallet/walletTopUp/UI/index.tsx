@@ -1,13 +1,23 @@
 import { BarProfileFilter } from "@features/barProfileFilter/UI";
 import { ArrowIcon4 } from "@shared/assets";
 import { pageFilter } from "@shared/config/pageFilter";
+import { paymentTypes } from "@shared/config/payment";
 import { profileTypesName } from "@shared/config/profileFilter";
 import { useAppSelector } from "@shared/store";
 import {
-  IProfileData,
+  useCreateLegalMutation,
+  useEditLegalMutation,
+  useReadLegalsByTypeQuery,
+  useReadOneLegalMutation,
+} from "@shared/store/services/legalService";
+import { usePaymentDepositMutation } from "@shared/store/services/walletService";
+import {
   ILegalCard,
   ILegalCardShort,
+  IProfileData,
 } from "@shared/types/profile";
+import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
+import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import { ChooseProfile } from "@widgets/wallet/UI/chooseProfile";
 import { Guide } from "@widgets/wallet/UI/guide";
 import { PaymentData } from "@widgets/wallet/UI/paymentData/UI";
@@ -16,20 +26,13 @@ import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import {
-  useCreateLegalMutation,
-  useEditLegalMutation,
-  useReadLegalsByTypeQuery,
-  useReadOneLegalMutation,
-} from "@shared/store/services/legalService";
-import { usePaymentDepositMutation } from "@shared/store/services/walletService";
-import { paymentTypes } from "@shared/config/payment";
 
 interface IExtendedProfileData extends IProfileData {
   amount: number;
 }
 
 export const WalletTopUp: FC = () => {
+  const { toast } = useToast();
   const { t } = useTranslation();
   const [activeAccount, setActiveAccount] = useState<ILegalCard | null>(null);
 
@@ -66,11 +69,17 @@ export const WalletTopUp: FC = () => {
           (Object.keys(data) as Array<keyof IProfileData>).forEach(
             (value: keyof IProfileData) => {
               setValue(value, data[value]);
-            },
+            }
           );
           clearErrors();
         })
         .catch((error) => {
+          toast({
+            variant: "error",
+            title: t("toasts.wallet.profile.error"),
+            description: error,
+            action: <ToastAction altText="Ok">Ok</ToastAction>,
+          });
           console.error("Ошибка при заполнении данных", error);
         });
     }
@@ -99,9 +108,21 @@ export const WalletTopUp: FC = () => {
           .unwrap()
           .then(() => {
             reset();
-            alert(`Баланс успешно пополнен на сумму: ${paymentReq.amount}`);
+            // alert(`Баланс успешно пополнен на сумму: ${paymentReq.amount}`);
+            toast({
+              variant: "success",
+              title: `${t("toasts.wallet.topup.success")}: ${paymentReq.amount.toLocaleString()} ${t("symbol")}`,
+            });
           })
-          .catch((error) => console.error("Ошибка payment/deposit: ", error));
+          .catch((error) => {
+            toast({
+              variant: "error",
+              title: t("toasts.wallet.topup.error"),
+              description: error,
+              action: <ToastAction altText="Ok">Ok</ToastAction>,
+            });
+            console.error("Ошибка payment/deposit: ", error);
+          });
       })
       .catch((error) => {
         console.error("Ошибка в createLegal", error);
@@ -122,15 +143,31 @@ export const WalletTopUp: FC = () => {
                 .unwrap()
                 .then(() => {
                   reset();
-                  alert(
-                    `Баланс успешно пополнен на сумму: ${paymentReq.amount}`,
-                  );
+                  toast({
+                    variant: "success",
+                    title: `${t("toasts.wallet.topup.success")}: ${paymentReq.amount.toLocaleString()} ${t("symbol")}`,
+                  });
+                  // alert(
+                  //   `Баланс успешно пополнен на сумму: ${paymentReq.amount}`
+                  // );
                 })
-                .catch((error) =>
-                  console.error("Ошибка payment/deposit: ", error),
-                );
+                .catch((error) => {
+                  toast({
+                    variant: "error",
+                    title: t("toasts.wallet.topup.error"),
+                    description: error,
+                    action: <ToastAction altText="Ok">Ok</ToastAction>,
+                  });
+                  console.error("Ошибка payment/deposit: ", error);
+                });
             })
             .catch((error) => {
+              toast({
+                variant: "error",
+                title: t("toasts.wallet.profile.error"),
+                description: error,
+                action: <ToastAction altText="Ok">Ok</ToastAction>,
+              });
               console.error("Ошибка в editLegal", error);
             });
         }

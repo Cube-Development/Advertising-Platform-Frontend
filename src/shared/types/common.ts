@@ -7,6 +7,7 @@ export interface ILogin {
 
 export interface IMenuItems {
   item: IMenuItem;
+  onChange: () => void
   // toggleMenu?: () => void;
   // chapter?: string;
   // changeCharper: (title: string, haveSubitems: boolean) => void;
@@ -19,7 +20,7 @@ interface IMenuItem {
 
 interface IMenuItemParams {
   title: string;
-  img?: React.FC;
+  img?: React.FC<SVGProps<SVGSVGElement>>;
   path?: string;
 }
 

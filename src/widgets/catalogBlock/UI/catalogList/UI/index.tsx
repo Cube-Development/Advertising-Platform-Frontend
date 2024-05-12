@@ -3,22 +3,21 @@ import { CatalogCard } from "@features/catalogCard";
 import { FormatList } from "@features/formatList";
 import { SearchFilter } from "@features/searchFilter";
 import { SelectOptions } from "@features/selectOptions";
+import { ShowMoreBtn } from "@features/showMore";
+import { SadSmileIcon } from "@shared/assets";
 import {
   filterData,
   networkTypes,
   platformData,
   sortingTypes,
 } from "@shared/config/platformData";
+import { getCatalogReq } from "@shared/store/services/catalogService";
 import { IPlatform } from "@shared/types/platform";
+import { SpinnerLoader } from "@shared/ui/spinnerLoader";
 import { FC } from "react";
 import { UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { getCatalogReq } from "@shared/store/services/catalogService";
-import { DinamicPagination } from "@features/dinamicPagination";
-import { SadSmileIcon } from "@shared/assets";
-import { ShowMoreBtn } from "@features/showMore";
-import { SpinnerLoader } from "@shared/ui/spinnerLoader";
 
 interface CatalogListProps {
   channels: IPlatform[];

@@ -23,8 +23,10 @@ export const enum FILES {
 }
 
 // Количество опций, после которого появляется Scroll
-export const enum SELECTOPTIONS {
+export const enum PLATFORM_PARAMETERS {
   scrollAddLen = 5,
+  defaultSexMale = 50,
+  defaultTextLimit = 4096
 }
 
 export const enum POST {

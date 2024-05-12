@@ -12,7 +12,7 @@ import styles from "./styles.module.scss";
 import { accordionTypes } from "@shared/config/accordion";
 import { paths } from "@shared/routing";
 
-export const MenuItem: React.FC<IMenuItems> = ({ item }) => {
+export const MenuItem: React.FC<IMenuItems> = ({ item , onChange}) => {
   const { t } = useTranslation();
   const [isActive, setIsActive] = useState<boolean>(false);
 
@@ -39,7 +39,7 @@ export const MenuItem: React.FC<IMenuItems> = ({ item }) => {
           <AccordionTrigger>
             <div className={`${styles.row} ${isActive ? styles.active : ""}`}>
               <div className={styles.row__title}>
-                {item.item.img && <item.item.img />}
+                {item.item.img && <item.item.img/>}
                 {t(item.item.title)}
               </div>
               <ArrowSmallVerticalIcon
@@ -52,13 +52,13 @@ export const MenuItem: React.FC<IMenuItems> = ({ item }) => {
             </div>
           </AccordionTrigger>
         ) : (
-          <Link to={item.item.path!}>
+          <Link to={item.item.path!} onClick={onChange}>
             <AccordionTrigger>
               <div
                 className={`${styles.row} ${isActive ? styles.active : ""} ${item.item.path === paths.faq && styles.faq}`}
               >
                 <div className={styles.row__title}>
-                  {item.item.img && <item.item.img />}
+                  {item.item.img && <item.item.img/>}
                   {t(item.item.title)}
                 </div>
               </div>
@@ -70,7 +70,7 @@ export const MenuItem: React.FC<IMenuItems> = ({ item }) => {
           <AccordionContent>
             <ul>
               {item.subItems.map((subItem) => (
-                <Link to={subItem.path!} key={subItem.title}>
+                <Link to={subItem.path!} key={subItem.title} onClick={onChange}>
                   <li>{t(subItem.title)}</li>
                 </Link>
               ))}

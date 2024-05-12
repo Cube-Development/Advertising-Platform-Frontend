@@ -65,7 +65,9 @@ export const BarProfileFilter: FC<BarProfileFilterProps> = ({
     } else if (page === pageFilter.createOrderFiles) {
       dispatch(filterSlice.actions.setAddFileFilter(option.type));
     }
-    if (page !== pageFilter.catalog) {
+    if (page === pageFilter.catalog) {
+    // if (page !== pageFilter.catalog) {
+      // изменил этот момент
       resetValues();
     }
   };

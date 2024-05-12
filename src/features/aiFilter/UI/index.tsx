@@ -4,14 +4,20 @@ import { useTranslation } from "react-i18next";
 import { MyButton } from "@shared/ui";
 import { RobotIcon } from "@shared/assets";
 
-export const AiFilter: FC = () => {
+interface AiFilterProps {
+  onChange: () => void;
+}
+
+export const AiFilter: FC<AiFilterProps> = ({ onChange }) => {
   const { t } = useTranslation();
   return (
-    <MyButton className={styles.button}>
-      <div className={styles.wrapper}>
-        <RobotIcon />
-        {t(`catalog.generation_btn`)}
-      </div>
+    <MyButton
+      buttons_type="button__white"
+      className={styles.button}
+      onClick={onChange}
+    >
+      <RobotIcon />
+      {t(`catalog.generation_btn`)}
     </MyButton>
   );
 };

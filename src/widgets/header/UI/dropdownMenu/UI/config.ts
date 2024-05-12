@@ -4,6 +4,8 @@ import {
   TemplateIcon,
   WalletIcon,
   BookIcon,
+  PlatformIcon,
+  OfferIcon,
 } from "@shared/assets";
 import { projectTypesFilter } from "@shared/config/projectFilter";
 
@@ -43,14 +45,14 @@ export const bloggerMenu = [
     item: {
       title: "burger_menu.platforms",
       path: paths.platforms,
-      img: CampaignIcon,
+      img: PlatformIcon,
     },
   },
   {
     item: {
       title: "burger_menu.offers",
       path: paths.offers,
-      img: TemplateIcon,
+      img: OfferIcon,
     },
   },
 ];

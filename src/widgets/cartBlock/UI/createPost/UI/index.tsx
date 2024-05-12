@@ -10,12 +10,15 @@ import { useAppSelector } from "@shared/store";
 import { useNavigate } from "react-router-dom";
 import { paths } from "@shared/routing";
 import Cookies from "js-cookie";
+import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
+import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
 
 interface CreatePostProps {
   cart: ICart;
 }
 
 export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
+  const { toast } = useToast();
   const { t } = useTranslation();
 
   // let { views, cost, subs } = cards.reduce(
@@ -47,10 +50,20 @@ export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
         })
         .catch((error) => {
           console.error("Ошибка во время создания корзины", error);
-          alert("У вас недостаточно средств, нужно пополнить баланс");
+          toast({
+            variant: "error",
+            title: t("toasts.cart.error"),
+            description: error,
+            action: <ToastAction altText="Ok">Ok</ToastAction>,
+          });
+          // alert("У вас недостаточно средств, нужно пополнить баланс");
         });
     } else {
-      alert("Нужно авторизоваться чтобы продолжить");
+      toast({
+        variant: "error",
+        title: t("toasts.auth.token.alert"),
+      });
+      // alert("Нужно авторизоваться чтобы продолжить");
     }
   };
 

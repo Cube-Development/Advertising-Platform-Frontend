@@ -1,16 +1,6 @@
 import { GenerateGuestId } from "@features/generateGuestId";
 import { GetUserId } from "@features/getUserId";
-import { FC, useEffect, useRef, useState } from "react";
-import styles from "./styles.module.scss";
-import { CatalogSearch } from "./catalogSearch";
-import { CatalogList } from "./catalogList";
-import { useTranslation } from "react-i18next";
-import { IPlatform } from "@shared/types/platform";
-import { CatalogCart } from "./catalogCart";
-import {
-  getCatalogReq,
-  useGetCatalogQuery,
-} from "@shared/store/services/catalogService";
+import { INTERSECTION_ELEMENTS, PLATFORM_PARAMETERS } from "@shared/config/common";
 import { Languages } from "@shared/config/languages";
 import { platformData, sortingFilter } from "@shared/config/platformData";
 import { platformTypesNum } from "@shared/config/platformTypes";
@@ -23,11 +13,26 @@ import {
   useRemoveFromCommonCartMutation,
   useRemoveFromPublicCartMutation,
 } from "@shared/store/services/cartService";
+import {
+  getCatalogReq,
+  useGetCatalogQuery,
+} from "@shared/store/services/catalogService";
 import { ICart } from "@shared/types/cart";
+import { IPlatform } from "@shared/types/platform";
 import Cookies from "js-cookie";
+import { FC, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
-import { INTERSECTION_ELEMENTS } from "@shared/config/common";
+import { useTranslation } from "react-i18next";
+import { CatalogCart } from "./catalogCart";
+import { CatalogList } from "./catalogList";
+import { CatalogSearch } from "./catalogSearch";
+import styles from "./styles.module.scss";
+import { RecommendCARDS } from "@shared/config/mockDATA";
+import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
+import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
+
 export const CatalogBlock: FC = () => {
+  const { toast } = useToast();
   const { t, i18n } = useTranslation();
   const language = Languages.find((lang) => {
     return i18n.language === lang.name;
@@ -41,6 +46,8 @@ export const CatalogBlock: FC = () => {
       elements_on_page: elements,
       filter: {
         platform: platformTypesNum.telegram,
+        male: PLATFORM_PARAMETERS.defaultSexMale,
+        female: 100 - PLATFORM_PARAMETERS.defaultSexMale,
         business: [],
         age: [],
         language: [],
@@ -64,31 +71,31 @@ export const CatalogBlock: FC = () => {
       { ...formFields, user_id: userId },
       {
         skip: !userId,
-      },
+      }
     );
   const { data: catalog, isFetching: isCatalogLoading } = useGetCatalogQuery(
     { ...formFields, guest_id: guestId },
-    { skip: isAuth },
+    { skip: isAuth }
   );
 
   const { data: cart } = useReadCommonCartQuery(
     { language: language?.id || Languages[0].id },
-    { skip: !isAuth },
+    { skip: !isAuth }
   );
   const { data: cartPub } = useReadPublicCartQuery(
     { guest_id: guestId, language: language?.id || Languages[0].id },
-    { skip: !guestId || isAuth },
+    { skip: !guestId || isAuth }
   );
 
   const [cards, setCards] = useState<IPlatform[]>(
-    catalogAuth?.channels ? catalogAuth?.channels : catalog?.channels || [],
+    catalogAuth?.channels ? catalogAuth?.channels : catalog?.channels || []
   );
 
   const catalogTopRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setCards(
-      catalogAuth?.channels ? catalogAuth?.channels : catalog?.channels || [],
+      catalogAuth?.channels ? catalogAuth?.channels : catalog?.channels || []
     );
     setValue(platformData.page, 1);
     catalogTopRef.current?.scrollIntoView({
@@ -113,7 +120,7 @@ export const CatalogBlock: FC = () => {
   }, [catalogAuth]);
 
   const [currentCart, setCurrentCart] = useState<ICart>(
-    cartPub ? cartPub : cart!,
+    cartPub ? cartPub : cart!
   );
   useEffect(() => {
     if (isAuth && cart) {
@@ -171,18 +178,31 @@ export const CatalogBlock: FC = () => {
             .then((data) => {
               setCurrentCart(data);
             })
-            .catch((error) =>
-              console.error("Ошибка при добавлении в корзину", error),
-            );
+            .catch((error) => {
+              toast({
+                variant: "error",
+                title: t("toasts.catalog.add.error"),
+                description: error,
+                action: <ToastAction altText="Ok">Ok</ToastAction>,
+              });
+
+              console.error("Ошибка при добавлении в корзину", error);
+            });
         } else if (isAuth) {
           addToCommonCart(addReq)
             .unwrap()
             .then((data) => {
               setCurrentCart(data);
             })
-            .catch((error) =>
-              console.error("Ошибка при добавлении в корзину", error),
-            );
+            .catch((error) => {
+              toast({
+                variant: "error",
+                title: t("toasts.catalog.add.error"),
+                description: error,
+                action: <ToastAction altText="Ok">Ok</ToastAction>,
+              });
+              console.error("Ошибка при добавлении в корзину", error);
+            });
         }
       } else if (
         currentCard?.selected_format?.format !==
@@ -195,18 +215,30 @@ export const CatalogBlock: FC = () => {
             .then((data) => {
               setCurrentCart(data);
             })
-            .catch((error) =>
-              console.error("Ошибка при добавлении в корзину", error),
-            );
+            .catch((error) => {
+              toast({
+                variant: "error",
+                title: t("toasts.catalog.add.error"),
+                description: error,
+                action: <ToastAction altText="Ok">Ok</ToastAction>,
+              });
+              console.error("Ошибка при добавлении в корзину", error);
+            });
         } else if (isAuth) {
           addToCommonCart(addReq)
             .unwrap()
             .then((data) => {
               setCurrentCart(data);
             })
-            .catch((error) =>
-              console.error("Ошибка при добавлении в корзину", error),
-            );
+            .catch((error) => {
+              toast({
+                variant: "error",
+                title: t("toasts.catalog.add.error"),
+                description: error,
+                action: <ToastAction altText="Ok">Ok</ToastAction>,
+              });
+              console.error("Ошибка при добавлении в корзину", error);
+            });
         }
         newCards = cards.map((card) => {
           if (
@@ -225,18 +257,30 @@ export const CatalogBlock: FC = () => {
             .then((data) => {
               setCurrentCart(data);
             })
-            .catch((error) =>
-              console.error("Ошибка при удалении с корзины", error),
-            );
+            .catch((error) => {
+              toast({
+                variant: "error",
+                title: t("toasts.catalog.remove.error"),
+                description: error,
+                action: <ToastAction altText="Ok">Ok</ToastAction>,
+              });
+              console.error("Ошибка при удалении с корзины", error);
+            });
         } else if (isAuth) {
           removeFromCommonCart(removeReq)
             .unwrap()
             .then((data) => {
               setCurrentCart(data);
             })
-            .catch((error) =>
-              console.error("Ошибка при удалении с корзины", error),
-            );
+            .catch((error) => {
+              toast({
+                variant: "error",
+                title: t("toasts.catalog.remove.error"),
+                description: error,
+                action: <ToastAction altText="Ok">Ok</ToastAction>,
+              });
+              console.error("Ошибка при удалении с корзины", error);
+            });
         }
         newCards = cards.map((item) => {
           if (item.id === cartChannel.id) {
@@ -276,7 +320,7 @@ export const CatalogBlock: FC = () => {
                       INTERSECTION_ELEMENTS.catalog) ||
                     (catalog &&
                       catalog?.channels.length ===
-                        INTERSECTION_ELEMENTS.catalog),
+                        INTERSECTION_ELEMENTS.catalog)
                 )}
                 isLoading={isCatalogAuthLoading || isCatalogLoading}
               />

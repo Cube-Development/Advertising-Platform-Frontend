@@ -1,25 +1,26 @@
-import { FC } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
 import { BarProfileFilter } from "@features/barProfileFilter/UI";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { IProfileData } from "@shared/types/profile";
+import { BarSubrofileFilter } from "@features/barSubprofileFilter";
+import { CreateProfile } from "@features/createProfile/UI";
+import { ProfileData } from "@features/profileData/UI";
+import { pageFilter } from "@shared/config/pageFilter";
 import {
-  SelfEmployedData,
   EntityData,
   IndividualData,
   SelfEmployedCardData,
+  SelfEmployedData,
 } from "@shared/config/profileData";
-import { ProfileData } from "@features/profileData/UI";
-import { CreateProfile } from "@features/createProfile/UI";
+import { profileTypesName, subprofileFilter } from "@shared/config/profileFilter";
 import { useAppSelector } from "@shared/store";
-import { subprofileFilter } from "@shared/config/profileFilter";
-import { BarSubrofileFilter } from "@features/barSubprofileFilter";
-import { pageFilter } from "@shared/config/pageFilter";
-import { profileTypesName } from "@shared/config/profileFilter";
 import { useCreateLegalMutation } from "@shared/store/services/legalService";
+import { IProfileData } from "@shared/types/profile";
+import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
+import { FC } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 export const ProfileCard: FC = () => {
+  const { toast } = useToast();
   const { t } = useTranslation();
 
   const {
@@ -52,10 +53,18 @@ export const ProfileCard: FC = () => {
     createLegal(dataWithLegalType)
       .unwrap()
       .then((data) => {
+        toast({
+          variant: "success",
+          title: t("toasts.add_profile.create.success"),
+        });
         console.log(data);
       })
       .catch((error) => {
-        console.error("Ошибка при заполнении данных", error);
+        toast({
+          variant: "error",
+          title: t("toasts.add_profile.create.error"),
+          description: error,
+        });
       });
   };
 
