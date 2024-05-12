@@ -1,9 +1,11 @@
 .wrapper {
   display: grid;
-  grid-template: 1fr / minmax(10vw, 15vw) minmax(10vw, 15vw) minmax(10vw, 15vw) minmax(
+  grid-template:
+    1fr / minmax(10vw, 15vw) minmax(10vw, 15vw) minmax(10vw, 15vw) minmax(
       10vw,
       15vw
-    ) minmax(20vw, 30vw);
+    )
+    minmax(20vw, 30vw);
   align-items: center;
   border-radius: 12px;
   border: 1px solid var(--Containers, #8c8c8c);

@@ -20,7 +20,7 @@ export const TopUpCard: FC = () => {
   const { toast } = useToast();
   const { t } = useTranslation();
   const [paymentType, setPaymentType] = useState<paymentTypes>(
-    paymentTypes.payme
+    paymentTypes.payme,
   );
 
   const {

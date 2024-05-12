@@ -26,7 +26,7 @@ export const enum FILES {
 export const enum PLATFORM_PARAMETERS {
   scrollAddLen = 5,
   defaultSexMale = 50,
-  defaultTextLimit = 4096
+  defaultTextLimit = 4096,
 }
 
 export const enum POST {

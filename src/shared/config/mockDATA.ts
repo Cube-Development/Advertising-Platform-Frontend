@@ -1644,7 +1644,6 @@ export const advSavedProjectCompleteCARDS: IAdvProjects = {
   ],
 };
 
-
 export const RecommendCARDS: IFilterSearch[] = [
   {
     platform: 1,
@@ -1776,7 +1775,6 @@ export const RecommendCARDS: IFilterSearch[] = [
   },
 ];
 
-
 export const AIRecommendCARDS: IFilterSearch[] = [
   {
     platform: 1,
@@ -1807,7 +1805,6 @@ export const AIRecommendCARDS: IFilterSearch[] = [
         id: 7,
         name: "Самарканд",
       },
-      
     ],
     male: 75,
     female: 25,
@@ -1829,7 +1826,6 @@ export const AIRecommendCARDS: IFilterSearch[] = [
         id: 2,
         name: "18-34 лет",
       },
-
     ],
     language: [
       {

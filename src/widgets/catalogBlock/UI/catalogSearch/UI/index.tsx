@@ -41,7 +41,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
 }) => {
   const [recommendationCard, setRecCard] = useState<IFilterSearch | null>(null);
   const [recommendationCards, setRecCards] = useState<IFilterSearch[] | null>(
-    null
+    null,
   );
 
   const { catalogFilter: catfilter } = useAppSelector((state) => state.filter);
@@ -87,7 +87,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
   };
 
   useEffect(() => {
-    console.log(filter)
+    console.log(filter);
     // setRecCards(RecommendCARDS);
   }, [filter]);
 

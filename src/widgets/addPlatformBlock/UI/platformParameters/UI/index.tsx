@@ -57,7 +57,7 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
   });
   const { data: channel } = useGetChannelByIdQuery(
     { channel_id: channel_id, language: language?.id || Languages[0].id },
-    { skip: !channel_id }
+    { skip: !channel_id },
   );
 
   let defaultValues;

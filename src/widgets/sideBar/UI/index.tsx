@@ -1,12 +1,15 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { roles } from "@shared/config/roles";
-import { userSlice } from "@shared/store/reducers";
+import { filterSlice, userSlice } from "@shared/store/reducers";
 import { useAppDispatch, useAppSelector } from "@shared/store";
-import { advertiserMenu, bloggerMenu, commonMenu } from "./config";
+import { advertiserMenu, bloggerMenu, commonMenu, managerMenu } from "./config";
 import { Link } from "react-router-dom";
 import { paths } from "@shared/routing";
 import { useTranslation } from "react-i18next";
+import { IMenuItem } from "@shared/types/common";
+import { Accordion } from "@shared/ui/shadcn-ui/ui/accordion";
+import { AccordionItem } from "@radix-ui/react-accordion";
 
 export const SideBar: FC = () => {
   const { isAuth, role } = useAppSelector((state) => state.user);
@@ -16,10 +19,22 @@ export const SideBar: FC = () => {
     dispatch(userSlice.actions.toggleRole(role));
   };
 
-  const combinedMenu =
+  const handleOpenDropdownMenu = (
+    event: React.MouseEvent<HTMLLIElement, MouseEvent>,
+  ) => {
+    event.stopPropagation();
+    document.body.classList.add("sidebar-open");
+    dispatch(filterSlice.actions.setDropDownMenuOpen(true));
+  };
+
+  const combinedMenu: IMenuItem[] =
     role === roles.advertiser
       ? [...advertiserMenu, ...commonMenu]
-      : [...bloggerMenu, ...commonMenu];
+      : role === roles.blogger
+        ? [...bloggerMenu, ...commonMenu]
+        : role === roles.manager
+          ? managerMenu
+          : [];
 
   return (
     <div className={styles.wrapper}>
@@ -53,13 +68,27 @@ export const SideBar: FC = () => {
             </Link>
           </div>
         </div>
-        {combinedMenu.map((item, index) => (
-          <Link to={item.item.path} key={index}>
-            <li className={styles.row}>
-              <item.item.img />
-            </li>
-          </Link>
-        ))}
+        <Accordion type="single">
+          {combinedMenu.map((item, index) => (
+            <AccordionItem value={`item-${item.item.title}`} key={index}>
+              {item.item.openMenu ? (
+                <li
+                  key={index}
+                  className={styles.row}
+                  onClick={(e) => handleOpenDropdownMenu(e)}
+                >
+                  {item.item.img && <item.item.img />}
+                </li>
+              ) : (
+                <Link to={item.item.path!} key={index}>
+                  <li className={styles.row}>
+                    {item.item.img && <item.item.img />}
+                  </li>
+                </Link>
+              )}
+            </AccordionItem>
+          ))}
+        </Accordion>
       </div>
     </div>
   );

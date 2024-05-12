@@ -69,7 +69,7 @@ export const WalletTopUp: FC = () => {
           (Object.keys(data) as Array<keyof IProfileData>).forEach(
             (value: keyof IProfileData) => {
               setValue(value, data[value]);
-            }
+            },
           );
           clearErrors();
         })

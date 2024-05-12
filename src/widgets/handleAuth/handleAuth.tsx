@@ -55,7 +55,7 @@ export const HandleAuth = () => {
           const decoded: DecodedToken = jwtDecode(data.access_token);
           dispatch(userSlice.actions.login(data));
           navigate(
-            decoded.role === roles.advertiser ? paths.main : paths.mainBlogger
+            decoded.role === roles.advertiser ? paths.main : paths.mainBlogger,
           );
           dispatch(userSlice.actions.toggleRole(decoded?.role));
           Cookies.remove("genState");

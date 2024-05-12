@@ -1,3 +1,4 @@
+import { SVGProps } from "react";
 import { IProfileData } from "./profile";
 import { ISelectOption } from "./translate";
 
@@ -7,21 +8,22 @@ export interface ILogin {
 
 export interface IMenuItems {
   item: IMenuItem;
-  onChange: () => void
+  onChange: () => void;
   // toggleMenu?: () => void;
   // chapter?: string;
   // changeCharper: (title: string, haveSubitems: boolean) => void;
 }
 
-interface IMenuItem {
+export interface IMenuItem {
   item: IMenuItemParams;
   subItems?: IMenuItemParams[];
 }
 
 interface IMenuItemParams {
-  title: string;
+  title?: string;
   img?: React.FC<SVGProps<SVGSVGElement>>;
   path?: string;
+  openMenu?: boolean;
 }
 
 export interface ITypeFilter {

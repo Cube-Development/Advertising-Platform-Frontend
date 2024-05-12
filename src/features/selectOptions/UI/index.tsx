@@ -46,7 +46,7 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
     : options;
 
   const [selectedOptions, setSelectedOptions] = useState<(number | null)[]>(
-    !single && defaultValues ? (defaultValues as unknown as number[]) : []
+    !single && defaultValues ? (defaultValues as unknown as number[]) : [],
   );
 
   const [selectedOption, setSelectedOption] = useState<IOption | null>(
@@ -54,7 +54,7 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
       ? allOptions[0]
       : single && defaultValues
         ? (defaultValues as unknown as IOption)
-        : null
+        : null,
   );
 
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -71,12 +71,12 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
   const handleOptionsChange = (
     event:
       | React.MouseEvent<HTMLLIElement | EventTarget>
-      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLInputElement>,
   ) => {
     const selectedValue = Number(
       event.target instanceof HTMLLIElement
         ? (event.target as HTMLLIElement).getAttribute("data-value")
-        : (event.target as HTMLInputElement).value
+        : (event.target as HTMLInputElement).value,
     );
     const newOptions = selectedOptions.includes(selectedValue)
       ? selectedOptions.filter((value) => value !== selectedValue)
@@ -95,13 +95,13 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
   };
 
   const handleOptionChange = (
-    event: React.MouseEvent<HTMLLIElement | EventTarget>
+    event: React.MouseEvent<HTMLLIElement | EventTarget>,
   ) => {
     const selectedId = Number(
-      (event.target as HTMLLIElement).getAttribute("data-value")
+      (event.target as HTMLLIElement).getAttribute("data-value"),
     );
     const option: IOption = allOptions!.find(
-      (option) => option?.id === selectedId
+      (option) => option?.id === selectedId,
     )!;
     setSelectedOption(option);
     onChange(type, isCatalogSorting ? option?.type : selectedId);

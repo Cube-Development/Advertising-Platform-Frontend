@@ -24,13 +24,13 @@
   row-gap: 20px;
   align-items: center;
 
-  &__title{
+  &__title {
     display: grid;
     grid-auto-flow: column;
     column-gap: 10px;
     align-items: center;
     justify-content: center;
-  
+
     p {
       font-size: 16px;
       font-style: normal;
@@ -38,17 +38,16 @@
       line-height: normal;
       color: var(--Personal-colors-main);
     }
-  
+
     svg {
       width: 26px;
       height: 26px;
     }
   }
 
-  &__cards{
+  &__cards {
     display: grid;
     grid-auto-flow: row;
     row-gap: 20px;
   }
-
 }

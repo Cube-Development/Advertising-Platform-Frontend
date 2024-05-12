@@ -10,9 +10,7 @@ import {
   useReadLegalsByTypeQuery,
   useReadOneLegalMutation,
 } from "@shared/store/services/legalService";
-import {
-  usePaymentWithdrawalMutation
-} from "@shared/store/services/walletService";
+import { usePaymentWithdrawalMutation } from "@shared/store/services/walletService";
 import {
   ILegalCard,
   ILegalCardShort,
@@ -48,7 +46,7 @@ export const WalletWithdraw: FC = () => {
   } = useForm<IExtendedProfileData>();
 
   const { profileFilter: filter, subprofileFilter } = useAppSelector(
-    (state) => state.filter
+    (state) => state.filter,
   );
 
   const {
@@ -58,7 +56,7 @@ export const WalletWithdraw: FC = () => {
   } = useReadLegalsByTypeQuery(
     filter.type === profileTypesName.selfEmployedAccounts
       ? subprofileFilter.id
-      : filter.id
+      : filter.id,
   );
 
   const [readOneLegal, { isLoading: isOneLegalLoading, error: oneLegalError }] =
@@ -76,7 +74,7 @@ export const WalletWithdraw: FC = () => {
           (Object.keys(data) as Array<keyof IProfileData>).forEach(
             (value: keyof IProfileData) => {
               setValue(value, data[value]);
-            }
+            },
           );
           clearErrors();
         })

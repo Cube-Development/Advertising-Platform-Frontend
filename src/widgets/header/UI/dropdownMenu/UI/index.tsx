@@ -1,12 +1,15 @@
 import { roles } from "@shared/config/roles";
 import { paths } from "@shared/routing";
-import { MenuItem } from "@widgets/header/UI/dropdownMenu/UI/menuItem";
 import { Accordion } from "@shared/ui/shadcn-ui/ui/accordion";
+import { MenuItem } from "@widgets/header/UI/dropdownMenu/UI/menuItem";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { advertiserMenu, bloggerMenu, commonMenu } from "./config";
+import { advertiserMenu, bloggerMenu, commonMenu, managerMenu } from "./config";
 import styles from "./styles.module.scss";
+import { IMenuItem } from "@shared/types/common";
+import { useAppDispatch, useAppSelector } from "@shared/store";
+import { filterSlice } from "@shared/store/reducers";
 
 interface DropdownMenuProps {
   currentRole: roles;
@@ -18,10 +21,17 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
   toggleRole,
 }) => {
   const { t } = useTranslation();
-  const [isMenuOpen, setMenuOpen] = useState<null | boolean>(null);
+
+  const { dropdownMenuOpen: isMenuOpen } = useAppSelector(
+    (state) => state.filter,
+  );
+  const dispatch = useAppDispatch();
+
+  // const [isMenuOpen, setMenuOpen] = useState<null | boolean>(null);
   const menuRef = useRef<HTMLDivElement>(null);
   const toggleMenu = () => {
-    setMenuOpen(!isMenuOpen);
+    // setMenuOpen(!isMenuOpen);
+    dispatch(filterSlice.actions.setDropDownMenuOpen(!isMenuOpen));
   };
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -30,12 +40,15 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
       !menuRef.current.contains(event.target as Node) &&
       isMenuOpen !== null
     ) {
-      setMenuOpen(false);
+      dispatch(filterSlice.actions.setDropDownMenuOpen(false));
+
+      // setMenuOpen(false);
     }
   };
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
+    console.log("isMenuOpen", isMenuOpen);
     if (isMenuOpen) {
       document.body.classList.add("sidebar-open");
     } else {
@@ -47,10 +60,14 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
     };
   }, [isMenuOpen]);
 
-  const combinedMenu =
+  const combinedMenu: IMenuItem[] =
     currentRole === roles.advertiser
       ? [...advertiserMenu, ...commonMenu]
-      : [...bloggerMenu, ...commonMenu];
+      : currentRole === roles.blogger
+        ? [...bloggerMenu, ...commonMenu]
+        : currentRole === roles.manager
+          ? [...managerMenu]
+          : [];
 
   return (
     <div className={styles.dropdown} ref={menuRef}>
@@ -97,9 +114,13 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
             </div>
           </div>
           <div>
-            <Accordion type="single" collapsible>
+            <Accordion type="single">
               {combinedMenu.map((item) => (
-                <MenuItem key={item.item.title} item={item} onChange={toggleMenu}/>
+                <MenuItem
+                  key={item.item.title}
+                  item={item}
+                  onChange={toggleMenu}
+                />
               ))}
             </Accordion>
           </div>

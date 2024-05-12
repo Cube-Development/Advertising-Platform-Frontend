@@ -6,13 +6,13 @@ import styles from "./styles.module.scss";
 interface RecommendationCardProps {
   card: IFilterSearch;
   onChange: (card: IFilterSearch) => void;
-  isChooseed: boolean
+  isChooseed: boolean;
 }
 
 export const RecommendationCard: FC<RecommendationCardProps> = ({
   card,
   onChange,
-  isChooseed
+  isChooseed,
 }) => {
   const { t } = useTranslation();
   return (

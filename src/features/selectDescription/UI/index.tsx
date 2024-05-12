@@ -11,7 +11,7 @@ interface SelectDescriptionProps {
   placeholder: string;
   onChange: UseFormSetValue<any>;
   defaultValues?: string;
-  type: platformData
+  type: platformData;
 }
 
 export const SelectDescription: FC<SelectDescriptionProps> = ({
@@ -20,7 +20,7 @@ export const SelectDescription: FC<SelectDescriptionProps> = ({
   placeholder,
   onChange,
   defaultValues,
-  type
+  type,
 }) => {
   const { t } = useTranslation();
   const [description, setDescription] = useState(defaultValues || "");

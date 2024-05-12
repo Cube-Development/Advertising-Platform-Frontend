@@ -9,7 +9,10 @@ import {
   SelfEmployedCardData,
   SelfEmployedData,
 } from "@shared/config/profileData";
-import { profileTypesName, subprofileFilter } from "@shared/config/profileFilter";
+import {
+  profileTypesName,
+  subprofileFilter,
+} from "@shared/config/profileFilter";
 import { useAppSelector } from "@shared/store";
 import { useCreateLegalMutation } from "@shared/store/services/legalService";
 import { IProfileData } from "@shared/types/profile";

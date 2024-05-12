@@ -1,6 +1,9 @@
 import { GenerateGuestId } from "@features/generateGuestId";
 import { GetUserId } from "@features/getUserId";
-import { INTERSECTION_ELEMENTS, PLATFORM_PARAMETERS } from "@shared/config/common";
+import {
+  INTERSECTION_ELEMENTS,
+  PLATFORM_PARAMETERS,
+} from "@shared/config/common";
 import { Languages } from "@shared/config/languages";
 import { platformData, sortingFilter } from "@shared/config/platformData";
 import { platformTypesNum } from "@shared/config/platformTypes";
@@ -71,31 +74,31 @@ export const CatalogBlock: FC = () => {
       { ...formFields, user_id: userId },
       {
         skip: !userId,
-      }
+      },
     );
   const { data: catalog, isFetching: isCatalogLoading } = useGetCatalogQuery(
     { ...formFields, guest_id: guestId },
-    { skip: isAuth }
+    { skip: isAuth },
   );
 
   const { data: cart } = useReadCommonCartQuery(
     { language: language?.id || Languages[0].id },
-    { skip: !isAuth }
+    { skip: !isAuth },
   );
   const { data: cartPub } = useReadPublicCartQuery(
     { guest_id: guestId, language: language?.id || Languages[0].id },
-    { skip: !guestId || isAuth }
+    { skip: !guestId || isAuth },
   );
 
   const [cards, setCards] = useState<IPlatform[]>(
-    catalogAuth?.channels ? catalogAuth?.channels : catalog?.channels || []
+    catalogAuth?.channels ? catalogAuth?.channels : catalog?.channels || [],
   );
 
   const catalogTopRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setCards(
-      catalogAuth?.channels ? catalogAuth?.channels : catalog?.channels || []
+      catalogAuth?.channels ? catalogAuth?.channels : catalog?.channels || [],
     );
     setValue(platformData.page, 1);
     catalogTopRef.current?.scrollIntoView({
@@ -120,7 +123,7 @@ export const CatalogBlock: FC = () => {
   }, [catalogAuth]);
 
   const [currentCart, setCurrentCart] = useState<ICart>(
-    cartPub ? cartPub : cart!
+    cartPub ? cartPub : cart!,
   );
   useEffect(() => {
     if (isAuth && cart) {
@@ -320,7 +323,7 @@ export const CatalogBlock: FC = () => {
                       INTERSECTION_ELEMENTS.catalog) ||
                     (catalog &&
                       catalog?.channels.length ===
-                        INTERSECTION_ELEMENTS.catalog)
+                        INTERSECTION_ELEMENTS.catalog),
                 )}
                 isLoading={isCatalogAuthLoading || isCatalogLoading}
               />
