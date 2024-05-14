@@ -12,7 +12,7 @@ import { ZeroPlatform } from "@features/zeroPlatform";
 import { pageFilter } from "@shared/config/pageFilter";
 import { Accordion } from "@shared/ui/shadcn-ui/ui/accordion";
 import { AllChannelTypes } from "@shared/types/channelStatus";
-import { FC } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import styles from "./styles.module.scss";
 import { SpinnerLoader } from "@shared/ui/spinnerLoader";
 import { ShowMoreBtn } from "@features/showMore";

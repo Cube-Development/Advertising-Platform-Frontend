@@ -21,10 +21,12 @@ export const SideBar: FC = () => {
 
   const handleOpenDropdownMenu = (
     event: React.MouseEvent<HTMLLIElement, MouseEvent>,
+    newTitle: string,
   ) => {
     event.stopPropagation();
     document.body.classList.add("sidebar-open");
-    dispatch(filterSlice.actions.setDropDownMenuOpen(true));
+    const newMenu = { isOpen: true, title: newTitle };
+    dispatch(filterSlice.actions.setDropDownMenu(newMenu));
   };
 
   const combinedMenu: IMenuItem[] =
@@ -75,7 +77,7 @@ export const SideBar: FC = () => {
                 <li
                   key={index}
                   className={styles.row}
-                  onClick={(e) => handleOpenDropdownMenu(e)}
+                  onClick={(e) => handleOpenDropdownMenu(e, item.item.title!)}
                 >
                   {item.item.img && <item.item.img />}
                 </li>

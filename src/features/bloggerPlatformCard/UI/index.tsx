@@ -66,9 +66,9 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
   const { t } = useTranslation();
   const [isSubcardOpen, setSubcardOpen] = useState(false);
 
-  const handleChangeOpenSubcard = (): void => {
-    setSubcardOpen(!isSubcardOpen);
-  };
+  // const handleChangeOpenSubcard = (): void => {
+  //   setSubcardOpen(!isSubcardOpen);
+  // };
 
   const { statusFilter } = useAppSelector((state) => state.filter);
 
@@ -275,7 +275,7 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
           </div>
         </AccordionContent>
 
-        <AccordionTrigger onClick={() => handleChangeOpenSubcard()}>
+        <AccordionTrigger>
           <div className={styles.card__btn}>
             {isSubcardOpen
               ? t(`platforms_blogger.card.see_less`)

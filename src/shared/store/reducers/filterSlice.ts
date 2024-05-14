@@ -33,7 +33,10 @@ interface FilterState {
   platformFilter: IPlatformLink;
   chatFilter: string;
   addFileFilter: string;
-  dropdownMenuOpen: boolean | null;
+  dropdownMenu: {
+    isOpen: boolean | null;
+    title: string;
+  };
 }
 
 const initialState: FilterState = {
@@ -53,7 +56,10 @@ const initialState: FilterState = {
   platformFilter: platformTypes[0],
   chatFilter: chatFilter.blogger,
   addFileFilter: addFileFilter.mediafile,
-  dropdownMenuOpen: null,
+  dropdownMenu: {
+    isOpen: null,
+    title: "",
+  },
 };
 
 export const filterSlice = createSlice({
@@ -102,8 +108,15 @@ export const filterSlice = createSlice({
     setAddFileFilter: (state, action: PayloadAction<string>) => {
       state.addFileFilter = action.payload;
     },
-    setDropDownMenuOpen: (state, action: PayloadAction<boolean | null>) => {
-      state.dropdownMenuOpen = action.payload;
+    setDropDownMenu: (
+      state,
+      action: PayloadAction<{
+        isOpen: boolean | null;
+        title: string;
+      }>,
+    ) => {
+      state.dropdownMenu.isOpen = action.payload.isOpen;
+      state.dropdownMenu.title = action.payload.title;
     },
   },
 });
