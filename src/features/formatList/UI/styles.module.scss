@@ -24,7 +24,7 @@
       font-style: normal;
       font-weight: 500;
       line-height: 0.75;
-
+      overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
@@ -47,7 +47,7 @@
   z-index: 1;
 
   border-radius: 10px;
-  border: 0.5px solid #4772e6;
+  border: 0.5px solid var(--Personal-colors-main);
 
   ul {
     display: grid;
@@ -60,6 +60,7 @@
     grid-auto-flow: column;
     align-items: center;
     justify-content: space-between;
+    text-align: start;
     cursor: pointer;
     padding: 10px;
 

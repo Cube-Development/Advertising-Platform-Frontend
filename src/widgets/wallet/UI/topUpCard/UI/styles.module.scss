@@ -82,7 +82,7 @@
       }
 
       span {
-        color: var(--choosen-text, #808080);
+        color: var(--choosen-text);
         font-size: 12px;
         font-style: normal;
         font-weight: 400;
@@ -91,15 +91,18 @@
 
       div {
         display: grid;
-        grid-auto-flow: column;
+        // grid-auto-flow: column;
+        grid-template: 1fr / 1fr minmax(20px, 30px);
+        gap: 10px;
         justify-content: space-between;
         padding: 15px 30px;
         border-radius: 12px;
-        border: 1px solid var(--Inside-container, #bdbdbd);
-        background: var(--Personal-colors-White, #fff);
+        border: 1px solid var(--Inside-container);
+        background: var(--Personal-colors-White);
 
         small {
-          color: var(--Text-sample, #a3a0a0);
+          text-align: end;
+          color: var(--Text-sample);
           font-size: 14px;
           font-style: normal;
           font-weight: 500;

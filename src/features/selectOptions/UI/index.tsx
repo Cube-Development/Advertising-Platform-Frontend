@@ -1,12 +1,12 @@
+import { ArrowSmallVerticalIcon, InfoIcon } from "@shared/assets";
+import { PLATFORM_PARAMETERS } from "@shared/config/common";
+import { platformData } from "@shared/config/platformData";
 import { IOption } from "@shared/types/common";
+import { ISelectOption } from "@shared/types/translate";
 import { FC, useEffect, useRef, useState } from "react";
+import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { ArrowSmallVerticalIcon, InfoIcon } from "@shared/assets";
-import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
-import { PLATFORM_PARAMETERS } from "@shared/config/common";
-import { ISelectOption } from "@shared/types/translate";
-import { platformData } from "@shared/config/platformData";
 
 interface SelectOptionsProps {
   textData: string;
@@ -237,7 +237,7 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
                           : ""
                       }
                     >
-                      {option?.name}
+                      <span>{option?.name}</span>
                       <input
                         type="checkbox"
                         value={option?.id}

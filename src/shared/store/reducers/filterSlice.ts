@@ -1,20 +1,20 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { addFileFilter } from "@shared/config/addFileFilter";
+import { catalogFilter } from "@shared/config/catalogFilter";
+import { chatFilter } from "@shared/config/chatFilter";
+import { offerStatusFilter } from "@shared/config/offerFilter";
+import { platformStatusFilter } from "@shared/config/platformFilter";
+import { platformTypes } from "@shared/config/postFilter";
+import {
+  profileTypesName,
+  profileTypesNum,
+  subprofileFilter,
+} from "@shared/config/profileFilter";
 import {
   myProjectStatusFilter,
   projectTypesFilter,
 } from "@shared/config/projectFilter";
-import { subprofileFilter } from "@shared/config/profileFilter";
-import { catalogFilter } from "@shared/config/catalogFilter";
-import {
-  profileTypesName,
-  profileTypesNum,
-} from "@shared/config/profileFilter";
-import { platformTypes } from "@shared/config/postFilter";
-import { chatFilter } from "@shared/config/chatFilter";
-import { addFileFilter } from "@shared/config/addFileFilter";
 import { IPlatformLink } from "@shared/types/platform";
-import { platformStatusFilter } from "@shared/config/platformFilter";
-import { offerStatusFilter } from "@shared/config/offerFilter";
 
 interface FilterState {
   typeFilter: string;
@@ -34,7 +34,7 @@ interface FilterState {
   chatFilter: string;
   addFileFilter: string;
   dropdownMenu: {
-    isOpen: boolean | null;
+    isOpen: boolean;
     title: string;
   };
 }
@@ -57,7 +57,7 @@ const initialState: FilterState = {
   chatFilter: chatFilter.blogger,
   addFileFilter: addFileFilter.mediafile,
   dropdownMenu: {
-    isOpen: null,
+    isOpen: false,
     title: "",
   },
 };
@@ -111,7 +111,7 @@ export const filterSlice = createSlice({
     setDropDownMenu: (
       state,
       action: PayloadAction<{
-        isOpen: boolean | null;
+        isOpen: boolean;
         title: string;
       }>,
     ) => {

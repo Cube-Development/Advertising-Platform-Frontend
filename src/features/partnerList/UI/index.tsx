@@ -6,26 +6,33 @@ import {
   CarouselItem,
 } from "@shared/ui/shadcn-ui/ui/carousel";
 import Autoplay from "embla-carousel-autoplay";
+// import "swiper/css";
+// import "swiper/css/autoplay";
+// import SwiperCore from "swiper";
+// import { Autoplay, EffectCreative } from "swiper/modules";
+// import { Swiper, SwiperSlide } from "swiper/react";
 
 interface PartnerListProps {
   partners: { img: string }[];
   isLeft?: boolean;
 }
+// SwiperCore.use([Autoplay, EffectCreative]);
 
 export const PartnerList: FC<PartnerListProps> = ({ partners, isLeft }) => {
   return (
     <div
+      // className={styles.partners}
       className={`${styles.partners} ${isLeft ? styles.isLeft : styles.isRight}`}
     >
       <Carousel
         opts={{
           align: "start",
           loop: true,
-          duration: 50,
+          duration: 700,
         }}
         plugins={[
           Autoplay({
-            delay: 1500,
+            delay: 1000,
           }),
         ]}
       >
@@ -40,9 +47,9 @@ export const PartnerList: FC<PartnerListProps> = ({ partners, isLeft }) => {
 
       {/* <Swiper
         modules={[Autoplay, EffectCreative]}
-        slidesPerView={isLeft ? 5 : 4}
+        slidesPerView={5}
         loop={true}
-        speed={5000}
+        speed={500}
         autoplay={{ delay: 0, disableOnInteraction: false }}
         className={isLeft ? styles.isLeft : ""}
       >

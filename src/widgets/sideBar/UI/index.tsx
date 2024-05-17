@@ -1,18 +1,18 @@
-import { FC } from "react";
-import styles from "./styles.module.scss";
+import { AccordionItem } from "@radix-ui/react-accordion";
 import { roles } from "@shared/config/roles";
-import { filterSlice, userSlice } from "@shared/store/reducers";
-import { useAppDispatch, useAppSelector } from "@shared/store";
-import { advertiserMenu, bloggerMenu, commonMenu, managerMenu } from "./config";
-import { Link } from "react-router-dom";
 import { paths } from "@shared/routing";
-import { useTranslation } from "react-i18next";
+import { useAppDispatch, useAppSelector } from "@shared/store";
+import { filterSlice, userSlice } from "@shared/store/reducers";
 import { IMenuItem } from "@shared/types/common";
 import { Accordion } from "@shared/ui/shadcn-ui/ui/accordion";
-import { AccordionItem } from "@radix-ui/react-accordion";
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { advertiserMenu, bloggerMenu, commonMenu, managerMenu } from "./config";
+import styles from "./styles.module.scss";
 
 export const SideBar: FC = () => {
-  const { isAuth, role } = useAppSelector((state) => state.user);
+  const { role } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const toggleRole = (role: roles) => {
@@ -40,9 +40,6 @@ export const SideBar: FC = () => {
 
   return (
     <div className={styles.wrapper}>
-      {/* <div className={styles.row__top}>
-          {isAuth && <DropdownMenu currentRole={role} toggleRole={toggleRole} />}
-        </div> */}
       <div className={styles.menu}>
         <div className={styles.switcher}>
           <div className={styles.switcher__row}>
@@ -70,7 +67,7 @@ export const SideBar: FC = () => {
             </Link>
           </div>
         </div>
-        <Accordion type="single">
+        <Accordion type="single" className={styles.menu__accordion}>
           {combinedMenu.map((item, index) => (
             <AccordionItem value={`item-${item.item.title}`} key={index}>
               {item.item.openMenu ? (

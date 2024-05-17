@@ -47,7 +47,6 @@
     font-size: 12px;
     font-style: normal;
     font-weight: 500;
-    line-height: normal;
   }
 }
 
@@ -168,13 +167,17 @@
       color: var(--Personal-colors-black);
       display: grid;
       grid-auto-flow: column;
+      column-gap: 5px;
       align-items: center;
       justify-content: space-between;
       cursor: pointer;
       padding: 10px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+
+      span {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
 
       input {
         cursor: pointer;
