@@ -7,7 +7,8 @@ export const EmptyPost = () => {
   const { t } = useTranslation();
   return (
     <div className={styles.wrapper}>
-      <p className={styles.result}>{t("create_order.create.result")}</p>
+      {/* <p className={styles.result}>{t("create_order.create.result")}</p> */}
+      <p></p>
       <div className={styles.middle}>
         <div>
           <EyeDisabledIcon />

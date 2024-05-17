@@ -44,8 +44,12 @@
     justify-content: center;
 
     .stroke {
+      position: absolute;
+      bottom: 10px;
+      left: 50%;
+      transform: translate(-50%);
       width: 10vw;
-      max-width: 100px;
+      max-width: 130px;
       border-bottom: 4px solid #c9c9c9;
       border-radius: 20px;
     }

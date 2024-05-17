@@ -1,13 +1,14 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Toolbar } from "./toolbar";
 import styles from "./styles.module.scss";
 import underline from "@tiptap/extension-underline";
-import Link from "@tiptap/extension-link";
+import link from "@tiptap/extension-link";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { ICreatePost, ICreatePostForm, IFile } from "@shared/types/createPost";
 import { CreatePostFormData } from "@shared/config/createPostData";
+import HardBreak from "@tiptap/extension-hard-break";
 
 interface EditorProps {
   setValue: UseFormSetValue<ICreatePostForm>;
@@ -45,13 +46,17 @@ export const Editor: FC<EditorProps> = ({
           class: "underline",
         },
       }),
-      Link.configure({
+      link.configure({
         openOnClick: "whenNotEditable",
         HTMLAttributes: {
           target: "_blank",
           rel: "noopener noreferrer",
           class: "hyperlink",
         },
+        autolink: false,
+      }),
+      HardBreak.configure({
+        // keepMarks: false,
       }),
     ],
     content: content,
