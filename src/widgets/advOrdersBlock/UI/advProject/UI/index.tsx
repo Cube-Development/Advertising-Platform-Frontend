@@ -16,6 +16,8 @@ import styles from "./styles.module.scss";
 import { Accordion } from "@shared/ui/shadcn-ui/ui/accordion";
 import { SpinnerLoader } from "@shared/ui/spinnerLoader";
 import { ShowMoreBtn } from "@features/showMore";
+import { SkeletonAdvProjectCard } from "@features/advProjectCard/skeletonAdvProjectCard";
+import { INTERSECTION_ELEMENTS } from "@shared/config/common";
 
 interface AdvProjectProps {
   projects: IAdvProjectCard[];
@@ -55,6 +57,10 @@ export const AdvProject: FC<AdvProjectProps> = ({
                 ChangeChannelBtn={ChangeChannel}
               />
             ))}
+            {isLoading &&
+              Array.from({ length: INTERSECTION_ELEMENTS.orders }).map(
+                (_, index) => <SkeletonAdvProjectCard key={index} />,
+              )}
             {isNotEmpty && (
               <div className={styles.show_more} onClick={handleOnChangePage}>
                 {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}

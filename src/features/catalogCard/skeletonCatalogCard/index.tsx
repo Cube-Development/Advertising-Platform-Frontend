@@ -36,7 +36,7 @@ export const SkeletonCatalogCard: FC<SkeletonCatalogCardProps> = () => {
             </div>
           </div>
         </div>
-        <Skeleton className="w-full h-full rounded-[12px]" />
+        <Skeleton className="w-full h-full rounded-[15px]" />
       </div>
     </Skeleton>
   );

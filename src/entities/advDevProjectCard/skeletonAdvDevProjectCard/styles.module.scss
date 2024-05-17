@@ -1,0 +1,23 @@
+.card {
+  display: grid;
+  grid-template: 1fr / 2fr 2fr 2fr 3.5fr;
+  padding: 10px 30px;
+  height: 70px;
+
+  &__title {
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 10px;
+    align-content: center;
+  }
+
+  &__info {
+    padding: 0 20px;
+    display: grid;
+    align-items: center;
+  }
+
+  &__status {
+    margin-left: 20px;
+  }
+}

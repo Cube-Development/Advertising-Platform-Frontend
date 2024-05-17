@@ -18,8 +18,8 @@ import { FC } from "react";
 import { UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { SkeletonCatalogCard } from "@features/skeletonCatalogCard";
 import { INTERSECTION_ELEMENTS } from "@shared/config/common";
+import { SkeletonCatalogCard } from "@features/catalogCard/skeletonCatalogCard";
 
 interface CatalogListProps {
   channels: IPlatform[];

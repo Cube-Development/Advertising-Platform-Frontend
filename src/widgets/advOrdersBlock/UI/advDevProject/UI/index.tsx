@@ -8,6 +8,7 @@ import styles from "./styles.module.scss";
 import { SpinnerLoader } from "@shared/ui/spinnerLoader";
 import { ShowMoreBtn } from "@features/showMore";
 import { IAdvManagerProjectsDevCard } from "@shared/types/advProject";
+import { SkeletonAdvDevProjectCard } from "@entities/advDevProjectCard/skeletonAdvDevProjectCard";
 
 interface AdvDevProjectProps {
   projects: IAdvManagerProjectsDevCard[];
@@ -32,6 +33,7 @@ export const AdvDevProject: FC<AdvDevProjectProps> = ({
         />
       ) : (
         <div className={styles.wrapper}>
+          <SkeletonAdvDevProjectCard />
           {projects?.map((card, index) => (
             <AdvDevProjectCard
               key={index}
