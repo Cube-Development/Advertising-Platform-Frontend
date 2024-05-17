@@ -7,8 +7,8 @@
   padding: 20px;
 
   border-radius: 15px;
-  border: 1px solid var(--Containers, #8c8c8c);
-  background: #fff;
+  border: 1px solid var(--Containers);
+  background: var(--Personal-colors-White);
 
   svg {
     margin-top: 3px;
@@ -27,7 +27,7 @@
     line-height: normal;
 
     &::placeholder {
-      color: var(--Text-sample, #a3a0a0);
+      color: var(--Text-sample);
     }
   }
 }

@@ -6,7 +6,7 @@
   padding: 30px;
   align-items: center;
   border-radius: 12px;
-  border: 1px solid var(--Containers, #8c8c8c);
+  border: 1px solid var(--Containers);
   background: var(--Personal-colors-White);
   cursor: pointer;
 }
@@ -34,7 +34,7 @@
   }
 
   span {
-    color: var(--Containers, #8c8c8c);
+    color: var(--Containers);
     font-size: 12px;
     font-style: normal;
     font-weight: 500;

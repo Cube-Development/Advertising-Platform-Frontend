@@ -12,7 +12,7 @@ export const enum CALENDAR {
   disabledDays = 2,
 }
 
-export const enum MEDIAFILES {
+export const enum MEDIA_FILES {
   maxSize = 50,
   maxLenght = 10,
 }
@@ -39,8 +39,12 @@ export const enum DEBOUNCE {
 }
 
 export const enum INTERSECTION_ELEMENTS {
-  catalog = 10,
-  orders = 5,
-  channels = 15,
-  hisory = 1000,
+  catalog = 3,
+  orders = 1,
+  channels = 1,
+  hisory = 1,
+  // catalog = 10,
+  // orders = 5,
+  // channels = 15,
+  // hisory = 1000,
 }

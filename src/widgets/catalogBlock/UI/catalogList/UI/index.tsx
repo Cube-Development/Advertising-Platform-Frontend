@@ -18,6 +18,8 @@ import { FC } from "react";
 import { UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { SkeletonCatalogCard } from "@features/skeletonCatalogCard";
+import { INTERSECTION_ELEMENTS } from "@shared/config/common";
 
 interface CatalogListProps {
   channels: IPlatform[];
@@ -80,6 +82,10 @@ export const CatalogList: FC<CatalogListProps> = ({
             onChangeCard={onChangeCard}
           />
         ))}
+        {isLoading &&
+          Array.from({ length: INTERSECTION_ELEMENTS.catalog }).map(
+            (_, index) => <SkeletonCatalogCard key={index} />,
+          )}
       </div>
       {isNotEmpty ? (
         // <DinamicPagination onChange={handleOnChangePage} />

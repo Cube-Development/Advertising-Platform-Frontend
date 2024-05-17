@@ -9,8 +9,8 @@
   align-content: space-between;
 
   border-radius: 15px;
-  border: 1px solid var(--Containers, #8c8c8c);
-  background: #fff;
+  border: 1px solid var(--Containers);
+  background: var(--Personal-colors-White);
 
   padding: 25px 30px;
 
@@ -59,13 +59,13 @@
 
 .stroke {
   width: 100px;
-  border-bottom: 2px solid #8c8c8c;
+  border-bottom: 2px solid var(--Containers);
 }
 
 .button {
   border-radius: 8px;
   border: 1px solid #4772e6;
-  background: #fff;
+  background: var(--Personal-colors-White);
   p {
     color: #4772e6;
   }

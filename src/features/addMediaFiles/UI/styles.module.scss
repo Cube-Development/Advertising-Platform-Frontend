@@ -23,7 +23,7 @@
       align-items: center;
       justify-content: start;
       border-radius: 12px;
-      border: 1px dashed #8c8c8c;
+      border: 1px dashed var(--Containers);
 
       .logo {
         display: grid;
@@ -102,7 +102,7 @@
         background: var(--Gradients-Gradient-1);
 
         span {
-          color: #fff;
+          color: var(--Personal-colors-White);
           font-size: 14px;
           font-style: normal;
           font-weight: 500;

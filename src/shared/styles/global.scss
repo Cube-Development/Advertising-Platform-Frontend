@@ -56,7 +56,7 @@ body {
   &__white {
     color: var(--Personal-colors-main);
     border: 1px solid var(--Personal-colors-main);
-    background: var(--Personal-colors-White);
+    background: #fff;
     &:hover {
       background: rgb(237, 237, 237);
     }
@@ -314,6 +314,13 @@ body {
     --ring: 222.2 84% 4.9%;
 
     --radius: 0.5rem;
+
+    --skeleton-light: hsl(210 40% 96.1%);
+    --skeleton-dark: hsl(216, 12%, 84%);
+
+    --toast-success: hsl(83, 78%, 55%);
+    --toast-error: hsl(0 84.2% 60.2%);
+    --toast-foreground: hsl(0, 0%, 100%);
   }
 
   .dark {

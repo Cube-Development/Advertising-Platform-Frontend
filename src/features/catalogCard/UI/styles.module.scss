@@ -3,9 +3,8 @@
   grid-auto-flow: row;
 
   border-radius: 15px;
-  // border: 0.5px solid #8c8c8c;
-  box-shadow: inset 0px 0px 0px 0.5px #8c8c8c;
-  background: #fff;
+  box-shadow: inset 0px 0px 0px 0.5px var(--Containers);
+  background: var(--Personal-colors-White);
   position: relative;
 
   .channel__top {
@@ -25,7 +24,7 @@
         width: 80px;
         height: 80px;
         border-radius: 50%;
-        border: 0.5px solid #4772e6;
+        border: 0.5px solid var(--Personal-colors-main);
       }
 
       .rate {
@@ -43,7 +42,6 @@
       .description {
         display: grid;
         grid-auto-flow: row;
-        // align-items: center;
         row-gap: 10px;
         margin-top: 5px;
 
@@ -56,7 +54,7 @@
         }
 
         p {
-          color: var(--Subtitle-text, #666);
+          color: var(--Subtitle-text);
           font-size: 12px;
           font-style: normal;
           font-weight: 500;
@@ -64,7 +62,7 @@
         }
 
         span {
-          color: var(--Subtitle-text, #666);
+          color: var(--Subtitle-text);
           font-size: 12px;
           font-style: normal;
           font-weight: 600;
@@ -171,7 +169,6 @@
 
         align-items: center;
         justify-content: center;
-        font-family: Montserrat;
         width: 60px;
         height: 60px;
         border-radius: 50%;
