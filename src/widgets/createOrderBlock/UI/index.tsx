@@ -116,7 +116,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
                   action: <ToastAction altText="Ok">Ok</ToastAction>,
                 });
               });
-          })
+          }),
         );
         await createOrderDates(formData.datetime)
           .unwrap()

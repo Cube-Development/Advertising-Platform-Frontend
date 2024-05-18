@@ -88,7 +88,7 @@ export const CatalogList: FC<CatalogListProps> = ({
         ))}
         {isLoading &&
           Array.from({ length: INTERSECTION_ELEMENTS.catalog }).map(
-            (_, index) => <SkeletonCatalogCard key={index} />
+            (_, index) => <SkeletonCatalogCard key={index} />,
           )}
       </div>
       {isNotEmpty ? (
