@@ -54,4 +54,5 @@ export interface TimeListProps {
 
 export interface FileProps {
   onChange: (file: IAddFile[], type: ContentType) => void;
+  currentFiles?: any;
 }

@@ -1,4 +1,5 @@
 import { ArrowSmallVerticalIcon } from "@shared/assets";
+import { accordionTypes } from "@shared/config/accordion";
 import { IMenuItems } from "@shared/types/common";
 import {
   AccordionContent,
@@ -9,12 +10,16 @@ import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
-import { accordionTypes } from "@shared/config/accordion";
-import { paths } from "@shared/routing";
 
-export const MenuItem: React.FC<IMenuItems> = ({ item }) => {
+export const MenuItem: React.FC<IMenuItems> = ({
+  item,
+  onChange,
+  openTitle,
+}) => {
   const { t } = useTranslation();
-  const [isActive, setIsActive] = useState<boolean>(false);
+  const [isActive, setIsActive] = useState<boolean>(
+    openTitle === item.item.title,
+  );
 
   const accordionRef = useRef(null);
 
@@ -40,7 +45,7 @@ export const MenuItem: React.FC<IMenuItems> = ({ item }) => {
             <div className={`${styles.row} ${isActive ? styles.active : ""}`}>
               <div className={styles.row__title}>
                 {item.item.img && <item.item.img />}
-                {t(item.item.title)}
+                {t(item.item.title!)}
               </div>
               <ArrowSmallVerticalIcon
                 className={
@@ -52,31 +57,29 @@ export const MenuItem: React.FC<IMenuItems> = ({ item }) => {
             </div>
           </AccordionTrigger>
         ) : (
-          <Link to={item.item.path!}>
+          <Link to={item.item.path!} onClick={onChange}>
             <AccordionTrigger>
-              <div
-                className={`${styles.row} ${isActive ? styles.active : ""} ${item.item.path === paths.faq && styles.faq}`}
-              >
+              <div className={`${styles.row} ${isActive ? styles.active : ""}`}>
                 <div className={styles.row__title}>
                   {item.item.img && <item.item.img />}
-                  {t(item.item.title)}
+                  {t(item.item.title!)}
                 </div>
               </div>
             </AccordionTrigger>
           </Link>
         )}
 
-        {item.subItems && (
-          <AccordionContent>
-            <ul>
-              {item.subItems.map((subItem) => (
-                <Link to={subItem.path!} key={subItem.title}>
-                  <li>{t(subItem.title)}</li>
-                </Link>
-              ))}
-            </ul>
-          </AccordionContent>
-        )}
+        {/* {item.subItems && ( */}
+        <AccordionContent>
+          <ul>
+            {item.subItems?.map((subItem) => (
+              <Link to={subItem.path!} key={subItem.title} onClick={onChange}>
+                <li>{t(subItem.title!)}</li>
+              </Link>
+            ))}
+          </ul>
+        </AccordionContent>
+        {/* )} */}
       </div>
     </AccordionItem>
   );

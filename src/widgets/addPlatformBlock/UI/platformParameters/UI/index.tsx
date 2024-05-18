@@ -1,22 +1,17 @@
-import { FC, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import { SelectOptions } from "@features/selectOptions";
-import { SelectSex } from "@features/selectSex";
-import { SelectDescription } from "@features/selectDescription";
 import { FormatPrice } from "@features/accommPrice";
-import { SelectPrice } from "@features/selectPrice/UI";
-import { SelectSymbol } from "@features/selectSymbols";
 import { CreatePlatform } from "@features/createPlatform";
+import { SelectDescription } from "@features/selectDescription";
+import { SelectOptions } from "@features/selectOptions";
+import { SelectPrice } from "@features/selectPrice/UI";
+import { SelectSex } from "@features/selectSex";
+import { SelectSymbol } from "@features/selectSymbols";
+import { Languages } from "@shared/config/languages";
 import { platformData } from "@shared/config/platformData";
 import {
-  IAddChannelData,
-  IAddPlatformBlur,
-  IFormat,
-  IPlatformLink,
-} from "@shared/types/platform";
-import { Languages } from "@shared/config/languages";
+  useCreateChannelMutation,
+  useEditChannelMutation,
+  useGetChannelByIdQuery,
+} from "@shared/store/services/channelService";
 import {
   useGetChannelAgesQuery,
   useGetChannelCategoriesQuery,
@@ -24,13 +19,21 @@ import {
   useGetChannelLanguagesQuery,
   useGetChannelRegionsQuery,
 } from "@shared/store/services/contentService";
-import { MyButton } from "@shared/ui";
 import {
-  useCreateChannelMutation,
-  useEditChannelMutation,
-  useGetChannelByIdQuery,
-} from "@shared/store/services/channelService";
+  IAddChannelData,
+  IAddPlatformBlur,
+  IFormat,
+  IPlatformLink,
+} from "@shared/types/platform";
+import { MyButton } from "@shared/ui";
 import { AccountsLoader } from "@shared/ui/accountsLoader";
+import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
+import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
+import { FC, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
+import { PLATFORM_PARAMETERS } from "@shared/config/common";
 
 interface PlatformParametersProps {
   blur: IAddPlatformBlur;
@@ -47,6 +50,7 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
   inserCode,
   channel_id,
 }) => {
+  const { toast } = useToast();
   const { t, i18n } = useTranslation();
   const language = Languages.find((lang) => {
     return i18n.language === lang.name;
@@ -74,11 +78,11 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
       })
     : (defaultValues = {
         insertion_code: inserCode,
-        male: 50,
-        female: 50,
+        male: PLATFORM_PARAMETERS.defaultSexMale,
+        female: 100 - PLATFORM_PARAMETERS.defaultSexMale,
         category: undefined,
         description: undefined,
-        text_limit: 4096,
+        text_limit: PLATFORM_PARAMETERS.defaultTextLimit,
         region: [],
         language: [],
         age: [],
@@ -111,26 +115,49 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
         editChannel({ ...editData, channel_id: channel.id })
           .unwrap()
           .then((data) => {
-            console.log(data);
+            // console.log(data);
             setIsModalOpen(true);
             onChangeBlur({ link: true, parameters: true });
+            toast({
+              variant: "success",
+              title: t("toasts.add_platform.edit.success"),
+            });
           })
-          .catch((error) =>
-            console.error("Ошибка при добавлении канала...", error),
-          );
+          .catch((error) => {
+            // console.error("Ошибка при добавлении канала...", error);
+            toast({
+              variant: "error",
+              title: t("toasts.add_platform.edit.error"),
+              description: error,
+              action: <ToastAction altText="Ok">Ok</ToastAction>,
+            });
+          });
       } else {
         createChannel(data)
           .unwrap()
           .then(() => {
             setIsModalOpen(true);
             onChangeBlur({ link: true, parameters: true });
+            toast({
+              variant: "success",
+              title: t("toasts.add_platform.create.success"),
+            });
           })
-          .catch((error) =>
-            console.error("Ошибка при добавлении канала...", error),
-          );
+          .catch((error) => {
+            console.error("Ошибка при добавлении канала...", error);
+            toast({
+              variant: "error",
+              title: t("toasts.add_platform.create.error"),
+              description: error,
+              action: <ToastAction altText="Ok">Ok</ToastAction>,
+            });
+          });
       }
     } else {
-      alert("Заполните все поля...");
+      toast({
+        variant: "default",
+        title: t("toasts.add_platform.parameters.alert"),
+      });
     }
   };
 
@@ -197,6 +224,7 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
             <div className={styles.form__bottom}>
               <SelectDescription
                 onChange={setValue}
+                type={platformData.description}
                 title={"add_platform.description.title"}
                 text={"add_platform.description.text"}
                 placeholder={"add_platform.default_input"}

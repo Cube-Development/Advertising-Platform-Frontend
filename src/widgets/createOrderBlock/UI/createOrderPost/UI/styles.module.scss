@@ -59,14 +59,15 @@
 
       .data {
         display: grid;
-        grid-auto-flow: column;
-        justify-content: space-between;
+        grid-template: 1fr / 1fr 1fr;
+        gap: 12vw;
 
         .post_data {
           display: grid;
           grid-template: 1fr 1fr / 1fr;
-          width: 300px;
           row-gap: 30px;
+          // height: 30vw;
+          min-height: 500px;
 
           button {
             height: fit-content;
@@ -91,6 +92,8 @@
 
         .display {
           position: relative;
+          // height: 30vw;
+          min-height: 500px;
 
           .continue {
             position: absolute;

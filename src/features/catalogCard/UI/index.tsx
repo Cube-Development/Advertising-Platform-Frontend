@@ -30,9 +30,9 @@ export const CatalogCard: FC<CatalogCardProps> = ({
   page,
 }) => {
   const { t } = useTranslation();
-  const startFormat: IFormat = card.selected_format
+  const startFormat: IFormat = card?.selected_format
     ? card.format.find(
-        (format) => format.format === card.selected_format?.format,
+        (format) => format?.format === card.selected_format?.format
       )!
     : card.format[0];
   const [selectedFormat, setSelectedFormat] = useState<IFormat>(startFormat);
@@ -40,8 +40,8 @@ export const CatalogCard: FC<CatalogCardProps> = ({
   const handleChangeFormat = (selectedValue: IFormat) => {
     setSelectedFormat(selectedValue);
     if (
-      card.selected_format &&
-      card.selected_format.format !== selectedValue.format
+      card?.selected_format &&
+      card?.selected_format?.format !== selectedValue?.format
     ) {
       onChangeCard({
         ...card,
@@ -62,7 +62,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
       <div className={styles.channel__top}>
         <div className={styles.channel__logo}>
           <div>
-            <img src={card.avatar} alt="" />
+            <img src={card?.avatar} alt="logo" />
           </div>
           <div className={styles.rate}>
             <RatingIcon />
@@ -70,9 +70,9 @@ export const CatalogCard: FC<CatalogCardProps> = ({
         </div>
         <div className={styles.channel__description}>
           <div className={styles.description}>
-            <h1>{card.name}</h1>
-            <p>{card.category}</p>
-            <span>{card.description}</span>
+            <h1>{card?.name}</h1>
+            <p>{card?.category}</p>
+            <span>{card?.description}</span>
           </div>
         </div>
         <div className={styles.channel__info}>
@@ -81,13 +81,13 @@ export const CatalogCard: FC<CatalogCardProps> = ({
               <div>
                 <SubsIcon />
               </div>
-              <span>{card.subscribers.toLocaleString()}</span>
+              <span>{card?.subscribers?.toLocaleString()}</span>
             </div>
             <div className={styles.info}>
               <div>
                 <EyeIcon />
               </div>
-              <span>{selectedFormat.views!.toLocaleString()}</span>
+              <span>{selectedFormat?.views!.toLocaleString()}</span>
             </div>
           </div>
           <div className={styles.channel__info_middle}>
@@ -96,9 +96,9 @@ export const CatalogCard: FC<CatalogCardProps> = ({
             </div>
             <div
               className="colorline"
-              style={{ "--male": `${card.male}%` } as React.CSSProperties}
-              data-male={`${card.male}%`}
-              data-female={`${card.female}%`}
+              style={{ "--male": `${card?.male}%` } as React.CSSProperties}
+              data-male={`${card?.male}%`}
+              data-female={`${card?.female}%`}
             />
             <div>
               <WomanIcon />
@@ -107,12 +107,12 @@ export const CatalogCard: FC<CatalogCardProps> = ({
           <div className={styles.channel__info_row}>
             <div className={styles.info}>
               <p>ER:</p>
-              <span>{selectedFormat.er}%</span>
+              <span>{selectedFormat?.er}%</span>
             </div>
             <div className={styles.info}>
               <p>CPV:</p>
               <span>
-                {selectedFormat.cpv!.toLocaleString()} {t(`symbol`)}
+                {selectedFormat?.cpv!.toLocaleString()} {t(`symbol`)}
               </span>
             </div>
           </div>
@@ -121,12 +121,12 @@ export const CatalogCard: FC<CatalogCardProps> = ({
           <p>{t("platform.cross")}</p>
           <div
             className={styles.circle}
-            style={{ "--percentage": `${card.match}%` } as React.CSSProperties}
+            style={{ "--percentage": `${card?.match}%` } as React.CSSProperties}
           >
-            <span>{card.match}%</span>
+            <span>{card?.match}%</span>
           </div>
           <div className={styles.platform__icon}>
-            {card.platform && card.platform in platformToIcon
+            {card?.platform && card?.platform in platformToIcon
               ? platformToIcon[card.platform!]()
               : "..."}
           </div>

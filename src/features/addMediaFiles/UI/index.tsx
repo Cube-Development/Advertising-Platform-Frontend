@@ -13,25 +13,28 @@ import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
-interface AddMediaFilesProps {}
-
-export const AddMediaFiles: FC<FileProps> = ({ onChange }) => {
+export const AddMediaFiles: FC<FileProps> = ({ onChange, currentFiles }) => {
   const { t } = useTranslation();
-  const [files, setFiles] = useState<IAddFile[]>([]);
-  // const [uploadFiles, setUploadFiles] = useState<string[]>([]);
+
+  const [files, setFiles] = useState<IAddFile[]>(
+    currentFiles ? currentFiles : [],
+  );
   const [dragActive, setDragActive] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (e.target.files && e.target.files[0]) {
-      console.log("e.target.files", e.target.files);
-      var newFiles: IAddFile[] = [...e.target.files];
+      const newFiles: IAddFile[] = [...e.target.files];
       newFiles.map(
-        (file) => (file.path = file.name + new Date().toISOString()),
+        // (file) => (file.path = file.name + new Date().toISOString())
+        (file) => (file.path = file.name),
       );
-      console.log(newFiles);
-      setFiles([...newFiles]);
-      onChange(newFiles, ContentType.photo);
+      if (files.length + newFiles.length <= 10) {
+        setFiles([...files, ...newFiles]);
+        onChange([...files, ...newFiles], ContentType.photo);
+      } else {
+        alert("Максимум можно 10 файлов!");
+      }
 
       // Запрос в бек на загрузку файла или файлов
       // может быть mapping на загрузку в бек
@@ -61,11 +64,11 @@ export const AddMediaFiles: FC<FileProps> = ({ onChange }) => {
     e.preventDefault();
     setDragActive(false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      var newFiles: IAddFile[] = [...e.dataTransfer.files];
+      const newFiles: IAddFile[] = [...e.dataTransfer.files];
       newFiles.map(
-        (file) => (file.path = file.name + new Date().toISOString()),
+        // (file) => (file.path = file.name + new Date().toISOString())
+        (file) => (file.path = file.name),
       );
-      console.log(newFiles);
       setFiles([...files, ...newFiles]);
       onChange(newFiles, ContentType.photo);
 
@@ -144,8 +147,9 @@ export const AddMediaFiles: FC<FileProps> = ({ onChange }) => {
                 <div className={styles.item__left}>
                   <FileIcon />
                   <div className={styles.item__text}>
-                    <p>{file.name}</p>
-                    <span>{formatFileSize(file.size)}</span>
+                    {/* <p>{file?.name || file?.content}</p> */}
+                    <p>{file?.name}</p>
+                    <span>{file?.size && formatFileSize(file?.size)}</span>
                   </div>
                 </div>
                 <div className={styles.item__right}>

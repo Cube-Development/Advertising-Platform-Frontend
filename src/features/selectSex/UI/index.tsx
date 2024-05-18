@@ -1,5 +1,5 @@
 import { InfoIcon } from "@shared/assets";
-import { DEBOUNCE } from "@shared/config/common";
+import { DEBOUNCE, PLATFORM_PARAMETERS } from "@shared/config/common";
 import { useDebounce } from "@shared/store/hooks";
 import { FC, useEffect, useState } from "react";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
@@ -28,7 +28,11 @@ export const SelectSex: FC<SelectSexProps> = ({
 }) => {
   const { t } = useTranslation();
 
-  const [position, setPosition] = useState(defaultValues || 50);
+  const [position, setPosition] = useState<number>(
+    defaultValues !== undefined
+      ? defaultValues
+      : PLATFORM_PARAMETERS.defaultSexMale,
+  );
   const debouncedPosition = useDebounce(position, DEBOUNCE.sex);
 
   const handleChange = (newPosition: number) => {
@@ -45,6 +49,14 @@ export const SelectSex: FC<SelectSexProps> = ({
       onChange("female", 100 - newPosition);
     }
   };
+
+  useEffect(() => {
+    setPosition(
+      defaultValues !== undefined
+        ? defaultValues
+        : PLATFORM_PARAMETERS.defaultSexMale,
+    );
+  }, [defaultValues]);
 
   useEffect(() => {
     handleChange(debouncedPosition as number);

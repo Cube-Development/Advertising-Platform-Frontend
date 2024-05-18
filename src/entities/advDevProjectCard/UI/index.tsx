@@ -23,7 +23,8 @@ export const AdvDevProjectCard: FC<AdvDevProjectCardProps> = ({
       <div className={styles.card__title}>
         <p>{card.name}</p>
         <div>
-          <span>№{card.id}</span>
+          <span>№31221515</span>
+          {/* <span>№{card.id}</span> */}
           <span>{card.created}</span>
         </div>
       </div>

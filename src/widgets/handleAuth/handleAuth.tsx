@@ -9,12 +9,17 @@ import { useNavigate } from "react-router-dom";
 import { paths } from "@shared/routing";
 import { useGetTokensMutation } from "@shared/store/services/authService";
 import { useTransferPublicMutation } from "@shared/store/services/cartService";
+import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
+import { useTranslation } from "react-i18next";
+import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
 
 type DecodedToken = {
   role: roles;
 };
 
 export const HandleAuth = () => {
+  const { toast } = useToast();
+  const { t } = useTranslation();
   const [getTokens] = useGetTokensMutation();
   const dispatch = useAppDispatch();
   const { code, state } = QueryParams();
@@ -28,7 +33,15 @@ export const HandleAuth = () => {
       .then(() => {
         Cookies.remove("guest_id");
       })
-      .catch((error) => console.error("Ошибка при трансфере корзины", error));
+      .catch((error) => {
+        toast({
+          variant: "error",
+          title: t("toasts.auth.cart.error"),
+          description: error,
+          action: <ToastAction altText="Ok">Ok</ToastAction>,
+        });
+        console.error("Ошибка при трансфере корзины", error);
+      });
   };
   const [transferPublic] = useTransferPublicMutation();
 
@@ -49,6 +62,12 @@ export const HandleAuth = () => {
           guestId && transferCart(guestId);
         })
         .catch((error) => {
+          toast({
+            variant: "error",
+            title: t("toasts.auth.token.error"),
+            description: error,
+            action: <ToastAction altText="Ok">Ok</ToastAction>,
+          });
           console.error("Ошибка получения токена:", error);
         });
     }

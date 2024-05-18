@@ -15,7 +15,7 @@
     background: var(--Gradients-Gradient-1);
 
     justify-content: start;
-    color: #fff;
+    color: var(--Personal-colors-White);
     p {
       font-size: 34px;
       font-style: normal;
@@ -123,7 +123,7 @@
 
       .submit__btn {
         background: var(--Gradients-Gradient-1);
-        color: #fff;
+        color: var(--Personal-colors-White);
         display: flex;
         justify-content: center;
         align-items: center;

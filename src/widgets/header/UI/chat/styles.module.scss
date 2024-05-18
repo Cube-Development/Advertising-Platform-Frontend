@@ -17,7 +17,7 @@
     display: grid;
     margin: 15% auto;
     border-radius: 25px;
-    background: #fff;
+    background: var(--Personal-colors-White);
     grid-template: 1fr / 0.7fr 1fr;
     max-width: 45vw;
     column-gap: 10px;

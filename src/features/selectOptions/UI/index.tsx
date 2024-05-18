@@ -1,18 +1,16 @@
+import { ArrowSmallVerticalIcon, InfoIcon } from "@shared/assets";
+import { PLATFORM_PARAMETERS } from "@shared/config/common";
+import { platformData } from "@shared/config/platformData";
 import { IOption } from "@shared/types/common";
+import { ISelectOption } from "@shared/types/translate";
 import { FC, useEffect, useRef, useState } from "react";
+import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { ArrowSmallVerticalIcon, InfoIcon } from "@shared/assets";
-import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
-import { SELECTOPTIONS } from "@shared/config/common";
-import { ISelectOption } from "@shared/types/translate";
-import { platformData } from "@shared/config/platformData";
 
 interface SelectOptionsProps {
   textData: string;
   options: IOption[];
-  // type: keyof IAddPLatformData;
-  // onChange: UseFormSetValue<IAddPLatformData>;
   type: any;
   onChange: UseFormSetValue<any>;
   single: boolean;
@@ -20,6 +18,7 @@ interface SelectOptionsProps {
   isFilter?: boolean;
   isCatalog?: boolean;
   isCatalogSorting?: boolean;
+  isCatalogPlatform?: boolean;
   getValues?: UseFormGetValues<any>;
   defaultValues?: IOption | number[];
 }
@@ -34,6 +33,7 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
   isFilter,
   isCatalog,
   isCatalogSorting,
+  isCatalogPlatform,
   getValues,
   defaultValues,
 }) => {
@@ -48,6 +48,7 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
   const [selectedOptions, setSelectedOptions] = useState<(number | null)[]>(
     !single && defaultValues ? (defaultValues as unknown as number[]) : [],
   );
+
   const [selectedOption, setSelectedOption] = useState<IOption | null>(
     isFilter
       ? allOptions[0]
@@ -103,7 +104,16 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
       (option) => option?.id === selectedId,
     )!;
     setSelectedOption(option);
-    onChange(type, isCatalogSorting ? option?.type : selectedId);
+    if (isCatalogPlatform) {
+      const { filter } = getValues && getValues();
+      const updatedFilter = {
+        ...filter,
+        [type]: selectedId,
+      };
+      onChange("filter", updatedFilter);
+    } else {
+      onChange(type, isCatalogSorting ? option?.type : selectedId);
+    }
     closeMenu();
   };
 
@@ -123,6 +133,10 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
+  useEffect(() => {
+    setSelectedOptions(defaultValues as number[]);
+  }, [defaultValues]);
 
   return (
     <div
@@ -200,7 +214,7 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
           <div className={`${styles.options} show`}>
             <ul
               className={
-                allOptions.length > SELECTOPTIONS.scrollAddLen
+                allOptions.length > PLATFORM_PARAMETERS.scrollAddLen
                   ? styles.scroll
                   : ""
               }
@@ -232,7 +246,7 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
                           : ""
                       }
                     >
-                      {option?.name}
+                      <span>{option?.name}</span>
                       <input
                         type="checkbox"
                         value={option?.id}

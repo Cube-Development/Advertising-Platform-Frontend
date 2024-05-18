@@ -1,6 +1,6 @@
 .wrapper {
   background-color: #0074cc; /* Замените на нужный вам синий цвет */
-  color: #ffffff; /* Цвет текста внутри футера */
+  color: var(--Personal-colors-White) fff; /* Цвет текста внутри футера */
   padding: 20px; /* Расстояние вокруг содержимого футера */
   width: 100%;
   min-height: 20vh;

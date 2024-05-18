@@ -1,6 +1,5 @@
 import { FC, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
-import { PencilIcon } from "@shared/assets";
 import { useTranslation } from "react-i18next";
 import { ICreatePost, ICreatePostForm, IFile } from "@shared/types/createPost";
 import { CreatePostFormData } from "@shared/config/createPostData";
@@ -28,20 +27,6 @@ export const PostText: FC<PostTextProps> = ({
   platformId,
 }) => {
   const { t } = useTranslation();
-
-  // const form: ICreatePostForm = { ...getValues() };
-  // const currentPost = (form.posts || []).find(
-  //   (item) => item.platform === platformId
-  // ) || {
-  //   project_id: form.project_id,
-  //   platform: platformId,
-  // };
-
-  // const startText = contentId
-  //   ? (currentPost.files || []).find((item) => item.content_type === contentId)
-  //       ?.content || ""
-  //   : currentPost.comment || "";
-
   const [description, setDescription] = useState<string>("");
 
   useEffect(() => {
@@ -93,7 +78,6 @@ export const PostText: FC<PostTextProps> = ({
 
   return (
     <div className={styles.wrapper}>
-      <PencilIcon />
       <textarea
         id="input"
         value={description}
