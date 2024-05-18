@@ -30,7 +30,6 @@ import { CatalogCart } from "./catalogCart";
 import { CatalogList } from "./catalogList";
 import { CatalogSearch } from "./catalogSearch";
 import styles from "./styles.module.scss";
-import { RecommendCARDS } from "@shared/config/mockDATA";
 import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
 
@@ -313,6 +312,7 @@ export const CatalogBlock: FC = () => {
           <div className={styles.right}>
             <div className={styles.content__right} ref={catalogTopRef}>
               <CatalogList
+                getValues={getValues}
                 setValue={setValue}
                 page={formFields.page}
                 channels={cards || []}

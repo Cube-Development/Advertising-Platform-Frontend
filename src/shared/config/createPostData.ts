@@ -18,6 +18,7 @@ export enum ContentType {
   text = 1,
   photo = 2,
   video = 3,
+  file = 4,
 }
 
 export enum FileData {

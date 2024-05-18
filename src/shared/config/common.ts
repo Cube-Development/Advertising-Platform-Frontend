@@ -30,8 +30,8 @@ export const enum PLATFORM_PARAMETERS {
 }
 
 export const enum POST {
-  postLength = 200,
-  commentLength = 300,
+  postLength = 2000,
+  commentLength = 1000,
 }
 
 export const enum DEBOUNCE {

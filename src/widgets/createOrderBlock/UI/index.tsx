@@ -43,6 +43,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
       case "datetime":
         scroller.scrollTo("datetime", {
           smooth: true,
+          offset: -80,
         });
         break;
       case "payment":
@@ -64,7 +65,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
 
   const project_id = Cookies.get("project_id");
 
-  const { register, getValues, handleSubmit, setValue } =
+  const { register, getValues, handleSubmit, setValue, watch } =
     useForm<ICreatePostForm>({
       defaultValues: {
         project_id: project_id,
@@ -72,6 +73,8 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
         datetime: { project_id: project_id, orders: [] },
       },
     });
+
+  const formState = watch();
 
   const projectChannelsReq = {
     project_id: project_id!,
@@ -169,6 +172,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
         onChangeBlur={handleOnChangeBlur}
         setValue={setValue}
         getValues={getValues}
+        formState={formState}
       />
       <CreateOrderDatetime
         cards={projectChannels?.orders || []}

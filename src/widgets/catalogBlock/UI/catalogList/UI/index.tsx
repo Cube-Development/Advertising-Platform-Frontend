@@ -15,7 +15,7 @@ import { getCatalogReq } from "@shared/store/services/catalogService";
 import { IPlatform } from "@shared/types/platform";
 import { SpinnerLoader } from "@shared/ui/spinnerLoader";
 import { FC } from "react";
-import { UseFormSetValue } from "react-hook-form";
+import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { INTERSECTION_ELEMENTS } from "@shared/config/common";
@@ -24,6 +24,7 @@ import { SkeletonCatalogCard } from "@features/catalogCard/skeletonCatalogCard";
 interface CatalogListProps {
   channels: IPlatform[];
   setValue: UseFormSetValue<getCatalogReq>;
+  getValues: UseFormGetValues<getCatalogReq>;
   page: number;
   onChangeCard: (cart: IPlatform) => void;
   isNotEmpty: boolean;
@@ -33,6 +34,7 @@ interface CatalogListProps {
 export const CatalogList: FC<CatalogListProps> = ({
   channels,
   setValue,
+  getValues,
   page,
   isNotEmpty,
   onChangeCard,
@@ -52,12 +54,14 @@ export const CatalogList: FC<CatalogListProps> = ({
         </big>
         <div className={styles.filters}>
           <SelectOptions
+            getValues={getValues}
             onChange={setValue}
             options={networkTypes}
             textData="filter.title"
             single={true}
             type={filterData.platform}
             isFilter={true}
+            isCatalogPlatform={true}
           />
           <SelectOptions
             onChange={setValue}

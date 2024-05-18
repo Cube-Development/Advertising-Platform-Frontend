@@ -11,8 +11,6 @@ import styles from "./styles.module.scss";
 interface SelectOptionsProps {
   textData: string;
   options: IOption[];
-  // type: keyof IAddPLatformData;
-  // onChange: UseFormSetValue<IAddPLatformData>;
   type: any;
   onChange: UseFormSetValue<any>;
   single: boolean;
@@ -20,6 +18,7 @@ interface SelectOptionsProps {
   isFilter?: boolean;
   isCatalog?: boolean;
   isCatalogSorting?: boolean;
+  isCatalogPlatform?: boolean;
   getValues?: UseFormGetValues<any>;
   defaultValues?: IOption | number[];
 }
@@ -34,6 +33,7 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
   isFilter,
   isCatalog,
   isCatalogSorting,
+  isCatalogPlatform,
   getValues,
   defaultValues,
 }) => {
@@ -104,7 +104,16 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
       (option) => option?.id === selectedId,
     )!;
     setSelectedOption(option);
-    onChange(type, isCatalogSorting ? option?.type : selectedId);
+    if (isCatalogPlatform) {
+      const { filter } = getValues && getValues();
+      const updatedFilter = {
+        ...filter,
+        [type]: selectedId,
+      };
+      onChange("filter", updatedFilter);
+    } else {
+      onChange(type, isCatalogSorting ? option?.type : selectedId);
+    }
     closeMenu();
   };
 

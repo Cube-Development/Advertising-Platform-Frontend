@@ -362,3 +362,9 @@ body {
     @apply bg-background text-foreground;
   }
 }
+
+.hyperlink {
+  color: blue;
+  text-decoration: underline;
+  font-weight: bold;
+}

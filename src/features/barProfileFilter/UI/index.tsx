@@ -76,9 +76,10 @@ export const BarProfileFilter: FC<BarProfileFilterProps> = ({
     <div className={styles.types}>
       <ul
         className={
-          page === pageFilter.catalog ? styles.catalog : styles.profile
+          page === pageFilter.catalog || pageFilter.createOrderFiles
+            ? styles.catalog
+            : styles.profile
         }
-        // className={styles.profile}
       >
         {options.map((option, index) => (
           <li
