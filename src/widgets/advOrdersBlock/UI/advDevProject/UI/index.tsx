@@ -9,6 +9,7 @@ import { SpinnerLoader } from "@shared/ui/spinnerLoader";
 import { ShowMoreBtn } from "@features/showMore";
 import { IAdvManagerProjectsDevCard } from "@shared/types/advProject";
 import { SkeletonAdvDevProjectCard } from "@entities/advDevProjectCard/skeletonAdvDevProjectCard";
+import { INTERSECTION_ELEMENTS } from "@shared/config/common";
 
 interface AdvDevProjectProps {
   projects: IAdvManagerProjectsDevCard[];
@@ -33,7 +34,6 @@ export const AdvDevProject: FC<AdvDevProjectProps> = ({
         />
       ) : (
         <div className={styles.wrapper}>
-          <SkeletonAdvDevProjectCard />
           {projects?.map((card, index) => (
             <AdvDevProjectCard
               key={index}
@@ -41,6 +41,10 @@ export const AdvDevProject: FC<AdvDevProjectProps> = ({
               ContinueBtn={ContinueTemplate}
             />
           ))}
+          {isLoading &&
+            Array.from({ length: INTERSECTION_ELEMENTS.orders }).map(
+              (_, index) => <SkeletonAdvDevProjectCard key={index} />,
+            )}
           {isNotEmpty && (
             <div className={styles.show_more} onClick={handleOnChangePage}>
               {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
