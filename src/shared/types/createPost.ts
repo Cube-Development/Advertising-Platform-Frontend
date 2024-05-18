@@ -29,6 +29,7 @@ export interface ICreatePost extends IProjectId {
 export interface IFile {
   content_type: number;
   content: string;
+  url?: string;
 }
 
 export interface ICreateDate extends IProjectId {

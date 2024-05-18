@@ -5,7 +5,6 @@ import { PostGeneration } from "@features/postGeneration";
 import { PostText } from "@features/postText";
 import { PostFiles } from "@features/postFiles";
 import { PostButtons } from "@features/postButtons";
-import { PostDispay } from "@features/postDispay";
 import { BarPostFilter } from "@features/barPostFilter";
 import { ICreatePostForm, IPostChannel } from "@shared/types/createPost";
 import { AddFiles } from "@features/addFiles";
@@ -23,6 +22,7 @@ import { ContinueOrder } from "@features/continueOrder";
 import { filterSlice } from "@shared/store/reducers";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { Editor } from "@features/postEditor";
+import { PostDispayTelegram } from "@features/postDispayTelegram";
 
 interface CreateOrderPostProps {
   cards: IPostChannel[];
@@ -122,7 +122,13 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                     getValues={getValues}
                     platformId={filter.id}
                   />
-                  {filter.type === platformTypesStr.telegram && <PostButtons />}
+                  {filter.type === platformTypesStr.telegram && (
+                    <PostButtons
+                      getValues={getValues}
+                      setValue={setValue}
+                      platformId={filter.id}
+                    />
+                  )}
                   <PostText
                     placeholder={"create_order.create.comment"}
                     maxLength={POST.commentLength}
@@ -135,7 +141,18 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                 </div>
               </div>
               <div className={styles.display}>
-                <PostDispay formState={formState} platformId={filter.id} />
+                {filter.type === platformTypesStr.telegram && (
+                  <PostDispayTelegram
+                    formState={formState}
+                    platformId={filter.id}
+                  />
+                )}
+                {filter.type === platformTypesStr.instagram && (
+                  <PostDispayTelegram
+                    formState={formState}
+                    platformId={filter.id}
+                  />
+                )}
                 <div className={styles.continue}>
                   <ContinueOrder onClick={handleCheckPosts} />
                 </div>

@@ -2,15 +2,19 @@ import { FC } from "react";
 import styles from "./styles.module.scss";
 import { ICreatePostForm } from "@shared/types/createPost";
 import { ContentType } from "@shared/config/createPostData";
-import { PostPhotos } from "./postPhotos";
 import { EmptyPost } from "./emptyPost";
+import { EyeIcon } from "@shared/assets";
+import { InstagramPhotos } from "./instagramPhotos";
 
-interface PostDispayProps {
+interface PostDispayInstagramProps {
   formState: ICreatePostForm;
   platformId: number;
 }
 
-export const PostDispay: FC<PostDispayProps> = ({ formState, platformId }) => {
+export const PostDispayInstagram: FC<PostDispayInstagramProps> = ({
+  formState,
+  platformId,
+}) => {
   const currentPost = formState.posts.find(
     (item) => item.platform === platformId,
   );
@@ -52,18 +56,25 @@ export const PostDispay: FC<PostDispayProps> = ({ formState, platformId }) => {
           postPhotos?.length ||
           postVideo ? (
             <div className={styles.content}>
-              {postPhotos && postPhotos?.length > 0 && (
-                <PostPhotos photos={postPhotos} />
-              )}
-              {postVideo && <video src={postVideo.content} />}
-              {postText && (
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: postText?.content || "",
-                  }}
-                  className={styles.current_post}
-                />
-              )}
+              <div className={styles.post}>
+                {postPhotos && postPhotos?.length > 0 && (
+                  <InstagramPhotos photos={postPhotos} />
+                )}
+                {postVideo && <video src={postVideo.content} />}
+                {postText && (
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: postText?.content || "",
+                    }}
+                    className={styles.post__text}
+                  />
+                )}
+                <div className={styles.info}>
+                  <EyeIcon />
+                  <span>213,7K</span>
+                  <span>19:00</span>
+                </div>
+              </div>
               <div className={styles.stroke}></div>
             </div>
           ) : (

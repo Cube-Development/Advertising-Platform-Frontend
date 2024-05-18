@@ -9,11 +9,11 @@ import {
 } from "@shared/ui/shadcn-ui/ui/carousel";
 import { FC, useEffect, useState } from "react";
 
-interface PostPhotosProps {
+interface InstagramPhotosProps {
   photos: IFile[];
 }
 
-export const PostPhotos: FC<PostPhotosProps> = ({ photos }) => {
+export const InstagramPhotos: FC<InstagramPhotosProps> = ({ photos }) => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
 

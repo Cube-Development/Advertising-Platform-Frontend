@@ -69,9 +69,12 @@ export const AddMediaFiles: FC<FileProps> = ({ onChange, currentFiles }) => {
         // (file) => (file.path = file.name + new Date().toISOString())
         (file) => (file.path = file.name),
       );
-      setFiles([...files, ...newFiles]);
-      onChange(newFiles, ContentType.photo);
-
+      if (files.length + newFiles.length <= 10) {
+        setFiles([...files, ...newFiles]);
+        onChange([...files, ...newFiles], ContentType.photo);
+      } else {
+        alert("Максимум можно 10 файлов!");
+      }
       // Запрос в бек на загрузку файла или файлов
       // может быть mapping на загрузку в бек
       // в uploadFiles записываются стринги пути к файлу на сервере, чтобы при удалении этого файла с Фронта в useForm найти этот обьект в files: [] с content: string = file_server_path и удалить

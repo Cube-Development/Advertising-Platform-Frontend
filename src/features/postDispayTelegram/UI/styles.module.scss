@@ -92,40 +92,88 @@
       left: 0;
       height: 97.5%;
       width: 93.7%;
-      padding: 0px 10px;
       padding-top: 80px;
       padding-bottom: 60px;
       background: #142530;
       margin: 9px 11px;
       border-radius: 53.5px;
 
-      .content {
-        height: 100%;
+      .content_wrapper {
+        display: grid;
+        align-content: end;
         background: url("/src/shared/assets/img/tgbg.png") no-repeat;
         background-size: cover;
-        padding: 5px 0px;
-        overflow-x: hidden;
-        overflow-y: auto;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
+        height: 100%;
 
-        .current_post {
+        .content {
           height: 100%;
-          width: 100%;
-          font-size: 14px;
-          padding: 0px 5px;
-          color: #fff;
-        }
+          padding: 8px;
+          overflow-x: hidden;
+          overflow-y: auto;
+          word-wrap: break-word;
+          overflow-wrap: break-word;
 
-        .stroke {
-          position: absolute;
-          bottom: 10px;
-          left: 50%;
-          transform: translate(-50%);
-          width: 10vw;
-          max-width: 130px;
-          border-bottom: 4px solid #c9c9c9;
-          border-radius: 20px;
+          .post {
+            background: #2b4f67;
+            width: 80%;
+            padding: 5px;
+            padding-bottom: 15px;
+            border-radius: 10px 10px 10px 0px;
+            position: relative;
+
+            &__text {
+              height: 100%;
+              width: 100%;
+              font-size: 14px;
+              padding: 0px 5px;
+              color: #fff;
+            }
+
+            .info {
+              position: absolute;
+              bottom: 1.5px;
+              right: 7px;
+              display: grid;
+              grid-auto-flow: column;
+              gap: 5px;
+              align-items: center;
+              justify-content: center;
+              font-size: 8px;
+              color: #bbbbbb;
+            }
+          }
+
+          .buttons {
+            width: 80%;
+            margin-top: 3px;
+            display: grid;
+            gap: 3px;
+
+            a {
+              padding: 7px;
+              border-radius: 10px;
+              background: rgba(87, 132, 161, 0.3);
+              color: #fff;
+              font-size: 12px;
+              font-weight: 500;
+              text-align: center;
+            }
+
+            &:last-child {
+              border-radius: 20px;
+            }
+          }
+
+          .stroke {
+            position: absolute;
+            bottom: 10px;
+            left: 50%;
+            transform: translate(-50%);
+            width: 10vw;
+            max-width: 130px;
+            border-bottom: 4px solid #c9c9c9;
+            border-radius: 20px;
+          }
         }
       }
     }

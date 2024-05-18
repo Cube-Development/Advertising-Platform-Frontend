@@ -61,7 +61,7 @@ export const PostFiles: FC<PostFilesProps> = ({
     );
     const newFiles: IFile[] = files.map((file) => ({
       content_type: contentId,
-      content: file.path!,
+      content: file.path || file.name,
     }));
 
     currentPost.files = [...currentFiles, ...newFiles];
@@ -76,11 +76,15 @@ export const PostFiles: FC<PostFilesProps> = ({
     platform: platformId,
     files: [],
   };
-  const currentFiles: IFile[] = (currentPost.files || []).filter(
+  const currentMedia: IFile[] = (currentPost.files || []).filter(
     (item) =>
       item.content_type === ContentType.photo ||
       item.content_type === ContentType.video,
   );
+  const currentFile: IFile[] = (currentPost.files || []).filter(
+    (item) => item.content_type === ContentType.file,
+  );
+
   console.log(form);
 
   return (
@@ -105,11 +109,14 @@ export const PostFiles: FC<PostFilesProps> = ({
               resetValues={handle}
             />
             {filter === addFileFilter.file ? (
-              <AddFiles onChange={handleAddMediaFile} />
+              <AddFiles
+                onChange={handleAddMediaFile}
+                currentFiles={currentFile}
+              />
             ) : (
               <AddMediaFiles
                 onChange={handleAddMediaFile}
-                currentFiles={currentFiles}
+                currentFiles={currentMedia}
               />
             )}
           </div>
