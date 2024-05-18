@@ -39,12 +39,12 @@ export const enum DEBOUNCE {
 }
 
 export const enum INTERSECTION_ELEMENTS {
-  catalog = 3,
-  orders = 1,
-  channels = 1,
-  hisory = 1,
-  // catalog = 10,
-  // orders = 5,
-  // channels = 15,
-  // hisory = 1000,
+  // catalog = 3,
+  // orders = 1,
+  // channels = 1,
+  // hisory = 1,
+  catalog = 10,
+  orders = 5,
+  channels = 15,
+  hisory = 1000,
 }

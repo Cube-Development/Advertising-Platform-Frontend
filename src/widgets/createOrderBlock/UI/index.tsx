@@ -80,7 +80,6 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
     project_id: project_id!,
     language: language?.id || Languages[0].id,
     page: 1,
-    // elements_on_page: 100,
   };
   const { data: projectChannels } = useProjectOrdersQuery(projectChannelsReq, {
     skip: !project_id,
@@ -116,9 +115,8 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
                   description: error,
                   action: <ToastAction altText="Ok">Ok</ToastAction>,
                 });
-                // alert("Ошибка в создании поста");
               });
-          }),
+          })
         );
         await createOrderDates(formData.datetime)
           .unwrap()
@@ -135,7 +133,6 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
                   description: error,
                   action: <ToastAction altText="Ok">Ok</ToastAction>,
                 });
-                // alert("Ошибка в оплате заказа");
               });
           })
           .catch((error) => {
@@ -145,7 +142,6 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
               description: error,
               action: <ToastAction altText="Ok">Ok</ToastAction>,
             });
-            // alert("Ошибка в создании дат для каналов");
           });
       } catch (error) {
         toast({
@@ -154,7 +150,6 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
           description: String(error),
           action: <ToastAction altText="Ok">Ok</ToastAction>,
         });
-        // alert("Произошла ошибка: " + error);
       }
     }
   };
