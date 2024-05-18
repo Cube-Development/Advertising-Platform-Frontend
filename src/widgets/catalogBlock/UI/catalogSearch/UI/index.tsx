@@ -1,21 +1,15 @@
-import { FC } from "react";
-import styles from "./styles.module.scss";
+import { AiFilter } from "@features/aiFilter";
 import { BarProfileFilter } from "@features/barProfileFilter/UI";
-import { pageFilter } from "@shared/config/pageFilter";
+import { RecommendationCard } from "@features/recommendationCard";
+import { SelectDescription } from "@features/selectDescription";
 import { SelectOptions } from "@features/selectOptions";
 import { SelectSex } from "@features/selectSex";
-import { useTranslation } from "react-i18next";
-import {
-  UseFormGetValues,
-  UseFormReset,
-  UseFormSetValue,
-} from "react-hook-form";
 import { QualityIcon } from "@shared/assets";
-import { useAppSelector } from "@shared/store";
 import { catalogFilter } from "@shared/config/catalogFilter";
-import { SelectDescription } from "@features/selectDescription";
-import { AiFilter } from "@features/aiFilter";
+import { Languages } from "@shared/config/languages";
+import { pageFilter } from "@shared/config/pageFilter";
 import { platformData } from "@shared/config/platformData";
+import { useAppSelector } from "@shared/store";
 import { getCatalogReq } from "@shared/store/services/catalogService";
 import {
   useGetChannelAgesQuery,
@@ -23,7 +17,16 @@ import {
   useGetChannelRegionsQuery,
   useGetCompanyCategoriesQuery,
 } from "@shared/store/services/contentService";
-import { Languages } from "@shared/config/languages";
+import { IFilterSearch } from "@shared/types/filterSearch";
+import { FC, useEffect, useState } from "react";
+import {
+  UseFormGetValues,
+  UseFormReset,
+  UseFormSetValue,
+} from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
+import { AIRecommendCARDS, RecommendCARDS } from "@shared/config/mockDATA";
 
 interface CatalogSearchProps {
   setValue: UseFormSetValue<getCatalogReq>;
@@ -36,7 +39,12 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
   reset,
   getValues,
 }) => {
-  const { catalogFilter: filter } = useAppSelector((state) => state.filter);
+  const [recommendationCard, setRecCard] = useState<IFilterSearch | null>(null);
+  const [recommendationCards, setRecCards] = useState<IFilterSearch[] | null>(
+    null,
+  );
+
+  const { catalogFilter: catfilter } = useAppSelector((state) => state.filter);
 
   const { t, i18n } = useTranslation();
   const language = Languages.find((lang) => {
@@ -53,11 +61,48 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
   const { data: regions } = useGetChannelRegionsQuery(contentRes);
   const { data: languages } = useGetChannelLanguagesQuery(contentRes);
 
+  const { filter } = getValues();
+
+  const resetRecommendationCard = () => {
+    setRecCard(null);
+    setRecCards(null);
+    reset();
+    console.log("resetRecommendationCard");
+  };
+
+  const handleUseRecommendionCard = (card: IFilterSearch) => {
+    if (card === recommendationCard) {
+      resetRecommendationCard();
+    } else {
+      setRecCard(card);
+      const newFilter = { ...filter };
+      newFilter.business = card.business.map((item) => item.id);
+      newFilter.age = card.age.map((item) => item.id);
+      newFilter.language = card.language.map((item) => item.id);
+      newFilter.region = card.region.map((item) => item.id);
+      newFilter.male = card.male;
+      newFilter.female = card.female;
+      setValue("filter", newFilter);
+    }
+  };
+
+  useEffect(() => {
+    console.log(filter);
+    // setRecCards(RecommendCARDS);
+  }, [filter]);
+
+  const getAIRecommendationCards = () => {
+    setRecCards(AIRecommendCARDS);
+  };
+
   return (
     <div className={styles.wrapper}>
-      <BarProfileFilter resetValues={reset} page={pageFilter.catalog} />
+      <BarProfileFilter
+        resetValues={resetRecommendationCard}
+        page={pageFilter.catalog}
+      />
       <div className={styles.options}>
-        {filter === catalogFilter.parameters ? (
+        {catfilter === catalogFilter.parameters ? (
           <>
             <SelectOptions
               onChange={setValue}
@@ -68,6 +113,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
               textData={"catalog.category"}
               isRow={true}
               isCatalog={true}
+              defaultValues={filter.business}
             />
             <SelectOptions
               onChange={setValue}
@@ -78,6 +124,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
               textData={"catalog.age"}
               isRow={true}
               isCatalog={true}
+              defaultValues={filter.age}
             />
             <SelectSex
               onChange={setValue}
@@ -85,6 +132,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
               title={"catalog.sex.title"}
               isRow={true}
               isCatalog={true}
+              defaultValues={filter.male}
             />
             <SelectOptions
               onChange={setValue}
@@ -95,6 +143,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
               textData={"catalog.languages"}
               isRow={true}
               isCatalog={true}
+              defaultValues={filter.language}
             />
             <SelectOptions
               onChange={setValue}
@@ -105,22 +154,40 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
               textData={"catalog.region"}
               isRow={true}
               isCatalog={true}
+              defaultValues={filter.region}
             />
           </>
         ) : (
           <>
             <SelectDescription
               onChange={setValue}
+              type={platformData.description}
               title={"catalog.ai.title"}
               placeholder={"catalog.ai.default_input"}
             />
-            <AiFilter />
+            <AiFilter onChange={getAIRecommendationCards} />
           </>
         )}
-        <div className={styles.recomendation}>
-          <QualityIcon />
-          <p>{t("catalog.recomendation")}</p>
-        </div>
+        {recommendationCards ? (
+          <div className={styles.recommendation}>
+            <div className={styles.recommendation__title}>
+              <QualityIcon />
+              <p>{t("catalog.recommendation.title")}</p>
+            </div>
+            <div className={styles.recommendation__cards}>
+              {recommendationCards.map((card, index) => (
+                <RecommendationCard
+                  key={index}
+                  card={card}
+                  onChange={handleUseRecommendionCard}
+                  isChooseed={recommendationCard === card}
+                />
+              ))}
+            </div>
+          </div>
+        ) : (
+          <></>
+        )}
       </div>
     </div>
   );

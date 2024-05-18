@@ -1,11 +1,13 @@
-import { paths } from "@shared/routing";
 import {
+  BookIcon,
   CampaignIcon,
+  OfferIcon,
+  PlatformIcon,
   TemplateIcon,
   WalletIcon,
-  BookIcon,
 } from "@shared/assets";
 import { projectTypesFilter } from "@shared/config/projectFilter";
+import { paths } from "@shared/routing";
 
 export const advertiserMenu = [
   {
@@ -38,19 +40,30 @@ export const advertiserMenu = [
   },
 ];
 
+export const managerMenu = [
+  {
+    item: {
+      title: "burger_menu.orders",
+      path: paths.orders,
+      img: CampaignIcon,
+    },
+  },
+  { item: { title: "burger_menu.base", path: paths.faq, img: BookIcon } },
+];
+
 export const bloggerMenu = [
   {
     item: {
       title: "burger_menu.platforms",
       path: paths.platforms,
-      img: CampaignIcon,
+      img: PlatformIcon,
     },
   },
   {
     item: {
       title: "burger_menu.offers",
       path: paths.offers,
-      img: TemplateIcon,
+      img: OfferIcon,
     },
   },
 ];

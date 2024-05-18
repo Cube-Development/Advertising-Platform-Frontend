@@ -3,26 +3,28 @@ import { CatalogCard } from "@features/catalogCard";
 import { FormatList } from "@features/formatList";
 import { SearchFilter } from "@features/searchFilter";
 import { SelectOptions } from "@features/selectOptions";
+import { ShowMoreBtn } from "@features/showMore";
+import { SadSmileIcon } from "@shared/assets";
 import {
   filterData,
   networkTypes,
   platformData,
   sortingTypes,
 } from "@shared/config/platformData";
+import { getCatalogReq } from "@shared/store/services/catalogService";
 import { IPlatform } from "@shared/types/platform";
+import { SpinnerLoader } from "@shared/ui/spinnerLoader";
 import { FC } from "react";
-import { UseFormSetValue } from "react-hook-form";
+import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { getCatalogReq } from "@shared/store/services/catalogService";
-import { DinamicPagination } from "@features/dinamicPagination";
-import { SadSmileIcon } from "@shared/assets";
-import { ShowMoreBtn } from "@features/showMore";
-import { SpinnerLoader } from "@shared/ui/spinnerLoader";
+import { INTERSECTION_ELEMENTS } from "@shared/config/common";
+import { SkeletonCatalogCard } from "@features/catalogCard/skeletonCatalogCard";
 
 interface CatalogListProps {
   channels: IPlatform[];
   setValue: UseFormSetValue<getCatalogReq>;
+  getValues: UseFormGetValues<getCatalogReq>;
   page: number;
   onChangeCard: (cart: IPlatform) => void;
   isNotEmpty: boolean;
@@ -32,6 +34,7 @@ interface CatalogListProps {
 export const CatalogList: FC<CatalogListProps> = ({
   channels,
   setValue,
+  getValues,
   page,
   isNotEmpty,
   onChangeCard,
@@ -51,12 +54,14 @@ export const CatalogList: FC<CatalogListProps> = ({
         </big>
         <div className={styles.filters}>
           <SelectOptions
+            getValues={getValues}
             onChange={setValue}
             options={networkTypes}
             textData="filter.title"
             single={true}
             type={filterData.platform}
             isFilter={true}
+            isCatalogPlatform={true}
           />
           <SelectOptions
             onChange={setValue}
@@ -81,6 +86,10 @@ export const CatalogList: FC<CatalogListProps> = ({
             onChangeCard={onChangeCard}
           />
         ))}
+        {isLoading &&
+          Array.from({ length: INTERSECTION_ELEMENTS.catalog }).map(
+            (_, index) => <SkeletonCatalogCard key={index} />
+          )}
       </div>
       {isNotEmpty ? (
         // <DinamicPagination onChange={handleOnChangePage} />

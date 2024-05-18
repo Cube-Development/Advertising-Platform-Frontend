@@ -1,13 +1,23 @@
 import { BarProfileFilter } from "@features/barProfileFilter/UI";
+import { BarSubrofileFilter } from "@features/barSubprofileFilter";
 import { ArrowIcon5 } from "@shared/assets";
 import { pageFilter } from "@shared/config/pageFilter";
 import { profileTypesName } from "@shared/config/profileFilter";
 import { useAppSelector } from "@shared/store";
 import {
+  useCreateLegalMutation,
+  useEditLegalMutation,
+  useReadLegalsByTypeQuery,
+  useReadOneLegalMutation,
+} from "@shared/store/services/legalService";
+import { usePaymentWithdrawalMutation } from "@shared/store/services/walletService";
+import {
   ILegalCard,
   ILegalCardShort,
   IProfileData,
 } from "@shared/types/profile";
+import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
+import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import { ChooseProfile } from "@widgets/wallet/UI/chooseProfile";
 import { Guide } from "@widgets/wallet/UI/guide";
 import { PaymentData } from "@widgets/wallet/UI/paymentData/UI";
@@ -15,24 +25,13 @@ import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { BarSubrofileFilter } from "@features/barSubprofileFilter";
-import {
-  useCreateLegalMutation,
-  useEditLegalMutation,
-  useReadLegalsByTypeQuery,
-  useReadOneLegalMutation,
-} from "@shared/store/services/legalService";
-import {
-  usePaymentDepositMutation,
-  usePaymentWithdrawalMutation,
-} from "@shared/store/services/walletService";
-import { paymentTypes } from "@shared/config/payment";
 
 interface IExtendedProfileData extends IProfileData {
   amount: number;
 }
 
 export const WalletWithdraw: FC = () => {
+  const { toast } = useToast();
   const { t } = useTranslation();
   const [activeAccount, setActiveAccount] = useState<ILegalCard | null>(null);
 
@@ -80,6 +79,12 @@ export const WalletWithdraw: FC = () => {
           clearErrors();
         })
         .catch((error) => {
+          toast({
+            variant: "error",
+            title: t("toasts.wallet.profile.error"),
+            description: error,
+            action: <ToastAction altText="Ok">Ok</ToastAction>,
+          });
           console.error("Ошибка при заполнении данных", error);
         });
     }
@@ -114,9 +119,15 @@ export const WalletWithdraw: FC = () => {
         paymentWithdrawal(paymentReq)
           .unwrap()
           .then(() => reset())
-          .catch((error) =>
-            console.error("Ошибка payment/paymentWithdrawal: ", error),
-          );
+          .catch((error) => {
+            toast({
+              variant: "error",
+              title: t("toasts.wallet.withdraw.error"),
+              description: error,
+              action: <ToastAction altText="Ok">Ok</ToastAction>,
+            });
+            console.error("Ошибка payment/paymentWithdrawal: ", error);
+          });
       })
       .catch((error) => {
         console.error("Ошибка в createLegal", error);
@@ -128,6 +139,10 @@ export const WalletWithdraw: FC = () => {
           editLegal(newFormData)
             .unwrap()
             .then((editRes) => {
+              toast({
+                variant: "success",
+                title: t("toasts.add_profile.edit.success"),
+              });
               const paymentReq = {
                 amount: Number(formData.amount),
                 legal_id: editRes.legal_id,
@@ -135,11 +150,23 @@ export const WalletWithdraw: FC = () => {
               paymentWithdrawal(paymentReq)
                 .unwrap()
                 .then(() => reset())
-                .catch((error) =>
-                  console.error("Ошибка payment/paymentWithdrawal: ", error),
-                );
+                .catch((error) => {
+                  toast({
+                    variant: "error",
+                    title: t("toasts.wallet.withdraw.error"),
+                    description: error,
+                    action: <ToastAction altText="Ok">Ok</ToastAction>,
+                  });
+                  console.error("Ошибка payment/paymentWithdrawal: ", error);
+                });
             })
             .catch((error) => {
+              toast({
+                variant: "error",
+                title: t("toasts.add_profile.edit.error"),
+                description: error,
+                action: <ToastAction altText="Ok">Ok</ToastAction>,
+              });
               console.error("Ошибка в editLegal", error);
             });
         }

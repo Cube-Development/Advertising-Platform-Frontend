@@ -33,7 +33,7 @@
 
 .calculate__subtitle {
   max-width: 1000px;
-  color: #fff;
+  color: var(--Personal-colors-White);
   font-size: 24px;
   font-style: normal;
   font-weight: 600;
@@ -96,7 +96,7 @@
       rgba(125, 117, 117, 0) 100%
     ),
     linear-gradient(90deg, #ff2f66 0%, rgba(254, 110, 48, 0.99) 100%);
-  color: #fff;
+  color: var(--Personal-colors-White);
   font-size: 16px;
   font-style: normal;
   font-weight: 600;

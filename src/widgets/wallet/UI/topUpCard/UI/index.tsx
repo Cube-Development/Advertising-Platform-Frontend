@@ -7,6 +7,8 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { usePaymentDepositMutation } from "@shared/store/services/walletService";
+import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
+import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
 
 interface IOnlineBankingData {
   legal_id: string;
@@ -15,6 +17,7 @@ interface IOnlineBankingData {
 }
 
 export const TopUpCard: FC = () => {
+  const { toast } = useToast();
   const { t } = useTranslation();
   const [paymentType, setPaymentType] = useState<paymentTypes>(
     paymentTypes.payme,
@@ -45,9 +48,21 @@ export const TopUpCard: FC = () => {
       .unwrap()
       .then(() => {
         reset();
-        alert(`Баланс успешно пополнен на сумму: ${formData.amount}`);
+        toast({
+          variant: "success",
+          title: `${t("toasts.wallet.topup.success")}: ${formData.amount.toLocaleString()} ${t("symbol")}`,
+        });
+        // alert(`Баланс успешно пополнен на сумму: ${formData.amount}`);
       })
-      .catch((error) => console.error("Ошибка payment/deposit: ", error));
+      .catch((error) => {
+        toast({
+          variant: "error",
+          title: t("toasts.wallet.topup.error"),
+          description: error,
+          action: <ToastAction altText="Ok">Ok</ToastAction>,
+        });
+        console.error("Ошибка payment/deposit: ", error);
+      });
   };
 
   const amount = watch("amount", 0);

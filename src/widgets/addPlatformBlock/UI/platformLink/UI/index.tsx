@@ -1,20 +1,22 @@
-import { MyButton } from "@shared/ui";
-import { FC } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
 import { InfoIcon } from "@shared/assets";
+import { platformTypes } from "@shared/config/postFilter";
+import {
+  useChannelVerifyMutation,
+  useCreateCodeQuery,
+} from "@shared/store/services/channelService";
 import {
   IAddChannelIdentification,
   IAddPlatformBlur,
   IPlatformLink,
 } from "@shared/types/platform";
-import {
-  useChannelVerifyMutation,
-  useCreateCodeQuery,
-} from "@shared/store/services/channelService";
-import { platformTypes } from "@shared/config/postFilter";
+import { MyButton } from "@shared/ui";
+import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
+import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import { SpinnerLoaderSmall } from "@shared/ui/spinnerLoader";
+import { FC } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 interface PlatformLinkProps {
   blur: IAddPlatformBlur;
@@ -33,6 +35,7 @@ export const PlatformLink: FC<PlatformLinkProps> = ({
   setInserCode,
   channel_id,
 }) => {
+  const { toast } = useToast();
   const { t } = useTranslation();
   const {
     reset,
@@ -59,13 +62,26 @@ export const PlatformLink: FC<PlatformLinkProps> = ({
         .then((data) => {
           setInserCode(data.insertion_code);
           onChangeBlur({ link: true, parameters: false });
+          toast({
+            variant: "success",
+            title: t("toasts.add_platform.link.success"),
+          });
         })
         .catch((error) => {
-          console.error("Ошибка: ", error);
+          // console.error("Ошибка: ", error);
           if (error.status === 400) {
-            alert(
-              "К сожалению время истекло, обновите страницу и попробуйте заново",
-            );
+            toast({
+              variant: "error",
+              title: t("toasts.add_platform.link.alert"),
+              action: <ToastAction altText="Ok">Ok</ToastAction>,
+            });
+          } else {
+            toast({
+              variant: "error",
+              title: t("toasts.add_platform.link.error"),
+              description: error,
+              action: <ToastAction altText="Ok">Ok</ToastAction>,
+            });
           }
         });
     }

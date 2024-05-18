@@ -13,12 +13,16 @@ import { AddMediaFiles } from "@features/addMediaFiles";
 import { ICreateOrderBlur, IPlatformLink } from "@shared/types/platform";
 import { useAppDispatch, useAppSelector } from "@shared/store";
 import { platformTypes } from "@shared/config/postFilter";
-import { platformTypesStr } from "@shared/config/platformTypes";
+import {
+  platformTypesNum,
+  platformTypesStr,
+} from "@shared/config/platformTypes";
 import { POST } from "@shared/config/common";
-import { CreatePostFormData, ContentType } from "@shared/config/createPostData";
+import { ContentType, CreatePostFormData } from "@shared/config/createPostData";
 import { ContinueOrder } from "@features/continueOrder";
 import { filterSlice } from "@shared/store/reducers";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
+import { Editor } from "@features/postEditor";
 
 interface CreateOrderPostProps {
   cards: IPostChannel[];
@@ -26,6 +30,7 @@ interface CreateOrderPostProps {
   onChangeBlur: (key: keyof ICreateOrderBlur) => void;
   setValue: UseFormSetValue<ICreatePostForm>;
   getValues: UseFormGetValues<ICreatePostForm>;
+  formState: ICreatePostForm;
 }
 
 export const CreateOrderPost: FC<CreateOrderPostProps> = ({
@@ -34,6 +39,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
   onChangeBlur,
   setValue,
   getValues,
+  formState,
 }) => {
   const { t } = useTranslation();
 
@@ -48,9 +54,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
   };
 
   const handleCheckPosts = () => {
-    const form: ICreatePostForm = getValues();
-    console.log(form.posts);
-    if (platformIds.length === form.posts?.length) {
+    if (platformIds.length === formState.posts?.length) {
       onChangeBlur("datetime");
     } else {
       const allTypes = [
@@ -80,16 +84,33 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
             <div className={styles.data}>
               <div className={styles.post_data}>
                 <div className={styles.block}>
-                  <PostText
-                    placeholder={"create_order.create.text"}
-                    maxLength={POST.postLength}
-                    rows={10}
-                    setValue={setValue}
-                    getValues={getValues}
-                    type={CreatePostFormData.posts}
-                    contentId={ContentType.text}
-                    platformId={filter.id}
-                  />
+                  {filter.id === platformTypesNum.telegram && (
+                    <Editor
+                      contentId={ContentType.text}
+                      setValue={setValue}
+                      getValues={getValues}
+                      type={CreatePostFormData.posts}
+                      platformId={filter.id}
+                    />
+                  )}
+                  {filter.id === platformTypesNum.instagram && (
+                    <Editor
+                      contentId={ContentType.text}
+                      setValue={setValue}
+                      getValues={getValues}
+                      type={CreatePostFormData.posts}
+                      platformId={filter.id}
+                    />
+                  )}
+                  {filter.id === platformTypesNum.youtube && (
+                    <Editor
+                      contentId={ContentType.text}
+                      setValue={setValue}
+                      getValues={getValues}
+                      type={CreatePostFormData.posts}
+                      platformId={filter.id}
+                    />
+                  )}
                 </div>
                 <div
                   className={`${styles.block__bottom} ${filter.type !== platformTypesStr.telegram ? styles.filter : ""}`}
@@ -114,7 +135,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                 </div>
               </div>
               <div className={styles.display}>
-                <PostDispay />
+                <PostDispay formState={formState} platformId={filter.id} />
                 <div className={styles.continue}>
                   <ContinueOrder onClick={handleCheckPosts} />
                 </div>

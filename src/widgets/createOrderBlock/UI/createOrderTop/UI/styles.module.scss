@@ -13,7 +13,7 @@
     align-items: center;
     justify-content: center;
     p {
-      color: #fff;
+      color: var(--Personal-colors-White);
       font-size: 44px;
       font-style: normal;
       font-weight: 600;
@@ -44,11 +44,11 @@
         font-size: 44px;
         font-weight: bold;
         line-height: 1;
-        color: #fff;
+        color: var(--Personal-colors-White);
       }
 
       p {
-        color: #fff;
+        color: var(--Personal-colors-White);
         font-size: 34px;
         font-style: normal;
         font-weight: 600;
@@ -60,7 +60,8 @@
       margin-left: 120px;
       padding-left: 20px;
       display: grid;
-      grid-auto-flow: column;
+      grid-template: 1fr / 1fr 50px;
+      gap: 10px;
       align-items: center;
       max-width: 450px;
       justify-content: space-between;
@@ -70,7 +71,7 @@
 
       button {
         border-radius: 50%;
-        background: #fff;
+        background: var(--Personal-colors-White);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -79,16 +80,16 @@
       }
       .input {
         display: grid;
-        grid-auto-flow: column;
+        grid-template: 1fr / 20px 1fr;
         align-items: center;
         justify-content: start;
         column-gap: 10px;
 
         input {
-          color: #fff;
+          color: var(--Personal-colors-White);
           align-items: center;
           &::placeholder {
-            color: #fff;
+            color: var(--Personal-colors-White);
           }
         }
       }

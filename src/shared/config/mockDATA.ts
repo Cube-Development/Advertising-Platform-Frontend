@@ -1,4 +1,5 @@
 import { IAdvManagerProjectsDev, IAdvProjects } from "@shared/types/advProject";
+import { IFilterSearch } from "@shared/types/filterSearch";
 import {
   IManagerNewProjects,
   IManagerProjects,
@@ -1642,3 +1643,203 @@ export const advSavedProjectCompleteCARDS: IAdvProjects = {
     },
   ],
 };
+
+export const RecommendCARDS: IFilterSearch[] = [
+  {
+    platform: 1,
+    business: [
+      {
+        id: 1,
+        name: "Авто, мото",
+      },
+      {
+        id: 2,
+        name: "Автомобильная электроника",
+      },
+      {
+        id: 3,
+        name: "Автосервис",
+      },
+    ],
+    age: [
+      {
+        id: 2,
+        name: "18-34 лет",
+      },
+      {
+        id: 3,
+        name: "35-44 лет",
+      },
+      {
+        id: 4,
+        name: "45-54 лет",
+      },
+    ],
+    language: [
+      {
+        id: 1,
+        name: "🇺🇿 Узбекский",
+      },
+      {
+        id: 2,
+        name: "🇬🇧 Английский",
+      },
+      {
+        id: 3,
+        name: "🇷🇺 Русский",
+      },
+    ],
+    region: [
+      {
+        id: 7,
+        name: "Самарканд",
+      },
+      {
+        id: 8,
+        name: "Сурхандарья",
+      },
+      {
+        id: 9,
+        name: "Сырдарья",
+      },
+      {
+        id: 10,
+        name: "Ташкент",
+      },
+      {
+        id: 11,
+        name: "Фергана",
+      },
+      {
+        id: 12,
+        name: "Хорезм",
+      },
+      {
+        id: 13,
+        name: "Таш. Область",
+      },
+    ],
+    male: 50,
+    female: 50,
+  },
+  {
+    platform: 1,
+    business: [
+      {
+        id: 2,
+        name: "Автомобильная электроника",
+      },
+      {
+        id: 3,
+        name: "Автосервис",
+      },
+    ],
+    age: [
+      {
+        id: 2,
+        name: "18-34 лет",
+      },
+
+      {
+        id: 4,
+        name: "45-54 лет",
+      },
+    ],
+    language: [
+      {
+        id: 3,
+        name: "🇷🇺 Русский",
+      },
+    ],
+    region: [
+      {
+        id: 7,
+        name: "Самарканд",
+      },
+      {
+        id: 8,
+        name: "Сурхандарья",
+      },
+
+      {
+        id: 12,
+        name: "Хорезм",
+      },
+      {
+        id: 13,
+        name: "Таш. Область",
+      },
+    ],
+    male: 0,
+    female: 100,
+  },
+];
+
+export const AIRecommendCARDS: IFilterSearch[] = [
+  {
+    platform: 1,
+    business: [
+      {
+        id: 1,
+        name: "Авто, мото",
+      },
+      {
+        id: 2,
+        name: "Автомобильная электроника",
+      },
+    ],
+    age: [
+      {
+        id: 4,
+        name: "45-54 лет",
+      },
+    ],
+    language: [
+      {
+        id: 2,
+        name: "🇬🇧 Английский",
+      },
+    ],
+    region: [
+      {
+        id: 7,
+        name: "Самарканд",
+      },
+    ],
+    male: 75,
+    female: 25,
+  },
+  {
+    platform: 1,
+    business: [
+      {
+        id: 2,
+        name: "Автомобильная электроника",
+      },
+      {
+        id: 3,
+        name: "Автосервис",
+      },
+    ],
+    age: [
+      {
+        id: 2,
+        name: "18-34 лет",
+      },
+    ],
+    language: [
+      {
+        id: 3,
+        name: "🇷🇺 Русский",
+      },
+    ],
+    region: [
+      {
+        id: 13,
+        name: "Таш. Область",
+      },
+    ],
+    male: 90,
+    female: 10,
+  },
+];

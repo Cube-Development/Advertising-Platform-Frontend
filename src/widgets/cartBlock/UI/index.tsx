@@ -1,9 +1,12 @@
 import { FC, useEffect, useState } from "react";
-import styles from "./styles.module.scss";
 import { CartList } from "./cartList";
 import { CreatePost } from "./createPost";
+import styles from "./styles.module.scss";
 // import { RecomendationList } from "@widgets/cartBlock/UI/recomendationList";
-import { IPlatform } from "@shared/types/platform";
+import { GenerateGuestId } from "@features/generateGuestId";
+import { ToastAction } from "@radix-ui/react-toast";
+import { Languages } from "@shared/config/languages";
+import { useAppSelector } from "@shared/store";
 import {
   useAddToCommonCartMutation,
   useAddToPublicCartMutation,
@@ -13,14 +16,14 @@ import {
   useRemoveFromPublicCartMutation,
 } from "@shared/store/services/cartService";
 import { ICart } from "@shared/types/cart";
-import { useAppSelector } from "@shared/store";
+import { IPlatform } from "@shared/types/platform";
+import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import Cookies from "js-cookie";
-import { GenerateGuestId } from "@features/generateGuestId";
 import { useTranslation } from "react-i18next";
-import { Languages } from "@shared/config/languages";
 
 export const CartBlock: FC = () => {
-  const { i18n } = useTranslation();
+  const { toast } = useToast();
+  const { t, i18n } = useTranslation();
   const language = Languages.find((lang) => {
     return i18n.language === lang.name;
   });
@@ -90,18 +93,30 @@ export const CartBlock: FC = () => {
             .then((data) => {
               setCurrentCart(data);
             })
-            .catch((error) =>
-              console.error("Ошибка при удалении с корзины", error),
-            );
+            .catch((error) => {
+              toast({
+                variant: "error",
+                title: t("toasts.catalog.remove.error"),
+                description: error,
+                action: <ToastAction altText="Ok">Ok</ToastAction>,
+              });
+              console.error("Ошибка при удалении с корзины", error);
+            });
         } else if (isAuth) {
           removeFromCommonCart(removeReq)
             .unwrap()
             .then((data) => {
               setCurrentCart(data);
             })
-            .catch((error) =>
-              console.error("Ошибка при удалении с корзины", error),
-            );
+            .catch((error) => {
+              toast({
+                variant: "error",
+                title: t("toasts.catalog.remove.error"),
+                description: error,
+                action: <ToastAction altText="Ok">Ok</ToastAction>,
+              });
+              console.error("Ошибка при удалении с корзины", error);
+            });
         }
       } else if (
         currentCard.selected_format?.format !==
@@ -113,18 +128,30 @@ export const CartBlock: FC = () => {
             .then((data) => {
               setCurrentCart(data);
             })
-            .catch((error) =>
-              console.error("Ошибка при добавлении в корзину", error),
-            );
+            .catch((error) => {
+              toast({
+                variant: "error",
+                title: t("toasts.catalog.add.error"),
+                description: error,
+                action: <ToastAction altText="Ok">Ok</ToastAction>,
+              });
+              console.error("Ошибка при добавлении в корзину", error);
+            });
         } else if (isAuth) {
           addToCommonCart(addReq)
             .unwrap()
             .then((data) => {
               setCurrentCart(data);
             })
-            .catch((error) =>
-              console.error("Ошибка при добавлении в корзину", error),
-            );
+            .catch((error) => {
+              toast({
+                variant: "error",
+                title: t("toasts.catalog.add.error"),
+                description: error,
+                action: <ToastAction altText="Ok">Ok</ToastAction>,
+              });
+              console.error("Ошибка при добавлении в корзину", error);
+            });
         }
       }
       //       setCurrentCart({

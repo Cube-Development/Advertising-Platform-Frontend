@@ -65,7 +65,9 @@ export const BarProfileFilter: FC<BarProfileFilterProps> = ({
     } else if (page === pageFilter.createOrderFiles) {
       dispatch(filterSlice.actions.setAddFileFilter(option.type));
     }
-    if (page !== pageFilter.catalog) {
+    if (page === pageFilter.catalog) {
+      // if (page !== pageFilter.catalog) {
+      // изменил этот момент
       resetValues();
     }
   };
@@ -74,9 +76,10 @@ export const BarProfileFilter: FC<BarProfileFilterProps> = ({
     <div className={styles.types}>
       <ul
         className={
-          page === pageFilter.catalog ? styles.catalog : styles.profile
+          page === pageFilter.catalog || pageFilter.createOrderFiles
+            ? styles.catalog
+            : styles.profile
         }
-        // className={styles.profile}
       >
         {options.map((option, index) => (
           <li

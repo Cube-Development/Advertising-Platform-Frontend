@@ -1,23 +1,17 @@
 .wrapper {
-  display: grid;
-  grid-auto-flow: column;
-  column-gap: 5px;
-  align-items: start;
-  justify-content: start;
   padding: 20px;
-
   border-radius: 15px;
-  border: 1px solid var(--Containers, #8c8c8c);
-  background: #fff;
+  background: var(--Personal-colors-White);
+  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.6);
 
   svg {
+    justify-self: center;
     margin-top: 3px;
     width: 12px;
     height: 12px;
   }
 
   textarea {
-    // width: 100%;
     resize: none;
     outline: none;
     color: var(--Personal-colors-black);
@@ -25,9 +19,11 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+    width: 100%;
+    height: 100%;
 
     &::placeholder {
-      color: var(--Text-sample, #a3a0a0);
+      color: var(--Text-sample);
     }
   }
 }

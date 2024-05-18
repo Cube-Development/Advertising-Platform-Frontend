@@ -12,7 +12,7 @@ export const enum CALENDAR {
   disabledDays = 2,
 }
 
-export const enum MEDIAFILES {
+export const enum MEDIA_FILES {
   maxSize = 50,
   maxLenght = 10,
 }
@@ -23,13 +23,15 @@ export const enum FILES {
 }
 
 // Количество опций, после которого появляется Scroll
-export const enum SELECTOPTIONS {
+export const enum PLATFORM_PARAMETERS {
   scrollAddLen = 5,
+  defaultSexMale = 50,
+  defaultTextLimit = 4096,
 }
 
 export const enum POST {
-  postLength = 200,
-  commentLength = 300,
+  postLength = 2000,
+  commentLength = 1000,
 }
 
 export const enum DEBOUNCE {
@@ -37,6 +39,10 @@ export const enum DEBOUNCE {
 }
 
 export const enum INTERSECTION_ELEMENTS {
+  // catalog = 3,
+  // orders = 1,
+  // channels = 1,
+  // hisory = 1,
   catalog = 10,
   orders = 5,
   channels = 15,

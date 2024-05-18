@@ -25,6 +25,8 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@shared/ui/shadcn-ui/ui/accordion";
+import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
+import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -60,12 +62,13 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
   ActivateBtn,
   SupportBtn,
 }) => {
+  const { toast } = useToast();
   const { t } = useTranslation();
   const [isSubcardOpen, setSubcardOpen] = useState(false);
 
-  const handleChangeOpenSubcard = (): void => {
-    setSubcardOpen(!isSubcardOpen);
-  };
+  // const handleChangeOpenSubcard = (): void => {
+  //   setSubcardOpen(!isSubcardOpen);
+  // };
 
   const { statusFilter } = useAppSelector((state) => state.filter);
 
@@ -84,9 +87,21 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
     activateChannel(card.id)
       .unwrap()
       .then(() => {
+        toast({
+          variant: "success",
+          title: t("toasts.offers_blogger.channel.activate.success"),
+        });
         console.log("Успешная активация");
       })
-      .catch((error) => console.error("Ошибка при активации канала: ", error));
+      .catch((error) => {
+        toast({
+          variant: "error",
+          title: t("toasts.offers_blogger.channel.activate.error"),
+          description: error,
+          action: <ToastAction altText="Ok">Ok</ToastAction>,
+        });
+        console.error("Ошибка при активации канала: ", error);
+      });
   };
 
   const accordionRef = useRef(null);
@@ -260,7 +275,7 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
           </div>
         </AccordionContent>
 
-        <AccordionTrigger onClick={() => handleChangeOpenSubcard()}>
+        <AccordionTrigger>
           <div className={styles.card__btn}>
             {isSubcardOpen
               ? t(`platforms_blogger.card.see_less`)

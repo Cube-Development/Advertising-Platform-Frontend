@@ -37,6 +37,16 @@ module.exports = {
         ring: "hsl(var(--ring))",
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
+        skeleton: {
+          light: "var(--skeleton-light)",
+          dark: "var(--skeleton-dark)",
+        },
+        toast: {
+          success: "var(--toast-success)",
+          error: "var(--toast-error)",
+          foreground: "var(--toast-foreground)",
+        },
+
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",

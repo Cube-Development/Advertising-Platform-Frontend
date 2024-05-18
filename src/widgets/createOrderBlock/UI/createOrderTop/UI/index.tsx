@@ -58,7 +58,7 @@ export const CreateOrderTop: FC<CreateOrderTopProps> = ({
                     })}
                   />
                 </div>
-                <button onClick={handleOnChangeBlur}>
+                <button type="button" onClick={handleOnChangeBlur}>
                   <ArrowLongHorizontalIcon className="active__icon" />
                 </button>
               </div>

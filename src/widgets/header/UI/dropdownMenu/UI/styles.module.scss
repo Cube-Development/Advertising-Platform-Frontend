@@ -1,26 +1,41 @@
 .dropdown {
   position: relative;
+
   .menu {
-    padding: 25px 20px;
+    &__content {
+      display: grid;
+      grid-auto-flow: row;
+    }
+
+    &__accordion {
+      display: grid;
+      grid-auto-flow: row;
+      row-gap: 8px;
+      padding: 10px;
+    }
+
+    // padding: 25px 0px;
     height: 100%;
     position: fixed;
     top: 0;
     left: 0; /* Скрываем за пределами экрана */
-    background-color: #fff;
-    border: 1px solid #ccc;
+    background-color: var(--Personal-colors-White);
+    border: 1px solid var(--black-10);
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     z-index: 10;
 
-    &__enter {
-      animation: slideIn 0.25s forwards;
-    }
+    // &__enter {
+    //   animation: slideIn 0.25s forwards;
+    // }
 
-    &__exit {
-      animation: slideOut 0.25s forwards;
-    }
+    // &__exit {
+    //   animation: slideOut 0.25s forwards;
+    // }
 
     &__switcher {
       display: grid;
+      grid-auto-flow: row;
+      row-gap: 25px;
       justify-content: center;
 
       &__row {
@@ -30,7 +45,7 @@
         border: 0.1px solid var(--Personal-colors-main);
         display: inline-flex;
         align-items: center;
-        margin-bottom: 20px;
+        margin: 15px 10px;
 
         p {
           text-align: center;
@@ -48,15 +63,16 @@
 
         .active {
           background: var(--Gradients-Gradient-1);
-          color: #fff;
+          color: var(--Personal-colors-White);
         }
       }
     }
 
     &__top {
       display: grid;
-      padding-bottom: 15px;
-      margin-bottom: 25px;
+      padding: 20px;
+      align-content: center;
+      height: 80px;
       border-bottom: 1px solid #d9d9d9;
       grid-auto-flow: column;
       justify-content: space-between;
@@ -135,20 +151,20 @@
   }
 }
 
-@keyframes slideIn {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
-}
+// @keyframes slideIn {
+//   from {
+//     transform: translateX(-100%);
+//   }
+//   to {
+//     transform: translateX(0);
+//   }
+// }
 
-@keyframes slideOut {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-100%);
-  }
-}
+// @keyframes slideOut {
+//   from {
+//     transform: translateX(0);
+//   }
+//   to {
+//     transform: translateX(-100%);
+//   }
+// }

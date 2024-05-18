@@ -19,12 +19,8 @@ interface IButton {
 
 export const PostButtons: FC<PostButtonsProps> = () => {
   const { t } = useTranslation();
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [buttons, setButtons] = useState<IButton[]>([]);
   const [button, setButton] = useState<IButton>({ name: "", link: "" });
-  // const handleOpenModal = () => {
-  //   setIsModalOpen(!isModalOpen);
-  // };
 
   const handleOnChange = (type: keyof IButton, value: string) => {
     setButton((prevState) => ({
