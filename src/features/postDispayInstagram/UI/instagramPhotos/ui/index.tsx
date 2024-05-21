@@ -1,4 +1,3 @@
-import { IFile } from "@shared/types/createPost";
 import {
   Carousel,
   CarouselApi,
@@ -8,9 +7,12 @@ import {
   CarouselPrevious,
 } from "@shared/ui/shadcn-ui/ui/carousel";
 import { FC, useEffect, useState } from "react";
+import styles from "./styles.module.scss";
+import { GenerateDownloadLink } from "@features/generateDownloadLink";
+import { Download } from "lucide-react";
 
 interface InstagramPhotosProps {
-  photos: IFile[];
+  photos: File[];
 }
 
 export const InstagramPhotos: FC<InstagramPhotosProps> = ({ photos }) => {
@@ -36,19 +38,35 @@ export const InstagramPhotos: FC<InstagramPhotosProps> = ({ photos }) => {
         loop: true,
       }}
       setApi={setApi}
+      className="relative"
     >
-      <CarouselContent>
+      <CarouselContent className="-ml-1">
         {photos?.map((photo, index) => (
-          <CarouselItem key={index}>
-            <div className="w-[100%] rounded-[20px] overflow-hidden">
-              <img src="https://img.freepik.com/free-photo/the-adorable-illustration-of-kittens-playing-in-the-forest-generative-ai_260559-483.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1715472000&semt=ais_user" />
+          <CarouselItem key={index} className="pl-1">
+            <div className="w-[100%] overflow-hidden relative">
+              <img
+                src={URL.createObjectURL(photo)}
+                alt={`Photo ${index + 1}`}
+                className="w-full h-full"
+              />
+              <div
+                className="absolute bottom-2 right-2 rounded-full bg-[#ababab] opacity-75 hover:opacity-100 flex items-center content-center p-1 cursor-pointer"
+                onClick={() => GenerateDownloadLink(photo, photo?.name)}
+              >
+                <Download width={20} height={20} stroke="#fff" />
+              </div>
             </div>
           </CarouselItem>
         ))}
       </CarouselContent>
-      <p className="text-[#909090] my-2 font-medium text-center text-xs">
-        {current} / {photos.length}
-      </p>
+      <div className={styles.navigation}>
+        {photos.map((item, index) => (
+          <span
+            key={index}
+            className={`${styles.navigation__item} ${current === index + 1 && styles.navigation__active}`}
+          ></span>
+        ))}
+      </div>
       <CarouselPrevious />
       <CarouselNext />
     </Carousel>

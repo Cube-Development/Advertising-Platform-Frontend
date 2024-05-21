@@ -1,0 +1,1 @@
+export { InstagramComment } from "./ui";

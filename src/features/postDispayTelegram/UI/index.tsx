@@ -1,10 +1,11 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { ICreatePostForm } from "@shared/types/createPost";
-import { ContentType } from "@shared/config/createPostData";
 import { EmptyPost } from "./emptyPost";
 import { EyeIcon } from "@shared/assets";
 import { TelegramPhotos } from "./telegramPhotos";
+import { TelegramFile } from "./telegramFile";
+import { TelegramComment } from "./telegramComment";
 
 interface PostDispayTelegramProps {
   formState: ICreatePostForm;
@@ -18,23 +19,14 @@ export const PostDispayTelegram: FC<PostDispayTelegramProps> = ({
   const currentPost = formState.posts.find(
     (item) => item.platform === platformId,
   );
-  const postText = currentPost?.files?.find(
-    (file) => file.content_type === ContentType.text,
-  );
-  const postPhotos = currentPost?.files?.filter(
-    (file) => file.content_type === ContentType.photo,
-  );
-  const postVideo = currentPost?.files?.filter(
-    (file) => file.content_type === ContentType.video,
-  );
-  const postButtons = currentPost?.files?.filter(
-    (file) => file.content_type === ContentType.button,
-  );
-  const postFile = currentPost?.files?.find(
-    (file) => file.content_type === ContentType.file,
-  );
-
-  console.log(postButtons);
+  const postText = currentPost?.text;
+  const postPhotos = currentPost?.media;
+  // const postVideo = currentPost?.files?.filter(
+  //   (file) => file.content_type === ContentType.video
+  // );
+  const postButtons = currentPost?.buttons;
+  const postFile = currentPost?.files;
+  const postComment = currentPost?.comment;
 
   return (
     <div className={styles.screen_wrapper}>
@@ -60,43 +52,47 @@ export const PostDispayTelegram: FC<PostDispayTelegramProps> = ({
         />
         <div className={styles.unmute}>Unmute</div>
         <div className={styles.display}>
-          {(postText && postText?.content !== "<p></p>") ||
-          postPhotos?.length ? (
-            <div className={styles.content_wrapper}>
-              <div className={styles.content}>
-                <div className={styles.post}>
-                  {postPhotos && postPhotos?.length > 0 && (
-                    <TelegramPhotos photos={postPhotos} />
-                  )}
-                  {postText && (
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: postText?.content || "",
-                      }}
-                      className={styles.post__text}
-                    />
-                  )}
-                  <div className={styles.info}>
-                    <EyeIcon />
-                    <span>213,7K</span>
-                    <span>19:00</span>
-                  </div>
-                </div>
-                {postButtons && postButtons?.length > 0 && (
-                  <div className={styles.buttons}>
-                    {postButtons?.map((button) => (
-                      <a
-                        href={button?.url}
-                        target="_blank"
-                        className="truncate"
-                      >
-                        {button?.content}
-                      </a>
-                    ))}
-                  </div>
+          {(postText && postText[0]?.content !== "<p></p>") ||
+          postPhotos?.length ||
+          postComment ||
+          postFile?.length ||
+          postButtons?.length ? (
+            <div className={styles.content}>
+              <div className={styles.post}>
+                {postPhotos && postPhotos?.length > 0 && (
+                  <TelegramPhotos photos={postPhotos} />
                 )}
-                <div className={styles.stroke}></div>
+                {postText && (
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: postText[0]?.content || "",
+                    }}
+                    className={styles.post__text}
+                  />
+                )}
+                <div className={styles.info}>
+                  <EyeIcon />
+                  <span>213,7K</span>
+                  <span>19:00</span>
+                </div>
               </div>
+              {postButtons && postButtons?.length > 0 && (
+                <div className={styles.buttons}>
+                  {postButtons?.map((button, index) => (
+                    <a
+                      key={index}
+                      href={button?.url}
+                      target="_blank"
+                      className="truncate"
+                    >
+                      {button?.content}
+                    </a>
+                  ))}
+                </div>
+              )}
+              {postFile?.length && <TelegramFile file={postFile[0]} />}
+              {postComment && <TelegramComment comment={postComment} />}
+              <div className={styles.stroke}></div>
             </div>
           ) : (
             <EmptyPost />

@@ -17,12 +17,13 @@ import {
   platformTypesStr,
 } from "@shared/config/platformTypes";
 import { POST } from "@shared/config/common";
-import { ContentType, CreatePostFormData } from "@shared/config/createPostData";
+import { CreatePostFormData } from "@shared/config/createPostData";
 import { ContinueOrder } from "@features/continueOrder";
 import { filterSlice } from "@shared/store/reducers";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { Editor } from "@features/postEditor";
 import { PostDispayTelegram } from "@features/postDispayTelegram";
+import { PostDispayInstagram } from "@features/postDispayInstagram";
 
 interface CreateOrderPostProps {
   cards: IPostChannel[];
@@ -86,7 +87,6 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                 <div className={styles.block}>
                   {filter.id === platformTypesNum.telegram && (
                     <Editor
-                      contentId={ContentType.text}
                       setValue={setValue}
                       getValues={getValues}
                       type={CreatePostFormData.posts}
@@ -95,7 +95,6 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                   )}
                   {filter.id === platformTypesNum.instagram && (
                     <Editor
-                      contentId={ContentType.text}
                       setValue={setValue}
                       getValues={getValues}
                       type={CreatePostFormData.posts}
@@ -104,7 +103,6 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                   )}
                   {filter.id === platformTypesNum.youtube && (
                     <Editor
-                      contentId={ContentType.text}
                       setValue={setValue}
                       getValues={getValues}
                       type={CreatePostFormData.posts}
@@ -148,7 +146,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                   />
                 )}
                 {filter.type === platformTypesStr.instagram && (
-                  <PostDispayTelegram
+                  <PostDispayInstagram
                     formState={formState}
                     platformId={filter.id}
                   />

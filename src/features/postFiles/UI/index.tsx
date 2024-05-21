@@ -1,16 +1,14 @@
 import { BarProfileFilter } from "@features/barProfileFilter/UI";
 import { CancelIcon2, ImageIcon } from "@shared/assets";
 import { addFileFilter } from "@shared/config/addFileFilter";
-import { ContentType, CreatePostFormData } from "@shared/config/createPostData";
+import { CreatePostFormData } from "@shared/config/createPostData";
 import { pageFilter } from "@shared/config/pageFilter";
 import { useAppSelector } from "@shared/store";
 import {
   FileProps,
   ICreatePost,
   ICreatePostForm,
-  IFile,
 } from "@shared/types/createPost";
-import { IAddFile } from "@shared/types/file";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -43,7 +41,7 @@ export const PostFiles: FC<PostFilesProps> = ({
 
   const handle = () => {};
 
-  const handleAddMediaFile = (files: IAddFile[], contentId: ContentType) => {
+  const handleAddMediaFile = (mediafiles: File[]) => {
     const form: ICreatePostForm = { ...getValues() };
     const posts: ICreatePost[] = (form.posts || []).filter(
       (item) => item.platform !== platformId,
@@ -54,17 +52,31 @@ export const PostFiles: FC<PostFilesProps> = ({
       project_id: form.project_id,
       platform: platformId,
       files: [],
+      media: [],
+      buttons: [],
     };
+    currentPost.media = [...mediafiles];
+    setValue(CreatePostFormData.posts, [...posts, currentPost]);
+  };
 
-    const currentFiles: IFile[] = (currentPost.files || []).filter(
-      (item) => item.content_type !== contentId,
+  const handleAddFile = (files: File[]) => {
+    const form: ICreatePostForm = { ...getValues() };
+    const posts: ICreatePost[] = (form.posts || []).filter(
+      (item) => item.platform !== platformId,
     );
-    const newFiles: IFile[] = files.map((file) => ({
-      content_type: contentId,
-      content: file.path || file.name,
-    }));
-
-    currentPost.files = [...currentFiles, ...newFiles];
+    const currentPost: ICreatePost = (form.posts || []).find(
+      (item) => item.platform === platformId,
+    ) || {
+      project_id: form.project_id,
+      platform: platformId,
+      files: [],
+      media: [],
+      buttons: [],
+    };
+    const currentFiles = currentPost.files || [];
+    files.length
+      ? (currentPost.files = [...currentFiles, ...files])
+      : (currentPost.files = []);
     setValue(CreatePostFormData.posts, [...posts, currentPost]);
   };
 
@@ -75,15 +87,11 @@ export const PostFiles: FC<PostFilesProps> = ({
     project_id: form.project_id,
     platform: platformId,
     files: [],
+    media: [],
+    buttons: [],
   };
-  const currentMedia: IFile[] = (currentPost.files || []).filter(
-    (item) =>
-      item.content_type === ContentType.photo ||
-      item.content_type === ContentType.video,
-  );
-  const currentFile: IFile[] = (currentPost.files || []).filter(
-    (item) => item.content_type === ContentType.file,
-  );
+  const currentMedia: File[] = currentPost.media || [];
+  const currentFile: File[] = currentPost.files || [];
 
   console.log(form);
 
@@ -109,10 +117,7 @@ export const PostFiles: FC<PostFilesProps> = ({
               resetValues={handle}
             />
             {filter === addFileFilter.file ? (
-              <AddFiles
-                onChange={handleAddMediaFile}
-                currentFiles={currentFile}
-              />
+              <AddFiles onChange={handleAddFile} currentFiles={currentFile} />
             ) : (
               <AddMediaFiles
                 onChange={handleAddMediaFile}

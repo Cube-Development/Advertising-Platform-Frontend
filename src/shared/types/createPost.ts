@@ -1,6 +1,3 @@
-import { ContentType } from "@shared/config/createPostData";
-import { IAddFile } from "./file";
-
 export interface IPostChannel {
   id: string;
   avatar: string;
@@ -23,13 +20,27 @@ export interface ICreatePost extends IProjectId {
   platform?: number;
   // name?: string;
   comment?: string;
-  files?: IFile[];
+  media?: File[];
+  files?: File[];
+  buttons?: ITgButton[];
+  text?: IPostText[];
 }
 
-export interface IFile {
+// export interface IFile {
+//   content_type: number;
+//   content: string;
+//   url?: string;
+// }
+
+export interface IPostText {
   content_type: number;
   content: string;
-  url?: string;
+}
+
+export interface ITgButton {
+  content_type: number;
+  content: string;
+  url: string;
 }
 
 export interface ICreateDate extends IProjectId {
@@ -54,6 +65,6 @@ export interface TimeListProps {
 }
 
 export interface FileProps {
-  onChange: (file: IAddFile[], type: ContentType) => void;
-  currentFiles?: any;
+  onChange: (files: File[]) => void;
+  currentFiles?: File[];
 }

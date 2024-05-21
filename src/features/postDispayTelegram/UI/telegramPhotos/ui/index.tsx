@@ -1,20 +1,25 @@
-import { IFile } from "@shared/types/createPost";
 import { FC } from "react";
 import styles from "./styles.module.scss";
+import { Download } from "lucide-react";
+import { GenerateDownloadLink } from "@features/generateDownloadLink";
 
 interface TelegramPhotosProps {
-  photos: IFile[];
+  photos: File[];
 }
 
 export const TelegramPhotos: FC<TelegramPhotosProps> = ({ photos }) => {
   return (
     <div className={styles.media}>
       {photos.map((photo, index) => (
-        <img
-          key={index}
-          src="https://img.freepik.com/free-photo/the-adorable-illustration-of-kittens-playing-in-the-forest-generative-ai_260559-483.jpg?size=338&ext=jpg&ga=GA1.1.2008272138.1715472000&semt=ais_user"
-          alt={`Photo ${index + 1}`}
-        />
+        <div className="relative" key={index}>
+          <img src={URL.createObjectURL(photo)} alt={`Photo ${index + 1}`} />
+          <div
+            onClick={() => GenerateDownloadLink(photo, photo?.name)}
+            className="absolute bottom-2 right-2 rounded-full bg-[#ababab] opacity-75 hover:opacity-100 flex items-center content-center p-1 cursor-pointer"
+          >
+            <Download width={20} height={20} stroke="#fff" />
+          </div>
+        </div>
       ))}
     </div>
   );

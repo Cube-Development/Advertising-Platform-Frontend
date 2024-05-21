@@ -9,24 +9,19 @@ import {
 } from "@shared/assets";
 import { useTranslation } from "react-i18next";
 import { FILES } from "@shared/config/common";
-import { IAddFile } from "@shared/types/file";
 import { formatFileSize } from "@shared/ui/formatFileSize";
 import { FileProps } from "@shared/types/createPost";
-import { ContentType } from "@shared/config/createPostData";
 
 export const AddFiles: FC<FileProps> = ({ onChange, currentFiles }) => {
   const { t } = useTranslation();
-  const [files, setFiles] = useState<IAddFile[]>(
-    currentFiles ? currentFiles : [],
-  );
+  const [files, setFiles] = useState<File[]>(currentFiles ? currentFiles : []);
   const [dragActive, setDragActive] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
-    console.log(e.target.files);
     if (e.target.files && e.target.files[0]) {
       setFiles([...e.target.files]);
-      onChange([...e.target.files], ContentType.file);
+      onChange([...e.target.files]);
     }
   };
 
@@ -49,12 +44,13 @@ export const AddFiles: FC<FileProps> = ({ onChange, currentFiles }) => {
     setDragActive(false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       setFiles([...e.dataTransfer.files]);
-      onChange([...e.dataTransfer.files], ContentType.file);
+      onChange([...e.dataTransfer.files]);
     }
   };
 
-  const handleRemoveFile = (file: IAddFile) => {
+  const handleRemoveFile = (file: File) => {
     setFiles(files.filter((item) => item !== file));
+    onChange([]);
   };
 
   return (
@@ -74,7 +70,7 @@ export const AddFiles: FC<FileProps> = ({ onChange, currentFiles }) => {
                 <FileIcon />
                 <div className={styles.item__text}>
                   <p>{file?.name}</p>
-                  <span>{formatFileSize(file.size)}</span>
+                  <span>{formatFileSize(file?.size)}</span>
                 </div>
               </div>
               <div className={styles.item__right}>

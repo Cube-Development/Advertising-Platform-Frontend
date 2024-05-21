@@ -1,10 +1,17 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { ICreatePostForm } from "@shared/types/createPost";
-import { ContentType } from "@shared/config/createPostData";
 import { EmptyPost } from "./emptyPost";
-import { EyeIcon } from "@shared/assets";
 import { InstagramPhotos } from "./instagramPhotos";
+import { InstagramFile } from "./instagramFile";
+import { InstagramComment } from "./instagramComment";
+import { ChevronLeft, Heart, MessageCircle, Send } from "lucide-react";
+import { AvatarIcon, SaveIcon } from "./assets";
+import { HomeIcon } from "./assets";
+import { MarketIcon } from "./assets";
+import { ReelsIcon } from "./assets";
+import { SearchIcon } from "./assets";
+import { EyeDisabledIcon } from "@shared/assets/icons/eyeDisabled";
 
 interface PostDispayInstagramProps {
   formState: ICreatePostForm;
@@ -18,15 +25,13 @@ export const PostDispayInstagram: FC<PostDispayInstagramProps> = ({
   const currentPost = formState.posts.find(
     (item) => item.platform === platformId,
   );
-  const postText = currentPost?.files?.find(
-    (file) => file.content_type === ContentType.text,
-  );
-  const postPhotos = currentPost?.files?.filter(
-    (file) => file.content_type === ContentType.photo,
-  );
-  const postVideo = currentPost?.files?.find(
-    (file) => file.content_type === ContentType.video,
-  );
+  const postText = currentPost?.text;
+  const postPhotos = currentPost?.media;
+  // const postVideo = currentPost?.files?.filter(
+  //   (file) => file.content_type === ContentType.video
+  // );
+  const postFile = currentPost?.files;
+  const postComment = currentPost?.comment;
 
   return (
     <div className={styles.screen_wrapper}>
@@ -40,41 +45,95 @@ export const PostDispayInstagram: FC<PostDispayInstagramProps> = ({
           className={styles.dynamic}
           src="/src/shared/assets/img/dynamic.png"
         />
-        <img className={styles.back} src="/src/shared/assets/img/back.svg" />
-        <div className={styles.channel}>
-          <p className={styles.channel__name}>Channel name</p>
-          <p className={styles.channel__subs}>1 312 678 subscribers</p>
+        <div className={styles.header}>
+          <ChevronLeft />
+          <div className={styles.channel}>
+            <p className={styles.channel__name}>Channel name</p>
+            <p className={styles.channel__posts}>Posts</p>
+          </div>
+          <div className={styles.subscribe}>Subscribe</div>
         </div>
-        <div className={styles.avatar}></div>
         <img
           className={styles.mockup}
           src="/src/shared/assets/img/iphonescreen.png"
         />
-        <div className={styles.unmute}>Unmute</div>
+        <div className={styles.footer}>
+          <HomeIcon />
+          <SearchIcon />
+          <ReelsIcon />
+          <MarketIcon />
+          <AvatarIcon />
+        </div>
         <div className={styles.display}>
-          {(postText && postText?.content !== "<p></p>") ||
+          {(postText && postText[0]?.content !== "<p></p>") ||
           postPhotos?.length ||
-          postVideo ? (
+          postComment ||
+          postFile?.length ? (
             <div className={styles.content}>
               <div className={styles.post}>
-                {postPhotos && postPhotos?.length > 0 && (
+                <div className={styles.head}>
+                  <div className={styles.account}>
+                    <div className={styles.account__avatar}></div>
+                    <div className={styles.account__name}>
+                      <p className={styles.name}>Channel</p>
+                      <p className={styles.category}>Category</p>
+                    </div>
+                  </div>
+                  <div className={styles.head__more}>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                </div>
+                {postPhotos && postPhotos?.length > 0 ? (
                   <InstagramPhotos photos={postPhotos} />
+                ) : (
+                  <div className={styles.empty__photo}>
+                    <EyeDisabledIcon />
+                    <p>No content yet...</p>
+                  </div>
                 )}
-                {postVideo && <video src={postVideo.content} />}
+                <div className={styles.post__footer}>
+                  <div className={styles.left}>
+                    <Heart
+                      strokeWidth="1.5px"
+                      stroke="#fff"
+                      width="22px"
+                      height="22px"
+                    />
+                    <MessageCircle
+                      strokeWidth="1.5px"
+                      stroke="#fff"
+                      width="22px"
+                      height="22px"
+                    />
+                    <Send
+                      strokeWidth="1.5px"
+                      stroke="#fff"
+                      width="20px"
+                      height="20px"
+                    />
+                  </div>
+                  <SaveIcon />
+                </div>
+                <p className={styles.post__likes}>893 likes</p>
                 {postText && (
                   <div
                     dangerouslySetInnerHTML={{
-                      __html: postText?.content || "",
+                      __html: postText[0]?.content || "",
                     }}
                     className={styles.post__text}
                   />
                 )}
-                <div className={styles.info}>
-                  <EyeIcon />
-                  <span>213,7K</span>
-                  <span>19:00</span>
+                <div className={styles.post__info}>
+                  <p className={styles.show__comments}>
+                    Show all comments (189)
+                  </p>
+                  <p className={styles.date}>Now •</p>
                 </div>
               </div>
+              {postFile?.length && <InstagramFile file={postFile[0]} />}
+              {postComment && <InstagramComment comment={postComment} />}
               <div className={styles.stroke}></div>
             </div>
           ) : (

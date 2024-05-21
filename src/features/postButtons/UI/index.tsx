@@ -10,19 +10,17 @@ import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
-import { ICreatePost, ICreatePostForm, IFile } from "@shared/types/createPost";
+import {
+  ICreatePost,
+  ICreatePostForm,
+  ITgButton,
+} from "@shared/types/createPost";
 import { ContentType, CreatePostFormData } from "@shared/config/createPostData";
 
 interface PostButtonsProps {
   setValue: UseFormSetValue<ICreatePostForm>;
   getValues: UseFormGetValues<ICreatePostForm>;
   platformId: number;
-}
-
-interface IButton {
-  content_type: ContentType;
-  content: string;
-  url?: string;
 }
 
 export const PostButtons: FC<PostButtonsProps> = ({
@@ -43,23 +41,18 @@ export const PostButtons: FC<PostButtonsProps> = ({
     platform: platformId,
     files: [],
   };
-  const currentFiles: IFile[] = (currentPost.files || []).filter(
-    (item) => item.content_type !== ContentType.button,
-  );
-  const currentButtons: IFile[] = (currentPost.files || []).filter(
-    (item) => item.content_type === ContentType.button,
-  );
+  const currentButtons: ITgButton[] = currentPost.buttons || [];
 
-  const [buttons, setButtons] = useState<IButton[]>(
+  const [buttons, setButtons] = useState<ITgButton[]>(
     currentButtons ? currentButtons : [],
   );
-  const [button, setButton] = useState<IButton>({
+  const [button, setButton] = useState<ITgButton>({
     content_type: ContentType.button,
     content: "",
     url: "",
   });
 
-  const handleOnChange = (type: keyof IButton, value: string) => {
+  const handleOnChange = (type: keyof ITgButton, value: string) => {
     setButton((prevState) => ({
       ...prevState,
       [type]: value,
@@ -72,13 +65,13 @@ export const PostButtons: FC<PostButtonsProps> = ({
     (document.getElementById("nameInput") as HTMLInputElement).value = "";
     (document.getElementById("linkInput") as HTMLInputElement).value = "";
 
-    currentPost.files = [...currentFiles, ...buttons, button];
+    currentPost.buttons = [...buttons, button];
     setValue(CreatePostFormData.posts, [...posts, currentPost]);
   };
 
-  const handleRemoveButton = (button: IButton) => {
+  const handleRemoveButton = (button: ITgButton) => {
     setButtons(buttons.filter((item) => item !== button));
-    currentPost.files = [...currentFiles];
+    currentPost.buttons = [...buttons.filter((item) => item !== button)];
     setValue(CreatePostFormData.posts, [...posts, currentPost]);
   };
 
