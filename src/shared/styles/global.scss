@@ -10,6 +10,14 @@ body {
   font-family: "Montserrat", sans-serif;
   padding-top: var(--container-padding-top);
 
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    display: none;
+  }
+
   &.sidebar-open {
     overflow: hidden;
 

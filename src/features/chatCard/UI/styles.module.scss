@@ -19,7 +19,7 @@
     width: 35px;
     height: 35px;
     border-radius: 50%;
-    border: 0.5px solid #4772e6;
+    border: 0.5px solid var(--Personal-colors-main);
   }
 }
 
@@ -36,7 +36,6 @@
   max-width: 100%;
   justify-content: space-between;
   align-content: space-between;
-  margin: 5px 0px;
 
   p {
     color: var(--Sub-text);
@@ -62,14 +61,34 @@
 }
 
 .date {
-  text-align: end;
-  margin: 5px 0px;
+  display: grid;
+  grid-template: 1fr 1fr /1fr;
+  align-content: space-between;
+  justify-items: end;
+
   p {
     color: var(--Sub-text);
     font-size: 12px;
     font-style: normal;
     font-weight: 600;
     line-height: 0.75;
+  }
+  .unread {
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    background-color: var(--Personal-colors-main);
+    border-radius: 50%;
+
+    span {
+      color: var(--Personal-colors-White);
+      font-size: 10px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 0.75;
+    }
   }
 }
 

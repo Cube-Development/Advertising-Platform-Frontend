@@ -3,25 +3,25 @@
   align-items: center;
   justify-content: center;
 
-  position: fixed;
-  z-index: 10;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(5px);
+  // position: fixed;
+  // z-index: 10;
+  // left: 0;
+  // top: 0;
+  // width: 100%;
+  // height: 100%;
+  // overflow: auto;
+  // background-color: rgba(0, 0, 0, 0.5);
+  // backdrop-filter: blur(5px);
 
   .content {
     display: grid;
-    margin: 15% auto;
+    // margin: 15% auto;
     border-radius: 25px;
     background: var(--Personal-colors-White);
     grid-template: 1fr / 0.7fr 1fr;
     max-width: 45vw;
     column-gap: 10px;
-    height: 600px;
+    // height: 600px;
     overflow: hidden;
 
     .content__left {
@@ -35,7 +35,7 @@
         font-style: normal;
         font-weight: 400;
         line-height: 0.75;
-        color: #4772e6;
+        color: var(--Personal-colors-main);
         padding: 25px 0;
         text-align: center;
       }
@@ -73,7 +73,7 @@
             width: 25px;
             height: 25px;
             border-radius: 50%;
-            border: 0.5px solid #4772e6;
+            border: 0.5px solid var(--Personal-colors-main);
           }
         }
 
@@ -105,68 +105,71 @@
 
     .content__right {
       display: grid;
-      grid-auto-flow: row;
+      grid-template: 1fr 6fr 1fr / 1fr;
       align-content: space-between;
       padding-right: 10px;
       padding-bottom: 10px;
+
+      .close {
+        padding: 15px;
+        border-radius: 50%;
+        &:hover {
+          background-color: rgba(0, 0, 0, 0.1);
+        }
+      }
 
       .top {
         display: grid;
         grid-auto-flow: column;
         align-items: center;
         justify-content: space-between;
-        position: relative; /* Добавляем относительное позиционирование для .top */
 
         p {
           font-size: 24px;
           font-style: normal;
           font-weight: 400;
           line-height: 12px; /* 50% */
-          color: #4772e6;
+          color: var(--Personal-colors-main);
         }
 
         button {
-          position: absolute; /* Добавляем абсолютное позиционирование */
-          right: 25px; /* Устанавливаем расстояние от правого края */
-          top: 25px;
           svg {
             width: 20px;
             height: 20px;
           }
         }
-      }
-
-      .info {
-        display: grid;
-        grid-auto-flow: column;
-        column-gap: 10px;
-        justify-content: start;
-        padding: 15px;
-
-        .logo {
-          img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 0.5px solid #4772e6;
-          }
-        }
-
-        .description {
+        .info {
           display: grid;
-          grid-auto-flow: row;
-          row-gap: 10px;
-          margin: 5px 0;
+          grid-auto-flow: column;
+          column-gap: 10px;
+          justify-content: start;
+          padding: 15px;
 
-          p {
-            color: var(--Sub-text);
-            font-size: 12px;
-            font-style: normal;
-            font-weight: 600;
-            line-height: 0.75;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+          .logo {
+            img {
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              border: 0.5px solid var(--Personal-colors-main);
+            }
+          }
+
+          .description {
+            display: grid;
+            grid-auto-flow: row;
+            row-gap: 10px;
+            margin: 5px 0;
+
+            p {
+              color: var(--Sub-text);
+              font-size: 12px;
+              font-style: normal;
+              font-weight: 600;
+              line-height: 0.75;
+              overflow: hidden;
+              text-overflow: ellipsis;
+              white-space: nowrap;
+            }
           }
         }
       }

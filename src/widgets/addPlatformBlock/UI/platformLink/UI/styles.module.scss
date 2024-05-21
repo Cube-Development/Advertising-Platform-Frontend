@@ -141,7 +141,7 @@
 
   .platform__btn {
     border-radius: 12px;
-    border: 1px solid #4772e6;
+    border: 1px solid var(--Personal-colors-main);
     background: var(--Personal-colors-White);
     color: var(--Personal-colors-main);
     font-size: 18px;
@@ -166,7 +166,7 @@
 
     &.active {
       color: var(--Personal-colors-White);
-      border: 1px solid #4772e6;
+      border: 1px solid var(--Personal-colors-main);
       background: var(--Gradients-Gradient-1);
     }
   }

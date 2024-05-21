@@ -41,7 +41,6 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
-    console.log("isMenuOpen", dropdownMenu);
     if (dropdownMenu.isOpen) {
       document.body.classList.add("sidebar-open");
     } else {

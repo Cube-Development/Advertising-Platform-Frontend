@@ -1,15 +1,24 @@
-import { CancelIcon2, ChatIcon } from "@shared/assets";
-import { FC, useState } from "react";
-import styles from "./styles.module.scss";
-import { useTranslation } from "react-i18next";
+import { BarProfileFilter } from "@features/barProfileFilter/UI";
 import { ChatCard } from "@features/chatCard";
 import { ChatMessages } from "@features/chatMessages";
-import { IChat, IMessage } from "@shared/types/chat";
-import { SendMessage } from "@features/sendMessage";
-import { BarProfileFilter } from "@features/barProfileFilter/UI";
+import { CancelIcon2, ChatIcon } from "@shared/assets";
 import { pageFilter } from "@shared/config/pageFilter";
 import { useAppSelector } from "@shared/store";
-import { chatFilter } from "@shared/config/chatFilter";
+import { IOrderMessageAll, IOrderMessageNewSocket } from "@shared/types/chat";
+import { FC, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
+import { useCentrifuge } from "./CentrifugeContext";
+import { RecipientType } from "@shared/config/chat";
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+} from "@shared/ui/shadcn-ui/ui/alert-dialog";
+import { AlertDialogTrigger } from "@radix-ui/react-alert-dialog";
+import { useGetAllChatsQuery } from "@shared/store/services/chatService";
+import Cookies from "js-cookie";
+import { convertUTCToLocalDateTime } from "@shared/functions/convertUTCToLocalTime";
 
 const AdministrationChat = {
   id: "999",
@@ -694,37 +703,146 @@ const ManagerChats = [
 
 export const Chat: FC = () => {
   const { t } = useTranslation();
+  const { data: chats } = useGetAllChatsQuery({
+    role: Cookies.get("role")!,
+  });
+  console.log("chats", chats);
 
-  const [chats, setChats] = useState<IChat[]>(AllChats);
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [currentChat, setCurrentChat] = useState<IChat | null>(null);
-  const handleOpenModal = () => {
-    setIsModalOpen(!isModalOpen);
-  };
+  const [allChats, setAllChats] = useState<IOrderMessageAll[]>(chats || []);
+  const [currentChat, setCurrentChat] = useState<IOrderMessageAll | null>(null);
+  const { OrderMessageNewChat } = useCentrifuge();
 
-  const handleChangeChat = (chat: IChat) => {
-    setCurrentChat(chat);
-  };
+  useEffect(() => {
+    if (chats) {
+      const Chats = chats.map((item) => {
+        const datetime = convertUTCToLocalDateTime(
+          item.message_date,
+          item.message_time,
+        );
+        return {
+          ...item,
+          message_date: datetime.localDate,
+          message_time: datetime.localTime,
+        };
+      });
+      setAllChats(Chats);
+    }
+  }, [chats]);
 
-  const handleAddMessage = (message: IMessage) => {
-    let newChat: IChat = currentChat!;
-    newChat!.messages.push(message);
-    setChats([newChat, ...chats.filter((chat) => chat !== currentChat)]);
+  const handleChangeChat = (order_id: string) => {
+    setCurrentChat(allChats.find((item) => item.order_id === order_id) || null);
   };
 
   const { chatFilter: filter } = useAppSelector((state) => state.filter);
 
   const handle = () => {
-    if (filter === chatFilter.blogger) {
-      setChats(ManagerChats);
-    } else if (filter === chatFilter.manager) {
-      setChats(AllChats);
-    }
+    // if (filter === chatFilter.blogger) {
+    //   setChats(ManagerChats);
+    // } else if (filter === chatFilter.manager) {
+    //   setChats(AllChats);
+    // }
   };
+
+  const handleCloseChat = () => {
+    setCurrentChat(null);
+  };
+
+  const handleNewMessage = (message: IOrderMessageNewSocket) => {
+    setAllChats((prevChats) =>
+      prevChats.map((chat) => {
+        if (chat.order_id === message.order_id) {
+          return {
+            ...chat,
+            last_message: message.message,
+            unread_count:
+              message.recipient === RecipientType.receiver
+                ? chat.unread_count + 1
+                : chat.unread_count,
+          };
+        }
+        return chat;
+      }),
+    );
+  };
+
+  OrderMessageNewChat(handleNewMessage);
 
   return (
     <div>
-      <button className={styles.chat} onClick={handleOpenModal}>
+      <AlertDialog>
+        <AlertDialogTrigger>
+          <div className={styles.chat}>
+            <ChatIcon />
+          </div>
+        </AlertDialogTrigger>
+        <AlertDialogContent>
+          <div className={styles.modal}>
+            <div className={styles.content}>
+              <div className={styles.content__left}>
+                <big>{t("chat.my_messages")}</big>
+                <div className={styles.filter}>
+                  <BarProfileFilter
+                    page={pageFilter.chat}
+                    resetValues={handle}
+                  />
+                </div>
+                <div className={styles.all_chats}>
+                  {allChats.map((card, index) => (
+                    <ChatCard
+                      key={index}
+                      card={card}
+                      isActive={currentChat?.order_id === card.order_id}
+                      onChange={handleChangeChat}
+                    />
+                  ))}
+                </div>
+                <div
+                  className={styles.administration}
+                  // onClick={() => handleChangeChat(AdministrationChat)}
+                >
+                  <div>
+                    <img src={AdministrationChat.avatar} alt="" />
+                  </div>
+                  <p>{t("chat.types.administration")}</p>
+                </div>
+              </div>
+              <div className={styles.content__right}>
+                <div className={styles.top}>
+                  {currentChat ? (
+                    <div className={styles.info}>
+                      <div className={styles.logo}>
+                        <div>
+                          <img src={currentChat.avatar} alt="" />
+                        </div>
+                      </div>
+                      <div className={styles.description}>
+                        <p>
+                          {currentChat.project_name
+                            ? `${t("chat.campaign")} ${currentChat.project_name} (${t("chat.channel")} ${currentChat.channel_name})`
+                            : t("chat.types.administration")}
+                        </p>
+                      </div>
+                    </div>
+                  ) : (
+                    <div></div>
+                  )}
+                  <AlertDialogCancel>
+                    <div className={styles.close} onClick={handleCloseChat}>
+                      <CancelIcon2 />
+                    </div>
+                  </AlertDialogCancel>
+                </div>
+
+                {currentChat && (
+                  <ChatMessages order_id={currentChat.order_id} />
+                )}
+              </div>
+            </div>
+          </div>
+        </AlertDialogContent>
+      </AlertDialog>
+
+      {/* <button className={styles.chat} onClick={handleOpenModal}>
         <ChatIcon />
       </button>
 
@@ -737,18 +855,18 @@ export const Chat: FC = () => {
                 <BarProfileFilter page={pageFilter.chat} resetValues={handle} />
               </div>
               <div className={styles.all_chats}>
-                {chats.map((card, index) => (
+                {allChats.map((card, index) => (
                   <ChatCard
                     key={index}
                     card={card}
-                    isActive={currentChat === card}
+                    isActive={currentChat?.order_id === card.order_id}
                     onChange={handleChangeChat}
                   />
                 ))}
               </div>
               <div
                 className={styles.administration}
-                onClick={() => handleChangeChat(AdministrationChat)}
+                // onClick={() => handleChangeChat(AdministrationChat)}
               >
                 <div>
                   <img src={AdministrationChat.avatar} alt="" />
@@ -767,8 +885,8 @@ export const Chat: FC = () => {
                     </div>
                     <div className={styles.description}>
                       <p>
-                        {currentChat.campaign
-                          ? `${t("chat.campaign")} ${currentChat.campaign} (${t("chat.channel")} ${currentChat.name})`
+                        {currentChat.project_name
+                          ? `${t("chat.campaign")} ${currentChat.project_name} (${t("chat.channel")} ${currentChat.channel_name})`
                           : t("chat.types.administration")}
                       </p>
                     </div>
@@ -781,14 +899,13 @@ export const Chat: FC = () => {
 
               {currentChat && (
                 <>
-                  <ChatMessages card={currentChat} />
-                  <SendMessage onChange={handleAddMessage} />
+                  <ChatMessages order_id={currentChat.order_id} />
                 </>
               )}
             </div>
           </div>
         </div>
-      )}
+      )} */}
     </div>
   );
 };

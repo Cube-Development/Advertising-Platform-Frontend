@@ -1,6 +1,6 @@
 .types {
   border-radius: 20px;
-  border: 1px solid #4772e6;
+  border: 1px solid var(--Personal-colors-main);
   overflow: hidden;
 
   .profile {
@@ -12,7 +12,7 @@
     font-weight: 600;
     line-height: normal;
     line-height: 0.75;
-    color: #4772e6;
+    color: var(--Personal-colors-main);
 
     li {
       text-align: center;
@@ -32,7 +32,7 @@
     font-weight: 500;
     line-height: normal;
     line-height: 0.75;
-    color: #4772e6;
+    color: var(--Personal-colors-main);
 
     li {
       text-align: center;

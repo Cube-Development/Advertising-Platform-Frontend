@@ -47,4 +47,5 @@ export const enum INTERSECTION_ELEMENTS {
   orders = 5,
   channels = 15,
   hisory = 1000,
+  chat = 10,
 }

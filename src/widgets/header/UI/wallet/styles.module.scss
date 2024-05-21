@@ -1,6 +1,6 @@
 .wallet {
   border-radius: 12px;
-  border: 1px solid #4772e6;
+  border: 1px solid var(--Personal-colors-main);
   background: var(--Gradients-Gradient-1);
   transition:
     background 0.3s ease,
@@ -77,7 +77,7 @@
 }
 
 .active__wallet {
-  border: 1px solid #4772e6;
+  border: 1px solid var(--Personal-colors-main);
   background: rgba(255, 255, 255, 0.25);
   color: var(--Personal-colors-black);
   transition:
