@@ -36,6 +36,7 @@
   --Personal-colors-green-hover: #6bda62;
   --Personal-colors-Click: #efe6ff;
   --Personal-colors-Error: rgba(254, 52, 48, 0.99);
+  --Personal-colors-grey: #bdbdbd;
   --black-10: rgba(0, 0, 0, 0.1);
   --Orange: #ffa04f;
 
@@ -43,7 +44,6 @@
   --Sub-text: #4d4d4d;
   --choosen-text: #808080;
   --Inside-container: #bdbdbd;
-  --Personal-colors-grey: #bdbdbd;
   --Containers: #8c8c8c;
   --Card-separator: #d9d9d9;
 
@@ -51,4 +51,108 @@
 
   --woman: 50;
   --man: 50%;
+
+  --borderRadius: 12px;
+  --borderMass: 1px;
+  --gradient: var(--Gradients-Gradient-1);
+  --zIndexTop: -1;
+  --zIndexBottom: -2;
+
+  /* Breakpoint constants */
+  --breakpoint-xl: 1366px; /* Extra Large */
+  --breakpoint-lg: 992px; /* Large */
+  --breakpoint-md: 768px; /* Medium */
+  --breakpoint-sm: 576px; /* Small */
+  --breakpoint-xs: 375px; /* Extra Small */
+
+  /* Контейнерные отступы */
+  /* Контейнерные отступы для Extra Large */
+  --container-padding-xl-all: 15px;
+  --container-padding-xl-side: 50px;
+  --container-padding-xl-top: 80px;
+
+  /* Контейнерные отступы для Large */
+  --container-padding-lg-all: 12px;
+  --container-padding-lg-side: 40px;
+  --container-padding-lg-top: 70px;
+
+  /* Контейнерные отступы для Medium */
+  --container-padding-md-all: 10px;
+  --container-padding-md-side: 30px;
+  --container-padding-md-top: 60px;
+
+  /* Контейнерные отступы для Small */
+  --container-padding-sm-all: 8px;
+  --container-padding-sm-side: 20px;
+  --container-padding-sm-top: 50px;
+
+  /* Контейнерные отступы для Extra Small */
+  --container-padding-xs-all: 5px;
+  --container-padding-xs-side: 10px;
+  --container-padding-xs-top: 40px;
+
+  /* Extra Large (XL) */
+  --font-size-xl-title-main: 32px;
+  --font-size-xl-subtitle-main: 24px;
+  --font-size-xl-title-secondary: 28px;
+  --font-size-xl-subtitle-secondary: 20px;
+  --font-size-xl-text-primary: 16px;
+  --font-size-xl-text-secondary: 14px;
+  --font-size-xl-text-accent: 18px;
+  --font-size-xl-menu-item: 16px;
+  --font-size-xl-button-text: 14px;
+  --margin-section-xl-top: 50px;
+  --margin-section-xl-bottom: 50px;
+
+  /* Large (LG) */
+  --font-size-lg-title-main: 30px;
+  --font-size-lg-subtitle-main: 22px;
+  --font-size-lg-title-secondary: 26px;
+  --font-size-lg-subtitle-secondary: 18px;
+  --font-size-lg-text-primary: 15px;
+  --font-size-lg-text-secondary: 13px;
+  --font-size-lg-text-accent: 17px;
+  --font-size-lg-menu-item: 15px;
+  --font-size-lg-button-text: 13px;
+  --margin-section-lg-top: 50px;
+  --margin-section-lg-bottom: 50px;
+
+  /* Medium (MD) */
+  --font-size-md-title-main: 28px;
+  --font-size-md-subtitle-main: 20px;
+  --font-size-md-title-secondary: 24px;
+  --font-size-md-subtitle-secondary: 16px;
+  --font-size-md-text-primary: 14px;
+  --font-size-md-text-secondary: 12px;
+  --font-size-md-text-accent: 16px;
+  --font-size-md-menu-item: 14px;
+  --font-size-md-button-text: 12px;
+  --margin-section-md-top: 50px;
+  --margin-section-md-bottom: 50px;
+
+  /* Small (SM) */
+  --font-size-sm-title-main: 26px;
+  --font-size-sm-subtitle-main: 18px;
+  --font-size-sm-title-secondary: 22px;
+  --font-size-sm-subtitle-secondary: 14px;
+  --font-size-sm-text-primary: 13px;
+  --font-size-sm-text-secondary: 11px;
+  --font-size-sm-text-accent: 15px;
+  --font-size-sm-menu-item: 13px;
+  --font-size-sm-button-text: 11px;
+  --margin-section-sm-top: 50px;
+  --margin-section-sm-bottom: 50px;
+
+  /* Extra Small (XS) */
+  --font-size-xs-title-main: 24px;
+  --font-size-xs-subtitle-main: 16px;
+  --font-size-xs-title-secondary: 20px;
+  --font-size-xs-subtitle-secondary: 12px;
+  --font-size-xs-text-primary: 12px;
+  --font-size-xs-text-secondary: 10px;
+  --font-size-xs-text-accent: 14px;
+  --font-size-xs-menu-item: 12px;
+  --font-size-xs-button-text: 10px;
+  --margin-section-xs-top: 50px;
+  --margin-section-xs-bottom: 50px;
 }

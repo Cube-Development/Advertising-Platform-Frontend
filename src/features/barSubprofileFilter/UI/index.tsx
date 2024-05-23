@@ -42,10 +42,12 @@ export const BarSubrofileFilter: FC<BarSubrofileFilterProps> = ({
             onClick={() => toggleProfile(subtype)}
             key={index}
           >
-            <div className={styles.outer}>
-              <div
-                className={`${styles.inner} ${subprofileFilter.type === subtype.type ? styles.active : ""}`}
-              ></div>
+            <div className={styles.circle_wrapper}>
+              <div className={styles.outer}>
+                <div
+                  className={`${styles.inner} ${subprofileFilter.type === subtype.type ? styles.active : ""}`}
+                ></div>
+              </div>
             </div>
             <p>{t(subtype.name)}</p>
           </li>

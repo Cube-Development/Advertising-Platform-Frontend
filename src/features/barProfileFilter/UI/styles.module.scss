@@ -1,7 +1,7 @@
 .types {
   border-radius: 20px;
-  border: 1px solid var(--Personal-colors-main);
   overflow: hidden;
+  box-shadow: 0 0 0 1px inset var(--Personal-colors-main);
 
   .profile {
     display: flex; /* Используем flex контейнер */

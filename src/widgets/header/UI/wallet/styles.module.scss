@@ -1,6 +1,7 @@
 .wallet {
-  border-radius: 12px;
-  border: 1px solid var(--Personal-colors-main);
+  $BR: 12px;
+  border-radius: $BR;
+  // border: 1px solid var(--Personal-colors-main);
   background: var(--Gradients-Gradient-1);
   transition:
     background 0.3s ease,
@@ -74,17 +75,44 @@
       }
     }
   }
-}
 
-.active__wallet {
-  border: 1px solid var(--Personal-colors-main);
-  background: rgba(255, 255, 255, 0.25);
-  color: var(--Personal-colors-black);
-  transition:
-    background 0.3s ease,
-    color 0.3s ease; /* Плавная смена цвета */
+  &.active__wallet {
+    color: var(--Personal-colors-black);
+    // border: 1px solid var(--Personal-colors-main);
+    // background: rgba(255, 255, 255, 0.25);
+    // transition:
+    //   background 0.3s ease,
+    //   color 0.3s ease; /* Плавная смена цвета */
 
-  svg {
-    border-left: rgba(255, 255, 255, 0.25);
+    //   background: none;
+    //   background-clip: padding-box;
+    //   $border-mass : 1px;
+
+    //   &:before {
+    //     content: '';
+    //     position: absolute;
+    //     top: 0; right: 0; bottom: 0; left: 0;
+    //     z-index: -1;
+    //     margin: 1px;
+    //     border-radius:  calc(var(--borderRadius) - $border-mass); /* !importanté */
+    //     background: var(--Personal-colors-White);
+    // }
+
+    // &:after {
+    //   content: '';
+    //   position: absolute;
+    //   top: 0;
+    //   right: 0;
+    //   bottom: 0;
+    //   left: 0;
+    //   z-index: -2; /* Псевдо-элемент будет под градиентным фоном */
+    //   // margin: 10px; /* !importanté */
+    //   border-radius: var(--borderRadius); /* !importanté */
+    //   background: var(--Gradients-Gradient-1);
+    // }
+
+    svg {
+      border-left: rgba(255, 255, 255, 0.25);
+    }
   }
 }

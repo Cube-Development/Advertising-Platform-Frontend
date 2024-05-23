@@ -98,7 +98,15 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
   const { typeFilter, statusFilter } = useAppSelector((state) => state.filter);
 
   return (
-    <div className={styles.wrapper}>
+    <div
+      style={
+        {
+          "--zIndexTop": "-3",
+          "--zIndexBottom": "-4",
+        } as React.CSSProperties
+      }
+      className={`${styles.wrapper} border__gradient`}
+    >
       <div className={styles.card}>
         <div className={styles.card__description}>
           <div className={styles.card__description__data}>
@@ -195,9 +203,20 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
         </div>
       </div>
 
-      <AccordionItem value={`item-${card.id}`} ref={accordionRef}>
+      <AccordionItem
+        style={
+          {
+            "--zIndexTop": "-1",
+            "--zIndexBottom": "-2",
+            "--borderMass": "2px",
+          } as React.CSSProperties
+        }
+        className="border__gradient"
+        value={`item-${card.id}`}
+        ref={accordionRef}
+      >
         <AccordionContent>
-          <div className={styles.subcard}>
+          <div className={`${styles.subcard} `}>
             {subcards?.orders.map((subcard, index) => (
               <AdvProjectSubcard
                 key={index}

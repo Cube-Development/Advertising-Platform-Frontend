@@ -291,6 +291,44 @@ body {
   // filter: grayscale(100%);
 }
 
+.border__gradient {
+  background: none;
+  position: relative;
+  box-sizing: content-box;
+
+  &:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: var(--zIndexTop);
+    margin: var(--borderMass);
+
+    border-radius: calc(
+      var(--borderRadius) - var(--borderMass)
+    ); /* !importanté */
+    background: var(--Personal-colors-White);
+  }
+
+  &:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: var(
+      --zIndexBottom
+    ); /* Псевдо-элемент будет под градиентным фоном */
+    // z-index: -2;
+    border-radius: var(--borderRadius); /* !importanté */
+    // background: var(--Gradients-Gradient-1);
+    background: var(--gradient);
+  }
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

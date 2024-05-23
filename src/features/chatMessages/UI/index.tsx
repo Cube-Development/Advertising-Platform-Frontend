@@ -1,5 +1,9 @@
 import { AddIcon } from "@shared/assets";
 import { MessageStatus, RecipientType } from "@shared/config/chat";
+import { INTERSECTION_ELEMENTS } from "@shared/config/common";
+import { convertUTCToLocalDateTime } from "@shared/functions/convertUTCToLocalTime";
+import { getCurrentUtcDateTime } from "@shared/functions/getCurrentUtcDateTime";
+import { useGetChatHistoryQuery } from "@shared/store/services/chatService";
 import {
   IOrderMessageNewSocket,
   IOrderMessageSendSocket,
@@ -10,10 +14,6 @@ import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { animateScroll } from "react-scroll";
 import styles from "./styles.module.scss";
-import { convertUTCToLocalDateTime } from "@shared/functions/convertUTCToLocalTime";
-import { useGetChatHistoryQuery } from "@shared/store/services/chatService";
-import { INTERSECTION_ELEMENTS } from "@shared/config/common";
-import { getCurrentUtcDateTime } from "@shared/functions/getCurrentUtcDateTime";
 
 interface ChatMessagesProps {
   order_id: string;
@@ -24,7 +24,6 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ order_id }) => {
   const { OrderMessageSend, OrderMessageNew } = useCentrifuge();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const currentDateString = getCurrentUtcDateTime();
-  console.log("currentDateString", currentDateString);
   const { data: history } = useGetChatHistoryQuery({
     order_id: order_id,
     batch: INTERSECTION_ELEMENTS.chat,

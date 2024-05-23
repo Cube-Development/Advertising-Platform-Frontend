@@ -34,7 +34,7 @@ export const BloggerOfferCard: FC<BloggerOfferCardProps> = ({
   const { statusFilter } = useAppSelector((state) => state.filter);
   return (
     <div
-      className={`${styles.card} ${offerStatusChat.includes(statusFilter as offerStatusFilter) ? styles.chat : styles.no__chat}`}
+      className={`${styles.card} ${offerStatusChat.includes(statusFilter as offerStatusFilter) ? styles.chat : styles.no__chat} border__gradient`}
     >
       <div className={styles.card__info}>
         <div className={styles.card__info__data}>

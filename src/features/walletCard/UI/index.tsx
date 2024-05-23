@@ -38,10 +38,12 @@ export const WalletCard: FC<WalletCardProps> = ({
           {isOneLegalLoading && !oneLegalError ? (
             <SpinnerLoaderSmall />
           ) : (
-            <div className={styles.outer}>
-              <div
-                className={`${styles.inner} ${isActive ? styles.active : ""}`}
-              ></div>
+            <div className={styles.circle_wrapper}>
+              <div className={styles.outer}>
+                <div
+                  className={`${styles.inner} ${isActive ? styles.active : ""}`}
+                ></div>
+              </div>
             </div>
           )}
         </>
