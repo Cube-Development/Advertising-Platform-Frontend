@@ -1,5 +1,5 @@
 :root {
-  --container-width: 1270px;
+  --container-width: 1280px;
   --container-padding-all: 15px;
   --container-padding-side: 50px;
   --container-padding-top: 80px;
@@ -98,87 +98,83 @@
   --header-height-xs: 56px;
 
   /* Extra Large (XL) */
-  --font-size-xl-title-main: 44px;
-  --font-size-xl-subtitle-main: 24px;
-  --row-gap-xl-title: 30px;
-  --row-gap-xl-content: 50px;
-  --font-size-xl-option-item: 16px;
-  --column-gap-xl-option-item: 20px;
+  --font-size-title-main-xl: 44px;
+  --font-size-subtitle-main-xl: 24px;
+  --row-gap-title-xl: 30px;
+  --row-gap-content-xl: 50px;
+  --font-size-option-item-xl: 16px;
+  --column-gap-option-item-xl: 20px;
+  --font-size-title-secondary-xl: 32px;
+  --font-size-subtitle-secondary-xl: 24px;
 
-  --font-size-xl-title-secondary: 28px;
-  --font-size-xl-subtitle-secondary: 20px;
   --font-size-xl-text-primary: 16px;
   --font-size-xl-text-secondary: 14px;
   --font-size-xl-text-accent: 18px;
   --font-size-xl-button-text: 14px;
-  --margin-section-xl-top: 50px;
-  --margin-section-xl-bottom: 50px;
+
+  --margin-section-xl: 100px;
 
   /* Large (LG) */
-  --font-size-lg-title-main: 40px;
-  --font-size-lg-subtitle-main: 22px;
-  --row-gap-lg-title: 25px;
-  --row-gap-lg-content: 45px;
-  --font-size-lg-option-item: 15px;
-  --column-gap-lg-option-item: 20px;
+  --font-size-title-main-lg: 40px;
+  --font-size-subtitle-main-lg: 22px;
+  --row-gap-title-lg: 25px;
+  --row-gap-content-lg: 45px;
+  --font-size-option-item-lg: 15px;
+  --column-gap-option-item-lg: 20px;
+  --font-size-title-secondary-lg: 30px;
+  --font-size-subtitle-secondary-lg: 24px;
 
-  --font-size-lg-title-secondary: 26px;
-  --font-size-lg-subtitle-secondary: 18px;
   --font-size-lg-text-primary: 15px;
   --font-size-lg-text-secondary: 13px;
   --font-size-lg-text-accent: 17px;
   --font-size-lg-button-text: 13px;
-  --margin-section-lg-top: 40px;
-  --margin-section-lg-bottom: 40px;
+  --margin-section-lg: 80px;
 
   /* Medium (MD) */
-  --font-size-md-title-main: 36px;
-  --font-size-md-subtitle-main: 20px;
-  --row-gap-md-title: 20px;
-  --row-gap-md-content: 35px;
-  --font-size-md-option-item: 14px;
-  --column-gap-md-option-item: 15px;
+  --font-size-title-main-md: 36px;
+  --font-size-subtitle-main-md: 20px;
+  --row-gap-title-md: 20px;
+  --row-gap-content-md: 35px;
+  --font-size-option-item-md: 14px;
+  --column-gap-option-item-md: 15px;
+  --font-size-title-secondary-md: 28px;
+  --font-size-subtitle-secondary-md: 24px;
 
-  --font-size-md-title-secondary: 24px;
-  --font-size-md-subtitle-secondary: 16px;
   --font-size-md-text-primary: 14px;
   --font-size-md-text-secondary: 12px;
   --font-size-md-text-accent: 16px;
   --font-size-md-button-text: 12px;
-  --margin-section-md-top: 30px;
-  --margin-section-md-bottom: 30px;
+  --margin-section-md: 60px;
 
   /* Small (SM) */
-  --font-size-sm-title-main: 30px;
-  --font-size-sm-subtitle-main: 18px;
-  --row-gap-sm-title: 15px;
-  --row-gap-sm-content: 30px;
-  --font-size-sm-option-item: 13px;
-  --column-gap-sm-option-item: 10px;
+  --font-size-title-main-sm: 30px;
+  --font-size-subtitle-main-sm: 18px;
+  --row-gap-title-sm: 15px;
+  --row-gap-content-sm: 30px;
+  --font-size-option-item-sm: 13px;
+  --column-gap-option-item-sm: 10px;
+  --font-size-title-secondary-sm: 24px;
+  --font-size-subtitle-secondary-sm: 20px;
 
-  --font-size-sm-title-secondary: 22px;
-  --font-size-sm-subtitle-secondary: 14px;
   --font-size-sm-text-primary: 13px;
   --font-size-sm-text-secondary: 11px;
   --font-size-sm-text-accent: 15px;
   --font-size-sm-button-text: 11px;
-  --margin-section-sm-top: 25px;
-  --margin-section-sm-bottom: 25px;
+  --margin-section-sm: 50px;
 
   /* Extra Small (XS) */
-  --font-size-xs-title-main: 24px;
-  --font-size-xs-subtitle-main: 16px;
-  --row-gap-xs-title: 15px;
-  --row-gap-xs-content: 25px;
-  --font-size-xs-option-item: 12px;
-  --column-gap-xs-option-item: 10px;
+  --font-size-title-main-xs: 24px;
+  --font-size-subtitle-main-xs: 16px;
+  --row-gap-title-xs: 15px;
+  --row-gap-content-xs: 25px;
+  --font-size-option-item-xs: 12px;
+  --column-gap-option-item-xs: 10px;
+  --font-size-title-secondary-xs: 20px;
+  --font-size-subtitle-secondary-xs: 16px;
 
-  --font-size-xs-title-secondary: 20px;
-  --font-size-xs-subtitle-secondary: 12px;
   --font-size-xs-text-primary: 12px;
   --font-size-xs-text-secondary: 10px;
   --font-size-xs-text-accent: 14px;
   --font-size-xs-button-text: 10px;
-  --margin-section-xs-top: 20px;
-  --margin-section-xs-bottom: 20px;
+  --margin-section-xs: 40px;
 }

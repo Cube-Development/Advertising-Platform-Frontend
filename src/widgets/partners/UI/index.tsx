@@ -14,13 +14,17 @@ export const Partners: FC<PartnersProps> = ({ page }) => {
     <section className={styles.partners}>
       <h1 className={styles.partners__title}>{t(`${page}.partners_title`)}</h1>
       <div className={styles.partners__block}>
-        <PartnerList
-          partners={t(`${page}.partners_list`, { returnObjects: true })}
-        />
-        <PartnerList
-          partners={t(`${page}.partners_list`, { returnObjects: true })}
-          isLeft={true}
-        />
+        <div>
+          <PartnerList
+            partners={t(`${page}.partners_list`, { returnObjects: true })}
+          />
+        </div>
+        <div className={styles.bottom}>
+          <PartnerList
+            partners={t(`${page}.partners_list`, { returnObjects: true })}
+            isLeft={true}
+          />
+        </div>
       </div>
     </section>
   );

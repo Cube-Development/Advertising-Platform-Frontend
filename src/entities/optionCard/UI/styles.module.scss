@@ -1,14 +1,14 @@
 .option {
   display: grid;
   grid-auto-flow: column;
-  column-gap: var(--column-gap-xl-option-item);
+  column-gap: var(--column-gap-option-item-xl);
   align-items: center;
   justify-content: start;
 
   font-style: normal;
   font-weight: 600;
   line-height: normal;
-  font-size: var(--font-size-xl-option-item);
+  font-size: var(--font-size-option-item-xl);
 
   img {
     width: 25px;
@@ -16,26 +16,26 @@
   }
 
   @media (max-width: 992px) {
-    font-size: var(--font-size-lg-option-item);
-    column-gap: var(--column-gap-lg-option-item);
+    font-size: var(--font-size-option-item-lg);
+    column-gap: var(--column-gap-option-item-lg);
   }
 
   @media (max-width: 768px) {
-    font-size: var(--font-size-md-option-item);
-    column-gap: var(--column-gap-md-option-item);
+    font-size: var(--font-size-option-item-md);
+    column-gap: var(--column-gap-option-item-md);
     img {
       width: 20px;
     }
   }
 
   @media (max-width: 576px) {
-    font-size: var(--font-size-sm-option-item);
-    column-gap: var(--column-gap-sm-option-item);
+    font-size: var(--font-size-option-item-sm);
+    column-gap: var(--column-gap-option-item-sm);
   }
 
   @media (max-width: 375px) {
-    font-size: var(--font-size-xs-option-item);
-    column-gap: var(--column-gap-xs-option-item);
+    font-size: var(--font-size-option-item-xs);
+    column-gap: var(--column-gap-option-item-xs);
     img {
       width: 18px;
     }
