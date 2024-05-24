@@ -1,12 +1,43 @@
 .option {
   display: grid;
   grid-auto-flow: column;
-  column-gap: 20px;
+  column-gap: var(--column-gap-xl-option-item);
   align-items: center;
   justify-content: start;
 
-  font-size: 16px;
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+  font-size: var(--font-size-xl-option-item);
+
+  img {
+    width: 25px;
+    height: auto;
+  }
+
+  @media (max-width: 992px) {
+    font-size: var(--font-size-lg-option-item);
+    column-gap: var(--column-gap-lg-option-item);
+  }
+
+  @media (max-width: 768px) {
+    font-size: var(--font-size-md-option-item);
+    column-gap: var(--column-gap-md-option-item);
+    img {
+      width: 20px;
+    }
+  }
+
+  @media (max-width: 576px) {
+    font-size: var(--font-size-sm-option-item);
+    column-gap: var(--column-gap-sm-option-item);
+  }
+
+  @media (max-width: 375px) {
+    font-size: var(--font-size-xs-option-item);
+    column-gap: var(--column-gap-xs-option-item);
+    img {
+      width: 18px;
+    }
+  }
 }

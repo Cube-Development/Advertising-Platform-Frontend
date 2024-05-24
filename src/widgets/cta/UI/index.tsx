@@ -44,7 +44,7 @@ export const Cta: FC<CtaProps> = ({ page }) => {
             )}
           </div>
         </div>
-        <div>
+        <div className={styles.wrapper__image}>
           <img src={`/images/assets/${t(`${page}.main_img`)}`} alt="" />
         </div>
       </div>

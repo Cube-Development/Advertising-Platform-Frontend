@@ -776,67 +776,60 @@ export const Chat: FC = () => {
           </div>
         </AlertDialogTrigger>
         <AlertDialogContent>
-          <div className={styles.modal}>
-            <div className={styles.content}>
-              <div className={styles.content__left}>
-                <big>{t("chat.my_messages")}</big>
-                <div className={styles.filter}>
-                  <BarProfileFilter
-                    page={pageFilter.chat}
-                    resetValues={handle}
+          <div className={styles.content}>
+            <div className={styles.content__left}>
+              <big>{t("chat.my_messages")}</big>
+              <div className={styles.filter}>
+                <BarProfileFilter page={pageFilter.chat} resetValues={handle} />
+              </div>
+              <div className={styles.all_chats}>
+                {allChats.map((card, index) => (
+                  <ChatCard
+                    key={index}
+                    card={card}
+                    isActive={currentChat?.order_id === card.order_id}
+                    onChange={handleChangeChat}
                   />
+                ))}
+              </div>
+              <div
+                className={styles.administration}
+                // onClick={() => handleChangeChat(AdministrationChat)}
+              >
+                <div>
+                  <img src={AdministrationChat.avatar} alt="" />
                 </div>
-                <div className={styles.all_chats}>
-                  {allChats.map((card, index) => (
-                    <ChatCard
-                      key={index}
-                      card={card}
-                      isActive={currentChat?.order_id === card.order_id}
-                      onChange={handleChangeChat}
-                    />
-                  ))}
-                </div>
-                <div
-                  className={styles.administration}
-                  // onClick={() => handleChangeChat(AdministrationChat)}
-                >
-                  <div>
-                    <img src={AdministrationChat.avatar} alt="" />
+                <p>{t("chat.types.administration")}</p>
+              </div>
+            </div>
+            <div className={styles.content__right}>
+              <div className={styles.top}>
+                {currentChat ? (
+                  <div className={styles.info}>
+                    <div className={styles.logo}>
+                      <div>
+                        <img src={currentChat.avatar} alt="" />
+                      </div>
+                    </div>
+                    <div className={styles.description}>
+                      <p>
+                        {currentChat.project_name
+                          ? `${t("chat.campaign")} ${currentChat.project_name} (${t("chat.channel")} ${currentChat.channel_name})`
+                          : t("chat.types.administration")}
+                      </p>
+                    </div>
                   </div>
-                  <p>{t("chat.types.administration")}</p>
-                </div>
-              </div>
-              <div className={styles.content__right}>
-                <div className={styles.top}>
-                  {currentChat ? (
-                    <div className={styles.info}>
-                      <div className={styles.logo}>
-                        <div>
-                          <img src={currentChat.avatar} alt="" />
-                        </div>
-                      </div>
-                      <div className={styles.description}>
-                        <p>
-                          {currentChat.project_name
-                            ? `${t("chat.campaign")} ${currentChat.project_name} (${t("chat.channel")} ${currentChat.channel_name})`
-                            : t("chat.types.administration")}
-                        </p>
-                      </div>
-                    </div>
-                  ) : (
-                    <div></div>
-                  )}
-                  <AlertDialogCancel>
-                    <div className={styles.close} onClick={handleCloseChat}>
-                      <CancelIcon2 />
-                    </div>
-                  </AlertDialogCancel>
-                </div>
-
-                {currentChat && (
-                  <ChatMessages order_id={currentChat.order_id} />
+                ) : (
+                  <div></div>
                 )}
+                <AlertDialogCancel>
+                  <div className={styles.close} onClick={handleCloseChat}>
+                    <CancelIcon2 />
+                  </div>
+                </AlertDialogCancel>
               </div>
+
+              {currentChat && <ChatMessages order_id={currentChat.order_id} />}
             </div>
           </div>
         </AlertDialogContent>

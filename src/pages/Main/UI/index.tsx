@@ -13,12 +13,12 @@ export const MainPage: FC = () => {
   return (
     <>
       <Cta page={page} />
-      <Services page={page} />
+      {/* <Services page={page} />
       <Partners page={page} />
       <HowItWorks page={page} />
       <WhyChooseUs page={page} />
       <Turnkey page={page} />
-      <Customers page={page} />
+      <Customers page={page} /> */}
     </>
   );
 };

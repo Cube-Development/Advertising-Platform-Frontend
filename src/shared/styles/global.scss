@@ -121,8 +121,26 @@ body {
 
 .container {
   max-width: var(--container-width);
-  padding: 0 var(--container-padding-side);
+  // padding: 0 var(--container-padding-side);
+
+  padding: 0 var(--container-padding-xl-side);
   margin: 0 auto;
+
+  @media (max-width: 992px) {
+    padding: 0 var(--container-padding-lg-side);
+  }
+
+  @media (max-width: 768px) {
+    padding: 0 var(--container-padding-md-side);
+  }
+
+  @media (max-width: 576px) {
+    padding: 0 var(--container-padding-sm-side);
+  }
+
+  @media (max-width: 375px) {
+    padding: 0 var(--container-padding-xs-side);
+  }
 }
 
 .layout {
@@ -294,7 +312,6 @@ body {
 .border__gradient {
   background: none;
   position: relative;
-  box-sizing: content-box;
 
   &:before {
     content: "";
@@ -319,9 +336,7 @@ body {
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: var(
-      --zIndexBottom
-    ); /* Псевдо-элемент будет под градиентным фоном */
+    z-index: var(--zIndexBottom);
     // z-index: -2;
     border-radius: var(--borderRadius); /* !importanté */
     // background: var(--Gradients-Gradient-1);
