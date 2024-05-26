@@ -18,7 +18,6 @@ export const WorkWithUs: FC<WorkWithUsProps> = ({ page }) => {
   const channels: { img: string }[] = t(`${page}.work_list`, {
     returnObjects: true,
   });
-  console.log(channels);
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.title}>{t(`${page}.work_title`)}</h1>

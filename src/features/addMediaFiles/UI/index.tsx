@@ -34,19 +34,11 @@ export const AddMediaFiles: FC<FileProps> = ({ onChange, currentFiles }) => {
           action: <ToastAction altText="OK">OK</ToastAction>,
         });
       }
-
-      // Запрос в бек на загрузку файла или файлов
-      // может быть mapping на загрузку в бек
-      // в uploadFiles записываются стринги пути к файлу на сервере, чтобы при удалении этого файла с Фронта в useForm найти этот обьект в files: [] с content: string = file_server_path и удалить
-      // const newFiles: IFile[] = [... e.target.files]
-      // const paths = newFiles.map((file) => file.name + new Date().toISOString())  // new Date().toISOString(); -> дает моковую уникальность при загрузке одного и того же файла
-      // setUploadFiles([...paths])
     }
   };
 
   const handleReset = () => {
     setFiles([]);
-    // setUploadFiles([])
   };
 
   const handleDrag = function (e: React.DragEvent<HTMLDivElement>) {
@@ -74,13 +66,6 @@ export const AddMediaFiles: FC<FileProps> = ({ onChange, currentFiles }) => {
           action: <ToastAction altText="OK">OK</ToastAction>,
         });
       }
-      // Запрос в бек на загрузку файла или файлов
-      // может быть mapping на загрузку в бек
-      // в uploadFiles записываются стринги пути к файлу на сервере, чтобы при удалении этого файла с Фронта в useForm найти этот обьект в files: [] с content: string = file_server_path и удалить
-
-      // const newFiles: IFile[] = [... e.dataTransfer.files]
-      // const paths = newFiles.map((file) => file.name + new Date().toISOString())
-      // setUploadFiles([...uploadFiles, ...paths])
     }
   };
 

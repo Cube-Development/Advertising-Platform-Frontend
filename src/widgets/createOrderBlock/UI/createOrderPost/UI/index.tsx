@@ -22,8 +22,7 @@ import { ContinueOrder } from "@features/continueOrder";
 import { filterSlice } from "@shared/store/reducers";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { Editor } from "@features/postEditor";
-import { PostDispayTelegram } from "@features/postDispayTelegram";
-import { PostDispayInstagram } from "@features/postDispayInstagram";
+import { PostDispayInstagram, PostDispayTelegram } from "@entities/postDisplay";
 
 interface CreateOrderPostProps {
   cards: IPostChannel[];

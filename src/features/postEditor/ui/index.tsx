@@ -30,7 +30,8 @@ export const Editor: FC<EditorProps> = ({
     project_id: form.project_id,
     platform: platformId,
   };
-  const startContent = currentPost.text || "";
+  const startContent =
+    (currentPost?.text && currentPost?.text[0]?.content) || "";
   const [content, setContent] = useState(startContent);
 
   const limit = 1000;

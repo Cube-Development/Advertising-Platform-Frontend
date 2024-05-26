@@ -34,7 +34,6 @@ const authBaseQuery: BaseQueryFn<
   if (result.error && result.error.status === 401) {
     if (!mutex.isLocked()) {
       const release = await mutex.acquire();
-      console.log("accessError");
       try {
         const refreshToken = Cookies.get("refreshToken");
         const refreshResult = (await baseQuery(
@@ -61,7 +60,6 @@ const authBaseQuery: BaseQueryFn<
           });
           result = await newBaseQuery(args, api, extraOptions);
         } else {
-          console.log("refreshError");
           api.dispatch(userSlice.actions.logout());
         }
       } finally {

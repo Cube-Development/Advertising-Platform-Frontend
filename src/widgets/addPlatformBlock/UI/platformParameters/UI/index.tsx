@@ -115,7 +115,6 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
         editChannel({ ...editData, channel_id: channel.id })
           .unwrap()
           .then((data) => {
-            // console.log(data);
             setIsModalOpen(true);
             onChangeBlur({ link: true, parameters: true });
             toast({

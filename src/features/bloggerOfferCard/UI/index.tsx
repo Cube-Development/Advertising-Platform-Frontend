@@ -12,6 +12,17 @@ import { useAppSelector } from "@shared/store";
 import { IOrderFeature } from "@shared/types/order";
 import { CheckDate } from "@shared/functions/checkDate";
 import { CountdownTimer } from "@features/countdownTimer";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogTrigger,
+} from "@shared/ui/shadcn-ui/ui/alert-dialog";
+import { PostDispayInstagram, PostDispayTelegram } from "@entities/postDisplay";
+import { X } from "lucide-react";
+import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
+import { useGetPostQuery } from "@shared/store/services/getPostService";
+import { platformTypesNum } from "@shared/config/platformTypes";
 
 interface BloggerOfferCardProps {
   card: IBloggerOfferCard;
@@ -31,7 +42,18 @@ export const BloggerOfferCard: FC<BloggerOfferCardProps> = ({
   SeeReasonBtn,
 }) => {
   const { t } = useTranslation();
+  const { toast } = useToast();
+
   const { statusFilter } = useAppSelector((state) => state.filter);
+  const { data: post, error } = useGetPostQuery({ order_id: card?.id });
+
+  if (error) {
+    toast({
+      variant: "error",
+      title: t("toasts.orders_advertiser.reject_post.error"),
+    });
+    console.error("error: ", error);
+  }
   return (
     <div
       className={`${styles.card} ${offerStatusChat.includes(statusFilter as offerStatusFilter) ? styles.chat : styles.no__chat} border__gradient`}
@@ -126,7 +148,35 @@ export const BloggerOfferCard: FC<BloggerOfferCardProps> = ({
               </span>
             </div>
             <div className={styles.card__active__buttons}>
-              <SeeLinkBtn />
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <div>
+                    <SeeLinkBtn />
+                  </div>
+                </AlertDialogTrigger>
+                <AlertDialogContent className="gap-0 w-[30vw] h-[40vw] bg-transparent grid items-center justify-center">
+                  <div className="w-[18vw] h-full relative">
+                    <AlertDialogAction>
+                      <X className="absolute -right-16 -top-10 w-[50px] rounded-full p-2 bg-white cursor-pointer" />
+                    </AlertDialogAction>
+                    {post?.platform === platformTypesNum.telegram && (
+                      <PostDispayTelegram
+                        post={post}
+                        platformId={platformTypesNum.telegram}
+                      />
+                    )}
+                    {post?.platform === platformTypesNum.instagram && (
+                      <PostDispayInstagram
+                        post={post}
+                        platformId={platformTypesNum.telegram}
+                      />
+                    )}
+                    {post?.platform === platformTypesNum.youtube && (
+                      <p>YOUTUBE</p>
+                    )}
+                  </div>
+                </AlertDialogContent>
+              </AlertDialog>
               <div
                 className={`${CheckDate(typeof card?.publish_date === "object" ? card?.publish_date.date_to : card?.publish_date) ? "" : "deactive"}`}
               >
@@ -156,7 +206,35 @@ export const BloggerOfferCard: FC<BloggerOfferCardProps> = ({
                 <RejectOfferBtn order_id={card?.id} />
                 <AcceptOfferBtn order_id={card?.id} />
               </div>
-              <SeeLinkBtn />
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <div>
+                    <SeeLinkBtn />
+                  </div>
+                </AlertDialogTrigger>
+                <AlertDialogContent className="gap-0 w-[30vw] h-[40vw] bg-transparent grid items-center justify-center">
+                  <div className="w-[18vw] h-full relative">
+                    <AlertDialogAction>
+                      <X className="absolute -right-16 -top-10 w-[50px] rounded-full p-2 bg-white cursor-pointer" />
+                    </AlertDialogAction>
+                    {post?.platform === platformTypesNum.telegram && (
+                      <PostDispayTelegram
+                        post={post}
+                        platformId={platformTypesNum.telegram}
+                      />
+                    )}
+                    {post?.platform === platformTypesNum.instagram && (
+                      <PostDispayInstagram
+                        post={post}
+                        platformId={platformTypesNum.telegram}
+                      />
+                    )}
+                    {post?.platform === platformTypesNum.youtube && (
+                      <p>YOUTUBE</p>
+                    )}
+                  </div>
+                </AlertDialogContent>
+              </AlertDialog>
             </div>
           </div>
         ) : statusFilter === offerStatusFilter.completed ? (

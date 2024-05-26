@@ -29,7 +29,6 @@ export const PriceList: FC<PriceListProps> = ({ tarifs, buyBtn }) => {
   const [screen, setScreen] = useState<number>(window.innerWidth);
 
   const handleChangeTarif = (tarifType: number) => {
-    console.log(tarifType);
     setTarif(tarifType);
   };
   const duplicateTarifs = tarifs.concat(tarifs);

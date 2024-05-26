@@ -93,8 +93,6 @@ export const PostFiles: FC<PostFilesProps> = ({
   const currentMedia: File[] = currentPost.media || [];
   const currentFile: File[] = currentPost.files || [];
 
-  console.log(form);
-
   return (
     <>
       <AlertDialog>

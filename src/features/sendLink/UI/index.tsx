@@ -20,7 +20,6 @@ export const SendLink: FC<IOrderFeature> = ({ url, order_id }) => {
           variant: "success",
           title: t("toasts.offers_blogger.send_link.success"),
         });
-        console.log("success");
       })
       .catch((error) => {
         toast({

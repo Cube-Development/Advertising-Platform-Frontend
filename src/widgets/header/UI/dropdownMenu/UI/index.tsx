@@ -28,7 +28,6 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
   const menuRef = useRef<HTMLDivElement>(null);
   const toggleMenu = () => {
     const newMenu = { isOpen: !dropdownMenu.isOpen, title: "" };
-    console.log(newMenu);
     dispatch(filterSlice.actions.setDropDownMenu(newMenu));
   };
 

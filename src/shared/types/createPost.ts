@@ -1,3 +1,5 @@
+import { ContentType } from "@shared/config/createPostData";
+
 export interface IPostChannel {
   id: string;
   avatar: string;
@@ -24,21 +26,22 @@ export interface ICreatePost extends IProjectId {
   files?: File[];
   buttons?: ITgButton[];
   text?: IPostText[];
+  content?: IFile[];
 }
 
-// export interface IFile {
-//   content_type: number;
-//   content: string;
-//   url?: string;
-// }
+export interface IFile {
+  content_type: ContentType;
+  content: string;
+  url?: string;
+}
 
 export interface IPostText {
-  content_type: number;
+  content_type: ContentType;
   content: string;
 }
 
 export interface ITgButton {
-  content_type: number;
+  content_type: ContentType;
   content: string;
   url: string;
 }

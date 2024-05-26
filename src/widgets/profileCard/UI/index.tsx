@@ -55,12 +55,11 @@ export const ProfileCard: FC = () => {
     };
     createLegal(dataWithLegalType)
       .unwrap()
-      .then((data) => {
+      .then(() => {
         toast({
           variant: "success",
           title: t("toasts.add_profile.create.success"),
         });
-        console.log(data);
       })
       .catch((error) => {
         toast({

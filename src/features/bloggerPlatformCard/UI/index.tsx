@@ -91,7 +91,6 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
           variant: "success",
           title: t("toasts.offers_blogger.channel.activate.success"),
         });
-        console.log("Успешная активация");
       })
       .catch((error) => {
         toast({
