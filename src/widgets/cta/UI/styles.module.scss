@@ -30,6 +30,8 @@
   }
 
   &__image {
+    display: grid;
+    justify-content: end;
     @media (max-width: 768px) {
       display: none;
     }

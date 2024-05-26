@@ -1,7 +1,7 @@
+import { ProtectIcon, QualityIcon } from "@shared/assets";
+import { IAccomm } from "@shared/types/translate";
 import { FC, ReactElement } from "react";
 import styles from "./styles.module.scss";
-import { IAccomm } from "@shared/types/translate";
-import { QualityIcon, ProtectIcon } from "@shared/assets";
 
 interface AccommCardProps {
   accomm: IAccomm;
@@ -15,7 +15,7 @@ export const AccommCard: FC<AccommCardProps> = ({ accomm, toDoBtn }) => {
     <div className={`${styles.accomms} ${subclass}`}>
       <div className={styles.accomms__row}>
         {accomm.type === "vencom" && <QualityIcon />}
-        <h1 className={styles.title}>{accomm.title}</h1>
+        <p className={styles.title}>{accomm.title}</p>
       </div>
 
       <ul>

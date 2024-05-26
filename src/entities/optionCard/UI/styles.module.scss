@@ -1,7 +1,6 @@
 .option {
   display: grid;
   grid-auto-flow: column;
-  column-gap: var(--column-gap-option-item-xl);
   align-items: center;
   justify-content: start;
 
@@ -9,6 +8,7 @@
   font-weight: 600;
   line-height: normal;
   font-size: var(--font-size-option-item-xl);
+  column-gap: var(--column-gap-option-item-xl);
 
   img {
     width: 25px;

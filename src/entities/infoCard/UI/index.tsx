@@ -11,9 +11,9 @@ export const InfoCard: FC<InfoCardProps> = ({ info }) => {
   return (
     <div className={styles.info}>
       <img src={`/images/basicInfo/${info.img}`} alt="" />
-      <p className={styles.count}>
+      <div className={styles.count}>
         <Counter val={info.count} time={2} />
-      </p>
+      </div>
       <span className={styles.text}>{info.info}</span>
     </div>
   );
