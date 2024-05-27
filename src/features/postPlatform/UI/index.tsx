@@ -7,33 +7,18 @@ import {
   IPostChannel,
   TimeListProps,
 } from "@shared/types/createPost";
-import {
-  InstagramIcon,
-  PostIcon,
-  TelegramIcon,
-  YouTubeIcon,
-} from "@shared/assets";
+import { PostIcon } from "@shared/assets";
 import { CreatePostFormData } from "@shared/config/createPostData";
 import { platformToIcon } from "@shared/config/platformData";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import {
   AlertDialog,
   AlertDialogContent,
-  AlertDialogHeader,
   AlertDialogTrigger,
 } from "@shared/ui/shadcn-ui/ui/alert-dialog";
 import { AlertDialogAction } from "@radix-ui/react-alert-dialog";
 import { X } from "lucide-react";
-import {
-  Tabs,
-  TabsContent,
-  TabsList,
-  TabsTrigger,
-} from "@shared/ui/shadcn-ui/ui/tabs";
-import {
-  platformTypesNum,
-  platformTypesStr,
-} from "@shared/config/platformTypes";
+import { platformTypesNum } from "@shared/config/platformTypes";
 import { EmptyPost } from "@entities/postDisplay/postDispayTelegram/UI/emptyPost";
 import { PostDispayInstagram, PostDispayTelegram } from "@entities/postDisplay";
 
@@ -98,16 +83,6 @@ export const PostPlatform: FC<PostPlatformProps> = ({
     setValue(CreatePostFormData.datetime, datetime);
   };
 
-  // const telegramPost = formState?.posts.find(
-  //   (post) => post.platform === platformTypesNum.telegram
-  // );
-  // const instagramPost = formState?.posts.find(
-  //   (post) => post.platform === platformTypesNum.instagram
-  // );
-  // const youtubePost = formState?.posts.find(
-  //   (post) => post.platform === platformTypesNum.youtube
-  // );
-
   return (
     <div className={styles.wrapper}>
       <div className={styles.info}>
@@ -136,82 +111,26 @@ export const PostPlatform: FC<PostPlatformProps> = ({
             <PostIcon />
           </div>
         </AlertDialogTrigger>
-        <AlertDialogContent className="gap-0">
-          <AlertDialogHeader className="flex items-end justify-end">
-            <AlertDialogAction>
-              <X className="m-4" />
-            </AlertDialogAction>
-          </AlertDialogHeader>
-          {formState?.posts.length ? (
-            <Tabs
-              defaultValue={
-                formState?.posts[0]?.platform === platformTypesNum.telegram
-                  ? platformTypesStr.telegram
-                  : formState?.posts[0].platform === platformTypesNum.instagram
-                    ? platformTypesStr.instagram
-                    : platformTypesStr.youtube
-              }
-              className="w-[30vw] px-6 h-[40vw]"
-            >
-              <TabsList className="grid w-full grid-cols-2">
-                {formState?.posts?.map((post) =>
-                  post.platform === platformTypesNum.telegram ? (
-                    <TabsTrigger
-                      key={post?.platform}
-                      value={platformTypesStr.telegram}
-                    >
-                      <TelegramIcon />
-                    </TabsTrigger>
-                  ) : post.platform === platformTypesNum.instagram ? (
-                    <TabsTrigger
-                      key={post?.platform}
-                      value={platformTypesStr.instagram}
-                    >
-                      <InstagramIcon />
-                    </TabsTrigger>
-                  ) : (
-                    <TabsTrigger
-                      key={post?.platform}
-                      value={platformTypesStr.youtube}
-                    >
-                      <YouTubeIcon />
-                    </TabsTrigger>
-                  ),
-                )}
-              </TabsList>
-              {formState?.posts?.map((post) =>
-                post.platform === platformTypesNum.telegram ? (
-                  <TabsContent
-                    key={post?.platform}
-                    value={platformTypesStr.telegram}
-                    className="w-[15vw] mx-auto mt-[30px]"
-                  >
-                    <PostDispayTelegram
-                      formState={formState}
-                      platformId={platformTypesNum.telegram}
-                    />
-                  </TabsContent>
-                ) : post.platform === platformTypesNum.instagram ? (
-                  <TabsContent
-                    key={post?.platform}
-                    value={platformTypesStr.instagram}
-                    className="w-[15vw] mx-auto mt-[30px]"
-                  >
-                    <PostDispayInstagram
-                      formState={formState}
-                      platformId={platformTypesNum.instagram}
-                    />
-                  </TabsContent>
-                ) : (
-                  <TabsContent
-                    key={post?.platform}
-                    value={platformTypesStr.youtube}
-                  >
-                    youtube
-                  </TabsContent>
-                ),
+        <AlertDialogContent className="gap-0 w-[30vw] h-[40vw] bg-transparent grid items-center justify-center">
+          {formState?.posts?.length ? (
+            <div className="w-[18vw] h-full relative">
+              <AlertDialogAction>
+                <X className="absolute -right-16 -top-10 w-[50px] rounded-full p-2 bg-white cursor-pointer" />
+              </AlertDialogAction>
+              {card?.platform === platformTypesNum.telegram && (
+                <PostDispayTelegram
+                  formState={formState}
+                  platformId={platformTypesNum.telegram}
+                />
               )}
-            </Tabs>
+              {card?.platform === platformTypesNum.instagram && (
+                <PostDispayInstagram
+                  formState={formState}
+                  platformId={platformTypesNum.telegram}
+                />
+              )}
+              {card?.platform === platformTypesNum.youtube && <p>YOUTUBE</p>}
+            </div>
           ) : (
             <EmptyPost />
           )}

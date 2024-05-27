@@ -29,7 +29,7 @@ export const TelegramMedia: FC<TelegramMediaProps> = ({
                 alt={`Photo ${index + 1}`}
               />
             ) : (
-              <video controls>
+              <video controls autoPlay muted>
                 <source src={URL.createObjectURL(media)} type="video/mp4" />
                 <source src={URL.createObjectURL(media)} type="video/ogg" />
                 Your browser does not support the video tag.
@@ -52,7 +52,7 @@ export const TelegramMedia: FC<TelegramMediaProps> = ({
             {media.content_type === ContentType.photo ? (
               <img src={media.content} alt={`Photo ${index + 1}`} />
             ) : (
-              <video controls>
+              <video controls autoPlay muted>
                 <source src={media.content} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
