@@ -39,8 +39,11 @@ export const CustomerList: FC<CustomerListProps> = ({ customers }) => {
         loop={true}
         modules={[Navigation, EffectCoverflow]}
         spaceBetween={25}
-        slidesPerView={2.5} // Задаем количество видимых слайдов и их частичное отображение
+        slidesPerView={1.3} // Задаем количество видимых слайдов и их частичное отображение
         breakpoints={{
+          1366: {
+            slidesPerView: 2.5,
+          },
           992: {
             slidesPerView: 2.4,
           },

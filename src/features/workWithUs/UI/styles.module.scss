@@ -1,5 +1,8 @@
 .wrapper {
   text-align: center;
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 30px;
 
   .title {
     color: var(--Personal-colors-black);
@@ -7,7 +10,6 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    margin-bottom: 40px;
   }
 
   .channel {

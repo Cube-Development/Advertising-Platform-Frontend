@@ -1,95 +1,251 @@
 .calculate__wrapper {
+  display: grid;
+  grid-auto-flow: row;
   background-image: url("/images/assets/background2.png");
   background-size: cover;
   background-position: center;
   border-radius: 50px 50px 0 0;
-  padding: 40px 0;
-  max-width: var(--container-width);
-  margin: 0 auto 150px auto;
+  padding: calc(var(--margin-section-xl) / 2);
 
-  svg {
-    width: 40px;
-    height: 40px;
+  max-width: var(--container-width);
+  margin: var(--margin-section-xl) auto;
+  row-gap: var(--row-gap-content-xl);
+
+  @media (max-width: 992px) {
+    row-gap: var(--row-gap-content-lg);
+    margin: var(--margin-section-lg) auto;
+    padding: calc(var(--margin-section-lg) / 2);
+  }
+
+  @media (max-width: 768px) {
+    border-radius: 0;
+    row-gap: var(--row-gap-content-md);
+    margin: var(--margin-section-md) auto;
+    padding: calc(var(--margin-section-md) / 2);
+  }
+
+  @media (max-width: 576px) {
+    row-gap: var(--row-gap-content-sm);
+    margin: var(--margin-section-sm) auto;
+    padding: calc(var(--margin-section-sm) / 2);
+  }
+
+  @media (max-width: 375px) {
+    row-gap: var(--row-gap-content-xs);
+    margin: var(--margin-section-xs) auto;
+    padding: calc(var(--margin-section-xs) / 2);
+  }
+
+  .top {
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 30px;
+
+    .title {
+      display: grid;
+      grid-auto-flow: column;
+      column-gap: 20px;
+      align-items: center;
+      margin-bottom: 20px;
+      justify-content: start;
+
+      color: var(--Personal-colors-black);
+      font-style: normal;
+      font-weight: 700;
+      line-height: normal;
+      font-size: var(--font-size-title-main-xl);
+
+      svg {
+        width: 40px;
+        height: 40px;
+      }
+
+      @media (max-width: 992px) {
+        font-size: var(--font-size-title-main-lg);
+      }
+
+      @media (max-width: 768px) {
+        text-align: center;
+        font-size: var(--font-size-title-main-md);
+
+        div {
+          display: none;
+        }
+      }
+
+      @media (max-width: 576px) {
+        font-size: var(--font-size-title-main-sm);
+      }
+
+      @media (max-width: 375px) {
+        font-size: var(--font-size-title-main-xs);
+      }
+    }
+
+    .subtitle {
+      display: grid;
+      justify-content: start;
+      margin-bottom: 20px;
+
+      p {
+        border-radius: 12px;
+        background: var(--Gradients-Gradient-1);
+        padding: 12px 20px 15px 20px;
+        color: var(--Personal-colors-White);
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+
+        font-size: var(--font-size-subtitle-secondary-xl);
+
+        @media (max-width: 992px) {
+          font-size: var(--font-size-subtitle-secondary-lg);
+        }
+
+        @media (max-width: 768px) {
+          padding: 10px;
+          font-size: var(--font-size-subtitle-secondary-md);
+        }
+
+        @media (max-width: 576px) {
+          padding: 0;
+          background: none;
+          text-align: center;
+          color: var(--Personal-colors-main);
+          font-size: var(--font-size-subtitle-secondary-sm);
+        }
+
+        @media (max-width: 375px) {
+          font-size: var(--font-size-subtitle-secondary-xs);
+        }
+      }
+    }
+  }
+  .card__wrapper {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+
+    .card {
+      display: grid;
+      grid-auto-flow: row;
+      row-gap: 30px;
+      flex-shrink: 0;
+      padding: calc(var(--margin-section-xl) / 2);
+      border-radius: 50px 50px 0px 50px;
+      background: #fff;
+      box-shadow: 0px 4px 18px 0px rgba(0, 0, 0, 0.25);
+
+      @media (max-width: 992px) {
+        padding: calc(var(--margin-section-lg) / 2);
+      }
+
+      @media (max-width: 768px) {
+        padding: calc(var(--margin-section-md) / 2);
+      }
+
+      @media (max-width: 576px) {
+        border-radius: 35px 35px 0px 35px;
+        padding: calc(var(--margin-section-sm) / 2);
+      }
+
+      @media (max-width: 375px) {
+        padding: calc(var(--margin-section-xs) / 2);
+      }
+
+      &__top {
+        display: grid;
+        grid-auto-flow: row;
+        row-gap: 12px;
+        text-align: center;
+
+        .card__title {
+          text-align: center;
+          // font-size: 36px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+          color: var(--Orange);
+          font-size: var(--font-size-subtitle-secondary-xl);
+
+          @media (max-width: 992px) {
+            font-size: var(--font-size-subtitle-secondary-lg);
+          }
+
+          @media (max-width: 768px) {
+            font-size: var(--font-size-subtitle-secondary-md);
+          }
+
+          @media (max-width: 576px) {
+            font-size: var(--font-size-subtitle-secondary-sm);
+          }
+
+          @media (max-width: 375px) {
+            font-size: var(--font-size-subtitle-secondary-xs);
+          }
+        }
+
+        .card__subtitle {
+          color: var(--black-65, #595959);
+          // font-size: 16px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+          font-size: var(--font-size-text-secondary-xl);
+
+          @media (max-width: 992px) {
+            font-size: var(--font-size-text-secondary-lg);
+          }
+
+          @media (max-width: 768px) {
+            font-size: var(--font-size-text-secondary-md);
+          }
+
+          @media (max-width: 576px) {
+            font-size: var(--font-size-text-secondary-sm);
+          }
+
+          @media (max-width: 375px) {
+            font-size: var(--font-size-text-secondary-xs);
+          }
+        }
+      }
+
+      &__content {
+        display: grid;
+        border-radius: 50px;
+        border: 1px solid var(--Orange);
+        background: #fff;
+        box-shadow: 0px 4px 18px 0px rgba(250, 82, 112, 0.24);
+        padding: 30px 40px;
+        grid-template-areas:
+          "item1 item2"
+          "item3 item4";
+        // grid-template: 2fr 1fr /1fr 1fr;
+        column-gap: 50px;
+        row-gap: 40px;
+
+        @media (max-width: 992px) {
+          font-size: var(--font-size-title-main-lg);
+          // grid-template: 2fr 1fr 1fr 1fr /1fr;
+          grid-template-areas:
+            "item1"
+            "item3"
+            "item2"
+            "item4";
+          row-gap: 40px;
+        }
+
+        @media (max-width: 576px) {
+          border-radius: 35px;
+        }
+      }
+    }
   }
 }
 
-.calculate__row {
-  max-width: 870px;
-  display: grid;
-  grid-auto-flow: column;
-  justify-content: start;
-  column-gap: 20px;
-  align-items: center;
-  margin-bottom: 20px;
-}
-
-.calculate__title {
-  color: var(--Personal-colors-black);
-  font-size: 44px;
-  font-style: normal;
-  font-weight: 700;
-  line-height: normal;
-}
-
-.calculate__subtitle {
-  max-width: 1000px;
-  color: var(--Personal-colors-White);
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  padding: 12px 20px 15px 20px;
-  border-radius: 12px;
-  background: var(--Gradients-Gradient-1);
-  margin-bottom: 20px;
-}
-
-.calculate__text {
-  color: #303030;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  margin-bottom: 50px;
-  max-width: 812px;
-}
-
-.card__wrapper {
-  display: grid;
-  justify-content: center;
-  align-items: center;
-  margin-bottom: 50px;
-}
-
-.card {
-  max-width: 800px;
-  white-space: nowrap;
-  flex-shrink: 0;
-  border-radius: 40px 40px 0px 40px;
-  border: 2px solid var(--Gradients-Gradient-1);
-  background: rgba(255, 255, 255, 0.85);
-  padding: 50px;
-}
-
-.card__content {
-  display: grid;
-  grid-template-rows: auto auto; /* Две строки */
-  grid-template-columns: auto auto;
-  column-gap: 50px;
-  row-gap: 40px;
-}
-
-.card__title {
-  text-align: center;
-  margin-bottom: 65px;
-  font-size: 36px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  color: var(--Gradients-Gradient-1);
-}
-
 .button {
+  grid-area: item4;
   background: radial-gradient(
       419.34% 136.52% at 0% 100%,
       rgba(255, 255, 255, 0.2) 0%,

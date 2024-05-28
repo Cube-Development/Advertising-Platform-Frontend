@@ -15,10 +15,10 @@ export const IncomeCalculator: FC<IncomeCalculatorProps> = ({
 
   return (
     <div className={styles.income__wrapper}>
-      <h2 className={styles.income__title}>{t(`${page}.card.income`)}</h2>
-      <h2 className={styles.income__cash}>
+      <p className={styles.income__title}>{t(`${page}.card.income`)}</p>
+      <p className={styles.income__cash}>
         {calculatedIncome.toLocaleString()} {t(`symbol`)}
-      </h2>
+      </p>
     </div>
   );
 };

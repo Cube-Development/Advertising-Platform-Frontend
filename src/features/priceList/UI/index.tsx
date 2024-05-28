@@ -55,7 +55,28 @@ export const PriceList: FC<PriceListProps> = ({ tarifs, buyBtn }) => {
           grabCursor={true}
           centeredSlides={true}
           loop={true}
-          slidesPerView={2}
+          slidesPerView={1}
+          breakpoints={{
+            1366: {
+              slidesPerView: 2,
+            },
+            992: {
+              slidesPerView: 2,
+              spaceBetween: 50,
+            },
+            768: {
+              slidesPerView: 2,
+              spaceBetween: -100,
+            },
+            576: {
+              slidesPerView: 2,
+              spaceBetween: -150,
+            },
+            375: {
+              slidesPerView: 1,
+              spaceBetween: -200,
+            },
+          }}
           coverflowEffect={{
             rotate: 0, // Угол поворота слайдов
             stretch: 0, // Растяжение между слайдами

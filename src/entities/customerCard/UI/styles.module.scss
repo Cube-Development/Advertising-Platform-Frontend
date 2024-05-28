@@ -67,7 +67,15 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    height: 150px;
+    height: 200px;
+
+    @media (max-width: 992) {
+      height: 270px;
+    }
+
+    @media (max-width: 772) {
+      height: 415px;
+    }
     // overflow: auto;
   }
 }

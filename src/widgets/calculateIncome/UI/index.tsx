@@ -40,37 +40,37 @@ export const CalculateIncome: FC<CalculateIncomeProps> = ({ page }) => {
       ref={calculateIncomeRef}
       className={styles.calculate__wrapper}
     >
-      <div className="container">
-        <div className={styles.calculate__row}>
-          <CalculatorIcon />
-          <h1 className={styles.calculate__title}>
-            {t(`${page}.calculate_title`)}
-          </h1>
+      <div className={styles.top}>
+        <div className={styles.title}>
+          <div>
+            <CalculatorIcon />
+          </div>
+          <p>{t(`${page}.calculate.title`)}</p>
         </div>
-
-        <h2 className={styles.calculate__subtitle}>
-          {t(`${page}.calculate_subtitle`)}
-        </h2>
-        <p className={styles.calculate__text}>{t(`${page}.calculate_text`)}</p>
-        <div className={styles.card__wrapper}>
-          <div className={styles.card}>
-            <h1 className={styles.card__title}>{t(`${page}.card.title`)}</h1>
-            <div className={styles.card__content}>
-              <ThemeChanger page={page} onThemeChange={handleThemeChange} />
-              <IncomeCalculator
-                page={page}
-                calculatedIncome={calculatedIncome}
-              />
-              <SliderSubs onUserCountChange={setUserCount} />
-              <AddPlatform
-                path={`${paths.addPlatform}?add_channel=${addChannelQueries.main}`}
-                props={{ className: styles.button }}
-              />
-            </div>
+        <div className={styles.subtitle}>
+          <p>{t(`${page}.calculate.subtitle`)}</p>
+        </div>
+      </div>
+      <div className={styles.card__wrapper}>
+        <div className={styles.card}>
+          <div className={styles.card__top}>
+            <p className={styles.card__title}>{t(`${page}.card.title`)}</p>
+            <p className={styles.card__subtitle}>
+              {t(`${page}.calculate.text`)}
+            </p>
+          </div>
+          <div className={styles.card__content}>
+            <ThemeChanger page={page} onThemeChange={handleThemeChange} />
+            <IncomeCalculator page={page} calculatedIncome={calculatedIncome} />
+            <SliderSubs onUserCountChange={setUserCount} />
+            <AddPlatform
+              path={`${paths.addPlatform}?add_channel=${addChannelQueries.main}`}
+              props={{ className: styles.button }}
+            />
           </div>
         </div>
-        <WorkWithUs page={page} />
       </div>
+      <WorkWithUs page={page} />
     </section>
   );
 };
