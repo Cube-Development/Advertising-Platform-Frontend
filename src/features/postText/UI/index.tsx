@@ -1,7 +1,7 @@
 import { FC, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
-import { ICreatePost, ICreatePostForm, IFile } from "@shared/types/createPost";
+import { ICreatePost, ICreatePostForm } from "@shared/types/createPost";
 import { CreatePostFormData } from "@shared/config/createPostData";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 
@@ -12,7 +12,6 @@ interface PostTextProps {
   type: CreatePostFormData;
   setValue: UseFormSetValue<ICreatePostForm>;
   getValues: UseFormGetValues<ICreatePostForm>;
-  contentId?: number;
   platformId: number;
 }
 
@@ -23,7 +22,6 @@ export const PostText: FC<PostTextProps> = ({
   setValue,
   type,
   getValues,
-  contentId,
   platformId,
 }) => {
   const { t } = useTranslation();
@@ -38,13 +36,9 @@ export const PostText: FC<PostTextProps> = ({
       project_id: form.project_id,
       platform: platformId,
     };
-    const startText = contentId
-      ? (currentPost.files || []).find(
-          (item) => item.content_type === contentId,
-        )?.content || ""
-      : currentPost.comment || "";
+    const startText = currentPost.comment || "";
     setDescription(startText);
-  }, [getValues, platformId, contentId]);
+  }, [getValues, platformId]);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newText = e.target.value;
@@ -60,19 +54,7 @@ export const PostText: FC<PostTextProps> = ({
       project_id: form.project_id,
       platform: platformId,
     };
-
-    if (contentId) {
-      const files: IFile[] = (currentPost.files || []).filter(
-        (item) => item.content_type !== contentId,
-      );
-      currentPost.files = [
-        ...files,
-        { content_type: contentId, content: newText },
-      ];
-    } else {
-      currentPost.comment = newText;
-    }
-    console.log(currentPost);
+    currentPost.comment = newText;
     setValue(type, [...posts, currentPost]);
   };
 

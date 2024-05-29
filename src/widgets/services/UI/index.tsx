@@ -14,16 +14,12 @@ export const Services: FC<ServicesProps> = ({ page }) => {
     returnObjects: true,
   });
   return (
-    <section className={styles.services__wrapper}>
-      <div className="container">
-        <h2 className={styles.services__title}>
-          {t(`${page}.services_title`)}
-        </h2>
-        <div className={styles.infos}>
-          {infos.map((info, index) => (
-            <InfoCard key={index} info={info} />
-          ))}
-        </div>
+    <section className={`${styles.wrapper} container`}>
+      <h2 className={styles.title}>{t(`${page}.services_title`)}</h2>
+      <div className={styles.infos}>
+        {infos.map((info, index) => (
+          <InfoCard key={index} info={info} />
+        ))}
       </div>
     </section>
   );

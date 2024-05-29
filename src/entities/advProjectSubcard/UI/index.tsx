@@ -19,6 +19,20 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { IOrderFeature } from "@shared/types/order";
+import { useGetPostQuery } from "@shared/store/services/getPostService";
+import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogTrigger,
+} from "@shared/ui/shadcn-ui/ui/alert-dialog";
+import { X } from "lucide-react";
+import { platformTypesNum } from "@shared/config/platformTypes";
+import {
+  PostDispayInstagram,
+  PostDispayTelegram,
+} from "@shared/ui/postDisplay";
 
 interface AdvProjectSubcardProps {
   subcard: IAdvProjectSubcard;
@@ -42,7 +56,18 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
   ChangeChannelBtn,
 }) => {
   const { t } = useTranslation();
+  const { toast } = useToast();
+
   const { typeFilter, statusFilter } = useAppSelector((state) => state.filter);
+  const { data: post, error } = useGetPostQuery({ order_id: subcard.id });
+
+  if (error) {
+    toast({
+      variant: "error",
+      title: t("toasts.orders_advertiser.reject_post.error"),
+    });
+    console.error("error: ", error);
+  }
 
   return (
     <div
@@ -190,7 +215,35 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
             {typeFilter === projectTypesFilter.managerProject || (
               <span>{t(`orders_advertiser.order_status.accepted.text`)}</span>
             )}
-            <SeeBtn />
+            <AlertDialog>
+              <AlertDialogTrigger asChild>
+                <div>
+                  <SeeBtn />
+                </div>
+              </AlertDialogTrigger>
+              <AlertDialogContent className="gap-0 w-[30vw] h-[40vw] bg-transparent grid items-center justify-center">
+                <div className="w-[18vw] h-full relative">
+                  <AlertDialogAction>
+                    <X className="absolute -right-16 -top-10 w-[50px] rounded-full p-2 bg-white cursor-pointer" />
+                  </AlertDialogAction>
+                  {post?.platform === platformTypesNum.telegram && (
+                    <PostDispayTelegram
+                      post={post}
+                      platformId={platformTypesNum.telegram}
+                    />
+                  )}
+                  {post?.platform === platformTypesNum.instagram && (
+                    <PostDispayInstagram
+                      post={post}
+                      platformId={platformTypesNum.telegram}
+                    />
+                  )}
+                  {post?.platform === platformTypesNum.youtube && (
+                    <p>YOUTUBE</p>
+                  )}
+                </div>
+              </AlertDialogContent>
+            </AlertDialog>
           </div>
         ) : subcard?.api_status === orderStatus.moderation ? (
           <div className={styles.subcard__moderation}>
@@ -208,7 +261,35 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
           <div className={styles.subcard__waiting}>
             <div>
               <p>{t(`orders_advertiser.order_status.waiting.title`)}</p>
-              <SeeBtn />
+              <AlertDialog>
+                <AlertDialogTrigger asChild>
+                  <div>
+                    <SeeBtn />
+                  </div>
+                </AlertDialogTrigger>
+                <AlertDialogContent className="gap-0 w-[30vw] h-[40vw] bg-transparent grid items-center justify-center">
+                  <div className="w-[18vw] h-full relative">
+                    <AlertDialogAction>
+                      <X className="absolute -right-16 -top-10 w-[50px] rounded-full p-2 bg-white cursor-pointer" />
+                    </AlertDialogAction>
+                    {post?.platform === platformTypesNum.telegram && (
+                      <PostDispayTelegram
+                        post={post}
+                        platformId={platformTypesNum.telegram}
+                      />
+                    )}
+                    {post?.platform === platformTypesNum.instagram && (
+                      <PostDispayInstagram
+                        post={post}
+                        platformId={platformTypesNum.telegram}
+                      />
+                    )}
+                    {post?.platform === platformTypesNum.youtube && (
+                      <p>YOUTUBE</p>
+                    )}
+                  </div>
+                </AlertDialogContent>
+              </AlertDialog>
             </div>
           </div>
         ) : subcard?.api_status === orderStatus.order_review ? (

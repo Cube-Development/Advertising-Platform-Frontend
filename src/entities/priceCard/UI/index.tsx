@@ -23,19 +23,27 @@ export const PriceCard: FC<PriceCardProps> = ({
       className={`${styles.price__card} ${currentTarif === tarifType ? styles.active : ""}`}
       onClick={() => onChange(tarifType)}
     >
-      <p className={styles.title}>{price.name}</p>
-      <p className={styles.views}>{price.views}</p>
-      <p className={styles.price}>{price.price}</p>
-      {buyBtn}
-      <p className={styles.text}>{price.info}</p>
-      <ul>
-        {price.options.map((option, index) => (
-          <li key={index}>
-            {option.available ? <YesIcon /> : <NoIcon />}
-            {option.option}
-          </li>
-        ))}
-      </ul>
+      <div className={styles.content}>
+        <div className={styles.top}>
+          <p className={styles.title}>{price.name}</p>
+          <p className={styles.views}>{price.views}</p>
+        </div>
+        <div className={styles.price}>
+          <p>{price.price}</p>
+        </div>
+        <div>
+          {buyBtn}
+          <p className={styles.text}>{price.info}</p>
+        </div>
+        <ul>
+          {price.options.map((option, index) => (
+            <li key={index}>
+              {option.available ? <YesIcon /> : <NoIcon />}
+              <p>{option.option}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
     </div>
   );
 };

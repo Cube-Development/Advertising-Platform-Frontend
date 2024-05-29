@@ -20,7 +20,6 @@ export const RejectPost: FC<IOrderFeature> = ({ order_id }) => {
             variant: "success",
             title: t("toasts.orders_advertiser.reject_post.success"),
           });
-          console.log("success");
         })
         .catch((error) => {
           toast({

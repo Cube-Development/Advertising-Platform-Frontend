@@ -1,7 +1,7 @@
 .types {
   border-radius: 20px;
-  border: 1px solid #4772e6;
   overflow: hidden;
+  box-shadow: 0 0 0 1px inset var(--Personal-colors-main);
 
   .profile {
     display: flex; /* Используем flex контейнер */
@@ -12,7 +12,7 @@
     font-weight: 600;
     line-height: normal;
     line-height: 0.75;
-    color: #4772e6;
+    color: var(--Personal-colors-main);
 
     li {
       text-align: center;
@@ -32,7 +32,7 @@
     font-weight: 500;
     line-height: normal;
     line-height: 0.75;
-    color: #4772e6;
+    color: var(--Personal-colors-main);
 
     li {
       text-align: center;

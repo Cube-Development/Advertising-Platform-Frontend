@@ -98,7 +98,7 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
   }, []);
 
   return (
-    <div className={styles.wrapper}>
+    <div className={`${styles.wrapper} border__gradient`}>
       <div
         className={`${styles.card} ${statusFilter === managerProjectStatusFilter.completed ? styles.grid__completed : styles.grid__active}`}
       >

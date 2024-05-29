@@ -19,6 +19,7 @@ export enum ContentType {
   photo = 2,
   video = 3,
   file = 4,
+  button = 5,
 }
 
 export enum FileData {
@@ -34,21 +35,3 @@ export enum DatetimeData {
   time_to = "time_to",
   date = "date",
 }
-
-const example = {
-  project_id: "project_id",
-  name: "name",
-  posts: {
-    telegram: {
-      project_id: "project_id",
-      platform: 1,
-      comment: "comment",
-      files: [
-        {
-          content_type: 1,
-          content: "content",
-        },
-      ],
-    },
-  },
-};

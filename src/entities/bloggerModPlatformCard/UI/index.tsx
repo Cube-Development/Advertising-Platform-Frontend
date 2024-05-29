@@ -13,7 +13,7 @@ export const BloggerModPlatformCard: FC<BloggerModPlatformCardProps> = ({
   const { t } = useTranslation();
 
   return (
-    <div className={styles.card}>
+    <div className={`${styles.card} border__gradient`}>
       <div className={styles.card__preview}>
         <div className={styles.card__preview__logo}>
           <img src={card.avatar} alt="" />

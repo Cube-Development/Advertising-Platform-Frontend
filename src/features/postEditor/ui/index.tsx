@@ -1,20 +1,19 @@
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { Toolbar } from "./toolbar";
 import styles from "./styles.module.scss";
 import underline from "@tiptap/extension-underline";
 import link from "@tiptap/extension-link";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
-import { ICreatePost, ICreatePostForm, IFile } from "@shared/types/createPost";
-import { CreatePostFormData } from "@shared/config/createPostData";
+import { ICreatePost, ICreatePostForm } from "@shared/types/createPost";
+import { ContentType, CreatePostFormData } from "@shared/config/createPostData";
 import HardBreak from "@tiptap/extension-hard-break";
 
 interface EditorProps {
   setValue: UseFormSetValue<ICreatePostForm>;
   getValues: UseFormGetValues<ICreatePostForm>;
   type: CreatePostFormData;
-  contentId?: number;
   platformId: number;
 }
 
@@ -22,7 +21,6 @@ export const Editor: FC<EditorProps> = ({
   setValue,
   getValues,
   type,
-  contentId,
   platformId,
 }) => {
   const form: ICreatePostForm = { ...getValues() };
@@ -33,8 +31,7 @@ export const Editor: FC<EditorProps> = ({
     platform: platformId,
   };
   const startContent =
-    (currentPost.files || []).find((item) => item.content_type === contentId)
-      ?.content || "";
+    (currentPost?.text && currentPost?.text[0]?.content) || "";
   const [content, setContent] = useState(startContent);
 
   const limit = 1000;
@@ -85,15 +82,7 @@ export const Editor: FC<EditorProps> = ({
       platform: platformId,
     };
 
-    if (contentId) {
-      const files: IFile[] = (currentPost.files || []).filter(
-        (item) => item.content_type !== contentId,
-      );
-      currentPost.files = [
-        ...files,
-        { content_type: contentId, content: content },
-      ];
-    }
+    currentPost.text = [{ content_type: ContentType.text, content: content }];
     setValue(type, [...posts, currentPost]);
   };
 

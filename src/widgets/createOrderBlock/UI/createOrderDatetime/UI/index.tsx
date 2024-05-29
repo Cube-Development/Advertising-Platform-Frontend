@@ -15,6 +15,7 @@ interface CreateOrderDatetimeProps {
   onChangeBlur: (key: keyof ICreateOrderBlur) => void;
   setValue: UseFormSetValue<ICreatePostForm>;
   getValues: UseFormGetValues<ICreatePostForm>;
+  formState: ICreatePostForm;
 }
 
 export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
@@ -23,6 +24,7 @@ export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
   onChangeBlur,
   setValue,
   getValues,
+  formState,
 }) => {
   const { t } = useTranslation();
 
@@ -55,7 +57,7 @@ export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
         </div>
         <div className={styles.content}>
           <div className={styles.cards}>
-            {cards.map((card, index) => (
+            {cards?.map((card, index) => (
               <PostPlatform
                 card={card}
                 key={index}
@@ -63,6 +65,7 @@ export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
                 TimeList={TimeList}
                 setValue={setValue}
                 getValues={getValues}
+                formState={formState}
               />
             ))}
           </div>

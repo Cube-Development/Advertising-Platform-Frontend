@@ -27,7 +27,7 @@ export const CheckRoutes = ({
   type: routerType;
 }) => {
   const { isAuth, role } = useAppSelector((state) => state.user);
-  console.log("ProtectedRoutes", role, checkRole);
+  // console.log("ProtectedRoutes", role, checkRole);
 
   if (type === routerType.public) {
     console.log("PublicdRoutes", role, checkRole);
@@ -36,10 +36,8 @@ export const CheckRoutes = ({
       (isAuth && role === checkRole) ||
       (isAuth && managmentRoles.includes(role))
     ) {
-      console.log("PublicdRoutes1111", role, checkRole);
       return <Outlet />;
     } else {
-      console.log("PublicdRoutes222", role, checkRole);
       return (
         <Navigate
           to={role === roles.advertiser ? paths.main : paths.mainBlogger}
@@ -51,10 +49,8 @@ export const CheckRoutes = ({
     if (!isAuth) {
       return <Navigate to={paths.main} replace />;
     } else if (isAuth && !checkRole) {
-      console.log("CommonRouter", checkRole);
       return <Outlet />;
     } else if (isAuth && userRoles.includes(role)) {
-      console.log("userRoles", checkRole, role);
       return role === checkRole ? (
         <Outlet />
       ) : (

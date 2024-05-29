@@ -1,13 +1,18 @@
 .wrapper {
   display: grid;
   grid-template: 1fr / 1fr 1fr;
-  height: 330px;
   column-gap: 20px;
+  width: 100%;
+
+  &.wrapper_empty {
+    grid-template: none;
+  }
 
   .left {
     display: grid;
     grid-auto-flow: row;
-    align-content: space-between;
+    align-content: center;
+    gap: 20px;
     padding: 20px;
     border-radius: 25px;
     border: 2.5px dashed #4772e6;
@@ -19,9 +24,10 @@
       display: grid;
       grid-auto-flow: column;
       column-gap: 10px;
-      padding: 35px 10px;
       align-items: center;
       justify-content: start;
+      gap: 10px;
+      padding: 10px;
       border-radius: 12px;
       border: 1px dashed var(--Containers);
 
@@ -42,7 +48,7 @@
         align-content: center;
         p {
           color: #4d4d4d;
-          font-size: 8px;
+          font-size: 12px;
           font-style: normal;
           font-weight: 400;
           span {

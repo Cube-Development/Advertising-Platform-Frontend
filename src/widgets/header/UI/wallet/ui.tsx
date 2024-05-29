@@ -36,13 +36,16 @@ export const Wallet: FC = () => {
 
   return (
     <div
-      className={`${styles.wallet} ${isMenuOpen && styles.active__wallet}`}
+      className={`${styles.wallet} ${isMenuOpen ? `${styles.active__wallet} border__gradient` : ""}`}
       ref={menuRef}
     >
       <button className={styles.roww} onClick={(e) => toggleMenu(e)}>
         {balance ? (
           <p>
-            {balance?.balance?.toLocaleString()} <span>{t("symbol")}</span>
+            {balance?.balance
+              ? Math.floor(balance.balance).toLocaleString()
+              : "0"}{" "}
+            <span>{t("symbol")}</span>
           </p>
         ) : (
           ""

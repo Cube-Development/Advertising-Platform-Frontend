@@ -75,3 +75,4 @@ export { WalletIcon } from "./wallet";
 export { WomanIcon } from "./woman";
 export { YesIcon } from "./yes";
 export { IphoneScreen } from "./iphonescreen";
+export { YouTubeIcon } from "./youtube";

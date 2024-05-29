@@ -12,7 +12,7 @@
 }
 
 .active__account {
-  border: 1px solid #4772e6;
+  border: 1px solid var(--Personal-colors-main);
 }
 
 .content {
@@ -42,24 +42,29 @@
   }
 }
 
-.outer {
-  display: flex;
+.circle_wrapper {
+  display: grid;
   align-items: center;
   justify-content: center;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  border: 0.2px solid #000;
-}
 
-.inner {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  border: 0.2px solid #000;
+  .outer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 3px;
+    border-radius: 50%;
+    border: 0.2px solid #000;
+
+    .inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      border: 0.2px solid #000;
+    }
+  }
 }
 
 .active {

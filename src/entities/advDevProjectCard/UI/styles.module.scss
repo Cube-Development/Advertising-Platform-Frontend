@@ -2,8 +2,9 @@
   display: grid;
   grid-template: 1fr / 2fr 2fr 2fr 3.5fr;
   padding: 10px 30px;
-  border-radius: 12px;
-  border: 1px solid var(--Personal-colors-main);
+  height: 80px;
+  // border-radius: 12px;
+  // border: 1px solid var(--Personal-colors-main);
 
   &__title {
     display: grid;

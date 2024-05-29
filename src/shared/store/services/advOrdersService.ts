@@ -2,11 +2,15 @@ import { authApi } from "@shared/api";
 import { ADV_PROJECTS, BLOGGER_OFFERS } from "@shared/api/tags";
 import { languagesNum } from "@shared/config/languages";
 import { IAdvProjects, IAdvSubprojects } from "@shared/types/advProject";
-import {
-  ICreateDate,
-  ICreatePost,
-  IPostChannel,
-} from "@shared/types/createPost";
+import { ICreateDate, IFile, IPostChannel } from "@shared/types/createPost";
+
+export interface ICreatePostReq {
+  project_id: string;
+  platform?: number;
+  // name?: string;
+  comment?: string;
+  files?: IFile[];
+}
 
 export interface getProjectsCardReq {
   page: number;
@@ -36,7 +40,17 @@ export const advProjectsAPI = authApi.injectEndpoints({
         method: "POST",
       }),
     }),
-    createPost: build.mutation<{ success: boolean }, ICreatePost>({
+    getUploadLink: build.mutation<
+      { file_name: string; url: string },
+      { extension: string; content_type: number }
+    >({
+      query: (params) => ({
+        url: `/file/upload_link`,
+        method: "GET",
+        params: params,
+      }),
+    }),
+    createPost: build.mutation<{ success: boolean }, ICreatePostReq>({
       query: (body) => ({
         url: `/order/post`,
         method: "POST",
@@ -93,11 +107,12 @@ export const advProjectsAPI = authApi.injectEndpoints({
 });
 
 export const {
-  useAcceptOrderMutation,
   useCreateCartMutation,
+  useGetUploadLinkMutation,
   useProjectOrdersQuery,
   useCreatePostMutation,
   useCreateOrderDatesMutation,
+  useAcceptOrderMutation,
   useRejectOrderMutation,
   useGetAdvProjectsQuery,
   useGetAdvSubprojectsQuery,

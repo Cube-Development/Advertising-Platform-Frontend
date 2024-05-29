@@ -22,6 +22,8 @@ import {
 } from "@shared/store/services/catalogService";
 import { ICart } from "@shared/types/cart";
 import { IPlatform } from "@shared/types/platform";
+import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
+import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import Cookies from "js-cookie";
 import { FC, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -30,8 +32,6 @@ import { CatalogCart } from "./catalogCart";
 import { CatalogList } from "./catalogList";
 import { CatalogSearch } from "./catalogSearch";
 import styles from "./styles.module.scss";
-import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
-import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
 
 export const CatalogBlock: FC = () => {
   const { toast } = useToast();

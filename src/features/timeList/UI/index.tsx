@@ -82,7 +82,6 @@ export const TimeList: FC<TimeListProps> = ({ onChange }) => {
       timeIndexList: newTimeIndexList,
       timeStringList: newTimeList,
     });
-    console.log(newTimeList);
   };
 
   // const handleOpenModal = (event: React.MouseEvent<HTMLButtonElement>) => {

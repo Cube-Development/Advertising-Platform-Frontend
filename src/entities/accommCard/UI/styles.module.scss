@@ -1,4 +1,5 @@
 .accomms {
+  grid-area: item1;
   background: linear-gradient(
     90deg,
     rgba(71, 114, 230, 0.1) 0.03%,
@@ -11,6 +12,7 @@
   &.vencom {
     color: var(--Personal-colors-White);
     background: var(--Gradients-Gradient-1);
+    grid-area: item2;
   }
 
   ul {
@@ -26,40 +28,66 @@
       list-style: disc;
     }
   }
-}
+  &__row {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: center;
+    text-align: center;
+    column-gap: 10px;
+    margin-bottom: 30px;
 
-.accomms__row {
-  display: grid;
-  grid-auto-flow: column;
-  justify-content: center;
-  text-align: center;
-  column-gap: 10px;
-  margin-bottom: 30px;
-}
+    .title {
+      text-align: center;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
 
-.title {
-  text-align: center;
-  font-size: 24px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-}
+      font-size: var(--font-size-subtitle-secondary-xl);
 
-.bottom__row {
-  display: grid;
-  grid-auto-flow: column;
-  column-gap: 30px;
-}
+      @media (max-width: 992px) {
+        font-size: var(--font-size-subtitle-secondary-lg);
+      }
 
-.save__row {
-  display: grid;
-  grid-auto-flow: column;
-  column-gap: 15px;
-  align-items: center;
-  text-align: left;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  max-width: 180px;
+      @media (max-width: 768px) {
+        font-size: var(--font-size-subtitle-secondary-md);
+      }
+
+      @media (max-width: 576px) {
+        font-size: var(--font-size-subtitle-secondary-sm);
+      }
+
+      @media (max-width: 375px) {
+        font-size: var(--font-size-subtitle-secondary-xs);
+      }
+    }
+  }
+
+  .bottom__row {
+    display: grid;
+    grid-template: 1fr / 1fr 1fr;
+    column-gap: 30px;
+
+    @media (max-width: 768px) {
+      display: flex;
+      flex-direction: column-reverse;
+      row-gap: 30px;
+    }
+
+    .save__row {
+      display: grid;
+      grid-auto-flow: column;
+      column-gap: 15px;
+      align-items: center;
+      text-align: left;
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+      // max-width: 180px;
+
+      @media (max-width: 768px) {
+        justify-content: center;
+      }
+    }
+  }
 }

@@ -1,5 +1,23 @@
 .why__row {
   display: grid;
-  grid-template: 1fr / repeat(2, 1fr);
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: "item1 item2";
   column-gap: 50px;
+
+  @media (max-width: 992px) {
+    grid-template: 1fr 1fr /1fr;
+    grid-template-areas:
+      "item2"
+      "item1";
+    row-gap: 30px;
+    margin: 0 75px;
+  }
+
+  @media (max-width: 768px) {
+    margin: 0 50px;
+  }
+
+  @media (max-width: 576px) {
+    margin: 0;
+  }
 }
