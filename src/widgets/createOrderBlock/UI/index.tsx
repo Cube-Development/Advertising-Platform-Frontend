@@ -137,7 +137,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
                     content_type: ContentType.file,
                     content: data.file_name,
                   });
-                }),
+                })
               );
             }
             if (post?.media) {
@@ -161,10 +161,10 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
                     content_type: getContentType(media),
                     content: data.file_name,
                   });
-                }),
+                })
               );
             }
-          }),
+          })
         );
 
         // Создание постов
@@ -186,7 +186,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
                   action: <ToastAction altText="Ok">Ok</ToastAction>,
                 });
               });
-          }),
+          })
         );
 
         // Создание дат заказа и оплата
@@ -234,8 +234,8 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
 
   return (
     <>
-      {isLoading && (
-        <div className="fixed w-[100vw] h-[100svh] z-50 backdrop-blur-xl grayscale flex flex-col justify-center items-center transition-all">
+      {!isLoading && (
+        <div className="fixed w-[100vw] h-[100svh] z-50 backdrop-blur-xl flex flex-col justify-center items-center transition-all">
           <img src={loadingAnimation} alt="isLoading..." className="w-[14vw]" />
           <p className="-mt-10 text-[44px] font-medium text-black/60">
             Loading...
