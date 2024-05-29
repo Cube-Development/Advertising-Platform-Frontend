@@ -1,4 +1,4 @@
-import { FC, ReactElement, useState } from "react";
+import { FC, ReactElement, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import { IPrice } from "@shared/types/translate";
 import { PriceCard } from "@entities/priceCard";
@@ -26,80 +26,95 @@ interface PriceListProps {
 
 export const PriceList: FC<PriceListProps> = ({ tarifs, buyBtn }) => {
   const [currentTarif, setTarif] = useState<number>(1);
+  const [screen, setScreen] = useState<number>(window.innerWidth);
 
   const handleChangeTarif = (tarifType: number) => {
     console.log(tarifType);
     setTarif(tarifType);
   };
   const duplicateTarifs = tarifs.concat(tarifs);
-  console.log(duplicateTarifs);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreen(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <>
-      <div className={styles.tarifs}>
-        {tarifs.map((price, index) => (
-          <div key={index} className={styles.slide}>
-            <PriceCard
-              price={price}
-              buyBtn={buyBtn}
-              tarifType={index}
-              currentTarif={currentTarif}
-              onChange={handleChangeTarif}
-            />
-          </div>
-        ))}
-      </div>
-      <div className={styles.carousel}>
-        <Swiper
-          effect="coverflow"
-          modules={[EffectCoverflow]}
-          grabCursor={true}
-          centeredSlides={true}
-          loop={true}
-          slidesPerView={1}
-          breakpoints={{
-            1366: {
-              slidesPerView: 2,
-            },
-            992: {
-              slidesPerView: 2,
-              spaceBetween: 50,
-            },
-            768: {
-              slidesPerView: 2,
-              spaceBetween: -100,
-            },
-            576: {
-              slidesPerView: 2,
-              spaceBetween: -150,
-            },
-            375: {
-              slidesPerView: 1,
-              spaceBetween: -200,
-            },
-          }}
-          coverflowEffect={{
-            rotate: 0, // Угол поворота слайдов
-            stretch: 0, // Растяжение между слайдами
-            depth: 700, // Глубина отдаления слайдов
-            modifier: 0.75, // Модификатор эффекта
-            slideShadows: false,
-          }}
-          className={styles.wrapper}
-        >
-          {duplicateTarifs.map((price, index) => (
-            <SwiperSlide key={index} className={"slide__price"}>
+      {screen >= 992 ? (
+        <div className={styles.tarifs}>
+          {tarifs.map((price, index) => (
+            <div key={index} className={styles.slide}>
               <PriceCard
-                key={index}
                 price={price}
                 buyBtn={buyBtn}
                 tarifType={index}
                 currentTarif={currentTarif}
                 onChange={handleChangeTarif}
               />
-            </SwiperSlide>
+            </div>
           ))}
-        </Swiper>
-        {/* <Carousel
+        </div>
+      ) : (
+        <div className={styles.carousel}>
+          <Swiper
+            effect="coverflow"
+            modules={[EffectCoverflow]}
+            grabCursor={true}
+            centeredSlides={true}
+            loop={true}
+            slidesPerView={1}
+            breakpoints={{
+              1366: {
+                slidesPerView: 2,
+              },
+              992: {
+                slidesPerView: 2,
+                spaceBetween: 50,
+              },
+              768: {
+                slidesPerView: 2,
+                spaceBetween: -100,
+              },
+              576: {
+                slidesPerView: 2,
+                spaceBetween: -150,
+              },
+              375: {
+                slidesPerView: 1,
+                spaceBetween: -200,
+              },
+            }}
+            coverflowEffect={{
+              rotate: 0, // Угол поворота слайдов
+              stretch: 0, // Растяжение между слайдами
+              depth: 700, // Глубина отдаления слайдов
+              modifier: 0.75, // Модификатор эффекта
+              slideShadows: false,
+            }}
+            className={styles.wrapper}
+          >
+            {duplicateTarifs.map((price, index) => (
+              <SwiperSlide key={index} className={"slide__price"}>
+                <PriceCard
+                  key={index}
+                  price={price}
+                  buyBtn={buyBtn}
+                  tarifType={index}
+                  currentTarif={currentTarif}
+                  onChange={handleChangeTarif}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+
+          {/* <Carousel
           opts={{
             align: "start",
             loop: true,
@@ -123,7 +138,8 @@ export const PriceList: FC<PriceListProps> = ({ tarifs, buyBtn }) => {
             ))}
           </CarouselContent>
         </Carousel> */}
-      </div>
+        </div>
+      )}
     </>
   );
 };

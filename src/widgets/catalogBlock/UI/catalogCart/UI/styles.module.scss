@@ -1,38 +1,79 @@
 .wrapper {
   display: grid;
-  grid-template: 1fr / 1fr 1fr 1fr 2fr;
-  padding: 20px 0;
+  // grid-template: 1fr / 1fr 1fr 1fr 2fr;
+  grid-template: 1fr / 3.6fr 2fr;
+  column-gap: 40px;
+  padding: 20px 15px;
   background: var(--Gradients-Gradient-1);
   opacity: 0.95;
   border-radius: 15px;
 
-  .info {
-    display: grid;
-    grid-auto-flow: row;
-    row-gap: 25px;
-    padding: 15px 0;
-    text-align: center;
-    border-right: 0.5px solid var(--Personal-colors-White);
+  @media (max-width: 992px) {
+    padding: 12px 15px;
+    column-gap: 30px;
+  }
 
-    p,
-    span {
-      color: var(--Personal-colors-White);
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 600;
+  @media (max-width: 576px) {
+    grid-template: 1fr 2fr/ 1fr;
+    row-gap: 15px;
+  }
+
+  .text {
+    display: grid;
+    grid-template: 1fr / 1fr 1fr 1fr;
+
+    @media (max-width: 768px) {
+      grid-template: 1fr / 1fr 1fr;
+    }
+
+    .info {
+      display: grid;
+      grid-auto-flow: row;
+      row-gap: 20px;
+      text-align: center;
+      border-right: 0.5px solid var(--Personal-colors-White);
+
+      @media (max-width: 992px) {
+        row-gap: 12px;
+      }
+
+      @media (max-width: 576px) {
+        grid-auto-flow: column;
+        column-gap: 12px;
+        border: none;
+      }
+
+      &.views {
+        @media (max-width: 768px) {
+          display: none;
+        }
+      }
+
+      p,
+      span {
+        color: var(--Personal-colors-White);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+      }
     }
   }
 
   .cart {
     display: grid;
-    justify-content: end;
     align-items: center;
-    margin-right: 40px;
+    margin: 0 15px;
+
+    @media (max-width: 576px) {
+      margin: 0 45px;
+    }
 
     .button {
-      padding: 15px 50px;
+      white-space: nowrap;
+      padding: 15px;
       opacity: 1;
-      background: var(--Personal-colors-Green);
+      // background: var(--Personal-colors-Green);
     }
   }
 }
