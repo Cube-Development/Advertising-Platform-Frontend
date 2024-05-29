@@ -65,11 +65,11 @@ export const PostDispayInstagram: FC<PostDispayInstagramProps> = ({
         <p className={styles.time}>9:41</p>
         <img
           className={styles.statusbar}
-          src="/src/shared/assets/img/statusbar.svg"
+          src="/images/phoneDisplay/statusbar.svg"
         />
         <img
           className={styles.dynamic}
-          src="/src/shared/assets/img/dynamic.png"
+          src="/images/phoneDisplay/dynamic.png"
         />
         <div className={styles.header}>
           <ChevronLeft />
@@ -81,7 +81,7 @@ export const PostDispayInstagram: FC<PostDispayInstagramProps> = ({
         </div>
         <img
           className={styles.mockup}
-          src="/src/shared/assets/img/iphonescreen.png"
+          src="/images/phoneDisplay/iphonescreen.png"
         />
         <div className={styles.footer}>
           <HomeIcon />

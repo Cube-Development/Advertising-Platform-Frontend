@@ -67,13 +67,13 @@ export const PostDispayTelegram: FC<PostDispayTelegramProps> = ({
         <p className={styles.time}>9:41</p>
         <img
           className={styles.statusbar}
-          src="/src/shared/assets/img/statusbar.svg"
+          src="/images/phoneDisplay/statusbar.svg"
         />
         <img
           className={styles.dynamic}
-          src="/src/shared/assets/img/dynamic.png"
+          src="/images/phoneDisplay/dynamic.png"
         />
-        <img className={styles.back} src="/src/shared/assets/img/back.svg" />
+        <img className={styles.back} src="/images/phoneDisplay/back.svg" />
         <div className={styles.channel}>
           <p className={styles.channel__name}>Channel name</p>
           <p className={styles.channel__subs}>1 312 678 subscribers</p>
@@ -81,7 +81,7 @@ export const PostDispayTelegram: FC<PostDispayTelegramProps> = ({
         <div className={styles.avatar}></div>
         <img
           className={styles.mockup}
-          src="/src/shared/assets/img/iphonescreen.png"
+          src="/images/phoneDisplay/iphonescreen.png"
         />
         <div className={styles.unmute}>Unmute</div>
         {formState ? (

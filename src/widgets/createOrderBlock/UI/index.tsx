@@ -24,7 +24,7 @@ import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
 import { ContentType } from "@shared/config/createPostData";
 import { getFileExtension } from "@features/getFileExtension";
 import { getContentType } from "@features/getContentType";
-import loadingAnimation from "@shared/assets/img/loadingAnimation.gif";
+import loadingAnimation from "/images/phoneDisplay/loadingAnimation.gif";
 
 interface CreateOrderBlockProps {}
 
