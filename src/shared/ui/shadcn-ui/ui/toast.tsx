@@ -28,7 +28,7 @@ const toastVariants = cva(
     variants: {
       variant: {
         default: "border bg-background text-foreground",
-        success: "border bg-toast-success text-toast-foreground",
+        success: "border bg-toast-success text-toast-foreground text-black",
         error: "border bg-toast-error text-toast-foreground",
       },
     },

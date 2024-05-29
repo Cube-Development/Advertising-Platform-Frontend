@@ -20,14 +20,12 @@ export const LoginBtn: FC = () => {
 
   return (
     <div className={styles.wrapper}>
-      <a onClick={handleRegistrationClick}>
+      <a className={styles.registrationBtn} onClick={handleRegistrationClick}>
         <MyButton>{t("registration")}</MyButton>
       </a>
-      <a onClick={handleLoginClick}>
-        <div className={styles.loginBtn}>
-          <button>{t("login")}</button>
-          <LoginIcon />
-        </div>
+      <a className={styles.loginBtn} onClick={handleLoginClick}>
+        <button>{t("login")}</button>
+        <LoginIcon />
       </a>
     </div>
   );

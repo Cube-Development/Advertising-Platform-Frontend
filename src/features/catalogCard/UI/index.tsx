@@ -132,6 +132,49 @@ export const CatalogCard: FC<CatalogCardProps> = ({
           </div>
         </div>
       </div>
+      <div className={styles.channel__info}>
+        <div className={styles.channel__info_row}>
+          <div className={styles.info}>
+            <div>
+              <SubsIcon />
+            </div>
+            <span>{card?.subscribers?.toLocaleString()}</span>
+          </div>
+          <div className={styles.info}>
+            <div>
+              <EyeIcon />
+            </div>
+            <span>{selectedFormat?.views!.toLocaleString()}</span>
+          </div>
+        </div>
+        <div className={styles.channel__info_middle}>
+          <div>
+            <ManIcon />
+          </div>
+          <div
+            className="colorline"
+            style={{ "--male": `${card?.male}%` } as React.CSSProperties}
+            data-male={`${card?.male}%`}
+            data-female={`${card?.female}%`}
+          />
+          <div>
+            <WomanIcon />
+          </div>
+        </div>
+        <div className={styles.channel__info_row}>
+          <div className={styles.info}>
+            <p>ER:</p>
+            <span>{selectedFormat?.er}%</span>
+          </div>
+          <div className={styles.info}>
+            <p>CPV:</p>
+            <span>
+              {selectedFormat?.cpv!.toLocaleString()} {t(`symbol`)}
+            </span>
+          </div>
+        </div>
+      </div>
+
       <AddToBasketBtn
         selectedFormat={selectedFormat}
         FormatList={FormatList}

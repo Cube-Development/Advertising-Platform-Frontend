@@ -1,0 +1,1 @@
+export { TelegramComment } from "./ui";

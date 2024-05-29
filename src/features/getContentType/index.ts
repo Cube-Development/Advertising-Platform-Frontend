@@ -1,0 +1,1 @@
+export { getContentType } from "./getContentType";

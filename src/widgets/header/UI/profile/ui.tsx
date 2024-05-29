@@ -31,7 +31,7 @@ export const Profile: FC<ProfileProps> = ({ toggleLogout }) => {
       refreshToken && logout(refreshToken);
       toggleLogout();
     } catch (error) {
-      console.log(error);
+      console.error(error);
     }
   };
 

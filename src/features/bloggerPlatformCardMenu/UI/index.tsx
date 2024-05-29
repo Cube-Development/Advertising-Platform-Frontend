@@ -31,7 +31,6 @@ export const BloggerPlatformCardMenu: FC<BloggerPlatformCardMenuProps> = ({
   };
 
   const handleClickOutside = (event: MouseEvent) => {
-    // console.log(!menuRef.current.contains(event.target as Node))
     if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
       setMenuOpen(false);
     }
@@ -66,7 +65,6 @@ export const BloggerPlatformCardMenu: FC<BloggerPlatformCardMenuProps> = ({
           variant: "success",
           title: t("toasts.offers_blogger.channel.deactivate.success"),
         });
-        console.log("Канал деактивирован");
       })
       .catch((error) => {
         toast({

@@ -19,7 +19,6 @@ export const AcceptOffer: FC<IOrderFeature> = ({ order_id }) => {
           variant: "success",
           title: t("toasts.offers_blogger.accept_offer.success"),
         });
-        console.log("success");
       })
       .catch((error) => {
         toast({

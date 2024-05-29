@@ -7,6 +7,7 @@ import {
   CART,
   CART_PUB,
   CATALOG,
+  CHAT,
   LEGALS,
 } from "@shared/api/tags";
 
@@ -25,5 +26,6 @@ export const baseApi = createApi({
     BLOGGER_OFFERS,
     ADV_PROJECTS,
     LEGALS,
+    CHAT,
   ],
 });

@@ -11,6 +11,19 @@ import { PostIcon } from "@shared/assets";
 import { CreatePostFormData } from "@shared/config/createPostData";
 import { platformToIcon } from "@shared/config/platformData";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
+import {
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogTrigger,
+} from "@shared/ui/shadcn-ui/ui/alert-dialog";
+import { AlertDialogAction } from "@radix-ui/react-alert-dialog";
+import { X } from "lucide-react";
+import { platformTypesNum } from "@shared/config/platformTypes";
+import {
+  PostDispayInstagram,
+  PostDispayTelegram,
+} from "@shared/ui/postDisplay";
+import { EmptyPost } from "@shared/ui/postDisplay/postDispayTelegram/UI/emptyPost";
 
 interface PostPlatformProps {
   card: IPostChannel;
@@ -18,6 +31,7 @@ interface PostPlatformProps {
   TimeList: FC<TimeListProps>;
   setValue: UseFormSetValue<ICreatePostForm>;
   getValues: UseFormGetValues<ICreatePostForm>;
+  formState: ICreatePostForm;
 }
 
 export const PostPlatform: FC<PostPlatformProps> = ({
@@ -26,37 +40,36 @@ export const PostPlatform: FC<PostPlatformProps> = ({
   TimeList,
   setValue,
   getValues,
+  formState,
 }) => {
   const handleChangeTime = (timeList: string[]) => {
     const form: ICreatePostForm = getValues();
     const datetime = form.datetime;
     const currentCard: IDatetime = (datetime.orders || []).find(
-      (item) => item.order_id === card.id,
+      (item) => item.order_id === card.id
     ) || {
       order_id: card.id,
     };
     const allCards = (datetime.orders || []).filter(
-      (item) => item.order_id !== card.id,
+      (item) => item.order_id !== card.id
     );
     currentCard.time_from = timeList[0];
     currentCard.time_to = timeList[1];
 
     datetime.orders = [...allCards, currentCard];
     setValue(CreatePostFormData.datetime, datetime);
-
-    console.log(getValues());
   };
 
   const handleChangeDate = (dateList: Date[]) => {
     const form: ICreatePostForm = getValues();
     const datetime = form.datetime;
     const currentCard: IDatetime = (datetime.orders || []).find(
-      (item) => item.order_id === card.id,
+      (item) => item.order_id === card.id
     ) || {
       order_id: card.id,
     };
     const allCards = (datetime.orders || []).filter(
-      (item) => item.order_id !== card.id,
+      (item) => item.order_id !== card.id
     );
 
     if (dateList.length === 1) {
@@ -71,7 +84,6 @@ export const PostPlatform: FC<PostPlatformProps> = ({
 
     datetime.orders = [...allCards, currentCard];
     setValue(CreatePostFormData.datetime, datetime);
-    console.log(getValues());
   };
 
   return (
@@ -85,11 +97,6 @@ export const PostPlatform: FC<PostPlatformProps> = ({
           <span>{card.category}</span>
         </div>
       </div>
-      {/* <div className={styles.type}>
-        {platformToIcon.hasOwnProperty(card.platform)
-          ? platformToIcon[card.platform]()
-          : null}
-      </div> */}
       <div className={styles.type}>
         {card.platform in platformToIcon
           ? platformToIcon[card.platform]()
@@ -101,10 +108,37 @@ export const PostPlatform: FC<PostPlatformProps> = ({
       <div className={styles.type}>
         <TimeList onChange={handleChangeTime} />
       </div>
-      <div className={styles.data}>
-        <PostIcon />
-        {/* <p>{card.post}</p> */}
-      </div>
+      <AlertDialog>
+        <AlertDialogTrigger asChild>
+          <div className={styles.data}>
+            <PostIcon />
+          </div>
+        </AlertDialogTrigger>
+        <AlertDialogContent className="gap-0 w-[30vw] h-[40vw] bg-transparent grid items-center justify-center">
+          {formState?.posts?.length ? (
+            <div className="w-[18vw] h-full relative">
+              <AlertDialogAction>
+                <X className="absolute -right-16 -top-10 w-[50px] rounded-full p-2 bg-white cursor-pointer" />
+              </AlertDialogAction>
+              {card?.platform === platformTypesNum.telegram && (
+                <PostDispayTelegram
+                  formState={formState}
+                  platformId={platformTypesNum.telegram}
+                />
+              )}
+              {card?.platform === platformTypesNum.instagram && (
+                <PostDispayInstagram
+                  formState={formState}
+                  platformId={platformTypesNum.telegram}
+                />
+              )}
+              {card?.platform === platformTypesNum.youtube && <p>YOUTUBE</p>}
+            </div>
+          ) : (
+            <EmptyPost />
+          )}
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 };

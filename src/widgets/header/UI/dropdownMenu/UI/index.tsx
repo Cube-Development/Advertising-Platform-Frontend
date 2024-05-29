@@ -28,7 +28,6 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
   const menuRef = useRef<HTMLDivElement>(null);
   const toggleMenu = () => {
     const newMenu = { isOpen: !dropdownMenu.isOpen, title: "" };
-    console.log(newMenu);
     dispatch(filterSlice.actions.setDropDownMenu(newMenu));
   };
 
@@ -41,7 +40,6 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
 
   useEffect(() => {
     document.addEventListener("click", handleClickOutside);
-    console.log("isMenuOpen", dropdownMenu);
     if (dropdownMenu.isOpen) {
       document.body.classList.add("sidebar-open");
     } else {

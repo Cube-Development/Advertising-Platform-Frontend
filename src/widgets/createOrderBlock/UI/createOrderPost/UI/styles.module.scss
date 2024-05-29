@@ -34,7 +34,7 @@
           font-size: 44px;
           font-weight: bold;
           line-height: 1;
-          color: #4772e6;
+          color: var(--Personal-colors-main);
         }
 
         p {
@@ -66,7 +66,6 @@
           display: grid;
           grid-template: 1fr 1fr / 1fr;
           row-gap: 30px;
-          // height: 30vw;
           min-height: 500px;
 
           button {
@@ -76,12 +75,12 @@
           .block {
             display: grid;
             grid-auto-flow: row;
-            row-gap: 25px;
+            row-gap: 15px;
           }
 
           .block__bottom {
             display: grid;
-            grid-template: 0.8fr 0.8fr 2fr / 1fr;
+            grid-template: 54px 54px 2fr / 1fr;
             row-gap: 25px;
 
             &.filter {
@@ -92,7 +91,6 @@
 
         .display {
           position: relative;
-          // height: 30vw;
           min-height: 500px;
 
           .continue {

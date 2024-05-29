@@ -24,13 +24,13 @@ export const Header: FC = () => {
 
   return (
     <header className={styles.wrapper}>
-      <div className={styles.row__left}>
+      <div className={styles.navigation}>
         {isAuth && <DropdownMenu currentRole={role} toggleRole={toggleRole} />}
         <Logo currentRole={role} />
         <Nav isAuth={isAuth} currentRole={role} />
       </div>
 
-      <div className={styles.row}>
+      <div className={styles.profile}>
         {isAuth && <Wallet />}
         <Lang />
         {isAuth ? (

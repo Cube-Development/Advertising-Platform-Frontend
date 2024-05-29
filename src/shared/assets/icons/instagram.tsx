@@ -1,16 +1,16 @@
 export const InstagramIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="61"
-    height="32"
+    width="26"
+    height="26"
     viewBox="0 0 61 32"
     fill="none"
   >
     <path
       d="M1 1V31"
       stroke="#8C8C8C"
-      stroke-width="0.5"
-      stroke-linecap="round"
+      strokeWidth="0.5"
+      strokeLinecap="round"
     />
     <path
       d="M53.9688 1H38.0312C34.148 1 31 4.148 31 8.03125V23.9688C31 27.852 34.148 31 38.0312 31H53.9688C57.852 31 61 27.852 61 23.9688V8.03125C61 4.148 57.852 1 53.9688 1Z"
@@ -33,10 +33,10 @@ export const InstagramIcon = () => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(38.9687 33.3106) rotate(-90) scale(29.7322 27.6533)"
       >
-        <stop stop-color="#FFDD55" />
-        <stop offset="0.1" stop-color="#FFDD55" />
-        <stop offset="0.5" stop-color="#FF543E" />
-        <stop offset="1" stop-color="#C837AB" />
+        <stop stopColor="#FFDD55" />
+        <stop offset="0.1" stopColor="#FFDD55" />
+        <stop offset="0.5" stopColor="#FF543E" />
+        <stop offset="1" stopColor="#C837AB" />
       </radialGradient>
       <radialGradient
         id="paint1_radial_1197_100659"
@@ -46,9 +46,9 @@ export const InstagramIcon = () => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(25.9749 3.16105) rotate(78.681) scale(13.2905 54.7837)"
       >
-        <stop stop-color="#3771C8" />
-        <stop offset="0.128" stop-color="#3771C8" />
-        <stop offset="1" stop-color="#6600FF" stop-opacity="0" />
+        <stop stopColor="#3771C8" />
+        <stop offset="0.128" stopColor="#3771C8" />
+        <stop offset="1" stopColor="#6600FF" stopOpacity="0" />
       </radialGradient>
     </defs>
   </svg>

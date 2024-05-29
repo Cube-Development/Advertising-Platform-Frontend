@@ -46,7 +46,7 @@ export const ManagerNewProjectCard: FC<ManagerNewProjectCardProps> = ({
   }, []);
 
   return (
-    <div className={styles.wrapper}>
+    <div className={`${styles.wrapper} border__gradient`}>
       <div className={styles.card}>
         <div className={styles.card__id}>
           <p>№ {card.id}</p>

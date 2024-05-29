@@ -1,5 +1,5 @@
 import { CustomerList } from "@features/customerList";
-import React, { FC } from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
@@ -11,15 +11,15 @@ export const Customers: FC<CustomersProps> = ({ page }) => {
   const { t } = useTranslation();
 
   return (
-    <section className={styles.customer}>
-      <div className="container">
-        <h1 className={styles.customer__title}>
-          {t(`${page}.customers_title`)}
-        </h1>
+    <div className="container">
+      <section className={`${styles.customer}`}>
+        <div className={styles.customer__title}>
+          <p>{t(`${page}.customers_title`)}</p>
+        </div>
         <CustomerList
           customers={t(`${page}.customers_list`, { returnObjects: true })}
         />
-      </div>
-    </section>
+      </section>
+    </div>
   );
 };

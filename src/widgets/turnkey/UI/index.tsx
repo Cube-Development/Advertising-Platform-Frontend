@@ -13,24 +13,24 @@ export const Turnkey: FC<TurnkeyProps> = ({ page }) => {
   const { t } = useTranslation();
 
   return (
-    <section className={styles.turnkey__wrapper}>
-      <div className="container">
-        <div className={styles.turnkey__row}>
-          <KeyIcon />
-          <h1 className={styles.turnkey__title}>
-            {t(`${page}.turnkey_title`)}
-          </h1>
+    <section className={styles.wrapper}>
+      <div className={styles.top}>
+        <div className={styles.title}>
+          <div>
+            <KeyIcon />
+          </div>
+          <p>{t(`${page}.turnkey_title`)}</p>
         </div>
-
-        <h2 className={styles.turnkey__subtitle}>
-          {t(`${page}.turnkey_subtitle`)}
-        </h2>
-        <p className={styles.turnkey__text}>{t(`${page}.turnkey_text`)}</p>
-        <PriceList
-          tarifs={t(`${page}.tarifs_list`, { returnObjects: true })}
-          buyBtn={<BuyTarif />}
-        />
+        <div className={styles.subtitle}>
+          <p>{t(`${page}.turnkey_subtitle`)}</p>
+        </div>
+        <p className={styles.text}>{t(`${page}.turnkey_text`)}</p>
       </div>
+
+      <PriceList
+        tarifs={t(`${page}.tarifs_list`, { returnObjects: true })}
+        buyBtn={<BuyTarif />}
+      />
     </section>
   );
 };

@@ -14,7 +14,6 @@ export const CountdownTimer: FC<CountdownTimerProps> = ({ date_to, time }) => {
   const hour: number = parseInt(time.split(":")[0]);
   const minute: number = parseInt(time.split(":")[1]);
   const finishTime: Date = new Date(year, month, day, hour, minute, 0);
-  //   console.log("date", date);
   const [[diffDays, diffH, diffM, diffS], setDiff] = useState<number[]>([
     0, 0, 0, 0,
   ]);
@@ -24,7 +23,6 @@ export const CountdownTimer: FC<CountdownTimerProps> = ({ date_to, time }) => {
 
   useEffect(() => {
     const diff = (finishTime.getTime() - new Date().getTime()) / 1000;
-    // console.log(finishTime, diff)
     if (diff < 0) {
       setIsTimeout(true);
       return;
@@ -45,7 +43,6 @@ export const CountdownTimer: FC<CountdownTimerProps> = ({ date_to, time }) => {
     const timerID = setInterval(() => {
       setTick(!tick);
     }, 1000);
-    console.log("timerID", timerID);
     setTimerID(timerID);
     return () => clearInterval(timerID);
   }, [tick]);

@@ -1,21 +1,58 @@
 .income__wrapper {
   display: grid;
-}
+  grid-auto-flow: row;
+  align-content: space-between;
+  column-gap: 10px;
+  text-align: center;
+  grid-area: item2;
 
-.income__title {
-  color: var(--Personal-colors-black);
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-}
+  .income__title {
+    color: var(--choosen-text);
+    // font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    font-size: var(--font-size-text-accent-xl);
 
-.income__cash {
-  color: var(--Personal-colors-black);
-  font-size: 32px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: normal;
-  display: grid;
-  align-items: flex-end;
+    @media (max-width: 992px) {
+      font-size: var(--font-size-text-accent-lg);
+    }
+
+    @media (max-width: 768px) {
+      font-size: var(--font-size-text-accent-md);
+    }
+
+    @media (max-width: 576px) {
+      font-size: var(--font-size-text-accent-sm);
+    }
+
+    @media (max-width: 375px) {
+      font-size: var(--font-size-text-accent-xs);
+    }
+  }
+
+  .income__cash {
+    color: var(--Personal-colors-black);
+    // font-size: 32px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    font-size: var(--font-size-title-main-xl);
+
+    @media (max-width: 992px) {
+      font-size: var(--font-size-title-main-lg);
+    }
+
+    @media (max-width: 768px) {
+      font-size: var(--font-size-title-main-md);
+    }
+
+    @media (max-width: 576px) {
+      font-size: var(--font-size-title-main-sm);
+    }
+
+    @media (max-width: 375px) {
+      font-size: var(--font-size-title-main-xs);
+    }
+  }
 }

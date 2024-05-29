@@ -19,7 +19,7 @@ export const AdvDevProjectCard: FC<AdvDevProjectCardProps> = ({
   const { typeFilter } = useAppSelector((state) => state.filter);
 
   return (
-    <div className={styles.card}>
+    <div className={`${styles.card} border__gradient`}>
       <div className={styles.card__title}>
         <p>{card.name}</p>
         <div>

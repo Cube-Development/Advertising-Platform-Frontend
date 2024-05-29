@@ -73,7 +73,10 @@ export const BarProfileFilter: FC<BarProfileFilterProps> = ({
   };
 
   return (
-    <div className={styles.types}>
+    <div
+      style={{ "--borderRadius": "20px" } as React.CSSProperties}
+      className={`${styles.types} `}
+    >
       <ul
         className={
           page === pageFilter.catalog || pageFilter.createOrderFiles

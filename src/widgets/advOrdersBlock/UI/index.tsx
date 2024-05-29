@@ -43,7 +43,6 @@ export const AdvOrdersBlock: FC = () => {
   // check queries for project types to show current orders
   useEffect(() => {
     if (order_type) {
-      console.log(order_type);
       advertiserProjectTypes.map((type) => {
         if (order_type === type.type) {
           dispatch(filterSlice.actions.setTypeFilter(type.type));

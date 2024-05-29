@@ -9,21 +9,19 @@ import {
 } from "@shared/assets";
 import { useTranslation } from "react-i18next";
 import { FILES } from "@shared/config/common";
-import { IAddFile } from "@shared/types/file";
 import { formatFileSize } from "@shared/ui/formatFileSize";
-import { DateListProps, FileProps } from "@shared/types/createPost";
+import { FileProps } from "@shared/types/createPost";
 
-interface AddFilesProps {}
-
-export const AddFiles: FC<FileProps> = ({ onChange }) => {
+export const AddFiles: FC<FileProps> = ({ onChange, currentFiles }) => {
   const { t } = useTranslation();
-  const [files, setFiles] = useState<IAddFile[]>([]);
+  const [files, setFiles] = useState<File[]>(currentFiles ? currentFiles : []);
   const [dragActive, setDragActive] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (e.target.files && e.target.files[0]) {
       setFiles([...e.target.files]);
+      onChange([...e.target.files]);
     }
   };
 
@@ -45,13 +43,14 @@ export const AddFiles: FC<FileProps> = ({ onChange }) => {
     e.preventDefault();
     setDragActive(false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      console.log([...e.dataTransfer.files]);
       setFiles([...e.dataTransfer.files]);
+      onChange([...e.dataTransfer.files]);
     }
   };
 
-  const handleRemoveFile = (file: IAddFile) => {
+  const handleRemoveFile = (file: File) => {
     setFiles(files.filter((item) => item !== file));
+    onChange([]);
   };
 
   return (
@@ -70,8 +69,8 @@ export const AddFiles: FC<FileProps> = ({ onChange }) => {
               <div className={styles.item__left}>
                 <FileIcon />
                 <div className={styles.item__text}>
-                  <p>{file.name}</p>
-                  <span>{formatFileSize(file.size)}</span>
+                  <p>{file?.name}</p>
+                  <span>{formatFileSize(file?.size)}</span>
                 </div>
               </div>
               <div className={styles.item__right}>
