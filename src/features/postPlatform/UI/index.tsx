@@ -19,8 +19,11 @@ import {
 import { AlertDialogAction } from "@radix-ui/react-alert-dialog";
 import { X } from "lucide-react";
 import { platformTypesNum } from "@shared/config/platformTypes";
-import { EmptyPost } from "@entities/postDisplay/postDispayTelegram/UI/emptyPost";
-import { PostDispayInstagram, PostDispayTelegram } from "@entities/postDisplay";
+import {
+  PostDispayInstagram,
+  PostDispayTelegram,
+} from "@shared/ui/postDisplay";
+import { EmptyPost } from "@shared/ui/postDisplay/postDispayTelegram/UI/emptyPost";
 
 interface PostPlatformProps {
   card: IPostChannel;
@@ -43,12 +46,12 @@ export const PostPlatform: FC<PostPlatformProps> = ({
     const form: ICreatePostForm = getValues();
     const datetime = form.datetime;
     const currentCard: IDatetime = (datetime.orders || []).find(
-      (item) => item.order_id === card.id,
+      (item) => item.order_id === card.id
     ) || {
       order_id: card.id,
     };
     const allCards = (datetime.orders || []).filter(
-      (item) => item.order_id !== card.id,
+      (item) => item.order_id !== card.id
     );
     currentCard.time_from = timeList[0];
     currentCard.time_to = timeList[1];
@@ -61,12 +64,12 @@ export const PostPlatform: FC<PostPlatformProps> = ({
     const form: ICreatePostForm = getValues();
     const datetime = form.datetime;
     const currentCard: IDatetime = (datetime.orders || []).find(
-      (item) => item.order_id === card.id,
+      (item) => item.order_id === card.id
     ) || {
       order_id: card.id,
     };
     const allCards = (datetime.orders || []).filter(
-      (item) => item.order_id !== card.id,
+      (item) => item.order_id !== card.id
     );
 
     if (dateList.length === 1) {

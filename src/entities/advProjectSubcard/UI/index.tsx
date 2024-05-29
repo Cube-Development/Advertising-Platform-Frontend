@@ -29,7 +29,10 @@ import {
 } from "@shared/ui/shadcn-ui/ui/alert-dialog";
 import { X } from "lucide-react";
 import { platformTypesNum } from "@shared/config/platformTypes";
-import { PostDispayInstagram, PostDispayTelegram } from "@entities/postDisplay";
+import {
+  PostDispayInstagram,
+  PostDispayTelegram,
+} from "@shared/ui/postDisplay";
 
 interface AdvProjectSubcardProps {
   subcard: IAdvProjectSubcard;

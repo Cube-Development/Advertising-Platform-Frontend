@@ -18,7 +18,10 @@ import {
   AlertDialogContent,
   AlertDialogTrigger,
 } from "@shared/ui/shadcn-ui/ui/alert-dialog";
-import { PostDispayInstagram, PostDispayTelegram } from "@entities/postDisplay";
+import {
+  PostDispayInstagram,
+  PostDispayTelegram,
+} from "@shared/ui/postDisplay";
 import { X } from "lucide-react";
 import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import { useGetPostQuery } from "@shared/store/services/getPostService";

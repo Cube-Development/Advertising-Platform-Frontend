@@ -234,7 +234,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
 
   return (
     <>
-      {!isLoading && (
+      {isLoading && (
         <div className="fixed w-[100vw] h-[100svh] z-50 backdrop-blur-xl flex flex-col justify-center items-center transition-all">
           <img src={loadingAnimation} alt="isLoading..." className="w-[14vw]" />
           <p className="-mt-10 text-[44px] font-medium text-black/60">

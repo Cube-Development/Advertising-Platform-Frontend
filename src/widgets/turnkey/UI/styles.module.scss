@@ -14,22 +14,26 @@
   @media (max-width: 992px) {
     row-gap: var(--row-gap-content-lg);
     margin: var(--margin-section-lg) auto;
+    padding: calc(var(--margin-section-lg) / 2);
   }
 
   @media (max-width: 768px) {
     border-radius: 0;
     row-gap: var(--row-gap-content-md);
     margin: var(--margin-section-md) auto;
+    padding: calc(var(--margin-section-md) / 2);
   }
 
   @media (max-width: 576px) {
     row-gap: var(--row-gap-content-sm);
     margin: var(--margin-section-sm) auto;
+    padding: calc(var(--margin-section-sm) / 2);
   }
 
   @media (max-width: 375px) {
     row-gap: var(--row-gap-content-xs);
     margin: var(--margin-section-xs) auto;
+    padding: calc(var(--margin-section-xs) / 2);
   }
 
   .top {

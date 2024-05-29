@@ -3,6 +3,7 @@
   display: grid;
   grid-auto-flow: row;
   row-gap: 30px;
+  z-index: 0;
 
   .title {
     color: var(--Personal-colors-black);
