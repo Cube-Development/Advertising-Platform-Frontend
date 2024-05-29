@@ -137,7 +137,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
                     content_type: ContentType.file,
                     content: data.file_name,
                   });
-                })
+                }),
               );
             }
             if (post?.media) {
@@ -161,10 +161,10 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
                     content_type: getContentType(media),
                     content: data.file_name,
                   });
-                })
+                }),
               );
             }
-          })
+          }),
         );
 
         // Создание постов
@@ -186,7 +186,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
                   action: <ToastAction altText="Ok">Ok</ToastAction>,
                 });
               });
-          })
+          }),
         );
 
         // Создание дат заказа и оплата
