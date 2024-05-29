@@ -81,7 +81,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
 
   const handleClickOutside = () => {
     const state = (accordionRef.current! as HTMLElement).getAttribute(
-      "data-state"
+      "data-state",
     );
     state === accordionTypes.open
       ? setSubcardOpen(true)
