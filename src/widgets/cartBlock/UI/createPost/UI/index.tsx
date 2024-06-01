@@ -1,17 +1,17 @@
-import { FC } from "react";
-import styles from "./styles.module.scss";
-import { useTranslation } from "react-i18next";
-import { ProtectIcon3 } from "@shared/assets";
 import { CreatePosts } from "@features/createPost";
-import { CART } from "@shared/config/common";
-import { ICart } from "@shared/types/cart";
-import { useCreateCartMutation } from "@shared/store/services/advOrdersService";
-import { useAppSelector } from "@shared/store";
-import { useNavigate } from "react-router-dom";
+import { ProtectIcon3 } from "@shared/assets";
+import { BREAKPOINT, CART } from "@shared/config/common";
 import { paths } from "@shared/routing";
-import Cookies from "js-cookie";
-import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
+import { useAppSelector } from "@shared/store";
+import { useCreateCartMutation } from "@shared/store/services/advOrdersService";
+import { ICart } from "@shared/types/cart";
 import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
+import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
+import Cookies from "js-cookie";
+import { FC, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import styles from "./styles.module.scss";
 
 interface CreatePostProps {
   cart: ICart;
@@ -20,6 +20,17 @@ interface CreatePostProps {
 export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
   const { toast } = useToast();
   const { t } = useTranslation();
+  const [screen, setScreen] = useState<number>(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreen(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   // let { views, cost, subs } = cards.reduce(
   //   (totals, channel) => {
@@ -70,37 +81,47 @@ export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
   return (
     <div className={styles.sticky_block}>
       <div className={styles.wrapper}>
-        <div className={styles.top}>
-          <div>
-            <ProtectIcon3 />
-          </div>
-          <p>{t("cart.create_post.title")}</p>
-          <span>{t("cart.create_post.text")}</span>
-        </div>
-        <div className={styles.data}>
-          <div className={styles.data__row}>
-            <p>{t("cart.create_post.subscribers")}</p>
-            <span>{cart?.channels?.length?.toLocaleString()}</span>
-          </div>
-          <div className={styles.data__row}>
-            <p>{t("cart.create_post.views")}</p>
-            <span>{cart?.coverage?.toLocaleString()}</span>
-          </div>
-          <div className={styles.data__row}>
-            <p>{t("cart.create_post.commission")}</p>
-            <span>{CART.commission}%</span>
-          </div>
-        </div>
+        {screen >= BREAKPOINT.MD && (
+          <>
+            <div className={styles.icon}>
+              <div>
+                <ProtectIcon3 />
+              </div>
+            </div>
+            <div className={styles.data}>
+              <div className={styles.data__text}>
+                <p>{t("cart.create_post.title")}</p>
+                <span>{t("cart.create_post.text")}</span>
+              </div>
+              <div className={styles.data__info}>
+                <div className={styles.info}>
+                  <p>{t("cart.create_post.subscribers")}</p>
+                  <span>{cart?.channels?.length?.toLocaleString()}</span>
+                </div>
+                <div className={styles.info}>
+                  <p>{t("cart.create_post.views")}</p>
+                  <span>{cart?.coverage?.toLocaleString()}</span>
+                </div>
+                <div className={styles.info}>
+                  <p>{t("cart.create_post.commission")}</p>
+                  <span>{CART.commission}%</span>
+                </div>
+              </div>
+            </div>
+          </>
+        )}
         <div className={styles.finnaly}>
-          <p>{t("cart.create_post.commission")}:</p>
-          <span>
-            {cart?.amount?.toLocaleString()} {t("symbol")}
-          </span>
-        </div>
-        <div
-          className={`${styles.button} ${!cart?.channels?.length && "deactive"}`}
-        >
-          <CreatePosts onClick={handleCreateCart} />
+          <div className={styles.finnaly__text}>
+            <p>{t("cart.create_post.finnaly")}:</p>
+            <span>
+              {cart?.amount?.toLocaleString()} {t("symbol")}
+            </span>
+          </div>
+          <div
+            className={`${styles.button} ${!cart?.channels?.length && "deactive"}`}
+          >
+            <CreatePosts onClick={handleCreateCart} />
+          </div>
         </div>
       </div>
     </div>

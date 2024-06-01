@@ -1,22 +1,30 @@
 import { AddCart } from "@features/addCart";
 import { AddToBasket } from "@features/addToBasket";
 import { CatalogCard } from "@features/catalogCard";
+import { SkeletonCatalogCard } from "@features/catalogCard/skeletonCatalogCard";
 import { FormatList } from "@features/formatList";
 import { SaveCart } from "@features/saveCart";
+import { CartIcon, SadSmileIcon } from "@shared/assets";
+import { INTERSECTION_ELEMENTS } from "@shared/config/common";
+import { pageFilter } from "@shared/config/pageFilter";
 import { IPlatform } from "@shared/types/platform";
+import { Accordion } from "@shared/ui/shadcn-ui/ui/accordion";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { CartIcon, SadSmileIcon } from "@shared/assets";
-import { pageFilter } from "@shared/config/pageFilter";
 
 interface CartListProps {
   channels: IPlatform[];
   // setValue: UseFormSetValue<getCatalogReq>;
   onChangeCard: (cart: IPlatform) => void;
+  isLoading: boolean;
 }
 
-export const CartList: FC<CartListProps> = ({ channels, onChangeCard }) => {
+export const CartList: FC<CartListProps> = ({
+  channels,
+  onChangeCard,
+  isLoading,
+}) => {
   const { t } = useTranslation();
 
   return (
@@ -24,16 +32,16 @@ export const CartList: FC<CartListProps> = ({ channels, onChangeCard }) => {
       <div className={styles.top}>
         <div className={styles.title}>
           <CartIcon />
-          <h1>{t("cart.cart")}</h1>
+          <p>{t("cart.cart")}</p>
         </div>
         <div className={styles.buttons}>
           <SaveCart />
           <AddCart />
         </div>
       </div>
-      <div className={styles.cards}>
-        {channels?.length ? (
-          channels?.map((card) => (
+      {channels?.length ? (
+        <Accordion type="single" collapsible className={styles.cards}>
+          {channels?.map((card) => (
             <CatalogCard
               page={pageFilter.cart}
               card={card}
@@ -42,16 +50,20 @@ export const CartList: FC<CartListProps> = ({ channels, onChangeCard }) => {
               FormatList={FormatList}
               onChangeCard={onChangeCard}
             />
-          ))
-        ) : (
-          <div className={styles.empty__block}>
-            <div className={styles.icon}>
-              <SadSmileIcon />
-            </div>
-            <h3 className={styles.title}>{t("cart.empty")}</h3>
+          ))}
+          {isLoading &&
+            Array.from({ length: INTERSECTION_ELEMENTS.catalog }).map(
+              (_, index) => <SkeletonCatalogCard key={index} />,
+            )}
+        </Accordion>
+      ) : (
+        <div className={styles.empty__block}>
+          <div className={styles.icon}>
+            <SadSmileIcon />
           </div>
-        )}
-      </div>
+          <h3 className={styles.title}>{t("cart.empty")}</h3>
+        </div>
+      )}
     </div>
   );
 };

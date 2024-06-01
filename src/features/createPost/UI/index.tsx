@@ -16,7 +16,7 @@ export const CreatePosts: FC<CreatePostProps> = ({ onClick }) => {
       onClick={onClick}
       className={styles.button}
     >
-      {t(`cart_btn.create_post`)}
+      <p>{t(`cart_btn.create_post`)}</p>
       <ArrowLongHorizontalIcon className="default__icon__white" />
     </MyButton>
   );

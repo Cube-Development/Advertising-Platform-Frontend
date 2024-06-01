@@ -104,22 +104,20 @@ export const CatalogList: FC<CatalogListProps> = ({
           />
         )}
       </div>
-      <Accordion type="single" collapsible>
-        <div className={styles.card__list}>
-          {channels?.map((card) => (
-            <CatalogCard
-              card={card}
-              key={card.id}
-              AddToBasketBtn={AddToBasket}
-              FormatList={FormatList}
-              onChangeCard={onChangeCard}
-            />
-          ))}
-          {isLoading &&
-            Array.from({ length: INTERSECTION_ELEMENTS.catalog }).map(
-              (_, index) => <SkeletonCatalogCard key={index} />,
-            )}
-        </div>
+      <Accordion type="single" collapsible className={styles.card__list}>
+        {channels?.map((card) => (
+          <CatalogCard
+            card={card}
+            key={card.id}
+            AddToBasketBtn={AddToBasket}
+            FormatList={FormatList}
+            onChangeCard={onChangeCard}
+          />
+        ))}
+        {isLoading &&
+          Array.from({ length: INTERSECTION_ELEMENTS.catalog }).map(
+            (_, index) => <SkeletonCatalogCard key={index} />,
+          )}
       </Accordion>
       {isNotEmpty ? (
         // <DinamicPagination onChange={handleOnChangePage} />
