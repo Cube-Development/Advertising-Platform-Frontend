@@ -1009,6 +1009,9 @@
       }
     },
 
+    "see_more": "Развернуть",
+    "see_less": "Свернуть",
+
     "generation_btn": "Сгенерировать",
 
     "current_cart": {

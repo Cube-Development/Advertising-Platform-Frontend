@@ -1,6 +1,7 @@
 import { GenerateGuestId } from "@features/generateGuestId";
 import { GetUserId } from "@features/getUserId";
 import {
+  BREAKPOINT,
   INTERSECTION_ELEMENTS,
   PLATFORM_PARAMETERS,
 } from "@shared/config/common";
@@ -40,6 +41,19 @@ export const CatalogBlock: FC = () => {
     return i18n.language === lang.name;
   });
   const elements = INTERSECTION_ELEMENTS.catalog;
+  const [screen, setScreen] = useState<number>(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreen(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const { watch, reset, setValue, getValues } = useForm<getCatalogReq>({
     defaultValues: {
@@ -302,17 +316,20 @@ export const CatalogBlock: FC = () => {
       <div className={`${styles.wrapper}`}>
         <div className={styles.title}>{t("catalog.catalog")}</div>
         <div className={styles.content}>
-          <div className={styles.left}>
-            <CatalogSearch
-              getValues={getValues}
-              reset={reset}
-              setValue={setValue}
-            />
-          </div>
+          {screen >= BREAKPOINT.LG && (
+            <div className={styles.left}>
+              <CatalogSearch
+                getValues={getValues}
+                reset={reset}
+                setValue={setValue}
+              />
+            </div>
+          )}
           <div className={styles.right}>
             <div className={styles.content__right} ref={catalogTopRef}>
               <CatalogList
                 getValues={getValues}
+                reset={reset}
                 setValue={setValue}
                 page={formFields.page}
                 channels={cards || []}

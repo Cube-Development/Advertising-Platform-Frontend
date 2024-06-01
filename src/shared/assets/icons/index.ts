@@ -40,6 +40,7 @@ export { MoreIcon } from "./more";
 export { NoIcon } from "./no";
 export { OfferIcon } from "./offer";
 export { PaperAirplaneIcon } from "./paperAirplane";
+export { ParametersIcon } from "./parameters";
 export { PencilIcon } from "./pencil";
 export { PlatformIcon } from "./platform";
 export { PlusIcon } from "./plus";

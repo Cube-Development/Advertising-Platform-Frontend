@@ -9,6 +9,17 @@ export const FormatList: FC<IFormatListProps> = ({
   selectedFormat,
 }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
+  const [screen, setScreen] = useState<number>(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreen(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   const menuRef = useRef<HTMLDivElement>(null);
 
   const closeMenu = () => {
@@ -53,7 +64,11 @@ export const FormatList: FC<IFormatListProps> = ({
             className={isMenuOpen ? "active__icon" : "default__icon__black"}
           />
         </div>
-        <p>{selectedFormat?.format_name.big}</p>
+        <p>
+          {screen > 576
+            ? selectedFormat?.format_name.big
+            : selectedFormat?.format_name.small}
+        </p>
       </div>
 
       {isMenuOpen && (
@@ -68,7 +83,9 @@ export const FormatList: FC<IFormatListProps> = ({
                   selectedFormat?.format === format.format ? styles.active : ""
                 }
               >
-                {format.format_name.big}
+                {screen > 576
+                  ? format.format_name.big
+                  : format.format_name.small}
               </li>
             ))}
           </ul>

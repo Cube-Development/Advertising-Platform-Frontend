@@ -5,6 +5,15 @@
   text-align: center;
   justify-content: space-between;
   padding: 5px 15px;
+  border-radius: 0 0 15px 15px;
+
+  @media (max-width: 768px) {
+    grid-template: 1fr / 1fr 2fr;
+  }
+
+  @media (max-width: 576px) {
+    grid-template: none;
+  }
 
   .price {
     display: grid;
