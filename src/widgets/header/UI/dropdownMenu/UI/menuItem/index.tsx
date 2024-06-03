@@ -57,7 +57,7 @@ export const MenuItem: React.FC<IMenuItems> = ({
             </div>
           </AccordionTrigger>
         ) : (
-          <Link to={item.item.path!} onClick={onChange}>
+          <Link to={item.item.path!} onClick={() => onChange(item.item.path!)}>
             <AccordionTrigger>
               <div className={`${styles.row} ${isActive ? styles.active : ""}`}>
                 <div className={styles.row__title}>
@@ -69,17 +69,19 @@ export const MenuItem: React.FC<IMenuItems> = ({
           </Link>
         )}
 
-        {/* {item.subItems && ( */}
         <AccordionContent>
           <ul>
             {item.subItems?.map((subItem) => (
-              <Link to={subItem.path!} key={subItem.title} onClick={onChange}>
+              <Link
+                to={subItem.path!}
+                key={subItem.title}
+                onClick={() => onChange(item.item.path!)}
+              >
                 <li>{t(subItem.title!)}</li>
               </Link>
             ))}
           </ul>
         </AccordionContent>
-        {/* )} */}
       </div>
     </AccordionItem>
   );

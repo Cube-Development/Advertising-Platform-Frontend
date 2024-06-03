@@ -39,13 +39,17 @@
   .top {
     display: grid;
     grid-auto-flow: row;
+    row-gap: 20px;
+
+    @media (max-width: 768px) {
+      row-gap: 15px;
+    }
 
     .title {
       display: grid;
       grid-auto-flow: column;
       column-gap: 20px;
       align-items: center;
-      margin-bottom: 20px;
       justify-content: start;
 
       color: var(--Personal-colors-black);
@@ -84,7 +88,6 @@
     .subtitle {
       display: grid;
       justify-content: start;
-      margin-bottom: 20px;
 
       p {
         border-radius: 12px;

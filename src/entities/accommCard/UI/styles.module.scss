@@ -1,4 +1,4 @@
-.accomms {
+.wrapper {
   grid-area: item1;
   background: linear-gradient(
     90deg,
@@ -8,19 +8,29 @@
   border-radius: 40px 40px 0px 40px;
   padding: 30px 40px 30px 30px;
   width: 100%;
+  height: 100%;
 
   &.vencom {
     color: var(--Personal-colors-White);
     background: var(--Gradients-Gradient-1);
     grid-area: item2;
   }
+}
+
+.accomms {
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 30px;
 
   ul {
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 30px;
     text-align: left;
     padding-left: 20px;
 
     li {
-      margin-bottom: 30px;
+      // margin-bottom: 30px;
       font-size: 14px;
       font-style: normal;
       font-weight: 700;
@@ -28,13 +38,15 @@
       list-style: disc;
     }
   }
+
   &__row {
     display: grid;
     grid-auto-flow: column;
     justify-content: center;
+    align-items: center;
     text-align: center;
     column-gap: 10px;
-    margin-bottom: 30px;
+    // margin-bottom: 30px;
 
     .title {
       text-align: center;

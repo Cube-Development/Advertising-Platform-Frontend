@@ -1,11 +1,14 @@
 import {
   BookIcon,
+  CalculatorIcon,
   CampaignIcon,
+  KeyIcon,
   OfferIcon,
   PlatformIcon,
   TemplateIcon,
   WalletIcon,
 } from "@shared/assets";
+import { addChannelQueries } from "@shared/config/addChannelQueries";
 import { projectTypesFilter } from "@shared/config/projectFilter";
 import { paths } from "@shared/routing";
 
@@ -79,4 +82,48 @@ export const commonMenu = [
     ],
   },
   { item: { title: "burger_menu.base", path: paths.faq, img: BookIcon } },
+];
+
+export const advertiserMenuNotAuth = [
+  {
+    item: {
+      title: "pages.turnkey",
+      path: paths.turnkey,
+      img: KeyIcon,
+    },
+  },
+  {
+    item: {
+      title: "pages.catalog",
+      path: paths.catalog,
+    },
+  },
+  {
+    item: {
+      title: "pages.platformOwner",
+      path: paths.mainBlogger,
+    },
+  },
+];
+
+export const bloggerMenuNotAuth = [
+  {
+    item: {
+      title: "pages.calculateIncome",
+      path: `${paths.mainBlogger}#calculateIncome`,
+      img: CalculatorIcon,
+    },
+  },
+  {
+    item: {
+      title: "pages.addPlatform",
+      path: `${paths.addPlatform}?add_channel=${addChannelQueries.main}`,
+    },
+  },
+  {
+    item: {
+      title: "pages.advertiser",
+      path: paths.main,
+    },
+  },
 ];

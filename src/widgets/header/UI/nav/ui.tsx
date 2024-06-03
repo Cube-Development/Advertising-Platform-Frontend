@@ -3,15 +3,22 @@ import { roles } from "@shared/config/roles";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
-import { advertiserNavbar, bloggerNavbar, nonAuthNavbar } from "./config";
+import {
+  advertiserNavbar,
+  bloggerNavbar,
+  notAuthAdvertiserNavbar,
+  notAuthBloggerNavbar,
+} from "./config";
 import styles from "./styles.module.scss";
+import { paths } from "@shared/routing";
 
 interface NavProps {
   isAuth: boolean;
   currentRole: roles;
+  toggleRole: (role: roles) => void;
 }
 
-export const Nav: FC<NavProps> = ({ isAuth, currentRole }) => {
+export const Nav: FC<NavProps> = ({ isAuth, currentRole, toggleRole }) => {
   const router = useNavigate();
   const location = useLocation();
 
@@ -26,44 +33,37 @@ export const Nav: FC<NavProps> = ({ isAuth, currentRole }) => {
         });
       }
     }
+
+    if (href === paths.main) {
+      toggleRole(roles.advertiser);
+    } else if (href === paths.mainBlogger) {
+      toggleRole(roles.blogger);
+    }
   };
 
   const { t } = useTranslation();
 
+  const currentNavbar =
+    isAuth && currentRole === roles.advertiser
+      ? advertiserNavbar
+      : isAuth && currentRole === roles.blogger
+        ? bloggerNavbar
+        : !isAuth && currentRole === roles.advertiser
+          ? notAuthAdvertiserNavbar
+          : notAuthBloggerNavbar;
+
   return (
     <nav className={styles.wrapper}>
-      {isAuth && currentRole === roles.advertiser
-        ? advertiserNavbar.map((item, index) => (
-            <li
-              key={index}
-              onClick={() => handleNavigation(item.href)}
-              className={location.pathname === item.href ? styles.active : ""}
-            >
-              {item.img && <KeyIcon />}
-              {t(item.text)}
-            </li>
-          ))
-        : isAuth && currentRole === roles.blogger
-          ? bloggerNavbar.map((item, index) => (
-              <li
-                key={index}
-                onClick={() => handleNavigation(item.href)}
-                className={location.pathname === item.href ? styles.active : ""}
-              >
-                {item.img && <CalculatorIcon />}
-                {t(item.text)}
-              </li>
-            ))
-          : nonAuthNavbar.map((item, index) => (
-              <li
-                key={index}
-                onClick={() => handleNavigation(item.href)}
-                className={location.pathname === item.href ? styles.active : ""}
-              >
-                {item.img && <KeyIcon />}
-                {t(item.text)}
-              </li>
-            ))}
+      {currentNavbar.map((item, index) => (
+        <li
+          key={index}
+          onClick={() => handleNavigation(item.href)}
+          className={location.pathname === item.href ? styles.active : ""}
+        >
+          {item.img && <item.img />}
+          {t(item.text)}
+        </li>
+      ))}
     </nav>
   );
 };
