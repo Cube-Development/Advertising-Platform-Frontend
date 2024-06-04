@@ -1,4 +1,6 @@
 import { Registration } from "@features/registration";
+import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
+import { motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -77,111 +79,177 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  let custom = 0;
+
   return (
-    <section className={styles.wrapper}>
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={MAIN_PAGE_ANIMATION.viewport}
+      variants={MAIN_PAGE_ANIMATION.animationVision}
+      custom={custom++}
+      className={styles.wrapper}
+    >
       <div className="container">
         <div className={styles.content}>
-          <h1 className={styles.title}>{t(`${page}.how_title`)}</h1>
+          <motion.h1
+            custom={custom++}
+            variants={MAIN_PAGE_ANIMATION.animationUp}
+            className={styles.title}
+          >
+            {t(`${page}.how_title`)}
+          </motion.h1>
           {screen >= 992 ? (
             <div className={styles.steps}>
               <div className={styles.steps__column}>
-                <div className={styles.steps__column__items}>
+                <motion.div
+                  custom={custom++}
+                  variants={MAIN_PAGE_ANIMATION.animationUp}
+                  className={styles.steps__column__items}
+                >
                   <p>1</p>
                   <DecorativeElement />
                   <div className={styles.registration__xl}>
                     <span>{StepsList[0].stage}</span>
-                    <Registration />
+                    <motion.div
+                      custom={custom + 5}
+                      variants={MAIN_PAGE_ANIMATION.animationVision}
+                    >
+                      <Registration />
+                    </motion.div>
                   </div>
                   <div className={styles.text}></div>
-                </div>
+                </motion.div>
               </div>
               <div className={styles.gap} />
               <div className={styles.steps__column}>
-                <div className={`${styles.steps__column__items} ${styles.two}`}>
+                <motion.div
+                  custom={custom++}
+                  variants={MAIN_PAGE_ANIMATION.animationDown}
+                  className={`${styles.steps__column__items} ${styles.two}`}
+                >
                   <p>2</p>
                   <DecorativeElement />
                   <span>{StepsList[1].stage}</span>
                   <div className={styles.text}></div>
-                </div>
+                </motion.div>
               </div>
               <div className={styles.gap} />
               <div className={styles.steps__column}>
-                <div className={styles.steps__column__items}>
+                <motion.div
+                  custom={custom++}
+                  variants={MAIN_PAGE_ANIMATION.animationUp}
+                  className={styles.steps__column__items}
+                >
                   <p>3</p>
                   <DecorativeElement />
                   <span>{StepsList[2].stage}</span>
                   <div className={styles.text}></div>
-                </div>
+                </motion.div>
               </div>
               <div className={styles.gap} />
               <div className={styles.steps__column}>
-                <div
+                <motion.div
+                  custom={custom++}
+                  variants={MAIN_PAGE_ANIMATION.animationDown}
                   className={`${styles.steps__column__items} ${styles.four}`}
                 >
                   <p>4</p>
                   <DecorativeElement />
                   <span>{StepsList[3].stage}</span>
                   <div className={styles.text}></div>
-                </div>
+                </motion.div>
               </div>
               <div className={styles.gap} />
               <div className={styles.steps__column}>
-                <div className={styles.steps__column__items}>
+                <motion.div
+                  custom={custom++}
+                  variants={MAIN_PAGE_ANIMATION.animationUp}
+                  className={styles.steps__column__items}
+                >
                   <p>5</p>
                   <DecorativeElement />
                   <span>{StepsList[4].stage}</span>
-                </div>
+                </motion.div>
                 <div className={styles.text}></div>
               </div>
             </div>
           ) : screen < 992 && screen > 768 ? (
             <div className={styles.steps__md}>
               <div className={`${styles.steps__md__row} ${styles.one}`}>
-                <div className={styles.steps__md__row__items}>
+                <motion.div
+                  custom={custom++}
+                  variants={MAIN_PAGE_ANIMATION.animationLeft}
+                  className={styles.steps__md__row__items}
+                >
                   <div className={styles.registration}>
                     <span>{StepsList[0].stage}</span>
-                    <div>
+                    <motion.div
+                      custom={custom + 5}
+                      variants={MAIN_PAGE_ANIMATION.animationVision}
+                    >
                       <Registration />
-                    </div>
+                    </motion.div>
                   </div>
                   <DecorativeElementRow isRight={true} elements={18} />
                   <p>1</p>
-                </div>
+                </motion.div>
               </div>
               <div className={`${styles.steps__md__row} ${styles.two}`}>
                 <div></div>
-                <div className={styles.steps__md__row__items}>
+                <motion.div
+                  custom={custom++}
+                  variants={MAIN_PAGE_ANIMATION.animationRight}
+                  className={styles.steps__md__row__items}
+                >
                   <p>2</p>
                   <DecorativeElementRow isRight={false} elements={21} />
                   <span>{StepsList[1].stage}</span>
-                </div>
+                </motion.div>
               </div>
               <div className={`${styles.steps__md__row} ${styles.three}`}>
-                <div className={styles.steps__md__row__items}>
+                <motion.div
+                  custom={custom++}
+                  variants={MAIN_PAGE_ANIMATION.animationLeft}
+                  className={styles.steps__md__row__items}
+                >
                   <span>{StepsList[2].stage}</span>
                   <DecorativeElementRow isRight={true} elements={21} />
                   <p>3</p>
-                </div>
+                </motion.div>
               </div>
               <div className={`${styles.steps__md__row} ${styles.four}`}>
                 <div></div>
-                <div className={styles.steps__md__row__items}>
+                <motion.div
+                  custom={custom++}
+                  variants={MAIN_PAGE_ANIMATION.animationRight}
+                  className={styles.steps__md__row__items}
+                >
                   <p>4</p>
                   <DecorativeElementRow isRight={false} elements={13} />
                   <span>{StepsList[3].stage}</span>
-                </div>
+                </motion.div>
               </div>
               <div className={`${styles.steps__md__row} ${styles.five}`}>
-                <div className={styles.steps__md__row__items}>
+                <motion.div
+                  custom={custom++}
+                  variants={MAIN_PAGE_ANIMATION.animationLeft}
+                  className={styles.steps__md__row__items}
+                >
                   <span>{StepsList[4].stage}</span>
                   <DecorativeElementRow isRight={true} elements={8} />
                   <p>5</p>
-                </div>
+                </motion.div>
               </div>
             </div>
           ) : (
             <div className={styles.steps__xs}>
-              <div className={`${styles.steps__xs__row} ${styles.one}`}>
+              <motion.div
+                custom={custom++}
+                variants={MAIN_PAGE_ANIMATION.animationRight}
+                className={`${styles.steps__xs__row} ${styles.one}`}
+              >
                 <div className={`${styles.number} ${styles.left}`}>
                   <p>1</p>
                   <div className={styles.point} />
@@ -189,13 +257,20 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
                 <div>
                   <div className={styles.registration}>
                     <span>{StepsList[0].stage}</span>
-                    <div>
+                    <motion.div
+                      custom={custom++}
+                      variants={MAIN_PAGE_ANIMATION.animationVision}
+                    >
                       <Registration />
-                    </div>
+                    </motion.div>
                   </div>
                 </div>
-              </div>
-              <div className={`${styles.steps__xs__row} ${styles.two}`}>
+              </motion.div>
+              <motion.div
+                custom={custom++}
+                variants={MAIN_PAGE_ANIMATION.animationLeft}
+                className={`${styles.steps__xs__row} ${styles.two}`}
+              >
                 <div className={styles.text}>
                   <span>{StepsList[1].stage}</span>
                 </div>
@@ -203,8 +278,12 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
                   <div className={styles.point} />
                   <p>2</p>
                 </div>
-              </div>
-              <div className={`${styles.steps__xs__row} ${styles.three}`}>
+              </motion.div>
+              <motion.div
+                custom={custom++}
+                variants={MAIN_PAGE_ANIMATION.animationRight}
+                className={`${styles.steps__xs__row} ${styles.three}`}
+              >
                 <div className={`${styles.number} ${styles.left}`}>
                   <p>3</p>
                   <div className={styles.point} />
@@ -212,8 +291,12 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
                 <div className={styles.text}>
                   <span>{StepsList[2].stage}</span>
                 </div>
-              </div>
-              <div className={`${styles.steps__xs__row} ${styles.four}`}>
+              </motion.div>
+              <motion.div
+                custom={custom++}
+                variants={MAIN_PAGE_ANIMATION.animationLeft}
+                className={`${styles.steps__xs__row} ${styles.four}`}
+              >
                 <div className={styles.text}>
                   <span>{StepsList[3].stage}</span>
                 </div>
@@ -221,8 +304,12 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
                   <div className={styles.point} />
                   <p>4</p>
                 </div>
-              </div>
-              <div className={`${styles.steps__xs__row} ${styles.five}`}>
+              </motion.div>
+              <motion.div
+                custom={custom++}
+                variants={MAIN_PAGE_ANIMATION.animationRight}
+                className={`${styles.steps__xs__row} ${styles.five}`}
+              >
                 <div className={`${styles.number} ${styles.left}`}>
                   <p>5</p>
                   <div className={styles.point} />
@@ -230,12 +317,12 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
                 <div className={styles.text}>
                   <span>{StepsList[4].stage}</span>
                 </div>
-              </div>
+              </motion.div>
             </div>
           )}
         </div>
       </div>
       {/* <Registration /> */}
-    </section>
+    </motion.section>
   );
 };

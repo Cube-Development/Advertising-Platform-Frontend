@@ -4,6 +4,8 @@ import { KeyIcon } from "@shared/assets";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
+import { motion } from "framer-motion";
 
 interface TurnkeyProps {
   page: string;
@@ -11,26 +13,52 @@ interface TurnkeyProps {
 
 export const Turnkey: FC<TurnkeyProps> = ({ page }) => {
   const { t } = useTranslation();
-
+  let custom = 0;
   return (
-    <section className={styles.wrapper}>
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={MAIN_PAGE_ANIMATION.viewport}
+      variants={MAIN_PAGE_ANIMATION.animationVision}
+      custom={custom++}
+      className={styles.wrapper}
+    >
       <div className={styles.top}>
-        <div className={styles.title}>
+        <motion.div
+          custom={custom++}
+          variants={MAIN_PAGE_ANIMATION.animationUp}
+          className={styles.title}
+        >
           <div>
             <KeyIcon />
           </div>
           <p>{t(`${page}.turnkey_title`)}</p>
-        </div>
-        <div className={styles.subtitle}>
+        </motion.div>
+        <motion.div
+          custom={custom++}
+          variants={MAIN_PAGE_ANIMATION.animationUp}
+          className={styles.subtitle}
+        >
           <p>{t(`${page}.turnkey_subtitle`)}</p>
-        </div>
-        <p className={styles.text}>{t(`${page}.turnkey_text`)}</p>
+        </motion.div>
+        <motion.p
+          custom={custom++}
+          variants={MAIN_PAGE_ANIMATION.animationUp}
+          className={styles.text}
+        >
+          {t(`${page}.turnkey_text`)}
+        </motion.p>
       </div>
 
+      {/* <motion.div
+        custom={custom++}
+        variants={MAIN_PAGE_ANIMATION.animationVision}
+      > */}
       <PriceList
         tarifs={t(`${page}.tarifs_list`, { returnObjects: true })}
         buyBtn={<BuyTarif />}
       />
-    </section>
+      {/* </motion.div> */}
+    </motion.section>
   );
 };

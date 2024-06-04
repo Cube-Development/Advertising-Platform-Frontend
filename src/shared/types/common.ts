@@ -8,11 +8,8 @@ export interface ILogin {
 
 export interface IMenuItems {
   item: IMenuItem;
-  onChange: () => void;
+  onChange: (path?: string) => void;
   openTitle: string;
-  // toggleMenu?: () => void;
-  // chapter?: string;
-  // changeCharper: (title: string, haveSubitems: boolean) => void;
 }
 
 export interface IMenuItem {

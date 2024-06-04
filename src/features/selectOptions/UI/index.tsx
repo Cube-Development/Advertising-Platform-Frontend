@@ -1,5 +1,5 @@
 import { ArrowSmallVerticalIcon, InfoIcon } from "@shared/assets";
-import { PLATFORM_PARAMETERS } from "@shared/config/common";
+import { BREAKPOINT, PLATFORM_PARAMETERS } from "@shared/config/common";
 import { platformData } from "@shared/config/platformData";
 import { IOption } from "@shared/types/common";
 import { ISelectOption } from "@shared/types/translate";
@@ -21,6 +21,7 @@ interface SelectOptionsProps {
   isCatalogPlatform?: boolean;
   getValues?: UseFormGetValues<any>;
   defaultValues?: IOption | number[];
+  isPlatformFilter?: boolean;
 }
 
 export const SelectOptions: FC<SelectOptionsProps> = ({
@@ -36,6 +37,7 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
   isCatalogPlatform,
   getValues,
   defaultValues,
+  isPlatformFilter,
 }) => {
   const { t } = useTranslation();
   const allOptions: IOption[] = isFilter
@@ -59,6 +61,17 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
 
   const [isMenuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const [screen, setScreen] = useState<number>(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreen(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   const allText: ISelectOption = isFilter
     ? { title: t(textData) }
@@ -142,18 +155,20 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
     <div
       className={`${isFilter ? styles.filter__wrapper : styles.parameters} ${isRow ? styles.wrapper__row : styles.wrapper}`}
     >
-      <div className={styles.left}>
-        {isFilter ? (
-          <>
+      {isFilter ? (
+        screen >= BREAKPOINT.MD ? (
+          <div className={styles.left}>
             <p>{allText?.title}:</p>
-          </>
+          </div>
         ) : (
-          <>
-            <p>{allText?.title}</p>
-            {allText?.text && <InfoIcon />}
-          </>
-        )}
-      </div>
+          <></>
+        )
+      ) : (
+        <div className={styles.left}>
+          <p>{allText?.title}</p>
+          {allText?.text && <InfoIcon />}
+        </div>
+      )}
 
       <div className={styles.menu} ref={menuRef}>
         <button
@@ -161,7 +176,7 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
           onClick={handleButtonClick}
           className={`
           ${isFilter ? styles.filter : ""}  
-          
+        
           ${
             type === platformData.category && defaultValues
               ? styles.disabled__menu
@@ -175,11 +190,15 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
             {single ? (
               <div className={styles.filter}>
                 {selectedOption?.img ? <selectedOption.img /> : null}
-                <span>
-                  {selectedOption
-                    ? selectedOption?.name
-                    : allText.default_value}
-                </span>
+                {(!isFilter ||
+                  screen >= BREAKPOINT.SM ||
+                  !isPlatformFilter) && (
+                  <span>
+                    {selectedOption
+                      ? selectedOption.name
+                      : allText.default_value}
+                  </span>
+                )}
               </div>
             ) : (
               <span>
@@ -229,7 +248,9 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
                       className={`${isFilter ? styles.filter : ""} ${selectedOption?.id === option?.id ? styles.active : ""}`}
                     >
                       {option?.img ? <option.img /> : null}
-                      {option?.name}
+                      {screen >= BREAKPOINT.SM || !isPlatformFilter
+                        ? option?.name
+                        : ""}
                     </li>
                   ))}
                 </>

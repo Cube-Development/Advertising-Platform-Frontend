@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { LoginBtn } from "./loginBtn";
 import { Logo } from "./logo";
 import { Nav } from "./nav";
@@ -13,6 +13,7 @@ import { userSlice } from "@shared/store/reducers";
 import { roles } from "@shared/config/roles";
 
 export const Header: FC = () => {
+  const [screen, setScreen] = useState<number>(window.innerWidth);
   const { isAuth, role } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const toggleLogout = () => {
@@ -22,12 +23,30 @@ export const Header: FC = () => {
     dispatch(userSlice.actions.toggleRole(role));
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setScreen(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <header className={styles.wrapper}>
       <div className={styles.navigation}>
-        {isAuth && <DropdownMenu currentRole={role} toggleRole={toggleRole} />}
+        {(isAuth || screen <= 1100) && (
+          <DropdownMenu
+            isAuth={isAuth}
+            currentRole={role}
+            toggleRole={toggleRole}
+          />
+        )}
         <Logo currentRole={role} />
-        <Nav isAuth={isAuth} currentRole={role} />
+        <Nav isAuth={isAuth} currentRole={role} toggleRole={toggleRole} />
       </div>
 
       <div className={styles.profile}>

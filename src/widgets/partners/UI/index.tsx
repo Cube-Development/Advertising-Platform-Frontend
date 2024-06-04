@@ -1,7 +1,9 @@
 import { PartnerList } from "@features/partnerList";
+import { motion } from "framer-motion";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
 
 interface PartnersProps {
   page: string;
@@ -9,23 +11,42 @@ interface PartnersProps {
 
 export const Partners: FC<PartnersProps> = ({ page }) => {
   const { t } = useTranslation();
+  let custom = 0;
 
   return (
-    <section className={styles.partners}>
-      <h1 className={styles.partners__title}>{t(`${page}.partners_title`)}</h1>
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={MAIN_PAGE_ANIMATION.viewport}
+      className={styles.partners}
+    >
+      <motion.h1
+        custom={custom++}
+        variants={MAIN_PAGE_ANIMATION.animationUp}
+        className={styles.partners__title}
+      >
+        {t(`${page}.partners_title`)}
+      </motion.h1>
       <div className={styles.partners__block}>
-        <div>
+        <motion.div
+          custom={custom++}
+          variants={MAIN_PAGE_ANIMATION.animationVision}
+        >
           <PartnerList
             partners={t(`${page}.partners_list`, { returnObjects: true })}
           />
-        </div>
-        <div className={styles.bottom}>
+        </motion.div>
+        <motion.div
+          custom={custom++}
+          variants={MAIN_PAGE_ANIMATION.animationVision}
+          className={styles.bottom}
+        >
           <PartnerList
             partners={t(`${page}.partners_list`, { returnObjects: true })}
             isLeft={true}
           />
-        </div>
+        </motion.div>
       </div>
-    </section>
+    </motion.section>
   );
 };

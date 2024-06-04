@@ -1,14 +1,16 @@
 import { AddPlatform } from "@features/addPlatform";
 import { WorkWithUs } from "@features/workWithUs";
 import { CalculatorIcon } from "@shared/assets";
+import { addChannelQueries } from "@shared/config/addChannelQueries";
+import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
+import { paths } from "@shared/routing";
 import { IncomeCalculator } from "@shared/ui/incomeCalculator";
 import { SliderSubs } from "@shared/ui/sliderSubs";
 import { ThemeChanger } from "@shared/ui/themeChanger";
+import { motion } from "framer-motion";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { paths } from "@shared/routing";
-import { addChannelQueries } from "@shared/config/addChannelQueries";
 
 interface CalculateIncomeProps {
   page: string;
@@ -33,25 +35,42 @@ export const CalculateIncome: FC<CalculateIncomeProps> = ({ page }) => {
       });
     }
   }, []);
-
+  let custom = 0;
   return (
-    <section
+    <motion.section
+      initial="hidden"
+      whileInView="visible"
+      viewport={MAIN_PAGE_ANIMATION.viewport}
+      variants={MAIN_PAGE_ANIMATION.animationVision}
+      custom={custom++}
       id="calculateIncome"
       ref={calculateIncomeRef}
       className={styles.calculate__wrapper}
     >
       <div className={styles.top}>
-        <div className={styles.title}>
+        <motion.div
+          custom={custom++}
+          variants={MAIN_PAGE_ANIMATION.animationUp}
+          className={styles.title}
+        >
           <div>
             <CalculatorIcon />
           </div>
           <p>{t(`${page}.calculate.title`)}</p>
-        </div>
-        <div className={styles.subtitle}>
+        </motion.div>
+        <motion.div
+          custom={custom++}
+          variants={MAIN_PAGE_ANIMATION.animationUp}
+          className={styles.subtitle}
+        >
           <p>{t(`${page}.calculate.subtitle`)}</p>
-        </div>
+        </motion.div>
       </div>
-      <div className={styles.card__wrapper}>
+      <motion.div
+        custom={custom++}
+        variants={MAIN_PAGE_ANIMATION.animationVision}
+        className={styles.card__wrapper}
+      >
         <div className={styles.card}>
           <div className={styles.card__top}>
             <p className={styles.card__title}>{t(`${page}.card.title`)}</p>
@@ -69,8 +88,8 @@ export const CalculateIncome: FC<CalculateIncomeProps> = ({ page }) => {
             />
           </div>
         </div>
-      </div>
+      </motion.div>
       <WorkWithUs page={page} />
-    </section>
+    </motion.section>
   );
 };

@@ -7,6 +7,8 @@ import "swiper/css/autoplay";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./styles.module.scss";
+import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
+import { motion } from "framer-motion";
 
 interface WorkWithUsProps {
   page: string;
@@ -18,9 +20,16 @@ export const WorkWithUs: FC<WorkWithUsProps> = ({ page }) => {
   const channels: { img: string }[] = t(`${page}.work_list`, {
     returnObjects: true,
   });
+  let custom = 4;
   return (
     <div className={styles.wrapper}>
-      <h1 className={styles.title}>{t(`${page}.work_title`)}</h1>
+      <motion.h1
+        custom={custom++}
+        variants={MAIN_PAGE_ANIMATION.animationUp}
+        className={styles.title}
+      >
+        {t(`${page}.work_title`)}
+      </motion.h1>
       {/* <Carousel
         opts={{
           align: "start",
@@ -45,45 +54,50 @@ export const WorkWithUs: FC<WorkWithUsProps> = ({ page }) => {
           ))}
         </CarouselContent>
       </Carousel> */}
-
-      <Swiper
-        modules={[Autoplay]}
-        spaceBetween={60}
-        slidesPerView={7}
-        speed={5000}
-        autoplay={{ delay: 0, disableOnInteraction: false }}
-        loop={true}
-        breakpoints={{
-          1366: {
-            slidesPerView: 6,
-            spaceBetween: 60,
-          },
-          992: {
-            slidesPerView: 5,
-            spaceBetween: 60,
-          },
-          768: {
-            slidesPerView: 4,
-            spaceBetween: 60,
-          },
-          576: {
-            slidesPerView: 3,
-            spaceBetween: 0,
-          },
-          375: {
-            slidesPerView: 2,
-            spaceBetween: 60,
-          },
-        }}
+      <motion.div
+        custom={custom++}
+        variants={MAIN_PAGE_ANIMATION.animationVision}
+        style={{ overflow: "hidden" }}
       >
-        {channels.map((channel, index) => (
-          <SwiperSlide key={index}>
-            <div className={styles.channel}>
-              <img src={`/images/workWithUs/${channel.img}`} alt="" />
-            </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
+        <Swiper
+          modules={[Autoplay]}
+          spaceBetween={60}
+          slidesPerView={7}
+          speed={5000}
+          autoplay={{ delay: 0, disableOnInteraction: false }}
+          loop={true}
+          breakpoints={{
+            1366: {
+              slidesPerView: 6,
+              spaceBetween: 60,
+            },
+            992: {
+              slidesPerView: 5,
+              spaceBetween: 60,
+            },
+            768: {
+              slidesPerView: 4,
+              spaceBetween: 60,
+            },
+            576: {
+              slidesPerView: 3,
+              spaceBetween: 0,
+            },
+            375: {
+              slidesPerView: 2,
+              spaceBetween: 60,
+            },
+          }}
+        >
+          {channels.map((channel, index) => (
+            <SwiperSlide key={index}>
+              <div className={styles.channel}>
+                <img src={`/images/workWithUs/${channel.img}`} alt="" />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+      </motion.div>
     </div>
   );
 };

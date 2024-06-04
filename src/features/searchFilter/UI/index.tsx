@@ -1,5 +1,6 @@
-import { MyInput } from "@shared/ui";
 import { FC } from "react";
+import styles from "./styles.module.scss";
+import { SearchIcon } from "@shared/assets";
 
 interface Filter {
   sort: string;
@@ -13,8 +14,9 @@ interface PostFilterProps {
 
 export const SearchFilter: FC = () => {
   return (
-    <div>
-      <MyInput
+    <div className={styles.search}>
+      <SearchIcon />
+      <input
         // value={filter.query}
         // onChange={e=> setFilter({...filter, query: e.target.value})}
         placeholder="Search..."

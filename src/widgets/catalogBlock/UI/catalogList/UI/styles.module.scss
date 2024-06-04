@@ -8,22 +8,37 @@
     grid-auto-flow: column;
     align-items: center;
     justify-content: space-between;
+    column-gap: 10px;
 
-    big {
+    .text {
       color: var(--Personal-colors-black);
 
       text-align: center;
-      font-size: 14px;
+      font-size: 16px;
       font-style: normal;
       font-weight: 700;
       line-height: normal;
+
+      @media (max-width: 576px) {
+        font-size: 14px;
+      }
     }
 
     .filters {
       display: grid;
       grid-auto-flow: column;
       column-gap: 20px;
+
+      @media (max-width: 576px) {
+        column-gap: 10px;
+      }
     }
+  }
+
+  .search__row {
+    display: grid;
+    column-gap: 10px;
+    grid-template: 1fr / 1fr minmax(30px, auto);
   }
 
   .card__list {

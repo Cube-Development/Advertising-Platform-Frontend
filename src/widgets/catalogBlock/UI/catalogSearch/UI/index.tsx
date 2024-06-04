@@ -60,20 +60,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
   const { data: ages } = useGetChannelAgesQuery(contentRes);
   const { data: regions } = useGetChannelRegionsQuery(contentRes);
   const { data: languages } = useGetChannelLanguagesQuery(contentRes);
-  const [screen, setScreen] = useState<number>(window.innerWidth);
   const { filter } = getValues();
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   const resetRecommendationCard = () => {
     setRecCard(null);
@@ -109,102 +96,100 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
 
   return (
     <>
-      {screen >= 992 && (
-        <div className={styles.wrapper}>
-          <BarProfileFilter
-            resetValues={resetRecommendationCard}
-            page={pageFilter.catalog}
-          />
-          <div className={styles.options}>
-            {catfilter === catalogFilter.parameters ? (
-              <>
-                <SelectOptions
-                  onChange={setValue}
-                  getValues={getValues}
-                  options={categories?.contents || []}
-                  single={false}
-                  type={platformData.business}
-                  textData={"catalog.category"}
-                  isRow={true}
-                  isCatalog={true}
-                  defaultValues={filter.business}
-                />
-                <SelectOptions
-                  onChange={setValue}
-                  getValues={getValues}
-                  options={ages?.contents || []}
-                  single={false}
-                  type={platformData.age}
-                  textData={"catalog.age"}
-                  isRow={true}
-                  isCatalog={true}
-                  defaultValues={filter.age}
-                />
-                <SelectSex
-                  onChange={setValue}
-                  getValues={getValues}
-                  title={"catalog.sex.title"}
-                  isRow={true}
-                  isCatalog={true}
-                  defaultValues={filter.male}
-                />
-                <SelectOptions
-                  onChange={setValue}
-                  getValues={getValues}
-                  options={languages?.contents || []}
-                  single={false}
-                  type={platformData.language}
-                  textData={"catalog.languages"}
-                  isRow={true}
-                  isCatalog={true}
-                  defaultValues={filter.language}
-                />
-                <SelectOptions
-                  onChange={setValue}
-                  getValues={getValues}
-                  options={regions?.contents || []}
-                  single={false}
-                  type={platformData.region}
-                  textData={"catalog.region"}
-                  isRow={true}
-                  isCatalog={true}
-                  defaultValues={filter.region}
-                />
-              </>
-            ) : (
-              <>
-                <SelectDescription
-                  onChange={setValue}
-                  type={platformData.description}
-                  title={"catalog.ai.title"}
-                  placeholder={"catalog.ai.default_input"}
-                />
-                <AiFilter onChange={getAIRecommendationCards} />
-              </>
-            )}
-            {recommendationCards ? (
-              <div className={styles.recommendation}>
-                <div className={styles.recommendation__title}>
-                  <QualityIcon />
-                  <p>{t("catalog.recommendation.title")}</p>
-                </div>
-                <div className={styles.recommendation__cards}>
-                  {recommendationCards.map((card, index) => (
-                    <RecommendationCard
-                      key={index}
-                      card={card}
-                      onChange={handleUseRecommendionCard}
-                      isChooseed={recommendationCard === card}
-                    />
-                  ))}
-                </div>
+      <div className={styles.wrapper}>
+        <BarProfileFilter
+          resetValues={resetRecommendationCard}
+          page={pageFilter.catalog}
+        />
+        <div className={styles.options}>
+          {catfilter === catalogFilter.parameters ? (
+            <>
+              <SelectOptions
+                onChange={setValue}
+                getValues={getValues}
+                options={categories?.contents || []}
+                single={false}
+                type={platformData.business}
+                textData={"catalog.category"}
+                isRow={true}
+                isCatalog={true}
+                defaultValues={filter.business}
+              />
+              <SelectOptions
+                onChange={setValue}
+                getValues={getValues}
+                options={ages?.contents || []}
+                single={false}
+                type={platformData.age}
+                textData={"catalog.age"}
+                isRow={true}
+                isCatalog={true}
+                defaultValues={filter.age}
+              />
+              <SelectSex
+                onChange={setValue}
+                getValues={getValues}
+                title={"catalog.sex.title"}
+                isRow={true}
+                isCatalog={true}
+                defaultValues={filter.male}
+              />
+              <SelectOptions
+                onChange={setValue}
+                getValues={getValues}
+                options={languages?.contents || []}
+                single={false}
+                type={platformData.language}
+                textData={"catalog.languages"}
+                isRow={true}
+                isCatalog={true}
+                defaultValues={filter.language}
+              />
+              <SelectOptions
+                onChange={setValue}
+                getValues={getValues}
+                options={regions?.contents || []}
+                single={false}
+                type={platformData.region}
+                textData={"catalog.region"}
+                isRow={true}
+                isCatalog={true}
+                defaultValues={filter.region}
+              />
+            </>
+          ) : (
+            <>
+              <SelectDescription
+                onChange={setValue}
+                type={platformData.description}
+                title={"catalog.ai.title"}
+                placeholder={"catalog.ai.default_input"}
+              />
+              <AiFilter onChange={getAIRecommendationCards} />
+            </>
+          )}
+          {recommendationCards ? (
+            <div className={styles.recommendation}>
+              <div className={styles.recommendation__title}>
+                <QualityIcon />
+                <p>{t("catalog.recommendation.title")}</p>
               </div>
-            ) : (
-              <></>
-            )}
-          </div>
+              <div className={styles.recommendation__cards}>
+                {recommendationCards.map((card, index) => (
+                  <RecommendationCard
+                    key={index}
+                    card={card}
+                    onChange={handleUseRecommendionCard}
+                    isChooseed={recommendationCard === card}
+                  />
+                ))}
+              </div>
+            </div>
+          ) : (
+            <></>
+          )}
         </div>
-      )}
+      </div>
     </>
   );
 };

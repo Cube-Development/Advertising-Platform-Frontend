@@ -9,15 +9,24 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FC, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { advertiserMenu, bloggerMenu, commonMenu, managerMenu } from "./config";
+import {
+  advertiserMenu,
+  advertiserMenuNotAuth,
+  bloggerMenu,
+  bloggerMenuNotAuth,
+  commonMenu,
+  managerMenu,
+} from "./config";
 import styles from "./styles.module.scss";
 
 interface DropdownMenuProps {
+  isAuth: boolean;
   currentRole: roles;
   toggleRole: (role: roles) => void;
 }
 
 export const DropdownMenu: FC<DropdownMenuProps> = ({
+  isAuth,
   currentRole,
   toggleRole,
 }) => {
@@ -26,9 +35,14 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
   const { dropdownMenu } = useAppSelector((state) => state.filter);
   const dispatch = useAppDispatch();
   const menuRef = useRef<HTMLDivElement>(null);
-  const toggleMenu = () => {
+  const toggleMenu = (path?: string) => {
     const newMenu = { isOpen: !dropdownMenu.isOpen, title: "" };
     dispatch(filterSlice.actions.setDropDownMenu(newMenu));
+    if (path === paths.main) {
+      toggleRole(roles.advertiser);
+    } else if (path === paths.mainBlogger) {
+      toggleRole(roles.blogger);
+    }
   };
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -51,14 +65,17 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
     };
   }, [dropdownMenu.isOpen]);
 
-  const combinedMenu: IMenuItem[] =
-    currentRole === roles.advertiser
+  const combinedMenu: IMenuItem[] = isAuth
+    ? currentRole === roles.advertiser
       ? [...advertiserMenu, ...commonMenu]
       : currentRole === roles.blogger
         ? [...bloggerMenu, ...commonMenu]
         : currentRole === roles.manager
           ? [...managerMenu]
-          : [];
+          : []
+    : currentRole === roles.advertiser
+      ? advertiserMenuNotAuth
+      : bloggerMenuNotAuth;
 
   const divVariants = {
     close: { opacity: 0, x: "-100%" },
@@ -68,7 +85,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
 
   return (
     <div className={styles.dropdown} ref={menuRef}>
-      <button onClick={toggleMenu} className={styles.burger__icon_btn}>
+      <button onClick={() => toggleMenu()} className={styles.burger__icon_btn}>
         <div className={styles.burger__icon} />
       </button>
 
@@ -86,7 +103,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
               <div className={styles.menu__top}>
                 <img src="/images/assets/logo.svg" alt="" />
 
-                <button onClick={toggleMenu}>
+                <button onClick={() => toggleMenu()}>
                   <div className={styles.close__icon} />
                 </button>
               </div>
@@ -138,64 +155,6 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
           </motion.div>
         )}
       </AnimatePresence>
-
-      {/* {dropdownMenu.isOpen && (
-        <div
-          className={`${styles.menu} ${dropdownMenu.isOpen ? styles.menu__enter : styles.menu__exit}`}
-        >
-          <div className={styles.menu__top}>
-            <img src="/images/assets/logo.svg" alt="" />
-
-            <button onClick={toggleMenu}>
-              <div className={styles.close__icon} />
-            </button>
-          </div>
-          <div className={styles.menu__switcher}>
-            <div className={styles.menu__switcher__row}>
-              <Link to={paths.main}>
-                <p
-                  className={`${
-                    currentRole === roles.advertiser ? styles.active : ""
-                  }`}
-                  onClick={() => {
-                    toggleRole(roles.advertiser);
-                  }}
-                >
-                  {t("roles.advertiser")}
-                </p>
-              </Link>
-              <Link to={paths.mainBlogger}>
-                <p
-                  className={`${
-                    currentRole === roles.blogger ? styles.active : ""
-                  }`}
-                  onClick={() => {
-                    toggleRole(roles.blogger);
-                  }}
-                >
-                  {t("roles.blogger")}
-                </p>
-              </Link>
-            </div>
-          </div>
-          <div>
-            <Accordion
-              type="single"
-              collapsible
-              defaultValue={`item-${dropdownMenu.title}`}
-            >
-              {combinedMenu.map((item) => (
-                <MenuItem
-                  key={item.item.title}
-                  item={item}
-                  onChange={toggleMenu}
-                  openTitle={dropdownMenu.title}
-                />
-              ))}
-            </Accordion>
-          </div>
-        </div>
-      )} */}
     </div>
   );
 };

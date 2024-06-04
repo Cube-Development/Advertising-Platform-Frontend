@@ -12,6 +12,7 @@
     "catalog": "Каталог площадок",
     "turnkey": "Размещение под ключ",
     "platformOwner": "Владельцу площадки",
+    "advertiser": "Рекламодателю",
     "wallet": "Кошелёк",
     "languages": "",
     "addPlatform": "Добавить канал",
@@ -1008,6 +1009,9 @@
         "language": "Язык"
       }
     },
+
+    "see_more": "Развернуть",
+    "see_less": "Свернуть",
 
     "generation_btn": "Сгенерировать",
 

@@ -20,6 +20,7 @@ import { IPlatform } from "@shared/types/platform";
 import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
+import { BREAKPOINT } from "@shared/config/common";
 
 export const CartBlock: FC = () => {
   const { toast } = useToast();
@@ -39,10 +40,22 @@ export const CartBlock: FC = () => {
     GenerateGuestId();
   }
 
-  const { data: cartPub } = useReadPublicCartQuery(
+  const { data: cartPub, isLoading } = useReadPublicCartQuery(
     { guest_id: guestId, language: language?.id || Languages[0].id },
     { skip: !guestId || isAuth },
   );
+
+  const [screen, setScreen] = useState<number>(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreen(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   useEffect(() => {
     if (isAuth && cart) {
@@ -187,6 +200,7 @@ export const CartBlock: FC = () => {
             <CartList
               channels={currentCart?.channels || []}
               onChangeCard={handleChangeCartCards}
+              isLoading={isLoading}
             />
             {/* <RecomendationList
               cards={recomendCards}

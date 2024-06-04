@@ -1,7 +1,7 @@
 import { CartMinusIcon, CartPlusIcon } from "@shared/assets";
 import { IAddToBasketProps } from "@shared/types/platform";
 import { MyButton } from "@shared/ui";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
@@ -14,6 +14,7 @@ export const AddToBasket: FC<IAddToBasketProps> = ({
   selectedFormat,
 }) => {
   const { t } = useTranslation();
+
   return (
     <MyButton
       buttons_type={

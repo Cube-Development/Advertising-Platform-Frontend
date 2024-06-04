@@ -49,3 +49,11 @@ export const enum INTERSECTION_ELEMENTS {
   hisory = 1000,
   chat = 10,
 }
+
+export const enum BREAKPOINT {
+  XL = 1366,
+  LG = 992,
+  MD = 768,
+  SM = 576,
+  XS = 375,
+}
