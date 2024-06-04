@@ -5,6 +5,8 @@ services:
       context: .
       dockerfile: dockerfile
     ports:
-      - "3000:4173"
+      - "3000:80"
     env_file:
       - deploy.env
+    volumes:
+      - ./nginx.conf:/etc/nginx/sites-enabled/default
