@@ -36,6 +36,13 @@ import {
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
+import {
+  Drawer,
+  DrawerContent,
+  DrawerTrigger,
+  DrawerClose,
+} from "@shared/ui/shadcn-ui/ui/drawer";
+
 interface ParametersFilterProps {
   setValue: UseFormSetValue<getCatalogReq>;
   reset: UseFormReset<getCatalogReq>;
@@ -115,126 +122,127 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
 
   return (
     <div>
-      <AlertDialog>
-        <AlertDialogTrigger>
+      <Drawer>
+        <DrawerTrigger>
           <div className={styles.button}>
             <ParametersIcon />
             {screen >= BREAKPOINT.MD && <p>Параметры</p>}
           </div>
-        </AlertDialogTrigger>
-        <AlertDialogContent className="w-full bg-none bg-transparent h-screen flex">
-          <motion.div
+        </DrawerTrigger>
+        {/* <AlertDialogContent className="w-full bg-none bg-transparent h-screen flex"> */}
+        <DrawerContent className={styles.parameters}>
+          {/* <motion.div
             initial={{ y: "100vh", opacity: 0 }} // Начальное состояние: блок вне экрана внизу и прозрачный
             animate={{ y: 0, opacity: 1 }} // Конечное состояние: блок в начальной позиции и полностью видимый
             exit={{ y: "100vh", opacity: 0 }} // Состояние при выходе: блок уходит вниз и становится прозрачным
             transition={{ duration: 0.85, ease: "easeOut" }}
             className={styles.parameters}
-          >
-            <div className={styles.top}>
-              <p className={styles.title}>Параметры</p>
-              <AlertDialogCancel className={styles.close}>
-                <div>
-                  <CancelIcon2 />
-                </div>
-              </AlertDialogCancel>
-            </div>
-            <div className={styles.wrapper}>
-              <BarProfileFilter
-                resetValues={resetRecommendationCard}
-                page={pageFilter.catalog}
-              />
-              <div className={styles.options}>
-                {catfilter === catalogFilter.parameters ? (
-                  <>
-                    <SelectOptions
-                      onChange={setValue}
-                      getValues={getValues}
-                      options={categories?.contents || []}
-                      single={false}
-                      type={platformData.business}
-                      textData={"catalog.category"}
-                      isRow={true}
-                      isCatalog={true}
-                      defaultValues={filter.business}
-                    />
-                    <SelectOptions
-                      onChange={setValue}
-                      getValues={getValues}
-                      options={ages?.contents || []}
-                      single={false}
-                      type={platformData.age}
-                      textData={"catalog.age"}
-                      isRow={true}
-                      isCatalog={true}
-                      defaultValues={filter.age}
-                    />
-                    <SelectSex
-                      onChange={setValue}
-                      getValues={getValues}
-                      title={"catalog.sex.title"}
-                      isRow={true}
-                      isCatalog={true}
-                      defaultValues={filter.male}
-                    />
-                    <SelectOptions
-                      onChange={setValue}
-                      getValues={getValues}
-                      options={languages?.contents || []}
-                      single={false}
-                      type={platformData.language}
-                      textData={"catalog.languages"}
-                      isRow={true}
-                      isCatalog={true}
-                      defaultValues={filter.language}
-                    />
-                    <SelectOptions
-                      onChange={setValue}
-                      getValues={getValues}
-                      options={regions?.contents || []}
-                      single={false}
-                      type={platformData.region}
-                      textData={"catalog.region"}
-                      isRow={true}
-                      isCatalog={true}
-                      defaultValues={filter.region}
-                    />
-                  </>
-                ) : (
-                  <>
-                    <SelectDescription
-                      onChange={setValue}
-                      type={platformData.description}
-                      title={"catalog.ai.title"}
-                      placeholder={"catalog.ai.default_input"}
-                    />
-                    <AiFilter onChange={getAIRecommendationCards} />
-                  </>
-                )}
-                {recommendationCards ? (
-                  <div className={styles.recommendation}>
-                    <div className={styles.recommendation__title}>
-                      <QualityIcon />
-                      <p>{t("catalog.recommendation.title")}</p>
-                    </div>
-                    <div className={styles.recommendation__cards}>
-                      {recommendationCards.map((card, index) => (
-                        <RecommendationCard
-                          key={index}
-                          card={card}
-                          onChange={handleUseRecommendionCard}
-                          isChooseed={recommendationCard === card}
-                        />
-                      ))}
-                    </div>
-                  </div>
-                ) : (
-                  <></>
-                )}
+          > */}
+          <div className={styles.top}>
+            <p className={styles.title}>Параметры</p>
+            <DrawerClose className={styles.close}>
+              <div>
+                <CancelIcon2 />
               </div>
+            </DrawerClose>
+          </div>
+          <div className={styles.wrapper}>
+            <BarProfileFilter
+              resetValues={resetRecommendationCard}
+              page={pageFilter.catalog}
+            />
+            <div className={styles.options}>
+              {catfilter === catalogFilter.parameters ? (
+                <>
+                  <SelectOptions
+                    onChange={setValue}
+                    getValues={getValues}
+                    options={categories?.contents || []}
+                    single={false}
+                    type={platformData.business}
+                    textData={"catalog.category"}
+                    isRow={true}
+                    isCatalog={true}
+                    defaultValues={filter.business}
+                  />
+                  <SelectOptions
+                    onChange={setValue}
+                    getValues={getValues}
+                    options={ages?.contents || []}
+                    single={false}
+                    type={platformData.age}
+                    textData={"catalog.age"}
+                    isRow={true}
+                    isCatalog={true}
+                    defaultValues={filter.age}
+                  />
+                  <SelectSex
+                    onChange={setValue}
+                    getValues={getValues}
+                    title={"catalog.sex.title"}
+                    isRow={true}
+                    isCatalog={true}
+                    defaultValues={filter.male}
+                  />
+                  <SelectOptions
+                    onChange={setValue}
+                    getValues={getValues}
+                    options={languages?.contents || []}
+                    single={false}
+                    type={platformData.language}
+                    textData={"catalog.languages"}
+                    isRow={true}
+                    isCatalog={true}
+                    defaultValues={filter.language}
+                  />
+                  <SelectOptions
+                    onChange={setValue}
+                    getValues={getValues}
+                    options={regions?.contents || []}
+                    single={false}
+                    type={platformData.region}
+                    textData={"catalog.region"}
+                    isRow={true}
+                    isCatalog={true}
+                    defaultValues={filter.region}
+                  />
+                </>
+              ) : (
+                <>
+                  <SelectDescription
+                    onChange={setValue}
+                    type={platformData.description}
+                    title={"catalog.ai.title"}
+                    placeholder={"catalog.ai.default_input"}
+                  />
+                  <AiFilter onChange={getAIRecommendationCards} />
+                </>
+              )}
+              {recommendationCards ? (
+                <div className={styles.recommendation}>
+                  <div className={styles.recommendation__title}>
+                    <QualityIcon />
+                    <p>{t("catalog.recommendation.title")}</p>
+                  </div>
+                  <div className={styles.recommendation__cards}>
+                    {recommendationCards.map((card, index) => (
+                      <RecommendationCard
+                        key={index}
+                        card={card}
+                        onChange={handleUseRecommendionCard}
+                        isChooseed={recommendationCard === card}
+                      />
+                    ))}
+                  </div>
+                </div>
+              ) : (
+                <></>
+              )}
             </div>
-          </motion.div>
-        </AlertDialogContent>
-      </AlertDialog>
+          </div>
+          {/* </motion.div> */}
+        </DrawerContent>
+      </Drawer>
     </div>
   );
 };
