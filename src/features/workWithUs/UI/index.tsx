@@ -30,30 +30,6 @@ export const WorkWithUs: FC<WorkWithUsProps> = ({ page }) => {
       >
         {t(`${page}.work_title`)}
       </motion.h1>
-      {/* <Carousel
-        opts={{
-          align: "start",
-          loop: true,
-          duration: 50,
-        }}
-        plugins={[
-          Autoplay({
-            delay: 1000,
-            // stopOnMouseEnter: true,
-            stopOnInteraction: false,
-          }),
-        ]}
-      >
-        <CarouselContent>
-          {channels.map((channel, index) => (
-            <CarouselItem key={index} className="basis-1/6">
-              <div className={styles.channel}>
-                <img src={`/images/workWithUs/${channel.img}`} alt="" />
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-      </Carousel> */}
       <motion.div
         custom={custom++}
         variants={MAIN_PAGE_ANIMATION.animationVision}
@@ -61,8 +37,8 @@ export const WorkWithUs: FC<WorkWithUsProps> = ({ page }) => {
       >
         <Swiper
           modules={[Autoplay]}
-          spaceBetween={60}
-          slidesPerView={7}
+          spaceBetween={30}
+          slidesPerView={3}
           speed={5000}
           autoplay={{ delay: 0, disableOnInteraction: false }}
           loop={true}
@@ -77,15 +53,15 @@ export const WorkWithUs: FC<WorkWithUsProps> = ({ page }) => {
             },
             768: {
               slidesPerView: 4,
-              spaceBetween: 60,
+              spaceBetween: 30,
             },
             576: {
-              slidesPerView: 3,
-              spaceBetween: 0,
+              slidesPerView: 4,
+              spaceBetween: 30,
             },
             375: {
-              slidesPerView: 2,
-              spaceBetween: 60,
+              slidesPerView: 3,
+              spaceBetween: 30,
             },
           }}
         >

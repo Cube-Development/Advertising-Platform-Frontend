@@ -50,8 +50,8 @@ export const Header: FC = () => {
       </div>
 
       <div className={styles.profile}>
-        {isAuth && <Wallet />}
         <Lang />
+        {isAuth && screen > 768 && <Wallet />}
         {isAuth ? (
           <>
             <div className={styles.separator}></div>

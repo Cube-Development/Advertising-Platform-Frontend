@@ -1,5 +1,16 @@
 .logo {
-  width: 114px;
-  height: auto;
+  color: rgba(0, 0, 0, 0.3);
+  font-size: 44px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: normal;
   cursor: pointer;
+
+  @media (max-width: 768px) {
+    font-size: 24px;
+  }
+
+  @media (max-width: 375px) {
+    font-size: 20px;
+  }
 }

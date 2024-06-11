@@ -4,7 +4,6 @@
   justify-content: space-between;
   grid-auto-flow: column;
   align-items: center;
-  height: var(--header-height-xl);
   border-bottom: 0.5px solid rgba(0, 0, 0, 0.3);
   width: 100%;
   z-index: 10;
@@ -12,6 +11,7 @@
   top: 0;
   left: 0;
   background: var(--Personal-colors-White);
+  height: var(--header-height-xl);
 
   @media (max-width: 992px) {
     height: var(--header-height-lg);
@@ -32,8 +32,12 @@
   .navigation {
     display: grid;
     grid-auto-flow: column;
-    column-gap: 50px;
+    column-gap: 30px;
     align-items: center;
+
+    @media (max-width: 768px) {
+      column-gap: 20px;
+    }
   }
 
   .profile {

@@ -20,7 +20,8 @@ export const Logo: FC<LogoProps> = ({ currentRole }) => {
   return (
     <div onClick={handleLogoClick}>
       <Link to={currentRole === roles.blogger ? paths.mainBlogger : paths.main}>
-        <img src="/images/assets/logo.svg" className={styles.logo} alt="/" />
+        <p className={styles.logo}>Logo</p>
+        {/* <img src="/images/assets/logo.svg" className={styles.logo} alt="/" /> */}
       </Link>
     </div>
   );

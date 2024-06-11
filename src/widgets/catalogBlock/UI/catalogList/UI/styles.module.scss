@@ -38,7 +38,10 @@
   .search__row {
     display: grid;
     column-gap: 10px;
-    grid-template: 1fr / 1fr minmax(30px, auto);
+
+    @media (max-width: 992px) {
+      grid-template: 1fr / 1fr minmax(30px, auto);
+    }
   }
 
   .card__list {

@@ -7,7 +7,7 @@ export const MAIN_PAGE_ANIMATION = {
     visible: (custom: number) => ({
       x: 0,
       opacity: 1,
-      transition: { delay: custom * 0.2 },
+      transition: { delay: custom * 0.1 },
     }),
   },
   animationRight: {
@@ -18,7 +18,7 @@ export const MAIN_PAGE_ANIMATION = {
     visible: (custom: number) => ({
       x: 0,
       opacity: 1,
-      transition: { delay: custom * 0.2 },
+      transition: { delay: custom * 0.1 },
     }),
   },
   animationUp: {
@@ -29,7 +29,7 @@ export const MAIN_PAGE_ANIMATION = {
     visible: (custom: number) => ({
       y: 0,
       opacity: 1,
-      transition: { delay: custom * 0.2 },
+      transition: { delay: custom * 0.1 },
     }),
   },
   animationDown: {
@@ -40,7 +40,7 @@ export const MAIN_PAGE_ANIMATION = {
     visible: (custom: number) => ({
       y: 0,
       opacity: 1,
-      transition: { delay: custom * 0.2 },
+      transition: { delay: custom * 0.1 },
     }),
   },
 
@@ -50,8 +50,8 @@ export const MAIN_PAGE_ANIMATION = {
     },
     visible: (custom: number) => ({
       opacity: 1,
-      transition: { delay: custom * 0.2 },
+      transition: { delay: custom * 0.1 },
     }),
   },
-  viewport: { amount: 0.3, once: true },
+  viewport: { amount: 0.15, once: true },
 };

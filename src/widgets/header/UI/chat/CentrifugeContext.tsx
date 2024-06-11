@@ -71,22 +71,22 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
 
       try {
         const token = await getSubscriptionToken(channelName, accessToken);
-        console.log("getSubscriptionToken", token);
+        // console.log("getSubscriptionToken", token);
 
         const sub = centrifugeInstance.newSubscription(personalChannel, {
           getToken: () => Promise.resolve(token),
         });
 
         sub.on("publication", (ctx: PublicationContext) => {
-          console.log("Message", ctx);
+          // console.log("Message", ctx);
           const newMessage = ctx.data as IOrderMessageNewSocket;
-          console.log("handleNewMessage", handleNewMessageRef.current);
-          console.log("handleNewMessageChat", handleNewMessageChatRef.current);
+          // console.log("handleNewMessage", handleNewMessageRef.current);
+          // console.log("handleNewMessageChat", handleNewMessageChatRef.current);
 
           if (newMessage.recipient) {
             handleNewMessageRef.current(newMessage);
             handleNewMessageChatRef.current(newMessage);
-            console.log("new Message");
+            // console.log("new Message");
             toast({
               variant: "default",
               title: t("toasts.websoket.new_message"),
@@ -95,7 +95,7 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
         });
 
         sub.subscribe();
-        console.log("subsub", sub);
+        // console.log("subsub", sub);
 
         return () => {
           sub.unsubscribe();
@@ -130,7 +130,7 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
         personalChannel,
         message,
       );
-      console.log("Message sent:", result);
+      // console.log("Message sent:", result);
     } catch (error) {
       console.error("Error sending message:", error);
     }

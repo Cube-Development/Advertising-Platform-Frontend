@@ -18,9 +18,5 @@ export const DinamicPagination: FC<DinamicPaginationProps> = ({ onChange }) => {
     }
   }, [inView]);
 
-  return (
-    <div ref={ref} className={styles.wrapper}>
-      <p>БЛОК</p>
-    </div>
-  );
+  return <div ref={ref} className={styles.wrapper}></div>;
 };

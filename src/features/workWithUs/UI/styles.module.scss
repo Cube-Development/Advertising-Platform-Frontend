@@ -7,10 +7,26 @@
 
   .title {
     color: var(--Personal-colors-black);
-    font-size: 36px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    font-size: var(--font-size-title-main-xl);
+
+    @media (max-width: 992px) {
+      font-size: var(--font-size-title-main-lg);
+    }
+
+    @media (max-width: 768px) {
+      font-size: var(--font-size-title-main-md);
+    }
+
+    @media (max-width: 576px) {
+      font-size: var(--font-size-title-main-sm);
+    }
+
+    @media (max-width: 375px) {
+      font-size: var(--font-size-title-main-xs);
+    }
   }
 
   .channel {
@@ -25,12 +41,32 @@
     border: 1px solid var(--Personal-colors-main);
     background: var(--Personal-colors-White);
 
+    @media (max-width: 768px) {
+      width: 100px;
+      height: 100px;
+    }
+
+    @media (max-width: 375px) {
+      width: 75px;
+      height: 75px;
+    }
+
     img {
       width: 80px;
       height: 80px;
       flex-shrink: 0;
       border-radius: 50%;
       border: 1px solid var(--Personal-colors-main);
+
+      @media (max-width: 768px) {
+        width: 60px;
+        height: 60px;
+      }
+
+      @media (max-width: 375px) {
+        width: 40px;
+        height: 40px;
+      }
     }
   }
 }

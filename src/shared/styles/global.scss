@@ -8,7 +8,6 @@
 
 body {
   font-family: "Montserrat", sans-serif;
-  padding-top: var(--container-padding-top);
 
   &::-webkit-scrollbar {
     display: none;
@@ -32,6 +31,26 @@ body {
       transition: opacity 1s ease-in;
       backdrop-filter: blur(3px);
     }
+  }
+}
+
+main {
+  padding-top: var(--header-height-xl);
+
+  @media (max-width: 992px) {
+    padding-top: var(--header-height-lg);
+  }
+
+  @media (max-width: 768px) {
+    padding-top: var(--header-height-lg);
+  }
+
+  @media (max-width: 576px) {
+    padding-top: var(--header-height-sm);
+  }
+
+  @media (max-width: 375px) {
+    padding-top: var(--header-height-xs);
   }
 }
 
@@ -328,6 +347,7 @@ body {
 .swiper {
   margin: 0;
   padding: 20px 8px;
+  z-index: 0;
   // margin: 10px;
 }
 
