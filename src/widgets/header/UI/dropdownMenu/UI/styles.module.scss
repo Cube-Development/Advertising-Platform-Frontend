@@ -72,11 +72,28 @@
       display: grid;
       padding: 20px;
       align-content: center;
-      height: 80px;
       border-bottom: 1px solid #d9d9d9;
       grid-auto-flow: column;
       justify-content: space-between;
       align-items: center;
+
+      height: var(--header-height-xl);
+
+      @media (max-width: 992px) {
+        height: var(--header-height-lg);
+      }
+
+      @media (max-width: 768px) {
+        height: var(--header-height-md);
+      }
+
+      @media (max-width: 576px) {
+        height: var(--header-height-sm);
+      }
+
+      @media (max-width: 375px) {
+        height: var(--header-height-xs);
+      }
     }
   }
 }

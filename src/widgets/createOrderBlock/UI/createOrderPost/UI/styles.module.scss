@@ -52,15 +52,28 @@
       row-gap: 30px;
       padding: 0px 110px;
 
+      .post_type_filter {
+        li {
+          &.active__type {
+            background-color: #000;
+            color: #fff;
+          }
+        }
+      }
+
       .filters {
-        margin: 0 auto;
-        max-width: 80%;
       }
 
       .data {
         display: grid;
         grid-template: 1fr / 1fr 1fr;
         gap: 12vw;
+
+        &.multi_active {
+          grid-template: 1fr / 1fr 1fr 1fr;
+          gap: 20px;
+          justify-content: space-between;
+        }
 
         .post_data {
           display: grid;

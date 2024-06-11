@@ -1,4 +1,5 @@
-import { AddIcon } from "@shared/assets";
+import { DinamicPagination } from "@features/dinamicPagination";
+import { AddIcon, ArrowSmallVerticalIcon, SendIcon } from "@shared/assets";
 import { MessageStatus, RecipientType } from "@shared/config/chat";
 import { INTERSECTION_ELEMENTS } from "@shared/config/common";
 import { convertUTCToLocalDateTime } from "@shared/functions/convertUTCToLocalTime";
@@ -8,12 +9,18 @@ import {
   IOrderMessageNewSocket,
   IOrderMessageSendSocket,
 } from "@shared/types/chat";
+import HardBreak from "@tiptap/extension-hard-break";
+import Link from "@tiptap/extension-link";
+import Underline from "@tiptap/extension-underline";
+import { EditorContent, useEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
 import { useCentrifuge } from "@widgets/header/UI/chat/CentrifugeContext";
-import { SendIcon } from "lucide-react";
 import { FC, useEffect, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { animateScroll } from "react-scroll";
 import styles from "./styles.module.scss";
+import { SkeletonChatMessage } from "../skeletonChatMessage";
 
 interface ChatMessagesProps {
   order_id: string;
@@ -23,16 +30,34 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ order_id }) => {
   const { t } = useTranslation();
   const { OrderMessageSend, OrderMessageNew } = useCentrifuge();
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement | null>(null);
+  const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
   const currentDateString = getCurrentUtcDateTime();
-  const { data: history } = useGetChatHistoryQuery({
-    order_id: order_id,
-    batch: INTERSECTION_ELEMENTS.chat,
-    message_date: currentDateString.date,
-    message_time: currentDateString.time,
+
+  let currentDate: string | null = null;
+
+  const { watch, setValue } = useForm({
+    defaultValues: {
+      order_id: order_id,
+      batch: INTERSECTION_ELEMENTS.chat,
+      message_date: currentDateString.date,
+      message_time: currentDateString.time,
+    },
   });
 
+  const formFields = watch();
+
+  const { data: history, isLoading } = useGetChatHistoryQuery({
+    ...formFields,
+  });
+  console.log(history);
   const [newMessage, setNewMessage] = useState<string>("");
-  const [chat, setChat] = useState<IOrderMessageNewSocket[]>(history || []);
+  const [isNewMessage, setIsNewMessage] = useState<boolean>(false);
+
+  const [isSendMessage, setIsSendMessage] = useState<boolean>(false);
+  const [chat, setChat] = useState<IOrderMessageNewSocket[]>([]);
+  const [showScrollDownButton, setShowScrollDownButton] =
+    useState<boolean>(false);
 
   useEffect(() => {
     if (history) {
@@ -48,41 +73,59 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ order_id }) => {
           message_time: datetime.localTime,
         };
       });
-      setChat(newHistory);
+      setChat([...newHistory, ...chat]);
     }
   }, [history]);
 
   useEffect(() => {
-    scrollToBottom();
+    if (containerRef.current && !isSendMessage) {
+      const scrollTo = itemRefs.current
+        .slice(0, history?.length)
+        .reduce((acc, el) => {
+          return acc + (el?.offsetHeight || 0);
+        }, 0);
+
+      console.log("scrollTo", scrollTo, history?.length);
+      containerRef.current.scrollTop =
+        scrollTo + (INTERSECTION_ELEMENTS.chat - 1) * 15;
+    }
   }, [chat]);
 
-  const scrollToBottom = () => {
-    if (messagesEndRef.current) {
-      animateScroll.scrollToBottom({
-        containerId: "all__messages",
-        smooth: true,
-      });
+  useEffect(() => {
+    const handleScroll = () => {
+      if (containerRef.current) {
+        const isScrolledUp =
+          containerRef.current.scrollTop + containerRef.current.clientHeight <
+          containerRef.current.scrollHeight - 250;
+        setShowScrollDownButton(isScrolledUp);
+      }
+    };
+
+    if (containerRef.current) {
+      containerRef.current.addEventListener("scroll", handleScroll);
     }
-  };
 
-  let currentDate: string | null = null;
+    return () => {
+      if (containerRef.current) {
+        containerRef.current.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, []);
 
-  const handleOnChange = (value: string) => {
-    setNewMessage(value);
-  };
-
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter") {
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Enter" && event.ctrlKey) {
       handleSendMessage();
     }
   };
 
   const handleSendMessage = () => {
-    if (newMessage !== "") {
+    const message = cleanMessage(newMessage);
+    console.log(message);
+    if (message !== "") {
       const orderMessage: IOrderMessageSendSocket = {
         order_id: order_id,
         user_id: "35a547a1-6168-48de-9162-f9b89d7c5232",
-        message: newMessage,
+        message: message,
       };
       OrderMessageSend(orderMessage);
       const currentDate: Date = new Date();
@@ -98,20 +141,21 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ order_id }) => {
       const orderMessageState: IOrderMessageNewSocket = {
         id: "12",
         order_id: order_id,
-        message: newMessage,
+        message: message,
         recipient: RecipientType.sender,
         message_date: formattedDate,
         message_time: formattedTime,
         status: MessageStatus.unread,
       };
+
       setChat([...chat, orderMessageState]);
-      (document.getElementById("sendInput") as HTMLInputElement).value = "";
+      editor?.commands.setContent("");
       setNewMessage("");
+      setIsSendMessage(true);
     }
   };
 
   const handleNewMessage = (message: IOrderMessageNewSocket) => {
-    console.log("ChatMessages");
     if (
       message.order_id === order_id &&
       message.recipient === RecipientType.receiver
@@ -125,19 +169,131 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ order_id }) => {
         message_date: datetime.localDate,
         message_time: datetime.localTime,
       };
-      setChat((prevMessages) => [...prevMessages, newMessage]);
+      setChat([...chat, newMessage]);
+      setIsNewMessage(true);
+    }
+  };
+
+  const handleGetMessage = () => {
+    if (chat.length && history?.length) {
+      const lastMessage = chat[0];
+      const date = new Date(
+        `${lastMessage.message_date} ${lastMessage.message_time}`,
+      );
+      const utcDate = date.toISOString().split("T")[0];
+      const utcTime = date.toISOString().split("T")[1].split("Z")[0];
+
+      setValue("message_date", utcDate);
+      setValue("message_time", utcTime);
+
+      console.log(lastMessage, date.toISOString());
     }
   };
 
   OrderMessageNew(handleNewMessage);
 
+  const limit = 4000;
+  const editor = useEditor({
+    extensions: [
+      StarterKit.configure(),
+      Underline.configure({
+        HTMLAttributes: {
+          class: "underline",
+        },
+      }),
+      Link.configure({
+        openOnClick: "whenNotEditable",
+        HTMLAttributes: {
+          target: "_blank",
+          rel: "noopener noreferrer",
+          class: "hyperlink",
+        },
+        autolink: false,
+      }),
+      HardBreak.configure({
+        // keepMarks: false,
+      }),
+    ],
+    content: newMessage,
+    editorProps: {
+      attributes: {
+        class:
+          "h-full px-1 max-h-[100px] overflow-auto bg-transparent text-black focus:outline-none text-sm",
+      },
+    },
+    onUpdate({ editor }) {
+      handleChange(editor.getHTML());
+    },
+  });
+
+  const handleChange = (content: string) => {
+    setNewMessage(content);
+  };
+
+  const cleanMessage = (message: string) => {
+    console.log("Before cleaning:", message);
+    let cleanedMessage = message.replace(
+      /^(<p>\s*(<br\s*\/?>\s*)+|(<br\s*\/?>\s*)+)/g,
+      "<p>",
+    );
+    cleanedMessage = cleanedMessage.replace(
+      /((<br\s*\/?>\s*)+<\/p>\s*$|(<br\s*\/?>\s*)+\s*$)/g,
+      "</p>",
+    );
+    cleanedMessage = cleanedMessage.replace(/(<p>\s*<\/p>)+/g, "");
+    if (/^<p>\s*<\/p>$/.test(cleanedMessage)) {
+      cleanedMessage = "";
+    }
+
+    console.log("After cleaning:", cleanedMessage);
+    return cleanedMessage;
+  };
+  console.log(newMessage);
+
+  useEffect(() => {
+    if (isSendMessage && messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "auto" });
+      setIsSendMessage(false);
+    }
+  }, [isSendMessage]);
+
+  useEffect(() => {
+    if (isNewMessage && messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "auto" });
+      setIsNewMessage(false);
+    }
+  }, [isNewMessage]);
+
+  const handleArrowDown = () => {
+    if (messagesEndRef.current) {
+      animateScroll.scrollToBottom({
+        containerId: "all__messages",
+        smooth: true,
+      });
+    }
+  };
+
   return (
-    <>
-      <div className={styles.wrapper}>
-        <div id="all__messages" className={styles.check}>
-          <div className={styles.all__messages}>
-            {chat.map((message, index) => (
-              <div key={index} className={styles.messages_wrapper}>
+    <div className={styles.wrapper}>
+      <div id="all__messages" className={styles.check} ref={containerRef}>
+        <DinamicPagination onChange={handleGetMessage} />
+        <div className={styles.all__messages}>
+          {/* {isLoading && Array.from({ length: INTERSECTION_ELEMENTS.chat }).map(
+            (_, index) => (
+              <div className={styles.messages_wrapper} key={index}>
+                <div className={`${styles.row__message} ${styles.sender}`}>
+                  <SkeletonChatMessage />
+                </div>
+              </div>
+            )
+          )} */}
+          {~isLoading &&
+            chat.map((message, index) => (
+              <div
+                key={message.id}
+                ref={(el) => (itemRefs.current[index] = el)}
+                className={styles.messages_wrapper}
+              >
                 {message.message_date !== currentDate &&
                   ((currentDate = message.message_date),
                   (
@@ -152,7 +308,6 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ order_id }) => {
                       ? styles.recipient
                       : styles.sender
                   }`}
-                  key={index}
                 >
                   <div
                     className={`${styles.message} ${
@@ -161,35 +316,43 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ order_id }) => {
                         : styles.sender
                     }`}
                   >
-                    <p>{message.message}</p>
-                    <span>{message.message_time}</span>
+                    <div
+                      dangerouslySetInnerHTML={{
+                        __html: message.message || "",
+                      }}
+                    />
+                    <span className={styles.time}>{message.message_time}</span>
                   </div>
                 </div>
               </div>
             ))}
-          </div>
-          {/* Реф для прокрутки вниз */}
         </div>
-        <div ref={messagesEndRef} />
+        {showScrollDownButton && (
+          <button className={styles.arrow__down} onClick={handleArrowDown}>
+            <ArrowSmallVerticalIcon className="active__icon" />
+          </button>
+        )}
+        <div className={styles.end} ref={messagesEndRef} />
       </div>
-
-      <div className={styles.wrapper_bottom}>
+      <div className={styles.wrapper__bottom}>
         <button>
           <AddIcon />
         </button>
         <div className={styles.input}>
-          <input
-            id="sendInput"
-            type="text"
-            placeholder={t("chat.new_message")}
-            onChange={(e) => handleOnChange(e.target.value)}
+          {(newMessage === "" || newMessage === "<p></p>") && (
+            <span>{t("chat.new_message")}</span>
+          )}
+          <EditorContent
+            editor={editor}
+            maxLength={limit}
             onKeyDown={handleKeyPress}
+            className={styles.text}
           />
         </div>
         <button onClick={handleSendMessage}>
           <SendIcon />
         </button>
       </div>
-    </>
+    </div>
   );
 };

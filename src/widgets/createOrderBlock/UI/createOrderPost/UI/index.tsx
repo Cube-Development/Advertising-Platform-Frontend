@@ -5,7 +5,6 @@ import { PostGeneration } from "@features/postGeneration";
 import { PostText } from "@features/postText";
 import { PostFiles } from "@features/postFiles";
 import { PostButtons } from "@features/postButtons";
-import { BarPostFilter } from "@features/barPostFilter";
 import { ICreatePostForm, IPostChannel } from "@shared/types/createPost";
 import { AddFiles } from "@features/addFiles";
 import { AddMediaFiles } from "@features/addMediaFiles";
@@ -26,6 +25,9 @@ import {
   PostDispayInstagram,
   PostDispayTelegram,
 } from "@shared/ui/postDisplay";
+import clsx from "clsx";
+import { MultiPostsList } from "../multiPostsList";
+import { PlatformFilter } from "../platformFilter";
 
 interface CreateOrderPostProps {
   cards: IPostChannel[];
@@ -34,6 +36,8 @@ interface CreateOrderPostProps {
   setValue: UseFormSetValue<ICreatePostForm>;
   getValues: UseFormGetValues<ICreatePostForm>;
   formState: ICreatePostForm;
+  isMultiPost: boolean;
+  setIsMultiPost: () => void;
 }
 
 export const CreateOrderPost: FC<CreateOrderPostProps> = ({
@@ -43,11 +47,13 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
   setValue,
   getValues,
   formState,
+  isMultiPost,
+  setIsMultiPost,
 }) => {
   const { t } = useTranslation();
 
   const platformIds: number[] = [
-    ...new Set(cards.map((card) => card.platform)),
+    ...new Set(cards.map((card) => card?.platform)),
   ];
 
   const { platformFilter: filter } = useAppSelector((state) => state.filter);
@@ -61,7 +67,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
       onChangeBlur("datetime");
     } else {
       const allTypes = [
-        ...platformTypes.filter((item) => platformIds.includes(item.id)),
+        ...platformTypes.filter((item) => platformIds.includes(item?.id)),
       ];
       const nextType =
         allTypes[(allTypes.indexOf(filter) + 1) % allTypes.length];
@@ -81,10 +87,29 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
             <PostGeneration />
           </div>
           <div className={styles.creating__post}>
+            <ul className={styles.post_type_filter}>
+              <li
+                className={clsx("", { [styles.active__type]: !isMultiPost })}
+                onClick={setIsMultiPost}
+              >
+                {t("create_order.create.universal_post")}
+              </li>
+              <li
+                className={clsx("", { [styles.active__type]: isMultiPost })}
+                onClick={setIsMultiPost}
+              >
+                {t("create_order.create.multi_post")}
+              </li>
+            </ul>
             <div className={styles.filters}>
-              <BarPostFilter platforms={platformIds} />
+              <PlatformFilter platforms={platformIds} />
             </div>
-            <div className={styles.data}>
+            <div
+              className={clsx(styles.data, {
+                [styles.multi_active]: isMultiPost,
+              })}
+            >
+              {isMultiPost && <MultiPostsList />}
               <div className={styles.post_data}>
                 <div className={styles.block}>
                   {filter.id === platformTypesNum.telegram && (

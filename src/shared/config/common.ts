@@ -47,7 +47,7 @@ export const enum INTERSECTION_ELEMENTS {
   orders = 5,
   channels = 15,
   hisory = 1000,
-  chat = 10,
+  chat = 20,
 }
 
 export const enum BREAKPOINT {

@@ -4,11 +4,24 @@
   background: var(--Gradients-Gradient-1);
   border-radius: 50px 50px 0 50px;
   position: relative;
-  margin: 0 auto 100px auto;
+  margin: 0 auto var(--margin-section-xl) auto;
   overflow: hidden;
 
   @media (max-width: 992px) {
     border-radius: 0;
+    margin: 0 auto var(--margin-section-lg) auto;
+  }
+
+  @media (max-width: 768px) {
+    margin: 0 auto var(--margin-section-md) auto;
+  }
+
+  @media (max-width: 576px) {
+    margin: 0 auto var(--margin-section-sm) auto;
+  }
+
+  @media (max-width: 375px) {
+    margin: 0 auto var(--margin-section-xs) auto;
   }
 
   .content {
