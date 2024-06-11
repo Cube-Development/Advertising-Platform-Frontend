@@ -70,6 +70,8 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
 
   const project_id = Cookies.get("project_id");
 
+  const [isMultiPost, setIsMultiPost] = useState<boolean>(false);
+
   const { register, getValues, handleSubmit, setValue, watch } =
     useForm<ICreatePostForm>({
       defaultValues: {
@@ -255,6 +257,8 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
           setValue={setValue}
           getValues={getValues}
           formState={formState}
+          isMultiPost={isMultiPost}
+          setIsMultiPost={() => setIsMultiPost((prev) => !prev)}
         />
         <CreateOrderDatetime
           cards={projectChannels?.orders || []}

@@ -6,11 +6,11 @@ import { filterSlice } from "@shared/store/reducers";
 import { platformTypes } from "@shared/config/postFilter";
 import { IPlatformLink } from "@shared/types/platform";
 
-interface BarPostFilterProps {
+interface PlatformFilterProps {
   platforms: number[];
 }
 
-export const BarPostFilter: FC<BarPostFilterProps> = ({ platforms }) => {
+export const PlatformFilter: FC<PlatformFilterProps> = ({ platforms }) => {
   const { t } = useTranslation();
   const { platformFilter: filter } = useAppSelector((state) => state.filter);
   const dispatch = useAppDispatch();
@@ -20,6 +20,7 @@ export const BarPostFilter: FC<BarPostFilterProps> = ({ platforms }) => {
 
   return (
     <div className={styles.types}>
+      <p>{t("create_order.create.choose_platform")}</p>
       <ul>
         {platformTypes.map((type, index) => (
           <li
