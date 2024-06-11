@@ -20,7 +20,6 @@ export interface ICreatePostForm extends IProjectId {
 
 export interface ICreatePost extends IProjectId {
   platform?: number;
-  // name?: string;
   comment?: string;
   media?: File[];
   files?: File[];

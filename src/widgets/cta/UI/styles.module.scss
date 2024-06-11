@@ -1,5 +1,6 @@
 .wrapper {
   display: grid;
+  align-items: center;
   column-gap: 5px;
   // margin: 50px 0;
   grid-template: 1fr / 1fr 1fr;
@@ -10,7 +11,8 @@
   @media (max-width: 992px) {
     margin-top: calc(var(--margin-section-lg) / 2);
     margin-bottom: var(--margin-section-lg);
-    grid-template: 1fr 1fr / 1fr;
+    grid-template: none;
+    grid-auto-flow: row;
   }
 
   @media (max-width: 768px) {
@@ -39,6 +41,7 @@
 
   .cta {
     display: grid;
+    align-items: center;
     grid-auto-flow: row;
     row-gap: var(--row-gap-content-xl);
 

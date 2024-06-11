@@ -21,7 +21,6 @@ interface PartnerListProps {
 export const PartnerList: FC<PartnerListProps> = ({ partners, isLeft }) => {
   return (
     <div
-      // className={styles.partners}
       className={`${styles.partners} ${isLeft ? styles.isLeft : styles.isRight}`}
     >
       <Carousel
@@ -39,7 +38,9 @@ export const PartnerList: FC<PartnerListProps> = ({ partners, isLeft }) => {
         <CarouselContent>
           {partners.map((partner, index) => (
             <CarouselItem key={index} className="basis-1/4">
-              <img src={`/images/partners/${partner.img}`} alt="" />
+              <div className={styles.image}>
+                <img src={`/images/partners/${partner.img}`} alt="" />
+              </div>
             </CarouselItem>
           ))}
         </CarouselContent>
