@@ -75,7 +75,6 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
   const { register, getValues, handleSubmit, setValue, watch } =
     useForm<ICreatePostForm>({
       defaultValues: {
-        project_id: project_id,
         posts: [],
         datetime: { project_id: project_id, orders: [] },
       },
@@ -139,7 +138,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
                     content_type: ContentType.file,
                     content: data.file_name,
                   });
-                }),
+                })
               );
             }
             if (post?.media) {
@@ -163,10 +162,10 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
                     content_type: getContentType(media),
                     content: data.file_name,
                   });
-                }),
+                })
               );
             }
-          }),
+          })
         );
 
         // Создание постов
@@ -188,7 +187,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
                   action: <ToastAction altText="Ok">Ok</ToastAction>,
                 });
               });
-          }),
+          })
         );
 
         // Создание дат заказа и оплата

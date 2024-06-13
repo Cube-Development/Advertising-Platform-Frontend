@@ -4,11 +4,7 @@ import { addFileFilter } from "@shared/config/addFileFilter";
 import { CreatePostFormData } from "@shared/config/createPostData";
 import { pageFilter } from "@shared/config/pageFilter";
 import { useAppSelector } from "@shared/store";
-import {
-  FileProps,
-  ICreatePost,
-  ICreatePostForm,
-} from "@shared/types/createPost";
+import { FileProps, ICreatePostForm } from "@shared/types/createPost";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -16,7 +12,7 @@ import {
   AlertDialogTrigger,
 } from "@shared/ui/shadcn-ui/ui/alert-dialog";
 import { FC } from "react";
-import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
+import { UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
@@ -24,16 +20,18 @@ interface PostFilesProps {
   AddMediaFiles: FC<FileProps>;
   AddFiles: FC<FileProps>;
   setValue: UseFormSetValue<ICreatePostForm>;
-  getValues: UseFormGetValues<ICreatePostForm>;
+  formState: ICreatePostForm;
   platformId: number;
+  type: CreatePostFormData;
 }
 
 export const PostFiles: FC<PostFilesProps> = ({
   AddMediaFiles,
   AddFiles,
   setValue,
-  getValues,
+  formState,
   platformId,
+  type,
 }) => {
   const { t } = useTranslation();
 
@@ -42,56 +40,57 @@ export const PostFiles: FC<PostFilesProps> = ({
   const handle = () => {};
 
   const handleAddMediaFile = (mediafiles: File[]) => {
-    const form: ICreatePostForm = { ...getValues() };
-    const posts: ICreatePost[] = (form.posts || []).filter(
-      (item) => item.platform !== platformId,
-    );
-    const currentPost: ICreatePost = (form.posts || []).find(
-      (item) => item.platform === platformId,
-    ) || {
-      project_id: form.project_id,
-      platform: platformId,
-      files: [],
-      media: [],
-      buttons: [],
-    };
-    currentPost.media = [...mediafiles];
-    setValue(CreatePostFormData.posts, [...posts, currentPost]);
+    const posts = formState?.selectedMultiPostId
+      ? formState?.multiposts?.filter(
+          (item) => item?.order_id !== formState?.selectedMultiPostId
+        ) || []
+      : formState?.posts?.filter((item) => item?.platform !== platformId) || [];
+
+    const currentPost = formState?.selectedMultiPostId
+      ? formState?.multiposts?.find(
+          (item) => item?.order_id === formState?.selectedMultiPostId
+        )
+      : formState?.posts?.find((item) => item?.platform === platformId) || {
+          platform: platformId,
+        };
+    if (currentPost) {
+      currentPost.media = [...mediafiles];
+      setValue(type, [...posts, currentPost]);
+    }
   };
 
   const handleAddFile = (files: File[]) => {
-    const form: ICreatePostForm = { ...getValues() };
-    const posts: ICreatePost[] = (form.posts || []).filter(
-      (item) => item.platform !== platformId,
-    );
-    const currentPost: ICreatePost = (form.posts || []).find(
-      (item) => item.platform === platformId,
-    ) || {
-      project_id: form.project_id,
-      platform: platformId,
-      files: [],
-      media: [],
-      buttons: [],
-    };
-    const currentFiles = currentPost.files || [];
-    files.length
-      ? (currentPost.files = [...currentFiles, ...files])
-      : (currentPost.files = []);
-    setValue(CreatePostFormData.posts, [...posts, currentPost]);
+    const posts = formState?.selectedMultiPostId
+      ? formState?.multiposts?.filter(
+          (item) => item?.order_id !== formState?.selectedMultiPostId
+        ) || []
+      : formState?.posts?.filter((item) => item?.platform !== platformId) || [];
+
+    const currentPost = formState?.selectedMultiPostId
+      ? formState?.multiposts?.find(
+          (item) => item?.order_id === formState?.selectedMultiPostId
+        )
+      : formState?.posts?.find((item) => item?.platform === platformId) || {
+          platform: platformId,
+        };
+    if (currentPost) {
+      const currentFiles = currentPost.files || [];
+      files.length
+        ? (currentPost.files = [...currentFiles, ...files])
+        : (currentPost.files = []);
+      setValue(type, [...posts, currentPost]);
+    }
   };
 
-  const form: ICreatePostForm = { ...getValues() };
-  const currentPost: ICreatePost = (form.posts || []).find(
-    (item) => item.platform === platformId,
-  ) || {
-    project_id: form.project_id,
-    platform: platformId,
-    files: [],
-    media: [],
-    buttons: [],
-  };
-  const currentMedia: File[] = currentPost.media || [];
-  const currentFile: File[] = currentPost.files || [];
+  const currentPost = formState?.selectedMultiPostId
+    ? formState?.multiposts?.find(
+        (item) => item?.order_id === formState?.selectedMultiPostId
+      )
+    : formState?.posts?.find((item) => item?.platform === platformId) || {
+        platform: platformId,
+      };
+  const currentMedia: File[] = currentPost?.media || [];
+  const currentFile: File[] = currentPost?.files || [];
 
   return (
     <>

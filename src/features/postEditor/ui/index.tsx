@@ -5,31 +5,31 @@ import { Toolbar } from "./toolbar";
 import styles from "./styles.module.scss";
 import underline from "@tiptap/extension-underline";
 import link from "@tiptap/extension-link";
-import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
-import { ICreatePost, ICreatePostForm } from "@shared/types/createPost";
+import { UseFormSetValue } from "react-hook-form";
+import { ICreatePostForm } from "@shared/types/createPost";
 import { ContentType, CreatePostFormData } from "@shared/config/createPostData";
 import HardBreak from "@tiptap/extension-hard-break";
 
 interface EditorProps {
   setValue: UseFormSetValue<ICreatePostForm>;
-  getValues: UseFormGetValues<ICreatePostForm>;
   type: CreatePostFormData;
   platformId: number;
+  formState: ICreatePostForm;
 }
 
 export const Editor: FC<EditorProps> = ({
   setValue,
-  getValues,
   type,
   platformId,
+  formState,
 }) => {
-  const form: ICreatePostForm = { ...getValues() };
-  const currentPost = form.posts.find(
-    (item) => item.platform === platformId,
-  ) || {
-    project_id: form.project_id,
-    platform: platformId,
-  };
+  const currentPost = formState?.selectedMultiPostId
+    ? formState?.multiposts?.find(
+        (item) => item?.order_id === formState?.selectedMultiPostId
+      )
+    : formState?.posts?.find((item) => item.platform === platformId) || {
+        platform: platformId,
+      };
   const startContent =
     (currentPost?.text && currentPost?.text[0]?.content) || "";
   const [content, setContent] = useState(startContent);
@@ -70,26 +70,29 @@ export const Editor: FC<EditorProps> = ({
 
   const handleChange = (content: string) => {
     setContent(content);
-    const form: ICreatePostForm = { ...getValues() };
-    const posts: ICreatePost[] = (form.posts || []).filter(
-      (item) => item.platform !== platformId,
-    );
+    const posts = formState?.selectedMultiPostId
+      ? formState?.multiposts?.filter(
+          (item) => item?.order_id !== formState?.selectedMultiPostId
+        ) || []
+      : formState?.posts?.filter((item) => item?.platform !== platformId) || [];
 
-    const currentPost = (form.posts || []).find(
-      (item) => item.platform === platformId,
-    ) || {
-      project_id: form.project_id,
-      platform: platformId,
-    };
-
-    currentPost.text = [{ content_type: ContentType.text, content: content }];
-    setValue(type, [...posts, currentPost]);
+    const currentPost = formState?.selectedMultiPostId
+      ? formState?.multiposts?.find(
+          (item) => item?.order_id === formState?.selectedMultiPostId
+        )
+      : formState?.posts?.find((item) => item?.platform === platformId) || {
+          platform: platformId,
+        };
+    if (currentPost) {
+      currentPost.text = [{ content_type: ContentType.text, content: content }];
+      setValue(type, [...posts, currentPost]);
+    }
   };
 
   return (
     <div className={styles.editor}>
       <EditorContent
-        key={platformId}
+        // key={platformId}
         editor={editor}
         className="pb-12 pt-3 h-full relative"
         maxLength={limit}

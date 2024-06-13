@@ -12,13 +12,15 @@ export interface IProjectId {
   project_id: string;
 }
 
-export interface ICreatePostForm extends IProjectId {
+export interface ICreatePostForm {
   name?: string;
-  posts: ICreatePost[];
+  posts?: ICreatePost[];
+  multiposts?: ICreatePost[];
+  selectedMultiPostId?: string | null;
   datetime: ICreateDate;
 }
 
-export interface ICreatePost extends IProjectId {
+export interface ICreatePost {
   platform?: number;
   comment?: string;
   media?: File[];
@@ -26,6 +28,7 @@ export interface ICreatePost extends IProjectId {
   buttons?: ITgButton[];
   text?: IPostText[];
   content?: IFile[];
+  order_id?: string;
 }
 
 export interface IFile {

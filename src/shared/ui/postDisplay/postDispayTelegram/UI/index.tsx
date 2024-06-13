@@ -53,8 +53,22 @@ export const PostDispayTelegram: FC<PostDispayTelegramProps> = ({
   const commentRes = post && post?.comment;
 
   // postFromData
-  const currentPost =
-    formState && formState.posts.find((item) => item.platform === platformId);
+  const currentPost = formState?.selectedMultiPostId
+    ? formState?.multiposts?.find(
+        (item) => item?.order_id === formState?.selectedMultiPostId
+      ) || {
+        platform: platformId,
+        files: [],
+        media: [],
+        buttons: [],
+        order_id: formState?.selectedMultiPostId,
+      }
+    : (formState?.posts || []).find((item) => item.platform === platformId) || {
+        platform: platformId,
+        files: [],
+        media: [],
+        buttons: [],
+      };
   const postText = currentPost?.text;
   const postMedia = currentPost?.media;
   const postFile = currentPost?.files;
