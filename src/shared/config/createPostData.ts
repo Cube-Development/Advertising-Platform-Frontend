@@ -8,10 +8,10 @@ export enum CreatePostData {
 }
 
 export enum CreatePostFormData {
-  project_id = "project_id",
   name = "name",
   posts = "posts",
   datetime = "datetime",
+  multiposts = "multiposts",
 }
 
 export enum ContentType {

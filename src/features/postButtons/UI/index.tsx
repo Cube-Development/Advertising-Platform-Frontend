@@ -9,39 +9,40 @@ import {
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
-import {
-  ICreatePost,
-  ICreatePostForm,
-  ITgButton,
-} from "@shared/types/createPost";
+import { UseFormSetValue } from "react-hook-form";
+import { ICreatePostForm, ITgButton } from "@shared/types/createPost";
 import { ContentType, CreatePostFormData } from "@shared/config/createPostData";
 
 interface PostButtonsProps {
   setValue: UseFormSetValue<ICreatePostForm>;
-  getValues: UseFormGetValues<ICreatePostForm>;
   platformId: number;
+  formState: ICreatePostForm;
+  type: CreatePostFormData;
 }
 
 export const PostButtons: FC<PostButtonsProps> = ({
-  getValues,
   setValue,
   platformId,
+  formState,
+  type,
 }) => {
   const { t } = useTranslation();
 
-  const form: ICreatePostForm = { ...getValues() };
-  const posts: ICreatePost[] = (form.posts || []).filter(
-    (item) => item.platform !== platformId,
-  );
-  const currentPost: ICreatePost = (form.posts || []).find(
-    (item) => item.platform === platformId,
-  ) || {
-    project_id: form.project_id,
-    platform: platformId,
-    files: [],
-  };
-  const currentButtons: ITgButton[] = currentPost.buttons || [];
+  const posts = formState?.selectedMultiPostId
+    ? formState?.multiposts?.filter(
+        (item) => item?.order_id !== formState?.selectedMultiPostId,
+      ) || []
+    : formState?.posts?.filter((item) => item?.platform !== platformId) || [];
+
+  const currentPost = formState?.selectedMultiPostId
+    ? formState?.multiposts?.find(
+        (item) => item?.order_id === formState?.selectedMultiPostId,
+      )
+    : formState?.posts?.find((item) => item?.platform === platformId) || {
+        platform: platformId,
+      };
+
+  const currentButtons: ITgButton[] = currentPost?.buttons || [];
 
   const [buttons, setButtons] = useState<ITgButton[]>(
     currentButtons ? currentButtons : [],
@@ -65,14 +66,19 @@ export const PostButtons: FC<PostButtonsProps> = ({
     (document.getElementById("nameInput") as HTMLInputElement).value = "";
     (document.getElementById("linkInput") as HTMLInputElement).value = "";
 
-    currentPost.buttons = [...buttons, button];
-    setValue(CreatePostFormData.posts, [...posts, currentPost]);
+    if (currentPost) {
+      currentPost.buttons = [...buttons, button];
+      setValue(type, [...posts, currentPost]);
+    }
   };
 
   const handleRemoveButton = (button: ITgButton) => {
     setButtons(buttons.filter((item) => item !== button));
-    currentPost.buttons = [...buttons.filter((item) => item !== button)];
-    setValue(CreatePostFormData.posts, [...posts, currentPost]);
+
+    if (currentPost) {
+      currentPost.buttons = [...buttons.filter((item) => item !== button)];
+      setValue(type, [...posts, currentPost]);
+    }
   };
 
   return (

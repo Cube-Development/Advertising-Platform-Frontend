@@ -2,6 +2,7 @@ import { Languages } from "@shared/config/languages";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { Language } from "@shared/types/languages";
 
 export const Lang: FC = () => {
   const [isMenuOpen, setMenuOpen] = useState(false);
@@ -31,7 +32,7 @@ export const Lang: FC = () => {
     };
   }, []);
 
-  const handleLanguageSelect = (lang: any) => {
+  const handleLanguageSelect = (lang: Language) => {
     i18n.changeLanguage(lang.name);
     setMenuOpen(false);
     setLanguage(lang);
@@ -43,7 +44,7 @@ export const Lang: FC = () => {
       ref={menuRef}
     >
       <button className={styles.lang__button} onClick={handleButtonClick}>
-        {/* <language.icon/> */}
+        <img src={`/images/${language.icon}.svg`} alt="" />
       </button>
 
       {isMenuOpen && (
@@ -52,10 +53,11 @@ export const Lang: FC = () => {
             {Languages.map((lang) => (
               <li
                 className={styles.menu__item}
-                key={lang.id}
+                key={lang?.id}
                 onClick={() => handleLanguageSelect(lang)}
               >
-                <span>{lang.name}</span> <lang.icon />
+                <img src={`/images/${lang?.icon}.svg`} alt="" />{" "}
+                <span>{lang?.name}</span>
               </li>
             ))}
           </ul>

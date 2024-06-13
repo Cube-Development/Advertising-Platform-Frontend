@@ -1,9 +1,9 @@
 import { FC, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
-import { ICreatePost, ICreatePostForm } from "@shared/types/createPost";
+import { ICreatePostForm } from "@shared/types/createPost";
 import { CreatePostFormData } from "@shared/config/createPostData";
-import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
+import { UseFormSetValue } from "react-hook-form";
 
 interface PostTextProps {
   placeholder: string;
@@ -11,8 +11,8 @@ interface PostTextProps {
   maxLength: number;
   type: CreatePostFormData;
   setValue: UseFormSetValue<ICreatePostForm>;
-  getValues: UseFormGetValues<ICreatePostForm>;
   platformId: number;
+  formState: ICreatePostForm;
 }
 
 export const PostText: FC<PostTextProps> = ({
@@ -21,41 +21,46 @@ export const PostText: FC<PostTextProps> = ({
   maxLength,
   setValue,
   type,
-  getValues,
   platformId,
+  formState,
 }) => {
   const { t } = useTranslation();
   const [description, setDescription] = useState<string>("");
 
   useEffect(() => {
-    // Установка начального значения при монтировании компонента
-    const form: ICreatePostForm = { ...getValues() };
-    const currentPost = form.posts.find(
-      (item) => item.platform === platformId,
-    ) || {
-      project_id: form.project_id,
-      platform: platformId,
-    };
-    const startText = currentPost.comment || "";
-    setDescription(startText);
-  }, [getValues, platformId]);
+    const currentPost = formState?.selectedMultiPostId
+      ? formState?.multiposts?.find(
+          (item) => item?.order_id === formState?.selectedMultiPostId,
+        )
+      : formState?.posts?.find((item) => item?.platform === platformId) || {
+          platform: platformId,
+        };
+    if (currentPost) {
+      const startText = currentPost.comment || "";
+      setDescription(startText);
+    }
+  }, [formState, platformId]);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newText = e.target.value;
     setDescription(newText);
-    const form: ICreatePostForm = { ...getValues() };
-    const posts: ICreatePost[] = (form.posts || []).filter(
-      (item) => item.platform !== platformId,
-    );
+    const posts = formState?.selectedMultiPostId
+      ? formState?.multiposts?.filter(
+          (item) => item?.order_id !== formState?.selectedMultiPostId,
+        ) || []
+      : formState?.posts?.filter((item) => item?.platform !== platformId) || [];
 
-    const currentPost = (form.posts || []).find(
-      (item) => item.platform === platformId,
-    ) || {
-      project_id: form.project_id,
-      platform: platformId,
-    };
-    currentPost.comment = newText;
-    setValue(type, [...posts, currentPost]);
+    const currentPost = formState?.selectedMultiPostId
+      ? formState?.multiposts?.find(
+          (item) => item?.order_id === formState?.selectedMultiPostId,
+        )
+      : formState?.posts?.find((item) => item?.platform === platformId) || {
+          platform: platformId,
+        };
+    if (currentPost) {
+      currentPost.comment = newText;
+      setValue(type, [...posts, currentPost]);
+    }
   };
 
   return (

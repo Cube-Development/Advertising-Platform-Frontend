@@ -75,7 +75,6 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
   const { register, getValues, handleSubmit, setValue, watch } =
     useForm<ICreatePostForm>({
       defaultValues: {
-        project_id: project_id,
         posts: [],
         datetime: { project_id: project_id, orders: [] },
       },

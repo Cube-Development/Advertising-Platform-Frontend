@@ -65,15 +65,15 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
     ? (defaultValues = {
         male: channel?.male,
         female: channel?.female,
-        category: channel?.category.id,
+        category: channel?.category?.id,
         description: channel?.description,
         text_limit: channel?.text_limit,
-        region: channel?.region.map((item) => item.id),
-        language: channel?.language.map((item) => item.id),
-        age: channel?.age.map((item) => item.id),
-        format: channel?.format.map((format: IFormat) => ({
-          name: format.format,
-          price: format.price,
+        region: channel?.region?.map((item) => item?.id),
+        language: channel?.language?.map((item) => item?.id),
+        age: channel?.age?.map((item) => item?.id),
+        format: channel?.format?.map((format: IFormat) => ({
+          name: format?.format,
+          price: format?.price,
         })),
       })
     : (defaultValues = {
@@ -114,7 +114,7 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
         const { ...editData } = data;
         editChannel({ ...editData, channel_id: channel.id })
           .unwrap()
-          .then((data) => {
+          .then(() => {
             setIsModalOpen(true);
             onChangeBlur({ link: true, parameters: true });
             toast({

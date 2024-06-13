@@ -39,12 +39,19 @@
 
 .active {
   background: var(--Gradients-Gradient-1);
+  border: 1px solid #4772e6;
   color: #fff;
 }
 
 .non__active {
-  border: 2.5px dashed #4772e6;
-  color: #4772e6;
+  position: relative;
+  border: 1px solid #4772e6;
+  background: var(--Gradients-Gradient-1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* Включаем поддержку для Firefox */
+  background-clip: text;
+  color: transparent;
 }
 
 .disabled {
