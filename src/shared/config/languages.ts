@@ -17,16 +17,19 @@ export const Languages: Language[] = [
   {
     name: languages.ru,
     id: languagesNum.ru,
-    icon: LangRuIcon,
+    // icon: LangRuIcon,
+    icon: "russia",
   },
   {
     name: languages.uz,
     id: languagesNum.uz,
-    icon: LangUzIcon,
+    // icon: LangUzIcon,
+    icon: "uzbekistan",
   },
   {
     name: languages.en,
     id: languagesNum.en,
-    icon: LangEnIcon,
+    // icon: LangEnIcon,
+    icon: "uk",
   },
 ];

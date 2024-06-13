@@ -33,7 +33,7 @@ export const WorkWithUs: FC<WorkWithUsProps> = ({ page }) => {
       <motion.div
         custom={custom++}
         variants={MAIN_PAGE_ANIMATION.animationVision}
-        style={{ overflow: "hidden" }}
+        className={styles.channels}
       >
         <Swiper
           modules={[Autoplay]}

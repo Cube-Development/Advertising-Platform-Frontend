@@ -101,8 +101,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
           >
             <div className={styles.menu__content}>
               <div className={styles.menu__top}>
-                <img src="/images/assets/logo.svg" alt="" />
-
+                <p className={styles.logo}>Logo</p>
                 <button onClick={() => toggleMenu()}>
                   <div className={styles.close__icon} />
                 </button>
