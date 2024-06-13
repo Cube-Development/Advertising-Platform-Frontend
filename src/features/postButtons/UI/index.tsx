@@ -30,13 +30,13 @@ export const PostButtons: FC<PostButtonsProps> = ({
 
   const posts = formState?.selectedMultiPostId
     ? formState?.multiposts?.filter(
-        (item) => item?.order_id !== formState?.selectedMultiPostId
+        (item) => item?.order_id !== formState?.selectedMultiPostId,
       ) || []
     : formState?.posts?.filter((item) => item?.platform !== platformId) || [];
 
   const currentPost = formState?.selectedMultiPostId
     ? formState?.multiposts?.find(
-        (item) => item?.order_id === formState?.selectedMultiPostId
+        (item) => item?.order_id === formState?.selectedMultiPostId,
       )
     : formState?.posts?.find((item) => item?.platform === platformId) || {
         platform: platformId,
@@ -45,7 +45,7 @@ export const PostButtons: FC<PostButtonsProps> = ({
   const currentButtons: ITgButton[] = currentPost?.buttons || [];
 
   const [buttons, setButtons] = useState<ITgButton[]>(
-    currentButtons ? currentButtons : []
+    currentButtons ? currentButtons : [],
   );
   const [button, setButton] = useState<ITgButton>({
     content_type: ContentType.button,
@@ -106,7 +106,7 @@ export const PostButtons: FC<PostButtonsProps> = ({
                   id="nameInput"
                   type="text"
                   placeholder={t(
-                    "create_order.create.add_button.name.default_value"
+                    "create_order.create.add_button.name.default_value",
                   )}
                   onChange={(e) => handleOnChange("content", e.target.value)}
                 />
@@ -117,7 +117,7 @@ export const PostButtons: FC<PostButtonsProps> = ({
                   id="linkInput"
                   type="text"
                   placeholder={t(
-                    "create_order.create.add_button.link.default_value"
+                    "create_order.create.add_button.link.default_value",
                   )}
                   onChange={(e) => handleOnChange("url", e.target.value)}
                 />

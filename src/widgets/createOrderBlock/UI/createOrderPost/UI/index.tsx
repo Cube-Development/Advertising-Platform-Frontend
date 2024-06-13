@@ -90,7 +90,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
               platformId={platformId}
               formState={formState}
             />
-          )
+          ),
       )
     ) : (
       <Editor

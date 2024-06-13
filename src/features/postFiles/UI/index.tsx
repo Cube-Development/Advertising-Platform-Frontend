@@ -42,13 +42,13 @@ export const PostFiles: FC<PostFilesProps> = ({
   const handleAddMediaFile = (mediafiles: File[]) => {
     const posts = formState?.selectedMultiPostId
       ? formState?.multiposts?.filter(
-          (item) => item?.order_id !== formState?.selectedMultiPostId
+          (item) => item?.order_id !== formState?.selectedMultiPostId,
         ) || []
       : formState?.posts?.filter((item) => item?.platform !== platformId) || [];
 
     const currentPost = formState?.selectedMultiPostId
       ? formState?.multiposts?.find(
-          (item) => item?.order_id === formState?.selectedMultiPostId
+          (item) => item?.order_id === formState?.selectedMultiPostId,
         )
       : formState?.posts?.find((item) => item?.platform === platformId) || {
           platform: platformId,
@@ -62,13 +62,13 @@ export const PostFiles: FC<PostFilesProps> = ({
   const handleAddFile = (files: File[]) => {
     const posts = formState?.selectedMultiPostId
       ? formState?.multiposts?.filter(
-          (item) => item?.order_id !== formState?.selectedMultiPostId
+          (item) => item?.order_id !== formState?.selectedMultiPostId,
         ) || []
       : formState?.posts?.filter((item) => item?.platform !== platformId) || [];
 
     const currentPost = formState?.selectedMultiPostId
       ? formState?.multiposts?.find(
-          (item) => item?.order_id === formState?.selectedMultiPostId
+          (item) => item?.order_id === formState?.selectedMultiPostId,
         )
       : formState?.posts?.find((item) => item?.platform === platformId) || {
           platform: platformId,
@@ -84,7 +84,7 @@ export const PostFiles: FC<PostFilesProps> = ({
 
   const currentPost = formState?.selectedMultiPostId
     ? formState?.multiposts?.find(
-        (item) => item?.order_id === formState?.selectedMultiPostId
+        (item) => item?.order_id === formState?.selectedMultiPostId,
       )
     : formState?.posts?.find((item) => item?.platform === platformId) || {
         platform: platformId,

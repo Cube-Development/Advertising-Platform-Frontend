@@ -30,7 +30,7 @@ export const PostText: FC<PostTextProps> = ({
   useEffect(() => {
     const currentPost = formState?.selectedMultiPostId
       ? formState?.multiposts?.find(
-          (item) => item?.order_id === formState?.selectedMultiPostId
+          (item) => item?.order_id === formState?.selectedMultiPostId,
         )
       : formState?.posts?.find((item) => item?.platform === platformId) || {
           platform: platformId,
@@ -46,13 +46,13 @@ export const PostText: FC<PostTextProps> = ({
     setDescription(newText);
     const posts = formState?.selectedMultiPostId
       ? formState?.multiposts?.filter(
-          (item) => item?.order_id !== formState?.selectedMultiPostId
+          (item) => item?.order_id !== formState?.selectedMultiPostId,
         ) || []
       : formState?.posts?.filter((item) => item?.platform !== platformId) || [];
 
     const currentPost = formState?.selectedMultiPostId
       ? formState?.multiposts?.find(
-          (item) => item?.order_id === formState?.selectedMultiPostId
+          (item) => item?.order_id === formState?.selectedMultiPostId,
         )
       : formState?.posts?.find((item) => item?.platform === platformId) || {
           platform: platformId,

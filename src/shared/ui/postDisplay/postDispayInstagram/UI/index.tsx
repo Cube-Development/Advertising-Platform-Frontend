@@ -54,7 +54,7 @@ export const PostDispayInstagram: FC<PostDispayInstagramProps> = ({
   // postFromData
   const currentPost = formState?.selectedMultiPostId
     ? formState?.multiposts?.find(
-        (item) => item?.order_id === formState?.selectedMultiPostId
+        (item) => item?.order_id === formState?.selectedMultiPostId,
       ) || {
         platform: platformId,
         files: [],
