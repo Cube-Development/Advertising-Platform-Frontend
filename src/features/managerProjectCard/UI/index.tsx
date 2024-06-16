@@ -2,7 +2,6 @@ import { ManagerProjectSubcard } from "@entities/managerProjectSubcard";
 import {
   ArrowSmallVerticalIcon,
   CancelIcon,
-  ChatIcon,
   CompliteIcon,
   MoreIcon,
   RocketIcon,
@@ -10,26 +9,24 @@ import {
   SeePostIcon,
   WaitIcon,
 } from "@shared/assets";
+import { accordionTypes } from "@shared/config/accordion";
 import { Languages } from "@shared/config/languages";
+import { orderStatus } from "@shared/config/orderFilter";
 import { managerProjectStatusFilter } from "@shared/config/projectFilter";
 import { useAppSelector } from "@shared/store";
-import {
-  getProjectSubcardReq,
-  useGetAdvSubprojectsQuery,
-} from "@shared/store/services/advOrdersService";
-import { IManagerProjectCard } from "@shared/types/managerProjects";
+import { getProjectSubcardReq } from "@shared/store/services/advOrdersService";
 import { IChannelChat } from "@shared/types/common";
-import { FC, useEffect, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import { orderStatus } from "@shared/config/orderFilter";
+import { IManagerProjectCard } from "@shared/types/managerProjects";
 import { IOrderFeature } from "@shared/types/order";
-import { accordionTypes } from "@shared/config/accordion";
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@shared/ui/shadcn-ui/ui/accordion";
+import { Chat } from "@widgets/header/UI/chat";
+import { FC, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 interface ManagerProjectCardProps {
   card: IManagerProjectCard;
@@ -249,9 +246,7 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
             </button>
           </div>
           <div className={styles.card__more__icon}>
-            <button>
-              <ChatIcon />
-            </button>
+            <Chat />
           </div>
         </div>
       </div>

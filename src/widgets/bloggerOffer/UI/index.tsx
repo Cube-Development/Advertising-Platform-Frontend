@@ -13,6 +13,8 @@ import { pageFilter } from "@shared/config/pageFilter";
 import { paths } from "@shared/routing";
 import { SpinnerLoader } from "@shared/ui/spinnerLoader";
 import { ShowMoreBtn } from "@features/showMore";
+import { INTERSECTION_ELEMENTS } from "@shared/config/common";
+import { SkeletonBloggerOfferCard } from "@features/bloggerOfferCard/skeletonBloggerOfferCard";
 
 interface BloggerOfferProps {
   offers: IBloggerOfferCard[];
@@ -29,7 +31,7 @@ export const BloggerOffer: FC<BloggerOfferProps> = ({
 }) => {
   return (
     <div className="container sidebar">
-      {offers?.length === 0 ? (
+      {isLoading && offers?.length === 0 ? (
         <ZeroPlatform
           AddPlatformBtn={AddPlatform}
           page={pageFilter.offer}
@@ -37,17 +39,22 @@ export const BloggerOffer: FC<BloggerOfferProps> = ({
         />
       ) : (
         <div className={styles.wrapper}>
-          {offers?.map((card, index) => (
-            <BloggerOfferCard
-              key={index}
-              card={card}
-              SeeLinkBtn={SeeLink}
-              SendLinkBtn={SendLink}
-              AcceptOfferBtn={AcceptOffer}
-              RejectOfferBtn={RejectOffer}
-              SeeReasonBtn={SeeReason}
-            />
-          ))}
+          {isLoading &&
+            Array.from({ length: INTERSECTION_ELEMENTS.offers }).map(
+              (_, index) => <SkeletonBloggerOfferCard key={index} />,
+            )}
+          {!isLoading &&
+            offers?.map((card, index) => (
+              <BloggerOfferCard
+                key={index}
+                card={card}
+                SeeLinkBtn={SeeLink}
+                SendLinkBtn={SendLink}
+                AcceptOfferBtn={AcceptOffer}
+                RejectOfferBtn={RejectOffer}
+                SeeReasonBtn={SeeReason}
+              />
+            ))}
           {isNotEmpty && (
             <div className={styles.show_more} onClick={handleOnChangePage}>
               {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}

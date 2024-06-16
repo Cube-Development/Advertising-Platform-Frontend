@@ -7,6 +7,8 @@ import { IModerationChannel } from "@shared/types/channelStatus";
 import { pageFilter } from "@shared/config/pageFilter";
 import { SpinnerLoader } from "@shared/ui/spinnerLoader";
 import { ShowMoreBtn } from "@features/showMore";
+import { INTERSECTION_ELEMENTS } from "@shared/config/common";
+import { SkeletonBloggerModPlatformCard } from "@entities/bloggerModPlatformCard/skeletonBloggerModPlatformCard";
 
 interface BloggerModPlatformProps {
   cards: IModerationChannel[];
@@ -23,13 +25,18 @@ export const BloggerModPlatform: FC<BloggerModPlatformProps> = ({
 }) => {
   return (
     <section className="container sidebar">
-      {cards?.length === 0 ? (
+      {isLoading && cards?.length === 0 ? (
         <ZeroPlatform AddPlatformBtn={AddPlatform} page={pageFilter.platform} />
       ) : (
         <div className={styles.wrapper}>
-          {cards?.map((card, index: number) => (
-            <BloggerModPlatformCard key={index} card={card} />
-          ))}
+          {isLoading &&
+            Array.from({ length: INTERSECTION_ELEMENTS.modPlatforms }).map(
+              (_, index) => <SkeletonBloggerModPlatformCard key={index} />,
+            )}
+          {!isLoading &&
+            cards?.map((card, index: number) => (
+              <BloggerModPlatformCard key={index} card={card} />
+            ))}
           {isNotEmpty && (
             <div className={styles.show_more} onClick={handleOnChangePage}>
               {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}

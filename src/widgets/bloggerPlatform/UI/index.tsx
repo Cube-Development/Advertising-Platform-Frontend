@@ -16,6 +16,8 @@ import { FC, useEffect, useRef, useState } from "react";
 import styles from "./styles.module.scss";
 import { SpinnerLoader } from "@shared/ui/spinnerLoader";
 import { ShowMoreBtn } from "@features/showMore";
+import { INTERSECTION_ELEMENTS } from "@shared/config/common";
+import { SkeletonBloggerPlatformCard } from "@features/bloggerPlatformCard/skeletonBloggerPlatformCard";
 
 interface BloggerPlatformProps {
   cards: AllChannelTypes[];
@@ -32,25 +34,30 @@ export const BloggerPlatform: FC<BloggerPlatformProps> = ({
 }) => {
   return (
     <section className="container sidebar">
-      {cards?.length === 0 ? (
+      {!isLoading && cards?.length === 0 ? (
         <ZeroPlatform AddPlatformBtn={AddPlatform} page={pageFilter.platform} />
       ) : (
         <Accordion type="single" collapsible>
           <div className={styles.wrapper}>
-            {cards?.map((card) => (
-              <BloggerPlatformCard
-                key={card.id}
-                card={card}
-                DeleteChannel={DeleteChannel}
-                ChannelDescriptionBtn={ChannelDescription}
-                BloggerPlatformCardMenu={BloggerPlatformCardMenu}
-                SeeOffersBtn={SeeOffers}
-                SeeReasonBtn={SeeReason}
-                RepeatOfferBtn={RepeatOffer}
-                ActivateBtn={ActivatePlatform}
-                SupportBtn={Support}
-              />
-            ))}
+            {isLoading &&
+              Array.from({ length: INTERSECTION_ELEMENTS.platforms }).map(
+                (_, index) => <SkeletonBloggerPlatformCard key={index} />,
+              )}
+            {!isLoading &&
+              cards?.map((card) => (
+                <BloggerPlatformCard
+                  key={card.id}
+                  card={card}
+                  DeleteChannel={DeleteChannel}
+                  ChannelDescriptionBtn={ChannelDescription}
+                  BloggerPlatformCardMenu={BloggerPlatformCardMenu}
+                  SeeOffersBtn={SeeOffers}
+                  SeeReasonBtn={SeeReason}
+                  RepeatOfferBtn={RepeatOffer}
+                  ActivateBtn={ActivatePlatform}
+                  SupportBtn={Support}
+                />
+              ))}
             {isNotEmpty && (
               <div className={styles.show_more} onClick={handleOnChangePage}>
                 {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
