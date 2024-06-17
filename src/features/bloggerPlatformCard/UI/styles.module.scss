@@ -7,6 +7,7 @@
   padding-top: 20px;
   width: 100%;
   position: relative;
+  background-color: var(--Personal-colors-White);
 
   .card {
     display: grid;
@@ -19,15 +20,21 @@
       border-right: 1px solid var(--Card-separator);
       padding: 0 20px;
 
-      img {
-        width: 64px;
-        height: 64px;
-        border-radius: 64px;
-        border: 0.5px solid var(--Personal-colors-main);
-      }
+      .logo {
+        display: grid;
+        grid-auto-flow: row;
+        row-gap: 10px;
 
-      svg {
-        max-width: 80px;
+        img {
+          width: 80px;
+          height: 80px;
+          border-radius: 50%;
+          border: 0.5px solid var(--Personal-colors-main);
+        }
+
+        svg {
+          max-width: 80px;
+        }
       }
     }
 

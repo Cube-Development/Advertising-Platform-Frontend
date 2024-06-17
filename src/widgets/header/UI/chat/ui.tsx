@@ -109,7 +109,6 @@ export const Chat: FC = () => {
     transition: { transition: { duration: 0.5 } },
   };
 
-  console.log(allChats);
   return (
     <div>
       {screen >= BREAKPOINT.MD ? (

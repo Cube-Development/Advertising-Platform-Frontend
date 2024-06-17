@@ -26,7 +26,7 @@ export const AdvDevProject: FC<AdvDevProjectProps> = ({
 }) => {
   return (
     <div className="container">
-      {projects?.length === 0 ? (
+      {!isLoading && projects?.length === 0 ? (
         <ZeroProject
           listLength={true}
           NewProjectBtn={NewProject}
@@ -34,17 +34,18 @@ export const AdvDevProject: FC<AdvDevProjectProps> = ({
         />
       ) : (
         <div className={styles.wrapper}>
-          {projects?.map((card, index) => (
-            <AdvDevProjectCard
-              key={index}
-              card={card}
-              ContinueBtn={ContinueTemplate}
-            />
-          ))}
           {isLoading &&
             Array.from({ length: INTERSECTION_ELEMENTS.orders }).map(
               (_, index) => <SkeletonAdvDevProjectCard key={index} />,
             )}
+          {!isLoading &&
+            projects?.map((card, index) => (
+              <AdvDevProjectCard
+                key={index}
+                card={card}
+                ContinueBtn={ContinueTemplate}
+              />
+            ))}
           {isNotEmpty && (
             <div className={styles.show_more} onClick={handleOnChangePage}>
               {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}

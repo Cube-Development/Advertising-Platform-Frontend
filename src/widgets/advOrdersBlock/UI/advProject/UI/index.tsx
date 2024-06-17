@@ -34,7 +34,7 @@ export const AdvProject: FC<AdvProjectProps> = ({
 }) => {
   return (
     <div className="container sidebar">
-      {projects?.length === 0 ? (
+      {!isLoading && projects?.length === 0 ? (
         <ZeroProject
           listLength={!!projects?.length}
           NewProjectBtn={NewProject}
@@ -43,24 +43,25 @@ export const AdvProject: FC<AdvProjectProps> = ({
       ) : (
         <Accordion type="single" collapsible>
           <div className={styles.wrapper}>
-            {projects?.map((card, index) => (
-              <AdvProjectCard
-                key={index}
-                card={card}
-                FeedbackBtn={Feedback}
-                AcceptBtn={AcceptPost}
-                RejectBtn={RejectPost}
-                CheckBtn={CheckPost}
-                SeeBtn={SeePost}
-                ChannelChatBtn={ChannelChat}
-                AcceptProjectBtn={AcceptProject}
-                ChangeChannelBtn={ChangeChannel}
-              />
-            ))}
             {isLoading &&
               Array.from({ length: INTERSECTION_ELEMENTS.orders }).map(
                 (_, index) => <SkeletonAdvProjectCard key={index} />,
               )}
+            {!isLoading &&
+              projects?.map((card, index) => (
+                <AdvProjectCard
+                  key={index}
+                  card={card}
+                  FeedbackBtn={Feedback}
+                  AcceptBtn={AcceptPost}
+                  RejectBtn={RejectPost}
+                  CheckBtn={CheckPost}
+                  SeeBtn={SeePost}
+                  ChannelChatBtn={ChannelChat}
+                  AcceptProjectBtn={AcceptProject}
+                  ChangeChannelBtn={ChangeChannel}
+                />
+              ))}
             {isNotEmpty && (
               <div className={styles.show_more} onClick={handleOnChangePage}>
                 {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}

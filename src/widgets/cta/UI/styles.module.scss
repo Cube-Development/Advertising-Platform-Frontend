@@ -111,8 +111,13 @@
         font-weight: 700;
         line-height: normal;
         color: var(--Personal-colors-main);
-        background-clip: text;
         font-size: var(--font-size-subtitle-main-xl);
+        background: var(--Gradients-Gradient-1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        /* Включаем поддержку для Firefox */
+        background-clip: text;
+        color: transparent;
 
         @media (max-width: 992px) {
           font-size: var(--font-size-subtitle-main-lg);

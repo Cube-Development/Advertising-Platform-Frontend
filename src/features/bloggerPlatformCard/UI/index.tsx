@@ -125,13 +125,15 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
     <div className={styles.wrapper}>
       <div className={styles.card}>
         <div className={styles.card__logo}>
-          <img src={card.avatar} alt="" />
-          {statusFilter === platformStatusFilter.active ||
-          statusFilter === platformStatusFilter.inactive ? (
-            <RatingIcon />
-          ) : (
-            <></>
-          )}
+          <div className={styles.logo}>
+            <img src={card.avatar} alt="" />
+            {statusFilter === platformStatusFilter.active ||
+            statusFilter === platformStatusFilter.inactive ? (
+              <RatingIcon />
+            ) : (
+              <></>
+            )}
+          </div>
         </div>
         <div className={styles.card__description}>
           <div className={styles.card__description__top}>

@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 export const CheckPost: FC<IOrderFeature> = ({ url }) => {
   const { t } = useTranslation();
   return (
-    <Link to={url!}>
+    <Link to={url!} target="_blank">
       <MyButton buttons_type="button__white" className={styles.button}>
         {t(`order_btn.checkPost`)}
       </MyButton>

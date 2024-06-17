@@ -2,7 +2,6 @@ import { AdvProjectSubcard } from "@entities/advProjectSubcard";
 import {
   ArrowSmallVerticalIcon,
   CancelIcon,
-  ChatIcon,
   CompliteIcon,
   MoreIcon,
   RocketIcon,
@@ -33,6 +32,7 @@ import {
   AccordionTrigger,
 } from "@shared/ui/shadcn-ui/ui/accordion";
 import styles from "./styles.module.scss";
+import { Chat } from "@widgets/header/UI/chat";
 
 interface AdvProjectCardProps {
   card: IAdvProjectCard;
@@ -195,9 +195,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
           </div>
           {typeFilter === projectTypesFilter.managerProject && (
             <div className={styles.chat__btn}>
-              <button>
-                <ChatIcon />
-              </button>
+              <Chat />
             </div>
           )}
         </div>
