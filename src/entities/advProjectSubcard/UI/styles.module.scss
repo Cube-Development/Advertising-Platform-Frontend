@@ -300,7 +300,7 @@
   &__posted {
     display: grid;
     grid-auto-flow: row;
-    row-gap: 15px;
+    row-gap: 10px;
     align-items: center;
     align-content: center;
     padding: 0 50px;
@@ -312,7 +312,7 @@
     &__title {
       display: grid;
       grid-auto-flow: row;
-      row-gap: 10px;
+      row-gap: 5px;
 
       p {
         padding: 0 30px;
@@ -323,7 +323,6 @@
       }
 
       span {
-        padding: 0 30px;
         font-size: 10px;
         font-style: normal;
         font-weight: 400;
@@ -333,7 +332,8 @@
 
     &__buttons {
       display: grid;
-      grid-auto-flow: row;
+      // grid-auto-flow: row;
+      grid-template: 1fr 1fr / 1fr;
       row-gap: 5px;
 
       &__top {

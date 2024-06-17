@@ -1,4 +1,4 @@
-import { ArrowLongHorizontalIcon } from "@shared/assets";
+import { PostIcon } from "@shared/assets";
 import { MyButton } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -10,7 +10,7 @@ export const SeePost: FC = () => {
   return (
     <MyButton buttons_type="button__white" className={styles.button}>
       {t(`order_btn.seePost`)}
-      <ArrowLongHorizontalIcon className="active__icon" />
+      <PostIcon />
     </MyButton>
   );
 };

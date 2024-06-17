@@ -184,10 +184,7 @@ export const BloggerOfferCard: FC<BloggerOfferCardProps> = ({
               <div
                 className={`${CheckDate(typeof card?.publish_date === "object" ? card?.publish_date.date_to : card?.publish_date) ? "" : "deactive"}`}
               >
-                <SendLinkBtn
-                  order_id={card?.id}
-                  url="https://t.me/abdsh/12311"
-                />
+                <SendLinkBtn order_id={card?.id} />
               </div>
             </div>
           </div>
@@ -212,9 +209,9 @@ export const BloggerOfferCard: FC<BloggerOfferCardProps> = ({
               </div>
               <AlertDialog>
                 <AlertDialogTrigger asChild>
-                  <div>
+                  <p>
                     <SeeLinkBtn />
-                  </div>
+                  </p>
                 </AlertDialogTrigger>
                 <AlertDialogContent className="gap-0 w-[30vw] h-[40vw] bg-transparent grid items-center justify-center">
                   <div className="w-[18vw] h-full relative">
