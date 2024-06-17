@@ -11,7 +11,7 @@ export const PostGeneration: FC<PostGenerationProps> = () => {
   return (
     <MyButton
       type="button"
-      buttons_type="button_white"
+      buttons_type="button__white"
       className={styles.button}
     >
       {t(`create_order.create.generation`)}

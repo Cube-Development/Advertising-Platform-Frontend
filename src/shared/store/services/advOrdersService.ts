@@ -79,7 +79,10 @@ export const advProjectsAPI = authApi.injectEndpoints({
       }),
       invalidatesTags: [BLOGGER_OFFERS, ADV_PROJECTS],
     }),
-    rejectOrder: build.mutation<{ success: boolean }, { order_id: string }>({
+    rejectOrder: build.mutation<
+      { success: boolean },
+      { order_id: string; comment: string }
+    >({
       query: (params) => ({
         url: `/order/advertiser/reject`,
         method: "PUT",

@@ -79,6 +79,7 @@ export const OffersPage: FC = () => {
         isNotEmpty={
           data ? data?.orders?.length === INTERSECTION_ELEMENTS.orders : false
         }
+        // isNotEmpty={data ? offers?.length < data?.elements : false}
       />
     </>
   );

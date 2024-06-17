@@ -1,31 +1,32 @@
-import { ChatIcon, HappySmileIcon, MoreIcon } from "@shared/assets";
+import { CountdownTimer } from "@features/countdownTimer";
+import { HappySmileIcon, MoreIcon } from "@shared/assets";
 import {
   offerStatus,
   offerStatusChat,
   offerStatusFilter,
 } from "@shared/config/offerFilter";
-import { FC } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import { IBloggerOfferCard } from "@shared/types/bloggerOffer";
-import { useAppSelector } from "@shared/store";
-import { IOrderFeature } from "@shared/types/order";
+import { platformTypesNum } from "@shared/config/platformTypes";
 import { CheckDate } from "@shared/functions/checkDate";
-import { CountdownTimer } from "@features/countdownTimer";
+import { useAppSelector } from "@shared/store";
+import { useGetPostQuery } from "@shared/store/services/getPostService";
+import { IBloggerOfferCard } from "@shared/types/bloggerOffer";
+import { IOrderFeature } from "@shared/types/order";
+import {
+  PostDispayInstagram,
+  PostDispayTelegram,
+} from "@shared/ui/postDisplay";
 import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogContent,
   AlertDialogTrigger,
 } from "@shared/ui/shadcn-ui/ui/alert-dialog";
-import {
-  PostDispayInstagram,
-  PostDispayTelegram,
-} from "@shared/ui/postDisplay";
-import { X } from "lucide-react";
 import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
-import { useGetPostQuery } from "@shared/store/services/getPostService";
-import { platformTypesNum } from "@shared/config/platformTypes";
+import { Chat } from "@widgets/header/UI/chat";
+import { X } from "lucide-react";
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 interface BloggerOfferCardProps {
   card: IBloggerOfferCard;
@@ -59,7 +60,7 @@ export const BloggerOfferCard: FC<BloggerOfferCardProps> = ({
   }
   return (
     <div
-      className={`${styles.card} ${offerStatusChat.includes(statusFilter as offerStatusFilter) ? styles.chat : styles.no__chat} border__gradient`}
+      className={`${styles.card} ${offerStatusChat.includes(statusFilter as offerStatusFilter) ? styles.chat : styles.no__chat} border__gradientt`}
     >
       <div className={styles.card__info}>
         <div className={styles.card__info__data}>
@@ -183,10 +184,7 @@ export const BloggerOfferCard: FC<BloggerOfferCardProps> = ({
               <div
                 className={`${CheckDate(typeof card?.publish_date === "object" ? card?.publish_date.date_to : card?.publish_date) ? "" : "deactive"}`}
               >
-                <SendLinkBtn
-                  order_id={card?.id}
-                  url="https://t.me/abdsh/12311"
-                />
+                <SendLinkBtn order_id={card?.id} />
               </div>
             </div>
           </div>
@@ -211,9 +209,9 @@ export const BloggerOfferCard: FC<BloggerOfferCardProps> = ({
               </div>
               <AlertDialog>
                 <AlertDialogTrigger asChild>
-                  <div>
+                  <p>
                     <SeeLinkBtn />
-                  </div>
+                  </p>
                 </AlertDialogTrigger>
                 <AlertDialogContent className="gap-0 w-[30vw] h-[40vw] bg-transparent grid items-center justify-center">
                   <div className="w-[18vw] h-full relative">
@@ -281,9 +279,7 @@ export const BloggerOfferCard: FC<BloggerOfferCardProps> = ({
             </button>
           </div>
           <div className={styles.chat__btn}>
-            <button>
-              <ChatIcon />
-            </button>
+            <Chat />
           </div>
         </div>
       )}

@@ -122,12 +122,11 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
               title: t("toasts.add_platform.edit.success"),
             });
           })
-          .catch((error) => {
-            // console.error("Ошибка при добавлении канала...", error);
+          .catch(() => {
             toast({
               variant: "error",
               title: t("toasts.add_platform.edit.error"),
-              description: error,
+              // description: error!,
               action: <ToastAction altText="Ok">Ok</ToastAction>,
             });
           });
@@ -142,12 +141,11 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
               title: t("toasts.add_platform.create.success"),
             });
           })
-          .catch((error) => {
-            console.error("Ошибка при добавлении канала...", error);
+          .catch(() => {
             toast({
               variant: "error",
               title: t("toasts.add_platform.create.error"),
-              description: error,
+              // description: error!,
               action: <ToastAction altText="Ok">Ok</ToastAction>,
             });
           });
