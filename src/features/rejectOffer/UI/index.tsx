@@ -25,7 +25,6 @@ export const RejectOffer: FC<IOrderFeature> = ({ order_id }) => {
           toast({
             variant: "error",
             title: t("toasts.offers_blogger.reject_offer.error"),
-            description: error,
             action: <ToastAction altText="Ok">Ok</ToastAction>,
           });
           console.error("error: ", error);

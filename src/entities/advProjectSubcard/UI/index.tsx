@@ -36,7 +36,7 @@ import {
 
 interface AdvProjectSubcardProps {
   subcard: IAdvProjectSubcard;
-  FeedbackBtn: FC;
+  FeedbackBtn: FC<IOrderFeature>;
   AcceptBtn: FC<IOrderFeature>;
   RejectBtn: FC<IOrderFeature>;
   CheckBtn: FC<IOrderFeature>;
@@ -187,7 +187,7 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
             ) : (
               <>
                 <p>{t(`orders_advertiser.order_status.completed.title`)}</p>
-                <FeedbackBtn />
+                <FeedbackBtn order_id={subcard?.id} />
               </>
             )}
           </div>

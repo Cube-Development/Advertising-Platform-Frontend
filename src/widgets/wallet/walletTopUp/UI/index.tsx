@@ -77,7 +77,6 @@ export const WalletTopUp: FC = () => {
           toast({
             variant: "error",
             title: t("toasts.wallet.profile.error"),
-            description: error,
             action: <ToastAction altText="Ok">Ok</ToastAction>,
           });
           console.error("Ошибка при заполнении данных", error);
@@ -118,7 +117,6 @@ export const WalletTopUp: FC = () => {
             toast({
               variant: "error",
               title: t("toasts.wallet.topup.error"),
-              description: error,
               action: <ToastAction altText="Ok">Ok</ToastAction>,
             });
             console.error("Ошибка payment/deposit: ", error);
@@ -155,7 +153,6 @@ export const WalletTopUp: FC = () => {
                   toast({
                     variant: "error",
                     title: t("toasts.wallet.topup.error"),
-                    description: error,
                     action: <ToastAction altText="Ok">Ok</ToastAction>,
                   });
                   console.error("Ошибка payment/deposit: ", error);
@@ -165,7 +162,6 @@ export const WalletTopUp: FC = () => {
               toast({
                 variant: "error",
                 title: t("toasts.wallet.profile.error"),
-                description: error,
                 action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
               console.error("Ошибка в editLegal", error);

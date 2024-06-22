@@ -65,7 +65,6 @@ export const ProfileCard: FC = () => {
         toast({
           variant: "error",
           title: t("toasts.add_profile.create.error"),
-          description: error,
         });
       });
   };

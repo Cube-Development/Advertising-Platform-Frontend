@@ -20,17 +20,16 @@ import { useNavigate } from "react-router-dom";
 import { paths } from "@shared/routing";
 import { scroller } from "react-scroll";
 import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
-import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
 import { ContentType } from "@shared/config/createPostData";
 import { getFileExtension } from "@features/getFileExtension";
 import { getContentType } from "@features/getContentType";
-import loadingAnimation from "/images/phoneDisplay/loadingAnimation.gif";
+import { CreateOrderLoading } from "./createOrderLoading";
 
 interface CreateOrderBlockProps {}
 
 export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
   const { toast } = useToast();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const onBlur = { post: true, datetime: true, payment: true };
   const [blur, setBlur] = useState<ICreateOrderBlur>(onBlur);
   const handleOnChangeBlur = (key: keyof ICreateOrderBlur) => {
@@ -63,7 +62,6 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
 
   const navigate = useNavigate();
 
-  const { i18n } = useTranslation();
   const language = Languages.find((lang) => {
     return i18n.language === lang.name;
   });
@@ -179,12 +177,10 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
             };
             return createPost(postReq)
               .unwrap()
-              .catch((error) => {
+              .catch(() => {
                 toast({
                   variant: "error",
                   title: t("toasts.create_order.post.error"),
-                  description: error,
-                  action: <ToastAction altText="Ok">Ok</ToastAction>,
                 });
               });
           }),
@@ -203,21 +199,17 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
                 });
                 navigate(paths.orders);
               })
-              .catch((error) => {
+              .catch(() => {
                 toast({
                   variant: "error",
                   title: t("toasts.create_order.payment.error"),
-                  description: error,
-                  action: <ToastAction altText="Ok">Ok</ToastAction>,
                 });
               });
           })
-          .catch((error) => {
+          .catch(() => {
             toast({
               variant: "error",
               title: t("toasts.create_order.date.error"),
-              description: error,
-              action: <ToastAction altText="Ok">Ok</ToastAction>,
             });
           });
       } catch (error) {
@@ -225,7 +217,6 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
           variant: "error",
           title: t("toasts.create_order.post.error"),
           description: String(error),
-          action: <ToastAction altText="Ok">Ok</ToastAction>,
         });
       } finally {
         setIsLoading(false);
@@ -235,14 +226,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
 
   return (
     <>
-      {isLoading && (
-        <div className="fixed w-[100vw] h-[100svh] z-50 backdrop-blur-xl flex flex-col justify-center items-center transition-all">
-          <img src={loadingAnimation} alt="isLoading..." className="w-[14vw]" />
-          <p className="-mt-10 text-[44px] font-medium text-black/60">
-            Loading...
-          </p>
-        </div>
-      )}
+      {isLoading && <CreateOrderLoading />}
       <form onSubmit={handleSubmit(onSubmit)}>
         <CreateOrderTop
           onChangeBlur={handleOnChangeBlur}
