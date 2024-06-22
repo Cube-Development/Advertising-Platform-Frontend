@@ -48,7 +48,6 @@ export const SendLink: FC<IOrderFeature> = ({ order_id }) => {
         toast({
           variant: "error",
           title: t("toasts.offers_blogger.send_link.error"),
-          description: error,
           action: <ToastAction altText="Ok">Ok</ToastAction>,
         });
         console.error("error: ", error);

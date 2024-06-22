@@ -64,7 +64,6 @@ export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
           toast({
             variant: "error",
             title: t("toasts.cart.error"),
-            description: error,
             action: <ToastAction altText="Ok">Ok</ToastAction>,
           });
           // alert("У вас недостаточно средств, нужно пополнить баланс");

@@ -58,7 +58,6 @@ export const TopUpCard: FC = () => {
         toast({
           variant: "error",
           title: t("toasts.wallet.topup.error"),
-          description: error,
           action: <ToastAction altText="Ok">Ok</ToastAction>,
         });
         console.error("Ошибка payment/deposit: ", error);
