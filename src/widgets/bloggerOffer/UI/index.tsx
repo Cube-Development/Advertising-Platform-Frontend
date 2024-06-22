@@ -31,7 +31,7 @@ export const BloggerOffer: FC<BloggerOfferProps> = ({
 }) => {
   return (
     <div className="container sidebar">
-      {isLoading && offers?.length === 0 ? (
+      {!isLoading && offers?.length === 0 ? (
         <ZeroPlatform
           AddPlatformBtn={AddPlatform}
           page={pageFilter.offer}

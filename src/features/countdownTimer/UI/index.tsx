@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface CountdownTimerProps {
   date_to: string;
@@ -7,6 +8,7 @@ interface CountdownTimerProps {
 }
 
 export const CountdownTimer: FC<CountdownTimerProps> = ({ date_to, time }) => {
+  const { t } = useTranslation();
   const parts: string[] = date_to.split(".");
   const year: number = parseInt(parts[2]);
   const month: number = parseInt(parts[1]) - 1;
@@ -47,10 +49,20 @@ export const CountdownTimer: FC<CountdownTimerProps> = ({ date_to, time }) => {
     return () => clearInterval(timerID);
   }, [tick]);
 
+  const handleDay = (days: number) => {
+    if (days < 5) {
+      return t("offers_blogger.days.day");
+    } else {
+      return t("offers_blogger.days.days");
+    }
+  };
+
   return (
     <div className={styles.wrapper}>
       {diffDays > 1 ? (
-        <p>{diffDays}</p>
+        <p>
+          {diffDays} {handleDay(diffDays)}
+        </p>
       ) : (
         <p>
           {`${diffH}`.padStart(2, "0")}:{`${diffM}`.padStart(2, "0")}:
