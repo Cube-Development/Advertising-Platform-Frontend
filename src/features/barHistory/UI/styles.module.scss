@@ -20,6 +20,13 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+      color: var(--Personal-colors-main);
+      padding-bottom: 10px;
+      background: var(--Gradients-Gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
     }
   }
 }

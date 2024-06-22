@@ -205,7 +205,15 @@ export const BloggerOfferCard: FC<BloggerOfferCardProps> = ({
             <div className={styles.card__wait__buttons}>
               <div>
                 <RejectOfferBtn order_id={card?.id} />
-                <AcceptOfferBtn order_id={card?.id} />
+                {typeof card.publish_date === "object" &&
+                "date_from" in card.publish_date ? (
+                  <AcceptOfferBtn
+                    order_id={card?.id}
+                    dates={card?.publish_date}
+                  />
+                ) : (
+                  <AcceptOfferBtn order_id={card?.id} />
+                )}
               </div>
               <AlertDialog>
                 <AlertDialogTrigger asChild>

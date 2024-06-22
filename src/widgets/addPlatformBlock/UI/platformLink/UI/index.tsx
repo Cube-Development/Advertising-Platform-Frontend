@@ -10,7 +10,6 @@ import {
   IPlatformLink,
 } from "@shared/types/platform";
 import { MyButton } from "@shared/ui";
-import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
 import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import { SpinnerLoaderSmall } from "@shared/ui/spinnerLoader";
 import { FC } from "react";
@@ -62,25 +61,21 @@ export const PlatformLink: FC<PlatformLinkProps> = ({
         .then((data) => {
           setInserCode(data.insertion_code);
           onChangeBlur({ link: true, parameters: false });
-          toast({
-            variant: "success",
-            title: t("toasts.add_platform.link.success"),
-          });
+          // toast({
+          //   variant: "success",
+          //   title: t("toasts.add_platform.link.success"),
+          // });
         })
         .catch((error) => {
-          // console.error("Ошибка: ", error);
           if (error.status === 400) {
             toast({
               variant: "error",
               title: t("toasts.add_platform.link.alert"),
-              action: <ToastAction altText="Ok">Ok</ToastAction>,
             });
           } else {
             toast({
               variant: "error",
               title: t("toasts.add_platform.link.error"),
-              description: error,
-              action: <ToastAction altText="Ok">Ok</ToastAction>,
             });
           }
         });

@@ -90,6 +90,17 @@ export const advProjectsAPI = authApi.injectEndpoints({
       }),
       invalidatesTags: [BLOGGER_OFFERS, ADV_PROJECTS],
     }),
+    addReview: build.mutation<
+      { success: boolean },
+      { order_id: string; review: string; grade: number }
+    >({
+      query: (params) => ({
+        url: `/order/advertiser/add_review`,
+        method: "PUT",
+        params: params,
+      }),
+      invalidatesTags: [BLOGGER_OFFERS, ADV_PROJECTS],
+    }),
     getAdvProjects: build.query<IAdvProjects, getProjectsCardReq>({
       query: (BodyParams) => ({
         url: `/order/project/get/advertiser`,
@@ -117,6 +128,7 @@ export const {
   useCreateOrderDatesMutation,
   useAcceptOrderMutation,
   useRejectOrderMutation,
+  useAddReviewMutation,
   useGetAdvProjectsQuery,
   useGetAdvSubprojectsQuery,
 } = advProjectsAPI;

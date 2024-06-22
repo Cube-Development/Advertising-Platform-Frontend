@@ -126,7 +126,6 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
             toast({
               variant: "error",
               title: t("toasts.add_platform.edit.error"),
-              // description: error!,
               action: <ToastAction altText="Ok">Ok</ToastAction>,
             });
           });
@@ -145,7 +144,6 @@ export const PlatformParameters: FC<PlatformParametersProps> = ({
             toast({
               variant: "error",
               title: t("toasts.add_platform.create.error"),
-              // description: error!,
               action: <ToastAction altText="Ok">Ok</ToastAction>,
             });
           });
