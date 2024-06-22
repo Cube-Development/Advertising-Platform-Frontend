@@ -70,7 +70,6 @@ export const BloggerPlatformCardMenu: FC<BloggerPlatformCardMenuProps> = ({
         toast({
           variant: "error",
           title: t("toasts.offers_blogger.channel.activate.error"),
-          description: error,
           action: <ToastAction altText="Ok">Ok</ToastAction>,
         });
         console.error("Ошибка деактивации: ", error);

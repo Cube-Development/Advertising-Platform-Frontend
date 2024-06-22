@@ -110,7 +110,6 @@ export const CartBlock: FC = () => {
               toast({
                 variant: "error",
                 title: t("toasts.catalog.remove.error"),
-                description: error,
                 action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
               console.error("Ошибка при удалении с корзины", error);
@@ -125,7 +124,6 @@ export const CartBlock: FC = () => {
               toast({
                 variant: "error",
                 title: t("toasts.catalog.remove.error"),
-                description: error,
                 action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
               console.error("Ошибка при удалении с корзины", error);
@@ -145,7 +143,6 @@ export const CartBlock: FC = () => {
               toast({
                 variant: "error",
                 title: t("toasts.catalog.add.error"),
-                description: error,
                 action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
               console.error("Ошибка при добавлении в корзину", error);
@@ -160,7 +157,6 @@ export const CartBlock: FC = () => {
               toast({
                 variant: "error",
                 title: t("toasts.catalog.add.error"),
-                description: error,
                 action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
               console.error("Ошибка при добавлении в корзину", error);

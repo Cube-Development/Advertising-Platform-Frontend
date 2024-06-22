@@ -96,7 +96,6 @@ export const BloggerPlatformCard: FC<BloggerPlatformCardProps> = ({
         toast({
           variant: "error",
           title: t("toasts.offers_blogger.channel.activate.error"),
-          description: error,
           action: <ToastAction altText="Ok">Ok</ToastAction>,
         });
         console.error("Ошибка при активации канала: ", error);

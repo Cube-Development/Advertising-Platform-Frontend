@@ -37,7 +37,6 @@ export const HandleAuth = () => {
         toast({
           variant: "error",
           title: t("toasts.auth.cart.error"),
-          description: error,
           action: <ToastAction altText="Ok">Ok</ToastAction>,
         });
         console.error("Ошибка при трансфере корзины", error);
@@ -65,7 +64,6 @@ export const HandleAuth = () => {
           toast({
             variant: "error",
             title: t("toasts.auth.token.error"),
-            description: error,
             action: <ToastAction altText="Ok">Ok</ToastAction>,
           });
           console.error("Ошибка получения токена:", error);

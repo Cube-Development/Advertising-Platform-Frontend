@@ -25,7 +25,6 @@ export const AcceptPost: FC<IOrderFeature> = ({ order_id }) => {
           toast({
             variant: "error",
             title: t("toasts.orders_advertiser.accept_post.error"),
-            description: error,
             action: <ToastAction altText="Ok">Ok</ToastAction>,
           });
           console.error("error: ", error);
