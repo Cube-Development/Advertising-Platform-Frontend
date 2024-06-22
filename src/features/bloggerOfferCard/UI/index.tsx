@@ -58,6 +58,7 @@ export const BloggerOfferCard: FC<BloggerOfferCardProps> = ({
     });
     console.error("error: ", error);
   }
+  console.log(card.publish_date, card.publish_time.time_from);
   return (
     <div
       className={`${styles.card} ${offerStatusChat.includes(statusFilter as offerStatusFilter) ? styles.chat : styles.no__chat} border__gradientt`}
@@ -83,19 +84,16 @@ export const BloggerOfferCard: FC<BloggerOfferCardProps> = ({
               <p>{card?.order_status}</p>
             </div>
             <div className={styles.timer}>
-              <CountdownTimer date_to={card.date_coming} time="23:59" />
-              {/* {statusFilter !== offerStatusFilter.wait ? (
-              <CountdownTimer date_to={card.date_coming} time="24:00" />
-              ) : (
-                <CountdownTimer
-                  date_to={
-                    typeof card?.publish_date === "object"
-                      ? card?.publish_date.date_to
-                      : card?.publish_date
-                  }
-                  time={card.publish_time.time_from}
-                />
-              )} */}
+              {/* <CountdownTimer date_to={card.date_coming} time="23:59" /> */}
+
+              <CountdownTimer
+                date_to={
+                  typeof card?.publish_date === "object"
+                    ? card?.publish_date.date_to
+                    : card?.publish_date
+                }
+                time={card.publish_time.time_from}
+              />
             </div>
           </div>
         ) : (

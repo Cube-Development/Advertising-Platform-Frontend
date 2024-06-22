@@ -1,7 +1,7 @@
 export const MAIN_PAGE_ANIMATION = {
   animationLeft: {
     hidden: {
-      x: -100,
+      x: -10,
       opacity: 0,
     },
     visible: (custom: number) => ({
@@ -12,7 +12,7 @@ export const MAIN_PAGE_ANIMATION = {
   },
   animationRight: {
     hidden: {
-      x: 100,
+      x: 10,
       opacity: 0,
     },
     visible: (custom: number) => ({
@@ -23,7 +23,7 @@ export const MAIN_PAGE_ANIMATION = {
   },
   animationUp: {
     hidden: {
-      y: 100,
+      y: 10,
       opacity: 0,
     },
     visible: (custom: number) => ({
@@ -34,7 +34,7 @@ export const MAIN_PAGE_ANIMATION = {
   },
   animationDown: {
     hidden: {
-      y: -100,
+      y: -10,
       opacity: 0,
     },
     visible: (custom: number) => ({
