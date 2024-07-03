@@ -28,10 +28,11 @@ import {
   AlertDialogTrigger,
 } from "@shared/ui/shadcn-ui/ui/alert-dialog";
 import { X } from "lucide-react";
-import { platformTypesNum } from "@shared/config/platformTypes";
+import { PostTypesNum, platformTypesNum } from "@shared/config/platformTypes";
 import {
-  PostDispayInstagram,
-  PostDispayTelegram,
+  DisplayFeed,
+  DisplayStories,
+  DisplayTelegram,
 } from "@shared/ui/postDisplay";
 
 interface AdvProjectSubcardProps {
@@ -221,26 +222,39 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
                   <SeeBtn />
                 </div>
               </AlertDialogTrigger>
-              <AlertDialogContent className="gap-0 w-[30vw] h-[40vw] bg-transparent grid items-center justify-center">
+              <AlertDialogContent className="gap-0 w-[30vw] h-[40vw] bg-transparent grid items-center justify-center shadow-none">
                 <div className="w-[18vw] h-full relative">
                   <AlertDialogAction>
                     <X className="absolute -right-16 -top-10 w-[50px] rounded-full p-2 bg-white cursor-pointer" />
                   </AlertDialogAction>
                   {post?.platform === platformTypesNum.telegram && (
-                    <PostDispayTelegram
+                    <DisplayTelegram
                       post={post}
                       platformId={platformTypesNum.telegram}
                     />
                   )}
-                  {post?.platform === platformTypesNum.instagram && (
-                    <PostDispayInstagram
-                      post={post}
-                      platformId={platformTypesNum.telegram}
-                    />
-                  )}
-                  {post?.platform === platformTypesNum.youtube && (
-                    <p>YOUTUBE</p>
-                  )}
+                  {post?.platform === platformTypesNum.instagram &&
+                    post?.post_type === PostTypesNum.feed && (
+                      <DisplayFeed
+                        post={post}
+                        platformId={platformTypesNum.instagram}
+                      />
+                    )}
+                  {post?.platform === platformTypesNum.instagram &&
+                    post?.post_type === PostTypesNum.FullHd_vertical && (
+                      <DisplayStories
+                        post={post}
+                        platformId={platformTypesNum.instagram}
+                      />
+                    )}
+                  {post?.platform === platformTypesNum.youtube &&
+                    post?.post_type === PostTypesNum.FullHd_vertical && (
+                      <p>SHORTS</p>
+                    )}
+                  {post?.platform === platformTypesNum.youtube &&
+                    post?.post_type === PostTypesNum.FullHd_horizontal && (
+                      <p>VIDEOS</p>
+                    )}
                 </div>
               </AlertDialogContent>
             </AlertDialog>
@@ -267,23 +281,31 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
                     <SeeBtn />
                   </div>
                 </AlertDialogTrigger>
-                <AlertDialogContent className="gap-0 w-[30vw] h-[40vw] bg-transparent grid items-center justify-center">
+                <AlertDialogContent className="gap-0 w-[30vw] h-[40vw] bg-transparent grid items-center justify-center shadow-none">
                   <div className="w-[18vw] h-full relative">
                     <AlertDialogAction>
                       <X className="absolute -right-16 -top-10 w-[50px] rounded-full p-2 bg-white cursor-pointer" />
                     </AlertDialogAction>
                     {post?.platform === platformTypesNum.telegram && (
-                      <PostDispayTelegram
+                      <DisplayTelegram
                         post={post}
                         platformId={platformTypesNum.telegram}
                       />
                     )}
-                    {post?.platform === platformTypesNum.instagram && (
-                      <PostDispayInstagram
-                        post={post}
-                        platformId={platformTypesNum.telegram}
-                      />
-                    )}
+                    {post?.platform === platformTypesNum.instagram &&
+                      post?.post_type === PostTypesNum.feed && (
+                        <DisplayFeed
+                          post={post}
+                          platformId={platformTypesNum.instagram}
+                        />
+                      )}
+                    {post?.platform === platformTypesNum.instagram &&
+                      post?.post_type === PostTypesNum.FullHd_vertical && (
+                        <DisplayStories
+                          post={post}
+                          platformId={platformTypesNum.instagram}
+                        />
+                      )}
                     {post?.platform === platformTypesNum.youtube && (
                       <p>YOUTUBE</p>
                     )}

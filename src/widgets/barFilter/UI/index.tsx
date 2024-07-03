@@ -8,11 +8,12 @@ import styles from "./styles.module.scss";
 import { useAppSelector } from "@shared/store";
 import { pageFilter } from "@shared/config/pageFilter";
 import { projectTypesFilter } from "@shared/config/projectFilter";
-import { filterData, networkTypes } from "@shared/config/platformData";
+import { filterData } from "@shared/config/platformData";
 import { SelectOptions } from "@features/selectOptions";
 import { UseFormSetValue } from "react-hook-form";
 import { NewProject } from "@features/newProject";
 import { roles } from "@shared/config/roles";
+import { networkTypes } from "@shared/config/platformTypes";
 
 interface BarFilterProps {
   page: pageFilter;

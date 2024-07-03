@@ -44,14 +44,24 @@ export const PostFiles: FC<PostFilesProps> = ({
       ? formState?.multiposts?.filter(
           (item) => item?.order_id !== formState?.selectedMultiPostId,
         ) || []
-      : formState?.posts?.filter((item) => item?.platform !== platformId) || [];
+      : formState?.posts?.filter(
+          (item) =>
+            item?.platform !== platformId ||
+            (item?.platform === platformId &&
+              item?.post_type !== formState?.selectedPostType),
+        ) || [];
 
     const currentPost = formState?.selectedMultiPostId
       ? formState?.multiposts?.find(
           (item) => item?.order_id === formState?.selectedMultiPostId,
         )
-      : formState?.posts?.find((item) => item?.platform === platformId) || {
+      : formState?.posts?.find(
+          (item) =>
+            item?.platform === platformId &&
+            item?.post_type === formState?.selectedPostType,
+        ) || {
           platform: platformId,
+          post_type: formState?.selectedPostType,
         };
     if (currentPost) {
       currentPost.media = [...mediafiles];
@@ -64,14 +74,24 @@ export const PostFiles: FC<PostFilesProps> = ({
       ? formState?.multiposts?.filter(
           (item) => item?.order_id !== formState?.selectedMultiPostId,
         ) || []
-      : formState?.posts?.filter((item) => item?.platform !== platformId) || [];
+      : formState?.posts?.filter(
+          (item) =>
+            item?.platform !== platformId ||
+            (item?.platform === platformId &&
+              item?.post_type !== formState?.selectedPostType),
+        ) || [];
 
     const currentPost = formState?.selectedMultiPostId
       ? formState?.multiposts?.find(
           (item) => item?.order_id === formState?.selectedMultiPostId,
         )
-      : formState?.posts?.find((item) => item?.platform === platformId) || {
+      : formState?.posts?.find(
+          (item) =>
+            item?.platform === platformId &&
+            item?.post_type === formState?.selectedPostType,
+        ) || {
           platform: platformId,
+          post_type: formState?.selectedPostType,
         };
     if (currentPost) {
       const currentFiles = currentPost.files || [];
@@ -86,8 +106,13 @@ export const PostFiles: FC<PostFilesProps> = ({
     ? formState?.multiposts?.find(
         (item) => item?.order_id === formState?.selectedMultiPostId,
       )
-    : formState?.posts?.find((item) => item?.platform === platformId) || {
+    : formState?.posts?.find(
+        (item) =>
+          item?.platform === platformId &&
+          item?.post_type === formState?.selectedPostType,
+      ) || {
         platform: platformId,
+        post_type: formState?.selectedPostType,
       };
   const currentMedia: File[] = currentPost?.media || [];
   const currentFile: File[] = currentPost?.files || [];

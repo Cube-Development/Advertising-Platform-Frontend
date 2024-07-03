@@ -18,12 +18,13 @@ import {
 } from "@shared/ui/shadcn-ui/ui/alert-dialog";
 import { AlertDialogAction } from "@radix-ui/react-alert-dialog";
 import { X } from "lucide-react";
-import { platformTypesNum } from "@shared/config/platformTypes";
+import { PostTypesNum, platformTypesNum } from "@shared/config/platformTypes";
 import {
-  PostDispayInstagram,
-  PostDispayTelegram,
+  DisplayFeed,
+  DisplayStories,
+  DisplayTelegram,
 } from "@shared/ui/postDisplay";
-import { EmptyPost } from "@shared/ui/postDisplay/postDispayTelegram/UI/emptyPost";
+import { EmptyPost } from "@shared/ui/postDisplay/displayTelegram/UI/emptyPost";
 
 interface PostPlatformProps {
   card: IPostChannel;
@@ -64,12 +65,12 @@ export const PostPlatform: FC<PostPlatformProps> = ({
     const form: ICreatePostForm = getValues();
     const datetime = form.datetime;
     const currentCard: IDatetime = (datetime.orders || []).find(
-      (item) => item.order_id === card.id,
+      (item) => item?.order_id === card?.id,
     ) || {
-      order_id: card.id,
+      order_id: card?.id,
     };
     const allCards = (datetime.orders || []).filter(
-      (item) => item.order_id !== card.id,
+      (item) => item.order_id !== card?.id,
     );
 
     if (dateList.length === 1) {
@@ -90,16 +91,16 @@ export const PostPlatform: FC<PostPlatformProps> = ({
     <div className={styles.wrapper}>
       <div className={styles.info}>
         <div className={styles.logo}>
-          <img src={card.avatar} alt="" />
+          <img src={card?.avatar} alt="" />
         </div>
         <div className={styles.title}>
-          <p>{card.name}</p>
-          <span>{card.category}</span>
+          <p>{card?.name}</p>
+          <span>{card?.category}</span>
         </div>
       </div>
       <div className={styles.type}>
         {card.platform in platformToIcon
-          ? platformToIcon[card.platform]()
+          ? platformToIcon[card?.platform]()
           : null}
       </div>
       <div className={styles.type}>
@@ -114,25 +115,45 @@ export const PostPlatform: FC<PostPlatformProps> = ({
             <PostIcon />
           </div>
         </AlertDialogTrigger>
-        <AlertDialogContent className="gap-0 w-[30vw] h-[40vw] bg-transparent grid items-center justify-center">
+        <AlertDialogContent className="gap-0 w-[30vw] h-[40vw] bg-transparent grid items-center justify-center shadow-none">
           {formState?.posts?.length ? (
             <div className="w-[18vw] h-full relative">
               <AlertDialogAction>
                 <X className="absolute -right-16 -top-10 w-[50px] rounded-full p-2 bg-white cursor-pointer" />
               </AlertDialogAction>
               {card?.platform === platformTypesNum.telegram && (
-                <PostDispayTelegram
+                <DisplayTelegram
                   formState={formState}
                   platformId={platformTypesNum.telegram}
+                  orderId={card?.id}
                 />
               )}
-              {card?.platform === platformTypesNum.instagram && (
-                <PostDispayInstagram
-                  formState={formState}
-                  platformId={platformTypesNum.telegram}
-                />
-              )}
-              {card?.platform === platformTypesNum.youtube && <p>YOUTUBE</p>}
+              {card?.platform === platformTypesNum.instagram &&
+                card?.post_type === PostTypesNum.feed && (
+                  <DisplayFeed
+                    formState={formState}
+                    platformId={platformTypesNum.instagram}
+                    postType={PostTypesNum.feed}
+                    orderId={card?.id}
+                  />
+                )}
+              {card?.platform === platformTypesNum.instagram &&
+                card?.post_type === PostTypesNum.FullHd_vertical && (
+                  <DisplayStories
+                    formState={formState}
+                    platformId={platformTypesNum.instagram}
+                    postType={PostTypesNum.FullHd_vertical}
+                    orderId={card?.id}
+                  />
+                )}
+              {card?.platform === platformTypesNum.youtube &&
+                card?.post_type === PostTypesNum.FullHd_vertical && (
+                  <p>SHORTS</p>
+                )}
+              {card?.platform === platformTypesNum.youtube &&
+                card?.post_type === PostTypesNum.FullHd_horizontal && (
+                  <p>VIDEOS</p>
+                )}
             </div>
           ) : (
             <EmptyPost />

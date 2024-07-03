@@ -4,10 +4,8 @@ import { FormatList } from "@features/formatList";
 import { SearchFilter } from "@features/searchFilter";
 import { SelectOptions } from "@features/selectOptions";
 import { ShowMoreBtn } from "@features/showMore";
-import { SadSmileIcon } from "@shared/assets";
 import {
   filterData,
-  networkTypes,
   platformData,
   sortingTypes,
 } from "@shared/config/platformData";
@@ -26,6 +24,7 @@ import { BREAKPOINT, INTERSECTION_ELEMENTS } from "@shared/config/common";
 import { SkeletonCatalogCard } from "@features/catalogCard/skeletonCatalogCard";
 import { Accordion } from "@shared/ui/shadcn-ui/ui/accordion";
 import { ParametersFilter } from "../parametersFilter";
+import { networkTypes } from "@shared/config/platformTypes";
 
 interface CatalogListProps {
   channels: IPlatform[];
@@ -125,9 +124,7 @@ export const CatalogList: FC<CatalogListProps> = ({
           {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
         </div>
       ) : (
-        <div className={styles.empty}>
-          <SadSmileIcon />
-        </div>
+        <div className={styles.empty}></div>
       )}
     </div>
   );

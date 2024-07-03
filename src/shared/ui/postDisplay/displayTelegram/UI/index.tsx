@@ -9,16 +9,18 @@ import { TelegramComment } from "./telegramComment";
 import { ContentType } from "@shared/config/createPostData";
 import { GetPostRes } from "@shared/store/services/getPostService";
 
-interface PostDispayTelegramProps {
+interface DisplayTelegramProps {
   formState?: ICreatePostForm;
   platformId: number;
   post?: GetPostRes;
+  orderId?: string;
 }
 
-export const PostDispayTelegram: FC<PostDispayTelegramProps> = ({
+export const DisplayTelegram: FC<DisplayTelegramProps> = ({
   formState,
   platformId,
   post,
+  orderId,
 }) => {
   // post response
   const photosRes = post
@@ -54,8 +56,10 @@ export const PostDispayTelegram: FC<PostDispayTelegramProps> = ({
 
   // postFromData
   const currentPost = formState?.selectedMultiPostId
-    ? formState?.multiposts?.find(
-        (item) => item?.order_id === formState?.selectedMultiPostId,
+    ? formState?.multiposts?.find((item) =>
+        orderId
+          ? item?.order_id === orderId
+          : item?.order_id === formState?.selectedMultiPostId,
       ) || {
         platform: platformId,
         files: [],

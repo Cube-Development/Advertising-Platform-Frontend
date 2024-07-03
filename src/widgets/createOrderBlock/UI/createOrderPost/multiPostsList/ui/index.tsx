@@ -1,4 +1,4 @@
-import { platformTypesNum } from "@shared/config/platformTypes";
+import { PostTypesNum, platformTypesNum } from "@shared/config/platformTypes";
 import { ICreatePostForm, IPostChannel } from "@shared/types/createPost";
 import { FC, useEffect } from "react";
 import { useTranslation } from "react-i18next";
@@ -12,6 +12,7 @@ interface MultiPostsListProps {
   setValue: UseFormSetValue<ICreatePostForm>;
   getValues: UseFormGetValues<ICreatePostForm>;
   selectedMultiPostId: string | undefined | null;
+  selectedPostType: PostTypesNum;
 }
 
 export const MultiPostsList: FC<MultiPostsListProps> = ({
@@ -20,20 +21,27 @@ export const MultiPostsList: FC<MultiPostsListProps> = ({
   setValue,
   getValues,
   selectedMultiPostId,
+  selectedPostType,
 }) => {
   const { t } = useTranslation();
-  const platformPosts = orders?.filter((order) => order?.platform === platform);
+  const filteredPosts = orders?.filter(
+    (order) =>
+      order?.platform === platform && order?.post_type === selectedPostType,
+  );
 
   useEffect(() => {
-    handleChangePost(platformPosts[0]?.id);
-  }, [platform]);
+    handleChangePost(filteredPosts[0]?.id);
+  }, [selectedPostType]);
 
   const handleChangePost = (order_id: string) => {
     setValue("selectedMultiPostId", order_id);
     const multiPosts = getValues("multiposts") || [];
     const currentPost = multiPosts.find((post) => post?.order_id === order_id);
     if (!currentPost) {
-      setValue("multiposts", [...multiPosts, { order_id, platform }]);
+      setValue("multiposts", [
+        ...multiPosts,
+        { order_id, platform, post_type: selectedPostType },
+      ]);
     }
   };
   return (
@@ -42,7 +50,7 @@ export const MultiPostsList: FC<MultiPostsListProps> = ({
         {t("create_order.create.your_posts")}
       </p>
       <ul className={styles.posts__list}>
-        {platformPosts?.map((post, index) => (
+        {filteredPosts?.map((post, index) => (
           <li
             onClick={() => handleChangePost(post?.id)}
             key={index}

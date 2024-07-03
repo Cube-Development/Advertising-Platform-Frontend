@@ -21,23 +21,23 @@ export const AdvDevProjectCard: FC<AdvDevProjectCardProps> = ({
   return (
     <div className={`${styles.card} border__gradient`}>
       <div className={styles.card__title}>
-        <p>{card.name}</p>
+        <p>{card?.name}</p>
         <div>
           <span>№31221515</span>
           {/* <span>№{card.id}</span> */}
-          <span>{card.created}</span>
+          <span>{card?.created}</span>
         </div>
       </div>
 
       <div className={styles.card__info}>
         <p>{t("orders_advertiser.card.tarif")}:</p>
-        <span>{card.tarif}</span>
+        <span>{card?.tarif}</span>
       </div>
 
       <div className={styles.card__info}>
         <p>{t("orders_advertiser.card.cost")}:</p>
         <span>
-          {card.budget.toLocaleString()} {t("symbol")}
+          {card?.budget?.toLocaleString()} {t("symbol")}
         </span>
       </div>
 

@@ -1,11 +1,19 @@
 import { ContentType } from "@shared/config/createPostData";
+import { PostTypesNum, platformTypesNum } from "@shared/config/platformTypes";
+
+export interface PostFormats {
+  platform: platformTypesNum;
+  post_types: PostTypesNum[];
+}
+[];
 
 export interface IPostChannel {
   id: string;
   avatar: string;
   name: string;
   category: string;
-  platform: number;
+  platform: platformTypesNum;
+  post_type: PostTypesNum;
 }
 
 export interface IProjectId {
@@ -18,10 +26,13 @@ export interface ICreatePostForm {
   multiposts?: ICreatePost[];
   selectedMultiPostId?: string | null;
   datetime: ICreateDate;
+  isMultiPost: boolean;
+  selectedPostType: PostTypesNum;
 }
 
 export interface ICreatePost {
   platform?: number;
+  post_type?: PostTypesNum;
   comment?: string;
   media?: File[];
   files?: File[];

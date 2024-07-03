@@ -121,9 +121,9 @@ export const CatalogBlock: FC = () => {
       catalogAuth?.channels ? catalogAuth?.channels : catalog?.channels || [],
     );
     setValue(platformData.page, 1);
-    catalogTopRef.current?.scrollIntoView({
-      behavior: "smooth",
-    });
+    // catalogTopRef.current?.scrollIntoView({
+    //   behavior: "smooth",
+    // });
   }, [filter, sort, lang]);
 
   useEffect(() => {

@@ -1,2 +1,2 @@
-export * from "./postDispayInstagram";
-export * from "./postDispayTelegram";
+export * from "./displayInstagram";
+export * from "./displayTelegram";
