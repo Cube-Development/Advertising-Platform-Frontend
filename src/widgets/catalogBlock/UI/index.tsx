@@ -11,10 +11,12 @@ import { platformTypesNum } from "@shared/config/platformTypes";
 import { useAppSelector } from "@shared/store";
 import {
   useAddToCommonCartMutation,
+  useAddToManagerCartMutation,
   useAddToPublicCartMutation,
   useReadCommonCartQuery,
   useReadPublicCartQuery,
   useRemoveFromCommonCartMutation,
+  useRemoveFromManagerCartMutation,
   useRemoveFromPublicCartMutation,
 } from "@shared/store/services/cartService";
 import {
@@ -33,6 +35,7 @@ import { CatalogCart } from "./catalogCart";
 import { CatalogList } from "./catalogList";
 import { CatalogSearch } from "./catalogSearch";
 import styles from "./styles.module.scss";
+import { roles } from "@shared/config/roles";
 
 export const CatalogBlock: FC = () => {
   const { toast } = useToast();
@@ -75,9 +78,13 @@ export const CatalogBlock: FC = () => {
 
   const { isAuth } = useAppSelector((state) => state.user);
   const guestId = Cookies.get("guest_id");
+  const role = Cookies.get("role");
+  const managerProjectId = Cookies.get("manager_project_id");
+
   if (!guestId) {
     GenerateGuestId();
   }
+
   const userId = GetUserId();
   const formFields = watch();
   const { filter, sort, language: lang } = formFields;
@@ -155,6 +162,9 @@ export const CatalogBlock: FC = () => {
   // publicCart
   const [addToPublicCart] = useAddToPublicCartMutation();
   const [removeFromPublicCart] = useRemoveFromPublicCartMutation();
+  // managerCart
+  const [addToManagerCart] = useAddToManagerCartMutation();
+  const [removeFromManagerCart] = useRemoveFromManagerCartMutation();
 
   const handleChangeCards = (cartChannel: IPlatform) => {
     let newCards: IPlatform[] = [];
@@ -203,8 +213,22 @@ export const CatalogBlock: FC = () => {
 
               console.error("Ошибка при добавлении в корзину", error);
             });
-        } else if (isAuth) {
+        } else if (isAuth && role === roles.advertiser) {
           addToCommonCart(addReq)
+            .unwrap()
+            .then((data) => {
+              setCurrentCart(data);
+            })
+            .catch((error) => {
+              toast({
+                variant: "error",
+                title: t("toasts.catalog.add.error"),
+                action: <ToastAction altText="Ok">Ok</ToastAction>,
+              });
+              console.error("Ошибка при добавлении в корзину", error);
+            });
+        } else if (isAuth && role === roles.manager && managerProjectId) {
+          addToManagerCart({ ...addReq, project_id: managerProjectId })
             .unwrap()
             .then((data) => {
               setCurrentCart(data);
@@ -237,8 +261,22 @@ export const CatalogBlock: FC = () => {
               });
               console.error("Ошибка при добавлении в корзину", error);
             });
-        } else if (isAuth) {
+        } else if (isAuth && role === roles.advertiser) {
           addToCommonCart(addReq)
+            .unwrap()
+            .then((data) => {
+              setCurrentCart(data);
+            })
+            .catch((error) => {
+              toast({
+                variant: "error",
+                title: t("toasts.catalog.add.error"),
+                action: <ToastAction altText="Ok">Ok</ToastAction>,
+              });
+              console.error("Ошибка при добавлении в корзину", error);
+            });
+        } else if (isAuth && role === roles.manager && managerProjectId) {
+          addToManagerCart({ ...addReq, project_id: managerProjectId })
             .unwrap()
             .then((data) => {
               setCurrentCart(data);
@@ -277,8 +315,22 @@ export const CatalogBlock: FC = () => {
               });
               console.error("Ошибка при удалении с корзины", error);
             });
-        } else if (isAuth) {
+        } else if (isAuth && role === roles.advertiser) {
           removeFromCommonCart(removeReq)
+            .unwrap()
+            .then((data) => {
+              setCurrentCart(data);
+            })
+            .catch((error) => {
+              toast({
+                variant: "error",
+                title: t("toasts.catalog.remove.error"),
+                action: <ToastAction altText="Ok">Ok</ToastAction>,
+              });
+              console.error("Ошибка при удалении с корзины", error);
+            });
+        } else if (isAuth && role === roles.manager && managerProjectId) {
+          removeFromManagerCart({ ...removeReq, project_id: managerProjectId })
             .unwrap()
             .then((data) => {
               setCurrentCart(data);

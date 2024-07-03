@@ -11,14 +11,14 @@ export enum myProjectStatusFilter {
 
 export enum advManagerProjectStatusFilter {
   active = "active",
-  develop = "develop",
-  agreed = "agreed",
+  develop = "new",
+  agreed = "request_approve",
   completed = "completed",
 }
 
 export enum managerProjectStatusFilter {
   active = "active",
-  agreed = "agreed",
+  agreed = "request_approve",
   new = "new",
   completed = "completed",
 }

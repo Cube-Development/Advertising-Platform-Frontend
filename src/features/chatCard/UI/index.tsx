@@ -7,10 +7,16 @@ import styles from "./styles.module.scss";
 interface ChatCardProps {
   card: IOrderMessageAll;
   isActive: boolean;
-  onChange: (order_id: string) => void;
+  isOrder: boolean;
+  onChange: (id: string) => void;
 }
 
-export const ChatCard: FC<ChatCardProps> = ({ card, isActive, onChange }) => {
+export const ChatCard: FC<ChatCardProps> = ({
+  card,
+  isActive,
+  isOrder,
+  onChange,
+}) => {
   const { t } = useTranslation();
   const dateTime = getDateChat(card.message_date, card.message_time);
 
@@ -27,7 +33,7 @@ export const ChatCard: FC<ChatCardProps> = ({ card, isActive, onChange }) => {
   return (
     <div
       className={`${styles.channel} ${isActive ? styles.active : ""}`}
-      onClick={() => onChange(card.order_id)}
+      onClick={() => onChange(isOrder ? card.order_id! : card.project_id!)}
     >
       <div className={styles.info}>
         <div className={styles.logo}>

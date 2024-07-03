@@ -31,7 +31,7 @@ interface FilterState {
   networkFilter: string;
   sortingFilter: string;
   platformFilter: IPlatformLink;
-  chatFilter: string;
+  chatFilter: chatFilter;
   addFileFilter: string;
   dropdownMenu: {
     isOpen: boolean;
@@ -102,7 +102,7 @@ export const filterSlice = createSlice({
     setPlatformFilter: (state, action: PayloadAction<IPlatformLink>) => {
       state.platformFilter = action.payload;
     },
-    setChatFilter: (state, action: PayloadAction<string>) => {
+    setChatFilter: (state, action: PayloadAction<chatFilter>) => {
       state.chatFilter = action.payload;
     },
     setAddFileFilter: (state, action: PayloadAction<string>) => {

@@ -8,6 +8,7 @@ import {
   SearchIcon,
   WaitIcon,
 } from "@shared/assets";
+import { accordionTypes } from "@shared/config/accordion";
 import { Languages } from "@shared/config/languages";
 import {
   advManagerProjectStatusFilter,
@@ -17,22 +18,22 @@ import {
 import { useAppSelector } from "@shared/store";
 import {
   getProjectSubcardReq,
+  useGetAdvManagerSubprojectsQuery,
   useGetAdvSubprojectsQuery,
 } from "@shared/store/services/advOrdersService";
 import { IAdvProjectCard } from "@shared/types/advProject";
 import { IChannelChat } from "@shared/types/common";
 import { IOrderFeature } from "@shared/types/order";
 import { AccountsLoader } from "@shared/ui/accountsLoader";
-import { FC, useEffect, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { accordionTypes } from "@shared/config/accordion";
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@shared/ui/shadcn-ui/ui/accordion";
-import styles from "./styles.module.scss";
 import { Chat } from "@widgets/header/UI/chat";
+import { FC, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 interface AdvProjectCardProps {
   card: IAdvProjectCard;
@@ -58,6 +59,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
   ChangeChannelBtn,
 }) => {
   const [isSubcardOpen, setSubcardOpen] = useState(false);
+  const { typeFilter, statusFilter } = useAppSelector((state) => state.filter);
   const { t, i18n } = useTranslation();
   const language = Languages.find((lang) => {
     return i18n.language === lang.name;
@@ -69,9 +71,16 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
     page: 1,
   };
 
-  const { data: subcards, isLoading } = useGetAdvSubprojectsQuery(getParams, {
-    skip: !isSubcardOpen,
-  });
+  const { data: subcardsSelf, isLoading: isLoadingSelf } =
+    useGetAdvSubprojectsQuery(getParams, {
+      skip: !isSubcardOpen || typeFilter !== projectTypesFilter.myProject,
+    });
+
+  const { data: subcardsManager, isLoading: isLoadingManager } =
+    useGetAdvManagerSubprojectsQuery(getParams, {
+      skip: !isSubcardOpen || typeFilter !== projectTypesFilter.managerProject,
+    });
+
   // const subcards = card.subcard!;
   const handleChangeOpenSubcard = (): void => {
     setSubcardOpen(!isSubcardOpen);
@@ -94,8 +103,6 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
-
-  const { typeFilter, statusFilter } = useAppSelector((state) => state.filter);
 
   return (
     <div
@@ -214,32 +221,33 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
       >
         <AccordionContent>
           <div className={`${styles.subcard} `}>
-            {subcards?.orders.map((subcard, index) => (
-              <AdvProjectSubcard
-                key={index}
-                subcard={subcard}
-                FeedbackBtn={FeedbackBtn}
-                AcceptBtn={AcceptBtn}
-                RejectBtn={RejectBtn}
-                CheckBtn={CheckBtn}
-                SeeBtn={SeeBtn}
-                ChannelChatBtn={ChannelChatBtn}
-                ChangeChannelBtn={ChangeChannelBtn}
-              />
-            ))}
+            {(subcardsSelf?.orders || subcardsManager?.orders)?.map(
+              (subcard, index) => (
+                <AdvProjectSubcard
+                  key={index}
+                  subcard={subcard}
+                  FeedbackBtn={FeedbackBtn}
+                  AcceptBtn={AcceptBtn}
+                  RejectBtn={RejectBtn}
+                  CheckBtn={CheckBtn}
+                  SeeBtn={SeeBtn}
+                  ChannelChatBtn={ChannelChatBtn}
+                  ChangeChannelBtn={ChangeChannelBtn}
+                />
+              ),
+            )}
           </div>
         </AccordionContent>
-
         <AccordionTrigger onClick={() => handleChangeOpenSubcard()}>
           <div className={styles.card__btn}>
-            {isLoading ? (
+            {isLoadingSelf || isLoadingManager ? (
               <AccountsLoader />
             ) : isSubcardOpen ? (
               t(`orders_advertiser.card.see_less`)
             ) : (
               t(`orders_advertiser.card.see_more`)
             )}
-            {!isLoading && (
+            {(!isLoadingSelf || !isLoadingManager) && (
               <ArrowSmallVerticalIcon
                 className={
                   isSubcardOpen

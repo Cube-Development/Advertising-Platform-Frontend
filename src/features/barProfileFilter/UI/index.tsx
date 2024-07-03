@@ -11,8 +11,14 @@ import {
 } from "@shared/config/profileFilter";
 import { catalogFilter, catalogTypes } from "@shared/config/catalogFilter";
 import { pageFilter } from "@shared/config/pageFilter";
-import { chatFilter, chatTypes } from "@shared/config/chatFilter";
+import {
+  chatAdvertiserTypes,
+  chatFilter,
+  chatManagerTypes,
+} from "@shared/config/chatFilter";
 import { addFileFilter, addFileTypes } from "@shared/config/addFileFilter";
+import Cookies from "js-cookie";
+import { roles } from "@shared/config/roles";
 
 interface BarProfileFilterProps {
   page: pageFilter;
@@ -31,6 +37,9 @@ export const BarProfileFilter: FC<BarProfileFilterProps> = ({
   resetActiveAccount,
 }) => {
   const { t } = useTranslation();
+  const role = Cookies.get("role")
+    ? (Cookies.get("role") as roles)
+    : roles.advertiser;
 
   const { profileFilter, catalogFilter, chatFilter, addFileFilter } =
     useAppSelector((state) => state.filter);
@@ -41,11 +50,13 @@ export const BarProfileFilter: FC<BarProfileFilterProps> = ({
         ? [catalogTypes, catalogFilter]
         : page === pageFilter.walletTopUp
           ? [walletTopUpTypes, profileFilter.type]
-          : page === pageFilter.chat
-            ? [chatTypes, chatFilter]
-            : page === pageFilter.createOrderFiles
-              ? [addFileTypes, addFileFilter]
-              : [[], "", ""];
+          : page === pageFilter.chat && role === roles.advertiser
+            ? [chatAdvertiserTypes, chatFilter]
+            : page === pageFilter.chat && role === roles.manager
+              ? [chatManagerTypes, chatFilter]
+              : page === pageFilter.createOrderFiles
+                ? [addFileTypes, addFileFilter]
+                : [[], "", ""];
 
   const dispatch = useAppDispatch();
 
@@ -61,7 +72,7 @@ export const BarProfileFilter: FC<BarProfileFilterProps> = ({
     } else if (page === pageFilter.catalog) {
       dispatch(filterSlice.actions.setCatalogFilter(option.type));
     } else if (page === pageFilter.chat) {
-      dispatch(filterSlice.actions.setChatFilter(option.type));
+      dispatch(filterSlice.actions.setChatFilter(option.type as chatFilter));
     } else if (page === pageFilter.createOrderFiles) {
       dispatch(filterSlice.actions.setAddFileFilter(option.type));
     }
@@ -74,8 +85,9 @@ export const BarProfileFilter: FC<BarProfileFilterProps> = ({
 
   return (
     <div
-      style={{ "--borderRadius": "20px" } as React.CSSProperties}
-      className={`${styles.types} `}
+      // style={{ "--borderRadius": "20px" } as React.CSSProperties}
+      // className={`${styles.types} `}
+      className={styles.types}
     >
       <ul
         className={

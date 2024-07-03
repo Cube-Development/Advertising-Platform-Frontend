@@ -3,23 +3,39 @@ import { orderStatus } from "@shared/config/orderFilter";
 export interface IManagerProjects {
   page: number;
   elements: number;
-  projects: IManagerProjectCard[];
+  tariffs: IManagerProjectCard[];
 }
 
 export interface IManagerNewProjects {
   page: number;
   elements: number;
-  projects: IManagerNewProjectCard[];
+  tariffs: IManagerNewProjectCard[];
 }
 
+// export interface IManagerNewProjectCard {
+//   id: number;
+//   date: string;
+//   tarif: string;
+//   price: number;
+//   comment: string;
+//   url: string[];
+//   file: string[];
+// }
+
 export interface IManagerNewProjectCard {
-  id: number;
-  date: string;
-  tarif: string;
-  price: number;
+  id: string;
+  project_id: string;
+  tariff_date: string;
+  tariff_name: string;
+  budget: number;
   comment: string;
-  url: string[];
-  file: string[];
+  links: string[];
+  files: IFile[];
+}
+
+interface IFile {
+  content: string;
+  content_type: number;
 }
 
 export interface IManagerProjectCard {

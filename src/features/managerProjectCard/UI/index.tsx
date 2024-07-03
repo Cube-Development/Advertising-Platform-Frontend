@@ -16,7 +16,7 @@ import { managerProjectStatusFilter } from "@shared/config/projectFilter";
 import { useAppSelector } from "@shared/store";
 import { getProjectSubcardReq } from "@shared/store/services/advOrdersService";
 import { IChannelChat } from "@shared/types/common";
-import { IManagerProjectCard } from "@shared/types/managerProjects";
+import { IManagerProjectCard } from "@shared/types/managerProject";
 import { IOrderFeature } from "@shared/types/order";
 import {
   AccordionContent,

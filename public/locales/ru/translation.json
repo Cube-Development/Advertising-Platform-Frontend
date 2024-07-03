@@ -1225,6 +1225,7 @@
     "types": {
       "blogger": "От блогеров",
       "manager": "От менеджеров",
+      "advertiser": "От рекламодателей",
       "administration": "Администрация серсива"
     },
     "campaign": "РК",

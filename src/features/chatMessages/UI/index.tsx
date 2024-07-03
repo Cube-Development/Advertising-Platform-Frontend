@@ -4,7 +4,6 @@ import { MessageStatus, RecipientType } from "@shared/config/chat";
 import { INTERSECTION_ELEMENTS } from "@shared/config/common";
 import { convertUTCToLocalDateTime } from "@shared/functions/convertUTCToLocalTime";
 import { getCurrentUtcDateTime } from "@shared/functions/getCurrentUtcDateTime";
-import { useGetChatHistoryQuery } from "@shared/store/services/chatService";
 import {
   IOrderMessageNewSocket,
   IOrderMessageSendSocket,
@@ -21,12 +20,14 @@ import { useTranslation } from "react-i18next";
 import { animateScroll } from "react-scroll";
 import styles from "./styles.module.scss";
 import { SkeletonChatMessage } from "../skeletonChatMessage";
+import { useGetOrderHistoryQuery } from "@shared/store/services/chatService";
 
 interface ChatMessagesProps {
-  order_id: string;
+  id: string;
+  isOrder: boolean;
 }
 
-export const ChatMessages: FC<ChatMessagesProps> = ({ order_id }) => {
+export const ChatMessages: FC<ChatMessagesProps> = ({ id, isOrder }) => {
   const { t } = useTranslation();
   const { OrderMessageSend, OrderMessageNew } = useCentrifuge();
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -38,7 +39,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ order_id }) => {
 
   const { watch, setValue } = useForm({
     defaultValues: {
-      order_id: order_id,
+      ...(isOrder ? { order_id: id } : { project_id: id }),
       batch: INTERSECTION_ELEMENTS.chat,
       message_date: currentDateString.date,
       message_time: currentDateString.time,
@@ -47,7 +48,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ order_id }) => {
 
   const formFields = watch();
 
-  const { data: history, isLoading } = useGetChatHistoryQuery({
+  const { data: history, isLoading } = useGetOrderHistoryQuery({
     ...formFields,
   });
   console.log(history);
@@ -123,7 +124,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ order_id }) => {
     console.log(message);
     if (message !== "") {
       const orderMessage: IOrderMessageSendSocket = {
-        order_id: order_id,
+        ...(isOrder ? { order_id: id } : { project_id: id }),
         user_id: "35a547a1-6168-48de-9162-f9b89d7c5232",
         message: message,
       };
@@ -140,7 +141,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ order_id }) => {
 
       const orderMessageState: IOrderMessageNewSocket = {
         id: "12",
-        order_id: order_id,
+        ...(isOrder ? { order_id: id } : { project_id: id }),
         message: message,
         recipient: RecipientType.sender,
         message_date: formattedDate,
@@ -157,7 +158,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ order_id }) => {
 
   const handleNewMessage = (message: IOrderMessageNewSocket) => {
     if (
-      message.order_id === order_id &&
+      (message.order_id === id || message.project_id === id) &&
       message.recipient === RecipientType.receiver
     ) {
       const datetime = convertUTCToLocalDateTime(

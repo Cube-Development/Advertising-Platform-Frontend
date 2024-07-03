@@ -20,7 +20,8 @@ export interface IOrderMessageNewSocket {
   id: string;
   method?: string;
   recipient: string;
-  order_id: string;
+  order_id?: string;
+  project_id?: string;
   message: string;
   message_date: string;
   message_time: string;
@@ -28,7 +29,8 @@ export interface IOrderMessageNewSocket {
 }
 
 export interface IOrderMessageAll {
-  order_id: string;
+  order_id?: string;
+  project_id?: string;
   recipient: string;
   project_name: string;
   channel_name: string;
@@ -50,7 +52,8 @@ export interface IReadOrderMessage {
 }
 
 export interface IOrderMessageSendSocket {
-  order_id: string;
+  order_id?: string;
+  project_id?: string;
   user_id: string;
   message: string;
 }

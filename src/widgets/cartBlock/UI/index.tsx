@@ -9,10 +9,13 @@ import { Languages } from "@shared/config/languages";
 import { useAppSelector } from "@shared/store";
 import {
   useAddToCommonCartMutation,
+  useAddToManagerCartMutation,
   useAddToPublicCartMutation,
   useReadCommonCartQuery,
+  useReadManagerCartQuery,
   useReadPublicCartQuery,
   useRemoveFromCommonCartMutation,
+  useRemoveFromManagerCartMutation,
   useRemoveFromPublicCartMutation,
 } from "@shared/store/services/cartService";
 import { ICart } from "@shared/types/cart";
@@ -21,6 +24,7 @@ import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
 import { BREAKPOINT } from "@shared/config/common";
+import { roles } from "@shared/config/roles";
 
 export const CartBlock: FC = () => {
   const { toast } = useToast();
@@ -30,20 +34,34 @@ export const CartBlock: FC = () => {
   });
   const { isAuth } = useAppSelector((state) => state.user);
 
-  const { data: cart } = useReadCommonCartQuery(
-    { language: language?.id || Languages[0].id },
-    { skip: !isAuth },
-  );
-
   const guestId = Cookies.get("guest_id");
+  const role = Cookies.get("role");
+  const managerProjectId = Cookies.get("manager_project_id");
+
   if (!guestId) {
     GenerateGuestId();
   }
 
-  const { data: cartPub, isLoading } = useReadPublicCartQuery(
+  const { data: cart, isLoading: isLoadingCommon } = useReadCommonCartQuery(
+    { language: language?.id || Languages[0].id },
+    { skip: !isAuth || role !== roles.advertiser },
+  );
+
+  const { data: cartPub, isLoading: isLoadingPublic } = useReadPublicCartQuery(
     { guest_id: guestId, language: language?.id || Languages[0].id },
     { skip: !guestId || isAuth },
   );
+
+  const { data: cartManager, isLoading: isLoadingManager } =
+    useReadManagerCartQuery(
+      {
+        project_id: managerProjectId,
+        language: language?.id || Languages[0].id,
+      },
+      {
+        skip: !isAuth || role !== roles.manager || !managerProjectId,
+      },
+    );
 
   const [screen, setScreen] = useState<number>(window.innerWidth);
 
@@ -58,18 +76,25 @@ export const CartBlock: FC = () => {
   }, []);
 
   useEffect(() => {
-    if (isAuth && cart) {
+    if (isAuth && role === roles.advertiser && cart) {
       setCurrentCart(cart);
     }
   }, [cart]);
+
   useEffect(() => {
     if (!isAuth && guestId && cartPub) {
       setCurrentCart(cartPub);
     }
   }, [cartPub]);
 
+  useEffect(() => {
+    if (isAuth && role === roles.manager && cartManager) {
+      setCurrentCart(cartManager);
+    }
+  }, [cartManager]);
+
   const [currentCart, setCurrentCart] = useState<ICart>(
-    cartPub ? cartPub : cart!,
+    cartPub ? cartPub : cart ? cart : cartManager!,
   );
   // const [recomendCards, setRecomendCards] = useState<IPlatform[]>(reccartCards);
 
@@ -79,6 +104,9 @@ export const CartBlock: FC = () => {
   // publicCart
   const [addToPublicCart] = useAddToPublicCartMutation();
   const [removeFromPublicCart] = useRemoveFromPublicCartMutation();
+  // managerCart
+  const [addToManagerCart] = useAddToManagerCartMutation();
+  const [removeFromManagerCart] = useRemoveFromManagerCartMutation();
 
   const handleChangeCartCards = (cartChannel: IPlatform) => {
     const currentCard = currentCart.channels?.find(
@@ -114,8 +142,22 @@ export const CartBlock: FC = () => {
               });
               console.error("Ошибка при удалении с корзины", error);
             });
-        } else if (isAuth) {
+        } else if (isAuth && role === roles.advertiser) {
           removeFromCommonCart(removeReq)
+            .unwrap()
+            .then((data) => {
+              setCurrentCart(data);
+            })
+            .catch((error) => {
+              toast({
+                variant: "error",
+                title: t("toasts.catalog.remove.error"),
+                action: <ToastAction altText="Ok">Ok</ToastAction>,
+              });
+              console.error("Ошибка при удалении с корзины", error);
+            });
+        } else if (isAuth && role === roles.manager && managerProjectId) {
+          removeFromManagerCart({ ...removeReq, project_id: managerProjectId })
             .unwrap()
             .then((data) => {
               setCurrentCart(data);
@@ -147,7 +189,7 @@ export const CartBlock: FC = () => {
               });
               console.error("Ошибка при добавлении в корзину", error);
             });
-        } else if (isAuth) {
+        } else if (isAuth && role === roles.advertiser) {
           addToCommonCart(addReq)
             .unwrap()
             .then((data) => {
@@ -162,6 +204,20 @@ export const CartBlock: FC = () => {
               console.error("Ошибка при добавлении в корзину", error);
             });
         }
+      } else if (isAuth && role === roles.manager && managerProjectId) {
+        addToManagerCart({ ...addReq, project_id: managerProjectId })
+          .unwrap()
+          .then((data) => {
+            setCurrentCart(data);
+          })
+          .catch((error) => {
+            toast({
+              variant: "error",
+              title: t("toasts.catalog.add.error"),
+              action: <ToastAction altText="Ok">Ok</ToastAction>,
+            });
+            console.error("Ошибка при добавлении в корзину", error);
+          });
       }
       //       setCurrentCart({
       //   ...currentCart,
@@ -196,7 +252,7 @@ export const CartBlock: FC = () => {
             <CartList
               channels={currentCart?.channels || []}
               onChangeCard={handleChangeCartCards}
-              isLoading={isLoading}
+              isLoading={isLoadingCommon || isLoadingPublic || isLoadingManager}
             />
             {/* <RecomendationList
               cards={recomendCards}

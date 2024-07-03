@@ -13,10 +13,11 @@ export interface ICreatePostReq {
 }
 
 export interface getProjectsCardReq {
+  language?: number;
   page: number;
-  date_sort: string;
-  elements_on_page?: number;
   status: string;
+  elements_on_page?: number;
+  date_sort?: string;
 }
 
 export interface getProjectSubcardReq {
@@ -117,6 +118,26 @@ export const advProjectsAPI = authApi.injectEndpoints({
       }),
       providesTags: [ADV_PROJECTS],
     }),
+
+    getAdvManagerSubprojects: build.query<
+      IAdvSubprojects,
+      getProjectSubcardReq
+    >({
+      query: (BodyParams) => ({
+        url: `/order/project/orders`,
+        method: `POST`,
+        body: BodyParams,
+      }),
+      providesTags: [ADV_PROJECTS],
+    }),
+
+    getAdvManagerProjects: build.query<IAdvProjects, getProjectsCardReq>({
+      query: (params) => ({
+        url: `/tariff/advertiser`,
+        method: "GET",
+        params: params,
+      }),
+    }),
   }),
 });
 
@@ -131,4 +152,6 @@ export const {
   useAddReviewMutation,
   useGetAdvProjectsQuery,
   useGetAdvSubprojectsQuery,
+  useGetAdvManagerProjectsQuery,
+  useGetAdvManagerSubprojectsQuery,
 } = advProjectsAPI;

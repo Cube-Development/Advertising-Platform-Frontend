@@ -5,6 +5,7 @@ import { ICart } from "@shared/types/cart";
 
 interface AddChannelReq {
   guest_id?: string;
+  project_id?: string;
   channel_id: string;
   format: number;
   match: number;
@@ -13,6 +14,7 @@ interface AddChannelReq {
 
 interface RemoveChannelReq {
   guest_id?: string;
+  project_id?: string;
   channel_id: string;
   language: languagesNum;
 }
@@ -20,6 +22,7 @@ interface RemoveChannelReq {
 interface ReadCartReq {
   language: languagesNum;
   guest_id?: string;
+  project_id?: string;
 }
 
 // Авторизованные запросы
@@ -110,3 +113,46 @@ export const {
   useAddToPublicCartMutation,
   useRemoveFromPublicCartMutation,
 } = publicCartAPI;
+
+// Манагерские запросы
+
+export const managerCartAPI = authApi.injectEndpoints({
+  endpoints: (build) => ({
+    readManagerCart: build.query<ICart, ReadCartReq>({
+      query: (params) => ({
+        url: `/cart/project`,
+        method: `GET`,
+        params: params,
+      }),
+      providesTags: [CART_PUB, CART],
+    }),
+    addToManagerCart: build.mutation<ICart, AddChannelReq>({
+      query: (params) => ({
+        url: `/cart/project/add`,
+        method: `POST`,
+        params: params,
+      }),
+      invalidatesTags: [CART_PUB, CART, CATALOG],
+    }),
+    removeFromManagerCart: build.mutation<ICart, RemoveChannelReq>({
+      query: (params) => ({
+        url: `/cart/project/remove`,
+        method: `POST`,
+        params: params,
+      }),
+      invalidatesTags: [CART_PUB, CART, CATALOG],
+    }),
+    // saveCart: build.mutation<{ success: boolean }, void>({
+    //   query: () => ({
+    //     url: `/cart/save`,
+    //     method: `POST`,
+    //   }),
+    // }),
+  }),
+});
+
+export const {
+  useReadManagerCartQuery,
+  useAddToManagerCartMutation,
+  useRemoveFromManagerCartMutation,
+} = managerCartAPI;

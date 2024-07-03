@@ -3,9 +3,9 @@ import { IFilterSearch } from "@shared/types/filterSearch";
 import {
   IManagerNewProjects,
   IManagerProjects,
-} from "@shared/types/managerProjects";
+} from "@shared/types/managerProject";
 
-export const managerActiveCARDS: IManagerProjects = {
+export const managerActiveCARDS = {
   page: 1,
   elements: 1,
   projects: [
@@ -582,7 +582,7 @@ export const managerActiveCARDS: IManagerProjects = {
   ],
 };
 
-export const managerCompletedCARDS: IManagerProjects = {
+export const managerCompletedCARDS = {
   page: 1,
   elements: 1,
   projects: [
@@ -796,7 +796,7 @@ export const managerCompletedCARDS: IManagerProjects = {
   ],
 };
 
-export const managerAgreedCARDS: IManagerProjects = {
+export const managerAgreedCARDS = {
   page: 1,
   elements: 1,
   projects: [
@@ -952,7 +952,7 @@ export const managerAgreedCARDS: IManagerProjects = {
   ],
 };
 
-export const managerNewCARDS: IManagerNewProjects = {
+export const managerNewCARDS = {
   page: 1,
   elements: 1,
   projects: [

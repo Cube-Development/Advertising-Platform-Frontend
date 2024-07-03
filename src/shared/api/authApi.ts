@@ -10,6 +10,7 @@ import {
   CATALOG,
   CHAT,
   LEGALS,
+  MANAGER_PROJECTS,
 } from "@shared/api/tags";
 
 export const authApi = createApi({
@@ -24,6 +25,7 @@ export const authApi = createApi({
     BALANCE,
     BLOGGER_OFFERS,
     ADV_PROJECTS,
+    MANAGER_PROJECTS,
     LEGALS,
     CHAT,
   ],
