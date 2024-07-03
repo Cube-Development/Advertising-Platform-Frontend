@@ -1,10 +1,10 @@
 import { pageFilter } from "@shared/config/pageFilter";
-import {
-  platformTypesStr,
-  platformTypesNum,
-} from "@shared/config/platformTypes";
 import { ButtonHTMLAttributes, FC } from "react";
 import { IOption } from "./common";
+import {
+  platformTypesNum,
+  platformTypesStr,
+} from "@shared/config/platformTypes";
 
 export interface IAddChannelIdentification {
   platform: platformTypesNum;

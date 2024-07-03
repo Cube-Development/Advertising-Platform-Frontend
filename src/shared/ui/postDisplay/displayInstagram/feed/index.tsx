@@ -14,17 +14,22 @@ import { SearchIcon } from "./assets";
 import { EyeDisabledIcon } from "@shared/assets/icons/eyeDisabled";
 import { GetPostRes } from "@shared/store/services/getPostService";
 import { ContentType } from "@shared/config/createPostData";
+import { PostTypesNum } from "@shared/config/platformTypes";
 
-interface PostDispayInstagramProps {
+interface DisplayFeedProps {
   formState?: ICreatePostForm;
   platformId: number;
   post?: GetPostRes;
+  postType?: PostTypesNum;
+  orderId?: string;
 }
 
-export const PostDispayInstagram: FC<PostDispayInstagramProps> = ({
+export const DisplayFeed: FC<DisplayFeedProps> = ({
   formState,
   platformId,
   post,
+  postType,
+  orderId,
 }) => {
   // post response
   const photosRes = post
@@ -53,8 +58,10 @@ export const PostDispayInstagram: FC<PostDispayInstagramProps> = ({
 
   // postFromData
   const currentPost = formState?.selectedMultiPostId
-    ? formState?.multiposts?.find(
-        (item) => item?.order_id === formState?.selectedMultiPostId,
+    ? formState?.multiposts?.find((item) =>
+        orderId
+          ? item?.order_id === orderId
+          : item?.order_id === formState?.selectedMultiPostId,
       ) || {
         platform: platformId,
         files: [],
@@ -62,7 +69,9 @@ export const PostDispayInstagram: FC<PostDispayInstagramProps> = ({
         buttons: [],
         order_id: formState?.selectedMultiPostId,
       }
-    : (formState?.posts || []).find((item) => item.platform === platformId) || {
+    : (formState?.posts || []).find(
+        (item) => item.platform === platformId && item.post_type === postType,
+      ) || {
         platform: platformId,
         files: [],
         media: [],

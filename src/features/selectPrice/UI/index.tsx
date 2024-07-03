@@ -58,15 +58,15 @@ export const SelectPrice: FC<SelectPriceProps> = ({
       </div>
       <div className={styles.accomms}>
         {formats &&
-          formats.map((format, index) => (
+          formats?.map((format, index) => (
             <AccommPrice
-              small={format.small}
-              id={format.id}
-              big={format.big}
+              small={format?.small}
+              id={format?.id}
+              big={format?.big}
               key={index}
               onChange={handleChangeFormatPrice}
               defaultValue={
-                defaultValues?.find((value) => value.name === format.id)?.price
+                defaultValues?.find((value) => value.name === format?.id)?.price
               }
             />
           ))}

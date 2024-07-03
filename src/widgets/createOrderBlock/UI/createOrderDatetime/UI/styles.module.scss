@@ -45,13 +45,12 @@
     display: grid;
     grid-auto-flow: row;
     row-gap: 30px;
-    padding-left: 110px;
+    padding: 0px 110px;
 
     .cards {
       display: grid;
       grid-auto-flow: row;
       row-gap: 15px;
-      max-width: 850px;
     }
 
     .continue {

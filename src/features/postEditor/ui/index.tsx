@@ -27,8 +27,13 @@ export const Editor: FC<EditorProps> = ({
     ? formState?.multiposts?.find(
         (item) => item?.order_id === formState?.selectedMultiPostId,
       )
-    : formState?.posts?.find((item) => item.platform === platformId) || {
+    : formState?.posts?.find(
+        (item) =>
+          item.platform === platformId &&
+          item.post_type === formState.selectedPostType,
+      ) || {
         platform: platformId,
+        post_type: formState.selectedPostType,
       };
   const startContent =
     (currentPost?.text && currentPost?.text[0]?.content) || "";
@@ -74,15 +79,28 @@ export const Editor: FC<EditorProps> = ({
       ? formState?.multiposts?.filter(
           (item) => item?.order_id !== formState?.selectedMultiPostId,
         ) || []
-      : formState?.posts?.filter((item) => item?.platform !== platformId) || [];
+      : formState?.posts?.filter(
+          (item) =>
+            item?.platform !== platformId ||
+            (item?.platform === platformId &&
+              item?.post_type !== formState?.selectedPostType),
+        ) || [];
+
+    console.log(posts);
 
     const currentPost = formState?.selectedMultiPostId
       ? formState?.multiposts?.find(
           (item) => item?.order_id === formState?.selectedMultiPostId,
         )
-      : formState?.posts?.find((item) => item?.platform === platformId) || {
+      : formState?.posts?.find(
+          (item) =>
+            item?.platform === platformId &&
+            item?.post_type === formState?.selectedPostType,
+        ) || {
           platform: platformId,
+          post_type: formState?.selectedPostType,
         };
+
     if (currentPost) {
       currentPost.text = [{ content_type: ContentType.text, content: content }];
       setValue(type, [...posts, currentPost]);

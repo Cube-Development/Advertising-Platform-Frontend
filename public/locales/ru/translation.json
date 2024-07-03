@@ -295,8 +295,8 @@
 
   "main_page_blogger": {
     "main_img": "mainBlogger.png",
-    "cta_title": "Добавьте канал сейчас и получите заказ.",
-    "cta_subtitle": "Открой канал для заказов. Просто. Бèстро. Доходно.",
+    "cta_title": "Добавь канал сейчас и получи заказ.",
+    "cta_subtitle": "Открой канал для заказов. Просто. Быстро. Доходно.",
     "cta_list": [
       {
         "option": "Постоянно растущее количество рекламодателей для ваших каналов",
@@ -1136,6 +1136,19 @@
       "template": "Загрузить шаблон",
       "comment_to_post": "Комментарий к техническому заданию: ",
 
+      "post_types": {
+        "telegram": { "default": "Универсальный формат" },
+        "instagram": {
+          "stories": "Рилс/Сторис",
+          "reels": "Рилс/Сторис",
+          "feed": "Лента"
+        },
+        "youtube": {
+          "shorts": "Youtube Shorts",
+          "videos": "Youtube Videos"
+        }
+      },
+
       "filter": {
         "telegram": "Telegram",
         "instagram": "Instagram",
@@ -1225,6 +1238,7 @@
     "types": {
       "blogger": "От блогеров",
       "manager": "От менеджеров",
+      "advertiser": "От рекламодателей",
       "administration": "Администрация серсива"
     },
     "campaign": "РК",

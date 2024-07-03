@@ -4,11 +4,16 @@ import { ChatMessages } from "@features/chatMessages";
 import { AlertDialogTrigger } from "@radix-ui/react-alert-dialog";
 import { ArrowLongHorizontalIcon, CancelIcon2, ChatIcon } from "@shared/assets";
 import { RecipientType } from "@shared/config/chat";
+import { chatFilter } from "@shared/config/chatFilter";
 import { BREAKPOINT } from "@shared/config/common";
 import { pageFilter } from "@shared/config/pageFilter";
+import { roles } from "@shared/config/roles";
 import { convertUTCToLocalDateTime } from "@shared/functions/convertUTCToLocalTime";
 import { useAppSelector } from "@shared/store";
-import { useGetAllChatsQuery } from "@shared/store/services/chatService";
+import {
+  useGetOrderChatsQuery,
+  useGetProjectChatsQuery,
+} from "@shared/store/services/chatService";
 import { IOrderMessageAll, IOrderMessageNewSocket } from "@shared/types/chat";
 import {
   AlertDialog,
@@ -30,12 +35,44 @@ import styles from "./styles.module.scss";
 
 export const Chat: FC = () => {
   const { t } = useTranslation();
-  const { data: chats } = useGetAllChatsQuery({
-    role: Cookies.get("role")!,
-  });
+  const role = Cookies.get("role")
+    ? (Cookies.get("role") as roles)
+    : roles.advertiser;
+
+  const { chatFilter: filter } = useAppSelector((state) => state.filter);
+
+  const isOrderCondition = (role: string, filter: string): boolean => {
+    return (
+      (role !== roles.blogger && filter === chatFilter.blogger) ||
+      role === roles.blogger
+    );
+  };
+
+  const [isOrder, setIsOrder] = useState<boolean>(
+    isOrderCondition(role, filter),
+  );
+
+  const { data: chatsOrder } = useGetOrderChatsQuery(
+    { role: role },
+    { skip: role !== roles.blogger && filter !== chatFilter.blogger },
+  );
+
+  const { data: chatsProject } = useGetProjectChatsQuery(
+    { role: role },
+    { skip: role === roles.blogger || filter === chatFilter.blogger },
+  );
+
   const [screen, setScreen] = useState<number>(window.innerWidth);
-  const [allChats, setAllChats] = useState<IOrderMessageAll[]>(chats || []);
+  const [allChats, setAllChats] = useState<IOrderMessageAll[]>(
+    chatsOrder || chatsProject || [],
+  );
+
   const [currentChat, setCurrentChat] = useState<IOrderMessageAll | null>(null);
+
+  useEffect(() => {
+    setIsOrder(isOrderCondition(role, filter));
+  }, [role, filter]);
+
   const { OrderMessageNewChat } = useCentrifuge();
 
   useEffect(() => {
@@ -49,8 +86,8 @@ export const Chat: FC = () => {
   }, []);
 
   useEffect(() => {
-    if (chats) {
-      const Chats = chats.map((item) => {
+    if (chatsOrder) {
+      const Chats = chatsOrder.map((item) => {
         const datetime = convertUTCToLocalDateTime(
           item.message_date,
           item.message_time,
@@ -63,13 +100,32 @@ export const Chat: FC = () => {
       });
       setAllChats(Chats);
     }
-  }, [chats]);
+  }, [chatsOrder]);
 
-  const handleChangeChat = (order_id: string) => {
-    setCurrentChat(allChats.find((item) => item.order_id === order_id) || null);
+  useEffect(() => {
+    if (chatsProject) {
+      const Chats = chatsProject.map((item) => {
+        const datetime = convertUTCToLocalDateTime(
+          item.message_date,
+          item.message_time,
+        );
+        return {
+          ...item,
+          message_date: datetime.localDate,
+          message_time: datetime.localTime,
+        };
+      });
+      setAllChats(Chats);
+    }
+  }, [chatsProject]);
+
+  const handleChangeChat = (id: string) => {
+    setCurrentChat(
+      isOrder
+        ? allChats.find((item) => item.order_id === id) || null
+        : allChats.find((item) => item.project_id === id) || null,
+    );
   };
-
-  const { chatFilter: filter } = useAppSelector((state) => state.filter);
 
   const handle = () => {};
 
@@ -121,19 +177,26 @@ export const Chat: FC = () => {
               <div className={styles.content__left}>
                 <div className={styles.left}>
                   <p className={styles.title}>{t("chat.my_messages")}</p>
-                  <div className={styles.filter}>
-                    <BarProfileFilter
-                      page={pageFilter.chat}
-                      resetValues={handle}
-                    />
-                  </div>
+                  {role !== roles.blogger && (
+                    <div className={styles.filter}>
+                      <BarProfileFilter
+                        page={pageFilter.chat}
+                        resetValues={handle}
+                      />
+                    </div>
+                  )}
                   {allChats.length ? (
                     <div className={styles.all_chats}>
                       {allChats.map((card, index) => (
                         <ChatCard
                           key={index}
                           card={card}
-                          isActive={currentChat?.order_id === card.order_id}
+                          isActive={
+                            isOrder
+                              ? currentChat?.order_id === card.order_id
+                              : currentChat?.project_id === card.project_id
+                          }
+                          isOrder={isOrder}
                           onChange={handleChangeChat}
                         />
                       ))}
@@ -161,7 +224,12 @@ export const Chat: FC = () => {
                       </div>
                     </div>
                   </div>
-                  <ChatMessages order_id={currentChat.order_id} />
+                  <ChatMessages
+                    id={
+                      isOrder ? currentChat.order_id! : currentChat.project_id!
+                    }
+                    isOrder={isOrder}
+                  />
                 </div>
               ) : (
                 <></>
@@ -197,7 +265,12 @@ export const Chat: FC = () => {
                         <ChatCard
                           key={index}
                           card={card}
-                          isActive={currentChat?.order_id === card.order_id}
+                          isActive={
+                            isOrder
+                              ? currentChat?.order_id === card.order_id
+                              : currentChat?.project_id === card.project_id
+                          }
+                          isOrder={isOrder}
                           onChange={handleChangeChat}
                         />
                       ))}
@@ -233,7 +306,14 @@ export const Chat: FC = () => {
                         </div>
                       </div>
                     </div>
-                    <ChatMessages order_id={currentChat.order_id} />
+                    <ChatMessages
+                      id={
+                        isOrder
+                          ? currentChat.order_id!
+                          : currentChat.project_id!
+                      }
+                      isOrder={isOrder}
+                    />
                     <div className={styles.arrow} onClick={handleCloseChat}>
                       <ArrowLongHorizontalIcon className="default__icon__grey" />
                     </div>

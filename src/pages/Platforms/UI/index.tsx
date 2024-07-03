@@ -1,9 +1,8 @@
 import { INTERSECTION_ELEMENTS } from "@shared/config/common";
 import { Languages } from "@shared/config/languages";
 import { pageFilter } from "@shared/config/pageFilter";
-import { networkTypes } from "@shared/config/platformData";
 import { platformStatusFilter } from "@shared/config/platformFilter";
-import { platformTypesNum } from "@shared/config/platformTypes";
+import { networkTypes, platformTypesNum } from "@shared/config/platformTypes";
 import { useAppSelector } from "@shared/store";
 import {
   getChannelsByStatusReq,

@@ -1,6 +1,6 @@
 import { ArrowSmallVerticalIcon, CopyIcon, MoreIcon } from "@shared/assets";
 import { accordionTypes } from "@shared/config/accordion";
-import { IManagerNewProjectCard } from "@shared/types/managerProjects";
+import { IManagerNewProjectCard } from "@shared/types/managerProject";
 import {
   AccordionContent,
   AccordionItem,
@@ -12,7 +12,7 @@ import styles from "./styles.module.scss";
 
 interface ManagerNewProjectCardProps {
   card: IManagerNewProjectCard;
-  ManagerNewProjectStartBtn: FC;
+  ManagerNewProjectStartBtn: FC<{ project_id: string }>;
   SendToBotBtn: FC;
 }
 
@@ -52,19 +52,19 @@ export const ManagerNewProjectCard: FC<ManagerNewProjectCardProps> = ({
           <p>№ {card.id}</p>
         </div>
         <div className={styles.card__date}>
-          <p>{card.date}</p>
+          <p>{card.tariff_date}</p>
         </div>
         <div className={styles.card__tarif}>
           <p>{t("orders_manager.card.tarif")}:</p>
-          <span>{card.tarif}</span>
+          <span>{card.tariff_name}</span>
         </div>
         <div className={styles.card__price}>
           <p>{t("orders_manager.card.cost")}:</p>
           <span>
-            {card.price.toLocaleString()} {t("symbol")}
+            {card.budget.toLocaleString()} {t("symbol")}
           </span>
         </div>
-        <ManagerNewProjectStartBtn />
+        <ManagerNewProjectStartBtn project_id={card.project_id} />
         <MoreIcon />
       </div>
 
@@ -79,9 +79,9 @@ export const ManagerNewProjectCard: FC<ManagerNewProjectCardProps> = ({
               <div className={styles.link}>
                 <p>{t("orders_manager.subcard.link")}</p>
                 <ul>
-                  {card.url.map((url, index) => (
+                  {card.links.map((link, index) => (
                     <li key={index}>
-                      <span>{url}</span>
+                      <span>{link}</span>
                       <CopyIcon />
                     </li>
                   ))}

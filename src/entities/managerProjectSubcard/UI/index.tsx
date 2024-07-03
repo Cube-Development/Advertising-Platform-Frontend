@@ -9,7 +9,7 @@ import { orderStatus, orderStatusChat } from "@shared/config/orderFilter";
 import { managerProjectStatusFilter } from "@shared/config/projectFilter";
 import { useAppSelector } from "@shared/store";
 import { IChannelChat } from "@shared/types/common";
-import { IManagerProjectSubcard } from "@shared/types/managerProjects";
+import { IManagerProjectSubcard } from "@shared/types/managerProject";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";

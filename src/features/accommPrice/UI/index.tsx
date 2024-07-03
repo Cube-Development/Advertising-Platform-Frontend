@@ -5,7 +5,7 @@ import styles from "./styles.module.scss";
 
 export const FormatPrice: FC<IFormatPriceProps> = ({
   big,
-  small,
+  // small,
   id,
   onChange,
   defaultValue,

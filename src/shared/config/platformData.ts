@@ -18,12 +18,6 @@ export enum filterData {
   sort = "sort",
 }
 
-export enum networkFilter {
-  telegram = "telegram",
-  instagram = "instagram",
-  youtube = "youtube",
-}
-
 export enum sortingFilter {
   price_down = "price_down",
   price_up = "price_up",
@@ -55,27 +49,6 @@ export const sortToIcon: { [key: number]: () => JSX.Element } = {
   8: SortUpIcon,
   9: SortUpIcon,
 };
-
-export const networkTypes = [
-  {
-    name: "filter.telegram",
-    id: 1,
-    type: networkFilter.telegram,
-    img: TelegramIcon,
-  },
-  {
-    name: "filter.instagram",
-    id: 3,
-    type: networkFilter.instagram,
-    img: TelegramIcon,
-  },
-  {
-    name: "filter.youtube",
-    id: 2,
-    type: networkFilter.youtube,
-    img: TelegramIcon,
-  },
-];
 
 export const sortingTypes = [
   {

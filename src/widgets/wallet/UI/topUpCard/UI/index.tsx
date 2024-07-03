@@ -52,7 +52,6 @@ export const TopUpCard: FC = () => {
           variant: "success",
           title: `${t("toasts.wallet.topup.success")}: ${formData.amount.toLocaleString()} ${t("symbol")}`,
         });
-        // alert(`Баланс успешно пополнен на сумму: ${formData.amount}`);
       })
       .catch((error) => {
         toast({

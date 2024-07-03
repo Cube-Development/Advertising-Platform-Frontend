@@ -30,14 +30,14 @@ export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
 
   const handleCheckDatetimes = () => {
     const form: ICreatePostForm = getValues();
-    if (cards.length === form.datetime.orders.length) {
-      const condition = form.datetime.orders.reduce((acc, item) => {
+    if (cards?.length === form.datetime?.orders?.length) {
+      const condition = form.datetime?.orders?.reduce((acc, item) => {
         return (
           acc &&
-          Boolean(item.time_from) &&
-          Boolean(item.time_to) &&
-          (Boolean(item.date) ||
-            (Boolean(item.date_from) && Boolean(item.date_to)))
+          Boolean(item?.time_from) &&
+          Boolean(item?.time_to) &&
+          (Boolean(item?.date) ||
+            (Boolean(item?.date_from) && Boolean(item?.date_to)))
         );
       }, true);
       if (condition) {

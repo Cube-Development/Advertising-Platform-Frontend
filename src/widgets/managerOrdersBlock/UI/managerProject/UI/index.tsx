@@ -9,12 +9,15 @@ import { ManagerProjectRun } from "@features/managerProjectRun";
 import { RejectPost } from "@features/rejectPost";
 import { SeePost } from "@features/seePost";
 import { Accordion } from "@radix-ui/react-accordion";
-import { IManagerProjects } from "@shared/types/managerProjects";
+import {
+  IManagerProjectCard,
+  IManagerProjects,
+} from "@shared/types/managerProject";
 import { FC } from "react";
 import styles from "./styles.module.scss";
 
 interface ManagerProjectProps {
-  projects: IManagerProjects;
+  projects: IManagerProjectCard[];
 }
 
 export const ManagerProject: FC<ManagerProjectProps> = ({ projects }) => {
@@ -22,7 +25,7 @@ export const ManagerProject: FC<ManagerProjectProps> = ({ projects }) => {
     <div className="container sidebar">
       <Accordion type="single" collapsible>
         <div className={styles.wrapper}>
-          {projects?.projects?.map((card, index) => (
+          {projects?.map((card, index) => (
             <ManagerProjectCard
               key={index}
               card={card}

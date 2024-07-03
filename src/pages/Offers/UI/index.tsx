@@ -5,8 +5,7 @@ import { BloggerOffer } from "@widgets/bloggerOffer";
 import { FC, useEffect, useState } from "react";
 import { Languages } from "@shared/config/languages";
 import { useTranslation } from "react-i18next";
-import { platformTypesNum } from "@shared/config/platformTypes";
-import { networkTypes } from "@shared/config/platformData";
+import { networkTypes, platformTypesNum } from "@shared/config/platformTypes";
 import { useForm } from "react-hook-form";
 import {
   getOrdersByStatusReq,

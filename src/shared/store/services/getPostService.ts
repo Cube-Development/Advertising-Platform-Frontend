@@ -1,5 +1,5 @@
 import { authApi } from "@shared/api";
-import { platformTypesNum } from "@shared/config/platformTypes";
+import { PostTypesNum, platformTypesNum } from "@shared/config/platformTypes";
 
 export interface ITgButtonRes {
   id: string;
@@ -16,6 +16,7 @@ export interface GetPostRes {
   files: string[];
   buttons: ITgButtonRes[];
   text: string[];
+  post_type: PostTypesNum;
 }
 
 export const getPostAPI = authApi.injectEndpoints({

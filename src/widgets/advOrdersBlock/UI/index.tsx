@@ -1,35 +1,31 @@
+import { QueryParams } from "@features/queryParams";
+import { INTERSECTION_ELEMENTS } from "@shared/config/common";
+import i18n from "@shared/config/i18n";
+import { Languages } from "@shared/config/languages";
 import { pageFilter } from "@shared/config/pageFilter";
 import {
   advManagerProjectStatusFilter,
   advertiserProjectTypes,
-  managerProjectStatus,
-  managerProjectStatusFilter,
-  myProjectStatusFilter,
   projectTypesFilter,
 } from "@shared/config/projectFilter";
 import { useAppDispatch, useAppSelector } from "@shared/store";
+import { filterSlice } from "@shared/store/reducers";
 import {
   getProjectsCardReq,
+  useGetAdvManagerProjectsQuery,
   useGetAdvProjectsQuery,
 } from "@shared/store/services/advOrdersService";
+import { IAdvProjectCard } from "@shared/types/advProject";
 import { BarFilter } from "@widgets/barFilter";
 import { FC, useEffect, useState } from "react";
-import { AdvProject } from "./advProject";
-import {
-  advManagerProjectActiveCARDS,
-  advManagerProjectAgreedCARDS,
-  advManagerProjectCompleteCARDS,
-  advManagerProjectOnDevelopCARDS,
-  advMyProjectActiveCARDS,
-  advMyProjectCompleteCARDS,
-} from "@shared/config/mockDATA";
 import { AdvDevProject } from "./advDevProject";
-import { IAdvProjectCard } from "@shared/types/advProject";
-import { INTERSECTION_ELEMENTS } from "@shared/config/common";
-import { QueryParams } from "@features/queryParams";
-import { filterSlice } from "@shared/store/reducers";
+import { AdvProject } from "./advProject";
 
 export const AdvOrdersBlock: FC = () => {
+  const language = Languages.find((lang) => {
+    return i18n.language === lang.name;
+  });
+
   const { order_type } = QueryParams();
   const dispatch = useAppDispatch();
 
@@ -65,100 +61,73 @@ export const AdvOrdersBlock: FC = () => {
     status: statusFilter,
     elements_on_page: INTERSECTION_ELEMENTS.orders,
   };
-
-  const { data, isFetching } = useGetAdvProjectsQuery(getParams);
+  console.log("statusFilter", statusFilter);
+  const { data: projectsSelf, isFetching: isFetchingSelf } =
+    useGetAdvProjectsQuery(getParams, {
+      skip: typeFilter !== projectTypesFilter.myProject,
+    });
+  const { data: projectsManager, isFetching: isFetchingManager } =
+    useGetAdvManagerProjectsQuery(
+      { ...getParams, language: language?.id },
+      {
+        skip: typeFilter !== projectTypesFilter.managerProject,
+      },
+    );
   // data: projectsMan fetch2
   // data: projectsManDev fetch3
 
   const [projects, setProjects] = useState<IAdvProjectCard[]>(
-    data?.projects ? data?.projects : [],
+    projectsSelf?.projects || projectsManager?.projects || [],
   );
+  console.log("projectsManager", projectsManager, projects);
 
   useEffect(() => {
-    if (data && currentPage !== 1) {
-      setProjects([...projects, ...data.projects]);
+    if (projectsSelf && currentPage !== 1) {
+      setProjects([...projects, ...projectsSelf.projects]);
     } else {
-      data && setProjects(data.projects);
+      projectsSelf && setProjects(projectsSelf.projects);
     }
-  }, [data]);
+  }, [projectsSelf]);
+
+  useEffect(() => {
+    if (projectsManager && currentPage !== 1) {
+      setProjects([...projects, ...projectsManager.projects]);
+    } else {
+      projectsManager && setProjects(projectsManager.projects);
+    }
+  }, [projectsManager]);
 
   useEffect(() => {
     setCurrentPage(1);
   }, [statusFilter]);
 
-  // const projects =
-  //   typeFilter === projectTypesFilter.myProject &&
-  //   statusFilter === myProjectStatusFilter.active
-  //     ? advMyProjectActiveCARDS
-  //     : typeFilter === projectTypesFilter.myProject &&
-  //         statusFilter === myProjectStatusFilter.completed
-  //       ? advMyProjectCompleteCARDS
-  //       : typeFilter === projectTypesFilter.managerProject &&
-  //           statusFilter === advManagerProjectStatusFilter.active
-  //         ? advManagerProjectActiveCARDS
-  //         : typeFilter === projectTypesFilter.managerProject &&
-  //             statusFilter === advManagerProjectStatusFilter.agreed
-  //           ? advManagerProjectAgreedCARDS
-  //           : typeFilter === projectTypesFilter.managerProject &&
-  //               statusFilter === advManagerProjectStatusFilter.completed
-  //             ? advManagerProjectCompleteCARDS
-  //             : typeFilter === projectTypesFilter.managerProject &&
-  //                 statusFilter === advManagerProjectStatusFilter.develop
-  //               ? advManagerProjectOnDevelopCARDS
-  //               : advManagerProjectCompleteCARDS;
-
   return (
     <>
       <BarFilter page={page} listLength={!!projects?.length} />
-
-      {/* {typeFilter === projectTypesFilter.myProject &&
-      statusFilter === myProjectStatusFilter.active ? (
-        <AdvProject projects={projects!} />
-      ) : typeFilter === projectTypesFilter.myProject &&
-        statusFilter === myProjectStatusFilter.complite ? (
-        <AdvProject projects={projects!} />
-      ) : typeFilter === projectTypesFilter.managerProject &&
-        statusFilter === managerProjectStatusFilter.active ? (
-        <AdvProject projects={projects!} />
-      )
-       : typeFilter === projectTypesFilter.managerProject &&
-        statusFilter === managerProjectStatusFilter.develop ? (
-        <AdvDevProject cards={ManagerProjectAdvCardsDev} />
-      ) 
-      : typeFilter === projectTypesFilter.managerProject &&
-        statusFilter === managerProjectStatusFilter.agreed ? (
-        <AdvProject projects={projects!} />
-      ) : typeFilter === projectTypesFilter.managerProject &&
-        statusFilter === managerProjectStatusFilter.complite ? (
-        // <DevProjectAdv cards={ManagerProjectAdvCardsDev} />
-        <></>
-      ) : typeFilter === projectTypesFilter.savedProject ? (
-        <AdvDevProject cards={ManagerProjectAdvCardsDev} />
-      ) : (
-        <></>
-      )} */}
 
       {typeFilter === projectTypesFilter.managerProject &&
       statusFilter === advManagerProjectStatusFilter.develop ? (
         <AdvDevProject
           projects={projects!}
           handleOnChangePage={handleOnChangePage}
-          isLoading={isFetching}
+          isLoading={isFetchingSelf || isFetchingManager}
           isNotEmpty={
-            data
-              ? data?.projects?.length === INTERSECTION_ELEMENTS.orders
-              : false
+            projectsSelf?.projects?.length === INTERSECTION_ELEMENTS.orders ||
+            projectsManager?.projects?.length ===
+              INTERSECTION_ELEMENTS.orders ||
+            false
           }
         />
       ) : (
         <AdvProject
           projects={projects!}
           handleOnChangePage={handleOnChangePage}
-          isLoading={isFetching}
+          isLoading={isFetchingSelf || isFetchingManager}
           isNotEmpty={
-            data
-              ? data?.projects?.length === INTERSECTION_ELEMENTS.orders
-              : false
+            projectsSelf?.projects?.length === INTERSECTION_ELEMENTS.orders ||
+            projectsManager?.projects?.length ===
+              INTERSECTION_ELEMENTS.orders ||
+            false
           }
         />
       )}

@@ -6,7 +6,7 @@ import {
   AlertDialogContent,
   AlertDialogTrigger,
 } from "@shared/ui/shadcn-ui/ui/alert-dialog";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { UseFormSetValue } from "react-hook-form";
@@ -32,13 +32,22 @@ export const PostButtons: FC<PostButtonsProps> = ({
     ? formState?.multiposts?.filter(
         (item) => item?.order_id !== formState?.selectedMultiPostId,
       ) || []
-    : formState?.posts?.filter((item) => item?.platform !== platformId) || [];
+    : formState?.posts?.filter(
+        (item) =>
+          item?.platform !== platformId ||
+          (item?.platform === platformId &&
+            item?.post_type !== formState?.selectedPostType),
+      ) || [];
 
   const currentPost = formState?.selectedMultiPostId
     ? formState?.multiposts?.find(
         (item) => item?.order_id === formState?.selectedMultiPostId,
       )
-    : formState?.posts?.find((item) => item?.platform === platformId) || {
+    : formState?.posts?.find(
+        (item) =>
+          item?.platform === platformId &&
+          item?.post_type === formState?.selectedPostType,
+      ) || {
         platform: platformId,
       };
 
@@ -52,6 +61,23 @@ export const PostButtons: FC<PostButtonsProps> = ({
     content: "",
     url: "",
   });
+
+  useEffect(() => {
+    const currentPost = formState?.selectedMultiPostId
+      ? formState?.multiposts?.find(
+          (item) => item?.order_id === formState?.selectedMultiPostId,
+        )
+      : formState?.posts?.find(
+          (item) =>
+            item?.platform === platformId &&
+            item?.post_type === formState?.selectedPostType,
+        ) || {
+          platform: platformId,
+        };
+
+    const currentButtons: ITgButton[] = currentPost?.buttons || [];
+    setButtons(currentButtons);
+  }, [formState?.isMultiPost, formState?.selectedMultiPostId]);
 
   const handleOnChange = (type: keyof ITgButton, value: string) => {
     setButton((prevState) => ({
