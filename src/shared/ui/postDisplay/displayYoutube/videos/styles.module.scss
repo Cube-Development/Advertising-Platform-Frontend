@@ -30,39 +30,6 @@
       width: 30%;
     }
 
-    .footer {
-      width: 86%;
-      position: absolute;
-      bottom: 44px;
-      left: 50%;
-      transform: translate(-50%);
-      z-index: 1;
-      display: grid;
-      grid-template: 1fr / 1fr auto;
-      align-items: center;
-      justify-content: start;
-      justify-items: center;
-      gap: 10px;
-      color: #fff;
-
-      &__send_msg {
-        padding: 7px 10px;
-        border-radius: 15px;
-        border: 1px solid rgba(255, 255, 255, 1);
-        font-size: 10px;
-        width: 100%;
-        color: rgba(255, 255, 255, 1);
-      }
-      &__icons {
-        display: grid;
-        grid-auto-flow: column;
-        gap: 5px;
-      }
-    }
-
-    .mockup {
-    }
-
     .display {
       position: absolute;
       top: 0;
@@ -87,43 +54,9 @@
           width: 100%;
           position: relative;
 
-          .head {
-            position: absolute;
-            z-index: 1;
-            left: 2px;
-            top: 10px;
-            color: #fff;
-            display: grid;
-            grid-auto-flow: column;
-            justify-content: space-between;
-            align-items: center;
-
-            .account {
-              display: grid;
-              align-items: center;
-              grid-template: 1fr / 20px 1fr;
-              gap: 5px;
-
-              &__avatar {
-                width: 20px;
-                height: 20px;
-                background: #fff;
-                border-radius: 100%;
-                border: 1px solid #df006f;
-              }
-
-              &__name {
-                color: #fff;
-                line-height: 1.2;
-                font-weight: 500;
-                font-size: 10px;
-              }
-            }
-          }
-
           .empty__photo {
-            height: 34vw;
-            max-height: 500px;
+            height: 15vw;
+            max-height: 200px;
             background: rgba(255, 255, 255, 0.1);
             display: flex;
             flex-direction: column;
@@ -150,6 +83,26 @@
             padding: 0px 10px;
             padding-top: 5px;
             color: #fff;
+          }
+        }
+
+        .no_content {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: column;
+          height: 60%;
+
+          svg {
+            width: 80px;
+            height: 80px;
+          }
+
+          p {
+            margin-top: 10px;
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            font-weight: 500;
           }
         }
 

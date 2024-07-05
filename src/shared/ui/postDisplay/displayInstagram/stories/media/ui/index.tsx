@@ -6,7 +6,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@shared/ui/shadcn-ui/ui/carousel";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import styles from "./styles.module.scss";
 import { GenerateDownloadLink } from "@features/generateDownloadLink";
 import { Download } from "lucide-react";
@@ -38,6 +38,21 @@ export const InstagramMedia: FC<InstagramMediaProps> = ({
     });
   }, [api]);
 
+  const [spanWidth, setSpanWidth] = useState(0);
+  const containerRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (containerRef.current && medias) {
+      const containerWidth = containerRef.current.offsetWidth;
+      const widthPerSpan = containerWidth / medias.length;
+      setSpanWidth(widthPerSpan);
+    } else if (containerRef.current && mediasRes) {
+      const containerWidth = containerRef.current.offsetWidth;
+      const widthPerSpan = containerWidth / mediasRes.length;
+      setSpanWidth(widthPerSpan);
+    }
+  }, [medias, mediasRes]);
+
   return (
     <Carousel
       opts={{
@@ -45,9 +60,9 @@ export const InstagramMedia: FC<InstagramMediaProps> = ({
         loop: true,
       }}
       setApi={setApi}
-      className="relative"
+      className="relative overflow-hidden rounded-t-[6px]"
     >
-      <CarouselContent className="-ml-1">
+      <CarouselContent className="-ml-1 rounded-t-md">
         {medias &&
           medias?.map((media, index) => (
             <CarouselItem key={index} className="pl-1">
@@ -56,9 +71,15 @@ export const InstagramMedia: FC<InstagramMediaProps> = ({
                   <img
                     src={URL.createObjectURL(media)}
                     alt={`Photo ${index + 1}`}
+                    className="object-cover h-[34vw] max-h-[500px] w-full"
                   />
                 ) : (
-                  <video controls>
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    className="object-cover h-[34vw] max-h-[500px] w-full"
+                  >
                     <source src={URL.createObjectURL(media)} type="video/mp4" />
                     <source src={URL.createObjectURL(media)} type="video/ogg" />
                     Your browser does not support the video tag.
@@ -78,9 +99,18 @@ export const InstagramMedia: FC<InstagramMediaProps> = ({
             <CarouselItem key={index} className="pl-1">
               <div className="w-[100%] overflow-hidden relative">
                 {media.content_type === ContentType.photo ? (
-                  <img src={media.content} alt={`Photo ${index + 1}`} />
+                  <img
+                    src={media.content}
+                    alt={`Photo ${index + 1}`}
+                    className="object-cover h-[28vw] max-h-[600px] w-full"
+                  />
                 ) : (
-                  <video controls>
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    className="object-cover h-[28vw] max-h-[600px] w-full"
+                  >
                     <source src={media.content} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
@@ -97,12 +127,13 @@ export const InstagramMedia: FC<InstagramMediaProps> = ({
             </CarouselItem>
           ))}
       </CarouselContent>
-      <div className={styles.navigation}>
+      <div ref={containerRef} className={styles.navigation}>
         {medias &&
           medias.map((item, index) => (
             <span
               key={index}
               className={`${styles.navigation__item} ${current === index + 1 && styles.navigation__active}`}
+              style={{ width: `${spanWidth}px` }}
             ></span>
           ))}
         {mediasRes &&
@@ -110,6 +141,7 @@ export const InstagramMedia: FC<InstagramMediaProps> = ({
             <span
               key={index}
               className={`${styles.navigation__item} ${current === index + 1 && styles.navigation__active}`}
+              style={{ width: `${spanWidth}px` }}
             ></span>
           ))}
       </div>

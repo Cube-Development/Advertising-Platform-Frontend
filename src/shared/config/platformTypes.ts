@@ -56,11 +56,11 @@ export const networkTypes = [
     post_types: [
       {
         id: PostTypesNum.FullHd_horizontal,
-        name: "create_order.create.post_types.youtube.shorts",
+        name: "create_order.create.post_types.youtube.videos",
       },
       {
         id: PostTypesNum.FullHd_vertical,
-        name: "create_order.create.post_types.youtube.videos",
+        name: "create_order.create.post_types.youtube.shorts",
       },
     ],
   },

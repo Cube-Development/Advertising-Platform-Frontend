@@ -105,9 +105,8 @@
       padding-top: 80px;
       padding-bottom: 60px;
       background: #202020;
-      margin: 9px 11px;
-      // border-radius: 53.5px;
-      border-radius: 3vw;
+      margin: 7.5px 11px;
+      border-radius: 40px;
 
       .content {
         height: 100%;
@@ -175,7 +174,8 @@
           }
 
           .empty__photo {
-            height: 320px;
+            height: 20vw;
+            max-height: 300px;
             background: rgba(255, 255, 255, 0.1);
             display: flex;
             flex-direction: column;
@@ -222,7 +222,7 @@
           &__text {
             height: 100%;
             width: 100%;
-            font-size: 14px;
+            font-size: 12px;
             padding: 0px 10px;
             color: #fff;
           }

@@ -70,7 +70,7 @@ export const AddMediaFiles: FC<FileProps> = ({ onChange, currentFiles }) => {
   };
 
   const handleRemoveFile = (file: File) => {
-    const newFiles = files.filter((item) => item !== file);
+    const newFiles = files?.filter((item) => item !== file);
     setFiles(newFiles);
     onChange(newFiles);
   };

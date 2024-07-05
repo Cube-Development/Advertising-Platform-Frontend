@@ -31,8 +31,10 @@ import { X } from "lucide-react";
 import { PostTypesNum, platformTypesNum } from "@shared/config/platformTypes";
 import {
   DisplayFeed,
+  DisplayShorts,
   DisplayStories,
   DisplayTelegram,
+  DisplayVideos,
 } from "@shared/ui/postDisplay";
 
 interface AdvProjectSubcardProps {
@@ -249,11 +251,17 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
                     )}
                   {post?.platform === platformTypesNum.youtube &&
                     post?.post_type === PostTypesNum.FullHd_vertical && (
-                      <p>SHORTS</p>
+                      <DisplayShorts
+                        post={post}
+                        platformId={platformTypesNum.youtube}
+                      />
                     )}
                   {post?.platform === platformTypesNum.youtube &&
                     post?.post_type === PostTypesNum.FullHd_horizontal && (
-                      <p>VIDEOS</p>
+                      <DisplayVideos
+                        post={post}
+                        platformId={platformTypesNum.youtube}
+                      />
                     )}
                 </div>
               </AlertDialogContent>
@@ -306,9 +314,20 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
                           platformId={platformTypesNum.instagram}
                         />
                       )}
-                    {post?.platform === platformTypesNum.youtube && (
-                      <p>YOUTUBE</p>
-                    )}
+                    {post?.platform === platformTypesNum.youtube &&
+                      post?.post_type === PostTypesNum.FullHd_vertical && (
+                        <DisplayShorts
+                          post={post}
+                          platformId={platformTypesNum.youtube}
+                        />
+                      )}
+                    {post?.platform === platformTypesNum.youtube &&
+                      post?.post_type === PostTypesNum.FullHd_horizontal && (
+                        <DisplayVideos
+                          post={post}
+                          platformId={platformTypesNum.youtube}
+                        />
+                      )}
                   </div>
                 </AlertDialogContent>
               </AlertDialog>

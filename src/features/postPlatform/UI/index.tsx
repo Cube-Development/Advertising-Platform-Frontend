@@ -21,8 +21,10 @@ import { X } from "lucide-react";
 import { PostTypesNum, platformTypesNum } from "@shared/config/platformTypes";
 import {
   DisplayFeed,
+  DisplayShorts,
   DisplayStories,
   DisplayTelegram,
+  DisplayVideos,
 } from "@shared/ui/postDisplay";
 import { EmptyPost } from "@shared/ui/postDisplay/displayTelegram/UI/emptyPost";
 
@@ -148,11 +150,21 @@ export const PostPlatform: FC<PostPlatformProps> = ({
                 )}
               {card?.platform === platformTypesNum.youtube &&
                 card?.post_type === PostTypesNum.FullHd_vertical && (
-                  <p>SHORTS</p>
+                  <DisplayShorts
+                    formState={formState}
+                    platformId={platformTypesNum.youtube}
+                    postType={PostTypesNum.FullHd_vertical}
+                    orderId={card?.id}
+                  />
                 )}
               {card?.platform === platformTypesNum.youtube &&
                 card?.post_type === PostTypesNum.FullHd_horizontal && (
-                  <p>VIDEOS</p>
+                  <DisplayVideos
+                    formState={formState}
+                    platformId={platformTypesNum.youtube}
+                    postType={PostTypesNum.FullHd_horizontal}
+                    orderId={card?.id}
+                  />
                 )}
             </div>
           ) : (
