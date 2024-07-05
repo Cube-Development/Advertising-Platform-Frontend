@@ -2,24 +2,27 @@ import { FC } from "react";
 import styles from "./styles.module.scss";
 import { ICreatePostForm } from "@shared/types/createPost";
 import { EmptyPost } from "./emptyPost";
-import { EyeIcon } from "@shared/assets";
-import { TelegramMedia } from "./media";
-import { TelegramFile } from "./file";
-import { TelegramComment } from "./comment";
-import { ContentType } from "@shared/config/createPostData";
+import { EyeDisabledIcon } from "@shared/assets/icons/eyeDisabled";
 import { GetPostRes } from "@shared/store/services/getPostService";
+import { ContentType } from "@shared/config/createPostData";
+import { PostTypesNum } from "@shared/config/platformTypes";
+import { YoutubeMedia } from "./media";
+import { YoutubeFile } from "./file/ui";
+import { YoutubeComment } from "./comment/ui";
 
-interface DisplayTelegramProps {
+interface DisplayVideosProps {
   formState?: ICreatePostForm;
   platformId: number;
   post?: GetPostRes;
+  postType?: PostTypesNum;
   orderId?: string;
 }
 
-export const DisplayTelegram: FC<DisplayTelegramProps> = ({
+export const DisplayVideos: FC<DisplayVideosProps> = ({
   formState,
   platformId,
   post,
+  postType,
   orderId,
 }) => {
   // post response
@@ -40,20 +43,13 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
       ]
     : [];
   const mediaRes = [...photosRes, ...videosRes];
-  const textRes = post && post?.text;
+  const textRes = post && post.text;
   const fileRes = post &&
     post?.files.length > 0 && {
       content_type: ContentType.file,
       content: post.files[0],
     };
-  const buttonsRes = post && [
-    ...post.buttons.map((btn) => ({
-      content_type: ContentType.button,
-      content: btn?.content,
-      url: btn?.url,
-    })),
-  ];
-  const commentRes = post && post?.comment;
+  const commentRes = post && post.comment;
 
   // postFromData
   const currentPost = formState?.selectedMultiPostId
@@ -68,7 +64,9 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
         buttons: [],
         order_id: formState?.selectedMultiPostId,
       }
-    : (formState?.posts || []).find((item) => item.platform === platformId) || {
+    : (formState?.posts || []).find(
+        (item) => item.platform === platformId && item.post_type === postType,
+      ) || {
         platform: platformId,
         files: [],
         media: [],
@@ -77,7 +75,6 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
   const postText = currentPost?.text;
   const postMedia = currentPost?.media;
   const postFile = currentPost?.files;
-  const postButtons = currentPost?.buttons;
   const postComment = currentPost?.comment;
 
   return (
@@ -92,28 +89,25 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
           className={styles.dynamic}
           src="/images/phoneDisplay/dynamic.png"
         />
-        <img className={styles.back} src="/images/phoneDisplay/back.svg" />
-        <div className={styles.channel}>
-          <p className={styles.channel__name}>Channel name</p>
-          <p className={styles.channel__subs}>1 312 678 subscribers</p>
-        </div>
-        <div className={styles.avatar}></div>
         <img
           className={styles.mockup}
           src="/images/phoneDisplay/iphonescreen.png"
         />
-        <div className={styles.unmute}>Unmute</div>
         {formState ? (
           <div className={styles.display}>
             {(postText && postText[0]?.content !== "<p></p>") ||
             postMedia?.length ||
             postComment ||
-            postFile?.length ||
-            postButtons?.length ? (
+            postFile?.length ? (
               <div className={styles.content}>
                 <div className={styles.post}>
-                  {postMedia && postMedia?.length > 0 && (
-                    <TelegramMedia medias={postMedia} />
+                  {postMedia && postMedia?.length > 0 ? (
+                    <YoutubeMedia medias={postMedia} />
+                  ) : (
+                    <div className={styles.empty__photo}>
+                      <EyeDisabledIcon />
+                      <p>No content yet...</p>
+                    </div>
                   )}
                   {postText && (
                     <div
@@ -123,28 +117,19 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
                       className={styles.post__text}
                     />
                   )}
-                  <div className={styles.info}>
-                    <EyeIcon />
-                    <span>213,7K</span>
-                    <span>19:00</span>
-                  </div>
                 </div>
-                {postButtons && postButtons?.length > 0 && (
-                  <div className={styles.buttons}>
-                    {postButtons?.map((button, index) => (
-                      <a
-                        key={index}
-                        href={button?.url}
-                        target="_blank"
-                        className="truncate"
-                      >
-                        {button?.content}
-                      </a>
-                    ))}
-                  </div>
+                {postFile && postFile?.length > 0 && (
+                  <YoutubeFile file={postFile[0]} />
                 )}
-                {postFile?.length && <TelegramFile file={postFile[0]} />}
-                {postComment && <TelegramComment comment={postComment} />}
+                {postComment && <YoutubeComment comment={postComment} />}
+                {(!postText || postText[0]?.content === "<p></p>") &&
+                  !postComment &&
+                  (!postFile || postFile.length === 0) && (
+                    <div className={styles.no_content}>
+                      <EyeDisabledIcon />
+                      <p>No content yet...</p>
+                    </div>
+                  )}
                 <div className={styles.stroke}></div>
               </div>
             ) : (
@@ -156,12 +141,16 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
             {(textRes && textRes[0] !== "<p></p>") ||
             mediaRes?.length ||
             commentRes ||
-            fileRes ||
-            buttonsRes?.length ? (
+            fileRes ? (
               <div className={styles.content}>
                 <div className={styles.post}>
-                  {mediaRes && mediaRes?.length > 0 && (
-                    <TelegramMedia mediasRes={mediaRes} />
+                  {mediaRes && mediaRes?.length > 0 ? (
+                    <YoutubeMedia mediasRes={mediaRes} />
+                  ) : (
+                    <div className={styles.empty__photo}>
+                      <EyeDisabledIcon />
+                      <p>No content yet...</p>
+                    </div>
                   )}
                   {textRes && (
                     <div
@@ -171,28 +160,15 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
                       className={styles.post__text}
                     />
                   )}
-                  <div className={styles.info}>
-                    <EyeIcon />
-                    <span>213,7K</span>
-                    <span>19:00</span>
-                  </div>
                 </div>
-                {buttonsRes && buttonsRes?.length > 0 && (
-                  <div className={styles.buttons}>
-                    {buttonsRes?.map((button, index) => (
-                      <a
-                        key={index}
-                        href={button?.url}
-                        target="_blank"
-                        className="truncate"
-                      >
-                        {button?.content}
-                      </a>
-                    ))}
+                {fileRes && <YoutubeFile file={fileRes} />}
+                {commentRes && <YoutubeComment comment={commentRes} />}
+                {!textRes && !commentRes && !fileRes && (
+                  <div className={styles.no_content}>
+                    <EyeDisabledIcon />
+                    <p>No content yet...</p>
                   </div>
                 )}
-                {fileRes && <TelegramFile file={fileRes} />}
-                {commentRes && <TelegramComment comment={commentRes} />}
                 <div className={styles.stroke}></div>
               </div>
             ) : (

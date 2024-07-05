@@ -56,9 +56,15 @@ export const InstagramMedia: FC<InstagramMediaProps> = ({
                   <img
                     src={URL.createObjectURL(media)}
                     alt={`Photo ${index + 1}`}
+                    className="object-cover h-[20vw] max-h-[300px] w-full"
                   />
                 ) : (
-                  <video controls>
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    className="object-cover h-[20vw] max-h-[300px] w-full"
+                  >
                     <source src={URL.createObjectURL(media)} type="video/mp4" />
                     <source src={URL.createObjectURL(media)} type="video/ogg" />
                     Your browser does not support the video tag.
@@ -78,9 +84,18 @@ export const InstagramMedia: FC<InstagramMediaProps> = ({
             <CarouselItem key={index} className="pl-1">
               <div className="w-[100%] overflow-hidden relative">
                 {media.content_type === ContentType.photo ? (
-                  <img src={media.content} alt={`Photo ${index + 1}`} />
+                  <img
+                    src={media.content}
+                    alt={`Photo ${index + 1}`}
+                    className="object-cover h-[18vw] max-h-[360px] w-full"
+                  />
                 ) : (
-                  <video controls>
+                  <video
+                    autoPlay
+                    loop
+                    muted
+                    className="object-cover h-[18vw] max-h-[360px] w-full"
+                  >
                     <source src={media.content} type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
