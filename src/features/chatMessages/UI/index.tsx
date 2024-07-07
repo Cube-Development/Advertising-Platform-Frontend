@@ -13,7 +13,6 @@ import Link from "@tiptap/extension-link";
 import Underline from "@tiptap/extension-underline";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { useCentrifuge } from "@widgets/header/UI/chat/CentrifugeContext";
 import { FC, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -21,6 +20,7 @@ import { animateScroll } from "react-scroll";
 import styles from "./styles.module.scss";
 import { SkeletonChatMessage } from "../skeletonChatMessage";
 import { useGetOrderHistoryQuery } from "@shared/store/services/chatService";
+import { useCentrifuge } from "@widgets/chat";
 
 interface ChatMessagesProps {
   id: string;

@@ -1,10 +1,6 @@
-import { WalletHistory } from "@widgets/walletHistory";
+import { History } from "@widgets/wallet";
 import { FC } from "react";
 
 export const WalletHistoryPage: FC = () => {
-  return (
-    <>
-      <WalletHistory />
-    </>
-  );
+  return <History />;
 };

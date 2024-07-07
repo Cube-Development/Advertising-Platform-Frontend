@@ -1,11 +1,13 @@
+import {
+  Cta,
+  Customers,
+  HowItWorks,
+  Partners,
+  Services,
+  Turnkey,
+  WhyChooseUs,
+} from "@widgets/mainPages";
 import { FC } from "react";
-import { Cta } from "@widgets/cta";
-import { Services } from "@widgets/services";
-import { Partners } from "@widgets/partners";
-import { HowItWorks } from "@widgets/howItWorks";
-import { WhyChooseUs } from "@widgets/whyChooseUs";
-import { Turnkey } from "@widgets/turnkey";
-import { Customers } from "@widgets/customers";
 
 export const MainPage: FC = () => {
   const page = "main_page_advertiser";

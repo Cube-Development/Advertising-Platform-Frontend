@@ -91,7 +91,7 @@ export const BloggerPlatformCardMenu: FC<BloggerPlatformCardMenuProps> = ({
             </button>
           </div>
           <ul>
-            <Link to={`${paths.addPlatform}?channel_id=${channel_id}`}>
+            <Link to={`${paths.addChannel}?channel_id=${channel_id}`}>
               <li>{t("platforms_blogger.menu.edit")}</li>
             </Link>
             {statusFilter === platformStatusFilter.active && (

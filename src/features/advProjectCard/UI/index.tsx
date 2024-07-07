@@ -30,10 +30,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@shared/ui/shadcn-ui/ui/accordion";
-import { Chat } from "@widgets/header/UI/chat";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { Chat } from "@widgets/chat";
 
 interface AdvProjectCardProps {
   card: IAdvProjectCard;

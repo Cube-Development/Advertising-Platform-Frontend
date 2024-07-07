@@ -7,10 +7,10 @@ import styles from "./styles.module.scss";
 import { Lang } from "./lang";
 import { DropdownMenu } from "./dropdownMenu";
 import { Wallet } from "./wallet";
-import { Chat } from "./chat";
 import { useAppDispatch, useAppSelector } from "@shared/store";
 import { userSlice } from "@shared/store/reducers";
 import { roles } from "@shared/config/roles";
+import { Chat } from "@widgets/chat";
 
 export const Header: FC = () => {
   const [screen, setScreen] = useState<number>(window.innerWidth);

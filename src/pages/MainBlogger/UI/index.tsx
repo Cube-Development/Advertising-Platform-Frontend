@@ -1,11 +1,13 @@
 import { FC } from "react";
-import { Cta } from "@widgets/cta";
-import { Services } from "@widgets/services";
-import { Partners } from "@widgets/partners";
-import { HowItWorks } from "@widgets/howItWorks";
-import { WhyChooseUs } from "@widgets/whyChooseUs";
-import { Customers } from "@widgets/customers";
-import { CalculateIncome } from "@widgets/calculateIncome";
+import {
+  CalculateIncome,
+  Cta,
+  Customers,
+  HowItWorks,
+  Partners,
+  Services,
+  WhyChooseUs,
+} from "@widgets/mainPages";
 
 export const MainBloggerPage: FC = () => {
   const page = "main_page_blogger";

@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 import { advertiserMenu, bloggerMenu, commonMenu, managerMenu } from "./config";
 import styles from "./styles.module.scss";
 
-export const SideBar: FC = () => {
+export const Sidebar: FC = () => {
   const { role } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();

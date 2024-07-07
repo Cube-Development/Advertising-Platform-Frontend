@@ -1,10 +1,6 @@
-import { CreateOrderBlock } from "@widgets/createOrderBlock";
+import { CreateOrderBlock } from "@widgets/project";
 import { FC } from "react";
 
 export const CreateOrderPage: FC = () => {
-  return (
-    <>
-      <CreateOrderBlock />
-    </>
-  );
+  return <CreateOrderBlock />;
 };

@@ -1,10 +1,6 @@
-import { CartBlock } from "@widgets/cartBlock";
+import { Cart } from "@widgets/project";
 import { FC } from "react";
 
 export const CartPage: FC = () => {
-  return (
-    <>
-      <CartBlock />
-    </>
-  );
+  return <Cart />;
 };

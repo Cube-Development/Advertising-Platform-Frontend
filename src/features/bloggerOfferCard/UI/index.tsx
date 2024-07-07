@@ -25,11 +25,11 @@ import {
   AlertDialogTrigger,
 } from "@shared/ui/shadcn-ui/ui/alert-dialog";
 import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
-import { Chat } from "@widgets/header/UI/chat";
 import { X } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { Chat } from "@widgets/chat";
 
 interface BloggerOfferCardProps {
   card: IBloggerOfferCard;

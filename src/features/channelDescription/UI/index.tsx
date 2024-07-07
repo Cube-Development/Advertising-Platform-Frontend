@@ -151,7 +151,7 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
               </div>
               <div className={styles.buttons}>
                 <AlertDialogCancel>
-                  <Link to={`${paths.addPlatform}?channel_id=${channel_id}`}>
+                  <Link to={`${paths.addChannel}?channel_id=${channel_id}`}>
                     <div className="button button__white">
                       <p>{t("platform_description.edit_btn")}</p>
                     </div>
@@ -262,7 +262,7 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
                 </div>
               </div>
               <div className={styles.buttons}>
-                <Link to={`${paths.addPlatform}?channel_id=${channel_id}`}>
+                <Link to={`${paths.addChannel}?channel_id=${channel_id}`}>
                   <MyButton buttons_type="button__white">
                     <p>{t("platform_description.edit_btn")}</p>
                   </MyButton>

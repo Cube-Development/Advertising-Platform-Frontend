@@ -54,7 +54,7 @@ export const BarTop: FC<BarTopProps> = ({
             <div>
               {
                 <AddPlatformBtn
-                  path={`${paths.addPlatform}?add_channel=${addChannelQueries.platforms}`}
+                  path={`${paths.addChannel}?add_channel=${addChannelQueries.platforms}`}
                 />
               }
             </div>
@@ -69,7 +69,7 @@ export const BarTop: FC<BarTopProps> = ({
               <div>
                 {
                   <AddPlatformBtn
-                    path={`${paths.addPlatform}?add_channel=${addChannelQueries.offers}`}
+                    path={`${paths.addChannel}?add_channel=${addChannelQueries.offers}`}
                   />
                 }
               </div>

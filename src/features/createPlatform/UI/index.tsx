@@ -34,7 +34,7 @@ export const CreatePlatform: FC<CreatePlatformProps> = ({
                 {t("add_platform.create.answer.text2")}
               </p>
             </div>
-            <Link to={paths.platforms}>
+            <Link to={paths.myChannels}>
               <MyButton
                 className={styles.accept__btn}
                 buttons_type="button__white"

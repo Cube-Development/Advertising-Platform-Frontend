@@ -1,1 +1,0 @@
-export { FullServicePage } from "./UI";

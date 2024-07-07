@@ -1,7 +1,6 @@
 import { pageFilter } from "@shared/config/pageFilter";
 import { useAppSelector } from "@shared/store";
 import { BarFilter } from "@widgets/barFilter";
-import { BloggerOffer } from "@widgets/bloggerOffer";
 import { FC, useEffect, useState } from "react";
 import { Languages } from "@shared/config/languages";
 import { useTranslation } from "react-i18next";
@@ -13,6 +12,7 @@ import {
 } from "@shared/store/services/bloggerOffersService";
 import { INTERSECTION_ELEMENTS } from "@shared/config/common";
 import { IBloggerOfferCard } from "@shared/types/bloggerOffer";
+import { MyOffers } from "@widgets/offer";
 
 export const OffersPage: FC = () => {
   const { statusFilter } = useAppSelector((state) => state.filter);
@@ -71,7 +71,7 @@ export const OffersPage: FC = () => {
         listLength={!!offers?.length}
         setValue={setValue}
       />
-      <BloggerOffer
+      <MyOffers
         offers={offers!}
         handleOnChangePage={handleOnChangePage}
         isLoading={isFetching}

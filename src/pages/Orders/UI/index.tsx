@@ -1,7 +1,6 @@
 import { roles } from "@shared/config/roles";
 import { useAppSelector } from "@shared/store";
-import { AdvOrdersBlock } from "@widgets/advOrdersBlock";
-import { ManagerOrdersBlock } from "@widgets/managerOrdersBlock";
+import { AdvOrders, ManagerOrders } from "@widgets/project";
 import { FC } from "react";
 
 export const OrdersPage: FC = () => {
@@ -10,9 +9,9 @@ export const OrdersPage: FC = () => {
   return (
     <>
       {role === roles.advertiser ? (
-        <AdvOrdersBlock />
+        <AdvOrders />
       ) : (
-        role === roles.manager && <ManagerOrdersBlock />
+        role === roles.manager && <ManagerOrders />
       )}
     </>
   );

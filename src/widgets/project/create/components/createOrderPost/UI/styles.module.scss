@@ -1,0 +1,103 @@
+.wrapper {
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 20px;
+  padding-bottom: 120px;
+
+  .content {
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 10px;
+    padding-top: 30px;
+
+    .top {
+      display: grid;
+      grid-auto-flow: column;
+      align-items: center;
+      justify-content: space-between;
+      padding-right: 110px;
+
+      .title {
+        display: grid;
+        grid-auto-flow: column;
+        align-items: center;
+        justify-content: start;
+        column-gap: 30px;
+
+        span {
+          display: grid;
+          justify-content: center;
+          align-items: center;
+          width: 80px;
+          height: 80px;
+          border: 4px dashed #4772e6;
+          border-radius: 50%;
+          font-size: 44px;
+          font-weight: bold;
+          line-height: 1;
+          color: var(--Personal-colors-main);
+        }
+
+        p {
+          color: var(--Personal-colors-black);
+          font-size: 34px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: normal;
+        }
+      }
+    }
+
+    .creating__post {
+      display: grid;
+      row-gap: 30px;
+      padding: 0px 110px;
+
+      .data {
+        display: grid;
+        grid-template: 1fr / 1fr 1fr 1fr;
+        justify-content: center;
+        gap: 20px;
+
+        .post_data {
+          display: grid;
+          grid-template: 1fr 1fr / 1fr;
+          row-gap: 30px;
+          min-height: 500px;
+
+          button {
+            height: fit-content;
+          }
+
+          .block {
+            display: grid;
+            grid-auto-flow: row;
+            row-gap: 15px;
+          }
+
+          .block__bottom {
+            display: grid;
+            grid-template: 54px 54px 2fr / 1fr;
+            row-gap: 25px;
+
+            &.filter {
+              grid-template: 0.8fr 3.2fr / 1fr;
+            }
+          }
+        }
+
+        .display {
+          position: relative;
+          min-height: 500px;
+
+          .continue {
+            position: absolute;
+            bottom: -70px;
+            right: 0;
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+}

@@ -24,8 +24,8 @@ export const ZeroPlatform: FC<ZeroPlatformProps> = ({
   const { statusFilter } = useAppSelector((state) => state.filter);
   const selectedPath =
     path === paths.offers
-      ? `${paths.addPlatform}?add_channel=${addChannelQueries.offers}`
-      : `${paths.addPlatform}?add_channel=${addChannelQueries.platforms}`;
+      ? `${paths.addChannel}?add_channel=${addChannelQueries.offers}`
+      : `${paths.addChannel}?add_channel=${addChannelQueries.platforms}`;
 
   return (
     <div className={styles.wrapper}>

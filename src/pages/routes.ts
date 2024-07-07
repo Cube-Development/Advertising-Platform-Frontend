@@ -4,20 +4,19 @@ import { MainPage } from "./Main";
 import { MainBloggerPage } from "./MainBlogger";
 import { NotFoundPage } from "./NotFound";
 import { ProfilePage } from "./Profile";
-import { PlatformOwnerPage } from "./PlatformOwner";
-import { AddPlatformPage } from "./AddPlatform";
-import { paths } from "@shared/routing";
-import { TurnkeyPage } from "./TurnkeyPage";
-import { PlatformsPage } from "./Platforms";
+import { AddChannelPage } from "./AddChannel";
+import { TurnkeyPage } from "./Turnkey";
+import { MyChannelsPage } from "./MyChannels";
 import { OffersPage } from "./Offers";
 import { OrdersPage } from "./Orders";
-import { AddProfilePage } from "./AddProfile";
+import { AddLegalPage } from "./AddLegal";
 import { CartPage } from "./Cart";
-import { WalletTopUpPage } from "./WalletTopUp";
-import { WalletWithdrawPage } from "./WalletWithdraw";
+import { TopupPage } from "./Topup";
+import { WithdrawalPage } from "./Withdrawal";
 import { WalletHistoryPage } from "./WalletHistory";
 import { CreateOrderPage } from "./CreateOrder/UI";
 import { FAQPage } from "./FAQ";
+import { paths } from "@shared/routing";
 
 export interface IRoute {
   path: string;
@@ -26,11 +25,11 @@ export interface IRoute {
 }
 
 export const privateCommonRoutes: IRoute[] = [
-  { path: paths.walletTopUp, component: WalletTopUpPage, sidebar: true },
-  { path: paths.walletWithdraw, component: WalletWithdrawPage, sidebar: true },
+  { path: paths.walletTopUp, component: TopupPage, sidebar: true },
+  { path: paths.walletWithdraw, component: WithdrawalPage, sidebar: true },
   { path: paths.wallethistory, component: WalletHistoryPage, sidebar: true },
   { path: paths.profile, component: ProfilePage, sidebar: true },
-  { path: paths.addProfile, component: AddProfilePage, sidebar: true },
+  { path: paths.addChannel, component: AddLegalPage, sidebar: true },
 ];
 
 export const publicCommonRoutes: IRoute[] = [
@@ -39,9 +38,8 @@ export const publicCommonRoutes: IRoute[] = [
 ];
 
 export const privateBloggerRoutes: IRoute[] = [
-  { path: paths.platformOwner, component: PlatformOwnerPage, sidebar: true },
-  { path: paths.addPlatform, component: AddPlatformPage, sidebar: true },
-  { path: paths.platforms, component: PlatformsPage, sidebar: true },
+  { path: paths.addChannel, component: AddChannelPage, sidebar: true },
+  { path: paths.myChannels, component: MyChannelsPage, sidebar: true },
   { path: paths.offers, component: OffersPage, sidebar: true },
 ];
 
