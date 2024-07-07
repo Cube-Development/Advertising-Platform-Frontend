@@ -9,6 +9,7 @@ import {
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 
 interface ManagerNewProjectCardProps {
   card: IManagerNewProjectCard;
@@ -22,6 +23,7 @@ export const ManagerNewProjectCard: FC<ManagerNewProjectCardProps> = ({
   SendToBotBtn,
 }) => {
   const { t } = useTranslation();
+  const { toast } = useToast();
   const [isSubcardOpen, setSubcardOpen] = useState(false);
   const handleChangeOpenSubcard = (): void => {
     setSubcardOpen(!isSubcardOpen);
@@ -46,8 +48,11 @@ export const ManagerNewProjectCard: FC<ManagerNewProjectCardProps> = ({
   }, []);
 
   const handleCopyLink = (link: string) => {
-    console.log("textLink", link);
     navigator.clipboard.writeText(link);
+    toast({
+      variant: "default",
+      title: "Скопировано",
+    });
   };
 
   return (
