@@ -11,10 +11,10 @@ import {
 } from "@shared/assets";
 import { accordionTypes } from "@shared/config/accordion";
 import { Languages } from "@shared/config/languages";
-import { orderStatus } from "@shared/config/orderFilter";
 import { managerProjectStatusFilter } from "@shared/config/projectFilter";
 import { useAppSelector } from "@shared/store";
 import { getProjectSubcardReq } from "@shared/store/services/advOrdersService";
+import { useGetManagerSubprojectsQuery } from "@shared/store/services/managerOrdersService";
 import { IChannelChat } from "@shared/types/common";
 import { IManagerProjectCard } from "@shared/types/managerProject";
 import { IOrderFeature } from "@shared/types/order";
@@ -37,7 +37,7 @@ interface ManagerProjectCardProps {
   SeeBtn: FC;
   ChannelChatBtn: FC<IChannelChat>;
   ChangeChannelBtn: FC;
-  ManagerProjectRunBtn: FC;
+  ManagerProjectRunBtn: FC<{ is_request_approve: boolean }>;
   DownloadReportBtn: FC;
 }
 
@@ -60,15 +60,14 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
   });
 
   const getParams: getProjectSubcardReq = {
-    project_id: card.id,
+    project_id: card.project_id,
     language: language?.id || Languages[0].id,
     page: 1,
   };
 
-  // const { data: subcards } = useGetAdvSubprojectsQuery(getParams, {
-  //   skip: !isSubcardOpen,
-  // });
-  const subcard = card.subcards!;
+  const { data: subcard } = useGetManagerSubprojectsQuery(getParams, {
+    skip: !isSubcardOpen,
+  });
 
   const handleChangeOpenSubcard = (): void => {
     setSubcardOpen(!isSubcardOpen);
@@ -102,12 +101,12 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
         <div className={styles.card__description}>
           <div className={styles.card__description__data}>
             <div className={styles.card__description__data__title}>
-              <p>{card.name}</p>
-              <span>{card.tarif}</span>
+              <p>{card?.project_name}</p>
+              <span>{card?.tariff_name}</span>
             </div>
             <div className={styles.card__description__data__date}>
-              <span>№{card.id}</span>
-              <span>{card.created}</span>
+              <span>№{card?.id}</span>
+              <span>{card?.tariff_date}</span>
             </div>
           </div>
           <div className={styles.card__description__status}>
@@ -127,12 +126,12 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
                 <div className={styles.row}>
                   <div>
                     <p>{t("orders_manager.card.channels")}:</p>
-                    <span>{card.count_channels.toLocaleString()}</span>
+                    <span>{card?.orders?.toLocaleString()}</span>
                   </div>
                   <div>
                     <p>{t("orders_manager.card.cost")}:</p>
                     <span>
-                      <span>{card.budget.toLocaleString()}</span>
+                      <span>{card?.budget?.toLocaleString()}</span>
                       <small>{t("symbol")}</small>
                     </span>
                   </div>
@@ -140,12 +139,12 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
                 <div className={styles.row}>
                   <div>
                     <p>{t("orders_manager.card.views")}:</p>
-                    <span>~ {card.views.toLocaleString()}</span>
+                    <span>~ {card?.views?.toLocaleString()}</span>
                   </div>
                   <div>
                     <p>{t("orders_manager.card.rest")}:</p>
                     <span>
-                      <span>{card.budget.toLocaleString()}</span>
+                      <span>{card?.budget?.toLocaleString()}</span>
                       <small>{t("symbol")}</small>
                     </span>
                   </div>
@@ -155,16 +154,16 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
               <div className={styles.card__info__data}>
                 <div>
                   <p>{t("orders_manager.card.channels")}:</p>
-                  <span>{card.count_channels.toLocaleString()}</span>
+                  <span>{card?.orders?.toLocaleString()}</span>
                 </div>
                 <div>
                   <p>{t("orders_manager.card.views")}:</p>
-                  <span>~ {card.views.toLocaleString()}</span>
+                  <span>~ {card?.views?.toLocaleString()}</span>
                 </div>
                 <div>
                   <p>{t("orders_manager.card.cost")}:</p>
                   <span>
-                    <span>{card.budget.toLocaleString()}</span>
+                    <span>{card?.budget?.toLocaleString()}</span>
                     <small>{t("symbol")}</small>
                   </span>
                 </div>
@@ -172,39 +171,31 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
             )}
           </>
           <>
-            {statusFilter === managerProjectStatusFilter.agreed ? (
-              <div
-                className={
-                  subcard.filter(
-                    (item) => item?.api_status !== orderStatus.channel_agreed,
-                  ).length
-                    ? "deactive"
-                    : ""
-                }
-              >
-                <ManagerProjectRunBtn />
-              </div>
+            {statusFilter === managerProjectStatusFilter.request_approve ? (
+              <ManagerProjectRunBtn
+                is_request_approve={card?.is_request_approve!}
+              />
             ) : statusFilter === managerProjectStatusFilter.active ? (
               <div className={styles.card__info__icons}>
                 <div>
                   <CompliteIcon />
-                  <p>{card.completed.toLocaleString()}</p>
+                  <p>{card?.completed?.toLocaleString()}</p>
                 </div>
                 <div>
                   <CancelIcon />
-                  <p>{card.canceled_rejected.toLocaleString()}</p>
+                  <p>{card?.canceled_rejected?.toLocaleString()}</p>
                 </div>
                 <div>
                   <WaitIcon />
-                  <p>{card.wait?.toLocaleString()}</p>
+                  <p>{card?.wait?.toLocaleString()}</p>
                 </div>
                 <div>
                   <RocketIcon />
-                  <p>{card.in_progress?.toLocaleString()}</p>
+                  <p>{card?.in_progress?.toLocaleString()}</p>
                 </div>
                 <div>
                   <SearchIcon />
-                  <p>{card.moderation?.toLocaleString()}</p>
+                  <p>{card?.moderation?.toLocaleString()}</p>
                 </div>
               </div>
             ) : statusFilter === managerProjectStatusFilter.completed &&
@@ -212,22 +203,22 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
               <div className={styles.card__info__icons_completed}>
                 <div>
                   <CompliteIcon />
-                  <p>{card.completed.toLocaleString()}</p>
+                  <p>{card?.completed?.toLocaleString()}</p>
                 </div>
                 <div>
                   <CancelIcon />
-                  <p>{card.canceled_rejected.toLocaleString()}</p>
+                  <p>{card?.canceled_rejected?.toLocaleString()}</p>
                 </div>
               </div>
             ) : (
               <div className={styles.card__info__icons_completed_report}>
                 <div>
                   <CompliteIcon />
-                  <p>{card.completed.toLocaleString()}</p>
+                  <p>{card?.completed?.toLocaleString()}</p>
                 </div>
                 <div>
                   <CancelIcon />
-                  <p>{card.canceled_rejected.toLocaleString()}</p>
+                  <p>{card?.canceled_rejected?.toLocaleString()}</p>
                 </div>
                 <DownloadReportBtn />
               </div>
@@ -254,7 +245,7 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
       <AccordionItem value={`item-${card.id}`} ref={accordionRef}>
         <AccordionContent>
           <div className={styles.subcard}>
-            {subcard.map((subcard, index) => (
+            {subcard?.orders.map((subcard, index) => (
               <ManagerProjectSubcard
                 key={index}
                 subcard={subcard}

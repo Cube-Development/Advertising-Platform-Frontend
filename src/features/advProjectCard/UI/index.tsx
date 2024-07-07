@@ -154,7 +154,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
           </div>
           <>
             {typeFilter === projectTypesFilter.managerProject &&
-            statusFilter === advManagerProjectStatusFilter.agreed ? (
+            statusFilter === advManagerProjectStatusFilter.request_approve ? (
               <AcceptProjectBtn />
             ) : typeFilter === projectTypesFilter.myProject &&
               statusFilter === myProjectStatusFilter.completed ? (

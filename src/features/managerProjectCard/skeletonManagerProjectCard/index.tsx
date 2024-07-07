@@ -1,17 +1,11 @@
-import {
-  advManagerProjectStatusFilter,
-  myProjectStatusFilter,
-  projectTypesFilter,
-} from "@shared/config/projectFilter";
+import { managerProjectStatusFilter } from "@shared/config/projectFilter";
 import { useAppSelector } from "@shared/store";
 import { Skeleton } from "@shared/ui/shadcn-ui/ui/skeleton";
 import { FC } from "react";
 import styles from "./styles.module.scss";
 
-interface SkeletonAdvProjectCardProps {}
-
-export const SkeletonAdvProjectCard: FC<SkeletonAdvProjectCardProps> = () => {
-  const { typeFilter, statusFilter } = useAppSelector((state) => state.filter);
+export const SkeletonManagerProjectCard: FC = () => {
+  const { statusFilter } = useAppSelector((state) => state.filter);
   return (
     <Skeleton className="bg-skeleton-light rounded-[12px]">
       <div className={styles.wrapper}>
@@ -36,11 +30,9 @@ export const SkeletonAdvProjectCard: FC<SkeletonAdvProjectCardProps> = () => {
               <Skeleton className="h-2 w-[200px]" />
             </div>
 
-            {typeFilter === projectTypesFilter.managerProject &&
-            statusFilter === advManagerProjectStatusFilter.request_approve ? (
+            {statusFilter === managerProjectStatusFilter.request_approve ? (
               <Skeleton className="w-full h-full rounded-[8px]" />
-            ) : typeFilter === projectTypesFilter.myProject &&
-              statusFilter === myProjectStatusFilter.completed ? (
+            ) : statusFilter === managerProjectStatusFilter.completed ? (
               <div className={styles.card__info__icons_completed}>
                 <Skeleton className="w-full h-full rounded-[8px]" />
                 <Skeleton className="w-full h-full rounded-[8px]" />

@@ -3,13 +3,13 @@ import { orderStatus } from "@shared/config/orderFilter";
 export interface IManagerProjects {
   page: number;
   elements: number;
-  tariffs: IManagerProjectCard[];
+  projects: IManagerProjectCard[];
 }
 
 export interface IManagerNewProjects {
   page: number;
   elements: number;
-  tariffs: IManagerNewProjectCard[];
+  projects: IManagerNewProjectCard[];
 }
 
 // export interface IManagerNewProjectCard {
@@ -40,14 +40,24 @@ interface IFile {
 
 export interface IManagerProjectCard {
   id: string;
-  created: string;
-  tarif: string;
-  name: string;
-  count_channels: number;
+  project_id: string;
+  project_name: string;
+  tariff_name: string;
+  tariff_date: string;
+  orders: number;
   views: number;
   budget: number;
-  completed: number;
-  canceled_rejected: number;
+  is_request_approve?: boolean;
+
+  // id: string;
+  // created: string;
+  // tarif: string;
+  // name: string;
+  // count_channels: number;
+  // views: number;
+  // budget: number;
+  completed?: number;
+  canceled_rejected?: number;
   wait?: number;
   in_progress?: number;
   moderation?: number;

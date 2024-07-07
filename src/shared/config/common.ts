@@ -45,6 +45,7 @@ export const enum INTERSECTION_ELEMENTS {
   // hisory = 1,
   catalog = 10,
   orders = 4,
+  managerOrders = 4,
   offers = 4,
   platforms = 4,
   modPlatforms = 4,
