@@ -1,9 +1,9 @@
-import { Registration } from "@features/registration";
 import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
 import { motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { Registration } from "@features/other";
 
 interface HowItWorksProps {
   page: string;

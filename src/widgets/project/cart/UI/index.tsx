@@ -1,7 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 // import { RecomendationList } from "@widgets/cartBlock/UI/recomendationList";
-import { GenerateGuestId } from "@features/generateGuestId";
 import { ToastAction } from "@radix-ui/react-toast";
 import { Languages } from "@shared/config/languages";
 import { useAppSelector } from "@shared/store";
@@ -21,9 +20,9 @@ import { IPlatform } from "@shared/types/platform";
 import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
-import { BREAKPOINT } from "@shared/config/common";
 import { roles } from "@shared/config/roles";
 import { CartList, CreatePost } from "../components";
+import { GenerateGuestId } from "@shared/functions";
 
 export const Cart: FC = () => {
   const { toast } = useToast();

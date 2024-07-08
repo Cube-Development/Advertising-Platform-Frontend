@@ -1,6 +1,6 @@
-import { ManagerNewProjectCard } from "@features/managerNewProjectCard";
-import { ManagerNewProjectStart } from "@features/managerNewProjectStart";
-import { SendToBot } from "@features/sendToBot";
+import { ManagerNewProjectCard } from "src/features old/managerNewProjectCard";
+import { ManagerNewProjectStart } from "src/features old/managerNewProjectStart";
+import { SendToBot } from "src/features old/sendToBot";
 import {
   IManagerNewProjectCard,
   IManagerNewProjects,

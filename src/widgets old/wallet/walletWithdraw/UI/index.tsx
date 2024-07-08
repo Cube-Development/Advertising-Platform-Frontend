@@ -1,5 +1,5 @@
-import { BarProfileFilter } from "@features/barProfileFilter/UI";
-import { BarSubrofileFilter } from "@features/barSubprofileFilter";
+import { BarProfileFilter } from "src/features old/barProfileFilter/UI";
+import { BarSubrofileFilter } from "src/features old/barSubprofileFilter";
 import { ArrowIcon5 } from "@shared/assets";
 import { pageFilter } from "@shared/config/pageFilter";
 import { profileTypesName } from "@shared/config/profileFilter";

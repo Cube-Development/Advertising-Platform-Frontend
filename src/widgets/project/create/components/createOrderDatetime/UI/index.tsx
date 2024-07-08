@@ -1,13 +1,11 @@
-import { CustomCalendar } from "@features/calendar";
-import { ContinueOrder } from "@features/continueOrder";
-import { PostPlatform } from "@features/postPlatform";
-import { TimeList } from "@features/timeList";
 import { ICreatePostForm, IPostChannel } from "@shared/types/createPost";
 import { ICreateOrderBlur } from "@shared/types/platform";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
+import { ContinueOrder, CustomCalendar, OrderCard } from "@features/project";
+import { TimeList } from "@shared/ui";
 
 interface CreateOrderDatetimeProps {
   cards: IPostChannel[];
@@ -58,7 +56,7 @@ export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
         <div className={styles.content}>
           <div className={styles.cards}>
             {cards?.map((card, index) => (
-              <PostPlatform
+              <OrderCard
                 card={card}
                 key={index}
                 CustomCalendar={CustomCalendar}

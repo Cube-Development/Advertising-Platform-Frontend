@@ -1,0 +1,28 @@
+.subtypes {
+  ul {
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 25px;
+    align-items: center;
+    justify-content: start;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 0.75;
+    color: var(--Personal-colors-black);
+  }
+
+  li {
+    text-align: center;
+    padding: 10px;
+    min-width: 100px;
+    cursor: pointer;
+    white-space: nowrap;
+
+    &.active {
+      border-radius: 12px;
+      background: var(--Gradients-Gradient-1);
+      color: var(--Personal-colors-White);
+    }
+  }
+}

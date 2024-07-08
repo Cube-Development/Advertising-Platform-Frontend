@@ -1,9 +1,9 @@
-import { AddToBasket } from "@features/addToBasket";
-import { CatalogCard } from "@features/catalogCard";
-import { FormatList } from "@features/formatList";
-import { SearchFilter } from "@features/searchFilter";
-import { SelectOptions } from "@features/selectOptions";
-import { ShowMoreBtn } from "@features/showMore";
+import { AddToBasket } from "src/features old/addToBasket";
+import { CatalogCard } from "src/features old/catalogCard";
+import { FormatList } from "src/features old/formatList";
+import { SearchFilter } from "src/features old/searchFilter";
+import { SelectOptions } from "src/features old/selectOptions";
+import { ShowMoreBtn } from "src/features old/showMore";
 import {
   filterData,
   platformData,
@@ -21,7 +21,7 @@ import {
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { BREAKPOINT, INTERSECTION_ELEMENTS } from "@shared/config/common";
-import { SkeletonCatalogCard } from "@features/catalogCard/skeletonCatalogCard";
+import { SkeletonCatalogCard } from "src/features old/catalogCard/skeletonCatalogCard";
 import { Accordion } from "@shared/ui/shadcn-ui/ui/accordion";
 import { ParametersFilter } from "../parametersFilter";
 import { networkTypes } from "@shared/config/platformTypes";

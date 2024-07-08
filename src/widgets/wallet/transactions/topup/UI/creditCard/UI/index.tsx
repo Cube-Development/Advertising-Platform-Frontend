@@ -1,4 +1,3 @@
-import { PaymentCard } from "@features/paymentCard";
 import { CardIcon, InfoIcon } from "@shared/assets";
 import { topup } from "@shared/config/common";
 import { paymentTypes } from "@shared/config/payment";
@@ -9,6 +8,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { usePaymentDepositMutation } from "@shared/store/services/walletService";
 import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
+import { PaymentCard } from "@features/wallet";
 
 interface IOnlineBankingData {
   legal_id: string;

@@ -7,8 +7,6 @@ import {
 } from "@shared/store/services/advOrdersService";
 import { BarFilter } from "@widgets/barFilter";
 import { FC, useEffect, useState } from "react";
-import { ManagerNewProject } from "./managerNewProject";
-import { ManagerProject } from "./managerProject";
 import {
   managerActiveCARDS,
   managerAgreedCARDS,
@@ -23,6 +21,7 @@ import {
 } from "@shared/types/managerProject";
 import { useGetManagerProjectsQuery } from "@shared/store/services/managerOrdersService";
 import { INTERSECTION_ELEMENTS } from "@shared/config/common";
+import { ManagerNewProjectsList } from "./managerNewProject";
 
 export const ManagerOrders: FC = () => {
   const { statusFilter } = useAppSelector((state) => state.filter);
@@ -73,7 +72,7 @@ export const ManagerOrders: FC = () => {
     <>
       <BarFilter page={page} listLength={!!tariffs?.length} />
       {/* {statusFilter === managerProjectStatusFilter.new ? ( */}
-      <ManagerNewProject projects={tariffs! as IManagerNewProjectCard[]} />
+      <ManagerNewProjectsList projects={tariffs! as IManagerNewProjectCard[]} />
       {/* ) : ( */}
       {/* <ManagerProject projects={tariffs! as IManagerProjectCard[]} /> */}
       {/* )} */}

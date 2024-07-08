@@ -3,7 +3,7 @@ import { CartList } from "./cartList";
 import { CreatePost } from "./createPost";
 import styles from "./styles.module.scss";
 // import { RecomendationList } from "@widgets/cartBlock/UI/recomendationList";
-import { GenerateGuestId } from "@features/generateGuestId";
+import { GenerateGuestId } from "src/features old/generateGuestId";
 import { ToastAction } from "@radix-ui/react-toast";
 import { Languages } from "@shared/config/languages";
 import { useAppSelector } from "@shared/store";

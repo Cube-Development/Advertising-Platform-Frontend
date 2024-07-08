@@ -1,17 +1,17 @@
-import { AddPlatform } from "@features/addPlatform";
-import { BarStatusFilter } from "@features/barStatusFilter";
-import { BarTop } from "@features/barTop";
-import { BarTypesFilter } from "@features/barTypesFilter";
-import { TurnkeyProject } from "@features/turnkeyProject";
+import { AddPlatform } from "src/features old/addPlatform";
+import { BarStatusFilter } from "src/features old/barStatusFilter";
+import { BarTop } from "src/features old/barTop";
+import { BarTypesFilter } from "src/features old/barTypesFilter";
+import { TurnkeyProject } from "src/features old/turnkeyProject";
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { useAppSelector } from "@shared/store";
 import { pageFilter } from "@shared/config/pageFilter";
 import { projectTypesFilter } from "@shared/config/projectFilter";
 import { filterData } from "@shared/config/platformData";
-import { SelectOptions } from "@features/selectOptions";
+import { SelectOptions } from "src/features old/selectOptions";
 import { UseFormSetValue } from "react-hook-form";
-import { NewProject } from "@features/newProject";
+import { NewProject } from "src/features old/newProject";
 import { roles } from "@shared/config/roles";
 import { networkTypes } from "@shared/config/platformTypes";
 

@@ -1,7 +1,7 @@
-import { BarProfileFilter } from "@features/barProfileFilter/UI";
-import { BarSubrofileFilter } from "@features/barSubprofileFilter";
-import { CreateProfile } from "@features/createProfile/UI";
-import { ProfileData } from "@features/profileData/UI";
+import { BarProfileFilter } from "src/features old/barProfileFilter/UI";
+import { BarSubrofileFilter } from "src/features old/barSubprofileFilter";
+import { CreateProfile } from "src/features old/createProfile/UI";
+import { ProfileData } from "src/features old/profileData/UI";
 import { pageFilter } from "@shared/config/pageFilter";
 import {
   EntityData,
@@ -61,7 +61,7 @@ export const ProfileCard: FC = () => {
           title: t("toasts.add_profile.create.success"),
         });
       })
-      .catch((error) => {
+      .catch(() => {
         toast({
           variant: "error",
           title: t("toasts.add_profile.create.error"),

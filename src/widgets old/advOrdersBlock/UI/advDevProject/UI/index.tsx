@@ -1,14 +1,14 @@
-import { AdvDevProjectCard } from "@entities/advDevProjectCard";
-import { ContinueTemplate } from "@features/continueTemplate";
-import { NewProject } from "@features/newProject";
-import { TurnkeyProject } from "@features/turnkeyProject";
-import { ZeroProject } from "@features/zeroProject";
+import { AdvDevProjectCard } from "src/entities old/advDevProjectCard";
+import { ContinueTemplate } from "src/features old/continueTemplate";
+import { NewProject } from "src/features old/newProject";
+import { TurnkeyProject } from "src/features old/turnkeyProject";
+import { ZeroProject } from "src/features old/zeroProject";
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { SpinnerLoader } from "@shared/ui/spinnerLoader";
-import { ShowMoreBtn } from "@features/showMore";
+import { ShowMoreBtn } from "src/features old/showMore";
 import { IAdvManagerProjectsDevCard } from "@shared/types/advProject";
-import { SkeletonAdvDevProjectCard } from "@entities/advDevProjectCard/skeletonAdvDevProjectCard";
+import { SkeletonAdvDevProjectCard } from "src/entities old/advDevProjectCard/skeletonAdvDevProjectCard";
 import { INTERSECTION_ELEMENTS } from "@shared/config/common";
 
 interface AdvDevProjectProps {

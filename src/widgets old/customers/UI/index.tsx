@@ -1,4 +1,4 @@
-import { CustomerList } from "@features/customerList";
+import { CustomerList } from "src/features old/customerList";
 import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
 import { motion } from "framer-motion";
 import { FC } from "react";

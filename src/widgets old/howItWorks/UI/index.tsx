@@ -1,4 +1,4 @@
-import { Registration } from "@features/registration";
+import { Registration } from "src/features old/registration";
 import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
 import { motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";

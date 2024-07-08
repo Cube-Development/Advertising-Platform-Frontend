@@ -1,4 +1,4 @@
-import { PaymentCard } from "@features/paymentCard";
+import { PaymentCard } from "src/features old/paymentCard";
 import { CardIcon, InfoIcon } from "@shared/assets";
 import { topup } from "@shared/config/common";
 import { paymentTypes } from "@shared/config/payment";

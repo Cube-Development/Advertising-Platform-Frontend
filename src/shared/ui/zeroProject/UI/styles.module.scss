@@ -1,0 +1,51 @@
+.no__project {
+  display: grid;
+  grid-auto-flow: row;
+  justify-content: center;
+  align-items: center;
+  row-gap: 60px;
+  margin-bottom: 170px;
+}
+
+.buttons {
+  display: grid;
+  grid-auto-flow: column;
+  justify-content: center;
+  align-items: center;
+  column-gap: 25px;
+
+  p {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+}
+
+.smile {
+  display: grid;
+  grid-auto-flow: row;
+  justify-content: center;
+  align-items: center;
+  row-gap: 30px;
+  text-align: center;
+
+  div {
+    display: grid;
+    grid-auto-flow: row;
+    justify-content: center;
+  }
+
+  p {
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    max-width: 510px;
+  }
+
+  svg {
+    width: 185px;
+    height: 185px;
+  }
+}

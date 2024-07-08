@@ -1,9 +1,9 @@
-import { AddCart } from "@features/addCart";
-import { AddToBasket } from "@features/addToBasket";
-import { CatalogCard } from "@features/catalogCard";
-import { SkeletonCatalogCard } from "@features/catalogCard/skeletonCatalogCard";
-import { FormatList } from "@features/formatList";
-import { SaveCart } from "@features/saveCart";
+import { AddCart } from "src/features old/addCart";
+import { AddToBasket } from "src/features old/addToBasket";
+import { CatalogCard } from "src/features old/catalogCard";
+import { SkeletonCatalogCard } from "src/features old/catalogCard/skeletonCatalogCard";
+import { FormatList } from "src/features old/formatList";
+import { SaveCart } from "src/features old/saveCart";
 import { CartIcon, SadSmileIcon } from "@shared/assets";
 import { INTERSECTION_ELEMENTS } from "@shared/config/common";
 import { pageFilter } from "@shared/config/pageFilter";

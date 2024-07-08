@@ -1,9 +1,9 @@
-import { PartnerList } from "@features/partnerList";
 import { motion } from "framer-motion";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
+import { PartnerList } from "@features/other";
 
 interface PartnersProps {
   page: string;

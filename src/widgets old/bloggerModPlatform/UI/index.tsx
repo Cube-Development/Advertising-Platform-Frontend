@@ -1,14 +1,16 @@
-import { BloggerModPlatformCard } from "@entities/bloggerModPlatformCard";
-import { AddPlatform } from "@features/addPlatform";
-import { ZeroPlatform } from "@features/zeroPlatform";
+import { AddPlatform } from "src/features old/addPlatform";
+import { ZeroPlatform } from "src/features old/zeroPlatform";
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { IModerationChannel } from "@shared/types/channelStatus";
 import { pageFilter } from "@shared/config/pageFilter";
 import { SpinnerLoader } from "@shared/ui/spinnerLoader";
-import { ShowMoreBtn } from "@features/showMore";
+import { ShowMoreBtn } from "src/features old/showMore";
 import { INTERSECTION_ELEMENTS } from "@shared/config/common";
-import { SkeletonBloggerModPlatformCard } from "@entities/bloggerModPlatformCard/skeletonBloggerModPlatformCard";
+import {
+  ModChannelCard,
+  ModChannelCardSkeleton,
+} from "src/entities old/bloggerModPlatformCard";
 
 interface BloggerModPlatformProps {
   cards: IModerationChannel[];
@@ -31,11 +33,11 @@ export const BloggerModPlatform: FC<BloggerModPlatformProps> = ({
         <div className={styles.wrapper}>
           {isLoading &&
             Array.from({ length: INTERSECTION_ELEMENTS.modPlatforms }).map(
-              (_, index) => <SkeletonBloggerModPlatformCard key={index} />,
+              (_, index) => <ModChannelCardSkeleton key={index} />,
             )}
           {!isLoading &&
             cards?.map((card, index: number) => (
-              <BloggerModPlatformCard key={index} card={card} />
+              <ModChannelCard key={index} card={card} />
             ))}
           {isNotEmpty && (
             <div className={styles.show_more} onClick={handleOnChangePage}>

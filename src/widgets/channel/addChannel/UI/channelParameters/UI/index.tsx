@@ -1,10 +1,3 @@
-import { FormatPrice } from "@features/accommPrice";
-import { CreatePlatform } from "@features/createPlatform";
-import { SelectDescription } from "@features/selectDescription";
-import { SelectOptions } from "@features/selectOptions";
-import { SelectPrice } from "@features/selectPrice/UI";
-import { SelectSex } from "@features/selectSex";
-import { SelectSymbol } from "@features/selectSymbols";
 import { Languages } from "@shared/config/languages";
 import { platformData } from "@shared/config/platformData";
 import {
@@ -34,6 +27,13 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { PLATFORM_PARAMETERS } from "@shared/config/common";
+import { SelectDescription, SelectOptions, SelectSex } from "@features/other";
+import {
+  CreateChannel,
+  FormatPrice,
+  SelectPrice,
+  SelectSymbol,
+} from "@features/channel";
 
 interface ChannelParametersProps {
   blur: IAddPlatformBlur;
@@ -252,7 +252,7 @@ export const ChannelParameters: FC<ChannelParametersProps> = ({
         )}
       </form>
 
-      <CreatePlatform isModalOpen={isModalOpen} onChange={handleCloseModal} />
+      <CreateChannel isModalOpen={isModalOpen} onChange={handleCloseModal} />
     </div>
   );
 };

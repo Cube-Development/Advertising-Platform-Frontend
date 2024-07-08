@@ -1,4 +1,4 @@
-import { CreatePosts } from "@features/createPost";
+import { CreatePosts } from "src/features old/createPost";
 import { ProtectIcon3 } from "@shared/assets";
 import { BREAKPOINT, CART } from "@shared/config/common";
 import { paths } from "@shared/routing";

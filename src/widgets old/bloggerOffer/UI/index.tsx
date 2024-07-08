@@ -1,20 +1,20 @@
-import { AcceptOffer } from "@features/acceptOffer";
-import { AddPlatform } from "@features/addPlatform";
-import { BloggerOfferCard } from "@features/bloggerOfferCard";
-import { RejectOffer } from "@features/rejectOffer";
-import { SeeLink } from "@features/seeLink";
-import { SeeReason } from "@features/seeReason";
-import { SendLink } from "@features/sendLink";
+import { AcceptOffer } from "src/features old/acceptOffer";
+import { AddPlatform } from "src/features old/addPlatform";
+import { BloggerOfferCard } from "src/features old/bloggerOfferCard";
+import { RejectOffer } from "src/features old/rejectOffer";
+import { SeePost } from "src/features old/seeLink";
+import { SeeReason } from "src/features old/seeReason";
+import { SendLink } from "src/features old/sendLink";
 import { FC } from "react";
 import { IBloggerOfferCard } from "@shared/types/bloggerOffer";
 import styles from "./styles.module.scss";
-import { ZeroPlatform } from "@features/zeroPlatform";
+import { ZeroPlatform } from "src/features old/zeroPlatform";
 import { pageFilter } from "@shared/config/pageFilter";
 import { paths } from "@shared/routing";
 import { SpinnerLoader } from "@shared/ui/spinnerLoader";
-import { ShowMoreBtn } from "@features/showMore";
+import { ShowMoreBtn } from "src/features old/showMore";
 import { INTERSECTION_ELEMENTS } from "@shared/config/common";
-import { SkeletonBloggerOfferCard } from "@features/bloggerOfferCard/skeletonBloggerOfferCard";
+import { SkeletonBloggerOfferCard } from "src/features old/bloggerOfferCard/skeletonBloggerOfferCard";
 
 interface BloggerOfferProps {
   offers: IBloggerOfferCard[];
@@ -48,7 +48,7 @@ export const BloggerOffer: FC<BloggerOfferProps> = ({
               <BloggerOfferCard
                 key={index}
                 card={card}
-                SeeLinkBtn={SeeLink}
+                SeeLinkBtn={SeePost}
                 SendLinkBtn={SendLink}
                 AcceptOfferBtn={AcceptOffer}
                 RejectOfferBtn={RejectOffer}

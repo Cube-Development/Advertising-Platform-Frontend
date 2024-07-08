@@ -1,4 +1,3 @@
-import { QueryParams } from "@features/queryParams";
 import { INTERSECTION_ELEMENTS } from "@shared/config/common";
 import i18n from "@shared/config/i18n";
 import { Languages } from "@shared/config/languages";
@@ -18,8 +17,9 @@ import {
 import { IAdvProjectCard } from "@shared/types/advProject";
 import { BarFilter } from "@widgets/barFilter";
 import { FC, useEffect, useState } from "react";
-import { AdvManagersProjectsList } from "./advManagersProjects";
 import { AdvProjectsList } from "./advProjects";
+import { DevProjectsList } from "./devProjects";
+import { QueryParams } from "@shared/functions";
 
 export const AdvOrders: FC = () => {
   const language = Languages.find((lang) => {
@@ -107,7 +107,7 @@ export const AdvOrders: FC = () => {
 
       {typeFilter === projectTypesFilter.managerProject &&
       statusFilter === advManagerProjectStatusFilter.develop ? (
-        <AdvManagersProjectsList
+        <DevProjectsList
           projects={projects!}
           handleOnChangePage={handleOnChangePage}
           isLoading={isFetchingSelf || isFetchingManager}

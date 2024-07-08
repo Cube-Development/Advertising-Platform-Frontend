@@ -1,7 +1,7 @@
-import { CustomCalendar } from "@features/calendar";
-import { ContinueOrder } from "@features/continueOrder";
-import { PostPlatform } from "@features/postPlatform";
-import { TimeList } from "@features/timeList";
+import { CustomCalendar } from "src/features old/calendar";
+import { ContinueOrder } from "src/features old/continueOrder";
+import { PostPlatform } from "src/features old/postPlatform";
+import { TimeList } from "src/features old/timeList";
 import { ICreatePostForm, IPostChannel } from "@shared/types/createPost";
 import { ICreateOrderBlur } from "@shared/types/platform";
 import { FC } from "react";

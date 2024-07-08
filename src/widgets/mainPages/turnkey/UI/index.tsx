@@ -1,11 +1,11 @@
-import { BuyTarif } from "@features/buyTarif";
-import { PriceList } from "@features/priceList";
 import { KeyIcon } from "@shared/assets";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
 import { motion } from "framer-motion";
+import { PriceList } from "@features/other";
+import { BuyTarif } from "@features/turnkey";
 
 interface TurnkeyProps {
   page: string;

@@ -1,17 +1,17 @@
 import { FC, useEffect } from "react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
-import { PostGeneration } from "@features/postGeneration";
-import { PostText } from "@features/postText";
-import { PostFiles } from "@features/postFiles";
-import { PostButtons } from "@features/postButtons";
+import { PostGeneration } from "src/features old/postGeneration";
+import { PostText } from "src/features old/postText";
+import { PostFiles } from "src/features old/postFiles";
+import { PostButtons } from "src/features old/postButtons";
 import {
   ICreatePostForm,
   IPostChannel,
   PostFormats,
 } from "@shared/types/createPost";
-import { AddFiles } from "@features/addFiles";
-import { AddMediaFiles } from "@features/addMediaFiles";
+import { AddFiles } from "src/features old/addFiles";
+import { AddMediaFiles } from "src/features old/addMediaFiles";
 import { ICreateOrderBlur } from "@shared/types/platform";
 import { useAppDispatch, useAppSelector } from "@shared/store";
 import {
@@ -21,7 +21,7 @@ import {
 } from "@shared/config/platformTypes";
 import { POST } from "@shared/config/common";
 import { CreatePostFormData } from "@shared/config/createPostData";
-import { ContinueOrder } from "@features/continueOrder";
+import { ContinueOrder } from "src/features old/continueOrder";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import {
   DisplayFeed,
@@ -29,7 +29,7 @@ import {
   DisplayStories,
   DisplayTelegram,
   DisplayVideos,
-} from "@shared/ui/postDisplay";
+} from "@entities/platform";
 import clsx from "clsx";
 import { MultiPostsList } from "../multiPostsList";
 import { PlatformFilter, TypeTabs, PostTypesTabs } from "../tabs";

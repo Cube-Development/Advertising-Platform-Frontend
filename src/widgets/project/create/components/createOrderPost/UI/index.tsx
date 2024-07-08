@@ -1,17 +1,11 @@
 import { FC, useEffect } from "react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
-import { PostGeneration } from "@features/postGeneration";
-import { PostText } from "@features/postText";
-import { PostFiles } from "@features/postFiles";
-import { PostButtons } from "@features/postButtons";
 import {
   ICreatePostForm,
   IPostChannel,
   PostFormats,
 } from "@shared/types/createPost";
-import { AddFiles } from "@features/addFiles";
-import { AddMediaFiles } from "@features/addMediaFiles";
 import { ICreateOrderBlur } from "@shared/types/platform";
 import { useAppDispatch, useAppSelector } from "@shared/store";
 import {
@@ -21,7 +15,6 @@ import {
 } from "@shared/config/platformTypes";
 import { POST } from "@shared/config/common";
 import { CreatePostFormData } from "@shared/config/createPostData";
-import { ContinueOrder } from "@features/continueOrder";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import {
   DisplayFeed,
@@ -29,11 +22,20 @@ import {
   DisplayStories,
   DisplayTelegram,
   DisplayVideos,
-} from "@shared/ui/postDisplay";
+} from "@entities/platform";
 import clsx from "clsx";
 import { MultiPostsList } from "../multiPostsList";
 import { PlatformFilter, TypeTabs, PostTypesTabs } from "../tabs";
 import { checkPosts, renderEditor } from "../functions";
+import {
+  AddFiles,
+  AddMediaFiles,
+  ContinueOrder,
+  PostButtons,
+  PostComment,
+  PostFiles,
+  PostGeneration,
+} from "@features/project";
 
 interface CreateOrderPostProps {
   cards: IPostChannel[];
@@ -210,7 +212,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                       }
                     />
                   )}
-                  <PostText
+                  <PostComment
                     placeholder={"create_order.create.comment"}
                     maxLength={POST.commentLength}
                     rows={4}

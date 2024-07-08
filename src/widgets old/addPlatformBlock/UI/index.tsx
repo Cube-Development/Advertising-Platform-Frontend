@@ -4,7 +4,7 @@ import { PlatformParameters } from "./platformParameters";
 import { PlatformTop } from "./platformTop";
 import { IAddPlatformBlur, IPlatformLink } from "@shared/types/platform";
 import { platformTypes } from "@shared/config/postFilter";
-import { QueryParams } from "@features/queryParams";
+import { QueryParams } from "src/features old/queryParams";
 
 interface AddPlatformBlockProps {}
 

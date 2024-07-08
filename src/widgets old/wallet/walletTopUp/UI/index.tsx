@@ -1,4 +1,4 @@
-import { BarProfileFilter } from "@features/barProfileFilter/UI";
+import { BarProfileFilter } from "src/features old/barProfileFilter/UI";
 import { ArrowIcon4 } from "@shared/assets";
 import { pageFilter } from "@shared/config/pageFilter";
 import { paymentTypes } from "@shared/config/payment";

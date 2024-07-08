@@ -1,23 +1,23 @@
-import { ActivatePlatform } from "@features/activatePlatform";
-import { AddPlatform } from "@features/addPlatform";
-import { BloggerPlatformCard } from "@features/bloggerPlatformCard";
-import { BloggerPlatformCardMenu } from "@features/bloggerPlatformCardMenu";
-import { ChannelDescription } from "@features/channelDescription";
-import { DeleteChannel } from "@features/deleteChannel";
-import { RepeatOffer } from "@features/repeatOffer";
-import { SeeOffers } from "@features/seeOffers";
-import { SeeReason } from "@features/seeReason";
-import { Support } from "@features/support";
-import { ZeroPlatform } from "@features/zeroPlatform";
+import { ActivatePlatform } from "src/features old/activatePlatform";
+import { AddPlatform } from "src/features old/addPlatform";
+import { BloggerPlatformCard } from "src/features old/bloggerPlatformCard";
+import { BloggerPlatformCardMenu } from "src/features old/bloggerPlatformCardMenu";
+import { ChannelDescription } from "src/features old/channelDescription";
+import { DeleteChannel } from "src/features old/deleteChannel";
+import { RepeatOffer } from "src/features old/repeatOffer";
+import { SeeOffers } from "src/features old/seeOffers";
+import { SeeReason } from "src/features old/seeReason";
+import { Support } from "src/features old/support";
+import { ZeroPlatform } from "src/features old/zeroPlatform";
 import { pageFilter } from "@shared/config/pageFilter";
 import { Accordion } from "@shared/ui/shadcn-ui/ui/accordion";
 import { AllChannelTypes } from "@shared/types/channelStatus";
 import { FC, useEffect, useRef, useState } from "react";
 import styles from "./styles.module.scss";
 import { SpinnerLoader } from "@shared/ui/spinnerLoader";
-import { ShowMoreBtn } from "@features/showMore";
+import { ShowMoreBtn } from "src/features old/showMore";
 import { INTERSECTION_ELEMENTS } from "@shared/config/common";
-import { SkeletonBloggerPlatformCard } from "@features/bloggerPlatformCard/skeletonBloggerPlatformCard";
+import { SkeletonBloggerPlatformCard } from "src/features old/bloggerPlatformCard/skeletonBloggerPlatformCard";
 
 interface BloggerPlatformProps {
   cards: AllChannelTypes[];

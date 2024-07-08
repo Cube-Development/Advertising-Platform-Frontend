@@ -1,7 +1,3 @@
-import { BarProfileFilter } from "@features/barProfileFilter/UI";
-import { BarSubrofileFilter } from "@features/barSubprofileFilter";
-import { CreateProfile } from "@features/createProfile/UI";
-import { ProfileData } from "@features/profileData/UI";
 import { pageFilter } from "@shared/config/pageFilter";
 import {
   EntityData,
@@ -16,11 +12,13 @@ import {
 import { useAppSelector } from "@shared/store";
 import { useCreateLegalMutation } from "@shared/store/services/legalService";
 import { IProfileData } from "@shared/types/profile";
-import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { useToast } from "@shared/ui";
+import { BarSubrofileFilter, CreateLegal, LegalForm } from "@features/wallet";
+import { BarProfileFilter } from "@features/other";
 
 export const AddLegalForm: FC = () => {
   const { toast } = useToast();
@@ -82,7 +80,7 @@ export const AddLegalForm: FC = () => {
               <BarSubrofileFilter resetValues={reset} />
             )}
             {typeLegal.map((block, index) => (
-              <ProfileData
+              <LegalForm
                 inputError={errors}
                 data={block}
                 register={register}
@@ -101,7 +99,7 @@ export const AddLegalForm: FC = () => {
               {t("add_profile.accept.text2")}
             </p>
           </div>
-          <CreateProfile />
+          <CreateLegal />
         </form>
       )}
     </div>

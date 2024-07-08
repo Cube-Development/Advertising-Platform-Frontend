@@ -22,8 +22,8 @@ import { paths } from "@shared/routing";
 import { scroller } from "react-scroll";
 import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import { ContentType } from "@shared/config/createPostData";
-import { getFileExtension } from "@features/getFileExtension";
-import { getContentType } from "@features/getContentType";
+import { getFileExtension } from "src/features old/getFileExtension";
+import { getContentType } from "src/features old/getContentType";
 import { CreateOrderLoading } from "./createOrderLoading";
 import { SpinnerLoader } from "@shared/ui/spinnerLoader";
 

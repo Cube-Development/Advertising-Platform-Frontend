@@ -1,5 +1,3 @@
-import { PaymentDidox } from "@features/paymentDidox";
-import { ProfileData } from "@features/profileData/UI";
 import {
   EntityData,
   IndividualData,
@@ -12,6 +10,7 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { subprofileFilter } from "@shared/config/profileFilter";
+import { LegalForm, PaymentDidox } from "@features/wallet";
 
 interface PaymentDataProps {
   amountTitle: string;
@@ -76,7 +75,7 @@ export const PaymentData: FC<PaymentDataProps> = ({
           </div>
         </div>
         {typeLegal.map((block, index) => (
-          <ProfileData
+          <LegalForm
             data={block}
             inputError={errors}
             register={register}

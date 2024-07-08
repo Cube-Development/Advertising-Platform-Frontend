@@ -1,7 +1,7 @@
 import { ICreatePostForm } from "@shared/types/createPost";
 import { UseFormSetValue } from "react-hook-form";
 import { CreatePostFormData } from "@shared/config/createPostData";
-import { Editor } from "@features/postEditor";
+import { Editor } from "src/features old/postEditor";
 import { platformTypesNum } from "@shared/config/platformTypes";
 
 interface RenderEditorProps {

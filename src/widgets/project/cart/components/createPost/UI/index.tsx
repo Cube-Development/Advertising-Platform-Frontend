@@ -1,17 +1,16 @@
-import { CreatePosts } from "@features/createPost";
 import { ProtectIcon3 } from "@shared/assets";
 import { BREAKPOINT, CART } from "@shared/config/common";
 import { paths } from "@shared/routing";
 import { useAppSelector } from "@shared/store";
 import { useCreateCartMutation } from "@shared/store/services/advOrdersService";
 import { ICart } from "@shared/types/cart";
-import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
-import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import Cookies from "js-cookie";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.scss";
+import { CreatePost as CreatePostBtn } from "@features/project";
+import { ToastAction, useToast } from "@shared/ui";
 
 interface CreatePostProps {
   cart: ICart;
@@ -119,7 +118,7 @@ export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
           <div
             className={`${styles.button} ${!cart?.channels?.length && "deactive"}`}
           >
-            <CreatePosts onClick={handleCreateCart} />
+            <CreatePostBtn onClick={handleCreateCart} />
           </div>
         </div>
       </div>

@@ -1,9 +1,9 @@
-import { WalletCard } from "@features/walletCard";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { ILegalCard, ILegalCardShort } from "@shared/types/profile";
 import { SadSmileIcon } from "@shared/assets";
+import { LegalCard } from "@entities/wallet";
 
 interface LegalsListProps {
   accounts: ILegalCardShort[] | undefined;
@@ -37,7 +37,7 @@ export const LegalsList: FC<LegalsListProps> = ({
         !readLegalsError ? (
           <>
             {accounts?.map((account, index) => (
-              <WalletCard
+              <LegalCard
                 account={account}
                 key={index}
                 changeActiveAccount={() => changeActiveAccount(account)}

@@ -1,16 +1,16 @@
-import { AddPlatform } from "@features/addPlatform";
-import { WorkWithUs } from "@features/workWithUs";
 import { CalculatorIcon } from "@shared/assets";
 import { addChannelQueries } from "@shared/config/addChannelQueries";
 import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
 import { paths } from "@shared/routing";
 import { IncomeCalculator } from "@shared/ui/incomeCalculator";
-import { SliderSubs } from "@shared/ui/sliderSubs";
-import { ThemeChanger } from "@shared/ui/themeChanger";
+import { SliderSubs } from "@shared/ui";
+import { ThemeChanger } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { AddChannel } from "@features/channel";
+import { WorkWithUs } from "@features/mainPages";
 
 interface CalculateIncomeProps {
   page: string;
@@ -82,7 +82,7 @@ export const CalculateIncome: FC<CalculateIncomeProps> = ({ page }) => {
             <ThemeChanger page={page} onThemeChange={handleThemeChange} />
             <IncomeCalculator page={page} calculatedIncome={calculatedIncome} />
             <SliderSubs onUserCountChange={setUserCount} />
-            <AddPlatform
+            <AddChannel
               path={`${paths.addChannel}?add_channel=${addChannelQueries.main}`}
               props={{ className: styles.button }}
             />

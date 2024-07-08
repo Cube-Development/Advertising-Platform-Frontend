@@ -1,4 +1,4 @@
-import { InfoCard } from "@entities/infoCard";
+import { InfoCard } from "src/entities old/infoCard";
 import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
 import { IBasicInfo } from "@shared/types/translate";
 import { motion } from "framer-motion";

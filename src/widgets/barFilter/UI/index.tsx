@@ -1,19 +1,21 @@
-import { AddPlatform } from "@features/addPlatform";
-import { BarStatusFilter } from "@features/barStatusFilter";
-import { BarTop } from "@features/barTop";
-import { BarTypesFilter } from "@features/barTypesFilter";
-import { TurnkeyProject } from "@features/turnkeyProject";
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { useAppSelector } from "@shared/store";
 import { pageFilter } from "@shared/config/pageFilter";
 import { projectTypesFilter } from "@shared/config/projectFilter";
 import { filterData } from "@shared/config/platformData";
-import { SelectOptions } from "@features/selectOptions";
 import { UseFormSetValue } from "react-hook-form";
-import { NewProject } from "@features/newProject";
 import { roles } from "@shared/config/roles";
 import { networkTypes } from "@shared/config/platformTypes";
+import { AddChannel } from "@features/channel";
+import {
+  BarStatusFilter,
+  BarTop,
+  BarTypesFilter,
+  SelectOptions,
+  TurnkeyProject,
+} from "@features/other";
+import { NewProject } from "@features/project";
 
 interface BarFilterProps {
   page: pageFilter;
@@ -36,7 +38,7 @@ export const BarFilter: FC<BarFilterProps> = ({
           listLength={listLength}
           NewProjectBtn={NewProject}
           TurnkeyProjectBtn={TurnkeyProject}
-          AddPlatformBtn={AddPlatform}
+          AddChannelBtn={AddChannel}
           page={page}
         />
         {page === pageFilter.order ? (
@@ -55,12 +57,6 @@ export const BarFilter: FC<BarFilterProps> = ({
             )
           )
         ) : (
-          // <>
-          //   <BarTypesFilter />
-          //   {typeFilter === projectTypesFilter.savedProject || (
-          //     <BarStatusFilter page={page} />
-          //   )}
-          // </>
           <BarStatusFilter page={page} />
         )}
         {page !== pageFilter.order && (

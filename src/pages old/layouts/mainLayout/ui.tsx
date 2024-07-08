@@ -1,5 +1,4 @@
-import { Footer } from "@widgets/footer";
-import { Header } from "@widgets/header";
+import { Footer, Header } from "@pages/layouts/components";
 import type { PropsWithChildren } from "react";
 
 export const MainLayout = ({ children }: PropsWithChildren) => {

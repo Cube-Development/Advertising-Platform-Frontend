@@ -1,4 +1,4 @@
-import { PartnerList } from "@features/partnerList";
+import { PartnerList } from "src/features old/partnerList";
 import { motion } from "framer-motion";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";

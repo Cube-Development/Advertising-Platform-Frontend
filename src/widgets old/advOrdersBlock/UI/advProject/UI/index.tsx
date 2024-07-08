@@ -1,23 +1,23 @@
-import { AcceptPost } from "@features/acceptPost";
-import { AcceptProject } from "@features/acceptProject";
-import { AdvProjectCard } from "@features/advProjectCard";
-import { ChangeChannel } from "@features/changeChannel";
-import { ChannelChat } from "@features/channelChat";
-import { CheckPost } from "@features/checkPost";
-import { Feedback } from "@features/feedback";
-import { NewProject } from "@features/newProject";
-import { RejectPost } from "@features/rejectPost";
-import { SeePost } from "@features/seePost";
-import { TurnkeyProject } from "@features/turnkeyProject";
-import { ZeroProject } from "@features/zeroProject";
 import { IAdvProjectCard } from "@shared/types/advProject";
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { Accordion } from "@shared/ui/shadcn-ui/ui/accordion";
 import { SpinnerLoader } from "@shared/ui/spinnerLoader";
-import { ShowMoreBtn } from "@features/showMore";
-import { SkeletonAdvProjectCard } from "@features/advProjectCard/skeletonAdvProjectCard";
 import { INTERSECTION_ELEMENTS } from "@shared/config/common";
+import { ZeroProject } from "src/features old/zeroProject";
+import { TurnkeyProject } from "src/features old/turnkeyProject";
+import { NewProject } from "src/features old/newProject";
+import { SkeletonAdvProjectCard } from "src/features old/advProjectCard/skeletonAdvProjectCard";
+import { AdvProjectCard } from "src/features old/advProjectCard";
+import { Feedback } from "src/features old/feedback";
+import { AcceptPost } from "src/features old/acceptPost";
+import { RejectPost } from "src/features old/rejectPost";
+import { CheckPost } from "src/features old/checkPost";
+import { SeePost } from "src/features old/seePost";
+import { AcceptProject } from "src/features old/acceptProject";
+import { ChangeChannel } from "src/features old/changeChannel";
+import { OrderChat } from "src/features old/channelChat";
+import { ShowMoreBtn } from "src/features old/showMore";
 
 interface AdvProjectProps {
   projects: IAdvProjectCard[];
@@ -57,7 +57,7 @@ export const AdvProject: FC<AdvProjectProps> = ({
                   RejectBtn={RejectPost}
                   CheckBtn={CheckPost}
                   SeeBtn={SeePost}
-                  ChannelChatBtn={ChannelChat}
+                  ChannelChatBtn={OrderChat}
                   AcceptProjectBtn={AcceptProject}
                   ChangeChannelBtn={ChangeChannel}
                 />

@@ -1,7 +1,4 @@
-import { BarProfileFilter } from "@features/barProfileFilter/UI";
-import { BarSubrofileFilter } from "@features/barSubprofileFilter";
 import { ArrowIcon5 } from "@shared/assets";
-import { pageFilter } from "@shared/config/pageFilter";
 import { profileTypesName } from "@shared/config/profileFilter";
 import { useAppSelector } from "@shared/store";
 import {
@@ -23,6 +20,9 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { Guide, LegalsList, PaymentData } from "../../components";
+import { BarSubrofileFilter } from "@features/wallet";
+import { BarProfileFilter } from "@features/other";
+import { pageFilter } from "@shared/config/pageFilter";
 
 interface IExtendedProfileData extends IProfileData {
   amount: number;

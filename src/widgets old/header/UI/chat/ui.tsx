@@ -1,6 +1,6 @@
-import { BarProfileFilter } from "@features/barProfileFilter/UI";
-import { ChatCard } from "@features/chatCard";
-import { ChatMessages } from "@features/chatMessages";
+import { BarProfileFilter } from "src/features old/barProfileFilter/UI";
+import { ChatCard } from "src/features old/chatCard";
+import { ChatMessages } from "src/features old/chatMessages";
 import { AlertDialogTrigger } from "@radix-ui/react-alert-dialog";
 import { ArrowLongHorizontalIcon, CancelIcon2, ChatIcon } from "@shared/assets";
 import { RecipientType } from "@shared/config/chat";

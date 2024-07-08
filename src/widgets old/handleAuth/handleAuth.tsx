@@ -1,4 +1,4 @@
-import { QueryParams } from "@features/queryParams";
+import { QueryParams } from "src/features old/queryParams";
 import { useAppDispatch } from "@shared/store";
 import { userSlice } from "@shared/store/reducers";
 import Cookies from "js-cookie";

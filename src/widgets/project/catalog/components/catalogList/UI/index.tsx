@@ -1,9 +1,3 @@
-import { AddToBasket } from "@features/addToBasket";
-import { CatalogCard } from "@features/catalogCard";
-import { FormatList } from "@features/formatList";
-import { SearchFilter } from "@features/searchFilter";
-import { SelectOptions } from "@features/selectOptions";
-import { ShowMoreBtn } from "@features/showMore";
 import {
   filterData,
   platformData,
@@ -11,7 +5,6 @@ import {
 } from "@shared/config/platformData";
 import { getCatalogReq } from "@shared/store/services/catalogService";
 import { IPlatform } from "@shared/types/platform";
-import { SpinnerLoader } from "@shared/ui/spinnerLoader";
 import { FC, useEffect, useState } from "react";
 import {
   UseFormGetValues,
@@ -21,10 +14,18 @@ import {
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { BREAKPOINT, INTERSECTION_ELEMENTS } from "@shared/config/common";
-import { SkeletonCatalogCard } from "@features/catalogCard/skeletonCatalogCard";
 import { Accordion } from "@shared/ui/shadcn-ui/ui/accordion";
 import { ParametersFilter } from "../parametersFilter";
 import { networkTypes } from "@shared/config/platformTypes";
+import { SelectOptions } from "@features/other";
+import {
+  AddToBasket,
+  CatalogCard,
+  FormatList,
+  SearchFilter,
+  SkeletonCatalogCard,
+} from "@features/project";
+import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
 
 interface CatalogListProps {
   channels: IPlatform[];

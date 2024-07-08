@@ -1,10 +1,9 @@
-import { FormatPrice } from "@features/accommPrice";
-import { CreatePlatform } from "@features/createPlatform";
-import { SelectDescription } from "@features/selectDescription";
-import { SelectOptions } from "@features/selectOptions";
-import { SelectPrice } from "@features/selectPrice/UI";
-import { SelectSex } from "@features/selectSex";
-import { SelectSymbol } from "@features/selectSymbols";
+import { CreatePlatform } from "src/features old/createPlatform";
+import { SelectDescription } from "src/features old/selectDescription";
+import { SelectOptions } from "src/features old/selectOptions";
+import { SelectPrice } from "src/features old/selectPrice/UI";
+import { SelectSex } from "src/features old/selectSex";
+import { SelectSymbol } from "src/features old/selectSymbols";
 import { Languages } from "@shared/config/languages";
 import { platformData } from "@shared/config/platformData";
 import {
@@ -34,6 +33,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { PLATFORM_PARAMETERS } from "@shared/config/common";
+import { FormatPrice } from "src/features old/accommPrice";
 
 interface PlatformParametersProps {
   blur: IAddPlatformBlur;

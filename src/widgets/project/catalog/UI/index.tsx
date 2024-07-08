@@ -1,5 +1,3 @@
-import { GenerateGuestId } from "@features/generateGuestId";
-import { GetUserId } from "@features/getUserId";
 import {
   BREAKPOINT,
   INTERSECTION_ELEMENTS,
@@ -25,8 +23,6 @@ import {
 } from "@shared/store/services/catalogService";
 import { ICart } from "@shared/types/cart";
 import { IPlatform } from "@shared/types/platform";
-import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
-import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import Cookies from "js-cookie";
 import { FC, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -34,6 +30,8 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { roles } from "@shared/config/roles";
 import { CatalogCart, CatalogList, CatalogSearch } from "../components";
+import { GenerateGuestId, GetUserId } from "@shared/functions";
+import { ToastAction, useToast } from "@shared/ui";
 
 export const CatalogBlock: FC = () => {
   const { toast } = useToast();

@@ -1,6 +1,6 @@
-import { OptionCard } from "@entities/optionCard";
-import { AddPlatform } from "@features/addPlatform";
-import { SeeCatalog } from "@features/seeCatalog";
+import { OptionCard } from "src/entities old/optionCard";
+import { AddPlatform } from "src/features old/addPlatform";
+import { SeeCatalog } from "src/features old/seeCatalog";
 import { addChannelQueries } from "@shared/config/addChannelQueries";
 import { paths } from "@shared/routing";
 import { IOption } from "@shared/types/translate";

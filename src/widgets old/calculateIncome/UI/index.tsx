@@ -1,5 +1,5 @@
-import { AddPlatform } from "@features/addPlatform";
-import { WorkWithUs } from "@features/workWithUs";
+import { AddPlatform } from "src/features old/addPlatform";
+import { WorkWithUs } from "src/features old/workWithUs";
 import { CalculatorIcon } from "@shared/assets";
 import { addChannelQueries } from "@shared/config/addChannelQueries";
 import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";

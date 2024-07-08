@@ -1,6 +1,3 @@
-import { AccommList } from "@features/accommList";
-import { AddPlatform } from "@features/addPlatform";
-import { StartAdv } from "@features/startAdv";
 import { addChannelQueries } from "@shared/config/addChannelQueries";
 import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
 import { paths } from "@shared/routing";
@@ -8,6 +5,8 @@ import { motion } from "framer-motion";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { AccommList, StartAdv } from "@features/mainPages";
+import { AddChannel } from "@features/channel";
 
 interface WhyChooseUsProps {
   page: string;
@@ -37,7 +36,7 @@ export const WhyChooseUs: FC<WhyChooseUsProps> = ({ page }) => {
           page === "main_page_advertiser" ? (
             <StartAdv props={{ className: styles.button }} />
           ) : (
-            <AddPlatform
+            <AddChannel
               path={`${paths.addChannel}?add_channel=${addChannelQueries.main}`}
               props={{ className: styles.button }}
             />

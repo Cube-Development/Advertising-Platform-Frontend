@@ -1,8 +1,8 @@
 import { FC, useEffect } from "react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
-import { PriceList } from "@features/priceList";
-import { BuyTarif } from "@features/buyTarif";
+import { PriceList } from "src/features old/priceList";
+import { BuyTarif } from "src/features old/buyTarif";
 
 interface TurnkeyTopProps {}
 

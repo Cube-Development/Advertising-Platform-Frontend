@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
-import { CustomerList } from "@features/customerList";
+import { CustomerList } from "@features/customer";
 
 interface CustomersProps {}
 

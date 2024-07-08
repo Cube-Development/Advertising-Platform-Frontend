@@ -1,5 +1,5 @@
-import { GenerateGuestId } from "@features/generateGuestId";
-import { GetUserId } from "@features/getUserId";
+import { GenerateGuestId } from "src/features old/generateGuestId";
+import { GetUserId } from "src/features old/getUserId";
 import {
   BREAKPOINT,
   INTERSECTION_ELEMENTS,

@@ -1,9 +1,9 @@
-import { CustomerList } from "@features/customerList";
 import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
 import { motion } from "framer-motion";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { CustomerList } from "@features/customer";
 
 interface CustomersProps {
   page: string;

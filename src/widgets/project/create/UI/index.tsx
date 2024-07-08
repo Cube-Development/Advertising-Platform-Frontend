@@ -18,8 +18,6 @@ import { paths } from "@shared/routing";
 import { scroller } from "react-scroll";
 import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import { ContentType } from "@shared/config/createPostData";
-import { getFileExtension } from "@features/getFileExtension";
-import { getContentType } from "@features/getContentType";
 import { SpinnerLoader } from "@shared/ui/spinnerLoader";
 import {
   CreateOrderDatetime,
@@ -28,6 +26,7 @@ import {
   CreateOrderPost,
   CreateOrderTop,
 } from "../components";
+import { getContentType, getFileExtension } from "@shared/functions";
 
 interface CreateOrderBlockProps {}
 

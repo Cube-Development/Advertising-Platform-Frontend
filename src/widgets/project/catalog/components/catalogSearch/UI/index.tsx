@@ -1,9 +1,3 @@
-import { AiFilter } from "@features/aiFilter";
-import { BarProfileFilter } from "@features/barProfileFilter/UI";
-import { RecommendationCard } from "@features/recommendationCard";
-import { SelectDescription } from "@features/selectDescription";
-import { SelectOptions } from "@features/selectOptions";
-import { SelectSex } from "@features/selectSex";
 import { QualityIcon } from "@shared/assets";
 import { catalogFilter } from "@shared/config/catalogFilter";
 import { Languages } from "@shared/config/languages";
@@ -27,6 +21,14 @@ import {
 } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import {
+  BarProfileFilter,
+  SelectDescription,
+  SelectOptions,
+  SelectSex,
+} from "@features/other";
+import { AiFilter } from "@features/project";
+import { RecomTargetCard } from "@entities/catalog";
 
 interface CatalogSearchProps {
   setValue: UseFormSetValue<getCatalogReq>;
@@ -176,7 +178,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
               </div>
               <div className={styles.recommendation__cards}>
                 {recommendationCards.map((card, index) => (
-                  <RecommendationCard
+                  <RecomTargetCard
                     key={index}
                     card={card}
                     onChange={handleUseRecommendionCard}

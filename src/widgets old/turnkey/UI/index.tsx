@@ -1,5 +1,5 @@
-import { BuyTarif } from "@features/buyTarif";
-import { PriceList } from "@features/priceList";
+import { BuyTarif } from "src/features old/buyTarif";
+import { PriceList } from "src/features old/priceList";
 import { KeyIcon } from "@shared/assets";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";

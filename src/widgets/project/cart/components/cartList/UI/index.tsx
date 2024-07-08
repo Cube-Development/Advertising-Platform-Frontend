@@ -1,17 +1,19 @@
-import { AddCart } from "@features/addCart";
-import { AddToBasket } from "@features/addToBasket";
-import { CatalogCard } from "@features/catalogCard";
-import { SkeletonCatalogCard } from "@features/catalogCard/skeletonCatalogCard";
-import { FormatList } from "@features/formatList";
-import { SaveCart } from "@features/saveCart";
 import { CartIcon, SadSmileIcon } from "@shared/assets";
 import { INTERSECTION_ELEMENTS } from "@shared/config/common";
 import { pageFilter } from "@shared/config/pageFilter";
 import { IPlatform } from "@shared/types/platform";
-import { Accordion } from "@shared/ui/shadcn-ui/ui/accordion";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import {
+  AddMore,
+  AddToBasket,
+  CatalogCard,
+  FormatList,
+  SaveCart,
+  SkeletonCatalogCard,
+} from "@features/project";
+import { Accordion } from "@shared/ui";
 
 interface CartListProps {
   channels: IPlatform[];
@@ -36,7 +38,7 @@ export const CartList: FC<CartListProps> = ({
         </div>
         <div className={styles.buttons}>
           <SaveCart />
-          <AddCart />
+          <AddMore />
         </div>
       </div>
       {channels?.length ? (

@@ -1,4 +1,3 @@
-import { QueryParams } from "@features/queryParams";
 import { useAppDispatch } from "@shared/store";
 import { userSlice } from "@shared/store/reducers";
 import Cookies from "js-cookie";
@@ -12,6 +11,7 @@ import { useTransferPublicMutation } from "@shared/store/services/cartService";
 import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import { useTranslation } from "react-i18next";
 import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
+import { QueryParams } from "@shared/functions";
 
 type DecodedToken = {
   role: roles;

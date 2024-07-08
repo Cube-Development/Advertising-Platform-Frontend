@@ -1,4 +1,3 @@
-import { BarProfileFilter } from "@features/barProfileFilter/UI";
 import { ArrowIcon4 } from "@shared/assets";
 import { pageFilter } from "@shared/config/pageFilter";
 import { paymentTypes } from "@shared/config/payment";
@@ -16,14 +15,14 @@ import {
   ILegalCardShort,
   IProfileData,
 } from "@shared/types/profile";
-import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
-import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { CreditCard } from "./creditCard";
 import { Guide, LegalsList, PaymentData } from "../../components";
+import { ToastAction, useToast } from "@shared/ui";
+import { BarProfileFilter } from "@features/other";
 
 interface IExtendedProfileData extends IProfileData {
   amount: number;

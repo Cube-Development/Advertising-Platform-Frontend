@@ -1,4 +1,4 @@
-import { QueryParams } from "@features/queryParams";
+import { QueryParams } from "src/features old/queryParams";
 import { INTERSECTION_ELEMENTS } from "@shared/config/common";
 import i18n from "@shared/config/i18n";
 import { Languages } from "@shared/config/languages";
@@ -16,7 +16,7 @@ import {
   useGetAdvProjectsQuery,
 } from "@shared/store/services/advOrdersService";
 import { IAdvProjectCard } from "@shared/types/advProject";
-import { BarFilter } from "@widgets/barFilter";
+import { BarFilter } from "src/widgets old/barFilter";
 import { FC, useEffect, useState } from "react";
 import { AdvDevProject } from "./advDevProject";
 import { AdvProject } from "./advProject";

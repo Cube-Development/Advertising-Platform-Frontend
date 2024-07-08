@@ -1,9 +1,3 @@
-import { AiFilter } from "@features/aiFilter";
-import { BarProfileFilter } from "@features/barProfileFilter/UI";
-import { RecommendationCard } from "@features/recommendationCard";
-import { SelectDescription } from "@features/selectDescription";
-import { SelectOptions } from "@features/selectOptions";
-import { SelectSex } from "@features/selectSex";
 import { CancelIcon2, ParametersIcon, QualityIcon } from "@shared/assets";
 import { catalogFilter } from "@shared/config/catalogFilter";
 import { BREAKPOINT } from "@shared/config/common";
@@ -20,13 +14,6 @@ import {
   useGetCompanyCategoriesQuery,
 } from "@shared/store/services/contentService";
 import { IFilterSearch } from "@shared/types/filterSearch";
-import {
-  AlertDialog,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogTrigger,
-} from "@shared/ui/shadcn-ui/ui/alert-dialog";
-import { motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
 import {
   UseFormGetValues,
@@ -42,6 +29,14 @@ import {
   DrawerTrigger,
   DrawerClose,
 } from "@shared/ui/shadcn-ui/ui/drawer";
+import {
+  BarProfileFilter,
+  SelectDescription,
+  SelectOptions,
+  SelectSex,
+} from "@features/other";
+import { AiFilter } from "@features/project";
+import { RecomTargetCard } from "@entities/catalog";
 
 interface ParametersFilterProps {
   setValue: UseFormSetValue<getCatalogReq>;
@@ -226,7 +221,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
                   </div>
                   <div className={styles.recommendation__cards}>
                     {recommendationCards.map((card, index) => (
-                      <RecommendationCard
+                      <RecomTargetCard
                         key={index}
                         card={card}
                         onChange={handleUseRecommendionCard}

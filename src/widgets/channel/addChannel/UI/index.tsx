@@ -4,7 +4,7 @@ import { ChannelParameters } from "./channelParameters";
 import { ChannelTop } from "./channelTop";
 import { IAddPlatformBlur, IPlatformLink } from "@shared/types/platform";
 import { platformTypes } from "@shared/config/postFilter";
-import { QueryParams } from "@features/queryParams";
+import { QueryParams } from "@shared/functions";
 
 interface AddChannelBlockProps {}
 

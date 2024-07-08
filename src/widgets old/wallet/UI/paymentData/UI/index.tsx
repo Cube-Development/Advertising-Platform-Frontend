@@ -1,5 +1,5 @@
-import { PaymentDidox } from "@features/paymentDidox";
-import { ProfileData } from "@features/profileData/UI";
+import { PaymentDidox } from "src/features old/paymentDidox";
+import { ProfileData } from "src/features old/profileData/UI";
 import {
   EntityData,
   IndividualData,

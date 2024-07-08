@@ -1,4 +1,4 @@
-import { WalletCard } from "@features/walletCard";
+import { WalletCard } from "src/features old/walletCard";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";

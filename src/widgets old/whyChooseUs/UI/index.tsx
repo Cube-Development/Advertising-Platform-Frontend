@@ -1,6 +1,6 @@
-import { AccommList } from "@features/accommList";
-import { AddPlatform } from "@features/addPlatform";
-import { StartAdv } from "@features/startAdv";
+import { AccommList } from "src/features old/accommList";
+import { AddPlatform } from "src/features old/addPlatform";
+import { StartAdv } from "src/features old/startAdv";
 import { addChannelQueries } from "@shared/config/addChannelQueries";
 import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
 import { paths } from "@shared/routing";

@@ -1,6 +1,3 @@
-import { OptionCard } from "@entities/optionCard";
-import { AddPlatform } from "@features/addPlatform";
-import { SeeCatalog } from "@features/seeCatalog";
 import { addChannelQueries } from "@shared/config/addChannelQueries";
 import { paths } from "@shared/routing";
 import { IOption } from "@shared/types/translate";
@@ -10,6 +7,9 @@ import { useTranslation } from "react-i18next";
 import { Element } from "react-scroll";
 import styles from "./styles.module.scss";
 import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
+import { OptionCard } from "../card";
+import { SeeCatalog } from "@features/mainPages";
+import { AddChannel } from "@features/channel";
 
 interface CtaProps {
   page: string;
@@ -59,7 +59,7 @@ export const Cta: FC<CtaProps> = ({ page }) => {
             {page === "main_page_advertiser" ? (
               <SeeCatalog />
             ) : (
-              <AddPlatform
+              <AddChannel
                 path={`${paths.addChannel}?add_channel=${addChannelQueries.main}`}
               />
             )}

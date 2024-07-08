@@ -1,9 +1,9 @@
-import { AiFilter } from "@features/aiFilter";
-import { BarProfileFilter } from "@features/barProfileFilter/UI";
-import { RecommendationCard } from "@features/recommendationCard";
-import { SelectDescription } from "@features/selectDescription";
-import { SelectOptions } from "@features/selectOptions";
-import { SelectSex } from "@features/selectSex";
+import { AiFilter } from "src/features old/aiFilter";
+import { BarProfileFilter } from "src/features old/barProfileFilter/UI";
+import { RecommendationCard } from "src/features old/recommendationCard";
+import { SelectDescription } from "src/features old/selectDescription";
+import { SelectOptions } from "src/features old/selectOptions";
+import { SelectSex } from "src/features old/selectSex";
 import { QualityIcon } from "@shared/assets";
 import { catalogFilter } from "@shared/config/catalogFilter";
 import { Languages } from "@shared/config/languages";

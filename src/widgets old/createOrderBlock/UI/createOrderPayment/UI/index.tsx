@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
-import { CreateOrder } from "@features/createOrder";
+import { CreateOrder } from "src/features old/createOrder";
 
 interface CreateOrderPaymentProps {
   isBlur?: boolean;

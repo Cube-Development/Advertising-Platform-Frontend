@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
-import { PartnerList } from "@features/partnerList";
+import { PartnerList } from "@features/other";
 
 interface PartnersProps {}
 
