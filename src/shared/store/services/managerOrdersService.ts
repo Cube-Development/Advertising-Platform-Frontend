@@ -1,7 +1,9 @@
 import { authApi } from "@shared/api";
 import { MANAGER_PROJECTS } from "@shared/api/tags";
 import { languagesNum } from "@shared/config/languages";
+import { PostTypesNum, platformTypesNum } from "@shared/config/platformTypes";
 import { IAdvSubprojects } from "@shared/types/advProject";
+import { IPostChannel } from "@shared/types/createPost";
 import {
   IManagerNewProjects,
   IManagerProjects,
@@ -15,11 +17,48 @@ export interface getProjectsCardReq {
   language?: number;
 }
 
-export interface getProjectSubcardReq {
+export interface getProjectOrdersReq {
   project_id: string;
   language: languagesNum;
   page: number;
   elements_on_page?: number;
+}
+
+export interface getProjectOrdersRes {
+  page: number;
+  elements: number;
+  orders: IPostChannel[];
+}
+
+export interface getPostsReq {
+  project_id: string;
+  post_upload_type: number;
+  page: number;
+  elements_on_page?: number;
+}
+
+export interface getPostsRes {
+  page: number;
+  elements: number;
+  posts: GetPostRes[];
+}
+
+export interface ITgButtonRes {
+  id: string;
+  content: string;
+  url: string;
+}
+
+export interface GetPostRes {
+  id: string;
+  platform: platformTypesNum;
+  comment?: string;
+  photo: string[];
+  video: string[];
+  files: string[];
+  buttons: ITgButtonRes[];
+  text: string[];
+  post_type: PostTypesNum;
 }
 
 export const managerProjectsAPI = authApi.injectEndpoints({
@@ -46,7 +85,7 @@ export const managerProjectsAPI = authApi.injectEndpoints({
       }),
     }),
 
-    getManagerSubprojects: build.query<IAdvSubprojects, getProjectSubcardReq>({
+    getManagerSubprojects: build.query<IAdvSubprojects, getProjectOrdersReq>({
       query: (params) => ({
         url: `/tariff/order`,
         method: `GET`,
@@ -66,6 +105,36 @@ export const managerProjectsAPI = authApi.injectEndpoints({
       }),
       providesTags: [MANAGER_PROJECTS],
     }),
+
+    getManagerProjectOrders: build.query<
+      getProjectOrdersRes,
+      getProjectOrdersReq
+    >({
+      query: (params) => ({
+        url: `/order/datetime-setup`,
+        method: "GET",
+        params: params,
+      }),
+    }),
+
+    getManagerProjectOrdersRereview: build.query<
+      getProjectOrdersRes,
+      getProjectOrdersReq
+    >({
+      query: (params) => ({
+        url: `/order/datetime`,
+        method: "GET",
+        params: params,
+      }),
+    }),
+
+    getPostsRereview: build.query<getPostsRes, getPostsReq>({
+      query: (params) => ({
+        url: `/order/posts`,
+        method: "GET",
+        params: params,
+      }),
+    }),
   }),
 });
 
@@ -74,4 +143,7 @@ export const {
   useApproveProjectMutation,
   useGetManagerSubprojectsQuery,
   useCreateProjectCartMutation,
+  useGetManagerProjectOrdersQuery,
+  useGetManagerProjectOrdersRereviewQuery,
+  useGetPostsRereviewQuery,
 } = managerProjectsAPI;

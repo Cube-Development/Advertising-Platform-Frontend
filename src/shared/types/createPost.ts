@@ -14,6 +14,12 @@ export interface IPostChannel {
   category: string;
   platform: platformTypesNum;
   post_type: PostTypesNum;
+
+  date_from?: string;
+  date_to?: string;
+  date?: string;
+  time_from?: string;
+  time_to?: string;
 }
 
 export interface IProjectId {

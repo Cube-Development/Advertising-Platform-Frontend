@@ -12,16 +12,6 @@ export interface IManagerNewProjects {
   projects: IManagerNewProjectCard[];
 }
 
-// export interface IManagerNewProjectCard {
-//   id: number;
-//   date: string;
-//   tarif: string;
-//   price: number;
-//   comment: string;
-//   url: string[];
-//   file: string[];
-// }
-
 export interface IManagerNewProjectCard {
   id: string;
   project_id: string;
