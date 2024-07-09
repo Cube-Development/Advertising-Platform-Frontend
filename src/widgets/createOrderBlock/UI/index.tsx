@@ -1,12 +1,9 @@
-import { FC, useState } from "react";
-import { CreateOrderTop } from "./createOrderTop";
-import { CreateOrderPost } from "./createOrderPost";
-import { CreateOrderDatetime } from "./createOrderDatetime";
-import { CreateOrderPayment } from "./createOrderPayment";
-import { ICreateOrderBlur } from "@shared/types/platform";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { ICreatePostForm } from "@shared/types/createPost";
-import Cookies from "js-cookie";
+import { getContentType } from "@features/getContentType";
+import { getFileExtension } from "@features/getFileExtension";
+import { ContentType } from "@shared/config/createPostData";
+import { Languages } from "@shared/config/languages";
+import { roles } from "@shared/config/roles";
+import { paths } from "@shared/routing";
 import {
   useCreateOrderDatesMutation,
   useCreatePostMutation,
@@ -14,18 +11,28 @@ import {
   useGetUploadLinkMutation,
   useProjectOrdersQuery,
 } from "@shared/store/services/advOrdersService";
+import {
+  useApproveProjectMutation,
+  useGetManagerProjectOrdersQuery,
+  useGetManagerProjectOrdersRereviewQuery,
+  useGetPostsRereviewQuery,
+} from "@shared/store/services/managerOrdersService";
 import { usePaymentProjectMutation } from "@shared/store/services/walletService";
-import { useTranslation } from "react-i18next";
-import { Languages } from "@shared/config/languages";
-import { useNavigate } from "react-router-dom";
-import { paths } from "@shared/routing";
-import { scroller } from "react-scroll";
+import { ICreatePostForm } from "@shared/types/createPost";
+import { ICreateOrderBlur } from "@shared/types/platform";
 import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
-import { ContentType } from "@shared/config/createPostData";
-import { getFileExtension } from "@features/getFileExtension";
-import { getContentType } from "@features/getContentType";
-import { CreateOrderLoading } from "./createOrderLoading";
 import { SpinnerLoader } from "@shared/ui/spinnerLoader";
+import Cookies from "js-cookie";
+import { FC, useEffect, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { scroller } from "react-scroll";
+import { CreateOrderDatetime } from "./createOrderDatetime";
+import { CreateOrderLoading } from "./createOrderLoading";
+import { CreateOrderPayment } from "./createOrderPayment";
+import { CreateOrderPost } from "./createOrderPost";
+import { CreateOrderTop } from "./createOrderTop";
 
 interface CreateOrderBlockProps {}
 
@@ -33,11 +40,21 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
   const { toast } = useToast();
   const { t, i18n } = useTranslation();
 
+  const navigate = useNavigate();
+  const language = Languages.find((lang) => {
+    return i18n.language === lang.name;
+  });
+
+  const role = Cookies.get("role");
+  const project_id = Cookies.get("project_id");
+  const rereview = Cookies.get("rereview");
+
   const [blur, setBlur] = useState<ICreateOrderBlur>({
     post: true,
     datetime: true,
     payment: true,
   });
+
   const handleOnChangeBlur = (key: keyof ICreateOrderBlur) => {
     const newBlur = { ...blur };
     newBlur[key] = false;
@@ -65,25 +82,60 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
     }
   };
 
-  const navigate = useNavigate();
-  const language = Languages.find((lang) => {
-    return i18n.language === lang.name;
-  });
-  const project_id = Cookies.get("project_id");
   // useEffect(()=>{
   //   if (!project_id) {
   //     navigate(paths.cart);
   //   }
   // }, [])
+
+  const [currentPostUploadType, setCurrentPostUploadType] = useState<number>(1);
+
   const projectChannelsReq = {
     project_id: project_id!,
     language: language?.id || Languages[0].id,
     page: 1,
   };
-  const { data: projectChannels, isLoading: isOrdersLoading } =
-    useProjectOrdersQuery(projectChannelsReq, {
-      skip: !project_id,
+
+  const getPostsReq = {
+    project_id: project_id!,
+    post_upload_type: currentPostUploadType,
+    language: language?.id || Languages[0].id,
+    page: 1,
+  };
+
+  // получение ордеров во время формирования поста Рекламодателем
+  const { data: advOrders, isLoading: isOrdersLoading } = useProjectOrdersQuery(
+    projectChannelsReq,
+    {
+      skip: !project_id || role !== roles.advertiser,
+    },
+  );
+
+  // получение ордеров во время формирования поста Манагером
+  const { data: managerOrders, isLoading: isManagerOrdersLoading } =
+    useGetManagerProjectOrdersQuery(projectChannelsReq, {
+      skip: !project_id || role !== roles.manager,
     });
+
+  // получение ордеров во время изменения канала / поста Манагером
+  const {
+    data: managerOrdersReview,
+    isLoading: isManagerOrdersLoadingRereview,
+  } = useGetManagerProjectOrdersRereviewQuery(projectChannelsReq, {
+    skip: !project_id || role !== roles.manager || !rereview,
+  });
+
+  // получение постов во время изменения канала / поста Манагером
+  const { data: managerPostsReview, isLoading: isPostsLoadingRereview } =
+    useGetPostsRereviewQuery(getPostsReq, {
+      skip: !project_id || role !== roles.manager || !rereview,
+    });
+
+  useEffect(() => {
+    if (managerPostsReview?.posts.length === 0) {
+      setCurrentPostUploadType(2);
+    }
+  }, [managerPostsReview]);
 
   const { register, getValues, handleSubmit, setValue, watch } =
     useForm<ICreatePostForm>({
@@ -93,6 +145,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
         isMultiPost: false,
       },
     });
+
   const formState = watch();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -101,6 +154,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
   const [createUniquePost] = useCreateUniquePostMutation();
   const [createOrderDates] = useCreateOrderDatesMutation();
   const [paymentProject] = usePaymentProjectMutation();
+  const [approveProject] = useApproveProjectMutation();
 
   const onSubmit: SubmitHandler<ICreatePostForm> = async (formData) => {
     if (
@@ -286,21 +340,39 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
         await createOrderDates(formData.datetime)
           .unwrap()
           .then(() => {
-            paymentProject(project_id)
-              .unwrap()
-              .then(() => {
-                toast({
-                  variant: "success",
-                  title: t("toasts.create_order.payment.success"),
+            if (role === roles.advertiser && project_id) {
+              paymentProject(project_id)
+                .unwrap()
+                .then(() => {
+                  toast({
+                    variant: "success",
+                    title: t("toasts.create_order.payment.success"),
+                  });
+                  navigate(paths.orders);
+                })
+                .catch(() => {
+                  toast({
+                    variant: "error",
+                    title: t("toasts.create_order.payment.error"),
+                  });
                 });
-                navigate(paths.orders);
-              })
-              .catch(() => {
-                toast({
-                  variant: "error",
-                  title: t("toasts.create_order.payment.error"),
+            } else if (role === roles.manager && project_id) {
+              approveProject({ project_id: project_id })
+                .unwrap()
+                .then(() => {
+                  toast({
+                    variant: "success",
+                    title: t("toasts.create_order.payment.success"),
+                  });
+                  navigate(paths.orders);
+                })
+                .catch(() => {
+                  toast({
+                    variant: "error",
+                    title: t("toasts.create_order.payment.error"),
+                  });
                 });
-              });
+            }
           })
           .catch(() => {
             toast({
@@ -329,14 +401,22 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
           register={register}
           getValues={getValues}
         />
-        {isOrdersLoading ? (
+        {isOrdersLoading ||
+        isManagerOrdersLoading ||
+        isManagerOrdersLoadingRereview ||
+        isPostsLoadingRereview ? (
           <div className="h-[80svh] w-full backdrop-blur-3xl flex justify-center items-center">
             <SpinnerLoader />
           </div>
         ) : (
           <>
             <CreateOrderPost
-              cards={projectChannels?.orders || []}
+              cards={
+                advOrders?.orders ||
+                managerOrders?.orders ||
+                managerOrdersReview?.orders ||
+                []
+              }
               isBlur={blur.post}
               onChangeBlur={handleOnChangeBlur}
               setValue={setValue}
@@ -344,7 +424,12 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
               formState={formState}
             />
             <CreateOrderDatetime
-              cards={projectChannels?.orders || []}
+              cards={
+                advOrders?.orders ||
+                managerOrders?.orders ||
+                managerOrdersReview?.orders ||
+                []
+              }
               isBlur={blur.datetime}
               onChangeBlur={handleOnChangeBlur}
               setValue={setValue}

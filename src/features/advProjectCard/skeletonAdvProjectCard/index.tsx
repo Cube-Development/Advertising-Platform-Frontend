@@ -37,7 +37,7 @@ export const SkeletonAdvProjectCard: FC<SkeletonAdvProjectCardProps> = () => {
             </div>
 
             {typeFilter === projectTypesFilter.managerProject &&
-            statusFilter === advManagerProjectStatusFilter.agreed ? (
+            statusFilter === advManagerProjectStatusFilter.request_approve ? (
               <Skeleton className="w-full h-full rounded-[8px]" />
             ) : typeFilter === projectTypesFilter.myProject &&
               statusFilter === myProjectStatusFilter.completed ? (

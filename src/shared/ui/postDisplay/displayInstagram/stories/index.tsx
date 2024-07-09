@@ -2,15 +2,10 @@ import { FC } from "react";
 import styles from "./styles.module.scss";
 import { ICreatePostForm } from "@shared/types/createPost";
 import { EmptyPost } from "./emptyPost";
-import { InstagramMedia } from "./instagramMedia";
-import { InstagramFile } from "./instagramFile";
-import { InstagramComment } from "./instagramComment";
-import { ChevronLeft, Heart, MessageCircle, Send } from "lucide-react";
-import { AvatarIcon, SaveIcon } from "./assets";
-import { HomeIcon } from "./assets";
-import { MarketIcon } from "./assets";
-import { ReelsIcon } from "./assets";
-import { SearchIcon } from "./assets";
+import { InstagramMedia } from "./media";
+import { InstagramFile } from "./file";
+import { InstagramComment } from "./comment";
+import { Heart, Send } from "lucide-react";
 import { EyeDisabledIcon } from "@shared/assets/icons/eyeDisabled";
 import { GetPostRes } from "@shared/store/services/getPostService";
 import { ContentType } from "@shared/config/createPostData";
@@ -50,10 +45,11 @@ export const DisplayStories: FC<DisplayStoriesProps> = ({
     : [];
   const mediaRes = [...photosRes, ...videosRes];
   const textRes = post && post.text;
-  const fileRes = post && {
-    content_type: ContentType.file,
-    content: post.files[0],
-  };
+  const fileRes = post &&
+    post?.files.length > 0 && {
+      content_type: ContentType.file,
+      content: post.files[0],
+    };
   const commentRes = post && post.comment;
 
   // postFromData
@@ -94,24 +90,26 @@ export const DisplayStories: FC<DisplayStoriesProps> = ({
           className={styles.dynamic}
           src="/images/phoneDisplay/dynamic.png"
         />
-        <div className={styles.header}>
-          <ChevronLeft />
-          <div className={styles.channel}>
-            <p className={styles.channel__name}>Channel name</p>
-            <p className={styles.channel__posts}>Posts</p>
-          </div>
-          <div className={styles.subscribe}>Subscribe</div>
-        </div>
         <img
           className={styles.mockup}
           src="/images/phoneDisplay/iphonescreen.png"
         />
         <div className={styles.footer}>
-          <HomeIcon />
-          <SearchIcon />
-          <ReelsIcon />
-          <MarketIcon />
-          <AvatarIcon />
+          <p className={styles.footer__send_msg}>Send message...</p>
+          <div className={styles.footer__icons}>
+            <Heart
+              strokeWidth="1.5px"
+              stroke="#fff"
+              width="18px"
+              height="18px"
+            />
+            <Send
+              strokeWidth="1.5px"
+              stroke="#fff"
+              width="18px"
+              height="18px"
+            />
+          </div>
         </div>
         {formState ? (
           <div className={styles.display}>
@@ -124,15 +122,7 @@ export const DisplayStories: FC<DisplayStoriesProps> = ({
                   <div className={styles.head}>
                     <div className={styles.account}>
                       <div className={styles.account__avatar}></div>
-                      <div className={styles.account__name}>
-                        <p className={styles.name}>Channel</p>
-                        <p className={styles.category}>Category</p>
-                      </div>
-                    </div>
-                    <div className={styles.head__more}>
-                      <span></span>
-                      <span></span>
-                      <span></span>
+                      <p className={styles.account__name}>Channel</p>
                     </div>
                   </div>
                   {postMedia && postMedia?.length > 0 ? (
@@ -143,30 +133,6 @@ export const DisplayStories: FC<DisplayStoriesProps> = ({
                       <p>No content yet...</p>
                     </div>
                   )}
-                  <div className={styles.post__footer}>
-                    <div className={styles.left}>
-                      <Heart
-                        strokeWidth="1.5px"
-                        stroke="#fff"
-                        width="22px"
-                        height="22px"
-                      />
-                      <MessageCircle
-                        strokeWidth="1.5px"
-                        stroke="#fff"
-                        width="22px"
-                        height="22px"
-                      />
-                      <Send
-                        strokeWidth="1.5px"
-                        stroke="#fff"
-                        width="20px"
-                        height="20px"
-                      />
-                    </div>
-                    <SaveIcon />
-                  </div>
-                  <p className={styles.post__likes}>893 likes</p>
                   {postText && (
                     <div
                       dangerouslySetInnerHTML={{
@@ -175,12 +141,6 @@ export const DisplayStories: FC<DisplayStoriesProps> = ({
                       className={styles.post__text}
                     />
                   )}
-                  <div className={styles.post__info}>
-                    <p className={styles.show__comments}>
-                      Show all comments (189)
-                    </p>
-                    <p className={styles.date}>Now •</p>
-                  </div>
                 </div>
                 {postFile?.length && <InstagramFile file={postFile[0]} />}
                 {postComment && <InstagramComment comment={postComment} />}
@@ -201,15 +161,7 @@ export const DisplayStories: FC<DisplayStoriesProps> = ({
                   <div className={styles.head}>
                     <div className={styles.account}>
                       <div className={styles.account__avatar}></div>
-                      <div className={styles.account__name}>
-                        <p className={styles.name}>Channel</p>
-                        <p className={styles.category}>Category</p>
-                      </div>
-                    </div>
-                    <div className={styles.head__more}>
-                      <span></span>
-                      <span></span>
-                      <span></span>
+                      <p className={styles.account__name}>Channel</p>
                     </div>
                   </div>
                   {mediaRes && mediaRes?.length > 0 ? (
@@ -220,30 +172,6 @@ export const DisplayStories: FC<DisplayStoriesProps> = ({
                       <p>No content yet...</p>
                     </div>
                   )}
-                  <div className={styles.post__footer}>
-                    <div className={styles.left}>
-                      <Heart
-                        strokeWidth="1.5px"
-                        stroke="#fff"
-                        width="22px"
-                        height="22px"
-                      />
-                      <MessageCircle
-                        strokeWidth="1.5px"
-                        stroke="#fff"
-                        width="22px"
-                        height="22px"
-                      />
-                      <Send
-                        strokeWidth="1.5px"
-                        stroke="#fff"
-                        width="20px"
-                        height="20px"
-                      />
-                    </div>
-                    <SaveIcon />
-                  </div>
-                  <p className={styles.post__likes}>893 likes</p>
                   {textRes && (
                     <div
                       dangerouslySetInnerHTML={{
@@ -252,12 +180,6 @@ export const DisplayStories: FC<DisplayStoriesProps> = ({
                       className={styles.post__text}
                     />
                   )}
-                  <div className={styles.post__info}>
-                    <p className={styles.show__comments}>
-                      Show all comments (189)
-                    </p>
-                    <p className={styles.date}>Now •</p>
-                  </div>
                 </div>
                 {fileRes && <InstagramFile file={fileRes} />}
                 {commentRes && <InstagramComment comment={commentRes} />}

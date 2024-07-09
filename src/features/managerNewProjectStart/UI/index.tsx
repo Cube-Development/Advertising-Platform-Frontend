@@ -16,12 +16,12 @@ export const ManagerNewProjectStart: FC<ManagerNewProjectStartProps> = ({
 }) => {
   const { t } = useTranslation();
   const handleOnClick = () => {
-    Cookies.set("manager_project_id", project_id);
+    Cookies.set("project_id", project_id);
   };
 
   return (
-    <Link to={paths.catalog} className={styles.wrapper}>
-      <MyButton className={styles.button} onClick={handleOnClick}>
+    <Link to={paths.catalog} className={styles.wrapper} onClick={handleOnClick}>
+      <MyButton className={styles.button}>
         <p>{t("orders_manager.card.start_btn")}</p>
         <ArrowLongHorizontalIcon className="default__icon__white" />
       </MyButton>

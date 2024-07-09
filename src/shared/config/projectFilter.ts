@@ -12,13 +12,13 @@ export enum myProjectStatusFilter {
 export enum advManagerProjectStatusFilter {
   active = "active",
   develop = "new",
-  agreed = "request_approve",
+  request_approve = "request_approve",
   completed = "completed",
 }
 
 export enum managerProjectStatusFilter {
   active = "active",
-  agreed = "request_approve",
+  request_approve = "request_approve",
   new = "new",
   completed = "completed",
 }
@@ -45,7 +45,7 @@ export const advManagerProjectStatus = [
   },
   {
     name: "orders_advertiser.status_filter.agreed",
-    type: advManagerProjectStatusFilter.agreed,
+    type: advManagerProjectStatusFilter.request_approve,
   },
   {
     name: "orders_advertiser.status_filter.complite",
@@ -60,7 +60,7 @@ export const managerProjectStatus = [
   },
   {
     name: "orders_manager.status_filter.agreed",
-    type: managerProjectStatusFilter.agreed,
+    type: managerProjectStatusFilter.request_approve,
   },
   {
     name: "orders_manager.status_filter.new",

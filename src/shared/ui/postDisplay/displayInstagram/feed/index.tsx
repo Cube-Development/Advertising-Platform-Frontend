@@ -2,15 +2,18 @@ import { FC } from "react";
 import styles from "./styles.module.scss";
 import { ICreatePostForm } from "@shared/types/createPost";
 import { EmptyPost } from "./emptyPost";
-import { InstagramMedia } from "./instagramMedia";
-import { InstagramFile } from "./instagramFile";
-import { InstagramComment } from "./instagramComment";
+import { InstagramMedia } from "./media";
+import { InstagramFile } from "./file";
+import { InstagramComment } from "./comment";
 import { ChevronLeft, Heart, MessageCircle, Send } from "lucide-react";
-import { AvatarIcon, SaveIcon } from "./assets";
-import { HomeIcon } from "./assets";
-import { MarketIcon } from "./assets";
-import { ReelsIcon } from "./assets";
-import { SearchIcon } from "./assets";
+import {
+  AvatarIcon,
+  SaveIcon,
+  HomeIcon,
+  MarketIcon,
+  ReelsIcon,
+  SearchIcon,
+} from "./assets";
 import { EyeDisabledIcon } from "@shared/assets/icons/eyeDisabled";
 import { GetPostRes } from "@shared/store/services/getPostService";
 import { ContentType } from "@shared/config/createPostData";
@@ -50,10 +53,11 @@ export const DisplayFeed: FC<DisplayFeedProps> = ({
     : [];
   const mediaRes = [...photosRes, ...videosRes];
   const textRes = post && post.text;
-  const fileRes = post && {
-    content_type: ContentType.file,
-    content: post.files[0],
-  };
+  const fileRes = post &&
+    post?.files.length > 0 && {
+      content_type: ContentType.file,
+      content: post.files[0],
+    };
   const commentRes = post && post.comment;
 
   // postFromData

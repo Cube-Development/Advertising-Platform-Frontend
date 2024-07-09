@@ -86,8 +86,6 @@ export const Editor: FC<EditorProps> = ({
               item?.post_type !== formState?.selectedPostType),
         ) || [];
 
-    console.log(posts);
-
     const currentPost = formState?.selectedMultiPostId
       ? formState?.multiposts?.find(
           (item) => item?.order_id === formState?.selectedMultiPostId,

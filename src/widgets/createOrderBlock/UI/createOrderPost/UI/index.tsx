@@ -25,8 +25,10 @@ import { ContinueOrder } from "@features/continueOrder";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import {
   DisplayFeed,
+  DisplayShorts,
   DisplayStories,
   DisplayTelegram,
+  DisplayVideos,
 } from "@shared/ui/postDisplay";
 import clsx from "clsx";
 import { MultiPostsList } from "../multiPostsList";
@@ -54,11 +56,33 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
 
   // сразу сохраняем все ордеры в форму posts с учетом платформы и post_type
   useEffect(() => {
+    const allPostsUniversal = cards.reduce(
+      (
+        acc: { platform: platformTypesNum; post_type: PostTypesNum }[],
+        card,
+      ) => {
+        const exists = acc.find(
+          (post) =>
+            post?.platform === card?.platform &&
+            post?.post_type === card?.post_type,
+        );
+        if (!exists) {
+          acc.push({
+            platform: card?.platform,
+            post_type: card?.post_type,
+          });
+        }
+        return acc;
+      },
+      [],
+    );
+    setValue("posts", allPostsUniversal);
     const allPosts = cards.map((card) => ({
-      platform: card.platform,
-      post_type: card.post_type,
+      platform: card?.platform,
+      post_type: card?.post_type,
+      order_id: card?.id,
     }));
-    setValue("posts", allPosts);
+    setValue("multiposts", allPosts);
   }, []);
 
   const platformIds: number[] = [
@@ -101,11 +125,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
   };
 
   return (
-    <div
-      onClick={() => console.log(formState)}
-      id="post"
-      className={`container ${isBlur ? "blur" : ""}`}
-    >
+    <div id="post" className={`container ${isBlur ? "blur" : ""}`}>
       <div className={styles.wrapper}>
         <div className={styles.content}>
           <div className={styles.top}>
@@ -228,6 +248,24 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                       formState={formState}
                       platformId={selectedPlatform.id}
                       postType={PostTypesNum.FullHd_vertical}
+                    />
+                  )}
+                {selectedPlatform.type === platformTypesStr.youtube &&
+                  formState.selectedPostType ===
+                    PostTypesNum.FullHd_vertical && (
+                    <DisplayShorts
+                      formState={formState}
+                      platformId={selectedPlatform.id}
+                      postType={PostTypesNum.FullHd_vertical}
+                    />
+                  )}
+                {selectedPlatform.type === platformTypesStr.youtube &&
+                  formState.selectedPostType ===
+                    PostTypesNum.FullHd_horizontal && (
+                    <DisplayVideos
+                      formState={formState}
+                      platformId={selectedPlatform.id}
+                      postType={PostTypesNum.FullHd_horizontal}
                     />
                   )}
                 <div className={styles.continue}>

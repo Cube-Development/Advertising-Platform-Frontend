@@ -9,6 +9,7 @@ import {
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 
 interface ManagerNewProjectCardProps {
   card: IManagerNewProjectCard;
@@ -22,6 +23,7 @@ export const ManagerNewProjectCard: FC<ManagerNewProjectCardProps> = ({
   SendToBotBtn,
 }) => {
   const { t } = useTranslation();
+  const { toast } = useToast();
   const [isSubcardOpen, setSubcardOpen] = useState(false);
   const handleChangeOpenSubcard = (): void => {
     setSubcardOpen(!isSubcardOpen);
@@ -45,26 +47,34 @@ export const ManagerNewProjectCard: FC<ManagerNewProjectCardProps> = ({
     };
   }, []);
 
+  const handleCopyLink = (link: string) => {
+    navigator.clipboard.writeText(link);
+    toast({
+      variant: "default",
+      title: "Скопировано",
+    });
+  };
+
   return (
     <div className={`${styles.wrapper} border__gradient`}>
       <div className={styles.card}>
         <div className={styles.card__id}>
-          <p>№ {card.id}</p>
+          <p>№ {card?.id}</p>
         </div>
         <div className={styles.card__date}>
-          <p>{card.tariff_date}</p>
+          <p>{card?.tariff_date}</p>
         </div>
         <div className={styles.card__tarif}>
           <p>{t("orders_manager.card.tarif")}:</p>
-          <span>{card.tariff_name}</span>
+          <span>{card?.tariff_name}</span>
         </div>
         <div className={styles.card__price}>
           <p>{t("orders_manager.card.cost")}:</p>
           <span>
-            {card.budget.toLocaleString()} {t("symbol")}
+            {card?.budget?.toLocaleString()} {t("symbol")}
           </span>
         </div>
-        <ManagerNewProjectStartBtn project_id={card.project_id} />
+        <ManagerNewProjectStartBtn project_id={card?.project_id} />
         <MoreIcon />
       </div>
 
@@ -74,15 +84,19 @@ export const ManagerNewProjectCard: FC<ManagerNewProjectCardProps> = ({
             <div className={styles.subcard__left}>
               <div className={styles.comment}>
                 <p>{t("orders_manager.subcard.comment")}</p>
-                <span>{card.comment}</span>
+                <span>{card?.comment}</span>
               </div>
               <div className={styles.link}>
                 <p>{t("orders_manager.subcard.link")}</p>
                 <ul>
-                  {card.links.map((link, index) => (
+                  {card?.links?.map((link, index) => (
                     <li key={index}>
-                      <span>{link}</span>
-                      <CopyIcon />
+                      <a href={link} target="_blank" rel="noopener noreferrer">
+                        {link}
+                      </a>
+                      <button onClick={() => handleCopyLink(link)}>
+                        <CopyIcon />
+                      </button>
                     </li>
                   ))}
                 </ul>

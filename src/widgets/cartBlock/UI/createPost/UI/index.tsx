@@ -12,6 +12,8 @@ import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.scss";
+import { roles } from "@shared/config/roles";
+import { useCreateProjectCartMutation } from "@shared/store/services/managerOrdersService";
 
 interface CreatePostProps {
   cart: ICart;
@@ -48,11 +50,13 @@ export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
   // cost = Math.round(cost * (1 + CART.commission / 100));
 
   const { isAuth } = useAppSelector((state) => state.user);
+  const role = Cookies.get("role");
   const navigate = useNavigate();
   const [createCart] = useCreateCartMutation();
+  const [createProjectCart] = useCreateProjectCartMutation();
 
   const handleCreateCart = () => {
-    if (isAuth) {
+    if (isAuth && role === roles.advertiser) {
       createCart()
         .unwrap()
         .then((data) => {
@@ -68,12 +72,27 @@ export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
           });
           // alert("У вас недостаточно средств, нужно пополнить баланс");
         });
-    } else {
+    } else if (!isAuth) {
       toast({
         variant: "error",
         title: t("toasts.auth.token.alert"),
       });
       // alert("Нужно авторизоваться чтобы продолжить");
+    } else {
+      createProjectCart({ project_id: Cookies.get("project_id")! })
+        .unwrap()
+        .then((data) => {
+          navigate(paths.createOrder);
+        })
+        .catch((error) => {
+          console.error("Ошибка во время создания корзины", error);
+          toast({
+            variant: "error",
+            title: t("toasts.cart.error"),
+            action: <ToastAction altText="Ok">Ok</ToastAction>,
+          });
+          // alert("У вас недостаточно средств, нужно пополнить баланс");
+        });
     }
   };
 

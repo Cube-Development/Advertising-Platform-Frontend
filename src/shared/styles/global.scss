@@ -353,8 +353,8 @@ main {
 
 .deactive {
   pointer-events: none;
-  // background: var(--Inside-container);
-  // filter: grayscale(100%);
+  background: var(--Inside-container);
+  filter: grayscale(100%);
 }
 
 // .swiper-wrapper{

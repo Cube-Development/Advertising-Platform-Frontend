@@ -35,22 +35,31 @@ export const ManagerOrdersBlock: FC = () => {
   const getParams: getProjectsCardReq = {
     language: 1,
     page: currentPage,
-    // date_sort: "increase",
     status: statusFilter,
-    elements_on_page: INTERSECTION_ELEMENTS.orders,
+    elements_on_page: INTERSECTION_ELEMENTS.managerOrders,
   };
 
   const { data, isFetching } = useGetManagerProjectsQuery(getParams);
-  const [tariffs, setTariffs] = useState<IManagerNewProjectCard[]>(
-    data?.tariffs ? (data?.tariffs as IManagerNewProjectCard[]) : [],
-  );
+  const [tariffs, setTariffs] = useState<
+    IManagerNewProjectCard[] | IManagerProjectCard[]
+  >(data ? data.projects : []);
 
   useEffect(() => {
-    console.log(data);
+    console.log(data, currentPage, statusFilter);
     if (data && currentPage !== 1) {
-      setTariffs([...tariffs, ...(data.tariffs as IManagerNewProjectCard[])]);
+      if (statusFilter === managerProjectStatusFilter.new) {
+        setTariffs([
+          ...(tariffs as IManagerNewProjectCard[]),
+          ...(data.projects as IManagerNewProjectCard[]),
+        ]);
+      } else {
+        setTariffs([
+          ...(tariffs as IManagerProjectCard[]),
+          ...(data.projects as IManagerProjectCard[]),
+        ]);
+      }
     } else {
-      data && setTariffs(data.tariffs as IManagerNewProjectCard[]);
+      data && setTariffs(data.projects);
     }
   }, [data]);
 
@@ -68,15 +77,30 @@ export const ManagerOrdersBlock: FC = () => {
   //         ? managerAgreedCARDS
   //         : managerNewCARDS;
   // //  *****************
-
   return (
     <>
       <BarFilter page={page} listLength={!!tariffs?.length} />
-      {/* {statusFilter === managerProjectStatusFilter.new ? ( */}
-      <ManagerNewProject projects={tariffs! as IManagerNewProjectCard[]} />
-      {/* ) : ( */}
-      {/* <ManagerProject projects={tariffs! as IManagerProjectCard[]} /> */}
-      {/* )} */}
+      {statusFilter === managerProjectStatusFilter.new ? (
+        <ManagerNewProject
+          projects={tariffs! as IManagerNewProjectCard[]}
+          handleOnChangePage={handleOnChangePage}
+          isLoading={isFetching}
+          isNotEmpty={
+            data?.projects?.length === INTERSECTION_ELEMENTS.managerOrders ||
+            false
+          }
+        />
+      ) : (
+        <ManagerProject
+          projects={tariffs! as IManagerProjectCard[]}
+          handleOnChangePage={handleOnChangePage}
+          isLoading={isFetching}
+          isNotEmpty={
+            data?.projects?.length === INTERSECTION_ELEMENTS.managerOrders ||
+            false
+          }
+        />
+      )}
     </>
   );
 };

@@ -15,6 +15,7 @@ import { FC } from "react";
 import { UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { platformTypesNum } from "@shared/config/platformTypes";
 
 interface PostFilesProps {
   AddMediaFiles: FC<FileProps>;
@@ -64,7 +65,9 @@ export const PostFiles: FC<PostFilesProps> = ({
           post_type: formState?.selectedPostType,
         };
     if (currentPost) {
-      currentPost.media = [...mediafiles];
+      platformId !== platformTypesNum.youtube
+        ? (currentPost.media = [...mediafiles])
+        : (currentPost.media = mediafiles.length > 0 ? [mediafiles[0]] : []);
       setValue(type, [...posts, currentPost]);
     }
   };

@@ -71,10 +71,29 @@ export const checkPosts = (
       ) {
         changeSelectedPlatform(nextPlatform);
       } else {
-        if (!formState) {
-          console.log(
-            "надо дописать проверку на заполненость всех постов этой платформы с этим post_type исходя из orders и добавить вызов функци changeSelectedOrder",
-          );
+        const selectedPostTypePosts = formState?.multiposts?.filter(
+          (post) =>
+            post?.post_type === formState?.selectedPostType &&
+            post?.platform === selectedPlatform?.id,
+        );
+        const validSelectedPostTypePosts = selectedPostTypePosts?.filter(
+          (post) =>
+            post.comment !== undefined ||
+            post.media !== undefined ||
+            post.files !== undefined ||
+            post.buttons !== undefined ||
+            post.text !== undefined ||
+            post.content !== undefined,
+        );
+        const nextPost = selectedPostTypePosts?.find(
+          (post) => post?.order_id !== formState?.selectedMultiPostId,
+        );
+        if (
+          selectedPostTypePosts?.length !==
+            validSelectedPostTypePosts?.length &&
+          nextPost?.order_id
+        ) {
+          changeSelectedOrder(nextPost?.order_id);
         } else {
           const currentPostFormats = postFormats.find(
             (format) => format.platform === selectedPlatform.id,

@@ -36,7 +36,7 @@ export const CartBlock: FC = () => {
 
   const guestId = Cookies.get("guest_id");
   const role = Cookies.get("role");
-  const managerProjectId = Cookies.get("manager_project_id");
+  const projectId = Cookies.get("project_id");
 
   if (!guestId) {
     GenerateGuestId();
@@ -55,11 +55,11 @@ export const CartBlock: FC = () => {
   const { data: cartManager, isLoading: isLoadingManager } =
     useReadManagerCartQuery(
       {
-        project_id: managerProjectId,
+        project_id: projectId,
         language: language?.id || Languages[0].id,
       },
       {
-        skip: !isAuth || role !== roles.manager || !managerProjectId,
+        skip: !isAuth || role !== roles.manager || !projectId,
       },
     );
 
@@ -156,8 +156,8 @@ export const CartBlock: FC = () => {
               });
               console.error("Ошибка при удалении с корзины", error);
             });
-        } else if (isAuth && role === roles.manager && managerProjectId) {
-          removeFromManagerCart({ ...removeReq, project_id: managerProjectId })
+        } else if (isAuth && role === roles.manager && projectId) {
+          removeFromManagerCart({ ...removeReq, project_id: projectId })
             .unwrap()
             .then((data) => {
               setCurrentCart(data);
@@ -204,8 +204,8 @@ export const CartBlock: FC = () => {
               console.error("Ошибка при добавлении в корзину", error);
             });
         }
-      } else if (isAuth && role === roles.manager && managerProjectId) {
-        addToManagerCart({ ...addReq, project_id: managerProjectId })
+      } else if (isAuth && role === roles.manager && projectId) {
+        addToManagerCart({ ...addReq, project_id: projectId })
           .unwrap()
           .then((data) => {
             setCurrentCart(data);

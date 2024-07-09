@@ -3,9 +3,9 @@ import styles from "./styles.module.scss";
 import { ICreatePostForm } from "@shared/types/createPost";
 import { EmptyPost } from "./emptyPost";
 import { EyeIcon } from "@shared/assets";
-import { TelegramMedia } from "./telegramMedia";
-import { TelegramFile } from "./telegramFile";
-import { TelegramComment } from "./telegramComment";
+import { TelegramMedia } from "./media";
+import { TelegramFile } from "./file";
+import { TelegramComment } from "./comment";
 import { ContentType } from "@shared/config/createPostData";
 import { GetPostRes } from "@shared/store/services/getPostService";
 
@@ -41,10 +41,11 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
     : [];
   const mediaRes = [...photosRes, ...videosRes];
   const textRes = post && post?.text;
-  const fileRes = post && {
-    content_type: ContentType.file,
-    content: post.files[0],
-  };
+  const fileRes = post &&
+    post?.files.length > 0 && {
+      content_type: ContentType.file,
+      content: post.files[0],
+    };
   const buttonsRes = post && [
     ...post.buttons.map((btn) => ({
       content_type: ContentType.button,
