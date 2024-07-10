@@ -14,7 +14,7 @@ import {
   IOrderFeature,
   managerProjectStatusFilter,
 } from "@entities/project";
-import { orderStatus, orderStatusChat } from "@entities/order/config";
+import { orderStatus, orderStatusChat } from "@entities/order";
 import { useAppSelector } from "@shared/hooks";
 
 interface ManagerSubcardProps {

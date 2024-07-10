@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
-import { ILegalCardShort } from "@entities/wallet/types";
+import { ILegalCardShort } from "@entities/wallet";
 import { SpinnerLoaderSmall } from "@shared/ui";
 
 interface LegalCardProps {

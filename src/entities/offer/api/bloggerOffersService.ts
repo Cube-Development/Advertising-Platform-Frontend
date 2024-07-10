@@ -1,9 +1,8 @@
 import { IBloggerOffers, offerStatusFilter } from "@entities/offer";
 import { platformTypesNum } from "@entities/platform";
 import { IOrderFeature } from "@entities/project";
-import { authApi } from "@shared/api";
-import { ADV_PROJECTS, BLOGGER_OFFERS } from "@shared/api/tags";
-import { languagesNum } from "@shared/config/languages";
+import { authApi, ADV_PROJECTS, BLOGGER_OFFERS } from "@shared/api";
+import { languagesNum } from "@shared/config";
 
 interface OrderDate {
   date: string;

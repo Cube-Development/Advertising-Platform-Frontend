@@ -1,7 +1,6 @@
 import { IWalletHistory, paymentTypes } from "@entities/wallet";
-import { authApi } from "@shared/api";
-import { ADV_PROJECTS, BALANCE, LEGALS } from "@shared/api/tags";
-import { languagesNum } from "@shared/config/languages";
+import { ADV_PROJECTS, BALANCE, LEGALS, authApi } from "@shared/api";
+import { languagesNum } from "@shared/config";
 
 type PaymentOrderResponse = {
   success: boolean;

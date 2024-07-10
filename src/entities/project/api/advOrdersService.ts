@@ -6,9 +6,8 @@ import {
   IFile,
   IPostChannel,
 } from "@entities/project";
-import { authApi } from "@shared/api";
-import { ADV_PROJECTS, BLOGGER_OFFERS } from "@shared/api/tags";
-import { languagesNum } from "@shared/config/languages";
+import { ADV_PROJECTS, BLOGGER_OFFERS, authApi } from "@shared/api";
+import { languagesNum } from "@shared/config";
 
 export interface ICreatePostReq {
   project_id: string;

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { MoreIcon } from "@shared/assets";
-import { IWalletHistory } from "@entities/wallet/types";
+import { IWalletHistory } from "@entities/wallet";
 
 interface HistoryCardProps {
   card: IWalletHistory;

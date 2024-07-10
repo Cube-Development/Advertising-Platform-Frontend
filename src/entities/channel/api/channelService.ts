@@ -1,5 +1,5 @@
 import { BLOGGER_CHANNELS, authApi } from "@shared/api";
-import { languagesNum } from "@shared/config/languages";
+import { languagesNum } from "@shared/config";
 import { platformTypesNum } from "@entities/platform";
 import {
   IActiveChannelBlogger,

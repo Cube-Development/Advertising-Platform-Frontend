@@ -4,8 +4,7 @@ import {
   ILegalData,
   profileTypesNum,
 } from "@entities/wallet";
-import { authApi } from "@shared/api";
-import { LEGALS } from "@shared/api/tags";
+import { authApi, LEGALS } from "@shared/api";
 
 type DeleteLegalResponse = {
   success?: boolean;

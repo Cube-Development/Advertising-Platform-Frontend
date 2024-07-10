@@ -3,8 +3,7 @@ import {
   IOrderMessageNewSocket,
 } from "@entities/communication";
 import { roles } from "@entities/user";
-import { authApi } from "@shared/api";
-import { CHAT } from "@shared/api/tags";
+import { authApi, CHAT } from "@shared/api";
 
 export interface getChatsReq {
   role: roles;
