@@ -44,7 +44,7 @@ interface AdvProjectSubcardProps {
   RejectBtn: FC<IOrderFeature>;
   CheckBtn: FC<IOrderFeature>;
   SeeBtn: FC;
-  ChangeChannelBtn: FC;
+  // ChangeChannelBtn: FC;
   ChannelChatBtn: FC<IChannelChat>;
 }
 
@@ -56,7 +56,7 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
   CheckBtn,
   SeeBtn,
   ChannelChatBtn,
-  ChangeChannelBtn,
+  // ChangeChannelBtn,
 }) => {
   const { t } = useTranslation();
   const { toast } = useToast();
@@ -338,7 +338,7 @@ export const AdvProjectSubcard: FC<AdvProjectSubcardProps> = ({
             <div>
               <p>{t(`orders_advertiser.order_status.agreed.title`)}</p>
               <div>
-                <ChangeChannelBtn />
+                {/* <ChangeChannelBtn /> */}
                 <CheckBtn />
               </div>
             </div>

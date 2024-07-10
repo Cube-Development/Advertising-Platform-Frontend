@@ -17,6 +17,8 @@ import { IManagerProjectCard } from "@shared/types/managerProject";
 import { SpinnerLoader } from "@shared/ui/spinnerLoader";
 import { FC } from "react";
 import styles from "./styles.module.scss";
+import { ChangePost } from "@features/changePost";
+import { SeeComment } from "@features/seeComment";
 
 interface ManagerProjectProps {
   projects: IManagerProjectCard[];
@@ -55,6 +57,8 @@ export const ManagerProject: FC<ManagerProjectProps> = ({
                   ChannelChatBtn={ChannelChat}
                   ManagerProjectRunBtn={ManagerProjectRun}
                   ChangeChannelBtn={ChangeChannel}
+                  ChangePostBtn={ChangePost}
+                  SeeCommentBtn={SeeComment}
                   DownloadReportBtn={DownloadReport}
                 />
               ))}

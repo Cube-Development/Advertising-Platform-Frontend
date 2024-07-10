@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
 
-export const ChangeChannel: FC<{ project_id: string }> = ({ project_id }) => {
+export const ChangePost: FC<{ project_id: string }> = ({ project_id }) => {
   const { t } = useTranslation();
 
   const handleOnClick = () => {
@@ -17,7 +17,7 @@ export const ChangeChannel: FC<{ project_id: string }> = ({ project_id }) => {
   return (
     <Link to={paths.cart} onClick={handleOnClick}>
       <MyButton buttons_type="button__white" className={styles.button}>
-        {t(`order_btn.changeChannel`)}
+        {t(`order_btn.changePost`)}
       </MyButton>
     </Link>
   );

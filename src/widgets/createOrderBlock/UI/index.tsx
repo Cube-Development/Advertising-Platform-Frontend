@@ -47,13 +47,23 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
 
   const role = Cookies.get("role");
   const project_id = Cookies.get("project_id");
-  const rereview = Cookies.get("rereview");
+  const rereview = Boolean(Cookies.get("rereview"));
 
   const [blur, setBlur] = useState<ICreateOrderBlur>({
     post: true,
     datetime: true,
     payment: true,
   });
+
+  useEffect(() => {
+    if (project_id !== undefined && rereview) {
+      setBlur({
+        post: false,
+        datetime: false,
+        payment: false,
+      });
+    }
+  }, [project_id, rereview]);
 
   const handleOnChangeBlur = (key: keyof ICreateOrderBlur) => {
     const newBlur = { ...blur };

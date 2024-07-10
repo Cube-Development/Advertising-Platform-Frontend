@@ -36,7 +36,9 @@ interface ManagerProjectCardProps {
   CheckBtn: FC;
   SeeBtn: FC;
   ChannelChatBtn: FC<IChannelChat>;
-  ChangeChannelBtn: FC;
+  ChangeChannelBtn: FC<{ project_id: string }>;
+  ChangePostBtn: FC<{ project_id: string }>;
+  SeeCommentBtn: FC;
   ManagerProjectRunBtn: FC<{ is_request_approve: boolean }>;
   DownloadReportBtn: FC;
 }
@@ -51,6 +53,8 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
   SeeBtn,
   ChannelChatBtn,
   ChangeChannelBtn,
+  ChangePostBtn,
+  SeeCommentBtn,
   DownloadReportBtn,
 }) => {
   const [isSubcardOpen, setSubcardOpen] = useState(false);
@@ -248,6 +252,7 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
             {subcard?.orders.map((subcard, index) => (
               <ManagerProjectSubcard
                 key={index}
+                project_id={card.project_id}
                 subcard={subcard}
                 FeedbackBtn={FeedbackBtn}
                 AcceptBtn={AcceptBtn}
@@ -256,6 +261,8 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
                 SeePostBtn={SeeBtn}
                 ChannelChatBtn={ChannelChatBtn}
                 ChangeChannelBtn={ChangeChannelBtn}
+                ChangePostBtn={ChangePostBtn}
+                SeeCommentBtn={SeeCommentBtn}
               />
             ))}
           </div>

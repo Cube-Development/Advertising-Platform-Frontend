@@ -44,7 +44,7 @@ interface AdvProjectCardProps {
   CheckBtn: FC<IOrderFeature>;
   SeeBtn: FC;
   ChannelChatBtn: FC<IChannelChat>;
-  ChangeChannelBtn: FC;
+  // ChangeChannelBtn: FC;
 }
 
 export const AdvProjectCard: FC<AdvProjectCardProps> = ({
@@ -56,7 +56,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
   CheckBtn,
   SeeBtn,
   ChannelChatBtn,
-  ChangeChannelBtn,
+  // ChangeChannelBtn,
 }) => {
   const [isSubcardOpen, setSubcardOpen] = useState(false);
   const { typeFilter, statusFilter } = useAppSelector((state) => state.filter);
@@ -232,7 +232,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
                   CheckBtn={CheckBtn}
                   SeeBtn={SeeBtn}
                   ChannelChatBtn={ChannelChatBtn}
-                  ChangeChannelBtn={ChangeChannelBtn}
+                  // ChangeChannelBtn={ChangeChannelBtn}
                 />
               ),
             )}

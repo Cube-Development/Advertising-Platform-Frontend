@@ -1,4 +1,4 @@
-import { orderStatus } from "@shared/config/orderFilter";
+import { desireStatus, orderStatus } from "@shared/config/orderFilter";
 
 export interface IManagerProjects {
   page: number;
@@ -38,14 +38,6 @@ export interface IManagerProjectCard {
   views: number;
   budget: number;
   is_request_approve?: boolean;
-
-  // id: string;
-  // created: string;
-  // tarif: string;
-  // name: string;
-  // count_channels: number;
-  // views: number;
-  // budget: number;
   completed?: number;
   canceled_rejected?: number;
   wait?: number;
@@ -84,4 +76,10 @@ export interface IManagerProjectSubcard {
   cpv: number;
   male: number;
   female: number;
+  desire?: IDesire[];
+}
+
+export interface IDesire {
+  desire_type: desireStatus;
+  comment: string;
 }

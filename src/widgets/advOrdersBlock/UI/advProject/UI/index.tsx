@@ -59,7 +59,7 @@ export const AdvProject: FC<AdvProjectProps> = ({
                   SeeBtn={SeePost}
                   ChannelChatBtn={ChannelChat}
                   AcceptProjectBtn={AcceptProject}
-                  ChangeChannelBtn={ChangeChannel}
+                  // ChangeChannelBtn={ChangeChannel}
                 />
               ))}
             {isNotEmpty && (
