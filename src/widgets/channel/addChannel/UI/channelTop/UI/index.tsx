@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { Link } from "react-router-dom";
 import { paths } from "@shared/routing";
-import { addChannelQueries } from "@shared/config/addChannelQueries";
+import { addChannelQueries } from "@entities/channel";
 
 interface ChannelTopProps {
   channel_id?: string;

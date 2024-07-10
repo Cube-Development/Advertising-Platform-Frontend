@@ -1,9 +1,8 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { ILegalCard, ILegalCardShort } from "@shared/types/profile";
 import { SadSmileIcon } from "@shared/assets";
-import { LegalCard } from "@entities/wallet";
+import { ILegalCard, ILegalCardShort, LegalCard } from "@entities/wallet";
 
 interface LegalsListProps {
   accounts: ILegalCardShort[] | undefined;

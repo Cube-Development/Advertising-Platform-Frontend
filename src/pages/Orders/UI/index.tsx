@@ -1,4 +1,4 @@
-import { roles } from "@shared/config/roles";
+import { roles } from "@entities/user";
 import { useAppSelector } from "@shared/store";
 import { AdvOrders, ManagerOrders } from "@widgets/project";
 import { FC } from "react";

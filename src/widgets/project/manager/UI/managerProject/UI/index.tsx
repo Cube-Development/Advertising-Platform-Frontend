@@ -1,11 +1,8 @@
 import { Accordion } from "@radix-ui/react-accordion";
-import {
-  IManagerProjectCard,
-  IManagerProjects,
-} from "@shared/types/managerProject";
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { ManagerProjectCard } from "../card";
+import { IManagerProjectCard } from "@entities/project";
 
 interface ManagerProjectsListProps {
   projects: IManagerProjectCard[];

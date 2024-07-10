@@ -1,17 +1,13 @@
 import { AlertDialogTrigger } from "@radix-ui/react-alert-dialog";
 import { ArrowLongHorizontalIcon, CancelIcon2, ChatIcon } from "@shared/assets";
-import { RecipientType } from "@shared/config/chat";
-import { chatFilter } from "@shared/config/chatFilter";
 import { BREAKPOINT } from "@shared/config/common";
 import { pageFilter } from "@shared/config/pageFilter";
-import { roles } from "@shared/config/roles";
 import { convertUTCToLocalDateTime } from "@shared/functions";
 import { useAppSelector } from "@shared/store";
 import {
   useGetOrderChatsQuery,
   useGetProjectChatsQuery,
 } from "@shared/store/services/chatService";
-import { IOrderMessageAll, IOrderMessageNewSocket } from "@shared/types/chat";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -31,6 +27,13 @@ import { useCentrifuge } from "./CentrifugeContext";
 import styles from "./styles.module.scss";
 import { BarProfileFilter } from "@features/other";
 import { ChatCard, ChatMessages } from "@features/communication";
+import { roles } from "@entities/user";
+import {
+  IOrderMessageAll,
+  IOrderMessageNewSocket,
+  RecipientType,
+  chatFilter,
+} from "@entities/communication";
 
 export const Chat: FC = () => {
   const { t } = useTranslation();

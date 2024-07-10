@@ -1,5 +1,4 @@
 import { ArrowIcon5 } from "@shared/assets";
-import { profileTypesName } from "@shared/config/profileFilter";
 import { useAppSelector } from "@shared/store";
 import {
   useCreateLegalMutation,
@@ -8,11 +7,6 @@ import {
   useReadOneLegalMutation,
 } from "@shared/store/services/legalService";
 import { usePaymentWithdrawalMutation } from "@shared/store/services/walletService";
-import {
-  ILegalCard,
-  ILegalCardShort,
-  IProfileData,
-} from "@shared/types/profile";
 import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
 import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import { FC, useState } from "react";
@@ -23,8 +17,14 @@ import { Guide, LegalsList, PaymentData } from "../../components";
 import { BarSubrofileFilter } from "@features/wallet";
 import { BarProfileFilter } from "@features/other";
 import { pageFilter } from "@shared/config/pageFilter";
+import {
+  ILegalCard,
+  ILegalCardShort,
+  ILegalData,
+  profileTypesName,
+} from "@entities/wallet";
 
-interface IExtendedProfileData extends IProfileData {
+interface IExtendedProfileData extends ILegalData {
   amount: number;
 }
 
@@ -69,8 +69,8 @@ export const Withdrawal: FC = () => {
         .unwrap()
         .then((data) => {
           setActiveAccount(data);
-          (Object.keys(data) as Array<keyof IProfileData>).forEach(
-            (value: keyof IProfileData) => {
+          (Object.keys(data) as Array<keyof ILegalData>).forEach(
+            (value: keyof ILegalData) => {
               setValue(value, data[value]);
             },
           );

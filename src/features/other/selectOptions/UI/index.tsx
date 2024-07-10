@@ -1,12 +1,12 @@
 import { ArrowSmallVerticalIcon, InfoIcon } from "@shared/assets";
-import { BREAKPOINT, PLATFORM_PARAMETERS } from "@shared/config/common";
-import { platformData } from "@shared/config/platformData";
-import { IOption } from "@shared/types/common";
 import { ISelectOption } from "@shared/types/translate";
 import { FC, useEffect, useRef, useState } from "react";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { BREAKPOINT } from "@shared/config";
+import { PLATFORM_PARAMETERS, channelData } from "@entities/channel";
+import { IOption } from "@shared/types/common";
 
 interface SelectOptionsProps {
   textData: string;
@@ -178,7 +178,7 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
           ${isFilter ? styles.filter : ""}  
         
           ${
-            type === platformData.category && defaultValues
+            type === channelData.category && defaultValues
               ? styles.disabled__menu
               : isMenuOpen || selectedOption || selectedOptions?.length
                 ? styles.active
@@ -215,7 +215,7 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
             <div className={isMenuOpen ? "rotate" : "rotate__down"}>
               <ArrowSmallVerticalIcon
                 className={
-                  type === platformData.category && defaultValues
+                  type === channelData.category && defaultValues
                     ? "default__icon__grey"
                     : (isMenuOpen ||
                           selectedOption ||

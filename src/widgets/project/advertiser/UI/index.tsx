@@ -2,11 +2,6 @@ import { INTERSECTION_ELEMENTS } from "@shared/config/common";
 import i18n from "@shared/config/i18n";
 import { Languages } from "@shared/config/languages";
 import { pageFilter } from "@shared/config/pageFilter";
-import {
-  advManagerProjectStatusFilter,
-  advertiserProjectTypes,
-  projectTypesFilter,
-} from "@shared/config/projectFilter";
 import { useAppDispatch, useAppSelector } from "@shared/store";
 import { filterSlice } from "@shared/store/reducers";
 import {
@@ -14,12 +9,17 @@ import {
   useGetAdvManagerProjectsQuery,
   useGetAdvProjectsQuery,
 } from "@shared/store/services/advOrdersService";
-import { IAdvProjectCard } from "@shared/types/advProject";
-import { BarFilter } from "@widgets/barFilter";
+import { BarFilter } from "@widgets/other";
 import { FC, useEffect, useState } from "react";
 import { AdvProjectsList } from "./advProjects";
 import { DevProjectsList } from "./devProjects";
 import { QueryParams } from "@shared/functions";
+import {
+  IAdvProjectCard,
+  advManagerProjectStatusFilter,
+  advertiserProjectTypes,
+  projectTypesFilter,
+} from "@entities/project";
 
 export const AdvOrders: FC = () => {
   const language = Languages.find((lang) => {

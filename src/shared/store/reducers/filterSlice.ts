@@ -1,24 +1,23 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { addFileFilter } from "@shared/config/addFileFilter";
-import { catalogFilter } from "@shared/config/catalogFilter";
-import { chatFilter } from "@shared/config/chatFilter";
-import { offerStatusFilter } from "@shared/config/offerFilter";
-import { platformStatusFilter } from "@shared/config/platformFilter";
-import { platformTypes } from "@shared/config/postFilter";
+import { catalogFilter } from "@entities/catalog";
+import { IChannelLink, channelStatusFilter } from "@entities/channel";
+import { chatFilter } from "@entities/communication";
+import { offerStatusFilter } from "@entities/offer";
+import { platformTypes } from "@entities/platform";
+import {
+  addFileFilter,
+  myProjectStatusFilter,
+  projectTypesFilter,
+} from "@entities/project";
 import {
   profileTypesName,
   profileTypesNum,
   subprofileFilter,
-} from "@shared/config/profileFilter";
-import {
-  myProjectStatusFilter,
-  projectTypesFilter,
-} from "@shared/config/projectFilter";
-import { IPlatformLink } from "@shared/types/platform";
+} from "@entities/wallet";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 interface FilterState {
   typeFilter: string;
-  statusFilter: platformStatusFilter | offerStatusFilter | string;
+  statusFilter: channelStatusFilter | offerStatusFilter | string;
   profileFilter: {
     type: profileTypesName | catalogFilter | chatFilter | addFileFilter;
     id?: profileTypesNum;
@@ -30,7 +29,7 @@ interface FilterState {
   catalogFilter: string;
   networkFilter: string;
   sortingFilter: string;
-  platformFilter: IPlatformLink;
+  platformFilter: IChannelLink;
   chatFilter: chatFilter;
   addFileFilter: string;
   dropdownMenu: {
@@ -99,7 +98,7 @@ export const filterSlice = createSlice({
     setSortingFilter: (state, action: PayloadAction<string>) => {
       state.sortingFilter = action.payload;
     },
-    setPlatformFilter: (state, action: PayloadAction<IPlatformLink>) => {
+    setPlatformFilter: (state, action: PayloadAction<IChannelLink>) => {
       state.platformFilter = action.payload;
     },
     setChatFilter: (state, action: PayloadAction<chatFilter>) => {

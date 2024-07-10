@@ -1,5 +1,4 @@
 import { CalculatorIcon } from "@shared/assets";
-import { addChannelQueries } from "@shared/config/addChannelQueries";
 import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
 import { paths } from "@shared/routing";
 import { IncomeCalculator } from "@shared/ui/incomeCalculator";
@@ -11,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { AddChannel } from "@features/channel";
 import { WorkWithUs } from "@features/mainPages";
+import { addChannelQueries } from "@entities/channel";
 
 interface CalculateIncomeProps {
   page: string;

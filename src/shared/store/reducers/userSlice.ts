@@ -1,6 +1,5 @@
+import { IToken, roles } from "@entities/user";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { roles } from "@shared/config/roles";
-import { IToken } from "@shared/types/tokens";
 import Cookies from "js-cookie";
 
 interface UserState {

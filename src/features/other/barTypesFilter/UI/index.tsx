@@ -2,8 +2,8 @@ import { useAppDispatch, useAppSelector } from "@shared/store";
 import { filterSlice } from "@shared/store/reducers";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { advertiserProjectTypes } from "@shared/config/projectFilter";
 import styles from "./styles.module.scss";
+import { advertiserProjectTypes } from "@entities/project";
 
 export const BarTypesFilter: FC = () => {
   const { t } = useTranslation();

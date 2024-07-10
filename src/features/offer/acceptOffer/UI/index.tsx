@@ -1,17 +1,17 @@
 import { useAcceptOfferMutation } from "@shared/store/services/bloggerOffersService";
-import { IOrderFeature } from "@shared/types/order";
-import { MyButton } from "@shared/ui";
-import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
-import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
-import { FC, useState } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
 import {
+  MyButton,
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@shared/ui/shadcn-ui/ui/popover";
+  ToastAction,
+  useToast,
+} from "@shared/ui";
+import { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 import { SendHorizonal } from "lucide-react";
+import { IOrderFeature } from "@entities/project";
 
 // создаю массив дат из date_from до date_to
 function getDatesInRange(dates?: {

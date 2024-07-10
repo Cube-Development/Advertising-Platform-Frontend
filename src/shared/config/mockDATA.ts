@@ -1,9 +1,5 @@
-import { IAdvManagerProjectsDev, IAdvProjects } from "@shared/types/advProject";
-import { IFilterSearch } from "@shared/types/filterSearch";
-import {
-  IManagerNewProjects,
-  IManagerProjects,
-} from "@shared/types/managerProject";
+import { IFilterSearch } from "@entities/catalog";
+import { IAdvManagerProjectsDev, IAdvProjects } from "@entities/project";
 
 export const managerActiveCARDS = {
   page: 1,

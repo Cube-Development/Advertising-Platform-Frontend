@@ -1,8 +1,8 @@
-import { getDateChat } from "@shared/functions/checkDate";
-import { IOrderMessageAll } from "@shared/types/chat";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { IOrderMessageAll } from "@entities/communication";
+import { getDateChat } from "@shared/functions";
 
 interface ChatCardProps {
   card: IOrderMessageAll;

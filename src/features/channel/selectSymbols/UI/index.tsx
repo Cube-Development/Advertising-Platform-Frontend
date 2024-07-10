@@ -2,14 +2,14 @@ import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { InfoIcon } from "@shared/assets";
-import { IAddPLatformData } from "@shared/types/common";
 import { UseFormSetValue } from "react-hook-form";
 import { MySliderLimit } from "@shared/ui";
+import { IAddChannelData } from "@entities/channel";
 
 interface SelectSymbolProps {
   title: string;
   text: string;
-  type: keyof IAddPLatformData;
+  type: keyof IAddChannelData;
   onChange: UseFormSetValue<any>;
   defaultValues?: number;
 }

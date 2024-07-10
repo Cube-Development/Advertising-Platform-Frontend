@@ -1,27 +1,13 @@
-import { pageFilter } from "@shared/config/pageFilter";
-import { managerProjectStatusFilter } from "@shared/config/projectFilter";
 import { useAppSelector } from "@shared/store";
-import {
-  getProjectsCardReq,
-  useGetAdvProjectsQuery,
-} from "@shared/store/services/advOrdersService";
-import { BarFilter } from "@widgets/barFilter";
+import { BarFilter } from "@widgets/other";
 import { FC, useEffect, useState } from "react";
 import {
-  managerActiveCARDS,
-  managerAgreedCARDS,
-  managerCompletedCARDS,
-  managerNewCARDS,
-} from "@shared/config/mockDATA";
-import {
-  IManagerNewProjectCard,
-  IManagerNewProjects,
-  IManagerProjectCard,
-  IManagerProjects,
-} from "@shared/types/managerProject";
-import { useGetManagerProjectsQuery } from "@shared/store/services/managerOrdersService";
-import { INTERSECTION_ELEMENTS } from "@shared/config/common";
+  getProjectsCardReq,
+  useGetManagerProjectsQuery,
+} from "@shared/store/services/managerOrdersService";
 import { ManagerNewProjectsList } from "./managerNewProject";
+import { INTERSECTION_ELEMENTS, pageFilter } from "@shared/config";
+import { IManagerNewProjectCard } from "@entities/project";
 
 export const ManagerOrders: FC = () => {
   const { statusFilter } = useAppSelector((state) => state.filter);

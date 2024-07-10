@@ -1,5 +1,5 @@
+import { addChannelQueries } from "@entities/channel";
 import { CalculatorIcon, KeyIcon } from "@shared/assets";
-import { addChannelQueries } from "@shared/config/addChannelQueries";
 import { paths } from "@shared/routing";
 
 export const notAuthAdvertiserNavbar = [

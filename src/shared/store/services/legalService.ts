@@ -1,9 +1,9 @@
 import {
-  IProfileData,
   ILegalCard,
   ILegalCardShort,
-} from "@shared/types/profile";
-import { profileTypesNum } from "@shared/config/profileFilter";
+  ILegalData,
+  profileTypesNum,
+} from "@entities/wallet";
 import { authApi } from "@shared/api";
 import { LEGALS } from "@shared/api/tags";
 
@@ -20,7 +20,7 @@ type DeleteLegalResponse = {
 
 export const legalAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
-    createLegal: build.mutation<ILegalCard, IProfileData>({
+    createLegal: build.mutation<ILegalCard, ILegalData>({
       query: (BodyParams) => ({
         url: `/legal/create`,
         method: `POST`,
@@ -28,7 +28,7 @@ export const legalAPI = authApi.injectEndpoints({
       }),
       invalidatesTags: [LEGALS],
     }),
-    editLegal: build.mutation<ILegalCard, IProfileData>({
+    editLegal: build.mutation<ILegalCard, ILegalData>({
       query: (BodyParams) => ({
         url: `/legal/edit`,
         method: `PUT`,

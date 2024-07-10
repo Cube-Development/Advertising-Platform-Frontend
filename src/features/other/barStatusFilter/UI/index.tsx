@@ -1,18 +1,18 @@
-import { pageFilter } from "@shared/config/pageFilter";
+import { useAppDispatch, useAppSelector } from "@shared/store";
+import { filterSlice } from "@shared/store/reducers";
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
+import { pageFilter } from "@shared/config";
 import {
   advManagerProjectStatus,
   advMyProjectStatus,
   managerProjectStatus,
   projectTypesFilter,
-} from "@shared/config/projectFilter";
-import { useAppDispatch, useAppSelector } from "@shared/store";
-import { filterSlice } from "@shared/store/reducers";
-import { FC } from "react";
-import { useTranslation } from "react-i18next";
-import { bloggerPlatformStatus } from "@shared/config/platformFilter";
-import { bloggerOfferStatus } from "@shared/config/offerFilter";
-import styles from "./styles.module.scss";
-import { roles } from "@shared/config/roles";
+} from "@entities/project";
+import { roles } from "@entities/user";
+import { bloggerOfferStatus } from "@entities/offer";
+import { bloggerChannelStatus } from "@entities/channel";
 
 interface BarStatusFilterProps {
   page: pageFilter;
@@ -40,7 +40,7 @@ export const BarStatusFilter: FC<BarStatusFilterProps> = ({ page }) => {
           ? managerProjectStatus
           : page === pageFilter.offer
             ? bloggerOfferStatus
-            : bloggerPlatformStatus;
+            : bloggerChannelStatus;
 
   return (
     <div className={styles.subtypes}>

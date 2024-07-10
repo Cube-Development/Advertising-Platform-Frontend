@@ -2,16 +2,11 @@ import { StarIcon2 } from "@shared/assets";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@shared/ui/shadcn-ui/ui/popover";
 import { SendHorizonal } from "lucide-react";
-import { IOrderFeature } from "@shared/types/order";
 import { Rating } from "../rating";
 import { useAddReviewMutation } from "@shared/store/services/advOrdersService";
-import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
+import { IOrderFeature } from "@entities/project";
+import { Popover, PopoverContent, PopoverTrigger, useToast } from "@shared/ui";
 
 export const Feedback: FC<IOrderFeature> = ({ order_id }) => {
   const { t } = useTranslation();

@@ -2,31 +2,15 @@ import {
   ArrowSmallVerticalIcon,
   CancelIcon,
   CompliteIcon,
+  FeatherIcon,
   ProtectIcon2,
   RatingIcon,
   RocketIcon,
   StarIcon4,
   WaitIcon,
 } from "@shared/assets";
-import { FeatherIcon } from "@shared/assets/icons/feather";
-import { accordionTypes } from "@shared/config/accordion";
-import { platformStatusFilter } from "@shared/config/platformFilter";
 import { useAppSelector } from "@shared/store";
 import { useActivateChannelMutation } from "@shared/store/services/channelService";
-import {
-  IActiveChannel,
-  IBlockedChannel,
-  IInactiveChannel,
-  IModerationChannel,
-  IModerationRejectChannel,
-} from "@shared/types/channelStatus";
-import {
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@shared/ui/shadcn-ui/ui/accordion";
-import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
-import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -40,6 +24,22 @@ import {
   Support,
 } from "@features/channel";
 import { SeeReason } from "@features/other";
+import {
+  IActiveChannel,
+  IBlockedChannel,
+  IInactiveChannel,
+  IModerationChannel,
+  IModerationRejectChannel,
+  channelStatusFilter,
+} from "@entities/channel";
+import {
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+  ToastAction,
+  useToast,
+} from "@shared/ui";
+import { accordionTypes } from "@shared/config";
 
 interface ChannelCardProps {
   card:
@@ -115,8 +115,8 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card }) => {
         <div className={styles.card__logo}>
           <div className={styles.logo}>
             <img src={card.avatar} alt="" />
-            {statusFilter === platformStatusFilter.active ||
-            statusFilter === platformStatusFilter.inactive ? (
+            {statusFilter === channelStatusFilter.active ||
+            statusFilter === channelStatusFilter.inactive ? (
               <RatingIcon />
             ) : (
               <></>
@@ -130,7 +130,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card }) => {
               <span>{card?.category}</span>
             </div>
             <div className={styles.card__description__top__icons}>
-              {statusFilter === platformStatusFilter.banned ? (
+              {statusFilter === channelStatusFilter.banned ? (
                 <p>{(card as IBlockedChannel)?.blocked_date}</p>
               ) : (
                 <div>
@@ -143,13 +143,13 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card }) => {
           </div>
           <div className={styles.status}>
             <p>
-              {statusFilter === platformStatusFilter.active ? (
+              {statusFilter === channelStatusFilter.active ? (
                 t(`platforms_blogger.card.status.active`)
-              ) : statusFilter === platformStatusFilter.moderationReject ? (
+              ) : statusFilter === channelStatusFilter.moderationReject ? (
                 t(`platforms_blogger.card.status.reject`)
-              ) : statusFilter === platformStatusFilter.inactive ? (
+              ) : statusFilter === channelStatusFilter.inactive ? (
                 t(`platforms_blogger.card.status.deactivate`)
-              ) : statusFilter === platformStatusFilter.banned ? (
+              ) : statusFilter === channelStatusFilter.banned ? (
                 t(`platforms_blogger.card.status.ban`)
               ) : (
                 <></>
@@ -160,12 +160,12 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card }) => {
 
         <div className={styles.card__info}>
           <>
-            {statusFilter === platformStatusFilter.active ? (
+            {statusFilter === channelStatusFilter.active ? (
               <div className={styles.card__info__offers}>
                 <span></span>
                 <SeeOffers />
               </div>
-            ) : statusFilter === platformStatusFilter.moderationReject &&
+            ) : statusFilter === channelStatusFilter.moderationReject &&
               new Date((card as IModerationRejectChannel)?.reapplication_date) <
                 new Date() ? (
               <div className={styles.card__info__top}>
@@ -174,18 +174,18 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card }) => {
                   {(card as IModerationRejectChannel)?.reapplication_date}
                 </span>
               </div>
-            ) : statusFilter === platformStatusFilter.moderationReject ? (
+            ) : statusFilter === channelStatusFilter.moderationReject ? (
               <div className={styles.card__info__top}>
                 <span>{t(`platforms_blogger.repeat`)}</span>
               </div>
-            ) : statusFilter === platformStatusFilter.inactive ? (
+            ) : statusFilter === channelStatusFilter.inactive ? (
               <div
                 className={styles.card__info__top}
                 onClick={handleActiveChannel}
               >
                 <ActivateChannel />
               </div>
-            ) : statusFilter === platformStatusFilter.banned ? (
+            ) : statusFilter === channelStatusFilter.banned ? (
               <div className={styles.card__info__top}>
                 <span>{t(`platforms_blogger.ban`)}</span>
               </div>
@@ -194,12 +194,12 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card }) => {
             )}
           </>
 
-          {statusFilter === platformStatusFilter.moderationReject ? (
+          {statusFilter === channelStatusFilter.moderationReject ? (
             <div className={styles.card__info__bottom2}>
               <SeeReason />
               <RepeatModeration />
             </div>
-          ) : statusFilter === platformStatusFilter.banned ? (
+          ) : statusFilter === channelStatusFilter.banned ? (
             <div className={styles.card__info__bottom2}>
               <SeeReason />
               <Support />

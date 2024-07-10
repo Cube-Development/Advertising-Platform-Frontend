@@ -1,20 +1,21 @@
 import { BoyIcon, CancelIcon2, GirlIcon } from "@shared/assets";
-import { Languages } from "@shared/config/languages";
-import { platformToIcon } from "@shared/config/platformData";
 import { paths } from "@shared/routing";
 import { useGetChannelByIdQuery } from "@shared/store/services/channelService";
-import { MyButton, MyModal } from "@shared/ui";
 import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogTrigger,
-} from "@shared/ui/shadcn-ui/ui/alert-dialog";
+  MyButton,
+  MyModal,
+} from "@shared/ui";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
+import { Languages } from "@shared/config";
+import { platformToIcon } from "@entities/catalog";
 
 interface ChannelDescriptionProps {
   channel_id: string;

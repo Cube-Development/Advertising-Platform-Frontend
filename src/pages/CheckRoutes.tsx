@@ -1,4 +1,4 @@
-import { managmentRoles, roles, userRoles } from "@shared/config/roles";
+import { managmentRoles, roles, userRoles } from "@entities/user";
 import { paths } from "@shared/routing";
 import { useAppSelector } from "@shared/store";
 import Cookies from "js-cookie";

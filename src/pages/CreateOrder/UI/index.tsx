@@ -1,4 +1,4 @@
-import { CreateOrderBlock } from "@widgets/project";
+import { CreateOrderBlock } from "@widgets/createOrder";
 import { FC } from "react";
 
 export const CreateOrderPage: FC = () => {

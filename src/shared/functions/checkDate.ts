@@ -1,4 +1,4 @@
-import { DAY_OF_WEEK } from "@shared/config/chat";
+import { DAY_OF_WEEK } from "@entities/communication";
 
 export const CheckDate = (date_to: string): boolean => {
   const currentDate = new Date();

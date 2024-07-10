@@ -1,4 +1,3 @@
-import { roles } from "@shared/config/roles";
 import { paths } from "@shared/routing";
 import { SideBarLayout } from "@pages/layouts";
 import { RootLayout } from "@pages/layouts";
@@ -14,6 +13,7 @@ import {
   publicBloggerRoutes,
   publicCommonRoutes,
 } from "./routes";
+import { roles } from "@entities/user";
 
 const handleLayout = (route: IRoute) => {
   return route.sidebar ? (

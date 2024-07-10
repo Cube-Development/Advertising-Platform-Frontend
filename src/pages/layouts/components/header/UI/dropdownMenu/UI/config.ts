@@ -1,3 +1,5 @@
+import { addChannelQueries } from "@entities/channel";
+import { projectTypesFilter } from "@entities/project";
 import {
   BookIcon,
   CalculatorIcon,
@@ -8,8 +10,6 @@ import {
   TemplateIcon,
   WalletIcon,
 } from "@shared/assets";
-import { addChannelQueries } from "@shared/config/addChannelQueries";
-import { projectTypesFilter } from "@shared/config/projectFilter";
 import { paths } from "@shared/routing";
 
 export const advertiserMenu = [

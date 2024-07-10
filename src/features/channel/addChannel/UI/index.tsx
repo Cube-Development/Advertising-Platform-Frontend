@@ -1,4 +1,4 @@
-import { IAddChannelQuery } from "@shared/types/platform";
+import { IAddChannelQuery } from "@entities/channel";
 import { MyButton } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";

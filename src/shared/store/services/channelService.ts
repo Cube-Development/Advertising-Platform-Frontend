@@ -1,24 +1,20 @@
 import { authApi } from "@shared/api";
 import { languagesNum } from "@shared/config/languages";
-import {
-  platformStatus,
-  platformStatusFilter,
-} from "@shared/config/platformFilter";
-import { platformTypesNum } from "@shared/config/platformTypes";
+import { BLOGGER_CHANNELS } from "../../api/tags";
+import { platformTypesNum } from "@entities/platform";
 import {
   IActiveChannelBlogger,
+  IAddChannelData,
+  IAddChannelIdentification,
   IBlockedChannelBlogger,
+  IEditChannelData,
   IInactiveChannelBlogger,
   IModerationChannelBlogger,
   IModerationRejectChannelBlogger,
-} from "@shared/types/channelStatus";
-import {
-  IAddChannelData,
-  IAddChannelIdentification,
-  IEditChannelData,
   IReadChannelData,
-} from "@shared/types/platform";
-import { BLOGGER_CHANNELS } from "../../api/tags";
+  channelStatus,
+  channelStatusFilter,
+} from "@entities/channel";
 
 export interface getChannelsByStatusReq {
   platform: platformTypesNum;
@@ -26,7 +22,7 @@ export interface getChannelsByStatusReq {
   page: number;
   date_sort: string;
   elements_on_page?: number;
-  status: platformStatusFilter | string;
+  status: channelStatusFilter | string;
 }
 
 export const channelAPI = authApi.injectEndpoints({
@@ -47,7 +43,7 @@ export const channelAPI = authApi.injectEndpoints({
         body: BodyParams,
       }),
     }),
-    createChannel: build.mutation<{ status: platformStatus }, IAddChannelData>({
+    createChannel: build.mutation<{ status: channelStatus }, IAddChannelData>({
       query: (BodyParams) => ({
         url: `/channel/create`,
         method: `POST`,
@@ -93,7 +89,7 @@ export const channelAPI = authApi.injectEndpoints({
       }),
       invalidatesTags: [BLOGGER_CHANNELS],
     }),
-    editChannel: build.mutation<{ status: platformStatus }, IEditChannelData>({
+    editChannel: build.mutation<{ status: channelStatus }, IEditChannelData>({
       query: (body) => ({
         url: "/channel/edit",
         method: "PUT",

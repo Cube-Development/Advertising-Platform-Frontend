@@ -1,1 +1,0 @@
-export { PlatformOwnerPage } from "./UI";

@@ -7,20 +7,12 @@ import {
   SearchIcon,
   WaitIcon,
 } from "@shared/assets";
-import { accordionTypes } from "@shared/config/accordion";
-import { Languages } from "@shared/config/languages";
-import {
-  advManagerProjectStatusFilter,
-  myProjectStatusFilter,
-  projectTypesFilter,
-} from "@shared/config/projectFilter";
 import { useAppSelector } from "@shared/store";
 import {
   getProjectSubcardReq,
   useGetAdvManagerSubprojectsQuery,
   useGetAdvSubprojectsQuery,
 } from "@shared/store/services/advOrdersService";
-import { IAdvProjectCard } from "@shared/types/advProject";
 import {
   AccountsLoader,
   AccordionContent,
@@ -38,8 +30,15 @@ import {
   Feedback,
   OrderChat,
 } from "@features/order";
-import { AdvSubcard } from "@entities/project";
 import { RejectPost, SeePost } from "@features/project";
+import { AdvSubcard } from "@entities/order";
+import {
+  IAdvProjectCard,
+  advManagerProjectStatusFilter,
+  myProjectStatusFilter,
+  projectTypesFilter,
+} from "@entities/project";
+import { Languages, accordionTypes } from "@shared/config";
 
 interface AdvProjectCardProps {
   card: IAdvProjectCard;

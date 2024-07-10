@@ -1,4 +1,4 @@
-import { ContentType } from "@shared/config/createPostData";
+import { ContentType } from "@entities/project";
 
 export const getContentType = (file: File): ContentType => {
   const mimeType = file.type;

@@ -1,18 +1,18 @@
 import { pageFilter } from "@shared/config/pageFilter";
 import { useAppSelector } from "@shared/store";
-import { BarFilter } from "@widgets/barFilter";
 import { FC, useEffect, useState } from "react";
 import { Languages } from "@shared/config/languages";
 import { useTranslation } from "react-i18next";
-import { networkTypes, platformTypesNum } from "@shared/config/platformTypes";
 import { useForm } from "react-hook-form";
 import {
   getOrdersByStatusReq,
   useGetBloggerOrdersQuery,
 } from "@shared/store/services/bloggerOffersService";
 import { INTERSECTION_ELEMENTS } from "@shared/config/common";
-import { IBloggerOfferCard } from "@shared/types/bloggerOffer";
 import { MyOffers } from "@widgets/offer";
+import { BarFilter } from "@widgets/other";
+import { platformTypes, platformTypesNum } from "@entities/platform";
+import { IBloggerOfferCard } from "@entities/offer";
 
 export const OffersPage: FC = () => {
   const { statusFilter } = useAppSelector((state) => state.filter);
@@ -26,7 +26,7 @@ export const OffersPage: FC = () => {
 
   const { setValue, watch } = useForm<{ platform: platformTypesNum }>({
     defaultValues: {
-      platform: networkTypes[0].id,
+      platform: platformTypes[0].id,
     },
   });
 

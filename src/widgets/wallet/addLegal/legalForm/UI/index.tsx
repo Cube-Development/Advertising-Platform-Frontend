@@ -1,17 +1,6 @@
 import { pageFilter } from "@shared/config/pageFilter";
-import {
-  EntityData,
-  IndividualData,
-  SelfEmployedCardData,
-  SelfEmployedData,
-} from "@shared/config/profileData";
-import {
-  profileTypesName,
-  subprofileFilter,
-} from "@shared/config/profileFilter";
 import { useAppSelector } from "@shared/store";
 import { useCreateLegalMutation } from "@shared/store/services/legalService";
-import { IProfileData } from "@shared/types/profile";
 import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -19,6 +8,15 @@ import styles from "./styles.module.scss";
 import { useToast } from "@shared/ui";
 import { BarSubrofileFilter, CreateLegal, LegalForm } from "@features/wallet";
 import { BarProfileFilter } from "@features/other";
+import {
+  EntityData,
+  ILegalData,
+  IndividualData,
+  SelfEmployedCardData,
+  SelfEmployedData,
+  profileTypesName,
+  subprofileFilter,
+} from "@entities/wallet";
 
 export const AddLegalForm: FC = () => {
   const { toast } = useToast();
@@ -29,7 +27,7 @@ export const AddLegalForm: FC = () => {
     reset,
     handleSubmit,
     formState: { errors },
-  } = useForm<IProfileData>();
+  } = useForm<ILegalData>();
 
   const { profileFilter: filter, subprofileFilter: subprofile } =
     useAppSelector((state) => state.filter);
@@ -46,7 +44,7 @@ export const AddLegalForm: FC = () => {
 
   const [createLegal, { isLoading }] = useCreateLegalMutation();
 
-  const onSubmit: SubmitHandler<IProfileData> = async (data) => {
+  const onSubmit: SubmitHandler<ILegalData> = async (data) => {
     const dataWithLegalType = {
       ...data,
       type_legal: filter.id,

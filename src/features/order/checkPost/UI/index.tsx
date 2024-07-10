@@ -2,8 +2,8 @@ import { MyButton } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { IOrderFeature } from "@shared/types/order";
 import { Link } from "react-router-dom";
+import { IOrderFeature } from "@entities/project";
 
 export const CheckPost: FC<IOrderFeature> = ({ url }) => {
   const { t } = useTranslation();

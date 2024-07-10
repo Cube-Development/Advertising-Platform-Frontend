@@ -1,1 +1,0 @@
-export { PartnerList } from "./UI";

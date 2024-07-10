@@ -1,6 +1,5 @@
 import { ArrowSmallVerticalIcon, CopyIcon, MoreIcon } from "@shared/assets";
 import { accordionTypes } from "@shared/config/accordion";
-import { IManagerNewProjectCard } from "@shared/types/managerProject";
 import {
   AccordionContent,
   AccordionItem,
@@ -10,6 +9,7 @@ import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { SendToBot, StartProject } from "@features/project";
+import { IManagerNewProjectCard } from "@entities/project";
 
 interface ManagerNewProjectCardProps {
   card: IManagerNewProjectCard;

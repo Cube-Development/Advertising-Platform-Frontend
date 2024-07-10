@@ -1,4 +1,4 @@
-import { IChannelChat } from "@shared/types/common";
+import { IChannelChat } from "@entities/project";
 import { Chat } from "@widgets/communication";
 import { FC } from "react";
 

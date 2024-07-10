@@ -1,8 +1,6 @@
-import { roles } from "@shared/config/roles";
 import { paths } from "@shared/routing";
 import { useAppDispatch, useAppSelector } from "@shared/store";
 import { filterSlice } from "@shared/store/reducers";
-import { IMenuItem } from "@shared/types/common";
 import { Accordion } from "@shared/ui/shadcn-ui/ui/accordion";
 import { AnimatePresence, motion } from "framer-motion";
 import { FC, useEffect, useRef } from "react";
@@ -18,6 +16,8 @@ import {
 } from "./config";
 import styles from "./styles.module.scss";
 import { MenuItem } from "./menuItem";
+import { roles } from "@entities/user";
+import { IMenuItem } from "@pages/layouts/components/config";
 
 interface DropdownMenuProps {
   isAuth: boolean;

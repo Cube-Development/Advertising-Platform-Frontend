@@ -1,19 +1,19 @@
+import {
+  AllChannelTypes,
+  IModerationChannel,
+  channelStatusFilter,
+} from "@entities/channel";
+import { platformTypes, platformTypesNum } from "@entities/platform";
 import { INTERSECTION_ELEMENTS } from "@shared/config/common";
 import { Languages } from "@shared/config/languages";
 import { pageFilter } from "@shared/config/pageFilter";
-import { platformStatusFilter } from "@shared/config/platformFilter";
-import { networkTypes, platformTypesNum } from "@shared/config/platformTypes";
 import { useAppSelector } from "@shared/store";
 import {
   getChannelsByStatusReq,
   useGetChannelsByStatusQuery,
 } from "@shared/store/services/channelService";
-import {
-  AllChannelTypes,
-  IModerationChannel,
-} from "@shared/types/channelStatus";
-import { BarFilter } from "@widgets/barFilter";
 import { ActiveChannels, ModerationChannels } from "@widgets/channel";
+import { BarFilter } from "@widgets/other";
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -28,7 +28,7 @@ export const MyChannelsPage: FC = () => {
 
   const { setValue, watch } = useForm<{ platform: platformTypesNum }>({
     defaultValues: {
-      platform: networkTypes[0].id,
+      platform: platformTypes[0].id,
     },
   });
   const platformType = watch("platform");
@@ -73,7 +73,7 @@ export const MyChannelsPage: FC = () => {
         listLength={!channels?.length}
       />
 
-      {statusFilter === platformStatusFilter.active ? (
+      {statusFilter === channelStatusFilter.active ? (
         <ActiveChannels
           cards={channels!}
           handleOnChangePage={handleOnChangePage}
@@ -84,7 +84,7 @@ export const MyChannelsPage: FC = () => {
               : false
           }
         />
-      ) : statusFilter === platformStatusFilter.moderation ? (
+      ) : statusFilter === channelStatusFilter.moderation ? (
         <ModerationChannels
           cards={channels! as IModerationChannel[]}
           handleOnChangePage={handleOnChangePage}
@@ -95,7 +95,7 @@ export const MyChannelsPage: FC = () => {
               : false
           }
         />
-      ) : statusFilter === platformStatusFilter.moderationReject ? (
+      ) : statusFilter === channelStatusFilter.moderationReject ? (
         <ActiveChannels
           cards={channels!}
           handleOnChangePage={handleOnChangePage}
@@ -106,7 +106,7 @@ export const MyChannelsPage: FC = () => {
               : false
           }
         />
-      ) : statusFilter === platformStatusFilter.inactive ? (
+      ) : statusFilter === channelStatusFilter.inactive ? (
         <ActiveChannels
           cards={channels!}
           handleOnChangePage={handleOnChangePage}
@@ -118,7 +118,7 @@ export const MyChannelsPage: FC = () => {
           }
         />
       ) : (
-        statusFilter === platformStatusFilter.banned && (
+        statusFilter === channelStatusFilter.banned && (
           <ActiveChannels
             cards={channels!}
             handleOnChangePage={handleOnChangePage}

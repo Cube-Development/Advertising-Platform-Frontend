@@ -1,12 +1,12 @@
-import {
-  advManagerProjectStatusFilter,
-  myProjectStatusFilter,
-  projectTypesFilter,
-} from "@shared/config/projectFilter";
 import { useAppSelector } from "@shared/store";
 import { Skeleton } from "@shared/ui/shadcn-ui/ui/skeleton";
 import { FC } from "react";
 import styles from "./styles.module.scss";
+import {
+  advManagerProjectStatusFilter,
+  myProjectStatusFilter,
+  projectTypesFilter,
+} from "@entities/project";
 
 export const ProjectCardSkeleton: FC = () => {
   const { typeFilter, statusFilter } = useAppSelector((state) => state.filter);

@@ -1,13 +1,15 @@
 import { SadSmileIcon, HappySmileIcon } from "@shared/assets";
-import { platformStatusFilter } from "@shared/config/platformFilter";
 import { useAppSelector } from "@shared/store";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { pageFilter } from "@shared/config/pageFilter";
-import { IAddChannelQuery } from "@shared/types/platform";
 import { paths } from "@shared/routing";
-import { addChannelQueries } from "@shared/config/addChannelQueries";
+import {
+  IAddChannelQuery,
+  addChannelQueries,
+  channelStatusFilter,
+} from "@entities/channel";
 
 interface ZeroChannelProps {
   AddChannelBtn: FC<IAddChannelQuery>;
@@ -30,7 +32,7 @@ export const ZeroChannel: FC<ZeroChannelProps> = ({
   return (
     <div className={styles.wrapper}>
       <div className={styles.smile}>
-        {statusFilter === platformStatusFilter.banned ? (
+        {statusFilter === channelStatusFilter.banned ? (
           <>
             <div>
               <HappySmileIcon />

@@ -1,1 +1,0 @@
-export { AccommList } from "./UI";

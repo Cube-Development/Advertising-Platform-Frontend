@@ -3,22 +3,22 @@ import { filterSlice } from "@shared/store/reducers";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { pageFilter } from "@shared/config/pageFilter";
+import Cookies from "js-cookie";
 import {
   profileTypes,
   profileTypesName,
   profileTypesNum,
   walletTopUpTypes,
-} from "@shared/config/profileFilter";
-import { catalogFilter, catalogTypes } from "@shared/config/catalogFilter";
-import { pageFilter } from "@shared/config/pageFilter";
+} from "@entities/wallet";
+import { catalogFilter, catalogTypes } from "@entities/catalog";
 import {
   chatAdvertiserTypes,
   chatFilter,
   chatManagerTypes,
-} from "@shared/config/chatFilter";
-import { addFileFilter, addFileTypes } from "@shared/config/addFileFilter";
-import Cookies from "js-cookie";
-import { roles } from "@shared/config/roles";
+} from "@entities/communication";
+import { addFileFilter, addFileTypes } from "@entities/project";
+import { roles } from "@entities/user";
 
 interface BarProfileFilterProps {
   page: pageFilter;

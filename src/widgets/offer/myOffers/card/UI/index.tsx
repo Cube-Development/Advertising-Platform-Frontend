@@ -1,14 +1,7 @@
 import { HappySmileIcon, MoreIcon } from "@shared/assets";
-import {
-  offerStatus,
-  offerStatusChat,
-  offerStatusFilter,
-} from "@shared/config/offerFilter";
-import { PostTypesNum, platformTypesNum } from "@shared/config/platformTypes";
 import { CheckDate } from "@shared/functions";
 import { useAppSelector } from "@shared/store";
 import { useGetPostQuery } from "@shared/store/services/getPostService";
-import { IBloggerOfferCard } from "@shared/types/bloggerOffer";
 import {
   useToast,
   AlertDialog,
@@ -29,8 +22,16 @@ import {
   DisplayStories,
   DisplayTelegram,
   DisplayVideos,
+  PostTypesNum,
+  platformTypesNum,
 } from "@entities/platform";
 import { SeeReason } from "@features/other";
+import {
+  IBloggerOfferCard,
+  offerStatus,
+  offerStatusChat,
+  offerStatusFilter,
+} from "@entities/offer";
 
 interface OfferCardProps {
   card: IBloggerOfferCard;

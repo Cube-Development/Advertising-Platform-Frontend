@@ -2,20 +2,20 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { InfoIcon } from "@shared/assets";
+import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import {
   IAddChannelData,
   IAddFormat,
   IChannelFormat,
   IFormatPriceProps,
-} from "@shared/types/platform";
-import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
-import { platformData } from "@shared/config/platformData";
+  channelData,
+} from "@entities/channel";
 
 interface SelectPriceProps {
   title: string;
   text: string;
   info: string;
-  type: platformData;
+  type: channelData;
   formats?: IChannelFormat[];
   AccommPrice: FC<IFormatPriceProps>;
   onChange: UseFormSetValue<any>;

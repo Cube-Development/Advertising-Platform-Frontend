@@ -1,5 +1,4 @@
 import { CancelIcon2, ClockIcon } from "@shared/assets";
-import { TimeListProps } from "@shared/types/createPost";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -7,9 +6,10 @@ import {
   AlertDialogContent,
   AlertDialogTrigger,
 } from "@shared/ui/shadcn-ui/ui/alert-dialog";
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { TimeListProps } from "@entities/project";
 
 interface ITIme {
   timeIndexList: number[];

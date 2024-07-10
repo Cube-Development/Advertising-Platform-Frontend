@@ -1,5 +1,5 @@
+import { IToken } from "@entities/user";
 import { baseApi } from "@shared/api";
-import { IToken } from "@shared/types/tokens";
 
 type AuthParams = {
   authorization_code: string;

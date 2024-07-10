@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
-import { HandleAuth } from "@widgets/handleAuth";
 import { Toaster } from "@shared/ui/shadcn-ui/ui/toaster";
 import { MainLayout } from "./mainLayout";
+import { HandleAuth } from "@widgets/other";
 
 export const RootLayout = () => {
   return (

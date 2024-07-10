@@ -9,8 +9,8 @@ import { DropdownMenu } from "./dropdownMenu";
 import { Wallet } from "./wallet";
 import { useAppDispatch, useAppSelector } from "@shared/store";
 import { userSlice } from "@shared/store/reducers";
-import { roles } from "@shared/config/roles";
 import { Chat } from "@widgets/communication";
+import { roles } from "@entities/user";
 
 export const Header: FC = () => {
   const [screen, setScreen] = useState<number>(window.innerWidth);

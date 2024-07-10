@@ -1,7 +1,5 @@
 import { ArrowIcon4 } from "@shared/assets";
 import { pageFilter } from "@shared/config/pageFilter";
-import { paymentTypes } from "@shared/config/payment";
-import { profileTypesName } from "@shared/config/profileFilter";
 import { useAppSelector } from "@shared/store";
 import {
   useCreateLegalMutation,
@@ -10,11 +8,6 @@ import {
   useReadOneLegalMutation,
 } from "@shared/store/services/legalService";
 import { usePaymentDepositMutation } from "@shared/store/services/walletService";
-import {
-  ILegalCard,
-  ILegalCardShort,
-  IProfileData,
-} from "@shared/types/profile";
 import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -23,8 +16,15 @@ import { CreditCard } from "./creditCard";
 import { Guide, LegalsList, PaymentData } from "../../components";
 import { ToastAction, useToast } from "@shared/ui";
 import { BarProfileFilter } from "@features/other";
+import {
+  ILegalCard,
+  ILegalCardShort,
+  ILegalData,
+  paymentTypes,
+  profileTypesName,
+} from "@entities/wallet";
 
-interface IExtendedProfileData extends IProfileData {
+interface IExtendedProfileData extends ILegalData {
   amount: number;
 }
 
@@ -63,8 +63,8 @@ export const Topup: FC = () => {
         .unwrap()
         .then((data) => {
           setActiveAccount(data);
-          (Object.keys(data) as Array<keyof IProfileData>).forEach(
-            (value: keyof IProfileData) => {
+          (Object.keys(data) as Array<keyof ILegalData>).forEach(
+            (value: keyof ILegalData) => {
               setValue(value, data[value]);
             },
           );

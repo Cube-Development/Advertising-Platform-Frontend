@@ -1,8 +1,8 @@
-import { IManagerNewProjectCard } from "@shared/types/managerProject";
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { ManagerNewProjectCard } from "../card";
 import { Accordion } from "@shared/ui";
+import { IManagerNewProjectCard } from "@entities/project";
 
 interface ManagerNewProjectsListProps {
   projects: IManagerNewProjectCard[];

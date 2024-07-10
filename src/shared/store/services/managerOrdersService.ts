@@ -1,11 +1,6 @@
+import { IManagerNewProjects, IManagerProjects } from "@entities/project";
 import { authApi } from "@shared/api";
 import { MANAGER_PROJECTS } from "@shared/api/tags";
-import { languagesNum } from "@shared/config/languages";
-import { IFile, IPostChannel } from "@shared/types/createPost";
-import {
-  IManagerNewProjects,
-  IManagerProjects,
-} from "@shared/types/managerProject";
 
 // export interface ICreatePostReq {
 //   project_id: string;

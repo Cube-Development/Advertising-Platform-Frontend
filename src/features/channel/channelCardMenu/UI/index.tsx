@@ -1,14 +1,13 @@
 import { CancelIcon2, MoreIcon } from "@shared/assets";
-import { platformStatusFilter } from "@shared/config/platformFilter";
 import { paths } from "@shared/routing";
 import { useAppSelector } from "@shared/store";
 import { useDeactivateChannelMutation } from "@shared/store/services/channelService";
-import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
-import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
+import { ToastAction, useToast } from "@shared/ui";
+import { channelStatusFilter } from "@entities/channel";
 
 interface ChannelCardMenuProps {
   channel_id: string;
@@ -94,7 +93,7 @@ export const ChannelCardMenu: FC<ChannelCardMenuProps> = ({
             <Link to={`${paths.addChannel}?channel_id=${channel_id}`}>
               <li>{t("platforms_blogger.menu.edit")}</li>
             </Link>
-            {statusFilter === platformStatusFilter.active && (
+            {statusFilter === channelStatusFilter.active && (
               <li onClick={handleDeactiveChannel}>
                 {t("platforms_blogger.menu.deactivate")}
               </li>

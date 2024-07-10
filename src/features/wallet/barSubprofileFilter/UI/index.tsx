@@ -7,7 +7,7 @@ import {
   profileTypesNum,
   subprofileFilter,
   subprofileTypes,
-} from "@shared/config/profileFilter";
+} from "@entities/wallet";
 
 interface ISubFilterOption {
   type: subprofileFilter;

@@ -1,5 +1,4 @@
 import { Languages } from "@shared/config/languages";
-import { platformData } from "@shared/config/platformData";
 import {
   useCreateChannelMutation,
   useEditChannelMutation,
@@ -12,21 +11,11 @@ import {
   useGetChannelLanguagesQuery,
   useGetChannelRegionsQuery,
 } from "@shared/store/services/contentService";
-import {
-  IAddChannelData,
-  IAddPlatformBlur,
-  IFormat,
-  IPlatformLink,
-} from "@shared/types/platform";
-import { MyButton } from "@shared/ui";
-import { AccountsLoader } from "@shared/ui/accountsLoader";
-import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
-import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
+import { AccountsLoader, MyButton, ToastAction, useToast } from "@shared/ui";
 import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { PLATFORM_PARAMETERS } from "@shared/config/common";
 import { SelectDescription, SelectOptions, SelectSex } from "@features/other";
 import {
   CreateChannel,
@@ -34,11 +23,19 @@ import {
   SelectPrice,
   SelectSymbol,
 } from "@features/channel";
+import {
+  IAddChannelData,
+  IAddPlatformBlur,
+  IChannelLink,
+  PLATFORM_PARAMETERS,
+  channelData,
+} from "@entities/channel";
+import { IFormat } from "@entities/catalog";
 
 interface ChannelParametersProps {
   blur: IAddPlatformBlur;
   onChangeBlur: (newBlur: IAddPlatformBlur) => void;
-  currentPlatform: IPlatformLink;
+  currentPlatform: IChannelLink;
   inserCode: string;
   channel_id: string;
 }
@@ -108,6 +105,7 @@ export const ChannelParameters: FC<ChannelParametersProps> = ({
       data.description &&
       data.language.length > 0 &&
       data.region.length > 0 &&
+      data.format &&
       data.format.length > 0
     ) {
       if (channel) {
@@ -181,7 +179,7 @@ export const ChannelParameters: FC<ChannelParametersProps> = ({
                 onChange={setValue}
                 options={channelCategories?.contents || []}
                 single={true}
-                type={platformData.category}
+                type={channelData.category}
                 textData={"add_platform.category"}
                 defaultValues={channel?.category}
               />
@@ -189,7 +187,7 @@ export const ChannelParameters: FC<ChannelParametersProps> = ({
                 onChange={setValue}
                 options={languages?.contents || []}
                 single={false}
-                type={platformData.language}
+                type={channelData.language}
                 textData={"add_platform.languages"}
                 defaultValues={defaultValues.language}
               />
@@ -197,7 +195,7 @@ export const ChannelParameters: FC<ChannelParametersProps> = ({
                 onChange={setValue}
                 options={regions?.contents || []}
                 single={false}
-                type={platformData.region}
+                type={channelData.region}
                 textData={"add_platform.region"}
                 defaultValues={defaultValues.region}
               />
@@ -211,7 +209,7 @@ export const ChannelParameters: FC<ChannelParametersProps> = ({
                 onChange={setValue}
                 options={ages?.contents || []}
                 single={false}
-                type={platformData.age}
+                type={channelData.age}
                 textData={"add_platform.age"}
                 defaultValues={defaultValues.age}
               />
@@ -219,7 +217,7 @@ export const ChannelParameters: FC<ChannelParametersProps> = ({
             <div className={styles.form__bottom}>
               <SelectDescription
                 onChange={setValue}
-                type={platformData.description}
+                type={channelData.description}
                 title={"add_platform.description.title"}
                 text={"add_platform.description.text"}
                 placeholder={"add_platform.default_input"}
@@ -230,7 +228,7 @@ export const ChannelParameters: FC<ChannelParametersProps> = ({
                 getValues={getValues}
                 formats={formats?.contents}
                 AccommPrice={FormatPrice}
-                type={platformData.format}
+                type={channelData.format}
                 title={"add_platform.price.title"}
                 text={"add_platform.price.text"}
                 info={"add_platform.price.info"}

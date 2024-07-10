@@ -1,1 +1,0 @@
-export { GetUserId } from "./getUserId";

@@ -1,9 +1,9 @@
 import { InfoIcon } from "@shared/assets";
-import { platformData } from "@shared/config/platformData";
 import { FC, useState } from "react";
 import { UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { channelData } from "@entities/channel";
 
 interface SelectDescriptionProps {
   title: string;
@@ -11,7 +11,7 @@ interface SelectDescriptionProps {
   placeholder: string;
   onChange: UseFormSetValue<any>;
   defaultValues?: string;
-  type: platformData;
+  type: channelData;
 }
 
 export const SelectDescription: FC<SelectDescriptionProps> = ({

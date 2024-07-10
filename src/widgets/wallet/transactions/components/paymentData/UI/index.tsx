@@ -1,16 +1,16 @@
+import { useAppSelector } from "@shared/store";
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
+import { LegalForm, PaymentDidox } from "@features/wallet";
 import {
   EntityData,
   IndividualData,
   SelfEmployedCardData,
   SelfEmployedData,
-} from "@shared/config/profileData";
-import { profileTypesName } from "@shared/config/profileFilter";
-import { useAppSelector } from "@shared/store";
-import { FC } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import { subprofileFilter } from "@shared/config/profileFilter";
-import { LegalForm, PaymentDidox } from "@features/wallet";
+  profileTypesName,
+  subprofileFilter,
+} from "@entities/wallet";
 
 interface PaymentDataProps {
   amountTitle: string;

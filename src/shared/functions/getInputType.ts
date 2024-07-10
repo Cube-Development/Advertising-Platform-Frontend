@@ -1,26 +1,25 @@
-import { profileData } from "@shared/config/profileData";
-import { IProfileData } from "@shared/types/profile";
+import { ILegalData, legalData } from "@entities/wallet";
 
-export function getInputLegalType(inputType: keyof IProfileData): string {
+export function getInputLegalType(inputType: keyof ILegalData): string {
   switch (inputType) {
-    case profileData.type_legal:
-    case profileData.INN:
-    case profileData.bank_mfo:
-    case profileData.PNFL:
-    case profileData.registration_number:
-    case profileData.card_number:
+    case legalData.type_legal:
+    case legalData.INN:
+    case legalData.bank_mfo:
+    case legalData.PNFL:
+    case legalData.registration_number:
+    case legalData.card_number:
       return "number";
-    case profileData.name:
-    case profileData.address:
-    case profileData.checking_account:
-    case profileData.bank_name:
-    case profileData.registration_date:
-    case profileData.transit_account:
-    case profileData.card_date:
+    case legalData.name:
+    case legalData.address:
+    case legalData.checking_account:
+    case legalData.bank_name:
+    case legalData.registration_date:
+    case legalData.transit_account:
+    case legalData.card_date:
       return "text";
-    case profileData.email:
+    case legalData.email:
       return "email";
-    case profileData.phone:
+    case legalData.phone:
       return "tel";
     default:
       return "text";

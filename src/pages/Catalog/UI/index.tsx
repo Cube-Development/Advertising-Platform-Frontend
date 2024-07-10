@@ -1,4 +1,4 @@
-import { CatalogBlock } from "@widgets/project";
+import { CatalogBlock } from "@widgets/catalog";
 import { FC } from "react";
 
 export const CatalogPage: FC = () => {

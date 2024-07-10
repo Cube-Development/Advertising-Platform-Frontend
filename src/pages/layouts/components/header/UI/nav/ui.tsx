@@ -1,4 +1,3 @@
-import { roles } from "@shared/config/roles";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -10,6 +9,7 @@ import {
 } from "./config";
 import styles from "./styles.module.scss";
 import { paths } from "@shared/routing";
+import { roles } from "@entities/user";
 
 interface NavProps {
   isAuth: boolean;

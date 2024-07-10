@@ -1,1 +1,0 @@
-export { MultiPostsList } from "./ui";

@@ -1,6 +1,4 @@
 import { CardIcon, InfoIcon } from "@shared/assets";
-import { topup } from "@shared/config/common";
-import { paymentTypes } from "@shared/config/payment";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -9,6 +7,7 @@ import { usePaymentDepositMutation } from "@shared/store/services/walletService"
 import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
 import { PaymentCard } from "@features/wallet";
+import { paymentTypes, topup } from "@entities/wallet";
 
 interface IOnlineBankingData {
   legal_id: string;

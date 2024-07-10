@@ -6,7 +6,7 @@ import {
   BookIcon,
   OfferIcon,
 } from "@shared/assets";
-import { IMenuItem } from "@shared/types/common";
+import { IMenuItem } from "../../config";
 
 export const advertiserMenu: IMenuItem[] = [
   {

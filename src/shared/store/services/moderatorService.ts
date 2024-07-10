@@ -1,5 +1,5 @@
+import { IOrderFeature } from "@entities/project";
 import { authApi } from "@shared/api";
-import { IOrderFeature } from "@shared/types/order";
 
 export const moderatorAPI = authApi.injectEndpoints({
   endpoints: (build) => ({

@@ -1,12 +1,4 @@
 import { AddIcon, ArrowSmallVerticalIcon, SendIcon } from "@shared/assets";
-import { MessageStatus, RecipientType } from "@shared/config/chat";
-import { INTERSECTION_ELEMENTS } from "@shared/config/common";
-import { convertUTCToLocalDateTime } from "@shared/functions/convertUTCToLocalTime";
-import { getCurrentUtcDateTime } from "@shared/functions/getCurrentUtcDateTime";
-import {
-  IOrderMessageNewSocket,
-  IOrderMessageSendSocket,
-} from "@shared/types/chat";
 import HardBreak from "@tiptap/extension-hard-break";
 import Link from "@tiptap/extension-link";
 import Underline from "@tiptap/extension-underline";
@@ -20,6 +12,17 @@ import styles from "./styles.module.scss";
 import { useGetOrderHistoryQuery } from "@shared/store/services/chatService";
 import { useCentrifuge } from "@widgets/communication/chat";
 import { DinamicPagination } from "@features/other";
+import {
+  convertUTCToLocalDateTime,
+  getCurrentUtcDateTime,
+} from "@shared/functions";
+import {
+  IOrderMessageNewSocket,
+  IOrderMessageSendSocket,
+  MessageStatus,
+  RecipientType,
+} from "@entities/communication";
+import { INTERSECTION_ELEMENTS } from "@shared/config";
 
 interface ChatMessagesProps {
   id: string;

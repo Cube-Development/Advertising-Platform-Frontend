@@ -2,9 +2,9 @@ import { FC, useState } from "react";
 import { ChannelLink } from "./channelLink";
 import { ChannelParameters } from "./channelParameters";
 import { ChannelTop } from "./channelTop";
-import { IAddPlatformBlur, IPlatformLink } from "@shared/types/platform";
-import { platformTypes } from "@shared/config/postFilter";
 import { QueryParams } from "@shared/functions";
+import { IAddPlatformBlur, IChannelLink } from "@entities/channel";
+import { platformTypes } from "@entities/platform";
 
 interface AddChannelBlockProps {}
 
@@ -21,7 +21,7 @@ export const AddChannelBlock: FC<AddChannelBlockProps> = () => {
     setBlur(newBlur);
   };
 
-  const [currentPlatform, setCurrentPlatform] = useState<IPlatformLink>(
+  const [currentPlatform, setCurrentPlatform] = useState<IChannelLink>(
     platformTypes[0],
   );
   const [inserCode, setInserCode] = useState<string>("");

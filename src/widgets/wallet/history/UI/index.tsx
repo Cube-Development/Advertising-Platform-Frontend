@@ -5,11 +5,10 @@ import {
   HistoryReq,
   useGetHistoryQuery,
 } from "@shared/store/services/walletService";
-import { IWalletHistory } from "@shared/types/history";
 import { Languages } from "@shared/config/languages";
 import { INTERSECTION_ELEMENTS } from "@shared/config/common";
 import { SadSmileIcon } from "@shared/assets";
-import { HistoryCard } from "@entities/wallet";
+import { HistoryCard, IWalletHistory } from "@entities/wallet";
 import { BarHistory } from "@features/wallet";
 import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
 
@@ -27,7 +26,7 @@ export const History: FC = () => {
   const getParams: HistoryReq = {
     language: language?.id || Languages[0].id,
     page: currentPage,
-    elements_on_page: INTERSECTION_ELEMENTS.hisory,
+    elements_on_page: INTERSECTION_ELEMENTS.history,
     date_sort: "increase",
   };
 
@@ -59,7 +58,8 @@ export const History: FC = () => {
                 <HistoryCard card={card} key={index} />
               ))}
               {data &&
-                data?.transactions?.length === INTERSECTION_ELEMENTS.hisory && (
+                data?.transactions?.length ===
+                  INTERSECTION_ELEMENTS.history && (
                   <div
                     className={styles.show_more}
                     onClick={handleOnChangePage}

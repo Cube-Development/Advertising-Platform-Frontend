@@ -1,7 +1,10 @@
+import {
+  IOrderMessageAll,
+  IOrderMessageNewSocket,
+} from "@entities/communication";
+import { roles } from "@entities/user";
 import { authApi } from "@shared/api";
 import { CHAT } from "@shared/api/tags";
-import { roles } from "@shared/config/roles";
-import { IOrderMessageAll, IOrderMessageNewSocket } from "@shared/types/chat";
 
 export interface getChatsReq {
   role: roles;

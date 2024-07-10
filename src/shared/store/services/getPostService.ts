@@ -1,5 +1,5 @@
+import { PostTypesNum, platformTypesNum } from "@entities/platform";
 import { authApi } from "@shared/api";
-import { PostTypesNum, platformTypesNum } from "@shared/config/platformTypes";
 
 export interface ITgButtonRes {
   id: string;

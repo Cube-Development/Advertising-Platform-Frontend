@@ -1,6 +1,5 @@
 import { ArrowSmallVerticalIcon } from "@shared/assets";
 import { accordionTypes } from "@shared/config/accordion";
-import { IMenuItems } from "@shared/types/common";
 import {
   AccordionContent,
   AccordionItem,
@@ -10,6 +9,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
+import { IMenuItems } from "@pages/layouts/components/config";
 
 export const MenuItem: React.FC<IMenuItems> = ({
   item,

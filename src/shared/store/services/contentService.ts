@@ -1,7 +1,7 @@
+import { IChannelFormat } from "@entities/channel";
+import { platformTypesNum } from "@entities/platform";
 import { baseApi } from "@shared/api";
 import { languagesNum } from "@shared/config/languages";
-import { platformTypesNum } from "@shared/config/platformTypes";
-import { IChannelFormat } from "@shared/types/platform";
 
 type GetContentReq = {
   language: languagesNum;

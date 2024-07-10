@@ -1,7 +1,7 @@
-import { IFormatPriceProps } from "@shared/types/platform";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { IFormatPriceProps } from "@entities/channel";
 
 export const FormatPrice: FC<IFormatPriceProps> = ({
   big,

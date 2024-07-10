@@ -1,5 +1,5 @@
 export * from "./accommPrice";
-export * from "./activatePlatform";
+export * from "./activateChannel";
 export * from "./addChannel";
 export * from "./channelCardMenu";
 export * from "./channelDescription";

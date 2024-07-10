@@ -10,13 +10,8 @@ import {
 } from "@shared/assets";
 import { accordionTypes } from "@shared/config/accordion";
 import { Languages } from "@shared/config/languages";
-import { orderStatus } from "@shared/config/orderFilter";
-import { managerProjectStatusFilter } from "@shared/config/projectFilter";
 import { useAppSelector } from "@shared/store";
 import { getProjectSubcardReq } from "@shared/store/services/advOrdersService";
-import { IChannelChat } from "@shared/types/common";
-import { IManagerProjectCard } from "@shared/types/managerProject";
-import { IOrderFeature } from "@shared/types/order";
 import {
   AccordionContent,
   AccordionItem,
@@ -32,7 +27,6 @@ import {
   RunProject,
   SeePost,
 } from "@features/project";
-import { ManagerSubcard } from "@entities/project";
 import {
   AcceptOrder,
   ChangeChannel,
@@ -40,6 +34,11 @@ import {
   Feedback,
   OrderChat,
 } from "@features/order";
+import { ManagerSubcard, orderStatus } from "@entities/order";
+import {
+  IManagerProjectCard,
+  managerProjectStatusFilter,
+} from "@entities/project";
 
 interface ManagerProjectCardProps {
   card: IManagerProjectCard;

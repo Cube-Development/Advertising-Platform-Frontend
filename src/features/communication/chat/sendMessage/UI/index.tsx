@@ -2,8 +2,8 @@ import { FC, useState } from "react";
 import styles from "./styles.module.scss";
 import { AddIcon, SendIcon } from "@shared/assets";
 import { useTranslation } from "react-i18next";
-import { IChat, IMessage } from "@shared/types/chat";
-import { chatRoles } from "@shared/config/roles";
+import { IMessage } from "@entities/communication";
+import { chatRoles } from "@entities/user";
 
 interface SendMessageProps {
   onChange: (message: IMessage) => void;

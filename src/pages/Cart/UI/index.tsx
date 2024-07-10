@@ -1,4 +1,4 @@
-import { Cart } from "@widgets/project";
+import { Cart } from "@widgets/cart";
 import { FC } from "react";
 
 export const CartPage: FC = () => {

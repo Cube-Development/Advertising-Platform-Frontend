@@ -1,16 +1,16 @@
 import { usePublishPostBloggerMutation } from "@shared/store/services/bloggerOffersService";
-import { IOrderFeature } from "@shared/types/order";
-import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
-import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { SendHorizonal } from "lucide-react";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@shared/ui/shadcn-ui/ui/popover";
-import { SendHorizonal } from "lucide-react";
+  ToastAction,
+  useToast,
+} from "@shared/ui";
+import { IOrderFeature } from "@entities/project";
 
 export const SendLink: FC<IOrderFeature> = ({ order_id }) => {
   const [url, setUrl] = useState("");

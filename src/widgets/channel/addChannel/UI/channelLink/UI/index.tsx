@@ -1,27 +1,25 @@
 import { InfoIcon } from "@shared/assets";
-import { platformTypes } from "@shared/config/postFilter";
 import {
   useChannelVerifyMutation,
   useCreateCodeQuery,
 } from "@shared/store/services/channelService";
-import {
-  IAddChannelIdentification,
-  IAddPlatformBlur,
-  IPlatformLink,
-} from "@shared/types/platform";
-import { MyButton } from "@shared/ui";
-import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
-import { SpinnerLoaderSmall } from "@shared/ui/spinnerLoader";
+import { MyButton, SpinnerLoaderSmall, useToast } from "@shared/ui";
 import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import {
+  IAddChannelIdentification,
+  IAddPlatformBlur,
+  IChannelLink,
+} from "@entities/channel";
+import { platformTypes } from "@entities/platform";
 
 interface ChannelLinkProps {
   blur: IAddPlatformBlur;
   onChangeBlur: (newBlur: IAddPlatformBlur) => void;
-  currentPlatform: IPlatformLink;
-  setCurrentPlatform: (platform: IPlatformLink) => void;
+  currentPlatform: IChannelLink;
+  setCurrentPlatform: (platform: IChannelLink) => void;
   setInserCode: (code: string) => void;
   channel_id?: string;
 }
@@ -82,7 +80,7 @@ export const ChannelLink: FC<ChannelLinkProps> = ({
     }
   };
 
-  const changePlatform = (platform: IPlatformLink) => {
+  const changePlatform = (platform: IChannelLink) => {
     setCurrentPlatform(platform);
     reset();
   };

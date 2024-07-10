@@ -7,7 +7,7 @@ import {
 import { Mutex } from "async-mutex";
 import Cookies from "js-cookie";
 import { userSlice } from "../reducers";
-import { IToken } from "@shared/types/tokens";
+import { IToken } from "@entities/user";
 
 interface ITokenResponse {
   data?: IToken;

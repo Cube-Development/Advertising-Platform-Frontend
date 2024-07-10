@@ -1,9 +1,14 @@
+import { PostTypesNum } from "@entities/platform";
+import {
+  IAdvProjects,
+  IAdvSubprojects,
+  ICreateDate,
+  IFile,
+  IPostChannel,
+} from "@entities/project";
 import { authApi } from "@shared/api";
 import { ADV_PROJECTS, BLOGGER_OFFERS } from "@shared/api/tags";
 import { languagesNum } from "@shared/config/languages";
-import { PostTypesNum } from "@shared/config/platformTypes";
-import { IAdvProjects, IAdvSubprojects } from "@shared/types/advProject";
-import { ICreateDate, IFile, IPostChannel } from "@shared/types/createPost";
 
 export interface ICreatePostReq {
   project_id: string;

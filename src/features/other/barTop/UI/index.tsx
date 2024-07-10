@@ -4,10 +4,9 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { useAppSelector } from "@shared/store";
-import { roles } from "@shared/config/roles";
-import { IAddChannelQuery } from "@shared/types/platform";
-import { addChannelQueries } from "@shared/config/addChannelQueries";
 import { paths } from "@shared/routing";
+import { IAddChannelQuery, addChannelQueries } from "@entities/channel";
+import { roles } from "@entities/user";
 
 interface BarTopProps {
   listLength: boolean;

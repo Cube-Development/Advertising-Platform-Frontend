@@ -1,2 +1,3 @@
-export * from "./history";
-export * from "./legal";
+export * from "./ui";
+export * from "./config";
+export * from "./types";

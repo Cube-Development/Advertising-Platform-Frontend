@@ -1,4 +1,3 @@
-import { addChannelQueries } from "@shared/config/addChannelQueries";
 import { paths } from "@shared/routing";
 import { IOption } from "@shared/types/translate";
 import { motion } from "framer-motion";
@@ -10,6 +9,7 @@ import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
 import { OptionCard } from "../card";
 import { SeeCatalog } from "@features/mainPages";
 import { AddChannel } from "@features/channel";
+import { addChannelQueries } from "@entities/channel";
 
 interface CtaProps {
   page: string;

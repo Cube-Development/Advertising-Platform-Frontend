@@ -1,5 +1,4 @@
 import { FC } from "react";
-import { IBloggerOfferCard } from "@shared/types/bloggerOffer";
 import styles from "./styles.module.scss";
 import { pageFilter } from "@shared/config/pageFilter";
 import { paths } from "@shared/routing";
@@ -7,6 +6,7 @@ import { INTERSECTION_ELEMENTS } from "@shared/config/common";
 import { OfferCard, OfferCardSkeleton } from "../card";
 import { ShowMoreBtn, ZeroChannel, SpinnerLoader } from "@shared/ui";
 import { AddChannel } from "@features/channel";
+import { IBloggerOfferCard } from "@entities/offer";
 
 interface MyOffersProps {
   offers: IBloggerOfferCard[];

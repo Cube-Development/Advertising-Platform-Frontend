@@ -1,4 +1,3 @@
-import { IAdvProjectCard } from "@shared/types/advProject";
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { INTERSECTION_ELEMENTS } from "@shared/config/common";
@@ -6,6 +5,7 @@ import { Accordion, ShowMoreBtn, SpinnerLoader, ZeroProject } from "@shared/ui";
 import { NewProject } from "@features/project";
 import { TurnkeyProject } from "@features/other";
 import { AdvProjectCard, ProjectCardSkeleton } from "../card";
+import { IAdvProjectCard } from "@entities/project";
 
 interface AdvProjectsListProps {
   projects: IAdvProjectCard[];

@@ -1,7 +1,7 @@
 import {
   IOrderMessageNewSocket,
   IOrderMessageSendSocket,
-} from "@shared/types/chat";
+} from "@entities/communication";
 import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import axios from "axios";
 import { Centrifuge, PublicationContext } from "centrifuge";
