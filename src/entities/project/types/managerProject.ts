@@ -1,26 +1,16 @@
-import { orderStatus } from "@entities/order";
+import { desireStatus, orderStatus } from "@entities/order";
 
 export interface IManagerProjects {
   page: number;
   elements: number;
-  tariffs: IManagerProjectCard[];
+  projects: IManagerProjectCard[];
 }
 
 export interface IManagerNewProjects {
   page: number;
   elements: number;
-  tariffs: IManagerNewProjectCard[];
+  projects: IManagerNewProjectCard[];
 }
-
-// export interface IManagerNewProjectCard {
-//   id: number;
-//   date: string;
-//   tarif: string;
-//   price: number;
-//   comment: string;
-//   url: string[];
-//   file: string[];
-// }
 
 export interface IManagerNewProjectCard {
   id: string;
@@ -40,19 +30,27 @@ interface IFile {
 
 export interface IManagerProjectCard {
   id: string;
-  created: string;
-  tarif: string;
-  name: string;
-  count_channels: number;
+  project_id: string;
+  project_name: string;
+  tariff_name: string;
+  tariff_date: string;
+  orders: number;
   views: number;
   budget: number;
-  completed: number;
-  canceled_rejected: number;
+  is_request_approve?: boolean;
+  completed?: number;
+  canceled_rejected?: number;
   wait?: number;
   in_progress?: number;
   moderation?: number;
   report?: boolean;
   subcards?: IManagerProjectSubcard[];
+}
+
+export interface IManagerSubprojects {
+  page: number;
+  elements: number;
+  orders: IManagerProjectSubcard[];
 }
 
 export interface IManagerProjectSubcard {
@@ -84,4 +82,10 @@ export interface IManagerProjectSubcard {
   cpv: number;
   male: number;
   female: number;
+  desire?: IDesire[];
+}
+
+export interface IDesire {
+  desire_type: desireStatus;
+  comment: string;
 }

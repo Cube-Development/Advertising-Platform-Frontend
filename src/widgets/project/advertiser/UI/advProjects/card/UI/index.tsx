@@ -18,13 +18,15 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { Chat } from "@widgets/communication";
 import {
-  AcceptOrder,
+  AcceptPost,
   ChangeChannel,
   CheckPost,
   Feedback,
   OrderChat,
+  RejectPost,
+  SeePost,
 } from "@features/order";
-import { RejectPost, SeePost } from "@features/project";
+import { AcceptProject } from "@features/project";
 import { AdvSubcard } from "@entities/order";
 import {
   IAdvProjectCard,
@@ -139,8 +141,8 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({ card }) => {
           </div>
           <>
             {typeFilter === projectTypesFilter.managerProject &&
-            statusFilter === advManagerProjectStatusFilter.agreed ? (
-              <AcceptOrder />
+            statusFilter === advManagerProjectStatusFilter.request_approve ? (
+              <AcceptProject />
             ) : typeFilter === projectTypesFilter.myProject &&
               statusFilter === myProjectStatusFilter.completed ? (
               <div className={styles.card__info__icons_completed}>
@@ -212,7 +214,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({ card }) => {
                   key={index}
                   subcard={subcard}
                   FeedbackBtn={Feedback}
-                  AcceptBtn={AcceptOrder}
+                  AcceptBtn={AcceptPost}
                   RejectBtn={RejectPost}
                   CheckBtn={CheckPost}
                   SeeBtn={SeePost}

@@ -5,8 +5,7 @@ import styles from "./styles.module.scss";
 import { Accordion } from "@shared/ui";
 import { AddMore, AddToBasket, SaveCart } from "@features/cart";
 import { CatalogCard, SkeletonCatalogCard } from "@features/catalog";
-import { FormatList } from "@features/project";
-import { ICatalogChannel } from "@entities/catalog";
+import { FormatList, ICatalogChannel } from "@entities/catalog";
 import { pageFilter } from "@shared/routing";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 

@@ -4,12 +4,16 @@ import { useTranslation } from "react-i18next";
 import { MyButton } from "@shared/ui";
 import { ArrowLongHorizontalIcon } from "@shared/assets";
 
-interface RunProjectProps {}
+interface RunProjectProps {
+  is_request_approve: boolean;
+}
 
-export const RunProject: FC<RunProjectProps> = () => {
+export const RunProject: FC<RunProjectProps> = ({ is_request_approve }) => {
   const { t } = useTranslation();
   return (
-    <MyButton className={styles.button}>
+    <MyButton
+      className={`${styles.button} ${is_request_approve ? "" : "deactive"}`}
+    >
       <p>{t("orders_manager.card.run_btn")}</p>
       <ArrowLongHorizontalIcon className="default__icon__white" />
     </MyButton>

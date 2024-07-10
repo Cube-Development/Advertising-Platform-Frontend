@@ -4,7 +4,7 @@ import React, { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
-export const AcceptOrder: FC = () => {
+export const AcceptProject: FC = () => {
   const { t } = useTranslation();
   return (
     <MyButton buttons_type="button__blue" className={styles.button}>

@@ -68,7 +68,7 @@ export const CatalogBlock: FC = () => {
   const { isAuth } = useAppSelector((state) => state.user);
   const guestId = Cookies.get("guest_id");
   const role = Cookies.get("role");
-  const managerProjectId = Cookies.get("manager_project_id");
+  const projectId = Cookies.get("project_id");
 
   if (!guestId) {
     GenerateGuestId();
@@ -114,7 +114,6 @@ export const CatalogBlock: FC = () => {
     //   behavior: "smooth",
     // });
   }, [filter, sort, lang]);
-
   useEffect(() => {
     if (catalog && formFields.page !== 1) {
       setCards([...cards, ...catalog.channels]);
@@ -199,7 +198,6 @@ export const CatalogBlock: FC = () => {
                 title: t("toasts.catalog.add.error"),
                 action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
-
               console.error("Ошибка при добавлении в корзину", error);
             });
         } else if (isAuth && role === roles.advertiser) {
@@ -216,8 +214,8 @@ export const CatalogBlock: FC = () => {
               });
               console.error("Ошибка при добавлении в корзину", error);
             });
-        } else if (isAuth && role === roles.manager && managerProjectId) {
-          addToManagerCart({ ...addReq, project_id: managerProjectId })
+        } else if (isAuth && role === roles.manager && projectId) {
+          addToManagerCart({ ...addReq, project_id: projectId })
             .unwrap()
             .then((data) => {
               setCurrentCart(data);
@@ -264,8 +262,8 @@ export const CatalogBlock: FC = () => {
               });
               console.error("Ошибка при добавлении в корзину", error);
             });
-        } else if (isAuth && role === roles.manager && managerProjectId) {
-          addToManagerCart({ ...addReq, project_id: managerProjectId })
+        } else if (isAuth && role === roles.manager && projectId) {
+          addToManagerCart({ ...addReq, project_id: projectId })
             .unwrap()
             .then((data) => {
               setCurrentCart(data);
@@ -318,8 +316,8 @@ export const CatalogBlock: FC = () => {
               });
               console.error("Ошибка при удалении с корзины", error);
             });
-        } else if (isAuth && role === roles.manager && managerProjectId) {
-          removeFromManagerCart({ ...removeReq, project_id: managerProjectId })
+        } else if (isAuth && role === roles.manager && projectId) {
+          removeFromManagerCart({ ...removeReq, project_id: projectId })
             .unwrap()
             .then((data) => {
               setCurrentCart(data);

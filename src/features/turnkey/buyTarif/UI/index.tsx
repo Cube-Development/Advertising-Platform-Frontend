@@ -10,7 +10,16 @@ export const BuyTarif: FC = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
   const [buyTarif] = usePostBuyTarifMutation();
-  const tarif = { tariff_ident: 1, comment: "", links: [], attached_files: [] };
+  const tarif = {
+    tariff_ident: 1,
+    comment: new Date().toDateString(),
+    links: [
+      "https://strident-thump.info",
+      "https://strident-thump.info",
+      "https://strident-thump.info",
+    ],
+    attached_files: [],
+  };
 
   const handleOnClick = () => {
     buyTarif(tarif)

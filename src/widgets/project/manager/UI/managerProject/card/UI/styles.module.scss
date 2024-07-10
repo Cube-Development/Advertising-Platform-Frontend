@@ -159,7 +159,6 @@
               font-weight: 400;
               line-height: 0.75;
             }
-
             span {
               color: var(--Personal-colors-black);
               font-size: 14px;
@@ -266,7 +265,7 @@
     border-left: 1px solid var(--Personal-colors-main);
     border-top: 1px solid var(--Personal-colors-main);
     row-gap: 10px;
-    padding: 10px 10px 0 10px;
+    padding: 10px;
     border-radius: 12px 12px 0 0;
   }
 }

@@ -97,7 +97,6 @@ export const AdvOrders: FC = () => {
   return (
     <>
       <BarFilter page={page} listLength={!!projects?.length} />
-
       {typeFilter === projectTypesFilter.managerProject &&
       statusFilter === advManagerProjectStatusFilter.develop ? (
         <DevProjectsList

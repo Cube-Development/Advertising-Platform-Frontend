@@ -1,14 +1,17 @@
 import { BarFilter } from "@widgets/other";
 import { FC, useEffect, useState } from "react";
-import { ManagerNewProjectsList } from "./managerNewProject";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
-import {
-  IManagerNewProjectCard,
-  getManagerProjectsCardReq,
-  useGetManagerProjectsQuery,
-} from "@entities/project";
 import { pageFilter } from "@shared/routing";
 import { useAppSelector } from "@shared/hooks";
+import { ManagerProjectsList } from "./managerProject";
+import {
+  IManagerNewProjectCard,
+  IManagerProjectCard,
+  getProjectsCardReq,
+  managerProjectStatusFilter,
+  useGetManagerProjectsQuery,
+} from "@entities/project";
+import { ManagerNewProjectsList } from "./managerNewProject";
 
 export const ManagerOrders: FC = () => {
   const { statusFilter } = useAppSelector((state) => state.filter);
@@ -18,25 +21,34 @@ export const ManagerOrders: FC = () => {
     setCurrentPage(currentPage + 1);
   };
 
-  const getParams: getManagerProjectsCardReq = {
+  const getParams: getProjectsCardReq = {
     language: 1,
     page: currentPage,
-    // date_sort: "increase",
     status: statusFilter,
-    elements_on_page: INTERSECTION_ELEMENTS.orders,
+    elements_on_page: INTERSECTION_ELEMENTS.managerOrders,
   };
 
   const { data, isFetching } = useGetManagerProjectsQuery(getParams);
-  const [tariffs, setTariffs] = useState<IManagerNewProjectCard[]>(
-    data?.tariffs ? (data?.tariffs as IManagerNewProjectCard[]) : [],
-  );
+  const [tariffs, setTariffs] = useState<
+    IManagerNewProjectCard[] | IManagerProjectCard[]
+  >(data ? data.projects : []);
 
   useEffect(() => {
-    console.log(data);
+    console.log(data, currentPage, statusFilter);
     if (data && currentPage !== 1) {
-      setTariffs([...tariffs, ...(data.tariffs as IManagerNewProjectCard[])]);
+      if (statusFilter === managerProjectStatusFilter.new) {
+        setTariffs([
+          ...(tariffs as IManagerNewProjectCard[]),
+          ...(data.projects as IManagerNewProjectCard[]),
+        ]);
+      } else {
+        setTariffs([
+          ...(tariffs as IManagerProjectCard[]),
+          ...(data.projects as IManagerProjectCard[]),
+        ]);
+      }
     } else {
-      data && setTariffs(data.tariffs as IManagerNewProjectCard[]);
+      data && setTariffs(data.projects);
     }
   }, [data]);
 
@@ -44,25 +56,30 @@ export const ManagerOrders: FC = () => {
     setCurrentPage(1);
   }, [statusFilter]);
 
-  // // после раз Мока удалить часть кода между комментраиями
-  // const projects =
-  //   statusFilter === managerProjectStatusFilter.active
-  //     ? managerActiveCARDS
-  //     : statusFilter === managerProjectStatusFilter.completed
-  //       ? managerCompletedCARDS
-  //       : statusFilter === managerProjectStatusFilter.agreed
-  //         ? managerAgreedCARDS
-  //         : managerNewCARDS;
-  // //  *****************
-
   return (
     <>
       <BarFilter page={page} listLength={!!tariffs?.length} />
-      {/* {statusFilter === managerProjectStatusFilter.new ? ( */}
-      <ManagerNewProjectsList projects={tariffs! as IManagerNewProjectCard[]} />
-      {/* ) : ( */}
-      {/* <ManagerProject projects={tariffs! as IManagerProjectCard[]} /> */}
-      {/* )} */}
+      {statusFilter === managerProjectStatusFilter.new ? (
+        <ManagerNewProjectsList
+          projects={tariffs! as IManagerNewProjectCard[]}
+          handleOnChangePage={handleOnChangePage}
+          isLoading={isFetching}
+          isNotEmpty={
+            data?.projects?.length === INTERSECTION_ELEMENTS.managerOrders ||
+            false
+          }
+        />
+      ) : (
+        <ManagerProjectsList
+          projects={tariffs! as IManagerProjectCard[]}
+          handleOnChangePage={handleOnChangePage}
+          isLoading={isFetching}
+          isNotEmpty={
+            data?.projects?.length === INTERSECTION_ELEMENTS.managerOrders ||
+            false
+          }
+        />
+      )}
     </>
   );
 };

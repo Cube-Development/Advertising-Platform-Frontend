@@ -11,6 +11,7 @@ export const enum INTERSECTION_ELEMENTS {
   channels = 15,
   history = 1000,
   chat = 20,
+  managerOrders = 4,
 }
 
 export const enum BREAKPOINT {

@@ -1,0 +1,21 @@
+.wrapper {
+  display: grid;
+  grid-template: 8fr 3fr / 1fr;
+  min-height: 110px;
+
+  .card {
+    display: grid;
+    grid-template: 1fr / 1fr 1fr 2fr 2fr 3fr 0.5fr;
+    padding: 15px 0;
+
+    &__id,
+    &__date,
+    &__tarif,
+    &__price {
+      display: grid;
+      grid-auto-flow: row;
+      align-content: center;
+      justify-items: center;
+    }
+  }
+}

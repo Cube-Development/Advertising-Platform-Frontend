@@ -45,7 +45,7 @@ interface AdvSubcardProps {
   RejectBtn: FC<IOrderFeature>;
   CheckBtn: FC<IOrderFeature>;
   SeeBtn: FC;
-  ChangeChannelBtn: FC;
+  ChangeChannelBtn: FC<{ project_id: string }>;
   ChannelChatBtn: FC<IChannelChat>;
 }
 
@@ -339,7 +339,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
             <div>
               <p>{t(`orders_advertiser.order_status.agreed.title`)}</p>
               <div>
-                <ChangeChannelBtn />
+                <ChangeChannelBtn project_id={"sfsdf"} />
                 <CheckBtn />
               </div>
             </div>

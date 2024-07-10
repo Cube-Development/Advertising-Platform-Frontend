@@ -1,12 +1,13 @@
-import { IManagerNewProjects, IManagerProjects } from "@entities/project";
+import { PostTypesNum, platformTypesNum } from "@entities/platform";
+import {
+  IManagerNewProjects,
+  IManagerProjects,
+  IManagerSubprojects,
+  IPostChannel,
+  ITgButtonRes,
+} from "@entities/project";
 import { MANAGER_PROJECTS, authApi } from "@shared/api";
-
-// export interface ICreatePostReq {
-//   project_id: string;
-//   platform?: number;
-//   comment?: string;
-//   files?: IFile[];
-// }
+import { languagesNum } from "@shared/config";
 
 export interface getManagerProjectsCardReq {
   page: number;
@@ -16,88 +17,80 @@ export interface getManagerProjectsCardReq {
   language?: number;
 }
 
-// export interface getProjectSubcardReq {
-//   project_id: string;
-//   language: languagesNum;
-//   page: number;
-//   elements_on_page?: number;
-// }
+export interface getManagerProjectOrdersReq {
+  project_id: string;
+  language: languagesNum;
+  page: number;
+  elements_on_page?: number;
+}
 
-// export interface getProjectOrdersRes {
-//   page: number;
-//   elements: number;
-//   orders: IPostChannel[];
-// }
+export interface getManagerProjectOrdersRes {
+  page: number;
+  elements: number;
+  orders: IPostChannel[];
+}
+
+export interface getPostsReq {
+  project_id: string;
+  post_upload_type: number;
+  page: number;
+  elements_on_page?: number;
+}
+
+export interface getManagerPostsRes {
+  page: number;
+  elements: number;
+  posts: GetManagerPostRes[];
+}
+
+export interface GetManagerPostRes {
+  id: string;
+  platform: platformTypesNum;
+  comment?: string;
+  photo: string[];
+  video: string[];
+  files: string[];
+  buttons: ITgButtonRes[];
+  text: string[];
+  post_type: PostTypesNum;
+}
 
 export const managerProjectsAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
-    // createCart: build.mutation<{ project_id: string }, void>({
-    //   query: () => ({
-    //     url: `/order/`,
-    //     method: "POST",
-    //   }),
-    // }),
-    // getUploadLink: build.mutation<
-    //   { file_name: string; url: string },
-    //   { extension: string; content_type: number }
-    // >({
-    //   query: (params) => ({
-    //     url: `/file/upload_link`,
-    //     method: "GET",
-    //     params: params,
-    //   }),
-    // }),
-    // createPost: build.mutation<{ success: boolean }, ICreatePostReq>({
-    //   query: (body) => ({
-    //     url: `/order/post`,
-    //     method: "POST",
-    //     body: body,
-    //   }),
-    // }),
-    // projectOrders: build.query<getProjectOrdersRes, getProjectSubcardReq>({
-    //   query: (params) => ({
-    //     url: `/order/datetime-setup`,
-    //     method: "GET",
-    //     params: params,
-    //   }),
-    // }),
-    // createOrderDates: build.mutation<{ success: boolean }, ICreateDate>({
-    //   query: (body) => ({
-    //     url: `/order/dates`,
-    //     method: "POST",
-    //     body: body,
-    //   }),
-    // }),
-    // acceptOrder: build.mutation<{ success: boolean }, { order_id: string }>({
-    //   query: (params) => ({
-    //     url: `/order/advertiser/accept`,
-    //     method: "PUT",
-    //     params: params,
-    //   }),
-    //   invalidatesTags: [BLOGGER_OFFERS, ADV_PROJECTS],
-    // }),
-    // rejectOrder: build.mutation<
-    //   { success: boolean },
-    //   { order_id: string; comment: string }
-    // >({
-    //   query: (params) => ({
-    //     url: `/order/advertiser/reject`,
-    //     method: "PUT",
-    //     params: params,
-    //   }),
-    //   invalidatesTags: [BLOGGER_OFFERS, ADV_PROJECTS],
-    // }),
-    // addReview: build.mutation<
-    //   { success: boolean },
-    //   { order_id: string; review: string; grade: number }
-    // >({
-    //   query: (params) => ({
-    //     url: `/order/advertiser/add_review`,
-    //     method: "PUT",
-    //     params: params,
-    //   }),
-    //   invalidatesTags: [BLOGGER_OFFERS, ADV_PROJECTS],
-    // }),
+    createProjectCart: build.mutation<
+      { succsess: boolean },
+      { project_id: string }
+    >({
+      query: (params) => ({
+        url: `/cart/project/attach/`,
+        method: "POST",
+        params: params,
+      }),
+    }),
+
+    approveProject: build.mutation<
+      { success: boolean },
+      { project_id: string }
+    >({
+      query: (params) => ({
+        url: `/tariff/project/request-approve`,
+        method: "PUT",
+        params: params,
+      }),
+    }),
+
+    getManagerSubprojects: build.query<
+      IManagerSubprojects,
+      getManagerProjectOrdersReq
+    >({
+      query: (params) => ({
+        url: `/tariff/order`,
+        method: `GET`,
+        params: params,
+      }),
+      // providesTags: [ADV_PROJECTS],
+    }),
+
     getManagerProjects: build.query<
       IManagerProjects | IManagerNewProjects,
       getManagerProjectsCardReq
@@ -109,15 +102,45 @@ export const managerProjectsAPI = authApi.injectEndpoints({
       }),
       providesTags: [MANAGER_PROJECTS],
     }),
-    // getAdvSubprojects: build.query<IAdvSubprojects, getProjectSubcardReq>({
-    //   query: (BodyParams) => ({
-    //     url: `/order/project/orders`,
-    //     method: `POST`,
-    //     body: BodyParams,
-    //   }),
-    //   providesTags: [ADV_PROJECTS],
-    // }),
+
+    getManagerProjectOrders: build.query<
+      getManagerProjectOrdersRes,
+      getManagerProjectOrdersReq
+    >({
+      query: (params) => ({
+        url: `/order/datetime-setup`,
+        method: "GET",
+        params: params,
+      }),
+    }),
+
+    getManagerProjectOrdersRereview: build.query<
+      getManagerProjectOrdersRes,
+      getManagerProjectOrdersReq
+    >({
+      query: (params) => ({
+        url: `/order/datetime`,
+        method: "GET",
+        params: params,
+      }),
+    }),
+
+    getPostsRereview: build.query<getManagerPostsRes, getPostsReq>({
+      query: (params) => ({
+        url: `/order/posts`,
+        method: "GET",
+        params: params,
+      }),
+    }),
   }),
 });
 
-export const { useGetManagerProjectsQuery } = managerProjectsAPI;
+export const {
+  useGetManagerProjectsQuery,
+  useApproveProjectMutation,
+  useGetManagerSubprojectsQuery,
+  useCreateProjectCartMutation,
+  useGetManagerProjectOrdersQuery,
+  useGetManagerProjectOrdersRereviewQuery,
+  useGetPostsRereviewQuery,
+} = managerProjectsAPI;

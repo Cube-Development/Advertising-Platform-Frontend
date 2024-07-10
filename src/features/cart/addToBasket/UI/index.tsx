@@ -33,7 +33,7 @@ export const AddToBasket: FC<IAddToBasketProps> = ({
         card={card}
       />
       <div className={styles.price}>
-        {selectedFormat.price.toLocaleString()} {t("symbol")}
+        {selectedFormat?.price?.toLocaleString()} {t("symbol")}
         {page || card.selected_format ? <CartMinusIcon /> : <CartPlusIcon />}
       </div>
     </MyButton>

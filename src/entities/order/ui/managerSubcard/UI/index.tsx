@@ -14,21 +14,24 @@ import {
   IOrderFeature,
   managerProjectStatusFilter,
 } from "@entities/project";
-import { orderStatus, orderStatusChat } from "@entities/order";
+import { desireStatus, orderStatus, orderStatusChat } from "@entities/order";
 import { useAppSelector } from "@shared/hooks";
 
-interface ManagerSubcardProps {
+interface ManagerProjectSubcardProps {
   subcard: IManagerProjectSubcard;
   FeedbackBtn: FC;
   AcceptBtn: FC<IOrderFeature>;
   RejectBtn: FC<IOrderFeature>;
   CheckBtn: FC;
   SeePostBtn: FC;
-  ChangeChannelBtn: FC;
+  project_id: string;
+  ChangeChannelBtn: FC<{ project_id: string }>;
+  ChangePostBtn: FC<{ project_id: string }>;
+  SeeCommentBtn: FC;
   ChannelChatBtn: FC<IChannelChat>;
 }
 
-export const ManagerSubcard: FC<ManagerSubcardProps> = ({
+export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
   subcard,
   FeedbackBtn,
   AcceptBtn,
@@ -37,6 +40,9 @@ export const ManagerSubcard: FC<ManagerSubcardProps> = ({
   SeePostBtn,
   ChannelChatBtn,
   ChangeChannelBtn,
+  ChangePostBtn,
+  SeeCommentBtn,
+  project_id,
 }) => {
   const { t } = useTranslation();
   const { statusFilter } = useAppSelector((state) => state.filter);
@@ -133,8 +139,40 @@ export const ManagerSubcard: FC<ManagerSubcardProps> = ({
         </div>
       </div>
       <>
-        {subcard?.api_status === orderStatus.canceled ||
-        subcard?.api_status === orderStatus.rejected ? (
+        {subcard?.desire?.length === 0 ? (
+          <div className={styles.subcard__agreed}>
+            <div>
+              <p>{t(`orders_manager.order_status.agreed.title`)}</p>
+              <div>
+                <ChangePostBtn project_id={project_id} />
+                <CheckBtn />
+              </div>
+            </div>
+          </div>
+        ) : subcard?.desire?.length ? (
+          <div className={styles.subcard__posted}>
+            <div className={styles.subcard__posted__title}>
+              <p>{t(`orders_manager.order_status.comment.title`)}</p>
+            </div>
+            <div className={styles.subcard__posted__buttons}>
+              <div className={styles.subcard__posted__buttons__top}>
+                {subcard?.desire.length === 2 ? (
+                  <>
+                    <ChangePostBtn project_id={project_id} />
+                    <ChangeChannelBtn project_id={project_id} />
+                  </>
+                ) : subcard?.desire[0].desire_type ===
+                  desireStatus.replace_channel_request ? (
+                  <ChangeChannelBtn project_id={project_id} />
+                ) : (
+                  <ChangePostBtn project_id={project_id} />
+                )}
+              </div>
+              <SeeCommentBtn />
+            </div>
+          </div>
+        ) : subcard?.api_status === orderStatus.canceled ||
+          subcard?.api_status === orderStatus.rejected ? (
           <div className={styles.subcard__cancel}>
             {statusFilter === managerProjectStatusFilter.completed ? (
               <p>{t(`orders_manager.order_status.rejected.title2`)}</p>
@@ -194,32 +232,6 @@ export const ManagerSubcard: FC<ManagerSubcardProps> = ({
               <p>{t(`orders_manager.order_status.waiting.title`)}</p>
               <SeePostBtn />
             </div>
-          </div>
-        ) : subcard?.api_status === orderStatus.order_review ? (
-          <div className={styles.subcard__agreed}>
-            <div>
-              <p>{t(`orders_manager.order_status.agreed.title`)}</p>
-              <div>
-                <CheckBtn />
-              </div>
-            </div>
-          </div>
-        ) : subcard?.api_status === orderStatus.adv_comment ? (
-          <div className={styles.subcard__posted}>
-            <div className={styles.subcard__posted__title}>
-              <p>{t(`orders_manager.order_status.comment.title`)}</p>
-            </div>
-            <div className={styles.subcard__posted__buttons}>
-              <div className={styles.subcard__posted__buttons__top}>
-                <AcceptBtn order_id={subcard?.id} />
-                <ChangeChannelBtn />
-              </div>
-              <CheckBtn />
-            </div>
-          </div>
-        ) : subcard?.api_status === orderStatus.channel_agreed ? (
-          <div className={styles.subcard__channel_agreed}>
-            <p>{t(`orders_manager.order_status.channel_agreed.title`)}</p>
           </div>
         ) : (
           <></>

@@ -15,8 +15,8 @@ import {
   SkeletonCatalogCard,
 } from "@features/catalog";
 import { AddToBasket } from "@features/cart";
-import { FormatList } from "@features/project";
 import {
+  FormatList,
   ICatalogChannel,
   getCatalogReq,
   sortingTypes,

@@ -18,3 +18,8 @@ export const orderStatusChat = [
   orderStatus.post_review,
   orderStatus.in_progress,
 ];
+
+export enum desireStatus {
+  replace_channel_request = 1,
+  replace_post_request = 2,
+}
