@@ -1,24 +1,5 @@
-import { AlertDialogTrigger } from "@radix-ui/react-alert-dialog";
 import { ArrowLongHorizontalIcon, CancelIcon2, ChatIcon } from "@shared/assets";
-import { BREAKPOINT } from "@shared/config/common";
-import { pageFilter } from "@shared/config/pageFilter";
 import { convertUTCToLocalDateTime } from "@shared/functions";
-import { useAppSelector } from "@shared/store";
-import {
-  useGetOrderChatsQuery,
-  useGetProjectChatsQuery,
-} from "@shared/store/services/chatService";
-import {
-  AlertDialog,
-  AlertDialogCancel,
-  AlertDialogContent,
-} from "@shared/ui/shadcn-ui/ui/alert-dialog";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerTrigger,
-} from "@shared/ui/shadcn-ui/ui/drawer";
 import { AnimatePresence, motion } from "framer-motion";
 import Cookies from "js-cookie";
 import { FC, useEffect, useState } from "react";
@@ -33,7 +14,22 @@ import {
   IOrderMessageNewSocket,
   RecipientType,
   chatFilter,
+  useGetOrderChatsQuery,
+  useGetProjectChatsQuery,
 } from "@entities/communication";
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogTrigger,
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerTrigger,
+} from "@shared/ui";
+import { pageFilter } from "@shared/routing";
+import { BREAKPOINT } from "@shared/config";
+import { useAppSelector } from "@shared/hooks";
 
 export const Chat: FC = () => {
   const { t } = useTranslation();

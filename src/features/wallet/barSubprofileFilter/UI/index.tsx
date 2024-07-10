@@ -1,5 +1,3 @@
-import { useAppDispatch, useAppSelector } from "@shared/store";
-import { filterSlice } from "@shared/store/reducers";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -8,6 +6,8 @@ import {
   subprofileFilter,
   subprofileTypes,
 } from "@entities/wallet";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
+import { setSubprofileFilter } from "@shared/store";
 
 interface ISubFilterOption {
   type: subprofileFilter;
@@ -29,7 +29,7 @@ export const BarSubrofileFilter: FC<BarSubrofileFilterProps> = ({
   const toggleProfile = (option: ISubFilterOption) => {
     const newFilter = { type: option.type, id: option.id };
     resetValues();
-    dispatch(filterSlice.actions.setSubprofileFilter(newFilter));
+    dispatch(setSubprofileFilter(newFilter));
     resetActiveAccount && resetActiveAccount(null);
   };
 

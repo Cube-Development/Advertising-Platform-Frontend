@@ -1,4 +1,3 @@
-import { getCatalogReq } from "@shared/store/services/catalogService";
 import { FC, useEffect, useState } from "react";
 import {
   UseFormGetValues,
@@ -17,7 +16,11 @@ import {
 } from "@features/catalog";
 import { AddToBasket } from "@features/cart";
 import { FormatList } from "@features/project";
-import { ICatalogChannel, sortingTypes } from "@entities/catalog";
+import {
+  ICatalogChannel,
+  getCatalogReq,
+  sortingTypes,
+} from "@entities/catalog";
 import { channelData } from "@entities/channel";
 import { platformTypes } from "@entities/platform";
 import { BREAKPOINT, INTERSECTION_ELEMENTS } from "@shared/config";

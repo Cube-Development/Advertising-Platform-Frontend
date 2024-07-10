@@ -5,7 +5,7 @@ import styles from "./styles.module.scss";
 import Cookies from "js-cookie";
 import { Link } from "react-router-dom";
 import { paths } from "@shared/routing";
-import { useLogoutMutation } from "@shared/store/services/authService";
+import { useLogoutMutation } from "@entities/user";
 
 interface ProfileProps {
   toggleLogout: () => void;

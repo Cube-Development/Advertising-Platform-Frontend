@@ -1,12 +1,11 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
-import { pageFilter } from "@shared/config/pageFilter";
-import { paths } from "@shared/routing";
-import { INTERSECTION_ELEMENTS } from "@shared/config/common";
+import { pageFilter, paths } from "@shared/routing";
 import { OfferCard, OfferCardSkeleton } from "../card";
-import { ShowMoreBtn, ZeroChannel, SpinnerLoader } from "@shared/ui";
-import { AddChannel } from "@features/channel";
+import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
+import { AddChannel, ZeroChannel } from "@features/channel";
 import { IBloggerOfferCard } from "@entities/offer";
+import { INTERSECTION_ELEMENTS } from "@shared/config";
 
 interface MyOffersProps {
   offers: IBloggerOfferCard[];

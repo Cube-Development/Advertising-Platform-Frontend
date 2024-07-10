@@ -1,4 +1,3 @@
-import { useAppSelector } from "@shared/store";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -11,6 +10,7 @@ import {
   profileTypesName,
   subprofileFilter,
 } from "@entities/wallet";
+import { useAppSelector } from "@shared/hooks";
 
 interface PaymentDataProps {
   amountTitle: string;

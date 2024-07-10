@@ -8,15 +8,6 @@ import {
   SeePostIcon,
   WaitIcon,
 } from "@shared/assets";
-import { accordionTypes } from "@shared/config/accordion";
-import { Languages } from "@shared/config/languages";
-import { useAppSelector } from "@shared/store";
-import { getProjectSubcardReq } from "@shared/store/services/advOrdersService";
-import {
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@shared/ui/shadcn-ui/ui/accordion";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -37,8 +28,12 @@ import {
 import { ManagerSubcard, orderStatus } from "@entities/order";
 import {
   IManagerProjectCard,
+  getProjectSubcardReq,
   managerProjectStatusFilter,
 } from "@entities/project";
+import { Languages, accordionTypes } from "@shared/config";
+import { useAppSelector } from "@shared/hooks";
+import { AccordionContent, AccordionItem, AccordionTrigger } from "@shared/ui";
 
 interface ManagerProjectCardProps {
   card: IManagerProjectCard;

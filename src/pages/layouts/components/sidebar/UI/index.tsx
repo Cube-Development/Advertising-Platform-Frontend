@@ -1,22 +1,22 @@
 import { AccordionItem } from "@radix-ui/react-accordion";
 import { paths } from "@shared/routing";
-import { useAppDispatch, useAppSelector } from "@shared/store";
-import { filterSlice, userSlice } from "@shared/store/reducers";
 import { Accordion } from "@shared/ui/shadcn-ui/ui/accordion";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { advertiserMenu, bloggerMenu, commonMenu, managerMenu } from "./config";
 import styles from "./styles.module.scss";
-import { roles } from "@entities/user";
+import { roles, toggleRole as toggleroleAction } from "@entities/user";
 import { IMenuItem } from "../../config";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
+import { setDropDownMenu } from "@shared/store";
 
 export const Sidebar: FC = () => {
   const { role } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const toggleRole = (role: roles) => {
-    dispatch(userSlice.actions.toggleRole(role));
+    dispatch(toggleroleAction(role));
   };
 
   const handleOpenDropdownMenu = (
@@ -26,7 +26,7 @@ export const Sidebar: FC = () => {
     event.stopPropagation();
     document.body.classList.add("sidebar-open");
     const newMenu = { isOpen: true, title: newTitle };
-    dispatch(filterSlice.actions.setDropDownMenu(newMenu));
+    dispatch(setDropDownMenu(newMenu));
   };
 
   const combinedMenu: IMenuItem[] =

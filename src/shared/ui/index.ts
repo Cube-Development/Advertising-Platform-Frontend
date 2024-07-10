@@ -17,6 +17,3 @@ export * from "./sliderSubs";
 export * from "./spinnerLoader";
 export * from "./submitLoading";
 export * from "./themeChanger";
-export * from "./timeList";
-export * from "./zeroChannel";
-export * from "./zeroProject";

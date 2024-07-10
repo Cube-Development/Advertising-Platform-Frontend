@@ -1,14 +1,4 @@
 import { ArrowIcon5 } from "@shared/assets";
-import { useAppSelector } from "@shared/store";
-import {
-  useCreateLegalMutation,
-  useEditLegalMutation,
-  useReadLegalsByTypeQuery,
-  useReadOneLegalMutation,
-} from "@shared/store/services/legalService";
-import { usePaymentWithdrawalMutation } from "@shared/store/services/walletService";
-import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
-import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -16,13 +6,20 @@ import styles from "./styles.module.scss";
 import { Guide, LegalsList, PaymentData } from "../../components";
 import { BarSubrofileFilter } from "@features/wallet";
 import { BarProfileFilter } from "@features/other";
-import { pageFilter } from "@shared/config/pageFilter";
 import {
   ILegalCard,
   ILegalCardShort,
   ILegalData,
   profileTypesName,
+  useCreateLegalMutation,
+  useEditLegalMutation,
+  usePaymentWithdrawalMutation,
+  useReadLegalsByTypeQuery,
+  useReadOneLegalMutation,
 } from "@entities/wallet";
+import { ToastAction, useToast } from "@shared/ui";
+import { pageFilter } from "@shared/routing";
+import { useAppSelector } from "@shared/hooks";
 
 interface IExtendedProfileData extends ILegalData {
   amount: number;

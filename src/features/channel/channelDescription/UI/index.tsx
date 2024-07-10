@@ -1,6 +1,5 @@
 import { BoyIcon, CancelIcon2, GirlIcon } from "@shared/assets";
 import { paths } from "@shared/routing";
-import { useGetChannelByIdQuery } from "@shared/store/services/channelService";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -16,6 +15,7 @@ import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
 import { Languages } from "@shared/config";
 import { platformToIcon } from "@entities/catalog";
+import { useGetChannelByIdQuery } from "@entities/channel";
 
 interface ChannelDescriptionProps {
   channel_id: string;

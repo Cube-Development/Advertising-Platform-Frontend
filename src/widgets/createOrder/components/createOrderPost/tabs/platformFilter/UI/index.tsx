@@ -1,12 +1,12 @@
 import { FC, useEffect } from "react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
-import { useAppDispatch, useAppSelector } from "@shared/store";
-import { filterSlice } from "@shared/store/reducers";
 import { UseFormSetValue } from "react-hook-form";
 import { ICreatePostForm, PostFormats } from "@entities/project";
 import { platformTypes } from "@entities/platform";
 import { IChannelLink } from "@entities/channel";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
+import { setPlatformFilter } from "@shared/store";
 
 interface PlatformFilterProps {
   platforms: number[];
@@ -35,12 +35,12 @@ export const PlatformFilter: FC<PlatformFilterProps> = ({
     );
 
   const changeSelectedPlatform = (type: IChannelLink) => {
-    dispatch(filterSlice.actions.setPlatformFilter(type));
+    dispatch(setPlatformFilter(type));
   };
 
   useEffect(() => {
     dispatch(
-      filterSlice.actions.setPlatformFilter(
+      setPlatformFilter(
         platformTypes.find((type) => type.id === platforms[0]) ||
           platformTypes[0],
       ),

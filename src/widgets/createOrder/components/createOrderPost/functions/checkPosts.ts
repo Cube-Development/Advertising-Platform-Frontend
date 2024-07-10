@@ -6,7 +6,7 @@ import {
 } from "@entities/platform";
 import { ICreatePostForm, IPostChannel } from "@entities/project";
 import { Dispatch } from "@reduxjs/toolkit";
-import { filterSlice } from "@shared/store/reducers";
+import { setPlatformFilter } from "@shared/store";
 import { ICreateOrderBlur } from "@widgets/createOrder/config";
 import { UseFormSetValue } from "react-hook-form";
 
@@ -24,8 +24,7 @@ export const checkPosts = (
     const findedPlatform = platformTypes.find(
       (platform) => platform.id === type,
     );
-    findedPlatform &&
-      dispatch(filterSlice.actions.setPlatformFilter(findedPlatform));
+    findedPlatform && dispatch(setPlatformFilter(findedPlatform));
   };
   const changeSelectedPostType = (type: PostTypesNum) => {
     setValue("selectedPostType", type);

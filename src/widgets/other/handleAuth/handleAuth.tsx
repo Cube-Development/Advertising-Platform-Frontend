@@ -1,17 +1,15 @@
-import { useAppDispatch } from "@shared/store";
-import { userSlice } from "@shared/store/reducers";
 import Cookies from "js-cookie";
 import { useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { paths } from "@shared/routing";
-import { useGetTokensMutation } from "@shared/store/services/authService";
-import { useTransferPublicMutation } from "@shared/store/services/cartService";
 import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import { useTranslation } from "react-i18next";
 import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
 import { QueryParams } from "@shared/functions";
-import { roles } from "@entities/user";
+import { login, roles, toggleRole, useGetTokensMutation } from "@entities/user";
+import { useAppDispatch } from "@shared/hooks";
+import { useTransferPublicMutation } from "@entities/catalog";
 
 type DecodedToken = {
   role: roles;
@@ -50,13 +48,13 @@ export const HandleAuth = () => {
       getTokens({ authorization_code: code })
         .unwrap()
         .then((data) => {
-          dispatch(userSlice.actions.login(data));
+          dispatch(login(data));
           const decoded: DecodedToken = jwtDecode(data.access_token);
-          dispatch(userSlice.actions.login(data));
+          dispatch(login(data));
           navigate(
             decoded.role === roles.advertiser ? paths.main : paths.mainBlogger,
           );
-          dispatch(userSlice.actions.toggleRole(decoded?.role));
+          dispatch(toggleRole(decoded?.role));
           Cookies.remove("genState");
           guestId && transferCart(guestId);
         })

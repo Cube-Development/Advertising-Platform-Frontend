@@ -1,12 +1,10 @@
 import { paths } from "@shared/routing";
-import { usePostBuyTarifMutation } from "@shared/store/services/tarif";
-import { MyButton } from "@shared/ui";
-import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
-import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
+import { MyButton, ToastAction, useToast } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
+import { usePostBuyTarifMutation } from "@entities/project";
 
 export const BuyTarif: FC = () => {
   const { t } = useTranslation();

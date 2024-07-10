@@ -4,9 +4,9 @@ import {
   privateAdvertiserRoutes,
   publicRoutes,
 } from "./routes";
-import { useAppSelector } from "@shared/store";
 import { SideBarLayout } from "@pages/layouts";
 import { roles } from "@entities/user";
+import { useAppSelector } from "@shared/hooks";
 
 export const Routing = () => {
   const { isAuth, role } = useAppSelector((state) => state.user);

@@ -1,5 +1,4 @@
 import { CancelIcon2, ImageIcon } from "@shared/assets";
-import { useAppSelector } from "@shared/store";
 import { FC } from "react";
 import { UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -17,8 +16,9 @@ import {
   AlertDialogContent,
   AlertDialogTrigger,
 } from "@shared/ui";
-import { pageFilter } from "@shared/config";
 import { platformTypesNum } from "@entities/platform";
+import { pageFilter } from "@shared/routing";
+import { useAppSelector } from "@shared/hooks";
 
 interface PostFilesProps {
   AddMediaFiles: FC<FileProps>;

@@ -10,3 +10,4 @@ export * from "./seeOffers";
 export * from "./selectPrice";
 export * from "./selectSymbols";
 export * from "./support";
+export * from "./zeroChannel";

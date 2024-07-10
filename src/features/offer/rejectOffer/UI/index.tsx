@@ -1,9 +1,9 @@
-import { useCancelOfferMutation } from "@shared/store/services/bloggerOffersService";
 import { MyButton, ToastAction, useToast } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { IOrderFeature } from "@entities/project";
+import { useCancelOfferMutation } from "@entities/offer";
 
 export const RejectOffer: FC<IOrderFeature> = ({ order_id }) => {
   const { toast } = useToast();

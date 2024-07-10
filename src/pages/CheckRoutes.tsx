@@ -1,6 +1,6 @@
 import { managmentRoles, roles, userRoles } from "@entities/user";
+import { useAppSelector } from "@shared/hooks";
 import { paths } from "@shared/routing";
-import { useAppSelector } from "@shared/store";
 import Cookies from "js-cookie";
 import { Navigate, Outlet } from "react-router-dom";
 
@@ -27,7 +27,6 @@ export const CheckRoutes = ({
   type: routerType;
 }) => {
   const { isAuth, role } = useAppSelector((state) => state.user);
-  // console.log("ProtectedRoutes", role, checkRole);
 
   if (type === routerType.public) {
     console.log("PublicdRoutes", role, checkRole);

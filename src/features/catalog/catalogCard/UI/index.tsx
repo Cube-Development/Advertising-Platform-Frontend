@@ -1,4 +1,3 @@
-import { AccordionContent, AccordionTrigger } from "@radix-ui/react-accordion";
 import {
   ArrowSmallVerticalIcon,
   BoyIcon,
@@ -7,12 +6,9 @@ import {
   RatingIcon,
   SubsIcon,
 } from "@shared/assets";
-import { pageFilter } from "@shared/config/pageFilter";
-import { AccordionItem } from "@shared/ui/shadcn-ui/ui/accordion";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { BREAKPOINT } from "@shared/config/common";
 import {
   ICatalogCard,
   ICatalogChannel,
@@ -20,6 +16,9 @@ import {
   IFormat,
   platformToIcon,
 } from "@entities/catalog";
+import { BREAKPOINT } from "@shared/config";
+import { AccordionContent, AccordionItem, AccordionTrigger } from "@shared/ui";
+import { pageFilter } from "@shared/routing";
 
 interface CatalogCardProps extends IChangeCards, ICatalogCard {
   card: ICatalogChannel;

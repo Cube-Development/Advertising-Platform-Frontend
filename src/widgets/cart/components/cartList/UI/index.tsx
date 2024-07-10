@@ -1,6 +1,4 @@
 import { CartIcon, SadSmileIcon } from "@shared/assets";
-import { INTERSECTION_ELEMENTS } from "@shared/config/common";
-import { pageFilter } from "@shared/config/pageFilter";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -9,6 +7,8 @@ import { AddMore, AddToBasket, SaveCart } from "@features/cart";
 import { CatalogCard, SkeletonCatalogCard } from "@features/catalog";
 import { FormatList } from "@features/project";
 import { ICatalogChannel } from "@entities/catalog";
+import { pageFilter } from "@shared/routing";
+import { INTERSECTION_ELEMENTS } from "@shared/config";
 
 interface CartListProps {
   channels: ICatalogChannel[];

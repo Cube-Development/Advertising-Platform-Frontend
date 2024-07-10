@@ -1,6 +1,7 @@
+import { userSlice } from "@entities/user";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { authApi, baseApi } from "@shared/api";
-import { filterSlice, userSlice } from "./reducers";
+import { filterSlice } from "@shared/store";
 
 const rootReducer = combineReducers({
   [baseApi.reducerPath]: baseApi.reducer,

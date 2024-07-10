@@ -1,5 +1,5 @@
+import { authBaseQuery } from "@entities/user";
 import { createApi } from "@reduxjs/toolkit/query/react";
-import authBaseQuery from "@shared/store/services/authBaseQuery";
 import {
   ADV_PROJECTS,
   BALANCE,

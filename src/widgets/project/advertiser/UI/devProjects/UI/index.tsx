@@ -1,11 +1,11 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
-import { INTERSECTION_ELEMENTS } from "@shared/config/common";
-import { ShowMoreBtn, SpinnerLoader, ZeroProject } from "@shared/ui";
-import { ContinueTemplate, NewProject } from "@features/project";
+import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
+import { ContinueTemplate, NewProject, ZeroProject } from "@features/project";
 import { TurnkeyProject } from "@features/other";
 import { AdvDevProjectCard, SkeletonAdvDevProjectCard } from "@entities/order";
 import { IAdvManagerProjectsDevCard } from "@entities/project";
+import { INTERSECTION_ELEMENTS } from "@shared/config";
 
 interface DevProjectsListProps {
   projects: IAdvManagerProjectsDevCard[];

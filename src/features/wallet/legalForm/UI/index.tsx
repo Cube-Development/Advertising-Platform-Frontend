@@ -2,8 +2,11 @@ import { InfoIcon } from "@shared/assets";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { getInputLegalType } from "@shared/functions";
-import { IBlockData, IParameterData } from "@entities/wallet";
+import {
+  IBlockData,
+  IParameterData,
+  getInputLegalType,
+} from "@entities/wallet";
 
 interface LegalFormProps {
   data: IBlockData;

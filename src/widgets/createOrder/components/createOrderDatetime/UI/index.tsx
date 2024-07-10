@@ -7,9 +7,9 @@ import {
   CustomCalendar,
   OrderCard,
 } from "@features/createOrder";
-import { TimeList } from "@shared/ui";
 import { ICreatePostForm, IPostChannel } from "@entities/project";
 import { ICreateOrderBlur } from "@widgets/createOrder/config";
+import { TimeList } from "@features/project";
 
 interface CreateOrderDatetimeProps {
   cards: IPostChannel[];

@@ -3,8 +3,8 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Link as ScrollLink } from "react-scroll";
 import styles from "./styles.module.scss";
-import { useAppSelector } from "@shared/store";
-import { AuthStateGenerator } from "@shared/functions";
+import { useAppSelector } from "@shared/hooks";
+import { AuthStateGenerator } from "@entities/user";
 
 export const Registration: FC = () => {
   const { t } = useTranslation();

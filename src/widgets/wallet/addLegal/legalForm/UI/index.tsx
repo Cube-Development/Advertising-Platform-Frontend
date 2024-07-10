@@ -1,6 +1,3 @@
-import { pageFilter } from "@shared/config/pageFilter";
-import { useAppSelector } from "@shared/store";
-import { useCreateLegalMutation } from "@shared/store/services/legalService";
 import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -16,7 +13,10 @@ import {
   SelfEmployedData,
   profileTypesName,
   subprofileFilter,
+  useCreateLegalMutation,
 } from "@entities/wallet";
+import { pageFilter } from "@shared/routing";
+import { useAppSelector } from "@shared/hooks";
 
 export const AddLegalForm: FC = () => {
   const { toast } = useToast();

@@ -1,12 +1,11 @@
-import { pageFilter } from "@shared/config/pageFilter";
-import { IStartProjectProps } from "@shared/types/common";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { useAppSelector } from "@shared/store";
-import { paths } from "@shared/routing";
+import { pageFilter, paths } from "@shared/routing";
 import { IAddChannelQuery, addChannelQueries } from "@entities/channel";
 import { roles } from "@entities/user";
+import { IStartProjectProps } from "@shared/types/common";
+import { useAppSelector } from "@shared/hooks";
 
 interface BarTopProps {
   listLength: boolean;

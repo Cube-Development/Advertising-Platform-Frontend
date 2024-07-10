@@ -1,8 +1,8 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
-import { useAppSelector } from "@shared/store";
 import { useTranslation } from "react-i18next";
 import { profileTypesName } from "@entities/wallet";
+import { useAppSelector } from "@shared/hooks";
 
 interface GuideProps {}
 

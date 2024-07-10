@@ -1,5 +1,5 @@
-import { setupStore } from "@shared/store/store";
 import { Provider } from "react-redux";
+import { setupStore } from "./store";
 
 const store = setupStore();
 

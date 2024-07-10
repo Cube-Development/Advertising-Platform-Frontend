@@ -5,7 +5,6 @@ import {
   SubsIcon,
   WomanIcon,
 } from "@shared/assets";
-import { useAppSelector } from "@shared/store";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -16,6 +15,7 @@ import {
   managerProjectStatusFilter,
 } from "@entities/project";
 import { orderStatus, orderStatusChat } from "@entities/order/config";
+import { useAppSelector } from "@shared/hooks";
 
 interface ManagerSubcardProps {
   subcard: IManagerProjectSubcard;

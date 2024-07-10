@@ -13,8 +13,7 @@ import {
   ReelsIcon,
   SearchIcon,
 } from "./assets";
-import { GetPostRes } from "@shared/store/services/getPostService";
-import { ContentType, ICreatePostForm } from "@entities/project";
+import { ContentType, GetPostRes, ICreatePostForm } from "@entities/project";
 import { PostTypesNum } from "@entities/platform/config";
 import { EyeDisabledIcon } from "@shared/assets";
 

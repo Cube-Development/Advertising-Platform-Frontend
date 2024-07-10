@@ -1,7 +1,5 @@
 import { ProtectIcon3 } from "@shared/assets";
 import { paths } from "@shared/routing";
-import { useAppSelector } from "@shared/store";
-import { useCreateCartMutation } from "@shared/store/services/advOrdersService";
 import Cookies from "js-cookie";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -11,6 +9,8 @@ import { CreatePost as CreatePostBtn } from "@features/cart";
 import { ToastAction, useToast } from "@shared/ui";
 import { CART, ICart } from "@entities/catalog";
 import { BREAKPOINT } from "@shared/config";
+import { useAppSelector } from "@shared/hooks";
+import { useCreateCartMutation } from "@entities/project";
 
 interface CreatePostProps {
   cart: ICart;

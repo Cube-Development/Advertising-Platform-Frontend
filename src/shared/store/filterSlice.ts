@@ -119,3 +119,17 @@ export const filterSlice = createSlice({
     },
   },
 });
+
+export const {
+  setTypeFilter,
+  setStatusFilter,
+  setProfileFilter,
+  setSubprofileFilter,
+  setCatalogFilter,
+  setNetworkFilter,
+  setSortingFilter,
+  setPlatformFilter,
+  setChatFilter,
+  setAddFileFilter,
+  setDropDownMenu,
+} = filterSlice.actions;

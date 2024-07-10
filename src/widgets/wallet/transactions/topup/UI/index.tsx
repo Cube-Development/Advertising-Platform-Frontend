@@ -1,13 +1,4 @@
 import { ArrowIcon4 } from "@shared/assets";
-import { pageFilter } from "@shared/config/pageFilter";
-import { useAppSelector } from "@shared/store";
-import {
-  useCreateLegalMutation,
-  useEditLegalMutation,
-  useReadLegalsByTypeQuery,
-  useReadOneLegalMutation,
-} from "@shared/store/services/legalService";
-import { usePaymentDepositMutation } from "@shared/store/services/walletService";
 import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -22,7 +13,14 @@ import {
   ILegalData,
   paymentTypes,
   profileTypesName,
+  useCreateLegalMutation,
+  useEditLegalMutation,
+  usePaymentDepositMutation,
+  useReadLegalsByTypeQuery,
+  useReadOneLegalMutation,
 } from "@entities/wallet";
+import { pageFilter } from "@shared/routing";
+import { useAppSelector } from "@shared/hooks";
 
 interface IExtendedProfileData extends ILegalData {
   amount: number;

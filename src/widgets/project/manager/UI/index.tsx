@@ -1,13 +1,14 @@
-import { useAppSelector } from "@shared/store";
 import { BarFilter } from "@widgets/other";
 import { FC, useEffect, useState } from "react";
-import {
-  getProjectsCardReq,
-  useGetManagerProjectsQuery,
-} from "@shared/store/services/managerOrdersService";
 import { ManagerNewProjectsList } from "./managerNewProject";
-import { INTERSECTION_ELEMENTS, pageFilter } from "@shared/config";
-import { IManagerNewProjectCard } from "@entities/project";
+import { INTERSECTION_ELEMENTS } from "@shared/config";
+import {
+  IManagerNewProjectCard,
+  getManagerProjectsCardReq,
+  useGetManagerProjectsQuery,
+} from "@entities/project";
+import { pageFilter } from "@shared/routing";
+import { useAppSelector } from "@shared/hooks";
 
 export const ManagerOrders: FC = () => {
   const { statusFilter } = useAppSelector((state) => state.filter);
@@ -17,7 +18,7 @@ export const ManagerOrders: FC = () => {
     setCurrentPage(currentPage + 1);
   };
 
-  const getParams: getProjectsCardReq = {
+  const getParams: getManagerProjectsCardReq = {
     language: 1,
     page: currentPage,
     // date_sort: "increase",

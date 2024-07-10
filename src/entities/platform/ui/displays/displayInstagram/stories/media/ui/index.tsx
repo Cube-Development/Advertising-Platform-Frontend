@@ -1,7 +1,7 @@
 import { FC, useEffect, useRef, useState } from "react";
 import styles from "./styles.module.scss";
 import { Download } from "lucide-react";
-import { ContentType, IFile } from "@entities/project";
+import { ContentType, IFile, getContentType } from "@entities/project";
 import {
   Carousel,
   CarouselApi,
@@ -10,7 +10,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@shared/ui";
-import { GenerateDownloadLink, getContentType } from "@shared/functions";
+import { GenerateDownloadLink } from "@shared/functions";
 
 interface InstagramMediaProps {
   medias?: File[];

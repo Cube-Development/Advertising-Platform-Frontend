@@ -1,12 +1,12 @@
 import { FC } from "react";
-import { Accordion } from "@shared/ui";
+import { Accordion, ShowMoreBtn } from "@shared/ui";
 import { SpinnerLoader } from "@shared/ui";
 import { ChannelCard, ChannelCardSkeleton } from "../card";
-import { ShowMoreBtn, ZeroChannel } from "@shared/ui";
-import { AddChannel } from "@features/channel";
+import { AddChannel, ZeroChannel } from "@features/channel";
 import styles from "./styles.module.scss";
 import { AllChannelTypes } from "@entities/channel";
-import { INTERSECTION_ELEMENTS, pageFilter } from "@shared/config";
+import { INTERSECTION_ELEMENTS } from "@shared/config";
+import { pageFilter } from "@shared/routing";
 
 interface ActiveChannelsProps {
   cards: AllChannelTypes[];

@@ -1,17 +1,17 @@
-import { useAppDispatch, useAppSelector } from "@shared/store";
-import { filterSlice } from "@shared/store/reducers";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { advertiserProjectTypes } from "@entities/project";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
+import { setStatusFilter, setTypeFilter } from "@shared/store";
 
 export const BarTypesFilter: FC = () => {
   const { t } = useTranslation();
   const { typeFilter } = useAppSelector((state) => state.filter);
   const dispatch = useAppDispatch();
   const toggleType = (type: string, status: string) => {
-    dispatch(filterSlice.actions.setTypeFilter(type));
-    dispatch(filterSlice.actions.setStatusFilter(status));
+    dispatch(setTypeFilter(type));
+    dispatch(setStatusFilter(status));
   };
 
   const projectTypes = advertiserProjectTypes;

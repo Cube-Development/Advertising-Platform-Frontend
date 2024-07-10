@@ -5,8 +5,7 @@ import { InstagramMedia } from "./media";
 import { InstagramFile } from "./file";
 import { InstagramComment } from "./comment";
 import { Heart, Send } from "lucide-react";
-import { GetPostRes } from "@shared/store/services/getPostService";
-import { ContentType, ICreatePostForm } from "@entities/project";
+import { ContentType, GetPostRes, ICreatePostForm } from "@entities/project";
 import { PostTypesNum } from "@entities/platform/config";
 import { EyeDisabledIcon } from "@shared/assets";
 

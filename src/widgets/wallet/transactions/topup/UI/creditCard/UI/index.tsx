@@ -3,11 +3,13 @@ import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { usePaymentDepositMutation } from "@shared/store/services/walletService";
-import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
-import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
 import { PaymentCard } from "@features/wallet";
-import { paymentTypes, topup } from "@entities/wallet";
+import {
+  paymentTypes,
+  topup,
+  usePaymentDepositMutation,
+} from "@entities/wallet";
+import { ToastAction, useToast } from "@shared/ui";
 
 interface IOnlineBankingData {
   legal_id: string;

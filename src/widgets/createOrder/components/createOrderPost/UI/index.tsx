@@ -1,7 +1,6 @@
 import { FC, useEffect } from "react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
-import { useAppDispatch, useAppSelector } from "@shared/store";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import {
   DisplayFeed,
@@ -34,6 +33,7 @@ import {
   PostFormats,
 } from "@entities/project";
 import { ICreateOrderBlur } from "@widgets/createOrder/config";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
 
 interface CreateOrderPostProps {
   cards: IPostChannel[];

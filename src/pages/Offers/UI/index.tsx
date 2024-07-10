@@ -1,18 +1,17 @@
-import { pageFilter } from "@shared/config/pageFilter";
-import { useAppSelector } from "@shared/store";
 import { FC, useEffect, useState } from "react";
-import { Languages } from "@shared/config/languages";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
-import {
-  getOrdersByStatusReq,
-  useGetBloggerOrdersQuery,
-} from "@shared/store/services/bloggerOffersService";
-import { INTERSECTION_ELEMENTS } from "@shared/config/common";
 import { MyOffers } from "@widgets/offer";
 import { BarFilter } from "@widgets/other";
 import { platformTypes, platformTypesNum } from "@entities/platform";
-import { IBloggerOfferCard } from "@entities/offer";
+import {
+  IBloggerOfferCard,
+  getOrdersByStatusReq,
+  useGetBloggerOrdersQuery,
+} from "@entities/offer";
+import { pageFilter } from "@shared/routing";
+import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
+import { useAppSelector } from "@shared/hooks";
 
 export const OffersPage: FC = () => {
   const { statusFilter } = useAppSelector((state) => state.filter);

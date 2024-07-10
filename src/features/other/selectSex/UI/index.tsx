@@ -1,5 +1,4 @@
 import { InfoIcon } from "@shared/assets";
-import { useDebounce } from "@shared/store/hooks";
 import { FC, useEffect, useState } from "react";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -7,6 +6,7 @@ import styles from "./styles.module.scss";
 import { MySliderSex } from "@shared/ui";
 import { PLATFORM_PARAMETERS } from "@entities/channel";
 import { DEBOUNCE } from "@entities/catalog";
+import { useDebounce } from "@shared/hooks";
 
 interface SelectSexProps {
   title: string;

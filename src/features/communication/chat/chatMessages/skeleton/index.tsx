@@ -1,4 +1,4 @@
-import { Skeleton } from "@shared/ui/shadcn-ui/ui/skeleton";
+import { Skeleton } from "@shared/ui";
 import { FC } from "react";
 
 export const SkeletonChatMessage: FC = () => {

@@ -1,14 +1,3 @@
-import { INTERSECTION_ELEMENTS } from "@shared/config/common";
-import i18n from "@shared/config/i18n";
-import { Languages } from "@shared/config/languages";
-import { pageFilter } from "@shared/config/pageFilter";
-import { useAppDispatch, useAppSelector } from "@shared/store";
-import { filterSlice } from "@shared/store/reducers";
-import {
-  getProjectsCardReq,
-  useGetAdvManagerProjectsQuery,
-  useGetAdvProjectsQuery,
-} from "@shared/store/services/advOrdersService";
 import { BarFilter } from "@widgets/other";
 import { FC, useEffect, useState } from "react";
 import { AdvProjectsList } from "./advProjects";
@@ -18,8 +7,16 @@ import {
   IAdvProjectCard,
   advManagerProjectStatusFilter,
   advertiserProjectTypes,
+  getProjectsCardReq,
   projectTypesFilter,
+  useGetAdvManagerProjectsQuery,
+  useGetAdvProjectsQuery,
 } from "@entities/project";
+import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
+import i18n from "@shared/config/i18n";
+import { pageFilter } from "@shared/routing";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
+import { setStatusFilter, setTypeFilter } from "@shared/store";
 
 export const AdvOrders: FC = () => {
   const language = Languages.find((lang) => {
@@ -41,17 +38,13 @@ export const AdvOrders: FC = () => {
     if (order_type) {
       advertiserProjectTypes.map((type) => {
         if (order_type === type.type) {
-          dispatch(filterSlice.actions.setTypeFilter(type.type));
-          dispatch(filterSlice.actions.setStatusFilter(type.status));
+          dispatch(setTypeFilter(type.type));
+          dispatch(setStatusFilter(type.status));
         }
       });
     } else {
-      dispatch(
-        filterSlice.actions.setTypeFilter(advertiserProjectTypes[0].type),
-      );
-      dispatch(
-        filterSlice.actions.setStatusFilter(advertiserProjectTypes[0].status),
-      );
+      dispatch(setTypeFilter(advertiserProjectTypes[0].type));
+      dispatch(setStatusFilter(advertiserProjectTypes[0].status));
     }
   }, [order_type]);
 

@@ -1,31 +1,30 @@
-import { useAppSelector } from "@shared/store";
-import {
-  useAddToCommonCartMutation,
-  useAddToManagerCartMutation,
-  useAddToPublicCartMutation,
-  useReadCommonCartQuery,
-  useReadPublicCartQuery,
-  useRemoveFromCommonCartMutation,
-  useRemoveFromManagerCartMutation,
-  useRemoveFromPublicCartMutation,
-} from "@shared/store/services/cartService";
-import {
-  getCatalogReq,
-  useGetCatalogQuery,
-} from "@shared/store/services/catalogService";
 import Cookies from "js-cookie";
 import { FC, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { CatalogCart, CatalogList, CatalogSearch } from "../components";
-import { GenerateGuestId, GetUserId } from "@shared/functions";
 import { ToastAction, useToast } from "@shared/ui";
 import { BREAKPOINT, INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 import { PLATFORM_PARAMETERS, channelData } from "@entities/channel";
 import { platformTypesNum } from "@entities/platform";
-import { ICart, ICatalogChannel, sortingFilter } from "@entities/catalog";
-import { roles } from "@entities/user";
+import {
+  ICart,
+  ICatalogChannel,
+  getCatalogReq,
+  sortingFilter,
+  useAddToCommonCartMutation,
+  useAddToManagerCartMutation,
+  useAddToPublicCartMutation,
+  useGetCatalogQuery,
+  useReadCommonCartQuery,
+  useReadPublicCartQuery,
+  useRemoveFromCommonCartMutation,
+  useRemoveFromManagerCartMutation,
+  useRemoveFromPublicCartMutation,
+} from "@entities/catalog";
+import { GenerateGuestId, GetUserId, roles } from "@entities/user";
+import { useAppSelector } from "@shared/hooks";
 
 export const CatalogBlock: FC = () => {
   const { toast } = useToast();

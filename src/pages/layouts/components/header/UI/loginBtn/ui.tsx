@@ -3,7 +3,7 @@ import styles from "./styles.module.scss";
 import { MyButton } from "@shared/ui";
 import { useTranslation } from "react-i18next";
 import { LoginIcon } from "@shared/assets";
-import { AuthStateGenerator } from "@shared/functions";
+import { AuthStateGenerator } from "@entities/user";
 
 export const LoginBtn: FC = () => {
   const { t } = useTranslation();

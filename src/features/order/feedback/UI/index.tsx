@@ -4,8 +4,7 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { SendHorizonal } from "lucide-react";
 import { Rating } from "../rating";
-import { useAddReviewMutation } from "@shared/store/services/advOrdersService";
-import { IOrderFeature } from "@entities/project";
+import { IOrderFeature, useAddReviewMutation } from "@entities/project";
 import { Popover, PopoverContent, PopoverTrigger, useToast } from "@shared/ui";
 
 export const Feedback: FC<IOrderFeature> = ({ order_id }) => {

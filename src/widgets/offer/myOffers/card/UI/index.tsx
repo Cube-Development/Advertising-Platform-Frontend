@@ -1,7 +1,4 @@
 import { HappySmileIcon, MoreIcon } from "@shared/assets";
-import { CheckDate } from "@shared/functions";
-import { useAppSelector } from "@shared/store";
-import { useGetPostQuery } from "@shared/store/services/getPostService";
 import {
   useToast,
   AlertDialog,
@@ -32,6 +29,9 @@ import {
   offerStatusChat,
   offerStatusFilter,
 } from "@entities/offer";
+import { useAppSelector } from "@shared/hooks";
+import { useGetPostQuery } from "@entities/project";
+import { CheckDate } from "@entities/communication";
 
 interface OfferCardProps {
   card: IBloggerOfferCard;

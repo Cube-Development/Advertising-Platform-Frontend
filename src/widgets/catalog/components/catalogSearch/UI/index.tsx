@@ -1,12 +1,4 @@
 import { QualityIcon } from "@shared/assets";
-import { useAppSelector } from "@shared/store";
-import { getCatalogReq } from "@shared/store/services/catalogService";
-import {
-  useGetChannelAgesQuery,
-  useGetChannelLanguagesQuery,
-  useGetChannelRegionsQuery,
-  useGetCompanyCategoriesQuery,
-} from "@shared/store/services/contentService";
 import { FC, useEffect, useState } from "react";
 import {
   UseFormGetValues,
@@ -26,9 +18,18 @@ import {
   IFilterSearch,
   RecomTargetCard,
   catalogFilter,
+  getCatalogReq,
 } from "@entities/catalog";
-import { AIRecommendCARDS, Languages, pageFilter } from "@shared/config";
-import { channelData } from "@entities/channel";
+import { AIRecommendCARDS, Languages } from "@shared/config";
+import {
+  channelData,
+  useGetChannelAgesQuery,
+  useGetChannelLanguagesQuery,
+  useGetChannelRegionsQuery,
+  useGetCompanyCategoriesQuery,
+} from "@entities/channel";
+import { pageFilter } from "@shared/routing";
+import { useAppSelector } from "@shared/hooks";
 
 interface CatalogSearchProps {
   setValue: UseFormSetValue<getCatalogReq>;

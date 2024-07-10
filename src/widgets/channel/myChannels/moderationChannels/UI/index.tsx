@@ -1,15 +1,14 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
-import { pageFilter } from "@shared/config/pageFilter";
-import { SpinnerLoader } from "@shared/ui";
-import { INTERSECTION_ELEMENTS } from "@shared/config/common";
-import { ShowMoreBtn, ZeroChannel } from "@shared/ui";
-import { AddChannel } from "@features/channel";
+import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
+import { AddChannel, ZeroChannel } from "@features/channel";
 import {
   IModerationChannel,
   ModChannelCard,
   ModChannelCardSkeleton,
 } from "@entities/channel";
+import { pageFilter } from "@shared/routing";
+import { INTERSECTION_ELEMENTS } from "@shared/config";
 
 interface ModerationChannelsProps {
   cards: IModerationChannel[];

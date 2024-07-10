@@ -1,5 +1,5 @@
 import { platformTypesNum } from "@entities/platform";
-import { pageFilter } from "@shared/config";
+import { pageFilter } from "@shared/routing";
 import { FC } from "react";
 
 export interface ICatalogCards extends IChangeCards {

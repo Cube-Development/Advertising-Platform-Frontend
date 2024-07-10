@@ -6,8 +6,7 @@ import {
 } from "@reduxjs/toolkit/query/react";
 import { Mutex } from "async-mutex";
 import Cookies from "js-cookie";
-import { userSlice } from "../reducers";
-import { IToken } from "@entities/user";
+import { IToken, logout } from "@entities/user";
 
 interface ITokenResponse {
   data?: IToken;
@@ -17,7 +16,7 @@ const baseUrl = `${import.meta.env.VITE_BASE_URL}`;
 
 const mutex = new Mutex();
 
-const authBaseQuery: BaseQueryFn<
+export const authBaseQuery: BaseQueryFn<
   string | FetchArgs,
   unknown,
   FetchBaseQueryError
@@ -60,7 +59,7 @@ const authBaseQuery: BaseQueryFn<
           });
           result = await newBaseQuery(args, api, extraOptions);
         } else {
-          api.dispatch(userSlice.actions.logout());
+          api.dispatch(logout());
         }
       } finally {
         release();
@@ -73,5 +72,3 @@ const authBaseQuery: BaseQueryFn<
 
   return result;
 };
-
-export default authBaseQuery;

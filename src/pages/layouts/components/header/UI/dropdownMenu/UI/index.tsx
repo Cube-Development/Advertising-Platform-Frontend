@@ -1,7 +1,4 @@
 import { paths } from "@shared/routing";
-import { useAppDispatch, useAppSelector } from "@shared/store";
-import { filterSlice } from "@shared/store/reducers";
-import { Accordion } from "@shared/ui/shadcn-ui/ui/accordion";
 import { AnimatePresence, motion } from "framer-motion";
 import { FC, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
@@ -18,6 +15,9 @@ import styles from "./styles.module.scss";
 import { MenuItem } from "./menuItem";
 import { roles } from "@entities/user";
 import { IMenuItem } from "@pages/layouts/components/config";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
+import { setDropDownMenu } from "@shared/store";
+import { Accordion } from "@shared/ui";
 
 interface DropdownMenuProps {
   isAuth: boolean;
@@ -37,7 +37,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
   const menuRef = useRef<HTMLDivElement>(null);
   const toggleMenu = (path?: string) => {
     const newMenu = { isOpen: !dropdownMenu.isOpen, title: "" };
-    dispatch(filterSlice.actions.setDropDownMenu(newMenu));
+    dispatch(setDropDownMenu(newMenu));
     if (path === paths.main) {
       toggleRole(roles.advertiser);
     } else if (path === paths.mainBlogger) {
@@ -48,7 +48,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
   const handleClickOutside = (event: MouseEvent) => {
     if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
       const newMenu = { isOpen: false, title: "" };
-      dispatch(filterSlice.actions.setDropDownMenu(newMenu));
+      dispatch(setDropDownMenu(newMenu));
     }
   };
 

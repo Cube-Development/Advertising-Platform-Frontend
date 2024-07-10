@@ -1,5 +1,4 @@
 import { TemplateIcon2 } from "@shared/assets";
-import { useAppSelector } from "@shared/store";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -7,6 +6,7 @@ import {
   IAdvManagerProjectsDevCard,
   projectTypesFilter,
 } from "@entities/project";
+import { useAppSelector } from "@shared/hooks";
 
 interface AdvDevProjectCardProps {
   card: IAdvManagerProjectsDevCard;

@@ -1,16 +1,15 @@
-import { useRejectOrderMutation } from "@shared/store/services/advOrdersService";
-import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
-import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { SendHorizonal } from "lucide-react";
+import { IOrderFeature, useRejectOrderMutation } from "@entities/project";
 import {
   Popover,
   PopoverContent,
   PopoverTrigger,
-} from "@shared/ui/shadcn-ui/ui/popover";
-import { SendHorizonal } from "lucide-react";
-import { IOrderFeature } from "@entities/project";
+  ToastAction,
+  useToast,
+} from "@shared/ui";
 
 export const RejectPost: FC<IOrderFeature> = ({ order_id }) => {
   const [comment, setComment] = useState("");

@@ -7,12 +7,6 @@ import {
   SearchIcon,
   WaitIcon,
 } from "@shared/assets";
-import { useAppSelector } from "@shared/store";
-import {
-  getProjectSubcardReq,
-  useGetAdvManagerSubprojectsQuery,
-  useGetAdvSubprojectsQuery,
-} from "@shared/store/services/advOrdersService";
 import {
   AccountsLoader,
   AccordionContent,
@@ -35,10 +29,14 @@ import { AdvSubcard } from "@entities/order";
 import {
   IAdvProjectCard,
   advManagerProjectStatusFilter,
+  getProjectSubcardReq,
   myProjectStatusFilter,
   projectTypesFilter,
+  useGetAdvManagerSubprojectsQuery,
+  useGetAdvSubprojectsQuery,
 } from "@entities/project";
 import { Languages, accordionTypes } from "@shared/config";
+import { useAppSelector } from "@shared/hooks";
 
 interface AdvProjectCardProps {
   card: IAdvProjectCard;

@@ -1,16 +1,4 @@
 import { Languages } from "@shared/config/languages";
-import {
-  useCreateChannelMutation,
-  useEditChannelMutation,
-  useGetChannelByIdQuery,
-} from "@shared/store/services/channelService";
-import {
-  useGetChannelAgesQuery,
-  useGetChannelCategoriesQuery,
-  useGetChannelFormatsQuery,
-  useGetChannelLanguagesQuery,
-  useGetChannelRegionsQuery,
-} from "@shared/store/services/contentService";
 import { AccountsLoader, MyButton, ToastAction, useToast } from "@shared/ui";
 import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -29,6 +17,14 @@ import {
   IChannelLink,
   PLATFORM_PARAMETERS,
   channelData,
+  useCreateChannelMutation,
+  useEditChannelMutation,
+  useGetChannelAgesQuery,
+  useGetChannelByIdQuery,
+  useGetChannelCategoriesQuery,
+  useGetChannelFormatsQuery,
+  useGetChannelLanguagesQuery,
+  useGetChannelRegionsQuery,
 } from "@entities/channel";
 import { IFormat } from "@entities/catalog";
 

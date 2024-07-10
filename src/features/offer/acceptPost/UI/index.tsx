@@ -1,9 +1,8 @@
-import { useAcceptOrderMutation } from "@shared/store/services/advOrdersService";
 import { MyButton, ToastAction, useToast } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { IOrderFeature } from "@entities/project";
+import { IOrderFeature, useAcceptOrderMutation } from "@entities/project";
 
 export const AcceptPost: FC<IOrderFeature> = ({ order_id }) => {
   const { toast } = useToast();

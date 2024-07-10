@@ -1,4 +1,3 @@
-import { usePublishPostBloggerMutation } from "@shared/store/services/bloggerOffersService";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -11,6 +10,7 @@ import {
   useToast,
 } from "@shared/ui";
 import { IOrderFeature } from "@entities/project";
+import { usePublishPostBloggerMutation } from "@entities/offer";
 
 export const SendLink: FC<IOrderFeature> = ({ order_id }) => {
   const [url, setUrl] = useState("");

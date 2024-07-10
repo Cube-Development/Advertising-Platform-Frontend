@@ -9,8 +9,6 @@ import {
   StarIcon4,
   WaitIcon,
 } from "@shared/assets";
-import { useAppSelector } from "@shared/store";
-import { useActivateChannelMutation } from "@shared/store/services/channelService";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -31,6 +29,7 @@ import {
   IModerationChannel,
   IModerationRejectChannel,
   channelStatusFilter,
+  useActivateChannelMutation,
 } from "@entities/channel";
 import {
   AccordionContent,
@@ -40,6 +39,7 @@ import {
   useToast,
 } from "@shared/ui";
 import { accordionTypes } from "@shared/config";
+import { useAppSelector } from "@shared/hooks";
 
 interface ChannelCardProps {
   card:

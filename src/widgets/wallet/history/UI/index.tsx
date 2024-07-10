@@ -1,16 +1,16 @@
 import { FC, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
-import {
-  HistoryReq,
-  useGetHistoryQuery,
-} from "@shared/store/services/walletService";
-import { Languages } from "@shared/config/languages";
-import { INTERSECTION_ELEMENTS } from "@shared/config/common";
 import { SadSmileIcon } from "@shared/assets";
-import { HistoryCard, IWalletHistory } from "@entities/wallet";
+import {
+  HistoryCard,
+  HistoryReq,
+  IWalletHistory,
+  useGetHistoryQuery,
+} from "@entities/wallet";
 import { BarHistory } from "@features/wallet";
 import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
+import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 
 export const History: FC = () => {
   const { t, i18n } = useTranslation();

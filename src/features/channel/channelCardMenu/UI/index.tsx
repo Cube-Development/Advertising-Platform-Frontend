@@ -1,13 +1,15 @@
 import { CancelIcon2, MoreIcon } from "@shared/assets";
 import { paths } from "@shared/routing";
-import { useAppSelector } from "@shared/store";
-import { useDeactivateChannelMutation } from "@shared/store/services/channelService";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
 import { ToastAction, useToast } from "@shared/ui";
-import { channelStatusFilter } from "@entities/channel";
+import {
+  channelStatusFilter,
+  useDeactivateChannelMutation,
+} from "@entities/channel";
+import { useAppSelector } from "@shared/hooks";
 
 interface ChannelCardMenuProps {
   channel_id: string;

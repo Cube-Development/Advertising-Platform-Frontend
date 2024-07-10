@@ -1,5 +1,3 @@
-import { useAppSelector } from "@shared/store";
-import { Skeleton } from "@shared/ui/shadcn-ui/ui/skeleton";
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import {
@@ -7,6 +5,8 @@ import {
   myProjectStatusFilter,
   projectTypesFilter,
 } from "@entities/project";
+import { Skeleton } from "@shared/ui";
+import { useAppSelector } from "@shared/hooks";
 
 export const ProjectCardSkeleton: FC = () => {
   const { typeFilter, statusFilter } = useAppSelector((state) => state.filter);

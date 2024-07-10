@@ -1,8 +1,4 @@
 import { InfoIcon } from "@shared/assets";
-import {
-  useChannelVerifyMutation,
-  useCreateCodeQuery,
-} from "@shared/store/services/channelService";
 import { MyButton, SpinnerLoaderSmall, useToast } from "@shared/ui";
 import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -12,6 +8,8 @@ import {
   IAddChannelIdentification,
   IAddPlatformBlur,
   IChannelLink,
+  useChannelVerifyMutation,
+  useCreateCodeQuery,
 } from "@entities/channel";
 import { platformTypes } from "@entities/platform";
 

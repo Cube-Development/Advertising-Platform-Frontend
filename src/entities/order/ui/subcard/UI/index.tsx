@@ -5,11 +5,9 @@ import {
   SubsIcon,
   WomanIcon,
 } from "@shared/assets";
-import { useAppSelector } from "@shared/store";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { useGetPostQuery } from "@shared/store/services/getPostService";
 import { X } from "lucide-react";
 import {
   DisplayFeed,
@@ -28,6 +26,7 @@ import {
   managerProjectStatusFilter,
   myProjectStatusFilter,
   projectTypesFilter,
+  useGetPostQuery,
 } from "@entities/project";
 import {
   AlertDialog,
@@ -37,6 +36,7 @@ import {
   useToast,
 } from "@shared/ui";
 import { orderStatus, orderStatusChat } from "@entities/order/config";
+import { useAppSelector } from "@shared/hooks";
 
 interface AdvSubcardProps {
   subcard: IAdvProjectSubcard;

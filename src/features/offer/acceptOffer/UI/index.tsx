@@ -1,4 +1,3 @@
-import { useAcceptOfferMutation } from "@shared/store/services/bloggerOffersService";
 import {
   MyButton,
   Popover,
@@ -12,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { SendHorizonal } from "lucide-react";
 import { IOrderFeature } from "@entities/project";
+import { useAcceptOfferMutation } from "@entities/offer";
 
 // создаю массив дат из date_from до date_to
 function getDatesInRange(dates?: {

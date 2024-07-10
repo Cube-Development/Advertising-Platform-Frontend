@@ -1,14 +1,6 @@
 import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import Cookies from "js-cookie";
-import {
-  useCreateOrderDatesMutation,
-  useCreatePostMutation,
-  useCreateUniquePostMutation,
-  useGetUploadLinkMutation,
-  useProjectOrdersQuery,
-} from "@shared/store/services/advOrdersService";
-import { usePaymentProjectMutation } from "@shared/store/services/walletService";
 import { useTranslation } from "react-i18next";
 import { Languages } from "@shared/config/languages";
 import { useNavigate } from "react-router-dom";
@@ -23,9 +15,19 @@ import {
   CreateOrderPost,
   CreateOrderTop,
 } from "../components";
-import { getContentType, getFileExtension } from "@shared/functions";
 import { ICreateOrderBlur } from "../config";
-import { ContentType, ICreatePostForm } from "@entities/project";
+import {
+  ContentType,
+  ICreatePostForm,
+  getContentType,
+  useCreateOrderDatesMutation,
+  useCreatePostMutation,
+  useCreateUniquePostMutation,
+  useGetUploadLinkMutation,
+  useProjectOrdersQuery,
+} from "@entities/project";
+import { usePaymentProjectMutation } from "@entities/wallet";
+import { getFileExtension } from "@shared/functions";
 
 interface CreateOrderBlockProps {}
 

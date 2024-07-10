@@ -1,9 +1,6 @@
-import { useAppDispatch, useAppSelector } from "@shared/store";
-import { filterSlice } from "@shared/store/reducers";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { pageFilter } from "@shared/config/pageFilter";
 import Cookies from "js-cookie";
 import {
   profileTypes,
@@ -19,6 +16,14 @@ import {
 } from "@entities/communication";
 import { addFileFilter, addFileTypes } from "@entities/project";
 import { roles } from "@entities/user";
+import { pageFilter } from "@shared/routing";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
+import {
+  setAddFileFilter,
+  setCatalogFilter,
+  setChatFilter,
+  setProfileFilter,
+} from "@shared/store";
 
 interface BarProfileFilterProps {
   page: pageFilter;
@@ -67,14 +72,14 @@ export const BarProfileFilter: FC<BarProfileFilterProps> = ({
       page === pageFilter.walletTopUp
     ) {
       const newFilter = { type: option.type, id: option.id };
-      dispatch(filterSlice.actions.setProfileFilter(newFilter));
+      dispatch(setProfileFilter(newFilter));
       resetActiveAccount && resetActiveAccount(null);
     } else if (page === pageFilter.catalog) {
-      dispatch(filterSlice.actions.setCatalogFilter(option.type));
+      dispatch(setCatalogFilter(option.type));
     } else if (page === pageFilter.chat) {
-      dispatch(filterSlice.actions.setChatFilter(option.type as chatFilter));
+      dispatch(setChatFilter(option.type as chatFilter));
     } else if (page === pageFilter.createOrderFiles) {
-      dispatch(filterSlice.actions.setAddFileFilter(option.type));
+      dispatch(setAddFileFilter(option.type));
     }
     if (page === pageFilter.catalog) {
       // if (page !== pageFilter.catalog) {

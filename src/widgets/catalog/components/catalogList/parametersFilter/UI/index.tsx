@@ -1,12 +1,4 @@
 import { CancelIcon2, ParametersIcon, QualityIcon } from "@shared/assets";
-import { useAppSelector } from "@shared/store";
-import { getCatalogReq } from "@shared/store/services/catalogService";
-import {
-  useGetChannelAgesQuery,
-  useGetChannelLanguagesQuery,
-  useGetChannelRegionsQuery,
-  useGetCompanyCategoriesQuery,
-} from "@shared/store/services/contentService";
 import { FC, useEffect, useState } from "react";
 import {
   UseFormGetValues,
@@ -16,12 +8,6 @@ import {
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
-import {
-  Drawer,
-  DrawerContent,
-  DrawerTrigger,
-  DrawerClose,
-} from "@shared/ui/shadcn-ui/ui/drawer";
 import {
   BarProfileFilter,
   SelectDescription,
@@ -33,14 +19,19 @@ import {
   IFilterSearch,
   RecomTargetCard,
   catalogFilter,
+  getCatalogReq,
 } from "@entities/catalog";
-import { channelData } from "@entities/channel";
 import {
-  AIRecommendCARDS,
-  BREAKPOINT,
-  Languages,
-  pageFilter,
-} from "@shared/config";
+  channelData,
+  useGetChannelAgesQuery,
+  useGetChannelLanguagesQuery,
+  useGetChannelRegionsQuery,
+  useGetCompanyCategoriesQuery,
+} from "@entities/channel";
+import { AIRecommendCARDS, BREAKPOINT, Languages } from "@shared/config";
+import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from "@shared/ui";
+import { pageFilter } from "@shared/routing";
+import { useAppSelector } from "@shared/hooks";
 
 interface ParametersFilterProps {
   setValue: UseFormSetValue<getCatalogReq>;

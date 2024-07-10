@@ -1,15 +1,15 @@
 import { CancelIcon2, ClockIcon } from "@shared/assets";
+import { FC, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
+import { TimeListProps } from "@entities/project";
 import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogTrigger,
-} from "@shared/ui/shadcn-ui/ui/alert-dialog";
-import { FC, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import { TimeListProps } from "@entities/project";
+} from "@shared/ui/shadcn-ui";
 
 interface ITIme {
   timeIndexList: number[];

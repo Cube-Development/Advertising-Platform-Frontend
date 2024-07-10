@@ -1,15 +1,14 @@
 import { SadSmileIcon, HappySmileIcon } from "@shared/assets";
-import { useAppSelector } from "@shared/store";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { pageFilter } from "@shared/config/pageFilter";
-import { paths } from "@shared/routing";
+import { pageFilter, paths } from "@shared/routing";
 import {
   IAddChannelQuery,
   addChannelQueries,
   channelStatusFilter,
 } from "@entities/channel";
+import { useAppSelector } from "@shared/hooks";
 
 interface ZeroChannelProps {
   AddChannelBtn: FC<IAddChannelQuery>;

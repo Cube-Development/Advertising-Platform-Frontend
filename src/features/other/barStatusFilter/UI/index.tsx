@@ -1,9 +1,6 @@
-import { useAppDispatch, useAppSelector } from "@shared/store";
-import { filterSlice } from "@shared/store/reducers";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { pageFilter } from "@shared/config";
 import {
   advManagerProjectStatus,
   advMyProjectStatus,
@@ -13,6 +10,9 @@ import {
 import { roles } from "@entities/user";
 import { bloggerOfferStatus } from "@entities/offer";
 import { bloggerChannelStatus } from "@entities/channel";
+import { pageFilter } from "@shared/routing";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
+import { setStatusFilter } from "@shared/store";
 
 interface BarStatusFilterProps {
   page: pageFilter;
@@ -24,7 +24,7 @@ export const BarStatusFilter: FC<BarStatusFilterProps> = ({ page }) => {
   const { role } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const toggleStatus = (type: string) => {
-    dispatch(filterSlice.actions.setStatusFilter(type));
+    dispatch(setStatusFilter(type));
   };
 
   const projectStatus =

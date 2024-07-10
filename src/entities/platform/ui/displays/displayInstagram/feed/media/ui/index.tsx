@@ -9,8 +9,8 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@shared/ui";
-import { ContentType, IFile } from "@entities/project";
-import { GenerateDownloadLink, getContentType } from "@shared/functions";
+import { ContentType, IFile, getContentType } from "@entities/project";
+import { GenerateDownloadLink } from "@shared/functions";
 
 interface InstagramMediaProps {
   medias?: File[];

@@ -9,7 +9,6 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { animateScroll } from "react-scroll";
 import styles from "./styles.module.scss";
-import { useGetOrderHistoryQuery } from "@shared/store/services/chatService";
 import { useCentrifuge } from "@widgets/communication/chat";
 import { DinamicPagination } from "@features/other";
 import {
@@ -21,6 +20,7 @@ import {
   IOrderMessageSendSocket,
   MessageStatus,
   RecipientType,
+  useGetOrderHistoryQuery,
 } from "@entities/communication";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 

@@ -5,8 +5,7 @@ import { EyeIcon } from "@shared/assets";
 import { TelegramMedia } from "./media";
 import { TelegramFile } from "./file";
 import { TelegramComment } from "./comment";
-import { GetPostRes } from "@shared/store/services/getPostService";
-import { ContentType, ICreatePostForm } from "@entities/project";
+import { ContentType, GetPostRes, ICreatePostForm } from "@entities/project";
 
 interface DisplayTelegramProps {
   formState?: ICreatePostForm;

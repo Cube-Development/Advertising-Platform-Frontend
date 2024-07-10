@@ -7,20 +7,19 @@ import styles from "./styles.module.scss";
 import { Lang } from "./lang";
 import { DropdownMenu } from "./dropdownMenu";
 import { Wallet } from "./wallet";
-import { useAppDispatch, useAppSelector } from "@shared/store";
-import { userSlice } from "@shared/store/reducers";
 import { Chat } from "@widgets/communication";
-import { roles } from "@entities/user";
+import { logout, roles, toggleRole as toggleRoleAction } from "@entities/user";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
 
 export const Header: FC = () => {
   const [screen, setScreen] = useState<number>(window.innerWidth);
   const { isAuth, role } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const toggleLogout = () => {
-    dispatch(userSlice.actions.logout());
+    dispatch(logout());
   };
   const toggleRole = (role: roles) => {
-    dispatch(userSlice.actions.toggleRole(role));
+    dispatch(toggleRoleAction(role));
   };
 
   useEffect(() => {

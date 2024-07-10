@@ -1,11 +1,10 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { EmptyPost } from "./emptyPost";
-import { GetPostRes } from "@shared/store/services/getPostService";
 import { YoutubeMedia } from "./media";
 import { YoutubeFile } from "./file/ui";
 import { YoutubeComment } from "./comment/ui";
-import { ContentType, ICreatePostForm } from "@entities/project";
+import { ContentType, GetPostRes, ICreatePostForm } from "@entities/project";
 import { PostTypesNum } from "@entities/platform/config";
 import { EyeDisabledIcon } from "@shared/assets";
 

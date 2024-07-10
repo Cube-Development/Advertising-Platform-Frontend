@@ -9,7 +9,7 @@ import { MANAGER_PROJECTS } from "@shared/api/tags";
 //   files?: IFile[];
 // }
 
-export interface getProjectsCardReq {
+export interface getManagerProjectsCardReq {
   page: number;
   date_sort?: string;
   elements_on_page?: number;
@@ -101,7 +101,7 @@ export const managerProjectsAPI = authApi.injectEndpoints({
     // }),
     getManagerProjects: build.query<
       IManagerProjects | IManagerNewProjects,
-      getProjectsCardReq
+      getManagerProjectsCardReq
     >({
       query: (params) => ({
         url: `/tariff/`,

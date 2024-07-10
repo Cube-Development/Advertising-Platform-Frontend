@@ -1,8 +1,13 @@
 import { FC, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 // import { RecomendationList } from "@widgets/cartBlock/UI/recomendationList";
-import { useAppSelector } from "@shared/store";
+import Cookies from "js-cookie";
+import { useTranslation } from "react-i18next";
+import { CartList, CreatePost } from "../components";
+import { GenerateGuestId, roles } from "@entities/user";
 import {
+  ICart,
+  ICatalogChannel,
   useAddToCommonCartMutation,
   useAddToManagerCartMutation,
   useAddToPublicCartMutation,
@@ -12,15 +17,10 @@ import {
   useRemoveFromCommonCartMutation,
   useRemoveFromManagerCartMutation,
   useRemoveFromPublicCartMutation,
-} from "@shared/store/services/cartService";
-import Cookies from "js-cookie";
-import { useTranslation } from "react-i18next";
-import { CartList, CreatePost } from "../components";
-import { GenerateGuestId } from "@shared/functions";
-import { roles } from "@entities/user";
-import { ICart, ICatalogChannel } from "@entities/catalog";
+} from "@entities/catalog";
 import { ToastAction, useToast } from "@shared/ui";
 import { Languages } from "@shared/config";
+import { useAppSelector } from "@shared/hooks";
 
 export const Cart: FC = () => {
   const { toast } = useToast();

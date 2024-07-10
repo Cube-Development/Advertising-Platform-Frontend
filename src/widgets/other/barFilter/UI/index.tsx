@@ -1,7 +1,5 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
-import { useAppSelector } from "@shared/store";
-import { pageFilter } from "@shared/config/pageFilter";
 import { UseFormSetValue } from "react-hook-form";
 import { AddChannel } from "@features/channel";
 import {
@@ -16,6 +14,8 @@ import { NewProject } from "@features/project";
 import { roles } from "@entities/user";
 import { projectTypesFilter } from "@entities/project";
 import { platformTypes } from "@entities/platform";
+import { pageFilter } from "@shared/routing";
+import { useAppSelector } from "@shared/hooks";
 
 interface BarFilterProps {
   page: pageFilter;

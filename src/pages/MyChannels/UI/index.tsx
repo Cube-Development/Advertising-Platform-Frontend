@@ -2,16 +2,13 @@ import {
   AllChannelTypes,
   IModerationChannel,
   channelStatusFilter,
-} from "@entities/channel";
-import { platformTypes, platformTypesNum } from "@entities/platform";
-import { INTERSECTION_ELEMENTS } from "@shared/config/common";
-import { Languages } from "@shared/config/languages";
-import { pageFilter } from "@shared/config/pageFilter";
-import { useAppSelector } from "@shared/store";
-import {
   getChannelsByStatusReq,
   useGetChannelsByStatusQuery,
-} from "@shared/store/services/channelService";
+} from "@entities/channel";
+import { platformTypes, platformTypesNum } from "@entities/platform";
+import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
+import { useAppSelector } from "@shared/hooks";
+import { pageFilter } from "@shared/routing";
 import { ActiveChannels, ModerationChannels } from "@widgets/channel";
 import { BarFilter } from "@widgets/other";
 import { FC, useEffect, useState } from "react";
