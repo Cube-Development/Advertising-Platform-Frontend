@@ -11,7 +11,6 @@ import { languagesNum } from "@shared/config";
 
 export interface ICreatePostReq {
   project_id: string;
-  // name?: string;
   post_type: PostTypesNum;
   comment?: string;
   files?: IFile[];
@@ -19,7 +18,6 @@ export interface ICreatePostReq {
 
 export interface ICreateUniquePostReq {
   project_id: string;
-  // name?: string;
   comment?: string;
   files?: IFile[];
   orders: string[];
@@ -61,6 +59,16 @@ export const advProjectsAPI = authApi.injectEndpoints({
       query: (params) => ({
         url: `/file/upload_link`,
         method: "GET",
+        params: params,
+      }),
+    }),
+    projectName: build.mutation<
+      { success: boolean },
+      { project_id: string; name: string }
+    >({
+      query: (params) => ({
+        url: `/order/project-name`,
+        method: "POST",
         params: params,
       }),
     }),
@@ -114,17 +122,6 @@ export const advProjectsAPI = authApi.injectEndpoints({
       }),
       invalidatesTags: [BLOGGER_OFFERS, ADV_PROJECTS],
     }),
-    addReview: build.mutation<
-      { success: boolean },
-      { order_id: string; review: string; grade: number }
-    >({
-      query: (params) => ({
-        url: `/order/advertiser/add_review`,
-        method: "PUT",
-        params: params,
-      }),
-      invalidatesTags: [BLOGGER_OFFERS, ADV_PROJECTS],
-    }),
     getAdvProjects: build.query<IAdvProjects, getProjectsCardReq>({
       query: (BodyParams) => ({
         url: `/order/project/get/advertiser`,
@@ -168,12 +165,12 @@ export const {
   useCreateCartMutation,
   useGetUploadLinkMutation,
   useProjectOrdersQuery,
+  useProjectNameMutation,
   useCreatePostMutation,
   useCreateUniquePostMutation,
   useCreateOrderDatesMutation,
   useAcceptOrderMutation,
   useRejectOrderMutation,
-  useAddReviewMutation,
   useGetAdvProjectsQuery,
   useGetAdvSubprojectsQuery,
   useGetAdvManagerProjectsQuery,

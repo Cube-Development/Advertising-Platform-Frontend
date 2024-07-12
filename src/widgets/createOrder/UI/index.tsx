@@ -24,6 +24,7 @@ import {
   useCreatePostMutation,
   useCreateUniquePostMutation,
   useGetUploadLinkMutation,
+  useProjectNameMutation,
   useProjectOrdersQuery,
 } from "@entities/project";
 import { usePaymentProjectMutation } from "@entities/wallet";
@@ -99,6 +100,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [getUploadLink] = useGetUploadLinkMutation();
+  const [projectName] = useProjectNameMutation();
   const [createPost] = useCreatePostMutation();
   const [createUniquePost] = useCreateUniquePostMutation();
   const [createOrderDates] = useCreateOrderDatesMutation();
@@ -238,6 +240,11 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
             }),
           );
         }
+
+        projectName({
+          project_id,
+          name: formData?.name || "Some project name",
+        });
 
         // Создание постов
         if (formData?.isMultiPost && formData?.multiposts) {

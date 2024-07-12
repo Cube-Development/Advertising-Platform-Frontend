@@ -4,8 +4,9 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { SendHorizonal } from "lucide-react";
 import { Rating } from "../rating";
-import { IOrderFeature, useAddReviewMutation } from "@entities/project";
+import { IOrderFeature } from "@entities/project";
 import { Popover, PopoverContent, PopoverTrigger, useToast } from "@shared/ui";
+import { useAddReviewMutation } from "@entities/channel";
 
 export const Feedback: FC<IOrderFeature> = ({ order_id }) => {
   const { t } = useTranslation();
@@ -15,7 +16,11 @@ export const Feedback: FC<IOrderFeature> = ({ order_id }) => {
   const [addReview] = useAddReviewMutation();
   const handleOnClick = () => {
     order_id &&
-      addReview({ order_id, review, grade })
+      addReview({
+        order_id,
+        review: review.length > 0 ? review : undefined,
+        grade,
+      })
         .unwrap()
         .then(() => {
           toast({
