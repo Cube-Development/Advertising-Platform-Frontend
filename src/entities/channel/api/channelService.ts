@@ -96,6 +96,16 @@ export const channelAPI = authApi.injectEndpoints({
       }),
       invalidatesTags: [BLOGGER_CHANNELS],
     }),
+    addReview: build.mutation<
+      { success: boolean },
+      { order_id: string; review?: string; grade: number }
+    >({
+      query: (params) => ({
+        url: `/channel/review`,
+        method: "PUT",
+        params: params,
+      }),
+    }),
   }),
 });
 
@@ -108,4 +118,5 @@ export const {
   useDeactivateChannelMutation,
   useEditChannelMutation,
   useGetChannelByIdQuery,
+  useAddReviewMutation,
 } = channelAPI;
