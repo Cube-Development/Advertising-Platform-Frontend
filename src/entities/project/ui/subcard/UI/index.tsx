@@ -27,6 +27,8 @@ import {
   myProjectStatusFilter,
   projectTypesFilter,
   useGetPostQuery,
+  orderStatus,
+  orderStatusChat,
 } from "@entities/project";
 import {
   AlertDialog,
@@ -35,7 +37,6 @@ import {
   AlertDialogTrigger,
   useToast,
 } from "@shared/ui";
-import { orderStatus, orderStatusChat } from "@entities/order";
 import { useAppSelector } from "@shared/hooks";
 
 interface AdvSubcardProps {

@@ -7,10 +7,9 @@ import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.scss";
 import { CreatePost as CreatePostBtn } from "@features/cart";
 import { ToastAction, useToast } from "@shared/ui";
-import { CART, ICart } from "@entities/catalog";
 import { BREAKPOINT } from "@shared/config";
 import { useAppSelector } from "@shared/hooks";
-import { useCreateCartMutation } from "@entities/project";
+import { useCreateCartMutation, CART, ICart } from "@entities/project";
 
 interface CreatePostProps {
   cart: ICart;

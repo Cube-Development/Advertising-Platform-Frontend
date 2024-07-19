@@ -1,4 +1,4 @@
-import { desireStatus, orderStatus } from "@entities/order";
+import { desireStatus, orderStatus } from "../config";
 
 export interface IManagerProjects {
   page: number;

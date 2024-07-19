@@ -26,7 +26,7 @@ import {
   useGetChannelLanguagesQuery,
   useGetChannelRegionsQuery,
 } from "@entities/channel";
-import { IFormat } from "@entities/catalog";
+import { IFormat } from "@entities/project";
 
 interface ChannelParametersProps {
   blur: IAddPlatformBlur;

@@ -1,4 +1,4 @@
-import { IFormat } from "@entities/catalog";
+import { IFormat } from "@entities/project";
 import { IOption } from "@shared/types/common";
 
 export interface IReadChannelData {

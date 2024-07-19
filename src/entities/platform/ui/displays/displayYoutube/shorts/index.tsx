@@ -12,7 +12,7 @@ import {
   SquareSlash,
 } from "lucide-react";
 import { ContentType, GetPostRes, ICreatePostForm } from "@entities/project";
-import { PostTypesNum } from "@entities/platform/config";
+import { PostTypesNum } from "@entities/platform";
 import { EyeDisabledIcon } from "@shared/assets";
 
 interface DisplayShortsProps {

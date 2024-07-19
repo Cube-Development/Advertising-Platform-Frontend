@@ -17,7 +17,7 @@ import {
   useRemoveFromCommonCartMutation,
   useRemoveFromManagerCartMutation,
   useRemoveFromPublicCartMutation,
-} from "@entities/catalog";
+} from "@entities/project";
 import { ToastAction, useToast } from "@shared/ui";
 import { Languages } from "@shared/config";
 import { useAppSelector } from "@shared/hooks";

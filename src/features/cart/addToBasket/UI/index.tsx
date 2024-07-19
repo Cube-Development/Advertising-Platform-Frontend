@@ -3,7 +3,7 @@ import { MyButton } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { IAddToBasketProps } from "@entities/catalog";
+import { IAddToBasketProps } from "@entities/project";
 
 export const AddToBasket: FC<IAddToBasketProps> = ({
   FormatList,

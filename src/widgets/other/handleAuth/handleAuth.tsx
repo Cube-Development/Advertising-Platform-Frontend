@@ -9,7 +9,7 @@ import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
 import { QueryParams } from "@shared/functions";
 import { login, roles, toggleRole, useGetTokensMutation } from "@entities/user";
 import { useAppDispatch } from "@shared/hooks";
-import { useTransferPublicMutation } from "@entities/catalog";
+import { useTransferPublicMutation } from "@entities/project";
 
 type DecodedToken = {
   role: roles;

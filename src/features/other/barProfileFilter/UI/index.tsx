@@ -8,13 +8,17 @@ import {
   profileTypesNum,
   walletTopUpTypes,
 } from "@entities/wallet";
-import { catalogFilter, catalogTypes } from "@entities/catalog";
 import {
   chatAdvertiserTypes,
   chatFilter,
   chatManagerTypes,
 } from "@entities/communication";
-import { addFileFilter, addFileTypes } from "@entities/project";
+import {
+  addFileFilter,
+  addFileTypes,
+  catalogFilter,
+  catalogTypes,
+} from "@entities/project";
 import { roles } from "@entities/user";
 import { pageFilter } from "@shared/routing";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";

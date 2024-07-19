@@ -11,16 +11,16 @@ import { SelectOptions, filterData } from "@features/other";
 import { Accordion, ShowMoreBtn, SpinnerLoader } from "@shared/ui";
 import {
   CatalogCard,
+  FormatList,
   SearchFilter,
   SkeletonCatalogCard,
 } from "@features/catalog";
 import { AddToBasket } from "@features/cart";
 import {
-  FormatList,
   ICatalogChannel,
   getCatalogReq,
   sortingTypes,
-} from "@entities/catalog";
+} from "@entities/project";
 import { channelData } from "@entities/channel";
 import { platformTypes } from "@entities/platform";
 import { BREAKPOINT, INTERSECTION_ELEMENTS } from "@shared/config";

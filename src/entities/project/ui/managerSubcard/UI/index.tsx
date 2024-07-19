@@ -13,8 +13,10 @@ import {
   IManagerProjectSubcard,
   IOrderFeature,
   managerProjectStatusFilter,
+  desireStatus,
+  orderStatus,
+  orderStatusChat,
 } from "@entities/project";
-import { desireStatus, orderStatus, orderStatusChat } from "@entities/order";
 import { useAppSelector } from "@shared/hooks";
 
 interface ManagerProjectSubcardProps {

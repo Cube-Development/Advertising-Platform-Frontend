@@ -24,8 +24,8 @@ import {
   SeeComment,
   SeePost,
 } from "@features/order";
-import { ManagerProjectSubcard } from "@entities/order";
 import {
+  ManagerProjectSubcard,
   IManagerProjectCard,
   getProjectSubcardReq,
   managerProjectStatusFilter,

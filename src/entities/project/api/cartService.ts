@@ -1,6 +1,6 @@
-import { ICart } from "@entities/catalog";
 import { authApi, baseApi, CART, CART_PUB, CATALOG } from "@shared/api";
 import { languagesNum } from "@shared/config";
+import { ICart } from "../types";
 
 interface AddChannelReq {
   guest_id?: string;

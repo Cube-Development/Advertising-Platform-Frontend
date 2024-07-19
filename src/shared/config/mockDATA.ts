@@ -1,5 +1,8 @@
-import { IFilterSearch } from "@entities/catalog";
-import { IAdvManagerProjectsDev, IAdvProjects } from "@entities/project";
+import {
+  IAdvManagerProjectsDev,
+  IAdvProjects,
+  IFilterSearch,
+} from "@entities/project";
 
 export const managerActiveCARDS = {
   page: 1,

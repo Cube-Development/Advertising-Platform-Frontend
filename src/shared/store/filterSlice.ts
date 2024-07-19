@@ -1,4 +1,3 @@
-import { catalogFilter } from "@entities/catalog";
 import { IChannelLink, channelStatusFilter } from "@entities/channel";
 import { chatFilter } from "@entities/communication";
 import { offerStatusFilter } from "@entities/offer";
@@ -7,6 +6,7 @@ import {
   addFileFilter,
   myProjectStatusFilter,
   projectTypesFilter,
+  catalogFilter,
 } from "@entities/project";
 import {
   profileTypesName,

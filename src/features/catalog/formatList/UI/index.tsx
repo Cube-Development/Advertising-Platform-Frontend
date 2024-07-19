@@ -1,7 +1,7 @@
 import { FC, useEffect, useRef, useState } from "react";
 import styles from "./styles.module.scss";
 import { ArrowSmallVerticalIcon } from "@shared/assets";
-import { IFormat, IFormatListProps } from "@entities/catalog";
+import { IFormat, IFormatListProps } from "@entities/project";
 
 export const FormatList: FC<IFormatListProps> = ({
   changeFormat,

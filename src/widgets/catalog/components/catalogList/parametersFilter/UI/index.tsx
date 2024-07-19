@@ -14,13 +14,8 @@ import {
   SelectOptions,
   SelectSex,
 } from "@features/other";
-import { AiFilter } from "@features/catalog";
-import {
-  IFilterSearch,
-  RecomTargetCard,
-  catalogFilter,
-  getCatalogReq,
-} from "@entities/catalog";
+import { AiFilter, RecomTargetCard } from "@features/catalog";
+import { IFilterSearch, catalogFilter, getCatalogReq } from "@entities/project";
 import {
   channelData,
   useGetChannelAgesQuery,

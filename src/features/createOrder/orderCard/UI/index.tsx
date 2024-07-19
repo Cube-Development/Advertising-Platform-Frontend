@@ -12,7 +12,6 @@ import {
   PostTypesNum,
   platformTypesNum,
 } from "@entities/platform";
-import { EmptyPost } from "@entities/platform/ui/displays/displayTelegram/UI/emptyPost";
 import {
   CreatePostFormData,
   DateListProps,
@@ -20,14 +19,15 @@ import {
   IDatetime,
   IPostChannel,
   TimeListProps,
+  platformToIcon,
 } from "@entities/project";
-import { platformToIcon } from "@entities/catalog";
 import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogContent,
   AlertDialogTrigger,
 } from "@shared/ui";
+import { EmptyPost } from "@entities/platform/ui/displays/displayInstagram/feed/emptyPost";
 
 interface PostPlatformProps {
   card: IPostChannel;
