@@ -5,7 +5,7 @@ import { YoutubeMedia } from "./media";
 import { YoutubeFile } from "./file/ui";
 import { YoutubeComment } from "./comment/ui";
 import { ContentType, GetPostRes, ICreatePostForm } from "@entities/project";
-import { PostTypesNum } from "@entities/platform/config";
+import { PostTypesNum } from "@entities/platform";
 import { EyeDisabledIcon } from "@shared/assets";
 
 interface DisplayVideosProps {

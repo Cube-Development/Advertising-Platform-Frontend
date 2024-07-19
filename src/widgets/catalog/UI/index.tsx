@@ -22,7 +22,7 @@ import {
   useRemoveFromCommonCartMutation,
   useRemoveFromManagerCartMutation,
   useRemoveFromPublicCartMutation,
-} from "@entities/catalog";
+} from "@entities/project";
 import { GenerateGuestId, GetUserId, roles } from "@entities/user";
 import { useAppSelector } from "@shared/hooks";
 

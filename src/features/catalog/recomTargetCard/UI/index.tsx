@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { IFilterSearch } from "@entities/catalog";
+import { IFilterSearch } from "@entities/project";
 
 interface RecomTargetCardProps {
   card: IFilterSearch;

@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { MySliderSex } from "@shared/ui";
 import { PLATFORM_PARAMETERS } from "@entities/channel";
-import { DEBOUNCE } from "@entities/catalog";
+import { DEBOUNCE } from "@entities/project";
 import { useDebounce } from "@shared/hooks";
 
 interface SelectSexProps {

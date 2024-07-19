@@ -7,7 +7,7 @@ import {
   AlertDialogTrigger,
   MyButton,
 } from "@shared/ui";
-import { FC, useRef, useState } from "react";
+import { FC, useState } from "react";
 import Calendar from "react-calendar";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";

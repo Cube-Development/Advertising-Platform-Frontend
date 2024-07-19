@@ -1,4 +1,4 @@
-import { orderStatus } from "@entities/order";
+import { orderStatus } from "../config";
 
 export interface IAdvProjects {
   page: number;

@@ -4,7 +4,7 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
-import { ICart } from "@entities/catalog";
+import { ICart } from "@entities/project";
 
 interface CatalogCartProps {
   cart: ICart;

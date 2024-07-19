@@ -14,7 +14,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
 import { Languages } from "@shared/config";
-import { platformToIcon } from "@entities/catalog";
+import { platformToIcon } from "@entities/project";
 import { useGetChannelByIdQuery } from "@entities/channel";
 
 interface ChannelDescriptionProps {

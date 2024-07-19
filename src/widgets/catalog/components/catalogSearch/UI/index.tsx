@@ -13,13 +13,7 @@ import {
   SelectOptions,
   SelectSex,
 } from "@features/other";
-import { AiFilter } from "@features/catalog";
-import {
-  IFilterSearch,
-  RecomTargetCard,
-  catalogFilter,
-  getCatalogReq,
-} from "@entities/catalog";
+import { AiFilter, RecomTargetCard } from "@features/catalog";
 import { AIRecommendCARDS, Languages } from "@shared/config";
 import {
   channelData,
@@ -30,6 +24,7 @@ import {
 } from "@entities/channel";
 import { pageFilter } from "@shared/routing";
 import { useAppSelector } from "@shared/hooks";
+import { IFilterSearch, catalogFilter, getCatalogReq } from "@entities/project";
 
 interface CatalogSearchProps {
   setValue: UseFormSetValue<getCatalogReq>;

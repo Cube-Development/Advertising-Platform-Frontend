@@ -1,7 +1,8 @@
-import { ICatalogCards, sortingFilter } from "@entities/catalog";
 import { platformTypesNum } from "@entities/platform";
 import { CATALOG, baseApi } from "@shared/api";
 import { languagesNum } from "@shared/config";
+import { sortingFilter } from "../config";
+import { ICatalogCards } from "../types";
 
 export interface getCatalogReq {
   user_id?: string;

@@ -3,8 +3,11 @@ import styles from "./styles.module.scss";
 import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
 import { ContinueTemplate, NewProject, ZeroProject } from "@features/project";
 import { TurnkeyProject } from "@features/other";
-import { AdvDevProjectCard, SkeletonAdvDevProjectCard } from "@entities/order";
-import { IAdvManagerProjectsDevCard } from "@entities/project";
+import {
+  AdvDevProjectCard,
+  IAdvManagerProjectsDevCard,
+  SkeletonAdvDevProjectCard,
+} from "@entities/project";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 
 interface DevProjectsListProps {

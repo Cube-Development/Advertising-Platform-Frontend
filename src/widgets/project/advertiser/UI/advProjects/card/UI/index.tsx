@@ -27,8 +27,8 @@ import {
   SeePost,
 } from "@features/order";
 import { AcceptProject } from "@features/project";
-import { AdvSubcard } from "@entities/order";
 import {
+  AdvSubcard,
   IAdvProjectCard,
   advManagerProjectStatusFilter,
   getProjectSubcardReq,

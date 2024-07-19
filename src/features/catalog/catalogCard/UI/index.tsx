@@ -15,7 +15,7 @@ import {
   IChangeCards,
   IFormat,
   platformToIcon,
-} from "@entities/catalog";
+} from "@entities/project";
 import { BREAKPOINT } from "@shared/config";
 import { AccordionContent, AccordionItem, AccordionTrigger } from "@shared/ui";
 import { pageFilter } from "@shared/routing";
