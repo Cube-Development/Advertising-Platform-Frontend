@@ -12,7 +12,7 @@ export enum profileTypesNum {
   selfEmployedAccounts = 3,
 }
 
-export enum subprofileFilter {
+export enum subprofileFilterTypes {
   account = "account",
   card = "card",
 }
@@ -38,12 +38,12 @@ export const profileTypes = [
 export const subprofileTypes = [
   {
     name: "add_profile.subtypes.account",
-    type: subprofileFilter.account,
+    type: subprofileFilterTypes.account,
     id: profileTypesNum.selfEmployedAccounts,
   },
   {
     name: "add_profile.subtypes.card",
-    type: subprofileFilter.card,
+    type: subprofileFilterTypes.card,
     id: profileTypesNum.selfEmployedTransits,
   },
 ];

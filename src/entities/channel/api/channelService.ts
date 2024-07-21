@@ -96,6 +96,14 @@ export const channelAPI = authApi.injectEndpoints({
       }),
       invalidatesTags: [BLOGGER_CHANNELS],
     }),
+    deleteChannel: build.mutation<void, { channel_id: string }>({
+      query: (params) => ({
+        url: `/channel/delete`,
+        method: `DELETE`,
+        params: params,
+      }),
+      invalidatesTags: [BLOGGER_CHANNELS],
+    }),
     addReview: build.mutation<
       { success: boolean },
       { order_id: string; review?: string; grade: number }
@@ -117,6 +125,7 @@ export const {
   useActivateChannelMutation,
   useDeactivateChannelMutation,
   useEditChannelMutation,
+  useDeleteChannelMutation,
   useGetChannelByIdQuery,
   useAddReviewMutation,
 } = channelAPI;

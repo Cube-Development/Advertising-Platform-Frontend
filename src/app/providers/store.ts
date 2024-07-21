@@ -1,13 +1,13 @@
 import { userSlice } from "@entities/user";
+import { dropdownMenuSlice } from "@pages/layouts";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { authApi, baseApi } from "@shared/api";
-import { filterSlice } from "@shared/store";
 
 const rootReducer = combineReducers({
   [baseApi.reducerPath]: baseApi.reducer,
   [authApi.reducerPath]: authApi.reducer,
   [userSlice.reducerPath]: userSlice.reducer,
-  [filterSlice.reducerPath]: filterSlice.reducer,
+  [dropdownMenuSlice.reducerPath]: dropdownMenuSlice.reducer,
 });
 
 export const setupStore = () => {

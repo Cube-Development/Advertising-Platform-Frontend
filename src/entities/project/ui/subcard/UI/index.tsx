@@ -37,7 +37,8 @@ import {
   AlertDialogTrigger,
   useToast,
 } from "@shared/ui";
-import { useAppSelector } from "@shared/hooks";
+import { channelStatusFilter } from "@entities/channel";
+import { offerStatusFilter } from "@entities/offer";
 
 interface AdvSubcardProps {
   subcard: IAdvProjectSubcard;
@@ -48,6 +49,8 @@ interface AdvSubcardProps {
   SeeBtn: FC;
   ChangeChannelBtn: FC<{ project_id: string }>;
   ChannelChatBtn: FC<IChannelChat>;
+  typeFilter: string;
+  statusFilter: channelStatusFilter | offerStatusFilter | string;
 }
 
 export const AdvSubcard: FC<AdvSubcardProps> = ({
@@ -59,11 +62,12 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
   SeeBtn,
   ChannelChatBtn,
   ChangeChannelBtn,
+  typeFilter,
+  statusFilter,
 }) => {
   const { t } = useTranslation();
   const { toast } = useToast();
 
-  const { typeFilter, statusFilter } = useAppSelector((state) => state.filter);
   const { data: post, error } = useGetPostQuery({ order_id: subcard.id });
 
   if (error) {

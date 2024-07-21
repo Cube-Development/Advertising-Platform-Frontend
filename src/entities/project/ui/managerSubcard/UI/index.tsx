@@ -17,7 +17,8 @@ import {
   orderStatus,
   orderStatusChat,
 } from "@entities/project";
-import { useAppSelector } from "@shared/hooks";
+import { channelStatusFilter } from "@entities/channel";
+import { offerStatusFilter } from "@entities/offer";
 
 interface ManagerProjectSubcardProps {
   subcard: IManagerProjectSubcard;
@@ -31,6 +32,7 @@ interface ManagerProjectSubcardProps {
   ChangePostBtn: FC<{ project_id: string }>;
   SeeCommentBtn: FC;
   ChannelChatBtn: FC<IChannelChat>;
+  statusFilter: channelStatusFilter | offerStatusFilter | string;
 }
 
 export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
@@ -45,9 +47,9 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
   ChangePostBtn,
   SeeCommentBtn,
   project_id,
+  statusFilter,
 }) => {
   const { t } = useTranslation();
-  const { statusFilter } = useAppSelector((state) => state.filter);
 
   return (
     <div

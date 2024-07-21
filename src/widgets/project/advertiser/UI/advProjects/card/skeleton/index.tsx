@@ -6,10 +6,18 @@ import {
   projectTypesFilter,
 } from "@entities/project";
 import { Skeleton } from "@shared/ui";
-import { useAppSelector } from "@shared/hooks";
+import { channelStatusFilter } from "@entities/channel";
+import { offerStatusFilter } from "@entities/offer";
 
-export const ProjectCardSkeleton: FC = () => {
-  const { typeFilter, statusFilter } = useAppSelector((state) => state.filter);
+interface ProjectCardSkeletonProps {
+  typeFilter: string;
+  statusFilter: channelStatusFilter | offerStatusFilter | string;
+}
+
+export const ProjectCardSkeleton: FC<ProjectCardSkeletonProps> = ({
+  typeFilter,
+  statusFilter,
+}) => {
   return (
     <Skeleton className="bg-skeleton-light rounded-[12px]">
       <div className={styles.wrapper}>

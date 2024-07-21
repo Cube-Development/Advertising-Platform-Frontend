@@ -205,7 +205,7 @@ main {
 
 .shake__animation {
   animation:
-    slideInFromRight 0.3s ease-in-out forwards,
+    slideInFromRight 0.1s ease-in-out forwards,
     shake 0.3s ease-in-out 0.1s forwards;
 }
 
@@ -225,7 +225,7 @@ main {
   }
 
   25% {
-    transform: translateX(-100px);
+    transform: translateX(-15px);
   }
 
   50% {

@@ -2,34 +2,35 @@ import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import { MyOffers } from "@widgets/offer";
-import { BarFilter } from "@widgets/other";
+import { BarFilter } from "@widgets/barFilter";
 import { platformTypes, platformTypesNum } from "@entities/platform";
 import {
   IBloggerOfferCard,
   getOrdersByStatusReq,
+  offerStatusFilter,
   useGetBloggerOrdersQuery,
 } from "@entities/offer";
 import { pageFilter } from "@shared/routing";
 import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
-import { useAppSelector } from "@shared/hooks";
+import { channelStatusFilter } from "@entities/channel";
 
 export const OffersPage: FC = () => {
-  const { statusFilter } = useAppSelector((state) => state.filter);
-
   const page = pageFilter.offer;
-
   const { i18n } = useTranslation();
   const language = Languages.find((lang) => {
     return i18n.language === lang.name;
   });
 
-  const { setValue, watch } = useForm<{ platform: platformTypesNum }>({
+  const { setValue, watch } = useForm<{
+    platform: platformTypesNum;
+    status: channelStatusFilter | offerStatusFilter | string;
+  }>({
     defaultValues: {
       platform: platformTypes[0].id,
+      status: offerStatusFilter.active,
     },
   });
-
-  const platformType = watch("platform");
+  const formState = watch();
 
   const [currentPage, setCurrentPage] = useState(1);
   const handleOnChangePage = () => {
@@ -37,12 +38,12 @@ export const OffersPage: FC = () => {
   };
 
   const getParams: getOrdersByStatusReq = {
-    platform: platformType,
+    platform: formState.platform,
     language: language?.id || Languages[0].id,
     page: currentPage,
     elements_on_page: INTERSECTION_ELEMENTS.orders,
     date_sort: "increase",
-    status: statusFilter,
+    status: formState.status,
   };
 
   const { data, isFetching } = useGetBloggerOrdersQuery(getParams);
@@ -61,7 +62,7 @@ export const OffersPage: FC = () => {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [platformType, statusFilter]);
+  }, [formState]);
 
   return (
     <>
@@ -69,8 +70,11 @@ export const OffersPage: FC = () => {
         page={page}
         listLength={!!offers?.length}
         setValue={setValue}
+        changeStatus={(status) => setValue("status", status)}
+        statusFilter={formState.status}
       />
       <MyOffers
+        statusFilter={formState.status}
         offers={offers!}
         handleOnChangePage={handleOnChangePage}
         isLoading={isFetching}

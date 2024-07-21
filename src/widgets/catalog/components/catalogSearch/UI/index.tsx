@@ -8,7 +8,7 @@ import {
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import {
-  BarProfileFilter,
+  BarSubfilter,
   SelectDescription,
   SelectOptions,
   SelectSex,
@@ -23,26 +23,31 @@ import {
   useGetCompanyCategoriesQuery,
 } from "@entities/channel";
 import { pageFilter } from "@shared/routing";
-import { useAppSelector } from "@shared/hooks";
-import { IFilterSearch, catalogFilter, getCatalogReq } from "@entities/project";
+import {
+  IFilterSearch,
+  catalogBarFilter,
+  getCatalogReq,
+} from "@entities/project";
 
 interface CatalogSearchProps {
   setValue: UseFormSetValue<getCatalogReq>;
   reset: UseFormReset<getCatalogReq>;
   getValues: UseFormGetValues<getCatalogReq>;
+  catalogFilter: catalogBarFilter;
+  changeCatalogfilter: (filter: catalogBarFilter) => void;
 }
 
 export const CatalogSearch: FC<CatalogSearchProps> = ({
   setValue,
   reset,
   getValues,
+  catalogFilter,
+  changeCatalogfilter,
 }) => {
   const [recommendationCard, setRecCard] = useState<IFilterSearch | null>(null);
   const [recommendationCards, setRecCards] = useState<IFilterSearch[] | null>(
     null,
   );
-
-  const { catalogFilter: catfilter } = useAppSelector((state) => state.filter);
 
   const { t, i18n } = useTranslation();
   const language = Languages.find((lang) => {
@@ -95,12 +100,14 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
   return (
     <>
       <div className={styles.wrapper}>
-        <BarProfileFilter
+        <BarSubfilter
           resetValues={resetRecommendationCard}
           page={pageFilter.catalog}
+          changeCatalogFilter={changeCatalogfilter}
+          catalogFilter={catalogFilter}
         />
         <div className={styles.options}>
-          {catfilter === catalogFilter.parameters ? (
+          {catalogFilter === catalogBarFilter.parameters ? (
             <>
               <SelectOptions
                 onChange={setValue}

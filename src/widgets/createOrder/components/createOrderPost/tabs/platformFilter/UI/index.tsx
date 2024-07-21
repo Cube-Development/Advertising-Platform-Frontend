@@ -5,51 +5,46 @@ import { UseFormSetValue } from "react-hook-form";
 import { ICreatePostForm, PostFormats } from "@entities/project";
 import { platformTypes } from "@entities/platform";
 import { IChannelLink } from "@entities/channel";
-import { useAppDispatch, useAppSelector } from "@shared/hooks";
-import { setPlatformFilter } from "@shared/store";
 
 interface PlatformFilterProps {
   platforms: number[];
   setValue: UseFormSetValue<ICreatePostForm>;
   formats: PostFormats[];
+  platformFilter: IChannelLink;
 }
 
 export const PlatformFilter: FC<PlatformFilterProps> = ({
   platforms,
   setValue,
   formats,
+  platformFilter,
 }) => {
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
-  const { platformFilter: selectedPlatform } = useAppSelector(
-    (state) => state.filter,
-  );
   // существующие форматы поста для выбранной платформы
   const existingFormats = formats
-    .filter((format) => format.platform === selectedPlatform.id)
+    .filter((format) => format.platform === platformFilter.id)
     .flatMap((format) => format.post_types)
     .filter((post_type) =>
       platformTypes
-        .find((platform) => platform.id === selectedPlatform.id)
+        .find((platform) => platform.id === platformFilter.id)
         ?.post_types.some((type) => type.id === post_type),
     );
 
   const changeSelectedPlatform = (type: IChannelLink) => {
-    dispatch(setPlatformFilter(type));
+    setValue("platformFilter", type);
   };
 
   useEffect(() => {
-    dispatch(
-      setPlatformFilter(
-        platformTypes.find((type) => type.id === platforms[0]) ||
-          platformTypes[0],
-      ),
+    setValue(
+      "platformFilter",
+      platformTypes.find((type) => type.id === platforms[0]) ||
+        platformTypes[0],
     );
   }, []);
 
   useEffect(() => {
     setValue("selectedPostType", existingFormats[0]);
-  }, [selectedPlatform]);
+  }, [platformFilter]);
 
   return (
     <div className={styles.types}>
@@ -58,9 +53,9 @@ export const PlatformFilter: FC<PlatformFilterProps> = ({
         {platformTypes.map((type, index) => (
           <li
             className={
-              platforms.includes(type.id) && selectedPlatform === type
+              platforms.includes(type.id) && platformFilter === type
                 ? styles.active
-                : platforms.includes(type.id) && selectedPlatform !== type
+                : platforms.includes(type.id) && platformFilter !== type
                   ? styles.non__active
                   : styles.disabled
             }

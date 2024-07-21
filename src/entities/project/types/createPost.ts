@@ -1,5 +1,6 @@
 import { PostTypesNum, platformTypesNum } from "@entities/platform";
 import { ContentType } from "../config";
+import { IChannelLink } from "@entities/channel";
 
 export interface PostFormats {
   platform: platformTypesNum;
@@ -34,6 +35,7 @@ export interface ICreatePostForm {
   datetime: ICreateDate;
   isMultiPost: boolean;
   selectedPostType: PostTypesNum;
+  platformFilter: IChannelLink;
 }
 
 export interface ICreatePost {

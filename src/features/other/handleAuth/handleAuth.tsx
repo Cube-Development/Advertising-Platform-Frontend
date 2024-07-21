@@ -3,13 +3,12 @@ import { useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
 import { useNavigate } from "react-router-dom";
 import { paths } from "@shared/routing";
-import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import { useTranslation } from "react-i18next";
-import { ToastAction } from "@shared/ui/shadcn-ui/ui/toast";
 import { QueryParams } from "@shared/functions";
 import { login, roles, toggleRole, useGetTokensMutation } from "@entities/user";
 import { useAppDispatch } from "@shared/hooks";
 import { useTransferPublicMutation } from "@entities/project";
+import { ToastAction, useToast } from "@shared/ui";
 
 type DecodedToken = {
   role: roles;

@@ -1,11 +1,17 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { Skeleton } from "@shared/ui";
-import { useAppSelector } from "@shared/hooks";
 import { managerProjectStatusFilter } from "@entities/project";
+import { channelStatusFilter } from "@entities/channel";
+import { offerStatusFilter } from "@entities/offer";
 
-export const SkeletonManagerProjectCard: FC = () => {
-  const { statusFilter } = useAppSelector((state) => state.filter);
+interface SkeletonManagerProjectCardProps {
+  statusFilter: channelStatusFilter | offerStatusFilter | string;
+}
+
+export const SkeletonManagerProjectCard: FC<
+  SkeletonManagerProjectCardProps
+> = ({ statusFilter }) => {
   return (
     <Skeleton className="bg-skeleton-light rounded-[12px]">
       <div className={styles.wrapper}>

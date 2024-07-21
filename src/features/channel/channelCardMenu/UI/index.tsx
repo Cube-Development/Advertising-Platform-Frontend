@@ -4,27 +4,28 @@ import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
-import { ToastAction, useToast } from "@shared/ui";
-import {
-  channelStatusFilter,
-  useDeactivateChannelMutation,
-} from "@entities/channel";
-import { useAppSelector } from "@shared/hooks";
+import { channelStatusFilter } from "@entities/channel";
+import { offerStatusFilter } from "@entities/offer";
 
 interface ChannelCardMenuProps {
   channel_id: string;
   DeleteChannel: FC<{ channel_id: string; onChange: () => void }>;
+  DeactivateChannel: FC<{ channel_id: string; onChange: () => void }>;
+  statusFilter: channelStatusFilter | offerStatusFilter | string;
 }
 
 export const ChannelCardMenu: FC<ChannelCardMenuProps> = ({
   channel_id,
   DeleteChannel,
+  DeactivateChannel,
+  statusFilter,
 }) => {
-  const { toast } = useToast();
   const { t } = useTranslation();
   const menuRef = useRef<HTMLDivElement>(null);
   const [isMenuOpen, setMenuOpen] = useState<boolean>(false);
-  const [isModalOpen, setModalOpen] = useState<boolean>(false);
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
+  const [isDeactivateModalOpen, setDeactivateModalOpen] =
+    useState<boolean>(false);
 
   const toggleMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
@@ -44,37 +45,23 @@ export const ChannelCardMenu: FC<ChannelCardMenuProps> = ({
     };
   }, []);
 
-  const { statusFilter } = useAppSelector((state) => state.filter);
-
-  const handleModalOpen = (event: React.MouseEvent<HTMLLIElement>) => {
+  const handleDeleteModalOpen = (event: React.MouseEvent<HTMLLIElement>) => {
     event.stopPropagation();
-    setModalOpen(!isModalOpen);
+    setDeleteModalOpen(!isDeleteModalOpen);
+  };
+  const handleDeactivateModalOpen = (
+    event: React.MouseEvent<HTMLLIElement>,
+  ) => {
+    event.stopPropagation();
+    setDeactivateModalOpen(!isDeactivateModalOpen);
   };
 
-  const handleModalClose = () => {
-    setModalOpen(false);
+  const handleDeleteModalClose = () => {
+    setDeleteModalOpen(false);
   };
 
-  const [deactivateChannel] = useDeactivateChannelMutation();
-
-  const handleDeactiveChannel = () => {
-    deactivateChannel(channel_id)
-      .unwrap()
-      .then(() => {
-        handleModalClose();
-        toast({
-          variant: "success",
-          title: t("toasts.offers_blogger.channel.deactivate.success"),
-        });
-      })
-      .catch((error) => {
-        toast({
-          variant: "error",
-          title: t("toasts.offers_blogger.channel.activate.error"),
-          action: <ToastAction altText="Ok">Ok</ToastAction>,
-        });
-        console.error("Ошибка деактивации: ", error);
-      });
+  const handleDeactivateModalClose = () => {
+    setDeactivateModalOpen(false);
   };
 
   return (
@@ -96,19 +83,30 @@ export const ChannelCardMenu: FC<ChannelCardMenuProps> = ({
               <li>{t("platforms_blogger.menu.edit")}</li>
             </Link>
             {statusFilter === channelStatusFilter.active && (
-              <li onClick={handleDeactiveChannel}>
+              <li onClick={(e) => handleDeactivateModalOpen(e)}>
                 {t("platforms_blogger.menu.deactivate")}
               </li>
             )}
-            <li className={styles.delete} onClick={(e) => handleModalOpen(e)}>
+            <li
+              className={styles.delete}
+              onClick={(e) => handleDeleteModalOpen(e)}
+            >
               {t("platforms_blogger.menu.delete")}
             </li>
           </ul>
         </div>
       )}
-
-      {isModalOpen && (
-        <DeleteChannel channel_id={channel_id} onChange={handleModalClose} />
+      {isDeactivateModalOpen && (
+        <DeactivateChannel
+          channel_id={channel_id}
+          onChange={handleDeactivateModalClose}
+        />
+      )}
+      {isDeleteModalOpen && (
+        <DeleteChannel
+          channel_id={channel_id}
+          onChange={handleDeleteModalClose}
+        />
       )}
     </div>
   );

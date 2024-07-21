@@ -18,6 +18,7 @@ import {
 import { AddToBasket } from "@features/cart";
 import {
   ICatalogChannel,
+  catalogBarFilter,
   getCatalogReq,
   sortingTypes,
 } from "@entities/project";
@@ -34,6 +35,8 @@ interface CatalogListProps {
   onChangeCard: (cart: ICatalogChannel) => void;
   isNotEmpty: boolean;
   isLoading?: boolean;
+  catalogFilter: catalogBarFilter;
+  changeCatalogFilter: (filter: catalogBarFilter) => void;
 }
 
 export const CatalogList: FC<CatalogListProps> = ({
@@ -45,6 +48,8 @@ export const CatalogList: FC<CatalogListProps> = ({
   isNotEmpty,
   onChangeCard,
   isLoading,
+  catalogFilter,
+  changeCatalogFilter,
 }) => {
   const { t } = useTranslation();
   const [screen, setScreen] = useState<number>(window.innerWidth);
@@ -99,6 +104,8 @@ export const CatalogList: FC<CatalogListProps> = ({
             getValues={getValues}
             reset={reset}
             setValue={setValue}
+            catalogFilter={catalogFilter}
+            changeCatalogFilter={changeCatalogFilter}
           />
         )}
       </div>

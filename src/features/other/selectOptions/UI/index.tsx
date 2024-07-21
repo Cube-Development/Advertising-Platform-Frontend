@@ -1,5 +1,5 @@
 import { ArrowSmallVerticalIcon, InfoIcon } from "@shared/assets";
-import { ISelectOption } from "@shared/types/translate";
+import { ISelectOption } from "@shared/types";
 import { FC, useEffect, useRef, useState } from "react";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";

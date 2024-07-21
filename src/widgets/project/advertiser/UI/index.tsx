@@ -1,4 +1,4 @@
-import { BarFilter } from "@widgets/other";
+import { BarFilter } from "@widgets/barFilter";
 import { FC, useEffect, useState } from "react";
 import { AdvProjectsList } from "./advProjects";
 import { DevProjectsList } from "./devProjects";
@@ -15,8 +15,9 @@ import {
 import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 import i18n from "@shared/config/i18n";
 import { pageFilter } from "@shared/routing";
-import { useAppDispatch, useAppSelector } from "@shared/hooks";
-import { setStatusFilter, setTypeFilter } from "@shared/store";
+import { useForm } from "react-hook-form";
+import { channelStatusFilter } from "@entities/channel";
+import { offerStatusFilter } from "@entities/offer";
 
 export const AdvOrders: FC = () => {
   const language = Languages.find((lang) => {
@@ -24,9 +25,18 @@ export const AdvOrders: FC = () => {
   });
 
   const { order_type } = QueryParams();
-  const dispatch = useAppDispatch();
 
-  const { typeFilter, statusFilter } = useAppSelector((state) => state.filter);
+  const { setValue, watch } = useForm<{
+    status: channelStatusFilter | offerStatusFilter | string;
+    type: string;
+  }>({
+    defaultValues: {
+      status: channelStatusFilter.active,
+      type: projectTypesFilter.myProject,
+    },
+  });
+  const formState = watch();
+
   const page = pageFilter.order;
   const [currentPage, setCurrentPage] = useState(1);
   const handleOnChangePage = () => {
@@ -38,41 +48,39 @@ export const AdvOrders: FC = () => {
     if (order_type) {
       advertiserProjectTypes.map((type) => {
         if (order_type === type.type) {
-          dispatch(setTypeFilter(type.type));
-          dispatch(setStatusFilter(type.status));
+          setValue("type", type.type);
+          setValue("status", type.status);
         }
       });
     } else {
-      dispatch(setTypeFilter(advertiserProjectTypes[0].type));
-      dispatch(setStatusFilter(advertiserProjectTypes[0].status));
+      setValue("type", advertiserProjectTypes[0].type);
+      setValue("status", advertiserProjectTypes[0].status);
     }
   }, [order_type]);
 
   const getParams: getProjectsCardReq = {
     page: currentPage,
     date_sort: "increase",
-    status: statusFilter,
+    status: formState.status,
     elements_on_page: INTERSECTION_ELEMENTS.orders,
   };
-  console.log("statusFilter", statusFilter);
   const { data: projectsSelf, isFetching: isFetchingSelf } =
     useGetAdvProjectsQuery(getParams, {
-      skip: typeFilter !== projectTypesFilter.myProject,
+      skip: formState.type !== projectTypesFilter.myProject,
     });
   const { data: projectsManager, isFetching: isFetchingManager } =
     useGetAdvManagerProjectsQuery(
-      { ...getParams, language: language?.id },
+      { ...getParams, language: language?.id || Languages[0].id },
       {
-        skip: typeFilter !== projectTypesFilter.managerProject,
-      },
+        skip: formState.type !== projectTypesFilter.managerProject,
+      }
     );
   // data: projectsMan fetch2
   // data: projectsManDev fetch3
 
   const [projects, setProjects] = useState<IAdvProjectCard[]>(
-    projectsSelf?.projects || projectsManager?.projects || [],
+    projectsSelf?.projects || projectsManager?.projects || []
   );
-  console.log("projectsManager", projectsManager, projects);
 
   useEffect(() => {
     if (projectsSelf && currentPage !== 1) {
@@ -92,13 +100,20 @@ export const AdvOrders: FC = () => {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [statusFilter]);
+  }, [formState.status]);
 
   return (
     <>
-      <BarFilter page={page} listLength={!!projects?.length} />
-      {typeFilter === projectTypesFilter.managerProject &&
-      statusFilter === advManagerProjectStatusFilter.develop ? (
+      <BarFilter
+        page={page}
+        listLength={!!projects?.length}
+        typeFilter={formState.type}
+        changeStatus={(status) => setValue("status", status)}
+        changeType={(type) => setValue("type", type)}
+        statusFilter={formState.status}
+      />
+      {formState.type === projectTypesFilter.managerProject &&
+      formState.status === advManagerProjectStatusFilter.develop ? (
         <DevProjectsList
           projects={projects!}
           handleOnChangePage={handleOnChangePage}
@@ -109,9 +124,12 @@ export const AdvOrders: FC = () => {
               INTERSECTION_ELEMENTS.orders ||
             false
           }
+          typeFilter={formState.type}
         />
       ) : (
         <AdvProjectsList
+          statusFilter={formState.status}
+          typeFilter={formState.type}
           projects={projects!}
           handleOnChangePage={handleOnChangePage}
           isLoading={isFetchingSelf || isFetchingManager}

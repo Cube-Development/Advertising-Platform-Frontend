@@ -16,8 +16,8 @@ import { MenuItem } from "./menuItem";
 import { roles } from "@entities/user";
 import { IMenuItem } from "@pages/layouts/components/config";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
-import { setDropDownMenu } from "@shared/store";
 import { Accordion } from "@shared/ui";
+import { setDropDownMenu } from "@pages/layouts/model";
 
 interface DropdownMenuProps {
   isAuth: boolean;
@@ -32,7 +32,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
 }) => {
   const { t } = useTranslation();
 
-  const { dropdownMenu } = useAppSelector((state) => state.filter);
+  const { dropdownMenu } = useAppSelector((state) => state.dropdownMenu);
   const dispatch = useAppDispatch();
   const menuRef = useRef<HTMLDivElement>(null);
   const toggleMenu = (path?: string) => {

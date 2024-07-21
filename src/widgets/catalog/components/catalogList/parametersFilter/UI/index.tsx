@@ -9,13 +9,17 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
 import {
-  BarProfileFilter,
+  BarSubfilter,
   SelectDescription,
   SelectOptions,
   SelectSex,
 } from "@features/other";
 import { AiFilter, RecomTargetCard } from "@features/catalog";
-import { IFilterSearch, catalogFilter, getCatalogReq } from "@entities/project";
+import {
+  IFilterSearch,
+  catalogBarFilter,
+  getCatalogReq,
+} from "@entities/project";
 import {
   channelData,
   useGetChannelAgesQuery,
@@ -26,18 +30,21 @@ import {
 import { AIRecommendCARDS, BREAKPOINT, Languages } from "@shared/config";
 import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from "@shared/ui";
 import { pageFilter } from "@shared/routing";
-import { useAppSelector } from "@shared/hooks";
 
 interface ParametersFilterProps {
   setValue: UseFormSetValue<getCatalogReq>;
   reset: UseFormReset<getCatalogReq>;
   getValues: UseFormGetValues<getCatalogReq>;
+  catalogFilter: catalogBarFilter;
+  changeCatalogFilter: (filter: catalogBarFilter) => void;
 }
 
 export const ParametersFilter: FC<ParametersFilterProps> = ({
   setValue,
   reset,
   getValues,
+  catalogFilter,
+  changeCatalogFilter,
 }) => {
   const [recommendationCard, setRecCard] = useState<IFilterSearch | null>(null);
   const [recommendationCards, setRecCards] = useState<IFilterSearch[] | null>(
@@ -54,8 +61,6 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  const { catalogFilter: catfilter } = useAppSelector((state) => state.filter);
 
   const { t, i18n } = useTranslation();
   const language = Languages.find((lang) => {
@@ -132,12 +137,14 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
             </DrawerClose>
           </div>
           <div className={styles.wrapper}>
-            <BarProfileFilter
+            <BarSubfilter
               resetValues={resetRecommendationCard}
               page={pageFilter.catalog}
+              catalogFilter={catalogFilter}
+              changeCatalogFilter={changeCatalogFilter}
             />
             <div className={styles.options}>
-              {catfilter === catalogFilter.parameters ? (
+              {catalogFilter === catalogBarFilter.parameters ? (
                 <>
                   <SelectOptions
                     onChange={setValue}

@@ -6,15 +6,18 @@ import {
   IModerationChannel,
   ModChannelCard,
   ModChannelCardSkeleton,
+  channelStatusFilter,
 } from "@entities/channel";
 import { pageFilter } from "@shared/routing";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
+import { offerStatusFilter } from "@entities/offer";
 
 interface ModerationChannelsProps {
   cards: IModerationChannel[];
   handleOnChangePage: () => void;
   isLoading: boolean;
   isNotEmpty: boolean;
+  statusFilter: channelStatusFilter | offerStatusFilter | string;
 }
 
 export const ModerationChannels: FC<ModerationChannelsProps> = ({
@@ -22,11 +25,16 @@ export const ModerationChannels: FC<ModerationChannelsProps> = ({
   handleOnChangePage,
   isLoading,
   isNotEmpty,
+  statusFilter,
 }) => {
   return (
     <section className="container sidebar">
-      {isLoading && cards?.length === 0 ? (
-        <ZeroChannel AddChannelBtn={AddChannel} page={pageFilter.platform} />
+      {!isLoading && cards?.length === 0 ? (
+        <ZeroChannel
+          statusFilter={statusFilter}
+          AddChannelBtn={AddChannel}
+          page={pageFilter.platform}
+        />
       ) : (
         <div className={styles.wrapper}>
           {isLoading &&

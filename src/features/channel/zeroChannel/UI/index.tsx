@@ -8,21 +8,22 @@ import {
   addChannelQueries,
   channelStatusFilter,
 } from "@entities/channel";
-import { useAppSelector } from "@shared/hooks";
+import { offerStatusFilter } from "@entities/offer";
 
 interface ZeroChannelProps {
   AddChannelBtn: FC<IAddChannelQuery>;
   path?: paths;
   page: pageFilter;
+  statusFilter: channelStatusFilter | offerStatusFilter | string;
 }
 
 export const ZeroChannel: FC<ZeroChannelProps> = ({
   AddChannelBtn,
   page,
   path,
+  statusFilter,
 }) => {
   const { t } = useTranslation();
-  const { statusFilter } = useAppSelector((state) => state.filter);
   const selectedPath =
     path === paths.offers
       ? `${paths.addChannel}?add_channel=${addChannelQueries.offers}`

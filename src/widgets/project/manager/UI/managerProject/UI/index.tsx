@@ -5,12 +5,15 @@ import { IManagerProjectCard } from "@entities/project";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ZeroManagerProject } from "@features/project";
 import { Accordion, ShowMoreBtn, SpinnerLoader } from "@shared/ui";
+import { channelStatusFilter } from "@entities/channel";
+import { offerStatusFilter } from "@entities/offer";
 
 interface ManagerProjectsListProps {
   projects: IManagerProjectCard[];
   handleOnChangePage: () => void;
   isLoading: boolean;
   isNotEmpty: boolean;
+  statusFilter: channelStatusFilter | offerStatusFilter | string;
 }
 
 export const ManagerProjectsList: FC<ManagerProjectsListProps> = ({
@@ -18,6 +21,7 @@ export const ManagerProjectsList: FC<ManagerProjectsListProps> = ({
   handleOnChangePage,
   isLoading,
   isNotEmpty,
+  statusFilter,
 }) => {
   return (
     <div className="container sidebar">
@@ -28,11 +32,20 @@ export const ManagerProjectsList: FC<ManagerProjectsListProps> = ({
           <div className={styles.wrapper}>
             {isLoading &&
               Array.from({ length: INTERSECTION_ELEMENTS.managerOrders }).map(
-                (_, index) => <SkeletonManagerProjectCard key={index} />,
+                (_, index) => (
+                  <SkeletonManagerProjectCard
+                    statusFilter={statusFilter}
+                    key={index}
+                  />
+                ),
               )}
             {!isLoading &&
               projects?.map((card, index) => (
-                <ManagerProjectCard key={index} card={card} />
+                <ManagerProjectCard
+                  statusFilter={statusFilter}
+                  key={index}
+                  card={card}
+                />
               ))}
             {isNotEmpty && (
               <div className={styles.show_more} onClick={handleOnChangePage}>

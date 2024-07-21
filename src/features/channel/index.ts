@@ -5,6 +5,7 @@ export * from "./channelCardMenu";
 export * from "./channelDescription";
 export * from "./createChannel";
 export * from "./deleteChannel";
+export * from "./deactivateChannel";
 export * from "./repeatModeration";
 export * from "./seeOffers";
 export * from "./selectPrice";

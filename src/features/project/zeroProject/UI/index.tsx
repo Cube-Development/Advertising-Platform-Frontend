@@ -4,21 +4,21 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { projectTypesFilter } from "@entities/project";
-import { useAppSelector } from "@shared/hooks";
 
 interface ZeroProjectProps {
   listLength: boolean;
   NewProjectBtn: FC<IStartProjectProps>;
   TurnkeyProjectBtn: FC<IStartProjectProps>;
+  typeFilter: string;
 }
 
 export const ZeroProject: FC<ZeroProjectProps> = ({
   listLength,
   NewProjectBtn,
   TurnkeyProjectBtn,
+  typeFilter,
 }) => {
   const { t } = useTranslation();
-  const { typeFilter } = useAppSelector((state) => state.filter);
 
   return (
     <div className={styles.no__project}>

@@ -5,12 +5,12 @@ import {
   getChannelsByStatusReq,
   useGetChannelsByStatusQuery,
 } from "@entities/channel";
+import { offerStatusFilter } from "@entities/offer";
 import { platformTypes, platformTypesNum } from "@entities/platform";
 import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
-import { useAppSelector } from "@shared/hooks";
 import { pageFilter } from "@shared/routing";
+import { BarFilter } from "@widgets/barFilter";
 import { ActiveChannels, ModerationChannels } from "@widgets/channel";
-import { BarFilter } from "@widgets/other";
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -21,14 +21,16 @@ export const MyChannelsPage: FC = () => {
     return i18n.language === lang.name;
   });
 
-  const { statusFilter } = useAppSelector((state) => state.filter);
-
-  const { setValue, watch } = useForm<{ platform: platformTypesNum }>({
+  const { setValue, watch } = useForm<{
+    platform: platformTypesNum;
+    status: channelStatusFilter | offerStatusFilter | string;
+  }>({
     defaultValues: {
       platform: platformTypes[0].id,
+      status: channelStatusFilter.active,
     },
   });
-  const platformType = watch("platform");
+  const formState = watch();
 
   const [currentPage, setCurrentPage] = useState(1);
   const handleOnChangePage = () => {
@@ -36,12 +38,12 @@ export const MyChannelsPage: FC = () => {
   };
 
   const getParams: getChannelsByStatusReq = {
-    platform: platformType,
+    platform: formState.platform,
     language: language?.id || Languages[0].id,
     page: currentPage,
     elements_on_page: INTERSECTION_ELEMENTS.orders,
     date_sort: "increase",
-    status: statusFilter,
+    status: formState.status,
   };
 
   const { data, isFetching } = useGetChannelsByStatusQuery(getParams);
@@ -60,7 +62,7 @@ export const MyChannelsPage: FC = () => {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [platformType, statusFilter]);
+  }, [formState]);
 
   return (
     <>
@@ -68,9 +70,11 @@ export const MyChannelsPage: FC = () => {
         page={pageFilter.platform}
         setValue={setValue}
         listLength={!channels?.length}
+        changeStatus={(status) => setValue("status", status)}
+        statusFilter={formState.status}
       />
 
-      {statusFilter === channelStatusFilter.active ? (
+      {formState.status === channelStatusFilter.active ? (
         <ActiveChannels
           cards={channels!}
           handleOnChangePage={handleOnChangePage}
@@ -80,9 +84,11 @@ export const MyChannelsPage: FC = () => {
               ? data?.channels?.length === INTERSECTION_ELEMENTS.orders
               : false
           }
+          statusFilter={formState.status}
         />
-      ) : statusFilter === channelStatusFilter.moderation ? (
+      ) : formState.status === channelStatusFilter.moderation ? (
         <ModerationChannels
+          statusFilter={formState.status}
           cards={channels! as IModerationChannel[]}
           handleOnChangePage={handleOnChangePage}
           isLoading={isFetching}
@@ -92,8 +98,9 @@ export const MyChannelsPage: FC = () => {
               : false
           }
         />
-      ) : statusFilter === channelStatusFilter.moderationReject ? (
+      ) : formState.status === channelStatusFilter.moderationReject ? (
         <ActiveChannels
+          statusFilter={formState.status}
           cards={channels!}
           handleOnChangePage={handleOnChangePage}
           isLoading={isFetching}
@@ -103,8 +110,9 @@ export const MyChannelsPage: FC = () => {
               : false
           }
         />
-      ) : statusFilter === channelStatusFilter.inactive ? (
+      ) : formState.status === channelStatusFilter.inactive ? (
         <ActiveChannels
+          statusFilter={formState.status}
           cards={channels!}
           handleOnChangePage={handleOnChangePage}
           isLoading={isFetching}
@@ -115,8 +123,9 @@ export const MyChannelsPage: FC = () => {
           }
         />
       ) : (
-        statusFilter === channelStatusFilter.banned && (
+        formState.status === channelStatusFilter.banned && (
           <ActiveChannels
+            statusFilter={formState.status}
             cards={channels!}
             handleOnChangePage={handleOnChangePage}
             isLoading={isFetching}

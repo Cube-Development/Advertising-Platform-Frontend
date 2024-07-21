@@ -5,12 +5,14 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { Guide, LegalsList, PaymentData } from "../../components";
 import { BarSubrofileFilter } from "@features/wallet";
-import { BarProfileFilter } from "@features/other";
+import { BarSubfilter } from "@features/other";
 import {
   ILegalCard,
   ILegalCardShort,
   ILegalData,
   profileTypesName,
+  profileTypesNum,
+  subprofileFilterTypes,
   useCreateLegalMutation,
   useEditLegalMutation,
   usePaymentWithdrawalMutation,
@@ -19,7 +21,6 @@ import {
 } from "@entities/wallet";
 import { ToastAction, useToast } from "@shared/ui";
 import { pageFilter } from "@shared/routing";
-import { useAppSelector } from "@shared/hooks";
 
 interface IExtendedProfileData extends ILegalData {
   amount: number;
@@ -38,20 +39,28 @@ export const Withdrawal: FC = () => {
     handleSubmit,
     clearErrors,
     formState: { errors },
-  } = useForm<IExtendedProfileData>();
-
-  const { profileFilter: filter, subprofileFilter } = useAppSelector(
-    (state) => state.filter,
-  );
+  } = useForm<IExtendedProfileData>({
+    defaultValues: {
+      profileFilter: {
+        type: profileTypesName.selfEmployedAccounts,
+        id: profileTypesNum.selfEmployedAccounts,
+      },
+      subprofileFilter: {
+        type: subprofileFilterTypes.account,
+        id: profileTypesNum.selfEmployedAccounts,
+      },
+    },
+  });
+  const formState = watch();
 
   const {
     data: legalsByType,
     isLoading: isReadLegalsLoading,
     error: readLegalsError,
   } = useReadLegalsByTypeQuery(
-    filter.type === profileTypesName.selfEmployedAccounts
-      ? subprofileFilter.id
-      : filter.id,
+    formState.profileFilter.type === profileTypesName.selfEmployedAccounts
+      ? formState.subprofileFilter.id
+      : formState.profileFilter.id,
   );
 
   const [readOneLegal, { isLoading: isOneLegalLoading, error: oneLegalError }] =
@@ -84,24 +93,20 @@ export const Withdrawal: FC = () => {
     }
   };
 
-  const [createLegal, { isLoading: isCreateLoading, error: createError }] =
-    useCreateLegalMutation();
+  const [createLegal] = useCreateLegalMutation();
 
-  const [editLegal, { isLoading: isEditLoading, error: editError }] =
-    useEditLegalMutation();
+  const [editLegal] = useEditLegalMutation();
 
-  const [
-    paymentWithdrawal,
-    { isLoading: withdrowIsLoading, error: withdrowError },
-  ] = usePaymentWithdrawalMutation();
+  const [paymentWithdrawal, { error: withdrowError }] =
+    usePaymentWithdrawalMutation();
 
   const onSubmit: SubmitHandler<IExtendedProfileData> = async (formData) => {
     const dataWithLegalType = {
       ...formData,
       type_legal:
-        filter.type === profileTypesName.selfEmployedAccounts
-          ? subprofileFilter.id
-          : filter.id,
+        formState.profileFilter.type === profileTypesName.selfEmployedAccounts
+          ? formState.subprofileFilter.id
+          : formState.profileFilter.id,
     };
     createLegal(dataWithLegalType)
       .unwrap()
@@ -172,17 +177,27 @@ export const Withdrawal: FC = () => {
           <p>{t("wallet.withdraw.title")}</p>
           <ArrowIcon5 />
         </div>
-        <BarProfileFilter
+        <BarSubfilter
           resetValues={reset}
           page={pageFilter.walletWithdraw}
           resetActiveAccount={setActiveAccount}
+          profileFilter={formState.profileFilter}
+          changeProfile={(profileFilter) =>
+            setValue("profileFilter", profileFilter)
+          }
         />
         <div>
-          {filter.type === profileTypesName.selfEmployedAccounts && (
+          {formState.profileFilter.type ===
+            profileTypesName.selfEmployedAccounts && (
             <div className={styles.subbar}>
               <BarSubrofileFilter
                 resetActiveAccount={setActiveAccount}
                 resetValues={reset}
+                subprofileFilter={formState.subprofileFilter}
+                changeSubprofile={(subprofile: {
+                  type: subprofileFilterTypes;
+                  id: profileTypesNum;
+                }) => setValue("subprofileFilter", subprofile)}
               />
             </div>
           )}
@@ -197,6 +212,8 @@ export const Withdrawal: FC = () => {
               handleSubmit={handleSubmit}
               onSubmit={onSubmit}
               watch={watch}
+              profileFilter={formState.profileFilter}
+              subprofileFilter={formState.subprofileFilter}
             />
             <div>
               <div className={styles.content__right}>
@@ -209,7 +226,7 @@ export const Withdrawal: FC = () => {
                   readLegalsError={readLegalsError}
                   oneLegalError={oneLegalError}
                 />
-                <Guide />
+                <Guide profileFilter={formState.profileFilter} />
               </div>
             </div>
           </div>

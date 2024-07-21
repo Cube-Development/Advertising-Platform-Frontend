@@ -3,33 +3,39 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import {
   profileTypesNum,
-  subprofileFilter,
+  subprofileFilterTypes,
   subprofileTypes,
 } from "@entities/wallet";
-import { useAppDispatch, useAppSelector } from "@shared/hooks";
-import { setSubprofileFilter } from "@shared/store";
 
 interface ISubFilterOption {
-  type: subprofileFilter;
+  type: subprofileFilterTypes;
   id: profileTypesNum;
 }
 
 interface BarSubrofileFilterProps {
   resetValues: () => void;
   resetActiveAccount?: (account: null) => void;
+  subprofileFilter: {
+    type: subprofileFilterTypes;
+    id: profileTypesNum;
+  };
+  changeSubprofile: (subprofile: {
+    type: subprofileFilterTypes;
+    id: profileTypesNum;
+  }) => void;
 }
 
 export const BarSubrofileFilter: FC<BarSubrofileFilterProps> = ({
   resetValues,
   resetActiveAccount,
+  subprofileFilter,
+  changeSubprofile,
 }) => {
   const { t } = useTranslation();
-  const { subprofileFilter } = useAppSelector((state) => state.filter);
-  const dispatch = useAppDispatch();
   const toggleProfile = (option: ISubFilterOption) => {
-    const newFilter = { type: option.type, id: option.id };
+    const newSubprofile = { type: option.type, id: option.id };
     resetValues();
-    dispatch(setSubprofileFilter(newFilter));
+    changeSubprofile(newSubprofile);
     resetActiveAccount && resetActiveAccount(null);
   };
 

@@ -4,14 +4,16 @@ import { pageFilter, paths } from "@shared/routing";
 import { OfferCard, OfferCardSkeleton } from "../card";
 import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
 import { AddChannel, ZeroChannel } from "@features/channel";
-import { IBloggerOfferCard } from "@entities/offer";
+import { IBloggerOfferCard, offerStatusFilter } from "@entities/offer";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
+import { channelStatusFilter } from "@entities/channel";
 
 interface MyOffersProps {
   offers: IBloggerOfferCard[];
   handleOnChangePage: () => void;
   isLoading: boolean;
   isNotEmpty: boolean;
+  statusFilter: channelStatusFilter | offerStatusFilter | string;
 }
 
 export const MyOffers: FC<MyOffersProps> = ({
@@ -19,6 +21,7 @@ export const MyOffers: FC<MyOffersProps> = ({
   handleOnChangePage,
   isLoading,
   isNotEmpty,
+  statusFilter,
 }) => {
   return (
     <div className="container sidebar">
@@ -27,6 +30,7 @@ export const MyOffers: FC<MyOffersProps> = ({
           AddChannelBtn={AddChannel}
           page={pageFilter.offer}
           path={paths.offers}
+          statusFilter={statusFilter}
         />
       ) : (
         <div className={styles.wrapper}>
@@ -35,7 +39,9 @@ export const MyOffers: FC<MyOffersProps> = ({
               (_, index) => <OfferCardSkeleton key={index} />,
             )}
           {!isLoading &&
-            offers?.map((card, index) => <OfferCard key={index} card={card} />)}
+            offers?.map((card, index) => (
+              <OfferCard statusFilter={statusFilter} key={index} card={card} />
+            ))}
           {isNotEmpty && (
             <div className={styles.show_more} onClick={handleOnChangePage}>
               {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}

@@ -1,9 +1,9 @@
 import { CancelIcon2, ImageIcon } from "@shared/assets";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { BarProfileFilter } from "@features/other";
+import { BarSubfilter } from "@features/other";
 import {
   CreatePostFormData,
   FileProps,
@@ -18,7 +18,6 @@ import {
 } from "@shared/ui";
 import { platformTypesNum } from "@entities/platform";
 import { pageFilter } from "@shared/routing";
-import { useAppSelector } from "@shared/hooks";
 
 interface PostFilesProps {
   AddMediaFiles: FC<FileProps>;
@@ -38,9 +37,7 @@ export const PostFiles: FC<PostFilesProps> = ({
   type,
 }) => {
   const { t } = useTranslation();
-
-  const { addFileFilter: filter } = useAppSelector((state) => state.filter);
-
+  const [filter, setFilter] = useState<addFileFilter>(addFileFilter.mediafile);
   const handle = () => {};
 
   const handleAddMediaFile = (mediafiles: File[]) => {
@@ -140,9 +137,11 @@ export const PostFiles: FC<PostFilesProps> = ({
                 <CancelIcon2 />
               </AlertDialogCancel>
             </div>
-            <BarProfileFilter
+            <BarSubfilter
               page={pageFilter.createOrderFiles}
               resetValues={handle}
+              fileFilter={filter}
+              changeFileFilter={(filter) => setFilter(filter)}
             />
             {filter === addFileFilter.file ? (
               <AddFiles onChange={handleAddFile} currentFiles={currentFile} />
