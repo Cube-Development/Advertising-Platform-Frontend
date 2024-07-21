@@ -6,19 +6,19 @@ import {
   IAdvManagerProjectsDevCard,
   projectTypesFilter,
 } from "@entities/project";
-import { useAppSelector } from "@shared/hooks";
 
 interface AdvDevProjectCardProps {
   card: IAdvManagerProjectsDevCard;
   ContinueBtn: FC;
+  typeFilter: string;
 }
 
 export const AdvDevProjectCard: FC<AdvDevProjectCardProps> = ({
   card,
   ContinueBtn,
+  typeFilter,
 }) => {
   const { t } = useTranslation();
-  const { typeFilter } = useAppSelector((state) => state.filter);
 
   return (
     <div className={`${styles.card} border__gradient`}>

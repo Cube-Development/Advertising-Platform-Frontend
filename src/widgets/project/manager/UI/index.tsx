@@ -1,8 +1,7 @@
-import { BarFilter } from "@widgets/other";
+import { BarFilter } from "@widgets/barFilter";
 import { FC, useEffect, useState } from "react";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { pageFilter } from "@shared/routing";
-import { useAppSelector } from "@shared/hooks";
 import { ManagerProjectsList } from "./managerProject";
 import {
   IManagerNewProjectCard,
@@ -12,9 +11,22 @@ import {
   useGetManagerProjectsQuery,
 } from "@entities/project";
 import { ManagerNewProjectsList } from "./managerNewProject";
+import { useForm } from "react-hook-form";
+import { channelStatusFilter } from "@entities/channel";
+import { offerStatusFilter } from "@entities/offer";
 
 export const ManagerOrders: FC = () => {
-  const { statusFilter } = useAppSelector((state) => state.filter);
+  // const { statusFilter } = useAppSelector((state) => state.filter);
+  const { setValue, watch } = useForm<{
+    status: channelStatusFilter | offerStatusFilter | string;
+    type: string;
+  }>({
+    defaultValues: {
+      status: channelStatusFilter.active,
+    },
+  });
+  const formState = watch();
+
   const page = pageFilter.order;
   const [currentPage, setCurrentPage] = useState(1);
   const handleOnChangePage = () => {
@@ -24,7 +36,7 @@ export const ManagerOrders: FC = () => {
   const getParams: getProjectsCardReq = {
     language: 1,
     page: currentPage,
-    status: statusFilter,
+    status: formState.status,
     elements_on_page: INTERSECTION_ELEMENTS.managerOrders,
   };
 
@@ -34,9 +46,8 @@ export const ManagerOrders: FC = () => {
   >(data ? data.projects : []);
 
   useEffect(() => {
-    console.log(data, currentPage, statusFilter);
     if (data && currentPage !== 1) {
-      if (statusFilter === managerProjectStatusFilter.new) {
+      if (formState.status === managerProjectStatusFilter.new) {
         setTariffs([
           ...(tariffs as IManagerNewProjectCard[]),
           ...(data.projects as IManagerNewProjectCard[]),
@@ -54,12 +65,17 @@ export const ManagerOrders: FC = () => {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [statusFilter]);
+  }, [formState.status]);
 
   return (
     <>
-      <BarFilter page={page} listLength={!!tariffs?.length} />
-      {statusFilter === managerProjectStatusFilter.new ? (
+      <BarFilter
+        page={page}
+        listLength={!!tariffs?.length}
+        changeStatus={(status) => setValue("status", status)}
+        statusFilter={formState.status}
+      />
+      {formState.status === managerProjectStatusFilter.new ? (
         <ManagerNewProjectsList
           projects={tariffs! as IManagerNewProjectCard[]}
           handleOnChangePage={handleOnChangePage}
@@ -71,6 +87,7 @@ export const ManagerOrders: FC = () => {
         />
       ) : (
         <ManagerProjectsList
+          statusFilter={formState.status}
           projects={tariffs! as IManagerProjectCard[]}
           handleOnChangePage={handleOnChangePage}
           isLoading={isFetching}

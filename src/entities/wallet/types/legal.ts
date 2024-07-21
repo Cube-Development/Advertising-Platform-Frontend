@@ -1,3 +1,9 @@
+import {
+  profileTypesName,
+  profileTypesNum,
+  subprofileFilterTypes,
+} from "../config";
+
 export interface ILegalData {
   type_legal?: number;
   name: string;
@@ -14,6 +20,14 @@ export interface ILegalData {
   transit_account: string;
   card_number: number;
   card_date: string;
+  profileFilter: {
+    type: profileTypesName;
+    id?: profileTypesNum;
+  };
+  subprofileFilter: {
+    type: subprofileFilterTypes;
+    id: profileTypesNum;
+  };
 }
 
 export interface ILegalCardShort {

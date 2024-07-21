@@ -32,14 +32,19 @@ import {
   useGetManagerSubprojectsQuery,
 } from "@entities/project";
 import { Languages, accordionTypes } from "@shared/config";
-import { useAppSelector } from "@shared/hooks";
 import { AccordionContent, AccordionItem, AccordionTrigger } from "@shared/ui";
+import { channelStatusFilter } from "@entities/channel";
+import { offerStatusFilter } from "@entities/offer";
 
 interface ManagerProjectCardProps {
   card: IManagerProjectCard;
+  statusFilter: channelStatusFilter | offerStatusFilter | string;
 }
 
-export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({ card }) => {
+export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
+  card,
+  statusFilter,
+}) => {
   const [isSubcardOpen, setSubcardOpen] = useState(false);
   const { t, i18n } = useTranslation();
   const language = Languages.find((lang) => {
@@ -59,8 +64,6 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({ card }) => {
   const handleChangeOpenSubcard = (): void => {
     setSubcardOpen(!isSubcardOpen);
   };
-
-  const { statusFilter } = useAppSelector((state) => state.filter);
 
   const accordionRef = useRef(null);
 
@@ -245,6 +248,7 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({ card }) => {
                 ChangeChannelBtn={ChangeChannel}
                 ChangePostBtn={ChangePost}
                 SeeCommentBtn={SeeComment}
+                statusFilter={statusFilter}
               />
             ))}
           </div>

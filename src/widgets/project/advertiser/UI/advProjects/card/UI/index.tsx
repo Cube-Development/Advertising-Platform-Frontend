@@ -38,15 +38,21 @@ import {
   useGetAdvSubprojectsQuery,
 } from "@entities/project";
 import { Languages, accordionTypes } from "@shared/config";
-import { useAppSelector } from "@shared/hooks";
+import { channelStatusFilter } from "@entities/channel";
+import { offerStatusFilter } from "@entities/offer";
 
 interface AdvProjectCardProps {
   card: IAdvProjectCard;
+  typeFilter: string;
+  statusFilter: channelStatusFilter | offerStatusFilter | string;
 }
 
-export const AdvProjectCard: FC<AdvProjectCardProps> = ({ card }) => {
+export const AdvProjectCard: FC<AdvProjectCardProps> = ({
+  card,
+  statusFilter,
+  typeFilter,
+}) => {
   const [isSubcardOpen, setSubcardOpen] = useState(false);
-  const { typeFilter, statusFilter } = useAppSelector((state) => state.filter);
   const { t, i18n } = useTranslation();
   const language = Languages.find((lang) => {
     return i18n.language === lang.name;
@@ -220,6 +226,8 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({ card }) => {
                   SeeBtn={SeePost}
                   ChannelChatBtn={OrderChat}
                   ChangeChannelBtn={ChangeChannel}
+                  typeFilter={typeFilter}
+                  statusFilter={statusFilter}
                 />
               ),
             )}

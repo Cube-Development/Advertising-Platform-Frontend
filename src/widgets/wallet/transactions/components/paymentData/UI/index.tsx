@@ -8,9 +8,9 @@ import {
   SelfEmployedCardData,
   SelfEmployedData,
   profileTypesName,
-  subprofileFilter,
+  profileTypesNum,
+  subprofileFilterTypes,
 } from "@entities/wallet";
-import { useAppSelector } from "@shared/hooks";
 
 interface PaymentDataProps {
   amountTitle: string;
@@ -19,6 +19,14 @@ interface PaymentDataProps {
   watch?: any;
   handleSubmit?: any;
   onSubmit?: any;
+  profileFilter: {
+    type: profileTypesName;
+    id?: profileTypesNum;
+  };
+  subprofileFilter: {
+    type: subprofileFilterTypes;
+    id: profileTypesNum;
+  };
 }
 
 export const PaymentData: FC<PaymentDataProps> = ({
@@ -28,21 +36,20 @@ export const PaymentData: FC<PaymentDataProps> = ({
   handleSubmit,
   watch,
   onSubmit,
+  profileFilter,
+  subprofileFilter,
 }) => {
   const { t } = useTranslation();
 
   const amount = watch("amount", 0);
 
-  const { profileFilter: filter, subprofileFilter: subprofile } =
-    useAppSelector((state) => state.filter);
-
   const typeLegal =
-    filter.type === profileTypesName.entities
+    profileFilter.type === profileTypesName.entities
       ? EntityData
-      : filter.type === profileTypesName.individuals
+      : profileFilter.type === profileTypesName.individuals
         ? IndividualData
-        : filter.type === profileTypesName.selfEmployedAccounts &&
-            subprofile.type === subprofileFilter.account
+        : profileFilter.type === profileTypesName.selfEmployedAccounts &&
+            subprofileFilter.type === subprofileFilterTypes.account
           ? SelfEmployedData
           : SelfEmployedCardData;
 

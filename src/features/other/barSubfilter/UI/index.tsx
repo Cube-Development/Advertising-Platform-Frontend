@@ -10,64 +10,75 @@ import {
 } from "@entities/wallet";
 import {
   chatAdvertiserTypes,
-  chatFilter,
+  chatTypesFilter,
   chatManagerTypes,
 } from "@entities/communication";
 import {
   addFileFilter,
   addFileTypes,
-  catalogFilter,
+  catalogBarFilter,
   catalogTypes,
 } from "@entities/project";
 import { roles } from "@entities/user";
 import { pageFilter } from "@shared/routing";
-import { useAppDispatch, useAppSelector } from "@shared/hooks";
-import {
-  setAddFileFilter,
-  setCatalogFilter,
-  setChatFilter,
-  setProfileFilter,
-} from "@shared/store";
 
-interface BarProfileFilterProps {
+interface BarSubfilterProps {
   page: pageFilter;
   resetValues: () => void;
   resetActiveAccount?: (account: null) => void;
+  profileFilter?: {
+    type: profileTypesName;
+    id?: profileTypesNum;
+  };
+  changeProfile?: (profile: {
+    type: profileTypesName;
+    id?: profileTypesNum;
+  }) => void;
+  catalogFilter?: catalogBarFilter;
+  changeCatalogFilter?: (filter: catalogBarFilter) => void;
+  chatFilter?: chatTypesFilter;
+  changeChatFilter?: (filter: chatTypesFilter) => void;
+  fileFilter?: addFileFilter;
+  changeFileFilter?: (filter: addFileFilter) => void;
 }
 
 interface IFilterOption {
-  type: profileTypesName | catalogFilter | chatFilter | addFileFilter;
+  type: profileTypesName | catalogBarFilter | chatTypesFilter | addFileFilter;
   id?: profileTypesNum;
 }
 
-export const BarProfileFilter: FC<BarProfileFilterProps> = ({
+export const BarSubfilter: FC<BarSubfilterProps> = ({
   page,
   resetValues,
   resetActiveAccount,
+  profileFilter,
+  changeProfile,
+  catalogFilter,
+  changeCatalogFilter,
+  chatFilter,
+  changeChatFilter,
+  fileFilter,
+  changeFileFilter,
 }) => {
   const { t } = useTranslation();
   const role = Cookies.get("role")
     ? (Cookies.get("role") as roles)
     : roles.advertiser;
 
-  const { profileFilter, catalogFilter, chatFilter, addFileFilter } =
-    useAppSelector((state) => state.filter);
   const [options, filter] =
     page === pageFilter.profile || page === pageFilter.walletWithdraw
-      ? [profileTypes, profileFilter.type]
+      ? [profileTypes, profileFilter && profileFilter.type]
       : page === pageFilter.catalog
         ? [catalogTypes, catalogFilter]
         : page === pageFilter.walletTopUp
-          ? [walletTopUpTypes, profileFilter.type]
+          ? [walletTopUpTypes, profileFilter && profileFilter.type]
           : page === pageFilter.chat && role === roles.advertiser
             ? [chatAdvertiserTypes, chatFilter]
             : page === pageFilter.chat && role === roles.manager
               ? [chatManagerTypes, chatFilter]
               : page === pageFilter.createOrderFiles
-                ? [addFileTypes, addFileFilter]
+                ? [addFileTypes, fileFilter]
                 : [[], "", ""];
-
-  const dispatch = useAppDispatch();
 
   const toggleBar = (option: IFilterOption) => {
     if (
@@ -76,14 +87,21 @@ export const BarProfileFilter: FC<BarProfileFilterProps> = ({
       page === pageFilter.walletTopUp
     ) {
       const newFilter = { type: option.type, id: option.id };
-      dispatch(setProfileFilter(newFilter));
+      changeProfile &&
+        changeProfile(
+          newFilter as {
+            type: profileTypesName;
+            id?: profileTypesNum;
+          },
+        );
       resetActiveAccount && resetActiveAccount(null);
     } else if (page === pageFilter.catalog) {
-      dispatch(setCatalogFilter(option.type));
+      changeCatalogFilter &&
+        changeCatalogFilter(option.type as catalogBarFilter);
     } else if (page === pageFilter.chat) {
-      dispatch(setChatFilter(option.type as chatFilter));
+      changeChatFilter && changeChatFilter(option.type as chatTypesFilter);
     } else if (page === pageFilter.createOrderFiles) {
-      dispatch(setAddFileFilter(option.type));
+      changeFileFilter && changeFileFilter(option.type as addFileFilter);
     }
     if (page === pageFilter.catalog) {
       // if (page !== pageFilter.catalog) {

@@ -12,7 +12,7 @@ export const DAY_OF_WEEK = {
   Ru: ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вск"],
 };
 
-export enum chatFilter {
+export enum chatTypesFilter {
   blogger = "blogger",
   manager = "manager",
   advertiser = "advertiser",
@@ -21,21 +21,21 @@ export enum chatFilter {
 export const chatAdvertiserTypes = [
   {
     name: "chat.types.blogger",
-    type: chatFilter.blogger,
+    type: chatTypesFilter.blogger,
   },
   {
     name: "chat.types.manager",
-    type: chatFilter.manager,
+    type: chatTypesFilter.manager,
   },
 ];
 
 export const chatManagerTypes = [
   {
     name: "chat.types.blogger",
-    type: chatFilter.blogger,
+    type: chatTypesFilter.blogger,
   },
   {
     name: "chat.types.advertiser",
-    type: chatFilter.advertiser,
+    type: chatTypesFilter.advertiser,
   },
 ];

@@ -11,6 +11,7 @@ import { platformTypesNum } from "@entities/platform";
 import {
   ICart,
   ICatalogChannel,
+  catalogBarFilter,
   getCatalogReq,
   sortingFilter,
   useAddToCommonCartMutation,
@@ -34,6 +35,10 @@ export const CatalogBlock: FC = () => {
   });
   const elements = INTERSECTION_ELEMENTS.catalog;
   const [screen, setScreen] = useState<number>(window.innerWidth);
+
+  const [catalogFilter, setCatalogFilter] = useState<catalogBarFilter>(
+    catalogBarFilter.parameters,
+  );
 
   useEffect(() => {
     const handleResize = () => {
@@ -355,12 +360,16 @@ export const CatalogBlock: FC = () => {
                 getValues={getValues}
                 reset={reset}
                 setValue={setValue}
+                catalogFilter={catalogFilter}
+                changeCatalogfilter={(filter) => setCatalogFilter(filter)}
               />
             </div>
           )}
           <div className={styles.right}>
             <div className={styles.content__right} ref={catalogTopRef}>
               <CatalogList
+                changeCatalogFilter={(filter) => setCatalogFilter(filter)}
+                catalogFilter={catalogFilter}
                 getValues={getValues}
                 reset={reset}
                 setValue={setValue}

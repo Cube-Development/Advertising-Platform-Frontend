@@ -15,6 +15,7 @@ interface DevProjectsListProps {
   handleOnChangePage: () => void;
   isLoading: boolean;
   isNotEmpty: boolean;
+  typeFilter: string;
 }
 
 export const DevProjectsList: FC<DevProjectsListProps> = ({
@@ -22,6 +23,7 @@ export const DevProjectsList: FC<DevProjectsListProps> = ({
   handleOnChangePage,
   isLoading,
   isNotEmpty,
+  typeFilter,
 }) => {
   return (
     <div className="container">
@@ -30,6 +32,7 @@ export const DevProjectsList: FC<DevProjectsListProps> = ({
           listLength={true}
           NewProjectBtn={NewProject}
           TurnkeyProjectBtn={TurnkeyProject}
+          typeFilter={typeFilter}
         />
       ) : (
         <div className={styles.wrapper}>
@@ -43,6 +46,7 @@ export const DevProjectsList: FC<DevProjectsListProps> = ({
                 key={index}
                 card={card}
                 ContinueBtn={ContinueTemplate}
+                typeFilter={typeFilter}
               />
             ))}
           {isNotEmpty && (

@@ -1,6 +1,6 @@
 import { SortUpIcon, TelegramIcon } from "@shared/assets";
 
-export enum catalogFilter {
+export enum catalogBarFilter {
   parameters = "parameters",
   AI = "AI",
 }
@@ -8,11 +8,11 @@ export enum catalogFilter {
 export const catalogTypes = [
   {
     name: "catalog.search.parameters",
-    type: catalogFilter.parameters,
+    type: catalogBarFilter.parameters,
   },
   {
     name: "catalog.search.AI",
-    type: catalogFilter.AI,
+    type: catalogBarFilter.AI,
   },
 ];
 

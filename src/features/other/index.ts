@@ -1,4 +1,4 @@
-export * from "./barProfileFilter";
+export * from "./barSubfilter";
 export * from "./barStatusFilter";
 export * from "./barTop";
 export * from "./barTypesFilter";
@@ -11,3 +11,4 @@ export * from "./selectDescription";
 export * from "./selectOptions";
 export * from "./selectSex";
 export * from "./turnkeyProject";
+export * from "./handleAuth";

@@ -16,6 +16,7 @@ import {
   ActivateChannel,
   ChannelCardMenu,
   ChannelDescription,
+  DeactivateChannel,
   DeleteChannel,
   RepeatModeration,
   SeeOffers,
@@ -39,7 +40,7 @@ import {
   useToast,
 } from "@shared/ui";
 import { accordionTypes } from "@shared/config";
-import { useAppSelector } from "@shared/hooks";
+import { offerStatusFilter } from "@entities/offer";
 
 interface ChannelCardProps {
   card:
@@ -48,18 +49,13 @@ interface ChannelCardProps {
     | IModerationRejectChannel
     | IBlockedChannel
     | IModerationChannel;
+  statusFilter: channelStatusFilter | offerStatusFilter | string;
 }
 
-export const ChannelCard: FC<ChannelCardProps> = ({ card }) => {
+export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
   const { toast } = useToast();
   const { t } = useTranslation();
   const [isSubcardOpen, setSubcardOpen] = useState(false);
-
-  // const handleChangeOpenSubcard = (): void => {
-  //   setSubcardOpen(!isSubcardOpen);
-  // };
-
-  const { statusFilter } = useAppSelector((state) => state.filter);
 
   function getRandomValues() {
     // Предположим, что здесь получаются произвольные значения
@@ -246,6 +242,8 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card }) => {
             <ChannelCardMenu
               channel_id={card?.id}
               DeleteChannel={DeleteChannel}
+              DeactivateChannel={DeactivateChannel}
+              statusFilter={statusFilter}
             />
           </div>
         </div>

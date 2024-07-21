@@ -29,19 +29,19 @@ import {
   offerStatusChat,
   offerStatusFilter,
 } from "@entities/offer";
-import { useAppSelector } from "@shared/hooks";
 import { useGetPostQuery } from "@entities/project";
 import { CheckDate } from "@entities/communication";
+import { channelStatusFilter } from "@entities/channel";
 
 interface OfferCardProps {
   card: IBloggerOfferCard;
+  statusFilter: channelStatusFilter | offerStatusFilter | string;
 }
 
-export const OfferCard: FC<OfferCardProps> = ({ card }) => {
+export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter }) => {
   const { t } = useTranslation();
   const { toast } = useToast();
 
-  const { statusFilter } = useAppSelector((state) => state.filter);
   const { data: post, error } = useGetPostQuery({ order_id: card?.id });
 
   if (error) {

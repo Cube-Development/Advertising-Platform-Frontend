@@ -33,7 +33,6 @@ import {
   PostFormats,
 } from "@entities/project";
 import { ICreateOrderBlur } from "@widgets/createOrder/config";
-import { useAppDispatch, useAppSelector } from "@shared/hooks";
 
 interface CreateOrderPostProps {
   cards: IPostChannel[];
@@ -106,11 +105,6 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
     return acc;
   }, [] as PostFormats[]);
 
-  const { platformFilter: selectedPlatform } = useAppSelector(
-    (state) => state.filter,
-  );
-  const dispatch = useAppDispatch();
-
   const handleCheckPosts = () => {
     checkPosts(
       formState,
@@ -118,8 +112,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
       onChangeBlur,
       platformIds,
       postFormats,
-      selectedPlatform,
-      dispatch,
+      formState.platformFilter,
       cards,
     );
   };
@@ -141,9 +134,10 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
               platforms={platformIds}
               setValue={setValue}
               formats={postFormats}
+              platformFilter={formState.platformFilter}
             />
             <PostTypesTabs
-              selectedPlatform={selectedPlatform.id}
+              selectedPlatform={formState.platformFilter.id}
               selectedPostType={formState.selectedPostType}
               setValue={setValue}
               formats={postFormats}
@@ -151,7 +145,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
             <div className={clsx(styles.data, {})}>
               {formState.isMultiPost && (
                 <MultiPostsList
-                  platform={selectedPlatform?.id}
+                  platform={formState.platformFilter?.id}
                   orders={cards}
                   setValue={setValue}
                   getValues={getValues}
@@ -161,19 +155,19 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
               )}
               <div className={styles.post_data}>
                 <div className={styles.block}>
-                  {selectedPlatform.id === platformTypesNum.telegram &&
+                  {formState.platformFilter.id === platformTypesNum.telegram &&
                     renderEditor({
                       platformId: platformTypesNum.telegram,
                       formState,
                       setValue,
                     })}
-                  {selectedPlatform.id === platformTypesNum.instagram &&
+                  {formState.platformFilter.id === platformTypesNum.instagram &&
                     renderEditor({
                       platformId: platformTypesNum.instagram,
                       formState,
                       setValue,
                     })}
-                  {selectedPlatform.id === platformTypesNum.youtube &&
+                  {formState.platformFilter.id === platformTypesNum.youtube &&
                     renderEditor({
                       platformId: platformTypesNum.youtube,
                       formState,
@@ -183,14 +177,15 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                 <div
                   className={clsx(styles.block__bottom, {
                     [styles.filter]:
-                      selectedPlatform.type !== platformTypesStr.telegram,
+                      formState.platformFilter.type !==
+                      platformTypesStr.telegram,
                   })}
                 >
                   <PostFiles
                     AddFiles={AddFiles}
                     AddMediaFiles={AddMediaFiles}
                     setValue={setValue}
-                    platformId={selectedPlatform.id}
+                    platformId={formState.platformFilter.id}
                     formState={formState}
                     type={
                       formState?.selectedMultiPostId
@@ -198,11 +193,12 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                         : CreatePostFormData.posts
                     }
                   />
-                  {selectedPlatform.type === platformTypesStr.telegram && (
+                  {formState.platformFilter.type ===
+                    platformTypesStr.telegram && (
                     <PostButtons
                       setValue={setValue}
                       formState={formState}
-                      platformId={selectedPlatform.id}
+                      platformId={formState.platformFilter.id}
                       type={
                         formState?.selectedMultiPostId
                           ? CreatePostFormData.multiposts
@@ -220,51 +216,52 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                         ? CreatePostFormData.multiposts
                         : CreatePostFormData.posts
                     }
-                    platformId={selectedPlatform.id}
+                    platformId={formState.platformFilter.id}
                     formState={formState}
                   />
                 </div>
               </div>
               {!formState.isMultiPost && <div></div>}
               <div className={styles.display}>
-                {selectedPlatform.type === platformTypesStr.telegram && (
+                {formState.platformFilter.type ===
+                  platformTypesStr.telegram && (
                   <DisplayTelegram
                     formState={formState}
-                    platformId={selectedPlatform.id}
+                    platformId={formState.platformFilter.id}
                   />
                 )}
-                {selectedPlatform.type === platformTypesStr.instagram &&
+                {formState.platformFilter.type === platformTypesStr.instagram &&
                   formState.selectedPostType === PostTypesNum.feed && (
                     <DisplayFeed
                       formState={formState}
-                      platformId={selectedPlatform.id}
+                      platformId={formState.platformFilter.id}
                       postType={PostTypesNum.feed}
                     />
                   )}
-                {selectedPlatform.type === platformTypesStr.instagram &&
+                {formState.platformFilter.type === platformTypesStr.instagram &&
                   formState.selectedPostType ===
                     PostTypesNum.FullHd_vertical && (
                     <DisplayStories
                       formState={formState}
-                      platformId={selectedPlatform.id}
+                      platformId={formState.platformFilter.id}
                       postType={PostTypesNum.FullHd_vertical}
                     />
                   )}
-                {selectedPlatform.type === platformTypesStr.youtube &&
+                {formState.platformFilter.type === platformTypesStr.youtube &&
                   formState.selectedPostType ===
                     PostTypesNum.FullHd_vertical && (
                     <DisplayShorts
                       formState={formState}
-                      platformId={selectedPlatform.id}
+                      platformId={formState.platformFilter.id}
                       postType={PostTypesNum.FullHd_vertical}
                     />
                   )}
-                {selectedPlatform.type === platformTypesStr.youtube &&
+                {formState.platformFilter.type === platformTypesStr.youtube &&
                   formState.selectedPostType ===
                     PostTypesNum.FullHd_horizontal && (
                     <DisplayVideos
                       formState={formState}
-                      platformId={selectedPlatform.id}
+                      platformId={formState.platformFilter.id}
                       postType={PostTypesNum.FullHd_horizontal}
                     />
                   )}

@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { useToast } from "@shared/ui";
 import { BarSubrofileFilter, CreateLegal, LegalForm } from "@features/wallet";
-import { BarProfileFilter } from "@features/other";
+import { BarSubfilter } from "@features/other";
 import {
   EntityData,
   ILegalData,
@@ -12,11 +12,11 @@ import {
   SelfEmployedCardData,
   SelfEmployedData,
   profileTypesName,
-  subprofileFilter,
+  profileTypesNum,
+  subprofileFilterTypes,
   useCreateLegalMutation,
 } from "@entities/wallet";
 import { pageFilter } from "@shared/routing";
-import { useAppSelector } from "@shared/hooks";
 
 export const AddLegalForm: FC = () => {
   const { toast } = useToast();
@@ -26,19 +26,31 @@ export const AddLegalForm: FC = () => {
     register,
     reset,
     handleSubmit,
+    watch,
+    setValue,
     formState: { errors },
-  } = useForm<ILegalData>();
-
-  const { profileFilter: filter, subprofileFilter: subprofile } =
-    useAppSelector((state) => state.filter);
+  } = useForm<ILegalData>({
+    defaultValues: {
+      profileFilter: {
+        type: profileTypesName.selfEmployedAccounts,
+        id: profileTypesNum.selfEmployedAccounts,
+      },
+      subprofileFilter: {
+        type: subprofileFilterTypes.account,
+        id: profileTypesNum.selfEmployedAccounts,
+      },
+    },
+  });
+  const formState = watch();
 
   const typeLegal =
-    filter.type === profileTypesName.entities
+    formState.profileFilter.type === profileTypesName.entities
       ? EntityData
-      : filter.type === profileTypesName.individuals
+      : formState.profileFilter.type === profileTypesName.individuals
         ? IndividualData
-        : filter.type === profileTypesName.selfEmployedAccounts &&
-            subprofile.type === subprofileFilter.account
+        : formState.profileFilter.type ===
+              profileTypesName.selfEmployedAccounts &&
+            formState.subprofileFilter.type === subprofileFilterTypes.account
           ? SelfEmployedData
           : SelfEmployedCardData;
 
@@ -47,7 +59,7 @@ export const AddLegalForm: FC = () => {
   const onSubmit: SubmitHandler<ILegalData> = async (data) => {
     const dataWithLegalType = {
       ...data,
-      type_legal: filter.id,
+      type_legal: formState.profileFilter.id,
     };
     createLegal(dataWithLegalType)
       .unwrap()
@@ -71,11 +83,26 @@ export const AddLegalForm: FC = () => {
         "LOADING..."
       ) : (
         <form onSubmit={handleSubmit(onSubmit)} className={styles.wrapper}>
-          <BarProfileFilter page={pageFilter.profile} resetValues={reset} />
+          <BarSubfilter
+            page={pageFilter.profile}
+            resetValues={reset}
+            profileFilter={formState.profileFilter}
+            changeProfile={(profilefilter) =>
+              setValue("profileFilter", profilefilter)
+            }
+          />
 
           <div className={styles.block}>
-            {filter.type === profileTypesName.selfEmployedAccounts && (
-              <BarSubrofileFilter resetValues={reset} />
+            {formState.profileFilter.type ===
+              profileTypesName.selfEmployedAccounts && (
+              <BarSubrofileFilter
+                resetValues={reset}
+                subprofileFilter={formState.subprofileFilter}
+                changeSubprofile={(subprofile: {
+                  type: subprofileFilterTypes;
+                  id: profileTypesNum;
+                }) => setValue("subprofileFilter", subprofile)}
+              />
             )}
             {typeLegal.map((block, index) => (
               <LegalForm

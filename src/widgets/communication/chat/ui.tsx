@@ -6,14 +6,14 @@ import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useCentrifuge } from "./CentrifugeContext";
 import styles from "./styles.module.scss";
-import { BarProfileFilter } from "@features/other";
+import { BarSubfilter } from "@features/other";
 import { ChatCard, ChatMessages } from "@features/communication";
 import { roles } from "@entities/user";
 import {
   IOrderMessageAll,
   IOrderMessageNewSocket,
   RecipientType,
-  chatFilter,
+  chatTypesFilter,
   useGetOrderChatsQuery,
   useGetProjectChatsQuery,
 } from "@entities/communication";
@@ -29,7 +29,6 @@ import {
 } from "@shared/ui";
 import { pageFilter } from "@shared/routing";
 import { BREAKPOINT } from "@shared/config";
-import { useAppSelector } from "@shared/hooks";
 
 export const Chat: FC = () => {
   const { t } = useTranslation();
@@ -37,27 +36,29 @@ export const Chat: FC = () => {
     ? (Cookies.get("role") as roles)
     : roles.advertiser;
 
-  const { chatFilter: filter } = useAppSelector((state) => state.filter);
+  const [chatFilter, setChatFilter] = useState<chatTypesFilter>(
+    chatTypesFilter.blogger,
+  );
 
   const isOrderCondition = (role: string, filter: string): boolean => {
     return (
-      (role !== roles.blogger && filter === chatFilter.blogger) ||
+      (role !== roles.blogger && filter === chatTypesFilter.blogger) ||
       role === roles.blogger
     );
   };
 
   const [isOrder, setIsOrder] = useState<boolean>(
-    isOrderCondition(role, filter),
+    isOrderCondition(role, chatFilter),
   );
 
   const { data: chatsOrder } = useGetOrderChatsQuery(
     { role: role },
-    { skip: role !== roles.blogger && filter !== chatFilter.blogger },
+    { skip: role !== roles.blogger && chatFilter !== chatTypesFilter.blogger },
   );
 
   const { data: chatsProject } = useGetProjectChatsQuery(
     { role: role },
-    { skip: role === roles.blogger || filter === chatFilter.blogger },
+    { skip: role === roles.blogger || chatFilter === chatTypesFilter.blogger },
   );
 
   const [screen, setScreen] = useState<number>(window.innerWidth);
@@ -68,8 +69,8 @@ export const Chat: FC = () => {
   const [currentChat, setCurrentChat] = useState<IOrderMessageAll | null>(null);
 
   useEffect(() => {
-    setIsOrder(isOrderCondition(role, filter));
-  }, [role, filter]);
+    setIsOrder(isOrderCondition(role, chatFilter));
+  }, [role, chatFilter]);
 
   const { OrderMessageNewChat } = useCentrifuge();
 
@@ -177,9 +178,11 @@ export const Chat: FC = () => {
                   <p className={styles.title}>{t("chat.my_messages")}</p>
                   {role !== roles.blogger && (
                     <div className={styles.filter}>
-                      <BarProfileFilter
+                      <BarSubfilter
                         page={pageFilter.chat}
                         resetValues={handle}
+                        chatFilter={chatFilter}
+                        changeChatFilter={setChatFilter}
                       />
                     </div>
                   )}
@@ -252,9 +255,11 @@ export const Chat: FC = () => {
                 <div className={styles.left}>
                   <p className={styles.title}>{t("chat.my_messages")}</p>
                   <div className={styles.filter}>
-                    <BarProfileFilter
+                    <BarSubfilter
                       page={pageFilter.chat}
                       resetValues={handle}
+                      chatFilter={chatFilter}
+                      changeChatFilter={setChatFilter}
                     />
                   </div>
                   {allChats.length ? (

@@ -6,13 +6,15 @@ import styles from "./styles.module.scss";
 import { CreditCard } from "./creditCard";
 import { Guide, LegalsList, PaymentData } from "../../components";
 import { ToastAction, useToast } from "@shared/ui";
-import { BarProfileFilter } from "@features/other";
+import { BarSubfilter } from "@features/other";
 import {
   ILegalCard,
   ILegalCardShort,
   ILegalData,
   paymentTypes,
   profileTypesName,
+  profileTypesNum,
+  subprofileFilterTypes,
   useCreateLegalMutation,
   useEditLegalMutation,
   usePaymentDepositMutation,
@@ -20,7 +22,6 @@ import {
   useReadOneLegalMutation,
 } from "@entities/wallet";
 import { pageFilter } from "@shared/routing";
-import { useAppSelector } from "@shared/hooks";
 
 interface IExtendedProfileData extends ILegalData {
   amount: number;
@@ -39,15 +40,25 @@ export const Topup: FC = () => {
     handleSubmit,
     clearErrors,
     formState: { errors },
-  } = useForm<IExtendedProfileData>();
-
-  const { profileFilter: filter } = useAppSelector((state) => state.filter);
+  } = useForm<IExtendedProfileData>({
+    defaultValues: {
+      profileFilter: {
+        type: profileTypesName.selfEmployedAccounts,
+        id: profileTypesNum.selfEmployedAccounts,
+      },
+      subprofileFilter: {
+        type: subprofileFilterTypes.account,
+        id: profileTypesNum.selfEmployedAccounts,
+      },
+    },
+  });
+  const formState = watch();
 
   const {
     data: legalsByType,
     isLoading: isReadLegalsLoading,
     error: readLegalsError,
-  } = useReadLegalsByTypeQuery(filter.id);
+  } = useReadLegalsByTypeQuery(formState.profileFilter.id);
 
   const [readOneLegal, { isLoading: isOneLegalLoading, error: oneLegalError }] =
     useReadOneLegalMutation();
@@ -88,7 +99,7 @@ export const Topup: FC = () => {
   const onSubmit: SubmitHandler<IExtendedProfileData> = async (formData) => {
     const dataWithLegalType = {
       ...formData,
-      type_legal: filter.id,
+      type_legal: formState.profileFilter.id,
     };
     createLegal(dataWithLegalType)
       .unwrap()
@@ -173,12 +184,17 @@ export const Topup: FC = () => {
           <p>{t("wallet.topup.title")}</p>
           <ArrowIcon4 />
         </div>
-        <BarProfileFilter
+        <BarSubfilter
           resetValues={reset}
           page={pageFilter.walletTopUp}
           resetActiveAccount={setActiveAccount}
+          profileFilter={formState.profileFilter}
+          changeProfile={(profileFilter) =>
+            setValue("profileFilter", profileFilter)
+          }
         />
-        {filter.type === profileTypesName.selfEmployedAccounts ? (
+        {formState.profileFilter.type ===
+        profileTypesName.selfEmployedAccounts ? (
           <CreditCard />
         ) : (
           <div>
@@ -193,6 +209,8 @@ export const Topup: FC = () => {
                 handleSubmit={handleSubmit}
                 onSubmit={onSubmit}
                 watch={watch}
+                profileFilter={formState.profileFilter}
+                subprofileFilter={formState.subprofileFilter}
               />
               <div>
                 <div className={styles.content__right}>
@@ -205,7 +223,7 @@ export const Topup: FC = () => {
                     readLegalsError={readLegalsError}
                     oneLegalError={oneLegalError}
                   />
-                  <Guide />
+                  <Guide profileFilter={formState.profileFilter} />
                 </div>
               </div>
             </div>

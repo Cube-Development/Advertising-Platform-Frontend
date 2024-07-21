@@ -9,7 +9,7 @@ import styles from "./styles.module.scss";
 import { roles, toggleRole as toggleroleAction } from "@entities/user";
 import { IMenuItem } from "../../config";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
-import { setDropDownMenu } from "@shared/store";
+import { setDropDownMenu } from "@pages/layouts/model";
 
 export const Sidebar: FC = () => {
   const { role } = useAppSelector((state) => state.user);

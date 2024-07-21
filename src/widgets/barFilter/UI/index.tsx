@@ -16,19 +16,30 @@ import { projectTypesFilter } from "@entities/project";
 import { platformTypes } from "@entities/platform";
 import { pageFilter } from "@shared/routing";
 import { useAppSelector } from "@shared/hooks";
+import { channelStatusFilter } from "@entities/channel";
+import { offerStatusFilter } from "@entities/offer";
 
 interface BarFilterProps {
   page: pageFilter;
   listLength: boolean;
   setValue?: UseFormSetValue<any>;
+  typeFilter?: string;
+  statusFilter: channelStatusFilter | offerStatusFilter | string;
+  changeStatus: (
+    status: channelStatusFilter | offerStatusFilter | string,
+  ) => void;
+  changeType?: (status: string) => void;
 }
 
 export const BarFilter: FC<BarFilterProps> = ({
   page,
   setValue,
   listLength,
+  typeFilter,
+  statusFilter,
+  changeStatus,
+  changeType,
 }) => {
-  const { typeFilter } = useAppSelector((state) => state.filter);
   const { role } = useAppSelector((state) => state.user);
 
   return (
@@ -44,20 +55,39 @@ export const BarFilter: FC<BarFilterProps> = ({
         {page === pageFilter.order ? (
           role === roles.advertiser ? (
             <>
-              <BarTypesFilter />
+              <BarTypesFilter
+                changeStatus={changeStatus}
+                changeType={changeType!}
+                typeFilter={typeFilter!}
+              />
               {typeFilter === projectTypesFilter.savedProject || (
-                <BarStatusFilter page={page} />
+                <BarStatusFilter
+                  page={page}
+                  typeFilter={typeFilter}
+                  changeStatus={changeStatus}
+                  statusFilter={statusFilter}
+                />
               )}
             </>
           ) : (
             role === roles.manager && (
               <>
-                <BarStatusFilter page={page} />
+                <BarStatusFilter
+                  page={page}
+                  typeFilter={typeFilter}
+                  changeStatus={changeStatus}
+                  statusFilter={statusFilter}
+                />
               </>
             )
           )
         ) : (
-          <BarStatusFilter page={page} />
+          <BarStatusFilter
+            page={page}
+            typeFilter={typeFilter}
+            changeStatus={changeStatus}
+            statusFilter={statusFilter}
+          />
         )}
         {page !== pageFilter.order && (
           <div className={styles.filter}>

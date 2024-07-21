@@ -8,23 +8,30 @@ import {
   projectTypesFilter,
 } from "@entities/project";
 import { roles } from "@entities/user";
-import { bloggerOfferStatus } from "@entities/offer";
-import { bloggerChannelStatus } from "@entities/channel";
+import { bloggerOfferStatus, offerStatusFilter } from "@entities/offer";
+import { bloggerChannelStatus, channelStatusFilter } from "@entities/channel";
 import { pageFilter } from "@shared/routing";
-import { useAppDispatch, useAppSelector } from "@shared/hooks";
-import { setStatusFilter } from "@shared/store";
+import { useAppSelector } from "@shared/hooks";
 
 interface BarStatusFilterProps {
   page: pageFilter;
+  changeStatus: (
+    status: channelStatusFilter | offerStatusFilter | string,
+  ) => void;
+  typeFilter?: string;
+  statusFilter: channelStatusFilter | offerStatusFilter | string;
 }
 
-export const BarStatusFilter: FC<BarStatusFilterProps> = ({ page }) => {
+export const BarStatusFilter: FC<BarStatusFilterProps> = ({
+  page,
+  changeStatus,
+  typeFilter,
+  statusFilter,
+}) => {
   const { t } = useTranslation();
-  const { statusFilter, typeFilter } = useAppSelector((state) => state.filter);
   const { role } = useAppSelector((state) => state.user);
-  const dispatch = useAppDispatch();
-  const toggleStatus = (type: string) => {
-    dispatch(setStatusFilter(type));
+  const toggleStatus = (status: string) => {
+    changeStatus(status);
   };
 
   const projectStatus =

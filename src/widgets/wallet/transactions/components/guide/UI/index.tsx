@@ -1,18 +1,21 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
-import { profileTypesName } from "@entities/wallet";
-import { useAppSelector } from "@shared/hooks";
+import { profileTypesName, profileTypesNum } from "@entities/wallet";
 
-interface GuideProps {}
+interface GuideProps {
+  profileFilter: {
+    type: profileTypesName;
+    id?: profileTypesNum;
+  };
+}
 
-export const Guide: FC<GuideProps> = () => {
+export const Guide: FC<GuideProps> = ({ profileFilter }) => {
   const { t } = useTranslation();
-  const { profileFilter: filter } = useAppSelector((state) => state.filter);
 
   return (
     <div className={styles.guide}>
-      {filter.type === profileTypesName.entities
+      {profileFilter.type === profileTypesName.entities
         ? t("wallet.guide.entity")
         : t("wallet.guide.individual")}
     </div>
