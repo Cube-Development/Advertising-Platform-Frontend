@@ -73,13 +73,13 @@ export const AdvOrders: FC = () => {
       { ...getParams, language: language?.id || Languages[0].id },
       {
         skip: formState.type !== projectTypesFilter.managerProject,
-      }
+      },
     );
   // data: projectsMan fetch2
   // data: projectsManDev fetch3
 
   const [projects, setProjects] = useState<IAdvProjectCard[]>(
-    projectsSelf?.projects || projectsManager?.projects || []
+    projectsSelf?.projects || projectsManager?.projects || [],
   );
 
   useEffect(() => {
