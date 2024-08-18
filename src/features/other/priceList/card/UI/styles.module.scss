@@ -94,6 +94,12 @@
       }
     }
 
+    .buy_tarif {
+      display: grid;
+      grid-auto-flow: row;
+      row-gap: 15px;
+    }
+
     .text {
       color: var(--Personal-colors-black);
       text-align: center;

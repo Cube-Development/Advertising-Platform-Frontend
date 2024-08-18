@@ -67,3 +67,34 @@ export const bloggerChannelStatus = [
     id: channelStatus.banned,
   },
 ];
+
+export enum ratingData {
+  perfect = 5,
+  good = 4,
+  normal = 3,
+  bad = 2,
+  terrible = 1,
+}
+
+export const ratingStatus = [
+  {
+    id: ratingData.perfect,
+    name: "channel.reviews.rate.perfect",
+  },
+  {
+    id: ratingData.good,
+    name: "channel.reviews.rate.good",
+  },
+  {
+    id: ratingData.normal,
+    name: "channel.reviews.rate.normal",
+  },
+  {
+    id: ratingData.bad,
+    name: "channel.reviews.rate.bad",
+  },
+  {
+    id: ratingData.terrible,
+    name: "channel.reviews.rate.terrible",
+  },
+];

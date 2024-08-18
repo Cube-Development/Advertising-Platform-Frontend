@@ -18,7 +18,7 @@ export const BarHistory: FC = () => {
       <div className={styles.info}>
         <p>{t("wallet_history.tab.ammount")}</p>
       </div>
-      <div className={styles.info}>
+      <div>
         <p>{t("wallet_history.tab.status")}</p>
       </div>
     </div>

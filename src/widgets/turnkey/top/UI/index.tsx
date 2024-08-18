@@ -2,7 +2,6 @@ import { FC, useEffect } from "react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
 import { PriceList } from "@features/other";
-import { BuyTarif } from "@features/turnkey";
 
 interface TopProps {}
 
@@ -25,7 +24,6 @@ export const Top: FC<TopProps> = () => {
           tarifs={t(`main_page_advertiser.tarifs_list`, {
             returnObjects: true,
           })}
-          buyBtn={<BuyTarif />}
         />
       </div>
     </section>

@@ -1,1 +1,1 @@
-export * from "./UI";
+export { WithdrawalPage } from "./UI";

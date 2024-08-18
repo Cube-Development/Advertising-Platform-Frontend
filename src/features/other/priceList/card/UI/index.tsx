@@ -1,42 +1,35 @@
+import { NoIcon, YesIcon } from "@shared/assets";
+import { ITarifInfo } from "@shared/types/translate";
 import { FC, ReactElement } from "react";
 import styles from "./styles.module.scss";
-import { IPrice } from "@shared/types/translate";
-import { YesIcon, NoIcon } from "@shared/assets";
 
 interface PriceCardProps {
-  price: IPrice;
-  currentTarif: number;
-  buyBtn: ReactElement;
-  tarifType: number;
-  onChange: (tarif: number) => void;
+  tarifInfo: ITarifInfo;
+  BuyBtn: ReactElement;
+  isActive: boolean;
 }
 
 export const PriceCard: FC<PriceCardProps> = ({
-  price,
-  currentTarif,
-  tarifType,
-  buyBtn,
-  onChange,
+  tarifInfo,
+  BuyBtn,
+  isActive,
 }) => {
   return (
-    <div
-      className={`${styles.price__card} ${currentTarif === tarifType ? styles.active : ""}`}
-      onClick={() => onChange(tarifType)}
-    >
+    <div className={`${styles.price__card} ${isActive ? styles.active : ""}`}>
       <div className={styles.content}>
         <div className={styles.top}>
-          <p className={styles.title}>{price.name}</p>
-          <p className={styles.views}>{price.views}</p>
+          <p className={styles.title}>{tarifInfo.name}</p>
+          <p className={styles.views}>{tarifInfo.views}</p>
         </div>
         <div className={styles.price}>
-          <p>{price.price}</p>
+          <p>{tarifInfo.price}</p>
         </div>
-        <div>
-          {buyBtn}
-          <p className={styles.text}>{price.info}</p>
+        <div className={styles.buy_tarif}>
+          {BuyBtn}
+          <p className={styles.text}>{tarifInfo.info}</p>
         </div>
         <ul>
-          {price.options.map((option, index) => (
+          {tarifInfo.options.map((option, index) => (
             <li key={index}>
               {option.available ? <YesIcon /> : <NoIcon />}
               <p>{option.option}</p>

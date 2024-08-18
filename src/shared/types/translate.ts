@@ -21,7 +21,8 @@ export interface Stage {
   stage: string;
 }
 
-export interface IPrice {
+export interface ITarifInfo {
+  type: string;
   name: string;
   views: string;
   price: string;

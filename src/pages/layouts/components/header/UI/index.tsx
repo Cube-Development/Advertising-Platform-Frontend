@@ -10,6 +10,7 @@ import { Wallet } from "./wallet";
 import { Chat } from "@widgets/communication";
 import { logout, roles, toggleRole as toggleRoleAction } from "@entities/user";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
+import { BREAKPOINT } from "@shared/config";
 
 export const Header: FC = () => {
   const [screen, setScreen] = useState<number>(window.innerWidth);
@@ -50,7 +51,7 @@ export const Header: FC = () => {
 
       <div className={styles.profile}>
         <Lang />
-        {isAuth && screen > 768 && <Wallet />}
+        {isAuth && screen > BREAKPOINT.MD && <Wallet />}
         {isAuth ? (
           <>
             <div className={styles.separator}></div>

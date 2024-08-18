@@ -15,12 +15,12 @@ export const Customers: FC<CustomersProps> = () => {
           <h1>{t(`turnkey.customers.title`)}</h1>
           <h2>{t(`turnkey.customers.text`)}</h2>
         </div>
-        <CustomerList
-          customers={t(`main_page_advertiser.customers_list`, {
-            returnObjects: true,
-          })}
-        />
       </div>
+      <CustomerList
+        customers={t(`main_page_advertiser.customers_list`, {
+          returnObjects: true,
+        })}
+      />
     </div>
   );
 };

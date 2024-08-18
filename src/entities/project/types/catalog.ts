@@ -44,6 +44,7 @@ export interface IFormatListProps {
   selectedFormat: IFormat;
   changeFormat: (selectedValue: IFormat) => void;
   card: ICatalogChannel;
+  isSmall?: boolean;
 }
 
 interface Components {

@@ -12,6 +12,7 @@ export const AddToBasket: FC<IAddToBasketProps> = ({
   card,
   page,
   selectedFormat,
+  isSmall,
 }) => {
   const { t } = useTranslation();
 
@@ -28,6 +29,7 @@ export const AddToBasket: FC<IAddToBasketProps> = ({
       onClick={changeCard}
     >
       <FormatList
+        isSmall={isSmall}
         selectedFormat={selectedFormat}
         changeFormat={changeFormat}
         card={card}

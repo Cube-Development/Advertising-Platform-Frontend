@@ -1,22 +1,23 @@
+import { paths } from "@shared/routing";
 import * as React from "react";
-import { CatalogPage } from "./Catalog";
-import { MainPage } from "./Main";
-import { MainBloggerPage } from "./MainBlogger";
-import { NotFoundPage } from "./NotFound";
-import { ProfilePage } from "./Profile";
 import { AddChannelPage } from "./AddChannel";
-import { TurnkeyPage } from "./Turnkey";
-import { MyChannelsPage } from "./MyChannels";
-import { OffersPage } from "./Offers";
-import { OrdersPage } from "./Orders";
 import { AddLegalPage } from "./AddLegal";
 import { CartPage } from "./Cart";
-import { TopupPage } from "./Topup";
-import { WithdrawalPage } from "./Withdrawal";
-import { WalletHistoryPage } from "./WalletHistory";
-import { CreateOrderPage } from "./CreateOrder/UI";
+import { CatalogPage } from "./Catalog";
+import { ChannelPage } from "./Channel";
+import { CreateOrderPage } from "./CreateOrder";
 import { FAQPage } from "./FAQ";
-import { paths } from "@shared/routing";
+import { MainPage } from "./Main";
+import { MainBloggerPage } from "./MainBlogger";
+import { MyChannelsPage } from "./MyChannels";
+import { NotFoundPage } from "./NotFound";
+import { OffersPage } from "./Offers";
+import { OrdersPage } from "./Orders";
+import { ProfilePage } from "./Profile";
+import { TopupPage } from "./Topup";
+import { TurnkeyPage } from "./Turnkey";
+import { WalletHistoryPage } from "./WalletHistory";
+import { WithdrawalPage } from "./Withdrawal";
 
 export interface IRoute {
   path: string;
@@ -34,7 +35,7 @@ export const privateCommonRoutes: IRoute[] = [
 
 export const publicCommonRoutes: IRoute[] = [
   { path: paths.notFound, component: NotFoundPage },
-  { path: paths.faq, component: FAQPage },
+  { path: paths.faq, component: FAQPage, sidebar: true },
 ];
 
 export const privateBloggerRoutes: IRoute[] = [
@@ -56,6 +57,7 @@ export const publicAdvertiserRoutes: IRoute[] = [
   { path: paths.catalog, component: CatalogPage },
   { path: paths.cart, component: CartPage },
   { path: paths.turnkey, component: TurnkeyPage },
+  { path: paths.channel, component: ChannelPage },
 ];
 
 // нужен в старой версии роутинга после обновы удалить
@@ -64,6 +66,7 @@ export const publicRoutes: IRoute[] = [
   { path: paths.main, component: MainPage },
   { path: paths.notFound, component: NotFoundPage },
   { path: paths.catalog, component: CatalogPage },
+  { path: paths.channel, component: ChannelPage },
   { path: paths.cart, component: CartPage },
   { path: paths.turnkey, component: TurnkeyPage },
 ];

@@ -10,14 +10,14 @@ import {
 } from "@entities/wallet";
 import { BarHistory } from "@features/wallet";
 import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
-import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
+import { BREAKPOINT, INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 
 export const History: FC = () => {
   const { t, i18n } = useTranslation();
   const language = Languages.find((lang) => {
     return i18n.language === lang.name;
   });
-
+  const [screen, setScreen] = useState<number>(window.innerWidth);
   const [currentPage, setCurrentPage] = useState(1);
   const handleOnChangePage = () => {
     setCurrentPage(currentPage + 1);
@@ -44,29 +44,36 @@ export const History: FC = () => {
     }
   }, [data]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      setScreen(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
-    <div className="container sidebar">
+    <div className={`container ${screen > BREAKPOINT.LG ? "sidebar" : ""}`}>
       <div className={styles.wrapper}>
         <div className={styles.top}>
           <p>{t("wallet_history.wallet_history")}</p>
         </div>
-        <BarHistory />
+        {screen > BREAKPOINT.MD && <BarHistory />}
         <div className={styles.cards}>
           {transactions?.length > 0 ? (
             <div className={styles.cards__list}>
               {transactions?.map((card, index) => (
                 <HistoryCard card={card} key={index} />
               ))}
-              {data &&
+              {/* {data &&
                 data?.transactions?.length ===
-                  INTERSECTION_ELEMENTS.history && (
-                  <div
-                    className={styles.show_more}
-                    onClick={handleOnChangePage}
-                  >
-                    {isFetching ? <SpinnerLoader /> : <ShowMoreBtn />}
-                  </div>
-                )}
+                  INTERSECTION_ELEMENTS.history && ( */}
+              <div className={styles.show_more} onClick={handleOnChangePage}>
+                {isFetching ? <SpinnerLoader /> : <ShowMoreBtn />}
+              </div>
+              {/* )} */}
             </div>
           ) : (
             <div className={styles.empty__block}>

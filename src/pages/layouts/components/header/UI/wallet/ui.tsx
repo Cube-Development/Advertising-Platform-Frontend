@@ -4,13 +4,21 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { Link } from "react-router-dom";
 import { paths } from "@shared/routing";
-import { useGetBalanceQuery } from "@entities/wallet";
+import { useGetBalanceQuery, walletSlice } from "@entities/wallet";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
 
 export const Wallet: FC = () => {
   const { t } = useTranslation();
-  const { data: balance } = useGetBalanceQuery();
+  const { data } = useGetBalanceQuery();
   const [isMenuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    dispatch(walletSlice.actions.setBalance(data?.balance || 0));
+  }, [data]);
+
+  const { balance } = useAppSelector((state) => state.wallet);
 
   const toggleMenu = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
@@ -42,9 +50,7 @@ export const Wallet: FC = () => {
       <button className={styles.roww} onClick={(e) => toggleMenu(e)}>
         {balance ? (
           <p>
-            {balance?.balance
-              ? Math.floor(balance.balance).toLocaleString()
-              : "0"}{" "}
+            {balance ? Math.floor(balance).toLocaleString() : "0"}{" "}
             <span>{t("symbol")}</span>
           </p>
         ) : (
