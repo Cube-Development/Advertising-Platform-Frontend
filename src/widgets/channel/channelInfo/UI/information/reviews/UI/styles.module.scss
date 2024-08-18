@@ -1,0 +1,13 @@
+.wrapper {
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 30px;
+
+  .title {
+    color: var(--Personal-colors-black);
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1;
+  }
+}

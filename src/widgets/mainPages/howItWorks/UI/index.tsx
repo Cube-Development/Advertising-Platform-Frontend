@@ -4,6 +4,7 @@ import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { Registration } from "@features/other";
+import { BREAKPOINT } from "@shared/config";
 
 interface HowItWorksProps {
   page: string;
@@ -175,7 +176,7 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
                 <div className={styles.text}></div>
               </div>
             </div>
-          ) : screen < 992 && screen > 768 ? (
+          ) : screen < BREAKPOINT.LG && screen > BREAKPOINT.MD ? (
             <div className={styles.steps__md}>
               <div className={`${styles.steps__md__row} ${styles.one}`}>
                 <motion.div

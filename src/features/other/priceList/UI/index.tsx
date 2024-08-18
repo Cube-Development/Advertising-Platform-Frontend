@@ -1,36 +1,36 @@
-import { FC, ReactElement, useEffect, useState } from "react";
-import styles from "./styles.module.scss";
-import { IPrice } from "@shared/types/translate";
-// import {
-//   Carousel,
-//   CarouselContent,
-//   CarouselItem,
-// } from "@shared/ui/shadcn-ui/ui/carousel";
-
-import { Swiper, SwiperSlide } from "swiper/react";
-
+import { TarifParameters } from "@entities/project";
+import { ITarifInfo } from "@shared/types/translate";
+import { FC, useEffect, useState } from "react";
+import SwiperCore from "swiper";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
-
-import SwiperCore from "swiper";
 import { EffectCoverflow } from "swiper/modules";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { BuyTarif } from "../buyTarif";
 import { PriceCard } from "../card";
+import styles from "./styles.module.scss";
+import { BREAKPOINT } from "@shared/config";
 
 // Инициализация эффектов Swiper
 SwiperCore.use([EffectCoverflow]);
 
 interface PriceListProps {
-  tarifs: IPrice[];
-  buyBtn: ReactElement;
+  tarifs: ITarifInfo[];
 }
 
-export const PriceList: FC<PriceListProps> = ({ tarifs, buyBtn }) => {
-  const [currentTarif, setTarif] = useState<number>(1);
+export const PriceList: FC<PriceListProps> = ({ tarifs }) => {
+  const [currentTarif, setTarif] = useState<number | null>(null);
   const [screen, setScreen] = useState<number>(window.innerWidth);
+  // const [isOpenBuySidebar, setOpenBuySidebar] = useState<boolean>(false);
 
-  const handleChangeTarif = (tarifType: number) => {
-    setTarif(tarifType);
-  };
+  // const handleChangeTarif = (tarifType: number) => {
+  //   setTarif(tarifType);
+  // };
+  // const handleToggleBuySidebar = (tarif: number | null, toggle: boolean) => {
+  //   setTarif(tarif);
+  //   setOpenBuySidebar(toggle);
+  // };
+
   const duplicateTarifs = tarifs.concat(tarifs);
 
   useEffect(() => {
@@ -44,21 +44,34 @@ export const PriceList: FC<PriceListProps> = ({ tarifs, buyBtn }) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
   return (
     <>
-      {screen >= 992 ? (
+      {/* {
+        currentTarif &&
+        <BuySidebar
+        isOpen={isOpenBuySidebar}
+        onChange={handleToggleBuySidebar}
+        tarif={currentTarif}
+        />
+      } */}
+      {screen >= BREAKPOINT.LG ? (
         <div className={styles.tarifs}>
-          {tarifs.map((price, index) => (
-            <div key={index} className={styles.slide}>
-              <PriceCard
-                price={price}
-                buyBtn={buyBtn}
-                tarifType={index}
-                currentTarif={currentTarif}
-                onChange={handleChangeTarif}
-              />
-            </div>
-          ))}
+          {tarifs.map((tarifInfo, index) => {
+            const tarifIndex = TarifParameters.find(
+              (item) => item.type === tarifInfo.type,
+            )?.index!;
+
+            return (
+              <div key={index} className={styles.slide}>
+                <PriceCard
+                  tarifInfo={tarifInfo}
+                  BuyBtn={<BuyTarif tarif={tarifIndex} />}
+                  isActive={tarifIndex === currentTarif}
+                />
+              </div>
+            );
+          })}
         </div>
       ) : (
         <div className={styles.carousel}>
@@ -99,44 +112,22 @@ export const PriceList: FC<PriceListProps> = ({ tarifs, buyBtn }) => {
             }}
             className={styles.wrapper}
           >
-            {duplicateTarifs.map((price, index) => (
-              <SwiperSlide key={index} className={"slide__price"}>
-                <PriceCard
-                  key={index}
-                  price={price}
-                  buyBtn={buyBtn}
-                  tarifType={index}
-                  currentTarif={currentTarif}
-                  onChange={handleChangeTarif}
-                />
-              </SwiperSlide>
-            ))}
-          </Swiper>
+            {duplicateTarifs.map((tarifInfo, index) => {
+              const tarifIndex = TarifParameters.find(
+                (item) => item.type === tarifInfo.type,
+              )?.index!;
 
-          {/* <Carousel
-          opts={{
-            align: "start",
-            loop: true,
-          }}
-        >
-          <CarouselContent>
-            {tarifs.map((price, index) => (
-              <CarouselItem key={index} className="basis-1/3">
-                <div className={`${index !== 1 ? styles.side__card : ""}`}
-                >
+              return (
+                <SwiperSlide key={index} className="slide__price">
                   <PriceCard
-                    key={index}
-                    price={price}
-                    buyBtn={buyBtn}
-                    tarifType={index}
-                    currentTarif={currentTarif}
-                    onChange={handleChangeTarif}
+                    tarifInfo={tarifInfo}
+                    BuyBtn={<BuyTarif tarif={tarifIndex} />}
+                    isActive={tarifIndex === currentTarif}
                   />
-                </div>
-              </CarouselItem>
-            ))}
-          </CarouselContent>
-        </Carousel> */}
+                </SwiperSlide>
+              );
+            })}
+          </Swiper>
         </div>
       )}
     </>

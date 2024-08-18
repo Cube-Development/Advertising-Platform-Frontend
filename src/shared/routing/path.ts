@@ -16,5 +16,6 @@ export enum paths {
   orders = "/orders",
   offers = "/offers",
   myChannels = "/channels",
+  channel = "/channel",
   faq = "/faq",
 }

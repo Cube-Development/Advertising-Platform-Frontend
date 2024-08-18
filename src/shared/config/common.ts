@@ -9,9 +9,11 @@ export const enum INTERSECTION_ELEMENTS {
   platforms = 4,
   modPlatforms = 4,
   channels = 15,
-  history = 1000,
+  history = 10,
   chat = 20,
   managerOrders = 4,
+  review = 4,
+  reccomendCards = 10,
 }
 
 export const enum BREAKPOINT {

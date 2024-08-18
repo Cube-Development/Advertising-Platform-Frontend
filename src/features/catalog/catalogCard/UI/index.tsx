@@ -1,4 +1,11 @@
 import {
+  ICatalogCard,
+  ICatalogChannel,
+  IChangeCards,
+  IFormat,
+  platformToIcon,
+} from "@entities/project";
+import {
   ArrowSmallVerticalIcon,
   BoyIcon,
   EyeIcon,
@@ -6,19 +13,12 @@ import {
   RatingIcon,
   SubsIcon,
 } from "@shared/assets";
+import { BREAKPOINT } from "@shared/config";
+import { pageFilter } from "@shared/routing";
+import { AccordionContent, AccordionItem, AccordionTrigger } from "@shared/ui";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import {
-  ICatalogCard,
-  ICatalogChannel,
-  IChangeCards,
-  IFormat,
-  platformToIcon,
-} from "@entities/project";
-import { BREAKPOINT } from "@shared/config";
-import { AccordionContent, AccordionItem, AccordionTrigger } from "@shared/ui";
-import { pageFilter } from "@shared/routing";
 
 interface CatalogCardProps extends IChangeCards, ICatalogCard {
   card: ICatalogChannel;

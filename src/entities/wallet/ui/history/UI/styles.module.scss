@@ -5,35 +5,117 @@
       10vw,
       15vw
     )
-    minmax(20vw, 30vw);
+    minmax(20vw, 20vw);
   align-items: center;
+  border-bottom: 1px solid var(--Containers);
+  padding: 20px;
+  column-gap: 15px;
 
-  border-radius: 12px;
-  border: 1px solid var(--Containers);
-  background: var(--Personal-colors-White);
-  padding: 10px 0;
+  @media (max-width: 992px) {
+    padding: 10px 15px;
+    column-gap: 10px;
+  }
 
   div {
-    padding: 15px 30px;
-    p {
-      color: var(--Personal-colors-black);
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 500;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
+    padding: 15px 0;
+    color: var(--Personal-colors-black);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    @media (max-width: 992px) {
+      font-size: 14px;
     }
+  }
+
+  .info,
+  .datetime {
+    border-right: 1px solid #d9d9d9;
+  }
+
+  .datetime {
+    @media (max-width: 992px) {
+      text-align: center;
+    }
+  }
+
+  .status {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: space-between;
   }
 }
 
-.info {
-  border-right: 1px solid #d9d9d9;
-}
-
-.status {
+.wrapper__card {
   display: grid;
-  grid-auto-flow: column;
-  align-items: center;
-  justify-content: space-between;
+  grid-auto-flow: row;
+  padding: 0 10px;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.12);
+
+  .top {
+    display: grid;
+    grid-auto-flow: column;
+    justify-content: space-between;
+    padding: 10px 20px 10px 0;
+    border-bottom: 1px solid #d9d9d9;
+
+    .left {
+      display: grid;
+      grid-auto-flow: row;
+      row-gap: 10px;
+
+      p {
+        color: var(--Personal-colors-black);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 1;
+      }
+
+      span {
+        color: #8c8c8c;
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1;
+      }
+    }
+
+    .right {
+      display: grid;
+      justify-content: flex-end;
+      align-items: center;
+      transform: rotate(90deg);
+    }
+  }
+
+  .bottom {
+    display: grid;
+    grid-auto-flow: row;
+
+    .info__row {
+      display: grid;
+      grid-auto-flow: column;
+      justify-content: space-between;
+      padding: 10px 0;
+
+      p {
+        color: var(--choosen-text);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1;
+      }
+
+      span {
+        color: var(--Personal-colors-black);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1;
+      }
+    }
+  }
 }

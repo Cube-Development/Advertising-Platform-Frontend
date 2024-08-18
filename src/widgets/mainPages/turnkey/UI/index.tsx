@@ -1,11 +1,10 @@
+import { PriceList } from "@features/other";
 import { KeyIcon } from "@shared/assets";
+import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
+import { motion } from "framer-motion";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
-import { motion } from "framer-motion";
-import { PriceList } from "@features/other";
-import { BuyTarif } from "@features/turnkey";
 
 interface TurnkeyProps {
   page: string;
@@ -54,10 +53,7 @@ export const Turnkey: FC<TurnkeyProps> = ({ page }) => {
         custom={custom++}
         variants={MAIN_PAGE_ANIMATION.animationVision}
       > */}
-      <PriceList
-        tarifs={t(`${page}.tarifs_list`, { returnObjects: true })}
-        buyBtn={<BuyTarif />}
-      />
+      <PriceList tarifs={t(`${page}.tarifs_list`, { returnObjects: true })} />
       {/* </motion.div> */}
     </motion.section>
   );

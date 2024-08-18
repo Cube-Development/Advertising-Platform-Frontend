@@ -216,7 +216,7 @@ export const IphoneScreen = () => (
       </mask>
       <style>
         {
-          ".cls-10,.cls-15,.cls-16,.cls-17,.cls-2,.cls-4,.cls-8{stroke-width:0}.cls-2{fill:rgba(255,255,255,.8)}.cls-20,.cls-4{fill:none}.cls-20{stroke:rgba(0,0,0,.5);stroke-width:.51px}.cls-8{isolation:isolate;opacity:.2}.cls-15{fill:#b4ad98}.cls-16{fill:#fff}.cls-17{fill-rule:evenodd}"
+          ".cls-10,.cls-15,.cls-16,.cls-17,.cls-2,.cls-4,.cls-8{strokeWidth:0}.cls-2{fill:rgba(255,255,255,.8)}.cls-20,.cls-4{fill:none}.cls-20{stroke:rgba(0,0,0,.5);strokeWidth:.51px}.cls-8{isolation:isolate;opacity:.2}.cls-15{fill:#b4ad98}.cls-16{fill:#fff}.cls-17{fill-rule:evenodd}"
         }
       </style>
     </defs>

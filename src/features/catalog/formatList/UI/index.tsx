@@ -2,11 +2,13 @@ import { FC, useEffect, useRef, useState } from "react";
 import styles from "./styles.module.scss";
 import { ArrowSmallVerticalIcon } from "@shared/assets";
 import { IFormat, IFormatListProps } from "@entities/project";
+import { BREAKPOINT } from "@shared/config";
 
 export const FormatList: FC<IFormatListProps> = ({
   changeFormat,
   card,
   selectedFormat,
+  isSmall,
 }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [screen, setScreen] = useState<number>(window.innerWidth);
@@ -65,7 +67,7 @@ export const FormatList: FC<IFormatListProps> = ({
           />
         </div>
         <p>
-          {screen > 576
+          {screen > BREAKPOINT.SM && !isSmall
             ? selectedFormat?.format_name.big
             : selectedFormat?.format_name.small}
         </p>
@@ -83,7 +85,7 @@ export const FormatList: FC<IFormatListProps> = ({
                   selectedFormat?.format === format.format ? styles.active : ""
                 }
               >
-                {screen > 576
+                {screen > BREAKPOINT.SM && !isSmall
                   ? format.format_name.big
                   : format.format_name.small}
               </li>

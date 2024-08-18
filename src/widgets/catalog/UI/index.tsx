@@ -1,11 +1,3 @@
-import Cookies from "js-cookie";
-import { FC, useEffect, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import { CatalogCart, CatalogList, CatalogSearch } from "../components";
-import { ToastAction, useToast } from "@shared/ui";
-import { BREAKPOINT, INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 import { PLATFORM_PARAMETERS, channelData } from "@entities/channel";
 import { platformTypesNum } from "@entities/platform";
 import {
@@ -25,7 +17,15 @@ import {
   useRemoveFromPublicCartMutation,
 } from "@entities/project";
 import { GenerateGuestId, GetUserId, roles } from "@entities/user";
+import { BREAKPOINT, INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 import { useAppSelector } from "@shared/hooks";
+import { ToastAction, useToast } from "@shared/ui";
+import Cookies from "js-cookie";
+import { FC, useEffect, useRef, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { CatalogCart, CatalogList, CatalogSearch } from "../components";
+import styles from "./styles.module.scss";
 
 export const CatalogBlock: FC = () => {
   const { toast } = useToast();
@@ -119,6 +119,7 @@ export const CatalogBlock: FC = () => {
     //   behavior: "smooth",
     // });
   }, [filter, sort, lang]);
+
   useEffect(() => {
     if (catalog && formFields.page !== 1) {
       setCards([...cards, ...catalog.channels]);

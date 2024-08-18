@@ -1,1 +1,1 @@
-export * from "./UI";
+export { WalletHistoryPage } from "./UI";

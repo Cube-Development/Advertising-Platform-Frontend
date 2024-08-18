@@ -1,1 +1,1 @@
-export * from "./UI/index";
+export { OffersPage } from "./UI";
