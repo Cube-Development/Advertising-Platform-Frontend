@@ -11,7 +11,7 @@ import {
   TrashBasketIcon,
   YesIcon,
 } from "@shared/assets";
-import { HandshakeIcon2 } from "@shared/assets/icons/handshake2";
+import { HandshakeIcon2 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
 import { useAppSelector } from "@shared/hooks";
 import { paths } from "@shared/routing";
@@ -21,11 +21,10 @@ import {
   DrawerClose,
   DrawerTrigger,
   formatFileSize,
-  MyButton,
   ToastAction,
   useToast,
+  ScrollArea,
 } from "@shared/ui";
-import { ScrollArea } from "@shared/ui/shadcn-ui/ui/scroll-area";
 import { AnimatePresence, motion } from "framer-motion";
 import { FileIcon, InfoIcon } from "lucide-react";
 import { FC, useEffect, useRef, useState } from "react";

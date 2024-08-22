@@ -19,7 +19,7 @@ export const ProjectCardSkeleton: FC<ProjectCardSkeletonProps> = ({
   statusFilter,
 }) => {
   return (
-    <Skeleton className="bg-skeleton-light rounded-[12px]">
+    <Skeleton className="bg-skeleton-light rounded-[20px]">
       <div className={styles.wrapper}>
         <div className={styles.card}>
           <div className={styles.card__description}>

@@ -17,12 +17,12 @@ export const PriceCard: FC<PriceCardProps> = ({
   return (
     <div className={`${styles.price__card} ${isActive ? styles.active : ""}`}>
       <div className={styles.content}>
-        <div className={styles.top}>
+        <div className={`${styles.top} truncate`}>
           <p className={styles.title}>{tarifInfo.name}</p>
-          <p className={styles.views}>{tarifInfo.views}</p>
+          <p className={`${styles.views} truncate`}>{tarifInfo.views}</p>
         </div>
-        <div className={styles.price}>
-          <p>{tarifInfo.price}</p>
+        <div className={`${styles.price} truncate`}>
+          <p className="truncate">{tarifInfo.price}</p>
         </div>
         <div className={styles.buy_tarif}>
           {BuyBtn}

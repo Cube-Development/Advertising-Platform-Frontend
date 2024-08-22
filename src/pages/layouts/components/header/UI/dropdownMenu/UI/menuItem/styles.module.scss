@@ -50,6 +50,10 @@
       font-weight: 600;
       line-height: normal;
 
+      @media (max-width: 576px) {
+        font-weight: 500;
+      }
+
       svg {
         min-width: 20px;
         min-height: 20px;

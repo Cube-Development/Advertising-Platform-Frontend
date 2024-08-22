@@ -14,11 +14,11 @@ export const ModChannelCard: FC<ModChannelCardProps> = ({ card }) => {
     <div className={`${styles.card} border__gradient`}>
       <div className={styles.card__preview}>
         <div className={styles.card__preview__logo}>
-          <img src={card.avatar} alt="" />
+          <img src={card?.avatar} alt="" />
         </div>
         <div className={styles.card__preview__description}>
-          <p>{card.name}</p>
-          <span>{card.category}</span>
+          <p className="truncate">{card?.name}</p>
+          <span className="truncate">{card?.category}</span>
         </div>
       </div>
       <div className={styles.card__date}>

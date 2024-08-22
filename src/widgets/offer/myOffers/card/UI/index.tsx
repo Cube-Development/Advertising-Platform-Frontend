@@ -53,7 +53,7 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter }) => {
   }
   return (
     <div
-      className={`${styles.card} ${offerStatusChat.includes(statusFilter as offerStatusFilter) ? styles.chat : styles.no__chat} border__gradientt`}
+      className={`${styles.card} ${offerStatusChat.includes(statusFilter as offerStatusFilter) ? styles.chat : styles.no__chat} border__gradient`}
     >
       <div className={styles.card__info}>
         <div className={styles.card__info__data}>

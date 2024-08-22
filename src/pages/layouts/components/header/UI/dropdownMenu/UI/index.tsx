@@ -18,7 +18,7 @@ import { MenuItem } from "./menuItem";
 import { roles } from "@entities/user";
 import { IMenuItem } from "@pages/layouts/components/config";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
-import { Accordion } from "@shared/ui";
+import { Accordion, ScrollArea } from "@shared/ui";
 import { setDropDownMenu } from "@pages/layouts/model";
 
 interface DropdownMenuProps {
@@ -129,37 +129,59 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
                   <div className={styles.close__icon} />
                 </button>
               </div>
-              <div className={styles.menu__switcher}>
-                <div className={styles.menu__switcher__row}>
-                  <Link to={paths.main}>
-                    <p
-                      className={`${
-                        currentRole === roles.advertiser ? styles.active : ""
-                      }`}
-                      onClick={() => {
-                        toggleRole(roles.advertiser);
-                      }}
-                    >
-                      {t("roles.advertiser")}
-                    </p>
-                  </Link>
-                  <Link to={paths.mainBlogger}>
-                    <p
-                      className={`${
-                        currentRole === roles.blogger ? styles.active : ""
-                      }`}
-                      onClick={() => {
-                        toggleRole(roles.blogger);
-                      }}
-                    >
-                      {t("roles.blogger")}
-                    </p>
-                  </Link>
-                </div>
-                {screen < 1100 && (
+              <ScrollArea className="h-[calc(100svh_-_80px)]">
+                <div className={styles.menu__switcher}>
+                  <div className={styles.menu__switcher__row}>
+                    <Link to={paths.main}>
+                      <p
+                        className={`${
+                          currentRole === roles.advertiser ? styles.active : ""
+                        }`}
+                        onClick={() => {
+                          toggleRole(roles.advertiser);
+                        }}
+                      >
+                        {t("roles.advertiser")}
+                      </p>
+                    </Link>
+                    <Link to={paths.mainBlogger}>
+                      <p
+                        className={`${
+                          currentRole === roles.blogger ? styles.active : ""
+                        }`}
+                        onClick={() => {
+                          toggleRole(roles.blogger);
+                        }}
+                      >
+                        {t("roles.blogger")}
+                      </p>
+                    </Link>
+                  </div>
+                  {screen < 1100 && (
+                    <div className={styles.accordion__block}>
+                      <p className={styles.accordion__title}>
+                        {t("burger_menu.services")}
+                      </p>
+                      <Accordion
+                        type="single"
+                        collapsible
+                        defaultValue={`item-${dropdownMenu.title}`}
+                        className={styles.menu__accordion}
+                      >
+                        {serviceMenu.map((item) => (
+                          <MenuItem
+                            key={item.item.title}
+                            item={item}
+                            onChange={toggleMenu}
+                            openTitle={dropdownMenu.title}
+                          />
+                        ))}
+                      </Accordion>
+                    </div>
+                  )}
                   <div className={styles.accordion__block}>
                     <p className={styles.accordion__title}>
-                      {t("burger_menu.services")}
+                      {t("burger_menu.navigation")}
                     </p>
                     <Accordion
                       type="single"
@@ -167,7 +189,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
                       defaultValue={`item-${dropdownMenu.title}`}
                       className={styles.menu__accordion}
                     >
-                      {serviceMenu.map((item) => (
+                      {combinedMenu.map((item) => (
                         <MenuItem
                           key={item.item.title}
                           item={item}
@@ -177,28 +199,8 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
                       ))}
                     </Accordion>
                   </div>
-                )}
-                <div className={styles.accordion__block}>
-                  <p className={styles.accordion__title}>
-                    {t("burger_menu.navigation")}
-                  </p>
-                  <Accordion
-                    type="single"
-                    collapsible
-                    defaultValue={`item-${dropdownMenu.title}`}
-                    className={styles.menu__accordion}
-                  >
-                    {combinedMenu.map((item) => (
-                      <MenuItem
-                        key={item.item.title}
-                        item={item}
-                        onChange={toggleMenu}
-                        openTitle={dropdownMenu.title}
-                      />
-                    ))}
-                  </Accordion>
                 </div>
-              </div>
+              </ScrollArea>
             </div>
           </motion.div>
         )}

@@ -4,7 +4,7 @@ import styles from "./styles.module.scss";
 
 export const OfferCardSkeleton: FC = () => {
   return (
-    <Skeleton className="bg-skeleton-light rounded-[12px]">
+    <Skeleton className="bg-skeleton-light rounded-[20px]">
       <div className={styles.card}>
         <div className={styles.card__title}>
           <div className={styles.card__title__top}>

@@ -7,14 +7,13 @@ import {
 import { IBuyTarif } from "@entities/project/types/turnkey";
 import {
   AddFileIcon,
+  HandshakeIcon2,
   SadSmileIcon,
   TrashBasketIcon,
   YesIcon,
 } from "@shared/assets";
-import { HandshakeIcon2 } from "@shared/assets/icons/handshake2";
 import { useAppSelector } from "@shared/hooks";
-import { formatFileSize, ToastAction, useToast } from "@shared/ui";
-import { ScrollArea } from "@shared/ui/shadcn-ui/ui/scroll-area";
+import { formatFileSize, ScrollArea, ToastAction, useToast } from "@shared/ui";
 import { AnimatePresence, motion } from "framer-motion";
 import { FileIcon, InfoIcon } from "lucide-react";
 import { FC, useEffect, useRef, useState } from "react";

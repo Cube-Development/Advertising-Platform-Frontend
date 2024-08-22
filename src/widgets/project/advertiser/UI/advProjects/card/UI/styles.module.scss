@@ -2,8 +2,6 @@
   display: grid;
   grid-auto-flow: row;
   row-gap: 20px;
-  border-radius: 12px;
-  box-shadow: inset 0px 0px 4px rgba(146, 71, 245, 0.5);
   padding-top: 20px;
   min-height: 210px;
 
@@ -30,6 +28,7 @@
           display: grid;
           grid-auto-flow: row;
           row-gap: 10px;
+
           p {
             color: var(--Personal-colors-black);
             font-size: 16px;
@@ -37,6 +36,7 @@
             font-weight: 600;
             line-height: 0.75;
           }
+
           span {
             color: var(--Personal-colors-black);
             font-size: 12px;
@@ -97,6 +97,7 @@
           column-gap: 10px;
           justify-content: start;
           align-items: center;
+
           p {
             color: var(--Personal-colors-black);
             font-size: 14px;
@@ -141,7 +142,7 @@
           column-gap: 10px;
           padding: 10px 20px;
           border-radius: 8px;
-          border: 1px solid var(--Personal-colors-main);
+          box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.2);
 
           p {
             color: var(--Personal-colors-black);
@@ -157,6 +158,7 @@
         display: grid;
         grid-template: 1fr / 1fr 1fr;
         column-gap: 20px;
+
         div {
           display: grid;
           grid-auto-flow: column;
@@ -164,7 +166,7 @@
           column-gap: 10px;
           padding: 10px 20px;
           border-radius: 8px;
-          border: 1px solid var(--Personal-colors-main);
+          box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.2);
 
           p {
             text-align: end;
@@ -183,13 +185,8 @@
     display: grid;
     grid-auto-flow: row;
     align-items: center;
-    // border-right: 0.5px solid var(--Personal-colors-main);
-    // border-left: 0.5px solid var(--Personal-colors-main);
-    // border-top: 0.5px solid var(--Personal-colors-main);
     row-gap: 10px;
     padding: 10px;
-    // padding: 10px 10px 0 10px;
-    // border-radius: 12px 12px 0 0;
   }
 }
 
@@ -216,7 +213,6 @@
   column-gap: 10px;
   align-items: center;
   justify-content: center;
-  padding: 11px 0;
   width: 100%;
 
   color: var(--Personal-colors-White);
@@ -224,8 +220,8 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  line-height: 0.75;
-  border-radius: 12px;
+  padding: 12px 0;
+  border-radius: 0px 0px 20px 20px;
 
   background: var(--Gradients-Gradient-1);
 }
