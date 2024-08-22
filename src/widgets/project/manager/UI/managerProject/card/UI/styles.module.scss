@@ -2,11 +2,7 @@
   display: grid;
   grid-auto-flow: row;
   row-gap: 20px;
-  // border-radius: 12px;
-  // box-shadow: inset 0px 0px 0px 1.5px var(--Personal-colors-main);
-  // border: 1px solid var(--Personal-colors-main);
   padding-top: 20px;
-  // height: 210px;
 
   .card {
     display: grid;
@@ -300,7 +296,7 @@
   column-gap: 10px;
   align-items: center;
   justify-content: center;
-  padding: 11px 0;
+  padding: 12px 0;
   width: 100%;
 
   color: var(--Personal-colors-White);
@@ -309,6 +305,6 @@
   font-weight: 500;
   line-height: normal;
   line-height: 0.75;
-  border-radius: 12px;
+  border-radius: 0px 0px 16px 16px;
   background: var(--Gradients-Gradient-1);
 }

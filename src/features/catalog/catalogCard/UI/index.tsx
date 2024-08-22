@@ -95,7 +95,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
           <div className={styles.column__info}>
             <div className={styles.info}>
               <p className={`${styles.title} truncate`}>{card?.name}</p>
-              <p className={styles.category}>{card?.category}</p>
+              <p className={`${styles.category} truncate`}>{card?.category}</p>
               {screen >= BREAKPOINT.MD ? (
                 <span className={styles.description}>{card?.description}</span>
               ) : (

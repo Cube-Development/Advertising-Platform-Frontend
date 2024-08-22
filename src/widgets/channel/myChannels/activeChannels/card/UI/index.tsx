@@ -106,7 +106,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
   }, []);
 
   return (
-    <div className={styles.wrapper}>
+    <div className={`${styles.wrapper} border__gradient`}>
       <div className={styles.card}>
         <div className={styles.card__logo}>
           <div className={styles.logo}>
@@ -119,11 +119,11 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
             )}
           </div>
         </div>
-        <div className={styles.card__description}>
+        <div className={`${styles.card__description} truncate`}>
           <div className={styles.card__description__top}>
             <div className={styles.card__description__top__text}>
-              <p>{card?.name}</p>
-              <span>{card?.category}</span>
+              <p className="truncate">{card?.name}</p>
+              <span className="truncate">{card?.category}</span>
             </div>
             <div className={styles.card__description__top__icons}>
               {statusFilter === channelStatusFilter.banned ? (

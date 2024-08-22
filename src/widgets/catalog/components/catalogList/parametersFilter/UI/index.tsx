@@ -28,9 +28,14 @@ import {
   useGetCompanyCategoriesQuery,
 } from "@entities/channel";
 import { AIRecommendCARDS, BREAKPOINT, Languages } from "@shared/config";
-import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from "@shared/ui";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerTrigger,
+  ScrollArea,
+} from "@shared/ui";
 import { pageFilter } from "@shared/routing";
-import { ScrollArea } from "@shared/ui/shadcn-ui/ui/scroll-area";
 
 interface ParametersFilterProps {
   setValue: UseFormSetValue<getCatalogReq>;
@@ -129,7 +134,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
               </div>
             </DrawerClose>
           </div>
-          <ScrollArea>
+          <ScrollArea className="h-full">
             <div className={styles.wrapper}>
               <BarSubfilter
                 resetValues={resetRecommendationCard}

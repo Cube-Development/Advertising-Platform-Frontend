@@ -1,4 +1,4 @@
-import { EyeDisabledIcon } from "@shared/assets/icons/eyeDisabled";
+import { EyeDisabledIcon } from "@shared/assets";
 import { MyButton } from "@shared/ui";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";

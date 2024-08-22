@@ -8,7 +8,7 @@ export const SkeletonAdvDevProjectCard: FC<
   SkeletonAdvDevProjectCardProps
 > = () => {
   return (
-    <Skeleton className="bg-skeleton-light rounded-[12px]">
+    <Skeleton className="bg-skeleton-light rounded-[20px]">
       <div className={styles.card}>
         <div className={styles.card__title}>
           <Skeleton className="h-3 w-[150px]" />

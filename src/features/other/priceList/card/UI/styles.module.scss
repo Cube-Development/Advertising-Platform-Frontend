@@ -115,12 +115,16 @@
         grid-auto-flow: column;
         text-align: left;
         justify-content: start;
+        align-items: center;
         column-gap: 10px;
         font-style: normal;
         font-weight: 600;
         line-height: normal;
-
         font-size: var(--font-size-option-item-xl);
+
+        @media (max-width: 576px) {
+          font-weight: 500;
+        }
 
         svg {
           width: 15px;

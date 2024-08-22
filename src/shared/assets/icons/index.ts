@@ -89,3 +89,5 @@ export { IphoneScreen } from "./iphonescreen";
 export { YouTubeIcon } from "./youtube";
 export { FeatherIcon } from "./feather";
 export { EyeDisabledIcon } from "./eyeDisabled";
+export { SaveIcon } from "./save";
+export { HandshakeIcon2 } from "./handshake2";

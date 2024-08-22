@@ -208,9 +208,10 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
             "--borderMass": "2px",
           } as React.CSSProperties
         }
-        className="border__gradient"
+        // className="border__gradient"
         value={`item-${card.id}`}
         ref={accordionRef}
+        className="border-none"
       >
         <AccordionContent>
           <div className={`${styles.subcard} `}>

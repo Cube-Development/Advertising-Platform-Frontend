@@ -35,8 +35,6 @@
       display: grid;
       grid-auto-flow: row;
 
-      // justify-content: center;
-
       &__row {
         display: grid;
         grid-template: 1fr / 1fr 1fr;

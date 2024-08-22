@@ -1,7 +1,7 @@
-import { EyeDisabledIcon } from "@shared/assets/icons/eyeDisabled";
 import { MyButton } from "@shared/ui";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
+import { EyeDisabledIcon } from "@shared/assets";
 
 export const EmptyPost = () => {
   const { t } = useTranslation();
