@@ -9,7 +9,16 @@
 <circle cx="809" cy="2522" r="524" stroke="#DFCFF9" stroke-width="2"/>
 <circle cx="809" cy="2522" r="699" stroke="#DFCFF9" stroke-width="2"/>
 <circle cx="809" cy="2522" r="261.5" stroke="#DFCFF9" stroke-width="2"/>
+<g filter="url(#filter0_b_3979_2754)">
+<rect width="3008" height="4817" fill="white" fill-opacity="0.01"/>
+</g>
 <defs>
+<filter id="filter0_b_3979_2754" x="-300" y="-300" width="3608" height="5417" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+<feFlood flood-opacity="0" result="BackgroundImageFix"/>
+<feGaussianBlur in="BackgroundImageFix" stdDeviation="150"/>
+<feComposite in2="SourceAlpha" operator="in" result="effect1_backgroundBlur_3979_2754"/>
+<feBlend mode="normal" in="SourceGraphic" in2="effect1_backgroundBlur_3979_2754" result="shape"/>
+</filter>
 <linearGradient id="paint0_linear_3979_2754" x1="0" y1="2408.5" x2="3008" y2="2408.5" gradientUnits="userSpaceOnUse">
 <stop offset="1" stop-color="#F7F9FE"/>
 <stop offset="1" stop-color="#F9F8FE"/>

@@ -1,25 +1,5 @@
 .customer {
-  display: grid;
-  grid-auto-flow: row;
-  row-gap: var(--row-gap-content-xl);
   margin: 0 auto 200px auto;
-  max-width: var(--container-width);
-
-  @media (max-width: 992px) {
-    row-gap: var(--row-gap-content-lg);
-  }
-
-  @media (max-width: 768px) {
-    row-gap: var(--row-gap-content-md);
-  }
-
-  @media (max-width: 576px) {
-    row-gap: var(--row-gap-content-sm);
-  }
-
-  @media (max-width: 375px) {
-    row-gap: var(--row-gap-content-xs);
-  }
 
   &__title {
     color: var(--Personal-colors-black);
@@ -30,25 +10,33 @@
     font-size: var(--font-size-title-main-xl);
     padding: 0 var(--container-padding-xl-side);
 
+    max-width: var(--container-width);
+    margin: 0 auto;
+    padding-bottom: var(--row-gap-content-xl);
+
     @media (max-width: 992px) {
       padding: 0 var(--container-padding-lg-side);
       font-size: var(--font-size-title-main-lg);
+      padding-bottom: var(--row-gap-content-lg);
     }
 
     @media (max-width: 768px) {
       padding: 0 var(--container-padding-md-side);
       font-size: var(--font-size-title-main-md);
+      padding-bottom: var(--row-gap-content-md);
     }
 
     @media (max-width: 576px) {
       padding: 0 var(--container-padding-sm-side);
       font-size: var(--font-size-title-main-sm);
       text-align: center;
+      padding-bottom: var(--row-gap-content-sm);
     }
 
     @media (max-width: 375px) {
       padding: 0 var(--container-padding-xs-side);
       font-size: var(--font-size-title-main-xs);
+      padding-bottom: var(--row-gap-content-xs);
     }
   }
 }

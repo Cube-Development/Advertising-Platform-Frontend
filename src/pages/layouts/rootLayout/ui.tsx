@@ -1,7 +1,7 @@
-import { Outlet } from "react-router-dom";
-import { Toaster } from "@shared/ui/shadcn-ui/ui/toaster";
+import { Outlet, ScrollRestoration } from "react-router-dom";
 import { MainLayout } from "./mainLayout";
 import { HandleAuth } from "@features/other";
+import { Toaster } from "@shared/ui";
 
 export const RootLayout = () => {
   return (
@@ -9,6 +9,7 @@ export const RootLayout = () => {
       <HandleAuth />
       <Outlet />
       <Toaster />
+      <ScrollRestoration />
     </MainLayout>
   );
 };

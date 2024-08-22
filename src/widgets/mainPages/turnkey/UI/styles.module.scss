@@ -1,7 +1,8 @@
 .wrapper {
   display: grid;
   grid-auto-flow: row;
-  background-image: url("/images/assets/turnkey.svg");
+  // background-image: url("/images/assets/turnkey.svg");
+  background: var(--Gradients-Gradient-7);
   background-size: cover;
   background-position: right;
   border-radius: 50px 50px 0 0;

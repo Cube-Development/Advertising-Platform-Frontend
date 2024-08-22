@@ -1,6 +1,7 @@
 .wrapper {
   display: block;
-  top: var(--container-padding-top);
+  // top: var(--container-padding-top);
+  top: 0;
   position: fixed;
   height: 100vh;
   background: var(--Personal-colors-White);
@@ -20,10 +21,10 @@
   }
 
   .menu {
+    padding-top: var(--container-padding-top);
     display: grid;
     grid-auto-flow: row;
     row-gap: 25px;
-    // padding: 0 8px;
     justify-content: center;
 
     &__accordion {

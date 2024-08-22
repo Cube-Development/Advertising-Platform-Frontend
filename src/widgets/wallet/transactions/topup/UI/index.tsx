@@ -21,7 +21,8 @@ import {
   useReadLegalsByTypeQuery,
   useReadOneLegalMutation,
 } from "@entities/wallet";
-import { pageFilter } from "@shared/routing";
+import { pageFilter, paths } from "@shared/routing";
+import { useNavigate } from "react-router-dom";
 
 interface IExtendedProfileData extends ILegalData {
   amount: number;
@@ -31,6 +32,7 @@ export const Topup: FC = () => {
   const { toast } = useToast();
   const { t } = useTranslation();
   const [activeAccount, setActiveAccount] = useState<ILegalCard | null>(null);
+  const navigate = useNavigate();
 
   const {
     setValue,
@@ -113,7 +115,7 @@ export const Topup: FC = () => {
           .unwrap()
           .then(() => {
             reset();
-            // alert(`Баланс успешно пополнен на сумму: ${paymentReq.amount}`);
+            navigate(paths.main);
             toast({
               variant: "success",
               title: `${t("toasts.wallet.topup.success")}: ${paymentReq.amount.toLocaleString()} ${t("symbol")}`,
@@ -147,13 +149,11 @@ export const Topup: FC = () => {
                 .unwrap()
                 .then(() => {
                   reset();
+                  navigate(paths.main);
                   toast({
                     variant: "success",
                     title: `${t("toasts.wallet.topup.success")}: ${paymentReq.amount.toLocaleString()} ${t("symbol")}`,
                   });
-                  // alert(
-                  //   `Баланс успешно пополнен на сумму: ${paymentReq.amount}`
-                  // );
                 })
                 .catch((error) => {
                   toast({
