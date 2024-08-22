@@ -31,6 +31,7 @@ export const privateCommonRoutes: IRoute[] = [
   { path: paths.wallethistory, component: WalletHistoryPage, sidebar: true },
   { path: paths.profile, component: ProfilePage, sidebar: true },
   { path: paths.addChannel, component: AddLegalPage, sidebar: true },
+  { path: paths.faq, component: FAQPage, sidebar: true },
 ];
 
 export const publicCommonRoutes: IRoute[] = [

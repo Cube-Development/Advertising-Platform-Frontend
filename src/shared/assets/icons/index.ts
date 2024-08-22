@@ -1,4 +1,5 @@
 export { AddIcon } from "./add";
+export { AddChannelIcon } from "./addChannel";
 export { AddFileIcon } from "./addFile";
 export { ArrowSmallVerticalIcon } from "./arrowSmallVertical";
 export { ArrowLongHorizontalIcon } from "./arrowLongHorizontalIcon";
@@ -9,6 +10,7 @@ export { CartIcon } from "./cart";
 export { BookIcon } from "./book";
 export { BoyIcon } from "./boy";
 export { BackIcon } from "./back";
+export { CatalogIcon } from "./catalog";
 export { ChatIcon } from "./chat";
 export { CalculatorIcon } from "./calculator";
 export { CalendarIcon } from "./calendar";
