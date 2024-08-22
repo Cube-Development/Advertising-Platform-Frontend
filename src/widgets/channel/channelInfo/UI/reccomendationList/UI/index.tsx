@@ -33,7 +33,6 @@ export const ReccomendationList: FC<ReccomendationListProps> = ({
 
   useEffect(() => {
     if (inView) {
-      console.log(true);
       changePage();
     }
   }, [inView]);

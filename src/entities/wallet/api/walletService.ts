@@ -73,6 +73,21 @@ export const walletAPI = authApi.injectEndpoints({
         method: "POST",
         params,
       }),
+      serializeQueryArgs: ({ endpointName }) => {
+        return endpointName;
+      },
+      merge: (currentCache, newItems) => {
+        return {
+          ...newItems,
+          transactions: [
+            ...currentCache.transactions,
+            ...newItems.transactions,
+          ],
+        };
+      },
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg !== previousArg;
+      },
       providesTags: [BALANCE],
     }),
   }),

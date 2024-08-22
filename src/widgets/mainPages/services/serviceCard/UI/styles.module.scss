@@ -15,6 +15,22 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+
+    @media (max-width: 992px) {
+      font-size: var(--font-size-subtitle-secondary-lg);
+    }
+
+    @media (max-width: 768px) {
+      font-size: var(--font-size-subtitle-secondary-md);
+    }
+
+    @media (max-width: 576px) {
+      font-size: var(--font-size-subtitle-secondary-sm);
+    }
+
+    @media (max-width: 375px) {
+      font-size: var(--font-size-subtitle-secondary-xs);
+    }
   }
 
   .text {
@@ -23,5 +39,9 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
+
+    @media (max-width: 576px) {
+      font-size: var(--font-size-sm-button-text);
+    }
   }
 }

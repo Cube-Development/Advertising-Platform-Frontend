@@ -1,18 +1,11 @@
-.sticky_block {
-  min-height: 300px;
-}
-
 .wrapper {
-  position: sticky;
-  top: 0;
   display: grid;
   grid-auto-flow: row;
   justify-content: center;
   padding: 30px;
   border-radius: 20px;
-  border: 0.5px solid rgba(0, 0, 0, 0.3);
   background: var(--Personal-colors-White);
-  box-shadow: 0px 5px 15px 0px rgba(0, 0, 0, 0.15);
+  box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.2);
 
   @media (max-width: 992px) {
     grid-auto-flow: column;
@@ -26,10 +19,10 @@
   }
 
   .icon {
-    display: grid;
-    grid-auto-flow: row;
-    justify-items: center;
+    display: flex;
+    justify-content: center;
     align-items: center;
+    margin-right: -10px;
 
     svg {
       height: 150px;
@@ -169,7 +162,7 @@
 
       span {
         color: var(--Personal-colors-black);
-        font-size: 24px;
+        font-size: 22px;
         font-style: normal;
         font-weight: 600;
         line-height: 1;

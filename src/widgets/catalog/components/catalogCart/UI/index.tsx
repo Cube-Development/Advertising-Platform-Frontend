@@ -26,7 +26,10 @@ export const CatalogCart: FC<CatalogCartProps> = ({ cart }) => {
         </div>
         <div className={styles.info}>
           <p>{t("catalog.current_cart.cost")}:</p>
-          <span>{cart?.amount?.toLocaleString()}</span>
+          <span>
+            {cart?.amount?.toLocaleString()}{" "}
+            <span className={styles.symbol}>{t("symbol")}</span>
+          </span>
         </div>
       </div>
       <div className={styles.cart}>
