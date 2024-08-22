@@ -1,13 +1,15 @@
 import { paths } from "@shared/routing";
 import { AnimatePresence, motion } from "framer-motion";
-import { FC, useEffect, useRef } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import {
   advertiserMenu,
   advertiserMenuNotAuth,
+  advertiserServiсeMenu,
   bloggerMenu,
   bloggerMenuNotAuth,
+  bloggerServiсeMenu,
   commonMenu,
   managerMenu,
 } from "./config";
@@ -31,10 +33,10 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
   toggleRole,
 }) => {
   const { t } = useTranslation();
-
   const { dropdownMenu } = useAppSelector((state) => state.dropdownMenu);
   const dispatch = useAppDispatch();
   const menuRef = useRef<HTMLDivElement>(null);
+  const [screen, setScreen] = useState<number>(window.innerWidth);
   const toggleMenu = (path?: string) => {
     const newMenu = { isOpen: !dropdownMenu.isOpen, title: "" };
     dispatch(setDropDownMenu(newMenu));
@@ -65,6 +67,11 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
     };
   }, [dropdownMenu.isOpen]);
 
+  const serviceMenu: IMenuItem[] =
+    currentRole === roles.advertiser
+      ? advertiserServiсeMenu
+      : bloggerServiсeMenu;
+
   const combinedMenu: IMenuItem[] = isAuth
     ? currentRole === roles.advertiser
       ? [...advertiserMenu, ...commonMenu]
@@ -82,6 +89,18 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
     open: { opacity: 1, x: "0%" },
     transition: { transition: { duration: 0.25 } },
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreen(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <div className={styles.dropdown} ref={menuRef}>
@@ -133,22 +152,48 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
                     </p>
                   </Link>
                 </div>
-
-                <Accordion
-                  type="single"
-                  collapsible
-                  defaultValue={`item-${dropdownMenu.title}`}
-                  className={styles.menu__accordion}
-                >
-                  {combinedMenu.map((item) => (
-                    <MenuItem
-                      key={item.item.title}
-                      item={item}
-                      onChange={toggleMenu}
-                      openTitle={dropdownMenu.title}
-                    />
-                  ))}
-                </Accordion>
+                {screen < 1100 && (
+                  <div className={styles.accordion__block}>
+                    <p className={styles.accordion__title}>
+                      {t("burger_menu.services")}
+                    </p>
+                    <Accordion
+                      type="single"
+                      collapsible
+                      defaultValue={`item-${dropdownMenu.title}`}
+                      className={styles.menu__accordion}
+                    >
+                      {serviceMenu.map((item) => (
+                        <MenuItem
+                          key={item.item.title}
+                          item={item}
+                          onChange={toggleMenu}
+                          openTitle={dropdownMenu.title}
+                        />
+                      ))}
+                    </Accordion>
+                  </div>
+                )}
+                <div className={styles.accordion__block}>
+                  <p className={styles.accordion__title}>
+                    {t("burger_menu.navigation")}
+                  </p>
+                  <Accordion
+                    type="single"
+                    collapsible
+                    defaultValue={`item-${dropdownMenu.title}`}
+                    className={styles.menu__accordion}
+                  >
+                    {combinedMenu.map((item) => (
+                      <MenuItem
+                        key={item.item.title}
+                        item={item}
+                        onChange={toggleMenu}
+                        openTitle={dropdownMenu.title}
+                      />
+                    ))}
+                  </Accordion>
+                </div>
               </div>
             </div>
           </motion.div>

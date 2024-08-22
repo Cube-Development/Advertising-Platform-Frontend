@@ -12,19 +12,21 @@ import {
   useGetCatalogQuery,
 } from "@entities/project";
 import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
+import Cookies from "js-cookie";
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 import { AddToCart } from "./addToCart";
 import { Information } from "./information";
-import styles from "./styles.module.scss";
-import Cookies from "js-cookie";
 import { ReccomendationList } from "./reccomendationList";
+import styles from "./styles.module.scss";
 
 interface ChannelInfoProps {}
 
 export const ChannelInfo: FC<ChannelInfoProps> = () => {
-  const channel_id = "68e794a4-2cc6-4722-8a15-4144cbd53da6";
+  // const channel_id = "68e794a4-2cc6-4722-8a15-4144cbd53da6";
+  const { id: channel_id } = useParams<{ id: string }>();
   const { i18n } = useTranslation();
   const language = Languages.find((lang) => {
     return i18n.language === lang.name;
@@ -54,7 +56,7 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
   const { filter, sort, language: lang } = formFields;
 
   const { data: card } = useGetChannelByIdQuery({
-    channel_id: channel_id,
+    channel_id: channel_id || "",
     language: language?.id || Languages[0].id,
   });
 

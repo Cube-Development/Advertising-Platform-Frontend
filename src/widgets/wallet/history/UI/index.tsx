@@ -1,16 +1,23 @@
-import { FC, useEffect, useState } from "react";
-import styles from "./styles.module.scss";
-import { useTranslation } from "react-i18next";
-import { SadSmileIcon } from "@shared/assets";
 import {
   HistoryCard,
   HistoryReq,
   IWalletHistory,
   useGetHistoryQuery,
 } from "@entities/wallet";
+import { SkeletonHistoryCard } from "@entities/wallet/ui/history/skeleton";
 import { BarHistory } from "@features/wallet";
+import { SadSmileIcon } from "@shared/assets";
+import {
+  BREAKPOINT,
+  INTERSECTION_ELEMENTS,
+  Languages,
+  MAIN_PAGE_ANIMATION,
+} from "@shared/config";
 import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
-import { BREAKPOINT, INTERSECTION_ELEMENTS, Languages } from "@shared/config";
+import { motion } from "framer-motion";
+import { FC, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 export const History: FC = () => {
   const { t, i18n } = useTranslation();
@@ -27,10 +34,11 @@ export const History: FC = () => {
     language: language?.id || Languages[0].id,
     page: currentPage,
     elements_on_page: INTERSECTION_ELEMENTS.history,
-    date_sort: "increase",
+    date_sort: "decrease",
   };
 
-  const { data, isFetching } = useGetHistoryQuery(getParams);
+  const { data, isLoading, isFetching, isSuccess } =
+    useGetHistoryQuery(getParams);
 
   const [transactions, setTransactions] = useState<IWalletHistory[]>(
     data?.transactions ? data?.transactions : [],
@@ -54,6 +62,7 @@ export const History: FC = () => {
     };
   }, []);
 
+  let custom = 0;
   return (
     <div className={`container ${screen > BREAKPOINT.LG ? "sidebar" : ""}`}>
       <div className={styles.wrapper}>
@@ -63,18 +72,33 @@ export const History: FC = () => {
         {screen > BREAKPOINT.MD && <BarHistory />}
         <div className={styles.cards}>
           {transactions?.length > 0 ? (
-            <div className={styles.cards__list}>
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={MAIN_PAGE_ANIMATION.viewport}
+              variants={MAIN_PAGE_ANIMATION.animationVision}
+              className={styles.cards__list}
+            >
               {transactions?.map((card, index) => (
-                <HistoryCard card={card} key={index} />
+                <motion.div
+                  key={index}
+                  custom={index % INTERSECTION_ELEMENTS.history}
+                  initial="hidden"
+                  animate="visible"
+                  variants={MAIN_PAGE_ANIMATION.animationUp}
+                >
+                  <HistoryCard card={card} />
+                </motion.div>
               ))}
-              {/* {data &&
-                data?.transactions?.length ===
-                  INTERSECTION_ELEMENTS.history && ( */}
+
+              {(isFetching || isLoading) &&
+                Array.from({ length: INTERSECTION_ELEMENTS.history }).map(
+                  (_, index) => <SkeletonHistoryCard key={index} />,
+                )}
               <div className={styles.show_more} onClick={handleOnChangePage}>
-                {isFetching ? <SpinnerLoader /> : <ShowMoreBtn />}
+                {isFetching || isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
               </div>
-              {/* )} */}
-            </div>
+            </motion.div>
           ) : (
             <div className={styles.empty__block}>
               <div className={styles.icon}>

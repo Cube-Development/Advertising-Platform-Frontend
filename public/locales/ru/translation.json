@@ -44,10 +44,11 @@
 
   "burger_menu": {
     "services": "Сервисы",
+    "navigation": "Навигация",
     "catalog": "Каталог площадок",
     "turnkey": "Размещение под ключ",
     "addPlatform": "Добавить канал",
-    "calculateIncome": "Рассчет доход",
+    "calculateIncome": "Рассчет дохода",
 
     "orders": "Мои Рекламные компании",
 

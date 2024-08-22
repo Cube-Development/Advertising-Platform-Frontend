@@ -4,13 +4,49 @@ import {
   BookIcon,
   CalculatorIcon,
   CampaignIcon,
+  CatalogIcon,
   KeyIcon,
   OfferIcon,
   PlatformIcon,
   TemplateIcon,
   WalletIcon,
+  AddChannelIcon,
 } from "@shared/assets";
 import { paths } from "@shared/routing";
+
+export const advertiserServiсeMenu = [
+  {
+    item: {
+      title: "burger_menu.catalog",
+      path: paths.catalog,
+      img: CatalogIcon,
+    },
+  },
+  {
+    item: {
+      title: "burger_menu.turnkey",
+      path: paths.turnkey,
+      img: KeyIcon,
+    },
+  },
+];
+
+export const bloggerServiсeMenu = [
+  {
+    item: {
+      title: "burger_menu.calculateIncome",
+      path: paths.main,
+      img: CalculatorIcon,
+    },
+  },
+  {
+    item: {
+      title: "burger_menu.addPlatform",
+      path: paths.addChannel,
+      img: AddChannelIcon,
+    },
+  },
+];
 
 export const advertiserMenu = [
   {
