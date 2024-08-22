@@ -1,7 +1,4 @@
 .customer {
-  display: grid;
-  grid-auto-flow: row;
-  row-gap: var(--row-gap-content-xl);
   margin: calc(var(--margin-section-xl)) 0 calc(var(--margin-section-xl) * 2) 0;
 
   @media (max-width: 992px) {

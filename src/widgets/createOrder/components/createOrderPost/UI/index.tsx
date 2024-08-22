@@ -137,8 +137,8 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
               platformFilter={formState.platformFilter}
             />
             <PostTypesTabs
-              selectedPlatform={formState.platformFilter.id}
-              selectedPostType={formState.selectedPostType}
+              selectedPlatform={formState?.platformFilter?.id}
+              selectedPostType={formState?.selectedPostType}
               setValue={setValue}
               formats={postFormats}
             />
@@ -155,19 +155,20 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
               )}
               <div className={styles.post_data}>
                 <div className={styles.block}>
-                  {formState.platformFilter.id === platformTypesNum.telegram &&
+                  {formState.platformFilter?.id === platformTypesNum.telegram &&
                     renderEditor({
                       platformId: platformTypesNum.telegram,
                       formState,
                       setValue,
                     })}
-                  {formState.platformFilter.id === platformTypesNum.instagram &&
+                  {formState.platformFilter?.id ===
+                    platformTypesNum.instagram &&
                     renderEditor({
                       platformId: platformTypesNum.instagram,
                       formState,
                       setValue,
                     })}
-                  {formState.platformFilter.id === platformTypesNum.youtube &&
+                  {formState.platformFilter?.id === platformTypesNum.youtube &&
                     renderEditor({
                       platformId: platformTypesNum.youtube,
                       formState,
@@ -177,7 +178,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                 <div
                   className={clsx(styles.block__bottom, {
                     [styles.filter]:
-                      formState.platformFilter.type !==
+                      formState.platformFilter?.type !==
                       platformTypesStr.telegram,
                   })}
                 >
@@ -185,7 +186,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                     AddFiles={AddFiles}
                     AddMediaFiles={AddMediaFiles}
                     setValue={setValue}
-                    platformId={formState.platformFilter.id}
+                    platformId={formState.platformFilter?.id}
                     formState={formState}
                     type={
                       formState?.selectedMultiPostId
@@ -193,12 +194,12 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                         : CreatePostFormData.posts
                     }
                   />
-                  {formState.platformFilter.type ===
+                  {formState.platformFilter?.type ===
                     platformTypesStr.telegram && (
                     <PostButtons
                       setValue={setValue}
                       formState={formState}
-                      platformId={formState.platformFilter.id}
+                      platformId={formState?.platformFilter?.id}
                       type={
                         formState?.selectedMultiPostId
                           ? CreatePostFormData.multiposts
@@ -216,29 +217,31 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                         ? CreatePostFormData.multiposts
                         : CreatePostFormData.posts
                     }
-                    platformId={formState.platformFilter.id}
+                    platformId={formState.platformFilter?.id}
                     formState={formState}
                   />
                 </div>
               </div>
               {!formState.isMultiPost && <div></div>}
               <div className={styles.display}>
-                {formState.platformFilter.type ===
+                {formState.platformFilter?.type ===
                   platformTypesStr.telegram && (
                   <DisplayTelegram
                     formState={formState}
-                    platformId={formState.platformFilter.id}
+                    platformId={formState.platformFilter?.id}
                   />
                 )}
-                {formState.platformFilter.type === platformTypesStr.instagram &&
+                {formState.platformFilter?.type ===
+                  platformTypesStr.instagram &&
                   formState.selectedPostType === PostTypesNum.feed && (
                     <DisplayFeed
                       formState={formState}
-                      platformId={formState.platformFilter.id}
+                      platformId={formState.platformFilter?.id}
                       postType={PostTypesNum.feed}
                     />
                   )}
-                {formState.platformFilter.type === platformTypesStr.instagram &&
+                {formState.platformFilter?.type ===
+                  platformTypesStr.instagram &&
                   formState.selectedPostType ===
                     PostTypesNum.FullHd_vertical && (
                     <DisplayStories
@@ -247,21 +250,21 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                       postType={PostTypesNum.FullHd_vertical}
                     />
                   )}
-                {formState.platformFilter.type === platformTypesStr.youtube &&
+                {formState.platformFilter?.type === platformTypesStr.youtube &&
                   formState.selectedPostType ===
                     PostTypesNum.FullHd_vertical && (
                     <DisplayShorts
                       formState={formState}
-                      platformId={formState.platformFilter.id}
+                      platformId={formState.platformFilter?.id}
                       postType={PostTypesNum.FullHd_vertical}
                     />
                   )}
-                {formState.platformFilter.type === platformTypesStr.youtube &&
+                {formState.platformFilter?.type === platformTypesStr.youtube &&
                   formState.selectedPostType ===
                     PostTypesNum.FullHd_horizontal && (
                     <DisplayVideos
                       formState={formState}
-                      platformId={formState.platformFilter.id}
+                      platformId={formState.platformFilter?.id}
                       postType={PostTypesNum.FullHd_horizontal}
                     />
                   )}

@@ -1,4 +1,7 @@
 .profile {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   .img {
     margin: 20px;
     width: 40px;
@@ -12,9 +15,10 @@
   position: absolute;
   margin-top: 5px;
   right: 0;
+  bottom: -110px;
   color: var(--Personal-colors-black);
   background-color: var(--Personal-colors-White);
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.2);
   z-index: 1;
   width: 170px;
   border-radius: 12px;

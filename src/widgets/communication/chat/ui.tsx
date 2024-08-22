@@ -165,7 +165,7 @@ export const Chat: FC = () => {
   };
 
   return (
-    <div>
+    <div className="flex justify-center items-center">
       {screen >= BREAKPOINT.MD ? (
         <AlertDialog>
           <AlertDialogTrigger className={styles.chat}>

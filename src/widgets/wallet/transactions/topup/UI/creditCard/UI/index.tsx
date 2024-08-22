@@ -10,6 +10,8 @@ import {
   usePaymentDepositMutation,
 } from "@entities/wallet";
 import { ToastAction, useToast } from "@shared/ui";
+import { paths } from "@shared/routing";
+import { useNavigate } from "react-router-dom";
 
 interface IOnlineBankingData {
   legal_id: string;
@@ -23,6 +25,7 @@ export const CreditCard: FC = () => {
   const [paymentType, setPaymentType] = useState<paymentTypes>(
     paymentTypes.payme,
   );
+  const navigate = useNavigate();
 
   const {
     watch,
@@ -53,6 +56,7 @@ export const CreditCard: FC = () => {
           variant: "success",
           title: `${t("toasts.wallet.topup.success")}: ${formData.amount.toLocaleString()} ${t("symbol")}`,
         });
+        navigate(paths.main);
       })
       .catch((error) => {
         toast({

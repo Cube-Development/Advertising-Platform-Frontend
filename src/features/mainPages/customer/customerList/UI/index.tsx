@@ -1,5 +1,5 @@
-import { ICustomer } from "@shared/types/translate";
 import { FC } from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import SwiperCore from "swiper";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -7,6 +7,7 @@ import "swiper/css/navigation";
 import { EffectCoverflow, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { CustomerCard } from "../../card";
+import { ICustomer } from "@shared/types/translate";
 import styles from "./styles.module.scss";
 
 SwiperCore.use([EffectCoverflow]);
@@ -18,13 +19,20 @@ interface CustomerListProps {
 export const CustomerList: FC<CustomerListProps> = ({ customers }) => {
   return (
     <Swiper
+      navigation={{
+        prevEl: ".prev",
+        nextEl: ".next",
+      }}
       loop={true}
       modules={[Navigation, EffectCoverflow]}
       spaceBetween={25}
-      slidesPerView={1.3} // Задаем количество видимых слайдов и их частичное отображение
+      slidesPerView={1.3}
       breakpoints={{
+        1576: {
+          slidesPerView: 4.5,
+        },
         1366: {
-          slidesPerView: 2.5,
+          slidesPerView: 3.5,
         },
         992: {
           slidesPerView: 2.4,
@@ -48,6 +56,14 @@ export const CustomerList: FC<CustomerListProps> = ({ customers }) => {
           <CustomerCard customer={customer} />
         </SwiperSlide>
       ))}
+      <div className={styles.nav}>
+        <p>
+          <ChevronLeft className="prev" />
+        </p>
+        <p>
+          <ChevronRight className="next" />
+        </p>
+      </div>
     </Swiper>
   );
 };
