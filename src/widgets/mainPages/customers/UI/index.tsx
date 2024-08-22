@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { CustomerList } from "@features/customer";
+import { CustomerList } from "@features/mainPages";
 
 interface CustomersProps {
   page: string;

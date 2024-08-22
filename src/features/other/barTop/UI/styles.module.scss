@@ -10,10 +10,11 @@
 
   p {
     color: var(--Personal-colors-black);
-    font-size: 44px;
+    font-size: var(--font-size-title-main-xl);
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    text-align: start;
   }
 
   div {

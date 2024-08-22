@@ -28,6 +28,16 @@
     #ffef28 0%,
     rgba(254, 52, 48, 0.99) 71.43%
   );
+  --Gradients-Gradient-7: linear-gradient(
+    45deg,
+    rgba(71, 114, 230, 0.1) 23.91%,
+    rgba(142, 84, 233, 0.1) 75.06%
+  );
+  --Gradients-Gradient-8: linear-gradient(
+    45deg,
+    #8e54e9 23.91%,
+    #4772e6 75.06%
+  );
 
   --Personal-colors-black: #000;
   --Personal-colors-main: #4772e6;
@@ -150,7 +160,7 @@
   /* Small (SM) */
   --font-size-title-main-sm: 28px;
   --font-size-subtitle-main-sm: 18px;
-  --row-gap-title-sm: 15px;
+  --row-gap-title-sm: 18px;
   --row-gap-content-sm: 30px;
   --font-size-option-item-sm: 13px;
   --column-gap-option-item-sm: 10px;

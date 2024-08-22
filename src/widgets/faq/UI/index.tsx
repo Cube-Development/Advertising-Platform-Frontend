@@ -5,8 +5,10 @@ import { Accordion } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC } from "react";
 import styles from "./styles.module.scss";
+import { useTranslation } from "react-i18next";
 
 export const FAQ: FC = () => {
+  const { t } = useTranslation();
   const data = FAQData.map((item) => ({
     ...item,
     title:
@@ -27,7 +29,7 @@ export const FAQ: FC = () => {
           variants={MAIN_PAGE_ANIMATION.animationVision}
           className={styles.title}
         >
-          FAQS
+          {t("faq.page_title")}
         </motion.h1>
         <div className={styles.information__wrapper}>
           {data.map((item, index) => {

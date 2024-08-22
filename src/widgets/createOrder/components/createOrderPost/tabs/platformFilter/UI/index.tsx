@@ -22,12 +22,12 @@ export const PlatformFilter: FC<PlatformFilterProps> = ({
   const { t } = useTranslation();
   // существующие форматы поста для выбранной платформы
   const existingFormats = formats
-    .filter((format) => format.platform === platformFilter.id)
-    .flatMap((format) => format.post_types)
+    .filter((format) => format?.platform === platformFilter?.id)
+    .flatMap((format) => format?.post_types)
     .filter((post_type) =>
       platformTypes
-        .find((platform) => platform.id === platformFilter.id)
-        ?.post_types.some((type) => type.id === post_type),
+        .find((platform) => platform.id === platformFilter?.id)
+        ?.post_types.some((type) => type?.id === post_type),
     );
 
   const changeSelectedPlatform = (type: IChannelLink) => {
@@ -53,16 +53,16 @@ export const PlatformFilter: FC<PlatformFilterProps> = ({
         {platformTypes.map((type, index) => (
           <li
             className={
-              platforms.includes(type.id) && platformFilter === type
+              platforms.includes(type?.id) && platformFilter === type
                 ? styles.active
-                : platforms.includes(type.id) && platformFilter !== type
+                : platforms.includes(type?.id) && platformFilter !== type
                   ? styles.non__active
                   : styles.disabled
             }
             onClick={() => changeSelectedPlatform(type)}
             key={index}
           >
-            <p>{t(type.name)}</p>
+            <p>{t(type?.name)}</p>
           </li>
         ))}
       </ul>

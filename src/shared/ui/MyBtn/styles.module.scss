@@ -15,12 +15,16 @@
   padding: 15px 31px 15px 31px;
   cursor: pointer;
   border-radius: 12px;
+  transition: all 300ms ease;
 
   &__blue {
     color: var(--Personal-colors-White);
     background: var(--Gradients-Gradient-1);
+
     &:hover {
-      background: #005aa5;
+    }
+
+    &:active {
     }
   }
 
@@ -28,8 +32,11 @@
     color: var(--Personal-colors-main);
     border: 1px solid var(--Personal-colors-main);
     background: var(--Personal-colors-White);
+
     &:hover {
       background: rgb(237, 237, 237);
+      transform: scale(1.02);
+      transition: all 300ms ease;
     }
   }
 
@@ -39,6 +46,8 @@
 
     &:hover {
       background: var(--Gradients-Gradient-2);
+      transform: scale(1.02);
+      transition: all 300ms ease;
     }
   }
 
@@ -50,8 +59,11 @@
   &__yellow {
     color: var(--Personal-colors-White);
     background: var(--Orange);
+
     &:hover {
       background: var(--Orange);
+      transform: scale(1.02);
+      transition: all 300ms ease;
     }
   }
 }

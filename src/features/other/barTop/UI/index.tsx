@@ -30,7 +30,7 @@ export const BarTop: FC<BarTopProps> = ({
       {page === pageFilter.order ? (
         role === roles.advertiser ? (
           <>
-            <p>{t(`orders_advertiser.my_campaign`)}</p>
+            <p className="truncate">{t(`orders_advertiser.my_campaign`)}</p>
             {listLength && (
               <div>
                 {<NewProjectBtn listLength={listLength} />}
