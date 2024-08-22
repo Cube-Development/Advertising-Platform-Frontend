@@ -30,6 +30,7 @@ import {
 import { AIRecommendCARDS, BREAKPOINT, Languages } from "@shared/config";
 import { Drawer, DrawerClose, DrawerContent, DrawerTrigger } from "@shared/ui";
 import { pageFilter } from "@shared/routing";
+import { ScrollArea } from "@shared/ui/shadcn-ui/ui/scroll-area";
 
 interface ParametersFilterProps {
   setValue: UseFormSetValue<getCatalogReq>;
@@ -119,15 +120,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
             {screen >= BREAKPOINT.MD && <p>Параметры</p>}
           </div>
         </DrawerTrigger>
-        {/* <AlertDialogContent className="w-full bg-none bg-transparent h-screen flex"> */}
         <DrawerContent className={styles.parameters}>
-          {/* <motion.div
-            initial={{ y: "100vh", opacity: 0 }} // Начальное состояние: блок вне экрана внизу и прозрачный
-            animate={{ y: 0, opacity: 1 }} // Конечное состояние: блок в начальной позиции и полностью видимый
-            exit={{ y: "100vh", opacity: 0 }} // Состояние при выходе: блок уходит вниз и становится прозрачным
-            transition={{ duration: 0.85, ease: "easeOut" }}
-            className={styles.parameters}
-          > */}
           <div className={styles.top}>
             <p className={styles.title}>Параметры</p>
             <DrawerClose className={styles.close}>
@@ -136,103 +129,104 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
               </div>
             </DrawerClose>
           </div>
-          <div className={styles.wrapper}>
-            <BarSubfilter
-              resetValues={resetRecommendationCard}
-              page={pageFilter.catalog}
-              catalogFilter={catalogFilter}
-              changeCatalogFilter={changeCatalogFilter}
-            />
-            <div className={styles.options}>
-              {catalogFilter === catalogBarFilter.parameters ? (
-                <>
-                  <SelectOptions
-                    onChange={setValue}
-                    getValues={getValues}
-                    options={categories?.contents || []}
-                    single={false}
-                    type={channelData.business}
-                    textData={"catalog.category"}
-                    isRow={true}
-                    isCatalog={true}
-                    defaultValues={filter.business}
-                  />
-                  <SelectOptions
-                    onChange={setValue}
-                    getValues={getValues}
-                    options={ages?.contents || []}
-                    single={false}
-                    type={channelData.age}
-                    textData={"catalog.age"}
-                    isRow={true}
-                    isCatalog={true}
-                    defaultValues={filter.age}
-                  />
-                  <SelectSex
-                    onChange={setValue}
-                    getValues={getValues}
-                    title={"catalog.sex.title"}
-                    isRow={true}
-                    isCatalog={true}
-                    defaultValues={filter.male}
-                  />
-                  <SelectOptions
-                    onChange={setValue}
-                    getValues={getValues}
-                    options={languages?.contents || []}
-                    single={false}
-                    type={channelData.language}
-                    textData={"catalog.languages"}
-                    isRow={true}
-                    isCatalog={true}
-                    defaultValues={filter.language}
-                  />
-                  <SelectOptions
-                    onChange={setValue}
-                    getValues={getValues}
-                    options={regions?.contents || []}
-                    single={false}
-                    type={channelData.region}
-                    textData={"catalog.region"}
-                    isRow={true}
-                    isCatalog={true}
-                    defaultValues={filter.region}
-                  />
-                </>
-              ) : (
-                <>
-                  <SelectDescription
-                    onChange={setValue}
-                    type={channelData.description}
-                    title={"catalog.ai.title"}
-                    placeholder={"catalog.ai.default_input"}
-                  />
-                  <AiFilter onChange={getAIRecommendationCards} />
-                </>
-              )}
-              {recommendationCards ? (
-                <div className={styles.recommendation}>
-                  <div className={styles.recommendation__title}>
-                    <QualityIcon />
-                    <p>{t("catalog.recommendation.title")}</p>
+          <ScrollArea>
+            <div className={styles.wrapper}>
+              <BarSubfilter
+                resetValues={resetRecommendationCard}
+                page={pageFilter.catalog}
+                catalogFilter={catalogFilter}
+                changeCatalogFilter={changeCatalogFilter}
+              />
+              <div className={styles.options}>
+                {catalogFilter === catalogBarFilter.parameters ? (
+                  <>
+                    <SelectOptions
+                      onChange={setValue}
+                      getValues={getValues}
+                      options={categories?.contents || []}
+                      single={false}
+                      type={channelData.business}
+                      textData={"catalog.category"}
+                      isRow={true}
+                      isCatalog={true}
+                      defaultValues={filter.business}
+                    />
+                    <SelectOptions
+                      onChange={setValue}
+                      getValues={getValues}
+                      options={ages?.contents || []}
+                      single={false}
+                      type={channelData.age}
+                      textData={"catalog.age"}
+                      isRow={true}
+                      isCatalog={true}
+                      defaultValues={filter.age}
+                    />
+                    <SelectSex
+                      onChange={setValue}
+                      getValues={getValues}
+                      title={"catalog.sex.title"}
+                      isRow={true}
+                      isCatalog={true}
+                      defaultValues={filter.male}
+                    />
+                    <SelectOptions
+                      onChange={setValue}
+                      getValues={getValues}
+                      options={languages?.contents || []}
+                      single={false}
+                      type={channelData.language}
+                      textData={"catalog.languages"}
+                      isRow={true}
+                      isCatalog={true}
+                      defaultValues={filter.language}
+                    />
+                    <SelectOptions
+                      onChange={setValue}
+                      getValues={getValues}
+                      options={regions?.contents || []}
+                      single={false}
+                      type={channelData.region}
+                      textData={"catalog.region"}
+                      isRow={true}
+                      isCatalog={true}
+                      defaultValues={filter.region}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <SelectDescription
+                      onChange={setValue}
+                      type={channelData.description}
+                      title={"catalog.ai.title"}
+                      placeholder={"catalog.ai.default_input"}
+                    />
+                    <AiFilter onChange={getAIRecommendationCards} />
+                  </>
+                )}
+                {recommendationCards ? (
+                  <div className={styles.recommendation}>
+                    <div className={styles.recommendation__title}>
+                      <QualityIcon />
+                      <p>{t("catalog.recommendation.title")}</p>
+                    </div>
+                    <div className={styles.recommendation__cards}>
+                      {recommendationCards.map((card, index) => (
+                        <RecomTargetCard
+                          key={index}
+                          card={card}
+                          onChange={handleUseRecommendionCard}
+                          isChooseed={recommendationCard === card}
+                        />
+                      ))}
+                    </div>
                   </div>
-                  <div className={styles.recommendation__cards}>
-                    {recommendationCards.map((card, index) => (
-                      <RecomTargetCard
-                        key={index}
-                        card={card}
-                        onChange={handleUseRecommendionCard}
-                        isChooseed={recommendationCard === card}
-                      />
-                    ))}
-                  </div>
-                </div>
-              ) : (
-                <></>
-              )}
+                ) : (
+                  <></>
+                )}
+              </div>
             </div>
-          </div>
-          {/* </motion.div> */}
+          </ScrollArea>
         </DrawerContent>
       </Drawer>
     </div>

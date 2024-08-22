@@ -21,14 +21,9 @@ import styles from "./styles.module.scss";
 
 export const History: FC = () => {
   const { t, i18n } = useTranslation();
-  const language = Languages.find((lang) => {
-    return i18n.language === lang.name;
-  });
+  const language = Languages.find((lang) => lang.name === i18n.language);
   const [screen, setScreen] = useState<number>(window.innerWidth);
   const [currentPage, setCurrentPage] = useState(1);
-  const handleOnChangePage = () => {
-    setCurrentPage(currentPage + 1);
-  };
 
   const getParams: HistoryReq = {
     language: language?.id || Languages[0].id,
@@ -37,20 +32,7 @@ export const History: FC = () => {
     date_sort: "decrease",
   };
 
-  const { data, isLoading, isFetching, isSuccess } =
-    useGetHistoryQuery(getParams);
-
-  const [transactions, setTransactions] = useState<IWalletHistory[]>(
-    data?.transactions ? data?.transactions : [],
-  );
-
-  useEffect(() => {
-    if (data && currentPage !== 1) {
-      setTransactions([...transactions, ...data.transactions]);
-    } else {
-      data && setTransactions(data.transactions);
-    }
-  }, [data]);
+  const { data, isLoading, isFetching } = useGetHistoryQuery(getParams);
 
   useEffect(() => {
     const handleResize = () => {
@@ -62,7 +44,10 @@ export const History: FC = () => {
     };
   }, []);
 
-  let custom = 0;
+  const handleOnChangePage = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
+
   return (
     <div className={`container ${screen > BREAKPOINT.LG ? "sidebar" : ""}`}>
       <div className={styles.wrapper}>
@@ -71,7 +56,7 @@ export const History: FC = () => {
         </div>
         {screen > BREAKPOINT.MD && <BarHistory />}
         <div className={styles.cards}>
-          {transactions?.length > 0 ? (
+          {data?.transactions.length ? (
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -79,10 +64,9 @@ export const History: FC = () => {
               variants={MAIN_PAGE_ANIMATION.animationVision}
               className={styles.cards__list}
             >
-              {transactions?.map((card, index) => (
+              {data.transactions.map((card) => (
                 <motion.div
-                  key={index}
-                  custom={index % INTERSECTION_ELEMENTS.history}
+                  key={card.id} // Используйте уникальный идентификатор
                   initial="hidden"
                   animate="visible"
                   variants={MAIN_PAGE_ANIMATION.animationUp}
