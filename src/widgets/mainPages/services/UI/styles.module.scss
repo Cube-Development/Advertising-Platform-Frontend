@@ -62,6 +62,7 @@
     }
     @media (max-width: 576px) {
       grid-template-columns: repeat(1, minmax(150px, 1fr));
+      row-gap: 20px;
     }
   }
 }

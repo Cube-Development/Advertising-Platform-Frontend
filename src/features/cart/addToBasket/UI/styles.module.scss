@@ -1,14 +1,14 @@
 .button {
   display: grid;
-  grid-template: 1fr / 1fr 3fr;
+  grid-template: 1fr / 1fr 2fr;
   align-items: center;
   text-align: center;
   justify-content: space-between;
   padding: 5px 15px;
   border-radius: 0 0 15px 15px;
 
-  @media (max-width: 768px) {
-    grid-template: 1fr / 1fr 2fr;
+  @media (max-width: 767px) {
+    grid-template: 1fr / 1fr 1fr;
   }
 
   @media (max-width: 576px) {
@@ -23,9 +23,18 @@
     text-align: center;
     column-gap: 10px;
 
+    @media (max-width: 576px) {
+      font-size: var(--font-size-option-item-sm);
+    }
+
     svg {
       width: 22.5px;
       height: 20px;
+
+      @media (max-width: 576px) {
+        width: 20.5px;
+        height: 18px;
+      }
     }
   }
 }

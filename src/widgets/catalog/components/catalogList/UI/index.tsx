@@ -72,7 +72,7 @@ export const CatalogList: FC<CatalogListProps> = ({
     <div className={styles.wrapper}>
       <div className={styles.filters__row}>
         <p className={styles.text}>
-          {t("catalog.all_platform")}: {channels.length}
+          {t("catalog.all_platform")}: {channels?.length}
         </p>
         <div className={styles.filters}>
           <SelectOptions

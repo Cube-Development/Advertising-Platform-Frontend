@@ -1,11 +1,20 @@
 .button {
   padding: 10px;
-  font-size: 16px;
+  font-size: var(--font-size-text-primary-xl);
   font-style: normal;
   font-weight: 600;
   line-height: normal;
   color: var(--Personal-colors-main);
   background: var(--Personal-colors-White);
   border-radius: 10px;
-  border: 1px solid var(--Personal-colors-main);
+  box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.2);
+
+  @media (max-width: 576px) {
+    font-size: var(--font-size-sm-text-primary);
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
 }

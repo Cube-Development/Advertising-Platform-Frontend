@@ -8,7 +8,7 @@ import { paths } from "@shared/routing";
 export const AddMore: FC = () => {
   const { t } = useTranslation();
   return (
-    <MyButton className={styles.button}>
+    <MyButton className={`${styles.button} truncate`}>
       <Link to={paths.catalog}>{t(`cart_btn.add`)}</Link>
     </MyButton>
   );

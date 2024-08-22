@@ -7,4 +7,8 @@
   background: var(--Gradients-Gradient-1);
   color: var(--Personal-colors-White);
   cursor: pointer;
+
+  @media (max-width: 576px) {
+    font-size: var(--font-size-option-item-sm);
+  }
 }

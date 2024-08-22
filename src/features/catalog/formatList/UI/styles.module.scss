@@ -27,6 +27,10 @@
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: nowrap;
+
+      @media (max-width: 576px) {
+        font-size: var(--font-size-option-item-sm);
+      }
     }
   }
 }
@@ -61,6 +65,10 @@
     text-align: start;
     cursor: pointer;
     padding: 10px;
+
+    @media (max-width: 576px) {
+      font-size: var(--font-size-option-item-sm);
+    }
 
     &:hover {
       border-radius: 8px;

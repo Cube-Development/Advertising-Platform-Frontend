@@ -16,6 +16,7 @@
 
     @media (max-width: 768px) {
       row-gap: 12px;
+      padding-bottom: 0px;
     }
 
     .description {
@@ -229,10 +230,14 @@
 
           span {
             color: var(--Personal-colors-main);
-            font-size: 16px;
+            font-size: var(--font-size-option-item-xl);
             font-style: normal;
             font-weight: 500;
             line-height: normal;
+
+            @media (max-width: 576px) {
+              font-size: var(--font-size-option-item-sm);
+            }
           }
 
           // &::after {
@@ -265,6 +270,7 @@
 .channel__data__md {
   display: grid;
   grid-auto-flow: row;
+  row-gap: 15px;
 
   padding: 10px 12px;
   border-radius: 10px;
@@ -286,6 +292,7 @@
     column-gap: 50px;
     position: relative;
     justify-items: center;
+    width: 100%;
 
     .arrow {
       display: grid;
@@ -372,6 +379,7 @@
       display: grid;
       grid-auto-flow: row;
       row-gap: 15px;
+      padding-top: 15px;
     }
 
     .channel__content[data-state="open"] {
@@ -465,7 +473,7 @@
       color: var(--Personal-colors-main);
       font-size: 10px;
       font-style: normal;
-      font-weight: 700;
+      font-weight: 600;
       line-height: normal;
     }
   }

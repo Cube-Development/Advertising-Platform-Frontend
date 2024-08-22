@@ -68,8 +68,8 @@ export const FormatList: FC<IFormatListProps> = ({
         </div>
         <p>
           {screen > BREAKPOINT.SM && !isSmall
-            ? selectedFormat?.format_name.big
-            : selectedFormat?.format_name.small}
+            ? selectedFormat?.format_name?.big
+            : selectedFormat?.format_name?.small}
         </p>
       </div>
 
@@ -78,16 +78,16 @@ export const FormatList: FC<IFormatListProps> = ({
           <ul>
             {card.format.map((format) => (
               <li
-                key={format.format}
+                key={format?.format}
                 onClick={handleOptionChange}
                 data-value={JSON.stringify(format)}
                 className={
-                  selectedFormat?.format === format.format ? styles.active : ""
+                  selectedFormat?.format === format?.format ? styles.active : ""
                 }
               >
                 {screen > BREAKPOINT.SM && !isSmall
-                  ? format.format_name.big
-                  : format.format_name.small}
+                  ? format?.format_name?.big
+                  : format?.format_name?.small}
               </li>
             ))}
           </ul>

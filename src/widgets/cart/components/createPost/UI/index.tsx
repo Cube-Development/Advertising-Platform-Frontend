@@ -76,49 +76,45 @@ export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
   };
 
   return (
-    <div className={styles.sticky_block}>
-      <div className={styles.wrapper}>
-        {screen >= BREAKPOINT.MD && (
-          <>
-            <div className={styles.icon}>
-              <div>
-                <ProtectIcon3 />
+    <div className={styles.wrapper}>
+      {screen >= BREAKPOINT.MD && (
+        <>
+          <div className={styles.icon}>
+            <ProtectIcon3 />
+          </div>
+          <div className={styles.data}>
+            <div className={styles.data__text}>
+              <p>{t("cart.create_post.title")}</p>
+              <span>{t("cart.create_post.text")}</span>
+            </div>
+            <div className={styles.data__info}>
+              <div className={styles.info}>
+                <p>{t("cart.create_post.subscribers")}</p>
+                <span>{cart?.channels?.length?.toLocaleString()}</span>
+              </div>
+              <div className={styles.info}>
+                <p>{t("cart.create_post.views")}</p>
+                <span>{cart?.coverage?.toLocaleString()}</span>
+              </div>
+              <div className={styles.info}>
+                <p>{t("cart.create_post.commission")}</p>
+                <span>{CART.commission}%</span>
               </div>
             </div>
-            <div className={styles.data}>
-              <div className={styles.data__text}>
-                <p>{t("cart.create_post.title")}</p>
-                <span>{t("cart.create_post.text")}</span>
-              </div>
-              <div className={styles.data__info}>
-                <div className={styles.info}>
-                  <p>{t("cart.create_post.subscribers")}</p>
-                  <span>{cart?.channels?.length?.toLocaleString()}</span>
-                </div>
-                <div className={styles.info}>
-                  <p>{t("cart.create_post.views")}</p>
-                  <span>{cart?.coverage?.toLocaleString()}</span>
-                </div>
-                <div className={styles.info}>
-                  <p>{t("cart.create_post.commission")}</p>
-                  <span>{CART.commission}%</span>
-                </div>
-              </div>
-            </div>
-          </>
-        )}
-        <div className={styles.finnaly}>
-          <div className={styles.finnaly__text}>
-            <p>{t("cart.create_post.finnaly")}:</p>
-            <span>
-              {cart?.amount?.toLocaleString()} {t("symbol")}
-            </span>
           </div>
-          <div
-            className={`${styles.button} ${!cart?.channels?.length && "deactive"}`}
-          >
-            <CreatePostBtn onClick={handleCreateCart} />
-          </div>
+        </>
+      )}
+      <div className={styles.finnaly}>
+        <div className={styles.finnaly__text}>
+          <p>{t("cart.create_post.finnaly")}:</p>
+          <span>
+            {cart?.amount?.toLocaleString()} {t("symbol")}
+          </span>
+        </div>
+        <div
+          className={`${styles.button} ${!cart?.channels?.length && "deactive"}`}
+        >
+          <CreatePostBtn onClick={handleCreateCart} />
         </div>
       </div>
     </div>

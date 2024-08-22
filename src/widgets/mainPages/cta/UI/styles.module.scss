@@ -85,7 +85,7 @@
       &__title {
         color: var(--Personal-colors-black);
         font-style: normal;
-        font-weight: 700;
+        font-weight: 600;
         line-height: normal;
         font-size: var(--font-size-title-main-xl);
 
@@ -108,7 +108,7 @@
 
       &__subtitle {
         font-style: normal;
-        font-weight: 700;
+        font-weight: 500;
         line-height: normal;
         color: var(--Personal-colors-main);
         font-size: var(--font-size-subtitle-main-xl);
@@ -149,12 +149,15 @@
 
     &__button {
       display: grid;
-      grid-template: 1fr / 1fr 1fr;
+      grid-template: 1fr / 1fr;
+      justify-content: start;
+      justify-self: self-start;
 
       @media (max-width: 768px) {
         grid-template: none;
         align-items: center;
         justify-content: center;
+        justify-self: center;
       }
     }
   }

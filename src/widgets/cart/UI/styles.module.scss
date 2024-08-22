@@ -3,9 +3,9 @@
   grid-template: 1fr / 1fr 0.5fr;
   justify-content: space-between;
   column-gap: 30px;
-  max-height: 300px;
   margin-top: calc(var(--margin-section-xl) / 2);
   margin-bottom: var(--margin-section-xl);
+  align-items: start;
 
   @media (max-width: 992px) {
     margin-top: calc(var(--margin-section-lg) / 2);
