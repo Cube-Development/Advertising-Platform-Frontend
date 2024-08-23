@@ -33,6 +33,7 @@
   },
 
   "symbol": "сум",
+  "count": "шт.",
 
   "wallet_menu": {
     "balance": "Баланс",

@@ -24,12 +24,9 @@ export const CatalogCart: FC<CatalogCartProps> = ({ cart }) => {
           <p>{t("catalog.current_cart.views")}:</p>
           <span>{cart?.coverage?.toLocaleString()}</span>
         </div>
-        <div className={styles.info}>
+        <div className={`${styles.info} ${styles.coast}`}>
           <p>{t("catalog.current_cart.cost")}:</p>
-          <span>
-            {cart?.amount?.toLocaleString()}{" "}
-            <span className={styles.symbol}>{t("symbol")}</span>
-          </span>
+          <span>{cart?.amount?.toLocaleString()}</span>
         </div>
       </div>
       <div className={styles.cart}>

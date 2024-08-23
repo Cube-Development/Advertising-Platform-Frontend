@@ -18,6 +18,8 @@
   @media (max-width: 768px) {
     margin-top: calc(var(--margin-section-md) / 2);
     margin-bottom: var(--margin-section-md);
+    justify-content: stretch;
+    min-height: 70svh;
   }
 
   @media (max-width: 576px) {

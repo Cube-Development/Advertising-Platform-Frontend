@@ -2,7 +2,7 @@
   display: grid;
   grid-auto-flow: row;
   align-content: space-between;
-  column-gap: 10px;
+  gap: 10px;
   text-align: center;
   grid-area: item2;
 
@@ -33,26 +33,25 @@
 
   .income__cash {
     color: var(--Personal-colors-black);
-    // font-size: 32px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
-    font-size: var(--font-size-title-main-xl);
+    font-size: var(--row-gap-title-xl);
 
     @media (max-width: 992px) {
-      font-size: var(--font-size-title-main-lg);
+      font-size: var(--row-gap-title-lg);
     }
 
     @media (max-width: 768px) {
-      font-size: var(--font-size-title-main-md);
+      font-size: var(--row-gap-title-md);
     }
 
     @media (max-width: 576px) {
-      font-size: var(--font-size-title-main-sm);
+      font-size: var(--row-gap-title-sm);
     }
 
     @media (max-width: 375px) {
-      font-size: var(--font-size-title-main-xs);
+      font-size: var(--row-gap-title-xs);
     }
   }
 }

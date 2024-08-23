@@ -8,10 +8,10 @@
     display: grid;
     grid-auto-flow: column;
     justify-content: space-between;
+    gap: 10px;
 
     .value {
       color: var(--Personal-colors-black);
-      // font-size: 20px;
       font-style: normal;
       font-weight: 600;
       line-height: normal;
@@ -35,7 +35,6 @@
     }
 
     .title {
-      // font-size: 18px;
       font-style: normal;
       font-weight: 600;
       line-height: normal;

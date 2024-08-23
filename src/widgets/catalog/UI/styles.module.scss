@@ -65,6 +65,11 @@
     }
 
     .left {
+      @media (min-width: 993px) {
+        position: sticky;
+        top: 100px;
+        width: 100%;
+      }
     }
 
     .right {
@@ -74,9 +79,11 @@
       }
 
       .cart {
+        // @media (min-width: 993px){
         position: sticky;
         bottom: 0;
         width: 100%;
+        // }
       }
     }
   }

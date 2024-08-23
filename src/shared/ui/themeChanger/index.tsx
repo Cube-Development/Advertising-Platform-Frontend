@@ -74,7 +74,7 @@ export const ThemeChanger: FC<ThemeChangerProps> = ({
           className={isMenuOpen ? styles.active : ""}
         >
           <div>
-            <span>{selectedOption.name}</span>
+            <span className="truncate">{selectedOption.name}</span>
             <div className={isMenuOpen ? "rotate" : "rotate__down"}>
               <ArrowSmallVerticalIcon
                 className={isMenuOpen ? "active__icon" : "default__icon__grey"}

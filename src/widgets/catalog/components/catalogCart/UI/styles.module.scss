@@ -1,21 +1,31 @@
 .wrapper {
   display: grid;
-  // grid-template: 1fr / 1fr 1fr 1fr 2fr;
   grid-template: 1fr / 3.6fr 2fr;
   column-gap: 40px;
   padding: 20px 15px;
-  background: var(--Gradients-Gradient-1);
-  opacity: 0.95;
+  background: var(--Gradients-Gradient-9);
+  // opacity: 0.95;
+  backdrop-filter: blur(10px);
   border-radius: 15px;
 
   @media (max-width: 992px) {
     padding: 12px 15px;
     column-gap: 30px;
+
+    // fixed
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    border-radius: 0px;
   }
 
   @media (max-width: 576px) {
-    grid-template: 1fr 1fr / 1fr;
-    row-gap: 15px;
+    grid-template: none;
+    grid-auto-flow: row;
+    row-gap: 10px;
+    padding: 15px 20px;
   }
 
   .text {
@@ -24,6 +34,11 @@
 
     @media (max-width: 768px) {
       grid-template: 1fr / 1fr 1fr;
+      gap: 10px;
+    }
+
+    @media (max-width: 576px) {
+      justify-content: space-between;
     }
 
     .info {
@@ -38,16 +53,22 @@
       }
 
       @media (max-width: 576px) {
-        grid-auto-flow: row;
-        row-gap: 5px;
+        grid-auto-flow: column;
+        gap: 10px;
         border: none;
-        justify-content: center;
-        justify-self: center;
+        justify-content: start;
+        align-items: center;
       }
 
       &.views {
         @media (max-width: 768px) {
           display: none;
+        }
+      }
+
+      &.coast {
+        @media (max-width: 576px) {
+          justify-self: end;
         }
       }
 
@@ -59,21 +80,15 @@
         line-height: normal;
 
         @media (max-width: 576px) {
-          font-weight: 400;
+          font-weight: 500;
         }
       }
 
       span {
         color: var(--Personal-colors-White);
         font-style: normal;
-        font-weight: 600;
+        font-weight: 400;
         line-height: normal;
-
-        .symbol {
-          @media (min-width: 577px) {
-            display: none;
-          }
-        }
       }
     }
   }
@@ -84,7 +99,7 @@
     margin: 0 15px;
 
     @media (max-width: 576px) {
-      margin: 0 45px;
+      margin: 0px;
     }
 
     .button {
