@@ -106,8 +106,13 @@ export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
       )}
       <div className={styles.finnaly}>
         <div className={styles.finnaly__text}>
-          <p>{t("cart.create_post.finnaly")}:</p>
-          <span>
+          <p className={`${styles.finnaly_long}`}>
+            {t("cart.create_post.finnaly")}:
+          </p>
+          <p className={`${styles.finnaly_short}`}>
+            {t("cart.create_post.finnaly_short")}:
+          </p>
+          <span className="truncate">
             {cart?.amount?.toLocaleString()} {t("symbol")}
           </span>
         </div>

@@ -141,14 +141,15 @@
     }
 
     @media (max-width: 576px) {
-      grid-template: 1fr 1fr / 1fr;
-      gap: 15px;
+      grid-template: none;
+      grid-auto-flow: row;
+      gap: 10px;
     }
 
     &__text {
       display: grid;
       grid-auto-flow: row;
-      row-gap: 20px;
+      gap: 20px;
       align-items: center;
       text-align: center;
       margin-top: 30px;
@@ -159,7 +160,14 @@
         padding: 0;
         margin: 0;
         border: none;
-        row-gap: 15px;
+        gap: 15px;
+      }
+
+      @media (max-width: 576px) {
+        gap: 10px;
+        grid-auto-flow: column;
+        text-align: left;
+        justify-content: space-between;
       }
 
       p {
@@ -176,6 +184,20 @@
 
         @media (max-width: 375px) {
           font-size: 14px;
+        }
+      }
+
+      .finnaly_long {
+        @media (max-width: 576px) {
+          display: none;
+        }
+      }
+
+      .finnaly_short {
+        display: none;
+
+        @media (max-width: 576px) {
+          display: block;
         }
       }
 
