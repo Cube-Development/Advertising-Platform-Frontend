@@ -20,7 +20,9 @@ export const SliderSubs: FC<SliderSubsProps> = ({ onUserCountChange }) => {
   return (
     <div className={styles.slider__wrapper}>
       <div className={styles.slider__row}>
-        <p className={styles.title}>{t(`main_page_blogger.card.subs`)}</p>
+        <p className={`${styles.title} truncate`}>
+          {t(`main_page_blogger.card.subs`)}
+        </p>
         <p className={styles.value}>{value.toLocaleString()}</p>
       </div>
       <MySliderLimit

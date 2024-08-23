@@ -34,6 +34,10 @@
     line-height: 0.75;
     color: var(--Personal-colors-main);
 
+    @media (max-width: 375px) {
+      font-size: 10px;
+    }
+
     li {
       text-align: center;
       padding: 20px 10px;

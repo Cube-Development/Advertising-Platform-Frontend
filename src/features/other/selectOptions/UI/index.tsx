@@ -193,7 +193,7 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
                 {(!isFilter ||
                   screen >= BREAKPOINT.SM ||
                   !isPlatformFilter) && (
-                  <span>
+                  <span className="truncate">
                     {selectedOption
                       ? selectedOption.name
                       : allText.default_value}
@@ -212,7 +212,9 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
                 )}
               </span>
             )}
-            <div className={isMenuOpen ? "rotate" : "rotate__down"}>
+            <div
+              className={`w-[16px] h-[14px] ${isMenuOpen ? "rotate" : "rotate__down"}`}
+            >
               <ArrowSmallVerticalIcon
                 className={
                   type === channelData.category && defaultValues
@@ -245,12 +247,14 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
                       key={index}
                       onClick={handleOptionChange}
                       data-value={option?.id}
-                      className={`${isFilter ? styles.filter : ""} ${selectedOption?.id === option?.id ? styles.active : ""}`}
+                      className={`${isFilter ? styles.filter : ""} ${selectedOption?.id === option?.id ? styles.active : ""} truncate`}
                     >
                       {option?.img ? <option.img /> : null}
-                      {screen >= BREAKPOINT.SM || !isPlatformFilter
-                        ? option?.name
-                        : ""}
+                      {screen >= BREAKPOINT.SM || !isPlatformFilter ? (
+                        <span className="truncate">{option?.name}</span>
+                      ) : (
+                        ""
+                      )}
                     </li>
                   ))}
                 </>

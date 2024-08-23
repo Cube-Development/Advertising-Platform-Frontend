@@ -134,7 +134,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
               </div>
             </DrawerClose>
           </div>
-          <ScrollArea className="h-full">
+          <ScrollArea className="h-[calc(100svh_-_60px)]">
             <div className={styles.wrapper}>
               <BarSubfilter
                 resetValues={resetRecommendationCard}
