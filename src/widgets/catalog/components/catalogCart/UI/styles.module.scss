@@ -3,9 +3,8 @@
   grid-template: 1fr / 3.6fr 2fr;
   column-gap: 40px;
   padding: 20px 15px;
-  background: var(--Gradients-Gradient-9);
-  // opacity: 0.95;
-  backdrop-filter: blur(10px);
+  background: var(--Gradients-Gradient-1);
+  opacity: 0.95;
   border-radius: 15px;
 
   @media (max-width: 992px) {
