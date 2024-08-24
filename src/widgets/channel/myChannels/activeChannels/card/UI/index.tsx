@@ -110,7 +110,9 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
       <div className={styles.card}>
         <div className={styles.card__logo}>
           <div className={styles.logo}>
-            <img src={card.avatar} alt="" />
+            <div className={styles.logo__img_wrapper}>
+              <img src={card.avatar} alt="" />
+            </div>
             {statusFilter === channelStatusFilter.active ||
             statusFilter === channelStatusFilter.inactive ? (
               <RatingIcon />
@@ -249,14 +251,14 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
         </div>
       </div>
 
-      <AccordionItem value={`item-${card.id}`} ref={accordionRef}>
+      <AccordionItem value={`item-${card?.id}`} ref={accordionRef}>
         <AccordionContent>
           <div className={styles.platform__events}>
             <ChannelDescription channel_id={card?.id} />
-            <button>
+            <button className="truncate">
               <p>{t(`platform_btn.calendar`)}</p>
             </button>
-            <button>
+            <button className="truncate">
               <p>{t(`platform_btn.reviews`)}</p>
             </button>
           </div>

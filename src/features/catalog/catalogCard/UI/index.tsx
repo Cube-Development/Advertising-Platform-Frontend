@@ -82,7 +82,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
         <div className={styles.channel__top}>
           <div className={styles.column__logo}>
             <div className={styles.logo}>
-              <div>
+              <div className={styles.logo__img_wrapper}>
                 <img src={card?.avatar} alt="logo" />
               </div>
               {screen >= BREAKPOINT.MD && (
