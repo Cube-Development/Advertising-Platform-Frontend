@@ -1,4 +1,4 @@
-import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
+import { PAGE_ANIMATION } from "@shared/config/animation";
 import { paths } from "@shared/routing";
 import { motion } from "framer-motion";
 import { FC } from "react";
@@ -19,12 +19,12 @@ export const WhyChooseUs: FC<WhyChooseUsProps> = ({ page }) => {
     <motion.section
       initial="hidden"
       whileInView="visible"
-      viewport={MAIN_PAGE_ANIMATION.viewport}
+      viewport={PAGE_ANIMATION.viewport}
       className={`${styles.wrapper} container`}
     >
       <motion.h1
         custom={custom}
-        variants={MAIN_PAGE_ANIMATION.animationUp}
+        variants={PAGE_ANIMATION.animationUp}
         className={styles.title}
       >
         {t(`${page}.why_title`)}

@@ -1,16 +1,14 @@
-import { FC, useEffect, useState } from "react";
-import styles from "./styles.module.scss";
-// import { RecomendationList } from "@widgets/cartBlock/UI/recomendationList";
-import Cookies from "js-cookie";
-import { useTranslation } from "react-i18next";
-import { CartList, CreatePost } from "../components";
-import { GenerateGuestId, roles } from "@entities/user";
+import { PLATFORM_PARAMETERS } from "@entities/channel";
+import { platformTypesNum } from "@entities/platform";
 import {
+  getCatalogReq,
   ICart,
   ICatalogChannel,
+  sortingFilter,
   useAddToCommonCartMutation,
   useAddToManagerCartMutation,
   useAddToPublicCartMutation,
+  useGetCatalogQuery,
   useReadCommonCartQuery,
   useReadManagerCartQuery,
   useReadPublicCartQuery,
@@ -18,9 +16,16 @@ import {
   useRemoveFromManagerCartMutation,
   useRemoveFromPublicCartMutation,
 } from "@entities/project";
-import { ToastAction, useToast } from "@shared/ui";
-import { Languages } from "@shared/config";
+import { GenerateGuestId, GetUserId, roles } from "@entities/user";
+import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 import { useAppSelector } from "@shared/hooks";
+import { ToastAction, useToast } from "@shared/ui";
+import Cookies from "js-cookie";
+import { FC, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { CartList, CreatePost, RecommendationList } from "../components";
+import styles from "./styles.module.scss";
 
 export const Cart: FC = () => {
   const { toast } = useToast();
@@ -92,7 +97,37 @@ export const Cart: FC = () => {
   const [currentCart, setCurrentCart] = useState<ICart>(
     cartPub ? cartPub : cart ? cart : cartManager!,
   );
-  // const [recomendCards, setRecomendCards] = useState<IPlatform[]>(reccartCards);
+
+  //НАЧАЛО  убрать useForm после добвления api для рекомендованных площадок
+  const { watch, reset, setValue, getValues } = useForm<getCatalogReq>({
+    defaultValues: {
+      language: language?.id || Languages[0].id,
+      page: 1,
+      elements_on_page: INTERSECTION_ELEMENTS.recommendCardsCart,
+      filter: {
+        platform: platformTypesNum.telegram,
+        male: PLATFORM_PARAMETERS.defaultSexMale,
+        female: 100 - PLATFORM_PARAMETERS.defaultSexMale,
+        business: [],
+        age: [],
+        language: [],
+        region: [],
+      },
+      sort: sortingFilter.price_down,
+    },
+  });
+
+  const userId = GetUserId();
+  const formFields = watch();
+
+  const { data: recomendCards, isFetching: isCatalogLoading } =
+    useGetCatalogQuery(
+      { ...formFields, user_id: userId },
+      {
+        skip: !userId,
+      },
+    );
+  // КОНЕЦ
 
   // commonCart
   const [addToCommonCart] = useAddToCommonCartMutation();
@@ -214,29 +249,8 @@ export const Cart: FC = () => {
             console.error("Ошибка при добавлении в корзину", error);
           });
       }
-      //       setCurrentCart({
-      //   ...currentCart,
-      //   channels: [
-      //     ...currentCart.channels.filter((card) => card.id !== cartChannel.id),
-      //   ],
-      // });
     }
   };
-
-  // const handleChangeRecomendCards = (cart: IToCart) => {
-  //   setRecomendCards([
-  //     ...recomendCards.filter((card) => card.id !== cart.channel.channel_id),
-  //   ]);
-  //   const recommendedCard = recomendCards.find(
-  //     (card) => card.id === cart.channel.channel_id
-  //   );
-  //   if (recommendedCard) {
-  //     recommendedCard.selected_format = cart.format.format;
-  //     setCartCards([...cartCards, recommendedCard]);
-  //   }
-  //   // запрос в бек
-  //   console.log(cart.channel);
-  // };
 
   return (
     <div className="container">
@@ -248,10 +262,10 @@ export const Cart: FC = () => {
               onChangeCard={handleChangeCartCards}
               isLoading={isLoadingCommon || isLoadingPublic || isLoadingManager}
             />
-            {/* <RecomendationList
-              cards={recomendCards}
-              onChangeCard={handleChangeRecomendCards}
-            /> */}
+            <RecommendationList
+              channels={recomendCards?.channels || []}
+              onChangeCard={handleChangeCartCards}
+            />
           </div>
         </div>
         <CreatePost cart={currentCart} />

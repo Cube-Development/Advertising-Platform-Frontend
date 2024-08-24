@@ -1,6 +1,6 @@
 import { platformTypesNum } from "@entities/platform";
 import { CATALOG, baseApi } from "@shared/api";
-import { languagesNum } from "@shared/config";
+import { INTERSECTION_ELEMENTS, languagesNum } from "@shared/config";
 import { sortingFilter } from "../config";
 import { ICatalogCards } from "../types";
 
@@ -30,6 +30,25 @@ export const catalogAPI = baseApi.injectEndpoints({
         method: "POST",
         body: BodyParams,
       }),
+      transformResponse: (response: ICatalogCards) => {
+        return {
+          ...response,
+          isLast: response.channels.length !== INTERSECTION_ELEMENTS.catalog,
+        };
+      },
+      serializeQueryArgs: ({ endpointName }) => {
+        return endpointName;
+      },
+      merge: (currentCache, newItems) => {
+        return {
+          ...newItems,
+          channels: [...currentCache.channels, ...newItems.channels],
+          isLast: newItems.channels.length !== INTERSECTION_ELEMENTS.catalog,
+        };
+      },
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg !== previousArg;
+      },
       providesTags: [CATALOG],
     }),
   }),

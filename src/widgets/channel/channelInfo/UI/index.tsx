@@ -11,33 +11,38 @@ import {
   sortingFilter,
   useGetCatalogQuery,
 } from "@entities/project";
-import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
+import {
+  INTERSECTION_ELEMENTS,
+  Languages,
+  PAGE_ANIMATION,
+  STATS,
+} from "@shared/config";
+import { motion } from "framer-motion";
 import Cookies from "js-cookie";
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
-import { AddToCart } from "./addToCart";
+import { AddToCart, SkeletonChannelAddToCart } from "./addToCart";
 import { Information } from "./information";
-import { ReccomendationList } from "./reccomendationList";
+import { RecommendationList } from "./recommendationList";
 import styles from "./styles.module.scss";
 
 interface ChannelInfoProps {}
 
 export const ChannelInfo: FC<ChannelInfoProps> = () => {
-  // const channel_id = "68e794a4-2cc6-4722-8a15-4144cbd53da6";
   const { id: channel_id } = useParams<{ id: string }>();
   const { i18n } = useTranslation();
   const language = Languages.find((lang) => {
     return i18n.language === lang.name;
   });
+  const guestId = Cookies.get("guest_id");
 
-  const elements = INTERSECTION_ELEMENTS.reccomendCards;
   const { watch, reset, setValue, getValues } = useForm<getCatalogReq>({
     defaultValues: {
       language: language?.id || Languages[0].id,
       page: 1,
-      elements_on_page: elements,
+      elements_on_page: INTERSECTION_ELEMENTS.recommendCardsChannel,
       filter: {
         platform: platformTypesNum.telegram,
         male: PLATFORM_PARAMETERS.defaultSexMale,
@@ -51,16 +56,15 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
     },
   });
 
-  const guestId = Cookies.get("guest_id");
   const formFields = watch();
   const { filter, sort, language: lang } = formFields;
 
-  const { data: card } = useGetChannelByIdQuery({
+  const { data: card, isLoading } = useGetChannelByIdQuery({
     channel_id: channel_id || "",
     language: language?.id || Languages[0].id,
   });
 
-  const { data: reccomendCards, isFetching: isCatalogLoading } =
+  const { data: reccomendCards, isFetching: isRecommendCardsLoading } =
     useGetCatalogQuery({
       ...formFields,
       guest_id: guestId,
@@ -94,11 +98,26 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
     <div className="container">
       <div className={styles.wrapper}>
         <div className={styles.top}>
-          <Information card={channel} />
-          <AddToCart card={channel} />
+          <Information
+            card={channel}
+            statistics={STATS}
+            isLoading={isLoading}
+          />
+          {!isLoading ? (
+            <motion.div
+              initial="hidden"
+              animate="visible"
+              variants={PAGE_ANIMATION.animationRight}
+            >
+              <AddToCart card={channel} />
+            </motion.div>
+          ) : (
+            <SkeletonChannelAddToCart />
+          )}
         </div>
-        <ReccomendationList
+        <RecommendationList
           cards={cards}
+          isLoading={isRecommendCardsLoading}
           onChangeCard={handleChangeCards}
           changePage={handleOnChangePage}
         />

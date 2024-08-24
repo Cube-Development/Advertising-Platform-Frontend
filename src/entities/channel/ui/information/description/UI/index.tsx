@@ -6,15 +6,82 @@ import {
   RatingIcon,
   StarIcon4,
 } from "@shared/assets";
-import { FC } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import styles from "./styles.module.scss";
 import { platformToIcon } from "@entities/project";
+import { useTranslation } from "react-i18next";
 
 interface DescriptionProps {
   card: IReadChannelData;
 }
 
+interface SeeMoreLessComponentProps {
+  text: string;
+  rows: number;
+}
+
+const YourComponent: FC<SeeMoreLessComponentProps> = ({ text }) => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [lineCount, setLineCount] = useState(0);
+
+  const updateLineCount = () => {
+    if (containerRef.current) {
+      const element = containerRef.current;
+      const computedStyle = window.getComputedStyle(element);
+      const lineHeight = parseFloat(computedStyle.lineHeight);
+      const clientHeight = element.clientHeight;
+      const numberOfLines = Math.floor(clientHeight / lineHeight);
+      setLineCount(numberOfLines);
+    }
+  };
+
+  useEffect(() => {
+    updateLineCount();
+    window.addEventListener("resize", updateLineCount);
+    return () => {
+      window.removeEventListener("resize", updateLineCount);
+    };
+  }, [text]);
+
+  return (
+    <div ref={containerRef} className="text-container">
+      {text}
+      <p>Number of lines: {lineCount}</p>
+    </div>
+  );
+};
+const SeeMoreLessComponent: FC<SeeMoreLessComponentProps> = ({
+  text,
+  rows,
+}) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { t } = useTranslation();
+  const handleChangeIsOpen = () => {
+    setIsOpen(!isOpen);
+  };
+  return (
+    <div className={`${styles.block} `}>
+      <p
+        style={
+          {
+            "--rows": rows,
+          } as React.CSSProperties
+        }
+        className={`${!isOpen ? styles.short_text : ""}`}
+      >
+        {text}
+      </p>
+      <div>
+        <button onClick={handleChangeIsOpen}>
+          {!isOpen ? t("more_less.more") : t("more_less.less")}
+        </button>
+      </div>
+    </div>
+  );
+};
+
 export const Description: FC<DescriptionProps> = ({ card }) => {
+  const { t } = useTranslation();
   return (
     <div className={styles.wrapper}>
       <div className={styles.channel__logo__wrapper}>
@@ -24,7 +91,7 @@ export const Description: FC<DescriptionProps> = ({ card }) => {
             <RatingIcon />
           </div>
           <button className={styles.add_channel}>
-            <p>Добавить</p>
+            <p>{t("channel.description.button")}</p>
             <HeartIcon />
           </button>
         </div>
@@ -41,6 +108,14 @@ export const Description: FC<DescriptionProps> = ({ card }) => {
           </div>
           <div className={styles.description}>
             <p>{card?.description}</p>
+            {/* <SeeMoreLessComponent
+              text={(card?.description + " ").repeat(10)}
+              rows={2}
+            />
+            <YourComponent
+              text={(card?.description + " ").repeat(10)}
+              rows={0}
+            /> */}
           </div>
           <div className={styles.link}>
             {card?.platform || 0 in platformToIcon

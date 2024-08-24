@@ -1,4 +1,32 @@
+import {
+  channelData,
+  useGetChannelAgesQuery,
+  useGetChannelLanguagesQuery,
+  useGetChannelRegionsQuery,
+  useGetCompanyCategoriesQuery,
+} from "@entities/channel";
+import {
+  IFilterSearch,
+  catalogBarFilter,
+  getCatalogReq,
+} from "@entities/project";
+import { AiFilter, RecomTargetCard } from "@features/catalog";
+import {
+  BarSubfilter,
+  SelectDescription,
+  SelectOptions,
+  SelectSex,
+} from "@features/other";
 import { CancelIcon2, ParametersIcon, QualityIcon } from "@shared/assets";
+import { AIRecommendCARDS, BREAKPOINT, Languages } from "@shared/config";
+import { pageFilter } from "@shared/routing";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerTrigger,
+  ScrollArea,
+} from "@shared/ui";
 import { FC, useEffect, useState } from "react";
 import {
   UseFormGetValues,
@@ -7,35 +35,6 @@ import {
 } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-
-import {
-  BarSubfilter,
-  SelectDescription,
-  SelectOptions,
-  SelectSex,
-} from "@features/other";
-import { AiFilter, RecomTargetCard } from "@features/catalog";
-import {
-  IFilterSearch,
-  catalogBarFilter,
-  getCatalogReq,
-} from "@entities/project";
-import {
-  channelData,
-  useGetChannelAgesQuery,
-  useGetChannelLanguagesQuery,
-  useGetChannelRegionsQuery,
-  useGetCompanyCategoriesQuery,
-} from "@entities/channel";
-import { AIRecommendCARDS, BREAKPOINT, Languages } from "@shared/config";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerTrigger,
-  ScrollArea,
-} from "@shared/ui";
-import { pageFilter } from "@shared/routing";
 
 interface ParametersFilterProps {
   setValue: UseFormSetValue<getCatalogReq>;
@@ -52,11 +51,15 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
   catalogFilter,
   changeCatalogFilter,
 }) => {
+  const { t, i18n } = useTranslation();
+  const language = Languages.find((lang) => {
+    return i18n.language === lang.name;
+  });
+  const [screen, setScreen] = useState<number>(window.innerWidth);
   const [recommendationCard, setRecCard] = useState<IFilterSearch | null>(null);
   const [recommendationCards, setRecCards] = useState<IFilterSearch[] | null>(
-    null,
+    null
   );
-  const [screen, setScreen] = useState<number>(window.innerWidth);
 
   useEffect(() => {
     const handleResize = () => {
@@ -67,11 +70,6 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  const { t, i18n } = useTranslation();
-  const language = Languages.find((lang) => {
-    return i18n.language === lang.name;
-  });
 
   const contentRes = {
     language: language?.id || Languages[0].id,
@@ -88,7 +86,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
     setRecCard(null);
     setRecCards(null);
     reset();
-    console.log("resetRecommendationCard");
+    // console.log("resetRecommendationCard");
   };
 
   const handleUseRecommendionCard = (card: IFilterSearch) => {
@@ -107,14 +105,14 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
     }
   };
 
+  const getAIRecommendationCards = () => {
+    setRecCards(AIRecommendCARDS);
+  };
+
   useEffect(() => {
     console.log(filter);
     // setRecCards(RecommendCARDS);
   }, [filter]);
-
-  const getAIRecommendationCards = () => {
-    setRecCards(AIRecommendCARDS);
-  };
 
   return (
     <div>

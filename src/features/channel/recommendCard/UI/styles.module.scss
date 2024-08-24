@@ -3,7 +3,7 @@
   grid-auto-flow: row;
 
   border-radius: 15px;
-  box-shadow: inset 0px 0px 0px 0.5px var(--Containers);
+  box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.2);
   background: var(--Personal-colors-White);
   position: relative;
 
@@ -64,7 +64,7 @@
             font-size: 14px;
             font-style: normal;
             font-weight: 600;
-            line-height: normal;
+            line-height: 1;
           }
 
           .category {
@@ -81,6 +81,10 @@
         display: grid;
         grid-auto-flow: column;
         column-gap: 10px;
+        svg {
+          height: 18px;
+          min-width: 18px;
+        }
       }
     }
   }

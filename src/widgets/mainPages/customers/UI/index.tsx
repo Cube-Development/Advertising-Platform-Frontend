@@ -1,4 +1,4 @@
-import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
+import { PAGE_ANIMATION } from "@shared/config/animation";
 import { motion } from "framer-motion";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -16,19 +16,19 @@ export const Customers: FC<CustomersProps> = ({ page }) => {
     <motion.section
       initial="hidden"
       whileInView="visible"
-      viewport={MAIN_PAGE_ANIMATION.viewport}
+      viewport={PAGE_ANIMATION.viewport}
       className={`${styles.customer}`}
     >
       <motion.div
         custom={custom++}
-        variants={MAIN_PAGE_ANIMATION.animationUp}
+        variants={PAGE_ANIMATION.animationUp}
         className={styles.customer__title}
       >
         <p>{t(`${page}.customers_title`)}</p>
       </motion.div>
       <motion.div
         custom={custom++}
-        variants={MAIN_PAGE_ANIMATION.animationVision}
+        variants={PAGE_ANIMATION.animationVision}
         style={{ overflow: "hidden" }}
       >
         <CustomerList

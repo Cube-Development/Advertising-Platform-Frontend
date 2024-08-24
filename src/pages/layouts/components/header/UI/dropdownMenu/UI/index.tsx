@@ -48,19 +48,19 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
   };
 
   const handleClickOutside = (event: MouseEvent) => {
-    console.log("menuCurrent");
+    // console.log("menuCurrent");
     if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
       const newMenu = { isOpen: false, title: "" };
       dispatch(setDropDownMenu(newMenu));
-      console.log(newMenu);
+      // console.log(newMenu);
     }
   };
 
   useEffect(() => {
-    console.log(dropdownMenu.isOpen, "isOpen");
+    // console.log(dropdownMenu.isOpen, "isOpen");
     document.addEventListener("click", handleClickOutside);
     if (dropdownMenu.isOpen) {
-      console.log(dropdownMenu.isOpen, "ffffffffffffffffe");
+      // console.log(dropdownMenu.isOpen, "ffffffffffffffffe");
       document.body.classList.add("sidebar-open");
     } else {
       document.body.classList.remove("sidebar-open");

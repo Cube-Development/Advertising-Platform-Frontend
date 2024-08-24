@@ -5,6 +5,7 @@ import styles from "./styles.module.scss";
 
 export const SkeletonHistoryCard: FC = () => {
   const [screen, setScreen] = useState<number>(window.innerWidth);
+
   useEffect(() => {
     const handleResize = () => {
       setScreen(window.innerWidth);
@@ -14,6 +15,7 @@ export const SkeletonHistoryCard: FC = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
   return (
     <>
       {screen > BREAKPOINT.MD ? (
@@ -41,7 +43,7 @@ export const SkeletonHistoryCard: FC = () => {
           <div className={styles.card__xs}>
             <div className={styles.top}>
               <Skeleton className="h-3 w-[120px]" />
-              <Skeleton className="h-3 w-[120px]" />
+              <Skeleton className="h-3 w-[140px]" />
             </div>
             <div className={styles.bottom}>
               <div className={styles.row}>

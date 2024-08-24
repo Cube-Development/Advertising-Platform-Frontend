@@ -1,4 +1,4 @@
-import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
+import { PAGE_ANIMATION } from "@shared/config/animation";
 import { IBasicInfo } from "@shared/types/translate";
 import { Counter } from "@shared/ui/counter";
 import { motion } from "framer-motion";
@@ -14,7 +14,7 @@ export const ServiceCard: FC<ServiceCardProps> = ({ info, custom }) => {
   return (
     <motion.div
       custom={custom}
-      variants={MAIN_PAGE_ANIMATION.animationUp}
+      variants={PAGE_ANIMATION.animationUp}
       className={styles.info}
     >
       <img src={`/images/basicInfo/${info.img}`} alt="" />

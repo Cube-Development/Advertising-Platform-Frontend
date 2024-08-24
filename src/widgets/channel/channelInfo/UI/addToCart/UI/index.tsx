@@ -1,10 +1,10 @@
+import { IReadChannelData } from "@entities/channel";
 import { ICatalogChannel, IFormat } from "@entities/project";
 import { FormatList } from "@features/catalog";
 import { MyButton } from "@shared/ui";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { IReadChannelData } from "@entities/channel";
 
 interface AddToCartProps {
   card: IReadChannelData;
@@ -15,13 +15,13 @@ export const AddToCart: FC<AddToCartProps> = ({ card }) => {
   const startFormat = card?.format[0];
   const [selectedFormat, setSelectedFormat] = useState<IFormat>(startFormat);
 
-  useEffect(() => {
-    setSelectedFormat(startFormat);
-  }, [startFormat]);
-
   const handleChangeFormat = (selectedValue: IFormat) => {
     setSelectedFormat(selectedValue);
   };
+
+  useEffect(() => {
+    setSelectedFormat(startFormat);
+  }, [startFormat]);
 
   return (
     <div className={styles.wrapper}>

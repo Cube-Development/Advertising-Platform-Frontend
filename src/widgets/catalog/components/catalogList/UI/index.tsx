@@ -1,3 +1,26 @@
+import { channelData } from "@entities/channel";
+import { platformTypes } from "@entities/platform";
+import {
+  ICatalogChannel,
+  catalogBarFilter,
+  getCatalogReq,
+  sortingTypes,
+} from "@entities/project";
+import { AddToBasket } from "@features/cart";
+import {
+  CatalogCard,
+  FormatList,
+  SearchFilter,
+  SkeletonCatalogCard,
+} from "@features/catalog";
+import { SelectOptions, filterData } from "@features/other";
+import {
+  BREAKPOINT,
+  INTERSECTION_ELEMENTS,
+  PAGE_ANIMATION,
+} from "@shared/config";
+import { Accordion, ShowMoreBtn, SpinnerLoader } from "@shared/ui";
+import { motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
 import {
   UseFormGetValues,
@@ -5,26 +28,8 @@ import {
   UseFormSetValue,
 } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
 import { ParametersFilter } from "../parametersFilter";
-import { SelectOptions, filterData } from "@features/other";
-import { Accordion, ShowMoreBtn, SpinnerLoader } from "@shared/ui";
-import {
-  CatalogCard,
-  FormatList,
-  SearchFilter,
-  SkeletonCatalogCard,
-} from "@features/catalog";
-import { AddToBasket } from "@features/cart";
-import {
-  ICatalogChannel,
-  catalogBarFilter,
-  getCatalogReq,
-  sortingTypes,
-} from "@entities/project";
-import { channelData } from "@entities/channel";
-import { platformTypes } from "@entities/platform";
-import { BREAKPOINT, INTERSECTION_ELEMENTS } from "@shared/config";
+import styles from "./styles.module.scss";
 
 interface CatalogListProps {
   channels: ICatalogChannel[];
@@ -33,7 +38,7 @@ interface CatalogListProps {
   getValues: UseFormGetValues<getCatalogReq>;
   page: number;
   onChangeCard: (cart: ICatalogChannel) => void;
-  isNotEmpty: boolean;
+  isLast: boolean;
   isLoading?: boolean;
   catalogFilter: catalogBarFilter;
   changeCatalogFilter: (filter: catalogBarFilter) => void;
@@ -45,7 +50,7 @@ export const CatalogList: FC<CatalogListProps> = ({
   reset,
   getValues,
   page,
-  isNotEmpty,
+  isLast,
   onChangeCard,
   isLoading,
   catalogFilter,
@@ -53,6 +58,10 @@ export const CatalogList: FC<CatalogListProps> = ({
 }) => {
   const { t } = useTranslation();
   const [screen, setScreen] = useState<number>(window.innerWidth);
+
+  const handleOnChangePage = () => {
+    setValue(channelData.page, page + 1);
+  };
 
   useEffect(() => {
     const handleResize = () => {
@@ -63,10 +72,6 @@ export const CatalogList: FC<CatalogListProps> = ({
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  const handleOnChangePage = () => {
-    setValue(channelData.page, page + 1);
-  };
 
   return (
     <div className={styles.wrapper}>
@@ -110,22 +115,28 @@ export const CatalogList: FC<CatalogListProps> = ({
         )}
       </div>
       <Accordion type="single" collapsible className={styles.card__list}>
-        {channels?.map((card) => (
-          <CatalogCard
-            card={card}
-            key={card.id}
-            AddToBasketBtn={AddToBasket}
-            FormatList={FormatList}
-            onChangeCard={onChangeCard}
-          />
+        {channels?.map((card, index) => (
+          <motion.div
+            key={card.id + index}
+            initial="hidden"
+            animate="visible"
+            custom={index % INTERSECTION_ELEMENTS.catalog}
+            variants={PAGE_ANIMATION.animationUp}
+          >
+            <CatalogCard
+              card={card}
+              AddToBasketBtn={AddToBasket}
+              FormatList={FormatList}
+              onChangeCard={onChangeCard}
+            />
+          </motion.div>
         ))}
         {isLoading &&
           Array.from({ length: INTERSECTION_ELEMENTS.catalog }).map(
             (_, index) => <SkeletonCatalogCard key={index} />,
           )}
       </Accordion>
-      {isNotEmpty ? (
-        // <DinamicPagination onChange={handleOnChangePage} />
+      {!isLast ? (
         <div className={styles.show_more} onClick={handleOnChangePage}>
           {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
         </div>

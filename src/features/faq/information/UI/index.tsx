@@ -1,7 +1,7 @@
 import { IFAQInformation } from "@entities/faq";
 import { ArrowSmallVerticalIcon } from "@shared/assets";
 import { accordionTypes } from "@shared/config";
-import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
+import { PAGE_ANIMATION } from "@shared/config/animation";
 import { AccordionContent, AccordionItem, AccordionTrigger } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC, useEffect, useRef } from "react";
@@ -53,13 +53,13 @@ export const FAQInformation: FC<FAQInformationProps> = ({
     <motion.div
       initial="hidden"
       whileInView="visible"
-      viewport={MAIN_PAGE_ANIMATION.viewport}
-      variants={MAIN_PAGE_ANIMATION.animationVision}
+      viewport={PAGE_ANIMATION.viewport}
+      variants={PAGE_ANIMATION.animationVision}
       className={styles.wrapper}
     >
       <motion.p
         custom={custom++}
-        variants={MAIN_PAGE_ANIMATION.animationUp}
+        variants={PAGE_ANIMATION.animationUp}
         className={styles.block_title}
       >
         {t(`${information.title}`)}
@@ -69,7 +69,7 @@ export const FAQInformation: FC<FAQInformationProps> = ({
           <motion.div
             key={index}
             custom={custom++}
-            variants={MAIN_PAGE_ANIMATION.animationRight}
+            variants={PAGE_ANIMATION.animationRight}
             className={styles.wrapper}
           >
             <AccordionItem

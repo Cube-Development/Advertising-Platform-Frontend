@@ -7,7 +7,7 @@ interface ReviewProps {
   card: IReviewData;
 }
 
-export const Review: FC<ReviewProps> = ({ card }) => {
+export const ReviewCard: FC<ReviewProps> = ({ card }) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.review}>

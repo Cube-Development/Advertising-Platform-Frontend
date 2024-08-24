@@ -1,6 +1,6 @@
 import { IWalletHistory, paymentTypes } from "@entities/wallet";
 import { ADV_PROJECTS, BALANCE, LEGALS, authApi } from "@shared/api";
-import { languagesNum } from "@shared/config";
+import { INTERSECTION_ELEMENTS, languagesNum } from "@shared/config";
 
 type PaymentOrderResponse = {
   success: boolean;
@@ -17,6 +17,7 @@ type HistoryResponse = {
   page: number;
   elements: number;
   transactions: IWalletHistory[];
+  isLast?: boolean;
 };
 
 type PaymentDepositReq = {
@@ -73,6 +74,13 @@ export const walletAPI = authApi.injectEndpoints({
         method: "POST",
         params,
       }),
+      transformResponse: (response: HistoryResponse) => {
+        return {
+          ...response,
+          isLast:
+            response.transactions.length !== INTERSECTION_ELEMENTS.history,
+        };
+      },
       serializeQueryArgs: ({ endpointName }) => {
         return endpointName;
       },
@@ -83,6 +91,8 @@ export const walletAPI = authApi.injectEndpoints({
             ...currentCache.transactions,
             ...newItems.transactions,
           ],
+          isLast:
+            newItems.transactions.length !== INTERSECTION_ELEMENTS.history,
         };
       },
       forceRefetch({ currentArg, previousArg }) {

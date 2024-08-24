@@ -98,7 +98,7 @@
       font-size: 14px;
       font-style: normal;
       font-weight: 500;
-      line-height: normal;
+      line-height: 1;
     }
 
     .link {
@@ -122,5 +122,27 @@
         line-height: 1;
       }
     }
+  }
+}
+
+.block {
+  display: grid;
+  grid-auto-flow: rows;
+  grid-template: 1fr min-content / 1fr;
+  row-gap: 10px;
+
+  .short_text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: var(--rows);
+    width: 100%;
+  }
+
+  div {
+    display: grid;
+    justify-content: end;
+    color: var(--Personal-colors-main);
   }
 }

@@ -1,15 +1,16 @@
+import { CART, ICart, useCreateCartMutation } from "@entities/project";
+import { CreatePost as CreatePostBtn } from "@features/cart";
 import { ProtectIcon3 } from "@shared/assets";
+import { BREAKPOINT, PAGE_ANIMATION } from "@shared/config";
+import { useAppSelector } from "@shared/hooks";
 import { paths } from "@shared/routing";
+import { ToastAction, useToast } from "@shared/ui";
+import { motion } from "framer-motion";
 import Cookies from "js-cookie";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.scss";
-import { CreatePost as CreatePostBtn } from "@features/cart";
-import { ToastAction, useToast } from "@shared/ui";
-import { BREAKPOINT } from "@shared/config";
-import { useAppSelector } from "@shared/hooks";
-import { useCreateCartMutation, CART, ICart } from "@entities/project";
 
 interface CreatePostProps {
   cart: ICart;
@@ -19,32 +20,6 @@ export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
   const { toast } = useToast();
   const { t } = useTranslation();
   const [screen, setScreen] = useState<number>(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  // let { views, cost, subs } = cards.reduce(
-  //   (totals, channel) => {
-  //     const selected_format = channel.format.find(
-  //       (format) => format.format === channel.selected_format,
-  //     )!;
-  //     totals.views += selected_format.views;
-  //     totals.cost += selected_format.price;
-  //     totals.subs += channel.subscribers;
-  //     return totals;
-  //   },
-  //   { views: 0, cost: 0, subs: 0 },
-  // );
-
-  // cost = Math.round(cost * (1 + CART.commission / 100));
-
   const { isAuth } = useAppSelector((state) => state.user);
   const navigate = useNavigate();
   const [createCart] = useCreateCartMutation();
@@ -75,8 +50,23 @@ export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
     }
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setScreen(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
-    <div className={styles.wrapper}>
+    <motion.div
+      className={styles.wrapper}
+      initial="hidden"
+      animate="visible"
+      variants={PAGE_ANIMATION.animationRight}
+    >
       {screen >= BREAKPOINT.MD && (
         <>
           <div className={styles.icon}>
@@ -122,6 +112,6 @@ export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
           <CreatePostBtn onClick={handleCreateCart} />
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };

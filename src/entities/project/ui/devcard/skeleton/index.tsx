@@ -1,12 +1,8 @@
+import { Skeleton } from "@shared/ui";
 import { FC } from "react";
 import styles from "./styles.module.scss";
-import { Skeleton } from "@shared/ui";
 
-interface SkeletonAdvDevProjectCardProps {}
-
-export const SkeletonAdvDevProjectCard: FC<
-  SkeletonAdvDevProjectCardProps
-> = () => {
+export const SkeletonAdvDevProjectCard: FC = () => {
   return (
     <Skeleton className="bg-skeleton-light rounded-[20px]">
       <div className={styles.card}>

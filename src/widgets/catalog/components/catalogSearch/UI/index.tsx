@@ -1,4 +1,25 @@
+import {
+  channelData,
+  useGetChannelAgesQuery,
+  useGetChannelLanguagesQuery,
+  useGetChannelRegionsQuery,
+  useGetCompanyCategoriesQuery,
+} from "@entities/channel";
+import {
+  IFilterSearch,
+  catalogBarFilter,
+  getCatalogReq,
+} from "@entities/project";
+import { AiFilter, RecomTargetCard } from "@features/catalog";
+import {
+  BarSubfilter,
+  SelectDescription,
+  SelectOptions,
+  SelectSex,
+} from "@features/other";
 import { QualityIcon } from "@shared/assets";
+import { AIRecommendCARDS, Languages } from "@shared/config";
+import { pageFilter } from "@shared/routing";
 import { FC, useEffect, useState } from "react";
 import {
   UseFormGetValues,
@@ -7,27 +28,6 @@ import {
 } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import {
-  BarSubfilter,
-  SelectDescription,
-  SelectOptions,
-  SelectSex,
-} from "@features/other";
-import { AiFilter, RecomTargetCard } from "@features/catalog";
-import { AIRecommendCARDS, Languages } from "@shared/config";
-import {
-  channelData,
-  useGetChannelAgesQuery,
-  useGetChannelLanguagesQuery,
-  useGetChannelRegionsQuery,
-  useGetCompanyCategoriesQuery,
-} from "@entities/channel";
-import { pageFilter } from "@shared/routing";
-import {
-  IFilterSearch,
-  catalogBarFilter,
-  getCatalogReq,
-} from "@entities/project";
 
 interface CatalogSearchProps {
   setValue: UseFormSetValue<getCatalogReq>;
@@ -44,15 +44,15 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
   catalogFilter,
   changeCatalogfilter,
 }) => {
-  const [recommendationCard, setRecCard] = useState<IFilterSearch | null>(null);
-  const [recommendationCards, setRecCards] = useState<IFilterSearch[] | null>(
-    null,
-  );
-
   const { t, i18n } = useTranslation();
   const language = Languages.find((lang) => {
     return i18n.language === lang.name;
   });
+
+  const [recommendationCard, setRecCard] = useState<IFilterSearch | null>(null);
+  const [recommendationCards, setRecCards] = useState<IFilterSearch[] | null>(
+    null,
+  );
 
   const contentRes = {
     language: language?.id || Languages[0].id,
@@ -69,7 +69,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
     setRecCard(null);
     setRecCards(null);
     reset();
-    console.log("resetRecommendationCard");
+    // console.log("resetRecommendationCard");
   };
 
   const handleUseRecommendionCard = (card: IFilterSearch) => {
@@ -88,14 +88,14 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
     }
   };
 
+  const getAIRecommendationCards = () => {
+    setRecCards(AIRecommendCARDS);
+  };
+
   useEffect(() => {
     console.log(filter);
     // setRecCards(RecommendCARDS);
   }, [filter]);
-
-  const getAIRecommendationCards = () => {
-    setRecCards(AIRecommendCARDS);
-  };
 
   return (
     <>

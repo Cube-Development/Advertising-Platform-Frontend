@@ -1,19 +1,18 @@
 import {
   HistoryCard,
   HistoryReq,
-  IWalletHistory,
+  SkeletonHistoryCard,
   useGetHistoryQuery,
 } from "@entities/wallet";
-import { SkeletonHistoryCard } from "@entities/wallet/ui/history/skeleton";
 import { BarHistory } from "@features/wallet";
 import { SadSmileIcon } from "@shared/assets";
 import {
   BREAKPOINT,
   INTERSECTION_ELEMENTS,
   Languages,
-  MAIN_PAGE_ANIMATION,
+  PAGE_ANIMATION,
 } from "@shared/config";
-import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
+import { ShowMoreBtn, SpinnerLoaderSmall } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -34,6 +33,10 @@ export const History: FC = () => {
 
   const { data, isLoading, isFetching } = useGetHistoryQuery(getParams);
 
+  const handleOnChangePage = () => {
+    setCurrentPage((prevPage) => prevPage + 1);
+  };
+
   useEffect(() => {
     const handleResize = () => {
       setScreen(window.innerWidth);
@@ -43,46 +46,63 @@ export const History: FC = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
-  const handleOnChangePage = () => {
-    setCurrentPage((prevPage) => prevPage + 1);
-  };
-
+  let custom = 0;
   return (
     <div className={`container ${screen > BREAKPOINT.LG ? "sidebar" : ""}`}>
       <div className={styles.wrapper}>
-        <div className={styles.top}>
+        <motion.div
+          className={styles.top}
+          initial="hidden"
+          animate="visible"
+          custom={custom++}
+          variants={PAGE_ANIMATION.animationRight}
+        >
           <p>{t("wallet_history.wallet_history")}</p>
-        </div>
-        {screen > BREAKPOINT.MD && <BarHistory />}
-        <div className={styles.cards}>
+        </motion.div>
+        {screen > BREAKPOINT.MD && (
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            custom={custom++}
+            variants={PAGE_ANIMATION.animationRight}
+          >
+            <BarHistory />
+          </motion.div>
+        )}
+        <motion.div
+          className={styles.cards}
+          initial="hidden"
+          animate="visible"
+          custom={custom++}
+          variants={PAGE_ANIMATION.animationVision}
+        >
           {data?.transactions.length ? (
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={MAIN_PAGE_ANIMATION.viewport}
-              variants={MAIN_PAGE_ANIMATION.animationVision}
-              className={styles.cards__list}
-            >
-              {data.transactions.map((card) => (
+            <div className={styles.cards__list}>
+              {data.transactions.map((card, index) => (
                 <motion.div
-                  key={card.id} // Используйте уникальный идентификатор
+                  key={card.id}
                   initial="hidden"
                   animate="visible"
-                  variants={MAIN_PAGE_ANIMATION.animationUp}
+                  custom={index % INTERSECTION_ELEMENTS.history}
+                  variants={PAGE_ANIMATION.animationUp}
                 >
                   <HistoryCard card={card} />
                 </motion.div>
               ))}
-
               {(isFetching || isLoading) &&
                 Array.from({ length: INTERSECTION_ELEMENTS.history }).map(
                   (_, index) => <SkeletonHistoryCard key={index} />,
                 )}
-              <div className={styles.show_more} onClick={handleOnChangePage}>
-                {isFetching || isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
-              </div>
-            </motion.div>
+              {!data.isLast && (
+                <div className={styles.show_more} onClick={handleOnChangePage}>
+                  {isFetching || isLoading ? (
+                    <SpinnerLoaderSmall />
+                  ) : (
+                    <ShowMoreBtn />
+                  )}
+                </div>
+              )}
+            </div>
           ) : (
             <div className={styles.empty__block}>
               <div className={styles.icon}>
@@ -91,7 +111,7 @@ export const History: FC = () => {
               <h3 className={styles.title}>{t("cart.empty")}</h3>
             </div>
           )}
-        </div>
+        </motion.div>
       </div>
     </div>
   );
