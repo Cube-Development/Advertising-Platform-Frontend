@@ -6,6 +6,7 @@ export interface ICatalogCards extends IChangeCards {
   page: number;
   elements: number;
   channels: ICatalogChannel[];
+  isLast?: boolean;
 }
 
 export interface ICatalogChannel {

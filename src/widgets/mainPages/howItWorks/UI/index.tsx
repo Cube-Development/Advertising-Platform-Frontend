@@ -1,4 +1,4 @@
-import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
+import { PAGE_ANIMATION } from "@shared/config/animation";
 import { motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -87,8 +87,8 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
     <motion.section
       initial="hidden"
       whileInView="visible"
-      viewport={MAIN_PAGE_ANIMATION.viewport}
-      variants={MAIN_PAGE_ANIMATION.animationVision}
+      viewport={PAGE_ANIMATION.viewport}
+      variants={PAGE_ANIMATION.animationVision}
       custom={custom++}
       className={styles.wrapper}
     >
@@ -96,7 +96,7 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
         <div className={styles.content}>
           <motion.h1
             custom={custom++}
-            variants={MAIN_PAGE_ANIMATION.animationUp}
+            variants={PAGE_ANIMATION.animationUp}
             className={styles.title}
           >
             {t(`${page}.how_title`)}
@@ -106,7 +106,7 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
               <div className={styles.steps__column}>
                 <motion.div
                   custom={custom++}
-                  variants={MAIN_PAGE_ANIMATION.animationUp}
+                  variants={PAGE_ANIMATION.animationUp}
                   className={styles.steps__column__items}
                 >
                   <p>1</p>
@@ -115,7 +115,7 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
                     <span>{StepsList[0].stage}</span>
                     <motion.div
                       custom={custom + 5}
-                      variants={MAIN_PAGE_ANIMATION.animationVision}
+                      variants={PAGE_ANIMATION.animationVision}
                     >
                       <Registration />
                     </motion.div>
@@ -127,7 +127,7 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
               <div className={styles.steps__column}>
                 <motion.div
                   custom={custom++}
-                  variants={MAIN_PAGE_ANIMATION.animationDown}
+                  variants={PAGE_ANIMATION.animationDown}
                   className={`${styles.steps__column__items} ${styles.two}`}
                 >
                   <p>2</p>
@@ -140,7 +140,7 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
               <div className={styles.steps__column}>
                 <motion.div
                   custom={custom++}
-                  variants={MAIN_PAGE_ANIMATION.animationUp}
+                  variants={PAGE_ANIMATION.animationUp}
                   className={styles.steps__column__items}
                 >
                   <p>3</p>
@@ -153,7 +153,7 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
               <div className={styles.steps__column}>
                 <motion.div
                   custom={custom++}
-                  variants={MAIN_PAGE_ANIMATION.animationDown}
+                  variants={PAGE_ANIMATION.animationDown}
                   className={`${styles.steps__column__items} ${styles.four}`}
                 >
                   <p>4</p>
@@ -166,7 +166,7 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
               <div className={styles.steps__column}>
                 <motion.div
                   custom={custom++}
-                  variants={MAIN_PAGE_ANIMATION.animationUp}
+                  variants={PAGE_ANIMATION.animationUp}
                   className={styles.steps__column__items}
                 >
                   <p>5</p>
@@ -181,14 +181,14 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
               <div className={`${styles.steps__md__row} ${styles.one}`}>
                 <motion.div
                   custom={custom++}
-                  variants={MAIN_PAGE_ANIMATION.animationLeft}
+                  variants={PAGE_ANIMATION.animationLeft}
                   className={styles.steps__md__row__items}
                 >
                   <div className={styles.registration}>
                     <span>{StepsList[0].stage}</span>
                     <motion.div
                       custom={custom + 5}
-                      variants={MAIN_PAGE_ANIMATION.animationVision}
+                      variants={PAGE_ANIMATION.animationVision}
                     >
                       <Registration />
                     </motion.div>
@@ -201,7 +201,7 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
                 <div></div>
                 <motion.div
                   custom={custom++}
-                  variants={MAIN_PAGE_ANIMATION.animationRight}
+                  variants={PAGE_ANIMATION.animationRight}
                   className={styles.steps__md__row__items}
                 >
                   <p>2</p>
@@ -212,7 +212,7 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
               <div className={`${styles.steps__md__row} ${styles.three}`}>
                 <motion.div
                   custom={custom++}
-                  variants={MAIN_PAGE_ANIMATION.animationLeft}
+                  variants={PAGE_ANIMATION.animationLeft}
                   className={styles.steps__md__row__items}
                 >
                   <span>{StepsList[2].stage}</span>
@@ -224,7 +224,7 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
                 <div></div>
                 <motion.div
                   custom={custom++}
-                  variants={MAIN_PAGE_ANIMATION.animationRight}
+                  variants={PAGE_ANIMATION.animationRight}
                   className={styles.steps__md__row__items}
                 >
                   <p>4</p>
@@ -235,7 +235,7 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
               <div className={`${styles.steps__md__row} ${styles.five}`}>
                 <motion.div
                   custom={custom++}
-                  variants={MAIN_PAGE_ANIMATION.animationLeft}
+                  variants={PAGE_ANIMATION.animationLeft}
                   className={styles.steps__md__row__items}
                 >
                   <span>{StepsList[4].stage}</span>
@@ -248,7 +248,7 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
             <div className={styles.steps__xs}>
               <motion.div
                 custom={custom++}
-                variants={MAIN_PAGE_ANIMATION.animationRight}
+                variants={PAGE_ANIMATION.animationRight}
                 className={`${styles.steps__xs__row} ${styles.one}`}
               >
                 <div className={`${styles.number} ${styles.left}`}>
@@ -260,7 +260,7 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
                     <span>{StepsList[0].stage}</span>
                     <motion.div
                       custom={custom++}
-                      variants={MAIN_PAGE_ANIMATION.animationVision}
+                      variants={PAGE_ANIMATION.animationVision}
                     >
                       <Registration />
                     </motion.div>
@@ -269,7 +269,7 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
               </motion.div>
               <motion.div
                 custom={custom++}
-                variants={MAIN_PAGE_ANIMATION.animationLeft}
+                variants={PAGE_ANIMATION.animationLeft}
                 className={`${styles.steps__xs__row} ${styles.two}`}
               >
                 <div className={styles.text}>
@@ -282,7 +282,7 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
               </motion.div>
               <motion.div
                 custom={custom++}
-                variants={MAIN_PAGE_ANIMATION.animationRight}
+                variants={PAGE_ANIMATION.animationRight}
                 className={`${styles.steps__xs__row} ${styles.three}`}
               >
                 <div className={`${styles.number} ${styles.left}`}>
@@ -295,7 +295,7 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
               </motion.div>
               <motion.div
                 custom={custom++}
-                variants={MAIN_PAGE_ANIMATION.animationLeft}
+                variants={PAGE_ANIMATION.animationLeft}
                 className={`${styles.steps__xs__row} ${styles.four}`}
               >
                 <div className={styles.text}>
@@ -308,7 +308,7 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
               </motion.div>
               <motion.div
                 custom={custom++}
-                variants={MAIN_PAGE_ANIMATION.animationRight}
+                variants={PAGE_ANIMATION.animationRight}
                 className={`${styles.steps__xs__row} ${styles.five}`}
               >
                 <div className={`${styles.number} ${styles.left}`}>

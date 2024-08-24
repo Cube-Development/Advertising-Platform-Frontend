@@ -7,7 +7,7 @@ import "swiper/css/autoplay";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./styles.module.scss";
-import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
+import { PAGE_ANIMATION } from "@shared/config/animation";
 import { motion } from "framer-motion";
 
 interface WorkWithUsProps {
@@ -25,14 +25,14 @@ export const WorkWithUs: FC<WorkWithUsProps> = ({ page }) => {
     <div className={styles.wrapper}>
       <motion.h1
         custom={custom++}
-        variants={MAIN_PAGE_ANIMATION.animationUp}
+        variants={PAGE_ANIMATION.animationUp}
         className={styles.title}
       >
         {t(`${page}.work_title`)}
       </motion.h1>
       <motion.div
         custom={custom++}
-        variants={MAIN_PAGE_ANIMATION.animationVision}
+        variants={PAGE_ANIMATION.animationVision}
         className={styles.channels}
       >
         <Swiper

@@ -5,7 +5,7 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Element } from "react-scroll";
 import styles from "./styles.module.scss";
-import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
+import { PAGE_ANIMATION } from "@shared/config/animation";
 import { OptionCard } from "../card";
 import { SeeCatalog } from "@features/mainPages";
 import { AddChannel } from "@features/channel";
@@ -26,21 +26,21 @@ export const Cta: FC<CtaProps> = ({ page }) => {
         id="registration"
         initial="hidden"
         whileInView="visible"
-        viewport={MAIN_PAGE_ANIMATION.viewport}
+        viewport={PAGE_ANIMATION.viewport}
         className={styles.wrapper}
       >
         <div className={styles.cta}>
           <div className={styles.cta__content}>
             <motion.h1
               custom={custom++}
-              variants={MAIN_PAGE_ANIMATION.animationLeft}
+              variants={PAGE_ANIMATION.animationLeft}
               className={styles.cta__content__title}
             >
               {t(`${page}.cta_title`)}
             </motion.h1>
             <motion.h2
               custom={custom++}
-              variants={MAIN_PAGE_ANIMATION.animationLeft}
+              variants={PAGE_ANIMATION.animationLeft}
               className={styles.cta__content__subtitle}
             >
               {t(`${page}.cta_subtitle`)}
@@ -53,7 +53,7 @@ export const Cta: FC<CtaProps> = ({ page }) => {
           </div>
           <motion.div
             custom={custom++}
-            variants={MAIN_PAGE_ANIMATION.animationLeft}
+            variants={PAGE_ANIMATION.animationLeft}
             className={styles.cta__button}
           >
             {page === "main_page_advertiser" ? (

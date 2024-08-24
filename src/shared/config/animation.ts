@@ -1,4 +1,4 @@
-export const MAIN_PAGE_ANIMATION = {
+export const PAGE_ANIMATION = {
   animationLeft: {
     hidden: {
       x: -10,

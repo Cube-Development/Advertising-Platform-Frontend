@@ -3,7 +3,7 @@ export const enum CALENDAR {
 }
 
 export const enum INTERSECTION_ELEMENTS {
-  catalog = 10,
+  catalog = 3,
   orders = 4,
   offers = 4,
   platforms = 4,
@@ -12,8 +12,9 @@ export const enum INTERSECTION_ELEMENTS {
   history = 3,
   chat = 20,
   managerOrders = 4,
-  review = 4,
-  reccomendCards = 10,
+  review = 3,
+  recommendCardsChannel = 10,
+  recommendCardsCart = 3,
 }
 
 export const enum BREAKPOINT {

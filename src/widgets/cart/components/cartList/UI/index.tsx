@@ -1,21 +1,21 @@
-import { CartIcon, SadSmileIcon } from "@shared/assets";
-import { FC } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import { Accordion } from "@shared/ui";
-import { AddMore, AddToBasket, SaveCart } from "@features/cart";
-import { pageFilter } from "@shared/routing";
-import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ICatalogChannel } from "@entities/project";
+import { AddMore, AddToBasket, SaveCart } from "@features/cart";
 import {
   CatalogCard,
   FormatList,
   SkeletonCatalogCard,
 } from "@features/catalog";
+import { CartIcon, SadSmileIcon } from "@shared/assets";
+import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
+import { pageFilter } from "@shared/routing";
+import { Accordion } from "@shared/ui";
+import { motion } from "framer-motion";
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 interface CartListProps {
   channels: ICatalogChannel[];
-  // setValue: UseFormSetValue<getCatalogReq>;
   onChangeCard: (cart: ICatalogChannel) => void;
   isLoading: boolean;
 }
@@ -41,15 +41,22 @@ export const CartList: FC<CartListProps> = ({
       </div>
       {channels?.length ? (
         <Accordion type="single" collapsible className={styles.cards}>
-          {channels?.map((card) => (
-            <CatalogCard
-              page={pageFilter.cart}
-              card={card}
-              key={card.id}
-              AddToBasketBtn={AddToBasket}
-              FormatList={FormatList}
-              onChangeCard={onChangeCard}
-            />
+          {channels?.map((card, index) => (
+            <motion.div
+              key={card.id + index}
+              initial="hidden"
+              animate="visible"
+              custom={index}
+              variants={PAGE_ANIMATION.animationUp}
+            >
+              <CatalogCard
+                page={pageFilter.cart}
+                card={card}
+                AddToBasketBtn={AddToBasket}
+                FormatList={FormatList}
+                onChangeCard={onChangeCard}
+              />
+            </motion.div>
           ))}
           {isLoading &&
             Array.from({ length: INTERSECTION_ELEMENTS.catalog }).map(

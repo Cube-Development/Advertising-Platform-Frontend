@@ -1,28 +1,31 @@
 import { ICatalogChannel } from "@entities/project";
 import { AddToBasket } from "@features/cart";
 import { FormatList } from "@features/catalog";
-import { ReccomendCard } from "@features/channel";
+import { RecommendCard, SkeletonRecommendCard } from "@features/channel";
+import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { Accordion } from "@shared/ui";
 import { FC, useEffect } from "react";
 import { useTranslation } from "react-i18next";
+import { useInView } from "react-intersection-observer";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import { EffectCoverflow, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./styles.module.scss";
-import { useInView } from "react-intersection-observer";
 
-interface ReccomendationListProps {
+interface RecommendationListProps {
   cards: ICatalogChannel[];
   onChangeCard: (cart: ICatalogChannel) => void;
   changePage: () => void;
+  isLoading: boolean;
 }
 
-export const ReccomendationList: FC<ReccomendationListProps> = ({
+export const RecommendationList: FC<RecommendationListProps> = ({
   cards,
   onChangeCard,
   changePage,
+  isLoading,
 }) => {
   const { t } = useTranslation();
 
@@ -36,7 +39,7 @@ export const ReccomendationList: FC<ReccomendationListProps> = ({
       changePage();
     }
   }, [inView]);
-  console.log("cards", cards);
+
   return (
     <div className={styles.wrapper}>
       <p className={styles.title}>{t("channel.recommend.title")}</p>
@@ -45,13 +48,12 @@ export const ReccomendationList: FC<ReccomendationListProps> = ({
           <Swiper
             modules={[Navigation, EffectCoverflow]}
             spaceBetween={10}
-            slidesPerView={3.5}
+            slidesPerView={3}
             className={styles.wrapper}
           >
             {cards.map((card, index) => (
               <SwiperSlide key={index}>
-                <ReccomendCard
-                  // page={pageFilter.cart}
+                <RecommendCard
                   card={card}
                   key={card.id}
                   AddToBasketBtn={AddToBasket}
@@ -60,8 +62,18 @@ export const ReccomendationList: FC<ReccomendationListProps> = ({
                 />
               </SwiperSlide>
             ))}
+            {isLoading &&
+              Array.from({
+                length: INTERSECTION_ELEMENTS.recommendCardsChannel,
+              }).map((_, index) => (
+                <SwiperSlide key={index}>
+                  <SkeletonRecommendCard />
+                </SwiperSlide>
+              ))}
             <SwiperSlide>
-              <div ref={ref} className={styles.pagination}></div>
+              <div ref={ref} style={{ height: "100%" }}>
+                <SkeletonRecommendCard />
+              </div>
             </SwiperSlide>
           </Swiper>
         </Accordion>

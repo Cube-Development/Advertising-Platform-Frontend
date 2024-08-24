@@ -21,12 +21,12 @@ import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
-interface ReccomendCardProps extends IChangeCards, ICatalogCard {
+interface RecommendCardProps extends IChangeCards, ICatalogCard {
   card: ICatalogChannel;
   page?: pageFilter.cart;
 }
 
-export const ReccomendCard: FC<ReccomendCardProps> = ({
+export const RecommendCard: FC<RecommendCardProps> = ({
   card,
   AddToBasketBtn,
   FormatList,

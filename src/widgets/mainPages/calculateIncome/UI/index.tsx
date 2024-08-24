@@ -1,5 +1,5 @@
 import { CalculatorIcon } from "@shared/assets";
-import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
+import { PAGE_ANIMATION } from "@shared/config/animation";
 import { paths } from "@shared/routing";
 import { IncomeCalculator } from "@shared/ui/incomeCalculator";
 import { SliderSubs } from "@shared/ui";
@@ -40,8 +40,8 @@ export const CalculateIncome: FC<CalculateIncomeProps> = ({ page }) => {
     <motion.section
       initial="hidden"
       whileInView="visible"
-      viewport={MAIN_PAGE_ANIMATION.viewport}
-      variants={MAIN_PAGE_ANIMATION.animationVision}
+      viewport={PAGE_ANIMATION.viewport}
+      variants={PAGE_ANIMATION.animationVision}
       custom={custom++}
       id="calculateIncome"
       ref={calculateIncomeRef}
@@ -50,7 +50,7 @@ export const CalculateIncome: FC<CalculateIncomeProps> = ({ page }) => {
       <div className={styles.top}>
         <motion.div
           custom={custom++}
-          variants={MAIN_PAGE_ANIMATION.animationUp}
+          variants={PAGE_ANIMATION.animationUp}
           className={styles.title}
         >
           <div>
@@ -60,7 +60,7 @@ export const CalculateIncome: FC<CalculateIncomeProps> = ({ page }) => {
         </motion.div>
         <motion.div
           custom={custom++}
-          variants={MAIN_PAGE_ANIMATION.animationUp}
+          variants={PAGE_ANIMATION.animationUp}
           className={styles.subtitle}
         >
           <p>{t(`${page}.calculate.subtitle`)}</p>
@@ -68,7 +68,7 @@ export const CalculateIncome: FC<CalculateIncomeProps> = ({ page }) => {
       </div>
       <motion.div
         custom={custom++}
-        variants={MAIN_PAGE_ANIMATION.animationVision}
+        variants={PAGE_ANIMATION.animationVision}
         className={styles.card__wrapper}
       >
         <div className={styles.card}>

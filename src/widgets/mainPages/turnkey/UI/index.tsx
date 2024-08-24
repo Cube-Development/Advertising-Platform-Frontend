@@ -1,6 +1,6 @@
 import { PriceList } from "@features/other";
 import { KeyIcon } from "@shared/assets";
-import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
+import { PAGE_ANIMATION } from "@shared/config/animation";
 import { motion } from "framer-motion";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -17,15 +17,15 @@ export const Turnkey: FC<TurnkeyProps> = ({ page }) => {
     <motion.section
       initial="hidden"
       whileInView="visible"
-      viewport={MAIN_PAGE_ANIMATION.viewport}
-      variants={MAIN_PAGE_ANIMATION.animationVision}
+      viewport={PAGE_ANIMATION.viewport}
+      variants={PAGE_ANIMATION.animationVision}
       custom={custom++}
       className={styles.wrapper}
     >
       <div className={styles.top}>
         <motion.div
           custom={custom++}
-          variants={MAIN_PAGE_ANIMATION.animationUp}
+          variants={PAGE_ANIMATION.animationUp}
           className={styles.title}
         >
           <div>
@@ -35,14 +35,14 @@ export const Turnkey: FC<TurnkeyProps> = ({ page }) => {
         </motion.div>
         <motion.div
           custom={custom++}
-          variants={MAIN_PAGE_ANIMATION.animationUp}
+          variants={PAGE_ANIMATION.animationUp}
           className={styles.subtitle}
         >
           <p>{t(`${page}.turnkey_subtitle`)}</p>
         </motion.div>
         <motion.p
           custom={custom++}
-          variants={MAIN_PAGE_ANIMATION.animationUp}
+          variants={PAGE_ANIMATION.animationUp}
           className={styles.text}
         >
           {t(`${page}.turnkey_text`)}

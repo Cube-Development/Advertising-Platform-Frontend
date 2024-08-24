@@ -28,13 +28,23 @@ import { CatalogCart, CatalogList, CatalogSearch } from "../components";
 import styles from "./styles.module.scss";
 
 export const CatalogBlock: FC = () => {
-  const { toast } = useToast();
   const { t, i18n } = useTranslation();
   const language = Languages.find((lang) => {
     return i18n.language === lang.name;
   });
-  const elements = INTERSECTION_ELEMENTS.catalog;
+  const { toast } = useToast();
   const [screen, setScreen] = useState<number>(window.innerWidth);
+  const { isAuth } = useAppSelector((state) => state.user);
+  const guestId = Cookies.get("guest_id");
+  const role = Cookies.get("role");
+  const projectId = Cookies.get("project_id");
+  const catalogTopRef = useRef<HTMLDivElement>(null);
+
+  if (!guestId) {
+    GenerateGuestId();
+  }
+
+  const userId = GetUserId();
 
   const [catalogFilter, setCatalogFilter] = useState<catalogBarFilter>(
     catalogBarFilter.parameters,
@@ -56,7 +66,7 @@ export const CatalogBlock: FC = () => {
     defaultValues: {
       language: language?.id || Languages[0].id,
       page: 1,
-      elements_on_page: elements,
+      elements_on_page: INTERSECTION_ELEMENTS.catalog,
       filter: {
         platform: platformTypesNum.telegram,
         male: PLATFORM_PARAMETERS.defaultSexMale,
@@ -70,16 +80,6 @@ export const CatalogBlock: FC = () => {
     },
   });
 
-  const { isAuth } = useAppSelector((state) => state.user);
-  const guestId = Cookies.get("guest_id");
-  const role = Cookies.get("role");
-  const projectId = Cookies.get("project_id");
-
-  if (!guestId) {
-    GenerateGuestId();
-  }
-
-  const userId = GetUserId();
   const formFields = watch();
   const { filter, sort, language: lang } = formFields;
 
@@ -104,37 +104,9 @@ export const CatalogBlock: FC = () => {
     { skip: !guestId || isAuth },
   );
 
-  const [cards, setCards] = useState<ICatalogChannel[]>(
-    catalogAuth?.channels ? catalogAuth?.channels : catalog?.channels || [],
-  );
-
-  const catalogTopRef = useRef<HTMLDivElement>(null);
-
   useEffect(() => {
-    setCards(
-      catalogAuth?.channels ? catalogAuth?.channels : catalog?.channels || [],
-    );
     setValue(channelData.page, 1);
-    // catalogTopRef.current?.scrollIntoView({
-    //   behavior: "smooth",
-    // });
   }, [filter, sort, lang]);
-
-  useEffect(() => {
-    if (catalog && formFields.page !== 1) {
-      setCards([...cards, ...catalog.channels]);
-    } else if (catalog) {
-      setCards(catalog.channels);
-    }
-  }, [catalog]);
-
-  useEffect(() => {
-    if (catalogAuth && formFields.page !== 1) {
-      setCards([...cards, ...catalogAuth.channels]);
-    } else if (catalogAuth && formFields.page === 1) {
-      setCards(catalogAuth.channels);
-    }
-  }, [catalogAuth]);
 
   const [currentCart, setCurrentCart] = useState<ICart>(
     cartPub ? cartPub : cart!,
@@ -162,7 +134,9 @@ export const CatalogBlock: FC = () => {
 
   const handleChangeCards = (cartChannel: ICatalogChannel) => {
     let newCards: ICatalogChannel[] = [];
-    const currentCard = cards?.find((card) => card.id === cartChannel.id);
+    const currentCard = (
+      isAuth ? catalogAuth?.channels : catalog?.channels
+    )?.find((card) => card.id === cartChannel.id);
 
     if (cartChannel.selected_format) {
       const addReq = {
@@ -182,7 +156,9 @@ export const CatalogBlock: FC = () => {
         !currentCard.selected_format &&
         cartChannel.selected_format
       ) {
-        newCards = cards.map((item) => {
+        newCards = (
+          (isAuth ? catalogAuth?.channels : catalog?.channels) || []
+        ).map((item) => {
           if (item.id === cartChannel.id) {
             const newItem = {
               ...item,
@@ -283,7 +259,10 @@ export const CatalogBlock: FC = () => {
               console.error("Ошибка при добавлении в корзину", error);
             });
         }
-        newCards = cards.map((card) => {
+        // newCards = cards.map((card) => {
+        newCards = (
+          (isAuth ? catalogAuth?.channels : catalog?.channels) || []
+        ).map((card) => {
           if (
             card.id === cartChannel.id &&
             card.selected_format &&
@@ -337,18 +316,22 @@ export const CatalogBlock: FC = () => {
               console.error("Ошибка при удалении с корзины", error);
             });
         }
-        newCards = cards.map((item) => {
+        // newCards = cards.map((item) => {
+        newCards = (
+          (isAuth ? catalogAuth?.channels : catalog?.channels) || []
+        ).map((item) => {
           if (item.id === cartChannel.id) {
             const { selected_format, ...newItem } = item;
-            console.log(selected_format);
+            // console.log(selected_format);
             return newItem;
           }
           return item;
         });
       }
-      setCards(newCards);
+      // setCards(newCards);
     }
   };
+  console.log("data", catalogAuth, catalog);
 
   return (
     <div className="container">
@@ -375,16 +358,13 @@ export const CatalogBlock: FC = () => {
                 reset={reset}
                 setValue={setValue}
                 page={formFields.page}
-                channels={cards || []}
+                channels={
+                  (isAuth ? catalogAuth?.channels : catalog?.channels) || []
+                }
                 onChangeCard={handleChangeCards}
-                isNotEmpty={Boolean(
-                  (catalogAuth &&
-                    catalogAuth?.channels.length ===
-                      INTERSECTION_ELEMENTS.catalog) ||
-                    (catalog &&
-                      catalog?.channels.length ===
-                        INTERSECTION_ELEMENTS.catalog),
-                )}
+                isLast={
+                  (isAuth ? catalogAuth?.isLast : catalog?.isLast) || false
+                }
                 isLoading={isCatalogAuthLoading || isCatalogLoading}
               />
             </div>

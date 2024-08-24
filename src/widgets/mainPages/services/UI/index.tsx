@@ -1,4 +1,4 @@
-import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
+import { PAGE_ANIMATION } from "@shared/config/animation";
 import { IBasicInfo } from "@shared/types/translate";
 import { motion } from "framer-motion";
 import { FC } from "react";
@@ -21,12 +21,12 @@ export const Services: FC<ServicesProps> = ({ page }) => {
     <motion.section
       initial="hidden"
       whileInView="visible"
-      viewport={MAIN_PAGE_ANIMATION.viewport}
+      viewport={PAGE_ANIMATION.viewport}
       className={`${styles.wrapper} container`}
     >
       <motion.h2
         custom={custom++}
-        variants={MAIN_PAGE_ANIMATION.animationUp}
+        variants={PAGE_ANIMATION.animationUp}
         className={styles.title}
       >
         {t(`${page}.services_title`)}

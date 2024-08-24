@@ -1,6 +1,6 @@
 import { FC } from "react";
-import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 export const BarHistory: FC = () => {
   const { t } = useTranslation();

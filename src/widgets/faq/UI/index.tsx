@@ -1,6 +1,6 @@
 import { FAQData, FAQtypes } from "@entities/faq";
 import { FAQInformation } from "@features/faq";
-import { MAIN_PAGE_ANIMATION } from "@shared/config/animation";
+import { PAGE_ANIMATION } from "@shared/config/animation";
 import { Accordion } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC } from "react";
@@ -25,8 +25,8 @@ export const FAQ: FC = () => {
         <motion.h1
           initial="hidden"
           whileInView="visible"
-          viewport={MAIN_PAGE_ANIMATION.viewport}
-          variants={MAIN_PAGE_ANIMATION.animationVision}
+          viewport={PAGE_ANIMATION.viewport}
+          variants={PAGE_ANIMATION.animationVision}
           className={styles.title}
         >
           {t("faq.page_title")}

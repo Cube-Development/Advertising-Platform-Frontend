@@ -1,0 +1,17 @@
+.wrapper {
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 10px;
+
+  .parameters__row {
+    display: grid;
+    grid-template: 1fr / 1fr 2fr;
+    column-gap: 10px;
+    justify-items: start;
+    padding: 20px;
+    border-radius: 12px;
+    height: 60px;
+    box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.16);
+    align-items: center;
+  }
+}

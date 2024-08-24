@@ -5,9 +5,8 @@
   padding: 25px 20px;
   height: 300px;
   border-radius: 20px;
-  border: 0.5px solid var(--Personal-colors-main);
   background: #fff;
-  box-shadow: 0px 4px 16px 0px rgba(144, 71, 237, 0.18);
+  box-shadow: 0px 4px 16px 0px var(--Personal-colors-main);
 
   .title {
     color: var(--Personal-colors-black);
