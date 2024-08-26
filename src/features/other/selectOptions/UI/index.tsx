@@ -110,9 +110,11 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
   const handleOptionChange = (
     event: React.MouseEvent<HTMLLIElement | EventTarget>,
   ) => {
+    console.log(event.target);
     const selectedId = Number(
       (event.target as HTMLLIElement).getAttribute("data-value"),
     );
+    console.log(selectedId);
     const option: IOption = allOptions!.find(
       (option) => option?.id === selectedId,
     )!;
@@ -189,13 +191,13 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
           <div>
             {single ? (
               <div className={styles.filter}>
-                {selectedOption?.img ? <selectedOption.img /> : null}
+                {selectedOption?.img ? <selectedOption.img /> : "..."}
                 {(!isFilter ||
                   screen >= BREAKPOINT.SM ||
                   !isPlatformFilter) && (
                   <span className="truncate">
                     {selectedOption
-                      ? selectedOption.name
+                      ? selectedOption?.name
                       : allText.default_value}
                   </span>
                 )}

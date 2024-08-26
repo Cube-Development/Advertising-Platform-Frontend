@@ -1,9 +1,11 @@
 .wrapper {
-  background-color: #0074cc; /* Замените на нужный вам синий цвет */
-  color: var(--Personal-colors-White) fff; /* Цвет текста внутри футера */
-  padding: 20px; /* Расстояние вокруг содержимого футера */
+  background: var(--Gradients-Gradient-1);
+  color: var(--Personal-colors-White) fff;
+  padding: 20px;
   width: 100%;
   min-height: 20vh;
+  display: grid;
   justify-content: center;
+  align-items: center;
   text-align: center;
 }

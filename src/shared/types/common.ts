@@ -5,6 +5,6 @@ export interface IStartProjectProps {
 export interface IOption {
   id: number;
   name: string;
-  img?: () => JSX.Element;
+  img?: any;
   type?: string;
 }

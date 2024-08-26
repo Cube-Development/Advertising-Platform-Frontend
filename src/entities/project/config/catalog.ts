@@ -1,4 +1,4 @@
-import { SortUpIcon, TelegramIcon } from "@shared/assets";
+import { SortDownIcon, SortUpIcon, TelegramIcon } from "@shared/assets";
 
 export enum catalogBarFilter {
   parameters = "parameters",
@@ -43,24 +43,11 @@ export const platformToIcon: { [key: number]: () => JSX.Element } = {
   2: TelegramIcon,
 };
 
-export const sortToIcon: { [key: number]: () => JSX.Element } = {
-  0: SortUpIcon,
-  1: SortUpIcon,
-  2: SortUpIcon,
-  3: SortUpIcon,
-  4: SortUpIcon,
-  5: SortUpIcon,
-  6: SortUpIcon,
-  7: SortUpIcon,
-  8: SortUpIcon,
-  9: SortUpIcon,
-};
-
 export const sortingTypes = [
   {
     name: "sorting.views",
     type: sortingFilter.views_down,
-    img: SortUpIcon,
+    img: SortDownIcon,
     id: 0,
   },
   {
@@ -72,7 +59,7 @@ export const sortingTypes = [
   {
     name: "sorting.subscribers",
     type: sortingFilter.subscribers_down,
-    img: SortUpIcon,
+    img: SortDownIcon,
     id: 2,
   },
   {
@@ -84,7 +71,7 @@ export const sortingTypes = [
   {
     name: "sorting.price",
     type: sortingFilter.price_down,
-    img: SortUpIcon,
+    img: SortDownIcon,
     id: 4,
   },
   {
@@ -96,25 +83,25 @@ export const sortingTypes = [
   {
     name: "sorting.cpv",
     type: sortingFilter.cpv,
-    img: SortUpIcon,
+    img: SortDownIcon,
     id: 6,
   },
   {
     name: "sorting.er",
     type: sortingFilter.er,
-    img: SortUpIcon,
+    img: SortDownIcon,
     id: 7,
   },
   {
     name: "sorting.match",
     type: sortingFilter.match,
-    img: SortUpIcon,
+    img: SortDownIcon,
     id: 8,
   },
   {
     name: "sorting.rate",
     type: sortingFilter.rate,
-    img: SortUpIcon,
+    img: SortDownIcon,
     id: 9,
   },
 ];

@@ -1,4 +1,4 @@
-import { TelegramIcon } from "@shared/assets";
+import { InstagramIcon, TelegramIcon, YouTubeIcon } from "@shared/assets";
 
 export enum platformTypesStr {
   telegram = "telegram",
@@ -24,7 +24,7 @@ export const platformTypes = [
     name: "filter.telegram",
     id: platformTypesNum.telegram,
     type: platformTypesStr.telegram,
-    // img: TelegramIcon,
+    img: TelegramIcon,
     default_value: "platform_types.telegram.default_value",
     post_types: [
       {
@@ -37,7 +37,7 @@ export const platformTypes = [
     name: "filter.instagram",
     id: platformTypesNum.instagram,
     type: platformTypesStr.instagram,
-    // img: TelegramIcon,
+    img: InstagramIcon,
     default_value: "platform_types.instagram.default_value",
     post_types: [
       {
@@ -54,7 +54,7 @@ export const platformTypes = [
     name: "filter.youtube",
     id: platformTypesNum.youtube,
     type: platformTypesStr.youtube,
-    // img: TelegramIcon,
+    img: YouTubeIcon,
     default_value: "platform_types.youtube.default_value",
     post_types: [
       {

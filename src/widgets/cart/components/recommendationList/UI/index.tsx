@@ -6,6 +6,8 @@ import { motion } from "framer-motion";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { Accordion } from "@shared/ui";
+import { ArrowSmallVerticalIcon } from "@shared/assets";
 
 interface RecommendationListProps {
   channels: ICatalogChannel[];
@@ -25,14 +27,15 @@ export const RecommendationList: FC<RecommendationListProps> = ({
   return (
     <div className={styles.wrapper}>
       <div className={styles.top}>
-        <p>{t("cart.recomendation")}</p>
+        <p className="truncate">{t("cart.recomendation")}</p>
         <button onClick={handleChange}>
           {isVisible ? t("cart.hide") : t("cart.show")}
+          <ArrowSmallVerticalIcon />
         </button>
       </div>
 
       {isVisible && (
-        <div className={styles.cards}>
+        <Accordion type="single" collapsible className={styles.cards}>
           {channels.map((card, index) => (
             <motion.div
               key={card.id + index}
@@ -50,7 +53,7 @@ export const RecommendationList: FC<RecommendationListProps> = ({
               />
             </motion.div>
           ))}
-        </div>
+        </Accordion>
       )}
     </div>
   );

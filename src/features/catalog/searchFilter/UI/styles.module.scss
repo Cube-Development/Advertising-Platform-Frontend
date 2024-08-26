@@ -3,24 +3,23 @@
   grid-template: 1fr / minmax(10px, auto) 1fr;
   column-gap: 10px;
   border-radius: 10px;
-  height: 30px;
   border: 1px solid var(--black-20, #ccc);
   background: #fff;
-  padding: 0 20px;
+  padding: 5px 10px;
   align-items: center;
   justify-content: left;
+
   svg {
-    height: 14px;
+    height: 20px;
     width: auto;
     transform: scaleX(-1);
   }
 
   input {
     width: 100%;
-    font-size: 12px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 500;
-    line-height: 1;
     &::placeholder {
       color: var(--black-20, #ccc);
     }
