@@ -13,6 +13,8 @@ import "swiper/css/navigation";
 import { EffectCoverflow, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./styles.module.scss";
+import { ChevronLeft, ChevronRight } from "lucide-react";
+import SwiperCore from "swiper";
 
 interface RecommendationListProps {
   cards: ICatalogChannel[];
@@ -42,14 +44,51 @@ export const RecommendationList: FC<RecommendationListProps> = ({
 
   return (
     <div className={styles.wrapper}>
-      <p className={styles.title}>{t("channel.recommend.title")}</p>
+      <p className={`${styles.title} container`}>
+        {t("channel.recommend.title")}
+      </p>
       <div className={styles.carousel}>
         <Accordion type="single" collapsible className={styles.cards}>
           <Swiper
+            navigation={{
+              prevEl: ".prev",
+              nextEl: ".next",
+            }}
             modules={[Navigation, EffectCoverflow]}
             spaceBetween={10}
-            slidesPerView={3}
-            className={styles.wrapper}
+            // slidesPerView={3}
+            className={`${styles.wrapper} channel`}
+            breakpoints={{
+              3000: {
+                slidesPerView: 7.5,
+              },
+              2500: {
+                slidesPerView: 6.5,
+              },
+              2000: {
+                slidesPerView: 5.5,
+              },
+              1576: {
+                slidesPerView: 4.5,
+              },
+              1366: {
+                slidesPerView: 3.5,
+              },
+              992: {
+                slidesPerView: 2.4,
+              },
+              768: {
+                slidesPerView: 1.7,
+                spaceBetween: 15,
+              },
+              576: {
+                slidesPerView: 1.5,
+              },
+              375: {
+                slidesPerView: 1.3,
+                spaceBetween: 10,
+              },
+            }}
           >
             {cards.map((card, index) => (
               <SwiperSlide key={index}>
@@ -75,6 +114,14 @@ export const RecommendationList: FC<RecommendationListProps> = ({
                 <SkeletonRecommendCard />
               </div>
             </SwiperSlide>
+            <div className={styles.nav}>
+              <p>
+                <ChevronLeft className="prev" />
+              </p>
+              <p>
+                <ChevronRight className="next" />
+              </p>
+            </div>
           </Swiper>
         </Accordion>
       </div>

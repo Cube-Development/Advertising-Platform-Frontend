@@ -58,7 +58,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
   const [screen, setScreen] = useState<number>(window.innerWidth);
   const [recommendationCard, setRecCard] = useState<IFilterSearch | null>(null);
   const [recommendationCards, setRecCards] = useState<IFilterSearch[] | null>(
-    null
+    null,
   );
 
   useEffect(() => {

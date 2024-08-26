@@ -380,6 +380,13 @@ main {
   z-index: 0;
 }
 
+.swiper.channel {
+  margin: 0;
+  padding: 20px 8px 200px 8px;
+  z-index: 0;
+  max-height: 480px;
+}
+
 .slide__price {
   display: grid;
   filter: blur(2.5px);

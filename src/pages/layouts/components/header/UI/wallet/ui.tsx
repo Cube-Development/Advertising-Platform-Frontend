@@ -1,22 +1,24 @@
+import { useGetBalanceQuery, walletSlice } from "@entities/wallet";
 import { CloseIcon, PlusIcon } from "@shared/assets";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
+import { paths } from "@shared/routing";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
 import { Link } from "react-router-dom";
-import { paths } from "@shared/routing";
-import { useGetBalanceQuery, walletSlice } from "@entities/wallet";
-import { useAppDispatch, useAppSelector } from "@shared/hooks";
+import styles from "./styles.module.scss";
 
 export const Wallet: FC = () => {
   const { t } = useTranslation();
-  const { data } = useGetBalanceQuery();
+  // const { data, isLoading } = useGetBalanceQuery();
   const [isMenuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
-  const dispatch = useAppDispatch();
+  // const dispatch = useAppDispatch();
 
-  useEffect(() => {
-    dispatch(walletSlice.actions.setBalance(data?.balance || 0));
-  }, [data]);
+  // useEffect(() => {
+  //   if (data) {
+  //     dispatch(walletSlice.actions.setBalance(data?.balance));
+  //   }
+  // }, [data, isLoading]);
 
   const { balance } = useAppSelector((state) => state.wallet);
 

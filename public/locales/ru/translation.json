@@ -16,7 +16,8 @@
     "wallet": "Кошелёк",
     "languages": "",
     "addPlatform": "Добавить канал",
-    "calculateIncome": "Рассчитать доход"
+    "calculateIncome": "Рассчитать доход",
+    "faq": "FAQ"
   },
 
   "roles": {
@@ -45,6 +46,7 @@
 
   "burger_menu": {
     "services": "Сервисы",
+    "balance": "Общий баланс",
     "navigation": "Навигация",
     "catalog": "Каталог площадок",
     "turnkey": "Размещение под ключ",

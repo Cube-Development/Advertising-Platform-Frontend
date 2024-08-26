@@ -76,6 +76,23 @@
           line-height: 1;
           padding: 5px 25px;
         }
+
+        .balance {
+          padding: 5px 25px 25px 25px;
+          p {
+            font-size: 24px;
+            font-style: normal;
+            font-weight: 600;
+            line-height: 1;
+          }
+
+          span {
+            font-size: 12px;
+            font-style: normal;
+            font-weight: 500;
+            line-height: 1;
+          }
+        }
       }
     }
 
@@ -129,16 +146,22 @@
 .burger__icon_btn {
   --width: 32px;
   --height: 32px;
-  --line-height: 1.5px;
+  --line-height: 1.25px;
   // --color: var(--Gradients-1);;
   --color: var(--Personal-colors-black);
-
+  cursor: pointer;
   height: var(--height);
   width: var(--width);
   display: grid;
   grid-auto-flow: column;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: 768px) {
+    --width: 24px;
+    --height: 24px;
+    --line-height: 1.25px;
+  }
 }
 
 .burger__icon {
@@ -155,7 +178,7 @@
     position: absolute;
     left: 0;
     width: var(--width);
-    height: 2px;
+    height: var(--line-height);
     background-color: var(--color);
     border-radius: 5px;
   }
