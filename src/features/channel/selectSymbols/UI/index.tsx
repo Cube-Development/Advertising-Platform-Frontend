@@ -39,6 +39,7 @@ export const SelectSymbol: FC<SelectSymbolProps> = ({
         <InfoIcon />
       </div>
       <div className={styles.slider}>
+        <p>{min}</p>
         <MySliderLimit
           type="range"
           min={min}
@@ -46,10 +47,7 @@ export const SelectSymbol: FC<SelectSymbolProps> = ({
           value={position}
           onChange={handleChange}
         />
-        <div className={styles.position}>
-          <p>{min}</p>
-          <p>{position}</p>
-        </div>
+        <p>{position}</p>
       </div>
     </div>
   );

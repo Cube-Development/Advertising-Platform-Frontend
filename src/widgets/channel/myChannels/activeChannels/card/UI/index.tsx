@@ -272,8 +272,8 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
             <ArrowSmallVerticalIcon
               className={
                 isSubcardOpen
-                  ? "default__icon__white rotate"
-                  : "default__icon__white rotate__down"
+                  ? "icon__white rotate"
+                  : "icon__white rotate__down"
               }
             />
           </div>

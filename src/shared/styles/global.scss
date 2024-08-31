@@ -316,19 +316,35 @@ main {
 }
 
 .active__icon {
-  stroke: var(--Personal-colors-main);
+  // stroke: var(--Personal-colors-main);
+  --start-color: var(--Personal-colors-main);
 }
 
-.default__icon__grey {
-  stroke: var(--choosen-text);
+// .default__icon__grey {
+//   stroke: var(--choosen-text);
+// }
+
+// .default__icon__black {
+//   stroke: var(--Personal-colors-black);
+// }
+
+// .default__icon__white {
+//   stroke: var(--Personal-colors-White);
+// }
+
+.active__gradient__icon {
+  --start-color: var(--Personal-colors-main);
+  --end-color: var(--Personal-colors-main2);
 }
 
-.default__icon__black {
-  stroke: var(--Personal-colors-black);
+.icon__white {
+  --start-color: var(--Personal-colors-White);
+  --end-color: var(--Personal-colors-White);
 }
 
-.default__icon__white {
-  stroke: var(--Personal-colors-White);
+.icon__grey {
+  --start-color: var(--choosen-text);
+  --end-color: var(--choosen-text);
 }
 
 .show {

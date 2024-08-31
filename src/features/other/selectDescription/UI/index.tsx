@@ -1,9 +1,9 @@
+import { channelData } from "@entities/channel";
 import { InfoIcon } from "@shared/assets";
 import { FC, useState } from "react";
 import { UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { channelData } from "@entities/channel";
 
 interface SelectDescriptionProps {
   title: string;
@@ -45,7 +45,7 @@ export const SelectDescription: FC<SelectDescriptionProps> = ({
         <textarea
           id="input"
           value={description}
-          rows={10}
+          rows={9}
           onChange={handleChange}
           maxLength={1000}
           placeholder={t(placeholder)}

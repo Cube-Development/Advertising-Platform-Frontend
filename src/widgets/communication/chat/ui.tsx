@@ -318,7 +318,7 @@ export const Chat: FC = () => {
                       isOrder={isOrder}
                     />
                     <div className={styles.arrow} onClick={handleCloseChat}>
-                      <ArrowLongHorizontalIcon className="default__icon__grey" />
+                      <ArrowLongHorizontalIcon className="icon__grey" />
                     </div>
                   </motion.div>
                 )}

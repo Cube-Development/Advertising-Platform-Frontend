@@ -2,7 +2,7 @@ import { IBloggerOffers, offerStatusFilter } from "@entities/offer";
 import { platformTypesNum } from "@entities/platform";
 import { IOrderFeature } from "@entities/project";
 import { authApi, ADV_PROJECTS, BLOGGER_OFFERS } from "@shared/api";
-import { languagesNum } from "@shared/config";
+import { INTERSECTION_ELEMENTS, languagesNum } from "@shared/config";
 
 interface OrderDate {
   date: string;
@@ -67,6 +67,31 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
         method: `POST`,
         body: BodyParams,
       }),
+      transformResponse: (response: IBloggerOffers) => {
+        return {
+          ...response,
+          isLast:
+            response.orders.length !== INTERSECTION_ELEMENTS.bloggerOffers,
+        };
+      },
+      serializeQueryArgs: ({ endpointName, queryArgs }) => {
+        const { status } = queryArgs;
+        // console.log( `${endpointName}/${status}/${page}`)
+        return `${endpointName}/${status}`;
+      },
+      merge: (currentCache, newItems, queryArgs) => {
+        return {
+          ...newItems,
+          projects: [...currentCache.orders, ...newItems.orders],
+          status: queryArgs.arg.status,
+          isLast:
+            newItems.orders.length !== INTERSECTION_ELEMENTS.bloggerOffers,
+        };
+      },
+
+      // forceRefetch({ currentArg, previousArg }) {
+      //   return currentArg?.page !== previousArg?.page;
+      // },
       providesTags: [BLOGGER_OFFERS],
     }),
   }),

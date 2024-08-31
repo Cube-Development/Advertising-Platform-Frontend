@@ -63,7 +63,7 @@ export const FormatList: FC<IFormatListProps> = ({
       <div className={styles.selects} onClick={(e) => handleButtonClick(e)}>
         <div className={isMenuOpen ? "rotate" : "rotate__down"}>
           <ArrowSmallVerticalIcon
-            className={isMenuOpen ? "active__icon" : "default__icon__black"}
+            className={isMenuOpen ? "active__icon" : ""}
           />
         </div>
         <p>

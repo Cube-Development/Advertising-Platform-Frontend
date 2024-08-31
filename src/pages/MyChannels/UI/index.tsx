@@ -1,5 +1,4 @@
 import {
-  AllChannelTypes,
   IModerationChannel,
   channelStatusFilter,
   getChannelsByStatusReq,
@@ -41,102 +40,56 @@ export const MyChannelsPage: FC = () => {
     platform: formState.platform,
     language: language?.id || Languages[0].id,
     page: currentPage,
-    elements_on_page: INTERSECTION_ELEMENTS.orders,
+    elements_on_page: INTERSECTION_ELEMENTS.myChannels,
     date_sort: "increase",
     status: formState.status,
   };
 
   const { data, isFetching } = useGetChannelsByStatusQuery(getParams);
 
-  const [channels, setChannels] = useState<AllChannelTypes[]>(
-    data?.channels ? data?.channels : [],
-  );
+  // const [channels, setChannels] = useState<AllChannelTypes[]>(
+  //   data?.channels ? data?.channels : []
+  // );
 
-  useEffect(() => {
-    if (data && currentPage !== 1) {
-      setChannels([...channels, ...data.channels]);
-    } else {
-      data && setChannels(data.channels);
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data && currentPage !== 1) {
+  //     setChannels([...channels, ...data.channels]);
+  //   } else {
+  //     data && setChannels(data.channels);
+  //   }
+  // }, [data]);
 
   useEffect(() => {
     setCurrentPage(1);
   }, [formState]);
 
   return (
-    <>
+    <div className="container sidebar">
       <BarFilter
         page={pageFilter.platform}
         setValue={setValue}
-        listLength={!channels?.length}
+        listLength={!data?.channels?.length}
         changeStatus={(status) => setValue("status", status)}
         statusFilter={formState.status}
       />
 
-      {formState.status === channelStatusFilter.active ? (
+      {formState.status !== channelStatusFilter.moderation ? (
         <ActiveChannels
-          cards={channels!}
+          cards={data?.channels!}
           handleOnChangePage={handleOnChangePage}
           isLoading={isFetching}
-          isNotEmpty={
-            data
-              ? data?.channels?.length === INTERSECTION_ELEMENTS.orders
-              : false
-          }
+          isLast={data?.isLast || false}
           statusFilter={formState.status}
-        />
-      ) : formState.status === channelStatusFilter.moderation ? (
-        <ModerationChannels
-          statusFilter={formState.status}
-          cards={channels! as IModerationChannel[]}
-          handleOnChangePage={handleOnChangePage}
-          isLoading={isFetching}
-          isNotEmpty={
-            data
-              ? data?.channels?.length === INTERSECTION_ELEMENTS.orders
-              : false
-          }
-        />
-      ) : formState.status === channelStatusFilter.moderationReject ? (
-        <ActiveChannels
-          statusFilter={formState.status}
-          cards={channels!}
-          handleOnChangePage={handleOnChangePage}
-          isLoading={isFetching}
-          isNotEmpty={
-            data
-              ? data?.channels?.length === INTERSECTION_ELEMENTS.orders
-              : false
-          }
-        />
-      ) : formState.status === channelStatusFilter.inactive ? (
-        <ActiveChannels
-          statusFilter={formState.status}
-          cards={channels!}
-          handleOnChangePage={handleOnChangePage}
-          isLoading={isFetching}
-          isNotEmpty={
-            data
-              ? data?.channels?.length === INTERSECTION_ELEMENTS.orders
-              : false
-          }
         />
       ) : (
-        formState.status === channelStatusFilter.banned && (
-          <ActiveChannels
-            statusFilter={formState.status}
-            cards={channels!}
-            handleOnChangePage={handleOnChangePage}
-            isLoading={isFetching}
-            isNotEmpty={
-              data
-                ? data?.channels?.length === INTERSECTION_ELEMENTS.orders
-                : false
-            }
-          />
-        )
+        <ModerationChannels
+          statusFilter={formState.status}
+          cards={data?.channels! as IModerationChannel[]}
+          handleOnChangePage={handleOnChangePage}
+          isLoading={isFetching}
+          isLast={data?.isLast || false}
+        />
       )}
-    </>
+    </div>
   );
 };

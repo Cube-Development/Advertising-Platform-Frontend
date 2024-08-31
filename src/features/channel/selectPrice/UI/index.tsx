@@ -1,8 +1,3 @@
-import { FC } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import { InfoIcon } from "@shared/assets";
-import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import {
   IAddChannelData,
   IAddFormat,
@@ -10,6 +5,11 @@ import {
   IFormatPriceProps,
   channelData,
 } from "@entities/channel";
+import { InfoIcon } from "@shared/assets";
+import { FC } from "react";
+import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 interface SelectPriceProps {
   title: string;

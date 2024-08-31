@@ -163,7 +163,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
                       </p>
                     </Link>
                   </div>
-                  {isAuth && (
+                  {isAuth && screen < BREAKPOINT.MD && (
                     <div className={styles.accordion__block}>
                       <p className={styles.accordion__title}>
                         {t("burger_menu.balance")}

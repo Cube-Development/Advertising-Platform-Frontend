@@ -44,15 +44,15 @@ export const MenuItem: React.FC<IMenuItems> = ({
           <AccordionTrigger>
             <div className={`${styles.row} ${isActive ? styles.active : ""}`}>
               <div className={styles.row__title}>
-                {item.item.img && <item.item.img />}
+                {item.item.img && (
+                  <item.item.img
+                    className={`${isActive ? "icon__white" : ""}`}
+                  />
+                )}
                 {t(item.item.title!)}
               </div>
               <ArrowSmallVerticalIcon
-                className={
-                  isActive
-                    ? "default__icon__white rotate"
-                    : "default__icon__black rotate__down"
-                }
+                className={isActive ? "icon__white rotate" : "rotate__down"}
               />
             </div>
           </AccordionTrigger>

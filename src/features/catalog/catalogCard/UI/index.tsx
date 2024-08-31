@@ -190,8 +190,8 @@ export const CatalogCard: FC<CatalogCardProps> = ({
                   <ArrowSmallVerticalIcon
                     className={
                       isSubcardOpen
-                        ? "default__icon__grey rotate"
-                        : "default__icon__grey rotate__down"
+                        ? "icon__grey rotate"
+                        : "icon__grey rotate__down"
                     }
                   />
                 </div>

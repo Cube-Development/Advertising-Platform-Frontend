@@ -29,4 +29,6 @@ export interface IBloggerOffers {
   page: number;
   elements: number;
   orders: IBloggerOfferCard[];
+  status?: string;
+  isLast?: boolean;
 }

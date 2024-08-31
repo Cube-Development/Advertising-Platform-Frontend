@@ -1,20 +1,21 @@
-import { FC } from "react";
-import styles from "./styles.module.scss";
-import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
-import { ContinueTemplate, NewProject, ZeroProject } from "@features/project";
-import { TurnkeyProject } from "@features/other";
 import {
   AdvDevProjectCard,
   IAdvManagerProjectsDevCard,
   SkeletonAdvDevProjectCard,
 } from "@entities/project";
-import { INTERSECTION_ELEMENTS } from "@shared/config";
+import { TurnkeyProject } from "@features/other";
+import { ContinueTemplate, NewProject, ZeroProject } from "@features/project";
+import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
+import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
+import { motion } from "framer-motion";
+import { FC } from "react";
+import styles from "./styles.module.scss";
 
 interface DevProjectsListProps {
   projects: IAdvManagerProjectsDevCard[];
   handleOnChangePage: () => void;
   isLoading: boolean;
-  isNotEmpty: boolean;
+  isLast: boolean;
   typeFilter: string;
 }
 
@@ -22,11 +23,11 @@ export const DevProjectsList: FC<DevProjectsListProps> = ({
   projects,
   handleOnChangePage,
   isLoading,
-  isNotEmpty,
+  isLast,
   typeFilter,
 }) => {
   return (
-    <div className="container">
+    <div className={styles.wrapper}>
       {!isLoading && projects?.length === 0 ? (
         <ZeroProject
           listLength={true}
@@ -35,21 +36,28 @@ export const DevProjectsList: FC<DevProjectsListProps> = ({
           typeFilter={typeFilter}
         />
       ) : (
-        <div className={styles.wrapper}>
-          {isLoading &&
-            Array.from({ length: INTERSECTION_ELEMENTS.orders }).map(
-              (_, index) => <SkeletonAdvDevProjectCard key={index} />,
-            )}
-          {!isLoading &&
-            projects?.map((card, index) => (
+        <div className={styles.cards}>
+          {projects?.map((card, index) => (
+            <motion.div
+              key={card.id + index}
+              initial="hidden"
+              animate="visible"
+              custom={index % INTERSECTION_ELEMENTS.advOrders}
+              variants={PAGE_ANIMATION.animationUp}
+            >
               <AdvDevProjectCard
                 key={index}
                 card={card}
                 ContinueBtn={ContinueTemplate}
                 typeFilter={typeFilter}
               />
-            ))}
-          {isNotEmpty && (
+            </motion.div>
+          ))}
+          {isLoading &&
+            Array.from({ length: INTERSECTION_ELEMENTS.advOrders }).map(
+              (_, index) => <SkeletonAdvDevProjectCard key={index} />,
+            )}
+          {!isLast && (
             <div className={styles.show_more} onClick={handleOnChangePage}>
               {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
             </div>

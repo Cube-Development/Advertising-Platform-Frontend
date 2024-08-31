@@ -4,15 +4,14 @@ export const enum CALENDAR {
 
 export const enum INTERSECTION_ELEMENTS {
   catalog = 10,
-  orders = 4,
-  offers = 4,
-  platforms = 4,
-  modPlatforms = 4,
-  channels = 15,
+  advOrders = 4,
+  bloggerOffers = 4,
+  myChannels = 4,
+  myModChannels = 4,
   history = 10,
   chat = 20,
   managerOrders = 4,
-  review = 4,
+  channelReview = 4,
   recommendCardsChannel = 10,
   recommendCardsCart = 10,
 }

@@ -7,7 +7,7 @@ import {
   IPostChannel,
 } from "@entities/project";
 import { ADV_PROJECTS, BLOGGER_OFFERS, authApi } from "@shared/api";
-import { languagesNum } from "@shared/config";
+import { INTERSECTION_ELEMENTS, languagesNum } from "@shared/config";
 
 export interface ICreatePostReq {
   project_id: string;
@@ -128,6 +128,31 @@ export const advProjectsAPI = authApi.injectEndpoints({
         method: `POST`,
         body: BodyParams,
       }),
+      transformResponse: (response: IAdvProjects, meta, arg) => {
+        console.log("transformResponse", meta, arg);
+        return {
+          ...response,
+          status: arg?.status,
+          isLast: response.projects.length !== INTERSECTION_ELEMENTS.advOrders,
+        };
+      },
+      serializeQueryArgs: ({ endpointName, queryArgs }) => {
+        const { status, page } = queryArgs;
+        // console.log( `${endpointName}/${status}/${page}`)
+        return `${endpointName}/${status}`;
+      },
+      merge: (currentCache, newItems, queryArgs) => {
+        return {
+          ...newItems,
+          projects: [...currentCache.projects, ...newItems.projects],
+          status: queryArgs.arg.status,
+          isLast: newItems.projects.length !== INTERSECTION_ELEMENTS.advOrders,
+        };
+      },
+
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg?.page !== previousArg?.page;
+      },
       providesTags: [ADV_PROJECTS],
     }),
     getAdvSubprojects: build.query<IAdvSubprojects, getProjectSubcardReq>({
@@ -157,6 +182,28 @@ export const advProjectsAPI = authApi.injectEndpoints({
         method: "GET",
         params: params,
       }),
+      transformResponse: (response: IAdvProjects) => {
+        return {
+          ...response,
+          isLast:
+            response.projects.length !== INTERSECTION_ELEMENTS.managerOrders,
+        };
+      },
+      serializeQueryArgs: ({ endpointName, queryArgs }) => {
+        const { status } = queryArgs;
+        return `${endpointName}/${status}`;
+      },
+      merge: (currentCache, newItems) => {
+        return {
+          ...newItems,
+          projects: [...currentCache.projects, ...newItems.projects],
+          isLast:
+            newItems.projects.length !== INTERSECTION_ELEMENTS.managerOrders,
+        };
+      },
+      // forceRefetch({ currentArg, previousArg }) {
+      //   return currentArg !== previousArg;
+      // },
     }),
   }),
 });

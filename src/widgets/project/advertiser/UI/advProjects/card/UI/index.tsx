@@ -1,22 +1,15 @@
+import { channelStatusFilter } from "@entities/channel";
+import { offerStatusFilter } from "@entities/offer";
 import {
-  ArrowSmallVerticalIcon,
-  CancelIcon,
-  CompliteIcon,
-  MoreIcon,
-  RocketIcon,
-  SearchIcon,
-  WaitIcon,
-} from "@shared/assets";
-import {
-  AccountsLoader,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@shared/ui";
-import { FC, useEffect, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import { Chat } from "@widgets/communication";
+  AdvSubcard,
+  IAdvProjectCard,
+  advManagerProjectStatusFilter,
+  getProjectSubcardReq,
+  myProjectStatusFilter,
+  projectTypesFilter,
+  useGetAdvManagerSubprojectsQuery,
+  useGetAdvSubprojectsQuery,
+} from "@entities/project";
 import {
   AcceptPost,
   ChangeChannel,
@@ -28,18 +21,25 @@ import {
 } from "@features/order";
 import { AcceptProject } from "@features/project";
 import {
-  AdvSubcard,
-  IAdvProjectCard,
-  advManagerProjectStatusFilter,
-  getProjectSubcardReq,
-  myProjectStatusFilter,
-  projectTypesFilter,
-  useGetAdvManagerSubprojectsQuery,
-  useGetAdvSubprojectsQuery,
-} from "@entities/project";
+  ArrowSmallVerticalIcon,
+  CancelIcon,
+  CompliteIcon,
+  MoreIcon,
+  RocketIcon,
+  SearchIcon,
+  WaitIcon,
+} from "@shared/assets";
 import { Languages, accordionTypes } from "@shared/config";
-import { channelStatusFilter } from "@entities/channel";
-import { offerStatusFilter } from "@entities/offer";
+import {
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+  AccountsLoader,
+} from "@shared/ui";
+import { Chat } from "@widgets/communication";
+import { FC, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 interface AdvProjectCardProps {
   card: IAdvProjectCard;
@@ -247,8 +247,8 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
               <ArrowSmallVerticalIcon
                 className={
                   isSubcardOpen
-                    ? "default__icon__white rotate"
-                    : "default__icon__white rotate__down"
+                    ? "icon__white rotate"
+                    : "icon__white rotate__down"
                 }
               />
             )}

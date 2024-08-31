@@ -19,7 +19,7 @@ export const TurnkeyProject: FC<IStartProjectProps> = ({ listLength }) => {
         {listLength
           ? t(`orders_advertiser.turnkey_project`)
           : t(`orders_advertiser.start_turnkey_project`)}
-        <KeyIcon />
+        <KeyIcon className="icon__white" />
       </MyButton>
     </Link>
   );

@@ -1,10 +1,6 @@
-import { BarFilter } from "@widgets/barFilter";
-import { FC, useEffect, useState } from "react";
-import { AdvProjectsList } from "./advProjects";
-import { DevProjectsList } from "./devProjects";
-import { QueryParams } from "@shared/functions";
+import { channelStatusFilter } from "@entities/channel";
+import { offerStatusFilter } from "@entities/offer";
 import {
-  IAdvProjectCard,
   advManagerProjectStatusFilter,
   advertiserProjectTypes,
   getProjectsCardReq,
@@ -14,10 +10,13 @@ import {
 } from "@entities/project";
 import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 import i18n from "@shared/config/i18n";
+import { QueryParams } from "@shared/functions";
 import { pageFilter } from "@shared/routing";
+import { BarFilter } from "@widgets/barFilter";
+import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { channelStatusFilter } from "@entities/channel";
-import { offerStatusFilter } from "@entities/offer";
+import { AdvProjectsList } from "./advProjects";
+import { DevProjectsList } from "./devProjects";
 
 export const AdvOrders: FC = () => {
   const language = Languages.find((lang) => {
@@ -40,8 +39,13 @@ export const AdvOrders: FC = () => {
   const page = pageFilter.order;
   const [currentPage, setCurrentPage] = useState(1);
   const handleOnChangePage = () => {
+    console.log(currentPage);
     setCurrentPage(currentPage + 1);
   };
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [formState.status]);
 
   // check queries for project types to show current orders
   useEffect(() => {
@@ -62,8 +66,9 @@ export const AdvOrders: FC = () => {
     page: currentPage,
     date_sort: "increase",
     status: formState.status,
-    elements_on_page: INTERSECTION_ELEMENTS.orders,
+    elements_on_page: INTERSECTION_ELEMENTS.advOrders,
   };
+
   const { data: projectsSelf, isFetching: isFetchingSelf } =
     useGetAdvProjectsQuery(getParams, {
       skip: formState.type !== projectTypesFilter.myProject,
@@ -75,38 +80,16 @@ export const AdvOrders: FC = () => {
         skip: formState.type !== projectTypesFilter.managerProject,
       },
     );
-  // data: projectsMan fetch2
-  // data: projectsManDev fetch3
-
-  const [projects, setProjects] = useState<IAdvProjectCard[]>(
-    projectsSelf?.projects || projectsManager?.projects || [],
-  );
-
-  useEffect(() => {
-    if (projectsSelf && currentPage !== 1) {
-      setProjects([...projects, ...projectsSelf.projects]);
-    } else {
-      projectsSelf && setProjects(projectsSelf.projects);
-    }
-  }, [projectsSelf]);
-
-  useEffect(() => {
-    if (projectsManager && currentPage !== 1) {
-      setProjects([...projects, ...projectsManager.projects]);
-    } else {
-      projectsManager && setProjects(projectsManager.projects);
-    }
-  }, [projectsManager]);
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [formState.status]);
-
+  // console.log("projectsSelf", projectsSelf);
   return (
-    <>
+    <div className="container sidebar">
       <BarFilter
         page={page}
-        listLength={!!projects?.length}
+        listLength={
+          !!(
+            projectsSelf?.projects?.length || projectsManager?.projects?.length
+          )
+        }
         typeFilter={formState.type}
         changeStatus={(status) => setValue("status", status)}
         changeType={(type) => setValue("type", type)}
@@ -115,32 +98,36 @@ export const AdvOrders: FC = () => {
       {formState.type === projectTypesFilter.managerProject &&
       formState.status === advManagerProjectStatusFilter.develop ? (
         <DevProjectsList
-          projects={projects!}
+          // projects={projectsSelf?.projects || projectsManager?.projects || []}
+          projects={
+            (projectsSelf?.status === formState.status &&
+              projectsSelf?.projects) ||
+            (projectsManager?.status === formState.status &&
+              projectsManager?.projects) ||
+            []
+          }
           handleOnChangePage={handleOnChangePage}
           isLoading={isFetchingSelf || isFetchingManager}
-          isNotEmpty={
-            projectsSelf?.projects?.length === INTERSECTION_ELEMENTS.orders ||
-            projectsManager?.projects?.length ===
-              INTERSECTION_ELEMENTS.orders ||
-            false
-          }
+          isLast={projectsSelf?.isLast || projectsManager?.isLast || false}
           typeFilter={formState.type}
         />
       ) : (
         <AdvProjectsList
           statusFilter={formState.status}
           typeFilter={formState.type}
-          projects={projects!}
+          // projects={projectsSelf?.projects || projectsManager?.projects || []}
+          projects={
+            (projectsSelf?.status === formState.status &&
+              projectsSelf?.projects) ||
+            (projectsManager?.status === formState.status &&
+              projectsManager?.projects) ||
+            []
+          }
           handleOnChangePage={handleOnChangePage}
           isLoading={isFetchingSelf || isFetchingManager}
-          isNotEmpty={
-            projectsSelf?.projects?.length === INTERSECTION_ELEMENTS.orders ||
-            projectsManager?.projects?.length ===
-              INTERSECTION_ELEMENTS.orders ||
-            false
-          }
+          isLast={projectsSelf?.isLast || projectsManager?.isLast || false}
         />
       )}
-    </>
+    </div>
   );
 };

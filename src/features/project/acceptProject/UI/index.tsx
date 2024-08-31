@@ -9,7 +9,7 @@ export const AcceptProject: FC = () => {
   return (
     <MyButton buttons_type="button__blue" className={styles.button}>
       {t(`order_btn.accept`)}
-      <ArrowLongHorizontalIcon className="default__icon__white" />
+      <ArrowLongHorizontalIcon className="icon__white" />
     </MyButton>
   );
 };

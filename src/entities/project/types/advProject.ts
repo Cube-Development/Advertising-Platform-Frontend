@@ -4,6 +4,8 @@ export interface IAdvProjects {
   page: number;
   elements: number;
   projects: IAdvProjectCard[];
+  isLast?: boolean;
+  status?: string;
 }
 
 export interface IAdvSubprojects {

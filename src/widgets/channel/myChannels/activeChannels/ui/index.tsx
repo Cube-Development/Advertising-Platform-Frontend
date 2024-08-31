@@ -1,31 +1,31 @@
-import { FC } from "react";
-import { Accordion, ShowMoreBtn } from "@shared/ui";
-import { SpinnerLoader } from "@shared/ui";
-import { ChannelCard, ChannelCardSkeleton } from "../card";
-import { AddChannel, ZeroChannel } from "@features/channel";
-import styles from "./styles.module.scss";
 import { AllChannelTypes, channelStatusFilter } from "@entities/channel";
-import { INTERSECTION_ELEMENTS } from "@shared/config";
-import { pageFilter } from "@shared/routing";
 import { offerStatusFilter } from "@entities/offer";
+import { AddChannel, ZeroChannel } from "@features/channel";
+import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
+import { pageFilter } from "@shared/routing";
+import { Accordion, ShowMoreBtn, SpinnerLoader } from "@shared/ui";
+import { motion } from "framer-motion";
+import { FC } from "react";
+import { ChannelCard, ChannelCardSkeleton } from "../card";
+import styles from "./styles.module.scss";
 
 interface ActiveChannelsProps {
   cards: AllChannelTypes[];
   handleOnChangePage: () => void;
   isLoading: boolean;
-  isNotEmpty: boolean;
+  isLast: boolean;
   statusFilter: channelStatusFilter | offerStatusFilter | string;
 }
 
 export const ActiveChannels: FC<ActiveChannelsProps> = ({
   cards,
-  isNotEmpty,
+  isLast,
   isLoading,
   handleOnChangePage,
   statusFilter,
 }) => {
   return (
-    <section className="container sidebar">
+    <Accordion type="single" collapsible className={styles.wrapper}>
       {!isLoading && cards?.length === 0 ? (
         <ZeroChannel
           statusFilter={statusFilter}
@@ -33,28 +33,29 @@ export const ActiveChannels: FC<ActiveChannelsProps> = ({
           page={pageFilter.platform}
         />
       ) : (
-        <Accordion type="single" collapsible>
-          <div className={styles.wrapper}>
-            {isLoading &&
-              Array.from({ length: INTERSECTION_ELEMENTS.platforms }).map(
-                (_, index) => <ChannelCardSkeleton key={index} />,
-              )}
-            {!isLoading &&
-              cards?.map((card) => (
-                <ChannelCard
-                  statusFilter={statusFilter}
-                  key={card.id}
-                  card={card}
-                />
-              ))}
-            {isNotEmpty && (
-              <div className={styles.show_more} onClick={handleOnChangePage}>
-                {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
-              </div>
+        <div className={styles.cards}>
+          {cards?.map((card, index) => (
+            <motion.div
+              key={card.id + index}
+              initial="hidden"
+              animate="visible"
+              custom={index % INTERSECTION_ELEMENTS.myChannels}
+              variants={PAGE_ANIMATION.animationUp}
+            >
+              <ChannelCard statusFilter={statusFilter} card={card} />
+            </motion.div>
+          ))}
+          {isLoading &&
+            Array.from({ length: INTERSECTION_ELEMENTS.myChannels }).map(
+              (_, index) => <ChannelCardSkeleton key={index} />,
             )}
-          </div>
-        </Accordion>
+          {!isLast && (
+            <div className={styles.show_more} onClick={handleOnChangePage}>
+              {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
+            </div>
+          )}
+        </div>
       )}
-    </section>
+    </Accordion>
   );
 };

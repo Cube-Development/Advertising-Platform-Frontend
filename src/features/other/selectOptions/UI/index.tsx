@@ -218,13 +218,13 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
               <ArrowSmallVerticalIcon
                 className={
                   type === channelData.category && defaultValues
-                    ? "default__icon__grey"
+                    ? "icon__grey"
                     : (isMenuOpen ||
                           selectedOption ||
                           selectedOptions?.length) &&
                         !isFilter
                       ? "active__icon"
-                      : "default__icon__grey"
+                      : "icon__grey"
                 }
               />
             </div>
