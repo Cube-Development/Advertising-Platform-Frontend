@@ -14,9 +14,7 @@
     padding: 10px;
 
     li {
-      padding: 10px 20px;
-      // border-radius: 12px;
-      // border-left: 1px solid #000;
+      padding: 10px 20px 10px 15px;
       cursor: pointer;
       font-size: 14px;
       font-style: normal;
@@ -27,7 +25,7 @@
       grid-auto-flow: column;
       justify-content: start;
       align-items: center;
-      gap: 5px;
+      gap: 10px;
 
       &:hover {
         background-color: #f0f0f0;
