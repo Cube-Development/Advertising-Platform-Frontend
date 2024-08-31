@@ -26,17 +26,16 @@ export interface IRoute {
 }
 
 export const privateCommonRoutes: IRoute[] = [
+  { path: paths.faq, component: FAQPage, sidebar: true },
   { path: paths.walletTopUp, component: TopupPage, sidebar: true },
   { path: paths.walletWithdraw, component: WithdrawalPage, sidebar: true },
   { path: paths.wallethistory, component: WalletHistoryPage, sidebar: true },
   { path: paths.profile, component: ProfilePage, sidebar: true },
   { path: paths.addChannel, component: AddLegalPage, sidebar: true },
-  { path: paths.faq, component: FAQPage, sidebar: true },
 ];
 
 export const publicCommonRoutes: IRoute[] = [
   { path: paths.notFound, component: NotFoundPage },
-  { path: paths.faq, component: FAQPage, sidebar: true },
 ];
 
 export const privateBloggerRoutes: IRoute[] = [
@@ -47,10 +46,11 @@ export const privateBloggerRoutes: IRoute[] = [
 
 export const publicBloggerRoutes: IRoute[] = [
   { path: paths.mainBlogger, component: MainBloggerPage },
+  { path: paths.faq, component: FAQPage, sidebar: true },
 ];
 
 export const privateAdvertiserRoutes: IRoute[] = [
-  { path: paths.orders, component: OrdersPage, sidebar: true },
+  { path: paths.orders, component: OrdersPage },
 ];
 
 export const publicAdvertiserRoutes: IRoute[] = [
@@ -59,6 +59,7 @@ export const publicAdvertiserRoutes: IRoute[] = [
   { path: paths.cart, component: CartPage },
   { path: paths.turnkey, component: TurnkeyPage },
   { path: paths.channel, component: ChannelPage },
+  { path: paths.faq, component: FAQPage },
 ];
 
 // нужен в старой версии роутинга после обновы удалить

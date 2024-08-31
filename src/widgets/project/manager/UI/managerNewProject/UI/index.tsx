@@ -1,48 +1,53 @@
-import { FC } from "react";
-import styles from "./styles.module.scss";
-import { ManagerNewProjectCard, SkeletonManagerNewProjectCard } from "../card";
-import { Accordion, ShowMoreBtn, SpinnerLoader } from "@shared/ui";
 import { IManagerNewProjectCard } from "@entities/project";
-import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ZeroManagerProject } from "@features/project";
+import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
+import { Accordion, ShowMoreBtn, SpinnerLoader } from "@shared/ui";
+import { motion } from "framer-motion";
+import { FC } from "react";
+import { ManagerNewProjectCard, SkeletonManagerNewProjectCard } from "../card";
+import styles from "./styles.module.scss";
 
 interface ManagerNewProjectsListProps {
   projects: IManagerNewProjectCard[];
   handleOnChangePage: () => void;
   isLoading: boolean;
-  isNotEmpty: boolean;
+  isLast: boolean;
 }
 
 export const ManagerNewProjectsList: FC<ManagerNewProjectsListProps> = ({
   projects,
   handleOnChangePage,
   isLoading,
-  isNotEmpty,
+  isLast,
 }) => {
   return (
-    <div className="container sidebar">
+    <Accordion type="single" collapsible className={styles.wrapper}>
       {!isLoading && projects?.length === 0 ? (
         <ZeroManagerProject />
       ) : (
-        <Accordion type="single" collapsible>
-          <div className={styles.wrapper}>
-            {isLoading &&
-              Array.from({ length: INTERSECTION_ELEMENTS.managerOrders }).map(
-                (_, index) => <SkeletonManagerNewProjectCard key={index} />,
-              )}
-            {!isLoading &&
-              projects?.map((card, index) => (
-                <ManagerNewProjectCard key={index} card={card} />
-              ))}
-
-            {isNotEmpty && (
-              <div className={styles.show_more} onClick={handleOnChangePage}>
-                {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
-              </div>
+        <div className={styles.cards}>
+          {projects?.map((card, index) => (
+            <motion.div
+              key={card.id + index}
+              initial="hidden"
+              animate="visible"
+              custom={index % INTERSECTION_ELEMENTS.managerOrders}
+              variants={PAGE_ANIMATION.animationUp}
+            >
+              <ManagerNewProjectCard card={card} />
+            </motion.div>
+          ))}
+          {isLoading &&
+            Array.from({ length: INTERSECTION_ELEMENTS.managerOrders }).map(
+              (_, index) => <SkeletonManagerNewProjectCard key={index} />,
             )}
-          </div>
-        </Accordion>
+          {!isLast && (
+            <div className={styles.show_more} onClick={handleOnChangePage}>
+              {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
+            </div>
+          )}
+        </div>
       )}
-    </div>
+    </Accordion>
   );
 };

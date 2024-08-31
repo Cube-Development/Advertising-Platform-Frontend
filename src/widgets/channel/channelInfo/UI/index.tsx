@@ -95,33 +95,35 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
   const handleChangeCards = (cartChannel: ICatalogChannel) => {};
 
   return (
-    <div className="container">
-      <div className={styles.wrapper}>
-        <div className={styles.top}>
-          <Information
-            card={channel}
-            statistics={STATS}
-            isLoading={isLoading}
-          />
-          {!isLoading ? (
-            <motion.div
-              initial="hidden"
-              animate="visible"
-              variants={PAGE_ANIMATION.animationRight}
-            >
-              <AddToCart card={channel} />
-            </motion.div>
-          ) : (
-            <SkeletonChannelAddToCart />
-          )}
+    <>
+      <div className="container">
+        <div className={styles.wrapper}>
+          <div className={styles.top}>
+            <Information
+              card={channel}
+              statistics={STATS}
+              isLoading={isLoading}
+            />
+            {!isLoading ? (
+              <motion.div
+                initial="hidden"
+                animate="visible"
+                variants={PAGE_ANIMATION.animationRight}
+              >
+                <AddToCart card={channel} />
+              </motion.div>
+            ) : (
+              <SkeletonChannelAddToCart />
+            )}
+          </div>
         </div>
-        <RecommendationList
-          cards={cards}
-          isLoading={isRecommendCardsLoading}
-          onChangeCard={handleChangeCards}
-          changePage={handleOnChangePage}
-        />
       </div>
-    </div>
+      <RecommendationList
+        cards={cards}
+        isLoading={isRecommendCardsLoading}
+        onChangeCard={handleChangeCards}
+        changePage={handleOnChangePage}
+      />
+    </>
   );
 };

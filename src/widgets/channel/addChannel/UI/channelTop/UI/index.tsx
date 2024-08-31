@@ -21,7 +21,7 @@ export const ChannelTop: FC<ChannelTopProps> = ({ channel_id, query }) => {
         ? paths.offers
         : paths.myChannels;
   return (
-    <div className="container sidebar">
+    <>
       <div className={styles.wrapper}>
         <Link to={path}>
           <BackIcon />
@@ -29,12 +29,12 @@ export const ChannelTop: FC<ChannelTopProps> = ({ channel_id, query }) => {
         <div>
           <p>
             {channel_id
-              ? t(`add_platform.edit_platform`)
-              : t(`add_platform.add_platform`)}
+              ? t(`add_platform.title.edit`)
+              : t(`add_platform.title.add`)}
           </p>
           <ArrowIcon3 />
         </div>
       </div>
-    </div>
+    </>
   );
 };

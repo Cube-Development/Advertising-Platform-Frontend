@@ -14,7 +14,7 @@
     color: var(--Personal-colors-main);
     border: 1px solid var(--Personal-colors-main);
     background: var(--Personal-colors-White);
-    padding: 20px 0;
+    padding: 15px 0;
 
     &.active {
       border: none;
@@ -47,7 +47,7 @@
       font-style: normal;
       font-weight: 400;
       line-height: normal;
-      padding: 20px 15px;
+      padding: 15px;
 
       &::placeholder {
         color: var(--Text-sample);

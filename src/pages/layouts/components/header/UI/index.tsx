@@ -1,16 +1,17 @@
+import { logout, roles, toggleRole as toggleRoleAction } from "@entities/user";
+import { useGetBalanceQuery, walletSlice } from "@entities/wallet";
+import { BREAKPOINT } from "@shared/config";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
+import { Chat } from "@widgets/communication";
 import { FC, useEffect, useState } from "react";
+import { DropdownMenu } from "./dropdownMenu";
+import { Lang } from "./lang";
 import { LoginBtn } from "./loginBtn";
 import { Logo } from "./logo";
 import { Nav } from "./nav";
 import { Profile } from "./profile";
 import styles from "./styles.module.scss";
-import { Lang } from "./lang";
-import { DropdownMenu } from "./dropdownMenu";
 import { Wallet } from "./wallet";
-import { Chat } from "@widgets/communication";
-import { logout, roles, toggleRole as toggleRoleAction } from "@entities/user";
-import { useAppDispatch, useAppSelector } from "@shared/hooks";
-import { BREAKPOINT } from "@shared/config";
 
 export const Header: FC = () => {
   const [screen, setScreen] = useState<number>(window.innerWidth);
@@ -19,6 +20,15 @@ export const Header: FC = () => {
   const toggleLogout = () => {
     dispatch(logout());
   };
+
+  const { data, isLoading } = useGetBalanceQuery();
+
+  useEffect(() => {
+    if (data) {
+      dispatch(walletSlice.actions.setBalance(data?.balance));
+    }
+  }, [data, isLoading]);
+
   const toggleRole = (role: roles) => {
     dispatch(toggleRoleAction(role));
   };
@@ -38,7 +48,7 @@ export const Header: FC = () => {
   return (
     <header className={styles.wrapper}>
       <div className={styles.navigation}>
-        {(isAuth || screen <= 1100) && (
+        {(isAuth || screen <= BREAKPOINT.HEADER_NAVBAR_VISIBLE) && (
           <DropdownMenu
             isAuth={isAuth}
             currentRole={role}

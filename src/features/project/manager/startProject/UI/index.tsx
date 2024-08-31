@@ -21,7 +21,7 @@ export const StartProject: FC<StartProjectProps> = ({ project_id }) => {
     <Link to={paths.catalog} className={styles.wrapper} onClick={handleOnClick}>
       <MyButton className={styles.button}>
         <p>{t("orders_manager.card.start_btn")}</p>
-        <ArrowLongHorizontalIcon className="default__icon__white" />
+        <ArrowLongHorizontalIcon className="icon__white" />
       </MyButton>
     </Link>
   );

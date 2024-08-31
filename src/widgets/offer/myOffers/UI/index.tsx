@@ -1,18 +1,19 @@
-import { FC } from "react";
-import styles from "./styles.module.scss";
-import { pageFilter, paths } from "@shared/routing";
-import { OfferCard, OfferCardSkeleton } from "../card";
-import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
-import { AddChannel, ZeroChannel } from "@features/channel";
-import { IBloggerOfferCard, offerStatusFilter } from "@entities/offer";
-import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { channelStatusFilter } from "@entities/channel";
+import { IBloggerOfferCard, offerStatusFilter } from "@entities/offer";
+import { AddChannel, ZeroChannel } from "@features/channel";
+import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
+import { pageFilter, paths } from "@shared/routing";
+import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
+import { motion } from "framer-motion";
+import { FC } from "react";
+import { OfferCard, OfferCardSkeleton } from "../card";
+import styles from "./styles.module.scss";
 
 interface MyOffersProps {
   offers: IBloggerOfferCard[];
   handleOnChangePage: () => void;
   isLoading: boolean;
-  isNotEmpty: boolean;
+  isLast: boolean;
   statusFilter: channelStatusFilter | offerStatusFilter | string;
 }
 
@@ -20,11 +21,11 @@ export const MyOffers: FC<MyOffersProps> = ({
   offers,
   handleOnChangePage,
   isLoading,
-  isNotEmpty,
+  isLast,
   statusFilter,
 }) => {
   return (
-    <div className="container sidebar">
+    <div className={styles.wrapper}>
       {!isLoading && offers?.length === 0 ? (
         <ZeroChannel
           AddChannelBtn={AddChannel}
@@ -33,16 +34,23 @@ export const MyOffers: FC<MyOffersProps> = ({
           statusFilter={statusFilter}
         />
       ) : (
-        <div className={styles.wrapper}>
+        <div className={styles.cards}>
+          {offers?.map((card, index) => (
+            <motion.div
+              key={card.id + index}
+              initial="hidden"
+              animate="visible"
+              custom={index % INTERSECTION_ELEMENTS.bloggerOffers}
+              variants={PAGE_ANIMATION.animationUp}
+            >
+              <OfferCard statusFilter={statusFilter} card={card} />
+            </motion.div>
+          ))}
           {isLoading &&
-            Array.from({ length: INTERSECTION_ELEMENTS.offers }).map(
+            Array.from({ length: INTERSECTION_ELEMENTS.bloggerOffers }).map(
               (_, index) => <OfferCardSkeleton key={index} />,
             )}
-          {!isLoading &&
-            offers?.map((card, index) => (
-              <OfferCard statusFilter={statusFilter} key={index} card={card} />
-            ))}
-          {isNotEmpty && (
+          {!isLast && (
             <div className={styles.show_more} onClick={handleOnChangePage}>
               {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
             </div>

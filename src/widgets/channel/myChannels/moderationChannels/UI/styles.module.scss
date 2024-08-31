@@ -1,9 +1,13 @@
 .wrapper {
-  display: grid;
-  grid-auto-flow: row;
-  row-gap: 10px;
+  min-height: var(--cards-list-height);
 
-  .show_more {
-    margin: 10px auto;
+  .cards {
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 10px;
+
+    .show_more {
+      margin: 10px auto;
+    }
   }
 }

@@ -64,18 +64,6 @@ export const Cart: FC = () => {
       },
     );
 
-  const [screen, setScreen] = useState<number>(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   useEffect(() => {
     if (isAuth && role === roles.advertiser && cart) {
       setCurrentCart(cart);
@@ -99,7 +87,7 @@ export const Cart: FC = () => {
   );
 
   //НАЧАЛО  убрать useForm после добвления api для рекомендованных площадок
-  const { watch, reset, setValue, getValues } = useForm<getCatalogReq>({
+  const { watch } = useForm<getCatalogReq>({
     defaultValues: {
       language: language?.id || Languages[0].id,
       page: 1,
@@ -120,13 +108,12 @@ export const Cart: FC = () => {
   const userId = GetUserId();
   const formFields = watch();
 
-  const { data: recomendCards, isFetching: isCatalogLoading } =
-    useGetCatalogQuery(
-      { ...formFields, user_id: userId },
-      {
-        skip: !userId,
-      },
-    );
+  const { data: recomendCards } = useGetCatalogQuery(
+    { ...formFields, user_id: userId },
+    {
+      skip: !userId,
+    },
+  );
   // КОНЕЦ
 
   // commonCart

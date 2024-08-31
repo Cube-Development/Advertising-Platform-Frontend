@@ -12,7 +12,7 @@ export const ContinueOrder: FC<ContinueOrderProps> = (props) => {
   return (
     <MyButton type="button" buttons_type="button__blue" {...props}>
       {t(`order_btn.continue`)}
-      <ArrowLongHorizontalIcon className="default__icon__white" />
+      <ArrowLongHorizontalIcon className="icon__white" />
     </MyButton>
   );
 };

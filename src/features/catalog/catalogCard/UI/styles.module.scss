@@ -162,7 +162,7 @@
           margin-top: 5px;
 
           .title {
-            color: var(--Personal-colors-black);
+            color: var(--Personal-colors-main);
             font-size: 14px;
             font-style: normal;
             font-weight: 600;
@@ -193,7 +193,6 @@
         row-gap: 10px;
         align-content: center;
         justify-items: center;
-        // align-items: center;
         text-align: center;
 
         .platform__icon {

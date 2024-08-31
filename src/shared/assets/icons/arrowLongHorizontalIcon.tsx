@@ -8,7 +8,7 @@ export const ArrowLongHorizontalIcon = (props: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      stroke="current"
+      stroke="var(--start-color, #000)"
       strokeLinecap="round"
       strokeLinejoin="round"
       strokeWidth={1.5}

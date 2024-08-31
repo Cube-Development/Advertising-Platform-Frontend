@@ -30,11 +30,13 @@ export const Reviews: FC<ReviewsProps> = ({ isLoadingReviews }) => {
   const [isLoading, setIsLoading] = useState(false);
   const [currentRev, setCurrentRev] = useState<IReviewData[]>(REVIEWS);
   const [reviews, setReviews] = useState<IReviewData[]>(
-    currentRev.slice(0, INTERSECTION_ELEMENTS.review),
+    currentRev.slice(0, INTERSECTION_ELEMENTS.channelReview),
   );
 
   useEffect(() => {
-    setReviews(currentRev.slice(0, currentPage * INTERSECTION_ELEMENTS.review));
+    setReviews(
+      currentRev.slice(0, currentPage * INTERSECTION_ELEMENTS.channelReview),
+    );
   }, [currentRev, currentPage]);
 
   const handleChangeActiveType = (id: ratingData) => {
@@ -76,14 +78,14 @@ export const Reviews: FC<ReviewsProps> = ({ isLoadingReviews }) => {
                 key={review.date + review.email + index} // заменить на review.id когда будет апи
                 initial="hidden"
                 animate="visible"
-                custom={index % INTERSECTION_ELEMENTS.review}
+                custom={index % INTERSECTION_ELEMENTS.channelReview}
                 variants={PAGE_ANIMATION.animationUp}
               >
                 <ReviewCard card={review} />
               </motion.div>
             ))}
             {isLoading &&
-              Array.from({ length: INTERSECTION_ELEMENTS.review }).map(
+              Array.from({ length: INTERSECTION_ELEMENTS.channelReview }).map(
                 (_, index) => <SkeletonReviewCard key={index} />,
               )}
             {reviews.length < currentRev.length && (
@@ -97,7 +99,7 @@ export const Reviews: FC<ReviewsProps> = ({ isLoadingReviews }) => {
         <>
           <SkeletonChannelRate />
           <div className={styles.reviews__wrapper}>
-            {Array.from({ length: INTERSECTION_ELEMENTS.review }).map(
+            {Array.from({ length: INTERSECTION_ELEMENTS.channelReview }).map(
               (_, index) => (
                 <SkeletonReviewCard key={index} />
               ),

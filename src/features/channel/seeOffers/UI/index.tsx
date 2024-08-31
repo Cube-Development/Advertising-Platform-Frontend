@@ -12,7 +12,7 @@ export const SeeOffers: FC = () => {
     <Link to={paths.offers}>
       <MyButton buttons_type="button__blue" className={styles.button}>
         {t(`platform_btn.offer`)}
-        <ArrowLongHorizontalIcon className="default__icon__white" />
+        <ArrowLongHorizontalIcon className="icon__white" />
       </MyButton>
     </Link>
   );

@@ -1,4 +1,10 @@
+import { roles } from "@entities/user";
+import { IMenuItem } from "@pages/layouts/components/config";
+import { setDropDownMenu } from "@pages/layouts/model";
+import { BREAKPOINT } from "@shared/config";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { paths } from "@shared/routing";
+import { Accordion, ScrollArea } from "@shared/ui";
 import { AnimatePresence, motion } from "framer-motion";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -11,15 +17,11 @@ import {
   bloggerMenuNotAuth,
   bloggerServiсeMenu,
   commonMenu,
+  faqServiceMenu,
   managerMenu,
 } from "./config";
-import styles from "./styles.module.scss";
 import { MenuItem } from "./menuItem";
-import { roles } from "@entities/user";
-import { IMenuItem } from "@pages/layouts/components/config";
-import { useAppDispatch, useAppSelector } from "@shared/hooks";
-import { Accordion, ScrollArea } from "@shared/ui";
-import { setDropDownMenu } from "@pages/layouts/model";
+import styles from "./styles.module.scss";
 
 interface DropdownMenuProps {
   isAuth: boolean;
@@ -47,6 +49,8 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
     }
   };
 
+  const { balance } = useAppSelector((state) => state.wallet);
+
   const handleClickOutside = (event: MouseEvent) => {
     // console.log("menuCurrent");
     if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -71,18 +75,20 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
     };
   }, [dropdownMenu.isOpen]);
 
-  const serviceMenu: IMenuItem[] =
+  let serviceMenu: IMenuItem[] =
     currentRole === roles.advertiser
       ? advertiserServiсeMenu
       : bloggerServiсeMenu;
 
+  serviceMenu = isAuth ? serviceMenu : [...serviceMenu, ...faqServiceMenu];
+
   const combinedMenu: IMenuItem[] = isAuth
     ? currentRole === roles.advertiser
-      ? [...advertiserMenu, ...commonMenu]
+      ? [...advertiserMenu, ...commonMenu, ...faqServiceMenu]
       : currentRole === roles.blogger
-        ? [...bloggerMenu, ...commonMenu]
+        ? [...bloggerMenu, ...commonMenu, ...faqServiceMenu]
         : currentRole === roles.manager
-          ? [...managerMenu]
+          ? [...managerMenu, ...faqServiceMenu]
           : []
     : currentRole === roles.advertiser
       ? advertiserMenuNotAuth
@@ -157,7 +163,20 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
                       </p>
                     </Link>
                   </div>
-                  {screen < 1100 && (
+                  {isAuth && screen < BREAKPOINT.MD && (
+                    <div className={styles.accordion__block}>
+                      <p className={styles.accordion__title}>
+                        {t("burger_menu.balance")}
+                      </p>
+                      <div className={styles.balance}>
+                        <p>
+                          {balance ? Math.floor(balance).toLocaleString() : "0"}{" "}
+                          <span>{t("symbol")}</span>
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                  {screen < BREAKPOINT.HEADER_NAVBAR_VISIBLE && (
                     <div className={styles.accordion__block}>
                       <p className={styles.accordion__title}>
                         {t("burger_menu.services")}
@@ -179,26 +198,28 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
                       </Accordion>
                     </div>
                   )}
-                  <div className={styles.accordion__block}>
-                    <p className={styles.accordion__title}>
-                      {t("burger_menu.navigation")}
-                    </p>
-                    <Accordion
-                      type="single"
-                      collapsible
-                      defaultValue={`item-${dropdownMenu.title}`}
-                      className={styles.menu__accordion}
-                    >
-                      {combinedMenu.map((item) => (
-                        <MenuItem
-                          key={item.item.title}
-                          item={item}
-                          onChange={toggleMenu}
-                          openTitle={dropdownMenu.title}
-                        />
-                      ))}
-                    </Accordion>
-                  </div>
+                  {isAuth && (
+                    <div className={styles.accordion__block}>
+                      <p className={styles.accordion__title}>
+                        {t("burger_menu.navigation")}
+                      </p>
+                      <Accordion
+                        type="single"
+                        collapsible
+                        defaultValue={`item-${dropdownMenu.title}`}
+                        className={styles.menu__accordion}
+                      >
+                        {combinedMenu.map((item) => (
+                          <MenuItem
+                            key={item.item.title}
+                            item={item}
+                            onChange={toggleMenu}
+                            openTitle={dropdownMenu.title}
+                          />
+                        ))}
+                      </Accordion>
+                    </div>
+                  )}
                 </div>
               </ScrollArea>
             </div>

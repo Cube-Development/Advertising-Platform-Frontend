@@ -28,7 +28,7 @@ export const FAQInformation: FC<FAQInformationProps> = ({
           const icon = ref.querySelector(`.${styles.arrow} svg`);
           if (state === accordionTypes.open) {
             ref.classList.add(styles.active);
-            if (icon) icon.classList.add("default__icon__white");
+            if (icon) icon.classList.add("icon__white");
             if (icon) icon.classList.add("rotate__down");
             if (icon) icon.classList.remove("active__icon");
             if (icon) icon.classList.remove("rotate");
@@ -36,7 +36,7 @@ export const FAQInformation: FC<FAQInformationProps> = ({
             ref.classList.remove(styles.active);
             if (icon) icon.classList.add("active__icon");
             if (icon) icon.classList.add("rotate");
-            if (icon) icon.classList.remove("default__icon__white");
+            if (icon) icon.classList.remove("icon__white");
             if (icon) icon.classList.remove("rotate__down");
           }
         });

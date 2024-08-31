@@ -59,7 +59,9 @@ export const Nav: FC<NavProps> = ({ isAuth, currentRole, toggleRole }) => {
           onClick={() => handleNavigation(item.href)}
           className={location.pathname === item.href ? styles.active : ""}
         >
-          {item.img && <item.img />}
+          {item.img && (
+            <item.img key={index} className="active__gradient__icon" />
+          )}
           {t(item.text)}
         </li>
       ))}

@@ -1,19 +1,21 @@
-import { FC } from "react";
-import styles from "./styles.module.scss";
-import { INTERSECTION_ELEMENTS } from "@shared/config/common";
-import { Accordion, ShowMoreBtn, SpinnerLoader } from "@shared/ui";
-import { NewProject, ZeroProject } from "@features/project";
-import { TurnkeyProject } from "@features/other";
-import { AdvProjectCard, ProjectCardSkeleton } from "../card";
-import { IAdvProjectCard } from "@entities/project";
 import { channelStatusFilter } from "@entities/channel";
 import { offerStatusFilter } from "@entities/offer";
+import { IAdvProjectCard } from "@entities/project";
+import { TurnkeyProject } from "@features/other";
+import { NewProject, ZeroProject } from "@features/project";
+import { PAGE_ANIMATION } from "@shared/config";
+import { INTERSECTION_ELEMENTS } from "@shared/config/common";
+import { Accordion, ShowMoreBtn, SpinnerLoader } from "@shared/ui";
+import { motion } from "framer-motion";
+import { FC } from "react";
+import { AdvProjectCard, ProjectCardSkeleton } from "../card";
+import styles from "./styles.module.scss";
 
 interface AdvProjectsListProps {
   projects: IAdvProjectCard[];
   handleOnChangePage: () => void;
   isLoading: boolean;
-  isNotEmpty: boolean;
+  isLast: boolean;
   typeFilter: string;
   statusFilter: channelStatusFilter | offerStatusFilter | string;
 }
@@ -22,12 +24,12 @@ export const AdvProjectsList: FC<AdvProjectsListProps> = ({
   projects,
   handleOnChangePage,
   isLoading,
-  isNotEmpty,
+  isLast,
   typeFilter,
   statusFilter,
 }) => {
   return (
-    <div className="container sidebar">
+    <Accordion type="single" collapsible className={styles.wrapper}>
       {!isLoading && projects?.length === 0 ? (
         <ZeroProject
           listLength={!!projects?.length}
@@ -36,35 +38,40 @@ export const AdvProjectsList: FC<AdvProjectsListProps> = ({
           typeFilter={typeFilter}
         />
       ) : (
-        <Accordion type="single" collapsible>
-          <div className={styles.wrapper}>
-            {isLoading &&
-              Array.from({ length: INTERSECTION_ELEMENTS.orders }).map(
-                (_, index) => (
-                  <ProjectCardSkeleton
-                    typeFilter={typeFilter}
-                    statusFilter={statusFilter}
-                    key={index}
-                  />
-                ),
-              )}
-            {!isLoading &&
-              projects?.map((card, index) => (
-                <AdvProjectCard
-                  statusFilter={statusFilter}
+        <div className={styles.cards}>
+          {projects?.map((card, index) => (
+            <motion.div
+              key={card.id + index}
+              initial="hidden"
+              animate="visible"
+              custom={index % INTERSECTION_ELEMENTS.advOrders}
+              variants={PAGE_ANIMATION.animationUp}
+            >
+              <AdvProjectCard
+                statusFilter={statusFilter}
+                typeFilter={typeFilter}
+                key={index}
+                card={card}
+              />
+            </motion.div>
+          ))}
+          {isLoading &&
+            Array.from({ length: INTERSECTION_ELEMENTS.advOrders }).map(
+              (_, index) => (
+                <ProjectCardSkeleton
                   typeFilter={typeFilter}
+                  statusFilter={statusFilter}
                   key={index}
-                  card={card}
                 />
-              ))}
-            {isNotEmpty && (
-              <div className={styles.show_more} onClick={handleOnChangePage}>
-                {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
-              </div>
+              ),
             )}
-          </div>
-        </Accordion>
+          {!isLast && (
+            <div className={styles.show_more} onClick={handleOnChangePage}>
+              {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
+            </div>
+          )}
+        </div>
       )}
-    </div>
+    </Accordion>
   );
 };

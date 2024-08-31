@@ -1,7 +1,9 @@
 .wrapper {
-  display: grid;
-  grid-auto-flow: row;
-  row-gap: 30px;
+  // display: grid;
+  // grid-auto-flow: row;
+  // row-gap: 30px;
+  // position: relative;
+  margin: 0 auto;
 
   .title {
     color: var(--Personal-colors-black);
@@ -17,7 +19,42 @@
   }
 }
 
-.pagination {
-  background: black;
-  height: 100%;
+.nav {
+  display: grid;
+  justify-content: center;
+  align-items: center;
+  grid-template: 1fr / 1fr 1fr;
+  gap: 20px;
+  position: absolute;
+  top: 400px;
+  right: 5%;
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+
+  > p {
+    background: var(--Gradients-Gradient-1);
+    padding: 10px 11px;
+    border-radius: 100%;
+    cursor: pointer;
+
+    &:hover {
+      svg {
+        transform: scale(1.25);
+        transition: all 300ms ease;
+      }
+    }
+
+    &:active {
+      transform: scale(0.95);
+      transition: all 300ms ease;
+    }
+
+    svg {
+      stroke: #fff;
+      width: 30px;
+      height: 30px;
+    }
+  }
 }

@@ -9,7 +9,7 @@ export const ArrowSmallVerticalIcon = (props: SVGProps<SVGSVGElement>) => (
     {...props}
   >
     <path
-      stroke="current"
+      stroke="var(--start-color, #000)"
       strokeLinecap="round"
       d="M14 1 8.07 5.106a1 1 0 0 1-1.14 0L1 1"
     />

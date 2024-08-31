@@ -14,11 +14,12 @@ import {
   SubsIcon,
 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
-import { pageFilter } from "@shared/routing";
+import { pageFilter, paths } from "@shared/routing";
 import { AccordionContent, AccordionItem, AccordionTrigger } from "@shared/ui";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { Link } from "react-router-dom";
 
 interface CatalogCardProps extends IChangeCards, ICatalogCard {
   card: ICatalogChannel;
@@ -94,7 +95,12 @@ export const CatalogCard: FC<CatalogCardProps> = ({
           </div>
           <div className={styles.column__info}>
             <div className={styles.info}>
-              <p className={`${styles.title} truncate`}>{card?.name}</p>
+              <Link
+                to={`${paths.channel.replace(":id", card?.id)}`}
+                className={`${styles.title} truncate`}
+              >
+                {card?.name}
+              </Link>
               <p className={`${styles.category} truncate`}>{card?.category}</p>
               {screen >= BREAKPOINT.MD ? (
                 <span className={styles.description}>{card?.description}</span>
@@ -190,8 +196,8 @@ export const CatalogCard: FC<CatalogCardProps> = ({
                   <ArrowSmallVerticalIcon
                     className={
                       isSubcardOpen
-                        ? "default__icon__grey rotate"
-                        : "default__icon__grey rotate__down"
+                        ? "icon__grey rotate"
+                        : "icon__grey rotate__down"
                     }
                   />
                 </div>

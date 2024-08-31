@@ -146,3 +146,24 @@
     color: var(--Personal-colors-main);
   }
 }
+
+.block2 {
+  display: grid;
+  grid-auto-flow: column;
+  grid-template: 1fr / 1fr min-content;
+
+  .short_text {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-line-clamp: 1;
+    width: 100%;
+  }
+
+  div {
+    display: grid;
+    justify-content: end;
+    color: var(--Personal-colors-main);
+  }
+}

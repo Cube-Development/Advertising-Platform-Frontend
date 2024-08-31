@@ -1,6 +1,7 @@
 import { addChannelQueries } from "@entities/channel";
 import { projectTypesFilter } from "@entities/project";
 import {
+  AddChannelIcon,
   BookIcon,
   CalculatorIcon,
   CampaignIcon,
@@ -10,7 +11,6 @@ import {
   PlatformIcon,
   TemplateIcon,
   WalletIcon,
-  AddChannelIcon,
 } from "@shared/assets";
 import { paths } from "@shared/routing";
 
@@ -35,7 +35,7 @@ export const bloggerServiсeMenu = [
   {
     item: {
       title: "burger_menu.calculateIncome",
-      path: paths.main,
+      path: `${paths.mainBlogger}#calculateIncome`,
       img: CalculatorIcon,
     },
   },
@@ -46,6 +46,10 @@ export const bloggerServiсeMenu = [
       img: AddChannelIcon,
     },
   },
+];
+
+export const faqServiceMenu = [
+  { item: { title: "burger_menu.base", path: paths.faq, img: BookIcon } },
 ];
 
 export const advertiserMenu = [
@@ -87,7 +91,6 @@ export const managerMenu = [
       img: CampaignIcon,
     },
   },
-  { item: { title: "burger_menu.base", path: paths.faq, img: BookIcon } },
 ];
 
 export const bloggerMenu = [
@@ -117,7 +120,6 @@ export const commonMenu = [
       { title: "burger_menu.invoice", path: paths.main },
     ],
   },
-  { item: { title: "burger_menu.base", path: paths.faq, img: BookIcon } },
 ];
 
 export const advertiserMenuNotAuth = [

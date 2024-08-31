@@ -1,18 +1,12 @@
+import { channelStatusFilter } from "@entities/channel";
+import { offerStatusFilter } from "@entities/offer";
 import {
-  ArrowSmallVerticalIcon,
-  CancelIcon,
-  CompliteIcon,
-  MoreIcon,
-  RocketIcon,
-  SearchIcon,
-  SeePostIcon,
-  WaitIcon,
-} from "@shared/assets";
-import { FC, useEffect, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import { Chat } from "@widgets/communication";
-import { DownloadReport, RunProject } from "@features/project";
+  IManagerProjectCard,
+  ManagerProjectSubcard,
+  getProjectSubcardReq,
+  managerProjectStatusFilter,
+  useGetManagerSubprojectsQuery,
+} from "@entities/project";
 import {
   AcceptPost,
   ChangeChannel,
@@ -24,17 +18,23 @@ import {
   SeeComment,
   SeePost,
 } from "@features/order";
+import { DownloadReport, RunProject } from "@features/project";
 import {
-  ManagerProjectSubcard,
-  IManagerProjectCard,
-  getProjectSubcardReq,
-  managerProjectStatusFilter,
-  useGetManagerSubprojectsQuery,
-} from "@entities/project";
+  ArrowSmallVerticalIcon,
+  CancelIcon,
+  CompliteIcon,
+  MoreIcon,
+  RocketIcon,
+  SearchIcon,
+  SeePostIcon,
+  WaitIcon,
+} from "@shared/assets";
 import { Languages, accordionTypes } from "@shared/config";
 import { AccordionContent, AccordionItem, AccordionTrigger } from "@shared/ui";
-import { channelStatusFilter } from "@entities/channel";
-import { offerStatusFilter } from "@entities/offer";
+import { Chat } from "@widgets/communication";
+import { FC, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 interface ManagerProjectCardProps {
   card: IManagerProjectCard;
@@ -266,8 +266,8 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
             <ArrowSmallVerticalIcon
               className={
                 isSubcardOpen
-                  ? "default__icon__white rotate"
-                  : "default__icon__white rotate__down"
+                  ? "icon__white rotate"
+                  : "icon__white rotate__down"
               }
             />
           </div>

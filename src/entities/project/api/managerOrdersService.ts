@@ -7,7 +7,7 @@ import {
   ITgButtonRes,
 } from "@entities/project";
 import { MANAGER_PROJECTS, authApi } from "@shared/api";
-import { languagesNum } from "@shared/config";
+import { INTERSECTION_ELEMENTS, languagesNum } from "@shared/config";
 
 export interface getManagerProjectsCardReq {
   page: number;
@@ -100,6 +100,34 @@ export const managerProjectsAPI = authApi.injectEndpoints({
         method: `GET`,
         params: params,
       }),
+      transformResponse: (response: IManagerProjects | IManagerNewProjects) => {
+        return {
+          ...response,
+          isLast:
+            response.projects.length !== INTERSECTION_ELEMENTS.managerOrders,
+        };
+      },
+      serializeQueryArgs: ({ endpointName, queryArgs }) => {
+        const { status } = queryArgs;
+        // console.log( `${endpointName}/${status}/${page}`)
+        return `${endpointName}/${status}`;
+      },
+      // merge: (currentCache, newItems, queryArgs) => {
+      //   return {
+      //     ...newItems,
+      //     projects: [
+      //       ...currentCache.projects,
+      //       ...newItems.projects,
+      //     ],
+      //     status: queryArgs.arg.status,
+      //     isLast:
+      //       newItems.projects.length !== INTERSECTION_ELEMENTS.orders,
+      //   };
+      // },
+
+      // forceRefetch({ currentArg, previousArg }) {
+      //   return currentArg?.page !== previousArg?.page;
+      // },
       providesTags: [MANAGER_PROJECTS],
     }),
 

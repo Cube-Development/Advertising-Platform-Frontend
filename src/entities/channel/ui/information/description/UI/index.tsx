@@ -20,9 +20,9 @@ interface SeeMoreLessComponentProps {
   rows: number;
 }
 
-const YourComponent: FC<SeeMoreLessComponentProps> = ({ text }) => {
+const CheckRowsComponent: FC<SeeMoreLessComponentProps> = ({ text }) => {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [lineCount, setLineCount] = useState(0);
+  const [lineCount, setLineCount] = useState(1);
 
   const updateLineCount = () => {
     if (containerRef.current) {
@@ -43,13 +43,41 @@ const YourComponent: FC<SeeMoreLessComponentProps> = ({ text }) => {
     };
   }, [text]);
 
+  console.log(lineCount);
   return (
-    <div ref={containerRef} className="text-container">
-      {text}
-      <p>Number of lines: {lineCount}</p>
+    <>
+      {lineCount === 1 ? (
+        <div ref={containerRef}>
+          <p>{text}</p>
+        </div>
+      ) : (
+        <SeeMoreLessInlineComponent text={text} rows={1} />
+      )}
+    </>
+  );
+};
+
+const SeeMoreLessInlineComponent: FC<SeeMoreLessComponentProps> = ({
+  text,
+  rows,
+}) => {
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { t } = useTranslation();
+  const handleChangeIsOpen = () => {
+    setIsOpen(!isOpen);
+  };
+  return (
+    <div className={`${styles.block2} `}>
+      <p className={`${!isOpen ? styles.short_text : ""}`}>{text}</p>
+      <div>
+        <button onClick={handleChangeIsOpen}>
+          {!isOpen ? t("more_less.more") : t("more_less.less")}
+        </button>
+      </div>
     </div>
   );
 };
+
 const SeeMoreLessComponent: FC<SeeMoreLessComponentProps> = ({
   text,
   rows,
@@ -115,6 +143,10 @@ export const Description: FC<DescriptionProps> = ({ card }) => {
             <YourComponent
               text={(card?.description + " ").repeat(10)}
               rows={0}
+            /> */}
+            {/* <CheckRowsComponent
+              text={(card?.description + " ").repeat(2)}
+              rows={2}
             /> */}
           </div>
           <div className={styles.link}>

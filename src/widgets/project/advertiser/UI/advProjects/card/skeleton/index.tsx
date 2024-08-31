@@ -1,13 +1,13 @@
-import { FC } from "react";
-import styles from "./styles.module.scss";
+import { channelStatusFilter } from "@entities/channel";
+import { offerStatusFilter } from "@entities/offer";
 import {
   advManagerProjectStatusFilter,
   myProjectStatusFilter,
   projectTypesFilter,
 } from "@entities/project";
 import { Skeleton } from "@shared/ui";
-import { channelStatusFilter } from "@entities/channel";
-import { offerStatusFilter } from "@entities/offer";
+import { FC } from "react";
+import styles from "./styles.module.scss";
 
 interface ProjectCardSkeletonProps {
   typeFilter: string;

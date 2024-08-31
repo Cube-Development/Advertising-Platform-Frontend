@@ -10,6 +10,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
 import { IMenuItems } from "@pages/layouts/components/config";
+import { GripVertical } from "lucide-react";
 
 export const MenuItem: React.FC<IMenuItems> = ({
   item,
@@ -44,15 +45,15 @@ export const MenuItem: React.FC<IMenuItems> = ({
           <AccordionTrigger>
             <div className={`${styles.row} ${isActive ? styles.active : ""}`}>
               <div className={styles.row__title}>
-                {item.item.img && <item.item.img />}
+                {item.item.img && (
+                  <item.item.img
+                    className={`${isActive ? "icon__white" : ""}`}
+                  />
+                )}
                 {t(item.item.title!)}
               </div>
               <ArrowSmallVerticalIcon
-                className={
-                  isActive
-                    ? "default__icon__white rotate"
-                    : "default__icon__black rotate__down"
-                }
+                className={isActive ? "icon__white rotate" : "rotate__down"}
               />
             </div>
           </AccordionTrigger>
@@ -77,7 +78,10 @@ export const MenuItem: React.FC<IMenuItems> = ({
                 key={subItem.title}
                 onClick={() => onChange(item.item.path!)}
               >
-                <li>{t(subItem.title!)}</li>
+                <li>
+                  <GripVertical width={20} height={20} stroke="#4772e6" />
+                  {t(subItem.title!)}
+                </li>
               </Link>
             ))}
           </ul>

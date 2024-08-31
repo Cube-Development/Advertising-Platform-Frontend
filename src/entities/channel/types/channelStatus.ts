@@ -1,8 +1,21 @@
-export interface IActiveChannelBlogger {
+export interface IChannelBlogger {
   page: number;
   elements: number;
-  channels: IActiveChannel[];
+  channels:
+    | IActiveChannel[]
+    | IInactiveChannel[]
+    | IModerationChannel[]
+    | IModerationRejectChannel[]
+    | IBlockedChannel[];
+  status?: string;
+  isLast?: boolean;
 }
+
+// export interface IActiveChannelBlogger {
+//   page: number;
+//   elements: number;
+//   channels: IActiveChannel[];
+// }
 
 export type AllChannelTypes =
   | IActiveChannel
@@ -29,11 +42,11 @@ export interface IActiveChannelOrders {
 }
 
 //
-export interface IInactiveChannelBlogger {
-  page: number;
-  elements: number;
-  channels: IInactiveChannel[];
-}
+// export interface IInactiveChannelBlogger {
+//   page: number;
+//   elements: number;
+//   channels: IInactiveChannel[];
+// }
 
 export interface IInactiveChannel {
   id: string;
@@ -51,11 +64,11 @@ export interface InactiveChannelOrders {
 }
 
 //
-export interface IModerationChannelBlogger {
-  page: number;
-  elements: number;
-  channels: IModerationChannel[];
-}
+// export interface IModerationChannelBlogger {
+//   page: number;
+//   elements: number;
+//   channels: IModerationChannel[];
+// }
 
 export interface IModerationChannel {
   id: string;
@@ -66,11 +79,11 @@ export interface IModerationChannel {
 }
 
 //
-export interface IModerationRejectChannelBlogger {
-  page: number;
-  elements: number;
-  channels: IModerationRejectChannel[];
-}
+// export interface IModerationRejectChannelBlogger {
+//   page: number;
+//   elements: number;
+//   channels: IModerationRejectChannel[];
+// }
 
 export interface IModerationRejectChannel {
   id: string;
@@ -82,11 +95,11 @@ export interface IModerationRejectChannel {
 }
 
 //
-export interface IBlockedChannelBlogger {
-  page: number;
-  elements: number;
-  channels: IBlockedChannel[];
-}
+// export interface IBlockedChannelBlogger {
+//   page: number;
+//   elements: number;
+//   channels: IBlockedChannel[];
+// }
 
 export interface IBlockedChannel {
   id: string;

@@ -1,18 +1,19 @@
-import { FC } from "react";
-import styles from "./styles.module.scss";
-import { ManagerProjectCard, SkeletonManagerProjectCard } from "../card";
-import { IManagerProjectCard } from "@entities/project";
-import { INTERSECTION_ELEMENTS } from "@shared/config";
-import { ZeroManagerProject } from "@features/project";
-import { Accordion, ShowMoreBtn, SpinnerLoader } from "@shared/ui";
 import { channelStatusFilter } from "@entities/channel";
 import { offerStatusFilter } from "@entities/offer";
+import { IManagerProjectCard } from "@entities/project";
+import { ZeroManagerProject } from "@features/project";
+import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
+import { Accordion, ShowMoreBtn, SpinnerLoader } from "@shared/ui";
+import { motion } from "framer-motion";
+import { FC } from "react";
+import { ManagerProjectCard, SkeletonManagerProjectCard } from "../card";
+import styles from "./styles.module.scss";
 
 interface ManagerProjectsListProps {
   projects: IManagerProjectCard[];
   handleOnChangePage: () => void;
   isLoading: boolean;
-  isNotEmpty: boolean;
+  isLast: boolean;
   statusFilter: channelStatusFilter | offerStatusFilter | string;
 }
 
@@ -20,41 +21,42 @@ export const ManagerProjectsList: FC<ManagerProjectsListProps> = ({
   projects,
   handleOnChangePage,
   isLoading,
-  isNotEmpty,
+  isLast,
   statusFilter,
 }) => {
   return (
-    <div className="container sidebar">
+    <Accordion type="single" collapsible className={styles.wrapper}>
       {!isLoading && projects?.length === 0 ? (
         <ZeroManagerProject />
       ) : (
-        <Accordion type="single" collapsible>
-          <div className={styles.wrapper}>
-            {isLoading &&
-              Array.from({ length: INTERSECTION_ELEMENTS.managerOrders }).map(
-                (_, index) => (
-                  <SkeletonManagerProjectCard
-                    statusFilter={statusFilter}
-                    key={index}
-                  />
-                ),
-              )}
-            {!isLoading &&
-              projects?.map((card, index) => (
-                <ManagerProjectCard
+        <div className={styles.cards}>
+          {projects?.map((card, index) => (
+            <motion.div
+              key={card.id + index}
+              initial="hidden"
+              animate="visible"
+              custom={index % INTERSECTION_ELEMENTS.managerOrders}
+              variants={PAGE_ANIMATION.animationUp}
+            >
+              <ManagerProjectCard statusFilter={statusFilter} card={card} />
+            </motion.div>
+          ))}
+          {isLoading &&
+            Array.from({ length: INTERSECTION_ELEMENTS.managerOrders }).map(
+              (_, index) => (
+                <SkeletonManagerProjectCard
                   statusFilter={statusFilter}
                   key={index}
-                  card={card}
                 />
-              ))}
-            {isNotEmpty && (
-              <div className={styles.show_more} onClick={handleOnChangePage}>
-                {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
-              </div>
+              ),
             )}
-          </div>
-        </Accordion>
+          {!isLast && (
+            <div className={styles.show_more} onClick={handleOnChangePage}>
+              {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
+            </div>
+          )}
+        </div>
       )}
-    </div>
+    </Accordion>
   );
 };

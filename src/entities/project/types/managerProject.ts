@@ -4,12 +4,16 @@ export interface IManagerProjects {
   page: number;
   elements: number;
   projects: IManagerProjectCard[];
+  status?: string;
+  isLast?: boolean;
 }
 
 export interface IManagerNewProjects {
   page: number;
   elements: number;
   projects: IManagerNewProjectCard[];
+  status?: string;
+  isLast?: boolean;
 }
 
 export interface IManagerNewProjectCard {

@@ -1,15 +1,11 @@
 import { BLOGGER_CHANNELS, authApi } from "@shared/api";
-import { languagesNum } from "@shared/config";
+import { INTERSECTION_ELEMENTS, languagesNum } from "@shared/config";
 import { platformTypesNum } from "@entities/platform";
 import {
-  IActiveChannelBlogger,
   IAddChannelData,
   IAddChannelIdentification,
-  IBlockedChannelBlogger,
+  IChannelBlogger,
   IEditChannelData,
-  IInactiveChannelBlogger,
-  IModerationChannelBlogger,
-  IModerationRejectChannelBlogger,
   IReadChannelData,
   channelStatus,
   channelStatusFilter,
@@ -49,19 +45,34 @@ export const channelAPI = authApi.injectEndpoints({
         body: BodyParams,
       }),
     }),
-    getChannelsByStatus: build.query<
-      | IActiveChannelBlogger
-      | IInactiveChannelBlogger
-      | IModerationChannelBlogger
-      | IModerationRejectChannelBlogger
-      | IBlockedChannelBlogger,
-      getChannelsByStatusReq
-    >({
+    getChannelsByStatus: build.query<IChannelBlogger, getChannelsByStatusReq>({
       query: (params) => ({
         url: "/channel/blogger",
         method: "GET",
         params: params,
       }),
+      transformResponse: (response: IChannelBlogger) => {
+        return {
+          ...response,
+          isLast: response.channels.length !== INTERSECTION_ELEMENTS.myChannels,
+        };
+      },
+      serializeQueryArgs: ({ endpointName, queryArgs }) => {
+        const { status } = queryArgs;
+        return `${endpointName}/${status}`;
+      },
+      merge: (currentCache, newItems, queryArgs) => {
+        return {
+          ...newItems,
+          projects: [...currentCache.channels, ...newItems.channels],
+          status: queryArgs.arg.status,
+          isLast: newItems.channels.length !== INTERSECTION_ELEMENTS.myChannels,
+        };
+      },
+
+      // forceRefetch({ currentArg, previousArg }) {
+      //   return currentArg?.page !== previousArg?.page;
+      // },
       providesTags: [BLOGGER_CHANNELS],
     }),
     getChannelById: build.query<

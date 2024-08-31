@@ -1,18 +1,17 @@
-import { FC, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { useForm } from "react-hook-form";
-import { MyOffers } from "@widgets/offer";
-import { BarFilter } from "@widgets/barFilter";
-import { platformTypes, platformTypesNum } from "@entities/platform";
+import { channelStatusFilter } from "@entities/channel";
 import {
-  IBloggerOfferCard,
   getOrdersByStatusReq,
   offerStatusFilter,
   useGetBloggerOrdersQuery,
 } from "@entities/offer";
-import { pageFilter } from "@shared/routing";
+import { platformTypes, platformTypesNum } from "@entities/platform";
 import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
-import { channelStatusFilter } from "@entities/channel";
+import { pageFilter } from "@shared/routing";
+import { BarFilter } from "@widgets/barFilter";
+import { MyOffers } from "@widgets/offer";
+import { FC, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
 export const OffersPage: FC = () => {
   const page = pageFilter.offer;
@@ -41,48 +40,33 @@ export const OffersPage: FC = () => {
     platform: formState.platform,
     language: language?.id || Languages[0].id,
     page: currentPage,
-    elements_on_page: INTERSECTION_ELEMENTS.orders,
+    elements_on_page: INTERSECTION_ELEMENTS.advOrders,
     date_sort: "increase",
     status: formState.status,
   };
 
   const { data, isFetching } = useGetBloggerOrdersQuery(getParams);
 
-  const [offers, setOffers] = useState<IBloggerOfferCard[]>(
-    data?.orders ? data?.orders : [],
-  );
-
-  useEffect(() => {
-    if (data && currentPage !== 1) {
-      setOffers([...offers, ...data.orders]);
-    } else {
-      data && setOffers(data.orders);
-    }
-  }, [data]);
-
   useEffect(() => {
     setCurrentPage(1);
   }, [formState]);
 
   return (
-    <>
+    <div className="container sidebar">
       <BarFilter
         page={page}
-        listLength={!!offers?.length}
+        listLength={!!data?.orders?.length}
         setValue={setValue}
         changeStatus={(status) => setValue("status", status)}
         statusFilter={formState.status}
       />
       <MyOffers
         statusFilter={formState.status}
-        offers={offers!}
+        offers={data?.orders!}
         handleOnChangePage={handleOnChangePage}
         isLoading={isFetching}
-        isNotEmpty={
-          data ? data?.orders?.length === INTERSECTION_ELEMENTS.orders : false
-        }
-        // isNotEmpty={data ? offers?.length < data?.elements : false}
+        isLast={data?.isLast || false}
       />
-    </>
+    </div>
   );
 };

@@ -1,5 +1,6 @@
-import { FC } from "react";
+import { ICustomer } from "@shared/types/translate";
 import { ChevronLeft, ChevronRight } from "lucide-react";
+import { FC } from "react";
 import SwiperCore from "swiper";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -7,7 +8,6 @@ import "swiper/css/navigation";
 import { EffectCoverflow, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { CustomerCard } from "../../card";
-import { ICustomer } from "@shared/types/translate";
 import styles from "./styles.module.scss";
 
 SwiperCore.use([EffectCoverflow]);
@@ -17,6 +17,9 @@ interface CustomerListProps {
 }
 
 export const CustomerList: FC<CustomerListProps> = ({ customers }) => {
+  while (customers.length < 8) {
+    customers = [...customers, ...customers];
+  }
   return (
     <Swiper
       navigation={{
@@ -28,6 +31,15 @@ export const CustomerList: FC<CustomerListProps> = ({ customers }) => {
       spaceBetween={25}
       slidesPerView={1.3}
       breakpoints={{
+        3000: {
+          slidesPerView: 7.5,
+        },
+        2500: {
+          slidesPerView: 6.5,
+        },
+        2000: {
+          slidesPerView: 5.5,
+        },
         1576: {
           slidesPerView: 4.5,
         },

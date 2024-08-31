@@ -1,7 +1,7 @@
+import { IFormatPriceProps } from "@entities/channel";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { IFormatPriceProps } from "@entities/channel";
 
 export const FormatPrice: FC<IFormatPriceProps> = ({
   big,
@@ -38,7 +38,7 @@ export const FormatPrice: FC<IFormatPriceProps> = ({
         <input
           value={formattedPrice}
           onChange={handleInput}
-          placeholder={t("add_platform.price.default")}
+          placeholder={t("add_platform.description.price.default")}
         ></input>
         <p>{t("symbol")}</p>
       </div>

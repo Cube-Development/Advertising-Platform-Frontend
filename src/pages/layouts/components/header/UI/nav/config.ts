@@ -6,6 +6,7 @@ export const notAuthAdvertiserNavbar = [
   { text: "pages.turnkey", href: paths.turnkey, img: KeyIcon },
   { text: "pages.catalog", href: paths.catalog },
   { text: "pages.platformOwner", href: paths.mainBlogger },
+  { text: "pages.faq", href: paths.faq },
 ];
 
 export const notAuthBloggerNavbar = [
@@ -19,11 +20,13 @@ export const notAuthBloggerNavbar = [
     href: `${paths.addChannel}?add_channel=${addChannelQueries.main}`,
   },
   { text: "pages.advertiser", href: paths.main },
+  { text: "pages.faq", href: paths.faq },
 ];
 
 export const advertiserNavbar = [
   { text: "pages.turnkey", href: paths.turnkey, img: KeyIcon },
   { text: "pages.catalog", href: paths.catalog },
+  { text: "pages.faq", href: paths.faq },
 ];
 
 export const bloggerNavbar = [
@@ -36,4 +39,5 @@ export const bloggerNavbar = [
     text: "pages.addPlatform",
     href: `${paths.addChannel}?add_channel=${addChannelQueries.main}`,
   },
+  { text: "pages.faq", href: paths.faq },
 ];
