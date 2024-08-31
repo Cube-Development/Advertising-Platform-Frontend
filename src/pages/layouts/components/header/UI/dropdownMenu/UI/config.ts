@@ -35,7 +35,7 @@ export const bloggerServiсeMenu = [
   {
     item: {
       title: "burger_menu.calculateIncome",
-      path: paths.main,
+      path: `${paths.mainBlogger}#calculateIncome`,
       img: CalculatorIcon,
     },
   },
