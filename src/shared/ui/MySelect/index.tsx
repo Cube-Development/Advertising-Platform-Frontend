@@ -1,4 +1,4 @@
-import { IOption } from "@shared/types/common";
+import { IOption } from "@shared/types";
 import { FC, SelectHTMLAttributes } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";

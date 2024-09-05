@@ -12,11 +12,11 @@ const allThemes = [
   { id: 1, name: "theme1", coefficient: 1 },
   { id: 2, name: "theme2", coefficient: 2 },
   { id: 3, name: "theme3", coefficient: 3 },
-  { id: 4, name: "theme3", coefficient: 3 },
-  { id: 5, name: "theme3", coefficient: 3 },
-  { id: 6, name: "theme3", coefficient: 3 },
-  { id: 7, name: "theme3", coefficient: 3 },
-  { id: 8, name: "theme3", coefficient: 3 },
+  { id: 4, name: "theme4", coefficient: 4 },
+  { id: 5, name: "theme5", coefficient: 5 },
+  { id: 6, name: "theme6", coefficient: 6 },
+  { id: 7, name: "theme7", coefficient: 7 },
+  { id: 8, name: "theme8", coefficient: 8 },
 ];
 
 export const ThemeChanger: FC<ThemeChangerProps> = ({
@@ -89,11 +89,13 @@ export const ThemeChanger: FC<ThemeChangerProps> = ({
               {allThemes.map((theme, index) => (
                 <li
                   key={index}
-                  value={theme.name}
+                  value={theme?.name}
                   onClick={handleOptionChange}
                   data-value={theme?.id}
                 >
-                  <span>{theme.name}</span>
+                  <span onClick={handleOptionChange} data-value={theme?.id}>
+                    {theme?.name}
+                  </span>
                 </li>
               ))}
             </ul>

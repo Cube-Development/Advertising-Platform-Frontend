@@ -1,11 +1,11 @@
-import { IOption } from "@shared/types/translate";
+import { IOptionTranslate } from "@shared/types/translate";
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { motion } from "framer-motion";
 import { PAGE_ANIMATION } from "@shared/config/animation";
 
 interface OptionCardProps {
-  option: IOption;
+  option: IOptionTranslate;
   custom: number;
 }
 

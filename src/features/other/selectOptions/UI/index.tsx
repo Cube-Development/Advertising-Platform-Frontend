@@ -1,27 +1,27 @@
+import { PLATFORM_PARAMETERS, channelData } from "@entities/channel";
 import { ArrowSmallVerticalIcon, InfoIcon } from "@shared/assets";
-import { ISelectOption } from "@shared/types";
+import { BREAKPOINT } from "@shared/config";
+import { IOption, ISelectOption } from "@shared/types";
 import { FC, useEffect, useRef, useState } from "react";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { BREAKPOINT } from "@shared/config";
-import { PLATFORM_PARAMETERS, channelData } from "@entities/channel";
-import { IOption } from "@shared/types/common";
 
 interface SelectOptionsProps {
   textData: string;
   options: IOption[];
   type: any;
-  onChange: UseFormSetValue<any>;
   single: boolean;
   isRow?: boolean;
   isFilter?: boolean;
   isCatalog?: boolean;
   isCatalogSorting?: boolean;
   isCatalogPlatform?: boolean;
+  onChange: UseFormSetValue<any>;
   getValues?: UseFormGetValues<any>;
   defaultValues?: IOption | number[];
   isPlatformFilter?: boolean;
+  isDisabled?: boolean;
 }
 
 export const SelectOptions: FC<SelectOptionsProps> = ({
@@ -38,6 +38,7 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
   getValues,
   defaultValues,
   isPlatformFilter,
+  isDisabled,
 }) => {
   const { t } = useTranslation();
   const allOptions: IOption[] = isFilter
@@ -86,11 +87,14 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
       | React.MouseEvent<HTMLLIElement | EventTarget>
       | React.ChangeEvent<HTMLInputElement>,
   ) => {
+    event.stopPropagation();
+    // console.log(event.target);
     const selectedValue = Number(
-      event.target instanceof HTMLLIElement
-        ? (event.target as HTMLLIElement).getAttribute("data-value")
-        : (event.target as HTMLInputElement).value,
+      event.target instanceof HTMLInputElement
+        ? (event.target as HTMLInputElement).value
+        : (event.target as HTMLLIElement).getAttribute("data-value"),
     );
+    // console.log("selectedValue", selectedValue);
     const newOptions = selectedOptions.includes(selectedValue)
       ? selectedOptions.filter((value) => value !== selectedValue)
       : [...selectedOptions, selectedValue];
@@ -110,7 +114,8 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
   const handleOptionChange = (
     event: React.MouseEvent<HTMLLIElement | EventTarget>,
   ) => {
-    console.log(event.target);
+    // console.log(event.target);
+    event.stopPropagation();
     const selectedId = Number(
       (event.target as HTMLLIElement).getAttribute("data-value"),
     );
@@ -180,7 +185,7 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
           ${isFilter ? styles.filter : ""}  
         
           ${
-            type === channelData.category && defaultValues
+            type === channelData.category && defaultValues && isDisabled
               ? styles.disabled__menu
               : isMenuOpen || selectedOption || selectedOptions?.length
                 ? styles.active
@@ -191,7 +196,7 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
           <div>
             {single ? (
               <div className={styles.filter}>
-                {selectedOption?.img ? <selectedOption.img /> : "..."}
+                {selectedOption?.img ? <selectedOption.img /> : ""}
                 {(!isFilter ||
                   screen >= BREAKPOINT.SM ||
                   !isPlatformFilter) && (
@@ -206,8 +211,8 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
               <span>
                 {selectedOptions?.length ? (
                   <>
-                    {t("add_platform.choosed")}: {selectedOptions?.length} /{" "}
-                    {allOptions?.length}
+                    {t("add_platform.description.choosed")}:{" "}
+                    {selectedOptions?.length} / {allOptions?.length}
                   </>
                 ) : (
                   allText?.default_value
@@ -219,7 +224,7 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
             >
               <ArrowSmallVerticalIcon
                 className={
-                  type === channelData.category && defaultValues
+                  type === channelData.category && defaultValues && isDisabled
                     ? "icon__grey"
                     : (isMenuOpen ||
                           selectedOption ||
@@ -253,7 +258,13 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
                     >
                       {option?.img ? <option.img /> : null}
                       {screen >= BREAKPOINT.SM || !isPlatformFilter ? (
-                        <span className="truncate">{option?.name}</span>
+                        <span
+                          onClick={handleOptionChange}
+                          data-value={option?.id}
+                          className="truncate"
+                        >
+                          {option?.name}
+                        </span>
                       ) : (
                         ""
                       )}
@@ -273,7 +284,12 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
                           : ""
                       }
                     >
-                      <span>{option?.name}</span>
+                      <span
+                        onClick={handleOptionsChange}
+                        data-value={option?.id}
+                      >
+                        {option?.name}
+                      </span>
                       <input
                         type="checkbox"
                         value={option?.id}

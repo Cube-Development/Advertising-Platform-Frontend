@@ -181,7 +181,8 @@ main {
 
   @media (max-width: 576px) {
     // max-width: var(--breakpoint-sm);
-    padding: 0 var(--container-padding-sm-side);
+    // padding: 0 var(--container-padding-sm-side);
+    padding: 0 var(--container-padding-xs-side);
   }
 
   @media (max-width: 375px) {
@@ -195,7 +196,9 @@ main {
 }
 
 .sidebar {
-  padding-left: 100px;
+  @media (min-width: 992px) {
+    padding-left: 100px;
+  }
 }
 
 .blur {

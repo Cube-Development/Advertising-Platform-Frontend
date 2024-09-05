@@ -3,56 +3,149 @@
   grid-auto-flow: row;
   row-gap: 40px;
 
-  .form {
-    display: grid;
-    grid-auto-flow: row;
+  @media (max-width: 576px) {
     row-gap: 20px;
-    padding: 50px;
-    border-radius: 40px;
-    background: var(--Personal-colors-White);
-    box-shadow: 0px 4px 26px 0px rgba(0, 0, 0, 0.2);
+  }
 
-    .form__row {
-      display: grid;
-      grid-template: 1fr / 1fr 2fr;
-      column-gap: 20px;
-      padding: 15px 25px;
-      border-radius: 14px;
-      border: 1px solid var(--black-10);
-      background: var(--Personal-colors-White);
+  .title {
+    text-align: center;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+    color: var(--Personal-colors-main);
+    font-size: var(--font-size-subtitle-main-xl);
 
-      span {
-        color: var(--choosen-text);
-        font-size: 16px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 1;
-      }
+    @media (max-width: 992px) {
+      font-size: 18px;
+    }
 
-      p {
-        color: var(--Personal-colors-black);
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 600;
-        line-height: 1;
-      }
+    @media (max-width: 576px) {
+      font-size: 13px;
     }
   }
 
-  .btns__wrapper {
+  .form__wrapper {
     display: grid;
-    justify-content: center;
+    grid-auto-flow: row;
+    row-gap: 40px;
 
-    .btns {
+    @media (max-width: 576px) {
+      row-gap: 20px;
+    }
+
+    .form {
       display: grid;
-      grid-template: 1fr / 1fr 1fr;
-      column-gap: 15px;
-      justify-content: center;
-      align-items: center;
+      grid-auto-flow: row;
+      row-gap: 20px;
+      padding: 50px;
+      border-radius: 40px;
+      background: var(--Personal-colors-White);
+      box-shadow: 0px 4px 26px 0px rgba(0, 0, 0, 0.2);
 
-      .prev {
-        svg {
-          transform: rotate(180deg);
+      @media (max-width: 992px) {
+        padding: 30px 40px;
+        row-gap: 40px;
+        border-radius: 30px;
+      }
+
+      @media (max-width: 576px) {
+        padding: 20px;
+        border-radius: 25px;
+        row-gap: 20px;
+      }
+
+      .form__row {
+        display: grid;
+        grid-template: 1fr / 1fr 2fr;
+        column-gap: 20px;
+        padding: 15px 25px;
+        border-radius: 14px;
+        border: 1px solid var(--black-10);
+        background: var(--Personal-colors-White);
+        align-items: center;
+
+        span {
+          color: var(--choosen-text);
+          font-size: 16px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 1;
+        }
+
+        a,
+        p {
+          color: var(--Personal-colors-black);
+          font-size: 14px;
+          font-style: normal;
+          font-weight: 600;
+          line-height: 1;
+        }
+        a {
+          color: var(--Personal-colors-main);
+        }
+
+        @media (max-width: 576px) {
+          grid-template: unset;
+          grid-auto-flow: row;
+          row-gap: 10px;
+          justify-items: center;
+          padding: 15px;
+
+          span {
+            font-size: 14px;
+          }
+          p {
+            font-size: 12px;
+          }
+        }
+
+        .price__wrapper {
+          display: grid;
+          grid-auto-flow: row;
+          row-gap: 20px;
+          width: 100%;
+
+          .price__row {
+            display: grid;
+            grid-template: 1fr / 1fr 1fr;
+            column-gap: 20px;
+            align-items: center;
+            align-content: center;
+
+            .format {
+              text-align: start;
+            }
+            .price {
+              text-align: end;
+            }
+          }
+        }
+      }
+    }
+
+    .btns__wrapper {
+      display: grid;
+      justify-content: center;
+
+      @media (max-width: 576px) {
+        justify-content: unset;
+      }
+
+      .btns {
+        display: grid;
+        grid-template: 1fr / 1fr 1fr;
+        column-gap: 15px;
+        justify-content: center;
+        align-items: center;
+
+        button {
+          padding: 15px;
+        }
+
+        .prev {
+          svg {
+            transform: rotate(180deg);
+          }
         }
       }
     }

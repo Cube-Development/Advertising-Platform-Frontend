@@ -1,17 +1,31 @@
 .wrapper {
   display: grid;
   grid-auto-flow: row;
-  row-gap: 50px;
-  margin-top: 50px;
-  margin-bottom: 200px;
-}
 
-.flag {
-  position: relative;
-  background-color: rgb(0, 23, 201);
-  padding: 20px;
-  clip-path: polygon(10% 0%, 100% 0%, 90% 50%, 100% 100%, 10% 100%, 0% 50%);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  z-index: 1;
-  overflow: hidden; /* Чтобы не выходили псевдоэлементы */
+  row-gap: var(--row-gap-content-xl);
+  margin-top: calc(var(--margin-section-xl) / 2);
+  margin-bottom: var(--margin-section-xl);
+
+  @media (max-width: 992px) {
+    row-gap: var(--row-gap-content-lg);
+    margin-top: calc(var(--margin-section-lg) / 2);
+    margin-bottom: var(--margin-section-lg);
+  }
+
+  @media (max-width: 768px) {
+    row-gap: var(--row-gap-content-md);
+    margin-top: calc(var(--margin-section-md) / 2);
+    margin-bottom: var(--margin-section-md);
+  }
+
+  @media (max-width: 576px) {
+    row-gap: 0;
+    margin-top: calc(var(--margin-section-sm) / 2);
+    margin-bottom: var(--margin-section-sm);
+  }
+
+  @media (max-width: 375px) {
+    margin-top: calc(var(--margin-section-xs) / 2);
+    margin-bottom: var(--margin-section-xs);
+  }
 }

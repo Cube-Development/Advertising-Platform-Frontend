@@ -1,17 +1,19 @@
 import { IFormatPriceProps } from "@entities/channel";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { BREAKPOINT } from "@shared/config";
 
 export const FormatPrice: FC<IFormatPriceProps> = ({
   big,
-  // small,
+  small,
   id,
   onChange,
   defaultValue,
 }) => {
   const { t } = useTranslation();
   const [price, setPrice] = useState(defaultValue || "");
+  const [screen, setScreen] = useState<number>(window.innerWidth);
 
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value.replace(/[^0-9.]/g, "");
@@ -26,13 +28,25 @@ export const FormatPrice: FC<IFormatPriceProps> = ({
   };
   const formattedPrice = price === "" ? "" : Number(price).toLocaleString();
 
+  useEffect(() => {
+    const handleResize = () => {
+      setScreen(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div className={styles.wrapper}>
       <div
         // className={price === "" ? styles.no__active : styles.active}
         className={`${styles.button}  ${price === "" ? styles.no__active : styles.active}`}
       >
-        {big}
+        {screen > BREAKPOINT.MD ? big : small}
       </div>
       <div className={styles.input}>
         <input

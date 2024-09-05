@@ -5,7 +5,7 @@ interface MyInputProps extends InputHTMLAttributes<HTMLInputElement> {}
 
 export const MySliderLimit: FC<MyInputProps> = ({ ...props }) => {
   props.className = `${styles.slider}`;
-  const gradientColor = `#4772e6`;
+  const gradientColor = `#E5E5E5`;
 
   return <input {...props} style={{ background: gradientColor }} />;
 };

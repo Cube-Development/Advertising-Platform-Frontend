@@ -21,7 +21,9 @@ export const Header: FC = () => {
     dispatch(logout());
   };
 
-  const { data, isLoading } = useGetBalanceQuery();
+  const { data, isLoading } = useGetBalanceQuery(undefined, {
+    skip: !isAuth,
+  });
 
   useEffect(() => {
     if (data) {

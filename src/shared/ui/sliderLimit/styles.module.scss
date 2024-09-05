@@ -1,15 +1,28 @@
 .slider {
   width: 100%;
   border-radius: 20px;
+  -webkit-appearance: none;
 }
 
 .slider::-webkit-slider-runnable-track {
-  border-radius: 20px;
   height: 5px;
   -webkit-appearance: none;
 }
 .slider::-webkit-slider-thumb {
   cursor: pointer;
+  height: 15px;
+  width: 15px;
+  border-radius: 50%;
   -webkit-appearance: none;
   margin-top: -4.5px;
+  background: var(
+    --Gradients-Gradient-2,
+    radial-gradient(
+      419.34% 136.52% at 0% 100%,
+      rgba(255, 255, 255, 0.2) 0%,
+      rgba(125, 117, 117, 0) 100%
+    ),
+    linear-gradient(90deg, #ff2f66 0%, rgba(254, 110, 48, 0.99) 100%)
+  );
+  filter: drop-shadow(0px 2px 3px rgba(249, 82, 98, 0.3));
 }

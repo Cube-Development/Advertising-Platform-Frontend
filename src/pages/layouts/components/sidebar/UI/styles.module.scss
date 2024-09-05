@@ -7,6 +7,10 @@
   background: var(--Personal-colors-White);
   overflow-y: auto;
 
+  @media (max-width: 992px) {
+    display: none;
+  }
+
   .row {
     display: grid;
     justify-content: space-between;

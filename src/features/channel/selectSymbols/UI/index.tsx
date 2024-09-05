@@ -12,6 +12,7 @@ interface SelectSymbolProps {
   type: keyof IAddChannelData;
   onChange: UseFormSetValue<any>;
   defaultValues?: number;
+  isRow?: boolean;
 }
 
 export const SelectSymbol: FC<SelectSymbolProps> = ({
@@ -19,6 +20,7 @@ export const SelectSymbol: FC<SelectSymbolProps> = ({
   text,
   onChange,
   defaultValues,
+  isRow,
 }) => {
   const { t } = useTranslation();
 
@@ -33,7 +35,7 @@ export const SelectSymbol: FC<SelectSymbolProps> = ({
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div className={`${isRow ? styles.wrapper__row : styles.wrapper}`}>
       <div className={styles.title}>
         <p>{t(title)}</p>
         <InfoIcon />

@@ -9,6 +9,12 @@
   grid-auto-flow: row;
   row-gap: 15px;
   align-items: center;
+
+  .left {
+    p {
+      padding-left: 10px;
+    }
+  }
 }
 
 .parameters {

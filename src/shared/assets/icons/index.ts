@@ -65,6 +65,7 @@ export { QualityIcon } from "./quality";
 export { RatingIcon } from "./rating";
 export { RobotIcon } from "./robot";
 export { RocketIcon } from "./rocket";
+export { RoundIcon } from "./roundIcon";
 export { SearchIcon } from "./search";
 export { SeePostIcon } from "./seePost";
 export { SendIcon } from "./send";

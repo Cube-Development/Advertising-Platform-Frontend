@@ -2,6 +2,7 @@
   display: grid;
   grid-auto-flow: row;
   align-items: center;
+  row-gap: 20px;
 
   .title {
     display: grid;
@@ -9,13 +10,18 @@
     align-items: center;
     justify-content: center;
     column-gap: 10px;
-    margin-bottom: 30px;
+    // margin-bottom: 30px;
   }
 
   .accomms {
     display: grid;
     grid-template: 1fr / 1fr 1fr 1fr;
     gap: 30px;
+
+    @media (max-width: 992px) {
+      grid-template: unset;
+      grid-auto-flow: row;
+    }
   }
 
   .info {

@@ -1,5 +1,5 @@
 import { paths } from "@shared/routing";
-import { IOption } from "@shared/types/translate";
+import { IOptionTranslate } from "@shared/types/translate";
 import { motion } from "framer-motion";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -17,7 +17,9 @@ interface CtaProps {
 
 export const Cta: FC<CtaProps> = ({ page }) => {
   const { t } = useTranslation();
-  const options: IOption[] = t(`${page}.cta_list`, { returnObjects: true });
+  const options: IOptionTranslate[] = t(`${page}.cta_list`, {
+    returnObjects: true,
+  });
   let custom = 0;
 
   return (

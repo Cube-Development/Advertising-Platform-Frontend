@@ -222,19 +222,19 @@
         grid-template-areas:
           "item1 item2"
           "item3 item4";
-        // grid-template: 2fr 1fr /1fr 1fr;
         column-gap: 50px;
         row-gap: 40px;
+        grid-template-columns: 1fr 1fr;
 
         @media (max-width: 992px) {
           font-size: var(--font-size-title-main-lg);
-          // grid-template: 2fr 1fr 1fr 1fr /1fr;
           grid-template-areas:
             "item1"
             "item3"
             "item2"
             "item4";
-          row-gap: 40px;
+          row-gap: 30px;
+          grid-template-columns: unset;
         }
 
         @media (max-width: 576px) {

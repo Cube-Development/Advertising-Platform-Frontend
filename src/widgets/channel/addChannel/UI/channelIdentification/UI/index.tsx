@@ -1,31 +1,39 @@
 import {
+  IAddChannelData,
   IAddChannelIdentification,
   IChannelLink,
+  IIndetificationParams,
   useChannelVerifyMutation,
   useCreateCodeQuery,
 } from "@entities/channel";
 import { platformTypes } from "@entities/platform";
 import { ArrowLongHorizontalIcon, InfoIcon } from "@shared/assets";
+import { PAGE_ANIMATION } from "@shared/config";
 import { MyButton, SpinnerLoaderSmall, useToast } from "@shared/ui";
-import { FC, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { motion } from "framer-motion";
+import { FC } from "react";
+import { SubmitHandler, useForm, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
 interface ChannelIdentificationProps {
-  onChangeStep: (newStep: number) => void;
-  currentPlatform: IChannelLink;
-  setCurrentPlatform: (platform: IChannelLink) => void;
-  setInserCode: (code: string) => void;
+  step: number;
+  variant: typeof PAGE_ANIMATION.animationLeft;
   channel_id?: string;
+  indetificationParams: IIndetificationParams;
+  setValue: UseFormSetValue<IAddChannelData>;
+  onChangeStep: (newStep: number) => void;
+  setIndetificationParams: (params: IIndetificationParams) => void;
 }
 
 export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
-  onChangeStep,
-  currentPlatform,
-  setCurrentPlatform,
-  setInserCode,
+  step,
+  variant,
   channel_id,
+  indetificationParams,
+  setValue,
+  onChangeStep,
+  setIndetificationParams,
 }) => {
   const { toast } = useToast();
   const { t } = useTranslation();
@@ -36,27 +44,31 @@ export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
     formState: { errors },
   } = useForm<IAddChannelIdentification>();
 
-  const [currentLink, setCurrentLink] = useState<string>("");
   const { data: code } = useCreateCodeQuery("", {
-    skip: channel_id || currentLink ? true : undefined,
+    skip: channel_id || indetificationParams.link ? true : undefined,
   });
 
   const [channelVerify, { isLoading, error, isSuccess }] =
     useChannelVerifyMutation();
 
   const onSubmit: SubmitHandler<IAddChannelIdentification> = (data) => {
-    if (code) {
+    if (code && !indetificationParams.link) {
       const formData = {
         ...data,
-        platform: currentPlatform.id,
+        platform: indetificationParams.platform.id,
         verification_code: code.verification_code,
+      };
+      const newPlatform = {
+        ...indetificationParams,
+        link: formData.url,
+        checked: true,
       };
       channelVerify(formData)
         .unwrap()
         .then((data) => {
-          setInserCode(formData.url);
-          setCurrentLink(data.insertion_code);
+          setValue("insertion_code", data.insertion_code);
           onChangeStep(2);
+          setIndetificationParams(newPlatform);
           toast({
             variant: "success",
             title: t("toasts.add_platform.link.success"),
@@ -75,11 +87,14 @@ export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
             });
           }
         });
+    } else if (indetificationParams.link) {
+      onChangeStep(2);
     }
   };
 
   const changePlatform = (platform: IChannelLink) => {
-    setCurrentPlatform(platform);
+    const newPlatform = { ...indetificationParams, platform: platform };
+    setIndetificationParams(newPlatform);
     reset();
   };
 
@@ -89,67 +104,81 @@ export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
     return pattern.test(url);
   };
 
-  return (
-    <form onSubmit={handleSubmit(onSubmit)} className={styles.wrapper}>
-      <div className={styles.form}>
-        <div className={styles.form__row}>
-          <div className={styles.form__text}>
-            <p>{t("add_platform.identification.info.title")}</p>
-            <InfoIcon />
-          </div>
-          <div className={styles.choose_platform}>
-            {platformTypes.map((platform, index) => (
-              <MyButton
-                key={index}
-                type="button"
-                className={`${styles.platform__btn} ${currentPlatform.type === platform.type ? styles.active : ""}`}
-                onClick={() => changePlatform(platform)}
-              >
-                {t(platform.name)}
-              </MyButton>
-            ))}
-          </div>
-        </div>
+  const handleChangeLink = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newLink = e.target.value;
+    const newPlatform = { ...indetificationParams, link: newLink };
+    setIndetificationParams(newPlatform);
+  };
 
-        <div className={styles.form__row}>
-          <div className={styles.form__text}>
-            <p>{t("add_platform.identification.link.title")}</p>
-            <InfoIcon />
-          </div>
-          <div className={styles.paste_link}>
-            <input
-              {...register("url", {
-                required: t("add_platform.identification.link.requerd"),
-                validate: {
-                  validURL: (value) =>
-                    isValidURL(value) ||
-                    t("add_platform.identification.link.invalid"),
-                },
-              })}
-              placeholder={
-                errors["url"]
-                  ? errors["url"].message
-                  : t(currentPlatform.default_value)
-              }
-              className={`${styles.platform__input} ${errors["url"] && styles.form_error}`}
-              // value={currentLink}
-              disabled={!!currentLink}
-            />
-          </div>
-        </div>
-      </div>
-      {isLoading ? (
-        <div>
-          <SpinnerLoaderSmall />
-        </div>
-      ) : (
-        <div className={styles.next__btn}>
-          <MyButton type="submit">
-            <p>{t("add_platform_btn.next")}</p>
-            <ArrowLongHorizontalIcon className="icon__white" />
-          </MyButton>
-        </div>
+  return (
+    <>
+      {step == 1 && (
+        <motion.div initial="hidden" animate="visible" variants={variant}>
+          <form onSubmit={handleSubmit(onSubmit)} className={styles.wrapper}>
+            <div className={styles.form}>
+              <div className={styles.form__row}>
+                <div className={styles.form__text}>
+                  <p>{t("add_platform.identification.info.title")}</p>
+                  <InfoIcon />
+                </div>
+                <div className={styles.choose_platform}>
+                  {platformTypes.map((platform, index) => (
+                    <MyButton
+                      key={index}
+                      type="button"
+                      className={`${styles.platform__btn} ${indetificationParams.platform.type === platform.type ? styles.active : ""}`}
+                      onClick={() => changePlatform(platform)}
+                      disabled={indetificationParams.checked}
+                    >
+                      {t(platform.name)}
+                    </MyButton>
+                  ))}
+                </div>
+              </div>
+
+              <div className={styles.form__row}>
+                <div className={styles.form__text}>
+                  <p>{t("add_platform.identification.link.title")}</p>
+                  <InfoIcon />
+                </div>
+                <div className={styles.paste_link}>
+                  <input
+                    {...register("url", {
+                      required: t("add_platform.identification.link.requerd"),
+                      validate: {
+                        validURL: (value) =>
+                          isValidURL(value) ||
+                          t("add_platform.identification.link.invalid"),
+                      },
+                    })}
+                    placeholder={
+                      errors["url"]
+                        ? errors["url"].message
+                        : t(indetificationParams.platform.default_value)
+                    }
+                    className={`${styles.platform__input} ${errors["url"] && styles.form_error}`}
+                    // onChange={handleChangeLink}
+                    // value={indetificationParams.link}
+                    disabled={indetificationParams.checked}
+                  />
+                </div>
+              </div>
+            </div>
+            {isLoading ? (
+              <div>
+                <SpinnerLoaderSmall />
+              </div>
+            ) : (
+              <div className={styles.next__btn}>
+                <MyButton type="submit">
+                  <p>{t("add_platform_btn.next")}</p>
+                  <ArrowLongHorizontalIcon className="icon__white" />
+                </MyButton>
+              </div>
+            )}
+          </form>
+        </motion.div>
       )}
-    </form>
+    </>
   );
 };

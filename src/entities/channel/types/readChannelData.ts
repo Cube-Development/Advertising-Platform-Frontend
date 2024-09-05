@@ -1,5 +1,5 @@
 import { IFormat } from "@entities/project";
-import { IOption } from "@shared/types/common";
+import { IOption } from "@shared/types";
 import { ratingData } from "../config";
 
 export interface IReadChannelData {

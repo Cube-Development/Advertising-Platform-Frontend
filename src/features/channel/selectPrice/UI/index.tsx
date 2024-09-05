@@ -52,10 +52,10 @@ export const SelectPrice: FC<SelectPriceProps> = ({
         <p>{t(title)}</p>
         <InfoIcon />
       </div>
-      <hr />
-      <div className={styles.info}>
+      {/* <hr /> */}
+      {/* <div className={styles.info}>
         <p>{t(info)}</p>
-      </div>
+      </div> */}
       <div className={styles.accomms}>
         {formats &&
           formats?.map((format, index) => (

@@ -3,15 +3,42 @@ import { ButtonHTMLAttributes } from "react";
 
 export interface IAddChannelData {
   insertion_code?: string;
-  category: number;
+  category: number | undefined;
   language: number[];
   region: number[];
   male: number;
   female: number;
-  description: string;
+  description: string | undefined;
   text_limit: number;
   age: number[];
   format: IAddFormat[];
+}
+
+export interface IAddChannelDataPreview {
+  insertion_code?: string;
+  link?: string;
+  platform?: string;
+  category?: Content[];
+  language?: Content[];
+  region?: Content[];
+  male?: number;
+  female?: number;
+  description?: string | undefined;
+  text_limit?: number;
+  age?: Content[];
+  format?: IContentFormat[];
+}
+
+interface Content {
+  id: number;
+  name: string;
+}
+
+interface IContentFormat {
+  id: number;
+  small: string;
+  big: string;
+  price: number;
 }
 
 export interface IAddChannelIdentification {

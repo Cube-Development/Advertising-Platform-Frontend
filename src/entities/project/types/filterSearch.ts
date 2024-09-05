@@ -1,5 +1,5 @@
 import { platformTypesNum } from "@entities/platform";
-import { IOption } from "@shared/types/common";
+import { IOption } from "@shared/types";
 
 export interface IFilterSearch {
   platform: platformTypesNum;

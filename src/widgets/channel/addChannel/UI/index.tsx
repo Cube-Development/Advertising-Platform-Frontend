@@ -1,83 +1,160 @@
-import { FC, useState } from "react";
-import { ChannelIdentification } from "./channelIdentification";
-import { ChannelDescription } from "./channelDescription";
-import { ChannelTop } from "./channelTop";
-import { QueryParams } from "@shared/functions";
-import { IChannelLink } from "@entities/channel";
+import {
+  IAddChannelData,
+  IAddChannelDataPreview,
+  IIndetificationParams,
+  PLATFORM_PARAMETERS,
+  useGetChannelByIdQuery,
+} from "@entities/channel";
 import { platformTypes } from "@entities/platform";
-import styles from "./styles.module.scss";
+import { IFormat } from "@entities/project";
+import { Languages, PAGE_ANIMATION } from "@shared/config";
+import { QueryParams } from "@shared/functions";
+import { FC, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { ChannelAccept } from "./channelAccept";
-import { motion } from "framer-motion";
-import { PAGE_ANIMATION } from "@shared/config";
+import { ChannelDescription } from "./channelDescription";
+import { ChannelIdentification } from "./channelIdentification";
+import { ChannelTop } from "./channelTop";
+import styles from "./styles.module.scss";
 
 interface AddChannelBlockProps {}
 
 export const AddChannelBlock: FC<AddChannelBlockProps> = () => {
+  const { t, i18n } = useTranslation();
+  const language = Languages.find((lang) => {
+    return i18n.language === lang.name;
+  });
   const { channel_id, add_channel } = QueryParams();
-  const [currentStep, setCurrentStep] = useState<number>(1);
-  const [currentVariant, setCurrentVariant] = useState(
-    PAGE_ANIMATION.animationRight,
+  const stepStart = {
+    step: 1,
+    completedStep: 0,
+  };
+  const indetification = {
+    link: "",
+    platform: platformTypes[0],
+  };
+
+  const [currentStep, setCurrentStep] = useState(stepStart);
+  const [currentVariant, setCurrentVariant] = useState<
+    typeof PAGE_ANIMATION.animationLeft
+  >(PAGE_ANIMATION.animationRight);
+  const [indetificationParams, setIndetificationParams] =
+    useState<IIndetificationParams>(indetification);
+
+  const { data: channel } = useGetChannelByIdQuery(
+    { channel_id: channel_id!, language: language?.id || Languages[0].id },
+    { skip: !channel_id || currentStep.step !== 2 },
   );
 
   const handleOnChangeStep = (newStep: number) => {
-    if (newStep > currentStep) {
-      setCurrentVariant(PAGE_ANIMATION.animationRight);
-    } else {
+    let newCompletedStep = currentStep.completedStep;
+    if (newStep > currentStep.step) {
       setCurrentVariant(PAGE_ANIMATION.animationLeft);
+      if (newStep >= currentStep.completedStep + 1) {
+        newCompletedStep = newStep - 1;
+      }
+    } else {
+      setCurrentVariant(PAGE_ANIMATION.animationRight);
     }
-    setCurrentStep(newStep);
+    setCurrentStep({
+      step: newStep,
+      completedStep: newCompletedStep,
+    });
   };
 
-  const [currentPlatform, setCurrentPlatform] = useState<IChannelLink>(
-    platformTypes[0],
+  let defaultValues;
+  channel
+    ? (defaultValues = {
+        male: channel?.male,
+        female: channel?.female,
+        category: channel?.category?.id,
+        description: channel?.description,
+        text_limit: channel?.text_limit,
+        region: channel?.region?.map((item) => item?.id),
+        language: channel?.language?.map((item) => item?.id),
+        age: channel?.age?.map((item) => item?.id),
+        format: channel?.format?.map((format: IFormat) => ({
+          name: format?.format,
+          price: format?.price,
+        })),
+      })
+    : (defaultValues = {
+        insertion_code: "",
+        male: PLATFORM_PARAMETERS.defaultSexMale,
+        female: 100 - PLATFORM_PARAMETERS.defaultSexMale,
+        category: undefined,
+        description: undefined,
+        text_limit: PLATFORM_PARAMETERS.defaultTextLimit,
+        region: [],
+        language: [],
+        age: [],
+        format: [],
+      });
+
+  const { handleSubmit, setValue, getValues, watch } = useForm<IAddChannelData>(
+    {
+      defaultValues: defaultValues,
+    },
   );
-  const [inserCode, setInserCode] = useState<string>("");
+  const formFields = watch();
+  const [dataPreview, setDataPreview] = useState<IAddChannelDataPreview>({});
+
+  const handleSetDataPreview = (newData: IAddChannelDataPreview) => {
+    setDataPreview({
+      platform: indetificationParams.platform.name,
+      link: indetificationParams.link,
+      ...newData,
+    });
+  };
+
+  const handleSetIndetificationParams = (newData: IIndetificationParams) => {
+    setIndetificationParams(newData);
+  };
+
+  const handleReset = () => {
+    setIndetificationParams(indetification);
+    setDataPreview({});
+    setCurrentStep(stepStart);
+  };
 
   return (
     <div className="container sidebar" style={{ minHeight: "100vh" }}>
       <div className={styles.wrapper}>
-        {/* <div className="container">
-        <div className={styles.flag}></div>
-      </div> */}
-        <ChannelTop channel_id={channel_id!} query={add_channel!} />
-        {currentStep === 1 && (
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={currentVariant}
-          >
-            <ChannelIdentification
-              currentPlatform={currentPlatform}
-              setCurrentPlatform={setCurrentPlatform}
-              onChangeStep={handleOnChangeStep}
-              setInserCode={setInserCode}
-              channel_id={channel_id!}
-            />
-          </motion.div>
-        )}
-        {currentStep === 2 && (
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={currentVariant}
-          >
-            <ChannelDescription
-              currentPlatform={currentPlatform}
-              onChangeStep={handleOnChangeStep}
-              inserCode={inserCode}
-              channel_id={channel_id!}
-            />
-          </motion.div>
-        )}
-        {currentStep === 3 && (
-          <motion.div
-            initial="hidden"
-            animate="visible"
-            variants={currentVariant}
-          >
-            <ChannelAccept onChangeStep={handleOnChangeStep} />
-          </motion.div>
-        )}
+        <ChannelTop
+          channel_id={channel_id!}
+          step={currentStep}
+          onChangeStep={handleOnChangeStep}
+        />
+        <ChannelIdentification
+          indetificationParams={indetificationParams}
+          setIndetificationParams={handleSetIndetificationParams}
+          onChangeStep={handleOnChangeStep}
+          setValue={setValue}
+          channel_id={channel_id!}
+          step={currentStep.step}
+          variant={currentVariant}
+        />
+        <ChannelDescription
+          currentPlatform={indetificationParams.platform}
+          onChangeStep={handleOnChangeStep}
+          channel_id={channel_id!}
+          step={currentStep.step}
+          variant={currentVariant}
+          setValue={setValue}
+          getValues={getValues}
+          data={formFields}
+          handleChangeFormData={handleSetDataPreview}
+        />
+        <ChannelAccept
+          onChangeStep={handleOnChangeStep}
+          step={currentStep.step}
+          variant={currentVariant}
+          dataPreview={dataPreview}
+          handleSubmit={handleSubmit}
+          channel_id={channel_id!}
+          handleReset={handleReset}
+        />
       </div>
     </div>
   );

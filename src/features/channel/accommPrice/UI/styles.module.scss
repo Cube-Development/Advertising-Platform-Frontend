@@ -4,6 +4,17 @@
   row-gap: 25px;
   align-items: center;
   text-align: center;
+  grid-template: 1fr 1fr / 1fr;
+
+  @media (max-width: 992px) {
+    grid-auto-flow: column;
+    grid-template: 1fr / 1fr 1fr;
+    column-gap: 15px;
+  }
+
+  @media (max-width: 576px) {
+    grid-template: 1fr / 1fr max-content;
+  }
 
   .button {
     border-radius: 12px;
@@ -14,7 +25,11 @@
     color: var(--Personal-colors-main);
     border: 1px solid var(--Personal-colors-main);
     background: var(--Personal-colors-White);
-    padding: 15px 0;
+    padding: 15px 10px;
+
+    @media (max-width: 576px) {
+      font-size: 14px;
+    }
 
     &.active {
       border: none;
@@ -39,7 +54,8 @@
     border-radius: 12px;
     align-items: center;
     position: relative;
-    padding-right: 20px;
+    padding: 0 15px;
+    height: 100%;
 
     input {
       color: var(--Personal-colors-black);
@@ -47,7 +63,12 @@
       font-style: normal;
       font-weight: 400;
       line-height: normal;
-      padding: 15px;
+      // padding: 15px;
+
+      @media (max-width: 576px) {
+        font-size: 14px;
+        max-width: 40vw;
+      }
 
       &::placeholder {
         color: var(--Text-sample);
@@ -63,6 +84,10 @@
       font-style: normal;
       font-weight: 400;
       line-height: normal;
+
+      @media (max-width: 576px) {
+        font-size: 14px;
+      }
     }
   }
 }

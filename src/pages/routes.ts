@@ -46,7 +46,6 @@ export const privateBloggerRoutes: IRoute[] = [
 
 export const publicBloggerRoutes: IRoute[] = [
   { path: paths.mainBlogger, component: MainBloggerPage },
-  { path: paths.faq, component: FAQPage, sidebar: true },
 ];
 
 export const privateAdvertiserRoutes: IRoute[] = [
@@ -59,7 +58,6 @@ export const publicAdvertiserRoutes: IRoute[] = [
   { path: paths.cart, component: CartPage },
   { path: paths.turnkey, component: TurnkeyPage },
   { path: paths.channel, component: ChannelPage },
-  { path: paths.faq, component: FAQPage },
 ];
 
 // нужен в старой версии роутинга после обновы удалить
