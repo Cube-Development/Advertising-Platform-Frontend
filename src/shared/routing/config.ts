@@ -4,6 +4,7 @@ export enum pageFilter {
   platform = "platform",
   profile = "profile",
   catalog = "catalog",
+  turnkey = "turnkey",
   walletTopUp = "walletTopUp",
   walletWithdraw = "walletWithdraw",
   createOrderFiles = "createOrderFiles",

@@ -7,23 +7,23 @@ import {
 import { IBuyTarif } from "@entities/project/types/turnkey";
 import {
   AddFileIcon,
+  HandshakeIcon2,
   SadSmileIcon,
   TrashBasketIcon,
   YesIcon,
 } from "@shared/assets";
-import { HandshakeIcon2 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
 import { useAppSelector } from "@shared/hooks";
-import { paths } from "@shared/routing";
+import { pageFilter, paths } from "@shared/routing";
 import {
   Drawer,
-  DrawerContent,
   DrawerClose,
+  DrawerContent,
   DrawerTrigger,
   formatFileSize,
+  ScrollArea,
   ToastAction,
   useToast,
-  ScrollArea,
 } from "@shared/ui";
 import { AnimatePresence, motion } from "framer-motion";
 import { FileIcon, InfoIcon } from "lucide-react";
@@ -35,9 +35,10 @@ import styles from "./styles.module.scss";
 
 interface BuyTarifProps {
   tarif: number;
+  page?: pageFilter;
 }
 
-export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
+export const BuyTarif: FC<BuyTarifProps> = ({ tarif, page }) => {
   const { t } = useTranslation();
   const [screen, setScreen] = useState<number>(window.innerWidth);
   const { toast } = useToast();
@@ -52,6 +53,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
   const tarifPrice =
     TarifParameters.find((item) => item.index === tarif)?.price || 0;
   const { balance } = useAppSelector((state) => state.wallet);
+
   const [isHaveBalance, setIsHaveBalance] = useState<boolean>(
     tarifPrice <= balance,
   );
@@ -187,13 +189,15 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
 
   return (
     <>
-      {screen > BREAKPOINT.LG ? (
+      {page !== pageFilter.turnkey ? (
+        <Link to={paths.turnkey}>
+          <button className={styles.button} onClick={handleButtonClick}>
+            {t(`buy`)}
+          </button>
+        </Link>
+      ) : screen > BREAKPOINT.LG && page === pageFilter.turnkey ? (
         <>
-          <button
-            className={styles.button}
-            // onClick={() => onClick(tarif, true)}
-            onClick={handleButtonClick}
-          >
+          <button className={styles.button} onClick={handleButtonClick}>
             {t(`buy`)}
           </button>
 

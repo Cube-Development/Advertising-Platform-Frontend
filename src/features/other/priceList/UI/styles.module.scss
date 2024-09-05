@@ -19,12 +19,22 @@
 
 .carousel {
   overflow: hidden;
-  margin: -20px;
-  // display: none;
 
-  // @media (max-width: 992px) {
-  //   display: block;
-  // }
+  @media (max-width: 992px) {
+    margin: 0 calc(0px - var(--container-padding-lg-side));
+  }
+
+  @media (max-width: 768px) {
+    margin: 0 calc(0px - var(--container-padding-md-side));
+  }
+
+  @media (max-width: 576px) {
+    margin: 0 calc(0px - var(--container-padding-xs-side));
+  }
+
+  @media (max-width: 375px) {
+    margin: 0 calc(0px - var(--container-padding-xs-side));
+  }
 
   .wrapper {
     display: grid;

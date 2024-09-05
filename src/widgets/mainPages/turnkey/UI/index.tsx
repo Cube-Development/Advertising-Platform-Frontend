@@ -49,12 +49,7 @@ export const Turnkey: FC<TurnkeyProps> = ({ page }) => {
         </motion.p>
       </div>
 
-      {/* <motion.div
-        custom={custom++}
-        variants={MAIN_PAGE_ANIMATION.animationVision}
-      > */}
       <PriceList tarifs={t(`${page}.tarifs_list`, { returnObjects: true })} />
-      {/* </motion.div> */}
     </motion.section>
   );
 };
