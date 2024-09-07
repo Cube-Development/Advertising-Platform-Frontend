@@ -1,7 +1,7 @@
 import { paths } from "@shared/routing";
 import * as React from "react";
 import { AddChannelPage } from "./AddChannel";
-import { AddLegalPage } from "./AddLegal";
+// import { AddLegalPage } from "./AddLegal";
 import { CartPage } from "./Cart";
 import { CatalogPage } from "./Catalog";
 import { ChannelPage } from "./Channel";
@@ -31,7 +31,6 @@ export const privateCommonRoutes: IRoute[] = [
   { path: paths.walletWithdraw, component: WithdrawalPage, sidebar: true },
   { path: paths.wallethistory, component: WalletHistoryPage, sidebar: true },
   { path: paths.profile, component: ProfilePage, sidebar: true },
-  { path: paths.addChannel, component: AddLegalPage, sidebar: true },
 ];
 
 export const publicCommonRoutes: IRoute[] = [

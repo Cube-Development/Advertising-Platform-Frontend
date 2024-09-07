@@ -14,7 +14,7 @@ import {
 } from "@shared/config";
 import { ShowMoreBtn, SpinnerLoaderSmall } from "@shared/ui";
 import { motion } from "framer-motion";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
@@ -23,6 +23,7 @@ export const History: FC = () => {
   const language = Languages.find((lang) => lang.name === i18n.language);
   const [screen, setScreen] = useState<number>(window.innerWidth);
   const [currentPage, setCurrentPage] = useState(1);
+  const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
   const getParams: HistoryReq = {
     language: language?.id || Languages[0].id,
@@ -47,6 +48,28 @@ export const History: FC = () => {
     };
   }, []);
   let custom = 0;
+
+  useEffect(() => {
+    if (!loadMoreRef.current || screen > BREAKPOINT.MD) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && !isFetching && !isLoading) {
+          handleOnChangePage();
+        }
+      },
+      { rootMargin: "300px", threshold: 1.0 },
+    );
+
+    observer.observe(loadMoreRef.current);
+
+    return () => {
+      if (loadMoreRef.current) {
+        observer.unobserve(loadMoreRef.current);
+      }
+    };
+  }, [isFetching, isLoading, screen]);
+
   return (
     <div className={`container ${screen > BREAKPOINT.LG ? "sidebar" : ""}`}>
       <div className={styles.wrapper}>
@@ -93,7 +116,7 @@ export const History: FC = () => {
                 Array.from({ length: INTERSECTION_ELEMENTS.history }).map(
                   (_, index) => <SkeletonHistoryCard key={index} />,
                 )}
-              {!data.isLast && (
+              {!data.isLast && screen > BREAKPOINT.MD && (
                 <div className={styles.show_more} onClick={handleOnChangePage}>
                   {isFetching || isLoading ? (
                     <SpinnerLoaderSmall />
@@ -101,6 +124,19 @@ export const History: FC = () => {
                     <ShowMoreBtn />
                   )}
                 </div>
+              )}
+              {!data.isLast && screen <= BREAKPOINT.MD && (
+                <>
+                  {!isFetching || !isLoading ? (
+                    <div ref={loadMoreRef} className={styles.show_more}>
+                      ...
+                    </div>
+                  ) : (
+                    <div className={styles.show_more}>
+                      <SpinnerLoaderSmall />
+                    </div>
+                  )}
+                </>
               )}
             </div>
           ) : isLoading || isFetching ? (

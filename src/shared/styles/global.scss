@@ -197,8 +197,8 @@ main {
 
   @media (max-width: 576px) {
     // max-width: var(--breakpoint-sm);
-    // padding: 0 var(--container-padding-sm-side);
-    padding: 0 var(--container-padding-xs-side);
+    padding: 0 var(--container-padding-sm-side);
+    // padding: 0 var(--container-padding-xs-side);
   }
 
   @media (max-width: 375px) {

@@ -29,7 +29,7 @@
   }
 
   @media (max-width: 576px) {
-    margin: 0 calc(0px - var(--container-padding-xs-side));
+    margin: 0 calc(0px - var(--container-padding-sm-side));
   }
 
   @media (max-width: 375px) {
