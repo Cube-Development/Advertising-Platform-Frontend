@@ -3,20 +3,18 @@ import { AuthStateGenerator } from "@entities/user";
 import { LoginIcon } from "@shared/assets";
 import { useAppSelector } from "@shared/hooks";
 import {
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogFooter,
-  AlertDialogHeader,
-  AlertDialogTitle,
-  AlertDialogTrigger,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogTrigger,
   MyButton,
 } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import styles from "./styles.module.scss";
+import { CircleX } from "lucide-react";
 
 export const AddChannel: FC<IAddChannelQuery> = ({ props, path }) => {
   const { t } = useTranslation();
@@ -39,37 +37,49 @@ export const AddChannel: FC<IAddChannelQuery> = ({ props, path }) => {
           <MyButton {...props}>{t(`btn_add_platform`)}</MyButton>
         </Link>
       ) : (
-        <AlertDialog>
-          <AlertDialogTrigger asChild>
+        <Dialog>
+          <DialogTrigger asChild>
             <MyButton {...props}>{t(`btn_add_platform`)}</MyButton>
-          </AlertDialogTrigger>
-          <AlertDialogContent>
-            <AlertDialogHeader>
-              <AlertDialogTitle>
+          </DialogTrigger>
+          <DialogContent className={`${styles.content} gap-[0px]`}>
+            <DialogClose>
+              <p className={styles.close}>
+                <CircleX
+                  width={30}
+                  height={30}
+                  stroke="rgba(0,0,0,0.5)"
+                  strokeWidth={1.5}
+                />
+              </p>
+            </DialogClose>
+            <div className={styles.text}>
+              <p className={styles.text__title}>
                 {t("registration_alert.title")}
-              </AlertDialogTitle>
-              <AlertDialogDescription>
+              </p>
+              <p className={styles.text__description}>
                 {t("registration_alert.description")}
-                <AlertDialogAction>
-                  <a onClick={handleRegistrationClick}>
-                    <button>{t("registration")}</button>
-                  </a>
-                </AlertDialogAction>
-                <AlertDialogAction>
-                  <a onClick={handleLoginClick}>
-                    <button>{t("login")}</button>
-                    <LoginIcon />
-                  </a>
-                </AlertDialogAction>
-              </AlertDialogDescription>
-            </AlertDialogHeader>
-            <AlertDialogFooter>
-              <AlertDialogCancel>
-                {t("registration_alert.close")}
-              </AlertDialogCancel>
-            </AlertDialogFooter>
-          </AlertDialogContent>
-        </AlertDialog>
+              </p>
+              <p className={styles.text__call_to_action}>
+                {t("registration_alert.call_to_action")}
+              </p>
+            </div>
+            <DialogFooter className="pt-[20px]">
+              <a
+                onClick={handleLoginClick}
+                className={`${styles.btns__login} truncate`}
+              >
+                {t("login")}
+                <LoginIcon />
+              </a>
+              <a
+                onClick={handleRegistrationClick}
+                className={`${styles.btns__register} truncate`}
+              >
+                {t("registration")}
+              </a>
+            </DialogFooter>
+          </DialogContent>
+        </Dialog>
       )}
     </>
   );

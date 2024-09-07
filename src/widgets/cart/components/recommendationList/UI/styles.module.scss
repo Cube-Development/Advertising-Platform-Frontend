@@ -18,18 +18,18 @@
 
   p {
     color: var(--Personal-colors-black);
-    font-size: var(--font-size-subtitle-secondary-xl);
+    font-size: var(--column-gap-option-item-xl);
     font-style: normal;
     font-weight: 600;
     line-height: normal;
 
     @media (max-width: 576px) {
       font-weight: 500;
-      font-size: var(--font-size-subtitle-secondary-sm);
+      font-size: var(--column-gap-option-item-md);
     }
 
     @media (max-width: 375px) {
-      font-size: var(--font-size-subtitle-secondary-xs);
+      font-size: 12px;
     }
   }
 
