@@ -108,10 +108,15 @@
   @media (max-width: 576px) {
     display: block;
   }
+
+  svg {
+    height: 0;
+    width: 0;
+  }
 }
 
 .flag_wrap_2 {
-  filter: url(#round);
+  // filter: url(#round);
 }
 
 .flag_wrap {
