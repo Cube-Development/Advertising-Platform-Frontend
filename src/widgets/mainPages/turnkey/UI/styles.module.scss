@@ -30,8 +30,8 @@
     row-gap: var(--row-gap-content-sm);
     margin: var(--margin-section-sm) auto;
     // padding: calc(var(--margin-section-xs) / 2);
-    padding: calc(var(--container-padding-xs-side) * 2)
-      var(--container-padding-xs-side);
+    padding: calc(var(--container-padding-sm-side) * 2)
+      var(--container-padding-sm-side);
   }
 
   @media (max-width: 375px) {
