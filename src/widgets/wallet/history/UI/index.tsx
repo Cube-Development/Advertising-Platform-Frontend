@@ -14,16 +14,16 @@ import {
 } from "@shared/config";
 import { ShowMoreBtn, SpinnerLoaderSmall } from "@shared/ui";
 import { motion } from "framer-motion";
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { useInfiniteScroll } from "@shared/hooks"; // Импортируем хук
 
 export const History: FC = () => {
   const { t, i18n } = useTranslation();
   const language = Languages.find((lang) => lang.name === i18n.language);
   const [screen, setScreen] = useState<number>(window.innerWidth);
   const [currentPage, setCurrentPage] = useState(1);
-  const loadMoreRef = useRef<HTMLDivElement | null>(null);
 
   const getParams: HistoryReq = {
     language: language?.id || Languages[0].id,
@@ -38,6 +38,13 @@ export const History: FC = () => {
     setCurrentPage((prevPage) => prevPage + 1);
   };
 
+  // Используем хук для управления скроллом
+  const { loadMoreRef, isLoadingMore } = useInfiniteScroll({
+    isFetching,
+    isLast: data?.isLast || false,
+    onLoadMore: handleOnChangePage,
+  });
+
   useEffect(() => {
     const handleResize = () => {
       setScreen(window.innerWidth);
@@ -47,28 +54,8 @@ export const History: FC = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
   let custom = 0;
-
-  useEffect(() => {
-    if (!loadMoreRef.current || screen > BREAKPOINT.MD) return;
-
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0].isIntersecting && !isFetching && !isLoading) {
-          handleOnChangePage();
-        }
-      },
-      { rootMargin: "300px", threshold: 1.0 },
-    );
-
-    observer.observe(loadMoreRef.current);
-
-    return () => {
-      if (loadMoreRef.current) {
-        observer.unobserve(loadMoreRef.current);
-      }
-    };
-  }, [isFetching, isLoading, screen]);
 
   return (
     <div className={`container ${screen > BREAKPOINT.LG ? "sidebar" : ""}`}>
@@ -112,39 +99,46 @@ export const History: FC = () => {
                   <HistoryCard card={card} />
                 </motion.div>
               ))}
-              {(isFetching || isLoading) &&
-                Array.from({ length: INTERSECTION_ELEMENTS.history }).map(
-                  (_, index) => <SkeletonHistoryCard key={index} />,
-                )}
-              {!data.isLast && screen > BREAKPOINT.MD && (
-                <div className={styles.show_more} onClick={handleOnChangePage}>
-                  {isFetching || isLoading ? (
-                    <SpinnerLoaderSmall />
-                  ) : (
-                    <ShowMoreBtn />
-                  )}
+
+              {!data.isLast && screen <= BREAKPOINT.MD && !isLoadingMore && (
+                <div ref={loadMoreRef} className={styles.show_more}></div>
+              )}
+
+              {(isFetching || isLoadingMore) && screen <= BREAKPOINT.MD && (
+                <div className="pt-[20px]">
+                  <SpinnerLoaderSmall />
                 </div>
               )}
-              {!data.isLast && screen <= BREAKPOINT.MD && (
-                <>
-                  {!isFetching || !isLoading ? (
-                    <div ref={loadMoreRef} className={styles.show_more}>
-                      ...
-                    </div>
-                  ) : (
-                    <div className={styles.show_more}>
+
+              {!data.isLast && screen > BREAKPOINT.MD && (
+                <div className={styles.show_more} onClick={handleOnChangePage}>
+                  {isFetching || isLoadingMore ? (
+                    <div className="pt-[20px]">
                       <SpinnerLoaderSmall />
                     </div>
+                  ) : (
+                    <motion.div
+                      initial="hidden"
+                      animate="visible"
+                      custom={
+                        (data?.transactions?.length - 1) %
+                        INTERSECTION_ELEMENTS.history
+                      }
+                      variants={PAGE_ANIMATION.animationUp}
+                    >
+                      <ShowMoreBtn />
+                    </motion.div>
                   )}
-                </>
+                </div>
               )}
             </div>
           ) : isLoading || isFetching ? (
             <>
-              {(isFetching || isLoading) &&
-                Array.from({ length: INTERSECTION_ELEMENTS.history }).map(
-                  (_, index) => <SkeletonHistoryCard key={index} />,
-                )}
+              {Array.from({ length: INTERSECTION_ELEMENTS.history }).map(
+                (_, index) => (
+                  <SkeletonHistoryCard key={index} />
+                ),
+              )}
             </>
           ) : (
             <div className={styles.empty__block}>

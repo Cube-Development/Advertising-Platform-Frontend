@@ -19,7 +19,7 @@ import {
   INTERSECTION_ELEMENTS,
   PAGE_ANIMATION,
 } from "@shared/config";
-import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
+import { ShowMoreBtn, SpinnerLoaderSmall } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
 import {
@@ -30,6 +30,8 @@ import {
 import { useTranslation } from "react-i18next";
 import { ParametersFilter } from "../parametersFilter";
 import styles from "./styles.module.scss";
+import { SadSmileIcon } from "@shared/assets";
+import { useInfiniteScroll } from "@shared/hooks";
 
 interface CatalogListProps {
   channels: ICatalogChannel[];
@@ -72,6 +74,12 @@ export const CatalogList: FC<CatalogListProps> = ({
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  const { loadMoreRef, isLoadingMore } = useInfiniteScroll({
+    isFetching: isLoading!,
+    isLast: isLast || false,
+    onLoadMore: handleOnChangePage,
+  });
 
   return (
     <div className={styles.wrapper}>
@@ -132,16 +140,41 @@ export const CatalogList: FC<CatalogListProps> = ({
           </motion.div>
         ))}
         {isLoading &&
+          !channels?.length &&
           Array.from({ length: INTERSECTION_ELEMENTS.catalog }).map(
             (_, index) => <SkeletonCatalogCard key={index} />,
           )}
       </div>
-      {!isLast ? (
-        <div className={styles.show_more} onClick={handleOnChangePage}>
-          {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
-        </div>
+
+      {screen <= BREAKPOINT.MD ? (
+        <>
+          {!isLast && !isLoadingMore && (
+            <div ref={loadMoreRef} className={styles.show_more}></div>
+          )}
+
+          {(isLoading || isLoadingMore) && (
+            <div className="pt-[20px]">
+              <SpinnerLoaderSmall />
+            </div>
+          )}
+        </>
       ) : (
-        <div className={styles.empty}></div>
+        <>
+          {isLoading &&
+            Array.from({ length: INTERSECTION_ELEMENTS.catalog }).map(
+              (_, index) => <SkeletonCatalogCard key={index} />,
+            )}
+          {!isLast && (
+            <div className={styles.show_more} onClick={handleOnChangePage}>
+              {isLoading ? <SpinnerLoaderSmall /> : <ShowMoreBtn />}
+            </div>
+          )}
+        </>
+      )}
+      {!channels?.length && !isLoading && (
+        <div className={styles.empty}>
+          <SadSmileIcon />
+        </div>
       )}
     </div>
   );
