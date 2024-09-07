@@ -13,6 +13,10 @@
     box-shadow: 0px 4px 21px 0px rgba(144, 71, 237, 0.45);
     grid-area: item2;
   }
+
+  @media (max-width: 576px) {
+    padding: 25px 30px 25px 25px;
+  }
 }
 
 .accomms {
@@ -70,7 +74,7 @@
         font-size: var(--font-size-subtitle-secondary-sm);
       }
 
-      @media (max-width: 375px) {
+      @media (max-width: 380px) {
         font-size: var(--font-size-subtitle-secondary-xs);
       }
     }

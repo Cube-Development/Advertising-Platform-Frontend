@@ -3,9 +3,9 @@ import { FC, useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import Cookies from "js-cookie";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { paths } from "@shared/routing";
-import { useLogoutMutation } from "@entities/user";
+import { roles, useLogoutMutation } from "@entities/user";
 import {
   Dialog,
   DialogClose,
@@ -14,6 +14,7 @@ import {
   DialogTrigger,
 } from "@shared/ui";
 import { CircleX, LogOut } from "lucide-react";
+import { useAppSelector } from "@shared/hooks";
 
 interface ProfileProps {
   toggleLogout: () => void;
@@ -24,6 +25,8 @@ export const Profile: FC<ProfileProps> = ({ toggleLogout }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const [logout] = useLogoutMutation();
+  const navigate = useNavigate();
+  const { role } = useAppSelector((state) => state.user);
 
   const handleClickOutside = (event: MouseEvent) => {
     if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -38,6 +41,7 @@ export const Profile: FC<ProfileProps> = ({ toggleLogout }) => {
       const refreshToken = Cookies.get("refreshToken");
       refreshToken && logout(refreshToken);
       toggleLogout();
+      navigate(role === roles.advertiser ? paths.main : paths.mainBlogger);
     } catch (error) {
       console.error(error);
     }

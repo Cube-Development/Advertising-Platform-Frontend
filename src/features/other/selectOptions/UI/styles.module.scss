@@ -208,10 +208,10 @@
         column-gap: 5px;
         justify-content: start;
 
-        @media (max-width: 576px) {
-          justify-content: center;
-          align-items: center;
-        }
+        // @media (max-width: 576px) {
+        //   justify-content: center;
+        //   align-items: center;
+        // }
       }
 
       &:hover {

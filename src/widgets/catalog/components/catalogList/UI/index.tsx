@@ -19,7 +19,7 @@ import {
   INTERSECTION_ELEMENTS,
   PAGE_ANIMATION,
 } from "@shared/config";
-import { Accordion, ShowMoreBtn, SpinnerLoader } from "@shared/ui";
+import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
 import {
@@ -114,7 +114,7 @@ export const CatalogList: FC<CatalogListProps> = ({
           />
         )}
       </div>
-      <Accordion type="single" collapsible className={styles.card__list}>
+      <div className={styles.card__list}>
         {channels?.map((card, index) => (
           <motion.div
             key={card.id + index}
@@ -135,7 +135,7 @@ export const CatalogList: FC<CatalogListProps> = ({
           Array.from({ length: INTERSECTION_ELEMENTS.catalog }).map(
             (_, index) => <SkeletonCatalogCard key={index} />,
           )}
-      </Accordion>
+      </div>
       {!isLast ? (
         <div className={styles.show_more} onClick={handleOnChangePage}>
           {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}

@@ -33,7 +33,7 @@
     }
   }
 
-  button {
+  .button {
     color: rgba(0, 0, 0, 0.6);
     font-size: var(--font-size-xl-button-text);
     font-weight: 600;
@@ -43,6 +43,7 @@
     justify-content: center;
     align-items: center;
     gap: 5px;
+    height: 100%;
 
     @media (max-width: 576px) {
       font-size: var(--font-size-sm-button-text);

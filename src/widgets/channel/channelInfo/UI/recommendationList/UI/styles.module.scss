@@ -34,7 +34,7 @@
   }
 
   > p {
-    background: var(--Gradients-Gradient-1);
+    background: rgba($color: #4772e6, $alpha: 0.15);
     padding: 10px 11px;
     border-radius: 100%;
     cursor: pointer;
@@ -52,7 +52,7 @@
     }
 
     svg {
-      stroke: #fff;
+      stroke: var(--Personal-colors-main);
       width: 30px;
       height: 30px;
     }

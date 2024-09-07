@@ -15,7 +15,12 @@ import {
 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
 import { pageFilter, paths } from "@shared/routing";
-import { AccordionContent, AccordionItem, AccordionTrigger } from "@shared/ui";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@shared/ui";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -174,76 +179,12 @@ export const CatalogCard: FC<CatalogCardProps> = ({
           </div>
         </div>
         {screen < BREAKPOINT.LG && screen >= BREAKPOINT.MD ? (
-          <AccordionItem
-            value={`item-${card.id}`}
-            className={styles.channel__data__md}
-          >
-            <AccordionTrigger onClick={handleChangeOpenSubcard}>
-              <div className={styles.channel__data_row}>
-                <div className={styles.data}>
-                  <div>
-                    <SubsIcon />
-                  </div>
-                  <span>{card?.subscribers?.toLocaleString()}</span>
-                </div>
-                <div className={styles.data}>
-                  <div>
-                    <EyeIcon />
-                  </div>
-                  <span>{selectedFormat?.views!.toLocaleString()}</span>
-                </div>
-                <div className={styles.arrow}>
-                  <ArrowSmallVerticalIcon
-                    className={
-                      isSubcardOpen
-                        ? "icon__grey rotate"
-                        : "icon__grey rotate__down"
-                    }
-                  />
-                </div>
-              </div>
-            </AccordionTrigger>
-            <AccordionContent className={styles.channel__content}>
-              <div className={styles.channel__data_middle}>
-                <div className={styles.middle}>
-                  <div>
-                    <BoyIcon />
-                  </div>
-                  <div
-                    className="colorline"
-                    style={
-                      { "--male": `${card?.male}%` } as React.CSSProperties
-                    }
-                    data-male={`${card?.male}%`}
-                    data-female={`${card?.female}%`}
-                  />
-                  <div>
-                    <GirlIcon />
-                  </div>
-                </div>
-              </div>
-              <div className={styles.channel__data_row}>
-                <div className={styles.data}>
-                  <p>ER:</p>
-                  <span>{selectedFormat?.er}%</span>
-                </div>
-                <div className={styles.data}>
-                  <p>CPV:</p>
-                  <span>
-                    {selectedFormat?.cpv!.toLocaleString()} {t(`symbol`)}
-                  </span>
-                </div>
-              </div>
-            </AccordionContent>
-          </AccordionItem>
-        ) : screen < BREAKPOINT.MD ? (
-          <>
-            <span className={styles.description}>{card?.description}</span>
+          <Accordion type="single" collapsible>
             <AccordionItem
               value={`item-${card.id}`}
-              className={styles.channel__xs}
+              className={styles.channel__data__md}
             >
-              <div className={styles.channel__data__xs}>
+              <AccordionTrigger onClick={handleChangeOpenSubcard}>
                 <div className={styles.channel__data_row}>
                   <div className={styles.data}>
                     <div>
@@ -257,58 +198,128 @@ export const CatalogCard: FC<CatalogCardProps> = ({
                     </div>
                     <span>{selectedFormat?.views!.toLocaleString()}</span>
                   </div>
+                  <div className={styles.arrow}>
+                    <ArrowSmallVerticalIcon
+                      className={
+                        isSubcardOpen
+                          ? "icon__grey rotate"
+                          : "icon__grey rotate__down"
+                      }
+                    />
+                  </div>
                 </div>
-                <AccordionContent className={styles.channel__content}>
-                  <div className={styles.channel__data_middle}>
-                    <div className={styles.middle}>
-                      <div>
-                        <BoyIcon />
-                      </div>
-                      <div
-                        className="colorline"
-                        style={
-                          { "--male": `${card?.male}%` } as React.CSSProperties
-                        }
-                        data-male={`${card?.male}%`}
-                        data-female={`${card?.female}%`}
-                      />
-                      <div>
-                        <GirlIcon />
-                      </div>
+              </AccordionTrigger>
+              <AccordionContent className={styles.channel__content}>
+                <div className={styles.channel__data_middle}>
+                  <div className={styles.middle}>
+                    <div>
+                      <BoyIcon />
+                    </div>
+                    <div
+                      className="colorline"
+                      style={
+                        { "--male": `${card?.male}%` } as React.CSSProperties
+                      }
+                      data-male={`${card?.male}%`}
+                      data-female={`${card?.female}%`}
+                    />
+                    <div>
+                      <GirlIcon />
                     </div>
                   </div>
+                </div>
+                <div className={styles.channel__data_row}>
+                  <div className={styles.data}>
+                    <p>ER:</p>
+                    <span>{selectedFormat?.er}%</span>
+                  </div>
+                  <div className={styles.data}>
+                    <p>CPV:</p>
+                    <span>
+                      {selectedFormat?.cpv!.toLocaleString()} {t(`symbol`)}
+                    </span>
+                  </div>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        ) : screen < BREAKPOINT.MD ? (
+          <>
+            <span className={styles.description}>{card?.description}</span>
+            <Accordion type="single" collapsible>
+              <AccordionItem
+                value={`item-${card.id}`}
+                className={styles.channel__xs}
+              >
+                <div className={styles.channel__data__xs}>
                   <div className={styles.channel__data_row}>
                     <div className={styles.data}>
-                      <p>ER:</p>
-                      <span>{selectedFormat?.er}%</span>
+                      <div>
+                        <SubsIcon />
+                      </div>
+                      <span>{card?.subscribers?.toLocaleString()}</span>
                     </div>
                     <div className={styles.data}>
-                      <p>CPV:</p>
-                      <span>
-                        {selectedFormat?.cpv!.toLocaleString()} {t(`symbol`)}
-                      </span>
+                      <div>
+                        <EyeIcon />
+                      </div>
+                      <span>{selectedFormat?.views!.toLocaleString()}</span>
                     </div>
                   </div>
-                </AccordionContent>
-              </div>
-              <AccordionTrigger
-                onClick={handleChangeOpenSubcard}
-                className={styles.channel__data__xs__bottom}
-              >
-                <p>
-                  {isSubcardOpen
-                    ? t("catalog.see_less")
-                    : t("catalog.see_more")}
-                </p>
-                <ArrowSmallVerticalIcon
-                  className={
-                    isSubcardOpen
-                      ? "active__icon rotate"
-                      : "active__icon rotate__down"
-                  }
-                />
-              </AccordionTrigger>
-            </AccordionItem>
+                  <AccordionContent className={styles.channel__content}>
+                    <div className={styles.channel__data_middle}>
+                      <div className={styles.middle}>
+                        <div>
+                          <BoyIcon />
+                        </div>
+                        <div
+                          className="colorline"
+                          style={
+                            {
+                              "--male": `${card?.male}%`,
+                            } as React.CSSProperties
+                          }
+                          data-male={`${card?.male}%`}
+                          data-female={`${card?.female}%`}
+                        />
+                        <div>
+                          <GirlIcon />
+                        </div>
+                      </div>
+                    </div>
+                    <div className={styles.channel__data_row}>
+                      <div className={styles.data}>
+                        <p>ER:</p>
+                        <span>{selectedFormat?.er}%</span>
+                      </div>
+                      <div className={styles.data}>
+                        <p>CPV:</p>
+                        <span>
+                          {selectedFormat?.cpv!.toLocaleString()} {t(`symbol`)}
+                        </span>
+                      </div>
+                    </div>
+                  </AccordionContent>
+                </div>
+                <AccordionTrigger
+                  onClick={handleChangeOpenSubcard}
+                  className={styles.channel__data__xs__bottom}
+                >
+                  <p>
+                    {isSubcardOpen
+                      ? t("catalog.see_less")
+                      : t("catalog.see_more")}
+                  </p>
+                  <ArrowSmallVerticalIcon
+                    className={
+                      isSubcardOpen
+                        ? "active__icon rotate"
+                        : "active__icon rotate__down"
+                    }
+                  />
+                </AccordionTrigger>
+              </AccordionItem>
+            </Accordion>
           </>
         ) : (
           <></>

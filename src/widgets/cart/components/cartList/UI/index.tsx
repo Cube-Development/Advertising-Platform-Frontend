@@ -8,7 +8,6 @@ import {
 import { CartIcon, SadSmileIcon } from "@shared/assets";
 import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
 import { pageFilter } from "@shared/routing";
-import { Accordion } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -40,7 +39,7 @@ export const CartList: FC<CartListProps> = ({
         </div>
       </div>
       {channels?.length ? (
-        <Accordion type="single" collapsible className={styles.cards}>
+        <div className={styles.cards}>
           {channels?.map((card, index) => (
             <motion.div
               key={card.id + index}
@@ -62,7 +61,7 @@ export const CartList: FC<CartListProps> = ({
             Array.from({ length: INTERSECTION_ELEMENTS.catalog }).map(
               (_, index) => <SkeletonCatalogCard key={index} />,
             )}
-        </Accordion>
+        </div>
       ) : (
         <div className={styles.empty__block}>
           <div className={styles.icon}>

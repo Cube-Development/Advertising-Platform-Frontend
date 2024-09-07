@@ -1,4 +1,9 @@
 .wrapper {
+  // sticky
+  position: sticky;
+  top: 100px;
+  right: 0;
+
   display: grid;
   grid-auto-flow: row;
   row-gap: 25px;

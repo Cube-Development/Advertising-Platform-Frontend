@@ -61,19 +61,19 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
   };
 
   useEffect(() => {
-    // console.log(dropdownMenu.isOpen, "isOpen");
     document.addEventListener("click", handleClickOutside);
     if (dropdownMenu.isOpen) {
-      // console.log(dropdownMenu.isOpen, "ffffffffffffffffe");
-      document.body.classList.add("sidebar-open");
+      document.body.classList.add("sidebar-open-2");
+      console.log("open");
     } else {
-      document.body.classList.remove("sidebar-open");
+      document.body.classList.remove("sidebar-open-2");
+      console.log("closed");
     }
     return () => {
-      document.body.classList.remove("sidebar-open");
+      document.body.classList.remove("sidebar-open-2");
       document.removeEventListener("click", handleClickOutside);
     };
-  }, [dropdownMenu.isOpen]);
+  }, [dropdownMenu.isOpen, currentRole]);
 
   let serviceMenu: IMenuItem[] =
     currentRole === roles.advertiser
@@ -137,7 +137,9 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
               </div>
               <ScrollArea className="h-[calc(100svh_-_80px)]">
                 <div className={styles.menu__switcher}>
-                  <div className={styles.menu__switcher__row}>
+                  <div
+                    className={`${styles.menu__switcher__row} ${currentRole === roles.advertiser ? styles.active_advertiser : currentRole === roles.blogger ? styles.active_blogger : ""}`}
+                  >
                     <Link to={paths.main}>
                       <p
                         className={`${

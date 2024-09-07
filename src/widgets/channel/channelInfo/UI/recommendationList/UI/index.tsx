@@ -3,7 +3,6 @@ import { AddToBasket } from "@features/cart";
 import { FormatList } from "@features/catalog";
 import { RecommendCard, SkeletonRecommendCard } from "@features/channel";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
-import { Accordion } from "@shared/ui";
 import { FC, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useInView } from "react-intersection-observer";
@@ -14,7 +13,6 @@ import { EffectCoverflow, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./styles.module.scss";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import SwiperCore from "swiper";
 
 interface RecommendationListProps {
   cards: ICatalogChannel[];
@@ -48,7 +46,7 @@ export const RecommendationList: FC<RecommendationListProps> = ({
         {t("channel.recommend.title")}
       </p>
       <div className={styles.carousel}>
-        <Accordion type="single" collapsible className={styles.cards}>
+        <div className={styles.cards}>
           <Swiper
             navigation={{
               prevEl: ".prev",
@@ -123,7 +121,7 @@ export const RecommendationList: FC<RecommendationListProps> = ({
               </p>
             </div>
           </Swiper>
-        </Accordion>
+        </div>
       </div>
     </div>
   );

@@ -103,6 +103,13 @@ export const History: FC = () => {
                 </div>
               )}
             </div>
+          ) : isLoading || isFetching ? (
+            <>
+              {(isFetching || isLoading) &&
+                Array.from({ length: INTERSECTION_ELEMENTS.history }).map(
+                  (_, index) => <SkeletonHistoryCard key={index} />,
+                )}
+            </>
           ) : (
             <div className={styles.empty__block}>
               <div className={styles.icon}>
