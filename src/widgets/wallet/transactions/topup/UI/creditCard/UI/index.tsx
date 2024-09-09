@@ -1,17 +1,17 @@
-import { CardIcon, InfoIcon } from "@shared/assets";
-import { FC, useState } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { PaymentCard } from "@features/wallet";
 import {
   paymentTypes,
   topup,
   usePaymentDepositMutation,
 } from "@entities/wallet";
-import { ToastAction, useToast } from "@shared/ui";
+import { PaymentCard } from "@features/wallet";
+import { CardIcon, InfoIcon } from "@shared/assets";
 import { paths } from "@shared/routing";
+import { ToastAction, useToast } from "@shared/ui";
+import { FC, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import styles from "./styles.module.scss";
 
 interface IOnlineBankingData {
   legal_id: string;
@@ -169,9 +169,7 @@ export const CreditCard: FC = () => {
             </span>
           </div>
         </div>
-        <div className={styles.button}>
-          <PaymentCard error={error && true} isLoading={isLoading} />
-        </div>
+        <PaymentCard error={error && true} isLoading={isLoading} />
       </form>
     </div>
   );

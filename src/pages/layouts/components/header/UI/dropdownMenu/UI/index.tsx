@@ -138,7 +138,13 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
               <ScrollArea className="h-[calc(100svh_-_80px)]">
                 <div className={styles.menu__switcher}>
                   <div
-                    className={`${styles.menu__switcher__row} ${currentRole === roles.advertiser ? styles.active_advertiser : currentRole === roles.blogger ? styles.active_blogger : ""}`}
+                    style={
+                      {
+                        "--translateRole": `${currentRole === roles.advertiser ? `0%` : `100%`}`,
+                        "--widthRole": `50%`,
+                      } as React.CSSProperties
+                    }
+                    className={styles.menu__switcher__row}
                   >
                     <Link to={paths.main}>
                       <p

@@ -8,12 +8,13 @@ export const PaymentDidox: FC = ({ ...props }) => {
   const { t } = useTranslation();
   return (
     <MyButton
-      buttons_type="button__white"
+      {...props}
+      // buttons_type="button__white"
       className={styles.button}
       type="submit"
     >
       {t(`topup_btn.send`)}
-      <ArrowLongHorizontalIcon className="active__icon" />
+      <ArrowLongHorizontalIcon className="icon__white" />
     </MyButton>
   );
 };

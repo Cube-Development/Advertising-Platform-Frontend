@@ -4,6 +4,10 @@ import {
   subprofileFilterTypes,
 } from "../config";
 
+export interface IExtendedProfileData extends ILegalData {
+  amount: number;
+}
+
 export interface ILegalData {
   type_legal?: number;
   name: string;

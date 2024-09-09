@@ -1,9 +1,6 @@
-import { FC } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import { LegalForm, PaymentDidox } from "@features/wallet";
 import {
   EntityData,
+  IExtendedProfileData,
   IndividualData,
   SelfEmployedCardData,
   SelfEmployedData,
@@ -11,14 +8,20 @@ import {
   profileTypesNum,
   subprofileFilterTypes,
 } from "@entities/wallet";
+import { LegalForm, PaymentDidox } from "@features/wallet";
+import { FC, useState } from "react";
+import {
+  FieldErrors,
+  SubmitHandler,
+  UseFormHandleSubmit,
+  UseFormRegister,
+  UseFormWatch,
+} from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 interface PaymentDataProps {
   amountTitle: string;
-  register?: any;
-  errors?: any;
-  watch?: any;
-  handleSubmit?: any;
-  onSubmit?: any;
   profileFilter: {
     type: profileTypesName;
     id?: profileTypesNum;
@@ -27,21 +30,33 @@ interface PaymentDataProps {
     type: subprofileFilterTypes;
     id: profileTypesNum;
   };
+  errors?: FieldErrors<IExtendedProfileData>;
+  watch?: UseFormWatch<IExtendedProfileData>;
+  register?: UseFormRegister<IExtendedProfileData>;
+  onSubmit?: SubmitHandler<IExtendedProfileData>;
+  handleSubmit?: UseFormHandleSubmit<
+    IExtendedProfileData,
+    IExtendedProfileData
+  >;
 }
 
 export const PaymentData: FC<PaymentDataProps> = ({
   amountTitle,
-  register,
-  errors,
-  handleSubmit,
-  watch,
-  onSubmit,
   profileFilter,
   subprofileFilter,
+  errors,
+  watch,
+  onSubmit,
+  register,
+  handleSubmit,
 }) => {
   const { t } = useTranslation();
-
-  const amount = watch("amount", 0);
+  const formFields = watch!();
+  const accept = {
+    serviceRules: false,
+    saveData: false,
+  };
+  const [isAccept, setIsAccept] = useState<typeof accept>(accept);
 
   const typeLegal =
     profileFilter.type === profileTypesName.entities
@@ -53,30 +68,44 @@ export const PaymentData: FC<PaymentDataProps> = ({
           ? SelfEmployedData
           : SelfEmployedCardData;
 
+  const [price, setPrice] = useState("");
+  const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newValue = e.target.value.replace(/[^0-9.]/g, "");
+    if (newValue.length > 10 || newValue == "0") {
+      return;
+    }
+    setPrice(newValue);
+  };
+  // const formattedPrice = price === "" ? "" : Number(price).toLocaleString();
+  // console.log("price", price)
+
+  const handleChangeAccept = (serviceRules: boolean, saveData: boolean) => {
+    if (serviceRules) {
+      setIsAccept({ ...isAccept, serviceRules: !isAccept.serviceRules });
+    } else if (saveData) {
+      setIsAccept({ ...isAccept, saveData: !isAccept.saveData });
+    }
+  };
+
   return (
-    <form className={styles.payment__data} onSubmit={handleSubmit(onSubmit)}>
+    <form className={styles.payment__data} onSubmit={handleSubmit!(onSubmit!)}>
       <div className={styles.block}>
         <div className={styles.ammount}>
-          <p>{amountTitle}</p>
+          <p className={styles.title}>{amountTitle}</p>
           <div>
             <input
-              {...register("amount", {
+              {...register!("amount", {
                 required: t("wallet.topup.required"),
+                onChange: (e) => handleInput(e),
               })}
-              type="number"
               placeholder={
-                errors["amount"]
-                  ? errors["amount"].message
+                errors!["amount"]
+                  ? errors!["amount"].message
                   : t("wallet.topup.placeholder")
               }
-              // пример ограничения инпута
+              value={price}
               maxLength={10}
-              onInput={(e) => {
-                const target = e.target as HTMLInputElement;
-                target.value = target.value.slice(0, target.maxLength);
-                target.value = target.value.replace(/\D/g, "");
-              }}
-              className={errors["amount"] && styles.error}
+              className={errors!["amount"] && styles.error}
             />
             <small>{t("symbol")}</small>
           </div>
@@ -96,14 +125,19 @@ export const PaymentData: FC<PaymentDataProps> = ({
         </div>
         <div>
           <p>
-            {amount != 0 ? parseFloat(amount).toLocaleString() : 0}{" "}
+            {formFields.amount != 0
+              ? parseFloat(String(formFields.amount)).toLocaleString()
+              : 0}{" "}
             {t("symbol")}
           </p>
           <span>{t("wallet.pay.text")}</span>
         </div>
       </div>
       <div className={styles.accept}>
-        <input type="checkbox" />
+        <input
+          type="checkbox"
+          onClick={(e) => handleChangeAccept(true, false)}
+        />
         <p>
           {`${t("wallet.accept.text1")} `}
           <span>{`${t("wallet.accept.span1")} `}</span>
@@ -113,7 +147,10 @@ export const PaymentData: FC<PaymentDataProps> = ({
         </p>
       </div>
       <div className={styles.accept}>
-        <input type="checkbox" />
+        <input
+          type="checkbox"
+          onClick={(e) => handleChangeAccept(false, true)}
+        />
         <p>{t("wallet.save_data")}</p>
       </div>
       <div className={styles.button}>

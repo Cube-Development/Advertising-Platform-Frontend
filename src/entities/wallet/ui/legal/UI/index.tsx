@@ -38,11 +38,11 @@ export const LegalCard: FC<LegalCardProps> = ({
           {isOneLegalLoading && !oneLegalError ? (
             <SpinnerLoaderSmall />
           ) : (
-            <div className={styles.circle_wrapper}>
+            <div
+              className={`${styles.circle_wrapper} ${isActive ? styles.active : ""}`}
+            >
               <div className={styles.outer}>
-                <div
-                  className={`${styles.inner} ${isActive ? styles.active : ""}`}
-                ></div>
+                <div className={styles.inner} />
               </div>
             </div>
           )}

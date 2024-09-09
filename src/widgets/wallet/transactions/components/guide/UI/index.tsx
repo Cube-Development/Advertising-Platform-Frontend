@@ -1,7 +1,7 @@
-import { FC } from "react";
-import styles from "./styles.module.scss";
-import { useTranslation } from "react-i18next";
 import { profileTypesName, profileTypesNum } from "@entities/wallet";
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 interface GuideProps {
   profileFilter: {
@@ -15,9 +15,15 @@ export const Guide: FC<GuideProps> = ({ profileFilter }) => {
 
   return (
     <div className={styles.guide}>
-      {profileFilter.type === profileTypesName.entities
-        ? t("wallet.guide.entity")
-        : t("wallet.guide.individual")}
+      <p>
+        {profileFilter.type === profileTypesName.entities
+          ? t("wallet.guide.entity")
+          : profileFilter.type === profileTypesName.individuals
+            ? t("wallet.guide.individual")
+            : profileFilter.type === profileTypesName.selfEmployedAccounts
+              ? t("wallet.guide.selfEmployedAccounts")
+              : t("wallet.guide.selfEmployedTransits")}
+      </p>
     </div>
   );
 };

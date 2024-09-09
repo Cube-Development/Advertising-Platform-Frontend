@@ -76,7 +76,7 @@ export const PriceList: FC<PriceListProps> = ({ tarifs, page }) => {
           })}
         </div>
       ) : (
-        <div className={styles.carousel}>
+        <div className="swipper__carousel">
           <Swiper
             effect="coverflow"
             modules={[EffectCoverflow]}
@@ -112,7 +112,7 @@ export const PriceList: FC<PriceListProps> = ({ tarifs, page }) => {
               modifier: 0.75, // Модификатор эффекта
               slideShadows: false,
             }}
-            className={styles.wrapper}
+            className="swipper__wrapper"
           >
             {duplicateTarifs.map((tarifInfo, index) => {
               const tarifIndex = TarifParameters.find(

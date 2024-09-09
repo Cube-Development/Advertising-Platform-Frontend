@@ -1,12 +1,5 @@
-import { ArrowIcon5 } from "@shared/assets";
-import { FC, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import { Guide, LegalsList, PaymentData } from "../../components";
-import { BarSubrofileFilter } from "@features/wallet";
-import { BarSubfilter } from "@features/other";
 import {
+  IExtendedProfileData,
   ILegalCard,
   ILegalCardShort,
   ILegalData,
@@ -19,17 +12,23 @@ import {
   useReadLegalsByTypeQuery,
   useReadOneLegalMutation,
 } from "@entities/wallet";
-import { ToastAction, useToast } from "@shared/ui";
+import { BarSubfilter } from "@features/other";
+import { BarSubrofileFilter } from "@features/wallet";
+import { ArrowIcon5 } from "@shared/assets";
+import { BREAKPOINT } from "@shared/config";
 import { pageFilter } from "@shared/routing";
-
-interface IExtendedProfileData extends ILegalData {
-  amount: number;
-}
+import { ToastAction, useToast } from "@shared/ui";
+import { FC, useEffect, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { Guide, LegalsList, PaymentData } from "../../components";
+import styles from "./styles.module.scss";
 
 export const Withdrawal: FC = () => {
   const { toast } = useToast();
   const { t } = useTranslation();
   const [activeAccount, setActiveAccount] = useState<ILegalCard | null>(null);
+  const [screen, setScreen] = useState<number>(window.innerWidth);
 
   const {
     setValue,
@@ -65,6 +64,10 @@ export const Withdrawal: FC = () => {
 
   const [readOneLegal, { isLoading: isOneLegalLoading, error: oneLegalError }] =
     useReadOneLegalMutation();
+  const [paymentWithdrawal, { error: withdrowError }] =
+    usePaymentWithdrawalMutation();
+  const [createLegal] = useCreateLegalMutation();
+  const [editLegal] = useEditLegalMutation();
 
   const changeActiveAccount = async (account: ILegalCardShort) => {
     if (activeAccount && account.legal_id === activeAccount.legal_id) {
@@ -92,13 +95,6 @@ export const Withdrawal: FC = () => {
         });
     }
   };
-
-  const [createLegal] = useCreateLegalMutation();
-
-  const [editLegal] = useEditLegalMutation();
-
-  const [paymentWithdrawal, { error: withdrowError }] =
-    usePaymentWithdrawalMutation();
 
   const onSubmit: SubmitHandler<IExtendedProfileData> = async (formData) => {
     const dataWithLegalType = {
@@ -169,6 +165,16 @@ export const Withdrawal: FC = () => {
       });
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setScreen(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div className="container sidebar">
       {withdrowError ? <h1>ОШИБКА В ЗАПРОСЕ</h1> : ""}
@@ -186,47 +192,63 @@ export const Withdrawal: FC = () => {
             setValue("profileFilter", profileFilter)
           }
         />
-        <div>
-          {formState.profileFilter.type ===
-            profileTypesName.selfEmployedAccounts && (
-            <div className={styles.subbar}>
-              <BarSubrofileFilter
-                resetActiveAccount={setActiveAccount}
-                resetValues={reset}
-                subprofileFilter={formState.subprofileFilter}
-                changeSubprofile={(subprofile: {
-                  type: subprofileFilterTypes;
-                  id: profileTypesNum;
-                }) => setValue("subprofileFilter", subprofile)}
-              />
-            </div>
+        <div className={styles.form__wrapper}>
+          {screen < BREAKPOINT.MD && (
+            <Guide profileFilter={formState.profileFilter} />
           )}
           <div className={styles.top}>
             <p>{t("wallet.withdraw.offer")}</p>
           </div>
+          {formState.profileFilter.type ===
+            profileTypesName.selfEmployedAccounts && (
+            <BarSubrofileFilter
+              resetActiveAccount={setActiveAccount}
+              resetValues={reset}
+              subprofileFilter={formState.subprofileFilter}
+              changeSubprofile={(subprofile: {
+                type: subprofileFilterTypes;
+                id: profileTypesNum;
+              }) => setValue("subprofileFilter", subprofile)}
+            />
+          )}
+          {screen < BREAKPOINT.LG && (
+            <LegalsList
+              accounts={legalsByType}
+              changeActiveAccount={changeActiveAccount}
+              activeAccount={activeAccount}
+              isReadLegalsLoading={isReadLegalsLoading}
+              isOneLegalLoading={isOneLegalLoading}
+              readLegalsError={readLegalsError}
+              oneLegalError={oneLegalError}
+            />
+          )}
           <div className={styles.content}>
             <PaymentData
               amountTitle={t("wallet.withdraw.amount")}
-              register={register}
-              errors={errors}
-              handleSubmit={handleSubmit}
-              onSubmit={onSubmit}
-              watch={watch}
               profileFilter={formState.profileFilter}
               subprofileFilter={formState.subprofileFilter}
+              errors={errors}
+              watch={watch}
+              onSubmit={onSubmit}
+              register={register}
+              handleSubmit={handleSubmit}
             />
             <div>
               <div className={styles.content__right}>
-                <LegalsList
-                  accounts={legalsByType}
-                  changeActiveAccount={changeActiveAccount}
-                  activeAccount={activeAccount}
-                  isReadLegalsLoading={isReadLegalsLoading}
-                  isOneLegalLoading={isOneLegalLoading}
-                  readLegalsError={readLegalsError}
-                  oneLegalError={oneLegalError}
-                />
-                <Guide profileFilter={formState.profileFilter} />
+                {screen >= BREAKPOINT.LG && (
+                  <LegalsList
+                    accounts={legalsByType}
+                    changeActiveAccount={changeActiveAccount}
+                    activeAccount={activeAccount}
+                    isReadLegalsLoading={isReadLegalsLoading}
+                    isOneLegalLoading={isOneLegalLoading}
+                    readLegalsError={readLegalsError}
+                    oneLegalError={oneLegalError}
+                  />
+                )}
+                {screen >= BREAKPOINT.MD && (
+                  <Guide profileFilter={formState.profileFilter} />
+                )}
               </div>
             </div>
           </div>

@@ -1,17 +1,7 @@
-import { FC } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import Cookies from "js-cookie";
-import {
-  profileTypes,
-  profileTypesName,
-  profileTypesNum,
-  walletTopUpTypes,
-} from "@entities/wallet";
 import {
   chatAdvertiserTypes,
-  chatTypesFilter,
   chatManagerTypes,
+  chatTypesFilter,
 } from "@entities/communication";
 import {
   addFileFilter,
@@ -20,7 +10,17 @@ import {
   catalogTypes,
 } from "@entities/project";
 import { roles } from "@entities/user";
+import {
+  profileTypes,
+  profileTypesName,
+  profileTypesNum,
+  walletTopUpTypes,
+} from "@entities/wallet";
 import { pageFilter } from "@shared/routing";
+import Cookies from "js-cookie";
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 interface BarSubfilterProps {
   page: pageFilter;
@@ -121,6 +121,13 @@ export const BarSubfilter: FC<BarSubfilterProps> = ({
           page === pageFilter.catalog || pageFilter.createOrderFiles
             ? styles.catalog
             : styles.profile
+        }
+        style={
+          {
+            "--translateFilter": `${options.findIndex((option) => filter === option.type) * 100}%`,
+            "--lengthFilter": `${options.length}`,
+            // "--translateFilter": `50%`,
+          } as React.CSSProperties
         }
       >
         {options.map((option, index) => (

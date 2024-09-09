@@ -23,8 +23,8 @@ export const ArrowIcon4 = () => (
         y2="-0.410693"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="#4772E6" />
-        <stop offset="1" stopColor="#8E54E9" />
+        <stop stopColor="#000" />
+        <stop offset="1" stopColor="#000" />
       </linearGradient>
       <linearGradient
         id="paint1_linear_1501_315"
@@ -34,8 +34,8 @@ export const ArrowIcon4 = () => (
         y2="2.32019"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="#4772E6" />
-        <stop offset="1" stopColor="#8E54E9" />
+        <stop stopColor="#000" />
+        <stop offset="1" stopColor="#000" />
       </linearGradient>
     </defs>
   </svg>

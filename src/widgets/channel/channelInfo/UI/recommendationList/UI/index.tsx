@@ -3,6 +3,7 @@ import { AddToBasket } from "@features/cart";
 import { FormatList } from "@features/catalog";
 import { RecommendCard, SkeletonRecommendCard } from "@features/channel";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { FC, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useInView } from "react-intersection-observer";
@@ -12,7 +13,6 @@ import "swiper/css/navigation";
 import { EffectCoverflow, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./styles.module.scss";
-import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface RecommendationListProps {
   cards: ICatalogChannel[];

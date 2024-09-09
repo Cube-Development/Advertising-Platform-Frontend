@@ -1,12 +1,3 @@
-import { ArrowIcon4 } from "@shared/assets";
-import { FC, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import { CreditCard } from "./creditCard";
-import { Guide, LegalsList, PaymentData } from "../../components";
-import { ToastAction, useToast } from "@shared/ui";
-import { BarSubfilter } from "@features/other";
 import {
   ILegalCard,
   ILegalCardShort,
@@ -21,8 +12,18 @@ import {
   useReadLegalsByTypeQuery,
   useReadOneLegalMutation,
 } from "@entities/wallet";
+import { BarSubfilter } from "@features/other";
+import { ArrowIcon4 } from "@shared/assets";
 import { pageFilter, paths } from "@shared/routing";
+import { ToastAction, useToast } from "@shared/ui";
+import { FC, useEffect, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { Guide, LegalsList, PaymentData } from "../../components";
+import { CreditCard } from "./creditCard";
+import styles from "./styles.module.scss";
+import { BREAKPOINT } from "@shared/config";
 
 interface IExtendedProfileData extends ILegalData {
   amount: number;
@@ -33,6 +34,7 @@ export const Topup: FC = () => {
   const { t } = useTranslation();
   const [activeAccount, setActiveAccount] = useState<ILegalCard | null>(null);
   const navigate = useNavigate();
+  const [screen, setScreen] = useState<number>(window.innerWidth);
 
   const {
     setValue,
@@ -65,6 +67,12 @@ export const Topup: FC = () => {
   const [readOneLegal, { isLoading: isOneLegalLoading, error: oneLegalError }] =
     useReadOneLegalMutation();
 
+  const [createLegal] = useCreateLegalMutation();
+
+  const [editLegal] = useEditLegalMutation();
+
+  const [paymentDeposit, { error: topupError }] = usePaymentDepositMutation();
+
   const changeActiveAccount = async (account: ILegalCardShort) => {
     if (activeAccount && account.legal_id === activeAccount.legal_id) {
       setActiveAccount(null);
@@ -91,12 +99,6 @@ export const Topup: FC = () => {
         });
     }
   };
-
-  const [createLegal] = useCreateLegalMutation();
-
-  const [editLegal] = useEditLegalMutation();
-
-  const [paymentDeposit, { error: topupError }] = usePaymentDepositMutation();
 
   const onSubmit: SubmitHandler<IExtendedProfileData> = async (formData) => {
     const dataWithLegalType = {
@@ -176,6 +178,16 @@ export const Topup: FC = () => {
       });
   };
 
+  useEffect(() => {
+    const handleResize = () => {
+      setScreen(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div className="container sidebar">
       {topupError ? <h1>ОШИБКА В ЗАПРОСЕ</h1> : ""}
@@ -197,10 +209,24 @@ export const Topup: FC = () => {
         profileTypesName.selfEmployedAccounts ? (
           <CreditCard />
         ) : (
-          <div>
+          <div className={styles.form__wrapper}>
+            {screen < BREAKPOINT.MD && (
+              <Guide profileFilter={formState.profileFilter} />
+            )}
             <div className={styles.top}>
               <p>{t("wallet.topup.offer")}</p>
             </div>
+            {screen < BREAKPOINT.LG && (
+              <LegalsList
+                accounts={legalsByType}
+                changeActiveAccount={changeActiveAccount}
+                activeAccount={activeAccount}
+                isReadLegalsLoading={isReadLegalsLoading}
+                isOneLegalLoading={isOneLegalLoading}
+                readLegalsError={readLegalsError}
+                oneLegalError={oneLegalError}
+              />
+            )}
             <div className={styles.content}>
               <PaymentData
                 amountTitle={t("wallet.topup.amount")}
@@ -214,16 +240,20 @@ export const Topup: FC = () => {
               />
               <div>
                 <div className={styles.content__right}>
-                  <LegalsList
-                    accounts={legalsByType}
-                    changeActiveAccount={changeActiveAccount}
-                    activeAccount={activeAccount}
-                    isReadLegalsLoading={isReadLegalsLoading}
-                    isOneLegalLoading={isOneLegalLoading}
-                    readLegalsError={readLegalsError}
-                    oneLegalError={oneLegalError}
-                  />
-                  <Guide profileFilter={formState.profileFilter} />
+                  {screen >= BREAKPOINT.LG && (
+                    <LegalsList
+                      accounts={legalsByType}
+                      changeActiveAccount={changeActiveAccount}
+                      activeAccount={activeAccount}
+                      isReadLegalsLoading={isReadLegalsLoading}
+                      isOneLegalLoading={isOneLegalLoading}
+                      readLegalsError={readLegalsError}
+                      oneLegalError={oneLegalError}
+                    />
+                  )}
+                  {screen >= BREAKPOINT.MD && (
+                    <Guide profileFilter={formState.profileFilter} />
+                  )}
                 </div>
               </div>
             </div>

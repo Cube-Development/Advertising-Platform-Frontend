@@ -1,12 +1,12 @@
-import { InfoIcon } from "@shared/assets";
-import { FC } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
 import {
   IBlockData,
   IParameterData,
   getInputLegalType,
 } from "@entities/wallet";
+import { InfoIcon } from "@shared/assets";
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 interface LegalFormProps {
   data: IBlockData;
@@ -25,9 +25,7 @@ export const LegalForm: FC<LegalFormProps> = ({
 
   return (
     <div className={styles.wrapper}>
-      <div>
-        <p>{t(data.title)}</p>
-      </div>
+      <p className={styles.title}>{t(data.title)}</p>
       <div className={styles.parameters}>
         {data.parameters.map((row, index) => {
           const newValidate = {
