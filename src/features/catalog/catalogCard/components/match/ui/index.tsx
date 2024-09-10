@@ -32,7 +32,9 @@ export const ChannelCardMatch = ({ match }: { match?: number }) => {
       <p>{t("platform.cross")}</p>
       <div className={`${styles.circle} ${circleClass}`}>
         {match ? (
-          <span style={{ color: colorStyle }}>{match}%</span>
+          <span className={styles.match} style={{ color: colorStyle }}>
+            {match}%
+          </span>
         ) : (
           <span>
             <CircleHelp width={20} height={20} stroke="#bbb" />
