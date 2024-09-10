@@ -1,9 +1,10 @@
 .types {
-  border-radius: 20px;
+  --borderSize: 1px;
+  --borderRadius: 25px;
   overflow: hidden;
-  // box-shadow: 0 0 0 1px inset var(--Personal-colors-main);
-  background: var(--Personal-colors-White);
-  box-shadow: inset 0px 0px 5px 1px rgba($color: #4772e6, $alpha: 0.5);
+  background: rgba($color: #4772e6, $alpha: 0.1);
+  box-shadow: inset 0px 0px 5px 1px rgba($color: #4772e6, $alpha: 0.3);
+  border-radius: var(--borderRadius);
 
   .profile {
     display: flex; /* Используем flex контейнер */
@@ -46,19 +47,24 @@
     &::before {
       content: "";
       position: absolute;
-      top: 2px;
-      left: 2px;
-      width: calc(100% / var(--lengthFilter) - 2px);
-      height: calc(100% - 4px);
-      border-radius: 18px;
+      top: var(--borderSize);
+      left: var(--borderSize);
+      width: calc(100% / var(--lengthFilter) - var(--borderSize));
+      height: calc(100% - 2 * var(--borderSize));
+      border-radius: calc(var(--borderRadius) - var(--borderSize));
       background: var(--Gradients-Gradient-1);
-      transition: transform 0.4s ease;
+      box-shadow: 1px 1px 15px rgba($color: #000, $alpha: 0.3);
+      transition: transform 0.3s ease;
       z-index: -1;
-      transform: translateX(var(--translateFilter));
+      transform: translateX(calc(var(--translateIndex) * (100% + 0.5px)));
     }
 
     .active {
-      color: var(--Personal-colors-White) !important;
+      // color: var(--Personal-colors-White) !important;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: var(--Personal-colors-White);
+      background-clip: text;
+      color: var(--Personal-colors-White);
     }
     li {
       color: var(--Personal-colors-main);
@@ -69,7 +75,7 @@
       white-space: nowrap;
 
       @media (max-width: 576px) {
-        padding: 12px 10px;
+        padding: 15px 10px;
       }
     }
   }

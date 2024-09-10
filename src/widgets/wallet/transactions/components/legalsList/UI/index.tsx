@@ -80,7 +80,7 @@ export const LegalsList: FC<LegalsListProps> = ({
             ) : (
               <div className={styles.empty}>
                 <SadSmileIcon />
-                <p className={styles.empty__text}>Список пуст...</p>
+                <p className={styles.empty__text}>{t("wallet.empty_data")}</p>
                 {readLegalsError && <h1>Ошибка запроса...</h1>}
               </div>
             )}
@@ -128,7 +128,7 @@ export const LegalsList: FC<LegalsListProps> = ({
         ) : (
           <div className={`${styles.empty} ${styles.mini}`}>
             <SadSmileIcon />
-            <p className={styles.empty__text}>Список пуст...</p>
+            <p className={styles.empty__text}>{t("wallet.empty_data")}</p>
             {readLegalsError && <h1>Ошибка запроса...</h1>}
           </div>
         )}

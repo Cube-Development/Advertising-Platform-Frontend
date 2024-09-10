@@ -34,30 +34,33 @@
       grid-auto-flow: row;
 
       &__row {
+        --borderSize: 1px;
+        --borderRadius: 25px;
+
         position: relative;
         display: grid;
         grid-template: 1fr / 1fr 1fr;
         padding: 5px;
         justify-content: center;
-        border-radius: 25px;
         margin: 15px 10px;
         box-shadow: inset 0px 0px 5px 1px rgba($color: #4772e6, $alpha: 0.3);
-        overflow: hidden;
         background: rgba($color: #4772e6, $alpha: 0.1);
+        border-radius: var(--borderRadius);
+        overflow: hidden;
 
         &::before {
           content: "";
           position: absolute;
-          top: 1px;
-          left: 1px;
-          width: calc(var(--widthRole) - 1px);
-          height: calc(100% - 2px);
-          border-radius: 20px;
-          background: #fff;
+          top: var(--borderSize);
+          left: var(--borderSize);
+          width: calc(var(--widthRole) - var(--borderSize));
+          height: calc(100% - 2 * var(--borderSize));
+          border-radius: calc(var(--borderRadius) - var(--borderSize));
+          background: var(--Gradients-Gradient-1);
           box-shadow: 1px 1px 15px rgba($color: #000, $alpha: 0.3);
           transition: transform 0.3s ease;
-          z-index: 0;
           transform: translateX(var(--translateRole));
+          z-index: 0;
         }
 
         p {
@@ -86,12 +89,10 @@
         }
 
         .active {
-          color: var(--Personal-colors-main);
-          background: var(--Gradients-Gradient-1);
           -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
+          -webkit-text-fill-color: var(--Personal-colors-White);
           background-clip: text;
-          color: transparent;
+          color: var(--Personal-colors-White);
         }
       }
 

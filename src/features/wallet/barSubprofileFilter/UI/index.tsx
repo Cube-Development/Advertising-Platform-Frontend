@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import {
@@ -6,6 +6,7 @@ import {
   subprofileFilterTypes,
   subprofileTypes,
 } from "@entities/wallet";
+import { BREAKPOINT } from "@shared/config";
 
 interface ISubFilterOption {
   type: subprofileFilterTypes;
@@ -38,31 +39,72 @@ export const BarSubrofileFilter: FC<BarSubrofileFilterProps> = ({
     changeSubprofile(newSubprofile);
     resetActiveAccount && resetActiveAccount(null);
   };
+  const [screen, setScreen] = useState<number>(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreen(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
-    <div className={styles.types}>
-      <ul>
-        {subprofileTypes.map((subtype, index) => (
-          <li
-            className={styles.subtypes}
-            onClick={() => toggleProfile(subtype)}
-            key={index}
+    <>
+      {screen > +BREAKPOINT.MD ? (
+        <div className={styles.types}>
+          <ul>
+            {subprofileTypes.map((subtype, index) => (
+              <li
+                className={styles.subtypes}
+                onClick={() => toggleProfile(subtype)}
+                key={index}
+              >
+                <div
+                  className={`${styles.circle_wrapper} ${subprofileFilter.type === subtype.type ? styles.active : ""}`}
+                >
+                  <div className={styles.outer}>
+                    <div className={styles.inner} />
+                  </div>
+                </div>
+                <p
+                  className={`${subprofileFilter.type === subtype.type ? styles.active__type : ""}`}
+                >
+                  {t(subtype.name)}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <div className={styles.types_xs}>
+          <ul
+            className={styles.type}
+            style={
+              {
+                "--lengthFilter": `${subprofileTypes.length}`,
+                "--translateFilter": `${subprofileTypes.findIndex((option) => subprofileFilter.type === option.type) * 100}%`,
+              } as React.CSSProperties
+            }
           >
-            <div
-              className={`${styles.circle_wrapper} ${subprofileFilter.type === subtype.type ? styles.active : ""}`}
-            >
-              <div className={styles.outer}>
-                <div className={styles.inner} />
-              </div>
-            </div>
-            <p
-              className={`${subprofileFilter.type === subtype.type ? styles.active__type : ""}`}
-            >
-              {t(subtype.name)}
-            </p>
-          </li>
-        ))}
-      </ul>
-    </div>
+            {subprofileTypes.map((subtype, index) => (
+              <li
+                key={index}
+                className={
+                  subprofileFilter.type === subtype.type ? styles.active : ""
+                }
+                onClick={() => toggleProfile(subtype)}
+              >
+                {t(subtype.name)}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </>
   );
 };

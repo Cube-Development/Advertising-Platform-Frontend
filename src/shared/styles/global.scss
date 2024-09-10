@@ -413,8 +413,24 @@ main {
 
 .swiper {
   margin: 0;
-  padding: 20px 8px;
   z-index: 0;
+  padding: 20px var(--container-padding-xl-side);
+
+  @media (max-width: 992px) {
+    padding: 20px var(--container-padding-lg-side);
+  }
+
+  @media (max-width: 768px) {
+    padding: 20px var(--container-padding-md-side);
+  }
+
+  @media (max-width: 576px) {
+    padding: 20px var(--container-padding-sm-side);
+  }
+
+  @media (max-width: 375px) {
+    padding: 20px var(--container-padding-xs-side);
+  }
 }
 
 .swiper.channel {

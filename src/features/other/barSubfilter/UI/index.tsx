@@ -111,11 +111,7 @@ export const BarSubfilter: FC<BarSubfilterProps> = ({
   };
 
   return (
-    <div
-      // style={{ "--borderRadius": "20px" } as React.CSSProperties}
-      // className={`${styles.types} `}
-      className={styles.types}
-    >
+    <div className={styles.types}>
       <ul
         className={
           page === pageFilter.catalog || pageFilter.createOrderFiles
@@ -124,9 +120,8 @@ export const BarSubfilter: FC<BarSubfilterProps> = ({
         }
         style={
           {
-            "--translateFilter": `${options.findIndex((option) => filter === option.type) * 100}%`,
+            "--translateIndex": `${options.findIndex((option) => filter === option.type)}`,
             "--lengthFilter": `${options.length}`,
-            // "--translateFilter": `50%`,
           } as React.CSSProperties
         }
       >
