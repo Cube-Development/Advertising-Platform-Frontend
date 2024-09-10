@@ -50,7 +50,7 @@
           position: absolute;
           top: 1px;
           left: 1px;
-          width: calc(var(--widthRole) - 2px);
+          width: calc(var(--widthRole) - 1px);
           height: calc(100% - 2px);
           border-radius: 20px;
           background: #fff;
@@ -93,14 +93,6 @@
           background-clip: text;
           color: transparent;
         }
-
-        // &.active_advertiser::before {
-        //   transform: translateX(0%);
-        // }
-
-        // &.active_blogger::before {
-        //   transform: translateX(100%);
-        // }
       }
 
       .accordion__block {
