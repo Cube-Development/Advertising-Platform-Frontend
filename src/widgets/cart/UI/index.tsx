@@ -249,13 +249,13 @@ export const Cart: FC = () => {
               onChangeCard={handleChangeCartCards}
               isLoading={isLoadingCommon || isLoadingPublic || isLoadingManager}
             />
-            <RecommendationList
-              channels={recomendCards?.channels || []}
-              onChangeCard={handleChangeCartCards}
-            />
+            <CreatePost cart={currentCart} />
           </div>
         </div>
-        <CreatePost cart={currentCart} />
+        <RecommendationList
+          channels={recomendCards?.channels || []}
+          onChangeCard={handleChangeCartCards}
+        />
       </div>
     </div>
   );

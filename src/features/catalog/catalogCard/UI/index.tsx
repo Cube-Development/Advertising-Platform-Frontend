@@ -25,6 +25,7 @@ import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { Link } from "react-router-dom";
+import { CircleHelp } from "lucide-react";
 
 interface CatalogCardProps extends IChangeCards, ICatalogCard {
   card: ICatalogChannel;
@@ -169,7 +170,13 @@ export const CatalogCard: FC<CatalogCardProps> = ({
                 { "--percentage": `${card?.match}%` } as React.CSSProperties
               }
             >
-              <span>{card?.match}%</span>
+              {card?.match ? (
+                <span>{card?.match}%</span>
+              ) : (
+                <span>
+                  <CircleHelp width={20} height={20} />
+                </span>
+              )}
             </div>
             <div className={styles.platform__icon}>
               {card?.platform && card?.platform in platformToIcon

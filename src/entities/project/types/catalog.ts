@@ -11,7 +11,7 @@ export interface ICatalogCards extends IChangeCards {
 
 export interface ICatalogChannel {
   id: string;
-  match: number;
+  match?: number;
   name: string;
   description: string;
   rate: number;

@@ -135,7 +135,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
                   <div className={styles.close__icon} />
                 </button>
               </div>
-              <ScrollArea className="h-[calc(100svh_-_80px)]">
+              <ScrollArea className="h-[calc(100dvh_-_80px)]">
                 <div className={styles.menu__switcher}>
                   <div
                     style={

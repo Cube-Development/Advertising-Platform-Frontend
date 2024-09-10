@@ -7,7 +7,7 @@ interface AddChannelReq {
   project_id?: string;
   channel_id: string;
   format: number;
-  match: number;
+  match?: number;
   language: languagesNum;
 }
 

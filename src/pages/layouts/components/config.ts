@@ -4,6 +4,7 @@ export interface IMenuItems {
   item: IMenuItem;
   onChange: (path?: string) => void;
   openTitle: string;
+  isAuth?: boolean;
 }
 
 export interface IMenuItem {
