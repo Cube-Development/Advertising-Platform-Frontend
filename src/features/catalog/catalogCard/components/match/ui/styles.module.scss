@@ -18,6 +18,15 @@
     }
   }
 
+  .match {
+    font-weight: 500;
+    font-size: 14px;
+
+    @media (max-width: 576px) {
+      font-size: 12px;
+    }
+  }
+
   .circle {
     position: relative;
     display: grid;
@@ -28,7 +37,7 @@
     border-radius: 50%;
     border: 3px solid #ddd;
 
-    @media (max-width: 768px) {
+    @media (max-width: 576px) {
       width: 56px;
       height: 56px;
     }

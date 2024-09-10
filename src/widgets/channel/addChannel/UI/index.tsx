@@ -122,7 +122,6 @@ export const AddChannelBlock: FC<AddChannelBlockProps> = () => {
 
   const handleScrool = () => {
     scroller.scrollTo("add_channel_top", {
-      smooth: true,
       offset: -100,
     });
   };
