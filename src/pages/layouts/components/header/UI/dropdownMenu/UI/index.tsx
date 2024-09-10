@@ -201,6 +201,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
                             item={item}
                             onChange={toggleMenu}
                             openTitle={dropdownMenu.title}
+                            isAuth={item.item.isDialog && isAuth}
                           />
                         ))}
                       </Accordion>

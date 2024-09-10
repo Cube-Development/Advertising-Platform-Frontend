@@ -252,10 +252,13 @@ export const Cart: FC = () => {
             <CreatePost cart={currentCart} />
           </div>
         </div>
-        <RecommendationList
-          channels={recomendCards?.channels || []}
-          onChangeCard={handleChangeCartCards}
-        />
+        <div className={styles.cards}>
+          <RecommendationList
+            channels={recomendCards?.channels || []}
+            onChangeCard={handleChangeCartCards}
+          />
+          <div></div>
+        </div>
       </div>
     </div>
   );

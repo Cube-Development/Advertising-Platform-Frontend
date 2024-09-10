@@ -1,0 +1,91 @@
+.column__cross {
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 10px;
+  align-content: center;
+  justify-items: center;
+  text-align: center;
+
+  p {
+    color: #000;
+    text-align: center;
+    font-size: 10px;
+    font-weight: 600;
+    line-height: 0.75;
+
+    @media (max-width: 768px) {
+      font-size: 8px;
+    }
+  }
+
+  .circle {
+    position: relative;
+    display: grid;
+    align-items: center;
+    justify-content: center;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    border: 3px solid #ddd;
+
+    @media (max-width: 768px) {
+      width: 56px;
+      height: 56px;
+    }
+
+    &::before {
+      content: "";
+      position: absolute;
+      height: calc(100% + 6px);
+      width: calc(100% + 6px);
+      left: -3px;
+      transform: rotate(-45deg);
+      border-radius: 50%;
+      border: 3px solid #ddd;
+    }
+
+    &.low::before {
+      border-top: 3px solid transparent;
+      border-right: 3px solid #fe3430fc;
+      border-bottom: 3px solid transparent;
+      border-left: 3px solid transparent;
+      // border-top: 3px solid transparent;
+      // border-right: 3px solid rgba(125, 53, 240, 0.3);
+      // border-bottom: 3px solid transparent;
+      // border-left: 3px solid transparent;
+    }
+
+    &.medium::before {
+      border-top: 3px solid transparent;
+      border-right: 3px solid #fe9730fc;
+      border-bottom: 3px solid #fe9730fc;
+      border-left: 3px solid transparent;
+      // border-top: 3px solid transparent;
+      // border-right: 3px solid rgba(125, 53, 240, 0.5);
+      // border-bottom: 3px solid rgba(125, 53, 240, 0.5);
+      // border-left: 3px solid transparent;
+    }
+
+    &.high::before {
+      border-top: 3px solid transparent;
+      border-right: 3px solid #ffca28;
+      border-bottom: 3px solid #ffca28;
+      border-left: 3px solid #ffca28;
+      // border-top: 3px solid transparent;
+      // border-right: 3px solid rgba(125, 53, 240, 0.7);
+      // border-bottom: 3px solid rgba(125, 53, 240, 0.7);
+      // border-left: 3px solid rgba(125, 53, 240, 0.7);
+    }
+
+    &.full::before {
+      border-top: 3px solid #4772e6;
+      border-right: 3px solid #4772e6;
+      border-bottom: 3px solid #4772e6;
+      border-left: 3px solid #4772e6;
+      // border-top: 3px solid rgba(125, 53, 240, 1);
+      // border-right: 3px solid rgba(125, 53, 240, 1);
+      // border-bottom: 3px solid rgba(125, 53, 240, 1);
+      // border-left: 3px solid rgba(125, 53, 240, 1);
+    }
+  }
+}

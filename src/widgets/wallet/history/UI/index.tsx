@@ -17,7 +17,6 @@ import { motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { useInfiniteScroll } from "@shared/hooks"; // Импортируем хук
 
 export const History: FC = () => {
   const { t, i18n } = useTranslation();
@@ -38,13 +37,6 @@ export const History: FC = () => {
     setCurrentPage((prevPage) => prevPage + 1);
   };
 
-  // Используем хук для управления скроллом
-  const { loadMoreRef, isLoadingMore } = useInfiniteScroll({
-    isFetching,
-    isLast: data?.isLast || false,
-    onLoadMore: handleOnChangePage,
-  });
-
   useEffect(() => {
     const handleResize = () => {
       setScreen(window.innerWidth);
@@ -54,9 +46,7 @@ export const History: FC = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-
   let custom = 0;
-
   return (
     <div className={`container ${screen > BREAKPOINT.LG ? "sidebar" : ""}`}>
       <div className={styles.wrapper}>
@@ -99,46 +89,26 @@ export const History: FC = () => {
                   <HistoryCard card={card} />
                 </motion.div>
               ))}
-
-              {!data.isLast && screen <= BREAKPOINT.MD && !isLoadingMore && (
-                <div ref={loadMoreRef} className={styles.show_more}></div>
-              )}
-
-              {(isFetching || isLoadingMore) && screen <= BREAKPOINT.MD && (
-                <div className="pt-[20px]">
-                  <SpinnerLoaderSmall />
-                </div>
-              )}
-
-              {!data.isLast && screen > BREAKPOINT.MD && (
+              {(isFetching || isLoading) &&
+                Array.from({ length: INTERSECTION_ELEMENTS.history }).map(
+                  (_, index) => <SkeletonHistoryCard key={index} />,
+                )}
+              {!data.isLast && (
                 <div className={styles.show_more} onClick={handleOnChangePage}>
-                  {isFetching || isLoadingMore ? (
-                    <div className="pt-[20px]">
-                      <SpinnerLoaderSmall />
-                    </div>
+                  {isFetching || isLoading ? (
+                    <SpinnerLoaderSmall />
                   ) : (
-                    <motion.div
-                      initial="hidden"
-                      animate="visible"
-                      custom={
-                        (data?.transactions?.length - 1) %
-                        INTERSECTION_ELEMENTS.history
-                      }
-                      variants={PAGE_ANIMATION.animationUp}
-                    >
-                      <ShowMoreBtn />
-                    </motion.div>
+                    <ShowMoreBtn />
                   )}
                 </div>
               )}
             </div>
           ) : isLoading || isFetching ? (
             <div className={styles.cards__list}>
-              {Array.from({ length: INTERSECTION_ELEMENTS.history }).map(
-                (_, index) => (
-                  <SkeletonHistoryCard key={index} />
-                ),
-              )}
+              {(isFetching || isLoading) &&
+                Array.from({ length: INTERSECTION_ELEMENTS.history }).map(
+                  (_, index) => <SkeletonHistoryCard key={index} />,
+                )}
             </div>
           ) : (
             <div className={styles.empty__block}>

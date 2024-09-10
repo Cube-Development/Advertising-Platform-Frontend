@@ -17,4 +17,5 @@ interface IMenuItemParams {
   img?: React.FC<SVGProps<SVGSVGElement>>;
   path?: string;
   openMenu?: boolean;
+  isDialog?: boolean;
 }

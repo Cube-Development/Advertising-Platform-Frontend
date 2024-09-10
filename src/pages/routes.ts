@@ -26,7 +26,6 @@ export interface IRoute {
 }
 
 export const privateCommonRoutes: IRoute[] = [
-  { path: paths.faq, component: FAQPage, sidebar: true },
   { path: paths.walletTopUp, component: TopupPage, sidebar: true },
   { path: paths.walletWithdraw, component: WithdrawalPage, sidebar: true },
   { path: paths.wallethistory, component: WalletHistoryPage, sidebar: true },
@@ -34,6 +33,7 @@ export const privateCommonRoutes: IRoute[] = [
 ];
 
 export const publicCommonRoutes: IRoute[] = [
+  { path: paths.faq, component: FAQPage, sidebar: true },
   { path: paths.notFound, component: NotFoundPage },
 ];
 

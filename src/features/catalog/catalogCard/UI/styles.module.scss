@@ -205,73 +205,9 @@
             height: 15px;
           }
 
-          @media (max-width: 768px) {
+          @media (max-width: 576px) {
             display: none;
           }
-        }
-
-        p {
-          color: #000;
-          text-align: center;
-          font-size: 10px;
-          font-style: normal;
-          font-weight: 600;
-          line-height: 0.75;
-
-          @media (max-width: 768px) {
-            font-size: 8px;
-          }
-        }
-
-        .circle {
-          display: grid;
-
-          align-items: center;
-          justify-content: center;
-          width: 60px;
-          height: 60px;
-          border-radius: 50%;
-          // background: conic-gradient(
-          //   #4772e6 0% var(--percentage),
-          //   transparent var(--percentage) 100%
-          // );
-          // border: 5px solid conic-gradient(
-          //   #4772e6 0% var(--percentage),
-          //   transparent var(--percentage) 100%
-          // );
-
-          border: 3px solid #4772e6;
-          border-width: 50%;
-
-          @media (max-width: 768px) {
-            width: 50px;
-            height: 50px;
-          }
-
-          span {
-            color: var(--Personal-colors-main);
-            font-size: var(--font-size-option-item-xl);
-            font-style: normal;
-            font-weight: 500;
-            line-height: normal;
-
-            @media (max-width: 576px) {
-              font-size: var(--font-size-option-item-sm);
-            }
-          }
-
-          // &::after {
-          //   content: "";
-          //   width: 100%;
-          //   height: 100%;
-          //   background-color: transparent;
-          //   position: absolute;
-          //   z-index: -1;
-          // //   border-radius: 50%;
-          //   position: absolute;
-          // //   clip: rect(0, 50px, 50px, 25px);
-          //   border: 4px solid #d52121; // Цвет фона за дугой
-          // }
         }
       }
     }

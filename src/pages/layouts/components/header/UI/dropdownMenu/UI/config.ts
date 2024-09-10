@@ -44,6 +44,7 @@ export const bloggerServiсeMenu = [
       title: "burger_menu.addPlatform",
       path: paths.addChannel,
       img: AddChannelIcon,
+      isDialog: true,
     },
   },
 ];

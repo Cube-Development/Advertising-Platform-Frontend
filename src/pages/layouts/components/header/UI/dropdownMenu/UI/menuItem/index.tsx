@@ -11,7 +11,6 @@ import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
 import { IMenuItems } from "@pages/layouts/components/config";
 import { CircleX, GripVertical } from "lucide-react";
-import { paths } from "@shared/routing";
 import {
   Dialog,
   DialogClose,
@@ -77,18 +76,7 @@ export const MenuItem: React.FC<IMenuItems> = ({
               />
             </div>
           </AccordionTrigger>
-        ) : item.item.path !== paths.addChannel && isAuth ? (
-          <Link to={item.item.path!} onClick={() => onChange(item.item.path!)}>
-            <AccordionTrigger>
-              <div className={`${styles.row} ${isActive ? styles.active : ""}`}>
-                <div className={styles.row__title}>
-                  {item.item.img && <item.item.img />}
-                  {t(item.item.title!)}
-                </div>
-              </div>
-            </AccordionTrigger>
-          </Link>
-        ) : (
+        ) : item.item.isDialog && !isAuth ? (
           <Dialog>
             <DialogTrigger asChild>
               <span>
@@ -143,6 +131,17 @@ export const MenuItem: React.FC<IMenuItems> = ({
               </DialogFooter>
             </DialogContent>
           </Dialog>
+        ) : (
+          <Link to={item.item.path!} onClick={() => onChange(item.item.path!)}>
+            <AccordionTrigger>
+              <div className={`${styles.row} ${isActive ? styles.active : ""}`}>
+                <div className={styles.row__title}>
+                  {item.item.img && <item.item.img />}
+                  {t(item.item.title!)}
+                </div>
+              </div>
+            </AccordionTrigger>
+          </Link>
         )}
 
         <AccordionContent>

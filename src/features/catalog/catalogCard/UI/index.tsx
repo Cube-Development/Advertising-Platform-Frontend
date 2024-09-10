@@ -25,7 +25,7 @@ import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { Link } from "react-router-dom";
-import { CircleHelp } from "lucide-react";
+import { ChannelCardDescription, ChannelCardMatch } from "../components";
 
 interface CatalogCardProps extends IChangeCards, ICatalogCard {
   card: ICatalogChannel;
@@ -109,7 +109,8 @@ export const CatalogCard: FC<CatalogCardProps> = ({
               </Link>
               <p className={`${styles.category} truncate`}>{card?.category}</p>
               {screen >= BREAKPOINT.MD ? (
-                <span className={styles.description}>{card?.description}</span>
+                // <span className={styles.description}>{card?.description}</span>
+                <ChannelCardDescription description={card?.description} />
               ) : (
                 <div className={styles.rate}>
                   <RatingIcon />
@@ -163,21 +164,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
             </div>
           )}
           <div className={styles.column__cross}>
-            <p>{t("platform.cross")}</p>
-            <div
-              className={styles.circle}
-              style={
-                { "--percentage": `${card?.match}%` } as React.CSSProperties
-              }
-            >
-              {card?.match ? (
-                <span>{card?.match}%</span>
-              ) : (
-                <span>
-                  <CircleHelp width={20} height={20} />
-                </span>
-              )}
-            </div>
+            <ChannelCardMatch match={card?.match} />
             <div className={styles.platform__icon}>
               {card?.platform && card?.platform in platformToIcon
                 ? platformToIcon[card.platform!]()
@@ -252,7 +239,9 @@ export const CatalogCard: FC<CatalogCardProps> = ({
           </Accordion>
         ) : screen < BREAKPOINT.MD ? (
           <>
-            <span className={styles.description}>{card?.description}</span>
+            {/* <span className={styles.description}>{card?.description}</span> */}
+            <ChannelCardDescription description={card?.description} />
+
             <Accordion type="single" collapsible>
               <AccordionItem
                 value={`item-${card.id}`}
