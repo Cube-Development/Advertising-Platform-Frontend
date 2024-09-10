@@ -17,6 +17,7 @@ import { ChannelDescription } from "./channelDescription";
 import { ChannelIdentification } from "./channelIdentification";
 import { ChannelTop } from "./channelTop";
 import styles from "./styles.module.scss";
+import { scroller } from "react-scroll";
 
 interface AddChannelBlockProps {}
 
@@ -61,6 +62,7 @@ export const AddChannelBlock: FC<AddChannelBlockProps> = () => {
       step: newStep,
       completedStep: newCompletedStep,
     });
+    handleScrool();
   };
 
   let defaultValues;
@@ -118,9 +120,16 @@ export const AddChannelBlock: FC<AddChannelBlockProps> = () => {
     setCurrentStep(stepStart);
   };
 
+  const handleScrool = () => {
+    scroller.scrollTo("add_channel_top", {
+      smooth: true,
+      offset: -100,
+    });
+  };
+
   return (
     <div className="container sidebar" style={{ minHeight: "100vh" }}>
-      <div className={styles.wrapper}>
+      <div className={styles.wrapper} id="add_channel_top">
         <ChannelTop
           channel_id={channel_id!}
           step={currentStep}
