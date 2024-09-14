@@ -69,11 +69,18 @@ export const channelAPI = authApi.injectEndpoints({
         const { status } = queryArgs;
         return `${endpointName}/${status}`;
       },
-      merge: (currentCache, newItems, queryArgs) => {
+      merge: (currentCache, newItems, arg) => {
+        if (arg.arg.page === 1) {
+          return {
+            ...newItems,
+            isLast: newItems.channels.length !== INTERSECTION_ELEMENTS.catalog,
+          };
+        }
+
         return {
           ...newItems,
           projects: [...currentCache.channels, ...newItems.channels],
-          status: queryArgs.arg.status,
+          status: arg.arg.status,
           isLast: newItems.channels.length !== INTERSECTION_ELEMENTS.myChannels,
         };
       },

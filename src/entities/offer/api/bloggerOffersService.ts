@@ -79,11 +79,18 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
         // console.log( `${endpointName}/${status}/${page}`)
         return `${endpointName}/${status}`;
       },
-      merge: (currentCache, newItems, queryArgs) => {
+      merge: (currentCache, newItems, arg) => {
+        if (arg.arg.page === 1) {
+          return {
+            ...newItems,
+            isLast:
+              newItems.orders.length !== INTERSECTION_ELEMENTS.bloggerOffers,
+          };
+        }
         return {
           ...newItems,
           projects: [...currentCache.orders, ...newItems.orders],
-          status: queryArgs.arg.status,
+          status: arg.arg.status,
           isLast:
             newItems.orders.length !== INTERSECTION_ELEMENTS.bloggerOffers,
         };

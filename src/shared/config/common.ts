@@ -6,7 +6,7 @@ export const enum INTERSECTION_ELEMENTS {
   catalog = 10,
   advOrders = 4,
   bloggerOffers = 4,
-  myChannels = 4,
+  myChannels = 10,
   myModChannels = 4,
   history = 10,
   chat = 20,
@@ -19,7 +19,7 @@ export const enum INTERSECTION_ELEMENTS {
 export const enum BREAKPOINT {
   XL = 1366,
   LG = 992,
-  MD = 768,
+  MD = 769,
   SM = 576,
   XS = 375,
   HEADER_NAVBAR_VISIBLE = 1250,

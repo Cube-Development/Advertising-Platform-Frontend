@@ -141,11 +141,19 @@ export const advProjectsAPI = authApi.injectEndpoints({
         // console.log( `${endpointName}/${status}/${page}`)
         return `${endpointName}/${status}`;
       },
-      merge: (currentCache, newItems, queryArgs) => {
+      merge: (currentCache, newItems, arg) => {
+        if (arg.arg.page === 1) {
+          return {
+            ...newItems,
+            isLast:
+              newItems.projects.length !== INTERSECTION_ELEMENTS.advOrders,
+          };
+        }
+
         return {
           ...newItems,
           projects: [...currentCache.projects, ...newItems.projects],
-          status: queryArgs.arg.status,
+          status: arg.arg.status,
           isLast: newItems.projects.length !== INTERSECTION_ELEMENTS.advOrders,
         };
       },
@@ -193,7 +201,15 @@ export const advProjectsAPI = authApi.injectEndpoints({
         const { status } = queryArgs;
         return `${endpointName}/${status}`;
       },
-      merge: (currentCache, newItems) => {
+      merge: (currentCache, newItems, arg) => {
+        if (arg.arg.page === 1) {
+          return {
+            ...newItems,
+            isLast:
+              newItems.projects.length !== INTERSECTION_ELEMENTS.managerOrders,
+          };
+        }
+
         return {
           ...newItems,
           projects: [...currentCache.projects, ...newItems.projects],

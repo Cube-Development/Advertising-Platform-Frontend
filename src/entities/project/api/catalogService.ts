@@ -50,16 +50,18 @@ export const catalogAPI = baseApi.injectEndpoints({
       serializeQueryArgs: ({ endpointName }) => {
         return endpointName;
       },
-      merge: (currentCache, newItems) => {
-        // if (newItems.page > currentCache.page){
+      merge: (currentCache, newItems, arg) => {
+        if (arg.arg.page === 1) {
+          return {
+            ...newItems,
+            isLast: newItems.channels.length !== INTERSECTION_ELEMENTS.catalog,
+          };
+        }
         return {
           ...newItems,
           channels: [...currentCache.channels, ...newItems.channels],
           isLast: newItems.channels.length !== INTERSECTION_ELEMENTS.catalog,
         };
-        // } else{
-        //   return currentCache
-        // }
       },
       forceRefetch({ currentArg, previousArg }) {
         return currentArg !== previousArg;
