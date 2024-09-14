@@ -32,8 +32,10 @@
 
   &__white {
     color: var(--Personal-colors-main);
-    // border: 1px solid var(--Personal-colors-main);
     background: var(--Personal-colors-White);
+    border: 0.2px solid rgba(0, 0, 0, 0.1);
+    background: var(--Personal-colors-White);
+    box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.1);
 
     &:hover {
       background: rgb(237, 237, 237);

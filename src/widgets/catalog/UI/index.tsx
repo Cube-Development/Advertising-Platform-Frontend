@@ -1,8 +1,9 @@
-import { PLATFORM_PARAMETERS, channelData } from "@entities/channel";
+import { channelData } from "@entities/channel";
 import { platformTypesNum } from "@entities/platform";
 import {
   ICart,
   ICatalogChannel,
+  catalogAPI,
   catalogBarFilter,
   getCatalogReq,
   sortingFilter,
@@ -18,7 +19,7 @@ import {
 } from "@entities/project";
 import { GenerateGuestId, GetUserId, roles } from "@entities/user";
 import { BREAKPOINT, INTERSECTION_ELEMENTS, Languages } from "@shared/config";
-import { useAppSelector } from "@shared/hooks";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { ToastAction, useToast } from "@shared/ui";
 import Cookies from "js-cookie";
 import { FC, useEffect, useRef, useState } from "react";
@@ -39,6 +40,7 @@ export const CatalogBlock: FC = () => {
   const role = Cookies.get("role");
   const projectId = Cookies.get("project_id");
   const catalogTopRef = useRef<HTMLDivElement>(null);
+  const dispatch = useAppDispatch();
 
   if (!guestId) {
     GenerateGuestId();
@@ -69,8 +71,6 @@ export const CatalogBlock: FC = () => {
       elements_on_page: INTERSECTION_ELEMENTS.catalog,
       filter: {
         platform: platformTypesNum.telegram,
-        // male: PLATFORM_PARAMETERS.defaultSexMale,
-        // female: 100 - PLATFORM_PARAMETERS.defaultSexMale,
         business: [],
         age: [],
         language: [],
@@ -82,6 +82,12 @@ export const CatalogBlock: FC = () => {
 
   const formFields = watch();
   const { filter, sort, language: lang } = formFields;
+
+  useEffect(() => {
+    setTimeout(() => {
+      setValue(channelData.page, 1);
+    }, 500);
+  }, [filter, sort, lang]);
 
   const { data: catalogAuth, isFetching: isCatalogAuthLoading } =
     useGetCatalogQuery(
@@ -103,10 +109,6 @@ export const CatalogBlock: FC = () => {
     { guest_id: guestId, language: language?.id || Languages[0].id },
     { skip: !guestId || isAuth },
   );
-
-  useEffect(() => {
-    setValue(channelData.page, 1);
-  }, [filter, sort, lang]);
 
   const [currentCart, setCurrentCart] = useState<ICart>(
     cartPub ? cartPub : cart!,
@@ -316,7 +318,6 @@ export const CatalogBlock: FC = () => {
               console.error("Ошибка при удалении с корзины", error);
             });
         }
-        // newCards = cards.map((item) => {
         newCards = (
           (isAuth ? catalogAuth?.channels : catalog?.channels) || []
         ).map((item) => {
@@ -329,9 +330,17 @@ export const CatalogBlock: FC = () => {
         });
       }
       // setCards(newCards);
+      dispatch(
+        catalogAPI.util.updateQueryData(
+          "getCatalog",
+          { ...formFields, user_id: userId, guest_id: guestId },
+          (draft) => {
+            draft.channels = newCards;
+          },
+        ),
+      );
     }
   };
-  console.log("data", catalogAuth, catalog);
 
   return (
     <div className="container">

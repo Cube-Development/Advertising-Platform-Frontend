@@ -89,9 +89,12 @@ export const CatalogCard: FC<CatalogCardProps> = ({
         <div className={styles.channel__top}>
           <div className={styles.column__logo}>
             <div className={styles.logo}>
-              <div className={styles.logo__img_wrapper}>
+              <Link
+                to={`${paths.channel.replace(":id", card?.id)}`}
+                className={styles.logo__img_wrapper}
+              >
                 <img src={card?.avatar} alt="logo" />
-              </div>
+              </Link>
               {screen >= BREAKPOINT.MD && (
                 <div className={styles.rate}>
                   <RatingIcon />
@@ -239,7 +242,6 @@ export const CatalogCard: FC<CatalogCardProps> = ({
           </Accordion>
         ) : screen < BREAKPOINT.MD ? (
           <>
-            {/* <span className={styles.description}>{card?.description}</span> */}
             <ChannelCardDescription description={card?.description} />
 
             <Accordion type="single" collapsible>

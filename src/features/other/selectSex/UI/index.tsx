@@ -29,25 +29,28 @@ export const SelectSex: FC<SelectSexProps> = ({
 }) => {
   const { t } = useTranslation();
 
-  const [position, setPosition] = useState<number>(
+  const [position, setPosition] = useState<number | null>(
     defaultValues !== undefined
       ? defaultValues
-      : PLATFORM_PARAMETERS.defaultSexMale,
+      : isCatalog
+        ? null
+        : PLATFORM_PARAMETERS.defaultSexMale,
   );
+
   const debouncedPosition = useDebounce(position, DEBOUNCE.sex);
 
-  const handleChange = (newPosition: number) => {
+  const handleChange = (newPosition: number | null) => {
     if (isCatalog) {
       const { filter } = getValues && getValues();
       const updatedFilter = {
         ...filter,
         ["male"]: newPosition,
-        ["female"]: 100 - newPosition,
+        ["female"]: newPosition ? 100 - newPosition : null,
       };
       onChange("filter", updatedFilter);
     } else {
       onChange("male", newPosition);
-      onChange("female", 100 - newPosition);
+      onChange("female", newPosition ? 100 - newPosition : null);
     }
   };
 
@@ -60,7 +63,7 @@ export const SelectSex: FC<SelectSexProps> = ({
   }, [defaultValues]);
 
   useEffect(() => {
-    handleChange(debouncedPosition as number);
+    handleChange(debouncedPosition as number | null);
   }, [debouncedPosition]);
 
   return (
@@ -70,16 +73,16 @@ export const SelectSex: FC<SelectSexProps> = ({
         {text && <InfoIcon />}
       </div>
       <div className={styles.slider}>
-        <p className={styles.man}>{100 - position}%</p>
+        <p className={styles.man}>{position ? 100 - position : 50}%</p>
         <MySliderSex
           type="range"
           min={0}
           step={5}
           max={100}
-          value={position}
+          value={position || 50}
           onChange={(e) => setPosition(parseInt(e.target.value))}
         />
-        <p className={styles.woman}>{position}%</p>
+        <p className={styles.woman}>{position || 50}%</p>
       </div>
     </div>
   );

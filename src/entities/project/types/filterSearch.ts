@@ -1,12 +1,13 @@
-import { platformTypesNum } from "@entities/platform";
-import { IOption } from "@shared/types";
-
 export interface IFilterSearch {
-  platform: platformTypesNum;
-  business: IOption[];
-  age: IOption[];
-  language: IOption[];
-  region: IOption[];
+  category: Content[];
+  age: Content[];
+  language: Content[];
+  region: Content[];
   male: number;
   female: number;
+}
+
+interface Content {
+  id: number;
+  name: string;
 }

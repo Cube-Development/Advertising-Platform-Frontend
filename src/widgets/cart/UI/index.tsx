@@ -1,4 +1,3 @@
-import { PLATFORM_PARAMETERS } from "@entities/channel";
 import { platformTypesNum } from "@entities/platform";
 import {
   getCatalogReq,
@@ -94,8 +93,6 @@ export const Cart: FC = () => {
       elements_on_page: INTERSECTION_ELEMENTS.recommendCardsCart,
       filter: {
         platform: platformTypesNum.telegram,
-        male: PLATFORM_PARAMETERS.defaultSexMale,
-        female: 100 - PLATFORM_PARAMETERS.defaultSexMale,
         business: [],
         age: [],
         language: [],

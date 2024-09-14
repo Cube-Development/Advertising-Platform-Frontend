@@ -1,14 +1,15 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
-import { MyButton } from "@shared/ui";
+import { MyButton, SpinnerLoaderSmall } from "@shared/ui";
 import { RobotIcon } from "@shared/assets";
 
 interface AiFilterProps {
+  isLoading: boolean;
   onChange: () => void;
 }
 
-export const AiFilter: FC<AiFilterProps> = ({ onChange }) => {
+export const AiFilter: FC<AiFilterProps> = ({ isLoading, onChange }) => {
   const { t } = useTranslation();
   return (
     <MyButton
@@ -16,8 +17,14 @@ export const AiFilter: FC<AiFilterProps> = ({ onChange }) => {
       className={styles.button}
       onClick={onChange}
     >
-      <RobotIcon />
-      {t(`catalog.generation_btn`)}
+      {isLoading ? (
+        <SpinnerLoaderSmall />
+      ) : (
+        <>
+          <RobotIcon />
+          {t(`catalog.generation_btn`)}
+        </>
+      )}
     </MyButton>
   );
 };

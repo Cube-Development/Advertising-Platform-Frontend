@@ -2,7 +2,7 @@ import { platformTypesNum } from "@entities/platform";
 import { CATALOG, baseApi } from "@shared/api";
 import { INTERSECTION_ELEMENTS, languagesNum } from "@shared/config";
 import { sortingFilter } from "../config";
-import { ICatalogCards } from "../types";
+import { ICatalogCards, ITargetAudienceCard, IThreadData } from "../types";
 
 export interface getCatalogReq {
   user_id?: string;
@@ -22,6 +22,17 @@ export interface getCatalogReq {
   sort: sortingFilter;
 }
 
+export interface getAIParametersReq {
+  prompt: string;
+  thread_id?: string;
+}
+
+export interface getTAParametersReq {
+  category: number[];
+  region: number[];
+  language: number[];
+}
+
 export const catalogAPI = baseApi.injectEndpoints({
   endpoints: (build) => ({
     getCatalog: build.query<ICatalogCards, getCatalogReq>({
@@ -39,7 +50,13 @@ export const catalogAPI = baseApi.injectEndpoints({
       serializeQueryArgs: ({ endpointName }) => {
         return endpointName;
       },
-      merge: (currentCache, newItems) => {
+      merge: (currentCache, newItems, arg) => {
+        if (arg.arg.page === 1) {
+          return {
+            ...newItems,
+            isLast: newItems.channels.length !== INTERSECTION_ELEMENTS.catalog,
+          };
+        }
         return {
           ...newItems,
           channels: [...currentCache.channels, ...newItems.channels],
@@ -51,7 +68,25 @@ export const catalogAPI = baseApi.injectEndpoints({
       },
       providesTags: [CATALOG],
     }),
+    getAIParameters: build.query<IThreadData, getAIParametersReq>({
+      query: (params) => ({
+        url: "/sample/ai/parameters",
+        method: "GET",
+        params: params,
+      }),
+    }),
+    getTAParameters: build.query<ITargetAudienceCard[], getTAParametersReq>({
+      query: (BodyParams) => ({
+        url: "/sample/target-audience",
+        method: "POST",
+        body: BodyParams,
+      }),
+    }),
   }),
 });
 
-export const { useGetCatalogQuery } = catalogAPI;
+export const {
+  useGetCatalogQuery,
+  useGetAIParametersQuery,
+  useGetTAParametersQuery,
+} = catalogAPI;

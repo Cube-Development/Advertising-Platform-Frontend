@@ -1,11 +1,14 @@
+import { IReadChannelData } from "@entities/channel";
+import { IFormat } from "@entities/project";
 import { FC } from "react";
-import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
-import { IChannelStatistics } from "@entities/channel/types";
+import styles from "./styles.module.scss";
 
 interface StatisticsProps {
-  statistics: IChannelStatistics;
+  card: IReadChannelData;
+  selectedFormat: IFormat;
 }
+
 const changeNumber = (num: number): string => {
   if (num >= 1000000) {
     return (num / 1000000).toFixed(2).replace(/\.00$/, "") + "kk";
@@ -16,7 +19,7 @@ const changeNumber = (num: number): string => {
   }
 };
 
-export const Statistics: FC<StatisticsProps> = ({ statistics }) => {
+export const Statistics: FC<StatisticsProps> = ({ card, selectedFormat }) => {
   const { t } = useTranslation();
   return (
     <div className={styles.wrapper}>
@@ -25,11 +28,11 @@ export const Statistics: FC<StatisticsProps> = ({ statistics }) => {
         <div className={styles.main}>
           <div className={styles.block}>
             <p>{t("channel.statistics.orders")}</p>
-            <span>{changeNumber(statistics.orders)}</span>
+            <span>{changeNumber(card?.order_completed_count || 0)}</span>
           </div>
           <div className={styles.block}>
             <p>{t("channel.statistics.subs")}</p>
-            <span>{changeNumber(statistics.subs)}</span>
+            <span>{changeNumber(card?.subscribers || 0)}</span>
           </div>
         </div>
         <div className={styles.channel}>
@@ -37,13 +40,13 @@ export const Statistics: FC<StatisticsProps> = ({ statistics }) => {
             <div className={`${styles.row} ${styles.borBottom}`}>
               <div className={styles.center}>
                 <p>{t("channel.statistics.views")}:</p>
-                <span>{changeNumber(statistics.views)}</span>
+                <span>{changeNumber(selectedFormat?.views || 0)}</span>
               </div>
             </div>
             <div className={styles.row}>
               <div className={styles.center}>
                 <p>{t("channel.statistics.er")}:</p>
-                <span>{statistics.er} %</span>
+                <span>{selectedFormat?.er} %</span>
               </div>
             </div>
           </div>
@@ -51,14 +54,14 @@ export const Statistics: FC<StatisticsProps> = ({ statistics }) => {
             <div className={`${styles.row} ${styles.borBottom}`}>
               <div className={styles.center}>
                 <p>{t("channel.statistics.posts")}:</p>
-                <span>{statistics.posts}</span>
+                <span>{card?.published_posts}</span>
               </div>
             </div>
             <div className={styles.row}>
               <div className={styles.center}>
                 <p>{t("channel.statistics.cpv")}:</p>
                 <span>
-                  {statistics.cpv} {t("symbol")}
+                  {selectedFormat?.cpv} {t("symbol")}
                 </span>
               </div>
             </div>

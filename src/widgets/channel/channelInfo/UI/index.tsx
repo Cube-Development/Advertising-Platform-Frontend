@@ -8,6 +8,7 @@ import { platformTypesNum } from "@entities/platform";
 import {
   getCatalogReq,
   ICatalogChannel,
+  IFormat,
   sortingFilter,
   useGetCatalogQuery,
 } from "@entities/project";
@@ -15,7 +16,6 @@ import {
   INTERSECTION_ELEMENTS,
   Languages,
   PAGE_ANIMATION,
-  STATS,
 } from "@shared/config";
 import { motion } from "framer-motion";
 import Cookies from "js-cookie";
@@ -94,6 +94,18 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
 
   const handleChangeCards = (cartChannel: ICatalogChannel) => {};
 
+  const [selectedFormat, setSelectedFormat] = useState<IFormat | null>(null);
+
+  const handleChangeFormat = (selectedValue: IFormat) => {
+    setSelectedFormat(selectedValue);
+  };
+
+  useEffect(() => {
+    if (card) {
+      setSelectedFormat(card?.format[0]);
+    }
+  }, [card?.format[0]]);
+
   return (
     <>
       <div className="container">
@@ -101,7 +113,7 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
           <div className={styles.top}>
             <Information
               card={channel}
-              statistics={STATS}
+              selectedFormat={selectedFormat!}
               isLoading={isLoading}
             />
             {!isLoading ? (
@@ -110,7 +122,11 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
                 animate="visible"
                 variants={PAGE_ANIMATION.animationRight}
               >
-                <AddToCart card={channel} />
+                <AddToCart
+                  card={channel}
+                  selectedFormat={selectedFormat!}
+                  changeFormat={handleChangeFormat}
+                />
               </motion.div>
             ) : (
               <SkeletonChannelAddToCart />

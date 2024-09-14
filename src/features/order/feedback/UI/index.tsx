@@ -42,7 +42,7 @@ export const Feedback: FC<IOrderFeature> = ({ order_id }) => {
       <PopoverTrigger asChild>
         <div className={styles.button}>
           {t(`order_btn.feedback.btn_title`)}
-          <StarIcon2 />
+          {/* <StarIcon2 /> */}
         </div>
       </PopoverTrigger>
       <PopoverContent className="rounded-[10px] p-0 w-full h-full" align="end">

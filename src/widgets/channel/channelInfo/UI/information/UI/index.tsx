@@ -1,6 +1,5 @@
 import {
   Description,
-  IChannelStatistics,
   IReadChannelData,
   Parameters,
   SkeletonChannelDescription,
@@ -8,6 +7,7 @@ import {
   SkeletonChannelStatistics,
   Statistics,
 } from "@entities/channel";
+import { IFormat } from "@entities/project";
 import { PAGE_ANIMATION } from "@shared/config";
 import { motion } from "framer-motion";
 import { FC } from "react";
@@ -16,13 +16,13 @@ import styles from "./styles.module.scss";
 
 interface InformationProps {
   card: IReadChannelData;
-  statistics: IChannelStatistics;
+  selectedFormat: IFormat;
   isLoading: boolean;
 }
 
 export const Information: FC<InformationProps> = ({
   card,
-  statistics,
+  selectedFormat,
   isLoading,
 }) => {
   let custom = 0;
@@ -54,14 +54,14 @@ export const Information: FC<InformationProps> = ({
       <div>
         {!isLoading ? (
           <motion.div custom={custom++} variants={PAGE_ANIMATION.animationLeft}>
-            <Statistics statistics={statistics} />
+            <Statistics card={card} selectedFormat={selectedFormat} />
           </motion.div>
         ) : (
           <SkeletonChannelStatistics />
         )}
       </div>
 
-      <Reviews isLoadingReviews={isLoading} />
+      <Reviews isLoadingReviews={isLoading} card={card} />
     </motion.div>
   );
 };

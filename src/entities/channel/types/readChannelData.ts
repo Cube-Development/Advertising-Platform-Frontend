@@ -17,20 +17,11 @@ export interface IReadChannelData {
   language: IOption[];
   age: IOption[];
   format: IFormat[];
-}
-
-export interface IChannelStatistics {
-  orders: number;
-  subs: number;
-  views: number;
-  posts: number;
-  er: number;
-  cpv: number;
-}
-
-export interface IChannelRate {
-  rate: number;
-  count: number;
+  subscribers: number;
+  order_completed_count: number;
+  published_posts: number;
+  grade: number;
+  common_count: number;
   rating_type: IRatingType[];
 }
 

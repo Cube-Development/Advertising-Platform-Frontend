@@ -6,6 +6,53 @@ import { FC, useEffect, useRef, useState } from "react";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import {
+  MultiSelect,
+  MultiSelectSecond,
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectLabel,
+  SelectTrigger,
+  SelectValue,
+} from "@shared/ui";
+import { Cat, Dog, Fish, Rabbit, Turtle } from "lucide-react";
+
+const FRAMEWORKS = [
+  {
+    value: "next.js",
+    label: "Next.js",
+  },
+  {
+    value: "sveltekit",
+    label: "SvelteKit",
+  },
+  {
+    value: "nuxt.js",
+    label: "Nuxt.js",
+  },
+  {
+    value: "remix",
+    label: "Remix",
+  },
+  {
+    value: "astro",
+    label: "Astro",
+  },
+  {
+    value: "wordpress",
+    label: "WordPress",
+  },
+  {
+    value: "express.js",
+    label: "Express.js",
+  },
+  {
+    value: "nest.js",
+    label: "Nest.js",
+  },
+];
 
 interface SelectOptionsProps {
   textData: string;
@@ -158,30 +205,38 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
     setSelectedOptions(defaultValues as number[]);
   }, [defaultValues]);
 
-  return (
-    <div
-      className={`${isFilter ? styles.filter__wrapper : styles.parameters} ${isRow ? styles.wrapper__row : styles.wrapper}`}
-    >
-      {isFilter ? (
-        screen >= BREAKPOINT.MD ? (
-          <div className={styles.left}>
-            <p>{allText?.title}:</p>
-          </div>
-        ) : (
-          <></>
-        )
-      ) : (
-        <div className={styles.left}>
-          <p>{allText?.title}</p>
-          {allText?.text && <InfoIcon />}
-        </div>
-      )}
+  const [selectedFrameworks, setSelectedFrameworks] = useState<string[]>([]);
 
-      <div className={styles.menu} ref={menuRef}>
-        <button
-          type="button"
-          onClick={handleButtonClick}
-          className={`
+  const frameworksList = options.map((item) => ({
+    value: item.name,
+    label: item.name,
+  }));
+
+  return (
+    <>
+      <div
+        className={`${isFilter ? styles.filter__wrapper : styles.parameters} ${isRow ? styles.wrapper__row : styles.wrapper}`}
+      >
+        {isFilter ? (
+          screen >= BREAKPOINT.MD ? (
+            <div className={styles.left}>
+              <p>{allText?.title}:</p>
+            </div>
+          ) : (
+            <></>
+          )
+        ) : (
+          <div className={styles.left}>
+            <p>{allText?.title}</p>
+            {allText?.text && <InfoIcon />}
+          </div>
+        )}
+
+        <div className={styles.menu} ref={menuRef}>
+          <button
+            type="button"
+            onClick={handleButtonClick}
+            className={`
           ${isFilter ? styles.filter : ""}  
         
           ${
@@ -192,118 +247,183 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
                 : ""
           }
           `}
-        >
-          <div>
-            {single ? (
-              <div className={styles.filter}>
-                {selectedOption?.img ? <selectedOption.img /> : ""}
-                {(!isFilter ||
-                  screen >= BREAKPOINT.SM ||
-                  !isPlatformFilter) && (
-                  <span className="truncate">
-                    {selectedOption
-                      ? selectedOption?.name
-                      : allText.default_value}
-                  </span>
-                )}
+          >
+            <div>
+              {single ? (
+                <div className={styles.filter}>
+                  {selectedOption?.img ? <selectedOption.img /> : ""}
+                  {(!isFilter ||
+                    screen >= BREAKPOINT.SM ||
+                    !isPlatformFilter) && (
+                    <span className="truncate">
+                      {selectedOption
+                        ? selectedOption?.name
+                        : allText.default_value}
+                    </span>
+                  )}
+                </div>
+              ) : (
+                <span>
+                  {selectedOptions?.length ? (
+                    <>
+                      {t("add_platform.description.choosed")}:{" "}
+                      {selectedOptions?.length} / {allOptions?.length}
+                    </>
+                  ) : (
+                    allText?.default_value
+                  )}
+                </span>
+              )}
+              <div
+                className={`w-[16px] h-[14px] ${isMenuOpen ? "rotate" : "rotate__down"}`}
+              >
+                <ArrowSmallVerticalIcon
+                  className={
+                    type === channelData.category && defaultValues && isDisabled
+                      ? "icon__grey"
+                      : (isMenuOpen ||
+                            selectedOption ||
+                            selectedOptions?.length) &&
+                          !isFilter
+                        ? "active__icon"
+                        : "icon__grey"
+                  }
+                />
               </div>
-            ) : (
-              <span>
-                {selectedOptions?.length ? (
+            </div>
+          </button>
+
+          {isMenuOpen && (
+            <div className={`${styles.options} show`}>
+              <ul
+                className={
+                  allOptions.length > PLATFORM_PARAMETERS.scrollAddLen
+                    ? styles.scroll
+                    : ""
+                }
+              >
+                {single ? (
                   <>
-                    {t("add_platform.description.choosed")}:{" "}
-                    {selectedOptions?.length} / {allOptions?.length}
+                    {allOptions.map((option, index) => (
+                      <li
+                        key={index}
+                        onClick={handleOptionChange}
+                        data-value={option?.id}
+                        className={`${isFilter ? styles.filter : ""} ${selectedOption?.id === option?.id ? styles.active : ""} truncate`}
+                      >
+                        {option?.img ? <option.img /> : null}
+                        {screen >= BREAKPOINT.SM || !isPlatformFilter ? (
+                          <span
+                            onClick={handleOptionChange}
+                            data-value={option?.id}
+                            className="truncate"
+                          >
+                            {option?.name}
+                          </span>
+                        ) : (
+                          ""
+                        )}
+                      </li>
+                    ))}
                   </>
                 ) : (
-                  allText?.default_value
-                )}
-              </span>
-            )}
-            <div
-              className={`w-[16px] h-[14px] ${isMenuOpen ? "rotate" : "rotate__down"}`}
-            >
-              <ArrowSmallVerticalIcon
-                className={
-                  type === channelData.category && defaultValues && isDisabled
-                    ? "icon__grey"
-                    : (isMenuOpen ||
-                          selectedOption ||
-                          selectedOptions?.length) &&
-                        !isFilter
-                      ? "active__icon"
-                      : "icon__grey"
-                }
-              />
-            </div>
-          </div>
-        </button>
-
-        {isMenuOpen && (
-          <div className={`${styles.options} show`}>
-            <ul
-              className={
-                allOptions.length > PLATFORM_PARAMETERS.scrollAddLen
-                  ? styles.scroll
-                  : ""
-              }
-            >
-              {single ? (
-                <>
-                  {allOptions.map((option, index) => (
-                    <li
-                      key={index}
-                      onClick={handleOptionChange}
-                      data-value={option?.id}
-                      className={`${isFilter ? styles.filter : ""} ${selectedOption?.id === option?.id ? styles.active : ""} truncate`}
-                    >
-                      {option?.img ? <option.img /> : null}
-                      {screen >= BREAKPOINT.SM || !isPlatformFilter ? (
+                  <>
+                    {allOptions.map((option, index) => (
+                      <li
+                        key={index}
+                        onClick={handleOptionsChange}
+                        data-value={option?.id}
+                        className={
+                          selectedOptions.includes(option?.id)
+                            ? styles.active
+                            : ""
+                        }
+                      >
                         <span
-                          onClick={handleOptionChange}
+                          onClick={handleOptionsChange}
                           data-value={option?.id}
-                          className="truncate"
                         >
                           {option?.name}
                         </span>
-                      ) : (
-                        ""
-                      )}
-                    </li>
-                  ))}
-                </>
-              ) : (
-                <>
-                  {allOptions.map((option, index) => (
-                    <li
-                      key={index}
-                      onClick={handleOptionsChange}
-                      data-value={option?.id}
-                      className={
-                        selectedOptions.includes(option?.id)
-                          ? styles.active
-                          : ""
-                      }
-                    >
-                      <span
-                        onClick={handleOptionsChange}
-                        data-value={option?.id}
-                      >
-                        {option?.name}
-                      </span>
-                      <input
-                        type="checkbox"
-                        value={option?.id}
-                        onChange={handleOptionsChange}
-                        checked={selectedOptions.includes(option?.id)}
-                      />
-                    </li>
-                  ))}
-                </>
-              )}
-            </ul>
+                        <input
+                          type="checkbox"
+                          value={option?.id}
+                          onChange={handleOptionsChange}
+                          checked={selectedOptions.includes(option?.id)}
+                        />
+                      </li>
+                    ))}
+                  </>
+                )}
+              </ul>
+            </div>
+          )}
+        </div>
+      </div>
+      {/* <Select>
+        <SelectTrigger className="w-[180px]">
+          <SelectValue placeholder="Select a fruit" />
+        </SelectTrigger>
+        <SelectContent>
+          <SelectGroup>
+            <SelectLabel>Fruits</SelectLabel>
+            <SelectItem value="apple">Apple</SelectItem>
+            <SelectItem value="banana">Banana</SelectItem>
+            <SelectItem value="blueberry">Blueberry</SelectItem>
+            <SelectItem value="grapes">Grapes</SelectItem>
+            <SelectItem value="pineapple">Pineapple</SelectItem>
+          </SelectGroup>
+        </SelectContent>
+      </Select> */}
+      {/* <div
+        className={`${isFilter ? styles.filter__wrapper : styles.parameters} ${isRow ? styles.wrapper__row : styles.wrapper}`}
+      >
+        {isFilter ? (
+          screen >= BREAKPOINT.MD ? (
+            <div className={styles.left}>
+              <p>{allText?.title}:</p>
+            </div>
+          ) : (
+            <></>
+          )
+        ) : (
+          <div className={styles.left}>
+            <p>{allText?.title}</p>
+            {allText?.text && <InfoIcon />}
           </div>
         )}
-      </div>
-    </div>
+        <div className="p-4 max-w-xl">
+          <MultiSelect
+            options={frameworksList}
+            onValueChange={setSelectedFrameworks}
+            defaultValue={selectedFrameworks}
+            placeholder="Select frameworks"
+            variant="inverted"
+            animation={2}
+            // maxCount={frameworksList.length}
+            maxCount={1}
+          />
+        </div>
+      </div> */}
+      {/* <div
+        className={`${isFilter ? styles.filter__wrapper : styles.parameters} ${isRow ? styles.wrapper__row : styles.wrapper}`}
+      >
+        {isFilter ? (
+          screen >= BREAKPOINT.MD ? (
+            <div className={styles.left}>
+              <p>{allText?.title}:</p>
+            </div>
+          ) : (
+            <></>
+          )
+        ) : (
+          <div className={styles.left}>
+            <p>{allText?.title}</p>
+            {allText?.text && <InfoIcon />}
+          </div>
+        )}
+        <MultiSelectSecond FRAMEWORKS={frameworksList}/>
+      </div> */}
+    </>
   );
 };

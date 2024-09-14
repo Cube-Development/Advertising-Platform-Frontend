@@ -50,7 +50,7 @@ export const RecomTargetCard: FC<RecomTargetCardProps> = ({
           <p>
             {t("catalog.recommendation.card.business")}:{" "}
             <span>
-              {card?.business.map((business) => business.name).join("; ")}
+              {card?.category.map((business) => business.name).join("; ")}
             </span>
           </p>
         </div>

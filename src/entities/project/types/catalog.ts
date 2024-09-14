@@ -2,6 +2,25 @@ import { platformTypesNum } from "@entities/platform";
 import { pageFilter } from "@shared/routing";
 import { FC } from "react";
 
+export interface ITargetAudienceCard {
+  category: number[];
+  region: number[];
+  language: number[];
+  age: number[];
+  male: number;
+  female: number;
+}
+
+export interface IThreadData {
+  thread_id: string;
+  category: number[];
+  region: number[];
+  language: number[];
+  male: number;
+  female: number;
+  age: number[];
+}
+
 export interface ICatalogCards extends IChangeCards {
   page: number;
   elements: number;

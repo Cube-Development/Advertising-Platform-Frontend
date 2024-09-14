@@ -1,6 +1,7 @@
 import { CircleHelp } from "lucide-react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
+import matchAnimation from "/animated/match_lottie.gif";
 
 export const ChannelCardMatch = ({ match }: { match?: number }) => {
   const { t } = useTranslation();
@@ -40,6 +41,14 @@ export const ChannelCardMatch = ({ match }: { match?: number }) => {
             <CircleHelp width={20} height={20} stroke="#bbb" />
           </span>
         )}
+      </div>
+      <div className={styles.match_description}>
+        <img
+          src={matchAnimation}
+          alt="isLoading..."
+          className={styles.loading__icon}
+        />
+        <p>{t("platform.match_description")}</p>
       </div>
     </div>
   );

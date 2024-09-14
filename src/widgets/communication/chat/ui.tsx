@@ -169,7 +169,7 @@ export const Chat: FC = () => {
       {screen >= BREAKPOINT.MD ? (
         <AlertDialog>
           <AlertDialogTrigger className={styles.chat}>
-            <ChatIcon />
+            <ChatIcon className="icon__white" />
           </AlertDialogTrigger>
           <AlertDialogContent>
             <div className={styles.content}>

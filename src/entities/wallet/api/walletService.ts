@@ -84,7 +84,15 @@ export const walletAPI = authApi.injectEndpoints({
       serializeQueryArgs: ({ endpointName }) => {
         return endpointName;
       },
-      merge: (currentCache, newItems) => {
+      merge: (currentCache, newItems, arg) => {
+        if (arg.arg.page === 1) {
+          return {
+            ...newItems,
+            isLast:
+              newItems.transactions.length !== INTERSECTION_ELEMENTS.history,
+          };
+        }
+
         return {
           ...newItems,
           transactions: [
