@@ -22,6 +22,7 @@ export enum channelData {
   business = "business",
   page = "page",
   description = "description",
+  prompt = "prompt",
 }
 
 export enum channelStatus {

@@ -1,5 +1,4 @@
-import { ratingData, ratingStatus } from "@entities/channel/config";
-import { IChannelRate } from "@entities/channel/types";
+import { IReadChannelData, ratingData, ratingStatus } from "@entities/channel";
 import { RatingIcon } from "@shared/assets";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -34,24 +33,25 @@ const Slider: FC<SliderProps> = ({ max, current, isActive }) => {
 };
 
 interface RateProps {
-  rating: IChannelRate;
+  card: IReadChannelData;
   activeType: ratingData | null;
   onChange: (id: ratingData) => void;
 }
 
-export const Rate: FC<RateProps> = ({ rating, activeType, onChange }) => {
+export const Rate: FC<RateProps> = ({ card, activeType, onChange }) => {
   const { t } = useTranslation();
+
   return (
     <div className={styles.wrapper}>
       <p className={styles.title}>{t("channel.reviews.title")}</p>
       <div className={styles.card}>
         <div className={styles.left}>
           <div className={styles.rate__wrapper}>
-            <p>{rating.rate}</p>
+            <p>{card?.grade.toFixed(1)}</p>
             <div className={styles.rate}>
               <RatingIcon />
               <span>
-                {rating.count} {t("channel.reviews.text")}
+                {card?.common_count} {t("channel.reviews.text")}
               </span>
             </div>
           </div>
@@ -63,7 +63,7 @@ export const Rate: FC<RateProps> = ({ rating, activeType, onChange }) => {
                 key={index}
                 className={`${activeType === item.id ? styles.active : ""}`}
                 onClick={() => onChange(item.id)}
-              >{`${t(item.name)} (${rating.rating_type.find((type) => type.type === item.id)?.count || 0})`}</span>
+              >{`${t(item.name)} (${card?.rating_type.find((type) => type.type === item.id)?.count || 0})`}</span>
             ))}
           </div>
           <div className={styles.sliders}>
@@ -74,10 +74,10 @@ export const Rate: FC<RateProps> = ({ rating, activeType, onChange }) => {
                 onClick={() => onChange(item.id)}
               >
                 <Slider
-                  max={rating.count}
+                  max={card?.common_count}
                   isActive={activeType === item.id}
                   current={
-                    rating.rating_type.find((type) => type.type === item.id)
+                    card?.rating_type.find((type) => type.type === item.id)
                       ?.count || 0
                   }
                 />

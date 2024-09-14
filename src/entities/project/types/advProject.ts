@@ -16,6 +16,7 @@ export interface IAdvSubprojects {
 
 export interface IAdvProjectCard {
   id: string;
+  identifier: number;
   tarif?: string;
   created: string;
   name: string;
@@ -32,6 +33,7 @@ export interface IAdvProjectCard {
 
 export interface IAdvProjectSubcard {
   id: string;
+  identifier: number;
   date_coming: string;
   name: string;
   category: string;

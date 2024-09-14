@@ -10,7 +10,7 @@ export const SeePost: FC = () => {
   return (
     <MyButton buttons_type="button__white" className={styles.button}>
       {t(`order_btn.seePost`)}
-      <PostIcon />
+      {/* <PostIcon /> */}
     </MyButton>
   );
 };

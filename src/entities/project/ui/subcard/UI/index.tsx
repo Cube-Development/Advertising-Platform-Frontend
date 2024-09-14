@@ -39,6 +39,7 @@ import {
 } from "@shared/ui";
 import { channelStatusFilter } from "@entities/channel";
 import { offerStatusFilter } from "@entities/offer";
+import { platform } from "os";
 
 interface AdvSubcardProps {
   subcard: IAdvProjectSubcard;
@@ -68,15 +69,32 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
   const { t } = useTranslation();
   const { toast } = useToast();
 
-  const { data: post, error } = useGetPostQuery({ order_id: subcard.id });
-
-  if (error) {
-    toast({
-      variant: "error",
-      title: t("toasts.orders_advertiser.reject_post.error"),
-    });
-    console.error("error: ", error);
-  }
+  // const { data: post, error } = useGetPostQuery({ order_id: subcard.id });
+  const post = {
+    id: "string",
+    platform: 1,
+    comment: "string",
+    photo: ["ff"],
+    video: ["ff"],
+    files: ["ff"],
+    buttons: [
+      {
+        id: "string",
+        content: "string",
+        url: "string",
+      },
+    ],
+    text: ["dd"],
+    post_type: 1,
+  };
+  // const error = 5
+  // if (error) {
+  //   toast({
+  //     variant: "error",
+  //     title: t("toasts.orders_advertiser.reject_post.error"),
+  //   });
+  //   console.error("error: ", error);
+  // }
 
   return (
     <div
@@ -96,34 +114,42 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
           </div>
         </div>
         <div className={styles.subcard__left__info}>
-          <div className={styles.subcard__left__info__top}>
-            <p>{t(`orders_advertiser.subcard.date`)}</p>
-            <span>
-              {typeof subcard?.publish_date === "object"
-                ? subcard?.publish_date?.date_from +
-                  " - " +
-                  subcard?.publish_date?.date_to
-                : subcard?.publish_date}
-            </span>
+          <div className={`${styles.info__wrapper} ${styles.top}`}>
+            <div>
+              <p>{t(`orders_advertiser.subcard.date`)}</p>
+              <span>
+                {typeof subcard?.publish_date === "object"
+                  ? subcard?.publish_date?.date_from +
+                    " - " +
+                    subcard?.publish_date?.date_to
+                  : subcard?.publish_date}
+              </span>
+            </div>
           </div>
-          <div>
-            <p>{t(`orders_advertiser.subcard.accommodation`)}</p>
-            <span>{subcard?.format?.small}</span>
+          <div className={styles.info__wrapper}>
+            <div>
+              <p>{t(`orders_advertiser.subcard.price`)}</p>
+              <span>
+                {subcard?.price?.toLocaleString()} {t(`symbol`)}
+              </span>
+            </div>
           </div>
         </div>
         <div className={styles.subcard__left__info}>
-          <div className={styles.subcard__left__info__top}>
-            <p>{t(`orders_advertiser.subcard.time`)}</p>
-            <span>
-              {subcard?.publish_time?.time_from} -{" "}
-              {subcard?.publish_time?.time_to}
-            </span>
+          <div className={`${styles.info__wrapper} ${styles.top}`}>
+            <div>
+              <p>{t(`orders_advertiser.subcard.time`)}</p>
+              <span>
+                {subcard?.publish_time?.time_from} -{" "}
+                {subcard?.publish_time?.time_to}
+              </span>
+            </div>
           </div>
-          <div>
-            <p>{t(`orders_advertiser.subcard.price`)}</p>
-            <span>
-              {subcard?.price?.toLocaleString()} {t(`symbol`)}
-            </span>
+          <div className={styles.info__wrapper}>
+            <div>
+              <p>{t(`orders_advertiser.subcard.accommodation`)}</p>
+              <span>{subcard?.format?.small}</span>
+            </div>
           </div>
         </div>
         <div className={styles.subcard__left__data}>

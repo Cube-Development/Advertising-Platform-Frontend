@@ -8,20 +8,16 @@ import styles from "./styles.module.scss";
 
 interface AddToCartProps {
   card: IReadChannelData;
+  selectedFormat: IFormat;
+  changeFormat: (selectedValue: IFormat) => void;
 }
 
-export const AddToCart: FC<AddToCartProps> = ({ card }) => {
+export const AddToCart: FC<AddToCartProps> = ({
+  card,
+  selectedFormat,
+  changeFormat,
+}) => {
   const { t } = useTranslation();
-  const startFormat = card?.format[0];
-  const [selectedFormat, setSelectedFormat] = useState<IFormat>(startFormat);
-
-  const handleChangeFormat = (selectedValue: IFormat) => {
-    setSelectedFormat(selectedValue);
-  };
-
-  useEffect(() => {
-    setSelectedFormat(startFormat);
-  }, [startFormat]);
 
   return (
     <div className={styles.wrapper}>
@@ -33,7 +29,7 @@ export const AddToCart: FC<AddToCartProps> = ({ card }) => {
         <div className={styles.formatList__wrapper}>
           <FormatList
             selectedFormat={selectedFormat}
-            changeFormat={handleChangeFormat}
+            changeFormat={changeFormat}
             card={card as unknown as ICatalogChannel}
           />
         </div>

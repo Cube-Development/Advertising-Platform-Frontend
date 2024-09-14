@@ -6,9 +6,13 @@ import {
   useGetCompanyCategoriesQuery,
 } from "@entities/channel";
 import {
-  IFilterSearch,
   catalogBarFilter,
+  getAIParametersReq,
   getCatalogReq,
+  getTAParametersReq,
+  IFilterSearch,
+  useGetAIParametersQuery,
+  useGetTAParametersQuery,
 } from "@entities/project";
 import { AiFilter, RecomTargetCard } from "@features/catalog";
 import {
@@ -18,10 +22,11 @@ import {
   SelectSex,
 } from "@features/other";
 import { QualityIcon } from "@shared/assets";
-import { AIRecommendCARDS, Languages } from "@shared/config";
+import { Languages } from "@shared/config";
 import { pageFilter } from "@shared/routing";
 import { FC, useEffect, useState } from "react";
 import {
+  useForm,
   UseFormGetValues,
   UseFormReset,
   UseFormSetValue,
@@ -49,11 +54,6 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
     return i18n.language === lang.name;
   });
 
-  const [recommendationCard, setRecCard] = useState<IFilterSearch | null>(null);
-  const [recommendationCards, setRecCards] = useState<IFilterSearch[] | null>(
-    null,
-  );
-
   const contentRes = {
     language: language?.id || Languages[0].id,
     page: 1,
@@ -63,12 +63,95 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
   const { data: ages } = useGetChannelAgesQuery(contentRes);
   const { data: regions } = useGetChannelRegionsQuery(contentRes);
   const { data: languages } = useGetChannelLanguagesQuery(contentRes);
+
+  const [text, setText] = useState<string>("");
+
+  const { watch: watchAI, setValue: setValueAI } = useForm<getAIParametersReq>({
+    defaultValues: {
+      prompt: "",
+    },
+  });
+
+  const { watch: watchTA, setValue: setValueTA } = useForm<getTAParametersReq>({
+    defaultValues: {
+      category: [],
+      region: [],
+      language: [],
+    },
+  });
+
+  const formFieldsAI = watchAI();
+  const formFieldsTA = watchTA();
+  const {
+    data: AIParameters,
+    isLoading: isLoadingAIParameters,
+    isSuccess,
+  } = useGetAIParametersQuery({ prompt: text }, { skip: !text.length });
+
+  const { data: TAParameters, isLoading: isLoadingTAParameters } =
+    useGetTAParametersQuery(
+      { ...formFieldsTA },
+      {
+        skip:
+          !isSuccess ||
+          !formFieldsTA.category.length ||
+          !formFieldsTA.region.length ||
+          !formFieldsTA.language.length,
+      },
+    );
+
+  const [recommendationCard, setRecCard] = useState<IFilterSearch | null>(null);
+  const [recommendationCards, setRecCards] = useState<IFilterSearch[] | null>(
+    null,
+  );
+
+  useEffect(() => {
+    if (AIParameters) {
+      setValueTA(channelData.category, AIParameters?.category);
+      setValueTA(channelData.region, AIParameters?.region);
+      setValueTA(channelData.language, AIParameters?.language);
+    }
+  }, [AIParameters]);
+
+  useEffect(() => {
+    if (TAParameters) {
+      const repackCards = TAParameters.map((card) => {
+        // const filteredCategories = categories?.contents || [];
+        // const filteredAge = ages?.contents || [];
+        // const filteredRegion = regions?.contents || [];
+        // const filteredLanguage = languages?.contents || [];
+        const filteredCategories =
+          categories?.contents.filter((item) =>
+            card.category.includes(item.id),
+          ) || [];
+        const filteredAge =
+          ages?.contents.filter((item) => card.age.includes(item.id)) || [];
+        const filteredRegion =
+          regions?.contents.filter((item) => card.region.includes(item.id)) ||
+          [];
+        const filteredLanguage =
+          languages?.contents.filter((item) =>
+            card.language.includes(item.id),
+          ) || [];
+        return {
+          ...card,
+          category: filteredCategories,
+          age: filteredAge,
+          region: filteredRegion,
+          language: filteredLanguage,
+        };
+      });
+      console.log(repackCards);
+      setRecCards(repackCards);
+    }
+  }, [TAParameters]);
+
   const { filter } = getValues();
 
   const resetRecommendationCard = () => {
     setRecCard(null);
-    setRecCards(null);
-    reset();
+    // setRecCards(null);
+    // reset();
     // console.log("resetRecommendationCard");
   };
 
@@ -78,18 +161,18 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
     } else {
       setRecCard(card);
       const newFilter = { ...filter };
-      newFilter.business = card.business.map((item) => item.id);
-      newFilter.age = card.age.map((item) => item.id);
-      newFilter.language = card.language.map((item) => item.id);
-      newFilter.region = card.region.map((item) => item.id);
-      newFilter.male = card.male;
-      newFilter.female = card.female;
+      newFilter.business = card?.category.map((item) => item.id);
+      newFilter.age = card?.age.map((item) => item.id);
+      newFilter.language = card?.language.map((item) => item.id);
+      newFilter.region = card?.region.map((item) => item.id);
+      newFilter.male = card?.male;
+      newFilter.female = card?.female;
       setValue("filter", newFilter);
     }
   };
 
-  const getAIRecommendationCards = () => {
-    setRecCards(AIRecommendCARDS);
+  const handleAIClick = () => {
+    setText(formFieldsAI.prompt);
   };
 
   useEffect(() => {
@@ -165,12 +248,15 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
           ) : (
             <>
               <SelectDescription
-                onChange={setValue}
-                type={channelData.description}
+                onChange={setValueAI}
+                type={channelData.prompt}
                 title={"catalog.ai.title"}
                 placeholder={"catalog.ai.default_input"}
               />
-              <AiFilter onChange={getAIRecommendationCards} />
+              <AiFilter
+                isLoading={isLoadingAIParameters}
+                onChange={handleAIClick}
+              />
             </>
           )}
           {recommendationCards ? (

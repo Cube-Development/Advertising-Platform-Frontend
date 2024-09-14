@@ -1,10 +1,10 @@
-import { IReviewData } from "@entities/channel/types";
+import { IReviewCard } from "@entities/channel";
 import { RatingIcon } from "@shared/assets";
 import { FC } from "react";
 import styles from "./styles.module.scss";
 
 interface ReviewProps {
-  card: IReviewData;
+  card: IReviewCard;
 }
 
 export const ReviewCard: FC<ReviewProps> = ({ card }) => {

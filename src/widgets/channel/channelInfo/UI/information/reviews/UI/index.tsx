@@ -1,60 +1,65 @@
 import {
-  IReviewData,
+  getReviewsByIdReq,
+  IReadChannelData,
   Rate,
   ratingData,
   ReviewCard,
   SkeletonChannelRate,
   SkeletonReviewCard,
+  useGetReviewsByIdQuery,
 } from "@entities/channel";
-import {
-  INTERSECTION_ELEMENTS,
-  PAGE_ANIMATION,
-  RATING,
-  REVIEWS,
-  REVIEWSBYRATE,
-} from "@shared/config";
+import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
 import { ShowMoreBtn } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { useParams } from "react-router-dom";
 import styles from "./styles.module.scss";
 
 interface ReviewsProps {
+  card: IReadChannelData;
   isLoadingReviews: boolean;
 }
 
-export const Reviews: FC<ReviewsProps> = ({ isLoadingReviews }) => {
+export const Reviews: FC<ReviewsProps> = ({ card, isLoadingReviews }) => {
   const { t } = useTranslation();
   const [activeType, setActiveType] = useState<ratingData | null>(null);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [isLoading, setIsLoading] = useState(false);
-  const [currentRev, setCurrentRev] = useState<IReviewData[]>(REVIEWS);
-  const [reviews, setReviews] = useState<IReviewData[]>(
-    currentRev.slice(0, INTERSECTION_ELEMENTS.channelReview),
-  );
-
-  useEffect(() => {
-    setReviews(
-      currentRev.slice(0, currentPage * INTERSECTION_ELEMENTS.channelReview),
-    );
-  }, [currentRev, currentPage]);
+  const [currentLast, setCurrentLast] = useState<string | null>(null);
 
   const handleChangeActiveType = (id: ratingData) => {
     setActiveType(activeType !== id ? id : null);
-    setCurrentPage(1);
-    setCurrentRev(activeType !== id ? REVIEWSBYRATE[id] : REVIEWS);
+    setCurrentLast(null);
+    resetField("last");
+    if (activeType !== id) {
+      setValue("grade_filter", id);
+    } else {
+      resetField("grade_filter");
+    }
   };
 
   const handleOnChangePage = () => {
-    const newPage = currentPage + 1;
-    setIsLoading(true);
-    setTimeout(() => {
-      setCurrentPage(newPage);
-      setIsLoading(false);
-    }, 500);
+    setValue("last", currentLast!);
   };
 
-  const rate = RATING;
+  const { id: channel_id } = useParams<{ id: string }>();
+  const { watch, reset, setValue, getValues, resetField } =
+    useForm<getReviewsByIdReq>({
+      defaultValues: {
+        channel_id: channel_id,
+      },
+    });
+  const formFields = watch();
+
+  const { data: reviews, isLoading } = useGetReviewsByIdQuery({
+    ...formFields,
+  });
+
+  useEffect(() => {
+    const [lastElement] = (reviews?.reviews || [])?.slice(-1);
+    const last = lastElement?.full_created;
+    setCurrentLast(last);
+  }, [reviews]);
 
   return (
     <div className={styles.wrapper}>
@@ -67,13 +72,13 @@ export const Reviews: FC<ReviewsProps> = ({ isLoadingReviews }) => {
             variants={PAGE_ANIMATION.animationLeft}
           >
             <Rate
-              rating={rate}
+              card={card}
               activeType={activeType}
               onChange={handleChangeActiveType}
             />
           </motion.div>
           <div className={styles.reviews__wrapper}>
-            {reviews.map((review, index) => (
+            {(reviews?.reviews || []).map((review, index) => (
               <motion.div
                 key={review.date + review.email + index} // заменить на review.id когда будет апи
                 initial="hidden"
@@ -88,7 +93,7 @@ export const Reviews: FC<ReviewsProps> = ({ isLoadingReviews }) => {
               Array.from({ length: INTERSECTION_ELEMENTS.channelReview }).map(
                 (_, index) => <SkeletonReviewCard key={index} />,
               )}
-            {reviews.length < currentRev.length && (
+            {reviews?.isLast && (
               <div className={styles.show_more} onClick={handleOnChangePage}>
                 <ShowMoreBtn />
               </div>

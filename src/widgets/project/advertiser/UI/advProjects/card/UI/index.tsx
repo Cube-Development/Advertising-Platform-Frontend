@@ -29,7 +29,11 @@ import {
   SearchIcon,
   WaitIcon,
 } from "@shared/assets";
-import { Languages, accordionTypes } from "@shared/config";
+import {
+  Languages,
+  MY_PROJECT_ACTIVE_SUBCARD,
+  accordionTypes,
+} from "@shared/config";
 import {
   AccordionContent,
   AccordionItem,
@@ -74,7 +78,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
       skip: !isSubcardOpen || typeFilter !== projectTypesFilter.managerProject,
     });
 
-  // const subcards = card.subcard!;
+  const subcards = MY_PROJECT_ACTIVE_SUBCARD;
   const handleChangeOpenSubcard = (): void => {
     setSubcardOpen(!isSubcardOpen);
   };
@@ -112,10 +116,10 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
           <div className={styles.card__description__data}>
             <div className={styles.card__description__data__title}>
               <p>{card.name}</p>
-              <span>{card?.tarif}</span>
+              <span>№{card?.identifier}</span>
             </div>
             <div className={styles.card__description__data__date}>
-              {/* <span>№{card?.id}</span> */}
+              <span>{card?.tarif}</span>
               <span>{card?.created}</span>
             </div>
           </div>
@@ -163,23 +167,23 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
               </div>
             ) : (
               <div className={styles.card__info__icons}>
-                <div>
+                <div className={styles.item__full}>
                   <CompliteIcon />
                   <p>{card?.completed?.toLocaleString()}</p>
                 </div>
-                <div>
+                <div className={styles.item__left}>
                   <CancelIcon />
                   <p>{card?.canceled_rejected?.toLocaleString()}</p>
                 </div>
-                <div>
+                <div className={styles.item__right}>
                   <WaitIcon />
                   <p>{card?.wait?.toLocaleString()}</p>
                 </div>
-                <div>
+                <div className={styles.item__left}>
                   <RocketIcon />
                   <p>{card?.in_progress?.toLocaleString()}</p>
                 </div>
-                <div>
+                <div className={styles.item__right}>
                   <SearchIcon />
                   <p>{card?.moderation?.toLocaleString()}</p>
                 </div>
@@ -215,23 +219,25 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
       >
         <AccordionContent>
           <div className={`${styles.subcard} `}>
-            {(subcardsSelf?.orders || subcardsManager?.orders)?.map(
-              (subcard, index) => (
-                <AdvSubcard
-                  key={index}
-                  subcard={subcard}
-                  FeedbackBtn={Feedback}
-                  AcceptBtn={AcceptPost}
-                  RejectBtn={RejectPost}
-                  CheckBtn={CheckPost}
-                  SeeBtn={SeePost}
-                  ChannelChatBtn={OrderChat}
-                  ChangeChannelBtn={ChangeChannel}
-                  typeFilter={typeFilter}
-                  statusFilter={statusFilter}
-                />
-              ),
-            )}
+            {(
+              subcards?.orders ||
+              subcardsSelf?.orders ||
+              subcardsManager?.orders
+            )?.map((subcard, index) => (
+              <AdvSubcard
+                key={index}
+                subcard={subcard}
+                FeedbackBtn={Feedback}
+                AcceptBtn={AcceptPost}
+                RejectBtn={RejectPost}
+                CheckBtn={CheckPost}
+                SeeBtn={SeePost}
+                ChannelChatBtn={OrderChat}
+                ChangeChannelBtn={ChangeChannel}
+                typeFilter={typeFilter}
+                statusFilter={statusFilter}
+              />
+            ))}
           </div>
         </AccordionContent>
         <AccordionTrigger onClick={() => handleChangeOpenSubcard()}>

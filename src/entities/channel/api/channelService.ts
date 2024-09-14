@@ -1,15 +1,16 @@
-import { BLOGGER_CHANNELS, authApi } from "@shared/api";
-import { INTERSECTION_ELEMENTS, languagesNum } from "@shared/config";
-import { platformTypesNum } from "@entities/platform";
 import {
   IAddChannelData,
   IAddChannelIdentification,
   IChannelBlogger,
   IEditChannelData,
   IReadChannelData,
+  IReviewData,
   channelStatus,
   channelStatusFilter,
 } from "@entities/channel";
+import { platformTypesNum } from "@entities/platform";
+import { BLOGGER_CHANNELS, authApi } from "@shared/api";
+import { INTERSECTION_ELEMENTS, languagesNum } from "@shared/config";
 
 export interface getChannelsByStatusReq {
   platform: platformTypesNum;
@@ -18,6 +19,13 @@ export interface getChannelsByStatusReq {
   date_sort: string;
   elements_on_page?: number;
   status: channelStatusFilter | string;
+}
+
+export interface getReviewsByIdReq {
+  channel_id: string;
+  grade_filter?: number;
+  last: string;
+  elements_on_page: number;
 }
 
 export const channelAPI = authApi.injectEndpoints({
@@ -80,10 +88,34 @@ export const channelAPI = authApi.injectEndpoints({
       { channel_id: string; language: languagesNum }
     >({
       query: (params) => ({
-        url: "/channel/",
+        url: "/channel-page/",
         method: "GET",
         params: params,
       }),
+    }),
+    getReviewsById: build.query<IReviewData, getReviewsByIdReq>({
+      query: (params) => ({
+        url: "/channel-page/reviews",
+        method: "GET",
+        params: params,
+      }),
+      transformResponse: (response: IReviewData) => {
+        return {
+          ...response,
+          isLast:
+            response.reviews.length !== INTERSECTION_ELEMENTS.channelReview,
+        };
+      },
+      serializeQueryArgs: ({ endpointName }) => {
+        return endpointName;
+      },
+      merge: (currentCache, newItems) => {
+        return {
+          ...newItems,
+          reviews: [...currentCache.reviews, ...newItems.reviews],
+          isLast: newItems.reviews.length !== INTERSECTION_ELEMENTS.myChannels,
+        };
+      },
     }),
     activateChannel: build.mutation<void, string>({
       query: (channel_id) => ({
@@ -138,5 +170,6 @@ export const {
   useEditChannelMutation,
   useDeleteChannelMutation,
   useGetChannelByIdQuery,
+  useGetReviewsByIdQuery,
   useAddReviewMutation,
 } = channelAPI;
