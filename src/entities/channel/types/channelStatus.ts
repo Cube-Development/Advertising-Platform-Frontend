@@ -92,6 +92,7 @@ export interface IModerationRejectChannel {
   avatar: string;
   rejected_date: string;
   reapplication_date: string;
+  reason: string;
 }
 
 //
@@ -107,4 +108,5 @@ export interface IBlockedChannel {
   category: string;
   avatar: string;
   blocked_date: string;
+  reason: string;
 }

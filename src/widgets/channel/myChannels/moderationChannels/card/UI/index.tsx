@@ -17,16 +17,22 @@ export const ModChannelCard: FC<ModChannelCardProps> = ({ card }) => {
           <img src={card?.avatar} alt="" />
         </div>
         <div className={styles.card__preview__description}>
-          <p className="truncate">{card?.name}</p>
-          <span className="truncate">{card?.category}</span>
+          <p>{card?.name}</p>
+          <span>{card?.category}</span>
         </div>
       </div>
       <div className={styles.card__date}>
-        {/* <p>{card.created}</p> */}
-        <p>222222</p>
+        <span>{t("platforms_blogger.created")}:</span>
+        <p>{card?.created}</p>
       </div>
       <div className={styles.card__status}>
-        <p>{t(`platforms_blogger.card.status.moderation`)}</p>
+        <p className="truncate">
+          {t(`platforms_blogger.card.status.moderation`)}
+        </p>
+      </div>
+      <div className={styles.card__date__mobile}>
+        <span>{t("platforms_blogger.created")}:</span>
+        <p>{card?.created}</p>
       </div>
       <div className={styles.card__info}>
         <p>{t(`platforms_blogger.moderation_time`)}</p>

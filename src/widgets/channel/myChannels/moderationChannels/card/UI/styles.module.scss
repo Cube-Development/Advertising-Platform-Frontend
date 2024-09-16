@@ -1,0 +1,213 @@
+.card {
+  display: grid;
+  grid-template: 1fr / 3.5fr 1.5fr 4.5fr 6fr;
+  padding: 10px 20px;
+  align-items: center;
+
+  @media (max-width: 992px) {
+    grid-template: 1fr 0.5fr / 3.5fr 1.5fr 4.5fr;
+    row-gap: 20px;
+    padding: 20px;
+  }
+
+  @media (max-width: 576px) {
+    grid-template: 1fr auto auto auto / 1fr;
+    justify-items: center;
+    row-gap: 10px;
+  }
+
+  &__preview {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    column-gap: 20px;
+    padding-right: 20px;
+
+    @media (max-width: 992px) {
+      column-gap: 15px;
+    }
+
+    @media (max-width: 576px) {
+      padding-right: 0px;
+      justify-self: start;
+    }
+
+    &__description {
+      display: grid;
+      grid-auto-flow: row;
+      row-gap: 10px;
+      text-align: left;
+
+      @media (max-width: 576px) {
+        row-gap: 5px;
+      }
+
+      p {
+        color: var(--Personal-colors-black);
+        font-size: 16px;
+        font-weight: 600;
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        -webkit-line-clamp: 1;
+
+        @media (max-width: 576px) {
+          font-weight: 500;
+        }
+      }
+
+      span {
+        color: rgba(0, 0, 0, 0.6);
+        font-size: 12px;
+        font-weight: 500;
+      }
+    }
+
+    &__logo {
+      display: grid;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      border: 0.5px solid var(--Personal-colors-main);
+      border-radius: 50%;
+      overflow: hidden;
+
+      @media (max-width: 992px) {
+        width: 50px;
+        height: 50px;
+      }
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+
+  &__date {
+    display: none;
+
+    @media (min-width: 577px) {
+      display: grid;
+      grid-auto-flow: row;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--Personal-colors-black);
+      border-right: 1px solid var(--Card-separator);
+      border-left: 1px solid var(--Card-separator);
+      padding-left: 20px;
+      padding-right: 20px;
+      height: 100%;
+    }
+
+    span {
+      font-size: 12px;
+      color: #909090;
+      font-weight: 400;
+    }
+
+    p {
+      font-weight: 500;
+      font-size: 14px;
+      white-space: nowrap;
+    }
+  }
+
+  &__date__mobile {
+    display: none;
+
+    @media (max-width: 576px) {
+      display: grid;
+      justify-content: space-between;
+      align-items: center;
+      color: var(--Personal-colors-black);
+      padding-left: 20px;
+      padding-right: 20px;
+      grid-auto-flow: column;
+      width: 100%;
+      background: rgba(221, 221, 221, 0.3);
+      height: auto;
+      padding: 10px 12px;
+      border-radius: 12px;
+    }
+
+    span {
+      font-size: 12px;
+      color: #909090;
+      font-weight: 400;
+
+      @media (max-width: 576px) {
+        font-size: 14px;
+      }
+    }
+
+    p {
+      font-weight: 500;
+      font-size: 14px;
+      white-space: nowrap;
+
+      @media (max-width: 576px) {
+        font-size: 14px;
+      }
+    }
+  }
+
+  &__status {
+    display: grid;
+    grid-auto-flow: row;
+    margin-left: 20px;
+
+    @media (max-width: 576px) {
+      margin-left: 0px;
+      width: 100%;
+      padding-top: 10px;
+      border-top: 1px solid var(--Card-separator);
+    }
+
+    p {
+      display: grid;
+      align-items: center;
+      justify-content: center;
+      border-radius: 12px;
+      background: rgba(15, 105, 201, 0.1);
+      padding: 20px 10px;
+      font-weight: 500;
+
+      color: var(--Personal-colors-black);
+      font-size: 18px;
+
+      @media (max-width: 768px) {
+        font-size: 16px;
+      }
+    }
+  }
+
+  &__info {
+    color: var(--Personal-colors-black);
+    font-size: 14px;
+    font-weight: 500;
+    margin-left: 20px;
+
+    @media (max-width: 992px) {
+      margin-left: 0px;
+    }
+
+    @media (max-width: 576px) {
+      padding: 10px 10px 0px 10px;
+    }
+
+    @media (min-width: 577px) and (max-width: 992px) {
+      grid-column: 1 / 4;
+      padding: 20px 0px 0px 0px;
+      border-top: none;
+      border-top: 1px solid var(--Card-separator);
+    }
+
+    p {
+      text-align: center;
+    }
+  }
+}

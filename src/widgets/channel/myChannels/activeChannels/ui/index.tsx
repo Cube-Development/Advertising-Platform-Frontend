@@ -3,7 +3,7 @@ import { offerStatusFilter } from "@entities/offer";
 import { AddChannel, ZeroChannel } from "@features/channel";
 import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
 import { pageFilter } from "@shared/routing";
-import { Accordion, ShowMoreBtn, SpinnerLoader } from "@shared/ui";
+import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC } from "react";
 import { ChannelCard, ChannelCardSkeleton } from "../card";
@@ -25,7 +25,7 @@ export const ActiveChannels: FC<ActiveChannelsProps> = ({
   statusFilter,
 }) => {
   return (
-    <Accordion type="single" collapsible className={styles.wrapper}>
+    <div className={styles.wrapper}>
       {!isLoading && cards?.length === 0 ? (
         <ZeroChannel
           statusFilter={statusFilter}
@@ -56,6 +56,6 @@ export const ActiveChannels: FC<ActiveChannelsProps> = ({
           )}
         </div>
       )}
-    </Accordion>
+    </div>
   );
 };

@@ -1,9 +1,4 @@
-import {
-  IModerationChannel,
-  ModChannelCard,
-  ModChannelCardSkeleton,
-  channelStatusFilter,
-} from "@entities/channel";
+import { IModerationChannel, channelStatusFilter } from "@entities/channel";
 import { offerStatusFilter } from "@entities/offer";
 import { AddChannel, ZeroChannel } from "@features/channel";
 import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
@@ -12,6 +7,7 @@ import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC } from "react";
 import styles from "./styles.module.scss";
+import { ModChannelCard, ModChannelCardSkeleton } from "../card";
 
 interface ModerationChannelsProps {
   cards: IModerationChannel[];

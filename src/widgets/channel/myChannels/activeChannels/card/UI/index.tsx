@@ -1,5 +1,4 @@
 import {
-  ArrowSmallVerticalIcon,
   CancelIcon,
   CompliteIcon,
   FeatherIcon,
@@ -7,15 +6,13 @@ import {
   RatingIcon,
   RocketIcon,
   StarIcon4,
-  WaitIcon,
 } from "@shared/assets";
-import { FC, useEffect, useRef, useState } from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import {
   ActivateChannel,
   ChannelCardMenu,
-  ChannelDescription,
   DeactivateChannel,
   DeleteChannel,
   RepeatModeration,
@@ -32,15 +29,11 @@ import {
   channelStatusFilter,
   useActivateChannelMutation,
 } from "@entities/channel";
-import {
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-  ToastAction,
-  useToast,
-} from "@shared/ui";
-import { accordionTypes } from "@shared/config";
+import { ToastAction, useToast } from "@shared/ui";
 import { offerStatusFilter } from "@entities/offer";
+import { Link } from "react-router-dom";
+import { paths } from "@shared/routing";
+import { Cog } from "lucide-react";
 
 interface ChannelCardProps {
   card:
@@ -55,7 +48,6 @@ interface ChannelCardProps {
 export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
   const { toast } = useToast();
   const { t } = useTranslation();
-  const [isSubcardOpen, setSubcardOpen] = useState(false);
 
   function getRandomValues() {
     // Предположим, что здесь получаются произвольные значения
@@ -87,59 +79,58 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
       });
   };
 
-  const accordionRef = useRef(null);
-
-  const handleClickOutside = () => {
-    const state = (accordionRef.current! as HTMLElement).getAttribute(
-      "data-state",
-    );
-    state === accordionTypes.open
-      ? setSubcardOpen(true)
-      : setSubcardOpen(false);
-  };
-
-  useEffect(() => {
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
-
   return (
     <div className={`${styles.wrapper} border__gradient`}>
       <div className={styles.card}>
-        <div className={styles.card__logo}>
-          <div className={styles.logo}>
-            <div className={styles.logo__img_wrapper}>
-              <img src={card.avatar} alt="" />
-            </div>
-            {statusFilter === channelStatusFilter.active ||
-            statusFilter === channelStatusFilter.inactive ? (
-              <RatingIcon />
-            ) : (
-              <></>
-            )}
-          </div>
-        </div>
-        <div className={`${styles.card__description} truncate`}>
-          <div className={styles.card__description__top}>
-            <div className={styles.card__description__top__text}>
-              <p className="truncate">{card?.name}</p>
-              <span className="truncate">{card?.category}</span>
-            </div>
-            <div className={styles.card__description__top__icons}>
-              {statusFilter === channelStatusFilter.banned ? (
-                <p>{(card as IBlockedChannel)?.blocked_date}</p>
+        <div className={styles.card__base}>
+          <div className={styles.card__logo}>
+            <div className={styles.logo}>
+              <div className={styles.logo__img_wrapper}>
+                <img src={card.avatar} alt="" />
+              </div>
+              {statusFilter === channelStatusFilter.active ||
+              statusFilter === channelStatusFilter.inactive ? (
+                <RatingIcon />
               ) : (
-                <div>
-                  {author && <FeatherIcon />}
-                  {verified && <ProtectIcon2 />}
-                  {partner && <StarIcon4 />}
-                </div>
+                <></>
               )}
             </div>
           </div>
-          <div className={styles.status}>
+          <div className={`${styles.card__description} truncate`}>
+            <div className={styles.card__description__top}>
+              <div className={styles.card__description__top__text}>
+                <p className="truncate">{card?.name}</p>
+                <span className="truncate">{card?.category}</span>
+              </div>
+              <div className={styles.card__description__top__icons}>
+                {statusFilter === channelStatusFilter.banned ? (
+                  <p>{(card as IBlockedChannel)?.blocked_date}</p>
+                ) : (
+                  <div>
+                    {author && <FeatherIcon />}
+                    {verified && <ProtectIcon2 />}
+                    {partner && <StarIcon4 />}
+                  </div>
+                )}
+              </div>
+            </div>
+            <div className={styles.status}>
+              <p>
+                {statusFilter === channelStatusFilter.active ? (
+                  t(`platforms_blogger.card.status.active`)
+                ) : statusFilter === channelStatusFilter.moderationReject ? (
+                  t(`platforms_blogger.card.status.reject`)
+                ) : statusFilter === channelStatusFilter.inactive ? (
+                  t(`platforms_blogger.card.status.deactivate`)
+                ) : statusFilter === channelStatusFilter.banned ? (
+                  t(`platforms_blogger.card.status.ban`)
+                ) : (
+                  <></>
+                )}
+              </p>
+            </div>
+          </div>
+          <div className={styles.status_lg}>
             <p>
               {statusFilter === channelStatusFilter.active ? (
                 t(`platforms_blogger.card.status.active`)
@@ -155,12 +146,14 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
             </p>
           </div>
         </div>
-
         <div className={styles.card__info}>
           <>
             {statusFilter === channelStatusFilter.active ? (
               <div className={styles.card__info__offers}>
-                <span></span>
+                <div className={styles.wait_block}>
+                  {t(`platforms_blogger.card.new`)}:{" "}
+                  {(card as IActiveChannel)?.channel_orders?.wait}
+                </div>
                 <SeeOffers />
               </div>
             ) : statusFilter === channelStatusFilter.moderationReject &&
@@ -194,43 +187,43 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
 
           {statusFilter === channelStatusFilter.moderationReject ? (
             <div className={styles.card__info__bottom2}>
-              <SeeReason />
+              <SeeReason reason={(card as IModerationRejectChannel)?.reason} />
               <RepeatModeration />
             </div>
           ) : statusFilter === channelStatusFilter.banned ? (
             <div className={styles.card__info__bottom2}>
-              <SeeReason />
+              <SeeReason reason={(card as IBlockedChannel)?.reason} />
               <Support />
             </div>
           ) : (
             <div className={styles.card__info__bottom}>
+              {statusFilter === channelStatusFilter.active && (
+                <div>
+                  <figure>
+                    <RocketIcon />
+                  </figure>
+                  <p className="truncate">
+                    {(
+                      card as IActiveChannel
+                    )?.channel_orders?.in_progress?.toLocaleString()}
+                  </p>
+                </div>
+              )}
               <div>
-                <RocketIcon />
-                <p>
-                  {(
-                    card as IActiveChannel
-                  )?.channel_orders?.in_progress?.toLocaleString()}
-                </p>
-              </div>
-              <div>
-                <WaitIcon />
-                <p>
-                  {(
-                    card as IActiveChannel
-                  )?.channel_orders?.wait?.toLocaleString()}
-                </p>
-              </div>
-              <div>
-                <CompliteIcon />
-                <p>
+                <figure>
+                  <CompliteIcon />
+                </figure>
+                <p className="truncate">
                   {(
                     card as IActiveChannel
                   )?.channel_orders?.completed?.toLocaleString()}
                 </p>
               </div>
               <div>
-                <CancelIcon />
-                <p>
+                <figure>
+                  <CancelIcon />
+                </figure>
+                <p className="truncate">
                   {(
                     card as IActiveChannel
                   )?.channel_orders?.canceled_rejected?.toLocaleString()}
@@ -240,21 +233,44 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
           )}
         </div>
         <div className={styles.card__more}>
-          <div>
-            <ChannelCardMenu
-              channel_id={card?.id}
-              DeleteChannel={DeleteChannel}
-              DeactivateChannel={DeactivateChannel}
-              statusFilter={statusFilter}
-            />
-          </div>
+          <ChannelCardMenu
+            channel_id={card?.id}
+            DeleteChannel={DeleteChannel}
+            DeactivateChannel={DeactivateChannel}
+            statusFilter={statusFilter}
+          />
         </div>
       </div>
-
-      <AccordionItem value={`item-${card?.id}`} ref={accordionRef}>
-        <AccordionContent>
-          <div className={styles.platform__events}>
-            <ChannelDescription channel_id={card?.id} />
+      {statusFilter === channelStatusFilter.active ? (
+        <div className={styles.platform__events}>
+          <Link
+            to={`${paths.addChannel}?channel_id=${card?.id}`}
+            className={`${styles.edit} truncate`}
+          >
+            <div>
+              <Cog />
+            </div>
+            <p>{t("platform_description.edit_btn")}</p>
+          </Link>
+          <button className="truncate">
+            <p>{t(`platform_btn.calendar`)}</p>
+          </button>
+          <button className="truncate">
+            <p>{t(`platform_btn.reviews`)}</p>
+          </button>
+        </div>
+      ) : (
+        statusFilter === channelStatusFilter.inactive && (
+          <div className={`${styles.platform__events} ${styles.inactive}`}>
+            <Link
+              to={`${paths.addChannel}?channel_id=${card?.id}`}
+              className={`${styles.edit} truncate`}
+            >
+              <div>
+                <Cog />
+              </div>
+              <p>{t("platform_description.edit_btn")}</p>
+            </Link>
             <button className="truncate">
               <p>{t(`platform_btn.calendar`)}</p>
             </button>
@@ -262,23 +278,8 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
               <p>{t(`platform_btn.reviews`)}</p>
             </button>
           </div>
-        </AccordionContent>
-
-        <AccordionTrigger>
-          <div className={styles.card__btn}>
-            {isSubcardOpen
-              ? t(`platforms_blogger.card.see_less`)
-              : t(`platforms_blogger.card.see_more`)}
-            <ArrowSmallVerticalIcon
-              className={
-                isSubcardOpen
-                  ? "icon__white rotate"
-                  : "icon__white rotate__down"
-              }
-            />
-          </div>
-        </AccordionTrigger>
-      </AccordionItem>
+        )
+      )}
     </div>
   );
 };

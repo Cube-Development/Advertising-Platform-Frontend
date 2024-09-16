@@ -6,7 +6,15 @@ import {
 } from "@entities/channel";
 import { offerStatusFilter } from "@entities/offer";
 import { platformTypes, platformTypesNum } from "@entities/platform";
-import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
+import {
+  activeChannelsMock,
+  blockedChannelsMock,
+  inactiveChannelsMock,
+  INTERSECTION_ELEMENTS,
+  Languages,
+  moderationChannelsMock,
+  moderationRejectChannelsMock,
+} from "@shared/config";
 import { pageFilter } from "@shared/routing";
 import { BarFilter } from "@widgets/barFilter";
 import { ActiveChannels, ModerationChannels } from "@widgets/channel";
@@ -43,6 +51,7 @@ export const MyChannelsPage: FC = () => {
     status: formState.status,
   };
 
+  // unmock
   const { data, isFetching } = useGetChannelsByStatusQuery(getParams);
 
   useEffect(() => {
@@ -50,6 +59,21 @@ export const MyChannelsPage: FC = () => {
       setValue("page", 1);
     }, 500);
   }, [platform, status]);
+  // unmock
+
+  // mock
+  // const data =
+  //   formState.status === channelStatusFilter.active
+  //     ? activeChannelsMock
+  //     : formState.status === channelStatusFilter.banned
+  //       ? blockedChannelsMock
+  //       : formState.status === channelStatusFilter.inactive
+  //         ? inactiveChannelsMock
+  //         : formState.status === channelStatusFilter.moderation
+  //           ? moderationChannelsMock
+  //           : moderationRejectChannelsMock;
+  // const isFetching = false;
+  //mock
 
   return (
     <div className="container sidebar">

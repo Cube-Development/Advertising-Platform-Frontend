@@ -66,28 +66,27 @@ export const channelAPI = authApi.injectEndpoints({
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
-        const { status } = queryArgs;
-        return `${endpointName}/${status}`;
+        const { platform, language, date_sort, status } = queryArgs;
+        return `${endpointName}/${platform}/${language}/${date_sort}/${status}`;
       },
-      merge: (currentCache, newItems, arg) => {
+      merge: (currentCache: any, newItems, arg) => {
         if (arg.arg.page === 1) {
           return {
             ...newItems,
-            isLast: newItems.channels.length !== INTERSECTION_ELEMENTS.catalog,
+            isLast:
+              newItems.channels.length !== INTERSECTION_ELEMENTS.myChannels,
           };
         }
-
         return {
-          ...newItems,
-          projects: [...currentCache.channels, ...newItems.channels],
+          ...currentCache,
+          channels: [...currentCache.channels, ...newItems.channels],
           status: arg.arg.status,
           isLast: newItems.channels.length !== INTERSECTION_ELEMENTS.myChannels,
         };
       },
-
-      // forceRefetch({ currentArg, previousArg }) {
-      //   return currentArg?.page !== previousArg?.page;
-      // },
+      forceRefetch: ({ currentArg, previousArg }) => {
+        return currentArg?.page !== previousArg?.page;
+      },
       providesTags: [BLOGGER_CHANNELS],
     }),
     getChannelById: build.query<
@@ -120,7 +119,8 @@ export const channelAPI = authApi.injectEndpoints({
         return {
           ...newItems,
           reviews: [...currentCache.reviews, ...newItems.reviews],
-          isLast: newItems.reviews.length !== INTERSECTION_ELEMENTS.myChannels,
+          isLast:
+            newItems.reviews.length !== INTERSECTION_ELEMENTS.channelReview,
         };
       },
     }),

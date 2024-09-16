@@ -2,7 +2,10 @@
   font-size: var(--font-size-option-item-xl);
   font-style: normal;
   font-weight: 500;
-  text-transform: uppercase;
+
+  @media (max-width: 576px) {
+    font-size: 14px;
+  }
 }
 
 .content {
