@@ -1,6 +1,7 @@
 import { IReviewCard } from "@entities/channel";
 import {
   IAdvManagerProjectsDev,
+  IAdvManagerProjectsDevCard,
   IAdvProjects,
   IAdvSubprojects,
   IFilterSearch,
@@ -979,6 +980,27 @@ export const managerNewCARDS = {
   ],
 };
 
+export const advMyProjectActiveCARDS = {
+  page: 1,
+  elements: 1,
+  projects: [
+    {
+      id: "147c8ee0-7f3e-4c71-9a35-50df6c50c273",
+      identifier: 294600372731,
+      created: "10.09.2024",
+      name: "SEX",
+      count_channels: 0,
+      views: 12,
+      budget: 0.0,
+      remainder: 0.0,
+      completed: 0,
+      canceled_rejected: 0,
+      wait: 0,
+      in_progress: 0,
+      moderation: 0,
+    },
+  ],
+};
 // export const advMyProjectActiveCARDS: IAdvProjects = {
 //   page: 1,
 //   elements: 1,
@@ -2097,7 +2119,8 @@ export const MY_PROJECT_ACTIVE_SUBCARD: IAdvSubprojects = {
       date_coming: "2024-09-05",
       name: "Аренда авто",
       category: "Аренда авто",
-      avatar: "https://example.com/rental_car.jpg",
+      avatar:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
       api_status: 9,
       order_status: "Завершён",
       publish_date: {
@@ -2127,7 +2150,8 @@ export const MY_PROJECT_ACTIVE_SUBCARD: IAdvSubprojects = {
       date_coming: "2024-09-15",
       name: "Суперкар для аренды",
       category: "Авто, мото",
-      avatar: "https://example.com/car.jpg",
+      avatar:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
       api_status: 2,
       order_status: "В ожидании",
       publish_date: {
@@ -2157,7 +2181,8 @@ export const MY_PROJECT_ACTIVE_SUBCARD: IAdvSubprojects = {
       date_coming: "2024-09-12",
       name: "Модная электроника",
       category: "Автомобильная электроника",
-      avatar: "https://example.com/electronics.jpg",
+      avatar:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
       api_status: 4,
       order_status: "Опубликован",
       publish_date: {
@@ -2187,7 +2212,8 @@ export const MY_PROJECT_ACTIVE_SUBCARD: IAdvSubprojects = {
       date_coming: "2024-09-10",
       name: "Аренда недвижимости",
       category: "Аренда недвижимости",
-      avatar: "https://example.com/realestate.jpg",
+      avatar:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
       api_status: 5,
       order_status: "Завершён",
       publish_date: {
@@ -2217,7 +2243,8 @@ export const MY_PROJECT_ACTIVE_SUBCARD: IAdvSubprojects = {
       date_coming: "2024-09-15",
       name: "Суперкар для аренды",
       category: "Авто, мото",
-      avatar: "https://example.com/car.jpg",
+      avatar:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
       api_status: 3,
       order_status: "В ожидании",
       publish_date: {
@@ -2248,7 +2275,8 @@ export const MY_PROJECT_ACTIVE_SUBCARD: IAdvSubprojects = {
       date_coming: "2024-09-15",
       name: "Суперкар для аренды",
       category: "Авто, мото",
-      avatar: "https://example.com/car.jpg",
+      avatar:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
       api_status: 1,
       order_status: "В ожидании",
       publish_date: {
@@ -2279,7 +2307,8 @@ export const MY_PROJECT_ACTIVE_SUBCARD: IAdvSubprojects = {
       date_coming: "2024-09-05",
       name: "Аренда авто",
       category: "Аренда авто",
-      avatar: "https://example.com/rental_car.jpg",
+      avatar:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
       api_status: 10,
       order_status: "Завершён",
       publish_date: {
@@ -2302,6 +2331,43 @@ export const MY_PROJECT_ACTIVE_SUBCARD: IAdvSubprojects = {
       female: 35,
       er: 4.7,
       cpv: 0.06,
+    },
+  ],
+};
+
+export const MY_PROJECT_SAVE_SUBCARD: IAdvManagerProjectsDev = {
+  page: 1,
+  elements: 6,
+  projects: [
+    {
+      id: "1",
+      created: "2024-09-01",
+      name: "Campaign Alpha",
+      budget: 50000,
+    },
+    {
+      id: "2",
+      created: "2024-08-20",
+      name: "Campaign Beta",
+      budget: 75000,
+    },
+    {
+      id: "3",
+      created: "2024-07-15",
+      name: "Campaign Gamma",
+      budget: 60000,
+    },
+    {
+      id: "4",
+      created: "2024-09-05",
+      name: "Campaign Delta",
+      budget: 80000,
+    },
+    {
+      id: "5",
+      created: "2024-08-10",
+      name: "Campaign Epsilon",
+      budget: 45000,
     },
   ],
 };

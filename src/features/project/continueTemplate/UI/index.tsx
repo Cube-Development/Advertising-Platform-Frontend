@@ -7,9 +7,9 @@ import styles from "./styles.module.scss";
 export const ContinueTemplate: FC = () => {
   const { t } = useTranslation();
   return (
-    <MyButton buttons_type="button__white" className={styles.button}>
+    <MyButton className={styles.button}>
       {t(`order_btn.continue`)}
-      <ArrowLongHorizontalIcon className="active__icon" />
+      <ArrowLongHorizontalIcon className="icon__white" />
     </MyButton>
   );
 };

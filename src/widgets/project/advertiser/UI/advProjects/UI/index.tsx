@@ -46,6 +46,7 @@ export const AdvProjectsList: FC<AdvProjectsListProps> = ({
               animate="visible"
               custom={index % INTERSECTION_ELEMENTS.advOrders}
               variants={PAGE_ANIMATION.animationUp}
+              className={styles.motion}
             >
               <AdvProjectCard
                 statusFilter={statusFilter}
@@ -55,7 +56,7 @@ export const AdvProjectsList: FC<AdvProjectsListProps> = ({
               />
             </motion.div>
           ))}
-          {isLoading &&
+          {!isLoading &&
             Array.from({ length: INTERSECTION_ELEMENTS.advOrders }).map(
               (_, index) => (
                 <ProjectCardSkeleton

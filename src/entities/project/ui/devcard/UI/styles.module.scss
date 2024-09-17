@@ -1,7 +1,8 @@
 .card {
   display: grid;
-  grid-template: 1fr / 2fr 2fr 2fr 3.5fr;
-  padding: 10px 30px;
+  // grid-template: 1fr / 2fr 2fr 2fr 3.5fr 0.5fr;
+  grid-template: 1fr / 3fr 3fr 3fr 3fr 1fr;
+  padding: 10px 15px;
   height: 80px;
 
   &__title {
@@ -12,12 +13,13 @@
     border-right: 1px solid var(--Card-separator);
     padding-right: 20px;
     align-items: center;
+    align-content: center;
 
     p {
       font-size: 18px;
       font-style: normal;
       font-weight: 600;
-      line-height: normal;
+      line-height: 1;
       color: var(--Personal-colors-black);
     }
 
@@ -33,7 +35,7 @@
         font-size: 12px;
         font-style: normal;
         font-weight: 500;
-        line-height: normal;
+        line-height: 1;
       }
     }
   }
@@ -90,5 +92,12 @@
       align-items: center;
       text-align: center;
     }
+  }
+
+  &__more {
+    display: grid;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
   }
 }

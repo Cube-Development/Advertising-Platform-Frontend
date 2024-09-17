@@ -19,7 +19,7 @@ export const enum INTERSECTION_ELEMENTS {
 export const enum BREAKPOINT {
   XL = 1366,
   LG = 992,
-  MD = 769,
+  MD = 768,
   SM = 576,
   XS = 375,
   HEADER_NAVBAR_VISIBLE = 1250,

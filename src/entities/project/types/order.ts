@@ -1,3 +1,5 @@
+import { roles } from "@entities/user";
+
 export interface IOrderFeature {
   order_id?: string;
   date?: string;
@@ -9,5 +11,6 @@ export interface IOrderFeature {
 }
 
 export interface IChannelChat {
-  id: number;
+  id: string;
+  toRole?: roles;
 }

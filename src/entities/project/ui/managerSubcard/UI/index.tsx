@@ -245,7 +245,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
         <div
           className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : "deactive"}`}
         >
-          <ChannelChatBtn id={1} />
+          <ChannelChatBtn id={"1"} />
         </div>
       )}
     </div>

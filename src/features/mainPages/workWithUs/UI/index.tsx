@@ -1,14 +1,13 @@
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-
+import { PAGE_ANIMATION } from "@shared/config/animation";
+import { motion } from "framer-motion";
 import SwiperCore from "swiper";
 import "swiper/css";
 import "swiper/css/autoplay";
 import { Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./styles.module.scss";
-import { PAGE_ANIMATION } from "@shared/config/animation";
-import { motion } from "framer-motion";
 
 interface WorkWithUsProps {
   page: string;

@@ -13,7 +13,8 @@ export const TurnkeyProject: FC<IStartProjectProps> = ({ listLength }) => {
   return (
     <Link to={paths.turnkey}>
       <MyButton
-        buttons_type={listLength ? "button__white" : "button__orange"}
+        // buttons_type={listLength ? "button__white" : "button__orange"}
+        buttons_type={"button__orange"}
         className={styles.button}
       >
         {listLength

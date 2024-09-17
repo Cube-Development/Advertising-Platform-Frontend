@@ -76,6 +76,7 @@ export { StarIcon } from "./star";
 export { StarIcon2 } from "./star2";
 export { StarIcon3 } from "./star3";
 export { StarIcon4 } from "./star4";
+export { StarIcon5 } from "./star5";
 export { SubsIcon } from "./subs";
 export { TelegramIcon } from "./telegram";
 export { TemplateIcon } from "./template";

@@ -1,4 +1,4 @@
-import { TemplateIcon2 } from "@shared/assets";
+import { MoreIcon, TemplateIcon2 } from "@shared/assets";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -54,6 +54,11 @@ export const AdvDevProjectCard: FC<AdvDevProjectCardProps> = ({
       ) : (
         <div className={styles.card__status}>fffff</div>
       )}
+      <div className={styles.card__more}>
+        <button>
+          <MoreIcon />
+        </button>
+      </div>
     </div>
   );
 };

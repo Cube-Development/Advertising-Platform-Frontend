@@ -33,8 +33,8 @@ export const BarTop: FC<BarTopProps> = ({
             <p className="truncate">{t(`orders_advertiser.my_campaign`)}</p>
             {listLength && (
               <div>
-                {<NewProjectBtn listLength={listLength} />}
                 {<TurnkeyProjectBtn listLength={listLength} />}
+                {<NewProjectBtn listLength={listLength} />}
               </div>
             )}
           </>

@@ -1,4 +1,4 @@
-import { StarIcon3, SadSmileIcon } from "@shared/assets";
+import { StarIcon5, SadSmileIcon } from "@shared/assets";
 import { IStartProjectProps } from "@shared/types/common";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -26,7 +26,7 @@ export const ZeroProject: FC<ZeroProjectProps> = ({
         {typeFilter === projectTypesFilter.savedProject ? (
           <>
             <div>
-              <StarIcon3 />
+              <StarIcon5 />
             </div>
             <p>{t(`orders_advertiser.no_template`)}</p>
           </>
