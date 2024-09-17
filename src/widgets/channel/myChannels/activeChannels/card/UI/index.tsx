@@ -255,9 +255,12 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
           <button className="truncate">
             <p>{t(`platform_btn.calendar`)}</p>
           </button>
-          <button className="truncate">
+          <Link
+            to={`${paths.channel.replace(":id", card?.id)}`}
+            className={`${styles.edit} truncate`}
+          >
             <p>{t(`platform_btn.reviews`)}</p>
-          </button>
+          </Link>
         </div>
       ) : (
         statusFilter === channelStatusFilter.inactive && (
@@ -274,9 +277,12 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
             <button className="truncate">
               <p>{t(`platform_btn.calendar`)}</p>
             </button>
-            <button className="truncate">
+            <Link
+              to={`${paths.channel.replace(":id", card?.id)}`}
+              className={`${styles.edit} truncate`}
+            >
               <p>{t(`platform_btn.reviews`)}</p>
-            </button>
+            </Link>
           </div>
         )
       )}

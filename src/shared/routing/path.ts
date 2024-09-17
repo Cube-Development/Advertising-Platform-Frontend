@@ -6,6 +6,7 @@ export enum paths {
   catalog = "/catalog",
   cart = "/cart",
   turnkey = "/turnkey",
+  wallet = "/wallet",
   walletTopUp = "/wallet/topup",
   walletWithdraw = "/wallet/withdraw",
   wallethistory = "/wallet/history",
