@@ -1,25 +1,54 @@
 .wrapper {
   display: grid;
-  grid-template: 5fr 1fr / 1fr;
+  grid-template: 4fr 1fr / 1fr;
   row-gap: 20px;
-  min-height: 210px;
+  min-height: 230px;
+
+  @media (max-width: 768px) {
+    height: 500px;
+    row-gap: 15px;
+    grid-template: 1fr 32px / 1fr;
+  }
 
   .card {
     display: grid;
     grid-template: 1fr / 7.5fr 12fr 1.4fr;
     padding-top: 20px;
 
+    @media (max-width: 768px) {
+      grid-template: 0.8fr 2fr/ 1fr;
+      row-gap: 15px;
+
+      &.manager_chat {
+        grid-template: 1fr 0.4fr 2fr / 1fr;
+
+        .card__info {
+          @media (max-width: 768px) {
+            grid-template: 1fr 1.2fr / 1fr;
+          }
+        }
+      }
+    }
+
+    .chat__btn {
+      margin: 0 15px;
+    }
+
     &__description {
       display: grid;
-      grid-template: 2fr 3fr / 1fr;
+      grid-template: 1.5fr 2.5fr / 1fr;
       row-gap: 10px;
       padding: 0 20px 0 30px;
+
+      @media (max-width: 992px) {
+        padding: 0 15px;
+      }
 
       &__data {
         display: grid;
         grid-auto-flow: column;
         justify-content: space-between;
-        padding: 10px 0;
+        padding-bottom: 10px;
 
         &__title {
           display: grid;
@@ -37,26 +66,120 @@
 
     &__info {
       display: grid;
-      grid-template: 1.2fr 1fr / 1fr;
-      row-gap: 20px;
+      grid-template: repeat(2, 1fr) / 1fr;
+      row-gap: 40px;
       padding: 0 20px;
+
+      @media (max-width: 992px) {
+        grid-template: 1fr / repeat(2, 1fr);
+        column-gap: 40px;
+        padding: 0 15px;
+      }
+
+      @media (max-width: 768px) {
+        grid-template: 1fr 1.8fr / 1fr;
+        row-gap: 15px;
+      }
 
       &__data {
         display: grid;
-        grid-template: 1fr / 3fr 4fr 2fr;
+        grid-template: 1fr / repeat(3, 1fr);
+        column-gap: 10px;
         align-items: center;
+
+        @media (max-width: 992px) {
+          grid-template: repeat(3, 1fr) / 1fr;
+          row-gap: 5px;
+        }
       }
 
       &__icons {
         display: grid;
-        grid-template: 1fr / 1fr 1fr 1fr 1fr 1fr;
+        grid-template: 1fr / repeat(5, 1fr);
         column-gap: 20px;
+
+        @media (max-width: 992px) {
+          padding-top: 0;
+          grid-template: repeat(3, 1fr) / repeat(2, 1fr);
+          grid-gap: 5px;
+
+          .item {
+            &__full {
+              grid-column: 1 / -1;
+            }
+
+            &__left {
+              grid-column: 1;
+            }
+
+            &__right {
+              grid-column: 2;
+            }
+          }
+        }
+
+        @media (max-width: 768px) {
+          padding-left: 0;
+        }
+      }
+
+      &__icons_manager_request_approve {
+        display: grid;
+        grid-template: 1fr / repeat(2, 1fr);
+        column-gap: 10px;
+
+        div {
+          display: grid;
+          grid-auto-flow: row;
+          row-gap: 5px;
+          align-content: center;
+          justify-items: center;
+        }
+
+        @media (max-width: 992px) {
+          padding-top: 0;
+          grid-auto-flow: row;
+          grid-template: unset;
+          row-gap: 20px;
+          align-content: center;
+        }
+      }
+
+      &__icons_manager_active {
+        display: grid;
+        grid-template: 1fr / repeat(4, 1fr);
+        column-gap: 20px;
+
+        @media (max-width: 992px) {
+          padding-top: 0;
+          grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+          grid-gap: 5px;
+        }
+
+        @media (max-width: 768px) {
+          padding-left: 0;
+        }
       }
 
       &__icons_completed {
         display: grid;
         grid-auto-flow: column;
         column-gap: 20px;
+
+        @media (max-width: 992px) {
+          padding-top: 0;
+          grid-template: repeat(2, 1fr) / 1fr;
+          grid-gap: 5px;
+        }
+
+        @media (max-width: 768px) {
+          padding-top: 0;
+          grid-template: 1fr / repeat(2, 1fr);
+          grid-gap: 5px;
+        }
+      }
+
+      @media (max-width: 992px) {
       }
     }
   }

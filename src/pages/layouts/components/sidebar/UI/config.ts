@@ -53,7 +53,7 @@ export const commonMenu: IMenuItem[] = [
   {
     item: {
       title: "burger_menu.wallet",
-      path: paths.main,
+      path: paths.wallet,
       img: WalletIcon,
       openMenu: true,
     },

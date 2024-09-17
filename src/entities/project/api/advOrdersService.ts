@@ -136,10 +136,8 @@ export const advProjectsAPI = authApi.injectEndpoints({
           isLast: response.projects.length !== INTERSECTION_ELEMENTS.advOrders,
         };
       },
-      serializeQueryArgs: ({ endpointName, queryArgs }) => {
-        const { status, page } = queryArgs;
-        // console.log( `${endpointName}/${status}/${page}`)
-        return `${endpointName}/${status}`;
+      serializeQueryArgs: ({ endpointName }) => {
+        return endpointName;
       },
       merge: (currentCache, newItems, arg) => {
         if (arg.arg.page === 1) {
@@ -198,8 +196,8 @@ export const advProjectsAPI = authApi.injectEndpoints({
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
-        const { status } = queryArgs;
-        return `${endpointName}/${status}`;
+        const { language, date_sort, status } = queryArgs;
+        return `${endpointName}/${language}/${date_sort}/${status}`;
       },
       merge: (currentCache, newItems, arg) => {
         if (arg.arg.page === 1) {
@@ -213,13 +211,11 @@ export const advProjectsAPI = authApi.injectEndpoints({
         return {
           ...newItems,
           projects: [...currentCache.projects, ...newItems.projects],
+          status: arg.arg.status,
           isLast:
             newItems.projects.length !== INTERSECTION_ELEMENTS.managerOrders,
         };
       },
-      // forceRefetch({ currentArg, previousArg }) {
-      //   return currentArg !== previousArg;
-      // },
     }),
   }),
 });

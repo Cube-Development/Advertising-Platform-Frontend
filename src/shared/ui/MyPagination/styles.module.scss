@@ -1,0 +1,22 @@
+.wrapper {
+  display: grid;
+  justify-content: center;
+  padding: 10px;
+  .pagination {
+    display: grid;
+    grid-template: 1fr / repeat(var(--count), 1fr);
+    column-gap: 10px;
+
+    .point {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #dedede;
+
+      &.active {
+        background: var(--Gradients-Gradient-1);
+        transform: scale(1.5);
+      }
+    }
+  }
+}

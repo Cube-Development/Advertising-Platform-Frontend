@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import {
@@ -12,6 +12,10 @@ import { bloggerOfferStatus, offerStatusFilter } from "@entities/offer";
 import { bloggerChannelStatus, channelStatusFilter } from "@entities/channel";
 import { pageFilter } from "@shared/routing";
 import { useAppSelector } from "@shared/hooks";
+import { BREAKPOINT } from "@shared/config";
+import SwiperCore from "swiper";
+import "swiper/css";
+import { Swiper, SwiperSlide } from "swiper/react";
 
 interface BarStatusFilterProps {
   page: pageFilter;
@@ -33,6 +37,8 @@ export const BarStatusFilter: FC<BarStatusFilterProps> = ({
   const toggleStatus = (status: string) => {
     changeStatus(status);
   };
+  const swiperRef = useRef<SwiperCore | null>(null);
+  const [screen, setScreen] = useState<number>(window.innerWidth);
 
   const projectStatus =
     page === pageFilter.order &&
@@ -49,19 +55,62 @@ export const BarStatusFilter: FC<BarStatusFilterProps> = ({
             ? bloggerOfferStatus
             : bloggerChannelStatus;
 
+  useEffect(() => {
+    const handleResize = () => {
+      setScreen(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
-    <div className={styles.subtypes}>
-      <ul>
-        {projectStatus.map((type, index) => (
-          <li
-            key={index}
-            className={statusFilter === type.type ? styles.active : ""}
-            onClick={() => toggleStatus(type.type)}
+    <>
+      {screen > BREAKPOINT.MD ? (
+        <div className={styles.subtypes}>
+          <ul>
+            {projectStatus.map((type, index) => (
+              <li
+                key={index}
+                className={statusFilter === type.type ? styles.active : ""}
+                onClick={() => toggleStatus(type.type)}
+              >
+                {t(type.name)}
+              </li>
+            ))}
+          </ul>
+        </div>
+      ) : (
+        <div className="swipper__carousel">
+          <Swiper
+            onSwiper={(swiper) => (swiperRef.current = swiper)}
+            spaceBetween={0}
+            slidesPerView={3}
+            breakpoints={{
+              576: {
+                slidesPerView: 4.2,
+              },
+              375: {
+                slidesPerView: 2.2,
+              },
+            }}
+            className={styles.subtypes}
           >
-            {t(type.name)}
-          </li>
-        ))}
-      </ul>
-    </div>
+            {projectStatus.map((type, index) => (
+              <SwiperSlide key={index}>
+                <li
+                  key={index}
+                  className={statusFilter === type.type ? styles.active : ""}
+                  onClick={() => toggleStatus(type.type)}
+                >
+                  {t(type.name)}
+                </li>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
+      )}
+    </>
   );
 };

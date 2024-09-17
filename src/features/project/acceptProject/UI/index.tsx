@@ -7,9 +7,9 @@ import styles from "./styles.module.scss";
 export const AcceptProject: FC = () => {
   const { t } = useTranslation();
   return (
-    <MyButton buttons_type="button__blue" className={styles.button}>
+    <MyButton buttons_type="button__white" className={styles.button}>
       {t(`order_btn.accept`)}
-      <ArrowLongHorizontalIcon className="icon__white" />
+      {/* <ArrowLongHorizontalIcon className="icon__white" /> */}
     </MyButton>
   );
 };

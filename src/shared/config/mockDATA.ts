@@ -1,6 +1,16 @@
-import { IReviewCard } from "@entities/channel";
+import {
+  channelStatusFilter,
+  IActiveChannel,
+  IBlockedChannel,
+  IChannelBlogger,
+  IInactiveChannel,
+  IModerationChannel,
+  IModerationRejectChannel,
+  IReviewCard,
+} from "@entities/channel";
 import {
   IAdvManagerProjectsDev,
+  IAdvManagerProjectsDevCard,
   IAdvProjects,
   IAdvSubprojects,
   IFilterSearch,
@@ -979,6 +989,27 @@ export const managerNewCARDS = {
   ],
 };
 
+export const advMyProjectActiveCARDS = {
+  page: 1,
+  elements: 1,
+  projects: [
+    {
+      id: "147c8ee0-7f3e-4c71-9a35-50df6c50c273",
+      identifier: 294600372731,
+      created: "10.09.2024",
+      name: "SEX",
+      count_channels: 0,
+      views: 12,
+      budget: 0.0,
+      remainder: 0.0,
+      completed: 0,
+      canceled_rejected: 0,
+      wait: 0,
+      in_progress: 0,
+      moderation: 0,
+    },
+  ],
+};
 // export const advMyProjectActiveCARDS: IAdvProjects = {
 //   page: 1,
 //   elements: 1,
@@ -2097,7 +2128,8 @@ export const MY_PROJECT_ACTIVE_SUBCARD: IAdvSubprojects = {
       date_coming: "2024-09-05",
       name: "Аренда авто",
       category: "Аренда авто",
-      avatar: "https://example.com/rental_car.jpg",
+      avatar:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
       api_status: 9,
       order_status: "Завершён",
       publish_date: {
@@ -2127,7 +2159,8 @@ export const MY_PROJECT_ACTIVE_SUBCARD: IAdvSubprojects = {
       date_coming: "2024-09-15",
       name: "Суперкар для аренды",
       category: "Авто, мото",
-      avatar: "https://example.com/car.jpg",
+      avatar:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
       api_status: 2,
       order_status: "В ожидании",
       publish_date: {
@@ -2157,7 +2190,8 @@ export const MY_PROJECT_ACTIVE_SUBCARD: IAdvSubprojects = {
       date_coming: "2024-09-12",
       name: "Модная электроника",
       category: "Автомобильная электроника",
-      avatar: "https://example.com/electronics.jpg",
+      avatar:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
       api_status: 4,
       order_status: "Опубликован",
       publish_date: {
@@ -2187,7 +2221,8 @@ export const MY_PROJECT_ACTIVE_SUBCARD: IAdvSubprojects = {
       date_coming: "2024-09-10",
       name: "Аренда недвижимости",
       category: "Аренда недвижимости",
-      avatar: "https://example.com/realestate.jpg",
+      avatar:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
       api_status: 5,
       order_status: "Завершён",
       publish_date: {
@@ -2217,7 +2252,8 @@ export const MY_PROJECT_ACTIVE_SUBCARD: IAdvSubprojects = {
       date_coming: "2024-09-15",
       name: "Суперкар для аренды",
       category: "Авто, мото",
-      avatar: "https://example.com/car.jpg",
+      avatar:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
       api_status: 3,
       order_status: "В ожидании",
       publish_date: {
@@ -2248,7 +2284,8 @@ export const MY_PROJECT_ACTIVE_SUBCARD: IAdvSubprojects = {
       date_coming: "2024-09-15",
       name: "Суперкар для аренды",
       category: "Авто, мото",
-      avatar: "https://example.com/car.jpg",
+      avatar:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
       api_status: 1,
       order_status: "В ожидании",
       publish_date: {
@@ -2279,7 +2316,8 @@ export const MY_PROJECT_ACTIVE_SUBCARD: IAdvSubprojects = {
       date_coming: "2024-09-05",
       name: "Аренда авто",
       category: "Аренда авто",
-      avatar: "https://example.com/rental_car.jpg",
+      avatar:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
       api_status: 10,
       order_status: "Завершён",
       publish_date: {
@@ -2304,4 +2342,186 @@ export const MY_PROJECT_ACTIVE_SUBCARD: IAdvSubprojects = {
       cpv: 0.06,
     },
   ],
+};
+
+export const MY_PROJECT_SAVE_SUBCARD: IAdvManagerProjectsDev = {
+  page: 1,
+  elements: 6,
+  projects: [
+    {
+      id: "1",
+      created: "2024-09-01",
+      name: "Campaign Alpha",
+      budget: 50000,
+    },
+    {
+      id: "2",
+      created: "2024-08-20",
+      name: "Campaign Beta",
+      budget: 75000,
+    },
+    {
+      id: "3",
+      created: "2024-07-15",
+      name: "Campaign Gamma",
+      budget: 60000,
+    },
+    {
+      id: "4",
+      created: "2024-09-05",
+      name: "Campaign Delta",
+      budget: 80000,
+    },
+    {
+      id: "5",
+      created: "2024-08-10",
+      name: "Campaign Epsilon",
+      budget: 45000,
+    },
+  ],
+};
+
+export const activeChannelsMock: IChannelBlogger = {
+  page: 1,
+  elements: 10,
+  channels: [
+    {
+      id: "1",
+      name: "Активный канал 1",
+      category: "Технологии",
+      status: 1,
+      avatar: "https://example.com/avatar1.jpg",
+      channel_orders: {
+        wait: 5,
+        in_progress: 10,
+        completed: 20,
+        canceled_rejected: 2,
+      },
+      tags: [1, 2, 3],
+    },
+    {
+      id: "2",
+      name: "Активный канал 2",
+      category: "Наука",
+      status: 1,
+      avatar: "https://example.com/avatar2.jpg",
+      channel_orders: {
+        wait: 2,
+        in_progress: 8,
+        completed: 15,
+        canceled_rejected: 1,
+      },
+      tags: [2, 4],
+    },
+  ],
+  status: channelStatusFilter.active,
+  isLast: false,
+};
+
+export const inactiveChannelsMock: IChannelBlogger = {
+  page: 1,
+  elements: 10,
+  channels: [
+    {
+      id: "3",
+      name: "Неактивный канал 1",
+      category: "Развлечения",
+      status: 0,
+      avatar: "https://example.com/avatar3.jpg",
+      channel_orders: {
+        completed: 30,
+        canceled_rejected: 5,
+      },
+      tags: [3, 5],
+    },
+    {
+      id: "4",
+      name: "Неактивный канал 2",
+      category: "Новости",
+      status: 0,
+      avatar: "https://example.com/avatar4.jpg",
+      channel_orders: {
+        completed: 25,
+        canceled_rejected: 3,
+      },
+      tags: [1, 6],
+    },
+  ],
+  status: channelStatusFilter.inactive,
+  isLast: true,
+};
+
+export const moderationChannelsMock: IChannelBlogger = {
+  page: 1,
+  elements: 10,
+  channels: [
+    {
+      id: "5",
+      name: "Канал на модерации 1",
+      category: "Культура",
+      avatar: "https://example.com/avatar5.jpg",
+      created: "2024-09-15",
+    },
+    {
+      id: "6",
+      name: "Канал на модерации 2",
+      category: "Спорт",
+      avatar: "https://example.com/avatar6.jpg",
+      created: "2024-09-10",
+    },
+  ],
+  status: channelStatusFilter.moderation,
+  isLast: true,
+};
+
+export const moderationRejectChannelsMock: IChannelBlogger = {
+  page: 1,
+  elements: 10,
+  channels: [
+    {
+      id: "7",
+      name: "Отклоненный канал 1",
+      category: "Музыка",
+      avatar: "https://example.com/avatar7.jpg",
+      rejected_date: "2024-09-01",
+      reapplication_date: "2024-09-20",
+      reason: "причина бана которую будет писать модератор во время бана",
+    },
+    {
+      id: "8",
+      name: "Отклоненный канал 2",
+      category: "Туризм",
+      avatar: "https://example.com/avatar8.jpg",
+      rejected_date: "2024-08-28",
+      reapplication_date: "2024-09-18",
+      reason: "причина бана которую будет писать модератор во время бана",
+    },
+  ],
+  status: channelStatusFilter.active,
+  isLast: true,
+};
+
+export const blockedChannelsMock: IChannelBlogger = {
+  page: 1,
+  elements: 10,
+  channels: [
+    {
+      id: "9",
+      name: "Заблокированный канал 1",
+      category: "Политика",
+      avatar: "https://example.com/avatar9.jpg",
+      blocked_date: "2024-09-05",
+      reason: "причина бана которую будет писать модератор во время бана",
+    },
+    {
+      id: "10",
+      name: "Заблокированный канал 2",
+      category: "Экономика",
+      avatar: "https://example.com/avatar10.jpg",
+      blocked_date: "2024-09-12",
+      reason: "причина бана которую будет писать модератор во время бана",
+    },
+  ],
+  status: channelStatusFilter.active,
+  isLast: true,
 };

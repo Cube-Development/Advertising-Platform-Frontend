@@ -66,7 +66,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
       document.body.classList.add("sidebar-open-2");
       console.log("open");
     } else {
-      document.body.classList.remove("sidebar-open-2");
+      document.body.classList.remove("sidebar-open", "sidebar-open-2");
       console.log("closed");
     }
     return () => {

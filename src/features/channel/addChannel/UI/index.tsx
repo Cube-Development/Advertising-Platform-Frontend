@@ -14,7 +14,7 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
-import { CircleX } from "lucide-react";
+import { CircleFadingPlus, CircleX } from "lucide-react";
 
 export const AddChannel: FC<IAddChannelQuery> = ({ props, path }) => {
   const { t } = useTranslation();
@@ -33,8 +33,10 @@ export const AddChannel: FC<IAddChannelQuery> = ({ props, path }) => {
   return (
     <>
       {isAuth ? (
-        <Link to={path}>
-          <MyButton {...props}>{t(`btn_add_platform`)}</MyButton>
+        <Link to={path} className={styles.button}>
+          <MyButton {...props} className="w-auto">
+            {t(`btn_add_platform`)} <CircleFadingPlus />
+          </MyButton>
         </Link>
       ) : (
         <Dialog>

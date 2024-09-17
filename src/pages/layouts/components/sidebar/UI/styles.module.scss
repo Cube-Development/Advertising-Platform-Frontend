@@ -22,6 +22,14 @@
       border-radius: 12px;
       background: #e6e6e6;
     }
+
+    &.active_route {
+      background: var(--Gradients-Gradient-1);
+      color: #fff;
+      border-radius: 12px;
+      --start-color: var(--Personal-colors-White);
+      --end-color: var(--Personal-colors-White);
+    }
   }
 
   .menu {

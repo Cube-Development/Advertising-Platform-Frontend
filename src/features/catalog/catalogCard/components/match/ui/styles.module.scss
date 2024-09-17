@@ -154,8 +154,22 @@
     }
   }
 
-  .circle:hover + .match_description {
-    opacity: 1;
-    visibility: visible;
+  @media (min-width: 577px) {
+    .circle:hover + .match_description {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+
+  @media (max-width: 576px) {
+    .circle:hover + .match_description {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .circle:active + .match_description {
+      opacity: 1;
+      visibility: visible;
+    }
   }
 }

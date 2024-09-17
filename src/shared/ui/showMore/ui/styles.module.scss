@@ -1,14 +1,16 @@
 .btn {
   padding: 10px;
-  border-radius: 30px;
+  border-radius: 10px;
   width: 200px;
   text-align: center;
   font-weight: 600;
-  background: var(--Gradients-Gradient-1);
-  color: var(--Personal-colors-White);
+  background: #fff;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.15);
+  color: var(--Personal-colors-main);
   cursor: pointer;
+  font-size: var(--font-size-option-item-md);
 
   @media (max-width: 576px) {
-    font-size: var(--font-size-option-item-sm);
+    font-size: var(--font-size-option-item-xs);
   }
 }

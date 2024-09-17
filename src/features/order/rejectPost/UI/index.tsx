@@ -1,7 +1,3 @@
-import { FC, useState } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import { SendHorizonal } from "lucide-react";
 import { IOrderFeature, useRejectOrderMutation } from "@entities/project";
 import {
   Popover,
@@ -10,6 +6,10 @@ import {
   ToastAction,
   useToast,
 } from "@shared/ui";
+import { SendHorizonal } from "lucide-react";
+import { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 export const RejectPost: FC<IOrderFeature> = ({ order_id }) => {
   const [comment, setComment] = useState("");
@@ -39,7 +39,9 @@ export const RejectPost: FC<IOrderFeature> = ({ order_id }) => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <p className={styles.button}>{t(`order_btn.reject.btn_title`)}</p>
+        <small className={styles.button}>
+          {t(`order_btn.reject.btn_title`)}
+        </small>
       </PopoverTrigger>
       <PopoverContent className="rounded-[10px] p-0 w-full h-full" align="end">
         <div className={styles.popover}>

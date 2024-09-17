@@ -40,10 +40,10 @@ export const Feedback: FC<IOrderFeature> = ({ order_id }) => {
   return (
     <Popover>
       <PopoverTrigger asChild>
-        <div className={styles.button}>
+        <big className={styles.button}>
           {t(`order_btn.feedback.btn_title`)}
           {/* <StarIcon2 /> */}
-        </div>
+        </big>
       </PopoverTrigger>
       <PopoverContent className="rounded-[10px] p-0 w-full h-full" align="end">
         <div className={styles.popover}>

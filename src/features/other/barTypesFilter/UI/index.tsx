@@ -27,7 +27,12 @@ export const BarTypesFilter: FC<BarTypesFilterProps> = ({
   const projectTypes = advertiserProjectTypes;
 
   return (
-    <div className={styles.project__types}>
+    <div
+      className={styles.project__types}
+      style={
+        { "--typesLength": `${projectTypes.length}` } as React.CSSProperties
+      }
+    >
       <ul>
         {projectTypes.map((type, index) => (
           <li

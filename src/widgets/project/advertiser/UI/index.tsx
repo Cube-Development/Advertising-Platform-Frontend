@@ -8,7 +8,12 @@ import {
   useGetAdvManagerProjectsQuery,
   useGetAdvProjectsQuery,
 } from "@entities/project";
-import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
+import {
+  advMyProjectActiveCARDS,
+  INTERSECTION_ELEMENTS,
+  Languages,
+  MY_PROJECT_SAVE_SUBCARD as MY_PROJECT_SAVE_CARDS,
+} from "@shared/config";
 import i18n from "@shared/config/i18n";
 import { QueryParams } from "@shared/functions";
 import { pageFilter } from "@shared/routing";
@@ -17,6 +22,7 @@ import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { AdvProjectsList } from "./advProjects";
 import { DevProjectsList } from "./devProjects";
+import styles from "./styles.module.scss";
 
 export const AdvOrders: FC = () => {
   const language = Languages.find((lang) => {
@@ -81,53 +87,59 @@ export const AdvOrders: FC = () => {
       },
     );
   // console.log("projectsSelf", projectsSelf);
+  const save_cards = MY_PROJECT_SAVE_CARDS;
   return (
     <div className="container sidebar">
-      <BarFilter
-        page={page}
-        listLength={
-          !!(
-            projectsSelf?.projects?.length || projectsManager?.projects?.length
-          )
-        }
-        typeFilter={formState.type}
-        changeStatus={(status) => setValue("status", status)}
-        changeType={(type) => setValue("type", type)}
-        statusFilter={formState.status}
-      />
-      {formState.type === projectTypesFilter.managerProject &&
-      formState.status === advManagerProjectStatusFilter.develop ? (
-        <DevProjectsList
-          // projects={projectsSelf?.projects || projectsManager?.projects || []}
-          projects={
-            (projectsSelf?.status === formState.status &&
-              projectsSelf?.projects) ||
-            (projectsManager?.status === formState.status &&
-              projectsManager?.projects) ||
-            []
+      <div className={styles.wrapper}>
+        <BarFilter
+          page={page}
+          listLength={
+            !!(
+              projectsSelf?.projects?.length ||
+              projectsManager?.projects?.length
+            )
           }
-          handleOnChangePage={handleOnChangePage}
-          isLoading={isFetchingSelf || isFetchingManager}
-          isLast={projectsSelf?.isLast || projectsManager?.isLast || false}
           typeFilter={formState.type}
-        />
-      ) : (
-        <AdvProjectsList
+          changeStatus={(status) => setValue("status", status)}
+          changeType={(type) => setValue("type", type)}
           statusFilter={formState.status}
-          typeFilter={formState.type}
-          // projects={projectsSelf?.projects || projectsManager?.projects || []}
-          projects={
-            (projectsSelf?.status === formState.status &&
-              projectsSelf?.projects) ||
-            (projectsManager?.status === formState.status &&
-              projectsManager?.projects) ||
-            []
-          }
-          handleOnChangePage={handleOnChangePage}
-          isLoading={isFetchingSelf || isFetchingManager}
-          isLast={projectsSelf?.isLast || projectsManager?.isLast || false}
         />
-      )}
+        {(formState.type === projectTypesFilter.managerProject &&
+          formState.status === advManagerProjectStatusFilter.develop) ||
+        formState.type === projectTypesFilter.savedProject ? (
+          <DevProjectsList
+            // projects={projectsSelf?.projects || projectsManager?.projects || []}
+            projects={
+              save_cards.projects ||
+              (projectsSelf?.status === formState.status &&
+                projectsSelf?.projects) ||
+              (projectsManager?.status === formState.status &&
+                projectsManager?.projects) ||
+              []
+            }
+            handleOnChangePage={handleOnChangePage}
+            isLoading={isFetchingSelf || isFetchingManager}
+            isLast={projectsSelf?.isLast || projectsManager?.isLast || false}
+            typeFilter={formState.type}
+          />
+        ) : (
+          <AdvProjectsList
+            statusFilter={formState.status}
+            typeFilter={formState.type}
+            // projects={projectsSelf?.projects || projectsManager?.projects || []}
+            projects={
+              // (projectsSelf?.status === formState.status &&
+              //   projectsSelf?.projects) ||
+              // (projectsManager?.status === formState.status &&
+              //   projectsManager?.projects) ||
+              advMyProjectActiveCARDS.projects || []
+            }
+            handleOnChangePage={handleOnChangePage}
+            isLoading={isFetchingSelf || isFetchingManager}
+            isLast={projectsSelf?.isLast || projectsManager?.isLast || false}
+          />
+        )}
+      </div>
     </div>
   );
 };

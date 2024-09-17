@@ -9,10 +9,15 @@ import { paths } from "@shared/routing";
 export const SeeOffers: FC = () => {
   const { t } = useTranslation();
   return (
-    <Link to={paths.offers}>
-      <MyButton buttons_type="button__blue" className={styles.button}>
+    <Link to={paths.offers} className="h-full">
+      <MyButton
+        buttons_type="button__blue"
+        className={`${styles.button} truncate h-full`}
+      >
         {t(`platform_btn.offer`)}
-        <ArrowLongHorizontalIcon className="icon__white" />
+        <div>
+          <ArrowLongHorizontalIcon className="icon__white" />
+        </div>
       </MyButton>
     </Link>
   );

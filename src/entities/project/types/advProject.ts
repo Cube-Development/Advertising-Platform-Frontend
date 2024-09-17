@@ -23,6 +23,7 @@ export interface IAdvProjectCard {
   count_channels: number;
   views: number;
   budget: number;
+  remainder?: number;
   completed: number;
   canceled_rejected: number;
   wait?: number;

@@ -1,14 +1,3 @@
-import { ArrowLongHorizontalIcon, CancelIcon2, ChatIcon } from "@shared/assets";
-import { convertUTCToLocalDateTime } from "@shared/functions";
-import { AnimatePresence, motion } from "framer-motion";
-import Cookies from "js-cookie";
-import { FC, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { useCentrifuge } from "./CentrifugeContext";
-import styles from "./styles.module.scss";
-import { BarSubfilter } from "@features/other";
-import { ChatCard, ChatMessages } from "@features/communication";
-import { roles } from "@entities/user";
 import {
   IOrderMessageAll,
   IOrderMessageNewSocket,
@@ -17,6 +6,13 @@ import {
   useGetOrderChatsQuery,
   useGetProjectChatsQuery,
 } from "@entities/communication";
+import { roles } from "@entities/user";
+import { ChatCard, ChatMessages } from "@features/communication";
+import { BarSubfilter } from "@features/other";
+import { ArrowLongHorizontalIcon, CancelIcon2, ChatIcon } from "@shared/assets";
+import { BREAKPOINT } from "@shared/config";
+import { convertUTCToLocalDateTime } from "@shared/functions";
+import { pageFilter } from "@shared/routing";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -27,10 +23,17 @@ import {
   DrawerContent,
   DrawerTrigger,
 } from "@shared/ui";
-import { pageFilter } from "@shared/routing";
-import { BREAKPOINT } from "@shared/config";
+import { AnimatePresence, motion } from "framer-motion";
+import Cookies from "js-cookie";
+import { FC, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useCentrifuge } from "./CentrifugeContext";
+import styles from "./styles.module.scss";
 
-export const Chat: FC = () => {
+export const Chat: FC<{ orderId?: string; toRole?: roles }> = ({
+  orderId,
+  toRole,
+}) => {
   const { t } = useTranslation();
   const role = Cookies.get("role")
     ? (Cookies.get("role") as roles)
@@ -247,7 +250,9 @@ export const Chat: FC = () => {
       ) : (
         <Drawer>
           <DrawerTrigger className={styles.chat}>
-            <ChatIcon />
+            <ChatIcon className={`${toRole ? "icon__white" : ""}`} />
+            {toRole === roles.blogger && <p>{t("chat.role.blogger")}</p>}
+            {toRole === roles.manager && <p>{t("chat.role.manager")}</p>}
           </DrawerTrigger>
           <DrawerContent>
             <div className={styles.content}>

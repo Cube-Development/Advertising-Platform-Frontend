@@ -5,26 +5,64 @@
     column-gap: 25px;
     justify-content: start;
 
-    font-size: 22px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
     color: var(--Personal-colors-black);
-    line-height: 0.75;
+    line-height: 1;
+    font-size: var(--column-gap-option-item-xl);
+    text-align: center;
+
+    @media (max-width: 992px) {
+      font-size: var(--column-gap-option-item-lg);
+    }
+
+    @media (max-width: 768px) {
+      font-size: var(--column-gap-option-item-md);
+      column-gap: 0;
+      grid-template: 1fr / repeat(var(--typesLength), 1fr);
+      align-items: flex-end;
+    }
+
+    @media (max-width: 576px) {
+      font-size: var(--column-gap-option-item-sm);
+    }
+
+    @media (max-width: 375px) {
+      font-size: var(--column-gap-option-item-xs);
+    }
   }
 
   li {
     cursor: pointer;
     position: relative;
 
+    @media (max-width: 768px) {
+      color: var(--black-20);
+      padding-bottom: 10px;
+      background: var(--black-20);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+
+      &::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 2.5px;
+        background: var(--black-20);
+      }
+    }
+
     &.active {
       color: var(--Personal-colors-main);
-      // border-bottom: 3px solid var(--Personal-colors-main);
       padding-bottom: 10px;
       background: var(--Gradients-Gradient-1);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      /* Включаем поддержку для Firefox */
       background-clip: text;
       color: transparent;
 

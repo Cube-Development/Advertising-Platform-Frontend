@@ -7,9 +7,14 @@ import styles from "./styles.module.scss";
 export const RepeatModeration: FC = () => {
   const { t } = useTranslation();
   return (
-    <MyButton buttons_type="button__white" className={styles.button}>
+    <MyButton
+      buttons_type="button__blue"
+      className={`${styles.button} truncate`}
+    >
       {t(`platform_btn.repeat`)}
-      <ArrowLongHorizontalIcon className="active__icon" />
+      <div>
+        <ArrowLongHorizontalIcon className="icon__white" />
+      </div>
     </MyButton>
   );
 };
