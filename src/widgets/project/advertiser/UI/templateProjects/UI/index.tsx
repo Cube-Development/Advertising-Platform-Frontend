@@ -1,26 +1,25 @@
 import {
-  AdvDevProjectCard,
-  IAdvManagerProjectsDevCard,
-  SkeletonAdvDevProjectCard,
+  AdvTemplateProjectCard,
+  IAdvTemplateProjectsCard,
+  SkeletonTemplateProjectCard,
 } from "@entities/project";
 import { TurnkeyProject } from "@features/other";
-import { NewProject, ZeroProject } from "@features/project";
+import { ContinueTemplate, NewProject, ZeroProject } from "@features/project";
 import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
 import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
-import { Chat } from "@widgets/communication";
 import { motion } from "framer-motion";
 import { FC } from "react";
 import styles from "./styles.module.scss";
 
-interface DevProjectsListProps {
-  projects: IAdvManagerProjectsDevCard[];
-  handleOnChangePage: () => void;
+interface TemplateProjectsListProps {
+  projects: IAdvTemplateProjectsCard[];
   isLoading: boolean;
   isLast: boolean;
   typeFilter: string;
+  handleOnChangePage: () => void;
 }
 
-export const DevProjectsList: FC<DevProjectsListProps> = ({
+export const TemplateProjectsList: FC<TemplateProjectsListProps> = ({
   projects,
   handleOnChangePage,
   isLoading,
@@ -46,12 +45,16 @@ export const DevProjectsList: FC<DevProjectsListProps> = ({
               custom={index % INTERSECTION_ELEMENTS.advOrders}
               variants={PAGE_ANIMATION.animationUp}
             >
-              <AdvDevProjectCard key={index} card={card} ChatBtn={Chat} />
+              <AdvTemplateProjectCard
+                key={index}
+                card={card}
+                ContinueBtn={ContinueTemplate}
+              />
             </motion.div>
           ))}
           {!isLoading &&
             Array.from({ length: INTERSECTION_ELEMENTS.advOrders }).map(
-              (_, index) => <SkeletonAdvDevProjectCard key={index} />,
+              (_, index) => <SkeletonTemplateProjectCard key={index} />,
             )}
           {!isLast && (
             <div className={styles.show_more} onClick={handleOnChangePage}>

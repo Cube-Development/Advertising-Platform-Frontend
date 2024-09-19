@@ -13,6 +13,7 @@ import {
   IAdvManagerProjectsDevCard,
   IAdvProjects,
   IAdvSubprojects,
+  IAdvTemplateProjects,
   IFilterSearch,
 } from "@entities/project";
 
@@ -2344,39 +2345,96 @@ export const MY_PROJECT_ACTIVE_SUBCARD: IAdvSubprojects = {
   ],
 };
 
-export const MY_PROJECT_SAVE_SUBCARD: IAdvManagerProjectsDev = {
+export const MY_PROJECT_SAVE_CARDS: IAdvTemplateProjects = {
   page: 1,
   elements: 6,
   projects: [
     {
       id: "1",
+      identifier: 2315484854,
+      count: 5,
       created: "2024-09-01",
       name: "Campaign Alpha",
-      budget: 50000,
+      budget: 50000000,
     },
     {
       id: "2",
+      identifier: 8554546,
+      count: 7,
       created: "2024-08-20",
       name: "Campaign Beta",
-      budget: 75000,
+      budget: 75000000,
     },
     {
       id: "3",
+      identifier: 79564654,
+      count: 3,
       created: "2024-07-15",
       name: "Campaign Gamma",
-      budget: 60000,
+      budget: 60000000,
     },
     {
       id: "4",
+      identifier: 2356454,
+      count: 3,
       created: "2024-09-05",
       name: "Campaign Delta",
-      budget: 80000,
+      budget: 80000000,
     },
     {
       id: "5",
+      identifier: 2356454,
+      count: 1,
       created: "2024-08-10",
       name: "Campaign Epsilon",
-      budget: 45000,
+      budget: 45000000,
+    },
+  ],
+};
+
+export const MY_PROJECT_MANAGER_DEV_CARDS: IAdvManagerProjectsDev = {
+  page: 1,
+  elements: 6,
+  projects: [
+    {
+      id: "1",
+      identifier: 2315484854,
+      tarif: "Старт",
+      created: "2024-09-01",
+      name: "Campaign Alpha",
+      budget: 50000000,
+    },
+    {
+      id: "2",
+      identifier: 8554546,
+      tarif: "Старт",
+      created: "2024-08-20",
+      name: "Campaign Beta",
+      budget: 75000000,
+    },
+    {
+      id: "3",
+      identifier: 79564654,
+      tarif: "Стандарт",
+      created: "2024-07-15",
+      name: "Campaign Gamma",
+      budget: 60000000,
+    },
+    {
+      id: "4",
+      identifier: 2356454,
+      tarif: "Стандарт",
+      created: "2024-09-05",
+      name: "Campaign Delta",
+      budget: 80000000,
+    },
+    {
+      id: "5",
+      identifier: 2356454,
+      tarif: "Стандарт",
+      created: "2024-08-10",
+      name: "Campaign Epsilon",
+      budget: 45000000,
     },
   ],
 };

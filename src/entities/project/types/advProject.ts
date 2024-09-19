@@ -73,7 +73,23 @@ export interface IAdvManagerProjectsDev {
 
 export interface IAdvManagerProjectsDevCard {
   id: string;
-  tarif?: string;
+  identifier: number;
+  tarif: string;
+  created: string;
+  name: string;
+  budget: number;
+}
+
+export interface IAdvTemplateProjects {
+  page: number;
+  elements: number;
+  projects: IAdvTemplateProjectsCard[];
+}
+
+export interface IAdvTemplateProjectsCard {
+  id: string;
+  identifier: number;
+  count: number;
   created: string;
   name: string;
   budget: number;

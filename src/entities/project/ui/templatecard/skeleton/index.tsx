@@ -2,7 +2,7 @@ import { Skeleton } from "@shared/ui";
 import { FC } from "react";
 import styles from "./styles.module.scss";
 
-export const SkeletonAdvDevProjectCard: FC = () => {
+export const SkeletonTemplateProjectCard: FC = () => {
   return (
     <Skeleton className="bg-skeleton-light rounded-[20px]">
       <div className={styles.card}>
@@ -14,18 +14,14 @@ export const SkeletonAdvDevProjectCard: FC = () => {
           </div>
         </div>
         <div className={styles.card__info}>
-          <div>
-            <Skeleton className="h-full w-full rounded-[10px]" />
-          </div>
-          <div>
-            <Skeleton className="h-full w-full rounded-[10px]" />
-          </div>
+          <Skeleton className="h-full w-full rounded-[10px]" />
+          <Skeleton className="h-full w-full rounded-[10px]" />
         </div>
-        <div className={styles.card__status}>
-          <Skeleton className="h-full w-full rounded-[12px]" />
+        <div className={styles.card__template}>
+          <Skeleton className="h-full w-full rounded-[15px]" />
         </div>
-        <div className={styles.card__chat}>
-          <Skeleton className="h-full w-full rounded-[12px]" />
+        <div className={styles.card__continue}>
+          <Skeleton className="h-full w-full rounded-[15px]" />
         </div>
       </div>
     </Skeleton>

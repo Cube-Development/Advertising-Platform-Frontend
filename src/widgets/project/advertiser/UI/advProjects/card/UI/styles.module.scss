@@ -1,13 +1,11 @@
 .wrapper {
   display: grid;
-  // grid-auto-flow: row;
   grid-template: 1fr min-content / 1fr;
   row-gap: 15px;
-  min-height: 220px;
+  min-height: 230px;
 
   @media (max-width: 768px) {
     height: 500px;
-    // grid-template: 1fr min-content / 1fr;
     align-items: flex-start;
   }
 }
@@ -36,9 +34,21 @@
   }
 
   &__manager_completed {
+    .card__description__status {
+      @media (max-width: 768px) {
+        padding: 15px 0;
+        font-size: 16px;
+      }
+    }
+
     .card__info {
       display: grid;
       grid-template: 1fr / 1fr 1.5fr;
+
+      @media (max-width: 768px) {
+        grid-template: unset;
+        grid-auto-flow: row;
+      }
 
       &__data {
         display: grid;
@@ -48,6 +58,15 @@
         border-bottom: none;
         padding-right: 20px;
         border-right: 1px solid var(--Card-separator);
+
+        @media (max-width: 992px) {
+          padding-right: 15px;
+        }
+
+        @media (max-width: 768px) {
+          padding-right: 0;
+          border-right: none;
+        }
 
         div {
           grid-auto-flow: column;
@@ -322,12 +341,31 @@
       display: grid;
       grid-auto-flow: row;
       padding-left: 20px;
+
+      @media (max-width: 992px) {
+        padding-left: 15px;
+      }
+
+      @media (max-width: 768px) {
+        padding-left: 0;
+        row-gap: 10px;
+      }
+
       .top {
         display: grid;
         grid-template: 1fr / repeat(2, 1fr);
         column-gap: 10px;
         padding-bottom: 20px;
         border-bottom: 1px solid var(--Card-separator);
+
+        @media (max-width: 992px) {
+          padding-bottom: 15px;
+        }
+
+        @media (max-width: 768px) {
+          padding-bottom: 0;
+          border-bottom: none;
+        }
 
         div {
           display: grid;
@@ -360,6 +398,16 @@
         grid-template: 1fr / repeat(2, 1fr);
         column-gap: 10px;
         padding-top: 20px;
+
+        @media (max-width: 992px) {
+          padding-top: 15px;
+          grid-template: repeat(2, 1fr) / 1fr;
+          row-gap: 10px;
+        }
+
+        @media (max-width: 768px) {
+          padding-top: 0;
+        }
 
         big {
           font-size: 12px;

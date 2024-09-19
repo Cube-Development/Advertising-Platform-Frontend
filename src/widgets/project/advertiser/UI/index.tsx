@@ -1,8 +1,8 @@
 import { channelStatusFilter } from "@entities/channel";
 import { offerStatusFilter } from "@entities/offer";
 import {
-  advManagerProjectStatusFilter,
   advertiserProjectTypes,
+  advManagerProjectStatusFilter,
   getProjectsCardReq,
   projectTypesFilter,
   useGetAdvManagerProjectsQuery,
@@ -12,7 +12,8 @@ import {
   advMyProjectActiveCARDS,
   INTERSECTION_ELEMENTS,
   Languages,
-  MY_PROJECT_SAVE_SUBCARD as MY_PROJECT_SAVE_CARDS,
+  MY_PROJECT_MANAGER_DEV_CARDS,
+  MY_PROJECT_SAVE_CARDS,
 } from "@shared/config";
 import i18n from "@shared/config/i18n";
 import { QueryParams } from "@shared/functions";
@@ -23,6 +24,7 @@ import { useForm } from "react-hook-form";
 import { AdvProjectsList } from "./advProjects";
 import { DevProjectsList } from "./devProjects";
 import styles from "./styles.module.scss";
+import { TemplateProjectsList } from "./templateProjects";
 
 export const AdvOrders: FC = () => {
   const language = Languages.find((lang) => {
@@ -88,6 +90,7 @@ export const AdvOrders: FC = () => {
     );
   // console.log("projectsSelf", projectsSelf);
   const save_cards = MY_PROJECT_SAVE_CARDS;
+  const dev_cards = MY_PROJECT_MANAGER_DEV_CARDS;
   return (
     <div className="container sidebar">
       <div className={styles.wrapper}>
@@ -104,19 +107,26 @@ export const AdvOrders: FC = () => {
           changeType={(type) => setValue("type", type)}
           statusFilter={formState.status}
         />
-        {(formState.type === projectTypesFilter.managerProject &&
-          formState.status === advManagerProjectStatusFilter.develop) ||
-        formState.type === projectTypesFilter.savedProject ? (
+        {formState.type === projectTypesFilter.managerProject &&
+        formState.status === advManagerProjectStatusFilter.develop ? (
           <DevProjectsList
             // projects={projectsSelf?.projects || projectsManager?.projects || []}
             projects={
-              save_cards.projects ||
+              dev_cards.projects ||
               (projectsSelf?.status === formState.status &&
                 projectsSelf?.projects) ||
               (projectsManager?.status === formState.status &&
                 projectsManager?.projects) ||
               []
             }
+            handleOnChangePage={handleOnChangePage}
+            isLoading={isFetchingSelf || isFetchingManager}
+            isLast={projectsSelf?.isLast || projectsManager?.isLast || false}
+            typeFilter={formState.type}
+          />
+        ) : formState.type === projectTypesFilter.savedProject ? (
+          <TemplateProjectsList
+            projects={save_cards.projects || []}
             handleOnChangePage={handleOnChangePage}
             isLoading={isFetchingSelf || isFetchingManager}
             isLast={projectsSelf?.isLast || projectsManager?.isLast || false}

@@ -1,19 +1,17 @@
-import { IChatOpen } from "@entities/communication";
-import { IAdvManagerProjectsDevCard } from "@entities/project";
-import { roles } from "@entities/user";
-import { MoreIcon } from "@shared/assets";
+import { IAdvTemplateProjectsCard } from "@entities/project";
+import { MoreIcon, TemplateIcon2 } from "@shared/assets";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
-interface AdvDevProjectCardProps {
-  card: IAdvManagerProjectsDevCard;
-  ChatBtn: FC<IChatOpen>;
+interface AdvTemplateProjectCardProps {
+  card: IAdvTemplateProjectsCard;
+  ContinueBtn: FC;
 }
 
-export const AdvDevProjectCard: FC<AdvDevProjectCardProps> = ({
+export const AdvTemplateProjectCard: FC<AdvTemplateProjectCardProps> = ({
   card,
-  ChatBtn,
+  ContinueBtn,
 }) => {
   const { t } = useTranslation();
 
@@ -22,14 +20,14 @@ export const AdvDevProjectCard: FC<AdvDevProjectCardProps> = ({
       <div className={styles.card__title}>
         <p className="truncate">{card?.name}</p>
         <div>
-          <span className="truncate">№{card.identifier}</span>
+          <span className="truncate">{card?.identifier}</span>
           <span>{card?.created}</span>
         </div>
       </div>
       <div className={styles.card__info}>
         <div>
-          <p>{t("orders_advertiser.card.tarif")}:</p>
-          <span>{card?.tarif}</span>
+          <p>{t("orders_advertiser.card.channels")}:</p>
+          <span>{card?.count?.toLocaleString()}</span>
         </div>
         <div>
           <p>{t("orders_advertiser.card.cost")}:</p>
@@ -38,13 +36,14 @@ export const AdvDevProjectCard: FC<AdvDevProjectCardProps> = ({
           </span>
         </div>
       </div>
-      <div className={styles.card__status}>
+      <div className={styles.card__template}>
         <div>
-          <p>{t("orders_advertiser.card.status.develop")}</p>
+          <TemplateIcon2 />
+          <p>{t("orders_advertiser.order_status.template.title")}</p>
         </div>
       </div>
-      <div className={styles.card__chat}>
-        <ChatBtn orderId={card?.id} toRole={roles.manager} />
+      <div className={styles.card__continue}>
+        <ContinueBtn />
       </div>
       <div className={styles.card__more}>
         <button>
