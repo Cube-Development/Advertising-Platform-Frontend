@@ -840,7 +840,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, page }) => {
               </a>
               <a
                 onClick={handleRegistrationClick}
-                className={`${styles.btns__register} truncate`}
+                className={`${styles.btns__register} cate`}
               >
                 {t("registration")}
               </a>

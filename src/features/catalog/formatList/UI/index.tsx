@@ -9,6 +9,7 @@ export const FormatList: FC<IFormatListProps> = ({
   card,
   selectedFormat,
   isSmall,
+  isBig,
 }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [screen, setScreen] = useState<number>(window.innerWidth);
@@ -67,7 +68,7 @@ export const FormatList: FC<IFormatListProps> = ({
           />
         </div>
         <p>
-          {screen > BREAKPOINT.SM && !isSmall
+          {(screen > BREAKPOINT.SM && !isSmall) || isBig
             ? selectedFormat?.format_name?.big
             : selectedFormat?.format_name?.small}
         </p>

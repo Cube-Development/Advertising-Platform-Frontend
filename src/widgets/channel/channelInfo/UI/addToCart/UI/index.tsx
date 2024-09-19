@@ -31,6 +31,7 @@ export const AddToCart: FC<AddToCartProps> = ({
             selectedFormat={selectedFormat}
             changeFormat={changeFormat}
             card={card as unknown as ICatalogChannel}
+            isBig={true}
           />
         </div>
       </div>

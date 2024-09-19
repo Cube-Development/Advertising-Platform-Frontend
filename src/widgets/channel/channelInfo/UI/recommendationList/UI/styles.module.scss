@@ -12,6 +12,11 @@
     font-weight: 600;
     line-height: normal;
     text-align: left;
+
+    @media (max-width: 576px) {
+      text-align: center;
+      font-size: 20px;
+    }
   }
 
   .carousel {

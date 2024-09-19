@@ -25,14 +25,13 @@ export const SkeletonChannelDescription: FC = () => {
           <div className={styles.channel__description}>
             <div className={styles.title}>
               <Skeleton className="h-10 w-[180px]" />
-              <div className={styles.rating}>
-                <Skeleton className="h-[25px] w-[25px] rounded-full" />
-                <Skeleton className="h-[25px] w-[25px] rounded-full" />
-                <Skeleton className="h-[25px] w-[25px] rounded-full" />
-              </div>
+            </div>
+            <div className={styles.icons}>
+              <Skeleton className="h-[25px] w-[25px] rounded-full" />
+              <Skeleton className="h-[25px] w-[25px] rounded-full" />
+              <Skeleton className="h-[25px] w-[25px] rounded-full" />
             </div>
             <div className={styles.description}>
-              <Skeleton className="h-3 w-full" />
               <Skeleton className="h-3 w-full" />
               <Skeleton className="h-3 w-full" />
               <Skeleton className="h-3 w-full" />

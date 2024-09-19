@@ -1,20 +1,52 @@
 .wrapper {
   display: grid;
   grid-auto-flow: row;
-  row-gap: 25px;
-  padding: 25px 20px;
-  height: 300px;
+  row-gap: 20px;
+  padding: 15px;
   border-radius: 20px;
   box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.16);
+  min-height: 260px;
+
+  grid-template-areas:
+    "item1"
+    "item2"
+    "item3"
+    "item4";
+
+  @media (max-width: 992px) {
+    min-height: 190px;
+    grid-template-areas:
+      "item1 item1"
+      "item2 item3"
+      "item4 item4";
+  }
+
+  @media (max-width: 576px) {
+    grid-template-areas:
+      "item1"
+      "item2"
+      "item3"
+      "item4";
+  }
+
+  .title {
+    grid-area: item1;
+  }
 
   .format {
     display: grid;
     grid-auto-flow: row;
     row-gap: 10px;
+    grid-area: item2;
   }
   .price {
     display: grid;
     grid-auto-flow: row;
     row-gap: 15px;
+    grid-area: item3;
+  }
+
+  .button {
+    grid-area: item4;
   }
 }

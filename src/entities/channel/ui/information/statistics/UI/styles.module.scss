@@ -5,15 +5,19 @@
 
   .title {
     color: var(--Personal-colors-black);
-    font-size: 28px;
+    font-size: 24px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    @media (max-width: 576px) {
+      font-size: 20px;
+      text-align: center;
+    }
   }
 
   .block__wrapper {
     display: grid;
-    grid-template: 1fr / 1fr 1fr;
+    grid-template: 1fr / repeat(2, 1fr);
     column-gap: 15px;
 
     p {
@@ -23,6 +27,7 @@
       font-style: normal;
       font-weight: 500;
       line-height: normal;
+      white-space: nowrap;
     }
 
     span {
@@ -33,10 +38,19 @@
       font-weight: 500;
       line-height: normal;
     }
-
+    @media (max-width: 576px) {
+      grid-template: repeat(2, 1fr) / 1fr;
+      row-gap: 15px;
+      p {
+        font-size: 12px;
+      }
+      span {
+        font-size: 22px;
+      }
+    }
     .main {
       display: grid;
-      grid-template: 1fr 1fr / 1fr;
+      grid-template: repeat(2, 1fr) / 1fr;
       row-gap: 15px;
 
       .block {
@@ -48,12 +62,16 @@
         border-radius: 12px;
         background: var(--Personal-colors-White);
         box-shadow: 0px 4px 16px 0px rgba(0, 0, 0, 0.12);
+
+        @media (max-width: 576px) {
+          padding: 15px 0;
+        }
       }
     }
 
     .channel {
       display: grid;
-      grid-template: 1fr / 1fr 1fr;
+      grid-template: 1fr / repeat(2, 1fr);
       padding: 10px 0;
       border-radius: 12px;
       background: var(--Personal-colors-White);
@@ -61,7 +79,7 @@
 
       .column {
         display: grid;
-        grid-template: 1fr 1fr / 1fr;
+        grid-template: repeat(2, 1fr) / 1fr;
         padding: 0 10px;
 
         &.borRight {
