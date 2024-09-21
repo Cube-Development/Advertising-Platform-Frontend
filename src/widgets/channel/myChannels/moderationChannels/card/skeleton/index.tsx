@@ -9,17 +9,17 @@ export const ModChannelCardSkeleton: FC = () => {
         <div className={styles.card__logo}>
           <Skeleton className="h-[50px] w-[50px] rounded-full" />
           <div className={styles.title}>
-            <Skeleton className="h-3 w-[70px]" />
-            <Skeleton className="h-2 w-[100px]" />
+            <Skeleton className="h-3 w-3/5 max-w-[200px]" />
+            <Skeleton className="h-2 w-2/5 max-w-[160px]" />
           </div>
         </div>
         <div className={styles.card__info}>
-          <Skeleton className="h-3 w-full" />
-        </div>
-        <div className={styles.card__info}>
-          <Skeleton className="h-full w-full rounded-[12px]" />
+          <Skeleton className="h-3 w-full min-w-[120px]" />
         </div>
         <div className={styles.card__status}>
+          <Skeleton className="h-full w-full rounded-[12px]" />
+        </div>
+        <div className={styles.card__text}>
           <Skeleton className="h-3 w-full" />
         </div>
       </div>

@@ -1,18 +1,21 @@
 .card {
   display: grid;
-  grid-template: 1fr / 3.5fr 1.5fr 4.5fr 6fr;
-  padding: 10px 30px;
-  height: 70px;
+  grid-template: 1fr / 1.2fr 1fr 1.5fr 2fr;
+  padding: 10px 20px;
+  height: 85px;
+  grid-template-areas: "item1 item2 item3 item4";
 
   &__logo {
     display: grid;
-    grid-auto-flow: column;
-    column-gap: 10px;
+    grid-template: 1fr / min-content 1fr;
+    column-gap: 20px;
     align-items: center;
+    grid-area: item1;
+
     .title {
       display: grid;
       grid-auto-flow: row;
-      row-gap: 10px;
+      row-gap: 15px;
     }
   }
 
@@ -20,11 +23,63 @@
     padding: 0 20px;
     display: grid;
     align-items: center;
+    grid-area: item2;
   }
 
   &__status {
     display: grid;
     align-items: center;
-    margin-left: 20px;
+    padding-left: 20px;
+    grid-area: item3;
+  }
+
+  &__text {
+    display: grid;
+    align-items: center;
+    padding-left: 20px;
+    grid-area: item4;
+  }
+
+  @media (max-width: 992px) {
+    grid-template: 1fr 1fr / 3.5fr 1.5fr 4.5fr;
+    row-gap: 20px;
+    height: 170px;
+    grid-template-areas:
+      "item1 item2 item3"
+      "item4 item4 item4";
+    &__info {
+      padding: 0 15px;
+    }
+
+    &__status {
+      padding-left: 15px;
+    }
+
+    &__text {
+      padding-left: 0;
+    }
+  }
+
+  @media (max-width: 576px) {
+    grid-template: 1fr 1.6fr 1fr 0.8fr/ 1fr;
+    row-gap: 10px;
+    height: 265px;
+    grid-template-areas:
+      "item1"
+      "item3"
+      "item2"
+      "item4";
+    &__info {
+      padding: 0;
+      div {
+        height: 40px;
+        border-radius: 12px;
+      }
+    }
+
+    &__status {
+      padding-top: 10px;
+      padding-left: 0;
+    }
   }
 }

@@ -2583,3 +2583,55 @@ export const blockedChannelsMock: IChannelBlogger = {
   status: channelStatusFilter.active,
   isLast: true,
 };
+
+export const My_CHANNELS = {
+  page: 1,
+  elements: 30,
+  channels: [
+    {
+      id: "0a5de3e6-56fc-4b42-9c03-cb003b2f7bb8",
+      name: "NN",
+      category: "Digital и IT",
+      status: 1,
+      avatar:
+        "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
+      channel_orders: {
+        wait: 0,
+        in_progress: 0,
+        completed: 0,
+        canceled_rejected: 0,
+      },
+      tags: [],
+    },
+    {
+      id: "63f78c26-58f0-444f-9b57-0a410f5d38ac",
+      name: "Wylsacom Red",
+      category: "Гаджеты",
+      status: 1,
+      avatar:
+        "https://static6.tgstat.ru/channels/_0/07/0759b82303d700c50c174fe7518d4d4a.jpg",
+      channel_orders: {
+        wait: 0,
+        in_progress: 0,
+        completed: 0,
+        canceled_rejected: 0,
+      },
+      tags: [],
+    },
+    {
+      id: "15097641-096f-4fcf-9196-1d0459aae394",
+      name: "Romancev768",
+      category: "Гаджеты",
+      status: 1,
+      avatar:
+        "https://static9.tgstat.ru/channels/_0/d4/d46e5f4762657de7ea8279240282a32c.jpg",
+      channel_orders: {
+        wait: 0,
+        in_progress: 0,
+        completed: 0,
+        canceled_rejected: 0,
+      },
+      tags: [],
+    },
+  ],
+};

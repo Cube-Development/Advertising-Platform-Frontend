@@ -45,7 +45,7 @@ export const ModerationChannels: FC<ModerationChannelsProps> = ({
               <ModChannelCard key={index} card={card} />
             </motion.div>
           ))}
-          {isLoading &&
+          {!isLoading &&
             Array.from({ length: INTERSECTION_ELEMENTS.myModChannels }).map(
               (_, index) => <ModChannelCardSkeleton key={index} />,
             )}
