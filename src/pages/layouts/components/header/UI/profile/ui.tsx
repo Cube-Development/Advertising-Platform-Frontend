@@ -2,7 +2,6 @@ import { ProfileIcon } from "@shared/assets";
 import { FC, useState, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import Cookies from "js-cookie";
 import { Link, useNavigate } from "react-router-dom";
 import { paths } from "@shared/routing";
 import { roles, useLogoutMutation } from "@entities/user";
@@ -38,8 +37,7 @@ export const Profile: FC<ProfileProps> = ({ toggleLogout }) => {
   };
   const handleLogout = async () => {
     try {
-      const refreshToken = Cookies.get("refreshToken");
-      refreshToken && logout(refreshToken);
+      logout();
       toggleLogout();
       navigate(role === roles.advertiser ? paths.main : paths.mainBlogger);
     } catch (error) {

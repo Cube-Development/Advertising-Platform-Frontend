@@ -38,7 +38,6 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
-import { AuthStateGenerator } from "@entities/user";
 
 interface BuyTarifProps {
   tarif: number;
@@ -62,7 +61,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, page }) => {
   const { balance } = useAppSelector((state) => state.wallet);
 
   const [isHaveBalance, setIsHaveBalance] = useState<boolean>(
-    tarifPrice <= balance,
+    tarifPrice <= balance
   );
 
   const { setValue, watch } = useForm<IBuyTarif>({
@@ -194,15 +193,6 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, page }) => {
     };
   }, []);
 
-  const handleRegistrationClick = () => {
-    const { registrationLink } = AuthStateGenerator();
-    window.location.href = registrationLink;
-  };
-
-  const handleLoginClick = () => {
-    const { loginLink } = AuthStateGenerator();
-    window.location.href = loginLink;
-  };
   const { isAuth } = useAppSelector((state) => state.user);
 
   return (
@@ -248,12 +238,12 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, page }) => {
                                   <div className={styles.text}>
                                     <p>
                                       {t(
-                                        "turnkey.chain.have_balance.comment.title",
+                                        "turnkey.chain.have_balance.comment.title"
                                       )}
                                     </p>
                                     <span>
                                       {t(
-                                        "turnkey.chain.have_balance.comment.text",
+                                        "turnkey.chain.have_balance.comment.text"
                                       )}
                                     </span>
                                   </div>
@@ -264,7 +254,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, page }) => {
                                     onChange={handleChangeComment}
                                     maxLength={1000}
                                     placeholder={t(
-                                      "turnkey.chain.have_balance.comment.value",
+                                      "turnkey.chain.have_balance.comment.value"
                                     )}
                                   />
                                 </div>
@@ -272,7 +262,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, page }) => {
                                   <div className={styles.text}>
                                     <p>
                                       {t(
-                                        "turnkey.chain.have_balance.url.title",
+                                        "turnkey.chain.have_balance.url.title"
                                       )}
                                     </p>
                                     <span>
@@ -282,7 +272,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, page }) => {
                                   <div className={styles.menu__url_add}>
                                     <input
                                       placeholder={t(
-                                        "turnkey.chain.have_balance.url.value",
+                                        "turnkey.chain.have_balance.url.value"
                                       )}
                                       onChange={(e) => {
                                         setUrl(e.target.value);
@@ -292,7 +282,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, page }) => {
                                     <button onClick={handleChangeUrl}>
                                       <p>
                                         {t(
-                                          "turnkey.chain.have_balance.url.button",
+                                          "turnkey.chain.have_balance.url.button"
                                         )}
                                       </p>
                                     </button>
@@ -322,12 +312,12 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, page }) => {
                                   <div className={styles.text}>
                                     <p>
                                       {t(
-                                        "turnkey.chain.have_balance.file.title",
+                                        "turnkey.chain.have_balance.file.title"
                                       )}
                                     </p>
                                     <span>
                                       {t(
-                                        "turnkey.chain.have_balance.file.text",
+                                        "turnkey.chain.have_balance.file.text"
                                       )}
                                     </span>
                                   </div>
@@ -377,18 +367,18 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, page }) => {
                                           <div className={styles.files__text}>
                                             <p>
                                               {t(
-                                                "turnkey.chain.have_balance.file.value",
+                                                "turnkey.chain.have_balance.file.value"
                                               )}
                                             </p>
                                             <p>
                                               {t(
-                                                "turnkey.chain.have_balance.file.or",
+                                                "turnkey.chain.have_balance.file.or"
                                               )}
                                             </p>
                                             <label className={styles.button}>
                                               <span>
                                                 {t(
-                                                  "turnkey.chain.have_balance.file.button",
+                                                  "turnkey.chain.have_balance.file.button"
                                                 )}
                                               </span>
                                               <input
@@ -414,24 +404,24 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, page }) => {
                                             <div className={styles.file}>
                                               <p>
                                                 {t(
-                                                  "turnkey.chain.have_balance.file.formats.title",
+                                                  "turnkey.chain.have_balance.file.formats.title"
                                                 )}
                                               </p>
                                               <span>
                                                 {t(
-                                                  "turnkey.chain.have_balance.file.formats.text",
+                                                  "turnkey.chain.have_balance.file.formats.text"
                                                 )}
                                               </span>
                                             </div>
                                             <div className={styles.size}>
                                               <p>
                                                 {t(
-                                                  "turnkey.chain.have_balance.file.size.title",
+                                                  "turnkey.chain.have_balance.file.size.title"
                                                 )}
                                               </p>
                                               <span>
                                                 {t(
-                                                  "turnkey.chain.have_balance.file.size.text",
+                                                  "turnkey.chain.have_balance.file.size.text"
                                                 )}
                                               </span>
                                             </div>
@@ -505,12 +495,12 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, page }) => {
                                     <div>
                                       <p>
                                         {t(
-                                          "turnkey.chain.no_balance.remainder",
+                                          "turnkey.chain.no_balance.remainder"
                                         )}
                                       </p>
                                       <span>
                                         {Math.ceil(
-                                          Math.abs(balance - tarifPrice),
+                                          Math.abs(balance - tarifPrice)
                                         ).toLocaleString()}{" "}
                                         {t("symbol")}
                                       </span>
@@ -574,7 +564,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, page }) => {
                             onChange={handleChangeComment}
                             maxLength={1000}
                             placeholder={t(
-                              "turnkey.chain.have_balance.comment.value",
+                              "turnkey.chain.have_balance.comment.value"
                             )}
                           />
                         </div>
@@ -588,7 +578,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, page }) => {
                           <div className={styles.menu__url_add}>
                             <input
                               placeholder={t(
-                                "turnkey.chain.have_balance.url.value",
+                                "turnkey.chain.have_balance.url.value"
                               )}
                               onChange={(e) => {
                                 setUrl(e.target.value);
@@ -666,13 +656,13 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, page }) => {
                                   <div className={styles.files__text}>
                                     <p>
                                       {t(
-                                        "turnkey.chain.have_balance.file.value",
+                                        "turnkey.chain.have_balance.file.value"
                                       )}
                                     </p>
                                     <label className={styles.button}>
                                       <span>
                                         {t(
-                                          "turnkey.chain.have_balance.file.button",
+                                          "turnkey.chain.have_balance.file.button"
                                         )}
                                       </span>
                                       <input
@@ -694,24 +684,24 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, page }) => {
                                     <div className={styles.file}>
                                       <p>
                                         {t(
-                                          "turnkey.chain.have_balance.file.formats.title",
+                                          "turnkey.chain.have_balance.file.formats.title"
                                         )}
                                       </p>
                                       <span>
                                         {t(
-                                          "turnkey.chain.have_balance.file.formats.text",
+                                          "turnkey.chain.have_balance.file.formats.text"
                                         )}
                                       </span>
                                     </div>
                                     <div className={styles.size}>
                                       <p>
                                         {t(
-                                          "turnkey.chain.have_balance.file.size.title",
+                                          "turnkey.chain.have_balance.file.size.title"
                                         )}
                                       </p>
                                       <span>
                                         {t(
-                                          "turnkey.chain.have_balance.file.size.text",
+                                          "turnkey.chain.have_balance.file.size.text"
                                         )}
                                       </span>
                                     </div>
@@ -777,7 +767,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, page }) => {
                               <p>{t("turnkey.chain.no_balance.remainder")}</p>
                               <span>
                                 {Math.ceil(
-                                  Math.abs(balance - tarifPrice),
+                                  Math.abs(balance - tarifPrice)
                                 ).toLocaleString()}{" "}
                                 {t("symbol")}
                               </span>
@@ -831,19 +821,19 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, page }) => {
               </p>
             </div>
             <DialogFooter className="pt-[20px]">
-              <a
-                onClick={handleLoginClick}
+              <Link
+                to={paths.login}
                 className={`${styles.btns__login} truncate`}
               >
                 {t("login")}
                 <LoginIcon />
-              </a>
-              <a
-                onClick={handleRegistrationClick}
-                className={`${styles.btns__register} cate`}
+              </Link>
+              <Link
+                to={paths.registration}
+                className={`${styles.btns__register} truncate`}
               >
                 {t("registration")}
-              </a>
+              </Link>
             </DialogFooter>
           </DialogContent>
         </Dialog>

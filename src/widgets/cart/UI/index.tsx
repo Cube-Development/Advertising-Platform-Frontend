@@ -15,7 +15,7 @@ import {
   useRemoveFromManagerCartMutation,
   useRemoveFromPublicCartMutation,
 } from "@entities/project";
-import { GenerateGuestId, GetUserId, roles } from "@entities/user";
+import { GenerateGuestId, roles } from "@entities/user";
 import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 import { useAppSelector } from "@shared/hooks";
 import { ToastAction, useToast } from "@shared/ui";
@@ -32,7 +32,7 @@ export const Cart: FC = () => {
   const language = Languages.find((lang) => {
     return i18n.language === lang.name;
   });
-  const { isAuth } = useAppSelector((state) => state.user);
+  const { isAuth, user_id } = useAppSelector((state) => state.user);
 
   const guestId = Cookies.get("guest_id");
   const role = Cookies.get("role");
@@ -102,13 +102,12 @@ export const Cart: FC = () => {
     },
   });
 
-  const userId = GetUserId();
   const formFields = watch();
 
   const { data: recomendCards } = useGetCatalogQuery(
-    { ...formFields, user_id: userId },
+    { ...formFields, user_id: user_id },
     {
-      skip: !userId,
+      skip: !user_id,
     },
   );
   // КОНЕЦ

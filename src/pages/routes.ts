@@ -18,6 +18,8 @@ import { TopupPage } from "./Topup";
 import { TurnkeyPage } from "./Turnkey";
 import { WalletHistoryPage } from "./WalletHistory";
 import { WithdrawalPage } from "./Withdrawal";
+import { LoginPage } from "./Login";
+import { RegistrationPage } from "./Registration";
 
 export interface IRoute {
   path: string;
@@ -37,6 +39,8 @@ export const publicCommonRoutes: IRoute[] = [
   { path: paths.myChannels, component: MyChannelsPage, sidebar: true },
   { path: paths.faq, component: FAQPage, sidebar: true },
   { path: paths.notFound, component: NotFoundPage },
+  { path: paths.login, component: LoginPage },
+  { path: paths.registration, component: RegistrationPage },
 ];
 
 export const privateBloggerRoutes: IRoute[] = [

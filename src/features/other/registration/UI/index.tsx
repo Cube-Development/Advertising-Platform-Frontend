@@ -4,7 +4,8 @@ import { useTranslation } from "react-i18next";
 import { Link as ScrollLink } from "react-scroll";
 import styles from "./styles.module.scss";
 import { useAppSelector } from "@shared/hooks";
-import { AuthStateGenerator } from "@entities/user";
+import { Link } from "react-router-dom";
+import { paths } from "@shared/routing";
 
 export const Registration: FC = () => {
   const { t } = useTranslation();
@@ -15,11 +16,6 @@ export const Registration: FC = () => {
       {t(`registration`)}
     </MyButton>
   );
-
-  const handleRegistration = () => {
-    const { loginLink } = AuthStateGenerator();
-    window.location.href = loginLink;
-  };
 
   return (
     <>
@@ -33,7 +29,7 @@ export const Registration: FC = () => {
           {registrationButton}
         </ScrollLink>
       ) : (
-        <a onClick={handleRegistration}>{registrationButton}</a>
+        <Link to={paths.registration}>{registrationButton}</Link>
       )}
     </>
   );

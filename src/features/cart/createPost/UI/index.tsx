@@ -10,9 +10,10 @@ import {
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { AuthStateGenerator } from "@entities/user";
 import { useAppSelector } from "@shared/hooks";
 import { CircleX } from "lucide-react";
+import { Link } from "react-router-dom";
+import { paths } from "@shared/routing";
 
 interface CreatePostProps {
   onClick?: () => void;
@@ -20,16 +21,6 @@ interface CreatePostProps {
 
 export const CreatePost: FC<CreatePostProps> = ({ onClick }) => {
   const { t } = useTranslation();
-
-  const handleRegistrationClick = () => {
-    const { registrationLink } = AuthStateGenerator();
-    window.location.href = registrationLink;
-  };
-
-  const handleLoginClick = () => {
-    const { loginLink } = AuthStateGenerator();
-    window.location.href = loginLink;
-  };
   const { isAuth } = useAppSelector((state) => state.user);
 
   return (
@@ -74,19 +65,19 @@ export const CreatePost: FC<CreatePostProps> = ({ onClick }) => {
               </p>
             </div>
             <DialogFooter className="pt-[20px]">
-              <a
-                onClick={handleLoginClick}
+              <Link
+                to={paths.login}
                 className={`${styles.btns__login} truncate`}
               >
                 {t("login")}
                 <LoginIcon />
-              </a>
-              <a
-                onClick={handleRegistrationClick}
+              </Link>
+              <Link
+                to={paths.registration}
                 className={`${styles.btns__register} truncate`}
               >
                 {t("registration")}
-              </a>
+              </Link>
             </DialogFooter>
           </DialogContent>
         </Dialog>

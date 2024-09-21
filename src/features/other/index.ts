@@ -11,4 +11,3 @@ export * from "./selectDescription";
 export * from "./selectOptions";
 export * from "./selectSex";
 export * from "./turnkeyProject";
-export * from "./handleAuth";

@@ -129,6 +129,11 @@
       opacity 0.3s ease,
       visibility 0.3s ease;
 
+    &.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
     @media (max-width: 992px) {
       width: 50vw;
     }
@@ -156,18 +161,6 @@
 
   @media (min-width: 577px) {
     .circle:hover + .match_description {
-      opacity: 1;
-      visibility: visible;
-    }
-  }
-
-  @media (max-width: 576px) {
-    .circle:hover + .match_description {
-      opacity: 1;
-      visibility: visible;
-    }
-
-    .circle:active + .match_description {
       opacity: 1;
       visibility: visible;
     }

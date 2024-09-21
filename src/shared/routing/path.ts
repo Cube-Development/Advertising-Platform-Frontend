@@ -19,4 +19,6 @@ export enum paths {
   myChannels = "/channels",
   channel = "/channel/:id",
   faq = "/faq",
+  login = "/login",
+  registration = "/registration",
 }

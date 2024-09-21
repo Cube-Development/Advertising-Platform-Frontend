@@ -1,1 +1,0 @@
-export { HandleAuth } from "./handleAuth";
