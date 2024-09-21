@@ -25,27 +25,29 @@ export const ManagerNewProjectsList: FC<ManagerNewProjectsListProps> = ({
       {!isLoading && projects?.length === 0 ? (
         <ZeroManagerProject />
       ) : (
-        <div className={styles.cards}>
-          {projects?.map((card, index) => (
-            <motion.div
-              key={card.id + index}
-              initial="hidden"
-              animate="visible"
-              custom={index % INTERSECTION_ELEMENTS.managerOrders}
-              variants={PAGE_ANIMATION.animationUp}
-            >
-              <ManagerNewProjectCard card={card} />
-            </motion.div>
-          ))}
-          {isLoading &&
-            Array.from({ length: INTERSECTION_ELEMENTS.managerOrders }).map(
-              (_, index) => <SkeletonManagerNewProjectCard key={index} />,
+        <div>
+          <div className={styles.cards}>
+            {projects?.map((card, index) => (
+              <motion.div
+                key={card.id + index}
+                initial="hidden"
+                animate="visible"
+                custom={index % INTERSECTION_ELEMENTS.managerOrders}
+                variants={PAGE_ANIMATION.animationUp}
+              >
+                <ManagerNewProjectCard card={card} />
+              </motion.div>
+            ))}
+            {!isLoading &&
+              Array.from({ length: INTERSECTION_ELEMENTS.managerOrders }).map(
+                (_, index) => <SkeletonManagerNewProjectCard key={index} />,
+              )}
+            {!isLast && (
+              <div className={styles.show_more} onClick={handleOnChangePage}>
+                {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
+              </div>
             )}
-          {!isLast && (
-            <div className={styles.show_more} onClick={handleOnChangePage}>
-              {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
-            </div>
-          )}
+          </div>
         </div>
       )}
     </Accordion>

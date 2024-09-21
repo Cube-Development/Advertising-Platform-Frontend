@@ -33,13 +33,15 @@ export const privateCommonRoutes: IRoute[] = [
 ];
 
 export const publicCommonRoutes: IRoute[] = [
+  { path: paths.orders, component: OrdersPage },
+  { path: paths.myChannels, component: MyChannelsPage, sidebar: true },
   { path: paths.faq, component: FAQPage, sidebar: true },
   { path: paths.notFound, component: NotFoundPage },
 ];
 
 export const privateBloggerRoutes: IRoute[] = [
   { path: paths.addChannel, component: AddChannelPage, sidebar: true },
-  { path: paths.myChannels, component: MyChannelsPage, sidebar: true },
+  // { path: paths.myChannels, component: MyChannelsPage, sidebar: true },
   { path: paths.offers, component: OffersPage, sidebar: true },
 ];
 
@@ -48,7 +50,7 @@ export const publicBloggerRoutes: IRoute[] = [
 ];
 
 export const privateAdvertiserRoutes: IRoute[] = [
-  { path: paths.orders, component: OrdersPage },
+  // { path: paths.orders, component: OrdersPage },
 ];
 
 export const publicAdvertiserRoutes: IRoute[] = [

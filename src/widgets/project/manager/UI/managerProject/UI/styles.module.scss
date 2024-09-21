@@ -1,10 +1,17 @@
 .wrapper {
   min-height: var(--cards-list-height);
+  display: grid;
+  grid-auto-flow: row;
 
   .cards {
     display: grid;
     grid-auto-flow: row;
     row-gap: 10px;
+
+    .motion {
+      display: grid;
+      height: min-content;
+    }
 
     .show_more {
       margin: 10px auto;

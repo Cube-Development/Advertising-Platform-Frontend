@@ -1,7 +1,11 @@
 import { channelStatusFilter } from "@entities/channel";
 import { offerStatusFilter } from "@entities/offer";
 import { platformTypes } from "@entities/platform";
-import { projectTypesFilter } from "@entities/project";
+import {
+  advManagerProjectStatusFilter,
+  myProjectStatusFilter,
+  projectTypesFilter,
+} from "@entities/project";
 import { roles } from "@entities/user";
 import { AddChannel } from "@features/channel";
 import {
@@ -23,10 +27,20 @@ interface BarFilterProps {
   page: pageFilter;
   listLength: boolean;
   setValue?: UseFormSetValue<any>;
-  typeFilter?: string;
-  statusFilter: channelStatusFilter | offerStatusFilter | string;
+  typeFilter?: projectTypesFilter | string;
+  statusFilter:
+    | advManagerProjectStatusFilter
+    | myProjectStatusFilter
+    | channelStatusFilter
+    | offerStatusFilter
+    | string;
   changeStatus: (
-    status: channelStatusFilter | offerStatusFilter | string,
+    status:
+      | advManagerProjectStatusFilter
+      | myProjectStatusFilter
+      | channelStatusFilter
+      | offerStatusFilter
+      | string,
   ) => void;
   changeType?: (status: string) => void;
 }

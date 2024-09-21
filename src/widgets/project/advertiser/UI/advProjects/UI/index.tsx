@@ -1,6 +1,9 @@
-import { channelStatusFilter } from "@entities/channel";
-import { offerStatusFilter } from "@entities/offer";
-import { IAdvProjectCard } from "@entities/project";
+import {
+  advManagerProjectStatusFilter,
+  IAdvProjectCard,
+  myProjectStatusFilter,
+  projectTypesFilter,
+} from "@entities/project";
 import { TurnkeyProject } from "@features/other";
 import { NewProject, ZeroProject } from "@features/project";
 import { PAGE_ANIMATION } from "@shared/config";
@@ -16,8 +19,8 @@ interface AdvProjectsListProps {
   handleOnChangePage: () => void;
   isLoading: boolean;
   isLast: boolean;
-  typeFilter: string;
-  statusFilter: channelStatusFilter | offerStatusFilter | string;
+  typeFilter: projectTypesFilter;
+  statusFilter: advManagerProjectStatusFilter | myProjectStatusFilter;
 }
 
 export const AdvProjectsList: FC<AdvProjectsListProps> = ({
@@ -38,39 +41,41 @@ export const AdvProjectsList: FC<AdvProjectsListProps> = ({
           typeFilter={typeFilter}
         />
       ) : (
-        <div className={styles.cards}>
-          {projects?.map((card, index) => (
-            <motion.div
-              key={card.id + index}
-              initial="hidden"
-              animate="visible"
-              custom={index % INTERSECTION_ELEMENTS.advOrders}
-              variants={PAGE_ANIMATION.animationUp}
-              className={styles.motion}
-            >
-              <AdvProjectCard
-                statusFilter={statusFilter}
-                typeFilter={typeFilter}
-                key={index}
-                card={card}
-              />
-            </motion.div>
-          ))}
-          {!isLoading &&
-            Array.from({ length: INTERSECTION_ELEMENTS.advOrders }).map(
-              (_, index) => (
-                <ProjectCardSkeleton
-                  typeFilter={typeFilter}
+        <div>
+          <div className={styles.cards}>
+            {projects?.map((card, index) => (
+              <motion.div
+                key={card.id + index}
+                initial="hidden"
+                animate="visible"
+                custom={index % INTERSECTION_ELEMENTS.advOrders}
+                variants={PAGE_ANIMATION.animationUp}
+                className={styles.motion}
+              >
+                <AdvProjectCard
                   statusFilter={statusFilter}
+                  typeFilter={typeFilter}
                   key={index}
+                  card={card}
                 />
-              ),
+              </motion.div>
+            ))}
+            {!isLoading &&
+              Array.from({ length: INTERSECTION_ELEMENTS.advOrders }).map(
+                (_, index) => (
+                  <ProjectCardSkeleton
+                    typeFilter={typeFilter}
+                    statusFilter={statusFilter}
+                    key={index}
+                  />
+                ),
+              )}
+            {!isLast && (
+              <div className={styles.show_more} onClick={handleOnChangePage}>
+                {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
+              </div>
             )}
-          {!isLast && (
-            <div className={styles.show_more} onClick={handleOnChangePage}>
-              {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
-            </div>
-          )}
+          </div>
         </div>
       )}
     </Accordion>

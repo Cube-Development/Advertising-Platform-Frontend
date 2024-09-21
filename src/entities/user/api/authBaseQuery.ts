@@ -102,7 +102,9 @@ export const authBaseQuery: BaseQueryFn<
     baseUrl,
     headers: {
       accept: "application/json",
-      Cookie: `adv-blog=${advBlogCookie}`,
+      // Cookie: `adv-blog=${advBlogCookie}`,
+      // httpOnly: true,
+      // sameSite: 'None',
     },
     credentials: "include",
   });
@@ -122,14 +124,22 @@ export const authBaseQuery: BaseQueryFn<
   //           {
   //             method: "POST",
   //             credentials: "include",
-  //             url: "/auth/jwt/login",
-  //             body: {
-  //               username,
-  //               password,
-  //             } as ILoginRequest,
+  //             url: "/auth/jwt/login/",
+  //             headers: {
+  //               "Content-Type": "application/x-www-form-urlencoded",
+  //               accept: "application/json",
+  //             },
+  //             body: new URLSearchParams({
+  //               grant_type: "",
+  //               username: username,
+  //               password: password,
+  //               scope: "",
+  //               client_id: "",
+  //               client_secret: "",
+  //             }).toString(),
   //           },
   //           api,
-  //           extraOptions,
+  //           extraOptions
   //         );
 
   //         if (loginResult.error) {

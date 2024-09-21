@@ -1,9 +1,8 @@
-import { channelStatusFilter } from "@entities/channel";
-import { offerStatusFilter } from "@entities/offer";
 import {
   advertiserProjectTypes,
   advManagerProjectStatusFilter,
   getProjectsCardReq,
+  myProjectStatusFilter,
   projectTypesFilter,
   useGetAdvManagerProjectsQuery,
   useGetAdvProjectsQuery,
@@ -34,11 +33,11 @@ export const AdvOrders: FC = () => {
   const { order_type } = QueryParams();
 
   const { setValue, watch } = useForm<{
-    status: channelStatusFilter | offerStatusFilter | string;
-    type: string;
+    status: advManagerProjectStatusFilter | myProjectStatusFilter | string;
+    type: projectTypesFilter | string;
   }>({
     defaultValues: {
-      status: channelStatusFilter.active,
+      status: myProjectStatusFilter.active,
       type: projectTypesFilter.myProject,
     },
   });
@@ -134,8 +133,12 @@ export const AdvOrders: FC = () => {
           />
         ) : (
           <AdvProjectsList
-            statusFilter={formState.status}
-            typeFilter={formState.type}
+            statusFilter={
+              formState.status as
+                | advManagerProjectStatusFilter
+                | myProjectStatusFilter
+            }
+            typeFilter={formState.type as projectTypesFilter}
             // projects={projectsSelf?.projects || projectsManager?.projects || []}
             projects={
               // (projectsSelf?.status === formState.status &&

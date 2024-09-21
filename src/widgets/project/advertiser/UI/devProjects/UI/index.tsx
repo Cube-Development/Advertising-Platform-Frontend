@@ -1,6 +1,7 @@
 import {
   AdvDevProjectCard,
   IAdvManagerProjectsDevCard,
+  projectTypesFilter,
   SkeletonAdvDevProjectCard,
 } from "@entities/project";
 import { TurnkeyProject } from "@features/other";
@@ -17,7 +18,7 @@ interface DevProjectsListProps {
   handleOnChangePage: () => void;
   isLoading: boolean;
   isLast: boolean;
-  typeFilter: string;
+  typeFilter: projectTypesFilter;
 }
 
 export const DevProjectsList: FC<DevProjectsListProps> = ({
@@ -37,27 +38,29 @@ export const DevProjectsList: FC<DevProjectsListProps> = ({
           typeFilter={typeFilter}
         />
       ) : (
-        <div className={styles.cards}>
-          {projects?.map((card, index) => (
-            <motion.div
-              key={card.id + index}
-              initial="hidden"
-              animate="visible"
-              custom={index % INTERSECTION_ELEMENTS.advOrders}
-              variants={PAGE_ANIMATION.animationUp}
-            >
-              <AdvDevProjectCard key={index} card={card} ChatBtn={Chat} />
-            </motion.div>
-          ))}
-          {!isLoading &&
-            Array.from({ length: INTERSECTION_ELEMENTS.advOrders }).map(
-              (_, index) => <SkeletonAdvDevProjectCard key={index} />,
+        <div>
+          <div className={styles.cards}>
+            {projects?.map((card, index) => (
+              <motion.div
+                key={card.id + index}
+                initial="hidden"
+                animate="visible"
+                custom={index % INTERSECTION_ELEMENTS.advOrders}
+                variants={PAGE_ANIMATION.animationUp}
+              >
+                <AdvDevProjectCard key={index} card={card} ChatBtn={Chat} />
+              </motion.div>
+            ))}
+            {!isLoading &&
+              Array.from({ length: INTERSECTION_ELEMENTS.advOrders }).map(
+                (_, index) => <SkeletonAdvDevProjectCard key={index} />,
+              )}
+            {!isLast && (
+              <div className={styles.show_more} onClick={handleOnChangePage}>
+                {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
+              </div>
             )}
-          {!isLast && (
-            <div className={styles.show_more} onClick={handleOnChangePage}>
-              {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
-            </div>
-          )}
+          </div>
         </div>
       )}
     </div>

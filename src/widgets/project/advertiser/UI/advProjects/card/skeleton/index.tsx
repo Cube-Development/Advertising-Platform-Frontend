@@ -123,7 +123,7 @@ export const ProjectCardSkeleton: FC<ProjectCardSkeletonProps> = ({
             )}
           </div>
         </div>
-        <Skeleton className="w-full h-full rounded-bl-[10px] rounded-br-[10px]" />
+        <Skeleton className="w-full h-full rounded-bl-[20px] rounded-br-[20px]" />
       </div>
     </Skeleton>
   );

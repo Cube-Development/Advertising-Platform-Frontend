@@ -55,8 +55,8 @@ import styles from "./styles.module.scss";
 
 interface AdvProjectCardProps {
   card: IAdvProjectCard;
-  typeFilter: string;
-  statusFilter: channelStatusFilter | offerStatusFilter | string;
+  typeFilter: projectTypesFilter;
+  statusFilter: advManagerProjectStatusFilter | myProjectStatusFilter;
 }
 
 const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
