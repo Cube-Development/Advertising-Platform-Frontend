@@ -7,16 +7,24 @@ export const SkeletonAdvDevProjectCard: FC = () => {
     <Skeleton className="bg-skeleton-light rounded-[20px]">
       <div className={styles.card}>
         <div className={styles.card__title}>
-          <Skeleton className="h-3 w-[150px]" />
-          <Skeleton className="h-2 w-[100px]" />
+          <Skeleton className="h-4 w-4/5 max-w-48" />
+          <div className={styles.date}>
+            <Skeleton className="h-2 w-3/5 max-w-24" />
+            <Skeleton className="h-2 w-full max-w-24 min-w-20" />
+          </div>
         </div>
         <div className={styles.card__info}>
-          <Skeleton className="h-3 w-full" />
-        </div>
-        <div className={styles.card__info}>
-          <Skeleton className="h-3 w-full" />
+          <div>
+            <Skeleton className="h-full w-full rounded-[10px]" />
+          </div>
+          <div>
+            <Skeleton className="h-full w-full rounded-[10px]" />
+          </div>
         </div>
         <div className={styles.card__status}>
+          <Skeleton className="h-full w-full rounded-[12px]" />
+        </div>
+        <div className={styles.card__chat}>
           <Skeleton className="h-full w-full rounded-[12px]" />
         </div>
       </div>

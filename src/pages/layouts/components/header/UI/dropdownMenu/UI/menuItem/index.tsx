@@ -18,7 +18,7 @@ import {
   DialogFooter,
   DialogTrigger,
 } from "@shared/ui";
-import { AuthStateGenerator } from "@entities/user";
+import { paths } from "@shared/routing";
 
 export const MenuItem: React.FC<IMenuItems> = ({
   item,
@@ -30,16 +30,6 @@ export const MenuItem: React.FC<IMenuItems> = ({
   const [isActive, setIsActive] = useState<boolean>(
     openTitle === item.item.title,
   );
-
-  const handleRegistrationClick = () => {
-    const { registrationLink } = AuthStateGenerator();
-    window.location.href = registrationLink;
-  };
-
-  const handleLoginClick = () => {
-    const { loginLink } = AuthStateGenerator();
-    window.location.href = loginLink;
-  };
 
   const accordionRef = useRef(null);
 
@@ -115,19 +105,19 @@ export const MenuItem: React.FC<IMenuItems> = ({
                 </p>
               </div>
               <DialogFooter className="pt-[20px]">
-                <a
-                  onClick={handleLoginClick}
+                <Link
+                  to={paths.login}
                   className={`${styles.btns__login} truncate`}
                 >
                   {t("login")}
                   <LoginIcon />
-                </a>
-                <a
-                  onClick={handleRegistrationClick}
+                </Link>
+                <Link
+                  to={paths.registration}
                   className={`${styles.btns__register} truncate`}
                 >
                   {t("registration")}
-                </a>
+                </Link>
               </DialogFooter>
             </DialogContent>
           </Dialog>

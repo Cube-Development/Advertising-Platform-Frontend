@@ -1,4 +1,5 @@
 import { channelStatusFilter } from "@entities/channel";
+import { IChatOpen } from "@entities/communication";
 import { offerStatusFilter } from "@entities/offer";
 import {
   DisplayFeed,
@@ -11,7 +12,6 @@ import {
 } from "@entities/platform";
 import {
   IAdvProjectSubcard,
-  IChannelChat,
   IOrderFeature,
   advManagerProjectStatusFilter,
   managerProjectStatusFilter,
@@ -54,7 +54,7 @@ interface AdvSubcardProps {
   CheckBtn: FC<IOrderFeature>;
   SeeBtn: FC;
   ChangeChannelBtn: FC<{ project_id: string }>;
-  ChannelChatBtn: FC<IChannelChat>;
+  ChannelChatBtn: FC<IChatOpen>;
   typeFilter: string;
   statusFilter: channelStatusFilter | offerStatusFilter | string;
 }
@@ -423,7 +423,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
             <div
               className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : "deactive"}`}
             >
-              <ChannelChatBtn id={"1"} />
+              <ChannelChatBtn orderId={"1"} />
             </div>
           )}
       </div>
@@ -521,7 +521,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
               <div
                 className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : "deactive"}`}
               >
-                <ChannelChatBtn id={"1"} toRole={roles.blogger} />
+                <ChannelChatBtn orderId={"1"} toRole={roles.blogger} />
               </div>
             )}
           {subcard?.api_status === orderStatus.canceled ||

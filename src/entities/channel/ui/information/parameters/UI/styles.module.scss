@@ -15,18 +15,18 @@
 
     p {
       color: var(--Containers);
-      font-size: 16px;
+      font-size: 14px;
       font-style: normal;
       font-weight: 600;
-      line-height: normal;
+      line-height: 1;
     }
 
     span {
       color: var(--Personal-colors-black);
-      font-size: 16px;
+      font-size: 14px;
       font-style: normal;
       font-weight: 600;
-      line-height: normal;
+      line-height: 1;
     }
 
     .parameter__sex {
@@ -35,6 +35,17 @@
       column-gap: 5px;
       align-items: center;
       justify-content: start;
+    }
+
+    @media (max-width: 576px) {
+      padding: 15px;
+      grid-template: unset;
+      grid-auto-flow: row;
+      row-gap: 10px;
+      p,
+      span {
+        font-size: 12px;
+      }
     }
   }
 }

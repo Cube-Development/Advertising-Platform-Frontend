@@ -5,7 +5,19 @@
   padding: 35px 50px;
   border-radius: 20px;
   box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.16);
-  height: 300px;
+  // height: 230px;
+
+  @media (max-width: 992px) {
+    padding: 15px 25px;
+  }
+
+  @media (max-width: 768px) {
+    height: unset;
+    row-gap: 20px;
+    grid-auto-flow: row;
+    grid-template: unset;
+    padding: 10px;
+  }
 
   .channel__logo__wrapper {
     display: grid;
@@ -15,6 +27,7 @@
       display: grid;
       grid-auto-flow: row;
       row-gap: 20px;
+      justify-items: center;
 
       .logo {
         display: grid;
@@ -28,13 +41,30 @@
 
   .channel__description {
     display: grid;
-    grid-auto-flow: row;
+    grid-template: repeat(3, min-content) / 1fr min-content;
     row-gap: 25px;
+    column-gap: 10px;
+    grid-template-areas:
+      "item1 item2"
+      "item3 item3"
+      "item4 item4";
+
+    @media (max-width: 768px) {
+      grid-auto-flow: row;
+      grid-template: unset;
+      row-gap: 15px;
+      grid-template-areas:
+        "item1"
+        "item3"
+        "item2"
+        "item4";
+    }
 
     .title {
       display: grid;
       grid-auto-flow: column;
       justify-content: space-between;
+      grid-area: item1;
 
       div {
         display: grid;
@@ -48,6 +78,7 @@
       display: grid;
       grid-auto-flow: row;
       row-gap: 10px;
+      grid-area: item3;
     }
 
     .link {
@@ -56,6 +87,7 @@
       column-gap: 10px;
       align-items: center;
       justify-content: start;
+      grid-area: item4;
     }
   }
 
@@ -64,5 +96,14 @@
     grid-auto-flow: column;
     column-gap: 10px;
     justify-content: start;
+  }
+
+  .icons {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    column-gap: 10px;
+    grid-area: item2;
+    justify-self: flex-start;
   }
 }

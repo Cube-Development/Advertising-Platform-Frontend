@@ -13,19 +13,24 @@ import {
   IAdvManagerProjectsDevCard,
   IAdvProjects,
   IAdvSubprojects,
+  IAdvTemplateProjects,
   IFilterSearch,
+  IManagerNewProjects,
+  IManagerProjects,
 } from "@entities/project";
 
-export const managerActiveCARDS = {
+export const managerActiveCARDS: IManagerProjects = {
   page: 1,
   elements: 1,
   projects: [
     {
-      id: "31111111",
-      created: "20.01.2024",
-      tarif: "Начальный",
-      name: "КУБИКИ",
-      count_channels: 10,
+      id: "311111116",
+      identifier: 1111111,
+      tariff_date: "20.01.2024",
+      tariff_name: "Начальный",
+      project_name: "КУБИКИ",
+      project_id: "КУБИКИ",
+      orders: 10,
       views: 10000,
       budget: 9990000,
       completed: 2,
@@ -211,11 +216,13 @@ export const managerActiveCARDS = {
       ],
     },
     {
-      id: "31111112",
-      created: "20.01.2024",
-      tarif: "Начальный",
-      name: "КУБИКИ",
-      count_channels: 10,
+      id: "311111116",
+      identifier: 1111111,
+      tariff_date: "20.01.2024",
+      tariff_name: "Начальный",
+      project_name: "КУБИКИ",
+      project_id: "КУБИКИ",
+      orders: 10,
       views: 10000,
       budget: 9990000,
       completed: 2,
@@ -401,11 +408,13 @@ export const managerActiveCARDS = {
       ],
     },
     {
-      id: "31111113",
-      created: "20.01.2024",
-      tarif: "Начальный",
-      name: "КУБИКИ",
-      count_channels: 10,
+      id: "311111116",
+      identifier: 1111111,
+      tariff_date: "20.01.2024",
+      tariff_name: "Начальный",
+      project_name: "КУБИКИ",
+      project_id: "КУБИКИ",
+      orders: 10,
       views: 10000,
       budget: 9990000,
       completed: 2,
@@ -593,16 +602,18 @@ export const managerActiveCARDS = {
   ],
 };
 
-export const managerCompletedCARDS = {
+export const managerCompletedCARDS: IManagerProjects = {
   page: 1,
   elements: 1,
   projects: [
     {
-      id: "31111114",
-      created: "20.01.2024",
-      tarif: "Начальный",
-      name: "КУБИКИ",
-      count_channels: 10,
+      id: "311111116",
+      identifier: 1111111,
+      tariff_date: "20.01.2024",
+      tariff_name: "Начальный",
+      project_name: "КУБИКИ",
+      project_id: "КУБИКИ",
+      orders: 10,
       views: 10000,
       budget: 9990000,
       completed: 2,
@@ -702,11 +713,13 @@ export const managerCompletedCARDS = {
       ],
     },
     {
-      id: "31111115",
-      created: "20.01.2024",
-      tarif: "Начальный",
-      name: "КУБИКИ",
-      count_channels: 10,
+      id: "311111116",
+      identifier: 1111111,
+      tariff_date: "20.01.2024",
+      tariff_name: "Начальный",
+      project_name: "КУБИКИ",
+      project_id: "КУБИКИ",
+      orders: 10,
       views: 10000,
       budget: 9990000,
       completed: 2,
@@ -807,16 +820,18 @@ export const managerCompletedCARDS = {
   ],
 };
 
-export const managerAgreedCARDS = {
+export const managerAgreedCARDS: IManagerProjects = {
   page: 1,
   elements: 1,
   projects: [
     {
       id: "311111116",
-      created: "20.01.2024",
-      tarif: "Начальный",
-      name: "КУБИКИ",
-      count_channels: 10,
+      identifier: 1111111,
+      tariff_date: "20.01.2024",
+      tariff_name: "Начальный",
+      project_name: "КУБИКИ",
+      project_id: "КУБИКИ",
+      orders: 10,
       views: 10000,
       budget: 9990000,
       completed: 2,
@@ -887,13 +902,15 @@ export const managerAgreedCARDS = {
     },
 
     {
-      id: "311111117",
-      created: "20.01.2024",
-      tarif: "Начальный",
-      name: "КУБИКИ",
-      count_channels: 10,
-      views: 10000,
-      budget: 9990000,
+      id: "311111116",
+      identifier: 2222111,
+      tariff_date: "23.01.2024",
+      tariff_name: "Начальный",
+      project_name: "КУБИКИ",
+      project_id: "КУБИКИ",
+      orders: 10,
+      views: 10360,
+      budget: 9990220,
       completed: 2,
       canceled_rejected: 10,
       wait: 5,
@@ -963,28 +980,37 @@ export const managerAgreedCARDS = {
   ],
 };
 
-export const managerNewCARDS = {
+export const managerNewCARDS: IManagerNewProjects = {
   page: 1,
   elements: 1,
   projects: [
     {
-      id: 31231132,
-      date: "20.01.2024",
-      tarif: "Комплексный",
-      price: 99999999,
+      id: "31231132",
+      project_id: "fdsfsdf",
+      identifier: 31231132,
+      tariff_date: "20.01.2024",
+      tariff_name: "Комплексный",
+      budget: 99999999,
       comment:
         "Lorem ipsum dolor sit amet consectetur. Dignissim egestas suspendisse quam ac leo viverra aliquet tortor ullamcorper. Sodales adipiscing faucibus ullamcorper vivamus. Id volutpat eu mattis ultrices id felis tristique venenatis. In tellus amet nibh viverra magna bibendum sed pellentesque tincidunt.Lorem ipsum dolor sit amet consectetur. Dignissim egestas suspendisse quam ac leo viverra aliquet tortor ullamcorper. Sodales adipiscing faucibus ullamcorper vivamus. Id volutpat eu mattis ultrices id felis tristique venenatis. In tellus amet nibh viverra magna bibendum sed pellentesque tincidunt.Lorem ipsum dolor sit amet consectetur. Dignissim egestas suspendisse quam ac leo viverra aliquet tortor ullamcorper. Sodales adipiscing faucibus ullamcorper vivamus. Id volutpat eu mattis ultrices id felis tristique venenatis. In tellus amet nibh viverra magna bibendum sed pellentesque tincidunt.quam ac leo viverra aliquet tortor ullamcorper. Sodales adipiscing faucibus ullamcorper vivamus. Id volutpat eu mattis ultrices id felis tristique venenatis. ",
-      url: [
+      links: [
         "https://strident-thump.info",
         "https://strident-thump.info",
         "https://strident-thump.info",
       ],
-      file: [
-        "https://resizing.flixster.com/MlIScHjOtyNAq7SfItBGYoGjbQ8=/206x305/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/NowShowing/146687/146687_aa.jpg",
-        "https://resizing.flixster.com/MlIScHjOtyNAq7SfItBGYoGjbQ8=/206x305/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/NowShowing/146687/146687_aa.jpg",
-        "https://resizing.flixster.com/MlIScHjOtyNAq7SfItBGYoGjbQ8=/206x305/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/NowShowing/146687/146687_aa.jpg",
-        "https://resizing.flixster.com/MlIScHjOtyNAq7SfItBGYoGjbQ8=/206x305/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/NowShowing/146687/146687_aa.jpg",
+      files: [
+        {
+          content:
+            "https://resizing.flixster.com/MlIScHjOtyNAq7SfItBGYoGjbQ8=/206x305/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/NowShowing/146687/146687_aa.jpg",
+          content_type: 2,
+        },
       ],
+      // file: [
+      //   "https://resizing.flixster.com/MlIScHjOtyNAq7SfItBGYoGjbQ8=/206x305/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/NowShowing/146687/146687_aa.jpg",
+      //   "https://resizing.flixster.com/MlIScHjOtyNAq7SfItBGYoGjbQ8=/206x305/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/NowShowing/146687/146687_aa.jpg",
+      //   "https://resizing.flixster.com/MlIScHjOtyNAq7SfItBGYoGjbQ8=/206x305/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/NowShowing/146687/146687_aa.jpg",
+      //   "https://resizing.flixster.com/MlIScHjOtyNAq7SfItBGYoGjbQ8=/206x305/v2/https://resizing.flixster.com/-XZAfHZM39UwaGJIFWKAE8fS0ak=/v3/t/NowShowing/146687/146687_aa.jpg",
+      // ],
     },
   ],
 };
@@ -2344,40 +2370,97 @@ export const MY_PROJECT_ACTIVE_SUBCARD: IAdvSubprojects = {
   ],
 };
 
-export const MY_PROJECT_SAVE_SUBCARD: IAdvManagerProjectsDev = {
+export const MY_PROJECT_SAVE_CARDS: IAdvTemplateProjects = {
   page: 1,
   elements: 6,
   projects: [
     {
       id: "1",
+      identifier: 2315484854,
+      count: 5,
       created: "2024-09-01",
       name: "Campaign Alpha",
-      budget: 50000,
+      budget: 50000000,
     },
+    // {
+    //   id: "2",
+    //   identifier: 8554546,
+    //   count: 7,
+    //   created: "2024-08-20",
+    //   name: "Campaign Beta",
+    //   budget: 75000000,
+    // },
+    // {
+    //   id: "3",
+    //   identifier: 79564654,
+    //   count: 3,
+    //   created: "2024-07-15",
+    //   name: "Campaign Gamma",
+    //   budget: 60000000,
+    // },
+    // {
+    //   id: "4",
+    //   identifier: 2356454,
+    //   count: 3,
+    //   created: "2024-09-05",
+    //   name: "Campaign Delta",
+    //   budget: 80000000,
+    // },
+    // {
+    //   id: "5",
+    //   identifier: 2356454,
+    //   count: 1,
+    //   created: "2024-08-10",
+    //   name: "Campaign Epsilon",
+    //   budget: 45000000,
+    // },
+  ],
+};
+
+export const MY_PROJECT_MANAGER_DEV_CARDS: IAdvManagerProjectsDev = {
+  page: 1,
+  elements: 6,
+  projects: [
     {
-      id: "2",
-      created: "2024-08-20",
-      name: "Campaign Beta",
-      budget: 75000,
+      id: "1",
+      identifier: 2315484854,
+      tarif: "Старт",
+      created: "2024-09-01",
+      name: "Campaign Alpha",
+      budget: 50000000,
     },
-    {
-      id: "3",
-      created: "2024-07-15",
-      name: "Campaign Gamma",
-      budget: 60000,
-    },
-    {
-      id: "4",
-      created: "2024-09-05",
-      name: "Campaign Delta",
-      budget: 80000,
-    },
-    {
-      id: "5",
-      created: "2024-08-10",
-      name: "Campaign Epsilon",
-      budget: 45000,
-    },
+    // {
+    //   id: "2",
+    //   identifier: 8554546,
+    //   tarif: "Старт",
+    //   created: "2024-08-20",
+    //   name: "Campaign Beta",
+    //   budget: 75000000,
+    // },
+    // {
+    //   id: "3",
+    //   identifier: 79564654,
+    //   tarif: "Стандарт",
+    //   created: "2024-07-15",
+    //   name: "Campaign Gamma",
+    //   budget: 60000000,
+    // },
+    // {
+    //   id: "4",
+    //   identifier: 2356454,
+    //   tarif: "Стандарт",
+    //   created: "2024-09-05",
+    //   name: "Campaign Delta",
+    //   budget: 80000000,
+    // },
+    // {
+    //   id: "5",
+    //   identifier: 2356454,
+    //   tarif: "Стандарт",
+    //   created: "2024-08-10",
+    //   name: "Campaign Epsilon",
+    //   budget: 45000000,
+    // },
   ],
 };
 
@@ -2524,4 +2607,56 @@ export const blockedChannelsMock: IChannelBlogger = {
   ],
   status: channelStatusFilter.active,
   isLast: true,
+};
+
+export const My_CHANNELS = {
+  page: 1,
+  elements: 30,
+  channels: [
+    {
+      id: "0a5de3e6-56fc-4b42-9c03-cb003b2f7bb8",
+      name: "NN",
+      category: "Digital и IT",
+      status: 1,
+      avatar:
+        "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
+      channel_orders: {
+        wait: 0,
+        in_progress: 0,
+        completed: 0,
+        canceled_rejected: 0,
+      },
+      tags: [],
+    },
+    {
+      id: "63f78c26-58f0-444f-9b57-0a410f5d38ac",
+      name: "Wylsacom Red",
+      category: "Гаджеты",
+      status: 1,
+      avatar:
+        "https://static6.tgstat.ru/channels/_0/07/0759b82303d700c50c174fe7518d4d4a.jpg",
+      channel_orders: {
+        wait: 0,
+        in_progress: 0,
+        completed: 0,
+        canceled_rejected: 0,
+      },
+      tags: [],
+    },
+    {
+      id: "15097641-096f-4fcf-9196-1d0459aae394",
+      name: "Romancev768",
+      category: "Гаджеты",
+      status: 1,
+      avatar:
+        "https://static9.tgstat.ru/channels/_0/d4/d46e5f4762657de7ea8279240282a32c.jpg",
+      channel_orders: {
+        wait: 0,
+        in_progress: 0,
+        completed: 0,
+        canceled_rejected: 0,
+      },
+      tags: [],
+    },
+  ],
 };

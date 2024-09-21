@@ -127,12 +127,12 @@ export const Description: FC<DescriptionProps> = ({ card }) => {
       <div>
         <div className={styles.channel__description}>
           <div className={styles.title}>
-            <p>{card?.name}</p>
-            <div>
-              <FeatherIcon />
-              <ProtectIcon2 />
-              <StarIcon4 />
-            </div>
+            <p className="truncate">{card?.name}</p>
+          </div>
+          <div className={styles.icons}>
+            <FeatherIcon />
+            <ProtectIcon2 />
+            <StarIcon4 />
           </div>
           <div className={styles.description}>
             <p>{card?.description}</p>

@@ -20,9 +20,21 @@ export const ProjectCardSkeleton: FC<ProjectCardSkeletonProps> = ({
 }) => {
   return (
     <Skeleton className="bg-skeleton-light rounded-[20px]">
-      <div className={styles.wrapper}>
+      <div
+        className={`${styles.wrapper} ${
+          typeFilter === projectTypesFilter.managerProject &&
+          statusFilter === advManagerProjectStatusFilter.completed
+            ? styles.completed
+            : ""
+        }`}
+      >
         <div
-          className={`${styles.card} ${typeFilter === projectTypesFilter.managerProject ? styles.manager_chat : ""}`}
+          className={`${styles.card} ${typeFilter === projectTypesFilter.managerProject && statusFilter !== advManagerProjectStatusFilter.completed ? styles.manager_chat : ""} ${
+            typeFilter === projectTypesFilter.managerProject &&
+            statusFilter === advManagerProjectStatusFilter.completed
+              ? styles.card__manager_completed
+              : ""
+          }`}
         >
           <div className={styles.card__description}>
             <div className={styles.card__description__data}>
@@ -37,17 +49,22 @@ export const ProjectCardSkeleton: FC<ProjectCardSkeletonProps> = ({
             </div>
             <Skeleton className="w-full h-full rounded-[10px]" />
           </div>
-          {typeFilter === projectTypesFilter.managerProject && (
-            <div className={`${styles.chat__btn} display__hide__min__md`}>
-              <Skeleton className="h-full w-full rounded-[10px]" />
-            </div>
-          )}
+          {typeFilter === projectTypesFilter.managerProject &&
+            statusFilter !== advManagerProjectStatusFilter.completed && (
+              <div className={`${styles.chat__btn} display__hide__min__md`}>
+                <Skeleton className="h-full w-full rounded-[10px]" />
+              </div>
+            )}
 
           <div className={styles.card__info}>
             <div className={styles.card__info__data}>
               <Skeleton className="h-full w-full rounded-[10px]" />
               <Skeleton className="h-full w-full rounded-[10px]" />
               <Skeleton className="h-full w-full rounded-[10px]" />
+              {typeFilter === projectTypesFilter.managerProject &&
+                statusFilter === advManagerProjectStatusFilter.completed && (
+                  <Skeleton className="h-full w-full rounded-[10px]" />
+                )}
             </div>
 
             {typeFilter === projectTypesFilter.managerProject &&
@@ -58,6 +75,18 @@ export const ProjectCardSkeleton: FC<ProjectCardSkeletonProps> = ({
                   <Skeleton className="h-3 w-3/6" />
                 </div>
                 <Skeleton className="w-full h-full rounded-[15px] min-h-11" />
+              </div>
+            ) : typeFilter === projectTypesFilter.managerProject &&
+              statusFilter === advManagerProjectStatusFilter.completed ? (
+              <div className={styles.card__info__icons_manager_completed}>
+                <div className={styles.top}>
+                  <Skeleton className={`w-full h-full rounded-[10px]`} />
+                  <Skeleton className={`w-full h-full rounded-[10px]`} />
+                </div>
+                <div className={styles.bottom}>
+                  <Skeleton className={`w-full h-full rounded-[10px]`} />
+                  <Skeleton className={`w-full h-full rounded-[10px]`} />
+                </div>
               </div>
             ) : typeFilter === projectTypesFilter.managerProject &&
               statusFilter === advManagerProjectStatusFilter.active ? (
@@ -94,7 +123,7 @@ export const ProjectCardSkeleton: FC<ProjectCardSkeletonProps> = ({
             )}
           </div>
         </div>
-        <Skeleton className="w-full h-full rounded-bl-[10px] rounded-br-[10px]" />
+        <Skeleton className="w-full h-full rounded-bl-[20px] rounded-br-[20px]" />
       </div>
     </Skeleton>
   );

@@ -6,6 +6,10 @@
     grid-auto-flow: row;
     row-gap: 20px;
 
+    @media (max-width: 768px) {
+      row-gap: 15px;
+    }
+
     .show_more {
       margin: 10px auto;
     }

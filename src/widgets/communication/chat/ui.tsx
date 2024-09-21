@@ -1,4 +1,5 @@
 import {
+  IChatOpen,
   IOrderMessageAll,
   IOrderMessageNewSocket,
   RecipientType,
@@ -30,10 +31,7 @@ import { useTranslation } from "react-i18next";
 import { useCentrifuge } from "./CentrifugeContext";
 import styles from "./styles.module.scss";
 
-export const Chat: FC<{ orderId?: string; toRole?: roles }> = ({
-  orderId,
-  toRole,
-}) => {
+export const Chat: FC<IChatOpen> = ({ orderId, toRole }) => {
   const { t } = useTranslation();
   const role = Cookies.get("role")
     ? (Cookies.get("role") as roles)
@@ -168,7 +166,8 @@ export const Chat: FC<{ orderId?: string; toRole?: roles }> = ({
   };
 
   return (
-    <div className="flex justify-center items-center">
+    <div>
+      {/* <div className="flex justify-center items-center"> */}
       {screen >= BREAKPOINT.MD ? (
         <AlertDialog>
           <AlertDialogTrigger className={styles.chat}>

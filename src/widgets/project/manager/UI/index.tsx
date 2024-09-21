@@ -7,21 +7,27 @@ import {
   managerProjectStatusFilter,
   useGetManagerProjectsQuery,
 } from "@entities/project";
-import { INTERSECTION_ELEMENTS } from "@shared/config";
+import {
+  INTERSECTION_ELEMENTS,
+  managerActiveCARDS,
+  managerAgreedCARDS,
+  managerCompletedCARDS,
+  managerNewCARDS,
+} from "@shared/config";
 import { pageFilter } from "@shared/routing";
 import { BarFilter } from "@widgets/barFilter";
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { ManagerNewProjectsList } from "./managerNewProject";
 import { ManagerProjectsList } from "./managerProject";
+import styles from "./styles.module.scss";
 
 export const ManagerOrders: FC = () => {
   const { setValue, watch } = useForm<{
-    status: channelStatusFilter | offerStatusFilter | string;
-    type: string;
+    status: managerProjectStatusFilter | string;
   }>({
     defaultValues: {
-      status: channelStatusFilter.active,
+      status: managerProjectStatusFilter.active,
     },
   });
   const formState = watch();
@@ -39,7 +45,7 @@ export const ManagerOrders: FC = () => {
     elements_on_page: INTERSECTION_ELEMENTS.managerOrders,
   };
 
-  const { data, isFetching } = useGetManagerProjectsQuery(getParams);
+  // const { data, isFetching } = useGetManagerProjectsQuery(getParams);
   // const [tariffs, setTariffs] = useState<
   //   IManagerNewProjectCard[] | IManagerProjectCard[]
   // >(data ? data.projects : []);
@@ -65,31 +71,44 @@ export const ManagerOrders: FC = () => {
   useEffect(() => {
     setCurrentPage(1);
   }, [formState.status]);
+  console.log(formState.status);
+
+  const data =
+    formState.status === managerProjectStatusFilter.active
+      ? managerActiveCARDS
+      : formState.status === managerProjectStatusFilter.completed
+        ? managerCompletedCARDS
+        : formState.status === managerProjectStatusFilter.new
+          ? managerNewCARDS
+          : managerAgreedCARDS;
+  const isFetching = false;
 
   return (
     <div className="container sidebar">
-      <BarFilter
-        page={page}
-        listLength={!!data?.projects?.length}
-        changeStatus={(status) => setValue("status", status)}
-        statusFilter={formState.status}
-      />
-      {formState.status === managerProjectStatusFilter.new ? (
-        <ManagerNewProjectsList
-          projects={data?.projects! as IManagerNewProjectCard[]}
-          handleOnChangePage={handleOnChangePage}
-          isLoading={isFetching}
-          isLast={data?.isLast || false}
-        />
-      ) : (
-        <ManagerProjectsList
+      <div className={styles.wrapper}>
+        <BarFilter
+          page={page}
+          listLength={!!data?.projects?.length}
+          changeStatus={(status) => setValue("status", status)}
           statusFilter={formState.status}
-          projects={data?.projects! as IManagerProjectCard[]}
-          handleOnChangePage={handleOnChangePage}
-          isLoading={isFetching}
-          isLast={data?.isLast || false}
         />
-      )}
+        {formState.status === managerProjectStatusFilter.new ? (
+          <ManagerNewProjectsList
+            projects={data?.projects! as IManagerNewProjectCard[]}
+            handleOnChangePage={handleOnChangePage}
+            isLoading={isFetching}
+            isLast={data?.isLast || false}
+          />
+        ) : (
+          <ManagerProjectsList
+            statusFilter={formState.status as managerProjectStatusFilter}
+            projects={data?.projects! as IManagerProjectCard[]}
+            handleOnChangePage={handleOnChangePage}
+            isLoading={isFetching}
+            isLast={data?.isLast || false}
+          />
+        )}
+      </div>
     </div>
   );
 };

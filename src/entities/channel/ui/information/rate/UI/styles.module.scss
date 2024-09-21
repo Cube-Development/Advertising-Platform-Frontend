@@ -5,10 +5,15 @@
 
   .title {
     color: var(--Personal-colors-black);
-    font-size: 28px;
+    font-size: 24px;
     font-style: normal;
     font-weight: 600;
     line-height: 1;
+
+    @media (max-width: 576px) {
+      font-size: 20px;
+      text-align: center;
+    }
   }
 
   .card {
@@ -21,6 +26,17 @@
     background: var(--Personal-colors-White);
     box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.16);
 
+    @media (max-width: 768px) {
+      column-gap: 15px;
+    }
+
+    @media (max-width: 576px) {
+      grid-template: unset;
+      grid-auto-flow: row;
+      row-gap: 20px;
+      padding: 15px 25px;
+    }
+
     .left {
       display: grid;
       align-items: start;
@@ -28,6 +44,7 @@
       .rate__wrapper {
         display: grid;
         grid-auto-flow: column;
+        justify-content: center;
         column-gap: 10px;
 
         p {
@@ -36,6 +53,10 @@
           font-style: normal;
           font-weight: 600;
           line-height: 1;
+
+          @media (max-width: 576px) {
+            font-size: 36px;
+          }
         }
 
         .rate {

@@ -54,7 +54,7 @@ export const SkeletonManagerProjectCard: FC<
             )}
           </div>
         </div>
-        <Skeleton className="w-full h-full rounded-[12px]" />
+        <Skeleton className="w-full h-full rounded-bl-[20px] rounded-br-[20px]" />
       </div>
     </Skeleton>
   );

@@ -3,30 +3,21 @@ import styles from "./styles.module.scss";
 import { MyButton } from "@shared/ui";
 import { useTranslation } from "react-i18next";
 import { LoginIcon } from "@shared/assets";
-import { AuthStateGenerator } from "@entities/user";
+import { Link } from "react-router-dom";
+import { paths } from "@shared/routing";
 
 export const LoginBtn: FC = () => {
   const { t } = useTranslation();
 
-  const handleRegistrationClick = () => {
-    const { registrationLink } = AuthStateGenerator();
-    window.location.href = registrationLink;
-  };
-
-  const handleLoginClick = () => {
-    const { loginLink } = AuthStateGenerator();
-    window.location.href = loginLink;
-  };
-
   return (
     <div className={styles.wrapper}>
-      <a className={styles.registrationBtn} onClick={handleRegistrationClick}>
+      <Link to={paths.registration} className={styles.registrationBtn}>
         <MyButton>{t("registration")}</MyButton>
-      </a>
-      <a className={styles.loginBtn} onClick={handleLoginClick}>
+      </Link>
+      <Link to={paths.login} className={styles.loginBtn}>
         <button>{t("login")}</button>
         <LoginIcon />
-      </a>
+      </Link>
     </div>
   );
 };

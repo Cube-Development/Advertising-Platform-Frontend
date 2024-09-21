@@ -76,14 +76,14 @@ export const RecommendationList: FC<RecommendationListProps> = ({
                 slidesPerView: 2.4,
               },
               768: {
-                slidesPerView: 1.7,
+                slidesPerView: 1.5,
                 spaceBetween: 15,
               },
               576: {
-                slidesPerView: 1.5,
+                slidesPerView: 1.1,
               },
               375: {
-                slidesPerView: 1.3,
+                slidesPerView: 1.1,
                 spaceBetween: 10,
               },
             }}

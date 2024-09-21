@@ -1,5 +1,4 @@
 import { IAddChannelQuery } from "@entities/channel";
-import { AuthStateGenerator } from "@entities/user";
 import { LoginIcon } from "@shared/assets";
 import { useAppSelector } from "@shared/hooks";
 import {
@@ -15,19 +14,10 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
 import { CircleFadingPlus, CircleX } from "lucide-react";
+import { paths } from "@shared/routing";
 
 export const AddChannel: FC<IAddChannelQuery> = ({ props, path }) => {
   const { t } = useTranslation();
-
-  const handleRegistrationClick = () => {
-    const { registrationLink } = AuthStateGenerator();
-    window.location.href = registrationLink;
-  };
-
-  const handleLoginClick = () => {
-    const { loginLink } = AuthStateGenerator();
-    window.location.href = loginLink;
-  };
   const { isAuth } = useAppSelector((state) => state.user);
 
   return (
@@ -66,19 +56,19 @@ export const AddChannel: FC<IAddChannelQuery> = ({ props, path }) => {
               </p>
             </div>
             <DialogFooter className="pt-[20px]">
-              <a
-                onClick={handleLoginClick}
+              <Link
+                to={paths.login}
                 className={`${styles.btns__login} truncate`}
               >
                 {t("login")}
                 <LoginIcon />
-              </a>
-              <a
-                onClick={handleRegistrationClick}
+              </Link>
+              <Link
+                to={paths.registration}
                 className={`${styles.btns__register} truncate`}
               >
                 {t("registration")}
-              </a>
+              </Link>
             </DialogFooter>
           </DialogContent>
         </Dialog>

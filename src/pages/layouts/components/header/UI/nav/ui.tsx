@@ -28,7 +28,7 @@ export const Nav: FC<NavProps> = ({ isAuth, currentRole, toggleRole }) => {
       if (calculateIncomeElement) {
         calculateIncomeElement.scrollIntoView({
           behavior: "smooth",
-          block: "center",
+          // block: "end",
         });
       }
     }

@@ -21,6 +21,7 @@ import { ActiveChannels, ModerationChannels } from "@widgets/channel";
 import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 export const MyChannelsPage: FC = () => {
   const { i18n } = useTranslation();
@@ -77,31 +78,33 @@ export const MyChannelsPage: FC = () => {
 
   return (
     <div className="container sidebar">
-      <BarFilter
-        page={pageFilter.platform}
-        setValue={setValue}
-        listLength={!data?.channels?.length}
-        changeStatus={(status) => setValue("status", status)}
-        statusFilter={formState.status}
-      />
+      <div className={styles.wrapper}>
+        <BarFilter
+          page={pageFilter.platform}
+          setValue={setValue}
+          listLength={!data?.channels?.length}
+          changeStatus={(status) => setValue("status", status)}
+          statusFilter={formState.status}
+        />
 
-      {formState.status !== channelStatusFilter.moderation ? (
-        <ActiveChannels
-          cards={data?.channels || []}
-          handleOnChangePage={() => setValue("page", page + 1)}
-          isLoading={isFetching}
-          isLast={data?.isLast || false}
-          statusFilter={formState.status}
-        />
-      ) : (
-        <ModerationChannels
-          statusFilter={formState.status}
-          cards={data?.channels as IModerationChannel[]}
-          handleOnChangePage={() => setValue("page", page + 1)}
-          isLoading={isFetching}
-          isLast={data?.isLast || false}
-        />
-      )}
+        {formState.status !== channelStatusFilter.moderation ? (
+          <ActiveChannels
+            cards={data?.channels || []}
+            handleOnChangePage={() => setValue("page", page + 1)}
+            isLoading={isFetching}
+            isLast={data?.isLast || false}
+            statusFilter={formState.status as channelStatusFilter}
+          />
+        ) : (
+          <ModerationChannels
+            statusFilter={formState.status}
+            cards={data?.channels as IModerationChannel[]}
+            handleOnChangePage={() => setValue("page", page + 1)}
+            isLoading={isFetching}
+            isLast={data?.isLast || false}
+          />
+        )}
+      </div>
     </div>
   );
 };

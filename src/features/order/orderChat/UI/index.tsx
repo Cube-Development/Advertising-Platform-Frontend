@@ -1,7 +1,7 @@
-import { IChannelChat } from "@entities/project";
+import { IChatOpen } from "@entities/communication";
 import { Chat } from "@widgets/communication";
 import { FC } from "react";
 
-export const OrderChat: FC<IChannelChat> = ({ id, toRole }) => {
-  return <Chat orderId={id} toRole={toRole} />;
+export const OrderChat: FC<IChatOpen> = ({ orderId, toRole }) => {
+  return <Chat orderId={orderId} toRole={toRole} />;
 };

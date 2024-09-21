@@ -14,7 +14,7 @@ interface ActiveChannelsProps {
   handleOnChangePage: () => void;
   isLoading: boolean;
   isLast: boolean;
-  statusFilter: channelStatusFilter | offerStatusFilter | string;
+  statusFilter: channelStatusFilter;
 }
 
 export const ActiveChannels: FC<ActiveChannelsProps> = ({
@@ -45,9 +45,11 @@ export const ActiveChannels: FC<ActiveChannelsProps> = ({
               <ChannelCard statusFilter={statusFilter} card={card} />
             </motion.div>
           ))}
-          {isLoading &&
+          {!isLoading &&
             Array.from({ length: INTERSECTION_ELEMENTS.myChannels }).map(
-              (_, index) => <ChannelCardSkeleton key={index} />,
+              (_, index) => (
+                <ChannelCardSkeleton key={index} statusFilter={statusFilter} />
+              ),
             )}
           {!isLast && (
             <div className={styles.show_more} onClick={handleOnChangePage}>

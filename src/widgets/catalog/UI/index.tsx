@@ -17,7 +17,7 @@ import {
   useRemoveFromManagerCartMutation,
   useRemoveFromPublicCartMutation,
 } from "@entities/project";
-import { GenerateGuestId, GetUserId, roles } from "@entities/user";
+import { GenerateGuestId, roles } from "@entities/user";
 import { BREAKPOINT, INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { ToastAction, useToast } from "@shared/ui";
@@ -35,7 +35,7 @@ export const CatalogBlock: FC = () => {
   });
   const { toast } = useToast();
   const [screen, setScreen] = useState<number>(window.innerWidth);
-  const { isAuth } = useAppSelector((state) => state.user);
+  const { isAuth, user_id } = useAppSelector((state) => state.user);
   const guestId = Cookies.get("guest_id");
   const role = Cookies.get("role");
   const projectId = Cookies.get("project_id");
@@ -45,8 +45,6 @@ export const CatalogBlock: FC = () => {
   if (!guestId) {
     GenerateGuestId();
   }
-
-  const userId = GetUserId();
 
   const [catalogFilter, setCatalogFilter] = useState<catalogBarFilter>(
     catalogBarFilter.parameters,
@@ -91,9 +89,9 @@ export const CatalogBlock: FC = () => {
 
   const { data: catalogAuth, isFetching: isCatalogAuthLoading } =
     useGetCatalogQuery(
-      { ...formFields, user_id: userId },
+      { ...formFields, user_id: user_id },
       {
-        skip: !userId,
+        skip: !user_id,
       },
     );
   const { data: catalog, isFetching: isCatalogLoading } = useGetCatalogQuery(
@@ -333,7 +331,7 @@ export const CatalogBlock: FC = () => {
       dispatch(
         catalogAPI.util.updateQueryData(
           "getCatalog",
-          { ...formFields, user_id: userId, guest_id: guestId },
+          { ...formFields, user_id: user_id, guest_id: guestId },
           (draft) => {
             draft.channels = newCards;
           },

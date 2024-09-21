@@ -65,7 +65,10 @@ export const walletAPI = authApi.injectEndpoints({
       invalidatesTags: [BALANCE, LEGALS],
     }),
     getBalance: build.query<PaymentWithdrawResponse, void>({
-      query: () => `/wallet/balance`,
+      query: () => ({
+        url: `/wallet/balance`,
+        method: "GET",
+      }),
       providesTags: [BALANCE],
     }),
     getHistory: build.query<HistoryResponse, HistoryReq>({

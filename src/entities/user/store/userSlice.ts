@@ -1,10 +1,11 @@
-import { IToken, roles } from "@entities/user";
+import { roles } from "@entities/user";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import Cookies from "js-cookie";
 
 interface UserState {
   isAuth: boolean;
   role: roles;
+  user_id?: string;
 }
 
 const roleFromCookies = Cookies.get("role");
@@ -22,27 +23,14 @@ export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
-    login: (state, action: PayloadAction<IToken>) => {
+    login: (state) => {
       Cookies.set("isAuth", "true");
       state.isAuth = true;
-      Cookies.set("accessToken", action.payload.access_token, {
-        secure: true,
-        httpOnly: false,
-        sameSite: "None",
-        // expires: 7,
-      });
-      Cookies.set("refreshToken", action.payload.refresh_token, {
-        secure: true,
-        httpOnly: false,
-        sameSite: "None",
-        // expires: 7,
-      });
     },
     logout: (state) => {
-      Cookies.remove("accessToken");
-      Cookies.remove("refreshToken");
       Cookies.remove("project_id");
       Cookies.set("isAuth", "false");
+      Cookies.remove("adv-blog");
       state.isAuth = false;
     },
     setAuth: (state, action: PayloadAction<boolean>) => {
@@ -52,8 +40,12 @@ export const userSlice = createSlice({
       state.role = action.payload;
       Cookies.set("role", `${action.payload}`);
     },
+    setUserId: (state, action: PayloadAction<string>) => {
+      state.user_id = action.payload;
+    },
   },
 });
 
 export default userSlice.reducer;
-export const { login, logout, setAuth, toggleRole } = userSlice.actions;
+export const { login, logout, setAuth, toggleRole, setUserId } =
+  userSlice.actions;

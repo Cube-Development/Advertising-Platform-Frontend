@@ -9,8 +9,3 @@ export interface IOrderFeature {
     date_to: string;
   };
 }
-
-export interface IChannelChat {
-  id: string;
-  toRole?: roles;
-}

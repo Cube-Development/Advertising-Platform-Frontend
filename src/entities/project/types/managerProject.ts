@@ -18,6 +18,7 @@ export interface IManagerNewProjects {
 
 export interface IManagerNewProjectCard {
   id: string;
+  identifier: number;
   project_id: string;
   tariff_date: string;
   tariff_name: string;
@@ -34,6 +35,7 @@ interface IFile {
 
 export interface IManagerProjectCard {
   id: string;
+  identifier: number;
   project_id: string;
   project_name: string;
   tariff_name: string;

@@ -1,3 +1,14 @@
+import { channelStatusFilter } from "@entities/channel";
+import { IChatOpen } from "@entities/communication";
+import { offerStatusFilter } from "@entities/offer";
+import {
+  desireStatus,
+  IManagerProjectSubcard,
+  IOrderFeature,
+  managerProjectStatusFilter,
+  orderStatus,
+  orderStatusChat,
+} from "@entities/project";
 import {
   EyeIcon,
   ManIcon,
@@ -8,17 +19,6 @@ import {
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import {
-  IChannelChat,
-  IManagerProjectSubcard,
-  IOrderFeature,
-  managerProjectStatusFilter,
-  desireStatus,
-  orderStatus,
-  orderStatusChat,
-} from "@entities/project";
-import { channelStatusFilter } from "@entities/channel";
-import { offerStatusFilter } from "@entities/offer";
 
 interface ManagerProjectSubcardProps {
   subcard: IManagerProjectSubcard;
@@ -31,7 +31,7 @@ interface ManagerProjectSubcardProps {
   ChangeChannelBtn: FC<{ project_id: string }>;
   ChangePostBtn: FC<{ project_id: string }>;
   SeeCommentBtn: FC;
-  ChannelChatBtn: FC<IChannelChat>;
+  ChannelChatBtn: FC<IChatOpen>;
   statusFilter: channelStatusFilter | offerStatusFilter | string;
 }
 
@@ -245,7 +245,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
         <div
           className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : "deactive"}`}
         >
-          <ChannelChatBtn id={"1"} />
+          <ChannelChatBtn orderId={"1"} />
         </div>
       )}
     </div>

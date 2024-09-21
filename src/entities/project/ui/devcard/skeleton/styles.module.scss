@@ -1,23 +1,117 @@
 .card {
   display: grid;
-  grid-template: 1fr / 2fr 2fr 2fr 3.5fr;
-  padding: 10px 30px;
-  height: 70px;
+
+  grid-template: 1fr / 4.5fr 8fr 4.5fr 1fr;
+  padding: 10px 15px;
+  height: 80px;
+  grid-template-areas: "item1 item2 item3 item4";
+
+  @media (max-width: 992px) {
+    grid-template: 1.5fr 1fr / 1fr 1fr 1fr;
+    row-gap: 15px;
+    height: 140px;
+    grid-template-areas:
+      "item1 item2 item3 "
+      "item4 item4 item4";
+  }
+
+  @media (max-width: 768px) {
+    padding: 15px;
+    height: 315px;
+    grid-template: min-content 1fr 1fr 1.5fr 1fr/ 1fr;
+    grid-template-areas:
+      "item5"
+      "item1"
+      "item3"
+      "item2"
+      "item4";
+  }
 
   &__title {
     display: grid;
     grid-auto-flow: row;
     row-gap: 10px;
+    padding-right: 20px;
+    grid-area: item1;
     align-content: center;
+
+    .date {
+      display: grid;
+      grid-template: 1fr / 1fr min-content;
+      column-gap: 10px;
+      align-items: center;
+    }
+
+    @media (max-width: 992px) {
+      padding-right: 15px;
+    }
+    @media (max-width: 768px) {
+      padding-bottom: 15px;
+      padding-right: 0;
+    }
   }
 
   &__info {
-    padding: 0 20px;
+    grid-area: item2;
     display: grid;
+    grid-template: 1fr / repeat(2, 1fr);
     align-items: center;
+
+    @media (max-width: 992px) {
+      grid-template: repeat(2, 1fr) / 1fr;
+      align-items: unset;
+      row-gap: 5px;
+    }
+
+    @media (max-width: 768px) {
+      row-gap: 5px;
+    }
+
+    div {
+      display: grid;
+      grid-auto-flow: column;
+      column-gap: 10px;
+      padding: 0 20px;
+      height: 15px;
+
+      @media (max-width: 992px) {
+        height: unset;
+        padding: 0 15px;
+      }
+
+      @media (max-width: 768px) {
+        padding: 0;
+      }
+    }
   }
 
   &__status {
-    margin-left: 20px;
+    display: grid;
+    padding: 0 20px;
+
+    @media (max-width: 992px) {
+      padding-left: 15px;
+      padding-right: 0;
+    }
+
+    @media (max-width: 768px) {
+      padding: 0;
+    }
+
+    div {
+      display: grid;
+      grid-auto-flow: column;
+      column-gap: 10px;
+      padding: 15px;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+    grid-area: item3;
+  }
+
+  &__chat {
+    display: grid;
+    grid-area: item4;
   }
 }

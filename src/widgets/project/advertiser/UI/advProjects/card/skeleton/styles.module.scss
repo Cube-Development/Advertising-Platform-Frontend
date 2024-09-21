@@ -4,6 +4,14 @@
   row-gap: 20px;
   min-height: 230px;
 
+  @media (max-width: 992px) {
+    row-gap: 15px;
+
+    &.completed {
+      min-height: 245px;
+    }
+  }
+
   @media (max-width: 768px) {
     height: 500px;
     row-gap: 15px;
@@ -13,7 +21,41 @@
   .card {
     display: grid;
     grid-template: 1fr / 7.5fr 12fr 1.4fr;
-    padding-top: 20px;
+    padding-top: 15px;
+
+    &__manager_completed {
+      .card__info {
+        display: grid;
+        grid-template: 1fr / 1fr 1.5fr;
+
+        @media (max-width: 992px) {
+          column-gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+          grid-template: 1fr 1.2fr / 1fr;
+        }
+
+        &__data {
+          display: grid;
+          grid-template: repeat(4, 1fr) / 1fr;
+          row-gap: 5px;
+          padding-bottom: 0;
+          padding-right: 20px;
+
+          @media (max-width: 992px) {
+            padding-right: 0;
+          }
+
+          div {
+            grid-auto-flow: column;
+            column-gap: 10px;
+            grid-template: unset;
+            justify-content: space-between;
+          }
+        }
+      }
+    }
 
     @media (max-width: 768px) {
       grid-template: 0.8fr 2fr/ 1fr;
@@ -120,6 +162,40 @@
 
         @media (max-width: 768px) {
           padding-left: 0;
+        }
+      }
+
+      &__icons_manager_completed {
+        display: grid;
+        grid-template: 1.4fr 1fr / 1fr;
+        row-gap: 40px;
+        padding-left: 20px;
+
+        @media (max-width: 992px) {
+          row-gap: 30px;
+          padding-left: 0;
+          grid-template: 1fr 1.5fr / 1fr;
+        }
+
+        @media (max-width: 768px) {
+          row-gap: 10px;
+        }
+
+        .top {
+          display: grid;
+          grid-template: 1fr / repeat(2, 1fr);
+          column-gap: 10px;
+        }
+
+        .bottom {
+          display: grid;
+          grid-template: 1fr / repeat(2, 1fr);
+          column-gap: 10px;
+
+          @media (max-width: 992px) {
+            grid-template: repeat(2, 1fr) / 1fr;
+            row-gap: 10px;
+          }
         }
       }
 

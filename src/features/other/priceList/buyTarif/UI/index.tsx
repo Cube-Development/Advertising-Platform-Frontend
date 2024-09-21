@@ -38,7 +38,6 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
-import { AuthStateGenerator } from "@entities/user";
 
 interface BuyTarifProps {
   tarif: number;
@@ -194,15 +193,6 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, page }) => {
     };
   }, []);
 
-  const handleRegistrationClick = () => {
-    const { registrationLink } = AuthStateGenerator();
-    window.location.href = registrationLink;
-  };
-
-  const handleLoginClick = () => {
-    const { loginLink } = AuthStateGenerator();
-    window.location.href = loginLink;
-  };
   const { isAuth } = useAppSelector((state) => state.user);
 
   return (
@@ -831,19 +821,19 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, page }) => {
               </p>
             </div>
             <DialogFooter className="pt-[20px]">
-              <a
-                onClick={handleLoginClick}
+              <Link
+                to={paths.login}
                 className={`${styles.btns__login} truncate`}
               >
                 {t("login")}
                 <LoginIcon />
-              </a>
-              <a
-                onClick={handleRegistrationClick}
+              </Link>
+              <Link
+                to={paths.registration}
                 className={`${styles.btns__register} truncate`}
               >
                 {t("registration")}
-              </a>
+              </Link>
             </DialogFooter>
           </DialogContent>
         </Dialog>

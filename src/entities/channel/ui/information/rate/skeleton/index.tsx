@@ -7,7 +7,6 @@ export const SkeletonChannelRate: FC = () => {
   const { t } = useTranslation();
   return (
     <div className={styles.wrapper}>
-      {/* <Skeleton className="h-10 w-1/5" /> */}
       <p className={styles.title}>{t("channel.reviews.title")}</p>
       <Skeleton className="bg-skeleton-light rounded-[20px]">
         <div className={styles.card}>

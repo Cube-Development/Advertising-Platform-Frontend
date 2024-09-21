@@ -55,15 +55,15 @@ import styles from "./styles.module.scss";
 
 interface AdvProjectCardProps {
   card: IAdvProjectCard;
-  typeFilter: string;
-  statusFilter: channelStatusFilter | offerStatusFilter | string;
+  typeFilter: projectTypesFilter;
+  statusFilter: advManagerProjectStatusFilter | myProjectStatusFilter;
 }
 
 const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
   const { t } = useTranslation();
   return (
     <div
-      className={`${styles.card} ${typeFilter === projectTypesFilter.managerProject ? styles.manager_chat : ""} ${
+      className={`${styles.card} ${typeFilter === projectTypesFilter.managerProject && statusFilter !== advManagerProjectStatusFilter.completed ? styles.manager_chat : ""} ${
         typeFilter === projectTypesFilter.managerProject &&
         statusFilter === advManagerProjectStatusFilter.completed
           ? styles.card__manager_completed
@@ -89,11 +89,12 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
           </p>
         </div>
       </div>
-      {typeFilter === projectTypesFilter.managerProject && (
-        <div className={`${styles.chat__btn} display__hide__min__md`}>
-          <Chat orderId={card.id} toRole={roles.manager} />
-        </div>
-      )}
+      {typeFilter === projectTypesFilter.managerProject &&
+        statusFilter !== advManagerProjectStatusFilter.completed && (
+          <div className={`${styles.chat__btn} display__hide__min__md`}>
+            <Chat orderId={card.id} toRole={roles.manager} />
+          </div>
+        )}
       <div className={styles.card__info}>
         <div className={styles.card__info__data}>
           <div>
@@ -214,11 +215,12 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
             <MoreIcon />
           </button>
         </div>
-        {typeFilter === projectTypesFilter.managerProject && (
-          <div className={`${styles.chat__btn} display__hide__max__md`}>
-            <Chat orderId={card.id} toRole={roles.manager} />
-          </div>
-        )}
+        {typeFilter === projectTypesFilter.managerProject &&
+          statusFilter !== advManagerProjectStatusFilter.completed && (
+            <div className={`${styles.chat__btn} display__hide__max__md`}>
+              <Chat orderId={card.id} toRole={roles.manager} />
+            </div>
+          )}
       </div>
     </div>
   );
@@ -289,7 +291,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
   const handleSlideChange = () => {
     if (swiperRef.current && (!isLoadingSelf || !isLoadingManager)) {
       const indexTo = swiperRef.current.realIndex === 0 ? 1 : 0;
-      swiperRef.current.slideTo(indexTo);
+      swiperRef.current.slideTo(indexTo, 500);
       handleChangeOpenSubcard();
     }
   };
@@ -297,12 +299,11 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
   useEffect(() => {
     console.log(1111, typeFilter, statusFilter);
     if (typeFilter && statusFilter && swiperRef.current) {
-      swiperRef.current.slideTo(0);
+      swiperRef.current.slideTo(0, 500);
       setSubcardOpen(false);
     }
   }, [typeFilter, statusFilter]);
 
-  console.log(screen);
   return (
     <>
       {screen > BREAKPOINT.MD ? (
@@ -383,7 +384,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
           <Swiper
             slidesPerView={1}
             onSwiper={(swiper) => (swiperRef.current = swiper)}
-            // onSlideChange={handleSlideChange}
+            speed={500}
             spaceBetween={50}
             allowTouchMove={false}
           >
@@ -418,6 +419,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
                   slidesPerView={1}
                   onSwiper={(swiper) => (swiperRef.current = swiper)}
                   // onSlideChange={handleSlideChange}
+                  speed={500}
                   spaceBetween={50}
                   loop={true}
                 >

@@ -1,59 +1,51 @@
-import { MoreIcon, TemplateIcon2 } from "@shared/assets";
+import { IChatOpen } from "@entities/communication";
+import { IAdvManagerProjectsDevCard } from "@entities/project";
+import { roles } from "@entities/user";
+import { MoreIcon } from "@shared/assets";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import {
-  IAdvManagerProjectsDevCard,
-  projectTypesFilter,
-} from "@entities/project";
 
 interface AdvDevProjectCardProps {
   card: IAdvManagerProjectsDevCard;
-  ContinueBtn: FC;
-  typeFilter: string;
+  ChatBtn: FC<IChatOpen>;
 }
 
 export const AdvDevProjectCard: FC<AdvDevProjectCardProps> = ({
   card,
-  ContinueBtn,
-  typeFilter,
+  ChatBtn,
 }) => {
   const { t } = useTranslation();
 
   return (
     <div className={`${styles.card} border__gradient`}>
       <div className={styles.card__title}>
-        <p>{card?.name}</p>
+        <p className="truncate">{card?.name}</p>
         <div>
-          <span>№31221515</span>
-          {/* <span>№{card.id}</span> */}
+          <span className="truncate">№{card.identifier}</span>
           <span>{card?.created}</span>
         </div>
       </div>
-
       <div className={styles.card__info}>
-        <p>{t("orders_advertiser.card.tarif")}:</p>
-        <span>{card?.tarif}</span>
-      </div>
-
-      <div className={styles.card__info}>
-        <p>{t("orders_advertiser.card.cost")}:</p>
-        <span>
-          {card?.budget?.toLocaleString()} {t("symbol")}
-        </span>
-      </div>
-
-      {typeFilter === projectTypesFilter.savedProject ? (
-        <div className={styles.card__template}>
-          <div>
-            <TemplateIcon2 />
-            {t("orders_advertiser.order_status.template.title")}
-          </div>
-          <ContinueBtn />
+        <div>
+          <p>{t("orders_advertiser.card.tarif")}:</p>
+          <span>{card?.tarif}</span>
         </div>
-      ) : (
-        <div className={styles.card__status}>fffff</div>
-      )}
+        <div>
+          <p>{t("orders_advertiser.card.cost")}:</p>
+          <span className="truncate">
+            {card?.budget?.toLocaleString()} {t("symbol")}
+          </span>
+        </div>
+      </div>
+      <div className={styles.card__status}>
+        <div>
+          <p>{t("orders_advertiser.card.status.develop")}</p>
+        </div>
+      </div>
+      <div className={styles.card__chat}>
+        <ChatBtn orderId={card?.id} toRole={roles.manager} />
+      </div>
       <div className={styles.card__more}>
         <button>
           <MoreIcon />

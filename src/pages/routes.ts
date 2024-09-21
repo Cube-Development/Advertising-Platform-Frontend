@@ -18,6 +18,8 @@ import { TopupPage } from "./Topup";
 import { TurnkeyPage } from "./Turnkey";
 import { WalletHistoryPage } from "./WalletHistory";
 import { WithdrawalPage } from "./Withdrawal";
+import { LoginPage } from "./Login";
+import { RegistrationPage } from "./Registration";
 
 export interface IRoute {
   path: string;
@@ -33,13 +35,17 @@ export const privateCommonRoutes: IRoute[] = [
 ];
 
 export const publicCommonRoutes: IRoute[] = [
+  { path: paths.orders, component: OrdersPage },
+  { path: paths.myChannels, component: MyChannelsPage, sidebar: true },
   { path: paths.faq, component: FAQPage, sidebar: true },
   { path: paths.notFound, component: NotFoundPage },
+  { path: paths.login, component: LoginPage },
+  { path: paths.registration, component: RegistrationPage },
 ];
 
 export const privateBloggerRoutes: IRoute[] = [
   { path: paths.addChannel, component: AddChannelPage, sidebar: true },
-  { path: paths.myChannels, component: MyChannelsPage, sidebar: true },
+  // { path: paths.myChannels, component: MyChannelsPage, sidebar: true },
   { path: paths.offers, component: OffersPage, sidebar: true },
 ];
 
@@ -48,7 +54,7 @@ export const publicBloggerRoutes: IRoute[] = [
 ];
 
 export const privateAdvertiserRoutes: IRoute[] = [
-  { path: paths.orders, component: OrdersPage },
+  // { path: paths.orders, component: OrdersPage },
 ];
 
 export const publicAdvertiserRoutes: IRoute[] = [

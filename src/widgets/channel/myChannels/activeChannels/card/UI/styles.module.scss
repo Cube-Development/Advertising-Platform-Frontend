@@ -1,7 +1,7 @@
 .wrapper {
   display: grid;
   grid-auto-flow: row;
-  padding-top: 20px;
+  padding-top: 15px;
   width: 100%;
   position: relative;
 
@@ -30,7 +30,7 @@
 
     &__base {
       display: grid;
-      grid-auto-flow: column;
+      grid-template: 1fr / min-content 1fr;
 
       @media (max-width: 992px) {
         grid-template-columns: 0.3fr 1fr;

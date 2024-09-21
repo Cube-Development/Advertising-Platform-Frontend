@@ -1,3 +1,4 @@
+import { roles } from "@entities/user";
 import { MessageStatus, RecipientType } from "../config";
 
 export interface IChat {
@@ -56,4 +57,9 @@ export interface IOrderMessageSendSocket {
   project_id?: string;
   user_id: string;
   message: string;
+}
+
+export interface IChatOpen {
+  orderId?: string;
+  toRole?: roles;
 }
