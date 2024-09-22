@@ -43,29 +43,35 @@ export const RegistrationPage: FC = () => {
         {currentForm === registrationSteps.registration && (
           <RegistrationForm onNavigate={navigateForms} email={email} />
         )}
-        <p className={styles.account}>
-          {t("auth.have_account")}
-          <span>
-            <Link to={paths.login}>{t("sign_in")}</Link>
-          </span>
-        </p>
+        {currentForm !== registrationSteps.registration && (
+          <>
+            <p className={styles.account}>
+              {t("auth.have_account")}
+              <span>
+                <Link to={paths.login}>{t("auth.sign_in")}</Link>
+              </span>
+            </p>
 
-        <div className={styles.login__with}>
-          <p className={styles.login__with__title}>{t("auth.login_with")}</p>
-        </div>
-        <div className={styles.signin}>
-          <div className={styles.signin__container}>
-            <button type="button" className={styles.button__login}>
-              <img src="/images/authorization/facebook.svg" alt="" />
-            </button>
-            <button type="button" className={styles.button__login}>
-              <img src="/images/authorization/google.svg" alt="" />
-            </button>
-            <button type="button" className={styles.button__login}>
-              <img src="/images/authorization/apple.svg" alt="" />
-            </button>
-          </div>
-        </div>
+            <div className={styles.login__with}>
+              <p className={`${styles.login__with__title} truncate`}>
+                {t("auth.login_with")}
+              </p>
+            </div>
+            <div className={styles.signin}>
+              <div className={styles.signin__container}>
+                <button type="button" className={styles.button__login}>
+                  <img src="/images/authorization/facebook.svg" alt="" />
+                </button>
+                <button type="button" className={styles.button__login}>
+                  <img src="/images/authorization/google.svg" alt="" />
+                </button>
+                <button type="button" className={styles.button__login}>
+                  <img src="/images/authorization/apple.svg" alt="" />
+                </button>
+              </div>
+            </div>
+          </>
+        )}
       </div>
     </section>
   );

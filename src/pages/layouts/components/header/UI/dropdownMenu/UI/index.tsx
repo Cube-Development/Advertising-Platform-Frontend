@@ -64,10 +64,8 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
     document.addEventListener("click", handleClickOutside);
     if (dropdownMenu.isOpen) {
       document.body.classList.add("sidebar-open-2");
-      console.log("open");
     } else {
       document.body.classList.remove("sidebar-open", "sidebar-open-2");
-      console.log("closed");
     }
     return () => {
       document.body.classList.remove("sidebar-open-2");

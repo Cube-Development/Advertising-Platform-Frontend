@@ -10,6 +10,10 @@
   column-gap: 10px;
   justify-content: start;
   align-items: center;
+
+  @media (max-width: 576px) {
+    margin-bottom: 10px;
+  }
 }
 
 .input__container {
@@ -44,7 +48,7 @@
     border: 1px solid #d9d9d9;
     background: #fff;
 
-    font-size: 14px;
+    font-size: initial;
     font-style: normal;
     font-weight: 400;
     line-height: normal;
@@ -119,6 +123,10 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
+
+  @media (max-width: 576px) {
+    font-size: 10px;
+  }
 
   input {
     margin: 0;
