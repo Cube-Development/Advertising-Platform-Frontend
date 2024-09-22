@@ -18,9 +18,9 @@ export const CodeForm: FC<CodeFormProps> = ({ onNavigate }) => {
     e.preventDefault();
 
     if (code.trim() === "") {
-      setCodeError(t("auth.required"));
+      setCodeError(t("auth.email_required"));
     } else if (code.trim() !== userCode) {
-      setCodeError(t("auth.invalid"));
+      setCodeError(t("auth.email_invalid"));
     } else {
       setCodeError("");
       onNavigate(registrationSteps.registration);

@@ -47,9 +47,9 @@ export const BarTop: FC<BarTopProps> = ({
         )
       ) : page === pageFilter.platform ? (
         <>
-          <p>{t(`platforms_blogger.my_platform`)}</p>
+          <p className="">{t(`platforms_blogger.my_platform`)}</p>
           {!listLength && (
-            <div>
+            <div className="">
               {
                 <AddChannelBtn
                   path={`${paths.addChannel}?add_channel=${addChannelQueries.platforms}`}

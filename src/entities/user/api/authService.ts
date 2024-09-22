@@ -1,10 +1,6 @@
-import { IToken, roles } from "@entities/user";
+import { IUser, roles } from "@entities/user";
 import { authApi, baseApi } from "@shared/api";
 import { languagesNum } from "@shared/config";
-
-type AuthParams = {
-  authorization_code: string;
-};
 
 type RegisterReq = {
   email: string;
@@ -15,16 +11,9 @@ type RegisterReq = {
   role: roles;
   language: languagesNum;
 };
+type GetUserRes = IUser;
 
-type RegisterRes = {
-  id: string;
-  email: string;
-  is_active: boolean;
-  is_superuser: boolean;
-  is_verified: boolean;
-  role: roles;
-  language: languagesNum;
-};
+type RegisterRes = IUser;
 
 type LoginReq = {
   username: string;
@@ -57,28 +46,26 @@ export const authorizationAPI = baseApi.injectEndpoints({
         };
       },
     }),
-    getTokens: build.mutation<IToken, AuthParams>({
-      query: (BodyParams) => ({
-        url: `/auth/token`,
-        method: `POST`,
-        body: BodyParams,
-      }),
-    }),
   }),
 });
-export const { useGetTokensMutation, useLoginMutation, useRegisterMutation } =
-  authorizationAPI;
+export const { useLoginMutation, useRegisterMutation } = authorizationAPI;
 
-export const logoutAPI = authApi.injectEndpoints({
+export const userAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
-    logout: build.mutation<string, void>({
+    logout: build.mutation<void, void>({
       query: (BodyParams) => ({
         url: `/auth/jwt/logout`,
         method: `POST`,
         body: BodyParams,
       }),
     }),
+    getUser: build.mutation<GetUserRes, void>({
+      query: () => ({
+        url: `/users/me`,
+        method: `GET`,
+      }),
+    }),
   }),
 });
 
-export const { useLogoutMutation } = logoutAPI;
+export const { useLogoutMutation, useGetUserMutation } = userAPI;

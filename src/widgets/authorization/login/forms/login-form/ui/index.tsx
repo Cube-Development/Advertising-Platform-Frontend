@@ -4,7 +4,7 @@ import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
 import { useHandleAuth } from "@features/useHandleAuth";
 import { ToastAction, useToast } from "@shared/ui";
-import { roles, useLoginMutation } from "@entities/user";
+import { useGetUserMutation, useLoginMutation } from "@entities/user";
 
 interface Props {
   onNavigate: (form: loginSteps) => void;
@@ -16,7 +16,7 @@ export const LoginForm: FC<Props> = ({ onNavigate }) => {
   const { t } = useTranslation();
 
   const [login] = useLoginMutation();
-  // get_user запрос и user_id надо передать в handleAuth и там засетить в userSlice setUserId
+  const [getUser] = useGetUserMutation();
 
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -46,8 +46,14 @@ export const LoginForm: FC<Props> = ({ onNavigate }) => {
       login(loginReq)
         .unwrap()
         .then(() => {
-          // get_user запрос добавится
-          handleAuth(roles.advertiser, "user_id");
+          getUser()
+            .unwrap()
+            .then((data) => {
+              handleAuth(data.role, data.id);
+            })
+            .catch((error) => {
+              console.error("Something gone wrong: ", error);
+            });
         })
         .catch(() => {
           toast({

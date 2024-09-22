@@ -1,7 +1,12 @@
 import { FC, useState } from "react";
 import styles from "./styles.module.scss";
 import { registrationSteps } from "../../config";
-import { roles, useLoginMutation, useRegisterMutation } from "@entities/user";
+import {
+  roles,
+  useGetUserMutation,
+  useLoginMutation,
+  useRegisterMutation,
+} from "@entities/user";
 import { Languages } from "@shared/config";
 import { useTranslation } from "react-i18next";
 import { ToastAction, useToast } from "@shared/ui";
@@ -30,7 +35,7 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({
 
   const [register] = useRegisterMutation();
   const [login] = useLoginMutation();
-  // get_user запрос и user_id надо передать в handleAuth и там засетить в userSlice setUserId
+  const [getUser] = useGetUserMutation();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -75,8 +80,16 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({
           login(loginReq)
             .unwrap()
             .then(() => {
-              // get_user запрос добавится
-              handleAuth(roles.advertiser, "user_id");
+              {
+                getUser()
+                  .unwrap()
+                  .then((data) => {
+                    handleAuth(data.role, data.id);
+                  })
+                  .catch((error) => {
+                    console.error("Something gone wrong: ", error);
+                  });
+              }
             })
             .catch(() => {
               toast({

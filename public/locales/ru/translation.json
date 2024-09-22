@@ -30,7 +30,7 @@
     "continue": "Продолжить",
     "code_required": "Код обязательное поле",
     "code_invalid": "Код недействительный",
-    "verify_code": "Верифицируйте код",
+    "verify_code": "Верификация почты",
     "code_send_to_email": "Код аутентификации отправлен на почту",
     "enter_code": "Введите код",
     "didnt_receive_code": "Не получили код?",
