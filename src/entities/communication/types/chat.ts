@@ -59,7 +59,11 @@ export interface IOrderMessageSendSocket {
   message: string;
 }
 
-export interface IChatOpen {
+export interface IChatProps {
+  isMain?: boolean;
+  isOrder?: boolean;
+  isProject?: boolean;
   orderId?: string;
   toRole?: roles;
+  isFull?: boolean;
 }

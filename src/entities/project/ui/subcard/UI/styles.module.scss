@@ -326,135 +326,21 @@
       }
     }
 
-    // &__cancel {
-    //   display: grid;
-    //   grid-auto-flow: row;
-    //   align-items: center;
-    //   text-align: center;
-    //   align-content: center;
-    //   row-gap: 10px;
-    //   padding: 0 20px;
-    //   height: 100%;
-
-    //   p {
-    //     font-size: 16px;
-    //     font-style: normal;
-    //     font-weight: 600;
-    //     line-height: 1;
-    //   }
-
-    //   span {
-    //     font-size: 10px;
-    //     font-style: normal;
-    //     font-weight: 400;
-    //     line-height: 1;
-    //   }
-    // }
-
-    // &__completed {
-    //   display: grid;
-    //   grid-auto-flow: row;
-    //   align-items: center;
-    //   align-content: center;
-    //   text-align: center;
-    //   row-gap: 10px;
-    //   padding: 0 20px;
-    //   height: 100%;
-
-    //   p {
-    //     font-size: 16px;
-    //     font-style: normal;
-    //     font-weight: 600;
-    //     line-height: 1;
-    //   }
-    // }
-
-    // &__accepted {
-    //   display: grid;
-    //   grid-auto-flow: row;
-    //   align-content: center;
-    //   text-align: center;
-    //   row-gap: 10px;
-    //   padding: 0 20px;
-    //   height: 100%;
-
-    //   p {
-    //     font-size: 16px;
-    //     font-style: normal;
-    //     font-weight: 600;
-    //     line-height: 1;
-    //   }
-
-    //   span {
-    //     font-size: 10px;
-    //     font-style: normal;
-    //     font-weight: 400;
-    //     line-height: 1;
-    //   }
-    // }
-
-    // &__moderation {
-    //   display: grid;
-    //   align-items: center;
-    //   padding: 0 20px;
-    //   height: 100%;
-
-    //   div {
-    //     display: grid;
-    //     grid-auto-flow: row;
-    //     row-gap: 10px;
-    //     align-items: center;
-    //     text-align: center;
-    //     justify-content: space-between;
-
-    //     p {
-    //       font-size: 16px;
-    //       font-style: normal;
-    //       font-weight: 600;
-    //       line-height: 1;
-    //     }
-
-    //     span {
-    //       font-size: 10px;
-    //       font-style: normal;
-    //       font-weight: 400;
-    //       line-height: 1;
-
-    //       small {
-    //         font-weight: 600;
-    //       }
-    //     }
-    //   }
-    // }
+    &__moderation {
+      div {
+        display: grid;
+        grid-auto-flow: row;
+        row-gap: 10px;
+        align-items: center;
+        text-align: center;
+      }
+    }
 
     &__posted {
-      // display: grid;
-      // grid-auto-flow: row;
-      // align-items: center;
-      // align-content: center;
-      // text-align: center;
-      // padding: 0 20px;
-      // row-gap: 10px;
-      // height: 100%;
-
       &__title {
         display: grid;
         grid-auto-flow: row;
         row-gap: 5px;
-
-        // p {
-        //   font-size: 16px;
-        //   font-style: normal;
-        //   font-weight: 600;
-        //   line-height: 1;
-        // }
-
-        // span {
-        //   font-size: 10px;
-        //   font-style: normal;
-        //   font-weight: 400;
-        //   line-height: 1;
-        // }
       }
 
       &__buttons {
@@ -471,47 +357,18 @@
     }
 
     &__waiting {
-      // display: grid;
-      // align-items: center;
-      // align-content: center;
-      // padding: 0 20px;
-      // text-align: center;
-      // height: 100%;
-
       div {
         display: grid;
         grid-auto-flow: row;
         row-gap: 15px;
-
-        // p {
-        //   font-size: 16px;
-        //   font-style: normal;
-        //   font-weight: 600;
-        //   line-height: 1;
-        // }
       }
     }
 
     &__agreed {
-      // display: grid;
-      // align-items: center;
-      // align-content: center;
-      // padding: 0 20px;
-      // text-align: center;
-      // // border-radius: 15px;
-      // // border: 1px solid var(--Card-separator);
-      // height: 100%;
-
       div {
         display: grid;
         grid-auto-flow: row;
         row-gap: 15px;
-        // p {
-        //   font-size: 16px;
-        //   font-style: normal;
-        //   font-weight: 600;
-        //   line-height: 1;
-        // }
         div {
           display: grid;
           grid-auto-flow: row;
@@ -521,14 +378,21 @@
     }
 
     &__chat {
+      display: grid;
+      align-content: center;
+      justify-content: flex-end;
+      height: 100%;
+
+      @media (max-width: 768px) {
+        justify-content: unset;
+      }
+
       button {
         border-radius: 12px;
-        margin: 10px 0 10px 10px;
-        padding: 5px;
         background: var(--Gradients-Gradient-1);
-        width: 100% !important;
-        height: 100% !important;
-        padding: 12px 16px;
+        box-shadow: 0px 3px 6px 0px rgba(43, 90, 212, 0.42);
+        justify-content: flex-end;
+        padding: 30px 8px 30px 10px;
 
         p {
           color: var(--Personal-colors-White);
@@ -538,13 +402,15 @@
           line-height: 0.75;
         }
 
-        svg {
-          height: 16px;
-          width: 16px;
-        }
-
         @media (max-width: 768px) {
+          justify-content: center;
+          height: 40px;
           margin: 0;
+          padding: 0;
+
+          svg {
+            height: 18px;
+          }
         }
       }
     }

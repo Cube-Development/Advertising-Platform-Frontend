@@ -3,13 +3,13 @@
 
   grid-template: 1fr / 4.5fr 8fr 4.5fr 1fr;
   padding: 10px 15px;
-  height: 80px;
+  min-height: 80px;
   grid-template-areas: "item1 item2 item3 item4";
 
   @media (max-width: 992px) {
     grid-template: 1.5fr 1fr / 1fr 1fr 1fr;
     row-gap: 15px;
-    height: 140px;
+    min-height: 140px;
     grid-template-areas:
       "item1 item2 item3 "
       "item4 item4 item4";
@@ -17,7 +17,7 @@
 
   @media (max-width: 768px) {
     padding: 15px;
-    height: 315px;
+    min-height: 315px;
     grid-template: min-content 1fr 1fr 1.5fr 1fr/ 1fr;
     grid-template-areas:
       "item5"
@@ -178,19 +178,35 @@
   &__chat {
     display: grid;
     grid-area: item4;
-    border-radius: 15px;
-    background: var(
-      --Gradients-Gradient-1,
-      linear-gradient(45deg, #4772e6 23.91%, #8e54e9 75.06%)
-    );
-    box-shadow: 0px 3px 6px 0px rgba(43, 90, 212, 0.42);
 
-    p {
-      color: var(--Personal-colors-White);
-      font-size: 14px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: 1;
+    button {
+      display: grid;
+      border-radius: 12px;
+      background: var(--Gradients-Gradient-1);
+      box-shadow: 0px 3px 6px 0px rgba(43, 90, 212, 0.42);
+
+      p {
+        color: var(--Personal-colors-White);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 0.75;
+      }
+
+      svg {
+        height: 30px;
+      }
+
+      @media (max-width: 768px) {
+        justify-content: center;
+        height: 40px;
+        margin: 0;
+        padding: 0;
+
+        svg {
+          height: 18px;
+        }
+      }
     }
   }
 

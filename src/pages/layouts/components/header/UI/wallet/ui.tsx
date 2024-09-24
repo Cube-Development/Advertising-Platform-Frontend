@@ -56,7 +56,10 @@ export const Wallet: FC = () => {
             <span>{t("symbol")}</span>
           </p>
         ) : (
-          ""
+          <p>
+            {"0 "}
+            <span>{t("symbol")}</span>
+          </p>
         )}
         {isMenuOpen ? <CloseIcon /> : <PlusIcon />}
       </button>

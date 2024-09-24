@@ -2,12 +2,12 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  .img {
-    margin: 20px;
-    width: 40px;
-    height: 40px;
-  }
   position: relative;
+
+  svg {
+    width: 36px;
+    height: 36px;
+  }
 }
 
 .menu {

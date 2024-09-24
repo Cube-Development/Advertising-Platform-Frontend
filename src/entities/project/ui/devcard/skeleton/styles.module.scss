@@ -3,13 +3,13 @@
 
   grid-template: 1fr / 4.5fr 8fr 4.5fr 1fr;
   padding: 10px 15px;
-  height: 80px;
+  min-height: 80px;
   grid-template-areas: "item1 item2 item3 item4";
 
   @media (max-width: 992px) {
     grid-template: 1.5fr 1fr / 1fr 1fr 1fr;
     row-gap: 15px;
-    height: 140px;
+    min-height: 140px;
     grid-template-areas:
       "item1 item2 item3 "
       "item4 item4 item4";
@@ -17,7 +17,7 @@
 
   @media (max-width: 768px) {
     padding: 15px;
-    height: 315px;
+    min-height: 315px;
     grid-template: min-content 1fr 1fr 1.5fr 1fr/ 1fr;
     grid-template-areas:
       "item5"

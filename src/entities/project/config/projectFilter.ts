@@ -59,12 +59,12 @@ export const managerProjectStatus = [
     type: managerProjectStatusFilter.active,
   },
   {
-    name: "orders_manager.status_filter.agreed",
-    type: managerProjectStatusFilter.request_approve,
-  },
-  {
     name: "orders_manager.status_filter.new",
     type: managerProjectStatusFilter.new,
+  },
+  {
+    name: "orders_manager.status_filter.agreed",
+    type: managerProjectStatusFilter.request_approve,
   },
   {
     name: "orders_manager.status_filter.complite",

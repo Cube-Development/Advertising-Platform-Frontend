@@ -67,7 +67,7 @@ export const Header: FC = () => {
         {isAuth ? (
           <>
             <div className={styles.separator}></div>
-            <Chat />
+            <Chat isMain={true} />
             <Profile toggleLogout={toggleLogout} />
           </>
         ) : (

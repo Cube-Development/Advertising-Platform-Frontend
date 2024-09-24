@@ -1,5 +1,3 @@
-import { channelStatusFilter } from "@entities/channel";
-import { offerStatusFilter } from "@entities/offer";
 import {
   AdvSubcard,
   IAdvProjectCard,
@@ -176,11 +174,11 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
             <div className={styles.card__info__icons_completed}>
               <div>
                 <CompliteIcon />
-                <p>{card?.completed.toLocaleString()}</p>
+                <p>{card?.completed?.toLocaleString()}</p>
               </div>
               <div>
                 <CancelIcon />
-                <p>{card?.canceled_rejected.toLocaleString()}</p>
+                <p>{card?.canceled_rejected?.toLocaleString()}</p>
               </div>
             </div>
           ) : (
@@ -297,7 +295,6 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
   };
 
   useEffect(() => {
-    console.log(1111, typeFilter, statusFilter);
     if (typeFilter && statusFilter && swiperRef.current) {
       swiperRef.current.slideTo(0, 500);
       setSubcardOpen(false);

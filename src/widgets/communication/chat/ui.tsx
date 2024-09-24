@@ -1,5 +1,5 @@
 import {
-  IChatOpen,
+  IChatProps,
   IOrderMessageAll,
   IOrderMessageNewSocket,
   RecipientType,
@@ -10,7 +10,13 @@ import {
 import { roles } from "@entities/user";
 import { ChatCard, ChatMessages } from "@features/communication";
 import { BarSubfilter } from "@features/other";
-import { ArrowLongHorizontalIcon, CancelIcon2, ChatIcon } from "@shared/assets";
+import {
+  ArrowLongHorizontalIcon,
+  CancelIcon2,
+  ChatIcon,
+  ChatIcon2,
+  ChatMainIcon,
+} from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
 import { convertUTCToLocalDateTime } from "@shared/functions";
 import { pageFilter } from "@shared/routing";
@@ -31,7 +37,13 @@ import { useTranslation } from "react-i18next";
 import { useCentrifuge } from "./CentrifugeContext";
 import styles from "./styles.module.scss";
 
-export const Chat: FC<IChatOpen> = ({ orderId, toRole }) => {
+export const Chat: FC<IChatProps> = ({
+  orderId,
+  toRole,
+  isMain,
+  isProject,
+  isFull,
+}) => {
   const { t } = useTranslation();
   const role = Cookies.get("role")
     ? (Cookies.get("role") as roles)
@@ -164,14 +176,27 @@ export const Chat: FC<IChatOpen> = ({ orderId, toRole }) => {
     open: { opacity: 1, x: "0%" },
     transition: { transition: { duration: 0.5 } },
   };
-
+  const NEW_MESSAGE = true;
   return (
-    <div>
-      {/* <div className="flex justify-center items-center"> */}
+    <div className={styles.wrapper}>
       {screen >= BREAKPOINT.MD ? (
         <AlertDialog>
           <AlertDialogTrigger className={styles.chat}>
-            <ChatIcon className="icon__white" />
+            {isMain ? (
+              <ChatMainIcon haveNewMessage={true} />
+            ) : // <ChatIcon className="active__icon" />
+            isProject ? (
+              <ChatIcon2 className="active__icon" />
+            ) : (
+              // <ChatIcon className="active__icon" />
+              <ChatIcon className="icon__white" />
+            )}
+            {isFull && toRole === roles.blogger && (
+              <p>{t("chat.role.blogger")}</p>
+            )}
+            {isFull && toRole === roles.manager && (
+              <p>{t("chat.role.manager")}</p>
+            )}
           </AlertDialogTrigger>
           <AlertDialogContent>
             <div className={styles.content}>
@@ -249,7 +274,15 @@ export const Chat: FC<IChatOpen> = ({ orderId, toRole }) => {
       ) : (
         <Drawer>
           <DrawerTrigger className={styles.chat}>
-            <ChatIcon className={`${toRole ? "icon__white" : ""}`} />
+            {isMain ? (
+              <ChatMainIcon />
+            ) : // <ChatIcon className="active__icon" />
+            isProject ? (
+              <ChatIcon2 className="active__icon" />
+            ) : (
+              // <ChatIcon className="active__icon" />
+              <ChatIcon className="icon__white" />
+            )}
             {toRole === roles.blogger && <p>{t("chat.role.blogger")}</p>}
             {toRole === roles.manager && <p>{t("chat.role.manager")}</p>}
           </DrawerTrigger>

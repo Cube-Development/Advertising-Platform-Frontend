@@ -1,6 +1,4 @@
-import { channelStatusFilter } from "@entities/channel";
-import { IChatOpen } from "@entities/communication";
-import { offerStatusFilter } from "@entities/offer";
+import { IChatProps } from "@entities/communication";
 import {
   DisplayFeed,
   DisplayShorts,
@@ -14,7 +12,6 @@ import {
   IAdvProjectSubcard,
   IOrderFeature,
   advManagerProjectStatusFilter,
-  managerProjectStatusFilter,
   myProjectStatusFilter,
   orderStatus,
   orderStatusChat,
@@ -54,9 +51,9 @@ interface AdvSubcardProps {
   CheckBtn: FC<IOrderFeature>;
   SeeBtn: FC;
   ChangeChannelBtn: FC<{ project_id: string }>;
-  ChannelChatBtn: FC<IChatOpen>;
-  typeFilter: string;
-  statusFilter: channelStatusFilter | offerStatusFilter | string;
+  ChannelChatBtn: FC<IChatProps>;
+  typeFilter: projectTypesFilter;
+  statusFilter: advManagerProjectStatusFilter | myProjectStatusFilter;
 }
 
 export const AdvSubcard: FC<AdvSubcardProps> = ({
@@ -232,7 +229,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
             subcard?.api_status === orderStatus.rejected ? (
               <div className={styles.subcard__cancel}>
                 {typeFilter === projectTypesFilter.managerProject &&
-                statusFilter === managerProjectStatusFilter.completed ? (
+                statusFilter === advManagerProjectStatusFilter.completed ? (
                   <p>{t(`orders_advertiser.order_status.rejected.title2`)}</p>
                 ) : (
                   <>
@@ -249,7 +246,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
             ) : subcard?.api_status === orderStatus.completed ? (
               <div className={styles.subcard__completed}>
                 {typeFilter === projectTypesFilter.managerProject &&
-                statusFilter === managerProjectStatusFilter.completed ? (
+                statusFilter === advManagerProjectStatusFilter.completed ? (
                   <p>{t(`orders_advertiser.order_status.completed.title2`)}</p>
                 ) : (
                   <>
@@ -269,13 +266,13 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                   )}
                 </div>
                 <div className={styles.subcard__posted__buttons}>
+                  <CheckBtn url={subcard?.post_url} />
                   {typeFilter === projectTypesFilter.managerProject || (
                     <div className={styles.subcard__posted__buttons__top}>
                       <AcceptBtn order_id={subcard?.id} />
                       <RejectBtn order_id={subcard?.id} />
                     </div>
                   )}
-                  <CheckBtn url={subcard?.post_url} />
                 </div>
               </div>
             ) : subcard?.api_status === orderStatus.in_progress ? (
@@ -423,7 +420,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
             <div
               className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : "deactive"}`}
             >
-              <ChannelChatBtn orderId={"1"} />
+              <ChannelChatBtn orderId={subcard?.id} toRole={roles.blogger} />
             </div>
           )}
       </div>
@@ -528,7 +525,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
           subcard?.api_status === orderStatus.rejected ? (
             <div className={styles.subcard__cancel}>
               {typeFilter === projectTypesFilter.managerProject &&
-              statusFilter === managerProjectStatusFilter.completed ? (
+              statusFilter === advManagerProjectStatusFilter.completed ? (
                 <p>{t(`orders_advertiser.order_status.rejected.title2`)}</p>
               ) : (
                 <>
@@ -545,7 +542,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
           ) : subcard?.api_status === orderStatus.completed ? (
             <div className={styles.subcard__completed}>
               {typeFilter === projectTypesFilter.managerProject &&
-              statusFilter === managerProjectStatusFilter.completed ? (
+              statusFilter === advManagerProjectStatusFilter.completed ? (
                 <p>{t(`orders_advertiser.order_status.completed.title2`)}</p>
               ) : (
                 <>

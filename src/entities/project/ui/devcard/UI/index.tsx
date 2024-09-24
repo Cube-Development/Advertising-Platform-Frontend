@@ -1,14 +1,15 @@
-import { IChatOpen } from "@entities/communication";
+import { IChatProps } from "@entities/communication";
 import { IAdvManagerProjectsDevCard } from "@entities/project";
 import { roles } from "@entities/user";
 import { MoreIcon } from "@shared/assets";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { BREAKPOINT } from "@shared/config";
 
 interface AdvDevProjectCardProps {
   card: IAdvManagerProjectsDevCard;
-  ChatBtn: FC<IChatOpen>;
+  ChatBtn: FC<IChatProps>;
 }
 
 export const AdvDevProjectCard: FC<AdvDevProjectCardProps> = ({
@@ -16,6 +17,17 @@ export const AdvDevProjectCard: FC<AdvDevProjectCardProps> = ({
   ChatBtn,
 }) => {
   const { t } = useTranslation();
+  const [screen, setScreen] = useState<number>(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreen(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <div className={`${styles.card} border__gradient`}>
@@ -44,7 +56,11 @@ export const AdvDevProjectCard: FC<AdvDevProjectCardProps> = ({
         </div>
       </div>
       <div className={styles.card__chat}>
-        <ChatBtn orderId={card?.id} toRole={roles.manager} />
+        <ChatBtn
+          orderId={card?.id}
+          toRole={roles.manager}
+          isFull={screen < BREAKPOINT.LG}
+        />
       </div>
       <div className={styles.card__more}>
         <button>

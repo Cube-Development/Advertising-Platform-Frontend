@@ -1,3 +1,4 @@
+import { sizeTypes } from "@shared/ui";
 import { desireStatus, orderStatus } from "../config";
 
 export interface IManagerProjects {
@@ -43,6 +44,7 @@ export interface IManagerProjectCard {
   orders: number;
   views: number;
   budget: number;
+  remainder?: number;
   is_request_approve?: boolean;
   completed?: number;
   canceled_rejected?: number;
@@ -51,6 +53,10 @@ export interface IManagerProjectCard {
   moderation?: number;
   report?: boolean;
   subcards?: IManagerProjectSubcard[];
+
+  comment?: string;
+  links?: string[];
+  files?: IFile[];
 }
 
 export interface IManagerSubprojects {
@@ -67,6 +73,7 @@ export interface IManagerProjectSubcard {
   avatar: string;
   order_status: string;
   api_status: orderStatus;
+  post_url?: string;
   publish_date:
     | {
         date_from: string;
@@ -94,4 +101,12 @@ export interface IManagerProjectSubcard {
 export interface IDesire {
   desire_type: desireStatus;
   comment: string;
+}
+
+export interface IDownloadFileType extends IFile {
+  fileName?: string;
+  fileSize?: string | number;
+  currentSize?: string | number;
+  sizeType?: sizeTypes;
+  fileType?: string;
 }

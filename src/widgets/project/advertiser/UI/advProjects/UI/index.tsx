@@ -55,7 +55,6 @@ export const AdvProjectsList: FC<AdvProjectsListProps> = ({
                 <AdvProjectCard
                   statusFilter={statusFilter}
                   typeFilter={typeFilter}
-                  key={index}
                   card={card}
                 />
               </motion.div>

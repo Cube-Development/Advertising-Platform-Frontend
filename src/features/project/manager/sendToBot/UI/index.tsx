@@ -9,9 +9,9 @@ interface SendToBotProps {}
 export const SendToBot: FC<SendToBotProps> = () => {
   const { t } = useTranslation();
   return (
-    <MyButton className={styles.button} buttons_type="button__white">
+    <MyButton className={styles.button}>
       <p>{t("orders_manager.subcard.send_btn")}</p>
-      <ArrowLongHorizontalIcon className="active__icon" />
+      <ArrowLongHorizontalIcon className="icon__white" />
     </MyButton>
   );
 };

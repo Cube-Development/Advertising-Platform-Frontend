@@ -63,7 +63,7 @@ export const ProjectCardSkeleton: FC<ProjectCardSkeletonProps> = ({
               <Skeleton className="h-full w-full rounded-[10px]" />
               {typeFilter === projectTypesFilter.managerProject &&
                 statusFilter === advManagerProjectStatusFilter.completed && (
-                  <Skeleton className="h-full w-full rounded-[10px]" />
+                  <Skeleton className="h-full w-full rounded-[10px] min-w-[190px]" />
                 )}
             </div>
 

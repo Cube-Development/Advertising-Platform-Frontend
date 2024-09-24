@@ -3,6 +3,7 @@ export * from "./barStatusFilter";
 export * from "./barTop";
 export * from "./barTypesFilter";
 export * from "./dinamicPagination";
+export * from "./fileDownloader";
 export * from "./partnerList";
 export * from "./priceList";
 export * from "./registration";

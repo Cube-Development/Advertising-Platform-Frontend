@@ -13,9 +13,9 @@ export const RunProject: FC<RunProjectProps> = ({ is_request_approve }) => {
   return (
     <MyButton
       className={`${styles.button} ${is_request_approve ? "" : "deactive"}`}
+      buttons_type="button__white"
     >
       <p>{t("orders_manager.card.run_btn")}</p>
-      <ArrowLongHorizontalIcon className="icon__white" />
     </MyButton>
   );
 };

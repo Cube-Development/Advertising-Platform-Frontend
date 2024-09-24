@@ -605,9 +605,7 @@
 
   "orders_manager": {
     "orders": "Рекламные заказы",
-
     "no_project": "На данный момент у вас нет проектов",
-
     "status_filter": {
       "active": "Активные",
       "complite": "Выполненные",
@@ -621,16 +619,19 @@
         "agreed": "На согласовании",
         "completed": "Выполнен"
       },
+      "technical_specificationIcon":"Техническое задание",
       "channels": "Каналы",
       "views": "Просмотры",
       "tarif": "Тариф",
-      "cost": "Бюджет",
+      "budget": "Бюджет",
       "rest": "Остаток",
       "see_more": "Развернуть",
-      "see_task": "Подробное техническое задание",
+      "see_task": "Посмотреть задание",
       "see_less": "Свернуть",
       "start_btn": "Начать",
-      "run_btn": "Запустить"
+      "run_btn": "Запустить",
+      "request_approve":"Кампания была подтверждена",
+      "not_request_approve":"Рекламодатель внес изменения"
     },
     "subcard": {
       "date": "Дата",

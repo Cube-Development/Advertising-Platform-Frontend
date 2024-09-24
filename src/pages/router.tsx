@@ -6,6 +6,7 @@ import { CheckProjectId, CheckRoutes, routerType } from "./CheckRoutes";
 import {
   IRoute,
   createOrderRoutes,
+  onlyPublicCommonRoutes,
   privateAdvertiserRoutes,
   privateBloggerRoutes,
   privateCommonRoutes,
@@ -43,6 +44,9 @@ const publicAdvertisserRouter: RouteObject[] = handleRouter(
 );
 const publicBloggerRouter: RouteObject[] = handleRouter(publicBloggerRoutes);
 const publicCommonRouter: RouteObject[] = handleRouter(publicCommonRoutes);
+const onlyPublicCommonRouter: RouteObject[] = handleRouter(
+  onlyPublicCommonRoutes,
+);
 
 const createOrderRouter: RouteObject[] = handleRouter(createOrderRoutes);
 
@@ -88,6 +92,11 @@ export const router = createBrowserRouter([
         path: paths.main,
         element: <CheckProjectId />,
         children: createOrderRouter,
+      },
+      {
+        path: paths.main,
+        element: <CheckRoutes type={routerType.onlyPublic} />,
+        children: onlyPublicCommonRouter,
       },
       ...publicCommonRouter,
     ],

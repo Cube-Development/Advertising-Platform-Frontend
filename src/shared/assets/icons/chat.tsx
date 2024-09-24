@@ -6,7 +6,7 @@ export const ChatIcon = (props: SVGProps<SVGSVGElement>) => (
     width="24"
     height="24"
     fill="none"
-    viewBox="0 0 24 24"
+    viewBox="0 0 25 25"
     {...props}
   >
     <path

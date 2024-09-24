@@ -6,12 +6,12 @@ import { Navigate, Outlet } from "react-router-dom";
 
 export enum routerType {
   public = "public",
+  onlyPublic = "onlyPublic",
   private = "private",
 }
 
 export const CheckProjectId = () => {
   const projectId = Cookies.get("project_id");
-  console.log("CheckProjectId");
   if (projectId) {
     return <Outlet />;
   } else {
@@ -28,7 +28,18 @@ export const CheckRoutes = ({
 }) => {
   const { isAuth, role } = useAppSelector((state) => state.user);
 
-  if (type === routerType.public) {
+  if (type === routerType.onlyPublic) {
+    if (!isAuth) {
+      return <Outlet />;
+    } else {
+      return (
+        <Navigate
+          to={role === roles.advertiser ? paths.main : paths.mainBlogger}
+          replace
+        />
+      );
+    }
+  } else if (type === routerType.public) {
     // console.log("PublicdRoutes", role, checkRole);
     if (
       !isAuth ||

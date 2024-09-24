@@ -2,6 +2,7 @@ export * from "./MyBtn";
 export * from "./MyInput";
 export * from "./MyModal";
 export * from "./MyPagination";
+export * from "./MyProgressBar";
 export * from "./MySelect";
 export * from "./accountsLoader";
 export * from "./countdownTimer";
