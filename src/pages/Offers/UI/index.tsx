@@ -1,17 +1,21 @@
-import { channelStatusFilter } from "@entities/channel";
 import {
   getOrdersByStatusReq,
   offerStatusFilter,
   useGetBloggerOrdersQuery,
 } from "@entities/offer";
 import { platformTypes, platformTypesNum } from "@entities/platform";
-import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
+import {
+  BLOGGER_OFFERS,
+  INTERSECTION_ELEMENTS,
+  Languages,
+} from "@shared/config";
 import { pageFilter } from "@shared/routing";
 import { BarFilter } from "@widgets/barFilter";
 import { MyOffers } from "@widgets/offer";
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 export const OffersPage: FC = () => {
   const page = pageFilter.offer;
@@ -22,7 +26,7 @@ export const OffersPage: FC = () => {
 
   const { setValue, watch } = useForm<{
     platform: platformTypesNum;
-    status: channelStatusFilter | offerStatusFilter | string;
+    status: offerStatusFilter | string;
   }>({
     defaultValues: {
       platform: platformTypes[0].id,
@@ -45,28 +49,33 @@ export const OffersPage: FC = () => {
     status: formState.status,
   };
 
-  const { data, isFetching } = useGetBloggerOrdersQuery(getParams);
+  // const { data, isFetching } = useGetBloggerOrdersQuery(getParams);
 
   useEffect(() => {
     setCurrentPage(1);
   }, [formState]);
 
+  const data = BLOGGER_OFFERS;
+  const isFetching = false;
+
   return (
     <div className="container sidebar">
-      <BarFilter
-        page={page}
-        listLength={!!data?.orders?.length}
-        setValue={setValue}
-        changeStatus={(status) => setValue("status", status)}
-        statusFilter={formState.status}
-      />
-      <MyOffers
-        statusFilter={formState.status}
-        offers={data?.orders!}
-        handleOnChangePage={handleOnChangePage}
-        isLoading={isFetching}
-        isLast={data?.isLast || false}
-      />
+      <div className={styles.wrapper}>
+        <BarFilter
+          page={page}
+          listLength={!!data?.orders?.length}
+          setValue={setValue}
+          changeStatus={(status) => setValue("status", status)}
+          statusFilter={formState.status}
+        />
+        <MyOffers
+          statusFilter={formState.status as offerStatusFilter}
+          offers={data?.orders!}
+          handleOnChangePage={handleOnChangePage}
+          isLoading={isFetching}
+          isLast={data?.isLast || false}
+        />
+      </div>
     </div>
   );
 };

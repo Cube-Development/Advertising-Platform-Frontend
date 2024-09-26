@@ -96,6 +96,7 @@ export const AdvOrders: FC = () => {
         <BarFilter
           page={page}
           listLength={
+            // true
             !!(
               projectsSelf?.projects?.length ||
               projectsManager?.projects?.length

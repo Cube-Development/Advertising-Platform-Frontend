@@ -23,15 +23,18 @@ export const AddChannel: FC<IAddChannelQuery> = ({ props, path }) => {
   return (
     <>
       {isAuth ? (
-        <Link to={path} className={styles.button}>
-          <MyButton {...props} className="w-auto">
-            {t(`btn_add_platform`)} <CircleFadingPlus />
+        <Link to={path}>
+          <MyButton {...props} className={styles.button}>
+            <p>{t(`btn_add_platform`)}</p>
+            <CircleFadingPlus />
           </MyButton>
         </Link>
       ) : (
         <Dialog>
           <DialogTrigger asChild>
-            <MyButton {...props}>{t(`btn_add_platform`)}</MyButton>
+            <MyButton {...props}>
+              <p>{t(`btn_add_platform`)}</p>
+            </MyButton>
           </DialogTrigger>
           <DialogContent className={`${styles.content} gap-[0px]`}>
             <DialogClose>

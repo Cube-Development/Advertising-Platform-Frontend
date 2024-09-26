@@ -1,11 +1,11 @@
+import { IAddChannelQuery, addChannelQueries } from "@entities/channel";
+import { roles } from "@entities/user";
+import { useAppSelector } from "@shared/hooks";
+import { pageFilter, paths } from "@shared/routing";
+import { IStartProjectProps } from "@shared/types/common";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { pageFilter, paths } from "@shared/routing";
-import { IAddChannelQuery, addChannelQueries } from "@entities/channel";
-import { roles } from "@entities/user";
-import { IStartProjectProps } from "@shared/types/common";
-import { useAppSelector } from "@shared/hooks";
 
 interface BarTopProps {
   listLength: boolean;
@@ -30,9 +30,11 @@ export const BarTop: FC<BarTopProps> = ({
       {page === pageFilter.order ? (
         role === roles.advertiser ? (
           <>
-            <p className="truncate">{t(`orders_advertiser.my_campaign`)}</p>
+            <p className={`${styles.title} truncate`}>
+              {t(`orders_advertiser.my_campaign`)}
+            </p>
             {listLength && (
-              <div>
+              <div className={styles.adv}>
                 {<TurnkeyProjectBtn listLength={listLength} />}
                 {<NewProjectBtn listLength={listLength} />}
               </div>
@@ -41,13 +43,13 @@ export const BarTop: FC<BarTopProps> = ({
         ) : (
           role === roles.manager && (
             <>
-              <p>{t(`orders_manager.orders`)}</p>
+              <p className={styles.title}>{t(`orders_manager.orders`)}</p>
             </>
           )
         )
       ) : page === pageFilter.platform ? (
         <>
-          <p>{t(`platforms_blogger.my_platform`)}</p>
+          <p className={styles.title}>{t(`platforms_blogger.my_platform`)}</p>
           {!listLength && (
             <div>
               {
@@ -61,7 +63,7 @@ export const BarTop: FC<BarTopProps> = ({
       ) : (
         page === pageFilter.offer && (
           <>
-            <p>{t(`offers_blogger.my_offers`)}</p>
+            <p className={styles.title}>{t(`offers_blogger.my_offers`)}</p>
 
             {listLength && (
               <div>

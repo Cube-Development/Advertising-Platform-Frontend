@@ -7,7 +7,7 @@
   padding-bottom: 30px;
   border-bottom: 1px solid var(--Card-separator);
 
-  p {
+  .title {
     color: var(--Personal-colors-black);
     font-style: normal;
     font-weight: 600;
@@ -17,18 +17,22 @@
     font-size: var(--font-size-title-main-md);
 
     @media (max-width: 576px) {
-      font-size: var(--font-size-title-main-sm);
-    }
-
-    @media (max-width: 375px) {
+      text-align: center;
       font-size: var(--font-size-title-main-xs);
     }
+
+    // @media (max-width: 375px) {
+    //   font-size: var(--font-size-title-main-xs);
+    // }
   }
 
   div {
     display: grid;
-    column-gap: 10px;
-    grid-template: 1fr / repeat(2, 1fr);
+
+    &.adv {
+      grid-template: 1fr / repeat(2, 1fr);
+      column-gap: 10px;
+    }
 
     button {
       font-size: var(--column-gap-option-item-xl);

@@ -40,6 +40,7 @@ export const SelectSex: FC<SelectSexProps> = ({
   const debouncedPosition = useDebounce(position, DEBOUNCE.sex);
 
   const handleChange = (newPosition: number | null) => {
+    console.log("newPosition", newPosition);
     if (isCatalog) {
       const { filter } = getValues && getValues();
       const updatedFilter = {
@@ -73,16 +74,22 @@ export const SelectSex: FC<SelectSexProps> = ({
         {text && <InfoIcon />}
       </div>
       <div className={styles.slider}>
-        <p className={styles.man}>{position ? 100 - position : 50}%</p>
+        <p className={styles.man}>
+          {position ? position : PLATFORM_PARAMETERS.defaultSexMale}%
+        </p>
         <MySliderSex
           type="range"
           min={0}
           step={5}
           max={100}
-          value={position || 50}
-          onChange={(e) => setPosition(parseInt(e.target.value))}
+          value={position ? position : PLATFORM_PARAMETERS.defaultSexMale}
+          onChange={(e) => (
+            setPosition(parseInt(e.target.value)), console.log(e.target.value)
+          )}
         />
-        <p className={styles.woman}>{position || 50}%</p>
+        <p className={styles.woman}>
+          {position ? 100 - position : PLATFORM_PARAMETERS.defaultSexMale}%
+        </p>
       </div>
     </div>
   );

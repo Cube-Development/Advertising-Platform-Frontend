@@ -11,6 +11,7 @@ import {
 } from "@shared/ui";
 import { IOrderFeature } from "@entities/project";
 import { usePublishPostBloggerMutation } from "@entities/offer";
+import { ArrowLongHorizontalIcon } from "@shared/assets";
 
 export const SendLink: FC<IOrderFeature> = ({ order_id }) => {
   const [url, setUrl] = useState("");
@@ -59,7 +60,7 @@ export const SendLink: FC<IOrderFeature> = ({ order_id }) => {
       <PopoverTrigger asChild>
         <p className={styles.button}>
           {t(`offer_btn.send_link`)}
-          <SendHorizonal />
+          <ArrowLongHorizontalIcon className="icon__white" />
         </p>
       </PopoverTrigger>
       <PopoverContent className="rounded-[10px] p-0 w-full h-full" align="end">
@@ -80,7 +81,7 @@ export const SendLink: FC<IOrderFeature> = ({ order_id }) => {
               value={url}
             />
             <p className={styles.link__send_icon} onClick={handleOnClick}>
-              <SendHorizonal />
+              <ArrowLongHorizontalIcon className="icon__white" />
             </p>
           </div>
         </div>

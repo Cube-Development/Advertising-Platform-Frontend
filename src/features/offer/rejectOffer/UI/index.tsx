@@ -34,7 +34,7 @@ export const RejectOffer: FC<IOrderFeature> = ({ order_id }) => {
       buttons_type="button__white"
       className={styles.button}
     >
-      {t(`offer_btn.reject`)}
+      <p>{t(`offer_btn.reject`)}</p>
     </MyButton>
   );
 };

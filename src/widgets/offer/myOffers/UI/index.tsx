@@ -1,4 +1,3 @@
-import { channelStatusFilter } from "@entities/channel";
 import { IBloggerOfferCard, offerStatusFilter } from "@entities/offer";
 import { AddChannel, ZeroChannel } from "@features/channel";
 import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
@@ -14,7 +13,7 @@ interface MyOffersProps {
   handleOnChangePage: () => void;
   isLoading: boolean;
   isLast: boolean;
-  statusFilter: channelStatusFilter | offerStatusFilter | string;
+  statusFilter: offerStatusFilter;
 }
 
 export const MyOffers: FC<MyOffersProps> = ({
@@ -34,27 +33,31 @@ export const MyOffers: FC<MyOffersProps> = ({
           statusFilter={statusFilter}
         />
       ) : (
-        <div className={styles.cards}>
-          {offers?.map((card, index) => (
-            <motion.div
-              key={card.id + index}
-              initial="hidden"
-              animate="visible"
-              custom={index % INTERSECTION_ELEMENTS.bloggerOffers}
-              variants={PAGE_ANIMATION.animationUp}
-            >
-              <OfferCard statusFilter={statusFilter} card={card} />
-            </motion.div>
-          ))}
-          {isLoading &&
-            Array.from({ length: INTERSECTION_ELEMENTS.bloggerOffers }).map(
-              (_, index) => <OfferCardSkeleton key={index} />,
+        <div>
+          <div className={styles.cards}>
+            {offers?.map((card, index) => (
+              <motion.div
+                key={card.id + index}
+                initial="hidden"
+                animate="visible"
+                custom={index % INTERSECTION_ELEMENTS.bloggerOffers}
+                variants={PAGE_ANIMATION.animationUp}
+              >
+                <OfferCard statusFilter={statusFilter} card={card} />
+              </motion.div>
+            ))}
+            {!isLoading &&
+              Array.from({ length: INTERSECTION_ELEMENTS.bloggerOffers }).map(
+                (_, index) => (
+                  <OfferCardSkeleton key={index} statusFilter={statusFilter} />
+                ),
+              )}
+            {!isLast && (
+              <div className={styles.show_more} onClick={handleOnChangePage}>
+                {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
+              </div>
             )}
-          {!isLast && (
-            <div className={styles.show_more} onClick={handleOnChangePage}>
-              {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
-            </div>
-          )}
+          </div>
         </div>
       )}
     </div>

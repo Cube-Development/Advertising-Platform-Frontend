@@ -2,7 +2,9 @@ import { offerStatus } from "../config";
 
 export interface IBloggerOfferCard {
   id: string;
-  date_coming: string;
+  identifier: number;
+  created: string;
+  date_accept: string;
   name: string;
   category: string;
   avatar: string;

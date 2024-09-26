@@ -285,6 +285,7 @@ export const Chat: FC<IChatProps> = ({
             )}
             {toRole === roles.blogger && <p>{t("chat.role.blogger")}</p>}
             {toRole === roles.manager && <p>{t("chat.role.manager")}</p>}
+            {toRole === roles.advertiser && <p>{t("chat.role.advertiser")}</p>}
           </DrawerTrigger>
           <DrawerContent>
             <div className={styles.content}>

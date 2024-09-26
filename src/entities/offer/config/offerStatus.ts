@@ -9,6 +9,8 @@ export enum offerStatus {
   date_constant = 8,
   post_review = 9,
   moderation = 10,
+  unknown1 = 11,
+  unknown2 = 12,
 }
 
 export enum offerStatusFilter {

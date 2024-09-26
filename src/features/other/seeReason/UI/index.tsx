@@ -27,7 +27,7 @@ export const SeeReason: FC<SeeReasonProps> = ({ reason }) => {
           buttons_type="button__white"
           className={`${styles.button} truncate`}
         >
-          {t(`platform_btn.reason.btn`)}
+          <p>{t(`platform_btn.reason.btn`)}</p>
         </MyButton>
       </AlertDialogTrigger>
       <AlertDialogContent className={styles.alert}>
