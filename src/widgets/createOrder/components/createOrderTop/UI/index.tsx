@@ -30,11 +30,13 @@ export const CreateOrderTop: FC<CreateOrderTopProps> = ({
   };
 
   return (
-    <div className="layout">
+    <div className="layout -mt-[100px] pt-[100px]">
       <div className="container">
         <div className={styles.wrapper}>
           <div className={styles.top}>
-            <CreateIcon />
+            <div className={styles.icon}>
+              <CreateIcon />
+            </div>
             <p>{t(`create_order.create_order`)}</p>
           </div>
           <div className={styles.content}>

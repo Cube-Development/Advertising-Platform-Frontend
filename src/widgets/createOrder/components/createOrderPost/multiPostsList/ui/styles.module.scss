@@ -1,41 +1,112 @@
-.posts {
-  background: #fff;
-  padding: 20px 30px;
-  box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.6);
-  border-radius: 15px;
-
-  &__title {
-    font-size: var(--column-gap-option-item-xl);
-    background: var(--Gradients-Gradient-1);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    /* Включаем поддержку для Firefox */
-    background-clip: text;
-    color: transparent;
-    font-weight: 500;
-    margin-bottom: 20px;
+.wrapper {
+  @media (max-width: 992px) {
+    grid-column: span 2;
   }
 
-  &__list {
-    display: grid;
-    gap: 10px;
-    grid-auto-flow: row;
+  @media (max-width: 576px) {
+    grid-column: span 1;
+  }
 
-    .post {
-      color: var(--secondary-text);
-      font-size: var(--font-size-option-item-xl);
+  .posts {
+    height: 100%;
+    background: #fff;
+    padding: 10px 20px;
+    box-shadow: 0px 1px 8px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+
+    &__title {
+      font-size: var(--column-gap-option-item-xl);
+      background: var(--Gradients-Gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      /* Включаем поддержку для Firefox */
+      background-clip: text;
+      color: transparent;
       font-weight: 500;
-      padding: 10px;
-      border-radius: 10px;
-      box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.4);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
+      margin-bottom: 20px;
+      text-align: center;
+    }
 
-      &.active {
-        background: var(--Gradients-Gradient-1);
-        color: #fff;
-        box-shadow: 0px 0px 2px var(--Gradients-Gradient-1);
+    &__list {
+      display: grid;
+      gap: 15px;
+      grid-auto-flow: row;
+
+      .post {
+        color: var(--secondary-text);
+        font-size: var(--font-size-option-item-xl);
+        font-weight: 500;
+        padding: 10px 20px;
+        border-radius: 14px;
+        box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.1);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        cursor: pointer;
+
+        &:hover {
+          background: var(--Gradients-Gradient-1);
+          color: #fff;
+          transition: all 500ms ease;
+        }
+
+        &.active {
+          background: var(--Gradients-Gradient-1);
+          color: #fff;
+          box-shadow: inset 1px 1px 5px 1px rgba(0, 0, 0, 0.5);
+        }
+      }
+    }
+  }
+
+  .mobile {
+    height: 100%;
+    background: #fff;
+    padding: 15px 20px;
+    box-shadow: 0px 1px 8px 1px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+
+    &__title {
+      font-size: var(--column-gap-option-item-xl);
+      background: var(--Gradients-Gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      /* Включаем поддержку для Firefox */
+      background-clip: text;
+      color: transparent;
+      font-weight: normal;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    &__select {
+      width: 100%;
+      box-shadow: 0px 0px 1px 1px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+    }
+
+    &__list {
+      display: grid;
+      gap: 15px;
+      grid-auto-flow: row;
+      border-radius: 12px;
+
+      .post {
+        color: var(--secondary-text);
+        font-size: var(--font-size-option-item-xl);
+        font-weight: 500;
+        padding: 10px 20px;
+        border-radius: 14px;
+        box-shadow: 0px 1px 5px 2px rgba(0, 0, 0, 0.1);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        &.active {
+          background: var(--Gradients-Gradient-1);
+          color: #fff;
+          box-shadow: inset 1px 1px 5px 1px rgba(0, 0, 0, 0.5);
+        }
       }
     }
   }

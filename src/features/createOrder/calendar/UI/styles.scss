@@ -4,6 +4,13 @@
   color: #222;
   margin-bottom: 20px;
 
+  .react-calendar__navigation__next2-button {
+    display: none;
+  }
+  .react-calendar__navigation__prev2-button {
+    display: none;
+  }
+
   &__viewContainer {
     border-top: 1px solid #d9d9d9;
     border-bottom: 1px solid #d9d9d9;
@@ -50,12 +57,27 @@
     }
 
     button {
-      color: var(--Gradients-Gradient-1);
+      text-transform: uppercase;
+
       min-width: 44px;
       background: none;
-      font-size: 16px;
+      font-size: 14px;
       margin-top: 8px;
       border-radius: 6px;
+
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      color: var(--Personal-colors-main);
+      background: var(--Gradients-Gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+
+      abbr {
+        color: white;
+      }
 
       &:disabled {
         background-color: #f0f0f0;
@@ -91,11 +113,14 @@
   // }
 
   &__month-view__days__day--weekend {
-    color: var(--Gradients-Gradient-1);
+    color: var(--Personal-colors-main);
+    font-weight: 500;
+    font-size: 14px;
   }
 
   &__month-view__days__day--neighboringMonth {
     color: #757575;
+    font-size: 14px;
   }
 
   &__year-view .react-calendar__tile,
@@ -109,7 +134,7 @@
     padding: 10px 6.6667px;
     background: none;
     text-align: center;
-    line-height: 16px;
+    font-size: 14px;
 
     &:disabled {
       background-color: #f0f0f0;
@@ -157,16 +182,13 @@
 
     &--range {
       background: rgba(71, 113, 230, 0.5);
-      // border-radius: 6px !important;
-      border-radius: 0;
+      border-radius: 6px !important;
     }
 
     &--rangeStart {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
       border-radius: 6px;
-      // border-top-left-radius: 6px;
-      // border-bottom-left-radius: 6px;
       background: var(--Gradients-Gradient-1);
       color: white;
     }
@@ -175,8 +197,6 @@
       border-top-left-radius: 0;
       border-bottom-left-radius: 0;
       border-radius: 6px;
-      // border-top-right-radius: 6px;
-      // border-bottom-right-radius: 6px;
       background: var(--Gradients-Gradient-1);
       color: white;
     }

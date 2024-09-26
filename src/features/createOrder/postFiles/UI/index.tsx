@@ -125,8 +125,10 @@ export const PostFiles: FC<PostFilesProps> = ({
       <AlertDialog>
         <AlertDialogTrigger>
           <div className={`${styles.open} button`}>
-            <ImageIcon />
-            <p>{t("create_order.create.add_file")}</p>
+            <div className={styles.icon}>
+              <ImageIcon />
+            </div>
+            <p className="truncate">{t("create_order.create.add_file")}</p>
           </div>
         </AlertDialogTrigger>
         <AlertDialogContent>

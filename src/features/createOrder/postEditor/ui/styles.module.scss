@@ -14,4 +14,11 @@
   bottom: 0;
   width: 100%;
   z-index: 1;
+
+  svg {
+    @media (max-width: 576px) {
+      width: 18px;
+      height: 18px;
+    }
+  }
 }

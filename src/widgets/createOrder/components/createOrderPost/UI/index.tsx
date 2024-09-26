@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
@@ -33,6 +33,14 @@ import {
   PostFormats,
 } from "@entities/project";
 import { ICreateOrderBlur } from "@widgets/createOrder/config";
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogContent,
+  AlertDialogTrigger,
+} from "@shared/ui";
+import { PostIcon } from "@shared/assets";
+import { X } from "lucide-react";
 
 interface CreateOrderPostProps {
   cards: IPostChannel[];
@@ -117,6 +125,18 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
     );
   };
 
+  const [screen, setScreen] = useState<number>(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreen(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div id="post" className={`container ${isBlur ? "blur" : ""}`}>
       <div className={styles.wrapper}>
@@ -142,7 +162,9 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
               setValue={setValue}
               formats={postFormats}
             />
-            <div className={clsx(styles.data, {})}>
+            <div
+              className={`${styles.data} ${!formState.isMultiPost && styles.not_multi}`}
+            >
               {formState.isMultiPost && (
                 <MultiPostsList
                   platform={formState.platformFilter?.id}
@@ -222,7 +244,6 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                   />
                 </div>
               </div>
-              {!formState.isMultiPost && <div></div>}
               <div className={styles.display}>
                 {formState.platformFilter?.type ===
                   platformTypesStr.telegram && (
@@ -271,6 +292,76 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                 <div className={styles.continue}>
                   <ContinueOrder onClick={handleCheckPosts} />
                 </div>
+              </div>
+              <div className={styles.display_mobile}>
+                <AlertDialog>
+                  <AlertDialogTrigger asChild>
+                    <div className={styles.see_post_btn}>
+                      <p>{t("create_order.create.see_post_mobile_btn")}</p>
+                      <div className={styles.icon}>
+                        <PostIcon />
+                      </div>
+                    </div>
+                  </AlertDialogTrigger>
+                  <AlertDialogContent
+                    className={`gap-0 bg-transparent grid items-center justify-center shadow-none ${screen > 475 ? "w-[60vw]" : "w-[80vw]"}`}
+                  >
+                    <div className="relative">
+                      <AlertDialogAction>
+                        <X className="absolute -right-4 -top-4 w-[30px] rounded-full p-1 bg-white cursor-pointer" />
+                      </AlertDialogAction>
+                      {formState.platformFilter?.type ===
+                        platformTypesStr.telegram && (
+                        <DisplayTelegram
+                          formState={formState}
+                          platformId={formState.platformFilter?.id}
+                        />
+                      )}
+                      {formState.platformFilter?.type ===
+                        platformTypesStr.instagram &&
+                        formState.selectedPostType === PostTypesNum.feed && (
+                          <DisplayFeed
+                            formState={formState}
+                            platformId={formState.platformFilter?.id}
+                            postType={PostTypesNum.feed}
+                          />
+                        )}
+                      {formState.platformFilter?.type ===
+                        platformTypesStr.instagram &&
+                        formState.selectedPostType ===
+                          PostTypesNum.FullHd_vertical && (
+                          <DisplayStories
+                            formState={formState}
+                            platformId={formState.platformFilter.id}
+                            postType={PostTypesNum.FullHd_vertical}
+                          />
+                        )}
+                      {formState.platformFilter?.type ===
+                        platformTypesStr.youtube &&
+                        formState.selectedPostType ===
+                          PostTypesNum.FullHd_vertical && (
+                          <DisplayShorts
+                            formState={formState}
+                            platformId={formState.platformFilter?.id}
+                            postType={PostTypesNum.FullHd_vertical}
+                          />
+                        )}
+                      {formState.platformFilter?.type ===
+                        platformTypesStr.youtube &&
+                        formState.selectedPostType ===
+                          PostTypesNum.FullHd_horizontal && (
+                          <DisplayVideos
+                            formState={formState}
+                            platformId={formState.platformFilter?.id}
+                            postType={PostTypesNum.FullHd_horizontal}
+                          />
+                        )}
+                    </div>
+                  </AlertDialogContent>
+                </AlertDialog>
+              </div>
+              <div className={styles.continue_mobile}>
+                <ContinueOrder onClick={handleCheckPosts} />
               </div>
             </div>
           </div>

@@ -451,6 +451,10 @@
   align-items: center;
   padding: 10px 60px;
 
+  @media (max-width: 576px) {
+    padding: 30px;
+  }
+
   .no_balance__title {
     display: grid;
     grid-auto-flow: row;

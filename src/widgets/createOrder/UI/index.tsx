@@ -49,7 +49,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
       case "post":
         scroller.scrollTo("post", {
           smooth: true,
-          offset: -80,
+          offset: -100,
         });
         break;
       case "datetime":

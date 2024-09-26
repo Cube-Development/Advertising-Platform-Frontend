@@ -10,6 +10,10 @@
     border-color 0.3s,
     background-color 0.3s;
 
+  @media (max-width: 768px) {
+    grid-auto-flow: column;
+  }
+
   .empty {
     display: grid;
     grid-auto-flow: row;
@@ -27,12 +31,23 @@
     border-radius: 12px;
     border: 1px dashed var(--Containers);
 
+    @media (max-width: 768px) {
+      grid-template: none;
+      grid-auto-flow: row;
+      gap: 20px;
+    }
+
     .top__column {
       display: grid;
       grid-auto-flow: column;
       column-gap: 10px;
       align-items: center;
       justify-content: center;
+
+      @media (max-width: 768px) {
+        grid-auto-flow: row;
+        gap: 10px;
+      }
 
       .logo {
         display: grid;
@@ -49,12 +64,16 @@
         grid-auto-flow: row;
         row-gap: 10px;
         align-content: center;
+
         p {
           color: #4d4d4d;
           font-size: 10px;
           font-style: normal;
           font-weight: 400;
-          // line-height: 0.75;
+
+          @media (max-width: 768px) {
+            text-align: center;
+          }
 
           span {
             font-weight: 600;
@@ -92,7 +111,15 @@
         font-size: 16px;
         font-style: normal;
         font-weight: 600;
-        line-height: 0.75;
+        line-height: normal;
+
+        @media (max-width: 768px) {
+          font-size: 14px;
+        }
+
+        @media (max-width: 576px) {
+          font-size: 12px;
+        }
       }
 
       span {

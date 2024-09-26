@@ -1,6 +1,6 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
-import { PostIcon } from "@shared/assets";
+import { PostIcon, PostIcon2 } from "@shared/assets";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { X } from "lucide-react";
 import {
@@ -28,6 +28,7 @@ import {
   AlertDialogTrigger,
 } from "@shared/ui";
 import { EmptyPost } from "@entities/platform/ui/displays/displayInstagram/feed/emptyPost";
+import { useTranslation } from "react-i18next";
 
 interface PostPlatformProps {
   card: IPostChannel;
@@ -46,6 +47,7 @@ export const OrderCard: FC<PostPlatformProps> = ({
   getValues,
   formState,
 }) => {
+  const { t } = useTranslation();
   const handleChangeTime = (timeList: string[]) => {
     const form: ICreatePostForm = getValues();
     const datetime = form.datetime;
@@ -90,6 +92,18 @@ export const OrderCard: FC<PostPlatformProps> = ({
     setValue(CreatePostFormData.datetime, datetime);
   };
 
+  const [screen, setScreen] = useState<number>(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreen(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.info}>
@@ -97,82 +111,87 @@ export const OrderCard: FC<PostPlatformProps> = ({
           <img src={card?.avatar} alt="" />
         </div>
         <div className={styles.title}>
-          <p>{card?.name}</p>
-          <span>{card?.category}</span>
+          <p className="truncate">{card?.name}</p>
+          <span className="truncate">{card?.category}</span>
+        </div>
+        <div className={styles.icon}>
+          {card.platform in platformToIcon
+            ? platformToIcon[card?.platform]()
+            : null}
         </div>
       </div>
-      <div className={styles.type}>
-        {card.platform in platformToIcon
-          ? platformToIcon[card?.platform]()
-          : null}
-      </div>
-      <div className={styles.type}>
-        <CustomCalendar onChange={handleChangeDate} />
-      </div>
-      <div className={styles.type}>
-        <TimeList onChange={handleChangeTime} />
-      </div>
-      <AlertDialog>
-        <AlertDialogTrigger asChild>
-          <div className={styles.data}>
-            <PostIcon />
-          </div>
-        </AlertDialogTrigger>
-        <AlertDialogContent className="gap-0 w-[30vw] h-[40vw] bg-transparent grid items-center justify-center shadow-none">
-          {formState?.posts?.length ? (
-            <div className="w-[18vw] h-full relative">
-              <AlertDialogAction>
-                <X className="absolute -right-16 -top-10 w-[50px] rounded-full p-2 bg-white cursor-pointer" />
-              </AlertDialogAction>
-              {card?.platform === platformTypesNum.telegram && (
-                <DisplayTelegram
-                  formState={formState}
-                  platformId={platformTypesNum.telegram}
-                  orderId={card?.id}
-                />
-              )}
-              {card?.platform === platformTypesNum.instagram &&
-                card?.post_type === PostTypesNum.feed && (
-                  <DisplayFeed
-                    formState={formState}
-                    platformId={platformTypesNum.instagram}
-                    postType={PostTypesNum.feed}
-                    orderId={card?.id}
-                  />
-                )}
-              {card?.platform === platformTypesNum.instagram &&
-                card?.post_type === PostTypesNum.FullHd_vertical && (
-                  <DisplayStories
-                    formState={formState}
-                    platformId={platformTypesNum.instagram}
-                    postType={PostTypesNum.FullHd_vertical}
-                    orderId={card?.id}
-                  />
-                )}
-              {card?.platform === platformTypesNum.youtube &&
-                card?.post_type === PostTypesNum.FullHd_vertical && (
-                  <DisplayShorts
-                    formState={formState}
-                    platformId={platformTypesNum.youtube}
-                    postType={PostTypesNum.FullHd_vertical}
-                    orderId={card?.id}
-                  />
-                )}
-              {card?.platform === platformTypesNum.youtube &&
-                card?.post_type === PostTypesNum.FullHd_horizontal && (
-                  <DisplayVideos
-                    formState={formState}
-                    platformId={platformTypesNum.youtube}
-                    postType={PostTypesNum.FullHd_horizontal}
-                    orderId={card?.id}
-                  />
-                )}
+      <div className={styles.footer}>
+        <div className={styles.type}>
+          <CustomCalendar onChange={handleChangeDate} />
+        </div>
+        <div className={styles.type}>
+          <TimeList onChange={handleChangeTime} />
+        </div>
+        <AlertDialog>
+          <AlertDialogTrigger asChild>
+            <div className={styles.data}>
+              <PostIcon2 />
+              <p className={styles.data__see_post}>
+                {t("create_order.create.see_post_mobile_btn")}
+              </p>
             </div>
-          ) : (
-            <EmptyPost />
-          )}
-        </AlertDialogContent>
-      </AlertDialog>
+          </AlertDialogTrigger>
+          <AlertDialogContent className="gap-0 w-[30vw] h-[40vw] bg-transparent grid items-center justify-center shadow-none">
+            {formState?.posts?.length ? (
+              <div className="w-[18vw] h-full relative">
+                <AlertDialogAction>
+                  <X className="absolute -right-16 -top-10 w-[50px] rounded-full p-2 bg-white cursor-pointer" />
+                </AlertDialogAction>
+                {card?.platform === platformTypesNum.telegram && (
+                  <DisplayTelegram
+                    formState={formState}
+                    platformId={platformTypesNum.telegram}
+                    orderId={card?.id}
+                  />
+                )}
+                {card?.platform === platformTypesNum.instagram &&
+                  card?.post_type === PostTypesNum.feed && (
+                    <DisplayFeed
+                      formState={formState}
+                      platformId={platformTypesNum.instagram}
+                      postType={PostTypesNum.feed}
+                      orderId={card?.id}
+                    />
+                  )}
+                {card?.platform === platformTypesNum.instagram &&
+                  card?.post_type === PostTypesNum.FullHd_vertical && (
+                    <DisplayStories
+                      formState={formState}
+                      platformId={platformTypesNum.instagram}
+                      postType={PostTypesNum.FullHd_vertical}
+                      orderId={card?.id}
+                    />
+                  )}
+                {card?.platform === platformTypesNum.youtube &&
+                  card?.post_type === PostTypesNum.FullHd_vertical && (
+                    <DisplayShorts
+                      formState={formState}
+                      platformId={platformTypesNum.youtube}
+                      postType={PostTypesNum.FullHd_vertical}
+                      orderId={card?.id}
+                    />
+                  )}
+                {card?.platform === platformTypesNum.youtube &&
+                  card?.post_type === PostTypesNum.FullHd_horizontal && (
+                    <DisplayVideos
+                      formState={formState}
+                      platformId={platformTypesNum.youtube}
+                      postType={PostTypesNum.FullHd_horizontal}
+                      orderId={card?.id}
+                    />
+                  )}
+              </div>
+            ) : (
+              <EmptyPost />
+            )}
+          </AlertDialogContent>
+        </AlertDialog>
+      </div>
     </div>
   );
 };

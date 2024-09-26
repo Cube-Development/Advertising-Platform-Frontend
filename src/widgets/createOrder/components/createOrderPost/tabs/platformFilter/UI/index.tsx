@@ -48,14 +48,16 @@ export const PlatformFilter: FC<PlatformFilterProps> = ({
 
   return (
     <div className={styles.types}>
-      <p>{t("create_order.create.choose_platform")}</p>
+      <p className="truncate">{t("create_order.create.choose_platform")}</p>
       <ul>
         {platformTypes.map((type, index) => (
           <li
             className={
-              platforms.includes(type?.id) && platformFilter === type
+              platforms.includes(type?.id) &&
+              platformFilter?.type === type?.type
                 ? styles.active
-                : platforms.includes(type?.id) && platformFilter !== type
+                : platforms.includes(type?.id) &&
+                    platformFilter?.type !== type?.type
                   ? styles.non__active
                   : styles.disabled
             }

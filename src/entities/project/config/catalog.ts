@@ -1,4 +1,10 @@
-import { SortDownIcon, SortUpIcon, TelegramIcon } from "@shared/assets";
+import {
+  InstagramIcon,
+  SortDownIcon,
+  SortUpIcon,
+  TelegramIcon,
+  YouTubeIcon,
+} from "@shared/assets";
 
 export enum catalogBarFilter {
   parameters = "parameters",
@@ -37,10 +43,10 @@ export enum sortingFilter {
   rate = "rate",
 }
 
-export const platformToIcon: { [key: number]: () => JSX.Element } = {
-  0: TelegramIcon,
+export const platformToIcon: any = {
   1: TelegramIcon,
-  2: TelegramIcon,
+  2: YouTubeIcon,
+  3: InstagramIcon,
 };
 
 export const sortingTypes = [

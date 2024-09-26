@@ -119,7 +119,9 @@ export const TimeList: FC<TimeListProps> = ({ onChange }) => {
       <AlertDialog>
         <AlertDialogTrigger>
           <div className={styles.open}>
-            <ClockIcon />
+            <div className={styles.icon}>
+              <ClockIcon />
+            </div>
             <p>
               {selectedTimesObject.timeIndexList.length && !isModalOpen
                 ? `${selectedTimesObject.timeStringList[0]} - ${selectedTimesObject.timeStringList[1]}`
@@ -127,7 +129,7 @@ export const TimeList: FC<TimeListProps> = ({ onChange }) => {
             </p>
           </div>
         </AlertDialogTrigger>
-        <AlertDialogContent>
+        <AlertDialogContent className="w-[90%] max-w-[600px]">
           <div className={styles.content}>
             <div className={styles.top}>
               <p>{t("calendar.choose_time")}</p>
@@ -158,7 +160,7 @@ export const TimeList: FC<TimeListProps> = ({ onChange }) => {
               </div>
               <div className={styles.bottom}>
                 <AlertDialogAction type="button" onClick={continueAction}>
-                  <div className={`${styles.confirm} button button__white`}>
+                  <div className={`${styles.confirm} button button__blue`}>
                     <p>{t("calendar.confirm")}</p>
                   </div>
                 </AlertDialogAction>

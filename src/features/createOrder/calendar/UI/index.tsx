@@ -1,4 +1,4 @@
-import { CalendarIcon, CancelIcon2 } from "@shared/assets";
+import { CalendarIcon, CalendarIcon2, CancelIcon2 } from "@shared/assets";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -120,15 +120,15 @@ export const CustomCalendar: FC<DateListProps> = ({ onChange }) => {
       <AlertDialog>
         <AlertDialogTrigger>
           <div className={styles.open}>
-            <CalendarIcon />
+            <div className={styles.icon}>
+              <CalendarIcon />
+            </div>
             {dateOject.dateString && !isModalOpen ? (
               dateOject.dateString.length === 2 ? (
                 <p className={styles.range}>
-                  {dateOject.dateString[0]}
-                  <br />
-                  {t("calendar.until")}
-                  <br />
-                  {dateOject.dateString[1]}
+                  <p>{dateOject.dateString[0]}</p>
+                  <span>-</span>
+                  <p>{dateOject.dateString[1]}</p>
                 </p>
               ) : (
                 <p>{dateOject.dateString}</p>
@@ -173,7 +173,7 @@ export const CustomCalendar: FC<DateListProps> = ({ onChange }) => {
                 </p>
               </MyButton>
               <AlertDialogAction type="button" onClick={continueAction}>
-                <div className={`${styles.confirm} button button__white`}>
+                <div className={`${styles.confirm} button button__blue`}>
                   <p>{t("calendar.confirm")}</p>
                 </div>
               </AlertDialogAction>

@@ -116,8 +116,12 @@ export const PostButtons: FC<PostButtonsProps> = ({
       <AlertDialog>
         <AlertDialogTrigger>
           <div className={`${styles.open} button `}>
-            <AddIcon />
-            <p>{t("create_order.create.add_button.title")}</p>
+            <div className={styles.icon}>
+              <AddIcon />
+            </div>
+            <p className="truncate">
+              {t("create_order.create.add_button.title")}
+            </p>
           </div>
         </AlertDialogTrigger>
         <AlertDialogContent>

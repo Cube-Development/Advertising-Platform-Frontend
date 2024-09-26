@@ -5,11 +5,27 @@
   justify-content: start;
   align-items: center;
 
+  @media (max-width: 576px) {
+    justify-content: center;
+  }
+
   &__type {
     font-size: var(--column-gap-option-item-xl);
     font-weight: 500;
     cursor: pointer;
     position: relative;
+
+    @media (max-width: 992px) {
+      font-size: var(--column-gap-option-item-md);
+    }
+
+    @media (max-width: 768px) {
+      font-size: var(--column-gap-option-item-sm);
+    }
+
+    @media (max-width: 576px) {
+      font-size: var(--column-gap-option-item-sm);
+    }
 
     &.active__type {
       background: var(--Gradients-Gradient-1);

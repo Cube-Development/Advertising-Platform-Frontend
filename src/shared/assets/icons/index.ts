@@ -99,3 +99,5 @@ export { SaveIcon } from "./save";
 export { HandshakeIcon2 } from "./handshake2";
 export { SortDownIcon } from "./sortDown";
 export { SortUpIcon } from "./sortUp";
+export { PostIcon2 } from "./post2";
+export { CalendarIcon2 } from "./calendar2";

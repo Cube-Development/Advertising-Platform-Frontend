@@ -68,7 +68,7 @@ export const Editor: FC<EditorProps> = ({
     editorProps: {
       attributes: {
         class:
-          "h-full px-4 max-h-[300px] overflow-auto bg-transparent text-black focus:outline-none text-sm",
+          "h-full px-4 overflow-auto bg-transparent text-black focus:outline-none text-base",
       },
     },
     onUpdate({ editor }) {

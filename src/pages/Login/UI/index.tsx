@@ -25,11 +25,6 @@ export const LoginPage: FC = () => {
   return (
     <section className={styles.wrapper}>
       <div className={styles.container}>
-        <img
-          src="/images/authorization/logo.svg"
-          alt="Logo"
-          className={styles.logo}
-        />
         {currentForm === loginSteps.login && (
           <LoginForm onNavigate={navigateForms} />
         )}

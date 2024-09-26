@@ -3,23 +3,65 @@
   box-shadow: 0px 0px 2px rgba(0, 0, 0, 0.6);
   background: #fff;
 
+  .icon {
+    width: 18px;
+
+    svg {
+      width: 100%;
+      height: auto;
+    }
+  }
+
   p {
     color: var(--Sub-text);
-    font-size: 18px;
+    font-size: var(--font-size-option-item-xl);
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+
+    @media (max-width: 992px) {
+      font-size: var(--font-size-option-item-md);
+    }
+
+    @media (max-width: 768px) {
+      font-size: var(--font-size-option-item-sm);
+    }
+
+    @media (max-width: 576px) {
+      font-size: var(--font-size-option-item-sm);
+      text-align: center;
+    }
   }
 }
 
 .modalContent {
   display: grid;
-  width: 50vh;
+  max-width: 800px;
+  width: 70vw;
   align-items: center;
   grid-auto-flow: row;
   row-gap: 25px;
   padding: 35px;
   border-radius: 25px;
+
+  @media (max-width: 992px) {
+    width: 80vw;
+    row-gap: 20px;
+    border-radius: 20px;
+    padding: 25px;
+  }
+
+  @media (max-width: 768px) {
+    width: 90vw;
+    row-gap: 15px;
+    border-radius: 15px;
+    padding: 20px;
+  }
+
+  @media (max-width: 576px) {
+    width: 95vw;
+    border-radius: 12px;
+  }
 
   .top {
     display: grid;
@@ -30,9 +72,17 @@
     p {
       font-size: 24px;
       font-style: normal;
-      font-weight: 400;
-      line-height: 12px; /* 50% */
+      font-weight: 500;
+      line-height: 12px;
       color: var(--Personal-colors-main);
+
+      @media (max-width: 768px) {
+        font-size: 20px;
+      }
+
+      @media (max-width: 576px) {
+        font-size: 16px;
+      }
     }
 
     svg {
@@ -48,10 +98,18 @@
 
     div {
       display: grid;
-      grid-template: 1fr/0.3fr 1fr;
+      grid-template: 1fr / 0.3fr 1fr;
       column-gap: 10px;
       align-items: center;
       justify-content: space-between;
+
+      @media (max-width: 576px) {
+        grid-template: none;
+        grid-auto-flow: row;
+        justify-content: stretch;
+        gap: 10px;
+        width: 100%;
+      }
 
       p {
         color: var(--Personal-colors-black);
@@ -62,15 +120,14 @@
       }
 
       input {
-        padding: 15px;
-        border-radius: 8px;
-        border: 1px solid var(--Containers);
+        padding: 16px;
+        border-radius: 12px;
+        box-shadow: inset 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
         background: var(--Personal-colors-White);
         color: var(--Personal-colors-black);
-        font-size: 14px;
+        font-size: 16px;
         font-style: normal;
         font-weight: 500;
-        line-height: 0.75;
 
         &::placeholder {
           color: var(--Containers);
@@ -83,10 +140,17 @@
     display: grid;
     grid-auto-flow: row;
     border-radius: 30px;
-    height: 170px;
     border: 2.5px dashed var(--Personal-colors-main);
     align-items: start;
     padding: 25px;
+    max-height: 20dvh;
+    overflow: auto;
+
+    @media (max-width: 768px) {
+      padding: 20px;
+      border-radius: 20px;
+      border: 1.5px dashed var(--Personal-colors-main);
+    }
 
     &.zero {
       border: 2.5px dashed var(--Text-sample);
@@ -98,7 +162,14 @@
       font-size: 20px;
       font-style: normal;
       font-weight: 600;
+
+      @media (max-width: 768px) {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+      }
     }
+
     .row__button {
       display: grid;
       grid-auto-flow: column;
@@ -117,15 +188,19 @@
         font-style: normal;
         font-weight: 500;
         line-height: 0.75;
+
         p {
           color: var(--Subtitle-tex);
         }
+
         span {
           color: var(--Personal-colors-main);
         }
       }
+
       button {
         display: flex;
+
         svg {
           width: 10px;
           height: 10px;

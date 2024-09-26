@@ -1,29 +1,81 @@
 .open {
   display: grid;
-  grid-template: 1fr / 1fr 3.5fr;
-  justify-content: start;
+  grid-auto-flow: column;
   align-items: center;
   column-gap: 10px;
   justify-content: space-between;
 
+  @media (max-width: 768px) {
+    width: 20px;
+    justify-content: center;
+  }
+
+  @media (max-width: 576px) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+  }
+
+  .icon {
+    width: 24px;
+
+    @media (max-width: 768px) {
+      width: 20px;
+    }
+
+    @media (max-width: 576px) {
+      width: 24px;
+    }
+
+    svg {
+      width: 100%;
+      height: auto;
+    }
+  }
+
   p {
-    font-size: 16px;
-    font-style: normal;
+    font-size: 14px;
     font-weight: 500;
+    color: var(--Personal-colors-main);
+    white-space: nowrap;
+
+    font-style: normal;
     line-height: normal;
     color: var(--Personal-colors-main);
+    background: var(--Gradients-Gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+
+    @media (max-width: 768px) {
+      font-size: 10px;
+    }
+
+    @media (max-width: 576px) {
+      font-size: 14px;
+    }
   }
 }
 
 .content {
   display: grid;
   align-items: center;
-  justify-content: center;
+  justify-content: stretch;
   grid-auto-flow: row;
   position: relative;
   padding: 35px;
   border-radius: 25px;
   background: #fff;
+
+  @media (max-width: 768px) {
+    padding: 20px;
+  }
+
+  @media (max-width: 576px) {
+    padding: 15px;
+  }
 
   .top {
     display: grid;
@@ -32,17 +84,38 @@
     justify-content: space-between;
     margin-bottom: 25px;
 
+    @media (max-width: 576px) {
+      margin-bottom: 10px;
+    }
+
     p {
       font-size: 24px;
       font-style: normal;
-      font-weight: 400;
-      line-height: 12px; /* 50% */
+      font-weight: 500;
       color: var(--Personal-colors-main);
+      background: var(--Gradients-Gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      color: transparent;
+
+      @media (max-width: 992px) {
+        font-size: 20px;
+      }
+
+      @media (max-width: 768px) {
+        font-size: 16px;
+      }
     }
 
     svg {
       width: 20px;
       height: 20px;
+
+      @media (max-width: 576px) {
+        width: 14px;
+        height: 14px;
+      }
     }
   }
 
@@ -59,39 +132,59 @@
       grid-gap: 10px;
       justify-content: center;
 
+      @media (max-width: 768px) {
+        grid-template-rows: repeat(12, 1fr);
+        grid-template-columns: repeat(2, 1fr);
+        max-height: 50dvh;
+        overflow: auto;
+      }
+
       .timeSlot {
         display: grid;
         align-items: center;
         justify-content: center;
         border-radius: 8px;
-        box-shadow: inset 0px 0px 0px 1px var(--Personal-colors-main);
+        box-shadow: inset 0px 0px 3px 1px rgba(71, 113, 230, 0.5);
         padding: 10px;
         cursor: pointer;
+
         p {
-          color: var(--Personal-colors-black);
           font-size: 12px;
+          font-weight: 500;
           font-style: normal;
-          font-weight: 400;
-          line-height: 0.75;
+          color: var(--Personal-colors-main);
+          background: var(--Gradients-Gradient-1);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          color: transparent;
+          white-space: nowrap;
         }
 
         &.active {
           background: var(--Gradients-Gradient-1);
           box-shadow: none;
+
           p {
-            color: var(--Personal-colors-White);
+            color: #fff;
+            background: #fff;
+            -webkit-background-clip: text;
           }
         }
 
         &.active__in {
           background: rgba(71, 113, 230, 0.5);
           box-shadow: none;
+
           p {
-            color: var(--Personal-colors-White);
+            color: #fff;
+            background: #fff;
+            -webkit-background-clip: text;
           }
         }
       }
     }
+
     .bottom {
       display: grid;
       align-items: center;

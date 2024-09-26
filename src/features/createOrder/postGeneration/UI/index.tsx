@@ -14,8 +14,10 @@ export const PostGeneration: FC<PostGenerationProps> = () => {
       buttons_type="button__white"
       className={styles.button}
     >
-      {t(`create_order.create.generation`)}
-      <ArrowLongHorizontalIcon className="active__icon" />
+      <p className="truncate">{t(`create_order.create.generation`)}</p>
+      <div>
+        <ArrowLongHorizontalIcon className="active__icon" />
+      </div>
     </MyButton>
   );
 };
