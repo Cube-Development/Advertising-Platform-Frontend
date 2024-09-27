@@ -2,7 +2,7 @@ import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@shared/ui";
-import { login, roles, setUserId, toggleRole } from "@entities/user";
+import { login, roles, toggleRole } from "@entities/user";
 import { useAppDispatch } from "@shared/hooks";
 import { useTransferPublicMutation } from "@entities/project";
 import { paths } from "@shared/routing";
@@ -32,7 +32,7 @@ export const useHandleAuth = () => {
       dispatch(login());
       navigate(role === roles.advertiser ? paths.main : paths.mainBlogger);
       dispatch(toggleRole(role));
-      dispatch(setUserId(user_id));
+      Cookies.set("user_id", user_id);
 
       const guestId = Cookies.get("guest_id");
       if (guestId) {

@@ -32,8 +32,9 @@ export const Cart: FC = () => {
   const language = Languages.find((lang) => {
     return i18n.language === lang.name;
   });
-  const { isAuth, user_id } = useAppSelector((state) => state.user);
+  const { isAuth } = useAppSelector((state) => state.user);
 
+  const user_id = Cookies.get("user_id");
   const guestId = Cookies.get("guest_id");
   const role = Cookies.get("role");
   const projectId = Cookies.get("project_id");

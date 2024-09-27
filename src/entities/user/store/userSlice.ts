@@ -5,7 +5,6 @@ import Cookies from "js-cookie";
 interface UserState {
   isAuth: boolean;
   role: roles;
-  user_id?: string;
 }
 
 const roleFromCookies = Cookies.get("role");
@@ -31,6 +30,7 @@ export const userSlice = createSlice({
       Cookies.remove("project_id");
       Cookies.set("isAuth", "false");
       Cookies.remove("adv-blog");
+      Cookies.remove("user_id");
       state.isAuth = false;
     },
     setAuth: (state, action: PayloadAction<boolean>) => {
@@ -40,12 +40,8 @@ export const userSlice = createSlice({
       state.role = action.payload;
       Cookies.set("role", `${action.payload}`);
     },
-    setUserId: (state, action: PayloadAction<string>) => {
-      state.user_id = action.payload;
-    },
   },
 });
 
 export default userSlice.reducer;
-export const { login, logout, setAuth, toggleRole, setUserId } =
-  userSlice.actions;
+export const { login, logout, setAuth, toggleRole } = userSlice.actions;
