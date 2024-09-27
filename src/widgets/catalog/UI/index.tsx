@@ -6,7 +6,7 @@ import {
   catalogAPI,
   catalogBarFilter,
   getCatalogReq,
-  sortingFilter,
+  sortingTypes,
   useAddToCommonCartMutation,
   useAddToManagerCartMutation,
   useAddToPublicCartMutation,
@@ -35,7 +35,8 @@ export const CatalogBlock: FC = () => {
   });
   const { toast } = useToast();
   const [screen, setScreen] = useState<number>(window.innerWidth);
-  const { isAuth, user_id } = useAppSelector((state) => state.user);
+  const { isAuth } = useAppSelector((state) => state.user);
+  const user_id = Cookies.get("user_id");
   const guestId = Cookies.get("guest_id");
   const role = Cookies.get("role");
   const projectId = Cookies.get("project_id");
@@ -74,7 +75,7 @@ export const CatalogBlock: FC = () => {
         language: [],
         region: [],
       },
-      sort: sortingFilter.price_down,
+      sort: sortingTypes[0].type,
     },
   });
 
