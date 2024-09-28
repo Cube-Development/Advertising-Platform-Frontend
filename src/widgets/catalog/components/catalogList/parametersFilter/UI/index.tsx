@@ -1,5 +1,5 @@
 import {
-  channelData,
+  channelParameterData,
   useGetChannelAgesQuery,
   useGetChannelLanguagesQuery,
   useGetChannelRegionsQuery,
@@ -102,36 +102,31 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
 
   const { watch: watchTA, setValue: setValueTA } = useForm<getTAParametersReq>({
     defaultValues: {
-      category: [],
-      region: [],
-      language: [],
+      category: filter?.business,
+      region: filter?.region,
+      language: filter?.language,
     },
   });
 
   const formFieldsAI = watchAI();
   const formFieldsTA = watchTA();
-  const {
-    data: AIParameters,
-    isLoading: isLoadingAIParameters,
-    isSuccess,
-  } = useGetAIParametersQuery({ prompt: text }, { skip: !text.length });
+  const { data: AIParameters, isLoading: isLoadingAIParameters } =
+    useGetAIParametersQuery({ prompt: text }, { skip: !text.length });
 
   const { data: TAParameters, isLoading: isLoadingTAParameters } =
     useGetTAParametersQuery(
       { ...formFieldsTA },
       {
         skip:
-          !isSuccess ||
           !formFieldsTA.category.length ||
-          !formFieldsTA.region.length ||
-          !formFieldsTA.language.length,
+          (!!formFieldsTA.language.length && !formFieldsTA.region.length),
       },
     );
 
   const resetRecommendationCard = () => {
     setRecCard(null);
-    // setRecCards(null);
-    // reset();
+    setRecCards(null);
+    reset();
   };
 
   const handleUseRecommendionCard = (card: IFilterSearch) => {
@@ -149,14 +144,6 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
       setValue("filter", newFilter);
     }
   };
-
-  useEffect(() => {
-    if (AIParameters) {
-      setValueTA(channelData.category, AIParameters?.category);
-      setValueTA(channelData.region, AIParameters?.region);
-      setValueTA(channelData.language, AIParameters?.language);
-    }
-  }, [AIParameters]);
 
   useEffect(() => {
     if (TAParameters) {
@@ -196,9 +183,27 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
   };
 
   useEffect(() => {
-    console.log(filter);
-    // setRecCards(RecommendCARDS);
+    setValueTA(channelParameterData.category, filter?.business);
+    setValueTA(channelParameterData.region, filter?.region);
+    setValueTA(channelParameterData.language, filter?.language);
   }, [filter]);
+
+  useEffect(() => {
+    if (AIParameters) {
+      setValueTA(channelParameterData.category, AIParameters?.category);
+      setValueTA(channelParameterData.region, AIParameters?.region);
+      setValueTA(channelParameterData.language, AIParameters?.language);
+    }
+  }, [AIParameters]);
+
+  useEffect(() => {
+    reset();
+    if (catalogFilter === catalogBarFilter.parameters) {
+      setValueTA(channelParameterData.category, filter?.business);
+      setValueTA(channelParameterData.region, filter?.region);
+      setValueTA(channelParameterData.language, filter?.language);
+    }
+  }, [catalogFilter]);
 
   return (
     <Drawer>
@@ -233,7 +238,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
                     getValues={getValues}
                     options={categories?.contents || []}
                     single={false}
-                    type={channelData.business}
+                    type={channelParameterData.business}
                     textData={"catalog.category"}
                     isRow={true}
                     isCatalog={true}
@@ -244,7 +249,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
                     getValues={getValues}
                     options={ages?.contents || []}
                     single={false}
-                    type={channelData.age}
+                    type={channelParameterData.age}
                     textData={"catalog.age"}
                     isRow={true}
                     isCatalog={true}
@@ -263,7 +268,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
                     getValues={getValues}
                     options={languages?.contents || []}
                     single={false}
-                    type={channelData.language}
+                    type={channelParameterData.language}
                     textData={"catalog.languages"}
                     isRow={true}
                     isCatalog={true}
@@ -274,7 +279,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
                     getValues={getValues}
                     options={regions?.contents || []}
                     single={false}
-                    type={channelData.region}
+                    type={channelParameterData.region}
                     textData={"catalog.region"}
                     isRow={true}
                     isCatalog={true}
@@ -285,7 +290,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
                 <>
                   <SelectDescription
                     onChange={setValueAI}
-                    type={channelData.prompt}
+                    type={channelParameterData.prompt}
                     title={"catalog.ai.title"}
                     placeholder={"catalog.ai.default_input"}
                   />

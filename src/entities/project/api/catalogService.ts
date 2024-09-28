@@ -2,7 +2,12 @@ import { platformTypesNum } from "@entities/platform";
 import { CATALOG, baseApi } from "@shared/api";
 import { INTERSECTION_ELEMENTS, languagesNum } from "@shared/config";
 import { sortingFilter } from "../config";
-import { ICatalogCards, ITargetAudienceCard, IThreadData } from "../types";
+import {
+  ICatalogCards,
+  IRecommendCards,
+  ITargetAudienceCard,
+  IThreadData,
+} from "../types";
 
 export interface getCatalogReq {
   user_id?: string;
@@ -20,6 +25,7 @@ export interface getCatalogReq {
     region: number[];
   };
   sort: sortingFilter;
+  search_string?: string;
 }
 
 export interface getAIParametersReq {
@@ -31,6 +37,11 @@ export interface getTAParametersReq {
   category: number[];
   region: number[];
   language: number[];
+}
+
+export interface getRecommendChannels {
+  language: languagesNum;
+  channels: string[];
 }
 
 export const catalogAPI = baseApi.injectEndpoints({
@@ -68,6 +79,13 @@ export const catalogAPI = baseApi.injectEndpoints({
       },
       providesTags: [CATALOG],
     }),
+    getRecommedChannels: build.query<IRecommendCards, getRecommendChannels>({
+      query: (BodyParams) => ({
+        url: "/sample/recommended",
+        method: "POST",
+        body: BodyParams,
+      }),
+    }),
     getAIParameters: build.query<IThreadData, getAIParametersReq>({
       query: (params) => ({
         url: "/sample/ai/parameters",
@@ -89,4 +107,5 @@ export const {
   useGetCatalogQuery,
   useGetAIParametersQuery,
   useGetTAParametersQuery,
+  useGetRecommedChannelsQuery,
 } = catalogAPI;

@@ -3,6 +3,7 @@ import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
 import matchAnimation from "/animated/match_lottie.gif";
 import { useEffect, useRef, useState } from "react";
+import { MyProgressBar } from "@shared/ui";
 
 export const ChannelCardMatch = ({ match }: { match?: number }) => {
   const { t } = useTranslation();
@@ -71,6 +72,7 @@ export const ChannelCardMatch = ({ match }: { match?: number }) => {
             {match}%
           </span>
         ) : (
+          // <MyProgressBar progress={match}/>
           <span>
             <CircleHelp width={20} height={20} stroke="#bbb" />
           </span>

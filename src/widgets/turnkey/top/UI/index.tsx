@@ -25,7 +25,6 @@ export const Top: FC<TopProps> = () => {
           tarifs={t(`main_page_advertiser.tarifs_list`, {
             returnObjects: true,
           })}
-          page={pageFilter.turnkey}
         />
       </div>
     </section>

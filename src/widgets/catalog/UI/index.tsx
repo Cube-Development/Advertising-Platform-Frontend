@@ -1,4 +1,4 @@
-import { channelData } from "@entities/channel";
+import { channelParameterData } from "@entities/channel";
 import { platformTypesNum } from "@entities/platform";
 import {
   ICart,
@@ -59,30 +59,31 @@ export const CatalogBlock: FC = () => {
     };
   }, []);
 
-  const { watch, reset, setValue, getValues } = useForm<getCatalogReq>({
-    defaultValues: {
-      language: language?.id || Languages[0].id,
-      page: 1,
-      elements_on_page: INTERSECTION_ELEMENTS.catalog,
-      filter: {
-        platform: platformTypesNum.telegram,
-        business: [],
-        age: [],
-        language: [],
-        region: [],
+  const { watch, reset, setValue, getValues, resetField } =
+    useForm<getCatalogReq>({
+      defaultValues: {
+        language: language?.id || Languages[0].id,
+        page: 1,
+        elements_on_page: INTERSECTION_ELEMENTS.catalog,
+        filter: {
+          platform: platformTypesNum.telegram,
+          business: [],
+          age: [],
+          language: [],
+          region: [],
+        },
+        sort: sortingTypes[0].type,
       },
-      sort: sortingTypes[0].type,
-    },
-  });
+    });
 
   const formFields = watch();
-  const { filter, sort, language: lang } = formFields;
+  const { filter, sort, language: lang, search_string } = formFields;
 
   useEffect(() => {
     setTimeout(() => {
-      setValue(channelData.page, 1);
+      setValue(channelParameterData.page, 1);
     }, 500);
-  }, [filter, sort, lang]);
+  }, [filter, sort, lang, search_string]);
 
   const { data: catalogAuth, isFetching: isCatalogAuthLoading } =
     useGetCatalogQuery(
@@ -336,7 +337,8 @@ export const CatalogBlock: FC = () => {
       );
     }
   };
-
+  console.log(filter);
+  console.log(formFields, search_string);
   return (
     <div className="container">
       <div className={`${styles.wrapper}`}>
@@ -361,6 +363,7 @@ export const CatalogBlock: FC = () => {
                 getValues={getValues}
                 reset={reset}
                 setValue={setValue}
+                resetField={resetField}
                 page={formFields.page}
                 channels={
                   (isAuth ? catalogAuth?.channels : catalog?.channels) || []

@@ -60,14 +60,14 @@ export const CountdownTimer: FC<CountdownTimerProps> = ({ date_to, time }) => {
   return (
     <div className={styles.wrapper}>
       {diffDays > 1 ? (
-        <p>
+        <span>
           {diffDays} {handleDay(diffDays)}
-        </p>
+        </span>
       ) : (
-        <p>
+        <span>
           {`${diffH}`.padStart(2, "0")}:{`${diffM}`.padStart(2, "0")}:
           {`${diffS}`.padStart(2, "0")}
-        </p>
+        </span>
       )}
     </div>
   );

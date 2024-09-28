@@ -153,6 +153,13 @@
       justify-content: start;
       justify-self: self-start;
 
+      button {
+        padding: 15px 31px;
+        p {
+          font-size: 16px;
+        }
+      }
+
       @media (max-width: 768px) {
         grid-template: none;
         align-items: center;

@@ -3,7 +3,7 @@ import {
   IAddFormat,
   IChannelFormat,
   IFormatPriceProps,
-  channelData,
+  channelParameterData,
 } from "@entities/channel";
 import { InfoIcon } from "@shared/assets";
 import { FC } from "react";
@@ -15,7 +15,7 @@ interface SelectPriceProps {
   title: string;
   text: string;
   info: string;
-  type: channelData;
+  type: channelParameterData;
   formats?: IChannelFormat[];
   AccommPrice: FC<IFormatPriceProps>;
   onChange: UseFormSetValue<any>;
@@ -52,10 +52,6 @@ export const SelectPrice: FC<SelectPriceProps> = ({
         <p>{t(title)}</p>
         <InfoIcon />
       </div>
-      {/* <hr /> */}
-      {/* <div className={styles.info}>
-        <p>{t(info)}</p>
-      </div> */}
       <div className={styles.accomms}>
         {formats &&
           formats?.map((format, index) => (

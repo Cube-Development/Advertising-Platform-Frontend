@@ -1,5 +1,5 @@
 import {
-  channelData,
+  channelParameterData,
   IAddChannelData,
   IAddChannelDataPreview,
   IChannelLink,
@@ -27,7 +27,7 @@ interface ChannelDescriptionProps {
   step: number;
   variant: typeof PAGE_ANIMATION.animationLeft;
   currentPlatform: IChannelLink;
-  channel_id: string;
+  isEdit: boolean;
   data: IAddChannelData;
   setValue: UseFormSetValue<IAddChannelData>;
   getValues: UseFormGetValues<IAddChannelData>;
@@ -39,7 +39,7 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
   step,
   variant,
   currentPlatform,
-  channel_id,
+  isEdit,
   data,
   setValue,
   getValues,
@@ -51,10 +51,7 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
   const language = Languages.find((lang) => {
     return i18n.language === lang.name;
   });
-  const { data: channel } = useGetChannelByIdQuery(
-    { channel_id: channel_id, language: language?.id || Languages[0].id },
-    { skip: !channel_id },
-  );
+
   const [screen, setScreen] = useState<number>(window.innerWidth);
   const [cat, setCat] = useState<IOption | undefined>(undefined);
   const contentRes = {
@@ -127,7 +124,6 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
       });
     }
   };
-
   return (
     <>
       {step === 2 && (
@@ -139,17 +135,21 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
                   onChange={setValue}
                   options={channelCategories?.contents || []}
                   single={true}
-                  type={channelData.category}
+                  type={channelParameterData.category}
                   textData={"add_platform.description.category"}
-                  defaultValues={channel?.category || cat}
+                  defaultValues={
+                    (channelCategories?.contents || []).find(
+                      (item) => item.id === data.category,
+                    )! || cat
+                  }
                   isRow={screen <= BREAKPOINT.LG}
-                  isDisabled={!cat}
+                  isDisabled={isEdit}
                 />
                 <SelectOptions
                   onChange={setValue}
                   options={languages?.contents || []}
                   single={false}
-                  type={channelData.language}
+                  type={channelParameterData.language}
                   textData={"add_platform.description.languages"}
                   defaultValues={data.language}
                   isRow={screen <= BREAKPOINT.LG}
@@ -158,7 +158,7 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
                   onChange={setValue}
                   options={regions?.contents || []}
                   single={false}
-                  type={channelData.region}
+                  type={channelParameterData.region}
                   textData={"add_platform.description.region"}
                   defaultValues={data.region}
                   isRow={screen <= BREAKPOINT.LG}
@@ -167,7 +167,7 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
                   onChange={setValue}
                   options={ages?.contents || []}
                   single={false}
-                  type={channelData.age}
+                  type={channelParameterData.age}
                   textData={"add_platform.description.age"}
                   defaultValues={data.age}
                   isRow={screen <= BREAKPOINT.LG}
@@ -183,7 +183,7 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
               <div className={styles.form__bottom}>
                 <SelectDescription
                   onChange={setValue}
-                  type={channelData.description}
+                  type={channelParameterData.description}
                   title={"add_platform.description.description.title"}
                   text={"add_platform.description.description.text"}
                   placeholder={
@@ -196,7 +196,7 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
                   getValues={getValues}
                   formats={formats?.contents || []}
                   AccommPrice={FormatPrice}
-                  type={channelData.format}
+                  type={channelParameterData.format}
                   title={"add_platform.description.price.title"}
                   text={"add_platform.description.price.text"}
                   info={"add_platform.description.price.info"}

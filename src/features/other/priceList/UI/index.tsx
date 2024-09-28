@@ -17,10 +17,9 @@ SwiperCore.use([EffectCoverflow]);
 
 interface PriceListProps {
   tarifs: ITarifInfo[];
-  page?: pageFilter;
 }
 
-export const PriceList: FC<PriceListProps> = ({ tarifs, page }) => {
+export const PriceList: FC<PriceListProps> = ({ tarifs }) => {
   const [currentTarif, setTarif] = useState<number | null>(null);
   const [screen, setScreen] = useState<number>(window.innerWidth);
   // const [isOpenBuySidebar, setOpenBuySidebar] = useState<boolean>(false);
@@ -68,7 +67,7 @@ export const PriceList: FC<PriceListProps> = ({ tarifs, page }) => {
               <div key={index} className={styles.slide}>
                 <PriceCard
                   tarifInfo={tarifInfo}
-                  BuyBtn={<BuyTarif tarif={tarifIndex} page={page} />}
+                  BuyBtn={<BuyTarif tarif={tarifIndex} />}
                   isActive={tarifIndex === currentTarif}
                 />
               </div>
@@ -123,7 +122,7 @@ export const PriceList: FC<PriceListProps> = ({ tarifs, page }) => {
                 <SwiperSlide key={index} className="slide__price">
                   <PriceCard
                     tarifInfo={tarifInfo}
-                    BuyBtn={<BuyTarif tarif={tarifIndex} page={page} />}
+                    BuyBtn={<BuyTarif tarif={tarifIndex} />}
                     isActive={tarifIndex === currentTarif}
                   />
                 </SwiperSlide>

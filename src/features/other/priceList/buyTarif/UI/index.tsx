@@ -41,10 +41,9 @@ import styles from "./styles.module.scss";
 
 interface BuyTarifProps {
   tarif: number;
-  page?: pageFilter;
 }
 
-export const BuyTarif: FC<BuyTarifProps> = ({ tarif, page }) => {
+export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
   const { t } = useTranslation();
   const [screen, setScreen] = useState<number>(window.innerWidth);
   const { toast } = useToast();
@@ -199,13 +198,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, page }) => {
     <>
       {isAuth ? (
         <>
-          {page !== pageFilter.turnkey ? (
-            <Link to={paths.turnkey}>
-              <button className={styles.button} onClick={handleButtonClick}>
-                {t(`buy`)}
-              </button>
-            </Link>
-          ) : screen > BREAKPOINT.LG && page === pageFilter.turnkey ? (
+          {screen > BREAKPOINT.LG ? (
             <>
               <button className={styles.button} onClick={handleButtonClick}>
                 {t(`buy`)}
