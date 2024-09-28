@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import styles from "./styles.module.scss";
 import { EmptyPost } from "./emptyPost";
 import { EyeIcon } from "@shared/assets";
@@ -78,10 +78,69 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
   const postButtons = currentPost?.buttons;
   const postComment = currentPost?.comment;
 
+  const imgRef = useRef<HTMLImageElement>(null);
+  const [resizes, setResizes] = useState<{
+    borderRadius: number;
+    timeSize: number;
+    channelNameSize: number;
+    channelSubsSize: number;
+    avatarWidthSize: number;
+    unmuteSize: number;
+    displayTopSize: number;
+    displayBottomSize: number;
+    downloadIconSize: number;
+  } | null>(null);
+
+  useEffect(() => {
+    const updateSizes = () => {
+      if (imgRef.current) {
+        const imgWidth = imgRef.current.offsetWidth;
+
+        const calculatedRadius = (imgWidth / 364) * 54;
+        const calculatedTimeSize = (imgWidth / 364) * 14;
+        const calculatedChannelNameSize = (imgWidth / 364) * 12;
+        const calculatedChannelSubsSize = (imgWidth / 364) * 10;
+        const calculatedAvatarWidthSize = (imgWidth / 364) * 30;
+        const calculatedUnmuteSize = (imgWidth / 364) * 14;
+        const calculatedDisplayTopSize = (imgWidth / 364) * 80;
+        const calculatedDisplayBottomSize = (imgWidth / 364) * 60;
+        const calculatedDownloadIconSize = (imgWidth / 364) * 14;
+
+        // Обновляем все значения в состоянии
+        setResizes({
+          borderRadius: calculatedRadius,
+          timeSize: calculatedTimeSize,
+          channelNameSize: calculatedChannelNameSize,
+          channelSubsSize: calculatedChannelSubsSize,
+          avatarWidthSize: calculatedAvatarWidthSize,
+          unmuteSize: calculatedUnmuteSize,
+          displayTopSize: calculatedDisplayTopSize,
+          displayBottomSize: calculatedDisplayBottomSize,
+          downloadIconSize: calculatedDownloadIconSize,
+        });
+      }
+    };
+
+    setTimeout(() => {
+      updateSizes();
+    }, 100);
+
+    window.addEventListener("resize", updateSizes);
+
+    return () => {
+      window.removeEventListener("resize", updateSizes);
+    };
+  }, [imgRef.current?.offsetWidth]);
+
   return (
     <div className={styles.screen_wrapper}>
       <div className={styles.screen}>
-        <p className={styles.time}>9:41</p>
+        <p
+          className={styles.time}
+          style={{ fontSize: `${resizes?.timeSize}px` }}
+        >
+          9:41
+        </p>
         <img
           className={styles.statusbar}
           src="/images/phoneDisplay/statusbar.svg"
@@ -92,17 +151,46 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
         />
         <img className={styles.back} src="/images/phoneDisplay/back.svg" />
         <div className={styles.channel}>
-          <p className={styles.channel__name}>Channel name</p>
-          <p className={styles.channel__subs}>1 312 678 subscribers</p>
+          <p
+            className={styles.channel__name}
+            style={{ fontSize: `${resizes?.channelNameSize}px` }}
+          >
+            Channel name
+          </p>
+          <p
+            className={styles.channel__subs}
+            style={{ fontSize: `${resizes?.channelSubsSize}px` }}
+          >
+            1 312 678 subscribers
+          </p>
         </div>
-        <div className={styles.avatar}></div>
+        <div
+          className={styles.avatar}
+          style={{
+            width: `${resizes?.avatarWidthSize}px`,
+            height: `${resizes?.avatarWidthSize}px`,
+          }}
+        ></div>
         <img
+          ref={imgRef}
           className={styles.mockup}
           src="/images/phoneDisplay/iphonescreen.png"
         />
-        <div className={styles.unmute}>Unmute</div>
+        <div
+          className={styles.unmute}
+          style={{ fontSize: `${resizes?.unmuteSize}px` }}
+        >
+          Unmute
+        </div>
         {formState ? (
-          <div className={styles.display}>
+          <div
+            className={styles.display}
+            style={{
+              borderRadius: `${resizes?.borderRadius}px`,
+              paddingTop: `${resizes?.displayTopSize}px`,
+              paddingBottom: `${resizes?.displayBottomSize}px`,
+            }}
+          >
             {(postText && postText[0]?.content !== "<p></p>") ||
             postMedia?.length ||
             postComment ||
@@ -111,7 +199,10 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
               <div className={styles.content}>
                 <div className={styles.post}>
                   {postMedia && postMedia?.length > 0 && (
-                    <TelegramMedia medias={postMedia} />
+                    <TelegramMedia
+                      medias={postMedia}
+                      iconSize={resizes?.downloadIconSize || 20}
+                    />
                   )}
                   {postText && (
                     <div
@@ -119,6 +210,7 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
                         __html: postText[0]?.content || "",
                       }}
                       className={styles.post__text}
+                      style={{ fontSize: `${resizes?.timeSize}px` }}
                     />
                   )}
                   <div className={styles.info}>
@@ -135,14 +227,25 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
                         href={button?.url}
                         target="_blank"
                         className="truncate"
+                        style={{ fontSize: `${resizes?.timeSize}px` }}
                       >
                         {button?.content}
                       </a>
                     ))}
                   </div>
                 )}
-                {postFile?.length && <TelegramFile file={postFile[0]} />}
-                {postComment && <TelegramComment comment={postComment} />}
+                {postFile?.length && (
+                  <TelegramFile
+                    file={postFile[0]}
+                    fontSize={resizes?.timeSize || 14}
+                  />
+                )}
+                {postComment && (
+                  <TelegramComment
+                    comment={postComment}
+                    fontSize={resizes?.timeSize || 14}
+                  />
+                )}
                 <div className={styles.stroke}></div>
               </div>
             ) : (
@@ -150,7 +253,14 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
             )}
           </div>
         ) : (
-          <div className={styles.display}>
+          <div
+            className={styles.display}
+            style={{
+              borderRadius: `${resizes?.borderRadius}px`,
+              paddingTop: `${resizes?.displayTopSize}px`,
+              paddingBottom: `${resizes?.displayBottomSize}px`,
+            }}
+          >
             {(textRes && textRes[0] !== "<p></p>") ||
             mediaRes?.length ||
             commentRes ||
@@ -159,7 +269,10 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
               <div className={styles.content}>
                 <div className={styles.post}>
                   {mediaRes && mediaRes?.length > 0 && (
-                    <TelegramMedia mediasRes={mediaRes} />
+                    <TelegramMedia
+                      mediasRes={mediaRes}
+                      iconSize={resizes?.downloadIconSize || 20}
+                    />
                   )}
                   {textRes && (
                     <div
@@ -167,6 +280,7 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
                         __html: textRes[0] || "",
                       }}
                       className={styles.post__text}
+                      style={{ fontSize: `${resizes?.timeSize}px` }}
                     />
                   )}
                   <div className={styles.info}>
@@ -183,14 +297,25 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
                         href={button?.url}
                         target="_blank"
                         className="truncate"
+                        style={{ fontSize: `${resizes?.timeSize}px` }}
                       >
                         {button?.content}
                       </a>
                     ))}
                   </div>
                 )}
-                {fileRes && <TelegramFile file={fileRes} />}
-                {commentRes && <TelegramComment comment={commentRes} />}
+                {fileRes && (
+                  <TelegramFile
+                    file={fileRes}
+                    fontSize={resizes?.timeSize || 14}
+                  />
+                )}
+                {commentRes && (
+                  <TelegramComment
+                    comment={commentRes}
+                    fontSize={resizes?.timeSize || 14}
+                  />
+                )}
                 <div className={styles.stroke}></div>
               </div>
             ) : (

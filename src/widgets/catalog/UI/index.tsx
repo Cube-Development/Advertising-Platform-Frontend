@@ -37,15 +37,11 @@ export const CatalogBlock: FC = () => {
   const [screen, setScreen] = useState<number>(window.innerWidth);
   const { isAuth } = useAppSelector((state) => state.user);
   const user_id = Cookies.get("user_id");
-  const guestId = Cookies.get("guest_id");
+  const guestId = Cookies.get("guest_id") || GenerateGuestId();
   const role = Cookies.get("role");
   const projectId = Cookies.get("project_id");
   const catalogTopRef = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
-
-  if (!guestId) {
-    GenerateGuestId();
-  }
 
   const [catalogFilter, setCatalogFilter] = useState<catalogBarFilter>(
     catalogBarFilter.parameters,

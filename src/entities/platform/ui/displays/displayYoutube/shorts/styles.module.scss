@@ -2,11 +2,14 @@
   .screen {
     position: relative;
     overflow: hidden;
+    width: 100%;
+    font-size: 100%;
+    margin: 2%;
 
     .time {
       position: absolute;
-      top: 22px;
-      left: 56px;
+      top: 3.5%;
+      left: 15%;
       z-index: 1;
       font-weight: 500;
       color: #fff;
@@ -15,15 +18,15 @@
 
     .statusbar {
       position: absolute;
-      top: 26px;
-      right: 36px;
+      top: 4%;
+      right: 10%;
       z-index: 1;
       width: 20%;
     }
 
     .dynamic {
       position: absolute;
-      top: 18px;
+      top: 2.5%;
       left: 50%;
       transform: translate(-50%);
       z-index: 1;
@@ -33,7 +36,7 @@
     .footer {
       width: 90%;
       position: absolute;
-      bottom: 35px;
+      bottom: 4.2%;
       left: 50%;
       transform: translate(-50%);
       z-index: 1;
@@ -63,15 +66,15 @@
 
     .display {
       position: absolute;
-      top: 0;
-      left: 0;
-      height: 97.5%;
-      width: 93.7%;
+      top: 50%;
+      left: 50%;
+      height: 97.6%;
+      transform: translate(-50%, -50%);
+      width: 94%;
       padding-top: 50px;
       padding-bottom: 60px;
       background: #000000;
-      margin: 7.5px 11px;
-      border-radius: 40px;
+      border-radius: 54px;
 
       .content {
         height: 100%;
@@ -86,8 +89,7 @@
           position: relative;
 
           .empty__photo {
-            height: 34vw;
-            max-height: 500px;
+            height: 620px;
             background: rgba(255, 255, 255, 0.1);
             display: flex;
             flex-direction: column;
@@ -111,8 +113,8 @@
             height: 100%;
             width: 100%;
             font-size: 12px;
-            padding: 0px 10px;
-            padding-top: 5px;
+            padding: 0px 3%;
+            padding-top: 1.5%;
             color: #fff;
           }
         }

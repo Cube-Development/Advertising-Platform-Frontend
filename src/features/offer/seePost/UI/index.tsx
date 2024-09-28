@@ -16,7 +16,7 @@ import {
   MyButton,
 } from "@shared/ui";
 import { X } from "lucide-react";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
@@ -26,6 +26,18 @@ interface SeePostProps {
 
 export const SeePost: FC<SeePostProps> = ({ post }) => {
   const { t } = useTranslation();
+
+  const [screen, setScreen] = useState<number>(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreen(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
@@ -33,10 +45,24 @@ export const SeePost: FC<SeePostProps> = ({ post }) => {
           <p>{t(`offer_btn.see_post`)}</p>
         </MyButton>
       </AlertDialogTrigger>
-      <AlertDialogContent className="gap-0 w-[30vw] h-[40vw] bg-transparent grid items-center justify-center shadow-none">
-        <div className="w-[18vw] h-full relative">
+      <AlertDialogContent
+        className={`gap-0 bg-transparent grid items-center justify-center shadow-none ${
+          screen > 992
+            ? "w-[25vw]"
+            : screen > 768
+              ? "w-[30vw]"
+              : screen > 576
+                ? "w-[35vw]"
+                : screen > 475
+                  ? "w-[50vw]"
+                  : "w-[60vw]"
+        }`}
+      >
+        <div className="relative">
           <AlertDialogAction>
-            <X className="absolute -right-16 -top-10 w-[50px] rounded-full p-2 bg-white cursor-pointer" />
+            <X
+              className={`absolute ${screen > 475 ? "-right-10 -top-5" : "-right-8 -top-4"} w-[30px] rounded-full p-2 bg-white cursor-pointer`}
+            />
           </AlertDialogAction>
           {post?.platform === platformTypesNum.telegram && (
             <DisplayTelegram

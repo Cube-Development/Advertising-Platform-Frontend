@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import styles from "./styles.module.scss";
 import { EmptyPost } from "./emptyPost";
 import { InstagramMedia } from "./media";
@@ -7,7 +7,6 @@ import { InstagramComment } from "./comment";
 import { ChevronLeft, Heart, MessageCircle, Send } from "lucide-react";
 import {
   AvatarIcon,
-  SaveIcon,
   HomeIcon,
   MarketIcon,
   ReelsIcon,
@@ -84,10 +83,72 @@ export const DisplayFeed: FC<DisplayFeedProps> = ({
   const postFile = currentPost?.files;
   const postComment = currentPost?.comment;
 
+  const imgRef = useRef<HTMLImageElement>(null);
+  const [resizes, setResizes] = useState<{
+    borderRadius: number;
+    timeSize: number;
+    channelNameSize: number;
+    channelPostsSize: number;
+    footerIconSize: number;
+    displayTopSize: number;
+    displayBottomSize: number;
+    downloadIconSize: number;
+    feedHeightSize: number;
+    avatarSize: number;
+  } | null>(null);
+
+  useEffect(() => {
+    const updateSizes = () => {
+      if (imgRef.current) {
+        const imgWidth = imgRef.current.offsetWidth;
+
+        const calculatedRadius = (imgWidth / 364) * 54;
+        const calculatedTimeSize = (imgWidth / 364) * 14;
+        const calculatedChannelNameSize = (imgWidth / 364) * 8;
+        const calculatedChannelPostsSize = (imgWidth / 364) * 12;
+        const calculatedFooterIconSize = (imgWidth / 364) * 20;
+        const calculatedDisplayTopSize = (imgWidth / 364) * 80;
+        const calculatedDisplayBottomSize = (imgWidth / 364) * 60;
+        const calculatedDownloadIconSize = (imgWidth / 364) * 14;
+        const calculatedFeedHeightSize = (imgWidth / 364) * 300;
+        const calculatedAvatarSize = (imgWidth / 364) * 30;
+
+        // Обновляем все значения в состоянии
+        setResizes({
+          borderRadius: calculatedRadius,
+          timeSize: calculatedTimeSize,
+          channelNameSize: calculatedChannelNameSize,
+          channelPostsSize: calculatedChannelPostsSize,
+          footerIconSize: calculatedFooterIconSize,
+          displayTopSize: calculatedDisplayTopSize,
+          displayBottomSize: calculatedDisplayBottomSize,
+          downloadIconSize: calculatedDownloadIconSize,
+          feedHeightSize: calculatedFeedHeightSize,
+          avatarSize: calculatedAvatarSize,
+        });
+      }
+    };
+
+    setTimeout(() => {
+      updateSizes();
+    }, 100);
+
+    window.addEventListener("resize", updateSizes);
+
+    return () => {
+      window.removeEventListener("resize", updateSizes);
+    };
+  }, [imgRef.current?.offsetWidth]);
+
   return (
     <div className={styles.screen_wrapper}>
       <div className={styles.screen}>
-        <p className={styles.time}>9:41</p>
+        <p
+          className={styles.time}
+          style={{ fontSize: `${resizes?.timeSize}px` }}
+        >
+          9:41
+        </p>
         <img
           className={styles.statusbar}
           src="/images/phoneDisplay/statusbar.svg"
@@ -99,24 +160,62 @@ export const DisplayFeed: FC<DisplayFeedProps> = ({
         <div className={styles.header}>
           <ChevronLeft />
           <div className={styles.channel}>
-            <p className={styles.channel__name}>Channel name</p>
-            <p className={styles.channel__posts}>Posts</p>
+            <p
+              className={styles.channel__name}
+              style={{ fontSize: `${resizes?.channelNameSize}px` }}
+            >
+              Channel name
+            </p>
+            <p
+              className={styles.channel__posts}
+              style={{ fontSize: `${resizes?.channelPostsSize}px` }}
+            >
+              Posts
+            </p>
           </div>
-          <div className={styles.subscribe}>Subscribe</div>
+          <div
+            className={styles.subscribe}
+            style={{ fontSize: `${resizes?.channelPostsSize}px` }}
+          >
+            Subscribe
+          </div>
         </div>
         <img
+          ref={imgRef}
           className={styles.mockup}
           src="/images/phoneDisplay/iphonescreen.png"
         />
         <div className={styles.footer}>
-          <HomeIcon />
-          <SearchIcon />
-          <ReelsIcon />
-          <MarketIcon />
-          <AvatarIcon />
+          <HomeIcon
+            width={resizes?.footerIconSize || 20}
+            height={resizes?.footerIconSize || 20}
+          />
+          <SearchIcon
+            width={resizes?.footerIconSize || 20}
+            height={resizes?.footerIconSize || 20}
+          />
+          <ReelsIcon
+            width={resizes?.footerIconSize || 20}
+            height={resizes?.footerIconSize || 20}
+          />
+          <MarketIcon
+            width={resizes?.footerIconSize || 20}
+            height={resizes?.footerIconSize || 20}
+          />
+          <AvatarIcon
+            width={resizes?.footerIconSize || 20}
+            height={resizes?.footerIconSize || 20}
+          />
         </div>
         {formState ? (
-          <div className={styles.display}>
+          <div
+            className={styles.display}
+            style={{
+              borderRadius: `${resizes?.borderRadius}px`,
+              paddingTop: `${resizes?.displayTopSize}px`,
+              paddingBottom: `${resizes?.displayBottomSize}px`,
+            }}
+          >
             {(postText && postText[0]?.content !== "<p></p>") ||
             postMedia?.length ||
             postComment ||
@@ -125,10 +224,26 @@ export const DisplayFeed: FC<DisplayFeedProps> = ({
                 <div className={styles.post}>
                   <div className={styles.head}>
                     <div className={styles.account}>
-                      <div className={styles.account__avatar}></div>
+                      <div
+                        className={styles.account__avatar}
+                        style={{
+                          width: `${resizes?.avatarSize}px`,
+                          height: `${resizes?.avatarSize}px`,
+                        }}
+                      ></div>
                       <div className={styles.account__name}>
-                        <p className={styles.name}>Channel</p>
-                        <p className={styles.category}>Category</p>
+                        <p
+                          className={styles.name}
+                          style={{ fontSize: `${resizes?.channelPostsSize}px` }}
+                        >
+                          Channel
+                        </p>
+                        <p
+                          className={styles.category}
+                          style={{ fontSize: `${resizes?.channelNameSize}px` }}
+                        >
+                          Category
+                        </p>
                       </div>
                     </div>
                     <div className={styles.head__more}>
@@ -138,9 +253,16 @@ export const DisplayFeed: FC<DisplayFeedProps> = ({
                     </div>
                   </div>
                   {postMedia && postMedia?.length > 0 ? (
-                    <InstagramMedia medias={postMedia} />
+                    <InstagramMedia
+                      medias={postMedia}
+                      feedHeight={resizes?.feedHeightSize || 300}
+                      iconSize={resizes?.downloadIconSize || 14}
+                    />
                   ) : (
-                    <div className={styles.empty__photo}>
+                    <div
+                      className={styles.empty__photo}
+                      style={{ height: `${resizes?.feedHeightSize}px` }}
+                    >
                       <EyeDisabledIcon />
                       <p>No content yet...</p>
                     </div>
@@ -150,42 +272,65 @@ export const DisplayFeed: FC<DisplayFeedProps> = ({
                       <Heart
                         strokeWidth="1.5px"
                         stroke="#fff"
-                        width="22px"
-                        height="22px"
+                        width={resizes?.footerIconSize || 20}
+                        height={resizes?.footerIconSize || 20}
                       />
                       <MessageCircle
                         strokeWidth="1.5px"
                         stroke="#fff"
-                        width="22px"
-                        height="22px"
+                        width={resizes?.footerIconSize || 20}
+                        height={resizes?.footerIconSize || 20}
                       />
                       <Send
                         strokeWidth="1.5px"
                         stroke="#fff"
-                        width="20px"
-                        height="20px"
+                        width={resizes?.footerIconSize || 20}
+                        height={resizes?.footerIconSize || 20}
                       />
                     </div>
-                    <SaveIcon />
                   </div>
-                  <p className={styles.post__likes}>893 likes</p>
+                  <p
+                    className={styles.post__likes}
+                    style={{ fontSize: `${resizes?.timeSize}px` }}
+                  >
+                    893 likes
+                  </p>
                   {postText && (
                     <div
                       dangerouslySetInnerHTML={{
                         __html: postText[0]?.content || "",
                       }}
                       className={styles.post__text}
+                      style={{ fontSize: `${resizes?.timeSize}px` }}
                     />
                   )}
                   <div className={styles.post__info}>
-                    <p className={styles.show__comments}>
+                    <p
+                      className={styles.show__comments}
+                      style={{ fontSize: `${resizes?.channelPostsSize}px` }}
+                    >
                       Show all comments (189)
                     </p>
-                    <p className={styles.date}>Now •</p>
+                    <p
+                      className={styles.date}
+                      style={{ fontSize: `${resizes?.channelPostsSize}px` }}
+                    >
+                      Now •
+                    </p>
                   </div>
                 </div>
-                {postFile?.length && <InstagramFile file={postFile[0]} />}
-                {postComment && <InstagramComment comment={postComment} />}
+                {postFile?.length && (
+                  <InstagramFile
+                    file={postFile[0]}
+                    fontSize={resizes?.timeSize || 14}
+                  />
+                )}
+                {postComment && (
+                  <InstagramComment
+                    comment={postComment}
+                    fontSize={resizes?.timeSize || 14}
+                  />
+                )}
                 <div className={styles.stroke}></div>
               </div>
             ) : (
@@ -193,7 +338,14 @@ export const DisplayFeed: FC<DisplayFeedProps> = ({
             )}
           </div>
         ) : (
-          <div className={styles.display}>
+          <div
+            className={styles.display}
+            style={{
+              borderRadius: `${resizes?.borderRadius}px`,
+              paddingTop: `${resizes?.displayTopSize}px`,
+              paddingBottom: `${resizes?.displayBottomSize}px`,
+            }}
+          >
             {(textRes && textRes[0] !== "<p></p>") ||
             mediaRes?.length ||
             commentRes ||
@@ -202,10 +354,26 @@ export const DisplayFeed: FC<DisplayFeedProps> = ({
                 <div className={styles.post}>
                   <div className={styles.head}>
                     <div className={styles.account}>
-                      <div className={styles.account__avatar}></div>
+                      <div
+                        className={styles.account__avatar}
+                        style={{
+                          width: `${resizes?.avatarSize}px`,
+                          height: `${resizes?.avatarSize}px`,
+                        }}
+                      ></div>
                       <div className={styles.account__name}>
-                        <p className={styles.name}>Channel</p>
-                        <p className={styles.category}>Category</p>
+                        <p
+                          className={styles.name}
+                          style={{ fontSize: `${resizes?.channelPostsSize}px` }}
+                        >
+                          Channel
+                        </p>
+                        <p
+                          className={styles.category}
+                          style={{ fontSize: `${resizes?.channelNameSize}px` }}
+                        >
+                          Category
+                        </p>
                       </div>
                     </div>
                     <div className={styles.head__more}>
@@ -215,9 +383,16 @@ export const DisplayFeed: FC<DisplayFeedProps> = ({
                     </div>
                   </div>
                   {mediaRes && mediaRes?.length > 0 ? (
-                    <InstagramMedia mediasRes={mediaRes} />
+                    <InstagramMedia
+                      mediasRes={mediaRes}
+                      feedHeight={resizes?.feedHeightSize || 300}
+                      iconSize={resizes?.downloadIconSize || 14}
+                    />
                   ) : (
-                    <div className={styles.empty__photo}>
+                    <div
+                      className={styles.empty__photo}
+                      style={{ height: `${resizes?.feedHeightSize}px` }}
+                    >
                       <EyeDisabledIcon />
                       <p>No content yet...</p>
                     </div>
@@ -227,42 +402,65 @@ export const DisplayFeed: FC<DisplayFeedProps> = ({
                       <Heart
                         strokeWidth="1.5px"
                         stroke="#fff"
-                        width="22px"
-                        height="22px"
+                        width={resizes?.footerIconSize || 20}
+                        height={resizes?.footerIconSize || 20}
                       />
                       <MessageCircle
                         strokeWidth="1.5px"
                         stroke="#fff"
-                        width="22px"
-                        height="22px"
+                        width={resizes?.footerIconSize || 20}
+                        height={resizes?.footerIconSize || 20}
                       />
                       <Send
                         strokeWidth="1.5px"
                         stroke="#fff"
-                        width="20px"
-                        height="20px"
+                        width={resizes?.footerIconSize || 20}
+                        height={resizes?.footerIconSize || 20}
                       />
                     </div>
-                    <SaveIcon />
                   </div>
-                  <p className={styles.post__likes}>893 likes</p>
+                  <p
+                    className={styles.post__likes}
+                    style={{ fontSize: `${resizes?.timeSize}px` }}
+                  >
+                    893 likes
+                  </p>
                   {textRes && (
                     <div
                       dangerouslySetInnerHTML={{
                         __html: textRes[0] || "",
                       }}
                       className={styles.post__text}
+                      style={{ fontSize: `${resizes?.timeSize}px` }}
                     />
                   )}
                   <div className={styles.post__info}>
-                    <p className={styles.show__comments}>
+                    <p
+                      className={styles.show__comments}
+                      style={{ fontSize: `${resizes?.channelPostsSize}px` }}
+                    >
                       Show all comments (189)
                     </p>
-                    <p className={styles.date}>Now •</p>
+                    <p
+                      className={styles.date}
+                      style={{ fontSize: `${resizes?.channelPostsSize}px` }}
+                    >
+                      Now •
+                    </p>
                   </div>
                 </div>
-                {fileRes && <InstagramFile file={fileRes} />}
-                {commentRes && <InstagramComment comment={commentRes} />}
+                {fileRes && (
+                  <InstagramFile
+                    file={fileRes}
+                    fontSize={resizes?.timeSize || 14}
+                  />
+                )}
+                {commentRes && (
+                  <InstagramComment
+                    comment={commentRes}
+                    fontSize={resizes?.timeSize || 14}
+                  />
+                )}
                 <div className={styles.stroke}></div>
               </div>
             ) : (

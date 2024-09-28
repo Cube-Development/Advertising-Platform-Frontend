@@ -131,7 +131,7 @@ export const PostFiles: FC<PostFilesProps> = ({
             <p className="truncate">{t("create_order.create.add_file")}</p>
           </div>
         </AlertDialogTrigger>
-        <AlertDialogContent>
+        <AlertDialogContent className="overflow-hidden">
           <div className={styles.modalContent}>
             <div className={styles.top}>
               <p>{t("create_order.create.add_file")}</p>
