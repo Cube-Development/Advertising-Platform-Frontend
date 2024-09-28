@@ -304,11 +304,11 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                     </div>
                   </AlertDialogTrigger>
                   <AlertDialogContent
-                    className={`gap-0 bg-transparent grid items-center justify-center shadow-none ${screen > 475 ? "w-[60vw]" : "w-[80vw]"}`}
+                    className={`gap-0 bg-transparent grid items-center justify-center shadow-none ${screen > 475 ? "w-[50vw]" : "w-[60vw]"}`}
                   >
                     <div className="relative">
                       <AlertDialogAction>
-                        <X className="absolute -right-4 -top-4 w-[30px] rounded-full p-1 bg-white cursor-pointer" />
+                        <X className="absolute -right-8 -top-4 w-[30px] rounded-full p-1 bg-white cursor-pointer" />
                       </AlertDialogAction>
                       {formState.platformFilter?.type ===
                         platformTypesStr.telegram && (

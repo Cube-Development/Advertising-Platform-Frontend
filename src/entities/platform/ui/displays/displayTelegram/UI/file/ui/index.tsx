@@ -7,9 +7,10 @@ import { GenerateDownloadLink } from "@shared/functions";
 
 interface TelegramFileProps {
   file: File | IFile;
+  fontSize: number;
 }
 
-export const TelegramFile: FC<TelegramFileProps> = ({ file }) => {
+export const TelegramFile: FC<TelegramFileProps> = ({ file, fontSize }) => {
   const { t } = useTranslation();
   return (
     <div
@@ -21,12 +22,15 @@ export const TelegramFile: FC<TelegramFileProps> = ({ file }) => {
         )
       }
     >
-      <p className={styles.file__title}>
+      <p className={styles.file__title} style={{ fontSize: `${fontSize}px` }}>
         {t("create_order.create.add_files.file.post_title")}
       </p>
       <div className={styles.content}>
         <Paperclip />
-        <p className={styles.content__name}>
+        <p
+          className={styles.content__name}
+          style={{ fontSize: `${fontSize}px` }}
+        >
           {file instanceof File ? file?.name : `File_1`}
         </p>
       </div>

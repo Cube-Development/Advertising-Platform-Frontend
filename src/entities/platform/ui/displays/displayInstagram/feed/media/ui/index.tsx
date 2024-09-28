@@ -15,11 +15,15 @@ import { GenerateDownloadLink } from "@shared/functions";
 interface InstagramMediaProps {
   medias?: File[];
   mediasRes?: IFile[];
+  feedHeight: number;
+  iconSize: number;
 }
 
 export const InstagramMedia: FC<InstagramMediaProps> = ({
   medias,
   mediasRes,
+  feedHeight,
+  iconSize,
 }) => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
@@ -54,14 +58,16 @@ export const InstagramMedia: FC<InstagramMediaProps> = ({
                   <img
                     src={URL.createObjectURL(media)}
                     alt={`Photo ${index + 1}`}
-                    className="object-cover h-[20vw] max-h-[300px] w-full"
+                    className="object-cover h-[300px] w-full"
+                    style={{ height: `${feedHeight}px` }}
                   />
                 ) : (
                   <video
                     autoPlay
                     loop
                     muted
-                    className="object-cover h-[20vw] max-h-[300px] w-full"
+                    className="object-cover h-[300px] w-full"
+                    style={{ height: `${feedHeight}px` }}
                   >
                     <source src={URL.createObjectURL(media)} type="video/mp4" />
                     <source src={URL.createObjectURL(media)} type="video/ogg" />
@@ -72,7 +78,7 @@ export const InstagramMedia: FC<InstagramMediaProps> = ({
                   onClick={() => GenerateDownloadLink(media, media?.name)}
                   className="absolute bottom-2 right-2 rounded-full bg-[#ababab] opacity-75 hover:opacity-100 flex items-center content-center p-1 cursor-pointer"
                 >
-                  <Download width={20} height={20} stroke="#fff" />
+                  <Download width={iconSize} height={iconSize} stroke="#fff" />
                 </div>
               </div>
             </CarouselItem>
@@ -85,14 +91,16 @@ export const InstagramMedia: FC<InstagramMediaProps> = ({
                   <img
                     src={media.content}
                     alt={`Photo ${index + 1}`}
-                    className="object-cover h-[18vw] max-h-[360px] w-full"
+                    className="object-cover h-[300px] w-full"
+                    style={{ height: `${feedHeight}px` }}
                   />
                 ) : (
                   <video
                     autoPlay
                     loop
                     muted
-                    className="object-cover h-[18vw] max-h-[360px] w-full"
+                    className="object-cover h-[300px] w-full"
+                    style={{ height: `${feedHeight}px` }}
                   >
                     <source src={media.content} type="video/mp4" />
                     Your browser does not support the video tag.
@@ -104,7 +112,7 @@ export const InstagramMedia: FC<InstagramMediaProps> = ({
                   }
                   className="absolute bottom-2 right-2 rounded-full bg-[#ababab] opacity-75 hover:opacity-100 flex items-center content-center p-1 cursor-pointer"
                 >
-                  <Download width={20} height={20} stroke="#fff" />
+                  <Download width={iconSize} height={iconSize} stroke="#fff" />
                 </div>
               </div>
             </CarouselItem>

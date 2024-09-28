@@ -7,11 +7,13 @@ import { GenerateDownloadLink } from "@shared/functions";
 interface TelegramMediaProps {
   medias?: File[];
   mediasRes?: IFile[];
+  iconSize: number;
 }
 
 export const TelegramMedia: FC<TelegramMediaProps> = ({
   medias,
   mediasRes,
+  iconSize,
 }) => {
   return (
     <div className={styles.media}>
@@ -37,7 +39,7 @@ export const TelegramMedia: FC<TelegramMediaProps> = ({
               onClick={() => GenerateDownloadLink(media, media?.name)}
               className="absolute bottom-2 right-2 rounded-full bg-[#ababab] opacity-75 hover:opacity-100 flex items-center content-center p-1 cursor-pointer"
             >
-              <Download width={20} height={20} stroke="#fff" />
+              <Download width={iconSize} height={iconSize} stroke="#fff" />
             </div>
           </div>
         ))}
@@ -61,7 +63,7 @@ export const TelegramMedia: FC<TelegramMediaProps> = ({
               }
               className="absolute bottom-2 right-2 rounded-full bg-[#ababab] opacity-75 hover:opacity-100 flex items-center content-center p-1 cursor-pointer"
             >
-              <Download width={20} height={20} stroke="#fff" />
+              <Download width={iconSize} height={iconSize} stroke="#fff" />
             </div>
           </div>
         ))}
