@@ -1,6 +1,6 @@
-import { channelData } from "@entities/channel";
+import { channelParameterData } from "@entities/channel";
 import { InfoIcon } from "@shared/assets";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -11,7 +11,7 @@ interface SelectDescriptionProps {
   placeholder: string;
   onChange: UseFormSetValue<any>;
   defaultValues?: string;
-  type: channelData;
+  type: channelParameterData;
 }
 
 export const SelectDescription: FC<SelectDescriptionProps> = ({
@@ -34,6 +34,13 @@ export const SelectDescription: FC<SelectDescriptionProps> = ({
     setRemainingCharacters(newDescription.length);
     onChange(type, newDescription);
   };
+
+  useEffect(() => {
+    if (defaultValues) {
+      setDescription(defaultValues);
+      setRemainingCharacters(defaultValues.length);
+    }
+  }, [defaultValues]);
 
   return (
     <div className={styles.wrapper}>

@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { InfoIcon } from "@shared/assets";
@@ -33,6 +33,12 @@ export const SelectSymbol: FC<SelectSymbolProps> = ({
     setPosition(newPosition);
     onChange("text_limit", newPosition);
   };
+
+  useEffect(() => {
+    if (defaultValues) {
+      setPosition(defaultValues);
+    }
+  }, [defaultValues]);
 
   return (
     <div className={`${isRow ? styles.wrapper__row : styles.wrapper}`}>

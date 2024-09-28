@@ -32,13 +32,18 @@ export const FormatPrice: FC<IFormatPriceProps> = ({
     const handleResize = () => {
       setScreen(window.innerWidth);
     };
-
     window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
+  useEffect(() => {
+    if (defaultValue) {
+      setPrice(defaultValue);
+    }
+  }, [defaultValue]);
 
   return (
     <div className={styles.wrapper}>

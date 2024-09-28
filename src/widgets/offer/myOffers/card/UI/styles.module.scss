@@ -203,12 +203,14 @@
         line-height: 0.75;
       }
 
-      span {
-        color: var(--Personal-colors-black);
-        font-size: 10px;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 0.75;
+      .tarif {
+        span {
+          color: var(--Orange);
+          font-size: 20px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
+        }
       }
     }
 

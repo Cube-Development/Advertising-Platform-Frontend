@@ -1,5 +1,5 @@
 import { HappySmileIcon, MoreIcon } from "@shared/assets";
-import { useToast } from "@shared/ui";
+import { CountdownTimer, useToast } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -124,15 +124,9 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter }) => {
           <div className={styles.card__active}>
             <div className={styles.card__active__title}>
               <p>{t(`offers_blogger.offer_status.active.title`)}</p>
-              <span>
-                {typeof card?.publish_date === "object"
-                  ? card?.publish_date?.date_from +
-                    " - " +
-                    card?.publish_date?.date_to
-                  : card?.publish_date}{" "}
-                {card.publish_time?.time_from} - {card.publish_time?.time_to}{" "}
-                (UTC +5)
-              </span>
+              <div className={styles.tarif}>
+                <CountdownTimer date_to={card?.date_accept} time="23:59" />
+              </div>
             </div>
             <div className={styles.card__active__buttons}>
               <SeePost post={post} />

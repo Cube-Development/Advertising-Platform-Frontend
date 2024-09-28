@@ -1,33 +1,23 @@
 import {
-  channelData,
   Description,
   IReadChannelData,
   Parameters,
-  PLATFORM_PARAMETERS,
   SkeletonChannelDescription,
   SkeletonChannelParameters,
   SkeletonChannelStatistics,
   Statistics,
   useGetChannelByIdQuery,
 } from "@entities/channel";
-import { platformTypesNum } from "@entities/platform";
 import {
-  getCatalogReq,
+  getRecommendChannels,
   ICatalogChannel,
   IFormat,
-  sortingFilter,
-  useGetCatalogQuery,
+  useGetRecommedChannelsQuery,
 } from "@entities/project";
 import { roles } from "@entities/user";
-import {
-  BREAKPOINT,
-  INTERSECTION_ELEMENTS,
-  Languages,
-  PAGE_ANIMATION,
-} from "@shared/config";
+import { BREAKPOINT, Languages, PAGE_ANIMATION } from "@shared/config";
 import { useAppSelector } from "@shared/hooks";
 import { motion } from "framer-motion";
-import Cookies from "js-cookie";
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -45,44 +35,32 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
   const language = Languages.find((lang) => {
     return i18n.language === lang.name;
   });
-  const guestId = Cookies.get("guest_id");
   const [screen, setScreen] = useState<number>(window.innerWidth);
   const { role } = useAppSelector((state) => state.user);
 
-  const { watch, reset, setValue, getValues } = useForm<getCatalogReq>({
+  const { watch, reset, setValue, getValues } = useForm<getRecommendChannels>({
     defaultValues: {
       language: language?.id || Languages[0].id,
-      page: 1,
-      elements_on_page: INTERSECTION_ELEMENTS.recommendCardsChannel,
-      filter: {
-        platform: platformTypesNum.telegram,
-        male: PLATFORM_PARAMETERS.defaultSexMale,
-        female: 100 - PLATFORM_PARAMETERS.defaultSexMale,
-        business: [],
-        age: [],
-        language: [],
-        region: [],
-      },
-      sort: sortingFilter.price_down,
+      channels: [channel_id],
     },
   });
 
   const formFields = watch();
-  const { filter, sort, language: lang } = formFields;
-
   const { data: card, isLoading } = useGetChannelByIdQuery({
     channel_id: channel_id || "",
     language: language?.id || Languages[0].id,
   });
 
-  const { data: reccomendCards, isFetching: isRecommendCardsLoading } =
-    useGetCatalogQuery({
-      ...formFields,
-      guest_id: guestId,
-    });
+  const { data: recomendCards, isFetching: isRecommendCardsLoading } =
+    useGetRecommedChannelsQuery(
+      { ...formFields },
+      {
+        skip: role === roles.blogger,
+      },
+    );
 
   const [cards, setCards] = useState<ICatalogChannel[]>(
-    reccomendCards?.channels || [],
+    recomendCards?.channels || [],
   );
 
   const [channel, setChannel] = useState<IReadChannelData>(card!);
@@ -94,13 +72,13 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
   }, [card]);
 
   useEffect(() => {
-    if (reccomendCards) {
-      setCards([...cards, ...reccomendCards.channels]);
+    if (recomendCards) {
+      setCards([...cards, ...recomendCards.channels]);
     }
-  }, [reccomendCards]);
+  }, [recomendCards]);
 
   const handleOnChangePage = () => {
-    setValue(channelData.page, formFields.page + 1);
+    // setValue(channelParameterData.page, formFields.page + 1);
   };
 
   const handleChangeCards = (cartChannel: ICatalogChannel) => {};

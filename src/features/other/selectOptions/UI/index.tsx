@@ -1,4 +1,4 @@
-import { PLATFORM_PARAMETERS, channelData } from "@entities/channel";
+import { PLATFORM_PARAMETERS, channelParameterData } from "@entities/channel";
 import { ArrowSmallVerticalIcon, InfoIcon } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
 import { IOption, ISelectOption } from "@shared/types";
@@ -6,53 +6,6 @@ import { FC, useEffect, useRef, useState } from "react";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import {
-  MultiSelect,
-  MultiSelectSecond,
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectLabel,
-  SelectTrigger,
-  SelectValue,
-} from "@shared/ui";
-import { Cat, Dog, Fish, Rabbit, Turtle } from "lucide-react";
-
-const FRAMEWORKS = [
-  {
-    value: "next.js",
-    label: "Next.js",
-  },
-  {
-    value: "sveltekit",
-    label: "SvelteKit",
-  },
-  {
-    value: "nuxt.js",
-    label: "Nuxt.js",
-  },
-  {
-    value: "remix",
-    label: "Remix",
-  },
-  {
-    value: "astro",
-    label: "Astro",
-  },
-  {
-    value: "wordpress",
-    label: "WordPress",
-  },
-  {
-    value: "express.js",
-    label: "Express.js",
-  },
-  {
-    value: "nest.js",
-    label: "Nest.js",
-  },
-];
 
 interface SelectOptionsProps {
   textData: string;
@@ -202,15 +155,12 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
   }, []);
 
   useEffect(() => {
-    setSelectedOptions(defaultValues as number[]);
+    if (single) {
+      setSelectedOption(defaultValues as IOption);
+    } else {
+      setSelectedOptions(defaultValues as number[]);
+    }
   }, [defaultValues]);
-
-  const [selectedFrameworks, setSelectedFrameworks] = useState<string[]>([]);
-
-  const frameworksList = options.map((item) => ({
-    value: item.name,
-    label: item.name,
-  }));
 
   return (
     <>
@@ -240,7 +190,9 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
           ${isFilter ? styles.filter : ""}  
         
           ${
-            type === channelData.category && defaultValues && isDisabled
+            type === channelParameterData.category &&
+            defaultValues &&
+            isDisabled
               ? styles.disabled__menu
               : isMenuOpen || selectedOption || selectedOptions?.length
                 ? styles.active
@@ -279,7 +231,9 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
               >
                 <ArrowSmallVerticalIcon
                   className={
-                    type === channelData.category && defaultValues && isDisabled
+                    type === channelParameterData.category &&
+                    defaultValues &&
+                    isDisabled
                       ? "icon__grey"
                       : (isMenuOpen ||
                             selectedOption ||

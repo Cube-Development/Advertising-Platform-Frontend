@@ -10,7 +10,9 @@ export const SeeCatalog: FC = () => {
 
   return (
     <Link to={paths.catalog}>
-      <MyButton className={styles.button}>{t(`btn_catalog`)}</MyButton>
+      <MyButton className={styles.button}>
+        <p>{t(`btn_catalog`)}</p>
+      </MyButton>
     </Link>
   );
 };

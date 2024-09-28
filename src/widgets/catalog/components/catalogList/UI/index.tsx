@@ -1,4 +1,4 @@
-import { channelData } from "@entities/channel";
+import { channelData, channelParameterData } from "@entities/channel";
 import { platformTypes } from "@entities/platform";
 import {
   ICatalogChannel,
@@ -25,6 +25,7 @@ import { FC, useEffect, useState } from "react";
 import {
   UseFormGetValues,
   UseFormReset,
+  UseFormResetField,
   UseFormSetValue,
 } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -36,6 +37,7 @@ interface CatalogListProps {
   setValue: UseFormSetValue<getCatalogReq>;
   reset: UseFormReset<getCatalogReq>;
   getValues: UseFormGetValues<getCatalogReq>;
+  resetField: UseFormResetField<getCatalogReq>;
   page: number;
   onChangeCard: (cart: ICatalogChannel) => void;
   isLast: boolean;
@@ -49,6 +51,7 @@ export const CatalogList: FC<CatalogListProps> = ({
   setValue,
   reset,
   getValues,
+  resetField,
   page,
   isLast,
   onChangeCard,
@@ -60,7 +63,7 @@ export const CatalogList: FC<CatalogListProps> = ({
   const [screen, setScreen] = useState<number>(window.innerWidth);
 
   const handleOnChangePage = () => {
-    setValue(channelData.page, page + 1);
+    setValue(channelParameterData.page, page + 1);
   };
 
   useEffect(() => {
@@ -86,7 +89,7 @@ export const CatalogList: FC<CatalogListProps> = ({
             options={platformTypes}
             textData="filter.title"
             single={true}
-            type={filterData.platform}
+            type={channelParameterData.platform}
             isFilter={true}
             isCatalogPlatform={true}
             isPlatformFilter={true}
@@ -103,7 +106,11 @@ export const CatalogList: FC<CatalogListProps> = ({
         </div>
       </div>
       <div className={styles.search__row}>
-        <SearchFilter />
+        <SearchFilter
+          type={channelData.search}
+          onChange={setValue}
+          resetField={resetField}
+        />
         {screen < BREAKPOINT.LG && (
           <ParametersFilter
             getValues={getValues}

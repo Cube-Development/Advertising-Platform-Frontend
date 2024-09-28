@@ -28,6 +28,10 @@ export interface ICatalogCards extends IChangeCards {
   isLast?: boolean;
 }
 
+export interface IRecommendCards {
+  channels: ICatalogChannel[];
+}
+
 export interface ICatalogChannel {
   id: string;
   match?: number;

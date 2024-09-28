@@ -44,6 +44,7 @@ export const publicCommonRoutes: IRoute[] = [
   // { path: paths.myChannels, component: MyChannelsPage, sidebar: true },
   { path: paths.faq, component: FAQPage },
   { path: paths.notFound, component: NotFoundPage },
+  { path: paths.channel, component: ChannelPage },
 ];
 
 export const privateBloggerRoutes: IRoute[] = [
@@ -65,7 +66,7 @@ export const publicAdvertiserRoutes: IRoute[] = [
   { path: paths.catalog, component: CatalogPage },
   { path: paths.cart, component: CartPage },
   { path: paths.turnkey, component: TurnkeyPage },
-  { path: paths.channel, component: ChannelPage },
+  // { path: paths.channel, component: ChannelPage },
 ];
 
 // нужен в старой версии роутинга после обновы удалить
