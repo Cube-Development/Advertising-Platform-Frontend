@@ -3,6 +3,7 @@ import {
   IAddChannelIdentification,
   IChannelLink,
   IIndetificationParams,
+  IReadChannelData,
   useChannelVerifyMutation,
   useCreateCodeQuery,
 } from "@entities/channel";
@@ -11,15 +12,16 @@ import { ArrowLongHorizontalIcon, InfoIcon } from "@shared/assets";
 import { PAGE_ANIMATION } from "@shared/config";
 import { MyButton, SpinnerLoaderSmall, useToast } from "@shared/ui";
 import { motion } from "framer-motion";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { SubmitHandler, useForm, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
 interface ChannelIdentificationProps {
   step: number;
+  defaultValue: string | undefined;
   variant: typeof PAGE_ANIMATION.animationLeft;
-  channel_id?: string;
+  isEdit: boolean;
   indetificationParams: IIndetificationParams;
   setValue: UseFormSetValue<IAddChannelData>;
   onChangeStep: (newStep: number) => void;
@@ -28,8 +30,9 @@ interface ChannelIdentificationProps {
 
 export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
   step,
+  defaultValue,
   variant,
-  channel_id,
+  isEdit,
   indetificationParams,
   setValue,
   onChangeStep,
@@ -45,14 +48,16 @@ export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
   } = useForm<IAddChannelIdentification>();
 
   const { data: code } = useCreateCodeQuery("", {
-    skip: channel_id || indetificationParams.link ? true : undefined,
+    skip: isEdit || indetificationParams.link ? true : undefined,
   });
 
   const [channelVerify, { isLoading, error, isSuccess }] =
     useChannelVerifyMutation();
 
   const onSubmit: SubmitHandler<IAddChannelIdentification> = (data) => {
-    if (code && !indetificationParams.link) {
+    if (isEdit) {
+      onChangeStep(2);
+    } else if (code && !indetificationParams.link) {
       const formData = {
         ...data,
         platform: indetificationParams.platform.id,
@@ -106,9 +111,16 @@ export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
 
   const handleChangeLink = (e: React.ChangeEvent<HTMLInputElement>) => {
     const newLink = e.target.value;
-    const newPlatform = { ...indetificationParams, link: newLink };
-    setIndetificationParams(newPlatform);
+    setText(newLink);
   };
+
+  const [text, setText] = useState(defaultValue || "");
+
+  useEffect(() => {
+    if (defaultValue) {
+      setText(defaultValue);
+    }
+  }, [defaultValue]);
 
   return (
     <>
@@ -128,7 +140,7 @@ export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
                       type="button"
                       className={`${styles.platform__btn} ${indetificationParams.platform.type === platform.type ? styles.active : ""}`}
                       onClick={() => changePlatform(platform)}
-                      disabled={indetificationParams.checked}
+                      disabled={indetificationParams.checked || isEdit}
                     >
                       {t(platform.name)}
                     </MyButton>
@@ -143,23 +155,27 @@ export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
                 </div>
                 <div className={styles.paste_link}>
                   <input
-                    {...register("url", {
-                      required: t("add_platform.identification.link.requerd"),
-                      validate: {
-                        validURL: (value) =>
-                          isValidURL(value) ||
-                          t("add_platform.identification.link.invalid"),
-                      },
-                    })}
+                    {...(isEdit
+                      ? {}
+                      : register("url", {
+                          required: t(
+                            "add_platform.identification.link.requerd",
+                          ),
+                          validate: {
+                            validURL: (value) =>
+                              isValidURL(value) ||
+                              t("add_platform.identification.link.invalid"),
+                          },
+                        }))}
                     placeholder={
                       errors["url"]
                         ? errors["url"].message
                         : t(indetificationParams.platform.default_value)
                     }
                     className={`${styles.platform__input} ${errors["url"] && styles.form_error}`}
-                    // onChange={handleChangeLink}
-                    // value={indetificationParams.link}
-                    disabled={indetificationParams.checked}
+                    onChange={handleChangeLink}
+                    value={text}
+                    disabled={indetificationParams.checked || isEdit}
                   />
                 </div>
               </div>

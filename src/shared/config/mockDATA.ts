@@ -2803,7 +2803,7 @@ export const BLOGGER_OFFERS: IBloggerOffers = {
       id: "597f6eca-6276-4993-bfeb-53cbbbba6f02",
       identifier: 2,
       created: "24.09.2024",
-      date_accept: "24.09.2024",
+      date_accept: "28.09.2024",
       name: "Order 2",
       category: "Category B",
       avatar: "avatar2.png",

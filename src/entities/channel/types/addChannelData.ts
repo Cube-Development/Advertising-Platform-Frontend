@@ -8,7 +8,7 @@ export interface IAddChannelData {
   region: number[];
   male: number;
   female: number;
-  description: string | undefined;
+  description: string;
   text_limit: number;
   age: number[];
   format: IAddFormat[];

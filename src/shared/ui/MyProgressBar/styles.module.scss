@@ -9,24 +9,17 @@
       180deg
     ); // Поворот на -90 градусов, чтобы начать с верхней точки окружности
   }
-}
 
-.circle__background {
-  fill: none;
-  stroke: hsla(0, 0%, 0%, 0.1); // Цвет фона круга
-}
+  .circle__background {
+    fill: none;
+    stroke: hsla(0, 0%, 0%, 0.1); // Цвет фона круга
+  }
 
-.circle__progress {
-  fill: none;
-  stroke: black; // Цвет прогресса
-  transition: stroke-dashoffset 0.35s;
-  transform: rotate(0.25turn);
-  transform-origin: center;
-}
-
-.progress__text {
-  position: absolute;
-  font-size: 20px;
-  font-weight: bold;
-  color: #333;
+  .circle__progress {
+    fill: none;
+    stroke: black; // Цвет прогресса
+    transition: stroke-dashoffset 0.35s;
+    transform: rotate(0.25turn);
+    transform-origin: center;
+  }
 }

@@ -1,13 +1,11 @@
-import { platformTypesNum } from "@entities/platform";
 import {
-  getCatalogReq,
+  getRecommendChannels,
   ICart,
   ICatalogChannel,
-  sortingFilter,
   useAddToCommonCartMutation,
   useAddToManagerCartMutation,
   useAddToPublicCartMutation,
-  useGetCatalogQuery,
+  useGetRecommedChannelsQuery,
   useReadCommonCartQuery,
   useReadManagerCartQuery,
   useReadPublicCartQuery,
@@ -16,7 +14,7 @@ import {
   useRemoveFromPublicCartMutation,
 } from "@entities/project";
 import { GenerateGuestId, roles } from "@entities/user";
-import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
+import { Languages } from "@shared/config";
 import { useAppSelector } from "@shared/hooks";
 import { ToastAction, useToast } from "@shared/ui";
 import Cookies from "js-cookie";
@@ -83,35 +81,33 @@ export const Cart: FC = () => {
   }, [cartManager]);
 
   const [currentCart, setCurrentCart] = useState<ICart>(
-    cartPub ? cartPub : cart ? cart : cartManager!,
+    cartPub || cart || cartManager!,
   );
 
-  //НАЧАЛО  убрать useForm после добвления api для рекомендованных площадок
-  const { watch } = useForm<getCatalogReq>({
+  const { watch, reset } = useForm<getRecommendChannels>({
     defaultValues: {
       language: language?.id || Languages[0].id,
-      page: 1,
-      elements_on_page: INTERSECTION_ELEMENTS.recommendCardsCart,
-      filter: {
-        platform: platformTypesNum.telegram,
-        business: [],
-        age: [],
-        language: [],
-        region: [],
-      },
-      sort: sortingFilter.price_down,
+      channels: currentCart?.channels?.map((item) => item.id) || [],
     },
   });
 
-  const formFields = watch();
+  useEffect(() => {
+    if (currentCart) {
+      reset({
+        language: language?.id || Languages[0].id,
+        channels: currentCart?.channels?.map((item) => item.id),
+      });
+    }
+  }, [currentCart]);
 
-  const { data: recomendCards } = useGetCatalogQuery(
-    { ...formFields, user_id: user_id },
+  const formFields = watch();
+  console.log("!currentCart", !currentCart);
+  const { data: recomendCards } = useGetRecommedChannelsQuery(
+    { ...formFields },
     {
-      skip: !user_id,
+      skip: !currentCart,
     },
   );
-  // КОНЕЦ
 
   // commonCart
   const [addToCommonCart] = useAddToCommonCartMutation();

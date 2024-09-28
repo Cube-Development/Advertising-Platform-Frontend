@@ -12,6 +12,11 @@ export const enum PLATFORM_PARAMETERS {
 }
 
 export enum channelData {
+  search = "search_string",
+  sort = "sort",
+}
+
+export enum channelParameterData {
   platform = "platform",
   link = "link",
   category = "category",

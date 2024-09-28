@@ -30,7 +30,6 @@ export const MyProgressBar: React.FC<MyProgressBarProps> = ({ progress }) => {
           strokeDashoffset={strokeDashoffset}
         />
       </svg>
-      {/* <div className={styles.progress__text}>{progress}%</div> */}
     </div>
   );
 };
