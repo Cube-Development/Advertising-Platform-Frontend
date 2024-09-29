@@ -289,10 +289,24 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                       <SeeBtn />
                     </div>
                   </AlertDialogTrigger>
-                  <AlertDialogContent className="gap-0 w-[30vw] h-[40vw] bg-transparent grid items-center justify-center shadow-none">
-                    <div className="w-[18vw] h-full relative">
+                  <AlertDialogContent
+                    className={`gap-0 bg-transparent grid items-center justify-center shadow-none ${
+                      screen > 992
+                        ? "w-[25vw]"
+                        : screen > 768
+                          ? "w-[30vw]"
+                          : screen > 576
+                            ? "w-[35vw]"
+                            : screen > 475
+                              ? "w-[50vw]"
+                              : "w-[60vw]"
+                    }`}
+                  >
+                    <div className="relative">
                       <AlertDialogAction>
-                        <X className="absolute -right-16 -top-10 w-[50px] rounded-full p-2 bg-white cursor-pointer" />
+                        <X
+                          className={`absolute ${screen > 475 ? "-right-10 -top-5" : "-right-8 -top-4"} w-[30px] rounded-full p-2 bg-white cursor-pointer`}
+                        />
                       </AlertDialogAction>
                       {post?.platform === platformTypesNum.telegram && (
                         <DisplayTelegram
@@ -354,10 +368,24 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                         <SeeBtn />
                       </div>
                     </AlertDialogTrigger>
-                    <AlertDialogContent className="gap-0 w-[30vw] h-[40vw] bg-transparent grid items-center justify-center shadow-none">
-                      <div className="w-[18vw] h-full relative">
+                    <AlertDialogContent
+                      className={`gap-0 bg-transparent grid items-center justify-center shadow-none ${
+                        screen > 992
+                          ? "w-[25vw]"
+                          : screen > 768
+                            ? "w-[30vw]"
+                            : screen > 576
+                              ? "w-[35vw]"
+                              : screen > 475
+                                ? "w-[50vw]"
+                                : "w-[60vw]"
+                      }`}
+                    >
+                      <div className="relative">
                         <AlertDialogAction>
-                          <X className="absolute -right-16 -top-10 w-[50px] rounded-full p-2 bg-white cursor-pointer" />
+                          <X
+                            className={`absolute ${screen > 475 ? "-right-10 -top-5" : "-right-8 -top-4"} w-[30px] rounded-full p-2 bg-white cursor-pointer`}
+                          />
                         </AlertDialogAction>
                         {post?.platform === platformTypesNum.telegram && (
                           <DisplayTelegram
@@ -581,10 +609,24 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                     <SeeBtn />
                   </div>
                 </AlertDialogTrigger>
-                <AlertDialogContent className="gap-0 w-[30vw] h-[40vw] bg-transparent grid items-center justify-center shadow-none">
-                  <div className="w-[18vw] h-full relative">
+                <AlertDialogContent
+                  className={`gap-0 bg-transparent grid items-center justify-center shadow-none ${
+                    screen > 992
+                      ? "w-[25vw]"
+                      : screen > 768
+                        ? "w-[30vw]"
+                        : screen > 576
+                          ? "w-[35vw]"
+                          : screen > 475
+                            ? "w-[50vw]"
+                            : "w-[60vw]"
+                  }`}
+                >
+                  <div className="relative">
                     <AlertDialogAction>
-                      <X className="absolute -right-16 -top-10 w-[50px] rounded-full p-2 bg-white cursor-pointer" />
+                      <X
+                        className={`absolute ${screen > 475 ? "-right-10 -top-5" : "-right-8 -top-4"} w-[30px] rounded-full p-2 bg-white cursor-pointer`}
+                      />
                     </AlertDialogAction>
                     {post?.platform === platformTypesNum.telegram && (
                       <DisplayTelegram
@@ -646,10 +688,24 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                       <SeeBtn />
                     </div>
                   </AlertDialogTrigger>
-                  <AlertDialogContent className="gap-0 w-[30vw] h-[40vw] bg-transparent grid items-center justify-center shadow-none">
-                    <div className="w-[18vw] h-full relative">
+                  <AlertDialogContent
+                    className={`gap-0 bg-transparent grid items-center justify-center shadow-none ${
+                      screen > 992
+                        ? "w-[25vw]"
+                        : screen > 768
+                          ? "w-[30vw]"
+                          : screen > 576
+                            ? "w-[35vw]"
+                            : screen > 475
+                              ? "w-[50vw]"
+                              : "w-[60vw]"
+                    }`}
+                  >
+                    <div className="relative">
                       <AlertDialogAction>
-                        <X className="absolute -right-16 -top-10 w-[50px] rounded-full p-2 bg-white cursor-pointer" />
+                        <X
+                          className={`absolute ${screen > 475 ? "-right-10 -top-5" : "-right-8 -top-4"} w-[30px] rounded-full p-2 bg-white cursor-pointer`}
+                        />
                       </AlertDialogAction>
                       {post?.platform === platformTypesNum.telegram && (
                         <DisplayTelegram

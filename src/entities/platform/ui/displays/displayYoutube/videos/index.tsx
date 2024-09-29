@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import styles from "./styles.module.scss";
 import { EmptyPost } from "./emptyPost";
 import { YoutubeMedia } from "./media";
@@ -75,10 +75,60 @@ export const DisplayVideos: FC<DisplayVideosProps> = ({
   const postFile = currentPost?.files;
   const postComment = currentPost?.comment;
 
+  const imgRef = useRef<HTMLImageElement>(null);
+  const [resizes, setResizes] = useState<{
+    borderRadius: number;
+    timeSize: number;
+    displayTopSize: number;
+    displayBottomSize: number;
+    downloadIconSize: number;
+    feedHeightSize: number;
+  } | null>(null);
+
+  useEffect(() => {
+    const updateSizes = () => {
+      if (imgRef.current) {
+        const imgWidth = imgRef.current.offsetWidth;
+
+        const calculatedRadius = (imgWidth / 364) * 54;
+        const calculatedTimeSize = (imgWidth / 364) * 14;
+        const calculatedDisplayTopSize = (imgWidth / 364) * 50;
+        const calculatedDisplayBottomSize = (imgWidth / 364) * 80;
+        const calculatedDownloadIconSize = (imgWidth / 364) * 14;
+        const calculatedFeedHeightSize = (imgWidth / 364) * 200;
+
+        // Обновляем все значения в состоянии
+        setResizes({
+          borderRadius: calculatedRadius,
+          timeSize: calculatedTimeSize,
+          displayTopSize: calculatedDisplayTopSize,
+          displayBottomSize: calculatedDisplayBottomSize,
+          downloadIconSize: calculatedDownloadIconSize,
+          feedHeightSize: calculatedFeedHeightSize,
+        });
+      }
+    };
+
+    setTimeout(() => {
+      updateSizes();
+    }, 100);
+
+    window.addEventListener("resize", updateSizes);
+
+    return () => {
+      window.removeEventListener("resize", updateSizes);
+    };
+  }, [imgRef.current?.offsetWidth]);
+
   return (
     <div className={styles.screen_wrapper}>
       <div className={styles.screen}>
-        <p className={styles.time}>9:41</p>
+        <p
+          className={styles.time}
+          style={{ fontSize: `${resizes?.timeSize}px` }}
+        >
+          9:41
+        </p>
         <img
           className={styles.statusbar}
           src="/images/phoneDisplay/statusbar.svg"
@@ -88,11 +138,19 @@ export const DisplayVideos: FC<DisplayVideosProps> = ({
           src="/images/phoneDisplay/dynamic.png"
         />
         <img
+          ref={imgRef}
           className={styles.mockup}
           src="/images/phoneDisplay/iphonescreen.png"
         />
         {formState ? (
-          <div className={styles.display}>
+          <div
+            className={styles.display}
+            style={{
+              borderRadius: `${resizes?.borderRadius}px`,
+              paddingTop: `${resizes?.displayTopSize}px`,
+              paddingBottom: `${resizes?.displayBottomSize}px`,
+            }}
+          >
             {(postText && postText[0]?.content !== "<p></p>") ||
             postMedia?.length ||
             postComment ||
@@ -100,9 +158,16 @@ export const DisplayVideos: FC<DisplayVideosProps> = ({
               <div className={styles.content}>
                 <div className={styles.post}>
                   {postMedia && postMedia?.length > 0 ? (
-                    <YoutubeMedia medias={postMedia} />
+                    <YoutubeMedia
+                      medias={postMedia}
+                      feedHeight={resizes?.feedHeightSize || 200}
+                      iconSize={resizes?.downloadIconSize || 14}
+                    />
                   ) : (
-                    <div className={styles.empty__photo}>
+                    <div
+                      className={styles.empty__photo}
+                      style={{ height: `${resizes?.feedHeightSize}px` }}
+                    >
                       <EyeDisabledIcon />
                       <p>No content yet...</p>
                     </div>
@@ -113,13 +178,22 @@ export const DisplayVideos: FC<DisplayVideosProps> = ({
                         __html: postText[0]?.content || "",
                       }}
                       className={styles.post__text}
+                      style={{ fontSize: `${resizes?.timeSize}px` }}
                     />
                   )}
                 </div>
                 {postFile && postFile?.length > 0 && (
-                  <YoutubeFile file={postFile[0]} />
+                  <YoutubeFile
+                    file={postFile[0]}
+                    fontSize={resizes?.timeSize || 14}
+                  />
                 )}
-                {postComment && <YoutubeComment comment={postComment} />}
+                {postComment && (
+                  <YoutubeComment
+                    comment={postComment}
+                    fontSize={resizes?.timeSize || 14}
+                  />
+                )}
                 {(!postText || postText[0]?.content === "<p></p>") &&
                   !postComment &&
                   (!postFile || postFile.length === 0) && (
@@ -135,7 +209,14 @@ export const DisplayVideos: FC<DisplayVideosProps> = ({
             )}
           </div>
         ) : (
-          <div className={styles.display}>
+          <div
+            className={styles.display}
+            style={{
+              borderRadius: `${resizes?.borderRadius}px`,
+              paddingTop: `${resizes?.displayTopSize}px`,
+              paddingBottom: `${resizes?.displayBottomSize}px`,
+            }}
+          >
             {(textRes && textRes[0] !== "<p></p>") ||
             mediaRes?.length ||
             commentRes ||
@@ -143,9 +224,16 @@ export const DisplayVideos: FC<DisplayVideosProps> = ({
               <div className={styles.content}>
                 <div className={styles.post}>
                   {mediaRes && mediaRes?.length > 0 ? (
-                    <YoutubeMedia mediasRes={mediaRes} />
+                    <YoutubeMedia
+                      mediasRes={mediaRes}
+                      feedHeight={resizes?.feedHeightSize || 200}
+                      iconSize={resizes?.downloadIconSize || 14}
+                    />
                   ) : (
-                    <div className={styles.empty__photo}>
+                    <div
+                      className={styles.empty__photo}
+                      style={{ height: `${resizes?.feedHeightSize}px` }}
+                    >
                       <EyeDisabledIcon />
                       <p>No content yet...</p>
                     </div>
@@ -156,11 +244,22 @@ export const DisplayVideos: FC<DisplayVideosProps> = ({
                         __html: textRes[0] || "",
                       }}
                       className={styles.post__text}
+                      style={{ fontSize: `${resizes?.timeSize}px` }}
                     />
                   )}
                 </div>
-                {fileRes && <YoutubeFile file={fileRes} />}
-                {commentRes && <YoutubeComment comment={commentRes} />}
+                {fileRes && (
+                  <YoutubeFile
+                    file={fileRes}
+                    fontSize={resizes?.timeSize || 14}
+                  />
+                )}
+                {commentRes && (
+                  <YoutubeComment
+                    comment={commentRes}
+                    fontSize={resizes?.timeSize || 14}
+                  />
+                )}
                 {!textRes && !commentRes && !fileRes && (
                   <div className={styles.no_content}>
                     <EyeDisabledIcon />

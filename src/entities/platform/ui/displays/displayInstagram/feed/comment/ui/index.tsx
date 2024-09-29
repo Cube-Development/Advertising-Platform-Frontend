@@ -4,16 +4,25 @@ import { useTranslation } from "react-i18next";
 
 interface InstagramCommentProps {
   comment: string;
+  fontSize: number;
 }
 
-export const InstagramComment: FC<InstagramCommentProps> = ({ comment }) => {
+export const InstagramComment: FC<InstagramCommentProps> = ({
+  comment,
+  fontSize,
+}) => {
   const { t } = useTranslation();
   return (
     <div className={styles.comment}>
-      <p className={styles.comment__title}>
+      <p
+        className={styles.comment__title}
+        style={{ fontSize: `${fontSize}px` }}
+      >
         {t("create_order.create.comment_to_post")}
       </p>
-      <p className={styles.comment__text}>{comment}</p>
+      <p className={styles.comment__text} style={{ fontSize: `${fontSize}px` }}>
+        {comment}
+      </p>
     </div>
   );
 };

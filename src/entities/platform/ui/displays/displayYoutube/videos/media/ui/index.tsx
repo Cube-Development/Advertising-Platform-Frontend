@@ -6,9 +6,16 @@ import { ContentType, IFile, getContentType } from "@entities/project";
 interface YoutubeMediaProps {
   medias?: File[];
   mediasRes?: IFile[];
+  feedHeight: number;
+  iconSize: number;
 }
 
-export const YoutubeMedia: FC<YoutubeMediaProps> = ({ medias, mediasRes }) => {
+export const YoutubeMedia: FC<YoutubeMediaProps> = ({
+  medias,
+  mediasRes,
+  feedHeight,
+  iconSize,
+}) => {
   return (
     <div>
       {medias && (
@@ -17,12 +24,14 @@ export const YoutubeMedia: FC<YoutubeMediaProps> = ({ medias, mediasRes }) => {
             <img
               src={URL.createObjectURL(medias[0])}
               alt={`Photo ${1}`}
-              className="h-[15vw] object-contain max-h-[200px] w-full"
+              className="h-[200px] object-contain w-full bg-[#2d2d2d]"
+              style={{ height: `${feedHeight}px` }}
             />
           ) : (
             <video
               controls
-              className="h-[15vw] object-contain max-h-[200px] w-full"
+              className="h-[200px] object-contain w-full bg-[#2d2d2d]"
+              style={{ height: `${feedHeight}px` }}
             >
               <source src={URL.createObjectURL(medias[0])} type="video/mp4" />
               <source src={URL.createObjectURL(medias[0])} type="video/ogg" />
@@ -33,7 +42,7 @@ export const YoutubeMedia: FC<YoutubeMediaProps> = ({ medias, mediasRes }) => {
             onClick={() => GenerateDownloadLink(medias[0], medias[0]?.name)}
             className="absolute bottom-2 right-2 rounded-full bg-[#ababab] opacity-75 hover:opacity-100 flex items-center content-center p-1 cursor-pointer"
           >
-            <Download width={20} height={20} stroke="#fff" />
+            <Download width={iconSize} height={iconSize} stroke="#fff" />
           </div>
         </div>
       )}
@@ -43,12 +52,14 @@ export const YoutubeMedia: FC<YoutubeMediaProps> = ({ medias, mediasRes }) => {
             <img
               src={mediasRes[0]?.content}
               alt={`Photo ${1}`}
-              className="h-[15vw] object-contain max-h-[200px] w-full"
+              className="h-[200px] object-contain w-full bg-[#2d2d2d]"
+              style={{ height: `${feedHeight}px` }}
             />
           ) : (
             <video
               controls
-              className="h-[15vw] object-contain max-h-[200px] w-full"
+              className="h-[200px] object-contain w-full bg-[#2d2d2d]"
+              style={{ height: `${feedHeight}px` }}
             >
               <source src={mediasRes[0]?.content} type="video/mp4" />
               Your browser does not support the video tag.
@@ -60,7 +71,7 @@ export const YoutubeMedia: FC<YoutubeMediaProps> = ({ medias, mediasRes }) => {
             }
             className="absolute bottom-2 right-2 rounded-full bg-[#ababab] opacity-75 hover:opacity-100 flex items-center content-center p-1 cursor-pointer"
           >
-            <Download width={20} height={20} stroke="#fff" />
+            <Download width={iconSize} height={iconSize} stroke="#fff" />
           </div>
         </div>
       )}

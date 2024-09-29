@@ -15,11 +15,15 @@ import { GenerateDownloadLink } from "@shared/functions";
 interface InstagramMediaProps {
   medias?: File[];
   mediasRes?: IFile[];
+  storiesHeight: number;
+  iconSize: number;
 }
 
 export const InstagramMedia: FC<InstagramMediaProps> = ({
   medias,
   mediasRes,
+  storiesHeight,
+  iconSize,
 }) => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
@@ -43,11 +47,15 @@ export const InstagramMedia: FC<InstagramMediaProps> = ({
     if (containerRef.current && medias) {
       const containerWidth = containerRef.current.offsetWidth;
       const widthPerSpan = containerWidth / medias.length;
-      setSpanWidth(widthPerSpan);
+      setTimeout(() => {
+        setSpanWidth(widthPerSpan);
+      }, 300);
     } else if (containerRef.current && mediasRes) {
       const containerWidth = containerRef.current.offsetWidth;
       const widthPerSpan = containerWidth / mediasRes.length;
-      setSpanWidth(widthPerSpan);
+      setTimeout(() => {
+        setSpanWidth(widthPerSpan);
+      }, 300);
     }
   }, [medias, mediasRes]);
 
@@ -69,14 +77,16 @@ export const InstagramMedia: FC<InstagramMediaProps> = ({
                   <img
                     src={URL.createObjectURL(media)}
                     alt={`Photo ${index + 1}`}
-                    className="object-cover h-[34vw] max-h-[500px] w-full"
+                    className="object-cover h-[600px] w-full"
+                    style={{ height: `${storiesHeight}px` }}
                   />
                 ) : (
                   <video
                     autoPlay
                     loop
                     muted
-                    className="object-cover h-[34vw] max-h-[500px] w-full"
+                    className="object-cover h-[600px] w-full"
+                    style={{ height: `${storiesHeight}px` }}
                   >
                     <source src={URL.createObjectURL(media)} type="video/mp4" />
                     <source src={URL.createObjectURL(media)} type="video/ogg" />
@@ -87,7 +97,7 @@ export const InstagramMedia: FC<InstagramMediaProps> = ({
                   onClick={() => GenerateDownloadLink(media, media?.name)}
                   className="absolute bottom-2 right-2 rounded-full bg-[#ababab] opacity-75 hover:opacity-100 flex items-center content-center p-1 cursor-pointer"
                 >
-                  <Download width={20} height={20} stroke="#fff" />
+                  <Download width={iconSize} height={iconSize} stroke="#fff" />
                 </div>
               </div>
             </CarouselItem>
@@ -119,7 +129,7 @@ export const InstagramMedia: FC<InstagramMediaProps> = ({
                   }
                   className="absolute bottom-2 right-2 rounded-full bg-[#ababab] opacity-75 hover:opacity-100 flex items-center content-center p-1 cursor-pointer"
                 >
-                  <Download width={20} height={20} stroke="#fff" />
+                  <Download width={iconSize} height={iconSize} stroke="#fff" />
                 </div>
               </div>
             </CarouselItem>

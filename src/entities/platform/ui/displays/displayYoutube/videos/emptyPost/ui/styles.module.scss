@@ -12,6 +12,10 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+
+    @media (max-width: 768px) {
+      font-size: 10px;
+    }
   }
 
   .middle {
@@ -34,6 +38,10 @@
       font-weight: 400;
       line-height: normal;
       text-align: center;
+
+      @media (max-width: 768px) {
+        font-size: 10px;
+      }
     }
   }
 
@@ -58,9 +66,18 @@
       border-radius: 8px;
       border: 1px solid var(--Personal-colors-main);
       background: #fff;
+      padding: 15px;
+
+      @media (max-width: 768px) {
+        padding: 10px;
+      }
 
       p {
         color: var(--Personal-colors-main);
+
+        @media (max-width: 768px) {
+          font-size: 10px;
+        }
       }
     }
 
