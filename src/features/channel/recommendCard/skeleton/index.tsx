@@ -28,7 +28,13 @@ export const SkeletonRecommendCard: FC = () => {
               <Skeleton className="w-[18px] h-[18px] rounded-full" />
             </div>
           </div>
-          <Skeleton className="h-3 w-4/5" />
+          <div className={styles.channel__description}>
+            <Skeleton className="h-2 w-full" />
+            <Skeleton className="h-2 w-full" />
+            <Skeleton className="h-2 w-full" />
+            <Skeleton className="h-2 w-full" />
+            <Skeleton className="h-2 w-2/5" />
+          </div>
           <div>
             <Skeleton className="h-[35px] w-full rounded-[10px]" />
             <Skeleton className="h-3 w-1/5 my-[10px] mx-auto" />

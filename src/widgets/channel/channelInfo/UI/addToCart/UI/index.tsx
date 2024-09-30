@@ -10,19 +10,22 @@ interface AddToCartProps {
   card: IReadChannelData;
   selectedFormat: IFormat;
   changeFormat: (selectedValue: IFormat) => void;
+  onChange: () => void;
 }
 
 export const AddToCart: FC<AddToCartProps> = ({
   card,
   selectedFormat,
   changeFormat,
+  onChange,
 }) => {
   const { t } = useTranslation();
+  const inBasket = Boolean(card?.selected_format);
 
   return (
     <div className={styles.wrapper}>
       <div className={styles.title}>
-        <p>{t("channel.add_to_cart.title")}</p>
+        <p className="truncate">{t("channel.add_to_cart.title")}</p>
       </div>
       <div className={styles.format}>
         <p>{t("channel.add_to_cart.format")}</p>
@@ -41,8 +44,16 @@ export const AddToCart: FC<AddToCartProps> = ({
           {selectedFormat?.price.toLocaleString()} {t("symbol")}
         </span>
       </div>
-      <MyButton className={styles.button}>
-        <p>{t("channel.add_to_cart.button")}</p>
+      <MyButton
+        className={styles.button}
+        buttons_type={`${inBasket ? "button__green" : "button__blue"}`}
+        onClick={onChange}
+      >
+        {inBasket ? (
+          <p>{t("channel.add_to_cart.remove")}</p>
+        ) : (
+          <p>{t("channel.add_to_cart.add")}</p>
+        )}
       </MyButton>
     </div>
   );

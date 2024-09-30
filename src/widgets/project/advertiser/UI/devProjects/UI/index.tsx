@@ -51,7 +51,7 @@ export const DevProjectsList: FC<DevProjectsListProps> = ({
                 <AdvDevProjectCard key={index} card={card} ChatBtn={Chat} />
               </motion.div>
             ))}
-            {!isLoading &&
+            {isLoading &&
               Array.from({ length: INTERSECTION_ELEMENTS.advOrders }).map(
                 (_, index) => <SkeletonAdvDevProjectCard key={index} />,
               )}

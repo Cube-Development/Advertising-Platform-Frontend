@@ -21,28 +21,30 @@ export const ZeroProject: FC<ZeroProjectProps> = ({
   const { t } = useTranslation();
 
   return (
-    <div className={styles.no__project}>
-      <div className={styles.smile}>
-        {typeFilter === projectTypesFilter.savedProject ? (
-          <>
-            <div>
-              <StarIcon5 />
-            </div>
-            <p>{t(`orders_advertiser.no_template`)}</p>
-          </>
-        ) : (
-          <>
-            <div>
-              <SadSmileIcon />
-            </div>
-            <p>{t(`orders_advertiser.no_project`)}</p>
-          </>
-        )}
-      </div>
-      <div className={styles.buttons}>
-        <NewProjectBtn listLength={listLength} />
-        <p>{t(`orders_advertiser.or`)}</p>
-        <TurnkeyProjectBtn listLength={listLength} />
+    <div className={styles.wrapper}>
+      <div className={styles.no__project}>
+        <div className={styles.smile}>
+          {typeFilter === projectTypesFilter.savedProject ? (
+            <>
+              <div>
+                <StarIcon5 />
+              </div>
+              <p>{t(`orders_advertiser.no_template`)}</p>
+            </>
+          ) : (
+            <>
+              <div>
+                <SadSmileIcon />
+              </div>
+              <p>{t(`orders_advertiser.no_project`)}</p>
+            </>
+          )}
+        </div>
+        <div className={styles.buttons}>
+          <NewProjectBtn listLength={listLength} />
+          <p>{t(`orders_advertiser.or`)}</p>
+          <TurnkeyProjectBtn listLength={listLength} />
+        </div>
       </div>
     </div>
   );

@@ -9,6 +9,7 @@ import {
   CATALOG,
   CHAT,
   LEGALS,
+  RECOMMEND_CARDS,
 } from "@shared/api/tags";
 
 export const baseApi = createApi({
@@ -23,6 +24,7 @@ export const baseApi = createApi({
     BLOGGER_CHANNELS,
     CART,
     CATALOG,
+    RECOMMEND_CARDS,
     BALANCE,
     BLOGGER_OFFERS,
     ADV_PROJECTS,

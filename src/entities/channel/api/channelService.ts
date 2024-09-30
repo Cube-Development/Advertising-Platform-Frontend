@@ -91,7 +91,13 @@ export const channelAPI = authApi.injectEndpoints({
     }),
     getChannelById: build.query<
       IReadChannelData,
-      { channel_id: string; language: languagesNum }
+      {
+        channel_id: string;
+        language: languagesNum;
+        user_id?: string;
+        guest_id?: string;
+        project_id?: string;
+      }
     >({
       query: (params) => ({
         url: "/channel-page/",

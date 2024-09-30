@@ -1,13 +1,15 @@
 import { profileTypesName, profileTypesNum } from "@entities/wallet";
+import { accordionTypes } from "@shared/config";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@shared/ui";
-import { FC } from "react";
+import { FC, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { ArrowSmallVerticalIcon } from "@shared/assets";
 
 interface GuideProps {
   profileFilter: {
@@ -18,6 +20,37 @@ interface GuideProps {
 
 export const Guide: FC<GuideProps> = ({ profileFilter }) => {
   const { t } = useTranslation();
+  const accordionRefs = useRef<Array<HTMLDivElement | null>>([]);
+
+  useEffect(() => {
+    accordionRefs.current.forEach((ref, index) => {
+      if (ref) {
+        console.log("ref", ref);
+        const observer = new MutationObserver(() => {
+          const state = ref.getAttribute("data-state");
+          const icon = ref.querySelector(`.${styles.arrow} svg`);
+          if (state === accordionTypes.open) {
+            ref.classList.add(styles.active);
+            if (icon) icon.classList.add("icon__white");
+            if (icon) icon.classList.add("rotate__down");
+            if (icon) icon.classList.remove("active__icon");
+            if (icon) icon.classList.remove("rotate");
+          } else {
+            ref.classList.remove(styles.active);
+            if (icon) icon.classList.add("active__icon");
+            if (icon) icon.classList.add("rotate");
+            if (icon) icon.classList.remove("icon__white");
+            if (icon) icon.classList.remove("rotate__down");
+          }
+        });
+        observer.observe(ref, {
+          attributes: true,
+          attributeFilter: ["data-state"],
+        });
+        return () => observer.disconnect();
+      }
+    });
+  }, []);
 
   return (
     <>
@@ -34,11 +67,18 @@ export const Guide: FC<GuideProps> = ({ profileFilter }) => {
       </div>
       <div className="display__hide__min__md">
         <Accordion type="single" collapsible className={styles.accordion}>
-          <AccordionItem value={`item-guide`} className={styles.item}>
+          <AccordionItem
+            value={`item-guide`}
+            ref={(el) => (accordionRefs.current[0] = el)}
+            className={styles.item}
+          >
             <AccordionTrigger className={styles.trigger}>
               <p className={styles.title}>{t("wallet.guide.title")}</p>
+              <div className={styles.arrow}>
+                <ArrowSmallVerticalIcon className="active__icon rotate" />
+              </div>
             </AccordionTrigger>
-            <AccordionContent className={`${styles.content} ${styles.guide}`}>
+            <AccordionContent className={`${styles.content} ${styles.guidee}`}>
               <span className={styles.text}>
                 {profileFilter.type === profileTypesName.entities
                   ? t("wallet.guide.entity")

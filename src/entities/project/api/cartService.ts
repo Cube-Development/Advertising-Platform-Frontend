@@ -1,4 +1,11 @@
-import { authApi, baseApi, CART, CART_PUB, CATALOG } from "@shared/api";
+import {
+  authApi,
+  baseApi,
+  CART,
+  CART_PUB,
+  CATALOG,
+  RECOMMEND_CARDS,
+} from "@shared/api";
 import { languagesNum } from "@shared/config";
 import { ICart } from "../types";
 
@@ -42,7 +49,7 @@ export const authCartAPI = authApi.injectEndpoints({
         method: `POST`,
         params: params,
       }),
-      invalidatesTags: [CART_PUB, CART, CATALOG],
+      invalidatesTags: [CART_PUB, CART, CATALOG, RECOMMEND_CARDS],
     }),
     removeFromCommonCart: build.mutation<ICart, RemoveChannelReq>({
       query: (params) => ({
@@ -50,7 +57,7 @@ export const authCartAPI = authApi.injectEndpoints({
         method: `POST`,
         params: params,
       }),
-      invalidatesTags: [CART_PUB, CART, CATALOG],
+      invalidatesTags: [CART_PUB, CART, CATALOG, RECOMMEND_CARDS],
     }),
     saveCart: build.mutation<{ success: boolean }, void>({
       query: () => ({
@@ -94,7 +101,7 @@ export const publicCartAPI = baseApi.injectEndpoints({
         method: `POST`,
         params: params,
       }),
-      invalidatesTags: [CART_PUB, CART, CATALOG],
+      invalidatesTags: [CART_PUB, CART, CATALOG, RECOMMEND_CARDS],
     }),
     removeFromPublicCart: build.mutation<ICart, RemoveChannelReq>({
       query: (params) => ({
@@ -102,7 +109,7 @@ export const publicCartAPI = baseApi.injectEndpoints({
         method: `POST`,
         params: params,
       }),
-      invalidatesTags: [CART_PUB, CART, CATALOG],
+      invalidatesTags: [CART_PUB, CART, CATALOG, RECOMMEND_CARDS],
     }),
   }),
 });
@@ -131,7 +138,7 @@ export const managerCartAPI = authApi.injectEndpoints({
         method: `POST`,
         params: params,
       }),
-      invalidatesTags: [CART_PUB, CART, CATALOG],
+      invalidatesTags: [CART_PUB, CART, CATALOG, RECOMMEND_CARDS],
     }),
     removeFromManagerCart: build.mutation<ICart, RemoveChannelReq>({
       query: (params) => ({
@@ -139,7 +146,7 @@ export const managerCartAPI = authApi.injectEndpoints({
         method: `POST`,
         params: params,
       }),
-      invalidatesTags: [CART_PUB, CART, CATALOG],
+      invalidatesTags: [CART_PUB, CART, CATALOG, RECOMMEND_CARDS],
     }),
     // saveCart: build.mutation<{ success: boolean }, void>({
     //   query: () => ({

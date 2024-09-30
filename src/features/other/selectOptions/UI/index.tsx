@@ -155,7 +155,7 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
   }, []);
 
   useEffect(() => {
-    if (single) {
+    if (single && !isFilter) {
       setSelectedOption(defaultValues as IOption);
     } else {
       setSelectedOptions(defaultValues as number[]);

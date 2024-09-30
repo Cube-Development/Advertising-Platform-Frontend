@@ -41,16 +41,7 @@ export const LegalsList: FC<LegalsListProps> = ({
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  const accounts1 = accounts
-    ? [
-        ...accounts,
-        ...accounts,
-        ...accounts,
-        ...accounts,
-        ...accounts,
-        ...accounts,
-      ]
-    : undefined;
+
   return (
     <>
       <div className={styles.profile}>
@@ -64,7 +55,7 @@ export const LegalsList: FC<LegalsListProps> = ({
             !isReadLegalsLoading &&
             !readLegalsError ? (
               <>
-                {accounts1?.map((account, index) => (
+                {accounts?.map((account, index) => (
                   <LegalCard
                     account={account}
                     key={index}
@@ -109,7 +100,7 @@ export const LegalsList: FC<LegalsListProps> = ({
                 },
               }}
             >
-              {accounts1?.map((account, index) => (
+              {accounts?.map((account, index) => (
                 <SwiperSlide key={index}>
                   <LegalCard
                     account={account}

@@ -54,7 +54,7 @@ export const TemplateProjectsList: FC<TemplateProjectsListProps> = ({
                 />
               </motion.div>
             ))}
-            {!isLoading &&
+            {isLoading &&
               Array.from({ length: INTERSECTION_ELEMENTS.advOrders }).map(
                 (_, index) => <SkeletonTemplateProjectCard key={index} />,
               )}

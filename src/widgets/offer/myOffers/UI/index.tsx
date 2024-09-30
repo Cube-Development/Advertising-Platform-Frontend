@@ -46,7 +46,7 @@ export const MyOffers: FC<MyOffersProps> = ({
                 <OfferCard statusFilter={statusFilter} card={card} />
               </motion.div>
             ))}
-            {!isLoading &&
+            {isLoading &&
               Array.from({ length: INTERSECTION_ELEMENTS.bloggerOffers }).map(
                 (_, index) => (
                   <OfferCardSkeleton key={index} statusFilter={statusFilter} />

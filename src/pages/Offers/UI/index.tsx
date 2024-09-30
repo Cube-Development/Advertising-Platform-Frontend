@@ -49,14 +49,14 @@ export const OffersPage: FC = () => {
     status: formState.status,
   };
 
-  // const { data, isFetching } = useGetBloggerOrdersQuery(getParams);
+  const { data, isFetching } = useGetBloggerOrdersQuery(getParams);
 
   useEffect(() => {
     setCurrentPage(1);
   }, [formState]);
 
-  const data = BLOGGER_OFFERS;
-  const isFetching = false;
+  // const data = BLOGGER_OFFERS;
+  // const isFetching = false;
 
   return (
     <div className="container sidebar">
