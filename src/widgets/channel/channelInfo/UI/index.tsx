@@ -9,15 +9,24 @@ import {
   useGetChannelByIdQuery,
 } from "@entities/channel";
 import {
+  catalogAPI,
   getRecommendChannels,
   ICatalogChannel,
   IFormat,
+  useAddToCommonCartMutation,
+  useAddToManagerCartMutation,
+  useAddToPublicCartMutation,
   useGetRecommedChannelsQuery,
+  useRemoveFromCommonCartMutation,
+  useRemoveFromManagerCartMutation,
+  useRemoveFromPublicCartMutation,
 } from "@entities/project";
-import { roles } from "@entities/user";
+import { GenerateGuestId, roles } from "@entities/user";
 import { BREAKPOINT, Languages, PAGE_ANIMATION } from "@shared/config";
-import { useAppSelector } from "@shared/hooks";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
+import { ToastAction, useToast } from "@shared/ui";
 import { motion } from "framer-motion";
+import Cookies from "js-cookie";
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -30,13 +39,19 @@ import styles from "./styles.module.scss";
 interface ChannelInfoProps {}
 
 export const ChannelInfo: FC<ChannelInfoProps> = () => {
+  const userId = Cookies.get("user_id");
+  const guestId = Cookies.get("guest_id") || GenerateGuestId();
+  const projectId = Cookies.get("project_id");
+
   const { id: channel_id } = useParams<{ id: string }>();
-  const { i18n } = useTranslation();
+  const dispatch = useAppDispatch();
+  const { t, i18n } = useTranslation();
+  const { toast } = useToast();
   const language = Languages.find((lang) => {
     return i18n.language === lang.name;
   });
   const [screen, setScreen] = useState<number>(window.innerWidth);
-  const { role } = useAppSelector((state) => state.user);
+  const { isAuth, role } = useAppSelector((state) => state.user);
 
   const { watch, reset, setValue, getValues } = useForm<getRecommendChannels>({
     defaultValues: {
@@ -46,10 +61,27 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
   });
 
   const formFields = watch();
-  const { data: card, isLoading } = useGetChannelByIdQuery({
+
+  const baseParams = {
     channel_id: channel_id || "",
     language: language?.id || Languages[0].id,
-  });
+  };
+
+  const getParams = (
+    user_id?: string,
+    guestId?: string,
+    projectId?: string,
+  ) => {
+    return user_id
+      ? { ...baseParams, user_id: user_id }
+      : projectId
+        ? { ...baseParams, project_id: projectId }
+        : { ...baseParams, guest_id: guestId };
+  };
+
+  const { data: card, isLoading } = useGetChannelByIdQuery(
+    getParams(userId, guestId, projectId),
+  );
 
   const { data: recomendCards, isFetching: isRecommendCardsLoading } =
     useGetRecommedChannelsQuery(
@@ -59,11 +91,21 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
       },
     );
 
-  const [cards, setCards] = useState<ICatalogChannel[]>(
-    recomendCards?.channels || [],
-  );
-
   const [channel, setChannel] = useState<IReadChannelData>(card!);
+
+  // commonCart
+  const [addToCommonCart] = useAddToCommonCartMutation();
+  const [removeFromCommonCart] = useRemoveFromCommonCartMutation();
+  // publicCart
+  const [addToPublicCart] = useAddToPublicCartMutation();
+  const [removeFromPublicCart] = useRemoveFromPublicCartMutation();
+  // managerCart
+  const [addToManagerCart] = useAddToManagerCartMutation();
+  const [removeFromManagerCart] = useRemoveFromManagerCartMutation();
+
+  const [selectedFormat, setSelectedFormat] = useState<IFormat | undefined>(
+    channel?.selected_format,
+  );
 
   useEffect(() => {
     if (card) {
@@ -71,19 +113,317 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
     }
   }, [card]);
 
-  useEffect(() => {
-    if (recomendCards) {
-      setCards([...cards, ...recomendCards.channels]);
-    }
-  }, [recomendCards]);
-
   const handleOnChangePage = () => {
     // setValue(channelParameterData.page, formFields.page + 1);
   };
 
-  const handleChangeCards = (cartChannel: ICatalogChannel) => {};
+  // const handleChangeCards = () => {
+  // const handleNewRecommendCards = () => {
+  // }
+  // const handleChangeCards = (cartChannel: ICatalogChannel) => {
+  //   let newCards: ICatalogChannel[] = [];
+  //   const currentCard = (
+  //     isAuth ? catalogAuth?.channels : catalog?.channels
+  //   )?.find((card) => card.id === cartChannel?.id);
 
-  const [selectedFormat, setSelectedFormat] = useState<IFormat | null>(null);
+  //   const addReq = {
+  //     channel_id: channel?.id!,
+  //     format: selectedFormat?.format!,
+  //     language: language?.id || Languages[0].id,
+  //   };
+
+  //   const removeReq = {
+  //     channel_id: channel?.id!,
+  //     language: language?.id || Languages[0].id,
+  //   };
+
+  //   if (channel && !channel.selected_format && selectedFormat) {
+  //     const newCard = { ...channel, selected_format: selectedFormat };
+  //     if (!isAuth && guestId) {
+  //       addToPublicCart({ ...addReq, guest_id: guestId })
+  //         .unwrap()
+  //         .then((data) => {
+  //           setChannel(newCard);
+  //         })
+  //         .catch((error) => {
+  //           toast({
+  //             variant: "error",
+  //             title: t("toasts.catalog.add.error"),
+  //             action: <ToastAction altText="Ok">Ok</ToastAction>,
+  //           });
+  //           console.error("Ошибка при добавлении в корзину", error);
+  //         });
+  //     } else if (isAuth && role === roles.advertiser) {
+  //       addToCommonCart(addReq)
+  //         .unwrap()
+  //         .then((data) => {
+  //           setChannel(newCard);
+  //         })
+  //         .catch((error) => {
+  //           toast({
+  //             variant: "error",
+  //             title: t("toasts.catalog.add.error"),
+  //             action: <ToastAction altText="Ok">Ok</ToastAction>,
+  //           });
+  //           console.error("Ошибка при добавлении в корзину", error);
+  //         });
+  //     } else if (isAuth && role === roles.manager && projectId) {
+  //       addToManagerCart({ ...addReq, project_id: projectId })
+  //         .unwrap()
+  //         .then((data) => {
+  //           setChannel(newCard);
+  //         })
+  //         .catch((error) => {
+  //           toast({
+  //             variant: "error",
+  //             title: t("toasts.catalog.add.error"),
+  //             action: <ToastAction altText="Ok">Ok</ToastAction>,
+  //           });
+  //           console.error("Ошибка при добавлении в корзину", error);
+  //         });
+  //     }
+  //   } else if (
+  //     channel?.selected_format?.format !== selectedFormat?.format &&
+  //     selectedFormat
+  //   ) {
+  //     const newCard = { ...channel, selected_format: selectedFormat };
+  //     if (!isAuth && guestId) {
+  //       addToPublicCart({ ...addReq, guest_id: guestId })
+  //         .unwrap()
+  //         .then((data) => {
+  //           setChannel(newCard);
+  //         })
+  //         .catch((error) => {
+  //           toast({
+  //             variant: "error",
+  //             title: t("toasts.catalog.add.error"),
+  //             action: <ToastAction altText="Ok">Ok</ToastAction>,
+  //           });
+  //           console.error("Ошибка при добавлении в корзину", error);
+  //         });
+  //     } else if (isAuth && role === roles.advertiser) {
+  //       addToCommonCart(addReq)
+  //         .unwrap()
+  //         .then((data) => {
+  //           setChannel(newCard);
+  //         })
+  //         .catch((error) => {
+  //           toast({
+  //             variant: "error",
+  //             title: t("toasts.catalog.add.error"),
+  //             action: <ToastAction altText="Ok">Ok</ToastAction>,
+  //           });
+  //           console.error("Ошибка при добавлении в корзину", error);
+  //         });
+  //     } else if (isAuth && role === roles.manager && projectId) {
+  //       addToManagerCart({ ...addReq, project_id: projectId })
+  //         .unwrap()
+  //         .then((data) => {
+  //           setChannel(newCard);
+  //         })
+  //         .catch((error) => {
+  //           toast({
+  //             variant: "error",
+  //             title: t("toasts.catalog.add.error"),
+  //             action: <ToastAction altText="Ok">Ok</ToastAction>,
+  //           });
+  //           console.error("Ошибка при добавлении в корзину", error);
+  //         });
+  //     }
+  //   } else {
+  //     const newCard = { ...channel, selected_format: undefined };
+  //     if (!isAuth && guestId) {
+  //       removeFromPublicCart({ ...removeReq, guest_id: guestId })
+  //         .unwrap()
+  //         .then((data) => {
+  //           setChannel(newCard);
+  //         })
+  //         .catch((error) => {
+  //           toast({
+  //             variant: "error",
+  //             title: t("toasts.catalog.remove.error"),
+  //             action: <ToastAction altText="Ok">Ok</ToastAction>,
+  //           });
+  //           console.error("Ошибка при удалении с корзины", error);
+  //         });
+  //     } else if (isAuth && role === roles.advertiser) {
+  //       removeFromCommonCart(removeReq)
+  //         .unwrap()
+  //         .then((data) => {
+  //           setChannel(newCard);
+  //         })
+  //         .catch((error) => {
+  //           toast({
+  //             variant: "error",
+  //             title: t("toasts.catalog.remove.error"),
+  //             action: <ToastAction altText="Ok">Ok</ToastAction>,
+  //           });
+  //           console.error("Ошибка при удалении с корзины", error);
+  //         });
+  //     } else if (isAuth && role === roles.manager && projectId) {
+  //       removeFromManagerCart({ ...removeReq, project_id: projectId })
+  //         .unwrap()
+  //         .then((data) => {
+  //           setChannel(newCard);
+  //         })
+  //         .catch((error) => {
+  //           toast({
+  //             variant: "error",
+  //             title: t("toasts.catalog.remove.error"),
+  //             action: <ToastAction altText="Ok">Ok</ToastAction>,
+  //           });
+  //           console.error("Ошибка при удалении с корзины", error);
+  //         });
+  //     }
+  //   }
+  // };
+
+  const handleSuccsessAdd = () => {};
+
+  const handleChangeCartCards = () => {
+    const currentCard = channel;
+    console.log("handleChangeCartCards", currentCard);
+    const cartChannel = { ...channel, selected_format: selectedFormat };
+    handleChangeCards(
+      cartChannel as unknown as ICatalogChannel,
+      currentCard as unknown as ICatalogChannel,
+    );
+  };
+
+  const handleChangeRecommendCards = (cartChannel: ICatalogChannel) => {
+    const currentCard = recomendCards?.channels?.find(
+      (card) => card.id === cartChannel?.id,
+    );
+    console.log("handleChangeCartCards", currentCard);
+    handleChangeCards(cartChannel, currentCard);
+  };
+
+  const handleChangeCards = (
+    cartChannel: ICatalogChannel,
+    currentCard: ICatalogChannel | undefined,
+  ) => {
+    if (cartChannel?.selected_format && currentCard) {
+      const addReq = {
+        channel_id: cartChannel?.id,
+        format: cartChannel?.selected_format.format,
+        match: cartChannel?.match,
+        language: language?.id || Languages[0].id,
+      };
+      const removeReq = {
+        channel_id: cartChannel?.id,
+        language: language?.id || Languages[0].id,
+      };
+      if (
+        currentCard?.selected_format?.format ===
+        cartChannel?.selected_format?.format
+      ) {
+        const newCard = { ...channel, selected_format: undefined };
+        if (!isAuth && guestId) {
+          removeFromPublicCart({ ...removeReq, guest_id: guestId })
+            .unwrap()
+            .then((data) => {
+              currentCard.id === channel.id && setChannel(newCard);
+            })
+            .catch((error) => {
+              toast({
+                variant: "error",
+                title: t("toasts.catalog.remove.error"),
+                action: <ToastAction altText="Ok">Ok</ToastAction>,
+              });
+              console.error("Ошибка при удалении с корзины", error);
+            });
+        } else if (isAuth && role === roles.advertiser) {
+          removeFromCommonCart(removeReq)
+            .unwrap()
+            .then((data) => {
+              currentCard.id === channel.id && setChannel(newCard);
+            })
+            .catch((error) => {
+              toast({
+                variant: "error",
+                title: t("toasts.catalog.remove.error"),
+                action: <ToastAction altText="Ok">Ok</ToastAction>,
+              });
+              console.error("Ошибка при удалении с корзины", error);
+            });
+        } else if (isAuth && role === roles.manager && projectId) {
+          removeFromManagerCart({ ...removeReq, project_id: projectId })
+            .unwrap()
+            .then((data) => {
+              currentCard.id === channel.id && setChannel(newCard);
+            })
+            .catch((error) => {
+              toast({
+                variant: "error",
+                title: t("toasts.catalog.remove.error"),
+                action: <ToastAction altText="Ok">Ok</ToastAction>,
+              });
+              console.error("Ошибка при удалении с корзины", error);
+            });
+        }
+      } else if (
+        currentCard?.selected_format?.format !==
+        cartChannel?.selected_format?.format
+      ) {
+        const newCard = { ...channel, selected_format: selectedFormat };
+        if (!isAuth && guestId) {
+          addToPublicCart({ ...addReq, guest_id: guestId })
+            .unwrap()
+            .then((data) => {
+              currentCard.id === channel.id && setChannel(newCard);
+            })
+            .catch((error) => {
+              toast({
+                variant: "error",
+                title: t("toasts.catalog.add.error"),
+                action: <ToastAction altText="Ok">Ok</ToastAction>,
+              });
+              console.error("Ошибка при добавлении в корзину", error);
+            });
+        } else if (isAuth && role === roles.advertiser) {
+          addToCommonCart(addReq)
+            .unwrap()
+            .then((data) => {
+              currentCard.id === channel.id && setChannel(newCard);
+            })
+            .catch((error) => {
+              toast({
+                variant: "error",
+                title: t("toasts.catalog.add.error"),
+                action: <ToastAction altText="Ok">Ok</ToastAction>,
+              });
+              console.error("Ошибка при добавлении в корзину", error);
+            });
+        } else if (isAuth && role === roles.manager && projectId) {
+          addToManagerCart({ ...addReq, project_id: projectId })
+            .unwrap()
+            .then((data) => {
+              currentCard.id === channel.id && setChannel(newCard);
+            })
+            .catch((error) => {
+              toast({
+                variant: "error",
+                title: t("toasts.catalog.add.error"),
+                action: <ToastAction altText="Ok">Ok</ToastAction>,
+              });
+              console.error("Ошибка при добавлении в корзину", error);
+            });
+        }
+      }
+      const newCards =
+        recomendCards?.channels?.filter((item) => item.id !== cartChannel.id) ||
+        [];
+      dispatch(
+        catalogAPI.util.updateQueryData(
+          "getRecommedChannels",
+          { ...formFields },
+          (draft) => {
+            draft.channels = newCards;
+          },
+        ),
+      );
+    }
+  };
 
   const handleChangeFormat = (selectedValue: IFormat) => {
     setSelectedFormat(selectedValue);
@@ -91,9 +431,13 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
 
   useEffect(() => {
     if (card) {
-      setSelectedFormat(card?.format[0]);
+      if (card.selected_format) {
+        setSelectedFormat(card?.selected_format);
+      } else {
+        setSelectedFormat(card?.format[0]);
+      }
     }
-  }, [card?.format[0]]);
+  }, [card]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -104,6 +448,7 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
   let custom = 0;
   return (
     <>
@@ -151,6 +496,7 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
                             card={channel}
                             selectedFormat={selectedFormat!}
                             changeFormat={handleChangeFormat}
+                            onChange={handleChangeCartCards}
                           />
                         </motion.div>
                       </>
@@ -189,6 +535,7 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
                         card={channel}
                         selectedFormat={selectedFormat!}
                         changeFormat={handleChangeFormat}
+                        onChange={handleChangeCartCards}
                       />
                     </motion.div>
                   </>
@@ -202,9 +549,9 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
       </div>
       {role !== roles.blogger && (
         <RecommendationList
-          cards={cards}
+          cards={recomendCards?.channels || []}
           isLoading={isRecommendCardsLoading}
-          onChangeCard={handleChangeCards}
+          onChangeCard={handleChangeRecommendCards}
           changePage={handleOnChangePage}
         />
       )}

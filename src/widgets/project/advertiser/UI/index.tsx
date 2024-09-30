@@ -2,18 +2,13 @@ import {
   advertiserProjectTypes,
   advManagerProjectStatusFilter,
   getProjectsCardReq,
+  IAdvManagerProjectsDev,
   myProjectStatusFilter,
   projectTypesFilter,
   useGetAdvManagerProjectsQuery,
   useGetAdvProjectsQuery,
 } from "@entities/project";
-import {
-  advMyProjectActiveCARDS,
-  INTERSECTION_ELEMENTS,
-  Languages,
-  MY_PROJECT_MANAGER_DEV_CARDS,
-  MY_PROJECT_SAVE_CARDS,
-} from "@shared/config";
+import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 import i18n from "@shared/config/i18n";
 import { QueryParams } from "@shared/functions";
 import { pageFilter } from "@shared/routing";
@@ -88,8 +83,8 @@ export const AdvOrders: FC = () => {
       },
     );
   // console.log("projectsSelf", projectsSelf);
-  const save_cards = MY_PROJECT_SAVE_CARDS;
-  const dev_cards = MY_PROJECT_MANAGER_DEV_CARDS;
+  // const save_cards = MY_PROJECT_SAVE_CARDS;
+  // const dev_cards = MY_PROJECT_MANAGER_DEV_CARDS;
   return (
     <div className="container sidebar">
       <div className={styles.wrapper}>
@@ -112,21 +107,22 @@ export const AdvOrders: FC = () => {
           <DevProjectsList
             // projects={projectsSelf?.projects || projectsManager?.projects || []}
             projects={
-              dev_cards.projects ||
-              (projectsSelf?.status === formState.status &&
-                projectsSelf?.projects) ||
-              (projectsManager?.status === formState.status &&
-                projectsManager?.projects) ||
-              []
+              // dev_cards.projects ||
+              // (projectsSelf?.status === formState.status &&
+              //   projectsSelf?.projects) ||
+              // (projectsManager?.status === formState.status &&
+              //   projectsManager?.projects) ||
+              (projectsManager as IAdvManagerProjectsDev)?.projects || []
             }
             handleOnChangePage={handleOnChangePage}
             isLoading={isFetchingSelf || isFetchingManager}
-            isLast={projectsSelf?.isLast || projectsManager?.isLast || false}
+            isLast={projectsManager?.isLast || false}
             typeFilter={formState.type}
           />
         ) : formState.type === projectTypesFilter.savedProject ? (
           <TemplateProjectsList
-            projects={save_cards.projects || []}
+            // projects={save_cards.projects || []}
+            projects={[]}
             handleOnChangePage={handleOnChangePage}
             isLoading={isFetchingSelf || isFetchingManager}
             isLast={projectsSelf?.isLast || projectsManager?.isLast || false}
@@ -142,11 +138,12 @@ export const AdvOrders: FC = () => {
             typeFilter={formState.type as projectTypesFilter}
             // projects={projectsSelf?.projects || projectsManager?.projects || []}
             projects={
-              // (projectsSelf?.status === formState.status &&
-              //   projectsSelf?.projects) ||
-              // (projectsManager?.status === formState.status &&
-              //   projectsManager?.projects) ||
-              advMyProjectActiveCARDS.projects || []
+              (projectsSelf?.status === formState.status &&
+                projectsSelf?.projects) ||
+              (projectsManager?.status === formState.status &&
+                projectsManager?.projects) ||
+              []
+              // advMyProjectActiveCARDS.projects || []
             }
             handleOnChangePage={handleOnChangePage}
             isLoading={isFetchingSelf || isFetchingManager}

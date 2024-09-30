@@ -15,6 +15,7 @@ import {
   managerProjectStatusFilter,
   orderStatus,
   orderStatusChat,
+  useGetPostQuery,
 } from "@entities/project";
 import { roles } from "@entities/user";
 import {
@@ -75,32 +76,32 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
   const { toast } = useToast();
   const [screen, setScreen] = useState<number>(window.innerWidth);
   const [isSubcardOpen, setSubcardOpen] = useState(false);
-  // const { data: post, error } = useGetPostQuery({ order_id: subcard.id });
-  const post = {
-    id: "string",
-    platform: 1,
-    comment: "string",
-    photo: ["ff"],
-    video: ["ff"],
-    files: ["ff"],
-    buttons: [
-      {
-        id: "string",
-        content: "string",
-        url: "string",
-      },
-    ],
-    text: ["dd"],
-    post_type: 1,
-  };
+  const { data: post, error } = useGetPostQuery({ order_id: subcard.id });
+  // const post = {
+  //   id: "string",
+  //   platform: 1,
+  //   comment: "string",
+  //   photo: ["ff"],
+  //   video: ["ff"],
+  //   files: ["ff"],
+  //   buttons: [
+  //     {
+  //       id: "string",
+  //       content: "string",
+  //       url: "string",
+  //     },
+  //   ],
+  //   text: ["dd"],
+  //   post_type: 1,
+  // };
   // const error = 5
-  // if (error) {
-  //   toast({
-  //     variant: "error",
-  //     title: t("toasts.orders_advertiser.reject_post.error"),
-  //   });
-  //   console.error("error: ", error);
-  // }
+  if (error) {
+    toast({
+      variant: "error",
+      title: t("toasts.orders_advertiser.reject_post.error"),
+    });
+    console.error("error: ", error);
+  }
 
   useEffect(() => {
     const handleResize = () => {

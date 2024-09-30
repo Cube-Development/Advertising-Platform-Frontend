@@ -13,9 +13,11 @@ export const NewProject: FC<IStartProjectProps> = ({ listLength }) => {
   return (
     <Link to={paths.catalog}>
       <MyButton buttons_type="button__blue" className={styles.button}>
-        {listLength
-          ? t(`orders_advertiser.new_project`)
-          : t(`orders_advertiser.start_new_project`)}
+        <p>
+          {listLength
+            ? t(`orders_advertiser.new_project`)
+            : t(`orders_advertiser.start_new_project`)}
+        </p>
         <PlusIcon2 />
       </MyButton>
     </Link>

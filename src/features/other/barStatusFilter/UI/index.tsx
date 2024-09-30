@@ -3,8 +3,11 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import {
   advManagerProjectStatus,
+  advManagerProjectStatusFilter,
   advMyProjectStatus,
   managerProjectStatus,
+  managerProjectStatusFilter,
+  myProjectStatusFilter,
   projectTypesFilter,
 } from "@entities/project";
 import { roles } from "@entities/user";
@@ -20,10 +23,22 @@ import { Swiper, SwiperSlide } from "swiper/react";
 interface BarStatusFilterProps {
   page: pageFilter;
   changeStatus: (
-    status: channelStatusFilter | offerStatusFilter | string,
+    status:
+      | channelStatusFilter
+      | offerStatusFilter
+      | myProjectStatusFilter
+      | advManagerProjectStatusFilter
+      | managerProjectStatusFilter
+      | string,
   ) => void;
   typeFilter?: string;
-  statusFilter: channelStatusFilter | offerStatusFilter | string;
+  statusFilter:
+    | channelStatusFilter
+    | offerStatusFilter
+    | myProjectStatusFilter
+    | advManagerProjectStatusFilter
+    | managerProjectStatusFilter
+    | string;
 }
 
 export const BarStatusFilter: FC<BarStatusFilterProps> = ({
@@ -65,6 +80,27 @@ export const BarStatusFilter: FC<BarStatusFilterProps> = ({
     };
   }, []);
 
+  const handleChangeStepSwiper = (
+    type:
+      | channelStatusFilter
+      | offerStatusFilter
+      | myProjectStatusFilter
+      | advManagerProjectStatusFilter
+      | managerProjectStatusFilter,
+    index: number,
+  ) => {
+    toggleStatus(type);
+    swiperRef.current?.slideTo(index);
+  };
+
+  const handleSlideChange = () => {
+    if (swiperRef.current) {
+      const activeIndex = swiperRef.current.activeIndex;
+      // console.log("activeIndex", activeIndex, projectStatus[activeIndex]?.type)
+      toggleStatus(projectStatus[activeIndex]?.type);
+    }
+  };
+
   return (
     <>
       {screen > BREAKPOINT.MD ? (
@@ -96,13 +132,17 @@ export const BarStatusFilter: FC<BarStatusFilterProps> = ({
               },
             }}
             className={styles.subtypes}
+            onSlideChange={handleSlideChange}
           >
             {projectStatus.map((type, index) => (
-              <SwiperSlide key={index}>
+              <SwiperSlide
+                key={index}
+                onClick={() => handleChangeStepSwiper(type.type, index)}
+              >
                 <li
                   key={index}
                   className={statusFilter === type.type ? styles.active : ""}
-                  onClick={() => toggleStatus(type.type)}
+                  // onClick={() => toggleStatus(type.type)}
                 >
                   {t(type.name)}
                 </li>

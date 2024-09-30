@@ -1,6 +1,7 @@
 import { PostTypesNum } from "@entities/platform";
 import {
   advManagerProjectStatusFilter,
+  IAdvManagerProjectsDev,
   IAdvProjects,
   IAdvSubprojects,
   ICreateDate,

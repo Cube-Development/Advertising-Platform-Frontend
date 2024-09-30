@@ -1,11 +1,13 @@
 .wrapper {
   display: grid;
-  grid-auto-flow: row;
+  grid-template: 1fr min-content / 1fr;
 
   border-radius: 15px;
   box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.2);
   background: var(--Personal-colors-White);
   position: relative;
+
+  min-height: 340px;
 
   .channel {
     display: grid;

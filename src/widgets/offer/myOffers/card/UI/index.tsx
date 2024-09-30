@@ -25,33 +25,33 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter }) => {
   const { t } = useTranslation();
   const { toast } = useToast();
 
-  // const { data: post, error } = useGetPostQuery({ order_id: card?.id });
+  const { data: post, error } = useGetPostQuery({ order_id: card?.id });
 
-  const post = {
-    id: "string",
-    platform: 1,
-    comment: "string",
-    photo: ["ff"],
-    video: ["ff"],
-    files: ["ff"],
-    buttons: [
-      {
-        id: "string",
-        content: "string",
-        url: "string",
-      },
-    ],
-    text: ["dd"],
-    post_type: 1,
-  };
+  // const post = {
+  //   id: "string",
+  //   platform: 1,
+  //   comment: "string",
+  //   photo: ["ff"],
+  //   video: ["ff"],
+  //   files: ["ff"],
+  //   buttons: [
+  //     {
+  //       id: "string",
+  //       content: "string",
+  //       url: "string",
+  //     },
+  //   ],
+  //   text: ["dd"],
+  //   post_type: 1,
+  // };
 
-  // if (error) {
-  //   toast({
-  //     variant: "error",
-  //     title: t("toasts.orders_advertiser.reject_post.error"),
-  //   });
-  //   console.error("error: ", error);
-  // }
+  if (error) {
+    toast({
+      variant: "error",
+      title: t("toasts.orders_advertiser.reject_post.error"),
+    });
+    console.error("error: ", error);
+  }
   return (
     <div
       className={`${styles.card} ${statusFilter === offerStatusFilter.active ? styles.active__chat : ""} border__gradient`}
@@ -129,7 +129,7 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter }) => {
               </div>
             </div>
             <div className={styles.card__active__buttons}>
-              <SeePost post={post} />
+              <SeePost post={post!} />
               <div
                 className={`${CheckDate(typeof card?.publish_date === "object" ? card?.publish_date.date_to : card?.publish_date) ? "" : "deactive"}`}
               >
@@ -160,7 +160,7 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter }) => {
                   <AcceptOffer order_id={card.id} />
                 )}
               </div>
-              <SeePost post={post} />
+              <SeePost post={post!} />
             </div>
           </div>
         ) : statusFilter === offerStatusFilter.completed ? (

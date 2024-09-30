@@ -32,15 +32,14 @@ export const SelectSex: FC<SelectSexProps> = ({
   const [position, setPosition] = useState<number | null>(
     defaultValues !== undefined
       ? defaultValues
-      : isCatalog
-        ? null
-        : PLATFORM_PARAMETERS.defaultSexMale,
+      : // : isCatalog
+        //   ? null
+        PLATFORM_PARAMETERS.defaultSexMale,
   );
 
   const debouncedPosition = useDebounce(position, DEBOUNCE.sex);
 
   const handleChange = (newPosition: number | null) => {
-    console.log("newPosition", newPosition);
     if (isCatalog) {
       const { filter } = getValues && getValues();
       const updatedFilter = {

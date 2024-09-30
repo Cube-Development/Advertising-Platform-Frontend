@@ -23,6 +23,7 @@ export interface IReadChannelData {
   grade: number;
   common_count: number;
   rating_type: IRatingType[];
+  selected_format?: IFormat;
 }
 
 export interface IRatingType {

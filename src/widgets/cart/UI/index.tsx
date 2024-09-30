@@ -101,7 +101,6 @@ export const Cart: FC = () => {
   }, [currentCart]);
 
   const formFields = watch();
-  console.log("!currentCart", !currentCart);
   const { data: recomendCards } = useGetRecommedChannelsQuery(
     { ...formFields },
     {
@@ -119,24 +118,155 @@ export const Cart: FC = () => {
   const [addToManagerCart] = useAddToManagerCartMutation();
   const [removeFromManagerCart] = useRemoveFromManagerCartMutation();
 
+  // const handleChangeCartCards = (cartChannel: ICatalogChannel) => {
+  //   const currentCard = currentCart.channels?.find(
+  //     (card) => card.id === cartChannel?.id
+  //   );
+  //   console.log("handleChangeCartCards", currentCard);
+  //   // handleChange(cartChannel, currentCard)
+  //   if (cartChannel?.selected_format && currentCard) {
+  //     const addReq = {
+  //       channel_id: cartChannel?.id,
+  //       format: cartChannel?.selected_format.format,
+  //       match: cartChannel?.match,
+  //       language: language?.id || Languages[0].id,
+  //     };
+  //     const removeReq = {
+  //       channel_id: cartChannel?.id,
+  //       language: language?.id || Languages[0].id,
+  //     };
+  //     if (
+  //       currentCard?.selected_format?.format ===
+  //       cartChannel?.selected_format?.format
+  //     ) {
+  //       if (!isAuth && guestId) {
+  //         removeFromPublicCart({ ...removeReq, guest_id: guestId })
+  //           .unwrap()
+  //           .then((data) => {
+  //             setCurrentCart(data);
+  //           })
+  //           .catch((error) => {
+  //             toast({
+  //               variant: "error",
+  //               title: t("toasts.catalog.remove.error"),
+  //               action: <ToastAction altText="Ok">Ok</ToastAction>,
+  //             });
+  //             console.error("Ошибка при удалении с корзины", error);
+  //           });
+  //       } else if (isAuth && role === roles.advertiser) {
+  //         removeFromCommonCart(removeReq)
+  //           .unwrap()
+  //           .then((data) => {
+  //             setCurrentCart(data);
+  //           })
+  //           .catch((error) => {
+  //             toast({
+  //               variant: "error",
+  //               title: t("toasts.catalog.remove.error"),
+  //               action: <ToastAction altText="Ok">Ok</ToastAction>,
+  //             });
+  //             console.error("Ошибка при удалении с корзины", error);
+  //           });
+  //       } else if (isAuth && role === roles.manager && projectId) {
+  //         removeFromManagerCart({ ...removeReq, project_id: projectId })
+  //           .unwrap()
+  //           .then((data) => {
+  //             setCurrentCart(data);
+  //           })
+  //           .catch((error) => {
+  //             toast({
+  //               variant: "error",
+  //               title: t("toasts.catalog.remove.error"),
+  //               action: <ToastAction altText="Ok">Ok</ToastAction>,
+  //             });
+  //             console.error("Ошибка при удалении с корзины", error);
+  //           });
+  //       }
+  //     } else if (
+  //       currentCard?.selected_format?.format !==
+  //       cartChannel?.selected_format?.format
+  //     ) {
+  //       if (!isAuth && guestId) {
+  //         addToPublicCart({ ...addReq, guest_id: guestId })
+  //           .unwrap()
+  //           .then((data) => {
+  //             setCurrentCart(data);
+  //           })
+  //           .catch((error) => {
+  //             toast({
+  //               variant: "error",
+  //               title: t("toasts.catalog.add.error"),
+  //               action: <ToastAction altText="Ok">Ok</ToastAction>,
+  //             });
+  //             console.error("Ошибка при добавлении в корзину", error);
+  //           });
+  //       } else if (isAuth && role === roles.advertiser) {
+  //         addToCommonCart(addReq)
+  //           .unwrap()
+  //           .then((data) => {
+  //             setCurrentCart(data);
+  //           })
+  //           .catch((error) => {
+  //             toast({
+  //               variant: "error",
+  //               title: t("toasts.catalog.add.error"),
+  //               action: <ToastAction altText="Ok">Ok</ToastAction>,
+  //             });
+  //             console.error("Ошибка при добавлении в корзину", error);
+  //           });
+  //       }
+  //     } else if (isAuth && role === roles.manager && projectId) {
+  //       addToManagerCart({ ...addReq, project_id: projectId })
+  //         .unwrap()
+  //         .then((data) => {
+  //           setCurrentCart(data);
+  //         })
+  //         .catch((error) => {
+  //           toast({
+  //             variant: "error",
+  //             title: t("toasts.catalog.add.error"),
+  //             action: <ToastAction altText="Ok">Ok</ToastAction>,
+  //           });
+  //           console.error("Ошибка при добавлении в корзину", error);
+  //         });
+  //     }
+  //   }
+  // };
+
   const handleChangeCartCards = (cartChannel: ICatalogChannel) => {
     const currentCard = currentCart.channels?.find(
-      (card) => card.id === cartChannel.id,
+      (card) => card.id === cartChannel?.id,
     );
-    if (cartChannel.selected_format && currentCard) {
+    console.log("handleChangeCartCards", currentCard);
+    handleChangeCards(cartChannel, currentCard);
+  };
+
+  const handleChangeRecommendCards = (cartChannel: ICatalogChannel) => {
+    const currentCard = recomendCards?.channels?.find(
+      (card) => card.id === cartChannel?.id,
+    );
+    console.log("handleChangeCartCards", currentCard);
+    handleChangeCards(cartChannel, currentCard);
+  };
+
+  const handleChangeCards = (
+    cartChannel: ICatalogChannel,
+    currentCard: ICatalogChannel | undefined,
+  ) => {
+    if (cartChannel?.selected_format && currentCard) {
       const addReq = {
-        channel_id: cartChannel.id,
-        format: cartChannel.selected_format.format,
-        match: cartChannel.match,
+        channel_id: cartChannel?.id,
+        format: cartChannel?.selected_format.format,
+        match: cartChannel?.match,
         language: language?.id || Languages[0].id,
       };
       const removeReq = {
-        channel_id: cartChannel.id,
+        channel_id: cartChannel?.id,
         language: language?.id || Languages[0].id,
       };
       if (
-        currentCard.selected_format?.format ===
-        cartChannel.selected_format?.format
+        currentCard?.selected_format?.format ===
+        cartChannel?.selected_format?.format
       ) {
         if (!isAuth && guestId) {
           removeFromPublicCart({ ...removeReq, guest_id: guestId })
@@ -182,8 +312,8 @@ export const Cart: FC = () => {
             });
         }
       } else if (
-        currentCard.selected_format?.format !==
-        cartChannel.selected_format?.format
+        currentCard?.selected_format?.format !==
+        cartChannel?.selected_format?.format
       ) {
         if (!isAuth && guestId) {
           addToPublicCart({ ...addReq, guest_id: guestId })
@@ -213,21 +343,21 @@ export const Cart: FC = () => {
               });
               console.error("Ошибка при добавлении в корзину", error);
             });
-        }
-      } else if (isAuth && role === roles.manager && projectId) {
-        addToManagerCart({ ...addReq, project_id: projectId })
-          .unwrap()
-          .then((data) => {
-            setCurrentCart(data);
-          })
-          .catch((error) => {
-            toast({
-              variant: "error",
-              title: t("toasts.catalog.add.error"),
-              action: <ToastAction altText="Ok">Ok</ToastAction>,
+        } else if (isAuth && role === roles.manager && projectId) {
+          addToManagerCart({ ...addReq, project_id: projectId })
+            .unwrap()
+            .then((data) => {
+              setCurrentCart(data);
+            })
+            .catch((error) => {
+              toast({
+                variant: "error",
+                title: t("toasts.catalog.add.error"),
+                action: <ToastAction altText="Ok">Ok</ToastAction>,
+              });
+              console.error("Ошибка при добавлении в корзину", error);
             });
-            console.error("Ошибка при добавлении в корзину", error);
-          });
+        }
       }
     }
   };
@@ -248,7 +378,7 @@ export const Cart: FC = () => {
         <div className={styles.cards}>
           <RecommendationList
             channels={recomendCards?.channels || []}
-            onChangeCard={handleChangeCartCards}
+            onChangeCard={handleChangeRecommendCards}
           />
           <div></div>
         </div>

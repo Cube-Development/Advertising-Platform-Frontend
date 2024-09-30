@@ -45,7 +45,7 @@ export const ActiveChannels: FC<ActiveChannelsProps> = ({
               <ChannelCard statusFilter={statusFilter} card={card} />
             </motion.div>
           ))}
-          {!isLoading &&
+          {isLoading &&
             Array.from({ length: INTERSECTION_ELEMENTS.myChannels }).map(
               (_, index) => (
                 <ChannelCardSkeleton key={index} statusFilter={statusFilter} />

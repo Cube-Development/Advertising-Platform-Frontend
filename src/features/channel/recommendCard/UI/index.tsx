@@ -4,6 +4,7 @@ import {
   IChangeCards,
   IFormat,
 } from "@entities/project";
+import { ChannelCardDescription } from "@features/catalog/catalogCard/components";
 import {
   ArrowSmallVerticalIcon,
   BoyIcon,
@@ -84,7 +85,7 @@ export const RecommendCard: FC<RecommendCardProps> = ({
           </div>
           <div className={styles.column__info}>
             <div className={styles.info}>
-              <p className={styles.title}>{card?.name}</p>
+              <p className={`${styles.title} truncate`}>{card?.name}</p>
               <p className={styles.category}>{card?.category}</p>
               <div className={styles.rate}>
                 <RatingIcon />
@@ -97,7 +98,8 @@ export const RecommendCard: FC<RecommendCardProps> = ({
             <StarIcon4 />
           </div>
         </div>
-        <span className={styles.description}>{card?.description}</span>
+        <ChannelCardDescription description={card?.description} />
+        {/* <span className={styles.description}>{card?.description}</span> */}
         <Accordion type="single" collapsible>
           <AccordionItem
             value={`item-${card.id}`}

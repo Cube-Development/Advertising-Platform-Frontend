@@ -17,9 +17,11 @@ export const TurnkeyProject: FC<IStartProjectProps> = ({ listLength }) => {
         buttons_type={"button__orange"}
         className={styles.button}
       >
-        {listLength
-          ? t(`orders_advertiser.turnkey_project`)
-          : t(`orders_advertiser.start_turnkey_project`)}
+        <p>
+          {listLength
+            ? t(`orders_advertiser.turnkey_project`)
+            : t(`orders_advertiser.start_turnkey_project`)}
+        </p>
         <KeyIcon className="icon__white" />
       </MyButton>
     </Link>

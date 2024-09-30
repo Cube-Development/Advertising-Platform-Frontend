@@ -337,8 +337,7 @@ export const CatalogBlock: FC = () => {
       );
     }
   };
-  console.log(filter);
-  console.log(formFields, search_string);
+
   return (
     <div className="container">
       <div className={`${styles.wrapper}`}>

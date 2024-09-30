@@ -1,5 +1,3 @@
-import { channelStatusFilter } from "@entities/channel";
-import { offerStatusFilter } from "@entities/offer";
 import {
   IManagerNewProjectCard,
   IManagerProjectCard,
@@ -45,7 +43,7 @@ export const ManagerOrders: FC = () => {
     elements_on_page: INTERSECTION_ELEMENTS.managerOrders,
   };
 
-  // const { data, isFetching } = useGetManagerProjectsQuery(getParams);
+  const { data, isFetching } = useGetManagerProjectsQuery(getParams);
   // const [tariffs, setTariffs] = useState<
   //   IManagerNewProjectCard[] | IManagerProjectCard[]
   // >(data ? data.projects : []);
@@ -71,17 +69,17 @@ export const ManagerOrders: FC = () => {
   useEffect(() => {
     setCurrentPage(1);
   }, [formState.status]);
-  console.log(formState.status);
+  // console.log(formState.status);
 
-  const data =
-    formState.status === managerProjectStatusFilter.active
-      ? managerActiveCARDS
-      : formState.status === managerProjectStatusFilter.completed
-        ? managerCompletedCARDS
-        : formState.status === managerProjectStatusFilter.new
-          ? managerNewCARDS
-          : managerAgreedCARDS;
-  const isFetching = false;
+  // const data =
+  //   formState.status === managerProjectStatusFilter.active
+  //     ? managerActiveCARDS
+  //     : formState.status === managerProjectStatusFilter.completed
+  //       ? managerCompletedCARDS
+  //       : formState.status === managerProjectStatusFilter.new
+  //         ? managerNewCARDS
+  //         : managerAgreedCARDS;
+  // const isFetching = false;
 
   return (
     <div className="container sidebar">

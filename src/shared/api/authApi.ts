@@ -11,6 +11,7 @@ import {
   CHAT,
   LEGALS,
   MANAGER_PROJECTS,
+  RECOMMEND_CARDS,
 } from "@shared/api/tags";
 
 export const authApi = createApi({
@@ -20,6 +21,7 @@ export const authApi = createApi({
   tagTypes: [
     CART,
     CATALOG,
+    RECOMMEND_CARDS,
     BLOGGER_CHANNELS,
     CART_PUB,
     BALANCE,

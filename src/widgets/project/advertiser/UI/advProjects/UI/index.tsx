@@ -59,7 +59,7 @@ export const AdvProjectsList: FC<AdvProjectsListProps> = ({
                 />
               </motion.div>
             ))}
-            {!isLoading &&
+            {isLoading &&
               Array.from({ length: INTERSECTION_ELEMENTS.advOrders }).map(
                 (_, index) => (
                   <ProjectCardSkeleton

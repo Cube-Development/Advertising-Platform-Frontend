@@ -21,17 +21,26 @@ import {
   SelectOptions,
   SelectSex,
 } from "@features/other";
-import { CancelIcon2, ParametersIcon, QualityIcon } from "@shared/assets";
-import { BREAKPOINT, Languages } from "@shared/config";
+import {
+  ArrowSmallVerticalIcon,
+  CancelIcon2,
+  ParametersIcon,
+  QualityIcon,
+} from "@shared/assets";
+import { accordionTypes, BREAKPOINT, Languages } from "@shared/config";
 import { pageFilter } from "@shared/routing";
 import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
   Drawer,
   DrawerClose,
   DrawerContent,
   DrawerTrigger,
   ScrollArea,
 } from "@shared/ui";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import {
   useForm,
   UseFormGetValues,
@@ -70,6 +79,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
   const [recommendationCards, setRecCards] = useState<IFilterSearch[] | null>(
     null,
   );
+  const accordionRefs = useRef<Array<HTMLDivElement | null>>([]);
 
   useEffect(() => {
     const handleResize = () => {
@@ -205,6 +215,36 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
     }
   }, [catalogFilter]);
 
+  useEffect(() => {
+    accordionRefs.current.forEach((ref, index) => {
+      if (ref) {
+        console.log("ref", ref);
+        const observer = new MutationObserver(() => {
+          const state = ref.getAttribute("data-state");
+          const icon = ref.querySelector(`.${styles.arrow} svg`);
+          if (state === accordionTypes.open) {
+            ref.classList.add(styles.active);
+            if (icon) icon.classList.add("icon__white");
+            if (icon) icon.classList.add("rotate__down");
+            if (icon) icon.classList.remove("active__icon");
+            if (icon) icon.classList.remove("rotate");
+          } else {
+            ref.classList.remove(styles.active);
+            if (icon) icon.classList.add("active__icon");
+            if (icon) icon.classList.add("rotate");
+            if (icon) icon.classList.remove("icon__white");
+            if (icon) icon.classList.remove("rotate__down");
+          }
+        });
+        observer.observe(ref, {
+          attributes: true,
+          attributeFilter: ["data-state"],
+        });
+        return () => observer.disconnect();
+      }
+    });
+  }, [recommendationCards]);
+
   return (
     <Drawer>
       <DrawerTrigger className="h-full">
@@ -231,6 +271,37 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
               changeCatalogFilter={changeCatalogFilter}
             />
             <div className={styles.options}>
+              {recommendationCards ? (
+                <Accordion type="single" collapsible>
+                  <AccordionItem
+                    value={`item-TA-Cards-LITTLE`}
+                    ref={(el) => (accordionRefs.current[0] = el)}
+                    className={styles.item}
+                  >
+                    <AccordionTrigger className={styles.trigger}>
+                      <div className={styles.title}>
+                        <QualityIcon />
+                        <p>{t("catalog.recommendation.title")}</p>
+                      </div>
+                      <div className={styles.arrow}>
+                        <ArrowSmallVerticalIcon className="active__icon rotate" />
+                      </div>
+                    </AccordionTrigger>
+                    <AccordionContent className={styles.content}>
+                      {recommendationCards.map((card, index) => (
+                        <RecomTargetCard
+                          key={index}
+                          card={card}
+                          onChange={handleUseRecommendionCard}
+                          isChooseed={recommendationCard === card}
+                        />
+                      ))}
+                    </AccordionContent>
+                  </AccordionItem>
+                </Accordion>
+              ) : (
+                <></>
+              )}
               {catalogFilter === catalogBarFilter.parameters ? (
                 <>
                   <SelectOptions
@@ -300,7 +371,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
                   />
                 </>
               )}
-              {recommendationCards ? (
+              {/* {recommendationCards ? (
                 <div className={styles.recommendation}>
                   <div className={styles.recommendation__title}>
                     <QualityIcon />
@@ -337,26 +408,6 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
                         </SwiperSlide>
                       ))}
                     </Swiper>
-                  </div>
-                </div>
-              ) : (
-                <></>
-              )}
-              {/* {recommendationCards ? (
-                <div className={styles.recommendation}>
-                  <div className={styles.recommendation__title}>
-                    <QualityIcon />
-                    <p>{t("catalog.recommendation.title")}</p>
-                  </div>
-                  <div className={styles.recommendation__cards}>
-                    {recommendationCards.map((card, index) => (
-                      <RecomTargetCard
-                        key={index}
-                        card={card}
-                        onChange={handleUseRecommendionCard}
-                        isChooseed={recommendationCard === card}
-                      />
-                    ))}
                   </div>
                 </div>
               ) : (
