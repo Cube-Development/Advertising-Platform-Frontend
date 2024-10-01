@@ -5,6 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useHandleAuth } from "@features/useHandleAuth";
 import { ToastAction, useToast } from "@shared/ui";
 import { useGetUserMutation, useLoginMutation } from "@entities/user";
+import { Loader } from "lucide-react";
 
 interface Props {
   onNavigate: (form: loginSteps) => void;
@@ -15,8 +16,8 @@ export const LoginForm: FC<Props> = ({ onNavigate }) => {
   const { toast } = useToast();
   const { t } = useTranslation();
 
-  const [login] = useLoginMutation();
-  const [getUser] = useGetUserMutation();
+  const [login, { isLoading }] = useLoginMutation();
+  const [getUser, { isLoading: getUserLoading }] = useGetUserMutation();
 
   const [password, setPassword] = useState("");
   const [email, setEmail] = useState("");
@@ -103,7 +104,16 @@ export const LoginForm: FC<Props> = ({ onNavigate }) => {
       </div>
 
       <button type="submit" className={styles.button__sign}>
-        {t("auth.sign_in")}
+        {isLoading || getUserLoading ? (
+          <Loader
+            className="animate-spin"
+            stroke="#fff"
+            width={20}
+            height={20}
+          />
+        ) : (
+          t("auth.sign_in")
+        )}
       </button>
     </form>
   );

@@ -10,6 +10,7 @@ import { FC, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { ArrowSmallVerticalIcon } from "@shared/assets";
+import guideAnimation from "/animated/guide_lottie.gif";
 
 interface GuideProps {
   profileFilter: {
@@ -23,7 +24,7 @@ export const Guide: FC<GuideProps> = ({ profileFilter }) => {
   const accordionRefs = useRef<Array<HTMLDivElement | null>>([]);
 
   useEffect(() => {
-    accordionRefs.current.forEach((ref, index) => {
+    accordionRefs.current.forEach((ref) => {
       if (ref) {
         console.log("ref", ref);
         const observer = new MutationObserver(() => {
@@ -73,6 +74,7 @@ export const Guide: FC<GuideProps> = ({ profileFilter }) => {
             className={styles.item}
           >
             <AccordionTrigger className={styles.trigger}>
+              <img src={guideAnimation} alt="guide_animation_gif" />
               <p className={styles.title}>{t("wallet.guide.title")}</p>
               <div className={styles.arrow}>
                 <ArrowSmallVerticalIcon className="active__icon rotate" />

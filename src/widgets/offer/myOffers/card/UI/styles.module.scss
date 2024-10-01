@@ -16,7 +16,8 @@
   }
 
   @media (max-width: 768px) {
-    grid-template: min-content min-content 1fr / 1fr;
+    // grid-template: min-content min-content 1fr / 1fr;
+    grid-template: none;
     grid-auto-flow: row;
     row-gap: 15px;
     padding-top: 35px;
@@ -224,9 +225,9 @@
   &__wait {
     display: grid;
     grid-auto-flow: row;
-    align-items: center;
-    align-content: center;
-    row-gap: 15px;
+    // align-items: center;
+    // align-content: center;
+    // row-gap: 15px;
 
     &__title {
       display: grid;

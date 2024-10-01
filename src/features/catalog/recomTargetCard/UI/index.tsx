@@ -49,9 +49,9 @@ export const RecomTargetCard: FC<RecomTargetCardProps> = ({
         <div className={styles.card__row}>
           <p>
             {t("catalog.recommendation.card.business")}:{" "}
-            <span>
-              {card?.category.map((business) => business.name).join("; ")}
-            </span>
+            {/* <span>
+              {card?.category.map((business) => business?.name).join("; ")}
+            </span> */}
           </p>
         </div>
       </div>

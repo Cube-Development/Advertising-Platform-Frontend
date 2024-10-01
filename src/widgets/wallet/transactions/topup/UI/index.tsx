@@ -71,7 +71,7 @@ export const Topup: FC = () => {
 
   const [editLegal] = useEditLegalMutation();
 
-  const [paymentDeposit, { error: topupError }] = usePaymentDepositMutation();
+  const [paymentDeposit] = usePaymentDepositMutation();
 
   const changeActiveAccount = async (account: ILegalCardShort) => {
     if (activeAccount && account.legal_id === activeAccount.legal_id) {
@@ -104,6 +104,9 @@ export const Topup: FC = () => {
     const dataWithLegalType = {
       ...formData,
       type_legal: formState.profileFilter.id,
+      PNFL: Number(formState.PNFL),
+      INN: Number(formState.INN),
+      registration_number: Number(formState.registration_number),
     };
     createLegal(dataWithLegalType)
       .unwrap()
@@ -190,7 +193,6 @@ export const Topup: FC = () => {
 
   return (
     <div className="container sidebar">
-      {topupError ? <h1>ОШИБКА В ЗАПРОСЕ</h1> : ""}
       <div className={styles.wrapper}>
         <div className={styles.title}>
           <p>{t("wallet.topup.title")}</p>

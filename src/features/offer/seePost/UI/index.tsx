@@ -46,7 +46,7 @@ export const SeePost: FC<SeePostProps> = ({ post }) => {
         </MyButton>
       </AlertDialogTrigger>
       <AlertDialogContent
-        className={`gap-0 bg-transparent grid items-center justify-center shadow-none ${
+        className={`max-w-[300px] gap-0 bg-transparent grid items-center justify-center shadow-none ${
           screen > 992
             ? "w-[25vw]"
             : screen > 768

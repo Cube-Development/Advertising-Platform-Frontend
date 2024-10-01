@@ -360,7 +360,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
               getValues={getValues}
               formState={formState}
             />
-            <CreateOrderPayment isBlur={blur.payment} />
+            <CreateOrderPayment isBlur={blur.payment} total_price={10000000} />
           </>
         )}
       </form>
