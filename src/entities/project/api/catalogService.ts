@@ -12,6 +12,7 @@ import {
 export interface getCatalogReq {
   user_id?: string;
   guest_id?: string;
+  project_id?: string;
   language: languagesNum;
   page: number;
   elements_on_page?: number;

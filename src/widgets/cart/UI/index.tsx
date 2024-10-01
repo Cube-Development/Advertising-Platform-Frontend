@@ -32,7 +32,7 @@ export const Cart: FC = () => {
   });
   const { isAuth } = useAppSelector((state) => state.user);
 
-  const user_id = Cookies.get("user_id");
+  const userId = Cookies.get("user_id");
   const guestId = Cookies.get("guest_id");
   const role = Cookies.get("role");
   const projectId = Cookies.get("project_id");
@@ -46,21 +46,16 @@ export const Cart: FC = () => {
     { skip: !isAuth || role !== roles.advertiser },
   );
 
-  const { data: cartPub, isLoading: isLoadingPublic } = useReadPublicCartQuery(
-    { guest_id: guestId, language: language?.id || Languages[0].id },
-    { skip: !guestId || isAuth },
-  );
-
   const { data: cartManager, isLoading: isLoadingManager } =
     useReadManagerCartQuery(
-      {
-        project_id: projectId,
-        language: language?.id || Languages[0].id,
-      },
-      {
-        skip: !isAuth || role !== roles.manager || !projectId,
-      },
+      { project_id: projectId, language: language?.id || Languages[0].id },
+      { skip: !isAuth || role !== roles.manager || !projectId },
     );
+
+  const { data: cartPub, isLoading: isLoadingPublic } = useReadPublicCartQuery(
+    { guest_id: guestId, language: language?.id || Languages[0].id },
+    { skip: isAuth || !guestId },
+  );
 
   useEffect(() => {
     if (isAuth && role === roles.advertiser && cart) {
@@ -101,6 +96,7 @@ export const Cart: FC = () => {
   }, [currentCart]);
 
   const formFields = watch();
+  console.log("formFields", formFields);
   const { data: recomendCards } = useGetRecommedChannelsQuery(
     { ...formFields },
     {

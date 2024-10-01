@@ -28,12 +28,7 @@ import {
   SearchIcon,
   WaitIcon,
 } from "@shared/assets";
-import {
-  BREAKPOINT,
-  Languages,
-  MY_PROJECT_ACTIVE_SUBCARD,
-  accordionTypes,
-} from "@shared/config";
+import { BREAKPOINT, Languages, accordionTypes } from "@shared/config";
 import {
   AccordionContent,
   AccordionItem,
@@ -253,7 +248,6 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
       skip: !isSubcardOpen || typeFilter !== projectTypesFilter.managerProject,
     });
 
-  const subcards = MY_PROJECT_ACTIVE_SUBCARD;
   const handleChangeOpenSubcard = (): void => {
     setSubcardOpen(!isSubcardOpen);
   };
@@ -333,25 +327,23 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
           >
             <AccordionContent>
               <div className={`${styles.subcard} `}>
-                {(
-                  subcards?.orders ||
-                  subcardsSelf?.orders ||
-                  subcardsManager?.orders
-                )?.map((subcard, index) => (
-                  <AdvSubcard
-                    key={index}
-                    subcard={subcard}
-                    FeedbackBtn={Feedback}
-                    AcceptBtn={AcceptPost}
-                    RejectBtn={RejectPost}
-                    CheckBtn={CheckPost}
-                    SeeBtn={SeePost}
-                    ChannelChatBtn={OrderChat}
-                    ChangeChannelBtn={ChangeChannel}
-                    typeFilter={typeFilter}
-                    statusFilter={statusFilter}
-                  />
-                ))}
+                {(subcardsSelf?.orders || subcardsManager?.orders)?.map(
+                  (subcard, index) => (
+                    <AdvSubcard
+                      key={index}
+                      subcard={subcard}
+                      FeedbackBtn={Feedback}
+                      AcceptBtn={AcceptPost}
+                      RejectBtn={RejectPost}
+                      CheckBtn={CheckPost}
+                      SeeBtn={SeePost}
+                      ChannelChatBtn={OrderChat}
+                      ChangeChannelBtn={ChangeChannel}
+                      typeFilter={typeFilter}
+                      statusFilter={statusFilter}
+                    />
+                  ),
+                )}
               </div>
             </AccordionContent>
             <AccordionTrigger onClick={() => handleChangeOpenSubcard()}>
@@ -420,61 +412,58 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
                   spaceBetween={50}
                   loop={true}
                 >
-                  {(
-                    [...subcards?.orders] ||
-                    subcardsSelf?.orders ||
-                    subcardsManager?.orders
-                  ).map((subcard, index) => (
-                    <SwiperSlide
-                      key={index}
-                      className={`${styles.subcard__md} border__gradient`}
-                    >
-                      <div className={styles.top}>
-                        <AdvSubcard
-                          subcard={subcard}
-                          FeedbackBtn={Feedback}
-                          AcceptBtn={AcceptPost}
-                          RejectBtn={RejectPost}
-                          CheckBtn={CheckPost}
-                          SeeBtn={SeePost}
-                          ChannelChatBtn={OrderChat}
-                          ChangeChannelBtn={ChangeChannel}
-                          typeFilter={typeFilter}
-                          statusFilter={statusFilter}
-                        />
-                        <MyPagination
-                          cardIndex={index}
-                          count={
-                            subcards?.orders?.length ||
-                            subcardsSelf?.orders?.length ||
-                            subcardsManager?.orders?.length ||
-                            1
-                          }
-                        />
-                      </div>
-                      <div
-                        className={styles.card__btn}
-                        onClick={handleSlideChange}
+                  {(subcardsSelf?.orders || subcardsManager?.orders || []).map(
+                    (subcard, index) => (
+                      <SwiperSlide
+                        key={index}
+                        className={`${styles.subcard__md} border__gradient`}
                       >
-                        {isLoadingSelf || isLoadingManager ? (
-                          <AccountsLoader />
-                        ) : isSubcardOpen ? (
-                          t(`orders_advertiser.card.see_less`)
-                        ) : (
-                          t(`orders_advertiser.card.see_more`)
-                        )}
-                        {(!isLoadingSelf || !isLoadingManager) && (
-                          <ArrowSmallVerticalIcon
-                            className={
-                              isSubcardOpen
-                                ? "icon__white rotate side"
-                                : "icon__white rotate__down side"
+                        <div className={styles.top}>
+                          <AdvSubcard
+                            subcard={subcard}
+                            FeedbackBtn={Feedback}
+                            AcceptBtn={AcceptPost}
+                            RejectBtn={RejectPost}
+                            CheckBtn={CheckPost}
+                            SeeBtn={SeePost}
+                            ChannelChatBtn={OrderChat}
+                            ChangeChannelBtn={ChangeChannel}
+                            typeFilter={typeFilter}
+                            statusFilter={statusFilter}
+                          />
+                          <MyPagination
+                            cardIndex={index}
+                            count={
+                              subcardsSelf?.orders?.length ||
+                              subcardsManager?.orders?.length ||
+                              1
                             }
                           />
-                        )}
-                      </div>
-                    </SwiperSlide>
-                  ))}
+                        </div>
+                        <div
+                          className={styles.card__btn}
+                          onClick={handleSlideChange}
+                        >
+                          {isLoadingSelf || isLoadingManager ? (
+                            <AccountsLoader />
+                          ) : isSubcardOpen ? (
+                            t(`orders_advertiser.card.see_less`)
+                          ) : (
+                            t(`orders_advertiser.card.see_more`)
+                          )}
+                          {(!isLoadingSelf || !isLoadingManager) && (
+                            <ArrowSmallVerticalIcon
+                              className={
+                                isSubcardOpen
+                                  ? "icon__white rotate side"
+                                  : "icon__white rotate__down side"
+                              }
+                            />
+                          )}
+                        </div>
+                      </SwiperSlide>
+                    ),
+                  )}
                 </Swiper>
               </div>
             </SwiperSlide>

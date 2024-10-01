@@ -1,20 +1,12 @@
 import {
-  IModerationChannel,
   channelStatusFilter,
   getChannelsByStatusReq,
+  IModerationChannel,
   useGetChannelsByStatusQuery,
 } from "@entities/channel";
 import { offerStatusFilter } from "@entities/offer";
 import { platformTypes, platformTypesNum } from "@entities/platform";
-import {
-  activeChannelsMock,
-  blockedChannelsMock,
-  inactiveChannelsMock,
-  INTERSECTION_ELEMENTS,
-  Languages,
-  moderationChannelsMock,
-  moderationRejectChannelsMock,
-} from "@shared/config";
+import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 import { pageFilter } from "@shared/routing";
 import { BarFilter } from "@widgets/barFilter";
 import { ActiveChannels, ModerationChannels } from "@widgets/channel";
