@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import styles from "./styles.module.scss";
-import { PostIcon, PostIcon2 } from "@shared/assets";
+import { PostIcon2 } from "@shared/assets";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { X } from "lucide-react";
 import {
@@ -137,7 +137,7 @@ export const OrderCard: FC<PostPlatformProps> = ({
             </div>
           </AlertDialogTrigger>
           <AlertDialogContent
-            className={`gap-0 bg-transparent grid items-center justify-center shadow-none ${
+            className={`max-w-[300px] gap-0 bg-transparent grid items-center justify-center shadow-none ${
               screen > 992
                 ? "w-[25vw]"
                 : screen > 768

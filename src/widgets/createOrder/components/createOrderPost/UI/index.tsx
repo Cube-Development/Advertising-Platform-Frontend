@@ -215,6 +215,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                         ? CreatePostFormData.multiposts
                         : CreatePostFormData.posts
                     }
+                    screen={screen}
                   />
                   {formState.platformFilter?.type ===
                     platformTypesStr.telegram && (
@@ -304,7 +305,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                     </div>
                   </AlertDialogTrigger>
                   <AlertDialogContent
-                    className={`gap-0 bg-transparent grid items-center justify-center shadow-none ${screen > 475 ? "w-[50vw]" : "w-[60vw]"}`}
+                    className={`max-w-[300px] gap-0 bg-transparent grid items-center justify-center shadow-none ${screen > 475 ? "w-[50vw]" : "w-[60vw]"}`}
                   >
                     <div className="relative">
                       <AlertDialogAction>

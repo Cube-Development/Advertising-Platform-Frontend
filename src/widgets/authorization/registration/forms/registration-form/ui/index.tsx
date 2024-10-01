@@ -11,6 +11,7 @@ import { Languages } from "@shared/config";
 import { useTranslation } from "react-i18next";
 import { ToastAction, useToast } from "@shared/ui";
 import { useHandleAuth } from "@features/useHandleAuth";
+import { Loader } from "lucide-react";
 
 interface RegistrationFormProps {
   onNavigate: (direction: registrationSteps) => void;
@@ -33,9 +34,9 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
 
-  const [register] = useRegisterMutation();
-  const [login] = useLoginMutation();
-  const [getUser] = useGetUserMutation();
+  const [register, { isLoading: registerLoading }] = useRegisterMutation();
+  const [login, { isLoading: loginLoading }] = useLoginMutation();
+  const [getUser, { isLoading: getUserLoading }] = useGetUserMutation();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -174,7 +175,16 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({
         </p>
 
         <button type="submit" className={styles.button__sign}>
-          {t("auth.sign_up")}
+          {registerLoading || loginLoading || getUserLoading ? (
+            <Loader
+              className="animate-spin"
+              stroke="#fff"
+              width={20}
+              height={20}
+            />
+          ) : (
+            t("auth.sign_up")
+          )}
         </button>
       </form>
     </>

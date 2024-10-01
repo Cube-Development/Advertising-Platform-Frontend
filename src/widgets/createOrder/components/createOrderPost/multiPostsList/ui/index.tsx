@@ -1,4 +1,4 @@
-import { FC, useEffect } from "react";
+import { FC, useEffect, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import clsx from "clsx";
@@ -33,6 +33,8 @@ export const MultiPostsList: FC<MultiPostsListProps> = ({
       order?.platform === platform && order?.post_type === selectedPostType,
   );
 
+  const activePostRef = useRef<HTMLLIElement | null>(null);
+
   useEffect(() => {
     handleChangePost(filteredPosts[0]?.id);
   }, [selectedPostType, platform]);
@@ -47,6 +49,15 @@ export const MultiPostsList: FC<MultiPostsListProps> = ({
         { order_id, platform, post_type: selectedPostType },
       ]);
     }
+
+    setTimeout(() => {
+      if (activePostRef.current) {
+        activePostRef.current.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+        });
+      }
+    }, 0);
   };
 
   return (
@@ -66,6 +77,7 @@ export const MultiPostsList: FC<MultiPostsListProps> = ({
               className={clsx(styles.post, {
                 [styles.active]: selectedMultiPostId === post?.id,
               })}
+              ref={selectedMultiPostId === post?.id ? activePostRef : null}
             >
               {index + 1}. {post?.name}
             </li>

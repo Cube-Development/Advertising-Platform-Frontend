@@ -64,8 +64,7 @@ export const Withdrawal: FC = () => {
 
   const [readOneLegal, { isLoading: isOneLegalLoading, error: oneLegalError }] =
     useReadOneLegalMutation();
-  const [paymentWithdrawal, { error: withdrowError }] =
-    usePaymentWithdrawalMutation();
+  const [paymentWithdrawal] = usePaymentWithdrawalMutation();
   const [createLegal] = useCreateLegalMutation();
   const [editLegal] = useEditLegalMutation();
 
@@ -103,6 +102,9 @@ export const Withdrawal: FC = () => {
         formState.profileFilter.type === profileTypesName.selfEmployedAccounts
           ? formState.subprofileFilter.id
           : formState.profileFilter.id,
+      PNFL: Number(formState.PNFL),
+      INN: Number(formState.INN),
+      registration_number: Number(formState.registration_number),
     };
     createLegal(dataWithLegalType)
       .unwrap()
@@ -177,7 +179,6 @@ export const Withdrawal: FC = () => {
 
   return (
     <div className="container sidebar">
-      {withdrowError ? <h1>ОШИБКА В ЗАПРОСЕ</h1> : ""}
       <div className={styles.wrapper}>
         <div className={styles.title}>
           <p>{t("wallet.withdraw.title")}</p>
