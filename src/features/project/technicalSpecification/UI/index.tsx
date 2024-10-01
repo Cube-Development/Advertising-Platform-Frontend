@@ -168,6 +168,7 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
                               href={link}
                               target="_blank"
                               rel="noopener noreferrer"
+                              className="truncate"
                             >
                               {link}
                             </a>
@@ -253,6 +254,7 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
                               href={link}
                               target="_blank"
                               rel="noopener noreferrer"
+                              className="truncate"
                             >
                               {link}
                             </a>

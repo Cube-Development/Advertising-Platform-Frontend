@@ -92,7 +92,7 @@ export const managerProjectsAPI = authApi.injectEndpoints({
     }),
 
     getManagerProjects: build.query<
-      IManagerProjects | IManagerNewProjects,
+      IManagerProjects | IManagerNewProjects | any,
       getManagerProjectsCardReq
     >({
       query: (params) => ({
@@ -100,30 +100,39 @@ export const managerProjectsAPI = authApi.injectEndpoints({
         method: `GET`,
         params: params,
       }),
-      transformResponse: (response: IManagerProjects | IManagerNewProjects) => {
+      transformResponse: (
+        response: IManagerProjects | IManagerNewProjects,
+        meta,
+        arg,
+      ) => {
         return {
           ...response,
+          status: arg?.status,
           isLast:
             response.projects.length !== INTERSECTION_ELEMENTS.managerOrders,
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
         const { status } = queryArgs;
-        // console.log( `${endpointName}/${status}/${page}`)
         return `${endpointName}/${status}`;
       },
-      // merge: (currentCache, newItems, queryArgs) => {
-      //   return {
-      //     ...newItems,
-      //     projects: [
-      //       ...currentCache.projects,
-      //       ...newItems.projects,
-      //     ],
-      //     status: queryArgs.arg.status,
-      //     isLast:
-      //       newItems.projects.length !== INTERSECTION_ELEMENTS.orders,
-      //   };
-      // },
+      merge: (currentCache, newItems, arg) => {
+        if (arg.arg.page === 1) {
+          return {
+            ...newItems,
+            isLast:
+              newItems.projects.length !== INTERSECTION_ELEMENTS.advOrders,
+          };
+        }
+
+        return {
+          ...newItems,
+          projects: [...currentCache.projects, ...newItems.projects],
+          status: arg.arg.status,
+          isLast:
+            newItems.projects.length !== INTERSECTION_ELEMENTS.managerOrders,
+        };
+      },
 
       // forceRefetch({ currentArg, previousArg }) {
       //   return currentArg?.page !== previousArg?.page;

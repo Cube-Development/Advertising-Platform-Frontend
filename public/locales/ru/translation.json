@@ -76,7 +76,7 @@
     "administrator": "Администратор"
   },
 
-  "profile": {
+  "my_profile": {
     "messages": "Мои сообщения",
     "data": "Мои данные",
     "settings": "Настройки профиля"
@@ -926,6 +926,74 @@
       }
     }
   },
+  "profile": {
+    "title": "Настройка профиля",
+    "account_block": {
+      "title": "Аккаунт",
+      "date": "Дата регистрации",
+      "name": {
+        "title": "Имя", 
+        "default_value": "Gomer"
+      },
+      "surname": {
+        "title": "Фамилия", 
+        "default_value": "German"
+      },
+      "email": {
+        "title": "E-mail", 
+        "default_value": "Sample@gmail.com"
+      } ,
+      "phone": {
+        "title": "Телефон", 
+        "default_value": "+998 90 999 99 99"
+      },
+      "language": {
+        "title": "Язык"
+      },
+      "location": {
+        "title": "Локация", 
+        "default_value": "Узбекистан, Ташкент"
+      },
+      "save_btn": "Сохранить изменения"
+    },
+    "password_block": {
+      "title": "Изменение пароля",
+      "current_password": {
+        "title": "Текущий пароль", 
+        "default_value": "Sample@gmail.com"
+      },
+      "new_password": {
+        "title": "Новый пароль", 
+        "default_value": "Sample@gmail.com"
+      },
+      "accept_password": {
+        "title": "Подтверждение нового пароля", 
+        "default_value": "Sample@gmail.com"
+      },
+      "change_btn": "Изменить пароль"
+    },
+    "notification_block": {
+      "title": "Уведомления",
+      "email": {
+        "title": "E-mail",
+        "system": "Системные сообщения",
+        "project" :"Уведомления о проектах",
+        "individual": "Индивидуальные предложения и промо рассылки"
+      },
+      "bot": {
+        "title" : "Телеграм бот",
+        "enable_notifications": "Хотите подключить телеграм бота для уведомлений ?",
+        "telegramm": {
+          "title": "Введите ваш телеграм аккаунт",
+          "default_value": "Sample@gmail.com"
+        },
+        "instruction": "Прочитать более подробную инструкцию по настройке телеграм бота"
+      },
+       "continue_btn": "Продолжить"
+    }
+
+  },
+
   "add_profile": {
     "add_profile": "Добавление данных",
     "types": {

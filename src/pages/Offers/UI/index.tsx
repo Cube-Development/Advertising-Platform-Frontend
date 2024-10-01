@@ -4,11 +4,7 @@ import {
   useGetBloggerOrdersQuery,
 } from "@entities/offer";
 import { platformTypes, platformTypesNum } from "@entities/platform";
-import {
-  BLOGGER_OFFERS,
-  INTERSECTION_ELEMENTS,
-  Languages,
-} from "@shared/config";
+import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 import { pageFilter } from "@shared/routing";
 import { BarFilter } from "@widgets/barFilter";
 import { MyOffers } from "@widgets/offer";

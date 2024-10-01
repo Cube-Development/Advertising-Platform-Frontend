@@ -5,13 +5,7 @@ import {
   managerProjectStatusFilter,
   useGetManagerProjectsQuery,
 } from "@entities/project";
-import {
-  INTERSECTION_ELEMENTS,
-  managerActiveCARDS,
-  managerAgreedCARDS,
-  managerCompletedCARDS,
-  managerNewCARDS,
-} from "@shared/config";
+import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { pageFilter } from "@shared/routing";
 import { BarFilter } from "@widgets/barFilter";
 import { FC, useEffect, useState } from "react";
@@ -92,7 +86,10 @@ export const ManagerOrders: FC = () => {
         />
         {formState.status === managerProjectStatusFilter.new ? (
           <ManagerNewProjectsList
-            projects={data?.projects! as IManagerNewProjectCard[]}
+            projects={
+              ((data?.status === formState.status &&
+                data?.projects) as IManagerNewProjectCard[]) || []
+            }
             handleOnChangePage={handleOnChangePage}
             isLoading={isFetching}
             isLast={data?.isLast || false}
@@ -100,7 +97,10 @@ export const ManagerOrders: FC = () => {
         ) : (
           <ManagerProjectsList
             statusFilter={formState.status as managerProjectStatusFilter}
-            projects={data?.projects! as IManagerProjectCard[]}
+            projects={
+              ((data?.status === formState.status &&
+                data?.projects) as IManagerProjectCard[]) || []
+            }
             handleOnChangePage={handleOnChangePage}
             isLoading={isFetching}
             isLast={data?.isLast || false}

@@ -1,10 +1,7 @@
-import { ProfileIcon } from "@shared/assets";
-import { FC, useState, useEffect, useRef } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import { Link, useNavigate } from "react-router-dom";
-import { paths } from "@shared/routing";
 import { roles, useLogoutMutation } from "@entities/user";
+import { ProfileIcon } from "@shared/assets";
+import { useAppSelector } from "@shared/hooks";
+import { paths } from "@shared/routing";
 import {
   Dialog,
   DialogClose,
@@ -13,7 +10,10 @@ import {
   DialogTrigger,
 } from "@shared/ui";
 import { CircleX, LogOut } from "lucide-react";
-import { useAppSelector } from "@shared/hooks";
+import { FC, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Link, useNavigate } from "react-router-dom";
+import styles from "./styles.module.scss";
 
 interface ProfileProps {
   toggleLogout: () => void;
@@ -62,10 +62,10 @@ export const Profile: FC<ProfileProps> = ({ toggleLogout }) => {
         <div className={styles.menu}>
           <ul>
             <Link to={paths.profile}>
-              <li onClick={handleButtonClick}>{t("profile.data")}</li>
+              <li onClick={handleButtonClick}>{t("my_profile.data")}</li>
             </Link>
             <Link to={paths.profile}>
-              <li onClick={handleButtonClick}>{t("profile.settings")}</li>
+              <li onClick={handleButtonClick}>{t("my_profile.settings")}</li>
             </Link>
             <Dialog>
               <DialogTrigger asChild>

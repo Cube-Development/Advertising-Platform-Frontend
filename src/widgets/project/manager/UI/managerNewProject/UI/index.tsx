@@ -38,7 +38,7 @@ export const ManagerNewProjectsList: FC<ManagerNewProjectsListProps> = ({
                 <ManagerNewProjectCard card={card} />
               </motion.div>
             ))}
-            {!isLoading &&
+            {isLoading &&
               Array.from({ length: INTERSECTION_ELEMENTS.managerOrders }).map(
                 (_, index) => <SkeletonManagerNewProjectCard key={index} />,
               )}

@@ -11,6 +11,7 @@ import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.scss";
+import { roles } from "@entities/user";
 
 interface CreatePostProps {
   cart: ICart;
@@ -20,12 +21,12 @@ export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
   const { toast } = useToast();
   const { t } = useTranslation();
   const [screen, setScreen] = useState<number>(window.innerWidth);
-  const { isAuth } = useAppSelector((state) => state.user);
+  const { isAuth, role } = useAppSelector((state) => state.user);
   const navigate = useNavigate();
   const [createCart] = useCreateCartMutation();
 
   const handleCreateCart = () => {
-    if (isAuth) {
+    if (isAuth && role === roles.advertiser) {
       createCart()
         .unwrap()
         .then((data) => {
@@ -41,6 +42,7 @@ export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
           });
           // alert("У вас недостаточно средств, нужно пополнить баланс");
         });
+    } else if (isAuth && role === roles.manager) {
     } else {
       toast({
         variant: "error",

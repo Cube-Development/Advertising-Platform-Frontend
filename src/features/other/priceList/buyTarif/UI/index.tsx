@@ -45,6 +45,7 @@ interface BuyTarifProps {
 
 export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
   const { t } = useTranslation();
+  const { isAuth } = useAppSelector((state) => state.user);
   const [screen, setScreen] = useState<number>(window.innerWidth);
   const { toast } = useToast();
   const [buyTarif] = usePostBuyTarifMutation();
@@ -62,6 +63,12 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
   const [isHaveBalance, setIsHaveBalance] = useState<boolean>(
     tarifPrice <= balance,
   );
+
+  useEffect(() => {
+    if (balance) {
+      setIsHaveBalance(tarifPrice <= balance);
+    }
+  }, [balance]);
 
   const { setValue, watch } = useForm<IBuyTarif>({
     defaultValues: {
@@ -192,8 +199,6 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
     };
   }, []);
 
-  const { isAuth } = useAppSelector((state) => state.user);
-
   return (
     <>
       {isAuth ? (
@@ -289,7 +294,9 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
                                         >
                                           <div className={styles.url__text}>
                                             <p>№ {index + 1}</p>
-                                            <span>{url}</span>
+                                            <span className="truncate">
+                                              {url}
+                                            </span>
                                           </div>
                                           <button
                                             onClick={() => handleDeleteUrl(url)}
