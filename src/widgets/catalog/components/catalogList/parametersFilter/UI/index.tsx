@@ -54,6 +54,7 @@ import "swiper/css/navigation";
 import { EffectCoverflow, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./styles.module.scss";
+import recomAnimation from "/animated/recom_lottie.gif";
 
 interface ParametersFilterProps {
   setValue: UseFormSetValue<getCatalogReq>;
@@ -272,16 +273,25 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
             />
             <div className={styles.options}>
               {recommendationCards ? (
-                <Accordion type="single" collapsible>
+                <Accordion
+                  type="single"
+                  collapsible
+                  className={styles.accordion}
+                >
                   <AccordionItem
                     value={`item-TA-Cards-LITTLE`}
                     ref={(el) => (accordionRefs.current[0] = el)}
                     className={styles.item}
                   >
                     <AccordionTrigger className={styles.trigger}>
+                      <div className={styles.trigger__lottie}>
+                        <img src={recomAnimation} alt="recom_lottie_gif" />
+                      </div>
                       <div className={styles.title}>
                         <QualityIcon />
-                        <p>{t("catalog.recommendation.title")}</p>
+                        <p className="truncate">
+                          {t("catalog.recommendation.title")}
+                        </p>
                       </div>
                       <div className={styles.arrow}>
                         <ArrowSmallVerticalIcon className="active__icon rotate" />

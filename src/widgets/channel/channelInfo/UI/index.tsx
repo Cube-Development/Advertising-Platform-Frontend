@@ -67,21 +67,14 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
     language: language?.id || Languages[0].id,
   };
 
-  const getParams = (
-    user_id?: string,
-    guestId?: string,
-    projectId?: string,
-  ) => {
-    return user_id
-      ? { ...baseParams, user_id: user_id }
-      : projectId
+  const channelInfoParams =
+    userId && role !== roles.manager
+      ? { ...baseParams, user_id: userId }
+      : projectId && role === roles.manager
         ? { ...baseParams, project_id: projectId }
         : { ...baseParams, guest_id: guestId };
-  };
 
-  const { data: card, isLoading } = useGetChannelByIdQuery(
-    getParams(userId, guestId, projectId),
-  );
+  const { data: card, isLoading } = useGetChannelByIdQuery(channelInfoParams);
 
   const { data: recomendCards, isFetching: isRecommendCardsLoading } =
     useGetRecommedChannelsQuery(

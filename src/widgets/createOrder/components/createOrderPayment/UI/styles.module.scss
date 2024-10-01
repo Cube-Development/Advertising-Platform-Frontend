@@ -8,7 +8,7 @@
   .content {
     display: grid;
     grid-auto-flow: row;
-    gap: 10vw;
+    gap: 30px;
     height: 100%;
     width: 100%;
 
@@ -84,8 +84,76 @@
       }
     }
 
+    .info {
+      color: #fff;
+      display: grid;
+      grid-auto-flow: row;
+      gap: 20px;
+      justify-items: center;
+      align-items: center;
+
+      .lottie {
+        width: 100px;
+        height: 100px;
+
+        @media (max-width: 576px) {
+          width: 60px;
+          height: 60px;
+        }
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+
+      .price {
+        font-size: var(--font-size-title-secondary-xl);
+        text-align: center;
+
+        @media (max-width: 992px) {
+          font-size: var(--font-size-title-secondary-lg);
+        }
+
+        @media (max-width: 768px) {
+          font-size: var(--font-size-title-secondary-md);
+        }
+
+        @media (max-width: 576px) {
+          font-size: var(--font-size-title-secondary-sm);
+        }
+
+        @media (max-width: 375px) {
+          font-size: var(--font-size-title-secondary-xs);
+        }
+      }
+
+      .description {
+        font-size: var(--font-size-option-item-xl);
+        max-width: 80%;
+        text-align: center;
+
+        @media (max-width: 992px) {
+          font-size: var(--font-size-option-item-lg);
+        }
+
+        @media (max-width: 768px) {
+          font-size: var(--font-size-option-item-md);
+          max-width: 100%;
+        }
+
+        @media (max-width: 576px) {
+          font-size: var(--font-size-option-item-sm);
+        }
+
+        @media (max-width: 375px) {
+          font-size: var(--font-size-option-item-xs);
+        }
+      }
+    }
+
     .pay_btn {
-      justify-self: end;
+      justify-self: center;
       width: 30%;
 
       @media (max-width: 576px) {

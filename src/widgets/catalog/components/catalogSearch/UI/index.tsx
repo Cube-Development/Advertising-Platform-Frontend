@@ -44,6 +44,7 @@ import {
   DrawerTrigger,
   ScrollArea,
 } from "@shared/ui";
+import recomAnimation from "/animated/recom_lottie.gif";
 
 interface CatalogSearchProps {
   setValue: UseFormSetValue<getCatalogReq>;
@@ -232,7 +233,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
         />
         <div className={styles.options}>
           {recommendationCards ? (
-            <Accordion type="single" collapsible>
+            <Accordion type="single" collapsible className={styles.accordion}>
               <AccordionItem
                 value={`item-TA-Cards-BIG`}
                 ref={(el) => (accordionRefs.current[0] = el)}
@@ -240,7 +241,9 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
               >
                 <AccordionTrigger className={styles.trigger}>
                   <div className={styles.title}>
-                    <QualityIcon />
+                    <div className={styles.trigger__lottie}>
+                      <img src={recomAnimation} alt="recom_lottie_gif" />
+                    </div>
                     <p>{t("catalog.recommendation.title")}</p>
                   </div>
                   <div className={styles.arrow}>

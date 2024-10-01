@@ -73,6 +73,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
   const { toast } = useToast();
   const [screen, setScreen] = useState<number>(window.innerWidth);
   const [isSubcardOpen, setSubcardOpen] = useState(false);
+  console.log("subcard", subcard.id);
   const { data: post, error } = useGetPostQuery({ order_id: subcard.id });
   // const post = {
   //   id: "string",
@@ -291,7 +292,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                     </div>
                   </AlertDialogTrigger>
                   <AlertDialogContent
-                    className={`gap-0 bg-transparent grid items-center justify-center shadow-none ${
+                    className={`max-w-[300px] gap-0 bg-transparent grid items-center justify-center shadow-none ${
                       screen > 992
                         ? "w-[25vw]"
                         : screen > 768
@@ -370,7 +371,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                       </div>
                     </AlertDialogTrigger>
                     <AlertDialogContent
-                      className={`gap-0 bg-transparent grid items-center justify-center shadow-none ${
+                      className={`max-w-[300px] gap-0 bg-transparent grid items-center justify-center shadow-none ${
                         screen > 992
                           ? "w-[25vw]"
                           : screen > 768
@@ -611,7 +612,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                   </div>
                 </AlertDialogTrigger>
                 <AlertDialogContent
-                  className={`gap-0 bg-transparent grid items-center justify-center shadow-none ${
+                  className={`max-w-[300px] gap-0 bg-transparent grid items-center justify-center shadow-none ${
                     screen > 992
                       ? "w-[25vw]"
                       : screen > 768
@@ -690,7 +691,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                     </div>
                   </AlertDialogTrigger>
                   <AlertDialogContent
-                    className={`gap-0 bg-transparent grid items-center justify-center shadow-none ${
+                    className={`max-w-[300px] gap-0 bg-transparent grid items-center justify-center shadow-none ${
                       screen > 992
                         ? "w-[25vw]"
                         : screen > 768

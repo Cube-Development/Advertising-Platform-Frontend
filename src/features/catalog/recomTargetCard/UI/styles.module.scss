@@ -1,6 +1,6 @@
 .wrapper {
   display: grid;
-  grid-template: 1fr / 14fr 1fr;
+  grid-template: 1fr / 1fr auto;
   column-gap: 10px;
   border-radius: 10px;
   align-content: start;
@@ -14,9 +14,6 @@
     row-gap: 15px;
     color: var(--Personal-colors-black);
     padding: 5px;
-
-    height: 150px;
-    overflow-y: scroll;
 
     &::-webkit-scrollbar {
       width: 2px;

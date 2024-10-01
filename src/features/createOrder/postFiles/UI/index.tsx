@@ -26,6 +26,7 @@ interface PostFilesProps {
   formState: ICreatePostForm;
   platformId: number;
   type: CreatePostFormData;
+  screen: number;
 }
 
 export const PostFiles: FC<PostFilesProps> = ({
@@ -35,6 +36,7 @@ export const PostFiles: FC<PostFilesProps> = ({
   formState,
   platformId,
   type,
+  screen,
 }) => {
   const { t } = useTranslation();
   const [filter, setFilter] = useState<addFileFilter>(addFileFilter.mediafile);
@@ -131,7 +133,17 @@ export const PostFiles: FC<PostFilesProps> = ({
             <p className="truncate">{t("create_order.create.add_file")}</p>
           </div>
         </AlertDialogTrigger>
-        <AlertDialogContent className="overflow-hidden">
+        <AlertDialogContent
+          className={`max-w-[800px] ${
+            screen > 992
+              ? "w-[75vw]"
+              : screen > 768
+                ? "w-[80vw]"
+                : screen > 576
+                  ? "w-[90vw]"
+                  : "w-[95vw]"
+          }`}
+        >
           <div className={styles.modalContent}>
             <div className={styles.top}>
               <p>{t("create_order.create.add_file")}</p>

@@ -44,7 +44,7 @@ export const ManagerProjectsList: FC<ManagerProjectsListProps> = ({
                 <ManagerProjectCard statusFilter={statusFilter} card={card} />
               </motion.div>
             ))}
-            {!isLoading &&
+            {isLoading &&
               Array.from({ length: INTERSECTION_ELEMENTS.managerOrders }).map(
                 (_, index) => (
                   <SkeletonManagerProjectCard

@@ -12,6 +12,7 @@ import {
   useAddToPublicCartMutation,
   useGetCatalogQuery,
   useReadCommonCartQuery,
+  useReadManagerCartQuery,
   useReadPublicCartQuery,
   useRemoveFromCommonCartMutation,
   useRemoveFromManagerCartMutation,
@@ -35,10 +36,10 @@ export const CatalogBlock: FC = () => {
   });
   const { toast } = useToast();
   const [screen, setScreen] = useState<number>(window.innerWidth);
-  const { isAuth } = useAppSelector((state) => state.user);
-  const user_id = Cookies.get("user_id");
+  const { isAuth, role } = useAppSelector((state) => state.user);
+  const userId = Cookies.get("user_id");
   const guestId = Cookies.get("guest_id") || GenerateGuestId();
-  const role = Cookies.get("role");
+  // const role = Cookies.get("role");
   const projectId = Cookies.get("project_id");
   const catalogTopRef = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
@@ -87,30 +88,41 @@ export const CatalogBlock: FC = () => {
 
   const { data: catalogAuth, isFetching: isCatalogAuthLoading } =
     useGetCatalogQuery(
-      { ...formFields, user_id: user_id },
-      {
-        skip: !user_id,
-      },
+      { ...formFields, user_id: userId },
+      { skip: !isAuth || !userId || role !== roles.advertiser },
     );
-  const { data: catalog, isFetching: isCatalogLoading } = useGetCatalogQuery(
-    { ...formFields, guest_id: guestId },
-    { skip: isAuth },
-  );
+
+  const { data: catalogManager, isFetching: isCatalogManagerLoading } =
+    useGetCatalogQuery(
+      { ...formFields, project_id: projectId },
+      { skip: !isAuth || !projectId || role !== roles.manager },
+    );
+
+  const { data: catalogPublic, isFetching: isCatalogLoading } =
+    useGetCatalogQuery(
+      { ...formFields, guest_id: guestId },
+      { skip: isAuth || !guestId },
+    );
 
   const { data: cart } = useReadCommonCartQuery(
     { language: language?.id || Languages[0].id },
-    { skip: !isAuth },
+    { skip: !isAuth || role !== roles.advertiser },
   );
+  const { data: cartManager } = useReadManagerCartQuery(
+    { project_id: projectId, language: language?.id || Languages[0].id },
+    { skip: !isAuth || role !== roles.manager || !projectId },
+  );
+
   const { data: cartPub } = useReadPublicCartQuery(
     { guest_id: guestId, language: language?.id || Languages[0].id },
-    { skip: !guestId || isAuth },
+    { skip: isAuth || !guestId },
   );
 
   const [currentCart, setCurrentCart] = useState<ICart>(
-    cartPub ? cartPub : cart!,
+    cart || cartPub || cartManager!,
   );
   useEffect(() => {
-    if (isAuth && cart) {
+    if (isAuth && role === roles.advertiser && cart) {
       setCurrentCart(cart);
     }
   }, [cart]);
@@ -120,6 +132,12 @@ export const CatalogBlock: FC = () => {
     }
   }, [cartPub]);
 
+  useEffect(() => {
+    if (isAuth && role === roles.manager && cartManager) {
+      setCurrentCart(cartManager);
+    }
+  }, [cartManager]);
+  console.log(cartManager);
   // commonCart
   const [addToCommonCart] = useAddToCommonCartMutation();
   const [removeFromCommonCart] = useRemoveFromCommonCartMutation();
@@ -133,7 +151,11 @@ export const CatalogBlock: FC = () => {
   const handleChangeCards = (cartChannel: ICatalogChannel) => {
     let newCards: ICatalogChannel[] = [];
     const currentCard = (
-      isAuth ? catalogAuth?.channels : catalog?.channels
+      (isAuth && role == roles.advertiser
+        ? catalogAuth?.channels
+        : isAuth && role == roles.manager
+          ? catalogManager?.channels
+          : catalogPublic?.channels) || []
     )?.find((card) => card.id === cartChannel.id);
 
     if (cartChannel.selected_format) {
@@ -155,7 +177,11 @@ export const CatalogBlock: FC = () => {
         cartChannel.selected_format
       ) {
         newCards = (
-          (isAuth ? catalogAuth?.channels : catalog?.channels) || []
+          (isAuth && role == roles.advertiser
+            ? catalogAuth?.channels
+            : isAuth && role == roles.manager
+              ? catalogManager?.channels
+              : catalogPublic?.channels) || []
         ).map((item) => {
           if (item.id === cartChannel.id) {
             const newItem = {
@@ -259,7 +285,11 @@ export const CatalogBlock: FC = () => {
         }
         // newCards = cards.map((card) => {
         newCards = (
-          (isAuth ? catalogAuth?.channels : catalog?.channels) || []
+          (isAuth && role == roles.advertiser
+            ? catalogAuth?.channels
+            : isAuth && role == roles.manager
+              ? catalogManager?.channels
+              : catalogPublic?.channels) || []
         ).map((card) => {
           if (
             card.id === cartChannel.id &&
@@ -315,7 +345,11 @@ export const CatalogBlock: FC = () => {
             });
         }
         newCards = (
-          (isAuth ? catalogAuth?.channels : catalog?.channels) || []
+          (isAuth && role == roles.advertiser
+            ? catalogAuth?.channels
+            : isAuth && role == roles.manager
+              ? catalogManager?.channels
+              : catalogPublic?.channels) || []
         ).map((item) => {
           if (item.id === cartChannel.id) {
             const { selected_format, ...newItem } = item;
@@ -329,7 +363,12 @@ export const CatalogBlock: FC = () => {
       dispatch(
         catalogAPI.util.updateQueryData(
           "getCatalog",
-          { ...formFields, user_id: user_id, guest_id: guestId },
+          {
+            ...formFields,
+            user_id: userId,
+            guest_id: guestId,
+            project_id: projectId,
+          },
           (draft) => {
             draft.channels = newCards;
           },
@@ -365,23 +404,30 @@ export const CatalogBlock: FC = () => {
                 resetField={resetField}
                 page={formFields.page}
                 channels={
-                  (isAuth ? catalogAuth?.channels : catalog?.channels) || []
+                  (isAuth && role == roles.advertiser
+                    ? catalogAuth?.channels
+                    : isAuth && role == roles.manager
+                      ? catalogManager?.channels
+                      : catalogPublic?.channels) || []
                 }
                 onChangeCard={handleChangeCards}
                 isLast={
-                  (isAuth ? catalogAuth?.isLast : catalog?.isLast) || false
+                  (isAuth && role == roles.advertiser
+                    ? catalogAuth?.isLast
+                    : isAuth && role == roles.manager
+                      ? catalogManager?.isLast
+                      : catalogPublic?.isLast) || false
                 }
-                isLoading={isCatalogAuthLoading || isCatalogLoading}
+                isLoading={
+                  isCatalogAuthLoading ||
+                  isCatalogLoading ||
+                  isCatalogManagerLoading
+                }
               />
             </div>
             <div className={styles.cart}>
-              {cartPub && currentCart?.channels.length > 0 ? (
+              {currentCart?.channels.length > 0 && (
                 <CatalogCart cart={currentCart!} />
-              ) : (
-                cart &&
-                currentCart?.channels?.length > 0 && (
-                  <CatalogCart cart={currentCart!} />
-                )
               )}
             </div>
           </div>
