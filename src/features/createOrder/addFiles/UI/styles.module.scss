@@ -127,11 +127,11 @@
         font-size: 13px;
         font-style: normal;
         font-weight: 500;
-        line-height: 0.75;
       }
     }
 
     .button {
+      max-width: 60vw;
       display: grid;
       grid-auto-flow: row;
       justify-content: center;
@@ -145,7 +145,6 @@
         font-size: 14px;
         font-style: normal;
         font-weight: 500;
-        line-height: 0.75;
       }
 
       input {
@@ -168,6 +167,10 @@
   display: grid;
   grid-auto-flow: row;
   padding: 20px 30px;
+
+  @media (max-width: 576px) {
+    padding: 0;
+  }
 
   .item {
     display: grid;
@@ -197,13 +200,20 @@
           font-size: 14px;
           font-style: normal;
           font-weight: 600;
+
+          @media (max-width: 576px) {
+            font-size: 10px;
+          }
         }
         span {
           color: #a3a0a0;
           font-size: 12px;
           font-style: normal;
           font-weight: 600;
-          line-height: 0.75;
+
+          @media (max-width: 576px) {
+            font-size: 8px;
+          }
         }
       }
     }
