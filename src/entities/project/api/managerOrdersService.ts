@@ -59,7 +59,7 @@ export const managerProjectsAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
     createProjectCart: build.mutation<
       { succsess: boolean },
-      { project_id: string }
+      { project_id: string; language: languagesNum }
     >({
       query: (params) => ({
         url: `/cart/project/attach/`,

@@ -1,5 +1,6 @@
 export * from "./addFiles";
 export * from "./addMediaFiles";
+export * from "./approveCampaign";
 export * from "./calendar";
 export * from "./continueOrder";
 export * from "./createOrder";

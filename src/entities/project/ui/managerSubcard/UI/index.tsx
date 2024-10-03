@@ -133,8 +133,8 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
               <RatingIcon />
             </div>
             <div className={styles.subcard__left__description__title}>
-              <p>{subcard?.name}</p>
-              <span>{subcard?.category}</span>
+              <p className="truncate">{subcard?.name}</p>
+              <span className="truncate">{subcard?.category}</span>
             </div>
           </div>
           <div className={styles.subcard__left__info}>
@@ -144,7 +144,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
               >
                 <div>
                   <p>{t(`orders_manager.subcard.date`)}</p>
-                  <span>
+                  <span className="truncate">
                     {typeof subcard?.publish_date === "object"
                       ? subcard?.publish_date?.date_from +
                         " - " +

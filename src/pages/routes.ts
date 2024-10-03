@@ -58,7 +58,7 @@ export const publicBloggerRoutes: IRoute[] = [
 ];
 
 export const privateAdvertiserRoutes: IRoute[] = [
-  { path: paths.orders, component: OrdersPage },
+  { path: paths.orders, component: OrdersPage, sidebar: true },
 ];
 
 export const publicAdvertiserRoutes: IRoute[] = [

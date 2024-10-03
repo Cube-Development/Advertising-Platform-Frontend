@@ -3,6 +3,7 @@ import {
   advManagerProjectStatusFilter,
   getProjectsCardReq,
   IAdvManagerProjectsDev,
+  IAdvManagerProjectsDevCard,
   myProjectStatusFilter,
   projectTypesFilter,
   useGetAdvManagerProjectsQuery,
@@ -82,7 +83,6 @@ export const AdvOrders: FC = () => {
         skip: formState.type !== projectTypesFilter.managerProject,
       },
     );
-  console.log("projectsSelf", getParams, projectsSelf);
   // const save_cards = MY_PROJECT_SAVE_CARDS;
   // const dev_cards = MY_PROJECT_MANAGER_DEV_CARDS;
   return (
@@ -105,14 +105,10 @@ export const AdvOrders: FC = () => {
         {formState.type === projectTypesFilter.managerProject &&
         formState.status === advManagerProjectStatusFilter.develop ? (
           <DevProjectsList
-            // projects={projectsSelf?.projects || projectsManager?.projects || []}
             projects={
-              // dev_cards.projects ||
-              // (projectsSelf?.status === formState.status &&
-              //   projectsSelf?.projects) ||
-              // (projectsManager?.status === formState.status &&
-              //   projectsManager?.projects) ||
-              (projectsManager as IAdvManagerProjectsDev)?.projects || []
+              (projectsManager?.status === formState.status &&
+                (projectsManager?.projects as IAdvManagerProjectsDevCard[])) ||
+              []
             }
             handleOnChangePage={handleOnChangePage}
             isLoading={isFetchingSelf || isFetchingManager}
@@ -121,14 +117,13 @@ export const AdvOrders: FC = () => {
           />
         ) : formState.type === projectTypesFilter.savedProject ? (
           <TemplateProjectsList
-            // projects={save_cards.projects || []}
             projects={[]}
             handleOnChangePage={handleOnChangePage}
-            isLoading={isFetchingSelf || isFetchingManager}
-            isLast={projectsSelf?.isLast || projectsManager?.isLast || false}
+            isLoading={isFetchingSelf}
+            isLast={projectsSelf?.isLast || false}
             typeFilter={formState.type}
           />
-        ) : (
+        ) : formState.type === projectTypesFilter.managerProject ? (
           <AdvProjectsList
             statusFilter={
               formState.status as
@@ -136,21 +131,35 @@ export const AdvOrders: FC = () => {
                 | myProjectStatusFilter
             }
             typeFilter={formState.type as projectTypesFilter}
-            // projects={projectsSelf?.projects || projectsManager?.projects || []}
             projects={
-              (projectsSelf?.status === formState.status &&
-                formState.type === projectTypesFilter.myProject &&
-                projectsSelf?.projects) ||
               (projectsManager?.status === formState.status &&
-                formState.type === projectTypesFilter.managerProject &&
                 projectsManager?.projects) ||
               []
               // advMyProjectActiveCARDS.projects || []
             }
             handleOnChangePage={handleOnChangePage}
-            isLoading={isFetchingSelf || isFetchingManager}
-            isLast={projectsSelf?.isLast || projectsManager?.isLast || false}
+            isLoading={isFetchingManager}
+            isLast={projectsManager?.isLast || false}
           />
+        ) : (
+          formState.type === projectTypesFilter.myProject && (
+            <AdvProjectsList
+              statusFilter={
+                formState.status as
+                  | advManagerProjectStatusFilter
+                  | myProjectStatusFilter
+              }
+              typeFilter={formState.type as projectTypesFilter}
+              projects={
+                (projectsSelf?.status === formState.status &&
+                  projectsSelf?.projects) ||
+                []
+              }
+              handleOnChangePage={handleOnChangePage}
+              isLoading={isFetchingSelf}
+              isLast={projectsSelf?.isLast || false}
+            />
+          )
         )}
       </div>
     </div>

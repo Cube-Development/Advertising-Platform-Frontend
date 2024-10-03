@@ -1,25 +1,8 @@
-import { FC, useState } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import Cookies from "js-cookie";
-import { useTranslation } from "react-i18next";
-import { Languages } from "@shared/config/languages";
-import { useNavigate } from "react-router-dom";
-import { paths } from "@shared/routing";
-import { scroller } from "react-scroll";
-import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
-import { SpinnerLoader } from "@shared/ui/spinnerLoader";
-import {
-  CreateOrderDatetime,
-  CreateOrderLoading,
-  CreateOrderPayment,
-  CreateOrderPost,
-  CreateOrderTop,
-} from "../components";
-import { ICreateOrderBlur } from "../config";
 import {
   ContentType,
   ICreatePostForm,
   getContentType,
+  useApproveProjectMutation,
   useCreateOrderDatesMutation,
   useCreatePostMutation,
   useCreateUniquePostMutation,
@@ -28,13 +11,33 @@ import {
   useProjectOrdersQuery,
 } from "@entities/project";
 import { usePaymentProjectMutation } from "@entities/wallet";
+import { Languages } from "@shared/config/languages";
 import { getFileExtension } from "@shared/functions";
+import { useAppSelector } from "@shared/hooks";
+import { paths } from "@shared/routing";
+import { SpinnerLoader, useToast } from "@shared/ui";
+import Cookies from "js-cookie";
+import { FC, useState } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { scroller } from "react-scroll";
+import {
+  CreateOrderDatetime,
+  CreateOrderLoading,
+  CreateOrderPayment,
+  CreateOrderPost,
+  CreateOrderTop,
+} from "../components";
+import { ICreateOrderBlur } from "../config";
+import { roles } from "@entities/user";
 
 interface CreateOrderBlockProps {}
 
 export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
   const { toast } = useToast();
   const { t, i18n } = useTranslation();
+  const { isAuth, role } = useAppSelector((state) => state.user);
 
   const [blur, setBlur] = useState<ICreateOrderBlur>({
     post: true,
@@ -85,7 +88,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
   };
   const { data: projectChannels, isLoading: isOrdersLoading } =
     useProjectOrdersQuery(projectChannelsReq, {
-      skip: !project_id,
+      skip: !project_id || !isAuth,
     });
 
   const { register, getValues, handleSubmit, setValue, watch } =
@@ -105,6 +108,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
   const [createUniquePost] = useCreateUniquePostMutation();
   const [createOrderDates] = useCreateOrderDatesMutation();
   const [paymentProject] = usePaymentProjectMutation();
+  const [approveProject] = useApproveProjectMutation();
 
   const onSubmit: SubmitHandler<ICreatePostForm> = async (formData) => {
     if (
@@ -295,7 +299,10 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
         await createOrderDates(formData.datetime)
           .unwrap()
           .then(() => {
-            paymentProject(project_id)
+            (role === roles.advertiser
+              ? paymentProject(project_id)
+              : approveProject({ project_id: project_id })
+            )
               .unwrap()
               .then(() => {
                 toast({
@@ -360,7 +367,11 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
               getValues={getValues}
               formState={formState}
             />
-            <CreateOrderPayment isBlur={blur.payment} total_price={10000000} />
+            <CreateOrderPayment
+              isBlur={blur.payment}
+              total_price={10000000}
+              role={role}
+            />
           </>
         )}
       </form>

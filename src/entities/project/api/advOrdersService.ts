@@ -152,6 +152,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
         if (arg.arg.page === 1) {
           return {
             ...newItems,
+            status: arg.arg.status,
             isLast:
               newItems.projects.length !== INTERSECTION_ELEMENTS.advOrders,
           };
@@ -202,9 +203,12 @@ export const advProjectsAPI = authApi.injectEndpoints({
       }),
       transformResponse: (
         response: IAdvManagerProjectsDev | IAdvProjects | any,
+        meta,
+        arg,
       ) => {
         return {
           ...response,
+          status: arg?.status,
           isLast:
             response.projects.length !== INTERSECTION_ELEMENTS.managerOrders,
         };
@@ -217,6 +221,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
         if (arg.arg.page === 1) {
           return {
             ...newItems,
+            status: arg.arg.status,
             isLast:
               newItems.projects.length !== INTERSECTION_ELEMENTS.managerOrders,
           };

@@ -37,16 +37,14 @@ export const CustomCalendar: FC<DateListProps> = ({ onChange }) => {
   const { t } = useTranslation();
 
   const handleOnChange = (newDate: any) => {
-    console.log("newDate", newDate);
-
     if (Array.isArray(newDate)) {
       const newDateString = newDate.map(
         (date: Date) =>
-          `${date.getDate()}/${date.getMonth()}/${date.getFullYear()}`,
+          `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`,
       );
       setDateOject({ date: newDate, dateString: newDateString });
     } else {
-      const newDateString = `${newDate.getDate()}/${newDate.getMonth()}/${newDate.getFullYear()}`;
+      const newDateString = `${newDate.getDate()}/${newDate.getMonth() + 1}/${newDate.getFullYear()}`;
       setDateOject({ date: [newDate], dateString: newDateString });
     }
   };
@@ -114,7 +112,7 @@ export const CustomCalendar: FC<DateListProps> = ({ onChange }) => {
     }
     return null;
   };
-
+  console.log("dateOject", dateOject);
   return (
     <>
       <AlertDialog>

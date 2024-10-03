@@ -426,7 +426,7 @@ export const CatalogBlock: FC = () => {
               />
             </div>
             <div className={styles.cart}>
-              {currentCart?.channels.length > 0 && (
+              {currentCart?.channels?.length && (
                 <CatalogCart cart={currentCart!} />
               )}
             </div>

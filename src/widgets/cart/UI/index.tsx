@@ -253,7 +253,7 @@ export const Cart: FC = () => {
       const addReq = {
         channel_id: cartChannel?.id,
         format: cartChannel?.selected_format.format,
-        match: cartChannel?.match,
+        match: cartChannel?.match || 0, // если метч не существует итак отправляется  null , возможно при отправке json преображуется в JSONstringlify
         language: language?.id || Languages[0].id,
       };
       const removeReq = {

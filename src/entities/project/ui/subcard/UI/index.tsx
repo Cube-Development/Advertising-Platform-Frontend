@@ -73,7 +73,6 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
   const { toast } = useToast();
   const [screen, setScreen] = useState<number>(window.innerWidth);
   const [isSubcardOpen, setSubcardOpen] = useState(false);
-  console.log("subcard", subcard.id);
   const { data: post, error } = useGetPostQuery({ order_id: subcard.id });
   // const post = {
   //   id: "string",
