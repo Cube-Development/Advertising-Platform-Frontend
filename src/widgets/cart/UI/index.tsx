@@ -43,18 +43,18 @@ export const Cart: FC = () => {
 
   const { data: cart, isLoading: isLoadingCommon } = useReadCommonCartQuery(
     { language: language?.id || Languages[0].id },
-    { skip: !isAuth || role !== roles.advertiser }
+    { skip: !isAuth || role !== roles.advertiser },
   );
 
   const { data: cartManager, isLoading: isLoadingManager } =
     useReadManagerCartQuery(
       { project_id: projectId, language: language?.id || Languages[0].id },
-      { skip: !isAuth || role !== roles.manager || !projectId }
+      { skip: !isAuth || role !== roles.manager || !projectId },
     );
 
   const { data: cartPub, isLoading: isLoadingPublic } = useReadPublicCartQuery(
     { guest_id: guestId, language: language?.id || Languages[0].id },
-    { skip: isAuth || !guestId }
+    { skip: isAuth || !guestId },
   );
 
   useEffect(() => {
@@ -76,7 +76,7 @@ export const Cart: FC = () => {
   }, [cartManager]);
 
   const [currentCart, setCurrentCart] = useState<ICart>(
-    cartPub || cart || cartManager!
+    cartPub || cart || cartManager!,
   );
 
   const { watch, reset } = useForm<getRecommendChannels>({
@@ -101,7 +101,7 @@ export const Cart: FC = () => {
     { ...formFields },
     {
       skip: !currentCart,
-    }
+    },
   );
 
   // commonCart
@@ -231,7 +231,7 @@ export const Cart: FC = () => {
 
   const handleChangeCartCards = (cartChannel: ICatalogChannel) => {
     const currentCard = currentCart.channels?.find(
-      (card) => card.id === cartChannel?.id
+      (card) => card.id === cartChannel?.id,
     );
     console.log("handleChangeCartCards", currentCard);
     handleChangeCards(cartChannel, currentCard);
@@ -239,7 +239,7 @@ export const Cart: FC = () => {
 
   const handleChangeRecommendCards = (cartChannel: ICatalogChannel) => {
     const currentCard = recomendCards?.channels?.find(
-      (card) => card.id === cartChannel?.id
+      (card) => card.id === cartChannel?.id,
     );
     console.log("handleChangeCartCards", currentCard);
     handleChangeCards(cartChannel, currentCard);
@@ -247,7 +247,7 @@ export const Cart: FC = () => {
 
   const handleChangeCards = (
     cartChannel: ICatalogChannel,
-    currentCard: ICatalogChannel | undefined
+    currentCard: ICatalogChannel | undefined,
   ) => {
     if (cartChannel?.selected_format && currentCard) {
       const addReq = {
