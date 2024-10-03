@@ -932,27 +932,27 @@
       "title": "Аккаунт",
       "date": "Дата регистрации",
       "name": {
-        "title": "Имя", 
+        "title": "Имя",
         "default_value": "Gomer"
       },
       "surname": {
-        "title": "Фамилия", 
+        "title": "Фамилия",
         "default_value": "German"
       },
       "email": {
-        "title": "E-mail", 
+        "title": "E-mail",
         "default_value": "Sample@gmail.com"
-      } ,
+      },
       "phone": {
-        "title": "Телефон", 
+        "title": "Телефон",
         "default_value": "+998 90 999 99 99"
       },
       "language": {
         "title": "Язык",
-                "default_value": "Русский"
+        "default_value": "Русский"
       },
       "location": {
-        "title": "Локация", 
+        "title": "Локация",
         "default_value": "Узбекистан, Ташкент"
       },
       "save_btn": "Сохранить изменения"
@@ -960,15 +960,15 @@
     "password_block": {
       "title": "Изменение пароля",
       "current_password": {
-        "title": "Текущий пароль", 
+        "title": "Текущий пароль",
         "default_value": "Sample@gmail.com"
       },
       "new_password": {
-        "title": "Новый пароль", 
+        "title": "Новый пароль",
         "default_value": "Sample@gmail.com"
       },
       "accept_password": {
-        "title": "Подтверждение нового пароля", 
+        "title": "Подтверждение нового пароля",
         "default_value": "Sample@gmail.com"
       },
       "change_btn": "Изменить пароль"
@@ -978,13 +978,13 @@
       "email": {
         "title": "E-mail",
         "system": "Системные сообщения",
-        "project" :"Уведомления о проектах",
+        "project": "Уведомления о проектах",
         "individual": "Индивидуальные предложения и промо рассылки"
       },
       "bot": {
-        "title" : "Телеграм бот",
+        "title": "Телеграм бот",
         "system": "Системные сообщения",
-        "project" :"Уведомления о проектах",
+        "project": "Уведомления о проектах",
         "individual": "Индивидуальные предложения и промо рассылки",
         "enable_notifications": "Хотите подключить телеграм бота для уведомлений ?",
         "telegramm": {
@@ -995,16 +995,15 @@
         "change_btn": "Изменить",
         "cancel_btn": "Отменить"
       },
-       "continue_btn": "Продолжить"
+      "continue_btn": "Продолжить"
     }
-
   },
 
   "add_profile": {
     "add_profile": "Добавление данных",
     "types": {
       "selfemployedaccount": "Самозанятый",
-      "entity": "Юридическое лицо",
+      "entity": "Юр. лицо",
       "individual": "ИП"
     },
     "subtypes": {

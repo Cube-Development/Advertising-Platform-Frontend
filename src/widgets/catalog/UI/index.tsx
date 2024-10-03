@@ -352,14 +352,12 @@ export const CatalogBlock: FC = () => {
               : catalogPublic?.channels) || []
         ).map((item) => {
           if (item.id === cartChannel.id) {
-            const { selected_format, ...newItem } = item;
-            // console.log(selected_format);
+            const { ...newItem } = item;
             return newItem;
           }
           return item;
         });
       }
-      // setCards(newCards);
       dispatch(
         catalogAPI.util.updateQueryData(
           "getCatalog",
