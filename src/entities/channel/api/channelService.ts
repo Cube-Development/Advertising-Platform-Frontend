@@ -59,9 +59,10 @@ export const channelAPI = authApi.injectEndpoints({
         method: "GET",
         params: params,
       }),
-      transformResponse: (response: IChannelBlogger) => {
+      transformResponse: (response: IChannelBlogger, meta, arg) => {
         return {
           ...response,
+          status: arg?.status,
           isLast: response.channels.length !== INTERSECTION_ELEMENTS.myChannels,
         };
       },
@@ -73,6 +74,7 @@ export const channelAPI = authApi.injectEndpoints({
         if (arg.arg.page === 1) {
           return {
             ...newItems,
+            status: arg.arg.status,
             isLast:
               newItems.channels.length !== INTERSECTION_ELEMENTS.myChannels,
           };

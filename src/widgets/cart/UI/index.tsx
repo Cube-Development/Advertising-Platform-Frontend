@@ -253,8 +253,8 @@ export const Cart: FC = () => {
       const addReq = {
         channel_id: cartChannel?.id,
         format: cartChannel?.selected_format.format,
-        match: cartChannel?.match,
         language: language?.id || Languages[0].id,
+        ...(cartChannel?.match && { match: cartChannel.match }),
       };
       const removeReq = {
         channel_id: cartChannel?.id,

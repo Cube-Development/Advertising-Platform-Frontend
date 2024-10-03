@@ -1,7 +1,12 @@
-import { CART, ICart, useCreateCartMutation } from "@entities/project";
+import {
+  CART,
+  ICart,
+  useCreateCartMutation,
+  useCreateProjectCartMutation,
+} from "@entities/project";
 import { CreatePost as CreatePostBtn } from "@features/cart";
 import { ProtectIcon3 } from "@shared/assets";
-import { BREAKPOINT, PAGE_ANIMATION } from "@shared/config";
+import { BREAKPOINT, Languages, PAGE_ANIMATION } from "@shared/config";
 import { useAppSelector } from "@shared/hooks";
 import { paths } from "@shared/routing";
 import { ToastAction, useToast } from "@shared/ui";
@@ -19,11 +24,15 @@ interface CreatePostProps {
 
 export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
   const { toast } = useToast();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const language = Languages.find((lang) => {
+    return i18n.language === lang.name;
+  });
   const [screen, setScreen] = useState<number>(window.innerWidth);
   const { isAuth, role } = useAppSelector((state) => state.user);
   const navigate = useNavigate();
   const [createCart] = useCreateCartMutation();
+  const [createProjectCart] = useCreateProjectCartMutation();
 
   const handleCreateCart = () => {
     if (isAuth && role === roles.advertiser) {
@@ -43,6 +52,24 @@ export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
           // alert("У вас недостаточно средств, нужно пополнить баланс");
         });
     } else if (isAuth && role === roles.manager) {
+      // должен быть запрос на проверку общей суммы в корзине манагера проекта и бюджета этого проета
+      const projectId = Cookies.get("project_id") || "";
+      createProjectCart({
+        project_id: projectId,
+        language: language?.id || Languages[0].id,
+      })
+        .unwrap()
+        .then((data) => {
+          navigate(paths.createOrder);
+        })
+        .catch((error) => {
+          console.error("Ошибка во время создания корзины", error);
+          toast({
+            variant: "error",
+            title: t("toasts.cart.error"),
+            action: <ToastAction altText="Ok">Ok</ToastAction>,
+          });
+        });
     } else {
       toast({
         variant: "error",

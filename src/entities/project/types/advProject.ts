@@ -69,14 +69,17 @@ export interface IAdvManagerProjectsDev {
   page: number;
   elements: number;
   projects: IAdvManagerProjectsDevCard[];
+  isLast?: boolean;
+  status?: string;
 }
 
 export interface IAdvManagerProjectsDevCard {
   id: string;
   identifier: number;
-  tarif: string;
-  created: string;
-  name: string;
+  project_id: string;
+  project_name: string;
+  tariff_name: string;
+  tariff_date: string;
   budget: number;
 }
 

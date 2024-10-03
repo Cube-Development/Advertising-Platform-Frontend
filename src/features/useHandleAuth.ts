@@ -6,6 +6,7 @@ import { login, roles, toggleRole } from "@entities/user";
 import { useAppDispatch } from "@shared/hooks";
 import { useTransferPublicMutation } from "@entities/project";
 import { paths } from "@shared/routing";
+import { authApi, baseApi } from "@shared/api";
 
 export const useHandleAuth = () => {
   const { toast } = useToast();
@@ -29,6 +30,8 @@ export const useHandleAuth = () => {
 
   const handleAuth = async (role: roles, user_id: string): Promise<void> => {
     try {
+      dispatch(baseApi.util.resetApiState());
+      dispatch(authApi.util.resetApiState());
       dispatch(login());
       navigate(role === roles.advertiser ? paths.main : paths.mainBlogger);
       dispatch(toggleRole(role));

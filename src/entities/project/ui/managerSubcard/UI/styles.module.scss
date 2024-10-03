@@ -45,14 +45,14 @@
     &__left {
       display: grid;
       // grid-template: 1fr / 0.7fr 2fr 1.1fr;
-      grid-template: 1fr / max-content 2fr 1.1fr;
+      grid-template: 1fr / 0.7fr 2fr 1.1fr;
       padding-right: 20px;
       white-space: nowrap;
       height: 150px;
 
       @media (max-width: 992px) {
         // grid-template: 1fr / 0.7fr 2fr;
-        grid-template: 1fr / max-content 2fr;
+        grid-template: 1fr / 0.7fr 2fr;
         height: unset;
       }
 

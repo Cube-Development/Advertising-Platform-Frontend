@@ -12,6 +12,7 @@ import { Nav } from "./nav";
 import { Profile } from "./profile";
 import styles from "./styles.module.scss";
 import { Wallet } from "./wallet";
+import { authApi, baseApi } from "@shared/api";
 
 export const Header: FC = () => {
   const [screen, setScreen] = useState<number>(window.innerWidth);
@@ -19,6 +20,8 @@ export const Header: FC = () => {
   const dispatch = useAppDispatch();
   const toggleLogout = () => {
     dispatch(logout());
+    dispatch(baseApi.util.resetApiState());
+    dispatch(authApi.util.resetApiState());
   };
 
   const { data, isLoading } = useGetBalanceQuery(undefined, {

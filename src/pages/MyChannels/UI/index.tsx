@@ -81,7 +81,7 @@ export const MyChannelsPage: FC = () => {
 
         {formState.status !== channelStatusFilter.moderation ? (
           <ActiveChannels
-            cards={data?.channels || []}
+            cards={(formState.status === data?.status && data?.channels) || []}
             handleOnChangePage={() => setValue("page", page + 1)}
             isLoading={isFetching}
             isLast={data?.isLast || false}
@@ -90,7 +90,10 @@ export const MyChannelsPage: FC = () => {
         ) : (
           <ModerationChannels
             statusFilter={formState.status}
-            cards={data?.channels as IModerationChannel[]}
+            cards={
+              ((formState.status === data?.status &&
+                data?.channels) as IModerationChannel[]) || []
+            }
             handleOnChangePage={() => setValue("page", page + 1)}
             isLoading={isFetching}
             isLast={data?.isLast || false}

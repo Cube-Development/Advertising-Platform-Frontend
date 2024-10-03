@@ -4,8 +4,8 @@ import { PAGE_ANIMATION } from "@shared/config/animation";
 import { Accordion } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC } from "react";
-import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 export const FAQ: FC = () => {
   const { t } = useTranslation();

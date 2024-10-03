@@ -67,6 +67,7 @@ export const OrderCard: FC<PostPlatformProps> = ({
   };
 
   const handleChangeDate = (dateList: Date[]) => {
+    console.log("dateList", dateList);
     const form: ICreatePostForm = getValues();
     const datetime = form.datetime;
     const currentCard: IDatetime = (datetime.orders || []).find(
@@ -87,7 +88,7 @@ export const OrderCard: FC<PostPlatformProps> = ({
       currentCard.date_from = dateList[0].toLocaleDateString();
       currentCard.date_to = dateList[1].toLocaleDateString();
     }
-
+    console.log("currentCard", currentCard);
     datetime.orders = [...allCards, currentCard];
     setValue(CreatePostFormData.datetime, datetime);
   };

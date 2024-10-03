@@ -1,17 +1,20 @@
+import { roles } from "@entities/user";
+import { ApproveCampaign, CreateOrder } from "@features/createOrder";
 import { FC } from "react";
-import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
-import { CreateOrder } from "@features/createOrder";
+import styles from "./styles.module.scss";
 import heartAnimation from "/animated/heart_white_lottie.gif";
 
 interface CreateOrderPaymentProps {
   isBlur?: boolean;
   total_price: number;
+  role: roles;
 }
 
 export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
   isBlur,
   total_price,
+  role,
 }) => {
   const { t } = useTranslation();
 
@@ -36,7 +39,11 @@ export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
               </p>
             </div>
             <div className={styles.pay_btn}>
-              <CreateOrder />
+              {role === roles.advertiser ? (
+                <CreateOrder />
+              ) : (
+                <ApproveCampaign />
+              )}
             </div>
           </div>
         </div>

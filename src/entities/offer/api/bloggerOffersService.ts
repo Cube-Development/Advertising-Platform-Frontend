@@ -67,9 +67,11 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
         method: `POST`,
         body: BodyParams,
       }),
-      transformResponse: (response: IBloggerOffers) => {
+      transformResponse: (response: IBloggerOffers, meta, arg) => {
+        console.log("transformResponse", meta, arg);
         return {
           ...response,
+          status: arg?.status,
           isLast:
             response.orders.length !== INTERSECTION_ELEMENTS.bloggerOffers,
         };
