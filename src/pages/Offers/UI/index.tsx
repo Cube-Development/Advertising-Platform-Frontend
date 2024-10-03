@@ -53,7 +53,7 @@ export const OffersPage: FC = () => {
 
   // const data = BLOGGER_OFFERS;
   // const isFetching = false;
-
+  console.log(data);
   return (
     <div className="container sidebar">
       <div className={styles.wrapper}>
@@ -66,7 +66,7 @@ export const OffersPage: FC = () => {
         />
         <MyOffers
           statusFilter={formState.status as offerStatusFilter}
-          offers={data?.orders!}
+          offers={(data?.status === formState.status && data?.orders) || []}
           handleOnChangePage={handleOnChangePage}
           isLoading={isFetching}
           isLast={data?.isLast || false}

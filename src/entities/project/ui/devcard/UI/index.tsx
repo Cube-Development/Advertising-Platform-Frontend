@@ -2,10 +2,10 @@ import { IChatProps } from "@entities/communication";
 import { IAdvManagerProjectsDevCard } from "@entities/project";
 import { roles } from "@entities/user";
 import { MoreIcon } from "@shared/assets";
+import { BREAKPOINT } from "@shared/config";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { BREAKPOINT } from "@shared/config";
 
 interface AdvDevProjectCardProps {
   card: IAdvManagerProjectsDevCard;
@@ -32,16 +32,16 @@ export const AdvDevProjectCard: FC<AdvDevProjectCardProps> = ({
   return (
     <div className={`${styles.card} border__gradient`}>
       <div className={styles.card__title}>
-        <p className="truncate">{card?.name}</p>
+        <p className="truncate">{card?.project_name}</p>
         <div>
           <span className="truncate">№{card.identifier}</span>
-          <span>{card?.created}</span>
+          <span>{card?.tariff_date}</span>
         </div>
       </div>
       <div className={styles.card__info}>
         <div>
           <p>{t("orders_advertiser.card.tarif")}:</p>
-          <span>{card?.tarif}</span>
+          <span>{card?.tariff_name}</span>
         </div>
         <div>
           <p>{t("orders_advertiser.card.cost")}:</p>

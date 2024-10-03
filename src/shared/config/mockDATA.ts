@@ -2531,14 +2531,14 @@ export const MY_PROJECT_MANAGER_DEV_CARDS: IAdvManagerProjectsDev = {
   page: 1,
   elements: 6,
   projects: [
-    {
-      id: "1",
-      identifier: 2315484854,
-      tarif: "Старт",
-      created: "2024-09-01",
-      name: "Campaign Alpha",
-      budget: 50000000,
-    },
+    // {
+    //   id: "1",
+    //   identifier: 2315484854,
+    //   tarif: "Старт",
+    //   created: "2024-09-01",
+    //   name: "Campaign Alpha",
+    //   budget: 50000000,
+    // },
     // {
     //   id: "2",
     //   identifier: 8554546,

@@ -82,7 +82,7 @@ export const AdvOrders: FC = () => {
         skip: formState.type !== projectTypesFilter.managerProject,
       },
     );
-  // console.log("projectsSelf", projectsSelf);
+  console.log("projectsSelf", getParams, projectsSelf);
   // const save_cards = MY_PROJECT_SAVE_CARDS;
   // const dev_cards = MY_PROJECT_MANAGER_DEV_CARDS;
   return (
@@ -139,8 +139,10 @@ export const AdvOrders: FC = () => {
             // projects={projectsSelf?.projects || projectsManager?.projects || []}
             projects={
               (projectsSelf?.status === formState.status &&
+                formState.type === projectTypesFilter.myProject &&
                 projectsSelf?.projects) ||
               (projectsManager?.status === formState.status &&
+                formState.type === projectTypesFilter.managerProject &&
                 projectsManager?.projects) ||
               []
               // advMyProjectActiveCARDS.projects || []

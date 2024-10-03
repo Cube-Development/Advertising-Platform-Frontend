@@ -137,15 +137,16 @@ export const advProjectsAPI = authApi.injectEndpoints({
         body: BodyParams,
       }),
       transformResponse: (response: IAdvProjects, meta, arg) => {
-        console.log("transformResponse", meta, arg);
         return {
           ...response,
           status: arg?.status,
           isLast: response.projects.length !== INTERSECTION_ELEMENTS.advOrders,
         };
       },
-      serializeQueryArgs: ({ endpointName }) => {
-        return endpointName;
+      serializeQueryArgs: ({ endpointName, queryArgs }) => {
+        const { status } = queryArgs;
+        // console.log( `${endpointName}/${status}/${page}`)
+        return `${endpointName}/${status}`;
       },
       merge: (currentCache, newItems, arg) => {
         if (arg.arg.page === 1) {
@@ -190,13 +191,18 @@ export const advProjectsAPI = authApi.injectEndpoints({
       providesTags: [ADV_PROJECTS],
     }),
 
-    getAdvManagerProjects: build.query<IAdvProjects, getProjectsCardReq>({
+    getAdvManagerProjects: build.query<
+      IAdvManagerProjectsDev | IAdvProjects | any,
+      getProjectsCardReq
+    >({
       query: (params) => ({
         url: `/tariff/advertiser`,
         method: "GET",
         params: params,
       }),
-      transformResponse: (response: IAdvProjects) => {
+      transformResponse: (
+        response: IAdvManagerProjectsDev | IAdvProjects | any,
+      ) => {
         return {
           ...response,
           isLast:
