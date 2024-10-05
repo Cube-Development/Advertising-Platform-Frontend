@@ -79,6 +79,16 @@ export const managerProjectsAPI = authApi.injectEndpoints({
       }),
     }),
 
+    launchProject: build.mutation<{ success: boolean }, { project_id: string }>(
+      {
+        query: (params) => ({
+          url: `/tariff/project/launch`,
+          method: "PUT",
+          params: params,
+        }),
+      },
+    ),
+
     getManagerSubprojects: build.query<
       IManagerSubprojects,
       getManagerProjectOrdersReq
@@ -173,6 +183,7 @@ export const managerProjectsAPI = authApi.injectEndpoints({
 });
 
 export const {
+  useLaunchProjectMutation,
   useGetManagerProjectsQuery,
   useApproveProjectMutation,
   useGetManagerSubprojectsQuery,

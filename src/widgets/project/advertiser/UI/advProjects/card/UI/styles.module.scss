@@ -113,7 +113,7 @@
           font-size: 18px;
           font-style: normal;
           font-weight: 600;
-          line-height: 0.75;
+          line-height: 1;
         }
 
         span {
@@ -121,7 +121,7 @@
           font-size: 12px;
           font-style: normal;
           font-weight: 500;
-          line-height: 0.75;
+          line-height: 1;
         }
 
         @media (max-width: 992px) {
@@ -141,7 +141,7 @@
           font-size: 12px;
           font-style: normal;
           font-weight: 500;
-          line-height: 0.75;
+          line-height: 1;
         }
       }
     }
@@ -159,7 +159,7 @@
         color: var(--Personal-colors-black);
         font-style: normal;
         font-weight: 500;
-        line-height: 0.75;
+        line-height: 1;
       }
 
       @media (max-width: 992px) {
@@ -231,7 +231,7 @@
           font-size: 14px;
           font-style: normal;
           font-weight: 500;
-          line-height: 0.75;
+          line-height: 1;
         }
 
         span {
@@ -239,7 +239,7 @@
           font-size: 14px;
           font-style: normal;
           font-weight: 500;
-          line-height: 0.75;
+          line-height: 1;
 
           display: grid;
           grid-auto-flow: column;
@@ -252,7 +252,7 @@
             font-size: 10px;
             font-style: normal;
             font-weight: 500;
-            line-height: 0.75;
+            line-height: 1;
           }
         }
 
@@ -470,7 +470,7 @@
 
     &__icons_manager_request_approve {
       display: grid;
-      grid-template: 1fr / repeat(2, 1fr);
+      grid-template: 1fr / repeat(var(--columns), 1fr);
       column-gap: 10px;
       padding-top: 20px;
 
@@ -622,7 +622,7 @@
       font-size: 14px;
       font-style: normal;
       font-weight: 500;
-      line-height: 0.75;
+      line-height: 1;
     }
 
     svg {

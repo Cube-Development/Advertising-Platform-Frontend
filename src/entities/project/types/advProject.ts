@@ -21,6 +21,7 @@ export interface IAdvProjectCard {
   created: string;
   name: string;
   count_channels: number;
+  is_request_approve?: boolean;
   views: number;
   budget: number;
   remainder?: number;

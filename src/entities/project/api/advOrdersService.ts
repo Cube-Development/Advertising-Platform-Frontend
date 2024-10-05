@@ -184,12 +184,24 @@ export const advProjectsAPI = authApi.injectEndpoints({
       IAdvSubprojects,
       getProjectSubcardReq
     >({
-      query: (BodyParams) => ({
-        url: `/order/project/orders`,
-        method: `POST`,
-        body: BodyParams,
+      query: (params) => ({
+        url: `/tariff/order`,
+        method: `GET`,
+        params: params,
       }),
       providesTags: [ADV_PROJECTS],
+    }),
+
+    approveAdvManagerProject: build.mutation<
+      { success: boolean },
+      { project_id: string }
+    >({
+      query: (params) => ({
+        url: `/tariff/project/approve`,
+        method: "PUT",
+        params: params,
+      }),
+      invalidatesTags: [ADV_PROJECTS],
     }),
 
     getAdvManagerProjects: build.query<
@@ -248,6 +260,7 @@ export const {
   useCreateUniquePostMutation,
   useCreateOrderDatesMutation,
   useAcceptOrderMutation,
+  useApproveAdvManagerProjectMutation,
   useRejectOrderMutation,
   useGetAdvProjectsQuery,
   useGetAdvSubprojectsQuery,

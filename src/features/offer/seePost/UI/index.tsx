@@ -38,6 +38,7 @@ export const SeePost: FC<SeePostProps> = ({ post }) => {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
+
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>

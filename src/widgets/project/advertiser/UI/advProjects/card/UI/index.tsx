@@ -120,11 +120,28 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
         <>
           {typeFilter === projectTypesFilter.managerProject &&
           statusFilter === advManagerProjectStatusFilter.request_approve ? (
-            <div className={styles.card__info__icons_manager_request_approve}>
-              <div>
-                <span>{t("orders_advertiser.card.request_approve")}</span>
-              </div>
-              <AcceptProject />
+            <div
+              style={
+                {
+                  "--columns": `${card?.is_request_approve ? 1 : 2}`,
+                } as React.CSSProperties
+              }
+              className={styles.card__info__icons_manager_request_approve}
+            >
+              {card?.is_request_approve ? (
+                <div>
+                  <span>{t("orders_advertiser.card.request_approve")}</span>
+                </div>
+              ) : (
+                <>
+                  <div>
+                    <span>
+                      {t("orders_advertiser.card.not_request_approve")}
+                    </span>
+                  </div>
+                  <AcceptProject project_id={card?.id} />
+                </>
+              )}
             </div>
           ) : typeFilter === projectTypesFilter.managerProject &&
             statusFilter === advManagerProjectStatusFilter.completed ? (
@@ -336,7 +353,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
                       AcceptBtn={AcceptPost}
                       RejectBtn={RejectPost}
                       CheckBtn={CheckPost}
-                      SeeBtn={SeePost}
+                      SeePostBtn={SeePost}
                       ChannelChatBtn={OrderChat}
                       ChangeChannelBtn={ChangeChannel}
                       typeFilter={typeFilter}
@@ -425,7 +442,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
                             AcceptBtn={AcceptPost}
                             RejectBtn={RejectPost}
                             CheckBtn={CheckPost}
-                            SeeBtn={SeePost}
+                            SeePostBtn={SeePost}
                             ChannelChatBtn={OrderChat}
                             ChangeChannelBtn={ChangeChannel}
                             typeFilter={typeFilter}
