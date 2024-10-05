@@ -1,20 +1,25 @@
 import { IOrderFeature, useRejectOrderMutation } from "@entities/project";
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogTrigger,
+  Drawer,
+  DrawerContent,
+  DrawerTrigger,
   ToastAction,
   useToast,
 } from "@shared/ui";
-import { SendHorizonal } from "lucide-react";
-import { FC, useState } from "react";
+import { Loader, SendHorizonal, X } from "lucide-react";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { BREAKPOINT } from "@shared/config";
 
 export const RejectPost: FC<IOrderFeature> = ({ order_id }) => {
   const [comment, setComment] = useState("");
   const { toast } = useToast();
-  const [rejectOrder] = useRejectOrderMutation();
+  const [rejectOrder, { isLoading }] = useRejectOrderMutation();
   const { t } = useTranslation();
   const handleOnClick = () => {
     order_id &&
@@ -36,38 +41,117 @@ export const RejectPost: FC<IOrderFeature> = ({ order_id }) => {
           console.error("error: ", error);
         });
   };
+
+  const [screen, setScreen] = useState<number>(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreen(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const [open, setOpen] = useState(false);
+
   return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <small className={styles.button}>
-          {t(`order_btn.reject.btn_title`)}
-        </small>
-      </PopoverTrigger>
-      <PopoverContent className="rounded-[10px] p-0 w-full h-full" align="end">
-        <div className={styles.popover}>
-          <div className={styles.description}>
-            <h2 className={styles.description__title}>
-              {t(`order_btn.reject.description.title`)}
-            </h2>
-            <p className={styles.description__subtitle}>
-              {t(`order_btn.reject.description.subtitle`)}
-            </p>
-          </div>
-          <div className={styles.comment}>
-            <textarea
-              className={styles.comment__input}
-              // placeholder={t("order_btn.reject.placeholder")}
-              onChange={(e) => {
-                setComment(e.target.value);
-              }}
-              value={comment}
-            />
-            <p className={styles.comment__send_icon} onClick={handleOnClick}>
-              <SendHorizonal />
-            </p>
-          </div>
-        </div>
-      </PopoverContent>
-    </Popover>
+    <>
+      {screen >= BREAKPOINT.MD ? (
+        <Dialog open={open} onOpenChange={setOpen}>
+          <DialogTrigger>
+            <small className={styles.button}>
+              {t(`order_btn.reject.btn_title`)}
+            </small>
+          </DialogTrigger>
+          <DialogContent>
+            <div className={styles.popover}>
+              <div className="absolute -right-3 -top-3">
+                <DialogClose>
+                  <X width={20} height={20} stroke="#2d2d2d" />
+                </DialogClose>
+              </div>
+              <div className={styles.description}>
+                <h2 className={styles.description__title}>
+                  {t(`order_btn.reject.description.title`)}
+                </h2>
+                <p className={styles.description__subtitle}>
+                  {t(`order_btn.reject.description.subtitle`)}
+                </p>
+              </div>
+              <div className={styles.comment}>
+                <textarea
+                  className={styles.comment__input}
+                  onChange={(e) => {
+                    setComment(e.target.value);
+                  }}
+                  value={comment}
+                />
+                <p
+                  className={styles.comment__send_icon}
+                  onClick={handleOnClick}
+                >
+                  {isLoading ? (
+                    <Loader
+                      className="animate-spin"
+                      stroke="#4772e6"
+                      width={20}
+                      height={20}
+                    />
+                  ) : (
+                    <SendHorizonal />
+                  )}
+                </p>
+              </div>
+            </div>
+          </DialogContent>
+        </Dialog>
+      ) : (
+        <Drawer open={open} onOpenChange={setOpen}>
+          <DrawerTrigger asChild>
+            <small className={styles.button}>
+              {t(`order_btn.reject.btn_title`)}
+            </small>
+          </DrawerTrigger>
+          <DrawerContent className="top-[40dvh] rounded-t-xl">
+            <div className={styles.drawer_popover}>
+              <div className={styles.description}>
+                <h2 className={styles.description__title}>
+                  {t(`order_btn.reject.description.title`)}
+                </h2>
+                <p className={styles.description__subtitle}>
+                  {t(`order_btn.reject.description.subtitle`)}
+                </p>
+              </div>
+              <div className={styles.comment}>
+                <textarea
+                  className={styles.comment__input}
+                  onChange={(e) => {
+                    setComment(e.target.value);
+                  }}
+                  value={comment}
+                />
+                <p
+                  className={styles.comment__send_icon}
+                  onClick={handleOnClick}
+                >
+                  {isLoading ? (
+                    <Loader
+                      className="animate-spin"
+                      stroke="#4772e6"
+                      width={20}
+                      height={20}
+                    />
+                  ) : (
+                    <SendHorizonal />
+                  )}
+                </p>
+              </div>
+            </div>
+          </DrawerContent>
+        </Drawer>
+      )}
+    </>
   );
 };
