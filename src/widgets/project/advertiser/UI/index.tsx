@@ -42,7 +42,6 @@ export const AdvOrders: FC = () => {
   const page = pageFilter.order;
   const [currentPage, setCurrentPage] = useState(1);
   const handleOnChangePage = () => {
-    console.log(currentPage);
     setCurrentPage(currentPage + 1);
   };
 

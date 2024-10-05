@@ -38,6 +38,7 @@ interface PaymentDataProps {
     IExtendedProfileData,
     IExtendedProfileData
   >;
+  isPaymentLoading: boolean;
 }
 
 export const PaymentData: FC<PaymentDataProps> = ({
@@ -49,6 +50,7 @@ export const PaymentData: FC<PaymentDataProps> = ({
   onSubmit,
   register,
   handleSubmit,
+  isPaymentLoading,
 }) => {
   const { t } = useTranslation();
   const formFields = watch!();
@@ -136,7 +138,7 @@ export const PaymentData: FC<PaymentDataProps> = ({
       <div className={styles.accept}>
         <input
           type="checkbox"
-          onClick={(e) => handleChangeAccept(true, false)}
+          onClick={() => handleChangeAccept(true, false)}
         />
         <p>
           {`${t("wallet.accept.text1")} `}
@@ -149,12 +151,12 @@ export const PaymentData: FC<PaymentDataProps> = ({
       <div className={styles.accept}>
         <input
           type="checkbox"
-          onClick={(e) => handleChangeAccept(false, true)}
+          onClick={() => handleChangeAccept(false, true)}
         />
         <p>{t("wallet.save_data")}</p>
       </div>
       <div className={styles.button}>
-        <PaymentDidox />
+        <PaymentDidox isLoading={isPaymentLoading} />
       </div>
     </form>
   );

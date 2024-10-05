@@ -112,7 +112,6 @@ export const CustomCalendar: FC<DateListProps> = ({ onChange }) => {
     }
     return null;
   };
-  console.log("dateOject", dateOject);
   return (
     <>
       <AlertDialog>
