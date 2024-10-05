@@ -1,8 +1,8 @@
+import { dateSortingTypes } from "@entities/platform";
 import {
   advertiserProjectTypes,
   advManagerProjectStatusFilter,
   getProjectsCardReq,
-  IAdvManagerProjectsDev,
   IAdvManagerProjectsDevCard,
   myProjectStatusFilter,
   projectTypesFilter,
@@ -66,7 +66,7 @@ export const AdvOrders: FC = () => {
 
   const getParams: getProjectsCardReq = {
     page: currentPage,
-    date_sort: "increase",
+    date_sort: dateSortingTypes.decrease,
     status: formState.status,
     elements_on_page: INTERSECTION_ELEMENTS.advOrders,
   };

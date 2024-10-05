@@ -1,3 +1,4 @@
+import { dateSortingTypes } from "@entities/platform";
 import { IWalletHistory, paymentTypes } from "@entities/wallet";
 import { ADV_PROJECTS, BALANCE, LEGALS, authApi } from "@shared/api";
 import { INTERSECTION_ELEMENTS, languagesNum } from "@shared/config";
@@ -9,7 +10,7 @@ type PaymentOrderResponse = {
 export type HistoryReq = {
   language: languagesNum;
   page: number;
-  date_sort: "increase" | "decrease";
+  date_sort: dateSortingTypes;
   elements_on_page?: number;
 };
 

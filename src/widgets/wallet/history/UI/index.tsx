@@ -1,3 +1,4 @@
+import { dateSortingTypes } from "@entities/platform";
 import {
   HistoryCard,
   HistoryReq,
@@ -28,7 +29,7 @@ export const History: FC = () => {
     language: language?.id || Languages[0].id,
     page: currentPage,
     elements_on_page: INTERSECTION_ELEMENTS.history,
-    date_sort: "decrease",
+    date_sort: dateSortingTypes.decrease,
   };
 
   const { data, isLoading, isFetching } = useGetHistoryQuery(getParams);

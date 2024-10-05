@@ -24,7 +24,7 @@ export const ManagerNewProjectCard: FC<ManagerNewProjectCardProps> = ({
         <div className={styles.card__name}>
           <p className="truncate">Новая компания</p>
           <div>
-            <span className="truncate">№ {card?.id}</span>
+            <span className="truncate">№ {card?.identifier}</span>
             <span className="truncate">№ {card?.tariff_date}</span>
           </div>
         </div>

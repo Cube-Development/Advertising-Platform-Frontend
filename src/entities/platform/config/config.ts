@@ -1,5 +1,10 @@
 import { InstagramIcon, TelegramIcon, YouTubeIcon } from "@shared/assets";
 
+export enum dateSortingTypes {
+  increase = "increase",
+  decrease = "decrease",
+}
+
 export enum platformTypesStr {
   telegram = "telegram",
   instagram = "instagram",

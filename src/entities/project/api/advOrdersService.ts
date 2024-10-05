@@ -1,4 +1,4 @@
-import { PostTypesNum } from "@entities/platform";
+import { dateSortingTypes, PostTypesNum } from "@entities/platform";
 import {
   advManagerProjectStatusFilter,
   IAdvManagerProjectsDev,
@@ -10,7 +10,7 @@ import {
   managerProjectStatusFilter,
   myProjectStatusFilter,
 } from "@entities/project";
-import { ADV_PROJECTS, BLOGGER_OFFERS, authApi } from "@shared/api";
+import { ADV_PROJECTS, authApi, BLOGGER_OFFERS } from "@shared/api";
 import { INTERSECTION_ELEMENTS, languagesNum } from "@shared/config";
 
 export interface ICreatePostReq {
@@ -36,7 +36,7 @@ export interface getProjectsCardReq {
     | managerProjectStatusFilter
     | string;
   elements_on_page?: number;
-  date_sort?: string;
+  date_sort?: dateSortingTypes;
 }
 
 export interface getProjectSubcardReq {

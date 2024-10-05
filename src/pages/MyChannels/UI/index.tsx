@@ -5,7 +5,11 @@ import {
   useGetChannelsByStatusQuery,
 } from "@entities/channel";
 import { offerStatusFilter } from "@entities/offer";
-import { platformTypes, platformTypesNum } from "@entities/platform";
+import {
+  dateSortingTypes,
+  platformTypes,
+  platformTypesNum,
+} from "@entities/platform";
 import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 import { pageFilter } from "@shared/routing";
 import { BarFilter } from "@widgets/barFilter";
@@ -39,7 +43,7 @@ export const MyChannelsPage: FC = () => {
     language: language?.id || Languages[0].id,
     page: formState.page,
     elements_on_page: INTERSECTION_ELEMENTS.myChannels,
-    date_sort: "increase",
+    date_sort: dateSortingTypes.decrease,
     status: formState.status,
   };
 
