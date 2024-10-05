@@ -409,6 +409,13 @@ main {
 
 .deactive {
   pointer-events: none;
+
+  button {
+    filter: grayscale(0.9);
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+  }
   // background: var(--Inside-container);
   // filter: grayscale(100%);
 }
