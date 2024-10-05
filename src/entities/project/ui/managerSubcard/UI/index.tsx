@@ -9,6 +9,7 @@ import {
   platformTypesNum,
 } from "@entities/platform";
 import {
+  GetPostRes,
   IManagerProjectSubcard,
   IOrderFeature,
   desireStatus,
@@ -49,7 +50,7 @@ interface ManagerProjectSubcardProps {
   AcceptBtn: FC<IOrderFeature>;
   RejectBtn: FC<IOrderFeature>;
   CheckBtn: FC<IOrderFeature>;
-  SeePostBtn: FC;
+  SeePostBtn: FC<{ post: GetPostRes }>;
   project_id: string;
   ChangeChannelBtn: FC<{ project_id: string }>;
   ChangePostBtn: FC<{ project_id: string }>;
@@ -304,7 +305,8 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
               <div className={styles.subcard__accepted}>
                 <p>{t(`orders_manager.order_status.accepted.title`)}</p>
                 <span>{t(`orders_manager.order_status.accepted.text`)}</span>
-                <SeePostBtn />
+                <SeePostBtn post={post!} />
+                {/* <SeePostBtn /> */}
               </div>
             ) : subcard?.api_status === orderStatus.moderation ? (
               <div className={styles.subcard__moderation}>
@@ -322,7 +324,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
               <div className={styles.subcard__waiting}>
                 <div>
                   <p>{t(`orders_manager.order_status.waiting.title`)}</p>
-                  <SeePostBtn />
+                  <SeePostBtn post={post!} />
                 </div>
               </div>
             ) : (

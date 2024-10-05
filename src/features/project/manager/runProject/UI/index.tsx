@@ -1,17 +1,43 @@
+import { MyButton, ToastAction, useToast } from "@shared/ui";
 import { FC } from "react";
-import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
-import { MyButton } from "@shared/ui";
-import { ArrowLongHorizontalIcon } from "@shared/assets";
+import styles from "./styles.module.scss";
+import { useLaunchProjectMutation } from "@entities/project";
 
-interface RunProjectProps {
+interface LaunchProjectProps {
   is_request_approve: boolean;
+  project_id: string;
 }
 
-export const RunProject: FC<RunProjectProps> = ({ is_request_approve }) => {
+export const LaunchProject: FC<LaunchProjectProps> = ({
+  is_request_approve,
+  project_id,
+}) => {
+  const { toast } = useToast();
   const { t } = useTranslation();
+  const [launchProject] = useLaunchProjectMutation();
+  const handleOnClick = () => {
+    project_id &&
+      launchProject({ project_id })
+        .unwrap()
+        .then(() => {
+          toast({
+            variant: "success",
+            title: t("toasts.orders_manager.launch_project.success"),
+          });
+        })
+        .catch((error) => {
+          toast({
+            variant: "error",
+            title: t("toasts.orders_manager.launch_project.error"),
+            action: <ToastAction altText="Ok">Ok</ToastAction>,
+          });
+          console.error("error: ", error);
+        });
+  };
   return (
     <MyButton
+      onClick={handleOnClick}
       className={`${styles.button} ${is_request_approve ? "" : "deactive"}`}
       buttons_type="button__white"
     >

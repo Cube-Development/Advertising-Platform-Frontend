@@ -1,14 +1,6 @@
 import { IChatProps } from "@entities/communication";
 import {
-  DisplayFeed,
-  DisplayShorts,
-  DisplayStories,
-  DisplayTelegram,
-  DisplayVideos,
-  PostTypesNum,
-  platformTypesNum,
-} from "@entities/platform";
-import {
+  GetPostRes,
   IAdvProjectSubcard,
   IOrderFeature,
   advManagerProjectStatusFilter,
@@ -33,13 +25,8 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogContent,
-  AlertDialogTrigger,
   useToast,
 } from "@shared/ui";
-import { X } from "lucide-react";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -50,7 +37,7 @@ interface AdvSubcardProps {
   AcceptBtn: FC<IOrderFeature>;
   RejectBtn: FC<IOrderFeature>;
   CheckBtn: FC<IOrderFeature>;
-  SeeBtn: FC;
+  SeePostBtn: FC<{ post: GetPostRes }>;
   ChangeChannelBtn: FC<{ project_id: string }>;
   ChannelChatBtn: FC<IChatProps>;
   typeFilter: projectTypesFilter;
@@ -63,7 +50,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
   AcceptBtn,
   RejectBtn,
   CheckBtn,
-  SeeBtn,
+  SeePostBtn,
   ChannelChatBtn,
   ChangeChannelBtn,
   typeFilter,
@@ -284,7 +271,8 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                     {t(`orders_advertiser.order_status.accepted.text`)}
                   </span>
                 )}
-                <AlertDialog>
+                <SeePostBtn post={post!} />
+                {/* <AlertDialog>
                   <AlertDialogTrigger asChild>
                     <div>
                       <SeeBtn />
@@ -345,7 +333,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                         )}
                     </div>
                   </AlertDialogContent>
-                </AlertDialog>
+                </AlertDialog> */}
               </div>
             ) : subcard?.api_status === orderStatus.moderation ? (
               <div className={styles.subcard__moderation}>
@@ -363,7 +351,8 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
               <div className={styles.subcard__waiting}>
                 <div>
                   <p>{t(`orders_advertiser.order_status.waiting.title`)}</p>
-                  <AlertDialog>
+                  <SeePostBtn post={post!} />
+                  {/* <AlertDialog>
                     <AlertDialogTrigger asChild>
                       <div>
                         <SeeBtn />
@@ -425,7 +414,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                           )}
                       </div>
                     </AlertDialogContent>
-                  </AlertDialog>
+                  </AlertDialog> */}
                 </div>
               </div>
             ) : subcard?.api_status === orderStatus.order_review ? (
@@ -434,7 +423,8 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                   <p>{t(`orders_advertiser.order_status.agreed.title`)}</p>
                   <div>
                     <ChangeChannelBtn project_id={"sfsdf"} />
-                    <CheckBtn />
+                    <SeePostBtn post={post!} />
+                    {/* <CheckBtn /> */}
                   </div>
                 </div>
               </div>
@@ -604,7 +594,8 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
               {typeFilter === projectTypesFilter.managerProject || (
                 <span>{t(`orders_advertiser.order_status.accepted.text`)}</span>
               )}
-              <AlertDialog>
+              <SeePostBtn post={post!} />
+              {/* <AlertDialog>
                 <AlertDialogTrigger asChild>
                   <div>
                     <SeeBtn />
@@ -665,7 +656,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                       )}
                   </div>
                 </AlertDialogContent>
-              </AlertDialog>
+              </AlertDialog> */}
             </div>
           ) : subcard?.api_status === orderStatus.moderation ? (
             <div className={styles.subcard__moderation}>
@@ -683,7 +674,8 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
             <div className={styles.subcard__waiting}>
               <div>
                 <p>{t(`orders_advertiser.order_status.waiting.title`)}</p>
-                <AlertDialog>
+                <SeePostBtn post={post!} />
+                {/* <AlertDialog>
                   <AlertDialogTrigger asChild>
                     <div>
                       <SeeBtn />
@@ -744,7 +736,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                         )}
                     </div>
                   </AlertDialogContent>
-                </AlertDialog>
+                </AlertDialog> */}
               </div>
             </div>
           ) : subcard?.api_status === orderStatus.order_review ? (
@@ -753,7 +745,8 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                 <p>{t(`orders_advertiser.order_status.agreed.title`)}</p>
                 <div>
                   <ChangeChannelBtn project_id={"sfsdf"} />
-                  <CheckBtn />
+                  <SeePostBtn post={post!} />
+                  {/* <CheckBtn /> */}
                 </div>
               </div>
             </div>

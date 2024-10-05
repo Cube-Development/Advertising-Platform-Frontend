@@ -19,7 +19,7 @@ import {
 } from "@features/order";
 import {
   DownloadReport,
-  RunProject,
+  LaunchProject,
   SendToBot,
   TechnicalSpecification,
 } from "@features/project";
@@ -131,8 +131,9 @@ const Card: FC<ManagerProjectCardProps> = ({ card, statusFilter }) => {
                     : t("orders_manager.card.not_request_approve")}
                 </span>
               </div>
-              <RunProject
+              <LaunchProject
                 is_request_approve={card?.is_request_approve || false}
+                project_id={card?.project_id}
               />
             </div>
           ) : statusFilter === managerProjectStatusFilter.completed ? (
