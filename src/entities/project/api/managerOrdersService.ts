@@ -1,4 +1,8 @@
-import { PostTypesNum, platformTypesNum } from "@entities/platform";
+import {
+  PostTypesNum,
+  dateSortingTypes,
+  platformTypesNum,
+} from "@entities/platform";
 import {
   IManagerNewProjects,
   IManagerProjects,
@@ -11,7 +15,7 @@ import { INTERSECTION_ELEMENTS, languagesNum } from "@shared/config";
 
 export interface getManagerProjectsCardReq {
   page: number;
-  date_sort?: string;
+  date_sort?: dateSortingTypes;
   elements_on_page?: number;
   status: string;
   language?: number;

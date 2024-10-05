@@ -8,13 +8,14 @@ import {
   channelStatus,
   channelStatusFilter,
 } from "@entities/channel";
+import { dateSortingTypes } from "@entities/platform";
 import { BLOGGER_CHANNELS, authApi } from "@shared/api";
 import { INTERSECTION_ELEMENTS, languagesNum } from "@shared/config";
 
 export interface getChannelsByStatusReq {
   language: languagesNum;
   page: number;
-  date_sort: string;
+  date_sort: dateSortingTypes;
   elements_on_page?: number;
   status: channelStatusFilter | string;
 }

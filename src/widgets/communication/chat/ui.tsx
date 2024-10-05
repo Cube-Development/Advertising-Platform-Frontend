@@ -177,6 +177,7 @@ export const Chat: FC<IChatProps> = ({
     transition: { transition: { duration: 0.5 } },
   };
   const NEW_MESSAGE = true;
+  console.log(isFull, toRole);
   return (
     <div className={styles.wrapper}>
       {screen >= BREAKPOINT.MD ? (
@@ -283,9 +284,15 @@ export const Chat: FC<IChatProps> = ({
               // <ChatIcon className="active__icon" />
               <ChatIcon className="icon__white" />
             )}
-            {toRole === roles.blogger && <p>{t("chat.role.blogger")}</p>}
-            {toRole === roles.manager && <p>{t("chat.role.manager")}</p>}
-            {toRole === roles.advertiser && <p>{t("chat.role.advertiser")}</p>}
+            {isFull && toRole === roles.blogger && (
+              <p>{t("chat.role.blogger")}</p>
+            )}
+            {isFull && toRole === roles.manager && (
+              <p>{t("chat.role.manager")}</p>
+            )}
+            {isFull && toRole === roles.advertiser && (
+              <p>{t("chat.role.advertiser")}</p>
+            )}
           </DrawerTrigger>
           <DrawerContent>
             <div className={styles.content}>

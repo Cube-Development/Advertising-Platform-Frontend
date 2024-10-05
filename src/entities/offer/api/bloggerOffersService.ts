@@ -1,7 +1,7 @@
 import { IBloggerOffers, offerStatusFilter } from "@entities/offer";
-import { platformTypesNum } from "@entities/platform";
+import { dateSortingTypes } from "@entities/platform";
 import { IOrderFeature } from "@entities/project";
-import { authApi, ADV_PROJECTS, BLOGGER_OFFERS } from "@shared/api";
+import { ADV_PROJECTS, authApi, BLOGGER_OFFERS } from "@shared/api";
 import { INTERSECTION_ELEMENTS, languagesNum } from "@shared/config";
 
 interface OrderDate {
@@ -19,7 +19,7 @@ interface OrderDates {
 export interface getOrdersByStatusReq {
   language: languagesNum;
   page: number;
-  date_sort: string;
+  date_sort: dateSortingTypes;
   elements_on_page?: number;
   status: offerStatusFilter | string;
 }

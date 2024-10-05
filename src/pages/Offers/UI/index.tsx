@@ -3,7 +3,11 @@ import {
   offerStatusFilter,
   useGetBloggerOrdersQuery,
 } from "@entities/offer";
-import { platformTypes, platformTypesNum } from "@entities/platform";
+import {
+  dateSortingTypes,
+  platformTypes,
+  platformTypesNum,
+} from "@entities/platform";
 import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 import { pageFilter } from "@shared/routing";
 import { BarFilter } from "@widgets/barFilter";
@@ -40,7 +44,7 @@ export const OffersPage: FC = () => {
     language: language?.id || Languages[0].id,
     page: currentPage,
     elements_on_page: INTERSECTION_ELEMENTS.bloggerOffers,
-    date_sort: "increase",
+    date_sort: dateSortingTypes.decrease,
     status: formState.status,
   };
 
