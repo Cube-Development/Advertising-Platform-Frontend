@@ -36,7 +36,6 @@ export const MyChannelsPage: FC = () => {
   const { platform, status, page } = formState;
 
   const getParams: getChannelsByStatusReq = {
-    platform: formState.platform,
     language: language?.id || Languages[0].id,
     page: formState.page,
     elements_on_page: INTERSECTION_ELEMENTS.myChannels,

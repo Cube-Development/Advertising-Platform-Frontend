@@ -64,9 +64,11 @@ export const Withdrawal: FC = () => {
 
   const [readOneLegal, { isLoading: isOneLegalLoading, error: oneLegalError }] =
     useReadOneLegalMutation();
-  const [paymentWithdrawal] = usePaymentWithdrawalMutation();
-  const [createLegal] = useCreateLegalMutation();
-  const [editLegal] = useEditLegalMutation();
+  const [paymentWithdrawal, { isLoading: isPaymentLoading }] =
+    usePaymentWithdrawalMutation();
+  const [createLegal, { isLoading: isCreateLoading }] =
+    useCreateLegalMutation();
+  const [editLegal, { isLoading: isEditLoading }] = useEditLegalMutation();
 
   const changeActiveAccount = async (account: ILegalCardShort) => {
     if (activeAccount && account.legal_id === activeAccount.legal_id) {
@@ -233,6 +235,9 @@ export const Withdrawal: FC = () => {
               onSubmit={onSubmit}
               register={register}
               handleSubmit={handleSubmit}
+              isPaymentLoading={
+                isCreateLoading || isEditLoading || isPaymentLoading
+              }
             />
             <div>
               <div className={styles.content__right}>

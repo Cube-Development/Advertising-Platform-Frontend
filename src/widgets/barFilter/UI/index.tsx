@@ -1,6 +1,5 @@
 import { channelStatusFilter } from "@entities/channel";
 import { offerStatusFilter } from "@entities/offer";
-import { platformTypes } from "@entities/platform";
 import {
   advManagerProjectStatusFilter,
   myProjectStatusFilter,
@@ -12,9 +11,7 @@ import {
   BarStatusFilter,
   BarTop,
   BarTypesFilter,
-  SelectOptions,
   TurnkeyProject,
-  filterData,
 } from "@features/other";
 import { NewProject } from "@features/project";
 import { useAppSelector } from "@shared/hooks";
@@ -59,7 +56,7 @@ export const BarFilter: FC<BarFilterProps> = ({
   return (
     <div className={styles.wrapper}>
       <BarTop
-        listLength={listLength}
+        listLength={true}
         NewProjectBtn={NewProject}
         TurnkeyProjectBtn={TurnkeyProject}
         AddChannelBtn={AddChannel}
@@ -101,18 +98,6 @@ export const BarFilter: FC<BarFilterProps> = ({
           changeStatus={changeStatus}
           statusFilter={statusFilter}
         />
-      )}
-      {page !== pageFilter.order && (
-        <div className={styles.filter}>
-          <SelectOptions
-            onChange={setValue!}
-            options={platformTypes}
-            textData="filter.title"
-            single={true}
-            type={filterData.platform}
-            isFilter={true}
-          />
-        </div>
       )}
     </div>
   );

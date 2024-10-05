@@ -1,13 +1,12 @@
-import { FC } from "react";
-import styles from "./styles.module.scss";
-import { useTranslation } from "react-i18next";
 import { ILegalCardShort } from "@entities/wallet";
 import { SpinnerLoaderSmall } from "@shared/ui";
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 interface LegalCardProps {
   account: ILegalCardShort;
   isActive: boolean;
-  changeActiveAccount: (account: ILegalCardShort) => void;
   isOneLegalLoading?: boolean;
   oneLegalError?: any;
 }
@@ -15,7 +14,6 @@ interface LegalCardProps {
 export const LegalCard: FC<LegalCardProps> = ({
   account,
   isActive,
-  changeActiveAccount,
   isOneLegalLoading,
   oneLegalError,
 }) => {
@@ -23,7 +21,6 @@ export const LegalCard: FC<LegalCardProps> = ({
   return (
     <div
       className={`${styles.wrapper} ${isActive ? styles.active__account : ""}`}
-      onClick={() => changeActiveAccount(account)}
     >
       {!oneLegalError && (
         <>

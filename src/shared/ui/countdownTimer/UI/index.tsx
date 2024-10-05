@@ -64,7 +64,7 @@ export const CountdownTimer: FC<CountdownTimerProps> = ({ date_to, time }) => {
           {diffDays} {handleDay(diffDays)}
         </span>
       ) : (
-        <span>
+        <span className={`${isTimeout ? styles.isTimeout : ""}`}>
           {`${diffH}`.padStart(2, "0")}:{`${diffM}`.padStart(2, "0")}:
           {`${diffS}`.padStart(2, "0")}
         </span>

@@ -17,7 +17,6 @@ interface OrderDates {
 }
 
 export interface getOrdersByStatusReq {
-  platform: platformTypesNum;
   language: languagesNum;
   page: number;
   date_sort: string;
@@ -68,7 +67,6 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
         body: BodyParams,
       }),
       transformResponse: (response: IBloggerOffers, meta, arg) => {
-        console.log("transformResponse", meta, arg);
         return {
           ...response,
           status: arg?.status,
@@ -78,29 +76,29 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
         const { status } = queryArgs;
-        // console.log( `${endpointName}/${status}/${page}`)
-        return `${endpointName}/${status}`;
+        return `${endpointName}/${status}/`;
       },
       merge: (currentCache, newItems, arg) => {
         if (arg.arg.page === 1) {
           return {
             ...newItems,
+            status: arg.arg.status,
             isLast:
               newItems.orders.length !== INTERSECTION_ELEMENTS.bloggerOffers,
           };
         }
         return {
           ...newItems,
-          projects: [...currentCache.orders, ...newItems.orders],
+          orders: [...currentCache.orders, ...newItems.orders],
           status: arg.arg.status,
           isLast:
             newItems.orders.length !== INTERSECTION_ELEMENTS.bloggerOffers,
         };
       },
 
-      // forceRefetch({ currentArg, previousArg }) {
-      //   return currentArg?.page !== previousArg?.page;
-      // },
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg?.page !== previousArg?.page;
+      },
       providesTags: [BLOGGER_OFFERS],
     }),
   }),

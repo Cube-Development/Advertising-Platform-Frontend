@@ -67,11 +67,13 @@ export const Topup: FC = () => {
   const [readOneLegal, { isLoading: isOneLegalLoading, error: oneLegalError }] =
     useReadOneLegalMutation();
 
-  const [createLegal] = useCreateLegalMutation();
+  const [createLegal, { isLoading: isCreateLoading }] =
+    useCreateLegalMutation();
 
-  const [editLegal] = useEditLegalMutation();
+  const [editLegal, { isLoading: isEditLoading }] = useEditLegalMutation();
 
-  const [paymentDeposit] = usePaymentDepositMutation();
+  const [paymentDeposit, { isLoading: isPaymentLoading }] =
+    usePaymentDepositMutation();
 
   const changeActiveAccount = async (account: ILegalCardShort) => {
     if (activeAccount && account.legal_id === activeAccount.legal_id) {
@@ -239,6 +241,9 @@ export const Topup: FC = () => {
                 watch={watch}
                 profileFilter={formState.profileFilter}
                 subprofileFilter={formState.subprofileFilter}
+                isPaymentLoading={
+                  isCreateLoading || isEditLoading || isPaymentLoading
+                }
               />
               <div>
                 <div className={styles.content__right}>

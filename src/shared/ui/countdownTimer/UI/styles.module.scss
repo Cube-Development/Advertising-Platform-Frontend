@@ -1,7 +1,11 @@
 .wrapper {
   display: grid;
   align-items: center;
-  p {
+  span {
     color: var(--Orange);
+
+    &.isTimeout {
+      color: var(--Text-sample);
+    }
   }
 }

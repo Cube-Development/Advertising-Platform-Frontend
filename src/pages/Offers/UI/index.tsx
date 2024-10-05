@@ -37,10 +37,9 @@ export const OffersPage: FC = () => {
   };
 
   const getParams: getOrdersByStatusReq = {
-    platform: formState.platform,
     language: language?.id || Languages[0].id,
     page: currentPage,
-    elements_on_page: INTERSECTION_ELEMENTS.advOrders,
+    elements_on_page: INTERSECTION_ELEMENTS.bloggerOffers,
     date_sort: "increase",
     status: formState.status,
   };
@@ -49,11 +48,8 @@ export const OffersPage: FC = () => {
 
   useEffect(() => {
     setCurrentPage(1);
-  }, [formState]);
+  }, [formState.status]);
 
-  // const data = BLOGGER_OFFERS;
-  // const isFetching = false;
-  console.log(data);
   return (
     <div className="container sidebar">
       <div className={styles.wrapper}>

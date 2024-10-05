@@ -8,12 +8,10 @@ import {
   channelStatus,
   channelStatusFilter,
 } from "@entities/channel";
-import { platformTypesNum } from "@entities/platform";
 import { BLOGGER_CHANNELS, authApi } from "@shared/api";
 import { INTERSECTION_ELEMENTS, languagesNum } from "@shared/config";
 
 export interface getChannelsByStatusReq {
-  platform: platformTypesNum;
   language: languagesNum;
   page: number;
   date_sort: string;
@@ -67,8 +65,8 @@ export const channelAPI = authApi.injectEndpoints({
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
-        const { platform, language, date_sort, status } = queryArgs;
-        return `${endpointName}/${platform}/${language}/${date_sort}/${status}`;
+        const { language, date_sort, status } = queryArgs;
+        return `${endpointName}/${language}/${date_sort}/${status}`;
       },
       merge: (currentCache: any, newItems, arg) => {
         if (arg.arg.page === 1) {

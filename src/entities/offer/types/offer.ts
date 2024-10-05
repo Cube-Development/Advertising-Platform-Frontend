@@ -1,7 +1,9 @@
+import { platformTypesNum } from "@entities/platform";
 import { offerStatus } from "../config";
 
 export interface IBloggerOfferCard {
   id: string;
+  platform: platformTypesNum;
   identifier: number;
   created: string;
   date_accept: string;

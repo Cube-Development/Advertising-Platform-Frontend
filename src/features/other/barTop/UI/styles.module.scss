@@ -35,24 +35,31 @@
     }
 
     button {
-      font-size: var(--column-gap-option-item-xl);
-
-      @media (max-width: 992px) {
-        font-size: var(--column-gap-option-item-lg);
-      }
+      border-radius: 15px;
+      padding: 15px;
 
       @media (max-width: 768px) {
-        font-size: var(--column-gap-option-item-md);
-        border-radius: 15px;
         padding: 10px 15px;
       }
 
-      @media (max-width: 576px) {
-        font-size: var(--column-gap-option-item-sm);
-      }
+      p {
+        font-size: var(--column-gap-option-item-xl);
 
-      @media (max-width: 375px) {
-        font-size: var(--column-gap-option-item-xs);
+        @media (max-width: 992px) {
+          font-size: var(--column-gap-option-item-lg);
+        }
+
+        @media (max-width: 768px) {
+          font-size: var(--column-gap-option-item-md);
+        }
+
+        @media (max-width: 576px) {
+          font-size: var(--column-gap-option-item-sm);
+        }
+
+        @media (max-width: 375px) {
+          font-size: var(--column-gap-option-item-xs);
+        }
       }
     }
   }

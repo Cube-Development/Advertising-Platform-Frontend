@@ -1,6 +1,6 @@
 import { PlusIcon2 } from "@shared/assets";
 import { paths } from "@shared/routing";
-import { IStartProjectProps } from "@shared/types/common";
+import { IStartProjectProps } from "@shared/types";
 import { MyButton } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";

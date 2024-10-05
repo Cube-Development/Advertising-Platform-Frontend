@@ -15,6 +15,10 @@ import {
 import { ContentType, GetPostRes, ICreatePostForm } from "@entities/project";
 import { PostTypesNum } from "@entities/platform";
 import { EyeDisabledIcon } from "@shared/assets";
+import { EditorContent, useEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import Link from "@tiptap/extension-link";
+import Underline from "@tiptap/extension-underline";
 
 interface DisplayFeedProps {
   formState?: ICreatePostForm;
@@ -129,9 +133,11 @@ export const DisplayFeed: FC<DisplayFeedProps> = ({
       }
     };
 
+    updateSizes();
+
     setTimeout(() => {
       updateSizes();
-    }, 100);
+    }, 300);
 
     window.addEventListener("resize", updateSizes);
 
@@ -139,6 +145,28 @@ export const DisplayFeed: FC<DisplayFeedProps> = ({
       window.removeEventListener("resize", updateSizes);
     };
   }, [imgRef.current?.offsetWidth]);
+
+  const postEditor = useEditor({
+    extensions: [StarterKit, Link, Underline],
+    content: (postText && postText[0]?.content) || "",
+    editable: false,
+  });
+
+  const editorRes = useEditor({
+    extensions: [StarterKit, Link, Underline],
+    content: (textRes && textRes[0]) || "",
+    editable: false,
+  });
+
+  // Обновляем контент редактора, когда изменяется postText
+  useEffect(() => {
+    if (postEditor && postText) {
+      postEditor.commands.setContent(postText[0]?.content || "");
+    }
+    if (editorRes && textRes) {
+      editorRes.commands.setContent(textRes[0] || "");
+    }
+  }, [postText, postEditor, editorRes]);
 
   return (
     <div className={styles.screen_wrapper}>
@@ -295,7 +323,7 @@ export const DisplayFeed: FC<DisplayFeedProps> = ({
                   >
                     893 likes
                   </p>
-                  {postText && (
+                  {/* {postText && (
                     <div
                       dangerouslySetInnerHTML={{
                         __html: postText[0]?.content || "",
@@ -303,7 +331,11 @@ export const DisplayFeed: FC<DisplayFeedProps> = ({
                       className={styles.post__text}
                       style={{ fontSize: `${resizes?.timeSize}px` }}
                     />
-                  )}
+                  )} */}
+                  <EditorContent
+                    className={styles.post__text}
+                    editor={postEditor}
+                  />
                   <div className={styles.post__info}>
                     <p
                       className={styles.show__comments}
@@ -425,7 +457,7 @@ export const DisplayFeed: FC<DisplayFeedProps> = ({
                   >
                     893 likes
                   </p>
-                  {textRes && (
+                  {/* {textRes && (
                     <div
                       dangerouslySetInnerHTML={{
                         __html: textRes[0] || "",
@@ -433,7 +465,11 @@ export const DisplayFeed: FC<DisplayFeedProps> = ({
                       className={styles.post__text}
                       style={{ fontSize: `${resizes?.timeSize}px` }}
                     />
-                  )}
+                  )} */}
+                  <EditorContent
+                    className={styles.post__text}
+                    editor={editorRes}
+                  />
                   <div className={styles.post__info}>
                     <p
                       className={styles.show__comments}

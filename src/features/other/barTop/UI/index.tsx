@@ -33,12 +33,12 @@ export const BarTop: FC<BarTopProps> = ({
             <p className={`${styles.title} truncate`}>
               {t(`orders_advertiser.my_campaign`)}
             </p>
-            {listLength && (
-              <div className={styles.adv}>
-                {<TurnkeyProjectBtn listLength={listLength} />}
-                {<NewProjectBtn listLength={listLength} />}
-              </div>
-            )}
+            {/* {listLength && ( */}
+            <div className={styles.adv}>
+              <TurnkeyProjectBtn listLength={listLength} />
+              <NewProjectBtn listLength={listLength} />
+            </div>
+            {/* )} */}
           </>
         ) : (
           role === roles.manager && (
@@ -50,30 +50,26 @@ export const BarTop: FC<BarTopProps> = ({
       ) : page === pageFilter.platform ? (
         <>
           <p className={styles.title}>{t(`platforms_blogger.my_platform`)}</p>
-          {!listLength && (
-            <div className="">
-              {
-                <AddChannelBtn
-                  path={`${paths.addChannel}?add_channel=${addChannelQueries.platforms}`}
-                />
-              }
-            </div>
-          )}
+          {/* {!listLength && ( */}
+          <div>
+            <AddChannelBtn
+              path={`${paths.addChannel}?add_channel=${addChannelQueries.platforms}`}
+            />
+          </div>
+          {/* )} */}
         </>
       ) : (
         page === pageFilter.offer && (
           <>
             <p className={styles.title}>{t(`offers_blogger.my_offers`)}</p>
 
-            {listLength && (
-              <div>
-                {
-                  <AddChannelBtn
-                    path={`${paths.addChannel}?add_channel=${addChannelQueries.offers}`}
-                  />
-                }
-              </div>
-            )}
+            {/* {listLength && ( */}
+            <div>
+              <AddChannelBtn
+                path={`${paths.addChannel}?add_channel=${addChannelQueries.offers}`}
+              />
+            </div>
+            {/* )} */}
           </>
         )
       )}

@@ -34,8 +34,8 @@ export const AdvDevProjectCard: FC<AdvDevProjectCardProps> = ({
       <div className={styles.card__title}>
         <p className="truncate">{card?.project_name}</p>
         <div>
-          <span className="truncate">№{card.identifier}</span>
-          <span>{card?.tariff_date}</span>
+          <span className="truncate">№{card?.identifier}</span>
+          <span>{card?.created}</span>
         </div>
       </div>
       <div className={styles.card__info}>

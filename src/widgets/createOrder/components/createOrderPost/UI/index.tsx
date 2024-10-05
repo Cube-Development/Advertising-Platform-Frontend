@@ -26,11 +26,14 @@ import {
   PostGeneration,
 } from "@features/createOrder";
 import {
+  ContentType,
   CreatePostFormData,
+  getContentType,
   ICreatePostForm,
   IPostChannel,
   POST,
   PostFormats,
+  useGetUploadLinkMutation,
 } from "@entities/project";
 import { ICreateOrderBlur } from "@widgets/createOrder/config";
 import {
@@ -41,6 +44,7 @@ import {
 } from "@shared/ui";
 import { PostIcon } from "@shared/assets";
 import { X } from "lucide-react";
+import { getFileExtension } from "@shared/functions";
 
 interface CreateOrderPostProps {
   cards: IPostChannel[];
@@ -49,6 +53,7 @@ interface CreateOrderPostProps {
   setValue: UseFormSetValue<ICreatePostForm>;
   getValues: UseFormGetValues<ICreatePostForm>;
   formState: ICreatePostForm;
+  setIsUploadLoading: (bool: boolean) => void;
 }
 
 export const CreateOrderPost: FC<CreateOrderPostProps> = ({
@@ -58,8 +63,10 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
   setValue,
   getValues,
   formState,
+  setIsUploadLoading,
 }) => {
   const { t } = useTranslation();
+  const [getUploadLink] = useGetUploadLinkMutation();
 
   // сразу сохраняем все ордеры в форму posts с учетом платформы и post_type
   useEffect(() => {
@@ -113,16 +120,152 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
     return acc;
   }, [] as PostFormats[]);
 
-  const handleCheckPosts = () => {
-    checkPosts(
-      formState,
-      setValue,
-      onChangeBlur,
-      platformIds,
-      postFormats,
-      formState.platformFilter,
-      cards,
-    );
+  const uploadFilesAndMedia = async () => {
+    if (formState?.isMultiPost && formState?.multiposts) {
+      await Promise.all(
+        formState.multiposts.map(async (post) => {
+          if (post?.buttons) {
+            if (!post.content) {
+              post.content = [];
+            }
+            post.content.push(...post.buttons);
+          }
+          if (post?.text) {
+            if (!post.content) {
+              post.content = [];
+            }
+            post.content.push(...post.text);
+          }
+          if (post?.files) {
+            await Promise.all(
+              post.files.map(async (file) => {
+                const data = await getUploadLink({
+                  extension: getFileExtension(file),
+                  content_type: ContentType.file,
+                }).unwrap();
+                await fetch(data?.url, {
+                  method: "PUT",
+                  body: file,
+                });
+                if (!post.content) {
+                  post.content = [];
+                }
+                post.content.push({
+                  content_type: ContentType.file,
+                  content: data.file_name,
+                });
+              }),
+            );
+          }
+          if (post?.media) {
+            await Promise.all(
+              post.media.map(async (media) => {
+                const data = await getUploadLink({
+                  extension: getFileExtension(media),
+                  content_type: getContentType(media),
+                }).unwrap();
+                await fetch(data?.url, {
+                  headers: {
+                    "Content-Type": media.type,
+                  },
+                  method: "PUT",
+                  body: media,
+                });
+                if (!post.content) {
+                  post.content = [];
+                }
+                post.content.push({
+                  content_type: getContentType(media),
+                  content: data.file_name,
+                });
+              }),
+            );
+          }
+        }),
+      );
+    } else {
+      if (formState?.posts) {
+        await Promise.all(
+          formState.posts.map(async (post) => {
+            if (post?.buttons) {
+              if (!post.content) {
+                post.content = [];
+              }
+              post.content.push(...post.buttons);
+            }
+            if (post?.text) {
+              if (!post.content) {
+                post.content = [];
+              }
+              post.content.push(...post.text);
+            }
+            if (post?.files) {
+              await Promise.all(
+                post.files.map(async (file) => {
+                  const data = await getUploadLink({
+                    extension: getFileExtension(file),
+                    content_type: ContentType.file,
+                  }).unwrap();
+                  await fetch(data?.url, {
+                    method: "PUT",
+                    body: file,
+                  });
+                  if (!post.content) {
+                    post.content = [];
+                  }
+                  post.content.push({
+                    content_type: ContentType.file,
+                    content: data.file_name,
+                  });
+                }),
+              );
+            }
+            if (post?.media) {
+              await Promise.all(
+                post.media.map(async (media) => {
+                  const data = await getUploadLink({
+                    extension: getFileExtension(media),
+                    content_type: getContentType(media),
+                  }).unwrap();
+                  await fetch(data?.url, {
+                    headers: {
+                      "Content-Type": media.type,
+                    },
+                    method: "PUT",
+                    body: media,
+                  });
+                  if (!post.content) {
+                    post.content = [];
+                  }
+                  post.content.push({
+                    content_type: getContentType(media),
+                    content: data.file_name,
+                  });
+                }),
+              );
+            }
+          }),
+        );
+      }
+    }
+  };
+
+  const handleCheckPosts = async () => {
+    setIsUploadLoading(true);
+    try {
+      checkPosts(
+        formState,
+        setValue,
+        onChangeBlur,
+        platformIds,
+        postFormats,
+        formState.platformFilter,
+        cards,
+      );
+      await uploadFilesAndMedia();
+    } finally {
+      setIsUploadLoading(false);
+    }
   };
 
   const [screen, setScreen] = useState<number>(window.innerWidth);

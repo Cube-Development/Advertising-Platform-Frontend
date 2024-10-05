@@ -1,8 +1,9 @@
 .card {
   display: grid;
   grid-template: 1fr / 1.2fr 1fr 1.5fr 2fr;
-  padding: 10px 20px;
+  padding: 10px 30px;
   align-items: center;
+  position: relative;
 
   @media (max-width: 992px) {
     grid-template: 1fr 0.5fr / 3.5fr 1.5fr 4.5fr;
@@ -14,6 +15,16 @@
     grid-template: 1fr auto auto auto / 1fr;
     justify-items: center;
     row-gap: 10px;
+  }
+
+  .platform__icon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    svg {
+      width: 15px;
+      height: 15px;
+    }
   }
 
   &__preview {

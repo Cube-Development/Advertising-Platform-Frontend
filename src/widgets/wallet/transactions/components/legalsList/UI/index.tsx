@@ -1,7 +1,8 @@
 import { ILegalCard, ILegalCardShort, LegalCard } from "@entities/wallet";
 import { BREAKPOINT } from "@shared/config";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
+import SwiperCore from "swiper";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
@@ -29,6 +30,7 @@ export const LegalsList: FC<LegalsListProps> = ({
   oneLegalError,
 }) => {
   const { t } = useTranslation();
+  const swiperRef = useRef<SwiperCore | null>(null);
   const [screen, setScreen] = useState<number>(window.innerWidth);
 
   useEffect(() => {
@@ -41,6 +43,10 @@ export const LegalsList: FC<LegalsListProps> = ({
     };
   }, []);
 
+  const handleChangeStepSwiper = (account: ILegalCardShort, index: number) => {
+    changeActiveAccount(account);
+    swiperRef.current?.slideTo(index);
+  };
   return (
     <>
       {accounts && accounts?.length > 0 && (
@@ -58,14 +64,15 @@ export const LegalsList: FC<LegalsListProps> = ({
               !readLegalsError ? (
                 <>
                   {accounts?.map((account, index) => (
-                    <LegalCard
-                      account={account}
-                      key={index}
-                      changeActiveAccount={() => changeActiveAccount(account)}
-                      isActive={activeAccount?.legal_id === account?.legal_id}
-                      isOneLegalLoading={isOneLegalLoading}
-                      oneLegalError={oneLegalError}
-                    />
+                    <div onClick={(e) => changeActiveAccount(account)}>
+                      <LegalCard
+                        account={account}
+                        key={index}
+                        isActive={activeAccount?.legal_id === account?.legal_id}
+                        isOneLegalLoading={isOneLegalLoading}
+                        oneLegalError={oneLegalError}
+                      />
+                    </div>
                   ))}
                 </>
               ) : (
@@ -79,6 +86,7 @@ export const LegalsList: FC<LegalsListProps> = ({
             <div className="swipper__carousel">
               <Swiper
                 className="swipper__wrapper"
+                onSwiper={(swiper) => (swiperRef.current = swiper)}
                 modules={[Navigation, EffectCoverflow]}
                 spaceBetween={10}
                 slidesPerView={1.1}
@@ -97,11 +105,13 @@ export const LegalsList: FC<LegalsListProps> = ({
                 }}
               >
                 {accounts?.map((account, index) => (
-                  <SwiperSlide key={index}>
+                  <SwiperSlide
+                    key={index}
+                    onClick={(e) => handleChangeStepSwiper(account, index)}
+                  >
                     <LegalCard
                       account={account}
                       key={index}
-                      changeActiveAccount={() => changeActiveAccount(account)}
                       isActive={activeAccount?.legal_id === account?.legal_id}
                       isOneLegalLoading={isOneLegalLoading}
                       oneLegalError={oneLegalError}

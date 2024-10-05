@@ -2574,150 +2574,150 @@ export const MY_PROJECT_MANAGER_DEV_CARDS: IAdvManagerProjectsDev = {
   ],
 };
 
-export const activeChannelsMock: IChannelBlogger = {
-  page: 1,
-  elements: 10,
-  channels: [
-    {
-      id: "1",
-      name: "Активный канал 1",
-      category: "Технологии",
-      status: 1,
-      avatar: "https://example.com/avatar1.jpg",
-      channel_orders: {
-        wait: 5,
-        in_progress: 10,
-        completed: 20,
-        canceled_rejected: 2,
-      },
-      tags: [1, 2, 3],
-    },
-    {
-      id: "2",
-      name: "Активный канал 2",
-      category: "Наука",
-      status: 1,
-      avatar: "https://example.com/avatar2.jpg",
-      channel_orders: {
-        wait: 2,
-        in_progress: 8,
-        completed: 15,
-        canceled_rejected: 1,
-      },
-      tags: [2, 4],
-    },
-  ],
-  status: channelStatusFilter.active,
-  isLast: false,
-};
+// export const activeChannelsMock: IChannelBlogger = {
+//   page: 1,
+//   elements: 10,
+//   channels: [
+//     {
+//       id: "1",
+//       name: "Активный канал 1",
+//       category: "Технологии",
+//       status: 1,
+//       avatar: "https://example.com/avatar1.jpg",
+//       channel_orders: {
+//         wait: 5,
+//         in_progress: 10,
+//         completed: 20,
+//         canceled_rejected: 2,
+//       },
+//       tags: [1, 2, 3],
+//     },
+//     {
+//       id: "2",
+//       name: "Активный канал 2",
+//       category: "Наука",
+//       status: 1,
+//       avatar: "https://example.com/avatar2.jpg",
+//       channel_orders: {
+//         wait: 2,
+//         in_progress: 8,
+//         completed: 15,
+//         canceled_rejected: 1,
+//       },
+//       tags: [2, 4],
+//     },
+//   ],
+//   status: channelStatusFilter.active,
+//   isLast: false,
+// };
 
-export const inactiveChannelsMock: IChannelBlogger = {
-  page: 1,
-  elements: 10,
-  channels: [
-    {
-      id: "3",
-      name: "Неактивный канал 1",
-      category: "Развлечения",
-      status: 0,
-      avatar: "https://example.com/avatar3.jpg",
-      channel_orders: {
-        completed: 30,
-        canceled_rejected: 5,
-      },
-      tags: [3, 5],
-    },
-    {
-      id: "4",
-      name: "Неактивный канал 2",
-      category: "Новости",
-      status: 0,
-      avatar: "https://example.com/avatar4.jpg",
-      channel_orders: {
-        completed: 25,
-        canceled_rejected: 3,
-      },
-      tags: [1, 6],
-    },
-  ],
-  status: channelStatusFilter.inactive,
-  isLast: true,
-};
+// export const inactiveChannelsMock: IChannelBlogger = {
+//   page: 1,
+//   elements: 10,
+//   channels: [
+//     {
+//       id: "3",
+//       name: "Неактивный канал 1",
+//       category: "Развлечения",
+//       status: 0,
+//       avatar: "https://example.com/avatar3.jpg",
+//       channel_orders: {
+//         completed: 30,
+//         canceled_rejected: 5,
+//       },
+//       tags: [3, 5],
+//     },
+//     {
+//       id: "4",
+//       name: "Неактивный канал 2",
+//       category: "Новости",
+//       status: 0,
+//       avatar: "https://example.com/avatar4.jpg",
+//       channel_orders: {
+//         completed: 25,
+//         canceled_rejected: 3,
+//       },
+//       tags: [1, 6],
+//     },
+//   ],
+//   status: channelStatusFilter.inactive,
+//   isLast: true,
+// };
 
-export const moderationChannelsMock: IChannelBlogger = {
-  page: 1,
-  elements: 10,
-  channels: [
-    {
-      id: "5",
-      name: "Канал на модерации 1",
-      category: "Культура",
-      avatar: "https://example.com/avatar5.jpg",
-      created: "2024-09-15",
-    },
-    {
-      id: "6",
-      name: "Канал на модерации 2",
-      category: "Спорт",
-      avatar: "https://example.com/avatar6.jpg",
-      created: "2024-09-10",
-    },
-  ],
-  status: channelStatusFilter.moderation,
-  isLast: true,
-};
+// export const moderationChannelsMock: IChannelBlogger = {
+//   page: 1,
+//   elements: 10,
+//   channels: [
+//     {
+//       id: "5",
+//       name: "Канал на модерации 1",
+//       category: "Культура",
+//       avatar: "https://example.com/avatar5.jpg",
+//       created: "2024-09-15",
+//     },
+//     {
+//       id: "6",
+//       name: "Канал на модерации 2",
+//       category: "Спорт",
+//       avatar: "https://example.com/avatar6.jpg",
+//       created: "2024-09-10",
+//     },
+//   ],
+//   status: channelStatusFilter.moderation,
+//   isLast: true,
+// };
 
-export const moderationRejectChannelsMock: IChannelBlogger = {
-  page: 1,
-  elements: 10,
-  channels: [
-    {
-      id: "7",
-      name: "Отклоненный канал 1",
-      category: "Музыка",
-      avatar: "https://example.com/avatar7.jpg",
-      rejected_date: "2024-09-01",
-      reapplication_date: "2024-09-20",
-      reason: "причина бана которую будет писать модератор во время бана",
-    },
-    {
-      id: "8",
-      name: "Отклоненный канал 2",
-      category: "Туризм",
-      avatar: "https://example.com/avatar8.jpg",
-      rejected_date: "2024-08-28",
-      reapplication_date: "2024-09-18",
-      reason: "причина бана которую будет писать модератор во время бана",
-    },
-  ],
-  status: channelStatusFilter.active,
-  isLast: true,
-};
+// export const moderationRejectChannelsMock: IChannelBlogger = {
+//   page: 1,
+//   elements: 10,
+//   channels: [
+//     {
+//       id: "7",
+//       name: "Отклоненный канал 1",
+//       category: "Музыка",
+//       avatar: "https://example.com/avatar7.jpg",
+//       rejected_date: "2024-09-01",
+//       reapplication_date: "2024-09-20",
+//       reason: "причина бана которую будет писать модератор во время бана",
+//     },
+//     {
+//       id: "8",
+//       name: "Отклоненный канал 2",
+//       category: "Туризм",
+//       avatar: "https://example.com/avatar8.jpg",
+//       rejected_date: "2024-08-28",
+//       reapplication_date: "2024-09-18",
+//       reason: "причина бана которую будет писать модератор во время бана",
+//     },
+//   ],
+//   status: channelStatusFilter.active,
+//   isLast: true,
+// };
 
-export const blockedChannelsMock: IChannelBlogger = {
-  page: 1,
-  elements: 10,
-  channels: [
-    {
-      id: "9",
-      name: "Заблокированный канал 1",
-      category: "Политика",
-      avatar: "https://example.com/avatar9.jpg",
-      blocked_date: "2024-09-05",
-      reason: "причина бана которую будет писать модератор во время бана",
-    },
-    {
-      id: "10",
-      name: "Заблокированный канал 2",
-      category: "Экономика",
-      avatar: "https://example.com/avatar10.jpg",
-      blocked_date: "2024-09-12",
-      reason: "причина бана которую будет писать модератор во время бана",
-    },
-  ],
-  status: channelStatusFilter.active,
-  isLast: true,
-};
+// export const blockedChannelsMock: IChannelBlogger = {
+//   page: 1,
+//   elements: 10,
+//   channels: [
+//     {
+//       id: "9",
+//       name: "Заблокированный канал 1",
+//       category: "Политика",
+//       avatar: "https://example.com/avatar9.jpg",
+//       blocked_date: "2024-09-05",
+//       reason: "причина бана которую будет писать модератор во время бана",
+//     },
+//     {
+//       id: "10",
+//       name: "Заблокированный канал 2",
+//       category: "Экономика",
+//       avatar: "https://example.com/avatar10.jpg",
+//       blocked_date: "2024-09-12",
+//       reason: "причина бана которую будет писать модератор во время бана",
+//     },
+//   ],
+//   status: channelStatusFilter.active,
+//   isLast: true,
+// };
 
 export const My_CHANNELS = {
   page: 1,
@@ -2799,30 +2799,30 @@ export const BLOGGER_OFFERS: IBloggerOffers = {
     //   },
     //   price: 500000,
     // },
-    {
-      id: "597f6eca-6276-4993-bfeb-53cbbbba6f02",
-      identifier: 2,
-      created: "24.09.2024",
-      date_accept: "28.09.2024",
-      name: "Order 2",
-      category: "Category B",
-      avatar: "avatar2.png",
-      api_status: 2,
-      order_status: "Pending",
-      publish_date: {
-        date_from: "26.09.2024",
-        date_to: "27.09.2024",
-      },
-      publish_time: {
-        time_from: "10:00",
-        time_to: "20:00",
-      },
-      format: {
-        small: "1/24",
-        big: "1 час в топе 24 в ленте",
-      },
-      price: 550000,
-    },
+    // {
+    //   id: "597f6eca-6276-4993-bfeb-53cbbbba6f02",
+    //   identifier: 2,
+    //   created: "24.09.2024",
+    //   date_accept: "28.09.2024",
+    //   name: "Order 2",
+    //   category: "Category B",
+    //   avatar: "avatar2.png",
+    //   api_status: 2,
+    //   order_status: "Pending",
+    //   publish_date: {
+    //     date_from: "26.09.2024",
+    //     date_to: "27.09.2024",
+    //   },
+    //   publish_time: {
+    //     time_from: "10:00",
+    //     time_to: "20:00",
+    //   },
+    //   format: {
+    //     small: "1/24",
+    //     big: "1 час в топе 24 в ленте",
+    //   },
+    //   price: 550000,
+    // },
     // {
     //   id: "697f6eca-6276-4993-bfeb-53cbbbba6f03",
     //   identifier: 3,

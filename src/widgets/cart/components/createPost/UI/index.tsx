@@ -49,7 +49,6 @@ export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
             title: t("toasts.cart.error"),
             action: <ToastAction altText="Ok">Ok</ToastAction>,
           });
-          // alert("У вас недостаточно средств, нужно пополнить баланс");
         });
     } else if (isAuth && role === roles.manager) {
       // должен быть запрос на проверку общей суммы в корзине манагера проекта и бюджета этого проета
@@ -59,7 +58,7 @@ export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
         language: language?.id || Languages[0].id,
       })
         .unwrap()
-        .then((data) => {
+        .then(() => {
           navigate(paths.createOrder);
         })
         .catch((error) => {
@@ -75,7 +74,6 @@ export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
         variant: "error",
         title: t("toasts.auth.token.alert"),
       });
-      // alert("Нужно авторизоваться чтобы продолжить");
     }
   };
 

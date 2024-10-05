@@ -7,6 +7,10 @@ import { YoutubeComment } from "./comment/ui";
 import { ContentType, GetPostRes, ICreatePostForm } from "@entities/project";
 import { PostTypesNum } from "@entities/platform";
 import { EyeDisabledIcon } from "@shared/assets";
+import { EditorContent, useEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import Link from "@tiptap/extension-link";
+import Underline from "@tiptap/extension-underline";
 
 interface DisplayVideosProps {
   formState?: ICreatePostForm;
@@ -109,9 +113,11 @@ export const DisplayVideos: FC<DisplayVideosProps> = ({
       }
     };
 
+    updateSizes();
+
     setTimeout(() => {
       updateSizes();
-    }, 100);
+    }, 300);
 
     window.addEventListener("resize", updateSizes);
 
@@ -119,6 +125,28 @@ export const DisplayVideos: FC<DisplayVideosProps> = ({
       window.removeEventListener("resize", updateSizes);
     };
   }, [imgRef.current?.offsetWidth]);
+
+  const postEditor = useEditor({
+    extensions: [StarterKit, Link, Underline],
+    content: (postText && postText[0]?.content) || "",
+    editable: false,
+  });
+
+  const editorRes = useEditor({
+    extensions: [StarterKit, Link, Underline],
+    content: (textRes && textRes[0]) || "",
+    editable: false,
+  });
+
+  // Обновляем контент редактора, когда изменяется postText
+  useEffect(() => {
+    if (postEditor && postText) {
+      postEditor.commands.setContent(postText[0]?.content || "");
+    }
+    if (editorRes && textRes) {
+      editorRes.commands.setContent(textRes[0] || "");
+    }
+  }, [postText, postEditor, editorRes]);
 
   return (
     <div className={styles.screen_wrapper}>
@@ -172,7 +200,7 @@ export const DisplayVideos: FC<DisplayVideosProps> = ({
                       <p>No content yet...</p>
                     </div>
                   )}
-                  {postText && (
+                  {/* {postText && (
                     <div
                       dangerouslySetInnerHTML={{
                         __html: postText[0]?.content || "",
@@ -180,7 +208,11 @@ export const DisplayVideos: FC<DisplayVideosProps> = ({
                       className={styles.post__text}
                       style={{ fontSize: `${resizes?.timeSize}px` }}
                     />
-                  )}
+                  )} */}
+                  <EditorContent
+                    className={styles.post__text}
+                    editor={postEditor}
+                  />
                 </div>
                 {postFile && postFile?.length > 0 && (
                   <YoutubeFile
@@ -238,7 +270,7 @@ export const DisplayVideos: FC<DisplayVideosProps> = ({
                       <p>No content yet...</p>
                     </div>
                   )}
-                  {textRes && (
+                  {/* {textRes && (
                     <div
                       dangerouslySetInnerHTML={{
                         __html: textRes[0] || "",
@@ -246,7 +278,11 @@ export const DisplayVideos: FC<DisplayVideosProps> = ({
                       className={styles.post__text}
                       style={{ fontSize: `${resizes?.timeSize}px` }}
                     />
-                  )}
+                  )} */}
+                  <EditorContent
+                    className={styles.post__text}
+                    editor={editorRes}
+                  />
                 </div>
                 {fileRes && (
                   <YoutubeFile

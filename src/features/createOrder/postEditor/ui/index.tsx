@@ -6,12 +6,12 @@ import styles from "./styles.module.scss";
 import underline from "@tiptap/extension-underline";
 import link from "@tiptap/extension-link";
 import { UseFormSetValue } from "react-hook-form";
-import HardBreak from "@tiptap/extension-hard-break";
 import {
   ContentType,
   CreatePostFormData,
   ICreatePostForm,
 } from "@entities/project";
+import Paragraph from "@tiptap/extension-paragraph"; // импортируем параграф для кастомизации
 
 interface EditorProps {
   setValue: UseFormSetValue<ICreatePostForm>;
@@ -43,9 +43,17 @@ export const Editor: FC<EditorProps> = ({
   const [content, setContent] = useState(startContent);
 
   const limit = 1000;
+
+  // Конфигурация редактора с изменением поведения параграфов
   const editor = useEditor({
     extensions: [
-      StarterKit.configure(),
+      StarterKit.configure({
+        paragraph: {
+          HTMLAttributes: {
+            class: "my-custom-paragraph",
+          },
+        },
+      }),
       underline.configure({
         HTMLAttributes: {
           class: "underline",
@@ -60,8 +68,16 @@ export const Editor: FC<EditorProps> = ({
         },
         autolink: false,
       }),
-      HardBreak.configure({
-        // keepMarks: false,
+      Paragraph.extend({
+        // Переопределяем поведение нажатия на Enter для создания нового параграфа
+        addKeyboardShortcuts() {
+          return {
+            Enter: () => {
+              this.editor.commands.createParagraphNear(); // Создание нового <p> вместо <br>
+              return true;
+            },
+          };
+        },
       }),
     ],
     content: content,
@@ -77,7 +93,9 @@ export const Editor: FC<EditorProps> = ({
   });
 
   const handleChange = (content: string) => {
-    setContent(content);
+    const cleanedContent = content.replace(/(<br\s*\/?>\s*){2,}/g, "<p></p>");
+    setContent(cleanedContent);
+
     const posts = formState?.selectedMultiPostId
       ? formState?.multiposts?.filter(
           (item) => item?.order_id !== formState?.selectedMultiPostId,
@@ -103,7 +121,9 @@ export const Editor: FC<EditorProps> = ({
         };
 
     if (currentPost) {
-      currentPost.text = [{ content_type: ContentType.text, content: content }];
+      currentPost.text = [
+        { content_type: ContentType.text, content: cleanedContent },
+      ];
       setValue(type, [...posts, currentPost]);
     }
   };
@@ -111,7 +131,6 @@ export const Editor: FC<EditorProps> = ({
   return (
     <div className={styles.editor}>
       <EditorContent
-        // key={platformId}
         editor={editor}
         className="pb-12 pt-3 h-full relative"
         maxLength={limit}

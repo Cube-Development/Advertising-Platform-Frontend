@@ -1,18 +1,18 @@
 import {
-  ContentType,
+  // ContentType,
   ICreatePostForm,
-  getContentType,
+  // getContentType,
   useApproveProjectMutation,
   useCreateOrderDatesMutation,
   useCreatePostMutation,
   useCreateUniquePostMutation,
-  useGetUploadLinkMutation,
+  // useGetUploadLinkMutation,
   useProjectNameMutation,
   useProjectOrdersQuery,
 } from "@entities/project";
 import { usePaymentProjectMutation } from "@entities/wallet";
 import { Languages } from "@shared/config/languages";
-import { getFileExtension } from "@shared/functions";
+// import { getFileExtension } from "@shared/functions";
 import { useAppSelector } from "@shared/hooks";
 import { paths } from "@shared/routing";
 import { SpinnerLoader, useToast } from "@shared/ui";
@@ -76,11 +76,6 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
     return i18n.language === lang.name;
   });
   const project_id = Cookies.get("project_id");
-  // useEffect(()=>{
-  //   if (!project_id) {
-  //     navigate(paths.cart);
-  //   }
-  // }, [])
   const projectChannelsReq = {
     project_id: project_id!,
     language: language?.id || Languages[0].id,
@@ -102,13 +97,16 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
   const formState = watch();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [getUploadLink] = useGetUploadLinkMutation();
+  // const [getUploadLink] = useGetUploadLinkMutation();
   const [projectName] = useProjectNameMutation();
   const [createPost] = useCreatePostMutation();
   const [createUniquePost] = useCreateUniquePostMutation();
   const [createOrderDates] = useCreateOrderDatesMutation();
   const [paymentProject] = usePaymentProjectMutation();
   const [approveProject] = useApproveProjectMutation();
+
+  // загрузка файлов и медиа
+  const [isUploadLoading, setIsUploadLoading] = useState<boolean>(false);
 
   const onSubmit: SubmitHandler<ICreatePostForm> = async (formData) => {
     if (
@@ -119,131 +117,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
       try {
         setIsLoading(true);
         // Загрузка файлов и медиа
-        if (formData?.isMultiPost && formData?.multiposts) {
-          await Promise.all(
-            formData.multiposts.map(async (post) => {
-              if (post?.buttons) {
-                if (!post.content) {
-                  post.content = [];
-                }
-                post.content.push(...post.buttons);
-              }
-              if (post?.text) {
-                if (!post.content) {
-                  post.content = [];
-                }
-                post.content.push(...post.text);
-              }
-              if (post?.files) {
-                await Promise.all(
-                  post.files.map(async (file) => {
-                    const data = await getUploadLink({
-                      extension: getFileExtension(file),
-                      content_type: ContentType.file,
-                    }).unwrap();
-                    await fetch(data?.url, {
-                      method: "PUT",
-                      body: file,
-                    });
-                    if (!post.content) {
-                      post.content = [];
-                    }
-                    post.content.push({
-                      content_type: ContentType.file,
-                      content: data.file_name,
-                    });
-                  }),
-                );
-              }
-              if (post?.media) {
-                await Promise.all(
-                  post.media.map(async (media) => {
-                    const data = await getUploadLink({
-                      extension: getFileExtension(media),
-                      content_type: getContentType(media),
-                    }).unwrap();
-                    await fetch(data?.url, {
-                      headers: {
-                        "Content-Type": media.type,
-                      },
-                      method: "PUT",
-                      body: media,
-                    });
-                    if (!post.content) {
-                      post.content = [];
-                    }
-                    post.content.push({
-                      content_type: getContentType(media),
-                      content: data.file_name,
-                    });
-                  }),
-                );
-              }
-            }),
-          );
-        } else {
-          await Promise.all(
-            formData.posts.map(async (post) => {
-              if (post?.buttons) {
-                if (!post.content) {
-                  post.content = [];
-                }
-                post.content.push(...post.buttons);
-              }
-              if (post?.text) {
-                if (!post.content) {
-                  post.content = [];
-                }
-                post.content.push(...post.text);
-              }
-              if (post?.files) {
-                await Promise.all(
-                  post.files.map(async (file) => {
-                    const data = await getUploadLink({
-                      extension: getFileExtension(file),
-                      content_type: ContentType.file,
-                    }).unwrap();
-                    await fetch(data?.url, {
-                      method: "PUT",
-                      body: file,
-                    });
-                    if (!post.content) {
-                      post.content = [];
-                    }
-                    post.content.push({
-                      content_type: ContentType.file,
-                      content: data.file_name,
-                    });
-                  }),
-                );
-              }
-              if (post?.media) {
-                await Promise.all(
-                  post.media.map(async (media) => {
-                    const data = await getUploadLink({
-                      extension: getFileExtension(media),
-                      content_type: getContentType(media),
-                    }).unwrap();
-                    await fetch(data?.url, {
-                      headers: {
-                        "Content-Type": media.type,
-                      },
-                      method: "PUT",
-                      body: media,
-                    });
-                    if (!post.content) {
-                      post.content = [];
-                    }
-                    post.content.push({
-                      content_type: getContentType(media),
-                      content: data.file_name,
-                    });
-                  }),
-                );
-              }
-            }),
-          );
-        }
+        // Загрузка файлов и медиа
 
         projectName({
           project_id,
@@ -358,6 +232,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
               setValue={setValue}
               getValues={getValues}
               formState={formState}
+              setIsUploadLoading={setIsUploadLoading}
             />
             <CreateOrderDatetime
               cards={projectChannels?.orders || []}
@@ -366,6 +241,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
               setValue={setValue}
               getValues={getValues}
               formState={formState}
+              isUploadLoading={isUploadLoading}
             />
             <CreateOrderPayment
               isBlur={blur.payment}
