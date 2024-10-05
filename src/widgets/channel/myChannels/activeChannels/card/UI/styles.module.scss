@@ -10,6 +10,16 @@
     position: relative;
   }
 
+  .platform__icon {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    svg {
+      width: 15px;
+      height: 15px;
+    }
+  }
+
   .card {
     display: grid;
     grid-template: 1fr / 4fr 4fr 0.4fr;
@@ -245,7 +255,7 @@
           color: var(--Personal-colors-black);
           font-size: 16px;
           font-weight: 500;
-          line-height: 0.75;
+          line-height: 1;
         }
       }
     }
@@ -484,7 +494,7 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    line-height: 0.75;
+    line-height: 1;
     background: var(--Gradients-Gradient-1);
     padding: 12px 0;
     border-radius: 0px 0px 20px 20px;

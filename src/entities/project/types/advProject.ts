@@ -17,9 +17,9 @@ export interface IAdvSubprojects {
 export interface IAdvProjectCard {
   id: string;
   identifier: number;
-  tarif?: string;
+  tariff_name?: string;
   created: string;
-  name: string;
+  project_name: string;
   count_channels: number;
   is_request_approve?: boolean;
   views: number;
@@ -80,7 +80,7 @@ export interface IAdvManagerProjectsDevCard {
   project_id: string;
   project_name: string;
   tariff_name: string;
-  tariff_date: string;
+  created: string;
   budget: number;
 }
 

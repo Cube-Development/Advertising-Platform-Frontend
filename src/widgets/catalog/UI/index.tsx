@@ -39,7 +39,6 @@ export const CatalogBlock: FC = () => {
   const { isAuth, role } = useAppSelector((state) => state.user);
   const userId = Cookies.get("user_id");
   const guestId = Cookies.get("guest_id") || GenerateGuestId();
-  // const role = Cookies.get("role");
   const projectId = Cookies.get("project_id");
   const catalogTopRef = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
@@ -182,15 +181,15 @@ export const CatalogBlock: FC = () => {
             : isAuth && role == roles.manager
               ? catalogManager?.channels
               : catalogPublic?.channels) || []
-        ).map((item) => {
-          if (item.id === cartChannel.id) {
+        ).map((card) => {
+          if (card.id === cartChannel.id) {
             const newItem = {
-              ...item,
+              ...card,
               selected_format: cartChannel.selected_format,
             };
             return newItem;
           }
-          return item;
+          return card;
         });
         if (!isAuth && guestId) {
           addToPublicCart({ ...addReq, guest_id: guestId })
@@ -283,7 +282,6 @@ export const CatalogBlock: FC = () => {
               console.error("Ошибка при добавлении в корзину", error);
             });
         }
-        // newCards = cards.map((card) => {
         newCards = (
           (isAuth && role == roles.advertiser
             ? catalogAuth?.channels
@@ -296,7 +294,10 @@ export const CatalogBlock: FC = () => {
             card.selected_format &&
             cartChannel.selected_format
           ) {
-            card.selected_format = cartChannel.selected_format;
+            return {
+              ...card,
+              selected_format: { ...cartChannel.selected_format },
+            };
           }
           return card;
         });
@@ -350,14 +351,18 @@ export const CatalogBlock: FC = () => {
             : isAuth && role == roles.manager
               ? catalogManager?.channels
               : catalogPublic?.channels) || []
-        ).map((item) => {
-          if (item.id === cartChannel.id) {
-            const { ...newItem } = item;
+        ).map((card) => {
+          if (card.id === cartChannel.id) {
+            const newItem = {
+              ...card,
+              selected_format: undefined,
+            };
             return newItem;
           }
-          return item;
+          return card;
         });
       }
+      console.log(newCards);
       dispatch(
         catalogAPI.util.updateQueryData(
           "getCatalog",

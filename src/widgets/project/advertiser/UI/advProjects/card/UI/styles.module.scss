@@ -135,6 +135,7 @@
         display: grid;
         grid-auto-flow: row;
         row-gap: 10px;
+        justify-items: flex-end;
 
         span {
           color: #a8a4a4;
@@ -142,6 +143,10 @@
           font-style: normal;
           font-weight: 500;
           line-height: 1;
+
+          &.tariff {
+            color: var(--Personal-colors-main);
+          }
         }
       }
     }

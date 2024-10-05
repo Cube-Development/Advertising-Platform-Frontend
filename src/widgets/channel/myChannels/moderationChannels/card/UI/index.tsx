@@ -1,7 +1,8 @@
+import { IModerationChannel } from "@entities/channel/types";
+import { platformToIcon } from "@entities/project";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { IModerationChannel } from "@entities/channel/types";
 
 interface ModChannelCardProps {
   card: IModerationChannel;
@@ -12,6 +13,11 @@ export const ModChannelCard: FC<ModChannelCardProps> = ({ card }) => {
 
   return (
     <div className={`${styles.card} border__gradient`}>
+      <div className={styles.platform__icon}>
+        {card?.platform && card?.platform in platformToIcon
+          ? platformToIcon[card.platform!]()
+          : "..."}
+      </div>
       <div className={styles.card__preview}>
         <div className={styles.card__preview__logo}>
           <img src={card?.avatar} alt="" />

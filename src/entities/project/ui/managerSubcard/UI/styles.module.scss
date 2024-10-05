@@ -201,7 +201,7 @@
                 font-size: 12px;
                 font-style: normal;
                 font-weight: 500;
-                line-height: 0.75;
+                line-height: 1;
               }
               span {
                 color: rgba(0, 0, 0, 0.85);
@@ -209,7 +209,7 @@
                 font-size: 12px;
                 font-style: normal;
                 font-weight: 600;
-                line-height: 0.75;
+                line-height: 1;
                 // white-space: wrap;
               }
             }
@@ -255,7 +255,7 @@
             font-size: 8px;
             font-style: normal;
             font-weight: 600;
-            line-height: 0.75;
+            line-height: 1;
           }
 
           span {
@@ -264,7 +264,7 @@
             font-size: 10px;
             font-style: normal;
             font-weight: 500;
-            line-height: 0.75;
+            line-height: 1;
           }
         }
 
@@ -401,7 +401,7 @@
           font-size: 14px;
           font-style: normal;
           font-weight: 500;
-          line-height: 0.75;
+          line-height: 1;
         }
 
         @media (max-width: 768px) {
@@ -476,7 +476,7 @@
         font-size: 8px;
         font-style: normal;
         font-weight: 600;
-        line-height: 0.75;
+        line-height: 1;
       }
 
       span {
@@ -485,7 +485,7 @@
         font-size: 10px;
         font-style: normal;
         font-weight: 500;
-        line-height: 0.75;
+        line-height: 1;
       }
     }
   }
@@ -574,7 +574,7 @@
           font-size: 16px;
           font-style: normal;
           font-weight: 600;
-          line-height: 0.75;
+          line-height: 1;
 
           @media (max-width: 576px) {
             font-size: 12px;
@@ -587,7 +587,7 @@
           font-size: 12px;
           font-style: normal;
           font-weight: 500;
-          line-height: 0.75;
+          line-height: 1;
         }
       }
     }

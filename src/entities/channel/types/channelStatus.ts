@@ -1,3 +1,5 @@
+import { platformTypesNum } from "@entities/platform";
+
 export interface IChannelBlogger {
   page: number;
   elements: number;
@@ -11,12 +13,6 @@ export interface IChannelBlogger {
   isLast?: boolean;
 }
 
-// export interface IActiveChannelBlogger {
-//   page: number;
-//   elements: number;
-//   channels: IActiveChannel[];
-// }
-
 export type AllChannelTypes =
   | IActiveChannel
   | IInactiveChannel
@@ -26,6 +22,7 @@ export type AllChannelTypes =
 
 export interface IActiveChannel {
   id: string;
+  platform: platformTypesNum;
   name: string;
   category: string;
   status: number;
@@ -41,15 +38,9 @@ export interface IActiveChannelOrders {
   canceled_rejected: number;
 }
 
-//
-// export interface IInactiveChannelBlogger {
-//   page: number;
-//   elements: number;
-//   channels: IInactiveChannel[];
-// }
-
 export interface IInactiveChannel {
   id: string;
+  platform: platformTypesNum;
   name: string;
   category: string;
   status: number;
@@ -63,30 +54,18 @@ export interface InactiveChannelOrders {
   canceled_rejected: number;
 }
 
-//
-// export interface IModerationChannelBlogger {
-//   page: number;
-//   elements: number;
-//   channels: IModerationChannel[];
-// }
-
 export interface IModerationChannel {
   id: string;
+  platform: platformTypesNum;
   name: string;
   category: string;
   avatar: string;
   created: string;
 }
 
-//
-// export interface IModerationRejectChannelBlogger {
-//   page: number;
-//   elements: number;
-//   channels: IModerationRejectChannel[];
-// }
-
 export interface IModerationRejectChannel {
   id: string;
+  platform: platformTypesNum;
   name: string;
   category: string;
   avatar: string;
@@ -95,15 +74,9 @@ export interface IModerationRejectChannel {
   reason: string;
 }
 
-//
-// export interface IBlockedChannelBlogger {
-//   page: number;
-//   elements: number;
-//   channels: IBlockedChannel[];
-// }
-
 export interface IBlockedChannel {
   id: string;
+  platform: platformTypesNum;
   name: string;
   category: string;
   avatar: string;

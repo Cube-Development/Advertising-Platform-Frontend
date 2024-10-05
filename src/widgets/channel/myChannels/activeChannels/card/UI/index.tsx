@@ -1,15 +1,12 @@
 import {
-  CancelIcon,
-  CompliteIcon,
-  FeatherIcon,
-  ProtectIcon2,
-  RatingIcon,
-  RocketIcon,
-  StarIcon4,
-} from "@shared/assets";
-import { FC } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
+  IActiveChannel,
+  IBlockedChannel,
+  IInactiveChannel,
+  IModerationChannel,
+  IModerationRejectChannel,
+  channelStatusFilter,
+  useActivateChannelMutation,
+} from "@entities/channel";
 import {
   ActivateChannel,
   ChannelCardMenu,
@@ -21,19 +18,22 @@ import {
 } from "@features/channel";
 import { SeeReason } from "@features/other";
 import {
-  IActiveChannel,
-  IBlockedChannel,
-  IInactiveChannel,
-  IModerationChannel,
-  IModerationRejectChannel,
-  channelStatusFilter,
-  useActivateChannelMutation,
-} from "@entities/channel";
-import { ToastAction, useToast } from "@shared/ui";
-import { offerStatusFilter } from "@entities/offer";
-import { Link } from "react-router-dom";
+  CancelIcon,
+  CompliteIcon,
+  FeatherIcon,
+  ProtectIcon2,
+  RatingIcon,
+  RocketIcon,
+  StarIcon4,
+} from "@shared/assets";
 import { paths } from "@shared/routing";
+import { ToastAction, useToast } from "@shared/ui";
 import { Cog } from "lucide-react";
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import styles from "./styles.module.scss";
+import { platformToIcon } from "@entities/project";
 
 interface ChannelCardProps {
   card:
@@ -42,7 +42,7 @@ interface ChannelCardProps {
     | IModerationRejectChannel
     | IBlockedChannel
     | IModerationChannel;
-  statusFilter: channelStatusFilter | offerStatusFilter | string;
+  statusFilter: channelStatusFilter;
 }
 
 export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
@@ -81,6 +81,11 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
 
   return (
     <div className={`${styles.wrapper} border__gradient`}>
+      <div className={styles.platform__icon}>
+        {card?.platform && card?.platform in platformToIcon
+          ? platformToIcon[card.platform!]()
+          : "..."}
+      </div>
       <div className={styles.card}>
         <div className={styles.card__base}>
           <div className={styles.card__logo}>

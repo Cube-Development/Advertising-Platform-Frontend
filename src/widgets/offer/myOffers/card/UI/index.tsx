@@ -12,7 +12,7 @@ import {
   offerStatusChat,
   offerStatusFilter,
 } from "@entities/offer";
-import { useGetPostQuery } from "@entities/project";
+import { platformToIcon, useGetPostQuery } from "@entities/project";
 import { CheckDate } from "@entities/communication";
 import { roles } from "@entities/user";
 
@@ -56,6 +56,11 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter }) => {
     <div
       className={`${styles.card} ${statusFilter === offerStatusFilter.active ? styles.active__chat : ""} border__gradient`}
     >
+      <div className={styles.platform__icon}>
+        {card?.platform && card?.platform in platformToIcon
+          ? platformToIcon[card.platform!]()
+          : "..."}
+      </div>
       <div className={styles.card__description}>
         <div className={styles.card__description__data}>
           <div className={styles.description}>
@@ -73,16 +78,6 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter }) => {
         <div className={styles.card__description__status}>
           <p>{card.order_status}</p>
         </div>
-
-        {/* <CountdownTimer date_to={card.date_accept} time="23:59" />
-        <CountdownTimer
-          date_to={
-            typeof card?.publish_date === "object"
-              ? card?.publish_date.date_to
-              : card?.publish_date
-          }
-          time={card.publish_time.time_from}
-        /> */}
       </div>
       {statusFilter === offerStatusFilter.active && (
         <div className={`${styles.chat__btn} display__hide__min__md`}>
@@ -125,7 +120,10 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter }) => {
             <div className={styles.card__active__title}>
               <p>{t(`offers_blogger.offer_status.active.title`)}</p>
               <div className={styles.tarif}>
-                <CountdownTimer date_to={card?.date_accept} time="23:59" />
+                <CountdownTimer
+                  date_to={card?.date_accept}
+                  time={card?.publish_time?.time_to}
+                />
               </div>
             </div>
             <div className={styles.card__active__buttons}>

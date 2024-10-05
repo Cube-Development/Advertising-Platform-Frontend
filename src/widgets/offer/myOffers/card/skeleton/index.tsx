@@ -18,7 +18,7 @@ export const OfferCardSkeleton: FC<OfferCardSkeletonProps> = ({
         <div className={styles.card__description}>
           <div className={styles.card__description__data}>
             <div className={styles.description}>
-              <Skeleton className="h-[30px] w-[30px] rounded-full" />
+              <Skeleton className="h-[50px] w-[50px] rounded-full" />
               <div>
                 <Skeleton className="h-4 w-[90px]" />
                 <Skeleton className="h-2 w-[90px]" />

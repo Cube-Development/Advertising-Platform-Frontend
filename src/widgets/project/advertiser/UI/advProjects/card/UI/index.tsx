@@ -66,11 +66,11 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
       <div className={styles.card__description}>
         <div className={styles.card__description__data}>
           <div className={styles.card__description__data__title}>
-            <p>{card.name}</p>
+            <p className="truncate">{card?.project_name}</p>
             <span>№{card?.identifier}</span>
           </div>
           <div className={styles.card__description__data__date}>
-            <span>{card?.tarif}</span>
+            <span className={styles.tariff}>{card?.tariff_name}</span>
             <span>{card?.created}</span>
           </div>
         </div>
@@ -85,7 +85,7 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
       {typeFilter === projectTypesFilter.managerProject &&
         statusFilter !== advManagerProjectStatusFilter.completed && (
           <div className={`${styles.chat__btn} display__hide__min__md`}>
-            <Chat orderId={card.id} toRole={roles.manager} />
+            <Chat orderId={card?.id} toRole={roles.manager} />
           </div>
         )}
       <div className={styles.card__info}>
@@ -228,7 +228,7 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
         {typeFilter === projectTypesFilter.managerProject &&
           statusFilter !== advManagerProjectStatusFilter.completed && (
             <div className={`${styles.chat__btn} display__hide__max__md`}>
-              <Chat orderId={card.id} toRole={roles.manager} />
+              <Chat orderId={card?.id} toRole={roles.manager} />
             </div>
           )}
       </div>
@@ -338,7 +338,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
               } as React.CSSProperties
             }
             // className="border__gradient"
-            value={`item-${card.id}`}
+            value={`item-${card?.id}`}
             ref={accordionRef}
             className="border-none"
           >
