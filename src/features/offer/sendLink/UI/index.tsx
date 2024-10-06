@@ -1,23 +1,28 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { SendHorizonal } from "lucide-react";
+import { Loader, X } from "lucide-react";
 import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogTrigger,
+  Drawer,
+  DrawerContent,
+  DrawerTrigger,
   ToastAction,
   useToast,
 } from "@shared/ui";
 import { IOrderFeature } from "@entities/project";
 import { usePublishPostBloggerMutation } from "@entities/offer";
 import { ArrowLongHorizontalIcon } from "@shared/assets";
+import { BREAKPOINT } from "@shared/config";
 
 export const SendLink: FC<IOrderFeature> = ({ order_id }) => {
   const [url, setUrl] = useState("");
   const [isUrlValid, setIsUrlValid] = useState(true);
   const { toast } = useToast();
-  const [publishPostBlogger] = usePublishPostBloggerMutation();
+  const [publishPostBlogger, { isLoading }] = usePublishPostBloggerMutation();
   const { t } = useTranslation();
 
   // Функция для проверки валидности URL
@@ -55,37 +60,130 @@ export const SendLink: FC<IOrderFeature> = ({ order_id }) => {
       });
   };
 
+  const [screen, setScreen] = useState<number>(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setScreen(window.innerWidth);
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const [open, setOpen] = useState(false);
+
   return (
-    <Popover>
-      <PopoverTrigger asChild>
-        <p className={styles.button}>
-          {t(`offer_btn.send_link`)}
-          <ArrowLongHorizontalIcon className="icon__white" />
-        </p>
-      </PopoverTrigger>
-      <PopoverContent className="rounded-[10px] p-0 w-full h-full" align="end">
-        <div className={styles.popover}>
-          {!isUrlValid && (
-            <p className={styles.error_input}>
-              {t("offers_blogger.offer_status.active.invalid_url")}
-            </p>
-          )}
-          <div className={styles.link}>
-            <input
-              className={`${styles.link__input} ${!isUrlValid ? styles.link__input_invalid : ""}`}
-              placeholder={t("offers_blogger.offer_status.active.placeholder")}
-              onChange={(e) => {
-                setUrl(e.target.value);
-                setIsUrlValid(true);
-              }}
-              value={url}
-            />
-            <p className={styles.link__send_icon} onClick={handleOnClick}>
+    <>
+      {screen >= BREAKPOINT.MD ? (
+        <Dialog open={open} onOpenChange={setOpen}>
+          <DialogTrigger>
+            <p className={styles.button}>
+              {t(`offer_btn.send_link`)}
               <ArrowLongHorizontalIcon className="icon__white" />
             </p>
-          </div>
-        </div>
-      </PopoverContent>
-    </Popover>
+          </DialogTrigger>
+          <DialogContent>
+            <div className={styles.popover}>
+              <div className="absolute -right-3 -top-3">
+                <DialogClose>
+                  <X width={20} height={20} stroke="#2d2d2d" />
+                </DialogClose>
+              </div>
+              <div className={styles.description}>
+                <h2 className={styles.description__title}>
+                  {t("offers_blogger.offer_status.active.send_link_title")}
+                </h2>
+                <p className={styles.description__subtitle}>
+                  {t("offers_blogger.offer_status.active.send_link_subtitle")}
+                </p>
+              </div>
+              <div className={styles.link}>
+                <input
+                  className={`${styles.link__input} ${!isUrlValid ? styles.link__input_invalid : ""}`}
+                  placeholder={t(
+                    "offers_blogger.offer_status.active.placeholder",
+                  )}
+                  onChange={(e) => {
+                    setUrl(e.target.value);
+                    setIsUrlValid(true);
+                  }}
+                  value={url}
+                />
+                <p className={styles.link__send_icon} onClick={handleOnClick}>
+                  {isLoading ? (
+                    <Loader
+                      className="animate-spin"
+                      stroke="#4772e6"
+                      width={20}
+                      height={20}
+                    />
+                  ) : (
+                    <ArrowLongHorizontalIcon />
+                  )}
+                </p>
+              </div>
+              {!isUrlValid && (
+                <p className={styles.error_input}>
+                  {t("offers_blogger.offer_status.active.invalid_url")}
+                </p>
+              )}
+            </div>
+          </DialogContent>
+        </Dialog>
+      ) : (
+        <Drawer open={open} onOpenChange={setOpen}>
+          <DrawerTrigger asChild>
+            <p className={styles.button}>
+              {t(`offer_btn.send_link`)}
+              <ArrowLongHorizontalIcon className="icon__white" />
+            </p>
+          </DrawerTrigger>
+          <DrawerContent className="top-[40dvh] rounded-t-xl">
+            <div className={styles.drawer_popover}>
+              <div className={styles.description}>
+                <h2 className={styles.description__title}>
+                  {t("offers_blogger.offer_status.active.send_link_title")}
+                </h2>
+                <p className={styles.description__subtitle}>
+                  {t("offers_blogger.offer_status.active.send_link_subtitle")}
+                </p>
+              </div>
+              <div className={styles.link}>
+                <input
+                  className={`${styles.link__input} ${!isUrlValid ? styles.link__input_invalid : ""}`}
+                  placeholder={t(
+                    "offers_blogger.offer_status.active.placeholder",
+                  )}
+                  onChange={(e) => {
+                    setUrl(e.target.value);
+                    setIsUrlValid(true);
+                  }}
+                  value={url}
+                />
+                <p className={styles.link__send_icon} onClick={handleOnClick}>
+                  {isLoading ? (
+                    <Loader
+                      className="animate-spin"
+                      stroke="#4772e6"
+                      width={20}
+                      height={20}
+                    />
+                  ) : (
+                    <ArrowLongHorizontalIcon />
+                  )}
+                </p>
+              </div>
+              {!isUrlValid && (
+                <p className={styles.error_input}>
+                  {t("offers_blogger.offer_status.active.invalid_url")}
+                </p>
+              )}
+            </div>
+          </DrawerContent>
+        </Drawer>
+      )}
+    </>
   );
 };

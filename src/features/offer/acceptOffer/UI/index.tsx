@@ -1,17 +1,10 @@
 import {
   Dialog,
+  DialogClose,
   DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
   Drawer,
-  DrawerClose,
   DrawerContent,
-  DrawerDescription,
-  DrawerFooter,
-  DrawerHeader,
-  DrawerTitle,
   DrawerTrigger,
   MyButton,
   ToastAction,
@@ -20,7 +13,7 @@ import {
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { SendHorizonal } from "lucide-react";
+import { Loader, SendHorizonal, X } from "lucide-react";
 import { IOrderFeature } from "@entities/project";
 import { useAcceptOfferMutation } from "@entities/offer";
 import { BREAKPOINT } from "@shared/config";
@@ -65,7 +58,7 @@ export const AcceptOffer: FC<IOrderFeature> = ({ order_id, dates }) => {
   const { t } = useTranslation();
   const currentDates = getDatesInRange(dates);
   const [selectedDate, setSelectedDate] = useState<string>(currentDates[0]);
-  const [acceptOffer] = useAcceptOfferMutation();
+  const [acceptOffer, { isLoading }] = useAcceptOfferMutation();
   const handleOnClick = () => {
     acceptOffer({ order_id, date: selectedDate })
       .unwrap()
@@ -108,34 +101,43 @@ export const AcceptOffer: FC<IOrderFeature> = ({ order_id, dates }) => {
               <DialogTrigger>
                 <p className={styles.button}>{t(`offer_btn.accept`)}</p>
               </DialogTrigger>
-              <DialogContent className={styles.popover}>
-                <DialogHeader>
-                  <DialogTitle>Edit profile</DialogTitle>
-                  <DialogDescription>
-                    <div className={styles.popover}>
-                      <h2 className={styles.description__title}>
-                        {t(`offer_btn.accept_title`)}
-                      </h2>
-                      <div className={styles.dates}>
-                        {currentDates?.map((date, index) => (
-                          <p
-                            key={index}
-                            onClick={() => setSelectedDate(date)}
-                            className={`${styles.date} ${date === selectedDate && styles.selected_date}`}
-                          >
-                            {date}
-                          </p>
-                        ))}
-                      </div>
-                      <div className={styles.send} onClick={handleOnClick}>
-                        <p className={styles.send__title}>
-                          {t(`offer_btn.accept_date`)}
-                          <SendHorizonal />
-                        </p>
-                      </div>
-                    </div>
-                  </DialogDescription>
-                </DialogHeader>
+              <DialogContent>
+                <div className={styles.popover}>
+                  <div className="absolute -right-3 -top-3">
+                    <DialogClose>
+                      <X width={20} height={20} stroke="#2d2d2d" />
+                    </DialogClose>
+                  </div>
+                  <h2 className={styles.description__title}>
+                    {t(`offer_btn.accept_title`)}
+                  </h2>
+                  <div className={styles.dates}>
+                    {currentDates?.map((date, index) => (
+                      <p
+                        key={index}
+                        onClick={() => setSelectedDate(date)}
+                        className={`${styles.date} ${date === selectedDate && styles.selected_date}`}
+                      >
+                        {date}
+                      </p>
+                    ))}
+                  </div>
+                  <MyButton className={styles.send} onClick={handleOnClick}>
+                    {isLoading ? (
+                      <Loader
+                        className="animate-spin"
+                        stroke="#fff"
+                        width={20}
+                        height={20}
+                      />
+                    ) : (
+                      <p className={styles.send__title}>
+                        {t(`offer_btn.accept_date`)}
+                        <SendHorizonal />
+                      </p>
+                    )}
+                  </MyButton>
+                </div>
               </DialogContent>
             </Dialog>
           ) : (
@@ -143,37 +145,38 @@ export const AcceptOffer: FC<IOrderFeature> = ({ order_id, dates }) => {
               <DrawerTrigger asChild>
                 <p className={styles.button}>{t(`offer_btn.accept`)}</p>
               </DrawerTrigger>
-              <DrawerContent className={styles.popover}>
-                <DrawerHeader className="text-left">
-                  <DrawerTitle>Edit profile</DrawerTitle>
-                  <DrawerDescription>
-                    <div className={styles.popover}>
-                      <h2 className={styles.description__title}>
-                        {t(`offer_btn.accept_title`)}
-                      </h2>
-                      <div className={styles.dates}>
-                        {currentDates?.map((date, index) => (
-                          <p
-                            key={index}
-                            onClick={() => setSelectedDate(date)}
-                            className={`${styles.date} ${date === selectedDate && styles.selected_date}`}
-                          >
-                            {date}
-                          </p>
-                        ))}
-                      </div>
-                      <div className={styles.send} onClick={handleOnClick}>
-                        <p className={styles.send__title}>
-                          {t(`offer_btn.accept_date`)}
-                          <SendHorizonal />
-                        </p>
-                      </div>
-                    </div>
-                  </DrawerDescription>
-                </DrawerHeader>
-                <DrawerFooter className="pt-2">
-                  <DrawerClose asChild>Cancel</DrawerClose>
-                </DrawerFooter>
+              <DrawerContent className="top-[20dvh] rounded-t-xl">
+                <div className={styles.drawer_popover}>
+                  <h2 className={styles.description__title}>
+                    {t(`offer_btn.accept_title`)}
+                  </h2>
+                  <div className={styles.dates}>
+                    {currentDates?.map((date, index) => (
+                      <p
+                        key={index}
+                        onClick={() => setSelectedDate(date)}
+                        className={`${styles.date} ${date === selectedDate && styles.selected_date}`}
+                      >
+                        {date}
+                      </p>
+                    ))}
+                  </div>
+                  <MyButton className={styles.send} onClick={handleOnClick}>
+                    {isLoading ? (
+                      <Loader
+                        className="animate-spin"
+                        stroke="#fff"
+                        width={20}
+                        height={20}
+                      />
+                    ) : (
+                      <p className={styles.send__title}>
+                        {t(`offer_btn.accept_date`)}
+                        <SendHorizonal />
+                      </p>
+                    )}
+                  </MyButton>
+                </div>
               </DrawerContent>
             </Drawer>
           )}
@@ -184,7 +187,16 @@ export const AcceptOffer: FC<IOrderFeature> = ({ order_id, dates }) => {
           buttons_type="button__white"
           className={styles.button}
         >
-          <p>{t(`offer_btn.accept`)}</p>
+          {isLoading ? (
+            <Loader
+              className="animate-spin"
+              stroke="#4772e6"
+              width={20}
+              height={20}
+            />
+          ) : (
+            <p>{t(`offer_btn.accept`)}</p>
+          )}
         </MyButton>
       )}
     </>
