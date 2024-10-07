@@ -125,7 +125,7 @@ export const Feedback: FC<IOrderFeature> = ({ order_id }) => {
               {t(`order_btn.feedback.btn_title`)}
             </big>
           </DrawerTrigger>
-          <DrawerContent className="top-[40dvh] rounded-t-xl">
+          <DrawerContent className="mt-[20dvh] rounded-t-xl">
             <div className={styles.drawer_popover}>
               <div className={styles.description}>
                 <h2 className={styles.description__title}>
@@ -135,12 +135,14 @@ export const Feedback: FC<IOrderFeature> = ({ order_id }) => {
                   {t(`order_btn.feedback.description.subtitle`)}
                 </p>
               </div>
-              <Rating
-                count={5}
-                value={grade}
-                edit={true}
-                onChange={(value) => setGrade(value)}
-              />
+              <div>
+                <Rating
+                  count={5}
+                  value={grade}
+                  edit={true}
+                  onChange={(value) => setGrade(value)}
+                />
+              </div>
               <div className={styles.comment}>
                 <textarea
                   className={styles.comment__input}

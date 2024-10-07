@@ -11,19 +11,19 @@ export interface IExtendedProfileData extends ILegalData {
 export interface ILegalData {
   type_legal?: number;
   name: string;
-  address: string;
-  INN: number;
-  checking_account: string;
+  address?: string;
+  INN?: number;
+  checking_account?: string;
   bank_name: string;
   bank_mfo: number;
   phone: string;
   email: string;
-  PNFL: number;
-  registration_number: number;
-  registration_date: string;
-  transit_account: string;
-  card_number: number;
-  card_date: string;
+  PNFL?: number;
+  registration_number?: number;
+  registration_date?: string;
+  transit_account?: string;
+  card_number?: number;
+  card_date?: string;
   profileFilter: {
     type: profileTypesName;
     id?: profileTypesNum;

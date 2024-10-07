@@ -104,11 +104,93 @@ export const Topup: FC = () => {
 
   const onSubmit: SubmitHandler<IExtendedProfileData> = async (formData) => {
     const dataWithLegalType = {
-      ...formData,
-      type_legal: formState.profileFilter.id,
-      PNFL: Number(formState.PNFL),
-      INN: Number(formState.INN),
-      registration_number: Number(formState.registration_number),
+      name: formState.name,
+      bank_name: formState.bank_name,
+      bank_mfo: formState.bank_mfo,
+      phone: formState.phone,
+      email: formState.email,
+      profileFilter: formState.profileFilter,
+      subprofileFilter: formState.subprofileFilter,
+
+      // юр.лицо
+      ...(formState.profileFilter.id === profileTypesNum.entities && {
+        INN: formState.INN,
+      }),
+      ...(formState.profileFilter.id === profileTypesNum.entities && {
+        address: formState.address,
+      }),
+      ...(formState.profileFilter.id === profileTypesNum.entities && {
+        checking_account: formState.checking_account,
+      }),
+      ...(formState.profileFilter.id === profileTypesNum.entities && {
+        type_legal: formState.profileFilter.id,
+      }),
+
+      // ИП
+      ...(formState.profileFilter.id === profileTypesNum.individuals && {
+        INN: formState.INN,
+      }),
+      ...(formState.profileFilter.id === profileTypesNum.individuals && {
+        address: formState.address,
+      }),
+      ...(formState.profileFilter.id === profileTypesNum.individuals && {
+        checking_account: formState.checking_account,
+      }),
+      ...(formState.profileFilter.id === profileTypesNum.individuals && {
+        type_legal: formState.profileFilter.id,
+      }),
+
+      // самозанятый р/с
+      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
+        formState.subprofileFilter.type === subprofileFilterTypes.account && {
+          PNFL: formState.PNFL,
+        }),
+      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
+        formState.subprofileFilter.type === subprofileFilterTypes.account && {
+          checking_account: formState.checking_account,
+        }),
+      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
+        formState.subprofileFilter.type === subprofileFilterTypes.account && {
+          registration_date: formState.registration_date,
+        }),
+      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
+        formState.subprofileFilter.type === subprofileFilterTypes.account && {
+          registration_number: formState.registration_number,
+        }),
+      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
+        formState.subprofileFilter.type === subprofileFilterTypes.account && {
+          type_legal: profileTypesNum.selfEmployedAccounts,
+        }),
+
+      // самозанятый т/с
+      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
+        formState.subprofileFilter.type === subprofileFilterTypes.card && {
+          PNFL: formState.PNFL,
+        }),
+      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
+        formState.subprofileFilter.type === subprofileFilterTypes.card && {
+          transit_account: formState.transit_account,
+        }),
+      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
+        formState.subprofileFilter.type === subprofileFilterTypes.card && {
+          registration_date: formState.registration_date,
+        }),
+      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
+        formState.subprofileFilter.type === subprofileFilterTypes.card && {
+          registration_number: formState.registration_number,
+        }),
+      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
+        formState.subprofileFilter.type === subprofileFilterTypes.card && {
+          card_number: formState.card_number,
+        }),
+      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
+        formState.subprofileFilter.type === subprofileFilterTypes.card && {
+          card_date: formState.card_date,
+        }),
+      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
+        formState.subprofileFilter.type === subprofileFilterTypes.card && {
+          type_legal: profileTypesNum.selfEmployedTransits,
+        }),
     };
     createLegal(dataWithLegalType)
       .unwrap()

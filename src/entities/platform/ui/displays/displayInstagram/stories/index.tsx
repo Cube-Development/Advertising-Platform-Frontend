@@ -266,6 +266,7 @@ export const DisplayStories: FC<DisplayStoriesProps> = ({
                   <EditorContent
                     className={styles.post__text}
                     editor={postEditor}
+                    style={{ fontSize: `${resizes?.timeSize}px` }}
                   />
                 </div>
                 {postFile?.length && (
@@ -345,6 +346,7 @@ export const DisplayStories: FC<DisplayStoriesProps> = ({
                   <EditorContent
                     className={styles.post__text}
                     editor={editorRes}
+                    style={{ fontSize: `${resizes?.timeSize}px` }}
                   />
                 </div>
                 {fileRes && (

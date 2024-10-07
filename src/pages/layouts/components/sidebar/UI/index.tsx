@@ -1,4 +1,8 @@
-import { roles, toggleRole as toggleroleAction } from "@entities/user";
+import {
+  roles,
+  toggleRole as toggleroleAction,
+  useUpdateRoleMutation,
+} from "@entities/user";
 import { setDropDownMenu } from "@pages/layouts/model";
 import { AccordionItem } from "@radix-ui/react-accordion";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
@@ -17,8 +21,13 @@ export const Sidebar: FC = () => {
   const { t } = useTranslation();
   const location = useLocation();
 
-  const toggleRole = (role: roles) => {
-    dispatch(toggleroleAction(role));
+  const [updateRole] = useUpdateRoleMutation();
+
+  const toggleRole = (currentRole: roles) => {
+    if (currentRole !== role) {
+      dispatch(toggleroleAction(currentRole));
+      updateRole({ role: currentRole });
+    }
   };
 
   const handleOpenDropdownMenu = (

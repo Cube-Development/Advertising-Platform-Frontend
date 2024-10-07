@@ -111,6 +111,13 @@ export const advProjectsAPI = authApi.injectEndpoints({
         body: body,
       }),
     }),
+    getProjectAmount: build.query<{ amount: number }, { project_id: string }>({
+      query: (params) => ({
+        url: `/order/project/amount`,
+        method: "GET",
+        params,
+      }),
+    }),
     acceptOrder: build.mutation<{ success: boolean }, { order_id: string }>({
       query: (params) => ({
         url: `/order/advertiser/accept`,
@@ -259,6 +266,7 @@ export const {
   useCreatePostMutation,
   useCreateUniquePostMutation,
   useCreateOrderDatesMutation,
+  useGetProjectAmountQuery,
   useAcceptOrderMutation,
   useApproveAdvManagerProjectMutation,
   useRejectOrderMutation,

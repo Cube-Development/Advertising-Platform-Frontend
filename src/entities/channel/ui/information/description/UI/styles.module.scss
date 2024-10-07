@@ -110,6 +110,7 @@
         font-weight: 600;
         line-height: 1;
         color: var(--Personal-colors-main);
+
         @media (max-width: 992px) {
           font-size: 24px;
         }
@@ -152,7 +153,8 @@
         width: 24px;
       }
 
-      p {
+      p,
+      a {
         color: var(--URL);
         font-family: Montserrat;
         font-size: 14px;

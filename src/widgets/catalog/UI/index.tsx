@@ -136,7 +136,6 @@ export const CatalogBlock: FC = () => {
       setCurrentCart(cartManager);
     }
   }, [cartManager]);
-  console.log(cartManager);
   // commonCart
   const [addToCommonCart] = useAddToCommonCartMutation();
   const [removeFromCommonCart] = useRemoveFromCommonCartMutation();

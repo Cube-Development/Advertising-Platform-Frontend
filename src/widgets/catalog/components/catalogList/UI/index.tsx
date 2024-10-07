@@ -31,6 +31,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { ParametersFilter } from "../parametersFilter";
 import styles from "./styles.module.scss";
+import { SadSmileIcon } from "@shared/assets";
 
 interface CatalogListProps {
   channels: ICatalogChannel[];
@@ -142,6 +143,11 @@ export const CatalogList: FC<CatalogListProps> = ({
           Array.from({ length: INTERSECTION_ELEMENTS.catalog }).map(
             (_, index) => <SkeletonCatalogCard key={index} />,
           )}
+        {channels.length === 0 && (
+          <div className={styles.icon}>
+            <SadSmileIcon />
+          </div>
+        )}
       </div>
       {!isLast ? (
         <div className={styles.show_more} onClick={handleOnChangePage}>

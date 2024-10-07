@@ -9,4 +9,11 @@ export interface IUser {
   is_verified: boolean;
   role: roles;
   language: languagesNum;
+  location: string;
+  name: string;
+  lastname: string;
+  phone: string;
+  password: string;
+  new_password: string;
+  accept_password: string;
 }

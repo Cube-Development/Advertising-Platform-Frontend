@@ -140,7 +140,7 @@ export const SendLink: FC<IOrderFeature> = ({ order_id }) => {
               <ArrowLongHorizontalIcon className="icon__white" />
             </p>
           </DrawerTrigger>
-          <DrawerContent className="top-[40dvh] rounded-t-xl">
+          <DrawerContent className="mt-[20dvh] rounded-t-xl">
             <div className={styles.drawer_popover}>
               <div className={styles.description}>
                 <h2 className={styles.description__title}>

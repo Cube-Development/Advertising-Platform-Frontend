@@ -4,11 +4,12 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { IOrderFeature } from "@entities/project";
 import { useCancelOfferMutation } from "@entities/offer";
+import { Loader } from "lucide-react";
 
 export const RejectOffer: FC<IOrderFeature> = ({ order_id }) => {
   const { toast } = useToast();
   const { t } = useTranslation();
-  const [cancelOffer] = useCancelOfferMutation();
+  const [cancelOffer, { isLoading }] = useCancelOfferMutation();
   const handleOnClick = () => {
     order_id &&
       cancelOffer({ order_id })
@@ -34,7 +35,11 @@ export const RejectOffer: FC<IOrderFeature> = ({ order_id }) => {
       buttons_type="button__white"
       className={styles.button}
     >
-      <p>{t(`offer_btn.reject`)}</p>
+      {isLoading ? (
+        <Loader className="animate-spin" stroke="#fff" width={20} height={20} />
+      ) : (
+        <p>{t(`offer_btn.reject`)}</p>
+      )}
     </MyButton>
   );
 };

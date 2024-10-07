@@ -1,4 +1,9 @@
-import { logout, roles, toggleRole as toggleRoleAction } from "@entities/user";
+import {
+  logout,
+  roles,
+  toggleRole as toggleRoleAction,
+  useUpdateRoleMutation,
+} from "@entities/user";
 import { useGetBalanceQuery, walletSlice } from "@entities/wallet";
 import { BREAKPOINT } from "@shared/config";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
@@ -34,8 +39,13 @@ export const Header: FC = () => {
     }
   }, [data, isLoading]);
 
-  const toggleRole = (role: roles) => {
-    dispatch(toggleRoleAction(role));
+  const [updateRole] = useUpdateRoleMutation();
+
+  const toggleRole = (currentRole: roles) => {
+    if (currentRole !== role) {
+      dispatch(toggleRoleAction(currentRole));
+      updateRole({ role: currentRole });
+    }
   };
 
   useEffect(() => {

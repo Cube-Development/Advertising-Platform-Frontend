@@ -47,6 +47,36 @@
   .card__list {
     display: grid;
     gap: 10px;
+
+    .icon {
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 5vw;
+
+      @media (max-width: 768px) {
+        margin-top: 15vw;
+      }
+
+      svg {
+        max-width: 200px;
+        width: 15vw;
+        height: auto;
+
+        @media (max-width: 992px) {
+          width: 20vw;
+        }
+
+        @media (max-width: 768px) {
+          width: 30vw;
+        }
+
+        @media (max-width: 576px) {
+          width: 40vw;
+        }
+      }
+    }
   }
 
   .card__loader {
