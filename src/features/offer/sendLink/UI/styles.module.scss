@@ -33,6 +33,7 @@
 .drawer_popover {
   display: grid;
   grid-auto-flow: row;
+  align-content: start;
   gap: 15px;
   height: 100%;
   width: 100%;

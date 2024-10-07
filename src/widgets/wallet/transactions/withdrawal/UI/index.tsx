@@ -16,19 +16,21 @@ import { BarSubfilter } from "@features/other";
 import { BarSubrofileFilter } from "@features/wallet";
 import { ArrowIcon5 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
-import { pageFilter } from "@shared/routing";
+import { pageFilter, paths } from "@shared/routing";
 import { ToastAction, useToast } from "@shared/ui";
 import { FC, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Guide, LegalsList, PaymentData } from "../../components";
 import styles from "./styles.module.scss";
+import { useNavigate } from "react-router-dom";
 
 export const Withdrawal: FC = () => {
   const { toast } = useToast();
   const { t } = useTranslation();
   const [activeAccount, setActiveAccount] = useState<ILegalCard | null>(null);
   const [screen, setScreen] = useState<number>(window.innerWidth);
+  const navigate = useNavigate();
 
   const {
     setValue,
@@ -99,14 +101,93 @@ export const Withdrawal: FC = () => {
 
   const onSubmit: SubmitHandler<IExtendedProfileData> = async (formData) => {
     const dataWithLegalType = {
-      ...formData,
-      type_legal:
-        formState.profileFilter.type === profileTypesName.selfEmployedAccounts
-          ? formState.subprofileFilter.id
-          : formState.profileFilter.id,
-      PNFL: Number(formState.PNFL),
-      INN: Number(formState.INN),
-      registration_number: Number(formState.registration_number),
+      name: formState.name,
+      bank_name: formState.bank_name,
+      bank_mfo: formState.bank_mfo,
+      phone: formState.phone,
+      email: formState.email,
+      profileFilter: formState.profileFilter,
+      subprofileFilter: formState.subprofileFilter,
+
+      // юр.лицо
+      ...(formState.profileFilter.id === profileTypesNum.entities && {
+        INN: formState.INN,
+      }),
+      ...(formState.profileFilter.id === profileTypesNum.entities && {
+        address: formState.address,
+      }),
+      ...(formState.profileFilter.id === profileTypesNum.entities && {
+        checking_account: formState.checking_account,
+      }),
+      ...(formState.profileFilter.id === profileTypesNum.entities && {
+        type_legal: formState.profileFilter.id,
+      }),
+
+      // ИП
+      ...(formState.profileFilter.id === profileTypesNum.individuals && {
+        INN: formState.INN,
+      }),
+      ...(formState.profileFilter.id === profileTypesNum.individuals && {
+        address: formState.address,
+      }),
+      ...(formState.profileFilter.id === profileTypesNum.individuals && {
+        checking_account: formState.checking_account,
+      }),
+      ...(formState.profileFilter.id === profileTypesNum.individuals && {
+        type_legal: formState.profileFilter.id,
+      }),
+
+      // самозанятый р/с
+      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
+        formState.subprofileFilter.type === subprofileFilterTypes.account && {
+          PNFL: formState.PNFL,
+        }),
+      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
+        formState.subprofileFilter.type === subprofileFilterTypes.account && {
+          checking_account: formState.checking_account,
+        }),
+      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
+        formState.subprofileFilter.type === subprofileFilterTypes.account && {
+          registration_date: formState.registration_date,
+        }),
+      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
+        formState.subprofileFilter.type === subprofileFilterTypes.account && {
+          registration_number: formState.registration_number,
+        }),
+      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
+        formState.subprofileFilter.type === subprofileFilterTypes.account && {
+          type_legal: profileTypesNum.selfEmployedAccounts,
+        }),
+
+      // самозанятый т/с
+      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
+        formState.subprofileFilter.type === subprofileFilterTypes.card && {
+          PNFL: formState.PNFL,
+        }),
+      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
+        formState.subprofileFilter.type === subprofileFilterTypes.card && {
+          transit_account: formState.transit_account,
+        }),
+      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
+        formState.subprofileFilter.type === subprofileFilterTypes.card && {
+          registration_date: formState.registration_date,
+        }),
+      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
+        formState.subprofileFilter.type === subprofileFilterTypes.card && {
+          registration_number: formState.registration_number,
+        }),
+      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
+        formState.subprofileFilter.type === subprofileFilterTypes.card && {
+          card_number: formState.card_number,
+        }),
+      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
+        formState.subprofileFilter.type === subprofileFilterTypes.card && {
+          card_date: formState.card_date,
+        }),
+      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
+        formState.subprofileFilter.type === subprofileFilterTypes.card && {
+          type_legal: profileTypesNum.selfEmployedTransits,
+        }),
     };
     createLegal(dataWithLegalType)
       .unwrap()
@@ -117,7 +198,14 @@ export const Withdrawal: FC = () => {
         };
         paymentWithdrawal(paymentReq)
           .unwrap()
-          .then(() => reset())
+          .then(() => {
+            reset();
+            navigate(paths.wallethistory);
+            toast({
+              variant: "success",
+              title: `${t("toasts.wallet.withdraw.success")}: ${paymentReq.amount.toLocaleString()} ${t("symbol")}`,
+            });
+          })
           .catch((error) => {
             toast({
               variant: "error",
@@ -137,17 +225,20 @@ export const Withdrawal: FC = () => {
           editLegal(newFormData)
             .unwrap()
             .then((editRes) => {
-              toast({
-                variant: "success",
-                title: t("toasts.add_profile.edit.success"),
-              });
               const paymentReq = {
                 amount: Number(formData.amount),
                 legal_id: editRes.legal_id,
               };
               paymentWithdrawal(paymentReq)
                 .unwrap()
-                .then(() => reset())
+                .then(() => {
+                  reset();
+                  navigate(paths.wallethistory);
+                  toast({
+                    variant: "success",
+                    title: `${t("toasts.wallet.withdraw.success")}: ${paymentReq.amount.toLocaleString()} ${t("symbol")}`,
+                  });
+                })
                 .catch((error) => {
                   toast({
                     variant: "error",

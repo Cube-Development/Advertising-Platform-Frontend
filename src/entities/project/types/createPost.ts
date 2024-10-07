@@ -15,6 +15,7 @@ export interface IPostChannel {
   category: string;
   platform: platformTypesNum;
   post_type: PostTypesNum;
+  channel_url: string;
 
   date_from?: string;
   date_to?: string;
