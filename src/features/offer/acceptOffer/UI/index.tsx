@@ -145,7 +145,7 @@ export const AcceptOffer: FC<IOrderFeature> = ({ order_id, dates }) => {
               <DrawerTrigger asChild>
                 <p className={styles.button}>{t(`offer_btn.accept`)}</p>
               </DrawerTrigger>
-              <DrawerContent className="top-[20dvh] rounded-t-xl">
+              <DrawerContent className="mt-[20dvh] rounded-t-xl">
                 <div className={styles.drawer_popover}>
                   <h2 className={styles.description__title}>
                     {t(`offer_btn.accept_title`)}

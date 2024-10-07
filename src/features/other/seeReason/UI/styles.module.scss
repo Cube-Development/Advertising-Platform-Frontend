@@ -9,6 +9,14 @@
 .alert {
   padding: 20px;
 
+  @media (max-width: 768px) {
+    width: 80vw;
+  }
+
+  @media (max-width: 576px) {
+    width: 90vw;
+  }
+
   &__title {
     display: grid;
     grid-auto-flow: column;
@@ -22,6 +30,10 @@
 
       @media (max-width: 768px) {
         font-size: 14px;
+      }
+
+      @media (max-width: 576px) {
+        font-size: 12px;
       }
     }
 
@@ -42,6 +54,10 @@
 
     @media (max-width: 768px) {
       font-size: 12px;
+    }
+
+    @media (max-width: 576px) {
+      font-size: 10px;
     }
   }
 

@@ -6,6 +6,7 @@ import {
   useCreateOrderDatesMutation,
   useCreatePostMutation,
   useCreateUniquePostMutation,
+  useGetProjectAmountQuery,
   // useGetUploadLinkMutation,
   useProjectNameMutation,
   useProjectOrdersQuery,
@@ -104,6 +105,14 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
   const [createOrderDates] = useCreateOrderDatesMutation();
   const [paymentProject] = usePaymentProjectMutation();
   const [approveProject] = useApproveProjectMutation();
+
+  // total price
+  const { data: totalPrice } = useGetProjectAmountQuery(
+    { project_id: project_id || "" },
+    {
+      skip: !project_id,
+    },
+  );
 
   // загрузка файлов и медиа
   const [isUploadLoading, setIsUploadLoading] = useState<boolean>(false);
@@ -245,7 +254,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
             />
             <CreateOrderPayment
               isBlur={blur.payment}
-              total_price={10000000}
+              total_price={totalPrice?.amount || 0}
               role={role}
             />
           </>

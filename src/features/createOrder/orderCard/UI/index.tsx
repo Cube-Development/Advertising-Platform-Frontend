@@ -29,6 +29,7 @@ import {
 } from "@shared/ui";
 import { EmptyPost } from "@entities/platform/ui/displays/displayInstagram/feed/emptyPost";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 interface PostPlatformProps {
   card: IPostChannel;
@@ -112,7 +113,9 @@ export const OrderCard: FC<PostPlatformProps> = ({
           <img src={card?.avatar} alt="" />
         </div>
         <div className={styles.title}>
-          <p className="truncate">{card?.name}</p>
+          <Link to={card?.channel_url} target="_blank" className="truncate">
+            {card?.name}
+          </Link>
           <span className="truncate">{card?.category}</span>
         </div>
         <div className={styles.icon}>

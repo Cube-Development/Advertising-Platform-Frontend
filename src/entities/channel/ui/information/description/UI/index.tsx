@@ -10,6 +10,7 @@ import { FC, useEffect, useRef, useState } from "react";
 import styles from "./styles.module.scss";
 import { platformToIcon } from "@entities/project";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 interface DescriptionProps {
   card: IReadChannelData;
@@ -153,7 +154,9 @@ export const Description: FC<DescriptionProps> = ({ card }) => {
             {card?.platform || 0 in platformToIcon
               ? platformToIcon[card?.platform || 0]()
               : null}
-            <p>{card?.url}</p>
+            <Link to={card?.url} target="_blank">
+              {card?.url}
+            </Link>
           </div>
         </div>
       </div>

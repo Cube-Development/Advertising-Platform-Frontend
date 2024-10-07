@@ -244,6 +244,7 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
                   <EditorContent
                     className={styles.post__text}
                     editor={postEditor}
+                    style={{ fontSize: `${resizes?.timeSize}px` }}
                   />
                   <div className={styles.info}>
                     <EyeIcon />
@@ -318,6 +319,7 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
                   <EditorContent
                     className={styles.post__text}
                     editor={editorRes}
+                    style={{ fontSize: `${resizes?.timeSize}px` }}
                   />
 
                   <div className={styles.info}>

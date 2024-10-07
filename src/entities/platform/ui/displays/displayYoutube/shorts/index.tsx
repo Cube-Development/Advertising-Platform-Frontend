@@ -264,6 +264,7 @@ export const DisplayShorts: FC<DisplayShortsProps> = ({
                   <EditorContent
                     className={styles.post__text}
                     editor={postEditor}
+                    style={{ fontSize: `${resizes?.timeSize}px` }}
                   />
                 </div>
                 {postFile && postFile?.length > 0 && (
@@ -326,6 +327,7 @@ export const DisplayShorts: FC<DisplayShortsProps> = ({
                   <EditorContent
                     className={styles.post__text}
                     editor={editorRes}
+                    style={{ fontSize: `${resizes?.timeSize}px` }}
                   />
                 </div>
                 {fileRes && (

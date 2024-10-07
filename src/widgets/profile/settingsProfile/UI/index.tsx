@@ -2,9 +2,12 @@ import { EditPencilIcon, EmailIcon, TelegramJetlIcon } from "@shared/assets";
 import { PAGE_ANIMATION } from "@shared/config/animation";
 import { MyButton } from "@shared/ui";
 import { motion } from "framer-motion";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { IUser, roles, useGetUserMutation } from "@entities/user";
+import { useForm } from "react-hook-form";
+import { languages, languagesNum } from "@shared/config";
 
 export const SettingsProfile: FC = () => {
   const { t } = useTranslation();
@@ -18,6 +21,45 @@ export const SettingsProfile: FC = () => {
   const handleEdit = () => {
     setIsEdit(!isEdit);
   };
+
+  const [getUser] = useGetUserMutation();
+
+  useEffect(() => {
+    getUser()
+      .unwrap()
+      .then((data) => {
+        setValue("id", data.id);
+        setValue("email", data.email);
+        setValue("is_active", data.is_active);
+        setValue("is_superuser", data.is_superuser);
+        setValue("is_verified", data.is_verified);
+        setValue("role", data.role);
+        setValue("language", data.language);
+        setValue("location", data.location);
+        setValue("name", data.name);
+        setValue("lastname", data.lastname);
+        setValue("phone", data.phone);
+      });
+  }, []);
+
+  const { setValue, watch } = useForm<IUser>({
+    defaultValues: {
+      id: "",
+      email: "",
+      is_active: true,
+      is_superuser: false,
+      is_verified: true,
+      role: roles.advertiser,
+      language: languagesNum.ru,
+      location: "",
+      name: "",
+      lastname: "",
+      phone: "",
+      password: "",
+      new_password: "",
+    },
+  });
+  const formState = watch();
 
   return (
     <div className="container sidebar">
@@ -47,6 +89,8 @@ export const SettingsProfile: FC = () => {
                   <span> {t("profile.account_block.name.title")}</span>
                   <input
                     placeholder={t("profile.account_block.name.default_value")}
+                    value={formState.name}
+                    onChange={(e) => setValue("name", e.target.value)}
                   />
                 </div>
                 <div className={styles.parameters_row}>
@@ -55,6 +99,8 @@ export const SettingsProfile: FC = () => {
                     placeholder={t(
                       "profile.account_block.surname.default_value",
                     )}
+                    value={formState.lastname}
+                    onChange={(e) => setValue("lastname", e.target.value)}
                   />
                 </div>
               </div>
@@ -62,12 +108,17 @@ export const SettingsProfile: FC = () => {
                 <span> {t("profile.account_block.email.title")}</span>
                 <input
                   placeholder={t("profile.account_block.email.default_value")}
+                  value={formState.email}
+                  onChange={(e) => setValue("email", e.target.value)}
                 />
               </div>
               <div className={styles.parameters_row}>
                 <span> {t("profile.account_block.phone.title")}</span>
                 <input
                   placeholder={t("profile.account_block.phone.default_value")}
+                  value={formState.phone}
+                  onChange={(e) => setValue("phone", e.target.value)}
+                  type="tel"
                 />
               </div>
               <div className={styles.name}>
@@ -77,6 +128,14 @@ export const SettingsProfile: FC = () => {
                     placeholder={t(
                       "profile.account_block.language.default_value",
                     )}
+                    value={
+                      formState.language === languagesNum.en
+                        ? languages.en
+                        : formState.language === languagesNum.ru
+                          ? languages.ru
+                          : languages.uz
+                    }
+                    readOnly
                   />
                 </div>
                 <div className={styles.parameters_row}>
@@ -85,6 +144,8 @@ export const SettingsProfile: FC = () => {
                     placeholder={t(
                       "profile.account_block.location.default_value",
                     )}
+                    value={formState.location}
+                    onChange={(e) => setValue("location", e.target.value)}
                   />
                 </div>
               </div>
@@ -102,13 +163,14 @@ export const SettingsProfile: FC = () => {
             <div className={styles.parameters_wrapper}>
               <div className={styles.parameters_row}>
                 <span>
-                  {" "}
                   {t("profile.password_block.current_password.title")}
                 </span>
                 <input
                   placeholder={t(
                     "profile.password_block.current_password.default_value",
                   )}
+                  value={formState.password}
+                  onChange={(e) => setValue("password", e.target.value)}
                 />
               </div>
               <div className={styles.parameters_row}>
@@ -117,17 +179,18 @@ export const SettingsProfile: FC = () => {
                   placeholder={t(
                     "profile.password_block.new_password.default_value",
                   )}
+                  value={formState.new_password}
+                  onChange={(e) => setValue("new_password", e.target.value)}
                 />
               </div>
               <div className={styles.parameters_row}>
-                <span>
-                  {" "}
-                  {t("profile.password_block.accept_password.title")}
-                </span>
+                <span>{t("profile.password_block.accept_password.title")}</span>
                 <input
                   placeholder={t(
                     "profile.password_block.accept_password.default_value",
                   )}
+                  value={formState.accept_password}
+                  onChange={(e) => setValue("accept_password", e.target.value)}
                 />
               </div>
             </div>

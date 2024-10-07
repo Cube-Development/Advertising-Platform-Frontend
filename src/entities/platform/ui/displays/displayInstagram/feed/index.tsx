@@ -335,6 +335,7 @@ export const DisplayFeed: FC<DisplayFeedProps> = ({
                   <EditorContent
                     className={styles.post__text}
                     editor={postEditor}
+                    style={{ fontSize: `${resizes?.timeSize}px` }}
                   />
                   <div className={styles.post__info}>
                     <p
@@ -469,6 +470,7 @@ export const DisplayFeed: FC<DisplayFeedProps> = ({
                   <EditorContent
                     className={styles.post__text}
                     editor={editorRes}
+                    style={{ fontSize: `${resizes?.timeSize}px` }}
                   />
                   <div className={styles.post__info}>
                     <p

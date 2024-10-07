@@ -3,11 +3,12 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { IOrderFeature, useAcceptOrderMutation } from "@entities/project";
+import { Loader } from "lucide-react";
 
 export const AcceptPost: FC<IOrderFeature> = ({ order_id }) => {
   const { toast } = useToast();
   const { t } = useTranslation();
-  const [acceptOrder] = useAcceptOrderMutation();
+  const [acceptOrder, { isLoading }] = useAcceptOrderMutation();
   const handleOnClick = () => {
     order_id &&
       acceptOrder({ order_id })
@@ -33,7 +34,16 @@ export const AcceptPost: FC<IOrderFeature> = ({ order_id }) => {
       buttons_type="button__white"
       className={styles.button}
     >
-      {t(`order_btn.accept`)}
+      {isLoading ? (
+        <Loader
+          className="animate-spin"
+          stroke="#4772e6"
+          width={20}
+          height={20}
+        />
+      ) : (
+        t(`order_btn.accept`)
+      )}
     </MyButton>
   );
 };
