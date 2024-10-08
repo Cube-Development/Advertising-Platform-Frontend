@@ -167,7 +167,9 @@ export const CatalogCard: FC<CatalogCardProps> = ({
             </div>
           )}
           <div className={styles.column__cross}>
-            <ChannelCardMatch match={card?.match || undefined} />
+            <ChannelCardMatch
+              match={card.match ? Math.ceil(card.match) : undefined}
+            />
             <div className={styles.platform__icon}>
               {card?.platform && card?.platform in platformToIcon
                 ? platformToIcon[card.platform!]()
