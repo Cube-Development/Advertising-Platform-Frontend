@@ -143,7 +143,7 @@ export const CatalogList: FC<CatalogListProps> = ({
           Array.from({ length: INTERSECTION_ELEMENTS.catalog }).map(
             (_, index) => <SkeletonCatalogCard key={index} />,
           )}
-        {channels.length === 0 && (
+        {channels.length === 0 && !isLoading && (
           <div className={styles.icon}>
             <SadSmileIcon />
           </div>
