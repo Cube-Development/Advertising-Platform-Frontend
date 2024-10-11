@@ -159,7 +159,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
               <div className={`${styles.info__wrapper} ${styles.last}`}>
                 <div>
                   <p>{t(`orders_advertiser.subcard.accommodation`)}</p>
-                  <span>{subcard?.format?.small}</span>
+                  <span className="truncate">{subcard?.format?.small}</span>
                 </div>
               </div>
             </div>

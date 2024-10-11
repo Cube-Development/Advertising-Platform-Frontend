@@ -110,14 +110,16 @@ export const InstagramMedia: FC<InstagramMediaProps> = ({
                   <img
                     src={media.content}
                     alt={`Photo ${index + 1}`}
-                    className="object-cover h-[28vw] max-h-[600px] w-full"
+                    className="object-cover h-[600px] w-full"
+                    style={{ height: `${storiesHeight}px` }}
                   />
                 ) : (
                   <video
                     autoPlay
                     loop
                     muted
-                    className="object-cover h-[28vw] max-h-[600px] w-full"
+                    className="object-cover h-[600px] w-full"
+                    style={{ height: `${storiesHeight}px` }}
                   >
                     <source src={media.content} type="video/mp4" />
                     Your browser does not support the video tag.

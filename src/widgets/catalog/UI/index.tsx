@@ -77,18 +77,18 @@ export const CatalogBlock: FC = () => {
     });
 
   const formFields = watch();
-  const { filter, sort, language: lang, search_string } = formFields;
 
-  useEffect(() => {
-    setTimeout(() => {
-      setValue(channelParameterData.page, 1);
-    }, 500);
-  }, [filter, sort, lang, search_string]);
+  const setValueWithPage = (key: any, value: any) => {
+    setValue(channelParameterData.page, 1);
+    setValue(key, value);
+  };
 
   const { data: catalogAuth, isFetching: isCatalogAuthLoading } =
     useGetCatalogQuery(
       { ...formFields, user_id: userId },
-      { skip: !isAuth || !userId || role !== roles.advertiser },
+      {
+        skip: !isAuth || !userId || role !== roles.advertiser,
+      },
     );
 
   const { data: catalogManager, isFetching: isCatalogManagerLoading } =
@@ -388,7 +388,7 @@ export const CatalogBlock: FC = () => {
               <CatalogSearch
                 getValues={getValues}
                 reset={reset}
-                setValue={setValue}
+                setValue={setValueWithPage}
                 catalogFilter={catalogFilter}
                 changeCatalogfilter={(filter) => setCatalogFilter(filter)}
               />
@@ -401,7 +401,7 @@ export const CatalogBlock: FC = () => {
                 catalogFilter={catalogFilter}
                 getValues={getValues}
                 reset={reset}
-                setValue={setValue}
+                setValue={setValueWithPage}
                 resetField={resetField}
                 page={formFields.page}
                 channels={
