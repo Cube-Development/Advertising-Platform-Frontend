@@ -32,9 +32,9 @@ export const SelectSex: FC<SelectSexProps> = ({
   const [position, setPosition] = useState<number | null>(
     defaultValues !== undefined
       ? defaultValues
-      : // : isCatalog
-        //   ? null
-        PLATFORM_PARAMETERS.defaultSexMale,
+      : isCatalog
+        ? null
+        : PLATFORM_PARAMETERS.defaultSexMale,
   );
 
   const debouncedPosition = useDebounce(position, DEBOUNCE.sex);
@@ -55,11 +55,15 @@ export const SelectSex: FC<SelectSexProps> = ({
   };
 
   useEffect(() => {
-    setPosition(
-      defaultValues !== undefined
-        ? defaultValues
-        : PLATFORM_PARAMETERS.defaultSexMale,
-    );
+    if (isCatalog) {
+      setPosition(defaultValues !== undefined ? defaultValues : null);
+    } else {
+      setPosition(
+        defaultValues !== undefined
+          ? defaultValues
+          : PLATFORM_PARAMETERS.defaultSexMale,
+      );
+    }
   }, [defaultValues]);
 
   useEffect(() => {
