@@ -1,19 +1,15 @@
 import {
-  // ContentType,
   ICreatePostForm,
-  // getContentType,
   useApproveProjectMutation,
   useCreateOrderDatesMutation,
   useCreatePostMutation,
   useCreateUniquePostMutation,
   useGetProjectAmountQuery,
-  // useGetUploadLinkMutation,
   useProjectNameMutation,
   useProjectOrdersQuery,
 } from "@entities/project";
 import { usePaymentProjectMutation } from "@entities/wallet";
 import { Languages } from "@shared/config/languages";
-// import { getFileExtension } from "@shared/functions";
 import { useAppSelector } from "@shared/hooks";
 import { paths } from "@shared/routing";
 import { SpinnerLoader, useToast } from "@shared/ui";

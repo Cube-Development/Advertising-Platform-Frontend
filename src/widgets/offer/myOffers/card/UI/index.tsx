@@ -100,7 +100,7 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter }) => {
 
         <div className={styles.info}>
           <p>{t(`offers_blogger.card.accommodation`)}</p>
-          <span>{card.format?.small}</span>
+          <span className="truncate">{card.format?.small}</span>
         </div>
         <div className={styles.info}>
           <p>{t(`offers_blogger.card.date`)}</p>
