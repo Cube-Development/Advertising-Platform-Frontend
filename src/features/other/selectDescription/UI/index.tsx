@@ -12,6 +12,7 @@ interface SelectDescriptionProps {
   onChange: UseFormSetValue<any>;
   defaultValues?: string;
   type: channelParameterData;
+  isCatalog?: boolean;
 }
 
 export const SelectDescription: FC<SelectDescriptionProps> = ({
@@ -21,6 +22,7 @@ export const SelectDescription: FC<SelectDescriptionProps> = ({
   onChange,
   defaultValues,
   type,
+  isCatalog,
 }) => {
   const { t } = useTranslation();
   const [description, setDescription] = useState(defaultValues || "");
@@ -44,7 +46,7 @@ export const SelectDescription: FC<SelectDescriptionProps> = ({
 
   return (
     <div className={styles.wrapper}>
-      <div className={styles.title}>
+      <div className={`${styles.title} ${isCatalog && styles.is_catalog}`}>
         <p>{t(title)}</p>
         {text && <InfoIcon />}
       </div>

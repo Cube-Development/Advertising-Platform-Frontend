@@ -32,7 +32,23 @@
     align-items: center;
     justify-content: center;
     column-gap: 10px;
-    text-align: centerтз;
+
+    &.is_catalog {
+      text-align: center;
+
+      p {
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        color: var(--Personal-colors-main);
+        font-size: 14px;
+        background: var(--Gradients-Gradient-1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        color: transparent;
+      }
+    }
   }
 
   .field {
