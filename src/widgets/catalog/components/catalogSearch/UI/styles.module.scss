@@ -56,8 +56,9 @@
 
 .accordion {
   background: var(--Personal-colors-White);
-  box-shadow: 0px 1px 4px 1px var(--Personal-colors-main);
+  box-shadow: inset 0px 0px 4px 1px rgba(0, 0, 0, 0.2);
   border-radius: 20px;
+  transition: all 500ms ease;
 
   .item {
     display: grid;
@@ -107,7 +108,9 @@
       display: grid;
       grid-auto-flow: row;
       row-gap: 20px;
-      padding: 15px;
+      padding: 20px;
+      padding-top: 10px;
+      padding-bottom: 25px;
     }
   }
 
@@ -129,5 +132,10 @@
     .arrow {
       background: var(--Gradients-Gradient-1) !important;
     }
+  }
+
+  &.selected {
+    box-shadow: inset 0px 0px 2px 1px var(--Personal-colors-main);
+    transition: all 500ms ease;
   }
 }

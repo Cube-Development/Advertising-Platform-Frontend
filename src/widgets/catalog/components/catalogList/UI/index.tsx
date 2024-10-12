@@ -52,7 +52,6 @@ export const CatalogList: FC<CatalogListProps> = ({
   setValue,
   reset,
   getValues,
-  resetField,
   page,
   isLast,
   onChangeCard,
@@ -107,11 +106,7 @@ export const CatalogList: FC<CatalogListProps> = ({
         </div>
       </div>
       <div className={styles.search__row}>
-        <SearchFilter
-          type={channelData.search}
-          onChange={setValue}
-          resetField={resetField}
-        />
+        <SearchFilter type={channelData.search} onChange={setValue} />
         {screen < BREAKPOINT.LG && (
           <ParametersFilter
             getValues={getValues}
