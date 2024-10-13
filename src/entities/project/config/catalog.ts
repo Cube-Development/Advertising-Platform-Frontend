@@ -29,6 +29,7 @@ export const enum CART {
 export const enum DEBOUNCE {
   sex = 500,
   search = 500,
+  readMessage = 500,
 }
 
 export enum sortingFilter {

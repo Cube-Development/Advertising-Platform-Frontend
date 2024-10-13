@@ -1,0 +1,24 @@
+.wrapper {
+  display: grid;
+  grid-template: 1fr / min-content 1fr min-content;
+  column-gap: 15px;
+  padding: 10px;
+
+  .icon {
+    display: grid;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .text {
+    display: grid;
+    grid-template: 3fr 1fr 1fr / 1fr;
+    row-gap: 5px;
+  }
+
+  .info {
+    display: grid;
+    align-content: space-between;
+  }
+}

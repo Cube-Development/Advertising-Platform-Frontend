@@ -14,6 +14,7 @@ export const enum INTERSECTION_ELEMENTS {
   channelReview = 4,
   recommendCardsChannel = 10,
   recommendCardsCart = 10,
+  notifications = 15,
 }
 
 export const enum BREAKPOINT {

@@ -25,3 +25,60 @@ export function convertUTCToLocalDateTime(
     localTime: localTimeString,
   };
 }
+
+export function getFormattedDateTime() {
+  const now = new Date();
+
+  const utcDate =
+    now.getUTCFullYear() +
+    "-" +
+    String(now.getUTCMonth() + 1).padStart(2, "0") +
+    "-" +
+    String(now.getUTCDate()).padStart(2, "0");
+
+  const utcTime =
+    String(now.getUTCHours()).padStart(2, "0") +
+    ":" +
+    String(now.getUTCMinutes()).padStart(2, "0") +
+    ":" +
+    String(now.getUTCSeconds()).padStart(2, "0") +
+    "." +
+    String(now.getUTCMilliseconds()).padStart(6, "0") +
+    "000000";
+
+  const localDate =
+    now.getFullYear() +
+    "-" +
+    String(now.getMonth() + 1).padStart(2, "0") +
+    "-" +
+    String(now.getDate()).padStart(2, "0");
+
+  const localTime =
+    String(now.getHours()).padStart(2, "0") +
+    ":" +
+    String(now.getMinutes()).padStart(2, "0");
+
+  return {
+    utcDate: utcDate,
+    utcTime: utcTime,
+    localDate: localDate,
+    localTime: localTime,
+  };
+}
+
+export function checkDatetimeDifference(
+  dateTime1: string,
+  dateTime2: string,
+  minutes: number,
+): boolean {
+  const date1 = new Date(dateTime1);
+  const date2 = new Date(dateTime2);
+  const differenceInMilliseconds = date2.getTime() - date1.getTime();
+  return differenceInMilliseconds < 60000 * minutes;
+}
+
+export function checkDatetime(dateTime1: string, dateTime2: string): boolean {
+  const date1 = new Date(dateTime1);
+  const date2 = new Date(dateTime2);
+  return date2.getTime() >= date1.getTime();
+}

@@ -120,16 +120,16 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
         // const filteredLanguage = languages?.contents || [];
         const filteredCategories =
           categories?.contents.filter((item) =>
-            card.category.includes(item.id),
+            card?.category.includes(item.id),
           ) || [];
         const filteredAge =
-          ages?.contents.filter((item) => card.age.includes(item.id)) || [];
+          ages?.contents.filter((item) => card?.age.includes(item.id)) || [];
         const filteredRegion =
-          regions?.contents.filter((item) => card.region.includes(item.id)) ||
+          regions?.contents.filter((item) => card?.region.includes(item.id)) ||
           [];
         const filteredLanguage =
           languages?.contents.filter((item) =>
-            card.language.includes(item.id),
+            card?.language.includes(item.id),
           ) || [];
         return {
           ...card,

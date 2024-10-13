@@ -375,6 +375,11 @@ main {
   --end-color: var(--choosen-text);
 }
 
+.icon__grey2 {
+  --start-color: var(--black-20);
+  --end-color: var(--black-20);
+}
+
 .show {
   opacity: 0;
   animation: fadeIn 0.5s ease forwards;

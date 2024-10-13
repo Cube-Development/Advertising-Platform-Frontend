@@ -1,199 +1,87 @@
-import { AddIcon, ArrowSmallVerticalIcon, SendIcon } from "@shared/assets";
+import {
+  chatAPI,
+  chatType,
+  getChatHistoryReq,
+  IChatData,
+  IMessageNewSocket,
+  IMessageSendSocket,
+  MeesageSendType,
+  MessageStatus,
+  RecipientType,
+  useGetOrderHistoryQuery,
+  useReadOrderMessageMutation,
+  useReadProjectMessageMutation,
+} from "@entities/communication";
+import { DinamicPagination } from "@features/other";
+import {
+  AddIcon,
+  ArrowReadIcon,
+  ArrowSmallVerticalIcon,
+  MessageAppendixIcon,
+  SendIcon,
+} from "@shared/assets";
+import { INTERSECTION_ELEMENTS } from "@shared/config";
+import {
+  checkDatetime,
+  checkDatetimeDifference,
+  convertUTCToLocalDateTime,
+  getCurrentUtcDateTime,
+  getFormattedDateTime,
+} from "@shared/functions";
 import HardBreak from "@tiptap/extension-hard-break";
 import Link from "@tiptap/extension-link";
 import Underline from "@tiptap/extension-underline";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
+import { useCentrifuge } from "@widgets/communication/chat";
+import Cookies from "js-cookie";
 import { FC, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { animateScroll } from "react-scroll";
+import { v4 as uuidv4 } from "uuid";
 import styles from "./styles.module.scss";
-import { useCentrifuge } from "@widgets/communication/chat";
-import { DinamicPagination } from "@features/other";
-import {
-  convertUTCToLocalDateTime,
-  getCurrentUtcDateTime,
-} from "@shared/functions";
-import {
-  IOrderMessageNewSocket,
-  IOrderMessageSendSocket,
-  MessageStatus,
-  RecipientType,
-  useGetOrderHistoryQuery,
-} from "@entities/communication";
-import { INTERSECTION_ELEMENTS } from "@shared/config";
+import { useAppDispatch, useAppSelector, useDebounce } from "@shared/hooks";
+import { SkeletonChatMessage } from "../skeleton";
+import { useToast } from "@shared/ui";
+import { useInView } from "react-intersection-observer";
+import { DEBOUNCE } from "@entities/project";
 
 interface ChatMessagesProps {
-  id: string;
-  isOrder: boolean;
+  card: IChatData;
 }
 
-export const ChatMessages: FC<ChatMessagesProps> = ({ id, isOrder }) => {
+export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
   const { t } = useTranslation();
   const { OrderMessageSend, OrderMessageNew } = useCentrifuge();
+  const { role } = useAppSelector((state) => state.user);
+  let currentDate: string | null = null;
+  const userId = Cookies.get("user_id")!;
+  const dispatch = useAppDispatch();
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesRef = useRef<(HTMLDivElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement | null>(null);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
-  const currentDateString = getCurrentUtcDateTime();
-
-  let currentDate: string | null = null;
-
-  const { watch, setValue } = useForm({
-    defaultValues: {
-      ...(isOrder ? { order_id: id } : { project_id: id }),
-      batch: INTERSECTION_ELEMENTS.chat,
-      message_date: currentDateString.date,
-      message_time: currentDateString.time,
-    },
-  });
-
-  const formFields = watch();
-
-  const { data: history, isLoading } = useGetOrderHistoryQuery({
-    ...formFields,
-  });
-  console.log(history);
+  const [readOrderMessage] = useReadOrderMessageMutation();
+  const [readProjectMessage] = useReadProjectMessageMutation();
   const [newMessage, setNewMessage] = useState<string>("");
   const [isNewMessage, setIsNewMessage] = useState<boolean>(false);
-
   const [isSendMessage, setIsSendMessage] = useState<boolean>(false);
-  const [chat, setChat] = useState<IOrderMessageNewSocket[]>([]);
   const [showScrollDownButton, setShowScrollDownButton] =
     useState<boolean>(false);
 
-  useEffect(() => {
-    if (history) {
-      const reversedArray = [...history].reverse();
-      const newHistory = reversedArray.map((item) => {
-        const datetime = convertUTCToLocalDateTime(
-          item.message_date,
-          item.message_time,
-        );
-        return {
-          ...item,
-          message_date: datetime.localDate,
-          message_time: datetime.localTime,
-        };
-      });
-      setChat([...newHistory, ...chat]);
-    }
-  }, [history]);
+  const getDefaultValues = (card: IChatData) => ({
+    ...(card?.type === chatType.order
+      ? { order_id: card?.order_id }
+      : { project_id: card?.project_id }),
+    batch: INTERSECTION_ELEMENTS.chat,
+  });
 
-  useEffect(() => {
-    if (containerRef.current && !isSendMessage) {
-      const scrollTo = itemRefs.current
-        .slice(0, history?.length)
-        .reduce((acc, el) => {
-          return acc + (el?.offsetHeight || 0);
-        }, 0);
+  const { watch, setValue, reset } = useForm<getChatHistoryReq>({
+    defaultValues: getDefaultValues(card),
+  });
 
-      console.log("scrollTo", scrollTo, history?.length);
-      containerRef.current.scrollTop =
-        scrollTo + (INTERSECTION_ELEMENTS.chat - 1) * 15;
-    }
-  }, [chat]);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (containerRef.current) {
-        const isScrolledUp =
-          containerRef.current.scrollTop + containerRef.current.clientHeight <
-          containerRef.current.scrollHeight - 250;
-        setShowScrollDownButton(isScrolledUp);
-      }
-    };
-
-    if (containerRef.current) {
-      containerRef.current.addEventListener("scroll", handleScroll);
-    }
-
-    return () => {
-      if (containerRef.current) {
-        containerRef.current.removeEventListener("scroll", handleScroll);
-      }
-    };
-  }, []);
-
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === "Enter" && event.ctrlKey) {
-      handleSendMessage();
-    }
-  };
-
-  const handleSendMessage = () => {
-    const message = cleanMessage(newMessage);
-    console.log(message);
-    if (message !== "") {
-      const orderMessage: IOrderMessageSendSocket = {
-        ...(isOrder ? { order_id: id } : { project_id: id }),
-        user_id: "35a547a1-6168-48de-9162-f9b89d7c5232",
-        message: message,
-      };
-      OrderMessageSend(orderMessage);
-      const currentDate: Date = new Date();
-      const year: number = currentDate.getFullYear();
-      const month: number = currentDate.getMonth() + 1;
-      const day: number = currentDate.getDate();
-      const formattedDate: string = `${year}-${month.toString().padStart(2, "0")}-${day.toString().padStart(2, "0")}`;
-
-      const hours: number = currentDate.getHours();
-      const minutes: number = currentDate.getMinutes();
-      const formattedTime: string = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`;
-
-      const orderMessageState: IOrderMessageNewSocket = {
-        id: "12",
-        ...(isOrder ? { order_id: id } : { project_id: id }),
-        message: message,
-        recipient: RecipientType.sender,
-        message_date: formattedDate,
-        message_time: formattedTime,
-        status: MessageStatus.unread,
-      };
-
-      setChat([...chat, orderMessageState]);
-      editor?.commands.setContent("");
-      setNewMessage("");
-      setIsSendMessage(true);
-    }
-  };
-
-  const handleNewMessage = (message: IOrderMessageNewSocket) => {
-    if (
-      (message.order_id === id || message.project_id === id) &&
-      message.recipient === RecipientType.receiver
-    ) {
-      const datetime = convertUTCToLocalDateTime(
-        message.message_date,
-        message.message_time,
-      );
-      const newMessage: IOrderMessageNewSocket = {
-        ...message,
-        message_date: datetime.localDate,
-        message_time: datetime.localTime,
-      };
-      setChat([...chat, newMessage]);
-      setIsNewMessage(true);
-    }
-  };
-
-  const handleGetMessage = () => {
-    if (chat.length && history?.length) {
-      const lastMessage = chat[0];
-      const date = new Date(
-        `${lastMessage.message_date} ${lastMessage.message_time}`,
-      );
-      const utcDate = date.toISOString().split("T")[0];
-      const utcTime = date.toISOString().split("T")[1].split("Z")[0];
-
-      setValue("message_date", utcDate);
-      setValue("message_time", utcTime);
-
-      console.log(lastMessage, date.toISOString());
-    }
-  };
-
-  OrderMessageNew(handleNewMessage);
+  const formFields = watch();
 
   const limit = 4000;
   const editor = useEditor({
@@ -229,13 +117,165 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ id, isOrder }) => {
     },
   });
 
+  const { data, isFetching } = useGetOrderHistoryQuery({
+    ...formFields,
+  });
+
+  useEffect(() => {
+    reset(getDefaultValues(card));
+  }, [card]);
+
+  useEffect(() => {
+    if ((data?.history?.length || 0) <= INTERSECTION_ELEMENTS.chat) {
+      if (containerRef.current && !isSendMessage) {
+        const scrollTo = itemRefs.current
+          .slice(0, history?.length)
+          .reduce((acc, el) => {
+            return acc + (el?.offsetHeight || 0);
+          }, 0);
+
+        containerRef.current.scrollTop =
+          scrollTo + (INTERSECTION_ELEMENTS.chat - 1) * 15;
+      }
+    }
+  }, [data?.history?.length]);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (containerRef.current) {
+        const isScrolledUp =
+          containerRef.current.scrollTop + containerRef.current.clientHeight <
+          containerRef.current.scrollHeight - 250;
+        setShowScrollDownButton(isScrolledUp);
+      }
+    };
+
+    if (containerRef.current) {
+      containerRef.current.addEventListener("scroll", handleScroll);
+    }
+
+    return () => {
+      if (containerRef.current) {
+        containerRef.current.removeEventListener("scroll", handleScroll);
+      }
+    };
+  }, []);
+
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Enter" && event.ctrlKey) {
+      handleSendMessage();
+    }
+  };
+
+  const handleSendMessage = () => {
+    const message = cleanMessage(newMessage);
+    if (message !== "") {
+      const orderMessage: IMessageSendSocket = {
+        ...(card?.type === chatType.order
+          ? {
+              order_id: card?.order_id,
+              method: MeesageSendType.order_message_create,
+            }
+          : {
+              project_id: card?.project_id,
+              method: MeesageSendType.project_message_create,
+            }),
+        user_id: userId,
+        message: message,
+      };
+      OrderMessageSend(orderMessage);
+
+      const datetime = getFormattedDateTime();
+      const orderMessageState: IMessageNewSocket = {
+        id: uuidv4(),
+        ...(card?.type === chatType.order
+          ? { order_id: card?.order_id }
+          : { project_id: card?.project_id }),
+        message: message,
+        recipient: RecipientType.sender,
+        formated_date: datetime.localDate,
+        formated_time: datetime.localTime,
+        message_date: datetime.utcDate,
+        message_time: datetime.utcTime,
+        message_datetime: datetime.utcDate + " " + datetime.utcTime,
+        status: MessageStatus.unread,
+      };
+      const newHistory = {
+        ...data,
+        history: [...(data?.history || []), orderMessageState],
+      };
+      dispatch(
+        chatAPI.util.updateQueryData(
+          "getOrderHistory",
+          {
+            ...formFields,
+          },
+          (draft) => {
+            Object.assign(draft, newHistory);
+          },
+        ),
+      );
+      editor?.commands.setContent("");
+      setNewMessage("");
+      setIsSendMessage(true);
+    }
+  };
+
+  const handleNewMessage = (message: IMessageNewSocket) => {
+    // console.log("newnewnew", message);
+    if (message?.recipient === RecipientType.receiver) {
+      if (message?.order_id && message?.order_id === card?.order_id) {
+        const datetime = convertUTCToLocalDateTime(
+          message?.message_date,
+          message?.message_time,
+        );
+        const newMessage: IMessageNewSocket = {
+          ...message,
+          formated_date: datetime.localDate,
+          formated_time: datetime.localTime,
+          message_datetime: message.message_date + " " + message.message_time,
+        };
+        const newHistory = {
+          ...data,
+          history: [...(data?.history || []), newMessage],
+        };
+        dispatch(
+          chatAPI.util.updateQueryData(
+            "getOrderHistory",
+            {
+              ...formFields,
+            },
+            (draft) => {
+              Object.assign(draft, newHistory);
+            },
+          ),
+        );
+        setIsNewMessage(true);
+      } else if (
+        message?.project_id &&
+        message?.project_id === card?.project_id
+      ) {
+      }
+    }
+  };
+
+  const handlePaginationHistory = () => {
+    if (data?.history) {
+      const topMessage = data?.history[0];
+      setValue("message_date", topMessage?.message_date);
+      setValue("message_time", topMessage?.message_time);
+    }
+  };
+
+  OrderMessageNew(handleNewMessage);
+
   const handleChange = (content: string) => {
     setNewMessage(content);
   };
 
   const cleanMessage = (message: string) => {
-    console.log("Before cleaning:", message);
-    let cleanedMessage = message.replace(
+    // console.log("Before cleaning:", message);
+    let cleanedMessage = message?.replace(
       /^(<p>\s*(<br\s*\/?>\s*)+|(<br\s*\/?>\s*)+)/g,
       "<p>",
     );
@@ -248,10 +288,9 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ id, isOrder }) => {
       cleanedMessage = "";
     }
 
-    console.log("After cleaning:", cleanedMessage);
+    // console.log("After cleaning:", cleanedMessage);
     return cleanedMessage;
   };
-  console.log(newMessage);
 
   useEffect(() => {
     if (isSendMessage && messagesEndRef.current) {
@@ -276,67 +315,272 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ id, isOrder }) => {
     }
   };
 
+  const handleReadMessage = (message: IMessageNewSocket) => {
+    console.log("handleReadMessage");
+    if (message?.status === MessageStatus.unread && message?.order_id) {
+      console.log(
+        "READ MESSAGE",
+        message?.message_date + " " + message?.message_time,
+      );
+      readOrderMessage({
+        order_id: message?.order_id,
+        message_datetime: message?.message_date + " " + message?.message_time,
+      })
+        .unwrap()
+        .then(() => {
+          const newHistory: IMessageNewSocket[] =
+            data?.history.map((item) => {
+              if (
+                checkDatetime(item?.message_datetime, message?.message_datetime)
+              ) {
+                return {
+                  ...item,
+                  status: MessageStatus.read,
+                };
+              }
+              return item;
+            }) || [];
+          // console.log(
+          //   "NEW HISTORY",
+          //   newHistory,
+          //   newHistory.filter(
+          //     (item) =>
+          //       item?.status === MessageStatus.unread &&
+          //       item.recipient === RecipientType.receiver
+          //   ).length
+          // );
+          dispatch(
+            chatAPI.util.updateQueryData(
+              "getOrderHistory",
+              {
+                order_id: message?.order_id,
+                batch: INTERSECTION_ELEMENTS.chat,
+              },
+              (draft) => {
+                draft.history = newHistory;
+              },
+            ),
+          );
+          dispatch(
+            chatAPI.util.updateQueryData(
+              "getOrderChats",
+              { role: role },
+              (draft) => {
+                const newChatOrder: IChatData[] = draft.map((chat) => {
+                  if (chat?.order_id === message?.order_id) {
+                    return {
+                      ...chat,
+                      unread_count: newHistory.filter(
+                        (item) =>
+                          item?.status === MessageStatus.unread &&
+                          item.recipient === RecipientType.receiver,
+                      ).length,
+                    };
+                  }
+                  return chat;
+                });
+                console.log("newChatOrder", newChatOrder);
+                draft.splice(0, draft.length, ...newChatOrder);
+              },
+            ),
+          );
+        })
+        .catch(() => {
+          console.log("Read messag Error");
+        });
+    } else if (
+      message?.status === MessageStatus.unread &&
+      message?.project_id
+    ) {
+    }
+  };
+
+  const [lastMessage, setLastMessage] = useState<IMessageNewSocket | null>(
+    null,
+  );
+
+  useEffect(() => {
+    if (data && !lastMessage) {
+      setLastMessage(data?.history[0]);
+    }
+  }, [data]);
+
+  const debouncedPosition = useDebounce(
+    lastMessage?.message_date + " " + lastMessage?.message_time,
+    DEBOUNCE.readMessage,
+  );
+
+  useEffect(() => {
+    // console.log("debouncedPosition", debouncedPosition, lastMessage);
+    if (lastMessage) {
+      handleReadMessage(lastMessage);
+    }
+  }, [debouncedPosition]);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const dataset = (entry.target as HTMLElement).dataset.message;
+            // console.log(dataset);
+            if (dataset) {
+              const message: IMessageNewSocket = JSON.parse(dataset);
+              if (
+                message?.recipient === RecipientType.receiver &&
+                lastMessage
+              ) {
+                const lastDatetime = lastMessage?.message_datetime;
+                const messageDatetime = message?.message_datetime;
+                // console.log(lastDatetime, messageDatetime, message);
+                if (checkDatetime(lastDatetime, messageDatetime)) {
+                  // console.log("checkDatetime", message);
+                  setLastMessage(message);
+                }
+              }
+            }
+          }
+        });
+      },
+      {
+        root: null,
+        rootMargin: "0px",
+        threshold: 1, // Срабатывает, когда 100% элемента видны
+      },
+    );
+
+    messagesRef.current.forEach((ref) => {
+      if (ref) {
+        observer.observe(ref); // Подключаем наблюдателя к каждому элементу
+      }
+    });
+
+    return () => {
+      if (messagesRef.current) {
+        messagesRef.current.forEach((ref) => {
+          if (ref) observer.unobserve(ref); // Очищаем наблюдателя при размонтировании
+        });
+      }
+    };
+  }, [data]);
+
+  console.log("data", data);
+
   return (
     <div className={styles.wrapper}>
-      <div id="all__messages" className={styles.check} ref={containerRef}>
-        <DinamicPagination onChange={handleGetMessage} />
-        <div className={styles.all__messages}>
-          {/* {isLoading && Array.from({ length: INTERSECTION_ELEMENTS.chat }).map(
-            (_, index) => (
-              <div className={styles.messages_wrapper} key={index}>
-                <div className={`${styles.row__message} ${styles.sender}`}>
-                  <SkeletonChatMessage />
-                </div>
+      {data?.history?.length ? (
+        <div id="all__messages" className={styles.check} ref={containerRef}>
+          <div className={styles.all__messages}>
+            {!data?.isLast && (
+              <DinamicPagination onChange={handlePaginationHistory} />
+            )}
+            {isFetching && (
+              <div className={styles.skeleton_wrapper}>
+                {Array.from({ length: INTERSECTION_ELEMENTS.chat }).map(
+                  (_, index) => {
+                    const values = Object.values(RecipientType);
+                    const randomIndex = Math.floor(
+                      Math.random() * values.length,
+                    );
+                    const recipient = values[randomIndex];
+                    return (
+                      <div className={styles.messages_wrapper} key={index}>
+                        <div
+                          className={`${styles.row__message} ${
+                            recipient === RecipientType.receiver
+                              ? styles.receiver
+                              : styles.sender
+                          }`}
+                        >
+                          <SkeletonChatMessage recipient={recipient} />
+                        </div>
+                      </div>
+                    );
+                  },
+                )}
               </div>
-            )
-          )} */}
-          {~isLoading &&
-            chat.map((message, index) => (
-              <div
-                key={message.id}
-                ref={(el) => (itemRefs.current[index] = el)}
-                className={styles.messages_wrapper}
-              >
-                {message.message_date !== currentDate &&
-                  ((currentDate = message.message_date),
-                  (
-                    <div className={styles.date}>
-                      <p>{message.message_date}</p>
-                    </div>
-                  ))}
+            )}
+            {data &&
+              data?.history?.map((message, index) => {
+                let isTimeDifferenceSmall = false;
+                let isSameRecepient = true;
+                if (index < data.history.length) {
+                  isTimeDifferenceSmall = checkDatetimeDifference(
+                    message?.message_datetime,
+                    data.history[index + 1]?.message_datetime,
+                    2,
+                  );
+                  isSameRecepient =
+                    message?.recipient === data.history[index + 1]?.recipient;
+                }
 
-                <div
-                  className={`${styles.row__message} ${
-                    message.recipient === RecipientType.receiver
-                      ? styles.recipient
-                      : styles.sender
-                  }`}
-                >
+                return (
                   <div
-                    className={`${styles.message} ${
-                      message.recipient === RecipientType.receiver
-                        ? styles.recipient
-                        : styles.sender
-                    }`}
+                    key={message?.id}
+                    ref={(el) => (itemRefs.current[index] = el)}
+                    className={styles.messages_wrapper}
                   >
+                    {message?.message_date !== currentDate &&
+                      ((currentDate = message?.message_date),
+                      (
+                        <div className={styles.date}>
+                          <p>{message?.formated_date}</p>
+                        </div>
+                      ))}
+
                     <div
-                      dangerouslySetInnerHTML={{
-                        __html: message.message || "",
-                      }}
-                    />
-                    <span className={styles.time}>{message.message_time}</span>
+                      className={`${styles.row__message} ${
+                        message?.recipient === RecipientType.receiver
+                          ? styles.receiver
+                          : styles.sender
+                      } ${!isTimeDifferenceSmall || !isSameRecepient ? styles.more : styles.less} `}
+                    >
+                      <div
+                        ref={(el) => (messagesRef.current[index] = el)}
+                        data-message={JSON.stringify({
+                          ...message,
+                          message: undefined,
+                        })}
+                        className={styles.message}
+                      >
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: message?.message || "",
+                          }}
+                        />
+                        <div className={styles.time}>
+                          <span>{message?.formated_time}</span>
+                          {message?.recipient === RecipientType.sender && (
+                            <div className={styles.read}>
+                              <ArrowReadIcon
+                                isRead={Boolean(message?.status)}
+                              />
+                            </div>
+                          )}
+                        </div>
+                      </div>
+                      {(!isTimeDifferenceSmall || !isSameRecepient) && (
+                        <div className={styles.appendix}>
+                          <MessageAppendixIcon />
+                        </div>
+                      )}
+                    </div>
                   </div>
-                </div>
-              </div>
-            ))}
+                );
+              })}
+          </div>
+          {showScrollDownButton && (
+            <button className={styles.arrow__down} onClick={handleArrowDown}>
+              <ArrowSmallVerticalIcon className="active__icon" />
+            </button>
+          )}
+          <div className={styles.end} ref={messagesEndRef} />
         </div>
-        {showScrollDownButton && (
-          <button className={styles.arrow__down} onClick={handleArrowDown}>
-            <ArrowSmallVerticalIcon className="active__icon" />
-          </button>
-        )}
-        <div className={styles.end} ref={messagesEndRef} />
-      </div>
+      ) : (
+        <div className={styles.no_messages}>
+          <p>{t("chat.no_message")}</p>
+        </div>
+      )}
       <div className={styles.wrapper__bottom}>
         <button>
           <AddIcon />

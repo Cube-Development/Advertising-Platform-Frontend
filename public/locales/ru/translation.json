@@ -1454,7 +1454,94 @@
     },
     "campaign": "РК",
     "channel": "канал",
-    "new_message": "Написать сообщение..."
+    "new_message": "Написать сообщение...",
+    "no_message": "Здесь пока ничего нет, напишите сообщение",
+    "chat_choose": "Выберите чат чтобы начать общение"
+  },
+
+  "notifications":{
+    "title": "Уведомления",
+    "new": "Новых",
+    "support": {
+      "title": "Если у вас возникнут вопросы или потребуется помощь, наша служба поддержки всегда готова вам помочь."
+    },
+    "status": {
+      "order_message_add": {
+        "title": "Добавить сообщение о заказе"
+      },
+      "order_message_read": {
+        "title": "Прочитать сообщение о заказе"
+      },
+      "project_message_add": {
+        "title": "Добавить сообщение о проекте"
+      },
+      "project_message_read": {
+        "title": "Прочитать сообщение о проекте"
+      },
+      "new_manager_project": {
+        "title": "Новый менеджер проекта"
+      },
+      "request_approve": {
+        "title": "Одобрить запрос"
+      },
+      "accept_approve": {
+        "title": "Принять одобрение"
+      },
+      "notification_create_deposit": {
+        "title": "Создание депозита"
+      },
+      "notification_request_approve": {
+        "title": "Запросе на одобрения"
+      },
+      "notification_create_desire": {
+        "title": "Создании рекоммендаций"
+      },
+      "notification_launch_manager_project": {
+        "title": "Запуске проекта с менеджером"
+      },
+      "notification_unban_channel": {
+        "title": "Снятии бана с канала"
+      },
+      "notification_limited_ban_channel": {
+        "title": "Лимитированный бан канала"
+      },
+      "notification_unlimited_ban_channel": {
+        "title": "Неограниченном бан канала"
+      },
+      "notification_new_order_blogger": {
+        "title": "Новый заказ блогера"
+      },
+      "notification_accept_order_blogger": {
+        "title": "Принятие заказа блогера"
+      },
+      "notification_publish_post": {
+        "title": "Публикация поста"
+      },
+      "notification_advertiser_reject_order": {
+        "title": "Рекламодатель отклонил заказ"
+      },
+      "notification_advertiser_reject_order_moderator": {
+        "title": "Модератор отклонил заказ рекламодателя"
+      },
+      "notification_advertiser_accept_order": {
+        "title": "Рекламодатель принял заказ"
+      },
+      "notification_moderation_order_blogger_positive": {
+        "title": "Уведомление о положительной модерации заказа блогера"
+      },
+      "notification_moderation_order_advertiser_negative": {
+        "title": "Уведомление о негативной модерации заказа рекламодателя"
+      },
+      "notification_moderation_order_blogger_negative": {
+        "title": "Уведомление о негативной модерации заказа блогера"
+      },
+      "notification_moderation_order_advertiser_positive": {
+        "title": "Уведомление о положительной модерации заказа рекламодателя"
+      },
+      "notification_refund_manager_project": {
+        "title": "Возврат средств проекта с менеджером"
+      }
+    }
   },
 
   "turnkey": {

@@ -437,7 +437,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
           typeFilter === projectTypesFilter.myProject &&
           statusFilter === advManagerProjectStatusFilter.active && (
             <div
-              className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : "deactive"}`}
+              className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : "deactive1"}`}
             >
               <ChannelChatBtn orderId={subcard?.id} toRole={roles.blogger} />
             </div>

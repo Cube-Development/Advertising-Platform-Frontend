@@ -2,7 +2,7 @@ import { logout, roles, toggleRole as toggleRoleAction } from "@entities/user";
 import { useGetBalanceQuery, walletSlice } from "@entities/wallet";
 import { BREAKPOINT } from "@shared/config";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
-import { Chat } from "@widgets/communication";
+import { Chat, Notifications } from "@widgets/communication";
 import { FC, useEffect, useState } from "react";
 import { DropdownMenu } from "./dropdownMenu";
 import { Lang } from "./lang";
@@ -70,6 +70,7 @@ export const Header: FC = () => {
         {isAuth ? (
           <>
             <div className={styles.separator}></div>
+            <Notifications />
             <Chat isMain={true} />
             <Profile toggleLogout={toggleLogout} />
           </>

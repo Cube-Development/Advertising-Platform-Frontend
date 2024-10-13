@@ -1,0 +1,112 @@
+.wrapper {
+  display: grid;
+  align-items: center;
+}
+
+.trigger {
+  display: grid;
+  grid-auto-flow: column;
+  width: 100%;
+  height: 100%;
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.content {
+  display: grid;
+  grid-template: min-content 1fr / 1fr;
+  background: var(--Personal-colors-White);
+  position: relative;
+  overflow: hidden;
+
+  &.dialog {
+    height: 70vh;
+    max-width: 500px;
+    width: 500px;
+  }
+
+  &.drawer {
+    height: 100vh;
+  }
+
+  .title {
+    display: grid;
+    align-content: center;
+    position: relative;
+    padding: 20px 50px;
+    border-bottom: 0.5px solid var(--black-20, #ccc);
+
+    p {
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 1;
+      color: var(--Personal-colors-main);
+    }
+
+    .close {
+      position: absolute;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
+
+      padding: 15px;
+      border-radius: 50%;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+    }
+
+    .arrow {
+      position: absolute;
+      top: 50%;
+      left: 5px;
+      transform: translateY(-50%) rotate(90deg); /* Объединяем оба преобразования */
+
+      padding: 15px;
+      border-radius: 50%;
+      svg {
+        height: 20px;
+        width: 20px;
+      }
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+
+  .notifications {
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 10px;
+    padding: 10px;
+    overflow-y: scroll;
+  }
+
+  .message {
+    position: fixed;
+    margin-left: -10px;
+    margin-top: -10px;
+    height: -webkit-fill-available;
+    width: -webkit-fill-available;
+  }
+
+  .new {
+    padding: 15px 30px;
+    display: grid;
+    justify-content: start;
+    align-content: center;
+    border-top: 0.5px solid var(--black-20, #ccc);
+
+    p {
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 1;
+      color: var(--Personal-colors-main);
+    }
+  }
+}

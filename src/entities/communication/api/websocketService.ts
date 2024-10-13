@@ -2,18 +2,21 @@ import { authApi } from "@shared/api";
 
 export const websocketAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
-    getWebsocketToken: build.query({
-      query: (BodyParams) => (
-        console.log(BodyParams),
-        {
-          url: "/auth/subscription",
-          method: "POST",
-          body: BodyParams,
-        }
-      ),
-      // providesTags: [CHAT],
+    getAuthToken: build.mutation<{ token: string }, void>({
+      query: () => ({
+        url: "/auth/authentication",
+        method: "POST",
+      }),
+    }),
+    getWebsocketToken: build.mutation<{ token: string }, { channel: string }>({
+      query: (BodyParams) => ({
+        url: "/auth/subscription",
+        method: "POST",
+        body: BodyParams,
+      }),
     }),
   }),
 });
 
-export const { useGetWebsocketTokenQuery } = websocketAPI;
+export const { useGetAuthTokenMutation, useGetWebsocketTokenMutation } =
+  websocketAPI;

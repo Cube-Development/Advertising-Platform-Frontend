@@ -1,9 +1,11 @@
 import {
-  IOrderMessageNewSocket,
-  IOrderMessageSendSocket,
+  IMessageNewSocket,
+  IMessageSendSocket,
+  notificationsTypes,
+  useGetAuthTokenMutation,
+  useGetWebsocketTokenMutation,
 } from "@entities/communication";
 import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
-import axios from "axios";
 import { Centrifuge, PublicationContext } from "centrifuge";
 import Cookies from "js-cookie";
 import React, {
@@ -17,12 +19,15 @@ import { useTranslation } from "react-i18next";
 
 interface CentrifugeContextType {
   centrifuge: Centrifuge | null;
-  OrderMessageSend: (message: IOrderMessageSendSocket) => Promise<void>;
+  OrderMessageSend: (message: IMessageSendSocket) => Promise<void>;
   OrderMessageNewChat: (
-    handleNewMessageChat: (message: IOrderMessageNewSocket) => void,
+    handleNewMessageChat: (message: IMessageNewSocket) => void,
   ) => void;
   OrderMessageNew: (
-    handleNewMessage: (message: IOrderMessageNewSocket) => void,
+    handleNewMessage: (message: IMessageNewSocket) => void,
+  ) => void;
+  OrderReadMessage: (
+    handleReadMessage: (message: IMessageNewSocket) => void,
   ) => void;
 }
 
@@ -34,68 +39,58 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const centrifugeRef = useRef<Centrifuge | null>(null);
-  const handleNewMessageRef = useRef<(message: IOrderMessageNewSocket) => void>(
+  const handleNewMessageRef = useRef<(message: IMessageNewSocket) => void>(
     () => {},
   );
-  const handleNewMessageChatRef = useRef<
-    (message: IOrderMessageNewSocket) => void
-  >(() => {});
+  const handleNewMessageChatRef = useRef<(message: IMessageNewSocket) => void>(
+    () => {},
+  );
+  const handleReadMessageRef = useRef<(message: IMessageNewSocket) => void>(
+    () => {},
+  );
 
-  const { toast } = useToast();
   const { t } = useTranslation();
+  const [getWebsocketToken] = useGetWebsocketTokenMutation();
+  const [getAuthToken] = useGetAuthTokenMutation();
   const WS_ENDPOINT = "ws://167.172.186.13:8000/connection/websocket";
-  const accessToken: string = Cookies.get("accessToken")!;
-  const id = "35a547a1-6168-48de-9162-f9b89d7c5232";
-  const channelName = "common"; // замените на ваше имя канала
-  const personalChannel = "common:user#" + id;
+  const userId = Cookies.get("user_id")!;
+  const channelName = "common";
+  const personalChannel = "common:user#" + userId;
 
-  // const [token, setToken] = useState("");
-  // const { data: newToken, isLoading } = useGetChatTokenQuery({
-  //   channel: channelName,
-  // });
-
-  // useEffect(() => {
-  //   setToken(newToken);
-  // }, [newToken]);
-
-  // console.log("useGetChatTokenQuery", token);
   useEffect(() => {
     const initializeCentrifuge = async () => {
-      const centrifugeInstance = new Centrifuge(WS_ENDPOINT, {
-        getToken: () => Promise.resolve(accessToken),
-        debug: true,
-      });
-
-      centrifugeInstance.connect();
-      centrifugeRef.current = centrifugeInstance;
-
       try {
-        const token = await getSubscriptionToken(channelName, accessToken);
-        // console.log("getSubscriptionToken", token);
-
+        const authData = await getAuthToken().unwrap();
+        const authToken = authData.token;
+        const centrifugeInstance = new Centrifuge(WS_ENDPOINT, {
+          getToken: () => Promise.resolve(authToken),
+          debug: true,
+        });
+        centrifugeInstance.connect();
+        centrifugeRef.current = centrifugeInstance;
+        const data = await getWebsocketToken({ channel: channelName }).unwrap();
+        const token = data.token;
         const sub = centrifugeInstance.newSubscription(personalChannel, {
           getToken: () => Promise.resolve(token),
         });
-
         sub.on("publication", (ctx: PublicationContext) => {
           // console.log("Message", ctx);
-          const newMessage = ctx.data as IOrderMessageNewSocket;
+          const newMessage = ctx.data as IMessageNewSocket;
           // console.log("handleNewMessage", handleNewMessageRef.current);
           // console.log("handleNewMessageChat", handleNewMessageChatRef.current);
+          // console.log("new", newMessage);
 
           if (newMessage.recipient) {
-            handleNewMessageRef.current(newMessage);
             handleNewMessageChatRef.current(newMessage);
-            // console.log("new Message");
-            toast({
-              variant: "default",
-              title: t("toasts.websoket.new_message"),
-            });
+            handleNewMessageRef.current(newMessage);
+          } else if (
+            newMessage?.method === notificationsTypes.order_message_read
+          ) {
+            handleReadMessageRef.current(newMessage);
           }
         });
 
         sub.subscribe();
-        // console.log("subsub", sub);
 
         return () => {
           sub.unsubscribe();
@@ -109,20 +104,7 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
     initializeCentrifuge();
   }, []);
 
-  const getSubscriptionToken = async (channel: string, accessToken: string) => {
-    const response = await axios.post(
-      `${import.meta.env.VITE_BASE_URL}/auth/subscription`,
-      { channel: channel },
-      {
-        headers: {
-          Authorization: `Bearer ${accessToken}`,
-        },
-      },
-    );
-    return response.data.token;
-  };
-
-  const OrderMessageSend = async (message: IOrderMessageSendSocket) => {
+  const OrderMessageSend = async (message: IMessageSendSocket) => {
     if (!centrifugeRef.current)
       throw new Error("Centrifuge instance is not initialized");
     try {
@@ -130,22 +112,23 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
         personalChannel,
         message,
       );
-      // console.log("Message sent:", result);
     } catch (error) {
       console.error("Error sending message:", error);
     }
   };
 
-  const OrderMessageNew = (
-    callback: (message: IOrderMessageNewSocket) => void,
-  ) => {
+  const OrderMessageNew = (callback: (message: IMessageNewSocket) => void) => {
     handleNewMessageRef.current = callback;
   };
 
   const OrderMessageNewChat = (
-    callback: (message: IOrderMessageNewSocket) => void,
+    callback: (message: IMessageNewSocket) => void,
   ) => {
     handleNewMessageChatRef.current = callback;
+  };
+
+  const OrderReadMessage = (callback: (message: IMessageNewSocket) => void) => {
+    handleReadMessageRef.current = callback;
   };
 
   return (
@@ -155,6 +138,7 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
         OrderMessageSend,
         OrderMessageNew,
         OrderMessageNewChat,
+        OrderReadMessage,
       }}
     >
       {children}

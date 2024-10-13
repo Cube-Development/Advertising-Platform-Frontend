@@ -155,7 +155,7 @@ export const CatalogBlock: FC = () => {
         : isAuth && role == roles.manager
           ? catalogManager?.channels
           : catalogPublic?.channels) || []
-    )?.find((card) => card.id === cartChannel.id);
+    )?.find((card) => card?.id === cartChannel.id);
 
     if (cartChannel.selected_format) {
       const addReq = {
@@ -172,7 +172,7 @@ export const CatalogBlock: FC = () => {
 
       if (
         currentCard &&
-        !currentCard.selected_format &&
+        !currentCard?.selected_format &&
         cartChannel.selected_format
       ) {
         newCards = (
@@ -182,7 +182,7 @@ export const CatalogBlock: FC = () => {
               ? catalogManager?.channels
               : catalogPublic?.channels) || []
         ).map((card) => {
-          if (card.id === cartChannel.id) {
+          if (card?.id === cartChannel.id) {
             const newItem = {
               ...card,
               selected_format: cartChannel.selected_format,
@@ -290,8 +290,8 @@ export const CatalogBlock: FC = () => {
               : catalogPublic?.channels) || []
         ).map((card) => {
           if (
-            card.id === cartChannel.id &&
-            card.selected_format &&
+            card?.id === cartChannel.id &&
+            card?.selected_format &&
             cartChannel.selected_format
           ) {
             return {
@@ -352,7 +352,7 @@ export const CatalogBlock: FC = () => {
               ? catalogManager?.channels
               : catalogPublic?.channels) || []
         ).map((card) => {
-          if (card.id === cartChannel.id) {
+          if (card?.id === cartChannel.id) {
             const newItem = {
               ...card,
               selected_format: undefined,
@@ -362,7 +362,6 @@ export const CatalogBlock: FC = () => {
           return card;
         });
       }
-      console.log(newCards);
       dispatch(
         catalogAPI.util.updateQueryData(
           "getCatalog",

@@ -116,7 +116,7 @@ export const Cart: FC = () => {
 
   const handleChangeCartCards = (cartChannel: ICatalogChannel) => {
     const currentCard = currentCart.channels?.find(
-      (card) => card.id === cartChannel?.id,
+      (card) => card?.id === cartChannel?.id,
     );
     console.log("handleChangeCartCards", currentCard);
     handleChangeCards(cartChannel, currentCard);
@@ -124,7 +124,7 @@ export const Cart: FC = () => {
 
   const handleChangeRecommendCards = (cartChannel: ICatalogChannel) => {
     const currentCard = recomendCards?.channels?.find(
-      (card) => card.id === cartChannel?.id,
+      (card) => card?.id === cartChannel?.id,
     );
     console.log("handleChangeCartCards", currentCard);
     handleChangeCards(cartChannel, currentCard);
