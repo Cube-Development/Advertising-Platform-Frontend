@@ -35,6 +35,7 @@ import {
   AccordionTrigger,
   AccountsLoader,
   MyPagination,
+  SpinnerLoader,
 } from "@shared/ui";
 import { Chat } from "@widgets/communication";
 import { FC, useEffect, useRef, useState } from "react";
@@ -272,12 +273,14 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
   const accordionRef = useRef(null);
 
   const handleClickOutside = () => {
-    const state = (accordionRef.current! as HTMLElement).getAttribute(
-      "data-state",
-    );
-    state === accordionTypes.open
-      ? setSubcardOpen(true)
-      : setSubcardOpen(false);
+    if (accordionRef.current) {
+      const state = (accordionRef.current as HTMLElement).getAttribute(
+        "data-state",
+      );
+      state === accordionTypes.open
+        ? setSubcardOpen(true)
+        : setSubcardOpen(false);
+    }
   };
 
   useEffect(() => {
@@ -420,6 +423,11 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
               </div>
             </SwiperSlide>
             <SwiperSlide>
+              {(isLoadingSelf || isLoadingManager) && (
+                <div className="grid justify-center items-center h-full pt-[100px]">
+                  <SpinnerLoader />
+                </div>
+              )}
               <div className="swipper__carousel">
                 <Swiper
                   slidesPerView={1}

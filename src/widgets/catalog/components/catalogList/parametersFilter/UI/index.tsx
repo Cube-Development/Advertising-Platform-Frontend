@@ -168,9 +168,12 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
     } else if (!isRecom) {
       resetRecommendationCard();
     }
+    // setTimeout(() => {
+    //   setOpenAccordion("");
+    // }, 300);
     setTimeout(() => {
-      setOpenAccordion("");
-    }, 500);
+      setIsOpen(false);
+    }, 300);
   }, [isRecom, recommendationCard]);
 
   useEffect(() => {
@@ -266,8 +269,10 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
     setOpenAccordion(openAccordion === value ? undefined : value);
   };
 
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
-    <Drawer>
+    <Drawer open={isOpen} onOpenChange={setIsOpen}>
       <DrawerTrigger className="h-full">
         <div className={styles.button}>
           <ParametersIcon />
