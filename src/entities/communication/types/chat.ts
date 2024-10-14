@@ -84,6 +84,7 @@ export interface IChatProps {
   isOrder?: boolean;
   isProject?: boolean;
   orderId?: string;
+  projectId?: string;
   toRole?: roles;
   isFull?: boolean;
 }

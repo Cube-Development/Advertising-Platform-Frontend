@@ -54,4 +54,22 @@ export const PAGE_ANIMATION = {
     }),
   },
   viewport: { amount: 0.05, once: true },
+
+  sideTransition: {
+    hidden: { opacity: 0, x: "100%" },
+    visible: { opacity: 1, x: "0%" },
+    transition: { transition: { duration: 0.5 } },
+  },
+
+  animationChat: {
+    hidden: {
+      y: 10,
+      opacity: 0,
+    },
+    visible: (custom: number) => ({
+      y: 0,
+      opacity: 1,
+      transition: { delay: custom * 0.01 },
+    }),
+  },
 };

@@ -12,6 +12,7 @@ import {
   useReadOrderMessageMutation,
   useReadProjectMessageMutation,
 } from "@entities/communication";
+import { DEBOUNCE } from "@entities/project";
 import { DinamicPagination } from "@features/other";
 import {
   AddIcon,
@@ -20,14 +21,14 @@ import {
   MessageAppendixIcon,
   SendIcon,
 } from "@shared/assets";
-import { INTERSECTION_ELEMENTS } from "@shared/config";
+import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
 import {
   checkDatetime,
   checkDatetimeDifference,
   convertUTCToLocalDateTime,
-  getCurrentUtcDateTime,
   getFormattedDateTime,
 } from "@shared/functions";
+import { useAppDispatch, useAppSelector, useDebounce } from "@shared/hooks";
 import HardBreak from "@tiptap/extension-hard-break";
 import Link from "@tiptap/extension-link";
 import Underline from "@tiptap/extension-underline";
@@ -40,12 +41,9 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { animateScroll } from "react-scroll";
 import { v4 as uuidv4 } from "uuid";
-import styles from "./styles.module.scss";
-import { useAppDispatch, useAppSelector, useDebounce } from "@shared/hooks";
 import { SkeletonChatMessage } from "../skeleton";
-import { useToast } from "@shared/ui";
-import { useInView } from "react-intersection-observer";
-import { DEBOUNCE } from "@entities/project";
+import styles from "./styles.module.scss";
+import { motion } from "framer-motion";
 
 interface ChatMessagesProps {
   card: IChatData;
@@ -340,15 +338,6 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
               }
               return item;
             }) || [];
-          // console.log(
-          //   "NEW HISTORY",
-          //   newHistory,
-          //   newHistory.filter(
-          //     (item) =>
-          //       item?.status === MessageStatus.unread &&
-          //       item.recipient === RecipientType.receiver
-          //   ).length
-          // );
           dispatch(
             chatAPI.util.updateQueryData(
               "getOrderHistory",
@@ -515,8 +504,15 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
                 }
 
                 return (
-                  <div
+                  <motion.div
                     key={message?.id}
+                    initial="hidden"
+                    animate="visible"
+                    custom={
+                      INTERSECTION_ELEMENTS.chat -
+                      (index % INTERSECTION_ELEMENTS.chat)
+                    }
+                    variants={PAGE_ANIMATION.animationChat}
                     ref={(el) => (itemRefs.current[index] = el)}
                     className={styles.messages_wrapper}
                   >
@@ -536,12 +532,12 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
                       } ${!isTimeDifferenceSmall || !isSameRecepient ? styles.more : styles.less} `}
                     >
                       <div
+                        className={styles.message}
                         ref={(el) => (messagesRef.current[index] = el)}
                         data-message={JSON.stringify({
                           ...message,
                           message: undefined,
                         })}
-                        className={styles.message}
                       >
                         <div
                           dangerouslySetInnerHTML={{
@@ -565,7 +561,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
                         </div>
                       )}
                     </div>
-                  </div>
+                  </motion.div>
                 );
               })}
           </div>

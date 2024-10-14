@@ -17,7 +17,11 @@ import {
   CancelIcon2,
   NotificationMainIcon,
 } from "@shared/assets";
-import { BREAKPOINT, INTERSECTION_ELEMENTS } from "@shared/config";
+import {
+  BREAKPOINT,
+  INTERSECTION_ELEMENTS,
+  PAGE_ANIMATION,
+} from "@shared/config";
 import { useAppDispatch } from "@shared/hooks";
 import {
   AlertDialog,
@@ -143,12 +147,16 @@ export const Notifications: FC = () => {
             {data?.notifications?.length ? (
               <div className={styles.notifications}>
                 {data?.notifications.map((card, index) => (
-                  <div
+                  <motion.div
                     key={index}
+                    initial="hidden"
+                    animate="visible"
+                    custom={index % INTERSECTION_ELEMENTS.notifications}
+                    variants={PAGE_ANIMATION.animationUp}
                     onClick={() => handleChangeNotification(card)}
                   >
                     <NotificationCard card={card} />
-                  </div>
+                  </motion.div>
                 ))}
                 {isFetching &&
                   Array.from({
@@ -161,18 +169,16 @@ export const Notifications: FC = () => {
                 )}
                 <AnimatePresence>
                   {currentNotification && (
-                    <>
-                      <motion.div
-                        initial="close"
-                        animate="open"
-                        exit="close"
-                        transition={divVariants.transition}
-                        variants={divVariants}
-                        className={styles.message}
-                      >
-                        <NotificationMessage card={currentNotification} />
-                      </motion.div>
-                    </>
+                    <motion.div
+                      initial="hidden"
+                      animate="visible"
+                      exit="hidden"
+                      transition={PAGE_ANIMATION.sideTransition.transition}
+                      variants={PAGE_ANIMATION.sideTransition}
+                      className={styles.message}
+                    >
+                      <NotificationMessage card={currentNotification} />
+                    </motion.div>
                   )}
                 </AnimatePresence>
               </div>
@@ -210,12 +216,16 @@ export const Notifications: FC = () => {
             {data?.notifications?.length ? (
               <div className={styles.notifications}>
                 {data?.notifications.map((card, index) => (
-                  <div
+                  <motion.div
                     key={index}
+                    initial="hidden"
+                    animate="visible"
+                    custom={index % INTERSECTION_ELEMENTS.notifications}
+                    variants={PAGE_ANIMATION.animationUp}
                     onClick={() => handleChangeNotification(card)}
                   >
                     <NotificationCard card={card} />
-                  </div>
+                  </motion.div>
                 ))}
                 {isFetching &&
                   Array.from({
@@ -228,18 +238,16 @@ export const Notifications: FC = () => {
                 )}
                 <AnimatePresence>
                   {currentNotification && (
-                    <>
-                      <motion.div
-                        initial="close"
-                        animate="open"
-                        exit="close"
-                        transition={divVariants.transition}
-                        variants={divVariants}
-                        className={styles.message}
-                      >
-                        <NotificationMessage card={currentNotification} />
-                      </motion.div>
-                    </>
+                    <motion.div
+                      initial="hidden"
+                      animate="visible"
+                      exit="hidden"
+                      transition={PAGE_ANIMATION.sideTransition.transition}
+                      variants={PAGE_ANIMATION.sideTransition}
+                      className={styles.message}
+                    >
+                      <NotificationMessage card={currentNotification} />
+                    </motion.div>
                   )}
                 </AnimatePresence>
               </div>

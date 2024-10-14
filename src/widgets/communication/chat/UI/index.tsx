@@ -1,15 +1,14 @@
 import {
-  IChatProps,
-  IChatData,
-  IMessageNewSocket,
-  MeesageSendType,
+  chatAPI,
   chatType,
-  RecipientType,
   chatTypesFilter,
+  IChatData,
+  IChatProps,
+  IMessageNewSocket,
+  MessageStatus,
+  RecipientType,
   useGetOrderChatsQuery,
   useGetProjectChatsQuery,
-  chatAPI,
-  MessageStatus,
 } from "@entities/communication";
 import { roles } from "@entities/user";
 import { ChatCard, ChatMessages } from "@features/communication";
@@ -22,12 +21,12 @@ import {
   ChatIcon2,
   ChatMainIcon,
 } from "@shared/assets";
-import { BREAKPOINT, INTERSECTION_ELEMENTS } from "@shared/config";
 import {
-  checkDatetime,
-  checkDatetimeDifference,
-  convertUTCToLocalDateTime,
-} from "@shared/functions";
+  BREAKPOINT,
+  INTERSECTION_ELEMENTS,
+  PAGE_ANIMATION,
+} from "@shared/config";
+import { checkDatetime, convertUTCToLocalDateTime } from "@shared/functions";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { pageFilter } from "@shared/routing";
 import {
@@ -49,6 +48,7 @@ import styles from "./styles.module.scss";
 
 export const Chat: FC<IChatProps> = ({
   orderId,
+  projectId,
   toRole,
   isMain,
   isProject,
@@ -91,7 +91,7 @@ export const Chat: FC<IChatProps> = ({
     setCurrentChat(
       card?.type === chatType.order
         ? chatsOrder?.find((item) => item?.order_id === card?.order_id) || null
-        : chatsOrder?.find((item) => item?.project_id === card?.project_id) ||
+        : chatsProject?.find((item) => item?.project_id === card?.project_id) ||
             null,
     );
   };
@@ -104,23 +104,23 @@ export const Chat: FC<IChatProps> = ({
   };
 
   const handleNewMessage = (message: IMessageNewSocket) => {
-    if (message.order_id && chatsOrder) {
+    if (message?.order_id && chatsOrder) {
       const updatedChat = chatsOrder?.find(
         (chat) => chat?.order_id === message?.order_id,
       );
 
       if (updatedChat) {
         const datetime = convertUTCToLocalDateTime(
-          message.message_date,
-          message.message_time,
+          message?.message_date,
+          message?.message_time,
         );
         const updatedChatWithNewData = {
           ...updatedChat,
           message_date: datetime.localDate,
           message_time: datetime.localTime,
-          last_message: message.message,
+          last_message: message?.message,
           unread_count:
-            message.recipient === RecipientType.receiver
+            message?.recipient === RecipientType.receiver
               ? updatedChat.unread_count + 1
               : updatedChat.unread_count,
         };
@@ -149,6 +149,53 @@ export const Chat: FC<IChatProps> = ({
           });
         }
       }
+    } else if (message?.project_id && chatsProject) {
+      const updatedChat = chatsProject?.find(
+        (chat) => chat?.project_id === message?.project_id,
+      );
+
+      if (updatedChat) {
+        const datetime = convertUTCToLocalDateTime(
+          message?.message_date,
+          message?.message_time,
+        );
+        const updatedChatWithNewData = {
+          ...updatedChat,
+          message_date: datetime.localDate,
+          message_time: datetime.localTime,
+          last_message: message?.message,
+          unread_count:
+            message?.recipient === RecipientType.receiver
+              ? updatedChat.unread_count + 1
+              : updatedChat.unread_count,
+        };
+
+        dispatch(
+          chatAPI.util.updateQueryData(
+            "getProjectChats",
+            { role: role },
+            (draft) => {
+              const newChatOrder = [
+                updatedChatWithNewData,
+                ...draft.filter(
+                  (chat) => chat?.project_id !== message?.project_id,
+                ),
+              ];
+              draft.splice(0, draft.length, ...newChatOrder);
+            },
+          ),
+        );
+
+        if (
+          message?.recipient === RecipientType.receiver &&
+          currentChat?.project_id !== message?.project_id
+        ) {
+          toast({
+            variant: "default",
+            title: t("toasts.websoket.new_message"),
+          });
+        }
+      }
     }
   };
 
@@ -160,6 +207,27 @@ export const Chat: FC<IChatProps> = ({
         chatAPI.util.updateQueryData(
           "getOrderHistory",
           { order_id: message?.order_id, batch: INTERSECTION_ELEMENTS.chat },
+          (draft) => {
+            draft.history = draft.history.map((item) => {
+              if (checkDatetime(item?.message_datetime, datetime)) {
+                return {
+                  ...item,
+                  status: MessageStatus.read,
+                };
+              }
+              return item;
+            });
+          },
+        ),
+      );
+    } else if (message?.project_id) {
+      dispatch(
+        chatAPI.util.updateQueryData(
+          "getProjectHistory",
+          {
+            project_id: message?.project_id,
+            batch: INTERSECTION_ELEMENTS.chat,
+          },
           (draft) => {
             draft.history = draft.history.map((item) => {
               if (checkDatetime(item?.message_datetime, datetime)) {
@@ -195,6 +263,14 @@ export const Chat: FC<IChatProps> = ({
     }
   }, [orderId, isOpen]);
 
+  useEffect(() => {
+    if (projectId && isOpen) {
+      setCurrentChat(
+        chatsProject?.find((item) => item?.project_id === projectId) || null,
+      );
+    }
+  }, [projectId, isOpen]);
+
   OrderMessageNewChat(handleNewMessage);
   OrderReadMessage(handleReadMessage);
 
@@ -222,7 +298,6 @@ export const Chat: FC<IChatProps> = ({
           </AlertDialogTrigger>
           <AlertDialogContent className={`${styles.content} ${styles.dialog}`}>
             <div className={styles.content__left}>
-              {/* <div className={styles.left}> */}
               <p className={styles.title}>{t("chat.my_messages")}</p>
               {role !== roles.blogger && (
                 <div className={styles.filter}>
@@ -237,7 +312,14 @@ export const Chat: FC<IChatProps> = ({
               {chatsOrder?.length ? (
                 <div className={styles.all_chats}>
                   {chatsOrder.map((card, index) => (
-                    <div key={index} onClick={() => handleChangeChat(card)}>
+                    <motion.div
+                      key={index}
+                      initial="hidden"
+                      animate="visible"
+                      custom={index % chatsOrder?.length}
+                      variants={PAGE_ANIMATION.animationUp}
+                      onClick={() => handleChangeChat(card)}
+                    >
                       <ChatCard
                         card={card}
                         isActive={
@@ -248,14 +330,13 @@ export const Chat: FC<IChatProps> = ({
                           false
                         }
                       />
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               ) : (
                 <></>
               )}
             </div>
-            {/* </div> */}
             <div className={styles.content__right}>
               {currentChat ? (
                 <>
@@ -301,11 +382,9 @@ export const Chat: FC<IChatProps> = ({
           >
             {isMain ? (
               <ChatMainIcon />
-            ) : // <ChatIcon className="active__icon" />
-            isProject ? (
+            ) : isProject ? (
               <ChatIcon2 className="active__icon" />
             ) : (
-              // <ChatIcon className="active__icon" />
               <ChatIcon className="icon__white" />
             )}
             {isFull && toRole === roles.blogger && (
@@ -337,7 +416,14 @@ export const Chat: FC<IChatProps> = ({
               {chatsOrder?.length ? (
                 <div className={styles.all_chats}>
                   {chatsOrder.map((card, index) => (
-                    <div key={index} onClick={() => handleChangeChat(card)}>
+                    <motion.div
+                      key={index}
+                      initial="hidden"
+                      animate="visible"
+                      custom={index % chatsOrder?.length}
+                      variants={PAGE_ANIMATION.animationUp}
+                      onClick={() => handleChangeChat(card)}
+                    >
                       <ChatCard
                         card={card}
                         isActive={
@@ -348,7 +434,7 @@ export const Chat: FC<IChatProps> = ({
                           false
                         }
                       />
-                    </div>
+                    </motion.div>
                   ))}
                 </div>
               ) : (

@@ -31,7 +31,6 @@ export const chatAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
     getOrderChats: build.query<IChatData[], getChatsReq>({
       query: (BodyParams) => {
-        console.log(BodyParams);
         return {
           url: "/chat/order",
           method: "GET",
@@ -59,12 +58,27 @@ export const chatAPI = authApi.injectEndpoints({
 
     getProjectChats: build.query<IChatData[], getChatsReq>({
       query: (BodyParams) => {
-        console.log(BodyParams);
         return {
           url: "/chat/project",
           method: "GET",
           params: BodyParams,
         };
+      },
+      transformResponse: (response: IChatData[]) => {
+        const newResponse = response.map((item) => {
+          const datetime = convertUTCToLocalDateTime(
+            item.message_date,
+            item.message_time,
+          );
+          return {
+            ...item,
+            type: chatType.project,
+            formated_date: datetime.localDate,
+            formated_time: datetime.localTime,
+            message_datetime: item.message_date + " " + item.message_time,
+          };
+        });
+        return newResponse;
       },
       providesTags: [CHAT],
     }),
@@ -87,7 +101,6 @@ export const chatAPI = authApi.injectEndpoints({
 
     getOrderHistory: build.query<IAllMessages, getChatHistoryReq>({
       query: (BodyParams) => {
-        console.log(BodyParams);
         return {
           url: "/chat/order/history",
           method: "GET",
@@ -140,14 +153,56 @@ export const chatAPI = authApi.injectEndpoints({
       providesTags: [CHAT],
     }),
 
-    getProjectHistory: build.query<IMessageNewSocket[], getChatHistoryReq>({
+    getProjectHistory: build.query<IAllMessages, getChatHistoryReq>({
       query: (BodyParams) => {
-        console.log(BodyParams);
         return {
           url: "/chat/project/history",
           method: "GET",
           params: BodyParams,
         };
+      },
+      transformResponse: (response: IMessageNewSocket[]): IAllMessages => {
+        const reversedArray = [...response].reverse();
+        const newHistory = reversedArray.map((item) => {
+          const datetime = convertUTCToLocalDateTime(
+            item.message_date,
+            item.message_time,
+          );
+          return {
+            ...item,
+            formated_date: datetime.localDate,
+            formated_time: datetime.localTime,
+            message_datetime: item.message_date + " " + item.message_time,
+          };
+        });
+        return {
+          history: newHistory,
+          isLast: response.length !== INTERSECTION_ELEMENTS.chat,
+        };
+      },
+      merge: (currentCache: IAllMessages, newItems: IAllMessages) => {
+        const mergedHistory = [...newItems.history, ...currentCache.history];
+        const uniqueHistory = mergedHistory
+          .filter(
+            (item, index, self) =>
+              index === self.findIndex((t) => t.id === item.id),
+          )
+          .sort(
+            (a, b) =>
+              new Date(a.message_datetime).getTime() -
+              new Date(b.message_datetime).getTime(),
+          );
+        return {
+          history: uniqueHistory,
+          isLast: newItems.history.length !== INTERSECTION_ELEMENTS.chat,
+        };
+      },
+      serializeQueryArgs: ({ endpointName, queryArgs }) => {
+        const { project_id } = queryArgs;
+        return `${endpointName}/${project_id}`;
+      },
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg !== previousArg;
       },
       providesTags: [CHAT],
     }),
