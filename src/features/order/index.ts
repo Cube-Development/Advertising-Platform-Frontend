@@ -1,6 +1,5 @@
 export * from "./changeChannel";
 export * from "./checkPost";
-export * from "./orderChat";
 export * from "./feedback";
 export * from "./acceptPost";
 export * from "./rejectPost";

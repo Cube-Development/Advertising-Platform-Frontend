@@ -14,7 +14,6 @@ import {
   ChangeChannel,
   CheckPost,
   Feedback,
-  OrderChat,
   RejectPost,
   SeePost,
 } from "@features/order";
@@ -86,7 +85,7 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
       {typeFilter === projectTypesFilter.managerProject &&
         statusFilter !== advManagerProjectStatusFilter.completed && (
           <div className={`${styles.chat__btn} display__hide__min__md`}>
-            <Chat orderId={card?.id} toRole={roles.manager} />
+            <Chat projectId={card?.id} toRole={roles.manager} />
           </div>
         )}
       <div className={styles.card__info}>
@@ -229,7 +228,7 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
         {typeFilter === projectTypesFilter.managerProject &&
           statusFilter !== advManagerProjectStatusFilter.completed && (
             <div className={`${styles.chat__btn} display__hide__max__md`}>
-              <Chat orderId={card?.id} toRole={roles.manager} />
+              <Chat projectId={card?.id} toRole={roles.manager} />
             </div>
           )}
       </div>

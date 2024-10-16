@@ -12,7 +12,6 @@ import {
   ChangePost,
   CheckPost,
   Feedback,
-  OrderChat,
   RejectPost,
   SeeComment,
   SeePost,
@@ -30,7 +29,6 @@ import {
   MoreIcon,
   RocketIcon,
   SearchIcon,
-  TechnicalSpecificationIcon,
   WaitIcon,
 } from "@shared/assets";
 import { BREAKPOINT, Languages, accordionTypes } from "@shared/config";
@@ -86,7 +84,7 @@ const Card: FC<ManagerProjectCardProps> = ({ card, statusFilter }) => {
       {
         <div className={`${styles.buttons__md} display__hide__min__md`}>
           <div className={styles.chat__btn}>
-            <Chat orderId={card.id} toRole={roles.advertiser} />
+            <Chat projectId={card?.id} toRole={roles.advertiser} />
           </div>
           <div className={styles.ts__btn}>
             <TechnicalSpecification card={card} SendToBotBtn={SendToBot} />
@@ -191,7 +189,11 @@ const Card: FC<ManagerProjectCardProps> = ({ card, statusFilter }) => {
         <div
           className={`${styles.card__features__chat} display__hide__max__md`}
         >
-          <Chat orderId={card.id} toRole={roles.advertiser} isProject={true} />
+          <Chat
+            projectId={card?.id}
+            toRole={roles.advertiser}
+            isProject={true}
+          />
         </div>
       </div>
     </div>
@@ -211,7 +213,7 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
   const swiperRef = useRef<SwiperCore | null>(null);
 
   const getParams: getProjectSubcardReq = {
-    project_id: card.project_id,
+    project_id: card?.project_id,
     language: language?.id || Languages[0].id,
     page: 1,
   };
@@ -290,7 +292,7 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
               } as React.CSSProperties
             }
             // className="border__gradient"
-            value={`item-${card.id}`}
+            value={`item-${card?.id}`}
             ref={accordionRef}
             className="border-none"
           >
@@ -299,7 +301,7 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
                 {subcards?.orders?.map((subcard, index) => (
                   <ManagerProjectSubcard
                     key={index}
-                    project_id={card.project_id}
+                    project_id={card?.project_id}
                     subcard={subcard}
                     FeedbackBtn={Feedback}
                     AcceptBtn={AcceptPost}
@@ -385,7 +387,7 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
                       <div className={styles.top}>
                         <ManagerProjectSubcard
                           key={index}
-                          project_id={card.project_id}
+                          project_id={card?.project_id}
                           subcard={subcard}
                           FeedbackBtn={Feedback}
                           AcceptBtn={AcceptPost}

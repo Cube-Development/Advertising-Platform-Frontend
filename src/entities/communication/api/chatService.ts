@@ -49,6 +49,7 @@ export const chatAPI = authApi.injectEndpoints({
             formated_date: datetime.localDate,
             formated_time: datetime.localTime,
             message_datetime: item.message_date + " " + item.message_time,
+            // unread_count: Math.floor(Math.random() * 10)
           };
         });
         return newResponse;
@@ -76,6 +77,7 @@ export const chatAPI = authApi.injectEndpoints({
             formated_date: datetime.localDate,
             formated_time: datetime.localTime,
             message_datetime: item.message_date + " " + item.message_time,
+            // unread_count: Math.floor(Math.random() * 10)
           };
         });
         return newResponse;

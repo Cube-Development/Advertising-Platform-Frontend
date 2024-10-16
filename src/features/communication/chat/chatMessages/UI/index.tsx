@@ -9,6 +9,7 @@ import {
   MessageStatus,
   RecipientType,
   useGetOrderHistoryQuery,
+  useGetProjectHistoryQuery,
   useReadOrderMessageMutation,
   useReadProjectMessageMutation,
 } from "@entities/communication";
@@ -35,6 +36,7 @@ import Underline from "@tiptap/extension-underline";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { useCentrifuge } from "@widgets/communication/chat";
+import { motion } from "framer-motion";
 import Cookies from "js-cookie";
 import { FC, useEffect, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -43,7 +45,6 @@ import { animateScroll } from "react-scroll";
 import { v4 as uuidv4 } from "uuid";
 import { SkeletonChatMessage } from "../skeleton";
 import styles from "./styles.module.scss";
-import { motion } from "framer-motion";
 
 interface ChatMessagesProps {
   card: IChatData;
@@ -67,6 +68,10 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
   const [isSendMessage, setIsSendMessage] = useState<boolean>(false);
   const [showScrollDownButton, setShowScrollDownButton] =
     useState<boolean>(false);
+  const [lastMessageToRead, setLastMessageToRead] =
+    useState<IMessageNewSocket | null>(null);
+
+  const previousScrollHeightRef = useRef<number>(0);
 
   const getDefaultValues = (card: IChatData) => ({
     ...(card?.type === chatType.order
@@ -80,6 +85,11 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
   });
 
   const formFields = watch();
+
+  const debouncedPosition = useDebounce(
+    lastMessageToRead?.message_date + " " + lastMessageToRead?.message_time,
+    DEBOUNCE.readMessage,
+  );
 
   const limit = 4000;
   const editor = useEditor({
@@ -115,9 +125,25 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
     },
   });
 
-  const { data, isFetching } = useGetOrderHistoryQuery({
-    ...formFields,
-  });
+  const { data: orderHistory, isFetching: isFetchingOrder } =
+    useGetOrderHistoryQuery(
+      {
+        ...formFields,
+      },
+      { skip: !!card?.project_id && !!card },
+    );
+
+  const { data: projectHistory, isFetching: isFetchingProject } =
+    useGetProjectHistoryQuery(
+      {
+        ...formFields,
+      },
+      { skip: !!card?.order_id && !!card },
+    );
+
+  const data = card?.type === chatType.order ? orderHistory : projectHistory;
+  const isFetching =
+    card?.type === chatType.order ? isFetchingOrder : isFetchingProject;
 
   useEffect(() => {
     reset(getDefaultValues(card));
@@ -137,6 +163,14 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
       }
     }
   }, [data?.history?.length]);
+
+  useEffect(() => {
+    if (containerRef.current && !isFetching) {
+      const newScrollHeight = containerRef.current.scrollHeight;
+      containerRef.current.scrollTop +=
+        newScrollHeight - previousScrollHeightRef.current;
+    }
+  }, [data?.history?.length, isFetching]);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -159,9 +193,74 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
     };
   }, []);
 
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
-    if (event.key === "Enter" && event.ctrlKey) {
-      handleSendMessage();
+  const handlePaginationHistory = () => {
+    if (data?.history) {
+      const topMessage = data?.history[0];
+      setValue("message_date", topMessage?.message_date);
+      setValue("message_time", topMessage?.message_time);
+
+      if (containerRef.current) {
+        previousScrollHeightRef.current = containerRef.current.scrollHeight;
+      }
+    }
+  };
+
+  const handleArrowDown = () => {
+    if (messagesEndRef.current) {
+      animateScroll.scrollToBottom({
+        containerId: "all__messages",
+        smooth: true,
+      });
+    }
+  };
+
+  const handleNewMessage = (message: IMessageNewSocket) => {
+    // console.log("newnewnew", message);
+    if (message?.recipient === RecipientType.receiver) {
+      const datetime = convertUTCToLocalDateTime(
+        message?.message_date,
+        message?.message_time,
+      );
+      const newMessage: IMessageNewSocket = {
+        ...message,
+        formated_date: datetime.localDate,
+        formated_time: datetime.localTime,
+        message_datetime: message.message_date + " " + message.message_time,
+      };
+      const newHistory = {
+        ...data,
+        history: [...(data?.history || []), newMessage],
+      };
+
+      if (message?.order_id && message?.order_id === card?.order_id) {
+        dispatch(
+          chatAPI.util.updateQueryData(
+            "getOrderHistory",
+            {
+              ...formFields,
+            },
+            (draft) => {
+              Object.assign(draft, newHistory);
+            },
+          ),
+        );
+      } else if (
+        message?.project_id &&
+        message?.project_id === card?.project_id
+      ) {
+        dispatch(
+          chatAPI.util.updateQueryData(
+            "getProjectHistory",
+            {
+              ...formFields,
+            },
+            (draft) => {
+              Object.assign(draft, newHistory);
+            },
+          ),
+        );
+      }
+      setIsNewMessage(true);
     }
   };
 
@@ -202,41 +301,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
         ...data,
         history: [...(data?.history || []), orderMessageState],
       };
-      dispatch(
-        chatAPI.util.updateQueryData(
-          "getOrderHistory",
-          {
-            ...formFields,
-          },
-          (draft) => {
-            Object.assign(draft, newHistory);
-          },
-        ),
-      );
-      editor?.commands.setContent("");
-      setNewMessage("");
-      setIsSendMessage(true);
-    }
-  };
-
-  const handleNewMessage = (message: IMessageNewSocket) => {
-    // console.log("newnewnew", message);
-    if (message?.recipient === RecipientType.receiver) {
-      if (message?.order_id && message?.order_id === card?.order_id) {
-        const datetime = convertUTCToLocalDateTime(
-          message?.message_date,
-          message?.message_time,
-        );
-        const newMessage: IMessageNewSocket = {
-          ...message,
-          formated_date: datetime.localDate,
-          formated_time: datetime.localTime,
-          message_datetime: message.message_date + " " + message.message_time,
-        };
-        const newHistory = {
-          ...data,
-          history: [...(data?.history || []), newMessage],
-        };
+      if (card?.type === chatType.order) {
         dispatch(
           chatAPI.util.updateQueryData(
             "getOrderHistory",
@@ -248,74 +313,32 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
             },
           ),
         );
-        setIsNewMessage(true);
-      } else if (
-        message?.project_id &&
-        message?.project_id === card?.project_id
-      ) {
+      } else if (card?.type === chatType.project) {
+        dispatch(
+          chatAPI.util.updateQueryData(
+            "getProjectHistory",
+            {
+              ...formFields,
+            },
+            (draft) => {
+              Object.assign(draft, newHistory);
+            },
+          ),
+        );
       }
-    }
-  };
-
-  const handlePaginationHistory = () => {
-    if (data?.history) {
-      const topMessage = data?.history[0];
-      setValue("message_date", topMessage?.message_date);
-      setValue("message_time", topMessage?.message_time);
-    }
-  };
-
-  OrderMessageNew(handleNewMessage);
-
-  const handleChange = (content: string) => {
-    setNewMessage(content);
-  };
-
-  const cleanMessage = (message: string) => {
-    // console.log("Before cleaning:", message);
-    let cleanedMessage = message?.replace(
-      /^(<p>\s*(<br\s*\/?>\s*)+|(<br\s*\/?>\s*)+)/g,
-      "<p>",
-    );
-    cleanedMessage = cleanedMessage.replace(
-      /((<br\s*\/?>\s*)+<\/p>\s*$|(<br\s*\/?>\s*)+\s*$)/g,
-      "</p>",
-    );
-    cleanedMessage = cleanedMessage.replace(/(<p>\s*<\/p>)+/g, "");
-    if (/^<p>\s*<\/p>$/.test(cleanedMessage)) {
-      cleanedMessage = "";
-    }
-
-    // console.log("After cleaning:", cleanedMessage);
-    return cleanedMessage;
-  };
-
-  useEffect(() => {
-    if (isSendMessage && messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "auto" });
-      setIsSendMessage(false);
-    }
-  }, [isSendMessage]);
-
-  useEffect(() => {
-    if (isNewMessage && messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "auto" });
-      setIsNewMessage(false);
-    }
-  }, [isNewMessage]);
-
-  const handleArrowDown = () => {
-    if (messagesEndRef.current) {
-      animateScroll.scrollToBottom({
-        containerId: "all__messages",
-        smooth: true,
-      });
+      editor?.commands.setContent("");
+      setNewMessage("");
+      setIsSendMessage(true);
     }
   };
 
   const handleReadMessage = (message: IMessageNewSocket) => {
     console.log("handleReadMessage");
-    if (message?.status === MessageStatus.unread && message?.order_id) {
+    if (
+      message?.status === MessageStatus.unread &&
+      message?.recipient === RecipientType.receiver &&
+      message?.order_id
+    ) {
       console.log(
         "READ MESSAGE",
         message?.message_date + " " + message?.message_time,
@@ -379,30 +402,124 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
         });
     } else if (
       message?.status === MessageStatus.unread &&
+      message?.recipient === RecipientType.receiver &&
       message?.project_id
     ) {
+      console.log(
+        "READ MESSAGE PROJECT",
+        message?.message_date + " " + message?.message_time,
+      );
+      readProjectMessage({
+        project_id: message?.project_id,
+        message_datetime: message?.message_date + " " + message?.message_time,
+      })
+        .unwrap()
+        .then(() => {
+          const newHistory: IMessageNewSocket[] =
+            data?.history.map((item) => {
+              if (
+                checkDatetime(item?.message_datetime, message?.message_datetime)
+              ) {
+                return {
+                  ...item,
+                  status: MessageStatus.read,
+                };
+              }
+              return item;
+            }) || [];
+          dispatch(
+            chatAPI.util.updateQueryData(
+              "getProjectHistory",
+              {
+                project_id: message?.project_id,
+                batch: INTERSECTION_ELEMENTS.chat,
+              },
+              (draft) => {
+                draft.history = newHistory;
+              },
+            ),
+          );
+          dispatch(
+            chatAPI.util.updateQueryData(
+              "getProjectChats",
+              { role: role },
+              (draft) => {
+                const newChatOrder: IChatData[] = draft.map((chat) => {
+                  if (chat?.project_id === message?.project_id) {
+                    return {
+                      ...chat,
+                      unread_count: newHistory.filter(
+                        (item) =>
+                          item?.status === MessageStatus.unread &&
+                          item.recipient === RecipientType.receiver,
+                      ).length,
+                    };
+                  }
+                  return chat;
+                });
+                draft.splice(0, draft.length, ...newChatOrder);
+              },
+            ),
+          );
+        })
+        .catch(() => {
+          console.log("Read messag Error");
+        });
     }
   };
 
-  const [lastMessage, setLastMessage] = useState<IMessageNewSocket | null>(
-    null,
-  );
+  const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
+    if (event.key === "Enter" && event.ctrlKey) {
+      handleSendMessage();
+    }
+  };
+
+  const handleChange = (content: string) => {
+    setNewMessage(content);
+  };
+
+  const cleanMessage = (message: string) => {
+    // console.log("Before cleaning:", message);
+    let cleanedMessage = message?.replace(
+      /^(<p>\s*(<br\s*\/?>\s*)+|(<br\s*\/?>\s*)+)/g,
+      "<p>",
+    );
+    cleanedMessage = cleanedMessage.replace(
+      /((<br\s*\/?>\s*)+<\/p>\s*$|(<br\s*\/?>\s*)+\s*$)/g,
+      "</p>",
+    );
+    cleanedMessage = cleanedMessage.replace(/(<p>\s*<\/p>)+/g, "");
+    if (/^<p>\s*<\/p>$/.test(cleanedMessage)) {
+      cleanedMessage = "";
+    }
+
+    // console.log("After cleaning:", cleanedMessage);
+    return cleanedMessage;
+  };
 
   useEffect(() => {
-    if (data && !lastMessage) {
-      setLastMessage(data?.history[0]);
+    if (isSendMessage && messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "auto" });
+      setIsSendMessage(false);
+    }
+  }, [isSendMessage]);
+
+  useEffect(() => {
+    if (isNewMessage && messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "auto" });
+      setIsNewMessage(false);
+    }
+  }, [isNewMessage]);
+
+  useEffect(() => {
+    if (data && !lastMessageToRead) {
+      setLastMessageToRead(data?.history[data?.history?.length - 1]);
     }
   }, [data]);
 
-  const debouncedPosition = useDebounce(
-    lastMessage?.message_date + " " + lastMessage?.message_time,
-    DEBOUNCE.readMessage,
-  );
-
   useEffect(() => {
-    // console.log("debouncedPosition", debouncedPosition, lastMessage);
-    if (lastMessage) {
-      handleReadMessage(lastMessage);
+    if (lastMessageToRead) {
+      handleReadMessage(lastMessageToRead);
     }
   }, [debouncedPosition]);
 
@@ -412,19 +529,17 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
             const dataset = (entry.target as HTMLElement).dataset.message;
-            // console.log(dataset);
             if (dataset) {
               const message: IMessageNewSocket = JSON.parse(dataset);
               if (
                 message?.recipient === RecipientType.receiver &&
-                lastMessage
+                lastMessageToRead
               ) {
-                const lastDatetime = lastMessage?.message_datetime;
+                const lastDatetime = lastMessageToRead?.message_datetime;
                 const messageDatetime = message?.message_datetime;
-                // console.log(lastDatetime, messageDatetime, message);
+
                 if (checkDatetime(lastDatetime, messageDatetime)) {
-                  // console.log("checkDatetime", message);
-                  setLastMessage(message);
+                  setLastMessageToRead(message);
                 }
               }
             }
@@ -453,8 +568,60 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
     };
   }, [data]);
 
-  console.log("data", data);
+  // const [visibleDate, setVisibleDate] = useState<string | null>(null);
 
+  // useEffect(() => {
+  //   let lastVisibleDate: string | null | undefined = null;
+
+  //   const handleVisibilityChange = (entries: IntersectionObserverEntry[]) => {
+  //     entries.forEach((entry) => {
+  //       const date = (entry.target as HTMLElement).dataset.date;
+  //       console.log("date", date, entry);
+  //       if (entry.isIntersecting) {
+  //         console.log("date222", date);
+  //         lastVisibleDate = date; // Последняя видимая дата
+  //       }
+  //     });
+  //     console.log("lastVisibleDate", lastVisibleDate);
+  //     // Если ни одна дата не видна, показываем последнюю известную дату
+  //     if (lastVisibleDate) {
+  //       console.log("!isAnyDateVisible && lastVisibleDate", lastVisibleDate);
+  //       setVisibleDate(lastVisibleDate);
+  //     } else {
+  //       setVisibleDate(null); // Если хотя бы одна дата видна, скрываем фиксированную дату
+  //     }
+  //   };
+
+  //   const observer = new IntersectionObserver(handleVisibilityChange, {
+  //     root: containerRef.current,
+  //     threshold: 0,
+  //   });
+
+  //   // Находим все элементы с атрибутом data-date
+  //   const dateElements = document.querySelectorAll("[data-date]");
+  //   dateElements.forEach((el) => observer.observe(el));
+
+  //   // Добавляем слушатель события скролла
+  //   const container = containerRef.current;
+  //   const handleScroll = () => {
+  //     // Принудительно проверяем элементы при каждом скролле
+  //     observer.takeRecords().forEach(handleVisibilityChange);
+  //   };
+
+  //   if (container) {
+  //     container.addEventListener("scroll", handleScroll);
+  //   }
+
+  //   return () => {
+  //     // Убираем наблюдателя и слушатель при размонтировании
+  //     dateElements.forEach((el) => observer.unobserve(el));
+  //     if (container) {
+  //       container.removeEventListener("scroll", handleScroll);
+  //     }
+  //   };
+  // }, []);
+
+  OrderMessageNew(handleNewMessage);
   return (
     <div className={styles.wrapper}>
       {data?.history?.length ? (
@@ -463,32 +630,11 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
             {!data?.isLast && (
               <DinamicPagination onChange={handlePaginationHistory} />
             )}
-            {isFetching && (
-              <div className={styles.skeleton_wrapper}>
-                {Array.from({ length: INTERSECTION_ELEMENTS.chat }).map(
-                  (_, index) => {
-                    const values = Object.values(RecipientType);
-                    const randomIndex = Math.floor(
-                      Math.random() * values.length,
-                    );
-                    const recipient = values[randomIndex];
-                    return (
-                      <div className={styles.messages_wrapper} key={index}>
-                        <div
-                          className={`${styles.row__message} ${
-                            recipient === RecipientType.receiver
-                              ? styles.receiver
-                              : styles.sender
-                          }`}
-                        >
-                          <SkeletonChatMessage recipient={recipient} />
-                        </div>
-                      </div>
-                    );
-                  },
-                )}
+            {/* {!!visibleDate && (
+              <div className={styles.date_absolute}>
+                <p>{visibleDate}</p>
               </div>
-            )}
+            )} */}
             {data &&
               data?.history?.map((message, index) => {
                 let isTimeDifferenceSmall = false;
@@ -519,7 +665,10 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
                     {message?.message_date !== currentDate &&
                       ((currentDate = message?.message_date),
                       (
-                        <div className={styles.date}>
+                        <div
+                          //  data-date={""}
+                          className={styles.date}
+                        >
                           <p>{message?.formated_date}</p>
                         </div>
                       ))}
@@ -538,6 +687,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
                           ...message,
                           message: undefined,
                         })}
+                        data-date={message?.formated_date}
                       >
                         <div
                           dangerouslySetInnerHTML={{

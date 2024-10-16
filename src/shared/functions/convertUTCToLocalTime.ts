@@ -13,7 +13,8 @@ export function convertUTCToLocalDateTime(
   const year = localDateTime.getFullYear();
   const month = String(localDateTime.getMonth() + 1).padStart(2, "0");
   const day = String(localDateTime.getDate()).padStart(2, "0");
-  const localDateString = `${year}-${month}-${day}`;
+  // const localDateString = `${year}-${month}-${day}`;
+  const localDateString = `${day}.${month}.${year}`;
 
   // Извлекаем локальное время
   const hours = String(localDateTime.getHours()).padStart(2, "0");

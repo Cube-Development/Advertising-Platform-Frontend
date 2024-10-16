@@ -56,6 +56,7 @@ export const Chat: FC<IChatProps> = ({
 }) => {
   const { t } = useTranslation();
   const { toast } = useToast();
+  const { OrderMessageNewChat, OrderReadMessage } = useCentrifuge();
   const dispatch = useAppDispatch();
   const { role } = useAppSelector((state) => state.user);
   const [screen, setScreen] = useState<number>(window.innerWidth);
@@ -67,15 +68,33 @@ export const Chat: FC<IChatProps> = ({
 
   const { data: chatsOrder } = useGetOrderChatsQuery(
     { role: role },
-    { skip: role !== roles.blogger && chatFilter !== chatTypesFilter.blogger },
+    // { skip: role !== roles.blogger && chatFilter !== chatTypesFilter.blogger }
   );
 
   const { data: chatsProject } = useGetProjectChatsQuery(
     { role: role },
-    { skip: role === roles.blogger || chatFilter === chatTypesFilter.blogger },
+
+    // { skip: role === roles.blogger || chatFilter === chatTypesFilter.blogger }
+    { skip: role === roles.blogger },
   );
 
-  const { OrderMessageNewChat, OrderReadMessage } = useCentrifuge();
+  const selectedChats =
+    chatFilter === chatTypesFilter.blogger ? chatsOrder : chatsProject;
+  const countOrderMessage =
+    chatsOrder?.reduce(
+      (total, item) =>
+        total +
+        (item.recipient === RecipientType.receiver ? item.unread_count : 0),
+      0,
+    ) || 0;
+  const countProjectMessage =
+    chatsProject?.reduce(
+      (total, item) =>
+        total +
+        (item.recipient === RecipientType.receiver ? item.unread_count : 0),
+      0,
+    ) || 0;
+  const haveNewMessage = !!(countOrderMessage + countProjectMessage);
 
   useEffect(() => {
     const handleResize = () => {
@@ -96,7 +115,10 @@ export const Chat: FC<IChatProps> = ({
     );
   };
 
-  const handle = () => {};
+  const handle = () => {
+    console.log("setCurrentChat(null);");
+    setCurrentChat(null);
+  };
 
   const handleCloseChat = () => {
     setCurrentChat(null);
@@ -244,19 +266,11 @@ export const Chat: FC<IChatProps> = ({
     }
   };
 
-  const divVariants = {
-    close: { opacity: 0, x: "100%" },
-    open: { opacity: 1, x: "0%" },
-    transition: { transition: { duration: 0.5 } },
-  };
-
-  console.log("chatsOrder", chatsOrder);
-  const haveNewMessage = Boolean(
-    chatsOrder?.filter((item) => item.unread_count !== 0).length,
-  );
+  // console.log("chatsOrder", chatsOrder);
 
   useEffect(() => {
     if (orderId && isOpen) {
+      setChatFilter(chatTypesFilter.blogger);
       setCurrentChat(
         chatsOrder?.find((item) => item?.order_id === orderId) || null,
       );
@@ -264,7 +278,13 @@ export const Chat: FC<IChatProps> = ({
   }, [orderId, isOpen]);
 
   useEffect(() => {
+    console.log("MANAGER CHAT", projectId, isOpen);
     if (projectId && isOpen) {
+      setChatFilter(
+        role === roles.advertiser
+          ? chatTypesFilter.manager
+          : chatTypesFilter.advertiser,
+      );
       setCurrentChat(
         chatsProject?.find((item) => item?.project_id === projectId) || null,
       );
@@ -306,28 +326,30 @@ export const Chat: FC<IChatProps> = ({
                     resetValues={handle}
                     chatFilter={chatFilter}
                     changeChatFilter={setChatFilter}
+                    badge={[countOrderMessage, countProjectMessage]}
                   />
                 </div>
               )}
-              {chatsOrder?.length ? (
+              {selectedChats?.length ? (
                 <div className={styles.all_chats}>
-                  {chatsOrder.map((card, index) => (
+                  {selectedChats?.map((card, index) => (
                     <motion.div
                       key={index}
                       initial="hidden"
                       animate="visible"
-                      custom={index % chatsOrder?.length}
+                      custom={index % (selectedChats?.length || 1)}
                       variants={PAGE_ANIMATION.animationUp}
                       onClick={() => handleChangeChat(card)}
                     >
                       <ChatCard
                         card={card}
                         isActive={
-                          (currentChat &&
+                          !!(
+                            currentChat &&
                             (currentChat.type === chatType.order
                               ? currentChat.order_id === card?.order_id
-                              : currentChat.project_id === card?.project_id)) ||
-                          false
+                              : currentChat.project_id === card?.project_id)
+                          )
                         }
                       />
                     </motion.div>
@@ -381,7 +403,7 @@ export const Chat: FC<IChatProps> = ({
             onClick={() => setIsOpen(true)}
           >
             {isMain ? (
-              <ChatMainIcon />
+              <ChatMainIcon haveNewMessage={haveNewMessage} />
             ) : isProject ? (
               <ChatIcon2 className="active__icon" />
             ) : (
@@ -411,27 +433,29 @@ export const Chat: FC<IChatProps> = ({
                   resetValues={handle}
                   chatFilter={chatFilter}
                   changeChatFilter={setChatFilter}
+                  badge={[countOrderMessage, countProjectMessage]}
                 />
               </div>
-              {chatsOrder?.length ? (
+              {selectedChats?.length ? (
                 <div className={styles.all_chats}>
-                  {chatsOrder.map((card, index) => (
+                  {selectedChats?.map((card, index) => (
                     <motion.div
                       key={index}
                       initial="hidden"
                       animate="visible"
-                      custom={index % chatsOrder?.length}
+                      custom={index % (selectedChats?.length || 1)}
                       variants={PAGE_ANIMATION.animationUp}
                       onClick={() => handleChangeChat(card)}
                     >
                       <ChatCard
                         card={card}
                         isActive={
-                          (currentChat &&
+                          !!(
+                            currentChat &&
                             (currentChat.type === chatType.order
                               ? currentChat.order_id === card?.order_id
-                              : currentChat.project_id === card?.project_id)) ||
-                          false
+                              : currentChat.project_id === card?.project_id)
+                          )
                         }
                       />
                     </motion.div>
@@ -444,11 +468,11 @@ export const Chat: FC<IChatProps> = ({
             <AnimatePresence>
               {currentChat && (
                 <motion.div
-                  initial="close"
-                  animate="open"
-                  exit="close"
-                  transition={divVariants.transition}
-                  variants={divVariants}
+                  initial="hidden"
+                  animate="visible"
+                  exit="hidden"
+                  transition={PAGE_ANIMATION.sideTransition.transition}
+                  variants={PAGE_ANIMATION.sideTransition}
                   className={styles.content__right}
                 >
                   <div className={styles.top}>
