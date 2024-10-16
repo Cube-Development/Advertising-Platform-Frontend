@@ -38,6 +38,7 @@ import {
   AccordionTrigger,
   AccountsLoader,
   MyPagination,
+  SpinnerLoader,
 } from "@shared/ui";
 import { Chat } from "@widgets/communication";
 import { FC, useEffect, useRef, useState } from "react";
@@ -255,13 +256,13 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
     };
   }, []);
 
-  const handleSlideChange = () => {
-    if (swiperRef.current && !isLoading) {
-      const indexTo = swiperRef.current.realIndex === 0 ? 1 : 0;
-      swiperRef.current.slideTo(indexTo, 500);
-      handleChangeOpenSubcard();
-    }
-  };
+  // const handleSlideChange = () => {
+  //   if (swiperRef.current && !isLoading) {
+  //     const indexTo = swiperRef.current.realIndex === 0 ? 1 : 0;
+  //     swiperRef.current.slideTo(indexTo, 500);
+  //     handleChangeOpenSubcard();
+  //   }
+  // };
 
   useEffect(() => {
     if (statusFilter && swiperRef.current) {
@@ -340,41 +341,32 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
           </AccordionItem>
         </div>
       ) : (
-        <div className="swipper__carousel">
-          <Swiper
-            slidesPerView={1}
-            onSwiper={(swiper) => (swiperRef.current = swiper)}
-            speed={500}
-            spaceBetween={50}
-            allowTouchMove={false}
+        <>
+          {/* abdsh */}
+          <div
+            className={`${styles.disable_radius} overflow-hidden relative h-[500px] border__gradient`}
           >
-            <SwiperSlide className={`${styles.wrapper} border__gradient`}>
+            <div
+              className={`absolute top-0 left-0 w-full transition-transform duration-500 ${
+                isSubcardOpen ? "-translate-x-full" : "translate-x-0"
+              } ${styles.wrapper}`}
+            >
               <Card card={card} statusFilter={statusFilter} />
-              <div className={styles.card__btn} onClick={handleSlideChange}>
-                {isLoading ? (
-                  <AccountsLoader />
-                ) : isSubcardOpen ? (
-                  t(`orders_advertiser.card.see_less`)
-                ) : (
-                  t(`orders_advertiser.card.see_more`)
-                )}
-                {!isLoading && (
-                  <ArrowSmallVerticalIcon
-                    className={
-                      isSubcardOpen
-                        ? "icon__white rotate side"
-                        : "icon__white rotate__down side"
-                    }
-                  />
-                )}
-              </div>
-            </SwiperSlide>
-            <SwiperSlide>
-              <div className="swipper__carousel">
+            </div>
+            <div
+              className={`absolute top-0 left-0 w-full transition-transform duration-500 ${
+                isSubcardOpen ? "translate-x-0" : "translate-x-full"
+              }`}
+            >
+              {isLoading && (
+                <div className="grid justify-center items-center h-full pt-[100px]">
+                  <SpinnerLoader />
+                </div>
+              )}
+              <div className={`swipper__carousel`}>
                 <Swiper
                   slidesPerView={1}
                   onSwiper={(swiper) => (swiperRef.current = swiper)}
-                  // onSlideChange={handleSlideChange}
                   speed={500}
                   spaceBetween={50}
                   loop={true}
@@ -382,7 +374,7 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
                   {subcards?.orders.map((subcard, index) => (
                     <SwiperSlide
                       key={index}
-                      className={`${styles.subcard__md} border__gradient`}
+                      className={`${styles.subcard__md}`}
                     >
                       <div className={styles.top}>
                         <ManagerProjectSubcard
@@ -405,34 +397,130 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
                           count={subcards?.orders?.length || 1}
                         />
                       </div>
-                      <div
-                        className={styles.card__btn}
-                        onClick={handleSlideChange}
-                      >
-                        {isLoading ? (
-                          <AccountsLoader />
-                        ) : isSubcardOpen ? (
-                          t(`orders_advertiser.card.see_less`)
-                        ) : (
-                          t(`orders_advertiser.card.see_more`)
-                        )}
-                        {!isLoading && (
-                          <ArrowSmallVerticalIcon
-                            className={
-                              isSubcardOpen
-                                ? "icon__white rotate side"
-                                : "icon__white rotate__down side"
-                            }
-                          />
-                        )}
-                      </div>
                     </SwiperSlide>
                   ))}
                 </Swiper>
               </div>
-            </SwiperSlide>
-          </Swiper>
-        </div>
+            </div>
+          </div>
+          <div
+            className={styles.card__btn}
+            onClick={() => setSubcardOpen((prev) => !prev)}
+          >
+            {isLoading && (
+              <div className="grid justify-center items-center h-full pt-[100px]">
+                <SpinnerLoader />
+              </div>
+            )}
+            {isLoading && (
+              <ArrowSmallVerticalIcon
+                className={
+                  isSubcardOpen
+                    ? "icon__white rotate side"
+                    : "icon__white rotate__down side"
+                }
+              />
+            )}
+          </div>
+        </>
+        // <div className="swipper__carousel">
+        //   <Swiper
+        //     slidesPerView={1}
+        //     onSwiper={(swiper) => (swiperRef.current = swiper)}
+        //     speed={500}
+        //     spaceBetween={50}
+        //     allowTouchMove={false}
+        //   >
+        //     <SwiperSlide className={`${styles.wrapper} border__gradient`}>
+        //       <Card card={card} statusFilter={statusFilter} />
+        //       <div className={styles.card__btn} onClick={handleSlideChange}>
+        //         {isLoading ? (
+        //           <AccountsLoader />
+        //         ) : isSubcardOpen ? (
+        //           t(`orders_advertiser.card.see_less`)
+        //         ) : (
+        //           t(`orders_advertiser.card.see_more`)
+        //         )}
+        //         {!isLoading && (
+        //           <ArrowSmallVerticalIcon
+        //             className={
+        //               isSubcardOpen
+        //                 ? "icon__white rotate side"
+        //                 : "icon__white rotate__down side"
+        //             }
+        //           />
+        //         )}
+        //       </div>
+        //     </SwiperSlide>
+        //     {isLoading && (
+        //       <div className="grid justify-center items-center h-full pt-[100px]">
+        //         <SpinnerLoader />
+        //       </div>
+        //     )}
+        //     <SwiperSlide>
+        //       <div className="swipper__carousel">
+        //         <Swiper
+        //           slidesPerView={1}
+        //           onSwiper={(swiper) => (swiperRef.current = swiper)}
+        //           // onSlideChange={handleSlideChange}
+        //           speed={500}
+        //           spaceBetween={50}
+        //           loop={true}
+        //         >
+        //           {subcards?.orders.map((subcard, index) => (
+        //             <SwiperSlide
+        //               key={index}
+        //               className={`${styles.subcard__md} border__gradient`}
+        //             >
+        // <div className={styles.top}>
+        //   <ManagerProjectSubcard
+        //     key={index}
+        //     project_id={card.project_id}
+        //     subcard={subcard}
+        //     FeedbackBtn={Feedback}
+        //     AcceptBtn={AcceptPost}
+        //     RejectBtn={RejectPost}
+        //     CheckBtn={CheckPost}
+        //     SeePostBtn={SeePost}
+        //     ChannelChatBtn={Chat}
+        //     ChangeChannelBtn={ChangeChannel}
+        //     ChangePostBtn={ChangePost}
+        //     SeeCommentBtn={SeeComment}
+        //     statusFilter={statusFilter}
+        //   />
+        //   <MyPagination
+        //     cardIndex={index}
+        //     count={subcards?.orders?.length || 1}
+        //   />
+        // </div>
+        //               <div
+        //                 className={styles.card__btn}
+        //                 onClick={handleSlideChange}
+        //               >
+        //                 {isLoading ? (
+        //                   <AccountsLoader />
+        //                 ) : isSubcardOpen ? (
+        //                   t(`orders_advertiser.card.see_less`)
+        //                 ) : (
+        //                   t(`orders_advertiser.card.see_more`)
+        //                 )}
+        //                 {!isLoading && (
+        //                   <ArrowSmallVerticalIcon
+        //                     className={
+        //                       isSubcardOpen
+        //                         ? "icon__white rotate side"
+        //                         : "icon__white rotate__down side"
+        //                     }
+        //                   />
+        //                 )}
+        //               </div>
+        //             </SwiperSlide>
+        //           ))}
+        //         </Swiper>
+        //       </div>
+        //     </SwiperSlide>
+        //   </Swiper>
+        // </div>
       )}
     </>
   );

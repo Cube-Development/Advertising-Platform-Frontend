@@ -1,3 +1,9 @@
+.disable_radius {
+  @media (max-width: 768px) {
+    border-radius: 20px 20px 0px 0px !important;
+  }
+}
+
 .wrapper {
   display: grid;
   grid-template: 1fr min-content / 1fr;
