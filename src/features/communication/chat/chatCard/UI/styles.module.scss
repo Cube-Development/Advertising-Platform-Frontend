@@ -1,13 +1,13 @@
 .channel {
   display: grid;
-  grid-auto-flow: column;
+  grid-template: 1fr / 1fr 40px;
   column-gap: 10px;
   padding: 10px;
-  // border-bottom: 1px solid #d9d9d9;
   cursor: pointer;
   background: var(--Personal-colors-White);
   box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.16);
   border-radius: 10px;
+  position: relative;
 
   &:hover {
     border-radius: 10px;
@@ -29,9 +29,8 @@
 
 .info {
   display: grid;
-  grid-auto-flow: column;
+  grid-template: 1fr / max-content 1fr;
   column-gap: 10px;
-  justify-content: start;
 }
 
 .logo {
@@ -86,7 +85,6 @@
   row-gap: 5px;
   align-content: space-between;
   justify-items: end;
-  position: relative;
 
   p {
     color: var(--Sub-text);
@@ -98,7 +96,7 @@
 
   .unread {
     position: absolute;
-    bottom: 10px;
+    bottom: 5px;
     right: 10px;
     display: grid;
     align-content: center;

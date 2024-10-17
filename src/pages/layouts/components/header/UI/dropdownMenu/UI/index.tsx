@@ -135,40 +135,44 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
               </div>
               <ScrollArea className="h-[calc(100dvh_-_80px)]">
                 <div className={styles.menu__switcher}>
-                  <div
-                    style={
-                      {
-                        "--translateRole": `${currentRole === roles.advertiser ? `0%` : `100%`}`,
-                        "--widthRole": `50%`,
-                      } as React.CSSProperties
-                    }
-                    className={styles.menu__switcher__row}
-                  >
-                    <Link to={paths.main}>
-                      <p
-                        className={`${
-                          currentRole === roles.advertiser ? styles.active : ""
-                        }`}
-                        onClick={() => {
-                          toggleRole(roles.advertiser);
-                        }}
-                      >
-                        {t("roles.advertiser")}
-                      </p>
-                    </Link>
-                    <Link to={paths.mainBlogger}>
-                      <p
-                        className={`${
-                          currentRole === roles.blogger ? styles.active : ""
-                        }`}
-                        onClick={() => {
-                          toggleRole(roles.blogger);
-                        }}
-                      >
-                        {t("roles.blogger")}
-                      </p>
-                    </Link>
-                  </div>
+                  {[roles.advertiser, roles.blogger].includes(currentRole) && (
+                    <div
+                      style={
+                        {
+                          "--translateRole": `${currentRole === roles.advertiser ? `0%` : `100%`}`,
+                          "--widthRole": `50%`,
+                        } as React.CSSProperties
+                      }
+                      className={styles.menu__switcher__row}
+                    >
+                      <Link to={paths.main}>
+                        <p
+                          className={`${
+                            currentRole === roles.advertiser
+                              ? styles.active
+                              : ""
+                          }`}
+                          onClick={() => {
+                            toggleRole(roles.advertiser);
+                          }}
+                        >
+                          {t("roles.advertiser")}
+                        </p>
+                      </Link>
+                      <Link to={paths.mainBlogger}>
+                        <p
+                          className={`${
+                            currentRole === roles.blogger ? styles.active : ""
+                          }`}
+                          onClick={() => {
+                            toggleRole(roles.blogger);
+                          }}
+                        >
+                          {t("roles.blogger")}
+                        </p>
+                      </Link>
+                    </div>
+                  )}
                   {isAuth && screen < BREAKPOINT.MD && (
                     <div className={styles.accordion__block}>
                       <p className={styles.accordion__title}>

@@ -35,16 +35,10 @@
       top: 0;
       right: 0;
     }
-  }
 
-  @media (max-width: 992px) {
-    width: 75vw;
-  }
-
-  @media (max-width: 768px) {
-    width: 100%;
-    height: 100vh;
-    grid-template: none;
+    .content__left {
+      height: 100vh;
+    }
   }
 
   .close {

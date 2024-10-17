@@ -193,7 +193,7 @@
   }
 
   .date {
-    display: flex;
+    display: grid;
     justify-content: center;
     padding: 5px;
 
@@ -207,6 +207,32 @@
       font-weight: 500;
       line-height: 1;
     }
+
+    .absolute {
+      position: absolute;
+      top: 20px;
+      left: 0;
+    }
+  }
+}
+
+.date_absolute {
+  position: absolute;
+  padding: 5px;
+  top: 0;
+  left: 50%;
+  transform: translate(-50%);
+  z-index: 10;
+
+  p {
+    color: var(--Personal-colors-White);
+    padding: 5px 10px;
+    background: rgba(71, 113, 230, 0.5);
+    border-radius: 10px;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1;
   }
 }
 

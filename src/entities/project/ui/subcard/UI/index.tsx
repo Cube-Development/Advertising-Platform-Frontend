@@ -272,68 +272,6 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                   </span>
                 )}
                 <SeePostBtn post={post!} />
-                {/* <AlertDialog>
-                  <AlertDialogTrigger asChild>
-                    <div>
-                      <SeeBtn />
-                    </div>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent
-                    className={`max-w-[300px] gap-0 bg-transparent grid items-center justify-center shadow-none ${
-                      screen > 992
-                        ? "w-[25vw]"
-                        : screen > 768
-                          ? "w-[30vw]"
-                          : screen > 576
-                            ? "w-[35vw]"
-                            : screen > 475
-                              ? "w-[50vw]"
-                              : "w-[60vw]"
-                    }`}
-                  >
-                    <div className="relative">
-                      <AlertDialogAction>
-                        <X
-                          className={`absolute ${screen > 475 ? "-right-10 -top-5" : "-right-8 -top-4"} w-[30px] rounded-full p-2 bg-white cursor-pointer`}
-                        />
-                      </AlertDialogAction>
-                      {post?.platform === platformTypesNum.telegram && (
-                        <DisplayTelegram
-                          post={post}
-                          platformId={platformTypesNum.telegram}
-                        />
-                      )}
-                      {post?.platform === platformTypesNum.instagram &&
-                        post?.post_type === PostTypesNum.feed && (
-                          <DisplayFeed
-                            post={post}
-                            platformId={platformTypesNum.instagram}
-                          />
-                        )}
-                      {post?.platform === platformTypesNum.instagram &&
-                        post?.post_type === PostTypesNum.FullHd_vertical && (
-                          <DisplayStories
-                            post={post}
-                            platformId={platformTypesNum.instagram}
-                          />
-                        )}
-                      {post?.platform === platformTypesNum.youtube &&
-                        post?.post_type === PostTypesNum.FullHd_vertical && (
-                          <DisplayShorts
-                            post={post}
-                            platformId={platformTypesNum.youtube}
-                          />
-                        )}
-                      {post?.platform === platformTypesNum.youtube &&
-                        post?.post_type === PostTypesNum.FullHd_horizontal && (
-                          <DisplayVideos
-                            post={post}
-                            platformId={platformTypesNum.youtube}
-                          />
-                        )}
-                    </div>
-                  </AlertDialogContent>
-                </AlertDialog> */}
               </div>
             ) : subcard?.api_status === orderStatus.moderation ? (
               <div className={styles.subcard__moderation}>
@@ -352,69 +290,6 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                 <div>
                   <p>{t(`orders_advertiser.order_status.waiting.title`)}</p>
                   <SeePostBtn post={post!} />
-                  {/* <AlertDialog>
-                    <AlertDialogTrigger asChild>
-                      <div>
-                        <SeeBtn />
-                      </div>
-                    </AlertDialogTrigger>
-                    <AlertDialogContent
-                      className={`max-w-[300px] gap-0 bg-transparent grid items-center justify-center shadow-none ${
-                        screen > 992
-                          ? "w-[25vw]"
-                          : screen > 768
-                            ? "w-[30vw]"
-                            : screen > 576
-                              ? "w-[35vw]"
-                              : screen > 475
-                                ? "w-[50vw]"
-                                : "w-[60vw]"
-                      }`}
-                    >
-                      <div className="relative">
-                        <AlertDialogAction>
-                          <X
-                            className={`absolute ${screen > 475 ? "-right-10 -top-5" : "-right-8 -top-4"} w-[30px] rounded-full p-2 bg-white cursor-pointer`}
-                          />
-                        </AlertDialogAction>
-                        {post?.platform === platformTypesNum.telegram && (
-                          <DisplayTelegram
-                            post={post}
-                            platformId={platformTypesNum.telegram}
-                          />
-                        )}
-                        {post?.platform === platformTypesNum.instagram &&
-                          post?.post_type === PostTypesNum.feed && (
-                            <DisplayFeed
-                              post={post}
-                              platformId={platformTypesNum.instagram}
-                            />
-                          )}
-                        {post?.platform === platformTypesNum.instagram &&
-                          post?.post_type === PostTypesNum.FullHd_vertical && (
-                            <DisplayStories
-                              post={post}
-                              platformId={platformTypesNum.instagram}
-                            />
-                          )}
-                        {post?.platform === platformTypesNum.youtube &&
-                          post?.post_type === PostTypesNum.FullHd_vertical && (
-                            <DisplayShorts
-                              post={post}
-                              platformId={platformTypesNum.youtube}
-                            />
-                          )}
-                        {post?.platform === platformTypesNum.youtube &&
-                          post?.post_type ===
-                            PostTypesNum.FullHd_horizontal && (
-                            <DisplayVideos
-                              post={post}
-                              platformId={platformTypesNum.youtube}
-                            />
-                          )}
-                      </div>
-                    </AlertDialogContent>
-                  </AlertDialog> */}
                 </div>
               </div>
             ) : subcard?.api_status === orderStatus.order_review ? (
@@ -595,68 +470,6 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                 <span>{t(`orders_advertiser.order_status.accepted.text`)}</span>
               )}
               <SeePostBtn post={post!} />
-              {/* <AlertDialog>
-                <AlertDialogTrigger asChild>
-                  <div>
-                    <SeeBtn />
-                  </div>
-                </AlertDialogTrigger>
-                <AlertDialogContent
-                  className={`max-w-[300px] gap-0 bg-transparent grid items-center justify-center shadow-none ${
-                    screen > 992
-                      ? "w-[25vw]"
-                      : screen > 768
-                        ? "w-[30vw]"
-                        : screen > 576
-                          ? "w-[35vw]"
-                          : screen > 475
-                            ? "w-[50vw]"
-                            : "w-[60vw]"
-                  }`}
-                >
-                  <div className="relative">
-                    <AlertDialogAction>
-                      <X
-                        className={`absolute ${screen > 475 ? "-right-10 -top-5" : "-right-8 -top-4"} w-[30px] rounded-full p-2 bg-white cursor-pointer`}
-                      />
-                    </AlertDialogAction>
-                    {post?.platform === platformTypesNum.telegram && (
-                      <DisplayTelegram
-                        post={post}
-                        platformId={platformTypesNum.telegram}
-                      />
-                    )}
-                    {post?.platform === platformTypesNum.instagram &&
-                      post?.post_type === PostTypesNum.feed && (
-                        <DisplayFeed
-                          post={post}
-                          platformId={platformTypesNum.instagram}
-                        />
-                      )}
-                    {post?.platform === platformTypesNum.instagram &&
-                      post?.post_type === PostTypesNum.FullHd_vertical && (
-                        <DisplayStories
-                          post={post}
-                          platformId={platformTypesNum.instagram}
-                        />
-                      )}
-                    {post?.platform === platformTypesNum.youtube &&
-                      post?.post_type === PostTypesNum.FullHd_vertical && (
-                        <DisplayShorts
-                          post={post}
-                          platformId={platformTypesNum.youtube}
-                        />
-                      )}
-                    {post?.platform === platformTypesNum.youtube &&
-                      post?.post_type === PostTypesNum.FullHd_horizontal && (
-                        <DisplayVideos
-                          post={post}
-                          platformId={platformTypesNum.youtube}
-                        />
-                      )}
-                  </div>
-                </AlertDialogContent>
-              </AlertDialog> */}
             </div>
           ) : subcard?.api_status === orderStatus.moderation ? (
             <div className={styles.subcard__moderation}>
@@ -675,68 +488,6 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
               <div>
                 <p>{t(`orders_advertiser.order_status.waiting.title`)}</p>
                 <SeePostBtn post={post!} />
-                {/* <AlertDialog>
-                  <AlertDialogTrigger asChild>
-                    <div>
-                      <SeeBtn />
-                    </div>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent
-                    className={`max-w-[300px] gap-0 bg-transparent grid items-center justify-center shadow-none ${
-                      screen > 992
-                        ? "w-[25vw]"
-                        : screen > 768
-                          ? "w-[30vw]"
-                          : screen > 576
-                            ? "w-[35vw]"
-                            : screen > 475
-                              ? "w-[50vw]"
-                              : "w-[60vw]"
-                    }`}
-                  >
-                    <div className="relative">
-                      <AlertDialogAction>
-                        <X
-                          className={`absolute ${screen > 475 ? "-right-10 -top-5" : "-right-8 -top-4"} w-[30px] rounded-full p-2 bg-white cursor-pointer`}
-                        />
-                      </AlertDialogAction>
-                      {post?.platform === platformTypesNum.telegram && (
-                        <DisplayTelegram
-                          post={post}
-                          platformId={platformTypesNum.telegram}
-                        />
-                      )}
-                      {post?.platform === platformTypesNum.instagram &&
-                        post?.post_type === PostTypesNum.feed && (
-                          <DisplayFeed
-                            post={post}
-                            platformId={platformTypesNum.instagram}
-                          />
-                        )}
-                      {post?.platform === platformTypesNum.instagram &&
-                        post?.post_type === PostTypesNum.FullHd_vertical && (
-                          <DisplayStories
-                            post={post}
-                            platformId={platformTypesNum.instagram}
-                          />
-                        )}
-                      {post?.platform === platformTypesNum.youtube &&
-                        post?.post_type === PostTypesNum.FullHd_vertical && (
-                          <DisplayShorts
-                            post={post}
-                            platformId={platformTypesNum.youtube}
-                          />
-                        )}
-                      {post?.platform === platformTypesNum.youtube &&
-                        post?.post_type === PostTypesNum.FullHd_horizontal && (
-                          <DisplayVideos
-                            post={post}
-                            platformId={platformTypesNum.youtube}
-                          />
-                        )}
-                    </div>
-                  </AlertDialogContent>
-                </AlertDialog> */}
               </div>
             </div>
           ) : subcard?.api_status === orderStatus.order_review ? (

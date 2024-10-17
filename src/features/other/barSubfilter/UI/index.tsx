@@ -40,6 +40,7 @@ interface BarSubfilterProps {
   changeChatFilter?: (filter: chatTypesFilter) => void;
   fileFilter?: addFileFilter;
   changeFileFilter?: (filter: addFileFilter) => void;
+  badge?: (number | string)[];
 }
 
 interface IFilterOption {
@@ -59,6 +60,7 @@ export const BarSubfilter: FC<BarSubfilterProps> = ({
   changeChatFilter,
   fileFilter,
   changeFileFilter,
+  badge,
 }) => {
   const { t } = useTranslation();
   const role = Cookies.get("role")
@@ -100,6 +102,7 @@ export const BarSubfilter: FC<BarSubfilterProps> = ({
         changeCatalogFilter(option.type as catalogBarFilter);
     } else if (page === pageFilter.chat) {
       changeChatFilter && changeChatFilter(option.type as chatTypesFilter);
+      resetValues();
     } else if (page === pageFilter.createOrderFiles) {
       changeFileFilter && changeFileFilter(option.type as addFileFilter);
     }
@@ -132,6 +135,11 @@ export const BarSubfilter: FC<BarSubfilterProps> = ({
             onClick={() => toggleBar(option)}
           >
             {t(option.name)}
+            {!!badge && !!badge?.[index] && (
+              <div className={styles.badge}>
+                <span>{badge?.[index]}</span>
+              </div>
+            )}
           </li>
         ))}
       </ul>

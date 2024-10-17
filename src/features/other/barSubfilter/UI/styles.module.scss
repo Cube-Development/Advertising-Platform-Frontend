@@ -1,10 +1,32 @@
 .types {
   --borderSize: 1px;
   --borderRadius: 25px;
-  overflow: hidden;
+  // overflow: hidden;
   background: rgba($color: #4772e6, $alpha: 0.1);
   box-shadow: inset 0px 0px 5px 1px rgba($color: #4772e6, $alpha: 0.3);
   border-radius: var(--borderRadius);
+
+  .badge {
+    position: absolute;
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    padding: 5px;
+    background: red;
+    min-width: 20px;
+    min-height: 20px;
+    border-radius: 20px;
+    top: -5px;
+    right: -5px;
+
+    span {
+      color: var(--Personal-colors-White);
+      font-size: 10px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 1;
+    }
+  }
 
   .profile {
     display: flex; /* Используем flex контейнер */
@@ -23,6 +45,7 @@
       cursor: pointer;
       white-space: nowrap;
       flex: 1; /* Равномерно распределить пространство между элементами */
+      position: relative;
     }
   }
 
@@ -73,6 +96,7 @@
       cursor: pointer;
       flex: 1; /* Равномерно распределить пространство между элементами */
       white-space: nowrap;
+      position: relative;
 
       @media (max-width: 576px) {
         padding: 15px 10px;
