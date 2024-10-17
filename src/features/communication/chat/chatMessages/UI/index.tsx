@@ -30,7 +30,6 @@ import {
   getFormattedDateTime,
 } from "@shared/functions";
 import { useAppDispatch, useAppSelector, useDebounce } from "@shared/hooks";
-import HardBreak from "@tiptap/extension-hard-break";
 import Link from "@tiptap/extension-link";
 import Underline from "@tiptap/extension-underline";
 import { EditorContent, useEditor } from "@tiptap/react";
@@ -43,7 +42,6 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { animateScroll } from "react-scroll";
 import { v4 as uuidv4 } from "uuid";
-import { SkeletonChatMessage } from "../skeleton";
 import styles from "./styles.module.scss";
 
 interface ChatMessagesProps {
@@ -150,7 +148,10 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
   }, [card]);
 
   useEffect(() => {
-    if ((data?.history?.length || 0) <= INTERSECTION_ELEMENTS.chat) {
+    if (
+      data?.history &&
+      (data?.history?.length || 0) <= INTERSECTION_ELEMENTS.chat
+    ) {
       if (containerRef.current && !isSendMessage) {
         const scrollTo = itemRefs.current
           .slice(0, history?.length)
@@ -160,6 +161,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
 
         containerRef.current.scrollTop =
           scrollTo + (INTERSECTION_ELEMENTS.chat - 1) * 15;
+        setLastMessageToRead(data?.history[data?.history?.length - 1]);
       }
     }
   }, [data?.history?.length]);
@@ -505,11 +507,11 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
     }
   }, [isNewMessage]);
 
-  useEffect(() => {
-    if (data && !lastMessageToRead) {
-      setLastMessageToRead(data?.history[data?.history?.length - 1]);
-    }
-  }, [data]);
+  // useEffect(() => {
+  //   if (data && !lastMessageToRead) {
+  //     setLastMessageToRead(data?.history[data?.history?.length - 1]);
+  //   }
+  // }, [data]);
 
   useEffect(() => {
     if (lastMessageToRead) {

@@ -5,7 +5,7 @@ import {
   useGetAuthTokenMutation,
   useGetWebsocketTokenMutation,
 } from "@entities/communication";
-import { useToast } from "@shared/ui/shadcn-ui/ui/use-toast";
+import { useAppSelector } from "@shared/hooks";
 import { Centrifuge, PublicationContext } from "centrifuge";
 import Cookies from "js-cookie";
 import React, {
@@ -15,7 +15,6 @@ import React, {
   useEffect,
   useRef,
 } from "react";
-import { useTranslation } from "react-i18next";
 
 interface CentrifugeContextType {
   centrifuge: Centrifuge | null;
@@ -48,8 +47,7 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
   const handleReadMessageRef = useRef<(message: IMessageNewSocket) => void>(
     () => {},
   );
-
-  const { t } = useTranslation();
+  const { isAuth } = useAppSelector((state) => state.user);
   const [getWebsocketToken] = useGetWebsocketTokenMutation();
   const [getAuthToken] = useGetAuthTokenMutation();
   const WS_ENDPOINT = "ws://167.172.186.13:8000/connection/websocket";
@@ -84,7 +82,8 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
             handleNewMessageChatRef.current(newMessage);
             handleNewMessageRef.current(newMessage);
           } else if (
-            newMessage?.method === notificationsTypes.order_message_read
+            newMessage?.method === notificationsTypes.order_message_read ||
+            newMessage?.method === notificationsTypes.project_message_read
           ) {
             handleReadMessageRef.current(newMessage);
           }
@@ -100,9 +99,10 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
         console.error("Error:", error);
       }
     };
-
-    initializeCentrifuge();
-  }, []);
+    if (isAuth) {
+      initializeCentrifuge();
+    }
+  }, [isAuth]);
 
   const OrderMessageSend = async (message: IMessageSendSocket) => {
     if (!centrifugeRef.current)

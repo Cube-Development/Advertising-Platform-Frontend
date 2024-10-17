@@ -55,9 +55,16 @@
 
   &__left {
     display: grid;
-    grid-template: min-content min-content 1fr / 1fr;
     border-right: 0.5px solid rgba(0, 0, 0, 0.3);
     overflow: hidden;
+
+    &.gridA {
+      grid-template: min-content min-content 1fr / 1fr;
+    }
+
+    &.gridB {
+      grid-template: min-content 1fr / 1fr;
+    }
 
     .title {
       font-size: 24px;
@@ -67,7 +74,7 @@
       color: var(--Personal-colors-main);
       padding: 15px 25px;
       text-align: center;
-      border-bottom: 0.5px solid rgba(0, 0, 0, 0.3);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 
       @media (max-width: 576px) {
         font-weight: 500;
@@ -78,14 +85,14 @@
       display: grid;
       grid-auto-flow: column;
       padding: 10px;
-      border-bottom: 0.5px solid rgba(0, 0, 0, 0.3);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 
       li {
         font-size: 14px;
         font-style: normal;
         font-weight: 600;
         line-height: 1;
-        padding: 10px 0;
+        padding: 10px;
 
         @media (max-width: 576px) {
           font-weight: 500;

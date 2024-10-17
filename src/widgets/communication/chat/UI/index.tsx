@@ -79,7 +79,10 @@ export const Chat: FC<IChatProps> = ({
   );
 
   const selectedChats =
-    chatFilter === chatTypesFilter.blogger ? chatsOrder : chatsProject;
+    chatFilter === chatTypesFilter.blogger || role === roles.blogger
+      ? chatsOrder
+      : chatsProject;
+
   const countOrderMessage =
     chatsOrder?.reduce(
       (total, item) =>
@@ -264,8 +267,6 @@ export const Chat: FC<IChatProps> = ({
     }
   };
 
-  // console.log("chatsOrder", chatsOrder);
-
   useEffect(() => {
     if (orderId && isOpen) {
       setChatFilter(chatTypesFilter.blogger);
@@ -310,7 +311,9 @@ export const Chat: FC<IChatProps> = ({
             )}
           </AlertDialogTrigger>
           <AlertDialogContent className={`${styles.content} ${styles.dialog}`}>
-            <div className={styles.content__left}>
+            <div
+              className={`${styles.content__left} ${role !== roles.blogger ? styles.gridA : styles.gridB}`}
+            >
               <p className={styles.title}>{t("chat.my_messages")}</p>
               {role !== roles.blogger && (
                 <div className={styles.filter}>
@@ -327,7 +330,7 @@ export const Chat: FC<IChatProps> = ({
                 <div className={styles.all_chats}>
                   {selectedChats?.map((card, index) => (
                     <motion.div
-                      key={index}
+                      key={card?.order_id || card?.project_id || index}
                       initial="hidden"
                       animate="visible"
                       custom={index % (selectedChats?.length || 1)}
@@ -418,7 +421,9 @@ export const Chat: FC<IChatProps> = ({
                 <CancelIcon2 />
               </div>
             </DrawerClose>
-            <div className={styles.content__left}>
+            <div
+              className={`${styles.content__left} ${role !== roles.blogger ? styles.gridA : styles.gridB}`}
+            >
               <p className={styles.title}>{t("chat.my_messages")}</p>
               <div className={styles.filter}>
                 <BarSubfilter
@@ -433,7 +438,7 @@ export const Chat: FC<IChatProps> = ({
                 <div className={styles.all_chats}>
                   {selectedChats?.map((card, index) => (
                     <motion.div
-                      key={index}
+                      key={card?.order_id || card?.project_id || index}
                       initial="hidden"
                       animate="visible"
                       custom={index % (selectedChats?.length || 1)}
