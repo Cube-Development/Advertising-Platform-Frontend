@@ -116,7 +116,6 @@ export const Chat: FC<IChatProps> = ({
   };
 
   const handle = () => {
-    console.log("setCurrentChat(null);");
     setCurrentChat(null);
   };
 
@@ -223,7 +222,6 @@ export const Chat: FC<IChatProps> = ({
 
   const handleReadMessage = (message: IMessageNewSocket) => {
     const datetime = message?.message_date + " " + message?.message_time;
-    console.log("READ READ READ");
     if (message?.order_id) {
       dispatch(
         chatAPI.util.updateQueryData(
@@ -274,12 +272,7 @@ export const Chat: FC<IChatProps> = ({
       setCurrentChat(
         chatsOrder?.find((item) => item?.order_id === orderId) || null,
       );
-    }
-  }, [orderId, isOpen]);
-
-  useEffect(() => {
-    console.log("MANAGER CHAT", projectId, isOpen);
-    if (projectId && isOpen) {
+    } else if (projectId && isOpen) {
       setChatFilter(
         role === roles.advertiser
           ? chatTypesFilter.manager
@@ -289,7 +282,7 @@ export const Chat: FC<IChatProps> = ({
         chatsProject?.find((item) => item?.project_id === projectId) || null,
       );
     }
-  }, [projectId, isOpen]);
+  }, [isOpen]);
 
   OrderMessageNewChat(handleNewMessage);
   OrderReadMessage(handleReadMessage);

@@ -51,15 +51,16 @@ interface ChatMessagesProps {
 }
 
 export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
-  const { t } = useTranslation();
-  const { OrderMessageSend, OrderMessageNew } = useCentrifuge();
-  const { role } = useAppSelector((state) => state.user);
   let currentDate: string | null = null;
   const userId = Cookies.get("user_id")!;
+  const { t } = useTranslation();
+  const { role } = useAppSelector((state) => state.user);
+  const { OrderMessageSend, OrderMessageNew } = useCentrifuge();
   const dispatch = useAppDispatch();
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesRef = useRef<(HTMLDivElement | null)[]>([]);
   const containerRef = useRef<HTMLDivElement | null>(null);
+  const previousScrollHeightRef = useRef<number>(0);
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [readOrderMessage] = useReadOrderMessageMutation();
   const [readProjectMessage] = useReadProjectMessageMutation();
@@ -70,8 +71,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
     useState<boolean>(false);
   const [lastMessageToRead, setLastMessageToRead] =
     useState<IMessageNewSocket | null>(null);
-
-  const previousScrollHeightRef = useRef<number>(0);
+  const containerArrowHeight = 250;
 
   const getDefaultValues = (card: IChatData) => ({
     ...(card?.type === chatType.order
@@ -109,9 +109,9 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
         },
         autolink: false,
       }),
-      HardBreak.configure({
-        // keepMarks: false,
-      }),
+      // HardBreak.configure({
+      //   keepMarks: true,
+      // }),
     ],
     content: newMessage,
     editorProps: {
@@ -165,19 +165,19 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
   }, [data?.history?.length]);
 
   useEffect(() => {
-    if (containerRef.current && !isFetching) {
+    if (containerRef.current && !isFetching && !isNewMessage) {
       const newScrollHeight = containerRef.current.scrollHeight;
       containerRef.current.scrollTop +=
         newScrollHeight - previousScrollHeightRef.current;
     }
-  }, [data?.history?.length, isFetching]);
+  }, [isFetching]);
 
   useEffect(() => {
     const handleScroll = () => {
       if (containerRef.current) {
         const isScrolledUp =
           containerRef.current.scrollTop + containerRef.current.clientHeight <
-          containerRef.current.scrollHeight - 250;
+          containerRef.current.scrollHeight - containerArrowHeight;
         setShowScrollDownButton(isScrolledUp);
       }
     };
@@ -191,7 +191,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
         containerRef.current.removeEventListener("scroll", handleScroll);
       }
     };
-  }, []);
+  }, [containerRef.current]);
 
   const handlePaginationHistory = () => {
     if (data?.history) {
@@ -266,6 +266,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
 
   const handleSendMessage = () => {
     const message = cleanMessage(newMessage);
+    // const message = newMessage;
     if (message !== "") {
       const orderMessage: IMessageSendSocket = {
         ...(card?.type === chatType.order
@@ -280,6 +281,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
         user_id: userId,
         message: message,
       };
+
       OrderMessageSend(orderMessage);
 
       const datetime = getFormattedDateTime();
@@ -333,16 +335,11 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
   };
 
   const handleReadMessage = (message: IMessageNewSocket) => {
-    console.log("handleReadMessage");
     if (
       message?.status === MessageStatus.unread &&
       message?.recipient === RecipientType.receiver &&
       message?.order_id
     ) {
-      console.log(
-        "READ MESSAGE",
-        message?.message_date + " " + message?.message_time,
-      );
       readOrderMessage({
         order_id: message?.order_id,
         message_datetime: message?.message_date + " " + message?.message_time,
@@ -391,7 +388,6 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
                   }
                   return chat;
                 });
-                console.log("newChatOrder", newChatOrder);
                 draft.splice(0, draft.length, ...newChatOrder);
               },
             ),
@@ -405,10 +401,6 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
       message?.recipient === RecipientType.receiver &&
       message?.project_id
     ) {
-      console.log(
-        "READ MESSAGE PROJECT",
-        message?.message_date + " " + message?.message_time,
-      );
       readProjectMessage({
         project_id: message?.project_id,
         message_datetime: message?.message_date + " " + message?.message_time,
@@ -506,8 +498,10 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
 
   useEffect(() => {
     if (isNewMessage && messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "auto" });
       setIsNewMessage(false);
+      if (!showScrollDownButton) {
+        messagesEndRef.current.scrollIntoView({ behavior: "auto" });
+      }
     }
   }, [isNewMessage]);
 
