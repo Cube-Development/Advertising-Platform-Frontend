@@ -1,12 +1,16 @@
 import {
+  ContentType,
   FILES,
+  getContentType,
   tarifData,
   TarifParameters,
+  useGetUploadLinkMutation,
   usePostBuyTarifMutation,
 } from "@entities/project";
 import { IBuyTarif } from "@entities/project/types/turnkey";
 import {
   AddFileIcon,
+  CancelIcon2,
   HandshakeIcon2,
   LoginIcon,
   SadSmileIcon,
@@ -38,6 +42,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
+import { getFileExtension } from "@shared/functions";
 
 interface BuyTarifProps {
   tarif: number;
@@ -55,6 +60,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
   const [dragActive, setDragActive] = useState<boolean>(false);
   const [isTarifBought, setIsTarifBought] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [getUploadLink] = useGetUploadLinkMutation();
 
   const tarifPrice =
     TarifParameters.find((item) => item.index === tarif)?.price || 0;
@@ -123,11 +129,14 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
     // console.log(formState.links);
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (e.target.files && e.target.files[0]) {
       setFiles([...e.target.files]);
-      // onChange([...e.target.files]);
+      try {
+        await uploadFilesAndMedia([...e.target.files]);
+      } finally {
+      }
     }
   };
 
@@ -199,6 +208,29 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
     };
   }, []);
 
+  const uploadFilesAndMedia = async (files: File[]) => {
+    console.log(files);
+    await Promise.all(
+      files.map(async (file) => {
+        const data = await getUploadLink({
+          extension: getFileExtension(file),
+          content_type: ContentType.file,
+        }).unwrap();
+        await fetch(data?.url, {
+          method: "PUT",
+          body: file,
+        });
+        if (!formState.attached_files) {
+          formState.attached_files = [];
+        }
+        formState.attached_files.push({
+          content_type: ContentType.file,
+          content: data.file_name,
+        });
+      }),
+    );
+  };
+
   return (
     <>
       {isAuth ? (
@@ -225,9 +257,11 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
                           <>
                             <div className={styles.menu__top}>
                               <p>{t("turnkey.chain.have_balance.title")}</p>
-                              {/* <button onClick={() => onChange(null, false)}> */}
-                              <button onClick={handleButtonClick}>
-                                <div className={styles.close__icon} />
+                              <button
+                                className={styles.close}
+                                onClick={handleButtonClick}
+                              >
+                                <CancelIcon2 />
                               </button>
                             </div>
                             <ScrollArea>
@@ -445,9 +479,11 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
                         ) : isTarifBought && isHaveBalance ? (
                           <>
                             <div className={styles.menu__top}>
-                              {/* <button onClick={() => onChange(null, false)}> */}
-                              <button onClick={handleButtonClick}>
-                                <div className={styles.close__icon} />
+                              <button
+                                className={styles.close}
+                                onClick={handleButtonClick}
+                              >
+                                <CancelIcon2 />
                               </button>
                             </div>
                             <div className={styles.menu__middle}>
@@ -480,9 +516,11 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
                             <>
                               <div className={styles.menu__top}>
                                 <p>{t("turnkey.chain.no_balance.title")}</p>
-                                {/* <button onClick={() => onChange(null, false)}> */}
-                                <button onClick={handleButtonClick}>
-                                  <div className={styles.close__icon} />
+                                <button
+                                  className={styles.close}
+                                  onClick={handleButtonClick}
+                                >
+                                  <CancelIcon2 />
                                 </button>
                               </div>
                               <div className={styles.menu__middle}>
@@ -543,7 +581,9 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
                     <div className={styles.menu__top}>
                       <p>{t("turnkey.chain.have_balance.title")}</p>
                       <DrawerClose>
-                        <div className={styles.close__icon} />
+                        <div className={styles.close}>
+                          <CancelIcon2 />
+                        </div>
                       </DrawerClose>
                     </div>
                     <ScrollArea>
@@ -597,7 +637,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
                                 <div key={index} className={styles.url__row}>
                                   <div className={styles.url__text}>
                                     <p>№ {index + 1}</p>
-                                    <span>{url}</span>
+                                    <span className="truncate">{url}</span>
                                   </div>
                                   <button onClick={() => handleDeleteUrl(url)}>
                                     <TrashBasketIcon />
@@ -722,15 +762,18 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
                 ) : isTarifBought && isHaveBalance ? (
                   <>
                     <div className={styles.menu__top}>
+                      <p>{t("turnkey.chain.success.title")}</p>
                       <DrawerClose>
-                        <div className={styles.close__icon} />
+                        <div className={styles.close}>
+                          <CancelIcon2 />
+                        </div>
                       </DrawerClose>
                     </div>
                     <div className={styles.menu__middle}>
                       <div className={styles.success__wrapper}>
                         <div className={styles.success__title}>
                           <HandshakeIcon2 />
-                          <p>{t("turnkey.chain.success.title")}</p>
+                          <p>{t("turnkey.chain.success.info")}</p>
                         </div>
                         <div className={styles.success__text}>
                           <p>
@@ -753,7 +796,9 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
                       <div className={styles.menu__top}>
                         <p>{t("turnkey.chain.no_balance.title")}</p>
                         <DrawerClose>
-                          <div className={styles.close__icon} />
+                          <div className={styles.close}>
+                            <CancelIcon2 />
+                          </div>
                         </DrawerClose>
                       </div>
                       <div className={styles.menu__middle}>

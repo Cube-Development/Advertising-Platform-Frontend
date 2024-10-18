@@ -416,15 +416,17 @@ export const Chat: FC<IChatProps> = ({
             )}
           </DrawerTrigger>
           <DrawerContent className={`${styles.content} ${styles.drawer}`}>
-            <DrawerClose>
-              <div className={styles.close} onClick={handleCloseChat}>
-                <CancelIcon2 />
-              </div>
-            </DrawerClose>
             <div
               className={`${styles.content__left} ${role !== roles.blogger ? styles.gridA : styles.gridB}`}
             >
-              <p className={styles.title}>{t("chat.my_messages")}</p>
+              <div className={styles.title}>
+                <p>{t("chat.my_messages")}</p>
+                <DrawerClose>
+                  <div className={styles.close} onClick={handleCloseChat}>
+                    <CancelIcon2 />
+                  </div>
+                </DrawerClose>
+              </div>
               <div className={styles.filter}>
                 <BarSubfilter
                   page={pageFilter.chat}

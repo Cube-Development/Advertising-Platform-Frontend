@@ -32,8 +32,9 @@
     width: 100vw;
 
     .close {
-      top: 0;
-      right: 0;
+      top: 50%;
+      right: 15px;
+      transform: translateY(-50%);
     }
 
     .content__left {
@@ -67,14 +68,16 @@
     }
 
     .title {
+      display: grid;
+      position: relative;
       font-size: 24px;
       font-style: normal;
+      text-align: start;
       font-weight: 600;
       line-height: 1;
       color: var(--Personal-colors-main);
-      padding: 15px 25px;
-      text-align: center;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+      padding: 20px 50px;
+      border-bottom: 1px solid var(--black-20, #ccc);
 
       @media (max-width: 576px) {
         font-weight: 500;
@@ -85,7 +88,7 @@
       display: grid;
       grid-auto-flow: column;
       padding: 10px;
-      border-bottom: 1px solid rgba(0, 0, 0, 0.3);
+      border-bottom: 1px solid var(--black-20, #ccc);
 
       li {
         font-size: 14px;

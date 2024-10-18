@@ -191,8 +191,8 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
                               <div className={styles.text}>
                                 <p>{file.fileName}</p>
                                 <span>
-                                  {file.fileSize} {file.sizeType} /{" "}
-                                  {file.currentSize} {file.sizeType}
+                                  {file.currentSize} {file.sizeType} /{" "}
+                                  {file.fileSize} {file.sizeType}
                                 </span>
                               </div>
                             </div>
@@ -277,8 +277,8 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
                               <div className={styles.text}>
                                 <p>{file.fileName}</p>
                                 <span>
-                                  {file.fileSize} {file.sizeType} /{" "}
-                                  {file.currentSize} {file.sizeType}
+                                  {file.currentSize} {file.sizeType} /{" "}
+                                  {file.fileSize} {file.sizeType}
                                 </span>
                               </div>
                             </div>
