@@ -1,7 +1,6 @@
 import {
   ContentType,
   FILES,
-  getContentType,
   tarifData,
   TarifParameters,
   useGetUploadLinkMutation,
@@ -18,22 +17,23 @@ import {
   YesIcon,
 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
+import { getFileExtension } from "@shared/functions";
 import { useAppSelector } from "@shared/hooks";
-import { pageFilter, paths } from "@shared/routing";
+import { paths } from "@shared/routing";
 import {
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogFooter,
+  DialogTrigger,
   Drawer,
   DrawerClose,
   DrawerContent,
   DrawerTrigger,
   formatFileSize,
+  ScrollArea,
   ToastAction,
   useToast,
-  ScrollArea,
-  Dialog,
-  DialogTrigger,
-  DialogContent,
-  DialogClose,
-  DialogFooter,
 } from "@shared/ui";
 import { AnimatePresence, motion } from "framer-motion";
 import { CircleX, FileIcon, InfoIcon } from "lucide-react";
@@ -42,7 +42,6 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
-import { getFileExtension } from "@shared/functions";
 
 interface BuyTarifProps {
   tarif: number;
@@ -599,7 +598,6 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
                           </div>
                           <textarea
                             id="input"
-                            // value={description}
                             rows={10}
                             onChange={handleChangeComment}
                             maxLength={1000}
@@ -699,7 +697,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
                                         "turnkey.chain.have_balance.file.value",
                                       )}
                                     </p>
-                                    <label className={styles.button}>
+                                    <label className={styles.file__button}>
                                       <span>
                                         {t(
                                           "turnkey.chain.have_balance.file.button",

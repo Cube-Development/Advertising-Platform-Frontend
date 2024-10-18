@@ -28,7 +28,7 @@
   }
 
   &.drawer {
-    height: 100vh;
+    height: calc(var(--vh) * 100);
     width: 100vw;
 
     .close {
@@ -38,7 +38,7 @@
     }
 
     .content__left {
-      height: 100vh;
+      height: calc(var(--vh) * 100);
     }
   }
 

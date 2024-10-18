@@ -59,7 +59,7 @@
 .menu {
   display: grid;
   grid-auto-flow: row;
-  height: 100vh !important;
+  height: calc(var(--vh) * 100) !important;
   align-content: space-between;
 
   &__top {
@@ -260,7 +260,7 @@
       }
     }
 
-    .button {
+    .file__button {
       display: grid;
       grid-auto-flow: row;
       justify-content: center;
@@ -283,6 +283,7 @@
         width: 0;
         height: 0;
         visibility: collapse;
+        width: 10px;
       }
     }
   }

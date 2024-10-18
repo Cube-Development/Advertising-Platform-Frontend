@@ -28,7 +28,7 @@
   }
 
   &.drawer {
-    height: 100vh;
+    height: calc(var(--vh) * 100);
   }
 
   .title {

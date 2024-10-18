@@ -3,7 +3,7 @@
   // top: var(--container-padding-top);
   top: 0;
   position: fixed;
-  height: 100vh;
+  height: calc(var(--vh) * 100);
   background: var(--Personal-colors-White);
   overflow-y: auto;
 
