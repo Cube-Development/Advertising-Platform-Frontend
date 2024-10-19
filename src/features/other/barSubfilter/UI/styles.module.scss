@@ -1,7 +1,6 @@
 .types {
   --borderSize: 1px;
   --borderRadius: 25px;
-  // overflow: hidden;
   background: rgba($color: #4772e6, $alpha: 0.1);
   box-shadow: inset 0px 0px 5px 1px rgba($color: #4772e6, $alpha: 0.3);
   border-radius: var(--borderRadius);
@@ -18,6 +17,7 @@
     border-radius: 20px;
     top: -5px;
     right: -5px;
+    z-index: 50;
 
     span {
       color: var(--Personal-colors-White);
@@ -83,7 +83,6 @@
     }
 
     .active {
-      // color: var(--Personal-colors-White) !important;
       -webkit-background-clip: text;
       -webkit-text-fill-color: var(--Personal-colors-White);
       background-clip: text;

@@ -126,7 +126,7 @@
   --font-size-xl-button-text: 14px;
 
   --margin-section-xl: 100px;
-  --cards-list-height: 100vh;
+  --cards-list-height: calc(var(--vh) * 100);
 
   /* Large (LG) */
   --font-size-title-main-lg: 36px;

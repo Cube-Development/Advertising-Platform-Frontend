@@ -7,7 +7,7 @@
       grid-template-rows: repeat(2, min-content);
       grid-template-columns: 1fr;
       background-color: var(--Personal-colors-White);
-      height: 100vh;
+      height: calc(var(--vh) * 100);
     }
 
     &__accordion {

@@ -38,7 +38,7 @@
   row-gap: 15px;
   width: 100%;
   background: #fff;
-  height: 100vh !important;
+  height: calc(var(--vh) * 100) !important;
 
   .top {
     display: grid;

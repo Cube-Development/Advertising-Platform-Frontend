@@ -147,7 +147,7 @@ main {
 .main_layout {
   display: flex;
   flex-direction: column;
-  min-height: calc(100vh - 80px);
+  min-height: calc(calc(var(--vh) * 100) - 80px);
   width: 100vw;
   background: url("/images/rootBg/desktopBG.png") repeat top center;
   background-size: cover;
