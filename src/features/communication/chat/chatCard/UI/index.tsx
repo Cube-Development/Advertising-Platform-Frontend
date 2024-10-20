@@ -1,4 +1,5 @@
 import { IChatData, getDateChat } from "@entities/communication";
+import { CubeDevelopmentIcon } from "@shared/assets";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -25,10 +26,18 @@ export const ChatCard: FC<ChatCardProps> = ({ card, isActive }) => {
   };
 
   return (
-    <div className={`${styles.channel} ${isActive ? styles.active : ""}`}>
+    <div
+      className={`${styles.channel} ${isActive ? styles.active : ""} ${card?.unread_count ? styles.unread : ""}`}
+    >
       <div className={styles.info}>
         <div className={styles.logo}>
-          <img src={card?.avatar} alt="" />
+          {card?.order_id ? (
+            <img src={card?.avatar} alt="" />
+          ) : (
+            <div className={styles.icon}>
+              <CubeDevelopmentIcon />
+            </div>
+          )}
         </div>
         <div className={styles.description}>
           <p className={styles.title}>

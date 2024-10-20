@@ -20,6 +20,7 @@ import {
   ChatIcon,
   ChatIcon2,
   ChatMainIcon,
+  CubeDevelopmentIcon,
 } from "@shared/assets";
 import {
   BREAKPOINT,
@@ -37,6 +38,8 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
+  DrawerDescription,
+  DrawerTitle,
   DrawerTrigger,
   useToast,
 } from "@shared/ui";
@@ -314,7 +317,9 @@ export const Chat: FC<IChatProps> = ({
             <div
               className={`${styles.content__left} ${role !== roles.blogger ? styles.gridA : styles.gridB}`}
             >
-              <p className={styles.title}>{t("chat.my_messages")}</p>
+              <div className={styles.title}>
+                <p>{t("chat.my_messages")}</p>
+              </div>
               {role !== roles.blogger && (
                 <div className={styles.filter}>
                   <BarSubfilter
@@ -361,9 +366,13 @@ export const Chat: FC<IChatProps> = ({
                   <div className={styles.top}>
                     <div className={styles.info}>
                       <div className={styles.logo}>
-                        <div>
-                          <img src={currentChat.avatar} alt="" />
-                        </div>
+                        {currentChat?.order_id ? (
+                          <img src={currentChat?.avatar} alt="" />
+                        ) : (
+                          <div className={styles.icon}>
+                            <CubeDevelopmentIcon />
+                          </div>
+                        )}
                       </div>
                       <div className={styles.description}>
                         <p className="truncate">
@@ -415,89 +424,104 @@ export const Chat: FC<IChatProps> = ({
               <p>{t("chat.role.advertiser")}</p>
             )}
           </DrawerTrigger>
-          <DrawerContent className={`${styles.content} ${styles.drawer}`}>
-            <div
-              className={`${styles.content__left} ${role !== roles.blogger ? styles.gridA : styles.gridB}`}
-            >
-              <div className={styles.title}>
-                <p>{t("chat.my_messages")}</p>
-                <DrawerClose>
-                  <div className={styles.close} onClick={handleCloseChat}>
-                    <CancelIcon2 />
+          <DrawerContent>
+            <div className={`${styles.content} ${styles.drawer}`}>
+              <div
+                className={`${styles.content__left} ${role !== roles.blogger ? styles.gridA : styles.gridB}`}
+              >
+                <DrawerTitle className={styles.title}>
+                  <DrawerDescription className={styles.description}>
+                    {t("chat.my_messages")}
+                  </DrawerDescription>
+                  <DrawerClose>
+                    <div className={styles.close} onClick={handleCloseChat}>
+                      <CancelIcon2 />
+                    </div>
+                  </DrawerClose>
+                </DrawerTitle>
+                {role !== roles.blogger && (
+                  <div className={styles.filter}>
+                    <BarSubfilter
+                      page={pageFilter.chat}
+                      resetValues={handle}
+                      chatFilter={chatFilter}
+                      changeChatFilter={setChatFilter}
+                      badge={[countOrderMessage, countProjectMessage]}
+                    />
                   </div>
-                </DrawerClose>
+                )}
+                {selectedChats?.length ? (
+                  <div className={styles.all_chats}>
+                    {selectedChats?.map((card, index) => (
+                      <motion.div
+                        key={card?.order_id || card?.project_id || index}
+                        initial="hidden"
+                        animate="visible"
+                        custom={index % (selectedChats?.length || 1)}
+                        variants={PAGE_ANIMATION.animationUp}
+                        onClick={() => handleChangeChat(card)}
+                      >
+                        <ChatCard
+                          card={card}
+                          isActive={
+                            !!(
+                              currentChat &&
+                              (currentChat.type === chatType.order
+                                ? currentChat.order_id === card?.order_id
+                                : currentChat.project_id === card?.project_id)
+                            )
+                          }
+                        />
+                      </motion.div>
+                    ))}
+                  </div>
+                ) : (
+                  <></>
+                )}
               </div>
-              <div className={styles.filter}>
-                <BarSubfilter
-                  page={pageFilter.chat}
-                  resetValues={handle}
-                  chatFilter={chatFilter}
-                  changeChatFilter={setChatFilter}
-                  badge={[countOrderMessage, countProjectMessage]}
-                />
-              </div>
-              {selectedChats?.length ? (
-                <div className={styles.all_chats}>
-                  {selectedChats?.map((card, index) => (
-                    <motion.div
-                      key={card?.order_id || card?.project_id || index}
-                      initial="hidden"
-                      animate="visible"
-                      custom={index % (selectedChats?.length || 1)}
-                      variants={PAGE_ANIMATION.animationUp}
-                      onClick={() => handleChangeChat(card)}
-                    >
-                      <ChatCard
-                        card={card}
-                        isActive={
-                          !!(
-                            currentChat &&
-                            (currentChat.type === chatType.order
-                              ? currentChat.order_id === card?.order_id
-                              : currentChat.project_id === card?.project_id)
-                          )
-                        }
-                      />
-                    </motion.div>
-                  ))}
-                </div>
-              ) : (
-                <></>
-              )}
-            </div>
-            <AnimatePresence>
-              {currentChat && (
-                <motion.div
-                  initial="hidden"
-                  animate="visible"
-                  exit="hidden"
-                  transition={PAGE_ANIMATION.sideTransition.transition}
-                  variants={PAGE_ANIMATION.sideTransition}
-                  className={styles.content__right}
-                >
-                  <div className={styles.top}>
-                    <div className={styles.info}>
-                      <div className={styles.logo}>
-                        <div>
-                          <img src={currentChat.avatar} alt="" />
+              <AnimatePresence>
+                {currentChat && (
+                  <motion.div
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                    transition={PAGE_ANIMATION.sideTransition.transition}
+                    variants={PAGE_ANIMATION.sideTransition}
+                    className={styles.content__right}
+                    drag="x" // Возможность перемещения по оси X
+                    dragConstraints={{ left: 0, right: 0 }} // Ограничения по перемещению
+                    onDragEnd={(event, info) => {
+                      if (info.offset.x > 100) handleCloseChat(); // Если свайп вправо больше 100px, закрыть чат
+                    }}
+                  >
+                    <div className={styles.top}>
+                      <div className={styles.info}>
+                        <div className={styles.logo}>
+                          {currentChat?.order_id ? (
+                            <img src={currentChat?.avatar} alt="" />
+                          ) : (
+                            <div className={styles.icon}>
+                              <CubeDevelopmentIcon />
+                            </div>
+                          )}
+                        </div>
+                        <div className={styles.description}>
+                          <p>
+                            {currentChat.project_name
+                              ? `${t("chat.campaign")} ${currentChat.project_name} (${t("chat.channel")} ${currentChat.channel_name})`
+                              : t("chat.types.administration")}
+                          </p>
                         </div>
                       </div>
-                      <div className={styles.description}>
-                        <p>
-                          {currentChat.project_name
-                            ? `${t("chat.campaign")} ${currentChat.project_name} (${t("chat.channel")} ${currentChat.channel_name})`
-                            : t("chat.types.administration")}
-                        </p>
-                      </div>
                     </div>
-                  </div>
-                  <ChatMessages card={currentChat} />
-                  <div className={styles.arrow} onClick={handleCloseChat}>
-                    <ArrowLongHorizontalIcon className="icon__grey" />
-                  </div>
-                </motion.div>
-              )}
-            </AnimatePresence>
+                    <ChatMessages card={currentChat} />
+                    <div className={styles.arrow} onClick={handleCloseChat}>
+                      <ArrowLongHorizontalIcon className="icon__grey" />
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
           </DrawerContent>
         </Drawer>
       )}
