@@ -228,8 +228,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
         return {
           ...response,
           status: arg?.status,
-          isLast:
-            response.projects.length !== INTERSECTION_ELEMENTS.managerOrders,
+          isLast: response.projects.length !== INTERSECTION_ELEMENTS.advOrders,
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
@@ -242,7 +241,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
             ...newItems,
             status: arg.arg.status,
             isLast:
-              newItems.projects.length !== INTERSECTION_ELEMENTS.managerOrders,
+              newItems.projects.length !== INTERSECTION_ELEMENTS.advOrders,
           };
         }
 
@@ -250,8 +249,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
           ...newItems,
           projects: [...currentCache.projects, ...newItems.projects],
           status: arg.arg.status,
-          isLast:
-            newItems.projects.length !== INTERSECTION_ELEMENTS.managerOrders,
+          isLast: newItems.projects.length !== INTERSECTION_ELEMENTS.advOrders,
         };
       },
     }),

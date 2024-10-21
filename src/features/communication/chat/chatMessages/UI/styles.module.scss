@@ -1,13 +1,8 @@
 .wrapper {
   display: grid;
   grid-auto-flow: row;
-
-  // align-items: end;
-  // background: url("/images/phoneDisplay/tgbg.png") no-repeat;
-  // background-size: cover;
   position: relative;
-  // overflow: hidden;
-  height: calc(100% - 70px);
+  overflow: hidden;
 
   .no_messages {
     position: absolute;
@@ -60,8 +55,6 @@
     .all__messages {
       display: grid;
       grid-auto-flow: row;
-      // row-gap: 15px;
-      // padding-bottom: 60px;
 
       .skeleton_wrapper {
         display: grid;
@@ -180,16 +173,6 @@
         }
       }
     }
-
-    // &.receiver {
-    //   background: #F0F4F8;
-    //   color: var(--Personal-colors-black);
-    // }
-
-    // &.sender {
-    //   background: hsla(254, 76%, 64%);
-    //   color: var(--Personal-colors-White);
-    // }
   }
 
   .date {
@@ -286,7 +269,7 @@
     position: relative;
 
     font-family: Montserrat;
-    font-size: 12px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 500;
 
@@ -294,6 +277,11 @@
       width: inherit;
       word-break: break-all;
       outline: none;
+      p {
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+      }
 
       &::-webkit-scrollbar {
         width: 4px;
@@ -313,7 +301,7 @@
     span {
       position: absolute;
       pointer-events: none;
-      top: 10px;
+      top: 8px;
       left: 20px;
       color: #999;
     }

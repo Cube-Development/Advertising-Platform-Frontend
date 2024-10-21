@@ -32,6 +32,7 @@ export { CloseIcon } from "./close";
 export { CompliteIcon } from "./complite";
 export { CopyIcon } from "./copy";
 export { CreateIcon } from "./create";
+export { CubeDevelopmentIcon } from "./cubeDevelopment";
 export { DownloadIcon } from "./download";
 export { DownloadCompliteIcon } from "./downloadComplite";
 export { DocumentCheckmarkIcon } from "./documentCheckmark";

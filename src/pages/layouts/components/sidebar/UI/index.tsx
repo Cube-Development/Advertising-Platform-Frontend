@@ -8,7 +8,7 @@ import { AccordionItem } from "@radix-ui/react-accordion";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { paths } from "@shared/routing";
 import { Accordion } from "@shared/ui/shadcn-ui/ui/accordion";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 import { IMenuItem } from "../../config";
@@ -56,8 +56,33 @@ export const Sidebar: FC = () => {
           ? managerMenu
           : [];
 
+  const [isScrollingUp, setIsScrollingUp] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY < lastScrollY) {
+        setIsScrollingUp(true); // Скроллим вверх
+      } else {
+        setIsScrollingUp(false); // Скроллим вниз
+      }
+
+      setLastScrollY(currentScrollY);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, [lastScrollY]);
+
   return (
-    <div className={styles.wrapper}>
+    <div
+      className={`${styles.wrapper} ${isScrollingUp || lastScrollY === 0 ? styles.visible : styles.hidden}`}
+    >
       <div className={styles.menu}>
         <div className={styles.switcher}>
           <div className={styles.switcher__row}>

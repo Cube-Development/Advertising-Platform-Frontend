@@ -31,6 +31,8 @@ import {
   Drawer,
   DrawerClose,
   DrawerContent,
+  DrawerDescription,
+  DrawerTitle,
   DrawerTrigger,
 } from "@shared/ui";
 import { AnimatePresence, motion } from "framer-motion";
@@ -138,7 +140,7 @@ export const Notifications: FC = () => {
                   <CancelIcon2 />
                 </div>
               </AlertDialogCancel>
-              {currentNotification && (
+              {!!currentNotification && (
                 <div className={styles.arrow} onClick={handleClose}>
                   <ArrowSmallVerticalIcon className="active__icon" />
                 </div>
@@ -164,7 +166,7 @@ export const Notifications: FC = () => {
                   }).map((_, index) => (
                     <SkeletonNotificationCard key={index} />
                   ))}
-                {!data?.isLast && (
+                {!data?.isLast && !isFetching && (
                   <DinamicPagination onChange={handleChangePage} />
                 )}
                 <AnimatePresence>
@@ -200,19 +202,19 @@ export const Notifications: FC = () => {
             />
           </DrawerTrigger>
           <DrawerContent className={`${styles.content} ${styles.drawer}`}>
-            <div className={styles.title}>
-              <p>{t("notifications.title")}</p>
+            <DrawerTitle className={styles.title}>
+              <DrawerDescription>{t("notifications.title")}</DrawerDescription>
               <DrawerClose onClick={handleClose}>
                 <div className={styles.close}>
                   <CancelIcon2 />
                 </div>
               </DrawerClose>
-              {currentNotification && (
+              {!!currentNotification && (
                 <div className={styles.arrow} onClick={handleClose}>
                   <ArrowSmallVerticalIcon className="active__icon" />
                 </div>
               )}
-            </div>
+            </DrawerTitle>
             {data?.notifications?.length ? (
               <div className={styles.notifications}>
                 {data?.notifications.map((card, index) => (
@@ -233,7 +235,7 @@ export const Notifications: FC = () => {
                   }).map((_, index) => (
                     <SkeletonNotificationCard key={index} />
                   ))}
-                {!data?.isLast && (
+                {!data?.isLast && !isFetching && (
                   <DinamicPagination onChange={handleChangePage} />
                 )}
                 <AnimatePresence>
@@ -245,6 +247,12 @@ export const Notifications: FC = () => {
                       transition={PAGE_ANIMATION.sideTransition.transition}
                       variants={PAGE_ANIMATION.sideTransition}
                       className={styles.message}
+                      drag="x"
+                      dragConstraints={{ left: 0, right: 0 }}
+                      onDragEnd={(event, info) => {
+                        console.log(event, info);
+                        if (info.offset.x > 100) handleClose(); // Если свайп вправо больше 100px, закрыть чат
+                      }}
                     >
                       <NotificationMessage card={currentNotification} />
                     </motion.div>

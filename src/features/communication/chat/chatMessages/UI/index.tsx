@@ -623,7 +623,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
       {data?.history?.length ? (
         <div id="all__messages" className={styles.check} ref={containerRef}>
           <div className={styles.all__messages}>
-            {!data?.isLast && (
+            {!data?.isLast && !isFetching && (
               <DinamicPagination onChange={handlePaginationHistory} />
             )}
             {/* {!!visibleDate && (

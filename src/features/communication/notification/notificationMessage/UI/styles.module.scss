@@ -4,6 +4,7 @@
   border-bottom: 0.5px solid var(--black-20, #ccc);
   background: var(--Personal-colors-White);
   height: 100%;
+  grid-template: 1fr min-content / 1fr;
   position: relative;
 
   .text__wrapper {
@@ -11,7 +12,7 @@
     grid-template: min-content 1fr / 1fr;
     row-gap: 15px;
     overflow-y: scroll;
-    padding: 25px 15px 90px 15px;
+    padding: 25px 15px;
 
     .title {
       color: var(--Personal-colors-black);
@@ -32,9 +33,6 @@
   }
 
   .support {
-    position: absolute;
-    bottom: 0;
-    left: 0;
     display: grid;
     align-content: center;
     justify-content: center;
@@ -45,9 +43,9 @@
 
     span {
       color: #000;
-      font-size: 14px;
+      font-size: 12px;
       font-style: normal;
-      font-weight: 300;
+      font-weight: 500;
       line-height: normal;
     }
   }

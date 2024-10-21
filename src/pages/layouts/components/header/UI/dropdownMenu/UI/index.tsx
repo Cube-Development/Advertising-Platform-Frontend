@@ -6,7 +6,7 @@ import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { paths } from "@shared/routing";
 import { Accordion, ScrollArea } from "@shared/ui";
 import { AnimatePresence, motion } from "framer-motion";
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import {
@@ -37,10 +37,10 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
   const { t } = useTranslation();
   const { dropdownMenu } = useAppSelector((state) => state.dropdownMenu);
   const dispatch = useAppDispatch();
-  const menuRef = useRef<HTMLDivElement>(null);
   const [screen, setScreen] = useState<number>(window.innerWidth);
   const toggleMenu = (path?: string) => {
     const newMenu = { isOpen: !dropdownMenu.isOpen, title: "" };
+    console.log(newMenu);
     dispatch(setDropDownMenu(newMenu));
     if (path === paths.main) {
       toggleRole(roles.advertiser);
@@ -51,17 +51,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
 
   const { balance } = useAppSelector((state) => state.wallet);
 
-  const handleClickOutside = (event: MouseEvent) => {
-    // console.log("menuCurrent");
-    if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
-      const newMenu = { isOpen: false, title: "" };
-      dispatch(setDropDownMenu(newMenu));
-      // console.log(newMenu);
-    }
-  };
-
   useEffect(() => {
-    document.addEventListener("click", handleClickOutside);
     if (dropdownMenu.isOpen) {
       document.body.classList.add("sidebar-open-2");
     } else {
@@ -69,7 +59,6 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
     }
     return () => {
       document.body.classList.remove("sidebar-open-2");
-      document.removeEventListener("click", handleClickOutside);
     };
   }, [dropdownMenu.isOpen, currentRole]);
 
@@ -93,9 +82,9 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
       : bloggerMenuNotAuth;
 
   const divVariants = {
-    close: { opacity: 0, x: "-100%" },
-    open: { opacity: 1, x: "0%" },
-    transition: { transition: { duration: 0.25 } },
+    close: { opacity: 0, y: "-100%", x: "0%" },
+    open: { opacity: 1, y: "0%", x: "0%" },
+    transition: { transition: { duration: 0.2 } },
   };
 
   useEffect(() => {
@@ -111,7 +100,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
   }, []);
 
   return (
-    <div className={styles.dropdown} ref={menuRef}>
+    <div className={styles.dropdown}>
       <button onClick={() => toggleMenu()} className={styles.burger__icon_btn}>
         <div className={styles.burger__icon} />
       </button>
@@ -122,12 +111,12 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
             initial="close"
             animate="open"
             exit="close"
-            transition={divVariants.transition}
-            className={styles.menu}
+            transition={divVariants.transition.transition}
+            className={`${styles.menu}`}
             variants={divVariants}
           >
             <div className={styles.menu__content}>
-              <div className={styles.menu__top}>
+              <div className={`${styles.menu__top}`}>
                 <p className={styles.logo}>Logo</p>
                 <button onClick={() => toggleMenu()}>
                   <div className={styles.close__icon} />

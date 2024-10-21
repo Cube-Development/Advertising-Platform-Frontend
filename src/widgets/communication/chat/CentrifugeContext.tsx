@@ -50,7 +50,6 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
   const { isAuth } = useAppSelector((state) => state.user);
   const [getWebsocketToken] = useGetWebsocketTokenMutation();
   const [getAuthToken] = useGetAuthTokenMutation();
-  const WS_ENDPOINT = "ws://167.172.186.13:8000/connection/websocket";
   const userId = Cookies.get("user_id")!;
   const channelName = "common";
   const personalChannel = "common:user#" + userId;
@@ -60,10 +59,13 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
       try {
         const authData = await getAuthToken().unwrap();
         const authToken = authData.token;
-        const centrifugeInstance = new Centrifuge(WS_ENDPOINT, {
-          getToken: () => Promise.resolve(authToken),
-          debug: true,
-        });
+        const centrifugeInstance = new Centrifuge(
+          import.meta.env.VITE_BASE_WS_URL,
+          {
+            getToken: () => Promise.resolve(authToken),
+            debug: true,
+          },
+        );
         centrifugeInstance.connect();
         centrifugeRef.current = centrifugeInstance;
         const data = await getWebsocketToken({ channel: channelName }).unwrap();

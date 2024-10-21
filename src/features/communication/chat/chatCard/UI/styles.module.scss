@@ -1,7 +1,7 @@
 .channel {
   display: grid;
   grid-template: 1fr / 1fr 40px;
-  column-gap: 10px;
+  column-gap: 15px;
   padding: 10px;
   cursor: pointer;
   background: var(--Personal-colors-White);
@@ -16,13 +16,25 @@
 
   &.active {
     border-radius: 10px;
-    background: var(
-      --Gradients-Gradient-1,
-      linear-gradient(45deg, #4772e6 23.91%, #8e54e9 75.06%)
-    );
+    background: var(--Gradients-Gradient-1);
     p,
     span {
       color: var(--Personal-colors-White);
+    }
+  }
+
+  &.unread {
+    .title {
+      color: var(--Personal-colors-main);
+    }
+    .date {
+      p {
+        color: var(--Personal-colors-main);
+      }
+    }
+
+    img {
+      box-shadow: 0px 2px 2px 0px var(--Personal-colors-main);
     }
   }
 }
@@ -30,15 +42,35 @@
 .info {
   display: grid;
   grid-template: 1fr / max-content 1fr;
-  column-gap: 10px;
+  align-content: center;
+  column-gap: 15px;
 }
 
 .logo {
+  display: grid;
+  align-content: center;
+
   img {
-    width: 35px;
-    height: 35px;
+    width: 40px;
+    height: 40px;
     border-radius: 50%;
-    border: 0.5px solid var(--Personal-colors-main);
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.16);
+  }
+
+  .icon {
+    display: grid;
+    justify-content: center;
+    align-content: center;
+    width: 40px;
+    height: 40px;
+    background: var(--Gradients-Gradient-1);
+    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.16);
+    border-radius: 50%;
+
+    svg {
+      width: 30px;
+      height: 30px;
+    }
   }
 }
 
@@ -57,10 +89,10 @@
   align-content: space-between;
 
   .title {
-    // color: var(--Personal-colors-);
+    color: var(--black-70, #4d4d4d);
     font-size: 12px;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 1;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -90,7 +122,7 @@
     color: var(--Sub-text);
     font-size: 12px;
     font-style: normal;
-    font-weight: 600;
+    font-weight: 500;
     line-height: 1;
   }
 
