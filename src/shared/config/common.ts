@@ -23,5 +23,5 @@ export const enum BREAKPOINT {
   MD = 768,
   SM = 576,
   XS = 375,
-  HEADER_NAVBAR_VISIBLE = 1250,
+  HEADER_NAVBAR_VISIBLE = 1400,
 }

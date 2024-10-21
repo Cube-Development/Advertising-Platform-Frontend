@@ -13,7 +13,7 @@
 }
 
 :root {
-  background: rgba(71, 114, 230, 1);
+  // background: rgba(71, 114, 230, 1);
 }
 
 body {
@@ -38,10 +38,15 @@ body {
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.5);
+      // background: rgba(0, 0, 0, 0.5);
       transition: opacity 1s ease-in;
-      backdrop-filter: blur(3px);
+      backdrop-filter: blur(20px);
       z-index: 5;
+    }
+
+    main {
+      transform: translateY(30px) scale(0.98);
+      transition: all 600ms ease;
     }
   }
 
@@ -55,10 +60,15 @@ body {
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.5);
+      // background: rgba(0, 0, 0, 0.5);
       transition: opacity 1s ease-in;
-      backdrop-filter: blur(3px);
+      backdrop-filter: blur(20px);
       z-index: 5;
+    }
+
+    main {
+      transform: translateY(30px) scale(0.98);
+      transition: all 600ms ease;
     }
   }
 }

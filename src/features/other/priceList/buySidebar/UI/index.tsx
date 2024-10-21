@@ -69,12 +69,12 @@ export const BuySidebar: FC<BuySidebarProps> = ({
   useEffect(() => {
     // document.addEventListener("click", handleClickOutside);
     if (isOpen) {
-      document.body.classList.add("sidebar-open");
+      document.body.classList.add("sidebar-open-2");
     } else {
-      document.body.classList.remove("sidebar-open");
+      document.body.classList.remove("sidebar-open-2");
     }
     return () => {
-      document.body.classList.remove("sidebar-open");
+      document.body.classList.remove("sidebar-open-2");
       document.removeEventListener("click", handleClickOutside);
     };
   }, [isOpen]);
