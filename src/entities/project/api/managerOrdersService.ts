@@ -127,15 +127,15 @@ export const managerProjectsAPI = authApi.injectEndpoints({
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
-        const { status } = queryArgs;
-        return `${endpointName}/${status}`;
+        const { language, date_sort, status } = queryArgs;
+        return `${endpointName}/${language}/${date_sort}/${status}`;
       },
       merge: (currentCache, newItems, arg) => {
         if (arg.arg.page === 1) {
           return {
             ...newItems,
             isLast:
-              newItems.projects.length !== INTERSECTION_ELEMENTS.advOrders,
+              newItems.projects.length !== INTERSECTION_ELEMENTS.managerOrders,
           };
         }
 
@@ -148,9 +148,9 @@ export const managerProjectsAPI = authApi.injectEndpoints({
         };
       },
 
-      // forceRefetch({ currentArg, previousArg }) {
-      //   return currentArg?.page !== previousArg?.page;
-      // },
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg?.page !== previousArg?.page;
+      },
       providesTags: [MANAGER_PROJECTS],
     }),
 

@@ -408,7 +408,9 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
                                                 "turnkey.chain.have_balance.file.or",
                                               )}
                                             </p>
-                                            <label className={styles.button}>
+                                            <label
+                                              className={styles.file__button}
+                                            >
                                               <span>
                                                 {t(
                                                   "turnkey.chain.have_balance.file.button",
