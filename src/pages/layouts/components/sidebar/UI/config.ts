@@ -7,15 +7,29 @@ import {
   OfferIcon,
 } from "@shared/assets";
 import { IMenuItem } from "../../config";
+import { projectTypesFilter } from "@entities/project";
 
-export const advertiserMenu: IMenuItem[] = [
+export const advertiserMenu = [
   {
     item: {
       title: "burger_menu.orders",
       path: paths.orders,
       img: CampaignIcon,
-      openMenu: true,
     },
+    subItems: [
+      {
+        title: "orders_advertiser.type_filter.my_project",
+        path: `${paths.orders}?order_type=${projectTypesFilter.myProject}`,
+      },
+      {
+        title: "orders_advertiser.type_filter.manager_project",
+        path: `${paths.orders}?order_type=${projectTypesFilter.managerProject}`,
+      },
+      {
+        title: "orders_advertiser.type_filter.saved_project",
+        path: `${paths.orders}?order_type=${projectTypesFilter.savedProject}`,
+      },
+    ],
   },
   {
     item: {
@@ -57,6 +71,12 @@ export const commonMenu: IMenuItem[] = [
       img: WalletIcon,
       openMenu: true,
     },
+    subItems: [
+      { title: "burger_menu.top_up", path: paths.walletTopUp },
+      { title: "burger_menu.withdraw", path: paths.walletWithdraw },
+      { title: "burger_menu.history", path: paths.wallethistory },
+      { title: "burger_menu.invoice", path: paths.main },
+    ],
   },
   { item: { title: "burger_menu.base", path: paths.faq, img: BookIcon } },
 ];
