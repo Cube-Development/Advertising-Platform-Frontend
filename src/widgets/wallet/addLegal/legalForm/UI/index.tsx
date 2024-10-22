@@ -78,7 +78,7 @@ export const AddLegalForm: FC = () => {
   };
 
   return (
-    <div className="container sidebar">
+    <div className="container">
       {isLoading ? (
         "LOADING..."
       ) : (

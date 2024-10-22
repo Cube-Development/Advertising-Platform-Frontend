@@ -5,7 +5,7 @@ export const SideBarLayout = ({ children }: PropsWithChildren) => {
   return (
     <>
       <Sidebar />
-      <div>{children}</div>
+      <div className="sidebar">{children}</div>
     </>
   );
 };

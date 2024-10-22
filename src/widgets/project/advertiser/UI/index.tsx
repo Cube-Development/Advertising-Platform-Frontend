@@ -85,7 +85,7 @@ export const AdvOrders: FC = () => {
   // const save_cards = MY_PROJECT_SAVE_CARDS;
   // const dev_cards = MY_PROJECT_MANAGER_DEV_CARDS;
   return (
-    <div className="container sidebar">
+    <div className="container">
       <div className={styles.wrapper}>
         <BarFilter
           page={page}

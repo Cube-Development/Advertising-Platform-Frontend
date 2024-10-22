@@ -55,7 +55,7 @@ export const OffersPage: FC = () => {
   }, [formState.status]);
 
   return (
-    <div className="container sidebar">
+    <div className="container">
       <div className={styles.wrapper}>
         <BarFilter
           page={page}

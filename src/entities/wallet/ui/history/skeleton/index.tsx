@@ -21,19 +21,19 @@ export const SkeletonHistoryCard: FC = () => {
       {screen > BREAKPOINT.MD ? (
         <Skeleton className="bg-skeleton-light rounded-[12px]">
           <div className={styles.card}>
-            <div>
+            <div className={styles.info}>
               <Skeleton className="h-3 w-4/5" />
             </div>
-            <div>
+            <div className={styles.info}>
               <Skeleton className="h-3 w-3/5" />
             </div>
-            <div>
+            <div className={styles.info}>
               <Skeleton className="h-3 w-3/5" />
             </div>
-            <div>
+            <div className={styles.info}>
               <Skeleton className="h-3 w-3/5" />
             </div>
-            <div>
+            <div className={styles.info}>
               <Skeleton className="h-3 w-3/5" />
             </div>
           </div>

@@ -6,7 +6,7 @@ import styles from "./styles.module.scss";
 export const AddLegalTop: FC = () => {
   const { t } = useTranslation();
   return (
-    <div className="container sidebar">
+    <div className="container">
       <div className={styles.wrapper}>
         <button>
           <BackIcon />

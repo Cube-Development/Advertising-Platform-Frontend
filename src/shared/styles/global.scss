@@ -225,7 +225,7 @@ main {
 
 .sidebar {
   @media (min-width: 992px) {
-    padding-left: 100px;
+    padding-left: 80px;
   }
 }
 
@@ -646,6 +646,46 @@ main {
   &__xs {
     @media (min-width: 375px) {
       display: none !important;
+    }
+  }
+}
+
+.notification_text {
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 15px;
+
+  .title {
+    p {
+      color: var(--Personal-colors-black);
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+  }
+
+  .text {
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 10px;
+
+    p {
+      color: var(--Personal-colors-black);
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+  }
+
+  .footer {
+    p {
+      color: var(--Personal-colors-black);
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
     }
   }
 }

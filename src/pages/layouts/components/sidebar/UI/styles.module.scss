@@ -35,14 +35,14 @@
     cursor: pointer;
 
     &:hover {
-      border-radius: 12px;
+      border-radius: 50%;
       background: #e6e6e6;
     }
 
     &.active_route {
       background: var(--Gradients-Gradient-1);
       color: #fff;
-      border-radius: 12px;
+      border-radius: 50%;
       --start-color: var(--Personal-colors-White);
       --end-color: var(--Personal-colors-White);
     }

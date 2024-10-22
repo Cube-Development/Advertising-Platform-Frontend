@@ -6,21 +6,19 @@ export const BarHistory: FC = () => {
   const { t } = useTranslation();
   return (
     <div className={styles.wrapper}>
-      <div className={styles.info}>
-        <p>{t("wallet_history.tab.date")}</p>
+      <div className={`truncate ${styles.info}`}>
+        {t("wallet_history.tab.date")}
       </div>
-      <div className={styles.info}>
-        <p>{t("wallet_history.tab.purpose")}</p>
+      <div className={`truncate ${styles.info}`}>
+        {t("wallet_history.tab.purpose")}
       </div>
-      <div className={styles.info}>
-        <p>{t("wallet_history.tab.method")}</p>
+      <div className={`truncate ${styles.info}`}>
+        {t("wallet_history.tab.method")}
       </div>
-      <div className={styles.info}>
-        <p>{t("wallet_history.tab.ammount")}</p>
+      <div className={`truncate ${styles.info}`}>
+        {t("wallet_history.tab.ammount")}
       </div>
-      <div>
-        <p>{t("wallet_history.tab.status")}</p>
-      </div>
+      <div>{t("wallet_history.tab.status")}</div>
     </div>
   );
 };

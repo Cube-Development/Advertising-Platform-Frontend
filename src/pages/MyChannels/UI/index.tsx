@@ -72,7 +72,7 @@ export const MyChannelsPage: FC = () => {
   //mock
 
   return (
-    <div className="container sidebar">
+    <div className="container">
       <div className={styles.wrapper}>
         <BarFilter
           page={pageFilter.platform}

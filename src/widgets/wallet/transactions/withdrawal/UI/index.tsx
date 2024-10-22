@@ -271,7 +271,7 @@ export const Withdrawal: FC = () => {
   }, []);
 
   return (
-    <div className="container sidebar">
+    <div className="container">
       <div className={styles.wrapper}>
         <div className={styles.title}>
           <p>{t("wallet.withdraw.title")}</p>
