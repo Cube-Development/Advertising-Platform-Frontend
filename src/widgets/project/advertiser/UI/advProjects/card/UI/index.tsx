@@ -299,14 +299,6 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
     };
   }, []);
 
-  // const handleSlideChange = () => {
-  //   if (swiperRef.current && (!isLoadingSelf || !isLoadingManager)) {
-  //     const indexTo = swiperRef.current.realIndex === 0 ? 1 : 0;
-  //     swiperRef.current.slideTo(indexTo, 500);
-  //     handleChangeOpenSubcard();
-  //   }
-  // };
-
   useEffect(() => {
     if (typeFilter && statusFilter && swiperRef.current) {
       swiperRef.current.slideTo(0, 500);
@@ -389,7 +381,6 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
         </div>
       ) : (
         <>
-          {/* abdsh */}
           <div
             className={`${styles.disable_radius} overflow-hidden relative h-[500px] border__gradient`}
           >
@@ -479,111 +470,6 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
             )}
           </div>
         </>
-        // <div className="swipper__carousel">
-        //   <Swiper
-        //     slidesPerView={1}
-        //     onSwiper={(swiper) => (swiperRef.current = swiper)}
-        //     speed={500}
-        //     spaceBetween={50}
-        //     allowTouchMove={false}
-        //   >
-        //     <SwiperSlide className={`${styles.wrapper} border__gradient`}>
-        //       <Card
-        //         card={card}
-        //         typeFilter={typeFilter}
-        //         statusFilter={statusFilter}
-        //       />
-        //       <div className={styles.card__btn} onClick={handleSlideChange}>
-        //         {isLoadingSelf || isLoadingManager ? (
-        //           <AccountsLoader />
-        //         ) : isSubcardOpen ? (
-        //           t(`orders_advertiser.card.see_less`)
-        //         ) : (
-        //           t(`orders_advertiser.card.see_more`)
-        //         )}
-        //         {(!isLoadingSelf || !isLoadingManager) && (
-        //           <ArrowSmallVerticalIcon
-        //             className={
-        //               isSubcardOpen
-        //                 ? "icon__white rotate side"
-        //                 : "icon__white rotate__down side"
-        //             }
-        //           />
-        //         )}
-        //       </div>
-        //     </SwiperSlide>
-        //     <SwiperSlide>
-        //       {(isLoadingSelf || isLoadingManager) && (
-        //         <div className="grid justify-center items-center h-full pt-[100px]">
-        //           <SpinnerLoader />
-        //         </div>
-        //       )}
-        //       <div className="swipper__carousel">
-        //         <Swiper
-        //           slidesPerView={1}
-        //           onSwiper={(swiper) => (swiperRef.current = swiper)}
-        //           // onSlideChange={handleSlideChange}
-        //           speed={500}
-        //           spaceBetween={50}
-        //           loop={true}
-        //         >
-        //           {(subcardsSelf?.orders || subcardsManager?.orders || []).map(
-        //             (subcard, index) => (
-        //               <SwiperSlide
-        //                 key={index}
-        //                 className={`${styles.subcard__md} border__gradient`}
-        //               >
-        //                 <div className={styles.top}>
-        //                   <AdvSubcard
-        //                     subcard={subcard}
-        //                     FeedbackBtn={Feedback}
-        //                     AcceptBtn={AcceptPost}
-        //                     RejectBtn={RejectPost}
-        //                     CheckBtn={CheckPost}
-        //                     SeePostBtn={SeePost}
-        //                     ChannelChatBtn={Chat}
-        //                     ChangeChannelBtn={ChangeChannel}
-        //                     typeFilter={typeFilter}
-        //                     statusFilter={statusFilter}
-        //                   />
-        //                   <MyPagination
-        //                     cardIndex={index}
-        //                     count={
-        //                       subcardsSelf?.orders?.length ||
-        //                       subcardsManager?.orders?.length ||
-        //                       1
-        //                     }
-        //                   />
-        //                 </div>
-        //                 <div
-        //                   className={styles.card__btn}
-        //                   onClick={handleSlideChange}
-        //                 >
-        //                   {isLoadingSelf || isLoadingManager ? (
-        //                     <AccountsLoader />
-        //                   ) : isSubcardOpen ? (
-        //                     t(`orders_advertiser.card.see_less`)
-        //                   ) : (
-        //                     t(`orders_advertiser.card.see_more`)
-        //                   )}
-        //                   {(!isLoadingSelf || !isLoadingManager) && (
-        //                     <ArrowSmallVerticalIcon
-        //                       className={
-        //                         isSubcardOpen
-        //                           ? "icon__white rotate side"
-        //                           : "icon__white rotate__down side"
-        //                       }
-        //                     />
-        //                   )}
-        //                 </div>
-        //               </SwiperSlide>
-        //             )
-        //           )}
-        //         </Swiper>
-        //       </div>
-        //     </SwiperSlide>
-        //   </Swiper>
-        // </div>
       )}
     </>
   );
