@@ -689,3 +689,10 @@ main {
     }
   }
 }
+
+.gradient_color {
+  background: var(--Gradients-Gradient-1);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}

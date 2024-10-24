@@ -86,7 +86,6 @@
           font-size: 44px;
           font-weight: bold;
           line-height: 1;
-          color: var(--Personal-colors-main);
 
           @media (max-width: 768px) {
             width: 70px;
@@ -107,13 +106,7 @@
           font-style: normal;
           font-weight: 500;
           line-height: normal;
-          color: var(--Personal-colors-main);
           font-size: var(--font-size-title-secondary-xl);
-          background: var(--Gradients-Gradient-1);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-          background-clip: text;
-          color: transparent;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;

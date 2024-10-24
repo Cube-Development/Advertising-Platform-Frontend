@@ -49,7 +49,7 @@ export const FormatPrice: FC<IFormatPriceProps> = ({
     <div className={styles.wrapper}>
       <div
         // className={price === "" ? styles.no__active : styles.active}
-        className={`${styles.button}  ${price === "" ? styles.no__active : styles.active}`}
+        className={`gradient_color ${styles.button}  ${price === "" ? styles.no__active : styles.active}`}
       >
         {screen > BREAKPOINT.MD ? big : small}
       </div>

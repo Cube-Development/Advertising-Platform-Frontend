@@ -39,7 +39,6 @@
         word-break: break-all;
 
         p {
-          color: var(--Personal-colors-main);
           font-size: 24px;
           font-style: normal;
           font-weight: 500;
@@ -184,7 +183,6 @@
 
           &__name {
             p {
-              color: var(--Personal-colors-main);
               font-size: 12px;
               font-style: normal;
               font-weight: 600;
@@ -230,7 +228,6 @@
       .edit_btn {
         width: 100%;
         box-shadow: 0px 2px 10px 1px rgba(0, 0, 0, 0.2);
-        color: var(--Personal-colors-main);
         padding: 10px 15px;
         border-radius: 12px;
         font-weight: 600;

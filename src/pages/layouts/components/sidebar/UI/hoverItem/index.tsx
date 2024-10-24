@@ -13,7 +13,7 @@ export const HoverItem: FC<HoverItemProps> = ({ item }) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.title}>
-        <p>{t(item.item.title || "")}</p>
+        <p className="gradient_color">{t(item.item.title || "")}</p>
       </div>
       {item.subItems && (
         <ul>

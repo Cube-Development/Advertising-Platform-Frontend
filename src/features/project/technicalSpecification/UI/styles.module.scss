@@ -23,7 +23,10 @@
       font-style: normal !important;
       font-weight: 500 !important;
       line-height: 1;
-      color: var(--Personal-colors-main);
+      background: var(--Gradients-Gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
   }
 }
@@ -51,7 +54,10 @@
       font-style: normal;
       font-weight: 600;
       line-height: 1;
-      color: var(--Personal-colors-main);
+      background: var(--Gradients-Gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     .close {
       display: grid;
@@ -171,7 +177,10 @@
             column-gap: 20px;
 
             a {
-              color: var(--Personal-colors-main);
+              background: var(--Gradients-Gradient-1);
+              -webkit-background-clip: text;
+              -webkit-text-fill-color: transparent;
+              background-clip: text;
               font-size: 12px;
               font-style: normal;
               font-weight: 500;

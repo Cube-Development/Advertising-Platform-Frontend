@@ -276,12 +276,14 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
       <DrawerTrigger className="h-full">
         <div className={styles.button}>
           <ParametersIcon />
-          {screen >= BREAKPOINT.MD && <p>Параметры</p>}
+          {screen >= BREAKPOINT.MD && <p>{t("catalog.search.parameters")}</p>}
         </div>
       </DrawerTrigger>
       <DrawerContent className={styles.parameters}>
         <div className={styles.top}>
-          <p className={styles.title}>Параметры</p>
+          <p className={`gradient_color ${styles.title}`}>
+            {t("catalog.search.parameters")}
+          </p>
           <DrawerClose className={styles.close}>
             <div>
               <CancelIcon2 />

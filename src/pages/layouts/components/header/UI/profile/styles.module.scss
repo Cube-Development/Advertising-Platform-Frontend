@@ -42,7 +42,10 @@
 
     &:hover {
       background-color: #f0f0f0;
-      color: var(--Personal-colors-main);
+      background: var(--Gradients-Gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
   }
 }
@@ -102,7 +105,10 @@
     justify-content: end;
     align-items: center;
     gap: 5px;
-    color: var(--Personal-colors-main);
+    background: var(--Gradients-Gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
     padding: 10px 20px;
     font-weight: 500;
     cursor: pointer;

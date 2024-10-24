@@ -13,7 +13,7 @@ export const AddLegalTop: FC = () => {
         </button>
 
         <div>
-          <p>{t(`add_profile.add_profile`)}</p>
+          <p className="gradient_color">{t(`add_profile.add_profile`)}</p>
           <ProfileIcon2 />
         </div>
       </div>

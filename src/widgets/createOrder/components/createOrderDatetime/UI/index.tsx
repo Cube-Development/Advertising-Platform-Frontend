@@ -57,8 +57,8 @@ export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
       <div className={styles.wrapper}>
         <div className={styles.top}>
           <div className={styles.title}>
-            <span>3</span>
-            <p>{t("create_order.datetime.title")}</p>
+            <span className="gradient_color">3</span>
+            <p className="gradient_color">{t("create_order.datetime.title")}</p>
           </div>
         </div>
         <div className={styles.content}>

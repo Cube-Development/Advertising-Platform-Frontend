@@ -87,13 +87,7 @@
       font-style: normal;
       font-weight: 600;
       line-height: normal;
-      color: var(--Personal-colors-main);
       font-size: var(--font-size-subtitle-main-xl);
-      background: var(--Gradients-Gradient-1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      color: transparent;
       width: 70%;
 
       @media (max-width: 992px) {

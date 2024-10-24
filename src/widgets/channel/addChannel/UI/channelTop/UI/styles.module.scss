@@ -22,7 +22,6 @@
         text-align: center;
         font-style: normal;
         font-weight: 600;
-        color: var(--Personal-colors-main);
         font-size: var(--font-size-title-main-xl);
 
         @media (max-width: 992px) {
@@ -158,7 +157,10 @@
 
     p,
     span {
-      color: var(--Personal-colors-main);
+      background: var(--Gradients-Gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
   }
 

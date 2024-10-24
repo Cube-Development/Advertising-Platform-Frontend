@@ -68,7 +68,7 @@ export const ChannelTop: FC<ChannelTopProps> = ({
       <div className={styles.wrapper}>
         <div className={styles.title__wrapper}>
           <div>
-            <p className={styles.title}>
+            <p className={`gradient_color ${styles.title}`}>
               {channel_id
                 ? t(`add_platform.title.edit`)
                 : t(`add_platform.title.add`)}

@@ -39,7 +39,10 @@ export const ChannelCardDescription = ({
         {description}
       </p>
       {isOverflowing && (
-        <div className={styles.description__toggle} onClick={toggleExpand}>
+        <div
+          className={`gradient_color ${styles.description__toggle}`}
+          onClick={toggleExpand}
+        >
           {isExpanded ? `...${t("cart.hide")}` : `${t("cart.show")}...`}
         </div>
       )}

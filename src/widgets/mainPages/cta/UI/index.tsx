@@ -43,7 +43,7 @@ export const Cta: FC<CtaProps> = ({ page }) => {
             <motion.h2
               custom={custom++}
               variants={PAGE_ANIMATION.animationLeft}
-              className={styles.cta__content__subtitle}
+              className={`gradient_color ${styles.cta__content__subtitle}`}
             >
               {t(`${page}.cta_subtitle`)}
             </motion.h2>

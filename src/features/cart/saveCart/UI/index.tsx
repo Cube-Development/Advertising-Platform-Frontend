@@ -9,7 +9,7 @@ export const SaveCart: FC = () => {
   return (
     <MyButton className={styles.button}>
       <SaveIcon />
-      <p>{t(`cart_btn.save`)}</p>
+      <p className="gradient_color">{t(`cart_btn.save`)}</p>
     </MyButton>
   );
 };

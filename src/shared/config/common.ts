@@ -8,7 +8,7 @@ export const enum INTERSECTION_ELEMENTS {
   bloggerOffers = 4,
   myChannels = 4,
   myModChannels = 4,
-  history = 10,
+  history = 5,
   chat = 20,
   managerOrders = 4,
   channelReview = 4,

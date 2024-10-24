@@ -52,7 +52,9 @@ export const CreateOrderLoading: FC = () => {
         alt="isLoading..."
         className={styles.loading__icon}
       />
-      <p className={styles.loading__title}>{loadingState.text}</p>
+      <p className={`gradient_color ${styles.loading__title}`}>
+        {loadingState.text}
+      </p>
     </div>
   );
 };

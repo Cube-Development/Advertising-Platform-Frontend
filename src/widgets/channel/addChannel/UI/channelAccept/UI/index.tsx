@@ -92,7 +92,7 @@ export const ChannelAccept: FC<ChannelAcceptProps> = ({
           className={styles.wrapper}
         >
           <p
-            className={styles.title}
+            className={`gradient_color ${styles.title}`}
             dangerouslySetInnerHTML={{
               __html: t("add_platform.accept.title"),
             }}

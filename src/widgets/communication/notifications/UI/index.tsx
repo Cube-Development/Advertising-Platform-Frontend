@@ -134,7 +134,7 @@ export const Notifications: FC = () => {
           </AlertDialogTrigger>
           <AlertDialogContent className={`${styles.content} ${styles.dialog}`}>
             <div className={styles.title}>
-              <p>{t("notifications.title")}</p>
+              <p className="gradient_color">{t("notifications.title")}</p>
               <AlertDialogCancel onClick={handleClose}>
                 <div className={styles.close}>
                   <CancelIcon2 />
@@ -203,7 +203,9 @@ export const Notifications: FC = () => {
           </DrawerTrigger>
           <DrawerContent className={`${styles.content} ${styles.drawer}`}>
             <DrawerTitle className={styles.title}>
-              <DrawerDescription>{t("notifications.title")}</DrawerDescription>
+              <DrawerDescription className="gradient_color">
+                {t("notifications.title")}
+              </DrawerDescription>
               <DrawerClose onClick={handleClose}>
                 <div className={styles.close}>
                   <CancelIcon2 />
@@ -263,7 +265,7 @@ export const Notifications: FC = () => {
               <></>
             )}
             <div className={styles.new}>
-              <p>
+              <p className="gradient_color">
                 {t("notifications.new")}: {data?.elements}
               </p>
             </div>

@@ -25,11 +25,17 @@
 
   &.unread {
     .title {
-      color: var(--Personal-colors-main);
+      background: var(--Gradients-Gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
     .date {
       p {
-        color: var(--Personal-colors-main);
+        background: var(--Gradients-Gradient-1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
       }
     }
 
