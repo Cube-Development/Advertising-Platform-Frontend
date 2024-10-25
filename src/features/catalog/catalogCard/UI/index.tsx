@@ -106,7 +106,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
             <div className={styles.info}>
               <Link
                 to={`${paths.channel.replace(":id", card?.id)}`}
-                className={`${styles.title} truncate`}
+                className={`${styles.title} truncate gradient_color`}
               >
                 {card?.name}
               </Link>
@@ -305,7 +305,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
                   onClick={handleChangeOpenSubcard}
                   className={styles.channel__data__xs__bottom}
                 >
-                  <p>
+                  <p className="gradient_color">
                     {isSubcardOpen
                       ? t("catalog.see_less")
                       : t("catalog.see_more")}

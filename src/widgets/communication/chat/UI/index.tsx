@@ -318,7 +318,7 @@ export const Chat: FC<IChatProps> = ({
               className={`${styles.content__left} ${role !== roles.blogger ? styles.gridA : styles.gridB}`}
             >
               <div className={styles.title}>
-                <p>{t("chat.my_messages")}</p>
+                <p className="gradient_color">{t("chat.my_messages")}</p>
               </div>
               {role !== roles.blogger && (
                 <div className={styles.filter}>
@@ -339,7 +339,7 @@ export const Chat: FC<IChatProps> = ({
                       initial="hidden"
                       animate="visible"
                       custom={index % (selectedChats?.length || 1)}
-                      variants={PAGE_ANIMATION.animationUp}
+                      variants={PAGE_ANIMATION.animationChat}
                       onClick={() => handleChangeChat(card)}
                     >
                       <ChatCard
@@ -430,7 +430,9 @@ export const Chat: FC<IChatProps> = ({
                 className={`${styles.content__left} ${role !== roles.blogger ? styles.gridA : styles.gridB}`}
               >
                 <DrawerTitle className={styles.title}>
-                  <DrawerDescription className={styles.description}>
+                  <DrawerDescription
+                    className={`gradient_color ${styles.description}`}
+                  >
                     {t("chat.my_messages")}
                   </DrawerDescription>
                   <DrawerClose>
@@ -458,7 +460,7 @@ export const Chat: FC<IChatProps> = ({
                         initial="hidden"
                         animate="visible"
                         custom={index % (selectedChats?.length || 1)}
-                        variants={PAGE_ANIMATION.animationUp}
+                        variants={PAGE_ANIMATION.animationChat}
                         onClick={() => handleChangeChat(card)}
                       >
                         <ChatCard

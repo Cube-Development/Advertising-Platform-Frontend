@@ -76,7 +76,7 @@ export const ManagerOrders: FC = () => {
   // const isFetching = false;
 
   return (
-    <div className="container sidebar">
+    <div className="container">
       <div className={styles.wrapper}>
         <BarFilter
           page={page}

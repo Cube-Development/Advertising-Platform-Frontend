@@ -60,7 +60,7 @@ export const CreatePost: FC<CreatePostProps> = ({ onClick }) => {
               <p className={styles.text__description}>
                 {t("registration_alert.description")}
               </p>
-              <p className={styles.text__call_to_action}>
+              <p className={`gradient_color ${styles.text__call_to_action}`}>
                 {t("registration_alert.call_to_action")}
               </p>
             </div>

@@ -139,7 +139,7 @@ export const AddChannelBlock: FC<AddChannelBlockProps> = () => {
   };
   console.log(!!channel, channel);
   return (
-    <div className="container sidebar" style={{ minHeight: "100vh" }}>
+    <div className="container" style={{ minHeight: "100vh" }}>
       <div className={styles.wrapper} id="add_channel_top">
         <ChannelTop
           channel_id={channel_id!}

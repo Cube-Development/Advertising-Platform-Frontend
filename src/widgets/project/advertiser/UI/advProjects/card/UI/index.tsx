@@ -70,7 +70,7 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
             <span>№{card?.identifier}</span>
           </div>
           <div className={styles.card__description__data__date}>
-            <span className={styles.tariff}>{card?.tariff_name}</span>
+            <span className="gradient_color">{card?.tariff_name}</span>
             <span>{card?.created}</span>
           </div>
         </div>

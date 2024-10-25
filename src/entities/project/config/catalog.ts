@@ -30,6 +30,7 @@ export const enum DEBOUNCE {
   sex = 500,
   search = 500,
   readMessage = 500,
+  sidebarHover = 500,
 }
 
 export enum sortingFilter {

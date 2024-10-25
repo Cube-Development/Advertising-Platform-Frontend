@@ -27,17 +27,15 @@ export const HistoryCard: FC<HistoryCardProps> = ({ card }) => {
     <>
       {screen > BREAKPOINT.MD ? (
         <div className={styles.wrapper}>
-          <div className={styles.datetime}>
-            <p>{card?.transaction_datetime}</p>
+          <div className={`truncate ${styles.datetime}`}>
+            {card?.transaction_datetime}
           </div>
-          <div className={styles.info}>
-            <p>{card?.transaction_type}</p>
+          <div className={`truncate ${styles.info}`}>
+            {card?.transaction_type}
           </div>
-          <div className={styles.info}>
-            <p>{card?.way_type}</p>
-          </div>
-          <div className={styles.info}>
-            <p>{card?.amount?.toLocaleString()}</p>
+          <div className={`truncate ${styles.info}`}>{card?.way_type}</div>
+          <div className={`truncate ${styles.info}`}>
+            {card?.amount?.toLocaleString()}
           </div>
           <div className={styles.status}>
             <p>{card?.status}</p>

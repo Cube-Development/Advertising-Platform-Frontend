@@ -73,7 +73,9 @@ export const ChannelCardMenu: FC<ChannelCardMenuProps> = ({
       {isMenuOpen && (
         <div className={styles.menu}>
           <div className={styles.top}>
-            <p className="truncate">{t("platforms_blogger.menu.title")}</p>
+            <p className="gradient_color truncate">
+              {t("platforms_blogger.menu.title")}
+            </p>
             <button onClick={(e) => toggleMenu(e)}>
               <CancelIcon2 />
             </button>

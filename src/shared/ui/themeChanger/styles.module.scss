@@ -83,7 +83,10 @@
 
       &.active {
         span {
-          color: var(--Personal-colors-main);
+          background: var(--Gradients-Gradient-1);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
         border: 1px solid var(--Personal-colors-main);
         background: var(--Personal-colors-White);
@@ -150,7 +153,10 @@
         }
 
         &:hover {
-          color: var(--Personal-colors-main);
+          background: var(--Gradients-Gradient-1);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
           background: rgba(189, 189, 189, 0.25);
           border-radius: 8px;
         }

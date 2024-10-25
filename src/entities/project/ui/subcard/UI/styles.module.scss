@@ -627,20 +627,20 @@
     }
   }
 
-  .channel__data__xs__bottom {
-    display: grid;
-    grid-auto-flow: column;
-    column-gap: 10px;
-    justify-content: center;
-    align-items: center;
-    padding: 10px;
+  // .channel__data__xs__bottom {
+  //   display: grid;
+  //   grid-auto-flow: column;
+  //   column-gap: 10px;
+  //   justify-content: center;
+  //   align-items: center;
+  //   padding: 10px;
 
-    p {
-      color: var(--Personal-colors-main);
-      font-size: 10px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: normal;
-    }
-  }
+  //   p {
+  //     color: var(--Personal-colors-main);
+  //     font-size: 10px;
+  //     font-style: normal;
+  //     font-weight: 600;
+  //     line-height: normal;
+  //   }
+  // }
 }

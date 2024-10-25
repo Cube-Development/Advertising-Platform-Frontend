@@ -19,7 +19,7 @@ export const Top: FC<TopProps> = () => {
       <div className={styles.wrapper}>
         <div className={styles.title}>
           <h1>{t("turnkey.turnkey")}</h1>
-          <h2>{t("turnkey.text")}</h2>
+          <h2 className="gradient_color">{t("turnkey.text")}</h2>
         </div>
         <PriceList
           tarifs={t(`main_page_advertiser.tarifs_list`, {

@@ -69,17 +69,6 @@ export const publicAdvertiserRoutes: IRoute[] = [
   // { path: paths.channel, component: ChannelPage },
 ];
 
-// нужен в старой версии роутинга после обновы удалить
-export const publicRoutes: IRoute[] = [
-  { path: paths.mainBlogger, component: MainBloggerPage },
-  { path: paths.main, component: MainPage },
-  { path: paths.notFound, component: NotFoundPage },
-  { path: paths.catalog, component: CatalogPage },
-  { path: paths.channel, component: ChannelPage },
-  { path: paths.cart, component: CartPage },
-  { path: paths.turnkey, component: TurnkeyPage },
-];
-
 export const createOrderRoutes: IRoute[] = [
   { path: paths.createOrder, component: CreateOrderPage, sidebar: false },
 ];

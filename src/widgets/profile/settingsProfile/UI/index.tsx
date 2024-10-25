@@ -62,7 +62,7 @@ export const SettingsProfile: FC = () => {
   const formState = watch();
 
   return (
-    <div className="container sidebar">
+    <div className="container">
       <div className={styles.wrapper}>
         <motion.h1
           initial="hidden"

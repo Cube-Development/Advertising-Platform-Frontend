@@ -71,7 +71,10 @@
       }
 
       > a {
-        color: var(--Personal-colors-main);
+        background: var(--Gradients-Gradient-1);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
         font-size: 14px;
         font-weight: 600;
       }

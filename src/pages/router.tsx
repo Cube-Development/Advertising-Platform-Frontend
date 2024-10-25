@@ -15,9 +15,11 @@ import {
   publicCommonRoutes,
 } from "./routes";
 import { roles } from "@entities/user";
+import { useAppSelector } from "@shared/hooks";
 
-const handleLayout = (route: IRoute) => {
-  return route.sidebar ? (
+const HandleLayout = ({ route }: { route: IRoute }) => {
+  const { isAuth } = useAppSelector((state) => state.user); // Хук вызывается корректно
+  return isAuth ? (
     <SideBarLayout>
       <route.component />
     </SideBarLayout>
@@ -29,11 +31,10 @@ const handleLayout = (route: IRoute) => {
 const handleRouter = (routes: IRoute[]) => {
   const router: RouteObject[] = routes.map((route) => ({
     path: route.path,
-    element: handleLayout(route),
+    element: <HandleLayout route={route} />, // Передаём компонент как JSX
   }));
   return router;
 };
-
 const privateBloggerRouter: RouteObject[] = handleRouter(privateBloggerRoutes);
 const privateAdvertiserRouter: RouteObject[] = handleRouter(
   privateAdvertiserRoutes,

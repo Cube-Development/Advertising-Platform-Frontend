@@ -69,7 +69,7 @@ export const PAGE_ANIMATION = {
     visible: (custom: number) => ({
       y: 0,
       opacity: 1,
-      transition: { delay: custom * 0.01 },
+      transition: { delay: custom * 0.025 },
     }),
   },
 };

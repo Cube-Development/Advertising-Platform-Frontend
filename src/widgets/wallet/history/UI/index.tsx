@@ -58,7 +58,7 @@ export const History: FC = () => {
           custom={custom++}
           variants={PAGE_ANIMATION.animationRight}
         >
-          <p>{t("wallet_history.wallet_history")}</p>
+          <p className="gradient_color">{t("wallet_history.wallet_history")}</p>
         </motion.div>
         {screen > BREAKPOINT.MD && (
           <motion.div
@@ -95,7 +95,10 @@ export const History: FC = () => {
                   (_, index) => <SkeletonHistoryCard key={index} />,
                 )}
               {!data.isLast && (
-                <div className={styles.show_more} onClick={handleOnChangePage}>
+                <div
+                  className={`${styles.show_more}`}
+                  onClick={handleOnChangePage}
+                >
                   {isFetching || isLoading ? (
                     <SpinnerLoaderSmall />
                   ) : (

@@ -45,7 +45,9 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
             <div className={styles.content__left}>
               <div className={styles.top}>
                 <div className={styles.top__title}>
-                  <p>{t("platform_description.platform_description")}</p>
+                  <p className="gradient_color">
+                    {t("platform_description.platform_description")}
+                  </p>
                 </div>
                 <div className={styles.top__description}>
                   <div className={styles.top__description__top}>
@@ -84,7 +86,9 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
                   {card?.format.map((format) => (
                     <div key={format?.format} className={styles.format}>
                       <div className={styles.format__name}>
-                        <p className="truncate">{format?.format_name?.big}:</p>
+                        <p className="gradient_color truncate">
+                          {format?.format_name?.big}:
+                        </p>
                       </div>
                       <p className={`${styles.format__price} truncate`}>
                         {format?.price?.toLocaleString()} {t("symbol")}
@@ -133,7 +137,7 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
               <div className={styles.buttons}>
                 <AlertDialogCancel>
                   <Link to={`${paths.addChannel}?channel_id=${channel_id}`}>
-                    <p className={styles.edit_btn}>
+                    <p className={`gradient_color ${styles.edit_btn}`}>
                       {t("platform_description.edit_btn")}
                     </p>
                   </Link>

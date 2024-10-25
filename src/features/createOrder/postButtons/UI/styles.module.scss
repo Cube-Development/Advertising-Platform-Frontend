@@ -74,7 +74,10 @@
       font-style: normal;
       font-weight: 500;
       line-height: 12px;
-      color: var(--Personal-colors-main);
+      background: var(--Gradients-Gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
 
       @media (max-width: 768px) {
         font-size: 20px;
@@ -193,7 +196,10 @@
         }
 
         span {
-          color: var(--Personal-colors-main);
+          background: var(--Gradients-Gradient-1);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
         }
       }
 

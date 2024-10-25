@@ -6,14 +6,14 @@ import styles from "./styles.module.scss";
 export const AddLegalTop: FC = () => {
   const { t } = useTranslation();
   return (
-    <div className="container sidebar">
+    <div className="container">
       <div className={styles.wrapper}>
         <button>
           <BackIcon />
         </button>
 
         <div>
-          <p>{t(`add_profile.add_profile`)}</p>
+          <p className="gradient_color">{t(`add_profile.add_profile`)}</p>
           <ProfileIcon2 />
         </div>
       </div>

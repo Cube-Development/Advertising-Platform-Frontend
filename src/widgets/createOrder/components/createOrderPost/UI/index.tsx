@@ -286,8 +286,8 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
         <div className={styles.content}>
           <div className={styles.top}>
             <div className={styles.title}>
-              <span>2</span>
-              <p>{t("create_order.create.title")}</p>
+              <span className="gradient_color">2</span>
+              <p className="gradient_color">{t("create_order.create.title")}</p>
             </div>
             <PostGeneration />
           </div>

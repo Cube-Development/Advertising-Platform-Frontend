@@ -30,12 +30,10 @@
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    color: var(--Personal-colors-main);
     background: var(--Gradients-Gradient-1);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    color: transparent;
 
     @media (max-width: 768px) {
       font-size: 12px;
@@ -98,12 +96,10 @@
       font-size: 24px;
       font-weight: 500;
       font-style: normal;
-      color: var(--Personal-colors-main);
       background: var(--Gradients-Gradient-1);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      color: transparent;
 
       @media (max-width: 992px) {
         font-size: 20px;

@@ -4,13 +4,13 @@
   position: fixed;
   left: var(--left-padding-header);
   height: auto;
-  // background: var(--Personal-colors-White);
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(20px);
-  overflow-y: auto;
+  // overflow-y: auto;
   border-radius: 50px;
   width: var(--header-height-xl);
   border: 1px solid rgba(142, 84, 233, 0.2);
+  z-index: 40;
 
   transition: transform 0.5s ease-in-out;
   transform: translateY(0);
@@ -33,16 +33,17 @@
     align-items: center;
     padding: 20px;
     cursor: pointer;
+    position: relative;
 
     &:hover {
-      border-radius: 12px;
+      border-radius: 50%;
       background: #e6e6e6;
     }
 
     &.active_route {
       background: var(--Gradients-Gradient-1);
       color: #fff;
-      border-radius: 12px;
+      border-radius: 50%;
       --start-color: var(--Personal-colors-White);
       --end-color: var(--Personal-colors-White);
     }
@@ -60,6 +61,17 @@
       grid-auto-flow: row;
       row-gap: 8px;
       padding: 10px;
+
+      .item {
+        position: relative;
+
+        .mini {
+          position: absolute;
+          top: 50%;
+          left: 80px;
+          transform: translate(0, -50%);
+        }
+      }
     }
 
     .switcher {

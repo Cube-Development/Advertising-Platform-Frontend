@@ -5,7 +5,7 @@ import {
 } from "@entities/user";
 import { setDropDownMenu } from "@pages/layouts/model";
 import { AccordionItem } from "@radix-ui/react-accordion";
-import { useAppDispatch, useAppSelector } from "@shared/hooks";
+import { useAppDispatch, useAppSelector, useDebounce } from "@shared/hooks";
 import { paths } from "@shared/routing";
 import { Accordion } from "@shared/ui/shadcn-ui/ui/accordion";
 import { FC, useEffect, useState } from "react";
@@ -14,11 +14,13 @@ import { Link, useLocation } from "react-router-dom";
 import { IMenuItem } from "../../config";
 import { advertiserMenu, bloggerMenu, commonMenu, managerMenu } from "./config";
 import styles from "./styles.module.scss";
+import { HoverItem } from "./hoverItem";
+import { DEBOUNCE } from "@entities/project";
 
 export const Sidebar: FC = () => {
+  const { t } = useTranslation();
   const { role } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
-  const { t } = useTranslation();
   const location = useLocation();
 
   const [updateRole] = useUpdateRoleMutation();
@@ -79,6 +81,22 @@ export const Sidebar: FC = () => {
     };
   }, [lastScrollY]);
 
+  const [hoverItem, setHoverItem] = useState<IMenuItem | null>(null);
+  const [isLeave, setIsLeave] = useState<boolean>(false);
+  const debouncedPosition = useDebounce(isLeave, DEBOUNCE.sidebarHover);
+
+  const handleOnEnter = (item: IMenuItem) => {
+    setIsLeave(false);
+    setHoverItem(item);
+  };
+
+  useEffect(() => {
+    if (isLeave) {
+      setHoverItem(null);
+      setIsLeave(false);
+    }
+  }, [debouncedPosition]);
+
   return (
     <div
       className={`${styles.wrapper} ${isScrollingUp || lastScrollY === 0 ? styles.visible : styles.hidden}`}
@@ -117,7 +135,13 @@ export const Sidebar: FC = () => {
             const isActive = currentPathSegment === menuPathSegment;
 
             return (
-              <AccordionItem value={`item-${item.item.title}`} key={index}>
+              <AccordionItem
+                key={index}
+                className={styles.item}
+                value={`item-${item.item.title}`}
+                onMouseEnter={() => handleOnEnter(item)}
+                onMouseLeave={() => setIsLeave(true)}
+              >
                 {item.item.openMenu ? (
                   <li
                     key={index}
@@ -134,6 +158,16 @@ export const Sidebar: FC = () => {
                       {item.item.img && <item.item.img />}
                     </li>
                   </Link>
+                )}
+
+                {hoverItem === item && (
+                  <div
+                    className={styles.mini}
+                    onMouseEnter={() => handleOnEnter(item)}
+                    onMouseLeave={() => setIsLeave(true)}
+                  >
+                    <HoverItem item={item}></HoverItem>
+                  </div>
                 )}
               </AccordionItem>
             );

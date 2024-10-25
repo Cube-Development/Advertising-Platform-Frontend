@@ -37,7 +37,10 @@
     font-weight: 600;
     line-height: normal;
     line-height: 1;
-    color: var(--Personal-colors-main);
+    background: var(--Gradients-Gradient-1);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 
     li {
       text-align: center;
@@ -89,7 +92,10 @@
       color: var(--Personal-colors-White);
     }
     li {
-      color: var(--Personal-colors-main);
+      background: var(--Gradients-Gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       text-align: center;
       padding: 20px 10px;
       cursor: pointer;
