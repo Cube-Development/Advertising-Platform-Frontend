@@ -40,11 +40,9 @@ export const onlyPublicCommonRoutes: IRoute[] = [
 ];
 
 export const publicCommonRoutes: IRoute[] = [
-  // { path: paths.orders, component: OrdersPage },
-  // { path: paths.myChannels, component: MyChannelsPage, sidebar: true },
-  { path: paths.faq, component: FAQPage },
+  { path: paths.faq, component: FAQPage, sidebar: true },
   { path: paths.notFound, component: NotFoundPage },
-  { path: paths.channel, component: ChannelPage },
+  { path: paths.channel, component: ChannelPage, sidebar: true },
 ];
 
 export const privateBloggerRoutes: IRoute[] = [
@@ -63,8 +61,8 @@ export const privateAdvertiserRoutes: IRoute[] = [
 
 export const publicAdvertiserRoutes: IRoute[] = [
   { path: paths.main, component: MainPage },
-  { path: paths.catalog, component: CatalogPage },
-  { path: paths.cart, component: CartPage },
+  { path: paths.catalog, component: CatalogPage, sidebar: true },
+  { path: paths.cart, component: CartPage, sidebar: true },
   { path: paths.turnkey, component: TurnkeyPage },
   // { path: paths.channel, component: ChannelPage },
 ];

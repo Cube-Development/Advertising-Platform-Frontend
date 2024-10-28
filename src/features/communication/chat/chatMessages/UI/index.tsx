@@ -301,6 +301,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
         message_datetime: datetime.utcDate + " " + datetime.utcTime,
         status: MessageStatus.unread,
       };
+
       const newHistory = {
         ...data,
         history: [...(data?.history || []), orderMessageState],
