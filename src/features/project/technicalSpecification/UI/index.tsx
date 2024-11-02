@@ -74,7 +74,11 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
       const updatedFiles = await Promise.all(
         allFiles.map(async (file, index) => {
           let filename = "filename_" + (index + 1);
-          const response = await fetch(file.content);
+          console.log("contentType", file);
+          const response = await fetch(file.content, {
+            method: "HEAD",
+          });
+          console.log("response", response);
           const contentType = response.headers.get("Content-Type");
           const extension =
             contentTypeToExtension[contentType ? contentType : ""] || "";
@@ -83,6 +87,7 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
           }
 
           const size = response.headers.get("Content-Length");
+          console.log("size", size);
           const [sizeString, sizeType] = formatFileSizeAndType(
             size ? parseInt(size) : 0,
           );
