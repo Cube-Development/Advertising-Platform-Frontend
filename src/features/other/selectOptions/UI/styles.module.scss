@@ -210,18 +210,10 @@
       &.filter {
         column-gap: 5px;
         justify-content: start;
-
-        // @media (max-width: 576px) {
-        //   justify-content: center;
-        //   align-items: center;
-        // }
       }
 
       &:hover {
-        background: var(--Gradients-Gradient-1);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        color: var(--Personal-colors-main) !important;
         background: rgba(189, 189, 189, 0.25);
         border-radius: 8px;
       }

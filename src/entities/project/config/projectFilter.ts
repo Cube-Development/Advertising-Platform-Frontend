@@ -1,7 +1,7 @@
 export enum projectTypesFilter {
-  myProject = "myProject",
-  managerProject = "managerProject",
-  savedProject = "savedProject",
+  myProject = "my_project",
+  managerProject = "manager_project",
+  savedProject = "saved_project",
 }
 
 export enum myProjectStatusFilter {

@@ -19,9 +19,7 @@ export const NotificationMessage: FC<NotificationMessageProps> = ({ card }) => {
     <div className={styles.wrapper}>
       <div className={styles.text__wrapper}>
         <p className={styles.title}>{t(title)}</p>
-        <span className={styles.text}>
-          {Array(20).fill(card?.data?.text).join(" ") + 222}
-        </span>
+        <span dangerouslySetInnerHTML={{ __html: card?.data?.text || "" }} />
       </div>
       <div className={styles.support}>
         <span>{t("notifications.support.title")}</span>

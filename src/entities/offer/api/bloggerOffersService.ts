@@ -71,7 +71,9 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
           ...response,
           status: arg?.status,
           isLast:
-            response.orders.length !== INTERSECTION_ELEMENTS.bloggerOffers,
+            response?.elements ===
+            response?.orders?.length +
+              (response?.page - 1) * INTERSECTION_ELEMENTS.bloggerOffers,
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
@@ -82,17 +84,11 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
         if (arg.arg.page === 1) {
           return {
             ...newItems,
-            status: arg.arg.status,
-            isLast:
-              newItems.orders.length !== INTERSECTION_ELEMENTS.bloggerOffers,
           };
         }
         return {
           ...newItems,
           orders: [...currentCache.orders, ...newItems.orders],
-          status: arg.arg.status,
-          isLast:
-            newItems.orders.length !== INTERSECTION_ELEMENTS.bloggerOffers,
         };
       },
 

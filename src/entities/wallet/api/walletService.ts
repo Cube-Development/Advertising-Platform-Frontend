@@ -82,7 +82,9 @@ export const walletAPI = authApi.injectEndpoints({
         return {
           ...response,
           isLast:
-            response.transactions.length !== INTERSECTION_ELEMENTS.history,
+            response?.elements ===
+            response?.transactions?.length +
+              (response?.page - 1) * INTERSECTION_ELEMENTS.history,
         };
       },
       serializeQueryArgs: ({ endpointName }) => {
@@ -92,8 +94,6 @@ export const walletAPI = authApi.injectEndpoints({
         if (arg.arg.page === 1) {
           return {
             ...newItems,
-            isLast:
-              newItems.transactions.length !== INTERSECTION_ELEMENTS.history,
           };
         }
 
@@ -103,8 +103,6 @@ export const walletAPI = authApi.injectEndpoints({
             ...currentCache.transactions,
             ...newItems.transactions,
           ],
-          isLast:
-            newItems.transactions.length !== INTERSECTION_ELEMENTS.history,
         };
       },
       forceRefetch({ currentArg, previousArg }) {

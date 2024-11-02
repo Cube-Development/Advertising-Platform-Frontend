@@ -123,28 +123,25 @@ export const managerProjectsAPI = authApi.injectEndpoints({
           ...response,
           status: arg?.status,
           isLast:
-            response.projects.length !== INTERSECTION_ELEMENTS.managerOrders,
+            response?.elements ===
+            response?.projects?.length +
+              (response?.page - 1) * INTERSECTION_ELEMENTS.managerOrders,
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
         const { language, date_sort, status } = queryArgs;
-        return `${endpointName}/${language}/${date_sort}/${status}`;
+        return `${endpointName}/${status}/${date_sort}/${language}`;
       },
       merge: (currentCache, newItems, arg) => {
         if (arg.arg.page === 1) {
           return {
             ...newItems,
-            isLast:
-              newItems.projects.length !== INTERSECTION_ELEMENTS.managerOrders,
           };
         }
 
         return {
           ...newItems,
           projects: [...currentCache.projects, ...newItems.projects],
-          status: arg.arg.status,
-          isLast:
-            newItems.projects.length !== INTERSECTION_ELEMENTS.managerOrders,
         };
       },
 

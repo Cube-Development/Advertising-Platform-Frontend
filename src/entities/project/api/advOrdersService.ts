@@ -147,29 +147,25 @@ export const advProjectsAPI = authApi.injectEndpoints({
         return {
           ...response,
           status: arg?.status,
-          isLast: response.projects.length !== INTERSECTION_ELEMENTS.advOrders,
+          isLast:
+            response?.elements ===
+            response?.projects?.length +
+              (response?.page - 1) * INTERSECTION_ELEMENTS.advOrders,
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
-        const { status } = queryArgs;
-        // console.log( `${endpointName}/${status}/${page}`)
-        return `${endpointName}/${status}`;
+        const { language, date_sort, status } = queryArgs;
+        return `${endpointName}/${language}/${date_sort}/${status}`;
       },
       merge: (currentCache, newItems, arg) => {
         if (arg.arg.page === 1) {
           return {
             ...newItems,
-            status: arg.arg.status,
-            isLast:
-              newItems.projects.length !== INTERSECTION_ELEMENTS.advOrders,
           };
         }
-
         return {
           ...newItems,
           projects: [...currentCache.projects, ...newItems.projects],
-          status: arg.arg.status,
-          isLast: newItems.projects.length !== INTERSECTION_ELEMENTS.advOrders,
         };
       },
 
@@ -228,7 +224,10 @@ export const advProjectsAPI = authApi.injectEndpoints({
         return {
           ...response,
           status: arg?.status,
-          isLast: response.projects.length !== INTERSECTION_ELEMENTS.advOrders,
+          isLast:
+            response?.elements ===
+            response?.projects?.length +
+              (response?.page - 1) * INTERSECTION_ELEMENTS.advOrders,
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
@@ -239,17 +238,11 @@ export const advProjectsAPI = authApi.injectEndpoints({
         if (arg.arg.page === 1) {
           return {
             ...newItems,
-            status: arg.arg.status,
-            isLast:
-              newItems.projects.length !== INTERSECTION_ELEMENTS.advOrders,
           };
         }
-
         return {
           ...newItems,
           projects: [...currentCache.projects, ...newItems.projects],
-          status: arg.arg.status,
-          isLast: newItems.projects.length !== INTERSECTION_ELEMENTS.advOrders,
         };
       },
     }),

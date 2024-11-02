@@ -13,7 +13,6 @@ import { ShowMoreBtn } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 import styles from "./styles.module.scss";
 
@@ -23,7 +22,6 @@ interface ReviewsProps {
 }
 
 export const Reviews: FC<ReviewsProps> = ({ card, isLoadingReviews }) => {
-  const { t } = useTranslation();
   const [activeType, setActiveType] = useState<ratingData | null>(null);
   const [currentLast, setCurrentLast] = useState<string | null>(null);
 
@@ -77,28 +75,30 @@ export const Reviews: FC<ReviewsProps> = ({ card, isLoadingReviews }) => {
               onChange={handleChangeActiveType}
             />
           </motion.div>
-          <div className={styles.reviews__wrapper}>
-            {(reviews?.reviews || []).map((review, index) => (
-              <motion.div
-                key={review.date + review.email + index} // заменить на review.id когда будет апи
-                initial="hidden"
-                animate="visible"
-                custom={index % INTERSECTION_ELEMENTS.channelReview}
-                variants={PAGE_ANIMATION.animationUp}
-              >
-                <ReviewCard card={review} />
-              </motion.div>
-            ))}
-            {isLoading &&
-              Array.from({ length: INTERSECTION_ELEMENTS.channelReview }).map(
-                (_, index) => <SkeletonReviewCard key={index} />,
+          {!!reviews?.reviews?.length && (
+            <div className={styles.reviews__wrapper}>
+              {reviews?.reviews.map((review, index) => (
+                <motion.div
+                  key={review.date + review.email + index} // заменить на review.id когда будет апи
+                  initial="hidden"
+                  animate="visible"
+                  custom={index % INTERSECTION_ELEMENTS.channelReview}
+                  variants={PAGE_ANIMATION.animationUp}
+                >
+                  <ReviewCard card={review} />
+                </motion.div>
+              ))}
+              {isLoading &&
+                Array.from({ length: INTERSECTION_ELEMENTS.channelReview }).map(
+                  (_, index) => <SkeletonReviewCard key={index} />,
+                )}
+              {reviews?.isLast && (
+                <div className={styles.show_more} onClick={handleOnChangePage}>
+                  <ShowMoreBtn />
+                </div>
               )}
-            {reviews?.isLast && (
-              <div className={styles.show_more} onClick={handleOnChangePage}>
-                <ShowMoreBtn />
-              </div>
-            )}
-          </div>
+            </div>
+          )}
         </>
       ) : (
         <>

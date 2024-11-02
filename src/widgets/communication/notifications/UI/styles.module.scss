@@ -15,7 +15,7 @@
 }
 
 .content {
-  display: grid;
+  display: grid !important;
   grid-template: min-content 1fr / 1fr;
   background: var(--Personal-colors-White);
   position: relative;
@@ -43,6 +43,7 @@
       font-style: normal;
       font-weight: 600;
       line-height: 1;
+
       @media (max-width: 768px) {
         text-align: center;
       }
@@ -79,12 +80,15 @@
     }
   }
 
-  .notifications {
-    display: grid;
-    grid-auto-flow: row;
-    row-gap: 10px;
+  .notifications__wrapper {
     padding: 10px;
     overflow-y: scroll;
+
+    .notifications {
+      display: grid;
+      grid-auto-flow: row;
+      row-gap: 10px;
+    }
   }
 
   .message {
