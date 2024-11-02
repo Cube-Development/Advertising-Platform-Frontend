@@ -117,12 +117,6 @@ export const Notifications: FC = () => {
     };
   }, []);
 
-  const divVariants = {
-    close: { opacity: 0, x: "100%" },
-    open: { opacity: 1, x: "0%" },
-    transition: { transition: { duration: 0.5 } },
-  };
-
   return (
     <div className={styles.wrapper}>
       {screen >= BREAKPOINT.MD ? (
@@ -147,42 +141,44 @@ export const Notifications: FC = () => {
               )}
             </div>
             {data?.notifications?.length ? (
-              <div className={styles.notifications}>
-                {data?.notifications.map((card, index) => (
-                  <motion.div
-                    key={index}
-                    initial="hidden"
-                    animate="visible"
-                    custom={index % INTERSECTION_ELEMENTS.notifications}
-                    variants={PAGE_ANIMATION.animationUp}
-                    onClick={() => handleChangeNotification(card)}
-                  >
-                    <NotificationCard card={card} />
-                  </motion.div>
-                ))}
-                {isFetching &&
-                  Array.from({
-                    length: INTERSECTION_ELEMENTS.notifications,
-                  }).map((_, index) => (
-                    <SkeletonNotificationCard key={index} />
-                  ))}
-                {!data?.isLast && !isFetching && (
-                  <DinamicPagination onChange={handleChangePage} />
-                )}
-                <AnimatePresence>
-                  {currentNotification && (
+              <div className={styles.notifications__wrapper}>
+                <div className={styles.notifications}>
+                  {data?.notifications.map((card, index) => (
                     <motion.div
+                      key={index}
                       initial="hidden"
                       animate="visible"
-                      exit="hidden"
-                      transition={PAGE_ANIMATION.sideTransition.transition}
-                      variants={PAGE_ANIMATION.sideTransition}
-                      className={styles.message}
+                      custom={index % INTERSECTION_ELEMENTS.notifications}
+                      variants={PAGE_ANIMATION.animationUp}
+                      onClick={() => handleChangeNotification(card)}
                     >
-                      <NotificationMessage card={currentNotification} />
+                      <NotificationCard card={card} />
                     </motion.div>
+                  ))}
+                  {isFetching &&
+                    Array.from({
+                      length: INTERSECTION_ELEMENTS.notifications,
+                    }).map((_, index) => (
+                      <SkeletonNotificationCard key={index} />
+                    ))}
+                  {!data?.isLast && !isFetching && (
+                    <DinamicPagination onChange={handleChangePage} />
                   )}
-                </AnimatePresence>
+                  <AnimatePresence>
+                    {currentNotification && (
+                      <motion.div
+                        initial="hidden"
+                        animate="visible"
+                        exit="hidden"
+                        transition={PAGE_ANIMATION.sideTransition.transition}
+                        variants={PAGE_ANIMATION.sideTransition}
+                        className={styles.message}
+                      >
+                        <NotificationMessage card={currentNotification} />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </div>
             ) : (
               <></>
@@ -218,48 +214,50 @@ export const Notifications: FC = () => {
               )}
             </DrawerTitle>
             {data?.notifications?.length ? (
-              <div className={styles.notifications}>
-                {data?.notifications.map((card, index) => (
-                  <motion.div
-                    key={index}
-                    initial="hidden"
-                    animate="visible"
-                    custom={index % INTERSECTION_ELEMENTS.notifications}
-                    variants={PAGE_ANIMATION.animationUp}
-                    onClick={() => handleChangeNotification(card)}
-                  >
-                    <NotificationCard card={card} />
-                  </motion.div>
-                ))}
-                {isFetching &&
-                  Array.from({
-                    length: INTERSECTION_ELEMENTS.notifications,
-                  }).map((_, index) => (
-                    <SkeletonNotificationCard key={index} />
-                  ))}
-                {!data?.isLast && !isFetching && (
-                  <DinamicPagination onChange={handleChangePage} />
-                )}
-                <AnimatePresence>
-                  {currentNotification && (
+              <div className={styles.notifications__wrapper}>
+                <div className={styles.notifications}>
+                  {data?.notifications.map((card, index) => (
                     <motion.div
+                      key={index}
                       initial="hidden"
                       animate="visible"
-                      exit="hidden"
-                      transition={PAGE_ANIMATION.sideTransition.transition}
-                      variants={PAGE_ANIMATION.sideTransition}
-                      className={styles.message}
-                      drag="x"
-                      dragConstraints={{ left: 0, right: 0 }}
-                      onDragEnd={(event, info) => {
-                        console.log(event, info);
-                        if (info.offset.x > 100) handleClose(); // Если свайп вправо больше 100px, закрыть чат
-                      }}
+                      custom={index % INTERSECTION_ELEMENTS.notifications}
+                      variants={PAGE_ANIMATION.animationUp}
+                      onClick={() => handleChangeNotification(card)}
                     >
-                      <NotificationMessage card={currentNotification} />
+                      <NotificationCard card={card} />
                     </motion.div>
+                  ))}
+                  {isFetching &&
+                    Array.from({
+                      length: INTERSECTION_ELEMENTS.notifications,
+                    }).map((_, index) => (
+                      <SkeletonNotificationCard key={index} />
+                    ))}
+                  {!data?.isLast && !isFetching && (
+                    <DinamicPagination onChange={handleChangePage} />
                   )}
-                </AnimatePresence>
+                  <AnimatePresence>
+                    {currentNotification && (
+                      <motion.div
+                        initial="hidden"
+                        animate="visible"
+                        exit="hidden"
+                        transition={PAGE_ANIMATION.sideTransition.transition}
+                        variants={PAGE_ANIMATION.sideTransition}
+                        className={styles.message}
+                        drag="x"
+                        dragConstraints={{ left: 0, right: 0 }}
+                        onDragEnd={(event, info) => {
+                          console.log(event, info);
+                          if (info.offset.x > 100) handleClose(); // Если свайп вправо больше 100px, закрыть чат
+                        }}
+                      >
+                        <NotificationMessage card={currentNotification} />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </div>
               </div>
             ) : (
               <></>

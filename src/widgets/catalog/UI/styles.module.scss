@@ -67,7 +67,7 @@
     .left {
       @media (min-width: 993px) {
         position: sticky;
-        top: 100px;
+        top: var(--sticky-blog-top);
         width: 100%;
         min-width: 390px;
       }

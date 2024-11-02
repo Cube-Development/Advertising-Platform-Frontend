@@ -21,10 +21,10 @@
 .close {
   position: absolute;
   top: 0px;
-  right: 10px;
+  right: 0px;
 
   div {
-    padding: 15px;
+    padding: 10px;
     border-radius: 50%;
     &:hover {
       background-color: rgba(0, 0, 0, 0.1);

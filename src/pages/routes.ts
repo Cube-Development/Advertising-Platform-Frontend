@@ -40,9 +40,7 @@ export const onlyPublicCommonRoutes: IRoute[] = [
 ];
 
 export const publicCommonRoutes: IRoute[] = [
-  // { path: paths.orders, component: OrdersPage },
-  // { path: paths.myChannels, component: MyChannelsPage, sidebar: true },
-  { path: paths.faq, component: FAQPage },
+  { path: paths.faq, component: FAQPage, sidebar: true },
   { path: paths.notFound, component: NotFoundPage },
   { path: paths.channel, component: ChannelPage },
 ];
@@ -70,5 +68,5 @@ export const publicAdvertiserRoutes: IRoute[] = [
 ];
 
 export const createOrderRoutes: IRoute[] = [
-  { path: paths.createOrder, component: CreateOrderPage, sidebar: false },
+  { path: paths.createOrder, component: CreateOrderPage },
 ];

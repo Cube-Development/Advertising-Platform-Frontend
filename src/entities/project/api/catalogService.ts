@@ -56,7 +56,10 @@ export const catalogAPI = baseApi.injectEndpoints({
       transformResponse: (response: ICatalogCards) => {
         return {
           ...response,
-          isLast: response.channels.length !== INTERSECTION_ELEMENTS.catalog,
+          isLast:
+            response?.elements ===
+            response?.channels?.length +
+              (response?.page - 1) * INTERSECTION_ELEMENTS.catalog,
         };
       },
       serializeQueryArgs: ({ endpointName }) => {
@@ -66,13 +69,11 @@ export const catalogAPI = baseApi.injectEndpoints({
         if (arg.arg.page === 1) {
           return {
             ...newItems,
-            isLast: newItems.channels.length !== INTERSECTION_ELEMENTS.catalog,
           };
         }
         return {
           ...newItems,
           channels: [...currentCache.channels, ...newItems.channels],
-          isLast: newItems.channels.length !== INTERSECTION_ELEMENTS.catalog,
         };
       },
       forceRefetch({ currentArg, previousArg }) {

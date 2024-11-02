@@ -22,32 +22,45 @@ import styles from "./styles.module.scss";
 import { TemplateProjectsList } from "./templateProjects";
 
 export const AdvOrders: FC = () => {
+  const page = pageFilter.order;
   const language = Languages.find((lang) => {
     return i18n.language === lang.name;
   });
-
   const { order_type } = QueryParams();
 
   const { setValue, watch } = useForm<{
     status: advManagerProjectStatusFilter | myProjectStatusFilter | string;
     type: projectTypesFilter | string;
+    page: number;
   }>({
     defaultValues: {
       status: myProjectStatusFilter.active,
       type: projectTypesFilter.myProject,
+      page: 1,
     },
   });
   const formState = watch();
 
-  const page = pageFilter.order;
-  const [currentPage, setCurrentPage] = useState(1);
   const handleOnChangePage = () => {
-    setCurrentPage(currentPage + 1);
+    setValue("page", formState.page + 1);
   };
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [formState.status]);
+  const handleChangeStatus = (
+    status: advManagerProjectStatusFilter | myProjectStatusFilter | string,
+  ) => {
+    setValue("status", status);
+    setValue("page", 1);
+  };
+
+  const handleChangeType = (type: projectTypesFilter | string) => {
+    setValue("type", type);
+    setValue(
+      "status",
+      advertiserProjectTypes.find((item) => item.type === type)?.status ||
+        advertiserProjectTypes[0].status,
+    );
+    setValue("page", 1);
+  };
 
   // check queries for project types to show current orders
   useEffect(() => {
@@ -65,7 +78,7 @@ export const AdvOrders: FC = () => {
   }, [order_type]);
 
   const getParams: getProjectsCardReq = {
-    page: currentPage,
+    page: formState.page,
     date_sort: dateSortingTypes.decrease,
     status: formState.status,
     elements_on_page: INTERSECTION_ELEMENTS.advOrders,
@@ -90,15 +103,14 @@ export const AdvOrders: FC = () => {
         <BarFilter
           page={page}
           listLength={
-            // true
             !!(
               projectsSelf?.projects?.length ||
               projectsManager?.projects?.length
             )
           }
           typeFilter={formState.type}
-          changeStatus={(status) => setValue("status", status)}
-          changeType={(type) => setValue("type", type)}
+          changeStatus={(status) => handleChangeStatus(status)}
+          changeType={(type) => handleChangeType(type)}
           statusFilter={formState.status}
         />
         {formState.type === projectTypesFilter.managerProject &&
@@ -134,7 +146,6 @@ export const AdvOrders: FC = () => {
               (projectsManager?.status === formState.status &&
                 projectsManager?.projects) ||
               []
-              // advMyProjectActiveCARDS.projects || []
             }
             handleOnChangePage={handleOnChangePage}
             isLoading={isFetchingManager}

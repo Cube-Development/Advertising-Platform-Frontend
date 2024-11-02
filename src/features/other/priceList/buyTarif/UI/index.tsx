@@ -6,7 +6,7 @@ import {
   useGetUploadLinkMutation,
   usePostBuyTarifMutation,
 } from "@entities/project";
-import { IBuyTarif } from "@entities/project/types/turnkey";
+import { IBuyTarif } from "@entities/project";
 import {
   AddFileIcon,
   CancelIcon2,
@@ -184,6 +184,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
           extension: getFileExtension(file),
           content_type: ContentType.file,
         }).unwrap();
+        console.log("data", data, file);
         await fetch(data?.url, {
           method: "PUT",
           body: file,

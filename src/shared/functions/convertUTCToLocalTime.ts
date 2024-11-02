@@ -30,34 +30,57 @@ export function convertUTCToLocalDateTime(
 export function getFormattedDateTime() {
   const now = new Date();
 
-  const utcDate =
-    now.getUTCFullYear() +
-    "-" +
-    String(now.getUTCMonth() + 1).padStart(2, "0") +
-    "-" +
-    String(now.getUTCDate()).padStart(2, "0");
+  // const utcDate =
+  //   now.getUTCFullYear() +
+  //   "-" +
+  //   String(now.getUTCMonth() + 1).padStart(2, "0") +
+  //   "-" +
+  //   String(now.getUTCDate()).padStart(2, "0");
 
-  const utcTime =
-    String(now.getUTCHours()).padStart(2, "0") +
-    ":" +
-    String(now.getUTCMinutes()).padStart(2, "0") +
-    ":" +
-    String(now.getUTCSeconds()).padStart(2, "0") +
-    "." +
-    String(now.getUTCMilliseconds()).padStart(6, "0") +
-    "000000";
+  // const utcTime =
+  //   String(now.getUTCHours()).padStart(2, "0") +
+  //   ":" +
+  //   String(now.getUTCMinutes()).padStart(2, "0") +
+  //   ":" +
+  //   String(now.getUTCSeconds()).padStart(2, "0") +
+  //   "." +
+  //   String(now.getUTCMilliseconds()).padStart(6, "0") +
+  //   "000000";
 
-  const localDate =
-    now.getFullYear() +
-    "-" +
-    String(now.getMonth() + 1).padStart(2, "0") +
-    "-" +
-    String(now.getDate()).padStart(2, "0");
+  // const localDate =
+  //   now.getFullYear() +
+  //   "-" +
+  //   String(now.getMonth() + 1).padStart(2, "0") +
+  //   "-" +
+  //   String(now.getDate()).padStart(2, "0");
 
-  const localTime =
-    String(now.getHours()).padStart(2, "0") +
-    ":" +
-    String(now.getMinutes()).padStart(2, "0");
+  // const localTime =
+  //   String(now.getHours()).padStart(2, "0") +
+  //   ":" +
+  //   String(now.getMinutes()).padStart(2, "0");
+
+  const utcYear = now.getUTCFullYear();
+  const utcMonth = String(now.getUTCMonth() + 1).padStart(2, "0");
+  const utcDay = String(now.getUTCDate()).padStart(2, "0");
+
+  const utcHours = String(now.getUTCHours()).padStart(2, "0");
+  const utcMinutes = String(now.getUTCMinutes()).padStart(2, "0");
+  const utcSeconds = String(now.getUTCSeconds()).padStart(2, "0");
+  const utcMilliseconds =
+    String(now.getUTCMilliseconds()).padStart(3, "0") + "000000";
+
+  const utcDate = `${utcYear}-${utcMonth}-${utcDay}`;
+  const utcTime = `${utcHours}:${utcMinutes}:${utcSeconds}.${utcMilliseconds}`;
+
+  const localYear = now.getFullYear();
+  const localMonth = String(now.getMonth() + 1).padStart(2, "0");
+  const localDay = String(now.getDate()).padStart(2, "0");
+
+  const localHours = String(now.getHours()).padStart(2, "0");
+  const localMinutes = String(now.getMinutes()).padStart(2, "0");
+
+  const localDate = `${localDay}.${localMonth}.${localYear}`;
+  const localTime = `${localHours}:${localMinutes}`;
 
   return {
     utcDate: utcDate,

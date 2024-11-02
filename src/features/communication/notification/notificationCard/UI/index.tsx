@@ -16,6 +16,8 @@ export const NotificationCard: FC<NotificationCardProps> = ({ card }) => {
   const title =
     notificationsStatus.find((item) => item.type === card?.data?.method)
       ?.name || "...";
+
+  const stripHtml = (html: string) => html.replace(/<\/?[^>]+(>|$)/g, " ");
   return (
     <div
       className={`${styles.wrapper} ${!card?.is_read ? styles.isUnread : ""}`}
@@ -27,7 +29,11 @@ export const NotificationCard: FC<NotificationCardProps> = ({ card }) => {
       </div>
       <div className={styles.text__wrapper}>
         <p className={`${styles.title} truncate`}>{t(title)}</p>
-        <span className={styles.text}>{card?.data?.text}</span>
+        {/* <span
+          className={styles.text}
+          dangerouslySetInnerHTML={{ __html: card?.data?.text || "" }}
+        /> */}
+        <span className={styles.text}>{stripHtml(card?.data?.text)}</span>
       </div>
       <div className={styles.info}>
         <span>{card?.created_date}</span>

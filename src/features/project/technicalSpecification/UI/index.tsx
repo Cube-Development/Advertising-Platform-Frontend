@@ -28,23 +28,13 @@ import {
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { contentTypeToExtension } from "@shared/types";
 
 interface TechnicalSpecificationProps {
   isFull?: boolean;
   card: IManagerNewProjectCard | IManagerProjectCard;
   SendToBotBtn: FC;
 }
-
-const contentTypeToExtension: Record<string, string> = {
-  "application/pdf": ".pdf",
-  "image/jpeg": ".jpg",
-  "image/png": ".png",
-  "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-    ".docx",
-  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": ".xlsx",
-  "text/plain": ".txt",
-  "application/zip": ".zip",
-};
 
 export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
   isFull,
@@ -74,7 +64,11 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
       const updatedFiles = await Promise.all(
         allFiles.map(async (file, index) => {
           let filename = "filename_" + (index + 1);
-          const response = await fetch(file.content);
+          console.log("contentType", file);
+          const response = await fetch(file.content, {
+            method: "HEAD",
+          });
+          console.log("response", response);
           const contentType = response.headers.get("Content-Type");
           const extension =
             contentTypeToExtension[contentType ? contentType : ""] || "";
@@ -83,6 +77,7 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
           }
 
           const size = response.headers.get("Content-Length");
+          console.log("size", size);
           const [sizeString, sizeType] = formatFileSizeAndType(
             size ? parseInt(size) : 0,
           );

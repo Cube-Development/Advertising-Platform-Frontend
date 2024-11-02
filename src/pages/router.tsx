@@ -18,8 +18,8 @@ import { roles } from "@entities/user";
 import { useAppSelector } from "@shared/hooks";
 
 const HandleLayout = ({ route }: { route: IRoute }) => {
-  const { isAuth } = useAppSelector((state) => state.user); // Хук вызывается корректно
-  return isAuth ? (
+  const { isAuth } = useAppSelector((state) => state.user);
+  return isAuth && route.sidebar ? (
     <SideBarLayout>
       <route.component />
     </SideBarLayout>
@@ -31,7 +31,7 @@ const HandleLayout = ({ route }: { route: IRoute }) => {
 const handleRouter = (routes: IRoute[]) => {
   const router: RouteObject[] = routes.map((route) => ({
     path: route.path,
-    element: <HandleLayout route={route} />, // Передаём компонент как JSX
+    element: <HandleLayout route={route} />,
   }));
   return router;
 };

@@ -15,7 +15,7 @@
   z-index: 50;
 
   &.hidden {
-    transform: translateY(-120%);
+    transform: translateY(-130%);
     @media (max-width: 768px) {
       transform: translateY(0);
     }

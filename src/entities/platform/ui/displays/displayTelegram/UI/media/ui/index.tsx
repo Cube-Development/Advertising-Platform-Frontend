@@ -29,7 +29,7 @@ export const TelegramMedia: FC<TelegramMediaProps> = ({
                 alt={`Photo ${index + 1}`}
               />
             ) : (
-              <video controls autoPlay muted>
+              <video controls>
                 <source src={URL.createObjectURL(media)} type="video/mp4" />
                 <source src={URL.createObjectURL(media)} type="video/ogg" />
                 Your browser does not support the video tag.
@@ -37,7 +37,7 @@ export const TelegramMedia: FC<TelegramMediaProps> = ({
             )}
             <div
               onClick={() => GenerateDownloadLink(media, media?.name)}
-              className="absolute bottom-2 right-2 rounded-full bg-[#ababab] opacity-75 hover:opacity-100 flex items-center content-center p-1 cursor-pointer"
+              className="absolute bottom-3 right-3 rounded-full bg-[#ababab] opacity-75 hover:opacity-100 flex items-center content-center p-1 cursor-pointer"
             >
               <Download width={iconSize} height={iconSize} stroke="#fff" />
             </div>
@@ -52,7 +52,7 @@ export const TelegramMedia: FC<TelegramMediaProps> = ({
             {media.content_type === ContentType.photo ? (
               <img src={media.content} alt={`Photo ${index + 1}`} />
             ) : (
-              <video controls autoPlay muted>
+              <video controls>
                 <source src={media.content} type="video/mp4" />
                 Your browser does not support the video tag.
               </video>
@@ -61,7 +61,7 @@ export const TelegramMedia: FC<TelegramMediaProps> = ({
               onClick={() =>
                 GenerateDownloadLink(media?.content, `File_${index + 1}`)
               }
-              className="absolute bottom-2 right-2 rounded-full bg-[#ababab] opacity-75 hover:opacity-100 flex items-center content-center p-1 cursor-pointer"
+              className="absolute bottom-3 right-3 rounded-full bg-[#ababab] opacity-75 hover:opacity-100 flex items-center content-center p-1 cursor-pointer"
             >
               <Download width={iconSize} height={iconSize} stroke="#fff" />
             </div>

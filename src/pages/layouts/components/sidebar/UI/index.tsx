@@ -98,10 +98,10 @@ export const Sidebar: FC = () => {
   }, [debouncedPosition]);
 
   return (
-    <div
-      className={`${styles.wrapper} ${isScrollingUp || lastScrollY === 0 ? styles.visible : styles.hidden}`}
-    >
-      <div className={styles.menu}>
+    <div className={`${styles.wrapper}`}>
+      <div
+        className={`${styles.menu} ${isScrollingUp || lastScrollY === 0 ? styles.visible : styles.hidden}`}
+      >
         <div className={styles.switcher}>
           <div className={styles.switcher__row}>
             <Link

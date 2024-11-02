@@ -62,7 +62,10 @@ export const channelAPI = authApi.injectEndpoints({
         return {
           ...response,
           status: arg?.status,
-          isLast: response.channels.length !== INTERSECTION_ELEMENTS.myChannels,
+          isLast:
+            response?.elements ===
+            response?.channels?.length +
+              (response?.page - 1) * INTERSECTION_ELEMENTS.myChannels,
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
@@ -73,16 +76,11 @@ export const channelAPI = authApi.injectEndpoints({
         if (arg.arg.page === 1) {
           return {
             ...newItems,
-            status: arg.arg.status,
-            isLast:
-              newItems.channels.length !== INTERSECTION_ELEMENTS.myChannels,
           };
         }
         return {
           ...currentCache,
           channels: [...currentCache.channels, ...newItems.channels],
-          status: arg.arg.status,
-          isLast: newItems.channels.length !== INTERSECTION_ELEMENTS.myChannels,
         };
       },
       forceRefetch: ({ currentArg, previousArg }) => {
@@ -126,8 +124,6 @@ export const channelAPI = authApi.injectEndpoints({
         return {
           ...newItems,
           reviews: [...currentCache.reviews, ...newItems.reviews],
-          isLast:
-            newItems.reviews.length !== INTERSECTION_ELEMENTS.channelReview,
         };
       },
     }),

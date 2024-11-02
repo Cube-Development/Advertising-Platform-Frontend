@@ -9,6 +9,7 @@ import styles from "./styles.module.scss";
 import { UseFormGetValues, UseFormRegister } from "react-hook-form";
 import { ICreateOrderBlur } from "@widgets/createOrder/config";
 import { CreatePostData, ICreatePostForm } from "@entities/project";
+import { useToast } from "@shared/ui";
 
 interface CreateOrderTopProps {
   onChangeBlur: (key: keyof ICreateOrderBlur) => void;
@@ -22,10 +23,16 @@ export const CreateOrderTop: FC<CreateOrderTopProps> = ({
   getValues,
 }) => {
   const { t } = useTranslation();
+  const { toast } = useToast();
 
   const handleOnChangeBlur = () => {
     if (getValues("name")) {
       onChangeBlur("post");
+    } else {
+      toast({
+        variant: "error",
+        title: t("toasts.create_order.top.title_empty_error"),
+      });
     }
   };
 
@@ -59,7 +66,7 @@ export const CreateOrderTop: FC<CreateOrderTopProps> = ({
                     })}
                   />
                 </div>
-                <button onClick={handleOnChangeBlur}>
+                <button type="button" onClick={handleOnChangeBlur}>
                   <ArrowLongHorizontalIcon className="active__icon" />
                 </button>
               </div>
