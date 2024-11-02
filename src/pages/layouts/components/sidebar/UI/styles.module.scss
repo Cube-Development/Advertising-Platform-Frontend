@@ -6,22 +6,10 @@
   height: auto;
   background: rgba(255, 255, 255, 0.5);
   backdrop-filter: blur(20px);
-  // overflow-y: auto;
   border-radius: 50px;
   width: var(--header-height-xl);
   border: 1px solid rgba(142, 84, 233, 0.2);
   z-index: 40;
-
-  transition: transform 0.5s ease-in-out;
-  transform: translateY(0);
-
-  &.hidden {
-    transform: translateY(-110%);
-  }
-
-  &.visible {
-    transform: translateY(0);
-  }
 
   @media (max-width: 992px) {
     display: none;
@@ -55,6 +43,16 @@
     grid-auto-flow: row;
     row-gap: 25px;
     justify-content: center;
+
+    transition: all 0.5s ease;
+
+    &.hidden {
+      padding-top: 2rem;
+    }
+
+    &.visible {
+      padding-top: calc(var(--container-padding-top) + 3rem);
+    }
 
     &__accordion {
       display: grid;

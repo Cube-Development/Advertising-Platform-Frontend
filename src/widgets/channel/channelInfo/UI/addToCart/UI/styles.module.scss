@@ -1,6 +1,6 @@
 .wrapper {
   position: sticky;
-  top: 100px;
+  top: var(--sticky-blog-top);
   right: 0;
 
   display: grid;

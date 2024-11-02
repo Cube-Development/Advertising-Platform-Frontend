@@ -1,0 +1,22 @@
+export const contentTypeToExtension: Record<string, string> = {
+  "application/pdf": ".pdf",
+  "image/jpeg": ".jpg",
+  "image/png": ".png",
+  "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
+    ".docx",
+  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": ".xlsx",
+  "text/plain": ".txt",
+  "application/zip": ".zip",
+  "video/mp4": ".mp4",
+  "video/quicktime": ".mov",
+  "video/x-msvideo": ".avi",
+  "video/x-matroska": ".mkv",
+  "audio/mpeg": ".mp3",
+  "audio/wav": ".wav",
+  "application/json": ".json",
+  "image/gif": ".gif",
+  "image/bmp": ".bmp",
+  "image/webp": ".webp",
+  "application/msword": ".doc",
+  "application/vnd.ms-excel": ".xls",
+};

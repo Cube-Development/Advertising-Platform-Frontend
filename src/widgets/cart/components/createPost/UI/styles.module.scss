@@ -10,7 +10,7 @@
 
   //sticky
   position: sticky;
-  top: 100px;
+  top: var(--sticky-blog-top);
 
   @media (max-width: 992px) {
     grid-auto-flow: column;

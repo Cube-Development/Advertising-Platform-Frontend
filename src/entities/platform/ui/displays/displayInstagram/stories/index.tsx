@@ -12,6 +12,7 @@ import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
 import Underline from "@tiptap/extension-underline";
+import { DownloadAllBtn } from "../../downloadAllBtn";
 
 interface DisplayStoriesProps {
   formState?: ICreatePostForm;
@@ -92,46 +93,78 @@ export const DisplayStories: FC<DisplayStoriesProps> = ({
     storiesHeightSize: number;
   } | null>(null);
 
+  // useEffect(() => {
+  //   const updateSizes = () => {
+  //     if (imgRef.current) {
+  //       const imgWidth = imgRef.current.offsetWidth;
+
+  //       const calculatedRadius = (imgWidth / 364) * 54;
+  //       const calculatedTimeSize = (imgWidth / 364) * 14;
+  //       const calculatedChannelNameSize = (imgWidth / 364) * 10;
+  //       const calculatedChannelIconSize = (imgWidth / 364) * 20;
+  //       const calculatedDisplayTopSize = (imgWidth / 364) * 50;
+  //       const calculatedDisplayBottomSize = (imgWidth / 364) * 80;
+  //       const calculatedDownloadIconSize = (imgWidth / 364) * 20;
+  //       const calculatedStoriesHeightSize = (imgWidth / 364) * 600;
+
+  //       // Обновляем все значения в состоянии
+  //       setResizes({
+  //         borderRadius: calculatedRadius,
+  //         timeSize: calculatedTimeSize,
+  //         channelNameSize: calculatedChannelNameSize,
+  //         channelIconSize: calculatedChannelIconSize,
+  //         displayTopSize: calculatedDisplayTopSize,
+  //         displayBottomSize: calculatedDisplayBottomSize,
+  //         downloadIconSize: calculatedDownloadIconSize,
+  //         storiesHeightSize: calculatedStoriesHeightSize,
+  //       });
+  //     }
+  //   };
+
+  //   updateSizes();
+
+  //   setTimeout(() => {
+  //     updateSizes();
+  //   }, 300);
+
+  //   setTimeout(() => {
+  //     updateSizes();
+  //   }, 600);
+
+  //   setTimeout(() => {
+  //     updateSizes();
+  //   }, 1000);
+
+  //   window.addEventListener("resize", updateSizes);
+
+  //   return () => {
+  //     window.removeEventListener("resize", updateSizes);
+  //   };
+  // }, [imgRef.current?.offsetWidth]);
+
   useEffect(() => {
+    const imgElement = imgRef.current;
+    if (!imgElement) return;
+
     const updateSizes = () => {
-      if (imgRef.current) {
-        const imgWidth = imgRef.current.offsetWidth;
-
-        const calculatedRadius = (imgWidth / 364) * 54;
-        const calculatedTimeSize = (imgWidth / 364) * 14;
-        const calculatedChannelNameSize = (imgWidth / 364) * 10;
-        const calculatedChannelIconSize = (imgWidth / 364) * 20;
-        const calculatedDisplayTopSize = (imgWidth / 364) * 50;
-        const calculatedDisplayBottomSize = (imgWidth / 364) * 80;
-        const calculatedDownloadIconSize = (imgWidth / 364) * 14;
-        const calculatedStoriesHeightSize = (imgWidth / 364) * 600;
-
-        // Обновляем все значения в состоянии
-        setResizes({
-          borderRadius: calculatedRadius,
-          timeSize: calculatedTimeSize,
-          channelNameSize: calculatedChannelNameSize,
-          channelIconSize: calculatedChannelIconSize,
-          displayTopSize: calculatedDisplayTopSize,
-          displayBottomSize: calculatedDisplayBottomSize,
-          downloadIconSize: calculatedDownloadIconSize,
-          storiesHeightSize: calculatedStoriesHeightSize,
-        });
-      }
+      const imgWidth = imgElement.offsetWidth;
+      setResizes({
+        borderRadius: (imgWidth / 364) * 54,
+        timeSize: (imgWidth / 364) * 14,
+        channelNameSize: (imgWidth / 364) * 10,
+        channelIconSize: (imgWidth / 364) * 20,
+        displayTopSize: (imgWidth / 364) * 50,
+        displayBottomSize: (imgWidth / 364) * 80,
+        downloadIconSize: (imgWidth / 364) * 20,
+        storiesHeightSize: (imgWidth / 364) * 600,
+      });
     };
 
-    updateSizes();
+    const observer = new ResizeObserver(updateSizes);
+    observer.observe(imgElement);
 
-    setTimeout(() => {
-      updateSizes();
-    }, 300);
-
-    window.addEventListener("resize", updateSizes);
-
-    return () => {
-      window.removeEventListener("resize", updateSizes);
-    };
-  }, [imgRef.current?.offsetWidth]);
+    return () => observer.disconnect();
+  }, [imgRef]);
 
   const postEditor = useEditor({
     extensions: [StarterKit, Link, Underline],
@@ -254,15 +287,6 @@ export const DisplayStories: FC<DisplayStoriesProps> = ({
                       <p>No content yet...</p>
                     </div>
                   )}
-                  {/* {postText && (
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: postText[0]?.content || "",
-                      }}
-                      className={styles.post__text}
-                      style={{ fontSize: `${resizes?.timeSize}px` }}
-                    />
-                  )} */}
                   <EditorContent
                     className={styles.post__text}
                     editor={postEditor}
@@ -334,15 +358,6 @@ export const DisplayStories: FC<DisplayStoriesProps> = ({
                       <p>No content yet...</p>
                     </div>
                   )}
-                  {/* {textRes && (
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: textRes[0] || "",
-                      }}
-                      className={styles.post__text}
-                      style={{ fontSize: `${resizes?.timeSize}px` }}
-                    />
-                  )} */}
                   <EditorContent
                     className={styles.post__text}
                     editor={editorRes}
@@ -369,6 +384,11 @@ export const DisplayStories: FC<DisplayStoriesProps> = ({
           </div>
         )}
       </div>
+      <DownloadAllBtn
+        post={post}
+        formState={formState}
+        currentPost={currentPost}
+      />
     </div>
   );
 };

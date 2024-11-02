@@ -63,9 +63,7 @@ export const InstagramMedia: FC<InstagramMediaProps> = ({
                   />
                 ) : (
                   <video
-                    autoPlay
-                    loop
-                    muted
+                    controls
                     className="object-cover h-[300px] w-full"
                     style={{ height: `${feedHeight}px` }}
                   >
@@ -76,7 +74,7 @@ export const InstagramMedia: FC<InstagramMediaProps> = ({
                 )}
                 <div
                   onClick={() => GenerateDownloadLink(media, media?.name)}
-                  className="absolute bottom-2 right-2 rounded-full bg-[#ababab] opacity-75 hover:opacity-100 flex items-center content-center p-1 cursor-pointer"
+                  className="absolute bottom-3 right-3 rounded-full bg-[#ababab] opacity-75 hover:opacity-100 flex items-center content-center p-1 cursor-pointer"
                 >
                   <Download width={iconSize} height={iconSize} stroke="#fff" />
                 </div>
@@ -96,9 +94,7 @@ export const InstagramMedia: FC<InstagramMediaProps> = ({
                   />
                 ) : (
                   <video
-                    autoPlay
-                    loop
-                    muted
+                    controls
                     className="object-cover h-[300px] w-full"
                     style={{ height: `${feedHeight}px` }}
                   >
@@ -110,7 +106,7 @@ export const InstagramMedia: FC<InstagramMediaProps> = ({
                   onClick={() =>
                     GenerateDownloadLink(media?.content, `File_${index + 1}`)
                   }
-                  className="absolute bottom-2 right-2 rounded-full bg-[#ababab] opacity-75 hover:opacity-100 flex items-center content-center p-1 cursor-pointer"
+                  className="absolute bottom-3 right-3 rounded-full bg-[#ababab] opacity-75 hover:opacity-100 flex items-center content-center p-1 cursor-pointer"
                 >
                   <Download width={iconSize} height={iconSize} stroke="#fff" />
                 </div>

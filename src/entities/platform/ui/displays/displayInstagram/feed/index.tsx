@@ -19,6 +19,7 @@ import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
 import Underline from "@tiptap/extension-underline";
+import { DownloadAllBtn } from "../../downloadAllBtn";
 
 interface DisplayFeedProps {
   formState?: ICreatePostForm;
@@ -101,50 +102,86 @@ export const DisplayFeed: FC<DisplayFeedProps> = ({
     avatarSize: number;
   } | null>(null);
 
+  // useEffect(() => {
+  //   const updateSizes = () => {
+  //     if (imgRef.current) {
+  //       const imgWidth = imgRef.current.offsetWidth;
+
+  //       const calculatedRadius = (imgWidth / 364) * 54;
+  //       const calculatedTimeSize = (imgWidth / 364) * 14;
+  //       const calculatedChannelNameSize = (imgWidth / 364) * 8;
+  //       const calculatedChannelPostsSize = (imgWidth / 364) * 12;
+  //       const calculatedFooterIconSize = (imgWidth / 364) * 20;
+  //       const calculatedDisplayTopSize = (imgWidth / 364) * 80;
+  //       const calculatedDisplayBottomSize = (imgWidth / 364) * 60;
+  //       const calculatedDownloadIconSize = (imgWidth / 364) * 20;
+  //       const calculatedFeedHeightSize = (imgWidth / 364) * 300;
+  //       const calculatedAvatarSize = (imgWidth / 364) * 30;
+
+  //       // Обновляем все значения в состоянии
+  //       setResizes({
+  //         borderRadius: calculatedRadius,
+  //         timeSize: calculatedTimeSize,
+  //         channelNameSize: calculatedChannelNameSize,
+  //         channelPostsSize: calculatedChannelPostsSize,
+  //         footerIconSize: calculatedFooterIconSize,
+  //         displayTopSize: calculatedDisplayTopSize,
+  //         displayBottomSize: calculatedDisplayBottomSize,
+  //         downloadIconSize: calculatedDownloadIconSize,
+  //         feedHeightSize: calculatedFeedHeightSize,
+  //         avatarSize: calculatedAvatarSize,
+  //       });
+  //     }
+  //   };
+
+  //   updateSizes();
+
+  //   setTimeout(() => {
+  //     updateSizes();
+  //   }, 300);
+
+  //   setTimeout(() => {
+  //     updateSizes();
+  //   }, 600);
+
+  //   setTimeout(() => {
+  //     updateSizes();
+  //   }, 1000);
+
+  //   console.log("sizes");
+
+  //   window.addEventListener("resize", updateSizes);
+
+  //   return () => {
+  //     window.removeEventListener("resize", updateSizes);
+  //   };
+  // }, [imgRef.current]);
+
   useEffect(() => {
+    const imgElement = imgRef.current;
+    if (!imgElement) return;
+
     const updateSizes = () => {
-      if (imgRef.current) {
-        const imgWidth = imgRef.current.offsetWidth;
-
-        const calculatedRadius = (imgWidth / 364) * 54;
-        const calculatedTimeSize = (imgWidth / 364) * 14;
-        const calculatedChannelNameSize = (imgWidth / 364) * 8;
-        const calculatedChannelPostsSize = (imgWidth / 364) * 12;
-        const calculatedFooterIconSize = (imgWidth / 364) * 20;
-        const calculatedDisplayTopSize = (imgWidth / 364) * 80;
-        const calculatedDisplayBottomSize = (imgWidth / 364) * 60;
-        const calculatedDownloadIconSize = (imgWidth / 364) * 14;
-        const calculatedFeedHeightSize = (imgWidth / 364) * 300;
-        const calculatedAvatarSize = (imgWidth / 364) * 30;
-
-        // Обновляем все значения в состоянии
-        setResizes({
-          borderRadius: calculatedRadius,
-          timeSize: calculatedTimeSize,
-          channelNameSize: calculatedChannelNameSize,
-          channelPostsSize: calculatedChannelPostsSize,
-          footerIconSize: calculatedFooterIconSize,
-          displayTopSize: calculatedDisplayTopSize,
-          displayBottomSize: calculatedDisplayBottomSize,
-          downloadIconSize: calculatedDownloadIconSize,
-          feedHeightSize: calculatedFeedHeightSize,
-          avatarSize: calculatedAvatarSize,
-        });
-      }
+      const imgWidth = imgElement.offsetWidth;
+      setResizes({
+        borderRadius: (imgWidth / 364) * 54,
+        timeSize: (imgWidth / 364) * 14,
+        channelNameSize: (imgWidth / 364) * 8,
+        channelPostsSize: (imgWidth / 364) * 12,
+        footerIconSize: (imgWidth / 364) * 20,
+        displayTopSize: (imgWidth / 364) * 80,
+        displayBottomSize: (imgWidth / 364) * 60,
+        downloadIconSize: (imgWidth / 364) * 20,
+        feedHeightSize: (imgWidth / 364) * 300,
+        avatarSize: (imgWidth / 364) * 30,
+      });
     };
 
-    updateSizes();
+    const observer = new ResizeObserver(updateSizes);
+    observer.observe(imgElement);
 
-    setTimeout(() => {
-      updateSizes();
-    }, 300);
-
-    window.addEventListener("resize", updateSizes);
-
-    return () => {
-      window.removeEventListener("resize", updateSizes);
-    };
-  }, [imgRef.current?.offsetWidth]);
+    return () => observer.disconnect();
+  }, [imgRef]);
 
   const postEditor = useEditor({
     extensions: [StarterKit, Link, Underline],
@@ -158,7 +195,6 @@ export const DisplayFeed: FC<DisplayFeedProps> = ({
     editable: false,
   });
 
-  // Обновляем контент редактора, когда изменяется postText
   useEffect(() => {
     if (postEditor && postText) {
       postEditor.commands.setContent(postText[0]?.content || "");
@@ -323,15 +359,6 @@ export const DisplayFeed: FC<DisplayFeedProps> = ({
                   >
                     893 likes
                   </p>
-                  {/* {postText && (
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: postText[0]?.content || "",
-                      }}
-                      className={styles.post__text}
-                      style={{ fontSize: `${resizes?.timeSize}px` }}
-                    />
-                  )} */}
                   <EditorContent
                     className={styles.post__text}
                     editor={postEditor}
@@ -458,15 +485,6 @@ export const DisplayFeed: FC<DisplayFeedProps> = ({
                   >
                     893 likes
                   </p>
-                  {/* {textRes && (
-                    <div
-                      dangerouslySetInnerHTML={{
-                        __html: textRes[0] || "",
-                      }}
-                      className={styles.post__text}
-                      style={{ fontSize: `${resizes?.timeSize}px` }}
-                    />
-                  )} */}
                   <EditorContent
                     className={styles.post__text}
                     editor={editorRes}
@@ -507,6 +525,11 @@ export const DisplayFeed: FC<DisplayFeedProps> = ({
           </div>
         )}
       </div>
+      <DownloadAllBtn
+        post={post}
+        formState={formState}
+        currentPost={currentPost}
+      />
     </div>
   );
 };

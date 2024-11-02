@@ -28,23 +28,13 @@ import {
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { contentTypeToExtension } from "@shared/types";
 
 interface TechnicalSpecificationProps {
   isFull?: boolean;
   card: IManagerNewProjectCard | IManagerProjectCard;
   SendToBotBtn: FC;
 }
-
-const contentTypeToExtension: Record<string, string> = {
-  "application/pdf": ".pdf",
-  "image/jpeg": ".jpg",
-  "image/png": ".png",
-  "application/vnd.openxmlformats-officedocument.wordprocessingml.document":
-    ".docx",
-  "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": ".xlsx",
-  "text/plain": ".txt",
-  "application/zip": ".zip",
-};
 
 export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
   isFull,
