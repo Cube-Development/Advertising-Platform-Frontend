@@ -63,6 +63,9 @@ export const InstagramMedia: FC<InstagramMediaProps> = ({
                   />
                 ) : (
                   <video
+                    autoPlay
+                    loop
+                    muted
                     controls
                     className="object-cover h-[300px] w-full"
                     style={{ height: `${feedHeight}px` }}
@@ -94,6 +97,9 @@ export const InstagramMedia: FC<InstagramMediaProps> = ({
                   />
                 ) : (
                   <video
+                    autoPlay
+                    loop
+                    muted
                     controls
                     className="object-cover h-[300px] w-full"
                     style={{ height: `${feedHeight}px` }}

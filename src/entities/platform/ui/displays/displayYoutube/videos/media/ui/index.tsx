@@ -29,6 +29,9 @@ export const YoutubeMedia: FC<YoutubeMediaProps> = ({
             />
           ) : (
             <video
+              autoPlay
+              loop
+              muted
               controls
               className="h-[200px] object-contain w-full bg-[#2d2d2d]"
               style={{ height: `${feedHeight}px` }}
@@ -57,6 +60,9 @@ export const YoutubeMedia: FC<YoutubeMediaProps> = ({
             />
           ) : (
             <video
+              autoPlay
+              loop
+              muted
               controls
               className="h-[200px] object-contain w-full bg-[#2d2d2d]"
               style={{ height: `${feedHeight}px` }}

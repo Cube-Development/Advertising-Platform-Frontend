@@ -29,6 +29,9 @@ export const YoutubeMedia: FC<YoutubeMediaProps> = ({
             />
           ) : (
             <video
+              autoPlay
+              loop
+              muted
               controls
               className="object-cover h-[620] w-full"
               style={{ height: `${shortsHeight}px` }}
@@ -57,6 +60,9 @@ export const YoutubeMedia: FC<YoutubeMediaProps> = ({
             />
           ) : (
             <video
+              autoPlay
+              loop
+              muted
               controls
               className="object-cover h-[620] w-full"
               style={{ height: `${shortsHeight}px` }}
