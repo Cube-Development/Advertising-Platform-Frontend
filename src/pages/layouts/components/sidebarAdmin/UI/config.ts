@@ -1,6 +1,8 @@
 import { paths } from "@shared/routing";
 import { IMenuItem } from "../../config";
 import {
+  AdminComplaintIcon,
+  AdminReviewIcon,
   ChannelIcon,
   HomeIcon,
   TransactionIcon,
@@ -35,13 +37,13 @@ export const adminMenu: IMenuItem[] = [
   {
     item: {
       path: paths.adminReviews,
-      img: TransactionIcon,
+      img: AdminReviewIcon,
     },
   },
   {
     item: {
       path: paths.adminComplaints,
-      img: TransactionIcon,
+      img: AdminComplaintIcon,
     },
   },
 ];

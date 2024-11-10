@@ -1,11 +1,11 @@
-import { complaintStatus } from "../config";
+import { complaintPriority } from "../config";
 
 export interface IAdminComplaintData {
   id: string;
   theme: string;
   sender: IUser;
   date: string;
-  priority: complaintStatus;
+  priority: complaintPriority;
 }
 
 interface IUser {

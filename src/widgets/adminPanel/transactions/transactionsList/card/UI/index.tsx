@@ -1,7 +1,7 @@
 import {
   adminTransactionStatus,
-  Details,
-  Documents,
+  TransactionDetails,
+  TransactionDocuments,
   IAdminTransactionData,
   TransactionsRoute,
   transactionStatus,
@@ -32,7 +32,7 @@ export const TransactionCard: FC<TransactionCardProps> = ({
   const { toast } = useToast();
   const subcard = card?.subcard;
 
-  const handleCopyLink = (text: string) => {
+  const handleCopyLink = (text: string = "") => {
     navigator.clipboard.writeText(text);
     toast({
       variant: "default",
@@ -86,7 +86,7 @@ export const TransactionCard: FC<TransactionCardProps> = ({
                 : styles.pending
           }`}
         >
-          <p>
+          <p className="truncate">
             {t(
               adminTransactionStatus.find((item) => item.id === card?.status)
                 ?.name || "",
@@ -103,9 +103,9 @@ export const TransactionCard: FC<TransactionCardProps> = ({
         </div>
       </div>
       <AccordionContent className={styles.content}>
-        <Details subcard={subcard} />
+        <TransactionDetails subcard={subcard} />
         <TransactionsRoute subcard={subcard} />
-        <Documents subcard={subcard} />
+        <TransactionDocuments subcard={subcard} />
       </AccordionContent>
     </AccordionItem>
   );

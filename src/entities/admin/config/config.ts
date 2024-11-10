@@ -66,23 +66,44 @@ export const adminTransactionStatus = [
   },
 ];
 
-export enum complaintStatus {
+export enum complaintPriority {
   low = 0,
   medium = 1,
   high = 2,
 }
 
+export const adminComplaintPriorityStatus = [
+  {
+    name: "admin_panel.complaints.card.priority_status.low",
+    id: complaintPriority.low,
+  },
+  {
+    name: "admin_panel.complaints.card.priority_status.medium",
+    id: complaintPriority.medium,
+  },
+  {
+    name: "admin_panel.complaints.card.priority_status.high",
+    id: complaintPriority.high,
+  },
+];
+
+export enum complaintStatus {
+  wait = 0,
+  active = 1,
+  complite = 2,
+}
+
 export const adminComplaintStatus = [
   {
-    name: "admin_panel.complaints.card.status.low",
-    id: complaintStatus.low,
+    name: "admin_panel.complaintInfo.card.status.wait",
+    id: complaintStatus.wait,
   },
   {
-    name: "admin_panel.complaints.card.status.medium",
-    id: complaintStatus.medium,
+    name: "admin_panel.complaintInfo.card.status.active",
+    id: complaintStatus.active,
   },
   {
-    name: "admin_panel.complaints.card.status.high",
-    id: complaintStatus.high,
+    name: "admin_panel.complaintInfo.card.status.complite",
+    id: complaintStatus.complite,
   },
 ];

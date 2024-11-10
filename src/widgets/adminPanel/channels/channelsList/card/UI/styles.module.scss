@@ -13,7 +13,7 @@
 
     .info {
       display: grid;
-      grid-template-columns: min-content 1fr;
+      grid-template-columns: max-content 1fr;
       column-gap: 10px;
       align-content: center;
 
@@ -22,10 +22,10 @@
         align-items: center;
         align-content: center;
         justify-content: center;
-        width: 32px;
-        height: 32px;
 
         img {
+          width: 32px;
+          height: 32px;
           border: 1px solid rgba(0, 0, 0, 0.35);
           border-radius: 50%;
         }

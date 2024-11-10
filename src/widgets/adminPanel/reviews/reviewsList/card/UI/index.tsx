@@ -13,7 +13,7 @@ export const ReviewCard: FC<ReviewCardProps> = ({ card }) => {
   const { t } = useTranslation();
   const { toast } = useToast();
 
-  const handleCopyLink = (text: string) => {
+  const handleCopyLink = (text: string = "") => {
     navigator.clipboard.writeText(text);
     toast({
       variant: "default",

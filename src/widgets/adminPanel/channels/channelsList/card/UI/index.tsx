@@ -35,13 +35,14 @@ export const ChannelCard: FC<ChannelCardProps> = ({
   const { t } = useTranslation();
   const { toast } = useToast();
 
-  const handleCopyLink = (text: string) => {
+  const handleCopyLink = (text: string = "") => {
     navigator.clipboard.writeText(text);
     toast({
       variant: "default",
       title: t("copy.default"),
     });
   };
+
   return (
     <AccordionItem
       value={`item-adminChannel-${card?.id}`}
@@ -56,7 +57,6 @@ export const ChannelCard: FC<ChannelCardProps> = ({
           <div className={styles.title}>
             <p className="truncate">{card?.name}</p>
             <span className="truncate" onClick={() => handleCopyLink(card?.id)}>
-              {" "}
               # {card?.id}
             </span>
           </div>
@@ -88,7 +88,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({
                     : styles.moderationReject
           }`}
         >
-          <p>
+          <p className="truncate">
             {t(
               adminChannelStatus.find((item) => item.id === card?.status)
                 ?.name || "",

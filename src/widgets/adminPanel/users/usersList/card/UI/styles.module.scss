@@ -7,6 +7,10 @@
   box-shadow: 0px 2px 6px 0px rgba(0, 0, 0, 0.1);
   padding: 15px;
 
+  .click {
+    cursor: pointer;
+  }
+
   .info {
     display: grid;
     grid-template-columns: min-content 1fr;

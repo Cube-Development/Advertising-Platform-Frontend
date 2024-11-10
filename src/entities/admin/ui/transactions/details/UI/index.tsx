@@ -7,15 +7,17 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
-interface DetailsProps {
+interface TransactionDetailsProps {
   subcard: IAdminTransactionRoute;
 }
 
-export const Details: FC<DetailsProps> = ({ subcard }) => {
+export const TransactionDetails: FC<TransactionDetailsProps> = ({
+  subcard,
+}) => {
   const { t } = useTranslation();
   const { toast } = useToast();
 
-  const handleCopyLink = (text: string) => {
+  const handleCopyLink = (text: string = "") => {
     navigator.clipboard.writeText(text);
     toast({
       variant: "default",
