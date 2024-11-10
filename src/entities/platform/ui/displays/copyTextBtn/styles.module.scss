@@ -1,0 +1,81 @@
+.download_btn {
+  position: relative;
+  overflow: hidden;
+
+  display: grid;
+  grid-auto-flow: column;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(20px);
+  border-radius: 999px;
+  padding: 15px 5px;
+  margin: 20px 4% 0px 4%;
+
+  transition: all 300ms ease;
+
+  &:hover {
+    transform: scale(1.05);
+    transition: all 300ms ease;
+    background: rgba(255, 255, 255, 0.8);
+  }
+
+  &:active {
+    transform: scale(0.99);
+    transition: all 300ms ease;
+  }
+
+  @media (max-width: 992px) {
+    padding: 12px 5px;
+  }
+
+  @media (max-width: 768px) {
+    padding: 10px 5px;
+  }
+
+  &__title {
+    color: #2d2d2d;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    line-height: 1;
+    text-transform: uppercase;
+
+    @media (max-width: 992px) {
+      font-size: 10px;
+    }
+
+    @media (max-width: 768px) {
+      font-size: 8px;
+    }
+  }
+
+  &__icon {
+    position: relative;
+    z-index: 10;
+
+    img {
+      width: 24px;
+      height: 24px;
+    }
+  }
+}
+
+.download_progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  background: rgba(255, 255, 255, 0.8);
+  z-index: 1;
+  transition: width 0.1s ease;
+}
+
+.download_progress_text {
+  position: relative;
+  z-index: 2;
+  color: #2d2d2d;
+}

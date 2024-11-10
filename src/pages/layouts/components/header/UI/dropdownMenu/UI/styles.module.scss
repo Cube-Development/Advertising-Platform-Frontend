@@ -1,5 +1,18 @@
 .dropdown {
   .menu {
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+
     &__content {
       display: grid;
       grid-template-rows: repeat(2, min-content);
@@ -7,7 +20,7 @@
       height: calc(var(--vh) * 100);
       background: rgba(255, 255, 255, 0.6);
       z-index: 999;
-      width: calc(100vw);
+      width: 100vw;
       transform: translate(calc(var(--left-padding-header) * (-1)), -1rem);
 
       @media (max-width: 768px) {
@@ -22,19 +35,6 @@
       grid-auto-flow: row;
       row-gap: 8px;
       padding: 10px;
-    }
-
-    height: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    z-index: 10;
-
-    @media (max-width: 768px) {
-      width: 100%;
     }
 
     &__switcher {

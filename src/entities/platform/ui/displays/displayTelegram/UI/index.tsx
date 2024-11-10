@@ -96,57 +96,6 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
     downloadIconSize: number;
   } | null>(null);
 
-  // useEffect(() => {
-  //   const updateSizes = () => {
-  //     if (imgRef.current) {
-  //       const imgWidth = imgRef.current.offsetWidth;
-
-  //       const calculatedRadius = (imgWidth / 364) * 54;
-  //       const calculatedTimeSize = (imgWidth / 364) * 14;
-  //       const calculatedChannelNameSize = (imgWidth / 364) * 12;
-  //       const calculatedChannelSubsSize = (imgWidth / 364) * 10;
-  //       const calculatedAvatarWidthSize = (imgWidth / 364) * 30;
-  //       const calculatedUnmuteSize = (imgWidth / 364) * 14;
-  //       const calculatedDisplayTopSize = (imgWidth / 364) * 80;
-  //       const calculatedDisplayBottomSize = (imgWidth / 364) * 60;
-  //       const calculatedDownloadIconSize = (imgWidth / 364) * 20;
-
-  //       // Обновляем все значения в состоянии
-  //       setResizes({
-  //         borderRadius: calculatedRadius,
-  //         timeSize: calculatedTimeSize,
-  //         channelNameSize: calculatedChannelNameSize,
-  //         channelSubsSize: calculatedChannelSubsSize,
-  //         avatarWidthSize: calculatedAvatarWidthSize,
-  //         unmuteSize: calculatedUnmuteSize,
-  //         displayTopSize: calculatedDisplayTopSize,
-  //         displayBottomSize: calculatedDisplayBottomSize,
-  //         downloadIconSize: calculatedDownloadIconSize,
-  //       });
-  //     }
-  //   };
-
-  //   updateSizes();
-
-  //   setTimeout(() => {
-  //     updateSizes();
-  //   }, 300);
-
-  //   setTimeout(() => {
-  //     updateSizes();
-  //   }, 600);
-
-  //   setTimeout(() => {
-  //     updateSizes();
-  //   }, 1000);
-
-  //   window.addEventListener("resize", updateSizes);
-
-  //   return () => {
-  //     window.removeEventListener("resize", updateSizes);
-  //   };
-  // }, [imgRef.current?.offsetWidth]);
-
   useEffect(() => {
     const imgElement = imgRef.current;
     if (!imgElement) return;
@@ -379,11 +328,20 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
           </div>
         )}
       </div>
-      <DownloadAllBtn
-        post={post}
-        formState={formState}
-        currentPost={currentPost}
-      />
+      {((post?.files && post?.files?.length > 0) ||
+        (post?.photo && post?.photo?.length > 0) ||
+        (post?.video && post?.video?.length > 0)) && (
+        <DownloadAllBtn
+          post={post}
+          formState={formState}
+          currentPost={currentPost}
+        />
+      )}
+      {/* {post?.text && post?.text.length > 0 && (
+        <CopyTextBtn
+          text={formState ? postEditor?.getText() : editorRes?.getText()}
+        />
+      )} */}
     </div>
   );
 };

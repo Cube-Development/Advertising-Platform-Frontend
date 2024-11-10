@@ -1,10 +1,13 @@
 import {
+  ContentType,
+  getContentType,
   ICreatePostForm,
   useApproveProjectMutation,
   useCreateOrderDatesMutation,
   useCreatePostMutation,
   useCreateUniquePostMutation,
   useGetProjectAmountQuery,
+  useGetUploadLinkMutation,
   useProjectNameMutation,
   useProjectOrdersQuery,
 } from "@entities/project";
@@ -28,6 +31,7 @@ import {
 } from "../components";
 import { ICreateOrderBlur } from "../config";
 import { roles } from "@entities/user";
+import { getFileExtension } from "@shared/functions";
 
 interface CreateOrderBlockProps {}
 
@@ -94,7 +98,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
   const formState = watch();
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  // const [getUploadLink] = useGetUploadLinkMutation();
+  const [getUploadLink] = useGetUploadLinkMutation();
   const [projectName] = useProjectNameMutation();
   const [createPost] = useCreatePostMutation();
   const [createUniquePost] = useCreateUniquePostMutation();
@@ -110,9 +114,6 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
     },
   );
 
-  // загрузка файлов и медиа
-  const [isUploadLoading, setIsUploadLoading] = useState<boolean>(false);
-
   const onSubmit: SubmitHandler<ICreatePostForm> = async (formData) => {
     if (
       project_id &&
@@ -121,8 +122,133 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
     ) {
       try {
         setIsLoading(true);
-        // Загрузка файлов и медиа
-        // Загрузка файлов и медиа
+
+        // загрузка файлов
+        if (formData?.isMultiPost && formData?.multiposts) {
+          await Promise.all(
+            formData.multiposts.map(async (post) => {
+              if (post?.buttons) {
+                if (!post.content) {
+                  post.content = [];
+                }
+                post.content.push(...post.buttons);
+              }
+              if (post?.text) {
+                if (!post.content) {
+                  post.content = [];
+                }
+                post.content.push(...post.text);
+              }
+              if (post?.files) {
+                await Promise.all(
+                  post.files.map(async (file) => {
+                    const data = await getUploadLink({
+                      extension: getFileExtension(file),
+                      content_type: ContentType.file,
+                    }).unwrap();
+                    await fetch(data?.url, {
+                      method: "PUT",
+                      body: file,
+                    });
+                    if (!post.content) {
+                      post.content = [];
+                    }
+                    post.content.push({
+                      content_type: ContentType.file,
+                      content: data.file_name,
+                    });
+                  }),
+                );
+              }
+              if (post?.media) {
+                await Promise.all(
+                  post.media.map(async (media) => {
+                    const data = await getUploadLink({
+                      extension: getFileExtension(media),
+                      content_type: getContentType(media),
+                    }).unwrap();
+                    await fetch(data?.url, {
+                      headers: {
+                        "Content-Type": media.type,
+                      },
+                      method: "PUT",
+                      body: media,
+                    });
+                    if (!post.content) {
+                      post.content = [];
+                    }
+                    post.content.push({
+                      content_type: getContentType(media),
+                      content: data.file_name,
+                    });
+                  }),
+                );
+              }
+            }),
+          );
+        } else {
+          await Promise.all(
+            formData.posts.map(async (post) => {
+              if (post?.buttons) {
+                if (!post.content) {
+                  post.content = [];
+                }
+                post.content.push(...post.buttons);
+              }
+              if (post?.text) {
+                if (!post.content) {
+                  post.content = [];
+                }
+                post.content.push(...post.text);
+              }
+              if (post?.files) {
+                await Promise.all(
+                  post.files.map(async (file) => {
+                    const data = await getUploadLink({
+                      extension: getFileExtension(file),
+                      content_type: ContentType.file,
+                    }).unwrap();
+                    await fetch(data?.url, {
+                      method: "PUT",
+                      body: file,
+                    });
+                    if (!post.content) {
+                      post.content = [];
+                    }
+                    post.content.push({
+                      content_type: ContentType.file,
+                      content: data.file_name,
+                    });
+                  }),
+                );
+              }
+              if (post?.media) {
+                await Promise.all(
+                  post.media.map(async (media) => {
+                    const data = await getUploadLink({
+                      extension: getFileExtension(media),
+                      content_type: getContentType(media),
+                    }).unwrap();
+                    await fetch(data?.url, {
+                      headers: {
+                        "Content-Type": media.type,
+                      },
+                      method: "PUT",
+                      body: media,
+                    });
+                    if (!post.content) {
+                      post.content = [];
+                    }
+                    post.content.push({
+                      content_type: getContentType(media),
+                      content: data.file_name,
+                    });
+                  }),
+                );
+              }
+            }),
+          );
+        }
 
         projectName({
           project_id,
@@ -147,6 +273,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
                       variant: "error",
                       title: t("toasts.create_order.post.error"),
                     });
+                    setIsLoading(false);
                   });
               }
             }),
@@ -168,6 +295,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
                       variant: "error",
                       title: t("toasts.create_order.post.error"),
                     });
+                    setIsLoading(false);
                   });
               }
             }),
@@ -189,12 +317,14 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
                   title: t("toasts.create_order.payment.success"),
                 });
                 navigate(paths.orders);
+                setIsLoading(false);
               })
               .catch(() => {
                 toast({
                   variant: "error",
                   title: t("toasts.create_order.payment.error"),
                 });
+                setIsLoading(false);
               });
           })
           .catch(() => {
@@ -202,6 +332,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
               variant: "error",
               title: t("toasts.create_order.date.error"),
             });
+            setIsLoading(false);
           });
       } catch (error) {
         toast({
@@ -209,7 +340,6 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
           title: t("toasts.create_order.post.error"),
           description: String(error),
         });
-      } finally {
         setIsLoading(false);
       }
     }
@@ -237,7 +367,6 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
               setValue={setValue}
               getValues={getValues}
               formState={formState}
-              setIsUploadLoading={setIsUploadLoading}
             />
             <CreateOrderDatetime
               cards={projectChannels?.orders || []}
@@ -246,7 +375,6 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
               setValue={setValue}
               getValues={getValues}
               formState={formState}
-              isUploadLoading={isUploadLoading}
             />
             <CreateOrderPayment
               isBlur={blur.payment}

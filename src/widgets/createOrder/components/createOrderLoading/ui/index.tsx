@@ -7,7 +7,9 @@ import videosAnimation from "/animated/videos_lottie.gif";
 import heartAnimation from "/animated/heart_lottie.gif";
 import styles from "./styles.module.scss";
 
-export const CreateOrderLoading: FC = () => {
+interface CreateOrderLoadingProps {}
+
+export const CreateOrderLoading: FC<CreateOrderLoadingProps> = () => {
   const { t } = useTranslation();
 
   // Список анимаций и соответствующих текстов
