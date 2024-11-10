@@ -182,6 +182,23 @@ main {
   }
 }
 
+.admin_panel_layout {
+  display: flex;
+  flex-direction: column;
+  min-height: calc((var(--vh) * 100));
+  width: 100vw;
+  padding-left: var(--sidebar-admin-xl);
+
+  header,
+  footer {
+    flex-shrink: 0;
+  }
+
+  main {
+    flex-grow: 1;
+  }
+}
+
 .overlay {
   position: fixed;
   top: 0;

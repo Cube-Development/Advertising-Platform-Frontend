@@ -102,7 +102,7 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
     navigator.clipboard.writeText(link);
     toast({
       variant: "default",
-      title: "Скопировано",
+      title: t("copy.technical_specification.link"),
     });
   };
 

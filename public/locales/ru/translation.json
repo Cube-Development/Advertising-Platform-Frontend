@@ -1961,5 +1961,139 @@
       }
     }
   },
-  "url_link": "Введите URL-адрес..."
+  "url_link": "Введите URL-адрес...",
+
+  "admin_panel": {
+    "pages": {
+      "home": "Главная",
+      "channels": "Каналы",
+      "users": "Пользователи",
+      "transactions": "Tранзакции",
+      "moderation": "Модерация",
+      "complaints": "Жалобы",
+      "reviews": "Отзывы"
+    },
+    "channels": {
+      "card": {
+        "rate": "Рейтинг",
+        "complete": "Выполненных",
+        "complaints": "Жалоб",
+        "on_hold": "На ожидание",
+        "cancel": "Отмененные",
+        "not_complete": "Невыполненных",
+        "in_progress": "В работе",
+        "category": "Категория канала",
+        "language": "Язык аудитории",
+        "age": "Возраст аудитории",
+        "region": "Регион аудитории",
+        "sex": "Соотношение полов",
+        "count": "Количество символов",
+        "description": "Описание канала",
+
+        "buttons": {
+          "ban": "Заблокировать",
+          "update": "Обновить",
+          "reject": "Отклонить",
+          "accept": "Утвердить"
+        },
+
+        "status": {
+          "active": "Активный",
+          "moderation": "На модерации",
+          "moderation_reject": "Отклоненный",
+          "inactive": "Деактивированный",
+          "banned": "Заблокированный",
+          "deleted": "Удаленный"
+        }
+      }
+    },
+    "users": {
+      "card": {
+        "status": {
+          "active": "Активный",
+          "banned": "Заблокированный"
+        }
+      }
+    },
+    "transactions": {
+      "card": {
+        "details": {
+          "title": "Системный статус",
+          "sender": {
+              "title": "Детали отправителя",
+              "uuid": "UUID счёта",
+              "identification": "Идентификация счёта"
+            },
+            "receiver": {
+              "title": "Детали получателя",
+              "uuid": "UUID счёта",
+              "identification": "Идентификация счёта",
+              "userId": "ID пользователя"
+            }
+        },
+
+        "transactions": {
+          "id": "ID",
+          "transactionId": "ID транзакции",
+          "accountId": "Аккаунт ID",
+          "amount": "Сумма",
+          "date": "Дата создания"
+        },
+
+        "documents": {
+          "title": "Сопроводительная документация"
+        },
+
+        "status": {
+          "complite": "Выполнена",
+          "reject": "Отклонена",
+          "pending": "В ожидании"
+        }
+
+        
+      }
+    },
+
+    "complaints": {
+      "card": {
+        "id": "ID запроса",
+        "theme": "Тема",
+        "sender": "Отправитель",
+        "date": "Дата",
+        "priority": "Приоритет",
+
+        "status": {
+          "low": "Низкий",
+          "medium": "Средний",
+          "high": "Высокий"
+        }
+      }
+    },
+
+    "reviews": {
+      "card": {
+        "buttons": {
+          "accept": "Принять",
+          "reject": "Отклонить",
+          "ok": "Хорошо"
+        }
+      }
+    }
+
+
+  },
+
+
+  "copy": {
+    "default": "Скопировано",
+    "technical_specification":{
+      "link": "Ссылка скопирована"
+    },
+    "admin_transactions": {
+      "id": "Id скопировано"
+    }
+  }
+
+
+
 }

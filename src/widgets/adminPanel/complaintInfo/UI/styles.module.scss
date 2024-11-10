@@ -1,0 +1,42 @@
+.wrapper {
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 30px;
+
+  .top {
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 20px;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+
+    h1 {
+      color: rgba(0, 0, 0, 0.7);
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      cursor: pointer;
+    }
+
+    p {
+      color: rgba(0, 0, 0, 0.7);
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+
+      span {
+        color: var(--color-blacks-b-40, rgba(0, 0, 0, 0.4));
+      }
+    }
+  }
+
+  .table {
+    padding: 50px 0;
+    border-radius: 16px;
+    background: var(--color-whites-White, #fff);
+    box-shadow: 0px 2px 12px 0px rgba(0, 0, 0, 0.2);
+  }
+}
