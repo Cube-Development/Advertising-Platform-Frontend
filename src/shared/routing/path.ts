@@ -21,7 +21,7 @@ export enum paths {
   faq = "/faq",
   login = "/login",
   registration = "/registration",
-  serviceRules = "/servise_rules",
+  serviceRules = "/service_rules",
   publicOffer = "/public_offer",
   adminHome = "/admin/home",
   adminChannels = "/admin/channels",
