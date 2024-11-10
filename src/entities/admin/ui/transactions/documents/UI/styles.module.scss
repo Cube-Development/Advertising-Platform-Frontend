@@ -1,0 +1,46 @@
+.wrapper {
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 15px;
+  padding: 20px;
+
+  .title {
+    text-align: start;
+    p {
+      color: rgba(0, 0, 0, 0.65);
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+  }
+
+  .documents {
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 35px;
+    justify-content: start;
+
+    .card {
+      display: grid;
+      grid-auto-flow: column;
+      column-gap: 10px;
+      align-items: center;
+      align-content: center;
+      cursor: pointer;
+
+      svg {
+        width: 15px;
+        height: 15px;
+      }
+
+      p {
+        color: var(--URL, #4d94ff);
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+      }
+    }
+  }
+}

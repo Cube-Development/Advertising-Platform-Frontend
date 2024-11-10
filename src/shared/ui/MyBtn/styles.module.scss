@@ -67,4 +67,14 @@
       transition: all 300ms ease;
     }
   }
+
+  &__orange_light {
+    color: var(--Personal-colors-White);
+    background: var(--Personal-colors-Orange-light);
+  }
+
+  &__green_light {
+    color: var(--Personal-colors-White);
+    background: var(--Personal-colors-Green-light);
+  }
 }

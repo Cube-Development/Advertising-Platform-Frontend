@@ -1,3 +1,4 @@
+import { DEBOUNCE } from "@entities/project";
 import {
   roles,
   toggleRole as toggleroleAction,
@@ -13,9 +14,8 @@ import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 import { IMenuItem } from "../../config";
 import { advertiserMenu, bloggerMenu, commonMenu, managerMenu } from "./config";
-import styles from "./styles.module.scss";
 import { HoverItem } from "./hoverItem";
-import { DEBOUNCE } from "@entities/project";
+import styles from "./styles.module.scss";
 
 export const Sidebar: FC = () => {
   const { t } = useTranslation();

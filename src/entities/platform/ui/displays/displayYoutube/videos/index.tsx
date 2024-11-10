@@ -325,11 +325,20 @@ export const DisplayVideos: FC<DisplayVideosProps> = ({
           </div>
         )}
       </div>
-      <DownloadAllBtn
-        post={post}
-        formState={formState}
-        currentPost={currentPost}
-      />
+      {((post?.files && post?.files?.length > 0) ||
+        (post?.photo && post?.photo?.length > 0) ||
+        (post?.video && post?.video?.length > 0)) && (
+        <DownloadAllBtn
+          post={post}
+          formState={formState}
+          currentPost={currentPost}
+        />
+      )}
+      {/* {post?.text && post?.text.length > 0 && (
+        <CopyTextBtn
+          text={formState ? postEditor?.getText() : editorRes?.getText()}
+        />
+      )} */}
     </div>
   );
 };

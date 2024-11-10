@@ -1,7 +1,8 @@
 .loading {
+  margin-top: calc(0px - var(--header-height-xl));
   position: fixed;
   width: 100vw;
-  height: 96dvh;
+  height: 100dvh;
   z-index: 50;
   backdrop-filter: blur(50px);
   display: flex;
@@ -9,6 +10,23 @@
   justify-content: center;
   align-items: center;
   transition: all 0.5s ease;
+  background: rgba(255, 255, 255, 0.5);
+
+  @media (max-width: 992px) {
+    margin-top: calc(0px - var(--header-height-lg));
+  }
+
+  @media (max-width: 768px) {
+    margin-top: calc(-16px - var(--header-height-md));
+  }
+
+  @media (max-width: 576px) {
+    margin-top: calc(0px - var(--header-height-sm));
+  }
+
+  @media (max-width: 375px) {
+    margin-top: calc(0px - var(--header-height-xs));
+  }
 
   &__icon {
     width: 100px;

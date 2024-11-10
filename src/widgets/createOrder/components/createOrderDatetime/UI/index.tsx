@@ -10,8 +10,7 @@ import {
 } from "@features/createOrder";
 import { ICreatePostForm, IPostChannel } from "@entities/project";
 import { ICreateOrderBlur } from "@widgets/createOrder/config";
-import { Loader } from "lucide-react";
-import { MyButton, useToast } from "@shared/ui";
+import { useToast } from "@shared/ui";
 
 interface CreateOrderDatetimeProps {
   cards: IPostChannel[];
@@ -20,7 +19,6 @@ interface CreateOrderDatetimeProps {
   setValue: UseFormSetValue<ICreatePostForm>;
   getValues: UseFormGetValues<ICreatePostForm>;
   formState: ICreatePostForm;
-  isUploadLoading: boolean;
 }
 
 export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
@@ -30,7 +28,6 @@ export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
   setValue,
   getValues,
   formState,
-  isUploadLoading,
 }) => {
   const { t } = useTranslation();
   const { toast } = useToast();
@@ -87,19 +84,7 @@ export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
             ))}
           </div>
           <div className={styles.continue}>
-            {isUploadLoading ? (
-              <MyButton buttons_type="button__white" type="button">
-                {t("order_btn.is_upload_files")}
-                <Loader
-                  className="animate-spin"
-                  stroke="#4772e6"
-                  width={20}
-                  height={20}
-                />
-              </MyButton>
-            ) : (
-              <ContinueOrder onClick={handleCheckDatetimes} />
-            )}
+            <ContinueOrder onClick={handleCheckDatetimes} />
           </div>
         </div>
       </div>

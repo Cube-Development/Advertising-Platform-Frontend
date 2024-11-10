@@ -15,6 +15,11 @@ export const enum INTERSECTION_ELEMENTS {
   recommendCardsChannel = 10,
   recommendCardsCart = 10,
   notifications = 15,
+  adminChannels = 5,
+  adminUsers = 10,
+  adminTransactions = 10,
+  adminComplaints = 5,
+  adminReviews = 5,
 }
 
 export const enum BREAKPOINT {

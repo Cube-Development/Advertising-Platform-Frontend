@@ -6,8 +6,8 @@ import {
   BookIcon,
   OfferIcon,
 } from "@shared/assets";
-import { IMenuItem } from "../../config";
 import { projectTypesFilter } from "@entities/project";
+import { IMenuItem } from "../../config";
 
 export const advertiserMenu = [
   {

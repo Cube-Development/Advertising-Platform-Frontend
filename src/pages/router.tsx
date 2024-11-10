@@ -1,12 +1,19 @@
+import { managmentRoles, roles, userRoles } from "@entities/user";
+import {
+  RootAdminLayout,
+  RootLayout,
+  SideBarAdminLayout,
+  SideBarLayout,
+} from "@pages/layouts";
+import { useAppSelector } from "@shared/hooks";
 import { paths } from "@shared/routing";
-import { SideBarLayout } from "@pages/layouts";
-import { RootLayout } from "@pages/layouts";
 import { RouteObject, createBrowserRouter } from "react-router-dom";
 import { CheckProjectId, CheckRoutes, routerType } from "./CheckRoutes";
 import {
   IRoute,
   createOrderRoutes,
   onlyPublicCommonRoutes,
+  privateAdminRoutes,
   privateAdvertiserRoutes,
   privateBloggerRoutes,
   privateCommonRoutes,
@@ -14,15 +21,24 @@ import {
   publicBloggerRoutes,
   publicCommonRoutes,
 } from "./routes";
-import { roles } from "@entities/user";
-import { useAppSelector } from "@shared/hooks";
 
 const HandleLayout = ({ route }: { route: IRoute }) => {
-  const { isAuth } = useAppSelector((state) => state.user);
-  return isAuth && route.sidebar ? (
+  const { isAuth, role } = useAppSelector((state) => state.user);
+  return isAuth && route.sidebar && userRoles.includes(role) ? (
     <SideBarLayout>
       <route.component />
     </SideBarLayout>
+  ) : (
+    <route.component />
+  );
+};
+
+const HandleAdminLayout = ({ route }: { route: IRoute }) => {
+  const { isAuth, role } = useAppSelector((state) => state.user);
+  return isAuth && route.sidebar && managmentRoles.includes(role) ? (
+    <SideBarAdminLayout>
+      <route.component />
+    </SideBarAdminLayout>
   ) : (
     <route.component />
   );
@@ -35,6 +51,15 @@ const handleRouter = (routes: IRoute[]) => {
   }));
   return router;
 };
+
+const handleAdminRouter = (routes: IRoute[]) => {
+  const router: RouteObject[] = routes.map((route) => ({
+    path: route.path,
+    element: <HandleAdminLayout route={route} />,
+  }));
+  return router;
+};
+
 const privateBloggerRouter: RouteObject[] = handleRouter(privateBloggerRoutes);
 const privateAdvertiserRouter: RouteObject[] = handleRouter(
   privateAdvertiserRoutes,
@@ -50,6 +75,7 @@ const onlyPublicCommonRouter: RouteObject[] = handleRouter(
 );
 
 const createOrderRouter: RouteObject[] = handleRouter(createOrderRoutes);
+const privateAdminRouter: RouteObject[] = handleAdminRouter(privateAdminRoutes);
 
 export const router = createBrowserRouter([
   {
@@ -100,6 +126,19 @@ export const router = createBrowserRouter([
         children: onlyPublicCommonRouter,
       },
       ...publicCommonRouter,
+    ],
+  },
+  {
+    path: paths.main,
+    element: <RootAdminLayout />,
+    children: [
+      {
+        path: paths.main,
+        element: (
+          <CheckRoutes checkRole={roles.manager} type={routerType.private} />
+        ),
+        children: privateAdminRouter,
+      },
     ],
   },
 ]);

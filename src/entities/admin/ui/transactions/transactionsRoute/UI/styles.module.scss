@@ -1,0 +1,57 @@
+.wrapper {
+  display: grid;
+  grid-auto-flow: row;
+
+  .header {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    background: #f8f8f8;
+
+    div {
+      display: grid;
+      padding: 20px;
+      text-align: start;
+
+      p {
+        color: rgba(0, 0, 0, 0.45);
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+      }
+    }
+  }
+
+  .body {
+    display: grid;
+    grid-auto-flow: row;
+
+    .card {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+
+      div {
+        display: grid;
+        padding: 20px;
+        text-align: start;
+
+        p {
+          color: var(--Personal-colors-black, #000);
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
+        }
+
+        &.id {
+          cursor: pointer;
+          p {
+            color: var(--URL, #4d94ff);
+          }
+        }
+      }
+    }
+  }
+}
