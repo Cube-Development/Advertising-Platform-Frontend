@@ -1,22 +1,74 @@
-import { IAdminComplaintData } from "@entities/admin";
+import { adminComplaintTypesFilter, IAdminComplaints } from "@entities/admin";
+import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
+import { ShowMoreBtn, SpinnerLoaderSmall } from "@shared/ui";
+import { motion } from "framer-motion";
 import { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { ComplaintCard } from "../card";
+import { SkeletonAdminComplaintCard } from "../card/skeleton";
 import styles from "./styles.module.scss";
 
 interface ComplaintsListProps {
-  complaints: IAdminComplaintData[];
+  data: IAdminComplaints;
+  isLoading: boolean;
+  isFetching: boolean;
+  handleChange: () => void;
+  status: adminComplaintTypesFilter;
 }
 
-export const ComplaintsList: FC<ComplaintsListProps> = ({ complaints }) => {
+export const ComplaintsList: FC<ComplaintsListProps> = ({
+  data,
+  isLoading,
+  isFetching,
+  handleChange,
+  status,
+}) => {
+  const { t } = useTranslation();
   return (
     <div className={styles.wrapper}>
-      {complaints?.length ? (
+      <div className={styles.bar}>
+        <div className={styles.column}>
+          <p className="truncate">{t("admin_panel.complaints.bar.id")}</p>
+        </div>
+        <div className={styles.column}>
+          <p className="truncate">{t("admin_panel.complaints.bar.sender")}</p>
+        </div>
+        <div className={styles.column}>
+          <p className="truncate">{t("admin_panel.complaints.bar.theme")}</p>
+        </div>
+        <div className={styles.column}>
+          <p className="truncate">{t("admin_panel.complaints.bar.date")}</p>
+        </div>
+        <div className={styles.column}>
+          <p className="truncate">{t("admin_panel.complaints.bar.priority")}</p>
+        </div>
+      </div>
+      {data?.complaints?.length ? (
         <div className={styles.cards}>
-          {complaints.map((card, index) => (
-            <div key={index}>
+          {data?.complaints.map((card, index) => (
+            <motion.div
+              key={card.id + index}
+              initial="hidden"
+              animate="visible"
+              custom={index % INTERSECTION_ELEMENTS.adminComplaints}
+              variants={PAGE_ANIMATION.animationUp}
+            >
               <ComplaintCard card={card} />
-            </div>
+            </motion.div>
           ))}
+          {(isFetching || isLoading) &&
+            Array.from({ length: INTERSECTION_ELEMENTS.adminReviews }).map(
+              (_, index) => <SkeletonAdminComplaintCard key={index} />,
+            )}
+          {!data.isLast && (
+            <div className={`${styles.show_more}`} onClick={handleChange}>
+              {isLoading || isFetching ? (
+                <SpinnerLoaderSmall />
+              ) : (
+                <ShowMoreBtn />
+              )}
+            </div>
+          )}
         </div>
       ) : (
         <div></div>

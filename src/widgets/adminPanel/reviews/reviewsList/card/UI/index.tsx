@@ -22,7 +22,9 @@ export const ReviewCard: FC<ReviewCardProps> = ({ card }) => {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div
+      className={`${styles.wrapper} ${!!card?.closeDate ? styles.accept : styles.wait}`}
+    >
       <div className={styles.id} onClick={() => handleCopyLink(card?.id)}>
         <p className="truncate">{card?.id}</p>
       </div>
@@ -40,7 +42,7 @@ export const ReviewCard: FC<ReviewCardProps> = ({ card }) => {
           </span>
         </div>
       </div>
-      <div className={styles.sender}>
+      <div className={styles.user}>
         <div className={styles.logo}>
           <img src={card?.sender?.avatar} alt="" />
         </div>
@@ -59,10 +61,31 @@ export const ReviewCard: FC<ReviewCardProps> = ({ card }) => {
           </span>
         </div>
       </div>
+      {!!card?.closeDate && (
+        <div className={styles.user}>
+          <div className={styles.logo}>
+            <img src={card?.moderator?.avatar} alt="" />
+          </div>
+          <div className={styles.info}>
+            <p className="truncate">{card?.moderator?.name}</p>
+            <span
+              onClick={() => handleCopyLink(card?.moderator?.userId)}
+              className="truncate"
+            >
+              # {card?.moderator?.userId}
+            </span>
+          </div>
+        </div>
+      )}
       <div className={styles.date}>
         <p>{card?.createdDate}</p>
       </div>
-      <div>
+      {!!card?.closeDate && (
+        <div className={styles.date}>
+          <p>{card?.closeDate}</p>
+        </div>
+      )}
+      <div className={styles.last}>
         <SeeReview
           card={card}
           AcceptBtn={AcceptReview}

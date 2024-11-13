@@ -24,3 +24,6 @@ export * from "./scroll-area";
 export * from "./dialog";
 export * from "./navigation-menu";
 export * from "./tooltip";
+export * from "./table";
+export * from "./dropdown-menu";
+export * from "./checkbox";

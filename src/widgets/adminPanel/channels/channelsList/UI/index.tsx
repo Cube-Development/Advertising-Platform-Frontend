@@ -1,15 +1,30 @@
-import { IAdminChannelData } from "@entities/admin";
-import { accordionTypes } from "@shared/config";
-import { Accordion } from "@shared/ui";
+import { IAdminChannels } from "@entities/admin";
+import {
+  accordionTypes,
+  INTERSECTION_ELEMENTS,
+  PAGE_ANIMATION,
+} from "@shared/config";
+import { Accordion, ShowMoreBtn, SpinnerLoaderSmall } from "@shared/ui";
+import { motion } from "framer-motion";
 import { FC, useEffect, useRef } from "react";
-import { ChannelCard } from "../card";
+import { useTranslation } from "react-i18next";
+import { ChannelCard, SkeletonAdminChannelCard } from "../card";
 import styles from "./styles.module.scss";
 
 interface ChannelsListProps {
-  channels: IAdminChannelData[];
+  data: IAdminChannels;
+  isLoading: boolean;
+  isFetching: boolean;
+  handleChange: () => void;
 }
 
-export const ChannelsList: FC<ChannelsListProps> = ({ channels }) => {
+export const ChannelsList: FC<ChannelsListProps> = ({
+  data,
+  isLoading,
+  isFetching,
+  handleChange,
+}) => {
+  const { t } = useTranslation();
   const accordionRefs = useRef<Array<HTMLDivElement | null>>([]);
 
   useEffect(() => {
@@ -35,22 +50,58 @@ export const ChannelsList: FC<ChannelsListProps> = ({ channels }) => {
         return () => observer.disconnect();
       }
     });
-  }, []);
+  }, [data]);
 
   return (
     <div className={styles.wrapper}>
-      {channels?.length ? (
+      <div className={styles.bar}>
+        <div className={styles.column}>
+          <p className="truncate">{t("admin_panel.channels.bar.id")}</p>
+        </div>
+        <div className={styles.column}>
+          <p className="truncate">{t("admin_panel.channels.bar.owner")}</p>
+        </div>
+        <div className={styles.column}>
+          <p className="truncate">{t("admin_panel.channels.bar.platform")}</p>
+        </div>
+        <div className={styles.column}>
+          <p className="truncate">{t("admin_panel.channels.bar.date")}</p>
+        </div>
+        <div className={styles.column}>
+          <p className="truncate">{t("admin_panel.channels.bar.status")}</p>
+        </div>
+      </div>
+      {data?.channels?.length ? (
         <Accordion type="single" collapsible>
           <div className={styles.cards}>
-            {channels.map((card, index) => (
-              <div key={index}>
+            {data?.channels.map((card, index) => (
+              <motion.div
+                key={card.id + index}
+                initial="hidden"
+                animate="visible"
+                custom={index % INTERSECTION_ELEMENTS.adminChannels}
+                variants={PAGE_ANIMATION.animationUp}
+              >
                 <ChannelCard
                   card={card}
                   accordionRefs={accordionRefs}
                   index={index}
                 />
-              </div>
+              </motion.div>
             ))}
+            {(isFetching || isLoading) &&
+              Array.from({
+                length: INTERSECTION_ELEMENTS.adminChannels,
+              }).map((_, index) => <SkeletonAdminChannelCard key={index} />)}
+            {!data.isLast && (
+              <div className={`${styles.show_more}`} onClick={handleChange}>
+                {isLoading || isFetching ? (
+                  <SpinnerLoaderSmall />
+                ) : (
+                  <ShowMoreBtn />
+                )}
+              </div>
+            )}
           </div>
         </Accordion>
       ) : (

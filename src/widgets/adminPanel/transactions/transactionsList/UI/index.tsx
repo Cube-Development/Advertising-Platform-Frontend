@@ -1,17 +1,30 @@
-import { IAdminTransactionData } from "@entities/admin";
-import { accordionTypes } from "@shared/config";
-import { Accordion } from "@shared/ui";
+import { IAdminTransactions } from "@entities/admin";
+import {
+  accordionTypes,
+  INTERSECTION_ELEMENTS,
+  PAGE_ANIMATION,
+} from "@shared/config";
+import { Accordion, ShowMoreBtn, SpinnerLoaderSmall } from "@shared/ui";
+import { motion } from "framer-motion";
 import { FC, useEffect, useRef } from "react";
-import { TransactionCard } from "../card";
+import { useTranslation } from "react-i18next";
+import { SkeletonAdminTransactionCard, TransactionCard } from "../card";
 import styles from "./styles.module.scss";
 
 interface TransactionsListProps {
-  transactions: IAdminTransactionData[];
+  data: IAdminTransactions;
+  isLoading: boolean;
+  isFetching: boolean;
+  handleChange: () => void;
 }
 
 export const TransactionsList: FC<TransactionsListProps> = ({
-  transactions,
+  data,
+  isLoading,
+  isFetching,
+  handleChange,
 }) => {
+  const { t } = useTranslation();
   const accordionRefs = useRef<Array<HTMLDivElement | null>>([]);
 
   useEffect(() => {
@@ -37,22 +50,73 @@ export const TransactionsList: FC<TransactionsListProps> = ({
         return () => observer.disconnect();
       }
     });
-  }, []);
+  }, [data]);
 
   return (
     <div className={styles.wrapper}>
-      {transactions?.length ? (
+      <div className={styles.bar}>
+        <div className={styles.column}>
+          <p className="truncate">{t("admin_panel.transactions.bar.id")}</p>
+        </div>
+        <div className={styles.column}>
+          <p className="truncate">{t("admin_panel.transactions.bar.sender")}</p>
+        </div>
+        <div className={styles.column}>
+          <p className="truncate">
+            {t("admin_panel.transactions.bar.recipient")}
+          </p>
+        </div>
+        <div className={styles.column}>
+          <p className="truncate">{t("admin_panel.transactions.bar.date")}</p>
+        </div>
+        <div className={styles.column}>
+          <p className="truncate">{t("admin_panel.transactions.bar.method")}</p>
+        </div>
+        <div className={styles.column}>
+          <p className="truncate">
+            {t("admin_panel.transactions.bar.purpose")}
+          </p>
+        </div>
+        <div className={styles.column}>
+          <p className="truncate">{t("admin_panel.transactions.bar.amount")}</p>
+        </div>
+        <div className={styles.column}>
+          <p className="truncate">{t("admin_panel.transactions.bar.status")}</p>
+        </div>
+      </div>
+      {data?.transactions?.length ? (
         <Accordion type="single" collapsible>
           <div className={styles.cards}>
-            {transactions.map((card, index) => (
-              <div key={index}>
+            {data?.transactions.map((card, index) => (
+              <motion.div
+                key={card.id + index}
+                initial="hidden"
+                animate="visible"
+                custom={index % INTERSECTION_ELEMENTS.adminTransactions}
+                variants={PAGE_ANIMATION.animationUp}
+              >
                 <TransactionCard
                   card={card}
                   accordionRefs={accordionRefs}
                   index={index}
                 />
-              </div>
+              </motion.div>
             ))}
+            {(isFetching || isLoading) &&
+              Array.from({
+                length: INTERSECTION_ELEMENTS.adminTransactions,
+              }).map((_, index) => (
+                <SkeletonAdminTransactionCard key={index} />
+              ))}
+            {!data.isLast && (
+              <div className={`${styles.show_more}`} onClick={handleChange}>
+                {isLoading || isFetching ? (
+                  <SpinnerLoaderSmall />
+                ) : (
+                  <ShowMoreBtn />
+                )}
+              </div>
+            )}
           </div>
         </Accordion>
       ) : (

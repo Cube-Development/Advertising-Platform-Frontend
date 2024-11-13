@@ -1,0 +1,46 @@
+.wrapper {
+  display: grid;
+  position: relative;
+
+  button {
+    display: grid;
+    align-content: center;
+    justify-content: center;
+    border-radius: 10px;
+    background: rgba(0, 0, 0, 0.03);
+    padding: 3px;
+    height: 100%;
+
+    svg {
+      transform: rotate(90deg) scale(0.5);
+    }
+  }
+
+  .menu {
+    position: absolute;
+    display: grid;
+    grid-auto-flow: row;
+    border-radius: 10px;
+    background: var(--color-whites-White, #fff);
+    box-shadow: 0px 2px 9px 0px rgba(0, 0, 0, 0.16);
+    z-index: 50;
+    bottom: 10px;
+    right: 10px;
+    overflow: hidden;
+
+    li {
+      padding: 10px;
+      color: rgba(0, 0, 0, 0.45);
+      font-family: Montserrat;
+      font-size: 10px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      white-space: nowrap;
+
+      &:hover {
+        background: rgba(0, 0, 0, 0.05);
+      }
+    }
+  }
+}

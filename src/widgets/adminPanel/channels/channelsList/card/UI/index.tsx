@@ -7,6 +7,7 @@ import { platformTypes } from "@entities/platform";
 import {
   AcceptChannel,
   BanChannel,
+  ChannelCardMenu,
   RejectChannel,
   UpdateChannel,
 } from "@features/adminPanel";
@@ -61,8 +62,10 @@ export const ChannelCard: FC<ChannelCardProps> = ({
             </span>
           </div>
         </div>
-        <div className={styles.column}>
-          <p className="truncate">№{card?.owner}</p>
+        <div className={`${styles.column} ${styles.user}`}>
+          <p className="truncate" onClick={() => handleCopyLink(card?.userId)}>
+            №{card?.userId}
+          </p>
         </div>
         <div className={styles.column}>
           <p>
@@ -96,7 +99,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({
           </p>
         </div>
         <div className={styles.settings}>
-          <div>|||</div>
+          <ChannelCardMenu id={card?.id} />
           <AccordionTrigger className={styles.trigger}>
             <div className="arrow">
               <ArrowSmallVerticalIcon className="icon__grey rotate__down" />

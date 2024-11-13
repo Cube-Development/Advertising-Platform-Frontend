@@ -16,6 +16,7 @@ import {
 import { FC, MutableRefObject } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { TransactionCardMenu } from "@features/adminPanel";
 
 interface TransactionCardProps {
   card: IAdminTransactionData;
@@ -94,7 +95,7 @@ export const TransactionCard: FC<TransactionCardProps> = ({
           </p>
         </div>
         <div className={styles.settings}>
-          <div>|||</div>
+          <TransactionCardMenu id={card?.id} />
           <AccordionTrigger className={styles.trigger}>
             <div className="arrow">
               <ArrowSmallVerticalIcon className="icon__grey rotate__down" />

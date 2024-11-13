@@ -102,7 +102,12 @@ export const TransactionDetails: FC<TransactionDetailsProps> = ({
               <p>
                 {t("admin_panel.transactions.card.details.receiver.userId")} :
               </p>
-              <span>№ {subcard?.receiver?.userId}</span>
+              <span
+                className={styles.id}
+                onClick={() => handleCopyLink(subcard?.receiver?.userId)}
+              >
+                № {subcard?.receiver?.userId}
+              </span>
             </div>
           </div>
         </div>

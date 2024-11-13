@@ -1,0 +1,27 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr) max-content;
+  column-gap: 20px;
+  padding: 15px 20px;
+  min-height: 70px;
+
+  .column {
+    display: grid;
+    align-content: center;
+  }
+
+  .info {
+    display: grid;
+    grid-template-columns: min-content 1fr;
+    column-gap: 20px;
+    align-content: center;
+    align-items: center;
+
+    .logo {
+      display: grid;
+      align-items: center;
+      align-content: center;
+      justify-content: center;
+    }
+  }
+}
