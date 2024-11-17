@@ -52,7 +52,7 @@ export const EmailForm: FC<EmailFormProps> = ({
       </div>
 
       <button type="submit" className={styles.button_sign}>
-        {t("auth.sign_up")}
+        {t("auth.sign_up_registration")}
       </button>
     </form>
   );

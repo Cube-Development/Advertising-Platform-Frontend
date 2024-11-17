@@ -1,6 +1,5 @@
-import { FC, useEffect, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
+import { bloggerChannelStatus, channelStatusFilter } from "@entities/channel";
+import { bloggerOfferStatus, offerStatusFilter } from "@entities/offer";
 import {
   advManagerProjectStatus,
   advManagerProjectStatusFilter,
@@ -11,14 +10,15 @@ import {
   projectTypesFilter,
 } from "@entities/project";
 import { roles } from "@entities/user";
-import { bloggerOfferStatus, offerStatusFilter } from "@entities/offer";
-import { bloggerChannelStatus, channelStatusFilter } from "@entities/channel";
-import { pageFilter } from "@shared/routing";
-import { useAppSelector } from "@shared/hooks";
 import { BREAKPOINT } from "@shared/config";
+import { useAppSelector } from "@shared/hooks";
+import { pageFilter } from "@shared/routing";
+import { FC, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import SwiperCore from "swiper";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
+import styles from "./styles.module.scss";
 
 interface BarStatusFilterProps {
   page: pageFilter;

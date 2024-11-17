@@ -61,6 +61,12 @@ export const PAGE_ANIMATION = {
     transition: { transition: { duration: 0.5 } },
   },
 
+  dropdownTransition: {
+    close: { opacity: 0, y: "-100%", x: "0%" },
+    open: { opacity: 1, y: "0%", x: "0%" },
+    transition: { transition: { duration: 0.5 } },
+  },
+
   animationChat: {
     hidden: {
       y: 10,

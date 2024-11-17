@@ -12,6 +12,8 @@ import { useTranslation } from "react-i18next";
 import { ToastAction, useToast } from "@shared/ui";
 import { useHandleAuth } from "@features/useHandleAuth";
 import { Loader } from "lucide-react";
+import { Link } from "react-router-dom";
+import { paths } from "@shared/routing";
 
 interface RegistrationFormProps {
   onNavigate: (direction: registrationSteps) => void;
@@ -170,8 +172,14 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({
         </div>
 
         <p className={styles.agreement}>
-          {t("auth.by_clicking_sign_up")} <span>{t("auth.terms")}</span>{" "}
-          {t("auth.and")} <span>{t("auth.privacy_policy")}</span>
+          {t("auth.by_clicking_sign_up")}{" "}
+          <Link target="_blank" to={paths.serviceRules}>
+            {t("auth.terms")}
+          </Link>{" "}
+          {t("auth.and")}{" "}
+          <Link target="_blank" to={paths.publicOffer}>
+            {t("auth.privacy_policy")}
+          </Link>
         </p>
 
         <button type="submit" className={styles.button__sign}>
@@ -183,7 +191,7 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({
               height={20}
             />
           ) : (
-            t("auth.sign_up")
+            t("auth.sign_up_registration")
           )}
         </button>
       </form>

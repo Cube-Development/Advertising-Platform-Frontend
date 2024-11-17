@@ -4,11 +4,13 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
-interface DocumentsProps {
+interface TransactionDocumentsProps {
   subcard: IAdminTransactionRoute;
 }
 
-export const Documents: FC<DocumentsProps> = ({ subcard }) => {
+export const TransactionDocuments: FC<TransactionDocumentsProps> = ({
+  subcard,
+}) => {
   const { t } = useTranslation();
 
   return (

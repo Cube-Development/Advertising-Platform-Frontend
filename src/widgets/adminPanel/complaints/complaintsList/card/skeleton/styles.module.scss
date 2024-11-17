@@ -1,0 +1,36 @@
+.wrapper {
+  display: grid;
+  grid-template-columns: 2fr repeat(3, 1fr) 1.5fr;
+  column-gap: 20px;
+  padding: 15px 20px;
+  min-height: 70px;
+
+  .column {
+    display: grid;
+    align-content: center;
+  }
+
+  .user {
+    display: grid;
+    grid-template-columns: max-content 1fr;
+    column-gap: 20px;
+
+    .logo {
+      display: grid;
+      align-content: center;
+    }
+
+    .info {
+      display: grid;
+      grid-auto-flow: row;
+      row-gap: 10px;
+      align-content: center;
+    }
+  }
+
+  .last {
+    display: grid;
+    grid-template-columns: 1fr max-content;
+    column-gap: 20px;
+  }
+}

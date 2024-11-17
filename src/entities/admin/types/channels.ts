@@ -2,11 +2,18 @@ import { platformTypesNum } from "@entities/platform";
 import { IFormat } from "@entities/project";
 import { IOption } from "@shared/types";
 
+export interface IAdminChannels {
+  page: number;
+  elements: number;
+  channels: IAdminChannelData[];
+  isLast?: boolean;
+}
+
 export interface IAdminChannelData {
   id: string;
   avatar: string;
   name: string;
-  owner: string;
+  userId: string;
   platform: platformTypesNum;
   date: string;
   status: number;

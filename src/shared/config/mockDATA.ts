@@ -1,6 +1,7 @@
 import {
   IAdminChannelData,
   IAdminComplaintData,
+  IAdminComplaintInfoData,
   IAdminReviewData,
   IAdminTransactionData,
   IAdminUserData,
@@ -36,7 +37,7 @@ export const AdminProfile: IAdminProfileData = {
 
 export const AdminChannels: IAdminChannelData[] = [
   {
-    owner: "1232132",
+    userId: "1232132",
     status: 0,
     url: "https://t.me/MoneySwap_robot",
     date: "02.09.2022",
@@ -101,7 +102,7 @@ export const AdminChannels: IAdminChannelData[] = [
     in_progress: 10,
   },
   {
-    owner: "1232132",
+    userId: "1232132",
     status: 1,
     url: "https://t.me/MoneySwap_robot",
     date: "02.09.2022",
@@ -166,7 +167,7 @@ export const AdminChannels: IAdminChannelData[] = [
     in_progress: 10,
   },
   {
-    owner: "1232132",
+    userId: "1232132",
     status: 2,
     url: "https://t.me/MoneySwap_robot",
     date: "02.09.2022",
@@ -231,7 +232,7 @@ export const AdminChannels: IAdminChannelData[] = [
     in_progress: 10,
   },
   {
-    owner: "1232132",
+    userId: "1232132",
     status: 3,
     url: "https://t.me/MoneySwap_robot",
     date: "02.09.2022",
@@ -296,7 +297,7 @@ export const AdminChannels: IAdminChannelData[] = [
     in_progress: 10,
   },
   {
-    owner: "1232132",
+    userId: "1232132",
     status: 5,
     url: "https://t.me/MoneySwap_robot",
     date: "02.09.2022",
@@ -1114,6 +1115,13 @@ export const AdminReviews: IAdminReviewData[] = [
       email: "marketing.solutions@gmail.com",
       userId: "83746215",
     },
+    moderator: {
+      id: "v2w3x4y5-z6a7-b8c9-d0e1-f2g3h4i5j6k7",
+      avatar:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+      name: "Ирина Аллегрова",
+      userId: "45454545",
+    },
     review: {
       rate: 5,
       text: "Очень довольны сотрудничеством. Публикация была размещена точно в оговоренное время, с текстом и оформлением, полностью соответствующими нашим ожиданиям. Владелец канала проявил профессиональный подход, оперативно отвечал на все вопросы и учел все пожелания. Рекламный пост вызвал живой интерес у подписчиков, и мы получили больше откликов, чем рассчитывали. Рекомендуем сотрудничество и планируем обращаться снова для будущих кампаний! Очень довольны сотрудничеством. Публикация была размещена точно в оговоренное время, с текстом и оформлением, полностью соответствующими нашим ожиданиям. Владелец канала проявил профессиональный подход, оперативно отвечал на все вопросы и учел все пожелания. Рекламный пост вызвал живой интерес у подписчиков, и мы получили больше откликов, чем рассчитывали. Рекомендуем сотрудничество и планируем обращаться снова для будущих кампаний!Очень довольны сотрудничеством. Публикация была размещена точно в оговоренное время, с текстом и оформлением, полностью соответствующими нашим ожиданиям. Владелец канала проявил профессиональный подход, оперативно отвечал на все вопросы и учел все пожелания. Рекламный пост вызвал живой интерес у подписчиков, и мы получили больше откликов, чем рассчитывали. Рекомендуем сотрудничество и планируем обращаться снова для будущих кампаний!Очень довольны сотрудничеством. Публикация была размещена точно в оговоренное время, с текстом и оформлением, полностью соответствующими нашим ожиданиям. Владелец канала проявил профессиональный подход, оперативно отвечал на все вопросы и учел все пожелания. Рекламный пост вызвал живой интерес у подписчиков, и мы получили больше откликов, чем рассчитывали. Рекомендуем сотрудничество и планируем обращаться снова для будущих кампаний!",
@@ -1206,6 +1214,7 @@ export const AdminReviews: IAdminReviewData[] = [
   {
     id: "j1k2l3m4-n5o6-p7q8-r9s0-t1u2v3w4x5y6",
     createdDate: "14.08.2023",
+    closeDate: "15.03.2023",
     platform: {
       id: "y1z2a3b4-c5d6-e7f8-g9h0-i1j2k3l4m5n6",
       avatar:
@@ -1218,6 +1227,13 @@ export const AdminReviews: IAdminReviewData[] = [
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
       email: "partner.promodigest@gmail.com",
       userId: "18394756",
+    },
+    moderator: {
+      id: "v2w3x4y5-z6a7-b8c9-d0e1-f2g3h4i5j6k7",
+      avatar:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+      name: "Ирина Аллегрова",
+      userId: "45454545",
     },
     review: {
       rate: 5,
@@ -1311,6 +1327,7 @@ export const AdminReviews: IAdminReviewData[] = [
   {
     id: "a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6",
     createdDate: "04.01.2024",
+    closeDate: "15.03.2023",
     platform: {
       id: "h1i2j3k4-l5m6-n7o8-p9q0-r1s2t3u4v5w6",
       avatar:
@@ -1323,6 +1340,13 @@ export const AdminReviews: IAdminReviewData[] = [
         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
       email: "ads@marketarena.com",
       userId: "78293541",
+    },
+    moderator: {
+      id: "v2w3x4y5-z6a7-b8c9-d0e1-f2g3h4i5j6k7",
+      avatar:
+        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+      name: "Ирина Аллегрова",
+      userId: "45454545",
     },
     review: {
       rate: 5,
@@ -1343,6 +1367,7 @@ export const AdminComplaints: IAdminComplaintData[] = [
     },
     date: "08.11.2024",
     priority: 1,
+    status: 0,
   },
   {
     id: "550e8400-e29b-41d4-a716-446655440002",
@@ -1355,6 +1380,7 @@ export const AdminComplaints: IAdminComplaintData[] = [
     },
     date: "07.11.2024",
     priority: 2,
+    status: 0,
   },
   {
     id: "550e8400-e29b-41d4-a716-446655440003",
@@ -1367,6 +1393,7 @@ export const AdminComplaints: IAdminComplaintData[] = [
     },
     date: "06.11.2024",
     priority: 0,
+    status: 0,
   },
   {
     id: "550e8400-e29b-41d4-a716-446655440004",
@@ -1379,6 +1406,7 @@ export const AdminComplaints: IAdminComplaintData[] = [
     },
     date: "05.11.2024",
     priority: 1,
+    status: 0,
   },
   {
     id: "550e8400-e29b-41d4-a716-446655440005",
@@ -1391,6 +1419,7 @@ export const AdminComplaints: IAdminComplaintData[] = [
     },
     date: "04.11.2024",
     priority: 2,
+    status: 1,
   },
   {
     id: "550e8400-e29b-41d4-a716-446655440006",
@@ -1403,6 +1432,7 @@ export const AdminComplaints: IAdminComplaintData[] = [
     },
     date: "03.11.2024",
     priority: 0,
+    status: 1,
   },
   {
     id: "550e8400-e29b-41d4-a716-446655440007",
@@ -1415,6 +1445,7 @@ export const AdminComplaints: IAdminComplaintData[] = [
     },
     date: "02.11.2024",
     priority: 1,
+    status: 1,
   },
   {
     id: "550e8400-e29b-41d4-a716-446655440008",
@@ -1427,6 +1458,7 @@ export const AdminComplaints: IAdminComplaintData[] = [
     },
     date: "01.11.2024",
     priority: 2,
+    status: 1,
   },
   {
     id: "550e8400-e29b-41d4-a716-446655440009",
@@ -1439,6 +1471,7 @@ export const AdminComplaints: IAdminComplaintData[] = [
     },
     date: "31.10.2024",
     priority: 0,
+    status: 1,
   },
   {
     id: "550e8400-e29b-41d4-a716-446655440010",
@@ -1451,6 +1484,7 @@ export const AdminComplaints: IAdminComplaintData[] = [
     },
     date: "30.10.2024",
     priority: 1,
+    status: 2,
   },
   {
     id: "550e8400-e29b-41d4-a716-446655440011",
@@ -1463,6 +1497,7 @@ export const AdminComplaints: IAdminComplaintData[] = [
     },
     date: "29.10.2024",
     priority: 2,
+    status: 2,
   },
   {
     id: "550e8400-e29b-41d4-a716-446655440012",
@@ -1475,6 +1510,7 @@ export const AdminComplaints: IAdminComplaintData[] = [
     },
     date: "28.10.2024",
     priority: 0,
+    status: 2,
   },
   {
     id: "550e8400-e29b-41d4-a716-446655440013",
@@ -1487,6 +1523,7 @@ export const AdminComplaints: IAdminComplaintData[] = [
     },
     date: "27.10.2024",
     priority: 1,
+    status: 2,
   },
   {
     id: "550e8400-e29b-41d4-a716-446655440014",
@@ -1499,6 +1536,7 @@ export const AdminComplaints: IAdminComplaintData[] = [
     },
     date: "26.10.2024",
     priority: 2,
+    status: 2,
   },
   {
     id: "550e8400-e29b-41d4-a716-446655440015",
@@ -1511,6 +1549,7 @@ export const AdminComplaints: IAdminComplaintData[] = [
     },
     date: "25.10.2024",
     priority: 0,
+    status: 0,
   },
   {
     id: "550e8400-e29b-41d4-a716-446655440016",
@@ -1523,6 +1562,7 @@ export const AdminComplaints: IAdminComplaintData[] = [
     },
     date: "24.10.2024",
     priority: 1,
+    status: 0,
   },
   {
     id: "550e8400-e29b-41d4-a716-446655440017",
@@ -1535,6 +1575,7 @@ export const AdminComplaints: IAdminComplaintData[] = [
     },
     date: "23.10.2024",
     priority: 2,
+    status: 0,
   },
   {
     id: "550e8400-e29b-41d4-a716-446655440018",
@@ -1547,6 +1588,7 @@ export const AdminComplaints: IAdminComplaintData[] = [
     },
     date: "22.10.2024",
     priority: 0,
+    status: 1,
   },
   {
     id: "550e8400-e29b-41d4-a716-446655440019",
@@ -1559,6 +1601,7 @@ export const AdminComplaints: IAdminComplaintData[] = [
     },
     date: "21.10.2024",
     priority: 1,
+    status: 1,
   },
   {
     id: "550e8400-e29b-41d4-a716-446655440020",
@@ -1571,8 +1614,54 @@ export const AdminComplaints: IAdminComplaintData[] = [
     },
     date: "20.10.2024",
     priority: 2,
+    status: 2,
   },
 ];
+
+export const AdmiinComplaintInfo: IAdminComplaintInfoData = {
+  id: "c9d9baf0-45fe-11ed-b878-0242ac120002",
+  sender: {
+    userId: "13478293",
+    avatar:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+    email: "user1234@example.com",
+    name: "Александр Иванов",
+  },
+  moderator: {
+    userId: "82736412",
+    avatar:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+    email: "moderator@example.com",
+    name: "Ольга Сидорова",
+  },
+  owner: {
+    userId: "82777412",
+    avatar:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+    email: "moderator@example.com",
+    name: "Ольг Сирова",
+  },
+  datetime: "12.11.2024 16:45",
+  theme: "Проблема с постом",
+  priority: 1,
+  status: 2,
+  comment:
+    "Проблема на стадии проверки. Обратная связь будет предоставлена после анализа.",
+  offerId: "35e9ff20-45fe-11ed-b878-0242ac120002",
+  channel: {
+    id: "76ff1b60-45fe-11ed-b878-0242ac120002",
+    avatar:
+      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+    name: "Новости Технологий",
+    platform: "Telegram",
+  },
+  post: {
+    date: "12.11.2024",
+    time: "14:00",
+    format: "1час в топе 24ч в ленте",
+    amount: 5370000,
+  },
+};
 
 export const managerActiveCARDS: IManagerProjects = {
   page: 1,

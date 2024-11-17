@@ -1,5 +1,3 @@
-import { FC } from "react";
-import styles from "./styles.module.scss";
 import {
   AdminChatIcon,
   AdminNotificationsIcon,
@@ -8,6 +6,9 @@ import {
 } from "@shared/assets";
 import { AdminProfile } from "@shared/config";
 import { useAppSelector } from "@shared/hooks";
+import { FC } from "react";
+import styles from "./styles.module.scss";
+import { DropdownMenu } from "./dropdownMenu";
 
 export const HeaderAdmin: FC = () => {
   const profile = AdminProfile;
@@ -15,9 +16,7 @@ export const HeaderAdmin: FC = () => {
   return (
     <header className={styles.wrapper}>
       <div className={styles.left}>
-        <div className={styles.exit}>
-          <ArrowLongHorizontalIcon />
-        </div>
+        <DropdownMenu />
       </div>
       <div className={styles.right}>
         <div className={styles.icons}>

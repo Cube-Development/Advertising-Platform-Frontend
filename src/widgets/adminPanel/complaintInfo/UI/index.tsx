@@ -1,12 +1,20 @@
+import { ComplaintDescription, ComplaintDetails } from "@entities/admin";
+import { AdmiinComplaintInfo } from "@shared/config";
 import { paths } from "@shared/routing";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
 import styles from "./styles.module.scss";
+import {
+  AcceptComplaint,
+  ComplaintDecision,
+  RejectComplaint,
+} from "@features/adminPanel";
 
 export const ComplaintInfo: FC = () => {
   const { t } = useTranslation();
   const { id: complaint_id } = useParams<{ id: string }>();
+  const card = AdmiinComplaintInfo;
   return (
     <div className="container">
       <div className={styles.wrapper}>
@@ -24,7 +32,15 @@ export const ComplaintInfo: FC = () => {
             </p>
           </Link>
         </div>
-        <div className={styles.table}>{complaint_id}</div>
+        <div className={styles.table}>
+          <ComplaintDescription card={card} />
+          <ComplaintDetails card={card} />
+          <ComplaintDecision
+            card={card}
+            AcceptBtn={AcceptComplaint}
+            RejectBtn={RejectComplaint}
+          />
+        </div>
       </div>
     </div>
   );

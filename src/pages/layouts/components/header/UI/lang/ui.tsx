@@ -1,10 +1,14 @@
-import { Languages } from "@shared/config/languages";
+import { Language, Languages } from "@shared/config/languages";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { Language } from "@shared/types/languages";
+import { useChangeLanguegeMutation } from "@entities/user";
 
-export const Lang: FC = () => {
+interface LangProps {
+  isAuth: boolean;
+}
+
+export const Lang: FC<LangProps> = ({ isAuth }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [language, setLanguage] = useState(Languages[0]);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -32,10 +36,13 @@ export const Lang: FC = () => {
     };
   }, []);
 
+  const [changeLanguege] = useChangeLanguegeMutation();
+
   const handleLanguageSelect = (lang: Language) => {
     i18n.changeLanguage(lang.name);
     setMenuOpen(false);
     setLanguage(lang);
+    isAuth && changeLanguege({ language: lang.id });
   };
 
   return (

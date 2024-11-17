@@ -8,13 +8,14 @@
   .top {
     display: grid;
     grid-template-columns: repeat(5, 1fr) max-content;
-    column-gap: 10px;
+    column-gap: 20px;
     padding: 15px 20px;
+    min-height: 70px;
 
     .info {
       display: grid;
-      grid-template-columns: min-content 1fr;
-      column-gap: 10px;
+      grid-template-columns: max-content 1fr;
+      column-gap: 20px;
       align-content: center;
 
       .logo {
@@ -22,10 +23,10 @@
         align-items: center;
         align-content: center;
         justify-content: center;
-        width: 32px;
-        height: 32px;
 
         img {
+          width: 32px;
+          height: 32px;
           border: 1px solid rgba(0, 0, 0, 0.35);
           border-radius: 50%;
         }
@@ -58,6 +59,10 @@
     .column {
       display: grid;
       align-items: center;
+
+      &.user {
+        cursor: pointer;
+      }
 
       p {
         color: var(--Personal-colors-black, #000);
@@ -133,6 +138,7 @@
     grid-auto-flow: row;
     row-gap: 15px;
     padding: 20px;
+    overflow: unset;
 
     .info {
       display: grid;
@@ -178,6 +184,29 @@
           font-weight: 500;
           line-height: 1;
         }
+      }
+    }
+
+    .parameters {
+      display: grid;
+      column-gap: 20px;
+      row-gap: 10px;
+      grid-template-columns: repeat(2, 1fr); // Два столбца одинаковой ширины
+      grid-template-rows: auto; // Автоматическая высота строк
+      gap: 16px; // Зазор между элементами
+
+      .block:nth-child(1),
+      .block:nth-child(2) {
+        grid-column: span 1; // Занимают по одному столбцу
+      }
+
+      .block:nth-child(5) {
+        grid-column: span 2; // Занимает два столбца
+      }
+
+      .block:nth-child(4),
+      .block:nth-child(3) {
+        grid-column: span 1; // Занимают по одному столбцу
       }
     }
 

@@ -7,7 +7,7 @@ import {
   OfferIcon,
 } from "@shared/assets";
 import { projectTypesFilter } from "@entities/project";
-import { IMenuItem } from "../../config";
+import { IMenuItem } from "@entities/admin/types/sidebar";
 
 export const advertiserMenu = [
   {

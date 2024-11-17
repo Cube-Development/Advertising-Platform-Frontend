@@ -1,24 +1,22 @@
+import { IMenuItems } from "@entities/admin";
 import { ArrowSmallVerticalIcon, LoginIcon } from "@shared/assets";
-import { accordionTypes } from "@shared/config/accordion";
+import { accordionTypes } from "@shared/config";
+import { paths } from "@shared/routing";
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@shared/ui/shadcn-ui/ui/accordion";
-import React, { useEffect, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
-import styles from "./styles.module.scss";
-import { IMenuItems } from "@pages/layouts/components/config";
-import { CircleX, GripVertical } from "lucide-react";
-import {
   Dialog,
   DialogClose,
   DialogContent,
   DialogFooter,
   DialogTrigger,
 } from "@shared/ui";
-import { paths } from "@shared/routing";
+import { CircleX, GripVertical } from "lucide-react";
+import React, { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import styles from "./styles.module.scss";
 
 export const MenuItem: React.FC<IMenuItems> = ({
   item,

@@ -1,8 +1,8 @@
+import { CubeDevelopmentIcon } from "@shared/assets";
 import { FC } from "react";
-import styles from "./styles.module.scss";
 import { Link, useLocation } from "react-router-dom";
 import { adminMenu } from "./config";
-import { CubeDevelopmentIcon } from "@shared/assets";
+import styles from "./styles.module.scss";
 
 export const SidebarAdmin: FC = () => {
   const location = useLocation();

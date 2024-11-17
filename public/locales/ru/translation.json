@@ -22,6 +22,7 @@
     "sign_up": "Зарегистрируйтесь",
     "sign_in": "Войти",
     "login_with": "Или войдите через:",
+    "sign_up_registration": "Регистрация",
     "email_required": "Email обязательное поле",
     "email_invalid": "Недействительная почта",
     "back_to_login": "Вернуться",
@@ -51,10 +52,10 @@
     "accound_exist": "Такой аккаунт уже существует",
     "registration_error": "Ошибка регистрации",
     "subscribtion": "Получать уведомления от платформы",
-    "by_clicking_sign_up": "Кликая на кнопку регистрации вы подтверждаете что прочитали",
-    "terms": "Правила",
+    "by_clicking_sign_up": "Кликая на кнопку регистрации вы подтверждаете что ознакомились со следующим:",
+    "terms": "Правила сервиса",
     "and": "и",
-    "privacy_policy": "Политику конфиденциальности"
+    "privacy_policy": "Публичная оферта"
   },
 
   "pages": {
@@ -1968,6 +1969,16 @@
   "url_link": "Введите URL-адрес...",
 
   "admin_panel": {
+    "burger_menu":{
+      "home": "Главная",
+      "channels": "Каналы",
+      "users": "Пользователи",
+      "transactions": "Tранзакции",
+      "moderation": "Модерация",
+      "complaints": "Жалобы",
+      "reviews": "Отзывы"
+    },
+
     "pages": {
       "home": "Главная",
       "channels": "Каналы",
@@ -1978,6 +1989,14 @@
       "reviews": "Отзывы"
     },
     "channels": {
+      "bar": {
+        "id": "Название&ID",
+        "owner": "Владелец",
+        "platform": "Платформа",
+        "date": "Дата",
+        "status": "Статус"
+      },
+
       "card": {
         "rate": "Рейтинг",
         "complete": "Выполненных",
@@ -2012,28 +2031,71 @@
       }
     },
     "users": {
+      "bar": {
+        "id": "ID транзакции",
+        "name": "Имя пользователя",
+        "email": "Почта",
+        "date": "Дата создания",
+        "status": "Статус"
+      },
+
       "card": {
         "status": {
           "active": "Активный",
           "banned": "Заблокированный"
+        },
+
+        "menu": {
+
+          "details": "Подробнее",
+          "send_message": "Написать сообщение",
+          "edit": "Редактировать",
+          "unblock": "Разблокировать",
+
+          "editing": {
+            "title": "Редактирование профиля",
+            "username": "Имя пользователя",
+            "email": "Почта",
+            "phone": "Телефон",
+            "language": "Язык",
+            "location": "Локация",
+            "password": "Пароль",
+            "telegram": "Телеграм-аккаунт",
+
+            "buttons": {
+              "cancel": "Отменить",
+              "update": "Обновить"
+          }
+          }
         }
       }
     },
     "transactions": {
+      "bar": {
+        "id": "ID транзакции",
+        "sender": "Отправитель",
+        "recipient": "Получатель",
+        "date": "Дата создания",
+        "method": "Метод оплаты",
+        "purpose": "Назначение",
+        "amount": "Сумма",
+        "status": "Статус"
+      },
+
       "card": {
         "details": {
           "title": "Системный статус",
           "sender": {
-              "title": "Детали отправителя",
-              "uuid": "UUID счёта",
-              "identification": "Идентификация счёта"
-            },
-            "receiver": {
-              "title": "Детали получателя",
-              "uuid": "UUID счёта",
-              "identification": "Идентификация счёта",
-              "userId": "ID пользователя"
-            }
+            "title": "Детали отправителя",
+            "uuid": "UUID счёта",
+            "identification": "Идентификация счёта"
+          },
+          "receiver": {
+            "title": "Детали получателя",
+            "uuid": "UUID счёта",
+            "identification": "Идентификация счёта",
+            "userId": "ID пользователя"
+          }
         },
 
         "transactions": {
@@ -2053,12 +2115,24 @@
           "reject": "Отклонена",
           "pending": "В ожидании"
         }
-
-        
       }
     },
 
     "complaints": {
+      "types": {
+        "wait":"Ожидают",
+        "active": "В работе",
+        "complite":"Завершены"
+      },
+
+      "bar": {
+        "id": "ID запроса",
+        "sender": "Отправитель",
+        "theme": "Тема",
+        "date": "Дата",
+        "priority": "Приоритет"
+      },
+
       "card": {
         "id": "ID запроса",
         "theme": "Тема",
@@ -2066,7 +2140,7 @@
         "date": "Дата",
         "priority": "Приоритет",
 
-        "status": {
+        "priority_status": {
           "low": "Низкий",
           "medium": "Средний",
           "high": "Высокий"
@@ -2074,7 +2148,73 @@
       }
     },
 
+    "complaintInfo": {
+      "card": {
+        "title": "Жалоба",
+
+        "description": {
+          "title": "Описание",
+          "sender": "Отправитель",
+          "moderator": "Модератор",
+          "date": "Дата создания",
+          "theme": "Тема",
+          "status": "Статус",
+          "priority": "Приоритет",
+          "comment": "Комментарий"
+        },
+
+        "details": {
+          "title": "Детали",
+          "channel": "Рекламная площадка",
+          "owner": "Владелец площадки",
+          "id": "ID заказа",
+          "date": "Дата размещения",
+          "time": "Время размещения",
+          "platform": "Платформа",
+          "format": "Формат размещения",
+          "amount": "Сумма",
+          "link_blogger": "Ссылка на пост (владелец площадки)",
+          "link_advertiser": "Ссылка на пост (Рекламодатель)",
+
+          "buttons": {
+            "seePost": "Посмотреть пост"
+          }
+        },
+
+        "decision": {
+          "title": "Примите решение"
+        },
+
+        "buttons": {
+          "decision": "Принять решение",
+          "reject": "Отклонить",
+          "accept": "Принять"
+        },
+
+        "status": {
+          "wait": "Ожидает",
+          "active": "Активный",
+          "complite": "Завершен"
+        }
+
+      }
+    },
+
     "reviews": {
+      "types": {
+        "wait":"Ожиданиют",
+        "accept":"Принятые"
+      },
+
+      "bar": {
+        "id": "ID запроса",
+        "platform": "Площадка",
+        "sender": "Отпарвитель",
+        "moderator": "Модератор",
+        "date": "Дата",
+        "closed_date": "Дата закрытия"
+      },
+
       "card": {
         "buttons": {
           "accept": "Принять",
@@ -2083,21 +2223,15 @@
         }
       }
     }
-
-
   },
-
 
   "copy": {
     "default": "Скопировано",
-    "technical_specification":{
+    "technical_specification": {
       "link": "Ссылка скопирована"
     },
     "admin_transactions": {
       "id": "Id скопировано"
     }
   }
-
-
-
 }

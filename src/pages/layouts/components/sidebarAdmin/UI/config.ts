@@ -1,11 +1,13 @@
-import { paths } from "@shared/routing";
-import { IMenuItem } from "../../config";
+import { IMenuItem } from "@entities/admin";
 import {
+  AdminComplaintIcon,
+  AdminReviewIcon,
   ChannelIcon,
   HomeIcon,
   TransactionIcon,
   UserIcon,
 } from "@shared/assets";
+import { paths } from "@shared/routing";
 
 export const adminMenu: IMenuItem[] = [
   {
@@ -35,13 +37,13 @@ export const adminMenu: IMenuItem[] = [
   {
     item: {
       path: paths.adminReviews,
-      img: TransactionIcon,
+      img: AdminReviewIcon,
     },
   },
   {
     item: {
       path: paths.adminComplaints,
-      img: TransactionIcon,
+      img: AdminComplaintIcon,
     },
   },
 ];

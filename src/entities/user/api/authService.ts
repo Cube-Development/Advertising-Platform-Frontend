@@ -65,15 +65,26 @@ export const userAPI = authApi.injectEndpoints({
         method: `GET`,
       }),
     }),
-    updateRole: build.mutation<GetUserRes, { role: roles }>({
+    updateRole: build.mutation<void, { role: roles }>({
       query: (params) => ({
         url: `/users/role`,
         method: `PATCH`,
         params,
       }),
     }),
+    changeLanguege: build.mutation<void, { language: languagesNum }>({
+      query: (params) => ({
+        url: `/auth/language`,
+        method: `POST`,
+        params,
+      }),
+    }),
   }),
 });
 
-export const { useLogoutMutation, useGetUserMutation, useUpdateRoleMutation } =
-  userAPI;
+export const {
+  useLogoutMutation,
+  useGetUserMutation,
+  useUpdateRoleMutation,
+  useChangeLanguegeMutation,
+} = userAPI;

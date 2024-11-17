@@ -96,7 +96,7 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
       setCat(newCat);
       const newData: IAddChannelDataPreview = {
         ...data,
-        category: [newCat] || [],
+        category: [newCat],
         language: (languages?.contents || [])
           .filter((item) => data.language.includes(item.id))
           .sort((a, b) => a.id - b.id),

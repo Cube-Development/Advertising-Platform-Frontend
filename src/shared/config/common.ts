@@ -16,8 +16,8 @@ export const enum INTERSECTION_ELEMENTS {
   recommendCardsCart = 10,
   notifications = 15,
   adminChannels = 5,
-  adminUsers = 10,
-  adminTransactions = 10,
+  adminUsers = 5,
+  adminTransactions = 5,
   adminComplaints = 5,
   adminReviews = 5,
 }

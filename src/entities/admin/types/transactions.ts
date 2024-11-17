@@ -1,5 +1,12 @@
 import { transactionStatus } from "../config";
 
+export interface IAdminTransactions {
+  page: number;
+  elements: number;
+  transactions: IAdminTransactionData[];
+  isLast?: boolean;
+}
+
 export interface IAdminTransactionData {
   id: string;
   sender: string;

@@ -47,7 +47,9 @@ export const Header: FC = () => {
   const toggleRole = (currentRole: roles) => {
     if (currentRole !== role) {
       dispatch(toggleRoleAction(currentRole));
-      updateRole({ role: currentRole });
+      if (isAuth) {
+        updateRole({ role: currentRole });
+      }
     }
   };
 
@@ -118,7 +120,7 @@ export const Header: FC = () => {
         </div>
 
         <div className={styles.profile}>
-          <Lang />
+          <Lang isAuth={isAuth} />
           {isAuth && screen > BREAKPOINT.MD && <Wallet />}
           {isAuth ? (
             <>

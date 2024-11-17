@@ -5,9 +5,10 @@ import { useTranslation } from "react-i18next";
 
 interface CodeFormProps {
   onNavigate: (direction: registrationSteps) => void;
+  email: string;
 }
 
-export const CodeForm: FC<CodeFormProps> = ({ onNavigate }) => {
+export const CodeForm: FC<CodeFormProps> = ({ onNavigate, email }) => {
   const { t } = useTranslation();
 
   const [code, setCode] = useState("");
@@ -39,7 +40,9 @@ export const CodeForm: FC<CodeFormProps> = ({ onNavigate }) => {
       <form onSubmit={handleSubmit}>
         <div className={styles.texts}>
           <p>{t("auth.verify_code")}</p>
-          <span>{t("auth.code_send_to_email")}</span>
+          <span>
+            {t("auth.code_send_to_email")} {email}
+          </span>
         </div>
         <div
           className={`${styles.input__container} ${codeError && styles.error}`}

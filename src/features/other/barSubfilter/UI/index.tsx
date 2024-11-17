@@ -1,4 +1,10 @@
 import {
+  adminComplaintTypes,
+  adminComplaintTypesFilter,
+  adminReviewTypes,
+  adminReviewTypesFilter,
+} from "@entities/admin";
+import {
   chatAdvertiserTypes,
   chatManagerTypes,
   chatTypesFilter,
@@ -38,13 +44,23 @@ interface BarSubfilterProps {
   changeCatalogFilter?: (filter: catalogBarFilter) => void;
   chatFilter?: chatTypesFilter;
   changeChatFilter?: (filter: chatTypesFilter) => void;
+  reviewsFilter?: adminReviewTypesFilter;
+  changeReviewsFilter?: (filter: adminReviewTypesFilter) => void;
+  complaintsFilter?: adminComplaintTypesFilter;
+  changeComplaintsFilter?: (filter: adminComplaintTypesFilter) => void;
   fileFilter?: addFileFilter;
   changeFileFilter?: (filter: addFileFilter) => void;
   badge?: (number | string)[];
 }
 
 interface IFilterOption {
-  type: profileTypesName | catalogBarFilter | chatTypesFilter | addFileFilter;
+  type:
+    | profileTypesName
+    | catalogBarFilter
+    | chatTypesFilter
+    | addFileFilter
+    | adminReviewTypesFilter
+    | adminComplaintTypesFilter;
   id?: profileTypesNum;
 }
 
@@ -58,6 +74,10 @@ export const BarSubfilter: FC<BarSubfilterProps> = ({
   changeCatalogFilter,
   chatFilter,
   changeChatFilter,
+  reviewsFilter,
+  changeReviewsFilter,
+  complaintsFilter,
+  changeComplaintsFilter,
   fileFilter,
   changeFileFilter,
   badge,
@@ -80,7 +100,11 @@ export const BarSubfilter: FC<BarSubfilterProps> = ({
               ? [chatManagerTypes, chatFilter]
               : page === pageFilter.createOrderFiles
                 ? [addFileTypes, fileFilter]
-                : [[], "", ""];
+                : page === pageFilter.adminReviews && role === roles.manager
+                  ? [adminReviewTypes, reviewsFilter]
+                  : page === pageFilter.adminComplaint && role === roles.manager
+                    ? [adminComplaintTypes, complaintsFilter]
+                    : [[], "", ""];
 
   const toggleBar = (option: IFilterOption) => {
     if (
@@ -105,6 +129,12 @@ export const BarSubfilter: FC<BarSubfilterProps> = ({
       resetValues();
     } else if (page === pageFilter.createOrderFiles) {
       changeFileFilter && changeFileFilter(option.type as addFileFilter);
+    } else if (page === pageFilter.adminReviews) {
+      changeReviewsFilter &&
+        changeReviewsFilter(option.type as adminReviewTypesFilter);
+    } else if (page === pageFilter.adminComplaint) {
+      changeComplaintsFilter &&
+        changeComplaintsFilter(option.type as adminComplaintTypesFilter);
     }
     if (page === pageFilter.catalog) {
       // if (page !== pageFilter.catalog) {

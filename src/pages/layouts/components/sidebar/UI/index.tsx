@@ -1,25 +1,25 @@
+import { IMenuItem } from "@entities/admin";
 import { DEBOUNCE } from "@entities/project";
 import {
   roles,
   toggleRole as toggleroleAction,
   useUpdateRoleMutation,
 } from "@entities/user";
-import { setDropDownMenu } from "@pages/layouts/model";
+import { setDropDownMenu } from "@pages/layouts";
 import { AccordionItem } from "@radix-ui/react-accordion";
 import { useAppDispatch, useAppSelector, useDebounce } from "@shared/hooks";
 import { paths } from "@shared/routing";
-import { Accordion } from "@shared/ui/shadcn-ui/ui/accordion";
+import { Accordion } from "@shared/ui";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
-import { IMenuItem } from "../../config";
 import { advertiserMenu, bloggerMenu, commonMenu, managerMenu } from "./config";
 import { HoverItem } from "./hoverItem";
 import styles from "./styles.module.scss";
 
 export const Sidebar: FC = () => {
   const { t } = useTranslation();
-  const { role } = useAppSelector((state) => state.user);
+  const { isAuth, role } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const location = useLocation();
 
@@ -28,7 +28,9 @@ export const Sidebar: FC = () => {
   const toggleRole = (currentRole: roles) => {
     if (currentRole !== role) {
       dispatch(toggleroleAction(currentRole));
-      updateRole({ role: currentRole });
+      if (isAuth) {
+        updateRole({ role: currentRole });
+      }
     }
   };
 

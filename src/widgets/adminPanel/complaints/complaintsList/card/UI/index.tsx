@@ -1,6 +1,6 @@
 import {
-  adminComplaintStatus,
-  complaintStatus,
+  adminComplaintPriorityStatus,
+  complaintPriority,
   IAdminComplaintData,
 } from "@entities/admin";
 import { ArrowLongHorizontalIcon } from "@shared/assets";
@@ -19,7 +19,7 @@ export const ComplaintCard: FC<ComplaintCardProps> = ({ card }) => {
   const { t } = useTranslation();
   const { toast } = useToast();
 
-  const handleCopyLink = (text: string) => {
+  const handleCopyLink = (text: string = "") => {
     navigator.clipboard.writeText(text);
     toast({
       variant: "default",
@@ -63,17 +63,18 @@ export const ComplaintCard: FC<ComplaintCardProps> = ({ card }) => {
       <div className={styles.last}>
         <div
           className={`${styles.priority} ${
-            card?.priority === complaintStatus.low
+            card?.priority === complaintPriority.low
               ? styles.low
-              : card?.priority === complaintStatus.medium
+              : card?.priority === complaintPriority.medium
                 ? styles.medium
                 : styles.high
           }`}
         >
           <p>
             {t(
-              adminComplaintStatus.find((item) => item?.id === card?.priority)
-                ?.name || "",
+              adminComplaintPriorityStatus.find(
+                (item) => item?.id === card?.priority,
+              )?.name || "",
             )}
           </p>
         </div>

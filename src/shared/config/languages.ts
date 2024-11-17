@@ -1,5 +1,3 @@
-import { Language } from "@shared/types/languages";
-
 export enum languages {
   ru = "RU",
   en = "EN",
@@ -29,3 +27,10 @@ export const Languages: Language[] = [
     icon: "uk",
   },
 ];
+
+export interface Language {
+  name: languages;
+  id: languagesNum;
+  // icon: FC;
+  icon: string;
+}
