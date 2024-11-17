@@ -119,3 +119,6 @@ export { SortDownIcon } from "./sortDown";
 export { SortUpIcon } from "./sortUp";
 export { PostIcon2 } from "./post2";
 export { CalendarIcon2 } from "./calendar2";
+export { LocationIcon } from "./location";
+export { LineInstagramIcon } from "./line_inst";
+export { LineTelegramIcon } from "./line_tg";
