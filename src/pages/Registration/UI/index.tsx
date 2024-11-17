@@ -33,7 +33,7 @@ export const RegistrationPage: FC = () => {
           />
         )}
         {currentForm === registrationSteps.code && (
-          <CodeForm onNavigate={navigateForms} />
+          <CodeForm onNavigate={navigateForms} email={email} />
         )}
         {currentForm === registrationSteps.registration && (
           <RegistrationForm onNavigate={navigateForms} email={email} />

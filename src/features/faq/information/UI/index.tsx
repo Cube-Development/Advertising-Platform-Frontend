@@ -21,7 +21,7 @@ export const FAQInformation: FC<FAQInformationProps> = ({
   const { t } = useTranslation();
 
   useEffect(() => {
-    accordionRefs.current.forEach((ref, index) => {
+    accordionRefs.current.forEach((ref) => {
       if (ref) {
         const observer = new MutationObserver(() => {
           const state = ref.getAttribute("data-state");

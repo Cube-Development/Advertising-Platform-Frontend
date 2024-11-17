@@ -22,6 +22,7 @@
     "sign_up": "Зарегистрируйтесь",
     "sign_in": "Войти",
     "login_with": "Или войдите через:",
+    "sign_up_registration": "Регистрация",
     "email_required": "Email обязательное поле",
     "email_invalid": "Недействительная почта",
     "back_to_login": "Вернуться",
@@ -51,10 +52,10 @@
     "accound_exist": "Такой аккаунт уже существует",
     "registration_error": "Ошибка регистрации",
     "subscribtion": "Получать уведомления от платформы",
-    "by_clicking_sign_up": "Кликая на кнопку регистрации вы подтверждаете что прочитали",
-    "terms": "Правила",
+    "by_clicking_sign_up": "Кликая на кнопку регистрации вы подтверждаете что ознакомились со следующим:",
+    "terms": "Правила сервиса",
     "and": "и",
-    "privacy_policy": "Политику конфиденциальности"
+    "privacy_policy": "Публичная оферта"
   },
 
   "pages": {
@@ -2085,16 +2086,16 @@
         "details": {
           "title": "Системный статус",
           "sender": {
-              "title": "Детали отправителя",
-              "uuid": "UUID счёта",
-              "identification": "Идентификация счёта"
-            },
-            "receiver": {
-              "title": "Детали получателя",
-              "uuid": "UUID счёта",
-              "identification": "Идентификация счёта",
-              "userId": "ID пользователя"
-            }
+            "title": "Детали отправителя",
+            "uuid": "UUID счёта",
+            "identification": "Идентификация счёта"
+          },
+          "receiver": {
+            "title": "Детали получателя",
+            "uuid": "UUID счёта",
+            "identification": "Идентификация счёта",
+            "userId": "ID пользователя"
+          }
         },
 
         "transactions": {
@@ -2114,8 +2115,6 @@
           "reject": "Отклонена",
           "pending": "В ожидании"
         }
-
-        
       }
     },
 
@@ -2224,21 +2223,15 @@
         }
       }
     }
-
-
   },
-
 
   "copy": {
     "default": "Скопировано",
-    "technical_specification":{
+    "technical_specification": {
       "link": "Ссылка скопирована"
     },
     "admin_transactions": {
       "id": "Id скопировано"
     }
   }
-
-
-
 }

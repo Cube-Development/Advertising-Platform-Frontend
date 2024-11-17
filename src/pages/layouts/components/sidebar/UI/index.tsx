@@ -19,7 +19,7 @@ import styles from "./styles.module.scss";
 
 export const Sidebar: FC = () => {
   const { t } = useTranslation();
-  const { role } = useAppSelector((state) => state.user);
+  const { isAuth, role } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const location = useLocation();
 
@@ -28,7 +28,9 @@ export const Sidebar: FC = () => {
   const toggleRole = (currentRole: roles) => {
     if (currentRole !== role) {
       dispatch(toggleroleAction(currentRole));
-      updateRole({ role: currentRole });
+      if (isAuth) {
+        updateRole({ role: currentRole });
+      }
     }
   };
 
