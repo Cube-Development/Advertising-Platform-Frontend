@@ -138,6 +138,7 @@
     grid-auto-flow: row;
     row-gap: 15px;
     padding: 20px;
+    overflow: unset;
 
     .info {
       display: grid;
@@ -183,6 +184,29 @@
           font-weight: 500;
           line-height: 1;
         }
+      }
+    }
+
+    .parameters {
+      display: grid;
+      column-gap: 20px;
+      row-gap: 10px;
+      grid-template-columns: repeat(2, 1fr); // Два столбца одинаковой ширины
+      grid-template-rows: auto; // Автоматическая высота строк
+      gap: 16px; // Зазор между элементами
+
+      .block:nth-child(1),
+      .block:nth-child(2) {
+        grid-column: span 1; // Занимают по одному столбцу
+      }
+
+      .block:nth-child(5) {
+        grid-column: span 2; // Занимает два столбца
+      }
+
+      .block:nth-child(4),
+      .block:nth-child(3) {
+        grid-column: span 1; // Занимают по одному столбцу
       }
     }
 

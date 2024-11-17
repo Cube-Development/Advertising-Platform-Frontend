@@ -39,6 +39,7 @@ import {
   DrawerTrigger,
   ScrollArea,
 } from "@shared/ui";
+import { Loader } from "lucide-react";
 import { FC, useEffect, useRef, useState } from "react";
 import {
   useForm,
@@ -52,7 +53,6 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import styles from "./styles.module.scss";
 import recomAnimation from "/animated/recom_lottie.gif";
-import { Loader } from "lucide-react";
 
 interface ParametersFilterProps {
   setValue: UseFormSetValue<getCatalogReq>;

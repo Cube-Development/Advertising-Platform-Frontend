@@ -3,6 +3,15 @@ import {
   channelStatus,
   IAdminChannelData,
 } from "@entities/admin";
+import {
+  channelParameterData,
+  IAddChannelData,
+  PLATFORM_PARAMETERS,
+  useGetChannelAgesQuery,
+  useGetChannelLanguagesQuery,
+  useGetChannelRegionsQuery,
+  useGetCompanyCategoriesQuery,
+} from "@entities/channel";
 import { platformTypes } from "@entities/platform";
 import {
   AcceptChannel,
@@ -11,7 +20,9 @@ import {
   RejectChannel,
   UpdateChannel,
 } from "@features/adminPanel";
+import { SelectOptions, SelectSex } from "@features/other";
 import { ArrowSmallVerticalIcon } from "@shared/assets";
+import { Languages } from "@shared/config";
 import {
   AccordionContent,
   AccordionItem,
@@ -19,7 +30,11 @@ import {
   useToast,
 } from "@shared/ui";
 import { FC, MutableRefObject } from "react";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import "swiper/css";
+import "swiper/css/effect-coverflow";
+import "swiper/css/navigation";
 import styles from "./styles.module.scss";
 
 interface ChannelCardProps {
@@ -33,7 +48,10 @@ export const ChannelCard: FC<ChannelCardProps> = ({
   accordionRefs,
   index,
 }) => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
+  const language = Languages.find((lang) => {
+    return i18n.language === lang.name;
+  });
   const { toast } = useToast();
 
   const handleCopyLink = (text: string = "") => {
@@ -43,6 +61,35 @@ export const ChannelCard: FC<ChannelCardProps> = ({
       title: t("copy.default"),
     });
   };
+
+  const contentRes = {
+    language: language?.id || Languages[0].id,
+    page: 1,
+  };
+
+  let defaultValues = {
+    insertion_code: "",
+    male: PLATFORM_PARAMETERS.defaultSexMale,
+    female: 100 - PLATFORM_PARAMETERS.defaultSexMale,
+    category: undefined,
+    description: undefined,
+    text_limit: PLATFORM_PARAMETERS.defaultTextLimit,
+    region: [],
+    language: [],
+    age: [],
+    format: [],
+  };
+
+  const { handleSubmit, setValue, getValues, watch, reset } =
+    useForm<IAddChannelData>({
+      defaultValues: defaultValues,
+    });
+  const formFields = watch();
+
+  const { data: categories } = useGetCompanyCategoriesQuery(contentRes);
+  const { data: ages } = useGetChannelAgesQuery(contentRes);
+  const { data: regions } = useGetChannelRegionsQuery(contentRes);
+  const { data: languages } = useGetChannelLanguagesQuery(contentRes);
 
   return (
     <AccordionItem
@@ -146,6 +193,74 @@ export const ChannelCard: FC<ChannelCardProps> = ({
           <p>{t("admin_panel.channels.card.description")}</p>
           <div>
             <span>{card?.description}</span>
+          </div>
+        </div>
+        <div className={styles.parameters}>
+          <div className={styles.block}>
+            <SelectOptions
+              onChange={setValue}
+              options={categories?.contents || []}
+              single={true}
+              type={channelParameterData.category}
+              textData={"catalog.category"}
+              isRow={true}
+              isCatalog={true}
+              defaultValues={
+                (categories?.contents || []).find(
+                  (item) => item.id === formFields.category,
+                )!
+              }
+            />
+          </div>
+          <div className={styles.block}>
+            <SelectOptions
+              onChange={setValue}
+              getValues={getValues}
+              options={ages?.contents || []}
+              single={false}
+              type={channelParameterData.age}
+              textData={"catalog.age"}
+              isRow={true}
+              isCatalog={true}
+              defaultValues={formFields.age}
+            />
+          </div>
+
+          <div className={styles.block}>
+            <SelectOptions
+              onChange={setValue}
+              getValues={getValues}
+              options={languages?.contents || []}
+              single={false}
+              type={channelParameterData.language}
+              textData={"catalog.languages"}
+              isRow={true}
+              isCatalog={true}
+              defaultValues={formFields.language}
+            />
+          </div>
+          <div className={styles.block}>
+            <SelectOptions
+              onChange={setValue}
+              getValues={getValues}
+              options={regions?.contents || []}
+              single={false}
+              type={channelParameterData.region}
+              textData={"catalog.region"}
+              isRow={true}
+              isCatalog={true}
+              defaultValues={formFields.region}
+            />
+          </div>
+          <div className={styles.block}>
+            <SelectSex
+              onChange={setValue}
+              getValues={getValues}
+              title={"catalog.sex.title"}
+              isRow={true}
+              isCatalog={true}
+              defaultValues={formFields.male}
+            />
           </div>
         </div>
         <div className={styles.buttons}>

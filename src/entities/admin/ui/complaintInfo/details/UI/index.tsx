@@ -104,7 +104,7 @@ export const ComplaintDetails: FC<ComplaintDetailsProps> = ({ card }) => {
             <p className="truncate">
               {t("admin_panel.complaintInfo.card.details.link_blogger")}:
             </p>
-            <MyButton>
+            <MyButton buttons_type="button__white">
               <span>
                 {t("admin_panel.complaintInfo.card.details.buttons.seePost")}
               </span>
@@ -114,7 +114,7 @@ export const ComplaintDetails: FC<ComplaintDetailsProps> = ({ card }) => {
             <p className="truncate">
               {t("admin_panel.complaintInfo.card.details.link_advertiser")}:
             </p>
-            <MyButton>
+            <MyButton buttons_type="button__white">
               <span>
                 {t("admin_panel.complaintInfo.card.details.buttons.seePost")}
               </span>

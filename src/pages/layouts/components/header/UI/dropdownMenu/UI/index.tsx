@@ -1,6 +1,6 @@
+import { IMenuItem } from "@entities/admin";
 import { roles } from "@entities/user";
-import { IMenuItem } from "@pages/layouts/components/config";
-import { setDropDownMenu } from "@pages/layouts/model";
+import { setDropDownMenu } from "@pages/layouts";
 import { BREAKPOINT } from "@shared/config";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { paths } from "@shared/routing";

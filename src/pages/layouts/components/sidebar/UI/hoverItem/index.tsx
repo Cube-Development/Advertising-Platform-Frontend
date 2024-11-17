@@ -1,4 +1,4 @@
-import { IMenuItem } from "@pages/layouts/components/config";
+import { IMenuItem } from "@entities/admin";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";

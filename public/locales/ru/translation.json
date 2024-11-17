@@ -1968,6 +1968,16 @@
   "url_link": "Введите URL-адрес...",
 
   "admin_panel": {
+    "burger_menu":{
+      "home": "Главная",
+      "channels": "Каналы",
+      "users": "Пользователи",
+      "transactions": "Tранзакции",
+      "moderation": "Модерация",
+      "complaints": "Жалобы",
+      "reviews": "Отзывы"
+    },
+
     "pages": {
       "home": "Главная",
       "channels": "Каналы",

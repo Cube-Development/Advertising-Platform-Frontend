@@ -11,7 +11,6 @@ export interface IMenuItem {
   item: IMenuItemParams;
   subItems?: IMenuItemParams[];
 }
-
 interface IMenuItemParams {
   title?: string;
   img?: React.FC<SVGProps<SVGSVGElement>>;
