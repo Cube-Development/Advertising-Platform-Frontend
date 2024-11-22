@@ -21,6 +21,7 @@ export const LoginPage: FC = () => {
   };
 
   const [email, setEmail] = useState("");
+  const [currentCode, setCurrentCode] = useState("");
 
   return (
     <section className={styles.wrapper}>
@@ -36,10 +37,18 @@ export const LoginPage: FC = () => {
           />
         )}
         {currentForm === loginSteps.code && (
-          <CodeReceiveForm onNavigate={navigateForms} />
+          <CodeReceiveForm
+            onNavigate={navigateForms}
+            email={email}
+            setCurrentCode={(code: string) => setCurrentCode(code)}
+          />
         )}
         {currentForm === loginSteps.confirm && (
-          <ConfirmPasswordForm onNavigate={navigateForms} email={email} />
+          <ConfirmPasswordForm
+            onNavigate={navigateForms}
+            email={email}
+            currentCode={currentCode}
+          />
         )}
         {currentForm !== loginSteps.confirm && (
           <>

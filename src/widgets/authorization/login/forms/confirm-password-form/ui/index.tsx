@@ -2,21 +2,29 @@ import { FC, useState } from "react";
 import styles from "./styles.module.scss";
 import { loginSteps } from "../../config";
 import { useTranslation } from "react-i18next";
+import { useResetPasswordMutation } from "@entities/user";
+import { Loader } from "lucide-react";
+import { useToast } from "@shared/ui";
 
 interface ConfirmPasswordFormProps {
   onNavigate: (direction: loginSteps) => void;
   email: string;
+  currentCode: string;
 }
 
 export const ConfirmPasswordForm: FC<ConfirmPasswordFormProps> = ({
   onNavigate,
   email,
+  currentCode,
 }) => {
   const { t } = useTranslation();
+  const { toast } = useToast();
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
+
+  const [resetPassword, { isLoading }] = useResetPasswordMutation();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,6 +47,34 @@ export const ConfirmPasswordForm: FC<ConfirmPasswordFormProps> = ({
       setConfirmPasswordError(t("auth.passwords_dont_match"));
     } else {
       console.log("Passwords match! Proceed to next step.");
+      resetPassword({
+        email,
+        code: Number(currentCode),
+        password: password,
+      })
+        .unwrap()
+        .then(() => {
+          onNavigate(loginSteps.login);
+          toast({
+            variant: "success",
+            title: t("toasts.forgot_password.password_changed"),
+          });
+        })
+        .catch((error) => {
+          if (error.status === 423) {
+            onNavigate(loginSteps.login);
+            toast({
+              variant: "error",
+              title: t("toasts.forgot_password.wrong_code"),
+            });
+          } else {
+            onNavigate(loginSteps.login);
+            toast({
+              variant: "error",
+              title: t("toasts.forgot_password.other_error"),
+            });
+          }
+        });
     }
   };
 
@@ -93,7 +129,16 @@ export const ConfirmPasswordForm: FC<ConfirmPasswordFormProps> = ({
           {confirmPasswordError && <small>{confirmPasswordError}</small>}
         </div>
         <button type="submit" className={styles.button__sign}>
-          {t("auth.set_password")}
+          {isLoading ? (
+            <Loader
+              className="animate-spin"
+              stroke="#fff"
+              width={20}
+              height={20}
+            />
+          ) : (
+            t("auth.set_password")
+          )}
         </button>
       </form>
     </>

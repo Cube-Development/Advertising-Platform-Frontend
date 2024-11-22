@@ -42,7 +42,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
   const { t } = useTranslation();
   const startFormat: IFormat = card?.selected_format
     ? card.format.find(
-        (format) => format?.format === card.selected_format?.format,
+        (format) => format?.format === card.selected_format?.format
       )!
     : card.format[0];
   const [selectedFormat, setSelectedFormat] = useState<IFormat>(startFormat);
@@ -106,7 +106,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
             <div className={styles.info}>
               <Link
                 to={`${paths.channel.replace(":id", card?.id)}`}
-                className={`${styles.title} truncate gradient_color`}
+                className={`${styles.title} truncate`}
               >
                 {card?.name}
               </Link>

@@ -4,7 +4,6 @@ import {
   IAddChannelDataPreview,
   IChannelLink,
   useGetChannelAgesQuery,
-  useGetChannelByIdQuery,
   useGetChannelCategoriesQuery,
   useGetChannelFormatsQuery,
   useGetChannelLanguagesQuery,
@@ -90,7 +89,7 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
       data.format.length > 0
     ) {
       const newCat = (channelCategories?.contents || []).find(
-        (item) => item.id === data.category,
+        (item) => item.id === data.category
       )!;
 
       setCat(newCat);
@@ -109,7 +108,7 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
         format: (data.format || [])
           .map((defaultFormat) => {
             const formatItem = (formats?.contents || []).find(
-              (format) => format.id === defaultFormat.name,
+              (format) => format.id === defaultFormat.name
             )!;
             return { price: defaultFormat.price, ...formatItem };
           })
@@ -139,7 +138,7 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
                   textData={"add_platform.description.category"}
                   defaultValues={
                     (channelCategories?.contents || []).find(
-                      (item) => item.id === data.category,
+                      (item) => item.id === data.category
                     )! || cat
                   }
                   isRow={screen <= BREAKPOINT.LG}
