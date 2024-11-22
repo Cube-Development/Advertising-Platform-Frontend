@@ -130,7 +130,7 @@ export const Description: FC<DescriptionProps> = ({ card }) => {
       <div>
         <div className={styles.channel__description}>
           <div className={styles.title}>
-            <p className="gradient_color truncate">{card?.name}</p>
+            <p className="truncate">{card?.name}</p>
           </div>
           <div className={styles.icons}>
             <FeatherIcon />

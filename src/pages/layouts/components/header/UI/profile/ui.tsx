@@ -94,7 +94,7 @@ export const Profile: FC<ProfileProps> = ({ toggleLogout }) => {
                     onClick={handleLogout}
                   >
                     {t("logout")}
-                    <LogOut width={20} height={20} />
+                    <LogOut width={20} height={20} stroke="#8e54e9" />
                   </li>
                 </DialogFooter>
               </DialogContent>

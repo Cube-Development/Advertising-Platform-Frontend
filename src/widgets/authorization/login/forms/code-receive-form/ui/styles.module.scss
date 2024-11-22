@@ -72,6 +72,10 @@
     font-style: normal;
     font-weight: 400;
     line-height: normal;
+
+    &::placeholder {
+      opacity: 0.5;
+    }
   }
 
   small {

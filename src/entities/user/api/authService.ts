@@ -79,6 +79,30 @@ export const userAPI = authApi.injectEndpoints({
         params,
       }),
     }),
+    getCodeForForgotPassword: build.mutation<
+      { code: string },
+      { email: string }
+    >({
+      query: (body) => ({
+        url: `/auth/forgot-password`,
+        method: `POST`,
+        body,
+      }),
+    }),
+    resetPassword: build.mutation<
+      void,
+      {
+        email: string;
+        code: number;
+        password: string;
+      }
+    >({
+      query: (body) => ({
+        url: `/auth/forgot-password`,
+        method: `POST`,
+        body,
+      }),
+    }),
   }),
 });
 
@@ -87,4 +111,6 @@ export const {
   useGetUserMutation,
   useUpdateRoleMutation,
   useChangeLanguegeMutation,
+  useGetCodeForForgotPasswordMutation,
+  useResetPasswordMutation,
 } = userAPI;

@@ -54,6 +54,10 @@
       font-weight: 600;
       line-height: normal;
       padding: 10px;
+
+      @media (max-width: 576px) {
+        font-size: 18px;
+      }
     }
   }
 
