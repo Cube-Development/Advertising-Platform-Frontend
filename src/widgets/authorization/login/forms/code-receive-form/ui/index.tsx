@@ -67,6 +67,7 @@ export const CodeReceiveForm: FC<Props> = ({
             onChange={(e) => setCode(e.target.value)}
             name="code"
             placeholder="312412"
+            maxLength={6}
           />
           {codeError && <small>{codeError}</small>}
           <p className={styles.code__resend}>

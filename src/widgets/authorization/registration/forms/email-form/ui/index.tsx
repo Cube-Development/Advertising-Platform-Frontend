@@ -2,6 +2,8 @@ import { FC, useState } from "react";
 import { registrationSteps } from "../../config";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
+import { useGetCodeForRegistrationMutation } from "@entities/user";
+import { useToast } from "@shared/ui";
 
 interface EmailFormProps {
   onNavigate: (direction: registrationSteps) => void;
@@ -15,8 +17,11 @@ export const EmailForm: FC<EmailFormProps> = ({
   setEmail,
 }) => {
   const { t } = useTranslation();
+  const { toast } = useToast();
 
   const [emailError, setEmailError] = useState("");
+
+  const [getCodeForRegistration] = useGetCodeForRegistrationMutation();
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -30,6 +35,24 @@ export const EmailForm: FC<EmailFormProps> = ({
     } else {
       setEmailError("");
       onNavigate(registrationSteps.code);
+      getCodeForRegistration({ email })
+        .unwrap()
+        .then(() => {
+          onNavigate(registrationSteps.code);
+        })
+        .catch((error) => {
+          if (error.status === 423) {
+            toast({
+              variant: "error",
+              title: t("toasts.registration.email_verify.email_exists"),
+            });
+          } else {
+            toast({
+              variant: "error",
+              title: t("toasts.registration.email_verify.other_error"),
+            });
+          }
+        });
     }
   };
 

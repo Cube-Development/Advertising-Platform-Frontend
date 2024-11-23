@@ -21,6 +21,7 @@ export const RegistrationPage: FC = () => {
   };
 
   const [email, setEmail] = useState("");
+  const [code, setCode] = useState("");
 
   return (
     <section className={styles.wrapper}>
@@ -33,10 +34,19 @@ export const RegistrationPage: FC = () => {
           />
         )}
         {currentForm === registrationSteps.code && (
-          <CodeForm onNavigate={navigateForms} email={email} />
+          <CodeForm
+            onNavigate={navigateForms}
+            email={email}
+            code={code}
+            setCode={setCode}
+          />
         )}
         {currentForm === registrationSteps.registration && (
-          <RegistrationForm onNavigate={navigateForms} email={email} />
+          <RegistrationForm
+            onNavigate={navigateForms}
+            email={email}
+            code={code}
+          />
         )}
         {currentForm !== registrationSteps.registration && (
           <>
