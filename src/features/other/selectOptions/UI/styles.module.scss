@@ -222,9 +222,11 @@
 
       &.active {
         color: var(--Personal-colors-black);
-        background: linear-gradient(45deg,
-            rgba(71, 114, 230, 0.25) 23.91%,
-            rgba(142, 84, 233, 0.25) 75.06%);
+        background: linear-gradient(
+          45deg,
+          rgba(71, 114, 230, 0.25) 23.91%,
+          rgba(142, 84, 233, 0.25) 75.06%
+        );
         border-radius: 8px;
       }
     }

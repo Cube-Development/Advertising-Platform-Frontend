@@ -14,15 +14,18 @@ import { useHandleAuth } from "@features/useHandleAuth";
 import { Loader } from "lucide-react";
 import { Link } from "react-router-dom";
 import { paths } from "@shared/routing";
+import { useAppSelector } from "@shared/hooks";
 
 interface RegistrationFormProps {
   onNavigate: (direction: registrationSteps) => void;
   email: string;
+  code: string;
 }
 
 export const RegistrationForm: FC<RegistrationFormProps> = ({
   onNavigate,
   email,
+  code,
 }) => {
   const { handleAuth } = useHandleAuth();
   const { toast } = useToast();
@@ -30,6 +33,7 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({
   const language = Languages.find((lang) => {
     return i18n.language === lang.name;
   });
+  const { user } = useAppSelector((state) => state);
 
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -66,15 +70,16 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({
         is_active: true,
         is_superuser: false,
         is_verified: false,
-        role: roles.advertiser,
+        role: user.role || roles.advertiser,
         language: language?.id || Languages[0].id,
+        code: Number(code),
       };
       register(req)
         .unwrap()
         .then((data) => {
           toast({
             variant: "success",
-            title: t("auth.auth_success"),
+            title: t("toasts.authorization.auth_success"),
           });
           const loginReq = {
             username: data?.email,
@@ -97,7 +102,7 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({
             .catch(() => {
               toast({
                 variant: "error",
-                title: t("auth.auth_error"),
+                title: t("toasts.authorization.auth_error"),
                 action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
             });
@@ -106,14 +111,20 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({
           if (error.status === 400) {
             toast({
               variant: "error",
-              title: t("auth.accound_exist"),
-              action: <ToastAction altText="Ok">Ok</ToastAction>,
+              title: t("toasts.authorization.account_exist"),
+              action: <ToastAction altText="Ok">OK</ToastAction>,
+            });
+          } else if (error.status === 423) {
+            toast({
+              variant: "error",
+              title: t("toasts.registration.wrong_code"),
+              action: <ToastAction altText="Ok">OK</ToastAction>,
             });
           } else {
             toast({
               variant: "error",
-              title: t("auth.registration_error"),
-              action: <ToastAction altText="Ok">Ok</ToastAction>,
+              title: t("toasts.authorization.registration_error"),
+              action: <ToastAction altText="Ok">OK</ToastAction>,
             });
           }
         });
