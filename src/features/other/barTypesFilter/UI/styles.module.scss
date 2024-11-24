@@ -61,7 +61,6 @@
       padding-bottom: 10px;
       background: var(--Gradients-Gradient-1);
       -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
       background-clip: text;
       color: transparent;
 
@@ -73,6 +72,30 @@
         width: 100%;
         height: 2.5px;
         background: var(--Gradients-Gradient-1);
+      }
+    }
+
+    .badge {
+      position: absolute;
+      display: grid;
+      align-content: center;
+      align-items: center;
+      justify-content: center;
+      padding: 5px;
+      background: red;
+      min-width: 20px;
+      min-height: 20px;
+      border-radius: 10px;
+      top: -10px;
+      right: -10px;
+      z-index: 2;
+
+      span {
+        color: var(--Personal-colors-White);
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 0.75;
       }
     }
   }

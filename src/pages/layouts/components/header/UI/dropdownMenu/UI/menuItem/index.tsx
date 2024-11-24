@@ -23,6 +23,7 @@ export const MenuItem: React.FC<IMenuItems> = ({
   onChange,
   openTitle,
   isAuth,
+  viewsInfo,
 }) => {
   const { t } = useTranslation();
   const [isActive, setIsActive] = useState<boolean>(
@@ -62,6 +63,11 @@ export const MenuItem: React.FC<IMenuItems> = ({
               <ArrowSmallVerticalIcon
                 className={isActive ? "icon__white rotate" : "rotate__down"}
               />
+              {viewsInfo && (
+                <div className={styles.badge}>
+                  <span>{viewsInfo?.count}</span>
+                </div>
+              )}
             </div>
           </AccordionTrigger>
         ) : item.item.isDialog && !isAuth ? (
@@ -126,6 +132,11 @@ export const MenuItem: React.FC<IMenuItems> = ({
                 <div className={styles.row__title}>
                   {item.item.img && <item.item.img />}
                   {t(item.item.title!)}
+                  {viewsInfo && (
+                    <div className={styles.badge}>
+                      <span>{viewsInfo?.count}</span>
+                    </div>
+                  )}
                 </div>
               </div>
             </AccordionTrigger>
@@ -143,6 +154,15 @@ export const MenuItem: React.FC<IMenuItems> = ({
                 <li>
                   <GripVertical width={20} height={20} stroke="#4772e6" />
                   {t(subItem.title!)}
+                  {viewsInfo && (
+                    <div className={styles.badge}>
+                      <span>
+                        {viewsInfo?.values.find(
+                          (value) => subItem?.type === value?.type,
+                        )?.count || 0}
+                      </span>
+                    </div>
+                  )}
                 </li>
               </Link>
             ))}

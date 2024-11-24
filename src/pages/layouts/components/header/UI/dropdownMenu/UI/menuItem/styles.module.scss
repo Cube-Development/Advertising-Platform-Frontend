@@ -20,15 +20,16 @@
       font-style: normal;
       font-weight: 500;
       line-height: 1;
-
       display: grid;
       grid-auto-flow: column;
       justify-content: start;
       align-items: center;
       gap: 10px;
+      position: relative;
 
       &:hover {
         background-color: #f0f0f0;
+        border-radius: 10px;
       }
     }
   }
@@ -41,6 +42,7 @@
     padding: 20px 25px;
     color: var(--Personal-colors-black);
     width: 100%;
+    position: relative;
 
     &__title {
       display: grid;
@@ -65,7 +67,6 @@
     }
 
     &:hover {
-      // color: var(--Personal-colors-main);
       border-radius: 12px;
       background: #e6e6e6;
     }
@@ -75,6 +76,29 @@
       background: var(--Gradients-Gradient-1);
       color: var(--Personal-colors-White);
     }
+  }
+}
+
+.badge {
+  position: absolute;
+  display: grid;
+  align-content: center;
+  justify-content: center;
+  padding: 5px;
+  background: red;
+  min-width: 20px;
+  min-height: 20px;
+  border-radius: 10px;
+  top: -5px;
+  left: -5px;
+  z-index: 50;
+
+  span {
+    color: var(--Personal-colors-White);
+    font-size: 10px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 0.75;
   }
 }
 

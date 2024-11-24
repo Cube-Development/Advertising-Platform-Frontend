@@ -1,11 +1,20 @@
-import { channelStatusFilter } from "@entities/channel";
-import { offerStatusFilter } from "@entities/offer";
+import { bloggerChannelStatus, channelStatusFilter } from "@entities/channel";
+import { bloggerOfferStatus, offerStatusFilter } from "@entities/offer";
 import {
+  advManagerProjectStatus,
   advManagerProjectStatusFilter,
+  advMyProjectStatus,
+  managerProjectStatus,
   myProjectStatusFilter,
   projectTypesFilter,
 } from "@entities/project";
 import { roles } from "@entities/user";
+import {
+  useGetViewAdvertiserProjectQuery,
+  useGetViewBloggerChannelQuery,
+  useGetViewBloggerOrderQuery,
+  useGetViewManagerProjectQuery,
+} from "@entities/views";
 import { AddChannel } from "@features/channel";
 import {
   BarStatusFilter,
@@ -51,7 +60,72 @@ export const BarFilter: FC<BarFilterProps> = ({
   changeStatus,
   changeType,
 }) => {
-  const { role } = useAppSelector((state) => state.user);
+  const { isAuth, role } = useAppSelector((state) => state.user);
+
+  const { data: viewsAdvProjects } = useGetViewAdvertiserProjectQuery(
+    undefined,
+    {
+      skip: !isAuth || role !== roles.advertiser,
+    },
+  );
+
+  const { data: viewsBloggerOffers } = useGetViewBloggerOrderQuery(undefined, {
+    skip: !isAuth || role !== roles.blogger,
+  });
+
+  const { data: viewsBloggerChannels } = useGetViewBloggerChannelQuery(
+    undefined,
+    {
+      skip: !isAuth || role !== roles.blogger,
+    },
+  );
+
+  const { data: viewsManProjects } = useGetViewManagerProjectQuery(undefined, {
+    skip: !isAuth || role !== roles.manager,
+  });
+
+  const badgeStatus =
+    page === pageFilter.offer
+      ? viewsBloggerOffers?.values[0]?.value?.map((item) => {
+          return { status: item?.status, count: item?.count };
+        })
+      : page === pageFilter.platform
+        ? viewsBloggerChannels?.values[0]?.value?.map((item) => {
+            return { status: item?.status, count: item?.count };
+          })
+        : page === pageFilter.order && role === roles.advertiser
+          ? viewsAdvProjects?.values
+              .find((project) => project?.type === typeFilter)
+              ?.value?.map((item) => {
+                return { status: item?.status, count: item?.count };
+              })
+          : page === pageFilter.order && role === roles.manager
+            ? viewsManProjects?.values[0]?.value?.map((item) => {
+                return { status: item?.status, count: item?.count };
+              })
+            : undefined;
+
+  const badgeType =
+    page === pageFilter.order
+      ? viewsAdvProjects?.values?.map((item) => {
+          return { type: item?.type, count: item?.count };
+        })
+      : undefined;
+
+  const projectStatus =
+    page === pageFilter.order &&
+    typeFilter === projectTypesFilter.myProject &&
+    role === roles.advertiser
+      ? advMyProjectStatus
+      : page === pageFilter.order &&
+          typeFilter === projectTypesFilter.managerProject &&
+          role === roles.advertiser
+        ? advManagerProjectStatus
+        : page === pageFilter.order && role === roles.manager
+          ? managerProjectStatus
+          : page === pageFilter.offer
+            ? bloggerOfferStatus
+            : bloggerChannelStatus;
 
   return (
     <div className={styles.wrapper}>
@@ -69,13 +143,14 @@ export const BarFilter: FC<BarFilterProps> = ({
               changeStatus={changeStatus}
               changeType={changeType!}
               typeFilter={typeFilter!}
+              badge={badgeType}
             />
             {typeFilter === projectTypesFilter.savedProject || (
               <BarStatusFilter
-                page={page}
-                typeFilter={typeFilter}
                 changeStatus={changeStatus}
                 statusFilter={statusFilter}
+                projectStatus={projectStatus}
+                badge={badgeStatus}
               />
             )}
           </>
@@ -83,20 +158,20 @@ export const BarFilter: FC<BarFilterProps> = ({
           role === roles.manager && (
             <>
               <BarStatusFilter
-                page={page}
-                typeFilter={typeFilter}
                 changeStatus={changeStatus}
                 statusFilter={statusFilter}
+                projectStatus={projectStatus}
+                badge={badgeStatus}
               />
             </>
           )
         )
       ) : (
         <BarStatusFilter
-          page={page}
-          typeFilter={typeFilter}
           changeStatus={changeStatus}
           statusFilter={statusFilter}
+          projectStatus={projectStatus}
+          badge={badgeStatus}
         />
       )}
     </div>

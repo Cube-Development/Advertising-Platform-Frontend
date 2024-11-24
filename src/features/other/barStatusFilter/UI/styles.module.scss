@@ -18,6 +18,7 @@
     min-width: 100px;
     cursor: pointer;
     white-space: nowrap;
+    position: relative;
 
     &.active {
       border-radius: 12px;
@@ -27,6 +28,30 @@
 
     @media (max-width: 768px) {
       font-size: 12px;
+    }
+
+    .badge {
+      position: absolute;
+      display: grid;
+      align-content: center;
+      align-items: center;
+      justify-content: center;
+      padding: 5px;
+      background: red;
+      min-width: 20px;
+      min-height: 20px;
+      border-radius: 10px;
+      top: -5px;
+      right: -5px;
+      z-index: 2;
+
+      span {
+        color: var(--Personal-colors-White);
+        font-size: 10px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 0.75;
+      }
     }
   }
 }
