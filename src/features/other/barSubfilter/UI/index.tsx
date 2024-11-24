@@ -50,7 +50,8 @@ interface BarSubfilterProps {
   changeComplaintsFilter?: (filter: adminComplaintTypesFilter) => void;
   fileFilter?: addFileFilter;
   changeFileFilter?: (filter: addFileFilter) => void;
-  badge?: (number | string)[];
+  // badge?: (number | string)[];
+  badge?: { status: string; count: number }[];
 }
 
 interface IFilterOption {
@@ -165,11 +166,14 @@ export const BarSubfilter: FC<BarSubfilterProps> = ({
             onClick={() => toggleBar(option)}
           >
             {t(option.name)}
-            {!!badge && !!badge?.[index] && (
-              <div className={styles.badge}>
-                <span>{badge?.[index]}</span>
-              </div>
-            )}
+            {!!badge &&
+              badge?.find((el) => el?.status === option?.type)?.count && (
+                <div className={styles.badge}>
+                  <span>
+                    {badge?.find((el) => el?.status === option?.type)?.count}
+                  </span>
+                </div>
+              )}
           </li>
         ))}
       </ul>

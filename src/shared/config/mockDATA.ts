@@ -29,6 +29,117 @@ import {
   IManagerProjects,
 } from "@entities/project";
 
+export const viewsAdvProjects = {
+  count: 29,
+  values: [
+    {
+      type: "my_project",
+      count: 13,
+      value: [
+        {
+          status: "my_project_active",
+          count: 1,
+        },
+        {
+          status: "completed",
+          count: 2,
+        },
+      ],
+    },
+    {
+      type: "manager_project",
+      count: 22,
+      value: [
+        {
+          status: "manager_project_active",
+          count: 5,
+        },
+        {
+          status: "develop",
+          count: 6,
+        },
+        {
+          status: "request_approve",
+          count: 7,
+        },
+        {
+          status: "completed",
+          count: 8,
+        },
+      ],
+    },
+  ],
+};
+
+export const viewsWalletTransactions = {
+  count: 5,
+  values: [{ type: "transactions", count: 5, value: [] }],
+};
+
+export const viewsBloggerOffers = {
+  count: 20,
+  values: [
+    {
+      type: "my_orders",
+      count: 0,
+      value: [
+        {
+          status: "active",
+          count: 0,
+        },
+        {
+          status: "wait",
+          count: 0,
+        },
+        {
+          status: "completed",
+          count: 0,
+        },
+        {
+          status: "canceled",
+          count: 0,
+        },
+        {
+          status: "on_moderation",
+          count: 0,
+        },
+        {
+          status: "rejected",
+          count: 0,
+        },
+      ],
+    },
+  ],
+};
+
+export const viewsBloggerChannels = {
+  count: 15,
+  values: [
+    {
+      type: "my_channels",
+      count: 0,
+      value: [
+        {
+          status: "active",
+          count: 0,
+        },
+        {
+          status: "moderation",
+          count: 0,
+        },
+        {
+          status: "rejected",
+          count: 0,
+        },
+        {
+          status: "banned",
+          count: 0,
+        },
+      ],
+    },
+  ],
+};
+
 export const AdminProfile: IAdminProfileData = {
   avatar:
     "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",

@@ -1,14 +1,14 @@
-import { FC, useEffect, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import {
   logout,
   roles,
   toggleRole as toggleRoleAction,
   useUpdateRoleMutation,
 } from "@entities/user";
-import { useGetBalanceQuery, walletSlice } from "@entities/wallet";
+import { authApi, baseApi } from "@shared/api";
 import { BREAKPOINT } from "@shared/config";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { Chat, Notifications } from "@widgets/communication";
+import { FC, useEffect, useState } from "react";
 import { DropdownMenu } from "./dropdownMenu";
 import { Lang } from "./lang";
 import { LoginBtn } from "./loginBtn";
@@ -17,7 +17,6 @@ import { Nav } from "./nav";
 import { Profile } from "./profile";
 import styles from "./styles.module.scss";
 import { Wallet } from "./wallet";
-import { authApi, baseApi } from "@shared/api";
 
 export const Header: FC = () => {
   const [screen, setScreen] = useState<number>(window.innerWidth);
@@ -31,16 +30,6 @@ export const Header: FC = () => {
     dispatch(baseApi.util.resetApiState());
     dispatch(authApi.util.resetApiState());
   };
-
-  const { data, isLoading } = useGetBalanceQuery(undefined, {
-    skip: !isAuth,
-  });
-
-  useEffect(() => {
-    if (data) {
-      dispatch(walletSlice.actions.setBalance(data?.balance));
-    }
-  }, [data, isLoading]);
 
   const [updateRole] = useUpdateRoleMutation();
 

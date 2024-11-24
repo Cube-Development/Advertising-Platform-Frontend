@@ -1,18 +1,11 @@
-import { bloggerChannelStatus, channelStatusFilter } from "@entities/channel";
-import { bloggerOfferStatus, offerStatusFilter } from "@entities/offer";
+import { channelStatusFilter } from "@entities/channel";
+import { offerStatusFilter } from "@entities/offer";
 import {
-  advManagerProjectStatus,
   advManagerProjectStatusFilter,
-  advMyProjectStatus,
-  managerProjectStatus,
   managerProjectStatusFilter,
   myProjectStatusFilter,
-  projectTypesFilter,
 } from "@entities/project";
-import { roles } from "@entities/user";
 import { BREAKPOINT } from "@shared/config";
-import { useAppSelector } from "@shared/hooks";
-import { pageFilter } from "@shared/routing";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import SwiperCore from "swiper";
@@ -20,8 +13,18 @@ import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./styles.module.scss";
 
+interface IProjectType {
+  id?: number;
+  name: string;
+  type:
+    | channelStatusFilter
+    | myProjectStatusFilter
+    | advManagerProjectStatusFilter
+    | managerProjectStatusFilter
+    | offerStatusFilter;
+}
+
 interface BarStatusFilterProps {
-  page: pageFilter;
   changeStatus: (
     status:
       | channelStatusFilter
@@ -31,7 +34,6 @@ interface BarStatusFilterProps {
       | managerProjectStatusFilter
       | string,
   ) => void;
-  typeFilter?: string;
   statusFilter:
     | channelStatusFilter
     | offerStatusFilter
@@ -39,36 +41,22 @@ interface BarStatusFilterProps {
     | advManagerProjectStatusFilter
     | managerProjectStatusFilter
     | string;
+  projectStatus: IProjectType[];
+  badge?: { status: string; count: number }[];
 }
 
 export const BarStatusFilter: FC<BarStatusFilterProps> = ({
-  page,
   changeStatus,
-  typeFilter,
   statusFilter,
+  projectStatus,
+  badge,
 }) => {
   const { t } = useTranslation();
-  const { role } = useAppSelector((state) => state.user);
   const toggleStatus = (status: string) => {
     changeStatus(status);
   };
   const swiperRef = useRef<SwiperCore | null>(null);
   const [screen, setScreen] = useState<number>(window.innerWidth);
-
-  const projectStatus =
-    page === pageFilter.order &&
-    typeFilter === projectTypesFilter.myProject &&
-    role === roles.advertiser
-      ? advMyProjectStatus
-      : page === pageFilter.order &&
-          typeFilter === projectTypesFilter.managerProject &&
-          role === roles.advertiser
-        ? advManagerProjectStatus
-        : page === pageFilter.order && role === roles.manager
-          ? managerProjectStatus
-          : page === pageFilter.offer
-            ? bloggerOfferStatus
-            : bloggerChannelStatus;
 
   useEffect(() => {
     const handleResize = () => {
@@ -96,7 +84,6 @@ export const BarStatusFilter: FC<BarStatusFilterProps> = ({
   const handleSlideChange = () => {
     if (swiperRef.current) {
       const activeIndex = swiperRef.current.activeIndex;
-      // console.log("activeIndex", activeIndex, projectStatus[activeIndex]?.type)
       toggleStatus(projectStatus[activeIndex]?.type);
     }
   };
@@ -113,6 +100,14 @@ export const BarStatusFilter: FC<BarStatusFilterProps> = ({
                 onClick={() => toggleStatus(type.type)}
               >
                 {t(type.name)}
+                {!!badge && (
+                  // !!badge?.find((el) => el?.status === type?.type)?.count &&
+                  <div className={styles.badge}>
+                    <span>
+                      {badge?.find((el) => el?.status === type?.type)?.count}
+                    </span>
+                  </div>
+                )}
               </li>
             ))}
           </ul>
@@ -142,9 +137,16 @@ export const BarStatusFilter: FC<BarStatusFilterProps> = ({
                 <li
                   key={index}
                   className={statusFilter === type.type ? styles.active : ""}
-                  // onClick={() => toggleStatus(type.type)}
                 >
                   {t(type.name)}
+                  {!!badge && (
+                    // !!badge?.find((el) => el?.status === type?.type)?.count &&
+                    <div className={styles.badge}>
+                      <span>
+                        {badge?.find((el) => el?.status === type?.type)?.count}
+                      </span>
+                    </div>
+                  )}
                 </li>
               </SwiperSlide>
             ))}

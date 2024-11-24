@@ -1,3 +1,13 @@
+import { projectTypesFilter } from "@entities/project";
+import {
+  IViewAdvertiserProject,
+  IViewBloggerChannel,
+  IViewBloggerOrder,
+  IViewManagerProject,
+  IViewWallet,
+  viewsTypes,
+} from "@entities/views";
+import { walletTypesFilter } from "@entities/wallet";
 import { SVGProps } from "react";
 
 export interface IMenuItems {
@@ -5,6 +15,12 @@ export interface IMenuItems {
   onChange: (path?: string) => void;
   openTitle: string;
   isAuth?: boolean;
+  viewsInfo?:
+    | IViewAdvertiserProject
+    | IViewBloggerOrder
+    | IViewBloggerChannel
+    | IViewManagerProject
+    | IViewWallet;
 }
 
 export interface IMenuItem {
@@ -17,4 +33,5 @@ interface IMenuItemParams {
   path?: string;
   openMenu?: boolean;
   isDialog?: boolean;
+  type?: viewsTypes | projectTypesFilter | walletTypesFilter;
 }

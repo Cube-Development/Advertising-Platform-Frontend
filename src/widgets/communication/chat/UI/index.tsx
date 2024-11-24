@@ -327,7 +327,7 @@ export const Chat: FC<IChatProps> = ({
                     resetValues={handle}
                     chatFilter={chatFilter}
                     changeChatFilter={setChatFilter}
-                    badge={[countOrderMessage, countProjectMessage]}
+                    // badge={[countOrderMessage, countProjectMessage]}
                   />
                 </div>
               )}
@@ -448,7 +448,7 @@ export const Chat: FC<IChatProps> = ({
                       resetValues={handle}
                       chatFilter={chatFilter}
                       changeChatFilter={setChatFilter}
-                      badge={[countOrderMessage, countProjectMessage]}
+                      // badge={[countOrderMessage, countProjectMessage]}
                     />
                   </div>
                 )}

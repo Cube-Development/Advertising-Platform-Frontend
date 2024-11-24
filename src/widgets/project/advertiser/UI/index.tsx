@@ -14,7 +14,7 @@ import i18n from "@shared/config/i18n";
 import { QueryParams } from "@shared/functions";
 import { pageFilter } from "@shared/routing";
 import { BarFilter } from "@widgets/barFilter";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { AdvProjectsList } from "./advProjects";
 import { DevProjectsList } from "./devProjects";

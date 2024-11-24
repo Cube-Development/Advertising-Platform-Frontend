@@ -1,7 +1,21 @@
 import { IMenuItem } from "@entities/admin";
 import { roles } from "@entities/user";
+import {
+  useGetViewAdvertiserProjectQuery,
+  useGetViewBloggerChannelQuery,
+  useGetViewBloggerOrderQuery,
+  useGetViewManagerProjectQuery,
+  useGetViewTransactionsQuery,
+  viewsTypes,
+} from "@entities/views";
 import { setDropDownMenu } from "@pages/layouts";
-import { BREAKPOINT } from "@shared/config";
+import {
+  BREAKPOINT,
+  viewsAdvProjects,
+  viewsBloggerChannels,
+  viewsBloggerOffers,
+  viewsWalletTransactions,
+} from "@shared/config";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { paths } from "@shared/routing";
 import { Accordion, ScrollArea } from "@shared/ui";
@@ -36,8 +50,8 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
 }) => {
   const { t } = useTranslation();
   const { dropdownMenu } = useAppSelector((state) => state.dropdownMenu);
-  const dispatch = useAppDispatch();
   const [screen, setScreen] = useState<number>(window.innerWidth);
+  const dispatch = useAppDispatch();
   const toggleMenu = (path?: string) => {
     const newMenu = { isOpen: !dropdownMenu.isOpen, title: "" };
     console.log(newMenu);
@@ -50,6 +64,35 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
   };
 
   const { balance } = useAppSelector((state) => state.wallet);
+
+  const { data: viewsAdvProjects } = useGetViewAdvertiserProjectQuery(
+    undefined,
+    {
+      skip: !isAuth || currentRole !== roles.advertiser,
+    },
+  );
+
+  const { data: viewsBloggerOffers } = useGetViewBloggerOrderQuery(undefined, {
+    skip: !isAuth || currentRole !== roles.blogger,
+  });
+
+  const { data: viewsBloggerChannels } = useGetViewBloggerChannelQuery(
+    undefined,
+    {
+      skip: !isAuth || currentRole !== roles.blogger,
+    },
+  );
+
+  const { data: viewsManProjects } = useGetViewManagerProjectQuery(undefined, {
+    skip: !isAuth || currentRole !== roles.manager,
+  });
+
+  const { data: viewsWalletTransactions } = useGetViewTransactionsQuery(
+    undefined,
+    {
+      skip: !isAuth,
+    },
+  );
 
   useEffect(() => {
     if (dropdownMenu.isOpen) {
@@ -215,6 +258,21 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
                             item={item}
                             onChange={toggleMenu}
                             openTitle={dropdownMenu.title}
+                            viewsInfo={
+                              item.item.type === viewsTypes.advertiserProjects
+                                ? viewsAdvProjects
+                                : item.item.type === viewsTypes.wallet
+                                  ? viewsWalletTransactions
+                                  : item.item.type === viewsTypes.bloggerOffers
+                                    ? viewsBloggerOffers
+                                    : item.item.type ===
+                                        viewsTypes.bloggerChannels
+                                      ? viewsBloggerChannels
+                                      : item.item.type ===
+                                          viewsTypes.managerProjects
+                                        ? viewsManProjects
+                                        : undefined
+                            }
                           />
                         ))}
                       </Accordion>
