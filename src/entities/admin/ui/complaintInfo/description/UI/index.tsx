@@ -86,7 +86,7 @@ export const ComplaintDescription: FC<ComplaintDescriptionProps> = ({
                   ? styles.wait
                   : card?.status === complaintStatus.active
                     ? styles.active
-                    : styles.complite
+                    : styles.complete
               }`}
             >
               <p>

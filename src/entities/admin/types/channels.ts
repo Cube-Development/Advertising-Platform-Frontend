@@ -28,11 +28,7 @@ export interface IAdminChannelData {
   age: IOption[];
   format: IFormat[];
   subscribers: number;
-  // order_completed_count: number;
-  // published_posts: number;
   rate: number;
-  // common_count: number;
-
   complete: number;
   complaints: number;
   on_hold: number;

@@ -22,7 +22,7 @@ export const adminComplaintPriorityStatus = [
 export enum complaintStatus {
   wait = 0,
   active = 1,
-  complite = 2,
+  complete = 2,
 }
 
 export const adminComplaintStatus = [
@@ -35,15 +35,15 @@ export const adminComplaintStatus = [
     id: complaintStatus.active,
   },
   {
-    name: "admin_panel.complaintInfo.card.status.complite",
-    id: complaintStatus.complite,
+    name: "admin_panel.complaintInfo.card.status.complete",
+    id: complaintStatus.complete,
   },
 ];
 
 export enum adminComplaintTypesFilter {
   wait = "wait",
   active = "active",
-  complite = "complite",
+  complete = "complete",
 }
 
 export const adminComplaintTypes = [
@@ -56,7 +56,7 @@ export const adminComplaintTypes = [
     type: adminComplaintTypesFilter.active,
   },
   {
-    name: "admin_panel.complaints.types.complite",
-    type: adminComplaintTypesFilter.complite,
+    name: "admin_panel.complaints.types.complete",
+    type: adminComplaintTypesFilter.complete,
   },
 ];

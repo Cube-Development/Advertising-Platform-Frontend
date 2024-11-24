@@ -66,7 +66,7 @@ export const OfferCardSkeleton: FC<OfferCardSkeletonProps> = ({
               </div>
             </div>
           ) : statusFilter === offerStatusFilter.completed ? (
-            <div className={styles.card__complite}>
+            <div className={styles.card__complete}>
               <Skeleton className="h-[90px] w-[90px] rounded-[15px]" />
               <Skeleton className="h-3 w-[150px] rounded-[15px]" />
             </div>
@@ -89,8 +89,8 @@ export const OfferCardSkeleton: FC<OfferCardSkeletonProps> = ({
               </div>
             </div>
           ) : statusFilter === offerStatusFilter.unfulfilled ? (
-            <div className={styles.card__uncomplite}>
-              <div className={styles.card__uncomplite__title}>
+            <div className={styles.card__uncomplete}>
+              <div className={styles.card__uncomplete__title}>
                 <Skeleton className="h-3 w-full" />
                 <Skeleton className="h-2 w-full" />
               </div>

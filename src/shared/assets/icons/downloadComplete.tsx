@@ -1,4 +1,4 @@
-export const DownloadCompliteIcon = () => (
+export const DownloadCompleteIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     width="24"

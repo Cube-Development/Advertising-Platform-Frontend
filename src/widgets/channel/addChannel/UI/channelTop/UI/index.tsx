@@ -28,7 +28,7 @@ export const ChannelTop: FC<ChannelTopProps> = ({
   const handleStyles = (currentFlag: number) => {
     return `${
       step.completedStep >= currentFlag
-        ? styles.complited
+        ? styles.completed
         : step.step === currentFlag
           ? styles.active
           : step.completedStep + 1 === currentFlag

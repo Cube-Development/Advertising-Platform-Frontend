@@ -1,5 +1,5 @@
 import { IDownloadFileType } from "@entities/project";
-import { DownloadCompliteIcon, DownloadIcon } from "@shared/assets";
+import { DownloadCompleteIcon, DownloadIcon } from "@shared/assets";
 import { formatFileSizeFromType, MyProgressBar, sizeTypes } from "@shared/ui";
 import axios from "axios";
 import { FC, useEffect, useState } from "react";
@@ -80,7 +80,7 @@ export const FileDownloader: FC<FileDownloaderProps> = ({ file, onChange }) => {
       ) : progress !== 100 ? (
         <MyProgressBar progress={progress} />
       ) : (
-        <DownloadCompliteIcon />
+        <DownloadCompleteIcon />
       )}
     </div>
   );

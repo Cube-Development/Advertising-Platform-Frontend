@@ -80,8 +80,8 @@ export const TransactionCard: FC<TransactionCardProps> = ({
         </div>
         <div
           className={`${styles.status} ${
-            card?.status === transactionStatus.complite
-              ? styles.complite
+            card?.status === transactionStatus.complete
+              ? styles.complete
               : card?.status === transactionStatus.reject
                 ? styles.reject
                 : styles.pending
