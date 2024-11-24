@@ -120,10 +120,12 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter }) => {
             <div className={styles.card__active__title}>
               <p>{t(`offers_blogger.offer_status.active.title`)}</p>
               <div className={styles.tarif}>
-                <CountdownTimer
-                  date_to={card?.date_accept}
-                  time={card?.publish_time?.time_to}
-                />
+                {typeof card?.publish_date === "string" && (
+                  <CountdownTimer
+                    date_to={card?.publish_date}
+                    time={card?.publish_time?.time_to}
+                  />
+                )}
               </div>
             </div>
             <div className={styles.card__active__buttons}>
