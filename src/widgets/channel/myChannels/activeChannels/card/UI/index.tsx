@@ -19,7 +19,7 @@ import {
 import { SeeReason } from "@features/other";
 import {
   CancelIcon,
-  CompliteIcon,
+  CompleteIcon,
   FeatherIcon,
   ProtectIcon2,
   RatingIcon,
@@ -216,7 +216,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
               )}
               <div>
                 <figure>
-                  <CompliteIcon />
+                  <CompleteIcon />
                 </figure>
                 <p className="truncate">
                   {(

@@ -21,7 +21,7 @@ import { AcceptProject } from "@features/project";
 import {
   ArrowSmallVerticalIcon,
   CancelIcon,
-  CompliteIcon,
+  CompleteIcon,
   MoreIcon,
   RocketIcon,
   SearchIcon,
@@ -148,7 +148,7 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
             <div className={styles.card__info__icons_manager_completed}>
               <div className={styles.top}>
                 <div>
-                  <CompliteIcon />
+                  <CompleteIcon />
                   <p>{card?.completed?.toLocaleString()}</p>
                 </div>
                 <div>
@@ -169,7 +169,7 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
                 <p>{card?.in_progress?.toLocaleString()}</p>
               </div>
               <div>
-                <CompliteIcon />
+                <CompleteIcon />
                 <p>{card?.completed?.toLocaleString()}</p>
               </div>
               <div>
@@ -185,7 +185,7 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
             statusFilter === myProjectStatusFilter.completed ? (
             <div className={styles.card__info__icons_completed}>
               <div>
-                <CompliteIcon />
+                <CompleteIcon />
                 <p>{card?.completed?.toLocaleString()}</p>
               </div>
               <div>
@@ -200,7 +200,7 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
                 <p>{card?.in_progress?.toLocaleString()}</p>
               </div>
               <div className={styles.item__left}>
-                <CompliteIcon />
+                <CompleteIcon />
                 <p>{card?.completed?.toLocaleString()}</p>
               </div>
               <div className={styles.item__right}>

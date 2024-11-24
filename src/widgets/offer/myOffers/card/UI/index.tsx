@@ -162,9 +162,9 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter }) => {
             </div>
           </div>
         ) : statusFilter === offerStatusFilter.completed ? (
-          <div className={styles.card__complite}>
+          <div className={styles.card__complete}>
             <HappySmileIcon className="active__icon" />
-            <p>{t("offers_blogger.offer_status.complite.title")}</p>
+            <p>{t("offers_blogger.offer_status.complete.title")}</p>
           </div>
         ) : statusFilter === offerStatusFilter.canceled ? (
           <div className={styles.card__cancel}>
@@ -180,8 +180,8 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter }) => {
             </div>
           </div>
         ) : statusFilter === offerStatusFilter.unfulfilled ? (
-          <div className={styles.card__uncomplite}>
-            <div className={styles.card__uncomplite__title}>
+          <div className={styles.card__uncomplete}>
+            <div className={styles.card__uncomplete__title}>
               <p>{t(`offers_blogger.offer_status.reject.title`)}</p>
               <span>{t(`offers_blogger.offer_status.reject.text`)}</span>
             </div>

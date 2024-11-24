@@ -274,7 +274,7 @@
     }
   }
 
-  &__complite {
+  &__complete {
     display: grid;
     grid-auto-flow: row;
     align-items: center;
@@ -339,7 +339,7 @@
     }
   }
 
-  &__uncomplite {
+  &__uncomplete {
     display: grid;
     align-items: center;
     align-content: center;
@@ -402,10 +402,10 @@
 
   &__active,
   &__wait,
-  &__complite,
+  &__complete,
   &__cancel,
   &__moderation,
-  &__uncomplite,
+  &__uncomplete,
   &__check {
     padding: 0 20px;
     border-right: 1px solid var(--Card-separator);

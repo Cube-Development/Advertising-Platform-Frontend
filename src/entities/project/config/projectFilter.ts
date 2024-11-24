@@ -29,7 +29,7 @@ export const advMyProjectStatus = [
     type: myProjectStatusFilter.active,
   },
   {
-    name: "orders_advertiser.status_filter.complite",
+    name: "orders_advertiser.status_filter.complete",
     type: myProjectStatusFilter.completed,
   },
 ];
@@ -48,7 +48,7 @@ export const advManagerProjectStatus = [
     type: advManagerProjectStatusFilter.request_approve,
   },
   {
-    name: "orders_advertiser.status_filter.complite",
+    name: "orders_advertiser.status_filter.complete",
     type: advManagerProjectStatusFilter.completed,
   },
 ];
@@ -67,7 +67,7 @@ export const managerProjectStatus = [
     type: managerProjectStatusFilter.request_approve,
   },
   {
-    name: "orders_manager.status_filter.complite",
+    name: "orders_manager.status_filter.complete",
     type: managerProjectStatusFilter.completed,
   },
 ];

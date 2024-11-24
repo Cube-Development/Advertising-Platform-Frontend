@@ -27,8 +27,8 @@ export const Complaints: FC = () => {
   const active = AdminComplaints.filter(
     (item) => item.status === complaintStatus.active,
   );
-  const complite = AdminComplaints.filter(
-    (item) => item.status === complaintStatus.complite,
+  const complete = AdminComplaints.filter(
+    (item) => item.status === complaintStatus.complete,
   );
 
   const [complaintsFilter, setComplaintFilter] =
@@ -58,8 +58,8 @@ export const Complaints: FC = () => {
     } else {
       setComplaintsData({
         ...complaintsData,
-        elements: complite.length,
-        complaints: complite,
+        elements: complete.length,
+        complaints: complete,
       });
     }
   }, [complaintsFilter]);

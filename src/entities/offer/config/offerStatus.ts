@@ -32,7 +32,7 @@ export const bloggerOfferStatus = [
     type: offerStatusFilter.wait,
   },
   {
-    name: "offers_blogger.status_filter.complite",
+    name: "offers_blogger.status_filter.complete",
     type: offerStatusFilter.completed,
   },
   {
@@ -44,7 +44,7 @@ export const bloggerOfferStatus = [
     type: offerStatusFilter.moderation,
   },
   {
-    name: "offers_blogger.status_filter.uncomplite",
+    name: "offers_blogger.status_filter.uncomplete",
     type: offerStatusFilter.unfulfilled,
   },
 ];
