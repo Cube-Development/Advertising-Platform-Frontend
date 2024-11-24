@@ -37,15 +37,10 @@ export const Footer: FC = () => {
               <div key={index} className={styles.nav__block}>
                 <h4>{t(`${block.name}`)}</h4>
                 <ul>
-<<<<<<< HEAD
                   {block.items.map((item, index) => (
                     <Link to={item.path} key={index}>
                       {t(`${item.name}`)}
                     </Link>
-=======
-                  {block.items.map((item) => (
-                    <Link to={item.path}>{t(`${item.name}`)}</Link>
->>>>>>> 85df4eb (feat: footer)
                   ))}
                 </ul>
               </div>
