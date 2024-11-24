@@ -96,14 +96,13 @@ export const BarStatusFilter: FC<BarStatusFilterProps> = ({
   const handleSlideChange = () => {
     if (swiperRef.current) {
       const activeIndex = swiperRef.current.activeIndex;
-      // console.log("activeIndex", activeIndex, projectStatus[activeIndex]?.type)
       toggleStatus(projectStatus[activeIndex]?.type);
     }
   };
 
   return (
     <>
-      {screen > BREAKPOINT.MD ? (
+      {screen > BREAKPOINT.LG ? (
         <div className={styles.subtypes}>
           <ul>
             {projectStatus.map((type, index) => (
@@ -142,7 +141,6 @@ export const BarStatusFilter: FC<BarStatusFilterProps> = ({
                 <li
                   key={index}
                   className={statusFilter === type.type ? styles.active : ""}
-                  // onClick={() => toggleStatus(type.type)}
                 >
                   {t(type.name)}
                 </li>

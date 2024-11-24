@@ -9,62 +9,97 @@ interface CountdownTimerProps {
 
 export const CountdownTimer: FC<CountdownTimerProps> = ({ date_to, time }) => {
   const { t } = useTranslation();
+
+  // Парсим дату и время из строк
   const parts: string[] = date_to.split(".");
   const year: number = parseInt(parts[2]);
   const month: number = parseInt(parts[1]) - 1;
   const day: number = parseInt(parts[0]);
   const hour: number = parseInt(time.split(":")[0]);
   const minute: number = parseInt(time.split(":")[1]);
+
   const finishTime: Date = new Date(year, month, day, hour, minute, 0);
+
+  // Состояния для отображения
   const [[diffDays, diffH, diffM, diffS], setDiff] = useState<number[]>([
     0, 0, 0, 0,
   ]);
-  const [tick, setTick] = useState<boolean>(false);
   const [isTimeout, setIsTimeout] = useState<boolean>(false);
-  const [timerId, setTimerID] = useState<NodeJS.Timeout | number>(0);
 
   useEffect(() => {
-    const diff = (finishTime.getTime() - new Date().getTime()) / 1000;
-    if (diff < 0) {
-      setIsTimeout(true);
-      return;
-    }
-    setDiff([
-      Math.floor(diff / 86400), // дни
-      Math.floor((diff / 3600) % 24),
-      Math.floor((diff / 60) % 60),
-      Math.floor(diff % 60),
-    ]);
-  }, [tick]);
+    const updateDiff = () => {
+      const now = new Date();
+      const currentYear = now.getFullYear();
+      const currentMonth = now.getMonth();
+      const currentDay = now.getDate();
+      const currentHours = now.getHours();
+      const currentMinutes = now.getMinutes();
 
-  useEffect(() => {
-    if (isTimeout) clearInterval(timerId);
-  }, [isTimeout, timerId]);
+      // Проверка даты
+      if (
+        currentYear > year ||
+        (currentYear === year && currentMonth > month) ||
+        (currentYear === year && currentMonth === month && currentDay > day)
+      ) {
+        setIsTimeout(true);
+        setDiff([0, 0, 0, 0]);
+        return;
+      } else if (
+        currentDay === day &&
+        currentMonth === month &&
+        currentYear === year &&
+        currentHours > hour
+      ) {
+        setIsTimeout(true);
+        setDiff([0, 0, 0, 0]);
+        return;
+      } else if (
+        currentDay === day &&
+        currentMonth === month &&
+        currentYear === year &&
+        currentHours === hour &&
+        currentMinutes > minute
+      ) {
+        setIsTimeout(true);
+        setDiff([0, 0, 0, 0]);
+        return;
+      }
 
-  useEffect(() => {
-    const timerID = setInterval(() => {
-      setTick(!tick);
-    }, 1000);
-    setTimerID(timerID);
-    return () => clearInterval(timerID);
-  }, [tick]);
+      const diff = (finishTime.getTime() - now.getTime()) / 1000;
+
+      const days = Math.floor(diff / 86400);
+      const hours = Math.floor((diff / 3600) % 24);
+      const minutes = Math.floor((diff / 60) % 60);
+      const seconds = Math.floor(diff % 60);
+
+      setDiff([days, hours, minutes, seconds]);
+    };
+
+    // Запускаем интервал и обновляем состояние каждую секунду
+    const timerId = setInterval(updateDiff, 1000);
+
+    // Очищаем интервал при размонтировании компонента
+    return () => clearInterval(timerId);
+  }, [finishTime]);
 
   const handleDay = (days: number) => {
-    if (days < 5) {
-      return t("offers_blogger.days.day");
-    } else {
-      return t("offers_blogger.days.days");
-    }
+    return days === 1
+      ? t("offers_blogger.days.day")
+      : days > 1 && days < 5
+        ? t("offers_blogger.days.dayss")
+        : t("offers_blogger.days.days");
   };
 
   return (
     <div className={styles.wrapper}>
-      {diffDays > 1 ? (
+      {isTimeout ? (
+        <span>00:00:00</span>
+      ) : diffDays >= 1 ? (
         <span>
           {diffDays} {handleDay(diffDays)}
         </span>
       ) : (
-        <span className={`${isTimeout ? styles.isTimeout : ""}`}>
+        <span>
           {`${diffH}`.padStart(2, "0")}:{`${diffM}`.padStart(2, "0")}:
           {`${diffS}`.padStart(2, "0")}
         </span>

@@ -65,10 +65,7 @@
 
     &:hover {
       box-shadow: 1px 1px 5px 1px rgba(71, 114, 230, 0.7);
-      background: var(--Gradients-Gradient-1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: var(--Personal-colors-main);
     }
 
     &.selected_date {

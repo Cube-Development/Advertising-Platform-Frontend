@@ -16,7 +16,7 @@ import styles from "./styles.module.scss";
 import { CircleFadingPlus, CircleX } from "lucide-react";
 import { paths } from "@shared/routing";
 
-export const AddChannel: FC<IAddChannelQuery> = ({ props, path }) => {
+export const AddChannel: FC<IAddChannelQuery> = ({ props, path, orange }) => {
   const { t } = useTranslation();
   const { isAuth } = useAppSelector((state) => state.user);
 
@@ -24,7 +24,10 @@ export const AddChannel: FC<IAddChannelQuery> = ({ props, path }) => {
     <>
       {isAuth ? (
         <Link to={path}>
-          <MyButton {...props} className={styles.button}>
+          <MyButton
+            {...props}
+            className={`${styles.button} ${orange ? styles.orange : ""}`}
+          >
             <p>{t(`btn_add_platform`)}</p>
             <CircleFadingPlus />
           </MyButton>
@@ -32,8 +35,12 @@ export const AddChannel: FC<IAddChannelQuery> = ({ props, path }) => {
       ) : (
         <Dialog>
           <DialogTrigger asChild>
-            <MyButton {...props}>
+            <MyButton
+              {...props}
+              className={`${styles.button} ${orange ? styles.orange : ""}`}
+            >
               <p>{t(`btn_add_platform`)}</p>
+              <CircleFadingPlus />
             </MyButton>
           </DialogTrigger>
           <DialogContent className={`${styles.content} gap-[0px]`}>

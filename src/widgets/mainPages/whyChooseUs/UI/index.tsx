@@ -38,7 +38,7 @@ export const WhyChooseUs: FC<WhyChooseUsProps> = ({ page }) => {
           ) : (
             <AddChannel
               path={`${paths.addChannel}?add_channel=${addChannelQueries.main}`}
-              props={{ className: styles.button }}
+              orange
             />
           )
         }

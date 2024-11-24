@@ -241,7 +241,7 @@ main {
 }
 
 .sidebar {
-  @media (min-width: 992px) {
+  @media (min-width: 1081px) {
     padding-left: 80px;
   }
 }
@@ -441,21 +441,11 @@ main {
 
 .deactive {
   pointer-events: none;
-
-  button {
-    filter: grayscale(0.9);
-    opacity: 0.5;
-    width: 100%;
-    height: 100%;
-  }
-  // background: var(--Inside-container);
-  // filter: grayscale(100%);
+  filter: grayscale(0.9);
+  opacity: 0.5;
+  width: 100%;
+  height: 100%;
 }
-
-// .swiper-wrapper{
-//   display: grid;
-//   grid-auto-flow: column;
-// }
 
 .swiper {
   margin: 0;

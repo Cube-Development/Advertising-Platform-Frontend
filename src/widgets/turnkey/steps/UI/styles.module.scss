@@ -75,7 +75,6 @@
     }
 
     &__step {
-      // display: grid;
       column-gap: 30px;
 
       display: flex;
@@ -84,6 +83,10 @@
       > .item__content {
         flex: 6 1 0%; // 6 частей пространства
         min-height: 230px;
+
+        @media (max-width: 576px) {
+          min-height: auto;
+        }
       }
 
       > .item__step {
@@ -117,6 +120,8 @@
 
           @media (max-width: 576px) {
             font-size: 16px;
+            text-align: center;
+            text-transform: uppercase;
           }
 
           @media (max-width: 375px) {
@@ -180,7 +185,7 @@
 
         @media (max-width: 576px) {
           row-gap: var(--row-gap-title-sm);
-          padding: 30px;
+          padding: 20px;
         }
 
         @media (max-width: 375px) {
@@ -191,7 +196,6 @@
           display: grid;
           grid-auto-flow: row;
           row-gap: 20px;
-          list-style-type: disc;
           padding-left: 20px;
 
           @media (max-width: 576px) {
@@ -201,20 +205,32 @@
           li {
             color: var(--Personal-colors-White);
             font-style: normal;
-            font-weight: 600;
-            line-height: 1;
-            font-size: var(--font-size-subtitle-secondary-xl);
+            font-weight: 500;
+            line-height: 1.2;
+            position: relative;
+            text-transform: uppercase;
+            font-size: 12px;
+
+            &::before {
+              content: "";
+              position: absolute;
+              top: 50%;
+              left: -20px;
+              transform: translateY(-50%);
+              width: 10px;
+              height: 10px;
+              border-radius: 9999px;
+              background: #fff;
+            }
 
             @media (max-width: 992px) {
-              font-size: var(--font-size-subtitle-secondary-md);
+              font-size: 10px;
             }
 
             @media (max-width: 768px) {
-              font-size: var(--font-size-subtitle-secondary-sm);
             }
 
             @media (max-width: 576px) {
-              font-size: var(--font-size-subtitle-secondary-xs);
             }
           }
         }
@@ -226,21 +242,27 @@
         color: var(--Personal-colors-White);
         font-size: 16px;
         font-style: normal;
-        font-weight: 600;
+        font-weight: 500;
         line-height: normal;
         position: absolute;
         right: 0;
         left: 0;
         text-align: center;
-        top: -12%;
+        top: -26%;
 
         @media (max-width: 992px) {
           font-size: 14px;
+          top: -20%;
+        }
+
+        @media (max-width: 768px) {
+          font-size: 12px;
+          top: -14%;
         }
 
         @media (max-width: 576px) {
           font-size: 12px;
-          top: -8%;
+          top: -12%;
         }
       }
 
@@ -283,12 +305,17 @@
             border: 1px solid var(--Personal-colors-White);
             padding: 20px;
 
+            @media (max-width: 768px) {
+              padding: 14px;
+            }
+
             span {
               color: var(--Personal-colors-White);
-              font-size: 12px;
+              font-size: 10px;
               font-style: normal;
-              font-weight: 600;
-              line-height: 1;
+              font-weight: 500;
+              line-height: 1.2;
+              text-transform: uppercase;
             }
           }
 
@@ -297,6 +324,10 @@
             grid-auto-flow: column;
             align-items: center;
             column-gap: 15px;
+
+            @media (max-width: 768px) {
+              column-gap: 10px;
+            }
 
             svg {
               width: 42px;
@@ -333,6 +364,10 @@
           padding: 20px;
         }
 
+        @media (max-width: 576px) {
+          row-gap: 20px;
+        }
+
         ul {
           display: grid;
           grid-template: 1fr 1fr / repeat(3, 30%);
@@ -356,12 +391,17 @@
             border: 1px solid var(--Personal-colors-White);
             padding: 20px;
 
+            @media (max-width: 768px) {
+              padding: 14px;
+            }
+
             span {
               color: var(--Personal-colors-White);
-              font-size: 12px;
+              font-size: 10px;
               font-style: normal;
-              font-weight: 600;
-              line-height: 1;
+              font-weight: 500;
+              line-height: 1.2;
+              text-transform: uppercase;
             }
           }
 
@@ -370,6 +410,11 @@
             grid-auto-flow: column;
             align-items: center;
             column-gap: 15px;
+
+            @media (max-width: 768px) {
+              column-gap: 10px;
+            }
+
             svg {
               width: auto;
               height: 38px;
