@@ -4,7 +4,6 @@ import {
   IAddChannelDataPreview,
   IChannelLink,
   useGetChannelAgesQuery,
-  useGetChannelByIdQuery,
   useGetChannelCategoriesQuery,
   useGetChannelFormatsQuery,
   useGetChannelLanguagesQuery,

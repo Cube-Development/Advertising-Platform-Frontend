@@ -90,7 +90,7 @@ export const BarStatusFilter: FC<BarStatusFilterProps> = ({
 
   return (
     <>
-      {screen > BREAKPOINT.MD ? (
+      {screen > BREAKPOINT.LG ? (
         <div className={styles.subtypes}>
           <ul>
             {projectStatus.map((type, index) => (

@@ -10,6 +10,7 @@ type RegisterReq = {
   is_verified: boolean;
   role: roles;
   language: languagesNum;
+  code: number;
 };
 type GetUserRes = IUser;
 
@@ -22,13 +23,6 @@ type LoginReq = {
 
 export const authorizationAPI = baseApi.injectEndpoints({
   endpoints: (build) => ({
-    register: build.mutation<RegisterRes, RegisterReq>({
-      query: (BodyParams) => ({
-        url: `/auth/register`,
-        method: `POST`,
-        body: BodyParams,
-      }),
-    }),
     login: build.mutation<string, LoginReq>({
       query: (BodyParams) => {
         const urlEncodedBody = new URLSearchParams({
@@ -46,9 +40,58 @@ export const authorizationAPI = baseApi.injectEndpoints({
         };
       },
     }),
+    getCodeForRegistration: build.mutation<void, { email: string }>({
+      query: (params) => ({
+        url: `/auth/send-registration-code`,
+        method: `POST`,
+        params,
+      }),
+    }),
+    // verifyEmail: build.mutation<void, { email: string; code: number }>({
+    //   query: (body) => ({
+    //     url: `/auth/verify`,
+    //     method: `POST`,
+    //     body,
+    //   }),
+    // }),
+    register: build.mutation<RegisterRes, RegisterReq>({
+      query: (BodyParams) => ({
+        url: `/auth/register`,
+        method: `POST`,
+        body: BodyParams,
+      }),
+    }),
+    getCodeForForgotPassword: build.mutation<void, { email: string }>({
+      query: (body) => ({
+        url: `/auth/forgot-password`,
+        method: `POST`,
+        body,
+      }),
+    }),
+    resetPassword: build.mutation<
+      void,
+      {
+        email: string;
+        code: number;
+        password: string;
+      }
+    >({
+      query: (body) => ({
+        url: `/auth/reset-password`,
+        method: `POST`,
+        body,
+      }),
+    }),
   }),
 });
-export const { useLoginMutation, useRegisterMutation } = authorizationAPI;
+export const {
+  useLoginMutation,
+  useGetCodeForRegistrationMutation,
+  // useVerifyEmailMutation,
+  useRegisterMutation,
+  useGetCodeForForgotPasswordMutation,
+  useResetPasswordMutation,
+} = authorizationAPI;
 
 export const userAPI = authApi.injectEndpoints({
   endpoints: (build) => ({

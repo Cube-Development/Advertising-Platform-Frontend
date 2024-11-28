@@ -83,4 +83,5 @@ export interface IAddPlatformBlur {
 export interface IAddChannelQuery {
   props?: ButtonHTMLAttributes<HTMLButtonElement>;
   path: string;
+  orange?: boolean;
 }

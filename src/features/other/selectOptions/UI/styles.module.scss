@@ -107,11 +107,12 @@
 
     &.active {
       span {
-        background: var(--Gradients-Gradient-1);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        // background: var(--Gradients-Gradient-1);
+        // -webkit-background-clip: text;
+        // -webkit-text-fill-color: transparent;
+        // background-clip: text;
       }
+
       border: 1px solid var(--Personal-colors-main);
       background: var(--Personal-colors-White);
     }
@@ -126,6 +127,7 @@
       span {
         color: rgba(0, 0, 0, 0.6);
       }
+
       padding: 10px;
       border: 1px solid var(--Inside-container);
       height: 30px;

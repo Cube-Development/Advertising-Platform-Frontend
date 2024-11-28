@@ -59,7 +59,7 @@ export const LoginForm: FC<Props> = ({ onNavigate }) => {
         .catch(() => {
           toast({
             variant: "error",
-            title: t("auth.auth_error"),
+            title: t("toasts.authorization.auth_error"),
             action: <ToastAction altText="Ok">Ok</ToastAction>,
           });
         });

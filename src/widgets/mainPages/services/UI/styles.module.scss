@@ -3,13 +3,6 @@
   grid-auto-flow: row;
   row-gap: var(--row-gap-content-xl);
 
-  @media (min-width: 1220px) {
-    padding: 30px !important;
-    background: rgba(255, 255, 255, 0.5);
-    box-shadow: 0px 6px 10px 2px rgba(0, 0, 0, 0.1);
-    border-radius: 30px;
-  }
-
   @media (max-width: 992px) {
     row-gap: var(--row-gap-content-lg);
   }
@@ -32,6 +25,7 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    text-align: center;
 
     @media (max-width: 992px) {
       font-size: var(--font-size-subtitle-secondary-lg);
@@ -42,7 +36,8 @@
     }
 
     @media (max-width: 576px) {
-      font-size: var(--font-size-subtitle-secondary-sm);
+      font-size: var(--font-size-subtitle-secondary-xs);
+      text-align: left;
     }
 
     @media (max-width: 375px) {
@@ -52,10 +47,17 @@
 
   .infos {
     display: grid;
-    column-gap: 120px;
+    column-gap: 50px;
+    justify-content: space-between;
     row-gap: 30px;
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    margin: 0 40px;
+
+    @media (min-width: 1220px) {
+      padding: 30px !important;
+      background: rgba(255, 255, 255, 0.5);
+      box-shadow: 0px 6px 10px 2px rgba(0, 0, 0, 0.1);
+      border-radius: 30px;
+    }
 
     @media (max-width: 1160px) {
       grid-template-columns: repeat(2, minmax(150px, 1fr));

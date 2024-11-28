@@ -106,7 +106,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
             <div className={styles.info}>
               <Link
                 to={`${paths.channel.replace(":id", card?.id)}`}
-                className={`${styles.title} truncate gradient_color`}
+                className={`${styles.title} truncate`}
               >
                 {card?.name}
               </Link>
