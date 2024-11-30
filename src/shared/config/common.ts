@@ -18,7 +18,7 @@ export const enum INTERSECTION_ELEMENTS {
   adminChannels = 5,
   adminUsers = 5,
   adminTransactions = 5,
-  adminComplaints = 5,
+  adminComplaints = 1,
   adminReviews = 5,
 }
 

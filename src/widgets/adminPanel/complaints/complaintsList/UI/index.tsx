@@ -9,11 +9,10 @@ import { SkeletonAdminComplaintCard } from "../card/skeleton";
 import styles from "./styles.module.scss";
 
 interface ComplaintsListProps {
-  data: IAdminComplaints;
+  data?: IAdminComplaints;
   isLoading: boolean;
   isFetching: boolean;
   handleChange: () => void;
-  status: adminComplaintTypesFilter;
 }
 
 export const ComplaintsList: FC<ComplaintsListProps> = ({
@@ -21,7 +20,6 @@ export const ComplaintsList: FC<ComplaintsListProps> = ({
   isLoading,
   isFetching,
   handleChange,
-  status,
 }) => {
   const { t } = useTranslation();
   return (
@@ -31,10 +29,10 @@ export const ComplaintsList: FC<ComplaintsListProps> = ({
           <p className="truncate">{t("admin_panel.complaints.bar.id")}</p>
         </div>
         <div className={styles.column}>
-          <p className="truncate">{t("admin_panel.complaints.bar.sender")}</p>
+          <p className="truncate">{t("admin_panel.complaints.bar.theme")}</p>
         </div>
         <div className={styles.column}>
-          <p className="truncate">{t("admin_panel.complaints.bar.theme")}</p>
+          <p className="truncate">{t("admin_panel.complaints.bar.sender")}</p>
         </div>
         <div className={styles.column}>
           <p className="truncate">{t("admin_panel.complaints.bar.date")}</p>
@@ -47,7 +45,7 @@ export const ComplaintsList: FC<ComplaintsListProps> = ({
         <div className={styles.cards}>
           {data?.complaints.map((card, index) => (
             <motion.div
-              key={card.id + index}
+              key={card.id}
               initial="hidden"
               animate="visible"
               custom={index % INTERSECTION_ELEMENTS.adminComplaints}
@@ -57,7 +55,7 @@ export const ComplaintsList: FC<ComplaintsListProps> = ({
             </motion.div>
           ))}
           {(isFetching || isLoading) &&
-            Array.from({ length: INTERSECTION_ELEMENTS.adminReviews }).map(
+            Array.from({ length: INTERSECTION_ELEMENTS.adminComplaints }).map(
               (_, index) => <SkeletonAdminComplaintCard key={index} />,
             )}
           {!data.isLast && (

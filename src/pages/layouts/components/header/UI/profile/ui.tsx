@@ -7,6 +7,7 @@ import {
   DialogClose,
   DialogContent,
   DialogFooter,
+  DialogTitle,
   DialogTrigger,
 } from "@shared/ui";
 import { CircleX, LogOut } from "lucide-react";
@@ -72,6 +73,7 @@ export const Profile: FC<ProfileProps> = ({ toggleLogout }) => {
                 <li className={styles.logout}>{t("logout")}</li>
               </DialogTrigger>
               <DialogContent className={`${styles.content} gap-[0px]`}>
+                <DialogTitle></DialogTitle>
                 <DialogClose>
                   <p className={styles.close}>
                     <CircleX

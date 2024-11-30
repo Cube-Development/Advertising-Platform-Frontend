@@ -1,9 +1,10 @@
-import { complaintPriority, complaintStatus } from "../config";
+import { adminComplaintTypesFilter, complaintPriority } from "../config";
 
 export interface IAdminComplaints {
   page: number;
   elements: number;
   complaints: IAdminComplaintData[];
+  order_complaint_status?: adminComplaintTypesFilter;
   isLast?: boolean;
 }
 
@@ -11,13 +12,12 @@ export interface IAdminComplaintData {
   id: string;
   theme: string;
   sender: IUser;
-  date: string;
+  created: string;
   priority: complaintPriority;
-  status: complaintStatus;
 }
 
 interface IUser {
   avatar: string;
   email: string;
-  userId: string;
+  id: string;
 }

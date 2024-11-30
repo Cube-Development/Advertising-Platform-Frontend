@@ -2,6 +2,7 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogTitle,
   DialogTrigger,
   Drawer,
   DrawerContent,
@@ -102,6 +103,7 @@ export const AcceptOffer: FC<IOrderFeature> = ({ order_id, dates }) => {
                 <p className={styles.button}>{t(`offer_btn.accept`)}</p>
               </DialogTrigger>
               <DialogContent>
+                <DialogTitle></DialogTitle>
                 <div className={styles.popover}>
                   <div className="absolute -right-3 -top-3">
                     <DialogClose>
@@ -146,6 +148,7 @@ export const AcceptOffer: FC<IOrderFeature> = ({ order_id, dates }) => {
                 <p className={styles.button}>{t(`offer_btn.accept`)}</p>
               </DrawerTrigger>
               <DrawerContent className="mt-[20dvh] rounded-t-xl">
+                <DialogTitle></DialogTitle>
                 <div className={styles.drawer_popover}>
                   <h2 className={styles.description__title}>
                     {t(`offer_btn.accept_title`)}

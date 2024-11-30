@@ -481,7 +481,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Александр Иванов",
     email: "ivanov.alex@gmail.com",
-    date: "15.10.2023",
+    created: "15.10.2023",
     status: 1,
   },
   {
@@ -490,7 +490,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Мария Соколова",
     email: "sokolova.masha@example.com",
-    date: "23.08.2023",
+    created: "23.08.2023",
     status: 0,
   },
   {
@@ -499,7 +499,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Олег Петров",
     email: "oleg.petrov@example.com",
-    date: "01.01.2023",
+    created: "01.01.2023",
     status: 1,
   },
   {
@@ -508,7 +508,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Елена Смирнова",
     email: "elena.smirnova@mail.com",
-    date: "30.03.2023",
+    created: "30.03.2023",
     status: 0,
   },
   {
@@ -517,7 +517,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Дмитрий Орлов",
     email: "d.orlov@example.com",
-    date: "14.06.2023",
+    created: "14.06.2023",
     status: 1,
   },
   {
@@ -526,7 +526,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Наталья Кузнецова",
     email: "n.kuznetsova@example.com",
-    date: "22.05.2023",
+    created: "22.05.2023",
     status: 0,
   },
   {
@@ -535,7 +535,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Сергей Лебедев",
     email: "sergei.lebedev@example.com",
-    date: "05.07.2023",
+    created: "05.07.2023",
     status: 1,
   },
   {
@@ -544,7 +544,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Алина Попова",
     email: "popova.alina@gmail.com",
-    date: "10.11.2023",
+    created: "10.11.2023",
     status: 0,
   },
   {
@@ -553,7 +553,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Михаил Волков",
     email: "m.volkov@example.com",
-    date: "18.12.2023",
+    created: "18.12.2023",
     status: 1,
   },
   {
@@ -562,7 +562,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Анна Киселева",
     email: "anna.kiseleva@gmail.com",
-    date: "02.09.2023",
+    created: "02.09.2023",
     status: 1,
   },
   {
@@ -571,7 +571,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Иван Захаров",
     email: "ivan.zakharov@mail.com",
-    date: "09.08.2023",
+    created: "09.08.2023",
     status: 0,
   },
   {
@@ -580,7 +580,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Екатерина Морозова",
     email: "morozova.ekaterina@gmail.com",
-    date: "20.04.2023",
+    created: "20.04.2023",
     status: 1,
   },
   {
@@ -589,7 +589,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Павел Виноградов",
     email: "pavel.vinogradov@example.com",
-    date: "17.02.2023",
+    created: "17.02.2023",
     status: 0,
   },
   {
@@ -598,7 +598,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Ольга Беляева",
     email: "belyaeva.olga@mail.com",
-    date: "29.05.2023",
+    created: "29.05.2023",
     status: 1,
   },
   {
@@ -607,7 +607,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Максим Зайцев",
     email: "zaytsev.max@example.com",
-    date: "11.03.2023",
+    created: "11.03.2023",
     status: 0,
   },
 ];
@@ -1466,313 +1466,313 @@ export const AdminReviews: IAdminReviewData[] = [
   },
 ];
 
-export const AdminComplaints: IAdminComplaintData[] = [
-  {
-    id: "550e8400-e29b-41d4-a716-446655440001",
-    theme: "Проблема с постом!",
-    sender: {
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "maria.smirnova@example.com",
-      userId: "82417538",
-    },
-    date: "08.11.2024",
-    priority: 1,
-    status: 0,
-  },
-  {
-    id: "550e8400-e29b-41d4-a716-446655440002",
-    theme: "Проблема с постом!",
-    sender: {
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "andrey.petrova@example.com",
-      userId: "13492857",
-    },
-    date: "07.11.2024",
-    priority: 2,
-    status: 0,
-  },
-  {
-    id: "550e8400-e29b-41d4-a716-446655440003",
-    theme: "Проблема с постом!",
-    sender: {
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "ivan.ivanov@example.com",
-      userId: "57281934",
-    },
-    date: "06.11.2024",
-    priority: 0,
-    status: 0,
-  },
-  {
-    id: "550e8400-e29b-41d4-a716-446655440004",
-    theme: "Проблема с постом!",
-    sender: {
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "svetlana.kuznetsova@example.com",
-      userId: "76134892",
-    },
-    date: "05.11.2024",
-    priority: 1,
-    status: 0,
-  },
-  {
-    id: "550e8400-e29b-41d4-a716-446655440005",
-    theme: "Проблема с постом!",
-    sender: {
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "alexey.nikitin@example.com",
-      userId: "34819752",
-    },
-    date: "04.11.2024",
-    priority: 2,
-    status: 1,
-  },
-  {
-    id: "550e8400-e29b-41d4-a716-446655440006",
-    theme: "Проблема с постом!",
-    sender: {
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "olga.petrenko@example.com",
-      userId: "92841736",
-    },
-    date: "03.11.2024",
-    priority: 0,
-    status: 1,
-  },
-  {
-    id: "550e8400-e29b-41d4-a716-446655440007",
-    theme: "Проблема с постом!",
-    sender: {
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "dmitry.mikhailov@example.com",
-      userId: "18492675",
-    },
-    date: "02.11.2024",
-    priority: 1,
-    status: 1,
-  },
-  {
-    id: "550e8400-e29b-41d4-a716-446655440008",
-    theme: "Проблема с постом!",
-    sender: {
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "irina.novikova@example.com",
-      userId: "93716284",
-    },
-    date: "01.11.2024",
-    priority: 2,
-    status: 1,
-  },
-  {
-    id: "550e8400-e29b-41d4-a716-446655440009",
-    theme: "Проблема с постом!",
-    sender: {
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "valery.pavlov@example.com",
-      userId: "71829346",
-    },
-    date: "31.10.2024",
-    priority: 0,
-    status: 1,
-  },
-  {
-    id: "550e8400-e29b-41d4-a716-446655440010",
-    theme: "Проблема с постом!",
-    sender: {
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "elena.morozova@example.com",
-      userId: "68294753",
-    },
-    date: "30.10.2024",
-    priority: 1,
-    status: 2,
-  },
-  {
-    id: "550e8400-e29b-41d4-a716-446655440011",
-    theme: "Проблема с постом!",
-    sender: {
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "nikolay.belov@example.com",
-      userId: "49381726",
-    },
-    date: "29.10.2024",
-    priority: 2,
-    status: 2,
-  },
-  {
-    id: "550e8400-e29b-41d4-a716-446655440012",
-    theme: "Проблема с постом!",
-    sender: {
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "anna.vlasova@example.com",
-      userId: "16294837",
-    },
-    date: "28.10.2024",
-    priority: 0,
-    status: 2,
-  },
-  {
-    id: "550e8400-e29b-41d4-a716-446655440013",
-    theme: "Проблема с постом!",
-    sender: {
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "sergey.sokolov@example.com",
-      userId: "75923814",
-    },
-    date: "27.10.2024",
-    priority: 1,
-    status: 2,
-  },
-  {
-    id: "550e8400-e29b-41d4-a716-446655440014",
-    theme: "Проблема с постом!",
-    sender: {
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "polina.smirnova@example.com",
-      userId: "83579162",
-    },
-    date: "26.10.2024",
-    priority: 2,
-    status: 2,
-  },
-  {
-    id: "550e8400-e29b-41d4-a716-446655440015",
-    theme: "Проблема с постом!",
-    sender: {
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "viktor.ivanov@example.com",
-      userId: "61728394",
-    },
-    date: "25.10.2024",
-    priority: 0,
-    status: 0,
-  },
-  {
-    id: "550e8400-e29b-41d4-a716-446655440016",
-    theme: "Проблема с постом!",
-    sender: {
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "natalia.mironova@example.com",
-      userId: "28391746",
-    },
-    date: "24.10.2024",
-    priority: 1,
-    status: 0,
-  },
-  {
-    id: "550e8400-e29b-41d4-a716-446655440017",
-    theme: "Проблема с постом!",
-    sender: {
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "alexandr.volkov@example.com",
-      userId: "98471235",
-    },
-    date: "23.10.2024",
-    priority: 2,
-    status: 0,
-  },
-  {
-    id: "550e8400-e29b-41d4-a716-446655440018",
-    theme: "Проблема с постом!",
-    sender: {
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "tatyana.karpova@example.com",
-      userId: "28765413",
-    },
-    date: "22.10.2024",
-    priority: 0,
-    status: 1,
-  },
-  {
-    id: "550e8400-e29b-41d4-a716-446655440019",
-    theme: "Проблема с постом!",
-    sender: {
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "igor.orlov@example.com",
-      userId: "57283194",
-    },
-    date: "21.10.2024",
-    priority: 1,
-    status: 1,
-  },
-  {
-    id: "550e8400-e29b-41d4-a716-446655440020",
-    theme: "Проблема с постом!",
-    sender: {
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "yuliya.kovaleva@example.com",
-      userId: "62893741",
-    },
-    date: "20.10.2024",
-    priority: 2,
-    status: 2,
-  },
-];
+// export const AdminComplaints: IAdminComplaintData[] = [
+//   {
+//     id: "550e8400-e29b-41d4-a716-446655440001",
+//     theme: "Проблема с постом!",
+//     sender: {
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "maria.smirnova@example.com",
+//       id: "82417538",
+//     },
+//     created: "08.11.2024",
+//     priority: 1,
+//     status: 0,
+//   },
+//   {
+//     id: "550e8400-e29b-41d4-a716-446655440002",
+//     theme: "Проблема с постом!",
+//     sender: {
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "andrey.petrova@example.com",
+//       id: "13492857",
+//     },
+//     created: "07.11.2024",
+//     priority: 2,
+//     status: 0,
+//   },
+//   {
+//     id: "550e8400-e29b-41d4-a716-446655440003",
+//     theme: "Проблема с постом!",
+//     sender: {
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "ivan.ivanov@example.com",
+//       id: "57281934",
+//     },
+//     created: "06.11.2024",
+//     priority: 0,
+//     status: 0,
+//   },
+//   {
+//     id: "550e8400-e29b-41d4-a716-446655440004",
+//     theme: "Проблема с постом!",
+//     sender: {
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "svetlana.kuznetsova@example.com",
+//       id: "76134892",
+//     },
+//     created: "05.11.2024",
+//     priority: 1,
+//     status: 0,
+//   },
+//   {
+//     id: "550e8400-e29b-41d4-a716-446655440005",
+//     theme: "Проблема с постом!",
+//     sender: {
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "alexey.nikitin@example.com",
+//       id: "34819752",
+//     },
+//     created: "04.11.2024",
+//     priority: 2,
+//     status: 1,
+//   },
+//   {
+//     id: "550e8400-e29b-41d4-a716-446655440006",
+//     theme: "Проблема с постом!",
+//     sender: {
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "olga.petrenko@example.com",
+//       id: "92841736",
+//     },
+//     created: "03.11.2024",
+//     priority: 0,
+//     status: 1,
+//   },
+//   {
+//     id: "550e8400-e29b-41d4-a716-446655440007",
+//     theme: "Проблема с постом!",
+//     sender: {
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "dmitry.mikhailov@example.com",
+//       id: "18492675",
+//     },
+//     created: "02.11.2024",
+//     priority: 1,
+//     status: 1,
+//   },
+//   {
+//     id: "550e8400-e29b-41d4-a716-446655440008",
+//     theme: "Проблема с постом!",
+//     sender: {
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "irina.novikova@example.com",
+//       id: "93716284",
+//     },
+//     created: "01.11.2024",
+//     priority: 2,
+//     status: 1,
+//   },
+//   {
+//     id: "550e8400-e29b-41d4-a716-446655440009",
+//     theme: "Проблема с постом!",
+//     sender: {
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "valery.pavlov@example.com",
+//       id: "71829346",
+//     },
+//     created: "31.10.2024",
+//     priority: 0,
+//     status: 1,
+//   },
+//   {
+//     id: "550e8400-e29b-41d4-a716-446655440010",
+//     theme: "Проблема с постом!",
+//     sender: {
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "elena.morozova@example.com",
+//       id: "68294753",
+//     },
+//     created: "30.10.2024",
+//     priority: 1,
+//     status: 2,
+//   },
+//   {
+//     id: "550e8400-e29b-41d4-a716-446655440011",
+//     theme: "Проблема с постом!",
+//     sender: {
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "nikolay.belov@example.com",
+//       id: "49381726",
+//     },
+//     created: "29.10.2024",
+//     priority: 2,
+//     status: 2,
+//   },
+//   {
+//     id: "550e8400-e29b-41d4-a716-446655440012",
+//     theme: "Проблема с постом!",
+//     sender: {
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "anna.vlasova@example.com",
+//       id: "16294837",
+//     },
+//     created: "28.10.2024",
+//     priority: 0,
+//     status: 2,
+//   },
+//   {
+//     id: "550e8400-e29b-41d4-a716-446655440013",
+//     theme: "Проблема с постом!",
+//     sender: {
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "sergey.sokolov@example.com",
+//       id: "75923814",
+//     },
+//     created: "27.10.2024",
+//     priority: 1,
+//     status: 2,
+//   },
+//   {
+//     id: "550e8400-e29b-41d4-a716-446655440014",
+//     theme: "Проблема с постом!",
+//     sender: {
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "polina.smirnova@example.com",
+//       id: "83579162",
+//     },
+//     created: "26.10.2024",
+//     priority: 2,
+//     status: 2,
+//   },
+//   {
+//     id: "550e8400-e29b-41d4-a716-446655440015",
+//     theme: "Проблема с постом!",
+//     sender: {
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "viktor.ivanov@example.com",
+//       id: "61728394",
+//     },
+//     created: "25.10.2024",
+//     priority: 0,
+//     status: 0,
+//   },
+//   {
+//     id: "550e8400-e29b-41d4-a716-446655440016",
+//     theme: "Проблема с постом!",
+//     sender: {
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "natalia.mironova@example.com",
+//       id: "28391746",
+//     },
+//     created: "24.10.2024",
+//     priority: 1,
+//     status: 0,
+//   },
+//   {
+//     id: "550e8400-e29b-41d4-a716-446655440017",
+//     theme: "Проблема с постом!",
+//     sender: {
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "alexandr.volkov@example.com",
+//       id: "98471235",
+//     },
+//     created: "23.10.2024",
+//     priority: 2,
+//     status: 0,
+//   },
+//   {
+//     id: "550e8400-e29b-41d4-a716-446655440018",
+//     theme: "Проблема с постом!",
+//     sender: {
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "tatyana.karpova@example.com",
+//       id: "28765413",
+//     },
+//     created: "22.10.2024",
+//     priority: 0,
+//     status: 1,
+//   },
+//   {
+//     id: "550e8400-e29b-41d4-a716-446655440019",
+//     theme: "Проблема с постом!",
+//     sender: {
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "igor.orlov@example.com",
+//       id: "57283194",
+//     },
+//     created: "21.10.2024",
+//     priority: 1,
+//     status: 1,
+//   },
+//   {
+//     id: "550e8400-e29b-41d4-a716-446655440020",
+//     theme: "Проблема с постом!",
+//     sender: {
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "yuliya.kovaleva@example.com",
+//       id: "62893741",
+//     },
+//     created: "20.10.2024",
+//     priority: 2,
+//     status: 2,
+//   },
+// ];
 
-export const AdmiinComplaintInfo: IAdminComplaintInfoData = {
-  id: "c9d9baf0-45fe-11ed-b878-0242ac120002",
-  sender: {
-    userId: "13478293",
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-    email: "user1234@example.com",
-    name: "Александр Иванов",
-  },
-  moderator: {
-    userId: "82736412",
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-    email: "moderator@example.com",
-    name: "Ольга Сидорова",
-  },
-  owner: {
-    userId: "82777412",
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-    email: "moderator@example.com",
-    name: "Ольг Сирова",
-  },
-  datetime: "12.11.2024 16:45",
-  theme: "Проблема с постом",
-  priority: 1,
-  status: 2,
-  comment:
-    "Проблема на стадии проверки. Обратная связь будет предоставлена после анализа.",
-  offerId: "35e9ff20-45fe-11ed-b878-0242ac120002",
-  channel: {
-    id: "76ff1b60-45fe-11ed-b878-0242ac120002",
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-    name: "Новости Технологий",
-    platform: "Telegram",
-  },
-  post: {
-    date: "12.11.2024",
-    time: "14:00",
-    format: "1час в топе 24ч в ленте",
-    amount: 5370000,
-  },
-};
+// export const AdmiinComplaintInfo: IAdminComplaintInfoData = {
+//   id: "c9d9baf0-45fe-11ed-b878-0242ac120002",
+//   sender: {
+//     id: "13478293",
+//     avatar:
+//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//     email: "user1234@example.com",
+//     name: "Александр Иванов",
+//   },
+//   moderator: {
+//     id: "82736412",
+//     avatar:
+//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//     email: "moderator@example.com",
+//     name: "Ольга Сидорова",
+//   },
+//   owner: {
+//     id: "82777412",
+//     avatar:
+//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//     email: "moderator@example.com",
+//     name: "Ольг Сирова",
+//   },
+//   created: "12.11.2024 16:45",
+//   theme: "Проблема с постом",
+//   priority: 1,
+//   status: 2,
+//   comment:
+//     "Проблема на стадии проверки. Обратная связь будет предоставлена после анализа.",
+//   order_id: "35e9ff20-45fe-11ed-b878-0242ac120002",
+//   channel: {
+//     id: "76ff1b60-45fe-11ed-b878-0242ac120002",
+//     avatar:
+//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//     name: "Новости Технологий",
+//     platform: "Telegram",
+//   },
+//   post: {
+//     published_date: "12.11.2024",
+//     published_time: "14:00",
+//     format: "1час в топе 24ч в ленте",
+//     amount: 5370000,
+//   },
+// };
 
 export const managerActiveCARDS: IManagerProjects = {
   page: 1,

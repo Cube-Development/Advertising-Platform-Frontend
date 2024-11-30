@@ -9,6 +9,7 @@ import {
 } from "@entities/admin";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@shared/ui";
+import noUserAvatar from "/images/notFound/noUserAvatar.jpg";
 
 interface ComplaintDescriptionProps {
   card: IAdminComplaintInfoData;
@@ -39,7 +40,7 @@ export const ComplaintDescription: FC<ComplaintDescriptionProps> = ({
             </p>
             <div className={styles.info}>
               <div className={styles.logo}>
-                <img src={card?.sender?.avatar || ""} alt="avatar" />
+                <img src={card?.sender?.avatar || noUserAvatar} alt="avatar" />
               </div>
               <div className={styles.title}>
                 <p
@@ -50,9 +51,9 @@ export const ComplaintDescription: FC<ComplaintDescriptionProps> = ({
                 </p>
                 <span
                   className="truncate"
-                  onClick={() => handleCopyLink(card?.sender?.userId)}
+                  onClick={() => handleCopyLink(card?.sender?.id)}
                 >
-                  # {card?.sender?.userId}
+                  # {card?.sender?.id}
                 </span>
               </div>
             </div>
@@ -63,15 +64,18 @@ export const ComplaintDescription: FC<ComplaintDescriptionProps> = ({
             </p>
             <div className={styles.info}>
               <div className={styles.logo}>
-                <img src={card?.moderator?.avatar || ""} alt="avatar" />
+                <img
+                  src={card?.moderator?.avatar || noUserAvatar}
+                  alt="avatar"
+                />
               </div>
               <div className={styles.title}>
                 <p className="truncate">{card?.moderator?.name}</p>
                 <span
                   className="truncate"
-                  onClick={() => handleCopyLink(card?.moderator?.userId)}
+                  onClick={() => handleCopyLink(card?.moderator?.id)}
                 >
-                  # {card?.sender?.userId}
+                  # {card?.moderator?.id}
                 </span>
               </div>
             </div>
@@ -101,7 +105,7 @@ export const ComplaintDescription: FC<ComplaintDescriptionProps> = ({
         <div className={styles.complaint__wrapper}>
           <div className={styles.datetime}>
             <p>{t("admin_panel.complaintInfo.card.description.date")}:</p>
-            <span>{card?.datetime}</span>
+            <span>{card?.created}</span>
           </div>
           <div className={styles.theme}>
             <p>{t("admin_panel.complaintInfo.card.description.theme")}:</p>

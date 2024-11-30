@@ -10,6 +10,7 @@ import {
   DialogClose,
   DialogContent,
   DialogFooter,
+  DialogTitle,
   DialogTrigger,
 } from "@shared/ui";
 import { CircleX, GripVertical } from "lucide-react";
@@ -63,7 +64,7 @@ export const MenuItem: React.FC<IMenuItems> = ({
               <ArrowSmallVerticalIcon
                 className={isActive ? "icon__white rotate" : "rotate__down"}
               />
-              {viewsInfo && (
+              {viewsInfo && !!viewsInfo?.count && (
                 <div className={styles.badge}>
                   <span>{viewsInfo?.count}</span>
                 </div>
@@ -87,6 +88,7 @@ export const MenuItem: React.FC<IMenuItems> = ({
               </span>
             </DialogTrigger>
             <DialogContent className={`${styles.content} gap-[0px]`}>
+              <DialogTitle></DialogTitle>
               <DialogClose>
                 <p className={styles.close}>
                   <CircleX
@@ -132,7 +134,7 @@ export const MenuItem: React.FC<IMenuItems> = ({
                 <div className={styles.row__title}>
                   {item.item.img && <item.item.img />}
                   {t(item.item.title!)}
-                  {viewsInfo && (
+                  {viewsInfo && !!viewsInfo?.count && (
                     <div className={styles.badge}>
                       <span>{viewsInfo?.count}</span>
                     </div>
@@ -154,7 +156,7 @@ export const MenuItem: React.FC<IMenuItems> = ({
                 <li>
                   <GripVertical width={20} height={20} stroke="#4772e6" />
                   {t(subItem.title!)}
-                  {viewsInfo && (
+                  {viewsInfo && !!viewsInfo?.count && (
                     <div className={styles.badge}>
                       <span>
                         {viewsInfo?.values.find(

@@ -35,6 +35,7 @@ import {
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogTrigger,
+  DialogTitle,
   Drawer,
   DrawerClose,
   DrawerContent,
@@ -425,6 +426,7 @@ export const Chat: FC<IChatProps> = ({
             )}
           </DrawerTrigger>
           <DrawerContent>
+            <DialogTitle></DialogTitle>
             <div className={`${styles.content} ${styles.drawer}`}>
               <div
                 className={`${styles.content__left} ${role !== roles.blogger ? styles.gridA : styles.gridB}`}

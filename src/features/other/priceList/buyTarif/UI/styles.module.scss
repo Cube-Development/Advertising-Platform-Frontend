@@ -59,7 +59,7 @@
 .menu {
   display: grid;
   grid-auto-flow: row;
-  height: calc(var(--vh) * 100) !important;
+  // height: calc(var(--vh) * 100) !important;
   align-content: space-between;
 
   &__top {
@@ -83,6 +83,12 @@
       font-style: normal;
       font-weight: 600;
       line-height: 1;
+
+      @media (max-width: 576px) {
+        font-size: 20px;
+        text-align: center;
+        font-weight: 600;
+      }
     }
 
     .close {

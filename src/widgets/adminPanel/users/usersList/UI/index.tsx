@@ -8,7 +8,7 @@ import { SkeletonAdminUserCard, UserCard } from "../card";
 import styles from "./styles.module.scss";
 
 interface UsersListProps {
-  data: IAdminUsers;
+  data?: IAdminUsers;
   isLoading: boolean;
   isFetching: boolean;
   handleChange: () => void;
@@ -44,7 +44,7 @@ export const UsersList: FC<UsersListProps> = ({
         <div className={styles.cards}>
           {data?.users.map((card, index) => (
             <motion.div
-              key={card.id + index}
+              key={card.id}
               initial="hidden"
               animate="visible"
               custom={index % INTERSECTION_ELEMENTS.adminUsers}
@@ -55,7 +55,7 @@ export const UsersList: FC<UsersListProps> = ({
           ))}
           {(isFetching || isLoading) &&
             Array.from({
-              length: INTERSECTION_ELEMENTS.adminTransactions,
+              length: INTERSECTION_ELEMENTS.adminUsers,
             }).map((_, index) => <SkeletonAdminUserCard key={index} />)}
           {!data.isLast && (
             <div className={`${styles.show_more}`} onClick={handleChange}>

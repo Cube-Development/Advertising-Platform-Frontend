@@ -43,14 +43,14 @@ export const BarTypesFilter: FC<BarTypesFilterProps> = ({
             onClick={() => toggleType(type.type, type.status)}
           >
             {t(type.name)}
-            {!!badge && (
-              // !!badge?.find((el) => el?.status === type?.type)?.count &&
-              <div className={styles.badge}>
-                <span>
-                  {badge?.find((el) => el?.type === type?.type)?.count}
-                </span>
-              </div>
-            )}
+            {!!badge &&
+              !!badge?.find((el) => el?.type === type?.type)?.count && (
+                <div className={styles.badge}>
+                  <span>
+                    {badge?.find((el) => el?.type === type?.type)?.count}
+                  </span>
+                </div>
+              )}
           </li>
         ))}
       </ul>

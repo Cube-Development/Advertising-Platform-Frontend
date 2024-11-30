@@ -167,7 +167,7 @@ export const BarSubfilter: FC<BarSubfilterProps> = ({
           >
             {t(option.name)}
             {!!badge &&
-              badge?.find((el) => el?.status === option?.type)?.count && (
+              !!badge?.find((el) => el?.status === option?.type)?.count && (
                 <div className={styles.badge}>
                   <span>
                     {badge?.find((el) => el?.status === option?.type)?.count}

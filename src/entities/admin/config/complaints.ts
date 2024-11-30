@@ -41,9 +41,9 @@ export const adminComplaintStatus = [
 ];
 
 export enum adminComplaintTypesFilter {
-  wait = "wait",
-  active = "active",
-  complete = "complete",
+  wait = 1,
+  active = 2,
+  complete = 3,
 }
 
 export const adminComplaintTypes = [
@@ -60,3 +60,8 @@ export const adminComplaintTypes = [
     type: adminComplaintTypesFilter.complete,
   },
 ];
+
+export enum adminComplaintForm {
+  page = "page",
+  order_complaint_status = "order_complaint_status",
+}

@@ -16,11 +16,10 @@ import {
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogTrigger,
+  DialogTitle,
   Drawer,
   DrawerClose,
   DrawerContent,
-  DrawerDescription,
-  DrawerTitle,
   DrawerTrigger,
   formatFileSizeAndType,
   useToast,
@@ -219,10 +218,7 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
               )}
             </DrawerTrigger>
             <DrawerContent className="h-full">
-              <div style={{ display: "none" }}>
-                <DrawerTitle></DrawerTitle>
-                <DrawerDescription></DrawerDescription>
-              </div>
+              <DialogTitle></DialogTitle>
               <div className={styles.content__wrapper}>
                 <div className={styles.top}>
                   <p>{t("orders_manager.card.technical_specificationIcon")}</p>

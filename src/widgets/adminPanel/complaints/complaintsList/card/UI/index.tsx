@@ -10,6 +10,7 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
+import noUserAvatar from "/images/notFound/noUserAvatar.jpg";
 
 interface ComplaintCardProps {
   card: IAdminComplaintData;
@@ -40,7 +41,7 @@ export const ComplaintCard: FC<ComplaintCardProps> = ({ card }) => {
       </div>
       <div className={styles.info}>
         <div className={styles.logo}>
-          <img src={card?.sender?.avatar || ""} alt="sender" />
+          <img src={card?.sender?.avatar || noUserAvatar} alt="sender" />
         </div>
         <div className={styles.title}>
           <p
@@ -51,14 +52,14 @@ export const ComplaintCard: FC<ComplaintCardProps> = ({ card }) => {
           </p>
           <span
             className="truncate"
-            onClick={() => handleCopyLink(card?.sender?.userId)}
+            onClick={() => handleCopyLink(card?.sender?.id)}
           >
-            # {card?.sender?.userId}
+            # {card?.sender?.id}
           </span>
         </div>
       </div>
       <div className={styles.column}>
-        <p>{card?.date}</p>
+        <p>{card?.created}</p>
       </div>
       <div className={styles.last}>
         <div

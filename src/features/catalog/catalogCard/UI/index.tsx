@@ -112,7 +112,6 @@ export const CatalogCard: FC<CatalogCardProps> = ({
               </Link>
               <p className={`${styles.category} truncate`}>{card?.category}</p>
               {screen >= BREAKPOINT.MD ? (
-                // <span className={styles.description}>{card?.description}</span>
                 <ChannelCardDescription description={card?.description} />
               ) : (
                 <div className={styles.rate}>

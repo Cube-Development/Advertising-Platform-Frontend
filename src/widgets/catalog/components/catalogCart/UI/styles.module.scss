@@ -1,15 +1,22 @@
 .wrapper {
   display: grid;
-  grid-template: 1fr / 3.6fr 2fr;
-  column-gap: 40px;
+  grid-template: 1fr 1fr / 1fr;
+  gap: 10px;
+  column-gap: 20px;
   padding: 20px 15px;
   background: var(--Gradients-Gradient-1);
   // opacity: 0.95;
   border-radius: 15px;
 
+  @media (min-width: 1200px) {
+    grid-template: 1fr / 1fr auto;
+    gap: 0;
+  }
+
   @media (max-width: 992px) {
     padding: 12px 15px;
     column-gap: 30px;
+    grid-template: 1fr / 1fr auto;
 
     // fixed
     position: fixed;
@@ -29,7 +36,7 @@
 
   .text {
     display: grid;
-    grid-template: 1fr / 1fr 1fr 1fr;
+    grid-template: 1fr / auto auto auto;
 
     @media (max-width: 768px) {
       grid-template: 1fr / 1fr 1fr;
@@ -66,6 +73,10 @@
       }
 
       &.coast {
+        @media (max-width: 1199px) and (min-width: 993px) {
+          border-right: none;
+        }
+
         @media (max-width: 576px) {
           justify-self: end;
         }
