@@ -76,6 +76,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
       prompt: "",
     },
   });
+
   const { filter } = getValues();
 
   const { watch: watchTA, setValue: setValueTA } = useForm<getTAParametersReq>({

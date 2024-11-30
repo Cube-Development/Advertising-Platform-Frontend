@@ -481,7 +481,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Александр Иванов",
     email: "ivanov.alex@gmail.com",
-    date: "15.10.2023",
+    created: "15.10.2023",
     status: 1,
   },
   {
@@ -490,7 +490,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Мария Соколова",
     email: "sokolova.masha@example.com",
-    date: "23.08.2023",
+    created: "23.08.2023",
     status: 0,
   },
   {
@@ -499,7 +499,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Олег Петров",
     email: "oleg.petrov@example.com",
-    date: "01.01.2023",
+    created: "01.01.2023",
     status: 1,
   },
   {
@@ -508,7 +508,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Елена Смирнова",
     email: "elena.smirnova@mail.com",
-    date: "30.03.2023",
+    created: "30.03.2023",
     status: 0,
   },
   {
@@ -517,7 +517,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Дмитрий Орлов",
     email: "d.orlov@example.com",
-    date: "14.06.2023",
+    created: "14.06.2023",
     status: 1,
   },
   {
@@ -526,7 +526,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Наталья Кузнецова",
     email: "n.kuznetsova@example.com",
-    date: "22.05.2023",
+    created: "22.05.2023",
     status: 0,
   },
   {
@@ -535,7 +535,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Сергей Лебедев",
     email: "sergei.lebedev@example.com",
-    date: "05.07.2023",
+    created: "05.07.2023",
     status: 1,
   },
   {
@@ -544,7 +544,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Алина Попова",
     email: "popova.alina@gmail.com",
-    date: "10.11.2023",
+    created: "10.11.2023",
     status: 0,
   },
   {
@@ -553,7 +553,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Михаил Волков",
     email: "m.volkov@example.com",
-    date: "18.12.2023",
+    created: "18.12.2023",
     status: 1,
   },
   {
@@ -562,7 +562,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Анна Киселева",
     email: "anna.kiseleva@gmail.com",
-    date: "02.09.2023",
+    created: "02.09.2023",
     status: 1,
   },
   {
@@ -571,7 +571,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Иван Захаров",
     email: "ivan.zakharov@mail.com",
-    date: "09.08.2023",
+    created: "09.08.2023",
     status: 0,
   },
   {
@@ -580,7 +580,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Екатерина Морозова",
     email: "morozova.ekaterina@gmail.com",
-    date: "20.04.2023",
+    created: "20.04.2023",
     status: 1,
   },
   {
@@ -589,7 +589,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Павел Виноградов",
     email: "pavel.vinogradov@example.com",
-    date: "17.02.2023",
+    created: "17.02.2023",
     status: 0,
   },
   {
@@ -598,7 +598,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Ольга Беляева",
     email: "belyaeva.olga@mail.com",
-    date: "29.05.2023",
+    created: "29.05.2023",
     status: 1,
   },
   {
@@ -607,7 +607,7 @@ export const AdminUsers: IAdminUserData[] = [
       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
     name: "Максим Зайцев",
     email: "zaytsev.max@example.com",
-    date: "11.03.2023",
+    created: "11.03.2023",
     status: 0,
   },
 ];

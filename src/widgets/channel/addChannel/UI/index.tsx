@@ -65,6 +65,7 @@ export const AddChannelBlock: FC<AddChannelBlockProps> = () => {
     useForm<IAddChannelData>({
       defaultValues: defaultValues,
     });
+
   const formFields = watch();
 
   useEffect(() => {

@@ -4,6 +4,7 @@ import { useToast } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import noUserAvatar from "/images/notFound/noUserAvatar.jpg";
 
 interface UserCardProps {
   card: IAdminUserData;
@@ -25,7 +26,7 @@ export const UserCard: FC<UserCardProps> = ({ card }) => {
     <div className={styles.wrapper}>
       <div className={styles.info}>
         <div className={styles.logo}>
-          <img src={card?.avatar} alt="" />
+          <img src={card?.avatar || noUserAvatar} alt="avatar" />
         </div>
         <p
           className={`${styles.click} truncate`}
@@ -43,7 +44,7 @@ export const UserCard: FC<UserCardProps> = ({ card }) => {
         </p>
       </div>
       <div className={styles.column}>
-        <p className="truncate">{card?.date}</p>
+        <p className="truncate">{card?.created}</p>
       </div>
       <div
         className={`${styles.status} ${
