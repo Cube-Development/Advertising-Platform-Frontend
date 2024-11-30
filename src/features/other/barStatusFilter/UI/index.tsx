@@ -100,14 +100,14 @@ export const BarStatusFilter: FC<BarStatusFilterProps> = ({
                 onClick={() => toggleStatus(type.type)}
               >
                 {t(type.name)}
-                {!!badge && (
-                  // !!badge?.find((el) => el?.status === type?.type)?.count &&
-                  <div className={styles.badge}>
-                    <span>
-                      {badge?.find((el) => el?.status === type?.type)?.count}
-                    </span>
-                  </div>
-                )}
+                {!!badge &&
+                  !!badge?.find((el) => el?.status === type?.type)?.count && (
+                    <div className={styles.badge}>
+                      <span>
+                        {badge?.find((el) => el?.status === type?.type)?.count}
+                      </span>
+                    </div>
+                  )}
               </li>
             ))}
           </ul>
@@ -139,14 +139,17 @@ export const BarStatusFilter: FC<BarStatusFilterProps> = ({
                   className={statusFilter === type.type ? styles.active : ""}
                 >
                   {t(type.name)}
-                  {!!badge && (
-                    // !!badge?.find((el) => el?.status === type?.type)?.count &&
-                    <div className={styles.badge}>
-                      <span>
-                        {badge?.find((el) => el?.status === type?.type)?.count}
-                      </span>
-                    </div>
-                  )}
+                  {!!badge &&
+                    !!badge?.find((el) => el?.status === type?.type)?.count && (
+                      <div className={styles.badge}>
+                        <span>
+                          {
+                            badge?.find((el) => el?.status === type?.type)
+                              ?.count
+                          }
+                        </span>
+                      </div>
+                    )}
                 </li>
               </SwiperSlide>
             ))}
