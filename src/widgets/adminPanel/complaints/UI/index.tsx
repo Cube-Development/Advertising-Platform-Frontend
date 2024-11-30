@@ -1,92 +1,40 @@
 import {
+  adminComplaintForm,
   adminComplaintTypesFilter,
-  adminReviewTypesFilter,
-  complaintStatus,
-  IAdminComplaints,
-  IAdminReviews,
+  getAdminOrderComplaintsReq,
+  useGetAdminOrderComplaintsQuery,
 } from "@entities/admin";
-import { dateSortingTypes } from "@entities/platform";
-import { HistoryReq, useGetHistoryQuery } from "@entities/wallet";
 import { BarSubfilter } from "@features/other";
-import {
-  AdminComplaints,
-  INTERSECTION_ELEMENTS,
-  Languages,
-} from "@shared/config";
+import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { pageFilter } from "@shared/routing";
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { ComplaintsList } from "../complaintsList";
 import styles from "./styles.module.scss";
 
 export const Complaints: FC = () => {
-  const { t, i18n } = useTranslation();
-  const wait = AdminComplaints.filter(
-    (item) => item.status === complaintStatus.wait,
-  );
-  const active = AdminComplaints.filter(
-    (item) => item.status === complaintStatus.active,
-  );
-  const complete = AdminComplaints.filter(
-    (item) => item.status === complaintStatus.complete,
-  );
-
-  const [complaintsFilter, setComplaintFilter] =
-    useState<adminComplaintTypesFilter>(adminComplaintTypesFilter.wait);
-  const [complaintsData, setComplaintsData] = useState<IAdminComplaints>({
-    page: 1,
-    elements: wait.length,
-    complaints: wait.slice(0, INTERSECTION_ELEMENTS.adminComplaints),
+  const { t } = useTranslation();
+  const { watch, setValue } = useForm<getAdminOrderComplaintsReq>({
+    defaultValues: {
+      page: 1,
+      elements_on_page: INTERSECTION_ELEMENTS.adminComplaints,
+      order_complaint_status: adminComplaintTypesFilter.wait,
+    },
+  });
+  const formFields = watch();
+  const { data, isLoading, isFetching } = useGetAdminOrderComplaintsQuery({
+    ...formFields,
   });
 
-  useEffect(() => {
-    if (complaintsFilter === adminComplaintTypesFilter.wait) {
-      setComplaintsData({
-        ...complaintsData,
-        elements: wait.length,
-        complaints: wait.slice(
-          0,
-          complaintsData.page * INTERSECTION_ELEMENTS.adminComplaints,
-        ),
-      });
-    } else if (complaintsFilter === adminComplaintTypesFilter.active) {
-      setComplaintsData({
-        ...complaintsData,
-        elements: active.length,
-        complaints: active,
-      });
-    } else {
-      setComplaintsData({
-        ...complaintsData,
-        elements: complete.length,
-        complaints: complete,
-      });
-    }
-  }, [complaintsFilter]);
-
-  const handle = () => {};
-
-  ////
-  // удалить
-
-  const language = Languages.find((lang) => lang.name === i18n.language);
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const getParams: HistoryReq = {
-    language: language?.id || Languages[0].id,
-    page: currentPage,
-    elements_on_page: INTERSECTION_ELEMENTS.history,
-    date_sort: dateSortingTypes.decrease,
-  };
-
-  const { data, isLoading, isFetching } = useGetHistoryQuery(getParams);
-
   const handleOnChangePage = () => {
-    setCurrentPage((prevPage) => prevPage + 1);
-    setComplaintsData({ ...complaintsData, page: complaintsData.page + 1 });
+    setValue(adminComplaintForm.page, formFields?.page + 1);
   };
 
-  /////
+  const setComplaintFilter = (filter: adminComplaintTypesFilter) => {
+    setValue(adminComplaintForm.page, 1);
+    setValue(adminComplaintForm.order_complaint_status, filter);
+  };
 
   return (
     <div className="container">
@@ -102,17 +50,21 @@ export const Complaints: FC = () => {
           <div className={styles.filter}>
             <BarSubfilter
               page={pageFilter.adminComplaint}
-              resetValues={handle}
-              complaintsFilter={complaintsFilter}
+              resetValues={() => {}}
+              complaintsFilter={formFields?.order_complaint_status}
               changeComplaintsFilter={setComplaintFilter}
             />
           </div>
           <ComplaintsList
-            data={complaintsData}
+            data={
+              (data?.order_complaint_status ===
+                formFields.order_complaint_status &&
+                data) ||
+              undefined
+            }
             isLoading={isLoading}
             isFetching={isFetching}
             handleChange={handleOnChangePage}
-            status={complaintsFilter}
           />
         </div>
       </div>
