@@ -1729,50 +1729,50 @@ export const AdminReviews: IAdminReviewData[] = [
 //   },
 // ];
 
-export const AdmiinComplaintInfo: IAdminComplaintInfoData = {
-  id: "c9d9baf0-45fe-11ed-b878-0242ac120002",
-  sender: {
-    userId: "13478293",
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-    email: "user1234@example.com",
-    name: "Александр Иванов",
-  },
-  moderator: {
-    userId: "82736412",
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-    email: "moderator@example.com",
-    name: "Ольга Сидорова",
-  },
-  owner: {
-    userId: "82777412",
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-    email: "moderator@example.com",
-    name: "Ольг Сирова",
-  },
-  datetime: "12.11.2024 16:45",
-  theme: "Проблема с постом",
-  priority: 1,
-  status: 2,
-  comment:
-    "Проблема на стадии проверки. Обратная связь будет предоставлена после анализа.",
-  offerId: "35e9ff20-45fe-11ed-b878-0242ac120002",
-  channel: {
-    id: "76ff1b60-45fe-11ed-b878-0242ac120002",
-    avatar:
-      "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-    name: "Новости Технологий",
-    platform: "Telegram",
-  },
-  post: {
-    date: "12.11.2024",
-    time: "14:00",
-    format: "1час в топе 24ч в ленте",
-    amount: 5370000,
-  },
-};
+// export const AdmiinComplaintInfo: IAdminComplaintInfoData = {
+//   id: "c9d9baf0-45fe-11ed-b878-0242ac120002",
+//   sender: {
+//     id: "13478293",
+//     avatar:
+//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//     email: "user1234@example.com",
+//     name: "Александр Иванов",
+//   },
+//   moderator: {
+//     id: "82736412",
+//     avatar:
+//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//     email: "moderator@example.com",
+//     name: "Ольга Сидорова",
+//   },
+//   owner: {
+//     id: "82777412",
+//     avatar:
+//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//     email: "moderator@example.com",
+//     name: "Ольг Сирова",
+//   },
+//   created: "12.11.2024 16:45",
+//   theme: "Проблема с постом",
+//   priority: 1,
+//   status: 2,
+//   comment:
+//     "Проблема на стадии проверки. Обратная связь будет предоставлена после анализа.",
+//   order_id: "35e9ff20-45fe-11ed-b878-0242ac120002",
+//   channel: {
+//     id: "76ff1b60-45fe-11ed-b878-0242ac120002",
+//     avatar:
+//       "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//     name: "Новости Технологий",
+//     platform: "Telegram",
+//   },
+//   post: {
+//     published_date: "12.11.2024",
+//     published_time: "14:00",
+//     format: "1час в топе 24ч в ленте",
+//     amount: 5370000,
+//   },
+// };
 
 export const managerActiveCARDS: IManagerProjects = {
   page: 1,

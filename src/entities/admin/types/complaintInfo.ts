@@ -4,19 +4,19 @@ export interface IAdminComplaintInfoData {
   id: string;
   sender: IUser;
   moderator: IUser;
-  datetime: string;
+  created: string;
   theme: string;
   priority: complaintPriority;
   status: complaintStatus;
   comment: string;
-  offerId: string;
+  order_id: string;
   channel: IChannel;
   owner: IUser;
   post: IPost;
 }
 
 interface IUser {
-  userId: string;
+  id: string;
   avatar: string;
   email?: string;
   name?: string;
@@ -30,8 +30,13 @@ interface IChannel {
 }
 
 interface IPost {
-  date: string;
-  time: string;
-  format: string;
+  published_date: string;
+  published_time: string;
+  format: IFormat;
   amount: number;
+}
+
+interface IFormat {
+  big: string;
+  small: string;
 }

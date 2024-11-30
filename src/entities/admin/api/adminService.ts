@@ -1,6 +1,10 @@
 import { authApi } from "@shared/api";
 import { adminComplaintTypesFilter } from "../config";
-import { IAdminComplaints, IAdminUsers } from "../types";
+import {
+  IAdminComplaintInfoData,
+  IAdminComplaints,
+  IAdminUsers,
+} from "../types";
 
 export interface getAdminUsersReq {
   elements_on_page: number;
@@ -55,6 +59,7 @@ export const adminAPI = authApi.injectEndpoints({
         if (arg.arg.page === 1) {
           return {
             ...newItems,
+            isLast: newItems?.complaints.length === newItems?.elements,
           };
         }
 
@@ -76,8 +81,21 @@ export const adminAPI = authApi.injectEndpoints({
         return currentArg !== previousArg;
       },
     }),
+    getAdminOrderComplaintInfo: build.query<
+      IAdminComplaintInfoData,
+      { id: string }
+    >({
+      query: (params) => ({
+        url: `/adv-admin/order-complaint`,
+        method: `GET`,
+        params: params,
+      }),
+    }),
   }),
 });
 
-export const { useGetAdminUsersQuery, useGetAdminOrderComplaintsQuery } =
-  adminAPI;
+export const {
+  useGetAdminUsersQuery,
+  useGetAdminOrderComplaintsQuery,
+  useGetAdminOrderComplaintInfoQuery,
+} = adminAPI;

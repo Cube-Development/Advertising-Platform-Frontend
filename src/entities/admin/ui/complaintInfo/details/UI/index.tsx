@@ -3,6 +3,7 @@ import styles from "./styles.module.scss";
 import { IAdminComplaintInfoData } from "@entities/admin";
 import { useTranslation } from "react-i18next";
 import { MyButton, useToast } from "@shared/ui";
+import noUserAvatar from "/images/notFound/noUserAvatar.jpg";
 
 interface ComplaintDetailsProps {
   card: IAdminComplaintInfoData;
@@ -31,7 +32,7 @@ export const ComplaintDetails: FC<ComplaintDetailsProps> = ({ card }) => {
             </p>
             <div className={styles.info}>
               <div className={styles.logo}>
-                <img src={card?.channel?.avatar || ""} alt="avatar" />
+                <img src={card?.channel?.avatar || noUserAvatar} alt="avatar" />
               </div>
               <div className={styles.title}>
                 <p className="truncate">{card?.channel?.name}</p>
@@ -50,15 +51,18 @@ export const ComplaintDetails: FC<ComplaintDetailsProps> = ({ card }) => {
             </p>
             <div className={styles.info}>
               <div className={styles.logo}>
-                <img src={card?.moderator?.avatar || ""} alt="avatar" />
+                <img
+                  src={card?.moderator?.avatar || noUserAvatar}
+                  alt="avatar"
+                />
               </div>
               <div className={styles.title}>
                 <p className="truncate">{card?.owner?.name}</p>
                 <span
                   className="truncate"
-                  onClick={() => handleCopyLink(card?.owner?.userId)}
+                  onClick={() => handleCopyLink(card?.owner?.id)}
                 >
-                  # {card?.owner?.userId}
+                  # {card?.owner?.id}
                 </span>
               </div>
             </div>
@@ -67,20 +71,20 @@ export const ComplaintDetails: FC<ComplaintDetailsProps> = ({ card }) => {
             <p>{t("admin_panel.complaintInfo.card.details.id")}:</p>
             <span
               className="truncate"
-              onClick={() => handleCopyLink(card?.offerId)}
+              onClick={() => handleCopyLink(card?.order_id)}
             >
-              {card?.offerId}
+              {card?.order_id}
             </span>
           </div>
         </div>
         <div className={styles.post_wrapper}>
           <div className={styles.date}>
             <p>{t("admin_panel.complaintInfo.card.details.date")}:</p>
-            <span>{card?.post?.date}</span>
+            <span>{card?.post?.published_date}</span>
           </div>
           <div className={styles.time}>
             <p>{t("admin_panel.complaintInfo.card.details.time")}:</p>
-            <span>{card?.post?.time}</span>
+            <span>{card?.post?.published_time}</span>
           </div>
           <div className={styles.priority}>
             <p>{t("admin_panel.complaintInfo.card.details.platform")}:</p>
@@ -90,7 +94,7 @@ export const ComplaintDetails: FC<ComplaintDetailsProps> = ({ card }) => {
         <div className={styles.post_wrapper}>
           <div className={styles.format}>
             <p>{t("admin_panel.complaintInfo.card.details.format")}:</p>
-            <span>{card?.post?.format}</span>
+            <span>{card?.post?.format?.big}</span>
           </div>
           <div className={styles.amount}>
             <p>{t("admin_panel.complaintInfo.card.details.amount")}:</p>
