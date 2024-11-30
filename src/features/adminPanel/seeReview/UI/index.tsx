@@ -5,6 +5,7 @@ import {
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogTrigger,
+  DialogTitle,
   MyButton,
 } from "@shared/ui";
 import { FC } from "react";

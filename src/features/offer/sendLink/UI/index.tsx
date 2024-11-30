@@ -6,6 +6,7 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogTitle,
   DialogTrigger,
   Drawer,
   DrawerContent,
@@ -85,6 +86,7 @@ export const SendLink: FC<IOrderFeature> = ({ order_id }) => {
             </p>
           </DialogTrigger>
           <DialogContent>
+            <DialogTitle></DialogTitle>
             <div className={styles.popover}>
               <div className="absolute -right-3 -top-3">
                 <DialogClose>
@@ -141,6 +143,7 @@ export const SendLink: FC<IOrderFeature> = ({ order_id }) => {
             </p>
           </DrawerTrigger>
           <DrawerContent className="mt-[20dvh] rounded-t-xl">
+            <DialogTitle></DialogTitle>
             <div className={styles.drawer_popover}>
               <div className={styles.description}>
                 <h2 className={styles.description__title}>

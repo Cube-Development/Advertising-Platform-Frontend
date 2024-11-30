@@ -84,24 +84,21 @@ export const PriceList: FC<PriceListProps> = ({ tarifs }) => {
             loop={true}
             slidesPerView={1.5}
             breakpoints={{
-              1366: {
-                slidesPerView: 2,
-              },
-              992: {
-                slidesPerView: 2,
-                spaceBetween: 50,
-              },
               768: {
                 slidesPerView: 2,
-                spaceBetween: -100,
+                spaceBetween: -220,
+              },
+              576: {
+                slidesPerView: 1,
+                spaceBetween: -200,
               },
               450: {
-                slidesPerView: 1.5,
-                spaceBetween: -60,
+                slidesPerView: 1,
+                spaceBetween: -100,
               },
               320: {
-                slidesPerView: 1.2,
-                spaceBetween: -30,
+                slidesPerView: 1,
+                spaceBetween: 50,
               },
             }}
             coverflowEffect={{

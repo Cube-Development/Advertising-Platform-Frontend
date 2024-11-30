@@ -1,4 +1,4 @@
-import { CalendarIcon, CalendarIcon2, CancelIcon2 } from "@shared/assets";
+import { CalendarIcon, CancelIcon2 } from "@shared/assets";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -54,33 +54,11 @@ export const CustomCalendar: FC<DateListProps> = ({ onChange }) => {
     setDateOject({ date: null, dateString: null });
   };
 
-  // const handleOpenModal = () => {
-  //   setIsModalOpen(!isModalOpen);
-  // };
   const handleCloseModal = () => {
-    // setIsModalOpen(!isModalOpen);
     setDateOject({ date: null, dateString: null });
   };
 
-  // const handleClickOutside = (event: MouseEvent) => {
-  //   // console.log("handleClickOutside", isModalOpen);
-  //   // console.log("menuRef.current", menuRef.current);
-  //   // // console.log("menuRef.current", menuRef.current.contains(event.target as Node));
-  //   // if (menuRef.current && !menuRef.current.contains(event.target as Node) && isModalOpen) {
-  //   //   console.log("gete",isModalOpen, menuRef.current)
-  //   //   setIsModalOpen(false);
-  //   // }
-  // };
-
-  // useEffect(() => {
-  //   document.addEventListener("click", handleClickOutside);
-  //   return () => {
-  //     document.removeEventListener("click", handleClickOutside);
-  //   };
-  // }, []);
-
   const continueAction = () => {
-    // setIsModalOpen(false);
     onChange(dateOject.date);
   };
 
@@ -178,82 +156,6 @@ export const CustomCalendar: FC<DateListProps> = ({ onChange }) => {
           </div>
         </AlertDialogContent>
       </AlertDialog>
-
-      {/* <div>
-        <button
-          type="button"
-          className={styles.wrapper}
-          onClick={handleOpenModal}
-        >
-          <CalendarIcon />
-          {dateOject.dateString && !isModalOpen ? (
-            dateOject.dateString.length === 2 ? (
-              <p className={styles.range}>
-                {dateOject.dateString[0]}
-                <br />
-                {t("calendar.until")}
-                <br />
-                {dateOject.dateString[1]}
-              </p>
-            ) : (
-              <p>{dateOject.dateString}</p>
-            )
-          ) : (
-            <p>-- / -- / ----</p>
-          )}
-        </button>
-
-        {isModalOpen && (
-          <div className={styles.modal}>
-            <div className={styles.modalContent}>
-              <div
-                className={`${styles.calendar} shake__animation`}
-                ref={menuRef}
-              >
-                <div className={styles.top}>
-                  <p>{t("calendar.choose_date")}</p>
-                  <button type="button" onClick={handleCloseModal}>
-                    <CancelIcon2 />
-                  </button>
-                </div>
-                <div>
-                  <Calendar
-                    onChange={handleOnChange}
-                    value={
-                      isSelectRange
-                        ? dateOject.date
-                        : dateOject.date
-                          ? dateOject.date[0]
-                          : dateOject.date
-                    }
-                    tileClassName={tileClassName}
-                    selectRange={isSelectRange}
-                  />
-                </div>
-
-                <div className={styles.bottom}>
-                  <MyButton
-                    type="button"
-                    className={styles.button}
-                    onClick={handleChangeRange}
-                  >
-                    <p>
-                      {isSelectRange ? t("calendar.date") : t("calendar.range")}
-                    </p>
-                  </MyButton>
-                  <MyButton
-                    type="button"
-                    className={styles.button}
-                    onClick={continueAction}
-                  >
-                    <p>{t("calendar.confirm")}</p>
-                  </MyButton>
-                </div>
-              </div>
-            </div>
-          </div>
-        )}
-      </div> */}
     </>
   );
 };

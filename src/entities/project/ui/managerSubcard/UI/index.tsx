@@ -36,7 +36,9 @@ import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogContent,
+  AlertDialogTitle,
   AlertDialogTrigger,
+  DialogTitle,
   useToast,
 } from "@shared/ui";
 import { X } from "lucide-react";

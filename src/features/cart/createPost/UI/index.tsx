@@ -4,6 +4,7 @@ import {
   DialogClose,
   DialogContent,
   DialogFooter,
+  DialogTitle,
   DialogTrigger,
   MyButton,
 } from "@shared/ui";
@@ -43,6 +44,7 @@ export const CreatePost: FC<CreatePostProps> = ({ onClick }) => {
             </MyButton>
           </DialogTrigger>
           <DialogContent className={`${styles.content} gap-[0px]`}>
+            <DialogTitle></DialogTitle>
             <DialogClose>
               <p className={styles.close}>
                 <CircleX

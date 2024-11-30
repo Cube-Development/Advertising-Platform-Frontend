@@ -1,7 +1,7 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
-import { AlertDialogCancel, MyButton } from "@shared/ui";
+import { AlertDialogCancel, DialogTitle, MyButton } from "@shared/ui";
 import { IAdminComplaintInfoData } from "@entities/admin";
 import {
   Accordion,

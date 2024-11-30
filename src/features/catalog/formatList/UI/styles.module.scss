@@ -6,6 +6,9 @@
   font-weight: 500;
   line-height: normal;
   position: relative;
+  display: grid;
+  justify-content: start;
+  justify-items: start;
 
   .selects {
     display: grid;

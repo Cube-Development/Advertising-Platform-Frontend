@@ -33,6 +33,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
+  DialogTitle,
   Drawer,
   DrawerClose,
   DrawerContent,
@@ -280,6 +281,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
         </div>
       </DrawerTrigger>
       <DrawerContent className={styles.parameters}>
+        <DialogTitle></DialogTitle>
         <div className={styles.top}>
           <p className={`gradient_color ${styles.title}`}>
             {t("catalog.search.parameters")}

@@ -10,6 +10,7 @@ import {
   DialogClose,
   DialogContent,
   DialogFooter,
+  DialogTitle,
   DialogTrigger,
 } from "@shared/ui";
 import { CircleX, GripVertical } from "lucide-react";
@@ -87,6 +88,7 @@ export const MenuItem: React.FC<IMenuItems> = ({
               </span>
             </DialogTrigger>
             <DialogContent className={`${styles.content} gap-[0px]`}>
+              <DialogTitle></DialogTitle>
               <DialogClose>
                 <p className={styles.close}>
                   <CircleX
