@@ -1,69 +1,40 @@
-import { adminReviewTypesFilter, IAdminReviews } from "@entities/admin";
-import { dateSortingTypes } from "@entities/platform";
-import { HistoryReq, useGetHistoryQuery } from "@entities/wallet";
+import {
+  adminReviewForm,
+  adminReviewTypesFilter,
+  getAdminReviewsReq,
+  useGetAdminReviewsQuery,
+} from "@entities/admin";
 import { BarSubfilter } from "@features/other";
-import { AdminReviews, INTERSECTION_ELEMENTS, Languages } from "@shared/config";
+import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { pageFilter } from "@shared/routing";
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { ReviewsList } from "../reviewsList";
 import styles from "./styles.module.scss";
 
 export const Reviews: FC = () => {
-  const { t, i18n } = useTranslation();
-  const wait = AdminReviews.filter((item) => !item.closeDate);
-  const accept = AdminReviews.filter((item) => item.closeDate);
-  const [reviewsFilter, setReviewsFilter] = useState<adminReviewTypesFilter>(
-    adminReviewTypesFilter.wait,
-  );
-  const [reviewsData, setReviewsData] = useState<IAdminReviews>({
-    page: 1,
-    elements: wait.length,
-    reviews: wait.slice(0, INTERSECTION_ELEMENTS.adminReviews),
+  const { t } = useTranslation();
+  const { watch, setValue } = useForm<getAdminReviewsReq>({
+    defaultValues: {
+      page: 1,
+      status: adminReviewTypesFilter.wait,
+      elements_on_page: INTERSECTION_ELEMENTS.adminReviews,
+    },
+  });
+  const formFields = watch();
+  const { data, isLoading, isFetching } = useGetAdminReviewsQuery({
+    ...formFields,
   });
 
-  useEffect(() => {
-    if (reviewsFilter === adminReviewTypesFilter.wait) {
-      setReviewsData({
-        ...reviewsData,
-        elements: wait.length,
-        reviews: wait.slice(
-          0,
-          reviewsData.page * INTERSECTION_ELEMENTS.adminReviews,
-        ),
-      });
-    } else {
-      setReviewsData({
-        ...reviewsData,
-        elements: accept.length,
-        reviews: accept,
-      });
-    }
-  }, [reviewsFilter]);
-
-  const handle = () => {};
-
-  ////
-  // удалить
-
-  const language = Languages.find((lang) => lang.name === i18n.language);
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const getParams: HistoryReq = {
-    language: language?.id || Languages[0].id,
-    page: currentPage,
-    elements_on_page: INTERSECTION_ELEMENTS.history,
-    date_sort: dateSortingTypes.decrease,
-  };
-
-  const { data, isLoading, isFetching } = useGetHistoryQuery(getParams);
-
   const handleOnChangePage = () => {
-    setCurrentPage((prevPage) => prevPage + 1);
-    setReviewsData({ ...reviewsData, page: reviewsData.page + 1 });
+    setValue(adminReviewForm.page, formFields?.page + 1);
   };
 
-  /////
+  const setComplaintFilter = (filter: adminReviewTypesFilter) => {
+    setValue(adminReviewForm.page, 1);
+    setValue(adminReviewForm.status, filter);
+  };
 
   return (
     <div className="container">
@@ -79,14 +50,14 @@ export const Reviews: FC = () => {
           <div className={styles.filter}>
             <BarSubfilter
               page={pageFilter.adminReviews}
-              resetValues={handle}
-              reviewsFilter={reviewsFilter}
-              changeReviewsFilter={setReviewsFilter}
+              resetValues={() => {}}
+              reviewsFilter={formFields?.status}
+              changeReviewsFilter={setComplaintFilter}
             />
           </div>
           <ReviewsList
-            status={reviewsFilter}
-            data={reviewsData}
+            status={formFields?.status}
+            data={data}
             isLoading={isLoading}
             isFetching={isFetching}
             handleChange={handleOnChangePage}

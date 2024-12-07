@@ -1,10 +1,11 @@
 import { authApi } from "@shared/api";
-import { adminComplaintTypesFilter } from "../config";
+import { adminComplaintTypesFilter, adminReviewTypesFilter } from "../config";
 import {
   IAdminChannelInfo,
   IAdminChannels,
   IAdminComplaintInfoData,
   IAdminComplaints,
+  IAdminReviews,
   IAdminTransactionInfo,
   IAdminTransactions,
   IAdminUsers,
@@ -28,6 +29,12 @@ export interface getAdminTransactionsReq {
 
 export interface getAdminChannelsReq {
   page: number;
+  elements_on_page: number;
+}
+
+export interface getAdminReviewsReq {
+  page: number;
+  status: adminReviewTypesFilter;
   elements_on_page: number;
 }
 
@@ -167,6 +174,27 @@ export const adminAPI = authApi.injectEndpoints({
         method: `GET`,
       }),
     }),
+    getAdminReviews: build.query<IAdminReviews, getAdminReviewsReq>({
+      query: (params) => ({
+        url: `/adv-admin/channel/prepared-reviews`,
+        method: `GET`,
+        params: params,
+      }),
+      merge: (currentCache, newItems) => {
+        const newReviews = [...currentCache?.reviews, ...newItems?.reviews];
+        return {
+          ...newItems,
+          isLast: newReviews.length === newItems.elements,
+          reviews: newReviews,
+        };
+      },
+      serializeQueryArgs: ({ endpointName }) => {
+        return endpointName;
+      },
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg !== previousArg;
+      },
+    }),
   }),
 });
 
@@ -178,4 +206,5 @@ export const {
   useGetAdminTransactionInfoQuery,
   useGetAdminChannelsQuery,
   useGetAdminChannelInfoQuery,
+  useGetAdminReviewsQuery,
 } = adminAPI;

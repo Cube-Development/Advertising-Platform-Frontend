@@ -1,6 +1,6 @@
 export enum adminReviewTypesFilter {
-  wait = "wait",
-  accept = "accept",
+  wait = 0,
+  accept = 1,
 }
 
 export const adminReviewTypes = [
@@ -13,3 +13,8 @@ export const adminReviewTypes = [
     type: adminReviewTypesFilter.accept,
   },
 ];
+
+export enum adminReviewForm {
+  page = "page",
+  status = "status",
+}
