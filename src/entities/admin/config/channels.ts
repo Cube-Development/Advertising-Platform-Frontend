@@ -28,3 +28,7 @@ export const adminChannelStatus = [
     id: channelStatus.banned,
   },
 ];
+
+export enum adminChannelForm {
+  page = "page",
+}

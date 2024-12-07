@@ -176,4 +176,6 @@ export const {
   useGetAdminOrderComplaintInfoQuery,
   useGetAdminTransactionsQuery,
   useGetAdminTransactionInfoQuery,
+  useGetAdminChannelsQuery,
+  useGetAdminChannelInfoQuery,
 } = adminAPI;

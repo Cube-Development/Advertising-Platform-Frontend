@@ -1,66 +1,31 @@
-import { IAdminChannels } from "@entities/admin";
-import { dateSortingTypes } from "@entities/platform";
-import { HistoryReq, useGetHistoryQuery } from "@entities/wallet";
 import {
-  AdminChannels,
-  INTERSECTION_ELEMENTS,
-  Languages,
-} from "@shared/config";
-import { FC, useEffect, useState } from "react";
+  adminChannelForm,
+  getAdminChannelsReq,
+  useGetAdminChannelsQuery,
+} from "@entities/admin";
+import { INTERSECTION_ELEMENTS } from "@shared/config";
+import { FC } from "react";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { ChannelsList } from "../channelsList";
 import styles from "./styles.module.scss";
 
 export const Channels: FC = () => {
-  const { t, i18n } = useTranslation();
-  const channels = AdminChannels;
-
-  const [channelsData, setChannelsData] = useState<IAdminChannels>({
-    page: 1,
-    elements: channels.length,
-    channels: [],
+  const { t } = useTranslation();
+  const { watch, setValue } = useForm<getAdminChannelsReq>({
+    defaultValues: {
+      page: 1,
+      elements_on_page: INTERSECTION_ELEMENTS.adminChannels,
+    },
   });
-  ////
-  // удалить
-
-  const language = Languages.find((lang) => lang.name === i18n.language);
-  const [currentPage, setCurrentPage] = useState(1);
-
-  const getParams: HistoryReq = {
-    language: language?.id || Languages[0].id,
-    page: currentPage,
-    elements_on_page: INTERSECTION_ELEMENTS.history,
-    date_sort: dateSortingTypes.decrease,
-  };
-
-  const { data, isLoading, isFetching } = useGetHistoryQuery(getParams);
+  const formFields = watch();
+  const { data, isLoading, isFetching } = useGetAdminChannelsQuery({
+    ...formFields,
+  });
 
   const handleOnChangePage = () => {
-    setCurrentPage((prevPage) => prevPage + 1);
-
-    setChannelsData({
-      page: channelsData.page + 1,
-      elements: channels.length,
-      channels: channels.slice(
-        0,
-        (channelsData.page + 1) * INTERSECTION_ELEMENTS.adminChannels,
-      ),
-      isLast:
-        channels.length <=
-        (channelsData.page + 1) * INTERSECTION_ELEMENTS.adminChannels,
-    });
+    setValue(adminChannelForm.page, formFields?.page + 1);
   };
-
-  /////
-
-  useEffect(() => {
-    if (data && !isLoading && channelsData.page === 1) {
-      setChannelsData({
-        ...channelsData,
-        channels: channels.slice(0, INTERSECTION_ELEMENTS.adminChannels),
-      });
-    }
-  }, [data, isLoading]);
 
   return (
     <div className="container">
@@ -74,7 +39,7 @@ export const Channels: FC = () => {
         </div>
         <div className={styles.table}>
           <ChannelsList
-            data={channelsData}
+            data={data}
             isLoading={isLoading}
             isFetching={isFetching}
             handleChange={handleOnChangePage}

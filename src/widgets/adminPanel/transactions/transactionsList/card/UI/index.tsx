@@ -9,7 +9,6 @@ import {
 } from "@entities/admin";
 import { TransactionCardMenu } from "@features/adminPanel";
 import { ArrowSmallVerticalIcon } from "@shared/assets";
-import { accordionTypes } from "@shared/config";
 import {
   AccordionContent,
   AccordionItem,
@@ -17,7 +16,7 @@ import {
   AccountsLoader,
   useToast,
 } from "@shared/ui";
-import { FC, MutableRefObject, useEffect, useRef, useState } from "react";
+import { FC, MutableRefObject, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
@@ -36,11 +35,7 @@ export const TransactionCard: FC<TransactionCardProps> = ({
   const { toast } = useToast();
   const [isSubcardOpen, setSubcardOpen] = useState(false);
 
-  const {
-    data: subcard,
-    isLoading,
-    isFetching,
-  } = useGetAdminTransactionInfoQuery(
+  const { data: subcard, isLoading } = useGetAdminTransactionInfoQuery(
     { id: card?.id },
     {
       skip: !isSubcardOpen,
@@ -58,26 +53,6 @@ export const TransactionCard: FC<TransactionCardProps> = ({
   const handleChangeOpenSubcard = (): void => {
     setSubcardOpen(!isSubcardOpen);
   };
-
-  const accordionRef = useRef(null);
-
-  const handleClickOutside = () => {
-    if (accordionRef.current) {
-      const state = (accordionRef.current as HTMLElement).getAttribute(
-        "data-state",
-      );
-      state === accordionTypes.open
-        ? setSubcardOpen(true)
-        : setSubcardOpen(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
 
   return (
     <AccordionItem

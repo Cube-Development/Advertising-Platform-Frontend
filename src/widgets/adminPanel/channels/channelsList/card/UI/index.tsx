@@ -2,6 +2,7 @@ import {
   adminChannelStatus,
   channelStatus,
   IAdminChannelData,
+  useGetAdminChannelInfoQuery,
 } from "@entities/admin";
 import {
   channelParameterData,
@@ -27,15 +28,18 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
+  AccountsLoader,
   useToast,
 } from "@shared/ui";
-import { FC, MutableRefObject } from "react";
+import { FC, MutableRefObject, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import styles from "./styles.module.scss";
+import noUserAvatar from "/images/notFound/noUserAvatar.jpg";
+import { IFormat } from "@entities/project";
 
 interface ChannelCardProps {
   card: IAdminChannelData;
@@ -54,8 +58,8 @@ export const ChannelCard: FC<ChannelCardProps> = ({
   });
   const { toast } = useToast();
 
-  const handleCopyLink = (text: string = "") => {
-    navigator.clipboard.writeText(text);
+  const handleCopyLink = (text: string | number = "") => {
+    navigator.clipboard.writeText(text.toString());
     toast({
       variant: "default",
       title: t("copy.default"),
@@ -91,39 +95,80 @@ export const ChannelCard: FC<ChannelCardProps> = ({
   const { data: regions } = useGetChannelRegionsQuery(contentRes);
   const { data: languages } = useGetChannelLanguagesQuery(contentRes);
 
+  const [isSubcardOpen, setSubcardOpen] = useState(false);
+
+  const { data: channel, isLoading } = useGetAdminChannelInfoQuery(
+    { id: card?.channel?.id },
+    {
+      skip: !isSubcardOpen,
+    },
+  );
+
+  const handleChangeOpenSubcard = (): void => {
+    setSubcardOpen(!isSubcardOpen);
+  };
+
+  useEffect(() => {
+    if (channel) {
+      reset({
+        male: channel?.male,
+        female: channel?.female,
+        category: channel?.category?.id,
+        description: channel?.description,
+        text_limit: channel?.text_limit,
+        region: channel?.region?.map((item) => item?.id),
+        language: channel?.language?.map((item) => item?.id),
+        age: channel?.age?.map((item) => item?.id),
+        format: channel?.format?.map((format: IFormat) => ({
+          name: format?.format,
+          price: format?.price,
+        })),
+      });
+    }
+  }, [channel, reset]);
+
   return (
     <AccordionItem
-      value={`item-adminChannel-${card?.id}`}
+      value={`item-adminChannel-${card?.channel?.id}`}
       className={styles.wrapper}
       ref={(el) => (accordionRefs.current[index] = el)}
     >
       <div className={styles.top}>
         <div className={styles.info}>
           <div className={styles.logo}>
-            <img src={card?.avatar || ""} alt="channel_avatar" />
+            <img
+              src={card?.channel?.avatar || noUserAvatar}
+              alt="channel_avatar"
+            />
           </div>
           <div className={styles.title}>
-            <p className="truncate">{card?.name}</p>
-            <span className="truncate" onClick={() => handleCopyLink(card?.id)}>
-              # {card?.id}
+            <p className="truncate">{card?.channel?.name}</p>
+            <span
+              className="truncate"
+              onClick={() => handleCopyLink(card?.channel?.id)}
+            >
+              # {card?.channel?.id}
             </span>
           </div>
         </div>
         <div className={`${styles.column} ${styles.user}`}>
-          <p className="truncate" onClick={() => handleCopyLink(card?.userId)}>
-            №{card?.userId}
+          <p
+            className="truncate"
+            onClick={() => handleCopyLink(card?.owner_id)}
+          >
+            №{card?.owner_id}
           </p>
         </div>
         <div className={styles.column}>
           <p>
             {t(
-              platformTypes.find((item) => item.id === card?.platform)?.name ||
-                "",
+              platformTypes.find((item) => item.id === card?.channel?.platform)
+                ?.name || "",
             )}
           </p>
         </div>
         <div className={styles.column}>
-          <p>{card?.date}</p>
+          <p>{card?.created}</p>
         </div>
         <div
           className={`${styles.status} ${
@@ -146,151 +191,164 @@ export const ChannelCard: FC<ChannelCardProps> = ({
           </p>
         </div>
         <div className={styles.settings}>
-          <ChannelCardMenu id={card?.id} />
-          <AccordionTrigger className={styles.trigger}>
-            <div className="arrow">
-              <ArrowSmallVerticalIcon className="icon__grey rotate__down" />
-            </div>
+          <ChannelCardMenu id={card?.channel?.id} />
+          <AccordionTrigger
+            className={styles.trigger}
+            onClick={() => handleChangeOpenSubcard()}
+          >
+            {isLoading ? (
+              <div className={styles.loader}>
+                <AccountsLoader />
+              </div>
+            ) : (
+              <div className="arrow">
+                <ArrowSmallVerticalIcon className="icon__grey rotate__down" />
+              </div>
+            )}
           </AccordionTrigger>
         </div>
       </div>
       <AccordionContent className={styles.content}>
-        <div className={styles.info}>
-          <div className={styles.info__top}>
-            <div className={styles.block}>
-              <p>{t("admin_panel.channels.card.rate")}:</p>
-              <span>{card?.rate || 0}</span>
+        {!!channel && (
+          <>
+            <div className={styles.info}>
+              <div className={styles.info__top}>
+                <div className={styles.block}>
+                  <p>{t("admin_panel.channels.card.rate")}:</p>
+                  <span>{channel?.grade || 0}</span>
+                </div>
+                <div className={styles.block}>
+                  <p>{t("admin_panel.channels.card.complete")}:</p>
+                  <span>{channel?.complete || 0}</span>
+                </div>
+                <div className={styles.block}>
+                  <p>{t("admin_panel.channels.card.complaints")}:</p>
+                  <span>{channel?.complaints || 0}</span>
+                </div>
+              </div>
+              <div className={styles.info__bottom}>
+                <div className={styles.block}>
+                  <p>{t("admin_panel.channels.card.on_hold")}:</p>
+                  <span>{channel?.on_hold || 0}</span>
+                </div>
+                <div className={styles.block}>
+                  <p>{t("admin_panel.channels.card.cancel")}:</p>
+                  <span>{channel?.cancel || 0}</span>
+                </div>
+                <div className={styles.block}>
+                  <p>{t("admin_panel.channels.card.not_complete")}:</p>
+                  <span>{channel?.not_complete || 0}</span>
+                </div>
+                <div className={styles.block}>
+                  <p>{t("admin_panel.channels.card.in_progress")}:</p>
+                  <span>{channel?.in_progress || 0}</span>
+                </div>
+              </div>
             </div>
-            <div className={styles.block}>
-              <p>{t("admin_panel.channels.card.complete")}:</p>
-              <span>{card?.complete || 0}</span>
+            <div className={styles.description}>
+              <p>{t("admin_panel.channels.card.description")}</p>
+              <div>
+                <span>{channel?.description}</span>
+              </div>
             </div>
-            <div className={styles.block}>
-              <p>{t("admin_panel.channels.card.complaints")}:</p>
-              <span>{card?.complaints || 0}</span>
-            </div>
-          </div>
-          <div className={styles.info__bottom}>
-            <div className={styles.block}>
-              <p>{t("admin_panel.channels.card.on_hold")}:</p>
-              <span>{card?.on_hold || 0}</span>
-            </div>
-            <div className={styles.block}>
-              <p>{t("admin_panel.channels.card.cancel")}:</p>
-              <span>{card?.cancel || 0}</span>
-            </div>
-            <div className={styles.block}>
-              <p>{t("admin_panel.channels.card.not_complete")}:</p>
-              <span>{card?.not_complete || 0}</span>
-            </div>
-            <div className={styles.block}>
-              <p>{t("admin_panel.channels.card.in_progress")}:</p>
-              <span>{card?.in_progress || 0}</span>
-            </div>
-          </div>
-        </div>
-        <div className={styles.description}>
-          <p>{t("admin_panel.channels.card.description")}</p>
-          <div>
-            <span>{card?.description}</span>
-          </div>
-        </div>
-        <div className={styles.parameters}>
-          <div className={styles.block}>
-            <SelectOptions
-              onChange={setValue}
-              options={categories?.contents || []}
-              single={true}
-              type={channelParameterData.category}
-              textData={"catalog.category"}
-              isRow={true}
-              isCatalog={true}
-              defaultValues={
-                (categories?.contents || []).find(
-                  (item) => item.id === formFields.category,
-                )!
-              }
-            />
-          </div>
-          <div className={styles.block}>
-            <SelectOptions
-              onChange={setValue}
-              getValues={getValues}
-              options={ages?.contents || []}
-              single={false}
-              type={channelParameterData.age}
-              textData={"catalog.age"}
-              isRow={true}
-              isCatalog={true}
-              defaultValues={formFields.age}
-            />
-          </div>
+            <div className={styles.parameters}>
+              <div className={styles.block}>
+                <SelectOptions
+                  onChange={setValue}
+                  options={categories?.contents || []}
+                  single={true}
+                  type={channelParameterData.category}
+                  textData={"catalog.category"}
+                  isRow={true}
+                  isCatalog={true}
+                  defaultValues={
+                    (categories?.contents || []).find(
+                      (item) => item.id === formFields.category,
+                    )!
+                  }
+                />
+              </div>
+              <div className={styles.block}>
+                <SelectOptions
+                  onChange={setValue}
+                  getValues={getValues}
+                  options={ages?.contents || []}
+                  single={false}
+                  type={channelParameterData.age}
+                  textData={"catalog.age"}
+                  isRow={true}
+                  isCatalog={true}
+                  defaultValues={formFields.age}
+                />
+              </div>
 
-          <div className={styles.block}>
-            <SelectOptions
-              onChange={setValue}
-              getValues={getValues}
-              options={languages?.contents || []}
-              single={false}
-              type={channelParameterData.language}
-              textData={"catalog.languages"}
-              isRow={true}
-              isCatalog={true}
-              defaultValues={formFields.language}
-            />
-          </div>
-          <div className={styles.block}>
-            <SelectOptions
-              onChange={setValue}
-              getValues={getValues}
-              options={regions?.contents || []}
-              single={false}
-              type={channelParameterData.region}
-              textData={"catalog.region"}
-              isRow={true}
-              isCatalog={true}
-              defaultValues={formFields.region}
-            />
-          </div>
-          <div className={styles.block}>
-            <SelectSex
-              onChange={setValue}
-              getValues={getValues}
-              title={"catalog.sex.title"}
-              isRow={true}
-              isCatalog={true}
-              defaultValues={formFields.male}
-            />
-          </div>
-        </div>
-        <div className={styles.buttons}>
-          {card?.status === channelStatus.active ? (
-            <>
-              <BanChannel id={card?.id} />
-              <UpdateChannel id={card?.id} />
-            </>
-          ) : card?.status === channelStatus.moderation ? (
-            <>
-              <RejectChannel id={card?.id} />
-              <AcceptChannel id={card?.id} />
-            </>
-          ) : card?.status === channelStatus.banned ? (
-            <>
-              <RejectChannel id={card?.id} />
-              <AcceptChannel id={card?.id} />
-            </>
-          ) : card?.status === channelStatus.inactive ? (
-            <>
-              <RejectChannel id={card?.id} />
-              <AcceptChannel id={card?.id} />
-            </>
-          ) : (
-            <>
-              <RejectChannel id={card?.id} />
-              <AcceptChannel id={card?.id} />
-            </>
-          )}
-        </div>
+              <div className={styles.block}>
+                <SelectOptions
+                  onChange={setValue}
+                  getValues={getValues}
+                  options={languages?.contents || []}
+                  single={false}
+                  type={channelParameterData.language}
+                  textData={"catalog.languages"}
+                  isRow={true}
+                  isCatalog={true}
+                  defaultValues={formFields.language}
+                />
+              </div>
+              <div className={styles.block}>
+                <SelectOptions
+                  onChange={setValue}
+                  getValues={getValues}
+                  options={regions?.contents || []}
+                  single={false}
+                  type={channelParameterData.region}
+                  textData={"catalog.region"}
+                  isRow={true}
+                  isCatalog={true}
+                  defaultValues={formFields.region}
+                />
+              </div>
+              <div className={styles.block}>
+                <SelectSex
+                  onChange={setValue}
+                  getValues={getValues}
+                  title={"catalog.sex.title"}
+                  isRow={true}
+                  isCatalog={true}
+                  defaultValues={formFields.male}
+                />
+              </div>
+            </div>
+            <div className={styles.buttons}>
+              {card?.status === channelStatus.active ? (
+                <>
+                  <BanChannel id={card?.channel?.id} />
+                  <UpdateChannel id={card?.channel?.id} />
+                </>
+              ) : card?.status === channelStatus.moderation ? (
+                <>
+                  <RejectChannel id={card?.channel?.id} />
+                  <AcceptChannel id={card?.channel?.id} />
+                </>
+              ) : card?.status === channelStatus.banned ? (
+                <>
+                  <RejectChannel id={card?.channel?.id} />
+                  <AcceptChannel id={card?.channel?.id} />
+                </>
+              ) : card?.status === channelStatus.inactive ? (
+                <>
+                  <RejectChannel id={card?.channel?.id} />
+                  <AcceptChannel id={card?.channel?.id} />
+                </>
+              ) : (
+                <>
+                  <RejectChannel id={card?.channel?.id} />
+                  <AcceptChannel id={card?.channel?.id} />
+                </>
+              )}
+            </div>
+          </>
+        )}
       </AccordionContent>
     </AccordionItem>
   );

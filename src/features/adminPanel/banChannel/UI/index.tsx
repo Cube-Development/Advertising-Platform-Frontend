@@ -10,7 +10,7 @@ interface BanChannelProps {
 export const BanChannel: FC<BanChannelProps> = ({ id }) => {
   const { t } = useTranslation();
   return (
-    <MyButton>
+    <MyButton buttons_type="button__orange_light">
       <p>{t("admin_panel.channels.card.buttons.ban")}</p>
     </MyButton>
   );
