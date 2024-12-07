@@ -12,7 +12,7 @@ import { SkeletonAdminTransactionCard, TransactionCard } from "../card";
 import styles from "./styles.module.scss";
 
 interface TransactionsListProps {
-  data: IAdminTransactions;
+  data?: IAdminTransactions;
   isLoading: boolean;
   isFetching: boolean;
   handleChange: () => void;

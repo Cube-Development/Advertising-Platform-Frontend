@@ -1,11 +1,11 @@
-import { IAdminTransactionRoute } from "@entities/admin";
+import { IAdminTransactionInfo } from "@entities/admin";
 import { useToast } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
 interface TransactionsRouteProps {
-  subcard: IAdminTransactionRoute;
+  subcard: IAdminTransactionInfo;
 }
 
 export const TransactionsRoute: FC<TransactionsRouteProps> = ({ subcard }) => {

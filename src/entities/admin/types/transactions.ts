@@ -16,10 +16,10 @@ export interface IAdminTransactionData {
   way_type: string;
   amount: number;
   status: transactionStatus;
-  subcard: IAdminTransactionRoute;
+  subcard: IAdminTransactionInfo;
 }
 
-export interface IAdminTransactionRoute {
+export interface IAdminTransactionInfo {
   id: string;
   status: transactionStatus;
   sender: IUser;

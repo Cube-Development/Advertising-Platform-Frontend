@@ -1,22 +1,24 @@
 import {
   adminTransactionStatus,
+  IAdminTransactionData,
   TransactionDetails,
   TransactionDocuments,
-  IAdminTransactionData,
   TransactionsRoute,
   transactionStatus,
+  useGetAdminTransactionInfoQuery,
 } from "@entities/admin";
+import { TransactionCardMenu } from "@features/adminPanel";
 import { ArrowSmallVerticalIcon } from "@shared/assets";
+import { accordionTypes } from "@shared/config";
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
   useToast,
 } from "@shared/ui";
-import { FC, MutableRefObject } from "react";
+import { FC, MutableRefObject, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { TransactionCardMenu } from "@features/adminPanel";
 
 interface TransactionCardProps {
   card: IAdminTransactionData;
@@ -31,7 +33,18 @@ export const TransactionCard: FC<TransactionCardProps> = ({
 }) => {
   const { t } = useTranslation();
   const { toast } = useToast();
-  const subcard = card?.subcard;
+  const [isSubcardOpen, setSubcardOpen] = useState(false);
+
+  const {
+    data: subcard,
+    isLoading,
+    isFetching,
+  } = useGetAdminTransactionInfoQuery(
+    { id: card?.id },
+    {
+      skip: !isSubcardOpen,
+    },
+  );
 
   const handleCopyLink = (text: string = "") => {
     navigator.clipboard.writeText(text);
@@ -40,6 +53,30 @@ export const TransactionCard: FC<TransactionCardProps> = ({
       title: t("copy.admin_transactions.id"),
     });
   };
+
+  const handleChangeOpenSubcard = (): void => {
+    setSubcardOpen(!isSubcardOpen);
+  };
+
+  const accordionRef = useRef(null);
+
+  const handleClickOutside = () => {
+    if (accordionRef.current) {
+      const state = (accordionRef.current as HTMLElement).getAttribute(
+        "data-state",
+      );
+      state === accordionTypes.open
+        ? setSubcardOpen(true)
+        : setSubcardOpen(false);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("click", handleClickOutside);
+    return () => {
+      document.removeEventListener("click", handleClickOutside);
+    };
+  }, []);
 
   return (
     <AccordionItem
@@ -96,7 +133,10 @@ export const TransactionCard: FC<TransactionCardProps> = ({
         </div>
         <div className={styles.settings}>
           <TransactionCardMenu id={card?.id} />
-          <AccordionTrigger className={styles.trigger}>
+          <AccordionTrigger
+            className={styles.trigger}
+            onClick={() => handleChangeOpenSubcard()}
+          >
             <div className="arrow">
               <ArrowSmallVerticalIcon className="icon__grey rotate__down" />
             </div>
@@ -104,9 +144,9 @@ export const TransactionCard: FC<TransactionCardProps> = ({
         </div>
       </div>
       <AccordionContent className={styles.content}>
-        <TransactionDetails subcard={subcard} />
-        <TransactionsRoute subcard={subcard} />
-        <TransactionDocuments subcard={subcard} />
+        {/* <TransactionDetails subcard={subcard!} />
+        <TransactionsRoute subcard={subcard!} />
+        <TransactionDocuments subcard={subcard!} /> */}
       </AccordionContent>
     </AccordionItem>
   );

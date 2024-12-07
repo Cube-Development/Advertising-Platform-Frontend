@@ -36,3 +36,5 @@ export interface IAdminChannelData {
   not_complete: number;
   in_progress: number;
 }
+
+export interface IAdminChannelInfo {}

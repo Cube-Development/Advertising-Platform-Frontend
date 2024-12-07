@@ -18,3 +18,7 @@ export const adminTransactionStatus = [
     id: transactionStatus.pending,
   },
 ];
+
+export enum adminTransactionForm {
+  page = "page",
+}
