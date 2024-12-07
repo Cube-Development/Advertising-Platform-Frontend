@@ -47,21 +47,21 @@ export const TransactionsRoute: FC<TransactionsRouteProps> = ({ subcard }) => {
             </div>
             <div
               className={styles.id}
-              onClick={() => handleCopyLink(item?.transactionId)}
+              onClick={() => handleCopyLink(item?.journal_id)}
             >
-              <p>{item?.transactionId}</p>
+              <p>{item?.journal_id}</p>
             </div>
             <div
               className={styles.id}
-              onClick={() => handleCopyLink(item?.accountId)}
+              onClick={() => handleCopyLink(item?.account_id)}
             >
-              <p>{item?.accountId}</p>
+              <p>{item?.account_id}</p>
             </div>
             <div>
               <p>{item?.amount.toLocaleString()}</p>
             </div>
             <div>
-              <p>{item?.datetime}</p>
+              <p>{item?.created}</p>
             </div>
           </div>
         ))}

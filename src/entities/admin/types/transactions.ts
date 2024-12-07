@@ -1,4 +1,4 @@
-import { transactionStatus } from "../config";
+import { identificationType, transactionStatus } from "../config";
 
 export interface IAdminTransactions {
   page: number;
@@ -30,16 +30,16 @@ export interface IAdminTransactionInfo {
 
 interface IUser {
   id: string;
-  identification: string;
-  userId?: string;
+  ident: identificationType;
+  user_id?: string;
 }
 
 interface ITransaction {
   id: string;
-  transactionId: string;
-  accountId: string;
+  journal_id: string;
+  account_id: string;
   amount: number;
-  datetime: string;
+  created: string;
 }
 
 interface IDocument {

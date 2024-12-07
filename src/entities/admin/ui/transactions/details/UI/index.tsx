@@ -1,4 +1,8 @@
-import { adminTransactionStatus, IAdminTransactionInfo } from "@entities/admin";
+import {
+  adminIdentificationStatus,
+  adminTransactionStatus,
+  IAdminTransactionInfo,
+} from "@entities/admin";
 import { useToast } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -61,8 +65,27 @@ export const TransactionDetails: FC<TransactionDetailsProps> = ({
                 )}{" "}
                 :
               </p>
-              <span>{subcard?.sender?.identification}</span>
+              <span>
+                {t(
+                  adminIdentificationStatus.find(
+                    (item) => item.id === subcard?.sender?.ident,
+                  )?.name || "",
+                )}
+              </span>
             </div>
+            {!!subcard?.sender?.user_id && (
+              <div className={styles.row}>
+                <p>
+                  {t("admin_panel.transactions.card.details.sender.userId")} :
+                </p>
+                <span
+                  className={styles.id}
+                  onClick={() => handleCopyLink(subcard?.sender?.user_id)}
+                >
+                  № {subcard?.sender?.user_id}
+                </span>
+              </div>
+            )}
           </div>
         </div>
         <div className={styles.receiver}>
@@ -93,19 +116,28 @@ export const TransactionDetails: FC<TransactionDetailsProps> = ({
                 )}{" "}
                 :
               </p>
-              <span>{subcard?.receiver?.identification}</span>
-            </div>
-            <div className={styles.row}>
-              <p>
-                {t("admin_panel.transactions.card.details.receiver.userId")} :
-              </p>
-              <span
-                className={styles.id}
-                onClick={() => handleCopyLink(subcard?.receiver?.userId)}
-              >
-                № {subcard?.receiver?.userId}
+              <span>
+                {t(
+                  adminIdentificationStatus.find(
+                    (item) => item.id === subcard?.receiver?.ident,
+                  )?.name || "",
+                )}
               </span>
             </div>
+
+            {!!subcard?.receiver?.user_id && (
+              <div className={styles.row}>
+                <p>
+                  {t("admin_panel.transactions.card.details.receiver.userId")} :
+                </p>
+                <span
+                  className={styles.id}
+                  onClick={() => handleCopyLink(subcard?.receiver?.user_id)}
+                >
+                  № {subcard?.receiver?.user_id}
+                </span>
+              </div>
+            )}
           </div>
         </div>
       </div>

@@ -2155,6 +2155,7 @@
           "sender": {
             "title": "Детали отправителя",
             "uuid": "UUID счёта",
+            "userId": "ID пользователя",
             "identification": "Идентификация счёта"
           },
           "receiver": {
@@ -2162,6 +2163,11 @@
             "uuid": "UUID счёта",
             "identification": "Идентификация счёта",
             "userId": "ID пользователя"
+          },
+
+          "identification": {
+            "user": "Пользовательский",
+            "turnover": "Оборотный"
           }
         },
 

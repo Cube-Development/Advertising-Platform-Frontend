@@ -612,601 +612,601 @@ export const AdminUsers: IAdminUserData[] = [
   },
 ];
 
-export const AdminTransactions: IAdminTransactionData[] = [
-  {
-    id: "16e5a703-d4f1-4f42-98be-cf88c7a58142",
-    sender: "f7c409c5-6020-4646-8f2d-d96475e21136",
-    receiver: "51a7e707-e38c-4b3e-b3db-c35e6c2f76b8",
-    transaction_date: "10.11.2024",
-    transaction_type: "Покупка товара",
-    way_type: "Click",
-    amount: 229900,
-    status: 1,
-    subcard: {
-      id: "16e5a703-d4f1-4f42-98be-cf88c7a58142",
-      status: 1,
-      sender: {
-        id: "f7c409c5-6020-4646-8f2d-d96475e21136",
-        identification: "Оборотный",
-      },
-      receiver: {
-        id: "51a7e707-e38c-4b3e-b3db-c35e6c2f76b8",
-        identification: "Пользовательский",
-        userId: "98765412",
-      },
-      transactions: [
-        {
-          id: "b2f702e7-f2c9-42f4-b0e0-d1739e34a402",
-          transactionId: "b2f702e7-f2c9-42f4-b0e0-d1739e34a402",
-          accountId: "b2f702e7-f2c9-42f4-b0e0-d1739e34a402",
-          amount: 229900,
-          datetime: "09:00 10.11.2024",
-        },
-        {
-          id: "b7e30b61-2333-4f13-a133-3ecfa5b36cfa",
-          transactionId: "b7e30b61-2333-4f13-a133-3ecfa5b36cfa",
-          accountId: "b7e30b61-2333-4f13-a133-3ecfa5b36cfa",
-          amount: 229900,
-          datetime: "10:00 10.11.2024",
-        },
-        {
-          id: "0da18f99-c9e0-416d-9173-9baf3e61a3a9",
-          transactionId: "0da18f99-c9e0-416d-9173-9baf3e61a3a9",
-          accountId: "0da18f99-c9e0-416d-9173-9baf3e61a3a9",
-          amount: 229900,
-          datetime: "11:00 10.11.2024",
-        },
-        {
-          id: "d45ed6a1-5e6c-4fa7-83d7-e306f42b319d",
-          transactionId: "d45ed6a1-5e6c-4fa7-83d7-e306f42b319d",
-          accountId: "d45ed6a1-5e6c-4fa7-83d7-e306f42b319d",
-          amount: 229900,
-          datetime: "12:00 10.11.2024",
-        },
-      ],
-      documents: [
-        {
-          filename: "Товар_заказан",
-        },
-        {
-          filename: "Подтверждение_покупки",
-        },
-        {
-          filename: "Распределение_средств",
-        },
-        {
-          filename: "Договор_покупки",
-        },
-      ],
-    },
-  },
-  {
-    id: "a1c9f8c7-f988-4b5d-a52d-5d5ab7a04b72",
-    sender: "b0b2f1f8-0e34-4885-a014-0a7b463d0796",
-    receiver: "8c3d66ef-c590-42f3-9df2-2414d3c4ab79",
-    transaction_date: "11.11.2024",
-    transaction_type: "Вывод средств",
-    way_type: "Payme",
-    amount: 550000,
-    status: 2,
-    subcard: {
-      id: "a1c9f8c7-f988-4b5d-a52d-5d5ab7a04b72",
-      status: 2,
-      sender: {
-        id: "b0b2f1f8-0e34-4885-a014-0a7b463d0796",
-        identification: "Оборотный",
-      },
-      receiver: {
-        id: "8c3d66ef-c590-42f3-9df2-2414d3c4ab79",
-        identification: "Пользовательский",
-        userId: "45216578",
-      },
-      transactions: [
-        {
-          id: "e72de649-e6e7-4c98-9c9c-5cf5c212567b",
-          transactionId: "e72de649-e6e7-4c98-9c9c-5cf5c212567b",
-          accountId: "e72de649-e6e7-4c98-9c9c-5cf5c212567b",
-          amount: 550000,
-          datetime: "10:00 11.11.2024",
-        },
-        {
-          id: "45b9d8e0-bcc1-4644-9322-7e28a321004e",
-          transactionId: "45b9d8e0-bcc1-4644-9322-7e28a321004e",
-          accountId: "45b9d8e0-bcc1-4644-9322-7e28a321004e",
-          amount: 550000,
-          datetime: "11:00 11.11.2024",
-        },
-        {
-          id: "913a4e5f-99eb-4e7b-bc2d-8dbb1e5ab3f6",
-          transactionId: "913a4e5f-99eb-4e7b-bc2d-8dbb1e5ab3f6",
-          accountId: "913a4e5f-99eb-4e7b-bc2d-8dbb1e5ab3f6",
-          amount: 550000,
-          datetime: "12:00 11.11.2024",
-        },
-        {
-          id: "f3e1b48e-7242-490b-8e8f-cb56c91c3326",
-          transactionId: "f3e1b48e-7242-490b-8e8f-cb56c91c3326",
-          accountId: "f3e1b48e-7242-490b-8e8f-cb56c91c3326",
-          amount: 550000,
-          datetime: "13:00 11.11.2024",
-        },
-      ],
-      documents: [
-        {
-          filename: "Документ_о_выводе",
-        },
-        {
-          filename: "Запрос_на_вывод",
-        },
-        {
-          filename: "Подтверждение_вывода",
-        },
-      ],
-    },
-  },
-  {
-    id: "fc9e6d12-7a5e-49b8-9b58-e42c8308f597",
-    sender: "272fce60-03a0-44cd-bc9e-1103f490e60f",
-    receiver: "f8c1a7e7-72e7-4f16-bb5f-c81f9a7a2ad4",
-    transaction_date: "12.11.2024",
-    transaction_type: "Возврат средств",
-    way_type: "Didox",
-    amount: 720000,
-    status: 0,
-    subcard: {
-      id: "fc9e6d12-7a5e-49b8-9b58-e42c8308f597",
-      status: 0,
-      sender: {
-        id: "272fce60-03a0-44cd-bc9e-1103f490e60f",
-        identification: "Оборотный",
-      },
-      receiver: {
-        id: "f8c1a7e7-72e7-4f16-bb5f-c81f9a7a2ad4",
-        identification: "Пользовательский",
-        userId: "36928374",
-      },
-      transactions: [
-        {
-          id: "1c7c8310-fc1c-4a31-b98d-b99d67237f9d",
-          transactionId: "1c7c8310-fc1c-4a31-b98d-b99d67237f9d",
-          accountId: "1c7c8310-fc1c-4a31-b98d-b99d67237f9d",
-          amount: 720000,
-          datetime: "09:30 12.11.2024",
-        },
-        {
-          id: "7055d56b-d271-4fae-b70f-d9ec640d5f13",
-          transactionId: "7055d56b-d271-4fae-b70f-d9ec640d5f13",
-          accountId: "7055d56b-d271-4fae-b70f-d9ec640d5f13",
-          amount: 720000,
-          datetime: "10:30 12.11.2024",
-        },
-        {
-          id: "a436674d-1cf7-470f-b42d-73a5f30969e3",
-          transactionId: "a436674d-1cf7-470f-b42d-73a5f30969e3",
-          accountId: "a436674d-1cf7-470f-b42d-73a5f30969e3",
-          amount: 720000,
-          datetime: "11:30 12.11.2024",
-        },
-      ],
-      documents: [
-        {
-          filename: "Доказательство_возврата",
-        },
-        {
-          filename: "Выписка_о_платежах",
-        },
-        {
-          filename: "Согласование_возврата",
-        },
-      ],
-    },
-  },
-  {
-    id: "8964d456-bfe7-46ad-93c9-e177db591c99",
-    sender: "3312fcf7-504f-4863-8880-f58749acb742",
-    receiver: "399adbd9-e264-4b9b-b82b-7361a36f44d3",
-    transaction_date: "13.11.2024",
-    transaction_type: "Пополнение счета",
-    way_type: "Bank",
-    amount: 125000,
-    status: 1,
-    subcard: {
-      id: "8964d456-bfe7-46ad-93c9-e177db591c99",
-      status: 1,
-      sender: {
-        id: "3312fcf7-504f-4863-8880-f58749acb742",
-        identification: "Оборотный",
-      },
-      receiver: {
-        id: "399adbd9-e264-4b9b-b82b-7361a36f44d3",
-        identification: "Пользовательский",
-        userId: "52738961",
-      },
-      transactions: [
-        {
-          id: "029bdc67-33a5-40a9-b632-490ae7d506f9",
-          transactionId: "029bdc67-33a5-40a9-b632-490ae7d506f9",
-          accountId: "029bdc67-33a5-40a9-b632-490ae7d506f9",
-          amount: 125000,
-          datetime: "10:00 13.11.2024",
-        },
-        {
-          id: "1ad4f8b7-8693-4f68-99b5-e6bc07a8f3da",
-          transactionId: "1ad4f8b7-8693-4f68-99b5-e6bc07a8f3da",
-          accountId: "1ad4f8b7-8693-4f68-99b5-e6bc07a8f3da",
-          amount: 125000,
-          datetime: "11:00 13.11.2024",
-        },
-        {
-          id: "9f0e28c3-8c95-47ea-a2c3-b39940cb8811",
-          transactionId: "9f0e28c3-8c95-47ea-a2c3-b39940cb8811",
-          accountId: "9f0e28c3-8c95-47ea-a2c3-b39940cb8811",
-          amount: 125000,
-          datetime: "12:00 13.11.2024",
-        },
-      ],
-      documents: [
-        {
-          filename: "Подтверждение_пополнения",
-        },
-        {
-          filename: "Соглашение_о_пополнении",
-        },
-      ],
-    },
-  },
-  {
-    id: "ced65ba6-b30b-4dbb-8032-98a1a779c8fc",
-    sender: "9b28f28d-3246-4fbc-9708-784f8cf66312",
-    receiver: "26a417cf-9602-40a9-bcc2-9d17723b479e",
-    transaction_date: "14.11.2024",
-    transaction_type: "Перевод между картами",
-    way_type: "Phone",
-    amount: 320000,
-    status: 2,
-    subcard: {
-      id: "ced65ba6-b30b-4dbb-8032-98a1a779c8fc",
-      status: 2,
-      sender: {
-        id: "9b28f28d-3246-4fbc-9708-784f8cf66312",
-        identification: "Оборотный",
-      },
-      receiver: {
-        id: "26a417cf-9602-40a9-bcc2-9d17723b479e",
-        identification: "Пользовательский",
-        userId: "84327961",
-      },
-      transactions: [
-        {
-          id: "9c2b65f5-b5f9-42b3-8cfb-1f7f9d17c7d1",
-          transactionId: "9c2b65f5-b5f9-42b3-8cfb-1f7f9d17c7d1",
-          accountId: "9c2b65f5-b5f9-42b3-8cfb-1f7f9d17c7d1",
-          amount: 320000,
-          datetime: "13:00 14.11.2024",
-        },
-        {
-          id: "e5c8b267-437d-46a7-bcda-02feab249ac5",
-          transactionId: "e5c8b267-437d-46a7-bcda-02feab249ac5",
-          accountId: "e5c8b267-437d-46a7-bcda-02feab249ac5",
-          amount: 320000,
-          datetime: "14:00 14.11.2024",
-        },
-      ],
-      documents: [
-        {
-          filename: "Документы_перевод",
-        },
-      ],
-    },
-  },
-  {
-    id: "a1f8e1d5-4a1e-4d89-a1a1-b7d6e1a1c4f1",
-    sender: "e5f4d1a7-2b1c-4f68-b4b4-f1d8c6e3a4f9",
-    receiver: "d8f3c7b5-4e1d-4f98-b8b8-d1f9e4d5a6b2",
-    transaction_date: "01.11.2024",
-    transaction_type: "Оплата за проект",
-    way_type: "Click",
-    amount: 6387030,
-    status: 1,
-    subcard: {
-      id: "a1f8e1d5-4a1e-4d89-a1a1-b7d6e1a1c4f1",
-      status: 1,
-      sender: {
-        id: "e5f4d1a7-2b1c-4f68-b4b4-f1d8c6e3a4f9",
-        identification: "Оборотный",
-      },
-      receiver: {
-        id: "d8f3c7b5-4e1d-4f98-b8b8-d1f9e4d5a6b2",
-        identification: "Пользовательский",
-        userId: "12121212",
-      },
-      transactions: [
-        {
-          id: "9b034e7d-cde4-4e43-b84e-8424a01df838",
-          transactionId: "9b034e7d-cde4-4e43-b84e-8424a01df838",
-          accountId: "9b034e7d-cde4-4e43-b84e-8424a01df838",
-          amount: 6387030,
-          datetime: "12:30 01.11.2024",
-        },
-        {
-          id: "9b034e7d-cde4-4e43-b84e-8424a01df839",
-          transactionId: "9b034e7d-cde4-4e43-b84e-8424a01df839",
-          accountId: "9b034e7d-cde4-4e43-b84e-8424a01df839",
-          amount: 6387030,
-          datetime: "13:00 01.11.2024",
-        },
-        {
-          id: "9b034e7d-cde4-4e43-b84e-8424a01df838",
-          transactionId: "9b034e7d-cde4-4e43-b84e-8424a01df838",
-          accountId: "9b034e7d-cde4-4e43-b84e-8424a01df838",
-          amount: 6387030,
-          datetime: "13:30 01.11.2024",
-        },
-        {
-          id: "9b034e7d-cde4-4e43-b84e-8424a01df839",
-          transactionId: "9b034e7d-cde4-4e43-b84e-8424a01df839",
-          accountId: "9b034e7d-cde4-4e43-b84e-8424a01df839",
-          amount: 6387030,
-          datetime: "14:30 01.11.2024",
-        },
-      ],
-      documents: [
-        { filename: "Отчет_по_проекту_1" },
-        { filename: "Договор_с_клиентом" },
-      ],
-    },
-  },
-  {
-    id: "f2bcdca1-2e9f-4b36-b6c1-cb0a40f6e1c9",
-    sender: "a4f1c5e7-5b2e-4d62-bc0f-82b71c3879c4",
-    receiver: "c4d8f5b1-7b8c-4e1b-b7ac-abc95be3078b",
-    transaction_date: "02.11.2024",
-    transaction_type: "Покупка тарифа",
-    way_type: "Payme",
-    amount: 982345,
-    status: 0,
-    subcard: {
-      id: "f2bcdca1-2e9f-4b36-b6c1-cb0a40f6e1c9",
-      status: 0,
-      sender: {
-        id: "a4f1c5e7-5b2e-4d62-bc0f-82b71c3879c4",
-        identification: "Оборотный",
-      },
-      receiver: {
-        id: "c4d8f5b1-7b8c-4e1b-b7ac-abc95be3078b",
-        identification: "Пользовательский",
-        userId: "23232323",
-      },
-      transactions: [
-        {
-          id: "bd16e8d4-b4cd-4df0-a929-3fa21d64b7b7",
-          transactionId: "bd16e8d4-b4cd-4df0-a929-3fa21d64b7b7",
-          accountId: "bd16e8d4-b4cd-4df0-a929-3fa21d64b7b7",
-          amount: 982345,
-          datetime: "14:15 02.11.2024",
-        },
-      ],
-      documents: [
-        { filename: "Счет_фактура_по_тарифу_2" },
-        { filename: "Контракт_с_поставщиком" },
-        { filename: "Платежное_соглашение" },
-      ],
-    },
-  },
-  {
-    id: "e92fb1f9-2908-44d9-8d51-5693d37a1c9c",
-    sender: "b35a56ab-fc09-4593-9db0-7c5f6fdc3fe9",
-    receiver: "315d8953-3456-4ab8-84cf-99fa29b41d4e",
-    transaction_date: "03.11.2024",
-    transaction_type: "Оплата за проект",
-    way_type: "Didox",
-    amount: 4567890,
-    status: 1,
-    subcard: {
-      id: "e92fb1f9-2908-44d9-8d51-5693d37a1c9c",
-      status: 1,
-      sender: {
-        id: "b35a56ab-fc09-4593-9db0-7c5f6fdc3fe9",
-        identification: "Оборотный",
-      },
-      receiver: {
-        id: "315d8953-3456-4ab8-84cf-99fa29b41d4e",
-        identification: "Пользовательский",
-        userId: "43192345",
-      },
-      transactions: [
-        {
-          id: "e0b8d98c-ef75-467a-8a58-71e8a02b9f2d",
-          transactionId: "e0b8d98c-ef75-467a-8a58-71e8a02b9f2d",
-          accountId: "e0b8d98c-ef75-467a-8a58-71e8a02b9f2d",
-          amount: 4567890,
-          datetime: "15:00 03.11.2024",
-        },
-      ],
-      documents: [
-        { filename: "Квитанция_оплаты_за_проект" },
-        { filename: "Акт_выполненных_работ" },
-      ],
-    },
-  },
-  {
-    id: "e36c8d17-c3f3-4b99-83ad-4694be9b1a21",
-    sender: "4db9d7c1-c7ad-4729-b945-5313c8a3fdde",
-    receiver: "11fe61c0-98a1-47d9-b872-d5048f12f4d6",
-    transaction_date: "04.11.2024",
-    transaction_type: "Возврат средств",
-    way_type: "Click",
-    amount: 1284305,
-    status: 2,
-    subcard: {
-      id: "e36c8d17-c3f3-4b99-83ad-4694be9b1a21",
-      status: 2,
-      sender: {
-        id: "4db9d7c1-c7ad-4729-b945-5313c8a3fdde",
-        identification: "Оборотный",
-      },
-      receiver: {
-        id: "11fe61c0-98a1-47d9-b872-d5048f12f4d6",
-        identification: "Пользовательский",
-        userId: "87654321",
-      },
-      transactions: [
-        {
-          id: "91d8b093-3a65-469f-b45d-c831b06d8e2b",
-          transactionId: "91d8b093-3a65-469f-b45d-c831b06d8e2b",
-          accountId: "91d8b093-3a65-469f-b45d-c831b06d8e2b",
-          amount: 1284305,
-          datetime: "16:30 04.11.2024",
-        },
-      ],
-      documents: [
-        { filename: "Платеж_возврат_по_сделке" },
-        { filename: "Согласование_возврата" },
-      ],
-    },
-  },
-  {
-    id: "10fba75a-324b-46a7-90a7-c6342d99e7b3",
-    sender: "af6f5c80-bc9e-4c83-b585-6db96717d282",
-    receiver: "0e370e58-4734-45d3-b5b1-d5e74e0a7a13",
-    transaction_date: "05.11.2024",
-    transaction_type: "Пополнение счета",
-    way_type: "Payme",
-    amount: 250000,
-    status: 1,
-    subcard: {
-      id: "10fba75a-324b-46a7-90a7-c6342d99e7b3",
-      status: 1,
-      sender: {
-        id: "af6f5c80-bc9e-4c83-b585-6db96717d282",
-        identification: "Оборотный",
-      },
-      receiver: {
-        id: "0e370e58-4734-45d3-b5b1-d5e74e0a7a13",
-        identification: "Пользовательский",
-        userId: "98765432",
-      },
-      transactions: [
-        {
-          id: "6c56b927-22ed-4694-b2d0-8f2c31bb1f98",
-          transactionId: "6c56b927-22ed-4694-b2d0-8f2c31bb1f98",
-          accountId: "6c56b927-22ed-4694-b2d0-8f2c31bb1f98",
-          amount: 250000,
-          datetime: "17:30 05.11.2024",
-        },
-      ],
-      documents: [{ filename: "Платеж_пополнения_счета" }],
-    },
-  },
-  {
-    id: "e450cfb5-fd4d-44b8-b4c2-83203e5d68f3",
-    sender: "b723e71e-2e65-4b55-b8d1-ecf870798f6f",
-    receiver: "315d8953-3456-4ab8-84cf-99fa29b41d4e",
-    transaction_date: "06.11.2024",
-    transaction_type: "Оплата услуги",
-    way_type: "Click",
-    amount: 1123230,
-    status: 1,
-    subcard: {
-      id: "e450cfb5-fd4d-44b8-b4c2-83203e5d68f3",
-      status: 1,
-      sender: {
-        id: "b723e71e-2e65-4b55-b8d1-ecf870798f6f",
-        identification: "Оборотный",
-      },
-      receiver: {
-        id: "315d8953-3456-4ab8-84cf-99fa29b41d4e",
-        identification: "Пользовательский",
-        userId: "43242324",
-      },
-      transactions: [
-        {
-          id: "432432d4-f81c-4da0-a764-ff11233a777a",
-          transactionId: "432432d4-f81c-4da0-a764-ff11233a777a",
-          accountId: "432432d4-f81c-4da0-a764-ff11233a777a",
-          amount: 1123230,
-          datetime: "18:30 06.11.2024",
-        },
-      ],
-      documents: [
-        { filename: "Согласование_по_услуге" },
-        { filename: "Платеж_за_услугу" },
-      ],
-    },
-  },
-  {
-    id: "7c84ef90-418d-4b62-b9ac-c3d5bbd51f10",
-    sender: "adbf74b8-89f3-4da3-aed1-74be271a9d9e",
-    receiver: "ac89fb79-4578-43f4-a382-cb2b0e2ad3fc",
-    transaction_date: "07.11.2024",
-    transaction_type: "Возврат по ошибке",
-    way_type: "Payme",
-    amount: 546785,
-    status: 2,
-    subcard: {
-      id: "7c84ef90-418d-4b62-b9ac-c3d5bbd51f10",
-      status: 2,
-      sender: {
-        id: "adbf74b8-89f3-4da3-aed1-74be271a9d9e",
-        identification: "Оборотный",
-      },
-      receiver: {
-        id: "ac89fb79-4578-43f4-a382-cb2b0e2ad3fc",
-        identification: "Пользовательский",
-        userId: "12343242",
-      },
-      transactions: [
-        {
-          id: "27d8b11d-65b9-4a8c-854b-d2ec95cbff72",
-          transactionId: "27d8b11d-65b9-4a8c-854b-d2ec95cbff72",
-          accountId: "27d8b11d-65b9-4a8c-854b-d2ec95cbff72",
-          amount: 546785,
-          datetime: "19:30 07.11.2024",
-        },
-      ],
-      documents: [
-        { filename: "Ошибочный_платеж" },
-        { filename: "Подтверждение_возврата" },
-      ],
-    },
-  },
-  {
-    id: "88e742ba-e620-4f5f-929e-bb507f5b79e8",
-    sender: "a4580d2a-620f-4f35-90b0-b3ab58a9fa5c",
-    receiver: "c856746f-f5a7-4bb0-b1a4-1d30c6e074d1",
-    transaction_date: "08.11.2024",
-    transaction_type: "Продажа товара",
-    way_type: "Payme",
-    amount: 989500,
-    status: 1,
-    subcard: {
-      id: "88e742ba-e620-4f5f-929e-bb507f5b79e8",
-      status: 1,
-      sender: {
-        id: "a4580d2a-620f-4f35-90b0-b3ab58a9fa5c",
-        identification: "Оборотный",
-      },
-      receiver: {
-        id: "c856746f-f5a7-4bb0-b1a4-1d30c6e074d1",
-        identification: "Пользовательский",
-        userId: "98745321",
-      },
-      transactions: [
-        {
-          id: "ab01c092-2f90-41c5-8bc1-7ac423fa7ff5",
-          transactionId: "ab01c092-2f90-41c5-8bc1-7ac423fa7ff5",
-          accountId: "ab01c092-2f90-41c5-8bc1-7ac423fa7ff5",
-          amount: 989500,
-          datetime: "20:00 08.11.2024",
-        },
-      ],
-      documents: [
-        { filename: "Документы_по_продаже" },
-        { filename: "Согласование_платежа" },
-      ],
-    },
-  },
-];
+// export const AdminTransactions: IAdminTransactionData[] = [
+//   {
+//     id: "16e5a703-d4f1-4f42-98be-cf88c7a58142",
+//     sender: "f7c409c5-6020-4646-8f2d-d96475e21136",
+//     receiver: "51a7e707-e38c-4b3e-b3db-c35e6c2f76b8",
+//     transaction_date: "10.11.2024",
+//     transaction_type: "Покупка товара",
+//     way_type: "Click",
+//     amount: 229900,
+//     status: 1,
+//     subcard: {
+//       id: "16e5a703-d4f1-4f42-98be-cf88c7a58142",
+//       status: 1,
+//       sender: {
+//         id: "f7c409c5-6020-4646-8f2d-d96475e21136",
+//         ident: "Оборотный",
+//       },
+//       receiver: {
+//         id: "51a7e707-e38c-4b3e-b3db-c35e6c2f76b8",
+//         ident: "Пользовательский",
+//         user_id: "98765412",
+//       },
+//       transactions: [
+//         {
+//           id: "b2f702e7-f2c9-42f4-b0e0-d1739e34a402",
+//           journal_id: "b2f702e7-f2c9-42f4-b0e0-d1739e34a402",
+//           account_id: "b2f702e7-f2c9-42f4-b0e0-d1739e34a402",
+//           amount: 229900,
+//           created: "09:00 10.11.2024",
+//         },
+//         {
+//           id: "b7e30b61-2333-4f13-a133-3ecfa5b36cfa",
+//           journal_id: "b7e30b61-2333-4f13-a133-3ecfa5b36cfa",
+//           account_id: "b7e30b61-2333-4f13-a133-3ecfa5b36cfa",
+//           amount: 229900,
+//           created: "10:00 10.11.2024",
+//         },
+//         {
+//           id: "0da18f99-c9e0-416d-9173-9baf3e61a3a9",
+//           journal_id: "0da18f99-c9e0-416d-9173-9baf3e61a3a9",
+//           account_id: "0da18f99-c9e0-416d-9173-9baf3e61a3a9",
+//           amount: 229900,
+//           created: "11:00 10.11.2024",
+//         },
+//         {
+//           id: "d45ed6a1-5e6c-4fa7-83d7-e306f42b319d",
+//           journal_id: "d45ed6a1-5e6c-4fa7-83d7-e306f42b319d",
+//           account_id: "d45ed6a1-5e6c-4fa7-83d7-e306f42b319d",
+//           amount: 229900,
+//           created: "12:00 10.11.2024",
+//         },
+//       ],
+//       documents: [
+//         {
+//           filename: "Товар_заказан",
+//         },
+//         {
+//           filename: "Подтверждение_покупки",
+//         },
+//         {
+//           filename: "Распределение_средств",
+//         },
+//         {
+//           filename: "Договор_покупки",
+//         },
+//       ],
+//     },
+//   },
+//   {
+//     id: "a1c9f8c7-f988-4b5d-a52d-5d5ab7a04b72",
+//     sender: "b0b2f1f8-0e34-4885-a014-0a7b463d0796",
+//     receiver: "8c3d66ef-c590-42f3-9df2-2414d3c4ab79",
+//     transaction_date: "11.11.2024",
+//     transaction_type: "Вывод средств",
+//     way_type: "Payme",
+//     amount: 550000,
+//     status: 2,
+//     subcard: {
+//       id: "a1c9f8c7-f988-4b5d-a52d-5d5ab7a04b72",
+//       status: 2,
+//       sender: {
+//         id: "b0b2f1f8-0e34-4885-a014-0a7b463d0796",
+//         ident: "Оборотный",
+//       },
+//       receiver: {
+//         id: "8c3d66ef-c590-42f3-9df2-2414d3c4ab79",
+//         ident: "Пользовательский",
+//         user_id: "45216578",
+//       },
+//       transactions: [
+//         {
+//           id: "e72de649-e6e7-4c98-9c9c-5cf5c212567b",
+//           journal_id: "e72de649-e6e7-4c98-9c9c-5cf5c212567b",
+//           account_id: "e72de649-e6e7-4c98-9c9c-5cf5c212567b",
+//           amount: 550000,
+//           created: "10:00 11.11.2024",
+//         },
+//         {
+//           id: "45b9d8e0-bcc1-4644-9322-7e28a321004e",
+//           journal_id: "45b9d8e0-bcc1-4644-9322-7e28a321004e",
+//           account_id: "45b9d8e0-bcc1-4644-9322-7e28a321004e",
+//           amount: 550000,
+//           created: "11:00 11.11.2024",
+//         },
+//         {
+//           id: "913a4e5f-99eb-4e7b-bc2d-8dbb1e5ab3f6",
+//           journal_id: "913a4e5f-99eb-4e7b-bc2d-8dbb1e5ab3f6",
+//           account_id: "913a4e5f-99eb-4e7b-bc2d-8dbb1e5ab3f6",
+//           amount: 550000,
+//           created: "12:00 11.11.2024",
+//         },
+//         {
+//           id: "f3e1b48e-7242-490b-8e8f-cb56c91c3326",
+//           journal_id: "f3e1b48e-7242-490b-8e8f-cb56c91c3326",
+//           account_id: "f3e1b48e-7242-490b-8e8f-cb56c91c3326",
+//           amount: 550000,
+//           created: "13:00 11.11.2024",
+//         },
+//       ],
+//       documents: [
+//         {
+//           filename: "Документ_о_выводе",
+//         },
+//         {
+//           filename: "Запрос_на_вывод",
+//         },
+//         {
+//           filename: "Подтверждение_вывода",
+//         },
+//       ],
+//     },
+//   },
+//   {
+//     id: "fc9e6d12-7a5e-49b8-9b58-e42c8308f597",
+//     sender: "272fce60-03a0-44cd-bc9e-1103f490e60f",
+//     receiver: "f8c1a7e7-72e7-4f16-bb5f-c81f9a7a2ad4",
+//     transaction_date: "12.11.2024",
+//     transaction_type: "Возврат средств",
+//     way_type: "Didox",
+//     amount: 720000,
+//     status: 0,
+//     subcard: {
+//       id: "fc9e6d12-7a5e-49b8-9b58-e42c8308f597",
+//       status: 0,
+//       sender: {
+//         id: "272fce60-03a0-44cd-bc9e-1103f490e60f",
+//         ident: "Оборотный",
+//       },
+//       receiver: {
+//         id: "f8c1a7e7-72e7-4f16-bb5f-c81f9a7a2ad4",
+//         ident: "Пользовательский",
+//         user_id: "36928374",
+//       },
+//       transactions: [
+//         {
+//           id: "1c7c8310-fc1c-4a31-b98d-b99d67237f9d",
+//           journal_id: "1c7c8310-fc1c-4a31-b98d-b99d67237f9d",
+//           account_id: "1c7c8310-fc1c-4a31-b98d-b99d67237f9d",
+//           amount: 720000,
+//           created: "09:30 12.11.2024",
+//         },
+//         {
+//           id: "7055d56b-d271-4fae-b70f-d9ec640d5f13",
+//           journal_id: "7055d56b-d271-4fae-b70f-d9ec640d5f13",
+//           account_id: "7055d56b-d271-4fae-b70f-d9ec640d5f13",
+//           amount: 720000,
+//           created: "10:30 12.11.2024",
+//         },
+//         {
+//           id: "a436674d-1cf7-470f-b42d-73a5f30969e3",
+//           journal_id: "a436674d-1cf7-470f-b42d-73a5f30969e3",
+//           account_id: "a436674d-1cf7-470f-b42d-73a5f30969e3",
+//           amount: 720000,
+//           created: "11:30 12.11.2024",
+//         },
+//       ],
+//       documents: [
+//         {
+//           filename: "Доказательство_возврата",
+//         },
+//         {
+//           filename: "Выписка_о_платежах",
+//         },
+//         {
+//           filename: "Согласование_возврата",
+//         },
+//       ],
+//     },
+//   },
+//   {
+//     id: "8964d456-bfe7-46ad-93c9-e177db591c99",
+//     sender: "3312fcf7-504f-4863-8880-f58749acb742",
+//     receiver: "399adbd9-e264-4b9b-b82b-7361a36f44d3",
+//     transaction_date: "13.11.2024",
+//     transaction_type: "Пополнение счета",
+//     way_type: "Bank",
+//     amount: 125000,
+//     status: 1,
+//     subcard: {
+//       id: "8964d456-bfe7-46ad-93c9-e177db591c99",
+//       status: 1,
+//       sender: {
+//         id: "3312fcf7-504f-4863-8880-f58749acb742",
+//         ident: "Оборотный",
+//       },
+//       receiver: {
+//         id: "399adbd9-e264-4b9b-b82b-7361a36f44d3",
+//         ident: "Пользовательский",
+//         user_id: "52738961",
+//       },
+//       transactions: [
+//         {
+//           id: "029bdc67-33a5-40a9-b632-490ae7d506f9",
+//           journal_id: "029bdc67-33a5-40a9-b632-490ae7d506f9",
+//           account_id: "029bdc67-33a5-40a9-b632-490ae7d506f9",
+//           amount: 125000,
+//           created: "10:00 13.11.2024",
+//         },
+//         {
+//           id: "1ad4f8b7-8693-4f68-99b5-e6bc07a8f3da",
+//           journal_id: "1ad4f8b7-8693-4f68-99b5-e6bc07a8f3da",
+//           account_id: "1ad4f8b7-8693-4f68-99b5-e6bc07a8f3da",
+//           amount: 125000,
+//           created: "11:00 13.11.2024",
+//         },
+//         {
+//           id: "9f0e28c3-8c95-47ea-a2c3-b39940cb8811",
+//           journal_id: "9f0e28c3-8c95-47ea-a2c3-b39940cb8811",
+//           account_id: "9f0e28c3-8c95-47ea-a2c3-b39940cb8811",
+//           amount: 125000,
+//           created: "12:00 13.11.2024",
+//         },
+//       ],
+//       documents: [
+//         {
+//           filename: "Подтверждение_пополнения",
+//         },
+//         {
+//           filename: "Соглашение_о_пополнении",
+//         },
+//       ],
+//     },
+//   },
+//   {
+//     id: "ced65ba6-b30b-4dbb-8032-98a1a779c8fc",
+//     sender: "9b28f28d-3246-4fbc-9708-784f8cf66312",
+//     receiver: "26a417cf-9602-40a9-bcc2-9d17723b479e",
+//     transaction_date: "14.11.2024",
+//     transaction_type: "Перевод между картами",
+//     way_type: "Phone",
+//     amount: 320000,
+//     status: 2,
+//     subcard: {
+//       id: "ced65ba6-b30b-4dbb-8032-98a1a779c8fc",
+//       status: 2,
+//       sender: {
+//         id: "9b28f28d-3246-4fbc-9708-784f8cf66312",
+//         ident: "Оборотный",
+//       },
+//       receiver: {
+//         id: "26a417cf-9602-40a9-bcc2-9d17723b479e",
+//         ident: "Пользовательский",
+//         user_id: "84327961",
+//       },
+//       transactions: [
+//         {
+//           id: "9c2b65f5-b5f9-42b3-8cfb-1f7f9d17c7d1",
+//           journal_id: "9c2b65f5-b5f9-42b3-8cfb-1f7f9d17c7d1",
+//           account_id: "9c2b65f5-b5f9-42b3-8cfb-1f7f9d17c7d1",
+//           amount: 320000,
+//           created: "13:00 14.11.2024",
+//         },
+//         {
+//           id: "e5c8b267-437d-46a7-bcda-02feab249ac5",
+//           journal_id: "e5c8b267-437d-46a7-bcda-02feab249ac5",
+//           account_id: "e5c8b267-437d-46a7-bcda-02feab249ac5",
+//           amount: 320000,
+//           created: "14:00 14.11.2024",
+//         },
+//       ],
+//       documents: [
+//         {
+//           filename: "Документы_перевод",
+//         },
+//       ],
+//     },
+//   },
+//   {
+//     id: "a1f8e1d5-4a1e-4d89-a1a1-b7d6e1a1c4f1",
+//     sender: "e5f4d1a7-2b1c-4f68-b4b4-f1d8c6e3a4f9",
+//     receiver: "d8f3c7b5-4e1d-4f98-b8b8-d1f9e4d5a6b2",
+//     transaction_date: "01.11.2024",
+//     transaction_type: "Оплата за проект",
+//     way_type: "Click",
+//     amount: 6387030,
+//     status: 1,
+//     subcard: {
+//       id: "a1f8e1d5-4a1e-4d89-a1a1-b7d6e1a1c4f1",
+//       status: 1,
+//       sender: {
+//         id: "e5f4d1a7-2b1c-4f68-b4b4-f1d8c6e3a4f9",
+//         ident: "Оборотный",
+//       },
+//       receiver: {
+//         id: "d8f3c7b5-4e1d-4f98-b8b8-d1f9e4d5a6b2",
+//         ident: "Пользовательский",
+//         user_id: "12121212",
+//       },
+//       transactions: [
+//         {
+//           id: "9b034e7d-cde4-4e43-b84e-8424a01df838",
+//           journal_id: "9b034e7d-cde4-4e43-b84e-8424a01df838",
+//           account_id: "9b034e7d-cde4-4e43-b84e-8424a01df838",
+//           amount: 6387030,
+//           created: "12:30 01.11.2024",
+//         },
+//         {
+//           id: "9b034e7d-cde4-4e43-b84e-8424a01df839",
+//           journal_id: "9b034e7d-cde4-4e43-b84e-8424a01df839",
+//           account_id: "9b034e7d-cde4-4e43-b84e-8424a01df839",
+//           amount: 6387030,
+//           created: "13:00 01.11.2024",
+//         },
+//         {
+//           id: "9b034e7d-cde4-4e43-b84e-8424a01df838",
+//           journal_id: "9b034e7d-cde4-4e43-b84e-8424a01df838",
+//           account_id: "9b034e7d-cde4-4e43-b84e-8424a01df838",
+//           amount: 6387030,
+//           created: "13:30 01.11.2024",
+//         },
+//         {
+//           id: "9b034e7d-cde4-4e43-b84e-8424a01df839",
+//           journal_id: "9b034e7d-cde4-4e43-b84e-8424a01df839",
+//           account_id: "9b034e7d-cde4-4e43-b84e-8424a01df839",
+//           amount: 6387030,
+//           created: "14:30 01.11.2024",
+//         },
+//       ],
+//       documents: [
+//         { filename: "Отчет_по_проекту_1" },
+//         { filename: "Договор_с_клиентом" },
+//       ],
+//     },
+//   },
+//   {
+//     id: "f2bcdca1-2e9f-4b36-b6c1-cb0a40f6e1c9",
+//     sender: "a4f1c5e7-5b2e-4d62-bc0f-82b71c3879c4",
+//     receiver: "c4d8f5b1-7b8c-4e1b-b7ac-abc95be3078b",
+//     transaction_date: "02.11.2024",
+//     transaction_type: "Покупка тарифа",
+//     way_type: "Payme",
+//     amount: 982345,
+//     status: 0,
+//     subcard: {
+//       id: "f2bcdca1-2e9f-4b36-b6c1-cb0a40f6e1c9",
+//       status: 0,
+//       sender: {
+//         id: "a4f1c5e7-5b2e-4d62-bc0f-82b71c3879c4",
+//         ident: "Оборотный",
+//       },
+//       receiver: {
+//         id: "c4d8f5b1-7b8c-4e1b-b7ac-abc95be3078b",
+//         ident: "Пользовательский",
+//         user_id: "23232323",
+//       },
+//       transactions: [
+//         {
+//           id: "bd16e8d4-b4cd-4df0-a929-3fa21d64b7b7",
+//           journal_id: "bd16e8d4-b4cd-4df0-a929-3fa21d64b7b7",
+//           account_id: "bd16e8d4-b4cd-4df0-a929-3fa21d64b7b7",
+//           amount: 982345,
+//           created: "14:15 02.11.2024",
+//         },
+//       ],
+//       documents: [
+//         { filename: "Счет_фактура_по_тарифу_2" },
+//         { filename: "Контракт_с_поставщиком" },
+//         { filename: "Платежное_соглашение" },
+//       ],
+//     },
+//   },
+//   {
+//     id: "e92fb1f9-2908-44d9-8d51-5693d37a1c9c",
+//     sender: "b35a56ab-fc09-4593-9db0-7c5f6fdc3fe9",
+//     receiver: "315d8953-3456-4ab8-84cf-99fa29b41d4e",
+//     transaction_date: "03.11.2024",
+//     transaction_type: "Оплата за проект",
+//     way_type: "Didox",
+//     amount: 4567890,
+//     status: 1,
+//     subcard: {
+//       id: "e92fb1f9-2908-44d9-8d51-5693d37a1c9c",
+//       status: 1,
+//       sender: {
+//         id: "b35a56ab-fc09-4593-9db0-7c5f6fdc3fe9",
+//         ident: "Оборотный",
+//       },
+//       receiver: {
+//         id: "315d8953-3456-4ab8-84cf-99fa29b41d4e",
+//         ident: "Пользовательский",
+//         user_id: "43192345",
+//       },
+//       transactions: [
+//         {
+//           id: "e0b8d98c-ef75-467a-8a58-71e8a02b9f2d",
+//           journal_id: "e0b8d98c-ef75-467a-8a58-71e8a02b9f2d",
+//           account_id: "e0b8d98c-ef75-467a-8a58-71e8a02b9f2d",
+//           amount: 4567890,
+//           created: "15:00 03.11.2024",
+//         },
+//       ],
+//       documents: [
+//         { filename: "Квитанция_оплаты_за_проект" },
+//         { filename: "Акт_выполненных_работ" },
+//       ],
+//     },
+//   },
+//   {
+//     id: "e36c8d17-c3f3-4b99-83ad-4694be9b1a21",
+//     sender: "4db9d7c1-c7ad-4729-b945-5313c8a3fdde",
+//     receiver: "11fe61c0-98a1-47d9-b872-d5048f12f4d6",
+//     transaction_date: "04.11.2024",
+//     transaction_type: "Возврат средств",
+//     way_type: "Click",
+//     amount: 1284305,
+//     status: 2,
+//     subcard: {
+//       id: "e36c8d17-c3f3-4b99-83ad-4694be9b1a21",
+//       status: 2,
+//       sender: {
+//         id: "4db9d7c1-c7ad-4729-b945-5313c8a3fdde",
+//         ident: "Оборотный",
+//       },
+//       receiver: {
+//         id: "11fe61c0-98a1-47d9-b872-d5048f12f4d6",
+//         ident: "Пользовательский",
+//         user_id: "87654321",
+//       },
+//       transactions: [
+//         {
+//           id: "91d8b093-3a65-469f-b45d-c831b06d8e2b",
+//           journal_id: "91d8b093-3a65-469f-b45d-c831b06d8e2b",
+//           account_id: "91d8b093-3a65-469f-b45d-c831b06d8e2b",
+//           amount: 1284305,
+//           created: "16:30 04.11.2024",
+//         },
+//       ],
+//       documents: [
+//         { filename: "Платеж_возврат_по_сделке" },
+//         { filename: "Согласование_возврата" },
+//       ],
+//     },
+//   },
+//   {
+//     id: "10fba75a-324b-46a7-90a7-c6342d99e7b3",
+//     sender: "af6f5c80-bc9e-4c83-b585-6db96717d282",
+//     receiver: "0e370e58-4734-45d3-b5b1-d5e74e0a7a13",
+//     transaction_date: "05.11.2024",
+//     transaction_type: "Пополнение счета",
+//     way_type: "Payme",
+//     amount: 250000,
+//     status: 1,
+//     subcard: {
+//       id: "10fba75a-324b-46a7-90a7-c6342d99e7b3",
+//       status: 1,
+//       sender: {
+//         id: "af6f5c80-bc9e-4c83-b585-6db96717d282",
+//         ident: "Оборотный",
+//       },
+//       receiver: {
+//         id: "0e370e58-4734-45d3-b5b1-d5e74e0a7a13",
+//         ident: "Пользовательский",
+//         user_id: "98765432",
+//       },
+//       transactions: [
+//         {
+//           id: "6c56b927-22ed-4694-b2d0-8f2c31bb1f98",
+//           journal_id: "6c56b927-22ed-4694-b2d0-8f2c31bb1f98",
+//           account_id: "6c56b927-22ed-4694-b2d0-8f2c31bb1f98",
+//           amount: 250000,
+//           created: "17:30 05.11.2024",
+//         },
+//       ],
+//       documents: [{ filename: "Платеж_пополнения_счета" }],
+//     },
+//   },
+//   {
+//     id: "e450cfb5-fd4d-44b8-b4c2-83203e5d68f3",
+//     sender: "b723e71e-2e65-4b55-b8d1-ecf870798f6f",
+//     receiver: "315d8953-3456-4ab8-84cf-99fa29b41d4e",
+//     transaction_date: "06.11.2024",
+//     transaction_type: "Оплата услуги",
+//     way_type: "Click",
+//     amount: 1123230,
+//     status: 1,
+//     subcard: {
+//       id: "e450cfb5-fd4d-44b8-b4c2-83203e5d68f3",
+//       status: 1,
+//       sender: {
+//         id: "b723e71e-2e65-4b55-b8d1-ecf870798f6f",
+//         ident: "Оборотный",
+//       },
+//       receiver: {
+//         id: "315d8953-3456-4ab8-84cf-99fa29b41d4e",
+//         ident: "Пользовательский",
+//         user_id: "43242324",
+//       },
+//       transactions: [
+//         {
+//           id: "432432d4-f81c-4da0-a764-ff11233a777a",
+//           journal_id: "432432d4-f81c-4da0-a764-ff11233a777a",
+//           account_id: "432432d4-f81c-4da0-a764-ff11233a777a",
+//           amount: 1123230,
+//           created: "18:30 06.11.2024",
+//         },
+//       ],
+//       documents: [
+//         { filename: "Согласование_по_услуге" },
+//         { filename: "Платеж_за_услугу" },
+//       ],
+//     },
+//   },
+//   {
+//     id: "7c84ef90-418d-4b62-b9ac-c3d5bbd51f10",
+//     sender: "adbf74b8-89f3-4da3-aed1-74be271a9d9e",
+//     receiver: "ac89fb79-4578-43f4-a382-cb2b0e2ad3fc",
+//     transaction_date: "07.11.2024",
+//     transaction_type: "Возврат по ошибке",
+//     way_type: "Payme",
+//     amount: 546785,
+//     status: 2,
+//     subcard: {
+//       id: "7c84ef90-418d-4b62-b9ac-c3d5bbd51f10",
+//       status: 2,
+//       sender: {
+//         id: "adbf74b8-89f3-4da3-aed1-74be271a9d9e",
+//         ident: "Оборотный",
+//       },
+//       receiver: {
+//         id: "ac89fb79-4578-43f4-a382-cb2b0e2ad3fc",
+//         ident: "Пользовательский",
+//         user_id: "12343242",
+//       },
+//       transactions: [
+//         {
+//           id: "27d8b11d-65b9-4a8c-854b-d2ec95cbff72",
+//           journal_id: "27d8b11d-65b9-4a8c-854b-d2ec95cbff72",
+//           account_id: "27d8b11d-65b9-4a8c-854b-d2ec95cbff72",
+//           amount: 546785,
+//           created: "19:30 07.11.2024",
+//         },
+//       ],
+//       documents: [
+//         { filename: "Ошибочный_платеж" },
+//         { filename: "Подтверждение_возврата" },
+//       ],
+//     },
+//   },
+//   {
+//     id: "88e742ba-e620-4f5f-929e-bb507f5b79e8",
+//     sender: "a4580d2a-620f-4f35-90b0-b3ab58a9fa5c",
+//     receiver: "c856746f-f5a7-4bb0-b1a4-1d30c6e074d1",
+//     transaction_date: "08.11.2024",
+//     transaction_type: "Продажа товара",
+//     way_type: "Payme",
+//     amount: 989500,
+//     status: 1,
+//     subcard: {
+//       id: "88e742ba-e620-4f5f-929e-bb507f5b79e8",
+//       status: 1,
+//       sender: {
+//         id: "a4580d2a-620f-4f35-90b0-b3ab58a9fa5c",
+//         ident: "Оборотный",
+//       },
+//       receiver: {
+//         id: "c856746f-f5a7-4bb0-b1a4-1d30c6e074d1",
+//         ident: "Пользовательский",
+//         user_id: "98745321",
+//       },
+//       transactions: [
+//         {
+//           id: "ab01c092-2f90-41c5-8bc1-7ac423fa7ff5",
+//           journal_id: "ab01c092-2f90-41c5-8bc1-7ac423fa7ff5",
+//           account_id: "ab01c092-2f90-41c5-8bc1-7ac423fa7ff5",
+//           amount: 989500,
+//           created: "20:00 08.11.2024",
+//         },
+//       ],
+//       documents: [
+//         { filename: "Документы_по_продаже" },
+//         { filename: "Согласование_платежа" },
+//       ],
+//     },
+//   },
+// ];
 
 export const AdminReviews: IAdminReviewData[] = [
   {

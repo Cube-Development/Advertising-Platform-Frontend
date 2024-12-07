@@ -14,6 +14,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
+  AccountsLoader,
   useToast,
 } from "@shared/ui";
 import { FC, MutableRefObject, useEffect, useRef, useState } from "react";
@@ -137,16 +138,26 @@ export const TransactionCard: FC<TransactionCardProps> = ({
             className={styles.trigger}
             onClick={() => handleChangeOpenSubcard()}
           >
-            <div className="arrow">
-              <ArrowSmallVerticalIcon className="icon__grey rotate__down" />
-            </div>
+            {isLoading ? (
+              <div className={styles.loader}>
+                <AccountsLoader />
+              </div>
+            ) : (
+              <div className="arrow">
+                <ArrowSmallVerticalIcon className="icon__grey rotate__down" />
+              </div>
+            )}
           </AccordionTrigger>
         </div>
       </div>
       <AccordionContent className={styles.content}>
-        {/* <TransactionDetails subcard={subcard!} />
-        <TransactionsRoute subcard={subcard!} />
-        <TransactionDocuments subcard={subcard!} /> */}
+        {!!subcard && (
+          <>
+            <TransactionDetails subcard={subcard} />
+            <TransactionsRoute subcard={subcard} />
+            <TransactionDocuments subcard={subcard} />
+          </>
+        )}
       </AccordionContent>
     </AccordionItem>
   );
