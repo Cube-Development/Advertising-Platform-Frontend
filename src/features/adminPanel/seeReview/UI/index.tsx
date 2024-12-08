@@ -5,7 +5,7 @@ import {
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogTrigger,
-  MyButton
+  MyButton,
 } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -52,8 +52,16 @@ export const SeeReview: FC<SeeReviewProps> = ({
           >
             {!card?.closeDate ? (
               <>
-                <RejectBtn id={card?.id} />
-                <AcceptBtn id={card?.id} />
+                <AlertDialogCancel asChild>
+                  <div>
+                    <RejectBtn id={card?.id} />
+                  </div>
+                </AlertDialogCancel>
+                <AlertDialogCancel asChild>
+                  <div>
+                    <AcceptBtn id={card?.id} />
+                  </div>
+                </AlertDialogCancel>
               </>
             ) : (
               <AlertDialogCancel asChild>

@@ -1,4 +1,4 @@
-import { ADMIN_REVIEWS, authApi } from "@shared/api";
+import { ADMIN_COMPLAINTS, ADMIN_REVIEWS, authApi } from "@shared/api";
 import { adminComplaintTypesFilter, adminReviewTypesFilter } from "../config";
 import {
   IAdminChannelInfo,
@@ -106,6 +106,7 @@ export const adminAPI = authApi.injectEndpoints({
       forceRefetch({ currentArg, previousArg }) {
         return currentArg !== previousArg;
       },
+      providesTags: [ADMIN_COMPLAINTS]
     }),
     getAdminOrderComplaintInfo: build.query<
       IAdminComplaintInfoData,
@@ -258,6 +259,22 @@ export const adminAPI = authApi.injectEndpoints({
       }),
       invalidatesTags: [ADMIN_REVIEWS],
     }),
+    adminAcceptComplaint: build.mutation<{ success: boolean }, {complaint_id:string}>({
+      query: (body) => ({
+        url: `/adv-admin/accept/order-complaint`,
+        method: "POST",
+        params: body,
+      }),
+      invalidatesTags: [ADMIN_COMPLAINTS],
+    }),
+    adminRejectComplaint: build.mutation<{ success: boolean }, {complaint_id:string}>({
+      query: (body) => ({
+        url: `/adv-admin/reject/order-complaint`,
+        method: "POST",
+        params: body,
+      }),
+      invalidatesTags: [ADMIN_COMPLAINTS],
+    }),
   }),
 });
 
@@ -271,5 +288,7 @@ export const {
   useGetAdminChannelInfoQuery,
   useGetAdminReviewsQuery,
   useAdminAcceptReviewMutation,
-  useAdminRejectReviewMutation
+  useAdminRejectReviewMutation,
+  useAdminAcceptComplaintMutation,
+  useAdminRejectComplaintMutation,
 } = adminAPI;

@@ -57,8 +57,16 @@ export const ComplaintDecision: FC<ComplaintDecisionProps> = ({
               {t("admin_panel.complaintInfo.card.decision.title")}
             </p>
             <div className={styles.buttons}>
-              <RejectBtn id={card?.id} />
-              <AcceptBtn id={card?.id} />
+              <AlertDialogCancel asChild>
+                <div>
+                  <RejectBtn id={card?.id} />
+                </div>
+              </AlertDialogCancel>
+              <AlertDialogCancel asChild>
+                <div>
+                  <AcceptBtn id={card?.id} />
+                </div>
+              </AlertDialogCancel>
             </div>
           </div>
         </div>
