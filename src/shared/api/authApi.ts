@@ -1,6 +1,8 @@
 import { authBaseQuery } from "@entities/user";
 import { createApi } from "@reduxjs/toolkit/query/react";
 import {
+  ADMIN_COMPLAINTS,
+  ADMIN_REVIEWS,
   ADV_PROJECTS,
   BALANCE,
   BLOGGER_CHANNELS,
@@ -12,7 +14,7 @@ import {
   LEGALS,
   MANAGER_PROJECTS,
   RECOMMEND_CARDS,
-} from "@shared/api/tags";
+} from "@shared/api";
 
 export const authApi = createApi({
   baseQuery: authBaseQuery,
@@ -30,5 +32,7 @@ export const authApi = createApi({
     MANAGER_PROJECTS,
     LEGALS,
     CHAT,
+    ADMIN_REVIEWS,
+    ADMIN_COMPLAINTS
   ],
 });

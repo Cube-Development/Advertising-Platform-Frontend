@@ -35,7 +35,7 @@ export const Reviews: FC = () => {
     setValue(adminReviewForm.page, 1);
     setValue(adminReviewForm.status, filter);
   };
-
+  console.log(data);
   return (
     <div className="container">
       <div className={styles.wrapper}>
@@ -57,7 +57,7 @@ export const Reviews: FC = () => {
           </div>
           <ReviewsList
             status={formFields?.status}
-            data={data}
+            data={(data?.status === formFields.status && data) || undefined}
             isLoading={isLoading}
             isFetching={isFetching}
             handleChange={handleOnChangePage}

@@ -1208,263 +1208,263 @@ export const AdminUsers: IAdminUserData[] = [
 //   },
 // ];
 
-export const AdminReviews: IAdminReviewData[] = [
-  {
-    id: "d1f2g3h4-i5j6-k7l8-m9n0-o1p2q3r4s5t6",
-    createdDate: "15.03.2023",
-    closeDate: "15.03.2023",
-    platform: {
-      id: "f6g7h8i9-j0k1-l2m3-n4o5-p6q7r8s9t0u1",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      name: "AdPlace",
-    },
-    sender: {
-      id: "v2w3x4y5-z6a7-b8c9-d0e1-f2g3h4i5j6k7",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "marketing.solutions@gmail.com",
-      userId: "83746215",
-    },
-    moderator: {
-      id: "v2w3x4y5-z6a7-b8c9-d0e1-f2g3h4i5j6k7",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      name: "Ирина Аллегрова",
-      userId: "45454545",
-    },
-    review: {
-      rate: 5,
-      text: "Очень довольны сотрудничеством. Публикация была размещена точно в оговоренное время, с текстом и оформлением, полностью соответствующими нашим ожиданиям. Владелец канала проявил профессиональный подход, оперативно отвечал на все вопросы и учел все пожелания. Рекламный пост вызвал живой интерес у подписчиков, и мы получили больше откликов, чем рассчитывали. Рекомендуем сотрудничество и планируем обращаться снова для будущих кампаний! Очень довольны сотрудничеством. Публикация была размещена точно в оговоренное время, с текстом и оформлением, полностью соответствующими нашим ожиданиям. Владелец канала проявил профессиональный подход, оперативно отвечал на все вопросы и учел все пожелания. Рекламный пост вызвал живой интерес у подписчиков, и мы получили больше откликов, чем рассчитывали. Рекомендуем сотрудничество и планируем обращаться снова для будущих кампаний!Очень довольны сотрудничеством. Публикация была размещена точно в оговоренное время, с текстом и оформлением, полностью соответствующими нашим ожиданиям. Владелец канала проявил профессиональный подход, оперативно отвечал на все вопросы и учел все пожелания. Рекламный пост вызвал живой интерес у подписчиков, и мы получили больше откликов, чем рассчитывали. Рекомендуем сотрудничество и планируем обращаться снова для будущих кампаний!Очень довольны сотрудничеством. Публикация была размещена точно в оговоренное время, с текстом и оформлением, полностью соответствующими нашим ожиданиям. Владелец канала проявил профессиональный подход, оперативно отвечал на все вопросы и учел все пожелания. Рекламный пост вызвал живой интерес у подписчиков, и мы получили больше откликов, чем рассчитывали. Рекомендуем сотрудничество и планируем обращаться снова для будущих кампаний!",
-    },
-  },
-  {
-    id: "e2f3g4h5-i6j7-k8l9-m0n1-o2p3q4r5s6t7",
-    createdDate: "10.04.2023",
-    platform: {
-      id: "u1v2w3x4-y5z6-a7b8-c9d0-e1f2g3h4i5j6",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      name: "PromoHub",
-    },
-    sender: {
-      id: "g6h7i8j9-k0l1-m2n3-o4p5-q6r7s8t9u0v1",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "ads.agency@example.com",
-      userId: "19283746",
-    },
-    review: {
-      rate: 4,
-      text: "Площадка оправдала ожидания, публикация прошла успешно, и мы наблюдали активное вовлечение аудитории. Несколько вопросов по технической части возникли, но администратор оперативно на них ответил. Рекламный пост привлек внимание целевой аудитории, и мы получили хорошую отдачу. Рекомендуем эту платформу для продвижения.",
-    },
-  },
-  {
-    id: "f3g4h5i6-j7k8-l9m0-n1o2-p3q4r5s6t7u8",
-    createdDate: "28.05.2023",
-    platform: {
-      id: "w2x3y4z5-a6b7-c8d9-e0f1-g2h3i4j5k6l7",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      name: "MediaMarket",
-    },
-    sender: {
-      id: "i9j0k1l2-m3n4-o5p6-q7r8-s9t0u1v2w3x4",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "contact@mediacorp.com",
-      userId: "28374659",
-    },
-    review: {
-      rate: 5,
-      text: "Отличная платформа для рекламного продвижения. Сотрудничество прошло на высшем уровне: всё организовано чётко, владелец канала на связи, публикации в срок, креативно и качественно. Аудитория проявила активный интерес к посту, что положительно отразилось на нашем бренде. Будем пользоваться услугами этой площадки снова!",
-    },
-  },
-  {
-    id: "g4h5i6j7-k8l9-m0n1-o2p3-q4r5s6t7u8v9",
-    createdDate: "12.06.2023",
-    platform: {
-      id: "v3w4x5y6-z7a8-b9c0-d1e2-f3g4h5i6j7k8",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      name: "AdExchange",
-    },
-    sender: {
-      id: "o2p3q4r5-s6t7-u8v9-w0x1-y2z3a4b5c6d7",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "promotion.expert@gmail.com",
-      userId: "73648219",
-    },
-    review: {
-      rate: 3,
-      text: "Площадка имеет хорошую базу пользователей, но некоторые моменты требуют улучшения. Публикация прошла успешно, но задержка по времени чуть помешала. В целом, аудитория откликнулась положительно, но немного доработок не помешало бы. Надеемся на улучшение сервиса в будущем.",
-    },
-  },
-  {
-    id: "h5i6j7k8-l9m0-n1o2-p3q4-r5s6t7u8v9w0",
-    createdDate: "07.07.2023",
-    platform: {
-      id: "x4y5z6a7-b8c9-d0e1-f2g3-h4i5j6k7l8m9",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      name: "AdFlex",
-    },
-    sender: {
-      id: "p3q4r5s6-t7u8-v9w0-x1y2-z3a4b5c6d7e8",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "ad.marketing.pro@example.com",
-      userId: "56473829",
-    },
-    review: {
-      rate: 4,
-      text: "Хороший опыт работы с этой площадкой! Поддержка на высоте, администратор быстро реагировал на все запросы. Публикация прошла успешно, аудитория оказалась активной и отзывчивой. Планируем продолжить сотрудничество для дальнейших кампаний.",
-    },
-  },
-  {
-    id: "j1k2l3m4-n5o6-p7q8-r9s0-t1u2v3w4x5y6",
-    createdDate: "14.08.2023",
-    closeDate: "15.03.2023",
-    platform: {
-      id: "y1z2a3b4-c5d6-e7f8-g9h0-i1j2k3l4m5n6",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      name: "Promo Digest",
-    },
-    sender: {
-      id: "o5p6q7r8-s9t0-u1v2-w3x4-y5z6a7b8c9d0",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "partner.promodigest@gmail.com",
-      userId: "18394756",
-    },
-    moderator: {
-      id: "v2w3x4y5-z6a7-b8c9-d0e1-f2g3h4i5j6k7",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      name: "Ирина Аллегрова",
-      userId: "45454545",
-    },
-    review: {
-      rate: 5,
-      text: "Отличная рекламная площадка! Все требования по оформлению поста были учтены. Администратор постоянно оставался на связи и помогал с оформлением. Рекламная кампания прошла успешно, получили большое количество новых клиентов. Рекомендуем!",
-    },
-  },
-  {
-    id: "a2b3c4d5-e6f7-g8h9-i0j1-k2l3m4n5o6p7",
-    createdDate: "03.09.2023",
-    platform: {
-      id: "n3o4p5q6-r7s8-t9u0-v1w2-x3y4z5a6b7c8",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      name: "Digital Talks",
-    },
-    sender: {
-      id: "l7m8n9o0-p1q2-r3s4-t5u6-v7w8x9y0z1a2",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "contact@digitaltalks.com",
-      userId: "74628193",
-    },
-    review: {
-      rate: 4,
-      text: "Всё прошло гладко, аудитория откликнулась положительно. Несколько раз корректировали текст, но администратор был терпелив и помогал. Будем рекомендовать этот канал.",
-    },
-  },
-  {
-    id: "p3q4r5s6-t7u8-v9w0-x1y2-z3a4b5c6d7e8",
-    createdDate: "27.10.2023",
-    platform: {
-      id: "y3z4a5b6-c7d8-e9f0-g1h2-i3j4k5l6m7n8",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      name: "Smart Market",
-    },
-    sender: {
-      id: "w1x2y3z4-a5b6-c7d8-e9f0-g1h2i3j4k5l6",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "promo@smartmarket.com",
-      userId: "92837465",
-    },
-    review: {
-      rate: 3,
-      text: "Неплохая платформа, но могли бы улучшить обратную связь. Публикация сработала, но без особых результатов. Возможно, воспользуемся снова, если будет лучшее обслуживание.",
-    },
-  },
-  {
-    id: "c8d9e0f1-g2h3-i4j5-k6l7-m8n9o0p1q2r3",
-    createdDate: "11.11.2023",
-    platform: {
-      id: "j5k6l7m8-n9o0-p1q2-r3s4-t5u6v7w8x9y0",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      name: "Trend Hub",
-    },
-    sender: {
-      id: "m2n3o4p5-q6r7-s8t9-u0v1-w2x3y4z5a6b7",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "trendhub.ads@gmail.com",
-      userId: "64738291",
-    },
-    review: {
-      rate: 5,
-      text: "Сработано на отлично! Креативность и профессионализм команды Trend Hub впечатлили. Аудитория заинтересованная, пост собрал множество откликов. Будем продолжать сотрудничество!",
-    },
-  },
-  {
-    id: "d4e5f6g7-h8i9-j0k1-l2m3-n4o5p6q7r8s9",
-    createdDate: "15.12.2023",
-    platform: {
-      id: "t6u7v8w9-x0y1-z2a3-b4c5-d6e7f8g9h0i1",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      name: "Biz Adverts",
-    },
-    sender: {
-      id: "r4s5t6u7-v8w9-x0y1-z2a3-b4c5d6e7f8g9",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "info@bizadverts.net",
-      userId: "94736218",
-    },
-    review: {
-      rate: 4,
-      text: "Рекламная кампания прошла успешно, площадка выполнила свои обязательства. Немного задержек с обратной связью, но конечный результат нас устроил. С удовольствием обратимся снова.",
-    },
-  },
-  {
-    id: "a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6",
-    createdDate: "04.01.2024",
-    closeDate: "15.03.2023",
-    platform: {
-      id: "h1i2j3k4-l5m6-n7o8-p9q0-r1s2t3u4v5w6",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      name: "Market Arena",
-    },
-    sender: {
-      id: "z0a1b2c3-d4e5-f6g7-h8i9-j0k1l2m3n4o5",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "ads@marketarena.com",
-      userId: "78293541",
-    },
-    moderator: {
-      id: "v2w3x4y5-z6a7-b8c9-d0e1-f2g3h4i5j6k7",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      name: "Ирина Аллегрова",
-      userId: "45454545",
-    },
-    review: {
-      rate: 5,
-      text: "Отличный сервис! Администратор на связи 24/7, отзывчивый и доброжелательный. Пост собрал много просмотров и привлечённой аудитории. Будем обращаться регулярно.",
-    },
-  },
-];
+// export const AdminReviews: IAdminReviewData[] = [
+//   {
+//     id: "d1f2g3h4-i5j6-k7l8-m9n0-o1p2q3r4s5t6",
+//     created: "15.03.2023",
+//     closeDate: "15.03.2023",
+//     channel: {
+//       id: "f6g7h8i9-j0k1-l2m3-n4o5-p6q7r8s9t0u1",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       name: "AdPlace",
+//     },
+//     sender: {
+//       id: "v2w3x4y5-z6a7-b8c9-d0e1-f2g3h4i5j6k7",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "marketing.solutions@gmail.com",
+//       userId: "83746215",
+//     },
+//     moderator: {
+//       id: "v2w3x4y5-z6a7-b8c9-d0e1-f2g3h4i5j6k7",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       name: "Ирина Аллегрова",
+//       userId: "45454545",
+//     },
+//     review: {
+//       rate: 5,
+//       text: "Очень довольны сотрудничеством. Публикация была размещена точно в оговоренное время, с текстом и оформлением, полностью соответствующими нашим ожиданиям. Владелец канала проявил профессиональный подход, оперативно отвечал на все вопросы и учел все пожелания. Рекламный пост вызвал живой интерес у подписчиков, и мы получили больше откликов, чем рассчитывали. Рекомендуем сотрудничество и планируем обращаться снова для будущих кампаний! Очень довольны сотрудничеством. Публикация была размещена точно в оговоренное время, с текстом и оформлением, полностью соответствующими нашим ожиданиям. Владелец канала проявил профессиональный подход, оперативно отвечал на все вопросы и учел все пожелания. Рекламный пост вызвал живой интерес у подписчиков, и мы получили больше откликов, чем рассчитывали. Рекомендуем сотрудничество и планируем обращаться снова для будущих кампаний!Очень довольны сотрудничеством. Публикация была размещена точно в оговоренное время, с текстом и оформлением, полностью соответствующими нашим ожиданиям. Владелец канала проявил профессиональный подход, оперативно отвечал на все вопросы и учел все пожелания. Рекламный пост вызвал живой интерес у подписчиков, и мы получили больше откликов, чем рассчитывали. Рекомендуем сотрудничество и планируем обращаться снова для будущих кампаний!Очень довольны сотрудничеством. Публикация была размещена точно в оговоренное время, с текстом и оформлением, полностью соответствующими нашим ожиданиям. Владелец канала проявил профессиональный подход, оперативно отвечал на все вопросы и учел все пожелания. Рекламный пост вызвал живой интерес у подписчиков, и мы получили больше откликов, чем рассчитывали. Рекомендуем сотрудничество и планируем обращаться снова для будущих кампаний!",
+//     },
+//   },
+//   {
+//     id: "e2f3g4h5-i6j7-k8l9-m0n1-o2p3q4r5s6t7",
+//     created: "10.04.2023",
+//     channel: {
+//       id: "u1v2w3x4-y5z6-a7b8-c9d0-e1f2g3h4i5j6",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       name: "PromoHub",
+//     },
+//     sender: {
+//       id: "g6h7i8j9-k0l1-m2n3-o4p5-q6r7s8t9u0v1",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "ads.agency@example.com",
+//       userId: "19283746",
+//     },
+//     review: {
+//       rate: 4,
+//       text: "Площадка оправдала ожидания, публикация прошла успешно, и мы наблюдали активное вовлечение аудитории. Несколько вопросов по технической части возникли, но администратор оперативно на них ответил. Рекламный пост привлек внимание целевой аудитории, и мы получили хорошую отдачу. Рекомендуем эту платформу для продвижения.",
+//     },
+//   },
+//   {
+//     id: "f3g4h5i6-j7k8-l9m0-n1o2-p3q4r5s6t7u8",
+//     created: "28.05.2023",
+//     channel: {
+//       id: "w2x3y4z5-a6b7-c8d9-e0f1-g2h3i4j5k6l7",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       name: "MediaMarket",
+//     },
+//     sender: {
+//       id: "i9j0k1l2-m3n4-o5p6-q7r8-s9t0u1v2w3x4",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "contact@mediacorp.com",
+//       userId: "28374659",
+//     },
+//     review: {
+//       rate: 5,
+//       text: "Отличная платформа для рекламного продвижения. Сотрудничество прошло на высшем уровне: всё организовано чётко, владелец канала на связи, публикации в срок, креативно и качественно. Аудитория проявила активный интерес к посту, что положительно отразилось на нашем бренде. Будем пользоваться услугами этой площадки снова!",
+//     },
+//   },
+//   {
+//     id: "g4h5i6j7-k8l9-m0n1-o2p3-q4r5s6t7u8v9",
+//     created: "12.06.2023",
+//     channel: {
+//       id: "v3w4x5y6-z7a8-b9c0-d1e2-f3g4h5i6j7k8",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       name: "AdExchange",
+//     },
+//     sender: {
+//       id: "o2p3q4r5-s6t7-u8v9-w0x1-y2z3a4b5c6d7",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "promotion.expert@gmail.com",
+//       userId: "73648219",
+//     },
+//     review: {
+//       rate: 3,
+//       text: "Площадка имеет хорошую базу пользователей, но некоторые моменты требуют улучшения. Публикация прошла успешно, но задержка по времени чуть помешала. В целом, аудитория откликнулась положительно, но немного доработок не помешало бы. Надеемся на улучшение сервиса в будущем.",
+//     },
+//   },
+//   {
+//     id: "h5i6j7k8-l9m0-n1o2-p3q4-r5s6t7u8v9w0",
+//     created: "07.07.2023",
+//     channel: {
+//       id: "x4y5z6a7-b8c9-d0e1-f2g3-h4i5j6k7l8m9",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       name: "AdFlex",
+//     },
+//     sender: {
+//       id: "p3q4r5s6-t7u8-v9w0-x1y2-z3a4b5c6d7e8",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "ad.marketing.pro@example.com",
+//       userId: "56473829",
+//     },
+//     review: {
+//       rate: 4,
+//       text: "Хороший опыт работы с этой площадкой! Поддержка на высоте, администратор быстро реагировал на все запросы. Публикация прошла успешно, аудитория оказалась активной и отзывчивой. Планируем продолжить сотрудничество для дальнейших кампаний.",
+//     },
+//   },
+//   {
+//     id: "j1k2l3m4-n5o6-p7q8-r9s0-t1u2v3w4x5y6",
+//     created: "14.08.2023",
+//     closeDate: "15.03.2023",
+//     channel: {
+//       id: "y1z2a3b4-c5d6-e7f8-g9h0-i1j2k3l4m5n6",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       name: "Promo Digest",
+//     },
+//     sender: {
+//       id: "o5p6q7r8-s9t0-u1v2-w3x4-y5z6a7b8c9d0",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "partner.promodigest@gmail.com",
+//       userId: "18394756",
+//     },
+//     moderator: {
+//       id: "v2w3x4y5-z6a7-b8c9-d0e1-f2g3h4i5j6k7",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       name: "Ирина Аллегрова",
+//       userId: "45454545",
+//     },
+//     review: {
+//       rate: 5,
+//       text: "Отличная рекламная площадка! Все требования по оформлению поста были учтены. Администратор постоянно оставался на связи и помогал с оформлением. Рекламная кампания прошла успешно, получили большое количество новых клиентов. Рекомендуем!",
+//     },
+//   },
+//   {
+//     id: "a2b3c4d5-e6f7-g8h9-i0j1-k2l3m4n5o6p7",
+//     created: "03.09.2023",
+//     channel: {
+//       id: "n3o4p5q6-r7s8-t9u0-v1w2-x3y4z5a6b7c8",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       name: "Digital Talks",
+//     },
+//     sender: {
+//       id: "l7m8n9o0-p1q2-r3s4-t5u6-v7w8x9y0z1a2",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "contact@digitaltalks.com",
+//       userId: "74628193",
+//     },
+//     review: {
+//       rate: 4,
+//       text: "Всё прошло гладко, аудитория откликнулась положительно. Несколько раз корректировали текст, но администратор был терпелив и помогал. Будем рекомендовать этот канал.",
+//     },
+//   },
+//   {
+//     id: "p3q4r5s6-t7u8-v9w0-x1y2-z3a4b5c6d7e8",
+//     created: "27.10.2023",
+//     channel: {
+//       id: "y3z4a5b6-c7d8-e9f0-g1h2-i3j4k5l6m7n8",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       name: "Smart Market",
+//     },
+//     sender: {
+//       id: "w1x2y3z4-a5b6-c7d8-e9f0-g1h2i3j4k5l6",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "promo@smartmarket.com",
+//       userId: "92837465",
+//     },
+//     review: {
+//       rate: 3,
+//       text: "Неплохая платформа, но могли бы улучшить обратную связь. Публикация сработала, но без особых результатов. Возможно, воспользуемся снова, если будет лучшее обслуживание.",
+//     },
+//   },
+//   {
+//     id: "c8d9e0f1-g2h3-i4j5-k6l7-m8n9o0p1q2r3",
+//     created: "11.11.2023",
+//     channel: {
+//       id: "j5k6l7m8-n9o0-p1q2-r3s4-t5u6v7w8x9y0",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       name: "Trend Hub",
+//     },
+//     sender: {
+//       id: "m2n3o4p5-q6r7-s8t9-u0v1-w2x3y4z5a6b7",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "trendhub.ads@gmail.com",
+//       userId: "64738291",
+//     },
+//     review: {
+//       rate: 5,
+//       text: "Сработано на отлично! Креативность и профессионализм команды Trend Hub впечатлили. Аудитория заинтересованная, пост собрал множество откликов. Будем продолжать сотрудничество!",
+//     },
+//   },
+//   {
+//     id: "d4e5f6g7-h8i9-j0k1-l2m3-n4o5p6q7r8s9",
+//     created: "15.12.2023",
+//     channel: {
+//       id: "t6u7v8w9-x0y1-z2a3-b4c5-d6e7f8g9h0i1",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       name: "Biz Adverts",
+//     },
+//     sender: {
+//       id: "r4s5t6u7-v8w9-x0y1-z2a3-b4c5d6e7f8g9",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "info@bizadverts.net",
+//       userId: "94736218",
+//     },
+//     review: {
+//       rate: 4,
+//       text: "Рекламная кампания прошла успешно, площадка выполнила свои обязательства. Немного задержек с обратной связью, но конечный результат нас устроил. С удовольствием обратимся снова.",
+//     },
+//   },
+//   {
+//     id: "a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6",
+//     created: "04.01.2024",
+//     closeDate: "15.03.2023",
+//     channel: {
+//       id: "h1i2j3k4-l5m6-n7o8-p9q0-r1s2t3u4v5w6",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       name: "Market Arena",
+//     },
+//     sender: {
+//       id: "z0a1b2c3-d4e5-f6g7-h8i9-j0k1l2m3n4o5",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "ads@marketarena.com",
+//       userId: "78293541",
+//     },
+//     moderator: {
+//       id: "v2w3x4y5-z6a7-b8c9-d0e1-f2g3h4i5j6k7",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       name: "Ирина Аллегрова",
+//       userId: "45454545",
+//     },
+//     review: {
+//       rate: 5,
+//       text: "Отличный сервис! Администратор на связи 24/7, отзывчивый и доброжелательный. Пост собрал много просмотров и привлечённой аудитории. Будем обращаться регулярно.",
+//     },
+//   },
+// ];
 
 // export const AdminComplaints: IAdminComplaintData[] = [
 //   {

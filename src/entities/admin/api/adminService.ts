@@ -1,4 +1,4 @@
-import { authApi } from "@shared/api";
+import { ADMIN_REVIEWS, authApi } from "@shared/api";
 import { adminComplaintTypesFilter, adminReviewTypesFilter } from "../config";
 import {
   IAdminChannelInfo,
@@ -10,6 +10,7 @@ import {
   IAdminTransactions,
   IAdminUsers,
 } from "../types";
+import { INTERSECTION_ELEMENTS } from "@shared/config";
 
 export interface getAdminUsersReq {
   elements_on_page: number;
@@ -74,6 +75,10 @@ export const adminAPI = authApi.injectEndpoints({
         return {
           ...response,
           order_complaint_status: arg?.order_complaint_status,
+          isLast:
+            response?.elements ===
+            response?.complaints?.length +
+              (response?.page - 1) * INTERSECTION_ELEMENTS.adminComplaints,
         };
       },
       merge: (currentCache, newItems, arg) => {
@@ -121,7 +126,14 @@ export const adminAPI = authApi.injectEndpoints({
         method: `GET`,
         params: params,
       }),
-      merge: (currentCache, newItems) => {
+      merge: (currentCache, newItems, arg) => {
+        if (arg.arg.page === 1) {
+          return {
+            ...newItems,
+            isLast: newItems?.transactions.length === newItems?.elements,
+          };
+        }
+
         const newTransactions = [
           ...currentCache?.transactions,
           ...newItems?.transactions,
@@ -153,7 +165,23 @@ export const adminAPI = authApi.injectEndpoints({
         method: `GET`,
         params: params,
       }),
-      merge: (currentCache, newItems) => {
+      transformResponse: (response: IAdminChannels) => {
+        return {
+          ...response,
+          isLast:
+            response?.elements ===
+            response?.channels?.length +
+              (response?.page - 1) * INTERSECTION_ELEMENTS.adminChannels,
+        };
+      },
+      merge: (currentCache, newItems, arg) => {
+        if (arg.arg.page === 1) {
+          return {
+            ...newItems,
+            isLast: newItems?.channels.length === newItems?.elements,
+          };
+        }
+
         const newChannels = [...currentCache?.channels, ...newItems?.channels];
         return {
           ...newItems,
@@ -180,7 +208,24 @@ export const adminAPI = authApi.injectEndpoints({
         method: `GET`,
         params: params,
       }),
-      merge: (currentCache, newItems) => {
+      transformResponse: (response: IAdminReviews, meta, arg) => {
+        return {
+          ...response,
+          status: arg?.status,
+          isLast:
+            response?.elements ===
+            response?.reviews?.length +
+              (response?.page - 1) * INTERSECTION_ELEMENTS.adminReviews,
+        };
+      },
+      merge: (currentCache, newItems, arg) => {
+        if (arg.arg.page === 1) {
+          return {
+            ...newItems,
+            isLast: newItems?.reviews.length === newItems?.elements,
+          };
+        }
+
         const newReviews = [...currentCache?.reviews, ...newItems?.reviews];
         return {
           ...newItems,
@@ -188,12 +233,30 @@ export const adminAPI = authApi.injectEndpoints({
           reviews: newReviews,
         };
       },
-      serializeQueryArgs: ({ endpointName }) => {
-        return endpointName;
+      serializeQueryArgs: ({ endpointName, queryArgs }) => {
+        const { status } = queryArgs
+        return `${endpointName}/${status}`;
       },
       forceRefetch({ currentArg, previousArg }) {
         return currentArg !== previousArg;
       },
+      providesTags: [ADMIN_REVIEWS]
+    }),
+    adminAcceptReview: build.mutation<{ success: boolean }, {id:string}>({
+      query: (body) => ({
+        url: `/adv-admin/accept/order-review`,
+        method: "POST",
+        params: body,
+      }),
+      invalidatesTags: [ADMIN_REVIEWS],
+    }),
+    adminRejectReview: build.mutation<{ success: boolean }, {id:string}>({
+      query: (body) => ({
+        url: `/adv-admin/reject/order-review`,
+        method: "POST",
+        params: body,
+      }),
+      invalidatesTags: [ADMIN_REVIEWS],
     }),
   }),
 });
@@ -207,4 +270,6 @@ export const {
   useGetAdminChannelsQuery,
   useGetAdminChannelInfoQuery,
   useGetAdminReviewsQuery,
+  useAdminAcceptReviewMutation,
+  useAdminRejectReviewMutation
 } = adminAPI;
