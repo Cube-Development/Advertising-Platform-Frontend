@@ -33,6 +33,6 @@ export const authApi = createApi({
     LEGALS,
     CHAT,
     ADMIN_REVIEWS,
-    ADMIN_COMPLAINTS
+    ADMIN_COMPLAINTS,
   ],
 });

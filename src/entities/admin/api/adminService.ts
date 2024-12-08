@@ -106,7 +106,7 @@ export const adminAPI = authApi.injectEndpoints({
       forceRefetch({ currentArg, previousArg }) {
         return currentArg !== previousArg;
       },
-      providesTags: [ADMIN_COMPLAINTS]
+      providesTags: [ADMIN_COMPLAINTS],
     }),
     getAdminOrderComplaintInfo: build.query<
       IAdminComplaintInfoData,
@@ -235,15 +235,15 @@ export const adminAPI = authApi.injectEndpoints({
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
-        const { status } = queryArgs
+        const { status } = queryArgs;
         return `${endpointName}/${status}`;
       },
       forceRefetch({ currentArg, previousArg }) {
         return currentArg !== previousArg;
       },
-      providesTags: [ADMIN_REVIEWS]
+      providesTags: [ADMIN_REVIEWS],
     }),
-    adminAcceptReview: build.mutation<{ success: boolean }, {id:string}>({
+    adminAcceptReview: build.mutation<{ success: boolean }, { id: string }>({
       query: (body) => ({
         url: `/adv-admin/accept/order-review`,
         method: "POST",
@@ -251,7 +251,7 @@ export const adminAPI = authApi.injectEndpoints({
       }),
       invalidatesTags: [ADMIN_REVIEWS],
     }),
-    adminRejectReview: build.mutation<{ success: boolean }, {id:string}>({
+    adminRejectReview: build.mutation<{ success: boolean }, { id: string }>({
       query: (body) => ({
         url: `/adv-admin/reject/order-review`,
         method: "POST",
@@ -259,7 +259,10 @@ export const adminAPI = authApi.injectEndpoints({
       }),
       invalidatesTags: [ADMIN_REVIEWS],
     }),
-    adminAcceptComplaint: build.mutation<{ success: boolean }, {complaint_id:string}>({
+    adminAcceptComplaint: build.mutation<
+      { success: boolean },
+      { complaint_id: string }
+    >({
       query: (body) => ({
         url: `/adv-admin/accept/order-complaint`,
         method: "POST",
@@ -267,7 +270,10 @@ export const adminAPI = authApi.injectEndpoints({
       }),
       invalidatesTags: [ADMIN_COMPLAINTS],
     }),
-    adminRejectComplaint: build.mutation<{ success: boolean }, {complaint_id:string}>({
+    adminRejectComplaint: build.mutation<
+      { success: boolean },
+      { complaint_id: string }
+    >({
       query: (body) => ({
         url: `/adv-admin/reject/order-complaint`,
         method: "POST",

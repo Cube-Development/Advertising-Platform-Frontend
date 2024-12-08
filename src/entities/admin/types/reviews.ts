@@ -3,7 +3,7 @@ import { adminReviewTypesFilter } from "../config";
 export interface IAdminReviews {
   page: number;
   elements: number;
-  status: adminReviewTypesFilter,
+  status: adminReviewTypesFilter;
   reviews: IAdminReviewData[];
   isLast?: boolean;
 }
@@ -32,4 +32,3 @@ interface IUser {
   name?: string;
   // userId: string;
 }
-
