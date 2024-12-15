@@ -26,6 +26,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      line-height: normal;
     }
   }
 }
@@ -119,6 +120,7 @@
       cursor: pointer;
       flex: 1; /* Равномерно распределить пространство между элементами */
       white-space: nowrap;
+      line-height: normal;
 
       @media (max-width: 576px) {
         padding: 15px 10px;

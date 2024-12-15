@@ -3,6 +3,10 @@
   color: #fff;
   width: 100%;
 
+  &.create_order_bg {
+    background: var(--Gradients-Gradient-9);
+  }
+
   > section {
     display: grid;
     grid-auto-flow: row;

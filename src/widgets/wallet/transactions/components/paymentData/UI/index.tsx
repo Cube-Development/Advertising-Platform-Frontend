@@ -19,6 +19,8 @@ import {
 } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { Link } from "react-router-dom";
+import { paths } from "@shared/routing";
 
 interface PaymentDataProps {
   amountTitle: string;
@@ -105,8 +107,12 @@ export const PaymentData: FC<PaymentDataProps> = ({
                   ? errors!["amount"].message
                   : t("wallet.topup.placeholder")
               }
-              value={price}
-              maxLength={10}
+              value={
+                price
+                  ? new Intl.NumberFormat("ru-RU").format(Number(price))
+                  : ""
+              }
+              maxLength={14}
               className={errors!["amount"] && styles.error}
             />
             <small>{t("symbol")}</small>
@@ -141,10 +147,15 @@ export const PaymentData: FC<PaymentDataProps> = ({
           onClick={() => handleChangeAccept(true, false)}
         />
         <p>
-          {`${t("wallet.accept.text1")} `}
-          <span>{`${t("wallet.accept.span1")} `}</span>
+          {t("wallet.accept.text1")}
+          <Link to={paths.serviceRules} target="_blank">
+            {" "}
+            {t("wallet.accept.span1")}{" "}
+          </Link>
           {`${t("wallet.accept.and")} `}
-          <span>{`${t("wallet.accept.span2")} `}</span>
+          <Link to={paths.publicOffer} target="_blank">
+            {t("wallet.accept.span2")}{" "}
+          </Link>
           {t("wallet.accept.text2")}
         </p>
       </div>

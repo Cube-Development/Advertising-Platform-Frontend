@@ -13,7 +13,7 @@ import {
 } from "@entities/project";
 import { usePaymentProjectMutation } from "@entities/wallet";
 import { Languages } from "@shared/config/languages";
-import { useAppSelector } from "@shared/hooks";
+import { useAppSelector, useWindowWidth } from "@shared/hooks";
 import { paths } from "@shared/routing";
 import { SpinnerLoader, useToast } from "@shared/ui";
 import Cookies from "js-cookie";
@@ -32,6 +32,7 @@ import {
 import { ICreateOrderBlur } from "../config";
 import { roles } from "@entities/user";
 import { getFileExtension } from "@shared/functions";
+import { BREAKPOINT } from "@shared/config";
 
 interface CreateOrderBlockProps {}
 
@@ -39,6 +40,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
   const { toast } = useToast();
   const { t, i18n } = useTranslation();
   const { isAuth, role } = useAppSelector((state) => state.user);
+  const screen = useWindowWidth();
 
   const [blur, setBlur] = useState<ICreateOrderBlur>({
     post: true,
@@ -53,18 +55,19 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
       case "post":
         scroller.scrollTo("post", {
           smooth: true,
-          offset: -70,
+          offset: screen > BREAKPOINT.MD ? -20 : -70,
         });
         break;
       case "datetime":
         scroller.scrollTo("datetime", {
           smooth: true,
-          offset: -80,
+          offset: screen > BREAKPOINT.MD ? -30 : -80,
         });
         break;
       case "payment":
         scroller.scrollTo("payment", {
           smooth: true,
+          offset: screen > BREAKPOINT.MD ? -20 : -60,
         });
         break;
       default:

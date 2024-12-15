@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { Loader, X } from "lucide-react";
@@ -18,6 +18,7 @@ import { IOrderFeature } from "@entities/project";
 import { usePublishPostBloggerMutation } from "@entities/offer";
 import { ArrowLongHorizontalIcon } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
+import { useWindowWidth } from "@shared/hooks";
 
 export const SendLink: FC<IOrderFeature> = ({ order_id }) => {
   const [url, setUrl] = useState("");
@@ -61,17 +62,7 @@ export const SendLink: FC<IOrderFeature> = ({ order_id }) => {
       });
   };
 
-  const [screen, setScreen] = useState<number>(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const screen = useWindowWidth();
 
   const [open, setOpen] = useState(false);
 
@@ -86,7 +77,7 @@ export const SendLink: FC<IOrderFeature> = ({ order_id }) => {
             </p>
           </DialogTrigger>
           <DialogContent>
-            <DialogTitle></DialogTitle>
+            <DialogTitle className="sr-only"></DialogTitle>
             <div className={styles.popover}>
               <div className="absolute -right-3 -top-3">
                 <DialogClose>
@@ -143,7 +134,7 @@ export const SendLink: FC<IOrderFeature> = ({ order_id }) => {
             </p>
           </DrawerTrigger>
           <DrawerContent className="mt-[20dvh] rounded-t-xl">
-            <DialogTitle></DialogTitle>
+            <DialogTitle className="sr-only"></DialogTitle>
             <div className={styles.drawer_popover}>
               <div className={styles.description}>
                 <h2 className={styles.description__title}>

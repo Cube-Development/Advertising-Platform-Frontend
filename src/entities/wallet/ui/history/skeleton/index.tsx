@@ -1,20 +1,11 @@
 import { BREAKPOINT } from "@shared/config";
 import { Skeleton } from "@shared/ui";
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import styles from "./styles.module.scss";
+import { useWindowWidth } from "@shared/hooks";
 
 export const SkeletonHistoryCard: FC = () => {
-  const [screen, setScreen] = useState<number>(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const screen = useWindowWidth();
 
   return (
     <>

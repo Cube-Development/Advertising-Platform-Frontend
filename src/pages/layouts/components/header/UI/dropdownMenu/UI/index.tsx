@@ -9,18 +9,12 @@ import {
   viewsTypes,
 } from "@entities/views";
 import { setDropDownMenu } from "@pages/layouts";
-import {
-  BREAKPOINT,
-  viewsAdvProjects,
-  viewsBloggerChannels,
-  viewsBloggerOffers,
-  viewsWalletTransactions,
-} from "@shared/config";
-import { useAppDispatch, useAppSelector } from "@shared/hooks";
+import { BREAKPOINT } from "@shared/config";
+import { useAppDispatch, useAppSelector, useWindowWidth } from "@shared/hooks";
 import { paths } from "@shared/routing";
 import { Accordion, ScrollArea } from "@shared/ui";
 import { AnimatePresence, motion } from "framer-motion";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import {
@@ -50,7 +44,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
 }) => {
   const { t } = useTranslation();
   const { dropdownMenu } = useAppSelector((state) => state.dropdownMenu);
-  const [screen, setScreen] = useState<number>(window.innerWidth);
+  const screen = useWindowWidth();
   const dispatch = useAppDispatch();
   const toggleMenu = (path?: string) => {
     const newMenu = { isOpen: !dropdownMenu.isOpen, title: "" };
@@ -130,18 +124,6 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
     transition: { transition: { duration: 0.2 } },
   };
 
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   return (
     <div className={styles.dropdown}>
       <button onClick={() => toggleMenu()} className={styles.burger__icon_btn}>
@@ -160,7 +142,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
           >
             <div className={styles.menu__content}>
               <div className={`${styles.menu__top}`}>
-                <p className={styles.logo}>Logo</p>
+                <p className={styles.logo}>Blogix</p>
                 <button onClick={() => toggleMenu()}>
                   <div className={styles.close__icon} />
                 </button>

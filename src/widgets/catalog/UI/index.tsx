@@ -20,7 +20,7 @@ import {
 } from "@entities/project";
 import { GenerateGuestId, roles } from "@entities/user";
 import { BREAKPOINT, INTERSECTION_ELEMENTS, Languages } from "@shared/config";
-import { useAppDispatch, useAppSelector } from "@shared/hooks";
+import { useAppDispatch, useAppSelector, useWindowWidth } from "@shared/hooks";
 import { ToastAction, useToast } from "@shared/ui";
 import Cookies from "js-cookie";
 import { FC, useEffect, useRef, useState } from "react";
@@ -35,7 +35,7 @@ export const CatalogBlock: FC = () => {
     return i18n.language === lang.name;
   });
   const { toast } = useToast();
-  const [screen, setScreen] = useState<number>(window.innerWidth);
+  const screen = useWindowWidth();
   const { isAuth, role } = useAppSelector((state) => state.user);
   const userId = Cookies.get("user_id");
   const guestId = Cookies.get("guest_id") || GenerateGuestId();
@@ -46,18 +46,6 @@ export const CatalogBlock: FC = () => {
   const [catalogFilter, setCatalogFilter] = useState<catalogBarFilter>(
     catalogBarFilter.parameters,
   );
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   const { watch, reset, setValue, getValues, resetField } =
     useForm<getCatalogReq>({

@@ -12,10 +12,11 @@ import {
   useToast,
 } from "@shared/ui";
 import { Loader, SendHorizonal, X } from "lucide-react";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { BREAKPOINT } from "@shared/config";
+import { useWindowWidth } from "@shared/hooks";
 
 export const RejectPost: FC<IOrderFeature> = ({ order_id }) => {
   const [comment, setComment] = useState("");
@@ -43,17 +44,7 @@ export const RejectPost: FC<IOrderFeature> = ({ order_id }) => {
         });
   };
 
-  const [screen, setScreen] = useState<number>(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const screen = useWindowWidth();
 
   const [open, setOpen] = useState(false);
 
@@ -67,7 +58,7 @@ export const RejectPost: FC<IOrderFeature> = ({ order_id }) => {
             </small>
           </DialogTrigger>
           <DialogContent>
-            <DialogTitle></DialogTitle>
+            <DialogTitle className="sr-only"></DialogTitle>
             <div className={styles.popover}>
               <div className="absolute -right-3 -top-3">
                 <DialogClose>
@@ -117,7 +108,7 @@ export const RejectPost: FC<IOrderFeature> = ({ order_id }) => {
             </small>
           </DrawerTrigger>
           <DrawerContent className="mt-[20dvh] rounded-t-xl">
-            <DialogTitle></DialogTitle>
+            <DialogTitle className="sr-only"></DialogTitle>
             <div className={styles.drawer_popover}>
               <div className={styles.description}>
                 <h2 className={styles.description__title}>

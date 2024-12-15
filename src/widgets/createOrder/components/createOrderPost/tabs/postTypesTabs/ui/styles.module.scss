@@ -34,6 +34,7 @@
       /* Включаем поддержку для Firefox */
       background-clip: text;
       color: transparent;
+      line-height: normal;
 
       &::after {
         content: "";
@@ -53,6 +54,7 @@
       /* Включаем поддержку для Firefox */
       background-clip: text;
       color: transparent;
+      line-height: normal;
     }
   }
 }

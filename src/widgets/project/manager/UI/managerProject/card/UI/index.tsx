@@ -49,6 +49,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./styles.module.scss";
+import { useWindowWidth } from "@shared/hooks";
 
 interface ManagerProjectCardProps {
   card: IManagerProjectCard;
@@ -206,7 +207,7 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
   statusFilter,
 }) => {
   const [isSubcardOpen, setSubcardOpen] = useState(false);
-  const [screen, setScreen] = useState<number>(window.innerWidth);
+  const screen = useWindowWidth();
   const { t, i18n } = useTranslation();
   const language = Languages.find((lang) => {
     return i18n.language === lang.name;
@@ -245,24 +246,6 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  // const handleSlideChange = () => {
-  //   if (swiperRef.current && !isLoading) {
-  //     const indexTo = swiperRef.current.realIndex === 0 ? 1 : 0;
-  //     swiperRef.current.slideTo(indexTo, 500);
-  //     handleChangeOpenSubcard();
-  //   }
-  // };
 
   useEffect(() => {
     if (statusFilter && swiperRef.current) {

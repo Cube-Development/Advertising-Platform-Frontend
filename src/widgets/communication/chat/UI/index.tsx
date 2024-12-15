@@ -28,7 +28,7 @@ import {
   PAGE_ANIMATION,
 } from "@shared/config";
 import { checkDatetime, convertUTCToLocalDateTime } from "@shared/functions";
-import { useAppDispatch, useAppSelector } from "@shared/hooks";
+import { useAppDispatch, useAppSelector, useWindowWidth } from "@shared/hooks";
 import { pageFilter } from "@shared/routing";
 import {
   AlertDialog,
@@ -63,7 +63,7 @@ export const Chat: FC<IChatProps> = ({
   const { OrderMessageNewChat, OrderReadMessage } = useCentrifuge();
   const dispatch = useAppDispatch();
   const { role } = useAppSelector((state) => state.user);
-  const [screen, setScreen] = useState<number>(window.innerWidth);
+  const screen = useWindowWidth();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [currentChat, setCurrentChat] = useState<IChatData | null>(null);
   const [chatFilter, setChatFilter] = useState<chatTypesFilter>(
@@ -102,16 +102,6 @@ export const Chat: FC<IChatProps> = ({
       0,
     ) || 0;
   const haveNewMessage = !!(countOrderMessage + countProjectMessage);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   const handleChangeChat = (card: IChatData) => {
     setCurrentChat(
@@ -426,7 +416,7 @@ export const Chat: FC<IChatProps> = ({
             )}
           </DrawerTrigger>
           <DrawerContent>
-            <DialogTitle></DialogTitle>
+            <DialogTitle className="sr-only"></DialogTitle>
             <div className={`${styles.content} ${styles.drawer}`}>
               <div
                 className={`${styles.content__left} ${role !== roles.blogger ? styles.gridA : styles.gridB}`}

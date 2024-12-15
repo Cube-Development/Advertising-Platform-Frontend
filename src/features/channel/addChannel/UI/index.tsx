@@ -45,7 +45,7 @@ export const AddChannel: FC<IAddChannelQuery> = ({ props, path, orange }) => {
             </MyButton>
           </DialogTrigger>
           <DialogContent className={`${styles.content} gap-[0px]`}>
-            <DialogTitle></DialogTitle>
+            <DialogTitle className="sr-only"></DialogTitle>
             <DialogClose>
               <p className={styles.close}>
                 <CircleX
