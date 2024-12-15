@@ -13,6 +13,7 @@ interface ComplaintsListProps {
   isLoading: boolean;
   isFetching: boolean;
   handleChange: () => void;
+  status: adminComplaintTypesFilter;
 }
 
 export const ComplaintsList: FC<ComplaintsListProps> = ({
@@ -20,6 +21,7 @@ export const ComplaintsList: FC<ComplaintsListProps> = ({
   isLoading,
   isFetching,
   handleChange,
+  status,
 }) => {
   const { t } = useTranslation();
   return (
@@ -51,7 +53,7 @@ export const ComplaintsList: FC<ComplaintsListProps> = ({
               custom={index % INTERSECTION_ELEMENTS.adminComplaints}
               variants={PAGE_ANIMATION.animationUp}
             >
-              <ComplaintCard card={card} />
+              <ComplaintCard card={card} status={status} />
             </motion.div>
           ))}
           {(isFetching || isLoading) &&

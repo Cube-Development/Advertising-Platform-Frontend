@@ -1,6 +1,7 @@
 import { authBaseQuery } from "@entities/user";
 import { createApi } from "@reduxjs/toolkit/query/react";
 import {
+  ADMIN_CHANNELS,
   ADMIN_COMPLAINTS,
   ADMIN_REVIEWS,
   ADV_PROJECTS,
@@ -34,5 +35,6 @@ export const authApi = createApi({
     CHAT,
     ADMIN_REVIEWS,
     ADMIN_COMPLAINTS,
+    ADMIN_CHANNELS,
   ],
 });

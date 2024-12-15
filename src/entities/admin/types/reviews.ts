@@ -11,7 +11,7 @@ export interface IAdminReviews {
 export interface IAdminReviewData {
   id: string;
   created: string;
-  closeDate?: string;
+  completed?: string;
   channel: IChannel;
   sender: IUser;
   moderator?: IUser;

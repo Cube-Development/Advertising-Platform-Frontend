@@ -19,9 +19,10 @@ import {
   BanChannel,
   ChannelCardMenu,
   RejectChannel,
+  UnbanChannel,
   UpdateChannel,
 } from "@features/adminPanel";
-import { SelectOptions, SelectSex } from "@features/other";
+import { SelectDescription, SelectOptions, SelectSex } from "@features/other";
 import { ArrowSmallVerticalIcon } from "@shared/assets";
 import { Languages } from "@shared/config";
 import {
@@ -245,12 +246,14 @@ export const ChannelCard: FC<ChannelCardProps> = ({
                 </div>
               </div>
             </div>
-            <div className={styles.description}>
-              <p>{t("admin_panel.channels.card.description")}</p>
-              <div>
-                <span>{channel?.description}</span>
-              </div>
-            </div>
+            <SelectDescription
+              onChange={setValue}
+              type={channelParameterData.description}
+              title={"add_platform.description.description.title"}
+              text={"add_platform.description.description.text"}
+              placeholder={"add_platform.description.description.default_value"}
+              defaultValues={channel?.description}
+            />
             <div className={styles.parameters}>
               <div className={styles.block}>
                 <SelectOptions
@@ -258,7 +261,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({
                   options={categories?.contents || []}
                   single={true}
                   type={channelParameterData.category}
-                  textData={"catalog.category"}
+                  textData={"add_platform.description.category"}
                   isRow={true}
                   isCatalog={true}
                   defaultValues={
@@ -275,7 +278,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({
                   options={ages?.contents || []}
                   single={false}
                   type={channelParameterData.age}
-                  textData={"catalog.age"}
+                  textData={"add_platform.description.age"}
                   isRow={true}
                   isCatalog={true}
                   defaultValues={formFields.age}
@@ -289,7 +292,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({
                   options={languages?.contents || []}
                   single={false}
                   type={channelParameterData.language}
-                  textData={"catalog.languages"}
+                  textData={"add_platform.description.languages"}
                   isRow={true}
                   isCatalog={true}
                   defaultValues={formFields.language}
@@ -302,7 +305,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({
                   options={regions?.contents || []}
                   single={false}
                   type={channelParameterData.region}
-                  textData={"catalog.region"}
+                  textData={"add_platform.description.region"}
                   isRow={true}
                   isCatalog={true}
                   defaultValues={formFields.region}
@@ -312,7 +315,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({
                 <SelectSex
                   onChange={setValue}
                   getValues={getValues}
-                  title={"catalog.sex.title"}
+                  title={"add_platform.description.sex.title"}
                   isRow={true}
                   isCatalog={true}
                   defaultValues={formFields.male}
@@ -332,8 +335,8 @@ export const ChannelCard: FC<ChannelCardProps> = ({
                 </>
               ) : card?.status === channelStatus.banned ? (
                 <>
-                  <RejectChannel id={card?.channel?.id} />
-                  <AcceptChannel id={card?.channel?.id} />
+                  <UnbanChannel id={card?.channel?.id} />
+                  <UpdateChannel id={card?.channel?.id} disabled={true} />
                 </>
               ) : card?.status === channelStatus.inactive ? (
                 <>

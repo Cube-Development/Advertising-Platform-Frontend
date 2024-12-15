@@ -226,35 +226,6 @@
       }
     }
 
-    .description {
-      display: grid;
-      grid-auto-flow: row;
-      row-gap: 5px;
-
-      p {
-        color: rgba(0, 0, 0, 0.5);
-        text-align: left;
-        font-size: 14px;
-        font-style: normal;
-        font-weight: 500;
-        line-height: 1;
-      }
-
-      div {
-        padding: 10px 15px;
-        border-radius: 10px;
-        border: 1px solid var(--color-blacks-b-20, rgba(0, 0, 0, 0.2));
-
-        span {
-          color: var(--Personal-colors-black, #000);
-          font-size: 12px;
-          font-style: normal;
-          font-weight: 500;
-          line-height: normal;
-        }
-      }
-    }
-
     .buttons {
       display: grid;
       grid-template-columns: repeat(2, 1fr);

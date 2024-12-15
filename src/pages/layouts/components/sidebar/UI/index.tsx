@@ -2,6 +2,7 @@ import { IMenuItem } from "@entities/admin";
 import { DEBOUNCE } from "@entities/project";
 import {
   roles,
+  rolesTypes,
   toggleRole as toggleroleAction,
   useUpdateRoleMutation,
 } from "@entities/user";
@@ -119,13 +120,14 @@ export const Sidebar: FC = () => {
                   );
                 }}
               >
-                {role === roles.advertiser
+                {/* {role === roles.advertiser
                   ? t("roles.advertiser")[0]
                   : role === roles.blogger
                     ? t("roles.blogger")[0]
                     : role === roles.manager
                       ? t("roles.manager")[0]
-                      : t("roles.administrator")[0]}
+                      : t("roles.administrator")[0]} */}
+                {t(rolesTypes.find((el) => el.type === role)?.name || "")[0]}
               </p>
             </Link>
           </div>

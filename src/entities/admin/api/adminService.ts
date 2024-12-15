@@ -1,4 +1,9 @@
-import { ADMIN_COMPLAINTS, ADMIN_REVIEWS, authApi } from "@shared/api";
+import {
+  ADMIN_CHANNELS,
+  ADMIN_COMPLAINTS,
+  ADMIN_REVIEWS,
+  authApi,
+} from "@shared/api";
 import { adminComplaintTypesFilter, adminReviewTypesFilter } from "../config";
 import {
   IAdminChannelInfo,
@@ -37,6 +42,28 @@ export interface getAdminReviewsReq {
   page: number;
   status: adminReviewTypesFilter;
   elements_on_page: number;
+}
+
+export interface adminRejectChannelReq {
+  channel_id: string;
+  reason: string;
+  finish_date: string;
+}
+
+export interface adminBanChannelReq {
+  channel_id: string;
+  reason: string;
+  finish_date: string;
+}
+
+export interface adminAcceptComplaintReq {
+  order_id: string;
+  reason: string;
+}
+
+export interface adminRejectComplaintReq {
+  order_id: string;
+  reason: string;
 }
 
 export const adminAPI = authApi.injectEndpoints({
@@ -196,12 +223,51 @@ export const adminAPI = authApi.injectEndpoints({
       forceRefetch({ currentArg, previousArg }) {
         return currentArg !== previousArg;
       },
+      providesTags: [ADMIN_CHANNELS],
     }),
     getAdminChannelInfo: build.query<IAdminChannelInfo, { id: string }>({
       query: (params) => ({
         url: `/adv-admin/channels/${params.id}`,
         method: `GET`,
       }),
+    }),
+    adminChannelAccept: build.mutation<
+      { success: string },
+      { channel_id: string }
+    >({
+      query: (params) => ({
+        url: `/channel/moderation/accept/${params.channel_id}`,
+        method: `POST`,
+      }),
+      invalidatesTags: [ADMIN_CHANNELS],
+    }),
+    adminChannelReject: build.mutation<
+      { success: string },
+      adminRejectChannelReq
+    >({
+      query: (params) => ({
+        url: `/channel/moderation/accept/${params.channel_id}`,
+        method: `POST`,
+      }),
+      invalidatesTags: [ADMIN_CHANNELS],
+    }),
+    adminChannelUnban: build.mutation<
+      { success: string },
+      { channel_id: string }
+    >({
+      query: (params) => ({
+        url: `/channel/moderation/unban/${params.channel_id}`,
+        method: `POST`,
+      }),
+      invalidatesTags: [ADMIN_CHANNELS],
+    }),
+    adminChannelBan: build.mutation<{ success: string }, adminBanChannelReq>({
+      query: (params) => ({
+        url: `/channel/moderation/ban`,
+        method: `POST`,
+        body: params,
+      }),
+      invalidatesTags: [ADMIN_CHANNELS],
     }),
     getAdminReviews: build.query<IAdminReviews, getAdminReviewsReq>({
       query: (params) => ({
@@ -254,12 +320,12 @@ export const adminAPI = authApi.injectEndpoints({
     adminRejectReview: build.mutation<{ success: boolean }, { id: string }>({
       query: (body) => ({
         url: `/adv-admin/reject/order-review`,
-        method: "POST",
+        method: "DELETE",
         params: body,
       }),
       invalidatesTags: [ADMIN_REVIEWS],
     }),
-    adminAcceptComplaint: build.mutation<
+    adminChooseComplaint: build.mutation<
       { success: boolean },
       { complaint_id: string }
     >({
@@ -270,13 +336,24 @@ export const adminAPI = authApi.injectEndpoints({
       }),
       invalidatesTags: [ADMIN_COMPLAINTS],
     }),
-    adminRejectComplaint: build.mutation<
+    adminAcceptComplaint: build.mutation<
       { success: boolean },
-      { complaint_id: string }
+      adminAcceptComplaintReq
     >({
       query: (body) => ({
-        url: `/adv-admin/reject/order-complaint`,
-        method: "POST",
+        url: `/order/moderation/accept`,
+        method: "PUT",
+        params: body,
+      }),
+      invalidatesTags: [ADMIN_COMPLAINTS],
+    }),
+    adminRejectComplaint: build.mutation<
+      { success: boolean },
+      adminRejectComplaintReq
+    >({
+      query: (body) => ({
+        url: `/order/moderation/reject`,
+        method: "PUT",
         params: body,
       }),
       invalidatesTags: [ADMIN_COMPLAINTS],
@@ -292,9 +369,14 @@ export const {
   useGetAdminTransactionInfoQuery,
   useGetAdminChannelsQuery,
   useGetAdminChannelInfoQuery,
+  useAdminChannelAcceptMutation,
+  useAdminChannelRejectMutation,
+  useAdminChannelBanMutation,
+  useAdminChannelUnbanMutation,
   useGetAdminReviewsQuery,
   useAdminAcceptReviewMutation,
   useAdminRejectReviewMutation,
+  useAdminChooseComplaintMutation,
   useAdminAcceptComplaintMutation,
   useAdminRejectComplaintMutation,
 } = adminAPI;

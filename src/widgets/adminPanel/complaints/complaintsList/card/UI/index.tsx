@@ -1,8 +1,10 @@
 import {
   adminComplaintPriorityStatus,
+  adminComplaintTypesFilter,
   complaintPriority,
   IAdminComplaintData,
 } from "@entities/admin";
+import { ChooseComplaint, SeeComplaint } from "@features/adminPanel";
 import { ArrowLongHorizontalIcon } from "@shared/assets";
 import { paths } from "@shared/routing";
 import { useToast } from "@shared/ui";
@@ -14,9 +16,10 @@ import noUserAvatar from "/images/notFound/noUserAvatar.jpg";
 
 interface ComplaintCardProps {
   card: IAdminComplaintData;
+  status: adminComplaintTypesFilter;
 }
 
-export const ComplaintCard: FC<ComplaintCardProps> = ({ card }) => {
+export const ComplaintCard: FC<ComplaintCardProps> = ({ card, status }) => {
   const { t } = useTranslation();
   const { toast } = useToast();
 
@@ -79,12 +82,16 @@ export const ComplaintCard: FC<ComplaintCardProps> = ({ card }) => {
             )}
           </p>
         </div>
-        <Link
-          to={`${paths.adminComplaintInfo.replace(":id", card?.id)}`}
-          className={styles.arrow}
-        >
-          <ArrowLongHorizontalIcon className="icon__grey" />
-        </Link>
+        {status === adminComplaintTypesFilter.wait ? (
+          <SeeComplaint id={card?.id} ChooseBtn={ChooseComplaint} />
+        ) : (
+          <Link
+            to={`${paths.adminComplaintInfo.replace(":id", card?.id)}`}
+            className={styles.arrow}
+          >
+            <ArrowLongHorizontalIcon className="icon__grey" />
+          </Link>
+        )}
       </div>
     </div>
   );
