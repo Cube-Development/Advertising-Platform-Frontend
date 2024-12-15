@@ -1,6 +1,6 @@
 import { ILegalCard, ILegalCardShort, LegalCard } from "@entities/wallet";
 import { BREAKPOINT } from "@shared/config";
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import SwiperCore from "swiper";
 import "swiper/css";
@@ -9,6 +9,7 @@ import "swiper/css/navigation";
 import { EffectCoverflow, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./styles.module.scss";
+import { useWindowWidth } from "@shared/hooks";
 
 interface LegalsListProps {
   accounts: ILegalCardShort[] | undefined;
@@ -31,17 +32,7 @@ export const LegalsList: FC<LegalsListProps> = ({
 }) => {
   const { t } = useTranslation();
   const swiperRef = useRef<SwiperCore | null>(null);
-  const [screen, setScreen] = useState<number>(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const screen = useWindowWidth();
 
   const handleChangeStepSwiper = (account: ILegalCardShort, index: number) => {
     changeActiveAccount(account);
@@ -64,7 +55,10 @@ export const LegalsList: FC<LegalsListProps> = ({
               !readLegalsError ? (
                 <>
                   {accounts?.map((account, index) => (
-                    <div onClick={(e) => changeActiveAccount(account)}>
+                    <div
+                      onClick={() => changeActiveAccount(account)}
+                      key={index}
+                    >
                       <LegalCard
                         account={account}
                         key={index}
@@ -107,7 +101,7 @@ export const LegalsList: FC<LegalsListProps> = ({
                 {accounts?.map((account, index) => (
                   <SwiperSlide
                     key={index}
-                    onClick={(e) => handleChangeStepSwiper(account, index)}
+                    onClick={() => handleChangeStepSwiper(account, index)}
                   >
                     <LegalCard
                       account={account}

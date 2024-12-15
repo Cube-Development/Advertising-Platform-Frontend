@@ -7,12 +7,12 @@ import {
 import { CreatePost as CreatePostBtn } from "@features/cart";
 import { ProtectIcon3 } from "@shared/assets";
 import { BREAKPOINT, Languages, PAGE_ANIMATION } from "@shared/config";
-import { useAppSelector } from "@shared/hooks";
+import { useAppSelector, useWindowWidth } from "@shared/hooks";
 import { paths } from "@shared/routing";
 import { ToastAction, useToast } from "@shared/ui";
 import { motion } from "framer-motion";
 import Cookies from "js-cookie";
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.scss";
@@ -28,7 +28,7 @@ export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
   const language = Languages.find((lang) => {
     return i18n.language === lang.name;
   });
-  const [screen, setScreen] = useState<number>(window.innerWidth);
+  const screen = useWindowWidth();
   const { isAuth, role } = useAppSelector((state) => state.user);
   const navigate = useNavigate();
   const [createCart] = useCreateCartMutation();
@@ -76,16 +76,6 @@ export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
       });
     }
   };
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   return (
     <motion.div

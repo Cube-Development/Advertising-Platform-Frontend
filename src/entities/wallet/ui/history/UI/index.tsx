@@ -1,9 +1,10 @@
 import { IWalletHistory } from "@entities/wallet";
 import { MoreIcon } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { useWindowWidth } from "@shared/hooks";
 
 interface HistoryCardProps {
   card: IWalletHistory;
@@ -11,17 +12,7 @@ interface HistoryCardProps {
 
 export const HistoryCard: FC<HistoryCardProps> = ({ card }) => {
   const { t } = useTranslation();
-  const [screen, setScreen] = useState<number>(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const screen = useWindowWidth();
 
   return (
     <>

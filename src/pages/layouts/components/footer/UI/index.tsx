@@ -2,20 +2,26 @@ import { FC } from "react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
 import { navItems } from "../config/nav-items";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import {
   LineInstagramIcon,
   LineTelegramIcon,
   LocationIcon,
 } from "@shared/assets";
+import { paths } from "@shared/routing";
 
 export const Footer: FC = () => {
   const { t } = useTranslation();
+  const pathname = useLocation();
+  const isCreateOrderPage = pathname.pathname === paths.createOrder || false;
+  console.log(isCreateOrderPage);
   return (
-    <footer className={styles.wrapper}>
+    <footer
+      className={`${styles.wrapper} ${isCreateOrderPage && styles.create_order_bg}`}
+    >
       <section className="container">
         <div className={styles.results__wrapper}>
-          <div className={styles.logo}>Logo</div>
+          <div className={styles.logo}>Blogix</div>
           <div className={styles.results}>
             <div className={styles.results__item}>
               <h4>101.043</h4>

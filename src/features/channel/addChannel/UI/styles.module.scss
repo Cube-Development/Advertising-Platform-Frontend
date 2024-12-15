@@ -112,6 +112,7 @@
     cursor: pointer;
     border: 1.5px solid var(--Personal-colors-main);
     border-radius: 12px;
+    line-height: normal;
 
     @media (max-width: 640px) {
       text-align: center;

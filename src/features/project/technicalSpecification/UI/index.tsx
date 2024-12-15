@@ -28,6 +28,7 @@ import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { contentTypeToExtension } from "@shared/types";
+import { useWindowWidth } from "@shared/hooks";
 
 interface TechnicalSpecificationProps {
   isFull?: boolean;
@@ -41,22 +42,12 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
   SendToBotBtn,
 }) => {
   const { t } = useTranslation();
-  const [screen, setScreen] = useState<number>(window.innerWidth);
+  const screen = useWindowWidth();
   const [allFiles, setAllFiles] = useState<IDownloadFileType[]>(
     card.files || [],
   );
 
   const { toast } = useToast();
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   useEffect(() => {
     const fetchFileMetadata = async () => {
@@ -218,7 +209,7 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
               )}
             </DrawerTrigger>
             <DrawerContent className="h-full">
-              <DialogTitle></DialogTitle>
+              <DialogTitle className="sr-only"></DialogTitle>
               <div className={styles.content__wrapper}>
                 <div className={styles.top}>
                   <p>{t("orders_manager.card.technical_specificationIcon")}</p>

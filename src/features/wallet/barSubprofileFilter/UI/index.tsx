@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import {
@@ -7,6 +7,7 @@ import {
   subprofileTypes,
 } from "@entities/wallet";
 import { BREAKPOINT } from "@shared/config";
+import { useWindowWidth } from "@shared/hooks";
 
 interface ISubFilterOption {
   type: subprofileFilterTypes;
@@ -39,19 +40,7 @@ export const BarSubrofileFilter: FC<BarSubrofileFilterProps> = ({
     changeSubprofile(newSubprofile);
     resetActiveAccount && resetActiveAccount(null);
   };
-  const [screen, setScreen] = useState<number>(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const screen = useWindowWidth();
 
   return (
     <>

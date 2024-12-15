@@ -1,10 +1,11 @@
 import { PAGE_ANIMATION } from "@shared/config/animation";
 import { motion } from "framer-motion";
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { Registration } from "@features/other";
 import { BREAKPOINT } from "@shared/config";
+import { useWindowWidth } from "@shared/hooks";
 
 interface HowItWorksProps {
   page: string;
@@ -67,19 +68,7 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
     returnObjects: true,
   });
 
-  const [screen, setScreen] = useState<number>(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const screen = useWindowWidth();
 
   let custom = 0;
 

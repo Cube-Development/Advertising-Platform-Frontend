@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
@@ -41,6 +41,7 @@ import {
 } from "@shared/ui";
 import { PostIcon } from "@shared/assets";
 import { X } from "lucide-react";
+import { useWindowWidth } from "@shared/hooks";
 
 interface CreateOrderPostProps {
   cards: IPostChannel[];
@@ -125,17 +126,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
     );
   };
 
-  const [screen, setScreen] = useState<number>(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const screen = useWindowWidth();
 
   return (
     <div id="post" className={`container ${isBlur ? "blur" : ""}`}>

@@ -21,7 +21,7 @@ import {
 } from "@shared/config";
 import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
 import { motion } from "framer-motion";
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import {
   UseFormGetValues,
   UseFormReset,
@@ -32,6 +32,7 @@ import { useTranslation } from "react-i18next";
 import { ParametersFilter } from "../parametersFilter";
 import styles from "./styles.module.scss";
 import { SadSmileIcon } from "@shared/assets";
+import { useWindowWidth } from "@shared/hooks";
 
 interface CatalogListProps {
   channels: ICatalogChannel[];
@@ -60,21 +61,11 @@ export const CatalogList: FC<CatalogListProps> = ({
   changeCatalogFilter,
 }) => {
   const { t } = useTranslation();
-  const [screen, setScreen] = useState<number>(window.innerWidth);
+  const screen = useWindowWidth();
 
   const handleOnChangePage = () => {
     setValue(channelParameterData.page, page + 1);
   };
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   return (
     <div className={styles.wrapper}>

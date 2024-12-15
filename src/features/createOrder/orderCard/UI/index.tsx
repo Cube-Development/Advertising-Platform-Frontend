@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import styles from "./styles.module.scss";
 import { PostIcon2 } from "@shared/assets";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
@@ -30,6 +30,7 @@ import {
 import { EmptyPost } from "@entities/platform/ui/displays/displayInstagram/feed/emptyPost";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { useWindowWidth } from "@shared/hooks";
 
 interface PostPlatformProps {
   card: IPostChannel;
@@ -94,17 +95,7 @@ export const OrderCard: FC<PostPlatformProps> = ({
     setValue(CreatePostFormData.datetime, datetime);
   };
 
-  const [screen, setScreen] = useState<number>(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const screen = useWindowWidth();
 
   return (
     <div className={styles.wrapper}>

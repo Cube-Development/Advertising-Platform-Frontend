@@ -82,7 +82,7 @@
       font-size: 24px;
       font-style: normal;
       font-weight: 600;
-      line-height: 1;
+      line-height: normal;
 
       @media (max-width: 576px) {
         font-size: 20px;
@@ -142,6 +142,49 @@
     grid-auto-flow: row;
     row-gap: 40px;
     padding: 20px 25px;
+  }
+
+  .tarif {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    gap: 10px;
+    padding-top: 20px;
+
+    &__name {
+      font-weight: 600;
+      text-transform: uppercase;
+      color: black;
+      font-size: 20px;
+      line-height: 1;
+
+      @media (max-width: 576px) {
+        font-size: 16px;
+      }
+    }
+
+    &__views {
+      font-weight: 500;
+      color: #a3a0a0;
+      font-size: 16px;
+      line-height: 1;
+
+      @media (max-width: 576px) {
+        font-size: 12px;
+      }
+    }
+
+    &__price {
+      font-weight: 500;
+      color: black;
+      font-size: 16px;
+      line-height: 1;
+
+      @media (max-width: 576px) {
+        font-size: 12px;
+      }
+    }
   }
 
   &__block {
@@ -573,6 +616,7 @@
       color: transparent;
       font-weight: 500;
       text-align: center;
+      line-height: normal;
 
       @media (max-width: 992px) {
         font-size: var(--font-size-text-accent-lg);

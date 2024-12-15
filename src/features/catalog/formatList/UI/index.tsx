@@ -3,6 +3,7 @@ import styles from "./styles.module.scss";
 import { ArrowSmallVerticalIcon } from "@shared/assets";
 import { IFormat, IFormatListProps } from "@entities/project";
 import { BREAKPOINT } from "@shared/config";
+import { useWindowWidth } from "@shared/hooks";
 
 export const FormatList: FC<IFormatListProps> = ({
   changeFormat,
@@ -12,17 +13,8 @@ export const FormatList: FC<IFormatListProps> = ({
   isBig,
 }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
-  const [screen, setScreen] = useState<number>(window.innerWidth);
+  const screen = useWindowWidth();
 
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
   const menuRef = useRef<HTMLDivElement>(null);
 
   const closeMenu = () => {

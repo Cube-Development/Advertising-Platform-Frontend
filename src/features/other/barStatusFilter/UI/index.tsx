@@ -6,12 +6,13 @@ import {
   myProjectStatusFilter,
 } from "@entities/project";
 import { BREAKPOINT } from "@shared/config";
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import SwiperCore from "swiper";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./styles.module.scss";
+import { useWindowWidth } from "@shared/hooks";
 
 interface IProjectType {
   id?: number;
@@ -56,17 +57,7 @@ export const BarStatusFilter: FC<BarStatusFilterProps> = ({
     changeStatus(status);
   };
   const swiperRef = useRef<SwiperCore | null>(null);
-  const [screen, setScreen] = useState<number>(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const screen = useWindowWidth();
 
   const handleChangeStepSwiper = (
     type:

@@ -21,11 +21,12 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@shared/ui";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { Link } from "react-router-dom";
 import { ChannelCardDescription, ChannelCardMatch } from "../components";
+import { useWindowWidth } from "@shared/hooks";
 
 interface CatalogCardProps extends IChangeCards, ICatalogCard {
   card: ICatalogChannel;
@@ -46,22 +47,12 @@ export const CatalogCard: FC<CatalogCardProps> = ({
       )!
     : card.format[0];
   const [selectedFormat, setSelectedFormat] = useState<IFormat>(startFormat);
-  const [screen, setScreen] = useState<number>(window.innerWidth);
+  const screen = useWindowWidth();
   const [isSubcardOpen, setSubcardOpen] = useState(false);
 
   const handleChangeOpenSubcard = (): void => {
     setSubcardOpen(!isSubcardOpen);
   };
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   const handleChangeFormat = (selectedValue: IFormat) => {
     setSelectedFormat(selectedValue);

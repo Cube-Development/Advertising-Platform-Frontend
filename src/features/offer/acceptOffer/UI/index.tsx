@@ -11,13 +11,14 @@ import {
   ToastAction,
   useToast,
 } from "@shared/ui";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { Loader, SendHorizonal, X } from "lucide-react";
 import { IOrderFeature } from "@entities/project";
 import { useAcceptOfferMutation } from "@entities/offer";
 import { BREAKPOINT } from "@shared/config";
+import { useWindowWidth } from "@shared/hooks";
 
 // создаю массив дат из date_from до date_to
 function getDatesInRange(dates?: {
@@ -79,17 +80,7 @@ export const AcceptOffer: FC<IOrderFeature> = ({ order_id, dates }) => {
       });
   };
 
-  const [screen, setScreen] = useState<number>(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const screen = useWindowWidth();
 
   const [open, setOpen] = useState(false);
 
@@ -103,7 +94,7 @@ export const AcceptOffer: FC<IOrderFeature> = ({ order_id, dates }) => {
                 <p className={styles.button}>{t(`offer_btn.accept`)}</p>
               </DialogTrigger>
               <DialogContent>
-                <DialogTitle></DialogTitle>
+                <DialogTitle className="sr-only"></DialogTitle>
                 <div className={styles.popover}>
                   <div className="absolute -right-3 -top-3">
                     <DialogClose>
@@ -148,7 +139,7 @@ export const AcceptOffer: FC<IOrderFeature> = ({ order_id, dates }) => {
                 <p className={styles.button}>{t(`offer_btn.accept`)}</p>
               </DrawerTrigger>
               <DrawerContent className="mt-[20dvh] rounded-t-xl">
-                <DialogTitle></DialogTitle>
+                <DialogTitle className="sr-only"></DialogTitle>
                 <div className={styles.drawer_popover}>
                   <h2 className={styles.description__title}>
                     {t(`offer_btn.accept_title`)}

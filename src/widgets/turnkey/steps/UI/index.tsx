@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
 import { IStep } from "@shared/types/translate";
@@ -15,6 +15,7 @@ import {
 } from "@shared/assets";
 import { MyButton } from "@shared/ui";
 import { BREAKPOINT } from "@shared/config";
+import { useWindowWidth } from "@shared/hooks";
 
 interface DecorativeElementProps {
   elements: number;
@@ -34,7 +35,7 @@ const DecorativeElement: FC<DecorativeElementProps> = ({ elements }) => {
 
 export const Steps: FC = () => {
   const { t } = useTranslation();
-  const [screen, setScreen] = useState<number>(window.innerWidth);
+  const screen = useWindowWidth();
   const stepOne: IStep[] = t("turnkey.how_it_works.step_1.text", {
     returnObjects: true,
   });
@@ -62,16 +63,6 @@ export const Steps: FC = () => {
     <HandshakeIcon />,
     <GraphCheckmarkIcon />,
   ];
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   return (
     <section className="layout">
