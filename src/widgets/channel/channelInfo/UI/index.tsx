@@ -23,7 +23,7 @@ import {
 } from "@entities/project";
 import { GenerateGuestId, roles } from "@entities/user";
 import { BREAKPOINT, Languages, PAGE_ANIMATION } from "@shared/config";
-import { useAppDispatch, useAppSelector } from "@shared/hooks";
+import { useAppDispatch, useAppSelector, useWindowWidth } from "@shared/hooks";
 import { ToastAction, useToast } from "@shared/ui";
 import { motion } from "framer-motion";
 import Cookies from "js-cookie";
@@ -50,10 +50,10 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
   const language = Languages.find((lang) => {
     return i18n.language === lang.name;
   });
-  const [screen, setScreen] = useState<number>(window.innerWidth);
+  const screen = useWindowWidth();
   const { isAuth, role } = useAppSelector((state) => state.user);
 
-  const { watch, reset, setValue, getValues } = useForm<getRecommendChannels>({
+  const { watch } = useForm<getRecommendChannels>({
     defaultValues: {
       language: language?.id || Languages[0].id,
       channels: [channel_id],
@@ -314,7 +314,7 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
         if (!isAuth && guestId) {
           removeFromPublicCart({ ...removeReq, guest_id: guestId })
             .unwrap()
-            .then((data) => {
+            .then(() => {
               currentCard.id === channel.id && setChannel(newCard);
             })
             .catch((error) => {
@@ -328,7 +328,7 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
         } else if (isAuth && role === roles.advertiser) {
           removeFromCommonCart(removeReq)
             .unwrap()
-            .then((data) => {
+            .then(() => {
               currentCard.id === channel.id && setChannel(newCard);
             })
             .catch((error) => {
@@ -342,7 +342,7 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
         } else if (isAuth && role === roles.manager && projectId) {
           removeFromManagerCart({ ...removeReq, project_id: projectId })
             .unwrap()
-            .then((data) => {
+            .then(() => {
               currentCard.id === channel.id && setChannel(newCard);
             })
             .catch((error) => {
@@ -362,7 +362,7 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
         if (!isAuth && guestId) {
           addToPublicCart({ ...addReq, guest_id: guestId })
             .unwrap()
-            .then((data) => {
+            .then(() => {
               currentCard.id === channel.id && setChannel(newCard);
             })
             .catch((error) => {
@@ -376,7 +376,7 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
         } else if (isAuth && role === roles.advertiser) {
           addToCommonCart(addReq)
             .unwrap()
-            .then((data) => {
+            .then(() => {
               currentCard.id === channel.id && setChannel(newCard);
             })
             .catch((error) => {
@@ -390,7 +390,7 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
         } else if (isAuth && role === roles.manager && projectId) {
           addToManagerCart({ ...addReq, project_id: projectId })
             .unwrap()
-            .then((data) => {
+            .then(() => {
               currentCard.id === channel.id && setChannel(newCard);
             })
             .catch((error) => {
@@ -431,16 +431,6 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
       }
     }
   }, [card]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   let custom = 0;
   return (

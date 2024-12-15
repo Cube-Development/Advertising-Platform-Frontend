@@ -3,9 +3,10 @@ import { IAdvManagerProjectsDevCard } from "@entities/project";
 import { roles } from "@entities/user";
 import { MoreIcon } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { useWindowWidth } from "@shared/hooks";
 
 interface AdvDevProjectCardProps {
   card: IAdvManagerProjectsDevCard;
@@ -17,17 +18,7 @@ export const AdvDevProjectCard: FC<AdvDevProjectCardProps> = ({
   ChatBtn,
 }) => {
   const { t } = useTranslation();
-  const [screen, setScreen] = useState<number>(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const screen = useWindowWidth();
 
   return (
     <div className={`${styles.card} border__gradient`}>

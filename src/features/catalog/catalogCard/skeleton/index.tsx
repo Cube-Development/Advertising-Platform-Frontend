@@ -1,22 +1,13 @@
 import { BREAKPOINT } from "@shared/config/common";
 import { Skeleton } from "@shared/ui";
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import styles from "./styles.module.scss";
+import { useWindowWidth } from "@shared/hooks";
 
 interface SkeletonCatalogCardProps {}
 
 export const SkeletonCatalogCard: FC<SkeletonCatalogCardProps> = () => {
-  const [screen, setScreen] = useState<number>(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const screen = useWindowWidth();
 
   return (
     <Skeleton className="bg-skeleton-light rounded-[15px]">

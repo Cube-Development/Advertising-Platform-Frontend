@@ -54,6 +54,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import styles from "./styles.module.scss";
 import recomAnimation from "/animated/recom_lottie.gif";
+import { useWindowWidth } from "@shared/hooks";
 
 interface ParametersFilterProps {
   setValue: UseFormSetValue<getCatalogReq>;
@@ -74,22 +75,12 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
   const language = Languages.find((lang) => {
     return i18n.language === lang.name;
   });
-  const [screen, setScreen] = useState<number>(window.innerWidth);
+  const screen = useWindowWidth();
   const [recommendationCard, setRecCard] = useState<IFilterSearch | null>(null);
   const [recommendationCards, setRecCards] = useState<IFilterSearch[] | null>(
     null,
   );
   const accordionRefs = useRef<Array<HTMLDivElement | null>>([]);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   const contentRes = {
     language: language?.id || Languages[0].id,
@@ -281,7 +272,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
         </div>
       </DrawerTrigger>
       <DrawerContent className={styles.parameters}>
-        <DialogTitle></DialogTitle>
+        <DialogTitle className="sr-only"></DialogTitle>
         <div className={styles.top}>
           <p className={`gradient_color ${styles.title}`}>
             {t("catalog.search.parameters")}

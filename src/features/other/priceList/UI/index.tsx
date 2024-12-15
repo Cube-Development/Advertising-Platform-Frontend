@@ -1,8 +1,7 @@
 import { TarifParameters } from "@entities/project";
 import { BREAKPOINT } from "@shared/config";
-import { pageFilter } from "@shared/routing";
 import { ITarifInfo } from "@shared/types";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import SwiperCore from "swiper";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -11,6 +10,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import { BuyTarif } from "../buyTarif";
 import { PriceCard } from "../card";
 import styles from "./styles.module.scss";
+import { useWindowWidth } from "@shared/hooks";
 
 // Инициализация эффектов Swiper
 SwiperCore.use([EffectCoverflow]);
@@ -21,30 +21,9 @@ interface PriceListProps {
 
 export const PriceList: FC<PriceListProps> = ({ tarifs }) => {
   const [currentTarif, setTarif] = useState<number | null>(null);
-  const [screen, setScreen] = useState<number>(window.innerWidth);
-  // const [isOpenBuySidebar, setOpenBuySidebar] = useState<boolean>(false);
-
-  // const handleChangeTarif = (tarifType: number) => {
-  //   setTarif(tarifType);
-  // };
-  // const handleToggleBuySidebar = (tarif: number | null, toggle: boolean) => {
-  //   setTarif(tarif);
-  //   setOpenBuySidebar(toggle);
-  // };
+  const screen = useWindowWidth();
 
   const duplicateTarifs = tarifs.concat(tarifs);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   return (
     <>
@@ -67,7 +46,7 @@ export const PriceList: FC<PriceListProps> = ({ tarifs }) => {
               <div key={index} className={styles.slide}>
                 <PriceCard
                   tarifInfo={tarifInfo}
-                  BuyBtn={<BuyTarif tarif={tarifIndex} />}
+                  BuyBtn={<BuyTarif tarif={tarifIndex} tarifInfo={tarifInfo} />}
                   isActive={tarifIndex === currentTarif}
                 />
               </div>
@@ -119,7 +98,9 @@ export const PriceList: FC<PriceListProps> = ({ tarifs }) => {
                 <SwiperSlide key={index} className="slide__price">
                   <PriceCard
                     tarifInfo={tarifInfo}
-                    BuyBtn={<BuyTarif tarif={tarifIndex} />}
+                    BuyBtn={
+                      <BuyTarif tarif={tarifIndex} tarifInfo={tarifInfo} />
+                    }
                     isActive={tarifIndex === currentTarif}
                   />
                 </SwiperSlide>

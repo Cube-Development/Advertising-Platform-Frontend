@@ -17,10 +17,11 @@ import { Languages } from "@shared/config/languages";
 import { IOption } from "@shared/types";
 import { MyButton, useToast } from "@shared/ui";
 import { motion } from "framer-motion";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { useWindowWidth } from "@shared/hooks";
 
 interface ChannelDescriptionProps {
   step: number;
@@ -51,7 +52,7 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
     return i18n.language === lang.name;
   });
 
-  const [screen, setScreen] = useState<number>(window.innerWidth);
+  const screen = useWindowWidth();
   const [cat, setCat] = useState<IOption | undefined>(undefined);
   const contentRes = {
     language: language?.id || Languages[0].id,
@@ -67,16 +68,6 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
   const handleBack = () => {
     onChangeStep(1);
   };
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   const onSubmit = () => {
     if (

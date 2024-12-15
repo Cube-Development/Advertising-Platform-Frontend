@@ -27,9 +27,10 @@ import {
   AccordionTrigger,
   useToast,
 } from "@shared/ui";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { useWindowWidth } from "@shared/hooks";
 
 interface AdvSubcardProps {
   subcard: IAdvProjectSubcard;
@@ -58,27 +59,9 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
 }) => {
   const { t } = useTranslation();
   const { toast } = useToast();
-  const [screen, setScreen] = useState<number>(window.innerWidth);
+  const screen = useWindowWidth();
   const [isSubcardOpen, setSubcardOpen] = useState(false);
   const { data: post, error } = useGetPostQuery({ order_id: subcard.id });
-  // const post = {
-  //   id: "string",
-  //   platform: 1,
-  //   comment: "string",
-  //   photo: ["ff"],
-  //   video: ["ff"],
-  //   files: ["ff"],
-  //   buttons: [
-  //     {
-  //       id: "string",
-  //       content: "string",
-  //       url: "string",
-  //     },
-  //   ],
-  //   text: ["dd"],
-  //   post_type: 1,
-  // };
-  // const error = 5
   if (error) {
     toast({
       variant: "error",
@@ -86,16 +69,6 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
     });
     console.error("error: ", error);
   }
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   const handleChangeOpenSubcard = (): void => {
     setSubcardOpen(!isSubcardOpen);

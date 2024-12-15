@@ -15,14 +15,15 @@ import {
 } from "@shared/config";
 import { ShowMoreBtn, SpinnerLoaderSmall } from "@shared/ui";
 import { motion } from "framer-motion";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { useWindowWidth } from "@shared/hooks";
 
 export const History: FC = () => {
   const { t, i18n } = useTranslation();
   const language = Languages.find((lang) => lang.name === i18n.language);
-  const [screen, setScreen] = useState<number>(window.innerWidth);
+  const screen = useWindowWidth();
   const [currentPage, setCurrentPage] = useState(1);
 
   const getParams: HistoryReq = {
@@ -38,16 +39,8 @@ export const History: FC = () => {
     setCurrentPage((prevPage) => prevPage + 1);
   };
 
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
   let custom = 0;
+
   return (
     <div className={`container ${screen > BREAKPOINT.LG ? "sidebar" : ""}`}>
       <div className={styles.wrapper}>

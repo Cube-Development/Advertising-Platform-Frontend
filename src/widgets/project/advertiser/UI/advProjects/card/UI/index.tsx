@@ -45,6 +45,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./styles.module.scss";
+import { useWindowWidth } from "@shared/hooks";
 
 interface AdvProjectCardProps {
   card: IAdvProjectCard;
@@ -242,7 +243,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
   typeFilter,
 }) => {
   const [isSubcardOpen, setSubcardOpen] = useState(false);
-  const [screen, setScreen] = useState<number>(window.innerWidth);
+  const screen = useWindowWidth();
   const swiperRef = useRef<SwiperCore | null>(null);
   const { t, i18n } = useTranslation();
   const language = Languages.find((lang) => {
@@ -286,16 +287,6 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
     document.addEventListener("click", handleClickOutside);
     return () => {
       document.removeEventListener("click", handleClickOutside);
-    };
-  }, []);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
     };
   }, []);
 

@@ -16,9 +16,10 @@ import {
   MyButton,
 } from "@shared/ui";
 import { X } from "lucide-react";
-import { FC, useEffect, useState } from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { useWindowWidth } from "@shared/hooks";
 
 interface SeePostProps {
   post: GetPostRes;
@@ -26,18 +27,7 @@ interface SeePostProps {
 
 export const SeePost: FC<SeePostProps> = ({ post }) => {
   const { t } = useTranslation();
-
-  const [screen, setScreen] = useState<number>(window.innerWidth);
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  const screen = useWindowWidth();
 
   return (
     <AlertDialog>

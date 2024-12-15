@@ -22,7 +22,7 @@ import {
   INTERSECTION_ELEMENTS,
   PAGE_ANIMATION,
 } from "@shared/config";
-import { useAppDispatch } from "@shared/hooks";
+import { useAppDispatch, useWindowWidth } from "@shared/hooks";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -36,7 +36,7 @@ import {
   DrawerTrigger,
 } from "@shared/ui";
 import { AnimatePresence, motion } from "framer-motion";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -61,7 +61,7 @@ export const Notifications: FC = () => {
   const [readNotification] = useReadNotificationMutation();
   const [currentNotification, setCurrentNotification] =
     useState<INotificationCard | null>(null);
-  const [screen, setScreen] = useState<number>(window.innerWidth);
+  const screen = useWindowWidth();
 
   const handleChangeNotification = (card: INotificationCard) => {
     setCurrentNotification(card);
@@ -106,16 +106,6 @@ export const Notifications: FC = () => {
         });
     }
   };
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   return (
     <div className={styles.wrapper}>

@@ -6,7 +6,7 @@ import {
 } from "@entities/user";
 import { authApi, baseApi } from "@shared/api";
 import { BREAKPOINT } from "@shared/config";
-import { useAppDispatch, useAppSelector } from "@shared/hooks";
+import { useAppDispatch, useAppSelector, useWindowWidth } from "@shared/hooks";
 import { Chat, Notifications } from "@widgets/communication";
 import { FC, useEffect, useState } from "react";
 import { DropdownMenu } from "./dropdownMenu";
@@ -19,7 +19,7 @@ import styles from "./styles.module.scss";
 import { Wallet } from "./wallet";
 
 export const Header: FC = () => {
-  const [screen, setScreen] = useState<number>(window.innerWidth);
+  const screen = useWindowWidth();
   const [isScrollingUp, setIsScrollingUp] = useState(true); // Отслеживание направления скролла
   const [lastScrollY, setLastScrollY] = useState(0); // Последняя позиция скролла
   const { isAuth, role } = useAppSelector((state) => state.user);
@@ -41,18 +41,6 @@ export const Header: FC = () => {
       }
     }
   };
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   useEffect(() => {
     const handleScroll = () => {

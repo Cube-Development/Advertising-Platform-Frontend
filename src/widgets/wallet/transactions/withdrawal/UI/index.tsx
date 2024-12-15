@@ -18,18 +18,19 @@ import { ArrowIcon5 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
 import { pageFilter, paths } from "@shared/routing";
 import { ToastAction, useToast } from "@shared/ui";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Guide, LegalsList, PaymentData } from "../../components";
 import styles from "./styles.module.scss";
 import { useNavigate } from "react-router-dom";
+import { useWindowWidth } from "@shared/hooks";
 
 export const Withdrawal: FC = () => {
   const { toast } = useToast();
   const { t } = useTranslation();
   const [activeAccount, setActiveAccount] = useState<ILegalCard | null>(null);
-  const [screen, setScreen] = useState<number>(window.innerWidth);
+  const screen = useWindowWidth();
   const navigate = useNavigate();
 
   const {
@@ -259,16 +260,6 @@ export const Withdrawal: FC = () => {
         }
       });
   };
-
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-    window.addEventListener("resize", handleResize);
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
 
   return (
     <div className="container">

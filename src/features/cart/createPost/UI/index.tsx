@@ -44,7 +44,7 @@ export const CreatePost: FC<CreatePostProps> = ({ onClick }) => {
             </MyButton>
           </DialogTrigger>
           <DialogContent className={`${styles.content} gap-[0px]`}>
-            <DialogTitle></DialogTitle>
+            <DialogTitle className="sr-only"></DialogTitle>
             <DialogClose>
               <p className={styles.close}>
                 <CircleX

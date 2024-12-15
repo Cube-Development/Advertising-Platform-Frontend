@@ -46,6 +46,7 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
+      line-height: normal;
     }
   }
 }
@@ -114,6 +115,7 @@
     cursor: pointer;
     border: 1.5px solid var(--Personal-colors-main);
     border-radius: 12px;
+    line-height: normal;
 
     @media (max-width: 640px) {
       text-align: center;

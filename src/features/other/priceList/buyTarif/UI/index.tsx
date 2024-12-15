@@ -18,7 +18,7 @@ import {
 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
 import { getFileExtension } from "@shared/functions";
-import { useAppSelector } from "@shared/hooks";
+import { useAppSelector, useWindowWidth } from "@shared/hooks";
 import { paths } from "@shared/routing";
 import {
   Dialog,
@@ -42,15 +42,17 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
+import { ITarifInfo } from "@shared/types";
 
 interface BuyTarifProps {
   tarif: number;
+  tarifInfo: ITarifInfo;
 }
 
-export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
+export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
   const { t } = useTranslation();
   const { isAuth } = useAppSelector((state) => state.user);
-  const [screen, setScreen] = useState<number>(window.innerWidth);
+  const screen = useWindowWidth();
   const { toast } = useToast();
   const [buyTarif] = usePostBuyTarifMutation();
   // const menuRef = useRef<HTMLDivElement>(null);
@@ -165,27 +167,13 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
     }
   };
 
-  useEffect(() => {
-    const handleResize = () => {
-      setScreen(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
   const uploadFilesAndMedia = async (files: File[]) => {
-    console.log(files);
     await Promise.all(
       files.map(async (file) => {
         const data = await getUploadLink({
           extension: getFileExtension(file),
           content_type: ContentType.file,
         }).unwrap();
-        console.log("data", data, file);
         await fetch(data?.url, {
           method: "PUT",
           body: file,
@@ -209,7 +197,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
           <DrawerContent
             className={`${styles.menu} ${screen > BREAKPOINT.XL && "max-w-[40vw] ml-auto"}`}
           >
-            <DialogTitle></DialogTitle>
+            <DialogTitle className="sr-only"></DialogTitle>
             {!isTarifBought && isHaveBalance ? (
               <>
                 <div className={styles.menu__top}>
@@ -223,6 +211,11 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
                 <div
                   className={`${styles.menu__content} h-[calc(100dvh_-_85.5px_-_65px)] overflow-auto`}
                 >
+                  <div className={styles.tarif}>
+                    <p className={styles.tarif__name}>{tarifInfo.name}</p>
+                    <p className={styles.tarif__views}>{tarifInfo.views}</p>
+                    <p className={styles.tarif__price}>{tarifInfo.price}</p>
+                  </div>
                   <div className={styles.menu__block}>
                     <div className={styles.text}>
                       <p>{t("turnkey.chain.have_balance.comment.title")}</p>
@@ -461,7 +454,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
             <button className={styles.button}>{t(`buy`)}</button>
           </DialogTrigger>
           <DialogContent className={`${styles.content} gap-[0px]`}>
-            <DialogTitle></DialogTitle>
+            <DialogTitle className="sr-only"></DialogTitle>
             <DialogClose>
               <p className={styles.close}>
                 <CircleX
@@ -558,7 +551,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
 // export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
 //   const { t } = useTranslation();
 //   const { isAuth } = useAppSelector((state) => state.user);
-//   const [screen, setScreen] = useState<number>(window.innerWidth);
+//   const screen = useWindowWidth();
 //   const { toast } = useToast();
 //   const [buyTarif] = usePostBuyTarifMutation();
 //   const menuRef = useRef<HTMLDivElement>(null);
@@ -702,18 +695,6 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
 //   const handleButtonClick = () => {
 //     setIsOpen(!isOpen);
 //   };
-
-//   useEffect(() => {
-//     const handleResize = () => {
-//       setScreen(window.innerWidth);
-//     };
-
-//     window.addEventListener("resize", handleResize);
-
-//     return () => {
-//       window.removeEventListener("resize", handleResize);
-//     };
-//   }, []);
 
 //   const uploadFilesAndMedia = async (files: File[]) => {
 //     console.log(files);
@@ -1352,7 +1333,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif }) => {
 //             <button className={styles.button}>{t(`buy`)}</button>
 //           </DialogTrigger>
 //           <DialogContent className={`${styles.content} gap-[0px]`}>
-//            <DialogTitle></DialogTitle>
+//            <DialogTitle className="sr-only"></DialogTitle>
 //             <DialogClose>
 //               <p className={styles.close}>
 //                 <CircleX
