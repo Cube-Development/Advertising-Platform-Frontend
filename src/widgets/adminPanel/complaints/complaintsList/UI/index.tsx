@@ -26,7 +26,9 @@ export const ComplaintsList: FC<ComplaintsListProps> = ({
   const { t } = useTranslation();
   return (
     <div className={styles.wrapper}>
-      <div className={styles.bar}>
+      <div
+        className={`${styles.bar}  ${status === adminComplaintTypesFilter.wait ? styles.wait : status === adminComplaintTypesFilter.active ? styles.active : styles.completed}`}
+      >
         <div className={styles.column}>
           <p className="truncate">{t("admin_panel.complaints.bar.id")}</p>
         </div>
@@ -37,11 +39,29 @@ export const ComplaintsList: FC<ComplaintsListProps> = ({
           <p className="truncate">{t("admin_panel.complaints.bar.sender")}</p>
         </div>
         <div className={styles.column}>
-          <p className="truncate">{t("admin_panel.complaints.bar.date")}</p>
+          <p className="truncate">{t("admin_panel.complaints.bar.created")}</p>
         </div>
-        <div className={styles.column}>
-          <p className="truncate">{t("admin_panel.complaints.bar.priority")}</p>
-        </div>
+        {status === adminComplaintTypesFilter.wait && (
+          <div className={styles.column}>
+            <p className="truncate">
+              {t("admin_panel.complaints.bar.priority")}
+            </p>
+          </div>
+        )}
+        {status === adminComplaintTypesFilter.complete && (
+          <div className={styles.column}>
+            <p className="truncate">
+              {t("admin_panel.complaints.bar.completed")}
+            </p>
+          </div>
+        )}
+        {status !== adminComplaintTypesFilter.wait && (
+          <div className={styles.column}>
+            <p className="truncate">
+              {t("admin_panel.complaints.bar.moderator")}
+            </p>
+          </div>
+        )}
       </div>
       {data?.complaints?.length ? (
         <div className={styles.cards}>

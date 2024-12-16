@@ -12,12 +12,15 @@ export interface IAdminComplaintData {
   id: string;
   theme: string;
   sender: IUser;
+  moderator: IUser;
   created: string;
+  completed: string;
   priority: complaintPriority;
 }
 
 interface IUser {
   avatar: string;
   email: string;
+  name: string;
   id: string;
 }
