@@ -62,6 +62,7 @@ export const Complaints: FC = () => {
                 data) ||
               undefined
             }
+            status={formFields.order_complaint_status}
             isLoading={isLoading}
             isFetching={isFetching}
             handleChange={handleOnChangePage}

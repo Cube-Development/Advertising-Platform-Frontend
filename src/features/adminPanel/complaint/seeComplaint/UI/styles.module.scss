@@ -1,0 +1,58 @@
+.trigger {
+  width: 60px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.03);
+  padding: 10px 20px;
+}
+
+.content {
+  display: grid;
+  grid-auto-flow: row;
+  width: 50vw;
+
+  .top {
+    padding: 30px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+
+    .close {
+      display: grid;
+      position: absolute;
+      top: 0px;
+      right: 0;
+
+      button {
+        padding: 15px;
+      }
+    }
+  }
+
+  .bottom {
+    padding: 25px 30px;
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 25px;
+
+    .text__wrapper {
+      display: grid;
+      grid-auto-flow: row;
+      row-gap: 15px;
+
+      p {
+        color: rgba(0, 0, 0, 0.7);
+        font-size: 24px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        text-align: center;
+      }
+
+      span {
+        color: rgba(0, 0, 0, 0.7);
+        font-size: 20;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+      }
+    }
+  }
+}

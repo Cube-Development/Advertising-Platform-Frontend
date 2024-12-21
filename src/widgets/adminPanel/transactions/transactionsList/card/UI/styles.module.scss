@@ -79,6 +79,22 @@
         border-radius: 10px;
         background: rgba(0, 0, 0, 0.03);
         padding: 8px;
+
+        .loader {
+          display: grid;
+          align-content: center;
+          justify-content: center;
+
+          span {
+            width: 15px;
+            height: 15px;
+
+            &::after {
+              width: 15px;
+              height: 15px;
+            }
+          }
+        }
       }
     }
   }

@@ -23,22 +23,22 @@ export const ReviewCard: FC<ReviewCardProps> = ({ card }) => {
 
   return (
     <div
-      className={`${styles.wrapper} ${!!card?.closeDate ? styles.accept : styles.wait}`}
+      className={`${styles.wrapper} ${!!card?.completed ? styles.accept : styles.wait}`}
     >
       <div className={styles.id} onClick={() => handleCopyLink(card?.id)}>
         <p className="truncate">{card?.id}</p>
       </div>
       <div className={styles.platform}>
         <div className={styles.logo}>
-          <img src={card?.platform?.avatar} alt="" />
+          <img src={card?.channel?.avatar} alt="" />
         </div>
         <div className={styles.info}>
-          <p className="truncate">{card?.platform?.name}</p>
+          <p className="truncate">{card?.channel?.name}</p>
           <span
-            onClick={() => handleCopyLink(card?.platform?.id)}
+            onClick={() => handleCopyLink(card?.channel?.id)}
             className="truncate"
           >
-            # {card?.platform?.id}
+            # {card?.channel?.id}
           </span>
         </div>
       </div>
@@ -54,14 +54,14 @@ export const ReviewCard: FC<ReviewCardProps> = ({ card }) => {
             {card?.sender?.email}
           </p>
           <span
-            onClick={() => handleCopyLink(card?.sender?.userId)}
+            onClick={() => handleCopyLink(card?.sender?.id)}
             className="truncate"
           >
-            # {card?.sender?.userId}
+            # {card?.sender?.id}
           </span>
         </div>
       </div>
-      {!!card?.closeDate && (
+      {!!card?.completed && (
         <div className={styles.user}>
           <div className={styles.logo}>
             <img src={card?.moderator?.avatar} alt="" />
@@ -69,20 +69,20 @@ export const ReviewCard: FC<ReviewCardProps> = ({ card }) => {
           <div className={styles.info}>
             <p className="truncate">{card?.moderator?.name}</p>
             <span
-              onClick={() => handleCopyLink(card?.moderator?.userId)}
+              onClick={() => handleCopyLink(card?.moderator?.id)}
               className="truncate"
             >
-              # {card?.moderator?.userId}
+              # {card?.moderator?.id}
             </span>
           </div>
         </div>
       )}
       <div className={styles.date}>
-        <p>{card?.createdDate}</p>
+        <p>{card?.created}</p>
       </div>
-      {!!card?.closeDate && (
+      {!!card?.completed && (
         <div className={styles.date}>
-          <p>{card?.closeDate}</p>
+          <p>{card?.completed}</p>
         </div>
       )}
       <div className={styles.last}>

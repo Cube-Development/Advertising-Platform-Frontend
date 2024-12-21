@@ -12,7 +12,7 @@ import { ChannelCard, SkeletonAdminChannelCard } from "../card";
 import styles from "./styles.module.scss";
 
 interface ChannelsListProps {
-  data: IAdminChannels;
+  data?: IAdminChannels;
   isLoading: boolean;
   isFetching: boolean;
   handleChange: () => void;
@@ -76,7 +76,7 @@ export const ChannelsList: FC<ChannelsListProps> = ({
           <div className={styles.cards}>
             {data?.channels.map((card, index) => (
               <motion.div
-                key={card.id + index}
+                key={card?.channel?.id}
                 initial="hidden"
                 animate="visible"
                 custom={index % INTERSECTION_ELEMENTS.adminChannels}

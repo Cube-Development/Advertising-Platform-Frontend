@@ -1,3 +1,4 @@
+import { roles } from "@entities/user";
 import { complaintPriority, complaintStatus } from "../config";
 
 export interface IAdminComplaintInfoData {
@@ -13,6 +14,8 @@ export interface IAdminComplaintInfoData {
   channel: IChannel;
   owner: IUser;
   post: IPost;
+  role?: roles;
+  reason: string;
 }
 
 interface IUser {

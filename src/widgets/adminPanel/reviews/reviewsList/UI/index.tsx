@@ -8,7 +8,7 @@ import { ReviewCard, SkeletonAdminReviewCard } from "../card";
 import styles from "./styles.module.scss";
 
 interface ReviewsListProps {
-  data: IAdminReviews;
+  data?: IAdminReviews;
   isLoading: boolean;
   isFetching: boolean;
   handleChange: () => void;

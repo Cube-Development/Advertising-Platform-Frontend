@@ -9,3 +9,6 @@ export const MANAGER_PROJECTS = "MANAGER_PROJECTS";
 export const BALANCE = "BALANCE";
 export const LEGALS = "LEGALS";
 export const CHAT = "CHAT";
+export const ADMIN_REVIEWS = "ADMIN_REVIEWS";
+export const ADMIN_COMPLAINTS = "ADMIN_COMPLAINTS";
+export const ADMIN_CHANNELS = "ADMIN_CHANNELS";

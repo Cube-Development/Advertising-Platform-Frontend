@@ -146,333 +146,333 @@ export const AdminProfile: IAdminProfileData = {
   name: "Maftuna R.",
 };
 
-export const AdminChannels: IAdminChannelData[] = [
-  {
-    userId: "1232132",
-    status: 0,
-    url: "https://t.me/MoneySwap_robot",
-    date: "02.09.2022",
-    text_limit: 100,
-    id: "4a53b39c-451d-45f7-9571-fc59acc4fbf0",
-    platform: 1,
-    name: "NN",
-    description:
-      "Медиа про интернет, технологии и безопасность\nСотрудничество: @nnmanager\nЮтуб: https://youtube.com/naebnet",
-    rate: 4.9,
-    category: 1,
-    avatar:
-      "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
-    subscribers: 1467000,
-    male: 70,
-    female: 30,
-    format: [
-      {
-        format: 1,
-        format_name: {
-          small: "0/24",
-          big: "без топа 24 часа в ленте",
-        },
-        price: 6200000,
-        views: 0,
-        er: 0.0,
-        cpv: 0.0,
-      },
-      {
-        format: 2,
-        format_name: {
-          small: "1/24",
-          big: "1 час в топе 24 в ленте",
-        },
-        price: 9200000,
-        views: 0,
-        er: 0.0,
-        cpv: 0.0,
-      },
-    ],
-    language: [
-      { id: 1, name: "🇺🇿 Узбекский" },
-      { id: 2, name: "🇬🇧 Английский" },
-      { id: 3, name: "🇷🇺 Русский" },
-      { id: 4, name: "🇷🇼 Каракалпакский" },
-    ],
-    age: [
-      { id: 1, name: "до 18 лет" },
-      { id: 2, name: "18-34 лет" },
-      { id: 3, name: "35-44 лет" },
-    ],
-    region: [
-      { id: 1, name: "Андижан" },
-      { id: 2, name: "Бухара" },
-      { id: 3, name: "Джизак" },
-    ],
-    complete: 10,
-    complaints: 10,
-    on_hold: 10,
-    cancel: 10,
-    not_complete: 10,
-    in_progress: 10,
-  },
-  {
-    userId: "1232132",
-    status: 1,
-    url: "https://t.me/MoneySwap_robot",
-    date: "02.09.2022",
-    text_limit: 1200,
-    id: "4a53b39c-451d-45f7-9571-fc59acc4fbf1",
-    platform: 3,
-    name: "NN",
-    description:
-      "Медиа про интернет, технологии и безопасность\nСотрудничество: @nnmanager\nЮтуб: https://youtube.com/naebnet",
-    rate: 4.9,
-    category: 1,
-    avatar:
-      "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
-    subscribers: 1467000,
-    male: 70,
-    female: 30,
-    format: [
-      {
-        format: 1,
-        format_name: {
-          small: "0/24",
-          big: "без топа 24 часа в ленте",
-        },
-        price: 6200000,
-        views: 0,
-        er: 0.0,
-        cpv: 0.0,
-      },
-      {
-        format: 2,
-        format_name: {
-          small: "1/24",
-          big: "1 час в топе 24 в ленте",
-        },
-        price: 9200000,
-        views: 0,
-        er: 0.0,
-        cpv: 0.0,
-      },
-    ],
-    language: [
-      { id: 1, name: "🇺🇿 Узбекский" },
-      { id: 2, name: "🇬🇧 Английский" },
-      { id: 3, name: "🇷🇺 Русский" },
-      { id: 4, name: "🇷🇼 Каракалпакский" },
-    ],
-    age: [
-      { id: 1, name: "до 18 лет" },
-      { id: 2, name: "18-34 лет" },
-      { id: 3, name: "35-44 лет" },
-    ],
-    region: [
-      { id: 1, name: "Андижан" },
-      { id: 2, name: "Бухара" },
-      { id: 3, name: "Джизак" },
-    ],
-    complete: 10,
-    complaints: 10,
-    on_hold: 10,
-    cancel: 10,
-    not_complete: 10,
-    in_progress: 10,
-  },
-  {
-    userId: "1232132",
-    status: 2,
-    url: "https://t.me/MoneySwap_robot",
-    date: "02.09.2022",
-    text_limit: 100,
-    id: "4a53b39c-451d-45f7-9571-fc59acc4fbf2",
-    platform: 2,
-    name: "NN",
-    description:
-      "Медиа про интернет, технологии и безопасность\nСотрудничество: @nnmanager\nЮтуб: https://youtube.com/naebnet",
-    rate: 4.9,
-    category: 1,
-    avatar:
-      "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
-    subscribers: 1467000,
-    male: 70,
-    female: 30,
-    format: [
-      {
-        format: 1,
-        format_name: {
-          small: "0/24",
-          big: "без топа 24 часа в ленте",
-        },
-        price: 6200000,
-        views: 0,
-        er: 0.0,
-        cpv: 0.0,
-      },
-      {
-        format: 2,
-        format_name: {
-          small: "1/24",
-          big: "1 час в топе 24 в ленте",
-        },
-        price: 9200000,
-        views: 0,
-        er: 0.0,
-        cpv: 0.0,
-      },
-    ],
-    language: [
-      { id: 1, name: "🇺🇿 Узбекский" },
-      { id: 2, name: "🇬🇧 Английский" },
-      { id: 3, name: "🇷🇺 Русский" },
-      { id: 4, name: "🇷🇼 Каракалпакский" },
-    ],
-    age: [
-      { id: 1, name: "до 18 лет" },
-      { id: 2, name: "18-34 лет" },
-      { id: 3, name: "35-44 лет" },
-    ],
-    region: [
-      { id: 1, name: "Андижан" },
-      { id: 2, name: "Бухара" },
-      { id: 3, name: "Джизак" },
-    ],
-    complete: 10,
-    complaints: 10,
-    on_hold: 10,
-    cancel: 10,
-    not_complete: 10,
-    in_progress: 10,
-  },
-  {
-    userId: "1232132",
-    status: 3,
-    url: "https://t.me/MoneySwap_robot",
-    date: "02.09.2022",
-    text_limit: 100,
-    id: "4a53b39c-451d-45f7-9571-fc59acc4fbf3",
-    platform: 1,
-    name: "NN",
-    description:
-      "Медиа про интернет, технологии и безопасность\nСотрудничество: @nnmanager\nЮтуб: https://youtube.com/naebnet",
-    rate: 4.9,
-    category: 1,
-    avatar:
-      "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
-    subscribers: 1467000,
-    male: 70,
-    female: 30,
-    format: [
-      {
-        format: 1,
-        format_name: {
-          small: "0/24",
-          big: "без топа 24 часа в ленте",
-        },
-        price: 6200000,
-        views: 0,
-        er: 0.0,
-        cpv: 0.0,
-      },
-      {
-        format: 2,
-        format_name: {
-          small: "1/24",
-          big: "1 час в топе 24 в ленте",
-        },
-        price: 9200000,
-        views: 0,
-        er: 0.0,
-        cpv: 0.0,
-      },
-    ],
-    language: [
-      { id: 1, name: "🇺🇿 Узбекский" },
-      { id: 2, name: "🇬🇧 Английский" },
-      { id: 3, name: "🇷🇺 Русский" },
-      { id: 4, name: "🇷🇼 Каракалпакский" },
-    ],
-    age: [
-      { id: 1, name: "до 18 лет" },
-      { id: 2, name: "18-34 лет" },
-      { id: 3, name: "35-44 лет" },
-    ],
-    region: [
-      { id: 1, name: "Андижан" },
-      { id: 2, name: "Бухара" },
-      { id: 3, name: "Джизак" },
-    ],
-    complete: 10,
-    complaints: 10,
-    on_hold: 10,
-    cancel: 10,
-    not_complete: 10,
-    in_progress: 10,
-  },
-  {
-    userId: "1232132",
-    status: 5,
-    url: "https://t.me/MoneySwap_robot",
-    date: "02.09.2022",
-    text_limit: 100,
-    id: "4a53b39c-451d-45f7-9571-fc59acc4fbf5",
-    platform: 1,
-    name: "NN",
-    description:
-      "Медиа про интернет, технологии и безопасность\nСотрудничество: @nnmanager\nЮтуб: https://youtube.com/naebnet",
-    rate: 4.9,
-    category: 1,
-    avatar:
-      "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
-    subscribers: 1467000,
-    male: 70,
-    female: 30,
-    format: [
-      {
-        format: 1,
-        format_name: {
-          small: "0/24",
-          big: "без топа 24 часа в ленте",
-        },
-        price: 6200000,
-        views: 0,
-        er: 0.0,
-        cpv: 0.0,
-      },
-      {
-        format: 2,
-        format_name: {
-          small: "1/24",
-          big: "1 час в топе 24 в ленте",
-        },
-        price: 9200000,
-        views: 0,
-        er: 0.0,
-        cpv: 0.0,
-      },
-    ],
-    language: [
-      { id: 1, name: "🇺🇿 Узбекский" },
-      { id: 2, name: "🇬🇧 Английский" },
-      { id: 3, name: "🇷🇺 Русский" },
-      { id: 4, name: "🇷🇼 Каракалпакский" },
-    ],
-    age: [
-      { id: 1, name: "до 18 лет" },
-      { id: 2, name: "18-34 лет" },
-      { id: 3, name: "35-44 лет" },
-    ],
-    region: [
-      { id: 1, name: "Андижан" },
-      { id: 2, name: "Бухара" },
-      { id: 3, name: "Джизак" },
-    ],
-    complete: 10,
-    complaints: 10,
-    on_hold: 10,
-    cancel: 10,
-    not_complete: 10,
-    in_progress: 10,
-  },
-];
+// export const AdminChannels: IAdminChannelData[] = [
+//   {
+//     userId: "1232132",
+//     status: 0,
+//     url: "https://t.me/MoneySwap_robot",
+//     date: "02.09.2022",
+//     text_limit: 100,
+//     id: "4a53b39c-451d-45f7-9571-fc59acc4fbf0",
+//     platform: 1,
+//     name: "NN",
+//     description:
+//       "Медиа про интернет, технологии и безопасность\nСотрудничество: @nnmanager\nЮтуб: https://youtube.com/naebnet",
+//     rate: 4.9,
+//     category: 1,
+//     avatar:
+//       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
+//     subscribers: 1467000,
+//     male: 70,
+//     female: 30,
+//     format: [
+//       {
+//         format: 1,
+//         format_name: {
+//           small: "0/24",
+//           big: "без топа 24 часа в ленте",
+//         },
+//         price: 6200000,
+//         views: 0,
+//         er: 0.0,
+//         cpv: 0.0,
+//       },
+//       {
+//         format: 2,
+//         format_name: {
+//           small: "1/24",
+//           big: "1 час в топе 24 в ленте",
+//         },
+//         price: 9200000,
+//         views: 0,
+//         er: 0.0,
+//         cpv: 0.0,
+//       },
+//     ],
+//     language: [
+//       { id: 1, name: "🇺🇿 Узбекский" },
+//       { id: 2, name: "🇬🇧 Английский" },
+//       { id: 3, name: "🇷🇺 Русский" },
+//       { id: 4, name: "🇷🇼 Каракалпакский" },
+//     ],
+//     age: [
+//       { id: 1, name: "до 18 лет" },
+//       { id: 2, name: "18-34 лет" },
+//       { id: 3, name: "35-44 лет" },
+//     ],
+//     region: [
+//       { id: 1, name: "Андижан" },
+//       { id: 2, name: "Бухара" },
+//       { id: 3, name: "Джизак" },
+//     ],
+//     complete: 10,
+//     complaints: 10,
+//     on_hold: 10,
+//     cancel: 10,
+//     not_complete: 10,
+//     in_progress: 10,
+//   },
+//   {
+//     userId: "1232132",
+//     status: 1,
+//     url: "https://t.me/MoneySwap_robot",
+//     date: "02.09.2022",
+//     text_limit: 1200,
+//     id: "4a53b39c-451d-45f7-9571-fc59acc4fbf1",
+//     platform: 3,
+//     name: "NN",
+//     description:
+//       "Медиа про интернет, технологии и безопасность\nСотрудничество: @nnmanager\nЮтуб: https://youtube.com/naebnet",
+//     rate: 4.9,
+//     category: 1,
+//     avatar:
+//       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
+//     subscribers: 1467000,
+//     male: 70,
+//     female: 30,
+//     format: [
+//       {
+//         format: 1,
+//         format_name: {
+//           small: "0/24",
+//           big: "без топа 24 часа в ленте",
+//         },
+//         price: 6200000,
+//         views: 0,
+//         er: 0.0,
+//         cpv: 0.0,
+//       },
+//       {
+//         format: 2,
+//         format_name: {
+//           small: "1/24",
+//           big: "1 час в топе 24 в ленте",
+//         },
+//         price: 9200000,
+//         views: 0,
+//         er: 0.0,
+//         cpv: 0.0,
+//       },
+//     ],
+//     language: [
+//       { id: 1, name: "🇺🇿 Узбекский" },
+//       { id: 2, name: "🇬🇧 Английский" },
+//       { id: 3, name: "🇷🇺 Русский" },
+//       { id: 4, name: "🇷🇼 Каракалпакский" },
+//     ],
+//     age: [
+//       { id: 1, name: "до 18 лет" },
+//       { id: 2, name: "18-34 лет" },
+//       { id: 3, name: "35-44 лет" },
+//     ],
+//     region: [
+//       { id: 1, name: "Андижан" },
+//       { id: 2, name: "Бухара" },
+//       { id: 3, name: "Джизак" },
+//     ],
+//     complete: 10,
+//     complaints: 10,
+//     on_hold: 10,
+//     cancel: 10,
+//     not_complete: 10,
+//     in_progress: 10,
+//   },
+//   {
+//     userId: "1232132",
+//     status: 2,
+//     url: "https://t.me/MoneySwap_robot",
+//     date: "02.09.2022",
+//     text_limit: 100,
+//     id: "4a53b39c-451d-45f7-9571-fc59acc4fbf2",
+//     platform: 2,
+//     name: "NN",
+//     description:
+//       "Медиа про интернет, технологии и безопасность\nСотрудничество: @nnmanager\nЮтуб: https://youtube.com/naebnet",
+//     rate: 4.9,
+//     category: 1,
+//     avatar:
+//       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
+//     subscribers: 1467000,
+//     male: 70,
+//     female: 30,
+//     format: [
+//       {
+//         format: 1,
+//         format_name: {
+//           small: "0/24",
+//           big: "без топа 24 часа в ленте",
+//         },
+//         price: 6200000,
+//         views: 0,
+//         er: 0.0,
+//         cpv: 0.0,
+//       },
+//       {
+//         format: 2,
+//         format_name: {
+//           small: "1/24",
+//           big: "1 час в топе 24 в ленте",
+//         },
+//         price: 9200000,
+//         views: 0,
+//         er: 0.0,
+//         cpv: 0.0,
+//       },
+//     ],
+//     language: [
+//       { id: 1, name: "🇺🇿 Узбекский" },
+//       { id: 2, name: "🇬🇧 Английский" },
+//       { id: 3, name: "🇷🇺 Русский" },
+//       { id: 4, name: "🇷🇼 Каракалпакский" },
+//     ],
+//     age: [
+//       { id: 1, name: "до 18 лет" },
+//       { id: 2, name: "18-34 лет" },
+//       { id: 3, name: "35-44 лет" },
+//     ],
+//     region: [
+//       { id: 1, name: "Андижан" },
+//       { id: 2, name: "Бухара" },
+//       { id: 3, name: "Джизак" },
+//     ],
+//     complete: 10,
+//     complaints: 10,
+//     on_hold: 10,
+//     cancel: 10,
+//     not_complete: 10,
+//     in_progress: 10,
+//   },
+//   {
+//     userId: "1232132",
+//     status: 3,
+//     url: "https://t.me/MoneySwap_robot",
+//     date: "02.09.2022",
+//     text_limit: 100,
+//     id: "4a53b39c-451d-45f7-9571-fc59acc4fbf3",
+//     platform: 1,
+//     name: "NN",
+//     description:
+//       "Медиа про интернет, технологии и безопасность\nСотрудничество: @nnmanager\nЮтуб: https://youtube.com/naebnet",
+//     rate: 4.9,
+//     category: 1,
+//     avatar:
+//       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
+//     subscribers: 1467000,
+//     male: 70,
+//     female: 30,
+//     format: [
+//       {
+//         format: 1,
+//         format_name: {
+//           small: "0/24",
+//           big: "без топа 24 часа в ленте",
+//         },
+//         price: 6200000,
+//         views: 0,
+//         er: 0.0,
+//         cpv: 0.0,
+//       },
+//       {
+//         format: 2,
+//         format_name: {
+//           small: "1/24",
+//           big: "1 час в топе 24 в ленте",
+//         },
+//         price: 9200000,
+//         views: 0,
+//         er: 0.0,
+//         cpv: 0.0,
+//       },
+//     ],
+//     language: [
+//       { id: 1, name: "🇺🇿 Узбекский" },
+//       { id: 2, name: "🇬🇧 Английский" },
+//       { id: 3, name: "🇷🇺 Русский" },
+//       { id: 4, name: "🇷🇼 Каракалпакский" },
+//     ],
+//     age: [
+//       { id: 1, name: "до 18 лет" },
+//       { id: 2, name: "18-34 лет" },
+//       { id: 3, name: "35-44 лет" },
+//     ],
+//     region: [
+//       { id: 1, name: "Андижан" },
+//       { id: 2, name: "Бухара" },
+//       { id: 3, name: "Джизак" },
+//     ],
+//     complete: 10,
+//     complaints: 10,
+//     on_hold: 10,
+//     cancel: 10,
+//     not_complete: 10,
+//     in_progress: 10,
+//   },
+//   {
+//     userId: "1232132",
+//     status: 5,
+//     url: "https://t.me/MoneySwap_robot",
+//     date: "02.09.2022",
+//     text_limit: 100,
+//     id: "4a53b39c-451d-45f7-9571-fc59acc4fbf5",
+//     platform: 1,
+//     name: "NN",
+//     description:
+//       "Медиа про интернет, технологии и безопасность\nСотрудничество: @nnmanager\nЮтуб: https://youtube.com/naebnet",
+//     rate: 4.9,
+//     category: 1,
+//     avatar:
+//       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
+//     subscribers: 1467000,
+//     male: 70,
+//     female: 30,
+//     format: [
+//       {
+//         format: 1,
+//         format_name: {
+//           small: "0/24",
+//           big: "без топа 24 часа в ленте",
+//         },
+//         price: 6200000,
+//         views: 0,
+//         er: 0.0,
+//         cpv: 0.0,
+//       },
+//       {
+//         format: 2,
+//         format_name: {
+//           small: "1/24",
+//           big: "1 час в топе 24 в ленте",
+//         },
+//         price: 9200000,
+//         views: 0,
+//         er: 0.0,
+//         cpv: 0.0,
+//       },
+//     ],
+//     language: [
+//       { id: 1, name: "🇺🇿 Узбекский" },
+//       { id: 2, name: "🇬🇧 Английский" },
+//       { id: 3, name: "🇷🇺 Русский" },
+//       { id: 4, name: "🇷🇼 Каракалпакский" },
+//     ],
+//     age: [
+//       { id: 1, name: "до 18 лет" },
+//       { id: 2, name: "18-34 лет" },
+//       { id: 3, name: "35-44 лет" },
+//     ],
+//     region: [
+//       { id: 1, name: "Андижан" },
+//       { id: 2, name: "Бухара" },
+//       { id: 3, name: "Джизак" },
+//     ],
+//     complete: 10,
+//     complaints: 10,
+//     on_hold: 10,
+//     cancel: 10,
+//     not_complete: 10,
+//     in_progress: 10,
+//   },
+// ];
 
 export const AdminUsers: IAdminUserData[] = [
   {
@@ -612,859 +612,859 @@ export const AdminUsers: IAdminUserData[] = [
   },
 ];
 
-export const AdminTransactions: IAdminTransactionData[] = [
-  {
-    id: "16e5a703-d4f1-4f42-98be-cf88c7a58142",
-    sender: "f7c409c5-6020-4646-8f2d-d96475e21136",
-    receiver: "51a7e707-e38c-4b3e-b3db-c35e6c2f76b8",
-    transaction_date: "10.11.2024",
-    transaction_type: "Покупка товара",
-    way_type: "Click",
-    amount: 229900,
-    status: 1,
-    subcard: {
-      id: "16e5a703-d4f1-4f42-98be-cf88c7a58142",
-      status: 1,
-      sender: {
-        id: "f7c409c5-6020-4646-8f2d-d96475e21136",
-        identification: "Оборотный",
-      },
-      receiver: {
-        id: "51a7e707-e38c-4b3e-b3db-c35e6c2f76b8",
-        identification: "Пользовательский",
-        userId: "98765412",
-      },
-      transactions: [
-        {
-          id: "b2f702e7-f2c9-42f4-b0e0-d1739e34a402",
-          transactionId: "b2f702e7-f2c9-42f4-b0e0-d1739e34a402",
-          accountId: "b2f702e7-f2c9-42f4-b0e0-d1739e34a402",
-          amount: 229900,
-          datetime: "09:00 10.11.2024",
-        },
-        {
-          id: "b7e30b61-2333-4f13-a133-3ecfa5b36cfa",
-          transactionId: "b7e30b61-2333-4f13-a133-3ecfa5b36cfa",
-          accountId: "b7e30b61-2333-4f13-a133-3ecfa5b36cfa",
-          amount: 229900,
-          datetime: "10:00 10.11.2024",
-        },
-        {
-          id: "0da18f99-c9e0-416d-9173-9baf3e61a3a9",
-          transactionId: "0da18f99-c9e0-416d-9173-9baf3e61a3a9",
-          accountId: "0da18f99-c9e0-416d-9173-9baf3e61a3a9",
-          amount: 229900,
-          datetime: "11:00 10.11.2024",
-        },
-        {
-          id: "d45ed6a1-5e6c-4fa7-83d7-e306f42b319d",
-          transactionId: "d45ed6a1-5e6c-4fa7-83d7-e306f42b319d",
-          accountId: "d45ed6a1-5e6c-4fa7-83d7-e306f42b319d",
-          amount: 229900,
-          datetime: "12:00 10.11.2024",
-        },
-      ],
-      documents: [
-        {
-          filename: "Товар_заказан",
-        },
-        {
-          filename: "Подтверждение_покупки",
-        },
-        {
-          filename: "Распределение_средств",
-        },
-        {
-          filename: "Договор_покупки",
-        },
-      ],
-    },
-  },
-  {
-    id: "a1c9f8c7-f988-4b5d-a52d-5d5ab7a04b72",
-    sender: "b0b2f1f8-0e34-4885-a014-0a7b463d0796",
-    receiver: "8c3d66ef-c590-42f3-9df2-2414d3c4ab79",
-    transaction_date: "11.11.2024",
-    transaction_type: "Вывод средств",
-    way_type: "Payme",
-    amount: 550000,
-    status: 2,
-    subcard: {
-      id: "a1c9f8c7-f988-4b5d-a52d-5d5ab7a04b72",
-      status: 2,
-      sender: {
-        id: "b0b2f1f8-0e34-4885-a014-0a7b463d0796",
-        identification: "Оборотный",
-      },
-      receiver: {
-        id: "8c3d66ef-c590-42f3-9df2-2414d3c4ab79",
-        identification: "Пользовательский",
-        userId: "45216578",
-      },
-      transactions: [
-        {
-          id: "e72de649-e6e7-4c98-9c9c-5cf5c212567b",
-          transactionId: "e72de649-e6e7-4c98-9c9c-5cf5c212567b",
-          accountId: "e72de649-e6e7-4c98-9c9c-5cf5c212567b",
-          amount: 550000,
-          datetime: "10:00 11.11.2024",
-        },
-        {
-          id: "45b9d8e0-bcc1-4644-9322-7e28a321004e",
-          transactionId: "45b9d8e0-bcc1-4644-9322-7e28a321004e",
-          accountId: "45b9d8e0-bcc1-4644-9322-7e28a321004e",
-          amount: 550000,
-          datetime: "11:00 11.11.2024",
-        },
-        {
-          id: "913a4e5f-99eb-4e7b-bc2d-8dbb1e5ab3f6",
-          transactionId: "913a4e5f-99eb-4e7b-bc2d-8dbb1e5ab3f6",
-          accountId: "913a4e5f-99eb-4e7b-bc2d-8dbb1e5ab3f6",
-          amount: 550000,
-          datetime: "12:00 11.11.2024",
-        },
-        {
-          id: "f3e1b48e-7242-490b-8e8f-cb56c91c3326",
-          transactionId: "f3e1b48e-7242-490b-8e8f-cb56c91c3326",
-          accountId: "f3e1b48e-7242-490b-8e8f-cb56c91c3326",
-          amount: 550000,
-          datetime: "13:00 11.11.2024",
-        },
-      ],
-      documents: [
-        {
-          filename: "Документ_о_выводе",
-        },
-        {
-          filename: "Запрос_на_вывод",
-        },
-        {
-          filename: "Подтверждение_вывода",
-        },
-      ],
-    },
-  },
-  {
-    id: "fc9e6d12-7a5e-49b8-9b58-e42c8308f597",
-    sender: "272fce60-03a0-44cd-bc9e-1103f490e60f",
-    receiver: "f8c1a7e7-72e7-4f16-bb5f-c81f9a7a2ad4",
-    transaction_date: "12.11.2024",
-    transaction_type: "Возврат средств",
-    way_type: "Didox",
-    amount: 720000,
-    status: 0,
-    subcard: {
-      id: "fc9e6d12-7a5e-49b8-9b58-e42c8308f597",
-      status: 0,
-      sender: {
-        id: "272fce60-03a0-44cd-bc9e-1103f490e60f",
-        identification: "Оборотный",
-      },
-      receiver: {
-        id: "f8c1a7e7-72e7-4f16-bb5f-c81f9a7a2ad4",
-        identification: "Пользовательский",
-        userId: "36928374",
-      },
-      transactions: [
-        {
-          id: "1c7c8310-fc1c-4a31-b98d-b99d67237f9d",
-          transactionId: "1c7c8310-fc1c-4a31-b98d-b99d67237f9d",
-          accountId: "1c7c8310-fc1c-4a31-b98d-b99d67237f9d",
-          amount: 720000,
-          datetime: "09:30 12.11.2024",
-        },
-        {
-          id: "7055d56b-d271-4fae-b70f-d9ec640d5f13",
-          transactionId: "7055d56b-d271-4fae-b70f-d9ec640d5f13",
-          accountId: "7055d56b-d271-4fae-b70f-d9ec640d5f13",
-          amount: 720000,
-          datetime: "10:30 12.11.2024",
-        },
-        {
-          id: "a436674d-1cf7-470f-b42d-73a5f30969e3",
-          transactionId: "a436674d-1cf7-470f-b42d-73a5f30969e3",
-          accountId: "a436674d-1cf7-470f-b42d-73a5f30969e3",
-          amount: 720000,
-          datetime: "11:30 12.11.2024",
-        },
-      ],
-      documents: [
-        {
-          filename: "Доказательство_возврата",
-        },
-        {
-          filename: "Выписка_о_платежах",
-        },
-        {
-          filename: "Согласование_возврата",
-        },
-      ],
-    },
-  },
-  {
-    id: "8964d456-bfe7-46ad-93c9-e177db591c99",
-    sender: "3312fcf7-504f-4863-8880-f58749acb742",
-    receiver: "399adbd9-e264-4b9b-b82b-7361a36f44d3",
-    transaction_date: "13.11.2024",
-    transaction_type: "Пополнение счета",
-    way_type: "Bank",
-    amount: 125000,
-    status: 1,
-    subcard: {
-      id: "8964d456-bfe7-46ad-93c9-e177db591c99",
-      status: 1,
-      sender: {
-        id: "3312fcf7-504f-4863-8880-f58749acb742",
-        identification: "Оборотный",
-      },
-      receiver: {
-        id: "399adbd9-e264-4b9b-b82b-7361a36f44d3",
-        identification: "Пользовательский",
-        userId: "52738961",
-      },
-      transactions: [
-        {
-          id: "029bdc67-33a5-40a9-b632-490ae7d506f9",
-          transactionId: "029bdc67-33a5-40a9-b632-490ae7d506f9",
-          accountId: "029bdc67-33a5-40a9-b632-490ae7d506f9",
-          amount: 125000,
-          datetime: "10:00 13.11.2024",
-        },
-        {
-          id: "1ad4f8b7-8693-4f68-99b5-e6bc07a8f3da",
-          transactionId: "1ad4f8b7-8693-4f68-99b5-e6bc07a8f3da",
-          accountId: "1ad4f8b7-8693-4f68-99b5-e6bc07a8f3da",
-          amount: 125000,
-          datetime: "11:00 13.11.2024",
-        },
-        {
-          id: "9f0e28c3-8c95-47ea-a2c3-b39940cb8811",
-          transactionId: "9f0e28c3-8c95-47ea-a2c3-b39940cb8811",
-          accountId: "9f0e28c3-8c95-47ea-a2c3-b39940cb8811",
-          amount: 125000,
-          datetime: "12:00 13.11.2024",
-        },
-      ],
-      documents: [
-        {
-          filename: "Подтверждение_пополнения",
-        },
-        {
-          filename: "Соглашение_о_пополнении",
-        },
-      ],
-    },
-  },
-  {
-    id: "ced65ba6-b30b-4dbb-8032-98a1a779c8fc",
-    sender: "9b28f28d-3246-4fbc-9708-784f8cf66312",
-    receiver: "26a417cf-9602-40a9-bcc2-9d17723b479e",
-    transaction_date: "14.11.2024",
-    transaction_type: "Перевод между картами",
-    way_type: "Phone",
-    amount: 320000,
-    status: 2,
-    subcard: {
-      id: "ced65ba6-b30b-4dbb-8032-98a1a779c8fc",
-      status: 2,
-      sender: {
-        id: "9b28f28d-3246-4fbc-9708-784f8cf66312",
-        identification: "Оборотный",
-      },
-      receiver: {
-        id: "26a417cf-9602-40a9-bcc2-9d17723b479e",
-        identification: "Пользовательский",
-        userId: "84327961",
-      },
-      transactions: [
-        {
-          id: "9c2b65f5-b5f9-42b3-8cfb-1f7f9d17c7d1",
-          transactionId: "9c2b65f5-b5f9-42b3-8cfb-1f7f9d17c7d1",
-          accountId: "9c2b65f5-b5f9-42b3-8cfb-1f7f9d17c7d1",
-          amount: 320000,
-          datetime: "13:00 14.11.2024",
-        },
-        {
-          id: "e5c8b267-437d-46a7-bcda-02feab249ac5",
-          transactionId: "e5c8b267-437d-46a7-bcda-02feab249ac5",
-          accountId: "e5c8b267-437d-46a7-bcda-02feab249ac5",
-          amount: 320000,
-          datetime: "14:00 14.11.2024",
-        },
-      ],
-      documents: [
-        {
-          filename: "Документы_перевод",
-        },
-      ],
-    },
-  },
-  {
-    id: "a1f8e1d5-4a1e-4d89-a1a1-b7d6e1a1c4f1",
-    sender: "e5f4d1a7-2b1c-4f68-b4b4-f1d8c6e3a4f9",
-    receiver: "d8f3c7b5-4e1d-4f98-b8b8-d1f9e4d5a6b2",
-    transaction_date: "01.11.2024",
-    transaction_type: "Оплата за проект",
-    way_type: "Click",
-    amount: 6387030,
-    status: 1,
-    subcard: {
-      id: "a1f8e1d5-4a1e-4d89-a1a1-b7d6e1a1c4f1",
-      status: 1,
-      sender: {
-        id: "e5f4d1a7-2b1c-4f68-b4b4-f1d8c6e3a4f9",
-        identification: "Оборотный",
-      },
-      receiver: {
-        id: "d8f3c7b5-4e1d-4f98-b8b8-d1f9e4d5a6b2",
-        identification: "Пользовательский",
-        userId: "12121212",
-      },
-      transactions: [
-        {
-          id: "9b034e7d-cde4-4e43-b84e-8424a01df838",
-          transactionId: "9b034e7d-cde4-4e43-b84e-8424a01df838",
-          accountId: "9b034e7d-cde4-4e43-b84e-8424a01df838",
-          amount: 6387030,
-          datetime: "12:30 01.11.2024",
-        },
-        {
-          id: "9b034e7d-cde4-4e43-b84e-8424a01df839",
-          transactionId: "9b034e7d-cde4-4e43-b84e-8424a01df839",
-          accountId: "9b034e7d-cde4-4e43-b84e-8424a01df839",
-          amount: 6387030,
-          datetime: "13:00 01.11.2024",
-        },
-        {
-          id: "9b034e7d-cde4-4e43-b84e-8424a01df838",
-          transactionId: "9b034e7d-cde4-4e43-b84e-8424a01df838",
-          accountId: "9b034e7d-cde4-4e43-b84e-8424a01df838",
-          amount: 6387030,
-          datetime: "13:30 01.11.2024",
-        },
-        {
-          id: "9b034e7d-cde4-4e43-b84e-8424a01df839",
-          transactionId: "9b034e7d-cde4-4e43-b84e-8424a01df839",
-          accountId: "9b034e7d-cde4-4e43-b84e-8424a01df839",
-          amount: 6387030,
-          datetime: "14:30 01.11.2024",
-        },
-      ],
-      documents: [
-        { filename: "Отчет_по_проекту_1" },
-        { filename: "Договор_с_клиентом" },
-      ],
-    },
-  },
-  {
-    id: "f2bcdca1-2e9f-4b36-b6c1-cb0a40f6e1c9",
-    sender: "a4f1c5e7-5b2e-4d62-bc0f-82b71c3879c4",
-    receiver: "c4d8f5b1-7b8c-4e1b-b7ac-abc95be3078b",
-    transaction_date: "02.11.2024",
-    transaction_type: "Покупка тарифа",
-    way_type: "Payme",
-    amount: 982345,
-    status: 0,
-    subcard: {
-      id: "f2bcdca1-2e9f-4b36-b6c1-cb0a40f6e1c9",
-      status: 0,
-      sender: {
-        id: "a4f1c5e7-5b2e-4d62-bc0f-82b71c3879c4",
-        identification: "Оборотный",
-      },
-      receiver: {
-        id: "c4d8f5b1-7b8c-4e1b-b7ac-abc95be3078b",
-        identification: "Пользовательский",
-        userId: "23232323",
-      },
-      transactions: [
-        {
-          id: "bd16e8d4-b4cd-4df0-a929-3fa21d64b7b7",
-          transactionId: "bd16e8d4-b4cd-4df0-a929-3fa21d64b7b7",
-          accountId: "bd16e8d4-b4cd-4df0-a929-3fa21d64b7b7",
-          amount: 982345,
-          datetime: "14:15 02.11.2024",
-        },
-      ],
-      documents: [
-        { filename: "Счет_фактура_по_тарифу_2" },
-        { filename: "Контракт_с_поставщиком" },
-        { filename: "Платежное_соглашение" },
-      ],
-    },
-  },
-  {
-    id: "e92fb1f9-2908-44d9-8d51-5693d37a1c9c",
-    sender: "b35a56ab-fc09-4593-9db0-7c5f6fdc3fe9",
-    receiver: "315d8953-3456-4ab8-84cf-99fa29b41d4e",
-    transaction_date: "03.11.2024",
-    transaction_type: "Оплата за проект",
-    way_type: "Didox",
-    amount: 4567890,
-    status: 1,
-    subcard: {
-      id: "e92fb1f9-2908-44d9-8d51-5693d37a1c9c",
-      status: 1,
-      sender: {
-        id: "b35a56ab-fc09-4593-9db0-7c5f6fdc3fe9",
-        identification: "Оборотный",
-      },
-      receiver: {
-        id: "315d8953-3456-4ab8-84cf-99fa29b41d4e",
-        identification: "Пользовательский",
-        userId: "43192345",
-      },
-      transactions: [
-        {
-          id: "e0b8d98c-ef75-467a-8a58-71e8a02b9f2d",
-          transactionId: "e0b8d98c-ef75-467a-8a58-71e8a02b9f2d",
-          accountId: "e0b8d98c-ef75-467a-8a58-71e8a02b9f2d",
-          amount: 4567890,
-          datetime: "15:00 03.11.2024",
-        },
-      ],
-      documents: [
-        { filename: "Квитанция_оплаты_за_проект" },
-        { filename: "Акт_выполненных_работ" },
-      ],
-    },
-  },
-  {
-    id: "e36c8d17-c3f3-4b99-83ad-4694be9b1a21",
-    sender: "4db9d7c1-c7ad-4729-b945-5313c8a3fdde",
-    receiver: "11fe61c0-98a1-47d9-b872-d5048f12f4d6",
-    transaction_date: "04.11.2024",
-    transaction_type: "Возврат средств",
-    way_type: "Click",
-    amount: 1284305,
-    status: 2,
-    subcard: {
-      id: "e36c8d17-c3f3-4b99-83ad-4694be9b1a21",
-      status: 2,
-      sender: {
-        id: "4db9d7c1-c7ad-4729-b945-5313c8a3fdde",
-        identification: "Оборотный",
-      },
-      receiver: {
-        id: "11fe61c0-98a1-47d9-b872-d5048f12f4d6",
-        identification: "Пользовательский",
-        userId: "87654321",
-      },
-      transactions: [
-        {
-          id: "91d8b093-3a65-469f-b45d-c831b06d8e2b",
-          transactionId: "91d8b093-3a65-469f-b45d-c831b06d8e2b",
-          accountId: "91d8b093-3a65-469f-b45d-c831b06d8e2b",
-          amount: 1284305,
-          datetime: "16:30 04.11.2024",
-        },
-      ],
-      documents: [
-        { filename: "Платеж_возврат_по_сделке" },
-        { filename: "Согласование_возврата" },
-      ],
-    },
-  },
-  {
-    id: "10fba75a-324b-46a7-90a7-c6342d99e7b3",
-    sender: "af6f5c80-bc9e-4c83-b585-6db96717d282",
-    receiver: "0e370e58-4734-45d3-b5b1-d5e74e0a7a13",
-    transaction_date: "05.11.2024",
-    transaction_type: "Пополнение счета",
-    way_type: "Payme",
-    amount: 250000,
-    status: 1,
-    subcard: {
-      id: "10fba75a-324b-46a7-90a7-c6342d99e7b3",
-      status: 1,
-      sender: {
-        id: "af6f5c80-bc9e-4c83-b585-6db96717d282",
-        identification: "Оборотный",
-      },
-      receiver: {
-        id: "0e370e58-4734-45d3-b5b1-d5e74e0a7a13",
-        identification: "Пользовательский",
-        userId: "98765432",
-      },
-      transactions: [
-        {
-          id: "6c56b927-22ed-4694-b2d0-8f2c31bb1f98",
-          transactionId: "6c56b927-22ed-4694-b2d0-8f2c31bb1f98",
-          accountId: "6c56b927-22ed-4694-b2d0-8f2c31bb1f98",
-          amount: 250000,
-          datetime: "17:30 05.11.2024",
-        },
-      ],
-      documents: [{ filename: "Платеж_пополнения_счета" }],
-    },
-  },
-  {
-    id: "e450cfb5-fd4d-44b8-b4c2-83203e5d68f3",
-    sender: "b723e71e-2e65-4b55-b8d1-ecf870798f6f",
-    receiver: "315d8953-3456-4ab8-84cf-99fa29b41d4e",
-    transaction_date: "06.11.2024",
-    transaction_type: "Оплата услуги",
-    way_type: "Click",
-    amount: 1123230,
-    status: 1,
-    subcard: {
-      id: "e450cfb5-fd4d-44b8-b4c2-83203e5d68f3",
-      status: 1,
-      sender: {
-        id: "b723e71e-2e65-4b55-b8d1-ecf870798f6f",
-        identification: "Оборотный",
-      },
-      receiver: {
-        id: "315d8953-3456-4ab8-84cf-99fa29b41d4e",
-        identification: "Пользовательский",
-        userId: "43242324",
-      },
-      transactions: [
-        {
-          id: "432432d4-f81c-4da0-a764-ff11233a777a",
-          transactionId: "432432d4-f81c-4da0-a764-ff11233a777a",
-          accountId: "432432d4-f81c-4da0-a764-ff11233a777a",
-          amount: 1123230,
-          datetime: "18:30 06.11.2024",
-        },
-      ],
-      documents: [
-        { filename: "Согласование_по_услуге" },
-        { filename: "Платеж_за_услугу" },
-      ],
-    },
-  },
-  {
-    id: "7c84ef90-418d-4b62-b9ac-c3d5bbd51f10",
-    sender: "adbf74b8-89f3-4da3-aed1-74be271a9d9e",
-    receiver: "ac89fb79-4578-43f4-a382-cb2b0e2ad3fc",
-    transaction_date: "07.11.2024",
-    transaction_type: "Возврат по ошибке",
-    way_type: "Payme",
-    amount: 546785,
-    status: 2,
-    subcard: {
-      id: "7c84ef90-418d-4b62-b9ac-c3d5bbd51f10",
-      status: 2,
-      sender: {
-        id: "adbf74b8-89f3-4da3-aed1-74be271a9d9e",
-        identification: "Оборотный",
-      },
-      receiver: {
-        id: "ac89fb79-4578-43f4-a382-cb2b0e2ad3fc",
-        identification: "Пользовательский",
-        userId: "12343242",
-      },
-      transactions: [
-        {
-          id: "27d8b11d-65b9-4a8c-854b-d2ec95cbff72",
-          transactionId: "27d8b11d-65b9-4a8c-854b-d2ec95cbff72",
-          accountId: "27d8b11d-65b9-4a8c-854b-d2ec95cbff72",
-          amount: 546785,
-          datetime: "19:30 07.11.2024",
-        },
-      ],
-      documents: [
-        { filename: "Ошибочный_платеж" },
-        { filename: "Подтверждение_возврата" },
-      ],
-    },
-  },
-  {
-    id: "88e742ba-e620-4f5f-929e-bb507f5b79e8",
-    sender: "a4580d2a-620f-4f35-90b0-b3ab58a9fa5c",
-    receiver: "c856746f-f5a7-4bb0-b1a4-1d30c6e074d1",
-    transaction_date: "08.11.2024",
-    transaction_type: "Продажа товара",
-    way_type: "Payme",
-    amount: 989500,
-    status: 1,
-    subcard: {
-      id: "88e742ba-e620-4f5f-929e-bb507f5b79e8",
-      status: 1,
-      sender: {
-        id: "a4580d2a-620f-4f35-90b0-b3ab58a9fa5c",
-        identification: "Оборотный",
-      },
-      receiver: {
-        id: "c856746f-f5a7-4bb0-b1a4-1d30c6e074d1",
-        identification: "Пользовательский",
-        userId: "98745321",
-      },
-      transactions: [
-        {
-          id: "ab01c092-2f90-41c5-8bc1-7ac423fa7ff5",
-          transactionId: "ab01c092-2f90-41c5-8bc1-7ac423fa7ff5",
-          accountId: "ab01c092-2f90-41c5-8bc1-7ac423fa7ff5",
-          amount: 989500,
-          datetime: "20:00 08.11.2024",
-        },
-      ],
-      documents: [
-        { filename: "Документы_по_продаже" },
-        { filename: "Согласование_платежа" },
-      ],
-    },
-  },
-];
+// export const AdminTransactions: IAdminTransactionData[] = [
+//   {
+//     id: "16e5a703-d4f1-4f42-98be-cf88c7a58142",
+//     sender: "f7c409c5-6020-4646-8f2d-d96475e21136",
+//     receiver: "51a7e707-e38c-4b3e-b3db-c35e6c2f76b8",
+//     transaction_date: "10.11.2024",
+//     transaction_type: "Покупка товара",
+//     way_type: "Click",
+//     amount: 229900,
+//     status: 1,
+//     subcard: {
+//       id: "16e5a703-d4f1-4f42-98be-cf88c7a58142",
+//       status: 1,
+//       sender: {
+//         id: "f7c409c5-6020-4646-8f2d-d96475e21136",
+//         ident: "Оборотный",
+//       },
+//       receiver: {
+//         id: "51a7e707-e38c-4b3e-b3db-c35e6c2f76b8",
+//         ident: "Пользовательский",
+//         user_id: "98765412",
+//       },
+//       transactions: [
+//         {
+//           id: "b2f702e7-f2c9-42f4-b0e0-d1739e34a402",
+//           journal_id: "b2f702e7-f2c9-42f4-b0e0-d1739e34a402",
+//           account_id: "b2f702e7-f2c9-42f4-b0e0-d1739e34a402",
+//           amount: 229900,
+//           created: "09:00 10.11.2024",
+//         },
+//         {
+//           id: "b7e30b61-2333-4f13-a133-3ecfa5b36cfa",
+//           journal_id: "b7e30b61-2333-4f13-a133-3ecfa5b36cfa",
+//           account_id: "b7e30b61-2333-4f13-a133-3ecfa5b36cfa",
+//           amount: 229900,
+//           created: "10:00 10.11.2024",
+//         },
+//         {
+//           id: "0da18f99-c9e0-416d-9173-9baf3e61a3a9",
+//           journal_id: "0da18f99-c9e0-416d-9173-9baf3e61a3a9",
+//           account_id: "0da18f99-c9e0-416d-9173-9baf3e61a3a9",
+//           amount: 229900,
+//           created: "11:00 10.11.2024",
+//         },
+//         {
+//           id: "d45ed6a1-5e6c-4fa7-83d7-e306f42b319d",
+//           journal_id: "d45ed6a1-5e6c-4fa7-83d7-e306f42b319d",
+//           account_id: "d45ed6a1-5e6c-4fa7-83d7-e306f42b319d",
+//           amount: 229900,
+//           created: "12:00 10.11.2024",
+//         },
+//       ],
+//       documents: [
+//         {
+//           filename: "Товар_заказан",
+//         },
+//         {
+//           filename: "Подтверждение_покупки",
+//         },
+//         {
+//           filename: "Распределение_средств",
+//         },
+//         {
+//           filename: "Договор_покупки",
+//         },
+//       ],
+//     },
+//   },
+//   {
+//     id: "a1c9f8c7-f988-4b5d-a52d-5d5ab7a04b72",
+//     sender: "b0b2f1f8-0e34-4885-a014-0a7b463d0796",
+//     receiver: "8c3d66ef-c590-42f3-9df2-2414d3c4ab79",
+//     transaction_date: "11.11.2024",
+//     transaction_type: "Вывод средств",
+//     way_type: "Payme",
+//     amount: 550000,
+//     status: 2,
+//     subcard: {
+//       id: "a1c9f8c7-f988-4b5d-a52d-5d5ab7a04b72",
+//       status: 2,
+//       sender: {
+//         id: "b0b2f1f8-0e34-4885-a014-0a7b463d0796",
+//         ident: "Оборотный",
+//       },
+//       receiver: {
+//         id: "8c3d66ef-c590-42f3-9df2-2414d3c4ab79",
+//         ident: "Пользовательский",
+//         user_id: "45216578",
+//       },
+//       transactions: [
+//         {
+//           id: "e72de649-e6e7-4c98-9c9c-5cf5c212567b",
+//           journal_id: "e72de649-e6e7-4c98-9c9c-5cf5c212567b",
+//           account_id: "e72de649-e6e7-4c98-9c9c-5cf5c212567b",
+//           amount: 550000,
+//           created: "10:00 11.11.2024",
+//         },
+//         {
+//           id: "45b9d8e0-bcc1-4644-9322-7e28a321004e",
+//           journal_id: "45b9d8e0-bcc1-4644-9322-7e28a321004e",
+//           account_id: "45b9d8e0-bcc1-4644-9322-7e28a321004e",
+//           amount: 550000,
+//           created: "11:00 11.11.2024",
+//         },
+//         {
+//           id: "913a4e5f-99eb-4e7b-bc2d-8dbb1e5ab3f6",
+//           journal_id: "913a4e5f-99eb-4e7b-bc2d-8dbb1e5ab3f6",
+//           account_id: "913a4e5f-99eb-4e7b-bc2d-8dbb1e5ab3f6",
+//           amount: 550000,
+//           created: "12:00 11.11.2024",
+//         },
+//         {
+//           id: "f3e1b48e-7242-490b-8e8f-cb56c91c3326",
+//           journal_id: "f3e1b48e-7242-490b-8e8f-cb56c91c3326",
+//           account_id: "f3e1b48e-7242-490b-8e8f-cb56c91c3326",
+//           amount: 550000,
+//           created: "13:00 11.11.2024",
+//         },
+//       ],
+//       documents: [
+//         {
+//           filename: "Документ_о_выводе",
+//         },
+//         {
+//           filename: "Запрос_на_вывод",
+//         },
+//         {
+//           filename: "Подтверждение_вывода",
+//         },
+//       ],
+//     },
+//   },
+//   {
+//     id: "fc9e6d12-7a5e-49b8-9b58-e42c8308f597",
+//     sender: "272fce60-03a0-44cd-bc9e-1103f490e60f",
+//     receiver: "f8c1a7e7-72e7-4f16-bb5f-c81f9a7a2ad4",
+//     transaction_date: "12.11.2024",
+//     transaction_type: "Возврат средств",
+//     way_type: "Didox",
+//     amount: 720000,
+//     status: 0,
+//     subcard: {
+//       id: "fc9e6d12-7a5e-49b8-9b58-e42c8308f597",
+//       status: 0,
+//       sender: {
+//         id: "272fce60-03a0-44cd-bc9e-1103f490e60f",
+//         ident: "Оборотный",
+//       },
+//       receiver: {
+//         id: "f8c1a7e7-72e7-4f16-bb5f-c81f9a7a2ad4",
+//         ident: "Пользовательский",
+//         user_id: "36928374",
+//       },
+//       transactions: [
+//         {
+//           id: "1c7c8310-fc1c-4a31-b98d-b99d67237f9d",
+//           journal_id: "1c7c8310-fc1c-4a31-b98d-b99d67237f9d",
+//           account_id: "1c7c8310-fc1c-4a31-b98d-b99d67237f9d",
+//           amount: 720000,
+//           created: "09:30 12.11.2024",
+//         },
+//         {
+//           id: "7055d56b-d271-4fae-b70f-d9ec640d5f13",
+//           journal_id: "7055d56b-d271-4fae-b70f-d9ec640d5f13",
+//           account_id: "7055d56b-d271-4fae-b70f-d9ec640d5f13",
+//           amount: 720000,
+//           created: "10:30 12.11.2024",
+//         },
+//         {
+//           id: "a436674d-1cf7-470f-b42d-73a5f30969e3",
+//           journal_id: "a436674d-1cf7-470f-b42d-73a5f30969e3",
+//           account_id: "a436674d-1cf7-470f-b42d-73a5f30969e3",
+//           amount: 720000,
+//           created: "11:30 12.11.2024",
+//         },
+//       ],
+//       documents: [
+//         {
+//           filename: "Доказательство_возврата",
+//         },
+//         {
+//           filename: "Выписка_о_платежах",
+//         },
+//         {
+//           filename: "Согласование_возврата",
+//         },
+//       ],
+//     },
+//   },
+//   {
+//     id: "8964d456-bfe7-46ad-93c9-e177db591c99",
+//     sender: "3312fcf7-504f-4863-8880-f58749acb742",
+//     receiver: "399adbd9-e264-4b9b-b82b-7361a36f44d3",
+//     transaction_date: "13.11.2024",
+//     transaction_type: "Пополнение счета",
+//     way_type: "Bank",
+//     amount: 125000,
+//     status: 1,
+//     subcard: {
+//       id: "8964d456-bfe7-46ad-93c9-e177db591c99",
+//       status: 1,
+//       sender: {
+//         id: "3312fcf7-504f-4863-8880-f58749acb742",
+//         ident: "Оборотный",
+//       },
+//       receiver: {
+//         id: "399adbd9-e264-4b9b-b82b-7361a36f44d3",
+//         ident: "Пользовательский",
+//         user_id: "52738961",
+//       },
+//       transactions: [
+//         {
+//           id: "029bdc67-33a5-40a9-b632-490ae7d506f9",
+//           journal_id: "029bdc67-33a5-40a9-b632-490ae7d506f9",
+//           account_id: "029bdc67-33a5-40a9-b632-490ae7d506f9",
+//           amount: 125000,
+//           created: "10:00 13.11.2024",
+//         },
+//         {
+//           id: "1ad4f8b7-8693-4f68-99b5-e6bc07a8f3da",
+//           journal_id: "1ad4f8b7-8693-4f68-99b5-e6bc07a8f3da",
+//           account_id: "1ad4f8b7-8693-4f68-99b5-e6bc07a8f3da",
+//           amount: 125000,
+//           created: "11:00 13.11.2024",
+//         },
+//         {
+//           id: "9f0e28c3-8c95-47ea-a2c3-b39940cb8811",
+//           journal_id: "9f0e28c3-8c95-47ea-a2c3-b39940cb8811",
+//           account_id: "9f0e28c3-8c95-47ea-a2c3-b39940cb8811",
+//           amount: 125000,
+//           created: "12:00 13.11.2024",
+//         },
+//       ],
+//       documents: [
+//         {
+//           filename: "Подтверждение_пополнения",
+//         },
+//         {
+//           filename: "Соглашение_о_пополнении",
+//         },
+//       ],
+//     },
+//   },
+//   {
+//     id: "ced65ba6-b30b-4dbb-8032-98a1a779c8fc",
+//     sender: "9b28f28d-3246-4fbc-9708-784f8cf66312",
+//     receiver: "26a417cf-9602-40a9-bcc2-9d17723b479e",
+//     transaction_date: "14.11.2024",
+//     transaction_type: "Перевод между картами",
+//     way_type: "Phone",
+//     amount: 320000,
+//     status: 2,
+//     subcard: {
+//       id: "ced65ba6-b30b-4dbb-8032-98a1a779c8fc",
+//       status: 2,
+//       sender: {
+//         id: "9b28f28d-3246-4fbc-9708-784f8cf66312",
+//         ident: "Оборотный",
+//       },
+//       receiver: {
+//         id: "26a417cf-9602-40a9-bcc2-9d17723b479e",
+//         ident: "Пользовательский",
+//         user_id: "84327961",
+//       },
+//       transactions: [
+//         {
+//           id: "9c2b65f5-b5f9-42b3-8cfb-1f7f9d17c7d1",
+//           journal_id: "9c2b65f5-b5f9-42b3-8cfb-1f7f9d17c7d1",
+//           account_id: "9c2b65f5-b5f9-42b3-8cfb-1f7f9d17c7d1",
+//           amount: 320000,
+//           created: "13:00 14.11.2024",
+//         },
+//         {
+//           id: "e5c8b267-437d-46a7-bcda-02feab249ac5",
+//           journal_id: "e5c8b267-437d-46a7-bcda-02feab249ac5",
+//           account_id: "e5c8b267-437d-46a7-bcda-02feab249ac5",
+//           amount: 320000,
+//           created: "14:00 14.11.2024",
+//         },
+//       ],
+//       documents: [
+//         {
+//           filename: "Документы_перевод",
+//         },
+//       ],
+//     },
+//   },
+//   {
+//     id: "a1f8e1d5-4a1e-4d89-a1a1-b7d6e1a1c4f1",
+//     sender: "e5f4d1a7-2b1c-4f68-b4b4-f1d8c6e3a4f9",
+//     receiver: "d8f3c7b5-4e1d-4f98-b8b8-d1f9e4d5a6b2",
+//     transaction_date: "01.11.2024",
+//     transaction_type: "Оплата за проект",
+//     way_type: "Click",
+//     amount: 6387030,
+//     status: 1,
+//     subcard: {
+//       id: "a1f8e1d5-4a1e-4d89-a1a1-b7d6e1a1c4f1",
+//       status: 1,
+//       sender: {
+//         id: "e5f4d1a7-2b1c-4f68-b4b4-f1d8c6e3a4f9",
+//         ident: "Оборотный",
+//       },
+//       receiver: {
+//         id: "d8f3c7b5-4e1d-4f98-b8b8-d1f9e4d5a6b2",
+//         ident: "Пользовательский",
+//         user_id: "12121212",
+//       },
+//       transactions: [
+//         {
+//           id: "9b034e7d-cde4-4e43-b84e-8424a01df838",
+//           journal_id: "9b034e7d-cde4-4e43-b84e-8424a01df838",
+//           account_id: "9b034e7d-cde4-4e43-b84e-8424a01df838",
+//           amount: 6387030,
+//           created: "12:30 01.11.2024",
+//         },
+//         {
+//           id: "9b034e7d-cde4-4e43-b84e-8424a01df839",
+//           journal_id: "9b034e7d-cde4-4e43-b84e-8424a01df839",
+//           account_id: "9b034e7d-cde4-4e43-b84e-8424a01df839",
+//           amount: 6387030,
+//           created: "13:00 01.11.2024",
+//         },
+//         {
+//           id: "9b034e7d-cde4-4e43-b84e-8424a01df838",
+//           journal_id: "9b034e7d-cde4-4e43-b84e-8424a01df838",
+//           account_id: "9b034e7d-cde4-4e43-b84e-8424a01df838",
+//           amount: 6387030,
+//           created: "13:30 01.11.2024",
+//         },
+//         {
+//           id: "9b034e7d-cde4-4e43-b84e-8424a01df839",
+//           journal_id: "9b034e7d-cde4-4e43-b84e-8424a01df839",
+//           account_id: "9b034e7d-cde4-4e43-b84e-8424a01df839",
+//           amount: 6387030,
+//           created: "14:30 01.11.2024",
+//         },
+//       ],
+//       documents: [
+//         { filename: "Отчет_по_проекту_1" },
+//         { filename: "Договор_с_клиентом" },
+//       ],
+//     },
+//   },
+//   {
+//     id: "f2bcdca1-2e9f-4b36-b6c1-cb0a40f6e1c9",
+//     sender: "a4f1c5e7-5b2e-4d62-bc0f-82b71c3879c4",
+//     receiver: "c4d8f5b1-7b8c-4e1b-b7ac-abc95be3078b",
+//     transaction_date: "02.11.2024",
+//     transaction_type: "Покупка тарифа",
+//     way_type: "Payme",
+//     amount: 982345,
+//     status: 0,
+//     subcard: {
+//       id: "f2bcdca1-2e9f-4b36-b6c1-cb0a40f6e1c9",
+//       status: 0,
+//       sender: {
+//         id: "a4f1c5e7-5b2e-4d62-bc0f-82b71c3879c4",
+//         ident: "Оборотный",
+//       },
+//       receiver: {
+//         id: "c4d8f5b1-7b8c-4e1b-b7ac-abc95be3078b",
+//         ident: "Пользовательский",
+//         user_id: "23232323",
+//       },
+//       transactions: [
+//         {
+//           id: "bd16e8d4-b4cd-4df0-a929-3fa21d64b7b7",
+//           journal_id: "bd16e8d4-b4cd-4df0-a929-3fa21d64b7b7",
+//           account_id: "bd16e8d4-b4cd-4df0-a929-3fa21d64b7b7",
+//           amount: 982345,
+//           created: "14:15 02.11.2024",
+//         },
+//       ],
+//       documents: [
+//         { filename: "Счет_фактура_по_тарифу_2" },
+//         { filename: "Контракт_с_поставщиком" },
+//         { filename: "Платежное_соглашение" },
+//       ],
+//     },
+//   },
+//   {
+//     id: "e92fb1f9-2908-44d9-8d51-5693d37a1c9c",
+//     sender: "b35a56ab-fc09-4593-9db0-7c5f6fdc3fe9",
+//     receiver: "315d8953-3456-4ab8-84cf-99fa29b41d4e",
+//     transaction_date: "03.11.2024",
+//     transaction_type: "Оплата за проект",
+//     way_type: "Didox",
+//     amount: 4567890,
+//     status: 1,
+//     subcard: {
+//       id: "e92fb1f9-2908-44d9-8d51-5693d37a1c9c",
+//       status: 1,
+//       sender: {
+//         id: "b35a56ab-fc09-4593-9db0-7c5f6fdc3fe9",
+//         ident: "Оборотный",
+//       },
+//       receiver: {
+//         id: "315d8953-3456-4ab8-84cf-99fa29b41d4e",
+//         ident: "Пользовательский",
+//         user_id: "43192345",
+//       },
+//       transactions: [
+//         {
+//           id: "e0b8d98c-ef75-467a-8a58-71e8a02b9f2d",
+//           journal_id: "e0b8d98c-ef75-467a-8a58-71e8a02b9f2d",
+//           account_id: "e0b8d98c-ef75-467a-8a58-71e8a02b9f2d",
+//           amount: 4567890,
+//           created: "15:00 03.11.2024",
+//         },
+//       ],
+//       documents: [
+//         { filename: "Квитанция_оплаты_за_проект" },
+//         { filename: "Акт_выполненных_работ" },
+//       ],
+//     },
+//   },
+//   {
+//     id: "e36c8d17-c3f3-4b99-83ad-4694be9b1a21",
+//     sender: "4db9d7c1-c7ad-4729-b945-5313c8a3fdde",
+//     receiver: "11fe61c0-98a1-47d9-b872-d5048f12f4d6",
+//     transaction_date: "04.11.2024",
+//     transaction_type: "Возврат средств",
+//     way_type: "Click",
+//     amount: 1284305,
+//     status: 2,
+//     subcard: {
+//       id: "e36c8d17-c3f3-4b99-83ad-4694be9b1a21",
+//       status: 2,
+//       sender: {
+//         id: "4db9d7c1-c7ad-4729-b945-5313c8a3fdde",
+//         ident: "Оборотный",
+//       },
+//       receiver: {
+//         id: "11fe61c0-98a1-47d9-b872-d5048f12f4d6",
+//         ident: "Пользовательский",
+//         user_id: "87654321",
+//       },
+//       transactions: [
+//         {
+//           id: "91d8b093-3a65-469f-b45d-c831b06d8e2b",
+//           journal_id: "91d8b093-3a65-469f-b45d-c831b06d8e2b",
+//           account_id: "91d8b093-3a65-469f-b45d-c831b06d8e2b",
+//           amount: 1284305,
+//           created: "16:30 04.11.2024",
+//         },
+//       ],
+//       documents: [
+//         { filename: "Платеж_возврат_по_сделке" },
+//         { filename: "Согласование_возврата" },
+//       ],
+//     },
+//   },
+//   {
+//     id: "10fba75a-324b-46a7-90a7-c6342d99e7b3",
+//     sender: "af6f5c80-bc9e-4c83-b585-6db96717d282",
+//     receiver: "0e370e58-4734-45d3-b5b1-d5e74e0a7a13",
+//     transaction_date: "05.11.2024",
+//     transaction_type: "Пополнение счета",
+//     way_type: "Payme",
+//     amount: 250000,
+//     status: 1,
+//     subcard: {
+//       id: "10fba75a-324b-46a7-90a7-c6342d99e7b3",
+//       status: 1,
+//       sender: {
+//         id: "af6f5c80-bc9e-4c83-b585-6db96717d282",
+//         ident: "Оборотный",
+//       },
+//       receiver: {
+//         id: "0e370e58-4734-45d3-b5b1-d5e74e0a7a13",
+//         ident: "Пользовательский",
+//         user_id: "98765432",
+//       },
+//       transactions: [
+//         {
+//           id: "6c56b927-22ed-4694-b2d0-8f2c31bb1f98",
+//           journal_id: "6c56b927-22ed-4694-b2d0-8f2c31bb1f98",
+//           account_id: "6c56b927-22ed-4694-b2d0-8f2c31bb1f98",
+//           amount: 250000,
+//           created: "17:30 05.11.2024",
+//         },
+//       ],
+//       documents: [{ filename: "Платеж_пополнения_счета" }],
+//     },
+//   },
+//   {
+//     id: "e450cfb5-fd4d-44b8-b4c2-83203e5d68f3",
+//     sender: "b723e71e-2e65-4b55-b8d1-ecf870798f6f",
+//     receiver: "315d8953-3456-4ab8-84cf-99fa29b41d4e",
+//     transaction_date: "06.11.2024",
+//     transaction_type: "Оплата услуги",
+//     way_type: "Click",
+//     amount: 1123230,
+//     status: 1,
+//     subcard: {
+//       id: "e450cfb5-fd4d-44b8-b4c2-83203e5d68f3",
+//       status: 1,
+//       sender: {
+//         id: "b723e71e-2e65-4b55-b8d1-ecf870798f6f",
+//         ident: "Оборотный",
+//       },
+//       receiver: {
+//         id: "315d8953-3456-4ab8-84cf-99fa29b41d4e",
+//         ident: "Пользовательский",
+//         user_id: "43242324",
+//       },
+//       transactions: [
+//         {
+//           id: "432432d4-f81c-4da0-a764-ff11233a777a",
+//           journal_id: "432432d4-f81c-4da0-a764-ff11233a777a",
+//           account_id: "432432d4-f81c-4da0-a764-ff11233a777a",
+//           amount: 1123230,
+//           created: "18:30 06.11.2024",
+//         },
+//       ],
+//       documents: [
+//         { filename: "Согласование_по_услуге" },
+//         { filename: "Платеж_за_услугу" },
+//       ],
+//     },
+//   },
+//   {
+//     id: "7c84ef90-418d-4b62-b9ac-c3d5bbd51f10",
+//     sender: "adbf74b8-89f3-4da3-aed1-74be271a9d9e",
+//     receiver: "ac89fb79-4578-43f4-a382-cb2b0e2ad3fc",
+//     transaction_date: "07.11.2024",
+//     transaction_type: "Возврат по ошибке",
+//     way_type: "Payme",
+//     amount: 546785,
+//     status: 2,
+//     subcard: {
+//       id: "7c84ef90-418d-4b62-b9ac-c3d5bbd51f10",
+//       status: 2,
+//       sender: {
+//         id: "adbf74b8-89f3-4da3-aed1-74be271a9d9e",
+//         ident: "Оборотный",
+//       },
+//       receiver: {
+//         id: "ac89fb79-4578-43f4-a382-cb2b0e2ad3fc",
+//         ident: "Пользовательский",
+//         user_id: "12343242",
+//       },
+//       transactions: [
+//         {
+//           id: "27d8b11d-65b9-4a8c-854b-d2ec95cbff72",
+//           journal_id: "27d8b11d-65b9-4a8c-854b-d2ec95cbff72",
+//           account_id: "27d8b11d-65b9-4a8c-854b-d2ec95cbff72",
+//           amount: 546785,
+//           created: "19:30 07.11.2024",
+//         },
+//       ],
+//       documents: [
+//         { filename: "Ошибочный_платеж" },
+//         { filename: "Подтверждение_возврата" },
+//       ],
+//     },
+//   },
+//   {
+//     id: "88e742ba-e620-4f5f-929e-bb507f5b79e8",
+//     sender: "a4580d2a-620f-4f35-90b0-b3ab58a9fa5c",
+//     receiver: "c856746f-f5a7-4bb0-b1a4-1d30c6e074d1",
+//     transaction_date: "08.11.2024",
+//     transaction_type: "Продажа товара",
+//     way_type: "Payme",
+//     amount: 989500,
+//     status: 1,
+//     subcard: {
+//       id: "88e742ba-e620-4f5f-929e-bb507f5b79e8",
+//       status: 1,
+//       sender: {
+//         id: "a4580d2a-620f-4f35-90b0-b3ab58a9fa5c",
+//         ident: "Оборотный",
+//       },
+//       receiver: {
+//         id: "c856746f-f5a7-4bb0-b1a4-1d30c6e074d1",
+//         ident: "Пользовательский",
+//         user_id: "98745321",
+//       },
+//       transactions: [
+//         {
+//           id: "ab01c092-2f90-41c5-8bc1-7ac423fa7ff5",
+//           journal_id: "ab01c092-2f90-41c5-8bc1-7ac423fa7ff5",
+//           account_id: "ab01c092-2f90-41c5-8bc1-7ac423fa7ff5",
+//           amount: 989500,
+//           created: "20:00 08.11.2024",
+//         },
+//       ],
+//       documents: [
+//         { filename: "Документы_по_продаже" },
+//         { filename: "Согласование_платежа" },
+//       ],
+//     },
+//   },
+// ];
 
-export const AdminReviews: IAdminReviewData[] = [
-  {
-    id: "d1f2g3h4-i5j6-k7l8-m9n0-o1p2q3r4s5t6",
-    createdDate: "15.03.2023",
-    closeDate: "15.03.2023",
-    platform: {
-      id: "f6g7h8i9-j0k1-l2m3-n4o5-p6q7r8s9t0u1",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      name: "AdPlace",
-    },
-    sender: {
-      id: "v2w3x4y5-z6a7-b8c9-d0e1-f2g3h4i5j6k7",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "marketing.solutions@gmail.com",
-      userId: "83746215",
-    },
-    moderator: {
-      id: "v2w3x4y5-z6a7-b8c9-d0e1-f2g3h4i5j6k7",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      name: "Ирина Аллегрова",
-      userId: "45454545",
-    },
-    review: {
-      rate: 5,
-      text: "Очень довольны сотрудничеством. Публикация была размещена точно в оговоренное время, с текстом и оформлением, полностью соответствующими нашим ожиданиям. Владелец канала проявил профессиональный подход, оперативно отвечал на все вопросы и учел все пожелания. Рекламный пост вызвал живой интерес у подписчиков, и мы получили больше откликов, чем рассчитывали. Рекомендуем сотрудничество и планируем обращаться снова для будущих кампаний! Очень довольны сотрудничеством. Публикация была размещена точно в оговоренное время, с текстом и оформлением, полностью соответствующими нашим ожиданиям. Владелец канала проявил профессиональный подход, оперативно отвечал на все вопросы и учел все пожелания. Рекламный пост вызвал живой интерес у подписчиков, и мы получили больше откликов, чем рассчитывали. Рекомендуем сотрудничество и планируем обращаться снова для будущих кампаний!Очень довольны сотрудничеством. Публикация была размещена точно в оговоренное время, с текстом и оформлением, полностью соответствующими нашим ожиданиям. Владелец канала проявил профессиональный подход, оперативно отвечал на все вопросы и учел все пожелания. Рекламный пост вызвал живой интерес у подписчиков, и мы получили больше откликов, чем рассчитывали. Рекомендуем сотрудничество и планируем обращаться снова для будущих кампаний!Очень довольны сотрудничеством. Публикация была размещена точно в оговоренное время, с текстом и оформлением, полностью соответствующими нашим ожиданиям. Владелец канала проявил профессиональный подход, оперативно отвечал на все вопросы и учел все пожелания. Рекламный пост вызвал живой интерес у подписчиков, и мы получили больше откликов, чем рассчитывали. Рекомендуем сотрудничество и планируем обращаться снова для будущих кампаний!",
-    },
-  },
-  {
-    id: "e2f3g4h5-i6j7-k8l9-m0n1-o2p3q4r5s6t7",
-    createdDate: "10.04.2023",
-    platform: {
-      id: "u1v2w3x4-y5z6-a7b8-c9d0-e1f2g3h4i5j6",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      name: "PromoHub",
-    },
-    sender: {
-      id: "g6h7i8j9-k0l1-m2n3-o4p5-q6r7s8t9u0v1",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "ads.agency@example.com",
-      userId: "19283746",
-    },
-    review: {
-      rate: 4,
-      text: "Площадка оправдала ожидания, публикация прошла успешно, и мы наблюдали активное вовлечение аудитории. Несколько вопросов по технической части возникли, но администратор оперативно на них ответил. Рекламный пост привлек внимание целевой аудитории, и мы получили хорошую отдачу. Рекомендуем эту платформу для продвижения.",
-    },
-  },
-  {
-    id: "f3g4h5i6-j7k8-l9m0-n1o2-p3q4r5s6t7u8",
-    createdDate: "28.05.2023",
-    platform: {
-      id: "w2x3y4z5-a6b7-c8d9-e0f1-g2h3i4j5k6l7",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      name: "MediaMarket",
-    },
-    sender: {
-      id: "i9j0k1l2-m3n4-o5p6-q7r8-s9t0u1v2w3x4",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "contact@mediacorp.com",
-      userId: "28374659",
-    },
-    review: {
-      rate: 5,
-      text: "Отличная платформа для рекламного продвижения. Сотрудничество прошло на высшем уровне: всё организовано чётко, владелец канала на связи, публикации в срок, креативно и качественно. Аудитория проявила активный интерес к посту, что положительно отразилось на нашем бренде. Будем пользоваться услугами этой площадки снова!",
-    },
-  },
-  {
-    id: "g4h5i6j7-k8l9-m0n1-o2p3-q4r5s6t7u8v9",
-    createdDate: "12.06.2023",
-    platform: {
-      id: "v3w4x5y6-z7a8-b9c0-d1e2-f3g4h5i6j7k8",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      name: "AdExchange",
-    },
-    sender: {
-      id: "o2p3q4r5-s6t7-u8v9-w0x1-y2z3a4b5c6d7",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "promotion.expert@gmail.com",
-      userId: "73648219",
-    },
-    review: {
-      rate: 3,
-      text: "Площадка имеет хорошую базу пользователей, но некоторые моменты требуют улучшения. Публикация прошла успешно, но задержка по времени чуть помешала. В целом, аудитория откликнулась положительно, но немного доработок не помешало бы. Надеемся на улучшение сервиса в будущем.",
-    },
-  },
-  {
-    id: "h5i6j7k8-l9m0-n1o2-p3q4-r5s6t7u8v9w0",
-    createdDate: "07.07.2023",
-    platform: {
-      id: "x4y5z6a7-b8c9-d0e1-f2g3-h4i5j6k7l8m9",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      name: "AdFlex",
-    },
-    sender: {
-      id: "p3q4r5s6-t7u8-v9w0-x1y2-z3a4b5c6d7e8",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "ad.marketing.pro@example.com",
-      userId: "56473829",
-    },
-    review: {
-      rate: 4,
-      text: "Хороший опыт работы с этой площадкой! Поддержка на высоте, администратор быстро реагировал на все запросы. Публикация прошла успешно, аудитория оказалась активной и отзывчивой. Планируем продолжить сотрудничество для дальнейших кампаний.",
-    },
-  },
-  {
-    id: "j1k2l3m4-n5o6-p7q8-r9s0-t1u2v3w4x5y6",
-    createdDate: "14.08.2023",
-    closeDate: "15.03.2023",
-    platform: {
-      id: "y1z2a3b4-c5d6-e7f8-g9h0-i1j2k3l4m5n6",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      name: "Promo Digest",
-    },
-    sender: {
-      id: "o5p6q7r8-s9t0-u1v2-w3x4-y5z6a7b8c9d0",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "partner.promodigest@gmail.com",
-      userId: "18394756",
-    },
-    moderator: {
-      id: "v2w3x4y5-z6a7-b8c9-d0e1-f2g3h4i5j6k7",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      name: "Ирина Аллегрова",
-      userId: "45454545",
-    },
-    review: {
-      rate: 5,
-      text: "Отличная рекламная площадка! Все требования по оформлению поста были учтены. Администратор постоянно оставался на связи и помогал с оформлением. Рекламная кампания прошла успешно, получили большое количество новых клиентов. Рекомендуем!",
-    },
-  },
-  {
-    id: "a2b3c4d5-e6f7-g8h9-i0j1-k2l3m4n5o6p7",
-    createdDate: "03.09.2023",
-    platform: {
-      id: "n3o4p5q6-r7s8-t9u0-v1w2-x3y4z5a6b7c8",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      name: "Digital Talks",
-    },
-    sender: {
-      id: "l7m8n9o0-p1q2-r3s4-t5u6-v7w8x9y0z1a2",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "contact@digitaltalks.com",
-      userId: "74628193",
-    },
-    review: {
-      rate: 4,
-      text: "Всё прошло гладко, аудитория откликнулась положительно. Несколько раз корректировали текст, но администратор был терпелив и помогал. Будем рекомендовать этот канал.",
-    },
-  },
-  {
-    id: "p3q4r5s6-t7u8-v9w0-x1y2-z3a4b5c6d7e8",
-    createdDate: "27.10.2023",
-    platform: {
-      id: "y3z4a5b6-c7d8-e9f0-g1h2-i3j4k5l6m7n8",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      name: "Smart Market",
-    },
-    sender: {
-      id: "w1x2y3z4-a5b6-c7d8-e9f0-g1h2i3j4k5l6",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "promo@smartmarket.com",
-      userId: "92837465",
-    },
-    review: {
-      rate: 3,
-      text: "Неплохая платформа, но могли бы улучшить обратную связь. Публикация сработала, но без особых результатов. Возможно, воспользуемся снова, если будет лучшее обслуживание.",
-    },
-  },
-  {
-    id: "c8d9e0f1-g2h3-i4j5-k6l7-m8n9o0p1q2r3",
-    createdDate: "11.11.2023",
-    platform: {
-      id: "j5k6l7m8-n9o0-p1q2-r3s4-t5u6v7w8x9y0",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      name: "Trend Hub",
-    },
-    sender: {
-      id: "m2n3o4p5-q6r7-s8t9-u0v1-w2x3y4z5a6b7",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "trendhub.ads@gmail.com",
-      userId: "64738291",
-    },
-    review: {
-      rate: 5,
-      text: "Сработано на отлично! Креативность и профессионализм команды Trend Hub впечатлили. Аудитория заинтересованная, пост собрал множество откликов. Будем продолжать сотрудничество!",
-    },
-  },
-  {
-    id: "d4e5f6g7-h8i9-j0k1-l2m3-n4o5p6q7r8s9",
-    createdDate: "15.12.2023",
-    platform: {
-      id: "t6u7v8w9-x0y1-z2a3-b4c5-d6e7f8g9h0i1",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      name: "Biz Adverts",
-    },
-    sender: {
-      id: "r4s5t6u7-v8w9-x0y1-z2a3-b4c5d6e7f8g9",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "info@bizadverts.net",
-      userId: "94736218",
-    },
-    review: {
-      rate: 4,
-      text: "Рекламная кампания прошла успешно, площадка выполнила свои обязательства. Немного задержек с обратной связью, но конечный результат нас устроил. С удовольствием обратимся снова.",
-    },
-  },
-  {
-    id: "a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6",
-    createdDate: "04.01.2024",
-    closeDate: "15.03.2023",
-    platform: {
-      id: "h1i2j3k4-l5m6-n7o8-p9q0-r1s2t3u4v5w6",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      name: "Market Arena",
-    },
-    sender: {
-      id: "z0a1b2c3-d4e5-f6g7-h8i9-j0k1l2m3n4o5",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      email: "ads@marketarena.com",
-      userId: "78293541",
-    },
-    moderator: {
-      id: "v2w3x4y5-z6a7-b8c9-d0e1-f2g3h4i5j6k7",
-      avatar:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
-      name: "Ирина Аллегрова",
-      userId: "45454545",
-    },
-    review: {
-      rate: 5,
-      text: "Отличный сервис! Администратор на связи 24/7, отзывчивый и доброжелательный. Пост собрал много просмотров и привлечённой аудитории. Будем обращаться регулярно.",
-    },
-  },
-];
+// export const AdminReviews: IAdminReviewData[] = [
+//   {
+//     id: "d1f2g3h4-i5j6-k7l8-m9n0-o1p2q3r4s5t6",
+//     created: "15.03.2023",
+//     closeDate: "15.03.2023",
+//     channel: {
+//       id: "f6g7h8i9-j0k1-l2m3-n4o5-p6q7r8s9t0u1",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       name: "AdPlace",
+//     },
+//     sender: {
+//       id: "v2w3x4y5-z6a7-b8c9-d0e1-f2g3h4i5j6k7",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "marketing.solutions@gmail.com",
+//       userId: "83746215",
+//     },
+//     moderator: {
+//       id: "v2w3x4y5-z6a7-b8c9-d0e1-f2g3h4i5j6k7",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       name: "Ирина Аллегрова",
+//       userId: "45454545",
+//     },
+//     review: {
+//       rate: 5,
+//       text: "Очень довольны сотрудничеством. Публикация была размещена точно в оговоренное время, с текстом и оформлением, полностью соответствующими нашим ожиданиям. Владелец канала проявил профессиональный подход, оперативно отвечал на все вопросы и учел все пожелания. Рекламный пост вызвал живой интерес у подписчиков, и мы получили больше откликов, чем рассчитывали. Рекомендуем сотрудничество и планируем обращаться снова для будущих кампаний! Очень довольны сотрудничеством. Публикация была размещена точно в оговоренное время, с текстом и оформлением, полностью соответствующими нашим ожиданиям. Владелец канала проявил профессиональный подход, оперативно отвечал на все вопросы и учел все пожелания. Рекламный пост вызвал живой интерес у подписчиков, и мы получили больше откликов, чем рассчитывали. Рекомендуем сотрудничество и планируем обращаться снова для будущих кампаний!Очень довольны сотрудничеством. Публикация была размещена точно в оговоренное время, с текстом и оформлением, полностью соответствующими нашим ожиданиям. Владелец канала проявил профессиональный подход, оперативно отвечал на все вопросы и учел все пожелания. Рекламный пост вызвал живой интерес у подписчиков, и мы получили больше откликов, чем рассчитывали. Рекомендуем сотрудничество и планируем обращаться снова для будущих кампаний!Очень довольны сотрудничеством. Публикация была размещена точно в оговоренное время, с текстом и оформлением, полностью соответствующими нашим ожиданиям. Владелец канала проявил профессиональный подход, оперативно отвечал на все вопросы и учел все пожелания. Рекламный пост вызвал живой интерес у подписчиков, и мы получили больше откликов, чем рассчитывали. Рекомендуем сотрудничество и планируем обращаться снова для будущих кампаний!",
+//     },
+//   },
+//   {
+//     id: "e2f3g4h5-i6j7-k8l9-m0n1-o2p3q4r5s6t7",
+//     created: "10.04.2023",
+//     channel: {
+//       id: "u1v2w3x4-y5z6-a7b8-c9d0-e1f2g3h4i5j6",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       name: "PromoHub",
+//     },
+//     sender: {
+//       id: "g6h7i8j9-k0l1-m2n3-o4p5-q6r7s8t9u0v1",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "ads.agency@example.com",
+//       userId: "19283746",
+//     },
+//     review: {
+//       rate: 4,
+//       text: "Площадка оправдала ожидания, публикация прошла успешно, и мы наблюдали активное вовлечение аудитории. Несколько вопросов по технической части возникли, но администратор оперативно на них ответил. Рекламный пост привлек внимание целевой аудитории, и мы получили хорошую отдачу. Рекомендуем эту платформу для продвижения.",
+//     },
+//   },
+//   {
+//     id: "f3g4h5i6-j7k8-l9m0-n1o2-p3q4r5s6t7u8",
+//     created: "28.05.2023",
+//     channel: {
+//       id: "w2x3y4z5-a6b7-c8d9-e0f1-g2h3i4j5k6l7",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       name: "MediaMarket",
+//     },
+//     sender: {
+//       id: "i9j0k1l2-m3n4-o5p6-q7r8-s9t0u1v2w3x4",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "contact@mediacorp.com",
+//       userId: "28374659",
+//     },
+//     review: {
+//       rate: 5,
+//       text: "Отличная платформа для рекламного продвижения. Сотрудничество прошло на высшем уровне: всё организовано чётко, владелец канала на связи, публикации в срок, креативно и качественно. Аудитория проявила активный интерес к посту, что положительно отразилось на нашем бренде. Будем пользоваться услугами этой площадки снова!",
+//     },
+//   },
+//   {
+//     id: "g4h5i6j7-k8l9-m0n1-o2p3-q4r5s6t7u8v9",
+//     created: "12.06.2023",
+//     channel: {
+//       id: "v3w4x5y6-z7a8-b9c0-d1e2-f3g4h5i6j7k8",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       name: "AdExchange",
+//     },
+//     sender: {
+//       id: "o2p3q4r5-s6t7-u8v9-w0x1-y2z3a4b5c6d7",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "promotion.expert@gmail.com",
+//       userId: "73648219",
+//     },
+//     review: {
+//       rate: 3,
+//       text: "Площадка имеет хорошую базу пользователей, но некоторые моменты требуют улучшения. Публикация прошла успешно, но задержка по времени чуть помешала. В целом, аудитория откликнулась положительно, но немного доработок не помешало бы. Надеемся на улучшение сервиса в будущем.",
+//     },
+//   },
+//   {
+//     id: "h5i6j7k8-l9m0-n1o2-p3q4-r5s6t7u8v9w0",
+//     created: "07.07.2023",
+//     channel: {
+//       id: "x4y5z6a7-b8c9-d0e1-f2g3-h4i5j6k7l8m9",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       name: "AdFlex",
+//     },
+//     sender: {
+//       id: "p3q4r5s6-t7u8-v9w0-x1y2-z3a4b5c6d7e8",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "ad.marketing.pro@example.com",
+//       userId: "56473829",
+//     },
+//     review: {
+//       rate: 4,
+//       text: "Хороший опыт работы с этой площадкой! Поддержка на высоте, администратор быстро реагировал на все запросы. Публикация прошла успешно, аудитория оказалась активной и отзывчивой. Планируем продолжить сотрудничество для дальнейших кампаний.",
+//     },
+//   },
+//   {
+//     id: "j1k2l3m4-n5o6-p7q8-r9s0-t1u2v3w4x5y6",
+//     created: "14.08.2023",
+//     closeDate: "15.03.2023",
+//     channel: {
+//       id: "y1z2a3b4-c5d6-e7f8-g9h0-i1j2k3l4m5n6",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       name: "Promo Digest",
+//     },
+//     sender: {
+//       id: "o5p6q7r8-s9t0-u1v2-w3x4-y5z6a7b8c9d0",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "partner.promodigest@gmail.com",
+//       userId: "18394756",
+//     },
+//     moderator: {
+//       id: "v2w3x4y5-z6a7-b8c9-d0e1-f2g3h4i5j6k7",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       name: "Ирина Аллегрова",
+//       userId: "45454545",
+//     },
+//     review: {
+//       rate: 5,
+//       text: "Отличная рекламная площадка! Все требования по оформлению поста были учтены. Администратор постоянно оставался на связи и помогал с оформлением. Рекламная кампания прошла успешно, получили большое количество новых клиентов. Рекомендуем!",
+//     },
+//   },
+//   {
+//     id: "a2b3c4d5-e6f7-g8h9-i0j1-k2l3m4n5o6p7",
+//     created: "03.09.2023",
+//     channel: {
+//       id: "n3o4p5q6-r7s8-t9u0-v1w2-x3y4z5a6b7c8",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       name: "Digital Talks",
+//     },
+//     sender: {
+//       id: "l7m8n9o0-p1q2-r3s4-t5u6-v7w8x9y0z1a2",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "contact@digitaltalks.com",
+//       userId: "74628193",
+//     },
+//     review: {
+//       rate: 4,
+//       text: "Всё прошло гладко, аудитория откликнулась положительно. Несколько раз корректировали текст, но администратор был терпелив и помогал. Будем рекомендовать этот канал.",
+//     },
+//   },
+//   {
+//     id: "p3q4r5s6-t7u8-v9w0-x1y2-z3a4b5c6d7e8",
+//     created: "27.10.2023",
+//     channel: {
+//       id: "y3z4a5b6-c7d8-e9f0-g1h2-i3j4k5l6m7n8",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       name: "Smart Market",
+//     },
+//     sender: {
+//       id: "w1x2y3z4-a5b6-c7d8-e9f0-g1h2i3j4k5l6",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "promo@smartmarket.com",
+//       userId: "92837465",
+//     },
+//     review: {
+//       rate: 3,
+//       text: "Неплохая платформа, но могли бы улучшить обратную связь. Публикация сработала, но без особых результатов. Возможно, воспользуемся снова, если будет лучшее обслуживание.",
+//     },
+//   },
+//   {
+//     id: "c8d9e0f1-g2h3-i4j5-k6l7-m8n9o0p1q2r3",
+//     created: "11.11.2023",
+//     channel: {
+//       id: "j5k6l7m8-n9o0-p1q2-r3s4-t5u6v7w8x9y0",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       name: "Trend Hub",
+//     },
+//     sender: {
+//       id: "m2n3o4p5-q6r7-s8t9-u0v1-w2x3y4z5a6b7",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "trendhub.ads@gmail.com",
+//       userId: "64738291",
+//     },
+//     review: {
+//       rate: 5,
+//       text: "Сработано на отлично! Креативность и профессионализм команды Trend Hub впечатлили. Аудитория заинтересованная, пост собрал множество откликов. Будем продолжать сотрудничество!",
+//     },
+//   },
+//   {
+//     id: "d4e5f6g7-h8i9-j0k1-l2m3-n4o5p6q7r8s9",
+//     created: "15.12.2023",
+//     channel: {
+//       id: "t6u7v8w9-x0y1-z2a3-b4c5-d6e7f8g9h0i1",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       name: "Biz Adverts",
+//     },
+//     sender: {
+//       id: "r4s5t6u7-v8w9-x0y1-z2a3-b4c5d6e7f8g9",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "info@bizadverts.net",
+//       userId: "94736218",
+//     },
+//     review: {
+//       rate: 4,
+//       text: "Рекламная кампания прошла успешно, площадка выполнила свои обязательства. Немного задержек с обратной связью, но конечный результат нас устроил. С удовольствием обратимся снова.",
+//     },
+//   },
+//   {
+//     id: "a1b2c3d4-e5f6-g7h8-i9j0-k1l2m3n4o5p6",
+//     created: "04.01.2024",
+//     closeDate: "15.03.2023",
+//     channel: {
+//       id: "h1i2j3k4-l5m6-n7o8-p9q0-r1s2t3u4v5w6",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       name: "Market Arena",
+//     },
+//     sender: {
+//       id: "z0a1b2c3-d4e5-f6g7-h8i9-j0k1l2m3n4o5",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       email: "ads@marketarena.com",
+//       userId: "78293541",
+//     },
+//     moderator: {
+//       id: "v2w3x4y5-z6a7-b8c9-d0e1-f2g3h4i5j6k7",
+//       avatar:
+//         "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSj70E7y_6zqDXJasRG7zxg-Ig_07aIuia_pw&s",
+//       name: "Ирина Аллегрова",
+//       userId: "45454545",
+//     },
+//     review: {
+//       rate: 5,
+//       text: "Отличный сервис! Администратор на связи 24/7, отзывчивый и доброжелательный. Пост собрал много просмотров и привлечённой аудитории. Будем обращаться регулярно.",
+//     },
+//   },
+// ];
 
 // export const AdminComplaints: IAdminComplaintData[] = [
 //   {

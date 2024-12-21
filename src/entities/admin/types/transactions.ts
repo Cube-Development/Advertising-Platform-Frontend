@@ -1,4 +1,4 @@
-import { transactionStatus } from "../config";
+import { identificationType, transactionStatus } from "../config";
 
 export interface IAdminTransactions {
   page: number;
@@ -16,10 +16,10 @@ export interface IAdminTransactionData {
   way_type: string;
   amount: number;
   status: transactionStatus;
-  subcard: IAdminTransactionRoute;
+  subcard: IAdminTransactionInfo;
 }
 
-export interface IAdminTransactionRoute {
+export interface IAdminTransactionInfo {
   id: string;
   status: transactionStatus;
   sender: IUser;
@@ -30,16 +30,16 @@ export interface IAdminTransactionRoute {
 
 interface IUser {
   id: string;
-  identification: string;
-  userId?: string;
+  ident: identificationType;
+  user_id?: string;
 }
 
 interface ITransaction {
   id: string;
-  transactionId: string;
-  accountId: string;
+  journal_id: string;
+  account_id: string;
   amount: number;
-  datetime: string;
+  created: string;
 }
 
 interface IDocument {

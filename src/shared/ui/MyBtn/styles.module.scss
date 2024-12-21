@@ -58,6 +58,12 @@
     background: var(--Personal-colors-Green);
   }
 
+  &__grey {
+    color: var(--Personal-colors-White);
+    background: var(--Personal-colors-Grey);
+    cursor: default !important;
+  }
+
   &__yellow {
     color: var(--Personal-colors-White);
     background: var(--Orange);

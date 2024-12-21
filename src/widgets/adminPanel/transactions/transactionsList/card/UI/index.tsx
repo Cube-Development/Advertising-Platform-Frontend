@@ -1,22 +1,24 @@
 import {
   adminTransactionStatus,
+  IAdminTransactionData,
   TransactionDetails,
   TransactionDocuments,
-  IAdminTransactionData,
   TransactionsRoute,
   transactionStatus,
+  useGetAdminTransactionInfoQuery,
 } from "@entities/admin";
+import { TransactionCardMenu } from "@features/adminPanel";
 import { ArrowSmallVerticalIcon } from "@shared/assets";
 import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
+  AccountsLoader,
   useToast,
 } from "@shared/ui";
-import { FC, MutableRefObject } from "react";
+import { FC, MutableRefObject, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { TransactionCardMenu } from "@features/adminPanel";
 
 interface TransactionCardProps {
   card: IAdminTransactionData;
@@ -31,7 +33,14 @@ export const TransactionCard: FC<TransactionCardProps> = ({
 }) => {
   const { t } = useTranslation();
   const { toast } = useToast();
-  const subcard = card?.subcard;
+  const [isSubcardOpen, setSubcardOpen] = useState(false);
+
+  const { data: subcard, isLoading } = useGetAdminTransactionInfoQuery(
+    { id: card?.id },
+    {
+      skip: !isSubcardOpen,
+    },
+  );
 
   const handleCopyLink = (text: string = "") => {
     navigator.clipboard.writeText(text);
@@ -39,6 +48,10 @@ export const TransactionCard: FC<TransactionCardProps> = ({
       variant: "default",
       title: t("copy.admin_transactions.id"),
     });
+  };
+
+  const handleChangeOpenSubcard = (): void => {
+    setSubcardOpen(!isSubcardOpen);
   };
 
   return (
@@ -96,17 +109,30 @@ export const TransactionCard: FC<TransactionCardProps> = ({
         </div>
         <div className={styles.settings}>
           <TransactionCardMenu id={card?.id} />
-          <AccordionTrigger className={styles.trigger}>
-            <div className="arrow">
-              <ArrowSmallVerticalIcon className="icon__grey rotate__down" />
-            </div>
+          <AccordionTrigger
+            className={styles.trigger}
+            onClick={() => handleChangeOpenSubcard()}
+          >
+            {isLoading ? (
+              <div className={styles.loader}>
+                <AccountsLoader />
+              </div>
+            ) : (
+              <div className="arrow">
+                <ArrowSmallVerticalIcon className="icon__grey rotate__down" />
+              </div>
+            )}
           </AccordionTrigger>
         </div>
       </div>
       <AccordionContent className={styles.content}>
-        <TransactionDetails subcard={subcard} />
-        <TransactionsRoute subcard={subcard} />
-        <TransactionDocuments subcard={subcard} />
+        {!!subcard && (
+          <>
+            <TransactionDetails subcard={subcard} />
+            <TransactionsRoute subcard={subcard} />
+            <TransactionDocuments subcard={subcard} />
+          </>
+        )}
       </AccordionContent>
     </AccordionItem>
   );

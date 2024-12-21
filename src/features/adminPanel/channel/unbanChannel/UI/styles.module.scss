@@ -1,0 +1,15 @@
+.loader {
+  display: grid;
+  align-content: center;
+  justify-content: center;
+
+  span {
+    width: 15px;
+    height: 15px;
+
+    &::after {
+      width: 15px;
+      height: 15px;
+    }
+  }
+}

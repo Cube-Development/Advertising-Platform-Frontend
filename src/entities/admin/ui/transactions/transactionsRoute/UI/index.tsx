@@ -1,11 +1,11 @@
-import { IAdminTransactionRoute } from "@entities/admin";
+import { IAdminTransactionInfo } from "@entities/admin";
 import { useToast } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
 interface TransactionsRouteProps {
-  subcard: IAdminTransactionRoute;
+  subcard: IAdminTransactionInfo;
 }
 
 export const TransactionsRoute: FC<TransactionsRouteProps> = ({ subcard }) => {
@@ -47,21 +47,21 @@ export const TransactionsRoute: FC<TransactionsRouteProps> = ({ subcard }) => {
             </div>
             <div
               className={styles.id}
-              onClick={() => handleCopyLink(item?.transactionId)}
+              onClick={() => handleCopyLink(item?.journal_id)}
             >
-              <p>{item?.transactionId}</p>
+              <p>{item?.journal_id}</p>
             </div>
             <div
               className={styles.id}
-              onClick={() => handleCopyLink(item?.accountId)}
+              onClick={() => handleCopyLink(item?.account_id)}
             >
-              <p>{item?.accountId}</p>
+              <p>{item?.account_id}</p>
             </div>
             <div>
               <p>{item?.amount.toLocaleString()}</p>
             </div>
             <div>
-              <p>{item?.datetime}</p>
+              <p>{item?.created}</p>
             </div>
           </div>
         ))}
