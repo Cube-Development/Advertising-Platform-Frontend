@@ -45,9 +45,8 @@
 
   .input {
     display: grid;
-    grid-auto-flow: column;
     align-items: center;
-    justify-content: space-between;
+    grid-template-columns: 1fr max-content;
 
     border-radius: 12px;
     border: 1px solid var(--Inside-container);

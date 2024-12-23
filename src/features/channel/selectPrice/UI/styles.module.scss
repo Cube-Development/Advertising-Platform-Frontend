@@ -14,9 +14,20 @@
   }
 
   .accomms {
+    // grid-template: 1fr / 1fr 1fr 1fr;
     display: grid;
-    grid-template: 1fr / 1fr 1fr 1fr;
-    gap: 30px;
+    column-gap: 10px;
+    row-gap: 30px;
+
+    &.max {
+      grid-template-columns: repeat(2, 1fr);
+      grid-template-rows: repeat(2, 1fr);
+    }
+
+    &.min {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(1, 1fr);
+    }
 
     @media (max-width: 992px) {
       grid-template: unset;

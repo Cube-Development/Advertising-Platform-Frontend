@@ -9,11 +9,12 @@ import {
   IAddChannelData,
   PLATFORM_PARAMETERS,
   useGetChannelAgesQuery,
+  useGetChannelFormatsQuery,
   useGetChannelLanguagesQuery,
   useGetChannelRegionsQuery,
   useGetCompanyCategoriesQuery,
 } from "@entities/channel";
-import { platformTypes } from "@entities/platform";
+import { platformTypes, platformTypesNum } from "@entities/platform";
 import {
   AcceptChannel,
   BanChannel,
@@ -41,6 +42,7 @@ import "swiper/css/navigation";
 import styles from "./styles.module.scss";
 import noUserAvatar from "/images/notFound/noUserAvatar.jpg";
 import { IFormat } from "@entities/project";
+import { FormatPrice, SelectPrice } from "@features/channel";
 
 interface ChannelCardProps {
   card: IAdminChannelData;
@@ -91,6 +93,19 @@ export const ChannelCard: FC<ChannelCardProps> = ({
     });
   const formFields = watch();
 
+  const formatsResTg = { ...contentRes, platform: platformTypesNum.telegram };
+  const formatsResInsta = {
+    ...contentRes,
+    platform: platformTypesNum.instagram,
+  };
+  const formatsResYouTube = {
+    ...contentRes,
+    platform: platformTypesNum.youtube,
+  };
+  const { data: formatsTg } = useGetChannelFormatsQuery(formatsResTg);
+  const { data: formatsInsta } = useGetChannelFormatsQuery(formatsResInsta);
+  const { data: formatsYouTube } = useGetChannelFormatsQuery(formatsResYouTube);
+
   const { data: categories } = useGetCompanyCategoriesQuery(contentRes);
   const { data: ages } = useGetChannelAgesQuery(contentRes);
   const { data: regions } = useGetChannelRegionsQuery(contentRes);
@@ -127,6 +142,8 @@ export const ChannelCard: FC<ChannelCardProps> = ({
       });
     }
   }, [channel, reset]);
+
+  console.log(formFields);
 
   return (
     <AccordionItem
@@ -263,7 +280,6 @@ export const ChannelCard: FC<ChannelCardProps> = ({
                   type={channelParameterData.category}
                   textData={"add_platform.description.category"}
                   isRow={true}
-                  isCatalog={true}
                   defaultValues={
                     (categories?.contents || []).find(
                       (item) => item.id === formFields.category,
@@ -280,7 +296,6 @@ export const ChannelCard: FC<ChannelCardProps> = ({
                   type={channelParameterData.age}
                   textData={"add_platform.description.age"}
                   isRow={true}
-                  isCatalog={true}
                   defaultValues={formFields.age}
                 />
               </div>
@@ -294,7 +309,6 @@ export const ChannelCard: FC<ChannelCardProps> = ({
                   type={channelParameterData.language}
                   textData={"add_platform.description.languages"}
                   isRow={true}
-                  isCatalog={true}
                   defaultValues={formFields.language}
                 />
               </div>
@@ -307,7 +321,6 @@ export const ChannelCard: FC<ChannelCardProps> = ({
                   type={channelParameterData.region}
                   textData={"add_platform.description.region"}
                   isRow={true}
-                  isCatalog={true}
                   defaultValues={formFields.region}
                 />
               </div>
@@ -317,8 +330,26 @@ export const ChannelCard: FC<ChannelCardProps> = ({
                   getValues={getValues}
                   title={"add_platform.description.sex.title"}
                   isRow={true}
-                  isCatalog={true}
                   defaultValues={formFields.male}
+                />
+              </div>
+              <div className={styles.block}>
+                <SelectPrice
+                  onChange={setValue}
+                  getValues={getValues}
+                  formats={
+                    card?.channel?.platform === platformTypesNum?.telegram
+                      ? formatsTg?.contents || []
+                      : card?.channel?.platform === platformTypesNum?.instagram
+                        ? formatsInsta?.contents || []
+                        : formatsYouTube?.contents || []
+                  }
+                  AccommPrice={FormatPrice}
+                  type={channelParameterData.format}
+                  title={"add_platform.description.price.title"}
+                  text={"add_platform.description.price.text"}
+                  info={"add_platform.description.price.info"}
+                  defaultValues={formFields.format}
                 />
               </div>
             </div>
@@ -326,7 +357,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({
               {card?.status === channelStatus.active ? (
                 <>
                   <BanChannel id={card?.channel?.id} />
-                  <UpdateChannel id={card?.channel?.id} />
+                  <UpdateChannel channel={formFields} id={card?.channel?.id} />
                 </>
               ) : card?.status === channelStatus.moderation ? (
                 <>
@@ -336,7 +367,11 @@ export const ChannelCard: FC<ChannelCardProps> = ({
               ) : card?.status === channelStatus.banned ? (
                 <>
                   <UnbanChannel id={card?.channel?.id} />
-                  <UpdateChannel id={card?.channel?.id} disabled={true} />
+                  <UpdateChannel
+                    channel={formFields}
+                    id={card?.channel?.id}
+                    disabled={true}
+                  />
                 </>
               ) : card?.status === channelStatus.inactive ? (
                 <>
