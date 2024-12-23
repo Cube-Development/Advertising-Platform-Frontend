@@ -5,6 +5,10 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import noUserAvatar from "/images/notFound/noUserAvatar.jpg";
+import {
+  EditUser,
+  UpdateUser,
+} from "@features/adminPanel/user/userCardMenu/components";
 
 interface UserCardProps {
   card: IAdminUserData;
