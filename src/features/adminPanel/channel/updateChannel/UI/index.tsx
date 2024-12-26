@@ -1,11 +1,14 @@
-import { IAddChannelData, useEditChannelMutation } from "@entities/channel";
+import {
+  IAdminEditChannelData,
+  useAdminChannelEditMutation,
+} from "@entities/admin";
 import { AccountsLoader, MyButton, ToastAction, useToast } from "@shared/ui";
 import { ButtonHTMLAttributes, forwardRef } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
 interface UpdateChannelProps extends ButtonHTMLAttributes<HTMLButtonElement> {
-  channel: IAddChannelData;
+  channel: IAdminEditChannelData;
   id: string;
 }
 
@@ -13,7 +16,7 @@ export const UpdateChannel = forwardRef<HTMLButtonElement, UpdateChannelProps>(
   ({ channel, id, ...props }, ref) => {
     const { t } = useTranslation();
     const { toast } = useToast();
-    const [editChannel, { isLoading }] = useEditChannelMutation();
+    const [editChannel, { isLoading }] = useAdminChannelEditMutation();
 
     const handleOnClick = () => {
       const { ...editData } = channel;

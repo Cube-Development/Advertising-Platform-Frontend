@@ -2,11 +2,11 @@ import {
   adminChannelStatus,
   channelStatus,
   IAdminChannelData,
+  IAdminEditChannelData,
   useGetAdminChannelInfoQuery,
 } from "@entities/admin";
 import {
   channelParameterData,
-  IAddChannelData,
   PLATFORM_PARAMETERS,
   useGetChannelAgesQuery,
   useGetChannelFormatsQuery,
@@ -15,6 +15,7 @@ import {
   useGetCompanyCategoriesQuery,
 } from "@entities/channel";
 import { platformTypes, platformTypesNum } from "@entities/platform";
+import { IFormat } from "@entities/project";
 import {
   AcceptChannel,
   BanChannel,
@@ -23,6 +24,7 @@ import {
   UnbanChannel,
   UpdateChannel,
 } from "@features/adminPanel";
+import { FormatPrice, SelectPrice } from "@features/channel";
 import { SelectDescription, SelectOptions, SelectSex } from "@features/other";
 import { ArrowSmallVerticalIcon } from "@shared/assets";
 import { Languages } from "@shared/config";
@@ -41,8 +43,6 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import styles from "./styles.module.scss";
 import noUserAvatar from "/images/notFound/noUserAvatar.jpg";
-import { IFormat } from "@entities/project";
-import { FormatPrice, SelectPrice } from "@features/channel";
 
 interface ChannelCardProps {
   card: IAdminChannelData;
@@ -88,7 +88,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({
   };
 
   const { handleSubmit, setValue, getValues, watch, reset } =
-    useForm<IAddChannelData>({
+    useForm<IAdminEditChannelData>({
       defaultValues: defaultValues,
     });
   const formFields = watch();

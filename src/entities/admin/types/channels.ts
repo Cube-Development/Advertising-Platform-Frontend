@@ -43,3 +43,21 @@ export interface IAdminChannelInfo {
   in_progress: number;
   tags: string[];
 }
+
+export interface IAdminEditChannelData {
+  channel_id: string;
+  category: number;
+  male: number;
+  female: number;
+  description: string;
+  text_limit: number;
+  region: number[];
+  language: number[];
+  age: number[];
+  format: IAddFormat[];
+}
+
+interface IAddFormat {
+  name: number;
+  price: number;
+}
