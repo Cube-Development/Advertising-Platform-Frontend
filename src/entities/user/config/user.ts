@@ -1,0 +1,16 @@
+export enum profileForm {
+  id = "id",
+  first_name = "first_name",
+  surname = "surname",
+  email = "email",
+  phone = "phone",
+  location = "location",
+  language = "language",
+  system_events = "system_events",
+  project_events = "project_events",
+  promo_events = "promo_events",
+  created = "created",
+  password = "password",
+  new_password = "new_password",
+  accept_password = "accept_password",
+}

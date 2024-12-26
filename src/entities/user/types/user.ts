@@ -17,3 +17,30 @@ export interface IUser {
   new_password: string;
   accept_password: string;
 }
+
+export interface IUserData {
+  first_name: string;
+  surname: string;
+  email: string;
+  phone: string;
+  language: number;
+  location: string;
+}
+
+export interface IPasswordData {
+  // password: string;
+  new_password: string;
+  accept_password: string;
+}
+
+export interface IEventsData {
+  system_events: boolean;
+  project_events: boolean;
+  promo_events: boolean;
+}
+
+export interface IProfileData extends IUserData, IPasswordData, IEventsData {
+  id?: string;
+  created: string;
+  telegram?: string;
+}
