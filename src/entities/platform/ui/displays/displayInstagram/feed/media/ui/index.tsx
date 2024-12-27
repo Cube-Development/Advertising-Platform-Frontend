@@ -10,7 +10,7 @@ import {
   CarouselPrevious,
 } from "@shared/ui";
 import { ContentType, IFile, getContentType } from "@entities/project";
-import { GenerateDownloadLink } from "@shared/functions";
+import { GenerateDownloadLink } from "@shared/utils";
 
 interface InstagramMediaProps {
   medias?: File[];

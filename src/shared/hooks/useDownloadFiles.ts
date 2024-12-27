@@ -1,5 +1,5 @@
 import { IFile } from "@entities/project";
-import { generateDownloadLinkWithProgress } from "@shared/functions";
+import { generateDownloadLinkWithProgress } from "@shared/utils/lib";
 import { useState, useCallback } from "react";
 
 interface UseFileDownloaderResult {

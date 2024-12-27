@@ -17,7 +17,7 @@ import {
   YesIcon,
 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
-import { getFileExtension } from "@shared/functions";
+import { getFileExtension } from "@shared/utils";
 import { useAppSelector, useWindowWidth } from "@shared/hooks";
 import { paths } from "@shared/routing";
 import {

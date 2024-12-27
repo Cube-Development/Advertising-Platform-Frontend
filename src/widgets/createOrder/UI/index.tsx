@@ -31,7 +31,7 @@ import {
 } from "../components";
 import { ICreateOrderBlur } from "../config";
 import { roles } from "@entities/user";
-import { getFileExtension } from "@shared/functions";
+import { getFileExtension } from "@shared/utils";
 import { BREAKPOINT } from "@shared/config";
 
 interface CreateOrderBlockProps {}

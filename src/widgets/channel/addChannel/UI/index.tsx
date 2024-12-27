@@ -8,7 +8,7 @@ import {
 import { platformTypes } from "@entities/platform";
 import { IFormat } from "@entities/project";
 import { Languages, PAGE_ANIMATION } from "@shared/config";
-import { QueryParams } from "@shared/functions";
+import { QueryParams } from "@shared/utils";
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";

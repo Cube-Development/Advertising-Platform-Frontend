@@ -11,7 +11,7 @@ import {
 } from "@entities/project";
 import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 import i18n from "@shared/config/i18n";
-import { QueryParams } from "@shared/functions";
+import { QueryParams } from "@shared/utils";
 import { pageFilter } from "@shared/routing";
 import { BarFilter } from "@widgets/barFilter";
 import { FC, useEffect } from "react";
