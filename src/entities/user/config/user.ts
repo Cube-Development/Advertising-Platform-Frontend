@@ -10,7 +10,7 @@ export enum profileForm {
   project_events = "project_events",
   promo_events = "promo_events",
   created = "created",
-  password = "password",
+  current_password = "current_password",
   new_password = "new_password",
   accept_password = "accept_password",
 }

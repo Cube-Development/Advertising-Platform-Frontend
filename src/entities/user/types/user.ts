@@ -28,9 +28,9 @@ export interface IUserData {
 }
 
 export interface IPasswordData {
-  // password: string;
+  current_password: string;
   new_password: string;
-  accept_password: string;
+  accept_password?: string;
 }
 
 export interface IEventsData {

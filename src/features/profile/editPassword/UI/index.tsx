@@ -1,4 +1,4 @@
-import { IPasswordData, useEditProfileMutation } from "@entities/user";
+import { IPasswordData, useEditPasswordMutation } from "@entities/user";
 import { AccountsLoader, MyButton, ToastAction, useToast } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -11,19 +11,30 @@ interface EditPasswordProps {
 export const EditPassword: FC<EditPasswordProps> = ({ password }) => {
   const { toast } = useToast();
   const { t } = useTranslation();
-  const [edit, { isLoading }] = useEditProfileMutation();
+  const [edit, { isLoading }] = useEditPasswordMutation();
   const isValid = Object.values(password).every(
     (value) => value !== undefined && value !== null && value !== "",
   );
   const handleOnClick = () => {
-    if (password?.new_password !== password?.accept_password) {
+    if (
+      password?.current_password === password?.accept_password &&
+      password?.current_password === password?.new_password
+    ) {
+      toast({
+        variant: "error",
+        title: t("toasts.profile.edit.password.equal"),
+      });
+    } else if (password?.new_password !== password?.accept_password) {
       toast({
         variant: "error",
         title: t("toasts.profile.edit.password.nonEqual"),
       });
     } else {
       isValid &&
-        edit(password)
+        edit({
+          current_password: password?.current_password,
+          new_password: password?.new_password,
+        })
           .unwrap()
           .then(() => {
             toast({

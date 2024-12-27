@@ -53,7 +53,7 @@ export const SettingsProfile: FC = () => {
   };
 
   const password: IPasswordData = {
-    // password: formState?.password,
+    current_password: formState?.current_password || "",
     new_password: formState?.new_password,
     accept_password: formState?.accept_password,
   };
@@ -199,23 +199,25 @@ export const SettingsProfile: FC = () => {
               {t("profile.password_block.title")}
             </p>
             <div className={styles.parameters_wrapper}>
-              {/* <div className={styles.parameters_row}>
+              <div className={styles.parameters_row}>
                 <span>
                   {t("profile.password_block.current_password.title")}
                 </span>
                 <input
+                  type="password"
                   placeholder={t(
                     "profile.password_block.current_password.default_value",
                   )}
-                  value={formState.password}
+                  value={formState.current_password}
                   onChange={(e) =>
-                    setValue(profileForm.password, e.target.value)
+                    setValue(profileForm.current_password, e.target.value)
                   }
                 />
-              </div> */}
+              </div>
               <div className={styles.parameters_row}>
                 <span> {t("profile.password_block.new_password.title")}</span>
                 <input
+                  type="password"
                   placeholder={t(
                     "profile.password_block.new_password.default_value",
                   )}
@@ -228,6 +230,7 @@ export const SettingsProfile: FC = () => {
               <div className={styles.parameters_row}>
                 <span>{t("profile.password_block.accept_password.title")}</span>
                 <input
+                  type="password"
                   placeholder={t(
                     "profile.password_block.accept_password.default_value",
                   )}
