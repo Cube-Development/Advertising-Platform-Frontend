@@ -1,4 +1,5 @@
 import {
+  eventForm,
   IEventsData,
   IPasswordData,
   IProfileData,
@@ -6,6 +7,7 @@ import {
   profileForm,
   useEditProfileMutation,
   useGetProfileQuery,
+  userForm,
 } from "@entities/user";
 import { EditPassword, EditUser } from "@features/profile";
 import { EditPencilIcon, EmailIcon, TelegramJetlIcon } from "@shared/assets";
@@ -30,26 +32,32 @@ export const SettingsProfile: FC = () => {
 
   const { setValue, watch, reset } = useForm<IProfileData>({
     defaultValues: {
-      email: "",
-      language: languagesNum.ru,
-      location: "",
-      first_name: "",
-      surname: "",
-      phone: "",
-      system_events: false,
-      project_events: false,
-      promo_events: false,
+      user_additional: {
+        email: "",
+        language: languagesNum.ru,
+        location: "",
+        first_name: "",
+        surname: "",
+        phone: "",
+      },
+      user_events: {
+        system_events: false,
+        project_events: false,
+        promo_events: false,
+      },
     },
   });
+
   const formState = watch();
 
   const user: IUserData = {
-    first_name: formState?.first_name,
-    surname: formState?.surname,
-    email: formState?.email,
-    phone: formState?.phone,
-    location: formState?.location,
-    language: formState?.language,
+    user_additional: {
+      language: formState?.user_additional?.language,
+      location: formState?.user_additional?.location,
+      first_name: formState?.user_additional?.first_name,
+      surname: formState?.user_additional?.surname,
+      phone: formState?.user_additional?.phone,
+    },
   };
 
   const password: IPasswordData = {
@@ -59,25 +67,51 @@ export const SettingsProfile: FC = () => {
   };
 
   const events: IEventsData = {
-    promo_events: formState?.project_events,
-    project_events: formState?.project_events,
-    system_events: formState?.system_events,
+    user_events: {
+      project_events: formState?.user_events?.project_events,
+      promo_events: formState?.user_events?.promo_events,
+    },
   };
 
   useEffect(() => {
     if (!isLoading && profile) {
-      reset((prevValues) => ({
-        ...prevValues,
-        ...profile,
-      }));
+      reset({
+        user_additional: {
+          email: profile?.user_additional?.email || "",
+          language: profile?.user_additional?.language || languagesNum.ru,
+          location: profile?.user_additional?.location || "Ташкент",
+          first_name: profile?.user_additional?.first_name || "",
+          surname: profile?.user_additional?.surname || "",
+          phone: profile?.user_additional?.phone || "",
+        },
+        user_events: {
+          system_events: profile?.user_events?.system_events || true,
+          project_events: profile?.user_events?.project_events || false,
+          promo_events: profile?.user_events?.promo_events || false,
+        },
+        current_password: "",
+        new_password: "",
+        accept_password: "",
+        created: profile?.created,
+        id: profile?.id,
+        telegram: profile?.telegram,
+      });
     }
   }, [profile, isLoading]);
 
   const { toast } = useToast();
   const [edit] = useEditProfileMutation();
 
-  const handleOnClick = () => {
-    edit(events)
+  const handleOnClick = (event: eventForm) => {
+    const newValue = !formState?.user_events?.[event];
+    setValue(`${profileForm.user_events}.${event}`, newValue);
+    const updatedEvents: IEventsData = {
+      user_events: {
+        ...events?.user_events,
+        [event]: newValue,
+      },
+    };
+    edit(updatedEvents)
       .unwrap()
       .then(() => {
         toast({
@@ -123,9 +157,12 @@ export const SettingsProfile: FC = () => {
                   <span> {t("profile.account_block.name.title")}</span>
                   <input
                     placeholder={t("profile.account_block.name.default_value")}
-                    value={formState.first_name}
+                    value={formState?.user_additional?.first_name}
                     onChange={(e) =>
-                      setValue(profileForm.first_name, e.target.value)
+                      setValue(
+                        `${profileForm.user_additional}.${userForm.first_name}`,
+                        e.target.value,
+                      )
                     }
                   />
                 </div>
@@ -135,9 +172,12 @@ export const SettingsProfile: FC = () => {
                     placeholder={t(
                       "profile.account_block.surname.default_value",
                     )}
-                    value={formState.surname}
+                    value={formState?.user_additional?.surname}
                     onChange={(e) =>
-                      setValue(profileForm.surname, e.target.value)
+                      setValue(
+                        `${profileForm.user_additional}.${userForm.surname}`,
+                        e.target.value,
+                      )
                     }
                   />
                 </div>
@@ -146,16 +186,27 @@ export const SettingsProfile: FC = () => {
                 <span> {t("profile.account_block.email.title")}</span>
                 <input
                   placeholder={t("profile.account_block.email.default_value")}
-                  value={formState.email}
-                  onChange={(e) => setValue(profileForm.email, e.target.value)}
+                  value={formState?.user_additional?.email}
+                  disabled={true}
+                  onChange={(e) =>
+                    setValue(
+                      `${profileForm.user_additional}.${userForm.email}`,
+                      e.target.value,
+                    )
+                  }
                 />
               </div>
               <div className={styles.parameters_row}>
                 <span> {t("profile.account_block.phone.title")}</span>
                 <input
                   placeholder={t("profile.account_block.phone.default_value")}
-                  value={formState.phone}
-                  onChange={(e) => setValue(profileForm.phone, e.target.value)}
+                  value={formState?.user_additional?.phone}
+                  onChange={(e) =>
+                    setValue(
+                      `${profileForm.user_additional}.${userForm.phone}`,
+                      e.target.value,
+                    )
+                  }
                   type="tel"
                 />
               </div>
@@ -167,9 +218,10 @@ export const SettingsProfile: FC = () => {
                       "profile.account_block.language.default_value",
                     )}
                     value={
-                      formState.language === languagesNum.en
+                      formState?.user_additional?.language === languagesNum.en
                         ? languages.en
-                        : formState.language === languagesNum.ru
+                        : formState?.user_additional?.language ===
+                            languagesNum.ru
                           ? languages.ru
                           : languages.uz
                     }
@@ -182,9 +234,12 @@ export const SettingsProfile: FC = () => {
                     placeholder={t(
                       "profile.account_block.location.default_value",
                     )}
-                    value={formState.location}
+                    value={formState?.user_additional?.location}
                     onChange={(e) =>
-                      setValue(profileForm.location, e.target.value)
+                      setValue(
+                        `${profileForm.user_additional}.${userForm.location}`,
+                        e.target.value,
+                      )
                     }
                   />
                 </div>
@@ -259,21 +314,23 @@ export const SettingsProfile: FC = () => {
                   <EmailIcon />
                 </div>
                 <div className={styles.info_block}>
-                  <p className={styles.miniblock__title}>{formState.email}</p>
+                  <p className={styles.miniblock__title}>
+                    {formState?.user_additional?.email}
+                  </p>
                   <div className={styles.checkbox__wrapper}>
                     <span>{t("profile.notification_block.email.system")}</span>
                     <input
                       type="checkbox"
-                      checked={formState?.system_events}
-                      onChange={handleOnClick}
+                      disabled={true}
+                      checked={formState?.user_events?.system_events}
                     />
                   </div>
                   <div className={styles.checkbox__wrapper}>
                     <span>{t("profile.notification_block.email.project")}</span>
                     <input
                       type="checkbox"
-                      checked={formState?.project_events}
-                      onChange={handleOnClick}
+                      checked={formState?.user_events?.project_events}
+                      onChange={() => handleOnClick(eventForm.project_events)}
                     />
                   </div>
                   <div className={styles.checkbox__wrapper}>
@@ -282,8 +339,8 @@ export const SettingsProfile: FC = () => {
                     </span>
                     <input
                       type="checkbox"
-                      checked={formState?.promo_events}
-                      onChange={handleOnClick}
+                      checked={formState?.user_events?.promo_events}
+                      onChange={() => handleOnClick(eventForm.promo_events)}
                     />
                   </div>
                 </div>

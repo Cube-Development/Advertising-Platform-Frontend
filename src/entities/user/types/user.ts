@@ -19,9 +19,13 @@ export interface IUser {
 }
 
 export interface IUserData {
+  user_additional: IUserInfo;
+}
+
+export interface IUserInfo {
   first_name: string;
   surname: string;
-  email: string;
+  email?: string;
   phone: string;
   language: number;
   location: string;
@@ -34,7 +38,11 @@ export interface IPasswordData {
 }
 
 export interface IEventsData {
-  system_events: boolean;
+  user_events: IEventsInfo;
+}
+
+export interface IEventsInfo {
+  system_events?: boolean;
   project_events: boolean;
   promo_events: boolean;
 }

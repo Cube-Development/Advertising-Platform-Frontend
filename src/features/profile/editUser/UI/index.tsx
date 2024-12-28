@@ -12,10 +12,9 @@ export const EditUser: FC<EditUserProps> = ({ user }) => {
   const { toast } = useToast();
   const { t } = useTranslation();
   const [edit, { isLoading }] = useEditProfileMutation();
-  const isValid = Object.values(user).every(
+  const isValid = Object.values(user?.user_additional).every(
     (value) => value !== undefined && value !== null && value !== "",
   );
-
   const handleOnClick = () => {
     isValid &&
       edit(user)
