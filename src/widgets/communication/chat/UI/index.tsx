@@ -27,7 +27,7 @@ import {
   INTERSECTION_ELEMENTS,
   PAGE_ANIMATION,
 } from "@shared/config";
-import { checkDatetime, convertUTCToLocalDateTime } from "@shared/functions";
+import { checkDatetime, convertUTCToLocalDateTime } from "@shared/utils";
 import { useAppDispatch, useAppSelector, useWindowWidth } from "@shared/hooks";
 import { pageFilter } from "@shared/routing";
 import {

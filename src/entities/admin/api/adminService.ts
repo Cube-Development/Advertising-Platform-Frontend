@@ -4,18 +4,19 @@ import {
   ADMIN_REVIEWS,
   authApi,
 } from "@shared/api";
+import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { adminComplaintTypesFilter, adminReviewTypesFilter } from "../config";
 import {
   IAdminChannelInfo,
   IAdminChannels,
   IAdminComplaintInfoData,
   IAdminComplaints,
+  IAdminEditChannelData,
   IAdminReviews,
   IAdminTransactionInfo,
   IAdminTransactions,
   IAdminUsers,
 } from "../types";
-import { INTERSECTION_ELEMENTS } from "@shared/config";
 
 export interface getAdminUsersReq {
   elements_on_page: number;
@@ -231,8 +232,19 @@ export const adminAPI = authApi.injectEndpoints({
         method: `GET`,
       }),
     }),
+    adminChannelEdit: build.mutation<
+      { success: boolean },
+      IAdminEditChannelData
+    >({
+      query: (body) => ({
+        url: "/adv-admin/channel",
+        method: "PUT",
+        body: body,
+      }),
+      invalidatesTags: [ADMIN_CHANNELS],
+    }),
     adminChannelAccept: build.mutation<
-      { success: string },
+      { success: boolean },
       { channel_id: string }
     >({
       query: (params) => ({
@@ -242,7 +254,7 @@ export const adminAPI = authApi.injectEndpoints({
       invalidatesTags: [ADMIN_CHANNELS],
     }),
     adminChannelReject: build.mutation<
-      { success: string },
+      { success: boolean },
       adminRejectChannelReq
     >({
       query: (params) => ({
@@ -252,7 +264,7 @@ export const adminAPI = authApi.injectEndpoints({
       invalidatesTags: [ADMIN_CHANNELS],
     }),
     adminChannelUnban: build.mutation<
-      { success: string },
+      { success: boolean },
       { channel_id: string }
     >({
       query: (params) => ({
@@ -261,7 +273,7 @@ export const adminAPI = authApi.injectEndpoints({
       }),
       invalidatesTags: [ADMIN_CHANNELS],
     }),
-    adminChannelBan: build.mutation<{ success: string }, adminBanChannelReq>({
+    adminChannelBan: build.mutation<{ success: boolean }, adminBanChannelReq>({
       query: (params) => ({
         url: `/channel/moderation/ban`,
         method: `POST`,
@@ -373,6 +385,7 @@ export const {
   useAdminChannelRejectMutation,
   useAdminChannelBanMutation,
   useAdminChannelUnbanMutation,
+  useAdminChannelEditMutation,
   useGetAdminReviewsQuery,
   useAdminAcceptReviewMutation,
   useAdminRejectReviewMutation,

@@ -1,4 +1,12 @@
-import { IUser, roles } from "@entities/user";
+import {
+  IEventsData,
+  IPasswordData,
+  IProfileData,
+  IUser,
+  IUserData,
+  roles,
+} from "@entities/user";
+import { EditPassword } from "@features/profile";
 import { authApi, baseApi } from "@shared/api";
 import { languagesNum } from "@shared/config";
 
@@ -108,6 +116,27 @@ export const userAPI = authApi.injectEndpoints({
         method: `GET`,
       }),
     }),
+
+    getProfile: build.query<IProfileData, void>({
+      query: () => ({
+        url: `/auth/user`,
+        method: `GET`,
+      }),
+    }),
+    editProfile: build.mutation<{ success: boolean }, IUserData | IEventsData>({
+      query: (BodyParams) => ({
+        url: `/auth/user/additional`,
+        method: `PUT`,
+        body: BodyParams,
+      }),
+    }),
+    editPassword: build.mutation<{ success: boolean }, IPasswordData>({
+      query: (BodyParams) => ({
+        url: `/auth/replace-password`,
+        method: `PUT`,
+        body: BodyParams,
+      }),
+    }),
     updateRole: build.mutation<void, { role: roles }>({
       query: (params) => ({
         url: `/users/role`,
@@ -130,4 +159,7 @@ export const {
   useGetUserMutation,
   useUpdateRoleMutation,
   useChangeLanguegeMutation,
+  useGetProfileQuery,
+  useEditProfileMutation,
+  useEditPasswordMutation,
 } = userAPI;

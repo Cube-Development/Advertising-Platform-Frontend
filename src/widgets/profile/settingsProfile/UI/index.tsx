@@ -1,65 +1,133 @@
+import {
+  eventForm,
+  IEventsData,
+  IPasswordData,
+  IProfileData,
+  IUserData,
+  profileForm,
+  useEditProfileMutation,
+  useGetProfileQuery,
+  userForm,
+} from "@entities/user";
+import { EditPassword, EditUser } from "@features/profile";
 import { EditPencilIcon, EmailIcon, TelegramJetlIcon } from "@shared/assets";
+import { languages, languagesNum } from "@shared/config";
 import { PAGE_ANIMATION } from "@shared/config/animation";
-import { MyButton } from "@shared/ui";
+import { MyButton, ToastAction, useToast } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { IUser, roles, useGetUserMutation } from "@entities/user";
-import { useForm } from "react-hook-form";
-import { languages, languagesNum } from "@shared/config";
 
 export const SettingsProfile: FC = () => {
   const { t } = useTranslation();
   const [isEdit, setIsEdit] = useState<boolean>(false);
-  const card = {
-    date: "24.09.2024",
-    email: "Sample@sample.com",
-    telegram: "@telegram",
-  };
 
   const handleEdit = () => {
     setIsEdit(!isEdit);
   };
 
-  const [getUser] = useGetUserMutation();
+  const { data: profile, isLoading } = useGetProfileQuery();
 
-  useEffect(() => {
-    getUser()
-      .unwrap()
-      .then((data) => {
-        setValue("id", data.id);
-        setValue("email", data.email);
-        setValue("is_active", data.is_active);
-        setValue("is_superuser", data.is_superuser);
-        setValue("is_verified", data.is_verified);
-        setValue("role", data.role);
-        setValue("language", data.language);
-        setValue("location", data.location);
-        setValue("name", data.name);
-        setValue("lastname", data.lastname);
-        setValue("phone", data.phone);
-      });
-  }, []);
-
-  const { setValue, watch } = useForm<IUser>({
+  const { setValue, watch, reset } = useForm<IProfileData>({
     defaultValues: {
-      id: "",
-      email: "",
-      is_active: true,
-      is_superuser: false,
-      is_verified: true,
-      role: roles.advertiser,
-      language: languagesNum.ru,
-      location: "",
-      name: "",
-      lastname: "",
-      phone: "",
-      password: "",
-      new_password: "",
+      user_additional: {
+        email: "",
+        language: languagesNum.ru,
+        location: "",
+        first_name: "",
+        surname: "",
+        phone: "",
+      },
+      user_events: {
+        system_events: false,
+        project_events: false,
+        promo_events: false,
+      },
     },
   });
+
   const formState = watch();
+
+  const user: IUserData = {
+    user_additional: {
+      language: formState?.user_additional?.language,
+      location: formState?.user_additional?.location,
+      first_name: formState?.user_additional?.first_name,
+      surname: formState?.user_additional?.surname,
+      phone: formState?.user_additional?.phone,
+    },
+  };
+
+  const password: IPasswordData = {
+    current_password: formState?.current_password || "",
+    new_password: formState?.new_password,
+    accept_password: formState?.accept_password,
+  };
+
+  const events: IEventsData = {
+    user_events: {
+      project_events: formState?.user_events?.project_events,
+      promo_events: formState?.user_events?.promo_events,
+    },
+  };
+
+  useEffect(() => {
+    if (!isLoading && profile) {
+      reset({
+        user_additional: {
+          email: profile?.user_additional?.email || "",
+          language: profile?.user_additional?.language || languagesNum.ru,
+          location: profile?.user_additional?.location || "Ташкент",
+          first_name: profile?.user_additional?.first_name || "",
+          surname: profile?.user_additional?.surname || "",
+          phone: profile?.user_additional?.phone || "",
+        },
+        user_events: {
+          system_events: profile?.user_events?.system_events || true,
+          project_events: profile?.user_events?.project_events || false,
+          promo_events: profile?.user_events?.promo_events || false,
+        },
+        current_password: "",
+        new_password: "",
+        accept_password: "",
+        created: profile?.created,
+        id: profile?.id,
+        telegram: profile?.telegram,
+      });
+    }
+  }, [profile, isLoading]);
+
+  const { toast } = useToast();
+  const [edit] = useEditProfileMutation();
+
+  const handleOnClick = (event: eventForm) => {
+    const newValue = !formState?.user_events?.[event];
+    setValue(`${profileForm.user_events}.${event}`, newValue);
+    const updatedEvents: IEventsData = {
+      user_events: {
+        ...events?.user_events,
+        [event]: newValue,
+      },
+    };
+    edit(updatedEvents)
+      .unwrap()
+      .then(() => {
+        toast({
+          variant: "success",
+          title: t("toasts.profile.edit.event.success"),
+        });
+      })
+      .catch((error) => {
+        toast({
+          variant: "error",
+          title: t("toasts.profile.edit.event.error"),
+          action: <ToastAction altText="Ok">Ok</ToastAction>,
+        });
+        console.error("error: ", error);
+      });
+  };
 
   return (
     <div className="container">
@@ -80,7 +148,7 @@ export const SettingsProfile: FC = () => {
                 {t("profile.account_block.title")}
               </p>
               <span>
-                {t("profile.account_block.date")}: {card.date}
+                {t("profile.account_block.date")}: {formState.created}
               </span>
             </div>
             <div className={styles.parameters_wrapper}>
@@ -89,8 +157,13 @@ export const SettingsProfile: FC = () => {
                   <span> {t("profile.account_block.name.title")}</span>
                   <input
                     placeholder={t("profile.account_block.name.default_value")}
-                    value={formState.name}
-                    onChange={(e) => setValue("name", e.target.value)}
+                    value={formState?.user_additional?.first_name}
+                    onChange={(e) =>
+                      setValue(
+                        `${profileForm.user_additional}.${userForm.first_name}`,
+                        e.target.value,
+                      )
+                    }
                   />
                 </div>
                 <div className={styles.parameters_row}>
@@ -99,8 +172,13 @@ export const SettingsProfile: FC = () => {
                     placeholder={t(
                       "profile.account_block.surname.default_value",
                     )}
-                    value={formState.lastname}
-                    onChange={(e) => setValue("lastname", e.target.value)}
+                    value={formState?.user_additional?.surname}
+                    onChange={(e) =>
+                      setValue(
+                        `${profileForm.user_additional}.${userForm.surname}`,
+                        e.target.value,
+                      )
+                    }
                   />
                 </div>
               </div>
@@ -108,16 +186,27 @@ export const SettingsProfile: FC = () => {
                 <span> {t("profile.account_block.email.title")}</span>
                 <input
                   placeholder={t("profile.account_block.email.default_value")}
-                  value={formState.email}
-                  onChange={(e) => setValue("email", e.target.value)}
+                  value={formState?.user_additional?.email}
+                  disabled={true}
+                  onChange={(e) =>
+                    setValue(
+                      `${profileForm.user_additional}.${userForm.email}`,
+                      e.target.value,
+                    )
+                  }
                 />
               </div>
               <div className={styles.parameters_row}>
                 <span> {t("profile.account_block.phone.title")}</span>
                 <input
                   placeholder={t("profile.account_block.phone.default_value")}
-                  value={formState.phone}
-                  onChange={(e) => setValue("phone", e.target.value)}
+                  value={formState?.user_additional?.phone}
+                  onChange={(e) =>
+                    setValue(
+                      `${profileForm.user_additional}.${userForm.phone}`,
+                      e.target.value,
+                    )
+                  }
                   type="tel"
                 />
               </div>
@@ -129,9 +218,10 @@ export const SettingsProfile: FC = () => {
                       "profile.account_block.language.default_value",
                     )}
                     value={
-                      formState.language === languagesNum.en
+                      formState?.user_additional?.language === languagesNum.en
                         ? languages.en
-                        : formState.language === languagesNum.ru
+                        : formState?.user_additional?.language ===
+                            languagesNum.ru
                           ? languages.ru
                           : languages.uz
                     }
@@ -144,16 +234,19 @@ export const SettingsProfile: FC = () => {
                     placeholder={t(
                       "profile.account_block.location.default_value",
                     )}
-                    value={formState.location}
-                    onChange={(e) => setValue("location", e.target.value)}
+                    value={formState?.user_additional?.location}
+                    onChange={(e) =>
+                      setValue(
+                        `${profileForm.user_additional}.${userForm.location}`,
+                        e.target.value,
+                      )
+                    }
                   />
                 </div>
               </div>
             </div>
             <div className={styles.button__wrapper}>
-              <MyButton>
-                <p>{t("profile.account_block.save_btn")}</p>
-              </MyButton>
+              <EditUser user={user} />
             </div>
           </div>
           <div className={styles.block}>
@@ -166,38 +259,45 @@ export const SettingsProfile: FC = () => {
                   {t("profile.password_block.current_password.title")}
                 </span>
                 <input
+                  type="password"
                   placeholder={t(
                     "profile.password_block.current_password.default_value",
                   )}
-                  value={formState.password}
-                  onChange={(e) => setValue("password", e.target.value)}
+                  value={formState.current_password}
+                  onChange={(e) =>
+                    setValue(profileForm.current_password, e.target.value)
+                  }
                 />
               </div>
               <div className={styles.parameters_row}>
                 <span> {t("profile.password_block.new_password.title")}</span>
                 <input
+                  type="password"
                   placeholder={t(
                     "profile.password_block.new_password.default_value",
                   )}
                   value={formState.new_password}
-                  onChange={(e) => setValue("new_password", e.target.value)}
+                  onChange={(e) =>
+                    setValue(profileForm.new_password, e.target.value)
+                  }
                 />
               </div>
               <div className={styles.parameters_row}>
                 <span>{t("profile.password_block.accept_password.title")}</span>
                 <input
+                  type="password"
                   placeholder={t(
                     "profile.password_block.accept_password.default_value",
                   )}
                   value={formState.accept_password}
-                  onChange={(e) => setValue("accept_password", e.target.value)}
+                  onChange={(e) =>
+                    setValue(profileForm.accept_password, e.target.value)
+                  }
                 />
               </div>
             </div>
             <div className={styles.button__wrapper}>
-              <MyButton>
-                <p>{t("profile.password_block.change_btn")}</p>
-              </MyButton>
+              <EditPassword password={password} />
             </div>
           </div>
 
@@ -214,20 +314,34 @@ export const SettingsProfile: FC = () => {
                   <EmailIcon />
                 </div>
                 <div className={styles.info_block}>
-                  <p className={styles.miniblock__title}>{card.email}</p>
+                  <p className={styles.miniblock__title}>
+                    {formState?.user_additional?.email}
+                  </p>
                   <div className={styles.checkbox__wrapper}>
                     <span>{t("profile.notification_block.email.system")}</span>
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      disabled={true}
+                      checked={formState?.user_events?.system_events}
+                    />
                   </div>
                   <div className={styles.checkbox__wrapper}>
                     <span>{t("profile.notification_block.email.project")}</span>
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      checked={formState?.user_events?.project_events}
+                      onChange={() => handleOnClick(eventForm.project_events)}
+                    />
                   </div>
                   <div className={styles.checkbox__wrapper}>
                     <span>
                       {t("profile.notification_block.email.individual")}
                     </span>
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      checked={formState?.user_events?.promo_events}
+                      onChange={() => handleOnClick(eventForm.promo_events)}
+                    />
                   </div>
                 </div>
               </div>
@@ -239,9 +353,11 @@ export const SettingsProfile: FC = () => {
                   <TelegramJetlIcon />
                 </div>
                 <div className={styles.info_block}>
-                  {card?.telegram ? (
+                  {formState?.telegram ? (
                     <div className={styles.bot}>
-                      <p className={styles.miniblock__title}>{card.telegram}</p>
+                      <p className={styles.miniblock__title}>
+                        {formState?.telegram}
+                      </p>
                       <button onClick={handleEdit}>
                         <EditPencilIcon />
                       </button>

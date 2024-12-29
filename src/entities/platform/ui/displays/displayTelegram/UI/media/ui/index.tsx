@@ -2,7 +2,7 @@ import { FC } from "react";
 import styles from "./styles.module.scss";
 import { Download } from "lucide-react";
 import { ContentType, IFile, getContentType } from "@entities/project";
-import { GenerateDownloadLink } from "@shared/functions";
+import { GenerateDownloadLink } from "@shared/utils";
 
 interface TelegramMediaProps {
   medias?: File[];

@@ -2,11 +2,11 @@ export enum roles {
   advertiser = "advertiser",
   blogger = "blogger",
   manager = "manager",
-  administrator = "administrator",
+  moderator = "moderator",
 }
 
 export const userRoles = [roles.blogger, roles.advertiser];
-export const managmentRoles = [roles.administrator, roles.manager];
+export const managmentRoles = [roles.moderator, roles.manager];
 
 export enum chatRoles {
   recipient = "recipient",
@@ -26,7 +26,7 @@ export const rolesTypes = [
     name: "roles.manager",
   },
   {
-    type: roles.administrator,
+    type: roles.moderator,
     name: "roles.administrator",
   },
 ];

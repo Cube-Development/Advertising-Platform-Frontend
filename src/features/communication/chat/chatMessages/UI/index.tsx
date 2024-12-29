@@ -28,7 +28,7 @@ import {
   checkDatetimeDifference,
   convertUTCToLocalDateTime,
   getFormattedDateTime,
-} from "@shared/functions";
+} from "@shared/utils";
 import { useAppDispatch, useAppSelector, useDebounce } from "@shared/hooks";
 import Link from "@tiptap/extension-link";
 import Underline from "@tiptap/extension-underline";

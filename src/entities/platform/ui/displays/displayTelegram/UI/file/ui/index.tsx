@@ -3,7 +3,7 @@ import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
 import { Paperclip } from "lucide-react";
 import { IFile } from "@entities/project";
-import { GenerateDownloadLink } from "@shared/functions";
+import { GenerateDownloadLink } from "@shared/utils";
 
 interface TelegramFileProps {
   file: File | IFile;

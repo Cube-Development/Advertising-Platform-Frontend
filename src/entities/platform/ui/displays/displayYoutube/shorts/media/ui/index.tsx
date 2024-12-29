@@ -1,6 +1,6 @@
 import { FC } from "react";
 import { Download } from "lucide-react";
-import { GenerateDownloadLink } from "@shared/functions";
+import { GenerateDownloadLink } from "@shared/utils";
 import { ContentType, IFile, getContentType } from "@entities/project";
 
 interface YoutubeMediaProps {

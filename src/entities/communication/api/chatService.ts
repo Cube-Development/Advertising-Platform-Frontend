@@ -7,7 +7,7 @@ import {
 import { roles } from "@entities/user";
 import { authApi, CHAT } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
-import { convertUTCToLocalDateTime } from "@shared/functions";
+import { convertUTCToLocalDateTime } from "@shared/utils/lib";
 
 export interface getChatsReq {
   role: roles;

@@ -216,7 +216,8 @@
         grid-column: span 1; // Занимают по одному столбцу
       }
 
-      .block:nth-child(5) {
+      .block:nth-child(5),
+      .block:nth-child(6) {
         grid-column: span 2; // Занимает два столбца
       }
 

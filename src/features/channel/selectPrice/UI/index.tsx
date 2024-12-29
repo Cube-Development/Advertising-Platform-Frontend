@@ -52,7 +52,9 @@ export const SelectPrice: FC<SelectPriceProps> = ({
         <p>{t(title)}</p>
         <InfoIcon />
       </div>
-      <div className={styles.accomms}>
+      <div
+        className={`${styles.accomms} ${formats?.length === 4 ? styles.max : styles.min} `}
+      >
         {formats &&
           formats?.map((format, index) => (
             <AccommPrice
