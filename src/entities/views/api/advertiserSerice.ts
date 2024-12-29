@@ -1,4 +1,4 @@
-import { authApi } from "@shared/api";
+import { authApi, VIEWS_ADVERTISER } from "@shared/api";
 import { IViewAdvertiserProject } from "../types";
 
 export const viewAdvertiserAPI = authApi.injectEndpoints({
@@ -8,6 +8,7 @@ export const viewAdvertiserAPI = authApi.injectEndpoints({
         url: "/view/advertiser/project",
         method: "GET",
       }),
+      providesTags: [VIEWS_ADVERTISER],
     }),
   }),
 });

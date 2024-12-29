@@ -8,6 +8,7 @@ import {
   platformTypes,
   platformTypesNum,
 } from "@entities/platform";
+import { useGetViewBloggerOrderQuery } from "@entities/views";
 import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 import { pageFilter } from "@shared/routing";
 import { BarFilter } from "@widgets/barFilter";
@@ -49,10 +50,15 @@ export const OffersPage: FC = () => {
   };
 
   const { data, isFetching } = useGetBloggerOrdersQuery(getParams);
+  const { refetch: views } = useGetViewBloggerOrderQuery();
 
   useEffect(() => {
     setCurrentPage(1);
   }, [formState.status]);
+
+  useEffect(() => {
+    views();
+  }, [currentPage, formState.status]);
 
   return (
     <div className="container">
