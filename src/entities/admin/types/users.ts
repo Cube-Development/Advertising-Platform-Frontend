@@ -9,6 +9,7 @@ export interface IAdminUsers {
 
 export interface IAdminUserData {
   id: string;
+  user_id: string;
   avatar: string;
   name: string;
   email: string;
@@ -16,16 +17,14 @@ export interface IAdminUserData {
   status: userStatus;
 }
 
-export interface IAdminEditUser {
+export interface IAdminUserInfo {
   id: string;
-  avatar: string;
-  name: string;
+  first_name: string;
+  surname: string;
   email: string;
   phone: string;
-  language: string;
-  location: string;
-  password: string;
-  telegram: string;
+  language: number;
+  created: string;
 }
 
 export enum userField {

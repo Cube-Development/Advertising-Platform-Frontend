@@ -1,2 +1,2 @@
-export * from "./editUser";
+// export * from "./editUser";
 export * from "./updateUser";
