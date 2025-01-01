@@ -32,7 +32,7 @@ export const MainLayout = ({ children }: PropsWithChildren) => {
   });
 
   const {} = useGetViewTransactionsQuery(undefined, {
-    skip: !isAuth,
+    skip: !isAuth || role === roles.manager,
   });
 
   const {} = useGetViewManagerProjectQuery(undefined, {

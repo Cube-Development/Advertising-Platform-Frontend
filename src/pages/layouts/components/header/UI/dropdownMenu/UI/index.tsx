@@ -63,7 +63,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
     undefined,
     {
       skip: !isAuth || currentRole !== roles.advertiser,
-    },
+    }
   );
 
   const { data: viewsBloggerOffers } = useGetViewBloggerOrderQuery(undefined, {
@@ -74,7 +74,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
     undefined,
     {
       skip: !isAuth || currentRole !== roles.blogger,
-    },
+    }
   );
 
   const { data: viewsManProjects } = useGetViewManagerProjectQuery(undefined, {
@@ -84,8 +84,8 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
   const { data: viewsWalletTransactions } = useGetViewTransactionsQuery(
     undefined,
     {
-      skip: !isAuth,
-    },
+      skip: !isAuth || currentRole === roles.manager,
+    }
   );
 
   useEffect(() => {
