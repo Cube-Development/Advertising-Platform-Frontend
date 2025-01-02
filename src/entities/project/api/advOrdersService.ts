@@ -10,7 +10,13 @@ import {
   managerProjectStatusFilter,
   myProjectStatusFilter,
 } from "@entities/project";
-import { ADV_PROJECTS, authApi, BLOGGER_OFFERS } from "@shared/api";
+import {
+  ADV_PROJECTS,
+  authApi,
+  BLOGGER_OFFERS,
+  VIEWS_ADVERTISER,
+  VIEWS_MANAGER,
+} from "@shared/api";
 import { INTERSECTION_ELEMENTS, languagesNum } from "@shared/config";
 
 export interface ICreatePostReq {
@@ -124,7 +130,12 @@ export const advProjectsAPI = authApi.injectEndpoints({
         method: "PUT",
         params: params,
       }),
-      invalidatesTags: [BLOGGER_OFFERS, ADV_PROJECTS],
+      invalidatesTags: [
+        BLOGGER_OFFERS,
+        ADV_PROJECTS,
+        VIEWS_ADVERTISER,
+        VIEWS_MANAGER,
+      ],
     }),
     rejectOrder: build.mutation<
       { success: boolean },
@@ -135,7 +146,12 @@ export const advProjectsAPI = authApi.injectEndpoints({
         method: "PUT",
         params: params,
       }),
-      invalidatesTags: [BLOGGER_OFFERS, ADV_PROJECTS],
+      invalidatesTags: [
+        BLOGGER_OFFERS,
+        ADV_PROJECTS,
+        VIEWS_ADVERTISER,
+        VIEWS_MANAGER,
+      ],
     }),
     getAdvProjects: build.query<IAdvProjects, getProjectsCardReq>({
       query: (BodyParams) => ({

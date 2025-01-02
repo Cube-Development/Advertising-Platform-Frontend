@@ -10,7 +10,7 @@ import {
   IPostChannel,
   ITgButtonRes,
 } from "@entities/project";
-import { MANAGER_PROJECTS, authApi } from "@shared/api";
+import { MANAGER_PROJECTS, VIEWS_MANAGER, authApi } from "@shared/api";
 import { INTERSECTION_ELEMENTS, languagesNum } from "@shared/config";
 
 export interface getManagerProjectsCardReq {
@@ -81,6 +81,7 @@ export const managerProjectsAPI = authApi.injectEndpoints({
         method: "PUT",
         params: params,
       }),
+      invalidatesTags: [VIEWS_MANAGER],
     }),
 
     launchProject: build.mutation<{ success: boolean }, { project_id: string }>(
@@ -90,6 +91,7 @@ export const managerProjectsAPI = authApi.injectEndpoints({
           method: "PUT",
           params: params,
         }),
+        invalidatesTags: [VIEWS_MANAGER],
       },
     ),
 

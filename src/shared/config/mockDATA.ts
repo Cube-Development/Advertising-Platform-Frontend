@@ -474,143 +474,143 @@ export const AdminProfile: IAdminProfileData = {
 //   },
 // ];
 
-export const AdminUsers: IAdminUserData[] = [
-  {
-    id: "1111111",
-    avatar:
-      "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
-    name: "Александр Иванов",
-    email: "ivanov.alex@gmail.com",
-    created: "15.10.2023",
-    status: 1,
-  },
-  {
-    id: "2111111",
-    avatar:
-      "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
-    name: "Мария Соколова",
-    email: "sokolova.masha@example.com",
-    created: "23.08.2023",
-    status: 0,
-  },
-  {
-    id: "3111111",
-    avatar:
-      "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
-    name: "Олег Петров",
-    email: "oleg.petrov@example.com",
-    created: "01.01.2023",
-    status: 1,
-  },
-  {
-    id: "4111111",
-    avatar:
-      "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
-    name: "Елена Смирнова",
-    email: "elena.smirnova@mail.com",
-    created: "30.03.2023",
-    status: 0,
-  },
-  {
-    id: "5111111",
-    avatar:
-      "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
-    name: "Дмитрий Орлов",
-    email: "d.orlov@example.com",
-    created: "14.06.2023",
-    status: 1,
-  },
-  {
-    id: "6111111",
-    avatar:
-      "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
-    name: "Наталья Кузнецова",
-    email: "n.kuznetsova@example.com",
-    created: "22.05.2023",
-    status: 0,
-  },
-  {
-    id: "7111111",
-    avatar:
-      "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
-    name: "Сергей Лебедев",
-    email: "sergei.lebedev@example.com",
-    created: "05.07.2023",
-    status: 1,
-  },
-  {
-    id: "8111111",
-    avatar:
-      "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
-    name: "Алина Попова",
-    email: "popova.alina@gmail.com",
-    created: "10.11.2023",
-    status: 0,
-  },
-  {
-    id: "9111111",
-    avatar:
-      "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
-    name: "Михаил Волков",
-    email: "m.volkov@example.com",
-    created: "18.12.2023",
-    status: 1,
-  },
-  {
-    id: "10111111",
-    avatar:
-      "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
-    name: "Анна Киселева",
-    email: "anna.kiseleva@gmail.com",
-    created: "02.09.2023",
-    status: 1,
-  },
-  {
-    id: "11111111",
-    avatar:
-      "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
-    name: "Иван Захаров",
-    email: "ivan.zakharov@mail.com",
-    created: "09.08.2023",
-    status: 0,
-  },
-  {
-    id: "12111111",
-    avatar:
-      "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
-    name: "Екатерина Морозова",
-    email: "morozova.ekaterina@gmail.com",
-    created: "20.04.2023",
-    status: 1,
-  },
-  {
-    id: "13111111",
-    avatar:
-      "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
-    name: "Павел Виноградов",
-    email: "pavel.vinogradov@example.com",
-    created: "17.02.2023",
-    status: 0,
-  },
-  {
-    id: "14111111",
-    avatar:
-      "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
-    name: "Ольга Беляева",
-    email: "belyaeva.olga@mail.com",
-    created: "29.05.2023",
-    status: 1,
-  },
-  {
-    id: "15111111",
-    avatar:
-      "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
-    name: "Максим Зайцев",
-    email: "zaytsev.max@example.com",
-    created: "11.03.2023",
-    status: 0,
-  },
-];
+// export const AdminUsers: IAdminUserData[] = [
+//   {
+//     id: "1111111",
+//     avatar:
+//       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
+//     name: "Александр Иванов",
+//     email: "ivanov.alex@gmail.com",
+//     created: "15.10.2023",
+//     status: 1,
+//   },
+//   {
+//     id: "2111111",
+//     avatar:
+//       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
+//     name: "Мария Соколова",
+//     email: "sokolova.masha@example.com",
+//     created: "23.08.2023",
+//     status: 0,
+//   },
+//   {
+//     id: "3111111",
+//     avatar:
+//       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
+//     name: "Олег Петров",
+//     email: "oleg.petrov@example.com",
+//     created: "01.01.2023",
+//     status: 1,
+//   },
+//   {
+//     id: "4111111",
+//     avatar:
+//       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
+//     name: "Елена Смирнова",
+//     email: "elena.smirnova@mail.com",
+//     created: "30.03.2023",
+//     status: 0,
+//   },
+//   {
+//     id: "5111111",
+//     avatar:
+//       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
+//     name: "Дмитрий Орлов",
+//     email: "d.orlov@example.com",
+//     created: "14.06.2023",
+//     status: 1,
+//   },
+//   {
+//     id: "6111111",
+//     avatar:
+//       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
+//     name: "Наталья Кузнецова",
+//     email: "n.kuznetsova@example.com",
+//     created: "22.05.2023",
+//     status: 0,
+//   },
+//   {
+//     id: "7111111",
+//     avatar:
+//       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
+//     name: "Сергей Лебедев",
+//     email: "sergei.lebedev@example.com",
+//     created: "05.07.2023",
+//     status: 1,
+//   },
+//   {
+//     id: "8111111",
+//     avatar:
+//       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
+//     name: "Алина Попова",
+//     email: "popova.alina@gmail.com",
+//     created: "10.11.2023",
+//     status: 0,
+//   },
+//   {
+//     id: "9111111",
+//     avatar:
+//       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
+//     name: "Михаил Волков",
+//     email: "m.volkov@example.com",
+//     created: "18.12.2023",
+//     status: 1,
+//   },
+//   {
+//     id: "10111111",
+//     avatar:
+//       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
+//     name: "Анна Киселева",
+//     email: "anna.kiseleva@gmail.com",
+//     created: "02.09.2023",
+//     status: 1,
+//   },
+//   {
+//     id: "11111111",
+//     avatar:
+//       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
+//     name: "Иван Захаров",
+//     email: "ivan.zakharov@mail.com",
+//     created: "09.08.2023",
+//     status: 0,
+//   },
+//   {
+//     id: "12111111",
+//     avatar:
+//       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
+//     name: "Екатерина Морозова",
+//     email: "morozova.ekaterina@gmail.com",
+//     created: "20.04.2023",
+//     status: 1,
+//   },
+//   {
+//     id: "13111111",
+//     avatar:
+//       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
+//     name: "Павел Виноградов",
+//     email: "pavel.vinogradov@example.com",
+//     created: "17.02.2023",
+//     status: 0,
+//   },
+//   {
+//     id: "14111111",
+//     avatar:
+//       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
+//     name: "Ольга Беляева",
+//     email: "belyaeva.olga@mail.com",
+//     created: "29.05.2023",
+//     status: 1,
+//   },
+//   {
+//     id: "15111111",
+//     avatar:
+//       "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
+//     name: "Максим Зайцев",
+//     email: "zaytsev.max@example.com",
+//     created: "11.03.2023",
+//     status: 0,
+//   },
+// ];
 
 // export const AdminTransactions: IAdminTransactionData[] = [
 //   {

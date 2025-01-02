@@ -2,11 +2,12 @@ import { paths } from "@shared/routing";
 import * as React from "react";
 import { AddChannelPage } from "./AddChannel";
 import { AdminChannelsPage } from "./AdminChannels";
+import { AdminComplaintInfoPage } from "./AdminComplaintInfo";
 import { AdminComplaintsPage } from "./AdminComplaints";
 import { AdminHomePage } from "./AdminHome";
-import { AdminComplaintInfoPage } from "./AdminComplaintInfo";
 import { AdminReviewsPage } from "./AdminReviews";
 import { AdminTransactionsPage } from "./AdminTransactions";
+import { AdminUserInfoPage } from "./AdminUserInfo";
 import { AdminUsersPage } from "./AdminUsers";
 import { CartPage } from "./Cart";
 import { CatalogPage } from "./Catalog";
@@ -21,13 +22,13 @@ import { NotFoundPage } from "./NotFound";
 import { OffersPage } from "./Offers";
 import { OrdersPage } from "./Orders";
 import { ProfilePage } from "./Profile";
+import { PublicOfferPage } from "./PublicOffer";
 import { RegistrationPage } from "./Registration";
+import { ServiceRulesPage } from "./ServiceRules";
 import { TopupPage } from "./Topup";
 import { TurnkeyPage } from "./Turnkey";
 import { WalletHistoryPage } from "./WalletHistory";
 import { WithdrawalPage } from "./Withdrawal";
-import { PublicOfferPage } from "./PublicOffer";
-import { ServiceRulesPage } from "./ServiceRules";
 
 export interface IRoute {
   path: string;
@@ -99,6 +100,11 @@ export const privateAdminRoutes: IRoute[] = [
   {
     path: paths.adminComplaintInfo,
     component: AdminComplaintInfoPage,
+    sidebar: true,
+  },
+  {
+    path: paths.adminUserInfo,
+    component: AdminUserInfoPage,
     sidebar: true,
   },
 ];

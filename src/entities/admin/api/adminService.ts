@@ -15,6 +15,7 @@ import {
   IAdminReviews,
   IAdminTransactionInfo,
   IAdminTransactions,
+  IAdminUserInfo,
   IAdminUsers,
 } from "../types";
 
@@ -77,10 +78,13 @@ export const adminAPI = authApi.injectEndpoints({
       }),
       merge: (currentCache, newItems) => {
         const newUsers = [...currentCache?.users, ...newItems?.users];
+        const uniqueUsers = Array.from(
+          new Map(newUsers.map((user) => [user?.user_id, user])).values(),
+        );
         return {
           ...newItems,
-          isLast: newUsers.length === newItems.elements,
-          users: newUsers,
+          isLast: uniqueUsers.length === newItems.elements,
+          users: uniqueUsers,
         };
       },
       serializeQueryArgs: ({ endpointName }) => {
@@ -89,6 +93,12 @@ export const adminAPI = authApi.injectEndpoints({
       forceRefetch({ currentArg, previousArg }) {
         return currentArg !== previousArg;
       },
+    }),
+    getAdminUserInfo: build.query<IAdminUserInfo, { id: string }>({
+      query: (params) => ({
+        url: `/adv-admin/user/${params.id}`,
+        method: `GET`,
+      }),
     }),
     getAdminOrderComplaints: build.query<
       IAdminComplaints,
@@ -375,6 +385,7 @@ export const adminAPI = authApi.injectEndpoints({
 
 export const {
   useGetAdminUsersQuery,
+  useGetAdminUserInfoQuery,
   useGetAdminOrderComplaintsQuery,
   useGetAdminOrderComplaintInfoQuery,
   useGetAdminTransactionsQuery,

@@ -13,6 +13,7 @@ import { useForm } from "react-hook-form";
 import { ManagerNewProjectsList } from "./managerNewProject";
 import { ManagerProjectsList } from "./managerProject";
 import styles from "./styles.module.scss";
+import { useGetViewManagerProjectQuery } from "@entities/views";
 
 export const ManagerOrders: FC = () => {
   const { setValue, watch } = useForm<{
@@ -38,42 +39,17 @@ export const ManagerOrders: FC = () => {
   };
 
   const { data, isFetching } = useGetManagerProjectsQuery(getParams);
-  // const [tariffs, setTariffs] = useState<
-  //   IManagerNewProjectCard[] | IManagerProjectCard[]
-  // >(data ? data.projects : []);
-
-  // useEffect(() => {
-  //   if (data && currentPage !== 1) {
-  //     if (formState.status === managerProjectStatusFilter.new) {
-  //       setTariffs([
-  //         ...(tariffs as IManagerNewProjectCard[]),
-  //         ...(data.projects as IManagerNewProjectCard[]),
-  //       ]);
-  //     } else {
-  //       setTariffs([
-  //         ...(tariffs as IManagerProjectCard[]),
-  //         ...(data.projects as IManagerProjectCard[]),
-  //       ]);
-  //     }
-  //   } else {
-  //     data && setTariffs(data.projects);
-  //   }
-  // }, [data]);
+  const { refetch: views } = useGetViewManagerProjectQuery();
 
   useEffect(() => {
     setCurrentPage(1);
   }, [formState.status]);
-  // console.log(formState.status);
 
-  // const data =
-  //   formState.status === managerProjectStatusFilter.active
-  //     ? managerActiveCARDS
-  //     : formState.status === managerProjectStatusFilter.completed
-  //       ? managerCompletedCARDS
-  //       : formState.status === managerProjectStatusFilter.new
-  //         ? managerNewCARDS
-  //         : managerAgreedCARDS;
-  // const isFetching = false;
+  useEffect(() => {
+    if (formState.status === managerProjectStatusFilter.completed) {
+      views();
+    }
+  }, [formState.status, currentPage]);
 
   return (
     <div className="container">

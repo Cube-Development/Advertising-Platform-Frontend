@@ -4,12 +4,12 @@ import {
   IModerationChannel,
   useGetChannelsByStatusQuery,
 } from "@entities/channel";
-import { offerStatusFilter } from "@entities/offer";
 import {
   dateSortingTypes,
   platformTypes,
   platformTypesNum,
 } from "@entities/platform";
+import { useGetViewBloggerChannelQuery } from "@entities/views";
 import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 import { pageFilter } from "@shared/routing";
 import { BarFilter } from "@widgets/barFilter";
@@ -27,7 +27,7 @@ export const MyChannelsPage: FC = () => {
 
   const { setValue, watch } = useForm<{
     platform: platformTypesNum;
-    status: channelStatusFilter | offerStatusFilter | string;
+    status: channelStatusFilter | string;
     page: number;
   }>({
     defaultValues: {
@@ -47,29 +47,20 @@ export const MyChannelsPage: FC = () => {
     status: formState.status,
   };
 
-  // unmock
   const { data, isFetching } = useGetChannelsByStatusQuery(getParams);
+  const { refetch: views } = useGetViewBloggerChannelQuery();
+
+  useEffect(() => {
+    if (status !== channelStatusFilter.inactive) {
+      views();
+    }
+  }, [status, formState.page]);
 
   useEffect(() => {
     setTimeout(() => {
       setValue("page", 1);
     }, 500);
   }, [platform, status]);
-  // unmock
-
-  // mock
-  // const data =
-  //   formState.status === channelStatusFilter.active
-  //     ? activeChannelsMock
-  //     : formState.status === channelStatusFilter.banned
-  //       ? blockedChannelsMock
-  //       : formState.status === channelStatusFilter.inactive
-  //         ? inactiveChannelsMock
-  //         : formState.status === channelStatusFilter.moderation
-  //           ? moderationChannelsMock
-  //           : moderationRejectChannelsMock;
-  // const isFetching = false;
-  //mock
 
   return (
     <div className="container">

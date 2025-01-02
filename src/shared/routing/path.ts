@@ -26,6 +26,7 @@ export enum paths {
   adminHome = "/admin/home",
   adminChannels = "/admin/channels",
   adminUsers = "/admin/users",
+  adminUserInfo = "/admin/users/:id",
   adminTransactions = "/admin/transactions",
   adminReviews = "/admin/reviews",
   adminComplaints = "/admin/complaints",

@@ -1,4 +1,5 @@
 import { dateSortingTypes } from "@entities/platform";
+import { useGetViewTransactionsQuery } from "@entities/views";
 import {
   HistoryCard,
   HistoryReq,
@@ -13,12 +14,12 @@ import {
   Languages,
   PAGE_ANIMATION,
 } from "@shared/config";
+import { useWindowWidth } from "@shared/hooks";
 import { ShowMoreBtn, SpinnerLoaderSmall } from "@shared/ui";
 import { motion } from "framer-motion";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { useWindowWidth } from "@shared/hooks";
 
 export const History: FC = () => {
   const { t, i18n } = useTranslation();
@@ -34,10 +35,15 @@ export const History: FC = () => {
   };
 
   const { data, isLoading, isFetching } = useGetHistoryQuery(getParams);
+  const { refetch: views } = useGetViewTransactionsQuery();
 
   const handleOnChangePage = () => {
     setCurrentPage((prevPage) => prevPage + 1);
   };
+
+  useEffect(() => {
+    views();
+  }, [currentPage]);
 
   let custom = 0;
 

@@ -11,8 +11,8 @@ import {
 } from "@entities/project";
 import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 import i18n from "@shared/config/i18n";
-import { QueryParams } from "@shared/utils";
 import { pageFilter } from "@shared/routing";
+import { QueryParams } from "@shared/utils";
 import { BarFilter } from "@widgets/barFilter";
 import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -20,6 +20,7 @@ import { AdvProjectsList } from "./advProjects";
 import { DevProjectsList } from "./devProjects";
 import styles from "./styles.module.scss";
 import { TemplateProjectsList } from "./templateProjects";
+import { useGetViewAdvertiserProjectQuery } from "@entities/views";
 
 export const AdvOrders: FC = () => {
   const page = pageFilter.order;
@@ -95,8 +96,15 @@ export const AdvOrders: FC = () => {
         skip: formState.type !== projectTypesFilter.managerProject,
       },
     );
-  // const save_cards = MY_PROJECT_SAVE_CARDS;
-  // const dev_cards = MY_PROJECT_MANAGER_DEV_CARDS;
+
+  const { refetch: views } = useGetViewAdvertiserProjectQuery();
+
+  useEffect(() => {
+    if (formState.status !== advManagerProjectStatusFilter.request_approve) {
+      views();
+    }
+  }, [formState.type, formState.page]);
+
   return (
     <div className="container">
       <div className={styles.wrapper}>

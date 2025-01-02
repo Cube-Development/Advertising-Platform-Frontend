@@ -1,7 +1,12 @@
 import { IBloggerOffers, offerStatusFilter } from "@entities/offer";
 import { dateSortingTypes } from "@entities/platform";
 import { IOrderFeature } from "@entities/project";
-import { ADV_PROJECTS, authApi, BLOGGER_OFFERS } from "@shared/api";
+import {
+  ADV_PROJECTS,
+  authApi,
+  BLOGGER_OFFERS,
+  VIEWS_BLOGGER_OFFERS,
+} from "@shared/api";
 import { INTERSECTION_ELEMENTS, languagesNum } from "@shared/config";
 
 interface OrderDate {
@@ -50,7 +55,7 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
         method: "PUT",
         body: body,
       }),
-      invalidatesTags: [BLOGGER_OFFERS, ADV_PROJECTS],
+      invalidatesTags: [BLOGGER_OFFERS, ADV_PROJECTS, VIEWS_BLOGGER_OFFERS],
     }),
     cancelOffer: build.mutation<{ success: boolean }, { order_id: string }>({
       query: (params) => ({
@@ -58,7 +63,7 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
         method: "PUT",
         params: params,
       }),
-      invalidatesTags: [BLOGGER_OFFERS, ADV_PROJECTS],
+      invalidatesTags: [BLOGGER_OFFERS, ADV_PROJECTS, VIEWS_BLOGGER_OFFERS],
     }),
     getBloggerOrders: build.query<IBloggerOffers, getOrdersByStatusReq>({
       query: (BodyParams) => ({
