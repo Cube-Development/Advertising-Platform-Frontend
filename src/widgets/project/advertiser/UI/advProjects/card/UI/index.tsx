@@ -15,6 +15,8 @@ import {
   CheckPost,
   Feedback,
   RejectPost,
+  ReplaceChannel,
+  ReplacePost,
   SeePost,
 } from "@features/order";
 import { AcceptProject } from "@features/project";
@@ -341,6 +343,8 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
                       SeePostBtn={SeePost}
                       ChannelChatBtn={Chat}
                       ChangeChannelBtn={ChangeChannel}
+                      ReplaceChannelBtn={ReplaceChannel}
+                      ReplacePostBtn={ReplacePost}
                       typeFilter={typeFilter}
                       statusFilter={statusFilter}
                     />
@@ -420,6 +424,8 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
                             SeePostBtn={SeePost}
                             ChannelChatBtn={Chat}
                             ChangeChannelBtn={ChangeChannel}
+                            ReplaceChannelBtn={ReplaceChannel}
+                            ReplacePostBtn={ReplacePost}
                             typeFilter={typeFilter}
                             statusFilter={statusFilter}
                           />

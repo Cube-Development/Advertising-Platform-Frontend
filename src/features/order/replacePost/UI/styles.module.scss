@@ -1,0 +1,58 @@
+.trigger {
+  border-radius: 8px;
+  padding: 10px;
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1;
+}
+
+.content {
+  display: grid;
+  grid-template-rows: max-content 1fr max-content;
+  row-gap: 20px;
+  height: 50vh;
+  width: 50vw;
+  max-width: 800px;
+  padding: 40px;
+  position: relative;
+
+  .title {
+    display: grid;
+    grid-auto-flow: column;
+
+    p {
+      background: var(--Gradients-Gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+
+      // @media (max-width: 576px) {
+      //   font-size: 20px;
+      //   text-align: center;
+      //   font-weight: 600;
+      // }
+    }
+
+    .close {
+      position: absolute;
+      cursor: pointer;
+      top: 0px;
+      right: 0px;
+      padding: 15px;
+      border-radius: 50%;
+
+      &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+      }
+    }
+  }
+
+  textarea {
+    resize: none;
+  }
+}

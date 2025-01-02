@@ -30,7 +30,7 @@ import {
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { useWindowWidth } from "@shared/hooks";
+import { useAppSelector, useWindowWidth } from "@shared/hooks";
 
 interface AdvSubcardProps {
   subcard: IAdvProjectSubcard;
@@ -40,6 +40,8 @@ interface AdvSubcardProps {
   CheckBtn: FC<IOrderFeature>;
   SeePostBtn: FC<{ post: GetPostRes }>;
   ChangeChannelBtn: FC<{ project_id: string }>;
+  ReplaceChannelBtn: FC<{ order: IAdvProjectSubcard }>;
+  ReplacePostBtn: FC<{ order: IAdvProjectSubcard }>;
   ChannelChatBtn: FC<IChatProps>;
   typeFilter: projectTypesFilter;
   statusFilter: advManagerProjectStatusFilter | myProjectStatusFilter;
@@ -54,10 +56,13 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
   SeePostBtn,
   ChannelChatBtn,
   ChangeChannelBtn,
+  ReplaceChannelBtn,
+  ReplacePostBtn,
   typeFilter,
   statusFilter,
 }) => {
   const { t } = useTranslation();
+  const { role } = useAppSelector((state) => state.user);
   const { toast } = useToast();
   const screen = useWindowWidth();
   const [isSubcardOpen, setSubcardOpen] = useState(false);
@@ -270,7 +275,11 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                 <div>
                   <p>{t(`orders_advertiser.order_status.agreed.title`)}</p>
                   <div>
-                    <ChangeChannelBtn project_id={"sfsdf"} />
+                    {role === roles.manager ? (
+                      <ChangeChannelBtn project_id={"sfsdf"} />
+                    ) : (
+                      <ReplaceChannelBtn order={subcard} />
+                    )}
                     <SeePostBtn post={post!} />
                     {/* <CheckBtn /> */}
                   </div>

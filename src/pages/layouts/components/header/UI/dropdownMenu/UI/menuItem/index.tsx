@@ -28,14 +28,14 @@ export const MenuItem: React.FC<IMenuItems> = ({
 }) => {
   const { t } = useTranslation();
   const [isActive, setIsActive] = useState<boolean>(
-    openTitle === item.item.title
+    openTitle === item.item.title,
   );
 
   const accordionRef = useRef(null);
 
   const handleClickOutside = () => {
     const state = (accordionRef.current! as HTMLElement).getAttribute(
-      "data-state"
+      "data-state",
     );
     state === accordionTypes.open ? setIsActive(true) : setIsActive(false);
   };
@@ -159,12 +159,12 @@ export const MenuItem: React.FC<IMenuItems> = ({
                   {viewsInfo &&
                     !!viewsInfo?.count &&
                     !!viewsInfo?.values.find(
-                      (value) => subItem?.type === value?.type
+                      (value) => subItem?.type === value?.type,
                     )?.count && (
                       <div className={styles.badge}>
                         <span>
                           {viewsInfo?.values.find(
-                            (value) => subItem?.type === value?.type
+                            (value) => subItem?.type === value?.type,
                           )?.count || 0}
                         </span>
                       </div>
