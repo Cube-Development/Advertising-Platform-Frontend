@@ -2,10 +2,12 @@ import { FC, useState } from "react";
 import styles from "./styles.module.scss";
 import { registrationSteps } from "../../config";
 import {
+  IRegiser,
   roles,
   useGetUserMutation,
   useLoginMutation,
   useRegisterMutation,
+  userRoles,
 } from "@entities/user";
 import { Languages } from "@shared/config";
 import { useTranslation } from "react-i18next";
@@ -36,6 +38,7 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({
   const { user } = useAppSelector((state) => state);
 
   const [password, setPassword] = useState("");
+  const [promo, setPromo] = useState<boolean>(true);
   const [confirmPassword, setConfirmPassword] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [confirmPasswordError, setConfirmPasswordError] = useState("");
@@ -64,15 +67,16 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({
     } else if (password !== confirmPassword) {
       setConfirmPasswordError(t("auth.passwords_dont_match"));
     } else {
-      const req = {
+      const req: IRegiser = {
         email: email,
         password: password,
         is_active: true,
         is_superuser: false,
         is_verified: false,
-        role: user.role || roles.advertiser,
+        role: userRoles.includes(user.role) ? user.role : roles.advertiser,
         language: language?.id || Languages[0].id,
         code: Number(code),
+        promo: promo,
       };
       register(req)
         .unwrap()
@@ -178,7 +182,12 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({
         </div>
 
         <div className={styles.news}>
-          <input type="checkbox" name="agree" />
+          <input
+            type="checkbox"
+            name="agree"
+            checked={promo}
+            onChange={() => setPromo((prev) => !prev)}
+          />
           {t("auth.subscribtion")}
         </div>
 
