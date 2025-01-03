@@ -1,4 +1,8 @@
-import { authApi, VIEWS_BLOGGER_CHANNELS, VIEWS_BLOGGER_OFFERS } from "@shared/api";
+import {
+  authApi,
+  VIEWS_BLOGGER_CHANNELS,
+  VIEWS_BLOGGER_OFFERS,
+} from "@shared/api";
 import { IViewBloggerChannel, IViewBloggerOrder } from "../types";
 
 export const viewBloggerAPI = authApi.injectEndpoints({

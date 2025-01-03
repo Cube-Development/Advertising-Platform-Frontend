@@ -1,7 +1,7 @@
-import { desireNum } from "../config";
+import { desireStatus } from "../config";
 
 export interface IChangeOrder {
   order_id: string;
-  desire: desireNum;
+  desire: desireStatus;
   comment: string;
 }

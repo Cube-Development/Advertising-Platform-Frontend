@@ -8,7 +8,7 @@ export const viewManagerAPI = authApi.injectEndpoints({
         url: "/view/manager/project",
         method: "GET",
       }),
-       providesTags: [VIEWS_MANAGER],
+      providesTags: [VIEWS_MANAGER],
     }),
   }),
 });

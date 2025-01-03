@@ -1,5 +1,5 @@
 import {
-  desireNum,
+  desireStatus,
   IAdvProjectSubcard,
   IChangeOrder,
   useChangeOrderMutation,
@@ -19,24 +19,29 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
-interface ReplaceChannelProps {
+export interface ReplaceChannelProps {
   order: IAdvProjectSubcard;
+  is_request_approve: boolean;
 }
 
-export const ReplaceChannel: FC<ReplaceChannelProps> = ({ order }) => {
+export const ReplaceChannel: FC<ReplaceChannelProps> = ({
+  order,
+  is_request_approve,
+}) => {
   const { t } = useTranslation();
   const { toast } = useToast();
   const [replace] = useChangeOrderMutation();
   const haveDesire = !!order?.desire.find(
-    (el) => el.desire_type === desireNum.channel,
+    (el) => el.desire_type === desireStatus.replace_channel_request,
   );
   const { watch, register } = useForm<IChangeOrder>({
     defaultValues: {
       order_id: order?.id,
-      desire: desireNum.channel,
+      desire: desireStatus.replace_channel_request,
       comment: haveDesire
-        ? order?.desire.find((el) => el.desire_type === desireNum.channel)
-            ?.comment
+        ? order?.desire.find(
+            (el) => el.desire_type === desireStatus.replace_channel_request,
+          )?.comment
         : "",
     },
   });
@@ -50,13 +55,13 @@ export const ReplaceChannel: FC<ReplaceChannelProps> = ({ order }) => {
         .then(() => {
           toast({
             variant: "success",
-            title: t("toasts.orders_advertiser.replace.comment.success"),
+            title: t("toasts.orders_advertiser.replace.channel.success"),
           });
         })
         .catch((error) => {
           toast({
             variant: "error",
-            title: t("toasts.orders_advertiser.replace.comment.error"),
+            title: t("toasts.orders_advertiser.replace.channel.error"),
             action: <ToastAction altText="Ok">Ok</ToastAction>,
           });
           console.error("error: ", error);
@@ -65,7 +70,11 @@ export const ReplaceChannel: FC<ReplaceChannelProps> = ({ order }) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <MyButton buttons_type="button__white" className={styles.trigger}>
+        <MyButton
+          buttons_type="button__white"
+          className={styles.trigger}
+          disabled={!haveDesire && is_request_approve}
+        >
           {t(`order_btn.changeChannel`)}
         </MyButton>
       </AlertDialogTrigger>
@@ -73,8 +82,8 @@ export const ReplaceChannel: FC<ReplaceChannelProps> = ({ order }) => {
         <div className={styles.title}>
           <p className="gradient_color">
             {haveDesire
-              ? t("orders_advertiser.subcard.replace.comment.desire")
-              : t("orders_advertiser.subcard.replace.comment.title")}
+              ? t("orders_advertiser.subcard.replace.channel.desire")
+              : t("orders_advertiser.subcard.replace.channel.title")}
           </p>
           <AlertDialogCancel asChild>
             <div className={styles.close}>
@@ -87,7 +96,7 @@ export const ReplaceChannel: FC<ReplaceChannelProps> = ({ order }) => {
           maxLength={300}
           disabled={haveDesire}
           placeholder={t(
-            "orders_advertiser.subcard.replace.comment.placeholder",
+            "orders_advertiser.subcard.replace.channel.placeholder",
           )}
         />
         <AlertDialogCancel asChild>

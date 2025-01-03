@@ -10,6 +10,7 @@ import {
 } from "@entities/platform";
 import {
   GetPostRes,
+  IManagerProjectCard,
   IManagerProjectSubcard,
   IOrderFeature,
   desireStatus,
@@ -44,23 +45,25 @@ import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { useWindowWidth } from "@shared/hooks";
+import { ChangeChannelProps, ChangePostProps } from "@features/order";
 
 interface ManagerProjectSubcardProps {
+  card: IManagerProjectCard;
   subcard: IManagerProjectSubcard;
   FeedbackBtn: FC<IOrderFeature>;
   AcceptBtn: FC<IOrderFeature>;
   RejectBtn: FC<IOrderFeature>;
   CheckBtn: FC<IOrderFeature>;
   SeePostBtn: FC<{ post: GetPostRes }>;
-  project_id: string;
-  ChangeChannelBtn: FC<{ project_id: string }>;
-  ChangePostBtn: FC<{ project_id: string }>;
+  ChangeChannelBtn: FC<ChangeChannelProps>;
+  ChangePostBtn: FC<ChangePostProps>;
   SeeCommentBtn: FC;
   ChannelChatBtn: FC<IChatProps>;
   statusFilter: managerProjectStatusFilter;
 }
 
 export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
+  card,
   subcard,
   FeedbackBtn,
   AcceptBtn,
@@ -71,7 +74,6 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
   ChangeChannelBtn,
   ChangePostBtn,
   SeeCommentBtn,
-  project_id,
   statusFilter,
 }) => {
   const { t } = useTranslation();
@@ -209,7 +211,10 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
                 <div>
                   <p>{t(`orders_manager.order_status.agreed.title`)}</p>
                   <div>
-                    <ChangePostBtn project_id={project_id} />
+                    <ChangePostBtn
+                      order={subcard}
+                      project_id={card?.project_id}
+                    />
                     <CheckBtn />
                   </div>
                 </div>
@@ -223,17 +228,29 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
                   <div className={styles.subcard__posted__buttons__top}>
                     {subcard?.desire.length === 2 ? (
                       <>
-                        <ChangePostBtn project_id={project_id} />
-                        <ChangeChannelBtn project_id={project_id} />
+                        <ChangePostBtn
+                          order={subcard}
+                          project_id={card?.project_id}
+                        />
+                        <ChangeChannelBtn
+                          order={subcard}
+                          project_id={card?.project_id}
+                        />
                       </>
                     ) : subcard?.desire[0].desire_type ===
                       desireStatus.replace_channel_request ? (
-                      <ChangeChannelBtn project_id={project_id} />
+                      <ChangeChannelBtn
+                        order={subcard}
+                        project_id={card?.project_id}
+                      />
                     ) : (
-                      <ChangePostBtn project_id={project_id} />
+                      <ChangePostBtn
+                        order={subcard}
+                        project_id={card?.project_id}
+                      />
                     )}
                   </div>
-                  <SeeCommentBtn />
+                  <SeePostBtn post={post!} />
                 </div>
               </div>
             ) : subcard?.api_status === orderStatus.canceled ||
@@ -608,7 +625,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
               <div>
                 <p>{t(`orders_advertiser.order_status.agreed.title`)}</p>
                 <div>
-                  <ChangeChannelBtn project_id={"sfsdf"} />
+                  <ChangeChannelBtn order={subcard} project_id={card?.id} />
                   <CheckBtn />
                 </div>
               </div>

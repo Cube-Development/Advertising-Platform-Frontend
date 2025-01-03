@@ -1,5 +1,5 @@
 import {
-  desireNum,
+  desireStatus,
   IAdvProjectSubcard,
   IChangeOrder,
   useChangeOrderMutation,
@@ -19,23 +19,29 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
-interface ReplacePostProps {
+export interface ReplacePostProps {
   order: IAdvProjectSubcard;
+  is_request_approve: boolean;
 }
 
-export const ReplacePost: FC<ReplacePostProps> = ({ order }) => {
+export const ReplacePost: FC<ReplacePostProps> = ({
+  order,
+  is_request_approve,
+}) => {
   const { t } = useTranslation();
   const { toast } = useToast();
   const [replace] = useChangeOrderMutation();
   const haveDesire = !!order?.desire.find(
-    (el) => el.desire_type === desireNum.post,
+    (el) => el.desire_type === desireStatus.replace_post_request,
   );
   const { watch, register } = useForm<IChangeOrder>({
     defaultValues: {
       order_id: order?.id,
-      desire: desireNum.post,
+      desire: desireStatus.replace_post_request,
       comment: haveDesire
-        ? order?.desire.find((el) => el.desire_type === desireNum.post)?.comment
+        ? order?.desire.find(
+            (el) => el.desire_type === desireStatus.replace_post_request,
+          )?.comment
         : "",
     },
   });
@@ -64,8 +70,12 @@ export const ReplacePost: FC<ReplacePostProps> = ({ order }) => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <MyButton buttons_type="button__white" className={styles.trigger}>
-          {t(`order_btn.changeChannel`)}
+        <MyButton
+          buttons_type="button__white"
+          className={styles.trigger}
+          disabled={!haveDesire && is_request_approve}
+        >
+          {t(`order_btn.changePost`)}
         </MyButton>
       </AlertDialogTrigger>
       <AlertDialogContent className={`${styles.content} ${styles.dialog}`}>

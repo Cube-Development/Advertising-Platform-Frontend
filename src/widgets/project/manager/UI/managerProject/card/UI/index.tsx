@@ -285,7 +285,7 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
                 {subcards?.orders?.map((subcard, index) => (
                   <ManagerProjectSubcard
                     key={index}
-                    project_id={card?.project_id}
+                    card={card}
                     subcard={subcard}
                     FeedbackBtn={Feedback}
                     AcceptBtn={AcceptPost}
@@ -362,7 +362,7 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
                       <div className={styles.top}>
                         <ManagerProjectSubcard
                           key={index}
-                          project_id={card?.project_id}
+                          card={card}
                           subcard={subcard}
                           FeedbackBtn={Feedback}
                           AcceptBtn={AcceptPost}

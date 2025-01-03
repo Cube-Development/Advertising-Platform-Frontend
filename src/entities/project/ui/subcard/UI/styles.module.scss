@@ -376,15 +376,21 @@
     }
 
     &__agreed {
-      div {
+      .content {
         display: grid;
         grid-auto-flow: row;
         row-gap: 15px;
 
-        div {
+        .buttons__wrapper {
           display: grid;
           grid-template: repeat(2, 1fr) / 1fr;
           row-gap: 5px;
+
+          .buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            column-gap: 5px;
+          }
         }
       }
     }

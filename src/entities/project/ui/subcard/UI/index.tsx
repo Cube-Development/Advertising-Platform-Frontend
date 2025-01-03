@@ -1,6 +1,7 @@
 import { IChatProps } from "@entities/communication";
 import {
   GetPostRes,
+  IAdvProjectCard,
   IAdvProjectSubcard,
   IOrderFeature,
   advManagerProjectStatusFilter,
@@ -31,23 +32,30 @@ import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { useAppSelector, useWindowWidth } from "@shared/hooks";
+import {
+  ChangeChannelProps,
+  ReplaceChannelProps,
+  ReplacePostProps,
+} from "@features/order";
 
 interface AdvSubcardProps {
+  card: IAdvProjectCard;
   subcard: IAdvProjectSubcard;
   FeedbackBtn: FC<IOrderFeature>;
   AcceptBtn: FC<IOrderFeature>;
   RejectBtn: FC<IOrderFeature>;
   CheckBtn: FC<IOrderFeature>;
   SeePostBtn: FC<{ post: GetPostRes }>;
-  ChangeChannelBtn: FC<{ project_id: string }>;
-  ReplaceChannelBtn: FC<{ order: IAdvProjectSubcard }>;
-  ReplacePostBtn: FC<{ order: IAdvProjectSubcard }>;
+  // ChangeChannelBtn: FC<ChangeChannelProps>;
+  ReplaceChannelBtn: FC<ReplaceChannelProps>;
+  ReplacePostBtn: FC<ReplacePostProps>;
   ChannelChatBtn: FC<IChatProps>;
   typeFilter: projectTypesFilter;
   statusFilter: advManagerProjectStatusFilter | myProjectStatusFilter;
 }
 
 export const AdvSubcard: FC<AdvSubcardProps> = ({
+  card,
   subcard,
   FeedbackBtn,
   AcceptBtn,
@@ -55,7 +63,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
   CheckBtn,
   SeePostBtn,
   ChannelChatBtn,
-  ChangeChannelBtn,
+  // ChangeChannelBtn,
   ReplaceChannelBtn,
   ReplacePostBtn,
   typeFilter,
@@ -272,14 +280,22 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
               </div>
             ) : subcard?.api_status === orderStatus.order_review ? (
               <div className={styles.subcard__agreed}>
-                <div>
+                <div className={styles.content}>
                   <p>{t(`orders_advertiser.order_status.agreed.title`)}</p>
-                  <div>
-                    {role === roles.manager ? (
-                      <ChangeChannelBtn project_id={"sfsdf"} />
-                    ) : (
-                      <ReplaceChannelBtn order={subcard} />
-                    )}
+                  <div className={styles.buttons__wrapper}>
+                    {/* {role === roles.manager ? (
+                      <ChangeChannelBtn order={subcard} project_id={card?.id} />
+                    ) : ( */}
+                    <div className={styles.buttons}>
+                      <ReplaceChannelBtn
+                        order={subcard}
+                        is_request_approve={!!card?.is_request_approve}
+                      />
+                      <ReplacePostBtn
+                        order={subcard}
+                        is_request_approve={!!card?.is_request_approve}
+                      />
+                    </div>
                     <SeePostBtn post={post!} />
                     {/* <CheckBtn /> */}
                   </div>
@@ -477,7 +493,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
               <div>
                 <p>{t(`orders_advertiser.order_status.agreed.title`)}</p>
                 <div>
-                  <ChangeChannelBtn project_id={"sfsdf"} />
+                  {/* <ChangeChannelBtn order={subcard} project_id={card?.id} /> */}
                   <SeePostBtn post={post!} />
                   {/* <CheckBtn /> */}
                 </div>

@@ -335,6 +335,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
                   (subcard, index) => (
                     <AdvSubcard
                       key={index}
+                      card={card}
                       subcard={subcard}
                       FeedbackBtn={Feedback}
                       AcceptBtn={AcceptPost}
@@ -342,7 +343,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
                       CheckBtn={CheckPost}
                       SeePostBtn={SeePost}
                       ChannelChatBtn={Chat}
-                      ChangeChannelBtn={ChangeChannel}
+                      // ChangeChannelBtn={ChangeChannel}
                       ReplaceChannelBtn={ReplaceChannel}
                       ReplacePostBtn={ReplacePost}
                       typeFilter={typeFilter}
@@ -416,6 +417,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
                       >
                         <div className={styles.top}>
                           <AdvSubcard
+                            card={card}
                             subcard={subcard}
                             FeedbackBtn={Feedback}
                             AcceptBtn={AcceptPost}
@@ -423,7 +425,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
                             CheckBtn={CheckPost}
                             SeePostBtn={SeePost}
                             ChannelChatBtn={Chat}
-                            ChangeChannelBtn={ChangeChannel}
+                            // ChangeChannelBtn={ChangeChannel}
                             ReplaceChannelBtn={ReplaceChannel}
                             ReplacePostBtn={ReplacePost}
                             typeFilter={typeFilter}

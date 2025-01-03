@@ -11,7 +11,10 @@ import {
   myProjectStatusFilter,
 } from "@entities/project";
 import {
+  ADV_ORDERS,
   ADV_PROJECTS,
+  ADV_TARIFF_ORDERS,
+  ADV_TARIFF_PROJECTS,
   authApi,
   BLOGGER_OFFERS,
   VIEWS_ADVERTISER,
@@ -184,7 +187,6 @@ export const advProjectsAPI = authApi.injectEndpoints({
           projects: [...currentCache.projects, ...newItems.projects],
         };
       },
-
       forceRefetch({ currentArg, previousArg }) {
         return currentArg?.page !== previousArg?.page;
       },
@@ -196,9 +198,8 @@ export const advProjectsAPI = authApi.injectEndpoints({
         method: `POST`,
         body: BodyParams,
       }),
-      providesTags: [ADV_PROJECTS],
+      providesTags: [ADV_ORDERS],
     }),
-
     getAdvManagerSubprojects: build.query<
       IAdvSubprojects,
       getProjectSubcardReq
@@ -208,7 +209,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
         method: `GET`,
         params: params,
       }),
-      providesTags: [ADV_PROJECTS],
+      providesTags: [ADV_TARIFF_ORDERS],
     }),
 
     approveAdvManagerProject: build.mutation<
@@ -220,7 +221,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
         method: "PUT",
         params: params,
       }),
-      invalidatesTags: [ADV_PROJECTS],
+      invalidatesTags: [ADV_TARIFF_PROJECTS],
     }),
 
     getAdvManagerProjects: build.query<
@@ -261,6 +262,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
           projects: [...currentCache.projects, ...newItems.projects],
         };
       },
+      providesTags: [ADV_TARIFF_PROJECTS],
     }),
   }),
 });
