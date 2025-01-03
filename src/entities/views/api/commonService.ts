@@ -1,4 +1,4 @@
-import { authApi, VIEWS_MANAGER } from "@shared/api";
+import { authApi, VIEWS_TRANSACTIONS } from "@shared/api";
 import { IViewWallet } from "../types";
 
 export const viewCommonAPI = authApi.injectEndpoints({
@@ -8,7 +8,7 @@ export const viewCommonAPI = authApi.injectEndpoints({
         url: "/view/transaction",
         method: "GET",
       }),
-      providesTags: [VIEWS_MANAGER],
+      providesTags: [VIEWS_TRANSACTIONS],
     }),
   }),
 });
