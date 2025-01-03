@@ -1,4 +1,4 @@
-import { orderStatus } from "../config";
+import { desireStatus, orderStatus } from "../config";
 
 export interface IAdvProjects {
   page: number;
@@ -64,6 +64,12 @@ export interface IAdvProjectSubcard {
   male: number;
   female: number;
   post_url?: string;
+  desire: IDesire[];
+}
+
+interface IDesire {
+  desire_type: desireStatus;
+  comment: string;
 }
 
 export interface IAdvManagerProjectsDev {

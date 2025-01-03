@@ -1,4 +1,8 @@
-import { authApi } from "@shared/api";
+import {
+  authApi,
+  VIEWS_BLOGGER_CHANNELS,
+  VIEWS_BLOGGER_OFFERS,
+} from "@shared/api";
 import { IViewBloggerChannel, IViewBloggerOrder } from "../types";
 
 export const viewBloggerAPI = authApi.injectEndpoints({
@@ -8,12 +12,14 @@ export const viewBloggerAPI = authApi.injectEndpoints({
         url: "/view/blogger/order",
         method: "GET",
       }),
+      providesTags: [VIEWS_BLOGGER_CHANNELS],
     }),
     getViewBloggerChannel: build.query<IViewBloggerChannel, void>({
       query: () => ({
         url: "/view/blogger/channel",
         method: "GET",
       }),
+      providesTags: [VIEWS_BLOGGER_OFFERS],
     }),
   }),
 });

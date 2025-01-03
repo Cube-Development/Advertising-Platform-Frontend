@@ -1,5 +1,3 @@
-import { roles } from "@entities/user";
-
 export interface IOrderFeature {
   order_id?: string;
   date?: string;

@@ -84,7 +84,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
   const { data: viewsWalletTransactions } = useGetViewTransactionsQuery(
     undefined,
     {
-      skip: !isAuth,
+      skip: !isAuth || currentRole === roles.manager,
     },
   );
 
@@ -124,6 +124,8 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
     transition: { transition: { duration: 0.2 } },
   };
 
+  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
+
   return (
     <div className={styles.dropdown}>
       <button onClick={() => toggleMenu()} className={styles.burger__icon_btn}>
@@ -140,7 +142,9 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
             className={`${styles.menu}`}
             variants={divVariants}
           >
-            <div className={styles.menu__content}>
+            <div
+              className={`${styles.menu__content} ${isSafari && styles.safari}`}
+            >
               <div className={`${styles.menu__top}`}>
                 <p className={styles.logo}>Blogix</p>
                 <button onClick={() => toggleMenu()}>

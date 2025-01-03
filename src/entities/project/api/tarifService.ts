@@ -1,4 +1,5 @@
-import { authApi } from "@shared/api";
+import { ADV_TARIFF_ORDERS, authApi } from "@shared/api";
+import { IChangeOrder } from "../types";
 
 export interface getBuyTarifReq {
   tariff_ident: number;
@@ -21,7 +22,15 @@ export const tarifAPI = authApi.injectEndpoints({
         body: BodyParams,
       }),
     }),
+    changeOrder: build.mutation<{ success: boolean }, IChangeOrder>({
+      query: (BodyParams) => ({
+        url: `/tariff/order/desire`,
+        method: `PUT`,
+        body: BodyParams,
+      }),
+      invalidatesTags: [ADV_TARIFF_ORDERS],
+    }),
   }),
 });
 
-export const { usePostBuyTarifMutation } = tarifAPI;
+export const { usePostBuyTarifMutation, useChangeOrderMutation } = tarifAPI;

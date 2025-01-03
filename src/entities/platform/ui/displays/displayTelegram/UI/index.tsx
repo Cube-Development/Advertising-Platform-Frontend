@@ -10,7 +10,8 @@ import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
 import Underline from "@tiptap/extension-underline";
-import { DownloadAllBtn } from "../../downloadAllBtn";
+import { DownloadAllBtn } from "../../../utils/downloadAllBtn";
+import { CopyTextBtn } from "../../../utils/copyTextBtn";
 
 interface DisplayTelegramProps {
   formState?: ICreatePostForm;
@@ -328,20 +329,23 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
           </div>
         )}
       </div>
-      {((post?.files && post?.files?.length > 0) ||
-        (post?.photo && post?.photo?.length > 0) ||
-        (post?.video && post?.video?.length > 0)) && (
-        <DownloadAllBtn
-          post={post}
-          formState={formState}
-          currentPost={currentPost}
-        />
-      )}
-      {/* {post?.text && post?.text.length > 0 && (
-        <CopyTextBtn
-          text={formState ? postEditor?.getText() : editorRes?.getText()}
-        />
-      )} */}
+      <section className="grid grid-cols-[1fr_auto] mt-2 ml-2.5">
+        {((post?.files && post?.files?.length > 0) ||
+          (post?.photo && post?.photo?.length > 0) ||
+          (post?.video && post?.video?.length > 0)) && (
+          <DownloadAllBtn
+            post={post}
+            formState={formState}
+            currentPost={currentPost}
+          />
+        )}
+        {post?.text && post?.text.length > 0 && (
+          <CopyTextBtn
+            // text={formState ? postEditor?.getText() : editorRes?.getText()}
+            text={textRes ? textRes[0] : ""}
+          />
+        )}
+      </section>
     </div>
   );
 };

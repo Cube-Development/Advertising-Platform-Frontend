@@ -81,7 +81,7 @@ export const managerProjectsAPI = authApi.injectEndpoints({
         method: "PUT",
         params: params,
       }),
-      invalidatesTags: [VIEWS_MANAGER],
+      invalidatesTags: [MANAGER_PROJECTS, VIEWS_MANAGER],
     }),
 
     launchProject: build.mutation<{ success: boolean }, { project_id: string }>(
@@ -91,7 +91,7 @@ export const managerProjectsAPI = authApi.injectEndpoints({
           method: "PUT",
           params: params,
         }),
-        invalidatesTags: [VIEWS_MANAGER],
+        invalidatesTags: [MANAGER_PROJECTS, VIEWS_MANAGER],
       },
     ),
 

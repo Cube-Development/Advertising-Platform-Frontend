@@ -6,3 +6,5 @@ export * from "./rejectPost";
 export * from "./seePost";
 export * from "./changePost";
 export * from "./seeComment";
+export * from "./replaceChannel";
+export * from "./replacePost";

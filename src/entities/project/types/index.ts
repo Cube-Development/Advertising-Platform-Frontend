@@ -6,3 +6,4 @@ export * from "./cart";
 export * from "./catalog";
 export * from "./filterSearch";
 export * from "./turnkey";
+export * from "./tarif";

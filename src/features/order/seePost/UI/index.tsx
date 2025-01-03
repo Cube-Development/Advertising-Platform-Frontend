@@ -30,7 +30,7 @@ export const SeePost: FC<SeePostProps> = ({ post }) => {
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <MyButton buttons_type="button__white" className={styles.button}>
-          <p>{t(`order_btn.seePost`)}</p>
+          {t(`order_btn.seePost`)}
         </MyButton>
       </AlertDialogTrigger>
       <AlertDialogContent className={`${styles.content} bg-transparent`}>

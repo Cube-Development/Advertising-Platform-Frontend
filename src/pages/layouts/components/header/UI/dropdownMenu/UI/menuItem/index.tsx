@@ -156,15 +156,19 @@ export const MenuItem: React.FC<IMenuItems> = ({
                 <li>
                   <GripVertical width={20} height={20} stroke="#4772e6" />
                   {t(subItem.title!)}
-                  {viewsInfo && !!viewsInfo?.count && (
-                    <div className={styles.badge}>
-                      <span>
-                        {viewsInfo?.values.find(
-                          (value) => subItem?.type === value?.type,
-                        )?.count || 0}
-                      </span>
-                    </div>
-                  )}
+                  {viewsInfo &&
+                    !!viewsInfo?.count &&
+                    !!viewsInfo?.values.find(
+                      (value) => subItem?.type === value?.type,
+                    )?.count && (
+                      <div className={styles.badge}>
+                        <span>
+                          {viewsInfo?.values.find(
+                            (value) => subItem?.type === value?.type,
+                          )?.count || 0}
+                        </span>
+                      </div>
+                    )}
                 </li>
               </Link>
             ))}

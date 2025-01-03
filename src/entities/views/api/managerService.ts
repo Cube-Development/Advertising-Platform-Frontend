@@ -1,4 +1,4 @@
-import { authApi } from "@shared/api";
+import { authApi, VIEWS_MANAGER } from "@shared/api";
 import { IViewManagerProject } from "../types";
 
 export const viewManagerAPI = authApi.injectEndpoints({
@@ -8,6 +8,7 @@ export const viewManagerAPI = authApi.injectEndpoints({
         url: "/view/manager/project",
         method: "GET",
       }),
+      providesTags: [VIEWS_MANAGER],
     }),
   }),
 });
