@@ -6,7 +6,6 @@ import {
   IUserData,
   roles,
 } from "@entities/user";
-import { EditPassword } from "@features/profile";
 import { authApi, baseApi } from "@shared/api";
 import { languagesNum } from "@shared/config";
 
@@ -116,6 +115,12 @@ export const userAPI = authApi.injectEndpoints({
         method: `GET`,
       }),
     }),
+    getUserQuery: build.query<GetUserRes, void>({
+      query: () => ({
+        url: `/users/me`,
+        method: `GET`,
+      }),
+    }),
 
     getProfile: build.query<IProfileData, void>({
       query: () => ({
@@ -157,6 +162,7 @@ export const userAPI = authApi.injectEndpoints({
 export const {
   useLogoutMutation,
   useGetUserMutation,
+  useGetUserQueryQuery,
   useUpdateRoleMutation,
   useChangeLanguegeMutation,
   useGetProfileQuery,

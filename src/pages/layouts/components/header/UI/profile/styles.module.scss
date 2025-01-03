@@ -20,7 +20,7 @@
   background-color: var(--Personal-colors-White);
   box-shadow: 0px 4px 10px 1px rgba(0, 0, 0, 0.2);
   z-index: 1;
-  width: 170px;
+  min-width: 170px;
   border-radius: 12px;
 
   font-size: 12px;
@@ -46,7 +46,6 @@
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
-      line-height: normal;
     }
   }
 }

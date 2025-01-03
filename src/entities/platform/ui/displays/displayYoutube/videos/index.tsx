@@ -11,7 +11,8 @@ import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
 import Underline from "@tiptap/extension-underline";
-import { DownloadAllBtn } from "../../downloadAllBtn";
+import { DownloadAllBtn } from "../../../utils/downloadAllBtn";
+import { CopyTextBtn } from "../../../utils/copyTextBtn";
 
 interface DisplayVideosProps {
   formState?: ICreatePostForm;
@@ -89,51 +90,6 @@ export const DisplayVideos: FC<DisplayVideosProps> = ({
     downloadIconSize: number;
     feedHeightSize: number;
   } | null>(null);
-
-  // useEffect(() => {
-  //   const updateSizes = () => {
-  //     if (imgRef.current) {
-  //       const imgWidth = imgRef.current.offsetWidth;
-
-  //       const calculatedRadius = (imgWidth / 364) * 54;
-  //       const calculatedTimeSize = (imgWidth / 364) * 14;
-  //       const calculatedDisplayTopSize = (imgWidth / 364) * 50;
-  //       const calculatedDisplayBottomSize = (imgWidth / 364) * 80;
-  //       const calculatedDownloadIconSize = (imgWidth / 364) * 20;
-  //       const calculatedFeedHeightSize = (imgWidth / 364) * 200;
-
-  //       // Обновляем все значения в состоянии
-  //       setResizes({
-  //         borderRadius: calculatedRadius,
-  //         timeSize: calculatedTimeSize,
-  //         displayTopSize: calculatedDisplayTopSize,
-  //         displayBottomSize: calculatedDisplayBottomSize,
-  //         downloadIconSize: calculatedDownloadIconSize,
-  //         feedHeightSize: calculatedFeedHeightSize,
-  //       });
-  //     }
-  //   };
-
-  //   updateSizes();
-
-  //   setTimeout(() => {
-  //     updateSizes();
-  //   }, 300);
-
-  //   setTimeout(() => {
-  //     updateSizes();
-  //   }, 600);
-
-  //   setTimeout(() => {
-  //     updateSizes();
-  //   }, 1000);
-
-  //   window.addEventListener("resize", updateSizes);
-
-  //   return () => {
-  //     window.removeEventListener("resize", updateSizes);
-  //   };
-  // }, [imgRef.current?.offsetWidth]);
 
   useEffect(() => {
     const imgElement = imgRef.current;
@@ -325,20 +281,23 @@ export const DisplayVideos: FC<DisplayVideosProps> = ({
           </div>
         )}
       </div>
-      {((post?.files && post?.files?.length > 0) ||
-        (post?.photo && post?.photo?.length > 0) ||
-        (post?.video && post?.video?.length > 0)) && (
-        <DownloadAllBtn
-          post={post}
-          formState={formState}
-          currentPost={currentPost}
-        />
-      )}
-      {/* {post?.text && post?.text.length > 0 && (
-        <CopyTextBtn
-          text={formState ? postEditor?.getText() : editorRes?.getText()}
-        />
-      )} */}
+      <section className="grid grid-cols-[1fr_auto] mt-2 ml-2.5">
+        {((post?.files && post?.files?.length > 0) ||
+          (post?.photo && post?.photo?.length > 0) ||
+          (post?.video && post?.video?.length > 0)) && (
+          <DownloadAllBtn
+            post={post}
+            formState={formState}
+            currentPost={currentPost}
+          />
+        )}
+        {post?.text && post?.text.length > 0 && (
+          <CopyTextBtn
+            // text={formState ? postEditor?.getText() : editorRes?.getText()}
+            text={textRes ? textRes[0] : ""}
+          />
+        )}
+      </section>
     </div>
   );
 };

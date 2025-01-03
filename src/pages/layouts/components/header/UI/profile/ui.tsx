@@ -1,4 +1,4 @@
-import { roles, useLogoutMutation } from "@entities/user";
+import { roles, useGetUserQueryQuery, useLogoutMutation } from "@entities/user";
 import { ProfileIcon } from "@shared/assets";
 import { useAppSelector } from "@shared/hooks";
 import { paths } from "@shared/routing";
@@ -26,7 +26,8 @@ export const Profile: FC<ProfileProps> = ({ toggleLogout }) => {
   const menuRef = useRef<HTMLDivElement>(null);
   const [logout] = useLogoutMutation();
   const navigate = useNavigate();
-  const { role } = useAppSelector((state) => state.user);
+  const { isAuth, role } = useAppSelector((state) => state.user);
+  const { data: user } = useGetUserQueryQuery(undefined, { skip: !isAuth });
 
   const handleClickOutside = (event: MouseEvent) => {
     if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
@@ -62,6 +63,9 @@ export const Profile: FC<ProfileProps> = ({ toggleLogout }) => {
       {isMenuOpen && (
         <div className={styles.menu}>
           <ul>
+            <li className="font-bold text-[10px] truncate max-w-[70vw]">
+              {user?.email}
+            </li>
             <Link to={paths.profile}>
               <li onClick={handleButtonClick}>{t("my_profile.data")}</li>
             </Link>

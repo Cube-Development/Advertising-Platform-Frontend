@@ -6,24 +6,24 @@
   border-radius: 16px;
   overflow: hidden;
   background: #fff;
-  box-shadow: inset 0px 0px 5px 1px rgba(71, 114, 230, 0.3);
+  box-shadow: inset 0px 0px 5px 1px rgba(78, 78, 78, 0.3);
 
   li {
-    font-size: var(--font-size-subtitle-main-xl);
-    font-weight: normal;
+    font-size: var(--column-gap-option-item-xl);
+    font-weight: 500;
     cursor: pointer;
     position: relative;
     width: 100%;
     text-align: center;
-    color: var(--Personal-colors-grey);
+    color: #9c9c9c;
     padding: 10px 0px;
 
     @media (max-width: 992px) {
-      font-size: var(--font-size-subtitle-main-md);
+      font-size: var(--column-gap-option-item-md);
     }
 
     @media (max-width: 768px) {
-      font-size: var(--font-size-subtitle-main-sm);
+      font-size: var(--column-gap-option-item-sm);
     }
 
     @media (max-width: 576px) {

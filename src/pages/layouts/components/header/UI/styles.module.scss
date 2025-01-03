@@ -16,6 +16,7 @@
 
   &.hidden {
     transform: translateY(-130%);
+
     @media (max-width: 768px) {
       transform: translateY(0);
     }
