@@ -12,7 +12,7 @@ export default defineConfig({
     react(),
     sentryVitePlugin({
       org: "blogix",
-      project: "blogix",
+      project: "blogix-frontend",
       authToken: process.env.SENTRY_AUTH_TOKEN,
     }),
   ],
