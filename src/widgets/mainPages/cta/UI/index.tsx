@@ -17,9 +17,9 @@ interface CtaProps {
 
 export const Cta: FC<CtaProps> = ({ page }) => {
   const { t } = useTranslation();
-  const options: IOptionTranslate[] = t(`${page}.cta_list`, {
+  const options = t(`${page}.cta_list`, {
     returnObjects: true,
-  });
+  }) as IOptionTranslate[];
   let custom = 0;
 
   return (

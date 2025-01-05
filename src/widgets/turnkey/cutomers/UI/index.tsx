@@ -1,7 +1,8 @@
 import { FC } from "react";
-import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 import { CustomerList } from "@features/mainPages";
+import { ICustomer } from "@shared/types/translate";
 
 interface CustomersProps {}
 
@@ -17,9 +18,11 @@ export const Customers: FC<CustomersProps> = () => {
         </div>
       </div>
       <CustomerList
-        customers={t(`main_page_advertiser.customers_list`, {
-          returnObjects: true,
-        })}
+        customers={
+          t(`main_page_advertiser.customers_list`, {
+            returnObjects: true,
+          }) as ICustomer[]
+        }
       />
     </div>
   );

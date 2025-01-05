@@ -64,9 +64,9 @@ const DecorativeElementRow: FC<DecorativeElementRowProps> = ({
 
 export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
   const { t } = useTranslation();
-  const StepsList: any[] = t(`${page}.how_list`, {
+  const StepsList = t(`${page}.how_list`, {
     returnObjects: true,
-  });
+  }) as { stage: string }[];
 
   const screen = useWindowWidth();
 

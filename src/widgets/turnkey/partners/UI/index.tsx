@@ -15,9 +15,11 @@ export const Partners: FC<PartnersProps> = () => {
 
       <div className={styles.partners__block}>
         <PartnerList
-          partners={t(`main_page_advertiser.partners_list`, {
-            returnObjects: true,
-          })}
+          partners={
+            t(`main_page_advertiser.partners_list`, {
+              returnObjects: true,
+            }) as { img: string }[]
+          }
         />
       </div>
     </section>

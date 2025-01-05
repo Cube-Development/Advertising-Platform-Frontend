@@ -36,17 +36,17 @@ const DecorativeElement: FC<DecorativeElementProps> = ({ elements }) => {
 export const Steps: FC = () => {
   const { t } = useTranslation();
   const screen = useWindowWidth();
-  const stepOne: IStep[] = t("turnkey.how_it_works.step_1.text", {
+  const stepOne = t("turnkey.how_it_works.step_1.text", {
     returnObjects: true,
-  });
+  }) as IStep[];
 
-  const stepTwo: IStep[] = t("turnkey.how_it_works.step_2.text", {
+  const stepTwo = t("turnkey.how_it_works.step_2.text", {
     returnObjects: true,
-  });
+  }) as IStep[];
 
-  const stepThree: IStep[] = t("turnkey.how_it_works.step_3.text", {
+  const stepThree = t("turnkey.how_it_works.step_3.text", {
     returnObjects: true,
-  });
+  }) as IStep[];
 
   const handleClick = () => {
     window.scrollTo({

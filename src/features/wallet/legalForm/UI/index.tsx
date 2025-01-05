@@ -32,9 +32,9 @@ export const LegalForm: FC<LegalFormProps> = ({
             ...row.validate,
             required: t(row.validate.required),
           };
-          const row_dict: IParameterData = t(row.label, {
+          const row_dict = t(row.label, {
             returnObjects: true,
-          });
+          }) as IParameterData;
           return (
             <div
               className={`${styles.row} ${isCreateProfile ? styles.createProfile : ""}`}
