@@ -30,7 +30,11 @@ export const Partners: FC<PartnersProps> = ({ page }) => {
       <div className={styles.partners__block}>
         <motion.div custom={custom++} variants={PAGE_ANIMATION.animationVision}>
           <PartnerList
-            partners={t(`${page}.partners_list`, { returnObjects: true })}
+            partners={
+              t(`${page}.partners_list`, { returnObjects: true }) as {
+                img: string;
+              }[]
+            }
           />
         </motion.div>
         <motion.div
@@ -39,7 +43,11 @@ export const Partners: FC<PartnersProps> = ({ page }) => {
           className={styles.bottom}
         >
           <PartnerList
-            partners={t(`${page}.partners_list`, { returnObjects: true })}
+            partners={
+              t(`${page}.partners_list`, { returnObjects: true }) as {
+                img: string;
+              }[]
+            }
             isLeft={true}
           />
         </motion.div>

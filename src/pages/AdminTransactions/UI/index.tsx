@@ -1,6 +1,23 @@
-import { Transactions } from "@widgets/adminPanel";
-import { FC } from "react";
+// import { Transactions } from "@widgets/adminPanel";
+// import { FC } from "react";
 
-export const AdminTransactionsPage: FC = () => {
-  return <Transactions />;
+// export const AdminTransactionsPage: FC = () => {
+//   return <Transactions />;
+// };
+
+import React, { Suspense } from "react";
+
+// Ленивый импорт компонента Transactions
+const Transactions = React.lazy(() =>
+  import("@widgets/adminPanel").then((module) => ({
+    default: module.Transactions,
+  })),
+);
+
+export const AdminTransactionsPage = () => {
+  return (
+    <Suspense fallback={<div>Loading Transactions...</div>}>
+      <Transactions />
+    </Suspense>
+  );
 };

@@ -4,6 +4,7 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { CustomerList } from "@features/mainPages";
+import { ICustomer } from "@shared/types/translate";
 
 interface CustomersProps {
   page: string;
@@ -32,7 +33,9 @@ export const Customers: FC<CustomersProps> = ({ page }) => {
         style={{ overflow: "hidden" }}
       >
         <CustomerList
-          customers={t(`${page}.customers_list`, { returnObjects: true })}
+          customers={
+            t(`${page}.customers_list`, { returnObjects: true }) as ICustomer[]
+          }
         />
       </motion.div>
     </motion.section>

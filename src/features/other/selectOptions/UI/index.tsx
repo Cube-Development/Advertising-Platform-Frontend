@@ -65,9 +65,9 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
   const menuRef = useRef<HTMLDivElement>(null);
   const screen = useWindowWidth();
 
-  const allText: ISelectOption = isFilter
+  const allText = isFilter
     ? { title: t(textData) }
-    : t(textData!, { returnObjects: true });
+    : (t(textData!, { returnObjects: true }) as ISelectOption);
 
   const closeMenu = () => {
     setMenuOpen(false);

@@ -16,10 +16,15 @@ interface WorkWithUsProps {
 SwiperCore.use([Autoplay]);
 export const WorkWithUs: FC<WorkWithUsProps> = ({ page }) => {
   const { t } = useTranslation();
-  const channels: { img: string }[] = t(`${page}.work_list`, {
-    returnObjects: true,
-  });
+  // const channels: { img: string }[] = t(`${page}.work_list`, {
+  //   returnObjects: true,
+  // });
+
+  const channels = t(`${page}.partners_list`, { returnObjects: true }) as {
+    img: string;
+  }[];
   let custom = 4;
+
   return (
     <div className={styles.wrapper}>
       <motion.h1

@@ -21,7 +21,6 @@ export const Logo: FC<LogoProps> = ({ currentRole }) => {
     <div onClick={handleLogoClick}>
       <Link to={currentRole === roles.blogger ? paths.mainBlogger : paths.main}>
         <p className={styles.logo}>Blogix</p>
-        {/* <img src="/images/assets/logo.svg" className={styles.logo} alt="/" /> */}
       </Link>
     </div>
   );

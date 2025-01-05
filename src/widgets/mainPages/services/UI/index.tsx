@@ -12,9 +12,9 @@ interface ServicesProps {
 
 export const Services: FC<ServicesProps> = ({ page }) => {
   const { t } = useTranslation();
-  const infos: IBasicInfo[] = t(`${page}.services_list`, {
+  const infos = t(`${page}.services_list`, {
     returnObjects: true,
-  });
+  }) as IBasicInfo[];
   let custom = 7;
 
   return (

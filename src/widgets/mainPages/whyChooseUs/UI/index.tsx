@@ -7,6 +7,7 @@ import styles from "./styles.module.scss";
 import { AccommList, StartAdv } from "@features/mainPages";
 import { AddChannel } from "@features/channel";
 import { addChannelQueries } from "@entities/channel";
+import { IAccomm } from "@shared/types/translate";
 
 interface WhyChooseUsProps {
   page: string;
@@ -30,7 +31,9 @@ export const WhyChooseUs: FC<WhyChooseUsProps> = ({ page }) => {
         {t(`${page}.why_title`)}
       </motion.h1>
       <AccommList
-        accomms={t(`${page}.accomms_list`, { returnObjects: true })}
+        accomms={
+          t(`${page}.accomms_list`, { returnObjects: true }) as IAccomm[]
+        }
         custom={custom}
         toDoBtn={
           page === "main_page_advertiser" ? (

@@ -1,9 +1,10 @@
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
+import { motion } from "framer-motion";
 import { PriceList } from "@features/other";
 import { KeyIcon } from "@shared/assets";
 import { PAGE_ANIMATION } from "@shared/config/animation";
-import { motion } from "framer-motion";
-import { FC } from "react";
-import { useTranslation } from "react-i18next";
+import { ITarifInfo } from "@shared/types";
 import styles from "./styles.module.scss";
 
 interface TurnkeyProps {
@@ -49,7 +50,11 @@ export const Turnkey: FC<TurnkeyProps> = ({ page }) => {
         </motion.p>
       </div>
 
-      <PriceList tarifs={t(`${page}.tarifs_list`, { returnObjects: true })} />
+      <PriceList
+        tarifs={
+          t(`${page}.tarifs_list`, { returnObjects: true }) as ITarifInfo[]
+        }
+      />
     </motion.section>
   );
 };

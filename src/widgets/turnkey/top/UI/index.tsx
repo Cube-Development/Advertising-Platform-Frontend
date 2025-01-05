@@ -2,7 +2,7 @@ import { FC, useEffect } from "react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
 import { PriceList } from "@features/other";
-import { pageFilter } from "@shared/routing";
+import { ITarifInfo } from "@shared/types";
 
 interface TopProps {}
 
@@ -22,9 +22,11 @@ export const Top: FC<TopProps> = () => {
           <h2 className="gradient_color">{t("turnkey.text")}</h2>
         </div>
         <PriceList
-          tarifs={t(`main_page_advertiser.tarifs_list`, {
-            returnObjects: true,
-          })}
+          tarifs={
+            t(`main_page_advertiser.tarifs_list`, {
+              returnObjects: true,
+            }) as ITarifInfo[]
+          }
         />
       </div>
     </section>
