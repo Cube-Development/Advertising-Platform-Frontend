@@ -5,6 +5,7 @@
 //   return <CatalogBlock />;
 // };
 
+import { SuspenseLoader } from "@shared/ui";
 import React, { Suspense } from "react";
 
 // Ленивый импорт компонента CatalogBlock
@@ -16,7 +17,7 @@ const CatalogBlock = React.lazy(() =>
 
 export const CatalogPage = () => {
   return (
-    <Suspense fallback={<div>Loading Catalog...</div>}>
+    <Suspense fallback={<SuspenseLoader />}>
       <CatalogBlock />
     </Suspense>
   );

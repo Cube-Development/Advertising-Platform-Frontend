@@ -19,3 +19,4 @@ export * from "./sliderSubs";
 export * from "./spinnerLoader";
 export * from "./submitLoading";
 export * from "./themeChanger";
+export * from "./suspenseLoader";

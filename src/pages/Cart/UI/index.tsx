@@ -5,6 +5,7 @@
 //   return <Cart />;
 // };
 
+import { SuspenseLoader } from "@shared/ui";
 import React, { Suspense } from "react";
 
 // Ленивый импорт компонента Cart
@@ -14,7 +15,7 @@ const Cart = React.lazy(() =>
 
 export const CartPage = () => {
   return (
-    <Suspense fallback={<div>Loading Cart...</div>}>
+    <Suspense fallback={<SuspenseLoader />}>
       <Cart />
     </Suspense>
   );

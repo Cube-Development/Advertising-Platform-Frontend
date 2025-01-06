@@ -5,6 +5,7 @@
 //   return <ChannelInfo />;
 // };
 
+import { SuspenseLoader } from "@shared/ui";
 import React, { Suspense } from "react";
 
 // Ленивый импорт компонента ChannelInfo
@@ -16,7 +17,7 @@ const ChannelInfo = React.lazy(() =>
 
 export const ChannelPage = () => {
   return (
-    <Suspense fallback={<div>Loading Channel...</div>}>
+    <Suspense fallback={<SuspenseLoader />}>
       <ChannelInfo />
     </Suspense>
   );

@@ -268,7 +268,7 @@ export const Topup: FC = () => {
 
   return (
     <div className="container">
-      <div className={styles.wrapper}>
+      <div className={styles.wrapper} onClick={() => console.log(formState)}>
         <div className={styles.title}>
           <p>{t("wallet.topup.title")}</p>
           <ArrowIcon4 />

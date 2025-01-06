@@ -5,6 +5,7 @@
 //   return <Transactions />;
 // };
 
+import { SuspenseLoader } from "@shared/ui";
 import React, { Suspense } from "react";
 
 // Ленивый импорт компонента Transactions
@@ -16,7 +17,7 @@ const Transactions = React.lazy(() =>
 
 export const AdminTransactionsPage = () => {
   return (
-    <Suspense fallback={<div>Loading Transactions...</div>}>
+    <Suspense fallback={<SuspenseLoader />}>
       <Transactions />
     </Suspense>
   );

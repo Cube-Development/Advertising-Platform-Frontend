@@ -74,14 +74,12 @@ export const PaymentData: FC<PaymentDataProps> = ({
 
   const [price, setPrice] = useState("");
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value.replace(/[^0-9.]/g, "");
+    const newValue = e.target.value;
     if (newValue.length > 10 || newValue == "0") {
       return;
     }
     setPrice(newValue);
   };
-  // const formattedPrice = price === "" ? "" : Number(price).toLocaleString();
-  // console.log("price", price)
 
   const handleChangeAccept = (serviceRules: boolean, saveData: boolean) => {
     if (serviceRules) {
@@ -107,11 +105,7 @@ export const PaymentData: FC<PaymentDataProps> = ({
                   ? errors!["amount"].message
                   : t("wallet.topup.placeholder")
               }
-              value={
-                price
-                  ? new Intl.NumberFormat("ru-RU").format(Number(price))
-                  : ""
-              }
+              value={price}
               maxLength={14}
               className={errors!["amount"] && styles.error}
             />
@@ -134,7 +128,7 @@ export const PaymentData: FC<PaymentDataProps> = ({
         <div>
           <p>
             {formFields.amount != 0
-              ? parseFloat(String(formFields.amount)).toLocaleString()
+              ? parseFloat(String(price)).toLocaleString()
               : 0}{" "}
             {t("symbol")}
           </p>

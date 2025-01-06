@@ -5,6 +5,7 @@
 //   return <CreateOrderBlock />;
 // };
 
+import { SuspenseLoader } from "@shared/ui";
 import React, { Suspense } from "react";
 
 // Ленивый импорт компонента CreateOrderBlock
@@ -16,7 +17,7 @@ const CreateOrderBlock = React.lazy(() =>
 
 export const CreateOrderPage = () => {
   return (
-    <Suspense fallback={<div>Loading Create Order...</div>}>
+    <Suspense fallback={<SuspenseLoader />}>
       <CreateOrderBlock />
     </Suspense>
   );
