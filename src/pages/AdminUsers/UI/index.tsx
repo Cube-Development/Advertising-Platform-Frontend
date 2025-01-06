@@ -5,6 +5,7 @@
 //   return <Users />;
 // };
 
+import { SuspenseLoader } from "@shared/ui";
 import React, { Suspense } from "react";
 
 // Ленивый импорт компонента Users
@@ -14,7 +15,7 @@ const Users = React.lazy(() =>
 
 export const AdminUsersPage = () => {
   return (
-    <Suspense fallback={<div>Loading Users...</div>}>
+    <Suspense fallback={<SuspenseLoader />}>
       <Users />
     </Suspense>
   );

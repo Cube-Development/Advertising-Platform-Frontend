@@ -10,6 +10,7 @@
 //   );
 // };
 
+import { SuspenseLoader } from "@shared/ui";
 import React, { Suspense } from "react";
 
 // Ленивый импорт для AddLegalTop и AddLegalForm
@@ -26,10 +27,8 @@ const AddLegalForm = React.lazy(() =>
 export const AddLegalPage = () => {
   return (
     <>
-      <Suspense fallback={<div>Loading AddLegalTop...</div>}>
+      <Suspense fallback={<SuspenseLoader />}>
         <AddLegalTop />
-      </Suspense>
-      <Suspense fallback={<div>Loading AddLegalForm...</div>}>
         <AddLegalForm />
       </Suspense>
     </>

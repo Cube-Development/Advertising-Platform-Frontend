@@ -5,6 +5,7 @@
 //   return <ComplaintInfo />;
 // };
 
+import { SuspenseLoader } from "@shared/ui";
 import React, { Suspense } from "react";
 
 // Ленивый импорт для ComplaintInfo
@@ -16,7 +17,7 @@ const ComplaintInfo = React.lazy(() =>
 
 export const AdminComplaintInfoPage = () => {
   return (
-    <Suspense fallback={<div>Loading Complaint Info...</div>}>
+    <Suspense fallback={<SuspenseLoader />}>
       <ComplaintInfo />
     </Suspense>
   );

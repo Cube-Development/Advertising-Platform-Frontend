@@ -20,6 +20,7 @@
 import React, { Suspense } from "react";
 import { roles } from "@entities/user";
 import { useAppSelector } from "@shared/hooks";
+import { SuspenseLoader } from "@shared/ui";
 
 // Ленивые импорты компонентов
 const AdvOrders = React.lazy(() =>
@@ -35,7 +36,7 @@ export const OrdersPage = () => {
   const { role } = useAppSelector((state) => state.user);
 
   return (
-    <Suspense fallback={<div>Loading orders...</div>}>
+    <Suspense fallback={<SuspenseLoader />}>
       {role === roles.advertiser ? (
         <AdvOrders />
       ) : (

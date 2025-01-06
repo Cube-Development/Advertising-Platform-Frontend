@@ -20,13 +20,17 @@
     row-gap: 30px;
 
     &.max {
-      grid-template-columns: repeat(2, 1fr);
-      grid-template-rows: repeat(2, 1fr);
+      @media (min-width: 993px) {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: repeat(2, 1fr);
+      }
     }
 
     &.min {
-      grid-template-columns: repeat(3, 1fr);
-      grid-template-rows: repeat(1, 1fr);
+      @media (min-width: 993px) {
+        grid-template-columns: repeat(3, 1fr);
+        grid-template-rows: repeat(1, 1fr);
+      }
     }
 
     @media (max-width: 992px) {

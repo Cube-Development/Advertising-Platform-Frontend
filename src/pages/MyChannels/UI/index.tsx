@@ -118,6 +118,7 @@ import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { SuspenseLoader } from "@shared/ui";
 
 // Ленивый импорт компонентов
 const ActiveChannels = React.lazy(() =>
@@ -175,17 +176,17 @@ export const MyChannelsPage: FC = () => {
   }, [platform, status]);
 
   return (
-    <div className="container">
-      <div className={styles.wrapper}>
-        <BarFilter
-          page={pageFilter.platform}
-          setValue={setValue}
-          listLength={!data?.channels?.length}
-          changeStatus={(status) => setValue("status", status)}
-          statusFilter={formState.status}
-        />
+    <Suspense fallback={<SuspenseLoader />}>
+      <div className="container">
+        <div className={styles.wrapper}>
+          <BarFilter
+            page={pageFilter.platform}
+            setValue={setValue}
+            listLength={!data?.channels?.length}
+            changeStatus={(status) => setValue("status", status)}
+            statusFilter={formState.status}
+          />
 
-        <Suspense fallback={<div>Loading channels...</div>}>
           {formState.status !== channelStatusFilter.moderation ? (
             <ActiveChannels
               cards={
@@ -208,8 +209,8 @@ export const MyChannelsPage: FC = () => {
               isLast={data?.isLast || false}
             />
           )}
-        </Suspense>
+        </div>
       </div>
-    </div>
+    </Suspense>
   );
 };

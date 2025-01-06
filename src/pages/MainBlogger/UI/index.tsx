@@ -24,6 +24,7 @@
 //   );
 // };
 
+import { SuspenseLoader } from "@shared/ui";
 import React, { Suspense } from "react";
 
 // Ленивый импорт всех компонентов
@@ -61,7 +62,7 @@ export const MainBloggerPage = () => {
   const page = "main_page_blogger";
 
   return (
-    <Suspense fallback={<div>Loading page...</div>}>
+    <Suspense fallback={<SuspenseLoader />}>
       <Cta page={page} />
       <Services page={page} />
       <Partners page={page} />

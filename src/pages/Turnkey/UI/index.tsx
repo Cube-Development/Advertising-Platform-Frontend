@@ -12,6 +12,7 @@
 //   );
 // };
 
+import { SuspenseLoader } from "@shared/ui";
 import React, { Suspense } from "react";
 
 // Ленивые импорты компонентов
@@ -30,7 +31,7 @@ const Customers = React.lazy(() =>
 
 export const TurnkeyPage = () => {
   return (
-    <Suspense fallback={<div>Loading page...</div>}>
+    <Suspense fallback={<SuspenseLoader />}>
       <Top />
       <Partners />
       <Steps />

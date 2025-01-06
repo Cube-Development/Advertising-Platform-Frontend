@@ -5,6 +5,7 @@
 //   return <Channels />;
 // };
 
+import { SuspenseLoader } from "@shared/ui";
 import React, { Suspense } from "react";
 
 const Channels = React.lazy(() =>
@@ -15,7 +16,7 @@ const Channels = React.lazy(() =>
 
 export const AdminChannelsPage = () => {
   return (
-    <Suspense fallback={<div>Loading Channels...</div>}>
+    <Suspense fallback={<SuspenseLoader />}>
       <Channels />
     </Suspense>
   );

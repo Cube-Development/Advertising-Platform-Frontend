@@ -101,6 +101,7 @@ import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { SuspenseLoader } from "@shared/ui";
 
 // Ленивый импорт компонента MyOffers
 const MyOffers = React.lazy(() =>
@@ -150,17 +151,17 @@ export const OffersPage: FC = () => {
   }, [currentPage, formState.status]);
 
   return (
-    <div className="container">
-      <div className={styles.wrapper}>
-        <BarFilter
-          page={page}
-          listLength={!!data?.orders?.length}
-          setValue={setValue}
-          changeStatus={(status) => setValue("status", status)}
-          statusFilter={formState.status}
-        />
+    <Suspense fallback={<SuspenseLoader />}>
+      <div className="container">
+        <div className={styles.wrapper}>
+          <BarFilter
+            page={page}
+            listLength={!!data?.orders?.length}
+            setValue={setValue}
+            changeStatus={(status) => setValue("status", status)}
+            statusFilter={formState.status}
+          />
 
-        <Suspense fallback={<div>Loading offers...</div>}>
           <MyOffers
             statusFilter={formState.status as offerStatusFilter}
             offers={(data?.status === formState.status && data?.orders) || []}
@@ -168,8 +169,8 @@ export const OffersPage: FC = () => {
             isLoading={isFetching}
             isLast={data?.isLast || false}
           />
-        </Suspense>
+        </div>
       </div>
-    </div>
+    </Suspense>
   );
 };

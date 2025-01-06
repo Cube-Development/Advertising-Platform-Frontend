@@ -5,6 +5,7 @@
 //   return <UserInfo />;
 // };
 
+import { SuspenseLoader } from "@shared/ui";
 import React, { Suspense } from "react";
 
 // Ленивый импорт компонента UserInfo
@@ -16,7 +17,7 @@ const UserInfo = React.lazy(() =>
 
 export const AdminUserInfoPage = () => {
   return (
-    <Suspense fallback={<div>Loading User Info...</div>}>
+    <Suspense fallback={<SuspenseLoader />}>
       <UserInfo />
     </Suspense>
   );
