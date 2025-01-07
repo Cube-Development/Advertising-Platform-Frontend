@@ -108,13 +108,10 @@ export const BarStatusFilter: FC<BarStatusFilterProps> = ({
           <Swiper
             onSwiper={(swiper) => (swiperRef.current = swiper)}
             spaceBetween={0}
-            slidesPerView={3}
+            slidesPerView={2.2}
             breakpoints={{
               576: {
                 slidesPerView: 4.2,
-              },
-              375: {
-                slidesPerView: 2.2,
               },
             }}
             className={styles.subtypes}
