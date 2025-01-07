@@ -142,6 +142,16 @@
     grid-auto-flow: row;
     row-gap: 40px;
     padding: 20px 25px;
+    overflow: auto;
+    height: calc(100dvh - 85.5px - 90px);
+
+    @media (max-width: 992px) {
+      height: calc(100dvh - 85.5px - 73.5px);
+    }
+
+    @media (max-width: 576px) {
+      height: calc(100dvh - 85.5px - 68px);
+    }
   }
 
   .tarif {

@@ -208,9 +208,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
                     </div>
                   </DrawerClose>
                 </div>
-                <div
-                  className={`${styles.menu__content} h-[calc(100dvh_-_85.5px_-_65px)] overflow-auto`}
-                >
+                <div className={styles.menu__content}>
                   <div className={styles.tarif}>
                     <p className={styles.tarif__name}>{tarifInfo.name}</p>
                     <p className={styles.tarif__views}>{tarifInfo.views}</p>
