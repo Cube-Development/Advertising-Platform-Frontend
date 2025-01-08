@@ -37,6 +37,7 @@ import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogContent,
+  AlertDialogTitle,
   AlertDialogTrigger,
 } from "@shared/ui";
 import { PostIcon } from "@shared/assets";
@@ -298,6 +299,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                   <AlertDialogContent
                     className={`max-w-[300px] gap-0 bg-transparent grid items-center justify-center shadow-none ${screen > 475 ? "w-[50vw]" : "w-[60vw]"}`}
                   >
+                    <AlertDialogTitle className="sr-only"></AlertDialogTitle>
                     <div className="relative">
                       <AlertDialogAction>
                         <X className="absolute -right-8 -top-4 w-[30px] rounded-full p-1 bg-white cursor-pointer" />

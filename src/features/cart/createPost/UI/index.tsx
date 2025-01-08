@@ -3,6 +3,7 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogTitle,
   DialogTrigger,
@@ -45,6 +46,7 @@ export const CreatePost: FC<CreatePostProps> = ({ onClick }) => {
           </DialogTrigger>
           <DialogContent className={`${styles.content} gap-[0px]`}>
             <DialogTitle className="sr-only"></DialogTitle>
+            <DialogDescription className="sr-only"></DialogDescription>
             <DialogClose>
               <p className={styles.close}>
                 <CircleX

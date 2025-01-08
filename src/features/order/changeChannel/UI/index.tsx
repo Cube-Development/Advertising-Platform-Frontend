@@ -4,6 +4,7 @@ import {
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
+  AlertDialogTitle,
   AlertDialogTrigger,
   MyButton,
 } from "@shared/ui";
@@ -52,7 +53,7 @@ export const ChangeChannel: FC<ChangeChannelProps> = ({
         </MyButton>
       </AlertDialogTrigger>
       <AlertDialogContent className={`${styles.content} ${styles.dialog}`}>
-        <div className={styles.title}>
+        <AlertDialogTitle className={styles.title}>
           <p className="gradient_color">
             {t("orders_manager.subcard.change.channel.desire")}
           </p>
@@ -61,7 +62,7 @@ export const ChangeChannel: FC<ChangeChannelProps> = ({
               <CancelIcon2 />
             </div>
           </AlertDialogCancel>
-        </div>
+        </AlertDialogTitle>
         <span className={styles.text}>{text}</span>
 
         <AlertDialogCancel asChild>

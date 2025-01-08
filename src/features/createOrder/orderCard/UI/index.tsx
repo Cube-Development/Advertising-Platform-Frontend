@@ -1,8 +1,3 @@
-import { FC } from "react";
-import styles from "./styles.module.scss";
-import { PostIcon2 } from "@shared/assets";
-import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
-import { X } from "lucide-react";
 import {
   DisplayFeed,
   DisplayShorts,
@@ -12,6 +7,7 @@ import {
   PostTypesNum,
   platformTypesNum,
 } from "@entities/platform";
+import { EmptyPost } from "@entities/platform/ui/displays/displayInstagram/feed/emptyPost";
 import {
   CreatePostFormData,
   DateListProps,
@@ -21,16 +17,21 @@ import {
   TimeListProps,
   platformToIcon,
 } from "@entities/project";
+import { PostIcon2 } from "@shared/assets";
+import { useWindowWidth } from "@shared/hooks";
 import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogContent,
+  AlertDialogTitle,
   AlertDialogTrigger,
 } from "@shared/ui";
-import { EmptyPost } from "@entities/platform/ui/displays/displayInstagram/feed/emptyPost";
+import { X } from "lucide-react";
+import { FC } from "react";
+import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { useWindowWidth } from "@shared/hooks";
+import styles from "./styles.module.scss";
 
 interface PostPlatformProps {
   card: IPostChannel;
@@ -144,6 +145,7 @@ export const OrderCard: FC<PostPlatformProps> = ({
                       : "w-[60vw]"
             }`}
           >
+            <AlertDialogTitle className="sr-only"></AlertDialogTitle>
             {formState?.posts?.length ? (
               <div className="relative">
                 <AlertDialogAction>

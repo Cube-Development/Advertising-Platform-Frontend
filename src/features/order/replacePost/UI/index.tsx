@@ -9,6 +9,7 @@ import {
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
+  AlertDialogTitle,
   AlertDialogTrigger,
   MyButton,
   ToastAction,
@@ -79,7 +80,7 @@ export const ReplacePost: FC<ReplacePostProps> = ({
         </MyButton>
       </AlertDialogTrigger>
       <AlertDialogContent className={`${styles.content} ${styles.dialog}`}>
-        <div className={styles.title}>
+        <AlertDialogTitle className={styles.title}>
           <p className="gradient_color">
             {haveDesire
               ? t("orders_advertiser.subcard.replace.post.desire")
@@ -90,7 +91,7 @@ export const ReplacePost: FC<ReplacePostProps> = ({
               <CancelIcon2 />
             </div>
           </AlertDialogCancel>
-        </div>
+        </AlertDialogTitle>
         <textarea
           {...register("comment")}
           maxLength={300}

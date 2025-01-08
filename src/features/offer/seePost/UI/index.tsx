@@ -8,10 +8,12 @@ import {
   platformTypesNum,
 } from "@entities/platform";
 import { GetPostRes } from "@entities/project";
+import { useWindowWidth } from "@shared/hooks";
 import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogContent,
+  AlertDialogTitle,
   AlertDialogTrigger,
   MyButton,
 } from "@shared/ui";
@@ -19,7 +21,6 @@ import { X } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { useWindowWidth } from "@shared/hooks";
 
 interface SeePostProps {
   post: GetPostRes;
@@ -49,6 +50,7 @@ export const SeePost: FC<SeePostProps> = ({ post }) => {
                   : "w-[60vw]"
         }`}
       >
+        <AlertDialogTitle className="sr-only"></AlertDialogTitle>
         <div className="relative">
           <AlertDialogAction>
             <X

@@ -15,6 +15,7 @@ import {
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
+  AlertDialogTitle,
   AlertDialogTrigger,
   DialogTitle,
   Drawer,
@@ -129,7 +130,9 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
             <AlertDialogContent>
               <div className={styles.content__wrapper}>
                 <div className={styles.top}>
-                  <p>{t("orders_manager.card.technical_specificationIcon")}</p>
+                  <AlertDialogTitle className={styles.title}>
+                    {t("orders_manager.card.technical_specificationIcon")}
+                  </AlertDialogTitle>
                   <div className={styles.close}>
                     <AlertDialogCancel>
                       <CancelIcon2 />
@@ -209,10 +212,11 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
               )}
             </DrawerTrigger>
             <DrawerContent className="h-full">
-              <DialogTitle className="sr-only"></DialogTitle>
               <div className={styles.content__wrapper}>
                 <div className={styles.top}>
-                  <p>{t("orders_manager.card.technical_specificationIcon")}</p>
+                  <DialogTitle className={styles.title}>
+                    {t("orders_manager.card.technical_specificationIcon")}
+                  </DialogTitle>
                   <div className={styles.close}>
                     <DrawerClose>
                       <CancelIcon2 />

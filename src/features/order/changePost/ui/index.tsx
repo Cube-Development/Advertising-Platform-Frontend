@@ -5,6 +5,7 @@ import {
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
+  AlertDialogTitle,
   AlertDialogTrigger,
   MyButton,
 } from "@shared/ui";
@@ -49,7 +50,7 @@ export const ChangePost: FC<ChangePostProps> = ({ order, project_id }) => {
         </MyButton>
       </AlertDialogTrigger>
       <AlertDialogContent className={`${styles.content} ${styles.dialog}`}>
-        <div className={styles.title}>
+        <AlertDialogTitle className={styles.title}>
           <p className="gradient_color">
             {t("orders_manager.subcard.change.post.desire")}
           </p>
@@ -58,7 +59,7 @@ export const ChangePost: FC<ChangePostProps> = ({ order, project_id }) => {
               <CancelIcon2 />
             </div>
           </AlertDialogCancel>
-        </div>
+        </AlertDialogTitle>
         <span className={styles.text}>{text}</span>
 
         <AlertDialogCancel asChild>

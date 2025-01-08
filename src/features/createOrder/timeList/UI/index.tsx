@@ -1,15 +1,16 @@
-import { CancelIcon2, ClockIcon } from "@shared/assets";
-import { FC, useState } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
 import { TimeListProps } from "@entities/project";
+import { CancelIcon2, ClockIcon } from "@shared/assets";
 import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
+  AlertDialogTitle,
   AlertDialogTrigger,
 } from "@shared/ui";
+import { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 interface ITIme {
   timeIndexList: number[];
@@ -111,7 +112,9 @@ export const TimeList: FC<TimeListProps> = ({ onChange }) => {
         <AlertDialogContent className="w-[90%] max-w-[600px]">
           <div className={styles.content}>
             <div className={styles.top}>
-              <p>{t("calendar.choose_time")}</p>
+              <AlertDialogTitle className={styles.title}>
+                {t("calendar.choose_time")}
+              </AlertDialogTitle>
               <AlertDialogCancel type="button" onClick={handleCloseModal}>
                 <CancelIcon2 />
               </AlertDialogCancel>

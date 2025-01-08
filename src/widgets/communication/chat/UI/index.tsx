@@ -33,6 +33,7 @@ import {
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
+  AlertDialogTitle,
   AlertDialogTrigger,
   DialogTitle,
   Drawer,
@@ -309,9 +310,9 @@ export const Chat: FC<IChatProps> = ({
             <div
               className={`${styles.content__left} ${role !== roles.blogger ? styles.gridA : styles.gridB}`}
             >
-              <div className={styles.title}>
+              <AlertDialogTitle className={styles.title}>
                 <p className="gradient_color">{t("chat.my_messages")}</p>
-              </div>
+              </AlertDialogTitle>
               {role !== roles.blogger && (
                 <div className={styles.filter}>
                   <BarSubfilter
@@ -415,7 +416,6 @@ export const Chat: FC<IChatProps> = ({
             )}
           </DrawerTrigger>
           <DrawerContent>
-            <DialogTitle className="sr-only"></DialogTitle>
             <div className={`${styles.content} ${styles.drawer}`}>
               <div
                 className={`${styles.content__left} ${role !== roles.blogger ? styles.gridA : styles.gridB}`}

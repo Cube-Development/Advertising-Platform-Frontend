@@ -3,8 +3,8 @@ import {
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
+  AlertDialogTitle,
   AlertDialogTrigger,
-  MyButton,
 } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -24,6 +24,7 @@ export const SeeComplaint: FC<ChooseComplaintProps> = ({ id, ChooseBtn }) => {
         <ArrowLongHorizontalIcon className="icon__grey" />
       </AlertDialogTrigger>
       <AlertDialogContent className={styles.content}>
+        <AlertDialogTitle className="sr-only"></AlertDialogTitle>
         <div className={styles.top}>
           <div className={styles.close}>
             <AlertDialogCancel>

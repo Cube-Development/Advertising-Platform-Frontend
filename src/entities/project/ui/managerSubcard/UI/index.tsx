@@ -20,6 +20,7 @@ import {
   useGetPostQuery,
 } from "@entities/project";
 import { roles } from "@entities/user";
+import { ChangeChannelProps, ChangePostProps } from "@features/order";
 import {
   ArrowSmallVerticalIcon,
   BoyIcon,
@@ -29,6 +30,7 @@ import {
   SubsIcon,
 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
+import { useWindowWidth } from "@shared/hooks";
 import {
   Accordion,
   AccordionContent,
@@ -37,6 +39,7 @@ import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogContent,
+  AlertDialogTitle,
   AlertDialogTrigger,
   useToast,
 } from "@shared/ui";
@@ -44,8 +47,6 @@ import { X } from "lucide-react";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { useWindowWidth } from "@shared/hooks";
-import { ChangeChannelProps, ChangePostProps } from "@features/order";
 
 interface ManagerProjectSubcardProps {
   card: IManagerProjectCard;
@@ -575,6 +576,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
                               : "w-[60vw]"
                     }`}
                   >
+                    <AlertDialogTitle className="sr-only"></AlertDialogTitle>
                     <div className="relative">
                       <AlertDialogAction>
                         <X

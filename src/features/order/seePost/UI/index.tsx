@@ -12,6 +12,7 @@ import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogContent,
+  AlertDialogTitle,
   AlertDialogTrigger,
   MyButton,
 } from "@shared/ui";
@@ -34,6 +35,7 @@ export const SeePost: FC<SeePostProps> = ({ post }) => {
         </MyButton>
       </AlertDialogTrigger>
       <AlertDialogContent className={`${styles.content} bg-transparent`}>
+        <AlertDialogTitle className="sr-only"></AlertDialogTitle>
         <div className="relative">
           <AlertDialogAction>
             <X className={styles.x_button} />

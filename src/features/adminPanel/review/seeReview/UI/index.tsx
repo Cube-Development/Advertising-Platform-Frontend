@@ -4,6 +4,7 @@ import {
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
+  AlertDialogTitle,
   AlertDialogTrigger,
   MyButton,
 } from "@shared/ui";
@@ -29,6 +30,7 @@ export const SeeReview: FC<SeeReviewProps> = ({
         <ArrowLongHorizontalIcon className="icon__grey" />
       </AlertDialogTrigger>
       <AlertDialogContent className={styles.content}>
+        <AlertDialogTitle className="sr-only"></AlertDialogTitle>
         <div className={styles.top}>
           <div className={styles.close}>
             <AlertDialogCancel>

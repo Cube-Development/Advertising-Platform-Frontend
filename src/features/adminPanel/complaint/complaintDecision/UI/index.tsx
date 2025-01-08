@@ -3,18 +3,19 @@ import {
   adminRejectComplaintReq,
   IAdminComplaintInfoData,
 } from "@entities/admin";
+import { rolesTypes } from "@entities/user";
 import { CancelIcon2 } from "@shared/assets";
 import {
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
+  AlertDialogTitle,
   AlertDialogTrigger,
   MyButton,
 } from "@shared/ui";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { rolesTypes } from "@entities/user";
 
 interface ComplaintDecisionProps {
   card: IAdminComplaintInfoData;
@@ -60,9 +61,9 @@ export const ComplaintDecision: FC<ComplaintDecisionProps> = ({
         </div>
         <div className={styles.bottom}>
           <div className={styles.text__wrapper}>
-            <p className={styles.title}>
+            <AlertDialogTitle className={styles.title}>
               {t("admin_panel.complaintInfo.card.title")}
-            </p>
+            </AlertDialogTitle>
             <div className={styles.text}>
               <span>{card?.comment}</span>
             </div>
