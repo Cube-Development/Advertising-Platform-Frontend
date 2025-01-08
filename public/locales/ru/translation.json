@@ -584,7 +584,7 @@
     "no_template": "Сохраняйте свои Рекламные кампании и продолжайте их в любой момент",
     "type_filter": {
       "my_project": "Мои проекты",
-      "manager_project": "Проекты с менеджерами",
+      "manager_project": "С менеджерами",
       "saved_project": "Сохраненные"
     },
     "status_filter": {
