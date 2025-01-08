@@ -41,6 +41,7 @@ import {
   DrawerDescription,
   DrawerTitle,
   DrawerTrigger,
+  ScrollArea,
   useToast,
 } from "@shared/ui";
 import { checkDatetime, convertUTCToLocalDateTime } from "@shared/utils";
@@ -323,22 +324,28 @@ export const Chat: FC<IChatProps> = ({
                 </div>
               )}
               {selectedChats?.length ? (
-                <div className={styles.all_chats}>
-                  {selectedChats?.map((card, index) => (
-                    <ChatCard
-                      key={index}
-                      card={card}
-                      isActive={
-                        !!(
-                          currentChat &&
-                          (currentChat.type === chatType.order
-                            ? currentChat.order_id === card?.order_id
-                            : currentChat.project_id === card?.project_id)
-                        )
-                      }
-                    />
-                  ))}
-                </div>
+                <ScrollArea>
+                  <div className={styles.all_chats}>
+                    {selectedChats?.map((card, index) => (
+                      <div
+                        key={card?.order_id || card?.project_id || index}
+                        onClick={() => handleChangeChat(card)}
+                      >
+                        <ChatCard
+                          card={card}
+                          isActive={
+                            !!(
+                              currentChat &&
+                              (currentChat.type === chatType.order
+                                ? currentChat.order_id === card?.order_id
+                                : currentChat.project_id === card?.project_id)
+                            )
+                          }
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </ScrollArea>
               ) : (
                 <></>
               )}
@@ -437,22 +444,28 @@ export const Chat: FC<IChatProps> = ({
                   </div>
                 )}
                 {selectedChats?.length ? (
-                  <div className={styles.all_chats}>
-                    {selectedChats?.map((card, index) => (
-                      <ChatCard
-                        key={index}
-                        card={card}
-                        isActive={
-                          !!(
-                            currentChat &&
-                            (currentChat.type === chatType.order
-                              ? currentChat.order_id === card?.order_id
-                              : currentChat.project_id === card?.project_id)
-                          )
-                        }
-                      />
-                    ))}
-                  </div>
+                  <ScrollArea>
+                    <div className={styles.all_chats}>
+                      {selectedChats?.map((card, index) => (
+                        <div
+                          key={card?.order_id || card?.project_id || index}
+                          onClick={() => handleChangeChat(card)}
+                        >
+                          <ChatCard
+                            card={card}
+                            isActive={
+                              !!(
+                                currentChat &&
+                                (currentChat.type === chatType.order
+                                  ? currentChat.order_id === card?.order_id
+                                  : currentChat.project_id === card?.project_id)
+                              )
+                            }
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </ScrollArea>
                 ) : (
                   <></>
                 )}
