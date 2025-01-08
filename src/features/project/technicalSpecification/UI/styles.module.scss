@@ -131,7 +131,6 @@
       }
 
       .comment {
-        overflow-y: scroll;
         padding-right: 10px;
         span {
           color: var(--Personal-colors-black);
@@ -161,7 +160,6 @@
         display: grid;
         align-content: start;
         align-items: start;
-        overflow-y: scroll;
 
         ul {
           display: grid;
@@ -215,7 +213,6 @@
         display: grid;
         align-content: start;
         align-items: start;
-        overflow-y: scroll;
 
         ul {
           display: grid;

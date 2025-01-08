@@ -30,6 +30,7 @@ export interface IManagerNewProjectCard {
 }
 
 interface IFile {
+  name: string;
   content: string;
   content_type: number;
 }
