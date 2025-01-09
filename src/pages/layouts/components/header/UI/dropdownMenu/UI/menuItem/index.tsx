@@ -48,7 +48,11 @@ export const MenuItem: React.FC<IMenuItems> = ({
   }, []);
 
   return (
-    <AccordionItem value={`item-${item.item.title}`} ref={accordionRef}>
+    <AccordionItem
+      value={`item-${item.item.title}`}
+      ref={accordionRef}
+      className="border-0"
+    >
       <div className={styles.charper}>
         {item.subItems ? (
           <AccordionTrigger>
