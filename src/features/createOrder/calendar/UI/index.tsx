@@ -113,7 +113,7 @@ export const CustomCalendar: FC<DateListProps> = ({ onChange }) => {
             )}
           </div>
         </AlertDialogTrigger>
-        <AlertDialogContent>
+        <AlertDialogContent className="border-0">
           <div className={styles.calendar}>
             <div className={styles.top}>
               <p>{t("calendar.choose_date")}</p>
