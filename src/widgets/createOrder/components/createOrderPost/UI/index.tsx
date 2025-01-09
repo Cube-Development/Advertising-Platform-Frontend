@@ -296,7 +296,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                     </div>
                   </AlertDialogTrigger>
                   <AlertDialogContent
-                    className={`max-w-[300px] gap-0 bg-transparent grid items-center justify-center shadow-none ${screen > 475 ? "w-[50vw]" : "w-[60vw]"}`}
+                    className={`max-w-[300px] gap-0 bg-transparent grid items-center justify-center shadow-none border-0 ${screen > 475 ? "w-[50vw]" : "w-[60vw]"}`}
                   >
                     <div className="relative">
                       <AlertDialogAction>

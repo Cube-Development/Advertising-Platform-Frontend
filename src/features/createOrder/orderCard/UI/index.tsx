@@ -132,7 +132,7 @@ export const OrderCard: FC<PostPlatformProps> = ({
             </div>
           </AlertDialogTrigger>
           <AlertDialogContent
-            className={`max-w-[300px] gap-0 bg-transparent grid items-center justify-center shadow-none ${
+            className={`max-w-[300px] gap-0 bg-transparent grid items-center justify-center shadow-none border-0 ${
               screen > 992
                 ? "w-[25vw]"
                 : screen > 768

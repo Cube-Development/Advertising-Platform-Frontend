@@ -108,6 +108,11 @@
       @media (max-width: 768px) {
         justify-content: center;
       }
+
+      @media (max-width: 576px) {
+        font-size: 14px;
+        column-gap: 10px;
+      }
     }
   }
 }

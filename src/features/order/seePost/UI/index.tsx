@@ -33,7 +33,9 @@ export const SeePost: FC<SeePostProps> = ({ post }) => {
           {t(`order_btn.seePost`)}
         </MyButton>
       </AlertDialogTrigger>
-      <AlertDialogContent className={`${styles.content} bg-transparent`}>
+      <AlertDialogContent
+        className={`${styles.content} bg-transparent border-0`}
+      >
         <div className="relative">
           <AlertDialogAction>
             <X className={styles.x_button} />
