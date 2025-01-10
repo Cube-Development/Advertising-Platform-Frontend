@@ -1,17 +1,13 @@
-import {
-  PostTypesNum,
-  dateSortingTypes,
-  platformTypesNum,
-} from "@entities/platform";
+import { dateSortingTypes } from "@entities/platform";
 import {
   IManagerNewProjects,
   IManagerProjects,
   IManagerSubprojects,
   IPostChannel,
-  ITgButtonRes,
 } from "@entities/project";
 import { MANAGER_PROJECTS, VIEWS_MANAGER, authApi } from "@shared/api";
 import { INTERSECTION_ELEMENTS, languagesNum } from "@shared/config";
+import { IManagerProjectPosts } from "../types/managerProject";
 
 export interface getManagerProjectsCardReq {
   page: number;
@@ -36,27 +32,8 @@ export interface getManagerProjectOrdersRes {
 
 export interface getPostsReq {
   project_id: string;
-  post_upload_type: number;
   page: number;
   elements_on_page?: number;
-}
-
-export interface getManagerPostsRes {
-  page: number;
-  elements: number;
-  posts: GetManagerPostRes[];
-}
-
-export interface GetManagerPostRes {
-  id: string;
-  platform: platformTypesNum;
-  comment?: string;
-  photo: string[];
-  video: string[];
-  files: string[];
-  buttons: ITgButtonRes[];
-  text: string[];
-  post_type: PostTypesNum;
 }
 
 export const managerProjectsAPI = authApi.injectEndpoints({
@@ -175,7 +152,7 @@ export const managerProjectsAPI = authApi.injectEndpoints({
       }),
     }),
 
-    getPostsRereview: build.query<getManagerPostsRes, getPostsReq>({
+    getPostsRereview: build.query<IManagerProjectPosts, getPostsReq>({
       query: (params) => ({
         url: `/order/posts`,
         method: "GET",

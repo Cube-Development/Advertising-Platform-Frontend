@@ -1,81 +1,20 @@
-import {
-  CART,
-  ICart,
-  useCreateCartMutation,
-  useCreateProjectCartMutation,
-} from "@entities/project";
+import { CART, ICart } from "@entities/project";
 import { CreatePost as CreatePostBtn } from "@features/cart";
 import { ProtectIcon3 } from "@shared/assets";
-import { BREAKPOINT, Languages, PAGE_ANIMATION } from "@shared/config";
-import { useAppSelector, useWindowWidth } from "@shared/hooks";
-import { paths } from "@shared/routing";
-import { ToastAction, useToast } from "@shared/ui";
+import { BREAKPOINT, PAGE_ANIMATION } from "@shared/config";
+import { useWindowWidth } from "@shared/hooks";
 import { motion } from "framer-motion";
-import Cookies from "js-cookie";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.scss";
-import { roles } from "@entities/user";
 
 interface CreatePostProps {
   cart: ICart;
 }
 
 export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
-  const { toast } = useToast();
-  const { t, i18n } = useTranslation();
-  const language = Languages.find((lang) => {
-    return i18n.language === lang.name;
-  });
+  const { t } = useTranslation();
   const screen = useWindowWidth();
-  const { isAuth, role } = useAppSelector((state) => state.user);
-  const navigate = useNavigate();
-  const [createCart] = useCreateCartMutation();
-  const [createProjectCart] = useCreateProjectCartMutation();
-
-  const handleCreateCart = () => {
-    if (isAuth && role === roles.advertiser) {
-      createCart()
-        .unwrap()
-        .then((data) => {
-          Cookies.set("project_id", data.project_id);
-          navigate(paths.createOrder);
-        })
-        .catch((error) => {
-          console.error("Ошибка во время создания корзины", error);
-          toast({
-            variant: "error",
-            title: t("toasts.cart.error"),
-            action: <ToastAction altText="Ok">Ok</ToastAction>,
-          });
-        });
-    } else if (isAuth && role === roles.manager) {
-      // должен быть запрос на проверку общей суммы в корзине манагера проекта и бюджета этого проета
-      const projectId = Cookies.get("project_id") || "";
-      createProjectCart({
-        project_id: projectId,
-        language: language?.id || Languages[0].id,
-      })
-        .unwrap()
-        .then(() => {
-          navigate(paths.createOrder);
-        })
-        .catch((error) => {
-          console.error("Ошибка во время создания корзины", error);
-          toast({
-            variant: "error",
-            title: t("toasts.cart.error"),
-            action: <ToastAction altText="Ok">Ok</ToastAction>,
-          });
-        });
-    } else {
-      toast({
-        variant: "error",
-        title: t("toasts.auth.token.alert"),
-      });
-    }
-  };
 
   return (
     <motion.div
@@ -126,7 +65,7 @@ export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
         <div
           className={`${styles.button} ${!cart?.channels?.length && "deactive"}`}
         >
-          <CreatePostBtn onClick={handleCreateCart} />
+          <CreatePostBtn />
         </div>
       </div>
     </motion.div>

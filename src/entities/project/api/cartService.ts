@@ -7,6 +7,7 @@ import {
   RECOMMEND_CARDS,
 } from "@shared/api";
 import { languagesNum } from "@shared/config";
+import { cartStatusFilter } from "../config";
 import { ICart } from "../types";
 
 interface AddChannelReq {
@@ -72,6 +73,16 @@ export const authCartAPI = authApi.injectEndpoints({
         params: params,
       }),
     }),
+    checkCart: build.mutation<
+      { state: cartStatusFilter },
+      { project_id: string }
+    >({
+      query: (params) => ({
+        url: `/cart/project-common/check`,
+        method: `GET`,
+        params: params,
+      }),
+    }),
   }),
 });
 
@@ -81,6 +92,7 @@ export const {
   useRemoveFromCommonCartMutation,
   useSaveCartMutation,
   useTransferPublicMutation,
+  useCheckCartMutation,
 } = authCartAPI;
 
 // Публичные запросы

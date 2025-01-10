@@ -108,7 +108,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
     }),
     projectOrders: build.query<getProjectOrdersRes, getProjectSubcardReq>({
       query: (params) => ({
-        url: `/order/datetime-setup`,
+        url: `/order/datetime`,
         method: "GET",
         params: params,
       }),
