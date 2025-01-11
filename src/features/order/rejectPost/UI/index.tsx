@@ -107,8 +107,9 @@ export const RejectPost: FC<IOrderFeature> = ({ order_id }) => {
               {t(`order_btn.reject.btn_title`)}
             </small>
           </DrawerTrigger>
-          <DrawerContent className="mt-[20dvh] rounded-t-xl">
+          <DrawerContent className="rounded-t-xl bottom-0 top-auto">
             <DialogTitle className="sr-only"></DialogTitle>
+            <div className="mx-auto mt-4 h-1.5 w-[80px] rounded-full bg-black/20" />
             <div className={styles.drawer_popover}>
               <div className={styles.description}>
                 <h2 className={styles.description__title}>

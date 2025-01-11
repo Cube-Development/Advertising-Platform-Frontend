@@ -74,6 +74,7 @@ body {
 
 main {
   padding-top: var(--header-height-xl);
+  min-height: 100svh;
 
   @media (max-width: 992px) {
     padding-top: var(--header-height-lg);
