@@ -7,7 +7,7 @@
   align-items: center;
   cursor: pointer;
   padding: 0px;
-  font-weight: 500;
+  font-weight: 600;
   gap: 5px;
   padding: 10px;
   color: var(--Personal-colors-main);
@@ -17,7 +17,7 @@
   border: 0.2px solid rgba(0, 0, 0, 0.1);
   background: var(--Personal-colors-White);
   box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.1);
-  font-size: 14px;
+  font-size: 12px;
 
   &:hover {
     background: rgb(237, 237, 237);
@@ -41,6 +41,7 @@
   height: 100%;
   width: 100%;
   padding: 30px;
+  padding-top: 15px;
 }
 
 .description {

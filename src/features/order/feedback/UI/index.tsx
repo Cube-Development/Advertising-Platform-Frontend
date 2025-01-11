@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
 import { Loader, SendHorizonal, X } from "lucide-react";
+import styles from "./styles.module.scss";
 import { Rating } from "../rating";
 import { IOrderFeature } from "@entities/project";
 import {
@@ -118,8 +118,9 @@ export const Feedback: FC<IOrderFeature> = ({ order_id }) => {
               {t(`order_btn.feedback.btn_title`)}
             </big>
           </DrawerTrigger>
-          <DrawerContent className="mt-[20dvh] rounded-t-xl">
+          <DrawerContent className="rounded-t-xl bottom-0 top-auto">
             <DialogTitle className="sr-only"></DialogTitle>
+            <div className="mx-auto mt-4 h-1.5 w-[80px] rounded-full bg-black/20" />
             <div className={styles.drawer_popover}>
               <div className={styles.description}>
                 <h2 className={styles.description__title}>
