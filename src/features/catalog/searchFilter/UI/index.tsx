@@ -5,6 +5,7 @@ import { useDebounce } from "@shared/hooks";
 import { FC, useEffect, useState } from "react";
 import { UseFormSetValue } from "react-hook-form";
 import styles from "./styles.module.scss";
+import { useTranslation } from "react-i18next";
 
 interface SearchFilterProps {
   type: channelData;
@@ -12,6 +13,7 @@ interface SearchFilterProps {
 }
 
 export const SearchFilter: FC<SearchFilterProps> = ({ type, onChange }) => {
+  const { t } = useTranslation();
   const [searchText, setSearchText] = useState<string | null>("");
 
   const debouncedPosition = useDebounce(searchText, DEBOUNCE.search);
@@ -34,7 +36,7 @@ export const SearchFilter: FC<SearchFilterProps> = ({ type, onChange }) => {
       <input
         // value={filter.query}
         onChange={(e) => setSearchText(e.target.value)}
-        placeholder="Search..."
+        placeholder={t("catalog.search.search")}
       />
     </div>
   );

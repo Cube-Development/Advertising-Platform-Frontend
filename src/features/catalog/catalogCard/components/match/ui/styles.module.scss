@@ -20,6 +20,7 @@
 
     @media (max-width: 768px) {
       font-size: 8px;
+      font-weight: 500;
     }
   }
 
@@ -48,8 +49,8 @@
     }
 
     @media (max-width: 576px) {
-      width: 56px;
-      height: 56px;
+      width: 48px;
+      height: 48px;
     }
 
     canvas {
@@ -62,8 +63,8 @@
       }
 
       @media (max-width: 576px) {
-        width: 56px;
-        height: 56px;
+        width: 48px;
+        height: 48px;
       }
     }
 

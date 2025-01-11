@@ -329,7 +329,7 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
           </div>
         )}
       </div>
-      <section className="grid grid-cols-[1fr_auto] mt-2 ml-2.5">
+      <section className="grid grid-cols-[1fr_auto] mt-2 ml-2.5 gap-1.5">
         {((post?.files && post?.files?.length > 0) ||
           (post?.photo && post?.photo?.length > 0) ||
           (post?.video && post?.video?.length > 0)) && (

@@ -24,8 +24,7 @@
     }
 
     .customer__column {
-      // white-space: nowrap;
-      // overflow: hidden;
+      display: grid;
 
       .title {
         color: var(--Personal-colors-black);
@@ -33,19 +32,16 @@
         font-style: normal;
         font-weight: 600;
         line-height: normal;
-        // white-space: nowrap;
-        // overflow: hidden;
-        // text-overflow: ellipsis;
+
+        @media (max-width: 576px) {
+          font-weight: 500;
+        }
       }
 
       .workplace {
         font-size: 12px;
-        font-weight: 500;
+        font-weight: 400;
         font-style: italic;
-        margin-bottom: 5px;
-        // white-space: nowrap;
-        // overflow: hidden;
-        // text-overflow: ellipsis;
       }
 
       .rating {
@@ -63,13 +59,8 @@
     line-height: normal;
     height: 200px;
 
-    @media (max-width: 992) {
-      height: 270px;
+    @media (max-width: 576px) {
+      font-size: 12px;
     }
-
-    @media (max-width: 772) {
-      height: 415px;
-    }
-    // overflow: auto;
   }
 }
