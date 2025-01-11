@@ -9,5 +9,6 @@ export interface IBuyTarif {
 
 interface IAttachedFiles {
   content: string;
+  name: string;
   content_type: number;
 }

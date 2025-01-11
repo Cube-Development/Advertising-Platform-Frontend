@@ -3,6 +3,7 @@ import {
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
+  AlertDialogTitle,
   AlertDialogTrigger,
   MyButton,
 } from "@shared/ui";
@@ -127,7 +128,9 @@ export const PostButtons: FC<PostButtonsProps> = ({
         <AlertDialogContent>
           <div className={styles.modalContent}>
             <div className={styles.top}>
-              <p>{t("create_order.create.add_button.title")}</p>
+              <AlertDialogTitle className={styles.title}>
+                {t("create_order.create.add_button.title")}
+              </AlertDialogTitle>
               <AlertDialogCancel>
                 <CancelIcon2 />
               </AlertDialogCancel>

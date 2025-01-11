@@ -78,4 +78,16 @@ export const PAGE_ANIMATION = {
       transition: { delay: custom * 0.025 },
     }),
   },
+
+  animationNotification: {
+    hidden: {
+      y: 10,
+      opacity: 0,
+    },
+    visible: (custom: number) => ({
+      y: 0,
+      opacity: 1,
+      transition: { delay: custom * 0.025 },
+    }),
+  },
 };

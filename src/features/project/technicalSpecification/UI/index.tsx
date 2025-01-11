@@ -15,6 +15,7 @@ import {
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
+  AlertDialogTitle,
   AlertDialogTrigger,
   DialogTitle,
   Drawer,
@@ -22,6 +23,7 @@ import {
   DrawerContent,
   DrawerTrigger,
   formatFileSizeAndType,
+  ScrollArea,
   useToast,
 } from "@shared/ui";
 import { FC, useEffect, useState } from "react";
@@ -53,7 +55,7 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
     const fetchFileMetadata = async () => {
       const updatedFiles = await Promise.all(
         allFiles.map(async (file, index) => {
-          let filename = "filename_" + (index + 1);
+          let filename = file.name;
           console.log("contentType", file);
           const response = await fetch(file.content, {
             method: "HEAD",
@@ -87,6 +89,7 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
 
     fetchFileMetadata();
   }, []);
+  console.log(allFiles);
 
   const handleCopyLink = (link: string) => {
     navigator.clipboard.writeText(link);
@@ -129,7 +132,9 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
             <AlertDialogContent>
               <div className={styles.content__wrapper}>
                 <div className={styles.top}>
-                  <p>{t("orders_manager.card.technical_specificationIcon")}</p>
+                  <AlertDialogTitle className={styles.title}>
+                    {t("orders_manager.card.technical_specificationIcon")}
+                  </AlertDialogTitle>
                   <div className={styles.close}>
                     <AlertDialogCancel>
                       <CancelIcon2 />
@@ -139,13 +144,13 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
                 <div className={styles.content}>
                   <div className={styles.comment__wrapper}>
                     <p>{t("orders_manager.subcard.comment")}</p>
-                    <div className={styles.comment}>
+                    <ScrollArea className={styles.comment}>
                       <span>{card?.comment}</span>
-                    </div>
+                    </ScrollArea>
                   </div>
                   <div className={styles.links__wrapper}>
                     <p>{t("orders_manager.subcard.link")}</p>
-                    <div className={styles.links}>
+                    <ScrollArea className={styles.links}>
                       <ul>
                         {card?.links?.map((link, index) => (
                           <li key={index}>
@@ -163,11 +168,11 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
                           </li>
                         ))}
                       </ul>
-                    </div>
+                    </ScrollArea>
                   </div>
                   <div className={styles.files__wrapper}>
                     <p>{t("orders_manager.subcard.file")}</p>
-                    <div className={styles.files}>
+                    <ScrollArea className={styles.files}>
                       <ul>
                         {allFiles.map((file, index) => (
                           <li key={index}>
@@ -188,7 +193,7 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
                           </li>
                         ))}
                       </ul>
-                    </div>
+                    </ScrollArea>
                   </div>
                 </div>
                 <div className={styles.bottom}>
@@ -209,10 +214,11 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
               )}
             </DrawerTrigger>
             <DrawerContent className="h-full">
-              <DialogTitle className="sr-only"></DialogTitle>
               <div className={styles.content__wrapper}>
                 <div className={styles.top}>
-                  <p>{t("orders_manager.card.technical_specificationIcon")}</p>
+                  <DialogTitle className={styles.title}>
+                    {t("orders_manager.card.technical_specificationIcon")}
+                  </DialogTitle>
                   <div className={styles.close}>
                     <DrawerClose>
                       <CancelIcon2 />
@@ -222,13 +228,13 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
                 <div className={styles.content}>
                   <div className={styles.comment__wrapper}>
                     <p>{t("orders_manager.subcard.comment")}</p>
-                    <div className={styles.comment}>
+                    <ScrollArea className={styles.comment}>
                       <span>{card?.comment}</span>
-                    </div>
+                    </ScrollArea>
                   </div>
                   <div className={styles.links__wrapper}>
                     <p>{t("orders_manager.subcard.link")}</p>
-                    <div className={styles.links}>
+                    <ScrollArea className={styles.links}>
                       <ul>
                         {card?.links?.map((link, index) => (
                           <li key={index}>
@@ -246,11 +252,11 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
                           </li>
                         ))}
                       </ul>
-                    </div>
+                    </ScrollArea>
                   </div>
                   <div className={styles.files__wrapper}>
                     <p>{t("orders_manager.subcard.file")}</p>
-                    <div className={styles.files}>
+                    <ScrollArea className={styles.files}>
                       <ul>
                         {allFiles.map((file, index) => (
                           <li key={index}>
@@ -271,7 +277,7 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
                           </li>
                         ))}
                       </ul>
-                    </div>
+                    </ScrollArea>
                   </div>
                 </div>
                 <div className={styles.bottom}>

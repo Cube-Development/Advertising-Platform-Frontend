@@ -1,20 +1,21 @@
-import { Link } from "react-router-dom";
-import { FC } from "react";
-import { useTranslation } from "react-i18next";
-import { platformToIcon } from "@entities/project";
 import { useGetChannelByIdQuery } from "@entities/channel";
+import { platformTypesNum } from "@entities/platform";
+import { platformToIcon } from "@entities/project";
 import { BoyIcon, CancelIcon2, GirlIcon } from "@shared/assets";
+import { Languages } from "@shared/config";
 import { paths } from "@shared/routing";
 import {
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
+  AlertDialogTitle,
   AlertDialogTrigger,
   ScrollArea,
 } from "@shared/ui";
-import { Languages } from "@shared/config";
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
-import { platformTypesNum } from "@entities/platform";
 
 interface ChannelDescriptionProps {
   channel_id: string;
@@ -44,11 +45,11 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
           <div className={styles.content}>
             <div className={styles.content__left}>
               <div className={styles.top}>
-                <div className={styles.top__title}>
+                <AlertDialogTitle className={styles.top__title}>
                   <p className="gradient_color">
                     {t("platform_description.platform_description")}
                   </p>
-                </div>
+                </AlertDialogTitle>
                 <div className={styles.top__description}>
                   <div className={styles.top__description__top}>
                     <div className={styles.logo}>

@@ -1,21 +1,22 @@
 import { IAddChannelQuery } from "@entities/channel";
 import { LoginIcon } from "@shared/assets";
 import { useAppSelector } from "@shared/hooks";
+import { paths } from "@shared/routing";
 import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogDescription,
   DialogFooter,
   DialogTitle,
   DialogTrigger,
   MyButton,
 } from "@shared/ui";
+import { CircleFadingPlus, CircleX } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
-import { CircleFadingPlus, CircleX } from "lucide-react";
-import { paths } from "@shared/routing";
 
 export const AddChannel: FC<IAddChannelQuery> = ({ props, path, orange }) => {
   const { t } = useTranslation();
@@ -46,6 +47,7 @@ export const AddChannel: FC<IAddChannelQuery> = ({ props, path, orange }) => {
           </DialogTrigger>
           <DialogContent className={`${styles.content} gap-[0px]`}>
             <DialogTitle className="sr-only"></DialogTitle>
+            <DialogDescription className="sr-only"></DialogDescription>
             <DialogClose>
               <p className={styles.close}>
                 <CircleX

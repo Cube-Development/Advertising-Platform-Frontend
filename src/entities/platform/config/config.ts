@@ -24,6 +24,11 @@ export enum PostTypesNum {
   default = 4,
 }
 
+export enum MatchTypesNum {
+  universal = 1,
+  unique = 2,
+}
+
 export const platformTypes = [
   {
     name: "filter.telegram",

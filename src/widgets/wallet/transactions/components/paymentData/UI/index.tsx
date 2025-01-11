@@ -9,6 +9,7 @@ import {
   subprofileFilterTypes,
 } from "@entities/wallet";
 import { LegalForm, PaymentDidox } from "@features/wallet";
+import { paths } from "@shared/routing";
 import { FC, useState } from "react";
 import {
   FieldErrors,
@@ -18,9 +19,8 @@ import {
   UseFormWatch,
 } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
 import { Link } from "react-router-dom";
-import { paths } from "@shared/routing";
+import styles from "./styles.module.scss";
 
 interface PaymentDataProps {
   amountTitle: string;
@@ -94,22 +94,23 @@ export const PaymentData: FC<PaymentDataProps> = ({
       <div className={styles.block}>
         <div className={styles.ammount}>
           <p className={styles.title}>{amountTitle}</p>
-          <div>
+          <div
+            className={`${styles.amount__wrapper} ${errors!["amount"] && styles.error}`}
+          >
             <input
               {...register!("amount", {
                 required: t("wallet.topup.required"),
                 onChange: (e) => handleInput(e),
               })}
-              placeholder={
-                errors!["amount"]
-                  ? errors!["amount"].message
-                  : t("wallet.topup.placeholder")
-              }
-              value={price}
+              placeholder={t("wallet.topup.placeholder")}
+              value={price ? parseInt(price).toLocaleString() : ""}
               maxLength={14}
-              className={errors!["amount"] && styles.error}
+              className={styles.input}
             />
             <small>{t("symbol")}</small>
+            {errors!["amount"] && (
+              <p className={styles.error_text}>{t("wallet.topup.required")}</p>
+            )}
           </div>
         </div>
         {typeLegal.map((block, index) => (

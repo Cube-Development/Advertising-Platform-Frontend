@@ -6,16 +6,20 @@ import {
   useCreateOrderDatesMutation,
   useCreatePostMutation,
   useCreateUniquePostMutation,
+  useGetPostsRereviewQuery,
   useGetProjectAmountQuery,
   useGetUploadLinkMutation,
   useProjectNameMutation,
   useProjectOrdersQuery,
 } from "@entities/project";
+import { roles } from "@entities/user";
 import { usePaymentProjectMutation } from "@entities/wallet";
+import { BREAKPOINT } from "@shared/config";
 import { Languages } from "@shared/config/languages";
 import { useAppSelector, useWindowWidth } from "@shared/hooks";
 import { paths } from "@shared/routing";
 import { SpinnerLoader, useToast } from "@shared/ui";
+import { getFileExtension } from "@shared/utils";
 import Cookies from "js-cookie";
 import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -30,23 +34,75 @@ import {
   CreateOrderTop,
 } from "../components";
 import { ICreateOrderBlur } from "../config";
-import { roles } from "@entities/user";
-import { getFileExtension } from "@shared/utils";
-import { BREAKPOINT } from "@shared/config";
 
 interface CreateOrderBlockProps {}
 
 export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
+  const project_id = Cookies.get("project_id");
+  const isChannelReplace = Boolean(Cookies.get("channel_to_be_replaced"));
   const { toast } = useToast();
   const { t, i18n } = useTranslation();
   const { isAuth, role } = useAppSelector((state) => state.user);
   const screen = useWindowWidth();
+  const navigate = useNavigate();
+  const language = Languages.find((lang) => {
+    return i18n.language === lang.name;
+  });
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [getUploadLink] = useGetUploadLinkMutation();
+  const [projectName] = useProjectNameMutation();
+  const [createPost] = useCreatePostMutation();
+  const [createUniquePost] = useCreateUniquePostMutation();
+  const [createOrderDates] = useCreateOrderDatesMutation();
+  const [paymentProject] = usePaymentProjectMutation();
+  const [approveProject] = useApproveProjectMutation();
+  const { register, getValues, handleSubmit, setValue, watch } =
+    useForm<ICreatePostForm>({
+      defaultValues: {
+        posts: [],
+        datetime: { project_id: project_id, orders: [] },
+        isMultiPost: false,
+      },
+    });
+  const formState = watch();
 
+  console.log("isChannelReplace", isChannelReplace);
   const [blur, setBlur] = useState<ICreateOrderBlur>({
     post: true,
     datetime: true,
     payment: true,
   });
+
+  const projectChannelsReq = {
+    project_id: project_id!,
+    language: language?.id || Languages[0].id,
+    page: 1,
+  };
+  const projectPostsReq = {
+    project_id: project_id!,
+    page: 1,
+  };
+
+  const { data: projectChannels, isLoading: isOrdersLoading } =
+    useProjectOrdersQuery(projectChannelsReq, {
+      skip: !project_id || !isAuth,
+    });
+
+  const { data: projectPosts, isLoading: isPostsLoading } =
+    useGetPostsRereviewQuery(projectPostsReq, {
+      skip: !project_id && !isChannelReplace,
+    });
+
+  console.log(formState);
+
+  // total price
+  const { data: totalPrice } = useGetProjectAmountQuery(
+    { project_id: project_id || "" },
+    {
+      skip: !project_id,
+    },
+  );
+
   const handleOnChangeBlur = (key: keyof ICreateOrderBlur) => {
     const newBlur = { ...blur };
     newBlur[key] = false;
@@ -74,48 +130,6 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
         break;
     }
   };
-
-  const navigate = useNavigate();
-  const language = Languages.find((lang) => {
-    return i18n.language === lang.name;
-  });
-  const project_id = Cookies.get("project_id");
-  const projectChannelsReq = {
-    project_id: project_id!,
-    language: language?.id || Languages[0].id,
-    page: 1,
-  };
-  const { data: projectChannels, isLoading: isOrdersLoading } =
-    useProjectOrdersQuery(projectChannelsReq, {
-      skip: !project_id || !isAuth,
-    });
-
-  const { register, getValues, handleSubmit, setValue, watch } =
-    useForm<ICreatePostForm>({
-      defaultValues: {
-        posts: [],
-        datetime: { project_id: project_id, orders: [] },
-        isMultiPost: false,
-      },
-    });
-  const formState = watch();
-
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [getUploadLink] = useGetUploadLinkMutation();
-  const [projectName] = useProjectNameMutation();
-  const [createPost] = useCreatePostMutation();
-  const [createUniquePost] = useCreateUniquePostMutation();
-  const [createOrderDates] = useCreateOrderDatesMutation();
-  const [paymentProject] = usePaymentProjectMutation();
-  const [approveProject] = useApproveProjectMutation();
-
-  // total price
-  const { data: totalPrice } = useGetProjectAmountQuery(
-    { project_id: project_id || "" },
-    {
-      skip: !project_id,
-    },
-  );
 
   const onSubmit: SubmitHandler<ICreatePostForm> = async (formData) => {
     if (
@@ -365,6 +379,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
           <>
             <CreateOrderPost
               cards={projectChannels?.orders || []}
+              posts={projectPosts?.posts || []}
               isBlur={blur.post}
               onChangeBlur={handleOnChangeBlur}
               setValue={setValue}
