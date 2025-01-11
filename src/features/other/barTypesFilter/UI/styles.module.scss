@@ -25,7 +25,8 @@
     }
 
     @media (max-width: 576px) {
-      font-size: var(--column-gap-option-item-sm);
+      // font-size: var(--column-gap-option-item-sm);
+      font-size: 12px;
     }
 
     @media (max-width: 375px) {

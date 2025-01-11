@@ -1,3 +1,8 @@
+import { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
+import { Link } from "react-router-dom";
+import { ChannelCardDescription, ChannelCardMatch } from "../components";
 import {
   ICatalogCard,
   ICatalogChannel,
@@ -21,11 +26,6 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@shared/ui";
-import { FC, useState } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import { Link } from "react-router-dom";
-import { ChannelCardDescription, ChannelCardMatch } from "../components";
 import { useWindowWidth } from "@shared/hooks";
 
 interface CatalogCardProps extends IChangeCards, ICatalogCard {

@@ -211,8 +211,12 @@ main {
 
 .container {
   max-width: var(--container-width);
-  padding: 0 var(--container-padding-xl-side);
+  padding: 0 70px;
   margin: 0 auto;
+
+  @media (max-width: 1080px) {
+    padding: 0 var(--container-padding-xl-side);
+  }
 
   @media (max-width: 992px) {
     // max-width: var(--breakpoint-lg);

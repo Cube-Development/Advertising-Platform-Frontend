@@ -12,23 +12,6 @@ interface CopyTextBtnProps {
 export const CopyTextBtn: FC<CopyTextBtnProps> = ({ text }) => {
   const { t } = useTranslation();
   const { toast } = useToast();
-  console.log(text);
-
-  // const copyText = () => {
-  //   if (text) {
-  //     navigator.clipboard.writeText(text).then(
-  //       () => {
-  //         toast({
-  //           variant: "success",
-  //           title: t("toasts.post.copy_text"),
-  //         });
-  //       },
-  //       (err) => {
-  //         console.error("Ошибка при копировании текста: ", err);
-  //       }
-  //     );
-  //   }
-  // };
 
   const copyText = () => {
     if (text) {

@@ -13,7 +13,9 @@
   }
 
   @media (max-width: 576px) {
-    grid-template: 1fr / 1fr max-content;
+    // grid-template: 1fr / 1fr max-content;
+    grid-template: 0.5fr 1fr / 1fr;
+    row-gap: 10px;
   }
 
   .button {

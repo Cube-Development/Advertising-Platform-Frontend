@@ -46,6 +46,7 @@
 
       @media (max-width: 768px) {
         align-items: center;
+        column-gap: 12px;
       }
 
       .logo {
@@ -160,11 +161,15 @@
           grid-auto-flow: row;
           row-gap: 10px;
 
+          @media (max-width: 576px) {
+            row-gap: 5px;
+          }
+
           .title {
             font-size: 14px;
             font-style: normal;
             font-weight: 600;
-            line-height: normal;
+            line-height: 1;
             color: var(--Personal-colors-main);
 
             @media (max-width: 576px) {

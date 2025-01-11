@@ -20,8 +20,9 @@
 
 .close {
   position: absolute;
-  top: 0px;
+  top: 50%;
   right: 0px;
+  transform: translateY(-50%);
 
   div {
     padding: 10px;
@@ -46,8 +47,8 @@
 
   .top {
     display: grid;
+    align-items: center;
     text-align: center;
-    // padding: 25px;
     border-bottom: 1px solid #d9d9d9;
     position: relative;
 
@@ -81,7 +82,6 @@
 
       .accordion {
         background: var(--Personal-colors-White);
-        box-shadow: 0px 1px 4px 1px var(--Personal-colors-main);
         border-radius: 20px;
         box-shadow: inset 0px 0px 4px 1px rgba(0, 0, 0, 0.2);
         transition: all 500ms ease;
@@ -89,6 +89,7 @@
         .item {
           display: grid;
           grid-auto-flow: row;
+          border: none;
 
           .trigger {
             display: grid;
