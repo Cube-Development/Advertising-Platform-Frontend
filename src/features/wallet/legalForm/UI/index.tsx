@@ -1,6 +1,7 @@
 import {
   IBlockData,
   IParameterData,
+  getInputLegalLength,
   getInputLegalType,
 } from "@entities/wallet";
 import { InfoIcon } from "@shared/assets";
@@ -46,15 +47,32 @@ export const LegalForm: FC<LegalFormProps> = ({
               </div>
               <div className={styles.right}>
                 <input
-                  placeholder={
-                    inputError[row.type]
-                      ? newValidate.required
-                      : row_dict.default_value
-                  }
+                  // placeholder={
+                  //   inputError[row.type]
+                  //     ? newValidate.required
+                  //     : row_dict.default_value
+                  // }
+                  placeholder={row_dict.default_value}
                   className={`${styles.input} ${inputError[row.type] && styles.error}`}
                   {...register(row.type, newValidate)}
                   type={getInputLegalType(row.type)}
+                  onInput={(e) => {
+                    if (
+                      e.currentTarget.value.length >
+                      getInputLegalLength(row.type)
+                    ) {
+                      e.currentTarget.value = e.currentTarget.value.slice(
+                        0,
+                        getInputLegalLength(row.type),
+                      );
+                    }
+                  }}
                 />
+                {inputError[row.type] && (
+                  <p className={styles.error_text}>
+                    {t(inputError[row.type].message)}
+                  </p>
+                )}
               </div>
             </div>
           );

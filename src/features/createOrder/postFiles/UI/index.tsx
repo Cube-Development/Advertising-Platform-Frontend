@@ -1,23 +1,24 @@
-import { CancelIcon2, ImageIcon } from "@shared/assets";
-import { FC, useState } from "react";
-import { UseFormSetValue } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import { BarSubfilter } from "@features/other";
+import { platformTypesNum } from "@entities/platform";
 import {
   CreatePostFormData,
   FileProps,
   ICreatePostForm,
   addFileFilter,
 } from "@entities/project";
+import { BarSubfilter } from "@features/other";
+import { CancelIcon2, ImageIcon } from "@shared/assets";
+import { pageFilter } from "@shared/routing";
 import {
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
+  AlertDialogTitle,
   AlertDialogTrigger,
 } from "@shared/ui";
-import { platformTypesNum } from "@entities/platform";
-import { pageFilter } from "@shared/routing";
+import { FC, useState } from "react";
+import { UseFormSetValue } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 interface PostFilesProps {
   AddMediaFiles: FC<FileProps>;
@@ -146,7 +147,9 @@ export const PostFiles: FC<PostFilesProps> = ({
         >
           <div className={styles.modalContent}>
             <div className={styles.top}>
-              <p>{t("create_order.create.add_file")}</p>
+              <AlertDialogTitle className={styles.title}>
+                {t("create_order.create.add_file")}
+              </AlertDialogTitle>
               <AlertDialogCancel>
                 <CancelIcon2 />
               </AlertDialogCancel>

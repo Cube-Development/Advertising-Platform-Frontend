@@ -27,13 +27,13 @@ import {
   INTERSECTION_ELEMENTS,
   PAGE_ANIMATION,
 } from "@shared/config";
-import { checkDatetime, convertUTCToLocalDateTime } from "@shared/utils";
 import { useAppDispatch, useAppSelector, useWindowWidth } from "@shared/hooks";
 import { pageFilter } from "@shared/routing";
 import {
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
+  AlertDialogTitle,
   AlertDialogTrigger,
   DialogTitle,
   Drawer,
@@ -42,8 +42,10 @@ import {
   DrawerDescription,
   DrawerTitle,
   DrawerTrigger,
+  ScrollArea,
   useToast,
 } from "@shared/ui";
+import { checkDatetime, convertUTCToLocalDateTime } from "@shared/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -308,9 +310,9 @@ export const Chat: FC<IChatProps> = ({
             <div
               className={`${styles.content__left} ${role !== roles.blogger ? styles.gridA : styles.gridB}`}
             >
-              <div className={styles.title}>
+              <AlertDialogTitle className={styles.title}>
                 <p className="gradient_color">{t("chat.my_messages")}</p>
-              </div>
+              </AlertDialogTitle>
               {role !== roles.blogger && (
                 <div className={styles.filter}>
                   <BarSubfilter
@@ -323,30 +325,28 @@ export const Chat: FC<IChatProps> = ({
                 </div>
               )}
               {selectedChats?.length ? (
-                <div className={styles.all_chats}>
-                  {selectedChats?.map((card, index) => (
-                    <motion.div
-                      key={card?.order_id || card?.project_id || index}
-                      initial="hidden"
-                      animate="visible"
-                      custom={index % (selectedChats?.length || 1)}
-                      variants={PAGE_ANIMATION.animationChat}
-                      onClick={() => handleChangeChat(card)}
-                    >
-                      <ChatCard
-                        card={card}
-                        isActive={
-                          !!(
-                            currentChat &&
-                            (currentChat.type === chatType.order
-                              ? currentChat.order_id === card?.order_id
-                              : currentChat.project_id === card?.project_id)
-                          )
-                        }
-                      />
-                    </motion.div>
-                  ))}
-                </div>
+                <ScrollArea>
+                  <div className={styles.all_chats}>
+                    {selectedChats?.map((card, index) => (
+                      <div
+                        key={card?.order_id || card?.project_id || index}
+                        onClick={() => handleChangeChat(card)}
+                      >
+                        <ChatCard
+                          card={card}
+                          isActive={
+                            !!(
+                              currentChat &&
+                              (currentChat.type === chatType.order
+                                ? currentChat.order_id === card?.order_id
+                                : currentChat.project_id === card?.project_id)
+                            )
+                          }
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </ScrollArea>
               ) : (
                 <></>
               )}
@@ -416,7 +416,6 @@ export const Chat: FC<IChatProps> = ({
             )}
           </DrawerTrigger>
           <DrawerContent>
-            <DialogTitle className="sr-only"></DialogTitle>
             <div className={`${styles.content} ${styles.drawer}`}>
               <div
                 className={`${styles.content__left} ${role !== roles.blogger ? styles.gridA : styles.gridB}`}
@@ -445,30 +444,28 @@ export const Chat: FC<IChatProps> = ({
                   </div>
                 )}
                 {selectedChats?.length ? (
-                  <div className={styles.all_chats}>
-                    {selectedChats?.map((card, index) => (
-                      <motion.div
-                        key={card?.order_id || card?.project_id || index}
-                        initial="hidden"
-                        animate="visible"
-                        custom={index % (selectedChats?.length || 1)}
-                        variants={PAGE_ANIMATION.animationChat}
-                        onClick={() => handleChangeChat(card)}
-                      >
-                        <ChatCard
-                          card={card}
-                          isActive={
-                            !!(
-                              currentChat &&
-                              (currentChat.type === chatType.order
-                                ? currentChat.order_id === card?.order_id
-                                : currentChat.project_id === card?.project_id)
-                            )
-                          }
-                        />
-                      </motion.div>
-                    ))}
-                  </div>
+                  <ScrollArea>
+                    <div className={styles.all_chats}>
+                      {selectedChats?.map((card, index) => (
+                        <div
+                          key={card?.order_id || card?.project_id || index}
+                          onClick={() => handleChangeChat(card)}
+                        >
+                          <ChatCard
+                            card={card}
+                            isActive={
+                              !!(
+                                currentChat &&
+                                (currentChat.type === chatType.order
+                                  ? currentChat.order_id === card?.order_id
+                                  : currentChat.project_id === card?.project_id)
+                              )
+                            }
+                          />
+                        </div>
+                      ))}
+                    </div>
+                  </ScrollArea>
                 ) : (
                   <></>
                 )}

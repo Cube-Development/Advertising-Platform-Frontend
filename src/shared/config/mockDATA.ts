@@ -1774,634 +1774,634 @@ export const AdminProfile: IAdminProfileData = {
 //   },
 // };
 
-export const managerActiveCARDS: IManagerProjects = {
-  page: 1,
-  elements: 1,
-  projects: [
-    {
-      comment:
-        "Lorem ipsum dolor sit amet consectetur. Dignissim egestas suspendisse quam ac leo viverra aliquet tortor ullamcorper. Sodales adipiscing faucibus ullamcorper vivamus. Id volutpat eu mattis ultrices id felis tristique venenatis. In tellus amet nibh viverra magna bibendum sed pellentesque tincidunt.Lorem ipsum dolor sit amet consectetur. Dignissim egestas suspendisse quam ac leo viverra aliquet tortor ullamcorper. Sodales adipiscing faucibus ullamcorper vivamus. Id volutpat eu mattis ultrices id felis tristique venenatis. In tellus amet nibh viverra magna bibendum sed pellentesque tincidunt.Lorem ipsum dolor sit amet consectetur. Dignissim egestas suspendisse quam ac leo viverra aliquet tortor ullamcorper. Sodales adipiscing faucibus ullamcorper vivamus. Id volutpat eu mattis ultrices id felis tristique venenatis. In tellus amet nibh viverra magna bibendum sed pellentesque tincidunt.quam ac leo viverra aliquet tortor ullamcorper. Sodales adipiscing faucibus ullamcorper vivamus. Id volutpat eu mattis ultrices id felis tristique venenatis. ",
-      links: [
-        "https://strident-thump.info",
-        "https://strident-thump.info",
-        "https://strident-thump.info",
-        "https://strident-thump.info",
-        "https://strident-thump.info",
-        "https://strident-thump.info",
-        "https://strident-thump.info",
-        "https://strident-thump.info",
-        "https://strident-thump.info",
-        "https://strident-thump.info",
-      ],
-      files: [
-        {
-          content:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBkJigufyq00dk5hZq_acK0ix6Gq5LMj59Kg&s",
-          content_type: 2,
-        },
-        {
-          content:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO06pOmBndDO0isERXC_9xx43Y3YB7rDDnBg&s",
-          content_type: 2,
-        },
-        {
-          content:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBkJigufyq00dk5hZq_acK0ix6Gq5LMj59Kg&s",
-          content_type: 2,
-        },
-        {
-          content:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO06pOmBndDO0isERXC_9xx43Y3YB7rDDnBg&s",
-          content_type: 2,
-        },
-        {
-          content:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBkJigufyq00dk5hZq_acK0ix6Gq5LMj59Kg&s",
-          content_type: 2,
-        },
-        {
-          content:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO06pOmBndDO0isERXC_9xx43Y3YB7rDDnBg&s",
-          content_type: 2,
-        },
-      ],
-      id: "31111111wdsdfsdfsdf6",
-      identifier: 1111111,
-      tariff_date: "20.01.2024",
-      tariff_name: "Начальный",
-      project_name: "КУБИКИ",
-      project_id: "КУБИКИ",
-      orders: 10,
-      views: 10000,
-      budget: 9990000,
-      completed: 200,
-      canceled_rejected: 1000,
-      wait: 500,
-      in_progress: 300,
-      moderation: 100,
-      subcards: [
-        {
-          id: "1",
-          date_coming: "22.10.2022",
-          name: "BVZ",
-          order_status: "BVZ",
-          category: "CAtegory",
-          avatar:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          api_status: 4,
-          publish_date: {
-            date_from: "20.10.2023",
-            date_to: "22.10.2023",
-          },
-          publish_time: {
-            time_from: "17:00",
-            time_to: "19:00",
-          },
-          format: {
-            small: "1/24",
-            big: "1 час в топе 24 в ленте",
-          },
-          price: 202222222,
-          subscribers: 333333333,
-          views: 44444,
-          er: 1.2,
-          cpv: 22.2,
-          male: 30,
-          female: 70,
-        },
-        {
-          id: "1",
-          date_coming: "22.10.2022",
-          name: "BVZ",
-          order_status: "BVZ",
-          category: "CAtegory",
-          avatar:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          api_status: 3,
-          publish_date: {
-            date_from: "20.10.2023",
-            date_to: "22.10.2023",
-          },
-          publish_time: {
-            time_from: "17:00",
-            time_to: "19:00",
-          },
-          format: {
-            small: "1/24",
-            big: "1 час в топе 24 в ленте",
-          },
-          price: 202222222,
-          subscribers: 333333333,
-          views: 44444,
-          er: 1.2,
-          cpv: 22.2,
-          male: 30,
-          female: 70,
-        },
-        {
-          id: "1",
-          date_coming: "22.10.2022",
-          name: "BVZ",
-          order_status: "BVZ",
-          category: "CAtegory",
-          avatar:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          api_status: 1,
-          publish_date: {
-            date_from: "20.10.2023",
-            date_to: "22.10.2023",
-          },
-          publish_time: {
-            time_from: "17:00",
-            time_to: "19:00",
-          },
-          format: {
-            small: "1/24",
-            big: "1 час в топе 24 в ленте",
-          },
-          price: 202222222,
-          subscribers: 333333333,
-          views: 44444,
-          er: 1.2,
-          cpv: 22.2,
-          male: 30,
-          female: 70,
-        },
-        {
-          id: "1",
-          date_coming: "22.10.2022",
-          name: "BVZ",
-          order_status: "BVZ",
-          category: "CAtegory",
-          avatar:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          api_status: 9,
-          publish_date: {
-            date_from: "20.10.2023",
-            date_to: "22.10.2023",
-          },
-          publish_time: {
-            time_from: "17:00",
-            time_to: "19:00",
-          },
-          format: {
-            small: "1/24",
-            big: "1 час в топе 24 в ленте",
-          },
-          price: 202222222,
-          subscribers: 333333333,
-          views: 44444,
-          er: 1.2,
-          cpv: 22.2,
-          male: 30,
-          female: 70,
-        },
-        {
-          id: "1",
-          date_coming: "22.10.2022",
-          name: "BVZ",
-          order_status: "BVZ",
-          category: "CAtegory",
-          avatar:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          api_status: 2,
-          publish_date: {
-            date_from: "20.10.2023",
-            date_to: "22.10.2023",
-          },
-          publish_time: {
-            time_from: "17:00",
-            time_to: "19:00",
-          },
-          format: {
-            small: "1/24",
-            big: "1 час в топе 24 в ленте",
-          },
-          price: 202222222,
-          subscribers: 333333333,
-          views: 44444,
-          er: 1.2,
-          cpv: 22.2,
-          male: 30,
-          female: 70,
-        },
-        {
-          id: "1",
-          date_coming: "22.10.2022",
-          name: "BVZ",
-          order_status: "BVZ",
-          category: "CAtegory",
-          avatar:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          api_status: 10,
-          publish_date: {
-            date_from: "20.10.2023",
-            date_to: "22.10.2023",
-          },
-          publish_time: {
-            time_from: "17:00",
-            time_to: "19:00",
-          },
-          format: {
-            small: "1/24",
-            big: "1 час в топе 24 в ленте",
-          },
-          price: 202222222,
-          subscribers: 333333333,
-          views: 44444,
-          er: 1.2,
-          cpv: 22.2,
-          male: 30,
-          female: 70,
-        },
-      ],
-    },
-    {
-      id: "3111sdfsdfsdf11116",
-      identifier: 1111111,
-      tariff_date: "20.01.2024",
-      tariff_name: "Начальный",
-      project_name: "КУБИКИ",
-      project_id: "КУБИКИ",
-      orders: 10,
-      views: 10000,
-      budget: 9990000,
-      completed: 2,
-      canceled_rejected: 10,
-      wait: 5,
-      in_progress: 3,
-      moderation: 1,
-      subcards: [
-        {
-          id: "1",
-          date_coming: "22.10.2022",
-          name: "BVZ",
-          order_status: "BVZ",
-          category: "CAtegory",
-          avatar:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          api_status: 4,
-          publish_date: {
-            date_from: "20.10.2023",
-            date_to: "22.10.2023",
-          },
-          publish_time: {
-            time_from: "17:00",
-            time_to: "19:00",
-          },
-          format: {
-            small: "1/24",
-            big: "1 час в топе 24 в ленте",
-          },
-          price: 202222222,
-          subscribers: 333333333,
-          views: 44444,
-          er: 1.2,
-          cpv: 22.2,
-          male: 30,
-          female: 70,
-        },
-        {
-          id: "1",
-          date_coming: "22.10.2022",
-          name: "BVZ",
-          order_status: "BVZ",
-          category: "CAtegory",
-          avatar:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          api_status: 3,
-          publish_date: {
-            date_from: "20.10.2023",
-            date_to: "22.10.2023",
-          },
-          publish_time: {
-            time_from: "17:00",
-            time_to: "19:00",
-          },
-          format: {
-            small: "1/24",
-            big: "1 час в топе 24 в ленте",
-          },
-          price: 202222222,
-          subscribers: 333333333,
-          views: 44444,
-          er: 1.2,
-          cpv: 22.2,
-          male: 30,
-          female: 70,
-        },
-        {
-          id: "1",
-          date_coming: "22.10.2022",
-          name: "BVZ",
-          order_status: "BVZ",
-          category: "CAtegory",
-          avatar:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          api_status: 1,
-          publish_date: {
-            date_from: "20.10.2023",
-            date_to: "22.10.2023",
-          },
-          publish_time: {
-            time_from: "17:00",
-            time_to: "19:00",
-          },
-          format: {
-            small: "1/24",
-            big: "1 час в топе 24 в ленте",
-          },
-          price: 202222222,
-          subscribers: 333333333,
-          views: 44444,
-          er: 1.2,
-          cpv: 22.2,
-          male: 30,
-          female: 70,
-        },
-        {
-          id: "1",
-          date_coming: "22.10.2022",
-          name: "BVZ",
-          order_status: "BVZ",
-          category: "CAtegory",
-          avatar:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          api_status: 9,
-          publish_date: {
-            date_from: "20.10.2023",
-            date_to: "22.10.2023",
-          },
-          publish_time: {
-            time_from: "17:00",
-            time_to: "19:00",
-          },
-          format: {
-            small: "1/24",
-            big: "1 час в топе 24 в ленте",
-          },
-          price: 202222222,
-          subscribers: 333333333,
-          views: 44444,
-          er: 1.2,
-          cpv: 22.2,
-          male: 30,
-          female: 70,
-        },
-        {
-          id: "1",
-          date_coming: "22.10.2022",
-          name: "BVZ",
-          order_status: "BVZ",
-          category: "CAtegory",
-          avatar:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          api_status: 2,
-          publish_date: {
-            date_from: "20.10.2023",
-            date_to: "22.10.2023",
-          },
-          publish_time: {
-            time_from: "17:00",
-            time_to: "19:00",
-          },
-          format: {
-            small: "1/24",
-            big: "1 час в топе 24 в ленте",
-          },
-          price: 202222222,
-          subscribers: 333333333,
-          views: 44444,
-          er: 1.2,
-          cpv: 22.2,
-          male: 30,
-          female: 70,
-        },
-        {
-          id: "1",
-          date_coming: "22.10.2022",
-          name: "BVZ",
-          order_status: "BVZ",
-          category: "CAtegory",
-          avatar:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          api_status: 10,
-          publish_date: {
-            date_from: "20.10.2023",
-            date_to: "22.10.2023",
-          },
-          publish_time: {
-            time_from: "17:00",
-            time_to: "19:00",
-          },
-          format: {
-            small: "1/24",
-            big: "1 час в топе 24 в ленте",
-          },
-          price: 202222222,
-          subscribers: 333333333,
-          views: 44444,
-          er: 1.2,
-          cpv: 22.2,
-          male: 30,
-          female: 70,
-        },
-      ],
-    },
-    {
-      id: "3111werewrwer11116",
-      identifier: 1111111,
-      tariff_date: "20.01.2024",
-      tariff_name: "Начальный",
-      project_name: "КУБИКИ",
-      project_id: "КУБИКИ",
-      orders: 10,
-      views: 10000,
-      budget: 9990000,
-      completed: 2,
-      canceled_rejected: 10,
-      wait: 5,
-      in_progress: 3,
-      moderation: 1,
-      subcards: [
-        {
-          id: "1",
-          date_coming: "22.10.2022",
-          name: "BVZ",
-          order_status: "BVZ",
-          category: "CAtegory",
-          avatar:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          api_status: 4,
-          publish_date: {
-            date_from: "20.10.2023",
-            date_to: "22.10.2023",
-          },
-          publish_time: {
-            time_from: "17:00",
-            time_to: "19:00",
-          },
-          format: {
-            small: "1/24",
-            big: "1 час в топе 24 в ленте",
-          },
-          price: 202222222,
-          subscribers: 333333333,
-          views: 44444,
-          er: 1.2,
-          cpv: 22.2,
-          male: 30,
-          female: 70,
-        },
-        {
-          id: "1",
-          date_coming: "22.10.2022",
-          name: "BVZ",
-          order_status: "BVZ",
-          category: "CAtegory",
-          avatar:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          api_status: 3,
-          publish_date: {
-            date_from: "20.10.2023",
-            date_to: "22.10.2023",
-          },
-          publish_time: {
-            time_from: "17:00",
-            time_to: "19:00",
-          },
-          format: {
-            small: "1/24",
-            big: "1 час в топе 24 в ленте",
-          },
-          price: 202222222,
-          subscribers: 333333333,
-          views: 44444,
-          er: 1.2,
-          cpv: 22.2,
-          male: 30,
-          female: 70,
-        },
-        {
-          id: "1",
-          date_coming: "22.10.2022",
-          name: "BVZ",
-          order_status: "BVZ",
-          category: "CAtegory",
-          avatar:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          api_status: 1,
-          publish_date: {
-            date_from: "20.10.2023",
-            date_to: "22.10.2023",
-          },
-          publish_time: {
-            time_from: "17:00",
-            time_to: "19:00",
-          },
-          format: {
-            small: "1/24",
-            big: "1 час в топе 24 в ленте",
-          },
-          price: 202222222,
-          subscribers: 333333333,
-          views: 44444,
-          er: 1.2,
-          cpv: 22.2,
-          male: 30,
-          female: 70,
-        },
-        {
-          id: "1",
-          date_coming: "22.10.2022",
-          name: "BVZ",
-          order_status: "BVZ",
-          category: "CAtegory",
-          avatar:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          api_status: 9,
-          publish_date: {
-            date_from: "20.10.2023",
-            date_to: "22.10.2023",
-          },
-          publish_time: {
-            time_from: "17:00",
-            time_to: "19:00",
-          },
-          format: {
-            small: "1/24",
-            big: "1 час в топе 24 в ленте",
-          },
-          price: 202222222,
-          subscribers: 333333333,
-          views: 44444,
-          er: 1.2,
-          cpv: 22.2,
-          male: 30,
-          female: 70,
-        },
-        {
-          id: "1",
-          date_coming: "22.10.2022",
-          name: "BVZ",
-          order_status: "BVZ",
-          category: "CAtegory",
-          avatar:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          api_status: 2,
-          publish_date: {
-            date_from: "20.10.2023",
-            date_to: "22.10.2023",
-          },
-          publish_time: {
-            time_from: "17:00",
-            time_to: "19:00",
-          },
-          format: {
-            small: "1/24",
-            big: "1 час в топе 24 в ленте",
-          },
-          price: 202222222,
-          subscribers: 333333333,
-          views: 44444,
-          er: 1.2,
-          cpv: 22.2,
-          male: 30,
-          female: 70,
-        },
-        {
-          id: "1",
-          date_coming: "22.10.2022",
-          name: "BVZ",
-          order_status: "BVZ",
-          category: "CAtegory",
-          avatar:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
-          api_status: 10,
-          publish_date: {
-            date_from: "20.10.2023",
-            date_to: "22.10.2023",
-          },
-          publish_time: {
-            time_from: "17:00",
-            time_to: "19:00",
-          },
-          format: {
-            small: "1/24",
-            big: "1 час в топе 24 в ленте",
-          },
-          price: 202222222,
-          subscribers: 333333333,
-          views: 44444,
-          er: 1.2,
-          cpv: 22.2,
-          male: 30,
-          female: 70,
-        },
-      ],
-    },
-  ],
-};
+// export const managerActiveCARDS: IManagerProjects = {
+//   page: 1,
+//   elements: 1,
+//   projects: [
+//     {
+//       comment:
+//         "Lorem ipsum dolor sit amet consectetur. Dignissim egestas suspendisse quam ac leo viverra aliquet tortor ullamcorper. Sodales adipiscing faucibus ullamcorper vivamus. Id volutpat eu mattis ultrices id felis tristique venenatis. In tellus amet nibh viverra magna bibendum sed pellentesque tincidunt.Lorem ipsum dolor sit amet consectetur. Dignissim egestas suspendisse quam ac leo viverra aliquet tortor ullamcorper. Sodales adipiscing faucibus ullamcorper vivamus. Id volutpat eu mattis ultrices id felis tristique venenatis. In tellus amet nibh viverra magna bibendum sed pellentesque tincidunt.Lorem ipsum dolor sit amet consectetur. Dignissim egestas suspendisse quam ac leo viverra aliquet tortor ullamcorper. Sodales adipiscing faucibus ullamcorper vivamus. Id volutpat eu mattis ultrices id felis tristique venenatis. In tellus amet nibh viverra magna bibendum sed pellentesque tincidunt.quam ac leo viverra aliquet tortor ullamcorper. Sodales adipiscing faucibus ullamcorper vivamus. Id volutpat eu mattis ultrices id felis tristique venenatis. ",
+//       links: [
+//         "https://strident-thump.info",
+//         "https://strident-thump.info",
+//         "https://strident-thump.info",
+//         "https://strident-thump.info",
+//         "https://strident-thump.info",
+//         "https://strident-thump.info",
+//         "https://strident-thump.info",
+//         "https://strident-thump.info",
+//         "https://strident-thump.info",
+//         "https://strident-thump.info",
+//       ],
+//       files: [
+//         {
+//           content:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBkJigufyq00dk5hZq_acK0ix6Gq5LMj59Kg&s",
+//           content_type: 2,
+//         },
+//         {
+//           content:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO06pOmBndDO0isERXC_9xx43Y3YB7rDDnBg&s",
+//           content_type: 2,
+//         },
+//         {
+//           content:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBkJigufyq00dk5hZq_acK0ix6Gq5LMj59Kg&s",
+//           content_type: 2,
+//         },
+//         {
+//           content:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO06pOmBndDO0isERXC_9xx43Y3YB7rDDnBg&s",
+//           content_type: 2,
+//         },
+//         {
+//           content:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBkJigufyq00dk5hZq_acK0ix6Gq5LMj59Kg&s",
+//           content_type: 2,
+//         },
+//         {
+//           content:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO06pOmBndDO0isERXC_9xx43Y3YB7rDDnBg&s",
+//           content_type: 2,
+//         },
+//       ],
+//       id: "31111111wdsdfsdfsdf6",
+//       identifier: 1111111,
+//       tariff_date: "20.01.2024",
+//       tariff_name: "Начальный",
+//       project_name: "КУБИКИ",
+//       project_id: "КУБИКИ",
+//       orders: 10,
+//       views: 10000,
+//       budget: 9990000,
+//       completed: 200,
+//       canceled_rejected: 1000,
+//       wait: 500,
+//       in_progress: 300,
+//       moderation: 100,
+//       subcards: [
+//         {
+//           id: "1",
+//           date_coming: "22.10.2022",
+//           name: "BVZ",
+//           order_status: "BVZ",
+//           category: "CAtegory",
+//           avatar:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
+//           api_status: 4,
+//           publish_date: {
+//             date_from: "20.10.2023",
+//             date_to: "22.10.2023",
+//           },
+//           publish_time: {
+//             time_from: "17:00",
+//             time_to: "19:00",
+//           },
+//           format: {
+//             small: "1/24",
+//             big: "1 час в топе 24 в ленте",
+//           },
+//           price: 202222222,
+//           subscribers: 333333333,
+//           views: 44444,
+//           er: 1.2,
+//           cpv: 22.2,
+//           male: 30,
+//           female: 70,
+//         },
+//         {
+//           id: "1",
+//           date_coming: "22.10.2022",
+//           name: "BVZ",
+//           order_status: "BVZ",
+//           category: "CAtegory",
+//           avatar:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
+//           api_status: 3,
+//           publish_date: {
+//             date_from: "20.10.2023",
+//             date_to: "22.10.2023",
+//           },
+//           publish_time: {
+//             time_from: "17:00",
+//             time_to: "19:00",
+//           },
+//           format: {
+//             small: "1/24",
+//             big: "1 час в топе 24 в ленте",
+//           },
+//           price: 202222222,
+//           subscribers: 333333333,
+//           views: 44444,
+//           er: 1.2,
+//           cpv: 22.2,
+//           male: 30,
+//           female: 70,
+//         },
+//         {
+//           id: "1",
+//           date_coming: "22.10.2022",
+//           name: "BVZ",
+//           order_status: "BVZ",
+//           category: "CAtegory",
+//           avatar:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
+//           api_status: 1,
+//           publish_date: {
+//             date_from: "20.10.2023",
+//             date_to: "22.10.2023",
+//           },
+//           publish_time: {
+//             time_from: "17:00",
+//             time_to: "19:00",
+//           },
+//           format: {
+//             small: "1/24",
+//             big: "1 час в топе 24 в ленте",
+//           },
+//           price: 202222222,
+//           subscribers: 333333333,
+//           views: 44444,
+//           er: 1.2,
+//           cpv: 22.2,
+//           male: 30,
+//           female: 70,
+//         },
+//         {
+//           id: "1",
+//           date_coming: "22.10.2022",
+//           name: "BVZ",
+//           order_status: "BVZ",
+//           category: "CAtegory",
+//           avatar:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
+//           api_status: 9,
+//           publish_date: {
+//             date_from: "20.10.2023",
+//             date_to: "22.10.2023",
+//           },
+//           publish_time: {
+//             time_from: "17:00",
+//             time_to: "19:00",
+//           },
+//           format: {
+//             small: "1/24",
+//             big: "1 час в топе 24 в ленте",
+//           },
+//           price: 202222222,
+//           subscribers: 333333333,
+//           views: 44444,
+//           er: 1.2,
+//           cpv: 22.2,
+//           male: 30,
+//           female: 70,
+//         },
+//         {
+//           id: "1",
+//           date_coming: "22.10.2022",
+//           name: "BVZ",
+//           order_status: "BVZ",
+//           category: "CAtegory",
+//           avatar:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
+//           api_status: 2,
+//           publish_date: {
+//             date_from: "20.10.2023",
+//             date_to: "22.10.2023",
+//           },
+//           publish_time: {
+//             time_from: "17:00",
+//             time_to: "19:00",
+//           },
+//           format: {
+//             small: "1/24",
+//             big: "1 час в топе 24 в ленте",
+//           },
+//           price: 202222222,
+//           subscribers: 333333333,
+//           views: 44444,
+//           er: 1.2,
+//           cpv: 22.2,
+//           male: 30,
+//           female: 70,
+//         },
+//         {
+//           id: "1",
+//           date_coming: "22.10.2022",
+//           name: "BVZ",
+//           order_status: "BVZ",
+//           category: "CAtegory",
+//           avatar:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
+//           api_status: 10,
+//           publish_date: {
+//             date_from: "20.10.2023",
+//             date_to: "22.10.2023",
+//           },
+//           publish_time: {
+//             time_from: "17:00",
+//             time_to: "19:00",
+//           },
+//           format: {
+//             small: "1/24",
+//             big: "1 час в топе 24 в ленте",
+//           },
+//           price: 202222222,
+//           subscribers: 333333333,
+//           views: 44444,
+//           er: 1.2,
+//           cpv: 22.2,
+//           male: 30,
+//           female: 70,
+//         },
+//       ],
+//     },
+//     {
+//       id: "3111sdfsdfsdf11116",
+//       identifier: 1111111,
+//       tariff_date: "20.01.2024",
+//       tariff_name: "Начальный",
+//       project_name: "КУБИКИ",
+//       project_id: "КУБИКИ",
+//       orders: 10,
+//       views: 10000,
+//       budget: 9990000,
+//       completed: 2,
+//       canceled_rejected: 10,
+//       wait: 5,
+//       in_progress: 3,
+//       moderation: 1,
+//       subcards: [
+//         {
+//           id: "1",
+//           date_coming: "22.10.2022",
+//           name: "BVZ",
+//           order_status: "BVZ",
+//           category: "CAtegory",
+//           avatar:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
+//           api_status: 4,
+//           publish_date: {
+//             date_from: "20.10.2023",
+//             date_to: "22.10.2023",
+//           },
+//           publish_time: {
+//             time_from: "17:00",
+//             time_to: "19:00",
+//           },
+//           format: {
+//             small: "1/24",
+//             big: "1 час в топе 24 в ленте",
+//           },
+//           price: 202222222,
+//           subscribers: 333333333,
+//           views: 44444,
+//           er: 1.2,
+//           cpv: 22.2,
+//           male: 30,
+//           female: 70,
+//         },
+//         {
+//           id: "1",
+//           date_coming: "22.10.2022",
+//           name: "BVZ",
+//           order_status: "BVZ",
+//           category: "CAtegory",
+//           avatar:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
+//           api_status: 3,
+//           publish_date: {
+//             date_from: "20.10.2023",
+//             date_to: "22.10.2023",
+//           },
+//           publish_time: {
+//             time_from: "17:00",
+//             time_to: "19:00",
+//           },
+//           format: {
+//             small: "1/24",
+//             big: "1 час в топе 24 в ленте",
+//           },
+//           price: 202222222,
+//           subscribers: 333333333,
+//           views: 44444,
+//           er: 1.2,
+//           cpv: 22.2,
+//           male: 30,
+//           female: 70,
+//         },
+//         {
+//           id: "1",
+//           date_coming: "22.10.2022",
+//           name: "BVZ",
+//           order_status: "BVZ",
+//           category: "CAtegory",
+//           avatar:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
+//           api_status: 1,
+//           publish_date: {
+//             date_from: "20.10.2023",
+//             date_to: "22.10.2023",
+//           },
+//           publish_time: {
+//             time_from: "17:00",
+//             time_to: "19:00",
+//           },
+//           format: {
+//             small: "1/24",
+//             big: "1 час в топе 24 в ленте",
+//           },
+//           price: 202222222,
+//           subscribers: 333333333,
+//           views: 44444,
+//           er: 1.2,
+//           cpv: 22.2,
+//           male: 30,
+//           female: 70,
+//         },
+//         {
+//           id: "1",
+//           date_coming: "22.10.2022",
+//           name: "BVZ",
+//           order_status: "BVZ",
+//           category: "CAtegory",
+//           avatar:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
+//           api_status: 9,
+//           publish_date: {
+//             date_from: "20.10.2023",
+//             date_to: "22.10.2023",
+//           },
+//           publish_time: {
+//             time_from: "17:00",
+//             time_to: "19:00",
+//           },
+//           format: {
+//             small: "1/24",
+//             big: "1 час в топе 24 в ленте",
+//           },
+//           price: 202222222,
+//           subscribers: 333333333,
+//           views: 44444,
+//           er: 1.2,
+//           cpv: 22.2,
+//           male: 30,
+//           female: 70,
+//         },
+//         {
+//           id: "1",
+//           date_coming: "22.10.2022",
+//           name: "BVZ",
+//           order_status: "BVZ",
+//           category: "CAtegory",
+//           avatar:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
+//           api_status: 2,
+//           publish_date: {
+//             date_from: "20.10.2023",
+//             date_to: "22.10.2023",
+//           },
+//           publish_time: {
+//             time_from: "17:00",
+//             time_to: "19:00",
+//           },
+//           format: {
+//             small: "1/24",
+//             big: "1 час в топе 24 в ленте",
+//           },
+//           price: 202222222,
+//           subscribers: 333333333,
+//           views: 44444,
+//           er: 1.2,
+//           cpv: 22.2,
+//           male: 30,
+//           female: 70,
+//         },
+//         {
+//           id: "1",
+//           date_coming: "22.10.2022",
+//           name: "BVZ",
+//           order_status: "BVZ",
+//           category: "CAtegory",
+//           avatar:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
+//           api_status: 10,
+//           publish_date: {
+//             date_from: "20.10.2023",
+//             date_to: "22.10.2023",
+//           },
+//           publish_time: {
+//             time_from: "17:00",
+//             time_to: "19:00",
+//           },
+//           format: {
+//             small: "1/24",
+//             big: "1 час в топе 24 в ленте",
+//           },
+//           price: 202222222,
+//           subscribers: 333333333,
+//           views: 44444,
+//           er: 1.2,
+//           cpv: 22.2,
+//           male: 30,
+//           female: 70,
+//         },
+//       ],
+//     },
+//     {
+//       id: "3111werewrwer11116",
+//       identifier: 1111111,
+//       tariff_date: "20.01.2024",
+//       tariff_name: "Начальный",
+//       project_name: "КУБИКИ",
+//       project_id: "КУБИКИ",
+//       orders: 10,
+//       views: 10000,
+//       budget: 9990000,
+//       completed: 2,
+//       canceled_rejected: 10,
+//       wait: 5,
+//       in_progress: 3,
+//       moderation: 1,
+//       subcards: [
+//         {
+//           id: "1",
+//           date_coming: "22.10.2022",
+//           name: "BVZ",
+//           order_status: "BVZ",
+//           category: "CAtegory",
+//           avatar:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
+//           api_status: 4,
+//           publish_date: {
+//             date_from: "20.10.2023",
+//             date_to: "22.10.2023",
+//           },
+//           publish_time: {
+//             time_from: "17:00",
+//             time_to: "19:00",
+//           },
+//           format: {
+//             small: "1/24",
+//             big: "1 час в топе 24 в ленте",
+//           },
+//           price: 202222222,
+//           subscribers: 333333333,
+//           views: 44444,
+//           er: 1.2,
+//           cpv: 22.2,
+//           male: 30,
+//           female: 70,
+//         },
+//         {
+//           id: "1",
+//           date_coming: "22.10.2022",
+//           name: "BVZ",
+//           order_status: "BVZ",
+//           category: "CAtegory",
+//           avatar:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
+//           api_status: 3,
+//           publish_date: {
+//             date_from: "20.10.2023",
+//             date_to: "22.10.2023",
+//           },
+//           publish_time: {
+//             time_from: "17:00",
+//             time_to: "19:00",
+//           },
+//           format: {
+//             small: "1/24",
+//             big: "1 час в топе 24 в ленте",
+//           },
+//           price: 202222222,
+//           subscribers: 333333333,
+//           views: 44444,
+//           er: 1.2,
+//           cpv: 22.2,
+//           male: 30,
+//           female: 70,
+//         },
+//         {
+//           id: "1",
+//           date_coming: "22.10.2022",
+//           name: "BVZ",
+//           order_status: "BVZ",
+//           category: "CAtegory",
+//           avatar:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
+//           api_status: 1,
+//           publish_date: {
+//             date_from: "20.10.2023",
+//             date_to: "22.10.2023",
+//           },
+//           publish_time: {
+//             time_from: "17:00",
+//             time_to: "19:00",
+//           },
+//           format: {
+//             small: "1/24",
+//             big: "1 час в топе 24 в ленте",
+//           },
+//           price: 202222222,
+//           subscribers: 333333333,
+//           views: 44444,
+//           er: 1.2,
+//           cpv: 22.2,
+//           male: 30,
+//           female: 70,
+//         },
+//         {
+//           id: "1",
+//           date_coming: "22.10.2022",
+//           name: "BVZ",
+//           order_status: "BVZ",
+//           category: "CAtegory",
+//           avatar:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
+//           api_status: 9,
+//           publish_date: {
+//             date_from: "20.10.2023",
+//             date_to: "22.10.2023",
+//           },
+//           publish_time: {
+//             time_from: "17:00",
+//             time_to: "19:00",
+//           },
+//           format: {
+//             small: "1/24",
+//             big: "1 час в топе 24 в ленте",
+//           },
+//           price: 202222222,
+//           subscribers: 333333333,
+//           views: 44444,
+//           er: 1.2,
+//           cpv: 22.2,
+//           male: 30,
+//           female: 70,
+//         },
+//         {
+//           id: "1",
+//           date_coming: "22.10.2022",
+//           name: "BVZ",
+//           order_status: "BVZ",
+//           category: "CAtegory",
+//           avatar:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
+//           api_status: 2,
+//           publish_date: {
+//             date_from: "20.10.2023",
+//             date_to: "22.10.2023",
+//           },
+//           publish_time: {
+//             time_from: "17:00",
+//             time_to: "19:00",
+//           },
+//           format: {
+//             small: "1/24",
+//             big: "1 час в топе 24 в ленте",
+//           },
+//           price: 202222222,
+//           subscribers: 333333333,
+//           views: 44444,
+//           er: 1.2,
+//           cpv: 22.2,
+//           male: 30,
+//           female: 70,
+//         },
+//         {
+//           id: "1",
+//           date_coming: "22.10.2022",
+//           name: "BVZ",
+//           order_status: "BVZ",
+//           category: "CAtegory",
+//           avatar:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRdUn5R4bj-U1l4KNlIOqSwdtK_cXYk6tyMfGBTlEXOew&s",
+//           api_status: 10,
+//           publish_date: {
+//             date_from: "20.10.2023",
+//             date_to: "22.10.2023",
+//           },
+//           publish_time: {
+//             time_from: "17:00",
+//             time_to: "19:00",
+//           },
+//           format: {
+//             small: "1/24",
+//             big: "1 час в топе 24 в ленте",
+//           },
+//           price: 202222222,
+//           subscribers: 333333333,
+//           views: 44444,
+//           er: 1.2,
+//           cpv: 22.2,
+//           male: 30,
+//           female: 70,
+//         },
+//       ],
+//     },
+//   ],
+// };
 
 export const managerCompletedCARDS: IManagerProjects = {
   page: 1,
@@ -2783,71 +2783,71 @@ export const managerAgreedCARDS: IManagerProjects = {
   ],
 };
 
-export const managerNewCARDS: IManagerNewProjects = {
-  page: 1,
-  elements: 1,
-  projects: [
-    {
-      id: "31231132",
-      project_id: "fdsfsdf",
-      identifier: 31231132,
-      tariff_date: "20.01.2024",
-      tariff_name: "Комплексный",
-      budget: 99999999,
-      comment:
-        "Lorem ipsum dolor sit amet consectetur. Dignissim egestas suspendisse quam ac leo viverra aliquet tortor ullamcorper. Sodales adipiscing faucibus ullamcorper vivamus. Id volutpat eu mattis ultrices id felis tristique venenatis. In tellus amet nibh viverra magna bibendum sed pellentesque tincidunt.Lorem ipsum dolor sit amet consectetur. Dignissim egestas suspendisse quam ac leo viverra aliquet tortor ullamcorper. Sodales adipiscing faucibus ullamcorper vivamus. Id volutpat eu mattis ultrices id felis tristique venenatis. In tellus amet nibh viverra magna bibendum sed pellentesque tincidunt.Lorem ipsum dolor sit amet consectetur. Dignissim egestas suspendisse quam ac leo viverra aliquet tortor ullamcorper. Sodales adipiscing faucibus ullamcorper vivamus. Id volutpat eu mattis ultrices id felis tristique venenatis. In tellus amet nibh viverra magna bibendum sed pellentesque tincidunt.quam ac leo viverra aliquet tortor ullamcorper. Sodales adipiscing faucibus ullamcorper vivamus. Id volutpat eu mattis ultrices id felis tristique venenatis. ",
-      links: [
-        "https://strident-thump.info",
-        "https://strident-thump.info",
-        "https://strident-thump.info",
-        "https://strident-thump.info",
-        "https://strident-thump.info",
-        "https://strident-thump.info",
-        "https://strident-thump.info",
-        "https://strident-thump.info",
-        "https://strident-thump.info",
-        "https://strident-thump.info",
-      ],
-      files: [
-        {
-          content:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBkJigufyq00dk5hZq_acK0ix6Gq5LMj59Kg&s",
-          content_type: 2,
-        },
-        {
-          content:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO06pOmBndDO0isERXC_9xx43Y3YB7rDDnBg&s",
-          content_type: 2,
-        },
-        {
-          content:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBkJigufyq00dk5hZq_acK0ix6Gq5LMj59Kg&s",
-          content_type: 2,
-        },
-        {
-          content:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO06pOmBndDO0isERXC_9xx43Y3YB7rDDnBg&s",
-          content_type: 2,
-        },
-        {
-          content:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBkJigufyq00dk5hZq_acK0ix6Gq5LMj59Kg&s",
-          content_type: 2,
-        },
-        {
-          content:
-            "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO06pOmBndDO0isERXC_9xx43Y3YB7rDDnBg&s",
-          content_type: 2,
-        },
-        // {
-        //   content:
-        //   "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
-        //   content_type: 2,
-        // },
-      ],
-    },
-  ],
-};
+// export const managerNewCARDS: IManagerNewProjects = {
+//   page: 1,
+//   elements: 1,
+//   projects: [
+//     {
+//       id: "31231132",
+//       project_id: "fdsfsdf",
+//       identifier: 31231132,
+//       tariff_date: "20.01.2024",
+//       tariff_name: "Комплексный",
+//       budget: 99999999,
+//       comment:
+//         "Lorem ipsum dolor sit amet consectetur. Dignissim egestas suspendisse quam ac leo viverra aliquet tortor ullamcorper. Sodales adipiscing faucibus ullamcorper vivamus. Id volutpat eu mattis ultrices id felis tristique venenatis. In tellus amet nibh viverra magna bibendum sed pellentesque tincidunt.Lorem ipsum dolor sit amet consectetur. Dignissim egestas suspendisse quam ac leo viverra aliquet tortor ullamcorper. Sodales adipiscing faucibus ullamcorper vivamus. Id volutpat eu mattis ultrices id felis tristique venenatis. In tellus amet nibh viverra magna bibendum sed pellentesque tincidunt.Lorem ipsum dolor sit amet consectetur. Dignissim egestas suspendisse quam ac leo viverra aliquet tortor ullamcorper. Sodales adipiscing faucibus ullamcorper vivamus. Id volutpat eu mattis ultrices id felis tristique venenatis. In tellus amet nibh viverra magna bibendum sed pellentesque tincidunt.quam ac leo viverra aliquet tortor ullamcorper. Sodales adipiscing faucibus ullamcorper vivamus. Id volutpat eu mattis ultrices id felis tristique venenatis. ",
+//       links: [
+//         "https://strident-thump.info",
+//         "https://strident-thump.info",
+//         "https://strident-thump.info",
+//         "https://strident-thump.info",
+//         "https://strident-thump.info",
+//         "https://strident-thump.info",
+//         "https://strident-thump.info",
+//         "https://strident-thump.info",
+//         "https://strident-thump.info",
+//         "https://strident-thump.info",
+//       ],
+//       files: [
+//         {
+//           content:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBkJigufyq00dk5hZq_acK0ix6Gq5LMj59Kg&s",
+//           content_type: 2,
+//         },
+//         {
+//           content:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO06pOmBndDO0isERXC_9xx43Y3YB7rDDnBg&s",
+//           content_type: 2,
+//         },
+//         {
+//           content:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBkJigufyq00dk5hZq_acK0ix6Gq5LMj59Kg&s",
+//           content_type: 2,
+//         },
+//         {
+//           content:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO06pOmBndDO0isERXC_9xx43Y3YB7rDDnBg&s",
+//           content_type: 2,
+//         },
+//         {
+//           content:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTBkJigufyq00dk5hZq_acK0ix6Gq5LMj59Kg&s",
+//           content_type: 2,
+//         },
+//         {
+//           content:
+//             "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRO06pOmBndDO0isERXC_9xx43Y3YB7rDDnBg&s",
+//           content_type: 2,
+//         },
+//         // {
+//         //   content:
+//         //   "https://static6.tgstat.ru/channels/_0/81/81e6ccb9e917e37a2759b2f849da89c5.jpg",
+//         //   content_type: 2,
+//         // },
+//       ],
+//     },
+//   ],
+// };
 
 export const advMyProjectActiveCARDS = {
   page: 1,

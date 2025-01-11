@@ -8,6 +8,7 @@ import {
   DisplayStories,
   DisplayTelegram,
   DisplayVideos,
+  MatchTypesNum,
   PostTypesNum,
   platformTypesNum,
   platformTypesStr,
@@ -28,6 +29,7 @@ import {
 import {
   CreatePostFormData,
   ICreatePostForm,
+  IManagerOrderPost,
   IPostChannel,
   POST,
   PostFormats,
@@ -37,6 +39,7 @@ import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogContent,
+  AlertDialogTitle,
   AlertDialogTrigger,
 } from "@shared/ui";
 import { PostIcon } from "@shared/assets";
@@ -45,6 +48,7 @@ import { useWindowWidth } from "@shared/hooks";
 
 interface CreateOrderPostProps {
   cards: IPostChannel[];
+  posts: IManagerOrderPost[];
   isBlur?: boolean;
   onChangeBlur: (key: keyof ICreateOrderBlur) => void;
   setValue: UseFormSetValue<ICreatePostForm>;
@@ -54,6 +58,7 @@ interface CreateOrderPostProps {
 
 export const CreateOrderPost: FC<CreateOrderPostProps> = ({
   cards,
+  posts,
   isBlur,
   onChangeBlur,
   setValue,
@@ -61,37 +66,73 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
   formState,
 }) => {
   const { t } = useTranslation();
+  const screen = useWindowWidth();
 
   // сразу сохраняем все ордеры в форму posts с учетом платформы и post_type
-  useEffect(() => {
-    const allPostsUniversal = cards.reduce(
-      (
-        acc: { platform: platformTypesNum; post_type: PostTypesNum }[],
-        card,
-      ) => {
-        const exists = acc.find(
-          (post) =>
-            post?.platform === card?.platform &&
-            post?.post_type === card?.post_type,
-        );
-        if (!exists) {
-          acc.push({
-            platform: card?.platform,
-            post_type: card?.post_type,
-          });
-        }
-        return acc;
-      },
-      [],
-    );
-    setValue("posts", allPostsUniversal);
-    const allPosts = cards.map((card) => ({
-      platform: card?.platform,
-      post_type: card?.post_type,
-      order_id: card?.id,
-    }));
-    setValue("multiposts", allPosts);
-  }, []);
+  // useEffect(() => {
+  //   const allPostsUniversal = cards.reduce(
+  //     (
+  //       acc: { platform: platformTypesNum; post_type: PostTypesNum }[],
+  //       card
+  //     ) => {
+  //       const exists = acc.find(
+  //         (post) =>
+  //           post?.platform === card?.platform &&
+  //           post?.post_type === card?.post_type
+  //       );
+  //       if (!exists) {
+  //         acc.push({
+  //           platform: card?.platform,
+  //           post_type: card?.post_type,
+  //         });
+  //       }
+  //       return acc;
+  //     },
+  //     []
+  //   );
+  //   setValue("posts", allPostsUniversal);
+  //   const allPosts = cards.map((card) => ({
+  //     platform: card?.platform,
+  //     post_type: card?.post_type,
+  //     order_id: card?.id,
+  //   }));
+  //   setValue("multiposts", allPosts);
+  // }, []);
+
+  // useEffect(() => {
+  //   if (posts?.length) {
+  //     const allPostsUniversal = posts.filter((post) => {
+  //       post.match_type === MatchTypesNum.universal
+  //     })
+  //     // const allPostsUniversal = cards.reduce(
+  //     //   (
+  //     //     acc: { platform: platformTypesNum; post_type: PostTypesNum }[],
+  //     //     card
+  //     //   ) => {
+  //     //     const exists = acc.find(
+  //     //       (post) =>
+  //     //         post?.platform === card?.platform &&
+  //     //         post?.post_type === card?.post_type
+  //     //     );
+  //     //     if (!exists) {
+  //     //       acc.push({
+  //     //         platform: card?.platform,
+  //     //         post_type: card?.post_type,
+  //     //       });
+  //     //     }
+  //     //     return acc;
+  //     //   },
+  //     //   []
+  //     // );
+  //     setValue("posts", allPostsUniversal);
+  //     const allPosts = cards.map((card) => ({
+  //       platform: card?.platform,
+  //       post_type: card?.post_type,
+  //       order_id: card?.id,
+  //     }));
+  //     setValue("multiposts", allPosts);
+  //   };
+  // }, [posts]);
 
   const platformIds: number[] = [
     ...new Set(cards?.map((card) => card?.platform)),
@@ -125,8 +166,6 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
       cards,
     );
   };
-
-  const screen = useWindowWidth();
 
   return (
     <div id="post" className={`container ${isBlur ? "blur" : ""}`}>
@@ -298,6 +337,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                   <AlertDialogContent
                     className={`max-w-[300px] gap-0 bg-transparent grid items-center justify-center shadow-none border-0 ${screen > 475 ? "w-[50vw]" : "w-[60vw]"}`}
                   >
+                    <AlertDialogTitle className="sr-only"></AlertDialogTitle>
                     <div className="relative">
                       <AlertDialogAction>
                         <X className="absolute -right-8 -top-4 w-[30px] rounded-full p-1 bg-white cursor-pointer" />

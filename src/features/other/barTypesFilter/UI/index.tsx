@@ -8,7 +8,7 @@ import styles from "./styles.module.scss";
 interface BarTypesFilterProps {
   typeFilter: string;
   changeStatus: (
-    status: channelStatusFilter | offerStatusFilter | string,
+    status: channelStatusFilter | offerStatusFilter | string
   ) => void;
   changeType: (type: string) => void;
   badge?: { type: string; count: number }[];
@@ -39,7 +39,7 @@ export const BarTypesFilter: FC<BarTypesFilterProps> = ({
         {projectTypes.map((type, index) => (
           <li
             key={index}
-            className={`${typeFilter === type.type && styles.active} truncate`}
+            className={`truncate ${typeFilter === type.type ? styles.active : ""}`}
             onClick={() => toggleType(type.type, type.status)}
           >
             {t(type.name)}

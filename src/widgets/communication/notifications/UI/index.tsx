@@ -27,6 +27,7 @@ import {
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
+  AlertDialogTitle,
   AlertDialogTrigger,
   Drawer,
   DrawerClose,
@@ -34,6 +35,7 @@ import {
   DrawerDescription,
   DrawerTitle,
   DrawerTrigger,
+  ScrollArea,
 } from "@shared/ui";
 import { AnimatePresence, motion } from "framer-motion";
 import { FC, useState } from "react";
@@ -117,7 +119,7 @@ export const Notifications: FC = () => {
             />
           </AlertDialogTrigger>
           <AlertDialogContent className={`${styles.content} ${styles.dialog}`}>
-            <div className={styles.title}>
+            <AlertDialogTitle className={styles.title}>
               <p className="gradient_color">{t("notifications.title")}</p>
               <AlertDialogCancel onClick={handleClose}>
                 <div className={styles.close}>
@@ -129,9 +131,9 @@ export const Notifications: FC = () => {
                   <ArrowSmallVerticalIcon className="active__icon" />
                 </div>
               )}
-            </div>
+            </AlertDialogTitle>
             {data?.notifications?.length ? (
-              <div className={styles.notifications__wrapper}>
+              <ScrollArea>
                 <div className={styles.notifications}>
                   {data?.notifications.map((card, index) => (
                     <motion.div
@@ -139,7 +141,7 @@ export const Notifications: FC = () => {
                       initial="hidden"
                       animate="visible"
                       custom={index % INTERSECTION_ELEMENTS.notifications}
-                      variants={PAGE_ANIMATION.animationUp}
+                      variants={PAGE_ANIMATION.animationNotification}
                       onClick={() => handleChangeNotification(card)}
                     >
                       <NotificationCard card={card} />
@@ -169,7 +171,7 @@ export const Notifications: FC = () => {
                     )}
                   </AnimatePresence>
                 </div>
-              </div>
+              </ScrollArea>
             ) : (
               <></>
             )}
@@ -204,7 +206,7 @@ export const Notifications: FC = () => {
               )}
             </DrawerTitle>
             {data?.notifications?.length ? (
-              <div className={styles.notifications__wrapper}>
+              <ScrollArea>
                 <div className={styles.notifications}>
                   {data?.notifications.map((card, index) => (
                     <motion.div
@@ -212,7 +214,7 @@ export const Notifications: FC = () => {
                       initial="hidden"
                       animate="visible"
                       custom={index % INTERSECTION_ELEMENTS.notifications}
-                      variants={PAGE_ANIMATION.animationUp}
+                      variants={PAGE_ANIMATION.animationNotification}
                       onClick={() => handleChangeNotification(card)}
                     >
                       <NotificationCard card={card} />
@@ -248,7 +250,7 @@ export const Notifications: FC = () => {
                     )}
                   </AnimatePresence>
                 </div>
-              </div>
+              </ScrollArea>
             ) : (
               <></>
             )}

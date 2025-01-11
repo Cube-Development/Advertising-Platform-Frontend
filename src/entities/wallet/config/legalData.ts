@@ -1,3 +1,18 @@
+import {
+  formatCardDate,
+  formatFullDate,
+  formatToNumber,
+  isValidAccount,
+  isValidCardDate,
+  isValidEmail,
+  isValidFullDate,
+  isValidINN,
+  isValidMFO,
+  isValidPhoneNumber,
+  isValidPNFL,
+} from "@shared/utils";
+import { IBlockData } from "../types";
+
 export enum legalData {
   type_legal = "type_legal",
   name = "name",
@@ -16,7 +31,7 @@ export enum legalData {
   card_date = "card_date",
 }
 
-export const selfEmployed = {
+export const selfEmployed: IBlockData = {
   title: "add_profile.basic_info.basic_info",
   parameters: [
     {
@@ -36,17 +51,30 @@ export const selfEmployed = {
       type: legalData.registration_date,
       validate: {
         required: "add_profile.basic_info.registration_date.error.required",
+        validate: {
+          valid: (value: string) =>
+            isValidFullDate(value) ||
+            "add_profile.basic_info.registration_date.error.required",
+        },
+        onChange: formatFullDate,
       },
     },
     {
       label: "add_profile.basic_info.PNFL",
       type: legalData.PNFL,
-      validate: { required: "add_profile.basic_info.PNFL.error.required" },
+      validate: {
+        required: "add_profile.basic_info.PNFL.error.required",
+        validate: {
+          valid: (value: string) =>
+            isValidPNFL(value) || "add_profile.basic_info.PNFL.error.required",
+        },
+        onChange: formatToNumber,
+      },
     },
   ],
 };
 
-export const entity = {
+export const entity: IBlockData = {
   title: "add_profile.basic_info.basic_info",
   parameters: [
     {
@@ -57,19 +85,24 @@ export const entity = {
     {
       label: "add_profile.basic_info.address",
       type: legalData.address,
-      validate: {
-        required: "add_profile.basic_info.address.error.required",
-      },
+      validate: { required: "add_profile.basic_info.address.error.required" },
     },
     {
       label: "add_profile.basic_info.INN",
       type: legalData.INN,
-      validate: { required: "add_profile.basic_info.INN.error.required" },
+      validate: {
+        required: "add_profile.basic_info.INN.error.required",
+        validate: {
+          valid: (value: string) =>
+            isValidINN(value) || "add_profile.basic_info.INN.error.required",
+        },
+        onChange: formatToNumber,
+      },
     },
   ],
 };
 
-export const individual = {
+export const individual: IBlockData = {
   title: "add_profile.basic_info.basic_info",
   parameters: [
     {
@@ -89,35 +122,19 @@ export const individual = {
     {
       label: "add_profile.basic_info.INN",
       type: legalData.INN,
-      validate: { required: "add_profile.basic_info.INN.error.required" },
-    },
-  ],
-};
-
-export const bank = {
-  title: "add_profile.bank_data.bank_data",
-  parameters: [
-    {
-      label: "add_profile.bank_data.bank_name",
-      type: legalData.bank_name,
-      validate: { required: "add_profile.bank_data.bank_name.error.required" },
-    },
-    {
-      label: "add_profile.bank_data.bank_mfo",
-      type: legalData.bank_mfo,
-      validate: { required: "add_profile.bank_data.bank_mfo.error.required" },
-    },
-    {
-      label: "add_profile.bank_data.checking_account",
-      type: legalData.checking_account,
       validate: {
-        required: "add_profile.bank_data.checking_account.error.required",
+        required: "add_profile.basic_info.INN.error.required",
+        validate: {
+          valid: (value: string) =>
+            isValidINN(value) || "add_profile.basic_info.INN.error.required",
+        },
+        onChange: formatToNumber,
       },
     },
   ],
 };
 
-export const bankCard = {
+export const bank: IBlockData = {
   title: "add_profile.bank_data.bank_data",
   parameters: [
     {
@@ -130,6 +147,49 @@ export const bankCard = {
       type: legalData.bank_mfo,
       validate: {
         required: "add_profile.bank_data.bank_mfo.error.required",
+        validate: {
+          valid: (value: string) =>
+            isValidMFO(value) ||
+            "add_profile.bank_data.bank_mfo.error.required",
+        },
+        onChange: formatToNumber,
+      },
+    },
+    {
+      label: "add_profile.bank_data.checking_account",
+      type: legalData.checking_account,
+      validate: {
+        required: "add_profile.bank_data.checking_account.error.required",
+        validate: {
+          valid: (value: string) =>
+            isValidAccount(value) ||
+            "add_profile.bank_data.checking_account.error.required",
+        },
+        onChange: formatToNumber,
+      },
+    },
+  ],
+};
+
+export const bankCard: IBlockData = {
+  title: "add_profile.bank_data.bank_data",
+  parameters: [
+    {
+      label: "add_profile.bank_data.bank_name",
+      type: legalData.bank_name,
+      validate: { required: "add_profile.bank_data.bank_name.error.required" },
+    },
+    {
+      label: "add_profile.bank_data.bank_mfo",
+      type: legalData.bank_mfo,
+      validate: {
+        required: "add_profile.bank_data.bank_mfo.error.required",
+        validate: {
+          valid: (value: string) =>
+            isValidMFO(value) ||
+            "add_profile.bank_data.bank_mfo.error.required",
+        },
+        onChange: formatToNumber,
       },
     },
     {
@@ -137,6 +197,12 @@ export const bankCard = {
       type: legalData.transit_account,
       validate: {
         required: "add_profile.bank_data.transit_account.error.required",
+        validate: {
+          valid: (value: string) =>
+            isValidAccount(value) ||
+            "add_profile.bank_data.transit_account.error.required",
+        },
+        onChange: formatToNumber,
       },
     },
     {
@@ -151,23 +217,43 @@ export const bankCard = {
       type: legalData.card_date,
       validate: {
         required: "add_profile.bank_data.card_date.error.required",
+        validate: {
+          valid: (value: string) =>
+            isValidCardDate(value) ||
+            "add_profile.bank_data.card_date.error.required",
+        },
+        onChange: formatCardDate,
       },
     },
   ],
 };
 
-export const contact = {
+export const contact: IBlockData = {
   title: "add_profile.contact.contact",
   parameters: [
     {
       label: "add_profile.contact.phone",
       type: legalData.phone,
-      validate: { required: "add_profile.contact.phone.error.required" },
+      validate: {
+        required: "add_profile.contact.phone.error.required",
+        validate: {
+          valid: (value: string) =>
+            isValidPhoneNumber(value) ||
+            "add_profile.contact.phone.error.required",
+        },
+        onChange: formatToNumber,
+      },
     },
     {
       label: "add_profile.contact.email",
       type: legalData.email,
-      validate: { required: "add_profile.contact.email.error.required" },
+      validate: {
+        required: "add_profile.contact.email.error.required",
+        validate: {
+          valid: (value: string) =>
+            isValidEmail(value) || "add_profile.contact.email.error.required",
+        },
+      },
     },
   ],
 };

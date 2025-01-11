@@ -57,6 +57,8 @@ export interface IRowData {
   type: keyof ILegalData;
   validate: {
     required: string;
+    validate?: any;
+    onChange?: any;
   };
 }
 

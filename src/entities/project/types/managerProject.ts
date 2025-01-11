@@ -1,5 +1,11 @@
 import { sizeTypes } from "@shared/ui";
 import { desireStatus, orderStatus } from "../config";
+import {
+  MatchTypesNum,
+  platformTypesNum,
+  PostTypesNum,
+} from "@entities/platform";
+import { ITgButtonRes } from "../api";
 
 export interface IManagerProjects {
   page: number;
@@ -30,6 +36,7 @@ export interface IManagerNewProjectCard {
 }
 
 interface IFile {
+  name: string;
   content: string;
   content_type: number;
 }
@@ -53,7 +60,6 @@ export interface IManagerProjectCard {
   moderation?: number;
   report?: boolean;
   subcards?: IManagerProjectSubcard[];
-
   comment?: string;
   links?: string[];
   files?: IFile[];
@@ -109,4 +115,29 @@ export interface IDownloadFileType extends IFile {
   currentSize?: string | number;
   sizeType?: sizeTypes;
   fileType?: string;
+}
+
+export interface IManagerProjectPosts {
+  page: number;
+  elements: number;
+  posts: IManagerOrderPost[];
+}
+
+export interface IManagerOrderPost {
+  id: string;
+  platform: platformTypesNum;
+  comment?: string;
+  photo: string[];
+  video: string[];
+  files: string[];
+  buttons: ITgButtonRes[];
+  text: string[];
+  orders: IPostOrders[];
+  post_type: PostTypesNum;
+  match_type: MatchTypesNum;
+}
+
+interface IPostOrders {
+  order_id: string;
+  channel_name: string;
 }
