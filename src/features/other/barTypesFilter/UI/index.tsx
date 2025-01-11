@@ -8,7 +8,7 @@ import styles from "./styles.module.scss";
 interface BarTypesFilterProps {
   typeFilter: string;
   changeStatus: (
-    status: channelStatusFilter | offerStatusFilter | string
+    status: channelStatusFilter | offerStatusFilter | string,
   ) => void;
   changeType: (type: string) => void;
   badge?: { type: string; count: number }[];
