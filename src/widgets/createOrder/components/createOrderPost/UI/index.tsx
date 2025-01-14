@@ -69,69 +69,78 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
   const screen = useWindowWidth();
 
   // сразу сохраняем все ордеры в форму posts с учетом платформы и post_type
-  // useEffect(() => {
-  //   const allPostsUniversal = cards.reduce(
-  //     (
-  //       acc: { platform: platformTypesNum; post_type: PostTypesNum }[],
-  //       card
-  //     ) => {
-  //       const exists = acc.find(
-  //         (post) =>
-  //           post?.platform === card?.platform &&
-  //           post?.post_type === card?.post_type
-  //       );
-  //       if (!exists) {
-  //         acc.push({
-  //           platform: card?.platform,
-  //           post_type: card?.post_type,
-  //         });
-  //       }
-  //       return acc;
-  //     },
-  //     []
-  //   );
-  //   setValue("posts", allPostsUniversal);
-  //   const allPosts = cards.map((card) => ({
-  //     platform: card?.platform,
-  //     post_type: card?.post_type,
-  //     order_id: card?.id,
-  //   }));
-  //   setValue("multiposts", allPosts);
-  // }, []);
+  useEffect(() => {
+    const allPostsUniversal = cards.reduce(
+      (
+        acc: { platform: platformTypesNum; post_type: PostTypesNum }[],
+        card,
+      ) => {
+        const exists = acc.find(
+          (post) =>
+            post?.platform === card?.platform &&
+            post?.post_type === card?.post_type,
+        );
+        if (!exists) {
+          acc.push({
+            platform: card?.platform,
+            post_type: card?.post_type,
+          });
+        }
+        return acc;
+      },
+      [],
+    );
+    setValue("posts", allPostsUniversal);
+    const allPosts = cards.map((card) => ({
+      platform: card?.platform,
+      post_type: card?.post_type,
+      order_id: card?.id,
+    }));
+    setValue("multiposts", allPosts);
+  }, []);
 
   // useEffect(() => {
   //   if (posts?.length) {
-  //     const allPostsUniversal = posts.filter((post) => {
-  //       post.match_type === MatchTypesNum.universal
-  //     })
-  //     // const allPostsUniversal = cards.reduce(
-  //     //   (
-  //     //     acc: { platform: platformTypesNum; post_type: PostTypesNum }[],
-  //     //     card
-  //     //   ) => {
-  //     //     const exists = acc.find(
-  //     //       (post) =>
-  //     //         post?.platform === card?.platform &&
-  //     //         post?.post_type === card?.post_type
-  //     //     );
-  //     //     if (!exists) {
-  //     //       acc.push({
-  //     //         platform: card?.platform,
-  //     //         post_type: card?.post_type,
-  //     //       });
-  //     //     }
-  //     //     return acc;
-  //     //   },
-  //     //   []
-  //     // );
-  //     setValue("posts", allPostsUniversal);
-  //     const allPosts = cards.map((card) => ({
-  //       platform: card?.platform,
-  //       post_type: card?.post_type,
-  //       order_id: card?.id,
-  //     }));
-  //     setValue("multiposts", allPosts);
-  //   };
+  //     const universalOrders = posts.filter(
+  //       (post) => post.match_type === MatchTypesNum.universal
+  //     );
+  //     const uniqueOrders = posts.filter(
+  //       (post) => post.match_type === MatchTypesNum.unique
+  //     );
+  //     const isMultiPost = !!uniqueOrders?.length;
+  //     setValue("isMultiPost", isMultiPost);
+  //     if (universalOrders?.length) {
+  //       const checkUniversalPosts = formState?.posts?.map((formPost) => {
+  //         const backPost = posts.find(
+  //           (post) => post.match_type === MatchTypesNum.universal
+  //         );
+  //         console.log(6666, backPost);
+  //         return {
+  //           ...formPost,
+  //           ...backPost,
+  //         };
+  //       });
+  //       setValue("posts", checkUniversalPosts);
+  //       console.log("checkUniversalPosts", checkUniversalPosts);
+  //     } else if (uniqueOrders?.length) {
+  //       const checkUniquePosts = formState?.multiposts?.map((formPost) => {
+  //         if (uniqueOrders?.includes(formPost?.order_id || "")) {
+  //           const backPost = posts.find(
+  //             (post) => post.match_type === MatchTypesNum.unique
+  //           );
+  //           return {
+  //             ...formPost,
+  //             ...backPost,
+  //           };
+  //         }
+  //         return formPost;
+  //       });
+  //       setValue("multiposts", checkUniquePosts);
+  //     }
+
+  //     // console.log(checkUniquePosts);
+  //     // console.log(checkUniversalPosts);
+  //   }
   // }, [posts]);
 
   const platformIds: number[] = [
@@ -334,9 +343,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                       </div>
                     </div>
                   </AlertDialogTrigger>
-                  <AlertDialogContent
-                    className={`max-w-[300px] gap-0 bg-transparent grid items-center justify-center shadow-none border-0 ${screen > 475 ? "w-[50vw]" : "w-[60vw]"}`}
-                  >
+                  <AlertDialogContent className={styles.content}>
                     <AlertDialogTitle className="sr-only"></AlertDialogTitle>
                     <div className="relative">
                       <AlertDialogAction>

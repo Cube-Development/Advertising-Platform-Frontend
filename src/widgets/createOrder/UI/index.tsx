@@ -65,8 +65,6 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
       },
     });
   const formState = watch();
-
-  console.log("isChannelReplace", isChannelReplace);
   const [blur, setBlur] = useState<ICreateOrderBlur>({
     post: true,
     datetime: true,
