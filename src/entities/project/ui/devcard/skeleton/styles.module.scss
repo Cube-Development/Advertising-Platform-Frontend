@@ -88,6 +88,7 @@
   &__status {
     display: grid;
     padding: 0 20px;
+    grid-area: item3;
 
     @media (max-width: 992px) {
       padding-left: 15px;
@@ -107,7 +108,6 @@
       align-items: center;
       text-align: center;
     }
-    grid-area: item3;
   }
 
   &__chat {
