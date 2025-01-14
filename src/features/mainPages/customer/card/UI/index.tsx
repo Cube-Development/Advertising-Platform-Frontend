@@ -1,5 +1,6 @@
 import { RatingIcon } from "@shared/assets";
 import { ICustomer } from "@shared/types/translate";
+import { ScrollArea } from "@shared/ui";
 import { FC } from "react";
 import styles from "./styles.module.scss";
 
@@ -22,7 +23,9 @@ export const CustomerCard: FC<CustomerCardProps> = ({ customer }) => {
           <RatingIcon />
         </div>
       </div>
-      <p className={`${styles.text} scroll`}>{customer.text}</p>
+      <ScrollArea className={styles.text__wrapper}>
+        <p className={styles.text}>{customer.text}</p>
+      </ScrollArea>
     </div>
   );
 };
