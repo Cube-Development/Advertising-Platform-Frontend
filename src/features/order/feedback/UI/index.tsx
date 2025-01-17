@@ -92,7 +92,7 @@ export const Feedback: FC<IOrderFeature> = ({ order_id }) => {
                   value={review}
                   maxLength={200}
                 />
-                <p
+                <DialogClose
                   className={styles.comment__send_icon}
                   onClick={handleOnClick}
                 >
@@ -106,7 +106,7 @@ export const Feedback: FC<IOrderFeature> = ({ order_id }) => {
                   ) : (
                     <SendHorizonal />
                   )}
-                </p>
+                </DialogClose>
               </div>
             </div>
           </DialogContent>

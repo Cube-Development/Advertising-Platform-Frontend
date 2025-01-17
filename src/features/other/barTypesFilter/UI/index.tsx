@@ -39,7 +39,7 @@ export const BarTypesFilter: FC<BarTypesFilterProps> = ({
         {projectTypes.map((type, index) => (
           <li
             key={index}
-            className={`truncate ${typeFilter === type.type ? styles.active : ""}`}
+            className={`${typeFilter === type.type ? styles.active : ""}`}
             onClick={() => toggleType(type.type, type.status)}
           >
             {t(type.name)}
