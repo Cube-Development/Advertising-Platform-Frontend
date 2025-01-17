@@ -83,10 +83,12 @@ export interface IDatetime {
 
 export interface DateListProps {
   onChange: (dateList: Date[]) => void;
+  startDate?: string[] | string | undefined;
 }
 
 export interface TimeListProps {
   onChange: (timeList: string[]) => void;
+  startTime?: string[] | undefined;
 }
 
 export interface FileProps {

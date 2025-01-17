@@ -1,5 +1,6 @@
 import { desireStatus, IManagerProjectSubcard } from "@entities/project";
 import { CancelIcon2 } from "@shared/assets";
+import { paths } from "@shared/routing";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -11,9 +12,8 @@ import {
 import Cookies from "js-cookie";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
 import { Link } from "react-router-dom";
-import { paths } from "@shared/routing";
+import styles from "./styles.module.scss";
 
 export interface ChangeChannelProps {
   order: IManagerProjectSubcard;
@@ -40,19 +40,16 @@ export const ChangeChannel: FC<ChangeChannelProps> = ({
   };
 
   return (
-    // <Link to={paths.cart} onClick={handleOnClick}>
-    //   <MyButton buttons_type="button__white" className={styles.button}>
-    //     {t(`order_btn.changeChannel`)}
-    //   </MyButton>
-    // </Link>
-
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <MyButton buttons_type="button__white" className={styles.trigger}>
+        <MyButton
+          buttons_type="button__white"
+          className={`truncate ${styles.trigger}`}
+        >
           {t(`order_btn.changeChannel`)}
         </MyButton>
       </AlertDialogTrigger>
-      <AlertDialogContent className={`${styles.content} ${styles.dialog}`}>
+      <AlertDialogContent className={styles.content}>
         <AlertDialogTitle className={styles.title}>
           <p className="gradient_color">
             {t("orders_manager.subcard.change.channel.desire")}

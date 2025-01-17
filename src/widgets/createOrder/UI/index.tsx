@@ -91,8 +91,6 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
       skip: !project_id && !isChannelReplace,
     });
 
-  console.log(formState);
-
   // total price
   const { data: totalPrice } = useGetProjectAmountQuery(
     { project_id: project_id || "" },

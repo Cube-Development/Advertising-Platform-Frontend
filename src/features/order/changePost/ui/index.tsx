@@ -37,19 +37,13 @@ export const ChangePost: FC<ChangePostProps> = ({ order, project_id }) => {
   };
 
   return (
-    // <Link to={paths.cart} onClick={handleOnClick}>
-    //   <MyButton buttons_type="button__white" className={styles.button}>
-    //     {t(`order_btn.changePost`)}
-    //   </MyButton>
-    // </Link>
-
     <AlertDialog>
       <AlertDialogTrigger asChild>
         <MyButton buttons_type="button__white" className={styles.trigger}>
           {t(`order_btn.changePost`)}
         </MyButton>
       </AlertDialogTrigger>
-      <AlertDialogContent className={`${styles.content} ${styles.dialog}`}>
+      <AlertDialogContent className={styles.content}>
         <AlertDialogTitle className={styles.title}>
           <p className="gradient_color">
             {t("orders_manager.subcard.change.post.desire")}

@@ -1,16 +1,16 @@
-import { FC } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
+import { ICreatePostForm, IPostChannel } from "@entities/project";
 import {
   ContinueOrder,
   CustomCalendar,
   OrderCard,
   TimeList,
 } from "@features/createOrder";
-import { ICreatePostForm, IPostChannel } from "@entities/project";
-import { ICreateOrderBlur } from "@widgets/createOrder/config";
 import { useToast } from "@shared/ui";
+import { ICreateOrderBlur } from "@widgets/createOrder/config";
+import { FC } from "react";
+import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 interface CreateOrderDatetimeProps {
   cards: IPostChannel[];
@@ -38,10 +38,9 @@ export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
       const condition = form.datetime?.orders?.reduce((acc, item) => {
         return (
           acc &&
-          Boolean(item?.time_from) &&
-          Boolean(item?.time_to) &&
-          (Boolean(item?.date) ||
-            (Boolean(item?.date_from) && Boolean(item?.date_to)))
+          !!item?.time_from &&
+          !!item?.time_to &&
+          (!!item?.date || (!!item?.date_from && !!item?.date_to))
         );
       }, true);
       if (condition) {
@@ -78,7 +77,6 @@ export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
                 CustomCalendar={CustomCalendar}
                 TimeList={TimeList}
                 setValue={setValue}
-                getValues={getValues}
                 formState={formState}
               />
             ))}

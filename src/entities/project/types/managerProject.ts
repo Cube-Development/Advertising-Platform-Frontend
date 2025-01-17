@@ -1,11 +1,11 @@
-import { sizeTypes } from "@shared/ui";
-import { desireStatus, orderStatus } from "../config";
 import {
   MatchTypesNum,
   platformTypesNum,
   PostTypesNum,
 } from "@entities/platform";
-import { ITgButtonRes } from "../api";
+import { sizeTypes } from "@shared/ui";
+import { ContentType, desireStatus, orderStatus } from "../config";
+import { ITgButton } from "./createPost";
 
 export interface IManagerProjects {
   page: number;
@@ -127,11 +127,11 @@ export interface IManagerOrderPost {
   id: string;
   platform: platformTypesNum;
   comment?: string;
-  photo: string[];
-  video: string[];
-  files: string[];
-  buttons: ITgButtonRes[];
-  text: string[];
+  // photo: string[];
+  // video: string[];
+  files: IPostData[];
+  // buttons: ITgButton[];
+  // text: string[];
   orders: IPostOrders[];
   post_type: PostTypesNum;
   match_type: MatchTypesNum;
@@ -140,4 +140,10 @@ export interface IManagerOrderPost {
 interface IPostOrders {
   order_id: string;
   channel_name: string;
+}
+
+export interface IPostData {
+  content_type: ContentType;
+  content: string;
+  url: string;
 }

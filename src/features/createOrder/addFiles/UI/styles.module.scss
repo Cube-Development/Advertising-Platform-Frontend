@@ -30,6 +30,7 @@
     justify-content: start;
     border-radius: 12px;
     border: 1px dashed var(--Containers);
+    min-height: 100px;
 
     @media (max-width: 768px) {
       grid-template: none;

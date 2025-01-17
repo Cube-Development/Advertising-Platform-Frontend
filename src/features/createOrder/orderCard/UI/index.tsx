@@ -11,6 +11,7 @@ import { EmptyPost } from "@entities/platform/ui/displays/displayInstagram/feed/
 import {
   CreatePostFormData,
   DateListProps,
+  ICreateDate,
   ICreatePostForm,
   IDatetime,
   IPostChannel,
@@ -27,8 +28,8 @@ import {
   AlertDialogTrigger,
 } from "@shared/ui";
 import { X } from "lucide-react";
-import { FC } from "react";
-import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
+import { FC, useEffect } from "react";
+import { UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
@@ -38,7 +39,6 @@ interface PostPlatformProps {
   CustomCalendar: FC<DateListProps>;
   TimeList: FC<TimeListProps>;
   setValue: UseFormSetValue<ICreatePostForm>;
-  getValues: UseFormGetValues<ICreatePostForm>;
   formState: ICreatePostForm;
 }
 
@@ -47,40 +47,47 @@ export const OrderCard: FC<PostPlatformProps> = ({
   CustomCalendar,
   TimeList,
   setValue,
-  getValues,
   formState,
 }) => {
   const { t } = useTranslation();
-  const handleChangeTime = (timeList: string[]) => {
-    const form: ICreatePostForm = getValues();
-    const datetime = form.datetime;
-    const currentCard: IDatetime = (datetime.orders || []).find(
+  const screen = useWindowWidth();
+  const getCardData = (datetime: ICreateDate) => {
+    const currentCard: IDatetime = (datetime?.orders || []).find(
       (item) => item.order_id === card.id,
     ) || {
-      order_id: card.id,
+      order_id: card?.id,
+      time_from: card?.time_from,
+      time_to: card?.time_to,
+      date: card?.date,
+      date_from: card?.date_from,
+      date_to: card?.date_to,
     };
-    const allCards = (datetime.orders || []).filter(
+    const cardsWithoutCurrent = (datetime.orders || []).filter(
       (item) => item.order_id !== card.id,
     );
+    return { currentCard, cardsWithoutCurrent };
+  };
+
+  // установка начальных даты и времени если они возвращаются
+  useEffect(() => {
+    const datetime = formState.datetime;
+    const { currentCard, cardsWithoutCurrent } = getCardData(datetime);
+    datetime.orders = [...cardsWithoutCurrent, currentCard];
+    setValue(CreatePostFormData.datetime, datetime);
+  }, []);
+
+  const handleChangeTime = (timeList: string[]) => {
+    const datetime = formState.datetime;
+    const { currentCard, cardsWithoutCurrent } = getCardData(datetime);
     currentCard.time_from = timeList[0];
     currentCard.time_to = timeList[1];
-
-    datetime.orders = [...allCards, currentCard];
+    datetime.orders = [...cardsWithoutCurrent, currentCard];
     setValue(CreatePostFormData.datetime, datetime);
   };
 
   const handleChangeDate = (dateList: Date[]) => {
-    console.log("dateList", dateList);
-    const form: ICreatePostForm = getValues();
-    const datetime = form.datetime;
-    const currentCard: IDatetime = (datetime.orders || []).find(
-      (item) => item?.order_id === card?.id,
-    ) || {
-      order_id: card?.id,
-    };
-    const allCards = (datetime.orders || []).filter(
-      (item) => item.order_id !== card?.id,
-    );
+    const datetime = formState.datetime;
+    const { currentCard, cardsWithoutCurrent } = getCardData(datetime);
 
     if (dateList.length === 1) {
       delete currentCard.date_from;
@@ -91,12 +98,9 @@ export const OrderCard: FC<PostPlatformProps> = ({
       currentCard.date_from = dateList[0].toLocaleDateString();
       currentCard.date_to = dateList[1].toLocaleDateString();
     }
-    console.log("currentCard", currentCard);
-    datetime.orders = [...allCards, currentCard];
+    datetime.orders = [...cardsWithoutCurrent, currentCard];
     setValue(CreatePostFormData.datetime, datetime);
   };
-
-  const screen = useWindowWidth();
 
   return (
     <div className={styles.wrapper}>
@@ -118,10 +122,26 @@ export const OrderCard: FC<PostPlatformProps> = ({
       </div>
       <div className={styles.footer}>
         <div className={styles.type}>
-          <CustomCalendar onChange={handleChangeDate} />
+          <CustomCalendar
+            onChange={handleChangeDate}
+            startDate={
+              !!card?.date
+                ? card?.date
+                : !!card?.date_from && !!card?.date_to
+                  ? [card?.date_from, card?.date_to]
+                  : undefined
+            }
+          />
         </div>
         <div className={styles.type}>
-          <TimeList onChange={handleChangeTime} />
+          <TimeList
+            onChange={handleChangeTime}
+            startTime={
+              !!card?.time_from && !!card?.time_to
+                ? [card?.time_from, card?.time_to]
+                : undefined
+            }
+          />
         </div>
         <AlertDialog>
           <AlertDialogTrigger asChild>
