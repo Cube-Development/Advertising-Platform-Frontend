@@ -7,6 +7,6 @@ services:
     ports:
       - "3000:80"
     env_file:
-      - deploy.env
+      - /path/to/project/.env  # Путь к .env на сервере
     volumes:
       - ./nginx.conf:/etc/nginx/sites-enabled/default
