@@ -18,6 +18,7 @@ import { platformTypes, platformTypesNum } from "@entities/platform";
 import { IFormat } from "@entities/project";
 import {
   AcceptChannel,
+  AcceptRemoderation,
   BanChannel,
   ChannelCardMenu,
   RejectChannel,
@@ -198,7 +199,9 @@ export const ChannelCard: FC<ChannelCardProps> = ({
                   ? styles.banned
                   : card?.status === channelStatus.inactive
                     ? styles.inactive
-                    : styles.moderationReject
+                    : card?.status === channelStatus.moderationReject
+                      ? styles.moderationReject
+                      : styles.remoderation
           }`}
         >
           <p className="truncate">
@@ -378,11 +381,18 @@ export const ChannelCard: FC<ChannelCardProps> = ({
                   <RejectChannel id={card?.channel?.id} />
                   <AcceptChannel id={card?.channel?.id} />
                 </>
-              ) : (
+              ) : card?.status === channelStatus.moderationReject ? (
                 <>
                   <RejectChannel id={card?.channel?.id} />
                   <AcceptChannel id={card?.channel?.id} />
                 </>
+              ) : card?.status === channelStatus.remoderation ? (
+                <>
+                  <div></div>
+                  <AcceptRemoderation id={card?.channel?.id} />
+                </>
+              ) : (
+                <></>
               )}
             </div>
           </>

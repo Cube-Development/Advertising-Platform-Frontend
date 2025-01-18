@@ -212,7 +212,6 @@
 
         .display {
           position: relative;
-          // min-height: 500px;
 
           @media (max-width: 576px) {
             display: none;
@@ -233,6 +232,22 @@
             display: block;
           }
 
+          .content {
+            max-width: 300px;
+            gap: 0;
+            background-color: transparent;
+            display: grid;
+            align-items: center;
+            justify-content: center;
+            box-shadow: none;
+            border: none;
+            width: 50vw;
+
+            @media (max-width: 475px) {
+              width: 60vw;
+            }
+          }
+
           .see_post_btn {
             display: grid;
             grid-auto-flow: column;
@@ -250,7 +265,6 @@
               background: var(--Gradients-Gradient-1);
               -webkit-background-clip: text;
               -webkit-text-fill-color: transparent;
-              /* Включаем поддержку для Firefox */
               background-clip: text;
               color: transparent;
               line-height: normal;

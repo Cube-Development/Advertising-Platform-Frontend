@@ -143,7 +143,7 @@ export const CreatePost: FC<CreatePostProps> = ({}) => {
               <ArrowLongHorizontalIcon className="icon__white" />
             </MyButton>
           </DialogTrigger>
-          <DialogContent className={`${styles.content} gap-[0px]`}>
+          <DialogContent className={styles.content}>
             <DialogTitle className="sr-only"></DialogTitle>
             <DialogDescription className="sr-only"></DialogDescription>
             <DialogClose>

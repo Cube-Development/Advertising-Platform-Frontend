@@ -30,7 +30,7 @@ import styles from "./styles.module.scss";
 
 interface BarSubfilterProps {
   page: pageFilter;
-  resetValues: () => void;
+  resetValues?: () => void;
   resetActiveAccount?: (account: null) => void;
   profileFilter?: {
     type: profileTypesName;
@@ -127,7 +127,7 @@ export const BarSubfilter: FC<BarSubfilterProps> = ({
         changeCatalogFilter(option.type as catalogBarFilter);
     } else if (page === pageFilter.chat) {
       changeChatFilter && changeChatFilter(option.type as chatTypesFilter);
-      resetValues();
+      resetValues!();
     } else if (page === pageFilter.createOrderFiles) {
       changeFileFilter && changeFileFilter(option.type as addFileFilter);
     } else if (page === pageFilter.adminReviews) {
@@ -140,7 +140,7 @@ export const BarSubfilter: FC<BarSubfilterProps> = ({
     if (page === pageFilter.catalog) {
       // if (page !== pageFilter.catalog) {
       // изменил этот момент
-      resetValues();
+      resetValues!();
     }
   };
 

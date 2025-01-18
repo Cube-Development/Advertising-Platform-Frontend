@@ -65,8 +65,6 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
       },
     });
   const formState = watch();
-
-  console.log("isChannelReplace", isChannelReplace);
   const [blur, setBlur] = useState<ICreateOrderBlur>({
     post: true,
     datetime: true,
@@ -92,8 +90,6 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
     useGetPostsRereviewQuery(projectPostsReq, {
       skip: !project_id && !isChannelReplace,
     });
-
-  console.log(formState);
 
   // total price
   const { data: totalPrice } = useGetProjectAmountQuery(

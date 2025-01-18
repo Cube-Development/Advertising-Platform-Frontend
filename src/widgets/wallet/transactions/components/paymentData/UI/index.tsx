@@ -74,8 +74,8 @@ export const PaymentData: FC<PaymentDataProps> = ({
 
   const [price, setPrice] = useState("");
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const newValue = e.target.value;
-    if (newValue.length > 10 || newValue == "0") {
+    let newValue = e.target.value.replace(/\D/g, "");
+    if (newValue.length > 10 || newValue === "0") {
       return;
     }
     setPrice(newValue);

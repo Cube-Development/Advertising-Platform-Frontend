@@ -1,17 +1,17 @@
-import { useEditor, EditorContent } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import { FC, useState } from "react";
-import { Toolbar } from "./toolbar";
-import styles from "./styles.module.scss";
-import underline from "@tiptap/extension-underline";
-import link from "@tiptap/extension-link";
-import { UseFormSetValue } from "react-hook-form";
 import {
   ContentType,
   CreatePostFormData,
   ICreatePostForm,
 } from "@entities/project";
+import link from "@tiptap/extension-link";
 import Paragraph from "@tiptap/extension-paragraph"; // импортируем параграф для кастомизации
+import underline from "@tiptap/extension-underline";
+import { EditorContent, useEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import { FC, useEffect, useState } from "react";
+import { UseFormSetValue } from "react-hook-form";
+import styles from "./styles.module.scss";
+import { Toolbar } from "./toolbar";
 
 interface EditorProps {
   setValue: UseFormSetValue<ICreatePostForm>;
@@ -26,6 +26,17 @@ export const Editor: FC<EditorProps> = ({
   platformId,
   formState,
 }) => {
+  const postsWithoutCurrent = formState?.selectedMultiPostId
+    ? formState?.multiposts?.filter(
+        (item) => item?.order_id !== formState?.selectedMultiPostId,
+      ) || []
+    : formState?.posts?.filter(
+        (item) =>
+          item?.platform !== platformId ||
+          (item?.platform === platformId &&
+            item?.post_type !== formState?.selectedPostType),
+      ) || [];
+
   const currentPost = formState?.selectedMultiPostId
     ? formState?.multiposts?.find(
         (item) => item?.order_id === formState?.selectedMultiPostId,
@@ -38,11 +49,14 @@ export const Editor: FC<EditorProps> = ({
         platform: platformId,
         post_type: formState.selectedPostType,
       };
-  const startContent =
-    (currentPost?.text && currentPost?.text[0]?.content) || "";
-  const [content, setContent] = useState(startContent);
 
+  const startContent = currentPost?.text?.[0]?.content || "";
+  const [content, setContent] = useState(startContent);
   const limit = 1000;
+
+  useEffect(() => {
+    setContent(startContent);
+  }, [startContent]);
 
   // Конфигурация редактора с изменением поведения параграфов
   const editor = useEditor({
@@ -92,39 +106,20 @@ export const Editor: FC<EditorProps> = ({
     },
   });
 
+  useEffect(() => {
+    if (editor && startContent !== editor.getHTML()) {
+      editor.commands.setContent(startContent); // Обновляем содержимое редактора
+    }
+  }, [startContent, editor]);
+
   const handleChange = (content: string) => {
     const cleanedContent = content.replace(/(<br\s*\/?>\s*){2,}/g, "<p></p>");
     setContent(cleanedContent);
-
-    const posts = formState?.selectedMultiPostId
-      ? formState?.multiposts?.filter(
-          (item) => item?.order_id !== formState?.selectedMultiPostId,
-        ) || []
-      : formState?.posts?.filter(
-          (item) =>
-            item?.platform !== platformId ||
-            (item?.platform === platformId &&
-              item?.post_type !== formState?.selectedPostType),
-        ) || [];
-
-    const currentPost = formState?.selectedMultiPostId
-      ? formState?.multiposts?.find(
-          (item) => item?.order_id === formState?.selectedMultiPostId,
-        )
-      : formState?.posts?.find(
-          (item) =>
-            item?.platform === platformId &&
-            item?.post_type === formState?.selectedPostType,
-        ) || {
-          platform: platformId,
-          post_type: formState?.selectedPostType,
-        };
-
     if (currentPost) {
       currentPost.text = [
         { content_type: ContentType.text, content: cleanedContent },
       ];
-      setValue(type, [...posts, currentPost]);
+      setValue(type, [...postsWithoutCurrent, currentPost]);
     }
   };
 
