@@ -31,7 +31,11 @@ jobs:
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
       - name: Build Docker Image
-        run: docker build --tag test-app .
+        run: |
+          docker build --build-arg VITE_BASE_URL=${{ secrets.VITE_BASE_URL }} \
+                       --build-arg VITE_BASE_WS_URL=${{ secrets.VITE_BASE_WS_URL }} \
+                       --build-arg VITE_APP_ENV=${{ secrets.VITE_APP_ENV }} \
+                       --tag test-app .
 
       - name: Tag image
         run: docker tag test-app ${{ secrets.DOCKERHUB_USERNAME }}/test-app:latest
@@ -39,7 +43,7 @@ jobs:
       - name: Push Docker Image
         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/test-app:latest
 
-      - name: SSH to Droplet and Generate .env File
+      - name: SSH to Droplet and Update Container
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.DROPLET_IP }}
@@ -47,15 +51,6 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            # Создаем .env файл с переменными окружения из GitHub Secrets
-            echo "VITE_BASE_URL=${{ secrets.VITE_BASE_URL }}" > /path/to/project/.env
-            echo "VITE_BASE_WS_URL=${{ secrets.VITE_BASE_WS_URL }}" >> /path/to/project/.env
-            # Дополнительно добавь другие переменные окружения, если нужно
-
-            # Проверим, что файл .env был создан
-            cat /path/to/project/.env
-
-            # Обновление Docker контейнера
             docker stop test-app || true
             docker rm test-app || true
             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/test-app:latest
