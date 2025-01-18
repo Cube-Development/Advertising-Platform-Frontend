@@ -30,31 +30,31 @@ import React, { Suspense } from "react";
 
 // Ленивый импорт всех компонентов
 const Cta = React.lazy(() =>
-  import("@widgets/mainPages").then((module) => ({ default: module.Cta })),
+  import("@widgets/mainPages").then((module) => ({ default: module.Cta }))
 );
 const Services = React.lazy(() =>
-  import("@widgets/mainPages").then((module) => ({ default: module.Services })),
+  import("@widgets/mainPages").then((module) => ({ default: module.Services }))
 );
 const Partners = React.lazy(() =>
-  import("@widgets/mainPages").then((module) => ({ default: module.Partners })),
+  import("@widgets/mainPages").then((module) => ({ default: module.Partners }))
 );
 const HowItWorks = React.lazy(() =>
   import("@widgets/mainPages").then((module) => ({
     default: module.HowItWorks,
-  })),
+  }))
 );
 const WhyChooseUs = React.lazy(() =>
   import("@widgets/mainPages").then((module) => ({
     default: module.WhyChooseUs,
-  })),
+  }))
 );
 const Turnkey = React.lazy(() =>
-  import("@widgets/mainPages").then((module) => ({ default: module.Turnkey })),
+  import("@widgets/mainPages").then((module) => ({ default: module.Turnkey }))
 );
 const Customers = React.lazy(() =>
   import("@widgets/mainPages").then((module) => ({
     default: module.Customers,
-  })),
+  }))
 );
 
 export const MainPage = () => {
