@@ -4,3 +4,4 @@ export * from "./channelCardMenu";
 export * from "./rejectChannel";
 export * from "./unbanChannel";
 export * from "./updateChannel";
+export * from "./acceptRemoderation";

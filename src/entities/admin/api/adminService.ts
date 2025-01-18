@@ -273,6 +273,16 @@ export const adminAPI = authApi.injectEndpoints({
       }),
       invalidatesTags: [ADMIN_CHANNELS],
     }),
+    adminChannelAcceptRemoderation: build.mutation<
+      { success: boolean },
+      { channel_id: string }
+    >({
+      query: (params) => ({
+        url: `/adv-admin/channel/${params.channel_id}/edit/accept`,
+        method: `PUT`,
+      }),
+      invalidatesTags: [ADMIN_CHANNELS],
+    }),
     adminChannelUnban: build.mutation<
       { success: boolean },
       { channel_id: string }
@@ -394,6 +404,7 @@ export const {
   useGetAdminChannelInfoQuery,
   useAdminChannelAcceptMutation,
   useAdminChannelRejectMutation,
+  useAdminChannelAcceptRemoderationMutation,
   useAdminChannelBanMutation,
   useAdminChannelUnbanMutation,
   useAdminChannelEditMutation,
