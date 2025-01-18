@@ -54,6 +54,7 @@
       padding: 10px;
       border-radius: 12px;
       border: 1px dashed var(--Containers);
+      min-height: 100px;
 
       .logo {
         display: grid;
@@ -87,7 +88,6 @@
       row-gap: 15px;
       align-content: center;
       justify-content: center;
-      justify-items: center;
 
       .logo {
         display: grid;
@@ -139,10 +139,6 @@
         text-align: center;
         border-radius: 8px;
         background: var(--Gradients-Gradient-1);
-
-        @media (min-width: 767px) {
-          width: 200px;
-        }
 
         span {
           color: var(--Personal-colors-White);

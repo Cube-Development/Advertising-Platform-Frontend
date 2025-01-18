@@ -73,7 +73,7 @@ export const ReplaceChannel: FC<ReplaceChannelProps> = ({
       <AlertDialogTrigger asChild>
         <MyButton
           buttons_type="button__white"
-          className={styles.trigger}
+          className={`truncate ${styles.trigger}`}
           disabled={!haveDesire && is_request_approve}
         >
           {t(`order_btn.changeChannel`)}

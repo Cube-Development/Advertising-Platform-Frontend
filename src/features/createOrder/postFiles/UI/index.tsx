@@ -12,6 +12,7 @@ import {
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
+  AlertDialogDescription,
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@shared/ui";
@@ -27,7 +28,6 @@ interface PostFilesProps {
   formState: ICreatePostForm;
   platformId: number;
   type: CreatePostFormData;
-  screen: number;
 }
 
 export const PostFiles: FC<PostFilesProps> = ({
@@ -37,76 +37,9 @@ export const PostFiles: FC<PostFilesProps> = ({
   formState,
   platformId,
   type,
-  screen,
 }) => {
   const { t } = useTranslation();
   const [filter, setFilter] = useState<addFileFilter>(addFileFilter.mediafile);
-  const handle = () => {};
-
-  const handleAddMediaFile = (mediafiles: File[]) => {
-    const posts = formState?.selectedMultiPostId
-      ? formState?.multiposts?.filter(
-          (item) => item?.order_id !== formState?.selectedMultiPostId,
-        ) || []
-      : formState?.posts?.filter(
-          (item) =>
-            item?.platform !== platformId ||
-            (item?.platform === platformId &&
-              item?.post_type !== formState?.selectedPostType),
-        ) || [];
-
-    const currentPost = formState?.selectedMultiPostId
-      ? formState?.multiposts?.find(
-          (item) => item?.order_id === formState?.selectedMultiPostId,
-        )
-      : formState?.posts?.find(
-          (item) =>
-            item?.platform === platformId &&
-            item?.post_type === formState?.selectedPostType,
-        ) || {
-          platform: platformId,
-          post_type: formState?.selectedPostType,
-        };
-    if (currentPost) {
-      platformId !== platformTypesNum.youtube
-        ? (currentPost.media = [...mediafiles])
-        : (currentPost.media = mediafiles.length > 0 ? [mediafiles[0]] : []);
-      setValue(type, [...posts, currentPost]);
-    }
-  };
-
-  const handleAddFile = (files: File[]) => {
-    const posts = formState?.selectedMultiPostId
-      ? formState?.multiposts?.filter(
-          (item) => item?.order_id !== formState?.selectedMultiPostId,
-        ) || []
-      : formState?.posts?.filter(
-          (item) =>
-            item?.platform !== platformId ||
-            (item?.platform === platformId &&
-              item?.post_type !== formState?.selectedPostType),
-        ) || [];
-
-    const currentPost = formState?.selectedMultiPostId
-      ? formState?.multiposts?.find(
-          (item) => item?.order_id === formState?.selectedMultiPostId,
-        )
-      : formState?.posts?.find(
-          (item) =>
-            item?.platform === platformId &&
-            item?.post_type === formState?.selectedPostType,
-        ) || {
-          platform: platformId,
-          post_type: formState?.selectedPostType,
-        };
-    if (currentPost) {
-      const currentFiles = currentPost.files || [];
-      files.length
-        ? (currentPost.files = [...currentFiles, ...files])
-        : (currentPost.files = []);
-      setValue(type, [...posts, currentPost]);
-    }
-  };
 
   const currentPost = formState?.selectedMultiPostId
     ? formState?.multiposts?.find(
@@ -120,57 +53,122 @@ export const PostFiles: FC<PostFilesProps> = ({
         platform: platformId,
         post_type: formState?.selectedPostType,
       };
+
+  const postsWithoutCurrent = formState?.selectedMultiPostId
+    ? formState?.multiposts?.filter(
+        (item) => item?.order_id !== formState?.selectedMultiPostId,
+      ) || []
+    : formState?.posts?.filter(
+        (item) =>
+          item?.platform !== platformId ||
+          (item?.platform === platformId &&
+            item?.post_type !== formState?.selectedPostType),
+      ) || [];
+
+  const handleAddMediaFile = (mediafiles: File[]) => {
+    // const posts = formState?.selectedMultiPostId
+    //   ? formState?.multiposts?.filter(
+    //       (item) => item?.order_id !== formState?.selectedMultiPostId
+    //     ) || []
+    //   : formState?.posts?.filter(
+    //       (item) =>
+    //         item?.platform !== platformId ||
+    //         (item?.platform === platformId &&
+    //           item?.post_type !== formState?.selectedPostType)
+    //     ) || [];
+
+    // const currentPost = formState?.selectedMultiPostId
+    //   ? formState?.multiposts?.find(
+    //       (item) => item?.order_id === formState?.selectedMultiPostId
+    //     )
+    //   : formState?.posts?.find(
+    //       (item) =>
+    //         item?.platform === platformId &&
+    //         item?.post_type === formState?.selectedPostType
+    //     ) || {
+    //       platform: platformId,
+    //       post_type: formState?.selectedPostType,
+    //     };
+    if (currentPost) {
+      platformId !== platformTypesNum.youtube
+        ? (currentPost.media = [...mediafiles])
+        : (currentPost.media = mediafiles.length > 0 ? [mediafiles[0]] : []);
+      setValue(type, [...postsWithoutCurrent, currentPost]);
+    }
+  };
+
+  const handleAddFile = (files: File[]) => {
+    // const posts = formState?.selectedMultiPostId
+    //   ? formState?.multiposts?.filter(
+    //       (item) => item?.order_id !== formState?.selectedMultiPostId
+    //     ) || []
+    //   : formState?.posts?.filter(
+    //       (item) =>
+    //         item?.platform !== platformId ||
+    //         (item?.platform === platformId &&
+    //           item?.post_type !== formState?.selectedPostType)
+    //     ) || [];
+
+    // const currentPost = formState?.selectedMultiPostId
+    //   ? formState?.multiposts?.find(
+    //       (item) => item?.order_id === formState?.selectedMultiPostId
+    //     )
+    //   : formState?.posts?.find(
+    //       (item) =>
+    //         item?.platform === platformId &&
+    //         item?.post_type === formState?.selectedPostType
+    //     ) || {
+    //       platform: platformId,
+    //       post_type: formState?.selectedPostType,
+    //     };
+    if (currentPost) {
+      const currentFiles = currentPost.files || [];
+      files.length
+        ? (currentPost.files = [...currentFiles, ...files])
+        : (currentPost.files = []);
+      setValue(type, [...postsWithoutCurrent, currentPost]);
+    }
+  };
+
   const currentMedia: File[] = currentPost?.media || [];
   const currentFile: File[] = currentPost?.files || [];
 
   return (
-    <>
-      <AlertDialog>
-        <AlertDialogTrigger>
-          <div className={`${styles.open} button`}>
-            <div className={styles.icon}>
-              <ImageIcon />
-            </div>
-            <p className="truncate">{t("create_order.create.add_file")}</p>
+    <AlertDialog>
+      <AlertDialogTrigger>
+        <div className={`${styles.open} button`}>
+          <div className={styles.icon}>
+            <ImageIcon />
           </div>
-        </AlertDialogTrigger>
-        <AlertDialogContent
-          className={`max-w-[800px] ${
-            screen > 992
-              ? "w-[75vw]"
-              : screen > 768
-                ? "w-[80vw]"
-                : screen > 576
-                  ? "w-[90vw]"
-                  : "w-[95vw]"
-          }`}
-        >
-          <div className={styles.modalContent}>
-            <div className={styles.top}>
-              <AlertDialogTitle className={styles.title}>
-                {t("create_order.create.add_file")}
-              </AlertDialogTitle>
-              <AlertDialogCancel>
-                <CancelIcon2 />
-              </AlertDialogCancel>
-            </div>
-            <BarSubfilter
-              page={pageFilter.createOrderFiles}
-              resetValues={handle}
-              fileFilter={filter}
-              changeFileFilter={(filter) => setFilter(filter)}
+          <p className="truncate">{t("create_order.create.add_file")}</p>
+        </div>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <div className={styles.modalContent}>
+          <AlertDialogDescription className="sr-only"></AlertDialogDescription>
+          <div className={styles.top}>
+            <AlertDialogTitle className={styles.title}>
+              {t("create_order.create.add_file")}
+            </AlertDialogTitle>
+            <AlertDialogCancel>
+              <CancelIcon2 />
+            </AlertDialogCancel>
+          </div>
+          <BarSubfilter
+            page={pageFilter.createOrderFiles}
+            fileFilter={filter}
+            changeFileFilter={(filter) => setFilter(filter)}
+          />
+          {filter === addFileFilter.file ? (
+            <AddFiles onChange={handleAddFile} currentFiles={currentFile} />
+          ) : (
+            <AddMediaFiles
+              onChange={handleAddMediaFile}
+              currentFiles={currentMedia}
             />
-            {filter === addFileFilter.file ? (
-              <AddFiles onChange={handleAddFile} currentFiles={currentFile} />
-            ) : (
-              <AddMediaFiles
-                onChange={handleAddMediaFile}
-                currentFiles={currentMedia}
-              />
-            )}
-          </div>
-        </AlertDialogContent>
-      </AlertDialog>
-    </>
+          )}
+        </div>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };

@@ -1,6 +1,7 @@
 .customer {
   display: grid;
   grid-template: 0.3fr 1fr / 1fr;
+  row-gap: 10px;
   align-content: space-between;
   align-items: start;
   padding: 20px;
@@ -15,7 +16,6 @@
     grid-template: 1fr / 35px 1fr;
     column-gap: 10px;
     align-items: center;
-    margin-bottom: 10px;
 
     .logo {
       width: 35px;
@@ -42,6 +42,7 @@
         font-size: 12px;
         font-weight: 400;
         font-style: italic;
+        // margin-bottom: 5px;
       }
 
       .rating {
@@ -51,16 +52,20 @@
     }
   }
 
-  .text {
-    color: var(--secondary-text);
-    font-size: 14px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
+  .text__wrapper {
     height: 200px;
 
-    @media (max-width: 576px) {
-      font-size: 12px;
+    .text {
+      color: var(--secondary-text);
+      font-size: 14px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      padding-right: 10px;
+
+      @media (max-width: 576px) {
+        font-size: 12px;
+      }
     }
   }
 }

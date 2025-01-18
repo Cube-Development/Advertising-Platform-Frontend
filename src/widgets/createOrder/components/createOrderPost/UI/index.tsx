@@ -1,7 +1,3 @@
-import { FC, useEffect } from "react";
-import styles from "./styles.module.scss";
-import { useTranslation } from "react-i18next";
-import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import {
   DisplayFeed,
   DisplayShorts,
@@ -13,10 +9,16 @@ import {
   platformTypesNum,
   platformTypesStr,
 } from "@entities/platform";
-import clsx from "clsx";
-import { MultiPostsList } from "../multiPostsList";
-import { PlatformFilter, TypeTabs, PostTypesTabs } from "../tabs";
-import { checkPosts, renderEditor } from "../functions";
+import {
+  ContentType,
+  CreatePostFormData,
+  ICreatePostForm,
+  IManagerOrderPost,
+  IPostChannel,
+  IPostData,
+  POST,
+  PostFormats,
+} from "@entities/project";
 import {
   AddFiles,
   AddMediaFiles,
@@ -26,15 +28,7 @@ import {
   PostFiles,
   PostGeneration,
 } from "@features/createOrder";
-import {
-  CreatePostFormData,
-  ICreatePostForm,
-  IManagerOrderPost,
-  IPostChannel,
-  POST,
-  PostFormats,
-} from "@entities/project";
-import { ICreateOrderBlur } from "@widgets/createOrder/config";
+import { PostIcon } from "@shared/assets";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -42,9 +36,16 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@shared/ui";
-import { PostIcon } from "@shared/assets";
+import { ICreateOrderBlur } from "@widgets/createOrder/config";
+import clsx from "clsx";
 import { X } from "lucide-react";
-import { useWindowWidth } from "@shared/hooks";
+import { FC, useEffect } from "react";
+import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { checkPosts, renderEditor } from "../functions";
+import { MultiPostsList } from "../multiPostsList";
+import { PlatformFilter, PostTypesTabs, TypeTabs } from "../tabs";
+import styles from "./styles.module.scss";
 
 interface CreateOrderPostProps {
   cards: IPostChannel[];
@@ -54,6 +55,17 @@ interface CreateOrderPostProps {
   setValue: UseFormSetValue<ICreatePostForm>;
   getValues: UseFormGetValues<ICreatePostForm>;
   formState: ICreatePostForm;
+}
+
+async function downloadFile(url: string, fileName: string): Promise<File> {
+  const response = await fetch(url);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch file: ${response.statusText}`);
+  }
+
+  const blob = await response.blob();
+  const file = new File([blob], fileName, { type: blob.type });
+  return file;
 }
 
 export const CreateOrderPost: FC<CreateOrderPostProps> = ({
@@ -66,73 +78,126 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
   formState,
 }) => {
   const { t } = useTranslation();
-  const screen = useWindowWidth();
-
   // сразу сохраняем все ордеры в форму posts с учетом платформы и post_type
-  // useEffect(() => {
-  //   const allPostsUniversal = cards.reduce(
-  //     (
-  //       acc: { platform: platformTypesNum; post_type: PostTypesNum }[],
-  //       card
-  //     ) => {
-  //       const exists = acc.find(
-  //         (post) =>
-  //           post?.platform === card?.platform &&
-  //           post?.post_type === card?.post_type
-  //       );
-  //       if (!exists) {
-  //         acc.push({
-  //           platform: card?.platform,
-  //           post_type: card?.post_type,
-  //         });
-  //       }
-  //       return acc;
-  //     },
-  //     []
-  //   );
-  //   setValue("posts", allPostsUniversal);
-  //   const allPosts = cards.map((card) => ({
-  //     platform: card?.platform,
-  //     post_type: card?.post_type,
-  //     order_id: card?.id,
-  //   }));
-  //   setValue("multiposts", allPosts);
-  // }, []);
+  useEffect(() => {
+    const allPostsUniversal = cards.reduce(
+      (
+        acc: { platform: platformTypesNum; post_type: PostTypesNum }[],
+        card,
+      ) => {
+        const exists = acc.find(
+          (post) =>
+            post?.platform === card?.platform &&
+            post?.post_type === card?.post_type,
+        );
+        if (!exists) {
+          acc.push({
+            platform: card?.platform,
+            post_type: card?.post_type,
+          });
+        }
+        return acc;
+      },
+      [],
+    );
+    setValue("posts", allPostsUniversal);
+    const allPosts = cards.map((card) => ({
+      platform: card?.platform,
+      post_type: card?.post_type,
+      order_id: card?.id,
+    }));
+    setValue("multiposts", allPosts);
+  }, []);
 
-  // useEffect(() => {
-  //   if (posts?.length) {
-  //     const allPostsUniversal = posts.filter((post) => {
-  //       post.match_type === MatchTypesNum.universal
-  //     })
-  //     // const allPostsUniversal = cards.reduce(
-  //     //   (
-  //     //     acc: { platform: platformTypesNum; post_type: PostTypesNum }[],
-  //     //     card
-  //     //   ) => {
-  //     //     const exists = acc.find(
-  //     //       (post) =>
-  //     //         post?.platform === card?.platform &&
-  //     //         post?.post_type === card?.post_type
-  //     //     );
-  //     //     if (!exists) {
-  //     //       acc.push({
-  //     //         platform: card?.platform,
-  //     //         post_type: card?.post_type,
-  //     //       });
-  //     //     }
-  //     //     return acc;
-  //     //   },
-  //     //   []
-  //     // );
-  //     setValue("posts", allPostsUniversal);
-  //     const allPosts = cards.map((card) => ({
-  //       platform: card?.platform,
-  //       post_type: card?.post_type,
-  //       order_id: card?.id,
-  //     }));
-  //     setValue("multiposts", allPosts);
-  //   };
-  // }, [posts]);
+  const downloadAllFiles = async (backFiles: IPostData[]) => {
+    const promises: Promise<File>[] = backFiles.map((file) =>
+      downloadFile(file.url, file.content),
+    );
+    return await Promise.all(promises);
+  };
+
+  // если есть посты на стороне бека то они заполнятся внутрь формы
+  useEffect(() => {
+    if (
+      posts?.length &&
+      (formState?.posts?.length || formState?.multiposts?.length)
+    ) {
+      const universalOrders = posts.filter(
+        (post) => post.match_type === MatchTypesNum.universal,
+      );
+      const uniqueOrders = posts.filter(
+        (post) => post.match_type === MatchTypesNum.unique,
+      );
+      const isMultiPost = !!uniqueOrders?.length;
+      setValue("isMultiPost", isMultiPost);
+      if (universalOrders?.length) {
+        const processUniversalPosts = async () => {
+          const checkUniversalPosts = await Promise.all(
+            (formState?.posts || [])?.map(async (formPost) => {
+              const backPost = posts.find(
+                (post) => post.match_type === MatchTypesNum.universal,
+              );
+              console.log(6666, backPost);
+
+              const backFiles = backPost?.files?.filter(
+                (el) => el?.content_type === ContentType.file,
+              );
+              const backMedia = backPost?.files?.filter((el) =>
+                [ContentType.photo, ContentType.video].includes(
+                  el?.content_type,
+                ),
+              );
+
+              let files: File[] | undefined;
+              let media: File[] | undefined;
+
+              if (backFiles?.length) {
+                files = await downloadAllFiles(backFiles);
+              }
+              if (backMedia?.length) {
+                media = await downloadAllFiles(backMedia);
+              }
+
+              return {
+                ...formPost,
+                text: backPost?.files?.filter(
+                  (el) => el?.content_type === ContentType.text,
+                ),
+                files: files,
+                media: media,
+                buttons: backPost?.files?.filter(
+                  (el) => el?.content_type === ContentType.button,
+                ),
+                comment: backPost?.comment,
+              };
+            }),
+          );
+
+          setValue("posts", checkUniversalPosts); // Устанавливаем данные после завершения всех операций
+          console.log("checkUniversalPosts", checkUniversalPosts);
+        };
+
+        processUniversalPosts();
+      } else if (uniqueOrders?.length) {
+        // const checkUniquePosts = formState?.multiposts?.map((formPost) => {
+        //   if (uniqueOrders?.includes(formPost?.order_id || "")) {
+        //     const backPost = posts.find(
+        //       (post) => post.match_type === MatchTypesNum.unique
+        //     );
+        //     return {
+        //       ...formPost,
+        //       ...backPost,
+        //     };
+        //   }
+        //   return formPost;
+        // });
+        // setValue("multiposts", checkUniquePosts);
+      }
+
+      // console.log(checkUniquePosts);
+      // console.log(checkUniversalPosts);
+    }
+  }, [posts?.length, formState?.posts?.length, formState?.multiposts?.length]);
 
   const platformIds: number[] = [
     ...new Set(cards?.map((card) => card?.platform)),
@@ -166,7 +231,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
       cards,
     );
   };
-
+  console.log("formState", formState);
   return (
     <div id="post" className={`container ${isBlur ? "blur" : ""}`}>
       <div className={styles.wrapper}>
@@ -245,7 +310,6 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                         ? CreatePostFormData.multiposts
                         : CreatePostFormData.posts
                     }
-                    screen={screen}
                   />
                   {formState.platformFilter?.type ===
                     platformTypesStr.telegram && (
@@ -334,9 +398,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                       </div>
                     </div>
                   </AlertDialogTrigger>
-                  <AlertDialogContent
-                    className={`max-w-[300px] gap-0 bg-transparent grid items-center justify-center shadow-none border-0 ${screen > 475 ? "w-[50vw]" : "w-[60vw]"}`}
-                  >
+                  <AlertDialogContent className={styles.content}>
                     <AlertDialogTitle className="sr-only"></AlertDialogTitle>
                     <div className="relative">
                       <AlertDialogAction>

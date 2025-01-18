@@ -1,22 +1,23 @@
-import { AddIcon, CancelIcon2 } from "@shared/assets";
-import {
-  AlertDialog,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-  MyButton,
-} from "@shared/ui";
-import { FC, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import { UseFormSetValue } from "react-hook-form";
 import {
   ContentType,
   CreatePostFormData,
   ICreatePostForm,
   ITgButton,
 } from "@entities/project";
+import { AddIcon, CancelIcon2 } from "@shared/assets";
+import {
+  AlertDialog,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+  MyButton,
+} from "@shared/ui";
+import { FC, useEffect, useState } from "react";
+import { UseFormSetValue } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 interface PostButtonsProps {
   setValue: UseFormSetValue<ICreatePostForm>;
@@ -33,7 +34,7 @@ export const PostButtons: FC<PostButtonsProps> = ({
 }) => {
   const { t } = useTranslation();
 
-  const posts = formState?.selectedMultiPostId
+  const postsWithoutCurrent = formState?.selectedMultiPostId
     ? formState?.multiposts?.filter(
         (item) => item?.order_id !== formState?.selectedMultiPostId,
       ) || []
@@ -56,10 +57,8 @@ export const PostButtons: FC<PostButtonsProps> = ({
         platform: platformId,
       };
 
-  const currentButtons: ITgButton[] = currentPost?.buttons || [];
-
   const [buttons, setButtons] = useState<ITgButton[]>(
-    currentButtons ? currentButtons : [],
+    currentPost?.buttons || [],
   );
   const [button, setButton] = useState<ITgButton>({
     content_type: ContentType.button,
@@ -68,21 +67,13 @@ export const PostButtons: FC<PostButtonsProps> = ({
   });
 
   useEffect(() => {
-    const currentPost = formState?.selectedMultiPostId
-      ? formState?.multiposts?.find(
-          (item) => item?.order_id === formState?.selectedMultiPostId,
-        )
-      : formState?.posts?.find(
-          (item) =>
-            item?.platform === platformId &&
-            item?.post_type === formState?.selectedPostType,
-        ) || {
-          platform: platformId,
-        };
-
-    const currentButtons: ITgButton[] = currentPost?.buttons || [];
-    setButtons(currentButtons);
-  }, [formState?.isMultiPost, formState?.selectedMultiPostId]);
+    setButtons(currentPost?.buttons || []);
+  }, [
+    formState?.isMultiPost,
+    formState?.selectedMultiPostId,
+    formState?.posts,
+    formState?.multiposts,
+  ]);
 
   const handleOnChange = (type: keyof ITgButton, value: string) => {
     setButton((prevState) => ({
@@ -99,7 +90,7 @@ export const PostButtons: FC<PostButtonsProps> = ({
 
     if (currentPost) {
       currentPost.buttons = [...buttons, button];
-      setValue(type, [...posts, currentPost]);
+      setValue(type, [...postsWithoutCurrent, currentPost]);
     }
   };
 
@@ -108,95 +99,92 @@ export const PostButtons: FC<PostButtonsProps> = ({
 
     if (currentPost) {
       currentPost.buttons = [...buttons.filter((item) => item !== button)];
-      setValue(type, [...posts, currentPost]);
+      setValue(type, [...postsWithoutCurrent, currentPost]);
     }
   };
 
   return (
-    <>
-      <AlertDialog>
-        <AlertDialogTrigger>
-          <div className={`${styles.open} button`}>
-            <div className={styles.icon}>
-              <AddIcon />
-            </div>
-            <p className="truncate">
+    <AlertDialog>
+      <AlertDialogTrigger>
+        <div className={`${styles.open} button`}>
+          <div className={styles.icon}>
+            <AddIcon />
+          </div>
+          <p className="truncate">
+            {t("create_order.create.add_button.title")}
+          </p>
+        </div>
+      </AlertDialogTrigger>
+      <AlertDialogContent>
+        <AlertDialogDescription className="sr-only"></AlertDialogDescription>
+        <div className={styles.modalContent}>
+          <div className={styles.top}>
+            <AlertDialogTitle className={styles.title}>
               {t("create_order.create.add_button.title")}
-            </p>
+            </AlertDialogTitle>
+            <AlertDialogCancel>
+              <CancelIcon2 />
+            </AlertDialogCancel>
           </div>
-        </AlertDialogTrigger>
-        <AlertDialogContent>
-          <div className={styles.modalContent}>
-            <div className={styles.top}>
-              <AlertDialogTitle className={styles.title}>
-                {t("create_order.create.add_button.title")}
-              </AlertDialogTitle>
-              <AlertDialogCancel>
-                <CancelIcon2 />
-              </AlertDialogCancel>
-            </div>
 
-            <div className={styles.inputs}>
-              <div>
-                <p>{t("create_order.create.add_button.name.title")}</p>
-                <input
-                  id="nameInput"
-                  type="text"
-                  placeholder={t(
-                    "create_order.create.add_button.name.default_value",
-                  )}
-                  onChange={(e) => handleOnChange("content", e.target.value)}
-                />
-              </div>
-              <div>
-                <p>{t("create_order.create.add_button.link.title")}</p>
-                <input
-                  id="linkInput"
-                  type="text"
-                  placeholder={t(
-                    "create_order.create.add_button.link.default_value",
-                  )}
-                  onChange={(e) => handleOnChange("url", e.target.value)}
-                />
-              </div>
+          <div className={styles.inputs}>
+            <div>
+              <p>{t("create_order.create.add_button.name.title")}</p>
+              <input
+                id="nameInput"
+                type="text"
+                placeholder={t(
+                  "create_order.create.add_button.name.default_value",
+                )}
+                onChange={(e) => handleOnChange("content", e.target.value)}
+              />
             </div>
-            <MyButton
-              onClick={handleAddButton}
-              className={
-                buttons.length === 3 ||
-                button.content === "" ||
-                button.url === ""
-                  ? "deactive"
-                  : ""
-              }
-            >
-              <p>{t("create_order.create.add_button.add_button")}</p>
-            </MyButton>
-            <div
-              className={`${styles.all__buttons} ${buttons.length ? "" : styles.zero}`}
-            >
-              {buttons.length ? (
-                buttons.map((button, index) => (
-                  <div className={styles.row__button} key={index}>
-                    <div>
-                      <span>№ {index + 1}</span>
-                      <p>
-                        {t("create_order.create.add_button.button")} "
-                        {button?.content}"
-                      </p>
-                    </div>
-                    <button onClick={() => handleRemoveButton(button)}>
-                      <CancelIcon2 />
-                    </button>
-                  </div>
-                ))
-              ) : (
-                <big>{t("create_order.create.add_button.zero")}</big>
-              )}
+            <div>
+              <p>{t("create_order.create.add_button.link.title")}</p>
+              <input
+                id="linkInput"
+                type="text"
+                placeholder={t(
+                  "create_order.create.add_button.link.default_value",
+                )}
+                onChange={(e) => handleOnChange("url", e.target.value)}
+              />
             </div>
           </div>
-        </AlertDialogContent>
-      </AlertDialog>
-    </>
+          <MyButton
+            onClick={handleAddButton}
+            className={
+              buttons.length === 3 || button.content === "" || button.url === ""
+                ? "deactive"
+                : ""
+            }
+          >
+            <p>{t("create_order.create.add_button.add_button")}</p>
+          </MyButton>
+          <div
+            className={`${styles.all__buttons} ${buttons.length ? "" : styles.zero}`}
+          >
+            {buttons.length ? (
+              buttons.map((button, index) => (
+                <div className={styles.row__button} key={index}>
+                  <div>
+                    <span>№ {index + 1}</span>
+                    <p>
+                      {t("create_order.create.add_button.button")} "
+                      {button?.content}"
+                    </p>
+                  </div>
+                  <button onClick={() => handleRemoveButton(button)}>
+                    <CancelIcon2 />
+                  </button>
+                </div>
+              ))
+            ) : (
+              <big>{t("create_order.create.add_button.zero")}</big>
+            )}
+          </div>
+        </div>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };
