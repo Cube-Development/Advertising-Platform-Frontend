@@ -47,11 +47,13 @@ jobs:
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           port: 22
           script: |
-            # Создание .env файла с использованием переменных окружения GitHub Secrets
-            echo "REACT_APP_BACKEND_URL=${{ secrets.VITE_BASE_URL }}" > /path/to/project/.env
-            echo "REACT_APP_WS_URL=${{ secrets.VITE_BASE_WS_URL }}" >> /path/to/project/.env
-            echo "VITE_APP_ENV=${{ secrets.VITE_APP_ENV }}" >> /path/to/project/.env
+            # Создаем .env файл с переменными окружения из GitHub Secrets
+            echo "VITE_BASE_URL=${{ secrets.VITE_BASE_URL }}" > /path/to/project/.env
+            echo "VITE_BASE_WS_URL=${{ secrets.VITE_BASE_WS_URL }}" >> /path/to/project/.env
             # Дополнительно добавь другие переменные окружения, если нужно
+
+            # Проверим, что файл .env был создан
+            cat /path/to/project/.env
 
             # Обновление Docker контейнера
             docker stop test-app || true
