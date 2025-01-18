@@ -7,9 +7,19 @@ ARG VITE_APP_ENV
 FROM node:18-alpine3.17 as build
 
 # Устанавливаем переменные окружения из build-аргументов
-ENV VITE_BASE_URL=$VITE_BASE_URL
-ENV VITE_BASE_WS_URL=$VITE_BASE_WS_URL
-ENV VITE_APP_ENV=$VITE_APP_ENV
+# ENV VITE_BASE_URL=$VITE_BASE_URL
+# ENV VITE_BASE_WS_URL=$VITE_BASE_WS_URL
+# ENV VITE_APP_ENV=$VITE_APP_ENV
+
+# Залогируем значения переменных окружения перед записью в .env
+RUN echo "VITE_BASE_URL=$VITE_BASE_URL" && \
+    echo "VITE_BASE_WS_URL=$VITE_BASE_WS_URL" && \
+    echo "VITE_APP_ENV=$VITE_APP_ENV"
+
+# Создаем .env файл с переменными
+RUN echo "VITE_BASE_URL=$VITE_BASE_URL" > .env && \
+    echo "VITE_BASE_WS_URL=$VITE_BASE_WS_URL" >> .env && \
+    echo "VITE_APP_ENV=$VITE_APP_ENV" >> .env
 
 WORKDIR /app
 COPY . /app
@@ -28,6 +38,9 @@ COPY nginx.conf /etc/nginx/sites-enabled/default
 
 # Копируем собранные файлы из первой стадии сборки
 COPY --from=build /app/dist /var/www/html
+
+# Проверим, что файл .env был создан
+RUN cat /var/www/html/.env
 
 # Открываем порт для веб-сервера
 EXPOSE 80
