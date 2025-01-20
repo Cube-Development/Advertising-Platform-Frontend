@@ -68,7 +68,7 @@ export const AddFiles: FC<FileProps> = ({ onChange, currentFiles }) => {
               <div className={styles.item__left}>
                 <FileIcon />
                 <div className={styles.item__text}>
-                  <p>{file?.name}</p>
+                  <p className="truncate">{file?.name}</p>
                   <span>{formatFileSize(file?.size)}</span>
                 </div>
               </div>
