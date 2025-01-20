@@ -1,10 +1,10 @@
-import { FC, useEffect } from "react";
-import styles from "./styles.module.scss";
-import { useTranslation } from "react-i18next";
-import { UseFormSetValue } from "react-hook-form";
-import { ICreatePostForm, PostFormats } from "@entities/project";
-import { platformTypes } from "@entities/platform";
 import { IChannelLink } from "@entities/channel";
+import { platformTypes } from "@entities/platform";
+import { ICreatePostForm, PostFormats } from "@entities/project";
+import { FC, useEffect } from "react";
+import { UseFormSetValue } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 interface PlatformFilterProps {
   platforms: number[];
