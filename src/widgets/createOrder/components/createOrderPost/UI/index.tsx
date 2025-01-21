@@ -84,12 +84,12 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
     const allPostsUniversal = cards.reduce(
       (
         acc: { platform: platformTypesNum; post_type: PostTypesNum }[],
-        card
+        card,
       ) => {
         const exists = acc.find(
           (post) =>
             post?.platform === card?.platform &&
-            post?.post_type === card?.post_type
+            post?.post_type === card?.post_type,
         );
         if (!exists) {
           acc.push({
@@ -99,7 +99,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
         }
         return acc;
       },
-      []
+      [],
     );
     setValue("posts", allPostsUniversal);
     const allPosts = cards.map((card) => ({
@@ -112,7 +112,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
 
   const downloadAllFiles = async (backFiles: IPostData[]) => {
     const promises: Promise<File>[] = backFiles.map((file) =>
-      downloadFile(file.url, file.content)
+      downloadFile(file.url, file.content),
     );
     return await Promise.all(promises);
   };
@@ -125,10 +125,10 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
       (formState?.posts?.length || formState?.multiposts?.length)
     ) {
       const universalOrders = posts.filter(
-        (post) => post.match_type === MatchTypesNum.universal
+        (post) => post.match_type === MatchTypesNum.universal,
       );
       const uniqueOrders = posts.filter(
-        (post) => post.match_type === MatchTypesNum.unique
+        (post) => post.match_type === MatchTypesNum.unique,
       );
       const isMultiPost = !!uniqueOrders?.length;
       setValue("isMultiPost", isMultiPost);
@@ -139,20 +139,20 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
           const textDataUpdatedPosts = (formState?.posts || []).map(
             (formPost) => {
               const backPost = posts.find(
-                (post) => post.match_type === MatchTypesNum.universal
+                (post) => post.match_type === MatchTypesNum.universal,
               );
 
               return {
                 ...formPost,
                 text: backPost?.files?.filter(
-                  (el) => el?.content_type === ContentType.text
+                  (el) => el?.content_type === ContentType.text,
                 ),
                 buttons: backPost?.files?.filter(
-                  (el) => el?.content_type === ContentType.button
+                  (el) => el?.content_type === ContentType.button,
                 ),
                 comment: backPost?.comment,
               };
-            }
+            },
           );
 
           setValue("posts", textDataUpdatedPosts); // Устанавливаем текстовые данные
@@ -161,16 +161,16 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
           const postsWithFiles = await Promise.all(
             textDataUpdatedPosts.map(async (formPost) => {
               const backPost = posts.find(
-                (post) => post.match_type === MatchTypesNum.universal
+                (post) => post.match_type === MatchTypesNum.universal,
               );
 
               const backFiles = backPost?.files?.filter(
-                (el) => el?.content_type === ContentType.file
+                (el) => el?.content_type === ContentType.file,
               );
               const backMedia = backPost?.files?.filter((el) =>
                 [ContentType.photo, ContentType.video].includes(
-                  el?.content_type
-                )
+                  el?.content_type,
+                ),
               );
 
               let files: File[] | undefined;
@@ -188,7 +188,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                 files: files,
                 media: media,
               };
-            })
+            }),
           );
 
           setValue("posts", postsWithFiles); // Устанавливаем данные с файлами
@@ -206,21 +206,21 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                 (post) =>
                   post.match_type === MatchTypesNum.unique &&
                   !!post.orders.find(
-                    (order) => order.order_id === formPost.order_id
-                  )
+                    (order) => order.order_id === formPost.order_id,
+                  ),
               );
 
               return {
                 ...formPost,
                 text: backPost?.files?.filter(
-                  (el) => el?.content_type === ContentType.text
+                  (el) => el?.content_type === ContentType.text,
                 ),
                 buttons: backPost?.files?.filter(
-                  (el) => el?.content_type === ContentType.button
+                  (el) => el?.content_type === ContentType.button,
                 ),
                 comment: backPost?.comment,
               };
-            }
+            },
           );
 
           setValue("multiposts", textDataUpdatedMultiposts); // Устанавливаем текстовые данные
@@ -232,17 +232,17 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                 (post) =>
                   post.match_type === MatchTypesNum.unique &&
                   !!post.orders.find(
-                    (order) => order.order_id === formPost.order_id
-                  )
+                    (order) => order.order_id === formPost.order_id,
+                  ),
               );
 
               const backFiles = backPost?.files?.filter(
-                (el) => el?.content_type === ContentType.file
+                (el) => el?.content_type === ContentType.file,
               );
               const backMedia = backPost?.files?.filter((el) =>
                 [ContentType.photo, ContentType.video].includes(
-                  el?.content_type
-                )
+                  el?.content_type,
+                ),
               );
 
               let files: File[] | undefined;
@@ -260,7 +260,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                 files: files,
                 media: media,
               };
-            })
+            }),
           );
 
           setValue("multiposts", multipostsWithFiles); // Устанавливаем данные с файлами
@@ -275,15 +275,15 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
 
   const cardsIds: number[] = [...new Set(cards?.map((card) => card?.platform))];
   const platformTypesIds: number[] = platformTypes.map(
-    (platform) => platform?.id
+    (platform) => platform?.id,
   );
   const platformIds: number[] = platformTypesIds.filter((el) =>
-    cardsIds.includes(el)
+    cardsIds.includes(el),
   );
 
   const postFormats = cards?.reduce((acc, order) => {
     const platformIndex = acc.findIndex(
-      (item) => item.platform === order.platform
+      (item) => item.platform === order.platform,
     );
     if (platformIndex > -1) {
       const existingPlatform = acc[platformIndex];
@@ -307,10 +307,10 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
       platformIds,
       postFormats,
       formState.platformFilter,
-      cards
+      cards,
     );
   };
-  // console.log("formState", formState);
+  console.log("formState", formState);
   return (
     <div id="post" className={`container ${isBlur ? "blur" : ""}`}>
       <div className={styles.wrapper}>

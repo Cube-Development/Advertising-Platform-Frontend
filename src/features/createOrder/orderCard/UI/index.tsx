@@ -27,6 +27,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@shared/ui";
+import { formatDateToRuString } from "@shared/utils";
 import { X } from "lucide-react";
 import { FC, useEffect } from "react";
 import { UseFormSetValue } from "react-hook-form";
@@ -92,11 +93,11 @@ export const OrderCard: FC<PostPlatformProps> = ({
     if (dateList.length === 1) {
       delete currentCard.date_from;
       delete currentCard.date_to;
-      currentCard.date = dateList[0].toLocaleDateString();
+      currentCard.date = formatDateToRuString(dateList[0]);
     } else {
       delete currentCard.date;
-      currentCard.date_from = dateList[0].toLocaleDateString();
-      currentCard.date_to = dateList[1].toLocaleDateString();
+      currentCard.date_from = formatDateToRuString(dateList[0]);
+      currentCard.date_to = formatDateToRuString(dateList[1]);
     }
     datetime.orders = [...cardsWithoutCurrent, currentCard];
     setValue(CreatePostFormData.datetime, datetime);

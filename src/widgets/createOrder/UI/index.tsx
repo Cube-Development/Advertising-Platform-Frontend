@@ -96,7 +96,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
     { project_id: project_id || "" },
     {
       skip: !project_id,
-    }
+    },
   );
 
   const handleOnChangeBlur = (key: keyof ICreateOrderBlur) => {
@@ -170,7 +170,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
                       content_type: ContentType.file,
                       content: data.file_name,
                     });
-                  })
+                  }),
                 );
               }
               if (post?.media) {
@@ -194,10 +194,10 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
                       content_type: getContentType(media),
                       content: data.file_name,
                     });
-                  })
+                  }),
                 );
               }
-            })
+            }),
           );
         } else {
           await Promise.all(
@@ -232,7 +232,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
                       content_type: ContentType.file,
                       content: data.file_name,
                     });
-                  })
+                  }),
                 );
               }
               if (post?.media) {
@@ -256,10 +256,10 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
                       content_type: getContentType(media),
                       content: data.file_name,
                     });
-                  })
+                  }),
                 );
               }
-            })
+            }),
           );
         }
 
@@ -289,7 +289,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
                     setIsLoading(false);
                   });
               }
-            })
+            }),
           );
         } else {
           await Promise.all(
@@ -311,7 +311,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
                     setIsLoading(false);
                   });
               }
-            })
+            }),
           );
         }
 
