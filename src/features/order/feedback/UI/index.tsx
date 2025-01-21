@@ -11,6 +11,7 @@ import {
   DialogTitle,
   DialogTrigger,
   Drawer,
+  DrawerClose,
   DrawerContent,
   DrawerTrigger,
   useToast,
@@ -147,7 +148,7 @@ export const Feedback: FC<IOrderFeature> = ({ order_id }) => {
                   value={review}
                   maxLength={200}
                 />
-                <p
+                <DrawerClose
                   className={styles.comment__send_icon}
                   onClick={handleOnClick}
                 >
@@ -161,7 +162,7 @@ export const Feedback: FC<IOrderFeature> = ({ order_id }) => {
                   ) : (
                     <SendHorizonal />
                   )}
-                </p>
+                </DrawerClose>
               </div>
             </div>
           </DrawerContent>

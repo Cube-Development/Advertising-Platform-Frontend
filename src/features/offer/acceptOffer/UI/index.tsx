@@ -5,6 +5,7 @@ import {
   DialogTitle,
   DialogTrigger,
   Drawer,
+  DrawerClose,
   DrawerContent,
   DrawerTrigger,
   MyButton,
@@ -124,10 +125,10 @@ export const AcceptOffer: FC<IOrderFeature> = ({ order_id, dates }) => {
                         height={20}
                       />
                     ) : (
-                      <p className={styles.send__title}>
+                      <DialogClose className={styles.send__title}>
                         {t(`offer_btn.accept_date`)}
                         <SendHorizonal />
-                      </p>
+                      </DialogClose>
                     )}
                   </MyButton>
                 </div>
@@ -165,10 +166,10 @@ export const AcceptOffer: FC<IOrderFeature> = ({ order_id, dates }) => {
                         height={20}
                       />
                     ) : (
-                      <p className={styles.send__title}>
+                      <DrawerClose className={styles.send__title}>
                         {t(`offer_btn.accept_date`)}
                         <SendHorizonal />
-                      </p>
+                      </DrawerClose>
                     )}
                   </MyButton>
                 </div>

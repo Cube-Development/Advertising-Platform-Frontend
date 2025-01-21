@@ -46,6 +46,7 @@ import { checkPosts, renderEditor } from "../functions";
 import { MultiPostsList } from "../multiPostsList";
 import { PlatformFilter, PostTypesTabs, TypeTabs } from "../tabs";
 import styles from "./styles.module.scss";
+import { useWindowWidth } from "@shared/hooks";
 
 interface CreateOrderPostProps {
   cards: IPostChannel[];
@@ -78,6 +79,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
   formState,
 }) => {
   const { t } = useTranslation();
+  const screen = useWindowWidth();
   // сразу сохраняем все ордеры в форму posts с учетом платформы и post_type
   useEffect(() => {
     const allPostsUniversal = cards.reduce(
@@ -398,7 +400,9 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                       </div>
                     </div>
                   </AlertDialogTrigger>
-                  <AlertDialogContent className={styles.content}>
+                  <AlertDialogContent
+                    className={`max-w-[300px] gap-0 bg-transparent grid items-center justify-center shadow-none border-0 ${screen > 475 ? "w-[50vw]" : "w-[60vw]"}`}
+                  >
                     <AlertDialogTitle className="sr-only"></AlertDialogTitle>
                     <div className="relative">
                       <AlertDialogAction>
