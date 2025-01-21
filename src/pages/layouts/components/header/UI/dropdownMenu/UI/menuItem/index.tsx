@@ -120,6 +120,7 @@ export const MenuItem: React.FC<IMenuItems> = ({
                 <Link
                   to={paths.login}
                   className={`${styles.btns__login} truncate`}
+                  onClick={() => onChange("")}
                 >
                   {t("login")}
                   <LoginIcon />
@@ -127,6 +128,7 @@ export const MenuItem: React.FC<IMenuItems> = ({
                 <Link
                   to={paths.registration}
                   className={`${styles.btns__register} truncate`}
+                  onClick={() => onChange("")}
                 >
                   {t("registration")}
                 </Link>
@@ -150,36 +152,37 @@ export const MenuItem: React.FC<IMenuItems> = ({
             </AccordionTrigger>
           </Link>
         )}
-
-        <AccordionContent>
-          <ul>
-            {item.subItems?.map((subItem) => (
-              <Link
-                to={subItem.path!}
-                key={subItem.title}
-                onClick={() => onChange(item.item.path!)}
-              >
-                <li>
-                  <GripVertical width={20} height={20} stroke="#4772e6" />
-                  {t(subItem.title!)}
-                  {viewsInfo &&
-                    !!viewsInfo?.count &&
-                    !!viewsInfo?.values.find(
-                      (value) => subItem?.type === value?.type,
-                    )?.count && (
-                      <div className={styles.badge}>
-                        <span>
-                          {viewsInfo?.values.find(
-                            (value) => subItem?.type === value?.type,
-                          )?.count || 0}
-                        </span>
-                      </div>
-                    )}
-                </li>
-              </Link>
-            ))}
-          </ul>
-        </AccordionContent>
+        {item?.subItems && (
+          <AccordionContent>
+            <ul>
+              {item.subItems?.map((subItem) => (
+                <Link
+                  to={subItem.path!}
+                  key={subItem.title}
+                  onClick={() => onChange(item.item.path!)}
+                >
+                  <li>
+                    <GripVertical width={20} height={20} stroke="#4772e6" />
+                    {t(subItem.title!)}
+                    {viewsInfo &&
+                      !!viewsInfo?.count &&
+                      !!viewsInfo?.values.find(
+                        (value) => subItem?.type === value?.type,
+                      )?.count && (
+                        <div className={styles.badge}>
+                          <span>
+                            {viewsInfo?.values.find(
+                              (value) => subItem?.type === value?.type,
+                            )?.count || 0}
+                          </span>
+                        </div>
+                      )}
+                  </li>
+                </Link>
+              ))}
+            </ul>
+          </AccordionContent>
+        )}
       </div>
     </AccordionItem>
   );

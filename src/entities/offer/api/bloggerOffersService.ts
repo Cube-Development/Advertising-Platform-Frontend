@@ -9,18 +9,6 @@ import {
 } from "@shared/api";
 import { INTERSECTION_ELEMENTS, languagesNum } from "@shared/config";
 
-interface OrderDate {
-  date: string;
-}
-interface OrderDates {
-  date: [
-    {
-      date_from: string;
-      date_to: string;
-    },
-  ];
-}
-
 export interface getOrdersByStatusReq {
   language: languagesNum;
   page: number;
@@ -38,16 +26,6 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
         body: body,
       }),
       invalidatesTags: [BLOGGER_OFFERS, ADV_PROJECTS],
-    }),
-    checkOrderDates: build.mutation<
-      OrderDate | OrderDates,
-      { order_id: string }
-    >({
-      query: (params) => ({
-        url: `/order/check/dates`,
-        method: "GET",
-        params: params,
-      }),
     }),
     acceptOffer: build.mutation<{ success: boolean }, IOrderFeature>({
       query: (body) => ({
@@ -108,7 +86,6 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
 export const {
   useAcceptOfferMutation,
   useCancelOfferMutation,
-  useCheckOrderDatesMutation,
   usePublishPostBloggerMutation,
   useGetBloggerOrdersQuery,
 } = bloggerOffersAPI;
