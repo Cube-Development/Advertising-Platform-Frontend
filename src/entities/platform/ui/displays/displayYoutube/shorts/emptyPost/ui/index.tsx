@@ -1,7 +1,7 @@
 import { EyeDisabledIcon } from "@shared/assets";
 import { MyButton } from "@shared/ui";
-import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 export const EmptyPost = () => {
   const { t } = useTranslation();
@@ -16,7 +16,7 @@ export const EmptyPost = () => {
         <span>{t("create_order.create.post")}</span>
       </div>
       <div className={styles.bottom}>
-        <MyButton className={styles.button}>
+        <MyButton className={styles.button} type="button">
           <p className="gradient_color">{t("create_order.create.template")}</p>
         </MyButton>
         <div>
