@@ -361,12 +361,12 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
   return (
     <>
       {isLoading && <CreateOrderLoading />}
+      <CreateOrderTop
+        onChangeBlur={handleOnChangeBlur}
+        register={register}
+        getValues={getValues}
+      />
       <form onSubmit={handleSubmit(onSubmit)}>
-        <CreateOrderTop
-          onChangeBlur={handleOnChangeBlur}
-          register={register}
-          getValues={getValues}
-        />
         {isOrdersLoading ? (
           <div className="h-[80svh] w-full backdrop-blur-3xl flex justify-center items-center">
             <SpinnerLoader />

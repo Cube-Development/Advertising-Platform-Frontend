@@ -112,6 +112,18 @@ export const advProjectsAPI = authApi.injectEndpoints({
         method: "GET",
         params: params,
       }),
+      transformResponse: (response: getProjectOrdersRes) => {
+        const sortOrders = response?.orders?.sort((a, b) => {
+          if (a.platform !== b.platform) {
+            return a.platform - b.platform;
+          }
+          return a.post_type - b.post_type;
+        });
+        return {
+          ...response,
+          orders: sortOrders,
+        };
+      },
     }),
     createOrderDates: build.mutation<{ success: boolean }, ICreateDate>({
       query: (body) => ({
