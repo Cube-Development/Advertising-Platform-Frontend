@@ -11,6 +11,7 @@ import {
   AlertDialogTrigger,
   MyButton,
 } from "@shared/ui";
+import { formatRuStringToDate } from "@shared/utils";
 import { FC, useEffect, useState } from "react";
 import Calendar from "react-calendar";
 import { useTranslation } from "react-i18next";
@@ -38,16 +39,11 @@ export const CustomCalendar: FC<DateListProps> = ({ onChange, startDate }) => {
   });
   console.log("dateObject", dateObject);
 
-  const formatDate = (date: Date): string => {
+  const customStringDate = (date: Date): string => {
     const day = date.getDate();
     const month = date.getMonth() + 1;
     const year = date.getFullYear();
     return `${day}/${month}/${year}`;
-  };
-
-  const formatValidDate = (date: string): Date => {
-    const [day, month, year] = date.split(".");
-    return new Date(`${year}-${month}-${day}`);
   };
 
   // установка начальных временных интервалов если они приходят из бека
@@ -55,16 +51,16 @@ export const CustomCalendar: FC<DateListProps> = ({ onChange, startDate }) => {
     if (startDate) {
       if (Array.isArray(startDate)) {
         const validDates = startDate.map((dateString) => {
-          return formatValidDate(dateString);
+          return formatRuStringToDate(dateString);
         });
-        const formattedDates = validDates.map(formatDate);
+        const formattedDates = validDates.map(customStringDate);
         setDateObject({
           date: validDates,
           dateString: formattedDates,
         });
       } else {
-        const validDate = formatValidDate(startDate);
-        const formattedDate = formatDate(validDate);
+        const validDate = formatRuStringToDate(startDate);
+        const formattedDate = customStringDate(validDate);
         setDateObject({
           date: [validDate],
           dateString: [formattedDate],
@@ -75,10 +71,10 @@ export const CustomCalendar: FC<DateListProps> = ({ onChange, startDate }) => {
 
   const handleOnChange = (newDate: any) => {
     if (Array.isArray(newDate)) {
-      const newDateString = newDate.map((date: Date) => formatDate(date));
+      const newDateString = newDate.map((date: Date) => customStringDate(date));
       setDateObject({ date: newDate, dateString: newDateString });
     } else {
-      const newDateString = formatDate(newDate);
+      const newDateString = customStringDate(newDate);
       setDateObject({ date: [newDate], dateString: newDateString });
     }
   };

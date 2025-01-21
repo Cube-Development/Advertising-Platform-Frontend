@@ -6,6 +6,7 @@ import {
   DisplayVideos,
   MatchTypesNum,
   PostTypesNum,
+  platformTypes,
   platformTypesNum,
   platformTypesStr,
 } from "@entities/platform";
@@ -117,6 +118,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
     );
     return await Promise.all(promises);
   };
+  // console.log("posts", posts);
 
   // если есть посты на стороне бека то они заполнятся внутрь формы
   useEffect(() => {
@@ -132,14 +134,37 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
       );
       const isMultiPost = !!uniqueOrders?.length;
       setValue("isMultiPost", isMultiPost);
+
       if (universalOrders?.length) {
         const processUniversalPosts = async () => {
-          const checkUniversalPosts = await Promise.all(
-            (formState?.posts || [])?.map(async (formPost) => {
+          // Этап 1: Обработка текстовых данных
+          const textDataUpdatedPosts = (formState?.posts || []).map(
+            (formPost) => {
               const backPost = posts.find(
                 (post) => post.match_type === MatchTypesNum.universal,
               );
-              console.log(6666, backPost);
+
+              return {
+                ...formPost,
+                text: backPost?.files?.filter(
+                  (el) => el?.content_type === ContentType.text,
+                ),
+                buttons: backPost?.files?.filter(
+                  (el) => el?.content_type === ContentType.button,
+                ),
+                comment: backPost?.comment,
+              };
+            },
+          );
+
+          setValue("posts", textDataUpdatedPosts); // Устанавливаем текстовые данные
+
+          // Этап 2: Загрузка файлов
+          const postsWithFiles = await Promise.all(
+            textDataUpdatedPosts.map(async (formPost) => {
+              const backPost = posts.find(
+                (post) => post.match_type === MatchTypesNum.universal,
+              );
 
               const backFiles = backPost?.files?.filter(
                 (el) => el?.content_type === ContentType.file,
@@ -162,48 +187,102 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
 
               return {
                 ...formPost,
+                files: files,
+                media: media,
+              };
+            }),
+          );
+
+          setValue("posts", postsWithFiles); // Устанавливаем данные с файлами
+        };
+
+        processUniversalPosts();
+      }
+
+      if (uniqueOrders?.length) {
+        const processUniquePosts = async () => {
+          // Этап 1: Обработка текстовых данных
+          const textDataUpdatedMultiposts = (formState?.multiposts || []).map(
+            (formPost) => {
+              const backPost = posts.find(
+                (post) =>
+                  post.match_type === MatchTypesNum.unique &&
+                  !!post.orders.find(
+                    (order) => order.order_id === formPost.order_id,
+                  ),
+              );
+
+              return {
+                ...formPost,
                 text: backPost?.files?.filter(
                   (el) => el?.content_type === ContentType.text,
                 ),
-                files: files,
-                media: media,
                 buttons: backPost?.files?.filter(
                   (el) => el?.content_type === ContentType.button,
                 ),
                 comment: backPost?.comment,
               };
+            },
+          );
+
+          setValue("multiposts", textDataUpdatedMultiposts); // Устанавливаем текстовые данные
+
+          // Этап 2: Загрузка файлов
+          const multipostsWithFiles = await Promise.all(
+            textDataUpdatedMultiposts.map(async (formPost) => {
+              const backPost = posts.find(
+                (post) =>
+                  post.match_type === MatchTypesNum.unique &&
+                  !!post.orders.find(
+                    (order) => order.order_id === formPost.order_id,
+                  ),
+              );
+
+              const backFiles = backPost?.files?.filter(
+                (el) => el?.content_type === ContentType.file,
+              );
+              const backMedia = backPost?.files?.filter((el) =>
+                [ContentType.photo, ContentType.video].includes(
+                  el?.content_type,
+                ),
+              );
+
+              let files: File[] | undefined;
+              let media: File[] | undefined;
+
+              if (backFiles?.length) {
+                files = await downloadAllFiles(backFiles);
+              }
+              if (backMedia?.length) {
+                media = await downloadAllFiles(backMedia);
+              }
+
+              return {
+                ...formPost,
+                files: files,
+                media: media,
+              };
             }),
           );
 
-          setValue("posts", checkUniversalPosts); // Устанавливаем данные после завершения всех операций
-          console.log("checkUniversalPosts", checkUniversalPosts);
+          setValue("multiposts", multipostsWithFiles); // Устанавливаем данные с файлами
         };
 
-        processUniversalPosts();
-      } else if (uniqueOrders?.length) {
-        // const checkUniquePosts = formState?.multiposts?.map((formPost) => {
-        //   if (uniqueOrders?.includes(formPost?.order_id || "")) {
-        //     const backPost = posts.find(
-        //       (post) => post.match_type === MatchTypesNum.unique
-        //     );
-        //     return {
-        //       ...formPost,
-        //       ...backPost,
-        //     };
-        //   }
-        //   return formPost;
-        // });
-        // setValue("multiposts", checkUniquePosts);
+        processUniquePosts();
       }
-
-      // console.log(checkUniquePosts);
-      // console.log(checkUniversalPosts);
     }
   }, [posts?.length, formState?.posts?.length, formState?.multiposts?.length]);
 
-  const platformIds: number[] = [
-    ...new Set(cards?.map((card) => card?.platform)),
-  ];
+  console.log("formState.multiposts", formState?.multiposts);
+
+  const cardsIds: number[] = [...new Set(cards?.map((card) => card?.platform))];
+  const platformTypesIds: number[] = platformTypes.map(
+    (platform) => platform?.id,
+  );
+  const platformIds: number[] = platformTypesIds.filter((el) =>
+    cardsIds.includes(el),
+  );
+
   const postFormats = cards?.reduce((acc, order) => {
     const platformIndex = acc.findIndex(
       (item) => item.platform === order.platform,

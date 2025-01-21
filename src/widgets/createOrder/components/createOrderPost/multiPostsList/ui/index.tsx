@@ -1,14 +1,14 @@
-import { FC, useEffect, useRef } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import clsx from "clsx";
-import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { PostTypesNum, platformTypesNum } from "@entities/platform";
 import {
   ICreatePostForm,
   IPostChannel,
   platformToIcon,
 } from "@entities/project";
+import clsx from "clsx";
+import { FC, useEffect, useRef } from "react";
+import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 interface MultiPostsListProps {
   platform: platformTypesNum;
@@ -28,6 +28,7 @@ export const MultiPostsList: FC<MultiPostsListProps> = ({
   selectedPostType,
 }) => {
   const { t } = useTranslation();
+  // console.log("orders", orders, selectedPostType);
   const filteredPosts = orders?.filter(
     (order) =>
       order?.platform === platform && order?.post_type === selectedPostType,
@@ -40,10 +41,16 @@ export const MultiPostsList: FC<MultiPostsListProps> = ({
   }, [selectedPostType, platform]);
 
   const handleChangePost = (order_id: string) => {
+    if (!order_id) return;
     setValue("selectedMultiPostId", order_id);
     const multiPosts = getValues("multiposts") || [];
     const currentPost = multiPosts.find((post) => post?.order_id === order_id);
     if (!currentPost) {
+      console.log("multiPosts", multiPosts, {
+        order_id,
+        platform,
+        post_type: selectedPostType,
+      });
       setValue("multiposts", [
         ...multiPosts,
         { order_id, platform, post_type: selectedPostType },

@@ -135,7 +135,7 @@ export const AddMediaFiles: FC<FileProps> = ({ onChange, currentFiles }) => {
                   <FileIcon />
                   <div className={styles.item__text}>
                     {/* <p>{file?.name || file?.content}</p> */}
-                    <p>{file?.name}</p>
+                    <p className="truncate">{file?.name}</p>
                     <span>{file?.size && formatFileSize(file?.size)}</span>
                   </div>
                 </div>
