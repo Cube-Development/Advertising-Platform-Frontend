@@ -11,6 +11,8 @@ import {
   TechnicalSpecificationIcon,
 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
+import { useWindowWidth } from "@shared/hooks";
+import { contentTypeToExtension } from "@shared/types";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -29,8 +31,6 @@ import {
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { contentTypeToExtension } from "@shared/types";
-import { useWindowWidth } from "@shared/hooks";
 
 interface TechnicalSpecificationProps {
   isFull?: boolean;
@@ -44,12 +44,11 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
   SendToBotBtn,
 }) => {
   const { t } = useTranslation();
+  const { toast } = useToast();
   const screen = useWindowWidth();
   const [allFiles, setAllFiles] = useState<IDownloadFileType[]>(
     card.files || [],
   );
-
-  const { toast } = useToast();
 
   useEffect(() => {
     const fetchFileMetadata = async () => {
@@ -58,8 +57,12 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
           let filename = file.name;
           console.log("contentType", file);
           const response = await fetch(file.content, {
-            method: "HEAD",
+            method: "GET",
+            headers: {
+              Range: "bytes=0-0", // Запрашиваем только первые байты для метаданных
+            },
           });
+
           console.log("response", response);
           const contentType = response.headers.get("Content-Type");
           const extension =
@@ -179,7 +182,7 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
                             <div className={styles.left}>
                               <FileIcon />
                               <div className={styles.text}>
-                                <p>{file.fileName}</p>
+                                <p className="truncate">{file.fileName}</p>
                                 <span>
                                   {file.currentSize} {file.sizeType} /{" "}
                                   {file.fileSize} {file.sizeType}
@@ -263,7 +266,7 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
                             <div className={styles.left}>
                               <FileIcon />
                               <div className={styles.text}>
-                                <p>{file.fileName}</p>
+                                <p className="truncate">{file.fileName}</p>
                                 <span>
                                   {file.currentSize} {file.sizeType} /{" "}
                                   {file.fileSize} {file.sizeType}
