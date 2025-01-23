@@ -37,8 +37,15 @@ export const TarifParameters: ITarifParameter[] = [
 ];
 
 export enum tarifData {
+  // back  data
   tariff_ident = "tariff_ident",
   comment = "comment",
   links = "links",
   attached_files = "attached_files",
+  //front data
+  url = "url",
+  files = "files",
+  dragActive = "dragActive",
+  isTarifBought = "isTarifBought",
+  isHaveBalance = "isHaveBalance",
 }
