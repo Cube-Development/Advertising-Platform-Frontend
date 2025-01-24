@@ -122,9 +122,10 @@
     grid-template: min-content 1fr /1fr;
 
     @media (max-width: 768px) {
-      position: fixed;
-      width: inherit;
-      z-index: 10;
+      // position: fixed;
+      // width: inherit;
+      // z-index: 10;
+      height: 100svh;
     }
 
     .arrow {

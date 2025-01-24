@@ -15,11 +15,11 @@ export const renderEditor = ({
   setValue,
 }: RenderEditorProps) => {
   if (formState?.selectedMultiPostId) {
-    return formState?.multiposts?.map((post, index) =>
+    return formState?.multiposts?.map((post) =>
       post?.order_id === formState?.selectedMultiPostId &&
       post?.post_type === formState?.selectedPostType ? (
         <Editor
-          key={index}
+          key={`${post?.platform && post?.platform + post?.post_type}`}
           setValue={setValue}
           type={CreatePostFormData.multiposts}
           platformId={platformId}
@@ -28,10 +28,10 @@ export const renderEditor = ({
       ) : null,
     );
   } else {
-    return formState?.posts?.map((post, index) =>
+    return formState?.posts?.map((post) =>
       post?.post_type === formState?.selectedPostType ? (
         <Editor
-          key={index}
+          key={`${post?.platform && post?.platform + post?.post_type}`}
           setValue={setValue}
           type={CreatePostFormData.posts}
           platformId={platformId}

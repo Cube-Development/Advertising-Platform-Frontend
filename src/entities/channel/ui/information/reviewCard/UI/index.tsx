@@ -16,7 +16,7 @@ export const ReviewCard: FC<ReviewProps> = ({ card }) => {
             <div className={styles.logo}>
               <img src={card?.avatar} alt="" />
             </div>
-            <p>{card?.email}</p>
+            <p className="truncate">{card?.email}</p>
           </div>
           <span>{card?.date}</span>
         </div>
