@@ -65,14 +65,15 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
 
           console.log("response", response);
           const contentType = response.headers.get("Content-Type");
+          const size = response.headers.get("Content-Range")?.split("/")[1];
           const extension =
             contentTypeToExtension[contentType ? contentType : ""] || "";
           if (extension && !filename.endsWith(extension)) {
             filename += extension;
           }
 
-          const size = response.headers.get("Content-Length");
-          console.log("size", size);
+          // const size = response.headers.get("Content-Length");
+          // console.log("size", size, range);
           const [sizeString, sizeType] = formatFileSizeAndType(
             size ? parseInt(size) : 0,
           );
