@@ -27,6 +27,7 @@ import {
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
+  AlertDialogDescription,
   AlertDialogTitle,
   AlertDialogTrigger,
   Drawer,
@@ -153,6 +154,7 @@ export const Notifications: FC = () => {
                 </div>
               )}
             </AlertDialogTitle>
+            <AlertDialogDescription className="sr-only"></AlertDialogDescription>
             {data?.notifications?.length ? (
               <ScrollArea>
                 <div className={styles.notifications}>
