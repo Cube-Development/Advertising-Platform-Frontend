@@ -26,9 +26,11 @@ export const TelegramFile: FC<TelegramFileProps> = ({ file, fontSize }) => {
         {t("create_order.create.add_files.file.post_title")}
       </p>
       <div className={styles.content}>
-        <Paperclip />
+        <div>
+          <Paperclip />
+        </div>
         <p
-          className={styles.content__name}
+          className={`${styles.content__name} truncate`}
           style={{ fontSize: `${fontSize}px` }}
         >
           {file instanceof File ? file?.name : `File_1`}

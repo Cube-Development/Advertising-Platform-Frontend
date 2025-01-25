@@ -102,8 +102,8 @@ export const Notifications: FC = () => {
               },
               (draft) => {
                 Object.assign(draft, newNotifications);
-              }
-            )
+              },
+            ),
           );
         });
     }

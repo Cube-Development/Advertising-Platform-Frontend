@@ -29,6 +29,7 @@
   &.drawer {
     height: calc(var(--vh) * 100);
     width: 100vw;
+    overflow: auto;
 
     .close {
       top: 50%;
@@ -122,9 +123,6 @@
     grid-template: min-content 1fr /1fr;
 
     @media (max-width: 768px) {
-      // position: fixed;
-      // width: inherit;
-      // z-index: 10;
       height: 100svh;
     }
 
@@ -135,6 +133,7 @@
       align-items: center;
       justify-content: space-between;
       background: var(--Personal-colors-White);
+      backdrop-filter: blur(20px);
 
       p {
         display: flex;
@@ -216,7 +215,7 @@
         position: absolute;
         top: 50%;
         left: 14px;
-        padding: 5px;
+        padding: 7px;
         border-radius: 50%;
         transform: translateY(-50%);
 

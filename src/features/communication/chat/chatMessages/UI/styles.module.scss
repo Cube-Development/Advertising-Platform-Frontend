@@ -263,21 +263,21 @@
     }
   }
 
-  // .text {
-  //   max-height: 30svh;
-  //   outline: none;
-  //   padding: 8px;
-  //   border-radius: 10px;
-  //   background: var(--Blue-Grey-Blue-Grey-050, #f0f4f8);
-  //   width: 100%;
-  //   font-size: 16px;
-  //   height: 40px;
-  //   box-sizing: border-box;
+  .text {
+    max-height: 30svh;
+    outline: none;
+    padding: 8px;
+    border-radius: 10px;
+    background: var(--Blue-Grey-Blue-Grey-050, #f0f4f8);
+    width: 100%;
+    font-size: 16px;
+    height: 40px;
+    box-sizing: border-box;
 
-  //   &::placeholder {
-  //     font-size: 12px;
-  //   }
-  // }
+    &::placeholder {
+      font-size: 16px;
+    }
+  }
 
   .input {
     padding: 8px;

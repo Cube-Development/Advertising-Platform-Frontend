@@ -86,7 +86,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
 
   const debouncedPosition = useDebounce(
     lastMessageToRead?.message_date + " " + lastMessageToRead?.message_time,
-    DEBOUNCE.readMessage
+    DEBOUNCE.readMessage,
   );
 
   const limit = 4000;
@@ -128,7 +128,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
       {
         ...formFields,
       },
-      { skip: !!card?.project_id && !!card }
+      { skip: !!card?.project_id && !!card },
     );
 
   const { data: projectHistory, isFetching: isFetchingProject } =
@@ -136,7 +136,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
       {
         ...formFields,
       },
-      { skip: !!card?.order_id && !!card }
+      { skip: !!card?.order_id && !!card },
     );
 
   const data = card?.type === chatType.order ? orderHistory : projectHistory;
@@ -221,7 +221,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
     if (message?.recipient === RecipientType.receiver) {
       const datetime = convertUTCToLocalDateTime(
         message?.message_date,
-        message?.message_time
+        message?.message_time,
       );
       const newMessage: IMessageNewSocket = {
         ...message,
@@ -243,8 +243,8 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
             },
             (draft) => {
               Object.assign(draft, newHistory);
-            }
-          )
+            },
+          ),
         );
       } else if (
         message?.project_id &&
@@ -258,8 +258,8 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
             },
             (draft) => {
               Object.assign(draft, newHistory);
-            }
-          )
+            },
+          ),
         );
       }
       setIsNewMessage(true);
@@ -315,8 +315,8 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
             },
             (draft) => {
               Object.assign(draft, newHistory);
-            }
-          )
+            },
+          ),
         );
       } else if (card?.type === chatType.project) {
         dispatch(
@@ -327,8 +327,8 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
             },
             (draft) => {
               Object.assign(draft, newHistory);
-            }
-          )
+            },
+          ),
         );
       }
       editor?.commands.setContent("");
@@ -370,8 +370,8 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
               },
               (draft) => {
                 draft.history = newHistory;
-              }
-            )
+              },
+            ),
           );
           dispatch(
             chatAPI.util.updateQueryData(
@@ -385,15 +385,15 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
                       unread_count: newHistory.filter(
                         (item) =>
                           item?.status === MessageStatus.unread &&
-                          item.recipient === RecipientType.receiver
+                          item.recipient === RecipientType.receiver,
                       ).length,
                     };
                   }
                   return chat;
                 });
                 draft.splice(0, draft.length, ...newChatOrder);
-              }
-            )
+              },
+            ),
           );
         })
         .catch(() => {
@@ -431,8 +431,8 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
               },
               (draft) => {
                 draft.history = newHistory;
-              }
-            )
+              },
+            ),
           );
           dispatch(
             chatAPI.util.updateQueryData(
@@ -446,15 +446,15 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
                       unread_count: newHistory.filter(
                         (item) =>
                           item?.status === MessageStatus.unread &&
-                          item.recipient === RecipientType.receiver
+                          item.recipient === RecipientType.receiver,
                       ).length,
                     };
                   }
                   return chat;
                 });
                 draft.splice(0, draft.length, ...newChatOrder);
-              }
-            )
+              },
+            ),
           );
         })
         .catch(() => {
@@ -477,11 +477,11 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
     // console.log("Before cleaning:", message);
     let cleanedMessage = message?.replace(
       /^(<p>\s*(<br\s*\/?>\s*)+|(<br\s*\/?>\s*)+)/g,
-      "<p>"
+      "<p>",
     );
     cleanedMessage = cleanedMessage.replace(
       /((<br\s*\/?>\s*)+<\/p>\s*$|(<br\s*\/?>\s*)+\s*$)/g,
-      "</p>"
+      "</p>",
     );
     cleanedMessage = cleanedMessage.replace(/(<p>\s*<\/p>)+/g, "");
     if (/^<p>\s*<\/p>$/.test(cleanedMessage)) {
@@ -547,7 +547,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
         root: null,
         rootMargin: "0px",
         threshold: 1, // Срабатывает, когда 100% элемента видны
-      }
+      },
     );
 
     messagesRef.current.forEach((ref) => {
@@ -640,7 +640,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
                   isTimeDifferenceSmall = checkDatetimeDifference(
                     message?.message_datetime,
                     data.history[index + 1]?.message_datetime,
-                    2
+                    2,
                   );
                   isSameRecepient =
                     message?.recipient === data.history[index + 1]?.recipient;
@@ -728,7 +728,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
         <button>
           <AddIcon />
         </button>
-        <div className={`main_font ${styles.input} placeholder:truncate`}>
+        {/* <div className={`main_font ${styles.input} placeholder:truncate`}>
           {(newMessage === "" || newMessage === "<p></p>") && (
             <span className="truncate">{t("chat.new_message")}</span>
           )}
@@ -738,14 +738,14 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
             onKeyDown={handleKeyPress}
             className={styles.text}
           />
-        </div>
-        {/* <textarea
+        </div> */}
+        <textarea
           onChange={(e) => setNewMessage(e.target.value)}
           placeholder={t("chat.new_message")}
           className={styles.text}
           maxLength={limit}
           value={newMessage}
-        ></textarea> */}
+        ></textarea>
         <button onClick={handleSendMessage}>
           <SendIcon />
         </button>
