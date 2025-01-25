@@ -81,7 +81,7 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
       { ...formFields },
       {
         skip: role === roles.blogger,
-      }
+      },
     );
 
   const [channel, setChannel] = useState<IReadChannelData>(card!);
@@ -97,7 +97,7 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
   const [removeFromManagerCart] = useRemoveFromManagerCartMutation();
 
   const [selectedFormat, setSelectedFormat] = useState<IFormat | undefined>(
-    channel?.selected_format
+    channel?.selected_format,
   );
 
   useEffect(() => {
@@ -279,13 +279,13 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
     const cartChannel = { ...channel, selected_format: selectedFormat };
     handleChangeCards(
       cartChannel as unknown as ICatalogChannel,
-      currentCard as unknown as ICatalogChannel
+      currentCard as unknown as ICatalogChannel,
     );
   };
 
   const handleChangeRecommendCards = (cartChannel: ICatalogChannel) => {
     const currentCard = recomendCards?.channels?.find(
-      (card) => card.id === cartChannel?.id
+      (card) => card.id === cartChannel?.id,
     );
     console.log("handleChangeCartCards", currentCard);
     handleChangeCards(cartChannel, currentCard);
@@ -293,7 +293,7 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
 
   const handleChangeCards = (
     cartChannel: ICatalogChannel,
-    currentCard: ICatalogChannel | undefined
+    currentCard: ICatalogChannel | undefined,
   ) => {
     if (cartChannel?.selected_format && currentCard) {
       const addReq = {
@@ -412,8 +412,8 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
           { ...formFields },
           (draft) => {
             draft.channels = newCards;
-          }
-        )
+          },
+        ),
       );
     }
   };

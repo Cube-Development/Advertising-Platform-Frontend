@@ -1,3 +1,6 @@
+import type { PropsWithChildren } from "react";
+import { lazy, Suspense, useEffect } from "react";
+import { Footer } from "@pages/layouts/components";
 import { roles } from "@entities/user";
 import {
   useGetViewAdvertiserProjectQuery,
@@ -7,10 +10,13 @@ import {
   useGetViewTransactionsQuery,
 } from "@entities/views";
 import { useGetBalanceQuery, walletSlice } from "@entities/wallet";
-import { Footer, Header } from "@pages/layouts/components";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
-import type { PropsWithChildren } from "react";
-import { useEffect } from "react";
+
+const Header = lazy(() =>
+  import("@pages/layouts/components").then((module) => ({
+    default: module.Header,
+  })),
+);
 
 export const MainLayout = ({ children }: PropsWithChildren) => {
   const { isAuth, role } = useAppSelector((state) => state.user);
@@ -48,7 +54,9 @@ export const MainLayout = ({ children }: PropsWithChildren) => {
   return (
     <>
       <section className="main_layout">
-        <Header />
+        <Suspense fallback={<div>loading...</div>}>
+          <Header />
+        </Suspense>
         <main className="main">{children}</main>
         <Footer />
       </section>

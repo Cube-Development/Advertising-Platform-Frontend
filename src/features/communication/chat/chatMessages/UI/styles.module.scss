@@ -78,6 +78,7 @@
     .appendix {
       position: absolute;
       bottom: 0;
+
       svg {
         width: 7px;
         height: 17px;
@@ -130,6 +131,7 @@
     &.more {
       margin-bottom: 10px;
     }
+
     &.less {
       margin-bottom: 3px;
     }
@@ -167,6 +169,7 @@
 
       .read {
         --start-color: white;
+
         svg {
           height: 10px;
           width: auto;
@@ -231,6 +234,8 @@
   position: absolute;
   bottom: 0;
   left: 0;
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(20px);
 
   display: grid;
   grid-template: 1fr / minmax(10px, auto) 1fr minmax(10px, auto);
@@ -258,8 +263,24 @@
     }
   }
 
+  // .text {
+  //   max-height: 30svh;
+  //   outline: none;
+  //   padding: 8px;
+  //   border-radius: 10px;
+  //   background: var(--Blue-Grey-Blue-Grey-050, #f0f4f8);
+  //   width: 100%;
+  //   font-size: 16px;
+  //   height: 40px;
+  //   box-sizing: border-box;
+
+  //   &::placeholder {
+  //     font-size: 12px;
+  //   }
+  // }
+
   .input {
-    padding: 8px 16px;
+    padding: 8px;
     border-radius: 10px;
     background: var(--Blue-Grey-Blue-Grey-050, #f0f4f8);
     width: 100%;
@@ -273,7 +294,7 @@
       width: inherit;
       word-break: break-all;
       outline: none;
-      
+
       p {
         font-size: 16px;
         font-style: normal;
@@ -299,7 +320,7 @@
       position: absolute;
       top: 50%;
       transform: translateY(-50%);
-      left: 20px;
+      left: 14px;
       color: #999;
       font-size: 12px;
     }

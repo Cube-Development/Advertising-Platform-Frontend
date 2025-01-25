@@ -739,6 +739,13 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
             className={styles.text}
           />
         </div>
+        {/* <textarea
+          onChange={(e) => setNewMessage(e.target.value)}
+          placeholder={t("chat.new_message")}
+          className={styles.text}
+          maxLength={limit}
+          value={newMessage}
+        ></textarea> */}
         <button onClick={handleSendMessage}>
           <SendIcon />
         </button>
