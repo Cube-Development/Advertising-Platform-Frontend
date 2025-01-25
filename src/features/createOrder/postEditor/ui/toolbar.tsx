@@ -99,7 +99,7 @@ export const Toolbar: FC<ToolbarProps> = ({ editor }) => {
                 editor.chain().focus().toggleLink({ href: link }).run();
               }
             }}
-            className="rounded-r-[10px] bg-[#000] h-full p-2 w-16 flex center justify-center absolute top-0 right-0"
+            className="cursor-pointer rounded-r-[10px] bg-[#000] h-full p-2 w-16 flex center justify-center absolute top-0 right-0"
           >
             <Link className="h-5 w-10 text-white" />
           </div>

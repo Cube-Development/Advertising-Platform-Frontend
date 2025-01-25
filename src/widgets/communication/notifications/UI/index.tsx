@@ -38,7 +38,7 @@ import {
   ScrollArea,
 } from "@shared/ui";
 import { AnimatePresence, motion } from "framer-motion";
-import { FC, useState } from "react";
+import { FC, useRef, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -106,6 +106,27 @@ export const Notifications: FC = () => {
             ),
           );
         });
+    }
+  };
+
+  // drag & drop new feat
+  const [isDraggable, setIsDraggable] = useState(false); // Состояние для активации drag
+  const chatRef = useRef<HTMLDivElement | null>(null); // Ref для чата
+
+  const handleTouchStart = (event: React.TouchEvent) => {
+    // Получаем координату начала касания
+    const touchX = event.touches[0].clientX;
+
+    // Проверяем, находится ли касание в пределах 0-100px от левого края чата
+    if (chatRef.current) {
+      const chatLeft = chatRef.current.getBoundingClientRect().left; // Левый край чата
+      const touchOffset = touchX - chatLeft;
+
+      if (touchOffset >= 0 && touchOffset <= 80) {
+        setIsDraggable(true); // Активируем drag
+      } else {
+        setIsDraggable(false); // Отключаем drag
+      }
     }
   };
 
@@ -229,7 +250,7 @@ export const Notifications: FC = () => {
                   {!data?.isLast && !isFetching && (
                     <DinamicPagination onChange={handleChangePage} />
                   )}
-                  <AnimatePresence>
+                  {/* <AnimatePresence>
                     {currentNotification && (
                       <motion.div
                         initial="hidden"
@@ -243,6 +264,27 @@ export const Notifications: FC = () => {
                         onDragEnd={(event, info) => {
                           console.log(event, info);
                           if (info.offset.x > 100) handleClose(); // Если свайп вправо больше 100px, закрыть чат
+                        }}
+                      >
+                        <NotificationMessage card={currentNotification} />
+                      </motion.div>
+                    )}
+                  </AnimatePresence> */}
+                  <AnimatePresence>
+                    {currentNotification && (
+                      <motion.div
+                        ref={chatRef}
+                        initial="hidden"
+                        animate="visible"
+                        exit="hidden"
+                        transition={PAGE_ANIMATION.sideTransition.transition}
+                        variants={PAGE_ANIMATION.sideTransition}
+                        className={styles.message}
+                        drag={isDraggable ? "x" : false} // Включаем drag только если isDraggable === true
+                        dragConstraints={{ left: 0, right: 0 }}
+                        onTouchStart={(event) => handleTouchStart(event)} // Отслеживаем начало касания
+                        onDragEnd={(event, info) => {
+                          if (info.offset.x > 100) handleClose(); // Закрыть чат, если свайп вправо больше 100px
                         }}
                       >
                         <NotificationMessage card={currentNotification} />

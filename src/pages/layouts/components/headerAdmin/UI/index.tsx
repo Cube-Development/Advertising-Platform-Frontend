@@ -2,7 +2,6 @@ import {
   AdminChatIcon,
   AdminNotificationsIcon,
   AdminSearchIcon,
-  ArrowLongHorizontalIcon,
 } from "@shared/assets";
 import { AdminProfile } from "@shared/config";
 import { useAppSelector } from "@shared/hooks";

@@ -115,7 +115,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
     editorProps: {
       attributes: {
         class:
-          "h-full px-1 max-h-[100px] overflow-auto bg-transparent text-black focus:outline-none text-sm",
+          "main_font h-full px-1 max-h-[100px] overflow-auto bg-transparent text-black focus:outline-none text-base",
       },
     },
     onUpdate({ editor }) {
@@ -728,9 +728,9 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
         <button>
           <AddIcon />
         </button>
-        <div className={styles.input}>
+        {/* <div className={`main_font ${styles.input} placeholder:truncate`}>
           {(newMessage === "" || newMessage === "<p></p>") && (
-            <span>{t("chat.new_message")}</span>
+            <span className="truncate">{t("chat.new_message")}</span>
           )}
           <EditorContent
             editor={editor}
@@ -738,7 +738,14 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
             onKeyDown={handleKeyPress}
             className={styles.text}
           />
-        </div>
+        </div> */}
+        <textarea
+          onChange={(e) => setNewMessage(e.target.value)}
+          placeholder={t("chat.new_message")}
+          className={styles.text}
+          maxLength={limit}
+          value={newMessage}
+        ></textarea>
         <button onClick={handleSendMessage}>
           <SendIcon />
         </button>

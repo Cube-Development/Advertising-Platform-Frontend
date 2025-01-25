@@ -107,7 +107,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
       case "post":
         scroller.scrollTo("post", {
           smooth: true,
-          offset: screen > BREAKPOINT.MD ? -20 : -70,
+          offset: screen > BREAKPOINT.MD ? 0 : -60,
         });
         break;
       case "datetime":
@@ -119,7 +119,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
       case "payment":
         scroller.scrollTo("payment", {
           smooth: true,
-          offset: screen > BREAKPOINT.MD ? -20 : -60,
+          offset: screen > BREAKPOINT.MD ? 0 : -60,
         });
         break;
       default:

@@ -62,11 +62,12 @@ export const Editor: FC<EditorProps> = ({
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
-        paragraph: {
-          HTMLAttributes: {
-            class: "my-custom-paragraph",
-          },
-        },
+        // paragraph: {
+        //   HTMLAttributes: {
+        //     class: "my-custom-paragraph",
+        //   },
+        // },
+        paragraph: false,
       }),
       underline.configure({
         HTMLAttributes: {

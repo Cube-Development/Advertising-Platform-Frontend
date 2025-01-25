@@ -1,3 +1,8 @@
+import { AnimatePresence, motion } from "framer-motion";
+import { FC, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { ChatCard, ChatMessages } from "@features/communication";
+import { BarSubfilter } from "@features/other";
 import {
   chatAPI,
   chatType,
@@ -11,8 +16,6 @@ import {
   useGetProjectChatsQuery,
 } from "@entities/communication";
 import { roles } from "@entities/user";
-import { ChatCard, ChatMessages } from "@features/communication";
-import { BarSubfilter } from "@features/other";
 import {
   ArrowLongHorizontalIcon,
   CancelIcon2,
@@ -35,7 +38,6 @@ import {
   AlertDialogContent,
   AlertDialogTitle,
   AlertDialogTrigger,
-  DialogTitle,
   Drawer,
   DrawerClose,
   DrawerContent,
@@ -46,9 +48,6 @@ import {
   useToast,
 } from "@shared/ui";
 import { checkDatetime, convertUTCToLocalDateTime } from "@shared/utils";
-import { AnimatePresence, motion } from "framer-motion";
-import { FC, useEffect, useState } from "react";
-import { useTranslation } from "react-i18next";
 import { useCentrifuge } from "../CentrifugeContext";
 import styles from "./styles.module.scss";
 
@@ -284,6 +283,27 @@ export const Chat: FC<IChatProps> = ({
   OrderMessageNewChat(handleNewMessage);
   OrderReadMessage(handleReadMessage);
 
+  // drag & drop new feat
+  const [isDraggable, setIsDraggable] = useState(false); // Состояние для активации drag
+  const chatRef = useRef<HTMLDivElement | null>(null); // Ref для чата
+
+  const handleTouchStart = (event: React.TouchEvent) => {
+    // Получаем координату начала касания
+    const touchX = event.touches[0].clientX;
+
+    // Проверяем, находится ли касание в пределах 0-100px от левого края чата
+    if (chatRef.current) {
+      const chatLeft = chatRef.current.getBoundingClientRect().left; // Левый край чата
+      const touchOffset = touchX - chatLeft;
+
+      if (touchOffset >= 0 && touchOffset <= 80) {
+        setIsDraggable(true); // Активируем drag
+      } else {
+        setIsDraggable(false); // Отключаем drag
+      }
+    }
+  };
+
   return (
     <div className={styles.wrapper}>
       {screen >= BREAKPOINT.MD ? (
@@ -470,7 +490,7 @@ export const Chat: FC<IChatProps> = ({
                   <></>
                 )}
               </div>
-              <AnimatePresence>
+              {/* <AnimatePresence>
                 {currentChat && (
                   <motion.div
                     initial="hidden"
@@ -504,11 +524,55 @@ export const Chat: FC<IChatProps> = ({
                           </p>
                         </div>
                       </div>
+                      <div className={styles.arrow} onClick={handleCloseChat}>
+                        <ArrowLongHorizontalIcon className="icon__grey" />
+                      </div>
                     </div>
                     <ChatMessages card={currentChat} />
-                    <div className={styles.arrow} onClick={handleCloseChat}>
-                      <ArrowLongHorizontalIcon className="icon__grey" />
+                  </motion.div>
+                )}
+              </AnimatePresence> */}
+              <AnimatePresence>
+                {currentChat && (
+                  <motion.div
+                    ref={chatRef} // Привязываем ref к блоку чата
+                    initial="hidden"
+                    animate="visible"
+                    exit="hidden"
+                    transition={PAGE_ANIMATION.sideTransition.transition}
+                    variants={PAGE_ANIMATION.sideTransition}
+                    className={styles.content__right}
+                    drag={isDraggable ? "x" : false} // Включаем drag только если isDraggable === true
+                    dragConstraints={{ left: 0, right: 0 }}
+                    onTouchStart={(event) => handleTouchStart(event)} // Отслеживаем начало касания
+                    onDragEnd={(event, info) => {
+                      if (info.offset.x > 100) handleCloseChat(); // Закрыть чат, если свайп вправо больше 100px
+                    }}
+                  >
+                    <div className={styles.top}>
+                      <div className={styles.info}>
+                        <div className={styles.logo}>
+                          {currentChat?.order_id ? (
+                            <img src={currentChat?.avatar} alt="" />
+                          ) : (
+                            <div className={styles.icon}>
+                              <CubeDevelopmentIcon />
+                            </div>
+                          )}
+                        </div>
+                        <div className={styles.description}>
+                          <p>
+                            {currentChat.project_name
+                              ? `${t("chat.campaign")} ${currentChat.project_name} (${t("chat.channel")} ${currentChat.channel_name})`
+                              : t("chat.types.administration")}
+                          </p>
+                        </div>
+                      </div>
+                      <div className={styles.arrow} onClick={handleCloseChat}>
+                        <ArrowLongHorizontalIcon className="active__gradient__icon" />
+                      </div>
                     </div>
+                    <ChatMessages card={currentChat} />
                   </motion.div>
                 )}
               </AnimatePresence>
