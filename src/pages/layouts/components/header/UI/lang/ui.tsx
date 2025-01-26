@@ -2,7 +2,7 @@ import { Language, Languages } from "@shared/config/languages";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { useChangeLanguegeMutation } from "@entities/user";
+import { useChangeLanguageMutation } from "@entities/user";
 
 interface LangProps {
   isAuth: boolean;
@@ -36,13 +36,13 @@ export const Lang: FC<LangProps> = ({ isAuth }) => {
     };
   }, []);
 
-  const [changeLanguege] = useChangeLanguegeMutation();
+  const [changeLanguage] = useChangeLanguageMutation();
 
   const handleLanguageSelect = (lang: Language) => {
     i18n.changeLanguage(lang.name);
     setMenuOpen(false);
     setLanguage(lang);
-    isAuth && changeLanguege({ language: lang.id });
+    isAuth && changeLanguage({ language: lang.id });
   };
 
   return (

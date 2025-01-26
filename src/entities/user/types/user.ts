@@ -31,6 +31,11 @@ export interface IUserInfo {
   location: string;
 }
 
+export interface IEmailData {
+  new_email: string;
+  password: string;
+}
+
 export interface IPasswordData {
   current_password: string;
   new_password: string;

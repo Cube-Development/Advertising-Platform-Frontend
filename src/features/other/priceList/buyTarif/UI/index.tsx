@@ -86,7 +86,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
     },
   });
   const formState = watch();
-  
+
   useEffect(() => {
     if (balance) {
       setValue(tarifData.isHaveBalance, tarifPrice <= balance);
