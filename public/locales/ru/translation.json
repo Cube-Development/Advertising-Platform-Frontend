@@ -1051,7 +1051,7 @@
         "default_value": "Sample@gmail.com",
         "error": {
           "required": "поле не может быть пустым",
-          "format": "введите данные по нужному формату Sample@gmail.com"
+          "format": "Формат Sample@gmail.com"
         }
       },
       "password": {
