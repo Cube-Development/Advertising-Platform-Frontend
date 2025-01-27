@@ -186,6 +186,7 @@ export const SettingsProfile: FC = () => {
                 <div className={styles.parameters_row}>
                   <span> {t("profile.account_block.email.title")}</span>
                   <input
+                    className={styles.email}
                     placeholder={t("profile.account_block.email.default_value")}
                     value={formState?.user_additional?.email}
                     disabled={true}
@@ -234,6 +235,7 @@ export const SettingsProfile: FC = () => {
                 <div className={styles.parameters_row}>
                   <span> {t("profile.account_block.location.title")}</span>
                   <input
+                    autoComplete="new-location"
                     placeholder={t(
                       "profile.account_block.location.default_value",
                     )}
@@ -262,6 +264,7 @@ export const SettingsProfile: FC = () => {
                   {t("profile.password_block.current_password.title")}
                 </span>
                 <input
+                  autoComplete="new-password"
                   type="password"
                   placeholder={t(
                     "profile.password_block.current_password.default_value",
@@ -275,6 +278,7 @@ export const SettingsProfile: FC = () => {
               <div className={styles.parameters_row}>
                 <span> {t("profile.password_block.new_password.title")}</span>
                 <input
+                  autoComplete="new-password"
                   type="password"
                   placeholder={t(
                     "profile.password_block.new_password.default_value",
@@ -288,6 +292,7 @@ export const SettingsProfile: FC = () => {
               <div className={styles.parameters_row}>
                 <span>{t("profile.password_block.accept_password.title")}</span>
                 <input
+                  autoComplete="new-password"
                   type="password"
                   placeholder={t(
                     "profile.password_block.accept_password.default_value",
