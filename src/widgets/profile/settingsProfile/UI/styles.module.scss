@@ -133,6 +133,13 @@
         }
       }
 
+      .email__wrapper {
+        display: grid;
+        grid-template-columns: 1fr max-content;
+        align-content: center;
+        column-gap: 10px;
+      }
+
       .parameters_wrapper {
         display: grid;
         grid-auto-flow: row;

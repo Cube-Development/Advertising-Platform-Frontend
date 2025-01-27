@@ -5,6 +5,12 @@ export function isValidEmail(email: string): boolean {
   return emailRegex.test(email);
 }
 
+export function isValidEmailCode(value: string): boolean {
+  const length = formDataLength.email_code - 1;
+  const Regex = new RegExp(`^[1-9]\\d{${length}}$`);
+  return Regex.test(value);
+}
+
 export function isValidINN(value: string): boolean {
   const length = formDataLength.INN - 1;
   const Regex = new RegExp(`^[1-9]\\d{${length}}$`);

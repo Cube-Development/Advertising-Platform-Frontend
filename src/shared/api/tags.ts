@@ -1,3 +1,4 @@
+export const USER_DATA = "USER_DATA";
 export const CART_PUB = "CART_PUB";
 export const CART = "CART";
 export const CATALOG = "CATALOG";

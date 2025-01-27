@@ -22,3 +22,11 @@ export enum eventForm {
   project_events = "project_events",
   promo_events = "promo_events",
 }
+
+export enum emailChangeForm {
+  new_email = "new_email",
+  password = "password",
+  code = "code",
+  isEmailChanged = "isEmailChanged",
+  isDialogOpen = "isDialogOpen",
+}

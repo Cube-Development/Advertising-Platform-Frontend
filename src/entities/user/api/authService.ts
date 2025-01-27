@@ -1,4 +1,5 @@
 import {
+  IEmailData,
   IEventsData,
   IPasswordData,
   IProfileData,
@@ -6,7 +7,7 @@ import {
   IUserData,
   roles,
 } from "@entities/user";
-import { authApi, baseApi } from "@shared/api";
+import { authApi, baseApi, USER_DATA } from "@shared/api";
 import { languagesNum } from "@shared/config";
 
 type RegisterReq = {
@@ -127,6 +128,7 @@ export const userAPI = authApi.injectEndpoints({
         url: `/auth/user`,
         method: `GET`,
       }),
+      providesTags: [USER_DATA],
     }),
     editProfile: build.mutation<{ success: boolean }, IUserData | IEventsData>({
       query: (BodyParams) => ({
@@ -142,6 +144,21 @@ export const userAPI = authApi.injectEndpoints({
         body: BodyParams,
       }),
     }),
+    editEmailRequest: build.mutation<{ success: boolean }, IEmailData>({
+      query: (BodyParams) => ({
+        url: `/auth/change/email/request`,
+        method: `POST`,
+        body: BodyParams,
+      }),
+    }),
+    editEmailAccept: build.mutation<{ success: boolean }, { code: number }>({
+      query: (BodyParams) => ({
+        url: `/auth/change/email/accept`,
+        method: `POST`,
+        body: BodyParams,
+      }),
+      invalidatesTags: [USER_DATA],
+    }),
     updateRole: build.mutation<void, { role: roles }>({
       query: (params) => ({
         url: `/users/role`,
@@ -149,7 +166,7 @@ export const userAPI = authApi.injectEndpoints({
         params,
       }),
     }),
-    changeLanguege: build.mutation<void, { language: languagesNum }>({
+    changeLanguage: build.mutation<void, { language: languagesNum }>({
       query: (params) => ({
         url: `/auth/language`,
         method: `POST`,
@@ -164,8 +181,10 @@ export const {
   useGetUserMutation,
   useGetUserQueryQuery,
   useUpdateRoleMutation,
-  useChangeLanguegeMutation,
+  useChangeLanguageMutation,
   useGetProfileQuery,
   useEditProfileMutation,
   useEditPasswordMutation,
+  useEditEmailRequestMutation,
+  useEditEmailAcceptMutation,
 } = userAPI;

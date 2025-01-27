@@ -1,21 +1,9 @@
 import { ADV_TARIFF_ORDERS, authApi } from "@shared/api";
-import { IChangeOrder } from "../types";
-
-export interface getBuyTarifReq {
-  tariff_ident: number;
-  comment: string;
-  links: string[];
-  attached_files: IAttachedFiles[];
-}
-
-interface IAttachedFiles {
-  content: string;
-  content_type: number;
-}
+import { IBuyTarif, IChangeOrder } from "../types";
 
 export const tarifAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
-    postBuyTarif: build.mutation<{ success: boolean }, getBuyTarifReq>({
+    postBuyTarif: build.mutation<{ success: boolean }, IBuyTarif>({
       query: (BodyParams) => ({
         url: `/tariff/payment`,
         method: `POST`,
