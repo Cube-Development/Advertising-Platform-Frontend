@@ -40,7 +40,7 @@ import {
 } from "@shared/ui";
 import { getFileExtension } from "@shared/utils";
 import { CircleX, FileIcon, InfoIcon } from "lucide-react";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -51,62 +51,68 @@ interface BuyTarifProps {
   tarifInfo: ITarifInfo;
 }
 
+interface IBuyTariffForm extends IBuyTarif {
+  url: string;
+  files: File[];
+  dragActive: boolean;
+  isTarifBought: boolean;
+  isHaveBalance: boolean;
+}
+
 export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
   const { t } = useTranslation();
-  const { isAuth } = useAppSelector((state) => state.user);
   const { toast } = useToast();
+  const { isAuth } = useAppSelector((state) => state.user);
+  const { balance } = useAppSelector((state) => state.wallet);
   const [buyTarif] = usePostBuyTarifMutation();
-  const [url, setUrl] = useState<string>("");
-  const [files, setFiles] = useState<File[]>([]);
-  const [dragActive, setDragActive] = useState<boolean>(false);
-  const [isTarifBought, setIsTarifBought] = useState<boolean>(false);
   const [getUploadLink] = useGetUploadLinkMutation();
 
   const tarifPrice =
     TarifParameters.find((item) => item.index === tarif)?.price || 0;
-  const { balance } = useAppSelector((state) => state.wallet);
 
-  const [isHaveBalance, setIsHaveBalance] = useState<boolean>(
-    tarifPrice <= balance,
-  );
-
-  useEffect(() => {
-    if (balance) {
-      setIsHaveBalance(tarifPrice <= balance);
-    }
-  }, [balance]);
-
-  const { setValue, watch, reset } = useForm<IBuyTarif>({
+  const { setValue, watch, reset } = useForm<IBuyTariffForm>({
     defaultValues: {
+      //back data
       tariff_ident: tarif,
       comment: "",
       links: [],
       attached_files: [],
+      // front data
+      url: "",
+      files: [],
+      dragActive: false,
+      isTarifBought: false,
+      isHaveBalance: tarifPrice <= balance,
     },
   });
   const formState = watch();
 
+  useEffect(() => {
+    if (balance) {
+      setValue(tarifData.isHaveBalance, tarifPrice <= balance);
+    }
+  }, [balance]);
   const handleChangeComment = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const comment = e.target.value;
     setValue(tarifData.comment, comment);
   };
 
   const handleChangeUrl = () => {
-    if (url) {
-      formState.links.push(url);
-      setUrl("");
+    if (formState?.url) {
+      formState?.links.push(formState?.url);
+      setValue(tarifData.url, "");
     }
   };
 
   const handleDeleteUrl = (urlDelete: string) => {
-    const updatedLinks = formState.links.filter((url) => url !== urlDelete);
+    const updatedLinks = formState?.links.filter((url) => url !== urlDelete);
     setValue(tarifData.links, updatedLinks);
   };
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (e.target.files && e.target.files[0]) {
-      setFiles([...e.target.files]);
+      setValue(tarifData.files, [...e.target.files]);
       try {
         await uploadFilesAndMedia([...e.target.files]);
       } finally {
@@ -116,51 +122,65 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
   };
 
   const handleReset = () => {
-    setFiles([]);
+    setValue(tarifData.files, []);
+    setValue(tarifData.attached_files, []);
   };
 
   const handleDrag = function (e: React.DragEvent<HTMLDivElement>) {
     e.preventDefault();
-    setDragActive(true);
+    setValue(tarifData.dragActive, true);
   };
 
   const handleLive = function (e: React.DragEvent<HTMLDivElement>) {
     e.preventDefault();
-    setDragActive(false);
+    setValue(tarifData.dragActive, false);
   };
 
   const handleDrop = function (e: React.DragEvent<HTMLInputElement>) {
     e.preventDefault();
-    setDragActive(false);
+    setValue(tarifData.dragActive, false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      setFiles([...e.dataTransfer.files]);
+      setValue(tarifData.files, [...e.dataTransfer.files]);
     }
   };
 
   const handleRemoveFile = (file: File) => {
-    setFiles(files.filter((item) => item !== file));
+    setValue(
+      tarifData.files,
+      formState?.files.filter((item) => item !== file),
+    );
     setValue(tarifData.attached_files, []);
   };
 
   const handleSubmit = () => {
     if (
-      formState.attached_files.length ||
-      formState.comment ||
-      formState.links.length
+      formState?.attached_files.length ||
+      formState?.comment ||
+      formState?.links.length
     ) {
-      buyTarif(formState)
+      buyTarif({
+        // only back data
+        tariff_ident: formState?.tariff_ident,
+        comment: formState?.comment,
+        links: formState?.links,
+        attached_files: formState?.attached_files,
+      })
         .unwrap()
         .then(() => {
           toast({
             variant: "success",
             title: t("toasts.turnkey.success"),
           });
-          setIsTarifBought(true);
           reset({
             tariff_ident: tarif,
             comment: "",
             links: [],
             attached_files: [],
+            url: "",
+            files: [],
+            dragActive: false,
+            isTarifBought: true,
+            isHaveBalance: tarifPrice <= balance,
           });
         })
         .catch((error) => {
@@ -185,10 +205,10 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
           method: "PUT",
           body: file,
         });
-        if (!formState.attached_files) {
+        if (!formState?.attached_files) {
           formState.attached_files = [];
         }
-        formState.attached_files.push({
+        formState?.attached_files.push({
           content_type: ContentType.file,
           content: data.file_name,
           name: file.name,
@@ -198,7 +218,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
   };
 
   const handleClose = () => {
-    setIsTarifBought(false);
+    setValue(tarifData?.isTarifBought, false);
   };
 
   return (
@@ -209,7 +229,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
           <DrawerContent className={styles.menu}>
             <DrawerTitle className="sr-only" />
             <DrawerDescription className="sr-only" />
-            {!isTarifBought && isHaveBalance ? (
+            {!formState?.isTarifBought && formState?.isHaveBalance ? (
               <>
                 <div className={styles.menu__top}>
                   <p>{t("turnkey.chain.have_balance.title")}</p>
@@ -238,6 +258,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
                         rows={10}
                         onChange={handleChangeComment}
                         maxLength={1000}
+                        value={formState?.comment}
                         placeholder={t(
                           "turnkey.chain.have_balance.comment.value",
                         )}
@@ -254,17 +275,17 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
                             "turnkey.chain.have_balance.url.value",
                           )}
                           onChange={(e) => {
-                            setUrl(e.target.value);
+                            setValue(tarifData.url, e.target.value);
                           }}
-                          value={url}
+                          value={formState?.url}
                         />
                         <button onClick={handleChangeUrl}>
                           <p>{t("turnkey.chain.have_balance.url.button")}</p>
                         </button>
                       </div>
-                      {formState.links.length !== 0 && (
+                      {formState?.links.length !== 0 && (
                         <div className={styles.menu__all_url}>
-                          {formState.links.map((url, index) => (
+                          {formState?.links.map((url, index) => (
                             <div key={index} className={styles.url__row}>
                               <div className={styles.url__text}>
                                 <p>№ {index + 1}</p>
@@ -284,22 +305,22 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
                         <span>{t("turnkey.chain.have_balance.file.text")}</span>
                       </div>
                       <div
-                        className={`${styles.files__wrapper} ${dragActive ? styles.drag : ""}`}
+                        className={`${styles.files__wrapper} ${formState?.dragActive ? styles.drag : ""}`}
                         onReset={handleReset}
                         onDragEnter={handleDrag}
                         onDragOver={handleDrag}
                         onDragLeave={handleLive}
                         onDrop={handleDrop}
                       >
-                        {files.length === FILES.maxLenght ? (
+                        {formState?.files.length === FILES.maxLenght ? (
                           <div className={styles.items}>
-                            {files.map((file, id) => (
+                            {formState?.files.map((file, id) => (
                               <div key={id} className={styles.item}>
                                 <div className={styles.item__left}>
                                   <FileIcon />
 
                                   <div className={styles.item__text}>
-                                    <p>{file?.name}</p>
+                                    <p className="truncate">{file?.name}</p>
                                     <span>{formatFileSize(file?.size)}</span>
                                   </div>
                                 </div>
@@ -384,7 +405,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
                   </button>
                 </div>
               </>
-            ) : isTarifBought && isHaveBalance ? (
+            ) : formState?.isTarifBought && formState?.isHaveBalance ? (
               <>
                 <div className={styles.menu__top}>
                   <p>{t("turnkey.chain.success.title")}</p>
@@ -418,7 +439,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
                 </ScrollArea>
               </>
             ) : (
-              !isHaveBalance && (
+              !formState?.isHaveBalance && (
                 <>
                   <div className={styles.menu__top}>
                     <p>{t("turnkey.chain.no_balance.title")}</p>

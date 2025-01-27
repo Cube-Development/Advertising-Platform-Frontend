@@ -20,6 +20,7 @@ export enum formDataLength {
   bank_mfo = 5,
   phone = 12,
   email = 20,
+  email_code = 6,
   PNFL = 14,
   registration_number = 20,
   registration_date = 20,

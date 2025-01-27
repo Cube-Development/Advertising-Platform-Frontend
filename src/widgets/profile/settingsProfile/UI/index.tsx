@@ -9,7 +9,7 @@ import {
   useGetProfileQuery,
   userForm,
 } from "@entities/user";
-import { EditPassword, EditUser } from "@features/profile";
+import { EditEmail, EditPassword, EditUser } from "@features/profile";
 import { EditPencilIcon, EmailIcon, TelegramJetlIcon } from "@shared/assets";
 import { languages, languagesNum } from "@shared/config";
 import { PAGE_ANIMATION } from "@shared/config/animation";
@@ -182,19 +182,22 @@ export const SettingsProfile: FC = () => {
                   />
                 </div>
               </div>
-              <div className={styles.parameters_row}>
-                <span> {t("profile.account_block.email.title")}</span>
-                <input
-                  placeholder={t("profile.account_block.email.default_value")}
-                  value={formState?.user_additional?.email}
-                  disabled={true}
-                  onChange={(e) =>
-                    setValue(
-                      `${profileForm.user_additional}.${userForm.email}`,
-                      e.target.value,
-                    )
-                  }
-                />
+              <div className={styles.email__wrapper}>
+                <div className={styles.parameters_row}>
+                  <span> {t("profile.account_block.email.title")}</span>
+                  <input
+                    placeholder={t("profile.account_block.email.default_value")}
+                    value={formState?.user_additional?.email}
+                    disabled={true}
+                    onChange={(e) =>
+                      setValue(
+                        `${profileForm.user_additional}.${userForm.email}`,
+                        e.target.value,
+                      )
+                    }
+                  />
+                </div>
+                <EditEmail />
               </div>
               <div className={styles.parameters_row}>
                 <span> {t("profile.account_block.phone.title")}</span>
