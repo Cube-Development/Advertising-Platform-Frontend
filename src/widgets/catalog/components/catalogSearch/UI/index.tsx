@@ -24,6 +24,13 @@ import {
 import { ArrowSmallVerticalIcon } from "@shared/assets";
 import { accordionTypes, Languages } from "@shared/config";
 import { pageFilter } from "@shared/routing";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@shared/ui";
+import { Loader } from "lucide-react";
 import { FC, useEffect, useRef, useState } from "react";
 import {
   useForm,
@@ -33,14 +40,7 @@ import {
 } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@shared/ui";
 import recomAnimation from "/animated/recom_lottie.gif";
-import { Loader } from "lucide-react";
 
 interface CatalogSearchProps {
   setValue: UseFormSetValue<getCatalogReq>;
@@ -329,21 +329,13 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
               <SelectOptions
                 onChange={setValue}
                 getValues={getValues}
-                options={ages?.contents || []}
+                options={regions?.contents || []}
                 single={false}
-                type={channelParameterData.age}
-                textData={"catalog.age"}
+                type={channelParameterData.region}
+                textData={"catalog.region"}
                 isRow={true}
                 isCatalog={true}
-                defaultValues={filter.age}
-              />
-              <SelectSex
-                onChange={setValue}
-                getValues={getValues}
-                title={"catalog.sex.title"}
-                isRow={true}
-                isCatalog={true}
-                defaultValues={filter.male}
+                defaultValues={filter.region}
               />
               <SelectOptions
                 onChange={setValue}
@@ -356,16 +348,24 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
                 isCatalog={true}
                 defaultValues={filter.language}
               />
+              <SelectSex
+                onChange={setValue}
+                getValues={getValues}
+                title={"catalog.sex.title"}
+                isRow={true}
+                isCatalog={true}
+                defaultValues={filter.male}
+              />
               <SelectOptions
                 onChange={setValue}
                 getValues={getValues}
-                options={regions?.contents || []}
+                options={ages?.contents || []}
                 single={false}
-                type={channelParameterData.region}
-                textData={"catalog.region"}
+                type={channelParameterData.age}
+                textData={"catalog.age"}
                 isRow={true}
                 isCatalog={true}
-                defaultValues={filter.region}
+                defaultValues={filter.age}
               />
             </>
           ) : (

@@ -27,6 +27,7 @@ import {
   ParametersIcon,
 } from "@shared/assets";
 import { accordionTypes, BREAKPOINT, Languages } from "@shared/config";
+import { useWindowWidth } from "@shared/hooks";
 import { pageFilter } from "@shared/routing";
 import {
   Accordion,
@@ -54,7 +55,6 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import styles from "./styles.module.scss";
 import recomAnimation from "/animated/recom_lottie.gif";
-import { useWindowWidth } from "@shared/hooks";
 
 interface ParametersFilterProps {
   setValue: UseFormSetValue<getCatalogReq>;
@@ -372,21 +372,13 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
                   <SelectOptions
                     onChange={setValue}
                     getValues={getValues}
-                    options={ages?.contents || []}
+                    options={regions?.contents || []}
                     single={false}
-                    type={channelParameterData.age}
-                    textData={"catalog.age"}
+                    type={channelParameterData.region}
+                    textData={"catalog.region"}
                     isRow={true}
                     isCatalog={true}
-                    defaultValues={filter.age}
-                  />
-                  <SelectSex
-                    onChange={setValue}
-                    getValues={getValues}
-                    title={"catalog.sex.title"}
-                    isRow={true}
-                    isCatalog={true}
-                    defaultValues={filter.male}
+                    defaultValues={filter.region}
                   />
                   <SelectOptions
                     onChange={setValue}
@@ -399,16 +391,24 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
                     isCatalog={true}
                     defaultValues={filter.language}
                   />
+                  <SelectSex
+                    onChange={setValue}
+                    getValues={getValues}
+                    title={"catalog.sex.title"}
+                    isRow={true}
+                    isCatalog={true}
+                    defaultValues={filter.male}
+                  />
                   <SelectOptions
                     onChange={setValue}
                     getValues={getValues}
-                    options={regions?.contents || []}
+                    options={ages?.contents || []}
                     single={false}
-                    type={channelParameterData.region}
-                    textData={"catalog.region"}
+                    type={channelParameterData.age}
+                    textData={"catalog.age"}
                     isRow={true}
                     isCatalog={true}
-                    defaultValues={filter.region}
+                    defaultValues={filter.age}
                   />
                 </>
               ) : (
