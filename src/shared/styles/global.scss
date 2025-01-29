@@ -316,8 +316,8 @@ main {
   width: 100%;
   background: linear-gradient(
     to right,
-    #5c89ff var(--male),
-    #fc65ff var(--male) 100%
+    var(--color-sex-man) var(--male),
+    var(--color-sex-woman) var(--male) 100%
   );
 
   &::before {

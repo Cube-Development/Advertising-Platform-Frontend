@@ -1,6 +1,6 @@
 import { PLATFORM_PARAMETERS } from "@entities/channel";
 import { DEBOUNCE } from "@entities/project";
-import { InfoIcon } from "@shared/assets";
+import { BoyIcon, GirlIcon, InfoIcon } from "@shared/assets";
 import { useDebounce } from "@shared/hooks";
 import { MySliderSex } from "@shared/ui";
 import { FC, useEffect, useState } from "react";
@@ -76,10 +76,11 @@ export const SelectSex: FC<SelectSexProps> = ({
         <p>{t(title)}</p>
         {text && <InfoIcon />}
       </div>
-      <div className={styles.slider}>
-        <p className={styles.man}>
-          {position ? position : PLATFORM_PARAMETERS.defaultSexMale}%
-        </p>
+      <div className={`${styles.slider} ${isCatalog ? styles.isCatalog : ""}`}>
+        <div className={styles.man}>
+          <p>{position ? position : PLATFORM_PARAMETERS.defaultSexMale}%</p>
+          <BoyIcon />
+        </div>
         <MySliderSex
           type="range"
           min={0}
@@ -90,9 +91,12 @@ export const SelectSex: FC<SelectSexProps> = ({
             setPosition(parseInt(e.target.value)), console.log(e.target.value)
           )}
         />
-        <p className={styles.woman}>
-          {position ? 100 - position : PLATFORM_PARAMETERS.defaultSexMale}%
-        </p>
+        <div className={styles.woman}>
+          <GirlIcon />
+          <p>
+            {position ? 100 - position : PLATFORM_PARAMETERS.defaultSexMale}%
+          </p>
+        </div>
       </div>
     </div>
   );
