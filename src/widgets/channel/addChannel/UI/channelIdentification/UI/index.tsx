@@ -3,14 +3,18 @@ import {
   IAddChannelIdentification,
   IChannelLink,
   IIndetificationParams,
-  IReadChannelData,
   useChannelVerifyMutation,
   useCreateCodeQuery,
 } from "@entities/channel";
 import { platformTypes } from "@entities/platform";
-import { ArrowLongHorizontalIcon, InfoIcon } from "@shared/assets";
+import { ArrowLongHorizontalIcon } from "@shared/assets";
 import { PAGE_ANIMATION } from "@shared/config";
-import { MyButton, SpinnerLoaderSmall, useToast } from "@shared/ui";
+import {
+  InfoTooltip,
+  MyButton,
+  SpinnerLoaderSmall,
+  useToast,
+} from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
 import { SubmitHandler, useForm, UseFormSetValue } from "react-hook-form";
@@ -131,7 +135,9 @@ export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
               <div className={styles.form__row}>
                 <div className={styles.form__text}>
                   <p>{t("add_platform.identification.info.title")}</p>
-                  <InfoIcon />
+                  <InfoTooltip
+                    text={t("add_platform.identification.info.text")}
+                  />
                 </div>
                 <div className={styles.choose_platform}>
                   {platformTypes.map((platform, index) => (
@@ -151,7 +157,9 @@ export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
               <div className={styles.form__row}>
                 <div className={styles.form__text}>
                   <p>{t("add_platform.identification.link.title")}</p>
-                  <InfoIcon />
+                  <InfoTooltip
+                    text={t("add_platform.identification.link.text")}
+                  />
                 </div>
                 <div className={styles.paste_link}>
                   <input

@@ -1,12 +1,13 @@
 import { PLATFORM_PARAMETERS, channelParameterData } from "@entities/channel";
-import { ArrowSmallVerticalIcon, InfoIcon } from "@shared/assets";
+import { ArrowSmallVerticalIcon } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
+import { useWindowWidth } from "@shared/hooks";
 import { IOption, ISelectOption } from "@shared/types";
+import { InfoTooltip } from "@shared/ui";
 import { FC, useEffect, useRef, useState } from "react";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { useWindowWidth } from "@shared/hooks";
 
 interface SelectOptionsProps {
   textData: string;
@@ -169,7 +170,7 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
         ) : (
           <div className={styles.left}>
             <p>{allText?.title}</p>
-            {allText?.text && <InfoIcon />}
+            {allText?.text && <InfoTooltip text={allText?.text} />}
           </div>
         )}
 

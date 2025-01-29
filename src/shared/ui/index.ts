@@ -20,3 +20,4 @@ export * from "./spinnerLoader";
 export * from "./submitLoading";
 export * from "./themeChanger";
 export * from "./suspenseLoader";
+export * from "./infoTooltip";

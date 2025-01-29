@@ -1,8 +1,8 @@
 import { PLATFORM_PARAMETERS } from "@entities/channel";
 import { DEBOUNCE } from "@entities/project";
-import { BoyIcon, GirlIcon, InfoIcon } from "@shared/assets";
+import { BoyIcon, GirlIcon } from "@shared/assets";
 import { useDebounce } from "@shared/hooks";
-import { MySliderSex } from "@shared/ui";
+import { InfoTooltip, MySliderSex } from "@shared/ui";
 import { FC, useEffect, useState } from "react";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -74,7 +74,7 @@ export const SelectSex: FC<SelectSexProps> = ({
     <div className={isRow ? styles.wrapper__row : styles.wrapper}>
       <div className={styles.title}>
         <p>{t(title)}</p>
-        {text && <InfoIcon />}
+        {text && <InfoTooltip text={t(text)} />}
       </div>
       <div className={`${styles.slider} ${isCatalog ? styles.isCatalog : ""}`}>
         <div className={styles.man}>

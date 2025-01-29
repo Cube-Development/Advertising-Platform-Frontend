@@ -5,7 +5,7 @@ import {
   IFormatPriceProps,
   channelParameterData,
 } from "@entities/channel";
-import { InfoIcon } from "@shared/assets";
+import { InfoTooltip } from "@shared/ui";
 import { FC } from "react";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -50,7 +50,7 @@ export const SelectPrice: FC<SelectPriceProps> = ({
     <div className={styles.wrapper}>
       <div className={styles.title}>
         <p>{t(title)}</p>
-        <InfoIcon />
+        <InfoTooltip text={t(text)} />
       </div>
       <div
         className={`${styles.accomms} ${formats?.length === 4 ? styles.max : styles.min} `}

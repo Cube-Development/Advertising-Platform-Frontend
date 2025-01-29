@@ -1,10 +1,9 @@
+import { IAddChannelData } from "@entities/channel";
+import { InfoTooltip, MySliderLimit } from "@shared/ui";
 import { FC, useEffect, useState } from "react";
+import { UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { InfoIcon } from "@shared/assets";
-import { UseFormSetValue } from "react-hook-form";
-import { MySliderLimit } from "@shared/ui";
-import { IAddChannelData } from "@entities/channel";
 
 interface SelectSymbolProps {
   title: string;
@@ -44,7 +43,7 @@ export const SelectSymbol: FC<SelectSymbolProps> = ({
     <div className={`${isRow ? styles.wrapper__row : styles.wrapper}`}>
       <div className={styles.title}>
         <p>{t(title)}</p>
-        <InfoIcon />
+        <InfoTooltip text={t(text)} />
       </div>
       <div className={styles.slider}>
         <p>{min}</p>
