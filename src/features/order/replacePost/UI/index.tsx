@@ -94,6 +94,7 @@ export const ReplacePost: FC<ReplacePostProps> = ({
         </AlertDialogTitle>
         <textarea
           {...register("comment")}
+          className={styles.textarea}
           maxLength={300}
           placeholder={t("orders_advertiser.subcard.replace.post.placeholder")}
           disabled={haveDesire}
