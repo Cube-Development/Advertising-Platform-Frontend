@@ -5,10 +5,10 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "../shadcn-ui";
-import { InfoIcon } from "@shared/assets";
 import styles from "./styles.module.scss";
 import { useWindowWidth } from "@shared/hooks";
 import { BREAKPOINT } from "@shared/config";
+import { InfoIcon } from "lucide-react";
 
 export interface InfoTooltipProps {
   text: string;
@@ -19,8 +19,8 @@ export const InfoTooltip: FC<InfoTooltipProps> = ({ text }) => {
   return (
     <TooltipProvider>
       <Tooltip>
-        <TooltipTrigger type="button">
-          <InfoIcon />
+        <TooltipTrigger type="button" className={styles.trigger}>
+          <InfoIcon color="#BDBDBD" />
         </TooltipTrigger>
         <TooltipContent
           side={`${screen > BREAKPOINT.MD ? "right" : "top"}`}

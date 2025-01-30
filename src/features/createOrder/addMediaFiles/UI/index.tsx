@@ -1,15 +1,15 @@
+import { FileProps } from "@entities/project";
 import {
   AddFileIcon,
   FileIcon,
-  InfoIcon,
   TrashBasketIcon,
   YesIcon,
 } from "@shared/assets";
+import { ToastAction, formatFileSize, useToast } from "@shared/ui";
+import { InfoIcon } from "lucide-react";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { ToastAction, formatFileSize, useToast } from "@shared/ui";
-import { FileProps } from "@entities/project";
 
 export const AddMediaFiles: FC<FileProps> = ({ onChange, currentFiles }) => {
   const { t } = useTranslation();
@@ -87,7 +87,7 @@ export const AddMediaFiles: FC<FileProps> = ({ onChange, currentFiles }) => {
       >
         <div className={styles.top}>
           <div className={styles.logo}>
-            <InfoIcon />
+            <InfoIcon color="#BDBDBD" />
           </div>
           <div className={styles.text}>
             <p>

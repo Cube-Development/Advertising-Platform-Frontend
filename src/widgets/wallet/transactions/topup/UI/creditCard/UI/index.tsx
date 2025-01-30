@@ -4,9 +4,10 @@ import {
   usePaymentDepositMutation,
 } from "@entities/wallet";
 import { PaymentCard } from "@features/wallet";
-import { CardIcon, InfoIcon } from "@shared/assets";
+import { CardIcon } from "@shared/assets";
 import { paths } from "@shared/routing";
 import { ToastAction, useToast } from "@shared/ui";
+import { InfoIcon } from "lucide-react";
 import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -135,7 +136,7 @@ export const CreditCard: FC = () => {
           </div>
           <div className={styles.conditions}>
             <div className={styles.conditions__right}>
-              <InfoIcon />
+              <InfoIcon color="#BDBDBD" />
             </div>
             <div className={styles.conditions__left}>
               <div>
