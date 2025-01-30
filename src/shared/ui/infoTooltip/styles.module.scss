@@ -1,5 +1,10 @@
 .trigger {
   transition: all 0.3s ease;
+
+  svg {
+    width: 15px;
+    height: 15px;
+  }
   &:hover {
     transform: scale(1.1);
   }
@@ -10,9 +15,10 @@
 
   .text {
     font-size: 12px;
+    font-style: normal;
     font-weight: normal;
     line-height: normal;
     text-align: justify;
-    text-indent: 40px;
+    text-indent: 20px;
   }
 }
