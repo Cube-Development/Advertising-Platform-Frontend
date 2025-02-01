@@ -17,9 +17,9 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { Loader, SendHorizonal, X } from "lucide-react";
 import { IOrderFeature } from "@entities/project";
-import { useAcceptOfferMutation } from "@entities/offer";
+import { bloggerOffersAPI, useAcceptOfferMutation } from "@entities/offer";
 import { BREAKPOINT } from "@shared/config";
-import { useWindowWidth } from "@shared/hooks";
+import { useAppDispatch, useWindowWidth } from "@shared/hooks";
 
 // создаю массив дат из date_from до date_to
 function getDatesInRange(dates?: {
@@ -59,6 +59,10 @@ function getDatesInRange(dates?: {
 export const AcceptOffer: FC<IOrderFeature> = ({ order_id, dates }) => {
   const { toast } = useToast();
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+  const handleInvalidateCache = () => {
+    dispatch(bloggerOffersAPI.util.resetApiState());
+  };
   const currentDates = getDatesInRange(dates);
   const [selectedDate, setSelectedDate] = useState<string>(currentDates[0]);
   const [acceptOffer, { isLoading }] = useAcceptOfferMutation();
@@ -70,6 +74,7 @@ export const AcceptOffer: FC<IOrderFeature> = ({ order_id, dates }) => {
           variant: "success",
           title: t("toasts.offers_blogger.accept_offer.success"),
         });
+        handleInvalidateCache();
       })
       .catch((error) => {
         toast({

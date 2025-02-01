@@ -1,18 +1,15 @@
-import { useNavigate } from "react-router-dom";
 import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@shared/ui";
 import { login, roles, toggleRole } from "@entities/user";
 import { useAppDispatch } from "@shared/hooks";
 import { useTransferPublicMutation } from "@entities/project";
-import { paths } from "@shared/routing";
 import { authApi, baseApi } from "@shared/api";
 
 export const useHandleAuth = () => {
   const { toast } = useToast();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();
   const [transferPublic] = useTransferPublicMutation();
 
   const transferCart = async (id: string): Promise<void> => {
@@ -33,7 +30,6 @@ export const useHandleAuth = () => {
       dispatch(baseApi.util.resetApiState());
       dispatch(authApi.util.resetApiState());
       dispatch(login());
-      navigate(role === roles.advertiser ? paths.main : paths.mainBlogger);
       dispatch(toggleRole(role));
       Cookies.set("user_id", user_id);
 

@@ -129,13 +129,11 @@ export const EditEmail: FC = () => {
 
   return (
     <AlertDialog open={formState?.isDialogOpen}>
-      <AlertDialogTrigger asChild>
-        <div
-          className={styles.trigger}
-          onClick={() => setValue(emailChangeForm.isDialogOpen, true)}
-        >
-          <PenLine />
-        </div>
+      <AlertDialogTrigger
+        className={styles.trigger}
+        onClick={() => setValue(emailChangeForm.isDialogOpen, true)}
+      >
+        <PenLine />
       </AlertDialogTrigger>
       <AlertDialogContent className={styles.content}>
         <AlertDialogDescription className="sr-only"></AlertDialogDescription>

@@ -1,5 +1,5 @@
 import { channelParameterData } from "@entities/channel";
-import { InfoIcon } from "@shared/assets";
+import { InfoTooltip } from "@shared/ui";
 import { FC, useEffect, useState } from "react";
 import { UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -48,7 +48,7 @@ export const SelectDescription: FC<SelectDescriptionProps> = ({
     <div className={styles.wrapper}>
       <div className={`${styles.title} ${isCatalog && styles.is_catalog}`}>
         <p>{t(title)}</p>
-        {text && <InfoIcon />}
+        {text && <InfoTooltip text={t(text)} />}
       </div>
       <div className={styles.field}>
         <textarea

@@ -45,7 +45,6 @@ export { DocumentCheckmarkIcon } from "./documentCheckmark";
 export { EditPencilIcon } from "./editPencil";
 export { EmailIcon } from "./email";
 export { EyeIcon } from "./eye";
-export { InfoIcon } from "./info";
 export { InstagramIcon } from "./instagram";
 export { FileIcon } from "./file";
 export { GirlIcon } from "./girl";

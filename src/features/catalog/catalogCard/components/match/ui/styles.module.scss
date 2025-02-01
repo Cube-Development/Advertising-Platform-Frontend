@@ -120,6 +120,11 @@
     p {
       line-height: 1.7;
       color: #8e54e9;
+
+      @media (max-width: 768px) {
+        line-height: 1.3;
+        text-align: left;
+      }
     }
   }
 

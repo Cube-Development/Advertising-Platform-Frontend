@@ -49,27 +49,79 @@
 
 .slider {
   display: grid;
-  grid-template: 1fr / 50px 1fr 50px;
+  grid-template: 1fr / 70px 1fr 70px;
+  column-gap: 10px;
   align-items: center;
   row-gap: 10px;
   font-size: 16px;
   font-weight: 500;
 
-  .man {
-    color: #5c89ff;
+  &.isCatalog {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto;
+
+    & > :nth-child(1) {
+      grid-column: 1;
+      grid-row: 1;
+      justify-content: flex-start !important;
+    }
+
+    & > :nth-child(3) {
+      grid-column: 2;
+      grid-row: 1;
+      justify-content: flex-end !important;
+    }
+
+    & > :nth-child(2) {
+      grid-column: span 2;
+      grid-row: 2;
+    }
+  }
+
+  @media (max-width: 768px) {
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: auto auto;
+
+    & > :nth-child(1) {
+      grid-column: 1;
+      grid-row: 1;
+      justify-content: flex-start !important;
+    }
+
+    & > :nth-child(3) {
+      grid-column: 2;
+      grid-row: 1;
+      justify-content: flex-end !important;
+    }
+
+    & > :nth-child(2) {
+      grid-column: span 2;
+      grid-row: 2;
+    }
+  }
+
+  .man,
+  .woman {
+    color: var(--color-sex-man);
     display: grid;
     grid-auto-flow: column;
-    justify-content: center;
+    column-gap: 10px;
     align-items: center;
     white-space: nowrap;
+
+    svg {
+      width: 13px;
+      height: 22px;
+    }
+  }
+
+  .man {
+    color: var(--color-sex-man);
+    justify-content: flex-end;
   }
 
   .woman {
-    color: #fc65ff;
-    display: grid;
-    grid-auto-flow: column;
-    justify-content: center;
-    align-items: center;
-    white-space: nowrap;
+    color: var(--color-sex-woman);
+    justify-content: flex-start;
   }
 }

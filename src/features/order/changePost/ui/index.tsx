@@ -54,7 +54,7 @@ export const ChangePost: FC<ChangePostProps> = ({ order, project_id }) => {
             </div>
           </AlertDialogCancel>
         </AlertDialogTitle>
-        <span className={styles.text}>{text}</span>
+        <span className={styles.textarea}>{text}</span>
 
         <AlertDialogCancel asChild>
           <Link to={paths.cart} onClick={handleOnClick}>

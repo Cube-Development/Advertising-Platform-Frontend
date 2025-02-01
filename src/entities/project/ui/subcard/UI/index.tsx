@@ -8,6 +8,7 @@ import {
   myProjectStatusFilter,
   orderStatus,
   orderStatusChat,
+  platformToIcon,
   projectTypesFilter,
   useGetPostQuery,
 } from "@entities/project";
@@ -94,6 +95,11 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
       <div
         className={`${styles.subcard} ${typeFilter === projectTypesFilter.myProject && statusFilter === advManagerProjectStatusFilter.active ? styles.grid__active : styles.grid}`}
       >
+        <div className={styles.platform__icon}>
+          {subcard?.platform && subcard?.platform in platformToIcon
+            ? platformToIcon[subcard.platform!]()
+            : "..."}
+        </div>
         <div className={styles.subcard__left}>
           <div className={styles.subcard__left__description}>
             <div className={styles.subcard__left__description__logo}>

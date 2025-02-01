@@ -1,10 +1,13 @@
+import { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { ChannelCardDescription } from "@features/catalog";
 import {
   ICatalogCard,
   ICatalogChannel,
   IChangeCards,
   IFormat,
 } from "@entities/project";
-import { ChannelCardDescription } from "@features/catalog/catalogCard/components";
 import {
   ArrowSmallVerticalIcon,
   BoyIcon,
@@ -16,16 +19,15 @@ import {
   StarIcon4,
   SubsIcon,
 } from "@shared/assets";
-import { pageFilter } from "@shared/routing";
+import { pageFilter, paths } from "@shared/routing";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@shared/ui";
-import { FC, useState } from "react";
-import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { Languages } from "@shared/config";
 
 interface RecommendCardProps extends IChangeCards, ICatalogCard {
   card: ICatalogChannel;
@@ -85,7 +87,33 @@ export const RecommendCard: FC<RecommendCardProps> = ({
           </div>
           <div className={styles.column__info}>
             <div className={styles.info}>
-              <p className={`${styles.title} truncate`}>{card?.name}</p>
+              <Link
+                to={`${paths.channel.replace(":id", card?.id)}`}
+                className={`${styles.title} truncate`}
+              >
+                {card?.name}
+
+                {/* языки */}
+                {card?.channel_languages && (
+                  <div className={styles.languages}>
+                    {card?.channel_languages?.map((lang) => {
+                      const languageInfo = Languages.find((l) => l.id === lang);
+
+                      if (!languageInfo) return "...";
+
+                      return (
+                        <img
+                          className={styles.languages__icon}
+                          key={languageInfo.id}
+                          src={`/images/${languageInfo.icon}.svg`}
+                          alt={languageInfo.name}
+                        />
+                      );
+                    })}
+                  </div>
+                )}
+                {/* языки */}
+              </Link>
               <p className={styles.category}>{card?.category}</p>
               <div className={styles.rate}>
                 <RatingIcon />
@@ -99,7 +127,6 @@ export const RecommendCard: FC<RecommendCardProps> = ({
           </div>
         </div>
         <ChannelCardDescription description={card?.description} />
-        {/* <span className={styles.description}>{card?.description}</span> */}
         <Accordion type="single" collapsible>
           <AccordionItem
             value={`item-${card.id}`}

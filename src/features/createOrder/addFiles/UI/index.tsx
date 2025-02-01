@@ -1,15 +1,15 @@
-import { FC, useState } from "react";
-import styles from "./styles.module.scss";
+import { FILES, FileProps } from "@entities/project";
 import {
   AddFileIcon,
-  InfoIcon,
   FileIcon,
   TrashBasketIcon,
   YesIcon,
 } from "@shared/assets";
-import { useTranslation } from "react-i18next";
-import { FILES, FileProps } from "@entities/project";
 import { formatFileSize } from "@shared/ui";
+import { InfoIcon } from "lucide-react";
+import { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 export const AddFiles: FC<FileProps> = ({ onChange, currentFiles }) => {
   const { t } = useTranslation();
@@ -86,7 +86,7 @@ export const AddFiles: FC<FileProps> = ({ onChange, currentFiles }) => {
           <div className={styles.top}>
             <div className={styles.top__column}>
               <div className={styles.logo}>
-                <InfoIcon />
+                <InfoIcon color="#BDBDBD" />
               </div>
               <div className={styles.text}>
                 <p>{t("create_order.create.add_files.file.file")}</p>

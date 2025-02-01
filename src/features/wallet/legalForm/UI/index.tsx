@@ -4,7 +4,7 @@ import {
   getInputLegalLength,
   getInputLegalType,
 } from "@entities/wallet";
-import { InfoIcon } from "@shared/assets";
+import { InfoTooltip } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -43,15 +43,10 @@ export const LegalForm: FC<LegalFormProps> = ({
             >
               <div className={styles.left}>
                 <span>{row_dict.title}</span>
-                <InfoIcon />
+                <InfoTooltip text={row_dict?.description} />
               </div>
               <div className={styles.right}>
                 <input
-                  // placeholder={
-                  //   inputError[row.type]
-                  //     ? newValidate.required
-                  //     : row_dict.default_value
-                  // }
                   placeholder={row_dict.default_value}
                   className={`${styles.input} ${inputError[row.type] && styles.error}`}
                   {...register(row.type, newValidate)}

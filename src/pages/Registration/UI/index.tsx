@@ -7,7 +7,7 @@ import {
 import { FC, useState } from "react";
 import styles from "./styles.module.scss";
 import { paths } from "@shared/routing";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 export const RegistrationPage: FC = () => {
@@ -22,6 +22,8 @@ export const RegistrationPage: FC = () => {
 
   const [email, setEmail] = useState("");
   const [code, setCode] = useState("");
+
+  const location = useLocation();
 
   return (
     <section className={styles.wrapper}>
@@ -53,7 +55,9 @@ export const RegistrationPage: FC = () => {
             <p className={styles.account}>
               {t("auth.have_account")}
               <span>
-                <Link to={paths.login}>{t("auth.sign_in")}</Link>
+                <Link to={`${paths.login}${location.search}`}>
+                  {t("auth.sign_in")}
+                </Link>
               </span>
             </p>
 

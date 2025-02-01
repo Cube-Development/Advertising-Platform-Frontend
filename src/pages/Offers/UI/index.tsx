@@ -118,22 +118,26 @@ export const OffersPage: FC = () => {
   const { setValue, watch } = useForm<{
     platform: platformTypesNum;
     status: offerStatusFilter | string;
+    page: number;
   }>({
     defaultValues: {
       platform: platformTypes[0].id,
       status: offerStatusFilter.active,
+      page: 1,
     },
   });
   const formState = watch();
 
-  const [currentPage, setCurrentPage] = useState(1);
-  const handleOnChangePage = () => {
-    setCurrentPage(currentPage + 1);
+  const changeStatus = (status: any) => {
+    setValue("page", 1);
+    setValue("status", status);
   };
+
+  // const [currentPage, setCurrentPage] = useState(1);
 
   const getParams: getOrdersByStatusReq = {
     language: language?.id || Languages[0].id,
-    page: currentPage,
+    page: formState.page,
     elements_on_page: INTERSECTION_ELEMENTS.bloggerOffers,
     date_sort: dateSortingTypes.decrease,
     status: formState.status,
@@ -142,13 +146,18 @@ export const OffersPage: FC = () => {
   const { data, isFetching } = useGetBloggerOrdersQuery(getParams);
   const { refetch: views } = useGetViewBloggerOrderQuery();
 
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [formState.status]);
+  const handleOnChangePage = () => {
+    // setCurrentPage((prev) => prev + 1);
+    setValue("page", formState.page + 1);
+  };
+
+  // useEffect(() => {
+  //   setCurrentPage(1);
+  // }, [formState.status]);
 
   useEffect(() => {
     views();
-  }, [currentPage, formState.status]);
+  }, [formState.page, formState.status]);
 
   return (
     <Suspense fallback={<SuspenseLoader />}>
@@ -158,7 +167,8 @@ export const OffersPage: FC = () => {
             page={page}
             listLength={!!data?.orders?.length}
             setValue={setValue}
-            changeStatus={(status) => setValue("status", status)}
+            // changeStatus={(status) => setValue("status", status)}
+            changeStatus={changeStatus}
             statusFilter={formState.status}
           />
 

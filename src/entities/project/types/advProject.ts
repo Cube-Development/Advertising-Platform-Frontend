@@ -1,3 +1,4 @@
+import { platformTypesNum } from "@entities/platform";
 import { desireStatus, orderStatus } from "../config";
 
 export interface IAdvProjects {
@@ -65,6 +66,7 @@ export interface IAdvProjectSubcard {
   female: number;
   post_url?: string;
   desire: IDesire[];
+  platform: platformTypesNum;
 }
 
 interface IDesire {

@@ -1,10 +1,10 @@
 import { PLATFORM_PARAMETERS } from "@entities/channel";
 import { DEBOUNCE } from "@entities/project";
-import { InfoIcon } from "@shared/assets";
+import { BoyIcon, GirlIcon } from "@shared/assets";
 import { useDebounce } from "@shared/hooks";
-import { MySliderSex } from "@shared/ui";
+import { InfoTooltip, MySliderSex } from "@shared/ui";
 import { FC, useEffect, useState } from "react";
-import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
+import { UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
@@ -14,7 +14,7 @@ interface SelectSexProps {
   onChange: UseFormSetValue<any>;
   isRow?: boolean;
   isCatalog?: boolean;
-  getValues?: UseFormGetValues<any>;
+  formState?: any;
   defaultValues?: number;
 }
 
@@ -24,7 +24,7 @@ export const SelectSex: FC<SelectSexProps> = ({
   onChange,
   isRow,
   isCatalog,
-  getValues,
+  formState,
   defaultValues,
 }) => {
   const { t } = useTranslation();
@@ -41,9 +41,8 @@ export const SelectSex: FC<SelectSexProps> = ({
 
   const handleChange = (newPosition: number | null) => {
     if (isCatalog) {
-      const { filter } = getValues && getValues();
       const updatedFilter = {
-        ...filter,
+        ...formState?.filter,
         ["male"]: newPosition,
         ["female"]: newPosition ? 100 - newPosition : null,
       };
@@ -74,12 +73,13 @@ export const SelectSex: FC<SelectSexProps> = ({
     <div className={isRow ? styles.wrapper__row : styles.wrapper}>
       <div className={styles.title}>
         <p>{t(title)}</p>
-        {text && <InfoIcon />}
+        {text && <InfoTooltip text={t(text)} />}
       </div>
-      <div className={styles.slider}>
-        <p className={styles.man}>
-          {position ? position : PLATFORM_PARAMETERS.defaultSexMale}%
-        </p>
+      <div className={`${styles.slider} ${isCatalog ? styles.isCatalog : ""}`}>
+        <div className={styles.man}>
+          <p>{position ? position : PLATFORM_PARAMETERS.defaultSexMale}%</p>
+          <BoyIcon />
+        </div>
         <MySliderSex
           type="range"
           min={0}
@@ -90,9 +90,12 @@ export const SelectSex: FC<SelectSexProps> = ({
             setPosition(parseInt(e.target.value)), console.log(e.target.value)
           )}
         />
-        <p className={styles.woman}>
-          {position ? 100 - position : PLATFORM_PARAMETERS.defaultSexMale}%
-        </p>
+        <div className={styles.woman}>
+          <GirlIcon />
+          <p>
+            {position ? 100 - position : PLATFORM_PARAMETERS.defaultSexMale}%
+          </p>
+        </div>
       </div>
     </div>
   );

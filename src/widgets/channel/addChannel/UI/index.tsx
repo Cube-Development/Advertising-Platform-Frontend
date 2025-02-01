@@ -66,7 +66,7 @@ export const AddChannelBlock: FC<AddChannelBlockProps> = () => {
       defaultValues: defaultValues,
     });
 
-  const formFields = watch();
+  const formState = watch();
 
   useEffect(() => {
     if (channel) {
@@ -164,8 +164,7 @@ export const AddChannelBlock: FC<AddChannelBlockProps> = () => {
           step={currentStep.step}
           variant={currentVariant}
           setValue={setValue}
-          getValues={getValues}
-          data={formFields}
+          formState={formState}
           handleChangeFormData={handleSetDataPreview}
         />
         <ChannelAccept

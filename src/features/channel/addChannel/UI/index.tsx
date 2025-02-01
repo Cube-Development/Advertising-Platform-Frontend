@@ -1,6 +1,6 @@
 import { IAddChannelQuery } from "@entities/channel";
 import { LoginIcon } from "@shared/assets";
-import { useAppSelector } from "@shared/hooks";
+import { useAppSelector, useCurrentPathEnum } from "@shared/hooks";
 import { paths } from "@shared/routing";
 import {
   Dialog,
@@ -21,6 +21,7 @@ import styles from "./styles.module.scss";
 export const AddChannel: FC<IAddChannelQuery> = ({ props, path, orange }) => {
   const { t } = useTranslation();
   const { isAuth } = useAppSelector((state) => state.user);
+  const currentPath = useCurrentPathEnum();
 
   return (
     <>
@@ -71,14 +72,14 @@ export const AddChannel: FC<IAddChannelQuery> = ({ props, path, orange }) => {
             </div>
             <DialogFooter className="pt-[20px]">
               <Link
-                to={paths.login}
+                to={`${paths.login}${currentPath}`}
                 className={`${styles.btns__login} truncate`}
               >
                 {t("login")}
                 <LoginIcon />
               </Link>
               <Link
-                to={paths.registration}
+                to={`${paths.registration}${currentPath}`}
                 className={`${styles.btns__register} truncate`}
               >
                 {t("registration")}

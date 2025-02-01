@@ -18,7 +18,7 @@ import {
   RatingIcon,
   SubsIcon,
 } from "@shared/assets";
-import { BREAKPOINT } from "@shared/config";
+import { BREAKPOINT, ChannelLanguages } from "@shared/config";
 import { pageFilter, paths } from "@shared/routing";
 import {
   Accordion,
@@ -100,6 +100,30 @@ export const CatalogCard: FC<CatalogCardProps> = ({
                 className={`${styles.title} truncate`}
               >
                 {card?.name}
+                {/* языки */}
+                {card?.channel_languages && (
+                  <div className={styles.languages}>
+                    {[...card.channel_languages]
+                      .sort((a, b) => a - b)
+                      .map((lang) => {
+                        const languageInfo = ChannelLanguages.find(
+                          (l) => l.id === lang,
+                        );
+
+                        if (!languageInfo) return "...";
+
+                        return (
+                          <img
+                            className={styles.languages__icon}
+                            key={languageInfo.id}
+                            src={`/images/${languageInfo.icon}.svg`}
+                            alt={languageInfo.name}
+                          />
+                        );
+                      })}
+                  </div>
+                )}
+                {/* языки */}
               </Link>
               <p className={`${styles.category} truncate`}>{card?.category}</p>
               {screen >= BREAKPOINT.MD ? (

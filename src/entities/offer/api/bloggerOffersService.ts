@@ -2,6 +2,7 @@ import { IBloggerOffers, offerStatusFilter } from "@entities/offer";
 import { dateSortingTypes } from "@entities/platform";
 import { IOrderFeature } from "@entities/project";
 import {
+  ADV_ORDERS,
   ADV_PROJECTS,
   authApi,
   BLOGGER_OFFERS,
@@ -33,7 +34,12 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
         method: "PUT",
         body: body,
       }),
-      invalidatesTags: [BLOGGER_OFFERS, ADV_PROJECTS, VIEWS_BLOGGER_OFFERS],
+      invalidatesTags: [
+        BLOGGER_OFFERS,
+        ADV_PROJECTS,
+        VIEWS_BLOGGER_OFFERS,
+        ADV_ORDERS,
+      ],
     }),
     cancelOffer: build.mutation<{ success: boolean }, { order_id: string }>({
       query: (params) => ({
@@ -41,7 +47,12 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
         method: "PUT",
         params: params,
       }),
-      invalidatesTags: [BLOGGER_OFFERS, ADV_PROJECTS, VIEWS_BLOGGER_OFFERS],
+      invalidatesTags: [
+        BLOGGER_OFFERS,
+        ADV_PROJECTS,
+        VIEWS_BLOGGER_OFFERS,
+        ADV_ORDERS,
+      ],
     }),
     getBloggerOrders: build.query<IBloggerOffers, getOrdersByStatusReq>({
       query: (BodyParams) => ({

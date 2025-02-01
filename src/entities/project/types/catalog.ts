@@ -1,4 +1,5 @@
 import { platformTypesNum } from "@entities/platform";
+import { languagesNum } from "@shared/config";
 import { pageFilter } from "@shared/routing";
 import { FC } from "react";
 
@@ -46,6 +47,7 @@ export interface ICatalogChannel {
   format: IFormat[];
   selected_format?: IFormat;
   platform?: platformTypesNum;
+  channel_languages: languagesNum[];
 }
 
 export interface IFormat {
