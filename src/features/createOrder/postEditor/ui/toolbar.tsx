@@ -86,7 +86,11 @@ export const Toolbar: FC<ToolbarProps> = ({ editor }) => {
             <Link className="h-8 w-8" />
           </Toggle>
         </PopoverTrigger>
-        <PopoverContent className="relative p-0 rounded-[10px]" align="end">
+        <PopoverContent
+          sideOffset={-60}
+          className="relative p-0 rounded-[10px]"
+          align="end"
+        >
           <input
             className="col-span-2 rounded-[10px] h-full p-2 border-[0.5px] border-solid border-[rgba(0,0,0,0.4)] w-full pr-[50px]"
             placeholder={t("url_link")}

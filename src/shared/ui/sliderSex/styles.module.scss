@@ -10,11 +10,19 @@
   -webkit-appearance: none;
 }
 .slider::-webkit-slider-thumb {
-  height: 15px;
+  height: 30px;
   width: 15px;
-  border-radius: 20px;
-  background: linear-gradient(-45deg, #f904d9 23.91%, #4772e6 75.06%);
   cursor: pointer;
   -webkit-appearance: none;
-  margin-top: -4.5px;
+  margin-top: -12.5px;
+
+  border-radius: 6px;
+  border: 0.4px solid var(--black-10, #e5e5e5);
+  background: var(--Personal-colors-White, #fff);
+  box-shadow:
+    7px 7px 3px 0px rgba(0, 0, 0, 0),
+    5px 4px 3px 0px rgba(0, 0, 0, 0.01),
+    3px 3px 2px 0px rgba(0, 0, 0, 0.05),
+    1px 1px 2px 0px rgba(0, 0, 0, 0.09),
+    0px 0px 1px 0px rgba(0, 0, 0, 0.1);
 }

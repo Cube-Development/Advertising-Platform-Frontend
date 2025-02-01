@@ -23,6 +23,7 @@
     grid-template: 1fr / 0.7fr 1fr;
     height: 70vh;
     max-width: 850px;
+    max-height: 850px;
     width: 90vw;
   }
 
@@ -118,7 +119,7 @@
     background: url("/images/phoneDisplay/tgbg.png") no-repeat;
     background-size: cover;
     position: relative;
-    height: inherit;
+    // height: inherit;
     display: grid;
     grid-template: min-content 1fr /1fr;
 

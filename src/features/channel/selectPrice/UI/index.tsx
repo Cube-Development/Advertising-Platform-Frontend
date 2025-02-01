@@ -1,13 +1,12 @@
 import {
-  IAddChannelData,
   IAddFormat,
   IChannelFormat,
   IFormatPriceProps,
   channelParameterData,
 } from "@entities/channel";
-import { InfoIcon } from "@shared/assets";
+import { InfoTooltip } from "@shared/ui";
 import { FC } from "react";
-import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
+import { UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
@@ -20,7 +19,7 @@ interface SelectPriceProps {
   AccommPrice: FC<IFormatPriceProps>;
   onChange: UseFormSetValue<any>;
   defaultValues?: IAddFormat[];
-  getValues: UseFormGetValues<any>;
+  formState: any;
 }
 
 export const SelectPrice: FC<SelectPriceProps> = ({
@@ -30,15 +29,14 @@ export const SelectPrice: FC<SelectPriceProps> = ({
   AccommPrice,
   info,
   onChange,
-  getValues,
+  formState,
   type,
   defaultValues,
 }) => {
   const { t } = useTranslation();
 
   const handleChangeFormatPrice = (format: IAddFormat) => {
-    const form: IAddChannelData = { ...getValues() };
-    const currentFormats = [...(form.format || [])];
+    const currentFormats = [...(formState?.format || [])];
     const newFormats = currentFormats.filter(
       (item) => item.name !== format.name,
     );
@@ -50,7 +48,7 @@ export const SelectPrice: FC<SelectPriceProps> = ({
     <div className={styles.wrapper}>
       <div className={styles.title}>
         <p>{t(title)}</p>
-        <InfoIcon />
+        <InfoTooltip text={t(text)} />
       </div>
       <div
         className={`${styles.accomms} ${formats?.length === 4 ? styles.max : styles.min} `}

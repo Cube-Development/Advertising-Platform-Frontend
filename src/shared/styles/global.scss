@@ -316,8 +316,8 @@ main {
   width: 100%;
   background: linear-gradient(
     to right,
-    #5c89ff var(--male),
-    #fc65ff var(--male) 100%
+    var(--color-sex-man) var(--male),
+    var(--color-sex-woman) var(--male) 100%
   );
 
   &::before {
@@ -741,6 +741,22 @@ main {
 
     100% {
       transform: translateX(0);
+    }
+  }
+}
+
+.loader {
+  display: grid;
+  align-content: center;
+  justify-content: center;
+
+  span {
+    width: 15px;
+    height: 15px;
+
+    &::after {
+      width: 15px;
+      height: 15px;
     }
   }
 }

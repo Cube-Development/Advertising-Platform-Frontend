@@ -207,20 +207,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
         </div>
         {screen > BREAKPOINT.MD && (
           <>
-            {subcard?.desire?.length === 0 ? (
-              <div className={styles.subcard__agreed}>
-                <div>
-                  <p>{t(`orders_manager.order_status.agreed.title`)}</p>
-                  <div>
-                    <ChangePostBtn
-                      order={subcard}
-                      project_id={card?.project_id}
-                    />
-                    <CheckBtn />
-                  </div>
-                </div>
-              </div>
-            ) : subcard?.desire?.length ? (
+            {subcard?.desire?.length ? (
               <div className={styles.subcard__posted}>
                 <div className={styles.subcard__posted__title}>
                   <p>{t(`orders_manager.order_status.comment.title`)}</p>
@@ -298,7 +285,6 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
                 <p>{t(`orders_manager.order_status.accepted.title`)}</p>
                 <span>{t(`orders_manager.order_status.accepted.text`)}</span>
                 <SeePostBtn post={post!} />
-                {/* <SeePostBtn /> */}
               </div>
             ) : subcard?.api_status === orderStatus.moderation ? (
               <div className={styles.subcard__moderation}>
@@ -317,6 +303,16 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
                 <div>
                   <p>{t(`orders_manager.order_status.waiting.title`)}</p>
                   <SeePostBtn post={post!} />
+                </div>
+              </div>
+            ) : subcard?.api_status === orderStatus.order_review ? (
+              <div className={styles.subcard__agreed}>
+                <div>
+                  <p>{t(`orders_advertiser.order_status.agreed.title`)}</p>
+                  <div>
+                    <ChangeChannelBtn order={subcard} project_id={card?.id} />
+                    <SeePostBtn post={post!} />
+                  </div>
                 </div>
               </div>
             ) : (
@@ -628,7 +624,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
                 <p>{t(`orders_advertiser.order_status.agreed.title`)}</p>
                 <div>
                   <ChangeChannelBtn order={subcard} project_id={card?.id} />
-                  <CheckBtn />
+                  <SeePostBtn post={post!} />
                 </div>
               </div>
             </div>

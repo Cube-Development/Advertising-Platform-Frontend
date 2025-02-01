@@ -8,8 +8,6 @@ export * from "./dialog";
 export * from "./drawer";
 export * from "./input";
 export * from "./label";
-export * from "./multi-select";
-export * from "./multi-select-2";
 export * from "./popover";
 export * from "./scroll-area";
 export * from "./select";

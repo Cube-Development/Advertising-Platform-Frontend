@@ -79,7 +79,7 @@ export const ReplaceChannel: FC<ReplaceChannelProps> = ({
           {t(`order_btn.changeChannel`)}
         </MyButton>
       </AlertDialogTrigger>
-      <AlertDialogContent className={`${styles.content} ${styles.dialog}`}>
+      <AlertDialogContent className={styles.content}>
         <AlertDialogTitle className={styles.title}>
           <p className="gradient_color">
             {haveDesire
@@ -94,6 +94,7 @@ export const ReplaceChannel: FC<ReplaceChannelProps> = ({
         </AlertDialogTitle>
         <textarea
           {...register("comment")}
+          className={styles.textarea}
           maxLength={300}
           disabled={haveDesire}
           placeholder={t(

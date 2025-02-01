@@ -14,23 +14,21 @@ import { SelectDescription, SelectOptions, SelectSex } from "@features/other";
 import { ArrowLongHorizontalIcon } from "@shared/assets";
 import { BREAKPOINT, PAGE_ANIMATION } from "@shared/config";
 import { Languages } from "@shared/config/languages";
-import { IOption } from "@shared/types";
+import { useWindowWidth } from "@shared/hooks";
 import { MyButton, useToast } from "@shared/ui";
 import { motion } from "framer-motion";
-import { FC, useState } from "react";
-import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
+import { FC } from "react";
+import { UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { useWindowWidth } from "@shared/hooks";
 
 interface ChannelDescriptionProps {
   step: number;
   variant: typeof PAGE_ANIMATION.animationLeft;
   currentPlatform: IChannelLink;
   isEdit: boolean;
-  data: IAddChannelData;
+  formState: IAddChannelData;
   setValue: UseFormSetValue<IAddChannelData>;
-  getValues: UseFormGetValues<IAddChannelData>;
   onChangeStep: (newStep: number) => void;
   handleChangeFormData: (newData: IAddChannelDataPreview) => void;
 }
@@ -40,9 +38,8 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
   variant,
   currentPlatform,
   isEdit,
-  data,
+  formState,
   setValue,
-  getValues,
   onChangeStep,
   handleChangeFormData,
 }) => {
@@ -53,7 +50,6 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
   });
 
   const screen = useWindowWidth();
-  const [cat, setCat] = useState<IOption | undefined>(undefined);
   const contentRes = {
     language: language?.id || Languages[0].id,
     page: 1,
@@ -71,32 +67,32 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
 
   const onSubmit = () => {
     if (
-      data.age.length > 0 &&
-      data.category &&
-      data.description &&
-      data.language.length > 0 &&
-      data.region.length > 0 &&
-      data.format &&
-      data.format.length > 0
+      formState?.age.length > 0 &&
+      formState?.category &&
+      formState?.description &&
+      formState?.language.length > 0 &&
+      formState?.region.length > 0 &&
+      formState?.format &&
+      formState?.format.length > 0
     ) {
       const newCat = (channelCategories?.contents || []).find(
-        (item) => item.id === data.category,
+        (item) => item.id === formState?.category,
       )!;
 
-      setCat(newCat);
+      // setCat(newCat);
       const newData: IAddChannelDataPreview = {
-        ...data,
+        ...formState,
         category: [newCat],
         language: (languages?.contents || [])
-          .filter((item) => data.language.includes(item.id))
+          .filter((item) => formState?.language.includes(item.id))
           .sort((a, b) => a.id - b.id),
         age: (ages?.contents || [])
-          .filter((item) => data.age.includes(item.id))
+          .filter((item) => formState?.age.includes(item.id))
           .sort((a, b) => a.id - b.id),
         region: (regions?.contents || [])
-          .filter((item) => data.region.includes(item.id))
+          .filter((item) => formState?.region.includes(item.id))
           .sort((a, b) => a.id - b.id),
-        format: (data.format || [])
+        format: (formState?.format || [])
           .map((defaultFormat) => {
             const formatItem = (formats?.contents || []).find(
               (format) => format.id === defaultFormat.name,
@@ -114,6 +110,8 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
       });
     }
   };
+
+  console.log(formState);
   return (
     <>
       {step === 2 && (
@@ -122,51 +120,51 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
             <div className={styles.form}>
               <div className={styles.form__top}>
                 <SelectOptions
-                  onChange={setValue}
+                  formState={formState}
+                  onChangeOption={setValue}
                   options={channelCategories?.contents || []}
                   single={true}
                   type={channelParameterData.category}
                   textData={"add_platform.description.category"}
-                  defaultValues={
-                    (channelCategories?.contents || []).find(
-                      (item) => item.id === data.category,
-                    )! || cat
+                  defaultValue={
+                    formState?.category ? [formState?.category] : []
                   }
                   isRow={screen <= BREAKPOINT.LG}
                   isDisabled={isEdit}
                 />
                 <SelectOptions
-                  onChange={setValue}
+                  formState={formState}
+                  onChangeOption={setValue}
                   options={languages?.contents || []}
-                  single={false}
                   type={channelParameterData.language}
                   textData={"add_platform.description.languages"}
-                  defaultValues={data.language}
+                  defaultValue={formState?.language}
                   isRow={screen <= BREAKPOINT.LG}
                 />
                 <SelectOptions
-                  onChange={setValue}
+                  formState={formState}
+                  onChangeOption={setValue}
                   options={regions?.contents || []}
-                  single={false}
                   type={channelParameterData.region}
                   textData={"add_platform.description.region"}
-                  defaultValues={data.region}
+                  defaultValue={formState?.region}
                   isRow={screen <= BREAKPOINT.LG}
                 />
                 <SelectOptions
-                  onChange={setValue}
+                  formState={formState}
+                  onChangeOption={setValue}
                   options={ages?.contents || []}
-                  single={false}
                   type={channelParameterData.age}
                   textData={"add_platform.description.age"}
-                  defaultValues={data.age}
+                  defaultValue={formState?.age}
                   isRow={screen <= BREAKPOINT.LG}
                 />
                 <SelectSex
+                  formState={formState}
                   onChange={setValue}
                   title={"add_platform.description.sex.title"}
                   text={"add_platform.description.sex.text"}
-                  defaultValues={data.male}
+                  defaultValues={formState?.male}
                   isRow={screen <= BREAKPOINT.LG}
                 />
               </div>
@@ -179,25 +177,25 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
                   placeholder={
                     "add_platform.description.description.default_value"
                   }
-                  defaultValues={data.description}
+                  defaultValues={formState?.description}
                 />
                 <SelectPrice
                   onChange={setValue}
-                  getValues={getValues}
+                  formState={formState}
                   formats={formats?.contents || []}
                   AccommPrice={FormatPrice}
                   type={channelParameterData.format}
                   title={"add_platform.description.price.title"}
                   text={"add_platform.description.price.text"}
                   info={"add_platform.description.price.info"}
-                  defaultValues={data.format}
+                  defaultValues={formState?.format}
                 />
                 <SelectSymbol
                   onChange={setValue}
                   type={"text_limit"}
                   title={"add_platform.description.symbol.title"}
                   text={"add_platform.description.symbol.text"}
-                  defaultValues={data.text_limit}
+                  defaultValues={formState?.text_limit}
                   isRow={screen <= BREAKPOINT.LG}
                 />
               </div>

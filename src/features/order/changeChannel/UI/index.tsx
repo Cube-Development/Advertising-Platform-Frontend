@@ -60,7 +60,7 @@ export const ChangeChannel: FC<ChangeChannelProps> = ({
             </div>
           </AlertDialogCancel>
         </AlertDialogTitle>
-        <span className={styles.text}>{text}</span>
+        <span className={styles.textarea}>{text}</span>
 
         <AlertDialogCancel asChild>
           <Link to={paths.cart} onClick={handleOnClick}>

@@ -10,6 +10,7 @@ import { Languages } from "@shared/config";
 import { useAppSelector, useCurrentPathEnum } from "@shared/hooks";
 import { paths } from "@shared/routing";
 import {
+  AccountsLoader,
   Dialog,
   DialogClose,
   DialogContent,
@@ -33,8 +34,9 @@ interface CreatePostProps {}
 export const CreatePost: FC<CreatePostProps> = ({}) => {
   const { t, i18n } = useTranslation();
   const { isAuth, role } = useAppSelector((state) => state.user);
-  const [createCart] = useCreateCartMutation();
-  const [createProjectCart] = useCreateProjectCartMutation();
+  const [createCart, { isLoading: isLoadingCart }] = useCreateCartMutation();
+  const [createProjectCart, { isLoading: isLoadingProjectCart }] =
+    useCreateProjectCartMutation();
   const [checkProjectCart] = useCheckCartMutation();
   const { toast } = useToast();
   const language = Languages.find((lang) => {
@@ -44,78 +46,80 @@ export const CreatePost: FC<CreatePostProps> = ({}) => {
 
   const handleCreateCart = () => {
     if (isAuth && role === roles.advertiser) {
-      createCart()
-        .unwrap()
-        .then((data) => {
-          Cookies.set("project_id", data.project_id);
-          navigate(paths.createOrder);
-        })
-        .catch((error) => {
-          console.error("Ошибка во время создания корзины", error);
-          toast({
-            variant: "error",
-            title: t("toasts.cart.error"),
-            action: <ToastAction altText="Ok">Ok</ToastAction>,
-          });
-        });
-    } else if (isAuth && role === roles.manager) {
-      // должен быть запрос на проверку общей суммы в корзине манагера проекта и бюджета этого проета
-      const projectId = Cookies.get("project_id") || "";
-      createProjectCart({
-        project_id: projectId,
-        language: language?.id || Languages[0].id,
-      })
-        .unwrap()
-        .then(() => {
-          checkProjectCart({
-            project_id: projectId,
+      !isLoadingCart &&
+        createCart()
+          .unwrap()
+          .then((data) => {
+            Cookies.set("project_id", data.project_id);
+            navigate(paths.createOrder);
           })
-            .unwrap()
-            .then((data) => {
-              if (data.state === cartStatusFilter.success) {
-                navigate(paths.createOrder);
-              } else if (
-                data.state === cartStatusFilter.channel_to_be_replaced
-              ) {
-                Cookies.set("channel_to_be_replaced", "true");
-                navigate(paths.createOrder);
-              } else if (data.state === cartStatusFilter.amount) {
-                toast({
-                  variant: "error",
-                  title: t("cart.check.amount"),
-                  action: <ToastAction altText="Ok">Ok</ToastAction>,
-                });
-              } else if (data.state === cartStatusFilter.not_found) {
-                toast({
-                  variant: "error",
-                  title: t("cart.check.not_found"),
-                  action: <ToastAction altText="Ok">Ok</ToastAction>,
-                });
-              } else if (data.state === cartStatusFilter.no_data) {
-                toast({
-                  variant: "error",
-                  title: t("cart.check.no_data"),
-                  action: <ToastAction altText="Ok">Ok</ToastAction>,
-                });
-              }
-            })
-            .catch((error) => {
-              console.error("Ошибка во время создания корзины", error);
-              toast({
-                variant: "error",
-                title: t("toasts.cart.error"),
-                action: <ToastAction altText="Ok">Ok</ToastAction>,
-              });
+          .catch((error) => {
+            console.error("Ошибка во время создания корзины", error);
+            toast({
+              variant: "error",
+              title: t("toasts.cart.error"),
+              action: <ToastAction altText="Ok">Ok</ToastAction>,
             });
-        })
-        .catch((error) => {
-          console.error("Ошибка во время создания корзины", error);
-          toast({
-            variant: "error",
-            title: t("toasts.cart.error"),
-            action: <ToastAction altText="Ok">Ok</ToastAction>,
           });
-        });
+    } else if (isAuth && role === roles.manager) {
+      // должен быть запрос на проверку общей суммы в корзине манагера проекта и бюджета этого проекта
+      const projectId = Cookies.get("project_id") || "";
+      !isLoadingProjectCart &&
+        createProjectCart({
+          project_id: projectId,
+          language: language?.id || Languages[0].id,
+        })
+          .unwrap()
+          .then(() => {
+            checkProjectCart({
+              project_id: projectId,
+            })
+              .unwrap()
+              .then((data) => {
+                if (data.state === cartStatusFilter.success) {
+                  navigate(paths.createOrder);
+                } else if (
+                  data.state === cartStatusFilter.channel_to_be_replaced
+                ) {
+                  Cookies.set("channel_to_be_replaced", "true");
+                  navigate(paths.createOrder);
+                } else if (data.state === cartStatusFilter.amount) {
+                  toast({
+                    variant: "error",
+                    title: t("cart.check.amount"),
+                    action: <ToastAction altText="Ok">Ok</ToastAction>,
+                  });
+                } else if (data.state === cartStatusFilter.not_found) {
+                  toast({
+                    variant: "error",
+                    title: t("cart.check.not_found"),
+                    action: <ToastAction altText="Ok">Ok</ToastAction>,
+                  });
+                } else if (data.state === cartStatusFilter.no_data) {
+                  toast({
+                    variant: "error",
+                    title: t("cart.check.no_data"),
+                    action: <ToastAction altText="Ok">Ok</ToastAction>,
+                  });
+                }
+              })
+              .catch((error) => {
+                console.error("Ошибка во время создания корзины", error);
+                toast({
+                  variant: "error",
+                  title: t("toasts.cart.error"),
+                  action: <ToastAction altText="Ok">Ok</ToastAction>,
+                });
+              });
+          })
+          .catch((error) => {
+            console.error("Ошибка во время создания корзины", error);
+            toast({
+              variant: "error",
+              title: t("toasts.cart.error"),
+              action: <ToastAction altText="Ok">Ok</ToastAction>,
+            });
+          });
     } else {
       toast({
         variant: "error",
@@ -135,7 +139,13 @@ export const CreatePost: FC<CreatePostProps> = ({}) => {
           className={styles.button}
         >
           <p>{t(`cart_btn.create_post`)}</p>
-          <ArrowLongHorizontalIcon className="icon__white" />
+          {isLoadingCart || isLoadingProjectCart ? (
+            <div className="loader">
+              <AccountsLoader />
+            </div>
+          ) : (
+            <ArrowLongHorizontalIcon className="icon__white" />
+          )}
         </MyButton>
       ) : (
         <Dialog>

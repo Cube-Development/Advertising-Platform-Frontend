@@ -14,28 +14,18 @@
   height: 50vh;
   width: 50vw;
   max-width: 800px;
+  max-height: 400px;
   padding: 40px;
-  position: relative;
 
   .title {
     display: grid;
     grid-auto-flow: column;
 
     p {
-      background: var(--Gradients-Gradient-1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
       font-size: 24px;
       font-style: normal;
       font-weight: 600;
       line-height: normal;
-
-      // @media (max-width: 576px) {
-      //   font-size: 20px;
-      //   text-align: center;
-      //   font-weight: 600;
-      // }
     }
 
     .close {
@@ -52,7 +42,12 @@
     }
   }
 
-  textarea {
+  .textarea {
     resize: none;
+    outline: none;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
   }
 }
