@@ -25,48 +25,32 @@ export const SelectSex: FC<SelectSexProps> = ({
   isRow,
   isCatalog,
   formState,
-  defaultValues,
+  defaultValues = PLATFORM_PARAMETERS.defaultSexMale,
 }) => {
   const { t } = useTranslation();
-
-  const [position, setPosition] = useState<number | null>(
-    defaultValues !== undefined
-      ? defaultValues
-      : isCatalog
-        ? null
-        : PLATFORM_PARAMETERS.defaultSexMale,
-  );
-
+  const [position, setPosition] = useState<number>(defaultValues);
   const debouncedPosition = useDebounce(position, DEBOUNCE.sex);
 
-  const handleChange = (newPosition: number | null) => {
+  const handleChange = (newPosition: number) => {
     if (isCatalog) {
       const updatedFilter = {
         ...formState?.filter,
         ["male"]: newPosition,
-        ["female"]: newPosition ? 100 - newPosition : null,
+        ["female"]: 100 - newPosition,
       };
       onChange("filter", updatedFilter);
     } else {
       onChange("male", newPosition);
-      onChange("female", newPosition ? 100 - newPosition : null);
+      onChange("female", 100 - newPosition);
     }
   };
 
   useEffect(() => {
-    if (isCatalog) {
-      setPosition(defaultValues !== undefined ? defaultValues : null);
-    } else {
-      setPosition(
-        defaultValues !== undefined
-          ? defaultValues
-          : PLATFORM_PARAMETERS.defaultSexMale,
-      );
-    }
+    setPosition(defaultValues);
   }, [defaultValues]);
 
   useEffect(() => {
-    handleChange(debouncedPosition as number | null);
+    handleChange(debouncedPosition as number);
   }, [debouncedPosition]);
 
   return (
@@ -77,7 +61,7 @@ export const SelectSex: FC<SelectSexProps> = ({
       </div>
       <div className={`${styles.slider} ${isCatalog ? styles.isCatalog : ""}`}>
         <div className={styles.man}>
-          <p>{position ? position : PLATFORM_PARAMETERS.defaultSexMale}%</p>
+          <p>{position}%</p>
           <BoyIcon />
         </div>
         <MySliderSex
@@ -85,16 +69,12 @@ export const SelectSex: FC<SelectSexProps> = ({
           min={0}
           step={5}
           max={100}
-          value={position ? position : PLATFORM_PARAMETERS.defaultSexMale}
-          onChange={(e) => (
-            setPosition(parseInt(e.target.value)), console.log(e.target.value)
-          )}
+          value={position}
+          onChange={(e) => setPosition(parseInt(e.target.value))}
         />
         <div className={styles.woman}>
           <GirlIcon />
-          <p>
-            {position ? 100 - position : PLATFORM_PARAMETERS.defaultSexMale}%
-          </p>
+          <p>{100 - position}%</p>
         </div>
       </div>
     </div>
