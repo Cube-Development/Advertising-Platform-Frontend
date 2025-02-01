@@ -2499,5 +2499,17 @@
     "admin_transactions": {
       "id": "Id скопировано"
     }
+  },
+
+  "components": { 
+    "select": {
+      "placeholder": "Не выбрано", 
+      "search": "Поиск...",
+      "select_all": "Выбрать все",
+      "not_found": "Не найдено",
+      "chosen": "Выбрано",
+      "clear": "Очистить",
+      "close": "Закрыть"
+  }
   }
 }

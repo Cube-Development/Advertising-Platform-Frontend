@@ -13,17 +13,18 @@ import {
   SearchFilter,
   SkeletonCatalogCard,
 } from "@features/catalog";
-import { SelectOptions, filterData } from "@features/other";
+import { SelectFilter, SelectOptions, filterData } from "@features/other";
+import { SadSmileIcon } from "@shared/assets";
 import {
   BREAKPOINT,
   INTERSECTION_ELEMENTS,
   PAGE_ANIMATION,
 } from "@shared/config";
+import { useWindowWidth } from "@shared/hooks";
 import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC } from "react";
 import {
-  UseFormGetValues,
   UseFormReset,
   UseFormResetField,
   UseFormSetValue,
@@ -31,14 +32,12 @@ import {
 import { useTranslation } from "react-i18next";
 import { ParametersFilter } from "../parametersFilter";
 import styles from "./styles.module.scss";
-import { SadSmileIcon } from "@shared/assets";
-import { useWindowWidth } from "@shared/hooks";
 
 interface CatalogListProps {
   channels: ICatalogChannel[];
   setValue: UseFormSetValue<getCatalogReq>;
   reset: UseFormReset<getCatalogReq>;
-  getValues: UseFormGetValues<getCatalogReq>;
+  formState: getCatalogReq;
   resetField: UseFormResetField<getCatalogReq>;
   page: number;
   onChangeCard: (cart: ICatalogChannel) => void;
@@ -52,7 +51,7 @@ export const CatalogList: FC<CatalogListProps> = ({
   channels,
   setValue,
   reset,
-  getValues,
+  formState,
   page,
   isLast,
   onChangeCard,
@@ -66,6 +65,14 @@ export const CatalogList: FC<CatalogListProps> = ({
   const handleOnChangePage = () => {
     setValue(channelParameterData.page, page + 1);
   };
+  console.log(formState);
+
+  const translatePlatformTypes = platformTypes.map((el) => {
+    return { ...el, name: t(el.name) };
+  });
+  const translateSortingTypes = sortingTypes.map((el) => {
+    return { ...el, name: t(el.name) };
+  });
 
   return (
     <div className={styles.wrapper}>
@@ -74,33 +81,42 @@ export const CatalogList: FC<CatalogListProps> = ({
           {t("catalog.all_platform")}: {channels?.length}
         </p>
         <div className={styles.filters}>
-          <SelectOptions
-            getValues={getValues}
-            onChange={setValue}
-            options={platformTypes}
+          <SelectFilter
+            formState={formState}
+            onChangeOption={setValue}
+            options={translatePlatformTypes}
             textData="filter.title"
             single={true}
+            showButtonClear={false}
+            showListClear={false}
+            showCheckBox={false}
             type={channelParameterData.platform}
             isFilter={true}
             isCatalogPlatform={true}
             isPlatformFilter={true}
+            defaultValue={[formState?.filter?.platform]}
           />
-          <SelectOptions
-            onChange={setValue}
-            options={sortingTypes}
+          {/* <SelectFilter
+            formState={formState}
+            onChangeOption={setValue}
+            options={translateSortingTypes}
             textData="sorting.title"
             single={true}
+            showButtonClear={false}
+            showListClear={false}
+            showCheckBox={false}
             type={filterData.sort}
             isFilter={true}
             isCatalogSorting={true}
-          />
+            // defaultValue={[formState?.filter?.]}
+          /> */}
         </div>
       </div>
       <div className={styles.search__row}>
         <SearchFilter type={channelData.search} onChange={setValue} />
         {screen < BREAKPOINT.LG && (
           <ParametersFilter
-            getValues={getValues}
+            formState={formState}
             reset={reset}
             setValue={setValue}
             catalogFilter={catalogFilter}

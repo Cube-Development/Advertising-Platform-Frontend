@@ -88,11 +88,10 @@ export const ChannelCard: FC<ChannelCardProps> = ({
     format: [],
   };
 
-  const { handleSubmit, setValue, getValues, watch, reset } =
-    useForm<IAdminEditChannelData>({
-      defaultValues: defaultValues,
-    });
-  const formFields = watch();
+  const { setValue, watch, reset } = useForm<IAdminEditChannelData>({
+    defaultValues: defaultValues,
+  });
+  const formState = watch();
 
   const formatsResTg = { ...contentRes, platform: platformTypesNum.telegram };
   const formatsResInsta = {
@@ -144,7 +143,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({
     }
   }, [channel, reset]);
 
-  console.log(formFields);
+  console.log(formState);
 
   return (
     <AccordionItem
@@ -277,69 +276,67 @@ export const ChannelCard: FC<ChannelCardProps> = ({
             <div className={styles.parameters}>
               <div className={styles.block}>
                 <SelectOptions
-                  onChange={setValue}
+                  formState={formState}
+                  onChangeOption={setValue}
                   options={categories?.contents || []}
                   single={true}
                   type={channelParameterData.category}
                   textData={"add_platform.description.category"}
                   isRow={true}
-                  defaultValues={
+                  defaultValue={
                     (categories?.contents || []).find(
-                      (item) => item.id === formFields.category,
+                      (item) => item.id === formState.category,
                     )!
                   }
                 />
               </div>
               <div className={styles.block}>
                 <SelectOptions
-                  onChange={setValue}
-                  getValues={getValues}
+                  onChangeOption={setValue}
+                  formState={formState}
                   options={ages?.contents || []}
-                  single={false}
                   type={channelParameterData.age}
                   textData={"add_platform.description.age"}
                   isRow={true}
-                  defaultValues={formFields.age}
+                  defaultValue={formState.age}
                 />
               </div>
 
               <div className={styles.block}>
                 <SelectOptions
-                  onChange={setValue}
-                  getValues={getValues}
+                  onChangeOption={setValue}
+                  formState={formState}
                   options={languages?.contents || []}
-                  single={false}
                   type={channelParameterData.language}
                   textData={"add_platform.description.languages"}
                   isRow={true}
-                  defaultValues={formFields.language}
+                  defaultValue={formState.language}
                 />
               </div>
               <div className={styles.block}>
                 <SelectOptions
-                  onChange={setValue}
-                  getValues={getValues}
+                  onChangeOption={setValue}
+                  formState={formState}
                   options={regions?.contents || []}
-                  single={false}
                   type={channelParameterData.region}
                   textData={"add_platform.description.region"}
                   isRow={true}
-                  defaultValues={formFields.region}
+                  defaultValue={formState.region}
                 />
               </div>
               <div className={styles.block}>
                 <SelectSex
                   onChange={setValue}
-                  getValues={getValues}
+                  formState={formState}
                   title={"add_platform.description.sex.title"}
                   isRow={true}
-                  defaultValues={formFields.male}
+                  defaultValues={formState.male}
                 />
               </div>
               <div className={styles.block}>
                 <SelectPrice
                   onChange={setValue}
-                  getValues={getValues}
+                  formState={formState}
                   formats={
                     card?.channel?.platform === platformTypesNum?.telegram
                       ? formatsTg?.contents || []
@@ -352,7 +349,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({
                   title={"add_platform.description.price.title"}
                   text={"add_platform.description.price.text"}
                   info={"add_platform.description.price.info"}
-                  defaultValues={formFields.format}
+                  defaultValues={formState.format}
                 />
               </div>
             </div>
@@ -360,7 +357,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({
               {card?.status === channelStatus.active ? (
                 <>
                   <BanChannel id={card?.channel?.id} />
-                  <UpdateChannel channel={formFields} id={card?.channel?.id} />
+                  <UpdateChannel channel={formState} id={card?.channel?.id} />
                 </>
               ) : card?.status === channelStatus.moderation ? (
                 <>
@@ -371,7 +368,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({
                 <>
                   <UnbanChannel id={card?.channel?.id} />
                   <UpdateChannel
-                    channel={formFields}
+                    channel={formState}
                     id={card?.channel?.id}
                     disabled={true}
                   />

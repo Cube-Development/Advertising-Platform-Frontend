@@ -10,5 +10,6 @@ export * from "./registration";
 export * from "./seeReason";
 export * from "./selectDescription";
 export * from "./selectOptions";
+export * from "./selectFilter";
 export * from "./selectSex";
 export * from "./turnkeyProject";

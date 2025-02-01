@@ -4,7 +4,7 @@ import { BoyIcon, GirlIcon } from "@shared/assets";
 import { useDebounce } from "@shared/hooks";
 import { InfoTooltip, MySliderSex } from "@shared/ui";
 import { FC, useEffect, useState } from "react";
-import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
+import { UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
@@ -14,7 +14,7 @@ interface SelectSexProps {
   onChange: UseFormSetValue<any>;
   isRow?: boolean;
   isCatalog?: boolean;
-  getValues?: UseFormGetValues<any>;
+  formState?: any;
   defaultValues?: number;
 }
 
@@ -24,7 +24,7 @@ export const SelectSex: FC<SelectSexProps> = ({
   onChange,
   isRow,
   isCatalog,
-  getValues,
+  formState,
   defaultValues,
 }) => {
   const { t } = useTranslation();
@@ -41,9 +41,8 @@ export const SelectSex: FC<SelectSexProps> = ({
 
   const handleChange = (newPosition: number | null) => {
     if (isCatalog) {
-      const { filter } = getValues && getValues();
       const updatedFilter = {
-        ...filter,
+        ...formState?.filter,
         ["male"]: newPosition,
         ["female"]: newPosition ? 100 - newPosition : null,
       };

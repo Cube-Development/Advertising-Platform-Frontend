@@ -32,12 +32,7 @@ import {
 } from "@shared/ui";
 import { Loader } from "lucide-react";
 import { FC, useEffect, useRef, useState } from "react";
-import {
-  useForm,
-  UseFormGetValues,
-  UseFormReset,
-  UseFormSetValue,
-} from "react-hook-form";
+import { useForm, UseFormReset, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import recomAnimation from "/animated/recom_lottie.gif";
@@ -45,7 +40,7 @@ import recomAnimation from "/animated/recom_lottie.gif";
 interface CatalogSearchProps {
   setValue: UseFormSetValue<getCatalogReq>;
   reset: UseFormReset<getCatalogReq>;
-  getValues: UseFormGetValues<getCatalogReq>;
+  formState: getCatalogReq;
   catalogFilter: catalogBarFilter;
   changeCatalogfilter: (filter: catalogBarFilter) => void;
 }
@@ -53,7 +48,7 @@ interface CatalogSearchProps {
 export const CatalogSearch: FC<CatalogSearchProps> = ({
   setValue,
   reset,
-  getValues,
+  formState,
   catalogFilter,
   changeCatalogfilter,
 }) => {
@@ -77,13 +72,11 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
     },
   });
 
-  const { filter } = getValues();
-
   const { watch: watchTA, setValue: setValueTA } = useForm<getTAParametersReq>({
     defaultValues: {
-      category: filter?.business,
-      region: filter?.region,
-      language: filter?.language,
+      category: formState?.filter?.business,
+      region: formState?.filter?.region,
+      language: formState?.filter?.language,
     },
   });
 
@@ -159,7 +152,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
 
   useEffect(() => {
     if (isRecom && recommendationCard) {
-      const newFilter = { ...filter };
+      const newFilter = { ...formState?.filter };
 
       newFilter.business = recommendationCard.category?.map((item) => item.id);
       newFilter.age = recommendationCard.age?.map((item) => item.id);
@@ -182,10 +175,10 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
   };
 
   useEffect(() => {
-    setValueTA(channelParameterData.category, filter?.business);
-    setValueTA(channelParameterData.region, filter?.region);
-    setValueTA(channelParameterData.language, filter?.language);
-  }, [filter]);
+    setValueTA(channelParameterData.category, formState?.filter?.business);
+    setValueTA(channelParameterData.region, formState?.filter?.region);
+    setValueTA(channelParameterData.language, formState?.filter?.language);
+  }, [formState?.filter]);
 
   useEffect(() => {
     if (AIParameters) {
@@ -198,9 +191,9 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
   useEffect(() => {
     reset();
     if (catalogFilter === catalogBarFilter.parameters) {
-      setValueTA(channelParameterData.category, filter?.business);
-      setValueTA(channelParameterData.region, filter?.region);
-      setValueTA(channelParameterData.language, filter?.language);
+      setValueTA(channelParameterData.category, formState?.filter?.business);
+      setValueTA(channelParameterData.region, formState?.filter?.region);
+      setValueTA(channelParameterData.language, formState?.filter?.language);
     }
   }, [catalogFilter]);
 
@@ -316,56 +309,52 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
           {catalogFilter === catalogBarFilter.parameters ? (
             <>
               <SelectOptions
-                onChange={setValue}
-                getValues={getValues}
+                onChangeOption={setValue}
+                formState={formState}
                 options={categories?.contents || []}
-                single={false}
                 type={channelParameterData.business}
                 textData={"catalog.category"}
                 isRow={true}
                 isCatalog={true}
-                defaultValues={filter.business}
+                defaultValue={formState?.filter?.business}
               />
               <SelectOptions
-                onChange={setValue}
-                getValues={getValues}
+                onChangeOption={setValue}
+                formState={formState}
                 options={regions?.contents || []}
-                single={false}
                 type={channelParameterData.region}
                 textData={"catalog.region"}
                 isRow={true}
                 isCatalog={true}
-                defaultValues={filter.region}
+                defaultValue={formState?.filter.region}
               />
               <SelectOptions
-                onChange={setValue}
-                getValues={getValues}
+                onChangeOption={setValue}
+                formState={formState}
                 options={languages?.contents || []}
-                single={false}
                 type={channelParameterData.language}
                 textData={"catalog.languages"}
                 isRow={true}
                 isCatalog={true}
-                defaultValues={filter.language}
+                defaultValue={formState?.filter.language}
               />
               <SelectSex
                 onChange={setValue}
-                getValues={getValues}
+                formState={formState}
                 title={"catalog.sex.title"}
                 isRow={true}
                 isCatalog={true}
-                defaultValues={filter.male}
+                defaultValues={formState?.filter.male}
               />
               <SelectOptions
-                onChange={setValue}
-                getValues={getValues}
+                onChangeOption={setValue}
+                formState={formState}
                 options={ages?.contents || []}
-                single={false}
                 type={channelParameterData.age}
                 textData={"catalog.age"}
                 isRow={true}
                 isCatalog={true}
-                defaultValues={filter.age}
+                defaultValue={formState?.filter.age}
               />
             </>
           ) : (

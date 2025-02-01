@@ -64,7 +64,7 @@ export const CatalogBlock: FC = () => {
       },
     });
 
-  const formFields = watch();
+  const formState = watch();
 
   const setValueWithPage = (key: any, value: any) => {
     setValue(channelParameterData.page, 1);
@@ -73,7 +73,7 @@ export const CatalogBlock: FC = () => {
 
   const { data: catalogAuth, isFetching: isCatalogAuthLoading } =
     useGetCatalogQuery(
-      { ...formFields, user_id: userId },
+      { ...formState, user_id: userId },
       {
         skip: !isAuth || !userId || role !== roles.advertiser,
       },
@@ -81,13 +81,13 @@ export const CatalogBlock: FC = () => {
 
   const { data: catalogManager, isFetching: isCatalogManagerLoading } =
     useGetCatalogQuery(
-      { ...formFields, project_id: projectId },
+      { ...formState, project_id: projectId },
       { skip: !isAuth || !projectId || role !== roles.manager },
     );
 
   const { data: catalogPublic, isFetching: isCatalogLoading } =
     useGetCatalogQuery(
-      { ...formFields, guest_id: guestId },
+      { ...formState, guest_id: guestId },
       { skip: isAuth || !guestId },
     );
 
@@ -353,7 +353,7 @@ export const CatalogBlock: FC = () => {
         catalogAPI.util.updateQueryData(
           "getCatalog",
           {
-            ...formFields,
+            ...formState,
             user_id: userId,
             guest_id: guestId,
             project_id: projectId,
@@ -374,7 +374,7 @@ export const CatalogBlock: FC = () => {
           {screen >= BREAKPOINT.LG && (
             <div className={styles.left}>
               <CatalogSearch
-                getValues={getValues}
+                formState={formState}
                 reset={reset}
                 setValue={setValueWithPage}
                 catalogFilter={catalogFilter}
@@ -387,11 +387,11 @@ export const CatalogBlock: FC = () => {
               <CatalogList
                 changeCatalogFilter={(filter) => setCatalogFilter(filter)}
                 catalogFilter={catalogFilter}
-                getValues={getValues}
+                formState={formState}
                 reset={reset}
                 setValue={setValueWithPage}
                 resetField={resetField}
-                page={formFields.page}
+                page={formState.page}
                 channels={
                   (isAuth && role == roles.advertiser
                     ? catalogAuth?.channels
