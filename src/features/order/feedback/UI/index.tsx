@@ -8,6 +8,7 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogDescription,
   DialogTitle,
   DialogTrigger,
   Drawer,
@@ -64,6 +65,7 @@ export const Feedback: FC<IOrderFeature> = ({ order_id }) => {
           </DialogTrigger>
           <DialogContent>
             <DialogTitle className="sr-only"></DialogTitle>
+            <DialogDescription className="sr-only"></DialogDescription>
             <div className={styles.popover}>
               <div className="absolute -right-3 -top-3">
                 <DialogClose>
@@ -121,6 +123,7 @@ export const Feedback: FC<IOrderFeature> = ({ order_id }) => {
           </DrawerTrigger>
           <DrawerContent className="rounded-t-xl bottom-0 top-auto">
             <DialogTitle className="sr-only"></DialogTitle>
+            <DialogDescription className="sr-only"></DialogDescription>
             <div className="mx-auto mt-4 h-1.5 w-[80px] rounded-full bg-black/20" />
             <div className={styles.drawer_popover}>
               <div className={styles.description}>

@@ -16,7 +16,7 @@ import {
   TrashBasketIcon,
   YesIcon,
 } from "@shared/assets";
-import { useAppSelector } from "@shared/hooks";
+import { useAppSelector, useCurrentPathEnum } from "@shared/hooks";
 import { paths } from "@shared/routing";
 import { ITarifInfo } from "@shared/types";
 import {
@@ -220,6 +220,8 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
   const handleClose = () => {
     setValue(tarifData?.isTarifBought, false);
   };
+
+  const currentPath = useCurrentPathEnum();
 
   return (
     <>
@@ -517,14 +519,14 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
             </div>
             <DialogFooter className="pt-[20px]">
               <Link
-                to={paths.login}
+                to={`${paths.login}${currentPath}`}
                 className={`${styles.btns__login} truncate`}
               >
                 {t("login")}
                 <LoginIcon />
               </Link>
               <Link
-                to={paths.registration}
+                to={`${paths.registration}${currentPath}`}
                 className={`${styles.btns__register} truncate`}
               >
                 {t("registration")}

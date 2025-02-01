@@ -150,11 +150,12 @@ export const advProjectsAPI = authApi.injectEndpoints({
         ADV_PROJECTS,
         VIEWS_ADVERTISER,
         VIEWS_MANAGER,
+        ADV_ORDERS,
       ],
     }),
     rejectOrder: build.mutation<
       { success: boolean },
-      { order_id: string; comment: string }
+      { order_id: string; comment: string; theme: string }
     >({
       query: (params) => ({
         url: `/order/advertiser/reject`,
@@ -166,6 +167,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
         ADV_PROJECTS,
         VIEWS_ADVERTISER,
         VIEWS_MANAGER,
+        ADV_ORDERS,
       ],
     }),
     getAdvProjects: build.query<IAdvProjects, getProjectsCardReq>({

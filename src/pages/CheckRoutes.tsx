@@ -1,8 +1,8 @@
+import { useLocation, Navigate, Outlet } from "react-router-dom";
 import { managmentRoles, roles, userRoles } from "@entities/user";
 import { useAppSelector } from "@shared/hooks";
 import { paths } from "@shared/routing";
 import Cookies from "js-cookie";
-import { Navigate, Outlet } from "react-router-dom";
 
 export enum routerType {
   public = "public",
@@ -12,11 +12,7 @@ export enum routerType {
 
 export const CheckProjectId = () => {
   const projectId = Cookies.get("project_id");
-  if (projectId) {
-    return <Outlet />;
-  } else {
-    return <Navigate to={paths.cart} replace />;
-  }
+  return projectId ? <Outlet /> : <Navigate to={paths.cart} replace />;
 };
 
 export const CheckRoutes = ({
@@ -27,20 +23,25 @@ export const CheckRoutes = ({
   type: routerType;
 }) => {
   const { isAuth, role } = useAppSelector((state) => state.user);
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const from = params.get("from");
+
+  // Проверяем, является ли `from` допустимым путем из `paths`
+  const isValidPath = from && Object.values(paths).includes(from as paths);
+  const redirectPath = isValidPath
+    ? (from as paths)
+    : role === roles.advertiser
+      ? paths.main
+      : paths.mainBlogger;
 
   if (type === routerType.onlyPublic) {
     if (!isAuth) {
       return <Outlet />;
     } else {
-      return (
-        <Navigate
-          to={role === roles.advertiser ? paths.main : paths.mainBlogger}
-          replace
-        />
-      );
+      return <Navigate to={redirectPath} replace />;
     }
   } else if (type === routerType.public) {
-    // console.log("PublicdRoutes", role, checkRole);
     if (
       !isAuth ||
       (isAuth && role === checkRole) ||
@@ -48,12 +49,7 @@ export const CheckRoutes = ({
     ) {
       return <Outlet />;
     } else {
-      return (
-        <Navigate
-          to={role === roles.advertiser ? paths.main : paths.mainBlogger}
-          replace
-        />
-      );
+      return <Navigate to={redirectPath} replace />;
     }
   } else {
     if (!isAuth) {
@@ -64,13 +60,9 @@ export const CheckRoutes = ({
       return role === checkRole ? (
         <Outlet />
       ) : (
-        <Navigate
-          to={role === roles.advertiser ? paths.main : paths.mainBlogger}
-          replace
-        />
+        <Navigate to={redirectPath} replace />
       );
     } else if (isAuth && managmentRoles.includes(role)) {
-      // console.log("managmentRoles", checkRole, role);
       return <Outlet />;
     } else {
       return <Navigate to={paths.main} replace />;

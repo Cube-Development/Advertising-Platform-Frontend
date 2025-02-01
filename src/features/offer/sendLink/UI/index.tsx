@@ -15,15 +15,22 @@ import {
   useToast,
 } from "@shared/ui";
 import { IOrderFeature } from "@entities/project";
-import { usePublishPostBloggerMutation } from "@entities/offer";
+import {
+  bloggerOffersAPI,
+  usePublishPostBloggerMutation,
+} from "@entities/offer";
 import { ArrowLongHorizontalIcon } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
-import { useWindowWidth } from "@shared/hooks";
+import { useAppDispatch, useWindowWidth } from "@shared/hooks";
 
 export const SendLink: FC<IOrderFeature> = ({ order_id }) => {
   const [url, setUrl] = useState("");
   const [isUrlValid, setIsUrlValid] = useState(true);
   const { toast } = useToast();
+  const dispatch = useAppDispatch();
+  const handleInvalidateCache = () => {
+    dispatch(bloggerOffersAPI.util.resetApiState());
+  };
   const [publishPostBlogger, { isLoading }] = usePublishPostBloggerMutation();
   const { t } = useTranslation();
 
@@ -51,6 +58,7 @@ export const SendLink: FC<IOrderFeature> = ({ order_id }) => {
           variant: "success",
           title: t("toasts.offers_blogger.send_link.success"),
         });
+        handleInvalidateCache();
       })
       .catch((error) => {
         toast({

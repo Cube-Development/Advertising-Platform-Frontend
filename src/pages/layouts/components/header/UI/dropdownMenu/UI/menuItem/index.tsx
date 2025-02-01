@@ -19,6 +19,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
+import { useCurrentPathEnum } from "@shared/hooks";
 
 export const MenuItem: React.FC<IMenuItems> = ({
   item,
@@ -47,6 +48,8 @@ export const MenuItem: React.FC<IMenuItems> = ({
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
+  const currentPath = useCurrentPathEnum();
 
   return (
     <AccordionItem
@@ -118,7 +121,7 @@ export const MenuItem: React.FC<IMenuItems> = ({
               </div>
               <DialogFooter className="pt-[20px]">
                 <Link
-                  to={paths.login}
+                  to={`${paths.login}${currentPath}`}
                   className={`${styles.btns__login} truncate`}
                   onClick={() => onChange("")}
                 >
@@ -126,7 +129,7 @@ export const MenuItem: React.FC<IMenuItems> = ({
                   <LoginIcon />
                 </Link>
                 <Link
-                  to={paths.registration}
+                  to={`${paths.registration}${currentPath}`}
                   className={`${styles.btns__register} truncate`}
                   onClick={() => onChange("")}
                 >

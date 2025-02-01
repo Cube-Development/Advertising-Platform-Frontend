@@ -7,7 +7,7 @@ import {
 import { roles } from "@entities/user";
 import { ArrowLongHorizontalIcon, LoginIcon } from "@shared/assets";
 import { Languages } from "@shared/config";
-import { useAppSelector } from "@shared/hooks";
+import { useAppSelector, useCurrentPathEnum } from "@shared/hooks";
 import { paths } from "@shared/routing";
 import {
   Dialog,
@@ -124,6 +124,8 @@ export const CreatePost: FC<CreatePostProps> = ({}) => {
     }
   };
 
+  const currentPath = useCurrentPathEnum();
+
   return (
     <>
       {isAuth ? (
@@ -169,14 +171,14 @@ export const CreatePost: FC<CreatePostProps> = ({}) => {
             </div>
             <DialogFooter className="pt-[20px]">
               <Link
-                to={paths.login}
+                to={`${paths.login}${currentPath}`}
                 className={`${styles.btns__login} truncate`}
               >
                 {t("login")}
                 <LoginIcon />
               </Link>
               <Link
-                to={paths.registration}
+                to={`${paths.registration}${currentPath}`}
                 className={`${styles.btns__register} truncate`}
               >
                 {t("registration")}

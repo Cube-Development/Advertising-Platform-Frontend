@@ -19,6 +19,18 @@
   .subcard {
     display: grid;
     align-items: center;
+    position: relative;
+
+    .platform__icon {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+
+      svg {
+        width: 15px;
+        height: 15px;
+      }
+    }
 
     &.grid__active {
       grid-template: 1fr / 12fr 4fr 1fr;
