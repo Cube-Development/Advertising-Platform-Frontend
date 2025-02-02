@@ -1,4 +1,5 @@
 import {
+  channelData,
   channelParameterData,
   useGetChannelAgesQuery,
   useGetChannelLanguagesQuery,
@@ -353,56 +354,55 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
               {catalogFilter === catalogBarFilter.parameters ? (
                 <>
                   <SelectOptions
+                    data={formState?.filter}
+                    typeData={channelData.filter}
                     onChangeOption={setValue}
-                    formState={formState}
                     options={categories?.contents || []}
-                    single={false}
-                    searchable={true}
-                    type={channelParameterData.business}
+                    typeParameter={channelParameterData.business}
                     textData={"catalog.category"}
-                    isRow={true}
-                    isCatalog={true}
                     defaultValue={formState?.filter?.business}
+                    isRow={true}
+                    searchable={true}
                   />
                   <SelectOptions
+                    data={formState?.filter}
+                    typeData={channelData.filter}
                     onChangeOption={setValue}
-                    formState={formState}
                     options={regions?.contents || []}
-                    single={false}
-                    type={channelParameterData.region}
+                    typeParameter={channelParameterData.region}
                     textData={"catalog.region"}
                     isRow={true}
-                    isCatalog={true}
                     defaultValue={formState?.filter?.region}
                   />
                   <SelectOptions
+                    data={formState?.filter}
+                    typeData={channelData.filter}
                     onChangeOption={setValue}
-                    formState={formState}
                     options={languages?.contents || []}
-                    single={false}
-                    type={channelParameterData.language}
+                    typeParameter={channelParameterData.language}
                     textData={"catalog.languages"}
                     isRow={true}
-                    isCatalog={true}
                     defaultValue={formState?.filter?.language}
                   />
                   <SelectSex
+                    data={formState?.filter}
+                    typeData={channelData.filter}
                     onChange={setValue}
-                    formState={formState}
+                    typeMan={channelParameterData.male}
+                    typeWoman={channelParameterData.female}
                     title={"catalog.sex.title"}
+                    defaultValues={formState?.filter?.male}
                     isRow={true}
                     isCatalog={true}
-                    defaultValues={formState?.filter?.male}
                   />
                   <SelectOptions
+                    data={formState?.filter}
+                    typeData={channelData.filter}
                     onChangeOption={setValue}
-                    formState={formState}
                     options={ages?.contents || []}
-                    single={false}
-                    type={channelParameterData.age}
+                    typeParameter={channelParameterData.age}
                     textData={"catalog.age"}
                     isRow={true}
-                    isCatalog={true}
                     defaultValue={formState?.filter?.age}
                   />
                 </>

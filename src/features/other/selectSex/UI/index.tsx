@@ -16,6 +16,10 @@ interface SelectSexProps {
   isCatalog?: boolean;
   formState?: any;
   defaultValues?: number;
+  data?: any;
+  typeData?: string;
+  typeMan: string;
+  typeWoman: string;
 }
 
 export const SelectSex: FC<SelectSexProps> = ({
@@ -24,7 +28,10 @@ export const SelectSex: FC<SelectSexProps> = ({
   onChange,
   isRow,
   isCatalog,
-  formState,
+  data,
+  typeData,
+  typeMan,
+  typeWoman,
   defaultValues = PLATFORM_PARAMETERS.defaultSexMale,
 }) => {
   const { t } = useTranslation();
@@ -32,16 +39,16 @@ export const SelectSex: FC<SelectSexProps> = ({
   const debouncedPosition = useDebounce(position, DEBOUNCE.sex);
 
   const handleChange = (newPosition: number) => {
-    if (isCatalog) {
-      const updatedFilter = {
-        ...formState?.filter,
-        ["male"]: newPosition,
-        ["female"]: 100 - newPosition,
+    if (typeData && data) {
+      const newData = {
+        ...data,
+        [typeMan]: newPosition,
+        [typeWoman]: 100 - newPosition,
       };
-      onChange("filter", updatedFilter);
+      onChange(typeData, newData);
     } else {
-      onChange("male", newPosition);
-      onChange("female", 100 - newPosition);
+      onChange(typeMan, newPosition);
+      onChange(typeWoman, 100 - newPosition);
     }
   };
 

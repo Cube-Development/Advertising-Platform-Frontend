@@ -8,68 +8,64 @@ import styles from "./styles.module.scss";
 interface SelectOptionsProps extends MultiSelectProps {
   textData: string;
   options: IOption[];
-  type: any;
   isRow?: boolean;
-  isCatalog?: boolean;
   onChangeOption: UseFormSetValue<any>;
-  formState: any;
-  isDisabled?: boolean;
+  data?: any;
+  typeData?: string;
+  typeParameter: string;
 }
 
 export const SelectOptions: FC<SelectOptionsProps> = ({
   options,
-  type,
+  data,
+  typeData,
+  typeParameter,
   onChangeOption,
+  isRow,
+  textData,
+  defaultValue,
   single = false,
   showButtonClear = true,
   showListClear = true,
   showCheckBox = true,
   searchable = false,
-  isRow,
-  textData,
-  isCatalog,
-  formState,
-  defaultValue,
-  isDisabled = false,
+  disabled = false,
 }) => {
   const { t } = useTranslation();
   const allText = t(textData!, { returnObjects: true }) as ISelectOption;
 
-  const handleMultiOptionsChange = (newOptions: (number | null)[]) => {
-    if (isCatalog) {
-      console.log("newOptions", newOptions);
-      const updatedFilter = {
-        ...formState?.filter,
-        [type]: single ? newOptions[0] : newOptions,
+  const handleMultiOptionsChange = (newOptions: (number | string)[]) => {
+    if (typeData && data) {
+      const newData = {
+        ...data,
+        [typeParameter]: single ? newOptions[0] : newOptions,
       };
-      onChangeOption("filter", updatedFilter);
+      onChangeOption(typeData, newData);
     } else {
-      onChangeOption(type, single ? newOptions[0] : newOptions);
+      onChangeOption(typeParameter, single ? newOptions[0] : newOptions);
     }
   };
 
   return (
-    <>
-      <div
-        className={`${styles.parameters} ${isRow ? styles.wrapper__row : styles.wrapper}`}
-      >
-        <div className={styles.left}>
-          <p>{allText?.title}</p>
-          {allText?.text && <InfoTooltip text={allText?.text} />}
-        </div>
+    <div
+      className={`${styles.parameters} ${isRow ? styles.wrapper__row : styles.wrapper}`}
+    >
+      <div className={styles.left}>
+        <p>{allText?.title}</p>
+        {allText?.text && <InfoTooltip text={allText?.text} />}
       </div>
       <MultiSelect
         options={options}
         onValueChange={handleMultiOptionsChange}
         defaultValue={defaultValue}
         placeholder={allText?.default_value}
-        disabled={isDisabled}
+        disabled={disabled}
         single={single}
         showButtonClear={showButtonClear}
         showListClear={showListClear}
         showCheckBox={showCheckBox}
         searchable={searchable}
       />
-    </>
+    </div>
   );
 };
