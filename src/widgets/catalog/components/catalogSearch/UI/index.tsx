@@ -349,6 +349,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
                 title={"catalog.sex.title"}
                 defaultValues={formState?.filter.male}
                 isRow={true}
+                iconsAboveSlider={true}
               />
               <SelectOptions
                 data={formState?.filter}

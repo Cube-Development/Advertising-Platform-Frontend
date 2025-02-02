@@ -13,7 +13,7 @@ interface SelectSexProps {
   text?: string;
   onChange: UseFormSetValue<any>;
   isRow?: boolean;
-  isCatalog?: boolean;
+  iconsAboveSlider?: boolean;
   formState?: any;
   defaultValues?: number;
   data?: any;
@@ -27,7 +27,7 @@ export const SelectSex: FC<SelectSexProps> = ({
   text,
   onChange,
   isRow,
-  isCatalog,
+  iconsAboveSlider,
   data,
   typeData,
   typeMan,
@@ -66,7 +66,9 @@ export const SelectSex: FC<SelectSexProps> = ({
         <p>{t(title)}</p>
         {text && <InfoTooltip text={t(text)} />}
       </div>
-      <div className={`${styles.slider} ${isCatalog ? styles.isCatalog : ""}`}>
+      <div
+        className={`${styles.slider} ${iconsAboveSlider ? styles.iconsAboveSlider : ""}`}
+      >
         <div className={styles.man}>
           <p>{position}%</p>
           <BoyIcon />
