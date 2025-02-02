@@ -24,6 +24,7 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
   showButtonClear = true,
   showListClear = true,
   showCheckBox = true,
+  searchable = false,
   isRow,
   textData,
   isCatalog,
@@ -67,6 +68,7 @@ export const SelectOptions: FC<SelectOptionsProps> = ({
         showButtonClear={showButtonClear}
         showListClear={showListClear}
         showCheckBox={showCheckBox}
+        searchable={searchable}
       />
     </>
   );

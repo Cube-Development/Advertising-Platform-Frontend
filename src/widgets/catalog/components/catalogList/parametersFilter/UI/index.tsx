@@ -357,6 +357,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
                     formState={formState}
                     options={categories?.contents || []}
                     single={false}
+                    searchable={true}
                     type={channelParameterData.business}
                     textData={"catalog.category"}
                     isRow={true}

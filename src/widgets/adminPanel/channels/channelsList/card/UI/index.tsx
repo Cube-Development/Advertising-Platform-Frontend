@@ -280,6 +280,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({
                   onChangeOption={setValue}
                   options={categories?.contents || []}
                   single={true}
+                  searchable={true}
                   type={channelParameterData.category}
                   textData={"add_platform.description.category"}
                   isRow={true}

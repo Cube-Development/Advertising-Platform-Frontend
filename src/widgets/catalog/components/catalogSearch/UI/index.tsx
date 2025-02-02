@@ -316,6 +316,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
                 textData={"catalog.category"}
                 isRow={true}
                 isCatalog={true}
+                searchable={true}
                 defaultValue={formState?.filter?.business}
               />
               <SelectOptions

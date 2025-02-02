@@ -33,6 +33,7 @@ export interface MultiSelectProps
   showButtonClear?: boolean;
   showListClear?: boolean;
   showCheckBox?: boolean;
+  searchable?: boolean;
 }
 
 export const MultiSelect = React.forwardRef<
@@ -52,6 +53,7 @@ export const MultiSelect = React.forwardRef<
       showButtonClear = true,
       showListClear = true,
       showCheckBox = true,
+      searchable = false,
       ...props
     },
     ref,
@@ -187,10 +189,12 @@ export const MultiSelect = React.forwardRef<
           onEscapeKeyDown={() => setIsPopoverOpen(false)}
         >
           <Command>
-            <CommandInput
-              placeholder={t("components.select.search")}
-              onKeyDown={handleInputKeyDown}
-            />
+            {searchable && (
+              <CommandInput
+                placeholder={t("components.select.search")}
+                onKeyDown={handleInputKeyDown}
+              />
+            )}
             <CommandList className="max-h-[none] overflow-visible">
               <ScrollArea className="h-[200px]">
                 <CommandEmpty>{t("components.select.not_found")}</CommandEmpty>

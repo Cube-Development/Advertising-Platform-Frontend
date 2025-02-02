@@ -111,7 +111,6 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
     }
   };
 
-  console.log(formState);
   return (
     <>
       {step === 2 && (
@@ -124,6 +123,7 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
                   onChangeOption={setValue}
                   options={channelCategories?.contents || []}
                   single={true}
+                  searchable={true}
                   type={channelParameterData.category}
                   textData={"add_platform.description.category"}
                   defaultValue={
