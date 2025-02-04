@@ -1,7 +1,8 @@
 import { IOption } from "@shared/types";
-import { CheckIcon, ChevronDown, XIcon } from "lucide-react";
+import { ChevronDown, XIcon } from "lucide-react";
 import * as React from "react";
 import { useTranslation } from "react-i18next";
+import { CustomCheckbox } from "../customCheckbox";
 import {
   Command,
   CommandEmpty,
@@ -16,9 +17,7 @@ import {
   ScrollArea,
   Separator,
 } from "../shadcn-ui";
-import { cn } from "../shadcn-ui/lib/utils";
 import styles from "./styles.module.scss";
-import { CustomCheckbox } from "../customCheckbox";
 
 export interface MultiSelectProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
@@ -33,6 +32,8 @@ export interface MultiSelectProps
   showButtonClear?: boolean;
   showListClear?: boolean;
   showCheckBox?: boolean;
+  searchable?: boolean;
+  hideText?: boolean;
 }
 
 export const MultiSelect = React.forwardRef<
@@ -52,6 +53,8 @@ export const MultiSelect = React.forwardRef<
       showButtonClear = true,
       showListClear = true,
       showCheckBox = true,
+      searchable = false,
+      hideText = false,
       ...props
     },
     ref,
@@ -127,7 +130,7 @@ export const MultiSelect = React.forwardRef<
           >
             {selectedValues?.length > 0 ? (
               <div className={styles.filter}>
-                <span className={styles.text}>
+                <div className={styles.text}>
                   {single ? (
                     (() => {
                       const singleOption = options?.find(
@@ -139,7 +142,9 @@ export const MultiSelect = React.forwardRef<
                           {singleOption?.img && (
                             <singleOption.img className="h-4 w-4" />
                           )}
-                          {singleOption?.name}
+                          <span className="truncate">
+                            {!hideText && singleOption?.name}
+                          </span>
                         </div>
                       );
                     })()
@@ -149,7 +154,7 @@ export const MultiSelect = React.forwardRef<
                       / {options?.length}
                     </>
                   )}
-                </span>
+                </div>
                 <div className={styles.icons}>
                   {showButtonClear && (
                     <>
@@ -187,10 +192,12 @@ export const MultiSelect = React.forwardRef<
           onEscapeKeyDown={() => setIsPopoverOpen(false)}
         >
           <Command>
-            <CommandInput
-              placeholder={t("components.select.search")}
-              onKeyDown={handleInputKeyDown}
-            />
+            {searchable && (
+              <CommandInput
+                placeholder={t("components.select.search")}
+                onKeyDown={handleInputKeyDown}
+              />
+            )}
             <CommandList className="max-h-[none] overflow-visible">
               <ScrollArea className="h-[200px]">
                 <CommandEmpty>{t("components.select.not_found")}</CommandEmpty>
@@ -222,38 +229,44 @@ export const MultiSelect = React.forwardRef<
                             <CustomCheckbox isSelected={isSelected} />
                           )}
                           {option?.img && <option.img className="h-4 w-4" />}
-                          <span className="truncate">{option?.name}</span>
+                          {!hideText && (
+                            <span className="truncate">{option?.name}</span>
+                          )}
                         </div>
                       </CommandItem>
                     );
                   })}
                 </CommandGroup>
               </ScrollArea>
-              <CommandSeparator />
-              <CommandGroup>
-                <div className="flex items-center justify-between">
-                  {selectedValues.length > 0 && showListClear && (
-                    <>
+              {!hideText && (
+                <>
+                  <CommandSeparator />
+                  <CommandGroup>
+                    <div className="flex items-center justify-between">
+                      {selectedValues.length > 0 && showListClear && (
+                        <>
+                          <CommandItem
+                            onSelect={handleClear}
+                            className="flex-1 justify-center cursor-pointer"
+                          >
+                            {t("components.select.clear")}
+                          </CommandItem>
+                          <Separator
+                            orientation="vertical"
+                            className="flex min-h-6 h-full"
+                          />
+                        </>
+                      )}
                       <CommandItem
-                        onSelect={handleClear}
-                        className="flex-1 justify-center cursor-pointer"
+                        onSelect={() => setIsPopoverOpen(false)}
+                        className="flex-1 justify-center cursor-pointer max-w-full"
                       >
-                        {t("components.select.clear")}
+                        {t("components.select.close")}
                       </CommandItem>
-                      <Separator
-                        orientation="vertical"
-                        className="flex min-h-6 h-full"
-                      />
-                    </>
-                  )}
-                  <CommandItem
-                    onSelect={() => setIsPopoverOpen(false)}
-                    className="flex-1 justify-center cursor-pointer max-w-full"
-                  >
-                    {t("components.select.close")}
-                  </CommandItem>
-                </div>
-              </CommandGroup>
+                    </div>
+                  </CommandGroup>
+                </>
+              )}
             </CommandList>
           </Command>
         </PopoverContent>

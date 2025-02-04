@@ -13,9 +13,13 @@ interface SelectSexProps {
   text?: string;
   onChange: UseFormSetValue<any>;
   isRow?: boolean;
-  isCatalog?: boolean;
+  iconsAboveSlider?: boolean;
   formState?: any;
   defaultValues?: number;
+  data?: any;
+  typeData?: string;
+  typeMan: string;
+  typeWoman: string;
 }
 
 export const SelectSex: FC<SelectSexProps> = ({
@@ -23,50 +27,37 @@ export const SelectSex: FC<SelectSexProps> = ({
   text,
   onChange,
   isRow,
-  isCatalog,
-  formState,
-  defaultValues,
+  iconsAboveSlider,
+  data,
+  typeData,
+  typeMan,
+  typeWoman,
+  defaultValues = PLATFORM_PARAMETERS.defaultSexMale,
 }) => {
   const { t } = useTranslation();
-
-  const [position, setPosition] = useState<number | null>(
-    defaultValues !== undefined
-      ? defaultValues
-      : isCatalog
-        ? null
-        : PLATFORM_PARAMETERS.defaultSexMale,
-  );
-
+  const [position, setPosition] = useState<number>(defaultValues);
   const debouncedPosition = useDebounce(position, DEBOUNCE.sex);
 
-  const handleChange = (newPosition: number | null) => {
-    if (isCatalog) {
-      const updatedFilter = {
-        ...formState?.filter,
-        ["male"]: newPosition,
-        ["female"]: newPosition ? 100 - newPosition : null,
+  const handleChange = (newPosition: number) => {
+    if (typeData && data) {
+      const newData = {
+        ...data,
+        [typeMan]: newPosition,
+        [typeWoman]: 100 - newPosition,
       };
-      onChange("filter", updatedFilter);
+      onChange(typeData, newData);
     } else {
-      onChange("male", newPosition);
-      onChange("female", newPosition ? 100 - newPosition : null);
+      onChange(typeMan, newPosition);
+      onChange(typeWoman, 100 - newPosition);
     }
   };
 
   useEffect(() => {
-    if (isCatalog) {
-      setPosition(defaultValues !== undefined ? defaultValues : null);
-    } else {
-      setPosition(
-        defaultValues !== undefined
-          ? defaultValues
-          : PLATFORM_PARAMETERS.defaultSexMale,
-      );
-    }
+    setPosition(defaultValues);
   }, [defaultValues]);
 
   useEffect(() => {
-    handleChange(debouncedPosition as number | null);
+    handleChange(debouncedPosition as number);
   }, [debouncedPosition]);
 
   return (
@@ -75,9 +66,11 @@ export const SelectSex: FC<SelectSexProps> = ({
         <p>{t(title)}</p>
         {text && <InfoTooltip text={t(text)} />}
       </div>
-      <div className={`${styles.slider} ${isCatalog ? styles.isCatalog : ""}`}>
+      <div
+        className={`${styles.slider} ${iconsAboveSlider ? styles.iconsAboveSlider : ""}`}
+      >
         <div className={styles.man}>
-          <p>{position ? position : PLATFORM_PARAMETERS.defaultSexMale}%</p>
+          <p>{position}%</p>
           <BoyIcon />
         </div>
         <MySliderSex
@@ -85,16 +78,12 @@ export const SelectSex: FC<SelectSexProps> = ({
           min={0}
           step={5}
           max={100}
-          value={position ? position : PLATFORM_PARAMETERS.defaultSexMale}
-          onChange={(e) => (
-            setPosition(parseInt(e.target.value)), console.log(e.target.value)
-          )}
+          value={position}
+          onChange={(e) => setPosition(parseInt(e.target.value))}
         />
         <div className={styles.woman}>
           <GirlIcon />
-          <p>
-            {position ? 100 - position : PLATFORM_PARAMETERS.defaultSexMale}%
-          </p>
+          <p>{100 - position}%</p>
         </div>
       </div>
     </div>
