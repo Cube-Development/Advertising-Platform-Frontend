@@ -111,7 +111,6 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
     }
   };
 
-  console.log(formState);
   return (
     <>
       {step === 2 && (
@@ -120,48 +119,46 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
             <div className={styles.form}>
               <div className={styles.form__top}>
                 <SelectOptions
-                  formState={formState}
                   onChangeOption={setValue}
                   options={channelCategories?.contents || []}
-                  single={true}
-                  type={channelParameterData.category}
+                  typeParameter={channelParameterData.category}
                   textData={"add_platform.description.category"}
                   defaultValue={
                     formState?.category ? [formState?.category] : []
                   }
                   isRow={screen <= BREAKPOINT.LG}
-                  isDisabled={isEdit}
+                  single={true}
+                  searchable={true}
+                  disabled={isEdit}
                 />
                 <SelectOptions
-                  formState={formState}
                   onChangeOption={setValue}
                   options={languages?.contents || []}
-                  type={channelParameterData.language}
+                  typeParameter={channelParameterData.language}
                   textData={"add_platform.description.languages"}
                   defaultValue={formState?.language}
                   isRow={screen <= BREAKPOINT.LG}
                 />
                 <SelectOptions
-                  formState={formState}
                   onChangeOption={setValue}
                   options={regions?.contents || []}
-                  type={channelParameterData.region}
+                  typeParameter={channelParameterData.region}
                   textData={"add_platform.description.region"}
                   defaultValue={formState?.region}
                   isRow={screen <= BREAKPOINT.LG}
                 />
                 <SelectOptions
-                  formState={formState}
                   onChangeOption={setValue}
                   options={ages?.contents || []}
-                  type={channelParameterData.age}
+                  typeParameter={channelParameterData.age}
                   textData={"add_platform.description.age"}
                   defaultValue={formState?.age}
                   isRow={screen <= BREAKPOINT.LG}
                 />
                 <SelectSex
-                  formState={formState}
                   onChange={setValue}
+                  typeMan={channelParameterData.male}
+                  typeWoman={channelParameterData.female}
                   title={"add_platform.description.sex.title"}
                   text={"add_platform.description.sex.text"}
                   defaultValues={formState?.male}

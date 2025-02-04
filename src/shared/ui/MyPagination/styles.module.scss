@@ -1,11 +1,14 @@
 .wrapper {
   display: grid;
   justify-content: center;
-  padding: 10px;
+  padding: 5px 10px;
+
   .pagination {
     display: grid;
     grid-template: 1fr / repeat(var(--count), 1fr);
     column-gap: 10px;
+    overflow: auto;
+    padding: 5px 0px;
 
     .point {
       width: 8px;

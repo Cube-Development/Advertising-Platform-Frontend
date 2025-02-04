@@ -14,6 +14,7 @@ export const enum PLATFORM_PARAMETERS {
 export enum channelData {
   search = "search_string",
   sort = "sort",
+  filter = "filter",
 }
 
 export enum channelParameterData {
@@ -28,6 +29,8 @@ export enum channelParameterData {
   page = "page",
   description = "description",
   prompt = "prompt",
+  male = "male",
+  female = "female",
 }
 
 export enum channelStatus {

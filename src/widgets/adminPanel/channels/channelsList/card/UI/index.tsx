@@ -276,11 +276,9 @@ export const ChannelCard: FC<ChannelCardProps> = ({
             <div className={styles.parameters}>
               <div className={styles.block}>
                 <SelectOptions
-                  formState={formState}
                   onChangeOption={setValue}
                   options={categories?.contents || []}
-                  single={true}
-                  type={channelParameterData.category}
+                  typeParameter={channelParameterData.category}
                   textData={"add_platform.description.category"}
                   isRow={true}
                   defaultValue={
@@ -288,49 +286,49 @@ export const ChannelCard: FC<ChannelCardProps> = ({
                       (item) => item.id === formState.category,
                     )!
                   }
+                  single={true}
+                  searchable={true}
                 />
               </div>
               <div className={styles.block}>
                 <SelectOptions
                   onChangeOption={setValue}
-                  formState={formState}
                   options={ages?.contents || []}
-                  type={channelParameterData.age}
+                  typeParameter={channelParameterData.age}
                   textData={"add_platform.description.age"}
-                  isRow={true}
                   defaultValue={formState.age}
+                  isRow={true}
                 />
               </div>
 
               <div className={styles.block}>
                 <SelectOptions
                   onChangeOption={setValue}
-                  formState={formState}
                   options={languages?.contents || []}
-                  type={channelParameterData.language}
+                  typeParameter={channelParameterData.language}
                   textData={"add_platform.description.languages"}
-                  isRow={true}
                   defaultValue={formState.language}
+                  isRow={true}
                 />
               </div>
               <div className={styles.block}>
                 <SelectOptions
                   onChangeOption={setValue}
-                  formState={formState}
                   options={regions?.contents || []}
-                  type={channelParameterData.region}
+                  typeParameter={channelParameterData.region}
                   textData={"add_platform.description.region"}
-                  isRow={true}
                   defaultValue={formState.region}
+                  isRow={true}
                 />
               </div>
               <div className={styles.block}>
                 <SelectSex
                   onChange={setValue}
-                  formState={formState}
+                  typeMan={channelParameterData.male}
+                  typeWoman={channelParameterData.female}
                   title={"add_platform.description.sex.title"}
-                  isRow={true}
                   defaultValues={formState.male}
+                  isRow={true}
                 />
               </div>
               <div className={styles.block}>

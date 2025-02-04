@@ -20,5 +20,9 @@
     line-height: normal;
     text-align: justify;
     text-indent: 20px;
+
+    @media (max-width: 768px) {
+      font-size: 10px;
+    }
   }
 }

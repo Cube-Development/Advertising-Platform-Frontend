@@ -13,7 +13,7 @@ import {
   SearchFilter,
   SkeletonCatalogCard,
 } from "@features/catalog";
-import { SelectFilter, SelectOptions, filterData } from "@features/other";
+import { SelectFilter, filterData } from "@features/other";
 import { SadSmileIcon } from "@shared/assets";
 import {
   BREAKPOINT,
@@ -21,6 +21,7 @@ import {
   PAGE_ANIMATION,
 } from "@shared/config";
 import { useWindowWidth } from "@shared/hooks";
+import { IOption } from "@shared/types";
 import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC } from "react";
@@ -71,7 +72,7 @@ export const CatalogList: FC<CatalogListProps> = ({
     return { ...el, name: t(el.name) };
   });
   const translateSortingTypes = sortingTypes.map((el) => {
-    return { ...el, name: t(el.name) };
+    return { ...el, name: t(el.name), id: el.type };
   });
 
   return (
@@ -82,7 +83,10 @@ export const CatalogList: FC<CatalogListProps> = ({
         </p>
         <div className={styles.filters}>
           <SelectFilter
-            formState={formState}
+            data={formState?.filter}
+            typeParameter={filterData.platform}
+            typeData={channelData.filter}
+            defaultValue={[formState?.filter?.platform]}
             onChangeOption={setValue}
             options={translatePlatformTypes}
             textData="filter.title"
@@ -90,26 +94,20 @@ export const CatalogList: FC<CatalogListProps> = ({
             showButtonClear={false}
             showListClear={false}
             showCheckBox={false}
-            type={channelParameterData.platform}
-            isFilter={true}
-            isCatalogPlatform={true}
-            isPlatformFilter={true}
-            defaultValue={[formState?.filter?.platform]}
+            hideText={screen < BREAKPOINT.MD}
           />
-          {/* <SelectFilter
-            formState={formState}
+          <SelectFilter
+            typeParameter={filterData.sort}
+            defaultValue={[formState?.sort]}
             onChangeOption={setValue}
-            options={translateSortingTypes}
+            options={translateSortingTypes as unknown as IOption[]}
             textData="sorting.title"
             single={true}
             showButtonClear={false}
             showListClear={false}
             showCheckBox={false}
-            type={filterData.sort}
-            isFilter={true}
-            isCatalogSorting={true}
-            // defaultValue={[formState?.filter?.]}
-          /> */}
+            hideText={false}
+          />
         </div>
       </div>
       <div className={styles.search__row}>
