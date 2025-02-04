@@ -27,7 +27,7 @@ import {
   AccordionTrigger,
 } from "@shared/ui";
 import styles from "./styles.module.scss";
-import { Languages } from "@shared/config";
+import { ChannelLanguages } from "@shared/config";
 
 interface RecommendCardProps extends IChangeCards, ICatalogCard {
   card: ICatalogChannel;
@@ -96,20 +96,24 @@ export const RecommendCard: FC<RecommendCardProps> = ({
                 {/* языки */}
                 {card?.channel_languages && (
                   <div className={styles.languages}>
-                    {card?.channel_languages?.map((lang) => {
-                      const languageInfo = Languages.find((l) => l.id === lang);
+                    {[...card.channel_languages]
+                      .sort((a, b) => a - b)
+                      .map((lang) => {
+                        const languageInfo = ChannelLanguages.find(
+                          (l) => l.id === lang,
+                        );
 
-                      if (!languageInfo) return "...";
+                        if (!languageInfo) return "...";
 
-                      return (
-                        <img
-                          className={styles.languages__icon}
-                          key={languageInfo.id}
-                          src={`/images/${languageInfo.icon}.svg`}
-                          alt={languageInfo.name}
-                        />
-                      );
-                    })}
+                        return (
+                          <img
+                            className={styles.languages__icon}
+                            key={languageInfo.id}
+                            src={`/images/${languageInfo.icon}.svg`}
+                            alt={languageInfo.name}
+                          />
+                        );
+                      })}
                   </div>
                 )}
                 {/* языки */}
