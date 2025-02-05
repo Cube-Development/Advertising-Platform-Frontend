@@ -21,6 +21,7 @@ import { FC } from "react";
 import { UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { useFindLanguage } from "@entities/user";
 
 interface ChannelDescriptionProps {
   step: number;
@@ -44,10 +45,8 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
   handleChangeFormData,
 }) => {
   const { toast } = useToast();
-  const { t, i18n } = useTranslation();
-  const language = Languages.find((lang) => {
-    return i18n.language === lang.name;
-  });
+  const { t } = useTranslation();
+  const language = useFindLanguage();
 
   const screen = useWindowWidth();
   const contentRes = {

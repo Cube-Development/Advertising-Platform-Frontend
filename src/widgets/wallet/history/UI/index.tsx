@@ -20,10 +20,11 @@ import { motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { useFindLanguage } from "@entities/user";
 
 export const History: FC = () => {
-  const { t, i18n } = useTranslation();
-  const language = Languages.find((lang) => lang.name === i18n.language);
+  const { t } = useTranslation();
+  const language = useFindLanguage();
   const screen = useWindowWidth();
   const [currentPage, setCurrentPage] = useState(1);
 

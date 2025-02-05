@@ -16,14 +16,10 @@
 // import { ActiveChannels, ModerationChannels } from "@widgets/channel";
 // import { FC, useEffect } from "react";
 // import { useForm } from "react-hook-form";
-// import { useTranslation } from "react-i18next";
 // import styles from "./styles.module.scss";
 
 // export const MyChannelsPage: FC = () => {
-//   const { i18n } = useTranslation();
-//   const language = Languages.find((lang) => {
-//     return i18n.language === lang.name;
-//   });
+// const language = useFindLanguage();
 
 //   const { setValue, watch } = useForm<{
 //     platform: platformTypesNum;
@@ -116,9 +112,9 @@ import { pageFilter } from "@shared/routing";
 import { BarFilter } from "@widgets/barFilter";
 import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { SuspenseLoader } from "@shared/ui";
+import { useFindLanguage } from "@entities/user";
 
 // Ленивый импорт компонентов
 const ActiveChannels = React.lazy(() =>
@@ -133,10 +129,7 @@ const ModerationChannels = React.lazy(() =>
 );
 
 export const MyChannelsPage: FC = () => {
-  const { i18n } = useTranslation();
-  const language = Languages.find((lang) => {
-    return i18n.language === lang.name;
-  });
+  const language = useFindLanguage();
 
   const { setValue, watch } = useForm<{
     platform: platformTypesNum;

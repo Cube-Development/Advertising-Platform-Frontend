@@ -12,7 +12,7 @@ import {
   useProjectNameMutation,
   useProjectOrdersQuery,
 } from "@entities/project";
-import { roles } from "@entities/user";
+import { roles, useFindLanguage } from "@entities/user";
 import { usePaymentProjectMutation } from "@entities/wallet";
 import { BREAKPOINT } from "@shared/config";
 import { Languages } from "@shared/config/languages";
@@ -41,13 +41,11 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
   const project_id = Cookies.get("project_id");
   const isChannelReplace = Boolean(Cookies.get("channel_to_be_replaced"));
   const { toast } = useToast();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { isAuth, role } = useAppSelector((state) => state.user);
   const screen = useWindowWidth();
   const navigate = useNavigate();
-  const language = Languages.find((lang) => {
-    return i18n.language === lang.name;
-  });
+  const language = useFindLanguage();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [getUploadLink] = useGetUploadLinkMutation();
   const [projectName] = useProjectNameMutation();

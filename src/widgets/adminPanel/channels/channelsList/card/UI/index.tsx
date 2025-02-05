@@ -44,6 +44,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import styles from "./styles.module.scss";
 import noUserAvatar from "/images/notFound/noUserAvatar.jpg";
+import { useFindLanguage } from "@entities/user";
 
 interface ChannelCardProps {
   card: IAdminChannelData;
@@ -56,10 +57,8 @@ export const ChannelCard: FC<ChannelCardProps> = ({
   accordionRefs,
   index,
 }) => {
-  const { t, i18n } = useTranslation();
-  const language = Languages.find((lang) => {
-    return i18n.language === lang.name;
-  });
+  const { t } = useTranslation();
+  const language = useFindLanguage();
   const { toast } = useToast();
 
   const handleCopyLink = (text: string | number = "") => {
@@ -142,8 +141,6 @@ export const ChannelCard: FC<ChannelCardProps> = ({
       });
     }
   }, [channel, reset]);
-
-  console.log(formState);
 
   return (
     <AccordionItem

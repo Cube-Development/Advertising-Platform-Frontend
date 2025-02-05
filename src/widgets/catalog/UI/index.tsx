@@ -18,7 +18,7 @@ import {
   useRemoveFromManagerCartMutation,
   useRemoveFromPublicCartMutation,
 } from "@entities/project";
-import { GenerateGuestId, roles } from "@entities/user";
+import { GenerateGuestId, roles, useFindLanguage } from "@entities/user";
 import { BREAKPOINT, INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 import { useAppDispatch, useAppSelector, useWindowWidth } from "@shared/hooks";
 import { ToastAction, useToast } from "@shared/ui";
@@ -30,10 +30,8 @@ import { CatalogCart, CatalogList, CatalogSearch } from "../components";
 import styles from "./styles.module.scss";
 
 export const CatalogBlock: FC = () => {
-  const { t, i18n } = useTranslation();
-  const language = Languages.find((lang) => {
-    return i18n.language === lang.name;
-  });
+  const { t } = useTranslation();
+  const language = useFindLanguage();
   const { toast } = useToast();
   const screen = useWindowWidth();
   const { isAuth, role } = useAppSelector((state) => state.user);
@@ -47,22 +45,20 @@ export const CatalogBlock: FC = () => {
     catalogBarFilter.parameters,
   );
 
-  const { watch, reset, setValue, getValues, resetField } =
-    useForm<getCatalogReq>({
-      defaultValues: {
-        language: language?.id || Languages[0].id,
-        page: 1,
-        elements_on_page: INTERSECTION_ELEMENTS.catalog,
-        filter: {
-          platform: platformTypesNum.telegram,
-          business: [],
-          age: [],
-          language: [],
-          region: [],
-        },
-        sort: sortingTypes[0].type,
+  const { watch, reset, setValue, resetField } = useForm<getCatalogReq>({
+    defaultValues: {
+      page: 1,
+      elements_on_page: INTERSECTION_ELEMENTS.catalog,
+      filter: {
+        platform: platformTypesNum.telegram,
+        business: [],
+        age: [],
+        language: [],
+        region: [],
       },
-    });
+      sort: sortingTypes[0].type,
+    },
+  });
 
   const formState = watch();
 
@@ -73,7 +69,11 @@ export const CatalogBlock: FC = () => {
 
   const { data: catalogAuth, isFetching: isCatalogAuthLoading } =
     useGetCatalogQuery(
-      { ...formState, user_id: userId },
+      {
+        ...formState,
+        language: language?.id || Languages[0].id,
+        user_id: userId,
+      },
       {
         skip: !isAuth || !userId || role !== roles.advertiser,
       },
@@ -81,13 +81,21 @@ export const CatalogBlock: FC = () => {
 
   const { data: catalogManager, isFetching: isCatalogManagerLoading } =
     useGetCatalogQuery(
-      { ...formState, project_id: projectId },
+      {
+        ...formState,
+        language: language?.id || Languages[0].id,
+        project_id: projectId,
+      },
       { skip: !isAuth || !projectId || role !== roles.manager },
     );
 
   const { data: catalogPublic, isFetching: isCatalogLoading } =
     useGetCatalogQuery(
-      { ...formState, guest_id: guestId },
+      {
+        ...formState,
+        language: language?.id || Languages[0].id,
+        guest_id: guestId,
+      },
       { skip: isAuth || !guestId },
     );
 

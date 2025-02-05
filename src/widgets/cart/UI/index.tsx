@@ -13,7 +13,7 @@ import {
   useRemoveFromManagerCartMutation,
   useRemoveFromPublicCartMutation,
 } from "@entities/project";
-import { GenerateGuestId, roles } from "@entities/user";
+import { GenerateGuestId, roles, useFindLanguage } from "@entities/user";
 import { Languages } from "@shared/config";
 import { useAppSelector } from "@shared/hooks";
 import { ToastAction, useToast } from "@shared/ui";
@@ -26,10 +26,8 @@ import styles from "./styles.module.scss";
 
 export const Cart: FC = () => {
   const { toast } = useToast();
-  const { t, i18n } = useTranslation();
-  const language = Languages.find((lang) => {
-    return i18n.language === lang.name;
-  });
+  const { t } = useTranslation();
+  const language = useFindLanguage();
   const { isAuth } = useAppSelector((state) => state.user);
 
   const userId = Cookies.get("user_id");

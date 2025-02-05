@@ -51,6 +51,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import styles from "./styles.module.scss";
 import recomAnimation from "/animated/recom_lottie.gif";
+import { useFindLanguage } from "@entities/user";
 
 interface ParametersFilterProps {
   setValue: UseFormSetValue<getCatalogReq>;
@@ -67,10 +68,8 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
   catalogFilter,
   changeCatalogFilter,
 }) => {
-  const { t, i18n } = useTranslation();
-  const language = Languages.find((lang) => {
-    return i18n.language === lang.name;
-  });
+  const { t } = useTranslation();
+  const language = useFindLanguage();
   const screen = useWindowWidth();
   const [recommendationCard, setRecCard] = useState<IFilterSearch | null>(null);
   const [recommendationCards, setRecCards] = useState<IFilterSearch[] | null>(

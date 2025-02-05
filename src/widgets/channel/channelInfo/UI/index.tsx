@@ -21,7 +21,7 @@ import {
   useRemoveFromManagerCartMutation,
   useRemoveFromPublicCartMutation,
 } from "@entities/project";
-import { GenerateGuestId, roles } from "@entities/user";
+import { GenerateGuestId, roles, useFindLanguage } from "@entities/user";
 import { BREAKPOINT, Languages, PAGE_ANIMATION } from "@shared/config";
 import { useAppDispatch, useAppSelector, useWindowWidth } from "@shared/hooks";
 import { ToastAction, useToast } from "@shared/ui";
@@ -45,11 +45,9 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
 
   const { id: channel_id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
   const { toast } = useToast();
-  const language = Languages.find((lang) => {
-    return i18n.language === lang.name;
-  });
+  const language = useFindLanguage();
   const screen = useWindowWidth();
   const { isAuth, role } = useAppSelector((state) => state.user);
 

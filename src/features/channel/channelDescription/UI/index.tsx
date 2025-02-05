@@ -16,6 +16,7 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
+import { useFindLanguage } from "@entities/user";
 
 interface ChannelDescriptionProps {
   channel_id: string;
@@ -24,10 +25,8 @@ interface ChannelDescriptionProps {
 export const ChannelDescription: FC<ChannelDescriptionProps> = ({
   channel_id,
 }) => {
-  const { t, i18n } = useTranslation();
-  const language = Languages.find((lang) => {
-    return i18n.language === lang.name;
-  });
+  const { t } = useTranslation();
+  const language = useFindLanguage();
   const { data: card } = useGetChannelByIdQuery(
     { channel_id: channel_id, language: language?.id || Languages[0].id },
     { skip: !channel_id },

@@ -8,7 +8,7 @@ import {
   useGetAdvManagerSubprojectsQuery,
   useGetAdvSubprojectsQuery,
 } from "@entities/project";
-import { roles } from "@entities/user";
+import { roles, useFindLanguage } from "@entities/user";
 import {
   AcceptPost,
   ChangeChannel,
@@ -247,11 +247,8 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
   const [isSubcardOpen, setSubcardOpen] = useState(false);
   const screen = useWindowWidth();
   const swiperRef = useRef<SwiperCore | null>(null);
-  const { t, i18n } = useTranslation();
-  const language = Languages.find((lang) => {
-    return i18n.language === lang.name;
-  });
-
+  const { t } = useTranslation();
+  const language = useFindLanguage();
   const getParams: getProjectSubcardReq = {
     project_id: card?.id,
     language: language?.id || Languages[0].id,

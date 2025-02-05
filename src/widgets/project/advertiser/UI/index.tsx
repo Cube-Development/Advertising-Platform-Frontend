@@ -10,7 +10,6 @@ import {
   useGetAdvProjectsQuery,
 } from "@entities/project";
 import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
-import i18n from "@shared/config/i18n";
 import { pageFilter } from "@shared/routing";
 import { QueryParams } from "@shared/utils";
 import { BarFilter } from "@widgets/barFilter";
@@ -21,12 +20,11 @@ import { DevProjectsList } from "./devProjects";
 import styles from "./styles.module.scss";
 import { TemplateProjectsList } from "./templateProjects";
 import { useGetViewAdvertiserProjectQuery } from "@entities/views";
+import { useFindLanguage } from "@entities/user";
 
 export const AdvOrders: FC = () => {
   const page = pageFilter.order;
-  const language = Languages.find((lang) => {
-    return i18n.language === lang.name;
-  });
+  const language = useFindLanguage();
   const { order_type } = QueryParams();
 
   const { setValue, watch } = useForm<{
