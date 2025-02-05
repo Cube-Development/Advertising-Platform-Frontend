@@ -66,7 +66,6 @@ export const CatalogList: FC<CatalogListProps> = ({
   const handleOnChangePage = () => {
     setValue(channelParameterData.page, page + 1);
   };
-  console.log(formState);
 
   const translatePlatformTypes = platformTypes.map((el) => {
     return { ...el, name: t(el.name) };

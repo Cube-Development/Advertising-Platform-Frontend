@@ -1,9 +1,11 @@
 import { DAY_OF_WEEK } from "@entities/communication";
 
 export const CheckDate = (date_to: string): boolean => {
-  const currentDate = new Date();
-  const date: Date = new Date(date_to);
-  return date > currentDate;
+  const currentDate = new Date().toLocaleString("ru-RU");
+  // const date: Date = new Date(date_to);
+  console.log("сегодня:", currentDate);
+  console.log("дата поста:", date_to);
+  return date_to <= currentDate;
 };
 
 export const getDateChat = (date: string, time: string): string => {

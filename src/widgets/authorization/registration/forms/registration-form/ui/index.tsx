@@ -4,6 +4,7 @@ import { registrationSteps } from "../../config";
 import {
   IRegiser,
   roles,
+  useFindLanguage,
   useGetUserMutation,
   useLoginMutation,
   useRegisterMutation,
@@ -31,10 +32,8 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({
 }) => {
   const { handleAuth } = useHandleAuth();
   const { toast } = useToast();
-  const { t, i18n } = useTranslation();
-  const language = Languages.find((lang) => {
-    return i18n.language === lang.name;
-  });
+  const { t } = useTranslation();
+  const language = useFindLanguage();
   const { user } = useAppSelector((state) => state);
 
   const [password, setPassword] = useState("");

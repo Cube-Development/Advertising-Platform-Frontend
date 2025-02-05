@@ -11,21 +11,18 @@ import { Languages, PAGE_ANIMATION } from "@shared/config";
 import { QueryParams } from "@shared/utils";
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 import { scroller } from "react-scroll";
 import { ChannelAccept } from "./channelAccept";
 import { ChannelDescription } from "./channelDescription";
 import { ChannelIdentification } from "./channelIdentification";
 import { ChannelTop } from "./channelTop";
 import styles from "./styles.module.scss";
+import { useFindLanguage } from "@entities/user";
 
 interface AddChannelBlockProps {}
 
 export const AddChannelBlock: FC<AddChannelBlockProps> = () => {
-  const { t, i18n } = useTranslation();
-  const language = Languages.find((lang) => {
-    return i18n.language === lang.name;
-  });
+  const language = useFindLanguage();
   const { channel_id, add_channel } = QueryParams();
   const stepStart = {
     step: channel_id ? 2 : 1,

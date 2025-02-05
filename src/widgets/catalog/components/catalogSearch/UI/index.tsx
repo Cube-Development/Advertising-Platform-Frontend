@@ -37,6 +37,7 @@ import { useForm, UseFormReset, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import recomAnimation from "/animated/recom_lottie.gif";
+import { useFindLanguage } from "@entities/user";
 
 interface CatalogSearchProps {
   setValue: UseFormSetValue<getCatalogReq>;
@@ -53,10 +54,8 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
   catalogFilter,
   changeCatalogfilter,
 }) => {
-  const { t, i18n } = useTranslation();
-  const language = Languages.find((lang) => {
-    return i18n.language === lang.name;
-  });
+  const { t } = useTranslation();
+  const language = useFindLanguage();
   const contentRes = {
     language: language?.id || Languages[0].id,
     page: 1,

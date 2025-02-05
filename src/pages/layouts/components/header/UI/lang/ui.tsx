@@ -1,19 +1,22 @@
-import { Language, Languages } from "@shared/config/languages";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { useChangeLanguageMutation } from "@entities/user";
+import { useChangeLanguageMutation, useFindLanguage } from "@entities/user";
+import { Language, Languages } from "@shared/config";
+import { useNavigate } from "react-router-dom";
 
 interface LangProps {
   isAuth: boolean;
 }
 
 export const Lang: FC<LangProps> = ({ isAuth }) => {
-  const [isMenuOpen, setMenuOpen] = useState(false);
-  const [language, setLanguage] = useState(Languages[0]);
-  const menuRef = useRef<HTMLDivElement>(null);
-
   const { i18n } = useTranslation();
+  const navigate = useNavigate();
+  const currentLang = useFindLanguage();
+
+  const [isMenuOpen, setMenuOpen] = useState(false);
+  const [language, setLanguage] = useState(currentLang);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   const closeMenu = () => {
     setMenuOpen(false);
@@ -39,10 +42,16 @@ export const Lang: FC<LangProps> = ({ isAuth }) => {
   const [changeLanguage] = useChangeLanguageMutation();
 
   const handleLanguageSelect = (lang: Language) => {
-    i18n.changeLanguage(lang.name);
+    i18n.changeLanguage(lang.name.toLocaleLowerCase());
     setMenuOpen(false);
     setLanguage(lang);
     isAuth && changeLanguage({ language: lang.id });
+    navigate(0);
+    // if (isAuth) {
+    //   dispatch(authApi.util.resetApiState());
+    // } else {
+    //   dispatch(baseApi.util.resetApiState());
+    // }
   };
 
   return (
@@ -63,7 +72,7 @@ export const Lang: FC<LangProps> = ({ isAuth }) => {
                 key={lang?.id}
                 onClick={() => handleLanguageSelect(lang)}
               >
-                <img src={`/images/${lang?.icon}.svg`} alt="" />{" "}
+                <img src={`/images/${lang.icon}.svg`} alt="" />{" "}
                 <span>{lang?.name}</span>
               </li>
             ))}

@@ -99,7 +99,6 @@ export const BuySidebar: FC<BuySidebarProps> = ({
 
   const handleDeleteUrl = (urlDelete: string) => {
     formState.links = formState.links.filter((url) => url !== urlDelete);
-    console.log(formState.links);
   };
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {

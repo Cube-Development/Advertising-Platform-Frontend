@@ -5,7 +5,7 @@ import {
   managerProjectStatusFilter,
   useGetManagerSubprojectsQuery,
 } from "@entities/project";
-import { roles } from "@entities/user";
+import { roles, useFindLanguage } from "@entities/user";
 import {
   AcceptPost,
   ChangeChannel,
@@ -208,10 +208,8 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
 }) => {
   const [isSubcardOpen, setSubcardOpen] = useState(false);
   const screen = useWindowWidth();
-  const { t, i18n } = useTranslation();
-  const language = Languages.find((lang) => {
-    return i18n.language === lang.name;
-  });
+  const { t } = useTranslation();
+  const language = useFindLanguage();
   const swiperRef = useRef<SwiperCore | null>(null);
 
   const getParams: getProjectSubcardReq = {

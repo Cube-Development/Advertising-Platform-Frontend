@@ -199,7 +199,7 @@ export const MultiSelect = React.forwardRef<
               />
             )}
             <CommandList className="max-h-[none] overflow-visible">
-              <ScrollArea className="h-[200px]">
+              <ScrollArea className="h-[30svh] max-h-[200px]">
                 <CommandEmpty>{t("components.select.not_found")}</CommandEmpty>
                 <CommandGroup className="w-[var(--radix-popper-anchor-width)] gap-1">
                   {!single && (

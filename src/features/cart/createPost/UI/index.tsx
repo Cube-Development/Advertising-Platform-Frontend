@@ -4,7 +4,7 @@ import {
   useCreateCartMutation,
   useCreateProjectCartMutation,
 } from "@entities/project";
-import { roles } from "@entities/user";
+import { roles, useFindLanguage } from "@entities/user";
 import { ArrowLongHorizontalIcon, LoginIcon } from "@shared/assets";
 import { Languages } from "@shared/config";
 import { useAppSelector, useCurrentPathEnum } from "@shared/hooks";
@@ -32,16 +32,14 @@ import styles from "./styles.module.scss";
 interface CreatePostProps {}
 
 export const CreatePost: FC<CreatePostProps> = ({}) => {
-  const { t, i18n } = useTranslation();
+  const { t } = useTranslation();
+  const language = useFindLanguage();
   const { isAuth, role } = useAppSelector((state) => state.user);
   const [createCart, { isLoading: isLoadingCart }] = useCreateCartMutation();
   const [createProjectCart, { isLoading: isLoadingProjectCart }] =
     useCreateProjectCartMutation();
   const [checkProjectCart] = useCheckCartMutation();
   const { toast } = useToast();
-  const language = Languages.find((lang) => {
-    return i18n.language === lang.name;
-  });
   const navigate = useNavigate();
 
   const handleCreateCart = () => {

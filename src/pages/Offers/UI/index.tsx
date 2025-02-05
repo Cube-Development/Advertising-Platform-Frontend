@@ -15,15 +15,11 @@
 // import { MyOffers } from "@widgets/offer";
 // import { FC, useEffect, useState } from "react";
 // import { useForm } from "react-hook-form";
-// import { useTranslation } from "react-i18next";
 // import styles from "./styles.module.scss";
 
 // export const OffersPage: FC = () => {
 //   const page = pageFilter.offer;
-//   const { i18n } = useTranslation();
-//   const language = Languages.find((lang) => {
-//     return i18n.language === lang.name;
-//   });
+// const language = useFindLanguage();
 
 //   const { setValue, watch } = useForm<{
 //     platform: platformTypesNum;
@@ -97,11 +93,11 @@ import { useGetViewBloggerOrderQuery } from "@entities/views";
 import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 import { pageFilter } from "@shared/routing";
 import { BarFilter } from "@widgets/barFilter";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { SuspenseLoader } from "@shared/ui";
+import { useFindLanguage } from "@entities/user";
 
 // Ленивый импорт компонента MyOffers
 const MyOffers = React.lazy(() =>
@@ -110,10 +106,7 @@ const MyOffers = React.lazy(() =>
 
 export const OffersPage: FC = () => {
   const page = pageFilter.offer;
-  const { i18n } = useTranslation();
-  const language = Languages.find((lang) => {
-    return i18n.language === lang.name;
-  });
+  const language = useFindLanguage();
 
   const { setValue, watch } = useForm<{
     platform: platformTypesNum;
