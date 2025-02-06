@@ -34,6 +34,7 @@ export interface MultiSelectProps
   showCheckBox?: boolean;
   searchable?: boolean;
   hideText?: boolean;
+  hideButtons?: boolean;
 }
 
 export const MultiSelect = React.forwardRef<
@@ -55,6 +56,7 @@ export const MultiSelect = React.forwardRef<
       showCheckBox = true,
       searchable = false,
       hideText = false,
+      hideButtons = true,
       ...props
     },
     ref,
@@ -142,9 +144,11 @@ export const MultiSelect = React.forwardRef<
                           {singleOption?.img && (
                             <singleOption.img className="h-4 w-4" />
                           )}
-                          <span className="truncate">
-                            {!hideText && singleOption?.name}
-                          </span>
+                          {!hideText && (
+                            <span className="truncate">
+                              {singleOption?.name}
+                            </span>
+                          )}
                         </div>
                       );
                     })()
@@ -199,7 +203,9 @@ export const MultiSelect = React.forwardRef<
               />
             )}
             <CommandList className="max-h-[none] overflow-visible">
-              <ScrollArea className="h-[200px]">
+              <ScrollArea
+                className={`${options?.length > 5 ? "h-[200px]" : ""}`}
+              >
                 <CommandEmpty>{t("components.select.not_found")}</CommandEmpty>
                 <CommandGroup className="w-[var(--radix-popper-anchor-width)] gap-1">
                   {!single && (
@@ -238,7 +244,7 @@ export const MultiSelect = React.forwardRef<
                   })}
                 </CommandGroup>
               </ScrollArea>
-              {!hideText && (
+              {!hideButtons && (
                 <>
                   <CommandSeparator />
                   <CommandGroup>
