@@ -29,18 +29,20 @@ export const MyPagination: FC<MyPaginationProps> = ({ cardIndex, count }) => {
 
   return (
     <div className={styles.wrapper} ref={wrapperRef}>
-      <div
-        className={styles.pagination}
-        style={{ "--count": `${count}` } as React.CSSProperties}
-      >
-        {Array.from({ length: count }).map((_, index) => (
-          <div
-            style={{ width: `${progressWidth / count}px` }}
-            key={index}
-            className={`${styles.point} ${cardIndex === index ? styles.active : ""}`}
-          />
-        ))}
-      </div>
+      {count > 1 && (
+        <div
+          className={styles.pagination}
+          style={{ "--count": `${count}` } as React.CSSProperties}
+        >
+          {Array.from({ length: count }).map((_, index) => (
+            <div
+              style={{ width: `${progressWidth / count}px` }}
+              key={index}
+              className={`${styles.point} ${cardIndex === index ? styles.active : ""}`}
+            />
+          ))}
+        </div>
+      )}
     </div>
   );
 };
