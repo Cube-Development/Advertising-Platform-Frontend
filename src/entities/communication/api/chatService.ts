@@ -39,6 +39,9 @@ export const chatAPI = authApi.injectEndpoints({
       },
       transformResponse: (response: IChatData[]) => {
         const newResponse = response.map((item) => {
+          if (!item.message_date || !item.message_time) {
+            return { ...item, type: chatType.order };
+          }
           const datetime = convertUTCToLocalDateTime(
             item.message_date,
             item.message_time,
@@ -57,6 +60,32 @@ export const chatAPI = authApi.injectEndpoints({
       providesTags: [CHAT],
     }),
 
+    getOrderChatById: build.query<IChatData, { order_id: string }>({
+      query: (params) => {
+        return {
+          url: `/chat/order/${params.order_id}`,
+          method: "GET",
+        };
+      },
+      transformResponse: (response: IChatData) => {
+        if (!response.message_date || !response.message_time) {
+          return { ...response, type: chatType.order };
+        }
+        const datetime = convertUTCToLocalDateTime(
+          response.message_date,
+          response.message_time,
+        );
+        return {
+          ...response,
+          type: chatType.order,
+          formated_date: datetime.localDate,
+          formated_time: datetime.localTime,
+          message_datetime: response.message_date + " " + response.message_time,
+        };
+      },
+      providesTags: [CHAT],
+    }),
+
     getProjectChats: build.query<IChatData[], getChatsReq>({
       query: (BodyParams) => {
         return {
@@ -67,6 +96,9 @@ export const chatAPI = authApi.injectEndpoints({
       },
       transformResponse: (response: IChatData[]) => {
         const newResponse = response.map((item) => {
+          if (!item.message_date || !item.message_time) {
+            return { ...item, type: chatType.project };
+          }
           const datetime = convertUTCToLocalDateTime(
             item.message_date,
             item.message_time,
@@ -77,10 +109,35 @@ export const chatAPI = authApi.injectEndpoints({
             formated_date: datetime.localDate,
             formated_time: datetime.localTime,
             message_datetime: item.message_date + " " + item.message_time,
-            // unread_count: Math.floor(Math.random() * 10)
           };
         });
         return newResponse;
+      },
+      providesTags: [CHAT],
+    }),
+
+    getProjectChatById: build.query<IChatData, { project_id: string }>({
+      query: (params) => {
+        return {
+          url: `/chat/project/${params.project_id}`,
+          method: "GET",
+        };
+      },
+      transformResponse: (response: IChatData) => {
+        if (!response.message_date || !response.message_time) {
+          return { ...response, type: chatType.project };
+        }
+        const datetime = convertUTCToLocalDateTime(
+          response.message_date,
+          response.message_time,
+        );
+        return {
+          ...response,
+          type: chatType.project,
+          formated_date: datetime.localDate,
+          formated_time: datetime.localTime,
+          message_datetime: response.message_date + " " + response.message_time,
+        };
       },
       providesTags: [CHAT],
     }),
@@ -104,7 +161,7 @@ export const chatAPI = authApi.injectEndpoints({
     getOrderHistory: build.query<IAllMessages, getChatHistoryReq>({
       query: (BodyParams) => {
         return {
-          url: "/chat/order/history",
+          url: "/chat/order/history/",
           method: "GET",
           params: BodyParams,
         };
@@ -158,7 +215,7 @@ export const chatAPI = authApi.injectEndpoints({
     getProjectHistory: build.query<IAllMessages, getChatHistoryReq>({
       query: (BodyParams) => {
         return {
-          url: "/chat/project/history",
+          url: "/chat/project/history/",
           method: "GET",
           params: BodyParams,
         };
@@ -215,7 +272,9 @@ export const {
   useReadOrderMessageMutation,
   useReadProjectMessageMutation,
   useGetOrderChatsQuery,
+  useGetOrderChatByIdQuery,
   useGetProjectChatsQuery,
+  useGetProjectChatByIdQuery,
   useGetOrderHistoryQuery,
   useGetProjectHistoryQuery,
 } = chatAPI;

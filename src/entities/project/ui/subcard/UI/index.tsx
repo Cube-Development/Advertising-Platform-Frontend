@@ -416,7 +416,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
               <div
                 className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : "deactive"}`}
               >
-                <ChannelChatBtn orderId={"1"} toRole={roles.blogger} />
+                <ChannelChatBtn orderId={subcard?.id} toRole={roles.blogger} />
               </div>
             )}
           {subcard?.api_status === orderStatus.canceled ||
