@@ -86,11 +86,9 @@ export const CatalogCard: FC<CatalogCardProps> = ({
               >
                 <img src={card?.avatar} alt="logo" />
               </Link>
-              {screen >= BREAKPOINT.MD && (
-                <div className={styles.rate}>
-                  <RatingIcon />
-                </div>
-              )}
+              <div className={styles.rate}>
+                <RatingIcon />
+              </div>
             </div>
           </div>
           <div className={styles.column__info}>
@@ -126,12 +124,8 @@ export const CatalogCard: FC<CatalogCardProps> = ({
                 {/* языки */}
               </Link>
               <p className={`${styles.category} truncate`}>{card?.category}</p>
-              {screen >= BREAKPOINT.MD ? (
+              {screen >= BREAKPOINT.MD && (
                 <ChannelCardDescription description={card?.description} />
-              ) : (
-                <div className={styles.rate}>
-                  <RatingIcon />
-                </div>
               )}
             </div>
           </div>

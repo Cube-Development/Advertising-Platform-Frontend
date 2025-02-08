@@ -20,19 +20,20 @@ import {
   ArrowReadIcon,
   ArrowSmallVerticalIcon,
   MessageAppendixIcon,
+  SadSmileIcon,
   SendIcon,
 } from "@shared/assets";
 import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
+import { useAppDispatch, useAppSelector, useDebounce } from "@shared/hooks";
 import {
   checkDatetime,
   checkDatetimeDifference,
   convertUTCToLocalDateTime,
   getFormattedDateTime,
 } from "@shared/utils";
-import { useAppDispatch, useAppSelector, useDebounce } from "@shared/hooks";
 import Link from "@tiptap/extension-link";
 import Underline from "@tiptap/extension-underline";
-import { EditorContent, useEditor } from "@tiptap/react";
+import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { useCentrifuge } from "@widgets/communication/chat";
 import { motion } from "framer-motion";
@@ -128,15 +129,19 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
       {
         ...formFields,
       },
-      { skip: !!card?.project_id && !!card },
+      // { skip: !!card?.project_id && !!card }
+      { skip: !formFields?.order_id || !card },
     );
+
+  console.log("formFields", formFields);
 
   const { data: projectHistory, isFetching: isFetchingProject } =
     useGetProjectHistoryQuery(
       {
         ...formFields,
       },
-      { skip: !!card?.order_id && !!card },
+      // { skip: !!card?.order_id && !!card }
+      { skip: !formFields?.project_id || !card },
     );
 
   const data = card?.type === chatType.order ? orderHistory : projectHistory;
@@ -463,7 +468,9 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
     }
   };
 
-  const handleKeyPress = (event: React.KeyboardEvent<HTMLDivElement>) => {
+  const handleKeyPress = (
+    event: React.KeyboardEvent<HTMLDivElement | HTMLTextAreaElement>,
+  ) => {
     if (event.key === "Enter" && event.ctrlKey) {
       handleSendMessage();
     }
@@ -720,8 +727,15 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
           <div className={styles.end} ref={messagesEndRef} />
         </div>
       ) : (
-        <div className={styles.no_messages}>
-          <p>{t("chat.no_message")}</p>
+        // <div className={styles.no_messages}>
+        //   <p>{t("chat.no_message")}</p>
+        // </div>
+
+        <div className={styles.chat__choose}>
+          <SadSmileIcon />
+          <div className={styles.no_messages}>
+            <p>{t("chat.no_message")}</p>
+          </div>
         </div>
       )}
       <div className={styles.wrapper__bottom}>
@@ -745,7 +759,8 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
           className={styles.text}
           maxLength={limit}
           value={newMessage}
-        ></textarea>
+          onKeyDown={handleKeyPress}
+        />
         <button onClick={handleSendMessage}>
           <SendIcon />
         </button>

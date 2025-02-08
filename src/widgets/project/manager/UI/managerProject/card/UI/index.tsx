@@ -86,7 +86,7 @@ const Card: FC<ManagerProjectCardProps> = ({ card, statusFilter }) => {
       {
         <div className={`${styles.buttons__md} display__hide__min__md`}>
           <div className={styles.chat__btn}>
-            <Chat projectId={card?.id} toRole={roles.advertiser} />
+            <Chat projectId={card?.project_id} toRole={roles.advertiser} />
           </div>
           <div className={styles.ts__btn}>
             <TechnicalSpecification card={card} SendToBotBtn={SendToBot} />
@@ -192,7 +192,7 @@ const Card: FC<ManagerProjectCardProps> = ({ card, statusFilter }) => {
           className={`${styles.card__features__chat} display__hide__max__md`}
         >
           <Chat
-            projectId={card?.id}
+            projectId={card?.project_id}
             toRole={roles.advertiser}
             isProject={true}
           />

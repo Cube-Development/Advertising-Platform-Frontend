@@ -4,22 +4,29 @@
   position: relative;
   overflow: hidden;
 
-  .no_messages {
+  .chat__choose {
+    display: grid;
+    justify-items: center;
+    grid-auto-flow: row;
+    row-gap: 10px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    text-align: center;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 15px;
 
-    p {
-      font-size: 16px;
-      font-weight: 500;
-      font-style: normal;
-      line-height: normal;
-      color: var(--Personal-colors-White);
+    .no_messages {
+      text-align: center;
+      padding: 10px;
+      background-color: rgba(0, 0, 0, 0.2);
+      border-radius: 15px;
+
+      p {
+        font-size: 16px;
+        font-weight: 500;
+        font-style: normal;
+        line-height: normal;
+        color: var(--Personal-colors-White);
+      }
     }
   }
 
@@ -265,6 +272,7 @@
 
   .text {
     max-height: 30svh;
+    resize: none;
     outline: none;
     padding: 8px;
     border-radius: 10px;
