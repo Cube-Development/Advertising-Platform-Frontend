@@ -201,7 +201,7 @@ export const Withdrawal: FC = () => {
           .unwrap()
           .then(() => {
             reset();
-            navigate(paths.wallethistory);
+            navigate(paths.walletHistory);
             toast({
               variant: "success",
               title: `${t("toasts.wallet.withdraw.success")}: ${paymentReq.amount.toLocaleString()} ${t("symbol")}`,
@@ -234,7 +234,7 @@ export const Withdrawal: FC = () => {
                 .unwrap()
                 .then(() => {
                   reset();
-                  navigate(paths.wallethistory);
+                  navigate(paths.walletHistory);
                   toast({
                     variant: "success",
                     title: `${t("toasts.wallet.withdraw.success")}: ${paymentReq.amount.toLocaleString()} ${t("symbol")}`,

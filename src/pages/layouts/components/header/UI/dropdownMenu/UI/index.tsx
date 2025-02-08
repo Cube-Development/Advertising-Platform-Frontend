@@ -1,5 +1,5 @@
 import { IMenuItem } from "@entities/admin";
-import { roles } from "@entities/user";
+import { roles, userRoles } from "@entities/user";
 import {
   useGetViewAdvertiserProjectQuery,
   useGetViewBloggerChannelQuery,
@@ -20,10 +20,10 @@ import { Link } from "react-router-dom";
 import {
   advertiserMenu,
   advertiserMenuNotAuth,
-  advertiserServiсeMenu,
+  advertiserServiceMenu,
   bloggerMenu,
   bloggerMenuNotAuth,
-  bloggerServiсeMenu,
+  bloggerServiceMenu,
   commonMenu,
   faqServiceMenu,
   managerMenu,
@@ -101,8 +101,8 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
 
   let serviceMenu: IMenuItem[] =
     currentRole === roles.advertiser
-      ? advertiserServiсeMenu
-      : bloggerServiсeMenu;
+      ? advertiserServiceMenu
+      : bloggerServiceMenu;
 
   serviceMenu = isAuth ? serviceMenu : [...serviceMenu, ...faqServiceMenu];
 
@@ -191,42 +191,47 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
                       </Link>
                     </div>
                   )}
-                  {isAuth && screen < BREAKPOINT.MD && (
-                    <div className={styles.accordion__block}>
-                      <p className={styles.accordion__title}>
-                        {t("burger_menu.balance")}
-                      </p>
-                      <div className={styles.balance}>
-                        <p>
-                          {balance ? Math.floor(balance).toLocaleString() : "0"}{" "}
-                          <span>{t("symbol")}</span>
+                  {isAuth &&
+                    userRoles.includes(currentRole) &&
+                    screen < BREAKPOINT.MD && (
+                      <div className={styles.accordion__block}>
+                        <p className={styles.accordion__title}>
+                          {t("burger_menu.balance")}
                         </p>
+                        <div className={styles.balance}>
+                          <p>
+                            {balance
+                              ? Math.floor(balance).toLocaleString()
+                              : "0"}{" "}
+                            <span>{t("symbol")}</span>
+                          </p>
+                        </div>
                       </div>
-                    </div>
-                  )}
-                  {screen < BREAKPOINT.HEADER_NAVBAR_VISIBLE && (
-                    <div className={styles.accordion__block}>
-                      <p className={styles.accordion__title}>
-                        {t("burger_menu.services")}
-                      </p>
-                      <Accordion
-                        type="single"
-                        collapsible
-                        defaultValue={`item-${dropdownMenu.title}`}
-                        className={styles.menu__accordion}
-                      >
-                        {serviceMenu.map((item) => (
-                          <MenuItem
-                            key={item.item.title}
-                            item={item}
-                            onChange={toggleMenu}
-                            openTitle={dropdownMenu.title}
-                            isAuth={item.item.isDialog && isAuth}
-                          />
-                        ))}
-                      </Accordion>
-                    </div>
-                  )}
+                    )}
+                  {userRoles.includes(currentRole) &&
+                    screen < BREAKPOINT.HEADER_NAVBAR_VISIBLE && (
+                      <div className={styles.accordion__block}>
+                        <p className={styles.accordion__title}>
+                          {t("burger_menu.services")}
+                        </p>
+                        <Accordion
+                          type="single"
+                          collapsible
+                          defaultValue={`item-${dropdownMenu.title}`}
+                          className={styles.menu__accordion}
+                        >
+                          {serviceMenu.map((item) => (
+                            <MenuItem
+                              key={item.item.title}
+                              item={item}
+                              onChange={toggleMenu}
+                              openTitle={dropdownMenu.title}
+                              isAuth={item.item.isDialog && isAuth}
+                            />
+                          ))}
+                        </Accordion>
+                      </div>
+                    )}
                   {isAuth && (
                     <div className={styles.accordion__block}>
                       <p className={styles.accordion__title}>

@@ -63,7 +63,7 @@ export const Wallet: FC = () => {
             <Link to={paths.walletWithdraw} onClick={closeMenu}>
               <li>{t("wallet_menu.withdraw")}</li>
             </Link>
-            <Link to={paths.wallethistory} onClick={closeMenu}>
+            <Link to={paths.walletHistory} onClick={closeMenu}>
               <li>{t("wallet_menu.history")}</li>
             </Link>
             <Link to={paths.main} onClick={closeMenu}>
