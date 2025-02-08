@@ -34,6 +34,7 @@ export interface MultiSelectProps
   showCheckBox?: boolean;
   searchable?: boolean;
   hideText?: boolean;
+  hideButtons?: boolean;
 }
 
 export const MultiSelect = React.forwardRef<
@@ -55,9 +56,10 @@ export const MultiSelect = React.forwardRef<
       showCheckBox = true,
       searchable = false,
       hideText = false,
+      hideButtons = true,
       ...props
     },
-    ref,
+    ref
   ) => {
     const { t } = useTranslation();
     const [selectedValues, setSelectedValues] =
@@ -69,7 +71,7 @@ export const MultiSelect = React.forwardRef<
     }, [defaultValue]);
 
     const handleInputKeyDown = (
-      event: React.KeyboardEvent<HTMLInputElement>,
+      event: React.KeyboardEvent<HTMLInputElement>
     ) => {
       if (event.key === "Enter") {
         setIsPopoverOpen(true);
@@ -134,7 +136,7 @@ export const MultiSelect = React.forwardRef<
                   {single ? (
                     (() => {
                       const singleOption = options?.find(
-                        (option) => option?.id === selectedValues[0],
+                        (option) => option?.id === selectedValues[0]
                       );
 
                       return (
@@ -142,9 +144,11 @@ export const MultiSelect = React.forwardRef<
                           {singleOption?.img && (
                             <singleOption.img className="h-4 w-4" />
                           )}
-                          <span className="truncate">
-                            {!hideText && singleOption?.name}
-                          </span>
+                          {!hideText && (
+                            <span className="truncate">
+                              {singleOption?.name}
+                            </span>
+                          )}
                         </div>
                       );
                     })()
@@ -199,7 +203,9 @@ export const MultiSelect = React.forwardRef<
               />
             )}
             <CommandList className="max-h-[none] overflow-visible">
-              <ScrollArea className="h-[30svh] max-h-[200px]">
+              <ScrollArea
+                className={`${options?.length > 5 ? "h-[30svh] max-h-[200px]" : ""}`}
+              >
                 <CommandEmpty>{t("components.select.not_found")}</CommandEmpty>
                 <CommandGroup className="w-[var(--radix-popper-anchor-width)] gap-1">
                   {!single && (
@@ -238,7 +244,7 @@ export const MultiSelect = React.forwardRef<
                   })}
                 </CommandGroup>
               </ScrollArea>
-              {!hideText && (
+              {!hideButtons && (
                 <>
                   <CommandSeparator />
                   <CommandGroup>
@@ -272,7 +278,7 @@ export const MultiSelect = React.forwardRef<
         </PopoverContent>
       </Popover>
     );
-  },
+  }
 );
 
 MultiSelect.displayName = "MultiSelect";

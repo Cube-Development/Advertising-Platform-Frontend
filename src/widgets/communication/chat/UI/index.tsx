@@ -1,8 +1,3 @@
-import { AnimatePresence, motion } from "framer-motion";
-import { FC, useEffect, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { ChatCard, ChatMessages } from "@features/communication";
-import { BarSubfilter } from "@features/other";
 import {
   chatAPI,
   chatType,
@@ -12,10 +7,14 @@ import {
   IMessageNewSocket,
   MessageStatus,
   RecipientType,
+  useGetOrderChatByIdQuery,
   useGetOrderChatsQuery,
+  useGetProjectChatByIdQuery,
   useGetProjectChatsQuery,
 } from "@entities/communication";
 import { roles } from "@entities/user";
+import { ChatCard, ChatMessages } from "@features/communication";
+import { BarSubfilter } from "@features/other";
 import {
   ArrowLongHorizontalIcon,
   CancelIcon2,
@@ -49,6 +48,9 @@ import {
   useToast,
 } from "@shared/ui";
 import { checkDatetime, convertUTCToLocalDateTime } from "@shared/utils";
+import { AnimatePresence, motion } from "framer-motion";
+import { FC, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { useCentrifuge } from "../CentrifugeContext";
 import styles from "./styles.module.scss";
 
@@ -60,29 +62,49 @@ export const Chat: FC<IChatProps> = ({
   isProject,
   isFull,
 }) => {
+  const screen = useWindowWidth();
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
   const { toast } = useToast();
   const { OrderMessageNewChat, OrderReadMessage } = useCentrifuge();
-  const dispatch = useAppDispatch();
   const { role } = useAppSelector((state) => state.user);
-  const screen = useWindowWidth();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [currentChat, setCurrentChat] = useState<IChatData | null>(null);
   const [chatFilter, setChatFilter] = useState<chatTypesFilter>(
-    chatTypesFilter.blogger,
+    chatTypesFilter.blogger
   );
 
-  const { data: chatsOrder } = useGetOrderChatsQuery(
-    { role: role },
-    // { skip: role !== roles.blogger && chatFilter !== chatTypesFilter.blogger }
-  );
+  // All chats
+  const { data: chatsOrder } = useGetOrderChatsQuery({ role: role });
 
   const { data: chatsProject } = useGetProjectChatsQuery(
     { role: role },
-
-    // { skip: role === roles.blogger || chatFilter === chatTypesFilter.blogger }
-    { skip: role === roles.blogger },
+    { skip: role === roles.blogger }
   );
+
+  // Checking existing current chat in all chats
+  const currentChatOrder = useMemo(() => {
+    if (!orderId) return null;
+    return chatsOrder?.find((item) => item?.order_id === orderId) || null;
+  }, [chatsOrder, orderId]);
+
+  const currentChatProject = useMemo(() => {
+    if (!projectId) return null;
+    return chatsProject?.find((item) => item?.project_id === projectId) || null;
+  }, [chatsProject, projectId]);
+
+  // if not found current chat in all chats then new request if chat is open
+  const { data: chatOrderById, isLoading: isLoadingOrder } =
+    useGetOrderChatByIdQuery(
+      { order_id: orderId! },
+      { skip: !isOpen || !orderId || !!currentChatOrder }
+    );
+
+  const { data: chatProjectById, isLoading: isLoadingProject } =
+    useGetProjectChatByIdQuery(
+      { project_id: projectId! },
+      { skip: !isOpen || !projectId || !!currentChatProject }
+    );
 
   const selectedChats =
     chatFilter === chatTypesFilter.blogger || role === roles.blogger
@@ -94,15 +116,17 @@ export const Chat: FC<IChatProps> = ({
       (total, item) =>
         total +
         (item.recipient === RecipientType.receiver ? item.unread_count : 0),
-      0,
+      0
     ) || 0;
+
   const countProjectMessage =
     chatsProject?.reduce(
       (total, item) =>
         total +
         (item.recipient === RecipientType.receiver ? item.unread_count : 0),
-      0,
+      0
     ) || 0;
+
   const haveNewMessage = !!(countOrderMessage + countProjectMessage);
 
   const handleChangeChat = (card: IChatData) => {
@@ -110,7 +134,7 @@ export const Chat: FC<IChatProps> = ({
       card?.type === chatType.order
         ? chatsOrder?.find((item) => item?.order_id === card?.order_id) || null
         : chatsProject?.find((item) => item?.project_id === card?.project_id) ||
-            null,
+            null
     );
   };
 
@@ -126,13 +150,13 @@ export const Chat: FC<IChatProps> = ({
   const handleNewMessage = (message: IMessageNewSocket) => {
     if (message?.order_id && chatsOrder) {
       const updatedChat = chatsOrder?.find(
-        (chat) => chat?.order_id === message?.order_id,
+        (chat) => chat?.order_id === message?.order_id
       );
 
       if (updatedChat) {
         const datetime = convertUTCToLocalDateTime(
           message?.message_date,
-          message?.message_time,
+          message?.message_time
         );
         const updatedChatWithNewData = {
           ...updatedChat,
@@ -155,8 +179,8 @@ export const Chat: FC<IChatProps> = ({
                 ...draft.filter((chat) => chat?.order_id !== message?.order_id),
               ];
               draft.splice(0, draft.length, ...newChatOrder);
-            },
-          ),
+            }
+          )
         );
 
         if (
@@ -171,13 +195,13 @@ export const Chat: FC<IChatProps> = ({
       }
     } else if (message?.project_id && chatsProject) {
       const updatedChat = chatsProject?.find(
-        (chat) => chat?.project_id === message?.project_id,
+        (chat) => chat?.project_id === message?.project_id
       );
 
       if (updatedChat) {
         const datetime = convertUTCToLocalDateTime(
           message?.message_date,
-          message?.message_time,
+          message?.message_time
         );
         const updatedChatWithNewData = {
           ...updatedChat,
@@ -198,12 +222,12 @@ export const Chat: FC<IChatProps> = ({
               const newChatOrder = [
                 updatedChatWithNewData,
                 ...draft.filter(
-                  (chat) => chat?.project_id !== message?.project_id,
+                  (chat) => chat?.project_id !== message?.project_id
                 ),
               ];
               draft.splice(0, draft.length, ...newChatOrder);
-            },
-          ),
+            }
+          )
         );
 
         if (
@@ -236,8 +260,8 @@ export const Chat: FC<IChatProps> = ({
               }
               return item;
             });
-          },
-        ),
+          }
+        )
       );
     } else if (message?.project_id) {
       dispatch(
@@ -257,8 +281,8 @@ export const Chat: FC<IChatProps> = ({
               }
               return item;
             });
-          },
-        ),
+          }
+        )
       );
     }
   };
@@ -266,20 +290,50 @@ export const Chat: FC<IChatProps> = ({
   useEffect(() => {
     if (orderId && isOpen) {
       setChatFilter(chatTypesFilter.blogger);
-      setCurrentChat(
-        chatsOrder?.find((item) => item?.order_id === orderId) || null,
-      );
+      if (chatOrderById && !currentChatOrder) {
+        setCurrentChat(chatOrderById);
+        dispatch(
+          chatAPI.util.updateQueryData(
+            "getOrderChats",
+            { role: role },
+            (draft) => {
+              const newChatOrder = [
+                chatOrderById,
+                ...draft.filter((chat) => chat?.order_id !== orderId),
+              ];
+              draft.splice(0, draft.length, ...newChatOrder);
+            }
+          )
+        );
+      } else if (currentChatOrder) {
+        setCurrentChat(currentChatOrder);
+      }
     } else if (projectId && isOpen) {
       setChatFilter(
         role === roles.advertiser
           ? chatTypesFilter.manager
-          : chatTypesFilter.advertiser,
+          : chatTypesFilter.advertiser
       );
-      setCurrentChat(
-        chatsProject?.find((item) => item?.project_id === projectId) || null,
-      );
+      if (chatProjectById && !currentChatProject) {
+        setCurrentChat(chatProjectById);
+        dispatch(
+          chatAPI.util.updateQueryData(
+            "getProjectChats",
+            { role: role },
+            (draft) => {
+              const newChatProject = [
+                chatProjectById,
+                ...draft.filter((chat) => chat?.project_id !== projectId),
+              ];
+              draft.splice(0, draft.length, ...newChatProject);
+            }
+          )
+        );
+      } else if (currentChatProject) {
+        setCurrentChat(currentChatProject);
+      }
     }
-  }, [isOpen]);
+  }, [isOpen, isLoadingOrder, isLoadingProject]);
 
   OrderMessageNewChat(handleNewMessage);
   OrderReadMessage(handleReadMessage);
