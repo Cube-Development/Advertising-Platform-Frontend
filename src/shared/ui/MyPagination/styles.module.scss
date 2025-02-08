@@ -2,6 +2,7 @@
   display: grid;
   justify-content: center;
   padding: 5px 0px;
+  // overflow: hidden;
 
   .pagination {
     display: grid;
@@ -15,7 +16,6 @@
 
       &.active {
         background: var(--Gradients-Gradient-1);
-        transform: scale(1.25);
         border-radius: 5px;
       }
     }

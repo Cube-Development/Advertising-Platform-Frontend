@@ -315,6 +315,11 @@
       padding: 0 20px;
       height: 100%;
 
+      > div {
+        display: grid;
+        gap: 10px;
+      }
+
       a,
       button {
         height: 100%;
