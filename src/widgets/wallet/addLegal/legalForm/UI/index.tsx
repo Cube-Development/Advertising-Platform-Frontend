@@ -1,10 +1,3 @@
-import { FC } from "react";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import { useToast } from "@shared/ui";
-import { BarSubrofileFilter, CreateLegal, LegalForm } from "@features/wallet";
-import { BarSubfilter } from "@features/other";
 import {
   EntityData,
   ILegalData,
@@ -16,7 +9,14 @@ import {
   subprofileFilterTypes,
   useCreateLegalMutation,
 } from "@entities/wallet";
+import { BarSubfilter } from "@features/other";
+import { BarSubrofileFilter, CreateLegal, LegalForm } from "@features/wallet";
 import { pageFilter } from "@shared/routing";
+import { CustomCheckbox, useToast } from "@shared/ui";
+import { FC } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 export const AddLegalForm: FC = () => {
   const { toast } = useToast();
@@ -116,7 +116,7 @@ export const AddLegalForm: FC = () => {
             ))}
           </div>
           <div className={styles.accept}>
-            <input type="checkbox" />
+            <CustomCheckbox />
             <p>
               {`${t("add_profile.accept.text1")} `}
               <span>{`${t("add_profile.accept.span1")} `}</span>

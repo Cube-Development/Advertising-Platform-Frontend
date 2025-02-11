@@ -13,7 +13,7 @@ import { EditEmail, EditPassword, EditUser } from "@features/profile";
 import { EditPencilIcon, EmailIcon, TelegramJetlIcon } from "@shared/assets";
 import { languages, languagesNum } from "@shared/config";
 import { PAGE_ANIMATION } from "@shared/config/animation";
-import { MyButton, ToastAction, useToast } from "@shared/ui";
+import { CustomCheckbox, MyButton, ToastAction, useToast } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -328,28 +328,27 @@ export const SettingsProfile: FC = () => {
                   </p>
                   <div className={styles.checkbox__wrapper}>
                     <span>{t("profile.notification_block.email.system")}</span>
-                    <input
-                      type="checkbox"
+                    <CustomCheckbox
                       disabled={true}
-                      checked={formState?.user_events?.system_events}
+                      isSelected={formState?.user_events?.system_events}
                     />
                   </div>
                   <div className={styles.checkbox__wrapper}>
                     <span>{t("profile.notification_block.email.project")}</span>
-                    <input
-                      type="checkbox"
-                      checked={formState?.user_events?.project_events}
-                      onChange={() => handleOnClick(eventForm.project_events)}
+                    <CustomCheckbox
+                      isSelected={formState?.user_events?.project_events}
+                      handleChange={() =>
+                        handleOnClick(eventForm.project_events)
+                      }
                     />
                   </div>
                   <div className={styles.checkbox__wrapper}>
                     <span>
                       {t("profile.notification_block.email.individual")}
                     </span>
-                    <input
-                      type="checkbox"
-                      checked={formState?.user_events?.promo_events}
-                      onChange={() => handleOnClick(eventForm.promo_events)}
+                    <CustomCheckbox
+                      isSelected={formState?.user_events?.promo_events}
+                      handleChange={() => handleOnClick(eventForm.promo_events)}
                     />
                   </div>
                 </div>
@@ -403,17 +402,17 @@ export const SettingsProfile: FC = () => {
                   )}
                   <div className={styles.checkbox__wrapper}>
                     <span>{t("profile.notification_block.bot.system")}</span>
-                    <input type="checkbox" />
+                    <CustomCheckbox />
                   </div>
                   <div className={styles.checkbox__wrapper}>
                     <span>{t("profile.notification_block.bot.project")}</span>
-                    <input type="checkbox" />
+                    <CustomCheckbox />
                   </div>
                   <div className={styles.checkbox__wrapper}>
                     <span>
                       {t("profile.notification_block.bot.individual")}
                     </span>
-                    <input type="checkbox" />
+                    <CustomCheckbox />
                   </div>
                 </div>
                 <p className={styles.instruction}>
