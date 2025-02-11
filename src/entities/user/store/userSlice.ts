@@ -1,4 +1,4 @@
-import { roles } from "@entities/user";
+import { roles, userRoles } from "@entities/user";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import Cookies from "js-cookie";
 
@@ -28,10 +28,15 @@ export const userSlice = createSlice({
     },
     logout: (state) => {
       Cookies.remove("project_id");
-      Cookies.set("isAuth", "false");
       Cookies.remove("adv-blog");
       Cookies.remove("user_id");
+      Cookies.set("isAuth", "false");
+      const logoutRole = userRoles.includes(Cookies.get("role") as roles)
+        ? (Cookies.get("role") as roles)
+        : roles.advertiser;
+      Cookies.set("role", logoutRole);
       state.isAuth = false;
+      state.role = logoutRole;
     },
     setAuth: (state, action: PayloadAction<boolean>) => {
       state.isAuth = action.payload;

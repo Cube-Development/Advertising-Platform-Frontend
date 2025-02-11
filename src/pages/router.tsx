@@ -1,4 +1,4 @@
-import { managmentRoles, roles, userRoles } from "@entities/user";
+import { managementRoles, roles, userRoles } from "@entities/user";
 import {
   RootAdminLayout,
   RootLayout,
@@ -35,7 +35,7 @@ const HandleLayout = ({ route }: { route: IRoute }) => {
 
 const HandleAdminLayout = ({ route }: { route: IRoute }) => {
   const { isAuth, role } = useAppSelector((state) => state.user);
-  return isAuth && route.sidebar && managmentRoles.includes(role) ? (
+  return isAuth && route.sidebar && managementRoles.includes(role) ? (
     <SideBarAdminLayout>
       <route.component />
     </SideBarAdminLayout>

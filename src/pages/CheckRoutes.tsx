@@ -1,5 +1,5 @@
 import { useLocation, Navigate, Outlet } from "react-router-dom";
-import { managmentRoles, roles, userRoles } from "@entities/user";
+import { managementRoles, roles, userRoles } from "@entities/user";
 import { useAppSelector } from "@shared/hooks";
 import { paths } from "@shared/routing";
 import Cookies from "js-cookie";
@@ -45,7 +45,7 @@ export const CheckRoutes = ({
     if (
       !isAuth ||
       (isAuth && role === checkRole) ||
-      (isAuth && managmentRoles.includes(role))
+      (isAuth && managementRoles.includes(role))
     ) {
       return <Outlet />;
     } else {
@@ -62,7 +62,7 @@ export const CheckRoutes = ({
       ) : (
         <Navigate to={redirectPath} replace />
       );
-    } else if (isAuth && managmentRoles.includes(role)) {
+    } else if (isAuth && managementRoles.includes(role)) {
       return <Outlet />;
     } else {
       return <Navigate to={paths.main} replace />;
