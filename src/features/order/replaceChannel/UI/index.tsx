@@ -15,6 +15,7 @@ import {
   ToastAction,
   useToast,
 } from "@shared/ui";
+import { Loader } from "lucide-react";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -31,7 +32,7 @@ export const ReplaceChannel: FC<ReplaceChannelProps> = ({
 }) => {
   const { t } = useTranslation();
   const { toast } = useToast();
-  const [replace] = useChangeOrderMutation();
+  const [replace, { isLoading }] = useChangeOrderMutation();
   const haveDesire = !!order?.desire.find(
     (el) => el.desire_type === desireStatus.replace_channel_request,
   );
@@ -49,8 +50,10 @@ export const ReplaceChannel: FC<ReplaceChannelProps> = ({
 
   const formState = watch();
   const handleOnClick = () => {
-    formState.comment &&
+    !isLoading &&
+      formState.comment &&
       order?.id &&
+      !isLoading &&
       replace(formState)
         .unwrap()
         .then(() => {
@@ -103,12 +106,20 @@ export const ReplaceChannel: FC<ReplaceChannelProps> = ({
         />
         <AlertDialogCancel asChild>
           {haveDesire ? (
-            <MyButton className={styles.button}>
-              {t("orders_advertiser.subcard.replace.button.ok")}
+            <MyButton>
+              <p>{t("orders_advertiser.subcard.replace.button.ok")}</p>
             </MyButton>
           ) : (
-            <MyButton className={styles.button} onClick={handleOnClick}>
-              {t("orders_advertiser.subcard.replace.button.send")}
+            <MyButton onClick={handleOnClick}>
+              <p>{t("orders_advertiser.subcard.replace.button.send")}</p>
+              {isLoading && (
+                <Loader
+                  className="animate-spin"
+                  stroke="#fff"
+                  width={20}
+                  height={20}
+                />
+              )}
             </MyButton>
           )}
         </AlertDialogCancel>

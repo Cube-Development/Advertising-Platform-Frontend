@@ -50,7 +50,7 @@ export const SendLink: FC<IOrderFeature> = ({ order_id }) => {
       setIsUrlValid(false);
       return;
     }
-
+    if (isLoading) return;
     setIsUrlValid(true);
     publishPostBlogger({ order_id, url })
       .unwrap()
@@ -142,7 +142,7 @@ export const SendLink: FC<IOrderFeature> = ({ order_id }) => {
               <ArrowLongHorizontalIcon className="icon__white" />
             </p>
           </DrawerTrigger>
-          <DrawerContent className="rounded-t-xl bottom-0 top-auto">
+          <DrawerContent className="bottom-0 top-auto rounded-t-xl">
             <DialogTitle className="sr-only"></DialogTitle>
             <DialogDescription className="sr-only"></DialogDescription>
             <div className="mx-auto mt-4 h-1.5 w-[80px] rounded-full bg-black/20" />

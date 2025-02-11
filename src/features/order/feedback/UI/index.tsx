@@ -29,6 +29,7 @@ export const Feedback: FC<IOrderFeature> = ({ order_id }) => {
   const [addReview, { isLoading }] = useAddReviewMutation();
   const handleOnClick = () => {
     order_id &&
+      !isLoading &&
       addReview({
         order_id,
         review: review.length > 0 ? review : undefined,
@@ -121,7 +122,7 @@ export const Feedback: FC<IOrderFeature> = ({ order_id }) => {
               {t(`order_btn.feedback.btn_title`)}
             </big>
           </DrawerTrigger>
-          <DrawerContent className="rounded-t-xl bottom-0 top-auto">
+          <DrawerContent className="bottom-0 top-auto rounded-t-xl">
             <DialogTitle className="sr-only"></DialogTitle>
             <DialogDescription className="sr-only"></DialogDescription>
             <div className="mx-auto mt-4 h-1.5 w-[80px] rounded-full bg-black/20" />

@@ -61,20 +61,21 @@ export const AddLegalForm: FC = () => {
       ...data,
       type_legal: formState.profileFilter.id,
     };
-    createLegal(dataWithLegalType)
-      .unwrap()
-      .then(() => {
-        toast({
-          variant: "success",
-          title: t("toasts.add_profile.create.success"),
+    !isLoading &&
+      createLegal(dataWithLegalType)
+        .unwrap()
+        .then(() => {
+          toast({
+            variant: "success",
+            title: t("toasts.add_profile.create.success"),
+          });
+        })
+        .catch(() => {
+          toast({
+            variant: "error",
+            title: t("toasts.add_profile.create.error"),
+          });
         });
-      })
-      .catch(() => {
-        toast({
-          variant: "error",
-          title: t("toasts.add_profile.create.error"),
-        });
-      });
   };
 
   return (

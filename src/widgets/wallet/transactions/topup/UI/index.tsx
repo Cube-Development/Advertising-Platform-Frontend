@@ -81,25 +81,26 @@ export const Topup: FC = () => {
       setActiveAccount(null);
       reset();
     } else {
-      readOneLegal(account.legal_id)
-        .unwrap()
-        .then((data) => {
-          setActiveAccount(data);
-          (Object.keys(data) as Array<keyof ILegalData>).forEach(
-            (value: keyof ILegalData) => {
-              setValue(value, data[value]);
-            },
-          );
-          clearErrors();
-        })
-        .catch((error) => {
-          toast({
-            variant: "error",
-            title: t("toasts.wallet.profile.error"),
-            action: <ToastAction altText="Ok">Ok</ToastAction>,
+      !isOneLegalLoading &&
+        readOneLegal(account.legal_id)
+          .unwrap()
+          .then((data) => {
+            setActiveAccount(data);
+            (Object.keys(data) as Array<keyof ILegalData>).forEach(
+              (value: keyof ILegalData) => {
+                setValue(value, data[value]);
+              },
+            );
+            clearErrors();
+          })
+          .catch((error) => {
+            toast({
+              variant: "error",
+              title: t("toasts.wallet.profile.error"),
+              action: <ToastAction altText="Ok">Ok</ToastAction>,
+            });
+            console.error("Ошибка при заполнении данных", error);
           });
-          console.error("Ошибка при заполнении данных", error);
-        });
     }
   };
 
@@ -193,77 +194,78 @@ export const Topup: FC = () => {
           type_legal: profileTypesNum.selfEmployedTransits,
         }),
     };
-    createLegal(dataWithLegalType)
-      .unwrap()
-      .then((createRes) => {
-        const paymentReq = {
-          amount: formData.amount,
-          legal_id: createRes.legal_id,
-          way_type: paymentTypes.didox,
-        };
-        paymentDeposit(paymentReq)
-          .unwrap()
-          .then(() => {
-            reset();
-            navigate(paths.main);
-            toast({
-              variant: "success",
-              title: `${t("toasts.wallet.topup.success")}: ${paymentReq.amount.toLocaleString()} ${t("symbol")}`,
-            });
-          })
-          .catch((error) => {
-            toast({
-              variant: "error",
-              title: t("toasts.wallet.topup.error"),
-              action: <ToastAction altText="Ok">Ok</ToastAction>,
-            });
-            console.error("Ошибка payment/deposit: ", error);
-          });
-      })
-      .catch((error) => {
-        console.error("Ошибка в createLegal", error);
-        if (error.status === 400 && error.data.value) {
-          const newFormData = {
-            ...dataWithLegalType,
-            legal_id: error.data.value,
+    !isCreateLoading &&
+      createLegal(dataWithLegalType)
+        .unwrap()
+        .then((createRes) => {
+          const paymentReq = {
+            amount: formData.amount,
+            legal_id: createRes.legal_id,
+            way_type: paymentTypes.didox,
           };
-          editLegal(newFormData)
+          paymentDeposit(paymentReq)
             .unwrap()
-            .then((editRes) => {
-              const paymentReq = {
-                amount: Number(formData.amount),
-                legal_id: editRes.legal_id,
-                way_type: paymentTypes.didox,
-              };
-              paymentDeposit(paymentReq)
-                .unwrap()
-                .then(() => {
-                  reset();
-                  navigate(paths.main);
-                  toast({
-                    variant: "success",
-                    title: `${t("toasts.wallet.topup.success")}: ${paymentReq.amount.toLocaleString()} ${t("symbol")}`,
-                  });
-                })
-                .catch((error) => {
-                  toast({
-                    variant: "error",
-                    title: t("toasts.wallet.topup.error"),
-                    action: <ToastAction altText="Ok">Ok</ToastAction>,
-                  });
-                  console.error("Ошибка payment/deposit: ", error);
-                });
+            .then(() => {
+              reset();
+              navigate(paths.main);
+              toast({
+                variant: "success",
+                title: `${t("toasts.wallet.topup.success")}: ${paymentReq.amount.toLocaleString()} ${t("symbol")}`,
+              });
             })
             .catch((error) => {
               toast({
                 variant: "error",
-                title: t("toasts.wallet.profile.error"),
+                title: t("toasts.wallet.topup.error"),
                 action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
-              console.error("Ошибка в editLegal", error);
+              console.error("Ошибка payment/deposit: ", error);
             });
-        }
-      });
+        })
+        .catch((error) => {
+          console.error("Ошибка в createLegal", error);
+          if (error.status === 400 && error.data.value) {
+            const newFormData = {
+              ...dataWithLegalType,
+              legal_id: error.data.value,
+            };
+            editLegal(newFormData)
+              .unwrap()
+              .then((editRes) => {
+                const paymentReq = {
+                  amount: Number(formData.amount),
+                  legal_id: editRes.legal_id,
+                  way_type: paymentTypes.didox,
+                };
+                paymentDeposit(paymentReq)
+                  .unwrap()
+                  .then(() => {
+                    reset();
+                    navigate(paths.main);
+                    toast({
+                      variant: "success",
+                      title: `${t("toasts.wallet.topup.success")}: ${paymentReq.amount.toLocaleString()} ${t("symbol")}`,
+                    });
+                  })
+                  .catch((error) => {
+                    toast({
+                      variant: "error",
+                      title: t("toasts.wallet.topup.error"),
+                      action: <ToastAction altText="Ok">Ok</ToastAction>,
+                    });
+                    console.error("Ошибка payment/deposit: ", error);
+                  });
+              })
+              .catch((error) => {
+                toast({
+                  variant: "error",
+                  title: t("toasts.wallet.profile.error"),
+                  action: <ToastAction altText="Ok">Ok</ToastAction>,
+                });
+                console.error("Ошибка в editLegal", error);
+              });
+          }
+        });
   };
 
   return (

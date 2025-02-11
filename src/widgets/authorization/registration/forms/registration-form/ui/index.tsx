@@ -48,6 +48,7 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (registerLoading) return;
 
     setPasswordError("");
     setConfirmPasswordError("");

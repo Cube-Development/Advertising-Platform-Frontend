@@ -100,7 +100,7 @@ export const SettingsProfile: FC = () => {
   }, [profile, isLoading]);
 
   const { toast } = useToast();
-  const [edit] = useEditProfileMutation();
+  const [edit, { isLoading: isLoadingEdit }] = useEditProfileMutation();
 
   const handleOnClick = (event: eventForm) => {
     const newValue = !formState?.user_events?.[event];
@@ -111,22 +111,23 @@ export const SettingsProfile: FC = () => {
         [event]: newValue,
       },
     };
-    edit(updatedEvents)
-      .unwrap()
-      .then(() => {
-        toast({
-          variant: "success",
-          title: t("toasts.profile.edit.event.success"),
+    !isLoadingEdit &&
+      edit(updatedEvents)
+        .unwrap()
+        .then(() => {
+          toast({
+            variant: "success",
+            title: t("toasts.profile.edit.event.success"),
+          });
+        })
+        .catch((error) => {
+          toast({
+            variant: "error",
+            title: t("toasts.profile.edit.event.error"),
+            action: <ToastAction altText="Ok">Ok</ToastAction>,
+          });
+          console.error("error: ", error);
         });
-      })
-      .catch((error) => {
-        toast({
-          variant: "error",
-          title: t("toasts.profile.edit.event.error"),
-          action: <ToastAction altText="Ok">Ok</ToastAction>,
-        });
-        console.error("error: ", error);
-      });
   };
 
   return (

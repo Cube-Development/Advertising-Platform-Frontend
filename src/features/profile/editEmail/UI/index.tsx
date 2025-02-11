@@ -7,7 +7,6 @@ import {
 import { formDataLength } from "@entities/wallet";
 import { CancelIcon2 } from "@shared/assets";
 import {
-  AccountsLoader,
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
@@ -19,7 +18,7 @@ import {
   useToast,
 } from "@shared/ui";
 import { isValidEmail, isValidEmailCode } from "@shared/utils";
-import { PenLine } from "lucide-react";
+import { Loader, PenLine } from "lucide-react";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -60,60 +59,62 @@ export const EditEmail: FC = () => {
       formState?.password &&
       !formState?.isEmailChanged
     ) {
-      editEmailRequest({
-        new_email: formState?.new_email,
-        password: formState?.password,
-      })
-        .unwrap()
-        .then(() => {
-          reset({
-            new_email: "",
-            password: "",
-            code: "",
-            isEmailChanged: true,
-            isDialogOpen: true,
-          });
-          toast({
-            variant: "success",
-            title: t("toasts.profile.edit.email.success"),
-            action: <ToastAction altText="Ok">Ok</ToastAction>,
-          });
+      !isLoadingEmail &&
+        editEmailRequest({
+          new_email: formState?.new_email,
+          password: formState?.password,
         })
-        .catch((error) => {
-          const message =
-            error?.status === 400
-              ? "toasts.profile.edit.email.exist"
-              : "toasts.profile.edit.email.error";
-          toast({
-            variant: "error",
-            title: t(message),
-            action: <ToastAction altText="Ok">Ok</ToastAction>,
+          .unwrap()
+          .then(() => {
+            reset({
+              new_email: "",
+              password: "",
+              code: "",
+              isEmailChanged: true,
+              isDialogOpen: true,
+            });
+            toast({
+              variant: "success",
+              title: t("toasts.profile.edit.email.success"),
+              action: <ToastAction altText="Ok">Ok</ToastAction>,
+            });
+          })
+          .catch((error) => {
+            const message =
+              error?.status === 400
+                ? "toasts.profile.edit.email.exist"
+                : "toasts.profile.edit.email.error";
+            toast({
+              variant: "error",
+              title: t(message),
+              action: <ToastAction altText="Ok">Ok</ToastAction>,
+            });
+            console.log(error);
           });
-          console.log(error);
-        });
     }
   };
 
   const handleSendCode = () => {
     if (formState?.code?.length === formDataLength.email_code) {
-      sendCode({ code: parseInt(formState?.code) })
-        .unwrap()
-        .then(() => {
-          toast({
-            variant: "success",
-            title: t("toasts.profile.edit.email_code.success"),
-            action: <ToastAction altText="Ok">Ok</ToastAction>,
+      !isLoadingCode &&
+        sendCode({ code: parseInt(formState?.code) })
+          .unwrap()
+          .then(() => {
+            toast({
+              variant: "success",
+              title: t("toasts.profile.edit.email_code.success"),
+              action: <ToastAction altText="Ok">Ok</ToastAction>,
+            });
+            handleClose();
+          })
+          .catch((error) => {
+            toast({
+              variant: "error",
+              title: t("toasts.profile.edit.email_code.error"),
+              action: <ToastAction altText="Ok">Ok</ToastAction>,
+            });
+            console.error("error: ", error);
           });
-          handleClose();
-        })
-        .catch((error) => {
-          toast({
-            variant: "error",
-            title: t("toasts.profile.edit.email_code.error"),
-            action: <ToastAction altText="Ok">Ok</ToastAction>,
-          });
-          console.error("error: ", error);
-        });
     }
   };
 
@@ -206,9 +207,12 @@ export const EditEmail: FC = () => {
             <MyButton>
               <p>{t("profile.email_block.change_btn")}</p>
               {isLoadingEmail && (
-                <div className={styles.loader}>
-                  <AccountsLoader />
-                </div>
+                <Loader
+                  className="animate-spin"
+                  stroke="#fff"
+                  width={20}
+                  height={20}
+                />
               )}
             </MyButton>
           </form>
@@ -256,9 +260,12 @@ export const EditEmail: FC = () => {
               <MyButton buttons_type="button__green" onClick={handleSendCode}>
                 <p>{t("profile.email_block.send_btn")}</p>
                 {isLoadingCode && (
-                  <div className={styles.loader}>
-                    <AccountsLoader />
-                  </div>
+                  <Loader
+                    className="animate-spin"
+                    stroke="#fff"
+                    width={20}
+                    height={20}
+                  />
                 )}
               </MyButton>
             </div>

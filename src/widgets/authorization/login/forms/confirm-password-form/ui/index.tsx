@@ -1,10 +1,10 @@
-import { FC, useState } from "react";
-import styles from "./styles.module.scss";
-import { loginSteps } from "../../config";
-import { useTranslation } from "react-i18next";
 import { useResetPasswordMutation } from "@entities/user";
-import { Loader } from "lucide-react";
 import { useToast } from "@shared/ui";
+import { Loader } from "lucide-react";
+import { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { loginSteps } from "../../config";
+import styles from "./styles.module.scss";
 
 interface ConfirmPasswordFormProps {
   onNavigate: (direction: loginSteps) => void;
@@ -47,34 +47,35 @@ export const ConfirmPasswordForm: FC<ConfirmPasswordFormProps> = ({
       setConfirmPasswordError(t("auth.passwords_dont_match"));
     } else {
       console.log("Passwords match! Proceed to next step.");
-      resetPassword({
-        email,
-        code: Number(currentCode),
-        password: password,
-      })
-        .unwrap()
-        .then(() => {
-          onNavigate(loginSteps.login);
-          toast({
-            variant: "success",
-            title: t("toasts.forgot_password.password_changed"),
-          });
+      !isLoading &&
+        resetPassword({
+          email,
+          code: Number(currentCode),
+          password: password,
         })
-        .catch((error) => {
-          if (error.status === 423) {
+          .unwrap()
+          .then(() => {
             onNavigate(loginSteps.login);
             toast({
-              variant: "error",
-              title: t("toasts.forgot_password.wrong_code"),
+              variant: "success",
+              title: t("toasts.forgot_password.password_changed"),
             });
-          } else {
-            onNavigate(loginSteps.login);
-            toast({
-              variant: "error",
-              title: t("toasts.forgot_password.other_error"),
-            });
-          }
-        });
+          })
+          .catch((error) => {
+            if (error.status === 423) {
+              onNavigate(loginSteps.login);
+              toast({
+                variant: "error",
+                title: t("toasts.forgot_password.wrong_code"),
+              });
+            } else {
+              onNavigate(loginSteps.login);
+              toast({
+                variant: "error",
+                title: t("toasts.forgot_password.other_error"),
+              });
+            }
+          });
     }
   };
 

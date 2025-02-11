@@ -62,6 +62,7 @@ export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
     if (isEdit) {
       onChangeStep(2);
     } else if (code && !indetificationParams.link) {
+      if (isLoading) return;
       const formData = {
         ...data,
         platform: indetificationParams.platform.id,
