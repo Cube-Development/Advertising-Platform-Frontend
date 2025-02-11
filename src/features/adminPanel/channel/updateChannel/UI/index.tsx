@@ -5,7 +5,6 @@ import {
 import { AccountsLoader, MyButton, ToastAction, useToast } from "@shared/ui";
 import { ButtonHTMLAttributes, forwardRef } from "react";
 import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
 
 interface UpdateChannelProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   channel: IAdminEditChannelData;
@@ -20,22 +19,23 @@ export const UpdateChannel = forwardRef<HTMLButtonElement, UpdateChannelProps>(
 
     const handleOnClick = () => {
       const { ...editData } = channel;
-      editChannel({ ...editData, channel_id: id })
-        .unwrap()
-        .then(() => {
-          toast({
-            variant: "success",
-            title: t("toasts.admin.channel.edit.success"),
+      !isLoading &&
+        editChannel({ ...editData, channel_id: id })
+          .unwrap()
+          .then(() => {
+            toast({
+              variant: "success",
+              title: t("toasts.admin.channel.edit.success"),
+            });
+          })
+          .catch((error) => {
+            toast({
+              variant: "error",
+              title: t("toasts.admin.channel.edit.error"),
+              action: <ToastAction altText="Ok">Ok</ToastAction>,
+            });
+            console.error("error: ", error);
           });
-        })
-        .catch((error) => {
-          toast({
-            variant: "error",
-            title: t("toasts.admin.channel.edit.error"),
-            action: <ToastAction altText="Ok">Ok</ToastAction>,
-          });
-          console.error("error: ", error);
-        });
     };
 
     return (
@@ -47,7 +47,7 @@ export const UpdateChannel = forwardRef<HTMLButtonElement, UpdateChannelProps>(
       >
         <p>{t("admin_panel.channels.card.buttons.update")}</p>
         {isLoading && (
-          <div className={styles.loader}>
+          <div className="loader">
             <AccountsLoader />
           </div>
         )}

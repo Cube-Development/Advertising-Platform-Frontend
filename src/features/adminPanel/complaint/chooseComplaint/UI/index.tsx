@@ -1,5 +1,5 @@
 import { useAdminChooseComplaintMutation } from "@entities/admin";
-import { MyButton, ToastAction, useToast } from "@shared/ui";
+import { AccountsLoader, MyButton, ToastAction, useToast } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -10,9 +10,10 @@ interface AcceptComplaintProps {
 export const ChooseComplaint: FC<AcceptComplaintProps> = ({ id }) => {
   const { toast } = useToast();
   const { t } = useTranslation();
-  const [chooseComplaint] = useAdminChooseComplaintMutation();
+  const [chooseComplaint, { isLoading }] = useAdminChooseComplaintMutation();
   const handleOnClick = () => {
     id &&
+      !isLoading &&
       chooseComplaint({ complaint_id: id })
         .unwrap()
         .then(() => {
@@ -33,6 +34,11 @@ export const ChooseComplaint: FC<AcceptComplaintProps> = ({ id }) => {
   return (
     <MyButton buttons_type="button__green_light" onClick={handleOnClick}>
       <p>{t("admin_panel.complaints.card.buttons.accept")}</p>
+      {isLoading && (
+        <div className="loader">
+          <AccountsLoader />
+        </div>
+      )}
     </MyButton>
   );
 };

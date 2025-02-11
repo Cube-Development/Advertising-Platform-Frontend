@@ -1,5 +1,5 @@
 import { useAdminChannelAcceptMutation } from "@entities/admin";
-import { MyButton, ToastAction, useToast } from "@shared/ui";
+import { AccountsLoader, MyButton, ToastAction, useToast } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -10,9 +10,10 @@ interface AcceptChannelProps {
 export const AcceptChannel: FC<AcceptChannelProps> = ({ id }) => {
   const { toast } = useToast();
   const { t } = useTranslation();
-  const [acceptChannel] = useAdminChannelAcceptMutation();
+  const [acceptChannel, { isLoading }] = useAdminChannelAcceptMutation();
   const handleOnClick = () => {
     id &&
+      !isLoading &&
       acceptChannel({ channel_id: id })
         .unwrap()
         .then(() => {
@@ -33,6 +34,11 @@ export const AcceptChannel: FC<AcceptChannelProps> = ({ id }) => {
   return (
     <MyButton buttons_type="button__green_light" onClick={handleOnClick}>
       <p>{t("admin_panel.channels.card.buttons.accept")}</p>
+      {isLoading && (
+        <div className="loader">
+          <AccountsLoader />
+        </div>
+      )}
     </MyButton>
   );
 };
