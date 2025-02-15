@@ -83,6 +83,9 @@ export const RecommendCard: FC<RecommendCardProps> = ({
               <div>
                 <img src={card?.avatar} alt="logo" />
               </div>
+              <div className={styles.rate}>
+                <RatingIcon />
+              </div>
             </div>
           </div>
           <div className={styles.column__info}>
@@ -119,9 +122,6 @@ export const RecommendCard: FC<RecommendCardProps> = ({
                 {/* языки */}
               </Link>
               <p className={styles.category}>{card?.category}</p>
-              <div className={styles.rate}>
-                <RatingIcon />
-              </div>
             </div>
           </div>
           <div className={styles.column__parameters}>
@@ -188,7 +188,7 @@ export const RecommendCard: FC<RecommendCardProps> = ({
               onClick={handleChangeOpenSubcard}
               className={styles.channel__data__xs__bottom}
             >
-              <p>
+              <p className="gradient_color">
                 {isSubcardOpen ? t("catalog.see_less") : t("catalog.see_more")}
               </p>
               <ArrowSmallVerticalIcon
