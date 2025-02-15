@@ -1,10 +1,11 @@
+import { useTransferPublicMutation } from "@entities/project";
+import { login, roles, toggleRole } from "@entities/user";
+import { authApi, baseApi } from "@shared/api";
+import { cookiesTypes } from "@shared/config";
+import { useAppDispatch } from "@shared/hooks";
+import { useToast } from "@shared/ui";
 import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
-import { useToast } from "@shared/ui";
-import { login, roles, toggleRole } from "@entities/user";
-import { useAppDispatch } from "@shared/hooks";
-import { useTransferPublicMutation } from "@entities/project";
-import { authApi, baseApi } from "@shared/api";
 
 export const useHandleAuth = () => {
   const { toast } = useToast();
@@ -15,7 +16,7 @@ export const useHandleAuth = () => {
   const transferCart = async (id: string): Promise<void> => {
     try {
       await transferPublic({ guest_id: id }).unwrap();
-      Cookies.remove("guest_id");
+      Cookies.remove(cookiesTypes.guestId);
     } catch (error) {
       toast({
         variant: "error",
@@ -31,9 +32,9 @@ export const useHandleAuth = () => {
       dispatch(authApi.util.resetApiState());
       dispatch(login());
       dispatch(toggleRole(role));
-      Cookies.set("user_id", user_id);
+      Cookies.set(cookiesTypes.userId, user_id);
 
-      const guestId = Cookies.get("guest_id");
+      const guestId = Cookies.get(cookiesTypes.guestId);
       if (guestId) {
         await transferCart(guestId);
       }

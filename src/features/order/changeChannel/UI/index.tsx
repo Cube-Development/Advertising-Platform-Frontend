@@ -1,5 +1,6 @@
 import { desireStatus, IManagerProjectSubcard } from "@entities/project";
 import { CancelIcon2 } from "@shared/assets";
+import { cookiesTypes } from "@shared/config";
 import { paths } from "@shared/routing";
 import {
   AlertDialog,
@@ -35,8 +36,8 @@ export const ChangeChannel: FC<ChangeChannelProps> = ({
   )?.comment;
 
   const handleOnClick = () => {
-    Cookies.set("project_id", project_id);
-    Cookies.set("rereview", "true");
+    Cookies.set(cookiesTypes.projectId, project_id);
+    Cookies.set(cookiesTypes.isReview, "true");
   };
 
   return (

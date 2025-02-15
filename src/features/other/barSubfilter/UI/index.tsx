@@ -22,6 +22,7 @@ import {
   profileTypesNum,
   walletTopUpTypes,
 } from "@entities/wallet";
+import { cookiesTypes } from "@shared/config";
 import { pageFilter } from "@shared/routing";
 import Cookies from "js-cookie";
 import { FC } from "react";
@@ -84,8 +85,8 @@ export const BarSubfilter: FC<BarSubfilterProps> = ({
   badge,
 }) => {
   const { t } = useTranslation();
-  const role = Cookies.get("role")
-    ? (Cookies.get("role") as roles)
+  const role = Cookies.get(cookiesTypes.role)
+    ? (Cookies.get(cookiesTypes.role) as roles)
     : roles.advertiser;
 
   const [options, filter] =

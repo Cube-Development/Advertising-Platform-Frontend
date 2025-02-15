@@ -11,8 +11,10 @@ import styles from "./styles.module.scss";
 import { Link, useLocation } from "react-router-dom";
 import { paths } from "@shared/routing";
 import { useTranslation } from "react-i18next";
+import { useClearCookiesOnPage } from "@shared/hooks";
 
 export const LoginPage: FC = () => {
+  useClearCookiesOnPage();
   const { t } = useTranslation();
   const [currentForm, setCurrentForm] = useState<loginSteps>(loginSteps.login);
 

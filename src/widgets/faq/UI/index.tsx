@@ -1,6 +1,7 @@
 import { FAQData, FAQtypes } from "@entities/faq";
 import { FAQInformation } from "@features/faq";
 import { PAGE_ANIMATION } from "@shared/config/animation";
+import { useClearCookiesOnPage } from "@shared/hooks";
 import { Accordion } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC } from "react";
@@ -8,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
 export const FAQ: FC = () => {
+  useClearCookiesOnPage();
   const { t } = useTranslation();
   const data = FAQData.map((item) => ({
     ...item,

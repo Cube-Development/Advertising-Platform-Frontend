@@ -10,6 +10,7 @@
 //   );
 // };
 
+import { useClearCookiesOnPage } from "@shared/hooks";
 import { SuspenseLoader } from "@shared/ui";
 import React, { Suspense } from "react";
 
@@ -25,6 +26,7 @@ const AddLegalForm = React.lazy(() =>
 );
 
 export const AddLegalPage = () => {
+  useClearCookiesOnPage();
   return (
     <>
       <Suspense fallback={<SuspenseLoader />}>

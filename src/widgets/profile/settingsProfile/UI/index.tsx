@@ -16,10 +16,12 @@ import {
 } from "@entities/user";
 import { EditPencilIcon, EmailIcon, TelegramJetlIcon } from "@shared/assets";
 import { languages, languagesNum, PAGE_ANIMATION } from "@shared/config";
+import { useClearCookiesOnPage } from "@shared/hooks";
 import { CustomCheckbox, MyButton, ToastAction, useToast } from "@shared/ui";
 import styles from "./styles.module.scss";
 
 export const SettingsProfile: FC = () => {
+  useClearCookiesOnPage();
   const { t } = useTranslation();
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
@@ -161,7 +163,7 @@ export const SettingsProfile: FC = () => {
                     onChange={(e) =>
                       setValue(
                         `${profileForm.user_additional}.${userForm.first_name}`,
-                        e.target.value,
+                        e.target.value
                       )
                     }
                   />
@@ -170,13 +172,13 @@ export const SettingsProfile: FC = () => {
                   <span> {t("profile.account_block.surname.title")}</span>
                   <input
                     placeholder={t(
-                      "profile.account_block.surname.default_value",
+                      "profile.account_block.surname.default_value"
                     )}
                     value={formState?.user_additional?.surname}
                     onChange={(e) =>
                       setValue(
                         `${profileForm.user_additional}.${userForm.surname}`,
-                        e.target.value,
+                        e.target.value
                       )
                     }
                   />
@@ -193,7 +195,7 @@ export const SettingsProfile: FC = () => {
                     onChange={(e) =>
                       setValue(
                         `${profileForm.user_additional}.${userForm.email}`,
-                        e.target.value,
+                        e.target.value
                       )
                     }
                   />
@@ -208,7 +210,7 @@ export const SettingsProfile: FC = () => {
                   onChange={(e) =>
                     setValue(
                       `${profileForm.user_additional}.${userForm.phone}`,
-                      e.target.value,
+                      e.target.value
                     )
                   }
                   type="tel"
@@ -219,7 +221,7 @@ export const SettingsProfile: FC = () => {
                   <span> {t("profile.account_block.language.title")}</span>
                   <input
                     placeholder={t(
-                      "profile.account_block.language.default_value",
+                      "profile.account_block.language.default_value"
                     )}
                     value={
                       formState?.user_additional?.language === languagesNum.en
@@ -237,13 +239,13 @@ export const SettingsProfile: FC = () => {
                   <input
                     autoComplete="new-location"
                     placeholder={t(
-                      "profile.account_block.location.default_value",
+                      "profile.account_block.location.default_value"
                     )}
                     value={formState?.user_additional?.location}
                     onChange={(e) =>
                       setValue(
                         `${profileForm.user_additional}.${userForm.location}`,
-                        e.target.value,
+                        e.target.value
                       )
                     }
                   />
@@ -267,7 +269,7 @@ export const SettingsProfile: FC = () => {
                   autoComplete="new-password"
                   type="password"
                   placeholder={t(
-                    "profile.password_block.current_password.default_value",
+                    "profile.password_block.current_password.default_value"
                   )}
                   value={formState.current_password}
                   onChange={(e) =>
@@ -281,7 +283,7 @@ export const SettingsProfile: FC = () => {
                   autoComplete="new-password"
                   type="password"
                   placeholder={t(
-                    "profile.password_block.new_password.default_value",
+                    "profile.password_block.new_password.default_value"
                   )}
                   value={formState.new_password}
                   onChange={(e) =>
@@ -295,7 +297,7 @@ export const SettingsProfile: FC = () => {
                   autoComplete="new-password"
                   type="password"
                   placeholder={t(
-                    "profile.password_block.accept_password.default_value",
+                    "profile.password_block.accept_password.default_value"
                   )}
                   value={formState.accept_password}
                   onChange={(e) =>
@@ -380,7 +382,7 @@ export const SettingsProfile: FC = () => {
                       <div className={styles.row}>
                         <input
                           placeholder={t(
-                            "profile.notification_block.bot.telegramm.default_value",
+                            "profile.notification_block.bot.telegramm.default_value"
                           )}
                         />
                         <MyButton>

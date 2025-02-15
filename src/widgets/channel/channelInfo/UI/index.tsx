@@ -22,7 +22,12 @@ import {
   useRemoveFromPublicCartMutation,
 } from "@entities/project";
 import { GenerateGuestId, roles, useFindLanguage } from "@entities/user";
-import { BREAKPOINT, Languages, PAGE_ANIMATION } from "@shared/config";
+import {
+  BREAKPOINT,
+  cookiesTypes,
+  Languages,
+  PAGE_ANIMATION,
+} from "@shared/config";
 import { useAppDispatch, useAppSelector, useWindowWidth } from "@shared/hooks";
 import { ToastAction, useToast } from "@shared/ui";
 import { motion } from "framer-motion";
@@ -39,9 +44,9 @@ import styles from "./styles.module.scss";
 interface ChannelInfoProps {}
 
 export const ChannelInfo: FC<ChannelInfoProps> = () => {
-  const userId = Cookies.get("user_id");
-  const guestId = Cookies.get("guest_id") || GenerateGuestId();
-  const projectId = Cookies.get("project_id");
+  const userId = Cookies.get(cookiesTypes.userId);
+  const guestId = Cookies.get(cookiesTypes.guestId) || GenerateGuestId();
+  const projectId = Cookies.get(cookiesTypes.projectId);
 
   const { id: channel_id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();

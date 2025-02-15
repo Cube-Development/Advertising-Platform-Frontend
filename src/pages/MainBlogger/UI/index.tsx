@@ -24,6 +24,7 @@
 //   );
 // };
 
+import { useClearCookiesOnPage } from "@shared/hooks";
 import { SuspenseLoader } from "@shared/ui";
 import React, { Suspense } from "react";
 
@@ -59,6 +60,7 @@ const Customers = React.lazy(() =>
 );
 
 export const MainBloggerPage = () => {
+  useClearCookiesOnPage();
   const page = "main_page_blogger";
 
   return (

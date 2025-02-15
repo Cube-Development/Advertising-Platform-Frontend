@@ -17,10 +17,10 @@
 //   );
 // };
 
-import React, { Suspense } from "react";
 import { roles } from "@entities/user";
-import { useAppSelector } from "@shared/hooks";
+import { useAppSelector, useClearCookiesOnPage } from "@shared/hooks";
 import { SuspenseLoader } from "@shared/ui";
+import React, { Suspense } from "react";
 
 // Ленивые импорты компонентов
 const AdvOrders = React.lazy(() =>
@@ -33,6 +33,7 @@ const ManagerOrders = React.lazy(() =>
 );
 
 export const OrdersPage = () => {
+  useClearCookiesOnPage();
   const { role } = useAppSelector((state) => state.user);
 
   return (

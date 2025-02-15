@@ -94,7 +94,6 @@
 //   );
 // };
 
-import React, { Suspense } from "react";
 import {
   channelStatusFilter,
   getChannelsByStatusReq,
@@ -106,15 +105,16 @@ import {
   platformTypes,
   platformTypesNum,
 } from "@entities/platform";
+import { useFindLanguage } from "@entities/user";
 import { useGetViewBloggerChannelQuery } from "@entities/views";
 import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
+import { useClearCookiesOnPage } from "@shared/hooks";
 import { pageFilter } from "@shared/routing";
+import { SuspenseLoader } from "@shared/ui";
 import { BarFilter } from "@widgets/barFilter";
-import { FC, useEffect } from "react";
+import React, { FC, Suspense, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import styles from "./styles.module.scss";
-import { SuspenseLoader } from "@shared/ui";
-import { useFindLanguage } from "@entities/user";
 
 // Ленивый импорт компонентов
 const ActiveChannels = React.lazy(() =>
@@ -129,6 +129,7 @@ const ModerationChannels = React.lazy(() =>
 );
 
 export const MyChannelsPage: FC = () => {
+  useClearCookiesOnPage();
   const language = useFindLanguage();
 
   const { setValue, watch } = useForm<{

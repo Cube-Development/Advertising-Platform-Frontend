@@ -1,3 +1,5 @@
+import { useClearCookiesOnPage } from "@shared/hooks";
+import { paths } from "@shared/routing";
 import {
   CodeForm,
   EmailForm,
@@ -5,12 +7,12 @@ import {
   registrationSteps,
 } from "@widgets/authorization";
 import { FC, useState } from "react";
-import styles from "./styles.module.scss";
-import { paths } from "@shared/routing";
-import { Link, useLocation } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { Link, useLocation } from "react-router-dom";
+import styles from "./styles.module.scss";
 
 export const RegistrationPage: FC = () => {
+  useClearCookiesOnPage();
   const { t } = useTranslation();
   const [currentForm, setCurrentForm] = useState<registrationSteps>(
     registrationSteps.email,

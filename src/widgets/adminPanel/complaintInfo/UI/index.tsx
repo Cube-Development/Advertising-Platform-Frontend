@@ -8,6 +8,7 @@ import {
   ComplaintDecision,
   RejectComplaint,
 } from "@features/adminPanel";
+import { useClearCookiesOnPage } from "@shared/hooks";
 import { paths } from "@shared/routing";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -15,6 +16,7 @@ import { Link, useParams } from "react-router-dom";
 import styles from "./styles.module.scss";
 
 export const ComplaintInfo: FC = () => {
+  useClearCookiesOnPage();
   const { t } = useTranslation();
   const { id: complaint_id } = useParams<{ id: string }>();
 

@@ -1,8 +1,9 @@
-import { useLocation, Navigate, Outlet } from "react-router-dom";
 import { managementRoles, roles, userRoles } from "@entities/user";
+import { cookiesTypes } from "@shared/config";
 import { useAppSelector } from "@shared/hooks";
 import { paths } from "@shared/routing";
 import Cookies from "js-cookie";
+import { Navigate, Outlet, useLocation } from "react-router-dom";
 
 export enum routerType {
   public = "public",
@@ -11,7 +12,7 @@ export enum routerType {
 }
 
 export const CheckProjectId = () => {
-  const projectId = Cookies.get("project_id");
+  const projectId = Cookies.get(cookiesTypes.projectId);
   return projectId ? <Outlet /> : <Navigate to={paths.cart} replace />;
 };
 

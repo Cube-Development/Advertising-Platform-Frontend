@@ -6,7 +6,7 @@ import {
 } from "@entities/project";
 import { roles, useFindLanguage } from "@entities/user";
 import { ArrowLongHorizontalIcon, LoginIcon } from "@shared/assets";
-import { Languages } from "@shared/config";
+import { cookiesTypes, Languages } from "@shared/config";
 import { useAppSelector, useCurrentPathEnum } from "@shared/hooks";
 import { paths } from "@shared/routing";
 import {
@@ -48,7 +48,7 @@ export const CreatePost: FC<CreatePostProps> = ({}) => {
         createCart()
           .unwrap()
           .then((data) => {
-            Cookies.set("project_id", data.project_id);
+            Cookies.set(cookiesTypes.projectId, data.project_id);
             navigate(paths.createOrder);
           })
           .catch((error) => {
@@ -61,7 +61,7 @@ export const CreatePost: FC<CreatePostProps> = ({}) => {
           });
     } else if (isAuth && role === roles.manager) {
       // должен быть запрос на проверку общей суммы в корзине манагера проекта и бюджета этого проекта
-      const projectId = Cookies.get("project_id") || "";
+      const projectId = Cookies.get(cookiesTypes.projectId) || "";
       !isLoadingProjectCart &&
         createProjectCart({
           project_id: projectId,
@@ -79,7 +79,7 @@ export const CreatePost: FC<CreatePostProps> = ({}) => {
                 } else if (
                   data.state === cartStatusFilter.channel_to_be_replaced
                 ) {
-                  Cookies.set("channel_to_be_replaced", "true");
+                  Cookies.set(cookiesTypes.isChannelReplaced, "true");
                   navigate(paths.createOrder);
                 } else if (data.state === cartStatusFilter.amount) {
                   toast({

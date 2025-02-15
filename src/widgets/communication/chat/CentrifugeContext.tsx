@@ -5,6 +5,7 @@ import {
   useGetAuthTokenMutation,
   useGetWebsocketTokenMutation,
 } from "@entities/communication";
+import { cookiesTypes } from "@shared/config";
 import { useAppSelector } from "@shared/hooks";
 import { Centrifuge, PublicationContext } from "centrifuge";
 import Cookies from "js-cookie";
@@ -50,7 +51,7 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
   const { isAuth } = useAppSelector((state) => state.user);
   const [getWebsocketToken] = useGetWebsocketTokenMutation();
   const [getAuthToken] = useGetAuthTokenMutation();
-  const userId = Cookies.get("user_id")!;
+  const userId = Cookies.get(cookiesTypes.userId)!;
   const channelName = "common";
   const personalChannel = "common:user#" + userId;
 

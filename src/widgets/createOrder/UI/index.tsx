@@ -14,7 +14,7 @@ import {
 } from "@entities/project";
 import { roles, useFindLanguage } from "@entities/user";
 import { usePaymentProjectMutation } from "@entities/wallet";
-import { BREAKPOINT } from "@shared/config";
+import { BREAKPOINT, cookiesTypes } from "@shared/config";
 import { Languages } from "@shared/config/languages";
 import { useAppSelector, useWindowWidth } from "@shared/hooks";
 import { paths } from "@shared/routing";
@@ -38,8 +38,8 @@ import { ICreateOrderBlur } from "../config";
 interface CreateOrderBlockProps {}
 
 export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
-  const project_id = Cookies.get("project_id");
-  const isChannelReplace = Boolean(Cookies.get("channel_to_be_replaced"));
+  const projectId = Cookies.get(cookiesTypes.projectId);
+  const isChannelReplace = Boolean(Cookies.get(cookiesTypes.isChannelReplaced));
   const { toast } = useToast();
   const { t } = useTranslation();
   const { isAuth, role } = useAppSelector((state) => state.user);
@@ -58,7 +58,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
     useForm<ICreatePostForm>({
       defaultValues: {
         posts: [],
-        datetime: { project_id: project_id, orders: [] },
+        datetime: { project_id: projectId, orders: [] },
         isMultiPost: false,
       },
     });
@@ -70,30 +70,30 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
   });
 
   const projectChannelsReq = {
-    project_id: project_id!,
+    project_id: projectId!,
     language: language?.id || Languages[0].id,
     page: 1,
   };
   const projectPostsReq = {
-    project_id: project_id!,
+    project_id: projectId!,
     page: 1,
   };
 
   const { data: projectChannels, isLoading: isOrdersLoading } =
     useProjectOrdersQuery(projectChannelsReq, {
-      skip: !project_id || !isAuth,
+      skip: !projectId || !isAuth,
     });
 
   const { data: projectPosts, isLoading: isPostsLoading } =
     useGetPostsRereviewQuery(projectPostsReq, {
-      skip: !project_id && !isChannelReplace,
+      skip: !projectId && !isChannelReplace,
     });
 
   // total price
   const { data: totalPrice } = useGetProjectAmountQuery(
-    { project_id: project_id || "" },
+    { project_id: projectId || "" },
     {
-      skip: !project_id,
+      skip: !projectId,
     },
   );
 
@@ -127,7 +127,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
 
   const onSubmit: SubmitHandler<ICreatePostForm> = async (formData) => {
     if (
-      project_id &&
+      projectId &&
       formData?.posts?.length &&
       formData?.datetime?.orders?.length
     ) {
@@ -262,7 +262,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
         }
 
         projectName({
-          project_id,
+          project_id: projectId,
           name: formData?.name || "Some project name",
         });
 
@@ -274,7 +274,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
                 const postReq = {
                   files: post.content,
                   comment: post?.comment,
-                  project_id: project_id,
+                  project_id: projectId,
                   orders: [post?.order_id],
                 };
                 return createUniquePost(postReq)
@@ -296,7 +296,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
                 const postReq = {
                   files: post.content,
                   comment: post?.comment,
-                  project_id: project_id,
+                  project_id: projectId,
                   post_type: post?.post_type,
                 };
                 return createPost(postReq)
@@ -318,8 +318,8 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
           .unwrap()
           .then(() => {
             (role === roles.advertiser
-              ? paymentProject(project_id)
-              : approveProject({ project_id: project_id })
+              ? paymentProject(projectId)
+              : approveProject({ project_id: projectId })
             )
               .unwrap()
               .then(() => {
