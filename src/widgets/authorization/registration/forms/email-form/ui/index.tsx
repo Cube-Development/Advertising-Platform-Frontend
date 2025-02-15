@@ -21,13 +21,14 @@ export const EmailForm: FC<EmailFormProps> = ({
 
   const [emailError, setEmailError] = useState("");
 
-  const [getCodeForRegistration] = useGetCodeForRegistrationMutation();
+  const [getCodeForRegistration, { isLoading }] =
+    useGetCodeForRegistrationMutation();
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
+    if (isLoading) return;
     if (email.trim() === "") {
       setEmailError(t("auth.email_required"));
     } else if (!emailRegex.test(email.trim())) {

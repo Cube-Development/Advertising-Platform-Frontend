@@ -6,14 +6,14 @@ import {
 } from "@entities/channel";
 import { ArrowLongHorizontalIcon } from "@shared/assets";
 import { PAGE_ANIMATION } from "@shared/config";
+import { paths } from "@shared/routing";
 import { MyButton, ToastAction, useToast } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC } from "react";
 import { SubmitHandler, UseFormHandleSubmit } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import { paths } from "@shared/routing";
 import { useNavigate } from "react-router-dom";
+import styles from "./styles.module.scss";
 
 interface ChannelAcceptProps {
   step: number;
@@ -41,43 +41,46 @@ export const ChannelAccept: FC<ChannelAcceptProps> = ({
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const [createChannel, { isLoading, error }] = useCreateChannelMutation();
-  const [editChannel] = useEditChannelMutation();
+  const [createChannel, { isLoading: isLoadingCreate }] =
+    useCreateChannelMutation();
+  const [editChannel, { isLoading: isLoadingEdit }] = useEditChannelMutation();
 
   const onSubmit: SubmitHandler<IAddChannelData> = (data) => {
     if (isEdit) {
       const { ...editData } = data;
-      editChannel({ ...editData, channel_id: channel_id })
-        .unwrap()
-        .then(() => {
-          toast({
-            variant: "success",
-            title: t("toasts.add_platform.edit.success"),
+      !isLoadingEdit &&
+        editChannel({ ...editData, channel_id: channel_id })
+          .unwrap()
+          .then(() => {
+            toast({
+              variant: "success",
+              title: t("toasts.add_platform.edit.success"),
+            });
+          })
+          .catch(() => {
+            toast({
+              variant: "error",
+              title: t("toasts.add_platform.edit.error"),
+              action: <ToastAction altText="Ok">Ok</ToastAction>,
+            });
           });
-        })
-        .catch(() => {
-          toast({
-            variant: "error",
-            title: t("toasts.add_platform.edit.error"),
-            action: <ToastAction altText="Ok">Ok</ToastAction>,
-          });
-        });
     } else {
-      createChannel(data)
-        .unwrap()
-        .then(() => {
-          toast({
-            variant: "success",
-            title: t("toasts.add_platform.create.success"),
+      !isLoadingCreate &&
+        createChannel(data)
+          .unwrap()
+          .then(() => {
+            toast({
+              variant: "success",
+              title: t("toasts.add_platform.create.success"),
+            });
+          })
+          .catch(() => {
+            toast({
+              variant: "error",
+              title: t("toasts.add_platform.create.error"),
+              action: <ToastAction altText="Ok">Ok</ToastAction>,
+            });
           });
-        })
-        .catch(() => {
-          toast({
-            variant: "error",
-            title: t("toasts.add_platform.create.error"),
-            action: <ToastAction altText="Ok">Ok</ToastAction>,
-          });
-        });
     }
     navigate(paths.myChannels);
   };

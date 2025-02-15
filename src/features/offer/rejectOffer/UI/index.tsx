@@ -17,6 +17,7 @@ export const RejectOffer: FC<IOrderFeature> = ({ order_id }) => {
   const [cancelOffer, { isLoading }] = useCancelOfferMutation();
   const handleOnClick = () => {
     order_id &&
+      !isLoading &&
       cancelOffer({ order_id })
         .unwrap()
         .then(() => {

@@ -1,8 +1,8 @@
 import { IPasswordData, useEditPasswordMutation } from "@entities/user";
-import { AccountsLoader, MyButton, ToastAction, useToast } from "@shared/ui";
+import { MyButton, ToastAction, useToast } from "@shared/ui";
+import { Loader } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
 
 interface EditPasswordProps {
   password: IPasswordData;
@@ -31,6 +31,7 @@ export const EditPassword: FC<EditPasswordProps> = ({ password }) => {
       });
     } else {
       isValid &&
+        !isLoading &&
         edit({
           current_password: password?.current_password,
           new_password: password?.new_password,
@@ -56,9 +57,7 @@ export const EditPassword: FC<EditPasswordProps> = ({ password }) => {
     <MyButton onClick={handleOnClick} disabled={!isValid}>
       <p>{t("profile.password_block.change_btn")}</p>
       {isLoading && (
-        <div className={styles.loader}>
-          <AccountsLoader />
-        </div>
+        <Loader className="animate-spin" stroke="#fff" width={20} height={20} />
       )}
     </MyButton>
   );

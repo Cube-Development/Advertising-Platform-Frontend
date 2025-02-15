@@ -59,24 +59,25 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
   }
   const { author, verified, partner } = getRandomValues();
 
-  const [activateChannel] = useActivateChannelMutation();
+  const [activateChannel, { isLoading }] = useActivateChannelMutation();
   const handleActiveChannel = () => {
-    activateChannel(card.id)
-      .unwrap()
-      .then(() => {
-        toast({
-          variant: "success",
-          title: t("toasts.offers_blogger.channel.activate.success"),
+    !isLoading &&
+      activateChannel(card.id)
+        .unwrap()
+        .then(() => {
+          toast({
+            variant: "success",
+            title: t("toasts.offers_blogger.channel.activate.success"),
+          });
+        })
+        .catch((error) => {
+          toast({
+            variant: "error",
+            title: t("toasts.offers_blogger.channel.activate.error"),
+            action: <ToastAction altText="Ok">Ok</ToastAction>,
+          });
+          console.error("Ошибка при активации канала: ", error);
         });
-      })
-      .catch((error) => {
-        toast({
-          variant: "error",
-          title: t("toasts.offers_blogger.channel.activate.error"),
-          action: <ToastAction altText="Ok">Ok</ToastAction>,
-        });
-        console.error("Ошибка при активации канала: ", error);
-      });
   };
 
   return (

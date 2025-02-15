@@ -2,7 +2,6 @@ import { useAdminChannelUnbanMutation } from "@entities/admin";
 import { AccountsLoader, MyButton, ToastAction, useToast } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
 
 interface UnbanChannelProps {
   id: string;
@@ -14,6 +13,7 @@ export const UnbanChannel: FC<UnbanChannelProps> = ({ id }) => {
   const [unbanChannel, { isLoading }] = useAdminChannelUnbanMutation();
   const handleOnClick = () => {
     id &&
+      !isLoading &&
       unbanChannel({ channel_id: id })
         .unwrap()
         .then(() => {
@@ -35,7 +35,7 @@ export const UnbanChannel: FC<UnbanChannelProps> = ({ id }) => {
     <MyButton buttons_type="button__green_light" onClick={handleOnClick}>
       <p>{t("admin_panel.channels.card.buttons.unban")}</p>
       {isLoading && (
-        <div className={styles.loader}>
+        <div className="loader">
           <AccountsLoader />
         </div>
       )}

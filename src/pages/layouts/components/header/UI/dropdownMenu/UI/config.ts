@@ -17,7 +17,7 @@ import {
 } from "@shared/assets";
 import { paths } from "@shared/routing";
 
-export const advertiserServiсeMenu: IMenuItem[] = [
+export const advertiserServiceMenu: IMenuItem[] = [
   {
     item: {
       title: "burger_menu.catalog",
@@ -34,7 +34,7 @@ export const advertiserServiсeMenu: IMenuItem[] = [
   },
 ];
 
-export const bloggerServiсeMenu: IMenuItem[] = [
+export const bloggerServiceMenu: IMenuItem[] = [
   {
     item: {
       title: "burger_menu.calculateIncome",
@@ -133,7 +133,7 @@ export const commonMenu: IMenuItem[] = [
       { title: "burger_menu.withdraw", path: paths.walletWithdraw },
       {
         title: "burger_menu.history",
-        path: paths.wallethistory,
+        path: paths.walletHistory,
         type: walletTypesFilter.transactions,
       },
       { title: "burger_menu.invoice", path: paths.main },

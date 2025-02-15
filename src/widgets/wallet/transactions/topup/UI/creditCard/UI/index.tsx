@@ -49,24 +49,25 @@ export const CreditCard: FC = () => {
       amount: Number(data.amount),
       way_type: paymentType,
     };
-    paymentDeposit(formData)
-      .unwrap()
-      .then(() => {
-        reset();
-        toast({
-          variant: "success",
-          title: `${t("toasts.wallet.topup.success")}: ${formData.amount.toLocaleString()} ${t("symbol")}`,
+    !isLoading &&
+      paymentDeposit(formData)
+        .unwrap()
+        .then(() => {
+          reset();
+          toast({
+            variant: "success",
+            title: `${t("toasts.wallet.topup.success")}: ${formData.amount.toLocaleString()} ${t("symbol")}`,
+          });
+          navigate(paths.main);
+        })
+        .catch((error) => {
+          toast({
+            variant: "error",
+            title: t("toasts.wallet.topup.error"),
+            action: <ToastAction altText="Ok">Ok</ToastAction>,
+          });
+          console.error("Ошибка payment/deposit: ", error);
         });
-        navigate(paths.main);
-      })
-      .catch((error) => {
-        toast({
-          variant: "error",
-          title: t("toasts.wallet.topup.error"),
-          action: <ToastAction altText="Ok">Ok</ToastAction>,
-        });
-        console.error("Ошибка payment/deposit: ", error);
-      });
   };
 
   const amount = watch("amount", 0);

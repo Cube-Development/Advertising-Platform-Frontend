@@ -10,6 +10,7 @@ import {
 } from "@entities/wallet";
 import { LegalForm, PaymentDidox } from "@features/wallet";
 import { paths } from "@shared/routing";
+import { CustomCheckbox } from "@shared/ui";
 import { FC, useState } from "react";
 import {
   FieldErrors,
@@ -137,10 +138,11 @@ export const PaymentData: FC<PaymentDataProps> = ({
         </div>
       </div>
       <div className={styles.accept}>
-        <input
+        <CustomCheckbox handleChange={() => handleChangeAccept(true, false)} />
+        {/* <input
           type="checkbox"
           onClick={() => handleChangeAccept(true, false)}
-        />
+        /> */}
         <p>
           {t("wallet.accept.text1")}
           <Link to={paths.serviceRules} target="_blank">
@@ -155,10 +157,11 @@ export const PaymentData: FC<PaymentDataProps> = ({
         </p>
       </div>
       <div className={styles.accept}>
-        <input
+        <CustomCheckbox handleChange={() => handleChangeAccept(false, true)} />
+        {/* <input
           type="checkbox"
           onClick={() => handleChangeAccept(false, true)}
-        />
+        /> */}
         <p>{t("wallet.save_data")}</p>
       </div>
       <div className={styles.button}>

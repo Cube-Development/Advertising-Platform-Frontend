@@ -6,7 +6,7 @@ export enum roles {
 }
 
 export const userRoles = [roles.blogger, roles.advertiser];
-export const managmentRoles = [roles.moderator, roles.manager];
+export const managementRoles = [roles.moderator, roles.manager];
 
 export enum chatRoles {
   recipient = "recipient",

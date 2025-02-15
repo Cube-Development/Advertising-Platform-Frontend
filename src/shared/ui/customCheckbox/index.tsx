@@ -1,23 +1,38 @@
-import { FC } from "react";
-import styles from "./styles.module.scss";
 import { CheckIcon } from "lucide-react";
+import { FC, InputHTMLAttributes, useEffect, useState } from "react";
+import styles from "./styles.module.scss";
 
-interface CustomCheckboxProps {
+interface CustomCheckboxProps extends InputHTMLAttributes<HTMLButtonElement> {
   isSelected?: boolean;
-  className?: string;
+  handleChange?: () => void;
 }
 
 export const CustomCheckbox: FC<CustomCheckboxProps> = ({
-  isSelected,
-  className = "",
+  isSelected = false,
+  handleChange,
+  ...props
 }) => {
+  const [checked, setChecked] = useState<boolean>(false);
+
+  useEffect(() => {
+    setChecked(isSelected);
+  }, [isSelected]);
+
+  const handleOnClick = () => {
+    setChecked(!checked);
+    handleChange && handleChange();
+  };
+
   return (
-    <div
-      className={`${className} ${styles.wrapper} ${
-        isSelected ? styles.selected : ""
+    <button
+      {...props}
+      onClick={handleOnClick}
+      type="button"
+      className={`${props?.className} ${styles.wrapper} ${
+        checked ? styles.selected : ""
       }`}
     >
       <CheckIcon />
-    </div>
+    </button>
   );
 };

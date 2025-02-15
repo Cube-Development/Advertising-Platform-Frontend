@@ -29,6 +29,11 @@ export const advertiserNavbar = [
   { text: "pages.faq", href: paths.faq },
 ];
 
+export const managerNavbar = [
+  // { text: "pages.platformOwner", href: paths.mainBlogger },
+  // { text: "pages.advertiser", href: paths.main },
+];
+
 export const bloggerNavbar = [
   {
     text: "pages.calculateIncome",

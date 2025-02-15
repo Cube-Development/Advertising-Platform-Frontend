@@ -1,5 +1,5 @@
 import { useAdminChannelAcceptRemoderationMutation } from "@entities/admin";
-import { MyButton, ToastAction, useToast } from "@shared/ui";
+import { AccountsLoader, MyButton, ToastAction, useToast } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -10,9 +10,11 @@ interface AcceptRemoderationProps {
 export const AcceptRemoderation: FC<AcceptRemoderationProps> = ({ id }) => {
   const { toast } = useToast();
   const { t } = useTranslation();
-  const [acceptChannel] = useAdminChannelAcceptRemoderationMutation();
+  const [acceptChannel, { isLoading }] =
+    useAdminChannelAcceptRemoderationMutation();
   const handleOnClick = () => {
     id &&
+      !isLoading &&
       acceptChannel({ channel_id: id })
         .unwrap()
         .then(() => {
@@ -33,6 +35,11 @@ export const AcceptRemoderation: FC<AcceptRemoderationProps> = ({ id }) => {
   return (
     <MyButton buttons_type="button__green_light" onClick={handleOnClick}>
       <p>{t("admin_panel.channels.card.buttons.accept")}</p>
+      {isLoading && (
+        <div className="loader">
+          <AccountsLoader />
+        </div>
+      )}
     </MyButton>
   );
 };

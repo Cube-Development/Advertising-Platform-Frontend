@@ -1,5 +1,5 @@
 import { useAdminAcceptReviewMutation } from "@entities/admin";
-import { MyButton, ToastAction, useToast } from "@shared/ui";
+import { AccountsLoader, MyButton, ToastAction, useToast } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -10,9 +10,10 @@ interface AcceptReviewProps {
 export const AcceptReview: FC<AcceptReviewProps> = ({ id }) => {
   const { toast } = useToast();
   const { t } = useTranslation();
-  const [acceptReview] = useAdminAcceptReviewMutation();
+  const [acceptReview, { isLoading }] = useAdminAcceptReviewMutation();
   const handleOnClick = () => {
     id &&
+      !isLoading &&
       acceptReview({ id })
         .unwrap()
         .then(() => {
@@ -33,6 +34,11 @@ export const AcceptReview: FC<AcceptReviewProps> = ({ id }) => {
   return (
     <MyButton buttons_type="button__green_light" onClick={handleOnClick}>
       <p>{t("admin_panel.reviews.card.buttons.accept")}</p>
+      {isLoading && (
+        <div className="loader">
+          <AccountsLoader />
+        </div>
+      )}
     </MyButton>
   );
 };

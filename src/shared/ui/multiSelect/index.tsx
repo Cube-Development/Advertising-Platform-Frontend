@@ -59,7 +59,7 @@ export const MultiSelect = React.forwardRef<
       hideButtons = true,
       ...props
     },
-    ref
+    ref,
   ) => {
     const { t } = useTranslation();
     const [selectedValues, setSelectedValues] =
@@ -71,7 +71,7 @@ export const MultiSelect = React.forwardRef<
     }, [defaultValue]);
 
     const handleInputKeyDown = (
-      event: React.KeyboardEvent<HTMLInputElement>
+      event: React.KeyboardEvent<HTMLInputElement>,
     ) => {
       if (event.key === "Enter") {
         setIsPopoverOpen(true);
@@ -136,7 +136,7 @@ export const MultiSelect = React.forwardRef<
                   {single ? (
                     (() => {
                       const singleOption = options?.find(
-                        (option) => option?.id === selectedValues[0]
+                        (option) => option?.id === selectedValues[0],
                       );
 
                       return (
@@ -278,7 +278,7 @@ export const MultiSelect = React.forwardRef<
         </PopoverContent>
       </Popover>
     );
-  }
+  },
 );
 
 MultiSelect.displayName = "MultiSelect";

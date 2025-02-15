@@ -1,8 +1,9 @@
+import { useApproveAdvManagerProjectMutation } from "@entities/project";
 import { MyButton, ToastAction, useToast } from "@shared/ui";
+import { Loader } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { useApproveAdvManagerProjectMutation } from "@entities/project";
 
 interface AcceptProjectProps {
   project_id: string;
@@ -11,9 +12,11 @@ interface AcceptProjectProps {
 export const AcceptProject: FC<AcceptProjectProps> = ({ project_id }) => {
   const { toast } = useToast();
   const { t } = useTranslation();
-  const [approveAdvManagerProject] = useApproveAdvManagerProjectMutation();
+  const [approveAdvManagerProject, { isLoading }] =
+    useApproveAdvManagerProjectMutation();
   const handleOnClick = () => {
     project_id &&
+      !isLoading &&
       approveAdvManagerProject({ project_id })
         .unwrap()
         .then(() => {
@@ -37,7 +40,10 @@ export const AcceptProject: FC<AcceptProjectProps> = ({ project_id }) => {
       buttons_type="button__white"
       className={styles.button}
     >
-      {t(`order_btn.accept`)}
+      <p>{t(`order_btn.accept`)}</p>
+      {isLoading && (
+        <Loader className="animate-spin" stroke="#fff" width={20} height={20} />
+      )}
     </MyButton>
   );
 };

@@ -34,12 +34,13 @@ import {
   DrawerTitle,
   DrawerTrigger,
   formatFileSize,
+  MyButton,
   ScrollArea,
   ToastAction,
   useToast,
 } from "@shared/ui";
 import { getFileExtension } from "@shared/utils";
-import { CircleX, FileIcon, InfoIcon } from "lucide-react";
+import { CircleX, FileIcon, InfoIcon, Loader } from "lucide-react";
 import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -64,7 +65,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
   const { toast } = useToast();
   const { isAuth } = useAppSelector((state) => state.user);
   const { balance } = useAppSelector((state) => state.wallet);
-  const [buyTarif] = usePostBuyTarifMutation();
+  const [buyTarif, { isLoading }] = usePostBuyTarifMutation();
   const [getUploadLink] = useGetUploadLinkMutation();
 
   const tarifPrice =
@@ -158,39 +159,40 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
       formState?.comment ||
       formState?.links.length
     ) {
-      buyTarif({
-        // only back data
-        tariff_ident: formState?.tariff_ident,
-        comment: formState?.comment,
-        links: formState?.links,
-        attached_files: formState?.attached_files,
-      })
-        .unwrap()
-        .then(() => {
-          toast({
-            variant: "success",
-            title: t("toasts.turnkey.success"),
-          });
-          reset({
-            tariff_ident: tarif,
-            comment: "",
-            links: [],
-            attached_files: [],
-            url: "",
-            files: [],
-            dragActive: false,
-            isTarifBought: true,
-            isHaveBalance: tarifPrice <= balance,
-          });
+      !isLoading &&
+        buyTarif({
+          // only back data
+          tariff_ident: formState?.tariff_ident,
+          comment: formState?.comment,
+          links: formState?.links,
+          attached_files: formState?.attached_files,
         })
-        .catch((error) => {
-          toast({
-            variant: "error",
-            title: t("toasts.turnkey.error"),
-            action: <ToastAction altText="Ok">Ok</ToastAction>,
+          .unwrap()
+          .then(() => {
+            toast({
+              variant: "success",
+              title: t("toasts.turnkey.success"),
+            });
+            reset({
+              tariff_ident: tarif,
+              comment: "",
+              links: [],
+              attached_files: [],
+              url: "",
+              files: [],
+              dragActive: false,
+              isTarifBought: true,
+              isHaveBalance: tarifPrice <= balance,
+            });
+          })
+          .catch((error) => {
+            toast({
+              variant: "error",
+              title: t("toasts.turnkey.error"),
+              action: <ToastAction altText="Ok">Ok</ToastAction>,
+            });
+            console.error("error: ", error);
           });
-          console.error("error: ", error);
-        });
     }
   };
 
@@ -402,9 +404,17 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
                   </div>
                 </ScrollArea>
                 <div className={styles.menu__bottom}>
-                  <button className={styles.payment} onClick={handleSubmit}>
+                  <MyButton className={styles.payment} onClick={handleSubmit}>
                     <p>{t("turnkey.chain.have_balance.button")}</p>
-                  </button>
+                    {isLoading && (
+                      <Loader
+                        className="animate-spin"
+                        stroke="#fff"
+                        width={20}
+                        height={20}
+                      />
+                    )}
+                  </MyButton>
                 </div>
               </>
             ) : formState?.isTarifBought && formState?.isHaveBalance ? (

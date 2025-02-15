@@ -1,8 +1,5 @@
-import { FC, useState } from "react";
-import styles from "./styles.module.scss";
-import { registrationSteps } from "../../config";
 import {
-  IRegiser,
+  IRegister,
   roles,
   useFindLanguage,
   useGetUserMutation,
@@ -10,14 +7,17 @@ import {
   useRegisterMutation,
   userRoles,
 } from "@entities/user";
-import { Languages } from "@shared/config";
-import { useTranslation } from "react-i18next";
-import { ToastAction, useToast } from "@shared/ui";
 import { useHandleAuth } from "@features/useHandleAuth";
-import { Loader } from "lucide-react";
-import { Link } from "react-router-dom";
-import { paths } from "@shared/routing";
+import { Languages } from "@shared/config";
 import { useAppSelector } from "@shared/hooks";
+import { paths } from "@shared/routing";
+import { CustomCheckbox, ToastAction, useToast } from "@shared/ui";
+import { Loader } from "lucide-react";
+import { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { registrationSteps } from "../../config";
+import styles from "./styles.module.scss";
 
 interface RegistrationFormProps {
   onNavigate: (direction: registrationSteps) => void;
@@ -48,6 +48,7 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (registerLoading) return;
 
     setPasswordError("");
     setConfirmPasswordError("");
@@ -66,7 +67,7 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({
     } else if (password !== confirmPassword) {
       setConfirmPasswordError(t("auth.passwords_dont_match"));
     } else {
-      const req: IRegiser = {
+      const req: IRegister = {
         email: email,
         password: password,
         is_active: true,
@@ -181,11 +182,15 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({
         </div>
 
         <div className={styles.news}>
-          <input
+          {/* <input
             type="checkbox"
             name="agree"
             checked={promo}
             onChange={() => setPromo((prev) => !prev)}
+          /> */}
+          <CustomCheckbox
+            isSelected={promo}
+            handleChange={() => setPromo((prev) => !prev)}
           />
           {t("auth.subscribtion")}
         </div>
