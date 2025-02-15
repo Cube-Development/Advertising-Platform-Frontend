@@ -1,8 +1,8 @@
 import { IUserData, useEditProfileMutation } from "@entities/user";
-import { AccountsLoader, MyButton, ToastAction, useToast } from "@shared/ui";
+import { MyButton, ToastAction, useToast } from "@shared/ui";
+import { Loader } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
 
 interface EditUserProps {
   user: IUserData;
@@ -17,6 +17,7 @@ export const EditUser: FC<EditUserProps> = ({ user }) => {
   );
   const handleOnClick = () => {
     isValid &&
+      !isLoading &&
       edit(user)
         .unwrap()
         .then(() => {
@@ -38,9 +39,7 @@ export const EditUser: FC<EditUserProps> = ({ user }) => {
     <MyButton onClick={handleOnClick} disabled={!isValid}>
       <p>{t("profile.account_block.save_btn")}</p>
       {isLoading && (
-        <div className={styles.loader}>
-          <AccountsLoader />
-        </div>
+        <Loader className="animate-spin" stroke="#fff" width={20} height={20} />
       )}
     </MyButton>
   );

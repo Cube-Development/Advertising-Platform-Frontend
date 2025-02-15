@@ -2,6 +2,7 @@ import {
   logout,
   roles,
   toggleRole as toggleRoleAction,
+  userRoles,
   useUpdateRoleMutation,
 } from "@entities/user";
 import { authApi, baseApi } from "@shared/api";
@@ -98,7 +99,9 @@ export const Header: FC = () => {
 
         <div className={styles.profile}>
           <Lang isAuth={isAuth} />
-          {isAuth && screen > BREAKPOINT.MD && <Wallet />}
+          {isAuth && userRoles.includes(role) && screen > BREAKPOINT.MD && (
+            <Wallet />
+          )}
           {isAuth ? (
             <>
               <div className={styles.separator}></div>

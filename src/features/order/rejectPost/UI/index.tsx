@@ -31,6 +31,7 @@ export const RejectPost: FC<IOrderFeature> = ({ order_id }) => {
   const { t } = useTranslation();
   const handleOnClick = () => {
     order_id &&
+      !isLoading &&
       comment.length > 0 &&
       rejectOrder({ order_id, comment, theme: "" })
         .unwrap()
@@ -115,7 +116,7 @@ export const RejectPost: FC<IOrderFeature> = ({ order_id }) => {
               {t(`order_btn.reject.btn_title`)}
             </small>
           </DrawerTrigger>
-          <DrawerContent className="rounded-t-xl bottom-0 top-auto">
+          <DrawerContent className="bottom-0 top-auto rounded-t-xl">
             <DialogTitle className="sr-only"></DialogTitle>
             <DialogDescription className="sr-only"></DialogDescription>
             <div className="mx-auto mt-4 h-1.5 w-[80px] rounded-full bg-black/20" />

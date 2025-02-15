@@ -17,24 +17,26 @@ export const DeleteChannel: FC<DeleteChannelProps> = ({
   const { t } = useTranslation();
   const { toast } = useToast();
 
-  const [deleteChannel] = useDeleteChannelMutation();
+  const [deleteChannel, { isLoading }] = useDeleteChannelMutation();
   const handleDeleteChannel = () => {
-    deleteChannel({ channel_id })
-      .unwrap()
-      .then(() => {
-        onChange();
-        toast({
-          variant: "success",
-          title: t("toasts.offers_blogger.channel.delete.success"),
+    channel_id &&
+      isLoading &&
+      deleteChannel({ channel_id })
+        .unwrap()
+        .then(() => {
+          onChange();
+          toast({
+            variant: "success",
+            title: t("toasts.offers_blogger.channel.delete.success"),
+          });
+        })
+        .catch(() => {
+          toast({
+            variant: "error",
+            title: t("toasts.offers_blogger.channel.delete.error"),
+            action: <ToastAction altText="Ok">Ok</ToastAction>,
+          });
         });
-      })
-      .catch(() => {
-        toast({
-          variant: "error",
-          title: t("toasts.offers_blogger.channel.delete.error"),
-          action: <ToastAction altText="Ok">Ok</ToastAction>,
-        });
-      });
   };
   const menuRef = useRef<HTMLDivElement>(null);
 

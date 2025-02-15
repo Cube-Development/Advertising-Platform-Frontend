@@ -28,6 +28,7 @@ export const LoginForm: FC<Props> = ({ onNavigate }) => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    if (isLoading) return;
     if (email.trim() === "") {
       setEmailError(t("auth.email_required"));
     } else if (!emailRegex.test(email.trim())) {

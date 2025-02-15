@@ -1,8 +1,8 @@
+import { useGetCodeForForgotPasswordMutation } from "@entities/user";
 import { FC, FormEvent, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { loginSteps } from "../../config";
 import styles from "./styles.module.scss";
-import { useTranslation } from "react-i18next";
-import { useGetCodeForForgotPasswordMutation } from "@entities/user";
 
 interface Props {
   onNavigate: (form: loginSteps) => void;
@@ -20,10 +20,12 @@ export const ForgotPasswordForm: FC<Props> = ({
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
-  const [getCodeForForgotPassword] = useGetCodeForForgotPasswordMutation();
+  const [getCodeForForgotPassword, { isLoading }] =
+    useGetCodeForForgotPasswordMutation();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    if (isLoading) return;
     if (email.trim() === "") {
       setEmailError(t("auth.email_required"));
     } else if (!emailRegex.test(email.trim())) {

@@ -17,24 +17,26 @@ export const DeactivateChannel: FC<DeactivateChannelProps> = ({
   const { t } = useTranslation();
   const { toast } = useToast();
 
-  const [deactivateChannel] = useDeactivateChannelMutation();
+  const [deactivateChannel, { isLoading }] = useDeactivateChannelMutation();
   const handleDeactiveChannel = () => {
-    deactivateChannel(channel_id)
-      .unwrap()
-      .then(() => {
-        onChange();
-        toast({
-          variant: "success",
-          title: t("toasts.offers_blogger.channel.deactivate.success"),
+    channel_id &&
+      !isLoading &&
+      deactivateChannel(channel_id)
+        .unwrap()
+        .then(() => {
+          onChange();
+          toast({
+            variant: "success",
+            title: t("toasts.offers_blogger.channel.deactivate.success"),
+          });
+        })
+        .catch(() => {
+          toast({
+            variant: "error",
+            title: t("toasts.offers_blogger.channel.deactivate.error"),
+            action: <ToastAction altText="Ok">Ok</ToastAction>,
+          });
         });
-      })
-      .catch(() => {
-        toast({
-          variant: "error",
-          title: t("toasts.offers_blogger.channel.deactivate.error"),
-          action: <ToastAction altText="Ok">Ok</ToastAction>,
-        });
-      });
   };
   const menuRef = useRef<HTMLDivElement>(null);
 

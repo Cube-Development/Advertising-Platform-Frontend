@@ -39,7 +39,7 @@ export interface IRoute {
 export const privateCommonRoutes: IRoute[] = [
   { path: paths.walletTopUp, component: TopupPage, sidebar: true },
   { path: paths.walletWithdraw, component: WithdrawalPage, sidebar: true },
-  { path: paths.wallethistory, component: WalletHistoryPage, sidebar: true },
+  { path: paths.walletHistory, component: WalletHistoryPage, sidebar: true },
   { path: paths.profile, component: ProfilePage, sidebar: true },
 ];
 

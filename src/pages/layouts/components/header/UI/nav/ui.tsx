@@ -1,15 +1,16 @@
+import { roles } from "@entities/user";
+import { paths } from "@shared/routing";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   advertiserNavbar,
   bloggerNavbar,
+  managerNavbar,
   notAuthAdvertiserNavbar,
   notAuthBloggerNavbar,
 } from "./config";
 import styles from "./styles.module.scss";
-import { paths } from "@shared/routing";
-import { roles } from "@entities/user";
 
 interface NavProps {
   isAuth: boolean;
@@ -47,9 +48,11 @@ export const Nav: FC<NavProps> = ({ isAuth, currentRole, toggleRole }) => {
       ? advertiserNavbar
       : isAuth && currentRole === roles.blogger
         ? bloggerNavbar
-        : !isAuth && currentRole === roles.advertiser
-          ? notAuthAdvertiserNavbar
-          : notAuthBloggerNavbar;
+        : isAuth && currentRole === roles.manager
+          ? managerNavbar
+          : !isAuth && currentRole === roles.advertiser
+            ? notAuthAdvertiserNavbar
+            : notAuthBloggerNavbar;
 
   return (
     <nav className={styles.wrapper}>
@@ -59,7 +62,7 @@ export const Nav: FC<NavProps> = ({ isAuth, currentRole, toggleRole }) => {
           onClick={() => handleNavigation(item.href)}
           className={location.pathname === item.href ? styles.active : ""}
         >
-          {item.img && (
+          {item?.img && (
             <item.img key={index} className="active__gradient__icon" />
           )}
           {t(item.text)}

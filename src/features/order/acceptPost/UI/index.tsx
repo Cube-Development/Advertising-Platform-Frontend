@@ -22,6 +22,7 @@ export const AcceptPost: FC<IOrderFeature> = ({ order_id }) => {
   const [acceptOrder, { isLoading }] = useAcceptOrderMutation();
   const handleOnClick = () => {
     order_id &&
+      !isLoading &&
       acceptOrder({ order_id })
         .unwrap()
         .then(() => {
@@ -54,7 +55,7 @@ export const AcceptPost: FC<IOrderFeature> = ({ order_id }) => {
           height={20}
         />
       ) : (
-        t(`order_btn.accept`)
+        <p>{t(`order_btn.accept`)}</p>
       )}
     </MyButton>
   );

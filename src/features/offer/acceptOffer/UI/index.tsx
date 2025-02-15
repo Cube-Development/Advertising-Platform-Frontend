@@ -67,23 +67,25 @@ export const AcceptOffer: FC<IOrderFeature> = ({ order_id, dates }) => {
   const [selectedDate, setSelectedDate] = useState<string>(currentDates[0]);
   const [acceptOffer, { isLoading }] = useAcceptOfferMutation();
   const handleOnClick = () => {
-    acceptOffer({ order_id, date: selectedDate })
-      .unwrap()
-      .then(() => {
-        toast({
-          variant: "success",
-          title: t("toasts.offers_blogger.accept_offer.success"),
+    order_id &&
+      !isLoading &&
+      acceptOffer({ order_id, date: selectedDate })
+        .unwrap()
+        .then(() => {
+          toast({
+            variant: "success",
+            title: t("toasts.offers_blogger.accept_offer.success"),
+          });
+          handleInvalidateCache();
+        })
+        .catch((error) => {
+          toast({
+            variant: "error",
+            title: t("toasts.offers_blogger.accept_offer.error"),
+            action: <ToastAction altText="Ok">Ok</ToastAction>,
+          });
+          console.error("error: ", error);
         });
-        handleInvalidateCache();
-      })
-      .catch((error) => {
-        toast({
-          variant: "error",
-          title: t("toasts.offers_blogger.accept_offer.error"),
-          action: <ToastAction altText="Ok">Ok</ToastAction>,
-        });
-        console.error("error: ", error);
-      });
   };
 
   const screen = useWindowWidth();
@@ -144,7 +146,7 @@ export const AcceptOffer: FC<IOrderFeature> = ({ order_id, dates }) => {
               <DrawerTrigger asChild>
                 <p className={styles.button}>{t(`offer_btn.accept`)}</p>
               </DrawerTrigger>
-              <DrawerContent className="rounded-t-xl bottom-0 top-auto">
+              <DrawerContent className="bottom-0 top-auto rounded-t-xl">
                 <DialogTitle className="sr-only"></DialogTitle>
                 <div className="mx-auto mt-4 h-1.5 w-[80px] rounded-full bg-black/20" />
                 <div className={styles.drawer_popover}>

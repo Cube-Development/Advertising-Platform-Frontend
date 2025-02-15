@@ -1,7 +1,7 @@
 import { languagesNum } from "@shared/config";
 import { roles } from "../config";
 
-export interface IRegiser {
+export interface IRegister {
   email: string;
   password: string;
   is_active: boolean;

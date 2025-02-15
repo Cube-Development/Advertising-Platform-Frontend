@@ -1,8 +1,8 @@
+import { useGetCodeForForgotPasswordMutation } from "@entities/user";
 import { FC, FormEvent, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { loginSteps } from "../../config";
 import styles from "./styles.module.scss";
-import { useTranslation } from "react-i18next";
-import { useGetCodeForForgotPasswordMutation } from "@entities/user";
 
 interface Props {
   onNavigate: (form: loginSteps) => void;
@@ -19,7 +19,8 @@ export const CodeReceiveForm: FC<Props> = ({
   const [code, setCode] = useState("");
   const [codeError, setCodeError] = useState("");
 
-  const [getCodeForForgotPassword] = useGetCodeForForgotPasswordMutation();
+  const [getCodeForForgotPassword, { isLoading }] =
+    useGetCodeForForgotPasswordMutation();
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -36,7 +37,7 @@ export const CodeReceiveForm: FC<Props> = ({
   };
 
   const resendCode = () => {
-    getCodeForForgotPassword({ email });
+    !isLoading && getCodeForForgotPassword({ email });
   };
 
   return (

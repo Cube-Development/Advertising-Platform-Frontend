@@ -44,7 +44,8 @@
       display: grid;
       grid-auto-flow: row;
       row-gap: 8px;
-      padding: 10px;
+      // padding: 10px;
+      padding: 0 10px;
     }
 
     &__switcher {
@@ -117,6 +118,8 @@
       .accordion__block {
         display: grid;
         grid-auto-flow: row;
+        row-gap: 5px;
+        margin-top: 15px;
 
         .accordion__title {
           color: rgba(0, 0, 0, 0.4);
@@ -124,11 +127,12 @@
           font-style: normal;
           font-weight: 600;
           line-height: 1;
-          padding: 5px 25px;
+          // padding: 5px 25px;
+          padding: 0 25px;
         }
 
         .balance {
-          padding: 5px 25px 25px 25px;
+          padding: 5px 25px 15px 25px;
 
           p {
             font-size: 24px;

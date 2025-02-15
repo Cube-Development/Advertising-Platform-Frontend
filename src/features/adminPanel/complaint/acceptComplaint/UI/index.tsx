@@ -3,7 +3,7 @@ import {
   useAdminAcceptComplaintMutation,
 } from "@entities/admin";
 import { paths } from "@shared/routing";
-import { MyButton, ToastAction, useToast } from "@shared/ui";
+import { AccountsLoader, MyButton, ToastAction, useToast } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -15,11 +15,12 @@ interface AcceptComplaintProps {
 export const AcceptComplaint: FC<AcceptComplaintProps> = ({ params }) => {
   const { toast } = useToast();
   const { t } = useTranslation();
-  const [acceptComplaint] = useAdminAcceptComplaintMutation();
+  const [acceptComplaint, { isLoading }] = useAdminAcceptComplaintMutation();
   const navigate = useNavigate();
   const handleOnClick = () => {
     params?.order_id &&
       params?.reason &&
+      !isLoading &&
       acceptComplaint(params)
         .unwrap()
         .then(() => {
@@ -41,6 +42,11 @@ export const AcceptComplaint: FC<AcceptComplaintProps> = ({ params }) => {
   return (
     <MyButton buttons_type="button__green_light" onClick={handleOnClick}>
       <p>{t("admin_panel.complaintInfo.card.buttons.accept")}</p>
+      {isLoading && (
+        <div className="loader">
+          <AccountsLoader />
+        </div>
+      )}
     </MyButton>
   );
 };

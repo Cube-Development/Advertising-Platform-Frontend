@@ -1,18 +1,19 @@
+import { IFilterSearch } from "@entities/project";
+import { CustomCheckbox } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { IFilterSearch } from "@entities/project";
 
 interface RecomTargetCardProps {
   card: IFilterSearch;
   onChange: (card: IFilterSearch) => void;
-  isChooseed: boolean;
+  isChosen: boolean;
 }
 
 export const RecomTargetCard: FC<RecomTargetCardProps> = ({
   card,
   onChange,
-  isChooseed,
+  isChosen,
 }) => {
   const { t } = useTranslation();
   return (
@@ -56,10 +57,14 @@ export const RecomTargetCard: FC<RecomTargetCardProps> = ({
         </div>
       </div>
       <div className={styles.checkbox}>
-        <input
+        {/* <input
           type="checkbox"
           checked={isChooseed}
           onChange={() => onChange(card)}
+        /> */}
+        <CustomCheckbox
+          isSelected={isChosen}
+          handleChange={() => onChange(card)}
         />
       </div>
     </div>

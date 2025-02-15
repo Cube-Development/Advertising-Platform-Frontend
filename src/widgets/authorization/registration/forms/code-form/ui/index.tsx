@@ -21,32 +21,34 @@ export const CodeForm: FC<CodeFormProps> = ({
   const { t } = useTranslation();
   const { toast } = useToast();
 
-  const [getCodeForRegistration] = useGetCodeForRegistrationMutation();
+  const [getCodeForRegistration, { isLoading }] =
+    useGetCodeForRegistrationMutation();
 
   const [codeError, setCodeError] = useState("");
 
   const resendCode = () => {
-    getCodeForRegistration({ email })
-      .unwrap()
-      .then(() => {
-        toast({
-          variant: "success",
-          title: `${t("toasts.registration.email_verify.resend_code_success")} ${email}`,
+    !isLoading &&
+      getCodeForRegistration({ email })
+        .unwrap()
+        .then(() => {
+          toast({
+            variant: "success",
+            title: `${t("toasts.registration.email_verify.resend_code_success")} ${email}`,
+          });
+        })
+        .catch((error) => {
+          if (error.status === 423) {
+            toast({
+              variant: "error",
+              title: t("toasts.registration.email_verify.email_exists"),
+            });
+          } else {
+            toast({
+              variant: "error",
+              title: t("toasts.registration.email_verify.other_error"),
+            });
+          }
         });
-      })
-      .catch((error) => {
-        if (error.status === 423) {
-          toast({
-            variant: "error",
-            title: t("toasts.registration.email_verify.email_exists"),
-          });
-        } else {
-          toast({
-            variant: "error",
-            title: t("toasts.registration.email_verify.other_error"),
-          });
-        }
-      });
   };
 
   const handleSubmit = (e: FormEvent) => {

@@ -15,6 +15,7 @@ import {
   useGetAIParametersQuery,
   useGetTAParametersQuery,
 } from "@entities/project";
+import { useFindLanguage } from "@entities/user";
 import { AiFilter, RecomTargetCard } from "@features/catalog";
 import {
   BarSubfilter,
@@ -37,7 +38,6 @@ import { useForm, UseFormReset, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import recomAnimation from "/animated/recom_lottie.gif";
-import { useFindLanguage } from "@entities/user";
 
 interface CatalogSearchProps {
   setValue: UseFormSetValue<getCatalogReq>;
@@ -91,7 +91,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
   const {
     data: TAParameters,
     isLoading: isLoadingTAParameters,
-    isFetching: isFetchingTAParaments,
+    isFetching: isFetchingTAParameters,
   } = useGetTAParametersQuery(
     { ...formFieldsTA },
     {
@@ -141,7 +141,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
     reset();
   };
 
-  const handleUseRecommendionCard = (card: IFilterSearch) => {
+  const handleUseRecommendationCard = (card: IFilterSearch) => {
     if (card === recommendationCard) {
       setIsRecom(false);
     } else {
@@ -260,8 +260,8 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
               >
                 <AccordionTrigger className={styles.trigger}>
                   <div className={styles.title}>
-                    {isFetchingTAParaments || isLoadingTAParameters ? (
-                      <div className="grid justify-center items-center">
+                    {isFetchingTAParameters || isLoadingTAParameters ? (
+                      <div className="grid items-center justify-center">
                         <Loader
                           className="animate-spin"
                           stroke="#4772e6"
@@ -287,8 +287,8 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
                     <RecomTargetCard
                       key={index}
                       card={card}
-                      onChange={handleUseRecommendionCard}
-                      isChooseed={recommendationCard === card}
+                      onChange={handleUseRecommendationCard}
+                      isChosen={recommendationCard === card}
                     />
                   ))}
                 </AccordionContent>
@@ -296,8 +296,8 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
             </Accordion>
           )}
           {!recommendationCards &&
-            (isLoadingTAParameters || isFetchingTAParaments) && (
-              <div className="grid justify-center items-center">
+            (isLoadingTAParameters || isFetchingTAParameters) && (
+              <div className="grid items-center justify-center">
                 <Loader
                   className="animate-spin"
                   stroke="#4772e6"

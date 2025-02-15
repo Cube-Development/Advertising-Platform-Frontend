@@ -2,7 +2,6 @@ import { useAdminChannelBanMutation } from "@entities/admin";
 import { AccountsLoader, MyButton, ToastAction, useToast } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
 
 interface BanChannelProps {
   id: string;
@@ -17,6 +16,7 @@ export const BanChannel: FC<BanChannelProps> = ({ id }) => {
 
   const handleOnClick = () => {
     id &&
+      !isLoading &&
       banChannel({ channel_id: id, reason: reason, finish_date: finish_date })
         .unwrap()
         .then(() => {
@@ -38,7 +38,7 @@ export const BanChannel: FC<BanChannelProps> = ({ id }) => {
     <MyButton buttons_type="button__orange_light" onClick={handleOnClick}>
       <p>{t("admin_panel.channels.card.buttons.ban")}</p>
       {isLoading && (
-        <div className={styles.loader}>
+        <div className="loader">
           <AccountsLoader />
         </div>
       )}
