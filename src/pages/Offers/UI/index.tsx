@@ -78,7 +78,6 @@
 //   );
 // };
 
-import React, { Suspense } from "react";
 import {
   getOrdersByStatusReq,
   offerStatusFilter,
@@ -89,15 +88,16 @@ import {
   platformTypes,
   platformTypesNum,
 } from "@entities/platform";
+import { useFindLanguage } from "@entities/user";
 import { useGetViewBloggerOrderQuery } from "@entities/views";
 import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
+import { useClearCookiesOnPage } from "@shared/hooks";
 import { pageFilter } from "@shared/routing";
+import { SuspenseLoader } from "@shared/ui";
 import { BarFilter } from "@widgets/barFilter";
-import { FC, useEffect } from "react";
+import React, { FC, Suspense, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import styles from "./styles.module.scss";
-import { SuspenseLoader } from "@shared/ui";
-import { useFindLanguage } from "@entities/user";
 
 // Ленивый импорт компонента MyOffers
 const MyOffers = React.lazy(() =>
@@ -105,6 +105,7 @@ const MyOffers = React.lazy(() =>
 );
 
 export const OffersPage: FC = () => {
+  useClearCookiesOnPage();
   const page = pageFilter.offer;
   const language = useFindLanguage();
 

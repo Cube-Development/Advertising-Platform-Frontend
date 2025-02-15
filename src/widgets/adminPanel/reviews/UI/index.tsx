@@ -6,6 +6,7 @@ import {
 } from "@entities/admin";
 import { BarSubfilter } from "@features/other";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
+import { useClearCookiesOnPage } from "@shared/hooks";
 import { pageFilter } from "@shared/routing";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
@@ -14,6 +15,7 @@ import { ReviewsList } from "../reviewsList";
 import styles from "./styles.module.scss";
 
 export const Reviews: FC = () => {
+  useClearCookiesOnPage();
   const { t } = useTranslation();
   const { watch, setValue } = useForm<getAdminReviewsReq>({
     defaultValues: {

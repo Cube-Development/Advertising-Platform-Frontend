@@ -1,10 +1,12 @@
-import { FC } from "react";
-import styles from "./styles.module.scss";
-import { service_roles } from "@shared/content";
-import { useTranslation } from "react-i18next";
 import { languages } from "@shared/config";
+import { service_roles } from "@shared/content";
+import { useClearCookiesOnPage } from "@shared/hooks";
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 export const ServiceRulesPage: FC = () => {
+  useClearCookiesOnPage();
   const { i18n } = useTranslation();
   const lang =
     i18n.language === languages.ru

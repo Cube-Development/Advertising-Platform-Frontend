@@ -1,4 +1,5 @@
 import { dateSortingTypes } from "@entities/platform";
+import { useFindLanguage } from "@entities/user";
 import { useGetViewTransactionsQuery } from "@entities/views";
 import {
   HistoryCard,
@@ -14,15 +15,15 @@ import {
   Languages,
   PAGE_ANIMATION,
 } from "@shared/config";
-import { useWindowWidth } from "@shared/hooks";
+import { useClearCookiesOnPage, useWindowWidth } from "@shared/hooks";
 import { ShowMoreBtn, SpinnerLoaderSmall } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { useFindLanguage } from "@entities/user";
 
 export const History: FC = () => {
+  useClearCookiesOnPage();
   const { t } = useTranslation();
   const language = useFindLanguage();
   const screen = useWindowWidth();

@@ -7,7 +7,9 @@ import {
 } from "@entities/channel";
 import { platformTypes } from "@entities/platform";
 import { IFormat } from "@entities/project";
+import { useFindLanguage } from "@entities/user";
 import { Languages, PAGE_ANIMATION } from "@shared/config";
+import { useClearCookiesOnPage } from "@shared/hooks";
 import { QueryParams } from "@shared/utils";
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -17,11 +19,11 @@ import { ChannelDescription } from "./channelDescription";
 import { ChannelIdentification } from "./channelIdentification";
 import { ChannelTop } from "./channelTop";
 import styles from "./styles.module.scss";
-import { useFindLanguage } from "@entities/user";
 
 interface AddChannelBlockProps {}
 
 export const AddChannelBlock: FC<AddChannelBlockProps> = () => {
+  useClearCookiesOnPage();
   const language = useFindLanguage();
   const { channel_id, add_channel } = QueryParams();
   const stepStart = {

@@ -4,6 +4,7 @@ import {
   useGetAdminChannelsQuery,
 } from "@entities/admin";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
+import { useClearCookiesOnPage } from "@shared/hooks";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -11,6 +12,7 @@ import { ChannelsList } from "../channelsList";
 import styles from "./styles.module.scss";
 
 export const Channels: FC = () => {
+  useClearCookiesOnPage();
   const { t } = useTranslation();
   const { watch, setValue } = useForm<getAdminChannelsReq>({
     defaultValues: {

@@ -1,11 +1,11 @@
 import { channelParameterData } from "@entities/channel";
 import { platformTypesNum } from "@entities/platform";
 import {
-  ICart,
-  ICatalogChannel,
   catalogAPI,
   catalogBarFilter,
   getCatalogReq,
+  ICart,
+  ICatalogChannel,
   sortingTypes,
   useAddToCommonCartMutation,
   useAddToManagerCartMutation,
@@ -19,7 +19,12 @@ import {
   useRemoveFromPublicCartMutation,
 } from "@entities/project";
 import { GenerateGuestId, roles, useFindLanguage } from "@entities/user";
-import { BREAKPOINT, INTERSECTION_ELEMENTS, Languages } from "@shared/config";
+import {
+  BREAKPOINT,
+  cookiesTypes,
+  INTERSECTION_ELEMENTS,
+  Languages,
+} from "@shared/config";
 import { useAppDispatch, useAppSelector, useWindowWidth } from "@shared/hooks";
 import { ToastAction, useToast } from "@shared/ui";
 import Cookies from "js-cookie";
@@ -35,9 +40,9 @@ export const CatalogBlock: FC = () => {
   const { toast } = useToast();
   const screen = useWindowWidth();
   const { isAuth, role } = useAppSelector((state) => state.user);
-  const userId = Cookies.get("user_id");
-  const guestId = Cookies.get("guest_id") || GenerateGuestId();
-  const projectId = Cookies.get("project_id");
+  const userId = Cookies.get(cookiesTypes.userId);
+  const guestId = Cookies.get(cookiesTypes.guestId) || GenerateGuestId();
+  const projectId = Cookies.get(cookiesTypes.projectId);
   const catalogTopRef = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
 

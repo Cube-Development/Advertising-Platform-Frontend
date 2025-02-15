@@ -13,6 +13,7 @@ import { EditEmail, EditPassword, EditUser } from "@features/profile";
 import { EditPencilIcon, EmailIcon, TelegramJetlIcon } from "@shared/assets";
 import { languages, languagesNum } from "@shared/config";
 import { PAGE_ANIMATION } from "@shared/config/animation";
+import { useClearCookiesOnPage } from "@shared/hooks";
 import { CustomCheckbox, MyButton, ToastAction, useToast } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
@@ -21,6 +22,7 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
 export const SettingsProfile: FC = () => {
+  useClearCookiesOnPage();
   const { t } = useTranslation();
   const [isEdit, setIsEdit] = useState<boolean>(false);
 
