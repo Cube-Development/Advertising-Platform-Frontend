@@ -1,6 +1,7 @@
 import { dateSortingTypes } from "@entities/platform";
 import {
   advertiserProjectTypes,
+  advManagerProjectStatus,
   advManagerProjectStatusFilter,
   getProjectsCardReq,
   IAdvManagerProjectsDevCard,
@@ -25,7 +26,7 @@ import { useFindLanguage } from "@entities/user";
 export const AdvOrders: FC = () => {
   const page = pageFilter.order;
   const language = useFindLanguage();
-  const { order_type } = QueryParams();
+  const { order_type, project_status } = QueryParams();
 
   const { setValue, watch } = useForm<{
     status: advManagerProjectStatusFilter | myProjectStatusFilter | string;
@@ -70,6 +71,13 @@ export const AdvOrders: FC = () => {
           setValue("status", type.status);
         }
       });
+      if (project_status) {
+        advManagerProjectStatus.map((status) => {
+          if (project_status === status.type) {
+            handleChangeStatus(status.type);
+          }
+        });
+      }
     } else {
       setValue("type", advertiserProjectTypes[0].type);
       setValue("status", advertiserProjectTypes[0].status);

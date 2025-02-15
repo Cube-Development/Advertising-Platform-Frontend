@@ -14,8 +14,8 @@ import {
   useRemoveFromPublicCartMutation,
 } from "@entities/project";
 import { GenerateGuestId, roles, useFindLanguage } from "@entities/user";
-import { Languages } from "@shared/config";
-import { useAppSelector } from "@shared/hooks";
+import { cookiesTypes, Languages } from "@shared/config";
+import { useAppSelector, useClearCookiesOnPage } from "@shared/hooks";
 import { ToastAction, useToast } from "@shared/ui";
 import Cookies from "js-cookie";
 import { FC, useEffect, useState } from "react";
@@ -25,15 +25,16 @@ import { CartList, CreatePost, RecommendationList } from "../components";
 import styles from "./styles.module.scss";
 
 export const Cart: FC = () => {
+  useClearCookiesOnPage();
   const { toast } = useToast();
   const { t } = useTranslation();
   const language = useFindLanguage();
   const { isAuth } = useAppSelector((state) => state.user);
 
-  const userId = Cookies.get("user_id");
-  const guestId = Cookies.get("guest_id");
-  const role = Cookies.get("role");
-  const projectId = Cookies.get("project_id");
+  const userId = Cookies.get(cookiesTypes.userId);
+  const guestId = Cookies.get(cookiesTypes.guestId);
+  const role = Cookies.get(cookiesTypes.role);
+  const projectId = Cookies.get(cookiesTypes.projectId);
 
   if (!guestId) {
     GenerateGuestId();

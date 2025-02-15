@@ -114,6 +114,14 @@
         @media (max-width: 992px) {
           font-size: 24px;
         }
+
+        @media (max-width: 768px) {
+          font-size: 20px;
+        }
+
+        @media (max-width: 576px) {
+          font-size: 16px;
+        }
       }
     }
 
@@ -138,19 +146,23 @@
       font-weight: 500;
       line-height: normal;
       grid-area: item3;
+
+      @media (max-width: 768px) {
+        font-size: 12px;
+      }
     }
 
     .link {
       display: grid;
       grid-auto-flow: column;
       column-gap: 10px;
-      align-items: center;
+      align-items: start;
       justify-content: start;
       grid-area: item4;
 
       svg {
-        height: 24px;
-        width: 24px;
+        height: 14px;
+        width: 14px;
       }
 
       p,
@@ -160,6 +172,7 @@
         font-style: normal;
         font-weight: 600;
         line-height: 1;
+        word-break: break-word;
       }
     }
   }

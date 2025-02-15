@@ -36,7 +36,7 @@ export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
             <div className={styles.data__info}>
               <div className={styles.info}>
                 <p>{t("cart.create_post.subscribers")}</p>
-                <span>{cart?.channels?.length?.toLocaleString()}</span>
+                <span>{cart?.subscribers?.toLocaleString()}</span>
               </div>
               <div className={styles.info}>
                 <p>{t("cart.create_post.views")}</p>

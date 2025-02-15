@@ -12,6 +12,7 @@
 //   );
 // };
 
+import { useClearCookiesOnPage } from "@shared/hooks";
 import { SuspenseLoader } from "@shared/ui";
 import React, { Suspense } from "react";
 
@@ -30,6 +31,7 @@ const Customers = React.lazy(() =>
 );
 
 export const TurnkeyPage = () => {
+  useClearCookiesOnPage();
   return (
     <Suspense fallback={<SuspenseLoader />}>
       <Top />

@@ -5,6 +5,7 @@ type QueryParams = {
   channel_id?: string | null;
   add_channel?: string | null;
   order_type?: string | null;
+  project_status?: string | null;
 };
 
 export const QueryParams = () => {
@@ -29,6 +30,9 @@ export const QueryParams = () => {
   }
   if (urlParams.has("order_type")) {
     queryParams.order_type = urlParams.get("order_type");
+  }
+  if (urlParams.has("project_status")) {
+    queryParams.project_status = urlParams.get("project_status");
   }
 
   return queryParams;

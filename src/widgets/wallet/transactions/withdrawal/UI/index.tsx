@@ -16,17 +16,18 @@ import { BarSubfilter } from "@features/other";
 import { BarSubrofileFilter } from "@features/wallet";
 import { ArrowIcon5 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
+import { useClearCookiesOnPage, useWindowWidth } from "@shared/hooks";
 import { pageFilter, paths } from "@shared/routing";
 import { ToastAction, useToast } from "@shared/ui";
 import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 import { Guide, LegalsList, PaymentData } from "../../components";
 import styles from "./styles.module.scss";
-import { useNavigate } from "react-router-dom";
-import { useWindowWidth } from "@shared/hooks";
 
 export const Withdrawal: FC = () => {
+  useClearCookiesOnPage();
   const { toast } = useToast();
   const { t } = useTranslation();
   const [activeAccount, setActiveAccount] = useState<ILegalCard | null>(null);

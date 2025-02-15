@@ -317,7 +317,8 @@
 
     .data {
       display: grid;
-      grid-template: 1fr / 1fr 1fr;
+      // grid-template: 1fr / 1fr 1fr;
+      grid-template: 1fr / auto 1fr;
       column-gap: 10px;
       justify-content: center;
       align-items: center;
@@ -415,7 +416,8 @@
 
       .data {
         display: grid;
-        grid-template: 1fr / 1fr 1fr;
+        // grid-template: 1fr / 1fr 1fr;
+        grid-template: 1fr / auto 1fr;
         column-gap: 10px;
         justify-content: center;
         align-items: center;

@@ -1,11 +1,12 @@
 import { ArrowLongHorizontalIcon } from "@shared/assets";
+import { cookiesTypes } from "@shared/config";
+import { paths } from "@shared/routing";
 import { MyButton } from "@shared/ui";
+import Cookies from "js-cookie";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
 import { Link } from "react-router-dom";
-import { paths } from "@shared/routing";
-import Cookies from "js-cookie";
+import styles from "./styles.module.scss";
 
 interface StartProjectProps {
   project_id: string;
@@ -14,7 +15,7 @@ interface StartProjectProps {
 export const StartProject: FC<StartProjectProps> = ({ project_id }) => {
   const { t } = useTranslation();
   const handleOnClick = () => {
-    Cookies.set("project_id", project_id);
+    Cookies.set(cookiesTypes.projectId, project_id);
   };
 
   return (

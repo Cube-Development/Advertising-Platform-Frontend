@@ -23,7 +23,11 @@ import {
   SadSmileIcon,
   SendIcon,
 } from "@shared/assets";
-import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
+import {
+  cookiesTypes,
+  INTERSECTION_ELEMENTS,
+  PAGE_ANIMATION,
+} from "@shared/config";
 import { useAppDispatch, useAppSelector, useDebounce } from "@shared/hooks";
 import {
   checkDatetime,
@@ -51,7 +55,7 @@ interface ChatMessagesProps {
 
 export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
   let currentDate: string | null = null;
-  const userId = Cookies.get("user_id")!;
+  const userId = Cookies.get(cookiesTypes.userId)!;
   const { t } = useTranslation();
   const { role } = useAppSelector((state) => state.user);
   const { OrderMessageSend, OrderMessageNew } = useCentrifuge();

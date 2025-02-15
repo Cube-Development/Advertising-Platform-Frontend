@@ -14,6 +14,8 @@ import {
 } from "@entities/wallet";
 import { BarSubfilter } from "@features/other";
 import { ArrowIcon4 } from "@shared/assets";
+import { BREAKPOINT } from "@shared/config";
+import { useClearCookiesOnPage, useWindowWidth } from "@shared/hooks";
 import { pageFilter, paths } from "@shared/routing";
 import { ToastAction, useToast } from "@shared/ui";
 import { FC, useState } from "react";
@@ -23,14 +25,13 @@ import { useNavigate } from "react-router-dom";
 import { Guide, LegalsList, PaymentData } from "../../components";
 import { CreditCard } from "./creditCard";
 import styles from "./styles.module.scss";
-import { BREAKPOINT } from "@shared/config";
-import { useWindowWidth } from "@shared/hooks";
 
 interface IExtendedProfileData extends ILegalData {
   amount: number;
 }
 
 export const Topup: FC = () => {
+  useClearCookiesOnPage();
   const { toast } = useToast();
   const { t } = useTranslation();
   const [activeAccount, setActiveAccount] = useState<ILegalCard | null>(null);

@@ -1,7 +1,14 @@
+import { CircleX, FileIcon, InfoIcon, Loader } from "lucide-react";
+import { FC, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import {
+  advManagerProjectStatusFilter,
   ContentType,
   FILES,
   IBuyTarif,
+  projectTypesFilter,
   tarifData,
   TarifParameters,
   useGetUploadLinkMutation,
@@ -9,6 +16,7 @@ import {
 } from "@entities/project";
 import {
   AddFileIcon,
+  ArrowLongHorizontalIcon,
   CancelIcon2,
   HandshakeIcon2,
   LoginIcon,
@@ -40,11 +48,6 @@ import {
   useToast,
 } from "@shared/ui";
 import { getFileExtension } from "@shared/utils";
-import { CircleX, FileIcon, InfoIcon, Loader } from "lucide-react";
-import { FC, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
 
 interface BuyTarifProps {
@@ -443,11 +446,27 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
                     </div>
                   </div>
                   <div className={styles.menu__help}>
-                    <p>
+                    <p className="text-sm">
                       {t("turnkey.chain.success.help.text1")}{" "}
-                      <span>{t("turnkey.chain.success.help.text2")}</span>
+                      <span className="text-indigo-600 underline">
+                        {t("turnkey.chain.success.help.text2")}
+                      </span>
                     </p>
                   </div>
+                  <Link
+                    to={`${paths.orders}?order_type=${projectTypesFilter.managerProject}&project_status=${advManagerProjectStatusFilter.develop}`}
+                    className="h-full"
+                  >
+                    <MyButton
+                      buttons_type="button__blue"
+                      className={`${styles.go_to_order_button} truncate h-full w-fit mx-auto`}
+                    >
+                      {t("turnkey.chain.success.go_to_order")}
+                      <div>
+                        <ArrowLongHorizontalIcon className="icon__white" />
+                      </div>
+                    </MyButton>
+                  </Link>
                 </ScrollArea>
               </>
             ) : (

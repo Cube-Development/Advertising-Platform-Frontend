@@ -169,7 +169,7 @@ export const PostButtons: FC<PostButtonsProps> = ({
                 <div className={styles.row__button} key={index}>
                   <div>
                     <span>№ {index + 1}</span>
-                    <p>
+                    <p className="truncate">
                       {t("create_order.create.add_button.button")} "
                       {button?.content}"
                     </p>
