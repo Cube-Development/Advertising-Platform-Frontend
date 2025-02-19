@@ -113,12 +113,11 @@ export const channelAPI = authApi.injectEndpoints({
       transformResponse: (response: IReviewData) => {
         return {
           ...response,
-          isLast:
-            response.reviews.length !== INTERSECTION_ELEMENTS.channelReview,
+          isLast: response.reviews.length < INTERSECTION_ELEMENTS.channelReview,
         };
       },
-      serializeQueryArgs: ({ endpointName }) => {
-        return endpointName;
+      serializeQueryArgs: ({ endpointName, queryArgs }) => {
+        return `${endpointName}/${queryArgs.channel_id}`;
       },
       merge: (currentCache, newItems) => {
         return {
