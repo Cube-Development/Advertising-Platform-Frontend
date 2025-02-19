@@ -7,8 +7,13 @@ import {
 } from "@pages/layouts";
 import { useAppSelector } from "@shared/hooks";
 import { paths } from "@shared/routing";
-import { RouteObject, createBrowserRouter } from "react-router-dom";
-import { CheckProjectId, CheckRoutes, routerType } from "./CheckRoutes";
+import { Navigate, RouteObject, createBrowserRouter } from "react-router-dom";
+import {
+  AminCheckRoute,
+  CheckProjectId,
+  CheckRoutes,
+  routerType,
+} from "./CheckRoutes";
 import {
   IRoute,
   createOrderRoutes,
@@ -33,15 +38,40 @@ const HandleLayout = ({ route }: { route: IRoute }) => {
   );
 };
 
-const HandleAdminLayout = ({ route }: { route: IRoute }) => {
+const HandleAdminLayout = ({
+  route,
+  allRoutes,
+}: {
+  route: IRoute;
+  allRoutes: string[];
+}) => {
   const { isAuth, role } = useAppSelector((state) => state.user);
-  return isAuth && route.sidebar && managementRoles.includes(role) ? (
+  return isAuth && route.sidebar && role === roles.moderator ? (
     <SideBarAdminLayout>
       <route.component />
     </SideBarAdminLayout>
   ) : (
     <route.component />
   );
+
+  // if (isAuth && role === roles.moderator && allRoutes.includes(route.path)) {
+  //   if (route.sidebar) {
+  //     return (
+  //       <SideBarAdminLayout>
+  //         <route.component />
+  //       </SideBarAdminLayout>
+  //     );
+  //   } else {
+  //     return <route.component />;
+  //   }
+  // } else if (
+  //   isAuth &&
+  //   role === roles.moderator &&
+  //   !allRoutes.includes(route.path)
+  // ) {
+  //   console.log(7777777)
+  //   return <Navigate to={paths.adminHome} replace />;
+  // }
 };
 
 const handleRouter = (routes: IRoute[]) => {
@@ -53,9 +83,11 @@ const handleRouter = (routes: IRoute[]) => {
 };
 
 const handleAdminRouter = (routes: IRoute[]) => {
+  const allRoutes = routes.map((el) => el.path);
+  console.log(allRoutes);
   const router: RouteObject[] = routes.map((route) => ({
     path: route.path,
-    element: <HandleAdminLayout route={route} />,
+    element: <HandleAdminLayout route={route} allRoutes={allRoutes} />,
   }));
   return router;
 };
@@ -81,6 +113,9 @@ export const router = createBrowserRouter([
   {
     path: paths.main,
     element: <RootLayout />,
+    // children: [
+
+    // ]
     children: [
       {
         path: paths.main,

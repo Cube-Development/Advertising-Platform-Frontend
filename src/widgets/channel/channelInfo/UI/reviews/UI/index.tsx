@@ -92,7 +92,7 @@ export const Reviews: FC<ReviewsProps> = ({ card, isLoadingReviews }) => {
                 Array.from({ length: INTERSECTION_ELEMENTS.channelReview }).map(
                   (_, index) => <SkeletonReviewCard key={index} />,
                 )}
-              {reviews?.isLast && (
+              {!reviews?.isLast && (
                 <div className={styles.show_more} onClick={handleOnChangePage}>
                   <ShowMoreBtn />
                 </div>
