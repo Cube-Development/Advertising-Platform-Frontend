@@ -107,11 +107,11 @@ export const RecommendationList: FC<RecommendationListProps> = ({
                   <SkeletonRecommendCard />
                 </SwiperSlide>
               ))}
-            <SwiperSlide>
+            {/* <SwiperSlide>
               <div ref={ref} style={{ height: "100%" }}>
                 <SkeletonRecommendCard />
               </div>
-            </SwiperSlide>
+            </SwiperSlide> */}
             <div className={styles.nav}>
               <p>
                 <ChevronLeft className="prev" />
