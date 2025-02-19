@@ -29,6 +29,7 @@ import { TopupPage } from "./Topup";
 import { TurnkeyPage } from "./Turnkey";
 import { WalletHistoryPage } from "./WalletHistory";
 import { WithdrawalPage } from "./Withdrawal";
+import { roles, userRoles } from "@entities/user";
 
 export interface IRoute {
   path: string;
@@ -105,6 +106,211 @@ export const privateAdminRoutes: IRoute[] = [
   {
     path: paths.adminUserInfo,
     component: AdminUserInfoPage,
+    sidebar: true,
+  },
+];
+
+export enum authTypes {
+  onlyPublic = "onlyPublic",
+  public = "public",
+  private = "private",
+}
+
+export const allRoutes = [
+  // only public
+  { path: paths.login, component: LoginPage, auth: authTypes.onlyPublic },
+  {
+    path: paths.registration,
+    component: RegistrationPage,
+    auth: authTypes.onlyPublic,
+  },
+
+  // public blogger
+  {
+    path: paths.mainBlogger,
+    component: MainBloggerPage,
+    roles: [roles.blogger],
+    auth: authTypes.public,
+  },
+
+  // public advertiser
+  {
+    paths: paths.main,
+    component: MainPage,
+    roles: [roles.advertiser],
+    auth: authTypes.public,
+    sidebar: true,
+  },
+  {
+    path: paths.catalog,
+    component: CatalogPage,
+    roles: [roles.advertiser],
+    auth: authTypes.public,
+  },
+  {
+    path: paths.cart,
+    component: CartPage,
+    roles: [roles.advertiser],
+    auth: authTypes.public,
+  },
+  {
+    path: paths.turnkey,
+    component: TurnkeyPage,
+    roles: [roles.advertiser],
+    auth: authTypes.public,
+  },
+
+  // public common
+  {
+    path: paths.faq,
+    component: FAQPage,
+    roles: userRoles,
+    auth: authTypes.public,
+    sidebar: true,
+  },
+  {
+    path: paths.notFound,
+    component: NotFoundPage,
+    roles: userRoles,
+    auth: authTypes.public,
+  },
+  {
+    path: paths.channel,
+    component: ChannelPage,
+    roles: userRoles,
+    auth: authTypes.public,
+  },
+  {
+    path: paths.publicOffer,
+    component: PublicOfferPage,
+    roles: userRoles,
+    auth: authTypes.public,
+    sidebar: true,
+  },
+  {
+    path: paths.serviceRules,
+    component: ServiceRulesPage,
+    roles: userRoles,
+    auth: authTypes.public,
+    sidebar: true,
+  },
+
+  // private blogger
+  {
+    path: paths.addChannel,
+    component: AddChannelPage,
+    roles: [roles.blogger],
+    auth: authTypes.private,
+    sidebar: true,
+  },
+  {
+    path: paths.myChannels,
+    component: MyChannelsPage,
+    roles: [roles.blogger],
+    auth: authTypes.private,
+    sidebar: true,
+  },
+  {
+    path: paths.offers,
+    component: OffersPage,
+    roles: [roles.blogger],
+    auth: authTypes.private,
+    sidebar: true,
+  },
+
+  // private advertiser & manager
+  {
+    path: paths.createOrder,
+    component: CreateOrderPage,
+    roles: [roles.advertiser, roles.manager],
+    auth: authTypes.private,
+  },
+
+  // private common
+  {
+    path: paths.walletTopUp,
+    component: TopupPage,
+    roles: userRoles,
+    auth: authTypes.private,
+    sidebar: true,
+  },
+  {
+    path: paths.walletWithdraw,
+    component: WithdrawalPage,
+    roles: userRoles,
+    auth: authTypes.private,
+    sidebar: true,
+  },
+  {
+    path: paths.walletHistory,
+    component: WalletHistoryPage,
+    roles: userRoles,
+    auth: authTypes.private,
+    sidebar: true,
+  },
+  {
+    path: paths.profile,
+    component: ProfilePage,
+    roles: userRoles,
+    auth: authTypes.private,
+    sidebar: true,
+  },
+
+  // private admin
+  {
+    path: paths.adminHome,
+    component: AdminHomePage,
+    roles: [roles.moderator],
+    auth: authTypes.private,
+    sidebar: true,
+  },
+  {
+    path: paths.adminChannels,
+    component: AdminChannelsPage,
+    roles: [roles.moderator],
+    auth: authTypes.private,
+    sidebar: true,
+  },
+  {
+    path: paths.adminUsers,
+    component: AdminUsersPage,
+    roles: [roles.moderator],
+    auth: authTypes.private,
+    sidebar: true,
+  },
+  {
+    path: paths.adminComplaints,
+    component: AdminComplaintsPage,
+    roles: [roles.moderator],
+    auth: authTypes.private,
+    sidebar: true,
+  },
+  {
+    path: paths.adminTransactions,
+    component: AdminTransactionsPage,
+    roles: [roles.moderator],
+    auth: authTypes.private,
+    sidebar: true,
+  },
+  {
+    path: paths.adminReviews,
+    component: AdminReviewsPage,
+    roles: [roles.moderator],
+    auth: authTypes.private,
+    sidebar: true,
+  },
+  {
+    path: paths.adminComplaintInfo,
+    component: AdminComplaintInfoPage,
+    roles: [roles.moderator],
+    auth: authTypes.private,
+    sidebar: true,
+  },
+  {
+    path: paths.adminUserInfo,
+    component: AdminUserInfoPage,
+    roles: [roles.moderator],
+    auth: authTypes.private,
     sidebar: true,
   },
 ];

@@ -25,7 +25,6 @@ import { CartList, CreatePost, RecommendationList } from "../components";
 import styles from "./styles.module.scss";
 
 export const Cart: FC = () => {
-  useClearCookiesOnPage();
   const { toast } = useToast();
   const { t } = useTranslation();
   const language = useFindLanguage();

@@ -70,3 +70,13 @@ export const CheckRoutes = ({
     }
   }
 };
+
+export const AminCheckRoute = () => {
+  const { isAuth, role } = useAppSelector((state) => state.user);
+  // console.log(99999999999999)
+  if (role === roles.moderator && isAuth) {
+    return <Outlet />;
+  } else {
+    return <Navigate to={paths.adminHome} replace />;
+  }
+};
