@@ -205,13 +205,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
         </div>
         {screen > BREAKPOINT.MD && (
           <>
-            {statusFilter === managerProjectStatusFilter.active ? (
-              <div
-                className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : ""}`}
-              >
-                <ChannelChatBtn orderId={subcard?.id} toRole={roles.blogger} />
-              </div>
-            ) : subcard?.desire?.length ? (
+            {subcard?.desire?.length ? (
               <div className={styles.subcard__posted}>
                 <div className={styles.subcard__posted__title}>
                   <p>{t(`orders_manager.order_status.comment.title`)}</p>
@@ -312,7 +306,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
             )}
           </>
         )}
-        {/* {screen > BREAKPOINT.MD &&
+        {screen > BREAKPOINT.MD &&
           statusFilter === managerProjectStatusFilter.active && (
             <div
               // className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : "deactive"}`}
@@ -320,7 +314,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
             >
               <ChannelChatBtn orderId={subcard?.id} toRole={roles.blogger} />
             </div>
-          )} */}
+          )}
       </div>
       {screen < BREAKPOINT.LG && screen >= BREAKPOINT.MD ? (
         <Accordion type="single" collapsible>

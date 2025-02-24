@@ -207,15 +207,8 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
         </div>
         {screen > BREAKPOINT.MD && (
           <>
-            {typeFilter === projectTypesFilter.myProject &&
-            statusFilter === advManagerProjectStatusFilter.active ? (
-              <div
-                className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : "deactive1"}`}
-              >
-                <ChannelChatBtn orderId={subcard?.id} toRole={roles.blogger} />
-              </div>
-            ) : subcard?.api_status === orderStatus.canceled ||
-              subcard?.api_status === orderStatus.rejected ? (
+            {subcard?.api_status === orderStatus.canceled ||
+            subcard?.api_status === orderStatus.rejected ? (
               <div className={styles.subcard__cancel}>
                 {typeFilter === projectTypesFilter.managerProject &&
                 statusFilter === advManagerProjectStatusFilter.completed ? (
@@ -323,6 +316,15 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
             )}
           </>
         )}
+        {screen > BREAKPOINT.MD &&
+          typeFilter === projectTypesFilter.myProject &&
+          statusFilter === advManagerProjectStatusFilter.active && (
+            <div
+              className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : "deactive1"}`}
+            >
+              <ChannelChatBtn orderId={subcard?.id} toRole={roles.blogger} />
+            </div>
+          )}
       </div>
       {screen < BREAKPOINT.LG && screen >= BREAKPOINT.MD ? (
         <Accordion type="single" collapsible>
