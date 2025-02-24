@@ -88,6 +88,8 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
     setSubcardOpen(!isSubcardOpen);
   };
 
+  const haveDesire = subcard?.desire?.length;
+
   return (
     <div
       className={`${styles.wrapper} ${(typeFilter === projectTypesFilter.myProject && statusFilter === advManagerProjectStatusFilter.completed) || typeFilter === projectTypesFilter.managerProject ? styles.no__chat : ""}`}
@@ -287,11 +289,14 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
             ) : subcard?.api_status === orderStatus.order_review ? (
               <div className={styles.subcard__agreed}>
                 <div className={styles.content}>
-                  <p>{t(`orders_advertiser.order_status.agreed.title`)}</p>
+                  <p>
+                    {haveDesire
+                      ? t(`orders_advertiser.order_status.agreed.title.edit`)
+                      : t(
+                          `orders_advertiser.order_status.agreed.title.default`,
+                        )}
+                  </p>
                   <div className={styles.buttons__wrapper}>
-                    {/* {role === roles.manager ? (
-                      <ChangeChannelBtn order={subcard} project_id={card?.id} />
-                    ) : ( */}
                     <div className={styles.buttons}>
                       <ReplaceChannelBtn
                         order={subcard}
@@ -303,7 +308,6 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                       />
                     </div>
                     <SeePostBtn post={post!} />
-                    {/* <CheckBtn /> */}
                   </div>
                 </div>
               </div>
@@ -497,7 +501,11 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
           ) : subcard?.api_status === orderStatus.order_review ? (
             <div className={styles.subcard__agreed}>
               <div>
-                <p>{t(`orders_advertiser.order_status.agreed.title`)}</p>
+                <p>
+                  {haveDesire
+                    ? t(`orders_advertiser.order_status.agreed.title.edit`)
+                    : t(`orders_advertiser.order_status.agreed.title.default`)}
+                </p>
                 <div>
                   {/* <ChangeChannelBtn order={subcard} project_id={card?.id} /> */}
                   <SeePostBtn post={post!} />

@@ -96,9 +96,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
   };
 
   return (
-    <div
-      className={`${styles.wrapper} ${statusFilter === managerProjectStatusFilter.completed ? styles.no__chat : ""}`}
-    >
+    <div className={styles.wrapper}>
       <div
         className={`${styles.subcard} ${statusFilter === managerProjectStatusFilter.active ? styles.grid__active : styles.grid}`}
       >
@@ -207,7 +205,13 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
         </div>
         {screen > BREAKPOINT.MD && (
           <>
-            {subcard?.desire?.length ? (
+            {statusFilter === managerProjectStatusFilter.active ? (
+              <div
+                className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : ""}`}
+              >
+                <ChannelChatBtn orderId={subcard?.id} toRole={roles.blogger} />
+              </div>
+            ) : subcard?.desire?.length ? (
               <div className={styles.subcard__posted}>
                 <div className={styles.subcard__posted__title}>
                   <p>{t(`orders_manager.order_status.comment.title`)}</p>
@@ -216,26 +220,14 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
                   <div className={styles.subcard__posted__buttons__top}>
                     {subcard?.desire.length === 2 ? (
                       <>
-                        <ChangePostBtn
-                          order={subcard}
-                          project_id={card?.project_id}
-                        />
-                        <ChangeChannelBtn
-                          order={subcard}
-                          project_id={card?.project_id}
-                        />
+                        <ChangePostBtn order={subcard} />
+                        <ChangeChannelBtn order={subcard} />
                       </>
                     ) : subcard?.desire[0].desire_type ===
                       desireStatus.replace_channel_request ? (
-                      <ChangeChannelBtn
-                        order={subcard}
-                        project_id={card?.project_id}
-                      />
+                      <ChangeChannelBtn order={subcard} />
                     ) : (
-                      <ChangePostBtn
-                        order={subcard}
-                        project_id={card?.project_id}
-                      />
+                      <ChangePostBtn order={subcard} />
                     )}
                   </div>
                   <SeePostBtn post={post!} />
@@ -308,9 +300,9 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
             ) : subcard?.api_status === orderStatus.order_review ? (
               <div className={styles.subcard__agreed}>
                 <div>
-                  <p>{t(`orders_advertiser.order_status.agreed.title`)}</p>
+                  <p>{t(`orders_manager.order_status.agreed.title.default`)}</p>
                   <div>
-                    <ChangeChannelBtn order={subcard} project_id={card?.id} />
+                    {/* <ChangeChannelBtn order={subcard} project_id={card?.id} /> */}
                     <SeePostBtn post={post!} />
                   </div>
                 </div>
@@ -320,7 +312,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
             )}
           </>
         )}
-        {screen > BREAKPOINT.MD &&
+        {/* {screen > BREAKPOINT.MD &&
           statusFilter === managerProjectStatusFilter.active && (
             <div
               // className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : "deactive"}`}
@@ -328,7 +320,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
             >
               <ChannelChatBtn orderId={subcard?.id} toRole={roles.blogger} />
             </div>
-          )}
+          )} */}
       </div>
       {screen < BREAKPOINT.LG && screen >= BREAKPOINT.MD ? (
         <Accordion type="single" collapsible>
@@ -419,7 +411,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
       )}
       {screen <= BREAKPOINT.MD && (
         <>
-          {statusFilter === managerProjectStatusFilter.active && (
+          {/* {statusFilter === managerProjectStatusFilter.active && (
             <div
               className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : "deactive"}`}
             >
@@ -429,9 +421,42 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
                 isFull={true}
               />
             </div>
-          )}
-          {subcard?.api_status === orderStatus.canceled ||
-          subcard?.api_status === orderStatus.rejected ? (
+          )} */}
+
+          {statusFilter === managerProjectStatusFilter.active ? (
+            <div
+              className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : "deactive"}`}
+            >
+              <ChannelChatBtn
+                orderId={subcard?.id}
+                toRole={roles.blogger}
+                isFull={true}
+              />
+            </div>
+          ) : subcard?.desire?.length ? (
+            <div className={styles.subcard__posted}>
+              <div className={styles.subcard__posted__title}>
+                <p>{t(`orders_manager.order_status.comment.title`)}</p>
+              </div>
+              <div className={styles.subcard__posted__buttons}>
+                <div className={styles.subcard__posted__buttons__top}>
+                  {subcard?.desire.length === 2 ? (
+                    <>
+                      <ChangePostBtn order={subcard} />
+                      <ChangeChannelBtn order={subcard} />
+                    </>
+                  ) : subcard?.desire[0].desire_type ===
+                    desireStatus.replace_channel_request ? (
+                    <ChangeChannelBtn order={subcard} />
+                  ) : (
+                    <ChangePostBtn order={subcard} />
+                  )}
+                </div>
+                <SeePostBtn post={post!} />
+              </div>
+            </div>
+          ) : subcard?.api_status === orderStatus.canceled ||
+            subcard?.api_status === orderStatus.rejected ? (
             <div className={styles.subcard__cancel}>
               {statusFilter === managerProjectStatusFilter.completed ? (
                 <p>{t(`orders_advertiser.order_status.rejected.title2`)}</p>
@@ -475,9 +500,6 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
           ) : subcard?.api_status === orderStatus.in_progress ? (
             <div className={styles.subcard__accepted}>
               <p>{t(`orders_advertiser.order_status.accepted.title`)}</p>
-              {/* {typeFilter === projectTypesFilter.managerProject || (
-                <span>{t(`orders_advertiser.order_status.accepted.text`)}</span>
-              )} */}
               <AlertDialog>
                 <AlertDialogTrigger asChild>
                   <div>{/* <SeeBtn /> */} 2</div>
@@ -621,9 +643,9 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
           ) : subcard?.api_status === orderStatus.order_review ? (
             <div className={styles.subcard__agreed}>
               <div>
-                <p>{t(`orders_advertiser.order_status.agreed.title`)}</p>
+                <p>{t(`orders_manager.order_status.agreed.title.default`)}</p>
                 <div>
-                  <ChangeChannelBtn order={subcard} project_id={card?.id} />
+                  {/* <ChangeChannelBtn order={subcard} project_id={card?.id} /> */}
                   <SeePostBtn post={post!} />
                 </div>
               </div>

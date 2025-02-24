@@ -78,7 +78,9 @@ export const ReplacePost: FC<ReplacePostProps> = ({
           className={styles.trigger}
           disabled={!haveDesire && is_request_approve}
         >
-          {t(`order_btn.changePost`)}
+          {haveDesire
+            ? t(`order_btn.post.advertiser.process`)
+            : t(`order_btn.post.advertiser.edit`)}
         </MyButton>
       </AlertDialogTrigger>
       <AlertDialogContent className={`${styles.content} ${styles.dialog}`}>

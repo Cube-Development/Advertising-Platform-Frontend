@@ -18,6 +18,7 @@ import {
 } from "@features/order";
 import {
   DownloadReport,
+  EditProject,
   LaunchProject,
   SendToBot,
   TechnicalSpecification,
@@ -83,16 +84,14 @@ const Card: FC<ManagerProjectCardProps> = ({ card, statusFilter }) => {
           </p>
         </div>
       </div>
-      {
-        <div className={`${styles.buttons__md} display__hide__min__md`}>
-          <div className={styles.chat__btn}>
-            <Chat projectId={card?.project_id} toRole={roles.advertiser} />
-          </div>
-          <div className={styles.ts__btn}>
-            <TechnicalSpecification card={card} SendToBotBtn={SendToBot} />
-          </div>
+      <div className={`${styles.buttons__md} display__hide__min__md`}>
+        <div className={styles.chat__btn}>
+          <Chat projectId={card?.project_id} toRole={roles.advertiser} />
         </div>
-      }
+        <div className={styles.ts__btn}>
+          <TechnicalSpecification card={card} SendToBotBtn={SendToBot} />
+        </div>
+      </div>
       <div className={styles.card__info}>
         <div className={styles.card__info__data}>
           <div>
@@ -110,7 +109,6 @@ const Card: FC<ManagerProjectCardProps> = ({ card, statusFilter }) => {
               <small>{t("symbol")}</small>
             </span>
           </div>
-
           {statusFilter === managerProjectStatusFilter.completed && (
             <div>
               <p>{t("orders_manager.card.rest")}:</p>
@@ -131,10 +129,14 @@ const Card: FC<ManagerProjectCardProps> = ({ card, statusFilter }) => {
                     : t("orders_manager.card.not_request_approve")}
                 </span>
               </div>
-              <LaunchProject
-                is_request_approve={card?.is_request_approve || false}
-                project_id={card?.project_id}
-              />
+              {!card?.is_request_approve ? (
+                <EditProject project_id={card?.project_id} />
+              ) : (
+                <LaunchProject
+                  is_request_approve={card?.is_request_approve || false}
+                  project_id={card?.project_id}
+                />
+              )}
             </div>
           ) : statusFilter === managerProjectStatusFilter.completed ? (
             <div className={styles.card__info__icons_manager_completed}>
@@ -301,14 +303,10 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
             </AccordionContent>
             <AccordionTrigger onClick={() => handleChangeOpenSubcard()}>
               <div className={styles.card__btn}>
-                {isLoading ? (
-                  <AccountsLoader />
-                ) : isSubcardOpen ? (
-                  t(`orders_advertiser.card.see_less`)
-                ) : (
-                  t(`orders_advertiser.card.see_more`)
-                )}
-                {!isLoading && (
+                {isSubcardOpen
+                  ? t(`orders_advertiser.card.see_less`)
+                  : t(`orders_advertiser.card.see_more`)}
+                {!isLoading ? (
                   <ArrowSmallVerticalIcon
                     className={
                       isSubcardOpen
@@ -316,6 +314,10 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
                         : "icon__white rotate__down"
                     }
                   />
+                ) : (
+                  <div className="loader">
+                    <AccountsLoader />
+                  </div>
                 )}
               </div>
             </AccordionTrigger>
@@ -388,12 +390,7 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
             className={styles.card__btn}
             onClick={() => setSubcardOpen((prev) => !prev)}
           >
-            {isLoading && (
-              <div className="grid justify-center items-center h-full pt-[100px]">
-                <SpinnerLoader />
-              </div>
-            )}
-            {isLoading && (
+            {!isLoading ? (
               <ArrowSmallVerticalIcon
                 className={
                   isSubcardOpen
@@ -401,107 +398,13 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
                     : "icon__white rotate__down side"
                 }
               />
+            ) : (
+              <div className="loader">
+                <AccountsLoader />
+              </div>
             )}
           </div>
         </>
-        // <div className="swipper__carousel">
-        //   <Swiper
-        //     slidesPerView={1}
-        //     onSwiper={(swiper) => (swiperRef.current = swiper)}
-        //     speed={500}
-        //     spaceBetween={50}
-        //     allowTouchMove={false}
-        //   >
-        //     <SwiperSlide className={`${styles.wrapper} border__gradient`}>
-        //       <Card card={card} statusFilter={statusFilter} />
-        //       <div className={styles.card__btn} onClick={handleSlideChange}>
-        //         {isLoading ? (
-        //           <AccountsLoader />
-        //         ) : isSubcardOpen ? (
-        //           t(`orders_advertiser.card.see_less`)
-        //         ) : (
-        //           t(`orders_advertiser.card.see_more`)
-        //         )}
-        //         {!isLoading && (
-        //           <ArrowSmallVerticalIcon
-        //             className={
-        //               isSubcardOpen
-        //                 ? "icon__white rotate side"
-        //                 : "icon__white rotate__down side"
-        //             }
-        //           />
-        //         )}
-        //       </div>
-        //     </SwiperSlide>
-        //     {isLoading && (
-        //       <div className="grid justify-center items-center h-full pt-[100px]">
-        //         <SpinnerLoader />
-        //       </div>
-        //     )}
-        //     <SwiperSlide>
-        //       <div className="swipper__carousel">
-        //         <Swiper
-        //           slidesPerView={1}
-        //           onSwiper={(swiper) => (swiperRef.current = swiper)}
-        //           // onSlideChange={handleSlideChange}
-        //           speed={500}
-        //           spaceBetween={50}
-        //           loop={true}
-        //         >
-        //           {subcards?.orders.map((subcard, index) => (
-        //             <SwiperSlide
-        //               key={index}
-        //               className={`${styles.subcard__md} border__gradient`}
-        //             >
-        // <div className={styles.top}>
-        //   <ManagerProjectSubcard
-        //     key={index}
-        //     project_id={card.project_id}
-        //     subcard={subcard}
-        //     FeedbackBtn={Feedback}
-        //     AcceptBtn={AcceptPost}
-        //     RejectBtn={RejectPost}
-        //     CheckBtn={CheckPost}
-        //     SeePostBtn={SeePost}
-        //     ChannelChatBtn={Chat}
-        //     ChangeChannelBtn={ChangeChannel}
-        //     ChangePostBtn={ChangePost}
-        //     SeeCommentBtn={SeeComment}
-        //     statusFilter={statusFilter}
-        //   />
-        //   <MyPagination
-        //     cardIndex={index}
-        //     count={subcards?.orders?.length || 1}
-        //   />
-        // </div>
-        //               <div
-        //                 className={styles.card__btn}
-        //                 onClick={handleSlideChange}
-        //               >
-        //                 {isLoading ? (
-        //                   <AccountsLoader />
-        //                 ) : isSubcardOpen ? (
-        //                   t(`orders_advertiser.card.see_less`)
-        //                 ) : (
-        //                   t(`orders_advertiser.card.see_more`)
-        //                 )}
-        //                 {!isLoading && (
-        //                   <ArrowSmallVerticalIcon
-        //                     className={
-        //                       isSubcardOpen
-        //                         ? "icon__white rotate side"
-        //                         : "icon__white rotate__down side"
-        //                     }
-        //                   />
-        //                 )}
-        //               </div>
-        //             </SwiperSlide>
-        //           ))}
-        //         </Swiper>
-        //       </div>
-        //     </SwiperSlide>
-        //   </Swiper>
-        // </div>
       )}
     </>
   );
