@@ -6,11 +6,13 @@ import {
   Dialog,
   DialogClose,
   DialogContent,
+  DialogDescription,
   DialogTitle,
   DialogTrigger,
   Drawer,
   DrawerClose,
   DrawerContent,
+  DrawerDescription,
   DrawerTitle,
   DrawerTrigger,
   MyButton,
@@ -49,8 +51,9 @@ export const ChangePost: FC<ChangePostProps> = ({ order }) => {
                 </div>
               </DialogClose>
             </DialogTitle>
-            <span className={styles.textarea}>{text}</span>
-
+            <DialogDescription className={styles.textarea}>
+              {text}
+            </DialogDescription>
             <DialogClose asChild>
               <MyButton className={styles.button}>
                 {t(`orders_manager.subcard.change.button.ok`)}
@@ -76,8 +79,9 @@ export const ChangePost: FC<ChangePostProps> = ({ order }) => {
                 </div>
               </DrawerClose>
             </DrawerTitle>
-            <span className={styles.textarea}>{text}</span>
-
+            <DrawerDescription className={styles.textarea}>
+              {text}
+            </DrawerDescription>
             <DrawerClose asChild>
               <MyButton className={styles.button}>
                 {t(`orders_manager.subcard.change.button.ok`)}

@@ -207,8 +207,15 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
         </div>
         {screen > BREAKPOINT.MD && (
           <>
-            {subcard?.api_status === orderStatus.canceled ||
-            subcard?.api_status === orderStatus.rejected ? (
+            {typeFilter === projectTypesFilter.myProject &&
+            statusFilter === advManagerProjectStatusFilter.active ? (
+              <div
+                className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : "deactive1"}`}
+              >
+                <ChannelChatBtn orderId={subcard?.id} toRole={roles.blogger} />
+              </div>
+            ) : subcard?.api_status === orderStatus.canceled ||
+              subcard?.api_status === orderStatus.rejected ? (
               <div className={styles.subcard__cancel}>
                 {typeFilter === projectTypesFilter.managerProject &&
                 statusFilter === advManagerProjectStatusFilter.completed ? (
@@ -316,15 +323,6 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
             )}
           </>
         )}
-        {screen > BREAKPOINT.MD &&
-          typeFilter === projectTypesFilter.myProject &&
-          statusFilter === advManagerProjectStatusFilter.active && (
-            <div
-              className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : "deactive1"}`}
-            >
-              <ChannelChatBtn orderId={subcard?.id} toRole={roles.blogger} />
-            </div>
-          )}
       </div>
       {screen < BREAKPOINT.LG && screen >= BREAKPOINT.MD ? (
         <Accordion type="single" collapsible>
@@ -500,16 +498,24 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
             </div>
           ) : subcard?.api_status === orderStatus.order_review ? (
             <div className={styles.subcard__agreed}>
-              <div>
+              <div className={styles.content}>
                 <p>
                   {haveDesire
                     ? t(`orders_advertiser.order_status.agreed.title.edit`)
                     : t(`orders_advertiser.order_status.agreed.title.default`)}
                 </p>
-                <div>
-                  {/* <ChangeChannelBtn order={subcard} project_id={card?.id} /> */}
+                <div className={styles.buttons__wrapper}>
+                  <div className={styles.buttons}>
+                    <ReplaceChannelBtn
+                      order={subcard}
+                      is_request_approve={!!card?.is_request_approve}
+                    />
+                    <ReplacePostBtn
+                      order={subcard}
+                      is_request_approve={!!card?.is_request_approve}
+                    />
+                  </div>
                   <SeePostBtn post={post!} />
-                  {/* <CheckBtn /> */}
                 </div>
               </div>
             </div>

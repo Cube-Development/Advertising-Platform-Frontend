@@ -255,7 +255,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
     page: 1,
   };
 
-  const { data: subcardsSelf, isLoading: isLoadingSelf } =
+  const { data: subcardsAdv, isLoading: isLoadingAdv } =
     useGetAdvSubprojectsQuery(getParams, {
       skip: !isSubcardOpen || typeFilter !== projectTypesFilter.myProject,
     });
@@ -328,7 +328,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
           >
             <AccordionContent>
               <div className={`${styles.subcard} `}>
-                {(subcardsSelf?.orders || subcardsManager?.orders)?.map(
+                {(subcardsAdv?.orders || subcardsManager?.orders)?.map(
                   (subcard, index) => (
                     <AdvSubcard
                       key={index}
@@ -352,14 +352,14 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
             </AccordionContent>
             <AccordionTrigger onClick={() => handleChangeOpenSubcard()}>
               <div className={styles.card__btn}>
-                {isLoadingSelf || isLoadingManager ? (
+                {isLoadingAdv || isLoadingManager ? (
                   <AccountsLoader />
                 ) : isSubcardOpen ? (
                   t(`orders_advertiser.card.see_less`)
                 ) : (
                   t(`orders_advertiser.card.see_more`)
                 )}
-                {(!isLoadingSelf || !isLoadingManager) && (
+                {(!isLoadingAdv || !isLoadingManager) && (
                   <ArrowSmallVerticalIcon
                     className={
                       isSubcardOpen
@@ -393,7 +393,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
                 isSubcardOpen ? "translate-x-0" : "translate-x-full"
               }`}
             >
-              {(isLoadingSelf || isLoadingManager) && (
+              {(isLoadingAdv || isLoadingManager) && (
                 <div className="grid justify-center items-center h-full pt-[100px]">
                   <SpinnerLoader />
                 </div>
@@ -406,7 +406,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
                   spaceBetween={50}
                   loop={true}
                 >
-                  {(subcardsSelf?.orders || subcardsManager?.orders || []).map(
+                  {(subcardsAdv?.orders || subcardsManager?.orders || []).map(
                     (subcard, index) => (
                       <SwiperSlide
                         key={index}
@@ -431,7 +431,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
                           <MyPagination
                             cardIndex={index}
                             count={
-                              subcardsSelf?.orders?.length ||
+                              subcardsAdv?.orders?.length ||
                               subcardsManager?.orders?.length ||
                               1
                             }
@@ -448,14 +448,11 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
             className={styles.card__btn}
             onClick={() => setSubcardOpen((prev) => !prev)}
           >
-            {isLoadingSelf || isLoadingManager ? (
-              <AccountsLoader />
-            ) : isSubcardOpen ? (
-              t(`orders_advertiser.card.see_less`)
+            {isLoadingAdv || isLoadingManager ? (
+              <div className="loader">
+                <AccountsLoader />
+              </div>
             ) : (
-              t(`orders_advertiser.card.see_more`)
-            )}
-            {(!isLoadingSelf || !isLoadingManager) && (
               <ArrowSmallVerticalIcon
                 className={
                   isSubcardOpen

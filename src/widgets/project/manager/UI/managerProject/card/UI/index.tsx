@@ -390,7 +390,11 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
             className={styles.card__btn}
             onClick={() => setSubcardOpen((prev) => !prev)}
           >
-            {!isLoading ? (
+            {isLoading ? (
+              <div className="loader">
+                <AccountsLoader />
+              </div>
+            ) : (
               <ArrowSmallVerticalIcon
                 className={
                   isSubcardOpen
@@ -398,10 +402,6 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
                     : "icon__white rotate__down side"
                 }
               />
-            ) : (
-              <div className="loader">
-                <AccountsLoader />
-              </div>
             )}
           </div>
         </>
