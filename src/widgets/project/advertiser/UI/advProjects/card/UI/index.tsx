@@ -352,14 +352,14 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
             </AccordionContent>
             <AccordionTrigger onClick={() => handleChangeOpenSubcard()}>
               <div className={styles.card__btn}>
+                {isSubcardOpen
+                  ? t(`orders_advertiser.card.see_less`)
+                  : t(`orders_advertiser.card.see_more`)}
                 {isLoadingAdv || isLoadingManager ? (
-                  <AccountsLoader />
-                ) : isSubcardOpen ? (
-                  t(`orders_advertiser.card.see_less`)
+                  <div className="loader">
+                    <AccountsLoader />
+                  </div>
                 ) : (
-                  t(`orders_advertiser.card.see_more`)
-                )}
-                {(!isLoadingAdv || !isLoadingManager) && (
                   <ArrowSmallVerticalIcon
                     className={
                       isSubcardOpen

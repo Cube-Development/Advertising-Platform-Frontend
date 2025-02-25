@@ -304,8 +304,8 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
             <AccordionTrigger onClick={() => handleChangeOpenSubcard()}>
               <div className={styles.card__btn}>
                 {isSubcardOpen
-                  ? t(`orders_advertiser.card.see_less`)
-                  : t(`orders_advertiser.card.see_more`)}
+                  ? t(`orders_manager.card.see_less`)
+                  : t(`orders_manager.card.see_more`)}
                 {!isLoading ? (
                   <ArrowSmallVerticalIcon
                     className={
