@@ -5,7 +5,7 @@
   padding: 10px;
   cursor: pointer;
   background: var(--Personal-colors-White);
-  box-shadow: 0px 4px 12px 0px rgba(0, 0, 0, 0.16);
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.16);
   border-radius: 10px;
   position: relative;
 
@@ -62,7 +62,7 @@
     width: 40px;
     height: 40px;
     border-radius: 50%;
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.16);
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.16);
   }
 
   .icon {
@@ -72,7 +72,7 @@
     width: 40px;
     height: 40px;
     background: var(--Gradients-Gradient-1);
-    box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.16);
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.16);
     border-radius: 50%;
 
     svg {
