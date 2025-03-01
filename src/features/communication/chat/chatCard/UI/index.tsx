@@ -41,8 +41,7 @@ export const ChatCard: FC<ChatCardProps> = ({ card, isActive }) => {
         </div>
         <div className={styles.description}>
           <p className={styles.title}>
-            {t("chat.campaign")} "{card?.project_name}" ({t("chat.channel")}{" "}
-            {card?.channel_name})
+            {`${t("chat.campaign")} ${card?.project_name} ${!!card?.channel_name ? `(${t("chat.channel")} ${card?.channel_name})` : ""}`}
           </p>
           <span className={`${styles.text} truncate`}>
             {cleanMessage(card?.last_message || "") || ""}

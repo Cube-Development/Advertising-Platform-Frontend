@@ -444,7 +444,7 @@ export const Chat: FC<IChatProps> = ({
                       <div className={styles.description}>
                         <p className="truncate">
                           {currentChat.project_name
-                            ? `${t("chat.campaign")} ${currentChat.project_name} (${t("chat.channel")} ${currentChat.channel_name})`
+                            ? `${t("chat.campaign")} ${currentChat.project_name} ${!!currentChat?.channel_name ? `(${t("chat.channel")} ${currentChat?.channel_name})` : ""}`
                             : t("chat.types.administration")}
                         </p>
                       </div>
@@ -546,48 +546,6 @@ export const Chat: FC<IChatProps> = ({
                   <></>
                 )}
               </div>
-              {/* <AnimatePresence>
-                {currentChat && (
-                  <motion.div
-                    initial="hidden"
-                    animate="visible"
-                    exit="hidden"
-                    transition={PAGE_ANIMATION.sideTransition.transition}
-                    variants={PAGE_ANIMATION.sideTransition}
-                    className={styles.content__right}
-                    drag="x" // Возможность перемещения по оси X
-                    dragConstraints={{ left: 0, right: 0 }} // Ограничения по перемещению
-                    onDragEnd={(event, info) => {
-                      if (info.offset.x > 100) handleCloseChat(); // Если свайп вправо больше 100px, закрыть чат
-                    }}
-                  >
-                    <div className={styles.top}>
-                      <div className={styles.info}>
-                        <div className={styles.logo}>
-                          {currentChat?.order_id ? (
-                            <img src={currentChat?.avatar} alt="" />
-                          ) : (
-                            <div className={styles.icon}>
-                              <CubeDevelopmentIcon />
-                            </div>
-                          )}
-                        </div>
-                        <div className={styles.description}>
-                          <p>
-                            {currentChat.project_name
-                              ? `${t("chat.campaign")} ${currentChat.project_name} (${t("chat.channel")} ${currentChat.channel_name})`
-                              : t("chat.types.administration")}
-                          </p>
-                        </div>
-                      </div>
-                      <div className={styles.arrow} onClick={handleCloseChat}>
-                        <ArrowLongHorizontalIcon className="icon__grey" />
-                      </div>
-                    </div>
-                    <ChatMessages card={currentChat} />
-                  </motion.div>
-                )}
-              </AnimatePresence> */}
               <AnimatePresence>
                 {currentChat && (
                   <motion.div
@@ -619,7 +577,7 @@ export const Chat: FC<IChatProps> = ({
                         <div className={styles.description}>
                           <p>
                             {currentChat.project_name
-                              ? `${t("chat.campaign")} ${currentChat.project_name} (${t("chat.channel")} ${currentChat.channel_name})`
+                              ? `${t("chat.campaign")} ${currentChat.project_name} ${!!currentChat?.channel_name ? `(${t("chat.channel")} ${currentChat?.channel_name})` : ""}`
                               : t("chat.types.administration")}
                           </p>
                         </div>
