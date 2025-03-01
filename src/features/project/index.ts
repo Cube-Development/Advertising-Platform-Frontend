@@ -1,4 +1,5 @@
 export * from "./acceptProject";
+export * from "./downloadReport";
 export * from "./continueTemplate";
 export * from "./manager";
 export * from "./newProject";

@@ -29,6 +29,8 @@ export const Channels: FC = () => {
     setValue(adminChannelForm.page, formFields?.page + 1);
   };
 
+  console.log(data);
+
   return (
     <div className="container">
       <div className={styles.wrapper}>

@@ -1875,6 +1875,7 @@
   },
 
   "order_btn": {
+
     "feedback": {
       "btn_title": "Оставить отзыв",
       "description": {
@@ -1914,7 +1915,8 @@
         "process": "Меняем пост"
       }
     },
-    "seeReport": "Загрузить отчет",
+    "sendReport": "Загрузить отчет",
+    "downloadReport": "Подробный отчет",
     "continue": "Продолжить",
     "is_upload_files": "Отправляем файлы"
   },
