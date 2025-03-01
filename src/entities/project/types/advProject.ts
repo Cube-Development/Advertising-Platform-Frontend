@@ -27,7 +27,8 @@ export interface IAdvProjectCard {
   budget: number;
   remainder?: number;
   completed: number;
-  canceled_rejected: number;
+  canceled_rejected?: number;
+  canceled?: number;
   wait?: number;
   in_progress?: number;
   moderation?: number;
