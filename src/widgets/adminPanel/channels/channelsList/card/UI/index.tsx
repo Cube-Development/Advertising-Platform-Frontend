@@ -203,7 +203,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({
           <p className="truncate">
             {t(
               adminChannelStatus.find((item) => item.id === card?.status)
-                ?.name || "",
+                ?.name || "???",
             )}
           </p>
         </div>
@@ -278,11 +278,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({
                   typeParameter={channelParameterData.category}
                   textData={"add_platform.description.category"}
                   isRow={true}
-                  defaultValue={
-                    (categories?.contents || []).find(
-                      (item) => item.id === formState.category,
-                    )!
-                  }
+                  defaultValue={[formState.category]}
                   single={true}
                   searchable={true}
                 />
