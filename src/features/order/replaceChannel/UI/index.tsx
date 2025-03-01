@@ -5,12 +5,21 @@ import {
   useChangeOrderMutation,
 } from "@entities/project";
 import { CancelIcon2 } from "@shared/assets";
+import { BREAKPOINT } from "@shared/config";
+import { useWindowWidth } from "@shared/hooks";
 import {
-  AlertDialog,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogTitle,
-  AlertDialogTrigger,
+  Dialog,
+  DialogClose,
+  DialogContent,
+  DialogDescription,
+  DialogTitle,
+  DialogTrigger,
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerDescription,
+  DrawerTitle,
+  DrawerTrigger,
   MyButton,
   ToastAction,
   useToast,
@@ -31,6 +40,7 @@ export const ReplaceChannel: FC<ReplaceChannelProps> = ({
   is_request_approve,
 }) => {
   const { t } = useTranslation();
+  const screen = useWindowWidth();
   const { toast } = useToast();
   const [replace, { isLoading }] = useChangeOrderMutation();
   const haveDesire = !!order?.desire.find(
@@ -72,58 +82,122 @@ export const ReplaceChannel: FC<ReplaceChannelProps> = ({
         });
   };
   return (
-    <AlertDialog>
-      <AlertDialogTrigger asChild>
-        <MyButton
-          buttons_type="button__white"
-          className={`truncate ${styles.trigger}`}
-          disabled={!haveDesire && is_request_approve}
-        >
-          {t(`order_btn.changeChannel`)}
-        </MyButton>
-      </AlertDialogTrigger>
-      <AlertDialogContent className={styles.content}>
-        <AlertDialogTitle className={styles.title}>
-          <p className="gradient_color">
-            {haveDesire
-              ? t("orders_advertiser.subcard.replace.channel.desire")
-              : t("orders_advertiser.subcard.replace.channel.title")}
-          </p>
-          <AlertDialogCancel asChild>
-            <div className={styles.close}>
-              <CancelIcon2 />
-            </div>
-          </AlertDialogCancel>
-        </AlertDialogTitle>
-        <textarea
-          {...register("comment")}
-          className={styles.textarea}
-          maxLength={300}
-          disabled={haveDesire}
-          placeholder={t(
-            "orders_advertiser.subcard.replace.channel.placeholder",
-          )}
-        />
-        <AlertDialogCancel asChild>
-          {haveDesire ? (
-            <MyButton>
-              <p>{t("orders_advertiser.subcard.replace.button.ok")}</p>
+    <>
+      {screen >= BREAKPOINT.MD ? (
+        <Dialog>
+          <DialogTrigger asChild>
+            <MyButton
+              buttons_type="button__white"
+              className={`truncate ${styles.trigger}`}
+              disabled={!haveDesire && is_request_approve}
+            >
+              {haveDesire
+                ? t(`order_btn.channel.advertiser.process`)
+                : t(`order_btn.channel.advertiser.edit`)}
             </MyButton>
-          ) : (
-            <MyButton onClick={handleOnClick}>
-              <p>{t("orders_advertiser.subcard.replace.button.send")}</p>
-              {isLoading && (
-                <Loader
-                  className="animate-spin"
-                  stroke="#fff"
-                  width={20}
-                  height={20}
-                />
+          </DialogTrigger>
+          <DialogContent className={styles.content}>
+            <DialogDescription className="sr-only"></DialogDescription>
+            <DialogTitle className={styles.title}>
+              <p className="gradient_color">
+                {haveDesire
+                  ? t("orders_advertiser.subcard.replace.channel.desire")
+                  : t("orders_advertiser.subcard.replace.channel.title")}
+              </p>
+              <DialogClose asChild>
+                <div className={styles.close}>
+                  <CancelIcon2 />
+                </div>
+              </DialogClose>
+            </DialogTitle>
+            <textarea
+              {...register("comment")}
+              className={styles.textarea}
+              maxLength={300}
+              disabled={haveDesire}
+              placeholder={t(
+                "orders_advertiser.subcard.replace.channel.placeholder",
               )}
+            />
+            <DialogClose asChild>
+              {haveDesire ? (
+                <MyButton>
+                  <p>{t("orders_advertiser.subcard.replace.button.ok")}</p>
+                </MyButton>
+              ) : (
+                <MyButton onClick={handleOnClick}>
+                  <p>{t("orders_advertiser.subcard.replace.button.send")}</p>
+                  {isLoading && (
+                    <Loader
+                      className="animate-spin"
+                      stroke="#fff"
+                      width={20}
+                      height={20}
+                    />
+                  )}
+                </MyButton>
+              )}
+            </DialogClose>
+          </DialogContent>
+        </Dialog>
+      ) : (
+        <Drawer>
+          <DrawerTrigger asChild>
+            <MyButton
+              buttons_type="button__white"
+              className={`truncate ${styles.trigger}`}
+              disabled={!haveDesire && is_request_approve}
+            >
+              {haveDesire
+                ? t(`order_btn.channel.advertiser.process`)
+                : t(`order_btn.channel.advertiser.edit`)}
             </MyButton>
-          )}
-        </AlertDialogCancel>
-      </AlertDialogContent>
-    </AlertDialog>
+          </DrawerTrigger>
+          <DrawerContent className={styles.content}>
+            <DrawerDescription className="sr-only"></DrawerDescription>
+            <DrawerTitle className={styles.title}>
+              <p className="gradient_color">
+                {haveDesire
+                  ? t("orders_advertiser.subcard.replace.channel.desire")
+                  : t("orders_advertiser.subcard.replace.channel.title")}
+              </p>
+              <DrawerClose asChild>
+                <div className={styles.close}>
+                  <CancelIcon2 />
+                </div>
+              </DrawerClose>
+            </DrawerTitle>
+            <textarea
+              {...register("comment")}
+              className={styles.textarea}
+              maxLength={300}
+              disabled={haveDesire}
+              placeholder={t(
+                "orders_advertiser.subcard.replace.channel.placeholder",
+              )}
+            />
+            <DrawerClose asChild>
+              {haveDesire ? (
+                <MyButton>
+                  <p>{t("orders_advertiser.subcard.replace.button.ok")}</p>
+                </MyButton>
+              ) : (
+                <MyButton onClick={handleOnClick}>
+                  <p>{t("orders_advertiser.subcard.replace.button.send")}</p>
+                  {isLoading && (
+                    <Loader
+                      className="animate-spin"
+                      stroke="#fff"
+                      width={20}
+                      height={20}
+                    />
+                  )}
+                </MyButton>
+              )}
+            </DrawerClose>
+          </DrawerContent>
+        </Drawer>
+      )}
+    </>
   );
 };

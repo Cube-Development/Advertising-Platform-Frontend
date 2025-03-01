@@ -12,7 +12,7 @@ export const viewBloggerAPI = authApi.injectEndpoints({
         url: "/view/blogger/order",
         method: "GET",
       }),
-      providesTags: [VIEWS_BLOGGER_CHANNELS],
+      providesTags: [VIEWS_BLOGGER_CHANNELS, VIEWS_BLOGGER_OFFERS],
     }),
     getViewBloggerChannel: build.query<IViewBloggerChannel, void>({
       query: () => ({
