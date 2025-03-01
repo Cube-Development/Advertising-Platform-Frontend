@@ -234,7 +234,7 @@ export const adminAPI = authApi.injectEndpoints({
       forceRefetch({ currentArg, previousArg }) {
         return currentArg !== previousArg;
       },
-      providesTags: [ADMIN_CHANNELS],
+      // providesTags: [ADMIN_CHANNELS],
     }),
     getAdminChannelInfo: build.query<IAdminChannelInfo, { id: string }>({
       query: (params) => ({
