@@ -10,6 +10,8 @@ import {
   useGetAdvManagerProjectsQuery,
   useGetAdvProjectsQuery,
 } from "@entities/project";
+import { useFindLanguage } from "@entities/user";
+import { useGetViewAdvertiserProjectQuery } from "@entities/views";
 import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 import { pageFilter } from "@shared/routing";
 import { QueryParams } from "@shared/utils";
@@ -20,8 +22,6 @@ import { AdvProjectsList } from "./advProjects";
 import { DevProjectsList } from "./devProjects";
 import styles from "./styles.module.scss";
 import { TemplateProjectsList } from "./templateProjects";
-import { useGetViewAdvertiserProjectQuery } from "@entities/views";
-import { useFindLanguage } from "@entities/user";
 
 export const AdvOrders: FC = () => {
   const page = pageFilter.order;

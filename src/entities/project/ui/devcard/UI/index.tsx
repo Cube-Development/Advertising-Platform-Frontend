@@ -48,7 +48,7 @@ export const AdvDevProjectCard: FC<AdvDevProjectCardProps> = ({
       </div>
       <div className={styles.card__chat}>
         <ChatBtn
-          orderId={card?.id}
+          projectId={card?.id}
           toRole={roles.manager}
           isFull={screen < BREAKPOINT.LG}
         />

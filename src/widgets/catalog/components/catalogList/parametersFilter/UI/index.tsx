@@ -36,10 +36,11 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  DialogTitle,
   Drawer,
   DrawerClose,
   DrawerContent,
+  DrawerDescription,
+  DrawerTitle,
   DrawerTrigger,
   ScrollArea,
 } from "@shared/ui";
@@ -256,7 +257,6 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
   };
 
   const [isOpen, setIsOpen] = useState(false);
-
   return (
     <Drawer open={isOpen} onOpenChange={setIsOpen}>
       <DrawerTrigger className="h-full">
@@ -266,11 +266,11 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
         </div>
       </DrawerTrigger>
       <DrawerContent className={styles.parameters}>
-        <DialogTitle className="sr-only"></DialogTitle>
+        <DrawerDescription className="sr-only"></DrawerDescription>
         <div className={styles.top}>
-          <p className={`gradient_color ${styles.title}`}>
+          <DrawerTitle className={`gradient_color ${styles.title}`}>
             {t("catalog.search.parameters")}
-          </p>
+          </DrawerTitle>
           <DrawerClose className={styles.close}>
             <div>
               <CancelIcon2 />
