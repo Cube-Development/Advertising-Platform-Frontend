@@ -19,7 +19,7 @@ import {
   ReplacePost,
   SeePost,
 } from "@features/order";
-import { AcceptProject } from "@features/project";
+import { AcceptProject, DownloadReport } from "@features/project";
 import {
   ArrowSmallVerticalIcon,
   CancelIcon,
@@ -161,7 +161,7 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
               </div>
               <div className={styles.bottom}>
                 <Feedback />
-                <Feedback />
+                <DownloadReport />
               </div>
             </div>
           ) : typeFilter === projectTypesFilter.managerProject &&

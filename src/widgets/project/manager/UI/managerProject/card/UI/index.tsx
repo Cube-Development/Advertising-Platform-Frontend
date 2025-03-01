@@ -17,7 +17,7 @@ import {
   SeePost,
 } from "@features/order";
 import {
-  DownloadReport,
+  SendReport,
   EditProject,
   LaunchProject,
   SendToBot,
@@ -151,7 +151,7 @@ const Card: FC<ManagerProjectCardProps> = ({ card, statusFilter }) => {
                 </div>
               </div>
               <div className={styles.bottom}>
-                <DownloadReport />
+                <SendReport />
               </div>
             </div>
           ) : (
