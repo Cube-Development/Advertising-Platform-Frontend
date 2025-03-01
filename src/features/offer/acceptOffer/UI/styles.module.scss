@@ -14,7 +14,7 @@
   border: 0.2px solid rgba(0, 0, 0, 0.1);
   color: var(--Personal-colors-main);
   background: #fff;
-  box-shadow: 0px 1px 4px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.16);
 }
 
 .popover {
@@ -62,7 +62,7 @@
     text-align: center;
     cursor: pointer;
     transition: all 0.5s ease;
-    box-shadow: 0px 1px 5px 1px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.16);
 
     &:hover {
       box-shadow: 1px 1px 5px 1px rgba(71, 114, 230, 0.7);
