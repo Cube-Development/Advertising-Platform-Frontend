@@ -10,7 +10,7 @@ export const enum INTERSECTION_ELEMENTS {
   myModChannels = 4,
   history = 5,
   chat = 20,
-  managerOrders = 1,
+  managerOrders = 4,
   channelReview = 4,
   recommendCardsChannel = 10,
   recommendCardsCart = 10,

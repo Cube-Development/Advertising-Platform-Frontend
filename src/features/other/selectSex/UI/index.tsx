@@ -57,7 +57,9 @@ export const SelectSex: FC<SelectSexProps> = ({
   }, [defaultValues]);
 
   useEffect(() => {
-    handleChange(debouncedPosition as number);
+    if (defaultValues !== debouncedPosition) {
+      handleChange(debouncedPosition as number);
+    }
   }, [debouncedPosition]);
 
   return (
