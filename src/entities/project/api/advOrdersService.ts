@@ -37,7 +37,7 @@ export interface ICreateUniquePostReq {
 }
 
 export interface getProjectsCardReq {
-  language?: number;
+  language?: languagesNum;
   page: number;
   status:
     | advManagerProjectStatusFilter

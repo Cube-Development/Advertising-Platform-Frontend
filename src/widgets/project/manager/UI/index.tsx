@@ -1,3 +1,4 @@
+import { dateSortingTypes } from "@entities/platform";
 import {
   IManagerNewProjectCard,
   IManagerProjectCard,
@@ -5,51 +6,49 @@ import {
   managerProjectStatusFilter,
   useGetManagerProjectsQuery,
 } from "@entities/project";
-import { INTERSECTION_ELEMENTS } from "@shared/config";
+import { useFindLanguage } from "@entities/user";
+import { useGetViewManagerProjectQuery } from "@entities/views";
+import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 import { pageFilter } from "@shared/routing";
 import { BarFilter } from "@widgets/barFilter";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { ManagerNewProjectsList } from "./managerNewProject";
 import { ManagerProjectsList } from "./managerProject";
 import styles from "./styles.module.scss";
-import { useGetViewManagerProjectQuery } from "@entities/views";
 
 export const ManagerOrders: FC = () => {
-  const { setValue, watch } = useForm<{
-    status: managerProjectStatusFilter | string;
-  }>({
+  const language = useFindLanguage();
+  const page = pageFilter.order;
+
+  const { setValue, watch } = useForm<getProjectsCardReq>({
     defaultValues: {
+      page: 1,
+      language: language?.id || Languages[0].id,
       status: managerProjectStatusFilter.active,
+      elements_on_page: INTERSECTION_ELEMENTS.managerOrders,
+      date_sort: dateSortingTypes.decrease,
     },
   });
+
   const formState = watch();
-
-  const page = pageFilter.order;
-  const [currentPage, setCurrentPage] = useState(1);
-  const handleOnChangePage = () => {
-    setCurrentPage(currentPage + 1);
-  };
-
-  const getParams: getProjectsCardReq = {
-    language: 1,
-    page: currentPage,
-    status: formState.status,
-    elements_on_page: INTERSECTION_ELEMENTS.managerOrders,
-  };
-
-  const { data, isFetching } = useGetManagerProjectsQuery(getParams);
+  const { data, isFetching } = useGetManagerProjectsQuery(formState);
   const { refetch: views } = useGetViewManagerProjectQuery();
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [formState.status]);
 
   useEffect(() => {
     if (formState.status === managerProjectStatusFilter.completed) {
       views();
     }
-  }, [formState.status, currentPage]);
+  }, [formState.status, formState.page]);
+
+  const handleChangeStatus = (status: managerProjectStatusFilter | string) => {
+    setValue("status", status);
+    setValue("page", 1);
+  };
+
+  const handleOnChangePage = () => {
+    setValue("page", formState.page + 1);
+  };
 
   return (
     <div className="container">
@@ -57,7 +56,7 @@ export const ManagerOrders: FC = () => {
         <BarFilter
           page={page}
           listLength={!!data?.projects?.length}
-          changeStatus={(status) => setValue("status", status)}
+          changeStatus={(status) => handleChangeStatus(status)}
           statusFilter={formState.status}
         />
         {formState.status === managerProjectStatusFilter.new ? (

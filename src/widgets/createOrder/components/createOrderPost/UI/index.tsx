@@ -322,7 +322,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
               <span className="gradient_color">2</span>
               <p className="gradient_color">{t("create_order.create.title")}</p>
             </div>
-            <PostGeneration />
+            {/* <PostGeneration /> */}
           </div>
           <div className={styles.creating__post}>
             <TypeTabs formState={formState} setValue={setValue} />
