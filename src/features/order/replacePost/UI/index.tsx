@@ -86,7 +86,9 @@ export const ReplacePost: FC<ReplacePostProps> = ({
         <Dialog>
           <DialogTrigger asChild>
             <MyButton
-              buttons_type="button__white"
+              buttons_type={
+                haveDesire ? "button__green__outline" : "button__white"
+              }
               className={styles.trigger}
               disabled={!haveDesire && is_request_approve}
             >
@@ -143,7 +145,9 @@ export const ReplacePost: FC<ReplacePostProps> = ({
         <Drawer>
           <DrawerTrigger asChild>
             <MyButton
-              buttons_type="button__white"
+              buttons_type={
+                haveDesire ? "button__green__outline" : "button__white"
+              }
               className={styles.trigger}
               disabled={!haveDesire && is_request_approve}
             >
