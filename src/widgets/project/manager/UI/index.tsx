@@ -5,7 +5,7 @@ import {
   managerProjectStatusFilter,
   useGetManagerProjectsQuery,
 } from "@entities/project";
-import { INTERSECTION_ELEMENTS } from "@shared/config";
+import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 import { pageFilter } from "@shared/routing";
 import { BarFilter } from "@widgets/barFilter";
 import { FC, useEffect, useState } from "react";
@@ -14,8 +14,10 @@ import { ManagerNewProjectsList } from "./managerNewProject";
 import { ManagerProjectsList } from "./managerProject";
 import styles from "./styles.module.scss";
 import { useGetViewManagerProjectQuery } from "@entities/views";
+import { useFindLanguage } from "@entities/user";
 
 export const ManagerOrders: FC = () => {
+  const language = useFindLanguage();
   const { setValue, watch } = useForm<{
     status: managerProjectStatusFilter | string;
   }>({
@@ -32,7 +34,7 @@ export const ManagerOrders: FC = () => {
   };
 
   const getParams: getProjectsCardReq = {
-    language: 1,
+    language: language?.id || Languages[0].id,
     page: currentPage,
     status: formState.status,
     elements_on_page: INTERSECTION_ELEMENTS.managerOrders,

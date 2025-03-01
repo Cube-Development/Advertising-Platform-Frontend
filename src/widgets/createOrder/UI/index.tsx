@@ -15,7 +15,7 @@ import {
 import { roles, useFindLanguage } from "@entities/user";
 import { usePaymentProjectMutation } from "@entities/wallet";
 import { BREAKPOINT, cookiesTypes } from "@shared/config";
-import { Languages } from "@shared/config/languages";
+import { Languages } from "@shared/config";
 import { useAppSelector, useWindowWidth } from "@shared/hooks";
 import { paths } from "@shared/routing";
 import { SpinnerLoader, useToast } from "@shared/ui";

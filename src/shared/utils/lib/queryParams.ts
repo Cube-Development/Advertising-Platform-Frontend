@@ -6,6 +6,7 @@ type QueryParams = {
   add_channel?: string | null;
   order_type?: string | null;
   project_status?: string | null;
+  telegram_role?: string | null;
 };
 
 export const QueryParams = () => {
@@ -33,6 +34,9 @@ export const QueryParams = () => {
   }
   if (urlParams.has("project_status")) {
     queryParams.project_status = urlParams.get("project_status");
+  }
+  if (urlParams.has("telegram_role")) {
+    queryParams.telegram_role = urlParams.get("telegram_role");
   }
 
   return queryParams;
