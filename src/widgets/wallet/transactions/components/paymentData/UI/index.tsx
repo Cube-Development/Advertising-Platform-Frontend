@@ -4,6 +4,7 @@ import {
   IndividualData,
   SelfEmployedCardData,
   SelfEmployedData,
+  formDataLength,
   profileTypesName,
   profileTypesNum,
   subprofileFilterTypes,
@@ -73,13 +74,13 @@ export const PaymentData: FC<PaymentDataProps> = ({
           ? SelfEmployedData
           : SelfEmployedCardData;
 
-  const [price, setPrice] = useState("");
+  const [price, setPrice] = useState<number | string>("");
   const handleInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     let newValue = e.target.value.replace(/\D/g, "");
-    if (newValue.length > 10 || newValue === "0") {
+    if (newValue.length > formDataLength.amount || newValue === "0") {
       return;
     }
-    setPrice(newValue);
+    setPrice(newValue ? Number(newValue) : "");
   };
 
   const handleChangeAccept = (serviceRules: boolean, saveData: boolean) => {
@@ -104,8 +105,7 @@ export const PaymentData: FC<PaymentDataProps> = ({
                 onChange: (e) => handleInput(e),
               })}
               placeholder={t("wallet.topup.placeholder")}
-              value={price ? parseInt(price).toLocaleString() : ""}
-              maxLength={14}
+              value={Number.isInteger(price) ? price.toLocaleString() : ""}
               className={styles.input}
             />
             <small>{t("symbol")}</small>

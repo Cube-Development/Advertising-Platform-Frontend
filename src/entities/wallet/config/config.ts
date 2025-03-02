@@ -27,4 +27,5 @@ export enum formDataLength {
   card_number = 20,
   card_date = 20,
   default = 20,
+  amount = 10,
 }
