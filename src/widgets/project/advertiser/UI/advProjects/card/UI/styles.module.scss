@@ -502,8 +502,9 @@
 
       @media (max-width: 992px) {
         padding-top: 0;
-        grid-auto-flow: row;
-        grid-template: unset;
+        flex-wrap: wrap;
+        // grid-auto-flow: row;
+        // grid-template: unset;
         row-gap: 20px;
         padding-left: 15px;
         align-content: center;
