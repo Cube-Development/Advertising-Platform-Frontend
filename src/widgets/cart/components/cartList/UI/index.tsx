@@ -42,7 +42,7 @@ export const CartList: FC<CartListProps> = ({
         <div className={styles.cards}>
           {channels?.map((card, index) => (
             <motion.div
-              key={card.id + index}
+              key={card.id}
               initial="hidden"
               animate="visible"
               custom={index}
