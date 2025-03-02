@@ -23,20 +23,23 @@ import { DevProjectsList } from "./devProjects";
 import styles from "./styles.module.scss";
 import { TemplateProjectsList } from "./templateProjects";
 
+interface IForm extends getProjectsCardReq {
+  type: projectTypesFilter | string;
+}
+
 export const AdvOrders: FC = () => {
   const page = pageFilter.order;
   const language = useFindLanguage();
   const { order_type, project_status } = QueryParams();
 
-  const { setValue, watch } = useForm<{
-    status: advManagerProjectStatusFilter | myProjectStatusFilter | string;
-    type: projectTypesFilter | string;
-    page: number;
-  }>({
+  const { setValue, watch } = useForm<IForm>({
     defaultValues: {
       status: myProjectStatusFilter.active,
       type: projectTypesFilter.myProject,
       page: 1,
+      date_sort: dateSortingTypes.decrease,
+      elements_on_page: INTERSECTION_ELEMENTS.advOrders,
+      language: language?.id || Languages[0].id,
     },
   });
   const formState = watch();
@@ -84,24 +87,16 @@ export const AdvOrders: FC = () => {
     }
   }, [order_type]);
 
-  const getParams: getProjectsCardReq = {
-    page: formState.page,
-    date_sort: dateSortingTypes.decrease,
-    status: formState.status,
-    elements_on_page: INTERSECTION_ELEMENTS.advOrders,
-  };
+  const { type, ...getParams } = formState;
 
   const { data: projectsSelf, isFetching: isFetchingSelf } =
     useGetAdvProjectsQuery(getParams, {
       skip: formState.type !== projectTypesFilter.myProject,
     });
   const { data: projectsManager, isFetching: isFetchingManager } =
-    useGetAdvManagerProjectsQuery(
-      { ...getParams, language: language?.id || Languages[0].id },
-      {
-        skip: formState.type !== projectTypesFilter.managerProject,
-      },
-    );
+    useGetAdvManagerProjectsQuery(getParams, {
+      skip: formState.type !== projectTypesFilter.managerProject,
+    });
 
   const { refetch: views } = useGetViewAdvertiserProjectQuery();
 
@@ -136,7 +131,7 @@ export const AdvOrders: FC = () => {
               []
             }
             handleOnChangePage={handleOnChangePage}
-            isLoading={isFetchingSelf || isFetchingManager}
+            isLoading={isFetchingManager}
             isLast={projectsManager?.isLast || false}
             typeFilter={formState.type}
           />

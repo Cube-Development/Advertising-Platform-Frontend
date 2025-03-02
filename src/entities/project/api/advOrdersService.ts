@@ -276,6 +276,9 @@ export const advProjectsAPI = authApi.injectEndpoints({
           projects: [...currentCache.projects, ...newItems.projects],
         };
       },
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg?.page !== previousArg?.page;
+      },
       providesTags: [ADV_TARIFF_PROJECTS],
     }),
   }),
