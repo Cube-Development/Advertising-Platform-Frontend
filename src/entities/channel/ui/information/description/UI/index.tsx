@@ -44,7 +44,6 @@ const CheckRowsComponent: FC<SeeMoreLessComponentProps> = ({ text }) => {
     };
   }, [text]);
 
-  console.log(lineCount);
   return (
     <>
       {lineCount === 1 ? (

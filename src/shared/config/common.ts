@@ -1,5 +1,6 @@
 export const enum CALENDAR {
-  disabledDays = 2,
+  // disabledDays = 2,
+  disabledDays = -1,
 }
 
 export const enum INTERSECTION_ELEMENTS {

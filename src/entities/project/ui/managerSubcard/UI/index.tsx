@@ -39,6 +39,7 @@ import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogContent,
+  AlertDialogDescription,
   AlertDialogTitle,
   AlertDialogTrigger,
   useToast,
@@ -511,6 +512,8 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
                             : "w-[60vw]"
                   }`}
                 >
+                  <AlertDialogDescription className="sr-only"></AlertDialogDescription>
+                  <AlertDialogTitle className="sr-only"></AlertDialogTitle>
                   <div className="relative">
                     <AlertDialogAction>
                       <X
@@ -588,6 +591,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
                               : "w-[60vw]"
                     }`}
                   >
+                    <AlertDialogDescription className="sr-only"></AlertDialogDescription>
                     <AlertDialogTitle className="sr-only"></AlertDialogTitle>
                     <div className="relative">
                       <AlertDialogAction>

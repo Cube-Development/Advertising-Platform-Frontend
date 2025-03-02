@@ -87,7 +87,9 @@ export const ReplaceChannel: FC<ReplaceChannelProps> = ({
         <Dialog>
           <DialogTrigger asChild>
             <MyButton
-              buttons_type="button__white"
+              buttons_type={
+                haveDesire ? "button__green__outline" : "button__white"
+              }
               className={`truncate ${styles.trigger}`}
               disabled={!haveDesire && is_request_approve}
             >
@@ -144,7 +146,9 @@ export const ReplaceChannel: FC<ReplaceChannelProps> = ({
         <Drawer>
           <DrawerTrigger asChild>
             <MyButton
-              buttons_type="button__white"
+              buttons_type={
+                haveDesire ? "button__green__outline" : "button__white"
+              }
               className={`truncate ${styles.trigger}`}
               disabled={!haveDesire && is_request_approve}
             >

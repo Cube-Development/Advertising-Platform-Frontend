@@ -9,6 +9,7 @@ import {
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
+  AlertDialogDescription,
   AlertDialogTitle,
   AlertDialogTrigger,
   MyButton,
@@ -52,6 +53,7 @@ export const ComplaintDecision: FC<ComplaintDecisionProps> = ({
         </MyButton>
       </AlertDialogTrigger>
       <AlertDialogContent className={styles.content}>
+        <AlertDialogDescription className="sr-only"></AlertDialogDescription>
         <div className={styles.top}>
           <div className={styles.close}>
             <AlertDialogCancel>

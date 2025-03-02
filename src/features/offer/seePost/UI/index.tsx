@@ -13,6 +13,7 @@ import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogContent,
+  AlertDialogDescription,
   AlertDialogTitle,
   AlertDialogTrigger,
   MyButton,
@@ -50,6 +51,7 @@ export const SeePost: FC<SeePostProps> = ({ post }) => {
                   : "w-[60vw]"
         }`}
       >
+        <AlertDialogDescription className="sr-only"></AlertDialogDescription>
         <AlertDialogTitle className="sr-only"></AlertDialogTitle>
         <div className="relative">
           <AlertDialogAction>

@@ -1,11 +1,11 @@
-import { FileProps } from "@entities/project";
+import { FileProps, getContentType } from "@entities/project";
 import {
   AddFileIcon,
   FileIcon,
   TrashBasketIcon,
   YesIcon,
 } from "@shared/assets";
-import { ToastAction, formatFileSize, useToast } from "@shared/ui";
+import { ScrollArea, ToastAction, formatFileSize, useToast } from "@shared/ui";
 import { InfoIcon } from "lucide-react";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -49,14 +49,47 @@ export const AddMediaFiles: FC<FileProps> = ({ onChange, currentFiles }) => {
     setDragActive(false);
   };
 
-  const handleDrop = function (e: React.DragEvent<HTMLInputElement>) {
+  // const handleDrop = function (e: React.DragEvent<HTMLInputElement>) {
+  //   e.preventDefault();
+  //   setDragActive(false);
+
+  //   console.log(2222, e.dataTransfer.files);
+  //   if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+
+  //     const newFiles: File[] = [...e.dataTransfer.files];
+  //     if (files.length + newFiles.length <= 10) {
+  //       setFiles([...files, ...newFiles]);
+  //       onChange([...files, ...newFiles]);
+  //     } else {
+  //       toast({
+  //         variant: "error",
+  //         title: t("create_order.create.add_files.mediafile.max_length"),
+  //         action: <ToastAction altText="OK">OK</ToastAction>,
+  //       });
+  //     }
+  //   }
+  // };
+
+  const handleDrop = (e: React.DragEvent<HTMLInputElement>) => {
     e.preventDefault();
     setDragActive(false);
-    if (e.dataTransfer.files && e.dataTransfer.files[0]) {
+
+    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
       const newFiles: File[] = [...e.dataTransfer.files];
-      if (files.length + newFiles.length <= 10) {
-        setFiles([...files, ...newFiles]);
-        onChange([...files, ...newFiles]);
+      const validFiles = newFiles.filter((file) => {
+        try {
+          getContentType(file); // Проверяем файл
+          return true; // Если ошибок нет - оставляем
+        } catch (error) {
+          console.warn(`Файл ${file.name} не поддерживается:`, error);
+          return false; // Если ошибка - убираем
+        }
+      });
+
+      // Ограничение на 10 файлов
+      if (files.length + validFiles.length <= 10) {
+        setFiles([...files, ...validFiles]);
+        onChange([...files, ...validFiles]);
       } else {
         toast({
           variant: "error",
@@ -124,9 +157,7 @@ export const AddMediaFiles: FC<FileProps> = ({ onChange, currentFiles }) => {
           </label>
         </div>
       </div>
-      <div
-        className={`${styles.right} ${files.length > 8 ? styles.scroll : ""}`}
-      >
+      <ScrollArea className={styles.right}>
         {files.length > 0 && (
           <div className={styles.items}>
             {files.map((file, id) => (
@@ -141,7 +172,10 @@ export const AddMediaFiles: FC<FileProps> = ({ onChange, currentFiles }) => {
                 </div>
                 <div className={styles.item__right}>
                   <YesIcon />
-                  <button onClick={() => handleRemoveFile(file)}>
+                  <button
+                    className={styles.remove}
+                    onClick={() => handleRemoveFile(file)}
+                  >
                     <TrashBasketIcon />
                   </button>
                 </div>
@@ -149,7 +183,7 @@ export const AddMediaFiles: FC<FileProps> = ({ onChange, currentFiles }) => {
             ))}
           </div>
         )}
-      </div>
+      </ScrollArea>
     </div>
   );
 };

@@ -24,6 +24,7 @@ import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogContent,
+  AlertDialogDescription,
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@shared/ui";
@@ -166,6 +167,7 @@ export const OrderCard: FC<PostPlatformProps> = ({
                       : "w-[60vw]"
             }`}
           >
+            <AlertDialogDescription className="sr-only"></AlertDialogDescription>
             <AlertDialogTitle className="sr-only"></AlertDialogTitle>
             {formState?.posts?.length ? (
               <div className="relative">

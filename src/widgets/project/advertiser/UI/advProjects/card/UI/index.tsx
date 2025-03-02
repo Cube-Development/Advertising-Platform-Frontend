@@ -156,7 +156,7 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
                 </div>
                 <div>
                   <CancelIcon />
-                  <p>{card?.canceled_rejected?.toLocaleString()}</p>
+                  <p>{card?.canceled?.toLocaleString()}</p>
                 </div>
               </div>
               <div className={styles.bottom}>
@@ -177,7 +177,7 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
               </div>
               <div>
                 <CancelIcon />
-                <p>{card?.canceled_rejected?.toLocaleString()}</p>
+                <p>{card?.canceled?.toLocaleString()}</p>
               </div>
               <div>
                 <WaitIcon />

@@ -102,9 +102,9 @@ export const BarSubfilter: FC<BarSubfilterProps> = ({
               ? [chatManagerTypes, chatFilter]
               : page === pageFilter.createOrderFiles
                 ? [addFileTypes, fileFilter]
-                : page === pageFilter.adminReviews && role === roles.manager
+                : page === pageFilter.adminReviews && role === roles.moderator
                   ? [adminReviewTypes, reviewsFilter]
-                  : page === pageFilter.adminComplaint && role === roles.manager
+                  : page === pageFilter.adminComplaint && role === roles.moderator
                     ? [adminComplaintTypes, complaintsFilter]
                     : [[], "", ""];
 
