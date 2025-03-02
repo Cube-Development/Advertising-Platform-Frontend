@@ -1,5 +1,5 @@
 import { platformTypesNum } from "@entities/platform";
-import { desireStatus, orderStatus } from "../config";
+import { desireStatus, orderStatus, projectStatus } from "../config";
 
 export interface IAdvProjects {
   page: number;
@@ -22,7 +22,7 @@ export interface IAdvProjectCard {
   created: string;
   project_name: string;
   count_channels: number;
-  is_request_approve?: boolean;
+  is_request_approve?: projectStatus;
   views: number;
   budget: number;
   remainder?: number;

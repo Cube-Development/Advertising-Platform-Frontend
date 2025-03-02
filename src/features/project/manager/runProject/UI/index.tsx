@@ -1,4 +1,4 @@
-import { useLaunchProjectMutation } from "@entities/project";
+import { projectStatus, useLaunchProjectMutation } from "@entities/project";
 import { MyButton, ToastAction, useToast } from "@shared/ui";
 import { Loader } from "lucide-react";
 import { FC } from "react";
@@ -6,13 +6,13 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
 interface LaunchProjectProps {
-  is_request_approve: boolean;
   project_id: string;
+  status: projectStatus;
 }
 
 export const LaunchProject: FC<LaunchProjectProps> = ({
-  is_request_approve,
   project_id,
+  status,
 }) => {
   const { toast } = useToast();
   const { t } = useTranslation();
@@ -40,8 +40,9 @@ export const LaunchProject: FC<LaunchProjectProps> = ({
   return (
     <MyButton
       onClick={handleOnClick}
-      className={`${styles.button} ${is_request_approve ? "" : "deactive"}`}
+      className={styles.button}
       buttons_type="button__white"
+      disabled={status !== projectStatus.approved}
     >
       <p>{t("orders_manager.card.run_btn")}</p>
       {isLoading && (

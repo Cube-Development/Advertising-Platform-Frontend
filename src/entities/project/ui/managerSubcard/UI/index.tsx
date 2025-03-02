@@ -17,6 +17,7 @@ import {
   managerProjectStatusFilter,
   orderStatus,
   orderStatusChat,
+  projectStatus,
   useGetPostQuery,
 } from "@entities/project";
 import { roles } from "@entities/user";
@@ -295,9 +296,19 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
             ) : subcard?.api_status === orderStatus.order_review ? (
               <div className={styles.subcard__agreed}>
                 <div>
-                  <p>{t(`orders_manager.order_status.agreed.title.default`)}</p>
+                  <p>
+                    {card?.is_request_approve === projectStatus.approved ||
+                    (card?.is_request_approve === projectStatus.changed &&
+                      subcard?.desire?.length === 0)
+                      ? t(`orders_manager.order_status.agreed.title.approved`)
+                      : card?.is_request_approve ===
+                          projectStatus.request_approve
+                        ? t(
+                            `orders_manager.order_status.agreed.title.request_approve`,
+                          )
+                        : ""}
+                  </p>
                   <div>
-                    {/* <ChangeChannelBtn order={subcard} project_id={card?.id} /> */}
                     <SeePostBtn post={post!} />
                   </div>
                 </div>
@@ -641,9 +652,18 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
           ) : subcard?.api_status === orderStatus.order_review ? (
             <div className={styles.subcard__agreed}>
               <div>
-                <p>{t(`orders_manager.order_status.agreed.title.default`)}</p>
+                <p>
+                  {card?.is_request_approve === projectStatus.approved ||
+                  (card?.is_request_approve === projectStatus.changed &&
+                    subcard?.desire?.length === 0)
+                    ? t(`orders_manager.order_status.agreed.title.approved`)
+                    : card?.is_request_approve === projectStatus.request_approve
+                      ? t(
+                          `orders_manager.order_status.agreed.title.request_approve`,
+                        )
+                      : ""}
+                </p>
                 <div>
-                  {/* <ChangeChannelBtn order={subcard} project_id={card?.id} /> */}
                   <SeePostBtn post={post!} />
                 </div>
               </div>

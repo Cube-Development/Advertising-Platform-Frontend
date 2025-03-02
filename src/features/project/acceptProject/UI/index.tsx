@@ -1,4 +1,7 @@
-import { useApproveAdvManagerProjectMutation } from "@entities/project";
+import {
+  projectStatus,
+  useApproveAdvManagerProjectMutation,
+} from "@entities/project";
 import { MyButton, ToastAction, useToast } from "@shared/ui";
 import { Loader } from "lucide-react";
 import { FC } from "react";
@@ -7,9 +10,13 @@ import styles from "./styles.module.scss";
 
 interface AcceptProjectProps {
   project_id: string;
+  status: projectStatus;
 }
 
-export const AcceptProject: FC<AcceptProjectProps> = ({ project_id }) => {
+export const AcceptProject: FC<AcceptProjectProps> = ({
+  project_id,
+  status,
+}) => {
   const { toast } = useToast();
   const { t } = useTranslation();
   const [approveAdvManagerProject, { isLoading }] =
@@ -39,6 +46,7 @@ export const AcceptProject: FC<AcceptProjectProps> = ({ project_id }) => {
       onClick={handleOnClick}
       buttons_type="button__white"
       className={styles.button}
+      disabled={status === projectStatus.changed}
     >
       <p>{t(`order_btn.accept`)}</p>
       {isLoading && (

@@ -3,6 +3,7 @@ import {
   ManagerProjectSubcard,
   getProjectSubcardReq,
   managerProjectStatusFilter,
+  projectStatus,
   useGetManagerSubprojectsQuery,
 } from "@entities/project";
 import { roles, useFindLanguage } from "@entities/user";
@@ -124,17 +125,22 @@ const Card: FC<ManagerProjectCardProps> = ({ card, statusFilter }) => {
             <div className={styles.card__info__icons_manager_request_approve}>
               <div>
                 <span>
-                  {Boolean(card?.is_request_approve)
-                    ? t("orders_manager.card.request_approve")
-                    : t("orders_manager.card.not_request_approve")}
+                  {card?.is_request_approve === projectStatus.approved
+                    ? t("orders_manager.card.approved")
+                    : card?.is_request_approve === projectStatus.changed
+                      ? t("orders_manager.card.changed")
+                      : card?.is_request_approve ===
+                          projectStatus.request_approve
+                        ? t("orders_manager.card.request_approve")
+                        : ""}
                 </span>
               </div>
-              {!card?.is_request_approve ? (
+              {card?.is_request_approve === projectStatus.changed ? (
                 <EditProject project_id={card?.project_id} />
               ) : (
                 <LaunchProject
-                  is_request_approve={card?.is_request_approve || false}
                   project_id={card?.project_id}
+                  status={card?.is_request_approve!}
                 />
               )}
             </div>

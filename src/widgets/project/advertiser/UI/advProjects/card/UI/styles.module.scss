@@ -476,10 +476,14 @@
     }
 
     &__icons_manager_request_approve {
-      display: grid;
-      grid-template: 1fr / repeat(var(--columns), 1fr);
+      display: flex;
+      flex-wrap: nowrap;
       column-gap: 10px;
       padding-top: 20px;
+
+      > * {
+        flex: 1 1 50%;
+      }
 
       div {
         display: grid;
