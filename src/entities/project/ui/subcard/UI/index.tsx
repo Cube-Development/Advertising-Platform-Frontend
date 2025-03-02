@@ -219,7 +219,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                     <span>
                       {typeFilter === projectTypesFilter.managerProject
                         ? t(`orders_advertiser.order_status.rejected.text2`)
-                        : statusFilter === myProjectStatusFilter.completed ||
+                        : typeFilter === projectTypesFilter.myProject &&
                           t(`orders_advertiser.order_status.rejected.text`)}
                     </span>
                   </>
@@ -435,7 +435,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                   <span>
                     {typeFilter === projectTypesFilter.managerProject
                       ? t(`orders_advertiser.order_status.rejected.text2`)
-                      : statusFilter === myProjectStatusFilter.completed ||
+                      : typeFilter === projectTypesFilter.myProject &&
                         t(`orders_advertiser.order_status.rejected.text`)}
                   </span>
                 </>
