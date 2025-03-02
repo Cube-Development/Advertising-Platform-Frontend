@@ -124,7 +124,7 @@ export const CatalogList: FC<CatalogListProps> = ({
       <div className={styles.card__list}>
         {channels?.map((card, index) => (
           <motion.div
-            key={card.id + index}
+            key={card.id}
             initial="hidden"
             animate="visible"
             custom={index % INTERSECTION_ELEMENTS.catalog}

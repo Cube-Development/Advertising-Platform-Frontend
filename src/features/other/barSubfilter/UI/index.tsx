@@ -104,7 +104,8 @@ export const BarSubfilter: FC<BarSubfilterProps> = ({
                 ? [addFileTypes, fileFilter]
                 : page === pageFilter.adminReviews && role === roles.moderator
                   ? [adminReviewTypes, reviewsFilter]
-                  : page === pageFilter.adminComplaint && role === roles.moderator
+                  : page === pageFilter.adminComplaint &&
+                      role === roles.moderator
                     ? [adminComplaintTypes, complaintsFilter]
                     : [[], "", ""];
 
