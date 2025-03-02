@@ -34,6 +34,7 @@ import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogContent,
+  AlertDialogDescription,
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@shared/ui";
@@ -482,6 +483,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                   <AlertDialogContent
                     className={`max-w-[300px] gap-0 bg-transparent grid items-center justify-center shadow-none border-0 ${screen > 475 ? "w-[50vw]" : "w-[60vw]"}`}
                   >
+                    <AlertDialogDescription className="sr-only"></AlertDialogDescription>
                     <AlertDialogTitle className="sr-only"></AlertDialogTitle>
                     <div className="relative">
                       <AlertDialogAction>

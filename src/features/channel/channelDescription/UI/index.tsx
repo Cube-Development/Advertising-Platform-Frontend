@@ -8,6 +8,7 @@ import {
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
+  AlertDialogDescription,
   AlertDialogTitle,
   AlertDialogTrigger,
   ScrollArea,
@@ -40,6 +41,7 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
         </div>
       </AlertDialogTrigger>
       <AlertDialogContent>
+        <AlertDialogDescription className="sr-only"></AlertDialogDescription>
         <ScrollArea className="relative">
           <div className={styles.content}>
             <div className={styles.content__left}>

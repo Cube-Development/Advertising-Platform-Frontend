@@ -3,6 +3,7 @@ import {
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
+  AlertDialogDescription,
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@shared/ui";
@@ -24,6 +25,7 @@ export const SeeComplaint: FC<ChooseComplaintProps> = ({ id, ChooseBtn }) => {
         <ArrowLongHorizontalIcon className="icon__grey" />
       </AlertDialogTrigger>
       <AlertDialogContent className={styles.content}>
+        <AlertDialogDescription className="sr-only"></AlertDialogDescription>
         <AlertDialogTitle className="sr-only"></AlertDialogTitle>
         <div className={styles.top}>
           <div className={styles.close}>

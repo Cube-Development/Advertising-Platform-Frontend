@@ -17,6 +17,7 @@ import {
   AlertDialog,
   AlertDialogCancel,
   AlertDialogContent,
+  AlertDialogDescription,
   AlertDialogTitle,
   AlertDialogTrigger,
   DialogTitle,
@@ -134,6 +135,7 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
               )}
             </AlertDialogTrigger>
             <AlertDialogContent>
+              <AlertDialogDescription className="sr-only"></AlertDialogDescription>
               <div className={styles.content__wrapper}>
                 <div className={styles.top}>
                   <AlertDialogTitle className={styles.title}>

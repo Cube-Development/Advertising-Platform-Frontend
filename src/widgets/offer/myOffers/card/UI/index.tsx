@@ -131,7 +131,8 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter }) => {
             <div className={styles.card__active__buttons}>
               <SeePost post={post!} />
               <div
-                className={`${CheckDate(typeof card?.publish_date === "object" ? card?.publish_date.date_to : card?.publish_date) ? "" : "deactive"}`}
+                // className={`${CheckDate(typeof card?.publish_date === "object" ? card?.publish_date.date_to : card?.publish_date) ? "" : "deactive"}`}
+                className={`${CheckDate(typeof card?.publish_date === "object" ? card?.publish_date.date_to : card?.publish_date) ? "" : ""}`}
               >
                 <SendLink order_id={card.id} />
               </div>

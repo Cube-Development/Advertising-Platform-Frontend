@@ -12,6 +12,7 @@ import {
   AlertDialog,
   AlertDialogAction,
   AlertDialogContent,
+  AlertDialogDescription,
   AlertDialogTitle,
   AlertDialogTrigger,
   MyButton,
@@ -37,6 +38,7 @@ export const SeePost: FC<SeePostProps> = ({ post }) => {
       <AlertDialogContent
         className={`${styles.content} bg-transparent border-0`}
       >
+        <AlertDialogDescription className="sr-only"></AlertDialogDescription>
         <AlertDialogTitle className="sr-only"></AlertDialogTitle>
         <div className="relative">
           <AlertDialogAction>
