@@ -56,6 +56,10 @@ export const ChannelCardMatch = ({ match }: { match?: number }) => {
       if (currentProgress < match!) {
         setCurrentProgress((prev) => Math.min(prev + 3, match!)); // Плавное увеличение прогресса
         animationFrameId = requestAnimationFrame(animateProgress);
+      } else if (currentProgress > match!) {
+        // setCurrentProgress(match!);
+        setCurrentProgress((prev) => Math.max(prev - 3, match!));
+        animationFrameId = requestAnimationFrame(animateProgress);
       }
     };
 

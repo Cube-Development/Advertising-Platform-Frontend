@@ -1,8 +1,3 @@
-import { CircleX, FileIcon, InfoIcon, Loader } from "lucide-react";
-import { FC, useEffect } from "react";
-import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import {
   advManagerProjectStatusFilter,
   ContentType,
@@ -48,6 +43,11 @@ import {
   useToast,
 } from "@shared/ui";
 import { getFileExtension } from "@shared/utils";
+import { CircleX, FileIcon, InfoIcon, Loader } from "lucide-react";
+import { FC, useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
 
 interface BuyTarifProps {
@@ -76,12 +76,10 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
 
   const { setValue, watch, reset } = useForm<IBuyTariffForm>({
     defaultValues: {
-      //back data
       tariff_ident: tarif,
       comment: "",
       links: [],
       attached_files: [],
-      // front data
       url: "",
       files: [],
       dragActive: false,
@@ -116,9 +114,9 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (e.target.files && e.target.files[0]) {
-      setValue(tarifData.files, [...e.target.files]);
+      setValue(tarifData.files, [e.target.files[0]]);
       try {
-        await uploadFilesAndMedia([...e.target.files]);
+        await uploadFilesAndMedia([e.target.files[0]]);
       } finally {
         console.log("finally buy tarif component");
       }
@@ -140,11 +138,16 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
     setValue(tarifData.dragActive, false);
   };
 
-  const handleDrop = function (e: React.DragEvent<HTMLInputElement>) {
+  const handleDrop = async (e: React.DragEvent<HTMLInputElement>) => {
     e.preventDefault();
     setValue(tarifData.dragActive, false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
-      setValue(tarifData.files, [...e.dataTransfer.files]);
+      setValue(tarifData.files, [e.dataTransfer.files[0]]);
+      try {
+        await uploadFilesAndMedia([e.dataTransfer.files[0]]);
+      } finally {
+        console.log("finally buy tarif component");
+      }
     }
   };
 
