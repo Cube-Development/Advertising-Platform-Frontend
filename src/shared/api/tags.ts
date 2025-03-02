@@ -1,6 +1,7 @@
 export const USER_DATA = "USER_DATA";
 export const CART_PUB = "CART_PUB";
 export const CART = "CART";
+export const CART_MANAGER = "CART_MANAGER";
 export const CATALOG = "CATALOG";
 export const RECOMMEND_CARDS = "RECOMMEND_CARDS";
 export const BLOGGER_CHANNELS = "BLOGGER_CHANNELS";

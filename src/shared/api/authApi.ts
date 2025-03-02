@@ -12,6 +12,7 @@ import {
   BLOGGER_CHANNELS,
   BLOGGER_OFFERS,
   CART,
+  CART_MANAGER,
   CART_PUB,
   CATALOG,
   CHAT,
@@ -33,6 +34,7 @@ export const authApi = createApi({
   endpoints: () => ({}),
   tagTypes: [
     CART,
+    CART_MANAGER,
     CATALOG,
     RECOMMEND_CARDS,
     BLOGGER_CHANNELS,

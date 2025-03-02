@@ -58,6 +58,12 @@
     background: var(--Personal-colors-Green);
   }
 
+  &__green__outline {
+    background: var(--Personal-colors-White);
+    color: var(--Personal-colors-Green);
+    box-shadow: 0px 1px 4px 0px var(--Personal-colors-Green);
+  }
+
   &__grey {
     color: var(--Personal-colors-White);
     background: var(--Personal-colors-Grey);
