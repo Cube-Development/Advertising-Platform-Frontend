@@ -57,10 +57,19 @@
   .textarea {
     resize: none;
     outline: none;
-    font-size: 14px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+
+    border: 2px solid var(--Card-separator);
+    border-radius: 10px;
+    padding: 10px;
+    transition: border-color 0.3s ease;
+
+    &:focus {
+      border-color: var(--Personal-colors-main);
+    }
 
     @media (max-width: 768px) {
       font-size: 12px;

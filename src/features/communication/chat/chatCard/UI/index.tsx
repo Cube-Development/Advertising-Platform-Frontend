@@ -24,10 +24,9 @@ export const ChatCard: FC<ChatCardProps> = ({ card, isActive }) => {
     // return `<p>${cleanedMessage}</p>`;
     return cleanedMessage;
   };
-
   return (
     <div
-      className={`${styles.channel} ${isActive ? styles.active : ""} ${card?.unread_count ? styles.unread : ""}`}
+      className={`${styles.channel} ${isActive ? styles.active : card?.unread_count ? styles.unread : ""}`}
     >
       <div className={styles.info}>
         <div className={styles.logo}>

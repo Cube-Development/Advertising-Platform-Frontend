@@ -4,8 +4,12 @@ import {
   PostTypesNum,
 } from "@entities/platform";
 import { sizeTypes } from "@shared/ui";
-import { ContentType, desireStatus, orderStatus } from "../config";
-import { ITgButton } from "./createPost";
+import {
+  ContentType,
+  desireStatus,
+  orderStatus,
+  projectStatus,
+} from "../config";
 
 export interface IManagerProjects {
   page: number;
@@ -52,7 +56,7 @@ export interface IManagerProjectCard {
   views: number;
   budget: number;
   remainder?: number;
-  is_request_approve?: boolean;
+  is_request_approve?: projectStatus;
   completed?: number;
   canceled_rejected?: number;
   wait?: number;

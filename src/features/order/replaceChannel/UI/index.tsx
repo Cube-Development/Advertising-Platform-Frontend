@@ -2,6 +2,7 @@ import {
   desireStatus,
   IAdvProjectSubcard,
   IChangeOrder,
+  projectStatus,
   useChangeOrderMutation,
 } from "@entities/project";
 import { CancelIcon2 } from "@shared/assets";
@@ -32,13 +33,10 @@ import styles from "./styles.module.scss";
 
 export interface ReplaceChannelProps {
   order: IAdvProjectSubcard;
-  is_request_approve: boolean;
+  status: projectStatus;
 }
 
-export const ReplaceChannel: FC<ReplaceChannelProps> = ({
-  order,
-  is_request_approve,
-}) => {
+export const ReplaceChannel: FC<ReplaceChannelProps> = ({ order, status }) => {
   const { t } = useTranslation();
   const screen = useWindowWidth();
   const { toast } = useToast();
@@ -91,7 +89,7 @@ export const ReplaceChannel: FC<ReplaceChannelProps> = ({
                 haveDesire ? "button__green__outline" : "button__white"
               }
               className={`truncate ${styles.trigger}`}
-              disabled={!haveDesire && is_request_approve}
+              disabled={!haveDesire && status === projectStatus.approved}
             >
               {haveDesire
                 ? t(`order_btn.channel.advertiser.process`)
@@ -150,7 +148,7 @@ export const ReplaceChannel: FC<ReplaceChannelProps> = ({
                 haveDesire ? "button__green__outline" : "button__white"
               }
               className={`truncate ${styles.trigger}`}
-              disabled={!haveDesire && is_request_approve}
+              disabled={!haveDesire && status === projectStatus.approved}
             >
               {haveDesire
                 ? t(`order_btn.channel.advertiser.process`)

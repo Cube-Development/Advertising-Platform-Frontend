@@ -9,6 +9,7 @@ import {
   orderStatus,
   orderStatusChat,
   platformToIcon,
+  projectStatus,
   projectTypesFilter,
   useGetPostQuery,
 } from "@entities/project";
@@ -290,21 +291,27 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
               <div className={styles.subcard__agreed}>
                 <div className={styles.content}>
                   <p>
-                    {haveDesire
-                      ? t(`orders_advertiser.order_status.agreed.title.edit`)
-                      : t(
-                          `orders_advertiser.order_status.agreed.title.default`,
-                        )}
+                    {card?.is_request_approve === projectStatus.approved
+                      ? t(
+                          `orders_advertiser.order_status.agreed.title.approved`,
+                        )
+                      : haveDesire
+                        ? t(
+                            `orders_advertiser.order_status.agreed.title.changed`,
+                          )
+                        : t(
+                            `orders_advertiser.order_status.agreed.title.request_approve`,
+                          )}
                   </p>
                   <div className={styles.buttons__wrapper}>
                     <div className={styles.buttons}>
                       <ReplaceChannelBtn
                         order={subcard}
-                        is_request_approve={!!card?.is_request_approve}
+                        status={card?.is_request_approve!}
                       />
                       <ReplacePostBtn
                         order={subcard}
-                        is_request_approve={!!card?.is_request_approve}
+                        status={card?.is_request_approve!}
                       />
                     </div>
                     <SeePostBtn post={post!} />
@@ -502,19 +509,23 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
             <div className={styles.subcard__agreed}>
               <div className={styles.content}>
                 <p>
-                  {haveDesire
-                    ? t(`orders_advertiser.order_status.agreed.title.edit`)
-                    : t(`orders_advertiser.order_status.agreed.title.default`)}
+                  {card?.is_request_approve === projectStatus.approved
+                    ? t("orders_advertiser.order_status.agreed.title.approved")
+                    : haveDesire
+                      ? t(`orders_advertiser.order_status.agreed.title.changed`)
+                      : t(
+                          `orders_advertiser.order_status.agreed.title.request_approve`,
+                        )}
                 </p>
                 <div className={styles.buttons__wrapper}>
                   <div className={styles.buttons}>
                     <ReplaceChannelBtn
                       order={subcard}
-                      is_request_approve={!!card?.is_request_approve}
+                      status={card?.is_request_approve!}
                     />
                     <ReplacePostBtn
                       order={subcard}
-                      is_request_approve={!!card?.is_request_approve}
+                      status={card?.is_request_approve!}
                     />
                   </div>
                   <SeePostBtn post={post!} />

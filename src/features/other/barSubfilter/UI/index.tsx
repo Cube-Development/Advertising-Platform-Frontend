@@ -51,8 +51,8 @@ interface BarSubfilterProps {
   changeComplaintsFilter?: (filter: adminComplaintTypesFilter) => void;
   fileFilter?: addFileFilter;
   changeFileFilter?: (filter: addFileFilter) => void;
-  // badge?: (number | string)[];
   badge?: { status: string; count: number }[];
+  isFixedColumns?: boolean;
 }
 
 interface IFilterOption {
@@ -83,6 +83,7 @@ export const BarSubfilter: FC<BarSubfilterProps> = ({
   fileFilter,
   changeFileFilter,
   badge,
+  isFixedColumns = false,
 }) => {
   const { t } = useTranslation();
   const role = Cookies.get(cookiesTypes.role)
@@ -149,11 +150,7 @@ export const BarSubfilter: FC<BarSubfilterProps> = ({
   return (
     <div className={styles.types}>
       <ul
-        className={
-          page === pageFilter.catalog || pageFilter.createOrderFiles
-            ? styles.catalog
-            : styles.profile
-        }
+        className={`${styles.common} ${isFixedColumns ? styles.isFixed : ""}`}
         style={
           {
             "--translateIndex": `${options.findIndex((option) => filter === option.type)}`,
@@ -164,10 +161,10 @@ export const BarSubfilter: FC<BarSubfilterProps> = ({
         {options.map((option, index) => (
           <li
             key={index}
-            className={filter === option.type ? styles.active : ""}
+            className={` ${filter === option.type ? styles.active : ""}`}
             onClick={() => toggleBar(option)}
           >
-            {t(option.name)}
+            <p className="truncate gradient_color">{t(option.name)}</p>
             {!!badge &&
               !!badge?.find((el) => el?.status === option?.type)?.count && (
                 <div className={styles.badge}>

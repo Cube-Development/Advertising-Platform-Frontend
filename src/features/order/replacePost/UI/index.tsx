@@ -2,6 +2,7 @@ import {
   desireStatus,
   IAdvProjectSubcard,
   IChangeOrder,
+  projectStatus,
   useChangeOrderMutation,
 } from "@entities/project";
 import { CancelIcon2 } from "@shared/assets";
@@ -32,13 +33,10 @@ import styles from "./styles.module.scss";
 
 export interface ReplacePostProps {
   order: IAdvProjectSubcard;
-  is_request_approve: boolean;
+  status: projectStatus;
 }
 
-export const ReplacePost: FC<ReplacePostProps> = ({
-  order,
-  is_request_approve,
-}) => {
+export const ReplacePost: FC<ReplacePostProps> = ({ order, status }) => {
   const { t } = useTranslation();
   const screen = useWindowWidth();
   const { toast } = useToast();
@@ -90,7 +88,7 @@ export const ReplacePost: FC<ReplacePostProps> = ({
                 haveDesire ? "button__green__outline" : "button__white"
               }
               className={styles.trigger}
-              disabled={!haveDesire && is_request_approve}
+              disabled={!haveDesire && status === projectStatus.approved}
             >
               {haveDesire
                 ? t(`order_btn.post.advertiser.process`)
@@ -149,7 +147,7 @@ export const ReplacePost: FC<ReplacePostProps> = ({
                 haveDesire ? "button__green__outline" : "button__white"
               }
               className={styles.trigger}
-              disabled={!haveDesire && is_request_approve}
+              disabled={!haveDesire && status === projectStatus.approved}
             >
               {haveDesire
                 ? t(`order_btn.post.advertiser.process`)

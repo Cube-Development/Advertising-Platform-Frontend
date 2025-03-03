@@ -15,11 +15,16 @@
   }
 
   &.active {
-    border-radius: 10px;
     background: var(--Gradients-Gradient-1);
-    p,
-    span {
+    .title,
+    .text {
       color: var(--Personal-colors-White);
+    }
+    .date {
+      span,
+      p {
+        color: var(--Personal-colors-White);
+      }
     }
   }
 

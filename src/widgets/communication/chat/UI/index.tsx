@@ -74,6 +74,9 @@ export const Chat: FC<IChatProps> = ({
     chatTypesFilter.blogger,
   );
 
+  const [newOrderId, setNewOrderId] = useState<string | null>(null);
+  const [newProjectId, setNewProjectId] = useState<string | null>(null);
+
   // All chats
   const { data: chatsOrder } = useGetOrderChatsQuery({ role: role });
 
@@ -103,7 +106,18 @@ export const Chat: FC<IChatProps> = ({
   const { data: chatProjectById, isLoading: isLoadingProject } =
     useGetProjectChatByIdQuery(
       { project_id: projectId! },
-      { skip: !isOpen || !projectId || !!currentChatProject },
+      {
+        skip: !isOpen || !projectId || !!currentChatProject,
+      },
+    );
+
+  const { data: newChatOrderById, isLoading: isLoadingNewOrder } =
+    useGetOrderChatByIdQuery({ order_id: newOrderId! }, { skip: !newOrderId });
+
+  const { data: newChatProjectById, isLoading: isLoadingNewProject } =
+    useGetProjectChatByIdQuery(
+      { project_id: newProjectId! },
+      { skip: !newProjectId },
     );
 
   const selectedChats =
@@ -147,8 +161,26 @@ export const Chat: FC<IChatProps> = ({
     setIsOpen(false);
   };
 
+  const checkOrderExist = (messageOrderId: string) => {
+    const condition = !chatsOrder?.find(
+      (item) => item?.order_id === messageOrderId,
+    );
+    if (condition) {
+      setNewOrderId(messageOrderId);
+    }
+  };
+  const checkProjectExist = (messageProjectId: string) => {
+    const condition = !chatsProject?.find(
+      (item) => item?.project_id === messageProjectId,
+    );
+    if (condition) {
+      setNewProjectId(messageProjectId);
+    }
+  };
+
   const handleNewMessage = (message: IMessageNewSocket) => {
     if (message?.order_id && chatsOrder) {
+      checkOrderExist(message?.order_id);
       const updatedChat = chatsOrder?.find(
         (chat) => chat?.order_id === message?.order_id,
       );
@@ -194,6 +226,7 @@ export const Chat: FC<IChatProps> = ({
         }
       }
     } else if (message?.project_id && chatsProject) {
+      checkProjectExist(message?.project_id);
       const updatedChat = chatsProject?.find(
         (chat) => chat?.project_id === message?.project_id,
       );
@@ -335,6 +368,42 @@ export const Chat: FC<IChatProps> = ({
     }
   }, [isOpen, isLoadingOrder, isLoadingProject]);
 
+  useEffect(() => {
+    if (newChatOrderById) {
+      dispatch(
+        chatAPI.util.updateQueryData(
+          "getOrderChats",
+          { role: role },
+          (draft) => {
+            const newChatOrder = [
+              newChatOrderById,
+              ...draft.filter((chat) => chat?.order_id !== newOrderId),
+            ];
+            draft.splice(0, draft.length, ...newChatOrder);
+          },
+        ),
+      );
+    }
+  }, [isLoadingNewOrder]);
+
+  useEffect(() => {
+    if (newChatProjectById) {
+      dispatch(
+        chatAPI.util.updateQueryData(
+          "getProjectChats",
+          { role: role },
+          (draft) => {
+            const newChatProject = [
+              newChatProjectById,
+              ...draft.filter((chat) => chat?.project_id !== newProjectId),
+            ];
+            draft.splice(0, draft.length, ...newChatProject);
+          },
+        ),
+      );
+    }
+  }, [isLoadingNewProject]);
+
   OrderMessageNewChat(handleNewMessage);
   OrderReadMessage(handleReadMessage);
 
@@ -358,6 +427,19 @@ export const Chat: FC<IChatProps> = ({
       }
     }
   };
+
+  const badge =
+    role === roles.advertiser
+      ? [
+          { status: chatTypesFilter.blogger, count: countOrderMessage },
+          { status: chatTypesFilter.manager, count: countProjectMessage },
+        ]
+      : role === roles.manager
+        ? [
+            { status: chatTypesFilter.blogger, count: countOrderMessage },
+            { status: chatTypesFilter.advertiser, count: countProjectMessage },
+          ]
+        : [];
 
   return (
     <div className={styles.wrapper}>
@@ -396,7 +478,8 @@ export const Chat: FC<IChatProps> = ({
                     resetValues={handle}
                     chatFilter={chatFilter}
                     changeChatFilter={setChatFilter}
-                    // badge={[countOrderMessage, countProjectMessage]}
+                    badge={badge}
+                    isFixedColumns={true}
                   />
                 </div>
               )}
@@ -515,7 +598,8 @@ export const Chat: FC<IChatProps> = ({
                       resetValues={handle}
                       chatFilter={chatFilter}
                       changeChatFilter={setChatFilter}
-                      // badge={[countOrderMessage, countProjectMessage]}
+                      badge={badge}
+                      isFixedColumns={true}
                     />
                   </div>
                 )}

@@ -28,31 +28,7 @@
     }
   }
 
-  .profile {
-    display: flex; /* Используем flex контейнер */
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-    font-style: normal;
-    font-weight: 600;
-    line-height: normal;
-    line-height: 1;
-    background: var(--Gradients-Gradient-1);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-
-    li {
-      text-align: center;
-      padding: 20px 0;
-      cursor: pointer;
-      white-space: nowrap;
-      flex: 1; /* Равномерно распределить пространство между элементами */
-      position: relative;
-    }
-  }
-
-  .catalog {
+  .common {
     display: grid;
     grid-template: 1fr / repeat(var(--lengthFilter), 1fr);
     position: relative;
@@ -64,6 +40,13 @@
     line-height: normal;
     line-height: 1;
     z-index: 1;
+
+    &.isFixed {
+      grid-template: 1fr / repeat(
+          var(--lengthFilter),
+          calc(100% / var(--lengthFilter))
+        );
+    }
 
     @media (max-width: 576px) {
       font-size: 10px;
@@ -85,16 +68,12 @@
     }
 
     .active {
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: var(--Personal-colors-White);
-      background-clip: text;
-      color: var(--Personal-colors-White);
+      p {
+        -webkit-text-fill-color: var(--Personal-colors-White);
+        color: var(--Personal-colors-White) !important;
+      }
     }
     li {
-      background: var(--Gradients-Gradient-1);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
       text-align: center;
       padding: 20px 10px;
       cursor: pointer;

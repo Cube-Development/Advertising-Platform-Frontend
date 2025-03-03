@@ -159,6 +159,8 @@
   }
 
   .right {
+    overflow: auto;
+
     .items {
       display: grid;
       grid-auto-flow: row;
