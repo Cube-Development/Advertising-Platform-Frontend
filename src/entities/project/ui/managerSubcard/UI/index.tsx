@@ -17,6 +17,7 @@ import {
   managerProjectStatusFilter,
   orderStatus,
   orderStatusChat,
+  platformToIcon,
   projectStatus,
   useGetPostQuery,
 } from "@entities/project";
@@ -102,6 +103,11 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
       <div
         className={`${styles.subcard} ${statusFilter === managerProjectStatusFilter.active ? styles.grid__active : styles.grid}`}
       >
+        <div className={styles.platform__icon}>
+          {subcard?.platform && subcard?.platform in platformToIcon
+            ? platformToIcon[subcard?.platform!]()
+            : "..."}
+        </div>
         <div className={styles.subcard__left}>
           <div className={styles.subcard__left__description}>
             <div className={styles.subcard__left__description__logo}>
