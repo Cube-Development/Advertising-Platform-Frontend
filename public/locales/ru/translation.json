@@ -2032,7 +2032,8 @@
     },
 
     "websoket": {
-      "new_message": "У вас новое уведомление"
+      "new_message": "У вас новое сообщение",
+      "new_notification": "У вас новое уведомление"
     },
     "auth": {
       "token": {
