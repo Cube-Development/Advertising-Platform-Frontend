@@ -1,1 +1,1 @@
-export * from "./UI copy";
+export * from "./UI";
