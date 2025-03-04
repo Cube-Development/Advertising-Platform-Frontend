@@ -13,15 +13,6 @@
   src: url("/fonts/TT Runs Trial Variable Roman.ttf") format("truetype");
 }
 
-html {
-  scroll-behavior: smooth;
-  overflow: hidden;
-}
-
-body {
-  overflow: hidden;
-}
-
 :root {
   // background: rgba(71, 114, 230, 1);
 }
@@ -29,7 +20,6 @@ body {
 body {
   font-family: "TT Runs Trial", "Montserrat Alternates", "Montserrat",
     sans-serif;
-  overflow: hidden;
 
   &::-webkit-scrollbar {
     display: none;
