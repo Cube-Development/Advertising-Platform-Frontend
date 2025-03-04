@@ -1,14 +1,5 @@
 import { IChatProps } from "@entities/communication";
 import {
-  DisplayFeed,
-  DisplayShorts,
-  DisplayStories,
-  DisplayTelegram,
-  DisplayVideos,
-  PostTypesNum,
-  platformTypesNum,
-} from "@entities/platform";
-import {
   GetPostRes,
   IManagerProjectCard,
   IManagerProjectSubcard,
@@ -38,15 +29,8 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-  AlertDialog,
-  AlertDialogAction,
-  AlertDialogContent,
-  AlertDialogDescription,
-  AlertDialogTitle,
-  AlertDialogTrigger,
   useToast,
 } from "@shared/ui";
-import { X } from "lucide-react";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -99,7 +83,9 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div
+      className={`${styles.wrapper} ${statusFilter === managerProjectStatusFilter.active ? "" : styles.no__chat}`}
+    >
       <div
         className={`${styles.subcard} ${statusFilter === managerProjectStatusFilter.active ? styles.grid__active : styles.grid}`}
       >
@@ -423,7 +409,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
       )}
       {screen <= BREAKPOINT.MD && (
         <>
-          {/* {statusFilter === managerProjectStatusFilter.active && (
+          {statusFilter === managerProjectStatusFilter.active && (
             <div
               className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : "deactive"}`}
             >
@@ -433,19 +419,9 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
                 isFull={true}
               />
             </div>
-          )} */}
+          )}
 
-          {statusFilter === managerProjectStatusFilter.active ? (
-            <div
-              className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : "deactive"}`}
-            >
-              <ChannelChatBtn
-                orderId={subcard?.id}
-                toRole={roles.blogger}
-                isFull={true}
-              />
-            </div>
-          ) : subcard?.desire?.length ? (
+          {subcard?.desire?.length ? (
             <div className={styles.subcard__posted}>
               <div className={styles.subcard__posted__title}>
                 <p>{t(`orders_manager.order_status.comment.title`)}</p>
@@ -471,16 +447,11 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
             subcard?.api_status === orderStatus.rejected ? (
             <div className={styles.subcard__cancel}>
               {statusFilter === managerProjectStatusFilter.completed ? (
-                <p>{t(`orders_advertiser.order_status.rejected.title2`)}</p>
+                <p>{t(`orders_manager.order_status.rejected.title2`)}</p>
               ) : (
                 <>
-                  <p>{t(`orders_advertiser.order_status.rejected.title`)}</p>
-                  {/* <span>
-                    {typeFilter === projectTypesFilter.managerProject
-                      ? t(`orders_advertiser.order_status.rejected.text2`)
-                      : statusFilter === myProjectStatusFilter.completed ||
-                        t(`orders_advertiser.order_status.rejected.text`)}
-                  </span> */}
+                  <p>{t(`orders_manager.order_status.rejected.title`)}</p>
+                  <span>{t(`orders_manager.order_status.rejected.text`)}</span>
                 </>
               )}
             </div>
@@ -511,69 +482,9 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
             </div>
           ) : subcard?.api_status === orderStatus.in_progress ? (
             <div className={styles.subcard__accepted}>
-              <p>{t(`orders_advertiser.order_status.accepted.title`)}</p>
-              <AlertDialog>
-                <AlertDialogTrigger asChild>
-                  <div>{/* <SeeBtn /> */} 2</div>
-                </AlertDialogTrigger>
-                <AlertDialogContent
-                  className={`max-w-[300px] gap-0 bg-transparent grid items-center justify-center shadow-none border-0 ${
-                    screen > 992
-                      ? "w-[25vw]"
-                      : screen > 768
-                        ? "w-[30vw]"
-                        : screen > 576
-                          ? "w-[35vw]"
-                          : screen > 475
-                            ? "w-[50vw]"
-                            : "w-[60vw]"
-                  }`}
-                >
-                  <AlertDialogDescription className="sr-only"></AlertDialogDescription>
-                  <AlertDialogTitle className="sr-only"></AlertDialogTitle>
-                  <div className="relative">
-                    <AlertDialogAction>
-                      <X
-                        className={`absolute ${screen > 475 ? "-right-10 -top-5" : "-right-8 -top-4"} w-[30px] rounded-full p-2 bg-white cursor-pointer`}
-                      />
-                    </AlertDialogAction>
-                    {post?.platform === platformTypesNum.telegram && (
-                      <DisplayTelegram
-                        post={post}
-                        platformId={platformTypesNum.telegram}
-                      />
-                    )}
-                    {post?.platform === platformTypesNum.instagram &&
-                      post?.post_type === PostTypesNum.feed && (
-                        <DisplayFeed
-                          post={post}
-                          platformId={platformTypesNum.instagram}
-                        />
-                      )}
-                    {post?.platform === platformTypesNum.instagram &&
-                      post?.post_type === PostTypesNum.FullHd_vertical && (
-                        <DisplayStories
-                          post={post}
-                          platformId={platformTypesNum.instagram}
-                        />
-                      )}
-                    {post?.platform === platformTypesNum.youtube &&
-                      post?.post_type === PostTypesNum.FullHd_vertical && (
-                        <DisplayShorts
-                          post={post}
-                          platformId={platformTypesNum.youtube}
-                        />
-                      )}
-                    {post?.platform === platformTypesNum.youtube &&
-                      post?.post_type === PostTypesNum.FullHd_horizontal && (
-                        <DisplayVideos
-                          post={post}
-                          platformId={platformTypesNum.youtube}
-                        />
-                      )}
-                  </div>
-                </AlertDialogContent>
-              </AlertDialog>
+              <p>{t(`orders_manager.order_status.accepted.title`)}</p>
+              <span>{t(`orders_manager.order_status.accepted.text`)}</span>
+              <SeePostBtn post={post!} />
             </div>
           ) : subcard?.api_status === orderStatus.moderation ? (
             <div className={styles.subcard__moderation}>
@@ -590,69 +501,8 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
           ) : subcard?.api_status === orderStatus.wait ? (
             <div className={styles.subcard__waiting}>
               <div>
-                <p>{t(`orders_advertiser.order_status.waiting.title`)}</p>
-                <AlertDialog>
-                  <AlertDialogTrigger asChild>
-                    <div>{/* <SeeBtn /> */}2</div>
-                  </AlertDialogTrigger>
-                  <AlertDialogContent
-                    className={`max-w-[300px] gap-0 bg-transparent grid items-center justify-center shadow-none ${
-                      screen > 992
-                        ? "w-[25vw]"
-                        : screen > 768
-                          ? "w-[30vw]"
-                          : screen > 576
-                            ? "w-[35vw]"
-                            : screen > 475
-                              ? "w-[50vw]"
-                              : "w-[60vw]"
-                    }`}
-                  >
-                    <AlertDialogDescription className="sr-only"></AlertDialogDescription>
-                    <AlertDialogTitle className="sr-only"></AlertDialogTitle>
-                    <div className="relative">
-                      <AlertDialogAction>
-                        <X
-                          className={`absolute ${screen > 475 ? "-right-10 -top-5" : "-right-8 -top-4"} w-[30px] rounded-full p-2 bg-white cursor-pointer`}
-                        />
-                      </AlertDialogAction>
-                      {post?.platform === platformTypesNum.telegram && (
-                        <DisplayTelegram
-                          post={post}
-                          platformId={platformTypesNum.telegram}
-                        />
-                      )}
-                      {post?.platform === platformTypesNum.instagram &&
-                        post?.post_type === PostTypesNum.feed && (
-                          <DisplayFeed
-                            post={post}
-                            platformId={platformTypesNum.instagram}
-                          />
-                        )}
-                      {post?.platform === platformTypesNum.instagram &&
-                        post?.post_type === PostTypesNum.FullHd_vertical && (
-                          <DisplayStories
-                            post={post}
-                            platformId={platformTypesNum.instagram}
-                          />
-                        )}
-                      {post?.platform === platformTypesNum.youtube &&
-                        post?.post_type === PostTypesNum.FullHd_vertical && (
-                          <DisplayShorts
-                            post={post}
-                            platformId={platformTypesNum.youtube}
-                          />
-                        )}
-                      {post?.platform === platformTypesNum.youtube &&
-                        post?.post_type === PostTypesNum.FullHd_horizontal && (
-                          <DisplayVideos
-                            post={post}
-                            platformId={platformTypesNum.youtube}
-                          />
-                        )}
-                    </div>
-                  </AlertDialogContent>
-                </AlertDialog>
+                <p>{t(`orders_manager.order_status.waiting.title`)}</p>
+                <SeePostBtn post={post!} />
               </div>
             </div>
           ) : subcard?.api_status === orderStatus.order_review ? (
