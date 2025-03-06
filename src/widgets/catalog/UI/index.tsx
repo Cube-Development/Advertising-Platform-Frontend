@@ -6,6 +6,7 @@ import {
   getCatalogReq,
   ICart,
   ICatalogChannel,
+  sortingFilter,
   sortingTypes,
   useAddToCommonCartMutation,
   useAddToManagerCartMutation,
@@ -378,6 +379,20 @@ export const CatalogBlock: FC = () => {
       );
     }
   };
+
+  useEffect(() => {
+    if (
+      (formState?.filter?.age ||
+        formState?.filter?.business ||
+        formState?.filter?.region ||
+        formState?.filter?.language ||
+        formState?.filter?.male ||
+        formState?.filter?.female) &&
+      !formState?.sort
+    ) {
+      setValue("sort", sortingFilter.match);
+    }
+  }, [formState?.filter]);
 
   return (
     <div className="container">

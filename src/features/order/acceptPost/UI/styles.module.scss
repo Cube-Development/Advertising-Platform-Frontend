@@ -1,8 +1,11 @@
 .button {
   padding: 0px;
   border-radius: 8px;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 1;
+
+  big {
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1;
+  }
 }

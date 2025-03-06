@@ -55,7 +55,7 @@ export const AcceptPost: FC<IOrderFeature> = ({ order_id }) => {
           height={20}
         />
       ) : (
-        <p>{t(`order_btn.accept`)}</p>
+        <big>{t(`order_btn.accept`)}</big>
       )}
     </MyButton>
   );

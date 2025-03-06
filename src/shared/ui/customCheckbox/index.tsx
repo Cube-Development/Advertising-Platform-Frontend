@@ -5,11 +5,13 @@ import styles from "./styles.module.scss";
 interface CustomCheckboxProps extends InputHTMLAttributes<HTMLButtonElement> {
   isSelected?: boolean;
   handleChange?: () => void;
+  handleChangeSelected?: (selected: boolean) => void;
 }
 
 export const CustomCheckbox: FC<CustomCheckboxProps> = ({
   isSelected = false,
   handleChange,
+  handleChangeSelected,
   ...props
 }) => {
   const [checked, setChecked] = useState<boolean>(false);
@@ -21,6 +23,7 @@ export const CustomCheckbox: FC<CustomCheckboxProps> = ({
   const handleOnClick = () => {
     setChecked(!checked);
     handleChange && handleChange();
+    handleChangeSelected && handleChangeSelected(!checked);
   };
 
   return (

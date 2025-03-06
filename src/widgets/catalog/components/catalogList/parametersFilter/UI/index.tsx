@@ -393,6 +393,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
                     defaultValues={formState?.filter?.male}
                     isRow={true}
                     iconsAboveSlider={true}
+                    showResetCheckbox={true}
                   />
                   <SelectOptions
                     data={formState?.filter}
