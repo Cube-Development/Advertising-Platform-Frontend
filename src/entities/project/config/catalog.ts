@@ -54,6 +54,12 @@ export const platformToIcon: any = {
 
 export const sortingTypes = [
   {
+    name: "sorting.match",
+    type: sortingFilter.match,
+    img: SortDownIcon,
+    id: 8,
+  },
+  {
     name: "sorting.views",
     type: sortingFilter.views_down,
     img: SortDownIcon,
@@ -100,12 +106,6 @@ export const sortingTypes = [
     type: sortingFilter.er,
     img: SortDownIcon,
     id: 7,
-  },
-  {
-    name: "sorting.match",
-    type: sortingFilter.match,
-    img: SortDownIcon,
-    id: 8,
   },
   {
     name: "sorting.rate",
