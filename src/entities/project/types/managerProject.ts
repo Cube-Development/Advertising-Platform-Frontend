@@ -106,6 +106,7 @@ export interface IManagerProjectSubcard {
   male: number;
   female: number;
   desire?: IDesire[];
+  platform: platformTypesNum;
 }
 
 export interface IDesire {

@@ -9,6 +9,7 @@ import {
   Drawer,
   DrawerContent,
   DrawerTrigger,
+  MyButton,
   ToastAction,
   useToast,
 } from "@shared/ui";
@@ -60,10 +61,10 @@ export const RejectPost: FC<IOrderFeature> = ({ order_id }) => {
     <>
       {screen >= BREAKPOINT.MD ? (
         <Dialog open={open} onOpenChange={setOpen}>
-          <DialogTrigger>
-            <small className={styles.button}>
-              {t(`order_btn.reject.btn_title`)}
-            </small>
+          <DialogTrigger asChild>
+            <MyButton buttons_type="button__white" className={styles.button}>
+              <big>{t(`order_btn.reject.btn_title`)}</big>
+            </MyButton>
           </DialogTrigger>
           <DialogContent>
             <DialogTitle className="sr-only"></DialogTitle>
@@ -112,9 +113,9 @@ export const RejectPost: FC<IOrderFeature> = ({ order_id }) => {
       ) : (
         <Drawer open={open} onOpenChange={setOpen}>
           <DrawerTrigger asChild>
-            <small className={styles.button}>
-              {t(`order_btn.reject.btn_title`)}
-            </small>
+            <MyButton buttons_type="button__white" className={styles.button}>
+              <big>{t(`order_btn.reject.btn_title`)}</big>
+            </MyButton>
           </DrawerTrigger>
           <DrawerContent className="bottom-0 top-auto rounded-t-xl">
             <DialogTitle className="sr-only"></DialogTitle>

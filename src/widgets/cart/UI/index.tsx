@@ -151,7 +151,7 @@ export const Cart: FC = () => {
           removeFromPublicCart({ ...removeReq, guest_id: guestId })
             .unwrap()
             .then((data) => {
-              setCurrentCart(data);
+              // setCurrentCart(data);
             })
             .catch((error) => {
               toast({
@@ -165,7 +165,7 @@ export const Cart: FC = () => {
           removeFromCommonCart(removeReq)
             .unwrap()
             .then((data) => {
-              setCurrentCart(data);
+              // setCurrentCart(data);
             })
             .catch((error) => {
               toast({
@@ -179,7 +179,7 @@ export const Cart: FC = () => {
           removeFromManagerCart({ ...removeReq, project_id: projectId })
             .unwrap()
             .then((data) => {
-              setCurrentCart(data);
+              // setCurrentCart(data);
             })
             .catch((error) => {
               toast({
@@ -198,7 +198,7 @@ export const Cart: FC = () => {
           addToPublicCart({ ...addReq, guest_id: guestId })
             .unwrap()
             .then((data) => {
-              setCurrentCart(data);
+              // setCurrentCart(data);
             })
             .catch((error) => {
               toast({
@@ -212,7 +212,7 @@ export const Cart: FC = () => {
           addToCommonCart(addReq)
             .unwrap()
             .then((data) => {
-              setCurrentCart(data);
+              // setCurrentCart(data);
             })
             .catch((error) => {
               toast({
@@ -226,7 +226,7 @@ export const Cart: FC = () => {
           addToManagerCart({ ...addReq, project_id: projectId })
             .unwrap()
             .then((data) => {
-              setCurrentCart(data);
+              // setCurrentCart(data);
             })
             .catch((error) => {
               toast({

@@ -8,13 +8,29 @@
   @media (max-width: 768px) {
     padding: 0;
     border-bottom: 0;
-    grid-template: repeat(2, min-content) 1fr / 1fr;
+    grid-template: repeat(3, min-content) 1fr / 1fr;
     height: 100%;
+
+    &.no__chat {
+      grid-template: repeat(2, min-content) 1fr / 1fr;
+    }
   }
 
   .subcard {
     display: grid;
     align-items: center;
+    position: relative;
+
+    .platform__icon {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+
+      svg {
+        width: 15px;
+        height: 15px;
+      }
+    }
 
     &.grid__active {
       grid-template: 1fr / 12fr 4fr 1fr;
