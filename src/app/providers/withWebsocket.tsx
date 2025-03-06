@@ -1,4 +1,4 @@
-import { CentrifugeProvider } from "@widgets/communication";
+import { CentrifugeProvider } from "@shared/api";
 
 export const withWebsocket = (Component: React.FC) => {
   return () => (

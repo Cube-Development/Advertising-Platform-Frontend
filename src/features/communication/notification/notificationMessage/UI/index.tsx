@@ -14,8 +14,8 @@ interface NotificationMessageProps {
 export const NotificationMessage: FC<NotificationMessageProps> = ({ card }) => {
   const { t } = useTranslation();
   const title =
-    notificationsStatus.find((item) => item.type === card?.data?.method)
-      ?.name || "...";
+    notificationsStatus.find((item) => item.type === card?.method)?.name ||
+    "...";
   return (
     <div className={styles.wrapper}>
       <ScrollArea className={styles.text__wrapper}>

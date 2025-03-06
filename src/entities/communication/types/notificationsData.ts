@@ -14,11 +14,14 @@ export interface INotificationCard {
   created_date: string;
   created_time: string;
   is_read: boolean;
-  data: INotificationData;
+  data?: INotificationData;
 }
 
-interface INotificationData {
+export interface INotificationData {
+  id: string;
   text: string;
   method: notificationsTypes;
   order_id: string;
+  created_date?: string;
+  created_time?: string;
 }

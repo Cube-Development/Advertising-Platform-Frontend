@@ -15,6 +15,7 @@ import {
 import { roles } from "@entities/user";
 import { ChatCard, ChatMessages } from "@features/communication";
 import { BarSubfilter } from "@features/other";
+import { useCentrifuge } from "@shared/api";
 import {
   ArrowLongHorizontalIcon,
   CancelIcon2,
@@ -51,7 +52,6 @@ import { checkDatetime, convertUTCToLocalDateTime } from "@shared/utils";
 import { AnimatePresence, motion } from "framer-motion";
 import { FC, useEffect, useMemo, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { useCentrifuge } from "../CentrifugeContext";
 import styles from "./styles.module.scss";
 
 export const Chat: FC<IChatProps> = ({
@@ -221,7 +221,7 @@ export const Chat: FC<IChatProps> = ({
         ) {
           toast({
             variant: "default",
-            title: t("toasts.websoket.new_message"),
+            title: t("toasts.websocket.new_message"),
           });
         }
       }
@@ -269,7 +269,7 @@ export const Chat: FC<IChatProps> = ({
         ) {
           toast({
             variant: "default",
-            title: t("toasts.websoket.new_message"),
+            title: t("toasts.websocket.new_message"),
           });
         }
       }

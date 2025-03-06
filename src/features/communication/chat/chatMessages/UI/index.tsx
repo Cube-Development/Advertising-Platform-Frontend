@@ -5,7 +5,7 @@ import {
   IChatData,
   IMessageNewSocket,
   IMessageSendSocket,
-  MeesageSendType,
+  MessageSendType,
   MessageStatus,
   RecipientType,
   useGetOrderHistoryQuery,
@@ -15,6 +15,7 @@ import {
 } from "@entities/communication";
 import { DEBOUNCE } from "@entities/project";
 import { DinamicPagination } from "@features/other";
+import { useCentrifuge } from "@shared/api";
 import {
   AddIcon,
   ArrowReadIcon,
@@ -39,7 +40,6 @@ import Link from "@tiptap/extension-link";
 import Underline from "@tiptap/extension-underline";
 import { useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { useCentrifuge } from "@widgets/communication/chat";
 import { motion } from "framer-motion";
 import Cookies from "js-cookie";
 import { FC, useEffect, useRef, useState } from "react";
@@ -283,11 +283,11 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
         ...(card?.type === chatType.order
           ? {
               order_id: card?.order_id,
-              method: MeesageSendType.order_message_create,
+              method: MessageSendType.order_message_create,
             }
           : {
               project_id: card?.project_id,
-              method: MeesageSendType.project_message_create,
+              method: MessageSendType.project_message_create,
             }),
         user_id: userId,
         message: message,
