@@ -14,8 +14,8 @@ interface NotificationCardProps {
 export const NotificationCard: FC<NotificationCardProps> = ({ card }) => {
   const { t } = useTranslation();
   const title =
-    notificationsStatus.find((item) => item.type === card?.data?.method)
-      ?.name || "...";
+    notificationsStatus.find((item) => item.type === card?.method)?.name ||
+    "...";
 
   const stripHtml = (html: string) => html.replace(/<\/?[^>]+(>|$)/g, " ");
   return (
@@ -33,7 +33,7 @@ export const NotificationCard: FC<NotificationCardProps> = ({ card }) => {
           className={styles.text}
           dangerouslySetInnerHTML={{ __html: card?.data?.text || "" }}
         /> */}
-        <span className={styles.text}>{stripHtml(card?.data?.text)}</span>
+        <span className={styles.text}>{stripHtml(card?.text || "")}</span>
       </div>
       <div className={styles.info}>
         <span>{card?.created_date}</span>

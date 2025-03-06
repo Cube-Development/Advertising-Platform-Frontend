@@ -1,6 +1,6 @@
 import { roles } from "@entities/user";
 import {
-  MeesageSendType,
+  MessageSendType as MessageSendType,
   MessageStatus,
   chatType,
   RecipientType,
@@ -30,7 +30,7 @@ export interface IAllMessages {
 
 export interface IMessageNewSocket {
   id: string;
-  method?: MeesageSendType | notificationsTypes;
+  method?: MessageSendType | notificationsTypes;
   recipient: string;
   order_id?: string;
   project_id?: string;
@@ -76,7 +76,7 @@ export interface IMessageSendSocket {
   project_id?: string;
   user_id: string;
   message: string;
-  method: MeesageSendType;
+  method: MessageSendType;
 }
 
 export interface IChatProps {

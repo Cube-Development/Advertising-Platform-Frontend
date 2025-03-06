@@ -8,7 +8,7 @@ export enum chatType {
   project = "project",
 }
 
-export enum MeesageSendType {
+export enum MessageSendType {
   order_message_create = "OrderMessageCreate",
   project_message_create = "ProjectMessageCreate",
 }
@@ -77,6 +77,34 @@ export enum notificationsTypes {
   notification_moderation_order_advertiser_positive = "NotificationModerationOrderAdvertiserPositive",
   notification_refund_manager_project = "NotificationRefundManagerProject",
 }
+
+export const websocketMessages = [
+  notificationsTypes.order_message_add,
+  notificationsTypes.order_message_read,
+  notificationsTypes.project_message_add,
+  notificationsTypes.project_message_read,
+];
+
+export const websocketNotifications = [
+  notificationsTypes.notification_create_deposit,
+  notificationsTypes.notification_request_approve,
+  notificationsTypes.notification_create_desire,
+  notificationsTypes.notification_launch_manager_project,
+  notificationsTypes.notification_unban_channel,
+  notificationsTypes.notification_limited_ban_channel,
+  notificationsTypes.notification_unlimited_ban_channel,
+  notificationsTypes.notification_new_order_blogger,
+  notificationsTypes.notification_accept_order_blogger,
+  notificationsTypes.notification_publish_post,
+  notificationsTypes.notification_advertiser_reject_order,
+  notificationsTypes.notification_advertiser_reject_order_moderator,
+  notificationsTypes.notification_advertiser_accept_order,
+  notificationsTypes.notification_moderation_order_blogger_positive,
+  notificationsTypes.notification_moderation_order_advertiser_negative,
+  notificationsTypes.notification_moderation_order_blogger_negative,
+  notificationsTypes.notification_moderation_order_advertiser_positive,
+  notificationsTypes.notification_refund_manager_project,
+];
 
 export const notificationsStatus = [
   {

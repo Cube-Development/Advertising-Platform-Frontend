@@ -2031,7 +2031,7 @@
       "error": "Ошибка покупки тарифа"
     },
 
-    "websoket": {
+    "websocket": {
       "new_message": "У вас новое сообщение",
       "new_notification": "У вас новое уведомление"
     },

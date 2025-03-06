@@ -1,12 +1,19 @@
 import {
   IMessageNewSocket,
   IMessageSendSocket,
+  INotificationCard,
+  INotificationData,
+  INotifications,
+  notificationsAPI,
   notificationsTypes,
   useGetAuthTokenMutation,
   useGetWebsocketTokenMutation,
+  websocketMessages,
+  websocketNotifications,
 } from "@entities/communication";
-import { cookiesTypes } from "@shared/config";
-import { useAppSelector } from "@shared/hooks";
+import { cookiesTypes, INTERSECTION_ELEMENTS } from "@shared/config";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
+import { useToast } from "@shared/ui";
 import { Centrifuge, PublicationContext } from "centrifuge";
 import Cookies from "js-cookie";
 import React, {
@@ -16,6 +23,8 @@ import React, {
   useEffect,
   useRef,
 } from "react";
+import { useTranslation } from "react-i18next";
+import { v4 as uuidv4 } from "uuid";
 
 interface CentrifugeContextType {
   centrifuge: Centrifuge | null;
@@ -38,6 +47,9 @@ const CentrifugeContext = createContext<CentrifugeContextType | undefined>(
 export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
+  const { toast } = useToast();
+  const { t } = useTranslation();
+  const dispatch = useAppDispatch();
   const centrifugeRef = useRef<Centrifuge | null>(null);
   const handleNewMessageRef = useRef<(message: IMessageNewSocket) => void>(
     () => {},
@@ -75,20 +87,24 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
           getToken: () => Promise.resolve(token),
         });
         sub.on("publication", (ctx: PublicationContext) => {
-          // console.log("Message", ctx);
-          const newMessage = ctx.data as IMessageNewSocket;
-          // console.log("handleNewMessage", handleNewMessageRef.current);
-          // console.log("handleNewMessageChat", handleNewMessageChatRef.current);
-          // console.log("new", newMessage);
+          const newPush = ctx.data;
+          const method = newPush?.method;
 
-          if (newMessage.recipient) {
-            handleNewMessageChatRef.current(newMessage);
-            handleNewMessageRef.current(newMessage);
-          } else if (
-            newMessage?.method === notificationsTypes.order_message_read ||
-            newMessage?.method === notificationsTypes.project_message_read
-          ) {
-            handleReadMessageRef.current(newMessage);
+          if (websocketMessages.includes(method)) {
+            const newMessage = ctx.data as IMessageNewSocket;
+            if (
+              newMessage?.method === notificationsTypes.order_message_read ||
+              newMessage?.method === notificationsTypes.project_message_read
+            ) {
+              handleReadMessageRef.current(newMessage);
+            } else if (newMessage.recipient) {
+              handleNewMessageChatRef.current(newMessage);
+              handleNewMessageRef.current(newMessage);
+            }
+          } else if (websocketNotifications.includes(method)) {
+            const newNotification = ctx.data as INotificationData;
+            console.log("newNotification", newNotification);
+            handleNewNotification(newNotification);
           }
         });
 
@@ -132,6 +148,41 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
 
   const OrderReadMessage = (callback: (message: IMessageNewSocket) => void) => {
     handleReadMessageRef.current = callback;
+  };
+
+  const handleNewNotification = (message: INotificationData) => {
+    dispatch(
+      notificationsAPI.util.updateQueryData(
+        "getNotifications",
+        {
+          page: 1,
+          elements_on_page: INTERSECTION_ELEMENTS.notifications,
+        },
+        (draft) => {
+          const newNotification: INotificationCard = {
+            id: message.id || uuidv4(),
+            text: message.text,
+            method: message.method,
+            created_date:
+              message?.created_date || new Date().toLocaleDateString("ru-RU"),
+            created_time:
+              message?.created_time || new Date().toLocaleTimeString("ru-RU"),
+            is_read: false,
+            data: message,
+          };
+          const notifications = [newNotification, ...draft?.notifications];
+          draft.notifications.splice(
+            0,
+            draft.notifications.length,
+            ...notifications,
+          );
+        },
+      ),
+    );
+    toast({
+      variant: "default",
+      title: t("toasts.websocket.new_notification"),
+    });
   };
 
   return (
