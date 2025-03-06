@@ -373,6 +373,7 @@ main {
 .rotate__down {
   transform: rotate(0deg);
   transition: transform 0.5s ease;
+
   &.side {
     transform: rotate(-90deg);
   }
