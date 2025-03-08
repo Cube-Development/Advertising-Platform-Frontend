@@ -1,17 +1,20 @@
-import { FAQData, FAQtypes } from "@entities/faq";
-import { FAQInformation } from "@features/faq";
-import { PAGE_ANIMATION } from "@shared/config/animation";
-import { useClearCookiesOnPage } from "@shared/hooks";
 import { Accordion } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
+import { FAQInformation } from "@features/faq";
+import { FAQData, FAQtypes } from "@entities/faq";
+import { useFindLanguage } from "@entities/user";
+import { PAGE_ANIMATION } from "@shared/config/animation";
+import { useClearCookiesOnPage } from "@shared/hooks";
 import styles from "./styles.module.scss";
 
 export const FAQ: FC = () => {
   useClearCookiesOnPage();
+  const language = useFindLanguage();
+  const lang = language.name as keyof typeof FAQData;
   const { t } = useTranslation();
-  const data = FAQData.map((item) => ({
+  const data = FAQData[`${lang}`].map((item) => ({
     ...item,
     title:
       item.type === FAQtypes.common

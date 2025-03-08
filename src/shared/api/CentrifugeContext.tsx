@@ -1,9 +1,9 @@
+import { channelAPI } from "@entities/channel";
 import {
   IMessageNewSocket,
   IMessageSendSocket,
   INotificationCard,
   INotificationData,
-  INotifications,
   notificationsAPI,
   notificationsTypes,
   useGetAuthTokenMutation,
@@ -11,20 +11,36 @@ import {
   websocketMessages,
   websocketNotifications,
 } from "@entities/communication";
+import { advProjectsAPI, managerProjectsAPI } from "@entities/project";
 import { cookiesTypes, INTERSECTION_ELEMENTS } from "@shared/config";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { useToast } from "@shared/ui";
 import { Centrifuge, PublicationContext } from "centrifuge";
 import Cookies from "js-cookie";
 import React, {
-  ReactNode,
   createContext,
+  ReactNode,
   useContext,
   useEffect,
   useRef,
 } from "react";
 import { useTranslation } from "react-i18next";
 import { v4 as uuidv4 } from "uuid";
+import {
+  ADV_PROJECTS,
+  ADV_TARIFF_PROJECTS,
+  BLOGGER_CHANNELS,
+  BLOGGER_OFFERS,
+  MANAGER_PROJECTS,
+  TRANSACTION_HISTORY,
+  VIEWS_ADVERTISER,
+  VIEWS_BLOGGER_CHANNELS,
+  VIEWS_BLOGGER_OFFERS,
+  VIEWS_MANAGER,
+  VIEWS_TRANSACTIONS,
+} from "./tags";
+import { bloggerOffersAPI } from "@entities/offer";
+import { walletAPI } from "@entities/wallet";
 
 interface CentrifugeContextType {
   centrifuge: Centrifuge | null;
@@ -60,7 +76,7 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
   const handleReadMessageRef = useRef<(message: IMessageNewSocket) => void>(
     () => {},
   );
-  const { isAuth } = useAppSelector((state) => state.user);
+  const { isAuth, role } = useAppSelector((state) => state.user);
   const [getWebsocketToken] = useGetWebsocketTokenMutation();
   const [getAuthToken] = useGetAuthTokenMutation();
   const userId = Cookies.get(cookiesTypes.userId)!;
@@ -89,6 +105,7 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
         sub.on("publication", (ctx: PublicationContext) => {
           const newPush = ctx.data;
           const method = newPush?.method;
+          handleRevalidateCash(method);
 
           if (websocketMessages.includes(method)) {
             const newMessage = ctx.data as IMessageNewSocket;
@@ -151,6 +168,17 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const handleNewNotification = (message: INotificationData) => {
+    const newNotification: INotificationCard = {
+      id: message.id || uuidv4(),
+      text: message.text || "222",
+      method: message.method,
+      created_date:
+        message?.created_date || new Date().toLocaleDateString("ru-RU"),
+      created_time:
+        message?.created_time || new Date().toLocaleTimeString("ru-RU"),
+      is_read: false,
+      data: message,
+    };
     dispatch(
       notificationsAPI.util.updateQueryData(
         "getNotifications",
@@ -159,17 +187,6 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
           elements_on_page: INTERSECTION_ELEMENTS.notifications,
         },
         (draft) => {
-          const newNotification: INotificationCard = {
-            id: message.id || uuidv4(),
-            text: message.text,
-            method: message.method,
-            created_date:
-              message?.created_date || new Date().toLocaleDateString("ru-RU"),
-            created_time:
-              message?.created_time || new Date().toLocaleTimeString("ru-RU"),
-            is_read: false,
-            data: message,
-          };
           const notifications = [newNotification, ...draft?.notifications];
           draft.notifications.splice(
             0,
@@ -183,6 +200,159 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
       variant: "default",
       title: t("toasts.websocket.new_notification"),
     });
+  };
+
+  const handleRevalidateCash = (method: notificationsTypes) => {
+    if (method === notificationsTypes.notification_create_deposit) {
+      dispatch(
+        walletAPI.util.invalidateTags([
+          TRANSACTION_HISTORY,
+          VIEWS_TRANSACTIONS,
+        ]),
+      );
+    } else if (method === notificationsTypes.new_manager_project) {
+      dispatch(
+        managerProjectsAPI.util.invalidateTags([
+          MANAGER_PROJECTS,
+          VIEWS_MANAGER,
+        ]),
+      );
+    } else if (method === notificationsTypes.notification_request_approve) {
+      dispatch(
+        advProjectsAPI.util.invalidateTags([
+          ADV_TARIFF_PROJECTS,
+          VIEWS_ADVERTISER,
+        ]),
+      );
+    } else if (method === notificationsTypes.notification_create_desire) {
+      dispatch(managerProjectsAPI.util.resetApiState());
+    } else if (
+      method === notificationsTypes.notification_launch_manager_project
+    ) {
+      dispatch(
+        advProjectsAPI.util.invalidateTags([
+          ADV_TARIFF_PROJECTS,
+          VIEWS_ADVERTISER,
+        ]),
+      );
+    } else if (method === notificationsTypes.notification_unban_channel) {
+      dispatch(
+        channelAPI.util.invalidateTags([
+          BLOGGER_CHANNELS,
+          VIEWS_BLOGGER_CHANNELS,
+        ]),
+      );
+    } else if (method === notificationsTypes.notification_limited_ban_channel) {
+      dispatch(
+        channelAPI.util.invalidateTags([
+          BLOGGER_CHANNELS,
+          VIEWS_BLOGGER_CHANNELS,
+        ]),
+      );
+    } else if (
+      method === notificationsTypes.notification_unlimited_ban_channel
+    ) {
+      dispatch(
+        channelAPI.util.invalidateTags([
+          BLOGGER_CHANNELS,
+          VIEWS_BLOGGER_CHANNELS,
+        ]),
+      );
+    } else if (method === notificationsTypes.notification_new_order_blogger) {
+      dispatch(
+        bloggerOffersAPI.util.invalidateTags([
+          BLOGGER_OFFERS,
+          VIEWS_BLOGGER_OFFERS,
+        ]),
+      );
+    } else if (
+      method === notificationsTypes.notification_accept_order_blogger
+    ) {
+      dispatch(
+        advProjectsAPI.util.invalidateTags([ADV_PROJECTS, VIEWS_ADVERTISER]),
+      );
+    }
+    //
+    else if (method === notificationsTypes.notification_publish_post) {
+      dispatch(
+        advProjectsAPI.util.invalidateTags([ADV_PROJECTS, VIEWS_ADVERTISER]),
+      );
+    } else if (
+      method === notificationsTypes.notification_advertiser_accept_order
+    ) {
+      dispatch(
+        bloggerOffersAPI.util.invalidateTags([
+          BLOGGER_OFFERS,
+          VIEWS_BLOGGER_OFFERS,
+        ]),
+      );
+    } else if (
+      method === notificationsTypes.notification_advertiser_reject_order
+    ) {
+      dispatch(
+        bloggerOffersAPI.util.invalidateTags([
+          BLOGGER_OFFERS,
+          VIEWS_BLOGGER_OFFERS,
+        ]),
+      );
+    }
+    // else if (
+    //   method ===
+    //   notificationsTypes.notification_advertiser_reject_order_moderator
+    // ) {
+    //   dispatch(bloggerOffersAPI.util.resetApiState());
+    // }
+    //
+    else if (
+      method ===
+      notificationsTypes.notification_moderation_order_blogger_positive
+    ) {
+      dispatch(
+        bloggerOffersAPI.util.invalidateTags([
+          BLOGGER_OFFERS,
+          VIEWS_BLOGGER_OFFERS,
+        ]),
+      );
+    } else if (
+      method ===
+      notificationsTypes.notification_moderation_order_blogger_negative
+    ) {
+      dispatch(
+        bloggerOffersAPI.util.invalidateTags([
+          BLOGGER_OFFERS,
+          VIEWS_BLOGGER_OFFERS,
+        ]),
+      );
+    } else if (
+      method ===
+      notificationsTypes.notification_moderation_order_advertiser_negative
+    ) {
+      dispatch(
+        advProjectsAPI.util.invalidateTags([
+          ADV_TARIFF_PROJECTS,
+          VIEWS_ADVERTISER,
+        ]),
+      );
+    } else if (
+      method ===
+      notificationsTypes.notification_moderation_order_advertiser_positive
+    ) {
+      dispatch(
+        advProjectsAPI.util.invalidateTags([
+          ADV_TARIFF_PROJECTS,
+          VIEWS_ADVERTISER,
+        ]),
+      );
+    } else if (
+      method === notificationsTypes.notification_refund_manager_project
+    ) {
+      dispatch(
+        walletAPI.util.invalidateTags([
+          TRANSACTION_HISTORY,
+          VIEWS_TRANSACTIONS,
+        ]),
+      );
+    }
   };
 
   return (

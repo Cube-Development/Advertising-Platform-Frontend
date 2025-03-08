@@ -1,6 +1,12 @@
 import { dateSortingTypes } from "@entities/platform";
 import { IWalletHistory, paymentTypes } from "@entities/wallet";
-import { ADV_PROJECTS, BALANCE, LEGALS, authApi } from "@shared/api";
+import {
+  ADV_PROJECTS,
+  BALANCE,
+  LEGALS,
+  TRANSACTION_HISTORY,
+  authApi,
+} from "@shared/api";
 import { INTERSECTION_ELEMENTS, languagesNum } from "@shared/config";
 
 type PaymentOrderResponse = {
@@ -44,7 +50,7 @@ export const walletAPI = authApi.injectEndpoints({
         url: `/wallet/payment/project?project_id=${params}`,
         method: `POST`,
       }),
-      invalidatesTags: [BALANCE, LEGALS, ADV_PROJECTS],
+      invalidatesTags: [BALANCE, LEGALS, ADV_PROJECTS, TRANSACTION_HISTORY],
     }),
     paymentDeposit: build.mutation<PaymentWithdrawResponse, PaymentDepositReq>({
       query: (params) => ({
@@ -52,7 +58,7 @@ export const walletAPI = authApi.injectEndpoints({
         method: `POST`,
         params: params,
       }),
-      invalidatesTags: [BALANCE, LEGALS],
+      invalidatesTags: [BALANCE, LEGALS, TRANSACTION_HISTORY],
     }),
     paymentWithdrawal: build.mutation<
       PaymentWithdrawResponse,
@@ -63,7 +69,7 @@ export const walletAPI = authApi.injectEndpoints({
         method: `POST`,
         params,
       }),
-      invalidatesTags: [BALANCE, LEGALS],
+      invalidatesTags: [BALANCE, LEGALS, TRANSACTION_HISTORY],
     }),
     getBalance: build.query<PaymentWithdrawResponse, void>({
       query: () => ({
@@ -108,7 +114,7 @@ export const walletAPI = authApi.injectEndpoints({
       forceRefetch({ currentArg, previousArg }) {
         return currentArg !== previousArg;
       },
-      providesTags: [BALANCE],
+      providesTags: [TRANSACTION_HISTORY],
     }),
   }),
 });

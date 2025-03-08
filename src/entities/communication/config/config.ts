@@ -86,6 +86,7 @@ export const websocketMessages = [
 ];
 
 export const websocketNotifications = [
+  notificationsTypes.new_manager_project,
   notificationsTypes.notification_create_deposit,
   notificationsTypes.notification_request_approve,
   notificationsTypes.notification_create_desire,
