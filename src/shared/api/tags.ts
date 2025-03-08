@@ -13,6 +13,7 @@ export const ADV_TARIFF_ORDERS = "ADV_TARIFF_ORDERS";
 export const MANAGER_PROJECTS = "MANAGER_PROJECTS";
 export const MANAGER_ORDERS = "MANAGER_ORDERS";
 export const BALANCE = "BALANCE";
+export const TRANSACTION_HISTORY = "TRANSACTION_HISTORY";
 export const LEGALS = "LEGALS";
 export const CHAT = "CHAT";
 export const ADMIN_REVIEWS = "ADMIN_REVIEWS";
