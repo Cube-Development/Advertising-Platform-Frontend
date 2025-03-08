@@ -666,7 +666,7 @@
           "request_approve": "Канал на согласовании",
           "changed": "Канал на редактировании",
           "approved": "Канал согласован"
-        } 
+        }
       },
       "template": {
         "title": "Черновик"
@@ -765,7 +765,7 @@
         "title": {
           "approved": "Канал согласован",
           "request_approve": "Канал на согласовании"
-        } 
+        }
       },
       "comment": {
         "title": "Есть комментарий"
@@ -1621,10 +1621,10 @@
         "title": "Создание депозита"
       },
       "notification_request_approve": {
-        "title": "Запросе на одобрения"
+        "title": "Запрос на одобрениe"
       },
       "notification_create_desire": {
-        "title": "Создании рекоммендаций"
+        "title": "Создании рекомендаций"
       },
       "notification_launch_manager_project": {
         "title": "Запуске проекта с менеджером"
@@ -1877,7 +1877,6 @@
   },
 
   "order_btn": {
-
     "feedback": {
       "btn_title": "Оставить отзыв",
       "description": {

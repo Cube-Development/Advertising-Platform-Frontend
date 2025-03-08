@@ -1,0 +1,2512 @@
+{
+  "footer": {
+    "results": {
+      "users": "Total users",
+      "channels": "Total platforms",
+      "online": "Currently online"
+    },
+    "nav": {
+      "services": {
+        "name": "Services",
+        "links": {
+          "catalog": "Platform catalog",
+          "add_channel": "Add channel",
+          "turnkey": "Turnkey solutions",
+          "calculate": "Profitability calculator",
+          "tg_bot": "Telegram bot"
+        }
+      },
+      "about": {
+        "name": "About us",
+        "links": {
+          "reviews": "Reviews",
+          "public_offer": "User agreement",
+          "service_rules": "Service rules"
+        }
+      },
+      "cooperation": {
+        "name": "Cooperation",
+        "links": {
+          "vacancies": "Vacancies",
+          "partner_programm": "Affiliate program"
+        }
+      },
+      "community": {
+        "name": "Community",
+        "links": {
+          "faq": "F.A.Q.",
+          "news": "News",
+          "blog": "Blog"
+        }
+      }
+    },
+    "contacts": {
+      "tech_contact": "+99899-111-11-11",
+      "tech_title": "For technical inquiries",
+      "cooperation_contact": "+99891-999-99-99",
+      "cooperation_title": "For cooperation inquiries",
+      "email": "Info@blogix.uz",
+      "email_title": "24/7 technical support",
+      "address": "Tashkent, 123123, Nikuyevo St., 123, Congress Business Center, 1st floor"
+    },
+    "all_rights": "Cubeinc Development © All rights reserved"
+  },
+
+  "registration": "Registration",
+  "login": "Login",
+  "logout": "Logout",
+  "logout_title": "Are you sure you want to log out?",
+  "logout_description": "All your data will be saved, and you can access it again by logging back into the platform.",
+  "buy": "Buy",
+  "btn_catalog": "Platform catalog",
+  "btn_add_platform": "Add platform",
+  "btn_add_profile": "Add",
+  "btn_start_adv": "Start advertising",
+  "registration_alert": {
+    "title": "You are not authorized",
+    "description": "You need to be a registered user to access this feature.",
+    "close": "Hide",
+    "call_to_action": "Get access to all platform features, receive exclusive offers, and much more!"
+  },
+
+  "auth": {
+    "dont_have_account": "Don't have an account yet?",
+    "have_account": "Already have an account?",
+    "sign_up": "Sign up",
+    "sign_in": "Sign in",
+    "login_with": "Or log in with:",
+    "sign_up_registration": "Registration",
+    "email_required": "Email is a required field",
+    "email_invalid": "Invalid email",
+    "back_to_login": "Go back",
+    "forgot_password": "Forgot password?",
+    "enter_email": "Enter your email to reset your password",
+    "continue": "Continue",
+    "code_required": "Code is a required field",
+    "code_invalid": "Invalid code",
+    "verify_code": "Email verification",
+    "code_send_to_email": "Authentication code has been sent to your email",
+    "enter_code": "Enter the code",
+    "didnt_receive_code": "Didn't receive the code?",
+    "resend": "Resend",
+    "password_required": "Password is a required field",
+    "confirm_password_required": "Confirm your password",
+    "more_characters": "At least 3 characters",
+    "less_characters": "Maximum 15 characters",
+    "passwords_dont_match": "Passwords do not match",
+    "set_new_password": "Enter a new password",
+    "previous_reseted": "The previous password will be replaced with a new one",
+    "password": "Password",
+    "email": "Email",
+    "confirm_password": "Confirm password",
+    "set_password": "Save password",
+    "subscribtion": "Receive platform notifications",
+    "by_clicking_sign_up": "By clicking the sign-up button, you confirm that you have read the following:",
+    "terms": "Service rules",
+    "and": "and",
+    "privacy_policy": "Public offer"
+  },
+  "pages": {
+    "catalog": "Platform catalog",
+    "turnkey": "Turnkey placement",
+    "platformOwner": "For platform owners",
+    "advertiser": "For advertisers",
+    "wallet": "Wallet",
+    "languages": "",
+    "addPlatform": "Add channel",
+    "calculateIncome": "Calculate income",
+    "faq": "FAQ"
+  },
+  "roles": {
+    "blogger": "Blogger",
+    "advertiser": "Advertiser",
+    "manager": "Manager",
+    "moderator": "Moderator"
+  },
+
+  "my_profile": {
+    "messages": "My messages",
+    "data": "My data",
+    "settings": "Profile settings"
+  },
+  "symbol": "sum",
+  "count": "pcs.",
+  "wallet_menu": {
+    "balance": "Balance",
+    "top_up": "Top up wallet",
+    "withdraw": "Withdraw funds",
+    "history": "Transaction history",
+    "invoice": "Invoices and contracts"
+  },
+  "burger_menu": {
+    "services": "Services",
+    "balance": "Total balance",
+    "navigation": "Navigation",
+    "catalog": "Platform catalog",
+    "turnkey": "Turnkey placement",
+    "addPlatform": "Add channel",
+    "calculateIncome": "Income calculation",
+
+    "orders": "My advertising campaigns",
+
+    "saved": "Saved",
+    "manager": "Work with managers",
+    "template": "Post templates",
+
+    "platforms": "My channels",
+    "offers": "My requests",
+
+    "wallet": "Wallet",
+
+    "top_up": "Top up wallet",
+    "withdraw": "Withdraw money",
+    "history": "Transaction history",
+    "invoice": "Invoices and contracts",
+
+    "base": "Knowledge base"
+  },
+  "more_less": {
+    "more": "More",
+    "less": "Less"
+  },
+
+  "main_page_advertiser": {
+    "main_img": "mainAdv.png",
+    "cta_title": "Effortless Advertising Placements on Social Media",
+    "cta_subtitle": "Only active, manually verified platforms",
+    "cta_list": [
+      {
+        "option": "Algorithms for selecting the target audience and suitable platforms for your ads",
+        "img": "option1.svg"
+      },
+      {
+        "option": "AI-generated effective advertising posts",
+        "img": "option2.svg"
+      },
+      {
+        "option": "Guaranteed protection through a secure transaction",
+        "img": "option3.svg"
+      }
+    ],
+    "services_title": "We work with legal entities, provide invoices, reports, and conduct electronic document management through didox.uz",
+    "services_list": [
+      {
+        "info": "Manually verified platforms",
+        "count": "784+",
+        "img": "info1.svg"
+      },
+      {
+        "info": "Successful ad launches",
+        "count": "15,713+",
+        "img": "info2.svg"
+      },
+      {
+        "info": "Advertisers' saved budget",
+        "count": "1.01 billion",
+        "img": "info3.svg"
+      },
+      {
+        "info": "Satisfied advertisers",
+        "count": "698+",
+        "img": "info4.svg"
+      }
+    ],
+    "partners_title": "Trusted by:",
+    "partners_list": [
+      { "img": "partner1.svg" },
+      { "img": "partner2.svg" },
+      { "img": "partner3.svg" },
+      { "img": "partner4.svg" },
+      { "img": "partner5.svg" },
+      { "img": "partner6.svg" }
+    ],
+    "how_title": "How does it work?",
+    "how_list": [
+      { "stage": "Register on the platform" },
+      { "stage": "Choose suitable platforms from the catalog" },
+      { "stage": "Top up your balance with a convenient method" },
+      {
+        "stage": "Create an ad placement manually or generate a post using AI"
+      },
+      {
+        "stage": "The platform owner will publish the post and send it for your approval"
+      }
+    ],
+    "why_title": "Why is it more effective with us?",
+    "accomms_list": [
+      {
+        "type": "self",
+        "title": "Самостоятельное размещение",
+        "stages": [
+          { "stage": "Найти подходящие площадки вручную" },
+          {
+            "stage": "Проверить каждую площадку на накрутку и качество аудитории"
+          },
+          {
+            "stage": "Узнать у админов стоимость, условия и свободные времена размещения"
+          },
+          {
+            "stage": "Оплатить отдельно каждому админу размещение без каких либо гарантий средств"
+          },
+          {
+            "stage": "Отправить рекламный пост каждому админу"
+          },
+          {
+            "stage": "Следить за размещением поста в каждой площадке отдельно"
+          }
+        ]
+      },
+      {
+        "type": "vencom",
+        "title": "Размещение с Blogix",
+        "stages": [
+          { "stage": "Зарегистрируйте аккаунт на платформе" },
+          {
+            "stage": "Подберите подходящие плошадки в пару кликов или выберите запуск под ключ"
+          },
+          { "stage": "Пополните баланс удобным способом" },
+          {
+            "stage": "Загрузите пост либо сгенерируйте все с помощью искусственного интеллекта"
+          },
+          {
+            "stage": "В один клик запустите рекламу сразу во всех выбранных площадках"
+          },
+          { "stage": "Получайте оповещение о каждом размещении" },
+          {
+            "stage": "Платформа гарантирует сохранность ваших средств пока не будут выполнены все условия размещения"
+          }
+        ],
+        "save": "Экономьте время и деньги"
+      }
+    ],
+    "turnkey_title": "Turnkey Advertising Launch",
+    "turnkey_subtitle": "Choose a plan, and a personal manager will handle everything for you",
+    "turnkey_text": "Manager services are provided as a bonus. The entire budget goes towards purchasing integrations in the Blogix catalog",
+
+    "tarifs_list": [
+      {
+        "type": "base",
+        "name": "Starter",
+        "views": "from 60,000 views",
+        "price": "1,250,000 UZS",
+        "info": "A basic option for evaluating the service or small advertising campaigns",
+        "options": [
+          { "option": "Manual selection of platforms", "available": true },
+          { "option": "Individual promotion plan", "available": true },
+          {
+            "option": "Creation of an effective advertising post",
+            "available": true
+          },
+          { "option": "Publication notifications", "available": true },
+          { "option": "Approval of selected platforms", "available": false },
+          { "option": "Promotion consultations", "available": false },
+          { "option": "Detailed report on completed work", "available": false },
+          { "option": "Advertising campaign forecasts", "available": false }
+        ]
+      },
+      {
+        "type": "standard",
+        "name": "Standard",
+        "views": "from 300,000 views",
+        "price": "5,500,000 UZS",
+        "info": "An optimal plan for small business promotion",
+        "options": [
+          { "option": "Manual selection of platforms", "available": true },
+          { "option": "Individual promotion plan", "available": true },
+          {
+            "option": "Creation of an effective advertising post",
+            "available": true
+          },
+          { "option": "Publication notifications", "available": true },
+          { "option": "Approval of selected platforms", "available": true },
+          { "option": "Promotion consultations", "available": true },
+          { "option": "Detailed report on completed work", "available": false },
+          { "option": "Advertising campaign forecasts", "available": false }
+        ]
+      },
+      {
+        "type": "complex",
+        "name": "Comprehensive",
+        "views": "from 1,000,000 views",
+        "price": "15,300,000 UZS",
+        "info": "A comprehensive plan for medium and large advertising campaigns",
+        "options": [
+          { "option": "Manual selection of platforms", "available": true },
+          { "option": "Individual promotion plan", "available": true },
+          {
+            "option": "Creation of an effective advertising post",
+            "available": true
+          },
+          { "option": "Publication notifications", "available": true },
+          { "option": "Approval of selected platforms", "available": true },
+          { "option": "Promotion consultations", "available": true },
+          { "option": "Detailed report on completed work", "available": true },
+          { "option": "Advertising campaign forecasts", "available": true },
+          {
+            "option": "Maximum reach of your target audience",
+            "available": true
+          }
+        ]
+      }
+    ],
+
+    "customers_title": "What our clients say about us:",
+    "customers_list": [
+      {
+        "name": "Kadmov Roman",
+        "workplace": "CocaCola Uzbekistan",
+        "img": "customer1.jpg",
+        "text": "Advertising sales on this marketplace are a real find! An excellent platform for brand promotion. Transparent deal conditions, effective client interaction, and high-quality analytics. I recommend it to anyone looking to increase their business visibility."
+      },
+      {
+        "name": "Karimov Damir",
+        "workplace": "Uzbekistan Airways",
+        "img": "customer2.jpg",
+        "text": "Very satisfied with the results of working on this marketplace. Advertising sales here are not only an effective way to attract new customers but also a pleasant experience with a professional support team. The platform provides unique opportunities for scaling ad campaigns."
+      },
+      {
+        "name": "Khamidov Mardonbek",
+        "workplace": "Hookah House",
+        "img": "customer3.jpg",
+        "text": "This marketplace has become a reliable partner for me in the field of advertising sales. An intuitive interface, extensive targeting options, and excellent visibility of results. Working with it has been a key element of my advertising strategy. Thank you for the excellent service!"
+      },
+      {
+        "name": "customer 1",
+        "workplace": "CocaCola Uzbekistan",
+        "img": "customer1.jpg",
+        "text": "Advertising sales on this marketplace are a real find! An excellent platform for brand promotion. Transparent deal conditions, effective client interaction, and high-quality analytics. I recommend it to anyone looking to increase their business visibility."
+      },
+      {
+        "name": "customer 2",
+        "workplace": "Uzbekistan Airways",
+        "img": "customer2.jpg",
+        "text": "Very satisfied with the results of working on this marketplace. Advertising sales here are not only an effective way to attract new customers but also a pleasant experience with a professional support team. The platform provides unique opportunities for scaling ad campaigns."
+      },
+      {
+        "name": "customer 3",
+        "workplace": "Hookah House",
+        "img": "customer3.jpg",
+        "text": "This marketplace has become a reliable partner for me in the field of advertising sales. An intuitive interface, extensive targeting options, and excellent visibility of results. Working with it has been a key element of my advertising strategy. Thank you for the excellent service!"
+      }
+    ]
+  },
+
+  "main_page_blogger": {
+    "main_img": "mainBlogger.png",
+    "cta_title": "Add your channel now and get an order",
+    "cta_subtitle": "Open your channel for orders. Simple. Fast. Profitable.",
+    "cta_list": [
+      {
+        "option": "A constantly growing number of advertisers for your channels",
+        "img": "option4.svg"
+      },
+      {
+        "option": "Statistics for each channel to effectively analyze your content",
+        "img": "option5.svg"
+      },
+      {
+        "option": "Fast and legal withdrawal system",
+        "img": "option6.svg"
+      }
+    ],
+    "services_title": "We work with legal entities, provide invoices, acts, and conduct electronic document management through didox.uz",
+    "services_list": [
+      {
+        "info": "Active advertisers",
+        "count": "784+",
+        "img": "info1.svg"
+      },
+      {
+        "info": "Completed orders",
+        "count": "42,309+",
+        "img": "info2.svg"
+      },
+      {
+        "info": "Earned by channel owners",
+        "count": "2.93 billion",
+        "img": "info3.svg"
+      },
+      {
+        "info": "Channel owners already with us",
+        "count": "1,230+",
+        "img": "info4.svg"
+      }
+    ],
+    "partners_title": "Trusted by:",
+    "partners_list": [
+      { "img": "partner1.svg" },
+      { "img": "partner2.svg" },
+      { "img": "partner3.svg" },
+      { "img": "partner4.svg" },
+      { "img": "partner5.svg" },
+      { "img": "partner6.svg" }
+    ],
+    "how_title": "How does it work?",
+    "how_list": [
+      { "stage": "Register on the service" },
+      { "stage": "Add your channel to our platform" },
+      { "stage": "Accept an advertising order request" },
+      {
+        "stage": "Publish a post on your channel at the specified time and receive payment from the advertiser"
+      },
+      { "stage": "Withdraw money in a way that is convenient for you" }
+    ],
+    "why_title": "Why is it more effective with us?",
+    "accomms_list": [
+      {
+        "type": "self",
+        "title": "Self-placement",
+        "stages": [
+          { "stage": "Labor-intensive constant search for advertisers" },
+          {
+            "stage": "Unpredictable income, as advertiser traffic is limited by your capabilities"
+          },
+          { "stage": "Low payment guarantee" },
+          {
+            "stage": "No automation of processes at all stages of the transaction"
+          },
+          {
+            "stage": "Time wasted on advertisers who ultimately won't buy"
+          }
+        ]
+      },
+      {
+        "type": "vencom",
+        "title": "Placement with Blogix",
+        "stages": [
+          { "stage": "A constant flow of major advertisers" },
+          { "stage": "Guaranteed payment" },
+          {
+            "stage": "Effective advertiser filtering—only those who have already paid will reach you"
+          },
+          {
+            "stage": "Eliminating the need to communicate with scammers pretending to be advertisers"
+          },
+          { "stage": "Automation of all transaction processes" },
+          {
+            "stage": "Significant increase in the profitability of your platform"
+          }
+        ],
+        "save": "Save time and money"
+      }
+    ],
+
+    "calculate": {
+      "title": "Calculate channel profitability",
+      "subtitle": "Specify the topic of your channel or blog and the number of subscribers",
+      "text": "The obtained values are approximate and may vary due to many other factors"
+    },
+    "card": {
+      "title": "Calculate your monthly income",
+      "theme": "Theme",
+      "default_theme": "Auto & Moto",
+      "income": "Estimated monthly income",
+      "subs": "Number of subscribers"
+    },
+    "work_title": "Already earning with us",
+    "work_list": [
+      { "img": "channel1.svg" },
+      { "img": "channel1.svg" },
+      { "img": "channel1.svg" },
+      { "img": "channel1.svg" },
+      { "img": "channel1.svg" },
+      { "img": "channel1.svg" },
+      { "img": "channel1.svg" },
+      { "img": "channel1.svg" },
+      { "img": "channel1.svg" },
+      { "img": "channel1.svg" },
+      { "img": "channel1.svg" },
+      { "img": "channel1.svg" },
+      { "img": "channel1.svg" },
+      { "img": "channel1.svg" }
+    ],
+    "customers_title": "What our clients say about us:",
+    "customers_list": [
+      {
+        "name": "Kadomov Roman",
+        "workplace": "CocaCola Uzbekistan",
+        "img": "customer1.jpg",
+        "text": "Selling ads on this marketplace is a real find! An excellent platform for brand promotion. Transparent deal conditions, effective client interaction, and high-quality analytics. I recommend it to everyone looking to increase their business visibility."
+      },
+      {
+        "name": "Karimov Damir",
+        "workplace": "Uzbekistan Airways",
+        "img": "customer2.jpg",
+        "text": "Very satisfied with the results on this marketplace. Selling ads here is not only an effective way to attract new clients but also a pleasant experience with a professional support team. The platform provides unique opportunities for scaling advertising campaigns."
+      },
+      {
+        "name": "Khamidov Mardonbek",
+        "workplace": "Hookah House",
+        "img": "customer3.jpg",
+        "text": "This marketplace has become a reliable partner for me in the field of ad sales. Intuitive interface, extensive targeting options, and excellent result visibility. Partnering with it has become a key element of my advertising strategy. Thank you for the great service!"
+      },
+      {
+        "name": "customer 1",
+        "workplace": "CocaCola Uzbekistan",
+        "img": "customer1.jpg",
+        "text": "Selling ads on this marketplace is a real find! An excellent platform for brand promotion. Transparent deal conditions, effective client interaction, and high-quality analytics. I recommend it to everyone looking to increase their business visibility."
+      },
+      {
+        "name": "customer 2",
+        "workplace": "Uzbekistan Airways",
+        "img": "customer2.jpg",
+        "text": "Very satisfied with the results on this marketplace. Selling ads here is not only an effective way to attract new clients but also a pleasant experience with a professional support team. The platform provides unique opportunities for scaling advertising campaigns."
+      },
+      {
+        "name": "customer 3",
+        "workplace": "Hookah House",
+        "img": "customer3.jpg",
+        "text": "This marketplace has become a reliable partner for me in the field of ad sales. Intuitive interface, extensive targeting options, and excellent result visibility. Partnering with it has become a key element of my advertising strategy. Thank you for the great service!"
+      }
+    ]
+  },
+
+  "orders_advertiser": {
+    "my_campaign": "My Advertising Campaigns",
+    "new_project": "Create Project",
+    "start_new_project": "Start Advertising Campaign",
+    "turnkey_project": "Turnkey",
+    "start_turnkey_project": "Launch Turnkey Advertising",
+    "or": "Or",
+    "no_project": "You currently have no projects",
+    "no_template": "Save your advertising campaigns and continue them at any time",
+    "type_filter": {
+      "my_project": "My Projects",
+      "manager_project": "With Managers",
+      "saved_project": "Saved"
+    },
+    "status_filter": {
+      "active": "Active",
+      "complete": "Completed",
+      "develop": "In Development",
+      "agreed": "Under Review"
+    },
+
+    "card": {
+      "status": {
+        "active": "In Progress",
+        "develop": "In Development",
+        "agreed": "Under Review",
+        "completed": "Completed"
+      },
+      "channels": "Channels",
+      "views": "Views",
+      "tarif": "Rate",
+      "cost": "Budget",
+      "remainder": "Remaining",
+      "see_more": "Expand",
+      "see_less": "Collapse",
+      "request_approve": "You have confirmed the campaign",
+      "not_request_approve": "Your campaign is awaiting approval"
+    },
+    "subcard": {
+      "date": "Date",
+      "accommodation": "Placement Format",
+      "time": "Placement Time",
+      "price": "Price",
+
+      "replace": {
+        "channel": {
+          "title": "Specify the reason for channel replacement",
+          "placeholder": "Write the reason ... Maximum allowed length - 300 characters",
+          "desire": "Reason for channel replacement"
+        },
+        "post": {
+          "title": "Specify the reason for post replacement",
+          "placeholder": "Write the reason ... Maximum allowed length - 300 characters",
+          "desire": "Reason for post replacement"
+        },
+        "button": {
+          "send": "Send",
+          "ok": "OK"
+        }
+      }
+    },
+    "order_status": {
+      "rejected": {
+        "title": "The channel owner has rejected your request",
+        "title2": "Order Canceled",
+        "text": "Your funds will be returned to your wallet within 12 hours",
+        "text2": "Remaining funds will be returned after the campaign is completed"
+      },
+      "completed": {
+        "title": "Your order is completed",
+        "title2": "Order Completed"
+      },
+      "posted": {
+        "title": "Post Published",
+        "text": "Check the post for compliance"
+      },
+      "accepted": {
+        "title": "Request Accepted",
+        "text": "You will receive a notification from the channel owner after the post is published"
+      },
+      "moderation": {
+        "title": "Under Moderation",
+        "text": "A decision on your request will be made within ",
+        "small": "24 hours"
+      },
+      "waiting": {
+        "title": "Awaiting Response from Channel Owner"
+      },
+      "agreed": {
+        "title": {
+          "request_approve": "Channel Under Review",
+          "changed": "Channel Under Editing",
+          "approved": "Channel Approved"
+        }
+      },
+      "template": {
+        "title": "Draft"
+      }
+    }
+  },
+
+  "orders_manager": {
+    "orders": "Advertising Orders",
+    "no_project": "You currently have no projects",
+    "status_filter": {
+      "active": "Active",
+      "complete": "Completed",
+      "new": "New Orders",
+      "agreed": "Under Review"
+    },
+
+    "card": {
+      "status": {
+        "active": "In Progress",
+        "agreed": "Under Review",
+        "completed": "Completed"
+      },
+      "technical_specificationIcon": "Technical Specification",
+      "channels": "Channels",
+      "views": "Views",
+      "tarif": "Tariff",
+      "budget": "Budget",
+      "rest": "Remaining",
+      "see_more": "Expand",
+      "see_task": "View Task",
+      "see_less": "Collapse",
+      "start_btn": "Start",
+      "run_btn": "Run",
+      "edit_btn": "Edit",
+      "approved": "Campaign has been approved",
+      "request_approve": "Campaign sent for approval",
+      "changed": "Advertiser made changes"
+    },
+    "subcard": {
+      "date": "Date",
+      "accommodation": "Placement Format",
+      "time": "Placement Time",
+      "price": "Price",
+      "comment": "Comment",
+      "link": "Attached Links",
+      "file": "Attached Files",
+      "download_all": "Download All",
+      "send_btn": "Send to Bot",
+      "change": {
+        "channel": {
+          "title": "Specify the reason for changing the channel",
+          "placeholder": "Write the reason... Maximum allowed length - 300 characters",
+          "desire": "Reason for channel change"
+        },
+        "post": {
+          "title": "Specify the reason for changing the post",
+          "placeholder": "Write the reason... Maximum allowed length - 300 characters",
+          "desire": "Reason for post change"
+        },
+        "button": {
+          "send": "Send",
+          "ok": "OK"
+        }
+      }
+    },
+
+    "order_status": {
+      "rejected": {
+        "title": "The channel owner rejected your request",
+        "title2": "Order Canceled",
+        "text": "Your funds will be returned to your wallet within 12 hours",
+        "text2": "The remaining funds will be refunded after the campaign ends"
+      },
+      "completed": {
+        "title": "Your order has been completed",
+        "title2": "Order Completed"
+      },
+      "posted": {
+        "title": "Post Published",
+        "text": "Check the post for compliance"
+      },
+      "accepted": {
+        "title": "Request Accepted",
+        "text": "After the post is published, you will receive a notification from the channel owner"
+      },
+      "moderation": {
+        "title": "Under Moderation",
+        "text": "A decision on your request will be made within ",
+        "small": "24 hours"
+      },
+      "waiting": {
+        "title": "Waiting for a response from the channel owner"
+      },
+      "agreed": {
+        "title": {
+          "approved": "Channel Approved",
+          "request_approve": "Channel Under Review"
+        }
+      },
+      "comment": {
+        "title": "There is a Comment"
+      },
+      "channel_agreed": {
+        "title": "Channel Approved"
+      },
+      "template": {
+        "title": "Draft"
+      }
+    }
+  },
+
+  "platforms_blogger": {
+    "my_platform": "My Channels",
+    "status_filter": {
+      "active": "Active",
+      "moderation": "Under Moderation",
+      "moderation_reject": "Rejected",
+      "inactive": "Deactivated",
+      "banned": "Banned",
+      "deleted": "Deleted"
+    },
+    "created": "Date",
+
+    "no_platform": "You currently have no platforms",
+    "no_banned": "You have no banned channels",
+
+    "offers_count": "New",
+    "moderation_time": "Channel moderation takes 24 hours",
+    "repeat": "You can resubmit your application after addressing the rejection reason",
+    "repeat_date": "Resubmission for moderation will be possible",
+    "ban": "Your channel is permanently banned",
+
+    "card": {
+      "status": {
+        "active": "Active",
+        "moderation": "Under Moderation",
+        "reject": "Rejected",
+        "deactivate": "Deactivated",
+        "ban": "Banned"
+      },
+      "new": "New"
+    },
+
+    "menu": {
+      "title": "Channel Actions",
+      "edit": "Edit",
+      "activate": "Activate",
+      "deactivate": "Deactivate",
+      "delete": "Delete"
+    },
+
+    "delete_channel": {
+      "title": "Are you sure you want to delete the channel?",
+      "yes": "Yes",
+      "no": "No"
+    },
+    "deactivate_channel": {
+      "title": "Are you sure you want to deactivate the channel? All active orders linked to this channel will be automatically rejected. If you have unfinished orders with this channel, we recommend completing them, receiving the funds, and then deactivating the channel.",
+      "yes": "Yes",
+      "no": "No"
+    }
+  },
+
+  "platform_description": {
+    "platform_description": "Channel Description",
+    "language": "Audience Language",
+    "age": "Audience Age",
+    "sex": "Gender Ratio",
+    "region": "Region",
+    "edit_btn": "Edit",
+    "okey_btn": "Got it"
+  },
+
+  "offers_blogger": {
+    "my_offers": "My Advertising Orders",
+    "no_offers": "You currently have no orders",
+
+    "status_filter": {
+      "active": "Active",
+      "waiting": "Pending Acceptance",
+      "complete": "Completed",
+      "reject": "Rejected",
+      "moderation": "Under Moderation",
+      "uncomplete": "Unfulfilled"
+    },
+
+    "card": {
+      "status": {
+        "active": "In Progress",
+        "check": "Under Review",
+        "wait": "Pending",
+        "complete": "Completed",
+        "cancel": "Canceled",
+        "moderation": "Under Moderation",
+        "reject": "Rejected"
+      },
+      "date": "Date",
+      "accommodation": "Placement Format",
+      "time": "Placement Time",
+      "price": "Price"
+    },
+
+    "days": {
+      "day": "day",
+      "days": "days",
+      "dayss": "days"
+    },
+
+    "offer_status": {
+      "active": {
+        "title": "Submit the post link",
+        "placeholder": "Enter the post link...",
+        "invalid_url": "Invalid link",
+        "send_link_title": "Submit the link to the published ad post",
+        "send_link_subtitle": "Before submitting the link, please ensure that all advertiser requirements have been fully met"
+      },
+      "check": {
+        "title": "You have submitted the post",
+        "text": "After the order period ends or upon advertiser confirmation, payment will be transferred to your account"
+      },
+      "wait": {
+        "title": "New Order",
+        "text": "You must make a decision within 24 hours, otherwise, the order will be automatically declined"
+      },
+      "cancel": {
+        "title": "Order Rejected",
+        "text": "Please note that frequent order cancellations may lower your rating"
+      },
+      "complete": {
+        "title": "Order Completed"
+      },
+      "moderation": {
+        "text": "The order does not meet the requirements of the Blogix platform. Please wait for the administrator's decision"
+      },
+      "reject": {
+        "title": "Order Canceled",
+        "text": "The decision was made in favor of the advertiser"
+      }
+    }
+  },
+
+  "add_platform": {
+    "title": {
+      "add": "Add Channel",
+      "edit": "Edit Channel"
+    },
+    "chevron": {
+      "step": "Step",
+      "identification": "Platform Identification",
+      "description": "Platform Description",
+      "accept": "Confirmation"
+    },
+    "identification": {
+      "info": {
+        "title": "Select a Platform",
+        "text": "Choose the platform where your channel is hosted."
+      },
+      "link": {
+        "title": "Enter the Link",
+        "text": "Provide a link to your channel, ensuring the correct format.",
+        "requerd": "Enter the channel link",
+        "invalid": "Invalid link"
+      }
+    },
+
+    "description": {
+      "category": {
+        "title": "Select a Category",
+        "default_value": "Not Selected",
+        "text": "You can select only one category that best represents your channel's content."
+      },
+      "languages": {
+        "title": "Select Language",
+        "default_value": "Not Selected",
+        "text": "You can select one or more languages in which content is published on your channel."
+      },
+      "region": {
+        "title": "Select Region",
+        "default_value": "Not Selected",
+        "text": "You can select one or more regions where your main audience is located."
+      },
+      "sex": {
+        "title": "Gender Ratio, %",
+        "default_value": "Not Selected",
+        "text": "Select the percentage distribution of men and women in your audience."
+      },
+      "age": {
+        "title": "Select Audience Age",
+        "default_value": "Not Selected",
+        "text": "You can select one or more age groups that dominate your audience."
+      },
+      "description": {
+        "title": "Platform Description",
+        "default_value": "Describe the features that make your channel stand out.",
+        "text": "Describe your platform, its main goals, and unique features. Specify its main topic, the predominant content types, and what makes it different from other platforms."
+      },
+      "price": {
+        "title": "Choose Placement Format and Specify Price",
+        "info": "You can learn about placement format differences and pricing guidelines in the instructions.",
+        "text": "Select a placement format and specify the corresponding price for the chosen option.",
+        "default": "Enter Price"
+      },
+      "symbol": {
+        "title": "Number of Characters in Post",
+        "text": "Specify the number of characters in the post you are willing to publish, including spaces and punctuation marks."
+      },
+      "choosed": "Selected",
+      "from": "of"
+    },
+    "accept": {
+      "title": "Review Data Before Confirmation",
+      "platform": {
+        "title": "Platform"
+      },
+      "link": {
+        "title": "Link"
+      },
+      "category": {
+        "title": "Category"
+      },
+      "languages": {
+        "title": "Language"
+      },
+      "region": {
+        "title": "Region"
+      },
+      "sex": {
+        "title": "Gender Ratio"
+      },
+      "age": {
+        "title": "Age"
+      },
+      "description": {
+        "title": "Description"
+      },
+      "price": {
+        "title": "Placement Format and Price"
+      },
+      "symbol": {
+        "title": "Number of Characters"
+      }
+    },
+
+    "create": {
+      "send": "Your application has been submitted!",
+      "moderation": "Your channel addition request has been sent for moderator review.",
+      "answer": {
+        "text1": "Response will be received",
+        "span": "within 24 hours",
+        "text2": "from the time of submission"
+      }
+    }
+  },
+
+  "profile": {
+    "title": "Profile Settings",
+    "account_block": {
+      "title": "Account",
+      "date": "Registration Date",
+      "name": {
+        "title": "First Name",
+        "default_value": "Gomer"
+      },
+      "surname": {
+        "title": "Last Name",
+        "default_value": "German"
+      },
+      "email": {
+        "title": "E-mail",
+        "default_value": "Sample@gmail.com"
+      },
+      "phone": {
+        "title": "Phone",
+        "default_value": "+998 90 999 99 99"
+      },
+      "language": {
+        "title": "Language",
+        "default_value": "Russian"
+      },
+      "location": {
+        "title": "Location",
+        "default_value": "Uzbekistan, Tashkent"
+      },
+      "save_btn": "Save Changes"
+    },
+    "email_block": {
+      "title": "Change E-mail",
+      "new_email": {
+        "title": "Enter New E-mail",
+        "default_value": "Sample@gmail.com",
+        "error": {
+          "required": "Field cannot be empty",
+          "format": "Format: Sample@gmail.com"
+        }
+      },
+      "password": {
+        "title": "Enter Password",
+        "default_value": "Sample@gmail.com",
+        "error": {
+          "required": "Field cannot be empty"
+        }
+      },
+      "code": {
+        "title": "Confirmation Code",
+        "default_value": "123456",
+        "error": {
+          "required": "Field cannot be empty",
+          "format": "Code must be 6 digits"
+        }
+      },
+      "change_btn": "Change E-mail",
+      "send_btn": "Send Code",
+      "back_btn": "Back"
+    },
+    "password_block": {
+      "title": "Change Password",
+      "current_password": {
+        "title": "Current Password",
+        "default_value": "Sample@gmail.com"
+      },
+      "new_password": {
+        "title": "New Password",
+        "default_value": "Sample@gmail.com"
+      },
+      "accept_password": {
+        "title": "Confirm New Password",
+        "default_value": "Sample@gmail.com"
+      },
+      "change_btn": "Change Password"
+    },
+    "notification_block": {
+      "title": "Notifications",
+      "email": {
+        "title": "E-mail",
+        "system": "System Messages",
+        "project": "Project Notifications",
+        "individual": "Individual Offers and Promo Mailings"
+      },
+      "bot": {
+        "title": "Telegram Bot",
+        "system": "System Messages",
+        "project": "Project Notifications",
+        "individual": "Individual Offers and Promo Mailings",
+        "enable_notifications": "Do you want to connect a Telegram bot for notifications?",
+        "telegramm": {
+          "title": "Enter Your Telegram Account",
+          "default_value": "Sample@gmail.com"
+        },
+        "instruction": "Read more detailed instructions on setting up the Telegram bot",
+        "change_btn": "Change",
+        "cancel_btn": "Cancel"
+      },
+      "continue_btn": "Continue"
+    }
+  },
+
+  "add_profile": {
+    "add_profile": "Adding Data",
+    "types": {
+      "selfemployedaccount": "Self-Employed",
+      "entity": "Legal Entity",
+      "individual": "Individual Entrepreneur"
+    },
+    "subtypes": {
+      "account": "Checking Account",
+      "card": "Transit Account"
+    },
+    "basic_info": {
+      "basic_info": "General Information",
+      "name": {
+        "title": "Full Name",
+        "default_value": "Gomer German",
+        "description": "Enter your full name as stated in your passport or another official document. Ensure that the data matches your bank information.",
+        "error": {
+          "required": "field cannot be empty"
+        }
+      },
+      "registration_number": {
+        "title": "Registration Number",
+        "default_value": "12345678",
+        "description": "Enter your registration number assigned during the registration process. This number is used for identification and verification.",
+        "error": {
+          "required": "enter without extra characters"
+        }
+      },
+      "registration_date": {
+        "title": "Registration Date",
+        "default_value": "22.09.2023",
+        "description": "Enter your registration date in the format DD.MM.YYYY. Ensure the data matches your official documents.",
+        "error": {
+          "required": "invalid format, enter in the format dd.mm.yyyy: 22.09.2023"
+        }
+      },
+      "PNFL": {
+        "title": "Personal Identification Number (PNFL)",
+        "default_value": "12345678901234",
+        "description": "Personal Identification Number for individuals. Enter a valid PNFL as it is required for data verification.",
+        "error": {
+          "required": "invalid format, must be 14 characters"
+        }
+      },
+      "entity": {
+        "title": "Company Name",
+        "default_value": "Company Name",
+        "description": "Enter the full official name of your company as per registration documents. This is required for proper payment processing and documentation.",
+        "error": {
+          "required": "field cannot be empty"
+        }
+      },
+      "address": {
+        "title": "Legal Address",
+        "default_value": "Legal Address",
+        "description": "Enter the registered address of your company. It may differ from the actual business location but must match the registration documents.",
+        "error": {
+          "required": "field cannot be empty"
+        }
+      },
+      "INN": {
+        "title": "Taxpayer Identification Number (INN)",
+        "default_value": "123456789",
+        "description": "Enter your company's or individual entrepreneur's Taxpayer Identification Number (INN). This number is used for tax accounting and organization identification.",
+        "error": {
+          "required": "invalid format, must be 9 characters"
+        }
+      },
+      "individual": {
+        "title": "Individual Entrepreneur Name",
+        "default_value": "Individual Entrepreneur Name",
+        "description": "Enter the full name of the individual entrepreneur as stated in the registration documents. This name is used for identification in legal and financial documents.",
+        "error": {
+          "required": "field cannot be empty"
+        }
+      }
+    },
+    "bank_data": {
+      "bank_data": "Banking Details",
+      "bank_mfo": {
+        "title": "Bank MFO",
+        "default_value": "12345",
+        "description": "Enter the bank's interbranch turnover code (MFO) where your account is opened. This code is used for payment processing.",
+        "error": {
+          "required": "invalid format, must be 5 characters"
+        }
+      },
+      "bank_name": {
+        "title": "Bank Name",
+        "default_value": "Bank Name",
+        "description": "Enter the official name of the bank where your account is opened. This is important for proper fund transfers to your account.",
+        "error": {
+          "required": "field cannot be empty"
+        }
+      },
+      "checking_account": {
+        "title": "Checking Account",
+        "default_value": "12345678901234567890",
+        "description": "Enter the checking account number opened in your name or your company's name at the bank. This account is used for fund transfers and other financial transactions.",
+        "error": {
+          "required": "invalid format, must be 20 characters"
+        }
+      },
+      "transit_account": {
+        "title": "Transit Account",
+        "default_value": "12345678901234567890",
+        "description": "Enter your transit account number if required for fund transfers. This account is used for payment processing and may differ from your checking account.",
+        "error": {
+          "required": "invalid format, must be 20 characters"
+        }
+      },
+      "card_number": {
+        "title": "Card Details",
+        "default_value": "9860123412341234",
+        "description": "Enter your bank card number without spaces. Be careful when entering, as an incorrect number may result in payment rejection.",
+        "error": {
+          "required": "invalid format, must be 16 characters"
+        }
+      },
+      "card_date": {
+        "title": "Card Expiry Date",
+        "default_value": "mm/yy",
+        "description": "Enter your card's expiry date in the format MM/YY (month/year). This information is required for transaction processing and card validation.",
+        "error": {
+          "required": "enter date in format - mm/yy: 09/23"
+        }
+      }
+    },
+    "contact": {
+      "contact": "Contact Information",
+      "phone": {
+        "title": "Phone Number",
+        "default_value": "+998909000123",
+        "description": "Enter your active phone number in international format. This number may be used for communication and payment confirmation.",
+        "error": {
+          "required": "enter phone number in the correct format"
+        }
+      },
+      "email": {
+        "title": "E-mail",
+        "default_value": "sample@gmail.com",
+        "description": "Enter your valid email address. Notifications about payment status and other important messages may be sent to this email.",
+        "error": {
+          "required": "invalid email address"
+        }
+      }
+    },
+    "accept": {
+      "text1": "I confirm the accuracy of the data, I have read and accept the",
+      "span1": "service terms",
+      "and": "and",
+      "span2": "offer rules",
+      "text2": "and agree with them."
+    }
+  },
+
+  "platform": {
+    "cross": "Match",
+    "match_description": "The match percentage indicates how well this platform fits the selected search parameters"
+  },
+  "catalog": {
+    "catalog": "Platform Catalog",
+    "all_platform": "Platforms",
+
+    "search": {
+      "parameters": "Search Parameters",
+      "AI": "AI Auto-Selection",
+      "search": "Search..."
+    },
+
+    "ai": {
+      "title": "Describe your advertising campaign. The more details you provide about your goals, the more effectively target audiences will be selected for you.",
+      "default_input": "Tell us about your brand and the product you plan to advertise."
+    },
+
+    "category": {
+      "title": "Business Category:",
+      "text": "",
+      "default_value": "Not selected"
+    },
+    "age": {
+      "title": "Age:",
+      "text": "",
+      "default_value": "Not selected"
+    },
+    "sex": {
+      "title": "Gender:",
+      "text": "",
+      "default_value": "Not selected"
+    },
+    "region": {
+      "title": "Region:",
+      "text": "",
+      "default_value": "Not selected"
+    },
+    "languages": {
+      "title": "Language:",
+      "text": "",
+      "default_value": "Not selected"
+    },
+    "recommendation": {
+      "title": "Recommended Target Audience",
+      "card": {
+        "business": "Platform Topics",
+        "age": "Age",
+        "sex": "Gender",
+        "region": "Region",
+        "language": "Language"
+      }
+    },
+
+    "see_more": "Expand",
+    "see_less": "Collapse",
+
+    "generation_btn": "Generate",
+
+    "current_cart": {
+      "channels": "Channels",
+      "views": "Reach",
+      "cost": "Total Amount",
+      "cart": "Go to Cart"
+    }
+  },
+  "cart": {
+    "cart": "Cart",
+    "empty": "The list is empty...",
+
+    "create_post": {
+      "title": "Order is protected by a secure transaction",
+      "text": "The platform owner will receive payment only after your confirmation of successful placement",
+      "subscribers": "Total Subscribers",
+      "views": "Total Views",
+      "commission": "Service Commission",
+      "finnaly": "Final Amount",
+      "finnaly_short": "Amount"
+    },
+
+    "recomendation": "Recommended Platforms",
+    "hide": "Hide",
+    "show": "Show",
+    "check": {
+      "amount": "The project exceeds the final amount",
+      "channel_to_be_replaced": "Replacement Channel",
+      "not_found": "Project Not Found",
+      "no_data": "No information available for this project"
+    }
+  },
+
+  "wallet": {
+    "topup": {
+      "title": "Balance Top-Up",
+      "offer": "Balance Top-Up Request",
+      "amount": "Top-Up Amount",
+      "required": "Enter the amount",
+      "placeholder": "Enter the amount",
+      "payment_method": "Select a payment method",
+      "fetch_error": "Request error"
+    },
+    "withdraw": {
+      "title": "Withdrawal of Funds",
+      "offer": "Withdrawal Request",
+      "amount": "Withdrawal Amount",
+      "required": "Enter the amount",
+      "placeholder": "Enter the amount"
+    },
+    "types": {
+      "selfemployed": "Individual",
+      "entity": "Legal Entity",
+      "individual": "Sole Proprietor",
+      "selfemployedaccount": "Self-Employed"
+    },
+    "subtypes": {
+      "account": "Settlement Account",
+      "card": "Transit Account (Humo|UzCard)"
+    },
+    "choose": "Select a payment method",
+    "conditions": {
+      "commission": "Commission",
+      "min": "Minimum Amount",
+      "max": "Maximum Amount"
+    },
+    "guide": {
+      "title": "Step-by-Step Guide",
+      "entity": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc.",
+      "individual": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc.",
+      "selfEmployedTransits": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc.",
+      "selfEmployedAccounts": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc."
+    },
+    "pay": {
+      "title": "To Pay",
+      "text": "Including Commission"
+    },
+    "accept": {
+      "text1": "I confirm the accuracy of the data, I have read and accept the",
+      "span1": "service terms",
+      "and": "and",
+      "span2": "offer rules",
+      "text2": "."
+    },
+    "use_data": "Saved Data:",
+    "empty_data": "You have no saved data",
+    "save_data": "Save data for future use",
+    "finally": "Final Amount",
+    "inn": "TIN:",
+    "pnfl": "PNFL:"
+  },
+  "wallet_history": {
+    "wallet_history": "Transaction History",
+    "tab": {
+      "date": "Date and Time",
+      "purpose": "Purpose",
+      "method": "Method",
+      "ammount": "Amount",
+      "status": "Status"
+    }
+  },
+
+  "create_order": {
+    "create_order": "Order Placement",
+    "name": {
+      "title": "What shall we name the advertising campaign?",
+      "default_value": "Enter a name..."
+    },
+    "create": {
+      "title": "Create an Advertising Post",
+      "text": "Advertising post text...",
+      "generation": "AI Generation",
+      "multi_post": "Unique Post",
+      "universal_post": "One Post for All",
+      "choose_platform": "Choose a Platform",
+      "your_posts": "Your Posts",
+      "add_file": "Upload File",
+      "comment": "Comment for the Blogger...",
+      "result": "Result",
+      "post": "Start filling out the advertising post to see the result",
+      "template": "Upload Template",
+      "comment_to_post": "Comment on the Technical Assignment: ",
+      "see_post_mobile_btn": "View Post",
+
+      "post_types": {
+        "telegram": { "default": "Universal Format" },
+        "instagram": {
+          "stories": "Reels/Stories",
+          "reels": "Reels/Stories",
+          "feed": "Feed"
+        },
+        "youtube": {
+          "shorts": "YouTube Shorts",
+          "videos": "YouTube Videos"
+        }
+      },
+
+      "filter": {
+        "telegram": "Telegram",
+        "instagram": "Instagram",
+        "youtube": "YouTube"
+      },
+      "add_button": {
+        "title": "Add Button",
+        "zero": "You can add up to 3 buttons",
+        "button": "Button",
+        "name": {
+          "title": "Button Name",
+          "default_value": "sample name"
+        },
+        "link": {
+          "title": "Button Link",
+          "default_value": "sample link"
+        },
+        "add_button": "Add Button"
+      },
+
+      "add_files": {
+        "add_files": "File Upload",
+        "types": {
+          "file": "Upload File",
+          "mediafile": "Upload Media File"
+        },
+        "mediafile": {
+          "max_length": "Maximum of 10 media files",
+          "formats": {
+            "title": "Supported Formats:",
+            "text": "JPG/JPEG, PNG, MP4, MOV, AVI, WMV, WEBM"
+          },
+          "size": {
+            "title": "Maximum Size:",
+            "text": "50 MB"
+          }
+        },
+        "file": {
+          "file": "You can upload only one file, such as a technical assignment for the blogger. If your file exceeds the allowed size, you can upload it to Google Drive or Yandex Disk and provide a link in the blogger's comments.",
+          "formats": {
+            "title": "Supported Formats:",
+            "text": "DOC, DOCX, ZIP, PDF, XLS, XLSX, TXT"
+          },
+          "size": {
+            "title": "Maximum Size:",
+            "text": "50 MB"
+          },
+          "post_title": "Files attached to the technical assignment:"
+        }
+      },
+
+      "add": {
+        "text": "Drag and drop a file here",
+        "span": "or",
+        "choose": "Choose a file"
+      }
+    },
+
+    "datetime": {
+      "title": "Specify Date and Time"
+    },
+
+    "payment": {
+      "title": "Order Payment",
+      "pay": "Pay",
+      "approve": "For Approval",
+      "price": "Total Amount:",
+      "description": "Just one last step to launch an effective advertising campaign! Once you pay for the order, platform owners will immediately receive notifications and begin placing your ads."
+    },
+
+    "loading": {
+      "posts": "Sending advertising posts...",
+      "files": "Uploading files...",
+      "payment": "Verifying payment...",
+      "heart": "Almost there..."
+    }
+  },
+
+  "calendar": {
+    "choose_date": "Choose a Date",
+    "choose_time": "Choose a Time",
+    "confirm": "Confirm",
+    "range": "Select Range",
+    "date": "Select Date",
+    "until": "until"
+  },
+  "chat": {
+    "my_messages": "My Messages",
+    "role": {
+      "blogger": "Chat with Blogger",
+      "manager": "Chat with Manager",
+      "advertiser": "Chat with Advertiser"
+    },
+    "types": {
+      "blogger": "From Bloggers",
+      "manager": "From Managers",
+      "advertiser": "From Advertisers",
+      "administration": "Service Administration"
+    },
+    "campaign": "Ad Campaign",
+    "channel": "Channel",
+    "new_message": "Write a message...",
+    "no_message": "There's nothing here yet, send a message",
+    "chat_choose": "Select a chat to start a conversation"
+  },
+
+  "notifications": {
+    "title": "Notifications",
+    "new": "New",
+    "support": {
+      "title": "If you have any questions or need assistance, our support team is always ready to help."
+    },
+    "status": {
+      "order_message_add": {
+        "title": "Add Order Message"
+      },
+      "order_message_read": {
+        "title": "Read Order Message"
+      },
+      "project_message_add": {
+        "title": "Add Project Message"
+      },
+      "project_message_read": {
+        "title": "Read Project Message"
+      },
+      "new_manager_project": {
+        "title": "New Project Manager"
+      },
+      "request_approve": {
+        "title": "Approve Request"
+      },
+      "accept_approve": {
+        "title": "Accept Approval"
+      },
+      "notification_create_deposit": {
+        "title": "Deposit Creation"
+      },
+      "notification_request_approve": {
+        "title": "Approval Request"
+      },
+      "notification_create_desire": {
+        "title": "Recommendation Created"
+      },
+      "notification_launch_manager_project": {
+        "title": "Project Launch with Manager"
+      },
+      "notification_unban_channel": {
+        "title": "Channel Unbanned"
+      },
+      "notification_limited_ban_channel": {
+        "title": "Limited Channel Ban"
+      },
+      "notification_unlimited_ban_channel": {
+        "title": "Unlimited Channel Ban"
+      },
+      "notification_new_order_blogger": {
+        "title": "New Blogger Order"
+      },
+      "notification_accept_order_blogger": {
+        "title": "Blogger Order Accepted"
+      },
+      "notification_publish_post": {
+        "title": "Post Published"
+      },
+      "notification_advertiser_reject_order": {
+        "title": "Advertiser Rejected Order"
+      },
+      "notification_advertiser_reject_order_moderator": {
+        "title": "Moderator Rejected Advertiser Order"
+      },
+      "notification_advertiser_accept_order": {
+        "title": "Advertiser Accepted Order"
+      },
+      "notification_moderation_order_blogger_positive": {
+        "title": "Positive Blogger Order Moderation Notification"
+      },
+      "notification_moderation_order_advertiser_negative": {
+        "title": "Negative Advertiser Order Moderation Notification"
+      },
+      "notification_moderation_order_blogger_negative": {
+        "title": "Negative Blogger Order Moderation Notification"
+      },
+      "notification_moderation_order_advertiser_positive": {
+        "title": "Positive Advertiser Order Moderation Notification"
+      },
+      "notification_refund_manager_project": {
+        "title": "Project Manager Refund"
+      }
+    }
+  },
+
+  "turnkey": {
+    "turnkey": "Guaranteed success for your business with our ready-made plans and personal manager!",
+    "text": "100% of the budget is allocated to placement, and the manager's services are absolutely free!",
+    "partners_title": "Trusted by:",
+    "how_it_works": {
+      "title": "How does it work?",
+      "choose_tarif": "Choose a plan",
+      "step_1": {
+        "title": "From you:",
+        "text": [
+          { "text": "Choose and pay for a plan that suits you" },
+          {
+            "text": "Describe your project and advertising campaign preferences"
+          }
+        ]
+      },
+      "step_2": {
+        "title": "100% of the budget is allocated to placement, and the manager's services are absolutely free!",
+        "text": [
+          { "text": "We develop a customized placement plan" },
+          { "text": "We manually select suitable channels" },
+          { "text": "We oversee the placement of advertising posts" },
+          { "text": "We analyze competitors and target audience" },
+          { "text": "We coordinate and launch the project" },
+          { "text": "We analyze statistics and evaluate the results" }
+        ]
+      },
+      "step_3": {
+        "title": "You will get",
+        "text": [
+          { "text": "Saving time and resources on your advertising campaign" },
+          { "text": "Saving time and resources on your advertising campaign" },
+          { "text": "Saving time and resources on your advertising campaign" },
+          { "text": "Saving time and resources on your advertising campaign" },
+          { "text": "Saving time and resources on your advertising campaign" },
+          { "text": "Saving time and resources on your advertising campaign" }
+        ]
+      }
+    },
+    "customers": {
+      "title": "Customer Reviews",
+      "text": "Find out why customers choose us"
+    },
+    "chain": {
+      "have_balance": {
+        "title": "Describe the project",
+        "comment": {
+          "title": "Add a comment",
+          "text": "Describe your project and its features to create a unique solution that meets your needs",
+          "value": "Comment field..."
+        },
+        "url": {
+          "title": "Add a link",
+          "text": "These links will be attached to your post. For example, for a Telegram advertising post, UTM tags will be generated based on the links (maximum 3 links)",
+          "value": "Https://www.sapmple.info",
+          "button": "Add"
+        },
+        "file": {
+          "title": "Add a file",
+          "text": "Upload a file with the necessary information for your advertising order for a more detailed elaboration of your project (for example, you can upload technical specifications or media files)",
+          "value": "Drag a file here",
+          "or": "or",
+          "button": "Choose file",
+          "formats": {
+            "title": "Supported formats:",
+            "text": "JPG/JPEG, PNG, MP4, MOV, AVI, WMV, WEBM"
+          },
+          "size": {
+            "title": "Maximum size:",
+            "text": "50 MB"
+          }
+        },
+        "button": "Pay"
+      },
+      "no_balance": {
+        "title": "Top up your balance",
+        "text": "Unfortunately, you do not have enough funds to purchase the plan.",
+        "remainder": "You need the following amount to purchase the plan:",
+        "button": "Top up balance",
+        "help": {
+          "text1": "If you need help, contact",
+          "text2": " technical support"
+        }
+      },
+      "success": {
+        "title": "Purchase completed",
+        "info": "Purchase completed!",
+        "text": "Your order has already been accepted for processing. You can track the status of your project in your personal account under the tab ",
+        "project": "“Projects with managers”",
+        "help": {
+          "text1": "If you need help, contact",
+          "text2": " technical support"
+        },
+        "go_to_order": "To order"
+      }
+    }
+  },
+
+  "channel": {
+    "description": {
+      "button": "Add"
+    },
+    "parameters": {
+      "category": "Channel Category",
+      "language": "Audience Language",
+      "age": "Audience Age",
+      "sex": "Gender Ratio",
+      "region": "Region"
+    },
+    "statistics": {
+      "title": "Channel Statistics",
+      "orders": "Orders Completed",
+      "subs": "Subscribers",
+      "views": "Views per Post",
+      "posts": "Posts per Day",
+      "er": "ER",
+      "cpv": "CPV"
+    },
+    "reviews": {
+      "title": "Reviews",
+      "text": "review(s)",
+      "rate": {
+        "perfect": "Excellent",
+        "good": "Good",
+        "normal": "Average",
+        "bad": "Bad",
+        "terrible": "Terrible"
+      }
+    },
+    "add_to_cart": {
+      "title": "Buy Placement",
+      "format": "Placement Format",
+      "price": "Placement Cost",
+      "add": "Add to Cart",
+      "remove": "Remove from Cart"
+    },
+    "recommend": {
+      "title": "Recommended Platforms"
+    }
+  },
+  "faq": {
+    "page_title": "Knowledge Base",
+    "common": {
+      "title": "General Questions"
+    },
+    "advertiser": {
+      "title": "For Advertisers"
+    },
+    "blogger": {
+      "title": "For Channel Owners"
+    }
+  },
+  "filter": {
+    "title": "Social Network",
+    "telegram": "Telegram",
+    "instagram": "Instagram",
+    "youtube": "YouTube"
+  },
+  "sorting": {
+    "title": "Sorting",
+    "price": "By Price",
+    "subscribers": "By Subscribers",
+    "views": "By Views",
+    "cpv": "By Cost per View",
+    "er": "By Engagement",
+    "match": "By Match",
+    "rate": "By Rating"
+  },
+  "platform_types": {
+    "telegram": {
+      "name": "Telegram",
+      "default_value": "https//t.me/channel_name..."
+    },
+    "instagram": {
+      "name": "Instagram",
+      "default_value": "https//instagram.com/channel_name..."
+    },
+    "youtube": {
+      "name": "YouTube",
+      "default_value": "https//youtube.com/channel_name..."
+    }
+  },
+
+  "download_all_files": "All files",
+  "copy_post_text": "Text",
+
+  "add_platform_btn": {
+    "check": "Check",
+    "checked": "Checked",
+    "checked_error": "Error...",
+    "save": "Save",
+    "create": "Submit request",
+    "accept": "Accept",
+
+    "next": "Next",
+    "prev": "Back",
+    "back": "Go back",
+    "send": "Send"
+  },
+  "order_btn": {
+    "feedback": {
+      "btn_title": "Leave feedback",
+      "description": {
+        "title": "Leave feedback",
+        "subtitle": "You will help us get better! Please describe the work done, did you like everything, were there any flaws?"
+      }
+    },
+    "accept": "Accept",
+    "reject": {
+      "btn_title": "Reject",
+      "placeholder": "Describe the reason",
+      "description": {
+        "title": "We regret what happened and will definitely make a fair decision",
+        "subtitle": "Write the reason for rejecting the ad post. The order will be sent for moderation to decide on the situation. If the blogger did not fulfill the conditions of the advertising order, the funds for the ad order will automatically be returned to your balance."
+      }
+    },
+    "checkPost": "Check post",
+    "seePost": "View post",
+    "seeComment": "View comment",
+    "channel": {
+      "advertiser": {
+        "edit": "Replace channel",
+        "process": "Changing channel"
+      },
+      "manager": {
+        "edit": "Replace channel",
+        "process": "Changing channel"
+      }
+    },
+    "post": {
+      "advertiser": {
+        "edit": "Replace post",
+        "process": "Changing post"
+      },
+      "manager": {
+        "edit": "Replace post",
+        "process": "Changing post"
+      }
+    },
+    "sendReport": "Upload report",
+    "downloadReport": "Detailed report",
+    "continue": "Continue",
+    "is_upload_files": "Uploading files"
+  },
+  "offer_btn": {
+    "see": "To applications",
+    "see_post": "View task",
+    "send_link": "Send",
+    "reject": "Reject",
+    "accept": "Accept",
+    "accept_title": "Choose placement date",
+    "accept_date": "Accept order",
+    "reason": "Reason"
+  },
+  "platform_btn": {
+    "description": "Channel description",
+    "calendar": "Calendar",
+    "reviews": "Reviews",
+    "reason": {
+      "btn": "View reason",
+      "okey_btn": "Got it",
+      "title": "Reason for rejection/ban"
+    },
+    "offer": "To applications",
+    "repeat": "Repeat application",
+    "activate": "Activate",
+    "support": "Tech support"
+  },
+
+  "cart_btn": {
+    "save": "Save",
+    "add": "Add more",
+    "create_post": "Create post"
+  },
+  "topup_btn": {
+    "replenish": "Replenish",
+    "send": "Send"
+  },
+  "amount": {
+    "error": {
+      "required": "Enter amount"
+    }
+  },
+  "pagination": {
+    "show_more": "Show more"
+  },
+  "toasts": {
+    "admin": {
+      "channel": {
+        "accept": {
+          "success": "Channel moderation accepted",
+          "error": "Error during channel moderation acceptance"
+        },
+        "remoderation": {
+          "success": "Channel remoderation accepted",
+          "error": "Error during channel remoderation acceptance"
+        },
+        "reject": {
+          "success": "Channel moderation rejected",
+          "error": "Error during channel moderation rejection"
+        },
+        "ban": {
+          "success": "Channel banned",
+          "error": "Error during channel banning"
+        },
+        "unban": {
+          "success": "Channel unbanned",
+          "error": "Error during channel unbanning"
+        },
+        "edit": {
+          "success": "Channel data updated",
+          "error": "Error during channel data update"
+        }
+      },
+      "review": {
+        "accept": {
+          "success": "Review accepted",
+          "error": "Error during review acceptance"
+        },
+        "reject": {
+          "success": "Review rejected",
+          "error": "Error during review rejection"
+        }
+      },
+      "complaint": {
+        "accept": {
+          "success": "Complaint accepted",
+          "error": "Error during complaint acceptance"
+        },
+        "reject": {
+          "success": "Complaint rejected",
+          "error": "Error during complaint rejection"
+        }
+      }
+    },
+    "turnkey": {
+      "success": "Tariff purchased",
+      "error": "Error purchasing tariff"
+    },
+    "websocket": {
+      "new_message": "You have a new message",
+      "new_notification": "You have a new notification"
+    },
+    "auth": {
+      "token": {
+        "error": "Error getting token",
+        "alert": "You need to log in to continue"
+      },
+      "cart": {
+        "error": "Error transferring cart"
+      }
+    },
+    "add_platform": {
+      "link": {
+        "success": "Channel identification successful",
+        "error": "Error during channel identification",
+        "alert": "Unfortunately, time has expired, refresh the page and try again"
+      },
+      "create": {
+        "success": "Channel successfully added",
+        "error": "Error during channel addition"
+      },
+      "edit": {
+        "success": "Channel successfully edited",
+        "error": "Error during channel editing"
+      },
+      "parameters": {
+        "alert": "Please fill in all fields..."
+      }
+    },
+    "add_profile": {
+      "create": {
+        "success": "Data successfully added",
+        "error": "Error during data addition"
+      },
+      "edit": {
+        "success": "Profile data successfully updated",
+        "error": "Error during profile data update"
+      }
+    },
+    "profile": {
+      "edit": {
+        "user": {
+          "success": "User data successfully updated",
+          "error": "Error during user data update"
+        },
+        "password": {
+          "success": "Password successfully updated",
+          "error": "Error during password update",
+          "nonEqual": "Passwords must match",
+          "equal": "New password must be different from the old one"
+        },
+        "email": {
+          "success": "Code sent to new email",
+          "error": "Error sending code",
+          "exist": "Email is already in use"
+        },
+        "email_code": {
+          "success": "Email successfully updated",
+          "error": "Error during email code sending"
+        },
+        "event": {
+          "success": "Flag successfully updated",
+          "error": "Error updating flag"
+        }
+      }
+    },
+    "wallet": {
+      "profile": {
+        "error": "Error filling in data"
+      },
+      "withdraw": {
+        "success": "Withdrawal successful",
+        "error": "Error during withdrawal"
+      },
+      "topup": {
+        "success": "Balance topped up by amount",
+        "error": "Error during top-up"
+      }
+    },
+    "catalog": {
+      "add": {
+        "error": "Error adding to cart"
+      },
+      "remove": {
+        "error": "Error removing from cart"
+      }
+    },
+    "cart": {
+      "error": "You have insufficient funds, please top up your balance"
+    },
+    "offers_blogger": {
+      "channel": {
+        "activate": {
+          "success": "Channel activated",
+          "error": "Error during channel activation"
+        },
+        "deactivate": {
+          "success": "Channel deactivated",
+          "error": "Error during channel deactivation"
+        },
+        "delete": {
+          "success": "Channel deleted",
+          "error": "Error during channel deletion"
+        }
+      },
+      "accept_offer": {
+        "success": "Application accepted",
+        "error": "Error accepting application"
+      },
+      "reject_offer": {
+        "success": "Application rejected",
+        "error": "Error rejecting application"
+      },
+      "send_link": {
+        "success": "Link successfully sent for verification",
+        "error": "Error sending link for verification"
+      }
+    },
+    "orders_manager": {
+      "edit_project": {
+        "success": "Starting to edit the advertising campaign"
+      },
+      "launch_project": {
+        "success": "Advertising campaign successfully launched, we will notify the advertiser and inform the bloggers",
+        "error": "Error during advertising campaign launch"
+      }
+    },
+    "orders_advertiser": {
+      "manager_project": {
+        "success": "Advertising campaign approved, we will notify the manager",
+        "error": "Error during advertising campaign approval"
+      },
+      "accept_post": {
+        "success": "Post accepted",
+        "error": "Error accepting post"
+      },
+      "reject_post": {
+        "success": "Post rejected",
+        "error": "Error rejecting post"
+      },
+      "add_review": {
+        "success": "Review successfully sent!",
+        "error": "Error occurred... Please try again later"
+      },
+      "replace": {
+        "channel": {
+          "success": "We have notified the manager about the need to replace the channel",
+          "error": "Error notifying the manager"
+        },
+        "post": {
+          "success": "We have notified the manager about the need to replace the post",
+          "error": "Error notifying the manager"
+        }
+      }
+    },
+    "create_order": {
+      "top": {
+        "title_empty_error": "Please specify the name of the advertising campaign"
+      },
+      "post": {
+        "success": "Post successfully created",
+        "error": "Error creating post"
+      },
+      "payment": {
+        "success": "Advertising campaign successfully paid and launched!",
+        "error": "You have insufficient funds, please top up your balance"
+      },
+      "date": {
+        "error": "Error creating dates for channels",
+        "add_dates_error": "Please fill in the dates in the orders"
+      },
+      "create_order": {
+        "error": "Error occurred"
+      }
+    },
+    "post": {
+      "copy_text": "Text successfully copied"
+    },
+    "authorization": {
+      "auth_error": "Authorization error",
+      "auth_success": "Successfully authorized",
+      "account_exist": "An account with this email already exists",
+      "registration_error": "Registration error"
+    },
+    "forgot_password": {
+      "password_changed": "Password successfully changed!",
+      "wrong_code": "Incorrect code, please try again...",
+      "other_error": "Oops! Something went wrong..."
+    },
+    "registration": {
+      "email_verify": {
+        "email_exists": "This email is already registered, please log in or use a different email",
+        "other_error": "Oops! Something went wrong...",
+        "wrong_code": "Incorrect code, please try again...",
+        "resend_code_success": "New code resent to email:"
+      }
+    }
+  },
+
+  "url_link": "Enter URL...",
+
+  "admin_panel": {
+    "burger_menu": {
+      "home": "Home",
+      "channels": "Channels",
+      "users": "Users",
+      "transactions": "Transactions",
+      "moderation": "Moderation",
+      "complaints": "Complaints",
+      "reviews": "Reviews"
+    },
+
+    "pages": {
+      "home": "Home",
+      "channels": "Channels",
+      "users": "Users",
+      "transactions": "Transactions",
+      "moderation": "Moderation",
+      "complaints": "Complaints",
+      "reviews": "Reviews"
+    },
+    "channels": {
+      "bar": {
+        "id": "Name & ID",
+        "owner": "Owner",
+        "platform": "Platform",
+        "date": "Date",
+        "status": "Status"
+      },
+
+      "card": {
+        "rate": "Rating",
+        "complete": "Completed",
+        "complaints": "Complaints",
+        "on_hold": "On Hold",
+        "cancel": "Cancelled",
+        "not_complete": "Not Completed",
+        "in_progress": "In Progress",
+        "category": "Channel Category",
+        "language": "Audience Language",
+        "age": "Audience Age",
+        "region": "Audience Region",
+        "sex": "Gender Ratio",
+        "count": "Character Count",
+        "description": "Channel Description",
+
+        "buttons": {
+          "ban": "Ban",
+          "unban": "Unban",
+          "update": "Update",
+          "reject": "Reject",
+          "accept": "Approve"
+        },
+
+        "status": {
+          "active": "Active",
+          "moderation": "Under Moderation",
+          "remoderation": "Under Remoderation",
+          "moderation_reject": "Rejected",
+          "inactive": "Inactive",
+          "banned": "Banned",
+          "deleted": "Deleted"
+        }
+      }
+    },
+    "users": {
+      "bar": {
+        "id": "User ID",
+        "name": "Username",
+        "email": "Email",
+        "date": "Registration Date",
+        "status": "Status"
+      },
+
+      "card": {
+        "status": {
+          "active": "Active",
+          "banned": "Banned"
+        },
+
+        "menu": {
+          "title": "User Settings",
+          "details": "Details",
+          "send_message": "Send Message",
+          "edit": "Edit",
+          "unblock": "Unblock",
+
+          "editing": {
+            "title": "Edit Profile",
+            "username": "Username",
+            "email": "Email",
+            "phone": "Phone",
+            "language": "Language",
+            "location": "Location",
+            "password": "Password",
+            "telegram": "Telegram Account",
+
+            "buttons": {
+              "cancel": "Cancel",
+              "update": "Update"
+            }
+          }
+        }
+      }
+    },
+
+    "userInfo": {
+      "card": {
+        "title": "User Information",
+        "first_name": "First Name",
+        "surname": "Last Name",
+        "email": "Email",
+        "phone": "Phone",
+        "language": "Language",
+        "location": "Location"
+      }
+    },
+    "transactions": {
+      "bar": {
+        "id": "Transaction ID",
+        "sender": "Sender",
+        "recipient": "Recipient",
+        "date": "Creation Date",
+        "method": "Payment Method",
+        "purpose": "Purpose",
+        "amount": "Amount",
+        "status": "Status"
+      },
+
+      "card": {
+        "details": {
+          "title": "System Status",
+          "sender": {
+            "title": "Sender Details",
+            "uuid": "Account UUID",
+            "userId": "User ID",
+            "identification": "Account Identification"
+          },
+          "receiver": {
+            "title": "Receiver Details",
+            "uuid": "Account UUID",
+            "identification": "Account Identification",
+            "userId": "User ID"
+          },
+
+          "identification": {
+            "user": "User",
+            "turnover": "Turnover"
+          }
+        },
+
+        "transactions": {
+          "id": "ID",
+          "transactionId": "Transaction ID",
+          "accountId": "Account ID",
+          "amount": "Amount",
+          "date": "Creation Date"
+        },
+
+        "documents": {
+          "title": "Supporting Documents"
+        },
+
+        "status": {
+          "complete": "Completed",
+          "reject": "Rejected",
+          "pending": "Pending"
+        }
+      }
+    },
+    "complaints": {
+      "choose": {
+        "title": "Taking Complaint to Work",
+        "text": "By clicking the accept button, you take the complaint into work and must make a decision in favor of one of the parties"
+      },
+
+      "types": {
+        "wait": "Waiting",
+        "active": "In Progress",
+        "complete": "Completed"
+      },
+
+      "bar": {
+        "id": "Request ID",
+        "sender": "Sender",
+        "theme": "Subject",
+        "created": "Date",
+        "completed": "Closing Date",
+        "moderator": "Moderator",
+        "priority": "Priority"
+      },
+
+      "card": {
+        "id": "Request ID",
+        "theme": "Subject",
+        "sender": "Sender",
+        "date": "Date",
+        "priority": "Priority",
+
+        "priority_status": {
+          "low": "Low",
+          "medium": "Medium",
+          "high": "High"
+        },
+
+        "buttons": {
+          "accept": "Accept"
+        }
+      }
+    },
+
+    "complaintInfo": {
+      "card": {
+        "title": "Complaint",
+
+        "description": {
+          "title": "Description",
+          "sender": "Sender",
+          "moderator": "Moderator",
+          "date": "Creation Date",
+          "theme": "Subject",
+          "status": "Status",
+          "priority": "Priority",
+          "comment": "Comment"
+        },
+
+        "details": {
+          "title": "Details",
+          "channel": "Advertising Platform",
+          "owner": "Platform Owner",
+          "id": "Order ID",
+          "date": "Placement Date",
+          "time": "Placement Time",
+          "platform": "Platform",
+          "format": "Placement Format",
+          "amount": "Amount",
+          "link_blogger": "Post Link (Platform Owner)",
+          "link_advertiser": "Post Link (Advertiser)",
+
+          "buttons": {
+            "seePost": "View Post"
+          }
+        },
+
+        "decision": {
+          "title": "Make a Decision",
+          "placeholder": "Write the reason",
+          "have_decision": "Decision made in favor of"
+        },
+
+        "buttons": {
+          "make_decision": "Make Decision",
+          "see_decision": "Show Decision",
+          "decision": "Make Decision",
+          "reject": "Reject",
+          "accept": "Accept",
+          "ok": "Ok"
+        },
+
+        "status": {
+          "wait": "Waiting",
+          "active": "Active",
+          "complete": "Completed"
+        }
+      }
+    },
+    "reviews": {
+      "types": {
+        "wait": "Waiting",
+        "accept": "Accepted"
+      },
+
+      "bar": {
+        "id": "Request ID",
+        "platform": "Platform",
+        "sender": "Sender",
+        "moderator": "Moderator",
+        "date": "Date",
+        "closed_date": "Closing Date"
+      },
+
+      "card": {
+        "buttons": {
+          "accept": "Accept",
+          "reject": "Reject",
+          "ok": "Ok"
+        }
+      }
+    }
+  },
+
+  "copy": {
+    "default": "Copied",
+    "technical_specification": {
+      "link": "Link copied"
+    },
+    "admin_transactions": {
+      "id": "Id copied"
+    }
+  },
+
+  "components": {
+    "select": {
+      "placeholder": "Not selected",
+      "search": "Search...",
+      "select_all": "Select all",
+      "not_found": "Not found",
+      "chosen": "Chosen",
+      "clear": "Clear",
+      "close": "Close"
+    }
+  }
+}

@@ -1,19 +1,13 @@
-import { languages } from "@shared/config";
+import { FC } from "react";
+import { useFindLanguage } from "@entities/user";
 import { public_offer } from "@shared/content";
 import { useClearCookiesOnPage } from "@shared/hooks";
-import { FC } from "react";
-import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
 export const PublicOfferPage: FC = () => {
   useClearCookiesOnPage();
-  const { i18n } = useTranslation();
-  const lang =
-    i18n.language === languages.ru
-      ? languages.ru
-      : i18n.language === languages.en
-        ? languages.en
-        : languages.uz;
+  const language = useFindLanguage();
+  const lang = language.name as keyof typeof public_offer;
   return (
     <section className="container">
       <div className={styles.wrapper}>

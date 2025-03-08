@@ -901,1814 +901,1839 @@ export const service_roles = {
           },
         ],
       },
-    ],
+    ] as Content,
   },
   EN: {
-    title: "Правила пользования",
+    title: "Terms of Use",
     subtitle:
-      "Прежде чем начать использовать сервис Blogix (далее — Сервис), просим вас внимательно прочитать этот документ.",
-    date: "«28» августа 2023 г.",
+      "Before you start using the Blogix service (hereinafter referred to as the Service), please read this document carefully.",
+    date: "August 28, 2023",
     description: [
       {
         id: 1,
         content:
-          "Нажимая кнопку, которая подтверждает согласие с настоящими Правилами, а также используя Сервис посредством личного Аккаунта на Сайте, вы принимаете изложенные в этих Правилах условия и обязуетесь их соблюдать. Если вы не принимаете условия Правил, вы должны прекратить пользоваться Сервисом.",
+          "By clicking the button that confirms your agreement with these Terms, as well as by using the Service through a personal Account on the Website, you accept the conditions set forth in these Terms and agree to comply with them. If you do not accept the Terms, you must stop using the Service.",
       },
       {
         id: 2,
         content:
-          "Сервис Blogix — это каталог публичных каналов различных тематик и инструмент для поиска площадок в экосистеме мессенджера Telegram, Instagram, в видеохостинге Youtube. Сервис выступает как платформа, которая объединяет владельцев или администраторов популярных каналов и заказчиков, желающих продвинуть свой продукт, канал, бренд или сервис.",
+          "The Blogix Service is a catalog of public channels on various topics and a tool for finding platforms within the Telegram, Instagram, and YouTube ecosystem. The Service acts as a platform that connects owners or administrators of popular channels with customers who wish to promote their product, channel, brand, or service.",
       },
       {
         id: 3,
         content:
-          "Настоящий Сервис предоставляется для использования юридическими и физическими лицами для целей не связанных, с личными, семейными, домашними и иными нуждами, не связанными с осуществлением предпринимательской деятельности. Использование настоящего Сервиса не регулируется законом Республики Узбекистан, от 26.04.1996 г. № 221-I “О защите прав потребителей”. Физические лица, пользующиеся Сервисом, не являются потребителями в понятии данного закона.",
+          "This Service is provided for use by legal entities and individuals for purposes not related to personal, family, household, or other needs unrelated to business activities. The use of this Service is not regulated by the Law of the Republic of Uzbekistan dated April 26, 1996, No. 221-I 'On Consumer Rights Protection.' Individuals using the Service are not considered consumers under this law.",
       },
     ],
     content: [
       {
         id: 1,
-        title: "1. Понятия и определения.",
+        title: "1. Definitions and Terms.",
         content: [
           {
             id: 1,
             content:
-              "1.1. В настоящих Правилах понятия и термины используются в следующих значениях:",
+              "1.1. The following terms and definitions are used in these Terms:",
           },
           {
             id: 2,
             content:
-              "1.1.1. Проект — это пост интеграции, оформленный в соответствии с пожеланиями Заказчика и содержащий изображение или видео, текст интеграции и ссылку на продукт, сервис или услугу.",
+              "1.1.1. Project – an integration post designed according to the Customer's preferences and containing an image or video, integration text, and a link to a product, service, or offering.",
           },
           {
             id: 3,
             content:
-              "1.1.2. Заказчик — это зарегистрированный пользователь Сервиса, который создает Проекты продвижения, проверяет и оплачивает их размещение.",
+              "1.1.2. Customer – a registered user of the Service who creates promotional Projects, reviews them, and pays for their placement.",
           },
           {
             id: 4,
             content:
-              "1.1.3. Владелец — зарегистрированный пользователь Сервиса, владелец или администратор публичного или приватного канала в Telegram, Instagram или Youtube. Владелец принимает от Заказчика на рассмотрение проекты интеграций и публикует их. ",
+              "1.1.3. Owner – a registered user of the Service who owns or administers a public or private channel on Telegram, Instagram, or YouTube. The Owner reviews integration projects submitted by the Customer and publishes them.",
           },
           {
             id: 5,
             content:
-              "1.1.4. Безопасная сделка (БС) — это система, позволяющая Заказчику и Владельцу канала защититься от невыполнения обязательств второй стороной. БС гарантирует обеим сторонам соблюдение обязательств: Заказчику — выполнение заказа или возврат средств в случае его невыполнения; Владельцу канала — оплату после успешного размещения Проекта.",
+              "1.1.4. Secure Deal (SD) – a system that allows the Customer and the Owner to protect themselves from non-fulfillment of obligations by the other party. SD guarantees compliance with obligations for both parties: for the Customer – the fulfillment of the order or a refund in case of non-fulfillment; for the Owner – payment after the successful placement of the Project.",
           },
           {
             id: 6,
             content:
-              "1.1.5. Заказ – оформленный посредством Сервиса заказ на размещение Проекта, который содержит необходимые условия и информацию для оказания услуги. ",
+              "1.1.5. Order – an order for Project placement made through the Service, containing the necessary conditions and information for the service provision.",
           },
           {
             id: 7,
             content:
-              "1.1.6. Завершенный Заказ – Заказ, получивший на Сервисе статус «выполнен».",
+              "1.1.6. Completed Order – an Order that has received the 'completed' status on the Service.",
           },
         ],
       },
       {
         id: 2,
-        title: "1-Б. Запрещенные тематики Проектов, Каналов и Заказов.",
+        title: "1-B. Prohibited Topics for Projects, Channels, and Orders.",
         content: [
           {
             id: 1,
-            content: "1-Б.1. Действия, нарушающие законодательство РУз: ",
+            content:
+              "1-B.1. Actions that violate the legislation of the Republic of Uzbekistan: ",
           },
           {
             id: 2,
             content:
-              "1-Б.1.1. Товары и услуги, нарушающие Закон РУз, от 07.06.2022 “ О рекламе” в том числе:",
+              "1-B.1.1. Goods and services that violate the Law of the Republic of Uzbekistan, dated 07.06.2022 'On Advertising,' including:",
           },
           {
             id: 3,
             content:
-              "Табак, табачные изделия (в том числе предназначенные для употребления путем нагревания или испарения), курительные принадлежности (в том числе электронные сигареты, электронные системы доставки никотина, устройства для нагревания табака или никотиносодержащих жидкостей, вейпы и расходные материалы к ним, трубки, любые кальяны, сигаретная бумага) и любые курительные смеси.",
+              "Tobacco, tobacco products (including those intended for consumption by heating or evaporation), smoking accessories (including electronic cigarettes, electronic nicotine delivery systems, devices for heating tobacco or nicotine-containing liquids, vapes and their consumables, pipes, any hookahs, cigarette paper), and any smoking mixtures.",
           },
-          { id: 4, content: "Любая алкогольная продукция." },
+          { id: 4, content: "Any alcoholic products." },
           {
             id: 5,
             content:
-              "– Игра на бирже, операции с ценными бумагами, криптовалюты, форекс: ",
+              "– Stock market trading, securities transactions, cryptocurrencies, Forex:",
           },
           {
             id: 6,
             content:
-              "- бинарные опционы, Форекс (в том числе оборудование, консультирование, обучение);",
+              "- binary options, Forex (including equipment, consulting, training);",
           },
           {
             id: 7,
             content:
-              "- ценные бумаги и криптовалюты (в том числе продажа, консультирование, обучение); ",
+              "- securities and cryptocurrencies (including sales, consulting, training);",
+          },
+          {
+            id: 8,
+            content:
+              "- cryptocurrency exchanges, P2P trading, exchangers, and related financial services.",
           },
           {
             id: 9,
             content:
-              "- финансовые и товарные пирамиды, сомнительные способы получения дохода или товаров, а также связанное с ними обучение.",
+              "- financial and commodity pyramids, dubious ways of earning income or obtaining goods, as well as related training.",
           },
           {
             id: 10,
             content:
-              "– Психотерапевтическая и медицинская помощь, в т.ч. народная медицина:",
+              "– Psychotherapeutic and medical assistance, including traditional medicine:",
           },
           {
             id: 11,
             content:
-              "- лечение, расшифровка анализов и  составление рецептов; ",
+              "- treatment, test interpretation, and prescription writing;",
           },
-          { id: 12, content: "- назначение препаратов и БАДов; " },
-          { id: 13, content: "- консультирование по заболеваниям; " },
+          {
+            id: 12,
+            content: "- prescribing medications and dietary supplements;",
+          },
+          { id: 13, content: "- disease consultations;" },
           {
             id: 14,
             content:
-              "- составление и продажа плана тренировок и питания в лечебных целях; ",
+              "- creating and selling workout and nutrition plans for medical purposes;",
           },
           {
             id: 15,
             content:
-              "- продажа, реклама и описание применения медицинских препаратов и БАДов, лекарственного сырья и аппаратов для лечения.",
+              "- sale, advertising, and description of medical drugs and dietary supplements, medicinal raw materials, and treatment devices.",
           },
           {
             id: 16,
             content:
-              "– Взрывчатые вещества и материалы, оружие (в том числе охотничье, пневматическое, гражданское, страйкбольное, пейнтбольное, сувенирное и декоративное), комплектующие изделия к нему, его копии; ножи, за исключением кухонных, перочинных и канцелярских.",
+              "– Explosives and materials, weapons (including hunting, pneumatic, civilian, airsoft, paintball, souvenir, and decorative), weapon components, replicas; knives, except kitchen, pen, and office knives.",
           },
           {
             id: 17,
             content:
-              "– Товары и услуги для взрослых (18+) (в том числе заказ услуг для магазинов и сайтов 18+ и поиск и предложение работы в этой сфере).",
+              "– Adult products and services (18+) (including orders for adult stores and websites, and job offers in this field).",
           },
           {
             id: 18,
             content:
-              "– Азартные игры, ставки  и прогнозы на спорт, лотереи, игры, основанные на риске или пари, в том числе оборудование для их проведения.",
+              "– Gambling, betting, and sports predictions, lotteries, games based on risk or betting, including equipment for their organization.",
           },
           {
             id: 19,
             content:
-              "– Подготовка и написание выпускных квалификационных работ, научных докладов об основных результатах подготовленных научно-квалификационных работ (диссертаций) и иных работ, предусмотренных государственной системой научной аттестации или необходимых для прохождения обучающимися промежуточной или итоговой аттестации. Прохождение тестов, сдача экзаменов за третьих лиц.",
+              "– Writing graduation qualification papers, scientific reports on the main results of scientific qualification works (dissertations), and other works required by the state scientific certification system or necessary for students to pass intermediate or final assessments. Taking tests or exams on behalf of others.",
           },
           {
             id: 20,
             content:
-              "1-Б.1.2. Мошенничество, спам, любая несанкционированная реклама, а также недобросовестная конкуренция и некорректное использование слов в превосходной степени в описании услуг.",
+              "1-B.1.2. Fraud, spam, any unauthorized advertising, as well as unfair competition and incorrect use of superlative words in service descriptions.",
           },
           {
             id: 21,
             content:
-              "1-Б.1.3. Услуги, нарушающие интеллектуальные и авторские права, включая:",
+              "1-B.1.3. Services that violate intellectual and copyright laws, including:",
           },
           {
             id: 22,
-            content: "– незаконное использование товарных знаков;",
+            content: "– illegal use of trademarks;",
           },
           {
             id: 23,
             content:
-              "– услуги, нарушающие условия использования и распространения контента",
+              "– services that violate terms of content use and distribution",
           },
           {
             id: 24,
             content:
-              "1-Б.1.4. Действия и услуги, нарушающие права третьих лиц, в том числе:",
+              "1-B.1.4. Actions and services that infringe on the rights of third parties, including:",
           },
           {
             id: 25,
-            content:
-              "– нарушающие права граждан на частную жизнь или публичный порядок;",
+            content: "– violating citizens' rights to privacy or public order;",
           },
           {
             id: 26,
             content:
-              "– нарушающие морально-этические нормы, носящие характер непристойности;",
+              "– violating moral and ethical standards, being obscene in nature;",
           },
           {
             id: 27,
             content:
-              "– нарушающие честь и достоинство, права и охраняемые законом интересы других лиц.",
+              "– violating honor, dignity, rights, and legally protected interests of others.",
           },
           {
             id: 28,
             content:
-              "– услуги сбора и передачи информации, запрещенной к распространению, в том числе персональные данные.",
+              "– collecting and transmitting prohibited information, including personal data.",
           },
           {
             id: 29,
             content:
-              "– создание и распространение устройств и программ шифрования, технические средства, предназначенные для прослушивания и другого негласного получения информации, а также сопутствующие документы.",
+              "– creating and distributing encryption devices and software, technical means for eavesdropping and other covert information acquisition, as well as related documents.",
           },
           {
             id: 30,
             content:
-              "– предоставление сведений из Единого государственного реестра недвижимости (ЕГРН).",
+              "– providing information from the Unified State Register of Real Estate (EGRN).",
           },
           {
             id: 31,
             content:
-              "1-Б.1.5. Размещение материалов, содержащих угрозы и оскорбления, дискредитирующие других лиц. Услуги или материалы, способствующие возбуждению ненависти либо вражды, разжиганию религиозной, расовой или межнациональной розни, политические призывы, призывы к насилию.",
+              "1-B.1.5. Posting materials containing threats and insults, discrediting others. Services or materials that promote hatred, hostility, religious, racial, or interethnic discord, political appeals, calls for violence.",
           },
           {
             id: 32,
             content:
-              "1-Б.1.6. Услуги, связанные с экстремистскими материалами и предметами с нацистской символикой.",
+              "1-B.1.6. Services related to extremist materials and items with Nazi symbols.",
           },
           {
             id: 33,
             content:
-              "1-Б.2. Иные тематики Проектов, Каналов и Заказов, запрещенные на Сервисе:",
+              "1-B.2. Other topics of Projects, Channels, and Orders prohibited on the Service:",
           },
           {
             id: 34,
             content:
-              "1-Б.2.2. Займы и услуги, связанные с предоставлением займов, от организаций, не имеющих банковской лицензии или статуса НКО.",
+              "1-B.2.2. Loans and loan-related services from organizations without a banking license or NPO status.",
           },
           {
             id: 35,
             content:
-              "1-Б.2.3. Накрутка лайков, подписчиков, репостов, голосов в опросах и других показателей в соцсетях черными методами и способами, которые могут принести вред группе/аккаунту заказчика. В том числе продажа и разработка программного обеспечения для накрутки. Исключение: естественное продвижение и раскрутка аккаунта.",
+              "1-B.2.3. Artificial boosting of likes, followers, reposts, poll votes, and other social media metrics using black-hat methods that may harm the client’s group/account. This includes selling and developing software for boosting. Exception: organic promotion and account growth.",
           },
           {
             id: 36,
             content:
-              "1-Б.2.4. Астрология, магия. В том числе колдовство, нумерология, гадания любые виды обрядов, ритуалов и предсказаний, поиск и предложение работы в этой сфере, нетрадиционная медицина, секты и религиозные услуги.",
+              "1-B.2.4. Astrology, magic, including witchcraft, numerology, fortune-telling, any rituals and predictions, job offers in this field, alternative medicine, sects, and religious services.",
           },
           {
             id: 37,
             content:
-              "1-Б.3. Сервис уведомляет, что придерживается политического нейтралитета. Создание Проектов, содержащих политическую тематику, в том числе прямую или скрытую агитацию с использованием средств и приемов рекламного жанра, равно как и без применения таких средств и приемов, не допускается.",
+              "1-B.3. The Service maintains political neutrality. Creating Projects with political content, including direct or covert agitation using advertising techniques or without them, is not allowed.",
           },
           {
             id: 38,
             content:
-              "1-Б.4. Проекты, содержащие запрещенные тематики не подлежат публикации/размещению.",
+              "1-B.4. Projects containing prohibited topics are not subject to publication/posting.",
           },
           {
             id: 39,
             content:
-              "1-Б.5. Каналы содержащие запрещённые тематики не подлежат включению в каталог, либо, если Каналы каталоге, они подлежит удалению после осуществления проверки, в рамках которой обнаружены в них посты/пост запрещённых тематик.",
+              "1-B.5. Channels containing prohibited topics are not included in the catalog or, if they are already in the catalog, they are subject to removal after verification revealing posts containing prohibited topics.",
           },
           {
             id: 40,
             content:
-              "1-Б.6. Популяризация, реклама VPN-сервисов, способы и методы обхода блокировок;",
+              "1-B.6. Popularization, advertising of VPN services, ways and methods to bypass restrictions;",
           },
           {
             id: 41,
             content:
-              "– Пояснения, как открыть доступ к запрещенным ресурсам и сетям с помощью VPN-сервисов; ",
+              "– Explanations on how to access restricted resources and networks using VPN services;",
           },
           {
             id: 42,
             content:
-              "– Предложения о покупке или скачивания в целях  доступа к VPN-сервисам для обхода блокировок;",
+              "– Offers to purchase or download VPN services for bypassing restrictions;",
           },
         ],
       },
       {
         id: 3,
-        title: "2. Создание Проекта в каналах или чатах (группах).",
+        title: "2. Creating a Project in Channels or Chats (Groups).",
         content: [
           {
             id: 1,
             content:
-              "2.1. Только зарегистрированный пользователь, Заказчик или Владелец, может создавать Проект.",
+              "2.1. Only a registered user, Customer, or Owner can create a Project.",
           },
-          { id: 2, content: "2.2. Проект включает:" },
+          { id: 2, content: "2.2. A Project includes:" },
           {
             id: 3,
             content:
-              "— список публичных каналов (в которых будет размещен проект);",
+              "— a list of public channels (where the project will be placed);",
           },
-          { id: 4, content: "— ссылку на продвигаемый ресурс;" },
-          { id: 5, content: "— текст интеграции;" },
-          { id: 6, content: "— изображения или видео;" },
+          { id: 4, content: "— a link to the promoted resource;" },
+          { id: 5, content: "— integration text;" },
+          { id: 6, content: "— images or videos;" },
           {
             id: 7,
             content:
-              "— требований к публикации (включая форматирование поста, дату и время публикации и прочее).",
+              "— publication requirements (including post formatting, publication date and time, etc.).",
           },
           {
             id: 8,
             content:
-              "2.3. Владелец обязан рассмотреть заявку на размещение Проекта в течение 24 часов. В противном случае заявка будет автоматически отменена. После принятия Проекта в работу Владелец обязан опубликовать Проект в течение 36 часов, если в пожеланиях к проекту не указано иного.",
+              "2.3. The Owner must review the request for Project placement within 24 hours. Otherwise, the request will be automatically canceled. Once the Project is accepted for work, the Owner must publish it within 36 hours, unless otherwise specified in the project requirements.",
           },
           {
             id: 9,
             content:
-              "2.4. Проект публикуется в ленте публичных сообщений канала в зависимости от формата размещения на следующих условиях:",
+              "2.4. The Project is published in the public message feed of the channel based on the following placement conditions:",
           },
           {
             id: 10,
             content:
-              "— формат 1/24: Проект публикуется в канале не менее чем на 24 часа с удержанием не менее, чем на 1 час в топе (без обновлений и вытеснения новыми постами). В чате (группе) Проект публикуется и закрепляется не менее чем на 24 часа; закрепление других постов запрещается на весь срок публикации. Проект может быть удален по истечении 24 часов.",
+              "— Format 1/24: The Project is published in the channel for at least 24 hours, with a minimum of 1 hour in the top (without updates or displacement by new posts). In a chat (group), the Project is published and pinned for at least 24 hours; pinning other posts is prohibited during the publication period. The Project may be deleted after 24 hours.",
           },
           {
             id: 11,
             content:
-              "— формат 2/48: Проект публикуется в канале не менее чем на 48 часов с удержанием не менее чем на 2 часа в топе (без обновлений и вытеснения новыми постами). В чате (группе) Проект публикуется и закрепляется не менее чем на 48 часа; закрепление других постов запрещается на весь срок публикации.Проект может быть удален по истечении 48 часов.",
+              "— Format 2/48: The Project is published in the channel for at least 48 hours, with a minimum of 2 hours in the top (without updates or displacement by new posts). In a chat (group), the Project is published and pinned for at least 48 hours; pinning other posts is prohibited during the publication period. The Project may be deleted after 48 hours.",
           },
           {
             id: 12,
             content:
-              "— формат 3/72: Проект публикуется в канале Проект публикуется не менее чем на 72 часа с удержанием не менее чем на 3 часа в топе (без обновлений и вытеснения новыми постами). В чате (группе) Проект публикуется и закрепляется не менее чем на 72 часа; закрепление других постов запрещается на весь срок публикации. Проект может быть удален по истечении 72 часов.",
+              "— Format 3/72: The Project is published in the channel for at least 72 hours, with a minimum of 3 hours in the top (without updates or displacement by new posts). In a chat (group), the Project is published and pinned for at least 72 hours; pinning other posts is prohibited during the publication period. The Project may be deleted after 72 hours.",
           },
           {
             id: 13,
             content:
-              "— формат «7 дней»: в канале Проект публикуется на 7 дней с удержанием на 3 часа в топе (без обновления и вытеснения новыми постами);",
+              "— Format '7 Days': The Project is published in the channel for 7 days, with 3 hours in the top (without updates or displacement by new posts).",
           },
           {
             id: 14,
             content:
-              "— формат «Нативный»: Проект в канале публикуется на 7 дней с удержанием на 1 час в топе (без обновления и вытеснения новыми постами);",
+              "— Format 'Native': The Project is published in the channel for 7 days, with 1 hour in the top (without updates or displacement by new posts).",
           },
           {
             id: 15,
             content:
-              "— формат «Репост»: Проект-пост из продвигаемого канала публикуется по формату 1/24 в другом канале с удержанием не менее, чем на 1 час в топе (без обновлений и вытеснения новыми постами). По истечении 24 часов Владелец может удалить Проект по своему желанию. ",
+              "— Format 'Repost': A Project-post from the promoted channel is published in another channel under the 1/24 format, with a minimum of 1 hour in the top (without updates or displacement by new posts). After 24 hours, the Owner may delete the Project at their discretion.",
           },
           {
             id: 16,
             content:
-              "2.5. Проект оплачивается на стадии создания. Оплата списывается с баланса Заказчика, резервируется Сервисом и начисляется Владельцу канала после проверки и подтверждения публикации Заказчиком в течение 24—72 часов, в зависимости от формата размещения (по истечении 24—72 часов оплата за проект автоматически переводится Владельцу канала).",
+              "2.5. The Project is paid for at the creation stage. Payment is deducted from the Customer's balance, reserved by the Service, and credited to the Owner after verification and confirmation of publication by the Customer within 24—72 hours, depending on the placement format (after 24—72 hours, the payment is automatically transferred to the channel Owner).",
           },
           {
             id: 17,
             content:
-              "2.6. Владелец в праве отклонить заявку на Проект без объяснения причин.",
+              "2.6. The Owner has the right to decline a Project request without explanation.",
           },
           {
             id: 18,
             content:
-              "2.7. Если в течение 24 часов с момента создания Проекта Владелец не примет заявку в работу, оплата вернется на баланс Заказчика автоматически (если не выбрана функция «Автозамена»).",
+              "2.7. If the Owner does not accept the Project request within 24 hours of creation, the payment will automatically be returned to the Customer's balance (unless the 'Auto Replacement' function is selected).",
           },
           {
             id: 19,
             content:
-              "2.8. Если в течение 24 часов с момента создания Проекта Владелец не примет заявку в работу, но выбрана Автозамена, оплата останется в резерве до момента подбора нового канала или чата и публикации Проекта. Данные о новых каналах и чатах отображаются в разделе «Мои Проекты» в личном кабинете.",
+              "2.8. If the Owner does not accept the Project request within 24 hours of creation but 'Auto Replacement' is selected, the payment will remain reserved until a new channel or chat is found and the Project is published. Information about new channels and chats is displayed in the 'My Projects' section in the personal account.",
           },
           {
             id: 20,
             content:
-              "2.9. Заказчик имеет право отменить оплату в течение 24—72 часов (в зависимости от формата размещения) после уведомления о размещении Проекта, в случае если Владельцем канала были допущены следующие нарушения:",
+              "2.9. The Customer has the right to cancel the payment within 24—72 hours (depending on the placement format) after being notified of the Project's publication if the channel Owner has committed the following violations:",
           },
           {
             id: 21,
             content:
-              "2.9.1. Проект не был опубликован в выбранном канале или чате (группе).",
+              "2.9.1. The project was not published in the selected channel or chat (group).",
           },
           {
             id: 22,
             content:
-              "2.9.2. Проект был опубликован без изображения или видео (если оно было добавлено в Проект).",
+              "2.9.2. The project was published without an image or video (if it was added to the project).",
           },
           {
             id: 23,
             content:
-              "2.9.3. Ссылка на Проект не активна или не соответствует заявленной.",
+              "2.9.3. The project link is inactive or does not match the specified one.",
           },
           {
             id: 24,
             content:
-              "2.9.4. Текст поста был видоизменен без предварительного согласования и не соответствует заявленному.",
+              "2.9.4. The post text was modified without prior approval and does not match the specified one.",
           },
           {
             id: 25,
             content:
-              "2.9.5. Проект был опубликован без учета пожеланий Заказчика (дата, время, форматирование поста и прочее).",
+              "2.9.5. The project was published without considering the client's preferences (date, time, post formatting, etc.).",
           },
           {
             id: 26,
             content:
-              "2.9.6. Канал или чат (группа), в котором заказан Проект, заблокирован или неактивен.",
+              "2.9.6. The channel or chat (group) where the project was ordered is blocked or inactive.",
           },
           {
             id: 27,
             content:
-              "2.9.7. Проект находился менее 24—72 часов (в зависимости от формата размещения) в ленте выбранного канала или был закреплен менее 24—72 часов в чате.",
+              "2.9.7. The project remained in the feed of the selected channel for less than 24–72 hours (depending on the placement format) or was pinned in the chat for less than 24–72 hours.",
           },
           {
             id: 28,
             content:
-              "2.9.8. Проект находился менее 1—3 часов (в зависимости от формата размещения) в топе ленты постов выбранного канала.",
+              "2.9.8. The project remained at the top of the selected channel’s post feed for less than 1–3 hours (depending on the placement format).",
           },
           {
             id: 29,
             content:
-              "2.9.9. Аудитория канала и ее поведение вызывает подозрение (накрутка подписчиков, просмотров и прочая неестественная активность).",
+              "2.9.9. The channel's audience and its behavior raise suspicion (artificial subscriber growth, fake views, and other unnatural activity).",
           },
           {
             id: 30,
             content:
-              "2.10. Заказчик вправе без объяснения причин отменить заявку в течение 24 часов, но только до того момента, пока Владелец не принял ее в работу.",
+              "2.10. The client has the right to cancel the request without explanation within 24 hours, but only before the owner accepts it for processing.",
           },
           {
             id: 31,
             content:
-              "2.11. Все иные причины отмены оплаты Заказчиком могут быть рассмотрены администраторами Сервиса. Финальное решение по таким жалобам остаются на усмотрении администраторов Сервиса.",
+              "2.11. All other reasons for payment cancellation by the client may be reviewed by the service administrators. The final decision on such complaints remains at the discretion of the service administrators.",
           },
           {
             id: 32,
             content:
-              "2.12. После проверки и подтверждения Заказчиком публикации Заказ признается завершенным и приобретает статус «выполнен»",
+              "2.12. After the client reviews and confirms the publication, the order is considered completed and receives the status 'completed'.",
           },
         ],
       },
       {
         id: 4,
-        title: "3. Безопасная сделка (БС). ",
+        title: "3. Secure Transaction (ST).",
         content: [
           {
             id: 1,
-            content: "3.1. БС обязательна к использованию во всех проектах.",
+            content: "3.1. ST is mandatory for all projects.",
           },
           {
             id: 2,
             content:
-              "3.2. Стоимость БС составляет 20% от цены, установленной Владельцем канала, чата (группы) или бота. Бремя БС полностью ложится на Заказчика.",
+              "3.2. The cost of ST is 20% of the price set by the owner of the channel, chat (group), or bot. The ST fee is entirely borne by the client.",
           },
         ],
       },
       {
         id: 5,
-        title: "4. Добавление канала в каталог.",
+        title: "4. Adding a Channel to the Catalog.",
         content: [
           {
             id: 1,
             content:
-              "4.1. Заявку на добавление публичного или приватного канала может подать только пользователь зарегистрированный как Владелец канала.",
+              "4.1. Only a user registered as a Channel Owner can submit a request to add a public or private channel.",
           },
           {
             id: 2,
             content:
-              "4.2. В каталог Сервиса добавляются публичные и приватные каналы.",
+              "4.2. Both public and private channels are added to the Service catalog.",
           },
           {
             id: 3,
             content:
-              "4.3. Заявка на добавление каналапроходит обязательную модерацию в течение 48 часов.",
+              "4.3. The request for adding a channel undergoes mandatory moderation within 48 hours.",
           },
           {
             id: 4,
             content:
-              "4.4. При создании заявки на добавление канала Владелец должен добавить:",
+              "4.4. When submitting a request to add a channel, the Owner must provide:",
           },
-          { id: 5, content: "— ссылку на канал " },
-          { id: 6, content: "— название канала " },
-          {
-            id: 7,
-            content: "— тематику канала ",
-          },
-          { id: 8, content: "— цену за размещение 1 поста;" },
+          { id: 5, content: "— a link to the channel" },
+          { id: 6, content: "— the channel name" },
+          { id: 7, content: "— the channel's topic" },
+          { id: 8, content: "— the price for placing one post;" },
           {
             id: 9,
             content:
-              "2.4. Проект публикуется в ленте публичных сообщений канала в зависимости от формата размещения на следующих условиях:",
+              "2.4. The project is published in the public message feed of the channel depending on the placement format under the following conditions:",
           },
           {
             id: 10,
             content:
-              "— допустимый формат размещения (см. пункт 2.4 настоящих правил);",
+              "— acceptable placement format (see section 2.4 of these rules);",
           },
-          { id: 11, content: "— описание канала, аудитории, охвата." },
+          {
+            id: 11,
+            content: "— a description of the channel, its audience, and reach.",
+          },
           {
             id: 12,
             content:
-              "4.5. Указывать в описании канала личные данные Владельца канала, цены размещения и иные условия размещения, отличающихся от условий Сервиса, запрещено.",
+              "4.5. It is prohibited to include personal data of the Channel Owner, placement prices, or any other conditions that differ from the Service's terms in the channel description.",
           },
           {
             id: 13,
             content:
-              "4.6. Канал не может быть добавлен в каталог, если при модерации выявлены следующие нарушения:",
+              "4.6. A channel cannot be added to the catalog if the following violations are detected during moderation:",
           },
-          { id: 14, content: "4.6.1. Канал имеет меньше 1000 подписчиков." },
-          { id: 15, content: "4.6.2. Канал заблокирован или неактивен." },
+          {
+            id: 14,
+            content: "4.6.1. The channel has fewer than 1,000 subscribers.",
+          },
+          { id: 15, content: "4.6.2. The channel is blocked or inactive." },
           {
             id: 16,
             content:
-              "4.6.3. В заявке указана неверная ссылка на канал или указана ссылка, при которой требуется подтверждение подписки от администратора.",
+              "4.6.3. The request contains an incorrect channel link or a link that requires admin approval for subscription.",
           },
           {
             id: 17,
             content:
-              "4.6.4. Пользователь не является Владельцем заявленного канала.",
+              "4.6.4. The user is not the Owner of the submitted channel.",
           },
           {
             id: 18,
             content:
-              "4.6.5. Канал не имеет цели принимать и размещать Проекты в рамках Сервиса.",
+              "4.6.5. The channel does not intend to accept and publish Projects within the Service.",
           },
           {
             id: 19,
             content:
-              "4.6.6. Канал долгое время не публикует сообщения. Продолжительность времени администрация Сервиса учитывает по своему усмотрению с учетом тематики и общего качества канала.",
+              "4.6.6. The channel has not published messages for a long time. The Service administration determines this period at its discretion, considering the channel's topic and overall quality.",
           },
           {
             id: 20,
             content:
-              "4.6.7. Аудитория канала и ее поведение вызывает подозрение (накрутка подписчиков, просмотров и прочая неестественная активность).",
+              "4.6.7. The channel's audience and its behavior raise suspicions (fake subscribers, artificial views, and other unnatural activity).",
           },
           {
             id: 21,
             content:
-              "4.6.8. Возраст канала не меньше 3 месяцев с даты создания первой публикации.",
+              "4.6.8. The channel must be at least 3 months old from the date of its first publication.",
           },
           {
             id: 22,
             content:
-              "4.6.9. Канал не зарегистрирован в сервисах аналитики или по нему нет актуальных данных за период как минимум 14 дней.",
+              "4.6.9. The channel is not registered in analytics services or does not have up-to-date data for at least the past 14 days.",
           },
           {
             id: 23,
             content:
-              "4.6.10. Канал не соответствует доступной интернационализации на сервисе.",
+              "4.6.10. The channel does not comply with the available internationalization on the Service.",
           },
           {
             id: 24,
             content:
-              "4.6.11. Контент канала нарушает законодательство Республики Узбекистан .",
+              "4.6.11. The channel's content violates the legislation of the Republic of Uzbekistan.",
           },
           {
             id: 25,
             content:
-              "4.6.12. Контент канала в значительной степени состоит из материалов, нарушающих нормы этики и морали (шок-контент).",
+              "4.6.12. The channel's content predominantly consists of materials that violate ethical and moral standards (shock content).",
           },
           {
             id: 26,
             content:
-              "4.6.13. Существенная часть аудитории канала набрана с использованием 'серых' методов продвижения, спам-рассылок, взаимного пиара (меги), механик «принудительной подписки» (обязательная подписка на канал для использования функционала бота и тому подобное).",
+              "4.6.13. A significant part of the channel's audience has been acquired using 'gray' promotion methods, spam mailings, mutual PR (megis), forced subscription mechanisms (mandatory subscription to access bot functionality, etc.).",
           },
           {
             id: 27,
             content:
-              "4.6.14 Содержание канала (чата, группы) и/или аудитория канала (чата, группы) недостаточно качественны для Сервиса (в том числе, но не ограничиваясь, содержат: копипаст, контент низкого качества, большое количество грамматических ошибок, заведомо ложные сообщения и пр.).",
+              "4.6.14. The content of the channel (chat, group) and/or its audience is of insufficient quality for the Service (including, but not limited to, containing: copied content, low-quality content, numerous grammatical errors, deliberately false messages, etc.).",
           },
           {
             id: 28,
             content:
-              "4.6.15 Канал содержит политическую тематику, может содержать прямую или скрытую агитацию, прямо или косвенно относится к тем или иным политическим объединениям, партиям, либо общественным объединениям или организациям, имеющим политические цели.",
+              "4.6.15. The channel contains political topics, may include direct or hidden campaigning, and directly or indirectly relates to political organizations, parties, or public associations with political objectives.",
           },
           {
             id: 29,
             content:
-              "4.6.16 Канал содержит контент серой или запрещенной тематики (18+, схемы заработка, ставки, финансовые пирамиды, мошенничество и т.д.);",
+              "4.6.16. The channel contains content of a gray or prohibited nature (18+, earning schemes, betting, financial pyramids, fraud, etc.).",
           },
           {
             id: 30,
             content:
-              "4.7. Уже добавленный канал могут быть исключены из каталога с течением времени, если будут выявлены нарушения (см. п. 4.6).",
+              "4.7. A channel that has already been added may be removed from the catalog over time if violations are detected (see section 4.6).",
           },
           {
             id: 31,
             content:
-              "4.8. Если канал заподозрен в использовании «серых» и иных способов накрутки, вызывающих неорганический рост подписчиков, аккаунт Владельца подлежит проверке, а в случае выявления справедливости претензий — полной блокировке. Все средства, оставшиеся на балансе такого аккаунта, списываются в пользу Заказчика и не подлежат выводу.",
+              "4.8. If a channel is suspected of using 'gray' or other manipulation methods that cause unnatural subscriber growth, the Owner's account will be subject to verification. If the allegations are confirmed, the account will be fully blocked, and all remaining funds in the account will be forfeited to the Client and cannot be withdrawn.",
           },
           {
             id: 32,
             content:
-              "4.9. Статистика канала и данные о его жизнеспособности будут обновляться в автоматическом режиме.",
+              "4.9. The channel's statistics and viability data will be updated automatically.",
           },
           {
             id: 33,
             content:
-              "4.10. Канал может быть отправлен на повторную модерацию спустя 30 дней после первой подачи заявки на модерацию. Если при повторной модерации канал снова будет отклонен, повторная отправка на модерацию будет доступна еще через 30 дней.",
+              "4.10. A channel can be resubmitted for moderation 30 days after the initial submission. If it is rejected again during re-moderation, the next submission will be available in another 30 days.",
           },
           {
             id: 34,
             content:
-              "4.11. Каналы, уличенные в нечестных методах продвижения (накрутка подписчиков, просмотров и прочая неестественная активность) лишаются возможности повторной модерации.",
+              "4.11. Channels found to be using dishonest promotion methods (subscriber/view fraud and other artificial activity) will be permanently denied further moderation.",
           },
         ],
       },
       {
         id: 6,
-        title: "5. Публикация Проекта в каналах.",
+        title: "5. Project Publication in Channels.",
         content: [
           {
             id: 1,
             content:
-              "5.1. Решение о публикации Проекта принимает только Владелец. Администрация Сервиса не может на это влиять.",
+              "5.1. The decision to publish the Project is made solely by the Owner. The Service Administration cannot influence this decision.",
           },
           {
             id: 2,
             content:
-              "5.2. Получив уведомление о поступлении нового Проекта, Владелец должен ответить на заявку в течение 24 часов. В противном случае по истечении 24 часов Проект будет аннулирован автоматически.",
+              "5.2. Upon receiving a notification of a new Project, the Owner must respond to the request within 24 hours. Otherwise, after 24 hours, the Project will be automatically canceled.",
           },
           {
             id: 3,
             content:
-              "5.3. Владелец имеет право принять Проект в работу либо отклонить заявку.",
+              "5.3. The Owner has the right to accept the Project for work or reject the request.",
           },
           {
             id: 4,
             content:
-              "5.4. При принятии Проекта в работу Владелец меняет статус заявки в личном кабинете и обязуется опубликовать пост в последующие 36 часов, если иное не указано в пожеланиях к Проекту. Если указаны точная дата и время публикации поста Владелец должен принять и выполнить проект согласно настоящим Правилам.",
+              "5.4. When accepting the Project for work, the Owner changes the request status in the personal account and undertakes to publish the post within the next 36 hours unless otherwise specified in the Project requirements. If a specific publication date and time are indicated, the Owner must accept and complete the project in accordance with these Rules.",
           },
           {
             id: 5,
             content:
-              "5.5. Пост необходимо форматировать вручную. Требования Заказчика в заявке являются обязательными к исполнению.",
+              "5.5. The post must be formatted manually. The Client's requirements in the request must be strictly followed.",
           },
           {
             id: 6,
             content:
-              "5.5.1.Запрещено в одностороннем порядке изменять текст входящей заявки при публикацию в Телеграм-канале/Инстаграм-канале/Ютуб-канале.",
+              "5.5.1. It is prohibited to unilaterally change the text of the incoming request when publishing it in a Telegram channel / Instagram channel / YouTube channel.",
           },
           {
             id: 7,
             content:
-              "5.5.2. В случае необходимости сервисом допускается тегирование текста интеграции только одним из следующих хештегов: #рекомендация, #интеграция, #cпонсор (на усмотрение владельца Телеграм-канале/Инстаграм-канале/Ютуб-канале).",
+              "5.5.2. If necessary, the service allows tagging the integration text with only one of the following hashtags: #recommendation, #integration, #sponsor (at the discretion of the Owner of the Telegram channel / Instagram channel / YouTube channel).",
           },
           {
             id: 8,
             content:
-              "5.6. Проект публикуется в ленте публичных сообщений на 24—72 часа с удержанием на 1—3 часа в топе (без обновлений и перекрытия новыми постами) в зависимости от формата размещения. В чатах (группах) пост закрепляют на 24—72 часа.",
+              "5.6. The Project is published in the public message feed for 24–72 hours, with a top placement hold of 1–3 hours (without updates or being overlaid by new posts), depending on the placement format. In chats (groups), the post is pinned for 24–72 hours.",
           },
           {
             id: 9,
             content:
-              "5.7. После успешной публикации Проекта Владелец должен отправить ссылку поста интеграции на проверку, тем самым изменив статус Проекта в разделе «Мои Проекты». Для публичного канала ссылка будет иметь вид «https://t.me/blogix/222», для приватного канала — «https://t.me/c/14376586631/169» . На проверку поста Заказчиком и администраторами Сервиса отводится 24—72 часов. Затем происходит автоматическое зачисление средств на баланс Владельца. Если ссылка на проверку не отправлена в срок, Проект отменяется без дальнейшей оплаты.",
+              "5.7. After successfully publishing the Project, the Owner must send the integration post link for review, thereby changing the Project status in the 'My Projects' section. For a public channel, the link format will be 'https://t.me/blogix/222', and for a private channel — 'https://t.me/c/14376586631/169'. The Client and Service administrators have 24–72 hours to review the post. After this, the funds are automatically credited to the Owner's balance. If the link is not submitted for review on time, the Project is canceled without payment.",
           },
           {
             id: 10,
             content:
-              "5.8. При несоблюдении условий и пожеланий к размещению Заказчик имеет право отменить оплату Проекта при проверке (см. п. 2.9), подав жалобу администраторам Сервиса.",
+              "5.8. If the placement conditions and requirements are not met, the Client has the right to cancel the Project payment upon review (see p. 2.9) by submitting a complaint to the Service administrators.",
           },
         ],
       },
       {
         id: 7,
         title:
-          "6. Общение в чате между Заказчиком и Владельцем канала, чата (группы) или  бота.",
+          "6. Communication in the Chat Between the Client and the Owner of a Channel, Chat (Group), or Bot.",
         content: [
           {
             id: 1,
             content:
-              "6.1. Чат для общения между Заказчиком и Владельцем появляется после принятия заказа и активен до момента его завершения.",
+              "6.1. The chat for communication between the Client and the Owner appears after the order is accepted and remains active until its completion.",
           },
           {
             id: 2,
             content:
-              "6.2. В чате запрещено обмениваться ссылками, которые ведут на сторонние Telegram-аккаунты, даже если они добавлены в каталог Blogix.",
+              "6.2. It is prohibited to exchange links in the chat that lead to third-party Telegram accounts, even if they are listed in the Blogix catalog.",
           },
         ],
       },
       {
         id: 8,
-        title: "7. Пополнение баланса, вывод средств и взимаемые комиссии.",
+        title: "7. Balance Replenishment, Withdrawals, and Fees.",
         content: [
           {
             id: 1,
             content:
-              "7.1. Пополнение и вывод средств с баланса может производить как Заказчик, так и Владелец.",
+              "7.1. Both the Customer and the Owner can replenish and withdraw funds from the balance.",
           },
           {
             id: 2,
             content:
-              "7.2. Когда Владелец выполняет Проект, на его баланс поступает сумма в размере стоимости интеграции, указанной при добавлении канала , за вычетом комиссии Сервиса за сопровождение сделок в размере 12,5%.",
+              "7.2. When the Owner completes a Project, the amount corresponding to the integration cost specified when adding the channel is credited to their balance, minus a 12.5% Service fee for transaction support.",
           },
           {
             id: 3,
             content:
-              "7.3 Доступные методы пополнения баланса, условия и комиссии по каждому методу указаны на странице https://blogix/recharge",
+              "7.3. The available balance replenishment methods, conditions, and fees for each method are listed on the page: https://blogix/recharge.",
           },
           {
             id: 4,
             content:
-              "7.4. Доступные методы вывода средств с баланса и условия по каждому методу можно посмотреть на странице https://blogix/payment_requests",
+              "7.4. The available withdrawal methods and their conditions can be found on the page: https://blogix/payment_requests.",
           },
           {
             id: 5,
             content:
-              "7.4.1. Во избежание мошеннических действий вывод средств, ранее зачисленных Заказчиком на баланс, возможен только на ту банковскую карту или электронный кошелек Заказчика, с которых производилось зачисление на баланс.",
+              "7.4.1. To prevent fraudulent activities, withdrawals of funds previously deposited by the Customer are only possible to the same bank card or e-wallet from which the deposit was made.",
           },
           {
             id: 6,
             content:
-              "7.4.2. В отдельных случаях, при которых вывод средств в соответствии с пунктом",
+              "7.4.2. In certain cases where withdrawal according to section 7.4.1 is not possible due to technical or other reasons (e.g., loss of the payment method), the Service may require verification of the withdrawal request by requesting additional information from the Customer to confirm identity and payment details. Verification may be conducted by a partner company specializing in online verification.",
           },
           {
             id: 7,
             content:
-              "7.4.1. не представляется возможным по техническим или иным причинам (утеря средства платежа и т.д.), Сервис вправе потребовать верификации платежа на вывод средств путем запроса у Заказчика дополнительной информации, удостоверяющей личность и платежные реквизиты. Верификация может быть произведена Сервисом путем привлечения партнерской компании, осуществляющей верификацию в сети Интернет.",
+              "7.4.3. Users who choose the withdrawal method 'Legal Entity or Individual Entrepreneur' must provide: - A valid confirmation of the applicable tax system: after receiving the request but before preparing the necessary documents for withdrawal; - Originals of documents required according to the platform's procedures and the legislation of Uzbekistan (depending on the type of taxation and payment basis, these may include: Contract, Agreement, Report, Act, Invoice, Invoice-Factura): no later than 30 days after each payment. To receive the contract, further communication, and submit signed documents for withdrawal to a bank account, the user must connect to a special bot. Instructions for connecting to the bot are sent on the nearest withdrawal day after the withdrawal request is submitted.",
           },
           {
             id: 8,
             content:
-              "7.4.2. Пользователи, выбравшие способ вывода средств 'Юридическое лицо или ИП', обязаны предоставить: - актуальное подтверждение применяемой системы налогообложения: после получения запроса, но перед оформление комплекта документов на вывод; - оригиналы необходимых в соответствии с процедурой оформления, предусмотренной на платформе, и законодательством РУз документов (такими документами в зависимости от типа налогообложения и основания выплаты могут являться - Договор, Соглашение, Отчет, Акт, Счет, Счет-фактура): в срок не позднее 30 дней после каждой выплаты средств. Для получения договора, дальнейших коммуникаций и передачи подписанных документов для вывода средств на расчетный счет необходимо подключиться к специальному боту, инструкция по подключению к боту отправляется в ближайший день вывода после оформления запроса на вывод средств.",
+              "7.4.4. After successfully withdrawing funds using the methods: Self-Employed, Legal Entity, or Individual Entrepreneur, these methods become permanently linked to the user, and further withdrawals can only be made using them. Changing the withdrawal type is possible only after contacting technical support and providing an official confirmation from the tax authority about the closure/liquidation of the self-employment, individual entrepreneur, or legal entity.",
           },
           {
             id: 9,
             content:
-              "7.4.3. После успешного вывода средств методами: Самозанятые, Юридическое лицо или ИП, данные методы закрепляются за пользователем и вывод средств становится возможен только ими. Смена типа вывода средств возможна только после обращения в техническую поддержку и предоставления официального подтверждения ФНС о закрытие/ликвидации самозанятости/ИП/юридического лица.",
+              "7.5. After creating a withdrawal request, an email with a validation link is sent to the registered email address. A properly submitted and confirmed withdrawal request is processed on the next operational day: Monday, Wednesday, or Friday. Requests submitted on a payout day (Monday, Wednesday, or Friday) will be processed on the next operational day. The minimum withdrawal amount depends on the selected withdrawal method and can be checked at https://blogix/recharge.",
           },
           {
             id: 10,
             content:
-              "7.5. После создания заявки на вывод средств на почтовый ящик отправляется письмо со ссылкой для валидации транзакции. Оформленная и подтвержденная заявка на вывод обрабатывается в ближайший операционный день: понедельник, среду или пятницу. Заявка, созданная в день выплат (понедельник, среду и пятницу) будут обработаны в следующий операционный день. Минимальная сумма вывода зависит от метода вывода денежных средств, и ее можно уточнить в разделе https://blogix/recharge.",
+              "7.6. The Service allows the User to set up automatic payments for transferring payments to Owners for publishing Customer Projects.",
           },
           {
             id: 11,
             content:
-              "7.6. Сервис позволяет Пользователю настроить автоматические платежи для перечисления оплаты Владельцам за услуги публикации Проектов Заказчиков.",
+              "7.7. The balance is deducted when the Customer confirms the publication, for the amount payable to the Owner.",
           },
           {
             id: 12,
             content:
-              "7.7. Баланс списывается при подтверждении Заказчиком публикации на сумму, подлежащую зачислению Владельцу.",
-          },
-          {
-            id: 13,
-            content:
-              "7.8. В случае, когда в течение одного календарного месяца со стороны Заказчика не поступает Заказов, производится автоматическое списание средств с баланса Заказчика в качестве вознаграждения за предоставление права пользования Сервисом в размере 50 000 сум за каждый такой месяц, при недостаточности средств списание производится в сумме остатка.",
+              "7.8. If no orders are placed by the Customer within a calendar month, an automatic deduction of 50,000 UZS is made from the Customer’s balance as a service usage fee for each such month. If the balance is insufficient, the remaining funds are deducted.",
           },
         ],
       },
       {
         id: 9,
-        title: "8-А. Предоставление и прекращение доступа к Сервису ",
+        title: "8-A. Provision and Termination of Access to the Service",
         content: [
           {
             id: 1,
             content:
-              "8-А.1. Пользователям с момента их регистрации на Сервисе предоставляется доступ к Сервису для целей использования функционала Сервиса, в том числе осуществления интеграций. ",
+              "8-A.1. From the moment of registration, Users are granted access to the Service for the purpose of using its functionality, including performing integrations.",
           },
           {
             id: 2,
             content:
-              "8-А.2. Если пользователь Сервиса прекратил/приостановил использование Сервиса для целей осуществления интеграций, ему ограничивается доступ к Сервису, начиная с 7-го месяца со дня последней интеграции. Ограничение заключается в блокировке использования услуг в рамках баланса/лицевого счета в Аккаунте пользователя. Блокировка длится один месяц. Если пользователь возобновил в течение одного месяца пользование Сервисом для целей осуществления интеграций, блокировка будет снята. Если пользователь не возобновил в течение одного месяца пользование Сервисом для целей осуществления интеграций, Аккаунт пользователя подлежит удалению без возможности дальнейшего восстановления.",
+              "8-A.2. If a User stops or suspends the use of the Service for performing integrations, their access to the Service will be restricted starting from the 7th month after the last integration. The restriction consists of blocking the use of services within the balance/account funds in the User's Account. The blocking lasts for one month. If the User resumes using the Service for integrations within this period, the restriction will be lifted. If the User does not resume using the Service for integrations within one month, the User's Account will be deleted without the possibility of recovery.",
           },
         ],
       },
       {
         id: 10,
-        title: "8-Б Гарантия справедливой цены.",
+        title: "8-B. Fair Pricing Guarantee",
         content: [
           {
             id: 1,
             content:
-              "8-Б.1. Администратор канала самостоятельно устанавливает и регулирует цену на размещение в своем канале. Тем не менее, чтобы гарантировать лучшую цену заказчикам Blogix, сервис оставляет за собой право в одностороннем порядке приостановить сотрудничество с каналом, если конечная цена на размещение в канале через сервис Blogix будет дороже, чем цена, указанная на любой другой бирже или публичном ресурсе.",
+              "8-B.1. The channel administrator independently sets and regulates the price for placements in their channel. However, to ensure the best prices for Blogix customers, the service reserves the right to unilaterally suspend cooperation with a channel if the final placement price through Blogix is higher than the price listed on any other exchange or public resource.",
           },
         ],
       },
       {
         id: 11,
-        title: "8-В Ограничение и запрет доступа к Сервису.",
+        title: "8-C. Restriction and Prohibition of Access to the Service",
         content: [
           {
             id: 1,
             content:
-              "8-В.1. Пользователю (и Заказчику и Владельцу) может быть ограничен доступ к Сервису в случае не предоставления им подписанных документов, в рамках сделки, таких как чеки, акты, счета-фактуры и иные.",
+              "8-C.1. A User (both Customer and Owner) may have their access to the Service restricted if they fail to provide signed documents required for the transaction, such as receipts, acts, invoices, and others.",
           },
           {
             id: 2,
             content:
-              "8-В.2. Пользователю (и Заказчику и Владельцу) может быть ограничен доступ к Сервису в случае не прохождения им идентификации личности, если это требуется в рамках исполнения сделки, либо непредоставления документов, которые необходимы для исполнения сделки.",
+              "8-C.2. A User (both Customer and Owner) may have their access to the Service restricted if they fail to complete identity verification when required for transaction execution or fail to provide necessary documents for the transaction.",
           },
           {
             id: 3,
             content:
-              "8-В.3. Пользователю (и Заказчику и Владельцу) может быть ограничен доступ к Сервису в случае иных (не перечисленных в настоящем разделе) нарушений условий сделки или настоящих Правил, а также иных документов, на которые могут ссылаться соглашение или настоящие Правила.",
+              "8-C.3. A User (both Customer and Owner) may have their access to the Service restricted in case of other violations (not listed in this section) of transaction terms, these Rules, or other documents referenced in the agreement or these Rules.",
           },
           {
             id: 4,
             content:
-              "8-В.4. Пользователю (и Заказчику и Владельцу) может быть запрещён доступ к Сервису в случае не неоднократного нарушения, либо грубого нарушения (оценка нарушения осуществляется Сервисом) условий сделки, настоящих Правил и документов, на которые могут ссылаться соглашение или настоящие Правила.",
+              "8-C.4. A User (both Customer and Owner) may be permanently prohibited from accessing the Service in case of repeated violations or a serious violation (assessed at the discretion of the Service) of transaction terms, these Rules, and documents referenced in the agreement or these Rules.",
           },
         ],
       },
       {
         id: 11,
-        title: "9. Ответственность Администрации.",
+        title: "9. Administration's Responsibility",
         content: [
           {
             id: 1,
             content:
-              "9.1. Сервис, его программное обеспечение и весь контент, содержащийся в Сервисе, предоставляются по принципу «как есть» и «как доступно». Администрация не предоставляет никаких прямых и косвенных гарантий, в частности о пригодности или удобстве использования Сервиса или любого контента, доступ к которому осуществляется через Сервис.",
+              "9.1. The Service, its software, and all content contained in the Service are provided on an 'as-is' and 'as-available' basis. The Administration does not provide any explicit or implicit guarantees, including but not limited to suitability or convenience of using the Service or any content accessed through the Service.",
           },
           {
             id: 2,
             content:
-              "9.2. Администрация прилагает все усилия для обеспечения бесперебойной работы Сервиса. Однако Администрация не несет ответственности за временную недоступность Сервиса из-за технических неисправностей, которые являются последствием независимых от Администрации обстоятельств.",
+              "9.2. The Administration makes every effort to ensure the uninterrupted operation of the Service. However, the Administration is not responsible for the temporary unavailability of the Service due to technical failures resulting from circumstances beyond its control.",
           },
           {
             id: 3,
             content:
-              "9.3. Администрация принимает меры для предотвращения появления «накрученных» каналов, а также недействительных или неправомерных предложений, однако НЕ гарантирует максимальную эффективность таких мер.",
+              "9.3. The Administration takes measures to prevent the appearance of 'boosted' channels as well as invalid or unlawful offers; however, it does NOT guarantee the maximum effectiveness of such measures.",
           },
           {
             id: 4,
             content:
-              "9.4. Пользователь Сервиса (Заказчик и Владелец) самостоятельно несет все риски, а Сервис не несет ответственности за выбранные пользователем способы получения вознаграждения. Пользователь Сервиса также принимает и соглашается с тем, что Сервис не несет ответственности за любые суммы комиссий, которые могут взиматься платежной системой Payme, Click или Банками при перечислении или получении любых платежей в рамках Сервиса. Пользователь полностью принимает и соглашается с тем, что любые взимаемые в рамках Сервиса комиссии, такие как: комиссии Payme и их партнеров, комиссии Click и их партнеров, комиссии Банков и их партнеров, комиссии в рамках Безопасной сделки, комиссия за пополнение и исполнение заказов, включаемые в состав расчетов при использовании Сервиса любыми пользователями (в том числе комиссии, предусмотренные разделом 7 настоящих Правил), — возврату и компенсации при выводе средств и (или) отказе пользователя от услуг Сервиса не подлежат.",
+              "9.4. The Service User (both Customer and Owner) bears all risks independently, and the Service is not responsible for the methods chosen by the user for receiving remuneration. The Service User also acknowledges and agrees that the Service is not responsible for any commission fees that may be charged by payment systems such as Payme, Click, or Banks when processing any transactions within the Service. The User fully accepts and agrees that any fees charged within the Service, including: fees from Payme and its partners, fees from Click and its partners, fees from Banks and their partners, fees related to Secure Transactions, fees for order fulfillment and execution—are non-refundable and non-compensable upon fund withdrawal and/or refusal of the Service by the User.",
           },
           {
             id: 5,
             content:
-              "9.5. Пользователь (Заказчик и Владелец) принимает и соглашается с тем, что он использует Сервис в собственных коммерческих целях, и на использование Сервиса не распространяет свое действие Закон Республики Узбекистан, от 26.04.1996 г. № 221-I “О защите прав потребителей”. Пользователь Сервиса не является «потребителем» в рамках указанного Закона, так как использует Сервис для получения коммерческой выгоды и (или) в целях продвижения собственного продукта, канала, бренда или сервиса.",
+              "9.5. The User (both Customer and Owner) acknowledges and agrees that they use the Service for their own commercial purposes, and the Law of the Republic of Uzbekistan dated April 26, 1996, No. 221-I 'On Consumer Protection' does not apply to the use of the Service. The Service User is not considered a 'consumer' under this law, as they use the Service for commercial gain and/or for promoting their own product, channel, brand, or service.",
           },
           {
             id: 6,
             content:
-              "9.6. Во избежание противоречий, спорных ситуаций, интернет-мошенничества и иных действий, вводящих в заблуждение Пользователей, Администрация заверяет, что основным первоисточником информации для работы с Сервисом является веб-сайт Сервиса по адресу: Blogix. Любые обновления в работе Сервиса в первую очередь появляются на указанном веб-сайте. Во всех спорных ситуациях, связанных с выполнением размещений, проведением финансовых операций и прочих действий, которые Пользователи могут осуществлять посредством Сервиса, данные с веб-сайта Сервиса являются основным источником, если иное не будет указано в настоящих Правилах.",
+              "9.6. To avoid contradictions, disputes, internet fraud, and other misleading activities, the Administration affirms that the primary source of information for working with the Service is the Service's website at Blogix. Any updates regarding the Service’s operation appear first on this website. In all disputed situations related to placements, financial transactions, and other actions that Users may perform through the Service, the data from the Service’s website shall be considered the primary source unless otherwise specified in these Rules.",
           },
         ],
       },
       {
         id: 12,
-        title: "10. Заключительные положения.",
+        title: "10. Final Provisions",
         content: [
           {
             id: 1,
             content:
-              "10.1. Администрация оставляет за собой право время от времени вносить изменения, добавлять и исключать положения Правил.",
+              "10.1. The Administration reserves the right to amend, add, or remove provisions of the Rules from time to time.",
           },
           {
             id: 2,
             content:
-              "10.2. Новая редакция Правил вступает в силу с момента ее размещения на Сайте или в Приложении, если иное не указано в новой редакции Правил. Дата последних изменений будет указана в Правилах в соответствующем поле «Дата внесения последних изменений».",
+              "10.2. The new version of the Rules comes into effect from the moment it is published on the Website or in the Application, unless otherwise stated in the new version. The date of the last changes will be indicated in the corresponding 'Last Updated' field of the Rules.",
           },
           {
             id: 3,
             content:
-              "10.3. Заказчик или Владелец может отказаться от соблюдения Правил в любой момент путем прекращения использования Сервиса.",
+              "10.3. The Customer or Owner may refuse to comply with the Rules at any time by ceasing to use the Service.",
           },
           {
             id: 4,
             content:
-              "10.4. Администрация может прекратить действие Правил в любой момент, предварительно предупредив об этом Заказчика или Владельца канала, чата(группы) или бота путем направления сообщения на адрес электронной почты, который Заказчик или Владелец указывают при регистрации.",
+              "10.4. The Administration may terminate the Rules at any time, providing prior notice to the Customer or Owner of a channel, chat (group), or bot by sending a message to the email address specified during registration.",
           },
         ],
       },
       {
         id: 12,
-        title:
-          "11. Политика безопасности Сервиса и предупреждения фрода (мошеннических действий).",
+        title: "11. Service Security Policy and Fraud Prevention",
         content: [
           {
             id: 1,
             content:
-              "11.1 Администрация Сервиса при возникновении подозрений в совершении любым из зарегистрированных пользователей Сервиса следующих действий:",
+              "11.1 The Service Administration, in the event of suspected actions committed by any registered user of the Service, including:",
           },
           {
             id: 2,
-            content: " -  грубых нарушений правил Сервиса;",
+            content: " - Gross violations of the Service rules;",
           },
           {
             id: 3,
             content:
-              " -  попытки фрода (мошеннических действий), в том числе при оплате с помощью любых платежных средств, включая банковские карты;",
+              " - Attempted fraud, including payments using any payment methods, including bank cards;",
           },
           {
             id: 4,
-            content: " -  совершении фейковых Проектов, заявок;",
+            content: " - Creation of fake Projects or requests;",
           },
           {
             id: 5,
             content:
-              "Вправе отменить заказ и применить санкции к обеим сторонам, участвующим в заявке (платеже) в виде блокировки личных Аккаунтов пользователей, и блокировки доступа к их балансам, а также, вправе списать денежные средства, уже поступившие на баланс Владельца, и вернуть их Заказчику вне зависимости от срока давности Проекта (заявки). При этом, Администрация Сервиса вправе исключить канал (каналы) Владельца из каталога Сервиса.  Для контроля за платежами Администрация Сервиса использует данные и сведения, поступающие от партнера Сервиса: платежной системы Payme (ссылка), Click(ссылка) и электронной системы документооборота Didox (ссылка на дидокс). ",
+              "Has the right to cancel the order and impose sanctions on both parties involved in the request (payment) by blocking their personal accounts and access to their balances. Additionally, the Administration has the right to withdraw funds already credited to the Owner's balance and return them to the Customer, regardless of the statute of limitations of the Project (request). Moreover, the Service Administration has the right to exclude the Owner's channel(s) from the Service catalog. To monitor payments, the Service Administration uses data and information received from the Service’s partners: the Payme payment system (link), Click (link), and the electronic document management system Didox (link to Didox).",
           },
           {
             id: 6,
             content:
-              "Возврат денежных средств производится исключительно на тот счет пользователя, с которого была произведена оплата.",
+              "Refunds are made exclusively to the user's account from which the payment was made.",
           },
           {
             id: 7,
             content:
-              "11.2 В целях поддержания безопасности системы и сохранности балансов пользователей функционал не активных более 150 дней аккаунтов ограничивается. Под отсутствием активности для целей данного пункта понимается отсутствие любых транзакций на аккаунте.",
+              "11.2 To maintain system security and preserve user balances, accounts that have been inactive for more than 150 days will have their functionality restricted. For the purposes of this clause, inactivity is defined as the absence of any transactions on the account.",
           },
         ],
       },
       {
         id: 13,
-        title: "12. Право на удаление Аккаунта пользователя Сервиса",
+        title: "12. Right to Delete a Service User Account",
         content: [
           {
             id: 1,
             content:
-              "12.1 Владелец и Заказчик, являющиеся зарегистрированными пользователями Сервиса, вправе удалить свой Аккаунт  пользователя Сервиса только в случае отсутствия незавершенных заказов, в которых они участвуют как одна из сторон заказа. ",
+              "12.1 The Owner and the Customer, who are registered users of the Service, have the right to delete their Service User Account only if there are no ongoing orders in which they are involved as one of the parties.",
           },
           {
             id: 2,
             content:
-              "12.2 В случае, если пользователь Сервиса принял решение удалить свой Аккаунт, он соглашается с тем, что удаление Аккаунта происходит окончательно и без возможности восстановления. Срок, в течение которого существовала бы возможность отменить удаление Аккаунта, или восстановить удаленный Аккаунт, отсутствует.",
+              "12.2 If a Service user decides to delete their Account, they agree that the deletion is final and cannot be reversed. There is no period during which the deletion can be canceled or the deleted Account can be restored.",
           },
           {
             id: 3,
             content:
-              "12.3 В случае, если у пользователя Сервиса, принявшего решение удалить свой Аккаунт, остаются на балансе Аккаунта денежные средства, он имеет возможность вывода средств, предусмотренную пунктами 7.4. - 7.5. настоящих Правил, только до момента удаления Аккаунта. После удаления Аккаунта, возможность вывода средств, предусмотренная пунктами 7.4. - 7.5. настоящих Правил, отсутствует. ",
+              "12.3 If a Service user who has decided to delete their Account has a remaining balance, they may withdraw their funds as provided in sections 7.4 - 7.5 of these Rules, but only before the account is deleted. After the Account is deleted, the ability to withdraw funds as provided in sections 7.4 - 7.5 of these Rules will no longer be available.",
           },
           {
             id: 4,
             content:
-              "12.4 Зарегистрированный пользователь Сервиса соглашается и подтверждает, что он принимает все последствия и риски, связанные с удалением своего Аккаунта пользователя Сервиса.",
+              "12.4 A registered Service user agrees and acknowledges that they accept all consequences and risks associated with deleting their Service User Account.",
           },
         ],
       },
-    ],
+    ] as Content,
   },
   UZ: {
-    title: "Правила пользования",
+    title: "Foydalanish qoidalari",
     subtitle:
-      "Прежде чем начать использовать сервис Blogix (далее — Сервис), просим вас внимательно прочитать этот документ.",
-    date: "«28» августа 2023 г.",
+      "Blogix xizmatidan (bundan buyon 'Xizmat') foydalanishni boshlashdan oldin, ushbu hujjatni diqqat bilan o'qing.",
+    date: "28-avgust, 2023",
     description: [
       {
         id: 1,
         content:
-          "Нажимая кнопку, которая подтверждает согласие с настоящими Правилами, а также используя Сервис посредством личного Аккаунта на Сайте, вы принимаете изложенные в этих Правилах условия и обязуетесь их соблюдать. Если вы не принимаете условия Правил, вы должны прекратить пользоваться Сервисом.",
+          "Ushbu Qoidalarga roziligingizni tasdiqlovchi tugmani bosish va Shaxsiy Hisobingiz orqali Xizmatdan foydalanish orqali siz ushbu Qoidalarga muvofiq harakat qilishga rozilik bildirasiz.",
       },
       {
         id: 2,
         content:
-          "Сервис Blogix — это каталог публичных каналов различных тематик и инструмент для поиска площадок в экосистеме мессенджера Telegram, Instagram, в видеохостинге Youtube. Сервис выступает как платформа, которая объединяет владельцев или администраторов популярных каналов и заказчиков, желающих продвинуть свой продукт, канал, бренд или сервис.",
+          "Blogix xizmati — bu turli mavzulardagi ochiq kanallar katalogi va Telegram messenjeri ekotizimida, Instagram va YouTube videoxostingida maydonlarni qidirish vositasidir. Xizmat mashhur kanallar egalari yoki administratorlarini o‘z mahsuloti, kanali, brendi yoki xizmatini targ‘ib qilmoqchi bo‘lgan buyurtmachilar bilan birlashtiruvchi platforma sifatida ishlaydi.",
       },
       {
         id: 3,
         content:
-          "Настоящий Сервис предоставляется для использования юридическими и физическими лицами для целей не связанных, с личными, семейными, домашними и иными нуждами, не связанными с осуществлением предпринимательской деятельности. Использование настоящего Сервиса не регулируется законом Республики Узбекистан, от 26.04.1996 г. № 221-I “О защите прав потребителей”. Физические лица, пользующиеся Сервисом, не являются потребителями в понятии данного закона.",
+          "Mazkur Xizmat yuridik va jismoniy shaxslar tomonidan shaxsiy, oilaviy, uy yoki tadbirkorlik faoliyati bilan bog‘liq bo‘lmagan ehtiyojlar uchun foydalanish uchun taqdim etiladi. Ushbu Xizmatdan foydalanish O‘zbekiston Respublikasi 1996-yil 26-apreldagi № 221-I-sonli 'Iste’molchilar huquqlarini himoya qilish to‘g‘risida'gi qonun bilan tartibga solinmaydi. Xizmatdan foydalanuvchi jismoniy shaxslar ushbu qonun doirasida iste’molchi hisoblanmaydi.",
       },
     ],
     content: [
       {
         id: 1,
-        title: "1. Понятия и определения.",
+        title: "1. Tushunchalar va ta’riflar.",
         content: [
           {
             id: 1,
             content:
-              "1.1. В настоящих Правилах понятия и термины используются в следующих значениях:",
+              "1.1. Ushbu Qoidalarga muvofiq tushunchalar va atamalar quyidagi ma’nolarda qo‘llaniladi:",
           },
           {
             id: 2,
             content:
-              "1.1.1. Проект — это пост интеграции, оформленный в соответствии с пожеланиями Заказчика и содержащий изображение или видео, текст интеграции и ссылку на продукт, сервис или услугу.",
+              "1.1.1. Loyixa — bu Buyurtmachining talablariga muvofiq tayyorlangan va rasm yoki video, integratsiya matni hamda mahsulot, xizmat yoki servisga havolani o‘z ichiga olgan integratsiya postidir.",
           },
           {
             id: 3,
             content:
-              "1.1.2. Заказчик — это зарегистрированный пользователь Сервиса, который создает Проекты продвижения, проверяет и оплачивает их размещение.",
+              "1.1.2. Buyurtmachi — bu Xizmatning ro‘yxatdan o‘tgan foydalanuvchisi bo‘lib, u reklama loyihalarini yaratadi, ularni tekshiradi va joylashtirish uchun to‘lov qiladi.",
           },
           {
             id: 4,
             content:
-              "1.1.3. Владелец — зарегистрированный пользователь Сервиса, владелец или администратор публичного или приватного канала в Telegram, Instagram или Youtube. Владелец принимает от Заказчика на рассмотрение проекты интеграций и публикует их. ",
+              "1.1.3. Egasi — bu Xizmatning ro‘yxatdan o‘tgan foydalanuvchisi bo‘lib, Telegram, Instagram yoki YouTube’dagi ochiq yoki yopiq kanal egasi yoki administratoridir. Egasi Buyurtmachidan integratsiya loyihalarini ko‘rib chiqish uchun qabul qiladi va ularni nashr etadi.",
           },
           {
             id: 5,
             content:
-              "1.1.4. Безопасная сделка (БС) — это система, позволяющая Заказчику и Владельцу канала защититься от невыполнения обязательств второй стороной. БС гарантирует обеим сторонам соблюдение обязательств: Заказчику — выполнение заказа или возврат средств в случае его невыполнения; Владельцу канала — оплату после успешного размещения Проекта.",
+              "1.1.4. Xavfsiz bitim (XB) — bu Buyurtmachi va Kanal egasini ikkinchi tomon tomonidan majburiyatlarning bajarilmasidan himoya qilishga imkon beradigan tizimdir. XB ikkala tomonni majburiyatlarning bajarilishiga kafolatlaydi: Buyurtmachiga — buyurtmaning bajarilishi yoki u bajarilmagan taqdirda mablag‘larning qaytarilishi; Kanal egasiga — Loyixani muvaffaqiyatli joylashtirgandan keyin to‘lov amalga oshirilishini.",
           },
           {
             id: 6,
             content:
-              "1.1.5. Заказ – оформленный посредством Сервиса заказ на размещение Проекта, который содержит необходимые условия и информацию для оказания услуги. ",
+              "1.1.5. Buyurtma – bu Xizmat orqali joylashtirish uchun rasmiylashtirilgan va xizmatni ko‘rsatish uchun zarur shartlar va ma’lumotlarni o‘z ichiga olgan buyurtma.",
           },
           {
             id: 7,
             content:
-              "1.1.6. Завершенный Заказ – Заказ, получивший на Сервисе статус «выполнен».",
+              "1.1.6. Yakunlangan buyurtma – Xizmatda “bajarildi” maqomini olgan Buyurtma.",
           },
         ],
       },
       {
         id: 2,
-        title: "1-Б. Запрещенные тематики Проектов, Каналов и Заказов.",
+        title: "1-B. Taqiqlangan mavzular: Loyihalar, Kanallar va Buyurtmalar.",
         content: [
           {
             id: 1,
-            content: "1-Б.1. Действия, нарушающие законодательство РУз: ",
+            title:
+              "1-B.1. Oʻzbekiston Respublikasi qonunchiligini buzuvchi harakatlar:",
+            content: [
+              {
+                id: 2,
+                content:
+                  "1-B.1.1. Oʻzbekiston Respublikasining 07.06.2022 yildagi “Reklama toʻgʻrisida”gi qonunini buzuvchi mahsulotlar va xizmatlar, jumladan:",
+              },
+              {
+                id: 3,
+                content:
+                  "Tamaki, tamaki mahsulotlari (shu jumladan, qizdirish yoki bugʻ chiqarish yoʻli bilan isteʼmol qilish uchun moʻljallangan), chekish aksessuarlari (shu jumladan, elektron sigaretalar, elektron nikotin yetkazib berish tizimlari, tamaki yoki nikotinli suyuqliklarni qizdirish qurilmalari, veyplar va ularning sarf materiallari, trubkalar, har qanday kalyanlar, sigaret qogʻozi) va har qanday chekish aralashmalari.",
+              },
+              { id: 4, content: "Har qanday alkogolli mahsulotlar." },
+              {
+                id: 5,
+                content:
+                  "– Birja oʻyinlari, qimmatli qogʻozlar bilan operatsiyalar, kriptovalyutalar, Forex:",
+              },
+              {
+                id: 6,
+                content:
+                  "- binar opsionlar, Forex (shu jumladan, uskunalar, konsalting, oʻqitish);",
+              },
+              {
+                id: 7,
+                content:
+                  "- qimmatli qogʻozlar va kriptovalyutalar (shu jumladan, sotish, konsalting, oʻqitish);",
+              },
+              {
+                id: 9,
+                content:
+                  "- moliyaviy va tovar piramidalari, shubhali daromad olish yoki mahsulot sotib olish usullari, shuningdek, ularga bogʻliq oʻqitish.",
+              },
+              {
+                id: 10,
+                content:
+                  "– Psixoterapevtik va tibbiy yordam, shu jumladan, xalq tabobati:",
+              },
+              {
+                id: 11,
+                content:
+                  "- davolash, tahlillarni sharhlash va retseptlar yozish;",
+              },
+              {
+                id: 12,
+                content:
+                  "- dori vositalari va biologik faol qoʻshimchalar (BAA) belgilash;",
+              },
+              { id: 13, content: "- kasalliklar boʻyicha maslahat berish;" },
+              {
+                id: 14,
+                content:
+                  "- davolash maqsadida mashgʻulot va ovqatlanish rejalarini tuzish va sotish;",
+              },
+              {
+                id: 15,
+                content:
+                  "- tibbiy preparatlar va BAAlar, dori xomashyolari hamda davolash uchun moʻljallangan apparatlarni sotish, reklama qilish va ularni qoʻllash tavsifini berish.",
+              },
+              {
+                id: 16,
+                content:
+                  "– Portlovchi moddalar va materiallar, qurol-yarogʻ (shu jumladan, ovchi, pnevmatik, fuqarolik, strikbol, peyntbol, suvenir va dekorativ qurollar), ularning butlovchi qismlari va nusxalari; oshxona, choʻntak va kantselyariya pichoq va boshqa tigʻli aslahalardan tashqari barcha turdagi pichoqlar.",
+              },
+              {
+                id: 17,
+                content:
+                  "– Kattalar (18+) uchun mahsulot va xizmatlar (shu jumladan, 18+ doʻkonlari va saytlar uchun xizmat buyurtma qilish, bu sohada ish qidirish va taklif qilish).",
+              },
+              {
+                id: 18,
+                content:
+                  "– Qimor oʻyinlari, sportga garov va bashorat qilish, lotereyalar, tavakkalchilikka asoslangan yoki garov oʻyinlari, shu jumladan, ularni oʻtkazish uchun uskunalar.",
+              },
+              {
+                id: 19,
+                content:
+                  "– Bitiruv malakaviy ishlari, ilmiy maqolalar va dissertatsiyalar tayyorlash va yozish, davlat ilmiy attestatsiya tizimida nazarda tutilgan boshqa ishlarni bajarish yoki oʻquvchilar uchun oraliq yoki yakuniy attestatsiyani topshirish uchun xizmat koʻrsatish. Boshqa shaxs nomidan test topshirish yoki imtihon topshirish.",
+              },
+              {
+                id: 20,
+                content:
+                  "1-B.1.2. Firibgarlik, spam, har qanday ruxsatsiz reklama, shuningdek, insofsiz raqobat va xizmatlarni ta’riflashda ortiqcha maqtovli soʻzlarni notoʻgʻri ishlatish.",
+              },
+            ],
           },
-          {
-            id: 2,
-            content:
-              "1-Б.1.1. Товары и услуги, нарушающие Закон РУз, от 07.06.2022 “ О рекламе” в том числе:",
-          },
-          {
-            id: 3,
-            content:
-              "Табак, табачные изделия (в том числе предназначенные для употребления путем нагревания или испарения), курительные принадлежности (в том числе электронные сигареты, электронные системы доставки никотина, устройства для нагревания табака или никотиносодержащих жидкостей, вейпы и расходные материалы к ним, трубки, любые кальяны, сигаретная бумага) и любые курительные смеси.",
-          },
-          { id: 4, content: "Любая алкогольная продукция." },
-          {
-            id: 5,
-            content:
-              "– Игра на бирже, операции с ценными бумагами, криптовалюты, форекс: ",
-          },
-          {
-            id: 6,
-            content:
-              "- бинарные опционы, Форекс (в том числе оборудование, консультирование, обучение);",
-          },
-          {
-            id: 7,
-            content:
-              "- ценные бумаги и криптовалюты (в том числе продажа, консультирование, обучение); ",
-          },
-          {
-            id: 9,
-            content:
-              "- финансовые и товарные пирамиды, сомнительные способы получения дохода или товаров, а также связанное с ними обучение.",
-          },
-          {
-            id: 10,
-            content:
-              "– Психотерапевтическая и медицинская помощь, в т.ч. народная медицина:",
-          },
-          {
-            id: 11,
-            content:
-              "- лечение, расшифровка анализов и  составление рецептов; ",
-          },
-          { id: 12, content: "- назначение препаратов и БАДов; " },
-          { id: 13, content: "- консультирование по заболеваниям; " },
-          {
-            id: 14,
-            content:
-              "- составление и продажа плана тренировок и питания в лечебных целях; ",
-          },
-          {
-            id: 15,
-            content:
-              "- продажа, реклама и описание применения медицинских препаратов и БАДов, лекарственного сырья и аппаратов для лечения.",
-          },
-          {
-            id: 16,
-            content:
-              "– Взрывчатые вещества и материалы, оружие (в том числе охотничье, пневматическое, гражданское, страйкбольное, пейнтбольное, сувенирное и декоративное), комплектующие изделия к нему, его копии; ножи, за исключением кухонных, перочинных и канцелярских.",
-          },
-          {
-            id: 17,
-            content:
-              "– Товары и услуги для взрослых (18+) (в том числе заказ услуг для магазинов и сайтов 18+ и поиск и предложение работы в этой сфере).",
-          },
-          {
-            id: 18,
-            content:
-              "– Азартные игры, ставки  и прогнозы на спорт, лотереи, игры, основанные на риске или пари, в том числе оборудование для их проведения.",
-          },
-          {
-            id: 19,
-            content:
-              "– Подготовка и написание выпускных квалификационных работ, научных докладов об основных результатах подготовленных научно-квалификационных работ (диссертаций) и иных работ, предусмотренных государственной системой научной аттестации или необходимых для прохождения обучающимися промежуточной или итоговой аттестации. Прохождение тестов, сдача экзаменов за третьих лиц.",
-          },
-          {
-            id: 20,
-            content:
-              "1-Б.1.2. Мошенничество, спам, любая несанкционированная реклама, а также недобросовестная конкуренция и некорректное использование слов в превосходной степени в описании услуг.",
-          },
-          {
-            id: 21,
-            content:
-              "1-Б.1.3. Услуги, нарушающие интеллектуальные и авторские права, включая:",
-          },
-          {
-            id: 22,
-            content: "– незаконное использование товарных знаков;",
-          },
-          {
-            id: 23,
-            content:
-              "– услуги, нарушающие условия использования и распространения контента",
-          },
-          {
-            id: 24,
-            content:
-              "1-Б.1.4. Действия и услуги, нарушающие права третьих лиц, в том числе:",
-          },
-          {
-            id: 25,
-            content:
-              "– нарушающие права граждан на частную жизнь или публичный порядок;",
-          },
-          {
-            id: 26,
-            content:
-              "– нарушающие морально-этические нормы, носящие характер непристойности;",
-          },
-          {
-            id: 27,
-            content:
-              "– нарушающие честь и достоинство, права и охраняемые законом интересы других лиц.",
-          },
-          {
-            id: 28,
-            content:
-              "– услуги сбора и передачи информации, запрещенной к распространению, в том числе персональные данные.",
-          },
-          {
-            id: 29,
-            content:
-              "– создание и распространение устройств и программ шифрования, технические средства, предназначенные для прослушивания и другого негласного получения информации, а также сопутствующие документы.",
-          },
-          {
-            id: 30,
-            content:
-              "– предоставление сведений из Единого государственного реестра недвижимости (ЕГРН).",
-          },
-          {
-            id: 31,
-            content:
-              "1-Б.1.5. Размещение материалов, содержащих угрозы и оскорбления, дискредитирующие других лиц. Услуги или материалы, способствующие возбуждению ненависти либо вражды, разжиганию религиозной, расовой или межнациональной розни, политические призывы, призывы к насилию.",
-          },
-          {
-            id: 32,
-            content:
-              "1-Б.1.6. Услуги, связанные с экстремистскими материалами и предметами с нацистской символикой.",
-          },
-          {
-            id: 33,
-            content:
-              "1-Б.2. Иные тематики Проектов, Каналов и Заказов, запрещенные на Сервисе:",
-          },
-          {
-            id: 34,
-            content:
-              "1-Б.2.2. Займы и услуги, связанные с предоставлением займов, от организаций, не имеющих банковской лицензии или статуса НКО.",
-          },
-          {
-            id: 35,
-            content:
-              "1-Б.2.3. Накрутка лайков, подписчиков, репостов, голосов в опросах и других показателей в соцсетях черными методами и способами, которые могут принести вред группе/аккаунту заказчика. В том числе продажа и разработка программного обеспечения для накрутки. Исключение: естественное продвижение и раскрутка аккаунта.",
-          },
-          {
-            id: 36,
-            content:
-              "1-Б.2.4. Астрология, магия. В том числе колдовство, нумерология, гадания любые виды обрядов, ритуалов и предсказаний, поиск и предложение работы в этой сфере, нетрадиционная медицина, секты и религиозные услуги.",
-          },
-          {
-            id: 37,
-            content:
-              "1-Б.3. Сервис уведомляет, что придерживается политического нейтралитета. Создание Проектов, содержащих политическую тематику, в том числе прямую или скрытую агитацию с использованием средств и приемов рекламного жанра, равно как и без применения таких средств и приемов, не допускается.",
-          },
-          {
-            id: 38,
-            content:
-              "1-Б.4. Проекты, содержащие запрещенные тематики не подлежат публикации/размещению.",
-          },
-          {
-            id: 39,
-            content:
-              "1-Б.5. Каналы содержащие запрещённые тематики не подлежат включению в каталог, либо, если Каналы каталоге, они подлежит удалению после осуществления проверки, в рамках которой обнаружены в них посты/пост запрещённых тематик.",
-          },
-          {
-            id: 40,
-            content:
-              "1-Б.6. Популяризация, реклама VPN-сервисов, способы и методы обхода блокировок;",
-          },
-          {
-            id: 41,
-            content:
-              "– Пояснения, как открыть доступ к запрещенным ресурсам и сетям с помощью VPN-сервисов; ",
-          },
-          {
-            id: 42,
-            content:
-              "– Предложения о покупке или скачивания в целях  доступа к VPN-сервисам для обхода блокировок;",
-          },
+          [
+            {
+              id: 21,
+              content:
+                "1-B.1.3. Intellektual va mualliflik huquqlarini buzuvchi xizmatlar, jumladan:",
+            },
+            {
+              id: 22,
+              content: "– tovar belgilari noqonuniy ishlatilishi;",
+            },
+            {
+              id: 23,
+              content:
+                "– kontentdan foydalanish va tarqatish shartlarini buzuvchi xizmatlar;",
+            },
+            {
+              id: 24,
+              content:
+                "1-B.1.4. Uchinchi shaxslarning huquqlarini buzuvchi harakatlar va xizmatlar, jumladan:",
+            },
+            {
+              id: 25,
+              content:
+                "– fuqarolarning shaxsiy hayoti yoki jamoat tartibini buzuvchi harakatlar;",
+            },
+            {
+              id: 26,
+              content:
+                "– axloqiy me’yorlarga zid va odobsizlik xarakteriga ega bo‘lgan xizmatlar;",
+            },
+            {
+              id: 27,
+              content:
+                "– inson sha’ni va qadr-qimmatini, boshqalarning huquqlari va qonun bilan himoyalangan manfaatlarini buzuvchi xizmatlar.",
+            },
+            {
+              id: 28,
+              content:
+                "– tarqatish taqiqlangan ma’lumotlarni, shu jumladan shaxsiy ma’lumotlarni yig‘ish va uzatish xizmatlari.",
+            },
+            {
+              id: 29,
+              content:
+                "– shifrlash qurilmalari va dasturlarini yaratish va tarqatish, tinglash va boshqa maxfiy ma’lumotlarni olish uchun mo‘ljallangan texnik vositalar hamda ularga oid hujjatlar.",
+            },
+            {
+              id: 30,
+              content:
+                "– Yagona davlat ko‘chmas mulk reyestridan (YeGRN) ma’lumotlar taqdim etish.",
+            },
+            {
+              id: 31,
+              content:
+                "1-B.1.5. Boshqalarga tahdid va haqorat qiluvchi, ularning sha’nini to‘kadigan materiallarni joylashtirish. Nafrat yoki adovatni qo‘zg‘atishga, diniy, irqiy yoki milliy nizolarni keltirib chiqarishga, zo‘ravonlik va siyosiy chaqiriqlarga yo‘naltirilgan xizmatlar yoki materiallar.",
+            },
+            {
+              id: 32,
+              content:
+                "1-B.1.6. Ekstremistik materiallar va natsistik ramzlar tushirilgan buyumlar bilan bog‘liq xizmatlar.",
+            },
+            {
+              id: 33,
+              content:
+                "1-B.2. Servisda taqiqlangan boshqa Mavzular, Kanallar va Buyurtmalar:",
+            },
+            {
+              id: 34,
+              content:
+                "1-B.2.2. Bank litsenziyasi yoki NKO maqomiga ega bo‘lmagan tashkilotlar tomonidan kreditlar va kredit bilan bog‘liq xizmatlar ko‘rsatish.",
+            },
+            {
+              id: 35,
+              content:
+                "1-B.2.3. Layk, obunachi, repost, so‘rovnomalar ovozlari va boshqa ko‘rsatkichlarni noqonuniy usullar orqali oshirish. Bunda buyurtmachining guruh/akkauntiga zarar yetkazishi mumkin bo‘lgan qora usullarni qo‘llash, shu jumladan bunday dasturlarni ishlab chiqish va sotish. Istisno: akkauntni tabiiy usulda targ‘ib qilish va rivojlantirish.",
+            },
+            {
+              id: 36,
+              content:
+                "1-B.2.4. Astrologiya, sehrgarlik. Barcha turdagi folbinlik, numerologiya, marosim va bashoratlar, bu sohada ish taklif qilish, an’anaviy bo‘lmagan tibbiyot, sektalar va diniy xizmatlar.",
+            },
+            {
+              id: 37,
+              content:
+                "1-B.3. Servis siyosiy neytrallik tamoyiliga amal qiladi. Reklama usullari va janrlaridan foydalangan yoki foydalanmagan holda siyosiy mavzudagi loyihalarni yaratish taqiqlanadi.",
+            },
+            {
+              id: 38,
+              content:
+                "1-B.4. Taqiqlangan mavzularni o‘z ichiga olgan loyihalar nashr etilmaydi.",
+            },
+            {
+              id: 39,
+              content:
+                "1-B.5. Taqiqlangan mavzularni o‘z ichiga olgan kanallar katalogga qo‘shilmaydi yoki katalogda bo‘lsa, tekshiruv natijasida bunday postlar aniqlansa, o‘chirib tashlanadi.",
+            },
+            {
+              id: 40,
+              content:
+                "1-B.6. VPN-servislarni ommalashtirish, reklama qilish, blokirovkalarni chetlab o‘tish usullari va usullari;",
+            },
+            {
+              id: 41,
+              content:
+                "– VPN-servislar orqali taqiqlangan resurslarga va tarmoqlarga kirish usullarini tushuntirish;",
+            },
+            {
+              id: 42,
+              content:
+                "– Blokirovkalarni chetlab o‘tish uchun VPN-servislarga kirish maqsadida ularni sotib olish yoki yuklab olish bo‘yicha takliflar.",
+            },
+          ],
         ],
       },
       {
         id: 3,
-        title: "2. Создание Проекта в каналах или чатах (группах).",
+        title: "2. Proyektni Kanallarda yoki Chat (Guruh)larda Yaratish",
         content: [
           {
             id: 1,
             content:
-              "2.1. Только зарегистрированный пользователь, Заказчик или Владелец, может создавать Проект.",
+              "2.1. Faqatgina ro‘yxatdan o‘tgan foydalanuvchi, Buyurtmachi yoki Egasi loyiha yaratishi mumkin.",
           },
-          { id: 2, content: "2.2. Проект включает:" },
+          {
+            id: 2,
+            content: "2.2. Loyiha quyidagilarni o‘z ichiga oladi:",
+          },
           {
             id: 3,
             content:
-              "— список публичных каналов (в которых будет размещен проект);",
+              "— jamoat kanallari ro‘yxati (unda loyiha joylashtiriladi);",
           },
-          { id: 4, content: "— ссылку на продвигаемый ресурс;" },
-          { id: 5, content: "— текст интеграции;" },
-          { id: 6, content: "— изображения или видео;" },
+          {
+            id: 4,
+            content: "— targ‘ib qilinayotgan resursga havola;",
+          },
+          {
+            id: 5,
+            content: "— integratsiya matni;",
+          },
+          {
+            id: 6,
+            content: "— rasmlar yoki videolar;",
+          },
           {
             id: 7,
             content:
-              "— требований к публикации (включая форматирование поста, дату и время публикации и прочее).",
+              "— e’lon qilish talablarini (post formatlash, e’lon qilish sanasi va vaqti va boshqalar) o‘z ichiga oladi.",
           },
           {
             id: 8,
             content:
-              "2.3. Владелец обязан рассмотреть заявку на размещение Проекта в течение 24 часов. В противном случае заявка будет автоматически отменена. После принятия Проекта в работу Владелец обязан опубликовать Проект в течение 36 часов, если в пожеланиях к проекту не указано иного.",
+              "2.3. Ega loyiha joylashtirish bo‘yicha arizani 24 soat ichida ko‘rib chiqishi shart. Aks holda, ariza avtomatik ravishda bekor qilinadi. Loyiha ishga qabul qilingandan so‘ng, Ega uni 36 soat ichida e’lon qilishi kerak, agar loyihada boshqa muddatlar ko‘rsatilmagan bo‘lsa.",
           },
           {
             id: 9,
             content:
-              "2.4. Проект публикуется в ленте публичных сообщений канала в зависимости от формата размещения на следующих условиях:",
+              "2.4. Loyiha quyidagi shartlar asosida kanalning jamoat xabarlar tasmasida e’lon qilinadi:",
           },
           {
             id: 10,
             content:
-              "— формат 1/24: Проект публикуется в канале не менее чем на 24 часа с удержанием не менее, чем на 1 час в топе (без обновлений и вытеснения новыми постами). В чате (группе) Проект публикуется и закрепляется не менее чем на 24 часа; закрепление других постов запрещается на весь срок публикации. Проект может быть удален по истечении 24 часов.",
+              "— 1/24 formati: Loyiha kanalga kamida 24 soatga joylashtiriladi va kamida 1 soat davomida yuqorida turadi (yangilanishlar va yangi postlar bilan siqib chiqarishsiz). Chatda (guruhda) loyiha 24 soat davomida joylashtiriladi va mahkamlanadi; butun joylashtirish muddati davomida boshqa postlarni mahkamlash taqiqlanadi. 24 soat o‘tgach loyiha o‘chirilishi mumkin.",
           },
           {
             id: 11,
             content:
-              "— формат 2/48: Проект публикуется в канале не менее чем на 48 часов с удержанием не менее чем на 2 часа в топе (без обновлений и вытеснения новыми постами). В чате (группе) Проект публикуется и закрепляется не менее чем на 48 часа; закрепление других постов запрещается на весь срок публикации.Проект может быть удален по истечении 48 часов.",
+              "— 2/48 formati: Loyiha kanalga kamida 48 soatga joylashtiriladi va kamida 2 soat davomida yuqorida turadi (yangilanishlar va yangi postlar bilan siqib chiqarishsiz). Chatda (guruhda) loyiha 48 soat davomida joylashtiriladi va mahkamlanadi; butun joylashtirish muddati davomida boshqa postlarni mahkamlash taqiqlanadi. 48 soat o‘tgach loyiha o‘chirilishi mumkin.",
           },
           {
             id: 12,
             content:
-              "— формат 3/72: Проект публикуется в канале Проект публикуется не менее чем на 72 часа с удержанием не менее чем на 3 часа в топе (без обновлений и вытеснения новыми постами). В чате (группе) Проект публикуется и закрепляется не менее чем на 72 часа; закрепление других постов запрещается на весь срок публикации. Проект может быть удален по истечении 72 часов.",
+              "— 3/72 formati: Loyiha kanalga kamida 72 soatga joylashtiriladi va kamida 3 soat davomida yuqorida turadi (yangilanishlar va yangi postlar bilan siqib chiqarishsiz). Chatda (guruhda) loyiha 72 soat davomida joylashtiriladi va mahkamlanadi; butun joylashtirish muddati davomida boshqa postlarni mahkamlash taqiqlanadi. 72 soat o‘tgach loyiha o‘chirilishi mumkin.",
           },
           {
             id: 13,
             content:
-              "— формат «7 дней»: в канале Проект публикуется на 7 дней с удержанием на 3 часа в топе (без обновления и вытеснения новыми постами);",
+              "— «7 kun» formati: Loyiha kanalga 7 kun davomida joylashtiriladi va 3 soat davomida yuqorida turadi (yangilanishlar va yangi postlar bilan siqib chiqarishsiz);",
           },
           {
             id: 14,
             content:
-              "— формат «Нативный»: Проект в канале публикуется на 7 дней с удержанием на 1 час в топе (без обновления и вытеснения новыми постами);",
+              "— «Native» formati: Loyiha kanalga 7 kun davomida joylashtiriladi va 1 soat davomida yuqorida turadi (yangilanishlar va yangi postlar bilan siqib chiqarishsiz);",
           },
           {
             id: 15,
             content:
-              "— формат «Репост»: Проект-пост из продвигаемого канала публикуется по формату 1/24 в другом канале с удержанием не менее, чем на 1 час в топе (без обновлений и вытеснения новыми постами). По истечении 24 часов Владелец может удалить Проект по своему желанию. ",
+              "— «Repost» formati: Targ‘ib qilinayotgan kanal post-loyihasi boshqa kanalda 1/24 formati bo‘yicha e’lon qilinadi va kamida 1 soat davomida yuqorida turadi (yangilanishlar va yangi postlar bilan siqib chiqarishsiz). 24 soat o‘tgach, Ega o‘z xohishiga ko‘ra loyihani o‘chirish huquqiga ega.",
           },
           {
             id: 16,
             content:
-              "2.5. Проект оплачивается на стадии создания. Оплата списывается с баланса Заказчика, резервируется Сервисом и начисляется Владельцу канала после проверки и подтверждения публикации Заказчиком в течение 24—72 часов, в зависимости от формата размещения (по истечении 24—72 часов оплата за проект автоматически переводится Владельцу канала).",
+              "2.5. Loyiha yaratish bosqichida to‘lanadi. To‘lov Buyurtmachi balansidan yechib olinadi, Xizmat tomonidan zaxiraga olinadi va joylashtirish Buyurtmachi tomonidan tasdiqlangandan keyin 24—72 soat ichida Egaga o‘tkaziladi. Agar 24—72 soat ichida tasdiqlanmasa, to‘lov avtomatik ravishda Egaga o‘tkaziladi.",
           },
           {
             id: 17,
             content:
-              "2.6. Владелец в праве отклонить заявку на Проект без объяснения причин.",
+              "2.6. Ega loyihani rad etish huquqiga ega va rad etish sababini tushuntirish shart emas.",
           },
           {
             id: 18,
             content:
-              "2.7. Если в течение 24 часов с момента создания Проекта Владелец не примет заявку в работу, оплата вернется на баланс Заказчика автоматически (если не выбрана функция «Автозамена»).",
+              "2.7. Agar Ega loyiha yaratilgan paytdan boshlab 24 soat ichida arizani qabul qilmasa, to‘lov avtomatik ravishda Buyurtmachi balansiga qaytariladi (agar «Avtoalmashtirish» funksiyasi tanlanmagan bo‘lsa).",
           },
           {
             id: 19,
             content:
-              "2.8. Если в течение 24 часов с момента создания Проекта Владелец не примет заявку в работу, но выбрана Автозамена, оплата останется в резерве до момента подбора нового канала или чата и публикации Проекта. Данные о новых каналах и чатах отображаются в разделе «Мои Проекты» в личном кабинете.",
+              "2.8. Agar loyiha yaratilgan paytdan boshlab 24 soat ichida Ega arizani qabul qilmasa, lekin Avtoalmashtirish tanlangan bo‘lsa, to‘lov yangi kanal yoki chat tanlanib, loyiha joylashtirilguncha zaxirada qoladi. Yangi kanallar va chatlar haqidagi ma’lumotlar «Mening Loyihalarim» bo‘limida aks etadi.",
           },
           {
             id: 20,
             content:
-              "2.9. Заказчик имеет право отменить оплату в течение 24—72 часов (в зависимости от формата размещения) после уведомления о размещении Проекта, в случае если Владельцем канала были допущены следующие нарушения:",
+              "2.9. Buyurtmachi loyihani joylashtirish haqida xabarnoma olganidan keyin 24—72 soat (joylashtirish formatiga bog‘liq) ichida to‘lovni bekor qilish huquqiga ega, agar kanal Egasi quyidagi qoidabuzarliklarga yo‘l qo‘ygan bo‘lsa:",
           },
           {
             id: 21,
             content:
-              "2.9.1. Проект не был опубликован в выбранном канале или чате (группе).",
+              "2.9.1. Loyiha tanlangan kanal yoki chat (guruh)da chop etilmagan.",
           },
           {
             id: 22,
             content:
-              "2.9.2. Проект был опубликован без изображения или видео (если оно было добавлено в Проект).",
+              "2.9.2. Loyiha rasm yoki video bilan chop etilmagan (agar loyiha tarkibiga qo‘shilgan bo‘lsa).",
           },
           {
             id: 23,
             content:
-              "2.9.3. Ссылка на Проект не активна или не соответствует заявленной.",
+              "2.9.3. Loyiha havolasi faol emas yoki ko‘rsatilganiga mos kelmaydi.",
           },
           {
             id: 24,
             content:
-              "2.9.4. Текст поста был видоизменен без предварительного согласования и не соответствует заявленному.",
+              "2.9.4. Post matni oldindan kelishilmagan holda o‘zgartirilgan va ko‘rsatilgan talablarga mos kelmaydi.",
           },
           {
             id: 25,
             content:
-              "2.9.5. Проект был опубликован без учета пожеланий Заказчика (дата, время, форматирование поста и прочее).",
+              "2.9.5. Loyiha Buyurtmachining talablarini inobatga olmasdan chop etilgan (sana, vaqt, post formatlash va boshqalar).",
           },
           {
             id: 26,
             content:
-              "2.9.6. Канал или чат (группа), в котором заказан Проект, заблокирован или неактивен.",
+              "2.9.6. Loyiha joylashtirilgan kanal yoki chat (guruh) bloklangan yoki faol emas.",
           },
           {
             id: 27,
             content:
-              "2.9.7. Проект находился менее 24—72 часов (в зависимости от формата размещения) в ленте выбранного канала или был закреплен менее 24—72 часов в чате.",
+              "2.9.7. Loyiha tanlangan kanal tasmasida 24—72 soatdan kam vaqt davomida yoki chatda 24—72 soatdan kam vaqt davomida mahkamlangan holda saqlangan.",
           },
           {
             id: 28,
             content:
-              "2.9.8. Проект находился менее 1—3 часов (в зависимости от формата размещения) в топе ленты постов выбранного канала.",
+              "2.9.8. Loyiha tanlangan kanal postlari tasmasining yuqori qismida 1—3 soatdan kam vaqt davomida saqlangan.",
           },
           {
             id: 29,
             content:
-              "2.9.9. Аудитория канала и ее поведение вызывает подозрение (накрутка подписчиков, просмотров и прочая неестественная активность).",
+              "2.9.9. Kanal auditoriyasi va uning harakati shubhali (obunachilar, ko‘rishlar sun'iy ravishda oshirilgan va boshqa tabiiy bo‘lmagan faollik).",
           },
           {
             id: 30,
             content:
-              "2.10. Заказчик вправе без объяснения причин отменить заявку в течение 24 часов, но только до того момента, пока Владелец не принял ее в работу.",
+              "2.10. Buyurtmachi sabablarsiz 24 soat ichida arizani bekor qilish huquqiga ega, lekin faqatgina Egasi uni ishga qabul qilishidan oldin.",
           },
           {
             id: 31,
             content:
-              "2.11. Все иные причины отмены оплаты Заказчиком могут быть рассмотрены администраторами Сервиса. Финальное решение по таким жалобам остаются на усмотрении администраторов Сервиса.",
+              "2.11. Buyurtmachining to‘lovni bekor qilish bo‘yicha boshqa sabablarini Xizmat administratorlari ko‘rib chiqishi mumkin. Bunday shikoyatlar bo‘yicha yakuniy qaror Xizmat administratorlari ixtiyorida qoladi.",
           },
           {
             id: 32,
             content:
-              "2.12. После проверки и подтверждения Заказчиком публикации Заказ признается завершенным и приобретает статус «выполнен»",
+              "2.12. Buyurtmachi loyiha chop etilganligini tekshirib tasdiqlaganidan so‘ng, buyurtma yakunlangan hisoblanadi va «bajarilgan» holatiga ega bo‘ladi.",
           },
         ],
       },
       {
         id: 4,
-        title: "3. Безопасная сделка (БС). ",
+        title: "3. Xavfsiz bitim (XB).",
         content: [
           {
             id: 1,
-            content: "3.1. БС обязательна к использованию во всех проектах.",
+            content: "3.1. XB barcha loyihalarda majburiy hisoblanadi.",
           },
           {
             id: 2,
             content:
-              "3.2. Стоимость БС составляет 20% от цены, установленной Владельцем канала, чата (группы) или бота. Бремя БС полностью ложится на Заказчика.",
+              "3.2. XB narxi kanal, chat (guruh) yoki bot Egasi tomonidan belgilangan narxning 20% ni tashkil qiladi. XB xarajati to‘liq Buyurtmachi zimmasiga yuklatiladi.",
           },
         ],
       },
       {
         id: 5,
-        title: "4. Добавление канала в каталог.",
+        title: "4. Kanalni katalogga qo‘shish.",
         content: [
           {
             id: 1,
             content:
-              "4.1. Заявку на добавление публичного или приватного канала может подать только пользователь зарегистрированный как Владелец канала.",
+              "4.1. Ommaviy yoki shaxsiy kanal qo‘shish uchun faqat Kanal egasi sifatida ro‘yxatdan o‘tgan foydalanuvchi ariza yuborishi mumkin.",
           },
           {
             id: 2,
             content:
-              "4.2. В каталог Сервиса добавляются публичные и приватные каналы.",
+              "4.2. Xizmat katalogiga ommaviy va shaxsiy kanallar qo‘shiladi.",
           },
           {
             id: 3,
             content:
-              "4.3. Заявка на добавление каналапроходит обязательную модерацию в течение 48 часов.",
+              "4.3. Kanal qo‘shish bo‘yicha ariza majburiy moderatsiyadan o‘tadi va 48 soat ichida ko‘rib chiqiladi.",
           },
           {
             id: 4,
             content:
-              "4.4. При создании заявки на добавление канала Владелец должен добавить:",
+              "4.4. Kanal qo‘shish bo‘yicha ariza yuborishda Kanal egasi quyidagilarni taqdim etishi lozim:",
           },
-          { id: 5, content: "— ссылку на канал " },
-          { id: 6, content: "— название канала " },
-          {
-            id: 7,
-            content: "— тематику канала ",
-          },
-          { id: 8, content: "— цену за размещение 1 поста;" },
+          { id: 5, content: "— kanal havolasi " },
+          { id: 6, content: "— kanal nomi " },
+          { id: 7, content: "— kanal mavzusi " },
+          { id: 8, content: "— 1 ta post joylashtirish narxi;" },
           {
             id: 9,
             content:
-              "2.4. Проект публикуется в ленте публичных сообщений канала в зависимости от формата размещения на следующих условиях:",
+              "2.4. Loyiha kanalning ommaviy xabarlar tasmasida quyidagi shartlar asosida joylashtiriladi:",
           },
           {
             id: 10,
-            content:
-              "— допустимый формат размещения (см. пункт 2.4 настоящих правил);",
+            content: "— joylashtirish formati (qarang 2.4-band);",
           },
-          { id: 11, content: "— описание канала, аудитории, охвата." },
+          { id: 11, content: "— kanal, auditoriya va qamrov tavsifi." },
           {
             id: 12,
             content:
-              "4.5. Указывать в описании канала личные данные Владельца канала, цены размещения и иные условия размещения, отличающихся от условий Сервиса, запрещено.",
+              "4.5. Kanal tavsifida Kanal egasining shaxsiy ma’lumotlari, joylashtirish narxlari va Xizmat shartlaridan farq qiluvchi boshqa shartlarni ko‘rsatish taqiqlanadi.",
           },
           {
             id: 13,
             content:
-              "4.6. Канал не может быть добавлен в каталог, если при модерации выявлены следующие нарушения:",
+              "4.6. Kanal quyidagi holatlar aniqlanganda katalogga qo‘shilmaydi:",
           },
-          { id: 14, content: "4.6.1. Канал имеет меньше 1000 подписчиков." },
-          { id: 15, content: "4.6.2. Канал заблокирован или неактивен." },
+          { id: 14, content: "4.6.1. Kanalda 1000 tadan kam obunachi mavjud." },
+          { id: 15, content: "4.6.2. Kanal bloklangan yoki faol emas." },
           {
             id: 16,
             content:
-              "4.6.3. В заявке указана неверная ссылка на канал или указана ссылка, при которой требуется подтверждение подписки от администратора.",
+              "4.6.3. Arizada noto‘g‘ri kanal havolasi ko‘rsatilgan yoki havoladan foydalanish uchun administrator tomonidan obunani tasdiqlash talab qilinadi.",
           },
           {
             id: 17,
-            content:
-              "4.6.4. Пользователь не является Владельцем заявленного канала.",
+            content: "4.6.4. Foydalanuvchi ko‘rsatilgan kanalning Egasi emas.",
           },
           {
             id: 18,
             content:
-              "4.6.5. Канал не имеет цели принимать и размещать Проекты в рамках Сервиса.",
+              "4.6.5. Kanal Xizmat doirasida loyihalarni qabul qilish va joylashtirish maqsadiga ega emas.",
           },
           {
             id: 19,
             content:
-              "4.6.6. Канал долгое время не публикует сообщения. Продолжительность времени администрация Сервиса учитывает по своему усмотрению с учетом тематики и общего качества канала.",
+              "4.6.6. Kanal uzoq vaqt davomida post joylashtirmagan. Xizmat ma’muriyati ushbu vaqt davomiyligini mavzu va kanal sifati asosida o‘z xohishiga ko‘ra baholaydi.",
           },
           {
             id: 20,
             content:
-              "4.6.7. Аудитория канала и ее поведение вызывает подозрение (накрутка подписчиков, просмотров и прочая неестественная активность).",
+              "4.6.7. Kanal auditoriyasi va uning faoliyati shubha uyg‘otadi (obunachilar, ko‘rishlar sun’iy oshirilgan yoki boshqa g‘ayritabiiy faollik mavjud).",
           },
           {
             id: 21,
             content:
-              "4.6.8. Возраст канала не меньше 3 месяцев с даты создания первой публикации.",
+              "4.6.8. Kanal yoshi birinchi nashr yaratilgan sanadan boshlab kamida 3 oy bo‘lishi kerak.",
           },
           {
             id: 22,
             content:
-              "4.6.9. Канал не зарегистрирован в сервисах аналитики или по нему нет актуальных данных за период как минимум 14 дней.",
+              "4.6.9. Kanal tahlil xizmatlarida ro‘yxatdan o‘tmagan yoki u bo‘yicha kamida 14 kunlik dolzarb ma’lumotlar mavjud emas.",
           },
           {
             id: 23,
             content:
-              "4.6.10. Канал не соответствует доступной интернационализации на сервисе.",
+              "4.6.10. Kanal xizmatda mavjud bo‘lgan xalqaro standartlarga mos kelmaydi.",
           },
           {
             id: 24,
             content:
-              "4.6.11. Контент канала нарушает законодательство Республики Узбекистан .",
+              "4.6.11. Kanal kontenti O‘zbekiston Respublikasi qonunchiligini buzadi.",
           },
           {
             id: 25,
             content:
-              "4.6.12. Контент канала в значительной степени состоит из материалов, нарушающих нормы этики и морали (шок-контент).",
+              "4.6.12. Kanal kontenti axloq va odob me’yorlariga zid materiallardan (shok-kontent) iborat.",
           },
           {
             id: 26,
             content:
-              "4.6.13. Существенная часть аудитории канала набрана с использованием 'серых' методов продвижения, спам-рассылок, взаимного пиара (меги), механик «принудительной подписки» (обязательная подписка на канал для использования функционала бота и тому подобное).",
+              "4.6.13. Kanal auditoriyasining asosiy qismi 'kulrang' targ‘ibot usullari, spam-xabarlar, o‘zaro reklama (mega), majburiy obuna mexanizmlari (bot funksiyasidan foydalanish uchun kanalga majburiy obuna bo‘lish va hokazo) orqali yig‘ilgan.",
           },
           {
             id: 27,
             content:
-              "4.6.14 Содержание канала (чата, группы) и/или аудитория канала (чата, группы) недостаточно качественны для Сервиса (в том числе, но не ограничиваясь, содержат: копипаст, контент низкого качества, большое количество грамматических ошибок, заведомо ложные сообщения и пр.).",
+              "4.6.14. Kanal (chat, guruh) mazmuni va/yoki auditoriyasi xizmat uchun yetarlicha sifatli emas (shu jumladan, lekin cheklanmagan holda: ko‘chirib joylangan materiallar, past sifatli kontent, ko‘p sonli grammatik xatolar, ataylab noto‘g‘ri ma’lumotlar va h.k.).",
           },
           {
             id: 28,
             content:
-              "4.6.15 Канал содержит политическую тематику, может содержать прямую или скрытую агитацию, прямо или косвенно относится к тем или иным политическим объединениям, партиям, либо общественным объединениям или организациям, имеющим политические цели.",
+              "4.6.15. Kanal siyosiy mavzuga ega, bevosita yoki bilvosita tashviqot o‘z ichiga olishi, turli siyosiy tashkilotlar, partiyalar yoki siyosiy maqsadga ega bo‘lgan jamoat tashkilotlariga aloqador bo‘lishi mumkin.",
           },
           {
             id: 29,
             content:
-              "4.6.16 Канал содержит контент серой или запрещенной тематики (18+, схемы заработка, ставки, финансовые пирамиды, мошенничество и т.д.);",
+              "4.6.16. Kanal kulrang yoki taqiqlangan mavzular (18+, daromad sxemalari, garovlar, moliyaviy piramida, firibgarlik va h.k.) bo‘yicha kontentga ega.",
           },
           {
             id: 30,
             content:
-              "4.7. Уже добавленный канал могут быть исключены из каталога с течением времени, если будут выявлены нарушения (см. п. 4.6).",
+              "4.7. Oldin katalogga qo‘shilgan kanal vaqt o‘tishi bilan qoidabuzarliklar aniqlansa, katalogdan olib tashlanishi mumkin (qarang 4.6-bo‘lim).",
           },
           {
             id: 31,
             content:
-              "4.8. Если канал заподозрен в использовании «серых» и иных способов накрутки, вызывающих неорганический рост подписчиков, аккаунт Владельца подлежит проверке, а в случае выявления справедливости претензий — полной блокировке. Все средства, оставшиеся на балансе такого аккаунта, списываются в пользу Заказчика и не подлежат выводу.",
+              "4.8. Agar kanal 'kulrang' va boshqa sun’iy auditoriya oshirish usullaridan foydalanganlikda gumon qilinsa, Egasi akkaunti tekshiriladi va ayblovlar tasdiqlansa, to‘liq bloklanadi. Bunday akkaunt balansida qolgan barcha mablag‘lar Buyurtmachining foydasiga yechib olinadi va chiqarib bo‘lmaydi.",
           },
           {
             id: 32,
             content:
-              "4.9. Статистика канала и данные о его жизнеспособности будут обновляться в автоматическом режиме.",
+              "4.9. Kanal statistikasi va uning hayotiyligi haqidagi ma’lumotlar avtomatik ravishda yangilanib boradi.",
           },
           {
             id: 33,
             content:
-              "4.10. Канал может быть отправлен на повторную модерацию спустя 30 дней после первой подачи заявки на модерацию. Если при повторной модерации канал снова будет отклонен, повторная отправка на модерацию будет доступна еще через 30 дней.",
+              "4.10. Kanal birinchi moderatsiya so‘rovini bergandan keyin 30 kun o‘tgach qayta moderatsiyaga yuborilishi mumkin. Agar qayta moderatsiyada ham rad etilsa, yana 30 kundan keyin qayta yuborish mumkin bo‘ladi.",
           },
           {
             id: 34,
             content:
-              "4.11. Каналы, уличенные в нечестных методах продвижения (накрутка подписчиков, просмотров и прочая неестественная активность) лишаются возможности повторной модерации.",
+              "4.11. Nohaq targ‘ibot usullaridan foydalangan kanallar (obunachilar, ko‘rishlar va boshqa sun’iy faollikni oshirish) qayta moderatsiya qilish imkoniyatidan mahrum bo‘ladi.",
           },
         ],
       },
       {
         id: 6,
-        title: "5. Публикация Проекта в каналах.",
+        title: "5. Loyihani kanallarda e'lon qilish.",
         content: [
           {
             id: 1,
             content:
-              "5.1. Решение о публикации Проекта принимает только Владелец. Администрация Сервиса не может на это влиять.",
+              "5.1. Loyihani e'lon qilish to‘g‘risidagi qarorni faqat Egasi qabul qiladi. Xizmat ma'muriyati bunga ta’sir qila olmaydi.",
           },
           {
             id: 2,
             content:
-              "5.2. Получив уведомление о поступлении нового Проекта, Владелец должен ответить на заявку в течение 24 часов. В противном случае по истечении 24 часов Проект будет аннулирован автоматически.",
+              "5.2. Yangi Loyiha kelib tushganligi haqida bildirishnoma olgandan so‘ng, Egasi arizaga 24 soat ichida javob berishi kerak. Aks holda, 24 soat o‘tgach, Loyiha avtomatik ravishda bekor qilinadi.",
           },
           {
             id: 3,
             content:
-              "5.3. Владелец имеет право принять Проект в работу либо отклонить заявку.",
+              "5.3. Egasi Loyihani qabul qilish yoki arizani rad etish huquqiga ega.",
           },
           {
             id: 4,
             content:
-              "5.4. При принятии Проекта в работу Владелец меняет статус заявки в личном кабинете и обязуется опубликовать пост в последующие 36 часов, если иное не указано в пожеланиях к Проекту. Если указаны точная дата и время публикации поста Владелец должен принять и выполнить проект согласно настоящим Правилам.",
+              "5.4. Agar Egasi Loyihani qabul qilsa, shaxsiy kabinetda ariza holatini o‘zgartirishi va keyingi 36 soat ichida postni e'lon qilish majburiyatini oladi, agar Loyihada boshqa muddatlar ko‘rsatilmagan bo‘lsa. Agar postni e'lon qilish uchun aniq sana va vaqt belgilangan bo‘lsa, Egasi Loyihani qabul qilishi va ushbu Qoidalarga muvofiq bajarishi shart.",
           },
           {
             id: 5,
             content:
-              "5.5. Пост необходимо форматировать вручную. Требования Заказчика в заявке являются обязательными к исполнению.",
+              "5.5. Post qo‘lda formatlanishi kerak. Arizada Buyurtmachining talablarini bajarish majburiy hisoblanadi.",
           },
           {
             id: 6,
             content:
-              "5.5.1.Запрещено в одностороннем порядке изменять текст входящей заявки при публикацию в Телеграм-канале/Инстаграм-канале/Ютуб-канале.",
+              "5.5.1. Telegram kanali / Instagram kanali / YouTube kanalida e'lon qilishda kelib tushgan ariza matnini bir tomonlama o‘zgartirish taqiqlanadi.",
           },
           {
             id: 7,
             content:
-              "5.5.2. В случае необходимости сервисом допускается тегирование текста интеграции только одним из следующих хештегов: #рекомендация, #интеграция, #cпонсор (на усмотрение владельца Телеграм-канале/Инстаграм-канале/Ютуб-канале).",
+              "5.5.2. Xizmat zarur hollarda integratsiya matnini faqat quyidagi xeshteglarning biri bilan belgilashga ruxsat beradi: #rekomendatsiya, #integratsiya, #sponsor (Telegram kanali / Instagram kanali / YouTube kanal egasining tanloviga ko‘ra).",
           },
           {
             id: 8,
             content:
-              "5.6. Проект публикуется в ленте публичных сообщений на 24—72 часа с удержанием на 1—3 часа в топе (без обновлений и перекрытия новыми постами) в зависимости от формата размещения. В чатах (группах) пост закрепляют на 24—72 часа.",
+              "5.6. Loyiha 24—72 soat davomida jamoat xabarlar lentasida e'lon qilinadi va 1—3 soat davomida yuqorida ushlab turiladi (yangilanishlarsiz va yangi postlar bilan yopilmasdan). Chatlarda (guruhlar) post 24—72 soat davomida qotiriladi.",
           },
           {
             id: 9,
             content:
-              "5.7. После успешной публикации Проекта Владелец должен отправить ссылку поста интеграции на проверку, тем самым изменив статус Проекта в разделе «Мои Проекты». Для публичного канала ссылка будет иметь вид «https://t.me/blogix/222», для приватного канала — «https://t.me/c/14376586631/169» . На проверку поста Заказчиком и администраторами Сервиса отводится 24—72 часов. Затем происходит автоматическое зачисление средств на баланс Владельца. Если ссылка на проверку не отправлена в срок, Проект отменяется без дальнейшей оплаты.",
+              "5.7. Loyihani muvaffaqiyatli e'lon qilgandan so‘ng, Egasi integratsiya posti havolasini tekshirish uchun yuborishi kerak, shu bilan birga Loyihaning holatini 'Mening Loyihalarim' bo‘limida o‘zgartirishi lozim. Ochiq kanal uchun havola quyidagi ko‘rinishda bo‘ladi: 'https://t.me/blogix/222', yopiq kanal uchun — 'https://t.me/c/14376586631/169'. Postni Buyurtmachi va Xizmat administratorlari tekshirish uchun 24—72 soat ajratiladi. Shundan so‘ng, Egasi balansiga avtomatik ravishda mablag‘ o‘tkaziladi. Agar tekshirish uchun havola o‘z vaqtida yuborilmasa, Loyiha to‘lovsiz bekor qilinadi.",
           },
           {
             id: 10,
             content:
-              "5.8. При несоблюдении условий и пожеланий к размещению Заказчик имеет право отменить оплату Проекта при проверке (см. п. 2.9), подав жалобу администраторам Сервиса.",
+              "5.8. Agar joylashtirish shartlari va talablari bajarilmasa, Buyurtmachi Loyihani tekshirish vaqtida to‘lovni bekor qilish huquqiga ega (qarang 2.9-band), Xizmat administratorlariga shikoyat yuborish orqali.",
           },
         ],
       },
       {
         id: 7,
         title:
-          "6. Общение в чате между Заказчиком и Владельцем канала, чата (группы) или  бота.",
+          "6. Buyurtmachi va Kanal, chat (guruh) yoki bot Egasi o‘rtasidagi chat orqali muloqot.",
         content: [
           {
             id: 1,
             content:
-              "6.1. Чат для общения между Заказчиком и Владельцем появляется после принятия заказа и активен до момента его завершения.",
+              "6.1. Buyurtmachi va Egasi o‘rtasidagi chat buyurtma qabul qilingandan keyin paydo bo‘ladi va u yakunlangunga qadar faol bo‘ladi.",
           },
           {
             id: 2,
             content:
-              "6.2. В чате запрещено обмениваться ссылками, которые ведут на сторонние Telegram-аккаунты, даже если они добавлены в каталог Blogix.",
+              "6.2. Chatda Blogix katalogiga qo‘shilgan bo‘lsa ham, boshqa Telegram akkauntlariga olib boruvchi havolalar almashish taqiqlanadi.",
           },
         ],
       },
       {
         id: 8,
-        title: "7. Пополнение баланса, вывод средств и взимаемые комиссии.",
+        title:
+          "7. Balansni to‘ldirish, mablag‘larni yechib olish va komissiyalar.",
         content: [
           {
             id: 1,
             content:
-              "7.1. Пополнение и вывод средств с баланса может производить как Заказчик, так и Владелец.",
+              "7.1. Balansni to‘ldirish va mablag‘larni yechib olishni ham Buyurtmachi, ham Ega amalga oshirishi mumkin.",
           },
           {
             id: 2,
             content:
-              "7.2. Когда Владелец выполняет Проект, на его баланс поступает сумма в размере стоимости интеграции, указанной при добавлении канала , за вычетом комиссии Сервиса за сопровождение сделок в размере 12,5%.",
+              "7.2. Ega loyiha bajarilgandan so‘ng, balansiga kanal qo‘shishda ko‘rsatilgan integratsiya narxidan 12,5% xizmat komissiyasi chegirib qolingan holda mablag‘ tushadi.",
           },
           {
             id: 3,
             content:
-              "7.3 Доступные методы пополнения баланса, условия и комиссии по каждому методу указаны на странице https://blogix/recharge",
+              "7.3. Balansni to‘ldirishning mavjud usullari, shartlari va komissiyalari https://blogix/recharge sahifasida keltirilgan.",
           },
           {
             id: 4,
             content:
-              "7.4. Доступные методы вывода средств с баланса и условия по каждому методу можно посмотреть на странице https://blogix/payment_requests",
+              "7.4. Mablag‘larni yechib olishning mavjud usullari va shartlari https://blogix/payment_requests sahifasida ko‘rsatilgan.",
           },
           {
             id: 5,
             content:
-              "7.4.1. Во избежание мошеннических действий вывод средств, ранее зачисленных Заказчиком на баланс, возможен только на ту банковскую карту или электронный кошелек Заказчика, с которых производилось зачисление на баланс.",
+              "7.4.1. Firibgarlik harakatlarining oldini olish uchun Buyurtmachi tomonidan balansga kiritilgan mablag‘lar faqat o‘sha Buyurtmachi tomonidan ishlatilgan bank kartasi yoki elektron hamyonga yechib olinishi mumkin.",
           },
           {
             id: 6,
             content:
-              "7.4.2. В отдельных случаях, при которых вывод средств в соответствии с пунктом",
+              "7.4.2. Agar 7.4.1-bandda ko‘rsatilgan usul orqali mablag‘ni yechib olish texnik yoki boshqa sabablarga ko‘ra (to‘lov vositasini yo‘qotish va h.k.) imkonsiz bo‘lsa, Xizmat Buyurtmachidan qo‘shimcha shaxsiy va to‘lov ma’lumotlarini so‘rab, to‘lovni tekshirishni talab qilish huquqiga ega. Tekshirish Xizmat tomonidan Internetda identifikatsiya qilish bo‘yicha hamkor tashkilot orqali amalga oshirilishi mumkin.",
           },
           {
             id: 7,
             content:
-              "7.4.1. не представляется возможным по техническим или иным причинам (утеря средства платежа и т.д.), Сервис вправе потребовать верификации платежа на вывод средств путем запроса у Заказчика дополнительной информации, удостоверяющей личность и платежные реквизиты. Верификация может быть произведена Сервисом путем привлечения партнерской компании, осуществляющей верификацию в сети Интернет.",
+              "7.4.3. 'Yuridik shaxs yoki YATT' orqali mablag‘larni yechib olmoqchi bo‘lgan foydalanuvchilar quyidagilarni taqdim etishlari shart: - soliq tizimining dolzarb tasdiqlanishi; - platforma va O‘zbekiston Respublikasi qonunchiligiga muvofiq zarur hujjatlar (shartnoma, hisobot, akt, hisob-faktura va h.k.); - hisob raqamga mablag‘larni yechib olish uchun maxsus botga ulanish. Ulash bo‘yicha yo‘riqnoma yechib olish so‘rovi berilgan kunning keyingi ish kunida yuboriladi.",
           },
           {
             id: 8,
             content:
-              "7.4.2. Пользователи, выбравшие способ вывода средств 'Юридическое лицо или ИП', обязаны предоставить: - актуальное подтверждение применяемой системы налогообложения: после получения запроса, но перед оформление комплекта документов на вывод; - оригиналы необходимых в соответствии с процедурой оформления, предусмотренной на платформе, и законодательством РУз документов (такими документами в зависимости от типа налогообложения и основания выплаты могут являться - Договор, Соглашение, Отчет, Акт, Счет, Счет-фактура): в срок не позднее 30 дней после каждой выплаты средств. Для получения договора, дальнейших коммуникаций и передачи подписанных документов для вывода средств на расчетный счет необходимо подключиться к специальному боту, инструкция по подключению к боту отправляется в ближайший день вывода после оформления запроса на вывод средств.",
+              "7.4.4. 'O‘zini o‘zi band qilganlar', 'Yuridik shaxs yoki YATT' usullari orqali mablag‘ni yechib olgandan so‘ng, ushbu usullar foydalanuvchiga biriktiriladi va faqat shu usullar orqali mablag‘ni yechib olish mumkin bo‘ladi. Mablag‘ni yechib olish turini o‘zgartirish uchun texnik qo‘llab-quvvatlash xizmatiga murojaat qilib, FNS tomonidan berilgan rasmiy tasdiqlov hujjatini taqdim etish kerak.",
           },
           {
             id: 9,
             content:
-              "7.4.3. После успешного вывода средств методами: Самозанятые, Юридическое лицо или ИП, данные методы закрепляются за пользователем и вывод средств становится возможен только ими. Смена типа вывода средств возможна только после обращения в техническую поддержку и предоставления официального подтверждения ФНС о закрытие/ликвидации самозанятости/ИП/юридического лица.",
+              "7.5. Mablag‘larni yechib olish uchun so‘rov yaratilganda, elektron pochta manziliga tranzaksiyani tasdiqlash uchun havola yuboriladi. Tasdiqlangan so‘rov navbatdagi ish kuni (dushanba, chorshanba yoki juma) ko‘rib chiqiladi. Yechib olish so‘rovi ushbu ish kunlarida berilgan bo‘lsa, u keyingi ish kuni ko‘rib chiqiladi. Minimal yechib olish summasi mablag‘ni yechib olish usuliga bog‘liq bo‘lib, https://blogix/recharge sahifasida keltirilgan.",
           },
           {
             id: 10,
             content:
-              "7.5. После создания заявки на вывод средств на почтовый ящик отправляется письмо со ссылкой для валидации транзакции. Оформленная и подтвержденная заявка на вывод обрабатывается в ближайший операционный день: понедельник, среду или пятницу. Заявка, созданная в день выплат (понедельник, среду и пятницу) будут обработаны в следующий операционный день. Минимальная сумма вывода зависит от метода вывода денежных средств, и ее можно уточнить в разделе https://blogix/recharge.",
+              "7.6. Xizmat foydalanuvchilarga avtomatik to‘lovlarni sozlash imkonini beradi, bu orqali Buyurtmachilar tomonidan Egaga loyiha e’lon qilish uchun avtomatik ravishda to‘lov o‘tkaziladi.",
           },
           {
             id: 11,
             content:
-              "7.6. Сервис позволяет Пользователю настроить автоматические платежи для перечисления оплаты Владельцам за услуги публикации Проектов Заказчиков.",
+              "7.7. Buyurtmachi tomonidan e’lon tasdiqlangandan so‘ng, balansdan Egaga o‘tkazilishi lozim bo‘lgan summa yechib olinadi.",
           },
           {
             id: 12,
             content:
-              "7.7. Баланс списывается при подтверждении Заказчиком публикации на сумму, подлежащую зачислению Владельцу.",
-          },
-          {
-            id: 13,
-            content:
-              "7.8. В случае, когда в течение одного календарного месяца со стороны Заказчика не поступает Заказов, производится автоматическое списание средств с баланса Заказчика в качестве вознаграждения за предоставление права пользования Сервисом в размере 50 000 сум за каждый такой месяц, при недостаточности средств списание производится в сумме остатка.",
+              "7.8. Agar Buyurtmachi bir kalendar oy davomida hech qanday buyurtma bermasa, balansidan 50 000 so‘m xizmatdan foydalanish uchun avtomatik tarzda yechib olinadi. Mablag‘ yetarli bo‘lmasa, qolgan mablag‘ to‘liq yechib olinadi.",
           },
         ],
       },
       {
         id: 9,
-        title: "8-А. Предоставление и прекращение доступа к Сервису ",
+        title: "8-A. Servisga kirish taqdim etilishi va to‘xtatilishi",
         content: [
           {
             id: 1,
             content:
-              "8-А.1. Пользователям с момента их регистрации на Сервисе предоставляется доступ к Сервису для целей использования функционала Сервиса, в том числе осуществления интеграций. ",
+              "8-A.1. Foydalanuvchilarga Servisda ro‘yxatdan o‘tgan paytdan boshlab Servis funksiyalaridan foydalanish, jumladan, integratsiyalarni amalga oshirish uchun kirish huquqi taqdim etiladi.",
           },
           {
             id: 2,
             content:
-              "8-А.2. Если пользователь Сервиса прекратил/приостановил использование Сервиса для целей осуществления интеграций, ему ограничивается доступ к Сервису, начиная с 7-го месяца со дня последней интеграции. Ограничение заключается в блокировке использования услуг в рамках баланса/лицевого счета в Аккаунте пользователя. Блокировка длится один месяц. Если пользователь возобновил в течение одного месяца пользование Сервисом для целей осуществления интеграций, блокировка будет снята. Если пользователь не возобновил в течение одного месяца пользование Сервисом для целей осуществления интеграций, Аккаунт пользователя подлежит удалению без возможности дальнейшего восстановления.",
+              "8-A.2. Agar Servis foydalanuvchisi integratsiyalarni amalga oshirish maqsadida Servisdan foydalanishni to‘xtatsa/yoki vaqtincha to‘xtatsa, unga oxirgi integratsiya qilingan kundan boshlab 7-oydan e’tiboran Servisga kirish cheklanadi. Cheklov foydalanuvchi akkauntidagi balans/shaxsiy hisob doirasida xizmatlardan foydalanish bloklanishini o‘z ichiga oladi. Bloklash bir oy davom etadi. Agar foydalanuvchi bir oy ichida integratsiyalarni amalga oshirish uchun Servisdan foydalanishni qayta boshlab yuborsa, bloklash olib tashlanadi. Agar foydalanuvchi bir oy ichida Servisdan foydalanishni davom ettirmasa, uning akkaunti butunlay o‘chirilib, keyinchalik tiklash imkoniyati bo‘lmaydi.",
           },
         ],
       },
       {
         id: 10,
-        title: "8-Б Гарантия справедливой цены.",
+        title: "8-B Adolatli narx kafolati",
         content: [
           {
             id: 1,
             content:
-              "8-Б.1. Администратор канала самостоятельно устанавливает и регулирует цену на размещение в своем канале. Тем не менее, чтобы гарантировать лучшую цену заказчикам Blogix, сервис оставляет за собой право в одностороннем порядке приостановить сотрудничество с каналом, если конечная цена на размещение в канале через сервис Blogix будет дороже, чем цена, указанная на любой другой бирже или публичном ресурсе.",
+              "8-B.1. Kanal administratori o‘z kanalida joylashtirish narxini mustaqil ravishda belgilaydi va tartibga soladi. Shunga qaramay, Blogix mijozlariga eng yaxshi narxni kafolatlash uchun, agar Blogix servisi orqali kanalga joylashtirishning yakuniy narxi boshqa birja yoki ommaviy resursda ko‘rsatilgan narxdan qimmatroq bo‘lsa, servis kanal bilan hamkorlikni bir tomonlama tartibda to‘xtatish huquqini o‘zida saqlab qoladi.",
           },
         ],
       },
       {
         id: 11,
-        title: "8-В Ограничение и запрет доступа к Сервису.",
+        title: "8-V Xizmatga kirishni cheklash va taqiqlash",
         content: [
           {
             id: 1,
             content:
-              "8-В.1. Пользователю (и Заказчику и Владельцу) может быть ограничен доступ к Сервису в случае не предоставления им подписанных документов, в рамках сделки, таких как чеки, акты, счета-фактуры и иные.",
+              "8-V.1. Foydalanuvchiga (ham Buyurtmachi, ham Ega) xizmatga kirish cheklanishi mumkin, agar u bitim doirasida imzolangan hujjatlarni, masalan, cheklarni, aktlarni, schyot-fakturalarni va boshqa hujjatlarni taqdim etmasa.",
           },
           {
             id: 2,
             content:
-              "8-В.2. Пользователю (и Заказчику и Владельцу) может быть ограничен доступ к Сервису в случае не прохождения им идентификации личности, если это требуется в рамках исполнения сделки, либо непредоставления документов, которые необходимы для исполнения сделки.",
+              "8-V.2. Foydalanuvchiga (ham Buyurtmachi, ham Ega) xizmatga kirish cheklanishi mumkin, agar u shaxsiy identifikatsiyadan o‘tmasa (agar bu bitimni bajarish doirasida talab etilsa) yoki bitimni bajarish uchun zarur bo‘lgan hujjatlarni taqdim etmasa.",
           },
           {
             id: 3,
             content:
-              "8-В.3. Пользователю (и Заказчику и Владельцу) может быть ограничен доступ к Сервису в случае иных (не перечисленных в настоящем разделе) нарушений условий сделки или настоящих Правил, а также иных документов, на которые могут ссылаться соглашение или настоящие Правила.",
+              "8-V.3. Foydalanuvchiga (ham Buyurtmachi, ham Ega) xizmatga kirish cheklanishi mumkin, agar u ushbu bo‘limda ko‘rsatilmagan boshqa bitim shartlarini yoki ushbu Qoidalarning buzilishi, shuningdek, shartnoma yoki ushbu Qoidalarga ishora qiluvchi boshqa hujjatlarni buzsa.",
           },
           {
             id: 4,
             content:
-              "8-В.4. Пользователю (и Заказчику и Владельцу) может быть запрещён доступ к Сервису в случае не неоднократного нарушения, либо грубого нарушения (оценка нарушения осуществляется Сервисом) условий сделки, настоящих Правил и документов, на которые могут ссылаться соглашение или настоящие Правила.",
+              "8-V.4. Foydalanuvchiga (ham Buyurtmachi, ham Ega) xizmatga kirish taqiqlanishi mumkin, agar u bitim shartlarini, ushbu Qoidalarni yoki ularga ishora qiluvchi boshqa hujjatlarni bir necha marta buzsa yoki qo‘pol ravishda buzsa (buzilish darajasi Xizmat tomonidan baholanadi).",
           },
         ],
       },
       {
         id: 11,
-        title: "9. Ответственность Администрации.",
+        title: "9. Ma'muriyat mas'uliyati",
         content: [
           {
             id: 1,
             content:
-              "9.1. Сервис, его программное обеспечение и весь контент, содержащийся в Сервисе, предоставляются по принципу «как есть» и «как доступно». Администрация не предоставляет никаких прямых и косвенных гарантий, в частности о пригодности или удобстве использования Сервиса или любого контента, доступ к которому осуществляется через Сервис.",
+              '9.1. Xizmat, uning dasturiy ta\'minoti va Xizmat tarkibidagi barcha kontent "boricha" va "mavjud holatda" taqdim etiladi. Ma\'muriyat Xizmat yoki Xizmat orqali kirish mumkin bo‘lgan har qanday kontentning yaroqliligi yoki qulayligi bo‘yicha hech qanday bevosita yoki bilvosita kafolat bermaydi.',
           },
           {
             id: 2,
             content:
-              "9.2. Администрация прилагает все усилия для обеспечения бесперебойной работы Сервиса. Однако Администрация не несет ответственности за временную недоступность Сервиса из-за технических неисправностей, которые являются последствием независимых от Администрации обстоятельств.",
+              "9.2. Ma'muriyat Xizmatning uzluksiz ishlashini ta'minlash uchun barcha choralarni ko‘radi. Biroq, Ma'muriyat texnik nosozliklar tufayli Xizmatning vaqtincha mavjud emasligi uchun javobgar emas, agar bu holatlar Ma'muriyatga bog‘liq bo‘lmagan sabablar natijasida yuzaga kelgan bo‘lsa.",
           },
           {
             id: 3,
             content:
-              "9.3. Администрация принимает меры для предотвращения появления «накрученных» каналов, а также недействительных или неправомерных предложений, однако НЕ гарантирует максимальную эффективность таких мер.",
+              "9.3. Ma'muriyat \"sun'iy ravishda oshirilgan\" kanallar, shuningdek, haqiqiy bo‘lmagan yoki noqonuniy takliflarning oldini olish choralarini ko‘radi, ammo bunday choralar maksimal samaradorlik bilan ishlashini kafolatlamaydi.",
           },
           {
             id: 4,
             content:
-              "9.4. Пользователь Сервиса (Заказчик и Владелец) самостоятельно несет все риски, а Сервис не несет ответственности за выбранные пользователем способы получения вознаграждения. Пользователь Сервиса также принимает и соглашается с тем, что Сервис не несет ответственности за любые суммы комиссий, которые могут взиматься платежной системой Payme, Click или Банками при перечислении или получении любых платежей в рамках Сервиса. Пользователь полностью принимает и соглашается с тем, что любые взимаемые в рамках Сервиса комиссии, такие как: комиссии Payme и их партнеров, комиссии Click и их партнеров, комиссии Банков и их партнеров, комиссии в рамках Безопасной сделки, комиссия за пополнение и исполнение заказов, включаемые в состав расчетов при использовании Сервиса любыми пользователями (в том числе комиссии, предусмотренные разделом 7 настоящих Правил), — возврату и компенсации при выводе средств и (или) отказе пользователя от услуг Сервиса не подлежат.",
+              "9.4. Xizmat Foydalanuvchisi (Buyurtmachi va Ega) tanlagan mukofot olish usullari uchun barcha tavakkalchiliklarni o‘z zimmasiga oladi, Xizmat esa buning uchun javobgar emas. Xizmat Foydalanuvchisi shuningdek, Payme, Click yoki Banklar tomonidan Xizmat doirasida amalga oshirilgan to‘lovlar uchun undiriladigan har qanday komissiya summalari uchun Xizmat javobgar emasligini qabul qiladi va bunga rozi bo‘ladi. Foydalanuvchi Xizmat doirasida undiriladigan har qanday komissiyalar, jumladan: Payme va uning hamkorlari komissiyalari, Click va uning hamkorlari komissiyalari, Banklar va ularning hamkorlari komissiyalari, Xavfsiz bitim doirasidagi komissiyalar, balansni to‘ldirish va buyurtmalarni bajarish uchun olinadigan komissiyalar – mablag‘larni chiqarishda va (yoki) Xizmat xizmatlaridan voz kechishda qaytarilmaydi va kompensatsiya qilinmaydi.",
           },
           {
             id: 5,
             content:
-              "9.5. Пользователь (Заказчик и Владелец) принимает и соглашается с тем, что он использует Сервис в собственных коммерческих целях, и на использование Сервиса не распространяет свое действие Закон Республики Узбекистан, от 26.04.1996 г. № 221-I “О защите прав потребителей”. Пользователь Сервиса не является «потребителем» в рамках указанного Закона, так как использует Сервис для получения коммерческой выгоды и (или) в целях продвижения собственного продукта, канала, бренда или сервиса.",
+              "9.5. Foydalanuvchi (Buyurtmachi va Ega) Xizmatdan o‘zining tijorat maqsadlarida foydalanishini qabul qiladi va bunga rozi bo‘ladi. Shu sababli, Xizmatdan foydalanishga O‘zbekiston Respublikasi 1996-yil 26-apreldagi 221-I-sonli “Iste'molchilar huquqlarini himoya qilish to‘g‘risida”gi Qonuni taalluqli emas. Xizmat Foydalanuvchisi ushbu Qonun doirasida \"iste'molchi\" hisoblanmaydi, chunki u Xizmatdan tijorat foydasi olish va (yoki) o‘z mahsuloti, kanali, brendi yoki xizmatini targ‘ib qilish maqsadida foydalanadi.",
           },
           {
             id: 6,
             content:
-              "9.6. Во избежание противоречий, спорных ситуаций, интернет-мошенничества и иных действий, вводящих в заблуждение Пользователей, Администрация заверяет, что основным первоисточником информации для работы с Сервисом является веб-сайт Сервиса по адресу: Blogix. Любые обновления в работе Сервиса в первую очередь появляются на указанном веб-сайте. Во всех спорных ситуациях, связанных с выполнением размещений, проведением финансовых операций и прочих действий, которые Пользователи могут осуществлять посредством Сервиса, данные с веб-сайта Сервиса являются основным источником, если иное не будет указано в настоящих Правилах.",
+              "9.6. Har qanday kelishmovchilik, bahsli vaziyatlar, internet-firibgarlik va Foydalanuvchilarni chalg‘ituvchi harakatlarning oldini olish maqsadida, Ma'muriyat Xizmat bilan ishlash uchun asosiy manba sifatida Xizmatning rasmiy veb-sayti – Blogix manzilini belgilaydi. Xizmatdagi barcha yangilanishlar birinchi navbatda ushbu veb-saytda paydo bo‘ladi. Xizmat orqali joylashtirish, moliyaviy operatsiyalar va boshqa harakatlarni amalga oshirish bilan bog‘liq barcha bahsli vaziyatlarda, ushbu Qoidalarning boshqa bandlarida boshqacha ko‘rsatilmagan bo‘lsa, Xizmatning veb-saytidagi ma'lumotlar asosiy manba hisoblanadi.",
           },
         ],
       },
       {
         id: 12,
-        title: "10. Заключительные положения.",
+        title: "10. Yakuniy qoidalar",
         content: [
           {
             id: 1,
             content:
-              "10.1. Администрация оставляет за собой право время от времени вносить изменения, добавлять и исключать положения Правил.",
+              "10.1. Ma'muriyat vaqti-vaqti bilan Qoidalarga o‘zgartirishlar kiritish, yangi bandlar qo‘shish yoki mavjudlarini chiqarib tashlash huquqini o‘zida saqlab qoladi.",
           },
           {
             id: 2,
             content:
-              "10.2. Новая редакция Правил вступает в силу с момента ее размещения на Сайте или в Приложении, если иное не указано в новой редакции Правил. Дата последних изменений будет указана в Правилах в соответствующем поле «Дата внесения последних изменений».",
+              '10.2. Qoidalarning yangi tahriri Saytda yoki Ilovada joylashtirilgan paytdan boshlab kuchga kiradi, agar Qoidalarning yangi tahririda boshqacha ko‘rsatilmagan bo‘lsa. Oxirgi o‘zgarishlarning sanasi Qoidalarning tegishli "Oxirgi o‘zgarishlar sanasi" maydonida ko‘rsatiladi.',
           },
           {
             id: 3,
             content:
-              "10.3. Заказчик или Владелец может отказаться от соблюдения Правил в любой момент путем прекращения использования Сервиса.",
+              "10.3. Buyurtmachi yoki Egasi istalgan vaqtda Xizmatdan foydalanishni to‘xtatish orqali Qoidalarga rioya qilishdan voz kechishi mumkin.",
           },
           {
             id: 4,
             content:
-              "10.4. Администрация может прекратить действие Правил в любой момент, предварительно предупредив об этом Заказчика или Владельца канала, чата(группы) или бота путем направления сообщения на адрес электронной почты, который Заказчик или Владелец указывают при регистрации.",
+              "10.4. Ma'muriyat Qoidalar amal qilishini istalgan vaqtda to‘xtatishi mumkin, bu haqda Buyurtmachi yoki kanal, chat (guruh) yoki bot Egasi oldindan ogohlantiriladi. Ogohlantirish Buyurtmachi yoki Egasi ro‘yxatdan o‘tishda ko‘rsatgan elektron pochta manziliga xabar yuborish orqali amalga oshiriladi.",
           },
         ],
       },
       {
         id: 12,
-        title:
-          "11. Политика безопасности Сервиса и предупреждения фрода (мошеннических действий).",
+        title: "11. Xizmat xavfsizlik siyosati va firibgarlikning oldini olish",
         content: [
           {
             id: 1,
             content:
-              "11.1 Администрация Сервиса при возникновении подозрений в совершении любым из зарегистрированных пользователей Сервиса следующих действий:",
+              "11.1. Agar Xizmatning ro‘yxatdan o‘tgan foydalanuvchilari quyidagi harakatlarni amalga oshirganlikda gumon qilinsa, Xizmat Ma'muriyati quyidagi choralarni ko‘rishga haqli:",
           },
           {
             id: 2,
-            content: " -  грубых нарушений правил Сервиса;",
+            content: "- Xizmat qoidalarini qo‘pol ravishda buzish;",
           },
           {
             id: 3,
             content:
-              " -  попытки фрода (мошеннических действий), в том числе при оплате с помощью любых платежных средств, включая банковские карты;",
+              "- Firibgarlik (frod) harakatlariga urinish, jumladan, har qanday to‘lov vositalari, shu jumladan, bank kartalari orqali to‘lov amalga oshirishda;",
           },
           {
             id: 4,
-            content: " -  совершении фейковых Проектов, заявок;",
+            content: "- Soxta loyihalar va buyurtmalar yaratish;",
           },
           {
             id: 5,
             content:
-              "Вправе отменить заказ и применить санкции к обеим сторонам, участвующим в заявке (платеже) в виде блокировки личных Аккаунтов пользователей, и блокировки доступа к их балансам, а также, вправе списать денежные средства, уже поступившие на баланс Владельца, и вернуть их Заказчику вне зависимости от срока давности Проекта (заявки). При этом, Администрация Сервиса вправе исключить канал (каналы) Владельца из каталога Сервиса.  Для контроля за платежами Администрация Сервиса использует данные и сведения, поступающие от партнера Сервиса: платежной системы Payme (ссылка), Click(ссылка) и электронной системы документооборота Didox (ссылка на дидокс). ",
+              "Buyurtmani bekor qilish va ariza (to‘lov) jarayonida ishtirok etgan ikkala tomonga ham jazo choralari qo‘llash, jumladan, foydalanuvchilarning shaxsiy akkauntlarini bloklash va ularning balanslariga kirishni cheklash, shuningdek, allaqachon Egasi balansiga o‘tgan mablag‘larni qaytarib olish va ularni Buyurtmachiga qaytarish huquqiga ega, loyiha (buyurtma) muddati muhim emas. Shuningdek, Xizmat Ma'muriyati Egasi kanal(lar)ini Xizmat katalogidan chiqarib tashlash huquqiga ega. To‘lovlarni nazorat qilish maqsadida, Xizmat Ma'muriyati Xizmat hamkorlari tomonidan taqdim etilgan ma'lumotlardan foydalanadi: Payme to‘lov tizimi (havola), Click (havola) va Didox elektron hujjat almashinuvi tizimi (havola).",
           },
           {
             id: 6,
             content:
-              "Возврат денежных средств производится исключительно на тот счет пользователя, с которого была произведена оплата.",
+              "Mablag‘larni qaytarish faqat to‘lov amalga oshirilgan foydalanuvchi hisobiga amalga oshiriladi.",
           },
           {
             id: 7,
             content:
-              "11.2 В целях поддержания безопасности системы и сохранности балансов пользователей функционал не активных более 150 дней аккаунтов ограничивается. Под отсутствием активности для целей данного пункта понимается отсутствие любых транзакций на аккаунте.",
+              "11.2. Tizim xavfsizligini ta’minlash va foydalanuvchilarning balanslarini saqlab qolish maqsadida 150 kundan ortiq faol bo‘lmagan akkauntlarning funksionalligi cheklanadi. Ushbu band bo‘yicha 'faolsizlik' akkaunt bo‘yicha har qanday tranzaksiyalarning yo‘qligi deb tushuniladi.",
           },
         ],
       },
       {
         id: 13,
-        title: "12. Право на удаление Аккаунта пользователя Сервиса",
+        title: "12. Xizmat foydalanuvchi akkauntini oʻchirish huquqi",
         content: [
           {
             id: 1,
             content:
-              "12.1 Владелец и Заказчик, являющиеся зарегистрированными пользователями Сервиса, вправе удалить свой Аккаунт  пользователя Сервиса только в случае отсутствия незавершенных заказов, в которых они участвуют как одна из сторон заказа. ",
+              "12.1. Xizmatning roʻyxatdan oʻtgan foydalanuvchilari bo'lgan Egasi va Buyurtmachi, agar ular buyurtma tomonlaridan biri sifatida ishtirok etayotgan yakunlanmagan buyurtmalar bo‘lmasa, oʻz akkauntini oʻchirish huquqiga ega.",
           },
           {
             id: 2,
             content:
-              "12.2 В случае, если пользователь Сервиса принял решение удалить свой Аккаунт, он соглашается с тем, что удаление Аккаунта происходит окончательно и без возможности восстановления. Срок, в течение которого существовала бы возможность отменить удаление Аккаунта, или восстановить удаленный Аккаунт, отсутствует.",
+              "12.2. Agar Xizmat foydalanuvchisi oʻz akkauntini oʻchirishga qaror qilsa, u akkauntni oʻchirish qaytarib boʻlmasligini va uni tiklashning imkoni yo‘qligini tan oladi. Akkauntni oʻchirishni bekor qilish yoki uni tiklash muddati mavjud emas.",
           },
           {
             id: 3,
             content:
-              "12.3 В случае, если у пользователя Сервиса, принявшего решение удалить свой Аккаунт, остаются на балансе Аккаунта денежные средства, он имеет возможность вывода средств, предусмотренную пунктами 7.4. - 7.5. настоящих Правил, только до момента удаления Аккаунта. После удаления Аккаунта, возможность вывода средств, предусмотренная пунктами 7.4. - 7.5. настоящих Правил, отсутствует. ",
+              "12.3. Agar oʻz akkauntini oʻchirishga qaror qilgan Xizmat foydalanuvchisi akkaunt balansida mablagʻlarga ega boʻlsa, u ushbu mablag‘larni 7.4 - 7.5-bandlarida nazarda tutilgan tartibda faqat akkauntni oʻchirishdan oldin yechib olish imkoniyatiga ega. Akkaunt oʻchirib tashlanganidan so‘ng, ushbu mablagʻlarni yechib olish imkoniyati mavjud emas.",
           },
           {
             id: 4,
             content:
-              "12.4 Зарегистрированный пользователь Сервиса соглашается и подтверждает, что он принимает все последствия и риски, связанные с удалением своего Аккаунта пользователя Сервиса.",
+              "12.4. Xizmatning ro‘yxatdan o‘tgan foydalanuvchisi o‘z akkauntini oʻchirish bilan bog‘liq barcha oqibat va xatarlarni to‘liq anglab yetishini tasdiqlaydi.",
           },
         ],
       },
-    ],
+    ] as Content,
   },
 };
+
+type Content = {
+  id: number;
+  title: string;
+  content: {
+    id: number;
+    content: string;
+  }[];
+}[];
