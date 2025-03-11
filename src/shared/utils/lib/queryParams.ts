@@ -50,6 +50,8 @@ export enum queryParamKeys {
   addChannel = "add_channel",
   projectType = "project_type",
   projectStatus = "project_status",
+  offerStatus = "offer_status",
+  channelStatus = "channel_status",
   telegramRole = "telegram_role",
 }
 

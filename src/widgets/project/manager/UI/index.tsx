@@ -1,31 +1,42 @@
 import { dateSortingTypes } from "@entities/platform";
 import {
+  getProjectsCardReq,
   IManagerNewProjectCard,
   IManagerProjectCard,
-  getProjectsCardReq,
   managerProjectStatusFilter,
   useGetManagerProjectsQuery,
 } from "@entities/project";
 import { useFindLanguage } from "@entities/user";
 import { useGetViewManagerProjectQuery } from "@entities/views";
 import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
-import { pageFilter } from "@shared/routing";
+import { pageFilter, paths } from "@shared/routing";
+import { buildPathWithQuery, queryParamKeys, QueryParams } from "@shared/utils";
 import { BarFilter } from "@widgets/barFilter";
 import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { ManagerNewProjectsList } from "./managerNewProject";
 import { ManagerProjectsList } from "./managerProject";
 import styles from "./styles.module.scss";
 
 export const ManagerOrders: FC = () => {
   const language = useFindLanguage();
+  const navigate = useNavigate();
   const page = pageFilter.order;
+  const { project_status } = QueryParams();
 
   const { setValue, watch } = useForm<getProjectsCardReq>({
     defaultValues: {
       page: 1,
       language: language?.id || Languages[0].id,
-      status: managerProjectStatusFilter.active,
+      // status: managerProjectStatusFilter.active,
+      status:
+        project_status &&
+        !!Object.values(managerProjectStatusFilter).includes(
+          project_status as managerProjectStatusFilter,
+        )
+          ? project_status
+          : managerProjectStatusFilter.active,
       elements_on_page: INTERSECTION_ELEMENTS.managerOrders,
       date_sort: dateSortingTypes.decrease,
     },
@@ -49,6 +60,14 @@ export const ManagerOrders: FC = () => {
   const handleOnChangePage = () => {
     setValue("page", formState.page + 1);
   };
+
+  useEffect(() => {
+    const newPath = buildPathWithQuery(paths.orders, {
+      [queryParamKeys.projectStatus]: formState.status,
+    });
+
+    navigate(newPath, { replace: true });
+  }, [formState.status]);
 
   return (
     <div className="container">
