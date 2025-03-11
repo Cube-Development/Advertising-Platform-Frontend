@@ -3,6 +3,7 @@ import { roles } from "@entities/user";
 import { useAppSelector } from "@shared/hooks";
 import { pageFilter, paths } from "@shared/routing";
 import { IStartProjectProps } from "@shared/types/common";
+import { buildPathWithQuery, queryParamKeys } from "@shared/utils";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -53,7 +54,10 @@ export const BarTop: FC<BarTopProps> = ({
           {/* {!listLength && ( */}
           <div>
             <AddChannelBtn
-              path={`${paths.addChannel}?add_channel=${addChannelQueries.platforms}`}
+              // path={`${paths.addChannel}?add_channel=${addChannelQueries.platforms}`}
+              path={buildPathWithQuery(paths.addChannel, {
+                [queryParamKeys.addChannel]: addChannelQueries.platforms,
+              })}
             />
           </div>
           {/* )} */}
@@ -66,7 +70,10 @@ export const BarTop: FC<BarTopProps> = ({
             {/* {listLength && ( */}
             <div>
               <AddChannelBtn
-                path={`${paths.addChannel}?add_channel=${addChannelQueries.offers}`}
+                // path={`${paths.addChannel}?add_channel=${addChannelQueries.offers}`}
+                path={buildPathWithQuery(paths.addChannel, {
+                  [queryParamKeys.addChannel]: addChannelQueries.offers,
+                })}
               />
             </div>
             {/* )} */}

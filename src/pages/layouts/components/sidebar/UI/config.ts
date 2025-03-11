@@ -1,13 +1,18 @@
-import { paths } from "@shared/routing";
+import { IMenuItem } from "@entities/admin/types/sidebar";
 import {
+  advManagerProjectStatusFilter,
+  myProjectStatusFilter,
+  projectTypesFilter,
+} from "@entities/project";
+import {
+  BookIcon,
   CampaignIcon,
+  OfferIcon,
   TemplateIcon,
   WalletIcon,
-  BookIcon,
-  OfferIcon,
 } from "@shared/assets";
-import { projectTypesFilter } from "@entities/project";
-import { IMenuItem } from "@entities/admin/types/sidebar";
+import { paths } from "@shared/routing";
+import { buildPathWithQuery, queryParamKeys } from "@shared/utils";
 
 export const advertiserMenu = [
   {
@@ -19,15 +24,26 @@ export const advertiserMenu = [
     subItems: [
       {
         title: "orders_advertiser.type_filter.my_project",
-        path: `${paths.orders}?order_type=${projectTypesFilter.myProject}`,
+        path: buildPathWithQuery(paths.orders, {
+          [queryParamKeys.projectType]: projectTypesFilter.myProject,
+          [queryParamKeys.projectStatus]: myProjectStatusFilter.active,
+        }),
+        // path: `${paths.orders}?${queryParamKeys.projectType}=${projectTypesFilter.myProject}`,
       },
       {
         title: "orders_advertiser.type_filter.manager_project",
-        path: `${paths.orders}?order_type=${projectTypesFilter.managerProject}`,
+        path: buildPathWithQuery(paths.orders, {
+          [queryParamKeys.projectType]: projectTypesFilter.managerProject,
+          [queryParamKeys.projectStatus]: advManagerProjectStatusFilter.active,
+        }),
+        // path: `${paths.orders}?${queryParamKeys.projectType}=${projectTypesFilter.managerProject}`,
       },
       {
         title: "orders_advertiser.type_filter.saved_project",
-        path: `${paths.orders}?order_type=${projectTypesFilter.savedProject}`,
+        path: buildPathWithQuery(paths.orders, {
+          [queryParamKeys.projectType]: projectTypesFilter.savedProject,
+        }),
+        // path: `${paths.orders}?${queryParamKeys.projectType}=${projectTypesFilter.savedProject}`,
       },
     ],
   },

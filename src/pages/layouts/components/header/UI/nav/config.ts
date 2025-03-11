@@ -1,6 +1,7 @@
 import { addChannelQueries } from "@entities/channel";
 import { CalculatorIcon, KeyIcon } from "@shared/assets";
 import { paths } from "@shared/routing";
+import { buildPathWithQuery, queryParamKeys } from "@shared/utils";
 
 export const notAuthAdvertiserNavbar = [
   { text: "pages.turnkey", href: paths.turnkey, img: KeyIcon },
@@ -17,7 +18,10 @@ export const notAuthBloggerNavbar = [
   },
   {
     text: "pages.addPlatform",
-    href: `${paths.addChannel}?add_channel=${addChannelQueries.main}`,
+    // href: `${paths.addChannel}?add_channel=${addChannelQueries.main}`,
+    href: buildPathWithQuery(paths.addChannel, {
+      [queryParamKeys.addChannel]: addChannelQueries.main,
+    }),
   },
   { text: "pages.advertiser", href: paths.main },
   { text: "pages.faq", href: paths.faq },
@@ -42,7 +46,10 @@ export const bloggerNavbar = [
   },
   {
     text: "pages.addPlatform",
-    href: `${paths.addChannel}?add_channel=${addChannelQueries.main}`,
+    // href: `${paths.addChannel}?add_channel=${addChannelQueries.main}`,
+    href: buildPathWithQuery(paths.addChannel, {
+      [queryParamKeys.addChannel]: addChannelQueries.main,
+    }),
   },
   { text: "pages.faq", href: paths.faq },
 ];

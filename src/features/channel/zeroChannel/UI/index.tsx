@@ -1,14 +1,15 @@
-import { SadSmileIcon, HappySmileIcon } from "@shared/assets";
-import { FC } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import { pageFilter, paths } from "@shared/routing";
 import {
   IAddChannelQuery,
   addChannelQueries,
   channelStatusFilter,
 } from "@entities/channel";
 import { offerStatusFilter } from "@entities/offer";
+import { HappySmileIcon, SadSmileIcon } from "@shared/assets";
+import { pageFilter, paths } from "@shared/routing";
+import { buildPathWithQuery, queryParamKeys } from "@shared/utils";
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 interface ZeroChannelProps {
   AddChannelBtn: FC<IAddChannelQuery>;
@@ -26,8 +27,13 @@ export const ZeroChannel: FC<ZeroChannelProps> = ({
   const { t } = useTranslation();
   const selectedPath =
     path === paths.offers
-      ? `${paths.addChannel}?add_channel=${addChannelQueries.offers}`
-      : `${paths.addChannel}?add_channel=${addChannelQueries.platforms}`;
+      ? buildPathWithQuery(paths.addChannel, {
+          [queryParamKeys.addChannel]: addChannelQueries.offers,
+        })
+      : buildPathWithQuery(paths.addChannel, {
+          [queryParamKeys.addChannel]: addChannelQueries.platforms,
+        });
+  // : `${paths.addChannel}?add_channel=${addChannelQueries.platforms}`;
 
   return (
     <div className={styles.wrapper}>
