@@ -36,8 +36,20 @@ export const AdvOrders: FC = () => {
 
   const { setValue, watch } = useForm<IForm>({
     defaultValues: {
-      type: project_type || projectTypesFilter.myProject,
-      status: project_status || myProjectStatusFilter.active,
+      type:
+        project_type &&
+        !!Object.values(projectTypesFilter).includes(
+          project_type as projectTypesFilter,
+        )
+          ? project_type
+          : projectTypesFilter.myProject,
+      status:
+        project_status &&
+        !!Object.values(myProjectStatusFilter).includes(
+          project_status as myProjectStatusFilter,
+        )
+          ? project_status
+          : myProjectStatusFilter.active,
       page: 1,
       date_sort: dateSortingTypes.decrease,
       elements_on_page: INTERSECTION_ELEMENTS.advOrders,
