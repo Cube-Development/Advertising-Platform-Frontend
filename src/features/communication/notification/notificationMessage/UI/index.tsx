@@ -18,9 +18,11 @@ export const NotificationMessage: FC<NotificationMessageProps> = ({ card }) => {
     "...";
   return (
     <div className={styles.wrapper}>
-      <ScrollArea className={styles.text__wrapper}>
-        <p className={styles.title}>{t(title)}</p>
-        <span dangerouslySetInnerHTML={{ __html: card?.data?.text || "" }} />
+      <ScrollArea>
+        <div className={styles.text__wrapper}>
+          <p className={styles.title}>{t(title)}</p>
+          <span dangerouslySetInnerHTML={{ __html: card?.data?.text || "" }} />
+        </div>
       </ScrollArea>
       <div className={styles.support}>
         <span>{t("notifications.support.title")}</span>
