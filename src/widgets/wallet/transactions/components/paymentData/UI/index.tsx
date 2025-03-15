@@ -23,6 +23,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
+import { isValidAmount } from "@shared/utils";
 
 interface PaymentDataProps {
   amountTitle: string;
@@ -102,11 +103,26 @@ export const PaymentData: FC<PaymentDataProps> = ({
             <input
               {...register!("amount", {
                 required: t("wallet.topup.required"),
+                validate: {
+                  valid: (value: string) => isValidAmount(value),
+                },
                 onChange: (e) => handleInput(e),
               })}
               placeholder={t("wallet.topup.placeholder")}
               value={Number.isInteger(price) ? price.toLocaleString() : ""}
               className={styles.input}
+              // onChange={(e) => handleInput(e)}
+              // onInput={(e) => {
+              //   if (
+              //     e.currentTarget.value.replace(/\D/g, "").length >
+              //     formDataLength.amount
+              //   ) {
+              //     e.currentTarget.value = e.currentTarget.value.slice(
+              //       0,
+              //       formDataLength.amount
+              //     );
+              //   }
+              // }}
             />
             <small>{t("symbol")}</small>
             {errors!["amount"] && (
@@ -129,7 +145,7 @@ export const PaymentData: FC<PaymentDataProps> = ({
         </div>
         <div>
           <p>
-            {formFields.amount != 0
+            {Number(formFields?.amount?.replace(/\s/g, "")) != 0
               ? parseFloat(String(price)).toLocaleString()
               : 0}{" "}
             {t("symbol")}

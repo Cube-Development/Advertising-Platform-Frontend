@@ -18,9 +18,10 @@ export function isValidINN(value: string): boolean {
 }
 
 export function isValidAmount(value: string): boolean {
-  const length = formDataLength.INN - 1;
+  const amount = value.replace(/\D/g, "");
+  const length = formDataLength.amount - 1;
   const Regex = new RegExp(`^[1-9]\\d{${length}}$`);
-  return Regex.test(value);
+  return Regex.test(amount);
 }
 
 export function isValidPNFL(value: string): boolean {
