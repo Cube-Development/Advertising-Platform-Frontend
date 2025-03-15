@@ -1,13 +1,14 @@
+import { addChannelQueries } from "@entities/channel";
+import { AddChannel } from "@features/channel";
+import { AccommList, StartAdv } from "@features/mainPages";
 import { PAGE_ANIMATION } from "@shared/config/animation";
 import { paths } from "@shared/routing";
+import { IAccomm } from "@shared/types/translate";
+import { buildPathWithQuery, queryParamKeys } from "@shared/utils";
 import { motion } from "framer-motion";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { AccommList, StartAdv } from "@features/mainPages";
-import { AddChannel } from "@features/channel";
-import { addChannelQueries } from "@entities/channel";
-import { IAccomm } from "@shared/types/translate";
 
 interface WhyChooseUsProps {
   page: string;
@@ -40,7 +41,10 @@ export const WhyChooseUs: FC<WhyChooseUsProps> = ({ page }) => {
             <StartAdv props={{ className: styles.button }} />
           ) : (
             <AddChannel
-              path={`${paths.addChannel}?add_channel=${addChannelQueries.main}`}
+              // path={`${paths.addChannel}?add_channel=${addChannelQueries.main}`}
+              path={buildPathWithQuery(paths.addChannel, {
+                [queryParamKeys.addChannel]: addChannelQueries.main,
+              })}
               orange
             />
           )

@@ -197,7 +197,7 @@ export const Withdrawal: FC = () => {
         .unwrap()
         .then((createRes) => {
           const paymentReq = {
-            amount: formData.amount,
+            amount: Number(formState.amount.replace(/\s/g, "")),
             legal_id: createRes.legal_id,
           };
           paymentWithdrawal(paymentReq)
@@ -230,9 +230,10 @@ export const Withdrawal: FC = () => {
               .unwrap()
               .then((editRes) => {
                 const paymentReq = {
-                  amount: Number(formData.amount),
+                  amount: Number(formState.amount.replace(/\s/g, "")),
                   legal_id: editRes.legal_id,
                 };
+                console.log("paymentReq", paymentReq, formData.amount);
                 paymentWithdrawal(paymentReq)
                   .unwrap()
                   .then(() => {

@@ -16,7 +16,7 @@ export const checkPosts = (
   postFormats: { platform: platformTypesNum; post_types: PostTypesNum[] }[],
   selectedPlatform: IChannelLink,
   cards: IPostChannel[],
-) => {
+): boolean => {
   const changeSelectedPlatform = (type: platformTypesNum) => {
     const findedPlatform = platformTypes.find(
       (platform) => platform.id === type,
@@ -46,6 +46,7 @@ export const checkPosts = (
       )
     ) {
       onChangeBlur("datetime");
+      return true;
     } else {
       const currentPlatformIndex = platformIds.indexOf(selectedPlatform.id);
       const nextPlatformIndex = (currentPlatformIndex + 1) % platformIds.length;
@@ -113,6 +114,7 @@ export const checkPosts = (
           }
         }
       }
+      return false;
     }
   } else {
     if (
@@ -129,6 +131,7 @@ export const checkPosts = (
       )
     ) {
       onChangeBlur("datetime");
+      return true;
     } else {
       const currentPlatformIndex = platformIds.indexOf(selectedPlatform.id);
       const nextPlatformIndex = (currentPlatformIndex + 1) % platformIds.length;
@@ -170,6 +173,7 @@ export const checkPosts = (
           changeSelectedPostType(nextPostType);
         }
       }
+      return false;
     }
   }
 };

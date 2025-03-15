@@ -56,6 +56,7 @@ export const CreateOrderTop: FC<CreateOrderTopProps> = ({
                 <div className={styles.input}>
                   <PencilIcon stroke="#fff" />
                   <input
+                    autoFocus
                     type="text"
                     placeholder={t("create_order.name.default_value")}
                     onKeyDown={(event) => {

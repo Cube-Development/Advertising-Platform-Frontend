@@ -95,6 +95,7 @@ export const Feedback: FC<IOrderFeature> = ({ order_id }) => {
                   }}
                   value={review}
                   maxLength={200}
+                  autoFocus
                 />
                 <DialogClose
                   className={styles.comment__send_icon}
@@ -151,6 +152,7 @@ export const Feedback: FC<IOrderFeature> = ({ order_id }) => {
                   }}
                   value={review}
                   maxLength={200}
+                  autoFocus
                 />
                 <DrawerClose
                   className={styles.comment__send_icon}

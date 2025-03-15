@@ -1,6 +1,7 @@
 import { useGetChannelByIdQuery } from "@entities/channel";
 import { platformTypesNum } from "@entities/platform";
 import { platformToIcon } from "@entities/project";
+import { useFindLanguage } from "@entities/user";
 import { BoyIcon, CancelIcon2, GirlIcon } from "@shared/assets";
 import { Languages } from "@shared/config";
 import { paths } from "@shared/routing";
@@ -13,11 +14,11 @@ import {
   AlertDialogTrigger,
   ScrollArea,
 } from "@shared/ui";
+import { buildPathWithQuery, queryParamKeys } from "@shared/utils";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
-import { useFindLanguage } from "@entities/user";
 
 interface ChannelDescriptionProps {
   channel_id: string;
@@ -88,7 +89,7 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
                   {card?.format.map((format) => (
                     <div key={format?.format} className={styles.format}>
                       <div className={styles.format__name}>
-                        <p className="gradient_color truncate">
+                        <p className="truncate gradient_color">
                           {format?.format_name?.big}:
                         </p>
                       </div>
@@ -138,7 +139,12 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
               </div>
               <div className={styles.buttons}>
                 <AlertDialogCancel>
-                  <Link to={`${paths.addChannel}?channel_id=${channel_id}`}>
+                  <Link
+                    // to={`${paths.addChannel}?channel_id=${channel_id}`}
+                    to={buildPathWithQuery(paths.addChannel, {
+                      [queryParamKeys.channelId]: channel_id,
+                    })}
+                  >
                     <p className={`gradient_color ${styles.edit_btn}`}>
                       {t("platform_description.edit_btn")}
                     </p>

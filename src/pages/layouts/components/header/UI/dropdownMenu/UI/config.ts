@@ -1,6 +1,10 @@
 import { IMenuItem } from "@entities/admin";
 import { addChannelQueries } from "@entities/channel";
-import { projectTypesFilter } from "@entities/project";
+import {
+  advManagerProjectStatusFilter,
+  myProjectStatusFilter,
+  projectTypesFilter,
+} from "@entities/project";
 import { viewsTypes } from "@entities/views";
 import { walletTypesFilter } from "@entities/wallet";
 import {
@@ -16,6 +20,7 @@ import {
   WalletIcon,
 } from "@shared/assets";
 import { paths } from "@shared/routing";
+import { buildPathWithQuery, queryParamKeys } from "@shared/utils";
 
 export const advertiserServiceMenu: IMenuItem[] = [
   {
@@ -67,17 +72,28 @@ export const advertiserMenu: IMenuItem[] = [
     subItems: [
       {
         title: "orders_advertiser.type_filter.my_project",
-        path: `${paths.orders}?order_type=${projectTypesFilter.myProject}`,
+        path: buildPathWithQuery(paths.orders, {
+          [queryParamKeys.projectType]: projectTypesFilter.myProject,
+          [queryParamKeys.projectStatus]: myProjectStatusFilter.active,
+        }),
+        // path: `${paths.orders}?${queryParamKeys.projectType}=${projectTypesFilter.myProject}`,
         type: projectTypesFilter.myProject,
       },
       {
         title: "orders_advertiser.type_filter.manager_project",
-        path: `${paths.orders}?order_type=${projectTypesFilter.managerProject}`,
+        path: buildPathWithQuery(paths.orders, {
+          [queryParamKeys.projectType]: projectTypesFilter.managerProject,
+          [queryParamKeys.projectStatus]: advManagerProjectStatusFilter.active,
+        }),
+        // path: `${paths.orders}?${queryParamKeys.projectType}=${projectTypesFilter.managerProject}`,
         type: projectTypesFilter.managerProject,
       },
       {
         title: "orders_advertiser.type_filter.saved_project",
-        path: `${paths.orders}?order_type=${projectTypesFilter.savedProject}`,
+        path: buildPathWithQuery(paths.orders, {
+          [queryParamKeys.projectType]: projectTypesFilter.savedProject,
+        }),
+        // path: `${paths.orders}?${queryParamKeys.projectType}=${projectTypesFilter.savedProject}`,
         type: projectTypesFilter.savedProject,
       },
     ],
@@ -174,7 +190,10 @@ export const bloggerMenuNotAuth: IMenuItem[] = [
   {
     item: {
       title: "pages.addPlatform",
-      path: `${paths.addChannel}?add_channel=${addChannelQueries.main}`,
+      // path: `${paths.addChannel}?add_channel=${addChannelQueries.main}`,
+      path: buildPathWithQuery(paths.addChannel, {
+        [queryParamKeys.addChannel]: addChannelQueries.main,
+      }),
     },
   },
   {

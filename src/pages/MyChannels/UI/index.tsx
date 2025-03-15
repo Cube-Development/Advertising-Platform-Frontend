@@ -109,11 +109,13 @@ import { useFindLanguage } from "@entities/user";
 import { useGetViewBloggerChannelQuery } from "@entities/views";
 import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 import { useClearCookiesOnPage } from "@shared/hooks";
-import { pageFilter } from "@shared/routing";
+import { pageFilter, paths } from "@shared/routing";
 import { SuspenseLoader } from "@shared/ui";
+import { buildPathWithQuery, queryParamKeys, QueryParams } from "@shared/utils";
 import { BarFilter } from "@widgets/barFilter";
 import React, { FC, Suspense, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.scss";
 
 // Ленивый импорт компонентов
@@ -131,6 +133,8 @@ const ModerationChannels = React.lazy(() =>
 export const MyChannelsPage: FC = () => {
   useClearCookiesOnPage();
   const language = useFindLanguage();
+  const navigate = useNavigate();
+  const { channel_status } = QueryParams();
 
   const { setValue, watch } = useForm<{
     platform: platformTypesNum;
@@ -139,7 +143,14 @@ export const MyChannelsPage: FC = () => {
   }>({
     defaultValues: {
       platform: platformTypes[0].id,
-      status: channelStatusFilter.active,
+      status:
+        channel_status &&
+        !!Object.values(channelStatusFilter).includes(
+          channel_status as channelStatusFilter,
+        )
+          ? channel_status
+          : channelStatusFilter.active,
+      // status: channelStatusFilter.active,
       page: 1,
     },
   });
@@ -168,6 +179,13 @@ export const MyChannelsPage: FC = () => {
       setValue("page", 1);
     }, 500);
   }, [platform, status]);
+
+  useEffect(() => {
+    const newPath = buildPathWithQuery(paths.myChannels, {
+      [queryParamKeys.channelStatus]: formState.status,
+    });
+    navigate(newPath, { replace: true });
+  }, [formState.status]);
 
   return (
     <Suspense fallback={<SuspenseLoader />}>

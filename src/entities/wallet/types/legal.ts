@@ -5,7 +5,7 @@ import {
 } from "../config";
 
 export interface IExtendedProfileData extends ILegalData {
-  amount: number;
+  amount: string;
 }
 
 export interface ILegalData {

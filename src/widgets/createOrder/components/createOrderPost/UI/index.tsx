@@ -27,7 +27,6 @@ import {
   PostButtons,
   PostComment,
   PostFiles,
-  PostGeneration,
 } from "@features/createOrder";
 import { PostIcon } from "@shared/assets";
 import {
@@ -37,6 +36,7 @@ import {
   AlertDialogDescription,
   AlertDialogTitle,
   AlertDialogTrigger,
+  useToast,
 } from "@shared/ui";
 import { ICreateOrderBlur } from "@widgets/createOrder/config";
 import clsx from "clsx";
@@ -81,6 +81,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
   formState,
 }) => {
   const { t } = useTranslation();
+  const { toast } = useToast();
   const screen = useWindowWidth();
   // сразу сохраняем все ордеры в форму posts с учетом платформы и post_type
   useEffect(() => {
@@ -303,7 +304,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
   }, [] as PostFormats[]);
 
   const handleCheckPosts = async () => {
-    checkPosts(
+    const isValid = checkPosts(
       formState,
       setValue,
       onChangeBlur,
@@ -312,6 +313,13 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
       formState.platformFilter,
       cards,
     );
+
+    if (!isValid) {
+      toast({
+        variant: "error",
+        title: t("toasts.create_order.post.empty_error"),
+      });
+    }
   };
   console.log("formState", formState);
   return (

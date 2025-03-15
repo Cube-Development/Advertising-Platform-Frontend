@@ -1,15 +1,16 @@
+import { addChannelQueries } from "@entities/channel";
+import { AddChannel } from "@features/channel";
+import { SeeCatalog } from "@features/mainPages";
+import { PAGE_ANIMATION } from "@shared/config/animation";
 import { paths } from "@shared/routing";
 import { IOptionTranslate } from "@shared/types/translate";
+import { buildPathWithQuery, queryParamKeys } from "@shared/utils";
 import { motion } from "framer-motion";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Element } from "react-scroll";
-import styles from "./styles.module.scss";
-import { PAGE_ANIMATION } from "@shared/config/animation";
 import { OptionCard } from "../card";
-import { SeeCatalog } from "@features/mainPages";
-import { AddChannel } from "@features/channel";
-import { addChannelQueries } from "@entities/channel";
+import styles from "./styles.module.scss";
 
 interface CtaProps {
   page: string;
@@ -62,7 +63,10 @@ export const Cta: FC<CtaProps> = ({ page }) => {
               <SeeCatalog />
             ) : (
               <AddChannel
-                path={`${paths.addChannel}?add_channel=${addChannelQueries.main}`}
+                // path={`${paths.addChannel}?add_channel=${addChannelQueries.main}`}
+                path={buildPathWithQuery(paths.addChannel, {
+                  [queryParamKeys.addChannel]: addChannelQueries.main,
+                })}
               />
             )}
           </motion.div>

@@ -10,7 +10,7 @@
         "name": "Xizmatlar",
         "links": {
           "catalog": "Kanallar katalogi",
-          "add_channel": "Kanal qo‘shish",
+          "add_channel": "Kanal qo'shish",
           "turnkey": "Tayyor yechimlar",
           "calculate": "Daromad kalkulyatori",
           "tg_bot": "Telegram-bot"
@@ -27,7 +27,7 @@
       "cooperation": {
         "name": "Hamkorlik",
         "links": {
-          "vacancies": "Bo‘sh ish o‘rinlari",
+          "vacancies": "Bo'sh ish o'rinlari",
           "partner_programm": "Hamkorlik dasturi"
         }
       },
@@ -42,47 +42,47 @@
     },
     "contacts": {
       "tech_contact": "+99899-111-11-11",
-      "tech_title": "Texnik savollar bo‘yicha",
+      "tech_title": "Texnik savollar bo'yicha",
       "cooperation_contact": "+99891-999-99-99",
-      "cooperation_title": "Hamkorlik bo‘yicha savollar",
+      "cooperation_title": "Hamkorlik bo'yicha savollar",
       "email": "Info@blogix.uz",
-      "email_title": "24/7 texnik qo‘llab-quvvatlash",
-      "address": "Toshkent sh., 123123, Nikuyevo ko‘chasi, 123-uy, “Kongress” biznes markazi, 1-qavat"
+      "email_title": "24/7 texnik qo'llab-quvvatlash",
+      "address": "Toshkent sh., 123123, Nikuyevo ko'chasi, 123-uy, 'Kongress' biznes markazi, 1-qavat"
     },
     "all_rights": "Cubeinc Development © Barcha huquqlar himoyalangan"
   },
-  "registration": "Ro‘yxatdan o‘tish",
+  "registration": "Ro'yxatdan o'tish",
   "login": "Kirish",
   "logout": "Chiqish",
   "logout_title": "Haqiqatan ham profildan chiqmoqchimisiz?",
   "logout_description": "Barcha ma'lumotlaringiz saqlanadi, platformaga qayta kirganingizda ularga qayta kirishingiz mumkin",
   "buy": "Sotib olish",
   "btn_catalog": "Kanallar katalogi",
-  "btn_add_platform": "Kanal qo‘shish",
-  "btn_add_profile": "Qo‘shish",
+  "btn_add_platform": "Kanal qo'shish",
+  "btn_add_profile": "Qo'shish",
   "btn_start_adv": "Reklamani boshlash",
   "registration_alert": {
-    "title": "Siz avtorizatsiyadan o‘tmagansiz",
+    "title": "Siz avtorizatsiyadan o'tmagansiz",
     "description": "Bu funksiyadan foydalanish uchun tizimga kirish kerak",
     "close": "Yopish",
     "call_to_action": "Platformaning barcha imkoniyatlaridan foydalaning, eksklyuziv takliflar oling va boshqalar!"
   },
 
   "auth": {
-    "dont_have_account": "Sizda hali akkaunt yo‘qmi?",
+    "dont_have_account": "Sizda hali akkaunt yo'qmi?",
     "have_account": "Sizda akkaunt bormi?",
-    "sign_up": "Ro‘yxatdan o‘ting",
+    "sign_up": "Ro'yxatdan o'ting",
     "sign_in": "Kirish",
     "login_with": "Yoki quyidagilar orqali kiring:",
-    "sign_up_registration": "Ro‘yxatdan o‘tish",
+    "sign_up_registration": "Ro'yxatdan o'tish",
     "email_required": "Email majburiy maydon",
-    "email_invalid": "Noto‘g‘ri email",
+    "email_invalid": "Noto'g'ri email",
     "back_to_login": "Qaytish",
     "forgot_password": "Parolni unutdingizmi?",
     "enter_email": "Parolni tiklash uchun emailingizni kiriting",
     "continue": "Davom etish",
     "code_required": "Kod majburiy maydon",
-    "code_invalid": "Kod noto‘g‘ri",
+    "code_invalid": "Kod noto'g'ri",
     "verify_code": "Emailni tasdiqlash",
     "code_send_to_email": "Autentifikatsiya kodi emailingizga yuborildi",
     "enter_code": "Kod kiriting",
@@ -91,7 +91,7 @@
     "password_required": "Parol majburiy maydon",
     "confirm_password_required": "Parolni tasdiqlang",
     "more_characters": "Kamida 3 ta belgi",
-    "less_characters": "Ko‘pi bilan 15 ta belgi",
+    "less_characters": "Ko'pi bilan 15 ta belgi",
     "passwords_dont_match": "Parollar mos kelmaydi",
     "set_new_password": "Yangi parolni kiriting",
     "previous_reseted": "Oldingi parol yangisiga almashtiriladi",
@@ -100,7 +100,7 @@
     "confirm_password": "Parolni tasdiqlash",
     "set_password": "Parolni saqlash",
     "subscribtion": "Platformadan bildirishnomalarni olish",
-    "by_clicking_sign_up": "Ro‘yxatdan o‘tish tugmasini bosish orqali siz quyidagilar bilan tanishganligingizni tasdiqlaysiz:",
+    "by_clicking_sign_up": "Ro'yxatdan o'tish tugmasini bosish orqali siz quyidagilar bilan tanishganligingizni tasdiqlaysiz:",
     "terms": "Xizmat qoidalari",
     "and": "va",
     "privacy_policy": "Ommaviy oferta"
@@ -113,7 +113,7 @@
     "advertiser": "Reklama beruvchiga",
     "wallet": "Hamyon",
     "languages": "",
-    "addPlatform": "Kanal qo‘shish",
+    "addPlatform": "Kanal qo'shish",
     "calculateIncome": "Daromadni hisoblash",
     "faq": "FAQ"
   },
@@ -127,15 +127,16 @@
 
   "my_profile": {
     "messages": "Mening xabarlarim",
-    "data": "Mening ma’lumotlarim",
+    "data": "Mening ma'lumotlarim",
     "settings": "Profil sozlamalari"
   },
+
   "symbol": "so'm",
   "count": "dona",
 
   "wallet_menu": {
     "balance": "Balans",
-    "top_up": "Hamyonni to‘ldirish",
+    "top_up": "Hamyonni to'ldirish",
     "withdraw": "Pul yechib olish",
     "history": "Tranzaksiya tarixi",
     "invoice": "Hisob-fakturalar va shartnomalar"
@@ -147,7 +148,7 @@
     "navigation": "Navigatsiya",
     "catalog": "Kanallar katalogi",
     "turnkey": "Tayyor loyiha",
-    "addPlatform": "Kanal qo‘shish",
+    "addPlatform": "Kanal qo'shish",
     "calculateIncome": "Daromad hisoblash",
 
     "orders": "Mening reklama kampaniyalarim",
@@ -161,7 +162,7 @@
 
     "wallet": "Hamyon",
 
-    "top_up": "Hamyonni to‘ldirish",
+    "top_up": "Hamyonni to'ldirish",
     "withdraw": "Pul yechib olish",
     "history": "Tranzaksiya tarixi",
     "invoice": "Hisob-fakturalar va shartnomalar",
@@ -170,14 +171,14 @@
   },
 
   "more_less": {
-    "more": "Ko‘proq",
+    "more": "Ko'proq",
     "less": "Kamroq"
   },
 
   "main_page_advertiser": {
     "main_img": "mainAdv.png",
     "cta_title": "Ijtimoiy tarmoqlarda reklama joylashtirish hech qanday tashvishsiz",
-    "cta_subtitle": "Faqat faol, qo‘lda tekshirilgan kanallar",
+    "cta_subtitle": "Faqat faol, qo'lda tekshirilgan kanallar",
     "cta_list": [
       {
         "option": "Reklamangiz uchun maqsadli auditoriya va mos kanallarni tanlash algoritmlari",
@@ -192,6 +193,7 @@
         "img": "option3.svg"
       }
     ],
+
     "services_title": "Yuridik shaxslar bilan ishlaymiz, hisob-fakturalar va aktlar taqdim etamiz, didox.uz orqali elektron hujjat almashinuvi olib boramiz",
     "services_list": [
       {
@@ -226,15 +228,13 @@
     ],
     "how_title": "Bu qanday ishlaydi?",
     "how_list": [
-      { "stage": "Xizmatda ro‘yxatdan o‘ting" },
+      { "stage": "Xizmatda ro'yxatdan o'ting" },
       { "stage": "Katalogdan mos kanallarni tanlang" },
-      { "stage": "Hisobingizni qulay usul bilan to‘ldiring" },
+      { "stage": "Hisobingizni qulay usul bilan to'ldiring" },
       {
         "stage": "Joylashtirishni mustaqil yarating yoki sun'iy intellekt yordamida post generatsiya qiling"
       },
-      {
-        "stage": "Kanal egasi postni joylashtirib, tekshirish uchun sizga yuboradi"
-      }
+      { "stage": "Kanal egasi postni joylashtirib, tekshirish uchun sizga yuboradi" }
     ],
     "why_title": "Nega biz bilan samaraliroq?",
     "accomms_list": [
@@ -242,17 +242,19 @@
         "type": "self",
         "title": "Mustaqil joylashtirish",
         "stages": [
-          { "stage": "Mos kanallarni qo‘lda topish" },
+          { "stage": "Mos kanallarni qo'lda topish" },
           {
-            "stage": "Har bir kanalni soxta auditoriya va sifat bo‘yicha tekshirish"
+            "stage": "Har bir kanalni soxta auditoriya va sifat bo'yicha tekshirish"
           },
           {
-            "stage": "Adminlardan narx, shartlar va joylashtirish uchun bo‘sh vaqtlarni aniqlash"
+            "stage": "Adminlardan narx, shartlar va joylashtirish uchun bo'sh vaqtlarni aniqlash"
           },
           {
-            "stage": "Har bir admin bilan alohida to‘lov qilish (hech qanday kafolatsiz)"
+            "stage": "Har bir admin bilan alohida to'lov qilish (hech qanday kafolatsiz)"
           },
-          { "stage": "Reklama postini har bir adminga yuborish" },
+          { 
+            "stage": "Reklama postini har bir adminga yuborish" 
+          },
           {
             "stage": "Post joylashtirilishini har bir kanalda alohida kuzatish"
           }
@@ -266,83 +268,92 @@
           {
             "stage": "Bir necha bosish bilan mos kanallarni tanlang yoki tayyor joylashtirishni tanlang"
           },
-          { "stage": "Hisobingizni qulay usulda to‘ldiring" },
+          { "stage": "Hisobingizni qulay usulda to'ldiring" },
           {
-            "stage": "Post yuklang yoki sun’iy intellekt yordamida hammasini generatsiya qiling"
+            "stage": "Post yuklang yoki sun'iy intellekt yordamida hammasini generatsiya qiling"
           },
           {
             "stage": "Bir bosish bilan reklama joylashtirishni barcha tanlangan kanallarda ishga tushuring"
           },
-          { "stage": "Har bir joylashtirish bo‘yicha bildirishnoma oling" },
+          { "stage": "Har bir joylashtirish bo'yicha bildirishnoma oling" },
           {
-            "stage": "Kanal joylashtirish shartlari bajarilgunga qadar mablag‘laringizni himoya qiladi"
+            "stage": "Kanal joylashtirish shartlari bajarilgunga qadar mablag'laringizni himoya qiladi"
           }
         ],
         "save": "Vaqt va pulni tejang"
       }
     ],
-    "turnkey_title": "Reklamani to‘liq ishga tushiramiz",
+
+    "turnkey_title": "Reklamani to'liq ishga tushiramiz",
     "turnkey_subtitle": "Tarifni tanlang va shaxsiy menejer hamma ishni siz uchun bajaradi",
-    "turnkey_text": "Menejer xizmatlari bonus tariqasida taqdim etiladi. Butun budjet Blogix katalogidagi integratsiyalarni sotib olishga yo‘naltiriladi",
+    "turnkey_text": "Menejer xizmatlari bonus tariqasida taqdim etiladi. Butun budjet Blogix katalogidagi integratsiyalarni sotib olishga yo'naltiriladi",
     "tarifs_list": [
       {
         "type": "base",
-        "name": "Boshlang‘ich",
-        "views": "60 000 dan ortiq ko‘rish",
-        "price": "1 250 000 so‘m",
-        "info": "Xizmatni sinab ko‘rish yoki kichik reklama kampaniyalari uchun asosiy variant",
+        "name": "Boshlang'ich",
+        "views": "60 000 dan ortiq ko'rish",
+        "price": "1 250 000 so'm",
+        "info": "Xizmatni sinab ko'rish yoki kichik reklama kampaniyalari uchun asosiy variant",
         "options": [
-          { "option": "Kanallarni qo‘lda tanlash", "available": true },
-          { "option": "Individual targ‘ibot rejasi", "available": true },
-          { "option": "Samarali reklama postini yaratish", "available": true },
-          { "option": "Nashrlar haqida bildirishnomalar", "available": true },
-          {
-            "option": "Tanlangan kanallarni kelishish",
-            "available": false
+          { "option": "Kanallarni qo'lda tanlash", "available": true },
+          { "option": "Individual targ'ibot rejasi", "available": true },
+          { 
+            "option": "Samarali reklama postini yaratish", "available": true 
           },
-          { "option": "Targ‘ibot bo‘yicha maslahatlar", "available": false },
+          { "option": "Nashrlar haqida bildirishnomalar", "available": true },
+          { "option": "Tanlangan kanallarni kelishish",
+            "available": false },
+          { "option": "Targ'ibot bo'yicha maslahatlar", "available": false },
           {
-            "option": "Bajarilgan ish bo‘yicha batafsil hisobot",
+            "option": "Bajarilgan ish bo'yicha batafsil hisobot",
             "available": false
           },
           { "option": "Reklama kampaniyasi prognozlari", "available": false }
         ]
       },
+
       {
         "type": "standard",
         "name": "Standart",
-        "views": "300 000 dan ortiq ko‘rish",
-        "price": "5 500 000 so‘m",
-        "info": "Kichik biznesni targ‘ib qilish uchun optimal tarif",
+        "views": "300 000 dan ortiq ko'rish",
+        "price": "5 500 000 so'm",
+        "info": "Kichik biznesni targ'ib qilish uchun optimal tarif",
         "options": [
-          { "option": "Kanallarni qo‘lda tanlash", "available": true },
-          { "option": "Individual targ‘ibot rejasi", "available": true },
-          { "option": "Samarali reklama postini yaratish", "available": true },
+          { "option": "Kanallarni qo'lda tanlash", "available": true },
+          { "option": "Individual targ'ibot rejasi", "available": true },
+          { 
+            "option": "Samarali reklama postini yaratish",
+            "available": true 
+          },
           { "option": "Nashrlar haqida bildirishnomalar", "available": true },
           { "option": "Tanlangan kanallarni kelishish", "available": true },
-          { "option": "Targ‘ibot bo‘yicha maslahatlar", "available": true },
+          { "option": "Targ'ibot bo'yicha maslahatlar", "available": true },
           {
-            "option": "Bajarilgan ish bo‘yicha batafsil hisobot",
+            "option": "Bajarilgan ish bo'yicha batafsil hisobot",
             "available": false
           },
           { "option": "Reklama kampaniyasi prognozlari", "available": false }
         ]
       },
+
       {
         "type": "complex",
         "name": "Kompleks",
-        "views": "1 000 000 dan ortiq ko‘rish",
-        "price": "15 300 000 so‘m",
-        "info": "O‘rta va yirik reklama kampaniyalari uchun kompleks tarif",
+        "views": "1 000 000 dan ortiq ko'rish",
+        "price": "15 300 000 so'm",
+        "info": "O'rta va yirik reklama kampaniyalari uchun kompleks tarif",
         "options": [
-          { "option": "Kanallarni qo‘lda tanlash", "available": true },
-          { "option": "Individual targ‘ibot rejasi", "available": true },
-          { "option": "Samarali reklama postini yaratish", "available": true },
+          { "option": "Kanallarni qo'lda tanlash", "available": true },
+          { "option": "Individual targ'ibot rejasi", "available": true },
+          { 
+            "option": "Samarali reklama postini yaratish", 
+            "available": true 
+          },
           { "option": "Nashrlar haqida bildirishnomalar", "available": true },
           { "option": "Tanlangan kanallarni kelishish", "available": true },
-          { "option": "Targ‘ibot bo‘yicha maslahatlar", "available": true },
+          { "option": "Targ'ibot bo'yicha maslahatlar", "available": true },
           {
-            "option": "Bajarilgan ish bo‘yicha batafsil hisobot",
+            "option": "Bajarilgan ish bo'yicha batafsil hisobot",
             "available": true
           },
           { "option": "Reklama kampaniyasi prognozlari", "available": true },
@@ -393,22 +404,23 @@
 
   "main_page_blogger": {
     "main_img": "mainBlogger.png",
-    "cta_title": "Kanalingizni hozir qo‘shing va buyurtma oling",
+    "cta_title": "Kanalingizni hozir qo'shing va buyurtma oling",
     "cta_subtitle": "Buyurtmalar uchun kanalni oching. Oson. Tez. Foydali.",
     "cta_list": [
       {
-        "option": "Sizning kanallaringiz uchun doimiy o‘sib boruvchi reklama beruvchilar soni",
+        "option": "Sizning kanallaringiz uchun doimiy o'sib boruvchi reklama beruvchilar soni",
         "img": "option4.svg"
       },
       {
-        "option": "Har bir kanal bo‘yicha statistikalar – kontentingizni samarali tahlil qilish uchun",
+        "option": "Har bir kanal bo'yicha statistikalar – kontentingizni samarali tahlil qilish uchun",
         "img": "option5.svg"
       },
       {
-        "option": "Tez va qonuniy mablag‘ yechib olish tizimi",
+        "option": "Tez va qonuniy mablag' yechib olish tizimi",
         "img": "option6.svg"
       }
     ],
+
     "services_title": "Yuridik shaxslar bilan ishlaymiz, hisob-fakturalar va aktlar taqdim etamiz, didox.uz orqali elektron hujjat almashinuvini yuritamiz",
     "services_list": [
       {
@@ -427,7 +439,7 @@
         "img": "info3.svg"
       },
       {
-        "info": "Biz bilan birga bo‘lgan kanal egalari",
+        "info": "Biz bilan birga bo'lgan kanal egalari",
         "count": "1230+",
         "img": "info4.svg"
       }
@@ -443,13 +455,13 @@
     ],
     "how_title": "Bu qanday ishlaydi?",
     "how_list": [
-      { "stage": "Xizmatga ro‘yxatdan o‘ting" },
-      { "stage": "Kanalni bizning platformaga qo‘shing" },
+      { "stage": "Xizmatga ro'yxatdan o'ting" },
+      { "stage": "Kanalni bizning platformaga qo'shing" },
       { "stage": "Reklama buyurtmasini qabul qiling" },
       {
-        "stage": "Belgilangan vaqtda kanalga post joylashtiring va reklama beruvchidan to‘lov oling"
+        "stage": "Belgilangan vaqtda kanalga post joylashtiring va reklama beruvchidan to'lov oling"
       },
-      { "stage": "Pulni o‘zingizga qulay usulda yechib oling" }
+      { "stage": "Pulni o'zingizga qulay usulda yechib oling" }
     ],
     "why_title": "Nega biz bilan samaraliroq?",
     "accomms_list": [
@@ -457,16 +469,12 @@
         "type": "self",
         "title": "Mustaqil joylashtirish",
         "stages": [
-          {
-            "stage": "Reklama beruvchilarni doimiy qidirishga vaqt va kuch sarflash"
-          },
+          { "stage": "Reklama beruvchilarni doimiy qidirishga vaqt va kuch sarflash" },
           {
             "stage": "Daromadning noaniqligi, chunki reklama beruvchilar oqimi faqat sizning imkoniyatlaringiz bilan cheklangan"
           },
-          { "stage": "To‘lov kafolati past" },
-          {
-            "stage": "Kelishuv jarayonining barcha bosqichlarida avtomatlashtirish yo‘q"
-          },
+          { "stage": "To'lov kafolati past" },
+          { "stage": "Kelishuv jarayonining barcha bosqichlarida avtomatlashtirish yo'q" },
           {
             "stage": "Oxir-oqibat sotib olmaydigan reklama beruvchilarga vaqt sarflash"
           }
@@ -477,25 +485,23 @@
         "title": "Blogix bilan joylashtirish",
         "stages": [
           { "stage": "Yirik reklama beruvchilarning doimiy oqimi" },
-          { "stage": "Kafolatlangan to‘lov" },
+          { "stage": "Kafolatlangan to'lov" },
           {
-            "stage": "Reklama beruvchilarning samarali filtrlash tizimi, siz faqat buyurtma uchun allaqachon to‘lagan mijozlarni qabul qilasiz"
+            "stage": "Reklama beruvchilarning samarali filtrlash tizimi, siz faqat buyurtma uchun allaqachon to'lagan mijozlarni qabul qilasiz"
           },
           {
             "stage": "Firibgar reklama beruvchilardan qochish imkoni"
           },
-          { "stage": "Kelishuv jarayonining to‘liq avtomatlashtirilishi" },
-          {
-            "stage": "Kanalingiz daromadini bir necha barobar oshirish"
-          }
+          { "stage": "Kelishuv jarayonining to'liq avtomatlashtirilishi" },
+          { "stage": "Kanalingiz daromadini bir necha barobar oshirish" }
         ],
         "save": "Vaqtingiz va pulingizni tejang"
       }
     ],
     "calculate": {
       "title": "Kanal daromadini hisoblash",
-      "subtitle": "Kanal yoki blogingiz mavzusini va obunachilar sonini ko‘rsating",
-      "text": "Olingan natijalar taxminiy hisoblanadi va ko‘plab omillarga bog‘liq holda farq qilishi mumkin"
+      "subtitle": "Kanal yoki blogingiz mavzusini va obunachilar sonini ko'rsating",
+      "text": "Olingan natijalar taxminiy hisoblanadi va ko'plab omillarga bog'liq holda farq qilishi mumkin"
     },
 
     "card": {
@@ -523,44 +529,45 @@
       { "img": "channel1.svg" },
       { "img": "channel1.svg" }
     ],
+
     "customers_title": "Mijozlarimiz biz haqimizda nima deyishmoqda:",
     "customers_list": [
       {
         "name": "Kadomov Roman",
         "workplace": "CocaCola Uzbekistan",
         "img": "customer1.jpg",
-        "text": "Ushbu marketplace reklamani sotish uchun haqiqiy topilma! Brendni targ'ib qilish uchun ajoyib platforma. Shaffof kelishuv shartlari, mijozlar bilan samarali o‘zaro aloqalar va yuqori sifatli tahlil. Biznesingiz ko‘rinishini oshirishni istaganlarga tavsiya qilaman."
+        "text": "Ushbu marketplace reklamani sotish uchun haqiqiy topilma! Brendni targ'ib qilish uchun ajoyib platforma. Shaffof kelishuv shartlari, mijozlar bilan samarali o'zaro aloqalar va yuqori sifatli tahlil. Biznesingiz ko'rinishini oshirishni istaganlarga tavsiya qilaman."
       },
       {
         "name": "Karimov Damir",
         "workplace": "Uzbekistan Airways",
         "img": "customer2.jpg",
-        "text": "Ushbu marketplaceda ishlash natijalaridan juda mamnunman. Reklama sotish bu nafaqat yangi mijozlarni jalb qilishning samarali usuli, balki professional qo‘llab-quvvatlash jamoasi bilan yoqimli hamkorlik hamdir. Platforma reklama kampaniyalarini kengaytirish uchun noyob imkoniyatlarni taqdim etadi."
+        "text": "Ushbu marketplaceda ishlash natijalaridan juda mamnunman. Reklama sotish bu nafaqat yangi mijozlarni jalb qilishning samarali usuli, balki professional qo'llab-quvvatlash jamoasi bilan yoqimli hamkorlik hamdir. Platforma reklama kampaniyalarini kengaytirish uchun noyob imkoniyatlarni taqdim etadi."
       },
       {
         "name": "Xamidov Mardonbek",
         "workplace": "Kalyan House",
         "img": "customer3.jpg",
-        "text": "Bu marketplace reklama sotish sohasida ishonchli hamkorimga aylandi. Intuitiv tushunarli interfeys, keng targeting imkoniyatlari va natijalarning aniq ko‘rinishi. U bilan hamkorlik mening reklama strategiyamning asosiy qismiga aylandi. Zo‘r xizmat uchun rahmat!"
+        "text": "Bu marketplace reklama sotish sohasida ishonchli hamkorimga aylandi. Intuitiv tushunarli interfeys, keng targeting imkoniyatlari va natijalarning aniq ko'rinishi. U bilan hamkorlik mening reklama strategiyamning asosiy qismiga aylandi. Zo'r xizmat uchun rahmat!"
       },
 
       {
         "name": "customer 1",
         "workplace": "CocaCola Uzbekistan",
         "img": "customer1.jpg",
-        "text": "Ushbu marketplace reklamani sotish uchun haqiqiy topilma! Brendni targ'ib qilish uchun ajoyib platforma. Shaffof kelishuv shartlari, mijozlar bilan samarali o‘zaro aloqalar va yuqori sifatli tahlil. Biznesingiz ko‘rinishini oshirishni istaganlarga tavsiya qilaman."
+        "text": "Ushbu marketplace reklamani sotish uchun haqiqiy topilma! Brendni targ'ib qilish uchun ajoyib platforma. Shaffof kelishuv shartlari, mijozlar bilan samarali o'zaro aloqalar va yuqori sifatli tahlil. Biznesingiz ko'rinishini oshirishni istaganlarga tavsiya qilaman."
       },
       {
         "name": "customer 2",
         "workplace": "Uzbekistan Airways",
         "img": "customer2.jpg",
-        "text": "Ushbu marketplaceda ishlash natijalaridan juda mamnunman. Reklama sotish bu nafaqat yangi mijozlarni jalb qilishning samarali usuli, balki professional qo‘llab-quvvatlash jamoasi bilan yoqimli hamkorlik hamdir. Platforma reklama kampaniyalarini kengaytirish uchun noyob imkoniyatlarni taqdim etadi."
+        "text": "Ushbu marketplaceda ishlash natijalaridan juda mamnunman. Reklama sotish bu nafaqat yangi mijozlarni jalb qilishning samarali usuli, balki professional qo'llab-quvvatlash jamoasi bilan yoqimli hamkorlik hamdir. Platforma reklama kampaniyalarini kengaytirish uchun noyob imkoniyatlarni taqdim etadi."
       },
       {
         "name": "customer 3",
         "workplace": "Kalyan House",
         "img": "customer3.jpg",
-        "text": "Bu marketplace reklama sotish sohasida ishonchli hamkorimga aylandi. Intuitiv tushunarli interfeys, keng targeting imkoniyatlari va natijalarning aniq ko‘rinishi. U bilan hamkorlik mening reklama strategiyamning asosiy qismiga aylandi. Zo‘r xizmat uchun rahmat!"
+        "text": "Bu marketplace reklama sotish sohasida ishonchli hamkorimga aylandi. Intuitiv tushunarli interfeys, keng targeting imkoniyatlari va natijalarning aniq ko'rinishi. U bilan hamkorlik mening reklama strategiyamning asosiy qismiga aylandi. Zo'r xizmat uchun rahmat!"
       }
     ]
   },
@@ -572,7 +579,7 @@
     "turnkey_project": "Tayyor loyiha",
     "start_turnkey_project": "Tayyor reklama ishga tushirish",
     "or": "Yoki",
-    "no_project": "Hozircha sizda loyihalar yo‘q",
+    "no_project": "Hozircha sizda loyihalar yo'q",
     "no_template": "Reklama kampaniyalaringizni saqlang va istalgan vaqtda davom eting",
     "type_filter": {
       "my_project": "Mening loyihalarim",
@@ -585,6 +592,7 @@
       "develop": "Ishlab chiqilmoqda",
       "agreed": "Kelishilmoqda"
     },
+
     "card": {
       "status": {
         "active": "Ish jarayonida",
@@ -593,11 +601,11 @@
         "completed": "Bajarilgan"
       },
       "channels": "Kanallar",
-      "views": "Ko‘rishlar",
+      "views": "Ko'rishlar",
       "tarif": "Tarif",
       "cost": "Budjet",
       "remainder": "Qoldiq",
-      "see_more": "Ko‘proq ko‘rish",
+      "see_more": "Ko'proq ko'rish",
       "see_less": "Yopish",
       "request_approve": "Siz kampaniyani tasdiqladingiz",
       "not_request_approve": "Sizning kampaniyangiz tasdiqlashni kutmoqda"
@@ -607,6 +615,7 @@
       "accommodation": "Joylashtirish formati",
       "time": "Joylashtirish vaqti",
       "price": "Narx",
+
       "replace": {
         "channel": {
           "title": "Kanalni almashtirish sababini kiriting",
@@ -626,10 +635,10 @@
     },
     "order_status": {
       "rejected": {
-        "title": "Kanal egasi so‘rovingizni rad etdi",
+        "title": "Kanal egasi so'rovingizni rad etdi",
         "title2": "Buyurtma bekor qilindi",
-        "text": "Mablag‘ingiz 12 soat ichida hamyoningizga qaytariladi",
-        "text2": "Qolgan mablag‘ kampaniya tugagandan so‘ng qaytariladi"
+        "text": "Mablag'ingiz 12 soat ichida hamyoningizga qaytariladi",
+        "text2": "Qolgan mablag' kampaniya tugagandan so'ng qaytariladi"
       },
       "completed": {
         "title": "Buyurtmangiz bajarildi",
@@ -640,12 +649,12 @@
         "text": "Postni mosligiga tekshiring"
       },
       "accepted": {
-        "title": "So‘rov qabul qilindi",
-        "text": "Post joylashtirilgandan so‘ng siz kanal egasidan bildirishnoma olasiz"
+        "title": "So'rov qabul qilindi",
+        "text": "Post joylashtirilgandan so'ng siz kanal egasidan bildirishnoma olasiz"
       },
       "moderation": {
         "title": "Moderatsiyada",
-        "text": "So‘rovingiz bo‘yicha qaror ",
+        "text": "So'rovingiz bo'yicha qaror ",
         "small": "24 soat ichida qabul qilinadi"
       },
       "waiting": {
@@ -777,17 +786,17 @@
       "moderation_reject": "Rad etilgan",
       "inactive": "Faolsizlantirilgan",
       "banned": "Bloklangan",
-      "deleted": "O‘chirib tashlangan"
+      "deleted": "O'chirib tashlangan"
     },
     "created": "Sana",
 
-    "no_platform": "Hozircha sizda maydonchalar yo‘q",
-    "no_banned": "Sizda bloklangan kanallar yo‘q",
+    "no_platform": "Hozircha sizda maydonchalar yo'q",
+    "no_banned": "Sizda bloklangan kanallar yo'q",
 
     "offers_count": "Yangi",
     "moderation_time": "Kanal moderatsiyasi 24 soat davom etadi",
     "repeat": "Rad etish sababini bartaraf etib, arizani qayta yuborishingiz mumkin",
-    "repeat_date": "Moderatsiyaga qayta ariza berish mumkin bo‘ladi",
+    "repeat_date": "Moderatsiyaga qayta ariza berish mumkin bo'ladi",
     "ban": "Sizning kanalingiz doimiy blokda",
 
     "card": {
@@ -802,22 +811,22 @@
     },
 
     "menu": {
-      "title": "Kanal bo‘yicha harakatlar",
+      "title": "Kanal bo'yicha harakatlar",
       "edit": "Tahrirlash",
       "activate": "Faollashtirish",
       "deactivate": "Faolsizlantirish",
-      "delete": "O‘chirish"
+      "delete": "O'chirish"
     },
 
     "delete_channel": {
-      "title": "Siz chindan ham kanalni o‘chirib tashlamoqchimisiz?",
+      "title": "Siz chindan ham kanalni o'chirib tashlamoqchimisiz?",
       "yes": "Ha",
-      "no": "Yo‘q"
+      "no": "Yo'q"
     },
     "deactivate_channel": {
-      "title": "Siz chindan ham kanalni faolsizlantirmoqchimisiz? Ushbu kanal bilan bog‘liq barcha faol buyurtmalar avtomatik ravishda rad etiladi. Agar sizda yakunlanmagan buyurtmalar bo‘lsa, ularni tugatishingiz, buyurtma bo‘yicha mablag‘larni olishingiz va shundan keyingina kanalni faolsizlantirishingiz tavsiya etiladi.",
+      "title": "Siz chindan ham kanalni faolsizlantirmoqchimisiz? Ushbu kanal bilan bog'liq barcha faol buyurtmalar avtomatik ravishda rad etiladi. Agar sizda yakunlanmagan buyurtmalar bo'lsa, ularni tugatishingiz, buyurtma bo'yicha mablag'larni olishingiz va shundan keyingina kanalni faolsizlantirishingiz tavsiya etiladi.",
       "yes": "Ha",
-      "no": "Yo‘q"
+      "no": "Yo'q"
     }
   },
 
@@ -827,13 +836,13 @@
     "age": "Auditoriya yoshi",
     "sex": "Jinslar nisbati",
     "region": "Mintaqa",
-    "edit_btn": "O‘zgartirish",
+    "edit_btn": "O'zgartirish",
     "okey_btn": "Tushunarli"
   },
 
   "offers_blogger": {
     "my_offers": "Mening reklama buyurtmalarim",
-    "no_offers": "Hozircha sizda buyurtmalar yo‘q",
+    "no_offers": "Hozircha sizda buyurtmalar yo'q",
 
     "status_filter": {
       "active": "Faollar",
@@ -872,11 +881,11 @@
         "placeholder": "Post havolasini kiriting...",
         "invalid_url": "Havola yaroqsiz",
         "send_link_title": "Joylashtirilgan reklama posti havolasini yuboring",
-        "send_link_subtitle": "Havolani yuborishdan oldin, barcha reklama beruvchi talablariga to‘liq mos kelganingizga ishonch hosil qiling"
+        "send_link_subtitle": "Havolani yuborishdan oldin, barcha reklama beruvchi talablariga to'liq mos kelganingizga ishonch hosil qiling"
       },
       "check": {
         "title": "Siz postni yubordingiz",
-        "text": "Buyurtma muddati tugagandan keyin yoki buyurtmachi tasdiqlaganidan so‘ng to‘lov hisobingizga o‘tkaziladi"
+        "text": "Buyurtma muddati tugagandan keyin yoki buyurtmachi tasdiqlaganidan so'ng to'lov hisobingizga o'tkaziladi"
       },
       "wait": {
         "title": "Yangi buyurtma",
@@ -884,7 +893,7 @@
       },
       "cancel": {
         "title": "Buyurtma rad etildi",
-        "text": "Tez-tez buyurtmalarni bekor qilish sizning reytingingizni pasaytirishi mumkinligini eslatib o‘tamiz"
+        "text": "Tez-tez buyurtmalarni bekor qilish sizning reytingingizni pasaytirishi mumkinligini eslatib o'tamiz"
       },
       "complete": {
         "title": "Buyurtma bajarildi"
@@ -901,7 +910,7 @@
 
   "add_platform": {
     "title": {
-      "add": "Kanal qo‘shish",
+      "add": "Kanal qo'shish",
       "edit": "Kanalni tahrirlash"
     },
     "chevron": {
@@ -922,6 +931,7 @@
         "invalid": "Havola yaroqsiz"
       }
     },
+
     "description": {
       "category": {
         "title": "Kategoriya tanlang",
@@ -931,7 +941,7 @@
       "languages": {
         "title": "Tilni tanlang",
         "default_value": "Tanlanmagan",
-        "text": "Kanalda kontent e’lon qilinadigan bir yoki bir nechta tillarni tanlashingiz mumkin."
+        "text": "Kanalda kontent e'lon qilinadigan bir yoki bir nechta tillarni tanlashingiz mumkin."
       },
       "region": {
         "title": "Mintaqani tanlang",
@@ -946,28 +956,28 @@
       "age": {
         "title": "Auditoriya yoshini tanlang",
         "default_value": "Tanlanmagan",
-        "text": "Auditoriyangizda ustun bo‘lgan bir yoki bir nechta yosh guruhlarini tanlashingiz mumkin."
+        "text": "Auditoriyangizda ustun bo'lgan bir yoki bir nechta yosh guruhlarini tanlashingiz mumkin."
       },
       "description": {
         "title": "Kanalni tavsifi",
         "default_value": "Kanalni boshqa kanallardan ajratib turadigan xususiyatlarini yozing.",
-        "text": "Kanalingizni tavsiflang, uning asosiy maqsadlari va o‘ziga xos xususiyatlarini yozing. Asosiy mavzusi, ustun kontent turlari va uni boshqa kanallardan farqli jihatlari haqida ma’lumot bering."
+        "text": "Kanalingizni tavsiflang, uning asosiy maqsadlari va o'ziga xos xususiyatlarini yozing. Asosiy mavzusi, ustun kontent turlari va uni boshqa kanallardan farqli jihatlari haqida ma'lumot bering."
       },
       "price": {
         "title": "Joylashtirish formatini tanlang va narxni kiriting",
-        "info": "Joylashtirish formatlari va narx belgilash haqida ko‘proq ma’lumotni qo‘llanmadan bilib olishingiz mumkin",
+        "info": "Joylashtirish formatlari va narx belgilash haqida ko'proq ma'lumotni qo'llanmadan bilib olishingiz mumkin",
         "text": "Joylashtirish formatini tanlang va mos keluvchi narxni kiriting.",
         "default": "Narxni kiriting"
       },
       "symbol": {
         "title": "Postdagi belgi soni",
-        "text": "Joylashtirishga tayyor bo‘lgan postdagi belgi, shu jumladan bo‘sh joylar va tinish belgilari sonini kiriting."
+        "text": "Joylashtirishga tayyor bo'lgan postdagi belgi, shu jumladan bo'sh joylar va tinish belgilari sonini kiriting."
       },
       "choosed": "Tanlangan",
       "from": "dan"
     },
     "accept": {
-      "title": "Tasdiqlashdan oldin ma’lumotlarni tekshiring",
+      "title": "Tasdiqlashdan oldin ma'lumotlarni tekshiring",
       "platform": {
         "title": "Platforma"
       },
@@ -999,9 +1009,10 @@
         "title": "Belgilar soni"
       }
     },
+
     "create": {
-      "send": "Sizning so‘rovingiz yuborildi!",
-      "moderation": "Kanal qo‘shish so‘rovingiz moderator tekshiruvidan o‘tish uchun yuborildi.",
+      "send": "Sizning so'rovingiz yuborildi!",
+      "moderation": "Kanal qo'shish so'rovingiz moderator tekshiruvidan o'tish uchun yuborildi.",
       "answer": {
         "text1": "Javob keladi",
         "span": "24 soat ichida",
@@ -1014,7 +1025,7 @@
     "title": "Profil sozlamalari",
     "account_block": {
       "title": "Hisob",
-      "date": "Ro‘yxatdan o‘tgan sana",
+      "date": "Ro'yxatdan o'tgan sana",
       "name": {
         "title": "Ism",
         "default_value": "Gomer"
@@ -1037,18 +1048,18 @@
       },
       "location": {
         "title": "Manzil",
-        "default_value": "O‘zbekiston, Toshkent"
+        "default_value": "O'zbekiston, Toshkent"
       },
-      "save_btn": "O‘zgarishlarni saqlash"
+      "save_btn": "O'zgarishlarni saqlash"
     },
 
     "email_block": {
-      "title": "E-mailni o‘zgartirish",
+      "title": "E-mailni o'zgartirish",
       "new_email": {
         "title": "Yangi E-mail kiriting",
         "default_value": "Sample@gmail.com",
         "error": {
-          "required": "maydon bo‘sh bo‘lishi mumkin emas",
+          "required": "maydon bo'sh bo'lishi mumkin emas",
           "format": "Format: Sample@gmail.com"
         }
       },
@@ -1056,24 +1067,24 @@
         "title": "Parolni kiriting",
         "default_value": "Sample@gmail.com",
         "error": {
-          "required": "maydon bo‘sh bo‘lishi mumkin emas"
+          "required": "maydon bo'sh bo'lishi mumkin emas"
         }
       },
       "code": {
         "title": "Tasdiqlash kodi",
         "default_value": "123456",
         "error": {
-          "required": "maydon bo‘sh bo‘lishi mumkin emas",
-          "format": "kod 6 xonali bo‘lishi kerak"
+          "required": "maydon bo'sh bo'lishi mumkin emas",
+          "format": "kod 6 xonali bo'lishi kerak"
         }
       },
-      "change_btn": "E-mailni o‘zgartirish",
-      "send_btn": "Kod jo‘natish",
+      "change_btn": "E-mailni o'zgartirish",
+      "send_btn": "Kod jo'natish",
       "back_btn": "Orqaga"
     },
 
     "password_block": {
-      "title": "Parolni o‘zgartirish",
+      "title": "Parolni o'zgartirish",
       "current_password": {
         "title": "Joriy parol",
         "default_value": "Sample@gmail.com"
@@ -1086,29 +1097,28 @@
         "title": "Yangi parolni tasdiqlash",
         "default_value": "Sample@gmail.com"
       },
-      "change_btn": "Parolni o‘zgartirish"
+      "change_btn": "Parolni o'zgartirish"
     },
-
     "notification_block": {
       "title": "Bildirishnomalar",
       "email": {
         "title": "E-mail",
         "system": "Tizim xabarlari",
-        "project": "Loyihalar bo‘yicha bildirishnomalar",
+        "project": "Loyihalar bo'yicha bildirishnomalar",
         "individual": "Shaxsiy takliflar va promo xabarlar"
       },
       "bot": {
         "title": "Telegram bot",
         "system": "Tizim xabarlari",
-        "project": "Loyihalar bo‘yicha bildirishnomalar",
+        "project": "Loyihalar bo'yicha bildirishnomalar",
         "individual": "Shaxsiy takliflar va promo xabarlar",
         "enable_notifications": "Telegram bot orqali bildirishnomalarni yoqishni xohlaysizmi?",
         "telegramm": {
           "title": "Telegram akkauntingizni kiriting",
           "default_value": "Sample@gmail.com"
         },
-        "instruction": "Telegram botni sozlash bo‘yicha batafsil qo‘llanmani o‘qish",
-        "change_btn": "O‘zgartirish",
+        "instruction": "Telegram botni sozlash bo'yicha batafsil qo'llanmani o'qish",
+        "change_btn": "O'zgartirish",
         "cancel_btn": "Bekor qilish"
       },
       "continue_btn": "Davom etish"
@@ -1116,87 +1126,84 @@
   },
 
   "add_profile": {
-    "add_profile": "Ma'lumot qo‘shish",
+    "add_profile": "Ma'lumot qo'shish",
     "types": {
-      "selfemployedaccount": "O‘zini o‘zi band qilgan",
+      "selfemployedaccount": "O'zini o'zi band qilgan",
       "entity": "Yuridik shaxs",
       "individual": "Yakka tartibdagi tadbirkor (YTT)"
     },
     "subtypes": {
       "account": "Hisob raqami",
       "card": "Tranzit hisob raqami"
-    }
-  },
-
-  "basic_info": {
-    "basic_info": "Umumiy ma'lumotlar",
-    "name": {
-      "title": "F.I.Sh",
-      "default_value": "Gomer German",
-      "description": "Familiyangiz, ismingiz va otangiz ismini pasport yoki boshqa rasmiy hujjatdagidek to‘liq kiriting. Ma'lumotlaringiz bank ma'lumotlari bilan mos kelishi kerak.",
-      "error": {
-        "required": "maydon bo‘sh bo‘lishi mumkin emas"
+    },
+    "basic_info": {
+      "basic_info": "Umumiy ma'lumotlar",
+      "name": {
+        "title": "F.I.Sh",
+        "default_value": "Gomer German",
+        "description": "Familiyangiz, ismingiz va otangiz ismini pasport yoki boshqa rasmiy hujjatdagidek to'liq kiriting. Ma'lumotlaringiz bank ma'lumotlari bilan mos kelishi kerak.",
+        "error": {
+          "required": "maydon bo'sh bo'lishi mumkin emas"
+        }
+      },
+      "registration_number": {
+        "title": "Ro'yxatdan o'tish raqami",
+        "default_value": "12345678",
+        "description": "Sizga ro'yxatdan o'tish jarayonida berilgan raqamni kiriting. Ushbu raqam shaxsingizni tasdiqlash va identifikatsiya qilish uchun ishlatiladi.",
+        "error": {
+          "required": "keraksiz belgilarni kiritmang"
+        }
+      },
+      "registration_date": {
+        "title": "Ro'yxatdan o'tgan sana",
+        "default_value": "22.09.2023",
+        "description": "Ro'yxatdan o'tgan sanani quyidagi formatda kiriting: KK.OY.YYYY. Ma'lumotlaringiz rasmiy hujjatlarga mos bo'lishiga ishonch hosil qiling.",
+        "error": {
+          "required": "noto'g'ri format, quyidagi formatda kiriting: kk.oy.yyyy, masalan: 22.09.2023"
+        }
+      },
+      "PNFL": {
+        "title": "JShShIR",
+        "default_value": "12345678901234",
+        "description": "Jismoniy shaxsning shaxsiy identifikatsiya raqami. Ma'lumotlaringizni tasdiqlash uchun to'g'ri JShShIRni kiriting.",
+        "error": {
+          "required": "noto'g'ri format, belgilarning umumiy soni - 14 bo'lishi kerak"
+        }
+      },
+      "entity": {
+        "title": "Tashkilot nomi",
+        "default_value": "Yuridik shaxs nomi",
+        "description": "Ro'yxatdan o'tish hujjatlarida ko'rsatilgan rasmiy kompaniya nomini to'liq kiriting. Ushbu ma'lumot to'lov va hujjatlarni to'g'ri rasmiylashtirish uchun zarur.",
+        "error": {
+          "required": "maydon bo'sh bo'lishi mumkin emas"
+        }
+      },
+      "address": {
+        "title": "Yuridik manzil",
+        "default_value": "Yuridik manzil",
+        "description": "Kompaniyangiz ro'yxatdan o'tgan manzilni kiriting. Bu manzil faoliyat yuritayotgan joydan farq qilishi mumkin, lekin ro'yxatdan o'tish hujjatlaridagi ma'lumotlarga mos kelishi kerak.",
+        "error": {
+          "required": "maydon bo'sh bo'lishi mumkin emas"
+        }
+      },
+      "INN": {
+        "title": "STIR",
+        "default_value": "123456789",
+        "description": "Tashkilot yoki yakka tartibdagi tadbirkorning soliq to'lovchi identifikatsiya raqamini (STIR) kiriting. Ushbu raqam soliq hisoboti va tashkilot identifikatsiyasi uchun ishlatiladi.",
+        "error": {
+          "required": "noto'g'ri format, belgilarning umumiy soni - 9 bo'lishi kerak"
+        }
+      },
+      "individual": {
+        "title": "YTT nomi",
+        "default_value": "YTT nomi",
+        "description": "Ro'yxatdan o'tish hujjatlaridagi yakka tartibdagi tadbirkorning to'liq ismini kiriting. Ushbu ism huquqiy va moliyaviy hujjatlarda ishlatiladi.",
+        "error": {
+          "required": "maydon bo'sh bo'lishi mumkin emas"
+        }
       }
     },
-    "registration_number": {
-      "title": "Ro‘yxatdan o‘tish raqami",
-      "default_value": "12345678",
-      "description": "Sizga ro‘yxatdan o‘tish jarayonida berilgan raqamni kiriting. Ushbu raqam shaxsingizni tasdiqlash va identifikatsiya qilish uchun ishlatiladi.",
-      "error": {
-        "required": "keraksiz belgilarni kiritmang"
-      }
-    },
-    "registration_date": {
-      "title": "Ro‘yxatdan o‘tgan sana",
-      "default_value": "22.09.2023",
-      "description": "Ro‘yxatdan o‘tgan sanani quyidagi formatda kiriting: KK.OY.YYYY. Ma'lumotlaringiz rasmiy hujjatlarga mos bo‘lishiga ishonch hosil qiling.",
-      "error": {
-        "required": "noto‘g‘ri format, quyidagi formatda kiriting: kk.oy.yyyy, masalan: 22.09.2023"
-      }
-    },
-    "PNFL": {
-      "title": "JShShIR",
-      "default_value": "12345678901234",
-      "description": "Jismoniy shaxsning shaxsiy identifikatsiya raqami. Ma'lumotlaringizni tasdiqlash uchun to‘g‘ri JShShIRni kiriting.",
-      "error": {
-        "required": "noto‘g‘ri format, belgilarning umumiy soni - 14 bo‘lishi kerak"
-      }
-    },
-    "entity": {
-      "title": "Tashkilot nomi",
-      "default_value": "Yuridik shaxs nomi",
-      "description": "Ro‘yxatdan o‘tish hujjatlarida ko‘rsatilgan rasmiy kompaniya nomini to‘liq kiriting. Ushbu ma'lumot to‘lov va hujjatlarni to‘g‘ri rasmiylashtirish uchun zarur.",
-      "error": {
-        "required": "maydon bo‘sh bo‘lishi mumkin emas"
-      }
-    },
-    "address": {
-      "title": "Yuridik manzil",
-      "default_value": "Yuridik manzil",
-      "description": "Kompaniyangiz ro‘yxatdan o‘tgan manzilni kiriting. Bu manzil faoliyat yuritayotgan joydan farq qilishi mumkin, lekin ro‘yxatdan o‘tish hujjatlaridagi ma'lumotlarga mos kelishi kerak.",
-      "error": {
-        "required": "maydon bo‘sh bo‘lishi mumkin emas"
-      }
-    },
-    "INN": {
-      "title": "STIR",
-      "default_value": "123456789",
-      "description": "Tashkilot yoki yakka tartibdagi tadbirkorning soliq to‘lovchi identifikatsiya raqamini (STIR) kiriting. Ushbu raqam soliq hisoboti va tashkilot identifikatsiyasi uchun ishlatiladi.",
-      "error": {
-        "required": "noto‘g‘ri format, belgilarning umumiy soni - 9 bo‘lishi kerak"
-      }
-    },
-    "individual": {
-      "title": "YTT nomi",
-      "default_value": "YTT nomi",
-      "description": "Ro‘yxatdan o‘tish hujjatlaridagi yakka tartibdagi tadbirkorning to‘liq ismini kiriting. Ushbu ism huquqiy va moliyaviy hujjatlarda ishlatiladi.",
-      "error": {
-        "required": "maydon bo‘sh bo‘lishi mumkin emas"
-      }
-    }
-  },
-
-  "bank_data": {
+    "bank_data": {
     "bank_data": "Bank ma'lumotlari",
     "bank_mfo": {
       "title": "Bank MFOsi",
@@ -1246,7 +1253,7 @@
         "required": "sanani mm/yy formatida kiriting: 09/23"
       }
     }
-  },
+    },
   "contact": {
     "contact": "Kontakt ma'lumotlari",
     "phone": {
@@ -1273,7 +1280,9 @@
     "and": "va",
     "span2": "oferta qoidalari",
     "text2": "bilan tanishdim va qabul qilaman."
-  },
+  }
+},
+
   "platform": {
     "cross": "Moslik",
     "match_description": "Moslik foizi ushbu kanalning tanlangan qidiruv parametrlariga qanchalik mos kelishini ko'rsatadi"
@@ -1341,15 +1350,16 @@
       "cart": "Savatga o'tish"
     }
   },
+
   "cart": {
     "cart": "Savat",
-    "empty": "Ro‘yxat bo‘sh...",
+    "empty": "Ro'yxat bo'sh...",
 
     "create_post": {
       "title": "Buyurtma xavfsiz bitim bilan himoyalangan",
       "text": "Kanal egasi to'lovni faqat joylashtirish muvaffaqiyatli yakunlanganidan keyin oladi",
       "subscribers": "Jami obunachilar",
-      "views": "Jami ko‘rishlar",
+      "views": "Jami ko'rishlar",
       "commission": "Xizmat komissiyasi",
       "finnaly": "Yakuniy summa",
       "finnaly_short": "Summa"
@@ -1357,27 +1367,28 @@
 
     "recomendation": "Tavsiya etilgan kanallar",
     "hide": "yashirish",
-    "show": "ko‘rsatish",
+    "show": "ko'rsatish",
     "check": {
-      "amount": "Loyiha yakuniy summaga sig‘maydi",
+      "amount": "Loyiha yakuniy summaga sig'maydi",
       "channel_to_be_replaced": "Almashtiriladigan kanal",
       "not_found": "Loyiha topilmadi",
-      "no_data": "Loyiha bo‘yicha ma'lumot yo‘q"
+      "no_data": "Loyiha bo'yicha ma'lumot yo'q"
     }
   },
+
   "wallet": {
     "topup": {
-      "title": "Balansni to‘ldirish",
-      "offer": "Balansni to‘ldirish uchun ariza",
-      "amount": "To‘ldirish summasi",
+      "title": "Balansni to'ldirish",
+      "offer": "Balansni to'ldirish uchun ariza",
+      "amount": "To'ldirish summasi",
       "required": "Summani kiriting",
       "placeholder": "Summani kiriting",
-      "payment_method": "To‘lov usulini tanlang",
-      "fetch_error": "So‘rov xatosi"
+      "payment_method": "To'lov usulini tanlang",
+      "fetch_error": "So'rov xatosi"
     },
     "withdraw": {
-      "title": "Pul mablag‘larini yechib olish",
-      "offer": "Pul mablag‘larini yechib olish uchun ariza",
+      "title": "Pul mablag'larini yechib olish",
+      "offer": "Pul mablag'larini yechib olish uchun ariza",
       "amount": "Yechib olish summasi",
       "required": "Summani kiriting",
       "placeholder": "Summani kiriting"
@@ -1386,39 +1397,40 @@
       "selfemployed": "Jismoniy shaxs",
       "entity": "Yuridik shaxs",
       "individual": "Yakka tartibdagi tadbirkor",
-      "selfemployedaccount": "O‘zini o‘zi band qilgan"
+      "selfemployedaccount": "O'zini o'zi band qilgan"
     },
     "subtypes": {
       "account": "Hisob-raqam",
       "card": "Tranzit hisob (Humo|UzCard)"
     },
-    "choose": "To‘lov usulini tanlang",
+    "choose": "To'lov usulini tanlang",
     "conditions": {
       "commission": "Komissiya",
       "min": "Minimal summa",
       "max": "Maksimal summa"
     },
     "guide": {
-      "title": "Bosqichma-bosqich qo‘llanma",
+      "title": "Bosqichma-bosqich qo'llanma",
       "entity": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc.",
       "individual": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc.",
       "selfEmployedTransits": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc.",
       "selfEmployedAccounts": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc."
     },
     "pay": {
-      "title": "To‘lov uchun",
+      "title": "To'lov uchun",
       "text": "Komissiyani hisobga olgan holda"
     },
     "accept": {
-      "text1": "Ma’lumotlarning to‘g‘riligini tasdiqlayman,",
+      "text1": "Ma'lumotlarning to'g'riligini tasdiqlayman,",
       "span1": "xizmat shartlari",
       "and": "va",
       "span2": "oferta qoidalari",
       "text2": "bilan tanishdim va ularni qabul qilaman."
     },
-    "use_data": "Saqlangan ma’lumotlar:",
-    "empty_data": "Sizda saqlangan ma’lumotlar yo‘q",
-    "save_data": "Keyinchalik foydalanish uchun ma’lumotlarni saqlash",
+
+    "use_data": "Saqlangan ma'lumotlar:",
+    "empty_data": "Sizda saqlangan ma'lumotlar yo'q",
+    "save_data": "Keyinchalik foydalanish uchun ma'lumotlarni saqlash",
     "finally": "Yakuniy summa",
     "inn": "STIR:",
     "pnfl": "JSHSHIR:"
@@ -1452,10 +1464,10 @@
       "add_file": "Fayl yuklash",
       "comment": "Bloger uchun izoh...",
       "result": "Natija",
-      "post": "Natijani ko‘rish uchun reklama postini to‘ldirishni boshlang",
+      "post": "Natijani ko'rish uchun reklama postini to'ldirishni boshlang",
       "template": "Shablonni yuklash",
       "comment_to_post": "Texnik topshiriq uchun izoh: ",
-      "see_post_mobile_btn": "Postni ko‘rish",
+      "see_post_mobile_btn": "Postni ko'rish",
 
       "post_types": {
         "telegram": { "default": "Universal format" },
@@ -1476,8 +1488,8 @@
         "youtube": "Youtube"
       },
       "add_button": {
-        "title": "Tugma qo‘shish",
-        "zero": "3 tagacha tugma qo‘shish mumkin",
+        "title": "Tugma qo'shish",
+        "zero": "3 tagacha tugma qo'shish mumkin",
         "button": "Tugma",
         "name": {
           "title": "Tugma nomi",
@@ -1487,7 +1499,7 @@
           "title": "Tugma uchun havola",
           "default_value": "namuna havola"
         },
-        "add_button": "Tugma qo‘shish"
+        "add_button": "Tugma qo'shish"
       },
 
       "add_files": {
@@ -1499,7 +1511,7 @@
         "mediafile": {
           "max_length": "Maksimal 10 ta mediafayl",
           "formats": {
-            "title": "Qo‘llab-quvvatlanadigan formatlar:",
+            "title": "Qo'llab-quvvatlanadigan formatlar:",
             "text": "JPG/JPEG, PNG, MP4, MOV, AVI, WMV, WEBM"
           },
           "size": {
@@ -1508,9 +1520,9 @@
           }
         },
         "file": {
-          "file": "Faqat bitta fayl yuklashingiz mumkin, masalan, bloger uchun texnik topshiriq. Agar faylingiz ruxsat etilgan hajmdan katta bo‘lsa, uni Google yoki Yandex diskka yuklab, bloger uchun izoh qismida havola qoldirishingiz mumkin.",
+          "file": "Faqat bitta fayl yuklashingiz mumkin, masalan, bloger uchun texnik topshiriq. Agar faylingiz ruxsat etilgan hajmdan katta bo'lsa, uni Google yoki Yandex diskka yuklab, bloger uchun izoh qismida havola qoldirishingiz mumkin.",
           "formats": {
-            "title": "Qo‘llab-quvvatlanadigan formatlar:",
+            "title": "Qo'llab-quvvatlanadigan formatlar:",
             "text": "DOC, DOCX, ZIP, PDF, XLS, XLSX, TXT"
           },
           "size": {
@@ -1533,17 +1545,17 @@
     },
 
     "payment": {
-      "title": "Buyurtma to‘lovi",
-      "pay": "To‘lash",
+      "title": "Buyurtma to'lovi",
+      "pay": "To'lash",
       "approve": "Kelishishga yuborish",
       "price": "Yakuniy summa:",
-      "description": "Samarali reklama kampaniyasini boshlash uchun so‘nggi qadam qoldi! Buyurtmani to‘laganingizdan so‘ng, kanal egalari darhol xabardor qilinadi va reklamani joylashtirishni boshlaydilar."
+      "description": "Samarali reklama kampaniyasini boshlash uchun so'nggi qadam qoldi! Buyurtmani to'laganingizdan so'ng, kanal egalari darhol xabardor qilinadi va reklamani joylashtirishni boshlaydilar."
     },
 
     "loading": {
       "posts": "Reklama postlarini yuboryapmiz...",
       "files": "Fayllarni yuklab olyapmiz...",
-      "payment": "To‘lovni tekshiryapmiz...",
+      "payment": "To'lovni tekshiryapmiz...",
       "heart": "Juda oz qoldi..."
     }
   },
@@ -1573,7 +1585,7 @@
     "campaign": "RK",
     "channel": "kanal",
     "new_message": "Xabar yozing...",
-    "no_message": "Bu yerda hali hech narsa yo‘q, xabar yozing",
+    "no_message": "Bu yerda hali hech narsa yo'q, xabar yozing",
     "chat_choose": "Suhbatni boshlash uchun chatni tanlang"
   },
 
@@ -1581,26 +1593,26 @@
     "title": "Bildirishnomalar",
     "new": "Yangi",
     "support": {
-      "title": "Agar savollaringiz bo‘lsa yoki yordam kerak bo‘lsa, qo‘llab-quvvatlash xizmati har doim sizga yordam berishga tayyor."
+      "title": "Agar savollaringiz bo'lsa yoki yordam kerak bo'lsa, qo'llab-quvvatlash xizmati har doim sizga yordam berishga tayyor."
     },
     "status": {
       "order_message_add": {
-        "title": "Buyurtma bo‘yicha xabar qo‘shish"
+        "title": "Buyurtma bo'yicha xabar qo'shish"
       },
       "order_message_read": {
-        "title": "Buyurtma bo‘yicha xabarni o‘qish"
+        "title": "Buyurtma bo'yicha xabarni o'qish"
       },
       "project_message_add": {
-        "title": "Loyiha bo‘yicha xabar qo‘shish"
+        "title": "Loyiha bo'yicha xabar qo'shish"
       },
       "project_message_read": {
-        "title": "Loyiha bo‘yicha xabarni o‘qish"
+        "title": "Loyiha bo'yicha xabarni o'qish"
       },
       "new_manager_project": {
         "title": "Yangi loyiha menejeri"
       },
       "request_approve": {
-        "title": "So‘rovni tasdiqlash"
+        "title": "So'rovni tasdiqlash"
       },
       "accept_approve": {
         "title": "Tasdiqni qabul qilish"
@@ -1609,7 +1621,7 @@
         "title": "Depozit yaratish"
       },
       "notification_request_approve": {
-        "title": "Tasdiqlash uchun so‘rov"
+        "title": "Tasdiqlash uchun so'rov"
       },
       "notification_create_desire": {
         "title": "Tavsiyalar yaratish"
@@ -1618,7 +1630,7 @@
         "title": "Menejer bilan loyiha boshlash"
       },
       "notification_unban_channel": {
-        "title": "Kanalga qo‘yilgan taqiqni olib tashlash"
+        "title": "Kanalga qo'yilgan taqiqni olib tashlash"
       },
       "notification_limited_ban_channel": {
         "title": "Cheklangan kanal blokirovkasi"
@@ -1657,14 +1669,14 @@
         "title": "Reklamachi buyurtmasining ijobiy moderatsiya bildirishnomasi"
       },
       "notification_refund_manager_project": {
-        "title": "Menejer loyihasi bo‘yicha mablag‘ni qaytarish"
+        "title": "Menejer loyihasi bo'yicha mablag'ni qaytarish"
       }
     }
   },
 
   "turnkey": {
     "turnkey": "Bizning tayyor tariflar va shaxsiy menejer bilan biznesingizning kafolatlangan muvaffaqiyati!",
-    "text": "Budjetning 100% joylashtirishga yo‘naltiriladi, menejer xizmatlari esa mutlaqo bepul!",
+    "text": "Budjetning 100% joylashtirishga yo'naltiriladi, menejer xizmatlari esa mutlaqo bepul!",
     "partners_title": "Bizga ishonishadi:",
     "how_it_works": {
       "title": "Bu qanday ishlaydi?",
@@ -1672,17 +1684,15 @@
       "step_1": {
         "title": "Sizdan talab qilinadi:",
         "text": [
-          { "text": "qulay tarifni tanlash va to‘lovni amalga oshirish" },
-          {
-            "text": "loyihangiz va reklama kampaniyasi bo‘yicha istaklaringizni tasvirlash"
-          }
+          { "text": "qulay tarifni tanlash va to'lovni amalga oshirish" },
+          { "text": "loyihangiz va reklama kampaniyasi bo'yicha istaklaringizni tasvirlash"}
         ]
       },
       "step_2": {
-        "title": "Budjetning 100% joylashtirishga yo‘naltiriladi, menejer xizmatlari esa mutlaqo bepul!",
+        "title": "Budjetning 100% joylashtirishga yo'naltiriladi, menejer xizmatlari esa mutlaqo bepul!",
         "text": [
           { "text": "Joylashtirishning individual rejasini ishlab chiqamiz" },
-          { "text": "Mos kanallarni qo‘lda tanlab chiqamiz" },
+          { "text": "Mos kanallarni qo'lda tanlab chiqamiz" },
           { "text": "Reklama postlarining joylashtirilishini nazorat qilamiz" },
           { "text": "Raqobatchilar va maqsadli auditoriyani tahlil qilamiz" },
           { "text": "Loyihani kelishamiz va ishga tushiramiz" },
@@ -1693,10 +1703,10 @@
         "title": "Sizga taqdim etiladi",
         "text": [
           { "text": "Vaqt va reklama kampaniyasi resurslarini tejash" },
-          { "text": "Maqsadli auditoriyaga aniq yo‘naltirilgan reklama" },
+          { "text": "Maqsadli auditoriyaga aniq yo'naltirilgan reklama" },
           { "text": "Raqobatchilar ustidan ustunlik" },
           { "text": "Samarali joylashtirish strategiyasi" },
-          { "text": "Loyihaning har bir bosqichida qo‘llab-quvvatlash" },
+          { "text": "Loyihaning har bir bosqichida qo'llab-quvvatlash" },
           { "text": "Joylashtirish natijalarining batafsil tahlili" }
         ]
       }
@@ -1709,24 +1719,24 @@
       "have_balance": {
         "title": "Loyihani tasvirlash",
         "comment": {
-          "title": "Izoh qo‘shish",
+          "title": "Izoh qo'shish",
           "text": "Sizning talablaringizni qondiradigan noyob loyiha yaratish uchun loyihangiz va uning xususiyatlarini tasvirlang",
           "value": "Izoh uchun maydon..."
         },
         "url": {
-          "title": "Havola qo‘shish",
+          "title": "Havola qo'shish",
           "text": "Ushbu havolalar postingizga biriktiriladi, masalan, Telegram kanalidagi reklama postlari uchun UTM-teglar yaratiladi (maksimal 3 ta havola)",
           "value": "Https://www.sample.info",
-          "button": "Qo‘shish"
+          "button": "Qo'shish"
         },
         "file": {
-          "title": "Fayl qo‘shish",
-          "text": "Reklama buyurtmangizni yanada batafsil ishlab chiqish uchun kerakli ma’lumotlar bilan fayl yuklang (masalan, texnik topshiriq yoki media fayllarni yuklashingiz mumkin)",
+          "title": "Fayl qo'shish",
+          "text": "Reklama buyurtmangizni yanada batafsil ishlab chiqish uchun kerakli ma'lumotlar bilan fayl yuklang (masalan, texnik topshiriq yoki media fayllarni yuklashingiz mumkin)",
           "value": "Faylni shu yerga tortib olib keling",
           "or": "yoki",
           "button": "Faylni tanlash",
           "formats": {
-            "title": "Qo‘llab-quvvatlanadigan formatlar:",
+            "title": "Qo'llab-quvvatlanadigan formatlar:",
             "text": "JPG/JPEG, PNG, MP4, MOV, AVI, WMV, WEBM"
           },
           "size": {
@@ -1734,28 +1744,28 @@
             "text": "50 MB"
           }
         },
-        "button": "To‘lash"
+        "button": "To'lash"
       },
       "no_balance": {
-        "title": "Balansni to‘ldiring",
-        "text": "Afsuski, tarif sotib olish uchun hisobingizda yetarli mablag‘ yo‘q.",
+        "title": "Balansni to'ldiring",
+        "text": "Afsuski, tarif sotib olish uchun hisobingizda yetarli mablag' yo'q.",
         "remainder": "Tarif sotib olish uchun yetishmayotgan summa:",
-        "button": "Balansni to‘ldirish",
+        "button": "Balansni to'ldirish",
         "help": {
-          "text1": "Agar sizga yordam kerak bo‘lsa, murojaat qiling",
-          "text2": " texnik qo‘llab-quvvatlash xizmatiga"
+          "text1": "Agar sizga yordam kerak bo'lsa, murojaat qiling",
+          "text2": " texnik qo'llab-quvvatlash xizmatiga"
         }
       },
       "success": {
         "title": "Xarid amalga oshirildi",
         "info": "Xarid amalga oshirildi!",
-        "text": "Sizning buyurtmangiz allaqachon ko‘rib chiqilmoqda. Loyiha holatini shaxsiy kabinetingizdagi ",
-        "project": "“Menejerlar bilan loyihalar”",
+        "text": "Sizning buyurtmangiz allaqachon ko'rib chiqilmoqda. Loyiha holatini shaxsiy kabinetingizdagi ",
+        "project": "Menejerlar bilan loyihalar",
         "help": {
-          "text1": "Agar sizga yordam kerak bo‘lsa, murojaat qiling",
-          "text2": " texnik qo‘llab-quvvatlash xizmatiga"
+          "text1": "Agar sizga yordam kerak bo'lsa, murojaat qiling",
+          "text2": " texnik qo'llab-quvvatlash xizmatiga"
         },
-        "go_to_order": "Buyurtmaga o‘tish"
+        "go_to_order": "Buyurtmaga o'tish"
       }
     }
   },
@@ -1871,7 +1881,7 @@
       "btn_title": "Fikr qoldirish",
       "description": {
         "title": "Fikr qoldiring",
-        "subtitle": "Biz yaxshiroq bo‘lishimizga yordam bering! Qilingan ishni tasvirlab bering, hammasi yoqdimi, kamchiliklar bo‘ldimi?"
+        "subtitle": "Biz yaxshiroq bo'lishimizga yordam bering! Qilingan ishni tasvirlab bering, hammasi yoqdimi, kamchiliklar bo'ldimi?"
       }
     },
     "accept": "Qabul qilish",
@@ -1879,13 +1889,13 @@
       "btn_title": "Rad etish",
       "placeholder": "Sababni yozing",
       "description": {
-        "title": "Biz sodir bo‘lgan holat uchun afsusdamiz va adolatli qaror qabul qilamiz",
-        "subtitle": "Reklama postini rad etish sababini yozing. Buyurtma moderatsiyaga yuboriladi va vaziyat bo‘yicha qaror qabul qilinadi. Agar bloger reklama shartlarini bajarmagan bo‘lsa, mablag‘ avtomatik ravishda balansingizga qaytariladi"
+        "title": "Biz sodir bo'lgan holat uchun afsusdamiz va adolatli qaror qabul qilamiz",
+        "subtitle": "Reklama postini rad etish sababini yozing. Buyurtma moderatsiyaga yuboriladi va vaziyat bo'yicha qaror qabul qilinadi. Agar bloger reklama shartlarini bajarmagan bo'lsa, mablag' avtomatik ravishda balansingizga qaytariladi"
       }
     },
     "checkPost": "Postni tekshirish",
-    "seePost": "Postni ko‘rish",
-    "seeComment": "Izohni ko‘rish",
+    "seePost": "Postni ko'rish",
+    "seeComment": "Izohni ko'rish",
     "channel": {
       "advertiser": {
         "edit": "Kanalni almashtirish",
@@ -1914,7 +1924,7 @@
 
   "offer_btn": {
     "see": "Arizalarga o'tish",
-    "see_post": "Vazifani ko‘rish",
+    "see_post": "Vazifani ko'rish",
     "send_link": "Yuborish",
     "reject": "Rad etish",
     "accept": "Qabul qilish",
@@ -1928,7 +1938,7 @@
     "calendar": "Taqvim",
     "reviews": "Sharhlar",
     "reason": {
-      "btn": "Sababni ko‘rish",
+      "btn": "Sababni ko'rish",
       "okey_btn": "Tushunarli",
       "title": "Rad etish/bloklash sababi"
     },
@@ -1940,12 +1950,12 @@
 
   "cart_btn": {
     "save": "Saqlash",
-    "add": "Yana qo‘shish",
+    "add": "Yana qo'shish",
     "create_post": "Post yaratish"
   },
 
   "topup_btn": {
-    "replenish": "Balansni to‘ldirish",
+    "replenish": "Balansni to'ldirish",
     "send": "Yuborish"
   },
 
@@ -1956,7 +1966,7 @@
   },
 
   "pagination": {
-    "show_more": "Ko‘proq ko‘rsatish"
+    "show_more": "Ko'proq ko'rsatish"
   },
 
   "toasts": {
@@ -1966,27 +1976,33 @@
           "success": "Kanal moderatsiyasi qabul qilindi",
           "error": "Kanal moderatsiyasini qabul qilishda xatolik yuz berdi"
         },
+
         "remoderation": {
           "success": "Kanal remoderatsiyasi qabul qilindi",
           "error": "Kanal remoderatsiyasini qabul qilishda xatolik yuz berdi"
         },
+
         "reject": {
           "success": "Kanal moderatsiyasi rad etildi",
           "error": "Kanal moderatsiyasini rad etishda xatolik yuz berdi"
         },
+
         "ban": {
           "success": "Kanal bloklandi",
           "error": "Kanalni bloklashda xatolik yuz berdi"
         },
+
         "unban": {
           "success": "Kanal blokdan chiqarildi",
           "error": "Kanalni blokdan chiqarishda xatolik yuz berdi"
         },
+
         "edit": {
           "success": "Kanal ma'lumotlari yangilandi",
           "error": "Kanal ma'lumotlarini yangilashda xatolik yuz berdi"
         }
       },
+
       "review": {
         "accept": {
           "success": "Sharh qabul qilindi",
@@ -2042,9 +2058,178 @@
       "parameters": {
         "alert": "Barcha maydonlarni to'ldiring..."
       }
+    },
+    "add_profile": {
+      "create": {
+        "success": "Ma'lumotlar muvaffaqiyatli qo'shildi",
+        "error": "Ma'lumotlar qo'shishda xatolik yuz berdi"
+      },
+      "edit": {
+        "success": "Ma'lumotlar muvaffaqiyatli tahrirlandi",
+        "error": "Ma'lumotlar tahrirlashda xatolik yuz berdi"
+      }
+    },
+    "profile": {
+      "edit": {
+        "user": {
+          "success": "Ma'lumotlar muvaffaqiyatli tahrirlandi",
+          "error": "Ma'lumotlar tahrirlashda xatolik yuz berdi"
+        },
+        "password": {
+          "success": "Parol muvaffaqiyatli o'zgartirildi",
+          "error": "Parol o'zgartirishda xatolik yuz berdi",
+          "nonEqual": "Parollar bir xil bo'lishi kerak",
+          "equal": "Yangi parol eski paroldan farq qilishi kerak"
+        },
+        "email": {
+          "success": "Email muvaffaqiyatli o'zgartirildi",
+          "error": "Email o'zgartirishda xatolik yuz berdi",
+          "exist": "Почта уже используется"
+        },
+        "email_code": {
+          "success": "Почта успешно обновлена",
+          "error": "Во время отправки кода произошла ошибка"
+        },
+        "event": {
+          "success": "Флаг успешно обновлен",
+          "error": "При изменении флага произошла ошибка"
+        }
+      }
+    },
+"wallet": {
+    "profile": {
+      "error": "Ma'lumotlarni to'ldirishda xatolik yuz berdi"
+    },
+    "withdraw": {
+      "success": "Mablag'larni yechib olish muvaffaqiyatli amalga oshirildi",
+      "error": "Mablag'larni yechib olishda xatolik yuz berdi"
+    },
+    "topup": {
+      "success": "Balans to'ldirildi, summa",
+      "error": "Mablag'larni kiritishda xatolik yuz berdi"
     }
   },
-
+  "catalog": {
+    "add": {
+      "error": "Savatga qo'shishda xatolik yuz berdi"
+    },
+    "remove": {
+      "error": "Savatdan o'chirishda xatolik yuz berdi"
+    }
+  },
+    "cart": {
+      "error": "Hisobingizda mablag' yetarli emas, balansni to'ldirish kerak"
+    },
+    "offers_blogger": {
+      "channel": {
+        "activate": {
+          "success": "Kanal faollashtirildi",
+          "error": "Kanalni faollashtirishda xatolik yuz berdi"
+        },
+        "deactivate": {
+          "success": "Kanal faolsizlantirildi",
+          "error": "Kanalni faolsizlantirishda xatolik yuz berdi"
+        },
+        "delete": {
+          "success": "Kanal o'chirildi",
+          "error": "Kanalni o'chirishda xatolik yuz berdi"
+        }
+      },
+      "accept_offer": {
+        "success": "Ariza qabul qilindi",
+        "error": "Arizani qabul qilishda xatolik yuz berdi"
+      },
+      "reject_offer": {
+        "success": "Ariza rad etildi",
+        "error": "Arizani rad etishda xatolik yuz berdi"
+      },
+      "send_link": {
+        "success": "Havola tekshirish uchun muvaffaqiyatli yuborildi",
+        "error": "Havolani tekshirish uchun yuborishda xatolik yuz berdi"
+      }
+    },
+    "orders_manager": {
+      "edit_project": {
+        "success": "Reklama kampaniyasini tahrirlashni boshlaymiz"
+      },
+      "launch_project": {
+        "success": "Siz reklama kampaniyasini muvaffaqiyatli ishga tushirdingiz, biz reklama beruvchini xabardor qilamiz va blogerlarga ma'lum qilamiz",
+        "error": "Reklama kampaniyasini ishga tushirishda xatolik yuz berdi"
+      }
+    },
+"orders_advertiser": {
+      "manager_project": {
+        "success": "Reklama kampaniyasi tasdiqlandi, biz menejerga xabar beramiz",
+        "error": "Reklama kampaniyasini tasdiqlash vaqtida xatolik yuz berdi"
+      },
+      "accept_post": {
+        "success": "Post qabul qilindi",
+        "error": "Postni qabul qilish vaqtida xatolik yuz berdi"
+      },
+      "reject_post": {
+        "success": "Post rad etildi",
+        "error": "Postni rad etish vaqtida xatolik yuz berdi"
+      },
+      "add_review": {
+        "success": "Sharh muvaffaqiyatli yuborildi!",
+        "error": "Xatolik yuz berdi... Iltimos, keyinroq qayta urinib ko'ring"
+      },
+      "replace": {
+        "channel": {
+          "success": "Biz menejerga kanal almashtirish zarurligi haqida xabar berdik",
+          "error": "Menejerga xabar berish vaqtida xatolik yuz berdi"
+        },
+        "post": {
+          "success": "Biz menejerga post almashtirish zarurligi haqida xabar berdik",
+          "error": "Menejerga xabar berish vaqtida xatolik yuz berdi"
+        }
+      }
+    },
+    "create_order": {
+      "top": {
+        "title_empty_error": "Reklama kampaniyasi nomini ko'rsating"
+      },
+      "post": {
+        "success": "Post muvaffaqiyatli yaratildi",
+        "error": "Post yaratishda xatolik",
+        "empty_error": "Barcha postlarni to'ldiring"
+      },
+      "payment": {
+        "success": "Reklama kampaniyasi muvaffaqiyatli to'landi va ishga tushirildi!",
+        "error": "Hisobingizda mablag' yetarli emas, hisobni to'ldirish kerak"
+      },
+      "date": {
+        "error": "Kanallar uchun sana yaratishda xatolik",
+        "add_dates_error": "Buyurtmalarga sanalarni kiritish kerak",
+        "empty_orders_error": "Avval kanallarni savatga qo'shing"
+      },
+      "create_order": {
+        "error": "Xatolik yuz berdi"
+      }
+    },
+    "post": {
+      "copy_text": "Matn muvaffaqiyatli nusxalandi"
+    },
+    "authorization": {
+      "auth_error": "Avtorizatsiya xatoligi",
+      "auth_success": "Muvaffaqiyatli avtorizatsiya",
+      "account_exist": "Bunday akkount allaqachon mavjud",
+      "registration_error": "Ro'yxatdan o'tishda xatolik"
+    },
+    "forgot_password": {
+      "password_changed": "Parol muvaffaqiyatli o'zgartirildi!",
+      "wrong_code": "Noto'g'ri kod, qaytadan urinib ko'ring...",
+      "other_error": "Ups! Nimadir noto'g'ri bajarildi..."
+    },
+    "registration": {
+      "email_verify": {
+        "email_exists": "Bu elektron pochta allaqachon ro'yxatdan o'tgan, avtorizatsiyadan o'ting yoki boshqa pochta manzilini kiriting",
+        "other_error": "Ups! Nimadir noto'g'ri bajarildi...",
+        "wrong_code": "Noto'g'ri kod, qaytadan urinib ko'ring...",
+        "resend_code_success": "Yangi kod pochtangizga qayta yuborildi:"
+      }
+    }
+  },
   "url_link": "URL-manzilni kiriting...",
 
   "admin_panel": {
@@ -2057,6 +2242,7 @@
       "complaints": "Shikoyatlar",
       "reviews": "Sharhlar"
     },
+
     "pages": {
       "home": "Bosh sahifa",
       "channels": "Kanallar",
@@ -2106,7 +2292,7 @@
           "moderation_reject": "Rad etilgan",
           "inactive": "Faol emas",
           "banned": "Bloklangan",
-          "deleted": "O‘chirilgan"
+          "deleted": "O'chirilgan"
         }
       }
     },
@@ -2115,7 +2301,7 @@
         "id": "Foydalanuvchi ID",
         "name": "Foydalanuvchi nomi",
         "email": "Pochta",
-        "date": "Ro‘yxatdan o‘tgan sana",
+        "date": "Ro'yxatdan o'tgan sana",
         "status": "Holat"
       },
 
@@ -2161,6 +2347,7 @@
         "location": "Manzil"
       }
     },
+
     "transactions": {
       "bar": {
         "id": "Tranzaksiya ID",
@@ -2217,8 +2404,8 @@
 
     "complaints": {
       "choose": {
-        "title": "Shikoyatni ko‘rib chiqish",
-        "text": "Qabul qilish tugmasini bosish orqali siz shikoyatni ko‘rib chiqishga olasiz va tomonlardan birining foydasiga qaror qabul qilishingiz kerak"
+        "title": "Shikoyatni ko'rib chiqish",
+        "text": "Qabul qilish tugmasini bosish orqali siz shikoyatni ko'rib chiqishga olasiz va tomonlardan birining foydasiga qaror qabul qilishingiz kerak"
       },
 
       "types": {
@@ -2228,7 +2415,7 @@
       },
 
       "bar": {
-        "id": "So‘rov ID",
+        "id": "So'rov ID",
         "sender": "Yuboruvchi",
         "theme": "Mavzu",
         "created": "Yaratilgan sana",
@@ -2238,7 +2425,7 @@
       },
 
       "card": {
-        "id": "So‘rov ID",
+        "id": "So'rov ID",
         "theme": "Mavzu",
         "sender": "Yuboruvchi",
         "date": "Sana",
@@ -2246,7 +2433,7 @@
 
         "priority_status": {
           "low": "Past",
-          "medium": "O‘rta",
+          "medium": "O'rta",
           "high": "Yuqori"
         },
 
@@ -2255,6 +2442,7 @@
         }
       }
     },
+
     "complaintInfo": {
       "card": {
         "title": "Shikoyat",
@@ -2284,7 +2472,7 @@
           "link_advertiser": "Postga havola (Reklamachi)",
 
           "buttons": {
-            "seePost": "Postni ko‘rish"
+            "seePost": "Postni ko'rish"
           }
         },
 
@@ -2296,7 +2484,7 @@
 
         "buttons": {
           "make_decision": "Qaror qabul qilish",
-          "see_decision": "Qarorni ko‘rsatish",
+          "see_decision": "Qarorni ko'rsatish",
           "decision": "Qaror qabul qilish",
           "reject": "Rad etish",
           "accept": "Qabul qilish",
@@ -2310,6 +2498,7 @@
         }
       }
     },
+    
     "reviews": {
       "types": {
         "wait": "Kutish holatida",
@@ -2317,7 +2506,7 @@
       },
 
       "bar": {
-        "id": "So‘rov ID",
+        "id": "So'rov ID",
         "platform": "Maydoncha",
         "sender": "Yuboruvchi",
         "moderator": "Moderator",
