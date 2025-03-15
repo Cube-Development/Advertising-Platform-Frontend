@@ -21,7 +21,7 @@ import { paths } from "@shared/routing";
 import { SpinnerLoader, useToast } from "@shared/ui";
 import { getFileExtension } from "@shared/utils";
 import Cookies from "js-cookie";
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -83,6 +83,16 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
     useProjectOrdersQuery(projectChannelsReq, {
       skip: !projectId || !isAuth,
     });
+
+  useEffect(() => {
+    if (!isOrdersLoading && projectChannels?.orders?.length === 0) {
+      toast({
+        variant: "error",
+        title: "Сначала нужно добавить каналы в корзину",
+      });
+      navigate(paths.catalog);
+    }
+  }, [projectChannels, isOrdersLoading]);
 
   const { data: projectPosts, isLoading: isPostsLoading } =
     useGetPostsRereviewQuery(projectPostsReq, {

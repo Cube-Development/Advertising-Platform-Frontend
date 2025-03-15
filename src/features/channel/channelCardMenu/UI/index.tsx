@@ -81,9 +81,11 @@ export const ChannelCardMenu: FC<ChannelCardMenuProps> = ({
             </button>
           </div>
           <ul>
-            <Link to={`${paths.addChannel}?channel_id=${channel_id}`}>
-              <li>{t("platforms_blogger.menu.edit")}</li>
-            </Link>
+            {statusFilter === channelStatusFilter.active && (
+              <Link to={`${paths.addChannel}?channel_id=${channel_id}`}>
+                <li>{t("platforms_blogger.menu.edit")}</li>
+              </Link>
+            )}
             {statusFilter === channelStatusFilter.active && (
               <li onClick={(e) => handleDeactivateModalOpen(e)}>
                 {t("platforms_blogger.menu.deactivate")}

@@ -103,6 +103,7 @@ export const SendLink: FC<IOrderFeature> = ({ order_id }) => {
               </div>
               <div className={styles.link}>
                 <input
+                  autoFocus
                   className={`${styles.link__input} ${!isUrlValid ? styles.link__input_invalid : ""}`}
                   placeholder={t(
                     "offers_blogger.offer_status.active.placeholder",
@@ -157,6 +158,7 @@ export const SendLink: FC<IOrderFeature> = ({ order_id }) => {
               </div>
               <div className={styles.link}>
                 <input
+                  autoFocus
                   className={`${styles.link__input} ${!isUrlValid ? styles.link__input_invalid : ""}`}
                   placeholder={t(
                     "offers_blogger.offer_status.active.placeholder",

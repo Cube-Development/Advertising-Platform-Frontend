@@ -90,6 +90,7 @@ export const RejectPost: FC<IOrderFeature> = ({ order_id }) => {
                     setComment(e.target.value);
                   }}
                   value={comment}
+                  autoFocus
                 />
                 <p
                   className={styles.comment__send_icon}
@@ -133,6 +134,7 @@ export const RejectPost: FC<IOrderFeature> = ({ order_id }) => {
               <div className={styles.comment}>
                 <textarea
                   className={styles.comment__input}
+                  autoFocus
                   onChange={(e) => {
                     setComment(e.target.value);
                   }}

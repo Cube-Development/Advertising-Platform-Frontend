@@ -51,7 +51,6 @@
     },
     "all_rights": "Cubeinc Development © All rights reserved"
   },
-
   "registration": "Registration",
   "login": "Login",
   "logout": "Logout",
@@ -106,6 +105,7 @@
     "and": "and",
     "privacy_policy": "Public offer"
   },
+
   "pages": {
     "catalog": "Platform catalog",
     "turnkey": "Turnkey placement",
@@ -117,6 +117,7 @@
     "calculateIncome": "Calculate income",
     "faq": "FAQ"
   },
+
   "roles": {
     "blogger": "Blogger",
     "advertiser": "Advertiser",
@@ -129,8 +130,10 @@
     "data": "My data",
     "settings": "Profile settings"
   },
+
   "symbol": "sum",
   "count": "pcs.",
+
   "wallet_menu": {
     "balance": "Balance",
     "top_up": "Top up wallet",
@@ -138,6 +141,7 @@
     "history": "Transaction history",
     "invoice": "Invoices and contracts"
   },
+
   "burger_menu": {
     "services": "Services",
     "balance": "Total balance",
@@ -165,6 +169,7 @@
 
     "base": "Knowledge base"
   },
+
   "more_less": {
     "more": "More",
     "less": "Less"
@@ -188,6 +193,7 @@
         "img": "option3.svg"
       }
     ],
+
     "services_title": "We work with legal entities, provide invoices, reports, and conduct electronic document management through didox.uz",
     "services_list": [
       {
@@ -225,12 +231,10 @@
       { "stage": "Register on the platform" },
       { "stage": "Choose suitable platforms from the catalog" },
       { "stage": "Top up your balance with a convenient method" },
-      {
-        "stage": "Create an ad placement manually or generate a post using AI"
+      { 
+        "stage": "Create an ad placement manually or generate a post using AI" 
       },
-      {
-        "stage": "The platform owner will publish the post and send it for your approval"
-      }
+      { "stage": "The platform owner will publish the post and send it for your approval" }
     ],
     "why_title": "Why is it more effective with us?",
     "accomms_list": [
@@ -279,10 +283,10 @@
         "save": "Экономьте время и деньги"
       }
     ],
+
     "turnkey_title": "Turnkey Advertising Launch",
     "turnkey_subtitle": "Choose a plan, and a personal manager will handle everything for you",
     "turnkey_text": "Manager services are provided as a bonus. The entire budget goes towards purchasing integrations in the Blogix catalog",
-
     "tarifs_list": [
       {
         "type": "base",
@@ -300,10 +304,14 @@
           { "option": "Publication notifications", "available": true },
           { "option": "Approval of selected platforms", "available": false },
           { "option": "Promotion consultations", "available": false },
-          { "option": "Detailed report on completed work", "available": false },
+          { 
+            "option": "Detailed report on completed work", 
+            "available": false 
+          },
           { "option": "Advertising campaign forecasts", "available": false }
         ]
       },
+
       {
         "type": "standard",
         "name": "Standard",
@@ -320,10 +328,14 @@
           { "option": "Publication notifications", "available": true },
           { "option": "Approval of selected platforms", "available": true },
           { "option": "Promotion consultations", "available": true },
-          { "option": "Detailed report on completed work", "available": false },
+          { 
+            "option": "Detailed report on completed work", 
+            "available": false 
+          },
           { "option": "Advertising campaign forecasts", "available": false }
         ]
       },
+
       {
         "type": "complex",
         "name": "Comprehensive",
@@ -349,7 +361,6 @@
         ]
       }
     ],
-
     "customers_title": "What our clients say about us:",
     "customers_list": [
       {
@@ -1041,6 +1052,7 @@
       },
       "save_btn": "Save Changes"
     },
+
     "email_block": {
       "title": "Change E-mail",
       "new_email": {
@@ -1070,6 +1082,7 @@
       "send_btn": "Send Code",
       "back_btn": "Back"
     },
+
     "password_block": {
       "title": "Change Password",
       "current_password": {
@@ -1260,6 +1273,7 @@
         }
       }
     },
+
     "accept": {
       "text1": "I confirm the accuracy of the data, I have read and accept the",
       "span1": "service terms",
@@ -1336,6 +1350,7 @@
       "cart": "Go to Cart"
     }
   },
+
   "cart": {
     "cart": "Cart",
     "empty": "The list is empty...",
@@ -1412,6 +1427,7 @@
       "span2": "offer rules",
       "text2": "."
     },
+
     "use_data": "Saved Data:",
     "empty_data": "You have no saved data",
     "save_data": "Save data for future use",
@@ -1419,6 +1435,7 @@
     "inn": "TIN:",
     "pnfl": "PNFL:"
   },
+
   "wallet_history": {
     "wallet_history": "Transaction History",
     "tab": {
@@ -1551,6 +1568,7 @@
     "date": "Select Date",
     "until": "until"
   },
+
   "chat": {
     "my_messages": "My Messages",
     "role": {
@@ -1667,9 +1685,7 @@
         "title": "From you:",
         "text": [
           { "text": "Choose and pay for a plan that suits you" },
-          {
-            "text": "Describe your project and advertising campaign preferences"
-          }
+          { "text": "Describe your project and advertising campaign preferences" }
         ]
       },
       "step_2": {
@@ -1796,6 +1812,7 @@
       "title": "Recommended Platforms"
     }
   },
+
   "faq": {
     "page_title": "Knowledge Base",
     "common": {
@@ -1808,12 +1825,14 @@
       "title": "For Channel Owners"
     }
   },
+
   "filter": {
     "title": "Social Network",
     "telegram": "Telegram",
     "instagram": "Instagram",
     "youtube": "YouTube"
   },
+
   "sorting": {
     "title": "Sorting",
     "price": "By Price",
@@ -1824,6 +1843,7 @@
     "match": "By Match",
     "rate": "By Rating"
   },
+
   "platform_types": {
     "telegram": {
       "name": "Telegram",
@@ -1855,6 +1875,7 @@
     "back": "Go back",
     "send": "Send"
   },
+
   "order_btn": {
     "feedback": {
       "btn_title": "Leave feedback",
@@ -1900,6 +1921,7 @@
     "continue": "Continue",
     "is_upload_files": "Uploading files"
   },
+
   "offer_btn": {
     "see": "To applications",
     "see_post": "View task",
@@ -1910,6 +1932,7 @@
     "accept_date": "Accept order",
     "reason": "Reason"
   },
+
   "platform_btn": {
     "description": "Channel description",
     "calendar": "Calendar",
@@ -1930,18 +1953,22 @@
     "add": "Add more",
     "create_post": "Create post"
   },
+
   "topup_btn": {
     "replenish": "Replenish",
     "send": "Send"
   },
+
   "amount": {
     "error": {
       "required": "Enter amount"
     }
   },
+
   "pagination": {
     "show_more": "Show more"
   },
+
   "toasts": {
     "admin": {
       "channel": {
@@ -1949,27 +1976,33 @@
           "success": "Channel moderation accepted",
           "error": "Error during channel moderation acceptance"
         },
+
         "remoderation": {
           "success": "Channel remoderation accepted",
           "error": "Error during channel remoderation acceptance"
         },
+
         "reject": {
           "success": "Channel moderation rejected",
           "error": "Error during channel moderation rejection"
         },
+
         "ban": {
           "success": "Channel banned",
           "error": "Error during channel banning"
         },
+
         "unban": {
           "success": "Channel unbanned",
           "error": "Error during channel unbanning"
         },
+
         "edit": {
           "success": "Channel data updated",
           "error": "Error during channel data update"
         }
       },
+
       "review": {
         "accept": {
           "success": "Review accepted",
@@ -2158,7 +2191,8 @@
       },
       "post": {
         "success": "Post successfully created",
-        "error": "Error creating post"
+        "error": "Error creating post",
+        "empty_error": "Fill in all posts"
       },
       "payment": {
         "success": "Advertising campaign successfully paid and launched!",
@@ -2166,7 +2200,8 @@
       },
       "date": {
         "error": "Error creating dates for channels",
-        "add_dates_error": "Please fill in the dates in the orders"
+        "add_dates_error": "Please fill in the dates in the orders",
+        "empty_orders_error": "Please add channels to the cart first"
       },
       "create_order": {
         "error": "Error occurred"
@@ -2195,7 +2230,6 @@
       }
     }
   },
-
   "url_link": "Enter URL...",
 
   "admin_panel": {
@@ -2302,7 +2336,6 @@
         }
       }
     },
-
     "userInfo": {
       "card": {
         "title": "User Information",
@@ -2314,6 +2347,7 @@
         "location": "Location"
       }
     },
+
     "transactions": {
       "bar": {
         "id": "Transaction ID",
@@ -2367,6 +2401,7 @@
         }
       }
     },
+
     "complaints": {
       "choose": {
         "title": "Taking Complaint to Work",
@@ -2463,6 +2498,7 @@
         }
       }
     },
+    
     "reviews": {
       "types": {
         "wait": "Waiting",
