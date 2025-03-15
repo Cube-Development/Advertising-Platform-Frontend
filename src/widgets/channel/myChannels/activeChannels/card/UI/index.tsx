@@ -7,6 +7,7 @@ import {
   channelStatusFilter,
   useActivateChannelMutation,
 } from "@entities/channel";
+import { platformToIcon } from "@entities/project";
 import {
   ActivateChannel,
   ChannelCardMenu,
@@ -28,12 +29,12 @@ import {
 } from "@shared/assets";
 import { paths } from "@shared/routing";
 import { ToastAction, useToast } from "@shared/ui";
+import { buildPathWithQuery, queryParamKeys } from "@shared/utils";
 import { Cog } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
-import { platformToIcon } from "@entities/project";
 
 interface ChannelCardProps {
   card:
@@ -250,7 +251,10 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
       {statusFilter === channelStatusFilter.active ? (
         <div className={styles.platform__events}>
           <Link
-            to={`${paths.addChannel}?channel_id=${card?.id}`}
+            // to={`${paths.addChannel}?channel_id=${card?.id}`}
+            to={buildPathWithQuery(paths.addChannel, {
+              [queryParamKeys.channelId]: card?.id,
+            })}
             className={`${styles.edit} truncate`}
           >
             <div>
@@ -272,7 +276,10 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
         statusFilter === channelStatusFilter.inactive && (
           <div className={`${styles.platform__events} ${styles.inactive}`}>
             <Link
-              to={`${paths.addChannel}?channel_id=${card?.id}`}
+              // to={`${paths.addChannel}?channel_id=${card?.id}`}
+              to={buildPathWithQuery(paths.addChannel, {
+                [queryParamKeys.channelId]: card?.id,
+              })}
               className={`${styles.edit} truncate`}
             >
               <div>

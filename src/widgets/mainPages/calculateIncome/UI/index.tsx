@@ -1,16 +1,16 @@
+import { addChannelQueries } from "@entities/channel";
+import { AddChannel } from "@features/channel";
+import { WorkWithUs } from "@features/mainPages";
 import { CalculatorIcon } from "@shared/assets";
 import { PAGE_ANIMATION } from "@shared/config/animation";
 import { paths } from "@shared/routing";
+import { SliderSubs, ThemeChanger } from "@shared/ui";
 import { IncomeCalculator } from "@shared/ui/incomeCalculator";
-import { SliderSubs } from "@shared/ui";
-import { ThemeChanger } from "@shared/ui";
+import { buildPathWithQuery, queryParamKeys } from "@shared/utils";
 import { motion } from "framer-motion";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { AddChannel } from "@features/channel";
-import { WorkWithUs } from "@features/mainPages";
-import { addChannelQueries } from "@entities/channel";
 
 interface CalculateIncomeProps {
   page: string;
@@ -83,7 +83,10 @@ export const CalculateIncome: FC<CalculateIncomeProps> = ({ page }) => {
             <IncomeCalculator page={page} calculatedIncome={calculatedIncome} />
             <SliderSubs onUserCountChange={setUserCount} />
             <AddChannel
-              path={`${paths.addChannel}?add_channel=${addChannelQueries.main}`}
+              // path={`${paths.addChannel}?add_channel=${addChannelQueries.main}`}
+              path={buildPathWithQuery(paths.addChannel, {
+                [queryParamKeys.addChannel]: addChannelQueries.main,
+              })}
               props={{ className: styles.button }}
             />
           </div>

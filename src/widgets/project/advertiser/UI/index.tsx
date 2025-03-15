@@ -13,11 +13,12 @@ import {
 import { useFindLanguage } from "@entities/user";
 import { useGetViewAdvertiserProjectQuery } from "@entities/views";
 import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
-import { pageFilter } from "@shared/routing";
-import { QueryParams } from "@shared/utils";
+import { pageFilter, paths } from "@shared/routing";
+import { buildPathWithQuery, queryParamKeys, QueryParams } from "@shared/utils";
 import { BarFilter } from "@widgets/barFilter";
 import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
 import { AdvProjectsList } from "./advProjects";
 import { DevProjectsList } from "./devProjects";
 import styles from "./styles.module.scss";
@@ -30,18 +31,32 @@ interface IForm extends getProjectsCardReq {
 export const AdvOrders: FC = () => {
   const page = pageFilter.order;
   const language = useFindLanguage();
-  const { order_type, project_status } = QueryParams();
+  const navigate = useNavigate();
+  const { project_type, project_status } = QueryParams();
 
   const { setValue, watch } = useForm<IForm>({
     defaultValues: {
-      status: myProjectStatusFilter.active,
-      type: projectTypesFilter.myProject,
+      type:
+        project_type &&
+        !!Object.values(projectTypesFilter).includes(
+          project_type as projectTypesFilter,
+        )
+          ? project_type
+          : projectTypesFilter.myProject,
+      status:
+        project_status &&
+        !!Object.values(myProjectStatusFilter).includes(
+          project_status as myProjectStatusFilter,
+        )
+          ? project_status
+          : myProjectStatusFilter.active,
       page: 1,
       date_sort: dateSortingTypes.decrease,
       elements_on_page: INTERSECTION_ELEMENTS.advOrders,
       language: language?.id || Languages[0].id,
     },
   });
+
   const formState = watch();
 
   const handleOnChangePage = () => {
@@ -67,9 +82,9 @@ export const AdvOrders: FC = () => {
 
   // check queries for project types to show current orders
   useEffect(() => {
-    if (order_type) {
+    if (project_type) {
       advertiserProjectTypes.map((type) => {
-        if (order_type === type.type) {
+        if (project_type === type.type) {
           setValue("type", type.type);
           setValue("status", type.status);
         }
@@ -85,7 +100,16 @@ export const AdvOrders: FC = () => {
       setValue("type", advertiserProjectTypes[0].type);
       setValue("status", advertiserProjectTypes[0].status);
     }
-  }, [order_type]);
+  }, [project_type, project_status]);
+
+  useEffect(() => {
+    const newPath = buildPathWithQuery(paths.orders, {
+      [queryParamKeys.projectType]: formState.type,
+      [queryParamKeys.projectStatus]: formState.status,
+    });
+
+    navigate(newPath, { replace: true });
+  }, [formState.type, formState.status]);
 
   const { type, ...getParams } = formState;
 

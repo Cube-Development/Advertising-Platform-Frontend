@@ -42,7 +42,7 @@ import {
   ToastAction,
   useToast,
 } from "@shared/ui";
-import { getFileExtension } from "@shared/utils";
+import { getFileExtension, queryParamKeys } from "@shared/utils";
 import { CircleX, FileIcon, InfoIcon, Loader } from "lucide-react";
 import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
@@ -457,7 +457,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
                     </p>
                   </div>
                   <Link
-                    to={`${paths.orders}?order_type=${projectTypesFilter.managerProject}&project_status=${advManagerProjectStatusFilter.develop}`}
+                    to={`${paths.orders}?${queryParamKeys.projectType}=${projectTypesFilter.managerProject}&${queryParamKeys.projectStatus}=${advManagerProjectStatusFilter.develop}`}
                     className="h-full"
                   >
                     <MyButton

@@ -1,4 +1,5 @@
 import {
+  IExtendedProfileData,
   ILegalCard,
   ILegalCardShort,
   ILegalData,
@@ -25,10 +26,6 @@ import { useNavigate } from "react-router-dom";
 import { Guide, LegalsList, PaymentData } from "../../components";
 import { CreditCard } from "./creditCard";
 import styles from "./styles.module.scss";
-
-interface IExtendedProfileData extends ILegalData {
-  amount: number;
-}
 
 export const Topup: FC = () => {
   useClearCookiesOnPage();
@@ -200,7 +197,7 @@ export const Topup: FC = () => {
         .unwrap()
         .then((createRes) => {
           const paymentReq = {
-            amount: formData.amount,
+            amount: Number(formState.amount.replace(/\s/g, "")),
             legal_id: createRes.legal_id,
             way_type: paymentTypes.didox,
           };
@@ -234,7 +231,7 @@ export const Topup: FC = () => {
               .unwrap()
               .then((editRes) => {
                 const paymentReq = {
-                  amount: Number(formData.amount),
+                  amount: Number(formState.amount.replace(/\s/g, "")),
                   legal_id: editRes.legal_id,
                   way_type: paymentTypes.didox,
                 };

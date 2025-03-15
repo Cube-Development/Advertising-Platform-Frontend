@@ -1,11 +1,12 @@
+import { channelStatusFilter } from "@entities/channel";
+import { offerStatusFilter } from "@entities/offer";
 import { CancelIcon2, MoreIcon } from "@shared/assets";
 import { paths } from "@shared/routing";
+import { buildPathWithQuery, queryParamKeys } from "@shared/utils";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
-import { channelStatusFilter } from "@entities/channel";
-import { offerStatusFilter } from "@entities/offer";
 
 interface ChannelCardMenuProps {
   channel_id: string;
@@ -73,7 +74,7 @@ export const ChannelCardMenu: FC<ChannelCardMenuProps> = ({
       {isMenuOpen && (
         <div className={styles.menu}>
           <div className={styles.top}>
-            <p className="gradient_color truncate">
+            <p className="truncate gradient_color">
               {t("platforms_blogger.menu.title")}
             </p>
             <button onClick={(e) => toggleMenu(e)}>
@@ -82,7 +83,9 @@ export const ChannelCardMenu: FC<ChannelCardMenuProps> = ({
           </div>
           <ul>
             {statusFilter === channelStatusFilter.active && (
-              <Link to={`${paths.addChannel}?channel_id=${channel_id}`}>
+              <Link to={buildPathWithQuery(paths.addChannel, {
+                [queryParamKeys.channelId]: channel_id,
+                })}>
                 <li>{t("platforms_blogger.menu.edit")}</li>
               </Link>
             )}

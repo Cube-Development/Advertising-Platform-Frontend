@@ -46,18 +46,18 @@ interface CentrifugeContextType {
   centrifuge: Centrifuge | null;
   OrderMessageSend: (message: IMessageSendSocket) => Promise<void>;
   OrderMessageNewChat: (
-    handleNewMessageChat: (message: IMessageNewSocket) => void,
+    handleNewMessageChat: (message: IMessageNewSocket) => void
   ) => void;
   OrderMessageNew: (
-    handleNewMessage: (message: IMessageNewSocket) => void,
+    handleNewMessage: (message: IMessageNewSocket) => void
   ) => void;
   OrderReadMessage: (
-    handleReadMessage: (message: IMessageNewSocket) => void,
+    handleReadMessage: (message: IMessageNewSocket) => void
   ) => void;
 }
 
 const CentrifugeContext = createContext<CentrifugeContextType | undefined>(
-  undefined,
+  undefined
 );
 
 export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
@@ -68,13 +68,13 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
   const dispatch = useAppDispatch();
   const centrifugeRef = useRef<Centrifuge | null>(null);
   const handleNewMessageRef = useRef<(message: IMessageNewSocket) => void>(
-    () => {},
+    () => {}
   );
   const handleNewMessageChatRef = useRef<(message: IMessageNewSocket) => void>(
-    () => {},
+    () => {}
   );
   const handleReadMessageRef = useRef<(message: IMessageNewSocket) => void>(
-    () => {},
+    () => {}
   );
   const { isAuth, role } = useAppSelector((state) => state.user);
   const [getWebsocketToken] = useGetWebsocketTokenMutation();
@@ -93,7 +93,7 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
           {
             getToken: () => Promise.resolve(authToken),
             debug: true,
-          },
+          }
         );
         centrifugeInstance.connect();
         centrifugeRef.current = centrifugeInstance;
@@ -146,7 +146,7 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
     try {
       const result = await centrifugeRef.current.publish(
         personalChannel,
-        message,
+        message
       );
     } catch (error) {
       console.error("Error sending message:", error);
@@ -158,7 +158,7 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const OrderMessageNewChat = (
-    callback: (message: IMessageNewSocket) => void,
+    callback: (message: IMessageNewSocket) => void
   ) => {
     handleNewMessageChatRef.current = callback;
   };
@@ -168,14 +168,15 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const handleNewNotification = (message: INotificationData) => {
+    const now = new Date();
     const newNotification: INotificationCard = {
       id: message.id || uuidv4(),
-      text: message.text || "222",
+      text: message.text || "",
       method: message.method,
-      created_date:
-        message?.created_date || new Date().toLocaleDateString("ru-RU"),
+      created_date: message?.created_date || now.toLocaleDateString("ru-RU"),
       created_time:
-        message?.created_time || new Date().toLocaleTimeString("ru-RU"),
+        message?.created_time ||
+        `${now.getHours()}:${now.getMinutes().toString().padStart(2, "0")}`,
       is_read: false,
       data: message,
     };
@@ -191,10 +192,10 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
           draft.notifications.splice(
             0,
             draft.notifications.length,
-            ...notifications,
+            ...notifications
           );
-        },
-      ),
+        }
+      )
     );
     toast({
       variant: "default",
@@ -205,24 +206,21 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
   const handleRevalidateCash = (method: notificationsTypes) => {
     if (method === notificationsTypes.notification_create_deposit) {
       dispatch(
-        walletAPI.util.invalidateTags([
-          TRANSACTION_HISTORY,
-          VIEWS_TRANSACTIONS,
-        ]),
+        walletAPI.util.invalidateTags([TRANSACTION_HISTORY, VIEWS_TRANSACTIONS])
       );
     } else if (method === notificationsTypes.new_manager_project) {
       dispatch(
         managerProjectsAPI.util.invalidateTags([
           MANAGER_PROJECTS,
           VIEWS_MANAGER,
-        ]),
+        ])
       );
     } else if (method === notificationsTypes.notification_request_approve) {
       dispatch(
         advProjectsAPI.util.invalidateTags([
           ADV_TARIFF_PROJECTS,
           VIEWS_ADVERTISER,
-        ]),
+        ])
       );
     } else if (method === notificationsTypes.notification_create_desire) {
       dispatch(managerProjectsAPI.util.resetApiState());
@@ -233,21 +231,21 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
         advProjectsAPI.util.invalidateTags([
           ADV_TARIFF_PROJECTS,
           VIEWS_ADVERTISER,
-        ]),
+        ])
       );
     } else if (method === notificationsTypes.notification_unban_channel) {
       dispatch(
         channelAPI.util.invalidateTags([
           BLOGGER_CHANNELS,
           VIEWS_BLOGGER_CHANNELS,
-        ]),
+        ])
       );
     } else if (method === notificationsTypes.notification_limited_ban_channel) {
       dispatch(
         channelAPI.util.invalidateTags([
           BLOGGER_CHANNELS,
           VIEWS_BLOGGER_CHANNELS,
-        ]),
+        ])
       );
     } else if (
       method === notificationsTypes.notification_unlimited_ban_channel
@@ -256,26 +254,26 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
         channelAPI.util.invalidateTags([
           BLOGGER_CHANNELS,
           VIEWS_BLOGGER_CHANNELS,
-        ]),
+        ])
       );
     } else if (method === notificationsTypes.notification_new_order_blogger) {
       dispatch(
         bloggerOffersAPI.util.invalidateTags([
           BLOGGER_OFFERS,
           VIEWS_BLOGGER_OFFERS,
-        ]),
+        ])
       );
     } else if (
       method === notificationsTypes.notification_accept_order_blogger
     ) {
       dispatch(
-        advProjectsAPI.util.invalidateTags([ADV_PROJECTS, VIEWS_ADVERTISER]),
+        advProjectsAPI.util.invalidateTags([ADV_PROJECTS, VIEWS_ADVERTISER])
       );
     }
     //
     else if (method === notificationsTypes.notification_publish_post) {
       dispatch(
-        advProjectsAPI.util.invalidateTags([ADV_PROJECTS, VIEWS_ADVERTISER]),
+        advProjectsAPI.util.invalidateTags([ADV_PROJECTS, VIEWS_ADVERTISER])
       );
     } else if (
       method === notificationsTypes.notification_advertiser_accept_order
@@ -284,7 +282,7 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
         bloggerOffersAPI.util.invalidateTags([
           BLOGGER_OFFERS,
           VIEWS_BLOGGER_OFFERS,
-        ]),
+        ])
       );
     } else if (
       method === notificationsTypes.notification_advertiser_reject_order
@@ -293,7 +291,7 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
         bloggerOffersAPI.util.invalidateTags([
           BLOGGER_OFFERS,
           VIEWS_BLOGGER_OFFERS,
-        ]),
+        ])
       );
     }
     // else if (
@@ -311,7 +309,7 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
         bloggerOffersAPI.util.invalidateTags([
           BLOGGER_OFFERS,
           VIEWS_BLOGGER_OFFERS,
-        ]),
+        ])
       );
     } else if (
       method ===
@@ -321,7 +319,7 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
         bloggerOffersAPI.util.invalidateTags([
           BLOGGER_OFFERS,
           VIEWS_BLOGGER_OFFERS,
-        ]),
+        ])
       );
     } else if (
       method ===
@@ -331,7 +329,7 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
         advProjectsAPI.util.invalidateTags([
           ADV_TARIFF_PROJECTS,
           VIEWS_ADVERTISER,
-        ]),
+        ])
       );
     } else if (
       method ===
@@ -341,16 +339,13 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
         advProjectsAPI.util.invalidateTags([
           ADV_TARIFF_PROJECTS,
           VIEWS_ADVERTISER,
-        ]),
+        ])
       );
     } else if (
       method === notificationsTypes.notification_refund_manager_project
     ) {
       dispatch(
-        walletAPI.util.invalidateTags([
-          TRANSACTION_HISTORY,
-          VIEWS_TRANSACTIONS,
-        ]),
+        walletAPI.util.invalidateTags([TRANSACTION_HISTORY, VIEWS_TRANSACTIONS])
       );
     }
   };
