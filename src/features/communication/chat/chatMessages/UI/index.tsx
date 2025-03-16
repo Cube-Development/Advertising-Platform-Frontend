@@ -137,8 +137,6 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
       { skip: !formFields?.order_id || !card },
     );
 
-  console.log("formFields", formFields);
-
   const { data: projectHistory, isFetching: isFetchingProject } =
     useGetProjectHistoryQuery(
       {
@@ -226,7 +224,6 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
   };
 
   const handleNewMessage = (message: IMessageNewSocket) => {
-    // console.log("newnewnew", message);
     if (message?.recipient === RecipientType.receiver) {
       const datetime = convertUTCToLocalDateTime(
         message?.message_date,
@@ -234,13 +231,16 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
       );
       const newMessage: IMessageNewSocket = {
         ...message,
-        formated_date: datetime.localDate,
-        formated_time: datetime.localTime,
+        formatted_date: datetime.localDate,
+        formatted_time: datetime.localTime,
         message_datetime: message.message_date + " " + message.message_time,
       };
       const newHistory = {
         ...data,
-        history: [...(data?.history || []), newMessage],
+        history: [
+          ...(data?.history.filter((item) => item?.id !== message?.id) || []),
+          newMessage,
+        ],
       };
 
       if (message?.order_id && message?.order_id === card?.order_id) {
@@ -279,6 +279,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
     const message = cleanMessage(newMessage);
     // const message = newMessage;
     if (message !== "") {
+      const messageId = uuidv4();
       const orderMessage: IMessageSendSocket = {
         ...(card?.type === chatType.order
           ? {
@@ -291,20 +292,21 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
             }),
         user_id: userId,
         message: message,
+        id: messageId,
       };
 
       OrderMessageSend(orderMessage);
 
       const datetime = getFormattedDateTime();
       const orderMessageState: IMessageNewSocket = {
-        id: uuidv4(),
+        id: messageId,
         ...(card?.type === chatType.order
           ? { order_id: card?.order_id }
           : { project_id: card?.project_id }),
         message: message,
         recipient: RecipientType.sender,
-        formated_date: datetime.localDate,
-        formated_time: datetime.localTime,
+        formatted_date: datetime.localDate,
+        formatted_time: datetime.localTime,
         message_date: datetime.utcDate,
         message_time: datetime.utcTime,
         message_datetime: datetime.utcDate + " " + datetime.utcTime,
@@ -485,7 +487,6 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
   };
 
   const cleanMessage = (message: string) => {
-    // console.log("Before cleaning:", message);
     let cleanedMessage = message?.replace(
       /^(<p>\s*(<br\s*\/?>\s*)+|(<br\s*\/?>\s*)+)/g,
       "<p>",
@@ -499,7 +500,6 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
       cleanedMessage = "";
     }
 
-    // console.log("After cleaning:", cleanedMessage);
     return cleanedMessage;
   };
 
@@ -677,7 +677,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
                           //  data-date={""}
                           className={styles.date}
                         >
-                          <p>{message?.formated_date}</p>
+                          <p>{message?.formatted_date}</p>
                         </div>
                       ))}
 
@@ -695,7 +695,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
                           ...message,
                           message: undefined,
                         })}
-                        data-date={message?.formated_date}
+                        data-date={message?.formatted_date}
                       >
                         <div
                           dangerouslySetInnerHTML={{
@@ -703,7 +703,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
                           }}
                         />
                         <div className={styles.time}>
-                          <span>{message?.formated_time}</span>
+                          <span>{message?.formatted_time}</span>
                           {message?.recipient === RecipientType.sender && (
                             <div className={styles.read}>
                               <ArrowReadIcon

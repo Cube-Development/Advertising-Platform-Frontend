@@ -83,9 +83,11 @@ export const ChannelCardMenu: FC<ChannelCardMenuProps> = ({
           </div>
           <ul>
             {statusFilter === channelStatusFilter.active && (
-              <Link to={buildPathWithQuery(paths.addChannel, {
-                [queryParamKeys.channelId]: channel_id,
-                })}>
+              <Link
+                to={buildPathWithQuery(paths.addChannel, {
+                  [queryParamKeys.channelId]: channel_id,
+                })}
+              >
                 <li>{t("platforms_blogger.menu.edit")}</li>
               </Link>
             )}
