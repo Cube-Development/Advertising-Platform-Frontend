@@ -17,6 +17,7 @@ import { walletAPI } from "@entities/wallet";
 import { cookiesTypes, INTERSECTION_ELEMENTS } from "@shared/config";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { useToast } from "@shared/ui";
+import { convertUTCToLocalDateTime } from "@shared/utils";
 import { Centrifuge, PublicationContext } from "centrifuge";
 import Cookies from "js-cookie";
 import React, {
@@ -168,14 +169,21 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const handleNewNotification = (message: INotificationData) => {
+    const datetime = convertUTCToLocalDateTime(
+      message?.created_date!,
+      message?.created_time!,
+    );
+
     const newNotification: INotificationCard = {
       id: message.id || uuidv4(),
       text: message.text || "new notification",
       method: message.method,
-      created_date:
-        message?.created_date || new Date().toLocaleDateString("ru-RU"),
-      created_time:
-        message?.created_time || new Date().toLocaleTimeString("ru-RU"),
+      created_date: message?.created_date
+        ? datetime.localDate
+        : new Date().toLocaleDateString("ru-RU"),
+      created_time: message?.created_time
+        ? datetime.localTime
+        : new Date().toLocaleTimeString("ru-RU"),
       is_read: false,
       data: message,
     };
