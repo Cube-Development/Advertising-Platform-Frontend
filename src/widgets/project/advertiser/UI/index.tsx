@@ -34,22 +34,32 @@ export const AdvOrders: FC = () => {
   const navigate = useNavigate();
   const { project_type, project_status } = QueryParams();
 
+  const startType =
+    project_type &&
+    !!Object.values(projectTypesFilter).includes(
+      project_type as projectTypesFilter,
+    )
+      ? project_type
+      : projectTypesFilter.myProject;
+
+  const startStatus =
+    project_status &&
+    (startType === projectTypesFilter.myProject &&
+    !!Object.values(myProjectStatusFilter).includes(
+      project_status as myProjectStatusFilter,
+    )
+      ? project_status
+      : startType === projectTypesFilter.managerProject &&
+        !!Object.values(advManagerProjectStatusFilter).includes(
+          project_status as advManagerProjectStatusFilter,
+        ))
+      ? project_status
+      : advertiserProjectTypes.find((item) => item.type === startType)?.status!;
+
   const { setValue, watch } = useForm<IForm>({
     defaultValues: {
-      type:
-        project_type &&
-        !!Object.values(projectTypesFilter).includes(
-          project_type as projectTypesFilter,
-        )
-          ? project_type
-          : projectTypesFilter.myProject,
-      status:
-        project_status &&
-        !!Object.values(myProjectStatusFilter).includes(
-          project_status as myProjectStatusFilter,
-        )
-          ? project_status
-          : myProjectStatusFilter.active,
+      type: startType,
+      status: startStatus,
       page: 1,
       date_sort: dateSortingTypes.decrease,
       elements_on_page: INTERSECTION_ELEMENTS.advOrders,
