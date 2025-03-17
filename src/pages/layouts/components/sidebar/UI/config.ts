@@ -59,10 +59,10 @@ export const advertiserMenu = [
 export const managerMenu: IMenuItem[] = [
   {
     item: {
-      title: "burger_menu.orders",
+      title: "burger_menu.manager_orders",
       path: paths.orders,
       img: CampaignIcon,
-      openMenu: true,
+      // openMenu: true,
     },
   },
   { item: { title: "burger_menu.base", path: paths.faq, img: BookIcon } },
