@@ -1628,22 +1628,22 @@
         "title": "Рекламодатель внес изменения"
       },
       "notification_launch_manager_project": {
-        "title": "Запуске проекта с менеджером"
+        "title": "Менеджер запустил проект"
       },
       "notification_unban_channel": {
-        "title": "Снятии бана с канала"
+        "title": "Снятие бана с канала"
       },
       "notification_limited_ban_channel": {
         "title": "Лимитированный бан канала"
       },
       "notification_unlimited_ban_channel": {
-        "title": "Неограниченном бан канала"
+        "title": "Неограниченный бан канала"
       },
       "notification_new_order_blogger": {
-        "title": "Новый заказ блогера"
+        "title": "Новый заказ"
       },
       "notification_accept_order_blogger": {
-        "title": "Принятие заказа блогера"
+        "title": "Блогер принял заказ"
       },
       "notification_publish_post": {
         "title": "Публикация поста"
@@ -1652,25 +1652,25 @@
         "title": "Рекламодатель отклонил заказ"
       },
       "notification_advertiser_reject_order_moderator": {
-        "title": "Модератор отклонил заказ рекламодателя"
+        "title": "Решение о модерации заказа"
       },
       "notification_advertiser_accept_order": {
         "title": "Рекламодатель принял заказ"
       },
       "notification_moderation_order_blogger_positive": {
-        "title": "Уведомление о положительной модерации заказа блогера"
+        "title": "Решение о модерации заказа"
       },
       "notification_moderation_order_advertiser_negative": {
-        "title": "Уведомление о негативной модерации заказа рекламодателя"
+        "title": "Решение о модерации заказа"
       },
       "notification_moderation_order_blogger_negative": {
-        "title": "Уведомление о негативной модерации заказа блогера"
+        "title": "Решение о модерации заказа"
       },
       "notification_moderation_order_advertiser_positive": {
-        "title": "Уведомление о положительной модерации заказа рекламодателя"
+        "title": "Решение о модерации заказа"
       },
       "notification_refund_manager_project": {
-        "title": "Возврат средств проекта с менеджером"
+        "title": "Возврат средств"
       }
     }
   },
