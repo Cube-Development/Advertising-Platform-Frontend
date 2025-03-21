@@ -153,7 +153,7 @@ const Card: FC<ManagerProjectCardProps> = ({ card, statusFilter }) => {
                 </div>
                 <div>
                   <CancelIcon />
-                  <p>{card?.canceled_rejected?.toLocaleString()}</p>
+                  <p>{card?.canceled?.toLocaleString()}</p>
                 </div>
               </div>
               <div className={styles.bottom}>
@@ -172,7 +172,7 @@ const Card: FC<ManagerProjectCardProps> = ({ card, statusFilter }) => {
               </div>
               <div className={styles.item__right}>
                 <CancelIcon />
-                <p>{card?.canceled_rejected?.toLocaleString()}</p>
+                <p>{card?.canceled?.toLocaleString()}</p>
               </div>
               <div className={styles.item__left}>
                 <WaitIcon />

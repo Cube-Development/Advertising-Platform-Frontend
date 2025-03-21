@@ -116,7 +116,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({
     { id: card?.channel?.id },
     {
       skip: !isSubcardOpen,
-    }
+    },
   );
 
   const handleChangeOpenSubcard = (): void => {
@@ -178,7 +178,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({
           <p>
             {t(
               platformTypes.find((item) => item.id === card?.channel?.platform)
-                ?.name || ""
+                ?.name || "",
             )}
           </p>
         </div>
@@ -203,7 +203,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({
           <p className="truncate">
             {t(
               adminChannelStatus.find((item) => item.id === card?.status)
-                ?.name || "???"
+                ?.name || "???",
             )}
           </p>
         </div>
