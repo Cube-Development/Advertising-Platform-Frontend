@@ -110,7 +110,7 @@ export const advertiserMenu: IMenuItem[] = [
 export const managerMenu: IMenuItem[] = [
   {
     item: {
-      title: "burger_menu.orders",
+      title: "burger_menu.manager_orders",
       path: paths.orders,
       img: CampaignIcon,
       type: viewsTypes.managerProjects,

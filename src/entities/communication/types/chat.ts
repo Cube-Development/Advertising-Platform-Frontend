@@ -35,10 +35,12 @@ export interface IMessageNewSocket {
   order_id?: string;
   project_id?: string;
   message: string;
-  formated_date: string;
-  formated_time: string;
+  formatted_date: string;
+  formatted_time: string;
   message_date: string;
   message_time: string;
+  created_date?: string;
+  created_time?: string;
   message_datetime: string;
   status: number;
   message_id?: string;
@@ -56,8 +58,8 @@ export interface IChatData {
   message_date: string;
   message_time: string;
   type: chatType;
-  formated_date: string;
-  formated_time: string;
+  formatted_date: string;
+  formatted_time: string;
   message_datetime: string;
 }
 
@@ -77,6 +79,7 @@ export interface IMessageSendSocket {
   user_id: string;
   message: string;
   method: MessageSendType;
+  id: string;
 }
 
 export interface IChatProps {
