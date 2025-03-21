@@ -108,6 +108,40 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
   );
 
   useEffect(() => {
+    if (!recommendationCard) {
+      return;
+    }
+
+    const isEqualArrays = (arr1: number[], arr2: number[]) =>
+      arr1?.length === arr2?.length && arr1?.every((val) => arr2.includes(val));
+
+    if (
+      !isEqualArrays(
+        formState.filter.age,
+        recommendationCard?.age?.map((item) => item.id),
+      ) ||
+      !isEqualArrays(
+        formState.filter.business,
+        recommendationCard?.category?.map((item) => item.id),
+      ) ||
+      !isEqualArrays(
+        formState.filter.language,
+        recommendationCard?.language?.map((item) => item.id),
+      ) ||
+      !isEqualArrays(
+        formState.filter.region,
+        recommendationCard?.region?.map((item) => item.id),
+      ) ||
+      formState.filter.male !== recommendationCard?.male ||
+      formState.filter.female !== recommendationCard?.female
+    ) {
+      setRecCard(null);
+    }
+  }, [formState.filter]);
+
+  console.log("recommendationCard", recommendationCard);
+
+  useEffect(() => {
     if (TAParameters) {
       const repackCards = TAParameters.map((card) => {
         const filteredCategories =
