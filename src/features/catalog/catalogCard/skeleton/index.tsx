@@ -30,14 +30,14 @@ export const SkeletonCatalogCard: FC<SkeletonCatalogCardProps> = () => {
             <div className={styles.channel__info}>
               <div className={styles.info}>
                 <Skeleton className="h-4 w-[80%]" />
-                <div className="grid grid-flow-col gap-1 justify-start justify-items-start">
+                <div className="grid justify-start grid-flow-col gap-1 justify-items-start">
                   <Skeleton className="h-[10px] w-[10px] rounded-full" />
                   <Skeleton className="h-[10px] w-[10px] rounded-full" />
                   <Skeleton className="h-[10px] w-[10px] rounded-full" />
                 </div>
-                <Skeleton className="h-4 w-3/5 max-w-32" />
+                <Skeleton className="w-3/5 h-4 max-w-32" />
                 {screen >= BREAKPOINT.MD && (
-                  <Skeleton className="h-4 w-11/12" />
+                  <Skeleton className="w-11/12 h-4" />
                 )}
               </div>
             </div>
@@ -51,12 +51,12 @@ export const SkeletonCatalogCard: FC<SkeletonCatalogCardProps> = () => {
               </div>
             </div>
           </div>
-          {screen < BREAKPOINT.MD && <Skeleton className="h-4 w-3/5" />}
+          {screen < BREAKPOINT.MD && <Skeleton className="w-3/5 h-4" />}
           {screen < BREAKPOINT.LG && (
             <Skeleton className="w-full h-[35px] rounded-[10px]" />
           )}
         </div>
-        <Skeleton className="w-full h-full rounded-[15px]" />
+        <Skeleton className="w-full h-full rounded-b-[15px] rounded-t-[0px]" />
       </div>
     </Skeleton>
   );

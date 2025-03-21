@@ -242,7 +242,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
                 ) : (
                   <>
                     <p>{t(`orders_manager.order_status.completed.title`)}</p>
-                    <FeedbackBtn />
+                    <FeedbackBtn order_id={subcard?.id} />
                   </>
                 )}
               </div>
