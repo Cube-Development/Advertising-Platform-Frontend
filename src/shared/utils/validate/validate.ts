@@ -19,9 +19,9 @@ export function isValidINN(value: string): boolean {
 
 export function isValidAmount(value: string): boolean {
   const amount = value.replace(/\D/g, "");
-  const length = formDataLength.amount - 1;
-  const Regex = new RegExp(`^[1-9]\\d{${length}}$`);
-  return Regex.test(amount);
+  const maxLength = formDataLength.amount - 1;
+  const regex = new RegExp(`^[1-9]\\d{0,${maxLength}}$`);
+  return regex.test(amount);
 }
 
 export function isValidPNFL(value: string): boolean {
