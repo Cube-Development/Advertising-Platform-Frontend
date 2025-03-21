@@ -179,6 +179,16 @@ export const Chat: FC<IChatProps> = ({
   };
 
   const handleNewMessage = (message: IMessageNewSocket) => {
+    const datetime = convertUTCToLocalDateTime(
+      message?.created_date!,
+      message?.created_time!,
+    );
+    const newMessage = {
+      formatted_date: datetime.localDate,
+      formatted_time: datetime.localTime,
+      last_message: message?.message,
+      message_datetime: message.message_date + " " + message.message_time,
+    };
     if (message?.order_id && chatsOrder) {
       checkOrderExist(message?.order_id);
       const updatedChat = chatsOrder?.find(
@@ -186,21 +196,14 @@ export const Chat: FC<IChatProps> = ({
       );
 
       if (updatedChat) {
-        const datetime = convertUTCToLocalDateTime(
-          message?.message_date,
-          message?.message_time,
-        );
         const updatedChatWithNewData = {
           ...updatedChat,
-          message_date: datetime.localDate,
-          message_time: datetime.localTime,
-          last_message: message?.message,
+          ...newMessage,
           unread_count:
             message?.recipient === RecipientType.receiver
               ? updatedChat.unread_count + 1
               : updatedChat.unread_count,
         };
-
         dispatch(
           chatAPI.util.updateQueryData(
             "getOrderChats",
@@ -232,21 +235,14 @@ export const Chat: FC<IChatProps> = ({
       );
 
       if (updatedChat) {
-        const datetime = convertUTCToLocalDateTime(
-          message?.message_date,
-          message?.message_time,
-        );
         const updatedChatWithNewData = {
           ...updatedChat,
-          message_date: datetime.localDate,
-          message_time: datetime.localTime,
-          last_message: message?.message,
+          ...newMessage,
           unread_count:
             message?.recipient === RecipientType.receiver
               ? updatedChat.unread_count + 1
               : updatedChat.unread_count,
         };
-
         dispatch(
           chatAPI.util.updateQueryData(
             "getProjectChats",

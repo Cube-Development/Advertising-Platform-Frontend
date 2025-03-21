@@ -5,3 +5,4 @@ export * from "./reviews";
 export * from "./transactions";
 export * from "./users";
 export * from "./userInfo";
+export * from "./home";

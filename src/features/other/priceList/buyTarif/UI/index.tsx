@@ -38,17 +38,23 @@ import {
   DrawerTrigger,
   formatFileSize,
   MyButton,
+  MyProgressBar,
   ScrollArea,
   ToastAction,
   useToast,
 } from "@shared/ui";
-import { getFileExtension, queryParamKeys } from "@shared/utils";
+import {
+  buildPathWithQuery,
+  getFileExtension,
+  queryParamKeys,
+} from "@shared/utils";
 import { CircleX, FileIcon, InfoIcon, Loader } from "lucide-react";
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
+import axios from "axios";
 
 interface BuyTarifProps {
   tarif: number;
@@ -61,6 +67,8 @@ interface IBuyTariffForm extends IBuyTarif {
   dragActive: boolean;
   isTarifBought: boolean;
   isHaveBalance: boolean;
+  isDropFile: boolean;
+  uploadProgress: { [key: string]: number };
 }
 
 export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
@@ -85,6 +93,8 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
       dragActive: false,
       isTarifBought: false,
       isHaveBalance: tarifPrice <= balance,
+      isDropFile: false,
+      uploadProgress: {},
     },
   });
   const formState = watch();
@@ -113,6 +123,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
 
   const handleChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
+    setValue(tarifData.isDropFile, true);
     if (e.target.files && e.target.files[0]) {
       setValue(tarifData.files, [e.target.files[0]]);
       try {
@@ -121,6 +132,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
         console.log("finally buy tarif component");
       }
     }
+    setValue(tarifData.isDropFile, false);
   };
 
   const handleReset = () => {
@@ -140,6 +152,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
 
   const handleDrop = async (e: React.DragEvent<HTMLInputElement>) => {
     e.preventDefault();
+    setValue(tarifData.isDropFile, true);
     setValue(tarifData.dragActive, false);
     if (e.dataTransfer.files && e.dataTransfer.files[0]) {
       setValue(tarifData.files, [e.dataTransfer.files[0]]);
@@ -149,6 +162,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
         console.log("finally buy tarif component");
       }
     }
+    setValue(tarifData.isDropFile, false);
   };
 
   const handleRemoveFile = (file: File) => {
@@ -161,9 +175,10 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
 
   const handleSubmit = () => {
     if (
-      formState?.attached_files.length ||
-      formState?.comment ||
-      formState?.links.length
+      (formState?.attached_files.length ||
+        formState?.comment ||
+        formState?.links.length) &&
+      !formState?.isDropFile
     ) {
       !isLoading &&
         buyTarif({
@@ -209,14 +224,35 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
           extension: getFileExtension(file),
           content_type: ContentType.file,
         }).unwrap();
-        await fetch(data?.url, {
-          method: "PUT",
-          body: file,
+
+        // Создаем FormData для отправки файла
+        const formData = new FormData();
+        formData.append("file", file);
+
+        // Отправляем запрос с отслеживанием прогресса
+        await axios.put(data.url, file, {
+          headers: {
+            "Content-Type": file.type,
+          },
+          onUploadProgress: (progressEvent) => {
+            if (progressEvent.total) {
+              const percentComplete =
+                (progressEvent.loaded / progressEvent.total) * 100;
+              console.log(`Прогресс загрузки: ${percentComplete.toFixed(2)}%`);
+              // Обновляем состояние прогресса в UI
+              setValue(tarifData.uploadProgress, {
+                ...formState?.uploadProgress,
+                [file.name]: percentComplete,
+              });
+            }
+          },
         });
+
+        // Добавляем файл в состояние формы
         if (!formState?.attached_files) {
           formState.attached_files = [];
         }
-        formState?.attached_files.push({
+        formState.attached_files.push({
           content_type: ContentType.file,
           content: data.file_name,
           name: file.name,
@@ -224,13 +260,11 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
       }),
     );
   };
-
   const handleClose = () => {
     setValue(tarifData?.isTarifBought, false);
   };
 
   const currentPath = useCurrentPathEnum();
-
   return (
     <>
       {isAuth ? (
@@ -334,9 +368,21 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
                                     <span>{formatFileSize(file?.size)}</span>
                                   </div>
                                 </div>
+
                                 <div className={styles.item__right}>
-                                  <YesIcon />
+                                  {formState?.uploadProgress[file?.name] !==
+                                  100 ? (
+                                    <MyProgressBar
+                                      progress={
+                                        formState?.uploadProgress[file?.name] ||
+                                        0
+                                      }
+                                    />
+                                  ) : (
+                                    <YesIcon />
+                                  )}
                                   <button
+                                    className={styles.delete}
                                     onClick={() => handleRemoveFile(file)}
                                   >
                                     <TrashBasketIcon />
@@ -457,7 +503,13 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
                     </p>
                   </div>
                   <Link
-                    to={`${paths.orders}?${queryParamKeys.projectType}=${projectTypesFilter.managerProject}&${queryParamKeys.projectStatus}=${advManagerProjectStatusFilter.develop}`}
+                    to={buildPathWithQuery(paths.orders, {
+                      [queryParamKeys.projectType]:
+                        projectTypesFilter.managerProject,
+                      [queryParamKeys.projectStatus]:
+                        advManagerProjectStatusFilter.develop,
+                    })}
+                    // to={`${paths.orders}?${queryParamKeys.projectType}=${projectTypesFilter.managerProject}&${queryParamKeys.projectStatus}=${advManagerProjectStatusFilter.develop}`}
                     className="h-full"
                   >
                     <MyButton

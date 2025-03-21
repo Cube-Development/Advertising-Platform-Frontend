@@ -11,10 +11,13 @@ import {
   websocketMessages,
   websocketNotifications,
 } from "@entities/communication";
+import { bloggerOffersAPI } from "@entities/offer";
 import { advProjectsAPI, managerProjectsAPI } from "@entities/project";
+import { walletAPI } from "@entities/wallet";
 import { cookiesTypes, INTERSECTION_ELEMENTS } from "@shared/config";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { useToast } from "@shared/ui";
+import { convertUTCToLocalDateTime } from "@shared/utils";
 import { Centrifuge, PublicationContext } from "centrifuge";
 import Cookies from "js-cookie";
 import React, {
@@ -39,8 +42,6 @@ import {
   VIEWS_MANAGER,
   VIEWS_TRANSACTIONS,
 } from "./tags";
-import { bloggerOffersAPI } from "@entities/offer";
-import { walletAPI } from "@entities/wallet";
 
 interface CentrifugeContextType {
   centrifuge: Centrifuge | null;
@@ -168,15 +169,21 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
   };
 
   const handleNewNotification = (message: INotificationData) => {
-    const now = new Date();
+    const datetime = convertUTCToLocalDateTime(
+      message?.created_date!,
+      message?.created_time!,
+    );
+
     const newNotification: INotificationCard = {
       id: message.id || uuidv4(),
-      text: message.text || "",
+      text: message.text || "new notification",
       method: message.method,
-      created_date: message?.created_date || now.toLocaleDateString("ru-RU"),
-      created_time:
-        message?.created_time ||
-        `${now.getHours()}:${now.getMinutes().toString().padStart(2, "0")}`,
+      created_date: message?.created_date
+        ? datetime.localDate
+        : new Date().toLocaleDateString("ru-RU"),
+      created_time: message?.created_time
+        ? datetime.localTime
+        : new Date().toLocaleTimeString("ru-RU"),
       is_read: false,
       data: message,
     };

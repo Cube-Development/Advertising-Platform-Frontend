@@ -49,8 +49,8 @@ export const chatAPI = authApi.injectEndpoints({
           return {
             ...item,
             type: chatType.order,
-            formated_date: datetime.localDate,
-            formated_time: datetime.localTime,
+            formatted_date: datetime.localDate,
+            formatted_time: datetime.localTime,
             message_datetime: item.message_date + " " + item.message_time,
             // unread_count: Math.floor(Math.random() * 10)
           };
@@ -78,8 +78,8 @@ export const chatAPI = authApi.injectEndpoints({
         return {
           ...response,
           type: chatType.order,
-          formated_date: datetime.localDate,
-          formated_time: datetime.localTime,
+          formatted_date: datetime.localDate,
+          formatted_time: datetime.localTime,
           message_datetime: response.message_date + " " + response.message_time,
         };
       },
@@ -106,8 +106,8 @@ export const chatAPI = authApi.injectEndpoints({
           return {
             ...item,
             type: chatType.project,
-            formated_date: datetime.localDate,
-            formated_time: datetime.localTime,
+            formatted_date: datetime.localDate,
+            formatted_time: datetime.localTime,
             message_datetime: item.message_date + " " + item.message_time,
           };
         });
@@ -134,8 +134,8 @@ export const chatAPI = authApi.injectEndpoints({
         return {
           ...response,
           type: chatType.project,
-          formated_date: datetime.localDate,
-          formated_time: datetime.localTime,
+          formatted_date: datetime.localDate,
+          formatted_time: datetime.localTime,
           message_datetime: response.message_date + " " + response.message_time,
         };
       },
@@ -175,8 +175,8 @@ export const chatAPI = authApi.injectEndpoints({
           );
           return {
             ...item,
-            formated_date: datetime.localDate,
-            formated_time: datetime.localTime,
+            formatted_date: datetime.localDate,
+            formatted_time: datetime.localTime,
             message_datetime: item.message_date + " " + item.message_time,
           };
         });
@@ -229,8 +229,8 @@ export const chatAPI = authApi.injectEndpoints({
           );
           return {
             ...item,
-            formated_date: datetime.localDate,
-            formated_time: datetime.localTime,
+            formatted_date: datetime.localDate,
+            formatted_time: datetime.localTime,
             message_datetime: item.message_date + " " + item.message_time,
           };
         });

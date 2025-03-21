@@ -11,7 +11,7 @@ interface ChatCardProps {
 
 export const ChatCard: FC<ChatCardProps> = ({ card, isActive }) => {
   const { t } = useTranslation();
-  const dateTime = getDateChat(card?.formated_date, card?.formated_time);
+  const dateTime = getDateChat(card?.formatted_date, card?.formatted_time);
 
   const cleanMessage = (message: string) => {
     // console.log("Before cleaning:", message);

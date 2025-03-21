@@ -48,4 +48,6 @@ export enum tarifData {
   dragActive = "dragActive",
   isTarifBought = "isTarifBought",
   isHaveBalance = "isHaveBalance",
+  isDropFile = "isDropFile",
+  uploadProgress = "uploadProgress",
 }

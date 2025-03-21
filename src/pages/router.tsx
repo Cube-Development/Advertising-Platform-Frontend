@@ -1,4 +1,4 @@
-import { managementRoles, roles, userRoles } from "@entities/user";
+import { roles } from "@entities/user";
 import {
   RootAdminLayout,
   RootLayout,
@@ -7,173 +7,83 @@ import {
 } from "@pages/layouts";
 import { useAppSelector } from "@shared/hooks";
 import { paths } from "@shared/routing";
-import { Navigate, RouteObject, createBrowserRouter } from "react-router-dom";
-import {
-  AminCheckRoute,
-  CheckProjectId,
-  CheckRoutes,
-  routerType,
-} from "./CheckRoutes";
-import {
-  IRoute,
-  createOrderRoutes,
-  onlyPublicCommonRoutes,
-  privateAdminRoutes,
-  privateAdvertiserRoutes,
-  privateBloggerRoutes,
-  privateCommonRoutes,
-  publicAdvertiserRoutes,
-  publicBloggerRoutes,
-  publicCommonRoutes,
-} from "./routes";
+import { createBrowserRouter, Navigate } from "react-router-dom";
+import { allRoutes, authTypes, IRouting, layoutTypes } from "./routes";
 
-const HandleLayout = ({ route }: { route: IRoute }) => {
+// Компонент защиты маршрутов
+const ProtectedRoute = ({ route }: { route: IRouting }) => {
   const { isAuth, role } = useAppSelector((state) => state.user);
-  return isAuth && route.sidebar && userRoles.includes(role) ? (
-    <SideBarLayout>
-      <route.component />
-    </SideBarLayout>
-  ) : (
-    <route.component />
-  );
+
+  // Проверка на авторизацию
+  if (route.auth === authTypes.onlyPublic && isAuth) {
+    console.log("onlyPublic");
+    return <Navigate to={paths.main} replace />;
+  }
+  if (route.auth === authTypes.private && !isAuth) {
+    console.log("private");
+    return <Navigate to={paths.main} replace />;
+  }
+  console.log(route.roles, role);
+
+  if (route.auth === authTypes.public) {
+    console.log("public");
+    if (role === roles.blogger && !route.roles?.includes(role)) {
+      return <Navigate to={paths.mainBlogger} replace />;
+    }
+    if (role === roles.advertiser && !route.roles?.includes(role)) {
+      return <Navigate to={paths.main} replace />;
+    }
+    if (role === roles.moderator && !route.roles?.includes(role)) {
+      return <Navigate to={paths.orders} replace />;
+    }
+  }
+
+  // Проверка на роль
+  if (route.roles && !route.roles.includes(role)) {
+    if (role === roles.moderator) {
+      return <Navigate to={paths.adminHome} replace />;
+    }
+    if (role === roles.manager) {
+      return <Navigate to={paths.orders} replace />;
+    }
+    return <Navigate to={paths.main} replace />;
+  }
+
+  // Оборачиваем в нужный layout
+  let Component = <route.component />;
+  if (route.authSidebar && isAuth) {
+    Component = <SideBarLayout>{Component}</SideBarLayout>;
+  }
+  if (route.adminSidebar) {
+    Component = <SideBarAdminLayout>{Component}</SideBarAdminLayout>;
+  }
+
+  return Component;
 };
 
-const HandleAdminLayout = ({
-  route,
-  allRoutes,
-}: {
-  route: IRoute;
-  allRoutes: string[];
-}) => {
-  const { isAuth, role } = useAppSelector((state) => state.user);
-  return isAuth && route.sidebar && role === roles.moderator ? (
-    <SideBarAdminLayout>
-      <route.component />
-    </SideBarAdminLayout>
-  ) : (
-    <route.component />
-  );
-
-  // if (isAuth && role === roles.moderator && allRoutes.includes(route.path)) {
-  //   if (route.sidebar) {
-  //     return (
-  //       <SideBarAdminLayout>
-  //         <route.component />
-  //       </SideBarAdminLayout>
-  //     );
-  //   } else {
-  //     return <route.component />;
-  //   }
-  // } else if (
-  //   isAuth &&
-  //   role === roles.moderator &&
-  //   !allRoutes.includes(route.path)
-  // ) {
-  //   console.log(7777777)
-  //   return <Navigate to={paths.adminHome} replace />;
-  // }
-};
-
-const handleRouter = (routes: IRoute[]) => {
-  const router: RouteObject[] = routes.map((route) => ({
+const rootRoutes = allRoutes
+  .filter((route) => route.layout === layoutTypes.root)
+  .map((route) => ({
     path: route.path,
-    element: <HandleLayout route={route} />,
+    element: <ProtectedRoute route={route} />,
   }));
-  return router;
-};
 
-const handleAdminRouter = (routes: IRoute[]) => {
-  const allRoutes = routes.map((el) => el.path);
-  console.log(allRoutes);
-  const router: RouteObject[] = routes.map((route) => ({
+const adminRoutes = allRoutes
+  .filter((route) => route.layout === layoutTypes.admin)
+  .map((route) => ({
     path: route.path,
-    element: <HandleAdminLayout route={route} allRoutes={allRoutes} />,
+    element: <ProtectedRoute route={route} />,
   }));
-  return router;
-};
-
-const privateBloggerRouter: RouteObject[] = handleRouter(privateBloggerRoutes);
-const privateAdvertiserRouter: RouteObject[] = handleRouter(
-  privateAdvertiserRoutes,
-);
-const privateCommonRouter: RouteObject[] = handleRouter(privateCommonRoutes);
-const publicAdvertisserRouter: RouteObject[] = handleRouter(
-  publicAdvertiserRoutes,
-);
-const publicBloggerRouter: RouteObject[] = handleRouter(publicBloggerRoutes);
-const publicCommonRouter: RouteObject[] = handleRouter(publicCommonRoutes);
-const onlyPublicCommonRouter: RouteObject[] = handleRouter(
-  onlyPublicCommonRoutes,
-);
-
-const createOrderRouter: RouteObject[] = handleRouter(createOrderRoutes);
-const privateAdminRouter: RouteObject[] = handleAdminRouter(privateAdminRoutes);
 
 export const router = createBrowserRouter([
   {
     path: paths.main,
     element: <RootLayout />,
-    // children: [
-
-    // ]
-    children: [
-      {
-        path: paths.main,
-        element: (
-          <CheckRoutes checkRole={roles.advertiser} type={routerType.public} />
-        ),
-        children: publicAdvertisserRouter,
-      },
-      {
-        path: paths.main,
-        element: (
-          <CheckRoutes checkRole={roles.blogger} type={routerType.public} />
-        ),
-        children: publicBloggerRouter,
-      },
-      {
-        path: paths.main,
-        element: (
-          <CheckRoutes checkRole={roles.advertiser} type={routerType.private} />
-        ),
-        children: privateAdvertiserRouter,
-      },
-      {
-        path: paths.main,
-        element: (
-          <CheckRoutes checkRole={roles.blogger} type={routerType.private} />
-        ),
-        children: privateBloggerRouter,
-      },
-      {
-        path: paths.main,
-        element: <CheckRoutes type={routerType.private} />,
-        children: privateCommonRouter,
-      },
-      {
-        path: paths.main,
-        element: <CheckProjectId />,
-        children: createOrderRouter,
-      },
-      {
-        path: paths.main,
-        element: <CheckRoutes type={routerType.onlyPublic} />,
-        children: onlyPublicCommonRouter,
-      },
-      ...publicCommonRouter,
-    ],
+    children: rootRoutes,
   },
   {
     path: paths.main,
     element: <RootAdminLayout />,
-    children: [
-      {
-        path: paths.main,
-        element: (
-          <CheckRoutes checkRole={roles.manager} type={routerType.private} />
-        ),
-        children: privateAdminRouter,
-      },
-    ],
+    children: adminRoutes,
   },
 ]);
