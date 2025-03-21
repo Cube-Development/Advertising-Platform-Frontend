@@ -73,7 +73,7 @@ export const CatalogList: FC<CatalogListProps> = ({
   const translateSortingTypes = sortingTypes.map((el) => {
     return { ...el, name: t(el.name), id: el.type };
   });
-
+  console.log(channels.length, channels);
   return (
     <div className={styles.wrapper}>
       <div className={styles.filters__row}>
@@ -122,22 +122,23 @@ export const CatalogList: FC<CatalogListProps> = ({
         )}
       </div>
       <div className={styles.card__list}>
-        {channels?.map((card, index) => (
-          <motion.div
-            key={card.id}
-            initial="hidden"
-            animate="visible"
-            custom={index % INTERSECTION_ELEMENTS.catalog}
-            variants={PAGE_ANIMATION.animationUp}
-          >
-            <CatalogCard
-              card={card}
-              AddToBasketBtn={AddToBasket}
-              FormatList={FormatList}
-              onChangeCard={onChangeCard}
-            />
-          </motion.div>
-        ))}
+        {(formState.page !== 1 || !isLoading) &&
+          channels?.map((card, index) => (
+            <motion.div
+              key={card.id + index}
+              initial="hidden"
+              animate="visible"
+              custom={index % INTERSECTION_ELEMENTS.catalog}
+              variants={PAGE_ANIMATION.animationUp}
+            >
+              <CatalogCard
+                card={card}
+                AddToBasketBtn={AddToBasket}
+                FormatList={FormatList}
+                onChangeCard={onChangeCard}
+              />
+            </motion.div>
+          ))}
         {isLoading &&
           Array.from({ length: INTERSECTION_ELEMENTS.catalog }).map(
             (_, index) => <SkeletonCatalogCard key={index} />,

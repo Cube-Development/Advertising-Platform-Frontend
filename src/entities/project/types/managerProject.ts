@@ -58,7 +58,7 @@ export interface IManagerProjectCard {
   remainder?: number;
   is_request_approve?: projectStatus;
   completed?: number;
-  canceled_rejected?: number;
+  canceled?: number;
   wait?: number;
   in_progress?: number;
   moderation?: number;

@@ -394,6 +394,7 @@ export const CatalogBlock: FC = () => {
     }
   }, [formState?.filter]);
 
+  console.log("render catalog", catalogAuth);
   return (
     <div className="container">
       <div className={`${styles.wrapper}`}>

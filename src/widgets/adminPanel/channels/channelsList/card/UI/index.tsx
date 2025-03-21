@@ -366,8 +366,8 @@ export const ChannelCard: FC<ChannelCardProps> = ({
                 </>
               ) : card?.status === channelStatus.inactive ? (
                 <>
-                  <RejectChannel id={card?.channel?.id} />
-                  <AcceptChannel id={card?.channel?.id} />
+                  <BanChannel id={card?.channel?.id} />
+                  <UpdateChannel channel={formState} id={card?.channel?.id} />
                 </>
               ) : card?.status === channelStatus.moderationReject ? (
                 <>

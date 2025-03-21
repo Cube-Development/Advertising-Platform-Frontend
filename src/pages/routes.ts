@@ -162,7 +162,6 @@ export const allRoutes: IRouting[] = [
     component: MainPage,
     roles: [roles.advertiser],
     auth: authTypes.public,
-    authSidebar: true,
     layout: layoutTypes.root,
   },
 
