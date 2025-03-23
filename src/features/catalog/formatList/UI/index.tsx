@@ -11,6 +11,7 @@ export const FormatList: FC<IFormatListProps> = ({
   selectedFormat,
   isSmall,
   isBig,
+  isSmallCatalogCard,
 }) => {
   const [isMenuOpen, setMenuOpen] = useState(false);
   const screen = useWindowWidth();
@@ -50,6 +51,50 @@ export const FormatList: FC<IFormatListProps> = ({
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
+  if (isSmallCatalogCard) {
+    return (
+      <div
+        className={`${styles.wrapper} ${styles.small_catalog}`}
+        ref={menuRef}
+      >
+        <div
+          className={`${styles.selects} !rounded-[5px] !gap-1 mobile:!px-[10px] mobile:!py-[5px] !p-[5px]`}
+          onClick={(e) => handleButtonClick(e)}
+        >
+          <p className="moobile-xl:!text-xs mobile:!text-[10px] !text-[9px] mobile-xl:max-w-[100px] mobile:max-w-[80px] max-w-[50px] truncate mobile-xl:!font-medium !font-semibold">
+            {selectedFormat?.format_name?.small}
+          </p>
+          <div className={isMenuOpen ? "rotate" : "rotate__down"}>
+            <ArrowSmallVerticalIcon
+              className={isMenuOpen ? "active__icon" : ""}
+            />
+          </div>
+        </div>
+
+        {isMenuOpen && (
+          <div className={`${styles.menu} ${styles.small_menu} show !mt-0`}>
+            <ul>
+              {card.format.map((format) => (
+                <li
+                  key={format?.format}
+                  onClick={handleOptionChange}
+                  data-value={JSON.stringify(format)}
+                  className={`${
+                    selectedFormat?.format === format?.format
+                      ? styles.active
+                      : ""
+                  } moobile-xl:!text-xs mobile:!text-[10px] !text-[9px] !p-1.5 !rounded-[5px]`}
+                >
+                  {format?.format_name?.small}
+                </li>
+              ))}
+            </ul>
+          </div>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className={styles.wrapper} ref={menuRef}>

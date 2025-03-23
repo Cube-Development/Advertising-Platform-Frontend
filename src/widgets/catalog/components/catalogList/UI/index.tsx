@@ -9,12 +9,14 @@ import {
 import { AddToBasket } from "@features/cart";
 import {
   CatalogCard,
+  SmallCatalogCard,
   FormatList,
   SearchFilter,
   SkeletonCatalogCard,
+  SkeletonSmallCatalogCard,
 } from "@features/catalog";
 import { SelectFilter, filterData } from "@features/other";
-import { SadSmileIcon } from "@shared/assets";
+import { SadSmileIcon, GridIcon, ListIcon } from "@shared/assets";
 import {
   BREAKPOINT,
   INTERSECTION_ELEMENTS,
@@ -22,9 +24,9 @@ import {
 } from "@shared/config";
 import { useWindowWidth } from "@shared/hooks";
 import { IOption } from "@shared/types";
-import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
+import { ShowMoreBtn, SpinnerLoader, Toggle } from "@shared/ui";
 import { motion } from "framer-motion";
-import { FC } from "react";
+import { FC, useState } from "react";
 import {
   UseFormReset,
   UseFormResetField,
@@ -62,6 +64,16 @@ export const CatalogList: FC<CatalogListProps> = ({
 }) => {
   const { t } = useTranslation();
   const screen = useWindowWidth();
+
+  const [isTableView, setIsTableView] = useState(() => {
+    const saved = localStorage.getItem("catalogViewMode");
+    return saved ? JSON.parse(saved) : false;
+  });
+
+  const handleViewChange = (value: boolean) => {
+    setIsTableView(value);
+    localStorage.setItem("catalogViewMode", JSON.stringify(value));
+  };
 
   const handleOnChangePage = () => {
     setValue(channelParameterData.page, page + 1);
@@ -110,7 +122,20 @@ export const CatalogList: FC<CatalogListProps> = ({
         </div>
       </div>
       <div className={styles.search__row}>
-        <SearchFilter type={channelData.search} onChange={setValue} />
+        <div className="grid grid-cols-[1fr_auto] gap-[10px]">
+          <SearchFilter type={channelData.search} onChange={setValue} />
+          <Toggle
+            pressed={isTableView}
+            onPressedChange={handleViewChange}
+            className="size-[36px] bg-white data-[state=on]:bg-gradient-to-r from-[#4772E6] to-[#8E54E9] rounded-lg border-[1px] border-[--black-20]"
+          >
+            {isTableView ? (
+              <ListIcon className="w-5 h-5" />
+            ) : (
+              <GridIcon className="w-5 h-5" />
+            )}
+          </Toggle>
+        </div>
         {screen < BREAKPOINT.LG && (
           <ParametersFilter
             formState={formState}
@@ -121,7 +146,7 @@ export const CatalogList: FC<CatalogListProps> = ({
           />
         )}
       </div>
-      <div className={styles.card__list}>
+      <div className={`${styles.card__list} ${isTableView && "!gap-1.5"}`}>
         {(formState.page !== 1 || !isLoading) &&
           channels?.map((card, index) => (
             <motion.div
@@ -131,17 +156,31 @@ export const CatalogList: FC<CatalogListProps> = ({
               custom={index % INTERSECTION_ELEMENTS.catalog}
               variants={PAGE_ANIMATION.animationUp}
             >
-              <CatalogCard
-                card={card}
-                AddToBasketBtn={AddToBasket}
-                FormatList={FormatList}
-                onChangeCard={onChangeCard}
-              />
+              {isTableView ? (
+                <SmallCatalogCard
+                  card={card}
+                  AddToBasketBtn={AddToBasket}
+                  FormatList={FormatList}
+                  onChangeCard={onChangeCard}
+                />
+              ) : (
+                <CatalogCard
+                  card={card}
+                  AddToBasketBtn={AddToBasket}
+                  FormatList={FormatList}
+                  onChangeCard={onChangeCard}
+                />
+              )}
             </motion.div>
           ))}
         {isLoading &&
           Array.from({ length: INTERSECTION_ELEMENTS.catalog }).map(
-            (_, index) => <SkeletonCatalogCard key={index} />,
+            (_, index) =>
+              isTableView ? (
+                <SkeletonSmallCatalogCard key={index} />
+              ) : (
+                <SkeletonCatalogCard key={index} />
+              ),
           )}
         {channels.length === 0 && !isLoading && (
           <div className={styles.icon}>

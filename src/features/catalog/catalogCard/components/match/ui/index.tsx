@@ -3,13 +3,23 @@ import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
 import matchAnimation from "/animated/match_lottie.gif";
 import { useEffect, useRef, useState } from "react";
+import { useWindowWidth } from "@shared/hooks";
 
-export const ChannelCardMatch = ({ match }: { match?: number }) => {
+interface ChannelCardMatchProps {
+  match?: number;
+  variant?: "default" | "compact";
+}
+
+export const ChannelCardMatch = ({
+  match,
+  variant = "default",
+}: ChannelCardMatchProps) => {
   const { t } = useTranslation();
   const [showDescription, setShowDescription] = useState(false);
   const descriptionRef = useRef<HTMLDivElement | null>(null);
   const circleRef = useRef<HTMLDivElement | null>(null);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
+  const screen = useWindowWidth();
 
   const handleClick = () => {
     setShowDescription(true);
@@ -37,9 +47,8 @@ export const ChannelCardMatch = ({ match }: { match?: number }) => {
   }, []);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [currentProgress, setCurrentProgress] = useState(0); // Текущий прогресс для анимации
+  const [currentProgress, setCurrentProgress] = useState(0);
 
-  // Выбор цвета в зависимости от значения match
   const getColor = (value: number) => {
     return value <= 25
       ? "#fe3430fc"
@@ -54,18 +63,17 @@ export const ChannelCardMatch = ({ match }: { match?: number }) => {
     let animationFrameId: number;
     const animateProgress = () => {
       if (currentProgress < match!) {
-        setCurrentProgress((prev) => Math.min(prev + 3, match!)); // Плавное увеличение прогресса
+        setCurrentProgress((prev) => Math.min(prev + 3, match!));
         animationFrameId = requestAnimationFrame(animateProgress);
       } else if (currentProgress > match!) {
-        // setCurrentProgress(match!);
         setCurrentProgress((prev) => Math.max(prev - 3, match!));
         animationFrameId = requestAnimationFrame(animateProgress);
       }
     };
 
-    animateProgress(); // Запуск анимации
+    animateProgress();
 
-    return () => cancelAnimationFrame(animationFrameId); // Очистка анимации при размонтировании
+    return () => cancelAnimationFrame(animationFrameId);
   }, [match]);
 
   useEffect(() => {
@@ -77,54 +85,63 @@ export const ChannelCardMatch = ({ match }: { match?: number }) => {
       const radius = 80;
       const startAngle = -Math.PI / 2;
       const endAngle = startAngle + (currentProgress / 100) * 2 * Math.PI;
-      const progressColor = getColor(currentProgress); // Цвет прогресса
+      const progressColor = getColor(currentProgress);
 
       if (context) {
-        // Очищаем canvas
         context.clearRect(0, 0, canvas.width, canvas.height);
 
-        // Рисуем задний круг
         context.beginPath();
         context.arc(centerX, centerY, radius, 0, 2 * Math.PI);
         context.strokeStyle = "#eee";
         context.lineWidth = 10;
         context.stroke();
 
-        // Рисуем круг прогресса
         context.beginPath();
         context.arc(centerX, centerY, radius, startAngle, endAngle);
-        context.strokeStyle = progressColor; // Применяем динамический цвет
+        context.strokeStyle = progressColor;
         context.lineWidth = 10;
         context.lineCap = "round";
         context.stroke();
 
-        // Рисуем текст с процентом
         context.fillStyle = "#000";
-        // context.font =
-        //   screen > BREAKPOINT.SM ? "30px TT Runs Trial" : "24px TT Runs Trial";
-        context.font = "30px TT Runs Trial";
+        const fontSize = 30;
+        context.font = `${fontSize}px TT Runs Trial`;
+        const textOffset = currentProgress === 100 ? 50 : 35;
+
         context.fillText(
           `${currentProgress}%`,
-          centerX - (match! === 100 ? 50 : 35),
+          centerX - textOffset,
           centerY + 10,
         );
       }
     }
-  }, [currentProgress]);
+  }, [currentProgress, variant, screen]);
+
+  const canvasSize = 170;
 
   return (
-    <div className={styles.column__cross}>
-      <p>{t("platform.cross")}</p>
+    <div
+      className={`${styles.column__cross} ${variant === "compact" ? styles.compact : ""}`}
+    >
+      <p className="mobile-xl:block hidden">{t("platform.cross")}</p>
       <div
         ref={circleRef}
-        className={`${styles.circle} ${!match && styles.no_match}`}
+        className={`${styles.circle} ${!match && styles.no_match} ${variant === "compact" ? styles.compact : ""}`}
         onClick={handleClick}
       >
         {match ? (
-          <canvas ref={canvasRef} width={170} height={170}></canvas>
+          <canvas
+            ref={canvasRef}
+            width={canvasSize}
+            height={canvasSize}
+          ></canvas>
         ) : (
           <span>
-            <CircleHelp width={20} height={20} stroke="#bbb" />
+            <CircleHelp
+              width={variant === "compact" ? 16 : 20}
+              height={variant === "compact" ? 16 : 20}
+              stroke="#bbb"
+            />
           </span>
         )}
       </div>
