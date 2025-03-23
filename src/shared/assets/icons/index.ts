@@ -111,3 +111,5 @@ export { LocationIcon } from "./location";
 export { LineInstagramIcon } from "./line_inst";
 export { LineTelegramIcon } from "./line_tg";
 export { PlusIcon } from "./plus";
+export { ListIcon } from "./list";
+export { GridIcon } from "./grid";
