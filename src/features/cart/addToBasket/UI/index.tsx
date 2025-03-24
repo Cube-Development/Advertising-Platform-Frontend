@@ -27,7 +27,7 @@ export const AddToBasket: FC<IAddToBasketProps> = ({
               ? "button__yellow"
               : "button__green"
         }
-        className="mobile-xl:px-3 mobile-xl:py-2 p-1 mobile-xl:rounded-[7px] rounded-[5px] mobile-xl:w-[150px] mobile:w-[120px] w-[100px] !justify-items-end !justify-end"
+        className="mobile-xl:px-3 mobile-xl:py-2 p-1 mobile-xl:rounded-[7px] rounded-[5px] mobile-xl:w-[150px] mobile:w-[120px] w-[110px] !justify-items-end !justify-end !shadow-none"
         onClick={changeCard}
       >
         <div className="grid grid-flow-row items-center justify-end justify-items-end gap-1">

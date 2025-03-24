@@ -73,7 +73,7 @@ export const FormatList: FC<IFormatListProps> = ({
         </div>
 
         {isMenuOpen && (
-          <div className={`${styles.menu} ${styles.small_menu} show !mt-0`}>
+          <div className={`${styles.menu} show !mt-0 w-fit`}>
             <ul>
               {card.format.map((format) => (
                 <li

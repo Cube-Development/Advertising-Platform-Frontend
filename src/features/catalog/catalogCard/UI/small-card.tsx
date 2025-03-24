@@ -74,10 +74,10 @@ export const SmallCatalogCard: FC<SmallCatalogCardProps> = ({
         </div>
 
         {/* Название и категория */}
-        <div className="flex flex-col mobile-xl:gap-1 gap-0.5 min-w-0">
+        <div className="flex flex-col justify-around h-full mobile-xl:gap-1 gap-0.5 min-w-0">
           <Link
             to={`${paths.channel.replace(":id", card?.id)}`}
-            className="text-[--Personal-colors-main] font-semibold xl:text-sm mobile-xl:text-xs text-[10px] truncate"
+            className="text-[--Personal-colors-main] font-semibold xl:text-sm mobile-xl:text-xs text-[10px] truncate leading-none"
           >
             {card?.name}
           </Link>
@@ -101,7 +101,7 @@ export const SmallCatalogCard: FC<SmallCatalogCardProps> = ({
                 })}
             </div>
           )}
-          <p className="text-[--Subtitle-text] xl:text-xs mobile-xl:text-[10px] text-[8px] font-medium truncate">
+          <p className="text-[--Subtitle-text] xl:text-xs mobile-xl:text-[10px] text-[8px] mobile-xl:font-medium font-semibold truncate leading-none">
             {card?.category}
           </p>
         </div>
@@ -117,7 +117,7 @@ export const SmallCatalogCard: FC<SmallCatalogCardProps> = ({
             </span>
           </div>
           <div
-            className="colorline mobile-xl:mt-3 mt-1"
+            className="colorline mobile-xl:!mt-3 !mt-2 mobile-xl:[&::before]:bottom-[4px] mobile-xl:[&::after]:bottom-[4px] [&::before]:bottom-[3px] [&::after]:bottom-[3px]"
             style={{ "--male": `${card?.male}%` } as React.CSSProperties}
             data-male={`${card?.male}%`}
             data-female={`${card?.female}%`}
