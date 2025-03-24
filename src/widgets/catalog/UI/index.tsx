@@ -18,6 +18,7 @@ import {
   useRemoveFromCommonCartMutation,
   useRemoveFromManagerCartMutation,
   useRemoveFromPublicCartMutation,
+  setFormState,
 } from "@entities/project";
 import { GenerateGuestId, roles, useFindLanguage } from "@entities/user";
 import {
@@ -41,6 +42,9 @@ export const CatalogBlock: FC = () => {
   const { toast } = useToast();
   const screen = useWindowWidth();
   const { isAuth, role } = useAppSelector((state) => state.user);
+  const savedFormState = useAppSelector(
+    (state) => state.catalogFilter.formState,
+  );
   const userId = Cookies.get(cookiesTypes.userId);
   const guestId = Cookies.get(cookiesTypes.guestId) || GenerateGuestId();
   const projectId = Cookies.get(cookiesTypes.projectId);
@@ -54,19 +58,27 @@ export const CatalogBlock: FC = () => {
   const { watch, reset, setValue, resetField } = useForm<getCatalogReq>({
     defaultValues: {
       page: 1,
-      elements_on_page: INTERSECTION_ELEMENTS.catalog,
-      filter: {
+      elements_on_page:
+        savedFormState?.elements_on_page || INTERSECTION_ELEMENTS.catalog,
+      filter: savedFormState?.filter || {
         platform: platformTypesNum.telegram,
         business: [],
         age: [],
         language: [],
         region: [],
       },
-      sort: sortingTypes[0].type,
+      sort: savedFormState?.sort || sortingTypes[0].type,
     },
   });
 
   const formState = watch();
+
+  useEffect(() => {
+    const { ...stateToSave } = formState;
+    if (JSON.stringify(stateToSave) !== JSON.stringify(savedFormState)) {
+      dispatch(setFormState(stateToSave));
+    }
+  }, [formState, savedFormState, dispatch]);
 
   const setValueWithPage = (key: any, value: any) => {
     setValue(channelParameterData.page, 1);

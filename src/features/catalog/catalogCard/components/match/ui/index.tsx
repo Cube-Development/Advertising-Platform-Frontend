@@ -4,6 +4,8 @@ import { useTranslation } from "react-i18next";
 import matchAnimation from "/animated/match_lottie.gif";
 import { useEffect, useRef, useState } from "react";
 import { useWindowWidth } from "@shared/hooks";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@shared/ui/shadcn-ui";
+import { BREAKPOINT } from "@shared/config";
 
 interface ChannelCardMatchProps {
   match?: number;
@@ -15,36 +17,8 @@ export const ChannelCardMatch = ({
   variant = "default",
 }: ChannelCardMatchProps) => {
   const { t } = useTranslation();
-  const [showDescription, setShowDescription] = useState(false);
-  const descriptionRef = useRef<HTMLDivElement | null>(null);
-  const circleRef = useRef<HTMLDivElement | null>(null);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
   const screen = useWindowWidth();
-
-  const handleClick = () => {
-    setShowDescription(true);
-    if (timerRef.current) clearTimeout(timerRef.current);
-    timerRef.current = setTimeout(() => setShowDescription(false), 3000);
-  };
-
-  const handleClickOutside = (event: MouseEvent) => {
-    if (
-      descriptionRef.current &&
-      !descriptionRef.current.contains(event.target as Node) &&
-      circleRef.current &&
-      !circleRef.current.contains(event.target as Node)
-    ) {
-      setShowDescription(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-      if (timerRef.current) clearTimeout(timerRef.current);
-    };
-  }, []);
+  const [open, setOpen] = useState(false);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [currentProgress, setCurrentProgress] = useState(0);
@@ -124,40 +98,46 @@ export const ChannelCardMatch = ({
       className={`${styles.column__cross} ${variant === "compact" ? styles.compact : ""}`}
     >
       <p className="mobile-xl:block hidden">{t("platform.cross")}</p>
-      <div
-        ref={circleRef}
-        className={`${styles.circle} ${!match && styles.no_match} ${variant === "compact" ? styles.compact : ""}`}
-        onClick={handleClick}
-      >
-        {match ? (
-          <canvas
-            ref={canvasRef}
-            width={canvasSize}
-            height={canvasSize}
-          ></canvas>
-        ) : (
-          <span>
-            <CircleHelp
-              width={variant === "compact" ? 16 : 20}
-              height={variant === "compact" ? 16 : 20}
-              stroke="#bbb"
+      <Tooltip open={open}>
+        <TooltipTrigger
+          type="button"
+          className={`${styles.circle} ${!match && styles.no_match} ${variant === "compact" ? styles.compact : ""}`}
+          onClick={() => setOpen(!open)}
+          onMouseEnter={() => setOpen(true)}
+          onMouseLeave={() => setOpen(false)}
+        >
+          {match ? (
+            <canvas
+              ref={canvasRef}
+              width={canvasSize}
+              height={canvasSize}
+            ></canvas>
+          ) : (
+            <span>
+              <CircleHelp
+                width={variant === "compact" ? 16 : 20}
+                height={variant === "compact" ? 16 : 20}
+                stroke="#bbb"
+              />
+            </span>
+          )}
+        </TooltipTrigger>
+        <TooltipContent
+          side={`${screen > BREAKPOINT.MD ? "right" : "top"}`}
+          className={styles.match_description}
+        >
+          <div className="grid grid-cols-[40px,1fr] items-center justify-start gap-2">
+            <img
+              src={matchAnimation}
+              alt="isLoading..."
+              className="w-10 h-10"
             />
-          </span>
-        )}
-      </div>
-      <div
-        ref={descriptionRef}
-        className={`${styles.match_description} ${
-          showDescription ? styles.visible : ""
-        }`}
-      >
-        <img
-          src={matchAnimation}
-          alt="isLoading..."
-          className={styles.loading__icon}
-        />
-        <p>{t("platform.match_description")}</p>
-      </div>
+            <p className="!text-[#8e54e9] mobile-xl:!text-[10px] !text-[9px] mobile-xl:!leading-4 !leading-2 mobile-xl:!text-center !text-start">
+              {t("platform.match_description")}
+            </p>
+          </div>
+        </TooltipContent>
+      </Tooltip>
     </div>
   );
 };
