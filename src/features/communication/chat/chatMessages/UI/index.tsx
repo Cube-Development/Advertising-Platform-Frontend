@@ -90,7 +90,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
   const formFields = watch();
 
   const debouncedPosition = useDebounce(
-    lastMessageToRead?.message_date + " " + lastMessageToRead?.message_time,
+    lastMessageToRead?.created_date + " " + lastMessageToRead?.created_time,
     DEBOUNCE.readMessage,
   );
 
@@ -205,8 +205,8 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
   const handlePaginationHistory = () => {
     if (data?.history) {
       const topMessage = data?.history[0];
-      setValue("message_date", topMessage?.message_date);
-      setValue("message_time", topMessage?.message_time);
+      setValue("created_date", topMessage?.created_date);
+      setValue("created_time", topMessage?.created_time);
 
       if (containerRef.current) {
         previousScrollHeightRef.current = containerRef.current.scrollHeight;
@@ -226,14 +226,14 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
   const handleNewMessage = (message: IMessageNewSocket) => {
     if (message?.recipient === RecipientType.receiver) {
       const datetime = convertUTCToLocalDateTime(
-        message?.message_date,
-        message?.message_time,
+        message?.created_date,
+        message?.created_time,
       );
       const newMessage: IMessageNewSocket = {
         ...message,
         formatted_date: datetime.localDate,
         formatted_time: datetime.localTime,
-        message_datetime: message.message_date + " " + message.message_time,
+        message_datetime: message.created_date + " " + message.created_time,
       };
       const newHistory = {
         ...data,
@@ -307,8 +307,8 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
         recipient: RecipientType.sender,
         formatted_date: datetime.localDate,
         formatted_time: datetime.localTime,
-        message_date: datetime.utcDate,
-        message_time: datetime.utcTime,
+        created_date: datetime.utcDate,
+        created_time: datetime.utcTime,
         message_datetime: datetime.utcDate + " " + datetime.utcTime,
         status: MessageStatus.unread,
       };
@@ -356,7 +356,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
     ) {
       readOrderMessage({
         order_id: message?.order_id,
-        message_datetime: message?.message_date + " " + message?.message_time,
+        message_datetime: message?.created_date + " " + message?.created_time,
       })
         .unwrap()
         .then(() => {
@@ -417,7 +417,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
     ) {
       readProjectMessage({
         project_id: message?.project_id,
-        message_datetime: message?.message_date + " " + message?.message_time,
+        message_datetime: message?.created_date + " " + message?.created_time,
       })
         .unwrap()
         .then(() => {
@@ -670,8 +670,8 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
                     ref={(el) => (itemRefs.current[index] = el)}
                     className={styles.messages_wrapper}
                   >
-                    {message?.message_date !== currentDate &&
-                      ((currentDate = message?.message_date),
+                    {message?.created_date !== currentDate &&
+                      ((currentDate = message?.created_date),
                       (
                         <div
                           //  data-date={""}

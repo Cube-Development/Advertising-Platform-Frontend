@@ -187,7 +187,7 @@ export const Chat: FC<IChatProps> = ({
       formatted_date: datetime.localDate,
       formatted_time: datetime.localTime,
       last_message: message?.message,
-      message_datetime: message.message_date + " " + message.message_time,
+      message_datetime: message.created_date + " " + message.created_time,
     };
     if (message?.order_id && chatsOrder) {
       checkOrderExist(message?.order_id);
@@ -273,7 +273,7 @@ export const Chat: FC<IChatProps> = ({
   };
 
   const handleReadMessage = (message: IMessageNewSocket) => {
-    const datetime = message?.message_date + " " + message?.message_time;
+    const datetime = message?.created_date + " " + message?.created_time;
     if (message?.order_id) {
       dispatch(
         chatAPI.util.updateQueryData(

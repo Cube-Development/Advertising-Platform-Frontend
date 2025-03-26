@@ -36,8 +36,8 @@ export const NotificationCard: FC<NotificationCardProps> = ({ card }) => {
         <span className={styles.text}>{stripHtml(card?.text || "")}</span>
       </div>
       <div className={styles.info}>
-        <span>{card?.created_date}</span>
-        <span>{card?.created_time}</span>
+        <span>{card?.formatted_date}</span>
+        <span>{card?.formatted_time}</span>
       </div>
     </div>
   );
