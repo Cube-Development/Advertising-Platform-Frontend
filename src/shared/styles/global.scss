@@ -319,39 +319,25 @@ main {
     var(--color-sex-man) var(--male),
     var(--color-sex-woman) var(--male) 100%
   );
+  position: relative;
 
   &::before {
     content: attr(data-male);
-    background-size: contain;
-    background-repeat: no-repeat;
-    bottom: 8px;
-    overflow: hidden;
-    position: relative;
-
+    position: absolute;
+    left: 0;
+    bottom: 6px;
     color: var(--Subtitle-text);
     font-size: 8px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
-    margin-right: 12px;
-
-    @media (max-width: 992px) {
-      margin-right: 250px;
-    }
-
-    @media (max-width: 576px) {
-      margin-right: 100px;
-    }
   }
 
   &::after {
     content: attr(data-female);
-    background-size: contain;
-    background-repeat: no-repeat;
-    bottom: 8px;
-    overflow: hidden;
-    position: relative;
-
+    position: absolute;
+    right: 0;
+    bottom: 6px;
     color: var(--Subtitle-text);
     font-size: 8px;
     font-style: normal;

@@ -1,4 +1,3 @@
-import { channelParameterData } from "@entities/channel";
 import { platformTypesNum } from "@entities/platform";
 import {
   catalogAPI,
@@ -18,6 +17,7 @@ import {
   useRemoveFromCommonCartMutation,
   useRemoveFromManagerCartMutation,
   useRemoveFromPublicCartMutation,
+  setFormState,
 } from "@entities/project";
 import { GenerateGuestId, roles, useFindLanguage } from "@entities/user";
 import {
@@ -30,7 +30,7 @@ import { useAppDispatch, useAppSelector, useWindowWidth } from "@shared/hooks";
 import { ToastAction, useToast } from "@shared/ui";
 import Cookies from "js-cookie";
 import { FC, useEffect, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { CatalogCart, CatalogList, CatalogSearch } from "../components";
 import styles from "./styles.module.scss";
@@ -41,6 +41,9 @@ export const CatalogBlock: FC = () => {
   const { toast } = useToast();
   const screen = useWindowWidth();
   const { isAuth, role } = useAppSelector((state) => state.user);
+  const savedFormState = useAppSelector(
+    (state) => state.catalogFilter.formState,
+  );
   const userId = Cookies.get(cookiesTypes.userId);
   const guestId = Cookies.get(cookiesTypes.guestId) || GenerateGuestId();
   const projectId = Cookies.get(cookiesTypes.projectId);
@@ -53,24 +56,34 @@ export const CatalogBlock: FC = () => {
 
   const { watch, reset, setValue, resetField } = useForm<getCatalogReq>({
     defaultValues: {
-      page: 1,
-      elements_on_page: INTERSECTION_ELEMENTS.catalog,
-      filter: {
+      page: savedFormState?.page || 1,
+      elements_on_page:
+        savedFormState?.elements_on_page || INTERSECTION_ELEMENTS.catalog,
+      filter: savedFormState?.filter || {
         platform: platformTypesNum.telegram,
         business: [],
         age: [],
         language: [],
         region: [],
       },
-      sort: sortingTypes[0].type,
+      sort: savedFormState?.sort || sortingTypes[0].type,
     },
   });
 
   const formState = watch();
 
-  const setValueWithPage = (key: any, value: any) => {
-    setValue(channelParameterData.page, 1);
-    setValue(key, value);
+  useEffect(() => {
+    const { ...stateToSave } = formState;
+    if (JSON.stringify(stateToSave) !== JSON.stringify(savedFormState)) {
+      dispatch(setFormState(stateToSave));
+    }
+  }, [formState, savedFormState, dispatch]);
+
+  const setValueWithPage: UseFormSetValue<getCatalogReq> = (name, value) => {
+    if (name === "filter" || name === "sort" || name === "search_string") {
+      setValue("page", 1);
+    }
+    setValue(name, value);
   };
 
   const { data: catalogAuth, isFetching: isCatalogAuthLoading } =
@@ -104,6 +117,67 @@ export const CatalogBlock: FC = () => {
       },
       { skip: isAuth || !guestId },
     );
+
+  const [prevParams, setPrevParams] = useState({
+    filter: formState.filter,
+    sort: formState.sort,
+    search_string: formState.search_string,
+  });
+
+  const [isFirstRender, setIsFirstRender] = useState(true);
+
+  // Устанавливаем сохраненную страницу при первом рендере
+  useEffect(() => {
+    if (isFirstRender && savedFormState?.page) {
+      setValue("page", savedFormState.page);
+      setIsFirstRender(false);
+    }
+  }, []);
+
+  // Синхронизация страницы в форме с количеством загруженных данных
+  useEffect(() => {
+    const currentData =
+      isAuth && role === roles.advertiser
+        ? catalogAuth
+        : isAuth && role === roles.manager
+          ? catalogManager
+          : catalogPublic;
+
+    const isParamsChanged =
+      JSON.stringify(prevParams.filter) !== JSON.stringify(formState.filter) ||
+      prevParams.sort !== formState.sort ||
+      prevParams.search_string !== formState.search_string;
+
+    // Обновляем предыдущие параметры
+    if (isParamsChanged) {
+      setPrevParams({
+        filter: formState.filter,
+        sort: formState.sort,
+        search_string: formState.search_string,
+      });
+    }
+
+    // Синхронизируем страницу только если параметры НЕ менялись и это не первый рендер
+    if (currentData?.channels?.length && !isParamsChanged && !isFirstRender) {
+      const currentPage = Math.ceil(
+        currentData.channels.length / INTERSECTION_ELEMENTS.catalog,
+      );
+      if (currentPage > formState.page) {
+        setValue("page", currentPage);
+      }
+    }
+  }, [
+    catalogAuth?.channels?.length,
+    catalogManager?.channels?.length,
+    catalogPublic?.channels?.length,
+    isAuth,
+    role,
+    formState.page,
+    formState.filter,
+    formState.sort,
+    formState.search_string,
+    isFirstRender,
+  ]);
 
   const { data: cart } = useReadCommonCartQuery(
     { language: language?.id || Languages[0].id },
@@ -394,7 +468,6 @@ export const CatalogBlock: FC = () => {
     }
   }, [formState?.filter]);
 
-  console.log("render catalog", catalogAuth);
   return (
     <div className="container">
       <div className={`${styles.wrapper}`}>

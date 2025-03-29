@@ -14,10 +14,15 @@ module.exports = {
       padding: "2rem",
       screens: {
         "2xl": "1400px",
-        'md-max': {'max': '992px'},
+        'md-max': { 'max': '992px' },
       },
     },
     extend: {
+      screens: {
+        "mobile-xl": "576px",
+        mobile: "450px",
+        "mobile-xs": "375px",
+      },
       keyframes: {
         "accordion-down": {
           from: { height: "0" },

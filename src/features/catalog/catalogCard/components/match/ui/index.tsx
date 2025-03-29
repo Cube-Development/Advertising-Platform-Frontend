@@ -3,43 +3,26 @@ import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
 import matchAnimation from "/animated/match_lottie.gif";
 import { useEffect, useRef, useState } from "react";
+import { useWindowWidth } from "@shared/hooks";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@shared/ui/shadcn-ui";
+import { BREAKPOINT } from "@shared/config";
 
-export const ChannelCardMatch = ({ match }: { match?: number }) => {
+interface ChannelCardMatchProps {
+  match?: number;
+  variant?: "default" | "compact";
+}
+
+export const ChannelCardMatch = ({
+  match,
+  variant = "default",
+}: ChannelCardMatchProps) => {
   const { t } = useTranslation();
-  const [showDescription, setShowDescription] = useState(false);
-  const descriptionRef = useRef<HTMLDivElement | null>(null);
-  const circleRef = useRef<HTMLDivElement | null>(null);
-  const timerRef = useRef<NodeJS.Timeout | null>(null);
-
-  const handleClick = () => {
-    setShowDescription(true);
-    if (timerRef.current) clearTimeout(timerRef.current);
-    timerRef.current = setTimeout(() => setShowDescription(false), 3000);
-  };
-
-  const handleClickOutside = (event: MouseEvent) => {
-    if (
-      descriptionRef.current &&
-      !descriptionRef.current.contains(event.target as Node) &&
-      circleRef.current &&
-      !circleRef.current.contains(event.target as Node)
-    ) {
-      setShowDescription(false);
-    }
-  };
-
-  useEffect(() => {
-    document.addEventListener("click", handleClickOutside);
-    return () => {
-      document.removeEventListener("click", handleClickOutside);
-      if (timerRef.current) clearTimeout(timerRef.current);
-    };
-  }, []);
+  const screen = useWindowWidth();
+  const [open, setOpen] = useState(false);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
-  const [currentProgress, setCurrentProgress] = useState(0); // Текущий прогресс для анимации
+  const [currentProgress, setCurrentProgress] = useState(0);
 
-  // Выбор цвета в зависимости от значения match
   const getColor = (value: number) => {
     return value <= 25
       ? "#fe3430fc"
@@ -54,18 +37,17 @@ export const ChannelCardMatch = ({ match }: { match?: number }) => {
     let animationFrameId: number;
     const animateProgress = () => {
       if (currentProgress < match!) {
-        setCurrentProgress((prev) => Math.min(prev + 3, match!)); // Плавное увеличение прогресса
+        setCurrentProgress((prev) => Math.min(prev + 3, match!));
         animationFrameId = requestAnimationFrame(animateProgress);
       } else if (currentProgress > match!) {
-        // setCurrentProgress(match!);
         setCurrentProgress((prev) => Math.max(prev - 3, match!));
         animationFrameId = requestAnimationFrame(animateProgress);
       }
     };
 
-    animateProgress(); // Запуск анимации
+    animateProgress();
 
-    return () => cancelAnimationFrame(animationFrameId); // Очистка анимации при размонтировании
+    return () => cancelAnimationFrame(animationFrameId);
   }, [match]);
 
   useEffect(() => {
@@ -77,70 +59,85 @@ export const ChannelCardMatch = ({ match }: { match?: number }) => {
       const radius = 80;
       const startAngle = -Math.PI / 2;
       const endAngle = startAngle + (currentProgress / 100) * 2 * Math.PI;
-      const progressColor = getColor(currentProgress); // Цвет прогресса
+      const progressColor = getColor(currentProgress);
 
       if (context) {
-        // Очищаем canvas
         context.clearRect(0, 0, canvas.width, canvas.height);
 
-        // Рисуем задний круг
         context.beginPath();
         context.arc(centerX, centerY, radius, 0, 2 * Math.PI);
         context.strokeStyle = "#eee";
         context.lineWidth = 10;
         context.stroke();
 
-        // Рисуем круг прогресса
         context.beginPath();
         context.arc(centerX, centerY, radius, startAngle, endAngle);
-        context.strokeStyle = progressColor; // Применяем динамический цвет
+        context.strokeStyle = progressColor;
         context.lineWidth = 10;
         context.lineCap = "round";
         context.stroke();
 
-        // Рисуем текст с процентом
         context.fillStyle = "#000";
-        // context.font =
-        //   screen > BREAKPOINT.SM ? "30px TT Runs Trial" : "24px TT Runs Trial";
-        context.font = "30px TT Runs Trial";
+        const fontSize = 30;
+        context.font = `${fontSize}px TT Runs Trial`;
+        const textOffset = currentProgress === 100 ? 50 : 35;
+
         context.fillText(
           `${currentProgress}%`,
-          centerX - (match! === 100 ? 50 : 35),
+          centerX - textOffset,
           centerY + 10,
         );
       }
     }
-  }, [currentProgress]);
+  }, [currentProgress, variant, screen]);
+
+  const canvasSize = 170;
 
   return (
-    <div className={styles.column__cross}>
-      <p>{t("platform.cross")}</p>
-      <div
-        ref={circleRef}
-        className={`${styles.circle} ${!match && styles.no_match}`}
-        onClick={handleClick}
-      >
-        {match ? (
-          <canvas ref={canvasRef} width={170} height={170}></canvas>
-        ) : (
-          <span>
-            <CircleHelp width={20} height={20} stroke="#bbb" />
-          </span>
-        )}
-      </div>
-      <div
-        ref={descriptionRef}
-        className={`${styles.match_description} ${
-          showDescription ? styles.visible : ""
-        }`}
-      >
-        <img
-          src={matchAnimation}
-          alt="isLoading..."
-          className={styles.loading__icon}
-        />
-        <p>{t("platform.match_description")}</p>
-      </div>
+    <div
+      className={`${styles.column__cross} ${variant === "compact" ? styles.compact : ""}`}
+    >
+      <p className="mobile-xl:block hidden">{t("platform.cross")}</p>
+      <Tooltip open={open}>
+        <TooltipTrigger
+          type="button"
+          className={`${styles.circle} ${!match && styles.no_match} ${variant === "compact" ? styles.compact : ""}`}
+          onClick={() => setOpen(!open)}
+          onMouseEnter={() => setOpen(true)}
+          onMouseLeave={() => setOpen(false)}
+        >
+          {match ? (
+            <canvas
+              ref={canvasRef}
+              width={canvasSize}
+              height={canvasSize}
+            ></canvas>
+          ) : (
+            <span>
+              <CircleHelp
+                width={variant === "compact" ? 16 : 20}
+                height={variant === "compact" ? 16 : 20}
+                stroke="#bbb"
+              />
+            </span>
+          )}
+        </TooltipTrigger>
+        <TooltipContent
+          side={`${screen > BREAKPOINT.MD ? "right" : "top"}`}
+          className={styles.match_description}
+        >
+          <div className="grid grid-cols-[40px,1fr] items-center justify-start gap-2">
+            <img
+              src={matchAnimation}
+              alt="isLoading..."
+              className="w-10 h-10"
+            />
+            <p className="!text-[#8e54e9] mobile-xl:!text-[10px] !text-[9px] mobile-xl:!leading-4 !leading-2 mobile-xl:!text-center !text-start">
+              {t("platform.match_description")}
+            </p>
+          </div>
+        </TooltipContent>
+      </Tooltip>
     </div>
   );
 };

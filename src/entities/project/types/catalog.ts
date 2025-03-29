@@ -72,6 +72,7 @@ export interface IFormatListProps {
   card: ICatalogChannel;
   isSmall?: boolean;
   isBig?: boolean;
+  isSmallCatalogCard?: boolean;
 }
 
 interface Components {
@@ -81,7 +82,9 @@ interface Components {
   card: ICatalogChannel;
 }
 
-export interface IAddToBasketProps extends IFormatListProps, Components {}
+export interface IAddToBasketProps extends IFormatListProps, Components {
+  isSmallCatalogCard?: boolean;
+}
 
 export interface ICatalogCard extends IChangeCards, Components {
   AddToBasketBtn: FC<IAddToBasketProps>;
