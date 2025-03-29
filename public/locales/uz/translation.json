@@ -927,7 +927,7 @@
       "link": {
         "title": "Havolani kiriting",
         "text": "Kanal havolasini kerakli formatda kiriting",
-        "requerd": "Kanal havolasini kiriting",
+        "required": "Kanal havolasini kiriting",
         "invalid": "Havola yaroqsiz"
       }
     },

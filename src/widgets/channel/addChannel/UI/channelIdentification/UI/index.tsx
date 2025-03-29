@@ -1,8 +1,9 @@
 import {
+  channelStatus,
   IAddChannelData,
   IAddChannelIdentification,
   IChannelLink,
-  IIndetificationParams,
+  IIdentificationParams,
   useChannelVerifyMutation,
   useCreateCodeQuery,
 } from "@entities/channel";
@@ -26,10 +27,10 @@ interface ChannelIdentificationProps {
   defaultValue: string | undefined;
   variant: typeof PAGE_ANIMATION.animationLeft;
   isEdit: boolean;
-  indetificationParams: IIndetificationParams;
+  identificationParams: IIdentificationParams;
   setValue: UseFormSetValue<IAddChannelData>;
   onChangeStep: (newStep: number) => void;
-  setIndetificationParams: (params: IIndetificationParams) => void;
+  setIdentificationParams: (params: IIdentificationParams) => void;
 }
 
 export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
@@ -37,10 +38,10 @@ export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
   defaultValue,
   variant,
   isEdit,
-  indetificationParams,
+  identificationParams,
   setValue,
   onChangeStep,
-  setIndetificationParams,
+  setIdentificationParams,
 }) => {
   const { toast } = useToast();
   const { t } = useTranslation();
@@ -52,7 +53,7 @@ export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
   } = useForm<IAddChannelIdentification>();
 
   const { data: code } = useCreateCodeQuery("", {
-    skip: isEdit || indetificationParams.link ? true : undefined,
+    skip: isEdit || identificationParams.link ? true : undefined,
   });
 
   const [channelVerify, { isLoading, error, isSuccess }] =
@@ -61,15 +62,15 @@ export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
   const onSubmit: SubmitHandler<IAddChannelIdentification> = (data) => {
     if (isEdit) {
       onChangeStep(2);
-    } else if (code && !indetificationParams.link) {
+    } else if (code && !identificationParams.link) {
       if (isLoading) return;
       const formData = {
         ...data,
-        platform: indetificationParams.platform.id,
+        platform: identificationParams.platform.id,
         verification_code: code.verification_code,
       };
       const newPlatform = {
-        ...indetificationParams,
+        ...identificationParams,
         link: formData.url,
         checked: true,
       };
@@ -78,7 +79,7 @@ export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
         .then((data) => {
           setValue("insertion_code", data.insertion_code);
           onChangeStep(2);
-          setIndetificationParams(newPlatform);
+          setIdentificationParams(newPlatform);
           toast({
             variant: "success",
             title: t("toasts.add_platform.link.success"),
@@ -86,25 +87,44 @@ export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
         })
         .catch((error) => {
           if (error.status === 400) {
+            let text = "toasts.add_platform.link.alert";
+            if (error?.data?.code === channelStatus.moderation) {
+              text = "toasts.add_platform.link.channelStatus.moderation";
+            } else if (error?.data?.code === channelStatus.active) {
+              text = "toasts.add_platform.link.channelStatus.active";
+            } else if (error?.data?.code === channelStatus.inactive) {
+              text = "toasts.add_platform.link.channelStatus.inactive";
+            } else if (error?.data?.code === channelStatus.banned) {
+              text = "toasts.add_platform.link.channelStatus.banned";
+            } else if (error?.data?.code === channelStatus.moderationReject) {
+              text = "toasts.add_platform.link.channelStatus.moderationReject";
+            } else if (error?.data?.code === channelStatus.remoderation) {
+              text = "toasts.add_platform.link.channelStatus.remoderation";
+            } else if (error?.data?.code === channelStatus.invalidUrl) {
+              text = "toasts.add_platform.link.channelStatus.invalidUrl";
+            } else {
+              text = "toasts.add_platform.link.alert";
+            }
             toast({
               variant: "error",
-              title: t("toasts.add_platform.link.alert"),
+              title: t(text),
             });
           } else {
+            let text = "toasts.add_platform.link.error";
             toast({
               variant: "error",
-              title: t("toasts.add_platform.link.error"),
+              title: t(text),
             });
           }
         });
-    } else if (indetificationParams.link) {
+    } else if (identificationParams.link) {
       onChangeStep(2);
     }
   };
 
   const changePlatform = (platform: IChannelLink) => {
-    const newPlatform = { ...indetificationParams, platform: platform };
-    setIndetificationParams(newPlatform);
+    const newPlatform = { ...identificationParams, platform: platform };
+    setIdentificationParams(newPlatform);
     reset();
   };
 
@@ -145,9 +165,9 @@ export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
                     <MyButton
                       key={index}
                       type="button"
-                      className={`${styles.platform__btn} ${indetificationParams.platform.type === platform.type ? styles.active : ""}`}
+                      className={`${styles.platform__btn} ${identificationParams.platform.type === platform.type ? styles.active : ""}`}
                       onClick={() => changePlatform(platform)}
-                      disabled={indetificationParams.checked || isEdit}
+                      disabled={identificationParams.checked || isEdit}
                     >
                       {t(platform.name)}
                     </MyButton>
@@ -168,7 +188,7 @@ export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
                       ? {}
                       : register("url", {
                           required: t(
-                            "add_platform.identification.link.requerd",
+                            "add_platform.identification.link.required",
                           ),
                           validate: {
                             validURL: (value) =>
@@ -179,12 +199,12 @@ export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
                     placeholder={
                       errors["url"]
                         ? errors["url"].message
-                        : t(indetificationParams.platform.default_value)
+                        : t(identificationParams.platform.default_value)
                     }
                     className={`${styles.platform__input} ${errors["url"] && styles.form_error}`}
                     onChange={handleChangeLink}
                     value={text}
-                    disabled={indetificationParams.checked || isEdit}
+                    disabled={identificationParams.checked || isEdit}
                   />
                 </div>
               </div>

@@ -927,7 +927,7 @@
       "link": {
         "title": "Enter the Link",
         "text": "Provide a link to your channel, ensuring the correct format.",
-        "requerd": "Enter the channel link",
+        "required": "Enter the channel link",
         "invalid": "Invalid link"
       }
     },
