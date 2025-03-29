@@ -60,7 +60,12 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
   const { t } = useTranslation();
   return (
     <div
-      className={`${styles.card} ${typeFilter === projectTypesFilter.managerProject && statusFilter !== advManagerProjectStatusFilter.completed ? styles.manager_chat : ""} ${
+      className={`${styles.card} ${
+        typeFilter === projectTypesFilter.managerProject
+          ? //  && statusFilter !== advManagerProjectStatusFilter.completed
+            styles.manager_chat
+          : ""
+      } ${
         typeFilter === projectTypesFilter.managerProject &&
         statusFilter === advManagerProjectStatusFilter.completed
           ? styles.card__manager_completed
@@ -86,12 +91,12 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
           </p>
         </div>
       </div>
-      {typeFilter === projectTypesFilter.managerProject &&
-        statusFilter !== advManagerProjectStatusFilter.completed && (
-          <div className={`${styles.chat__btn} display__hide__min__md`}>
-            <Chat projectId={card?.id} toRole={roles.manager} />
-          </div>
-        )}
+      {typeFilter === projectTypesFilter.managerProject && (
+        // statusFilter !== advManagerProjectStatusFilter.completed &&
+        <div className={`${styles.chat__btn} display__hide__min__md`}>
+          <Chat projectId={card?.id} toRole={roles.manager} />
+        </div>
+      )}
       <div className={styles.card__info}>
         <div className={styles.card__info__data}>
           <div>
@@ -228,12 +233,12 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
             <MoreIcon />
           </button>
         </div>
-        {typeFilter === projectTypesFilter.managerProject &&
-          statusFilter !== advManagerProjectStatusFilter.completed && (
-            <div className={`${styles.chat__btn} display__hide__max__md`}>
-              <Chat projectId={card?.id} toRole={roles.manager} />
-            </div>
-          )}
+        {typeFilter === projectTypesFilter.managerProject && (
+          // statusFilter !== advManagerProjectStatusFilter.completed &&
+          <div className={`${styles.chat__btn} display__hide__max__md`}>
+            <Chat projectId={card?.id} toRole={roles.manager} />
+          </div>
+        )}
       </div>
     </div>
   );
@@ -375,12 +380,12 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
       ) : (
         <>
           <div
-            className={`${styles.disable_radius} overflow-hidden relative h-[500px] border__gradient`}
+            className={`${styles.disable_radius} overflow-hidden relative border__gradient`}
           >
             <div
               className={`absolute top-0 left-0 w-full transition-transform duration-500 ${
                 isSubcardOpen ? "-translate-x-full" : "translate-x-0"
-              } ${styles.wrapper}`}
+              } ${styles.wrapper} ${typeFilter === projectTypesFilter.managerProject && statusFilter === advManagerProjectStatusFilter.completed ? styles.completed : ""}`}
             >
               <Card
                 card={card}

@@ -221,11 +221,22 @@ export const adminAPI = authApi.injectEndpoints({
           };
         }
 
-        const newChannels = [...currentCache?.channels, ...newItems?.channels];
+        const updatedChannelsMap = new Map(
+          currentCache?.channels.map((channel) => [
+            channel.channel.id,
+            channel,
+          ]),
+        );
+
+        // Обновляем данные каналов, если их ID уже есть в кеше
+        newItems.channels.forEach((channel) => {
+          updatedChannelsMap.set(channel.channel.id, channel);
+        });
+
         return {
           ...newItems,
-          isLast: newChannels.length === newItems.elements,
-          channels: newChannels,
+          isLast: updatedChannelsMap.size === newItems.elements,
+          channels: Array.from(updatedChannelsMap.values()),
         };
       },
       serializeQueryArgs: ({ endpointName }) => {
@@ -234,7 +245,7 @@ export const adminAPI = authApi.injectEndpoints({
       forceRefetch({ currentArg, previousArg }) {
         return currentArg !== previousArg;
       },
-      // providesTags: [ADMIN_CHANNELS],
+      providesTags: [ADMIN_CHANNELS],
     }),
     getAdminChannelInfo: build.query<IAdminChannelInfo, { id: string }>({
       query: (params) => ({

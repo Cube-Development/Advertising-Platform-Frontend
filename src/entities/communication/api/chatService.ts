@@ -23,8 +23,8 @@ export interface getChatHistoryReq {
   order_id?: string;
   project_id?: string;
   batch: number;
-  message_date?: string;
-  message_time?: string;
+  created_date?: string;
+  created_time?: string;
 }
 
 export const chatAPI = authApi.injectEndpoints({
@@ -39,19 +39,19 @@ export const chatAPI = authApi.injectEndpoints({
       },
       transformResponse: (response: IChatData[]) => {
         const newResponse = response.map((item) => {
-          if (!item.message_date || !item.message_time) {
+          if (!item.created_date || !item.created_time) {
             return { ...item, type: chatType.order };
           }
           const datetime = convertUTCToLocalDateTime(
-            item.message_date,
-            item.message_time,
+            item.created_date,
+            item.created_time,
           );
           return {
             ...item,
             type: chatType.order,
             formatted_date: datetime.localDate,
             formatted_time: datetime.localTime,
-            message_datetime: item.message_date + " " + item.message_time,
+            message_datetime: item.created_date + " " + item.created_time,
             // unread_count: Math.floor(Math.random() * 10)
           };
         });
@@ -68,19 +68,19 @@ export const chatAPI = authApi.injectEndpoints({
         };
       },
       transformResponse: (response: IChatData) => {
-        if (!response.message_date || !response.message_time) {
+        if (!response.created_date || !response.created_time) {
           return { ...response, type: chatType.order };
         }
         const datetime = convertUTCToLocalDateTime(
-          response.message_date,
-          response.message_time,
+          response.created_date,
+          response.created_time,
         );
         return {
           ...response,
           type: chatType.order,
           formatted_date: datetime.localDate,
           formatted_time: datetime.localTime,
-          message_datetime: response.message_date + " " + response.message_time,
+          message_datetime: response.created_date + " " + response.created_time,
         };
       },
       providesTags: [CHAT],
@@ -96,19 +96,19 @@ export const chatAPI = authApi.injectEndpoints({
       },
       transformResponse: (response: IChatData[]) => {
         const newResponse = response.map((item) => {
-          if (!item.message_date || !item.message_time) {
+          if (!item.created_date || !item.created_time) {
             return { ...item, type: chatType.project };
           }
           const datetime = convertUTCToLocalDateTime(
-            item.message_date,
-            item.message_time,
+            item.created_date,
+            item.created_time,
           );
           return {
             ...item,
             type: chatType.project,
             formatted_date: datetime.localDate,
             formatted_time: datetime.localTime,
-            message_datetime: item.message_date + " " + item.message_time,
+            message_datetime: item.created_date + " " + item.created_time,
           };
         });
         return newResponse;
@@ -124,19 +124,19 @@ export const chatAPI = authApi.injectEndpoints({
         };
       },
       transformResponse: (response: IChatData) => {
-        if (!response.message_date || !response.message_time) {
+        if (!response.created_date || !response.created_time) {
           return { ...response, type: chatType.project };
         }
         const datetime = convertUTCToLocalDateTime(
-          response.message_date,
-          response.message_time,
+          response.created_date,
+          response.created_time,
         );
         return {
           ...response,
           type: chatType.project,
           formatted_date: datetime.localDate,
           formatted_time: datetime.localTime,
-          message_datetime: response.message_date + " " + response.message_time,
+          message_datetime: response.created_date + " " + response.created_time,
         };
       },
       providesTags: [CHAT],
@@ -170,14 +170,14 @@ export const chatAPI = authApi.injectEndpoints({
         const reversedArray = [...response].reverse();
         const newHistory = reversedArray.map((item) => {
           const datetime = convertUTCToLocalDateTime(
-            item.message_date,
-            item.message_time,
+            item.created_date,
+            item.created_time,
           );
           return {
             ...item,
             formatted_date: datetime.localDate,
             formatted_time: datetime.localTime,
-            message_datetime: item.message_date + " " + item.message_time,
+            message_datetime: item.created_date + " " + item.created_time,
           };
         });
         return {
@@ -224,14 +224,14 @@ export const chatAPI = authApi.injectEndpoints({
         const reversedArray = [...response].reverse();
         const newHistory = reversedArray.map((item) => {
           const datetime = convertUTCToLocalDateTime(
-            item.message_date,
-            item.message_time,
+            item.created_date,
+            item.created_time,
           );
           return {
             ...item,
             formatted_date: datetime.localDate,
             formatted_time: datetime.localTime,
-            message_datetime: item.message_date + " " + item.message_time,
+            message_datetime: item.created_date + " " + item.created_time,
           };
         });
         return {

@@ -11,8 +11,10 @@ export interface INotificationCard {
   id: string;
   text: string;
   method: notificationsTypes;
-  created_date: string;
-  created_time: string;
+  created_date?: string;
+  created_time?: string;
+  formatted_date?: string;
+  formatted_time?: string;
   is_read: boolean;
   data?: INotificationData;
 }
@@ -24,4 +26,6 @@ export interface INotificationData {
   order_id: string;
   created_date?: string;
   created_time?: string;
+  formatted_date?: string;
+  formatted_time?: string;
 }
