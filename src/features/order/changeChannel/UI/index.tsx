@@ -37,10 +37,7 @@ export const ChangeChannel: FC<ChangeChannelProps> = ({ order }) => {
       {screen >= BREAKPOINT.MD ? (
         <Dialog>
           <DialogTrigger asChild>
-            <MyButton
-              buttons_type="button__white"
-              className={`truncate ${styles.trigger}`}
-            >
+            <MyButton buttons_type="button__white" className={styles.trigger}>
               {t(`order_btn.channel.manager.edit`)}
             </MyButton>
           </DialogTrigger>
@@ -69,10 +66,7 @@ export const ChangeChannel: FC<ChangeChannelProps> = ({ order }) => {
       ) : (
         <Drawer>
           <DrawerTrigger asChild>
-            <MyButton
-              buttons_type="button__white"
-              className={`truncate ${styles.trigger}`}
-            >
+            <MyButton buttons_type="button__white" className={styles.trigger}>
               {t(`order_btn.channel.manager.edit`)}
             </MyButton>
           </DrawerTrigger>

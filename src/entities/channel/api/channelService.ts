@@ -9,7 +9,12 @@ import {
   channelStatusFilter,
 } from "@entities/channel";
 import { dateSortingTypes } from "@entities/platform";
-import { BLOGGER_CHANNELS, authApi } from "@shared/api";
+import {
+  ADV_ORDERS,
+  BLOGGER_CHANNELS,
+  MANAGER_ORDERS,
+  authApi,
+} from "@shared/api";
 import { INTERSECTION_ELEMENTS, languagesNum } from "@shared/config";
 
 export interface getChannelsByStatusReq {
@@ -165,6 +170,7 @@ export const channelAPI = authApi.injectEndpoints({
         method: "PUT",
         params: params,
       }),
+      invalidatesTags: [ADV_ORDERS, MANAGER_ORDERS],
     }),
   }),
 });

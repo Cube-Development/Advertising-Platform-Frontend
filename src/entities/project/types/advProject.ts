@@ -68,6 +68,7 @@ export interface IAdvProjectSubcard {
   post_url?: string;
   desire: IDesire[];
   platform: platformTypesNum;
+  is_review: boolean;
 }
 
 interface IDesire {

@@ -37,6 +37,7 @@ interface IPost {
   published_time: string;
   format: IFormat;
   amount: number;
+  post_url: string;
 }
 
 interface IFormat {
