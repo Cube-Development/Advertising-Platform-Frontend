@@ -3,8 +3,10 @@ export enum channelStatus {
   active = 1,
   inactive = 2,
   banned = 3,
+  deleted = 4,
   moderationReject = 5,
   remoderation = 6,
+  invalidUrl = 7,
 }
 
 export const adminChannelStatus = [

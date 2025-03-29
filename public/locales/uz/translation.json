@@ -928,7 +928,8 @@
         "title": "Havolani kiriting",
         "text": "Kanal havolasini kerakli formatda kiriting",
         "requerd": "Kanal havolasini kiriting",
-        "invalid": "Havola yaroqsiz"
+        "invalid": "Havola yaroqsiz",
+        "verification": "Muhim! Kanalingiz tavsifiga ko'rsatilgan kodni joylashtiring, bu kanalga egalikni tasdiqlash uchun kerak. Muvaffaqiyatli tekshiruvdan so'ng, siz bu kodni o'chirib tashlashingiz mumkin."
       }
     },
 
