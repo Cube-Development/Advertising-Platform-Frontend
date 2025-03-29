@@ -88,7 +88,7 @@ export const ReplaceChannel: FC<ReplaceChannelProps> = ({ order, status }) => {
               buttons_type={
                 haveDesire ? "button__green__outline" : "button__white"
               }
-              className={`truncate ${styles.trigger}`}
+              className={styles.trigger}
               disabled={!haveDesire && status === projectStatus.approved}
             >
               {haveDesire
@@ -147,7 +147,7 @@ export const ReplaceChannel: FC<ReplaceChannelProps> = ({ order, status }) => {
               buttons_type={
                 haveDesire ? "button__green__outline" : "button__white"
               }
-              className={`truncate ${styles.trigger}`}
+              className={styles.trigger}
               disabled={!haveDesire && status === projectStatus.approved}
             >
               {haveDesire

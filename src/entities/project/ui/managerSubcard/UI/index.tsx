@@ -199,7 +199,8 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
         </div>
         {screen > BREAKPOINT.MD && (
           <>
-            {subcard?.desire?.length ? (
+            {subcard?.desire?.length &&
+            statusFilter !== managerProjectStatusFilter.active ? (
               <div className={styles.subcard__posted}>
                 <div className={styles.subcard__posted__title}>
                   <p>{t(`orders_manager.order_status.comment.title`)}</p>
