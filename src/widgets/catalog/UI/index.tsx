@@ -118,6 +118,22 @@ export const CatalogBlock: FC = () => {
       { skip: isAuth || !guestId },
     );
 
+  const [prevParams, setPrevParams] = useState({
+    filter: formState.filter,
+    sort: formState.sort,
+    search_string: formState.search_string,
+  });
+
+  const [isFirstRender, setIsFirstRender] = useState(true);
+
+  // Устанавливаем сохраненную страницу при первом рендере
+  useEffect(() => {
+    if (isFirstRender && savedFormState?.page) {
+      setValue("page", savedFormState.page);
+      setIsFirstRender(false);
+    }
+  }, []);
+
   // Синхронизация страницы в форме с количеством загруженных данных
   useEffect(() => {
     const currentData =
@@ -127,12 +143,25 @@ export const CatalogBlock: FC = () => {
           ? catalogManager
           : catalogPublic;
 
-    if (currentData?.channels?.length) {
+    const isParamsChanged =
+      JSON.stringify(prevParams.filter) !== JSON.stringify(formState.filter) ||
+      prevParams.sort !== formState.sort ||
+      prevParams.search_string !== formState.search_string;
+
+    // Обновляем предыдущие параметры
+    if (isParamsChanged) {
+      setPrevParams({
+        filter: formState.filter,
+        sort: formState.sort,
+        search_string: formState.search_string,
+      });
+    }
+
+    // Синхронизируем страницу только если параметры НЕ менялись и это не первый рендер
+    if (currentData?.channels?.length && !isParamsChanged && !isFirstRender) {
       const currentPage = Math.ceil(
         currentData.channels.length / INTERSECTION_ELEMENTS.catalog,
       );
-      // Обновляем страницу только если текущая страница меньше вычисленной
-      // Это предотвратит лишние запросы при "показать еще"
       if (currentPage > formState.page) {
         setValue("page", currentPage);
       }
@@ -144,6 +173,10 @@ export const CatalogBlock: FC = () => {
     isAuth,
     role,
     formState.page,
+    formState.filter,
+    formState.sort,
+    formState.search_string,
+    isFirstRender,
   ]);
 
   const { data: cart } = useReadCommonCartQuery(
@@ -435,7 +468,6 @@ export const CatalogBlock: FC = () => {
     }
   }, [formState?.filter]);
 
-  console.log("render catalog", catalogAuth);
   return (
     <div className="container">
       <div className={`${styles.wrapper}`}>
