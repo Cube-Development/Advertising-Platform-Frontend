@@ -4,6 +4,8 @@ import { IAdminComplaintInfoData } from "@entities/admin";
 import { useTranslation } from "react-i18next";
 import { MyButton, useToast } from "@shared/ui";
 import noUserAvatar from "/images/notFound/noUserAvatar.jpg";
+import { useGetPostQuery } from "@entities/project";
+import { SeePost } from "@features/order";
 
 interface ComplaintDetailsProps {
   card: IAdminComplaintInfoData;
@@ -12,6 +14,8 @@ interface ComplaintDetailsProps {
 export const ComplaintDetails: FC<ComplaintDetailsProps> = ({ card }) => {
   const { t } = useTranslation();
   const { toast } = useToast();
+
+  const { data: post, error } = useGetPostQuery({ order_id: card.order_id });
 
   const handleCopyLink = (text: string = "") => {
     navigator.clipboard.writeText(text);
@@ -108,21 +112,22 @@ export const ComplaintDetails: FC<ComplaintDetailsProps> = ({ card }) => {
             <p className="truncate">
               {t("admin_panel.complaintInfo.card.details.link_blogger")}:
             </p>
-            <MyButton buttons_type="button__white">
-              <span>
+            <MyButton buttons_type="button__white" className={styles.seePost}>
+              <a href={card?.post?.post_url || ""} target="_blank">
                 {t("admin_panel.complaintInfo.card.details.buttons.seePost")}
-              </span>
+              </a>
             </MyButton>
           </div>
           <div className={styles.role}>
             <p className="truncate">
               {t("admin_panel.complaintInfo.card.details.link_advertiser")}:
             </p>
-            <MyButton buttons_type="button__white">
+            <SeePost post={post!} className={styles.seePost} />
+            {/* <MyButton buttons_type="button__white">
               <span>
                 {t("admin_panel.complaintInfo.card.details.buttons.seePost")}
               </span>
-            </MyButton>
+            </MyButton> */}
           </div>
         </div>
       </div>

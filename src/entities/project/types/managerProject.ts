@@ -107,6 +107,7 @@ export interface IManagerProjectSubcard {
   female: number;
   desire?: IDesire[];
   platform: platformTypesNum;
+  is_review: boolean;
 }
 
 export interface IDesire {

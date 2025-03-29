@@ -199,7 +199,8 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
         </div>
         {screen > BREAKPOINT.MD && (
           <>
-            {subcard?.desire?.length ? (
+            {subcard?.desire?.length &&
+            statusFilter !== managerProjectStatusFilter.active ? (
               <div className={styles.subcard__posted}>
                 <div className={styles.subcard__posted__title}>
                   <p>{t(`orders_manager.order_status.comment.title`)}</p>
@@ -242,7 +243,9 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
                 ) : (
                   <>
                     <p>{t(`orders_manager.order_status.completed.title`)}</p>
-                    <FeedbackBtn order_id={subcard?.id} />
+                    {!subcard?.is_review && (
+                      <FeedbackBtn order_id={subcard?.id} />
+                    )}
                   </>
                 )}
               </div>
@@ -462,7 +465,9 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
               ) : (
                 <>
                   <p>{t(`orders_advertiser.order_status.completed.title`)}</p>
-                  <FeedbackBtn order_id={subcard?.id} />
+                  {!subcard?.is_review && (
+                    <FeedbackBtn order_id={subcard?.id} />
+                  )}
                 </>
               )}
             </div>

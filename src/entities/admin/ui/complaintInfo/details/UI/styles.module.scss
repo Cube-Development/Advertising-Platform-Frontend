@@ -178,15 +178,16 @@
           font-weight: 500;
           line-height: normal;
         }
-
-        span {
-          color: var(--Personal-colors-black, #000);
-          font-size: 14px;
-          font-style: normal;
-          font-weight: 400;
-          line-height: normal;
-        }
       }
     }
   }
+}
+
+.seePost {
+  // color: var(--Personal-colors-black, #000);
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
+  padding: 10px 20px;
 }
