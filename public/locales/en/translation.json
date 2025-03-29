@@ -2,14 +2,14 @@
   "footer": {
     "results": {
       "users": "Total users",
-      "channels": "Total platforms",
+      "channels": "Total channels",
       "online": "Currently online"
     },
     "nav": {
       "services": {
         "name": "Services",
         "links": {
-          "catalog": "Platform catalog",
+          "catalog": "Channel catalog",
           "add_channel": "Add channel",
           "turnkey": "Turnkey solutions",
           "calculate": "Profitability calculator",
@@ -57,8 +57,8 @@
   "logout_title": "Are you sure you want to log out?",
   "logout_description": "All your data will be saved, and you can access it again by logging back into the platform.",
   "buy": "Buy",
-  "btn_catalog": "Platform catalog",
-  "btn_add_platform": "Add platform",
+  "btn_catalog": "Channel catalog",
+  "btn_add_platform": "Add channel",
   "btn_add_profile": "Add",
   "btn_start_adv": "Start advertising",
   "registration_alert": {
@@ -107,9 +107,9 @@
   },
 
   "pages": {
-    "catalog": "Platform catalog",
+    "catalog": "Channel catalog",
     "turnkey": "Turnkey placement",
-    "platformOwner": "For platform owners",
+    "platformOwner": "For channel owners",
     "advertiser": "For advertisers",
     "wallet": "Wallet",
     "languages": "",
@@ -146,7 +146,7 @@
     "services": "Services",
     "balance": "Total balance",
     "navigation": "Navigation",
-    "catalog": "Platform catalog",
+    "catalog": "Channels catalog",
     "turnkey": "Turnkey placement",
     "addPlatform": "Add channel",
     "calculateIncome": "Income calculation",
@@ -178,10 +178,10 @@
   "main_page_advertiser": {
     "main_img": "mainAdv.png",
     "cta_title": "Effortless Advertising Placements on Social Media",
-    "cta_subtitle": "Only active, manually verified platforms",
+    "cta_subtitle": "Only active, manually verified channels",
     "cta_list": [
       {
-        "option": "Algorithms for selecting the target audience and suitable platforms for your ads",
+        "option": "Algorithms for selecting the target audience and suitable channels for your ads",
         "img": "option1.svg"
       },
       {
@@ -197,7 +197,7 @@
     "services_title": "We work with legal entities, provide invoices, reports, and conduct electronic document management through didox.uz",
     "services_list": [
       {
-        "info": "Manually verified platforms",
+        "info": "Manually verified channels",
         "count": "784+",
         "img": "info1.svg"
       },
@@ -229,12 +229,12 @@
     "how_title": "How does it work?",
     "how_list": [
       { "stage": "Register on the platform" },
-      { "stage": "Choose suitable platforms from the catalog" },
+      { "stage": "Choose suitable channels from the catalog" },
       { "stage": "Top up your balance with a convenient method" },
       { 
         "stage": "Create an ad placement manually or generate a post using AI" 
       },
-      { "stage": "The platform owner will publish the post and send it for your approval" }
+      { "stage": "The channel owner will publish the post and send it for your approval" }
     ],
     "why_title": "Why is it more effective with us?",
     "accomms_list": [
@@ -295,14 +295,14 @@
         "price": "1,250,000 UZS",
         "info": "A basic option for evaluating the service or small advertising campaigns",
         "options": [
-          { "option": "Manual selection of platforms", "available": true },
+          { "option": "Manual selection of channels", "available": true },
           { "option": "Individual promotion plan", "available": true },
           {
             "option": "Creation of an effective advertising post",
             "available": true
           },
           { "option": "Publication notifications", "available": true },
-          { "option": "Approval of selected platforms", "available": false },
+          { "option": "Approval of selected channels", "available": false },
           { "option": "Promotion consultations", "available": false },
           { 
             "option": "Detailed report on completed work", 
@@ -319,14 +319,14 @@
         "price": "5,500,000 UZS",
         "info": "An optimal plan for small business promotion",
         "options": [
-          { "option": "Manual selection of platforms", "available": true },
+          { "option": "Manual selection of channels", "available": true },
           { "option": "Individual promotion plan", "available": true },
           {
             "option": "Creation of an effective advertising post",
             "available": true
           },
           { "option": "Publication notifications", "available": true },
-          { "option": "Approval of selected platforms", "available": true },
+          { "option": "Approval of selected channels", "available": true },
           { "option": "Promotion consultations", "available": true },
           { 
             "option": "Detailed report on completed work", 
@@ -343,14 +343,14 @@
         "price": "15,300,000 UZS",
         "info": "A comprehensive plan for medium and large advertising campaigns",
         "options": [
-          { "option": "Manual selection of platforms", "available": true },
+          { "option": "Manual selection of channels", "available": true },
           { "option": "Individual promotion plan", "available": true },
           {
             "option": "Creation of an effective advertising post",
             "available": true
           },
           { "option": "Publication notifications", "available": true },
-          { "option": "Approval of selected platforms", "available": true },
+          { "option": "Approval of selected channels", "available": true },
           { "option": "Promotion consultations", "available": true },
           { "option": "Detailed report on completed work", "available": true },
           { "option": "Advertising campaign forecasts", "available": true },
@@ -495,7 +495,7 @@
           },
           { "stage": "Automation of all transaction processes" },
           {
-            "stage": "Significant increase in the profitability of your platform"
+            "stage": "Significant increase in the profitability of your channel"
           }
         ],
         "save": "Save time and money"
@@ -790,7 +790,7 @@
     },
     "created": "Date",
 
-    "no_platform": "You currently have no platforms",
+    "no_platform": "You currently have no channels",
     "no_banned": "You have no banned channels",
 
     "offers_count": "New",
@@ -915,8 +915,8 @@
     },
     "chevron": {
       "step": "Step",
-      "identification": "Platform Identification",
-      "description": "Platform Description",
+      "identification": "Channel Identification",
+      "description": "Channel Description",
       "accept": "Confirmation"
     },
     "identification": {
@@ -959,9 +959,9 @@
         "text": "You can select one or more age groups that dominate your audience."
       },
       "description": {
-        "title": "Platform Description",
+        "title": "Channel Description",
         "default_value": "Describe the features that make your channel stand out.",
-        "text": "Describe your platform, its main goals, and unique features. Specify its main topic, the predominant content types, and what makes it different from other platforms."
+        "text": "Describe your channel, its main goals, and unique features. Specify its main topic, the predominant content types, and what makes it different from other channels."
       },
       "price": {
         "title": "Choose Placement Format and Specify Price",
@@ -979,7 +979,7 @@
     "accept": {
       "title": "Review Data Before Confirmation",
       "platform": {
-        "title": "Platform"
+        "title": "Channel"
       },
       "link": {
         "title": "Link"
@@ -1285,11 +1285,11 @@
 
   "platform": {
     "cross": "Match",
-    "match_description": "The match percentage indicates how well this platform fits the selected search parameters"
+    "match_description": "The match percentage indicates how well this channel fits the selected search parameters"
   },
   "catalog": {
-    "catalog": "Platform Catalog",
-    "all_platform": "Platforms",
+    "catalog": "Channel Catalog",
+    "all_platform": "Channels",
 
     "search": {
       "parameters": "Search Parameters",
@@ -1330,7 +1330,7 @@
     "recommendation": {
       "title": "Recommended Target Audience",
       "card": {
-        "business": "Platform Topics",
+        "business": "Channel Topics",
         "age": "Age",
         "sex": "Gender",
         "region": "Region",
@@ -1346,7 +1346,7 @@
     "current_cart": {
       "channels": "Channels",
       "views": "Reach",
-      "cost": "Total Amount",
+      "cost": "Total",
       "cart": "Go to Cart"
     }
   },
@@ -1357,7 +1357,7 @@
 
     "create_post": {
       "title": "Order is protected by a secure transaction",
-      "text": "The platform owner will receive payment only after your confirmation of successful placement",
+      "text": "The channel owner will receive payment only after your confirmation of successful placement",
       "subscribers": "Total Subscribers",
       "views": "Total Views",
       "commission": "Service Commission",
@@ -1365,7 +1365,7 @@
       "finnaly_short": "Amount"
     },
 
-    "recomendation": "Recommended Platforms",
+    "recomendation": "Recommended Channels",
     "hide": "Hide",
     "show": "Show",
     "check": {
@@ -1549,7 +1549,7 @@
       "pay": "Pay",
       "approve": "For Approval",
       "price": "Total Amount:",
-      "description": "Just one last step to launch an effective advertising campaign! Once you pay for the order, platform owners will immediately receive notifications and begin placing your ads."
+      "description": "Just one last step to launch an effective advertising campaign! Once you pay for the order, channel owners will immediately receive notifications and begin placing your ads."
     },
 
     "loading": {
@@ -1809,7 +1809,7 @@
       "remove": "Remove from Cart"
     },
     "recommend": {
-      "title": "Recommended Platforms"
+      "title": "Recommended Channels"
     }
   },
 
@@ -1827,7 +1827,7 @@
   },
 
   "filter": {
-    "title": "Social Network",
+    "title": "Platform",
     "telegram": "Telegram",
     "instagram": "Instagram",
     "youtube": "YouTube"
@@ -2460,15 +2460,15 @@
 
         "details": {
           "title": "Details",
-          "channel": "Advertising Platform",
-          "owner": "Platform Owner",
+          "channel": "Advertising Channel",
+          "owner": "Channel Owner",
           "id": "Order ID",
           "date": "Placement Date",
           "time": "Placement Time",
           "platform": "Platform",
           "format": "Placement Format",
           "amount": "Amount",
-          "link_blogger": "Post Link (Platform Owner)",
+          "link_blogger": "Post Link (Channel Owner)",
           "link_advertiser": "Post Link (Advertiser)",
 
           "buttons": {

@@ -37,10 +37,10 @@ export interface IMessageNewSocket {
   message: string;
   formatted_date: string;
   formatted_time: string;
-  message_date: string;
-  message_time: string;
-  created_date?: string;
-  created_time?: string;
+  // created_date: string;
+  // created_time: string;
+  created_date: string;
+  created_time: string;
   message_datetime: string;
   status: number;
   message_id?: string;
@@ -55,8 +55,8 @@ export interface IChatData {
   avatar: string;
   last_message: string;
   unread_count: number;
-  message_date: string;
-  message_time: string;
+  created_date: string;
+  created_time: string;
   type: chatType;
   formatted_date: string;
   formatted_time: string;
@@ -68,8 +68,8 @@ export interface IReadOrderMessage {
   order_id: string;
   message: string;
   recipient: RecipientType;
-  message_date: string;
-  message_time: string;
+  created_date: string;
+  created_time: string;
   status: MessageStatus;
 }
 

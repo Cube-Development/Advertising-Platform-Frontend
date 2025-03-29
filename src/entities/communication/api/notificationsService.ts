@@ -1,6 +1,7 @@
 import { authApi } from "@shared/api";
 import { INotifications } from "../types";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
+import { convertUTCToLocalDateTime } from "@shared/utils";
 
 export interface getNotificationsReq {
   page: number;
@@ -16,8 +17,21 @@ export const notificationsAPI = authApi.injectEndpoints({
         params: params,
       }),
       transformResponse: (response: INotifications) => {
+        const newNotifications = response?.notifications?.map((item) => {
+          const datetime = convertUTCToLocalDateTime(
+            item?.created_date!,
+            item?.created_time!,
+          );
+          return {
+            ...item,
+            formatted_date: datetime.localDate,
+            formatted_time: datetime.localTime,
+            message_datetime: item?.created_date + " " + item?.created_time,
+          };
+        });
         return {
           ...response,
+          notifications: newNotifications,
           isLast:
             response.notifications.length !==
             INTERSECTION_ELEMENTS.notifications,

@@ -178,10 +178,12 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
       id: message.id || uuidv4(),
       text: message.text || "new notification",
       method: message.method,
-      created_date: message?.created_date
+      created_date: message?.created_date,
+      created_time: message?.created_time,
+      formatted_date: message?.created_date
         ? datetime.localDate
         : new Date().toLocaleDateString("ru-RU"),
-      created_time: message?.created_time
+      formatted_time: message?.created_time
         ? datetime.localTime
         : new Date().toLocaleTimeString("ru-RU"),
       is_read: false,

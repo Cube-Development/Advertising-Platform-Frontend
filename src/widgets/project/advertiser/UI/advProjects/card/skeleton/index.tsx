@@ -29,7 +29,12 @@ export const ProjectCardSkeleton: FC<ProjectCardSkeletonProps> = ({
         }`}
       >
         <div
-          className={`${styles.card} ${typeFilter === projectTypesFilter.managerProject && statusFilter !== advManagerProjectStatusFilter.completed ? styles.manager_chat : ""} ${
+          className={`${styles.card} ${
+            typeFilter === projectTypesFilter.managerProject
+              ? // && statusFilter !== advManagerProjectStatusFilter.completed
+                styles.manager_chat
+              : ""
+          } ${
             typeFilter === projectTypesFilter.managerProject &&
             statusFilter === advManagerProjectStatusFilter.completed
               ? styles.card__manager_completed
@@ -49,12 +54,12 @@ export const ProjectCardSkeleton: FC<ProjectCardSkeletonProps> = ({
             </div>
             <Skeleton className="w-full h-full rounded-[10px]" />
           </div>
-          {typeFilter === projectTypesFilter.managerProject &&
-            statusFilter !== advManagerProjectStatusFilter.completed && (
-              <div className={`${styles.chat__btn} display__hide__min__md`}>
-                <Skeleton className="h-full w-full rounded-[10px]" />
-              </div>
-            )}
+          {typeFilter === projectTypesFilter.managerProject && (
+            // statusFilter !== advManagerProjectStatusFilter.completed &&
+            <div className={`${styles.chat__btn} display__hide__min__md`}>
+              <Skeleton className="h-full w-full rounded-[10px]" />
+            </div>
+          )}
 
           <div className={styles.card__info}>
             <div className={styles.card__info__data}>
@@ -71,8 +76,8 @@ export const ProjectCardSkeleton: FC<ProjectCardSkeletonProps> = ({
             statusFilter === advManagerProjectStatusFilter.request_approve ? (
               <div className={styles.card__info__icons_manager_request_approve}>
                 <div>
-                  <Skeleton className="h-3 w-4/6" />
-                  <Skeleton className="h-3 w-3/6" />
+                  <Skeleton className="w-4/6 h-3" />
+                  <Skeleton className="w-3/6 h-3" />
                 </div>
                 <Skeleton className="w-full h-full rounded-[15px] min-h-11" />
               </div>
