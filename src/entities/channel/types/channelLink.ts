@@ -17,7 +17,7 @@ export interface IPostTypes {
   name: string;
 }
 
-export interface IIndetificationParams {
+export interface IIdentificationParams {
   link: string;
   platform: IChannelLink;
   checked?: boolean;

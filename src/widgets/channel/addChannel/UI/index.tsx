@@ -1,7 +1,7 @@
 import {
   IAddChannelData,
   IAddChannelDataPreview,
-  IIndetificationParams,
+  IIdentificationParams,
   PLATFORM_PARAMETERS,
   useGetChannelByIdQuery,
 } from "@entities/channel";
@@ -30,7 +30,7 @@ export const AddChannelBlock: FC<AddChannelBlockProps> = () => {
     step: channel_id ? 2 : 1,
     completedStep: channel_id ? 1 : 0,
   };
-  const indetification = {
+  const identification = {
     link: "",
     platform: platformTypes[0],
   };
@@ -39,8 +39,8 @@ export const AddChannelBlock: FC<AddChannelBlockProps> = () => {
   const [currentVariant, setCurrentVariant] = useState<
     typeof PAGE_ANIMATION.animationLeft
   >(PAGE_ANIMATION.animationRight);
-  const [indetificationParams, setIndetificationParams] =
-    useState<IIndetificationParams>(indetification);
+  const [identificationParams, setIdentificationParams] =
+    useState<IIdentificationParams>(identification);
 
   const { data: channel, isLoading } = useGetChannelByIdQuery(
     { channel_id: channel_id!, language: language?.id || Languages[0].id },
@@ -69,7 +69,7 @@ export const AddChannelBlock: FC<AddChannelBlockProps> = () => {
 
   useEffect(() => {
     if (channel) {
-      setIndetificationParams({
+      setIdentificationParams({
         link: channel.url,
         platform:
           platformTypes.find((item) => item.id === channel.platform) ||
@@ -96,18 +96,18 @@ export const AddChannelBlock: FC<AddChannelBlockProps> = () => {
 
   const handleSetDataPreview = (newData: IAddChannelDataPreview) => {
     setDataPreview({
-      platform: indetificationParams.platform.name,
-      link: indetificationParams.link,
+      platform: identificationParams.platform.name,
+      link: identificationParams.link,
       ...newData,
     });
   };
 
-  const handleSetIndetificationParams = (newData: IIndetificationParams) => {
-    setIndetificationParams(newData);
+  const handleSetIdentificationParams = (newData: IIdentificationParams) => {
+    setIdentificationParams(newData);
   };
 
   const handleReset = () => {
-    setIndetificationParams(indetification);
+    setIdentificationParams(identification);
     setDataPreview({});
     setCurrentStep({
       step: 1,
@@ -115,7 +115,7 @@ export const AddChannelBlock: FC<AddChannelBlockProps> = () => {
     });
   };
 
-  const handleScrool = () => {
+  const handleScroll = () => {
     scroller.scrollTo("add_channel_top", {
       offset: -100,
     });
@@ -135,7 +135,7 @@ export const AddChannelBlock: FC<AddChannelBlockProps> = () => {
       step: newStep,
       completedStep: newCompletedStep,
     });
-    handleScrool();
+    handleScroll();
   };
   console.log(!!channel, channel);
   return (
@@ -147,8 +147,8 @@ export const AddChannelBlock: FC<AddChannelBlockProps> = () => {
           onChangeStep={handleOnChangeStep}
         />
         <ChannelIdentification
-          indetificationParams={indetificationParams}
-          setIndetificationParams={handleSetIndetificationParams}
+          identificationParams={identificationParams}
+          setIdentificationParams={handleSetIdentificationParams}
           onChangeStep={handleOnChangeStep}
           setValue={setValue}
           step={currentStep.step}
@@ -157,7 +157,7 @@ export const AddChannelBlock: FC<AddChannelBlockProps> = () => {
           defaultValue={channel?.url}
         />
         <ChannelDescription
-          currentPlatform={indetificationParams.platform}
+          currentPlatform={identificationParams.platform}
           onChangeStep={handleOnChangeStep}
           isEdit={!!channel}
           step={currentStep.step}
