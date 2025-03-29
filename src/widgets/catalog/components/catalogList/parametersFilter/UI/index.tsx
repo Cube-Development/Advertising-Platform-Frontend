@@ -108,8 +108,11 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
 
   const formFieldsAI = watchAI();
   const formFieldsTA = watchTA();
-  const { data: AIParameters, isLoading: isLoadingAIParameters } =
-    useGetAIParametersQuery({ prompt: text }, { skip: !text.length });
+  const {
+    data: AIParameters,
+    isLoading: isLoadingAIParameters,
+    isFetching: isFetchingAIParameters,
+  } = useGetAIParametersQuery({ prompt: text }, { skip: !text.length });
 
   const {
     data: TAParameters,
@@ -416,7 +419,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
                     isCatalog
                   />
                   <AiFilter
-                    isLoading={isLoadingAIParameters}
+                    isLoading={isLoadingAIParameters || isFetchingAIParameters}
                     onChange={handleAIClick}
                   />
                 </>

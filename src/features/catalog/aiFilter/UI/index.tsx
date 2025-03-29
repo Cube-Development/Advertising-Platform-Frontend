@@ -11,6 +11,7 @@ interface AiFilterProps {
 
 export const AiFilter: FC<AiFilterProps> = ({ isLoading, onChange }) => {
   const { t } = useTranslation();
+  console.log("aiLoading", isLoading);
   return (
     <MyButton
       buttons_type="button__white"

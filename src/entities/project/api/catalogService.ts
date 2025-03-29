@@ -107,6 +107,9 @@ export const catalogAPI = baseApi.injectEndpoints({
         method: "POST",
         body: BodyParams,
       }),
+      forceRefetch({ currentArg, previousArg }) {
+        return JSON.stringify(currentArg) !== JSON.stringify(previousArg);
+      },
     }),
   }),
 });
