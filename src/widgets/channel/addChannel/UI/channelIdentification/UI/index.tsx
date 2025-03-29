@@ -1,3 +1,4 @@
+import verificationAnimation from "/animated/verification_lottie.gif";
 import {
   IAddChannelData,
   IAddChannelIdentification,
@@ -153,6 +154,25 @@ export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
                     </MyButton>
                   ))}
                 </div>
+              </div>
+
+              <div className="flex justify-center items-center">
+                <p className="lg:text-[56px] md:text-[48px] mobile-xl:text-[32px] text-[24px] font-semibold mobile-xl:leading-normal leading-none">
+                  {code?.verification_code}
+                </p>
+              </div>
+
+              <div className="mobile-xl:mt-0 -mt-4 grid mobile-xl:grid-cols-[auto,1fr] grid-flow-row items-center mobile-xl:justify-start justify-center mobile-xl:justify-items-start justify-items-center mobile-xl:gap-4 gap-2">
+                <div className="flex justify-center items-center lg:w-[100px] md:w-[80px] mobile-xl:w-[70px] w-[60px] lg:h-[100px] md:h-[80px] mobile-xl:h-[70px] h-[60px]">
+                  <img
+                    src={verificationAnimation}
+                    alt="isLoading..."
+                    className="object-contain w-full h-full"
+                  />
+                </div>
+                <p className="gradient_color lg:text-lg md:text-sm mobile-xl:text-xs text-[10px] mobile-xl:font-medium font-semibold mobile-xl:text-start text-center">
+                  {t("add_platform.identification.link.verification")}
+                </p>
               </div>
 
               <div className={styles.form__row}>
