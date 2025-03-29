@@ -213,7 +213,12 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
               <div className={styles.subcard__cancel}>
                 {typeFilter === projectTypesFilter.managerProject &&
                 statusFilter === advManagerProjectStatusFilter.completed ? (
-                  <p>{t(`orders_advertiser.order_status.rejected.title2`)}</p>
+                  <>
+                    <p>{t(`orders_advertiser.order_status.rejected.title2`)}</p>
+                    <span>
+                      {t(`orders_advertiser.order_status.rejected.text2`)}
+                    </span>
+                  </>
                 ) : (
                   <>
                     <p>{t(`orders_advertiser.order_status.rejected.title`)}</p>
@@ -434,7 +439,12 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
             <div className={styles.subcard__cancel}>
               {typeFilter === projectTypesFilter.managerProject &&
               statusFilter === advManagerProjectStatusFilter.completed ? (
-                <p>{t(`orders_advertiser.order_status.rejected.title2`)}</p>
+                <>
+                  <p>{t(`orders_advertiser.order_status.rejected.title2`)}</p>
+                  <span>
+                    {t(`orders_advertiser.order_status.rejected.text2`)}
+                  </span>
+                </>
               ) : (
                 <>
                   <p>{t(`orders_advertiser.order_status.rejected.title`)}</p>

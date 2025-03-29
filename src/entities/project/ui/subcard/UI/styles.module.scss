@@ -373,8 +373,11 @@
 
       &__buttons {
         display: grid;
-        grid-template: 1fr 1fr / 1fr;
-        row-gap: 5px;
+        row-gap: 5px !important;
+
+        &:has(:nth-child(2):last-child) {
+          grid-template: 1fr 1fr / 1fr;
+        }
 
         &__top {
           display: grid;
