@@ -243,7 +243,9 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
                 ) : (
                   <>
                     <p>{t(`orders_manager.order_status.completed.title`)}</p>
-                    <FeedbackBtn order_id={subcard?.id} />
+                    {!subcard?.is_review && (
+                      <FeedbackBtn order_id={subcard?.id} />
+                    )}
                   </>
                 )}
               </div>
@@ -463,7 +465,9 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
               ) : (
                 <>
                   <p>{t(`orders_advertiser.order_status.completed.title`)}</p>
-                  <FeedbackBtn order_id={subcard?.id} />
+                  {!subcard?.is_review && (
+                    <FeedbackBtn order_id={subcard?.id} />
+                  )}
                 </>
               )}
             </div>
