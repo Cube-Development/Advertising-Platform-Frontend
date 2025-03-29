@@ -1,4 +1,3 @@
-import { channelParameterData } from "@entities/channel";
 import { platformTypesNum } from "@entities/platform";
 import {
   catalogAPI,
@@ -31,7 +30,7 @@ import { useAppDispatch, useAppSelector, useWindowWidth } from "@shared/hooks";
 import { ToastAction, useToast } from "@shared/ui";
 import Cookies from "js-cookie";
 import { FC, useEffect, useRef, useState } from "react";
-import { useForm } from "react-hook-form";
+import { useForm, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { CatalogCart, CatalogList, CatalogSearch } from "../components";
 import styles from "./styles.module.scss";
@@ -57,7 +56,7 @@ export const CatalogBlock: FC = () => {
 
   const { watch, reset, setValue, resetField } = useForm<getCatalogReq>({
     defaultValues: {
-      page: 1,
+      page: savedFormState?.page || 1,
       elements_on_page:
         savedFormState?.elements_on_page || INTERSECTION_ELEMENTS.catalog,
       filter: savedFormState?.filter || {
@@ -80,9 +79,11 @@ export const CatalogBlock: FC = () => {
     }
   }, [formState, savedFormState, dispatch]);
 
-  const setValueWithPage = (key: any, value: any) => {
-    setValue(channelParameterData.page, 1);
-    setValue(key, value);
+  const setValueWithPage: UseFormSetValue<getCatalogReq> = (name, value) => {
+    if (name === "filter" || name === "sort" || name === "search_string") {
+      setValue("page", 1);
+    }
+    setValue(name, value);
   };
 
   const { data: catalogAuth, isFetching: isCatalogAuthLoading } =
@@ -116,6 +117,34 @@ export const CatalogBlock: FC = () => {
       },
       { skip: isAuth || !guestId },
     );
+
+  // Синхронизация страницы в форме с количеством загруженных данных
+  useEffect(() => {
+    const currentData =
+      isAuth && role === roles.advertiser
+        ? catalogAuth
+        : isAuth && role === roles.manager
+          ? catalogManager
+          : catalogPublic;
+
+    if (currentData?.channels?.length) {
+      const currentPage = Math.ceil(
+        currentData.channels.length / INTERSECTION_ELEMENTS.catalog,
+      );
+      // Обновляем страницу только если текущая страница меньше вычисленной
+      // Это предотвратит лишние запросы при "показать еще"
+      if (currentPage > formState.page) {
+        setValue("page", currentPage);
+      }
+    }
+  }, [
+    catalogAuth?.channels?.length,
+    catalogManager?.channels?.length,
+    catalogPublic?.channels?.length,
+    isAuth,
+    role,
+    formState.page,
+  ]);
 
   const { data: cart } = useReadCommonCartQuery(
     { language: language?.id || Languages[0].id },

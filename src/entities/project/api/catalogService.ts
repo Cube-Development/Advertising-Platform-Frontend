@@ -71,6 +71,12 @@ export const catalogAPI = baseApi.injectEndpoints({
             ...newItems,
           };
         }
+        if (
+          currentCache.channels.length >=
+          arg.arg.page * INTERSECTION_ELEMENTS.catalog
+        ) {
+          return currentCache;
+        }
         return {
           ...newItems,
           channels: [...currentCache.channels, ...newItems.channels],
