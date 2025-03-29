@@ -24,14 +24,18 @@ import styles from "./styles.module.scss";
 
 interface SeePostProps {
   post: GetPostRes;
+  className?: string;
 }
 
-export const SeePost: FC<SeePostProps> = ({ post }) => {
+export const SeePost: FC<SeePostProps> = ({ post, className }) => {
   const { t } = useTranslation();
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <MyButton buttons_type="button__white" className={styles.button}>
+        <MyButton
+          buttons_type="button__white"
+          className={`${className ? className : styles.button}`}
+        >
           {t(`order_btn.seePost`)}
         </MyButton>
       </AlertDialogTrigger>
