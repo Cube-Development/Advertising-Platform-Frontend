@@ -85,8 +85,11 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
   const formFieldsAI = watchAI();
   const formFieldsTA = watchTA();
 
-  const { data: AIParameters, isLoading: isLoadingAIParameters } =
-    useGetAIParametersQuery({ prompt: text }, { skip: !text.length });
+  const {
+    data: AIParameters,
+    isLoading: isLoadingAIParameters,
+    isFetching: isFetchingAIParameters,
+  } = useGetAIParametersQuery({ prompt: text }, { skip: !text.length });
 
   const {
     data: TAParameters,
@@ -219,6 +222,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
       setValueTA(channelParameterData.category, AIParameters?.category);
       setValueTA(channelParameterData.region, AIParameters?.region);
       setValueTA(channelParameterData.language, AIParameters?.language);
+      setOpenAccordion("item-TA-Cards-BIG");
     }
   }, [AIParameters]);
 
@@ -406,7 +410,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
                 isCatalog
               />
               <AiFilter
-                isLoading={isLoadingAIParameters}
+                isLoading={isLoadingAIParameters || isFetchingAIParameters}
                 onChange={handleAIClick}
               />
             </>
