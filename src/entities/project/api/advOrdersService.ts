@@ -46,6 +46,7 @@ export interface getProjectsCardReq {
     | string;
   elements_on_page?: number;
   date_sort?: dateSortingTypes;
+  search_string?: string;
 }
 
 export interface getProjectSubcardReq {
@@ -202,7 +203,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
         };
       },
       forceRefetch({ currentArg, previousArg }) {
-        return currentArg?.page !== previousArg?.page;
+        return currentArg !== previousArg;
       },
       providesTags: [ADV_PROJECTS],
     }),

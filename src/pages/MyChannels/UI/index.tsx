@@ -36,20 +36,20 @@ const ModerationChannels = React.lazy(() =>
   })),
 );
 
+interface IForm extends getChannelsByStatusReq {
+  platform: platformTypesNum;
+}
+
 export const MyChannelsPage: FC = () => {
   useClearCookiesOnPage();
   const language = useFindLanguage();
   const navigate = useNavigate();
   const { channel_status } = QueryParams();
 
-  const { setValue, watch } = useForm<{
-    platform: platformTypesNum;
-    status: channelStatusFilter | string;
-    page: number;
-    search_string?: string;
-  }>({
+  const { setValue, watch } = useForm<IForm>({
     defaultValues: {
       platform: platformTypes[0].id,
+      language: language?.id || Languages[0].id,
       status:
         channel_status &&
         !!Object.values(channelStatusFilter).includes(
@@ -59,18 +59,16 @@ export const MyChannelsPage: FC = () => {
           : channelStatusFilter.active,
       page: 1,
       search_string: "",
+      date_sort: dateSortingTypes.decrease,
+      elements_on_page: INTERSECTION_ELEMENTS.myChannels,
     },
   });
   const formState = watch();
+  const { platform, search_string, ...params } = formState;
+
   const getParams: getChannelsByStatusReq = {
-    language: language?.id || Languages[0].id,
-    page: formState.page,
-    elements_on_page: INTERSECTION_ELEMENTS.myChannels,
-    date_sort: dateSortingTypes.decrease,
-    status: formState.status,
-    ...(formState?.search_string && formState?.search_string?.length >= 3
-      ? { search_string: formState.search_string }
-      : {}),
+    ...params,
+    ...(search_string && search_string.length >= 3 ? { search_string } : {}),
   };
 
   const { data, isFetching } = useGetChannelsByStatusQuery(getParams);
