@@ -9,7 +9,7 @@ import { useTranslation } from "react-i18next";
 
 interface SearchFilterProps {
   type: channelData;
-  onChange: UseFormSetValue<getCatalogReq>;
+  onChange: UseFormSetValue<getCatalogReq | any>;
 }
 
 export const SearchFilter: FC<SearchFilterProps> = ({ type, onChange }) => {

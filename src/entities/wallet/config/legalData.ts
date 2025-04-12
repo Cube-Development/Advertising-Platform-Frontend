@@ -2,6 +2,7 @@ import {
   formatCardDate,
   formatFullDate,
   formatToNumber,
+  formatToPhoneNumber,
   isValidAccount,
   isValidCardDate,
   isValidEmail,
@@ -241,7 +242,7 @@ export const contact: IBlockData = {
             isValidPhoneNumber(value) ||
             "add_profile.contact.phone.error.required",
         },
-        onChange: formatToNumber,
+        onChange: formatToPhoneNumber,
       },
     },
     {

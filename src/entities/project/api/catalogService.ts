@@ -26,7 +26,7 @@ export interface getCatalogReq {
     region: number[];
   };
   sort: sortingFilter;
-  search_string?: string | null;
+  search_string?: string | undefined;
 }
 
 export interface getAIParametersReq {

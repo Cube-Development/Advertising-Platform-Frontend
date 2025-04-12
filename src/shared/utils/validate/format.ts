@@ -2,6 +2,24 @@ export const formatToNumber = (event: React.ChangeEvent<HTMLInputElement>) => {
   event.target.value = event.target.value.replace(/[^0-9]/g, "");
 };
 
+export const formatToPhoneNumber = (
+  event: React.ChangeEvent<HTMLInputElement>,
+) => {
+  let value = event.target.value;
+  value = value.replace(/[^0-9+]/g, "");
+  value = value.replace(/\+(?=.)/g, "");
+  if (!value.startsWith("+")) {
+    value = value.replace(/\+/g, "");
+  }
+  const digitsOnly = value.replace(/\D/g, "");
+  if (digitsOnly.length > 0) {
+    value = "+" + digitsOnly;
+  } else {
+    value = ""; // Очищаем полностью, если нет цифр
+  }
+  event.target.value = value;
+};
+
 export const formatFullDate = (event: React.ChangeEvent<HTMLInputElement>) => {
   let value = event.target.value.replace(/[^0-9]/g, "");
   if (value.length > 8) {

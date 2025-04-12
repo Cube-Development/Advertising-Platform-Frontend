@@ -61,7 +61,7 @@ export function getInputLegalLength(inputType: keyof ILegalData): number {
     case legalData.email:
       return formDataLength.email;
     case legalData.phone:
-      return formDataLength.phone;
+      return formDataLength.phone + 1;
     default:
       return formDataLength.default;
   }
