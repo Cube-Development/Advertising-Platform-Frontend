@@ -1,8 +1,13 @@
-import * as ReactDOM from "react-dom/client";
-import App from "./app";
 import * as Sentry from "@sentry/react";
-import "./shared/styles/global.scss";
 import "@shared/config/i18n";
+import * as ReactDOM from "react-dom/client";
+import { registerSW } from "virtual:pwa-register";
+import App from "./app";
+import "./shared/styles/global.scss";
+
+registerSW({
+  immediate: true,
+});
 
 Sentry.init({
   dsn: "https://665b49aebfd7a0ac234d3eb11b015971@o4508579606364160.ingest.de.sentry.io/4508579732979792",
