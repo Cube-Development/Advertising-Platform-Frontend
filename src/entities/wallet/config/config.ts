@@ -12,14 +12,14 @@ export enum paymentTypes {
 
 export enum formDataLength {
   type_legal = 20,
-  name = 20,
-  address = 20,
+  name = 255,
+  address = 255,
   INN = 9,
   account = 20,
-  bank_name = 20,
+  bank_name = 255,
   bank_mfo = 5,
   phone = 12,
-  email = 20,
+  email = 50,
   email_code = 6,
   PNFL = 14,
   registration_number = 20,

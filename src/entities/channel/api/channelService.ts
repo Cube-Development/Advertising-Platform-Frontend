@@ -23,6 +23,7 @@ export interface getChannelsByStatusReq {
   date_sort: dateSortingTypes;
   elements_on_page?: number;
   status: channelStatusFilter | string;
+  search_string?: string;
 }
 
 export interface getReviewsByIdReq {
@@ -89,7 +90,7 @@ export const channelAPI = authApi.injectEndpoints({
         };
       },
       forceRefetch: ({ currentArg, previousArg }) => {
-        return currentArg?.page !== previousArg?.page;
+        return currentArg !== previousArg;
       },
       providesTags: [BLOGGER_CHANNELS],
     }),

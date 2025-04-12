@@ -1,100 +1,5 @@
-// import {
-//   channelStatusFilter,
-//   getChannelsByStatusReq,
-//   IModerationChannel,
-//   useGetChannelsByStatusQuery,
-// } from "@entities/channel";
-// import {
-//   dateSortingTypes,
-//   platformTypes,
-//   platformTypesNum,
-// } from "@entities/platform";
-// import { useGetViewBloggerChannelQuery } from "@entities/views";
-// import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
-// import { pageFilter } from "@shared/routing";
-// import { BarFilter } from "@widgets/barFilter";
-// import { ActiveChannels, ModerationChannels } from "@widgets/channel";
-// import { FC, useEffect } from "react";
-// import { useForm } from "react-hook-form";
-// import styles from "./styles.module.scss";
-
-// export const MyChannelsPage: FC = () => {
-// const language = useFindLanguage();
-
-//   const { setValue, watch } = useForm<{
-//     platform: platformTypesNum;
-//     status: channelStatusFilter | string;
-//     page: number;
-//   }>({
-//     defaultValues: {
-//       platform: platformTypes[0].id,
-//       status: channelStatusFilter.active,
-//       page: 1,
-//     },
-//   });
-//   const formState = watch();
-//   const { platform, status, page } = formState;
-
-//   const getParams: getChannelsByStatusReq = {
-//     language: language?.id || Languages[0].id,
-//     page: formState.page,
-//     elements_on_page: INTERSECTION_ELEMENTS.myChannels,
-//     date_sort: dateSortingTypes.decrease,
-//     status: formState.status,
-//   };
-
-//   const { data, isFetching } = useGetChannelsByStatusQuery(getParams);
-//   const { refetch: views } = useGetViewBloggerChannelQuery();
-
-//   useEffect(() => {
-//     if (status !== channelStatusFilter.inactive) {
-//       views();
-//     }
-//   }, [status, formState.page]);
-
-//   useEffect(() => {
-//     setTimeout(() => {
-//       setValue("page", 1);
-//     }, 500);
-//   }, [platform, status]);
-
-//   return (
-//     <div className="container">
-//       <div className={styles.wrapper}>
-//         <BarFilter
-//           page={pageFilter.platform}
-//           setValue={setValue}
-//           listLength={!data?.channels?.length}
-//           changeStatus={(status) => setValue("status", status)}
-//           statusFilter={formState.status}
-//         />
-
-//         {formState.status !== channelStatusFilter.moderation ? (
-//           <ActiveChannels
-//             cards={(formState.status === data?.status && data?.channels) || []}
-//             handleOnChangePage={() => setValue("page", page + 1)}
-//             isLoading={isFetching}
-//             isLast={data?.isLast || false}
-//             statusFilter={formState.status as channelStatusFilter}
-//           />
-//         ) : (
-//           <ModerationChannels
-//             statusFilter={formState.status}
-//             cards={
-//               ((formState.status === data?.status &&
-//                 data?.channels) as IModerationChannel[]) || []
-//             }
-//             handleOnChangePage={() => setValue("page", page + 1)}
-//             isLoading={isFetching}
-//             isLast={data?.isLast || false}
-//           />
-//         )}
-//       </div>
-//     </div>
-//   );
-// };
-
 import {
+  channelData,
   channelStatusFilter,
   getChannelsByStatusReq,
   IModerationChannel,
@@ -107,6 +12,7 @@ import {
 } from "@entities/platform";
 import { useFindLanguage } from "@entities/user";
 import { useGetViewBloggerChannelQuery } from "@entities/views";
+import { SearchFilter } from "@features/catalog";
 import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 import { useClearCookiesOnPage } from "@shared/hooks";
 import { pageFilter, paths } from "@shared/routing";
@@ -140,6 +46,7 @@ export const MyChannelsPage: FC = () => {
     platform: platformTypesNum;
     status: channelStatusFilter | string;
     page: number;
+    search_string?: string;
   }>({
     defaultValues: {
       platform: platformTypes[0].id,
@@ -150,19 +57,20 @@ export const MyChannelsPage: FC = () => {
         )
           ? channel_status
           : channelStatusFilter.active,
-      // status: channelStatusFilter.active,
       page: 1,
+      search_string: "",
     },
   });
   const formState = watch();
-  const { platform, status, page } = formState;
-
   const getParams: getChannelsByStatusReq = {
     language: language?.id || Languages[0].id,
     page: formState.page,
     elements_on_page: INTERSECTION_ELEMENTS.myChannels,
     date_sort: dateSortingTypes.decrease,
     status: formState.status,
+    ...(formState?.search_string && formState?.search_string?.length >= 3
+      ? { search_string: formState.search_string }
+      : {}),
   };
 
   const { data, isFetching } = useGetChannelsByStatusQuery(getParams);
@@ -178,7 +86,7 @@ export const MyChannelsPage: FC = () => {
     setTimeout(() => {
       setValue("page", 1);
     }, 500);
-  }, [platform, status]);
+  }, [formState.platform, formState.status, formState.search_string]);
 
   useEffect(() => {
     const newPath = buildPathWithQuery(paths.myChannels, {
@@ -198,13 +106,13 @@ export const MyChannelsPage: FC = () => {
             changeStatus={(status) => setValue("status", status)}
             statusFilter={formState.status}
           />
-
+          <SearchFilter type={channelData.search} onChange={setValue} />
           {formState.status !== channelStatusFilter.moderation ? (
             <ActiveChannels
               cards={
                 (formState.status === data?.status && data?.channels) || []
               }
-              handleOnChangePage={() => setValue("page", page + 1)}
+              handleOnChangePage={() => setValue("page", formState?.page + 1)}
               isLoading={isFetching}
               isLast={data?.isLast || false}
               statusFilter={formState.status as channelStatusFilter}
@@ -216,7 +124,7 @@ export const MyChannelsPage: FC = () => {
                 ((formState.status === data?.status &&
                   data?.channels) as IModerationChannel[]) || []
               }
-              handleOnChangePage={() => setValue("page", page + 1)}
+              handleOnChangePage={() => setValue("page", formState?.page + 1)}
               isLoading={isFetching}
               isLast={data?.isLast || false}
             />
