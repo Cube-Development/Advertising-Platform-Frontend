@@ -16,6 +16,7 @@ export interface getOrdersByStatusReq {
   date_sort: dateSortingTypes;
   elements_on_page?: number;
   status: offerStatusFilter | string;
+  search_string?: string;
 }
 
 export const bloggerOffersAPI = authApi.injectEndpoints({
@@ -87,7 +88,7 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
       },
 
       forceRefetch({ currentArg, previousArg }) {
-        return currentArg?.page !== previousArg?.page;
+        return currentArg !== previousArg;
       },
       providesTags: [BLOGGER_OFFERS],
     }),

@@ -16,6 +16,8 @@ import React, { FC, Suspense, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.scss";
+import { SearchFilter } from "@features/catalog";
+import { channelData } from "@entities/channel";
 
 // Ленивый импорт компонента MyOffers
 const MyOffers = React.lazy(() =>
@@ -42,6 +44,7 @@ export const OffersPage: FC = () => {
       language: language?.id || Languages[0].id,
       elements_on_page: INTERSECTION_ELEMENTS.bloggerOffers,
       date_sort: dateSortingTypes.decrease,
+      search_string: "",
     },
   });
   const formState = watch();
@@ -50,13 +53,23 @@ export const OffersPage: FC = () => {
     setValue("page", 1);
     setValue("status", status);
   };
-
-  const { data, isFetching } = useGetBloggerOrdersQuery(formState);
+  const { search_string, ...params } = formState;
+  const getParams: getOrdersByStatusReq = {
+    ...params,
+    ...(search_string && search_string.length >= 3 ? { search_string } : {}),
+  };
+  const { data, isFetching } = useGetBloggerOrdersQuery(getParams);
   const { refetch: views } = useGetViewBloggerOrderQuery();
 
   const handleOnChangePage = () => {
     setValue("page", formState.page + 1);
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setValue("page", 1);
+    }, 500);
+  }, [formState.status, formState.search_string]);
 
   useEffect(() => {
     views();
@@ -80,7 +93,7 @@ export const OffersPage: FC = () => {
             changeStatus={changeStatus}
             statusFilter={formState.status}
           />
-
+          <SearchFilter type={channelData.search} onChange={setValue} />
           <MyOffers
             statusFilter={formState.status as offerStatusFilter}
             offers={(data?.status === formState.status && data?.orders) || []}
