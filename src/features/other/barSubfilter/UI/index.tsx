@@ -79,14 +79,9 @@ export const BarSubfilter = <T,>({
         ? [catalogTypes, catalogFilter]
         : page === pageFilter.walletTopUp
           ? [walletTopUpTypes, profileFilter && profileFilter.type]
-          : // : tab_list?.length && tab
-            // page === pageFilter.chat && role === roles.advertiser
-            //   ? [CHAT_ADVERTISER_FILTER_TABS_LIST, chatFilter]
-            //   : page === pageFilter.chat && role === roles.manager
-            //     ? [CHAT_MANAGER_FILTER_TABS_LIST, chatFilter]
-            page === pageFilter.createOrderFiles
+          : page === pageFilter.createOrderFiles
             ? [addFileTypes, fileFilter]
-            : tab_list?.length && tab
+            : tab_list?.length && tab !== undefined && tab !== null
               ? [tab_list, tab]
               : [[], "", ""];
 
@@ -102,20 +97,15 @@ export const BarSubfilter = <T,>({
           newFilter as {
             type: profileTypesName;
             id?: profileTypesNum;
-          },
+          }
         );
       resetActiveAccount && resetActiveAccount(null);
     } else if (page === pageFilter.catalog) {
       changeCatalogFilter &&
         changeCatalogFilter(option.type as catalogBarFilter);
-    }
-    // else if (page === pageFilter.chat) {
-    //   changeChatFilter && changeChatFilter(option.type as CHAT_FILTER);
-    //   resetValues!();
-    // }
-    else if (page === pageFilter.createOrderFiles) {
+    } else if (page === pageFilter.createOrderFiles) {
       changeFileFilter && changeFileFilter(option.type as addFileFilter);
-    } else if (tab_list?.length && tab) {
+    } else if (tab_list?.length && tab !== undefined && tab !== null) {
       changeTab && changeTab(option.type as T);
     }
 
