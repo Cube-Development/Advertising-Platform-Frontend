@@ -1,10 +1,13 @@
 import {
   adminChannelForm,
+  adminChannelTypesFilter,
   getAdminChannelsReq,
   useGetAdminChannelsQuery,
 } from "@entities/admin";
+import { BarSubfilter } from "@features/other";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { useClearCookiesOnPage } from "@shared/hooks";
+import { pageFilter } from "@shared/routing";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -17,6 +20,7 @@ export const Channels: FC = () => {
   const { watch, setValue } = useForm<getAdminChannelsReq>({
     defaultValues: {
       page: 1,
+      status: adminChannelTypesFilter.active,
       elements_on_page: INTERSECTION_ELEMENTS.adminChannels,
     },
   });
@@ -27,6 +31,11 @@ export const Channels: FC = () => {
 
   const handleOnChangePage = () => {
     setValue(adminChannelForm.page, formFields?.page + 1);
+  };
+
+  const setFilter = (filter: adminChannelTypesFilter) => {
+    setValue(adminChannelForm.page, 1);
+    setValue(adminChannelForm.status, filter);
   };
 
   return (
@@ -40,6 +49,14 @@ export const Channels: FC = () => {
           </p>
         </div>
         <div className={styles.table}>
+          <div className={styles.filter}>
+            <BarSubfilter
+              page={pageFilter.adminChannels}
+              resetValues={() => {}}
+              channelsFilter={formFields?.status}
+              changeChannelsFilter={setFilter}
+            />
+          </div>
           <ChannelsList
             data={data}
             isLoading={isLoading}

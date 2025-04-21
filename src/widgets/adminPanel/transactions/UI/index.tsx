@@ -1,5 +1,6 @@
 import {
   adminTransactionForm,
+  adminTransactionTypesFilter,
   getAdminTransactionsReq,
   useGetAdminTransactionsQuery,
 } from "@entities/admin";
@@ -10,6 +11,8 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { TransactionsList } from "../transactionsList";
 import styles from "./styles.module.scss";
+import { BarSubfilter } from "@features/other";
+import { pageFilter } from "@shared/routing";
 
 export const Transactions: FC = () => {
   useClearCookiesOnPage();
@@ -17,6 +20,7 @@ export const Transactions: FC = () => {
   const { watch, setValue } = useForm<getAdminTransactionsReq>({
     defaultValues: {
       page: 1,
+      status: adminTransactionTypesFilter.pending,
       elements_on_page: INTERSECTION_ELEMENTS.adminTransactions,
     },
   });
@@ -27,6 +31,11 @@ export const Transactions: FC = () => {
 
   const handleOnChangePage = () => {
     setValue(adminTransactionForm.page, formFields?.page + 1);
+  };
+
+  const setFilter = (filter: adminTransactionTypesFilter) => {
+    setValue(adminTransactionForm.page, 1);
+    setValue(adminTransactionForm.status, filter);
   };
 
   return (
@@ -40,6 +49,14 @@ export const Transactions: FC = () => {
           </p>
         </div>
         <div className={styles.table}>
+          <div className={styles.filter}>
+            <BarSubfilter
+              page={pageFilter.adminTransactions}
+              resetValues={() => {}}
+              transactionsFilter={formFields?.status}
+              changeTransactionsFilter={setFilter}
+            />
+          </div>
           <TransactionsList
             data={data}
             isLoading={isLoading}

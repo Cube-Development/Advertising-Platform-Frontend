@@ -1,5 +1,5 @@
-export enum transactionStatus {
-  reject = 0,
+export enum adminTransactionTypesFilter {
+  reject = 3,
   complete = 1,
   pending = 2,
 }
@@ -7,20 +7,36 @@ export enum transactionStatus {
 export const adminTransactionStatus = [
   {
     name: "admin_panel.transactions.card.status.complete",
-    id: transactionStatus.complete,
+    id: adminTransactionTypesFilter.complete,
   },
   {
     name: "admin_panel.transactions.card.status.reject",
-    id: transactionStatus.reject,
+    id: adminTransactionTypesFilter.reject,
   },
   {
     name: "admin_panel.transactions.card.status.pending",
-    id: transactionStatus.pending,
+    id: adminTransactionTypesFilter.pending,
+  },
+];
+
+export const adminTransactionTypes = [
+  {
+    name: "admin_panel.transactions.card.status.complete",
+    type: adminTransactionTypesFilter.complete,
+  },
+  {
+    name: "admin_panel.transactions.card.status.reject",
+    type: adminTransactionTypesFilter.reject,
+  },
+  {
+    name: "admin_panel.transactions.card.status.pending",
+    type: adminTransactionTypesFilter.pending,
   },
 ];
 
 export enum adminTransactionForm {
   page = "page",
+  status = "status",
 }
 
 export enum identificationType {

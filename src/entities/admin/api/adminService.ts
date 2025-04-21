@@ -5,7 +5,12 @@ import {
   authApi,
 } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
-import { adminComplaintTypesFilter, adminReviewTypesFilter } from "../config";
+import {
+  adminChannelTypesFilter,
+  adminComplaintTypesFilter,
+  adminReviewTypesFilter,
+  adminTransactionTypesFilter,
+} from "../config";
 import {
   IAdminChannelInfo,
   IAdminChannels,
@@ -32,11 +37,13 @@ export interface getAdminOrderComplaintsReq {
 
 export interface getAdminTransactionsReq {
   page: number;
+  status?: adminTransactionTypesFilter;
   elements_on_page: number;
 }
 
 export interface getAdminChannelsReq {
   page: number;
+  status?: adminChannelTypesFilter;
   elements_on_page: number;
 }
 

@@ -1,6 +1,6 @@
 import {
   adminChannelStatus,
-  channelStatus,
+  adminChannelTypesFilter,
   IAdminChannelData,
   IAdminEditChannelData,
   useGetAdminChannelInfoQuery,
@@ -187,15 +187,15 @@ export const ChannelCard: FC<ChannelCardProps> = ({
         </div>
         <div
           className={`${styles.status} ${
-            card?.status === channelStatus.active
+            card?.status === adminChannelTypesFilter.active
               ? styles.active
-              : card?.status === channelStatus.moderation
+              : card?.status === adminChannelTypesFilter.moderation
                 ? styles.moderation
-                : card?.status === channelStatus.banned
+                : card?.status === adminChannelTypesFilter.banned
                   ? styles.banned
-                  : card?.status === channelStatus.inactive
+                  : card?.status === adminChannelTypesFilter.inactive
                     ? styles.inactive
-                    : card?.status === channelStatus.moderationReject
+                    : card?.status === adminChannelTypesFilter.moderationReject
                       ? styles.moderationReject
                       : styles.remoderation
           }`}
@@ -345,17 +345,17 @@ export const ChannelCard: FC<ChannelCardProps> = ({
               </div>
             </div>
             <div className={styles.buttons}>
-              {card?.status === channelStatus.active ? (
+              {card?.status === adminChannelTypesFilter.active ? (
                 <>
                   <BanChannel id={card?.channel?.id} />
                   <UpdateChannel channel={formState} id={card?.channel?.id} />
                 </>
-              ) : card?.status === channelStatus.moderation ? (
+              ) : card?.status === adminChannelTypesFilter.moderation ? (
                 <>
                   <RejectChannel id={card?.channel?.id} />
                   <AcceptChannel id={card?.channel?.id} />
                 </>
-              ) : card?.status === channelStatus.banned ? (
+              ) : card?.status === adminChannelTypesFilter.banned ? (
                 <>
                   <UnbanChannel id={card?.channel?.id} />
                   <UpdateChannel
@@ -364,17 +364,17 @@ export const ChannelCard: FC<ChannelCardProps> = ({
                     disabled={true}
                   />
                 </>
-              ) : card?.status === channelStatus.inactive ? (
+              ) : card?.status === adminChannelTypesFilter.inactive ? (
                 <>
                   <BanChannel id={card?.channel?.id} />
                   <UpdateChannel channel={formState} id={card?.channel?.id} />
                 </>
-              ) : card?.status === channelStatus.moderationReject ? (
+              ) : card?.status === adminChannelTypesFilter.moderationReject ? (
                 <>
                   <RejectChannel id={card?.channel?.id} />
                   <AcceptChannel id={card?.channel?.id} />
                 </>
-              ) : card?.status === channelStatus.remoderation ? (
+              ) : card?.status === adminChannelTypesFilter.remoderation ? (
                 <>
                   <div></div>
                   <AcceptRemoderation id={card?.channel?.id} />

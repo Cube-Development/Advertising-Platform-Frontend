@@ -10,6 +10,8 @@ export enum pageFilter {
   createOrderFiles = "createOrderFiles",
   adminReviews = "adminReviews",
   adminComplaint = "adminComplaint",
+  adminTransactions = "adminTransactions",
+  adminChannels = "adminChannels",
   chat = "chat",
   cart = "cart",
 }

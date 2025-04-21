@@ -1,4 +1,4 @@
-export enum channelStatus {
+export enum adminChannelTypesFilter {
   moderation = 0,
   active = 1,
   inactive = 2,
@@ -12,30 +12,58 @@ export enum channelStatus {
 export const adminChannelStatus = [
   {
     name: "admin_panel.channels.card.status.active",
-    id: channelStatus.active,
+    id: adminChannelTypesFilter.active,
   },
   {
     name: "admin_panel.channels.card.status.moderation",
-    id: channelStatus.moderation,
+    id: adminChannelTypesFilter.moderation,
   },
   {
     name: "admin_panel.channels.card.status.moderation_reject",
-    id: channelStatus.moderationReject,
+    id: adminChannelTypesFilter.moderationReject,
   },
   {
     name: "admin_panel.channels.card.status.inactive",
-    id: channelStatus.inactive,
+    id: adminChannelTypesFilter.inactive,
   },
   {
     name: "admin_panel.channels.card.status.banned",
-    id: channelStatus.banned,
+    id: adminChannelTypesFilter.banned,
   },
   {
     name: "admin_panel.channels.card.status.remoderation",
-    id: channelStatus.remoderation,
+    id: adminChannelTypesFilter.remoderation,
+  },
+];
+
+export const adminChannelTypes = [
+  {
+    name: "admin_panel.channels.card.status.active",
+    type: adminChannelTypesFilter.active,
+  },
+  {
+    name: "admin_panel.channels.card.status.moderation",
+    type: adminChannelTypesFilter.moderation,
+  },
+  {
+    name: "admin_panel.channels.card.status.moderation_reject",
+    type: adminChannelTypesFilter.moderationReject,
+  },
+  {
+    name: "admin_panel.channels.card.status.inactive",
+    type: adminChannelTypesFilter.inactive,
+  },
+  {
+    name: "admin_panel.channels.card.status.banned",
+    type: adminChannelTypesFilter.banned,
+  },
+  {
+    name: "admin_panel.channels.card.status.remoderation",
+    type: adminChannelTypesFilter.remoderation,
   },
 ];
 
 export enum adminChannelForm {
   page = "page",
+  status = "status",
 }

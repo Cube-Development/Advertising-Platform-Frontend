@@ -1,8 +1,12 @@
 import {
+  adminChannelTypes,
+  adminChannelTypesFilter,
   adminComplaintTypes,
   adminComplaintTypesFilter,
   adminReviewTypes,
   adminReviewTypesFilter,
+  adminTransactionTypes,
+  adminTransactionTypesFilter,
 } from "@entities/admin";
 import {
   chatAdvertiserTypes,
@@ -49,6 +53,10 @@ interface BarSubfilterProps {
   changeReviewsFilter?: (filter: adminReviewTypesFilter) => void;
   complaintsFilter?: adminComplaintTypesFilter;
   changeComplaintsFilter?: (filter: adminComplaintTypesFilter) => void;
+  transactionsFilter?: adminTransactionTypesFilter;
+  changeTransactionsFilter?: (filter: adminTransactionTypesFilter) => void;
+  channelsFilter?: adminChannelTypesFilter;
+  changeChannelsFilter?: (filter: adminChannelTypesFilter) => void;
   fileFilter?: addFileFilter;
   changeFileFilter?: (filter: addFileFilter) => void;
   badge?: { status: string; count: number }[];
@@ -62,7 +70,9 @@ interface IFilterOption {
     | chatTypesFilter
     | addFileFilter
     | adminReviewTypesFilter
-    | adminComplaintTypesFilter;
+    | adminComplaintTypesFilter
+    | adminTransactionTypesFilter
+    | adminChannelTypesFilter;
   id?: profileTypesNum;
 }
 
@@ -80,6 +90,10 @@ export const BarSubfilter: FC<BarSubfilterProps> = ({
   changeReviewsFilter,
   complaintsFilter,
   changeComplaintsFilter,
+  transactionsFilter,
+  changeTransactionsFilter,
+  channelsFilter,
+  changeChannelsFilter,
   fileFilter,
   changeFileFilter,
   badge,
@@ -108,7 +122,13 @@ export const BarSubfilter: FC<BarSubfilterProps> = ({
                   : page === pageFilter.adminComplaint &&
                       role === roles.moderator
                     ? [adminComplaintTypes, complaintsFilter]
-                    : [[], "", ""];
+                    : page === pageFilter.adminTransactions &&
+                        role === roles.moderator
+                      ? [adminTransactionTypes, transactionsFilter]
+                      : page === pageFilter.adminChannels &&
+                          role === roles.moderator
+                        ? [adminChannelTypes, channelsFilter]
+                        : [[], "", ""];
 
   const toggleBar = (option: IFilterOption) => {
     if (
@@ -139,6 +159,12 @@ export const BarSubfilter: FC<BarSubfilterProps> = ({
     } else if (page === pageFilter.adminComplaint) {
       changeComplaintsFilter &&
         changeComplaintsFilter(option.type as adminComplaintTypesFilter);
+    } else if (page === pageFilter.adminTransactions) {
+      changeTransactionsFilter &&
+        changeTransactionsFilter(option.type as adminTransactionTypesFilter);
+    } else if (page === pageFilter.adminChannels) {
+      changeChannelsFilter &&
+        changeChannelsFilter(option.type as adminChannelTypesFilter);
     }
     if (page === pageFilter.catalog) {
       // if (page !== pageFilter.catalog) {

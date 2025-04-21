@@ -4,7 +4,7 @@ import {
   TransactionDetails,
   TransactionDocuments,
   TransactionsRoute,
-  transactionStatus,
+  adminTransactionTypesFilter,
   useGetAdminTransactionInfoQuery,
 } from "@entities/admin";
 import { TransactionCardMenu } from "@features/adminPanel";
@@ -93,9 +93,9 @@ export const TransactionCard: FC<TransactionCardProps> = ({
         </div>
         <div
           className={`${styles.status} ${
-            card?.status === transactionStatus.complete
+            card?.status === adminTransactionTypesFilter.complete
               ? styles.complete
-              : card?.status === transactionStatus.reject
+              : card?.status === adminTransactionTypesFilter.reject
                 ? styles.reject
                 : styles.pending
           }`}
