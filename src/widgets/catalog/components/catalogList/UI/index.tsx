@@ -153,7 +153,7 @@ export const CatalogList: FC<CatalogListProps> = ({
               key={card.id + index}
               initial="hidden"
               animate="visible"
-              custom={index % INTERSECTION_ELEMENTS.catalog}
+              custom={index % INTERSECTION_ELEMENTS.CATALOG}
               variants={PAGE_ANIMATION.animationUp}
             >
               {isTableView ? (
@@ -174,7 +174,7 @@ export const CatalogList: FC<CatalogListProps> = ({
             </motion.div>
           ))}
         {isLoading &&
-          Array.from({ length: INTERSECTION_ELEMENTS.catalog }).map(
+          Array.from({ length: INTERSECTION_ELEMENTS.CATALOG }).map(
             (_, index) =>
               isTableView ? (
                 <SkeletonSmallCatalogCard key={index} />

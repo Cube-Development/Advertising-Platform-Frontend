@@ -71,7 +71,7 @@ export const channelAPI = authApi.injectEndpoints({
           isLast:
             response?.elements ===
             response?.channels?.length +
-              (response?.page - 1) * INTERSECTION_ELEMENTS.myChannels,
+              (response?.page - 1) * INTERSECTION_ELEMENTS.BLOGGER_CHANNELS,
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
@@ -119,7 +119,8 @@ export const channelAPI = authApi.injectEndpoints({
       transformResponse: (response: IReviewData) => {
         return {
           ...response,
-          isLast: response.reviews.length < INTERSECTION_ELEMENTS.channelReview,
+          isLast:
+            response.reviews.length < INTERSECTION_ELEMENTS.CHANNEL_REVIEWS,
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {

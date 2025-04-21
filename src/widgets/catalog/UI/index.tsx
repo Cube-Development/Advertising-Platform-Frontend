@@ -58,7 +58,7 @@ export const CatalogBlock: FC = () => {
     defaultValues: {
       page: savedFormState?.page || 1,
       elements_on_page:
-        savedFormState?.elements_on_page || INTERSECTION_ELEMENTS.catalog,
+        savedFormState?.elements_on_page || INTERSECTION_ELEMENTS.CATALOG,
       filter: savedFormState?.filter || {
         platform: platformTypesNum.telegram,
         business: [],
@@ -160,7 +160,7 @@ export const CatalogBlock: FC = () => {
     // Синхронизируем страницу только если параметры НЕ менялись и это не первый рендер
     if (currentData?.channels?.length && !isParamsChanged && !isFirstRender) {
       const currentPage = Math.ceil(
-        currentData.channels.length / INTERSECTION_ELEMENTS.catalog,
+        currentData.channels.length / INTERSECTION_ELEMENTS.CATALOG,
       );
       if (currentPage > formState.page) {
         setValue("page", currentPage);

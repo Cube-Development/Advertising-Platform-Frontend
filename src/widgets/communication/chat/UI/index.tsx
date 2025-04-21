@@ -278,7 +278,7 @@ export const Chat: FC<IChatProps> = ({
       dispatch(
         chatAPI.util.updateQueryData(
           "getOrderHistory",
-          { order_id: message?.order_id, batch: INTERSECTION_ELEMENTS.chat },
+          { order_id: message?.order_id, batch: INTERSECTION_ELEMENTS.CHAT },
           (draft) => {
             draft.history = draft.history.map((item) => {
               if (checkDatetime(item?.message_datetime, datetime)) {
@@ -298,7 +298,7 @@ export const Chat: FC<IChatProps> = ({
           "getProjectHistory",
           {
             project_id: message?.project_id,
-            batch: INTERSECTION_ELEMENTS.chat,
+            batch: INTERSECTION_ELEMENTS.CHAT,
           },
           (draft) => {
             draft.history = draft.history.map((item) => {

@@ -1,4 +1,4 @@
-import { adminTransactionTypesFilter, identificationType } from "../config";
+import { ADMIN_TRANSACTION_STATUS, TRANSACTION_ID_STATUS } from "../config";
 
 export interface IAdminTransactions {
   page: number;
@@ -15,13 +15,13 @@ export interface IAdminTransactionData {
   transaction_type: string;
   way_type: string;
   amount: number;
-  status: adminTransactionTypesFilter;
+  status: ADMIN_TRANSACTION_STATUS;
   subcard: IAdminTransactionInfo;
 }
 
 export interface IAdminTransactionInfo {
   id: string;
-  status: adminTransactionTypesFilter;
+  status: ADMIN_TRANSACTION_STATUS;
   sender: IUser;
   receiver: IUser;
   transactions: ITransaction[];
@@ -30,7 +30,7 @@ export interface IAdminTransactionInfo {
 
 interface IUser {
   id: string;
-  ident: identificationType;
+  ident: TRANSACTION_ID_STATUS;
   user_id?: string;
 }
 

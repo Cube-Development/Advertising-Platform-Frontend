@@ -11,7 +11,7 @@ export const Users: FC = () => {
   useClearCookiesOnPage();
   const { t } = useTranslation();
   const { watch, setValue } = useForm<getAdminUsersReq>({
-    defaultValues: { elements_on_page: INTERSECTION_ELEMENTS.adminUsers },
+    defaultValues: { elements_on_page: INTERSECTION_ELEMENTS.ADMIN_USERS },
   });
   const formFields = watch();
   const { data, isLoading, isFetching } = useGetAdminUsersQuery({

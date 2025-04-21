@@ -1,10 +1,10 @@
-import { adminReviewTypesFilter } from "@entities/admin";
+import { ADMIN_REVIEW_STATUS } from "@entities/admin";
 import { Skeleton } from "@shared/ui";
 import { FC } from "react";
 import styles from "./styles.module.scss";
 
 interface SkeletonAdminReviewCardProps {
-  status: adminReviewTypesFilter;
+  status: ADMIN_REVIEW_STATUS;
 }
 
 export const SkeletonAdminReviewCard: FC<SkeletonAdminReviewCardProps> = ({
@@ -13,7 +13,7 @@ export const SkeletonAdminReviewCard: FC<SkeletonAdminReviewCardProps> = ({
   return (
     <Skeleton className="bg-skeleton-light rounded-[0px]">
       <div
-        className={`${styles.wrapper} ${status === adminReviewTypesFilter.accept ? styles.accept : styles.wait}`}
+        className={`${styles.wrapper} ${status === ADMIN_REVIEW_STATUS.ACCEPT ? styles.accept : styles.wait}`}
       >
         <div className={styles.id}>
           <Skeleton className="h-3 w-full" />
@@ -36,7 +36,7 @@ export const SkeletonAdminReviewCard: FC<SkeletonAdminReviewCardProps> = ({
             <Skeleton className="h-2.5 w-full" />
           </div>
         </div>
-        {status === adminReviewTypesFilter.accept && (
+        {status === ADMIN_REVIEW_STATUS.ACCEPT && (
           <div className={styles.user}>
             <div className={styles.logo}>
               <Skeleton className="h-[32px] w-[32px] rounded-full" />
@@ -50,7 +50,7 @@ export const SkeletonAdminReviewCard: FC<SkeletonAdminReviewCardProps> = ({
         <div className={styles.date}>
           <Skeleton className="h-3 w-4/5" />
         </div>
-        {status === adminReviewTypesFilter.accept && (
+        {status === ADMIN_REVIEW_STATUS.ACCEPT && (
           <div className={styles.date}>
             <Skeleton className="h-3 w-4/5" />
           </div>

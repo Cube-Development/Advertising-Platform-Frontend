@@ -79,7 +79,7 @@ export const ChannelsList: FC<ChannelsListProps> = ({
                 key={card?.channel?.id}
                 initial="hidden"
                 animate="visible"
-                custom={index % INTERSECTION_ELEMENTS.adminChannels}
+                custom={index % INTERSECTION_ELEMENTS.ADMIN_CHANNELS}
                 variants={PAGE_ANIMATION.animationUp}
               >
                 <ChannelCard
@@ -91,7 +91,7 @@ export const ChannelsList: FC<ChannelsListProps> = ({
             ))}
             {(isFetching || isLoading) &&
               Array.from({
-                length: INTERSECTION_ELEMENTS.adminChannels,
+                length: INTERSECTION_ELEMENTS.ADMIN_CHANNELS,
               }).map((_, index) => <SkeletonAdminChannelCard key={index} />)}
             {!data.isLast && (
               <div className={`${styles.show_more}`} onClick={handleChange}>

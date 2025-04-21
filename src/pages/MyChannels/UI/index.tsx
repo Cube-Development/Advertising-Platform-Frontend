@@ -60,7 +60,7 @@ export const MyChannelsPage: FC = () => {
       page: 1,
       search_string: "",
       date_sort: dateSortingTypes.decrease,
-      elements_on_page: INTERSECTION_ELEMENTS.myChannels,
+      elements_on_page: INTERSECTION_ELEMENTS.BLOGGER_CHANNELS,
     },
   });
   const formState = watch();

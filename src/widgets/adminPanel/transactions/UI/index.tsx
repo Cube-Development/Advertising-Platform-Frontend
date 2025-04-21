@@ -1,6 +1,6 @@
 import {
-  adminTransactionForm,
-  adminTransactionTypesFilter,
+  ADMIN_TRANSACTION_FORM,
+  ADMIN_TRANSACTION_STATUS,
   getAdminTransactionsReq,
   useGetAdminTransactionsQuery,
 } from "@entities/admin";
@@ -20,8 +20,8 @@ export const Transactions: FC = () => {
   const { watch, setValue } = useForm<getAdminTransactionsReq>({
     defaultValues: {
       page: 1,
-      status: adminTransactionTypesFilter.pending,
-      elements_on_page: INTERSECTION_ELEMENTS.adminTransactions,
+      status: ADMIN_TRANSACTION_STATUS.PENDING,
+      elements_on_page: INTERSECTION_ELEMENTS.ADMIN_TRANSACTIONS,
     },
   });
   const formFields = watch();
@@ -30,12 +30,12 @@ export const Transactions: FC = () => {
   });
 
   const handleOnChangePage = () => {
-    setValue(adminTransactionForm.page, formFields?.page + 1);
+    setValue(ADMIN_TRANSACTION_FORM.PAGE, formFields?.page + 1);
   };
 
-  const setFilter = (filter: adminTransactionTypesFilter) => {
-    setValue(adminTransactionForm.page, 1);
-    setValue(adminTransactionForm.status, filter);
+  const setFilter = (filter: ADMIN_TRANSACTION_STATUS) => {
+    setValue(ADMIN_TRANSACTION_FORM.PAGE, 1);
+    setValue(ADMIN_TRANSACTION_FORM.STATUS, filter);
   };
 
   return (

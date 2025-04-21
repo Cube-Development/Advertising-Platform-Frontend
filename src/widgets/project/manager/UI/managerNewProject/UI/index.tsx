@@ -32,14 +32,14 @@ export const ManagerNewProjectsList: FC<ManagerNewProjectsListProps> = ({
                 key={card.id + index}
                 initial="hidden"
                 animate="visible"
-                custom={index % INTERSECTION_ELEMENTS.managerOrders}
+                custom={index % INTERSECTION_ELEMENTS.MANAGER_ORDERS}
                 variants={PAGE_ANIMATION.animationUp}
               >
                 <ManagerNewProjectCard card={card} />
               </motion.div>
             ))}
             {isLoading &&
-              Array.from({ length: INTERSECTION_ELEMENTS.managerOrders }).map(
+              Array.from({ length: INTERSECTION_ELEMENTS.MANAGER_ORDERS }).map(
                 (_, index) => <SkeletonManagerNewProjectCard key={index} />,
               )}
             {!isLast && (

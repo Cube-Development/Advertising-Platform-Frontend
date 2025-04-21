@@ -1,9 +1,9 @@
-import { adminReviewTypesFilter } from "../config";
+import { ADMIN_REVIEW_STATUS } from "../config";
 
 export interface IAdminReviews {
   page: number;
   elements: number;
-  status: adminReviewTypesFilter;
+  status: ADMIN_REVIEW_STATUS;
   reviews: IAdminReviewData[];
   isLast?: boolean;
 }

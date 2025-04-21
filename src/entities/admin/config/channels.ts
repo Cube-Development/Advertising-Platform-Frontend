@@ -1,69 +1,69 @@
-export enum adminChannelTypesFilter {
-  moderation = 0,
-  active = 1,
-  inactive = 2,
-  banned = 3,
-  deleted = 4,
-  moderationReject = 5,
-  remoderation = 6,
-  invalidUrl = 7,
+export enum ADMIN_CHANNEL_STATUS {
+  MODERATION = 0,
+  ACTIVE = 1,
+  INACTIVE = 2,
+  BANNED = 3,
+  DELETED = 4,
+  MODERATION_REJECT = 5,
+  REMODERATION = 6,
+  INVALID_URL = 7,
 }
 
-export const adminChannelStatus = [
+export const ADMIN_CHANNEL_STATUS_LIST = [
   {
     name: "admin_panel.channels.card.status.active",
-    id: adminChannelTypesFilter.active,
+    id: ADMIN_CHANNEL_STATUS.ACTIVE,
   },
   {
     name: "admin_panel.channels.card.status.moderation",
-    id: adminChannelTypesFilter.moderation,
+    id: ADMIN_CHANNEL_STATUS.MODERATION,
   },
   {
     name: "admin_panel.channels.card.status.moderation_reject",
-    id: adminChannelTypesFilter.moderationReject,
+    id: ADMIN_CHANNEL_STATUS.MODERATION_REJECT,
   },
   {
     name: "admin_panel.channels.card.status.inactive",
-    id: adminChannelTypesFilter.inactive,
+    id: ADMIN_CHANNEL_STATUS.INACTIVE,
   },
   {
     name: "admin_panel.channels.card.status.banned",
-    id: adminChannelTypesFilter.banned,
+    id: ADMIN_CHANNEL_STATUS.BANNED,
   },
   {
     name: "admin_panel.channels.card.status.remoderation",
-    id: adminChannelTypesFilter.remoderation,
+    id: ADMIN_CHANNEL_STATUS.REMODERATION,
   },
 ];
 
-export const adminChannelTypes = [
+export const ADMIN_CHANNEL_BAR_FILTER = [
   {
     name: "admin_panel.channels.card.status.active",
-    type: adminChannelTypesFilter.active,
+    type: ADMIN_CHANNEL_STATUS.ACTIVE,
   },
   {
     name: "admin_panel.channels.card.status.moderation",
-    type: adminChannelTypesFilter.moderation,
+    type: ADMIN_CHANNEL_STATUS.MODERATION,
   },
   {
     name: "admin_panel.channels.card.status.moderation_reject",
-    type: adminChannelTypesFilter.moderationReject,
+    type: ADMIN_CHANNEL_STATUS.MODERATION_REJECT,
   },
   {
     name: "admin_panel.channels.card.status.inactive",
-    type: adminChannelTypesFilter.inactive,
+    type: ADMIN_CHANNEL_STATUS.INACTIVE,
   },
   {
     name: "admin_panel.channels.card.status.banned",
-    type: adminChannelTypesFilter.banned,
+    type: ADMIN_CHANNEL_STATUS.BANNED,
   },
   {
     name: "admin_panel.channels.card.status.remoderation",
-    type: adminChannelTypesFilter.remoderation,
+    type: ADMIN_CHANNEL_STATUS.REMODERATION,
   },
 ];
 
-export enum adminChannelForm {
-  page = "page",
-  status = "status",
+export enum ADMIN_CHANNEL_FORM {
+  PAGE = "page",
+  STATUS = "status",
 }

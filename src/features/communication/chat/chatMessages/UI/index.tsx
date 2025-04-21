@@ -80,7 +80,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
     ...(card?.type === chatType.order
       ? { order_id: card?.order_id }
       : { project_id: card?.project_id }),
-    batch: INTERSECTION_ELEMENTS.chat,
+    batch: INTERSECTION_ELEMENTS.CHAT,
   });
 
   const { watch, setValue, reset } = useForm<getChatHistoryReq>({
@@ -157,7 +157,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
   useEffect(() => {
     if (
       data?.history &&
-      (data?.history?.length || 0) <= INTERSECTION_ELEMENTS.chat
+      (data?.history?.length || 0) <= INTERSECTION_ELEMENTS.CHAT
     ) {
       if (containerRef.current && !isSendMessage) {
         const scrollTo = itemRefs.current
@@ -167,7 +167,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
           }, 0);
 
         containerRef.current.scrollTop =
-          scrollTo + (INTERSECTION_ELEMENTS.chat - 1) * 15;
+          scrollTo + (INTERSECTION_ELEMENTS.CHAT - 1) * 15;
         setLastMessageToRead(data?.history[data?.history?.length - 1]);
       }
     }
@@ -377,7 +377,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
               "getOrderHistory",
               {
                 order_id: message?.order_id,
-                batch: INTERSECTION_ELEMENTS.chat,
+                batch: INTERSECTION_ELEMENTS.CHAT,
               },
               (draft) => {
                 draft.history = newHistory;
@@ -438,7 +438,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
               "getProjectHistory",
               {
                 project_id: message?.project_id,
-                batch: INTERSECTION_ELEMENTS.chat,
+                batch: INTERSECTION_ELEMENTS.CHAT,
               },
               (draft) => {
                 draft.history = newHistory;
@@ -663,8 +663,8 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
                     initial="hidden"
                     animate="visible"
                     custom={
-                      INTERSECTION_ELEMENTS.chat -
-                      (index % INTERSECTION_ELEMENTS.chat)
+                      INTERSECTION_ELEMENTS.CHAT -
+                      (index % INTERSECTION_ELEMENTS.CHAT)
                     }
                     variants={PAGE_ANIMATION.animationChat}
                     ref={(el) => (itemRefs.current[index] = el)}

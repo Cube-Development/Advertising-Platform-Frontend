@@ -32,7 +32,7 @@ export const History: FC = () => {
   const getParams: HistoryReq = {
     language: language?.id || Languages[0].id,
     page: currentPage,
-    elements_on_page: INTERSECTION_ELEMENTS.history,
+    elements_on_page: INTERSECTION_ELEMENTS.HISTORY,
     date_sort: dateSortingTypes.decrease,
   };
 
@@ -85,14 +85,14 @@ export const History: FC = () => {
                   key={card.id}
                   initial="hidden"
                   animate="visible"
-                  custom={index % INTERSECTION_ELEMENTS.history}
+                  custom={index % INTERSECTION_ELEMENTS.HISTORY}
                   variants={PAGE_ANIMATION.animationUp}
                 >
                   <HistoryCard card={card} />
                 </motion.div>
               ))}
               {(isFetching || isLoading) &&
-                Array.from({ length: INTERSECTION_ELEMENTS.history }).map(
+                Array.from({ length: INTERSECTION_ELEMENTS.HISTORY }).map(
                   (_, index) => <SkeletonHistoryCard key={index} />,
                 )}
               {!data.isLast && (
@@ -111,7 +111,7 @@ export const History: FC = () => {
           ) : isLoading || isFetching ? (
             <div className={styles.cards__list}>
               {(isFetching || isLoading) &&
-                Array.from({ length: INTERSECTION_ELEMENTS.history }).map(
+                Array.from({ length: INTERSECTION_ELEMENTS.HISTORY }).map(
                   (_, index) => <SkeletonHistoryCard key={index} />,
                 )}
             </div>

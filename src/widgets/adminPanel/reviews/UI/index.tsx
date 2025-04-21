@@ -1,6 +1,6 @@
 import {
-  adminReviewForm,
-  adminReviewTypesFilter,
+  ADMIN_REVIEW_FORM,
+  ADMIN_REVIEW_STATUS,
   getAdminReviewsReq,
   useGetAdminReviewsQuery,
 } from "@entities/admin";
@@ -20,8 +20,8 @@ export const Reviews: FC = () => {
   const { watch, setValue } = useForm<getAdminReviewsReq>({
     defaultValues: {
       page: 1,
-      status: adminReviewTypesFilter.wait,
-      elements_on_page: INTERSECTION_ELEMENTS.adminReviews,
+      status: ADMIN_REVIEW_STATUS.WAIT,
+      elements_on_page: INTERSECTION_ELEMENTS.ADMIN_REVIEWS,
     },
   });
   const formFields = watch();
@@ -30,12 +30,12 @@ export const Reviews: FC = () => {
   });
 
   const handleOnChangePage = () => {
-    setValue(adminReviewForm.page, formFields?.page + 1);
+    setValue(ADMIN_REVIEW_FORM.PAGE, formFields?.page + 1);
   };
 
-  const setComplaintFilter = (filter: adminReviewTypesFilter) => {
-    setValue(adminReviewForm.page, 1);
-    setValue(adminReviewForm.status, filter);
+  const setComplaintFilter = (filter: ADMIN_REVIEW_STATUS) => {
+    setValue(ADMIN_REVIEW_FORM.PAGE, 1);
+    setValue(ADMIN_REVIEW_FORM.STATUS, filter);
   };
   console.log(data);
   return (

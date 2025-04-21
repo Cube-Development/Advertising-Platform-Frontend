@@ -1,20 +1,20 @@
-export enum adminReviewTypesFilter {
-  wait = 0,
-  accept = 1,
+export enum ADMIN_REVIEW_STATUS {
+  WAIT = 0,
+  ACCEPT = 1,
 }
 
-export const adminReviewTypes = [
+export const ADMIN_REVIEW_BAR_FILTER = [
   {
     name: "admin_panel.reviews.types.wait",
-    type: adminReviewTypesFilter.wait,
+    type: ADMIN_REVIEW_STATUS.WAIT,
   },
   {
     name: "admin_panel.reviews.types.accept",
-    type: adminReviewTypesFilter.accept,
+    type: ADMIN_REVIEW_STATUS.ACCEPT,
   },
 ];
 
-export enum adminReviewForm {
-  page = "page",
-  status = "status",
+export enum ADMIN_REVIEW_FORM {
+  PAGE = "page",
+  STATUS = "status",
 }

@@ -1,6 +1,6 @@
 import {
-  adminComplaintForm,
-  adminComplaintTypesFilter,
+  ADMIN_COMPLAINT_FORM,
+  ADMIN_COMPLAINT_STATUS,
   getAdminOrderComplaintsReq,
   useGetAdminOrderComplaintsQuery,
 } from "@entities/admin";
@@ -20,8 +20,8 @@ export const Complaints: FC = () => {
   const { watch, setValue } = useForm<getAdminOrderComplaintsReq>({
     defaultValues: {
       page: 1,
-      elements_on_page: INTERSECTION_ELEMENTS.adminComplaints,
-      order_complaint_status: adminComplaintTypesFilter.wait,
+      elements_on_page: INTERSECTION_ELEMENTS.ADMIN_COMPLAINTS,
+      order_complaint_status: ADMIN_COMPLAINT_STATUS.WAIT,
     },
   });
   const formFields = watch();
@@ -30,12 +30,12 @@ export const Complaints: FC = () => {
   });
 
   const handleOnChangePage = () => {
-    setValue(adminComplaintForm.page, formFields?.page + 1);
+    setValue(ADMIN_COMPLAINT_FORM.PAGE, formFields?.page + 1);
   };
 
-  const setComplaintFilter = (filter: adminComplaintTypesFilter) => {
-    setValue(adminComplaintForm.page, 1);
-    setValue(adminComplaintForm.order_complaint_status, filter);
+  const setComplaintFilter = (filter: ADMIN_COMPLAINT_STATUS) => {
+    setValue(ADMIN_COMPLAINT_FORM.PAGE, 1);
+    setValue(ADMIN_COMPLAINT_FORM.STATUS, filter);
   };
 
   return (

@@ -182,7 +182,7 @@ export const chatAPI = authApi.injectEndpoints({
         });
         return {
           history: newHistory,
-          isLast: response.length !== INTERSECTION_ELEMENTS.chat,
+          isLast: response.length !== INTERSECTION_ELEMENTS.CHAT,
         };
       },
       merge: (currentCache: IAllMessages, newItems: IAllMessages) => {
@@ -199,7 +199,7 @@ export const chatAPI = authApi.injectEndpoints({
           );
         return {
           history: uniqueHistory,
-          isLast: newItems.history.length !== INTERSECTION_ELEMENTS.chat,
+          isLast: newItems.history.length !== INTERSECTION_ELEMENTS.CHAT,
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
@@ -236,7 +236,7 @@ export const chatAPI = authApi.injectEndpoints({
         });
         return {
           history: newHistory,
-          isLast: response.length !== INTERSECTION_ELEMENTS.chat,
+          isLast: response.length !== INTERSECTION_ELEMENTS.CHAT,
         };
       },
       merge: (currentCache: IAllMessages, newItems: IAllMessages) => {
@@ -253,7 +253,7 @@ export const chatAPI = authApi.injectEndpoints({
           );
         return {
           history: uniqueHistory,
-          isLast: newItems.history.length !== INTERSECTION_ELEMENTS.chat,
+          isLast: newItems.history.length !== INTERSECTION_ELEMENTS.CHAT,
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {

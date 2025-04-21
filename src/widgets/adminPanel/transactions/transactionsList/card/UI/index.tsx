@@ -1,10 +1,10 @@
 import {
-  adminTransactionStatus,
+  ADMIN_TRANSACTION_STATUS_LIST,
   IAdminTransactionData,
   TransactionDetails,
   TransactionDocuments,
   TransactionsRoute,
-  adminTransactionTypesFilter,
+  ADMIN_TRANSACTION_STATUS,
   useGetAdminTransactionInfoQuery,
 } from "@entities/admin";
 import { TransactionCardMenu } from "@features/adminPanel";
@@ -93,17 +93,18 @@ export const TransactionCard: FC<TransactionCardProps> = ({
         </div>
         <div
           className={`${styles.status} ${
-            card?.status === adminTransactionTypesFilter.complete
+            card?.status === ADMIN_TRANSACTION_STATUS.COMPLETE
               ? styles.complete
-              : card?.status === adminTransactionTypesFilter.reject
+              : card?.status === ADMIN_TRANSACTION_STATUS.REJECT
                 ? styles.reject
                 : styles.pending
           }`}
         >
           <p className="truncate">
             {t(
-              adminTransactionStatus.find((item) => item.id === card?.status)
-                ?.name || "",
+              ADMIN_TRANSACTION_STATUS_LIST.find(
+                (item) => item.id === card?.status,
+              )?.name || "",
             )}
           </p>
         </div>

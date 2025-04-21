@@ -42,7 +42,7 @@ export const OffersPage: FC = () => {
           : offerStatusFilter.active,
       page: 1,
       language: language?.id || Languages[0].id,
-      elements_on_page: INTERSECTION_ELEMENTS.bloggerOffers,
+      elements_on_page: INTERSECTION_ELEMENTS.BLOGGER_OFFERS,
       date_sort: dateSortingTypes.decrease,
       search_string: "",
     },

@@ -1,12 +1,12 @@
 import {
-  adminChannelTypes,
-  adminChannelTypesFilter,
-  adminComplaintTypes,
-  adminComplaintTypesFilter,
-  adminReviewTypes,
-  adminReviewTypesFilter,
-  adminTransactionTypes,
-  adminTransactionTypesFilter,
+  ADMIN_CHANNEL_BAR_FILTER,
+  ADMIN_CHANNEL_STATUS,
+  ADMIN_COMPLAINT_BAR_FILTER,
+  ADMIN_COMPLAINT_STATUS,
+  ADMIN_REVIEW_BAR_FILTER,
+  ADMIN_REVIEW_STATUS,
+  ADMIN_TRANSACTION_BAR_FILTER,
+  ADMIN_TRANSACTION_STATUS,
 } from "@entities/admin";
 import {
   chatAdvertiserTypes,
@@ -49,14 +49,14 @@ interface BarSubfilterProps {
   changeCatalogFilter?: (filter: catalogBarFilter) => void;
   chatFilter?: chatTypesFilter;
   changeChatFilter?: (filter: chatTypesFilter) => void;
-  reviewsFilter?: adminReviewTypesFilter;
-  changeReviewsFilter?: (filter: adminReviewTypesFilter) => void;
-  complaintsFilter?: adminComplaintTypesFilter;
-  changeComplaintsFilter?: (filter: adminComplaintTypesFilter) => void;
-  transactionsFilter?: adminTransactionTypesFilter;
-  changeTransactionsFilter?: (filter: adminTransactionTypesFilter) => void;
-  channelsFilter?: adminChannelTypesFilter;
-  changeChannelsFilter?: (filter: adminChannelTypesFilter) => void;
+  reviewsFilter?: ADMIN_REVIEW_STATUS;
+  changeReviewsFilter?: (filter: ADMIN_REVIEW_STATUS) => void;
+  complaintsFilter?: ADMIN_COMPLAINT_STATUS;
+  changeComplaintsFilter?: (filter: ADMIN_COMPLAINT_STATUS) => void;
+  transactionsFilter?: ADMIN_TRANSACTION_STATUS;
+  changeTransactionsFilter?: (filter: ADMIN_TRANSACTION_STATUS) => void;
+  channelsFilter?: ADMIN_CHANNEL_STATUS;
+  changeChannelsFilter?: (filter: ADMIN_CHANNEL_STATUS) => void;
   fileFilter?: addFileFilter;
   changeFileFilter?: (filter: addFileFilter) => void;
   badge?: { status: string; count: number }[];
@@ -69,16 +69,16 @@ interface IFilterOption {
     | catalogBarFilter
     | chatTypesFilter
     | addFileFilter
-    | adminReviewTypesFilter
-    | adminComplaintTypesFilter
-    | adminTransactionTypesFilter
-    | adminChannelTypesFilter;
+    | ADMIN_REVIEW_STATUS
+    | ADMIN_COMPLAINT_STATUS
+    | ADMIN_TRANSACTION_STATUS
+    | ADMIN_CHANNEL_STATUS;
   id?: profileTypesNum;
 }
 
 export const BarSubfilter: FC<BarSubfilterProps> = ({
   page,
-  resetValues,
+  resetValues = () => {},
   resetActiveAccount,
   profileFilter,
   changeProfile,
@@ -118,16 +118,16 @@ export const BarSubfilter: FC<BarSubfilterProps> = ({
               : page === pageFilter.createOrderFiles
                 ? [addFileTypes, fileFilter]
                 : page === pageFilter.adminReviews && role === roles.moderator
-                  ? [adminReviewTypes, reviewsFilter]
+                  ? [ADMIN_REVIEW_BAR_FILTER, reviewsFilter]
                   : page === pageFilter.adminComplaint &&
                       role === roles.moderator
-                    ? [adminComplaintTypes, complaintsFilter]
+                    ? [ADMIN_COMPLAINT_BAR_FILTER, complaintsFilter]
                     : page === pageFilter.adminTransactions &&
                         role === roles.moderator
-                      ? [adminTransactionTypes, transactionsFilter]
+                      ? [ADMIN_TRANSACTION_BAR_FILTER, transactionsFilter]
                       : page === pageFilter.adminChannels &&
                           role === roles.moderator
-                        ? [adminChannelTypes, channelsFilter]
+                        ? [ADMIN_CHANNEL_BAR_FILTER, channelsFilter]
                         : [[], "", ""];
 
   const toggleBar = (option: IFilterOption) => {
@@ -155,21 +155,21 @@ export const BarSubfilter: FC<BarSubfilterProps> = ({
       changeFileFilter && changeFileFilter(option.type as addFileFilter);
     } else if (page === pageFilter.adminReviews) {
       changeReviewsFilter &&
-        changeReviewsFilter(option.type as adminReviewTypesFilter);
+        changeReviewsFilter(option.type as ADMIN_REVIEW_STATUS);
     } else if (page === pageFilter.adminComplaint) {
       changeComplaintsFilter &&
-        changeComplaintsFilter(option.type as adminComplaintTypesFilter);
+        changeComplaintsFilter(option.type as ADMIN_COMPLAINT_STATUS);
     } else if (page === pageFilter.adminTransactions) {
       changeTransactionsFilter &&
-        changeTransactionsFilter(option.type as adminTransactionTypesFilter);
+        changeTransactionsFilter(option.type as ADMIN_TRANSACTION_STATUS);
     } else if (page === pageFilter.adminChannels) {
       changeChannelsFilter &&
-        changeChannelsFilter(option.type as adminChannelTypesFilter);
+        changeChannelsFilter(option.type as ADMIN_CHANNEL_STATUS);
     }
     if (page === pageFilter.catalog) {
       // if (page !== pageFilter.catalog) {
       // изменил этот момент
-      resetValues!();
+      resetValues();
     }
   };
 

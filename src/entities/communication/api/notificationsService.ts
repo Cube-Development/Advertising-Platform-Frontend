@@ -34,7 +34,7 @@ export const notificationsAPI = authApi.injectEndpoints({
           notifications: newNotifications,
           isLast:
             response.notifications.length !==
-            INTERSECTION_ELEMENTS.notifications,
+            INTERSECTION_ELEMENTS.NOTIFICATIONS,
         };
       },
       merge: (currentCache, newItems) => {
@@ -46,7 +46,7 @@ export const notificationsAPI = authApi.injectEndpoints({
           ],
           isLast:
             newItems.notifications.length !==
-            INTERSECTION_ELEMENTS.notifications,
+            INTERSECTION_ELEMENTS.NOTIFICATIONS,
         };
       },
       serializeQueryArgs: ({ endpointName }) => {

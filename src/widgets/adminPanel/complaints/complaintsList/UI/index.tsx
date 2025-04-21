@@ -1,4 +1,4 @@
-import { adminComplaintTypesFilter, IAdminComplaints } from "@entities/admin";
+import { ADMIN_COMPLAINT_STATUS, IAdminComplaints } from "@entities/admin";
 import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
 import { ShowMoreBtn, SpinnerLoaderSmall } from "@shared/ui";
 import { motion } from "framer-motion";
@@ -13,7 +13,7 @@ interface ComplaintsListProps {
   isLoading: boolean;
   isFetching: boolean;
   handleChange: () => void;
-  status: adminComplaintTypesFilter;
+  status: ADMIN_COMPLAINT_STATUS;
 }
 
 export const ComplaintsList: FC<ComplaintsListProps> = ({
@@ -27,7 +27,7 @@ export const ComplaintsList: FC<ComplaintsListProps> = ({
   return (
     <div className={styles.wrapper}>
       <div
-        className={`${styles.bar}  ${status === adminComplaintTypesFilter.wait ? styles.wait : status === adminComplaintTypesFilter.active ? styles.active : styles.completed}`}
+        className={`${styles.bar}  ${status === ADMIN_COMPLAINT_STATUS.WAIT ? styles.wait : status === ADMIN_COMPLAINT_STATUS.ACTIVE ? styles.active : styles.completed}`}
       >
         <div className={styles.column}>
           <p className="truncate">{t("admin_panel.complaints.bar.id")}</p>
@@ -41,21 +41,21 @@ export const ComplaintsList: FC<ComplaintsListProps> = ({
         <div className={styles.column}>
           <p className="truncate">{t("admin_panel.complaints.bar.created")}</p>
         </div>
-        {status === adminComplaintTypesFilter.wait && (
+        {status === ADMIN_COMPLAINT_STATUS.WAIT && (
           <div className={styles.column}>
             <p className="truncate">
               {t("admin_panel.complaints.bar.priority")}
             </p>
           </div>
         )}
-        {status === adminComplaintTypesFilter.complete && (
+        {status === ADMIN_COMPLAINT_STATUS.COMPLETE && (
           <div className={styles.column}>
             <p className="truncate">
               {t("admin_panel.complaints.bar.completed")}
             </p>
           </div>
         )}
-        {status !== adminComplaintTypesFilter.wait && (
+        {status !== ADMIN_COMPLAINT_STATUS.WAIT && (
           <div className={styles.column}>
             <p className="truncate">
               {t("admin_panel.complaints.bar.moderator")}
@@ -70,14 +70,14 @@ export const ComplaintsList: FC<ComplaintsListProps> = ({
               key={card.id}
               initial="hidden"
               animate="visible"
-              custom={index % INTERSECTION_ELEMENTS.adminComplaints}
+              custom={index % INTERSECTION_ELEMENTS.ADMIN_COMPLAINTS}
               variants={PAGE_ANIMATION.animationUp}
             >
               <ComplaintCard card={card} status={status} />
             </motion.div>
           ))}
           {(isFetching || isLoading) &&
-            Array.from({ length: INTERSECTION_ELEMENTS.adminComplaints }).map(
+            Array.from({ length: INTERSECTION_ELEMENTS.ADMIN_COMPLAINTS }).map(
               (_, index) => <SkeletonAdminComplaintCard key={index} />,
             )}
           {!data.isLast && (

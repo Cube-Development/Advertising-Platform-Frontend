@@ -64,7 +64,7 @@ export const AdvOrders: FC = () => {
       status: startStatus,
       page: 1,
       date_sort: dateSortingTypes.decrease,
-      elements_on_page: INTERSECTION_ELEMENTS.advOrders,
+      elements_on_page: INTERSECTION_ELEMENTS.ADV_ORDERS,
       language: language?.id || Languages[0].id,
     },
   });

@@ -184,7 +184,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
           isLast:
             response?.elements ===
             response?.projects?.length +
-              (response?.page - 1) * INTERSECTION_ELEMENTS.advOrders,
+              (response?.page - 1) * INTERSECTION_ELEMENTS.ADV_ORDERS,
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
@@ -259,7 +259,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
           isLast:
             response?.elements ===
             response?.projects?.length +
-              (response?.page - 1) * INTERSECTION_ELEMENTS.advOrders,
+              (response?.page - 1) * INTERSECTION_ELEMENTS.ADV_ORDERS,
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {

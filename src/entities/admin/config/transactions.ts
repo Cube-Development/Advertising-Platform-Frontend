@@ -1,56 +1,56 @@
-export enum adminTransactionTypesFilter {
-  reject = 3,
-  complete = 1,
-  pending = 2,
+export enum ADMIN_TRANSACTION_STATUS {
+  COMPLETE = 1,
+  PENDING = 2,
+  REJECT = 3,
 }
 
-export const adminTransactionStatus = [
+export const ADMIN_TRANSACTION_STATUS_LIST = [
   {
     name: "admin_panel.transactions.card.status.complete",
-    id: adminTransactionTypesFilter.complete,
+    id: ADMIN_TRANSACTION_STATUS.COMPLETE,
   },
   {
     name: "admin_panel.transactions.card.status.reject",
-    id: adminTransactionTypesFilter.reject,
+    id: ADMIN_TRANSACTION_STATUS.REJECT,
   },
   {
     name: "admin_panel.transactions.card.status.pending",
-    id: adminTransactionTypesFilter.pending,
+    id: ADMIN_TRANSACTION_STATUS.PENDING,
   },
 ];
 
-export const adminTransactionTypes = [
+export const ADMIN_TRANSACTION_BAR_FILTER = [
   {
     name: "admin_panel.transactions.card.status.complete",
-    type: adminTransactionTypesFilter.complete,
+    type: ADMIN_TRANSACTION_STATUS.COMPLETE,
   },
   {
     name: "admin_panel.transactions.card.status.reject",
-    type: adminTransactionTypesFilter.reject,
+    type: ADMIN_TRANSACTION_STATUS.REJECT,
   },
   {
     name: "admin_panel.transactions.card.status.pending",
-    type: adminTransactionTypesFilter.pending,
+    type: ADMIN_TRANSACTION_STATUS.PENDING,
   },
 ];
 
-export enum adminTransactionForm {
-  page = "page",
-  status = "status",
+export enum ADMIN_TRANSACTION_FORM {
+  PAGE = "page",
+  STATUS = "status",
 }
 
-export enum identificationType {
-  turnover = 3,
-  user = 4,
+export enum TRANSACTION_ID_STATUS {
+  TURNOVER = 3,
+  USER = 4,
 }
 
-export const adminIdentificationStatus = [
+export const ADMIN_TRANSACTION_ID_LIST = [
   {
     name: "admin_panel.transactions.card.details.identification.turnover",
-    id: identificationType.turnover,
+    id: TRANSACTION_ID_STATUS.TURNOVER,
   },
   {
     name: "admin_panel.transactions.card.details.identification.user",
-    id: identificationType.user,
+    id: TRANSACTION_ID_STATUS.USER,
   },
 ];

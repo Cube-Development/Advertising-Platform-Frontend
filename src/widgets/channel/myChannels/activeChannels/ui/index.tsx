@@ -39,14 +39,14 @@ export const ActiveChannels: FC<ActiveChannelsProps> = ({
               key={card.id + index}
               initial="hidden"
               animate="visible"
-              custom={index % INTERSECTION_ELEMENTS.myChannels}
+              custom={index % INTERSECTION_ELEMENTS.BLOGGER_CHANNELS}
               variants={PAGE_ANIMATION.animationUp}
             >
               <ChannelCard statusFilter={statusFilter} card={card} />
             </motion.div>
           ))}
           {isLoading &&
-            Array.from({ length: INTERSECTION_ELEMENTS.myChannels }).map(
+            Array.from({ length: INTERSECTION_ELEMENTS.BLOGGER_CHANNELS }).map(
               (_, index) => (
                 <ChannelCardSkeleton key={index} statusFilter={statusFilter} />
               ),

@@ -68,7 +68,7 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
           isLast:
             response?.elements ===
             response?.orders?.length +
-              (response?.page - 1) * INTERSECTION_ELEMENTS.bloggerOffers,
+              (response?.page - 1) * INTERSECTION_ELEMENTS.BLOGGER_OFFERS,
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {

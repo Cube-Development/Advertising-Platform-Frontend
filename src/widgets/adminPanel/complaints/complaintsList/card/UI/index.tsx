@@ -1,7 +1,7 @@
 import {
-  adminComplaintPriorityStatus,
-  adminComplaintTypesFilter,
-  complaintPriority,
+  ADMIN_COMPLAINT_PRIORITY_STATUS_LIST,
+  ADMIN_COMPLAINT_STATUS,
+  ADMIN_COMPLAINT_PRIORITY,
   IAdminComplaintData,
 } from "@entities/admin";
 import { ChooseComplaint, SeeComplaint } from "@features/adminPanel";
@@ -16,7 +16,7 @@ import noUserAvatar from "/images/notFound/noUserAvatar.jpg";
 
 interface ComplaintCardProps {
   card: IAdminComplaintData;
-  status: adminComplaintTypesFilter;
+  status: ADMIN_COMPLAINT_STATUS;
 }
 
 export const ComplaintCard: FC<ComplaintCardProps> = ({ card, status }) => {
@@ -33,7 +33,7 @@ export const ComplaintCard: FC<ComplaintCardProps> = ({ card, status }) => {
 
   return (
     <div
-      className={`${styles.wrapper} ${status === adminComplaintTypesFilter.wait ? styles.wait : status === adminComplaintTypesFilter.active ? styles.active : styles.completed}`}
+      className={`${styles.wrapper} ${status === ADMIN_COMPLAINT_STATUS.WAIT ? styles.wait : status === ADMIN_COMPLAINT_STATUS.ACTIVE ? styles.active : styles.completed}`}
     >
       <div
         className={`${styles.column} ${styles.id}`}
@@ -66,7 +66,7 @@ export const ComplaintCard: FC<ComplaintCardProps> = ({ card, status }) => {
       <div className={styles.column}>
         <p>{card?.created}</p>
       </div>
-      {status === adminComplaintTypesFilter.complete && (
+      {status === ADMIN_COMPLAINT_STATUS.COMPLETE && (
         <div className={styles.column}>
           <p>{card?.completed}</p>
         </div>
@@ -96,20 +96,20 @@ export const ComplaintCard: FC<ComplaintCardProps> = ({ card, status }) => {
         </div>
       )} */}
       <div className={styles.last}>
-        {status === adminComplaintTypesFilter.wait ? (
+        {status === ADMIN_COMPLAINT_STATUS.WAIT ? (
           <>
             <div
               className={`${styles.priority} ${
-                card?.priority === complaintPriority.low
+                card?.priority === ADMIN_COMPLAINT_PRIORITY.LOW
                   ? styles.low
-                  : card?.priority === complaintPriority.medium
+                  : card?.priority === ADMIN_COMPLAINT_PRIORITY.MEDIUM
                     ? styles.medium
                     : styles.high
               }`}
             >
               <p>
                 {t(
-                  adminComplaintPriorityStatus.find(
+                  ADMIN_COMPLAINT_PRIORITY_STATUS_LIST.find(
                     (item) => item?.id === card?.priority,
                   )?.name || "",
                 )}

@@ -82,16 +82,16 @@ export const Reviews: FC<ReviewsProps> = ({ card, isLoadingReviews }) => {
                   key={review.date + review.email + index} // заменить на review.id когда будет апи
                   initial="hidden"
                   animate="visible"
-                  custom={index % INTERSECTION_ELEMENTS.channelReview}
+                  custom={index % INTERSECTION_ELEMENTS.CHANNEL_REVIEWS}
                   variants={PAGE_ANIMATION.animationUp}
                 >
                   <ReviewCard card={review} />
                 </motion.div>
               ))}
               {isLoading &&
-                Array.from({ length: INTERSECTION_ELEMENTS.channelReview }).map(
-                  (_, index) => <SkeletonReviewCard key={index} />,
-                )}
+                Array.from({
+                  length: INTERSECTION_ELEMENTS.CHANNEL_REVIEWS,
+                }).map((_, index) => <SkeletonReviewCard key={index} />)}
               {!reviews?.isLast && (
                 <div className={styles.show_more} onClick={handleOnChangePage}>
                   <ShowMoreBtn />
@@ -104,7 +104,7 @@ export const Reviews: FC<ReviewsProps> = ({ card, isLoadingReviews }) => {
         <>
           <SkeletonChannelRate />
           <div className={styles.reviews__wrapper}>
-            {Array.from({ length: INTERSECTION_ELEMENTS.channelReview }).map(
+            {Array.from({ length: INTERSECTION_ELEMENTS.CHANNEL_REVIEWS }).map(
               (_, index) => (
                 <SkeletonReviewCard key={index} />
               ),

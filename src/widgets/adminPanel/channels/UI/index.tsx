@@ -1,6 +1,6 @@
 import {
-  adminChannelForm,
-  adminChannelTypesFilter,
+  ADMIN_CHANNEL_FORM,
+  ADMIN_CHANNEL_STATUS,
   getAdminChannelsReq,
   useGetAdminChannelsQuery,
 } from "@entities/admin";
@@ -20,8 +20,8 @@ export const Channels: FC = () => {
   const { watch, setValue } = useForm<getAdminChannelsReq>({
     defaultValues: {
       page: 1,
-      status: adminChannelTypesFilter.active,
-      elements_on_page: INTERSECTION_ELEMENTS.adminChannels,
+      status: ADMIN_CHANNEL_STATUS.ACTIVE,
+      elements_on_page: INTERSECTION_ELEMENTS.ADMIN_CHANNELS,
     },
   });
   const formFields = watch();
@@ -30,12 +30,12 @@ export const Channels: FC = () => {
   });
 
   const handleOnChangePage = () => {
-    setValue(adminChannelForm.page, formFields?.page + 1);
+    setValue(ADMIN_CHANNEL_FORM.PAGE, formFields?.page + 1);
   };
 
-  const setFilter = (filter: adminChannelTypesFilter) => {
-    setValue(adminChannelForm.page, 1);
-    setValue(adminChannelForm.status, filter);
+  const setFilter = (filter: ADMIN_CHANNEL_STATUS) => {
+    setValue(ADMIN_CHANNEL_FORM.PAGE, 1);
+    setValue(ADMIN_CHANNEL_FORM.STATUS, filter);
   };
 
   return (
