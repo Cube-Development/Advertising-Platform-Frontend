@@ -5,9 +5,9 @@ import {
   SelfEmployedCardData,
   SelfEmployedData,
   formDataLength,
-  profileTypesName,
-  profileTypesNum,
-  subprofileFilterTypes,
+  PROFILE_TYPE,
+  PROFILE_STATUS,
+  SUBPROFILE_TYPE,
 } from "@entities/wallet";
 import { LegalForm, PaymentDidox } from "@features/wallet";
 import { paths } from "@shared/routing";
@@ -28,12 +28,12 @@ import { isValidAmount } from "@shared/utils";
 interface PaymentDataProps {
   amountTitle: string;
   profileFilter: {
-    type: profileTypesName;
-    id?: profileTypesNum;
+    type: PROFILE_TYPE;
+    id?: PROFILE_STATUS;
   };
   subprofileFilter: {
-    type: subprofileFilterTypes;
-    id: profileTypesNum;
+    type: SUBPROFILE_TYPE;
+    id: PROFILE_STATUS;
   };
   errors?: FieldErrors<IExtendedProfileData>;
   watch?: UseFormWatch<IExtendedProfileData>;
@@ -66,12 +66,12 @@ export const PaymentData: FC<PaymentDataProps> = ({
   const [isAccept, setIsAccept] = useState<typeof accept>(accept);
 
   const typeLegal =
-    profileFilter.type === profileTypesName.entities
+    profileFilter.type === PROFILE_TYPE.ENTITIES
       ? EntityData
-      : profileFilter.type === profileTypesName.individuals
+      : profileFilter.type === PROFILE_TYPE.INDIVIDUALS
         ? IndividualData
-        : profileFilter.type === profileTypesName.selfEmployedAccounts &&
-            subprofileFilter.type === subprofileFilterTypes.account
+        : profileFilter.type === PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT &&
+            subprofileFilter.type === SUBPROFILE_TYPE.ACCOUNT
           ? SelfEmployedData
           : SelfEmployedCardData;
 

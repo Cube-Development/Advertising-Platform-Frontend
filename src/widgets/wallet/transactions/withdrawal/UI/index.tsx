@@ -3,21 +3,22 @@ import {
   ILegalCard,
   ILegalCardShort,
   ILegalData,
-  profileTypesName,
-  profileTypesNum,
-  subprofileFilterTypes,
+  PROFILE_FILTER_TABS_LIST,
+  PROFILE_STATUS,
+  PROFILE_TYPE,
+  SUBPROFILE_TYPE,
   useCreateLegalMutation,
   useEditLegalMutation,
   usePaymentWithdrawalMutation,
   useReadLegalsByTypeQuery,
   useReadOneLegalMutation,
 } from "@entities/wallet";
-import { BarSubfilter } from "@features/other";
+import { BarSubFilter } from "@features/other";
 import { BarSubrofileFilter } from "@features/wallet";
 import { ArrowIcon5 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
 import { useClearCookiesOnPage, useWindowWidth } from "@shared/hooks";
-import { pageFilter, paths } from "@shared/routing";
+import { paths } from "@shared/routing";
 import { ToastAction, useToast } from "@shared/ui";
 import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -45,23 +46,33 @@ export const Withdrawal: FC = () => {
   } = useForm<IExtendedProfileData>({
     defaultValues: {
       profileFilter: {
-        type: profileTypesName.selfEmployedAccounts,
-        id: profileTypesNum.selfEmployedAccounts,
+        type: PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT,
+        id: PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT,
       },
       subprofileFilter: {
-        type: subprofileFilterTypes.account,
-        id: profileTypesNum.selfEmployedAccounts,
+        type: SUBPROFILE_TYPE.ACCOUNT,
+        id: PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT,
       },
     },
   });
   const formState = watch();
+
+  const resetValues = () => {
+    setActiveAccount(null);
+  };
+
+  const changeTab = (filter: PROFILE_TYPE) => {
+    const item = PROFILE_FILTER_TABS_LIST.find((item) => item.type === filter)!;
+    const newFilter = { type: item?.type, id: item?.id };
+    setValue("profileFilter", newFilter);
+  };
 
   const {
     data: legalsByType,
     isLoading: isReadLegalsLoading,
     error: readLegalsError,
   } = useReadLegalsByTypeQuery(
-    formState.profileFilter.type === profileTypesName.selfEmployedAccounts
+    formState.profileFilter.type === PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT
       ? formState.subprofileFilter.id
       : formState.profileFilter.id,
   );
@@ -113,83 +124,83 @@ export const Withdrawal: FC = () => {
       subprofileFilter: formState.subprofileFilter,
 
       // юр.лицо
-      ...(formState.profileFilter.id === profileTypesNum.entities && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.ENTITIES && {
         INN: formState.INN,
       }),
-      ...(formState.profileFilter.id === profileTypesNum.entities && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.ENTITIES && {
         address: formState.address,
       }),
-      ...(formState.profileFilter.id === profileTypesNum.entities && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.ENTITIES && {
         checking_account: formState.checking_account,
       }),
-      ...(formState.profileFilter.id === profileTypesNum.entities && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.ENTITIES && {
         type_legal: formState.profileFilter.id,
       }),
 
       // ИП
-      ...(formState.profileFilter.id === profileTypesNum.individuals && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.INDIVIDUALS && {
         INN: formState.INN,
       }),
-      ...(formState.profileFilter.id === profileTypesNum.individuals && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.INDIVIDUALS && {
         address: formState.address,
       }),
-      ...(formState.profileFilter.id === profileTypesNum.individuals && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.INDIVIDUALS && {
         checking_account: formState.checking_account,
       }),
-      ...(formState.profileFilter.id === profileTypesNum.individuals && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.INDIVIDUALS && {
         type_legal: formState.profileFilter.id,
       }),
 
       // самозанятый р/с
-      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
-        formState.subprofileFilter.type === subprofileFilterTypes.account && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT &&
+        formState.subprofileFilter.type === SUBPROFILE_TYPE.ACCOUNT && {
           PNFL: formState.PNFL,
         }),
-      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
-        formState.subprofileFilter.type === subprofileFilterTypes.account && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT &&
+        formState.subprofileFilter.type === SUBPROFILE_TYPE.ACCOUNT && {
           checking_account: formState.checking_account,
         }),
-      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
-        formState.subprofileFilter.type === subprofileFilterTypes.account && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT &&
+        formState.subprofileFilter.type === SUBPROFILE_TYPE.ACCOUNT && {
           registration_date: formState.registration_date,
         }),
-      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
-        formState.subprofileFilter.type === subprofileFilterTypes.account && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT &&
+        formState.subprofileFilter.type === SUBPROFILE_TYPE.ACCOUNT && {
           registration_number: formState.registration_number,
         }),
-      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
-        formState.subprofileFilter.type === subprofileFilterTypes.account && {
-          type_legal: profileTypesNum.selfEmployedAccounts,
+      ...(formState.profileFilter.id === PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT &&
+        formState.subprofileFilter.type === SUBPROFILE_TYPE.ACCOUNT && {
+          type_legal: PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT,
         }),
 
       // самозанятый т/с
-      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
-        formState.subprofileFilter.type === subprofileFilterTypes.card && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT &&
+        formState.subprofileFilter.type === SUBPROFILE_TYPE.CARD && {
           PNFL: formState.PNFL,
         }),
-      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
-        formState.subprofileFilter.type === subprofileFilterTypes.card && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT &&
+        formState.subprofileFilter.type === SUBPROFILE_TYPE.CARD && {
           transit_account: formState.transit_account,
         }),
-      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
-        formState.subprofileFilter.type === subprofileFilterTypes.card && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT &&
+        formState.subprofileFilter.type === SUBPROFILE_TYPE.CARD && {
           registration_date: formState.registration_date,
         }),
-      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
-        formState.subprofileFilter.type === subprofileFilterTypes.card && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT &&
+        formState.subprofileFilter.type === SUBPROFILE_TYPE.CARD && {
           registration_number: formState.registration_number,
         }),
-      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
-        formState.subprofileFilter.type === subprofileFilterTypes.card && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT &&
+        formState.subprofileFilter.type === SUBPROFILE_TYPE.CARD && {
           card_number: formState.card_number,
         }),
-      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
-        formState.subprofileFilter.type === subprofileFilterTypes.card && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT &&
+        formState.subprofileFilter.type === SUBPROFILE_TYPE.CARD && {
           card_date: formState.card_date,
         }),
-      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
-        formState.subprofileFilter.type === subprofileFilterTypes.card && {
-          type_legal: profileTypesNum.selfEmployedTransits,
+      ...(formState.profileFilter.id === PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT &&
+        formState.subprofileFilter.type === SUBPROFILE_TYPE.CARD && {
+          type_legal: PROFILE_STATUS.SELF_EMPLOYED_TRANSIT,
         }),
     };
     !isCreateLoading &&
@@ -272,14 +283,11 @@ export const Withdrawal: FC = () => {
           <p>{t("wallet.withdraw.title")}</p>
           <ArrowIcon5 />
         </div>
-        <BarSubfilter
-          resetValues={reset}
-          page={pageFilter.walletWithdraw}
-          resetActiveAccount={setActiveAccount}
-          profileFilter={formState.profileFilter}
-          changeProfile={(profileFilter) =>
-            setValue("profileFilter", profileFilter)
-          }
+        <BarSubFilter
+          tab={formState.profileFilter.type}
+          tab_list={PROFILE_FILTER_TABS_LIST}
+          changeTab={changeTab}
+          resetValues={resetValues}
         />
         <div className={styles.form__wrapper}>
           {screen < BREAKPOINT.MD && (
@@ -289,14 +297,14 @@ export const Withdrawal: FC = () => {
             <p>{t("wallet.withdraw.offer")}</p>
           </div>
           {formState.profileFilter.type ===
-            profileTypesName.selfEmployedAccounts && (
+            PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT && (
             <BarSubrofileFilter
               resetActiveAccount={setActiveAccount}
               resetValues={reset}
               subprofileFilter={formState.subprofileFilter}
               changeSubprofile={(subprofile: {
-                type: subprofileFilterTypes;
-                id: profileTypesNum;
+                type: SUBPROFILE_TYPE;
+                id: PROFILE_STATUS;
               }) => setValue("subprofileFilter", subprofile)}
             />
           )}

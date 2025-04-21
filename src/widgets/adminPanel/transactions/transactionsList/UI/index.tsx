@@ -92,7 +92,7 @@ export const TransactionsList: FC<TransactionsListProps> = ({
                 key={card.id + index}
                 initial="hidden"
                 animate="visible"
-                custom={index % INTERSECTION_ELEMENTS.adminTransactions}
+                custom={index % INTERSECTION_ELEMENTS.ADMIN_TRANSACTIONS}
                 variants={PAGE_ANIMATION.animationUp}
               >
                 <TransactionCard
@@ -104,7 +104,7 @@ export const TransactionsList: FC<TransactionsListProps> = ({
             ))}
             {(isFetching || isLoading) &&
               Array.from({
-                length: INTERSECTION_ELEMENTS.adminTransactions,
+                length: INTERSECTION_ELEMENTS.ADMIN_TRANSACTIONS,
               }).map((_, index) => (
                 <SkeletonAdminTransactionCard key={index} />
               ))}

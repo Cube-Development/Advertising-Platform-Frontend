@@ -5,7 +5,12 @@ import {
   authApi,
 } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
-import { adminComplaintTypesFilter, adminReviewTypesFilter } from "../config";
+import {
+  ADMIN_CHANNEL_STATUS,
+  ADMIN_COMPLAINT_STATUS,
+  ADMIN_REVIEW_STATUS,
+  ADMIN_TRANSACTION_STATUS,
+} from "../config";
 import {
   IAdminChannelInfo,
   IAdminChannels,
@@ -26,23 +31,25 @@ export interface getAdminUsersReq {
 
 export interface getAdminOrderComplaintsReq {
   page: number;
-  order_complaint_status: adminComplaintTypesFilter;
+  order_complaint_status: ADMIN_COMPLAINT_STATUS;
   elements_on_page: number;
 }
 
 export interface getAdminTransactionsReq {
   page: number;
+  status: ADMIN_TRANSACTION_STATUS;
   elements_on_page: number;
 }
 
 export interface getAdminChannelsReq {
   page: number;
+  status: ADMIN_CHANNEL_STATUS;
   elements_on_page: number;
 }
 
 export interface getAdminReviewsReq {
   page: number;
-  status: adminReviewTypesFilter;
+  status: ADMIN_REVIEW_STATUS;
   elements_on_page: number;
 }
 
@@ -116,7 +123,7 @@ export const adminAPI = authApi.injectEndpoints({
           isLast:
             response?.elements ===
             response?.complaints?.length +
-              (response?.page - 1) * INTERSECTION_ELEMENTS.adminComplaints,
+              (response?.page - 1) * INTERSECTION_ELEMENTS.ADMIN_COMPLAINTS,
         };
       },
       merge: (currentCache, newItems, arg) => {
@@ -210,7 +217,7 @@ export const adminAPI = authApi.injectEndpoints({
           isLast:
             response?.elements ===
             response?.channels?.length +
-              (response?.page - 1) * INTERSECTION_ELEMENTS.adminChannels,
+              (response?.page - 1) * INTERSECTION_ELEMENTS.ADMIN_CHANNELS,
         };
       },
       merge: (currentCache, newItems, arg) => {
@@ -325,7 +332,7 @@ export const adminAPI = authApi.injectEndpoints({
           isLast:
             response?.elements ===
             response?.reviews?.length +
-              (response?.page - 1) * INTERSECTION_ELEMENTS.adminReviews,
+              (response?.page - 1) * INTERSECTION_ELEMENTS.ADMIN_REVIEWS,
         };
       },
       merge: (currentCache, newItems, arg) => {

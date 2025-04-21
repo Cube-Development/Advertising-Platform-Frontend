@@ -1,8 +1,11 @@
 import {
-  adminChannelForm,
+  ADMIN_CHANNEL_FILTER_TABS_LIST,
+  ADMIN_CHANNEL_FORM,
+  ADMIN_CHANNEL_STATUS,
   getAdminChannelsReq,
   useGetAdminChannelsQuery,
 } from "@entities/admin";
+import { BarSubFilter } from "@features/other";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { useClearCookiesOnPage } from "@shared/hooks";
 import { FC } from "react";
@@ -17,7 +20,8 @@ export const Channels: FC = () => {
   const { watch, setValue } = useForm<getAdminChannelsReq>({
     defaultValues: {
       page: 1,
-      elements_on_page: INTERSECTION_ELEMENTS.adminChannels,
+      status: ADMIN_CHANNEL_STATUS.ACTIVE,
+      elements_on_page: INTERSECTION_ELEMENTS.ADMIN_CHANNELS,
     },
   });
   const formFields = watch();
@@ -26,7 +30,12 @@ export const Channels: FC = () => {
   });
 
   const handleOnChangePage = () => {
-    setValue(adminChannelForm.page, formFields?.page + 1);
+    setValue(ADMIN_CHANNEL_FORM.PAGE, formFields?.page + 1);
+  };
+
+  const changeTab = (filter: any) => {
+    setValue(ADMIN_CHANNEL_FORM.PAGE, 1);
+    setValue(ADMIN_CHANNEL_FORM.STATUS, filter);
   };
 
   return (
@@ -40,6 +49,13 @@ export const Channels: FC = () => {
           </p>
         </div>
         <div className={styles.table}>
+          <div className={styles.filter}>
+            <BarSubFilter
+              tab={formFields?.status}
+              changeTab={changeTab}
+              tab_list={ADMIN_CHANNEL_FILTER_TABS_LIST}
+            />
+          </div>
           <ChannelsList
             data={data}
             isLoading={isLoading}

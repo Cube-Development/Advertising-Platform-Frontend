@@ -47,7 +47,7 @@ export const UsersList: FC<UsersListProps> = ({
               key={card.id}
               initial="hidden"
               animate="visible"
-              custom={index % INTERSECTION_ELEMENTS.adminUsers}
+              custom={index % INTERSECTION_ELEMENTS.ADMIN_USERS}
               variants={PAGE_ANIMATION.animationUp}
             >
               <UserCard card={card} />
@@ -55,7 +55,7 @@ export const UsersList: FC<UsersListProps> = ({
           ))}
           {(isFetching || isLoading) &&
             Array.from({
-              length: INTERSECTION_ELEMENTS.adminUsers,
+              length: INTERSECTION_ELEMENTS.ADMIN_USERS,
             }).map((_, index) => <SkeletonAdminUserCard key={index} />)}
           {!data.isLast && (
             <div className={`${styles.show_more}`} onClick={handleChange}>

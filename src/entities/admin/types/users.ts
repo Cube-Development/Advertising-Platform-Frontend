@@ -1,4 +1,4 @@
-import { userStatus } from "../config";
+import { ADMIN_USER_STATUS } from "../config";
 
 export interface IAdminUsers {
   last: string;
@@ -14,7 +14,7 @@ export interface IAdminUserData {
   name: string;
   email: string;
   created: string;
-  status: userStatus;
+  status: ADMIN_USER_STATUS;
 }
 
 export interface IAdminUserInfo {

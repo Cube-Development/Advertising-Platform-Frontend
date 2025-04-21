@@ -1,4 +1,4 @@
-import { adminReviewTypesFilter, IAdminReviews } from "@entities/admin";
+import { ADMIN_REVIEW_STATUS, IAdminReviews } from "@entities/admin";
 import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
 import { ShowMoreBtn, SpinnerLoaderSmall } from "@shared/ui";
 import { motion } from "framer-motion";
@@ -12,7 +12,7 @@ interface ReviewsListProps {
   isLoading: boolean;
   isFetching: boolean;
   handleChange: () => void;
-  status: adminReviewTypesFilter;
+  status: ADMIN_REVIEW_STATUS;
 }
 
 export const ReviewsList: FC<ReviewsListProps> = ({
@@ -26,7 +26,7 @@ export const ReviewsList: FC<ReviewsListProps> = ({
   return (
     <div className={styles.wrapper}>
       <div
-        className={`${styles.bar} ${status === adminReviewTypesFilter.accept ? styles.accept : styles.wait}`}
+        className={`${styles.bar} ${status === ADMIN_REVIEW_STATUS.ACCEPT ? styles.accept : styles.wait}`}
       >
         <div className={styles.column}>
           <p className="truncate">{t("admin_panel.reviews.bar.id")}</p>
@@ -37,7 +37,7 @@ export const ReviewsList: FC<ReviewsListProps> = ({
         <div className={styles.column}>
           <p className="truncate">{t("admin_panel.reviews.bar.sender")}</p>
         </div>
-        {status === adminReviewTypesFilter.accept && (
+        {status === ADMIN_REVIEW_STATUS.ACCEPT && (
           <div className={styles.column}>
             <p className="truncate">{t("admin_panel.reviews.bar.moderator")}</p>
           </div>
@@ -45,7 +45,7 @@ export const ReviewsList: FC<ReviewsListProps> = ({
         <div className={styles.column}>
           <p className="truncate">{t("admin_panel.reviews.bar.date")}</p>
         </div>
-        {status === adminReviewTypesFilter.accept && (
+        {status === ADMIN_REVIEW_STATUS.ACCEPT && (
           <div className={styles.column}>
             <p className="truncate">
               {t("admin_panel.reviews.bar.closed_date")}
@@ -60,14 +60,14 @@ export const ReviewsList: FC<ReviewsListProps> = ({
               key={card.id + index}
               initial="hidden"
               animate="visible"
-              custom={index % INTERSECTION_ELEMENTS.adminReviews}
+              custom={index % INTERSECTION_ELEMENTS.ADMIN_REVIEWS}
               variants={PAGE_ANIMATION.animationUp}
             >
               <ReviewCard card={card} />
             </motion.div>
           ))}
           {(isFetching || isLoading) &&
-            Array.from({ length: INTERSECTION_ELEMENTS.adminReviews }).map(
+            Array.from({ length: INTERSECTION_ELEMENTS.ADMIN_REVIEWS }).map(
               (_, index) => (
                 <SkeletonAdminReviewCard key={index} status={status} />
               ),

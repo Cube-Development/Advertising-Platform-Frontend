@@ -1,13 +1,13 @@
 import {
   chatAPI,
-  chatType,
+  CHAT_TYPE,
   getChatHistoryReq,
   IChatData,
   IMessageNewSocket,
   IMessageSendSocket,
-  MessageSendType,
-  MessageStatus,
-  RecipientType,
+  MESSAGE_SEND_TYPE,
+  MESSAGE_STATUS,
+  RECIPIENT_TYPE,
   useGetOrderHistoryQuery,
   useGetProjectHistoryQuery,
   useReadOrderMessageMutation,
@@ -77,10 +77,10 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
   const containerArrowHeight = 250;
 
   const getDefaultValues = (card: IChatData) => ({
-    ...(card?.type === chatType.order
+    ...(card?.type === CHAT_TYPE.ORDER
       ? { order_id: card?.order_id }
       : { project_id: card?.project_id }),
-    batch: INTERSECTION_ELEMENTS.chat,
+    batch: INTERSECTION_ELEMENTS.CHAT,
   });
 
   const { watch, setValue, reset } = useForm<getChatHistoryReq>({
@@ -146,9 +146,9 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
       { skip: !formFields?.project_id || !card },
     );
 
-  const data = card?.type === chatType.order ? orderHistory : projectHistory;
+  const data = card?.type === CHAT_TYPE.ORDER ? orderHistory : projectHistory;
   const isFetching =
-    card?.type === chatType.order ? isFetchingOrder : isFetchingProject;
+    card?.type === CHAT_TYPE.ORDER ? isFetchingOrder : isFetchingProject;
 
   useEffect(() => {
     reset(getDefaultValues(card));
@@ -157,7 +157,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
   useEffect(() => {
     if (
       data?.history &&
-      (data?.history?.length || 0) <= INTERSECTION_ELEMENTS.chat
+      (data?.history?.length || 0) <= INTERSECTION_ELEMENTS.CHAT
     ) {
       if (containerRef.current && !isSendMessage) {
         const scrollTo = itemRefs.current
@@ -167,7 +167,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
           }, 0);
 
         containerRef.current.scrollTop =
-          scrollTo + (INTERSECTION_ELEMENTS.chat - 1) * 15;
+          scrollTo + (INTERSECTION_ELEMENTS.CHAT - 1) * 15;
         setLastMessageToRead(data?.history[data?.history?.length - 1]);
       }
     }
@@ -224,7 +224,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
   };
 
   const handleNewMessage = (message: IMessageNewSocket) => {
-    if (message?.recipient === RecipientType.receiver) {
+    if (message?.recipient === RECIPIENT_TYPE.RECEIVER) {
       const datetime = convertUTCToLocalDateTime(
         message?.created_date,
         message?.created_time,
@@ -281,14 +281,14 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
     if (message !== "") {
       const messageId = uuidv4();
       const orderMessage: IMessageSendSocket = {
-        ...(card?.type === chatType.order
+        ...(card?.type === CHAT_TYPE.ORDER
           ? {
               order_id: card?.order_id,
-              method: MessageSendType.order_message_create,
+              method: MESSAGE_SEND_TYPE.ORDER_MESSAGE_CREATE,
             }
           : {
               project_id: card?.project_id,
-              method: MessageSendType.project_message_create,
+              method: MESSAGE_SEND_TYPE.PROJECT_MESSAGE_CREATE,
             }),
         user_id: userId,
         message: message,
@@ -300,24 +300,24 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
       const datetime = getFormattedDateTime();
       const orderMessageState: IMessageNewSocket = {
         id: messageId,
-        ...(card?.type === chatType.order
+        ...(card?.type === CHAT_TYPE.ORDER
           ? { order_id: card?.order_id }
           : { project_id: card?.project_id }),
         message: message,
-        recipient: RecipientType.sender,
+        recipient: RECIPIENT_TYPE.SENDER,
         formatted_date: datetime.localDate,
         formatted_time: datetime.localTime,
         created_date: datetime.utcDate,
         created_time: datetime.utcTime,
         message_datetime: datetime.utcDate + " " + datetime.utcTime,
-        status: MessageStatus.unread,
+        status: MESSAGE_STATUS.UNREAD,
       };
 
       const newHistory = {
         ...data,
         history: [...(data?.history || []), orderMessageState],
       };
-      if (card?.type === chatType.order) {
+      if (card?.type === CHAT_TYPE.ORDER) {
         dispatch(
           chatAPI.util.updateQueryData(
             "getOrderHistory",
@@ -329,7 +329,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
             },
           ),
         );
-      } else if (card?.type === chatType.project) {
+      } else if (card?.type === CHAT_TYPE.PROJECT) {
         dispatch(
           chatAPI.util.updateQueryData(
             "getProjectHistory",
@@ -350,8 +350,8 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
 
   const handleReadMessage = (message: IMessageNewSocket) => {
     if (
-      message?.status === MessageStatus.unread &&
-      message?.recipient === RecipientType.receiver &&
+      message?.status === MESSAGE_STATUS.UNREAD &&
+      message?.recipient === RECIPIENT_TYPE.RECEIVER &&
       message?.order_id
     ) {
       readOrderMessage({
@@ -367,7 +367,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
               ) {
                 return {
                   ...item,
-                  status: MessageStatus.read,
+                  status: MESSAGE_STATUS.READ,
                 };
               }
               return item;
@@ -377,7 +377,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
               "getOrderHistory",
               {
                 order_id: message?.order_id,
-                batch: INTERSECTION_ELEMENTS.chat,
+                batch: INTERSECTION_ELEMENTS.CHAT,
               },
               (draft) => {
                 draft.history = newHistory;
@@ -395,8 +395,8 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
                       ...chat,
                       unread_count: newHistory.filter(
                         (item) =>
-                          item?.status === MessageStatus.unread &&
-                          item.recipient === RecipientType.receiver,
+                          item?.status === MESSAGE_STATUS.UNREAD &&
+                          item.recipient === RECIPIENT_TYPE.RECEIVER,
                       ).length,
                     };
                   }
@@ -411,8 +411,8 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
           console.log("Read messag Error");
         });
     } else if (
-      message?.status === MessageStatus.unread &&
-      message?.recipient === RecipientType.receiver &&
+      message?.status === MESSAGE_STATUS.UNREAD &&
+      message?.recipient === RECIPIENT_TYPE.RECEIVER &&
       message?.project_id
     ) {
       readProjectMessage({
@@ -428,7 +428,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
               ) {
                 return {
                   ...item,
-                  status: MessageStatus.read,
+                  status: MESSAGE_STATUS.READ,
                 };
               }
               return item;
@@ -438,7 +438,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
               "getProjectHistory",
               {
                 project_id: message?.project_id,
-                batch: INTERSECTION_ELEMENTS.chat,
+                batch: INTERSECTION_ELEMENTS.CHAT,
               },
               (draft) => {
                 draft.history = newHistory;
@@ -456,8 +456,8 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
                       ...chat,
                       unread_count: newHistory.filter(
                         (item) =>
-                          item?.status === MessageStatus.unread &&
-                          item.recipient === RecipientType.receiver,
+                          item?.status === MESSAGE_STATUS.UNREAD &&
+                          item.recipient === RECIPIENT_TYPE.RECEIVER,
                       ).length,
                     };
                   }
@@ -540,7 +540,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
             if (dataset) {
               const message: IMessageNewSocket = JSON.parse(dataset);
               if (
-                message?.recipient === RecipientType.receiver &&
+                message?.recipient === RECIPIENT_TYPE.RECEIVER &&
                 lastMessageToRead
               ) {
                 const lastDatetime = lastMessageToRead?.message_datetime;
@@ -663,8 +663,8 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
                     initial="hidden"
                     animate="visible"
                     custom={
-                      INTERSECTION_ELEMENTS.chat -
-                      (index % INTERSECTION_ELEMENTS.chat)
+                      INTERSECTION_ELEMENTS.CHAT -
+                      (index % INTERSECTION_ELEMENTS.CHAT)
                     }
                     variants={PAGE_ANIMATION.animationChat}
                     ref={(el) => (itemRefs.current[index] = el)}
@@ -683,7 +683,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
 
                     <div
                       className={`${styles.row__message} ${
-                        message?.recipient === RecipientType.receiver
+                        message?.recipient === RECIPIENT_TYPE.RECEIVER
                           ? styles.receiver
                           : styles.sender
                       } ${!isTimeDifferenceSmall || !isSameRecepient ? styles.more : styles.less} `}
@@ -704,7 +704,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
                         />
                         <div className={styles.time}>
                           <span>{message?.formatted_time}</span>
-                          {message?.recipient === RecipientType.sender && (
+                          {message?.recipient === RECIPIENT_TYPE.SENDER && (
                             <div className={styles.read}>
                               <ArrowReadIcon
                                 isRead={Boolean(message?.status)}

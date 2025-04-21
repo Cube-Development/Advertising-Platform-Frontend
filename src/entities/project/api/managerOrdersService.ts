@@ -104,7 +104,7 @@ export const managerProjectsAPI = authApi.injectEndpoints({
           isLast:
             response?.elements ===
             response?.projects?.length +
-              (response?.page - 1) * INTERSECTION_ELEMENTS.managerOrders,
+              (response?.page - 1) * INTERSECTION_ELEMENTS.MANAGER_ORDERS,
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {

@@ -66,7 +66,6 @@ export const QueryParams = (): QueryParamsType => {
       queryParams[key] = urlParams.get(key);
     }
   });
-  console.log("queryParams", queryParams);
   return queryParams;
 };
 

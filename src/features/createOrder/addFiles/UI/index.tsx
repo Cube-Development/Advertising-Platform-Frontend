@@ -61,7 +61,7 @@ export const AddFiles: FC<FileProps> = ({ onChange, currentFiles }) => {
       onDragLeave={handleLive}
       onDrop={handleDrop}
     >
-      {files.length === FILES.maxLenght ? (
+      {files.length === FILES.MAX_LENGTH ? (
         <div className={styles.items}>
           {files.map((file, id) => (
             <div key={id} className={styles.item}>

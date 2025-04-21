@@ -2545,5 +2545,10 @@
       "clear": "Tozalash",
       "close": "Yopish"
     }
+  },
+
+  "not_found": {
+    "description": "Sahifa topilmadi",
+    "home_link": "Bosh sahifaga qaytish"
   }
 }

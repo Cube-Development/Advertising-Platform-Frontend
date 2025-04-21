@@ -1,3 +1,4 @@
+import { channelData } from "@entities/channel";
 import { dateSortingTypes } from "@entities/platform";
 import {
   advertiserProjectTypes,
@@ -12,6 +13,7 @@ import {
 } from "@entities/project";
 import { useFindLanguage } from "@entities/user";
 import { useGetViewAdvertiserProjectQuery } from "@entities/views";
+import { SearchFilter } from "@features/catalog";
 import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 import { pageFilter, paths } from "@shared/routing";
 import { buildPathWithQuery, queryParamKeys, QueryParams } from "@shared/utils";
@@ -62,7 +64,7 @@ export const AdvOrders: FC = () => {
       status: startStatus,
       page: 1,
       date_sort: dateSortingTypes.decrease,
-      elements_on_page: INTERSECTION_ELEMENTS.advOrders,
+      elements_on_page: INTERSECTION_ELEMENTS.ADV_ORDERS,
       language: language?.id || Languages[0].id,
     },
   });
@@ -121,7 +123,11 @@ export const AdvOrders: FC = () => {
     navigate(newPath, { replace: true });
   }, [formState.type, formState.status]);
 
-  const { type, ...getParams } = formState;
+  const { type, search_string, ...params } = formState;
+  const getParams: getProjectsCardReq = {
+    ...params,
+    ...(search_string && search_string.length >= 3 ? { search_string } : {}),
+  };
 
   const { data: projectsSelf, isFetching: isFetchingSelf } =
     useGetAdvProjectsQuery(getParams, {
@@ -140,6 +146,12 @@ export const AdvOrders: FC = () => {
     }
   }, [formState.type, formState.page]);
 
+  useEffect(() => {
+    setTimeout(() => {
+      setValue("page", 1);
+    }, 500);
+  }, [formState.type, formState.status, formState.search_string]);
+
   return (
     <div className="container">
       <div className={styles.wrapper}>
@@ -156,6 +168,7 @@ export const AdvOrders: FC = () => {
           changeType={(type) => handleChangeType(type)}
           statusFilter={formState.status}
         />
+        <SearchFilter type={channelData.search} onChange={setValue} />
         {formState.type === projectTypesFilter.managerProject &&
         formState.status === advManagerProjectStatusFilter.develop ? (
           <DevProjectsList

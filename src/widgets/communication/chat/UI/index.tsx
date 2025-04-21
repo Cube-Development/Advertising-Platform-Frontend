@@ -1,12 +1,14 @@
 import {
+  CHAT_ADVERTISER_FILTER_TABS_LIST,
+  CHAT_FILTER,
+  CHAT_MANAGER_FILTER_TABS_LIST,
+  CHAT_TYPE,
   chatAPI,
-  chatType,
-  chatTypesFilter,
   IChatData,
   IChatProps,
   IMessageNewSocket,
-  MessageStatus,
-  RecipientType,
+  MESSAGE_STATUS,
+  RECIPIENT_TYPE,
   useGetOrderChatByIdQuery,
   useGetOrderChatsQuery,
   useGetProjectChatByIdQuery,
@@ -14,7 +16,7 @@ import {
 } from "@entities/communication";
 import { roles } from "@entities/user";
 import { ChatCard, ChatMessages } from "@features/communication";
-import { BarSubfilter } from "@features/other";
+import { BarSubFilter } from "@features/other";
 import { useCentrifuge } from "@shared/api";
 import {
   ArrowLongHorizontalIcon,
@@ -31,7 +33,6 @@ import {
   PAGE_ANIMATION,
 } from "@shared/config";
 import { useAppDispatch, useAppSelector, useWindowWidth } from "@shared/hooks";
-import { pageFilter } from "@shared/routing";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -70,8 +71,8 @@ export const Chat: FC<IChatProps> = ({
   const { role } = useAppSelector((state) => state.user);
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [currentChat, setCurrentChat] = useState<IChatData | null>(null);
-  const [chatFilter, setChatFilter] = useState<chatTypesFilter>(
-    chatTypesFilter.blogger,
+  const [chatFilter, setChatFilter] = useState<CHAT_FILTER>(
+    CHAT_FILTER.BLOGGER,
   );
 
   const [newOrderId, setNewOrderId] = useState<string | null>(null);
@@ -121,7 +122,7 @@ export const Chat: FC<IChatProps> = ({
     );
 
   const selectedChats =
-    chatFilter === chatTypesFilter.blogger || role === roles.blogger
+    chatFilter === CHAT_FILTER.BLOGGER || role === roles.blogger
       ? chatsOrder
       : chatsProject;
 
@@ -129,7 +130,7 @@ export const Chat: FC<IChatProps> = ({
     chatsOrder?.reduce(
       (total, item) =>
         total +
-        (item.recipient === RecipientType.receiver ? item.unread_count : 0),
+        (item.recipient === RECIPIENT_TYPE.RECEIVER ? item.unread_count : 0),
       0,
     ) || 0;
 
@@ -137,7 +138,7 @@ export const Chat: FC<IChatProps> = ({
     chatsProject?.reduce(
       (total, item) =>
         total +
-        (item.recipient === RecipientType.receiver ? item.unread_count : 0),
+        (item.recipient === RECIPIENT_TYPE.RECEIVER ? item.unread_count : 0),
       0,
     ) || 0;
 
@@ -145,14 +146,14 @@ export const Chat: FC<IChatProps> = ({
 
   const handleChangeChat = (card: IChatData) => {
     setCurrentChat(
-      card?.type === chatType.order
+      card?.type === CHAT_TYPE.ORDER
         ? chatsOrder?.find((item) => item?.order_id === card?.order_id) || null
         : chatsProject?.find((item) => item?.project_id === card?.project_id) ||
             null,
     );
   };
 
-  const handle = () => {
+  const resetValues = () => {
     setCurrentChat(null);
   };
 
@@ -200,7 +201,7 @@ export const Chat: FC<IChatProps> = ({
           ...updatedChat,
           ...newMessage,
           unread_count:
-            message?.recipient === RecipientType.receiver
+            message?.recipient === RECIPIENT_TYPE.RECEIVER
               ? updatedChat.unread_count + 1
               : updatedChat.unread_count,
         };
@@ -219,7 +220,7 @@ export const Chat: FC<IChatProps> = ({
         );
 
         if (
-          message?.recipient === RecipientType.receiver &&
+          message?.recipient === RECIPIENT_TYPE.RECEIVER &&
           currentChat?.order_id !== message?.order_id
         ) {
           toast({
@@ -239,7 +240,7 @@ export const Chat: FC<IChatProps> = ({
           ...updatedChat,
           ...newMessage,
           unread_count:
-            message?.recipient === RecipientType.receiver
+            message?.recipient === RECIPIENT_TYPE.RECEIVER
               ? updatedChat.unread_count + 1
               : updatedChat.unread_count,
         };
@@ -260,7 +261,7 @@ export const Chat: FC<IChatProps> = ({
         );
 
         if (
-          message?.recipient === RecipientType.receiver &&
+          message?.recipient === RECIPIENT_TYPE.RECEIVER &&
           currentChat?.project_id !== message?.project_id
         ) {
           toast({
@@ -278,13 +279,13 @@ export const Chat: FC<IChatProps> = ({
       dispatch(
         chatAPI.util.updateQueryData(
           "getOrderHistory",
-          { order_id: message?.order_id, batch: INTERSECTION_ELEMENTS.chat },
+          { order_id: message?.order_id, batch: INTERSECTION_ELEMENTS.CHAT },
           (draft) => {
             draft.history = draft.history.map((item) => {
               if (checkDatetime(item?.message_datetime, datetime)) {
                 return {
                   ...item,
-                  status: MessageStatus.read,
+                  status: MESSAGE_STATUS.READ,
                 };
               }
               return item;
@@ -298,14 +299,14 @@ export const Chat: FC<IChatProps> = ({
           "getProjectHistory",
           {
             project_id: message?.project_id,
-            batch: INTERSECTION_ELEMENTS.chat,
+            batch: INTERSECTION_ELEMENTS.CHAT,
           },
           (draft) => {
             draft.history = draft.history.map((item) => {
               if (checkDatetime(item?.message_datetime, datetime)) {
                 return {
                   ...item,
-                  status: MessageStatus.read,
+                  status: MESSAGE_STATUS.READ,
                 };
               }
               return item;
@@ -318,7 +319,7 @@ export const Chat: FC<IChatProps> = ({
 
   useEffect(() => {
     if (orderId && isOpen) {
-      setChatFilter(chatTypesFilter.blogger);
+      setChatFilter(CHAT_FILTER.BLOGGER);
       if (chatOrderById && !currentChatOrder) {
         setCurrentChat(chatOrderById);
         dispatch(
@@ -340,8 +341,8 @@ export const Chat: FC<IChatProps> = ({
     } else if (projectId && isOpen) {
       setChatFilter(
         role === roles.advertiser
-          ? chatTypesFilter.manager
-          : chatTypesFilter.advertiser,
+          ? CHAT_FILTER.MANAGER
+          : CHAT_FILTER.ADVERTISER,
       );
       if (chatProjectById && !currentChatProject) {
         setCurrentChat(chatProjectById);
@@ -427,14 +428,21 @@ export const Chat: FC<IChatProps> = ({
   const badge =
     role === roles.advertiser
       ? [
-          { status: chatTypesFilter.blogger, count: countOrderMessage },
-          { status: chatTypesFilter.manager, count: countProjectMessage },
+          { status: CHAT_FILTER.BLOGGER, count: countOrderMessage },
+          { status: CHAT_FILTER.MANAGER, count: countProjectMessage },
         ]
       : role === roles.manager
         ? [
-            { status: chatTypesFilter.blogger, count: countOrderMessage },
-            { status: chatTypesFilter.advertiser, count: countProjectMessage },
+            { status: CHAT_FILTER.BLOGGER, count: countOrderMessage },
+            { status: CHAT_FILTER.ADVERTISER, count: countProjectMessage },
           ]
+        : [];
+
+  const tab_list =
+    role === roles.advertiser
+      ? CHAT_ADVERTISER_FILTER_TABS_LIST
+      : role === roles.manager
+        ? CHAT_MANAGER_FILTER_TABS_LIST
         : [];
 
   return (
@@ -469,11 +477,11 @@ export const Chat: FC<IChatProps> = ({
               <AlertDialogDescription className="sr-only"></AlertDialogDescription>
               {role !== roles.blogger && (
                 <div className={styles.filter}>
-                  <BarSubfilter
-                    page={pageFilter.chat}
-                    resetValues={handle}
-                    chatFilter={chatFilter}
-                    changeChatFilter={setChatFilter}
+                  <BarSubFilter
+                    tab={chatFilter}
+                    changeTab={setChatFilter}
+                    tab_list={tab_list}
+                    resetValues={resetValues}
                     badge={badge}
                     isFixedColumns={true}
                   />
@@ -492,7 +500,7 @@ export const Chat: FC<IChatProps> = ({
                           isActive={
                             !!(
                               currentChat &&
-                              (currentChat.type === chatType.order
+                              (currentChat.type === CHAT_TYPE.ORDER
                                 ? currentChat.order_id === card?.order_id
                                 : currentChat.project_id === card?.project_id)
                             )
@@ -589,11 +597,11 @@ export const Chat: FC<IChatProps> = ({
                 </DrawerTitle>
                 {role !== roles.blogger && (
                   <div className={styles.filter}>
-                    <BarSubfilter
-                      page={pageFilter.chat}
-                      resetValues={handle}
-                      chatFilter={chatFilter}
-                      changeChatFilter={setChatFilter}
+                    <BarSubFilter
+                      tab={chatFilter}
+                      changeTab={setChatFilter}
+                      tab_list={tab_list}
+                      resetValues={resetValues}
                       badge={badge}
                       isFixedColumns={true}
                     />
@@ -612,7 +620,7 @@ export const Chat: FC<IChatProps> = ({
                             isActive={
                               !!(
                                 currentChat &&
-                                (currentChat.type === chatType.order
+                                (currentChat.type === CHAT_TYPE.ORDER
                                   ? currentChat.order_id === card?.order_id
                                   : currentChat.project_id === card?.project_id)
                               )

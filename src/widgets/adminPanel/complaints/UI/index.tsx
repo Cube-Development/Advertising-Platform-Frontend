@@ -1,13 +1,13 @@
 import {
-  adminComplaintForm,
-  adminComplaintTypesFilter,
+  ADMIN_COMPLAINT_FILTER_TABS_LIST,
+  ADMIN_COMPLAINT_FORM,
+  ADMIN_COMPLAINT_STATUS,
   getAdminOrderComplaintsReq,
   useGetAdminOrderComplaintsQuery,
 } from "@entities/admin";
-import { BarSubfilter } from "@features/other";
+import { BarSubFilter } from "@features/other";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { useClearCookiesOnPage } from "@shared/hooks";
-import { pageFilter } from "@shared/routing";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -20,8 +20,8 @@ export const Complaints: FC = () => {
   const { watch, setValue } = useForm<getAdminOrderComplaintsReq>({
     defaultValues: {
       page: 1,
-      elements_on_page: INTERSECTION_ELEMENTS.adminComplaints,
-      order_complaint_status: adminComplaintTypesFilter.wait,
+      elements_on_page: INTERSECTION_ELEMENTS.ADMIN_COMPLAINTS,
+      order_complaint_status: ADMIN_COMPLAINT_STATUS.WAIT,
     },
   });
   const formFields = watch();
@@ -30,12 +30,12 @@ export const Complaints: FC = () => {
   });
 
   const handleOnChangePage = () => {
-    setValue(adminComplaintForm.page, formFields?.page + 1);
+    setValue(ADMIN_COMPLAINT_FORM.PAGE, formFields?.page + 1);
   };
 
-  const setComplaintFilter = (filter: adminComplaintTypesFilter) => {
-    setValue(adminComplaintForm.page, 1);
-    setValue(adminComplaintForm.order_complaint_status, filter);
+  const changeTab = (filter: ADMIN_COMPLAINT_STATUS) => {
+    setValue(ADMIN_COMPLAINT_FORM.PAGE, 1);
+    setValue(ADMIN_COMPLAINT_FORM.STATUS, filter);
   };
 
   return (
@@ -50,11 +50,10 @@ export const Complaints: FC = () => {
         </div>
         <div className={styles.table}>
           <div className={styles.filter}>
-            <BarSubfilter
-              page={pageFilter.adminComplaint}
-              resetValues={() => {}}
-              complaintsFilter={formFields?.order_complaint_status}
-              changeComplaintsFilter={setComplaintFilter}
+            <BarSubFilter
+              tab={formFields?.order_complaint_status}
+              changeTab={changeTab}
+              tab_list={ADMIN_COMPLAINT_FILTER_TABS_LIST}
             />
           </div>
           <ComplaintsList

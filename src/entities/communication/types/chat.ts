@@ -1,9 +1,9 @@
 import { roles } from "@entities/user";
 import {
-  MessageSendType as MessageSendType,
-  MessageStatus,
-  chatType,
-  RecipientType,
+  MESSAGE_SEND_TYPE as MESSAGE_SEND_TYPE,
+  MESSAGE_STATUS,
+  CHAT_TYPE,
+  RECIPIENT_TYPE,
   notificationsTypes,
 } from "../config";
 
@@ -30,7 +30,7 @@ export interface IAllMessages {
 
 export interface IMessageNewSocket {
   id: string;
-  method?: MessageSendType | notificationsTypes;
+  method?: MESSAGE_SEND_TYPE | notificationsTypes;
   recipient: string;
   order_id?: string;
   project_id?: string;
@@ -57,7 +57,7 @@ export interface IChatData {
   unread_count: number;
   created_date: string;
   created_time: string;
-  type: chatType;
+  type: CHAT_TYPE;
   formatted_date: string;
   formatted_time: string;
   message_datetime: string;
@@ -67,10 +67,10 @@ export interface IReadOrderMessage {
   id: string;
   order_id: string;
   message: string;
-  recipient: RecipientType;
+  recipient: RECIPIENT_TYPE;
   created_date: string;
   created_time: string;
-  status: MessageStatus;
+  status: MESSAGE_STATUS;
 }
 
 export interface IMessageSendSocket {
@@ -78,7 +78,7 @@ export interface IMessageSendSocket {
   project_id?: string;
   user_id: string;
   message: string;
-  method: MessageSendType;
+  method: MESSAGE_SEND_TYPE;
   id: string;
 }
 

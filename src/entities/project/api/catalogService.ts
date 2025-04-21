@@ -59,7 +59,7 @@ export const catalogAPI = baseApi.injectEndpoints({
           isLast:
             response?.elements ===
             response?.channels?.length +
-              (response?.page - 1) * INTERSECTION_ELEMENTS.catalog,
+              (response?.page - 1) * INTERSECTION_ELEMENTS.CATALOG,
         };
       },
       serializeQueryArgs: ({ endpointName }) => {
@@ -73,7 +73,7 @@ export const catalogAPI = baseApi.injectEndpoints({
         }
         if (
           currentCache.channels.length >=
-          arg.arg.page * INTERSECTION_ELEMENTS.catalog
+          arg.arg.page * INTERSECTION_ELEMENTS.CATALOG
         ) {
           return currentCache;
         }

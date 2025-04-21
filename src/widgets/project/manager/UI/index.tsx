@@ -37,7 +37,7 @@ export const ManagerOrders: FC = () => {
         )
           ? project_status
           : managerProjectStatusFilter.active,
-      elements_on_page: INTERSECTION_ELEMENTS.managerOrders,
+      elements_on_page: INTERSECTION_ELEMENTS.MANAGER_ORDERS,
       date_sort: dateSortingTypes.decrease,
     },
   });

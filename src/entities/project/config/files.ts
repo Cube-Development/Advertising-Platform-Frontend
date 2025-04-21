@@ -1,29 +1,29 @@
 export const enum MEDIA_FILES {
-  maxSize = 50,
-  maxLenght = 10,
+  MAX_SIZE = 50,
+  MAX_LENGTH = 10,
 }
 export const enum FILES {
-  maxSize = 50,
-  maxLenght = 1,
+  MAX_SIZE = 50,
+  MAX_LENGTH = 1,
 }
 
 export const enum POST {
-  postLength = 2000,
-  commentLength = 1000,
+  POST_LENGTH = 2000,
+  COMMENT_LENGTH = 1000,
 }
 
-export enum addFileFilter {
-  mediafile = "mediafile",
-  file = "file",
+export enum ADD_FILE_FILTER {
+  MEDIA_FILE = "mediafile",
+  FILE = "file",
 }
 
-export const addFileTypes = [
+export const ADD_FILE_FILTER_TABS_LIST = [
   {
     name: "create_order.create.add_files.types.mediafile",
-    type: addFileFilter.mediafile,
+    type: ADD_FILE_FILTER.MEDIA_FILE,
   },
   {
     name: "create_order.create.add_files.types.file",
-    type: addFileFilter.file,
+    type: ADD_FILE_FILTER.FILE,
   },
 ];

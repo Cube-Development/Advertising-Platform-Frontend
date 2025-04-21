@@ -48,7 +48,7 @@ export const AdvProjectsList: FC<AdvProjectsListProps> = ({
                 key={card.id + index}
                 initial="hidden"
                 animate="visible"
-                custom={index % INTERSECTION_ELEMENTS.advOrders}
+                custom={index % INTERSECTION_ELEMENTS.ADV_ORDERS}
                 variants={PAGE_ANIMATION.animationUp}
                 className={styles.motion}
               >
@@ -60,7 +60,7 @@ export const AdvProjectsList: FC<AdvProjectsListProps> = ({
               </motion.div>
             ))}
             {isLoading &&
-              Array.from({ length: INTERSECTION_ELEMENTS.advOrders }).map(
+              Array.from({ length: INTERSECTION_ELEMENTS.ADV_ORDERS }).map(
                 (_, index) => (
                   <ProjectCardSkeleton
                     typeFilter={typeFilter}

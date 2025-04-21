@@ -16,6 +16,7 @@ export interface getOrdersByStatusReq {
   date_sort: dateSortingTypes;
   elements_on_page?: number;
   status: offerStatusFilter | string;
+  search_string?: string;
 }
 
 export const bloggerOffersAPI = authApi.injectEndpoints({
@@ -67,7 +68,7 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
           isLast:
             response?.elements ===
             response?.orders?.length +
-              (response?.page - 1) * INTERSECTION_ELEMENTS.bloggerOffers,
+              (response?.page - 1) * INTERSECTION_ELEMENTS.BLOGGER_OFFERS,
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
@@ -87,7 +88,7 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
       },
 
       forceRefetch({ currentArg, previousArg }) {
-        return currentArg?.page !== previousArg?.page;
+        return currentArg !== previousArg;
       },
       providesTags: [BLOGGER_OFFERS],
     }),

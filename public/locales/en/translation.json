@@ -2545,5 +2545,10 @@
       "clear": "Clear",
       "close": "Close"
     }
+  },
+
+  "not_found": {
+    "description": "Page not found",
+    "home_link": "Go back to home"
   }
 }

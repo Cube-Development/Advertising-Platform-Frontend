@@ -37,7 +37,7 @@ export const ManagerProjectsList: FC<ManagerProjectsListProps> = ({
                 key={card.id + index}
                 initial="hidden"
                 animate="visible"
-                custom={index % INTERSECTION_ELEMENTS.managerOrders}
+                custom={index % INTERSECTION_ELEMENTS.MANAGER_ORDERS}
                 variants={PAGE_ANIMATION.animationUp}
                 className={styles.motion}
               >
@@ -45,7 +45,7 @@ export const ManagerProjectsList: FC<ManagerProjectsListProps> = ({
               </motion.div>
             ))}
             {isLoading &&
-              Array.from({ length: INTERSECTION_ELEMENTS.managerOrders }).map(
+              Array.from({ length: INTERSECTION_ELEMENTS.MANAGER_ORDERS }).map(
                 (_, index) => (
                   <SkeletonManagerProjectCard
                     statusFilter={statusFilter}

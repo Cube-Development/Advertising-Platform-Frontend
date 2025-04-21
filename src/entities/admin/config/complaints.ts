@@ -1,67 +1,61 @@
-export enum complaintPriority {
-  low = 0,
-  medium = 1,
-  high = 2,
+export enum ADMIN_COMPLAINT_PRIORITY {
+  LOW = 0,
+  MEDIUM = 1,
+  HIGH = 2,
 }
 
-export const adminComplaintPriorityStatus = [
+export const ADMIN_COMPLAINT_PRIORITY_STATUS_LIST = [
   {
     name: "admin_panel.complaints.card.priority_status.low",
-    id: complaintPriority.low,
+    id: ADMIN_COMPLAINT_PRIORITY.LOW,
   },
   {
     name: "admin_panel.complaints.card.priority_status.medium",
-    id: complaintPriority.medium,
+    id: ADMIN_COMPLAINT_PRIORITY.MEDIUM,
   },
   {
     name: "admin_panel.complaints.card.priority_status.high",
-    id: complaintPriority.high,
+    id: ADMIN_COMPLAINT_PRIORITY.HIGH,
   },
 ];
 
-export enum complaintStatus {
-  wait = 0,
-  active = 1,
-  complete = 2,
+export enum ADMIN_COMPLAINT_STATUS {
+  WAIT = 1,
+  ACTIVE = 2,
+  COMPLETE = 3,
 }
 
-export const adminComplaintStatus = [
+export const ADMIN_COMPLAINT_STATUS_LIST = [
   {
     name: "admin_panel.complaintInfo.card.status.wait",
-    id: complaintStatus.wait,
+    id: ADMIN_COMPLAINT_STATUS.WAIT,
   },
   {
     name: "admin_panel.complaintInfo.card.status.active",
-    id: complaintStatus.active,
+    id: ADMIN_COMPLAINT_STATUS.ACTIVE,
   },
   {
     name: "admin_panel.complaintInfo.card.status.complete",
-    id: complaintStatus.complete,
+    id: ADMIN_COMPLAINT_STATUS.COMPLETE,
   },
 ];
 
-export enum adminComplaintTypesFilter {
-  wait = 1,
-  active = 2,
-  complete = 3,
-}
-
-export const adminComplaintTypes = [
+export const ADMIN_COMPLAINT_FILTER_TABS_LIST = [
   {
     name: "admin_panel.complaints.types.wait",
-    type: adminComplaintTypesFilter.wait,
+    type: ADMIN_COMPLAINT_STATUS.WAIT,
   },
   {
     name: "admin_panel.complaints.types.active",
-    type: adminComplaintTypesFilter.active,
+    type: ADMIN_COMPLAINT_STATUS.ACTIVE,
   },
   {
     name: "admin_panel.complaints.types.complete",
-    type: adminComplaintTypesFilter.complete,
+    type: ADMIN_COMPLAINT_STATUS.COMPLETE,
   },
 ];
 
-export enum adminComplaintForm {
-  page = "page",
-  order_complaint_status = "order_complaint_status",
+export enum ADMIN_COMPLAINT_FORM {
+  PAGE = "page",
+  STATUS = "order_complaint_status",
 }

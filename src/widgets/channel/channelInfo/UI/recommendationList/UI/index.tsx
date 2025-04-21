@@ -101,7 +101,7 @@ export const RecommendationList: FC<RecommendationListProps> = ({
             ))}
             {isLoading &&
               Array.from({
-                length: INTERSECTION_ELEMENTS.recommendCardsChannel,
+                length: INTERSECTION_ELEMENTS.REC_CARDS_CHANNEL,
               }).map((_, index) => (
                 <SwiperSlide key={index}>
                   <SkeletonRecommendCard />

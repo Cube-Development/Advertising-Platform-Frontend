@@ -46,6 +46,7 @@ export interface getProjectsCardReq {
     | string;
   elements_on_page?: number;
   date_sort?: dateSortingTypes;
+  search_string?: string;
 }
 
 export interface getProjectSubcardReq {
@@ -183,7 +184,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
           isLast:
             response?.elements ===
             response?.projects?.length +
-              (response?.page - 1) * INTERSECTION_ELEMENTS.advOrders,
+              (response?.page - 1) * INTERSECTION_ELEMENTS.ADV_ORDERS,
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
@@ -202,7 +203,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
         };
       },
       forceRefetch({ currentArg, previousArg }) {
-        return currentArg?.page !== previousArg?.page;
+        return currentArg !== previousArg;
       },
       providesTags: [ADV_PROJECTS],
     }),
@@ -258,7 +259,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
           isLast:
             response?.elements ===
             response?.projects?.length +
-              (response?.page - 1) * INTERSECTION_ELEMENTS.advOrders,
+              (response?.page - 1) * INTERSECTION_ELEMENTS.ADV_ORDERS,
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
@@ -277,7 +278,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
         };
       },
       forceRefetch({ currentArg, previousArg }) {
-        return currentArg?.page !== previousArg?.page;
+        return currentArg !== previousArg;
       },
       providesTags: [ADV_TARIFF_PROJECTS],
     }),

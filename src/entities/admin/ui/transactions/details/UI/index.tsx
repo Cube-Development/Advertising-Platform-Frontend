@@ -1,6 +1,6 @@
 import {
-  adminIdentificationStatus,
-  adminTransactionStatus,
+  ADMIN_TRANSACTION_ID_LIST,
+  ADMIN_TRANSACTION_STATUS_LIST,
   IAdminTransactionInfo,
 } from "@entities/admin";
 import { useToast } from "@shared/ui";
@@ -33,8 +33,9 @@ export const TransactionDetails: FC<TransactionDetailsProps> = ({
           {t("admin_panel.transactions.card.details.title").toUpperCase()}{" "}
           --------------------------------------------------------{" "}
           {t(
-            adminTransactionStatus.find((item) => item.id === subcard?.status)
-              ?.name || "",
+            ADMIN_TRANSACTION_STATUS_LIST.find(
+              (item) => item.id === subcard?.status,
+            )?.name || "",
           ).toUpperCase()}
         </p>
       </div>
@@ -67,7 +68,7 @@ export const TransactionDetails: FC<TransactionDetailsProps> = ({
               </p>
               <span>
                 {t(
-                  adminIdentificationStatus.find(
+                  ADMIN_TRANSACTION_ID_LIST.find(
                     (item) => item.id === subcard?.sender?.ident,
                   )?.name || "",
                 )}
@@ -118,7 +119,7 @@ export const TransactionDetails: FC<TransactionDetailsProps> = ({
               </p>
               <span>
                 {t(
-                  adminIdentificationStatus.find(
+                  ADMIN_TRANSACTION_ID_LIST.find(
                     (item) => item.id === subcard?.receiver?.ident,
                   )?.name || "",
                 )}

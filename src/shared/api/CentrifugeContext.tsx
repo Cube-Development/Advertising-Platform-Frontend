@@ -194,7 +194,7 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
         "getNotifications",
         {
           page: 1,
-          elements_on_page: INTERSECTION_ELEMENTS.notifications,
+          elements_on_page: INTERSECTION_ELEMENTS.NOTIFICATIONS,
         },
         (draft) => {
           const notifications = [newNotification, ...draft?.notifications];

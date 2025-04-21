@@ -58,7 +58,7 @@ export const CartList: FC<CartListProps> = ({
             </motion.div>
           ))}
           {isLoading &&
-            Array.from({ length: INTERSECTION_ELEMENTS.catalog }).map(
+            Array.from({ length: INTERSECTION_ELEMENTS.CATALOG }).map(
               (_, index) => <SkeletonCatalogCard key={index} />,
             )}
         </div>

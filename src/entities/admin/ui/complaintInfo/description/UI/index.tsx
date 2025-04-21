@@ -1,10 +1,10 @@
 import { FC } from "react";
 import styles from "./styles.module.scss";
 import {
-  adminComplaintPriorityStatus,
-  adminComplaintStatus,
-  complaintPriority,
-  complaintStatus,
+  ADMIN_COMPLAINT_PRIORITY_STATUS_LIST,
+  ADMIN_COMPLAINT_STATUS_LIST,
+  ADMIN_COMPLAINT_PRIORITY,
+  ADMIN_COMPLAINT_STATUS,
   IAdminComplaintInfoData,
 } from "@entities/admin";
 import { useTranslation } from "react-i18next";
@@ -86,17 +86,18 @@ export const ComplaintDescription: FC<ComplaintDescriptionProps> = ({
             </p>
             <div
               className={`${styles.status} ${
-                card?.status === complaintStatus.wait
+                card?.status === ADMIN_COMPLAINT_STATUS.WAIT
                   ? styles.wait
-                  : card?.status === complaintStatus.active
+                  : card?.status === ADMIN_COMPLAINT_STATUS.ACTIVE
                     ? styles.active
                     : styles.complete
               }`}
             >
               <p>
                 {t(
-                  adminComplaintStatus.find((item) => item?.id === card?.status)
-                    ?.name || "",
+                  ADMIN_COMPLAINT_STATUS_LIST.find(
+                    (item) => item?.id === card?.status,
+                  )?.name || "",
                 )}
               </p>
             </div>
@@ -117,16 +118,16 @@ export const ComplaintDescription: FC<ComplaintDescriptionProps> = ({
             </p>
             <div
               className={`${styles.priority} ${
-                card?.priority === complaintPriority.low
+                card?.priority === ADMIN_COMPLAINT_PRIORITY.LOW
                   ? styles.low
-                  : card?.priority === complaintPriority.medium
+                  : card?.priority === ADMIN_COMPLAINT_PRIORITY.MEDIUM
                     ? styles.medium
                     : styles.high
               }`}
             >
               <p>
                 {t(
-                  adminComplaintPriorityStatus.find(
+                  ADMIN_COMPLAINT_PRIORITY_STATUS_LIST.find(
                     (item) => item?.id === card?.priority,
                   )?.name || "",
                 )}

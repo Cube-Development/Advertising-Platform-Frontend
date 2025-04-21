@@ -1,4 +1,8 @@
-import { adminUserStatus, IAdminUserData, userStatus } from "@entities/admin";
+import {
+  ADMIN_USER_STATUS_LIST,
+  IAdminUserData,
+  ADMIN_USER_STATUS,
+} from "@entities/admin";
 import { UserCardMenu } from "@features/adminPanel";
 import { useToast } from "@shared/ui";
 import { FC } from "react";
@@ -48,13 +52,15 @@ export const UserCard: FC<UserCardProps> = ({ card }) => {
       </div>
       <div
         className={`${styles.status} ${
-          card?.status === userStatus.active ? styles.active : styles.banned
+          card?.status === ADMIN_USER_STATUS.ACTIVE
+            ? styles.active
+            : styles.banned
         }`}
       >
         <p className="truncate">
           {t(
-            adminUserStatus.find((item) => item.id === card?.status)?.name ||
-              "",
+            ADMIN_USER_STATUS_LIST.find((item) => item.id === card?.status)
+              ?.name || "",
           )}
         </p>
       </div>

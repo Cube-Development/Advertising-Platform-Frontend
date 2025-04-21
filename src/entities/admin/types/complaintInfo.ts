@@ -1,5 +1,5 @@
 import { roles } from "@entities/user";
-import { complaintPriority, complaintStatus } from "../config";
+import { ADMIN_COMPLAINT_PRIORITY, ADMIN_COMPLAINT_STATUS } from "../config";
 
 export interface IAdminComplaintInfoData {
   id: string;
@@ -7,8 +7,8 @@ export interface IAdminComplaintInfoData {
   moderator: IUser;
   created: string;
   theme: string;
-  priority: complaintPriority;
-  status: complaintStatus;
+  priority: ADMIN_COMPLAINT_PRIORITY;
+  status: ADMIN_COMPLAINT_STATUS;
   comment: string;
   order_id: string;
   channel: IChannel;

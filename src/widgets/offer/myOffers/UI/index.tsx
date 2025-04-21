@@ -40,14 +40,14 @@ export const MyOffers: FC<MyOffersProps> = ({
                 key={card.id + index}
                 initial="hidden"
                 animate="visible"
-                custom={index % INTERSECTION_ELEMENTS.bloggerOffers}
+                custom={index % INTERSECTION_ELEMENTS.BLOGGER_OFFERS}
                 variants={PAGE_ANIMATION.animationUp}
               >
                 <OfferCard statusFilter={statusFilter} card={card} />
               </motion.div>
             ))}
             {isLoading &&
-              Array.from({ length: INTERSECTION_ELEMENTS.bloggerOffers }).map(
+              Array.from({ length: INTERSECTION_ELEMENTS.BLOGGER_OFFERS }).map(
                 (_, index) => (
                   <OfferCardSkeleton key={index} statusFilter={statusFilter} />
                 ),

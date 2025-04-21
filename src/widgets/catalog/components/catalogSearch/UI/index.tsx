@@ -7,7 +7,8 @@ import {
   useGetCompanyCategoriesQuery,
 } from "@entities/channel";
 import {
-  catalogBarFilter,
+  CATALOG_FILTER,
+  CATALOG_FILTER_TABS_LIST,
   getAIParametersReq,
   getCatalogReq,
   getTAParametersReq,
@@ -18,14 +19,13 @@ import {
 import { useFindLanguage } from "@entities/user";
 import { AiFilter, RecomTargetCard } from "@features/catalog";
 import {
-  BarSubfilter,
+  BarSubFilter,
   SelectDescription,
   SelectOptions,
   SelectSex,
 } from "@features/other";
 import { ArrowSmallVerticalIcon } from "@shared/assets";
 import { accordionTypes, Languages } from "@shared/config";
-import { pageFilter } from "@shared/routing";
 import {
   Accordion,
   AccordionContent,
@@ -43,8 +43,8 @@ interface CatalogSearchProps {
   setValue: UseFormSetValue<getCatalogReq>;
   reset: UseFormReset<getCatalogReq>;
   formState: getCatalogReq;
-  catalogFilter: catalogBarFilter;
-  changeCatalogfilter: (filter: catalogBarFilter) => void;
+  catalogFilter: CATALOG_FILTER;
+  changeCatalogFilter: (filter: CATALOG_FILTER) => void;
 }
 
 export const CatalogSearch: FC<CatalogSearchProps> = ({
@@ -52,7 +52,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
   reset,
   formState,
   catalogFilter,
-  changeCatalogfilter,
+  changeCatalogFilter,
 }) => {
   const { t } = useTranslation();
   const language = useFindLanguage();
@@ -228,7 +228,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
 
   useEffect(() => {
     reset();
-    if (catalogFilter === catalogBarFilter.parameters) {
+    if (catalogFilter === CATALOG_FILTER.PARAMETERS) {
       setValueTA(channelParameterData.category, formState?.filter?.business);
       setValueTA(channelParameterData.region, formState?.filter?.region);
       setValueTA(channelParameterData.language, formState?.filter?.language);
@@ -276,11 +276,11 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
   return (
     <>
       <div className={styles.wrapper}>
-        <BarSubfilter
+        <BarSubFilter
+          tab={catalogFilter}
+          changeTab={changeCatalogFilter}
+          tab_list={CATALOG_FILTER_TABS_LIST}
           resetValues={resetRecommendationCard}
-          page={pageFilter.catalog}
-          changeCatalogFilter={changeCatalogfilter}
-          catalogFilter={catalogFilter}
         />
         <div className={styles.options}>
           {recommendationCards && (
@@ -344,7 +344,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
                 />
               </div>
             )}
-          {catalogFilter === catalogBarFilter.parameters ? (
+          {catalogFilter === CATALOG_FILTER.PARAMETERS ? (
             <>
               <SelectOptions
                 data={formState?.filter}

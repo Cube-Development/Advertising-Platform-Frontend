@@ -90,7 +90,7 @@ export const walletAPI = authApi.injectEndpoints({
           isLast:
             response?.elements ===
             response?.transactions?.length +
-              (response?.page - 1) * INTERSECTION_ELEMENTS.history,
+              (response?.page - 1) * INTERSECTION_ELEMENTS.HISTORY,
         };
       },
       serializeQueryArgs: ({ endpointName }) => {

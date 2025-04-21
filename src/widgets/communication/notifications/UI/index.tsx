@@ -52,7 +52,7 @@ export const Notifications: FC = () => {
     useForm<getNotificationsReq>({
       defaultValues: {
         page: 1,
-        elements_on_page: INTERSECTION_ELEMENTS.notifications,
+        elements_on_page: INTERSECTION_ELEMENTS.NOTIFICATIONS,
       },
     });
 
@@ -163,7 +163,7 @@ export const Notifications: FC = () => {
                       key={index}
                       initial="hidden"
                       animate="visible"
-                      custom={index % INTERSECTION_ELEMENTS.notifications}
+                      custom={index % INTERSECTION_ELEMENTS.NOTIFICATIONS}
                       variants={PAGE_ANIMATION.animationNotification}
                       onClick={() => handleChangeNotification(card)}
                     >
@@ -172,7 +172,7 @@ export const Notifications: FC = () => {
                   ))}
                   {isFetching &&
                     Array.from({
-                      length: INTERSECTION_ELEMENTS.notifications,
+                      length: INTERSECTION_ELEMENTS.NOTIFICATIONS,
                     }).map((_, index) => (
                       <SkeletonNotificationCard key={index} />
                     ))}
@@ -236,7 +236,7 @@ export const Notifications: FC = () => {
                       key={index}
                       initial="hidden"
                       animate="visible"
-                      custom={index % INTERSECTION_ELEMENTS.notifications}
+                      custom={index % INTERSECTION_ELEMENTS.NOTIFICATIONS}
                       variants={PAGE_ANIMATION.animationNotification}
                       onClick={() => handleChangeNotification(card)}
                     >
@@ -245,7 +245,7 @@ export const Notifications: FC = () => {
                   ))}
                   {isFetching &&
                     Array.from({
-                      length: INTERSECTION_ELEMENTS.notifications,
+                      length: INTERSECTION_ELEMENTS.NOTIFICATIONS,
                     }).map((_, index) => (
                       <SkeletonNotificationCard key={index} />
                     ))}

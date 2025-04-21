@@ -1,8 +1,11 @@
 import {
-  adminTransactionForm,
+  ADMIN_TRANSACTION_FILTER_TABS_LIST,
+  ADMIN_TRANSACTION_FORM,
+  ADMIN_TRANSACTION_STATUS,
   getAdminTransactionsReq,
   useGetAdminTransactionsQuery,
 } from "@entities/admin";
+import { BarSubFilter } from "@features/other";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { useClearCookiesOnPage } from "@shared/hooks";
 import { FC } from "react";
@@ -17,7 +20,8 @@ export const Transactions: FC = () => {
   const { watch, setValue } = useForm<getAdminTransactionsReq>({
     defaultValues: {
       page: 1,
-      elements_on_page: INTERSECTION_ELEMENTS.adminTransactions,
+      status: ADMIN_TRANSACTION_STATUS.PENDING,
+      elements_on_page: INTERSECTION_ELEMENTS.ADMIN_TRANSACTIONS,
     },
   });
   const formFields = watch();
@@ -26,7 +30,12 @@ export const Transactions: FC = () => {
   });
 
   const handleOnChangePage = () => {
-    setValue(adminTransactionForm.page, formFields?.page + 1);
+    setValue(ADMIN_TRANSACTION_FORM.PAGE, formFields?.page + 1);
+  };
+
+  const changeTab = (filter: ADMIN_TRANSACTION_STATUS) => {
+    setValue(ADMIN_TRANSACTION_FORM.PAGE, 1);
+    setValue(ADMIN_TRANSACTION_FORM.STATUS, filter);
   };
 
   return (
@@ -40,6 +49,13 @@ export const Transactions: FC = () => {
           </p>
         </div>
         <div className={styles.table}>
+          <div className={styles.filter}>
+            <BarSubFilter
+              tab={formFields?.status}
+              changeTab={changeTab}
+              tab_list={ADMIN_TRANSACTION_FILTER_TABS_LIST}
+            />
+          </div>
           <TransactionsList
             data={data}
             isLoading={isLoading}

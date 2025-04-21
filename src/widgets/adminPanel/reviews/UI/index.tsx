@@ -1,13 +1,13 @@
 import {
-  adminReviewForm,
-  adminReviewTypesFilter,
+  ADMIN_REVIEW_FILTER_TABS_LIST,
+  ADMIN_REVIEW_FORM,
+  ADMIN_REVIEW_STATUS,
   getAdminReviewsReq,
   useGetAdminReviewsQuery,
 } from "@entities/admin";
-import { BarSubfilter } from "@features/other";
+import { BarSubFilter } from "@features/other";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { useClearCookiesOnPage } from "@shared/hooks";
-import { pageFilter } from "@shared/routing";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -20,8 +20,8 @@ export const Reviews: FC = () => {
   const { watch, setValue } = useForm<getAdminReviewsReq>({
     defaultValues: {
       page: 1,
-      status: adminReviewTypesFilter.wait,
-      elements_on_page: INTERSECTION_ELEMENTS.adminReviews,
+      status: ADMIN_REVIEW_STATUS.WAIT,
+      elements_on_page: INTERSECTION_ELEMENTS.ADMIN_REVIEWS,
     },
   });
   const formFields = watch();
@@ -30,12 +30,12 @@ export const Reviews: FC = () => {
   });
 
   const handleOnChangePage = () => {
-    setValue(adminReviewForm.page, formFields?.page + 1);
+    setValue(ADMIN_REVIEW_FORM.PAGE, formFields?.page + 1);
   };
 
-  const setComplaintFilter = (filter: adminReviewTypesFilter) => {
-    setValue(adminReviewForm.page, 1);
-    setValue(adminReviewForm.status, filter);
+  const changeTab = (filter: ADMIN_REVIEW_STATUS) => {
+    setValue(ADMIN_REVIEW_FORM.PAGE, 1);
+    setValue(ADMIN_REVIEW_FORM.STATUS, filter);
   };
   console.log(data);
   return (
@@ -50,11 +50,10 @@ export const Reviews: FC = () => {
         </div>
         <div className={styles.table}>
           <div className={styles.filter}>
-            <BarSubfilter
-              page={pageFilter.adminReviews}
-              resetValues={() => {}}
-              reviewsFilter={formFields?.status}
-              changeReviewsFilter={setComplaintFilter}
+            <BarSubFilter
+              tab={formFields?.status}
+              changeTab={changeTab}
+              tab_list={ADMIN_REVIEW_FILTER_TABS_LIST}
             />
           </div>
           <ReviewsList

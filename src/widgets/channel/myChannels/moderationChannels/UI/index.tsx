@@ -39,16 +39,16 @@ export const ModerationChannels: FC<ModerationChannelsProps> = ({
               key={card.id + index}
               initial="hidden"
               animate="visible"
-              custom={index % INTERSECTION_ELEMENTS.myModChannels}
+              custom={index % INTERSECTION_ELEMENTS.BLOGGER_MODERATION_CHANNELS}
               variants={PAGE_ANIMATION.animationUp}
             >
               <ModChannelCard key={index} card={card} />
             </motion.div>
           ))}
           {isLoading &&
-            Array.from({ length: INTERSECTION_ELEMENTS.myModChannels }).map(
-              (_, index) => <ModChannelCardSkeleton key={index} />,
-            )}
+            Array.from({
+              length: INTERSECTION_ELEMENTS.BLOGGER_MODERATION_CHANNELS,
+            }).map((_, index) => <ModChannelCardSkeleton key={index} />)}
           {!isLast && (
             <div className={styles.show_more} onClick={handleOnChangePage}>
               {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
