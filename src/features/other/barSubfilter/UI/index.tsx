@@ -1,4 +1,3 @@
-import { catalogBarFilter, catalogTypes } from "@entities/project";
 import {
   profileTypes,
   profileTypesName,
@@ -26,8 +25,6 @@ type BarSubfilterProps<T> = {
     type: profileTypesName;
     id?: profileTypesNum;
   }) => void;
-  catalogFilter?: catalogBarFilter;
-  changeCatalogFilter?: (filter: catalogBarFilter) => void;
 
   tab_list?: IBarFilter<T>[];
   tab?: T;
@@ -48,8 +45,6 @@ export const BarSubfilter = <T,>({
   resetActiveAccount,
   profileFilter,
   changeProfile,
-  catalogFilter,
-  changeCatalogFilter,
 
   tab_list = [],
   tab,
@@ -63,13 +58,11 @@ export const BarSubfilter = <T,>({
   const [options, filter] =
     page === pageFilter.profile || page === pageFilter.walletWithdraw
       ? [profileTypes, profileFilter && profileFilter.type]
-      : page === pageFilter.catalog
-        ? [catalogTypes, catalogFilter]
-        : page === pageFilter.walletTopUp
-          ? [walletTopUpTypes, profileFilter && profileFilter.type]
-          : tab_list?.length && tab !== undefined && tab !== null
-            ? [tab_list, tab]
-            : [[], "", ""];
+      : page === pageFilter.walletTopUp
+        ? [walletTopUpTypes, profileFilter && profileFilter.type]
+        : tab_list?.length && tab !== undefined && tab !== null
+          ? [tab_list, tab]
+          : [[], "", ""];
 
   const toggleBar = (option: IFilterOption<T>) => {
     if (
@@ -86,18 +79,10 @@ export const BarSubfilter = <T,>({
           },
         );
       resetActiveAccount && resetActiveAccount(null);
-    } else if (page === pageFilter.catalog) {
-      changeCatalogFilter &&
-        changeCatalogFilter(option.type as catalogBarFilter);
     } else if (tab_list?.length && tab !== undefined && tab !== null) {
       changeTab && changeTab(option.type as T);
     }
 
-    if (page === pageFilter.catalog) {
-      // if (page !== pageFilter.catalog) {
-      // изменил этот момент
-      resetValues();
-    }
     if (resetValues) {
       resetValues();
     }

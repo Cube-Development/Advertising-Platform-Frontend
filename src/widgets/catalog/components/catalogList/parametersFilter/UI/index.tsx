@@ -7,7 +7,8 @@ import {
   useGetCompanyCategoriesQuery,
 } from "@entities/channel";
 import {
-  catalogBarFilter,
+  CATALOG_FILTER,
+  CATALOG_FILTER_TABS_LIST,
   getAIParametersReq,
   getCatalogReq,
   getTAParametersReq,
@@ -30,7 +31,6 @@ import {
 } from "@shared/assets";
 import { accordionTypes, BREAKPOINT, Languages } from "@shared/config";
 import { useWindowWidth } from "@shared/hooks";
-import { pageFilter } from "@shared/routing";
 import {
   Accordion,
   AccordionContent,
@@ -58,8 +58,8 @@ interface ParametersFilterProps {
   setValue: UseFormSetValue<getCatalogReq>;
   reset: UseFormReset<getCatalogReq>;
   formState: getCatalogReq;
-  catalogFilter: catalogBarFilter;
-  changeCatalogFilter: (filter: catalogBarFilter) => void;
+  catalogFilter: CATALOG_FILTER;
+  changeCatalogFilter: (filter: CATALOG_FILTER) => void;
 }
 
 export const ParametersFilter: FC<ParametersFilterProps> = ({
@@ -214,7 +214,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
 
   useEffect(() => {
     reset();
-    if (catalogFilter === catalogBarFilter.parameters) {
+    if (catalogFilter === CATALOG_FILTER.PARAMETERS) {
       setValueTA(channelParameterData.category, formState?.filter?.business);
       setValueTA(channelParameterData.region, formState?.filter?.region);
       setValueTA(channelParameterData.language, formState?.filter?.language);
@@ -283,10 +283,10 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
         <ScrollArea className="h-[calc(100svh_-_80px)]">
           <div className={styles.wrapper}>
             <BarSubfilter
+              tab={catalogFilter}
+              changeTab={changeCatalogFilter}
+              tab_list={CATALOG_FILTER_TABS_LIST}
               resetValues={resetRecommendationCard}
-              page={pageFilter.catalog}
-              catalogFilter={catalogFilter}
-              changeCatalogFilter={changeCatalogFilter}
             />
             <div className={styles.options}>
               {recommendationCards && (
@@ -353,7 +353,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
                     />
                   </div>
                 )}
-              {catalogFilter === catalogBarFilter.parameters ? (
+              {catalogFilter === CATALOG_FILTER.PARAMETERS ? (
                 <>
                   <SelectOptions
                     data={formState?.filter}

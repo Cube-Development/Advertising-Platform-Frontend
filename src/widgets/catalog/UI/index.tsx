@@ -1,10 +1,11 @@
 import { platformTypesNum } from "@entities/platform";
 import {
+  CATALOG_FILTER,
   catalogAPI,
-  catalogBarFilter,
   getCatalogReq,
   ICart,
   ICatalogChannel,
+  setFormState,
   sortingFilter,
   sortingTypes,
   useAddToCommonCartMutation,
@@ -17,7 +18,6 @@ import {
   useRemoveFromCommonCartMutation,
   useRemoveFromManagerCartMutation,
   useRemoveFromPublicCartMutation,
-  setFormState,
 } from "@entities/project";
 import { GenerateGuestId, roles, useFindLanguage } from "@entities/user";
 import {
@@ -50,8 +50,8 @@ export const CatalogBlock: FC = () => {
   const catalogTopRef = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
 
-  const [catalogFilter, setCatalogFilter] = useState<catalogBarFilter>(
-    catalogBarFilter.parameters,
+  const [catalogFilter, setCatalogFilter] = useState<CATALOG_FILTER>(
+    CATALOG_FILTER.PARAMETERS,
   );
 
   const { watch, reset, setValue, resetField } = useForm<getCatalogReq>({
@@ -480,7 +480,7 @@ export const CatalogBlock: FC = () => {
                 reset={reset}
                 setValue={setValueWithPage}
                 catalogFilter={catalogFilter}
-                changeCatalogfilter={(filter) => setCatalogFilter(filter)}
+                changeCatalogFilter={(filter) => setCatalogFilter(filter)}
               />
             </div>
           )}

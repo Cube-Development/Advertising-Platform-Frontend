@@ -6,19 +6,19 @@ import {
   YouTubeIcon,
 } from "@shared/assets";
 
-export enum catalogBarFilter {
-  parameters = "parameters",
+export enum CATALOG_FILTER {
+  PARAMETERS = "parameters",
   AI = "AI",
 }
 
-export const catalogTypes = [
+export const CATALOG_FILTER_TABS_LIST = [
   {
     name: "catalog.search.parameters",
-    type: catalogBarFilter.parameters,
+    type: CATALOG_FILTER.PARAMETERS,
   },
   {
     name: "catalog.search.AI",
-    type: catalogBarFilter.AI,
+    type: CATALOG_FILTER.AI,
   },
 ];
 

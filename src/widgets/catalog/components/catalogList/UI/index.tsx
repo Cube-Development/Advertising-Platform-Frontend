@@ -1,22 +1,22 @@
 import { channelData, channelParameterData } from "@entities/channel";
 import { platformTypes } from "@entities/platform";
 import {
+  CATALOG_FILTER,
   ICatalogChannel,
-  catalogBarFilter,
   getCatalogReq,
   sortingTypes,
 } from "@entities/project";
 import { AddToBasket } from "@features/cart";
 import {
   CatalogCard,
-  SmallCatalogCard,
   FormatList,
   SearchFilter,
   SkeletonCatalogCard,
   SkeletonSmallCatalogCard,
+  SmallCatalogCard,
 } from "@features/catalog";
 import { SelectFilter, filterData } from "@features/other";
-import { SadSmileIcon, GridIcon, ListIcon } from "@shared/assets";
+import { GridIcon, ListIcon, SadSmileIcon } from "@shared/assets";
 import {
   BREAKPOINT,
   INTERSECTION_ELEMENTS,
@@ -46,8 +46,8 @@ interface CatalogListProps {
   onChangeCard: (cart: ICatalogChannel) => void;
   isLast: boolean;
   isLoading?: boolean;
-  catalogFilter: catalogBarFilter;
-  changeCatalogFilter: (filter: catalogBarFilter) => void;
+  catalogFilter: CATALOG_FILTER;
+  changeCatalogFilter: (filter: CATALOG_FILTER) => void;
 }
 
 export const CatalogList: FC<CatalogListProps> = ({
