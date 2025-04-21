@@ -1,9 +1,9 @@
-import { RecipientType } from "@entities/communication";
+import { RECIPIENT_TYPE } from "@entities/communication";
 import { Skeleton } from "@shared/ui";
 import { FC } from "react";
 
 interface SkeletonChatMessageProps {
-  recipient: RecipientType;
+  recipient: RECIPIENT_TYPE;
 }
 
 export const SkeletonChatMessage: FC<SkeletonChatMessageProps> = ({
@@ -24,7 +24,7 @@ export const SkeletonChatMessage: FC<SkeletonChatMessageProps> = ({
   const randomHeight = getRandomValue(heights);
   const randomWidth = getRandomValue(widths);
   const rounded =
-    recipient === RecipientType.receiver
+    recipient === RECIPIENT_TYPE.RECEIVER
       ? "rounded-tl-[10px] rounded-bl-[10px] rounded-tr-[20px] rounded-br-[20px]"
       : "rounded-tl-[20px] rounded-bl-[20px] rounded-tr-[10px] rounded-br-[10px]";
   return (

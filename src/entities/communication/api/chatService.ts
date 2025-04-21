@@ -1,5 +1,5 @@
 import {
-  chatType,
+  CHAT_TYPE,
   IAllMessages,
   IChatData,
   IMessageNewSocket,
@@ -40,7 +40,7 @@ export const chatAPI = authApi.injectEndpoints({
       transformResponse: (response: IChatData[]) => {
         const newResponse = response.map((item) => {
           if (!item.created_date || !item.created_time) {
-            return { ...item, type: chatType.order };
+            return { ...item, type: CHAT_TYPE.ORDER };
           }
           const datetime = convertUTCToLocalDateTime(
             item.created_date,
@@ -48,7 +48,7 @@ export const chatAPI = authApi.injectEndpoints({
           );
           return {
             ...item,
-            type: chatType.order,
+            type: CHAT_TYPE.ORDER,
             formatted_date: datetime.localDate,
             formatted_time: datetime.localTime,
             message_datetime: item.created_date + " " + item.created_time,
@@ -69,7 +69,7 @@ export const chatAPI = authApi.injectEndpoints({
       },
       transformResponse: (response: IChatData) => {
         if (!response.created_date || !response.created_time) {
-          return { ...response, type: chatType.order };
+          return { ...response, type: CHAT_TYPE.ORDER };
         }
         const datetime = convertUTCToLocalDateTime(
           response.created_date,
@@ -77,7 +77,7 @@ export const chatAPI = authApi.injectEndpoints({
         );
         return {
           ...response,
-          type: chatType.order,
+          type: CHAT_TYPE.ORDER,
           formatted_date: datetime.localDate,
           formatted_time: datetime.localTime,
           message_datetime: response.created_date + " " + response.created_time,
@@ -97,7 +97,7 @@ export const chatAPI = authApi.injectEndpoints({
       transformResponse: (response: IChatData[]) => {
         const newResponse = response.map((item) => {
           if (!item.created_date || !item.created_time) {
-            return { ...item, type: chatType.project };
+            return { ...item, type: CHAT_TYPE.PROJECT };
           }
           const datetime = convertUTCToLocalDateTime(
             item.created_date,
@@ -105,7 +105,7 @@ export const chatAPI = authApi.injectEndpoints({
           );
           return {
             ...item,
-            type: chatType.project,
+            type: CHAT_TYPE.PROJECT,
             formatted_date: datetime.localDate,
             formatted_time: datetime.localTime,
             message_datetime: item.created_date + " " + item.created_time,
@@ -125,7 +125,7 @@ export const chatAPI = authApi.injectEndpoints({
       },
       transformResponse: (response: IChatData) => {
         if (!response.created_date || !response.created_time) {
-          return { ...response, type: chatType.project };
+          return { ...response, type: CHAT_TYPE.PROJECT };
         }
         const datetime = convertUTCToLocalDateTime(
           response.created_date,
@@ -133,7 +133,7 @@ export const chatAPI = authApi.injectEndpoints({
         );
         return {
           ...response,
-          type: chatType.project,
+          type: CHAT_TYPE.PROJECT,
           formatted_date: datetime.localDate,
           formatted_time: datetime.localTime,
           message_datetime: response.created_date + " " + response.created_time,

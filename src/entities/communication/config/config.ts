@@ -1,52 +1,52 @@
-export enum RecipientType {
-  sender = "sender",
-  receiver = "receiver",
+export enum RECIPIENT_TYPE {
+  SENDER = "sender",
+  RECEIVER = "receiver",
 }
 
-export enum chatType {
-  order = "order",
-  project = "project",
+export enum CHAT_TYPE {
+  ORDER = "order",
+  PROJECT = "project",
 }
 
-export enum MessageSendType {
-  order_message_create = "OrderMessageCreate",
-  project_message_create = "ProjectMessageCreate",
+export enum MESSAGE_SEND_TYPE {
+  ORDER_MESSAGE_CREATE = "OrderMessageCreate",
+  PROJECT_MESSAGE_CREATE = "ProjectMessageCreate",
 }
 
-export enum MessageStatus {
-  read = 1,
-  unread = 0,
+export enum MESSAGE_STATUS {
+  READ = 1,
+  UNREAD = 0,
 }
 
 export const DAY_OF_WEEK = {
   Ru: ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вск"],
 };
 
-export enum chatTypesFilter {
-  blogger = "blogger",
-  manager = "manager",
-  advertiser = "advertiser",
+export enum CHAT_FILTER {
+  BLOGGER = "blogger",
+  MANAGER = "manager",
+  ADVERTISER = "advertiser",
 }
 
-export const chatAdvertiserTypes = [
+export const CHAT_ADVERTISER_FILTER_TABS_LIST = [
   {
     name: "chat.types.blogger",
-    type: chatTypesFilter.blogger,
+    type: CHAT_FILTER.BLOGGER,
   },
   {
     name: "chat.types.manager",
-    type: chatTypesFilter.manager,
+    type: CHAT_FILTER.MANAGER,
   },
 ];
 
-export const chatManagerTypes = [
+export const CHAT_MANAGER_FILTER_TABS_LIST = [
   {
     name: "chat.types.blogger",
-    type: chatTypesFilter.blogger,
+    type: CHAT_FILTER.BLOGGER,
   },
   {
     name: "chat.types.advertiser",
-    type: chatTypesFilter.advertiser,
+    type: CHAT_FILTER.ADVERTISER,
   },
 ];
 

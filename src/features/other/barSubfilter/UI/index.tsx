@@ -1,24 +1,16 @@
 import {
-  chatAdvertiserTypes,
-  chatManagerTypes,
-  chatTypesFilter,
-} from "@entities/communication";
-import {
   addFileFilter,
   addFileTypes,
   catalogBarFilter,
   catalogTypes,
 } from "@entities/project";
-import { roles } from "@entities/user";
 import {
   profileTypes,
   profileTypesName,
   profileTypesNum,
   walletTopUpTypes,
 } from "@entities/wallet";
-import { cookiesTypes } from "@shared/config";
 import { pageFilter } from "@shared/routing";
-import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
@@ -41,9 +33,9 @@ type BarSubfilterProps<T> = {
   }) => void;
   catalogFilter?: catalogBarFilter;
   changeCatalogFilter?: (filter: catalogBarFilter) => void;
-  
-  chatFilter?: chatTypesFilter;
-  changeChatFilter?: (filter: chatTypesFilter) => void;
+
+  // chatFilter?: CHAT_FILTER;
+  // changeChatFilter?: (filter: CHAT_FILTER) => void;
 
   tab_list?: IBarFilter<T>[];
   tab?: T;
@@ -68,9 +60,6 @@ export const BarSubfilter = <T,>({
   changeProfile,
   catalogFilter,
   changeCatalogFilter,
-  chatFilter,
-  changeChatFilter,
-
 
   tab_list = [],
   tab,
@@ -82,9 +71,6 @@ export const BarSubfilter = <T,>({
   isFixedColumns = false,
 }: BarSubfilterProps<T>) => {
   const { t } = useTranslation();
-  const role = Cookies.get(cookiesTypes.role)
-    ? (Cookies.get(cookiesTypes.role) as roles)
-    : roles.advertiser;
 
   const [options, filter] =
     page === pageFilter.profile || page === pageFilter.walletWithdraw
@@ -93,15 +79,16 @@ export const BarSubfilter = <T,>({
         ? [catalogTypes, catalogFilter]
         : page === pageFilter.walletTopUp
           ? [walletTopUpTypes, profileFilter && profileFilter.type]
-          : page === pageFilter.chat && role === roles.advertiser
-            ? [chatAdvertiserTypes, chatFilter]
-            : page === pageFilter.chat && role === roles.manager
-              ? [chatManagerTypes, chatFilter]
-              : page === pageFilter.createOrderFiles
-                ? [addFileTypes, fileFilter]
-                : role === roles.moderator
-                  ? [tab_list, tab]
-                  : [[], "", ""];
+          : // : tab_list?.length && tab
+            // page === pageFilter.chat && role === roles.advertiser
+            //   ? [CHAT_ADVERTISER_FILTER_TABS_LIST, chatFilter]
+            //   : page === pageFilter.chat && role === roles.manager
+            //     ? [CHAT_MANAGER_FILTER_TABS_LIST, chatFilter]
+            page === pageFilter.createOrderFiles
+            ? [addFileTypes, fileFilter]
+            : tab_list?.length && tab
+              ? [tab_list, tab]
+              : [[], "", ""];
 
   const toggleBar = (option: IFilterOption<T>) => {
     if (
@@ -115,24 +102,29 @@ export const BarSubfilter = <T,>({
           newFilter as {
             type: profileTypesName;
             id?: profileTypesNum;
-          }
+          },
         );
       resetActiveAccount && resetActiveAccount(null);
     } else if (page === pageFilter.catalog) {
       changeCatalogFilter &&
         changeCatalogFilter(option.type as catalogBarFilter);
-    } else if (page === pageFilter.chat) {
-      changeChatFilter && changeChatFilter(option.type as chatTypesFilter);
-      resetValues!();
-    } else if (page === pageFilter.createOrderFiles) {
+    }
+    // else if (page === pageFilter.chat) {
+    //   changeChatFilter && changeChatFilter(option.type as CHAT_FILTER);
+    //   resetValues!();
+    // }
+    else if (page === pageFilter.createOrderFiles) {
       changeFileFilter && changeFileFilter(option.type as addFileFilter);
-    } else if (role === roles.moderator) {
+    } else if (tab_list?.length && tab) {
       changeTab && changeTab(option.type as T);
     }
 
     if (page === pageFilter.catalog) {
       // if (page !== pageFilter.catalog) {
       // изменил этот момент
+      resetValues();
+    }
+    if (resetValues) {
       resetValues();
     }
   };
