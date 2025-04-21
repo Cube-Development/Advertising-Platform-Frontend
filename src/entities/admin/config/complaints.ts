@@ -40,7 +40,7 @@ export const ADMIN_COMPLAINT_STATUS_LIST = [
   },
 ];
 
-export const ADMIN_COMPLAINT_BAR_FILTER = [
+export const ADMIN_COMPLAINT_FILTER_TABS_LIST = [
   {
     name: "admin_panel.complaints.types.wait",
     type: ADMIN_COMPLAINT_STATUS.WAIT,

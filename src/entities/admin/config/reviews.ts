@@ -3,7 +3,7 @@ export enum ADMIN_REVIEW_STATUS {
   ACCEPT = 1,
 }
 
-export const ADMIN_REVIEW_BAR_FILTER = [
+export const ADMIN_REVIEW_FILTER_TABS_LIST = [
   {
     name: "admin_panel.reviews.types.wait",
     type: ADMIN_REVIEW_STATUS.WAIT,

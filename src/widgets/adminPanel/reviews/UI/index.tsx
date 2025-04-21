@@ -1,4 +1,5 @@
 import {
+  ADMIN_REVIEW_FILTER_TABS_LIST,
   ADMIN_REVIEW_FORM,
   ADMIN_REVIEW_STATUS,
   getAdminReviewsReq,
@@ -7,7 +8,6 @@ import {
 import { BarSubfilter } from "@features/other";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { useClearCookiesOnPage } from "@shared/hooks";
-import { pageFilter } from "@shared/routing";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -33,7 +33,7 @@ export const Reviews: FC = () => {
     setValue(ADMIN_REVIEW_FORM.PAGE, formFields?.page + 1);
   };
 
-  const setComplaintFilter = (filter: ADMIN_REVIEW_STATUS) => {
+  const changeTab = (filter: ADMIN_REVIEW_STATUS) => {
     setValue(ADMIN_REVIEW_FORM.PAGE, 1);
     setValue(ADMIN_REVIEW_FORM.STATUS, filter);
   };
@@ -51,10 +51,9 @@ export const Reviews: FC = () => {
         <div className={styles.table}>
           <div className={styles.filter}>
             <BarSubfilter
-              page={pageFilter.adminReviews}
-              resetValues={() => {}}
-              reviewsFilter={formFields?.status}
-              changeReviewsFilter={setComplaintFilter}
+              tab={formFields?.status}
+              changeTab={changeTab}
+              tab_list={ADMIN_REVIEW_FILTER_TABS_LIST}
             />
           </div>
           <ReviewsList

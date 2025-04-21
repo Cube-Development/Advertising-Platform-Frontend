@@ -36,7 +36,7 @@ export const ADMIN_CHANNEL_STATUS_LIST = [
   },
 ];
 
-export const ADMIN_CHANNEL_BAR_FILTER = [
+export const ADMIN_CHANNEL_FILTER_TABS_LIST = [
   {
     name: "admin_panel.channels.card.status.active",
     type: ADMIN_CHANNEL_STATUS.ACTIVE,

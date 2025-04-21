@@ -1,14 +1,4 @@
 import {
-  ADMIN_CHANNEL_BAR_FILTER,
-  ADMIN_CHANNEL_STATUS,
-  ADMIN_COMPLAINT_BAR_FILTER,
-  ADMIN_COMPLAINT_STATUS,
-  ADMIN_REVIEW_BAR_FILTER,
-  ADMIN_REVIEW_STATUS,
-  ADMIN_TRANSACTION_BAR_FILTER,
-  ADMIN_TRANSACTION_STATUS,
-} from "@entities/admin";
-import {
   chatAdvertiserTypes,
   chatManagerTypes,
   chatTypesFilter,
@@ -29,12 +19,16 @@ import {
 import { cookiesTypes } from "@shared/config";
 import { pageFilter } from "@shared/routing";
 import Cookies from "js-cookie";
-import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
-interface BarSubfilterProps {
-  page: pageFilter;
+type IBarFilter<T> = {
+  type: T;
+  name: string;
+};
+
+type BarSubfilterProps<T> = {
+  page?: pageFilter;
   resetValues?: () => void;
   resetActiveAccount?: (account: null) => void;
   profileFilter?: {
@@ -47,36 +41,26 @@ interface BarSubfilterProps {
   }) => void;
   catalogFilter?: catalogBarFilter;
   changeCatalogFilter?: (filter: catalogBarFilter) => void;
+  
   chatFilter?: chatTypesFilter;
   changeChatFilter?: (filter: chatTypesFilter) => void;
-  reviewsFilter?: ADMIN_REVIEW_STATUS;
-  changeReviewsFilter?: (filter: ADMIN_REVIEW_STATUS) => void;
-  complaintsFilter?: ADMIN_COMPLAINT_STATUS;
-  changeComplaintsFilter?: (filter: ADMIN_COMPLAINT_STATUS) => void;
-  transactionsFilter?: ADMIN_TRANSACTION_STATUS;
-  changeTransactionsFilter?: (filter: ADMIN_TRANSACTION_STATUS) => void;
-  channelsFilter?: ADMIN_CHANNEL_STATUS;
-  changeChannelsFilter?: (filter: ADMIN_CHANNEL_STATUS) => void;
+
+  tab_list?: IBarFilter<T>[];
+  tab?: T;
+  changeTab?: (filter: T) => void;
+
   fileFilter?: addFileFilter;
   changeFileFilter?: (filter: addFileFilter) => void;
   badge?: { status: string; count: number }[];
   isFixedColumns?: boolean;
-}
+};
 
-interface IFilterOption {
-  type:
-    | profileTypesName
-    | catalogBarFilter
-    | chatTypesFilter
-    | addFileFilter
-    | ADMIN_REVIEW_STATUS
-    | ADMIN_COMPLAINT_STATUS
-    | ADMIN_TRANSACTION_STATUS
-    | ADMIN_CHANNEL_STATUS;
+type IFilterOption<T> = {
+  type: T;
   id?: profileTypesNum;
-}
+};
 
-export const BarSubfilter: FC<BarSubfilterProps> = ({
+export const BarSubfilter = <T,>({
   page,
   resetValues = () => {},
   resetActiveAccount,
@@ -86,19 +70,17 @@ export const BarSubfilter: FC<BarSubfilterProps> = ({
   changeCatalogFilter,
   chatFilter,
   changeChatFilter,
-  reviewsFilter,
-  changeReviewsFilter,
-  complaintsFilter,
-  changeComplaintsFilter,
-  transactionsFilter,
-  changeTransactionsFilter,
-  channelsFilter,
-  changeChannelsFilter,
+
+
+  tab_list = [],
+  tab,
+  changeTab,
+
   fileFilter,
   changeFileFilter,
   badge,
   isFixedColumns = false,
-}) => {
+}: BarSubfilterProps<T>) => {
   const { t } = useTranslation();
   const role = Cookies.get(cookiesTypes.role)
     ? (Cookies.get(cookiesTypes.role) as roles)
@@ -117,20 +99,11 @@ export const BarSubfilter: FC<BarSubfilterProps> = ({
               ? [chatManagerTypes, chatFilter]
               : page === pageFilter.createOrderFiles
                 ? [addFileTypes, fileFilter]
-                : page === pageFilter.adminReviews && role === roles.moderator
-                  ? [ADMIN_REVIEW_BAR_FILTER, reviewsFilter]
-                  : page === pageFilter.adminComplaint &&
-                      role === roles.moderator
-                    ? [ADMIN_COMPLAINT_BAR_FILTER, complaintsFilter]
-                    : page === pageFilter.adminTransactions &&
-                        role === roles.moderator
-                      ? [ADMIN_TRANSACTION_BAR_FILTER, transactionsFilter]
-                      : page === pageFilter.adminChannels &&
-                          role === roles.moderator
-                        ? [ADMIN_CHANNEL_BAR_FILTER, channelsFilter]
-                        : [[], "", ""];
+                : role === roles.moderator
+                  ? [tab_list, tab]
+                  : [[], "", ""];
 
-  const toggleBar = (option: IFilterOption) => {
+  const toggleBar = (option: IFilterOption<T>) => {
     if (
       page === pageFilter.profile ||
       page === pageFilter.walletWithdraw ||
@@ -142,7 +115,7 @@ export const BarSubfilter: FC<BarSubfilterProps> = ({
           newFilter as {
             type: profileTypesName;
             id?: profileTypesNum;
-          },
+          }
         );
       resetActiveAccount && resetActiveAccount(null);
     } else if (page === pageFilter.catalog) {
@@ -153,19 +126,10 @@ export const BarSubfilter: FC<BarSubfilterProps> = ({
       resetValues!();
     } else if (page === pageFilter.createOrderFiles) {
       changeFileFilter && changeFileFilter(option.type as addFileFilter);
-    } else if (page === pageFilter.adminReviews) {
-      changeReviewsFilter &&
-        changeReviewsFilter(option.type as ADMIN_REVIEW_STATUS);
-    } else if (page === pageFilter.adminComplaint) {
-      changeComplaintsFilter &&
-        changeComplaintsFilter(option.type as ADMIN_COMPLAINT_STATUS);
-    } else if (page === pageFilter.adminTransactions) {
-      changeTransactionsFilter &&
-        changeTransactionsFilter(option.type as ADMIN_TRANSACTION_STATUS);
-    } else if (page === pageFilter.adminChannels) {
-      changeChannelsFilter &&
-        changeChannelsFilter(option.type as ADMIN_CHANNEL_STATUS);
+    } else if (role === roles.moderator) {
+      changeTab && changeTab(option.type as T);
     }
+
     if (page === pageFilter.catalog) {
       // if (page !== pageFilter.catalog) {
       // изменил этот момент
@@ -188,7 +152,7 @@ export const BarSubfilter: FC<BarSubfilterProps> = ({
           <li
             key={index}
             className={` ${filter === option.type ? styles.active : ""}`}
-            onClick={() => toggleBar(option)}
+            onClick={() => toggleBar(option as any)}
           >
             <p className="truncate gradient_color">{t(option.name)}</p>
             {!!badge &&

@@ -19,7 +19,7 @@ export const ADMIN_TRANSACTION_STATUS_LIST = [
   },
 ];
 
-export const ADMIN_TRANSACTION_BAR_FILTER = [
+export const ADMIN_TRANSACTION_FILTER_TABS_LIST = [
   {
     name: "admin_panel.transactions.card.status.complete",
     type: ADMIN_TRANSACTION_STATUS.COMPLETE,

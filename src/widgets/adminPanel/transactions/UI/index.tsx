@@ -1,4 +1,5 @@
 import {
+  ADMIN_TRANSACTION_FILTER_TABS_LIST,
   ADMIN_TRANSACTION_FORM,
   ADMIN_TRANSACTION_STATUS,
   getAdminTransactionsReq,
@@ -33,7 +34,7 @@ export const Transactions: FC = () => {
     setValue(ADMIN_TRANSACTION_FORM.PAGE, formFields?.page + 1);
   };
 
-  const setFilter = (filter: ADMIN_TRANSACTION_STATUS) => {
+  const changeTab = (filter: ADMIN_TRANSACTION_STATUS) => {
     setValue(ADMIN_TRANSACTION_FORM.PAGE, 1);
     setValue(ADMIN_TRANSACTION_FORM.STATUS, filter);
   };
@@ -51,10 +52,9 @@ export const Transactions: FC = () => {
         <div className={styles.table}>
           <div className={styles.filter}>
             <BarSubfilter
-              page={pageFilter.adminTransactions}
-              resetValues={() => {}}
-              transactionsFilter={formFields?.status}
-              changeTransactionsFilter={setFilter}
+              tab={formFields?.status}
+              changeTab={changeTab}
+              tab_list={ADMIN_TRANSACTION_FILTER_TABS_LIST}
             />
           </div>
           <TransactionsList

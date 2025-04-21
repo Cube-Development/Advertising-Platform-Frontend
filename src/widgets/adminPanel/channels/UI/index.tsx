@@ -1,4 +1,5 @@
 import {
+  ADMIN_CHANNEL_FILTER_TABS_LIST,
   ADMIN_CHANNEL_FORM,
   ADMIN_CHANNEL_STATUS,
   getAdminChannelsReq,
@@ -7,7 +8,6 @@ import {
 import { BarSubfilter } from "@features/other";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { useClearCookiesOnPage } from "@shared/hooks";
-import { pageFilter } from "@shared/routing";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -33,7 +33,7 @@ export const Channels: FC = () => {
     setValue(ADMIN_CHANNEL_FORM.PAGE, formFields?.page + 1);
   };
 
-  const setFilter = (filter: ADMIN_CHANNEL_STATUS) => {
+  const changeTab = (filter: any) => {
     setValue(ADMIN_CHANNEL_FORM.PAGE, 1);
     setValue(ADMIN_CHANNEL_FORM.STATUS, filter);
   };
@@ -51,10 +51,9 @@ export const Channels: FC = () => {
         <div className={styles.table}>
           <div className={styles.filter}>
             <BarSubfilter
-              page={pageFilter.adminChannels}
-              resetValues={() => {}}
-              channelsFilter={formFields?.status}
-              changeChannelsFilter={setFilter}
+              tab={formFields?.status}
+              changeTab={changeTab}
+              tab_list={ADMIN_CHANNEL_FILTER_TABS_LIST}
             />
           </div>
           <ChannelsList

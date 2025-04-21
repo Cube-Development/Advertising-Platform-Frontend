@@ -1,4 +1,5 @@
 import {
+  ADMIN_COMPLAINT_FILTER_TABS_LIST,
   ADMIN_COMPLAINT_FORM,
   ADMIN_COMPLAINT_STATUS,
   getAdminOrderComplaintsReq,
@@ -7,7 +8,6 @@ import {
 import { BarSubfilter } from "@features/other";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { useClearCookiesOnPage } from "@shared/hooks";
-import { pageFilter } from "@shared/routing";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -33,7 +33,7 @@ export const Complaints: FC = () => {
     setValue(ADMIN_COMPLAINT_FORM.PAGE, formFields?.page + 1);
   };
 
-  const setComplaintFilter = (filter: ADMIN_COMPLAINT_STATUS) => {
+  const changeTab = (filter: ADMIN_COMPLAINT_STATUS) => {
     setValue(ADMIN_COMPLAINT_FORM.PAGE, 1);
     setValue(ADMIN_COMPLAINT_FORM.STATUS, filter);
   };
@@ -51,10 +51,9 @@ export const Complaints: FC = () => {
         <div className={styles.table}>
           <div className={styles.filter}>
             <BarSubfilter
-              page={pageFilter.adminComplaint}
-              resetValues={() => {}}
-              complaintsFilter={formFields?.order_complaint_status}
-              changeComplaintsFilter={setComplaintFilter}
+              tab={formFields?.order_complaint_status}
+              changeTab={changeTab}
+              tab_list={ADMIN_COMPLAINT_FILTER_TABS_LIST}
             />
           </div>
           <ComplaintsList
