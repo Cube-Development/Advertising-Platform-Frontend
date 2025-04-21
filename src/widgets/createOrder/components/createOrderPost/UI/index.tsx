@@ -416,7 +416,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                   )}
                   <PostComment
                     placeholder={"create_order.create.comment"}
-                    maxLength={POST.commentLength}
+                    maxLength={POST.COMMENT_LENGTH}
                     rows={4}
                     setValue={setValue}
                     type={

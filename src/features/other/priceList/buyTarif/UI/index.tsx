@@ -356,7 +356,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
                         onDragLeave={handleLive}
                         onDrop={handleDrop}
                       >
-                        {formState?.files.length === FILES.maxLenght ? (
+                        {formState?.files.length === FILES.MAX_LENGTH ? (
                           <div className={styles.items}>
                             {formState?.files.map((file, id) => (
                               <div key={id} className={styles.item}>

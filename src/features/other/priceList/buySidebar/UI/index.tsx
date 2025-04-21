@@ -255,7 +255,7 @@ export const BuySidebar: FC<BuySidebarProps> = ({
                           onDragLeave={handleLive}
                           onDrop={handleDrop}
                         >
-                          {files.length === FILES.maxLenght ? (
+                          {files.length === FILES.MAX_LENGTH ? (
                             <div className={styles.items}>
                               {files.map((file, id) => (
                                 <div key={id} className={styles.item}>

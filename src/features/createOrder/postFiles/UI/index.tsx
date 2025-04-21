@@ -1,13 +1,13 @@
 import { platformTypesNum } from "@entities/platform";
 import {
+  ADD_FILE_FILTER,
+  ADD_FILE_FILTER_TABS_LIST,
   CreatePostFormData,
   FileProps,
   ICreatePostForm,
-  addFileFilter,
 } from "@entities/project";
 import { BarSubfilter } from "@features/other";
 import { CancelIcon2, ImageIcon } from "@shared/assets";
-import { pageFilter } from "@shared/routing";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -39,7 +39,9 @@ export const PostFiles: FC<PostFilesProps> = ({
   type,
 }) => {
   const { t } = useTranslation();
-  const [filter, setFilter] = useState<addFileFilter>(addFileFilter.mediafile);
+  const [filter, setFilter] = useState<ADD_FILE_FILTER>(
+    ADD_FILE_FILTER.MEDIA_FILE,
+  );
 
   const currentPost = formState?.selectedMultiPostId
     ? formState?.multiposts?.find(
@@ -155,11 +157,11 @@ export const PostFiles: FC<PostFilesProps> = ({
             </AlertDialogCancel>
           </div>
           <BarSubfilter
-            page={pageFilter.createOrderFiles}
-            fileFilter={filter}
-            changeFileFilter={(filter) => setFilter(filter)}
+            tab={filter}
+            changeTab={setFilter}
+            tab_list={ADD_FILE_FILTER_TABS_LIST}
           />
-          {filter === addFileFilter.file ? (
+          {filter === ADD_FILE_FILTER.FILE ? (
             <AddFiles onChange={handleAddFile} currentFiles={currentFile} />
           ) : (
             <AddMediaFiles

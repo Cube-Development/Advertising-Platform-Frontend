@@ -1,9 +1,4 @@
-import {
-  addFileFilter,
-  addFileTypes,
-  catalogBarFilter,
-  catalogTypes,
-} from "@entities/project";
+import { catalogBarFilter, catalogTypes } from "@entities/project";
 import {
   profileTypes,
   profileTypesName,
@@ -34,15 +29,10 @@ type BarSubfilterProps<T> = {
   catalogFilter?: catalogBarFilter;
   changeCatalogFilter?: (filter: catalogBarFilter) => void;
 
-  // chatFilter?: CHAT_FILTER;
-  // changeChatFilter?: (filter: CHAT_FILTER) => void;
-
   tab_list?: IBarFilter<T>[];
   tab?: T;
   changeTab?: (filter: T) => void;
 
-  fileFilter?: addFileFilter;
-  changeFileFilter?: (filter: addFileFilter) => void;
   badge?: { status: string; count: number }[];
   isFixedColumns?: boolean;
 };
@@ -65,8 +55,6 @@ export const BarSubfilter = <T,>({
   tab,
   changeTab,
 
-  fileFilter,
-  changeFileFilter,
   badge,
   isFixedColumns = false,
 }: BarSubfilterProps<T>) => {
@@ -79,11 +67,9 @@ export const BarSubfilter = <T,>({
         ? [catalogTypes, catalogFilter]
         : page === pageFilter.walletTopUp
           ? [walletTopUpTypes, profileFilter && profileFilter.type]
-          : page === pageFilter.createOrderFiles
-            ? [addFileTypes, fileFilter]
-            : tab_list?.length && tab !== undefined && tab !== null
-              ? [tab_list, tab]
-              : [[], "", ""];
+          : tab_list?.length && tab !== undefined && tab !== null
+            ? [tab_list, tab]
+            : [[], "", ""];
 
   const toggleBar = (option: IFilterOption<T>) => {
     if (
@@ -97,14 +83,12 @@ export const BarSubfilter = <T,>({
           newFilter as {
             type: profileTypesName;
             id?: profileTypesNum;
-          }
+          },
         );
       resetActiveAccount && resetActiveAccount(null);
     } else if (page === pageFilter.catalog) {
       changeCatalogFilter &&
         changeCatalogFilter(option.type as catalogBarFilter);
-    } else if (page === pageFilter.createOrderFiles) {
-      changeFileFilter && changeFileFilter(option.type as addFileFilter);
     } else if (tab_list?.length && tab !== undefined && tab !== null) {
       changeTab && changeTab(option.type as T);
     }
