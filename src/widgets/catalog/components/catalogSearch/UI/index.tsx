@@ -19,7 +19,7 @@ import {
 import { useFindLanguage } from "@entities/user";
 import { AiFilter, RecomTargetCard } from "@features/catalog";
 import {
-  BarSubfilter,
+  BarSubFilter,
   SelectDescription,
   SelectOptions,
   SelectSex,
@@ -276,7 +276,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
   return (
     <>
       <div className={styles.wrapper}>
-        <BarSubfilter
+        <BarSubFilter
           tab={catalogFilter}
           changeTab={changeCatalogFilter}
           tab_list={CATALOG_FILTER_TABS_LIST}

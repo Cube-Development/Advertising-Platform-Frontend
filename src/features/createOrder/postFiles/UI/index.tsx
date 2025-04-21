@@ -6,7 +6,7 @@ import {
   FileProps,
   ICreatePostForm,
 } from "@entities/project";
-import { BarSubfilter } from "@features/other";
+import { BarSubFilter } from "@features/other";
 import { CancelIcon2, ImageIcon } from "@shared/assets";
 import {
   AlertDialog,
@@ -156,7 +156,7 @@ export const PostFiles: FC<PostFilesProps> = ({
               <CancelIcon2 />
             </AlertDialogCancel>
           </div>
-          <BarSubfilter
+          <BarSubFilter
             tab={filter}
             changeTab={setFilter}
             tab_list={ADD_FILE_FILTER_TABS_LIST}

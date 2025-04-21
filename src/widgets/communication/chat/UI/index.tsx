@@ -1,7 +1,9 @@
 import {
-  chatAPI,
-  CHAT_TYPE,
+  CHAT_ADVERTISER_FILTER_TABS_LIST,
   CHAT_FILTER,
+  CHAT_MANAGER_FILTER_TABS_LIST,
+  CHAT_TYPE,
+  chatAPI,
   IChatData,
   IChatProps,
   IMessageNewSocket,
@@ -11,12 +13,10 @@ import {
   useGetOrderChatsQuery,
   useGetProjectChatByIdQuery,
   useGetProjectChatsQuery,
-  CHAT_ADVERTISER_FILTER_TABS_LIST,
-  CHAT_MANAGER_FILTER_TABS_LIST,
 } from "@entities/communication";
 import { roles } from "@entities/user";
 import { ChatCard, ChatMessages } from "@features/communication";
-import { BarSubfilter } from "@features/other";
+import { BarSubFilter } from "@features/other";
 import { useCentrifuge } from "@shared/api";
 import {
   ArrowLongHorizontalIcon,
@@ -33,7 +33,6 @@ import {
   PAGE_ANIMATION,
 } from "@shared/config";
 import { useAppDispatch, useAppSelector, useWindowWidth } from "@shared/hooks";
-import { pageFilter } from "@shared/routing";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -154,7 +153,7 @@ export const Chat: FC<IChatProps> = ({
     );
   };
 
-  const resetChat = () => {
+  const resetValues = () => {
     setCurrentChat(null);
   };
 
@@ -478,11 +477,11 @@ export const Chat: FC<IChatProps> = ({
               <AlertDialogDescription className="sr-only"></AlertDialogDescription>
               {role !== roles.blogger && (
                 <div className={styles.filter}>
-                  <BarSubfilter
+                  <BarSubFilter
                     tab={chatFilter}
                     changeTab={setChatFilter}
                     tab_list={tab_list}
-                    resetValues={resetChat}
+                    resetValues={resetValues}
                     badge={badge}
                     isFixedColumns={true}
                   />
@@ -598,11 +597,11 @@ export const Chat: FC<IChatProps> = ({
                 </DrawerTitle>
                 {role !== roles.blogger && (
                   <div className={styles.filter}>
-                    <BarSubfilter
+                    <BarSubFilter
                       tab={chatFilter}
                       changeTab={setChatFilter}
                       tab_list={tab_list}
-                      resetValues={resetChat}
+                      resetValues={resetValues}
                       badge={badge}
                       isFixedColumns={true}
                     />

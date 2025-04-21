@@ -1,4 +1,4 @@
-import { profileTypesName, profileTypesNum } from "@entities/wallet";
+import { PROFILE_TYPE, PROFILE_STATUS } from "@entities/wallet";
 import { accordionTypes } from "@shared/config";
 import {
   Accordion,
@@ -14,8 +14,8 @@ import guideAnimation from "/animated/guide_lottie.gif";
 
 interface GuideProps {
   profileFilter: {
-    type: profileTypesName;
-    id?: profileTypesNum;
+    type: PROFILE_TYPE;
+    id?: PROFILE_STATUS;
   };
 }
 
@@ -56,11 +56,11 @@ export const Guide: FC<GuideProps> = ({ profileFilter }) => {
     <>
       <div className={`${styles.guide} display__hide__max__md`}>
         <span className={styles.text}>
-          {profileFilter.type === profileTypesName.entities
+          {profileFilter.type === PROFILE_TYPE.ENTITIES
             ? t("wallet.guide.entity")
-            : profileFilter.type === profileTypesName.individuals
+            : profileFilter.type === PROFILE_TYPE.INDIVIDUALS
               ? t("wallet.guide.individual")
-              : profileFilter.type === profileTypesName.selfEmployedAccounts
+              : profileFilter.type === PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT
                 ? t("wallet.guide.selfEmployedAccounts")
                 : t("wallet.guide.selfEmployedTransits")}
         </span>
@@ -81,12 +81,11 @@ export const Guide: FC<GuideProps> = ({ profileFilter }) => {
             </AccordionTrigger>
             <AccordionContent className={`${styles.content} ${styles.guidee}`}>
               <span className={styles.text}>
-                {profileFilter.type === profileTypesName.entities
+                {profileFilter.type === PROFILE_TYPE.ENTITIES
                   ? t("wallet.guide.entity")
-                  : profileFilter.type === profileTypesName.individuals
+                  : profileFilter.type === PROFILE_TYPE.INDIVIDUALS
                     ? t("wallet.guide.individual")
-                    : profileFilter.type ===
-                        profileTypesName.selfEmployedAccounts
+                    : profileFilter.type === PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT
                       ? t("wallet.guide.selfEmployedAccounts")
                       : t("wallet.guide.selfEmployedTransits")}
               </span>

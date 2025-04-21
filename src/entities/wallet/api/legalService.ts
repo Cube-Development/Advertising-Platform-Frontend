@@ -2,7 +2,7 @@ import {
   ILegalCard,
   ILegalCardShort,
   ILegalData,
-  profileTypesNum,
+  PROFILE_STATUS,
 } from "@entities/wallet";
 import { authApi, LEGALS } from "@shared/api";
 
@@ -41,7 +41,7 @@ export const legalAPI = authApi.injectEndpoints({
     }),
     readLegalsByType: build.query<
       ILegalCardShort[],
-      profileTypesNum | undefined
+      PROFILE_STATUS | undefined
     >({
       query: (type_legal) => `/legal/read/?type_legal=${type_legal}`,
       providesTags: [LEGALS],

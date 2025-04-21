@@ -1,67 +1,67 @@
-export enum profileTypesName {
-  individuals = "individuals",
-  entities = "entities",
-  selfEmployedTransits = "selfEmployedTransits",
-  selfEmployedAccounts = "selfEmployedAccounts",
+export enum PROFILE_TYPE {
+  INDIVIDUALS = "individuals",
+  ENTITIES = "entities",
+  SELF_EMPLOYED_TRANSIT = "selfEmployedTransits",
+  SELF_EMPLOYED_ACCOUNT = "selfEmployedAccounts",
 }
 
-export enum profileTypesNum {
-  individuals = 2,
-  entities = 1,
-  selfEmployedTransits = 4,
-  selfEmployedAccounts = 3,
+export enum PROFILE_STATUS {
+  INDIVIDUALS = 2,
+  ENTITIES = 1,
+  SELF_EMPLOYED_TRANSIT = 4,
+  SELF_EMPLOYED_ACCOUNT = 3,
 }
 
-export enum subprofileFilterTypes {
-  account = "account",
-  card = "card",
+export enum SUBPROFILE_TYPE {
+  ACCOUNT = "account",
+  CARD = "card",
 }
 
-export const profileTypes = [
+export const PROFILE_FILTER_TABS_LIST = [
   {
     name: "add_profile.types.selfemployedaccount",
-    type: profileTypesName.selfEmployedAccounts,
-    id: profileTypesNum.selfEmployedAccounts,
+    type: PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT,
+    id: PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT,
   },
   {
     name: "add_profile.types.entity",
-    type: profileTypesName.entities,
-    id: profileTypesNum.entities,
+    type: PROFILE_TYPE.ENTITIES,
+    id: PROFILE_STATUS.ENTITIES,
   },
   {
     name: "add_profile.types.individual",
-    type: profileTypesName.individuals,
-    id: profileTypesNum.individuals,
+    type: PROFILE_TYPE.INDIVIDUALS,
+    id: PROFILE_STATUS.INDIVIDUALS,
   },
 ];
 
-export const subprofileTypes = [
+export const SUBPROFILE_FILTER_TABS_LIST = [
   {
     name: "add_profile.subtypes.account",
-    type: subprofileFilterTypes.account,
-    id: profileTypesNum.selfEmployedAccounts,
+    type: SUBPROFILE_TYPE.ACCOUNT,
+    id: PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT,
   },
   {
     name: "add_profile.subtypes.card",
-    type: subprofileFilterTypes.card,
-    id: profileTypesNum.selfEmployedTransits,
+    type: SUBPROFILE_TYPE.CARD,
+    id: PROFILE_STATUS.SELF_EMPLOYED_TRANSIT,
   },
 ];
 
-export const walletTopUpTypes = [
+export const WALLET_TOP_UP_FILTER_TABS_LIST = [
   {
     name: "wallet.types.selfemployed",
-    type: profileTypesName.selfEmployedAccounts,
-    id: profileTypesNum.selfEmployedAccounts,
+    type: PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT,
+    id: PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT,
   },
   {
     name: "wallet.types.entity",
-    type: profileTypesName.entities,
-    id: profileTypesNum.entities,
+    type: PROFILE_TYPE.ENTITIES,
+    id: PROFILE_STATUS.ENTITIES,
   },
   {
     name: "wallet.types.individual",
-    type: profileTypesName.individuals,
-    id: profileTypesNum.individuals,
+    type: PROFILE_TYPE.INDIVIDUALS,
+    id: PROFILE_STATUS.INDIVIDUALS,
   },
 ];

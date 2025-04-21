@@ -5,6 +5,7 @@ import {
   getAdminTransactionsReq,
   useGetAdminTransactionsQuery,
 } from "@entities/admin";
+import { BarSubFilter } from "@features/other";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { useClearCookiesOnPage } from "@shared/hooks";
 import { FC } from "react";
@@ -12,8 +13,6 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { TransactionsList } from "../transactionsList";
 import styles from "./styles.module.scss";
-import { BarSubfilter } from "@features/other";
-import { pageFilter } from "@shared/routing";
 
 export const Transactions: FC = () => {
   useClearCookiesOnPage();
@@ -51,7 +50,7 @@ export const Transactions: FC = () => {
         </div>
         <div className={styles.table}>
           <div className={styles.filter}>
-            <BarSubfilter
+            <BarSubFilter
               tab={formFields?.status}
               changeTab={changeTab}
               tab_list={ADMIN_TRANSACTION_FILTER_TABS_LIST}

@@ -2,28 +2,28 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import {
-  profileTypesNum,
-  subprofileFilterTypes,
-  subprofileTypes,
+  PROFILE_STATUS,
+  SUBPROFILE_TYPE,
+  SUBPROFILE_FILTER_TABS_LIST,
 } from "@entities/wallet";
 import { BREAKPOINT } from "@shared/config";
 import { useWindowWidth } from "@shared/hooks";
 
 interface ISubFilterOption {
-  type: subprofileFilterTypes;
-  id: profileTypesNum;
+  type: SUBPROFILE_TYPE;
+  id: PROFILE_STATUS;
 }
 
 interface BarSubrofileFilterProps {
   resetValues: () => void;
   resetActiveAccount?: (account: null) => void;
   subprofileFilter: {
-    type: subprofileFilterTypes;
-    id: profileTypesNum;
+    type: SUBPROFILE_TYPE;
+    id: PROFILE_STATUS;
   };
   changeSubprofile: (subprofile: {
-    type: subprofileFilterTypes;
-    id: profileTypesNum;
+    type: SUBPROFILE_TYPE;
+    id: PROFILE_STATUS;
   }) => void;
 }
 
@@ -47,7 +47,7 @@ export const BarSubrofileFilter: FC<BarSubrofileFilterProps> = ({
       {screen > +BREAKPOINT.MD ? (
         <div className={styles.types}>
           <ul>
-            {subprofileTypes.map((subtype, index) => (
+            {SUBPROFILE_FILTER_TABS_LIST.map((subtype, index) => (
               <li
                 className={styles.subtypes}
                 onClick={() => toggleProfile(subtype)}
@@ -75,12 +75,12 @@ export const BarSubrofileFilter: FC<BarSubrofileFilterProps> = ({
             className={styles.type}
             style={
               {
-                "--lengthFilter": `${subprofileTypes.length}`,
-                "--translateFilter": `${subprofileTypes.findIndex((option) => subprofileFilter.type === option.type) * 100}%`,
+                "--lengthFilter": `${SUBPROFILE_FILTER_TABS_LIST.length}`,
+                "--translateFilter": `${SUBPROFILE_FILTER_TABS_LIST.findIndex((option) => subprofileFilter.type === option.type) * 100}%`,
               } as React.CSSProperties
             }
           >
-            {subprofileTypes.map((subtype, index) => (
+            {SUBPROFILE_FILTER_TABS_LIST.map((subtype, index) => (
               <li
                 key={index}
                 className={

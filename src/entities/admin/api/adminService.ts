@@ -37,13 +37,13 @@ export interface getAdminOrderComplaintsReq {
 
 export interface getAdminTransactionsReq {
   page: number;
-  status?: ADMIN_TRANSACTION_STATUS;
+  status: ADMIN_TRANSACTION_STATUS;
   elements_on_page: number;
 }
 
 export interface getAdminChannelsReq {
   page: number;
-  status?: ADMIN_CHANNEL_STATUS;
+  status: ADMIN_CHANNEL_STATUS;
   elements_on_page: number;
 }
 

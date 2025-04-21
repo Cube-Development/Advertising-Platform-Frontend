@@ -19,7 +19,7 @@ import {
 import { useFindLanguage } from "@entities/user";
 import { AiFilter, RecomTargetCard } from "@features/catalog";
 import {
-  BarSubfilter,
+  BarSubFilter,
   SelectDescription,
   SelectOptions,
   SelectSex,
@@ -282,7 +282,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
         </div>
         <ScrollArea className="h-[calc(100svh_-_80px)]">
           <div className={styles.wrapper}>
-            <BarSubfilter
+            <BarSubFilter
               tab={catalogFilter}
               changeTab={changeCatalogFilter}
               tab_list={CATALOG_FILTER_TABS_LIST}

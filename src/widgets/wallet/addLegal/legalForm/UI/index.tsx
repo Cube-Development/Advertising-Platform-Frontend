@@ -2,16 +2,16 @@ import {
   EntityData,
   ILegalData,
   IndividualData,
+  PROFILE_FILTER_TABS_LIST,
+  PROFILE_STATUS,
+  PROFILE_TYPE,
   SelfEmployedCardData,
   SelfEmployedData,
-  profileTypesName,
-  profileTypesNum,
-  subprofileFilterTypes,
+  SUBPROFILE_TYPE,
   useCreateLegalMutation,
 } from "@entities/wallet";
-import { BarSubfilter } from "@features/other";
+import { BarSubFilter } from "@features/other";
 import { BarSubrofileFilter, CreateLegal, LegalForm } from "@features/wallet";
-import { pageFilter } from "@shared/routing";
 import { CustomCheckbox, useToast } from "@shared/ui";
 import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -32,25 +32,30 @@ export const AddLegalForm: FC = () => {
   } = useForm<ILegalData>({
     defaultValues: {
       profileFilter: {
-        type: profileTypesName.selfEmployedAccounts,
-        id: profileTypesNum.selfEmployedAccounts,
+        type: PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT,
+        id: PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT,
       },
       subprofileFilter: {
-        type: subprofileFilterTypes.account,
-        id: profileTypesNum.selfEmployedAccounts,
+        type: SUBPROFILE_TYPE.ACCOUNT,
+        id: PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT,
       },
     },
   });
   const formState = watch();
 
+  const changeTab = (filter: PROFILE_TYPE) => {
+    const item = PROFILE_FILTER_TABS_LIST.find((item) => item.type === filter)!;
+    const newFilter = { type: item?.type, id: item?.id };
+    setValue("profileFilter", newFilter);
+  };
+
   const typeLegal =
-    formState.profileFilter.type === profileTypesName.entities
+    formState.profileFilter.type === PROFILE_TYPE.ENTITIES
       ? EntityData
-      : formState.profileFilter.type === profileTypesName.individuals
+      : formState.profileFilter.type === PROFILE_TYPE.INDIVIDUALS
         ? IndividualData
-        : formState.profileFilter.type ===
-              profileTypesName.selfEmployedAccounts &&
-            formState.subprofileFilter.type === subprofileFilterTypes.account
+        : formState.profileFilter.type === PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT &&
+            formState.subprofileFilter.type === SUBPROFILE_TYPE.ACCOUNT
           ? SelfEmployedData
           : SelfEmployedCardData;
 
@@ -84,24 +89,21 @@ export const AddLegalForm: FC = () => {
         "LOADING..."
       ) : (
         <form onSubmit={handleSubmit(onSubmit)} className={styles.wrapper}>
-          <BarSubfilter
-            page={pageFilter.profile}
-            resetValues={reset}
-            profileFilter={formState.profileFilter}
-            changeProfile={(profilefilter) =>
-              setValue("profileFilter", profilefilter)
-            }
+          <BarSubFilter
+            tab={formState.profileFilter.type}
+            tab_list={PROFILE_FILTER_TABS_LIST}
+            changeTab={changeTab}
           />
 
           <div className={styles.block}>
             {formState.profileFilter.type ===
-              profileTypesName.selfEmployedAccounts && (
+              PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT && (
               <BarSubrofileFilter
                 resetValues={reset}
                 subprofileFilter={formState.subprofileFilter}
                 changeSubprofile={(subprofile: {
-                  type: subprofileFilterTypes;
-                  id: profileTypesNum;
+                  type: SUBPROFILE_TYPE;
+                  id: PROFILE_STATUS;
                 }) => setValue("subprofileFilter", subprofile)}
               />
             )}

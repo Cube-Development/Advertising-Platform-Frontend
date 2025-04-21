@@ -4,16 +4,17 @@ import {
   ILegalCardShort,
   ILegalData,
   paymentTypes,
-  profileTypesName,
-  profileTypesNum,
-  subprofileFilterTypes,
+  PROFILE_STATUS,
+  PROFILE_TYPE,
+  SUBPROFILE_TYPE,
   useCreateLegalMutation,
   useEditLegalMutation,
   usePaymentDepositMutation,
   useReadLegalsByTypeQuery,
   useReadOneLegalMutation,
+  WALLET_TOP_UP_FILTER_TABS_LIST,
 } from "@entities/wallet";
-import { BarSubfilter } from "@features/other";
+import { BarSubFilter } from "@features/other";
 import { ArrowIcon4 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
 import { useClearCookiesOnPage, useWindowWidth } from "@shared/hooks";
@@ -46,16 +47,28 @@ export const Topup: FC = () => {
   } = useForm<IExtendedProfileData>({
     defaultValues: {
       profileFilter: {
-        type: profileTypesName.selfEmployedAccounts,
-        id: profileTypesNum.selfEmployedAccounts,
+        type: PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT,
+        id: PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT,
       },
       subprofileFilter: {
-        type: subprofileFilterTypes.account,
-        id: profileTypesNum.selfEmployedAccounts,
+        type: SUBPROFILE_TYPE.ACCOUNT,
+        id: PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT,
       },
     },
   });
   const formState = watch();
+
+  const resetValues = () => {
+    setActiveAccount(null);
+  };
+
+  const changeTab = (filter: PROFILE_TYPE) => {
+    const item = WALLET_TOP_UP_FILTER_TABS_LIST.find(
+      (item) => item.type === filter,
+    )!;
+    const newFilter = { type: item?.type, id: item?.id };
+    setValue("profileFilter", newFilter);
+  };
 
   const {
     data: legalsByType,
@@ -113,83 +126,83 @@ export const Topup: FC = () => {
       subprofileFilter: formState.subprofileFilter,
 
       // юр.лицо
-      ...(formState.profileFilter.id === profileTypesNum.entities && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.ENTITIES && {
         INN: formState.INN,
       }),
-      ...(formState.profileFilter.id === profileTypesNum.entities && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.ENTITIES && {
         address: formState.address,
       }),
-      ...(formState.profileFilter.id === profileTypesNum.entities && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.ENTITIES && {
         checking_account: formState.checking_account,
       }),
-      ...(formState.profileFilter.id === profileTypesNum.entities && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.ENTITIES && {
         type_legal: formState.profileFilter.id,
       }),
 
       // ИП
-      ...(formState.profileFilter.id === profileTypesNum.individuals && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.INDIVIDUALS && {
         INN: formState.INN,
       }),
-      ...(formState.profileFilter.id === profileTypesNum.individuals && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.INDIVIDUALS && {
         address: formState.address,
       }),
-      ...(formState.profileFilter.id === profileTypesNum.individuals && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.INDIVIDUALS && {
         checking_account: formState.checking_account,
       }),
-      ...(formState.profileFilter.id === profileTypesNum.individuals && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.INDIVIDUALS && {
         type_legal: formState.profileFilter.id,
       }),
 
       // самозанятый р/с
-      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
-        formState.subprofileFilter.type === subprofileFilterTypes.account && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT &&
+        formState.subprofileFilter.type === SUBPROFILE_TYPE.ACCOUNT && {
           PNFL: formState.PNFL,
         }),
-      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
-        formState.subprofileFilter.type === subprofileFilterTypes.account && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT &&
+        formState.subprofileFilter.type === SUBPROFILE_TYPE.ACCOUNT && {
           checking_account: formState.checking_account,
         }),
-      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
-        formState.subprofileFilter.type === subprofileFilterTypes.account && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT &&
+        formState.subprofileFilter.type === SUBPROFILE_TYPE.ACCOUNT && {
           registration_date: formState.registration_date,
         }),
-      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
-        formState.subprofileFilter.type === subprofileFilterTypes.account && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT &&
+        formState.subprofileFilter.type === SUBPROFILE_TYPE.ACCOUNT && {
           registration_number: formState.registration_number,
         }),
-      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
-        formState.subprofileFilter.type === subprofileFilterTypes.account && {
-          type_legal: profileTypesNum.selfEmployedAccounts,
+      ...(formState.profileFilter.id === PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT &&
+        formState.subprofileFilter.type === SUBPROFILE_TYPE.ACCOUNT && {
+          type_legal: PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT,
         }),
 
       // самозанятый т/с
-      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
-        formState.subprofileFilter.type === subprofileFilterTypes.card && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT &&
+        formState.subprofileFilter.type === SUBPROFILE_TYPE.CARD && {
           PNFL: formState.PNFL,
         }),
-      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
-        formState.subprofileFilter.type === subprofileFilterTypes.card && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT &&
+        formState.subprofileFilter.type === SUBPROFILE_TYPE.CARD && {
           transit_account: formState.transit_account,
         }),
-      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
-        formState.subprofileFilter.type === subprofileFilterTypes.card && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT &&
+        formState.subprofileFilter.type === SUBPROFILE_TYPE.CARD && {
           registration_date: formState.registration_date,
         }),
-      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
-        formState.subprofileFilter.type === subprofileFilterTypes.card && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT &&
+        formState.subprofileFilter.type === SUBPROFILE_TYPE.CARD && {
           registration_number: formState.registration_number,
         }),
-      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
-        formState.subprofileFilter.type === subprofileFilterTypes.card && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT &&
+        formState.subprofileFilter.type === SUBPROFILE_TYPE.CARD && {
           card_number: formState.card_number,
         }),
-      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
-        formState.subprofileFilter.type === subprofileFilterTypes.card && {
+      ...(formState.profileFilter.id === PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT &&
+        formState.subprofileFilter.type === SUBPROFILE_TYPE.CARD && {
           card_date: formState.card_date,
         }),
-      ...(formState.profileFilter.id === profileTypesNum.selfEmployedAccounts &&
-        formState.subprofileFilter.type === subprofileFilterTypes.card && {
-          type_legal: profileTypesNum.selfEmployedTransits,
+      ...(formState.profileFilter.id === PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT &&
+        formState.subprofileFilter.type === SUBPROFILE_TYPE.CARD && {
+          type_legal: PROFILE_STATUS.SELF_EMPLOYED_TRANSIT,
         }),
     };
     !isCreateLoading &&
@@ -273,17 +286,13 @@ export const Topup: FC = () => {
           <p>{t("wallet.topup.title")}</p>
           <ArrowIcon4 />
         </div>
-        <BarSubfilter
-          resetValues={reset}
-          page={pageFilter.walletTopUp}
-          resetActiveAccount={setActiveAccount}
-          profileFilter={formState.profileFilter}
-          changeProfile={(profileFilter) =>
-            setValue("profileFilter", profileFilter)
-          }
+        <BarSubFilter
+          tab={formState.profileFilter.type}
+          tab_list={WALLET_TOP_UP_FILTER_TABS_LIST}
+          changeTab={changeTab}
+          resetValues={resetValues}
         />
-        {formState.profileFilter.type ===
-        profileTypesName.selfEmployedAccounts ? (
+        {formState.profileFilter.type === PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT ? (
           <CreditCard />
         ) : (
           <div className={styles.form__wrapper}>

@@ -5,7 +5,7 @@ import {
   getAdminChannelsReq,
   useGetAdminChannelsQuery,
 } from "@entities/admin";
-import { BarSubfilter } from "@features/other";
+import { BarSubFilter } from "@features/other";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { useClearCookiesOnPage } from "@shared/hooks";
 import { FC } from "react";
@@ -50,7 +50,7 @@ export const Channels: FC = () => {
         </div>
         <div className={styles.table}>
           <div className={styles.filter}>
-            <BarSubfilter
+            <BarSubFilter
               tab={formFields?.status}
               changeTab={changeTab}
               tab_list={ADMIN_CHANNEL_FILTER_TABS_LIST}

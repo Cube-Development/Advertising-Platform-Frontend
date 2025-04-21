@@ -1,8 +1,4 @@
-import {
-  profileTypesName,
-  profileTypesNum,
-  subprofileFilterTypes,
-} from "../config";
+import { PROFILE_TYPE, PROFILE_STATUS, SUBPROFILE_TYPE } from "../config";
 
 export interface IExtendedProfileData extends ILegalData {
   amount: string;
@@ -25,12 +21,12 @@ export interface ILegalData {
   card_number?: number;
   card_date?: string;
   profileFilter: {
-    type: profileTypesName;
-    id?: profileTypesNum;
+    type: PROFILE_TYPE;
+    id?: PROFILE_STATUS;
   };
   subprofileFilter: {
-    type: subprofileFilterTypes;
-    id: profileTypesNum;
+    type: SUBPROFILE_TYPE;
+    id: PROFILE_STATUS;
   };
 }
 

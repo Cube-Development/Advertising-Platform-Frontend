@@ -1,10 +1,4 @@
-import {
-  profileTypes,
-  profileTypesName,
-  profileTypesNum,
-  walletTopUpTypes,
-} from "@entities/wallet";
-import { pageFilter } from "@shared/routing";
+import { PROFILE_STATUS } from "@entities/wallet";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
@@ -13,81 +7,35 @@ type IBarFilter<T> = {
   name: string;
 };
 
-type BarSubfilterProps<T> = {
-  page?: pageFilter;
-  resetValues?: () => void;
-  resetActiveAccount?: (account: null) => void;
-  profileFilter?: {
-    type: profileTypesName;
-    id?: profileTypesNum;
-  };
-  changeProfile?: (profile: {
-    type: profileTypesName;
-    id?: profileTypesNum;
-  }) => void;
-
-  tab_list?: IBarFilter<T>[];
-  tab?: T;
-  changeTab?: (filter: T) => void;
-
-  badge?: { status: string; count: number }[];
-  isFixedColumns?: boolean;
-};
-
 type IFilterOption<T> = {
   type: T;
-  id?: profileTypesNum;
+  id?: PROFILE_STATUS;
 };
 
-export const BarSubfilter = <T,>({
-  page,
-  resetValues = () => {},
-  resetActiveAccount,
-  profileFilter,
-  changeProfile,
+type BarSubFilterProps<T> = {
+  tab: T;
+  tab_list: IBarFilter<T>[];
+  changeTab: (filter: T) => void;
+  badge?: { status: string; count: number }[];
+  isFixedColumns?: boolean;
+  resetValues?: () => void;
+};
 
-  tab_list = [],
+export const BarSubFilter = <T,>({
   tab,
+  tab_list,
   changeTab,
-
   badge,
   isFixedColumns = false,
-}: BarSubfilterProps<T>) => {
+  resetValues = () => {},
+}: BarSubFilterProps<T>) => {
   const { t } = useTranslation();
-
-  const [options, filter] =
-    page === pageFilter.profile || page === pageFilter.walletWithdraw
-      ? [profileTypes, profileFilter && profileFilter.type]
-      : page === pageFilter.walletTopUp
-        ? [walletTopUpTypes, profileFilter && profileFilter.type]
-        : tab_list?.length && tab !== undefined && tab !== null
-          ? [tab_list, tab]
-          : [[], "", ""];
+  const [options, filter] = [tab_list, tab];
 
   const toggleBar = (option: IFilterOption<T>) => {
-    if (
-      page === pageFilter.profile ||
-      page === pageFilter.walletWithdraw ||
-      page === pageFilter.walletTopUp
-    ) {
-      const newFilter = { type: option.type, id: option.id };
-      changeProfile &&
-        changeProfile(
-          newFilter as {
-            type: profileTypesName;
-            id?: profileTypesNum;
-          },
-        );
-      resetActiveAccount && resetActiveAccount(null);
-    } else if (tab_list?.length && tab !== undefined && tab !== null) {
-      changeTab && changeTab(option.type as T);
-    }
-
-    if (resetValues) {
-      resetValues();
-    }
+    changeTab(option.type as T);
+    resetValues();
   };
-
   return (
     <div className={styles.types}>
       <ul
