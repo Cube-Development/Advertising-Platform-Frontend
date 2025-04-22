@@ -157,6 +157,7 @@
           row-gap: 10px;
           background: none;
           justify-items: center;
+          cursor: pointer;
 
           &.two {
             margin-top: 105%;
@@ -238,6 +239,7 @@
           align-items: center;
           column-gap: 15px;
           justify-content: left;
+          cursor: pointer;
         }
       }
     }
@@ -287,6 +289,7 @@
       &__row {
         display: grid;
         grid-auto-flow: column;
+        cursor: pointer;
 
         &.one {
           column-gap: 40px;
