@@ -25,9 +25,19 @@ export const Complaints: FC = () => {
     },
   });
   const formFields = watch();
-  const { data, isLoading, isFetching } = useGetAdminOrderComplaintsQuery({
-    ...formFields,
-  });
+  const { data, isLoading, isFetching } = useGetAdminOrderComplaintsQuery(
+    { ...formFields },
+    {
+      selectFromResult: ({ data, ...rest }) => ({
+        ...rest,
+        data:
+          (data?.order_complaint_status ===
+            formFields?.order_complaint_status &&
+            data) ||
+          undefined,
+      }),
+    },
+  );
 
   const handleOnChangePage = () => {
     setValue(ADMIN_COMPLAINT_FORM.PAGE, formFields?.page + 1);
@@ -37,7 +47,6 @@ export const Complaints: FC = () => {
     setValue(ADMIN_COMPLAINT_FORM.PAGE, 1);
     setValue(ADMIN_COMPLAINT_FORM.STATUS, filter);
   };
-
   return (
     <div className="container">
       <div className={styles.wrapper}>
@@ -57,13 +66,8 @@ export const Complaints: FC = () => {
             />
           </div>
           <ComplaintsList
-            data={
-              (data?.order_complaint_status ===
-                formFields.order_complaint_status &&
-                data) ||
-              undefined
-            }
-            status={formFields.order_complaint_status}
+            data={data}
+            status={formFields?.order_complaint_status}
             isLoading={isLoading}
             isFetching={isFetching}
             handleChange={handleOnChangePage}

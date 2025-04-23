@@ -25,9 +25,15 @@ export const Reviews: FC = () => {
     },
   });
   const formFields = watch();
-  const { data, isLoading, isFetching } = useGetAdminReviewsQuery({
-    ...formFields,
-  });
+  const { data, isLoading, isFetching } = useGetAdminReviewsQuery(
+    { ...formFields },
+    {
+      selectFromResult: ({ data, ...rest }) => ({
+        ...rest,
+        data: (data?.status === formFields?.status && data) || undefined,
+      }),
+    },
+  );
 
   const handleOnChangePage = () => {
     setValue(ADMIN_REVIEW_FORM.PAGE, formFields?.page + 1);
@@ -58,7 +64,7 @@ export const Reviews: FC = () => {
           </div>
           <ReviewsList
             status={formFields?.status}
-            data={(data?.status === formFields.status && data) || undefined}
+            data={data}
             isLoading={isLoading}
             isFetching={isFetching}
             handleChange={handleOnChangePage}

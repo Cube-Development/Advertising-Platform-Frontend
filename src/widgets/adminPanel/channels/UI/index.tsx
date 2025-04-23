@@ -25,9 +25,15 @@ export const Channels: FC = () => {
     },
   });
   const formFields = watch();
-  const { data, isLoading, isFetching } = useGetAdminChannelsQuery({
-    ...formFields,
-  });
+  const { data, isLoading, isFetching } = useGetAdminChannelsQuery(
+    { ...formFields },
+    {
+      selectFromResult: ({ data, ...rest }) => ({
+        ...rest,
+        data: (data?.status === formFields?.status && data) || undefined,
+      }),
+    },
+  );
 
   const handleOnChangePage = () => {
     setValue(ADMIN_CHANNEL_FORM.PAGE, formFields?.page + 1);

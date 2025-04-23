@@ -42,6 +42,10 @@ export const ADMIN_CHANNEL_FILTER_TABS_LIST = [
     type: ADMIN_CHANNEL_STATUS.ACTIVE,
   },
   {
+    name: "admin_panel.channels.card.status.inactive",
+    type: ADMIN_CHANNEL_STATUS.INACTIVE,
+  },
+  {
     name: "admin_panel.channels.card.status.moderation",
     type: ADMIN_CHANNEL_STATUS.MODERATION,
   },
@@ -50,16 +54,8 @@ export const ADMIN_CHANNEL_FILTER_TABS_LIST = [
     type: ADMIN_CHANNEL_STATUS.MODERATION_REJECT,
   },
   {
-    name: "admin_panel.channels.card.status.inactive",
-    type: ADMIN_CHANNEL_STATUS.INACTIVE,
-  },
-  {
     name: "admin_panel.channels.card.status.banned",
     type: ADMIN_CHANNEL_STATUS.BANNED,
-  },
-  {
-    name: "admin_panel.channels.card.status.remoderation",
-    type: ADMIN_CHANNEL_STATUS.REMODERATION,
   },
 ];
 
