@@ -8,6 +8,7 @@ import {
   PROFILE_TYPE,
   PROFILE_STATUS,
   SUBPROFILE_TYPE,
+  withdrawal,
 } from "@entities/wallet";
 import { LegalForm, PaymentDidox } from "@features/wallet";
 import { paths } from "@shared/routing";
@@ -139,18 +140,37 @@ export const PaymentData: FC<PaymentDataProps> = ({
           />
         ))}
       </div>
-      <div className={styles.payment}>
-        <div>
-          <p>{t("wallet.pay.title")}:</p>
+      <div>
+        <div className={styles.payment}>
+          <div>
+            <p>{t("wallet.pay.title")}:</p>
+            <span className="!text-start">{t("wallet.pay.sub_title")}</span>
+          </div>
+          <div>
+            <p>
+              {Number(formFields?.amount?.replace(/\s/g, "")) != 0
+                ? parseFloat(String(price)).toLocaleString()
+                : 0}{" "}
+              {t("symbol")}
+            </p>
+            <span>
+              {t("wallet.pay.text")}: {withdrawal.commission}%
+            </span>
+          </div>
         </div>
-        <div>
-          <p>
-            {Number(formFields?.amount?.replace(/\s/g, "")) != 0
-              ? parseFloat(String(price)).toLocaleString()
+        <div className="py-5 grid grid-flow-col justify-between items-center gap-2 border-b-[#D9D9D9] border-b-[1px]">
+          <p className="font-semibold text-base">
+            {t("wallet.pay.will_be_charged")}:
+          </p>
+          <p className="font-semibold text-base text-[#4D4D4D]">
+            {Number(formFields?.amount?.replace(/\s/g, "")) !== 0
+              ? (
+                  Number(formFields?.amount?.replace(/\s/g, "")) *
+                  (1 - withdrawal.commission / 100)
+                ).toLocaleString()
               : 0}{" "}
             {t("symbol")}
           </p>
-          <span>{t("wallet.pay.text")}</span>
         </div>
       </div>
       <div className={styles.accept}>

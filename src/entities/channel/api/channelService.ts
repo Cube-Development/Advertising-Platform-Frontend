@@ -7,6 +7,7 @@ import {
   IReviewData,
   channelStatus,
   channelStatusFilter,
+  ratingData,
 } from "@entities/channel";
 import { dateSortingTypes } from "@entities/platform";
 import {
@@ -28,7 +29,7 @@ export interface getChannelsByStatusReq {
 
 export interface getReviewsByIdReq {
   channel_id: string;
-  grade_filter?: number;
+  grade_filter?: ratingData;
   last: string;
   elements_on_page: number;
 }
@@ -116,22 +117,22 @@ export const channelAPI = authApi.injectEndpoints({
         method: "GET",
         params: params,
       }),
-      transformResponse: (response: IReviewData) => {
-        return {
-          ...response,
-          isLast:
-            response.reviews.length < INTERSECTION_ELEMENTS.CHANNEL_REVIEWS,
-        };
-      },
-      serializeQueryArgs: ({ endpointName, queryArgs }) => {
-        return `${endpointName}/${queryArgs.channel_id}`;
-      },
-      merge: (currentCache, newItems) => {
-        return {
-          ...newItems,
-          reviews: [...currentCache.reviews, ...newItems.reviews],
-        };
-      },
+      // transformResponse: (response: IReviewData) => {
+      //   return {
+      //     ...response,
+      //     isLast:
+      //       response.reviews.length < INTERSECTION_ELEMENTS.CHANNEL_REVIEWS,
+      //   };
+      // },
+      // serializeQueryArgs: ({ endpointName, queryArgs }) => {
+      //   return `${endpointName}/${queryArgs.channel_id}`;
+      // },
+      // merge: (currentCache, newItems) => {
+      //   return {
+      //     ...newItems,
+      //     reviews: [...currentCache.reviews, ...newItems.reviews],
+      //   };
+      // },
     }),
     activateChannel: build.mutation<void, string>({
       query: (channel_id) => ({

@@ -1,6 +1,6 @@
 .wrapper {
   padding: 15px 25px;
-  height: 225px;
+  height: 100%;
   background: var(--Personal-colors-White);
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.16);
   border-radius: 15px;
@@ -9,6 +9,10 @@
     display: grid;
     grid-auto-flow: row;
     row-gap: 20px;
+
+    @media (max-width: 576px) {
+      row-gap: 10px;
+    }
 
     .top {
       display: grid;
@@ -32,6 +36,11 @@
             width: 40px;
             height: 40px;
             border-radius: 50%;
+
+            @media (max-width: 576px) {
+              width: 30px;
+              height: 30px;
+            }
           }
         }
 
@@ -59,6 +68,12 @@
       font-style: normal;
       font-weight: 400;
       line-height: 1;
+      overflow: auto;
+      max-height: 100px;
+
+      @media (max-width: 576px) {
+        font-size: 12px;
+      }
     }
   }
 }

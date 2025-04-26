@@ -73,6 +73,7 @@ export interface IFormatListProps {
   isSmall?: boolean;
   isBig?: boolean;
   isSmallCatalogCard?: boolean;
+  isChannelPage?: boolean;
 }
 
 interface Components {

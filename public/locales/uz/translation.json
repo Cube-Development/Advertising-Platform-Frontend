@@ -1419,7 +1419,9 @@
     },
     "pay": {
       "title": "To'lov uchun",
-      "text": "Komissiyani hisobga olgan holda"
+      "text": "Komissiyani hisobga olgan holda",
+      "sub_title": "Hisobingizdan",
+      "will_be_charged": "Hisobingizga"
     },
     "accept": {
       "text1": "Ma'lumotlarning to'g'riligini tasdiqlayman,",
@@ -1800,7 +1802,8 @@
         "normal": "Oddiy",
         "bad": "Yomon",
         "terrible": "Juda yomon"
-      }
+      },
+      "no_reviews": "Bu yerda hali hech narsa yo'q..."
     },
     "add_to_cart": {
       "title": "Joylashtirishni sotib olish",
@@ -1810,7 +1813,8 @@
       "remove": "Savatdan olib tashlash"
     },
     "recommend": {
-      "title": "Tavsiya etilgan kanallar"
+      "title": "Tavsiya etilgan kanallar",
+      "empty": "Bu yerda hali hech narsa yo'q..."
     }
   },
 

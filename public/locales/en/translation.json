@@ -1418,8 +1418,10 @@
       "selfEmployedAccounts": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc."
     },
     "pay": {
-      "title": "To Pay",
-      "text": "Including Commission"
+      "title": "To Charge",
+      "sub_title": "From wallet",
+      "text": "Including Commission",
+      "will_be_charged": "To be Charged"
     },
     "accept": {
       "text1": "I confirm the accuracy of the data, I have read and accept the",
@@ -1800,7 +1802,8 @@
         "normal": "Average",
         "bad": "Bad",
         "terrible": "Terrible"
-      }
+      },
+      "no_reviews": "There are no reviews yet..."
     },
     "add_to_cart": {
       "title": "Buy Placement",
@@ -1810,7 +1813,8 @@
       "remove": "Remove from Cart"
     },
     "recommend": {
-      "title": "Recommended Channels"
+      "title": "Recommended Channels",
+      "empty": "There are no recommended channels yet..."
     }
   },
 

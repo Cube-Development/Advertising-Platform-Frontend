@@ -15,49 +15,49 @@ import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useParams } from "react-router-dom";
 import styles from "./styles.module.scss";
-
+import { SadSmileIcon } from "@shared/assets";
+import { useTranslation } from "react-i18next";
 interface ReviewsProps {
   card: IReadChannelData;
   isLoadingReviews: boolean;
 }
 
 export const Reviews: FC<ReviewsProps> = ({ card, isLoadingReviews }) => {
-  const [activeType, setActiveType] = useState<ratingData | null>(null);
+  const { t } = useTranslation();
   const [currentLast, setCurrentLast] = useState<string | null>(null);
 
   const handleChangeActiveType = (id: ratingData) => {
-    setActiveType(activeType !== id ? id : null);
-    setCurrentLast(null);
-    resetField("last");
-    if (activeType !== id) {
-      setValue("grade_filter", id);
-    } else {
-      resetField("grade_filter");
-    }
+    // setCurrentLast(null);
+    // resetField("last");
+    setValue("grade_filter", id);
   };
+
+  useEffect(() => {
+    handleChangeActiveType(5);
+  }, []);
 
   const handleOnChangePage = () => {
     setValue("last", currentLast!);
   };
 
   const { id: channel_id } = useParams<{ id: string }>();
-  const { watch, reset, setValue, getValues, resetField } =
-    useForm<getReviewsByIdReq>({
-      defaultValues: {
-        channel_id: channel_id,
-      },
-    });
+  const { watch, setValue, resetField } = useForm<getReviewsByIdReq>({
+    defaultValues: {
+      channel_id: channel_id,
+      grade_filter: 5,
+    },
+  });
   const formFields = watch();
 
   const { data: reviews, isLoading } = useGetReviewsByIdQuery({
     ...formFields,
   });
 
-  useEffect(() => {
-    const [lastElement] = (reviews?.reviews || [])?.slice(-1);
-    const last = lastElement?.full_created;
-    setCurrentLast(last);
-  }, [reviews]);
+  // useEffect(() => {
+  //   const [lastElement] = (reviews?.reviews || [])?.slice(-1);
+  //   const last = lastElement?.full_created;
+  //   setCurrentLast(last);
+  // }, [reviews]);
 
   return (
     <div className={styles.wrapper}>
@@ -71,7 +71,7 @@ export const Reviews: FC<ReviewsProps> = ({ card, isLoadingReviews }) => {
           >
             <Rate
               card={card}
-              activeType={activeType}
+              activeType={formFields.grade_filter || null}
               onChange={handleChangeActiveType}
             />
           </motion.div>
@@ -92,11 +92,11 @@ export const Reviews: FC<ReviewsProps> = ({ card, isLoadingReviews }) => {
                 Array.from({
                   length: INTERSECTION_ELEMENTS.CHANNEL_REVIEWS,
                 }).map((_, index) => <SkeletonReviewCard key={index} />)}
-              {!reviews?.isLast && (
+              {/* {!reviews?.isLast && (
                 <div className={styles.show_more} onClick={handleOnChangePage}>
                   <ShowMoreBtn />
                 </div>
-              )}
+              )} */}
             </div>
           )}
         </>
@@ -111,6 +111,16 @@ export const Reviews: FC<ReviewsProps> = ({ card, isLoadingReviews }) => {
             )}
           </div>
         </>
+      )}
+      {reviews?.reviews.length === 0 && (
+        <div className="mt-6 grid grid-rows-[1fr_auto] gap-4 justify-center justify-items-center items-center">
+          <div className="md:[&>svg]:size-[120px] mobile-xl:[&>svg]:size-[80px] [&>svg]:size-[60px]">
+            <SadSmileIcon />
+          </div>
+          <p className="text-center md:text-base mobile:text-sm text-xs text-gray-500 font-medium">
+            {t("channel.reviews.no_reviews")}
+          </p>
+        </div>
       )}
     </div>
   );
