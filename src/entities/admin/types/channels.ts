@@ -1,10 +1,12 @@
 import { platformTypesNum } from "@entities/platform";
 import { IFormat } from "@entities/project";
 import { IOption } from "@shared/types";
+import { ADMIN_CHANNEL_STATUS } from "../config";
 
 export interface IAdminChannels {
   page: number;
   elements: number;
+  status: ADMIN_CHANNEL_STATUS;
   channels: IAdminChannelData[];
   isLast?: boolean;
 }

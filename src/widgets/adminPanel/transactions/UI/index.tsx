@@ -25,9 +25,15 @@ export const Transactions: FC = () => {
     },
   });
   const formFields = watch();
-  const { data, isLoading, isFetching } = useGetAdminTransactionsQuery({
-    ...formFields,
-  });
+  const { data, isLoading, isFetching } = useGetAdminTransactionsQuery(
+    { ...formFields },
+    {
+      selectFromResult: ({ data, ...rest }) => ({
+        ...rest,
+        data: (data?.status === formFields?.status && data) || undefined,
+      }),
+    },
+  );
 
   const handleOnChangePage = () => {
     setValue(ADMIN_TRANSACTION_FORM.PAGE, formFields?.page + 1);
