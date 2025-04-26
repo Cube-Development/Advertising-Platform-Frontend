@@ -5,7 +5,7 @@ import {
 } from "@entities/channel";
 import { offerStatusFilter } from "@entities/offer";
 import { HappySmileIcon, SadSmileIcon } from "@shared/assets";
-import { pageFilter, paths } from "@shared/routing";
+import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";
 import { buildPathWithQuery, queryParamKeys } from "@shared/utils";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -13,8 +13,8 @@ import styles from "./styles.module.scss";
 
 interface ZeroChannelProps {
   AddChannelBtn: FC<IAddChannelQuery>;
-  path?: paths;
-  page: pageFilter;
+  path?: ENUM_PATHS;
+  page: ENUM_PAGE_FILTER;
   statusFilter: channelStatusFilter | offerStatusFilter | string;
 }
 
@@ -26,11 +26,11 @@ export const ZeroChannel: FC<ZeroChannelProps> = ({
 }) => {
   const { t } = useTranslation();
   const selectedPath =
-    path === paths.offers
-      ? buildPathWithQuery(paths.addChannel, {
+    path === ENUM_PATHS.OFFERS
+      ? buildPathWithQuery(ENUM_PATHS.ADD_CHANNEL, {
           [queryParamKeys.addChannel]: addChannelQueries.offers,
         })
-      : buildPathWithQuery(paths.addChannel, {
+      : buildPathWithQuery(ENUM_PATHS.ADD_CHANNEL, {
           [queryParamKeys.addChannel]: addChannelQueries.platforms,
         });
   // : `${paths.addChannel}?add_channel=${addChannelQueries.platforms}`;
@@ -50,7 +50,7 @@ export const ZeroChannel: FC<ZeroChannelProps> = ({
             <div>
               <SadSmileIcon />
             </div>
-            {page === pageFilter.offer ? (
+            {page === ENUM_PAGE_FILTER.OFFER ? (
               <p>{t(`offers_blogger.no_offers`)}</p>
             ) : (
               <p>{t(`platforms_blogger.no_platform`)}</p>

@@ -17,7 +17,7 @@
 //   );
 // };
 
-import { roles } from "@entities/user";
+import { ENUM_ROLES } from "@entities/user";
 import { useAppSelector, useClearCookiesOnPage } from "@shared/hooks";
 import { SuspenseLoader } from "@shared/ui";
 import React, { Suspense } from "react";
@@ -38,10 +38,10 @@ export const OrdersPage = () => {
 
   return (
     <Suspense fallback={<SuspenseLoader />}>
-      {role === roles.advertiser ? (
+      {role === ENUM_ROLES.ADVERTISER ? (
         <AdvOrders />
       ) : (
-        role === roles.manager && <ManagerOrders />
+        role === ENUM_ROLES.MANAGER && <ManagerOrders />
       )}
     </Suspense>
   );

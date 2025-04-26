@@ -18,7 +18,7 @@ import { BarSubrofileFilter } from "@features/wallet";
 import { ArrowIcon5 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
 import { useClearCookiesOnPage, useWindowWidth } from "@shared/hooks";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import { ToastAction, useToast } from "@shared/ui";
 import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -215,7 +215,7 @@ export const Withdrawal: FC = () => {
             .unwrap()
             .then(() => {
               reset();
-              navigate(paths.walletHistory);
+              navigate(ENUM_PATHS.WALLET_HISTORY);
               toast({
                 variant: "success",
                 title: `${t("toasts.wallet.withdraw.success")}: ${paymentReq.amount.toLocaleString()} ${t("symbol")}`,
@@ -249,7 +249,7 @@ export const Withdrawal: FC = () => {
                   .unwrap()
                   .then(() => {
                     reset();
-                    navigate(paths.walletHistory);
+                    navigate(ENUM_PATHS.WALLET_HISTORY);
                     toast({
                       variant: "success",
                       title: `${t("toasts.wallet.withdraw.success")}: ${paymentReq.amount.toLocaleString()} ${t("symbol")}`,

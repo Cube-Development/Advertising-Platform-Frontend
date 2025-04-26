@@ -1,18 +1,19 @@
-import { roles, userRoles } from "@entities/user";
+import { ENUM_ROLES, USER_ROLES } from "@entities/user";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { cookiesTypes } from "@shared/config";
 import Cookies from "js-cookie";
 
 interface UserState {
   isAuth: boolean;
-  role: roles;
+  role: ENUM_ROLES;
 }
 
 const roleFromCookies = Cookies.get(cookiesTypes.role);
-const getRole: roles =
-  roleFromCookies && Object.values(roles).includes(roleFromCookies as roles)
-    ? (roleFromCookies as roles)
-    : roles.advertiser;
+const getRole: ENUM_ROLES =
+  roleFromCookies &&
+  Object.values(ENUM_ROLES).includes(roleFromCookies as ENUM_ROLES)
+    ? (roleFromCookies as ENUM_ROLES)
+    : ENUM_ROLES.ADVERTISER;
 
 const initialState: UserState = {
   isAuth: Cookies.get(cookiesTypes.isAuth) === "true" ? true : false,
@@ -32,11 +33,11 @@ export const userSlice = createSlice({
       Cookies.remove(cookiesTypes.token);
       Cookies.remove(cookiesTypes.userId);
       Cookies.set(cookiesTypes.isAuth, "false");
-      const logoutRole = userRoles.includes(
-        Cookies.get(cookiesTypes.role) as roles,
+      const logoutRole = USER_ROLES.includes(
+        Cookies.get(cookiesTypes.role) as ENUM_ROLES,
       )
-        ? (Cookies.get(cookiesTypes.role) as roles)
-        : roles.advertiser;
+        ? (Cookies.get(cookiesTypes.role) as ENUM_ROLES)
+        : ENUM_ROLES.ADVERTISER;
       Cookies.set(cookiesTypes.role, logoutRole);
       state.isAuth = false;
       state.role = logoutRole;
@@ -44,7 +45,7 @@ export const userSlice = createSlice({
     setAuth: (state, action: PayloadAction<boolean>) => {
       state.isAuth = action.payload;
     },
-    toggleRole: (state, action: PayloadAction<roles>) => {
+    toggleRole: (state, action: PayloadAction<ENUM_ROLES>) => {
       state.role = action.payload;
       Cookies.set(cookiesTypes.role, `${action.payload}`);
     },

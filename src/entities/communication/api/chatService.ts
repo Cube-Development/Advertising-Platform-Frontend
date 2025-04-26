@@ -4,13 +4,13 @@ import {
   IChatData,
   IMessageNewSocket,
 } from "@entities/communication";
-import { roles } from "@entities/user";
+import { ENUM_ROLES } from "@entities/user";
 import { authApi, CHAT } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { convertUTCToLocalDateTime } from "@shared/utils/lib";
 
 export interface getChatsReq {
-  role: roles;
+  role: ENUM_ROLES;
 }
 
 export interface readMessageReq {

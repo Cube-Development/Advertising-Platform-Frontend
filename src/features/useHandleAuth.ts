@@ -1,5 +1,5 @@
 import { useTransferPublicMutation } from "@entities/project";
-import { login, roles, toggleRole } from "@entities/user";
+import { login, ENUM_ROLES, toggleRole } from "@entities/user";
 import { authApi, baseApi } from "@shared/api";
 import { cookiesTypes } from "@shared/config";
 import { useAppDispatch } from "@shared/hooks";
@@ -26,7 +26,10 @@ export const useHandleAuth = () => {
     }
   };
 
-  const handleAuth = async (role: roles, user_id: string): Promise<void> => {
+  const handleAuth = async (
+    role: ENUM_ROLES,
+    user_id: string,
+  ): Promise<void> => {
     try {
       dispatch(baseApi.util.resetApiState());
       dispatch(authApi.util.resetApiState());

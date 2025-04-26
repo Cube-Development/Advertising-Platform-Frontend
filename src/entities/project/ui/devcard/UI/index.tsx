@@ -1,6 +1,6 @@
 import { IChatProps } from "@entities/communication";
 import { IAdvManagerProjectsDevCard } from "@entities/project";
-import { roles } from "@entities/user";
+import { ENUM_ROLES } from "@entities/user";
 import { MoreIcon } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
 import { FC } from "react";
@@ -49,7 +49,7 @@ export const AdvDevProjectCard: FC<AdvDevProjectCardProps> = ({
       <div className={styles.card__chat}>
         <ChatBtn
           projectId={card?.id}
-          toRole={roles.manager}
+          toRole={ENUM_ROLES.MANAGER}
           isFull={screen < BREAKPOINT.LG}
         />
       </div>

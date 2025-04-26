@@ -1,4 +1,4 @@
-import { roles } from "@entities/user";
+import { ENUM_ROLES } from "@entities/user";
 import {
   MESSAGE_SEND_TYPE as MESSAGE_SEND_TYPE,
   MESSAGE_STATUS,
@@ -88,6 +88,6 @@ export interface IChatProps {
   isProject?: boolean;
   orderId?: string;
   projectId?: string;
-  toRole?: roles;
+  toRole?: ENUM_ROLES;
   isFull?: boolean;
 }

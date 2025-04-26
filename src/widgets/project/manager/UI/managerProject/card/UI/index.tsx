@@ -6,7 +6,7 @@ import {
   projectStatus,
   useGetManagerSubprojectsQuery,
 } from "@entities/project";
-import { roles, useFindLanguage } from "@entities/user";
+import { ENUM_ROLES, useFindLanguage } from "@entities/user";
 import {
   AcceptPost,
   ChangeChannel,
@@ -87,7 +87,7 @@ const Card: FC<ManagerProjectCardProps> = ({ card, statusFilter }) => {
       </div>
       <div className={`${styles.buttons__md} display__hide__min__md`}>
         <div className={styles.chat__btn}>
-          <Chat projectId={card?.project_id} toRole={roles.advertiser} />
+          <Chat projectId={card?.project_id} toRole={ENUM_ROLES.ADVERTISER} />
         </div>
         <div className={styles.ts__btn}>
           <TechnicalSpecification card={card} SendToBotBtn={SendToBot} />
@@ -201,7 +201,7 @@ const Card: FC<ManagerProjectCardProps> = ({ card, statusFilter }) => {
         >
           <Chat
             projectId={card?.project_id}
-            toRole={roles.advertiser}
+            toRole={ENUM_ROLES.ADVERTISER}
             isProject={true}
           />
         </div>

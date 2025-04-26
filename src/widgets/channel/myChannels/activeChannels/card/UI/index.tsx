@@ -27,7 +27,7 @@ import {
   RocketIcon,
   StarIcon4,
 } from "@shared/assets";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import { ToastAction, useToast } from "@shared/ui";
 import { buildPathWithQuery, queryParamKeys } from "@shared/utils";
 import { Cog } from "lucide-react";
@@ -252,7 +252,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
         <div className={styles.platform__events}>
           <Link
             // to={`${paths.addChannel}?channel_id=${card?.id}`}
-            to={buildPathWithQuery(paths.addChannel, {
+            to={buildPathWithQuery(ENUM_PATHS.ADD_CHANNEL, {
               [queryParamKeys.channelId]: card?.id,
             })}
             className={`${styles.edit} truncate`}
@@ -266,7 +266,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
             <p>{t(`platform_btn.calendar`)}</p>
           </button>
           <Link
-            to={`${paths.channel.replace(":id", card?.id)}`}
+            to={`${ENUM_PATHS.CHANNEL.replace(":id", card?.id)}`}
             className={`${styles.edit} truncate`}
           >
             <p>{t(`platform_btn.reviews`)}</p>
@@ -277,7 +277,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
           <div className={`${styles.platform__events} ${styles.inactive}`}>
             <Link
               // to={`${paths.addChannel}?channel_id=${card?.id}`}
-              to={buildPathWithQuery(paths.addChannel, {
+              to={buildPathWithQuery(ENUM_PATHS.ADD_CHANNEL, {
                 [queryParamKeys.channelId]: card?.id,
               })}
               className={`${styles.edit} truncate`}
@@ -291,7 +291,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
               <p>{t(`platform_btn.calendar`)}</p>
             </button>
             <Link
-              to={`${paths.channel.replace(":id", card?.id)}`}
+              to={`${ENUM_PATHS.CHANNEL.replace(":id", card?.id)}`}
               className={`${styles.edit} truncate`}
             >
               <p>{t(`platform_btn.reviews`)}</p>

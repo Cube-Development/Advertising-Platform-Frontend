@@ -5,7 +5,7 @@ import {
 } from "@entities/wallet";
 import { PaymentCard } from "@features/wallet";
 import { CardIcon } from "@shared/assets";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import { ToastAction, useToast } from "@shared/ui";
 import { InfoIcon } from "lucide-react";
 import { FC, useState } from "react";
@@ -58,7 +58,7 @@ export const CreditCard: FC = () => {
             variant: "success",
             title: `${t("toasts.wallet.topup.success")}: ${formData.amount.toLocaleString()} ${t("symbol")}`,
           });
-          navigate(paths.main);
+          navigate(ENUM_PATHS.MAIN);
         })
         .catch((error) => {
           toast({

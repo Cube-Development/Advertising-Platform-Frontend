@@ -1,4 +1,4 @@
-import { roles } from "@entities/user";
+import { ENUM_ROLES } from "@entities/user";
 import { ApproveCampaign, CreateOrder } from "@features/createOrder";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -8,7 +8,7 @@ import heartAnimation from "/animated/heart_white_lottie.gif";
 interface CreateOrderPaymentProps {
   isBlur?: boolean;
   total_price: number;
-  role: roles;
+  role: ENUM_ROLES;
 }
 
 export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
@@ -39,7 +39,7 @@ export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
               </p>
             </div>
             <div className={styles.pay_btn}>
-              {role === roles.advertiser ? (
+              {role === ENUM_ROLES.ADVERTISER ? (
                 <CreateOrder />
               ) : (
                 <ApproveCampaign />

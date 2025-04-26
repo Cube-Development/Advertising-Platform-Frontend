@@ -1,5 +1,5 @@
 import { cookiesTypes } from "@shared/config";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import { MyButton } from "@shared/ui";
 import Cookies from "js-cookie";
 import { FC } from "react";
@@ -20,7 +20,7 @@ export const EditProject: FC<EditProjectProps> = ({ project_id }) => {
   };
 
   return (
-    <Link to={paths.cart} onClick={handleOnClick}>
+    <Link to={ENUM_PATHS.CART} onClick={handleOnClick}>
       <MyButton className={styles.button} buttons_type="button__white">
         <p>{t("orders_manager.card.edit_btn")}</p>
       </MyButton>

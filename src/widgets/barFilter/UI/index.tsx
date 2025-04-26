@@ -8,7 +8,7 @@ import {
   myProjectStatusFilter,
   projectTypesFilter,
 } from "@entities/project";
-import { roles } from "@entities/user";
+import { ENUM_ROLES } from "@entities/user";
 import {
   useGetViewAdvertiserProjectQuery,
   useGetViewBloggerChannelQuery,
@@ -24,13 +24,13 @@ import {
 } from "@features/other";
 import { NewProject } from "@features/project";
 import { useAppSelector } from "@shared/hooks";
-import { pageFilter } from "@shared/routing";
+import { ENUM_PAGE_FILTER } from "@shared/routing";
 import { FC } from "react";
 import { UseFormSetValue } from "react-hook-form";
 import styles from "./styles.module.scss";
 
 interface BarFilterProps {
-  page: pageFilter;
+  page: ENUM_PAGE_FILTER;
   listLength: boolean;
   setValue?: UseFormSetValue<any>;
   typeFilter?: projectTypesFilter | string;
@@ -65,65 +65,65 @@ export const BarFilter: FC<BarFilterProps> = ({
   const { data: viewsAdvProjects } = useGetViewAdvertiserProjectQuery(
     undefined,
     {
-      skip: !isAuth || role !== roles.advertiser,
+      skip: !isAuth || role !== ENUM_ROLES.ADVERTISER,
     },
   );
 
   const { data: viewsBloggerOffers } = useGetViewBloggerOrderQuery(undefined, {
-    skip: !isAuth || role !== roles.blogger,
+    skip: !isAuth || role !== ENUM_ROLES.BLOGGER,
   });
 
   const { data: viewsBloggerChannels } = useGetViewBloggerChannelQuery(
     undefined,
     {
-      skip: !isAuth || role !== roles.blogger,
+      skip: !isAuth || role !== ENUM_ROLES.BLOGGER,
     },
   );
 
   const { data: viewsManProjects } = useGetViewManagerProjectQuery(undefined, {
-    skip: !isAuth || role !== roles.manager,
+    skip: !isAuth || role !== ENUM_ROLES.MANAGER,
   });
 
   const badgeStatus =
-    page === pageFilter.offer
+    page === ENUM_PAGE_FILTER.OFFER
       ? viewsBloggerOffers?.values[0]?.value?.map((item) => {
           return { status: item?.status, count: item?.count };
         })
-      : page === pageFilter.platform
+      : page === ENUM_PAGE_FILTER.PLATFORM
         ? viewsBloggerChannels?.values[0]?.value?.map((item) => {
             return { status: item?.status, count: item?.count };
           })
-        : page === pageFilter.order && role === roles.advertiser
+        : page === ENUM_PAGE_FILTER.ORDER && role === ENUM_ROLES.ADVERTISER
           ? viewsAdvProjects?.values
               .find((project) => project?.type === typeFilter)
               ?.value?.map((item) => {
                 return { status: item?.status, count: item?.count };
               })
-          : page === pageFilter.order && role === roles.manager
+          : page === ENUM_PAGE_FILTER.ORDER && role === ENUM_ROLES.MANAGER
             ? viewsManProjects?.values[0]?.value?.map((item) => {
                 return { status: item?.status, count: item?.count };
               })
             : undefined;
 
   const badgeType =
-    page === pageFilter.order
+    page === ENUM_PAGE_FILTER.ORDER
       ? viewsAdvProjects?.values?.map((item) => {
           return { type: item?.type, count: item?.count };
         })
       : undefined;
 
   const projectStatus =
-    page === pageFilter.order &&
+    page === ENUM_PAGE_FILTER.ORDER &&
     typeFilter === projectTypesFilter.myProject &&
-    role === roles.advertiser
+    role === ENUM_ROLES.ADVERTISER
       ? advMyProjectStatus
-      : page === pageFilter.order &&
+      : page === ENUM_PAGE_FILTER.ORDER &&
           typeFilter === projectTypesFilter.managerProject &&
-          role === roles.advertiser
+          role === ENUM_ROLES.ADVERTISER
         ? advManagerProjectStatus
-        : page === pageFilter.order && role === roles.manager
+        : page === ENUM_PAGE_FILTER.ORDER && role === ENUM_ROLES.MANAGER
           ? managerProjectStatus
-          : page === pageFilter.offer
+          : page === ENUM_PAGE_FILTER.OFFER
             ? bloggerOfferStatus
             : bloggerChannelStatus;
 
@@ -136,8 +136,8 @@ export const BarFilter: FC<BarFilterProps> = ({
         AddChannelBtn={AddChannel}
         page={page}
       />
-      {page === pageFilter.order ? (
-        role === roles.advertiser ? (
+      {page === ENUM_PAGE_FILTER.ORDER ? (
+        role === ENUM_ROLES.ADVERTISER ? (
           <>
             <BarTypesFilter
               changeStatus={changeStatus}
@@ -155,7 +155,7 @@ export const BarFilter: FC<BarFilterProps> = ({
             )}
           </>
         ) : (
-          role === roles.manager && (
+          role === ENUM_ROLES.MANAGER && (
             <>
               <BarStatusFilter
                 changeStatus={changeStatus}

@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { useLocation } from "react-router-dom";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 
 export const useCurrentPathEnum = () => {
   const location = useLocation();
@@ -9,7 +9,7 @@ export const useCurrentPathEnum = () => {
     const currentPath = location.pathname;
 
     // Ищем соответствие в enum
-    const matchedPath = Object.values(paths).find((path) => {
+    const matchedPath = Object.values(ENUM_PATHS).find((path) => {
       // Учитываем динамические пути типа "/channel/:id"
       const pathRegex = new RegExp(`^${path.replace(/:\w+/g, "\\w+")}$`);
       return pathRegex.test(currentPath);

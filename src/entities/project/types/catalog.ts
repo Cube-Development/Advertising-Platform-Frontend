@@ -1,6 +1,6 @@
 import { platformTypesNum } from "@entities/platform";
 import { languagesNum } from "@shared/config";
-import { pageFilter } from "@shared/routing";
+import { ENUM_PAGE_FILTER } from "@shared/routing";
 import { FC } from "react";
 
 export interface ITargetAudienceCard {
@@ -79,7 +79,7 @@ export interface IFormatListProps {
 interface Components {
   FormatList: FC<IFormatListProps>;
   changeCard?: () => void;
-  page?: pageFilter.cart;
+  page?: ENUM_PAGE_FILTER.CART;
   card: ICatalogChannel;
 }
 

@@ -19,7 +19,7 @@ import {
   SubsIcon,
 } from "@shared/assets";
 import { BREAKPOINT, ChannelLanguages } from "@shared/config";
-import { pageFilter, paths } from "@shared/routing";
+import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";
 import {
   Accordion,
   AccordionContent,
@@ -30,7 +30,7 @@ import { useWindowWidth } from "@shared/hooks";
 
 interface CatalogCardProps extends IChangeCards, ICatalogCard {
   card: ICatalogChannel;
-  page?: pageFilter.cart;
+  page?: ENUM_PAGE_FILTER.CART;
 }
 
 export const CatalogCard: FC<CatalogCardProps> = ({
@@ -81,7 +81,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
           <div className={styles.column__logo}>
             <div className={styles.logo}>
               <Link
-                to={`${paths.channel.replace(":id", card?.id)}`}
+                to={`${ENUM_PATHS.CHANNEL.replace(":id", card?.id)}`}
                 className={styles.logo__img_wrapper}
               >
                 <img src={card?.avatar} alt="logo" />
@@ -94,7 +94,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
           <div className={styles.column__info}>
             <div className={styles.info}>
               <Link
-                to={`${paths.channel.replace(":id", card?.id)}`}
+                to={`${ENUM_PATHS.CHANNEL.replace(":id", card?.id)}`}
                 className={`${styles.title} truncate`}
               >
                 {card?.name}

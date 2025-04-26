@@ -12,12 +12,12 @@ import {
   useProjectNameMutation,
   useProjectOrdersQuery,
 } from "@entities/project";
-import { roles, useFindLanguage } from "@entities/user";
+import { ENUM_ROLES, useFindLanguage } from "@entities/user";
 import { usePaymentProjectMutation } from "@entities/wallet";
 import { BREAKPOINT, cookiesTypes } from "@shared/config";
 import { Languages } from "@shared/config";
 import { useAppSelector, useWindowWidth } from "@shared/hooks";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import { SpinnerLoader, useToast } from "@shared/ui";
 import { getFileExtension } from "@shared/utils";
 import Cookies from "js-cookie";
@@ -90,7 +90,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
         variant: "error",
         title: "Сначала нужно добавить каналы в корзину",
       });
-      navigate(paths.catalog);
+      navigate(ENUM_PATHS.CATALOG);
     }
   }, [projectChannels, isOrdersLoading]);
 
@@ -327,7 +327,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
         await createOrderDates(formData.datetime)
           .unwrap()
           .then(() => {
-            (role === roles.advertiser
+            (role === ENUM_ROLES.ADVERTISER
               ? paymentProject(projectId)
               : approveProject({ project_id: projectId })
             )
@@ -337,7 +337,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
                   variant: "success",
                   title: t("toasts.create_order.payment.success"),
                 });
-                navigate(paths.orders);
+                navigate(ENUM_PATHS.ORDERS);
                 setIsLoading(false);
               })
               .catch(() => {

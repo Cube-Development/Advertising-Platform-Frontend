@@ -3,7 +3,7 @@ import {
   adminRejectComplaintReq,
   IAdminComplaintInfoData,
 } from "@entities/admin";
-import { rolesTypes } from "@entities/user";
+import { ROLES_TYPES_LIST } from "@entities/user";
 import { CancelIcon2 } from "@shared/assets";
 import {
   AlertDialog,
@@ -92,7 +92,8 @@ export const ComplaintDecision: FC<ComplaintDecisionProps> = ({
                 <p className={styles.title}>
                   {t("admin_panel.complaintInfo.card.decision.have_decision")}:{" "}
                   {t(
-                    rolesTypes.find((el) => el.type === card?.role)?.name || "",
+                    ROLES_TYPES_LIST.find((el) => el.type === card?.role)
+                      ?.name || "",
                   )}
                 </p>
                 <div className={styles.text}>

@@ -5,7 +5,7 @@ import {
   IProfileData,
   IUser,
   IUserData,
-  roles,
+  ENUM_ROLES,
 } from "@entities/user";
 import { authApi, baseApi, USER_DATA } from "@shared/api";
 import { languagesNum } from "@shared/config";
@@ -16,7 +16,7 @@ type RegisterReq = {
   is_active: boolean;
   is_superuser: boolean;
   is_verified: boolean;
-  role: roles;
+  role: ENUM_ROLES;
   language: languagesNum;
   code: number;
 };
@@ -159,7 +159,7 @@ export const userAPI = authApi.injectEndpoints({
       }),
       invalidatesTags: [USER_DATA],
     }),
-    updateRole: build.mutation<void, { role: roles }>({
+    updateRole: build.mutation<void, { role: ENUM_ROLES }>({
       query: (params) => ({
         url: `/users/role`,
         method: `PATCH`,

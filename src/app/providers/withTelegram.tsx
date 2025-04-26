@@ -1,4 +1,4 @@
-import { roles, toggleRole } from "@entities/user";
+import { ENUM_ROLES, toggleRole } from "@entities/user";
 import { useAppDispatch } from "@shared/hooks";
 import { QueryParams } from "@shared/utils";
 import { FC, useEffect } from "react";
@@ -16,7 +16,7 @@ export const withTelegram = (Component: React.FC) => {
         tg.enableClosingConfirmation();
         tg.ready();
       }
-      if (telegram_role) dispatch(toggleRole(telegram_role as roles));
+      if (telegram_role) dispatch(toggleRole(telegram_role as ENUM_ROLES));
     }, []);
 
     return (

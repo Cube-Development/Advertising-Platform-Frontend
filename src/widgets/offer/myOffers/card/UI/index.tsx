@@ -14,7 +14,7 @@ import {
 } from "@entities/offer";
 import { platformToIcon, useGetPostQuery } from "@entities/project";
 import { CheckDate } from "@entities/communication";
-import { roles } from "@entities/user";
+import { ENUM_ROLES } from "@entities/user";
 
 interface OfferCardProps {
   card: IBloggerOfferCard;
@@ -81,7 +81,7 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter }) => {
       </div>
       {statusFilter === offerStatusFilter.active && (
         <div className={`${styles.chat__btn} display__hide__min__md`}>
-          <Chat orderId={card.id} toRole={roles.advertiser} />
+          <Chat orderId={card.id} toRole={ENUM_ROLES.ADVERTISER} />
         </div>
       )}
       <div className={styles.card__info}>
@@ -204,7 +204,7 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter }) => {
 
         {offerStatusChat.includes(statusFilter as offerStatusFilter) && (
           <div className={`${styles.chat__btn} display__hide__max__md`}>
-            <Chat orderId={card?.id} toRole={roles.advertiser} />
+            <Chat orderId={card?.id} toRole={ENUM_ROLES.ADVERTISER} />
           </div>
         )}
       </div>

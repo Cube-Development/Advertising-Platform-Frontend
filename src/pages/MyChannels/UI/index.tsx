@@ -15,7 +15,7 @@ import { useGetViewBloggerChannelQuery } from "@entities/views";
 import { SearchFilter } from "@features/catalog";
 import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 import { useClearCookiesOnPage } from "@shared/hooks";
-import { pageFilter, paths } from "@shared/routing";
+import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";
 import { SuspenseLoader } from "@shared/ui";
 import { buildPathWithQuery, queryParamKeys, QueryParams } from "@shared/utils";
 import { BarFilter } from "@widgets/barFilter";
@@ -102,7 +102,7 @@ export const MyChannelsPage: FC = () => {
   }, [formState.platform, formState.status, formState.search_string]);
 
   useEffect(() => {
-    const newPath = buildPathWithQuery(paths.myChannels, {
+    const newPath = buildPathWithQuery(ENUM_PATHS.MY_CHANNELS, {
       [queryParamKeys.channelStatus]: formState.status,
       ...(startChannelId ? { [queryParamKeys.channelId]: startChannelId } : {}),
     });
@@ -114,7 +114,7 @@ export const MyChannelsPage: FC = () => {
       <div className="container">
         <div className={styles.wrapper}>
           <BarFilter
-            page={pageFilter.platform}
+            page={ENUM_PAGE_FILTER.PLATFORM}
             setValue={setValue}
             listLength={!data?.channels?.length}
             changeStatus={(status) => setValue("status", status)}

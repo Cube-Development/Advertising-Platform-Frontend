@@ -9,7 +9,7 @@ import { FC } from "react";
 import { useState } from "react";
 import styles from "./styles.module.scss";
 import { Link, useLocation } from "react-router-dom";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import { useTranslation } from "react-i18next";
 import { useClearCookiesOnPage } from "@shared/hooks";
 
@@ -59,7 +59,7 @@ export const LoginPage: FC = () => {
             <p className={styles.account}>
               {t("auth.dont_have_account")}
               <span>
-                <Link to={`${paths.registration}${location.search}`}>
+                <Link to={`${ENUM_PATHS.REGISTRATION}${location.search}`}>
                   {t("auth.sign_up")}
                 </Link>
               </span>

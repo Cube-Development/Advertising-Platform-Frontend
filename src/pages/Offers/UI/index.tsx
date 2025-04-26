@@ -10,7 +10,7 @@ import { useGetViewBloggerOrderQuery } from "@entities/views";
 import { SearchFilter } from "@features/catalog";
 import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 import { useClearCookiesOnPage } from "@shared/hooks";
-import { pageFilter, paths } from "@shared/routing";
+import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";
 import { SuspenseLoader } from "@shared/ui";
 import { buildPathWithQuery, queryParamKeys, QueryParams } from "@shared/utils";
 import { BarFilter } from "@widgets/barFilter";
@@ -27,7 +27,7 @@ const MyOffers = React.lazy(() =>
 
 export const OffersPage: FC = () => {
   useClearCookiesOnPage();
-  const page = pageFilter.offer;
+  const page = ENUM_PAGE_FILTER.OFFER;
   const language = useFindLanguage();
   const navigate = useNavigate();
   const { offer_status, order_id } = QueryParams();
@@ -90,7 +90,7 @@ export const OffersPage: FC = () => {
   }, [formState.page, formState.status]);
 
   useEffect(() => {
-    const newPath = buildPathWithQuery(paths.offers, {
+    const newPath = buildPathWithQuery(ENUM_PATHS.OFFERS, {
       [queryParamKeys.offerStatus]: formState.status,
       ...(startOrderId ? { [queryParamKeys.orderId]: startOrderId } : {}),
     });

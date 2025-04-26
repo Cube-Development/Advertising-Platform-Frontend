@@ -1,15 +1,15 @@
 import { IMenuItem } from "@entities/admin";
 import { DEBOUNCE } from "@entities/project";
 import {
-  roles,
-  rolesTypes,
+  ENUM_ROLES,
+  ROLES_TYPES_LIST,
   toggleRole as toggleroleAction,
   useUpdateRoleMutation,
 } from "@entities/user";
 import { setDropDownMenu } from "@pages/layouts";
 import { AccordionItem } from "@radix-ui/react-accordion";
 import { useAppDispatch, useAppSelector, useDebounce } from "@shared/hooks";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import { Accordion } from "@shared/ui";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -26,7 +26,7 @@ export const Sidebar: FC = () => {
 
   const [updateRole] = useUpdateRoleMutation();
 
-  const toggleRole = (currentRole: roles) => {
+  const toggleRole = (currentRole: ENUM_ROLES) => {
     if (currentRole !== role) {
       dispatch(toggleroleAction(currentRole));
       if (isAuth) {
@@ -53,11 +53,11 @@ export const Sidebar: FC = () => {
   };
 
   const combinedMenu: IMenuItem[] =
-    role === roles.advertiser
+    role === ENUM_ROLES.ADVERTISER
       ? [...advertiserMenu, ...commonMenu]
-      : role === roles.blogger
+      : role === ENUM_ROLES.BLOGGER
         ? [...bloggerMenu, ...commonMenu]
-        : role === roles.manager
+        : role === ENUM_ROLES.MANAGER
           ? managerMenu
           : [];
 
@@ -108,15 +108,19 @@ export const Sidebar: FC = () => {
         <div className={styles.switcher}>
           <div className={styles.switcher__row}>
             <Link
-              to={role === roles.advertiser ? paths.mainBlogger : paths.main}
+              to={
+                role === ENUM_ROLES.ADVERTISER
+                  ? ENUM_PATHS.MAIN_BLOGGER
+                  : ENUM_PATHS.MAIN
+              }
             >
               <p
                 className={styles.role}
                 onClick={() => {
                   toggleRole(
-                    role === roles.advertiser
-                      ? roles.blogger
-                      : roles.advertiser,
+                    role === ENUM_ROLES.ADVERTISER
+                      ? ENUM_ROLES.BLOGGER
+                      : ENUM_ROLES.ADVERTISER,
                   );
                 }}
               >
@@ -127,7 +131,11 @@ export const Sidebar: FC = () => {
                     : role === roles.manager
                       ? t("roles.manager")[0]
                       : t("roles.administrator")[0]} */}
-                {t(rolesTypes.find((el) => el.type === role)?.name || "")[0]}
+                {
+                  t(
+                    ROLES_TYPES_LIST.find((el) => el.type === role)?.name || "",
+                  )[0]
+                }
               </p>
             </Link>
           </div>

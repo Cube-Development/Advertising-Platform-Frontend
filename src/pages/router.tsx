@@ -1,4 +1,4 @@
-import { roles } from "@entities/user";
+import { ENUM_ROLES } from "@entities/user";
 import {
   RootAdminLayout,
   RootLayout,
@@ -6,47 +6,52 @@ import {
   SideBarLayout,
 } from "@pages/layouts";
 import { useAppSelector } from "@shared/hooks";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import { createBrowserRouter, Navigate } from "react-router-dom";
-import { allRoutes, authTypes, IRouting, layoutTypes } from "./routes";
+import {
+  allRoutes,
+  ENUM_AUTH_TYPES,
+  IRouting,
+  ENUM_LAYOUT_TYPES,
+} from "./routes";
 
 // Компонент защиты маршрутов
 const ProtectedRoute = ({ route }: { route: IRouting }) => {
   const { isAuth, role } = useAppSelector((state) => state.user);
 
   // Проверка на авторизацию
-  if (route.auth === authTypes.onlyPublic && isAuth) {
+  if (route.auth === ENUM_AUTH_TYPES.ONLY_PUBLIC && isAuth) {
     console.log("onlyPublic");
-    return <Navigate to={paths.main} replace />;
+    return <Navigate to={ENUM_PATHS.MAIN} replace />;
   }
-  if (route.auth === authTypes.private && !isAuth) {
+  if (route.auth === ENUM_AUTH_TYPES.PRIVATE && !isAuth) {
     console.log("private");
-    return <Navigate to={paths.main} replace />;
+    return <Navigate to={ENUM_PATHS.MAIN} replace />;
   }
   console.log(route.roles, role);
 
-  if (route.auth === authTypes.public) {
+  if (route.auth === ENUM_AUTH_TYPES.PUBLIC) {
     console.log("public");
-    if (role === roles.blogger && !route.roles?.includes(role)) {
-      return <Navigate to={paths.mainBlogger} replace />;
+    if (role === ENUM_ROLES.BLOGGER && !route.roles?.includes(role)) {
+      return <Navigate to={ENUM_PATHS.MAIN_BLOGGER} replace />;
     }
-    if (role === roles.advertiser && !route.roles?.includes(role)) {
-      return <Navigate to={paths.main} replace />;
+    if (role === ENUM_ROLES.ADVERTISER && !route.roles?.includes(role)) {
+      return <Navigate to={ENUM_PATHS.MAIN} replace />;
     }
-    if (role === roles.moderator && !route.roles?.includes(role)) {
-      return <Navigate to={paths.orders} replace />;
+    if (role === ENUM_ROLES.MODERATOR && !route.roles?.includes(role)) {
+      return <Navigate to={ENUM_PATHS.ORDERS} replace />;
     }
   }
 
   // Проверка на роль
   if (route.roles && !route.roles.includes(role)) {
-    if (role === roles.moderator) {
-      return <Navigate to={paths.adminHome} replace />;
+    if (role === ENUM_ROLES.MODERATOR) {
+      return <Navigate to={ENUM_PATHS.ADMIN_HOME} replace />;
     }
-    if (role === roles.manager) {
-      return <Navigate to={paths.orders} replace />;
+    if (role === ENUM_ROLES.MANAGER) {
+      return <Navigate to={ENUM_PATHS.ORDERS} replace />;
     }
-    return <Navigate to={paths.main} replace />;
+    return <Navigate to={ENUM_PATHS.MAIN} replace />;
   }
 
   // Оборачиваем в нужный layout
@@ -62,14 +67,14 @@ const ProtectedRoute = ({ route }: { route: IRouting }) => {
 };
 
 const rootRoutes = allRoutes
-  .filter((route) => route.layout === layoutTypes.root)
+  .filter((route) => route.layout === ENUM_LAYOUT_TYPES.ROOT)
   .map((route) => ({
     path: route.path,
     element: <ProtectedRoute route={route} />,
   }));
 
 const adminRoutes = allRoutes
-  .filter((route) => route.layout === layoutTypes.admin)
+  .filter((route) => route.layout === ENUM_LAYOUT_TYPES.ADMIN)
   .map((route) => ({
     path: route.path,
     element: <ProtectedRoute route={route} />,
@@ -77,12 +82,12 @@ const adminRoutes = allRoutes
 
 export const router = createBrowserRouter([
   {
-    path: paths.main,
+    path: ENUM_PATHS.MAIN,
     element: <RootLayout />,
     children: rootRoutes,
   },
   {
-    path: paths.main,
+    path: ENUM_PATHS.MAIN,
     element: <RootAdminLayout />,
     children: adminRoutes,
   },

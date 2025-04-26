@@ -18,7 +18,7 @@ import { BarSubFilter } from "@features/other";
 import { ArrowIcon4 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
 import { useClearCookiesOnPage, useWindowWidth } from "@shared/hooks";
-import { pageFilter, paths } from "@shared/routing";
+import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";
 import { ToastAction, useToast } from "@shared/ui";
 import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -218,7 +218,7 @@ export const Topup: FC = () => {
             .unwrap()
             .then(() => {
               reset();
-              navigate(paths.main);
+              navigate(ENUM_PATHS.MAIN);
               toast({
                 variant: "success",
                 title: `${t("toasts.wallet.topup.success")}: ${paymentReq.amount.toLocaleString()} ${t("symbol")}`,
@@ -252,7 +252,7 @@ export const Topup: FC = () => {
                   .unwrap()
                   .then(() => {
                     reset();
-                    navigate(paths.main);
+                    navigate(ENUM_PATHS.MAIN);
                     toast({
                       variant: "success",
                       title: `${t("toasts.wallet.topup.success")}: ${paymentReq.amount.toLocaleString()} ${t("symbol")}`,

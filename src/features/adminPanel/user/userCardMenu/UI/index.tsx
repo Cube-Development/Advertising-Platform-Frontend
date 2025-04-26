@@ -10,7 +10,7 @@ import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { Link } from "react-router-dom";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 
 interface UserCardMenuProps {
   card: IAdminUserData;
@@ -40,7 +40,7 @@ export const UserCardMenu: FC<UserCardMenuProps> = ({ card }) => {
           </div>
           <Link
             className={styles.item}
-            to={`${paths.adminUserInfo.replace(":id", card?.user_id)}`}
+            to={`${ENUM_PATHS.ADMIN_USER_INFO.replace(":id", card?.user_id)}`}
           >
             <span>{t("admin_panel.users.card.menu.edit")}</span>
           </Link>

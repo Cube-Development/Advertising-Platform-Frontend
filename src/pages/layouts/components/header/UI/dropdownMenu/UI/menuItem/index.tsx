@@ -1,7 +1,7 @@
 import { IMenuItems } from "@entities/admin";
 import { ArrowSmallVerticalIcon, LoginIcon } from "@shared/assets";
 import { accordionTypes } from "@shared/config";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import {
   AccordionContent,
   AccordionItem,
@@ -121,7 +121,7 @@ export const MenuItem: React.FC<IMenuItems> = ({
               </div>
               <DialogFooter className="pt-[20px]">
                 <Link
-                  to={`${paths.login}${currentPath}`}
+                  to={`${ENUM_PATHS.LOGIN}${currentPath}`}
                   className={`${styles.btns__login} truncate`}
                   onClick={() => onChange("")}
                 >
@@ -129,7 +129,7 @@ export const MenuItem: React.FC<IMenuItems> = ({
                   <LoginIcon />
                 </Link>
                 <Link
-                  to={`${paths.registration}${currentPath}`}
+                  to={`${ENUM_PATHS.REGISTRATION}${currentPath}`}
                   className={`${styles.btns__register} truncate`}
                   onClick={() => onChange("")}
                 >

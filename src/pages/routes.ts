@@ -1,4 +1,5 @@
-import { paths } from "@shared/routing";
+import { ENUM_ROLES, USER_ROLES } from "@entities/user";
+import { ENUM_PATHS } from "@shared/routing";
 import * as React from "react";
 import { AddChannelPage } from "./AddChannel";
 import { AdminChannelsPage } from "./AdminChannels";
@@ -29,344 +30,264 @@ import { TopupPage } from "./Topup";
 import { TurnkeyPage } from "./Turnkey";
 import { WalletHistoryPage } from "./WalletHistory";
 import { WithdrawalPage } from "./Withdrawal";
-import { roles, userRoles } from "@entities/user";
 
-// export interface IRoute {
-//   path: string;
-//   component: React.ComponentType;
-//   sidebar?: boolean;
-// }
-
-// export const privateCommonRoutes: IRoute[] = [
-//   { path: paths.walletTopUp, component: TopupPage, sidebar: true },
-//   { path: paths.walletWithdraw, component: WithdrawalPage, sidebar: true },
-//   { path: paths.walletHistory, component: WalletHistoryPage, sidebar: true },
-//   { path: paths.profile, component: ProfilePage, sidebar: true },
-// ];
-
-// export const onlyPublicCommonRoutes: IRoute[] = [
-//   { path: paths.login, component: LoginPage },
-//   { path: paths.registration, component: RegistrationPage },
-// ];
-
-// export const publicCommonRoutes: IRoute[] = [
-//   { path: paths.faq, component: FAQPage, sidebar: true },
-//   { path: paths.notFound, component: NotFoundPage },
-//   { path: paths.channel, component: ChannelPage },
-//   { path: paths.publicOffer, component: PublicOfferPage, sidebar: true },
-//   { path: paths.serviceRules, component: ServiceRulesPage, sidebar: true },
-// ];
-
-// export const privateBloggerRoutes: IRoute[] = [
-//   { path: paths.addChannel, component: AddChannelPage, sidebar: true },
-//   { path: paths.myChannels, component: MyChannelsPage, sidebar: true },
-//   { path: paths.offers, component: OffersPage, sidebar: true },
-// ];
-
-// export const publicBloggerRoutes: IRoute[] = [
-//   { path: paths.mainBlogger, component: MainBloggerPage },
-// ];
-
-// export const privateAdvertiserRoutes: IRoute[] = [
-//   { path: paths.orders, component: OrdersPage, sidebar: true },
-// ];
-
-// export const publicAdvertiserRoutes: IRoute[] = [
-//   { path: paths.main, component: MainPage },
-//   { path: paths.catalog, component: CatalogPage },
-//   { path: paths.cart, component: CartPage },
-//   { path: paths.turnkey, component: TurnkeyPage },
-//   // { path: paths.channel, component: ChannelPage },
-// ];
-
-// export const createOrderRoutes: IRoute[] = [
-//   { path: paths.createOrder, component: CreateOrderPage },
-// ];
-
-// export const privateAdminRoutes: IRoute[] = [
-//   { path: paths.adminHome, component: AdminHomePage, sidebar: true },
-//   { path: paths.adminChannels, component: AdminChannelsPage, sidebar: true },
-//   { path: paths.adminUsers, component: AdminUsersPage, sidebar: true },
-//   {
-//     path: paths.adminComplaints,
-//     component: AdminComplaintsPage,
-//     sidebar: true,
-//   },
-//   {
-//     path: paths.adminTransactions,
-//     component: AdminTransactionsPage,
-//     sidebar: true,
-//   },
-//   { path: paths.adminReviews, component: AdminReviewsPage, sidebar: true },
-//   {
-//     path: paths.adminComplaintInfo,
-//     component: AdminComplaintInfoPage,
-//     sidebar: true,
-//   },
-//   {
-//     path: paths.adminUserInfo,
-//     component: AdminUserInfoPage,
-//     sidebar: true,
-//   },
-// ];
-
-export enum authTypes {
-  onlyPublic = "onlyPublic",
-  public = "public",
-  private = "private",
+export enum ENUM_AUTH_TYPES {
+  ONLY_PUBLIC = "onlyPublic",
+  PUBLIC = "public",
+  PRIVATE = "private",
 }
 
-export enum layoutTypes {
-  root = "root",
-  admin = "admin",
+export enum ENUM_LAYOUT_TYPES {
+  ROOT = "root",
+  ADMIN = "admin",
 }
 
 export interface IRouting {
-  path: paths;
+  path: ENUM_PATHS;
   component: React.ComponentType;
-  auth: authTypes;
-  roles?: roles[];
+  auth: ENUM_AUTH_TYPES;
+  roles?: ENUM_ROLES[];
   authSidebar?: boolean;
   nonAuthSidebar?: boolean;
   adminSidebar?: boolean;
-  layout: layoutTypes;
+  layout: ENUM_LAYOUT_TYPES;
 }
 
 export const allRoutes: IRouting[] = [
   // only public
   {
-    path: paths.login,
+    path: ENUM_PATHS.LOGIN,
     component: LoginPage,
-    auth: authTypes.onlyPublic,
-    layout: layoutTypes.root,
+    auth: ENUM_AUTH_TYPES.ONLY_PUBLIC,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
   },
   {
-    path: paths.registration,
+    path: ENUM_PATHS.REGISTRATION,
     component: RegistrationPage,
-    auth: authTypes.onlyPublic,
-    layout: layoutTypes.root,
+    auth: ENUM_AUTH_TYPES.ONLY_PUBLIC,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
   },
 
   // public blogger
   {
-    path: paths.mainBlogger,
+    path: ENUM_PATHS.MAIN_BLOGGER,
     component: MainBloggerPage,
-    roles: [roles.blogger],
-    auth: authTypes.public,
-    layout: layoutTypes.root,
+    roles: [ENUM_ROLES.BLOGGER],
+    auth: ENUM_AUTH_TYPES.PUBLIC,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
   },
 
   // public advertiser
   {
-    path: paths.main,
+    path: ENUM_PATHS.MAIN,
     component: MainPage,
-    roles: [roles.advertiser],
-    auth: authTypes.public,
-    layout: layoutTypes.root,
+    roles: [ENUM_ROLES.ADVERTISER],
+    auth: ENUM_AUTH_TYPES.PUBLIC,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
   },
 
   {
-    path: paths.turnkey,
+    path: ENUM_PATHS.TURNKEY,
     component: TurnkeyPage,
-    roles: [roles.advertiser],
-    auth: authTypes.public,
-    layout: layoutTypes.root,
+    roles: [ENUM_ROLES.ADVERTISER],
+    auth: ENUM_AUTH_TYPES.PUBLIC,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
   },
 
   // public common
   {
-    path: paths.faq,
+    path: ENUM_PATHS.FAQ,
     component: FAQPage,
-    roles: [...userRoles, roles.manager],
-    auth: authTypes.public,
+    roles: [...USER_ROLES, ENUM_ROLES.MANAGER],
+    auth: ENUM_AUTH_TYPES.PUBLIC,
     authSidebar: true,
-    layout: layoutTypes.root,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
   },
   {
-    path: paths.notFound,
+    path: ENUM_PATHS.NOT_FOUND,
     component: NotFoundPage,
-    roles: userRoles,
-    auth: authTypes.public,
-    layout: layoutTypes.root,
+    roles: USER_ROLES,
+    auth: ENUM_AUTH_TYPES.PUBLIC,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
   },
   {
-    path: paths.channel,
+    path: ENUM_PATHS.CHANNEL,
     component: ChannelPage,
-    roles: userRoles,
-    auth: authTypes.public,
-    layout: layoutTypes.root,
+    roles: USER_ROLES,
+    auth: ENUM_AUTH_TYPES.PUBLIC,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
   },
   {
-    path: paths.publicOffer,
+    path: ENUM_PATHS.PUBLIC_OFFER,
     component: PublicOfferPage,
-    roles: userRoles,
-    auth: authTypes.public,
+    roles: USER_ROLES,
+    auth: ENUM_AUTH_TYPES.PUBLIC,
     authSidebar: true,
-    layout: layoutTypes.root,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
   },
   {
-    path: paths.serviceRules,
+    path: ENUM_PATHS.SERVICE_RULES,
     component: ServiceRulesPage,
-    roles: userRoles,
-    auth: authTypes.public,
+    roles: USER_ROLES,
+    auth: ENUM_AUTH_TYPES.PUBLIC,
     authSidebar: true,
-    layout: layoutTypes.root,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
   },
 
   // private blogger
   {
-    path: paths.addChannel,
+    path: ENUM_PATHS.ADD_CHANNEL,
     component: AddChannelPage,
-    roles: [roles.blogger],
-    auth: authTypes.private,
+    roles: [ENUM_ROLES.BLOGGER],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
     authSidebar: true,
-    layout: layoutTypes.root,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
   },
   {
-    path: paths.myChannels,
+    path: ENUM_PATHS.MY_CHANNELS,
     component: MyChannelsPage,
-    roles: [roles.blogger],
-    auth: authTypes.private,
+    roles: [ENUM_ROLES.BLOGGER],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
     authSidebar: true,
-    layout: layoutTypes.root,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
   },
   {
-    path: paths.offers,
+    path: ENUM_PATHS.OFFERS,
     component: OffersPage,
-    roles: [roles.blogger],
-    auth: authTypes.private,
+    roles: [ENUM_ROLES.BLOGGER],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
     authSidebar: true,
-    layout: layoutTypes.root,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
   },
 
   // private advertiser & manager
   {
-    path: paths.orders,
+    path: ENUM_PATHS.ORDERS,
     component: OrdersPage,
-    roles: [roles.advertiser, roles.manager],
-    auth: authTypes.private,
+    roles: [ENUM_ROLES.ADVERTISER, ENUM_ROLES.MANAGER],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
     authSidebar: true,
-    layout: layoutTypes.root,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
   },
   {
-    path: paths.catalog,
+    path: ENUM_PATHS.CATALOG,
     component: CatalogPage,
-    roles: [roles.advertiser, roles.manager],
-    auth: authTypes.public,
-    layout: layoutTypes.root,
+    roles: [ENUM_ROLES.ADVERTISER, ENUM_ROLES.MANAGER],
+    auth: ENUM_AUTH_TYPES.PUBLIC,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
   },
   {
-    path: paths.cart,
+    path: ENUM_PATHS.CART,
     component: CartPage,
-    roles: [roles.advertiser, roles.manager],
-    auth: authTypes.public,
-    layout: layoutTypes.root,
+    roles: [ENUM_ROLES.ADVERTISER, ENUM_ROLES.MANAGER],
+    auth: ENUM_AUTH_TYPES.PUBLIC,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
   },
   {
-    path: paths.createOrder,
+    path: ENUM_PATHS.CREATE_ORDER,
     component: CreateOrderPage,
-    roles: [roles.advertiser, roles.manager],
-    auth: authTypes.private,
-    layout: layoutTypes.root,
+    roles: [ENUM_ROLES.ADVERTISER, ENUM_ROLES.MANAGER],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
   },
 
   // private common
   {
-    path: paths.walletTopUp,
+    path: ENUM_PATHS.WALLET_TOP_UP,
     component: TopupPage,
-    roles: userRoles,
-    auth: authTypes.private,
+    roles: USER_ROLES,
+    auth: ENUM_AUTH_TYPES.PRIVATE,
     authSidebar: true,
-    layout: layoutTypes.root,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
   },
   {
-    path: paths.walletWithdraw,
+    path: ENUM_PATHS.WALLET_WITHDRAW,
     component: WithdrawalPage,
-    roles: userRoles,
-    auth: authTypes.private,
+    roles: USER_ROLES,
+    auth: ENUM_AUTH_TYPES.PRIVATE,
     authSidebar: true,
-    layout: layoutTypes.root,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
   },
   {
-    path: paths.walletHistory,
+    path: ENUM_PATHS.WALLET_HISTORY,
     component: WalletHistoryPage,
-    roles: userRoles,
-    auth: authTypes.private,
+    roles: USER_ROLES,
+    auth: ENUM_AUTH_TYPES.PRIVATE,
     authSidebar: true,
-    layout: layoutTypes.root,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
   },
   {
-    path: paths.profile,
+    path: ENUM_PATHS.PROFILE,
     component: ProfilePage,
-    roles: userRoles,
-    auth: authTypes.private,
+    roles: USER_ROLES,
+    auth: ENUM_AUTH_TYPES.PRIVATE,
     authSidebar: true,
-    layout: layoutTypes.root,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
   },
 
   // private admin
   {
-    path: paths.adminHome,
+    path: ENUM_PATHS.ADMIN_HOME,
     component: AdminHomePage,
-    roles: [roles.moderator],
-    auth: authTypes.private,
-    layout: layoutTypes.admin,
+    roles: [ENUM_ROLES.MODERATOR],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
+    layout: ENUM_LAYOUT_TYPES.ADMIN,
     adminSidebar: true,
   },
   {
-    path: paths.adminChannels,
+    path: ENUM_PATHS.ADMIN_CHANNELS,
     component: AdminChannelsPage,
-    roles: [roles.moderator],
-    auth: authTypes.private,
-    layout: layoutTypes.admin,
+    roles: [ENUM_ROLES.MODERATOR],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
+    layout: ENUM_LAYOUT_TYPES.ADMIN,
     adminSidebar: true,
   },
   {
-    path: paths.adminUsers,
+    path: ENUM_PATHS.ADMIN_USERS,
     component: AdminUsersPage,
-    roles: [roles.moderator],
-    auth: authTypes.private,
-    layout: layoutTypes.admin,
+    roles: [ENUM_ROLES.MODERATOR],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
+    layout: ENUM_LAYOUT_TYPES.ADMIN,
     adminSidebar: true,
   },
   {
-    path: paths.adminComplaints,
+    path: ENUM_PATHS.ADMIN_COMPLAINTS,
     component: AdminComplaintsPage,
-    roles: [roles.moderator],
-    auth: authTypes.private,
-    layout: layoutTypes.admin,
+    roles: [ENUM_ROLES.MODERATOR],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
+    layout: ENUM_LAYOUT_TYPES.ADMIN,
     adminSidebar: true,
   },
   {
-    path: paths.adminTransactions,
+    path: ENUM_PATHS.ADMIN_TRANSACTIONS,
     component: AdminTransactionsPage,
-    roles: [roles.moderator],
-    auth: authTypes.private,
-    layout: layoutTypes.admin,
+    roles: [ENUM_ROLES.MODERATOR],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
+    layout: ENUM_LAYOUT_TYPES.ADMIN,
     adminSidebar: true,
   },
   {
-    path: paths.adminReviews,
+    path: ENUM_PATHS.ADMIN_REVIEWS,
     component: AdminReviewsPage,
-    roles: [roles.moderator],
-    auth: authTypes.private,
-    layout: layoutTypes.admin,
+    roles: [ENUM_ROLES.MODERATOR],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
+    layout: ENUM_LAYOUT_TYPES.ADMIN,
     adminSidebar: true,
   },
   {
-    path: paths.adminComplaintInfo,
+    path: ENUM_PATHS.ADMIN_COMPLAINT_INFO,
     component: AdminComplaintInfoPage,
-    roles: [roles.moderator],
-    auth: authTypes.private,
-    layout: layoutTypes.admin,
+    roles: [ENUM_ROLES.MODERATOR],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
+    layout: ENUM_LAYOUT_TYPES.ADMIN,
     adminSidebar: true,
   },
   {
-    path: paths.adminUserInfo,
+    path: ENUM_PATHS.ADMIN_USER_INFO,
     component: AdminUserInfoPage,
-    roles: [roles.moderator],
-    auth: authTypes.private,
-    layout: layoutTypes.admin,
+    roles: [ENUM_ROLES.MODERATOR],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
+    layout: ENUM_LAYOUT_TYPES.ADMIN,
     adminSidebar: true,
   },
 ];

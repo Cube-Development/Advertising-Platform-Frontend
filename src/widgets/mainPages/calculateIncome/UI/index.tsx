@@ -3,7 +3,7 @@ import { AddChannel } from "@features/channel";
 import { WorkWithUs } from "@features/mainPages";
 import { CalculatorIcon } from "@shared/assets";
 import { PAGE_ANIMATION } from "@shared/config/animation";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import { SliderSubs, ThemeChanger } from "@shared/ui";
 import { IncomeCalculator } from "@shared/ui/incomeCalculator";
 import { buildPathWithQuery, queryParamKeys } from "@shared/utils";
@@ -84,7 +84,7 @@ export const CalculateIncome: FC<CalculateIncomeProps> = ({ page }) => {
             <SliderSubs onUserCountChange={setUserCount} />
             <AddChannel
               // path={`${paths.addChannel}?add_channel=${addChannelQueries.main}`}
-              path={buildPathWithQuery(paths.addChannel, {
+              path={buildPathWithQuery(ENUM_PATHS.ADD_CHANNEL, {
                 [queryParamKeys.addChannel]: addChannelQueries.main,
               })}
               props={{ className: styles.button }}

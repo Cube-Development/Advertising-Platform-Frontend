@@ -4,12 +4,12 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { Link } from "react-router-dom";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 
 export const SeeOffers: FC = () => {
   const { t } = useTranslation();
   return (
-    <Link to={paths.offers} className="h-full">
+    <Link to={ENUM_PATHS.OFFERS} className="h-full">
       <MyButton
         buttons_type="button__blue"
         className={`${styles.button} truncate h-full`}

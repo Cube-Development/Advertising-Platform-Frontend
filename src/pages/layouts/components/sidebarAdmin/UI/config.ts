@@ -7,42 +7,42 @@ import {
   TransactionIcon,
   UserIcon,
 } from "@shared/assets";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 
 export const adminMenu: IMenuItem[] = [
   {
     item: {
-      path: paths.adminHome,
+      path: ENUM_PATHS.ADMIN_HOME,
       img: HomeIcon,
     },
   },
   {
     item: {
-      path: paths.adminChannels,
+      path: ENUM_PATHS.ADMIN_CHANNELS,
       img: ChannelIcon,
     },
   },
   {
     item: {
-      path: paths.adminUsers,
+      path: ENUM_PATHS.ADMIN_USERS,
       img: UserIcon,
     },
   },
   {
     item: {
-      path: paths.adminTransactions,
+      path: ENUM_PATHS.ADMIN_TRANSACTIONS,
       img: TransactionIcon,
     },
   },
   {
     item: {
-      path: paths.adminReviews,
+      path: ENUM_PATHS.ADMIN_REVIEWS,
       img: AdminReviewIcon,
     },
   },
   {
     item: {
-      path: paths.adminComplaints,
+      path: ENUM_PATHS.ADMIN_COMPLAINTS,
       img: AdminComplaintIcon,
     },
   },

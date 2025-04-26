@@ -21,7 +21,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { Link } from "react-router-dom";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 
 interface BuySidebarProps {
   isOpen: boolean;
@@ -401,7 +401,7 @@ export const BuySidebar: FC<BuySidebarProps> = ({
                               {t("symbol")}
                             </span>
                           </div>
-                          <Link to={paths.walletTopUp}>
+                          <Link to={ENUM_PATHS.WALLET_TOP_UP}>
                             <button>
                               <p>{t("turnkey.chain.no_balance.button")}</p>
                             </button>

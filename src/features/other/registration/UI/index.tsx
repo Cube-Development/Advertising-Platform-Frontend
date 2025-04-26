@@ -5,7 +5,7 @@ import { Link as ScrollLink } from "react-scroll";
 import styles from "./styles.module.scss";
 import { useAppSelector } from "@shared/hooks";
 import { Link } from "react-router-dom";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 
 export const Registration: FC = () => {
   const { t } = useTranslation();
@@ -29,7 +29,7 @@ export const Registration: FC = () => {
           {registrationButton}
         </ScrollLink>
       ) : (
-        <Link to={paths.registration}>{registrationButton}</Link>
+        <Link to={ENUM_PATHS.REGISTRATION}>{registrationButton}</Link>
       )}
     </>
   );

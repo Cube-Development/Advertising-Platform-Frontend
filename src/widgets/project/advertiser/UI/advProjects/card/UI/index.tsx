@@ -9,7 +9,7 @@ import {
   useGetAdvManagerSubprojectsQuery,
   useGetAdvSubprojectsQuery,
 } from "@entities/project";
-import { roles, useFindLanguage } from "@entities/user";
+import { ENUM_ROLES, useFindLanguage } from "@entities/user";
 import {
   AcceptPost,
   ChangeChannel,
@@ -94,7 +94,7 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
       {typeFilter === projectTypesFilter.managerProject && (
         // statusFilter !== advManagerProjectStatusFilter.completed &&
         <div className={`${styles.chat__btn} display__hide__min__md`}>
-          <Chat projectId={card?.id} toRole={roles.manager} />
+          <Chat projectId={card?.id} toRole={ENUM_ROLES.MANAGER} />
         </div>
       )}
       <div className={styles.card__info}>
@@ -236,7 +236,7 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
         {typeFilter === projectTypesFilter.managerProject && (
           // statusFilter !== advManagerProjectStatusFilter.completed &&
           <div className={`${styles.chat__btn} display__hide__max__md`}>
-            <Chat projectId={card?.id} toRole={roles.manager} />
+            <Chat projectId={card?.id} toRole={ENUM_ROLES.MANAGER} />
           </div>
         )}
       </div>

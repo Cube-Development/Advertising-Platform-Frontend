@@ -4,7 +4,7 @@ import { platformToIcon } from "@entities/project";
 import { useFindLanguage } from "@entities/user";
 import { BoyIcon, CancelIcon2, GirlIcon } from "@shared/assets";
 import { Languages } from "@shared/config";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -141,7 +141,7 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
                 <AlertDialogCancel>
                   <Link
                     // to={`${paths.addChannel}?channel_id=${channel_id}`}
-                    to={buildPathWithQuery(paths.addChannel, {
+                    to={buildPathWithQuery(ENUM_PATHS.ADD_CHANNEL, {
                       [queryParamKeys.channelId]: channel_id,
                     })}
                   >

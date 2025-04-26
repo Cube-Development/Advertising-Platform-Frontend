@@ -4,7 +4,7 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { Link } from "react-router-dom";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 
 interface CreateChannelProps {
   isModalOpen: boolean;
@@ -34,7 +34,7 @@ export const CreateChannel: FC<CreateChannelProps> = ({
                 {t("add_platform.create.answer.text2")}
               </p>
             </div>
-            <Link to={paths.myChannels}>
+            <Link to={ENUM_PATHS.MY_CHANNELS}>
               <MyButton
                 className={styles.accept__btn}
                 buttons_type="button__white"

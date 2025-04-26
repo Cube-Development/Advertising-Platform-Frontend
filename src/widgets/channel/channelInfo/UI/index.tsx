@@ -21,7 +21,7 @@ import {
   useRemoveFromManagerCartMutation,
   useRemoveFromPublicCartMutation,
 } from "@entities/project";
-import { GenerateGuestId, roles, useFindLanguage } from "@entities/user";
+import { GenerateGuestId, ENUM_ROLES, useFindLanguage } from "@entities/user";
 import {
   BREAKPOINT,
   cookiesTypes,
@@ -71,9 +71,9 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
   };
 
   const channelInfoParams =
-    userId && role !== roles.manager
+    userId && role !== ENUM_ROLES.MANAGER
       ? { ...baseParams, user_id: userId }
-      : projectId && role === roles.manager
+      : projectId && role === ENUM_ROLES.MANAGER
         ? { ...baseParams, project_id: projectId }
         : { ...baseParams, guest_id: guestId };
 
@@ -83,7 +83,7 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
     useGetRecommedChannelsQuery(
       { ...formFields },
       {
-        skip: role === roles.blogger,
+        skip: role === ENUM_ROLES.BLOGGER,
       },
     );
 
@@ -328,7 +328,7 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
               });
               console.error("Ошибка при удалении с корзины", error);
             });
-        } else if (isAuth && role === roles.advertiser) {
+        } else if (isAuth && role === ENUM_ROLES.ADVERTISER) {
           removeFromCommonCart(removeReq)
             .unwrap()
             .then(() => {
@@ -342,7 +342,7 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
               });
               console.error("Ошибка при удалении с корзины", error);
             });
-        } else if (isAuth && role === roles.manager && projectId) {
+        } else if (isAuth && role === ENUM_ROLES.MANAGER && projectId) {
           removeFromManagerCart({ ...removeReq, project_id: projectId })
             .unwrap()
             .then(() => {
@@ -376,7 +376,7 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
               });
               console.error("Ошибка при добавлении в корзину", error);
             });
-        } else if (isAuth && role === roles.advertiser) {
+        } else if (isAuth && role === ENUM_ROLES.ADVERTISER) {
           addToCommonCart(addReq)
             .unwrap()
             .then(() => {
@@ -390,7 +390,7 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
               });
               console.error("Ошибка при добавлении в корзину", error);
             });
-        } else if (isAuth && role === roles.manager && projectId) {
+        } else if (isAuth && role === ENUM_ROLES.MANAGER && projectId) {
           addToManagerCart({ ...addReq, project_id: projectId })
             .unwrap()
             .then(() => {
@@ -468,7 +468,7 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
                     <SkeletonChannelParameters />
                   </>
                 )}
-                {screen <= BREAKPOINT.LG && role !== roles.blogger && (
+                {screen <= BREAKPOINT.LG && role !== ENUM_ROLES.BLOGGER && (
                   <>
                     {!isLoading ? (
                       <>
@@ -508,7 +508,7 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
               <Reviews isLoadingReviews={isLoading} card={card!} />
             </motion.div>
 
-            {screen > BREAKPOINT.LG && role !== roles.blogger && (
+            {screen > BREAKPOINT.LG && role !== ENUM_ROLES.BLOGGER && (
               <>
                 {!isLoading ? (
                   <>
@@ -533,7 +533,7 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
           </div>
         </div>
       </div>
-      {role !== roles.blogger && (
+      {role !== ENUM_ROLES.BLOGGER && (
         <RecommendationList
           cards={recomendCards?.channels || []}
           isLoading={isRecommendCardsLoading}

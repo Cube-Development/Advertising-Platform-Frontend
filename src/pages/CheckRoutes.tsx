@@ -1,7 +1,7 @@
-import { managementRoles, roles, userRoles } from "@entities/user";
+import { MANAGEMENT_ROLES, ENUM_ROLES, USER_ROLES } from "@entities/user";
 import { cookiesTypes } from "@shared/config";
 import { useAppSelector } from "@shared/hooks";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import Cookies from "js-cookie";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 
@@ -13,14 +13,14 @@ export enum routerType {
 
 export const CheckProjectId = () => {
   const projectId = Cookies.get(cookiesTypes.projectId);
-  return projectId ? <Outlet /> : <Navigate to={paths.cart} replace />;
+  return projectId ? <Outlet /> : <Navigate to={ENUM_PATHS.CART} replace />;
 };
 
 export const CheckRoutes = ({
   checkRole,
   type,
 }: {
-  checkRole?: roles;
+  checkRole?: ENUM_ROLES;
   type: routerType;
 }) => {
   const { isAuth, role } = useAppSelector((state) => state.user);
@@ -29,12 +29,13 @@ export const CheckRoutes = ({
   const from = params.get("from");
 
   // Проверяем, является ли `from` допустимым путем из `paths`
-  const isValidPath = from && Object.values(paths).includes(from as paths);
+  const isValidPath =
+    from && Object.values(ENUM_PATHS).includes(from as ENUM_PATHS);
   const redirectPath = isValidPath
-    ? (from as paths)
-    : role === roles.advertiser
-      ? paths.main
-      : paths.mainBlogger;
+    ? (from as ENUM_PATHS)
+    : role === ENUM_ROLES.ADVERTISER
+      ? ENUM_PATHS.MAIN
+      : ENUM_PATHS.MAIN_BLOGGER;
 
   if (type === routerType.onlyPublic) {
     if (!isAuth) {
@@ -46,7 +47,7 @@ export const CheckRoutes = ({
     if (
       !isAuth ||
       (isAuth && role === checkRole) ||
-      (isAuth && managementRoles.includes(role))
+      (isAuth && MANAGEMENT_ROLES.includes(role))
     ) {
       return <Outlet />;
     } else {
@@ -54,19 +55,19 @@ export const CheckRoutes = ({
     }
   } else {
     if (!isAuth) {
-      return <Navigate to={paths.main} replace />;
+      return <Navigate to={ENUM_PATHS.MAIN} replace />;
     } else if (isAuth && !checkRole) {
       return <Outlet />;
-    } else if (isAuth && userRoles.includes(role)) {
+    } else if (isAuth && USER_ROLES.includes(role)) {
       return role === checkRole ? (
         <Outlet />
       ) : (
         <Navigate to={redirectPath} replace />
       );
-    } else if (isAuth && managementRoles.includes(role)) {
+    } else if (isAuth && MANAGEMENT_ROLES.includes(role)) {
       return <Outlet />;
     } else {
-      return <Navigate to={paths.main} replace />;
+      return <Navigate to={ENUM_PATHS.MAIN} replace />;
     }
   }
 };
@@ -74,9 +75,9 @@ export const CheckRoutes = ({
 export const AminCheckRoute = () => {
   const { isAuth, role } = useAppSelector((state) => state.user);
   // console.log(99999999999999)
-  if (role === roles.moderator && isAuth) {
+  if (role === ENUM_ROLES.MODERATOR && isAuth) {
     return <Outlet />;
   } else {
-    return <Navigate to={paths.adminHome} replace />;
+    return <Navigate to={ENUM_PATHS.ADMIN_HOME} replace />;
   }
 };

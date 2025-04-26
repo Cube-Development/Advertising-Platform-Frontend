@@ -6,7 +6,7 @@ import {
 } from "@entities/channel";
 import { ArrowLongHorizontalIcon } from "@shared/assets";
 import { PAGE_ANIMATION } from "@shared/config";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import { MyButton, ToastAction, useToast } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC } from "react";
@@ -82,7 +82,7 @@ export const ChannelAccept: FC<ChannelAcceptProps> = ({
             });
           });
     }
-    navigate(paths.myChannels);
+    navigate(ENUM_PATHS.MY_CHANNELS);
   };
 
   return (

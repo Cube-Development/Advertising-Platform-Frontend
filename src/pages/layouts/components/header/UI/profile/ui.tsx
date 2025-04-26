@@ -1,7 +1,11 @@
-import { roles, useGetUserQueryQuery, useLogoutMutation } from "@entities/user";
+import {
+  ENUM_ROLES,
+  useGetUserQueryQuery,
+  useLogoutMutation,
+} from "@entities/user";
 import { ProfileIcon } from "@shared/assets";
 import { useAppSelector } from "@shared/hooks";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import {
   Dialog,
   DialogClose,
@@ -42,7 +46,11 @@ export const Profile: FC<ProfileProps> = ({ toggleLogout }) => {
     try {
       logout();
       toggleLogout();
-      navigate(role === roles.advertiser ? paths.main : paths.mainBlogger);
+      navigate(
+        role === ENUM_ROLES.ADVERTISER
+          ? ENUM_PATHS.MAIN
+          : ENUM_PATHS.MAIN_BLOGGER,
+      );
     } catch (error) {
       console.error(error);
     }
@@ -67,10 +75,10 @@ export const Profile: FC<ProfileProps> = ({ toggleLogout }) => {
             <li className="font-bold text-[10px] truncate max-w-[70vw]">
               {user?.email}
             </li>
-            <Link to={paths.profile}>
+            <Link to={ENUM_PATHS.PROFILE}>
               <li onClick={handleButtonClick}>{t("my_profile.data")}</li>
             </Link>
-            <Link to={paths.profile}>
+            <Link to={ENUM_PATHS.PROFILE}>
               <li onClick={handleButtonClick}>{t("my_profile.settings")}</li>
             </Link>
             <Dialog>

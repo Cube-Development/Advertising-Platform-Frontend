@@ -1,7 +1,7 @@
 import { IBloggerOfferCard, offerStatusFilter } from "@entities/offer";
 import { AddChannel, ZeroChannel } from "@features/channel";
 import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
-import { pageFilter, paths } from "@shared/routing";
+import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";
 import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC } from "react";
@@ -28,8 +28,8 @@ export const MyOffers: FC<MyOffersProps> = ({
       {!isLoading && offers?.length === 0 ? (
         <ZeroChannel
           AddChannelBtn={AddChannel}
-          page={pageFilter.offer}
-          path={paths.offers}
+          page={ENUM_PAGE_FILTER.OFFER}
+          path={ENUM_PATHS.OFFERS}
           statusFilter={statusFilter}
         />
       ) : (

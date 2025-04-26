@@ -19,7 +19,7 @@ import {
   StarIcon4,
   SubsIcon,
 } from "@shared/assets";
-import { pageFilter, paths } from "@shared/routing";
+import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";
 import {
   Accordion,
   AccordionContent,
@@ -31,7 +31,7 @@ import { ChannelLanguages } from "@shared/config";
 
 interface RecommendCardProps extends IChangeCards, ICatalogCard {
   card: ICatalogChannel;
-  page?: pageFilter.cart;
+  page?: ENUM_PAGE_FILTER.CART;
 }
 
 export const RecommendCard: FC<RecommendCardProps> = ({
@@ -91,7 +91,7 @@ export const RecommendCard: FC<RecommendCardProps> = ({
           <div className={styles.column__info}>
             <div className={styles.info}>
               <Link
-                to={`${paths.channel.replace(":id", card?.id)}`}
+                to={`${ENUM_PATHS.CHANNEL.replace(":id", card?.id)}`}
                 className={`${styles.title} truncate`}
               >
                 {card?.name}

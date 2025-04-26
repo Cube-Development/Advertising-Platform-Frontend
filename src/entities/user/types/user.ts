@@ -1,5 +1,5 @@
 import { languagesNum } from "@shared/config";
-import { roles } from "../config";
+import { ENUM_ROLES } from "../config";
 
 export interface IUser {
   id: string;
@@ -7,7 +7,7 @@ export interface IUser {
   is_active: boolean;
   is_superuser: boolean;
   is_verified: boolean;
-  role: roles;
+  role: ENUM_ROLES;
   language: languagesNum;
   location: string;
   name: string;

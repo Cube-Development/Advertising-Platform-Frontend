@@ -1,4 +1,4 @@
-import { roles } from "@entities/user";
+import { ENUM_ROLES } from "@entities/user";
 import { ADMIN_COMPLAINT_PRIORITY, ADMIN_COMPLAINT_STATUS } from "../config";
 
 export interface IAdminComplaintInfoData {
@@ -14,7 +14,7 @@ export interface IAdminComplaintInfoData {
   channel: IChannel;
   owner: IUser;
   post: IPost;
-  role?: roles;
+  role?: ENUM_ROLES;
   reason: string;
 }
 
