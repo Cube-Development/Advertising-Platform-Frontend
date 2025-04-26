@@ -45,23 +45,27 @@ export const MyChannelsPage: FC = () => {
   useClearCookiesOnPage();
   const language = useFindLanguage();
   const navigate = useNavigate();
-  const { channel_status } = QueryParams();
+  const { channel_status, channel_id } = QueryParams();
+
+  const startStatus =
+    channel_status &&
+    !!Object.values(channelStatusFilter).includes(
+      channel_status as channelStatusFilter,
+    )
+      ? channel_status
+      : channelStatusFilter.active;
+
+  const startChannelId = isValidUUID(channel_id || "") ? channel_id : undefined;
 
   const { setValue, watch } = useForm<IForm>({
     defaultValues: {
+      page: 1,
+      elements_on_page: INTERSECTION_ELEMENTS.BLOGGER_CHANNELS,
+      status: startStatus,
+      date_sort: dateSortingTypes.decrease,
       platform: platformTypes[0].id,
       language: language?.id || Languages[0].id,
-      status:
-        channel_status &&
-        !!Object.values(channelStatusFilter).includes(
-          channel_status as channelStatusFilter,
-        )
-          ? channel_status
-          : channelStatusFilter.active,
-      page: 1,
-      search_string: "",
-      date_sort: dateSortingTypes.decrease,
-      elements_on_page: INTERSECTION_ELEMENTS.BLOGGER_CHANNELS,
+      ...(startChannelId ? { search_string: startChannelId } : {}),
     },
   });
   const formState = watch();
@@ -100,6 +104,7 @@ export const MyChannelsPage: FC = () => {
   useEffect(() => {
     const newPath = buildPathWithQuery(paths.myChannels, {
       [queryParamKeys.channelStatus]: formState.status,
+      ...(startChannelId ? { [queryParamKeys.channelId]: startChannelId } : {}),
     });
     navigate(newPath, { replace: true });
   }, [formState.status]);
@@ -115,7 +120,11 @@ export const MyChannelsPage: FC = () => {
             changeStatus={(status) => setValue("status", status)}
             statusFilter={formState.status}
           />
-          <SearchFilter type={channelData.search} onChange={setValue} />
+          <SearchFilter
+            type={channelData.search}
+            onChange={setValue}
+            value={formState.search_string}
+          />
           {formState.status !== channelStatusFilter.moderation ? (
             <ActiveChannels
               cards={data?.channels || []}

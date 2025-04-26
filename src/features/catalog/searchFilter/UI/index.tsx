@@ -10,11 +10,16 @@ import { useTranslation } from "react-i18next";
 interface SearchFilterProps {
   type: channelData;
   onChange: UseFormSetValue<getCatalogReq | any>;
+  value?: string;
 }
 
-export const SearchFilter: FC<SearchFilterProps> = ({ type, onChange }) => {
+export const SearchFilter: FC<SearchFilterProps> = ({
+  type,
+  onChange,
+  value,
+}) => {
   const { t } = useTranslation();
-  const [searchText, setSearchText] = useState<string | null>("");
+  const [searchText, setSearchText] = useState<string>(value || "");
 
   const debouncedPosition = useDebounce(searchText, DEBOUNCE.search);
 
@@ -34,7 +39,7 @@ export const SearchFilter: FC<SearchFilterProps> = ({ type, onChange }) => {
     <div className={styles.search}>
       <SearchIcon />
       <input
-        // value={filter.query}
+        value={searchText}
         onChange={(e) => setSearchText(e.target.value)}
         placeholder={t("catalog.search.search")}
       />

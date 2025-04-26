@@ -24,22 +24,26 @@ export const ManagerOrders: FC = () => {
   const language = useFindLanguage();
   const navigate = useNavigate();
   const page = pageFilter.order;
-  const { project_status } = QueryParams();
+  const { project_status, project_id } = QueryParams();
+
+  const startStatus =
+    project_status &&
+    !!Object.values(managerProjectStatusFilter).includes(
+      project_status as managerProjectStatusFilter,
+    )
+      ? project_status
+      : managerProjectStatusFilter.active;
+
+  const startProjectId = isValidUUID(project_id || "") ? project_id : undefined;
 
   const { setValue, watch } = useForm<getProjectsCardReq>({
     defaultValues: {
       page: 1,
       language: language?.id || Languages[0].id,
-      // status: managerProjectStatusFilter.active,
-      status:
-        project_status &&
-        !!Object.values(managerProjectStatusFilter).includes(
-          project_status as managerProjectStatusFilter
-        )
-          ? project_status
-          : managerProjectStatusFilter.active,
+      status: startStatus,
       elements_on_page: INTERSECTION_ELEMENTS.MANAGER_ORDERS,
       date_sort: dateSortingTypes.decrease,
+      ...(startProjectId ? { search_string: startProjectId } : {}),
     },
   });
 
@@ -83,6 +87,7 @@ export const ManagerOrders: FC = () => {
   useEffect(() => {
     const newPath = buildPathWithQuery(paths.orders, {
       [queryParamKeys.projectStatus]: formState.status,
+      ...(startProjectId ? { [queryParamKeys.projectId]: startProjectId } : {}),
     });
 
     navigate(newPath, { replace: true });
@@ -103,7 +108,11 @@ export const ManagerOrders: FC = () => {
           changeStatus={(status) => handleChangeStatus(status)}
           statusFilter={formState.status}
         />
-        <SearchFilter type={channelData.search} onChange={setValue} />
+        <SearchFilter
+          type={channelData.search}
+          onChange={setValue}
+          value={formState.search_string}
+        />
         {formState.status === managerProjectStatusFilter.new ? (
           <ManagerNewProjectsList
             projects={data?.projects}

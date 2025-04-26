@@ -30,22 +30,26 @@ export const OffersPage: FC = () => {
   const page = pageFilter.offer;
   const language = useFindLanguage();
   const navigate = useNavigate();
-  const { offer_status } = QueryParams();
+  const { offer_status, order_id } = QueryParams();
+
+  const startStatus =
+    offer_status &&
+    !!Object.values(offerStatusFilter).includes(
+      offer_status as offerStatusFilter,
+    )
+      ? offer_status
+      : offerStatusFilter.active;
+
+  const startOrderId = isValidUUID(order_id || "") ? order_id : undefined;
 
   const { setValue, watch } = useForm<getOrdersByStatusReq>({
     defaultValues: {
-      status:
-        offer_status &&
-        !!Object.values(offerStatusFilter).includes(
-          offer_status as offerStatusFilter,
-        )
-          ? offer_status
-          : offerStatusFilter.active,
+      status: startStatus,
       page: 1,
       language: language?.id || Languages[0].id,
       elements_on_page: INTERSECTION_ELEMENTS.BLOGGER_OFFERS,
       date_sort: dateSortingTypes.decrease,
-      search_string: "",
+      ...(startOrderId ? { search_string: startOrderId } : {}),
     },
   });
   const formState = watch();
@@ -88,6 +92,7 @@ export const OffersPage: FC = () => {
   useEffect(() => {
     const newPath = buildPathWithQuery(paths.offers, {
       [queryParamKeys.offerStatus]: formState.status,
+      ...(startOrderId ? { [queryParamKeys.orderId]: startOrderId } : {}),
     });
     navigate(newPath, { replace: true });
   }, [formState.status]);
@@ -103,7 +108,11 @@ export const OffersPage: FC = () => {
             changeStatus={changeStatus}
             statusFilter={formState.status}
           />
-          <SearchFilter type={channelData.search} onChange={setValue} />
+          <SearchFilter
+            type={channelData.search}
+            onChange={setValue}
+            value={formState.search_string}
+          />
           <MyOffers
             statusFilter={formState.status as offerStatusFilter}
             offers={data?.orders || []}

@@ -34,12 +34,12 @@ export const AdvOrders: FC = () => {
   const page = pageFilter.order;
   const language = useFindLanguage();
   const navigate = useNavigate();
-  const { project_type, project_status } = QueryParams();
+  const { project_type, project_status, project_id } = QueryParams();
 
   const startType =
     project_type &&
     !!Object.values(projectTypesFilter).includes(
-      project_type as projectTypesFilter
+      project_type as projectTypesFilter,
     )
       ? project_type
       : projectTypesFilter.myProject;
@@ -48,24 +48,27 @@ export const AdvOrders: FC = () => {
     project_status &&
     (startType === projectTypesFilter.myProject &&
     !!Object.values(myProjectStatusFilter).includes(
-      project_status as myProjectStatusFilter
+      project_status as myProjectStatusFilter,
     )
       ? project_status
       : startType === projectTypesFilter.managerProject &&
         !!Object.values(advManagerProjectStatusFilter).includes(
-          project_status as advManagerProjectStatusFilter
+          project_status as advManagerProjectStatusFilter,
         ))
       ? project_status
       : advertiserProjectTypes.find((item) => item.type === startType)?.status!;
 
+  const startProjectId = isValidUUID(project_id || "") ? project_id : undefined;
+
   const { setValue, watch } = useForm<IForm>({
     defaultValues: {
+      page: 1,
+      elements_on_page: INTERSECTION_ELEMENTS.ADV_ORDERS,
       type: startType,
       status: startStatus,
-      page: 1,
       date_sort: dateSortingTypes.decrease,
-      elements_on_page: INTERSECTION_ELEMENTS.ADV_ORDERS,
       language: language?.id || Languages[0].id,
+      ...(startProjectId ? { search_string: startProjectId } : {}),
     },
   });
 
@@ -76,7 +79,7 @@ export const AdvOrders: FC = () => {
   };
 
   const handleChangeStatus = (
-    status: advManagerProjectStatusFilter | myProjectStatusFilter | string
+    status: advManagerProjectStatusFilter | myProjectStatusFilter | string,
   ) => {
     setValue("status", status);
     setValue("page", 1);
@@ -87,7 +90,7 @@ export const AdvOrders: FC = () => {
     setValue(
       "status",
       advertiserProjectTypes.find((item) => item.type === type)?.status ||
-        advertiserProjectTypes[0].status
+        advertiserProjectTypes[0].status,
     );
     setValue("page", 1);
   };
@@ -118,6 +121,7 @@ export const AdvOrders: FC = () => {
     const newPath = buildPathWithQuery(paths.orders, {
       [queryParamKeys.projectType]: formState.type,
       [queryParamKeys.projectStatus]: formState.status,
+      ...(startProjectId ? { [queryParamKeys.projectId]: startProjectId } : {}),
     });
 
     navigate(newPath, { replace: true });
@@ -182,7 +186,11 @@ export const AdvOrders: FC = () => {
           changeType={(type) => handleChangeType(type)}
           statusFilter={formState.status}
         />
-        <SearchFilter type={channelData.search} onChange={setValue} />
+        <SearchFilter
+          type={channelData.search}
+          onChange={setValue}
+          value={formState.search_string}
+        />
         {formState.type === projectTypesFilter.managerProject &&
         formState.status === advManagerProjectStatusFilter.develop ? (
           <DevProjectsList
