@@ -97,6 +97,10 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
                   custom={custom++}
                   variants={PAGE_ANIMATION.animationUp}
                   className={styles.steps__column__items}
+                  whileHover={{
+                    scale: 1.035,
+                    transition: { duration: 0.3 },
+                  }}
                 >
                   <p>1</p>
                   <DecorativeElement />
@@ -118,6 +122,10 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
                   custom={custom++}
                   variants={PAGE_ANIMATION.animationDown}
                   className={`${styles.steps__column__items} ${styles.two}`}
+                  whileHover={{
+                    scale: 1.035,
+                    transition: { duration: 0.3 },
+                  }}
                 >
                   <p>2</p>
                   <DecorativeElement />
@@ -131,6 +139,10 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
                   custom={custom++}
                   variants={PAGE_ANIMATION.animationUp}
                   className={styles.steps__column__items}
+                  whileHover={{
+                    scale: 1.035,
+                    transition: { duration: 0.3 },
+                  }}
                 >
                   <p>3</p>
                   <DecorativeElement />
@@ -144,6 +156,10 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
                   custom={custom++}
                   variants={PAGE_ANIMATION.animationDown}
                   className={`${styles.steps__column__items} ${styles.four}`}
+                  whileHover={{
+                    scale: 1.035,
+                    transition: { duration: 0.3 },
+                  }}
                 >
                   <p>4</p>
                   <DecorativeElement />
@@ -157,6 +173,10 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
                   custom={custom++}
                   variants={PAGE_ANIMATION.animationUp}
                   className={styles.steps__column__items}
+                  whileHover={{
+                    scale: 1.035,
+                    transition: { duration: 0.3 },
+                  }}
                 >
                   <p>5</p>
                   <DecorativeElement />
@@ -172,6 +192,10 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
                   custom={custom++}
                   variants={PAGE_ANIMATION.animationLeft}
                   className={styles.steps__md__row__items}
+                  whileHover={{
+                    scale: 1.035,
+                    transition: { duration: 0.3 },
+                  }}
                 >
                   <div className={styles.registration}>
                     <span>{StepsList[0].stage}</span>
@@ -192,6 +216,10 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
                   custom={custom++}
                   variants={PAGE_ANIMATION.animationRight}
                   className={styles.steps__md__row__items}
+                  whileHover={{
+                    scale: 1.035,
+                    transition: { duration: 0.3 },
+                  }}
                 >
                   <p>2</p>
                   <DecorativeElementRow isRight={false} elements={21} />
@@ -203,6 +231,10 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
                   custom={custom++}
                   variants={PAGE_ANIMATION.animationLeft}
                   className={styles.steps__md__row__items}
+                  whileHover={{
+                    scale: 1.035,
+                    transition: { duration: 0.3 },
+                  }}
                 >
                   <span>{StepsList[2].stage}</span>
                   <DecorativeElementRow isRight={true} elements={21} />
@@ -215,6 +247,10 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
                   custom={custom++}
                   variants={PAGE_ANIMATION.animationRight}
                   className={styles.steps__md__row__items}
+                  whileHover={{
+                    scale: 1.035,
+                    transition: { duration: 0.3 },
+                  }}
                 >
                   <p>4</p>
                   <DecorativeElementRow isRight={false} elements={13} />
@@ -226,6 +262,10 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
                   custom={custom++}
                   variants={PAGE_ANIMATION.animationLeft}
                   className={styles.steps__md__row__items}
+                  whileHover={{
+                    scale: 1.035,
+                    transition: { duration: 0.3 },
+                  }}
                 >
                   <span>{StepsList[4].stage}</span>
                   <DecorativeElementRow isRight={true} elements={8} />
@@ -239,6 +279,10 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
                 custom={custom++}
                 variants={PAGE_ANIMATION.animationRight}
                 className={`${styles.steps__xs__row} ${styles.one}`}
+                whileHover={{
+                  scale: 1.035,
+                  transition: { duration: 0.3 },
+                }}
               >
                 <div className={`${styles.number} ${styles.left}`}>
                   <p>1</p>
@@ -260,6 +304,10 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
                 custom={custom++}
                 variants={PAGE_ANIMATION.animationLeft}
                 className={`${styles.steps__xs__row} ${styles.two}`}
+                whileHover={{
+                  scale: 1.035,
+                  transition: { duration: 0.3 },
+                }}
               >
                 <div className={styles.text}>
                   <span>{StepsList[1].stage}</span>
@@ -273,6 +321,10 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
                 custom={custom++}
                 variants={PAGE_ANIMATION.animationRight}
                 className={`${styles.steps__xs__row} ${styles.three}`}
+                whileHover={{
+                  scale: 1.035,
+                  transition: { duration: 0.3 },
+                }}
               >
                 <div className={`${styles.number} ${styles.left}`}>
                   <p>3</p>
@@ -286,6 +338,10 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
                 custom={custom++}
                 variants={PAGE_ANIMATION.animationLeft}
                 className={`${styles.steps__xs__row} ${styles.four}`}
+                whileHover={{
+                  scale: 1.035,
+                  transition: { duration: 0.3 },
+                }}
               >
                 <div className={styles.text}>
                   <span>{StepsList[3].stage}</span>
@@ -299,6 +355,10 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
                 custom={custom++}
                 variants={PAGE_ANIMATION.animationRight}
                 className={`${styles.steps__xs__row} ${styles.five}`}
+                whileHover={{
+                  scale: 1.035,
+                  transition: { duration: 0.3 },
+                }}
               >
                 <div className={`${styles.number} ${styles.left}`}>
                   <p>5</p>

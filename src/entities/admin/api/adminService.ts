@@ -133,7 +133,6 @@ export const adminAPI = authApi.injectEndpoints({
             isLast: newItems?.complaints.length === newItems?.elements,
           };
         }
-
         const newComplaints = [
           ...currentCache?.complaints,
           ...newItems?.complaints,
@@ -172,6 +171,16 @@ export const adminAPI = authApi.injectEndpoints({
         method: `GET`,
         params: params,
       }),
+      transformResponse: (response: IAdminTransactions, meta, arg) => {
+        return {
+          ...response,
+          status: arg?.status,
+          isLast:
+            response?.elements ===
+            response?.transactions?.length +
+              (response?.page - 1) * INTERSECTION_ELEMENTS.ADMIN_TRANSACTIONS,
+        };
+      },
       merge: (currentCache, newItems, arg) => {
         if (arg.arg.page === 1) {
           return {
@@ -211,9 +220,10 @@ export const adminAPI = authApi.injectEndpoints({
         method: `GET`,
         params: params,
       }),
-      transformResponse: (response: IAdminChannels) => {
+      transformResponse: (response: IAdminChannels, meta, arg) => {
         return {
           ...response,
+          status: arg?.status,
           isLast:
             response?.elements ===
             response?.channels?.length +
@@ -221,29 +231,17 @@ export const adminAPI = authApi.injectEndpoints({
         };
       },
       merge: (currentCache, newItems, arg) => {
-        if (arg.arg.page === 1) {
-          return {
-            ...newItems,
-            isLast: newItems?.channels.length === newItems?.elements,
-          };
-        }
+        if (arg.arg.page === 1) return newItems;
 
-        const updatedChannelsMap = new Map(
-          currentCache?.channels.map((channel) => [
-            channel.channel.id,
-            channel,
-          ]),
+        const map = new Map(
+          currentCache?.channels.map((c) => [c.channel.id, c]),
         );
 
-        // Обновляем данные каналов, если их ID уже есть в кеше
-        newItems.channels.forEach((channel) => {
-          updatedChannelsMap.set(channel.channel.id, channel);
-        });
+        newItems.channels.forEach((c) => map.set(c.channel.id, c));
 
         return {
           ...newItems,
-          isLast: updatedChannelsMap.size === newItems.elements,
-          channels: Array.from(updatedChannelsMap.values()),
+          channels: Array.from(map.values()),
         };
       },
       serializeQueryArgs: ({ endpointName }) => {

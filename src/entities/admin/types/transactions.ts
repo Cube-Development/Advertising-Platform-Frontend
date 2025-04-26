@@ -5,6 +5,7 @@ export interface IAdminTransactions {
   elements: number;
   transactions: IAdminTransactionData[];
   isLast?: boolean;
+  status: ADMIN_TRANSACTION_STATUS;
 }
 
 export interface IAdminTransactionData {
