@@ -47,6 +47,7 @@ export interface getProjectsCardReq {
   elements_on_page?: number;
   date_sort?: dateSortingTypes;
   search_string?: string;
+  project_id?: string;
 }
 
 export interface getProjectSubcardReq {

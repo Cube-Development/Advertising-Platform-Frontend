@@ -5,7 +5,6 @@ import {
   advManagerProjectStatus,
   advManagerProjectStatusFilter,
   getProjectsCardReq,
-  IAdvManagerProjectsDevCard,
   myProjectStatusFilter,
   projectTypesFilter,
   useGetAdvManagerProjectsQuery,
@@ -25,6 +24,7 @@ import { AdvProjectsList } from "./advProjects";
 import { DevProjectsList } from "./devProjects";
 import styles from "./styles.module.scss";
 import { TemplateProjectsList } from "./templateProjects";
+import { validate as isValidUUID } from "uuid";
 
 interface IForm extends getProjectsCardReq {
   type: projectTypesFilter | string;
@@ -124,18 +124,32 @@ export const AdvOrders: FC = () => {
   }, [formState.type, formState.status]);
 
   const { type, search_string, ...params } = formState;
+
   const getParams: getProjectsCardReq = {
     ...params,
-    ...(search_string && search_string.length >= 3 ? { search_string } : {}),
+    ...(search_string && search_string.length >= 3
+      ? isValidUUID(search_string)
+        ? { project_id: search_string }
+        : { search_string }
+      : {}),
   };
 
   const { data: projectsSelf, isFetching: isFetchingSelf } =
     useGetAdvProjectsQuery(getParams, {
       skip: formState.type !== projectTypesFilter.myProject,
+      selectFromResult: ({ data, ...rest }) => ({
+        ...rest,
+        data: (data?.status === formState?.status && data) || undefined,
+      }),
     });
+
   const { data: projectsManager, isFetching: isFetchingManager } =
     useGetAdvManagerProjectsQuery(getParams, {
       skip: formState.type !== projectTypesFilter.managerProject,
+      selectFromResult: ({ data, ...rest }) => ({
+        ...rest,
+        data: (data?.status === formState?.status && data) || undefined,
+      }),
     });
 
   const { refetch: views } = useGetViewAdvertiserProjectQuery();
@@ -150,7 +164,12 @@ export const AdvOrders: FC = () => {
     setTimeout(() => {
       setValue("page", 1);
     }, 500);
-  }, [formState.type, formState.status, formState.search_string]);
+  }, [
+    formState.type,
+    formState.status,
+    formState.search_string,
+    formState.project_id,
+  ]);
 
   return (
     <div className="container">
@@ -172,11 +191,7 @@ export const AdvOrders: FC = () => {
         {formState.type === projectTypesFilter.managerProject &&
         formState.status === advManagerProjectStatusFilter.develop ? (
           <DevProjectsList
-            projects={
-              (projectsManager?.status === formState.status &&
-                (projectsManager?.projects as IAdvManagerProjectsDevCard[])) ||
-              []
-            }
+            projects={projectsManager?.projects || []}
             handleOnChangePage={handleOnChangePage}
             isLoading={isFetchingManager}
             isLast={projectsManager?.isLast || false}
@@ -198,11 +213,7 @@ export const AdvOrders: FC = () => {
                 | myProjectStatusFilter
             }
             typeFilter={formState.type as projectTypesFilter}
-            projects={
-              (projectsManager?.status === formState.status &&
-                projectsManager?.projects) ||
-              []
-            }
+            projects={projectsManager?.projects || []}
             handleOnChangePage={handleOnChangePage}
             isLoading={isFetchingManager}
             isLast={projectsManager?.isLast || false}
@@ -216,11 +227,7 @@ export const AdvOrders: FC = () => {
                   | myProjectStatusFilter
               }
               typeFilter={formState.type as projectTypesFilter}
-              projects={
-                (projectsSelf?.status === formState.status &&
-                  projectsSelf?.projects) ||
-                []
-              }
+              projects={projectsSelf?.projects || []}
               handleOnChangePage={handleOnChangePage}
               isLoading={isFetchingSelf}
               isLast={projectsSelf?.isLast || false}
