@@ -9,10 +9,10 @@ import { useAppSelector } from "@shared/hooks";
 import { ENUM_PATHS } from "@shared/routing";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import {
-  allRoutes,
+  ALL_APP_ROUTES_LIST,
   ENUM_AUTH_TYPES,
-  IRouting,
   ENUM_LAYOUT_TYPES,
+  IRouting,
 } from "./routes";
 
 // Компонент защиты маршрутов
@@ -28,10 +28,8 @@ const ProtectedRoute = ({ route }: { route: IRouting }) => {
     console.log("private");
     return <Navigate to={ENUM_PATHS.MAIN} replace />;
   }
-  console.log(route.roles, role);
 
   if (route.auth === ENUM_AUTH_TYPES.PUBLIC) {
-    console.log("public");
     if (role === ENUM_ROLES.BLOGGER && !route.roles?.includes(role)) {
       return <Navigate to={ENUM_PATHS.MAIN_BLOGGER} replace />;
     }
@@ -66,29 +64,29 @@ const ProtectedRoute = ({ route }: { route: IRouting }) => {
   return Component;
 };
 
-const rootRoutes = allRoutes
-  .filter((route) => route.layout === ENUM_LAYOUT_TYPES.ROOT)
-  .map((route) => ({
-    path: route.path,
-    element: <ProtectedRoute route={route} />,
-  }));
+const ROOT_ROUTES_LIST = ALL_APP_ROUTES_LIST.filter(
+  (route) => route.layout === ENUM_LAYOUT_TYPES.ROOT,
+).map((route) => ({
+  path: route.path,
+  element: <ProtectedRoute route={route} />,
+}));
 
-const adminRoutes = allRoutes
-  .filter((route) => route.layout === ENUM_LAYOUT_TYPES.ADMIN)
-  .map((route) => ({
-    path: route.path,
-    element: <ProtectedRoute route={route} />,
-  }));
+const ADMIN_ROUTES_LIST = ALL_APP_ROUTES_LIST.filter(
+  (route) => route.layout === ENUM_LAYOUT_TYPES.ADMIN,
+).map((route) => ({
+  path: route.path,
+  element: <ProtectedRoute route={route} />,
+}));
 
 export const router = createBrowserRouter([
   {
     path: ENUM_PATHS.MAIN,
     element: <RootLayout />,
-    children: rootRoutes,
+    children: ROOT_ROUTES_LIST,
   },
   {
     path: ENUM_PATHS.MAIN,
     element: <RootAdminLayout />,
-    children: adminRoutes,
+    children: ADMIN_ROUTES_LIST,
   },
 ]);

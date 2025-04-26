@@ -53,7 +53,7 @@ export interface IRouting {
   layout: ENUM_LAYOUT_TYPES;
 }
 
-export const allRoutes: IRouting[] = [
+export const ALL_APP_ROUTES_LIST: IRouting[] = [
   // only public
   {
     path: ENUM_PATHS.LOGIN,
