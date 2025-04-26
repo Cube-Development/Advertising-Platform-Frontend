@@ -34,7 +34,7 @@ export const ManagerOrders: FC = () => {
       status:
         project_status &&
         !!Object.values(managerProjectStatusFilter).includes(
-          project_status as managerProjectStatusFilter,
+          project_status as managerProjectStatusFilter
         )
           ? project_status
           : managerProjectStatusFilter.active,
@@ -92,7 +92,7 @@ export const ManagerOrders: FC = () => {
     setTimeout(() => {
       setValue("page", 1);
     }, 500);
-  }, [formState.status, formState.search_string, formState.project_id]);
+  }, [formState.status, formState.search_string]);
 
   return (
     <div className="container">

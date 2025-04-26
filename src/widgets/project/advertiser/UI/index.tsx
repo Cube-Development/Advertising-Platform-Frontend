@@ -39,7 +39,7 @@ export const AdvOrders: FC = () => {
   const startType =
     project_type &&
     !!Object.values(projectTypesFilter).includes(
-      project_type as projectTypesFilter,
+      project_type as projectTypesFilter
     )
       ? project_type
       : projectTypesFilter.myProject;
@@ -48,12 +48,12 @@ export const AdvOrders: FC = () => {
     project_status &&
     (startType === projectTypesFilter.myProject &&
     !!Object.values(myProjectStatusFilter).includes(
-      project_status as myProjectStatusFilter,
+      project_status as myProjectStatusFilter
     )
       ? project_status
       : startType === projectTypesFilter.managerProject &&
         !!Object.values(advManagerProjectStatusFilter).includes(
-          project_status as advManagerProjectStatusFilter,
+          project_status as advManagerProjectStatusFilter
         ))
       ? project_status
       : advertiserProjectTypes.find((item) => item.type === startType)?.status!;
@@ -76,7 +76,7 @@ export const AdvOrders: FC = () => {
   };
 
   const handleChangeStatus = (
-    status: advManagerProjectStatusFilter | myProjectStatusFilter | string,
+    status: advManagerProjectStatusFilter | myProjectStatusFilter | string
   ) => {
     setValue("status", status);
     setValue("page", 1);
@@ -87,7 +87,7 @@ export const AdvOrders: FC = () => {
     setValue(
       "status",
       advertiserProjectTypes.find((item) => item.type === type)?.status ||
-        advertiserProjectTypes[0].status,
+        advertiserProjectTypes[0].status
     );
     setValue("page", 1);
   };
@@ -164,12 +164,7 @@ export const AdvOrders: FC = () => {
     setTimeout(() => {
       setValue("page", 1);
     }, 500);
-  }, [
-    formState.type,
-    formState.status,
-    formState.search_string,
-    formState.project_id,
-  ]);
+  }, [formState.type, formState.status, formState.search_string]);
 
   return (
     <div className="container">

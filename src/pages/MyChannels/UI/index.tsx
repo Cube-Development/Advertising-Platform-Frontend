@@ -23,6 +23,7 @@ import React, { FC, Suspense, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.scss";
+import { validate as isValidUUID } from "uuid";
 
 // Ленивый импорт компонентов
 const ActiveChannels = React.lazy(() =>
@@ -68,10 +69,20 @@ export const MyChannelsPage: FC = () => {
 
   const getParams: getChannelsByStatusReq = {
     ...params,
-    ...(search_string && search_string.length >= 3 ? { search_string } : {}),
+    ...(search_string && search_string.length >= 3
+      ? isValidUUID(search_string)
+        ? { channel_id: search_string }
+        : { search_string }
+      : {}),
   };
 
-  const { data, isFetching } = useGetChannelsByStatusQuery(getParams);
+  const { data, isFetching } = useGetChannelsByStatusQuery(getParams, {
+    selectFromResult: ({ data, ...rest }) => ({
+      ...rest,
+      data: (data?.status === formState?.status && data) || undefined,
+    }),
+  });
+
   const { refetch: views } = useGetViewBloggerChannelQuery();
 
   useEffect(() => {
@@ -107,9 +118,7 @@ export const MyChannelsPage: FC = () => {
           <SearchFilter type={channelData.search} onChange={setValue} />
           {formState.status !== channelStatusFilter.moderation ? (
             <ActiveChannels
-              cards={
-                (formState.status === data?.status && data?.channels) || []
-              }
+              cards={data?.channels || []}
               handleOnChangePage={() => setValue("page", formState?.page + 1)}
               isLoading={isFetching}
               isLast={data?.isLast || false}
@@ -118,10 +127,7 @@ export const MyChannelsPage: FC = () => {
           ) : (
             <ModerationChannels
               statusFilter={formState.status}
-              cards={
-                ((formState.status === data?.status &&
-                  data?.channels) as IModerationChannel[]) || []
-              }
+              cards={(data?.channels as IModerationChannel[]) || []}
               handleOnChangePage={() => setValue("page", formState?.page + 1)}
               isLoading={isFetching}
               isLast={data?.isLast || false}

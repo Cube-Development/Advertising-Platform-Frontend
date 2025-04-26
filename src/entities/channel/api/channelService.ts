@@ -24,6 +24,7 @@ export interface getChannelsByStatusReq {
   elements_on_page?: number;
   status: channelStatusFilter | string;
   search_string?: string;
+  channel_id?: string;
 }
 
 export interface getReviewsByIdReq {
