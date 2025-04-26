@@ -1,18 +1,18 @@
 .wrapper {
   display: grid;
   grid-auto-flow: row;
-  row-gap: var(--row-gap-content-xl);
+  row-gap: var(--row-gap-content-md);
   margin-top: calc(var(--margin-section-xl) / 2);
   margin-bottom: var(--margin-section-xl);
 
   @media (max-width: 992px) {
-    row-gap: var(--row-gap-content-lg);
+    // row-gap: var(--row-gap-content-lg);
     margin-top: calc(var(--margin-section-lg) / 2);
     margin-bottom: var(--margin-section-lg);
   }
 
   @media (max-width: 768px) {
-    row-gap: var(--row-gap-content-md);
+    // row-gap: var(--row-gap-content-md);
     margin-top: calc(var(--margin-section-md) / 2);
     margin-bottom: var(--margin-section-md);
   }

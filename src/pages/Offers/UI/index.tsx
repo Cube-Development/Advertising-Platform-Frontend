@@ -1,3 +1,4 @@
+import { channelData } from "@entities/channel";
 import {
   getOrdersByStatusReq,
   offerStatusFilter,
@@ -6,6 +7,7 @@ import {
 import { dateSortingTypes } from "@entities/platform";
 import { useFindLanguage } from "@entities/user";
 import { useGetViewBloggerOrderQuery } from "@entities/views";
+import { SearchFilter } from "@features/catalog";
 import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
 import { useClearCookiesOnPage } from "@shared/hooks";
 import { pageFilter, paths } from "@shared/routing";
@@ -15,9 +17,8 @@ import { BarFilter } from "@widgets/barFilter";
 import React, { FC, Suspense, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { validate as isValidUUID } from "uuid";
 import styles from "./styles.module.scss";
-import { SearchFilter } from "@features/catalog";
-import { channelData } from "@entities/channel";
 
 // Ленивый импорт компонента MyOffers
 const MyOffers = React.lazy(() =>
@@ -29,22 +30,26 @@ export const OffersPage: FC = () => {
   const page = pageFilter.offer;
   const language = useFindLanguage();
   const navigate = useNavigate();
-  const { offer_status } = QueryParams();
+  const { offer_status, order_id } = QueryParams();
+
+  const startStatus =
+    offer_status &&
+    !!Object.values(offerStatusFilter).includes(
+      offer_status as offerStatusFilter,
+    )
+      ? offer_status
+      : offerStatusFilter.active;
+
+  const startOrderId = isValidUUID(order_id || "") ? order_id : undefined;
 
   const { setValue, watch } = useForm<getOrdersByStatusReq>({
     defaultValues: {
-      status:
-        offer_status &&
-        !!Object.values(offerStatusFilter).includes(
-          offer_status as offerStatusFilter,
-        )
-          ? offer_status
-          : offerStatusFilter.active,
+      status: startStatus,
       page: 1,
       language: language?.id || Languages[0].id,
       elements_on_page: INTERSECTION_ELEMENTS.BLOGGER_OFFERS,
       date_sort: dateSortingTypes.decrease,
-      search_string: "",
+      ...(startOrderId ? { search_string: startOrderId } : {}),
     },
   });
   const formState = watch();
@@ -56,9 +61,18 @@ export const OffersPage: FC = () => {
   const { search_string, ...params } = formState;
   const getParams: getOrdersByStatusReq = {
     ...params,
-    ...(search_string && search_string.length >= 3 ? { search_string } : {}),
+    ...(search_string && search_string.length >= 3
+      ? isValidUUID(search_string)
+        ? { order_id: search_string }
+        : { search_string }
+      : {}),
   };
-  const { data, isFetching } = useGetBloggerOrdersQuery(getParams);
+  const { data, isFetching } = useGetBloggerOrdersQuery(getParams, {
+    selectFromResult: ({ data, ...rest }) => ({
+      ...rest,
+      data: (data?.status === formState?.status && data) || undefined,
+    }),
+  });
   const { refetch: views } = useGetViewBloggerOrderQuery();
 
   const handleOnChangePage = () => {
@@ -78,6 +92,7 @@ export const OffersPage: FC = () => {
   useEffect(() => {
     const newPath = buildPathWithQuery(paths.offers, {
       [queryParamKeys.offerStatus]: formState.status,
+      ...(startOrderId ? { [queryParamKeys.orderId]: startOrderId } : {}),
     });
     navigate(newPath, { replace: true });
   }, [formState.status]);
@@ -93,10 +108,14 @@ export const OffersPage: FC = () => {
             changeStatus={changeStatus}
             statusFilter={formState.status}
           />
-          <SearchFilter type={channelData.search} onChange={setValue} />
+          <SearchFilter
+            type={channelData.search}
+            onChange={setValue}
+            value={formState.search_string}
+          />
           <MyOffers
             statusFilter={formState.status as offerStatusFilter}
-            offers={(data?.status === formState.status && data?.orders) || []}
+            offers={data?.orders || []}
             handleOnChangePage={handleOnChangePage}
             isLoading={isFetching}
             isLast={data?.isLast || false}

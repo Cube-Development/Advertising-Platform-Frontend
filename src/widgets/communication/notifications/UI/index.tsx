@@ -155,8 +155,8 @@ export const Notifications: FC = () => {
               )}
             </AlertDialogTitle>
             <AlertDialogDescription className="sr-only"></AlertDialogDescription>
-            {data?.notifications?.length ? (
-              <ScrollArea>
+            <ScrollArea>
+              {data?.notifications?.length ? (
                 <div className={styles.notifications}>
                   {data?.notifications.map((card, index) => (
                     <motion.div
@@ -194,10 +194,10 @@ export const Notifications: FC = () => {
                     )}
                   </AnimatePresence>
                 </div>
-              </ScrollArea>
-            ) : (
-              <></>
-            )}
+              ) : (
+                <></>
+              )}
+            </ScrollArea>
             <div className={styles.new}>
               <p>
                 {t("notifications.new")}: {data?.elements}
@@ -228,8 +228,8 @@ export const Notifications: FC = () => {
                 </div>
               )}
             </DrawerTitle>
-            {data?.notifications?.length ? (
-              <ScrollArea>
+            <ScrollArea>
+              {data?.notifications?.length ? (
                 <div className={styles.notifications}>
                   {data?.notifications.map((card, index) => (
                     <motion.div
@@ -294,10 +294,10 @@ export const Notifications: FC = () => {
                     )}
                   </AnimatePresence>
                 </div>
-              </ScrollArea>
-            ) : (
-              <></>
-            )}
+              ) : (
+                <></>
+              )}
+            </ScrollArea>
             <div className={styles.new}>
               <p className="gradient_color">
                 {t("notifications.new")}: {data?.elements}
