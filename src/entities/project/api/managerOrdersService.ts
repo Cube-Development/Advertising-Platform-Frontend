@@ -125,7 +125,7 @@ export const managerProjectsAPI = authApi.injectEndpoints({
       },
 
       forceRefetch({ currentArg, previousArg }) {
-        return currentArg?.page !== previousArg?.page;
+        return currentArg !== previousArg;
       },
       providesTags: [MANAGER_PROJECTS],
     }),

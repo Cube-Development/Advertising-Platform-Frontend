@@ -17,6 +17,7 @@ export interface getOrdersByStatusReq {
   elements_on_page?: number;
   status: offerStatusFilter | string;
   search_string?: string;
+  order_id?: string;
 }
 
 export const bloggerOffersAPI = authApi.injectEndpoints({

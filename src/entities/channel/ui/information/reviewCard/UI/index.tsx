@@ -1,4 +1,5 @@
 import { IReviewCard } from "@entities/channel";
+import { ScrollArea } from "@shared/ui";
 import { RatingIcon } from "@shared/assets";
 import { FC } from "react";
 import styles from "./styles.module.scss";
@@ -21,9 +22,9 @@ export const ReviewCard: FC<ReviewProps> = ({ card }) => {
           <span>{card?.date}</span>
         </div>
         <RatingIcon />
-        <div className={styles.description}>
+        <ScrollArea className={styles.description}>
           <p>{card?.text}</p>
-        </div>
+        </ScrollArea>
       </div>
     </div>
   );

@@ -7,6 +7,7 @@ import { IOrderFeature } from "@entities/project";
 
 export const CheckPost: FC<IOrderFeature> = ({ url }) => {
   const { t } = useTranslation();
+  console.log(url);
   return (
     <Link to={url!} target="_blank">
       <MyButton buttons_type="button__white" className={styles.button}>

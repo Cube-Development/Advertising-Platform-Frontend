@@ -47,6 +47,8 @@ export enum queryParamKeys {
   sessionState = "session_state",
   state = "state",
   channelId = "channel_id",
+  projectId = "project_id",
+  orderId = "order_id",
   addChannel = "add_channel",
   projectType = "project_type",
   projectStatus = "project_status",

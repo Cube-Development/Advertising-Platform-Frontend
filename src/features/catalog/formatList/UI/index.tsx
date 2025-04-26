@@ -55,7 +55,7 @@ export const FormatList: FC<IFormatListProps> = ({
   if (isSmallCatalogCard) {
     return (
       <div
-        className={`${styles.wrapper} ${styles.small_catalog}`}
+        className={`${styles.wrapper} ${styles.small_catalog}}`}
         ref={menuRef}
       >
         <div
