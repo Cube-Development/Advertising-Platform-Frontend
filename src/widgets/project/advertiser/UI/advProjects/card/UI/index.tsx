@@ -30,7 +30,8 @@ import {
   SearchIcon,
   WaitIcon,
 } from "@shared/assets";
-import { BREAKPOINT, Languages, accordionTypes } from "@shared/config";
+import { BREAKPOINT, ENUM_ACCORDION_TYPES } from "@shared/config";
+import { USER_LANGUAGES_LIST } from "@shared/languages";
 import {
   AccordionContent,
   AccordionItem,
@@ -256,7 +257,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
   const language = useFindLanguage();
   const getParams: getProjectSubcardReq = {
     project_id: card?.id,
-    language: language?.id || Languages[0].id,
+    language: language?.id || USER_LANGUAGES_LIST[0].id,
     page: 1,
   };
 
@@ -281,7 +282,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
       const state = (accordionRef.current as HTMLElement).getAttribute(
         "data-state",
       );
-      state === accordionTypes.open
+      state === ENUM_ACCORDION_TYPES.OPEN
         ? setSubcardOpen(true)
         : setSubcardOpen(false);
     }

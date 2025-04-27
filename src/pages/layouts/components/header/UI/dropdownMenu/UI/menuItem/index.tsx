@@ -1,6 +1,6 @@
 import { IMenuItems } from "@entities/admin";
 import { ArrowSmallVerticalIcon, LoginIcon } from "@shared/assets";
-import { accordionTypes } from "@shared/config";
+import { ENUM_ACCORDION_TYPES } from "@shared/config";
 import { ENUM_PATHS } from "@shared/routing";
 import {
   AccordionContent,
@@ -39,7 +39,9 @@ export const MenuItem: React.FC<IMenuItems> = ({
     const state = (accordionRef.current! as HTMLElement).getAttribute(
       "data-state",
     );
-    state === accordionTypes.open ? setIsActive(true) : setIsActive(false);
+    state === ENUM_ACCORDION_TYPES.OPEN
+      ? setIsActive(true)
+      : setIsActive(false);
   };
 
   useEffect(() => {

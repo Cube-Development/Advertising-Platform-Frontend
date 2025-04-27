@@ -1,9 +1,9 @@
+import { useChangeLanguageMutation, useFindLanguage } from "@entities/user";
+import { ILanguage, USER_LANGUAGES_LIST } from "@shared/languages";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import { useChangeLanguageMutation, useFindLanguage } from "@entities/user";
-import { Language, Languages } from "@shared/config";
 import { useNavigate } from "react-router-dom";
+import styles from "./styles.module.scss";
 
 interface LangProps {
   isAuth: boolean;
@@ -41,7 +41,7 @@ export const Lang: FC<LangProps> = ({ isAuth }) => {
 
   const [changeLanguage] = useChangeLanguageMutation();
 
-  const handleLanguageSelect = (lang: Language) => {
+  const handleLanguageSelect = (lang: ILanguage) => {
     i18n.changeLanguage(lang.name.toLocaleLowerCase());
     setMenuOpen(false);
     setLanguage(lang);
@@ -66,7 +66,7 @@ export const Lang: FC<LangProps> = ({ isAuth }) => {
       {isMenuOpen && (
         <div className={styles.menu}>
           <ul>
-            {Languages.map((lang) => (
+            {USER_LANGUAGES_LIST.map((lang) => (
               <li
                 className={styles.menu__item}
                 key={lang?.id}

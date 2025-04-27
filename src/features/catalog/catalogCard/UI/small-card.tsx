@@ -9,7 +9,7 @@ import {
   platformToIcon,
 } from "@entities/project";
 import { EyeIcon, RatingIcon, SubsIcon } from "@shared/assets";
-import { ChannelLanguages } from "@shared/config";
+import { CHANNEL_LANGUAGES_LIST } from "@shared/languages";
 import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";
 
 interface SmallCatalogCardProps extends IChangeCards, ICatalogCard {
@@ -63,7 +63,7 @@ export const SmallCatalogCard: FC<SmallCatalogCardProps> = ({
             <img
               src={card?.avatar}
               alt="logo"
-              className="w-full h-full object-cover"
+              className="object-cover w-full h-full"
             />
           </Link>
           <div>
@@ -86,7 +86,7 @@ export const SmallCatalogCard: FC<SmallCatalogCardProps> = ({
               {[...card.channel_languages]
                 .sort((a, b) => a - b)
                 .map((lang) => {
-                  const languageInfo = ChannelLanguages.find(
+                  const languageInfo = CHANNEL_LANGUAGES_LIST.find(
                     (l) => l.id === lang,
                   );
                   if (!languageInfo) return "...";
@@ -107,8 +107,8 @@ export const SmallCatalogCard: FC<SmallCatalogCardProps> = ({
         </div>
 
         {/* Подписчики и просмотры */}
-        <div className="grid grid-flow-row justify-center gap-1 h-full">
-          <div className="flex items-center mobile-xl:gap-2 gap-1">
+        <div className="grid justify-center h-full grid-flow-row gap-1">
+          <div className="flex items-center gap-1 mobile-xl:gap-2">
             <div className="w-[14px]">
               <SubsIcon />
             </div>
@@ -122,7 +122,7 @@ export const SmallCatalogCard: FC<SmallCatalogCardProps> = ({
             data-male={`${card?.male}%`}
             data-female={`${card?.female}%`}
           />
-          <div className="flex items-center mobile-xl:gap-2 gap-1">
+          <div className="flex items-center gap-1 mobile-xl:gap-2">
             <div className="w-[14px]">
               <EyeIcon />
             </div>
@@ -150,7 +150,7 @@ export const SmallCatalogCard: FC<SmallCatalogCardProps> = ({
         />
 
         {/* Иконка платформы */}
-        <div className="mobile-xl:block hidden absolute top-1 left-1 size-3">
+        <div className="absolute hidden mobile-xl:block top-1 left-1 size-3">
           {card?.platform && card?.platform in platformToIcon
             ? platformToIcon[card.platform!]()
             : "..."}

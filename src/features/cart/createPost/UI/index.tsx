@@ -6,8 +6,9 @@ import {
 } from "@entities/project";
 import { ENUM_ROLES, useFindLanguage } from "@entities/user";
 import { ArrowLongHorizontalIcon, LoginIcon } from "@shared/assets";
-import { cookiesTypes, Languages } from "@shared/config";
+import { ENUM_COOKIES_TYPES } from "@shared/config";
 import { useAppSelector, useCurrentPathEnum } from "@shared/hooks";
+import { USER_LANGUAGES_LIST } from "@shared/languages";
 import { ENUM_PATHS } from "@shared/routing";
 import {
   AccountsLoader,
@@ -48,7 +49,7 @@ export const CreatePost: FC<CreatePostProps> = ({}) => {
         createCart()
           .unwrap()
           .then((data) => {
-            Cookies.set(cookiesTypes.projectId, data.project_id);
+            Cookies.set(ENUM_COOKIES_TYPES.PROJECT_ID, data.project_id);
             navigate(ENUM_PATHS.CREATE_ORDER);
           })
           .catch((error) => {
@@ -61,11 +62,11 @@ export const CreatePost: FC<CreatePostProps> = ({}) => {
           });
     } else if (isAuth && role === ENUM_ROLES.MANAGER) {
       // должен быть запрос на проверку общей суммы в корзине манагера проекта и бюджета этого проекта
-      const projectId = Cookies.get(cookiesTypes.projectId) || "";
+      const projectId = Cookies.get(ENUM_COOKIES_TYPES.PROJECT_ID) || "";
       !isLoadingProjectCart &&
         createProjectCart({
           project_id: projectId,
-          language: language?.id || Languages[0].id,
+          language: language?.id || USER_LANGUAGES_LIST[0].id,
         })
           .unwrap()
           .then(() => {
@@ -79,7 +80,7 @@ export const CreatePost: FC<CreatePostProps> = ({}) => {
                 } else if (
                   data.state === cartStatusFilter.channel_to_be_replaced
                 ) {
-                  Cookies.set(cookiesTypes.isChannelReplaced, "true");
+                  Cookies.set(ENUM_COOKIES_TYPES.IS_CHANNEL_REPLACED, "true");
                   navigate(ENUM_PATHS.CREATE_ORDER);
                 } else if (data.state === cartStatusFilter.amount) {
                   toast({

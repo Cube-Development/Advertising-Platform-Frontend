@@ -1,4 +1,4 @@
-export const enum CALENDAR {
+export const enum ENUM_CALENDAR {
   // disabledDays = 2,
   disabledDays = -1,
 }

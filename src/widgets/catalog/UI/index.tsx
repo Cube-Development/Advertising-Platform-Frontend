@@ -19,14 +19,14 @@ import {
   useRemoveFromManagerCartMutation,
   useRemoveFromPublicCartMutation,
 } from "@entities/project";
-import { GenerateGuestId, ENUM_ROLES, useFindLanguage } from "@entities/user";
+import { ENUM_ROLES, GenerateGuestId, useFindLanguage } from "@entities/user";
 import {
   BREAKPOINT,
-  cookiesTypes,
+  ENUM_COOKIES_TYPES,
   INTERSECTION_ELEMENTS,
-  Languages,
 } from "@shared/config";
 import { useAppDispatch, useAppSelector, useWindowWidth } from "@shared/hooks";
+import { USER_LANGUAGES_LIST } from "@shared/languages";
 import { ToastAction, useToast } from "@shared/ui";
 import Cookies from "js-cookie";
 import { FC, useEffect, useRef, useState } from "react";
@@ -44,9 +44,9 @@ export const CatalogBlock: FC = () => {
   const savedFormState = useAppSelector(
     (state) => state.catalogFilter.formState,
   );
-  const userId = Cookies.get(cookiesTypes.userId);
-  const guestId = Cookies.get(cookiesTypes.guestId) || GenerateGuestId();
-  const projectId = Cookies.get(cookiesTypes.projectId);
+  const userId = Cookies.get(ENUM_COOKIES_TYPES.USER_ID);
+  const guestId = Cookies.get(ENUM_COOKIES_TYPES.GUEST_ID) || GenerateGuestId();
+  const projectId = Cookies.get(ENUM_COOKIES_TYPES.PROJECT_ID);
   const catalogTopRef = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
 
@@ -90,7 +90,7 @@ export const CatalogBlock: FC = () => {
     useGetCatalogQuery(
       {
         ...formState,
-        language: language?.id || Languages[0].id,
+        language: language?.id || USER_LANGUAGES_LIST[0].id,
         user_id: userId,
       },
       {
@@ -102,7 +102,7 @@ export const CatalogBlock: FC = () => {
     useGetCatalogQuery(
       {
         ...formState,
-        language: language?.id || Languages[0].id,
+        language: language?.id || USER_LANGUAGES_LIST[0].id,
         project_id: projectId,
       },
       { skip: !isAuth || !projectId || role !== ENUM_ROLES.MANAGER },
@@ -112,7 +112,7 @@ export const CatalogBlock: FC = () => {
     useGetCatalogQuery(
       {
         ...formState,
-        language: language?.id || Languages[0].id,
+        language: language?.id || USER_LANGUAGES_LIST[0].id,
         guest_id: guestId,
       },
       { skip: isAuth || !guestId },
@@ -180,16 +180,19 @@ export const CatalogBlock: FC = () => {
   ]);
 
   const { data: cart } = useReadCommonCartQuery(
-    { language: language?.id || Languages[0].id },
+    { language: language?.id || USER_LANGUAGES_LIST[0].id },
     { skip: !isAuth || role !== ENUM_ROLES.ADVERTISER },
   );
   const { data: cartManager } = useReadManagerCartQuery(
-    { project_id: projectId, language: language?.id || Languages[0].id },
+    {
+      project_id: projectId,
+      language: language?.id || USER_LANGUAGES_LIST[0].id,
+    },
     { skip: !isAuth || role !== ENUM_ROLES.MANAGER || !projectId },
   );
 
   const { data: cartPub } = useReadPublicCartQuery(
-    { guest_id: guestId, language: language?.id || Languages[0].id },
+    { guest_id: guestId, language: language?.id || USER_LANGUAGES_LIST[0].id },
     { skip: isAuth || !guestId },
   );
 
@@ -237,12 +240,12 @@ export const CatalogBlock: FC = () => {
         channel_id: cartChannel.id,
         format: cartChannel.selected_format.format,
         match: cartChannel.match,
-        language: language?.id || Languages[0].id,
+        language: language?.id || USER_LANGUAGES_LIST[0].id,
       };
 
       const removeReq = {
         channel_id: cartChannel.id,
-        language: language?.id || Languages[0].id,
+        language: language?.id || USER_LANGUAGES_LIST[0].id,
       };
 
       if (

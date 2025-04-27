@@ -21,14 +21,10 @@ import {
   useRemoveFromManagerCartMutation,
   useRemoveFromPublicCartMutation,
 } from "@entities/project";
-import { GenerateGuestId, ENUM_ROLES, useFindLanguage } from "@entities/user";
-import {
-  BREAKPOINT,
-  cookiesTypes,
-  Languages,
-  PAGE_ANIMATION,
-} from "@shared/config";
+import { ENUM_ROLES, GenerateGuestId, useFindLanguage } from "@entities/user";
+import { BREAKPOINT, ENUM_COOKIES_TYPES, PAGE_ANIMATION } from "@shared/config";
 import { useAppDispatch, useAppSelector, useWindowWidth } from "@shared/hooks";
+import { USER_LANGUAGES_LIST } from "@shared/languages";
 import { ToastAction, useToast } from "@shared/ui";
 import { motion } from "framer-motion";
 import Cookies from "js-cookie";
@@ -44,9 +40,9 @@ import styles from "./styles.module.scss";
 interface ChannelInfoProps {}
 
 export const ChannelInfo: FC<ChannelInfoProps> = () => {
-  const userId = Cookies.get(cookiesTypes.userId);
-  const guestId = Cookies.get(cookiesTypes.guestId) || GenerateGuestId();
-  const projectId = Cookies.get(cookiesTypes.projectId);
+  const userId = Cookies.get(ENUM_COOKIES_TYPES.USER_ID);
+  const guestId = Cookies.get(ENUM_COOKIES_TYPES.GUEST_ID) || GenerateGuestId();
+  const projectId = Cookies.get(ENUM_COOKIES_TYPES.PROJECT_ID);
 
   const { id: channel_id } = useParams<{ id: string }>();
   const dispatch = useAppDispatch();
@@ -58,7 +54,7 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
 
   const { watch } = useForm<getRecommendChannels>({
     defaultValues: {
-      language: language?.id || Languages[0].id,
+      language: language?.id || USER_LANGUAGES_LIST[0].id,
       channels: [channel_id],
     },
   });
@@ -67,7 +63,7 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
 
   const baseParams = {
     channel_id: channel_id || "",
-    language: language?.id || Languages[0].id,
+    language: language?.id || USER_LANGUAGES_LIST[0].id,
   };
 
   const channelInfoParams =
@@ -303,11 +299,11 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
         channel_id: cartChannel?.id,
         format: cartChannel?.selected_format.format,
         match: cartChannel?.match,
-        language: language?.id || Languages[0].id,
+        language: language?.id || USER_LANGUAGES_LIST[0].id,
       };
       const removeReq = {
         channel_id: cartChannel?.id,
-        language: language?.id || Languages[0].id,
+        language: language?.id || USER_LANGUAGES_LIST[0].id,
       };
       if (
         currentCard?.selected_format?.format ===

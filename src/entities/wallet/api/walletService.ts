@@ -7,14 +7,15 @@ import {
   TRANSACTION_HISTORY,
   authApi,
 } from "@shared/api";
-import { INTERSECTION_ELEMENTS, languagesNum } from "@shared/config";
+import { INTERSECTION_ELEMENTS } from "@shared/config";
+import { ENUM_LANGUAGES_NUM } from "@shared/languages";
 
 type PaymentOrderResponse = {
   success: boolean;
 };
 
 export type HistoryReq = {
-  language: languagesNum;
+  language: ENUM_LANGUAGES_NUM;
   page: number;
   date_sort: dateSortingTypes;
   elements_on_page?: number;

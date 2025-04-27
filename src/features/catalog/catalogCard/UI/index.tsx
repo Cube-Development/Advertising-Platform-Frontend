@@ -1,8 +1,3 @@
-import { FC, useState } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import { Link } from "react-router-dom";
-import { ChannelCardDescription, ChannelCardMatch } from "../components";
 import {
   ICatalogCard,
   ICatalogChannel,
@@ -18,7 +13,9 @@ import {
   RatingIcon,
   SubsIcon,
 } from "@shared/assets";
-import { BREAKPOINT, ChannelLanguages } from "@shared/config";
+import { BREAKPOINT } from "@shared/config";
+import { useWindowWidth } from "@shared/hooks";
+import { CHANNEL_LANGUAGES_LIST } from "@shared/languages";
 import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";
 import {
   Accordion,
@@ -26,7 +23,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@shared/ui";
-import { useWindowWidth } from "@shared/hooks";
+import { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { ChannelCardDescription, ChannelCardMatch } from "../components";
+import styles from "./styles.module.scss";
 
 interface CatalogCardProps extends IChangeCards, ICatalogCard {
   card: ICatalogChannel;
@@ -104,7 +105,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
                     {[...card.channel_languages]
                       .sort((a, b) => a - b)
                       .map((lang) => {
-                        const languageInfo = ChannelLanguages.find(
+                        const languageInfo = CHANNEL_LANGUAGES_LIST.find(
                           (l) => l.id === lang,
                         );
 

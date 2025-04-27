@@ -1,5 +1,5 @@
 import { platformTypesNum } from "@entities/platform";
-import { languagesNum } from "@shared/config";
+import { ENUM_LANGUAGES_NUM } from "@shared/languages";
 import { ENUM_PAGE_FILTER } from "@shared/routing";
 import { FC } from "react";
 
@@ -47,7 +47,7 @@ export interface ICatalogChannel {
   format: IFormat[];
   selected_format?: IFormat;
   platform?: platformTypesNum;
-  channel_languages: languagesNum[];
+  channel_languages: ENUM_LANGUAGES_NUM[];
 }
 
 export interface IFormat {

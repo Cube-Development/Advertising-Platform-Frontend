@@ -13,7 +13,8 @@ import {
 import { useFindLanguage } from "@entities/user";
 import { useGetViewAdvertiserProjectQuery } from "@entities/views";
 import { SearchFilter } from "@features/catalog";
-import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
+import { INTERSECTION_ELEMENTS } from "@shared/config";
+import { USER_LANGUAGES_LIST } from "@shared/languages";
 import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";
 import { buildPathWithQuery, queryParamKeys, QueryParams } from "@shared/utils";
 import { BarFilter } from "@widgets/barFilter";
@@ -67,7 +68,7 @@ export const AdvOrders: FC = () => {
       type: startType,
       status: startStatus,
       date_sort: dateSortingTypes.decrease,
-      language: language?.id || Languages[0].id,
+      language: language?.id || USER_LANGUAGES_LIST[0].id,
       ...(startProjectId ? { search_string: startProjectId } : {}),
     },
   });

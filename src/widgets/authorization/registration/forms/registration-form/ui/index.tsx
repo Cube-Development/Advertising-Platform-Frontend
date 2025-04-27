@@ -8,7 +8,7 @@ import {
   USER_ROLES,
 } from "@entities/user";
 import { useHandleAuth } from "@features/useHandleAuth";
-import { Languages } from "@shared/config";
+import { USER_LANGUAGES_LIST } from "@shared/languages";
 import { useAppSelector } from "@shared/hooks";
 import { ENUM_PATHS } from "@shared/routing";
 import { CustomCheckbox, ToastAction, useToast } from "@shared/ui";
@@ -76,7 +76,7 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({
         role: USER_ROLES.includes(user.role)
           ? user.role
           : ENUM_ROLES.ADVERTISER,
-        language: language?.id || Languages[0].id,
+        language: language?.id || USER_LANGUAGES_LIST[0].id,
         code: Number(code),
         promo: promo,
       };

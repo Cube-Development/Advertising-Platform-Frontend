@@ -25,7 +25,7 @@ import {
   SendIcon,
 } from "@shared/assets";
 import {
-  cookiesTypes,
+  ENUM_COOKIES_TYPES,
   INTERSECTION_ELEMENTS,
   PAGE_ANIMATION,
 } from "@shared/config";
@@ -55,7 +55,7 @@ interface ChatMessagesProps {
 
 export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
   let currentDate: string | null = null;
-  const userId = Cookies.get(cookiesTypes.userId)!;
+  const userId = Cookies.get(ENUM_COOKIES_TYPES.USER_ID)!;
   const { t } = useTranslation();
   const { role } = useAppSelector((state) => state.user);
   const { OrderMessageSend, OrderMessageNew } = useCentrifuge();

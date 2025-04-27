@@ -1,6 +1,6 @@
 import { DateListProps } from "@entities/project";
 import { CalendarIcon, CancelIcon2 } from "@shared/assets";
-import { CALENDAR } from "@shared/config";
+import { ENUM_CALENDAR } from "@shared/config";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -103,7 +103,9 @@ export const CustomCalendar: FC<DateListProps> = ({ onChange, startDate }) => {
   }): string | null => {
     if (view === "month") {
       const minSelectableDate = new Date();
-      minSelectableDate.setDate(new Date().getDate() + CALENDAR.disabledDays);
+      minSelectableDate.setDate(
+        new Date().getDate() + ENUM_CALENDAR.disabledDays,
+      );
       if (
         disabledDates.some(
           (disabledDate) => date.toDateString() === disabledDate.toDateString(),

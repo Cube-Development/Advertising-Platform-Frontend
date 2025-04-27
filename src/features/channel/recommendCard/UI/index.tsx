@@ -1,13 +1,10 @@
-import { FC, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
-import { ChannelCardDescription } from "@features/catalog";
 import {
   ICatalogCard,
   ICatalogChannel,
   IChangeCards,
   IFormat,
 } from "@entities/project";
+import { ChannelCardDescription } from "@features/catalog";
 import {
   ArrowSmallVerticalIcon,
   BoyIcon,
@@ -19,6 +16,7 @@ import {
   StarIcon4,
   SubsIcon,
 } from "@shared/assets";
+import { CHANNEL_LANGUAGES_LIST } from "@shared/languages";
 import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";
 import {
   Accordion,
@@ -26,8 +24,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@shared/ui";
+import { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
-import { ChannelLanguages } from "@shared/config";
 
 interface RecommendCardProps extends IChangeCards, ICatalogCard {
   card: ICatalogChannel;
@@ -102,7 +102,7 @@ export const RecommendCard: FC<RecommendCardProps> = ({
                     {[...card.channel_languages]
                       .sort((a, b) => a - b)
                       .map((lang) => {
-                        const languageInfo = ChannelLanguages.find(
+                        const languageInfo = CHANNEL_LANGUAGES_LIST.find(
                           (l) => l.id === lang,
                         );
 

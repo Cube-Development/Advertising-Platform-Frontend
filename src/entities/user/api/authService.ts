@@ -8,7 +8,7 @@ import {
   ENUM_ROLES,
 } from "@entities/user";
 import { authApi, baseApi, USER_DATA } from "@shared/api";
-import { languagesNum } from "@shared/config";
+import { ENUM_LANGUAGES_NUM } from "@shared/languages";
 
 type RegisterReq = {
   email: string;
@@ -17,7 +17,7 @@ type RegisterReq = {
   is_superuser: boolean;
   is_verified: boolean;
   role: ENUM_ROLES;
-  language: languagesNum;
+  language: ENUM_LANGUAGES_NUM;
   code: number;
 };
 type GetUserRes = IUser;
@@ -166,7 +166,7 @@ export const userAPI = authApi.injectEndpoints({
         params,
       }),
     }),
-    changeLanguage: build.mutation<void, { language: languagesNum }>({
+    changeLanguage: build.mutation<void, { language: ENUM_LANGUAGES_NUM }>({
       query: (params) => ({
         url: `/auth/language`,
         method: `POST`,

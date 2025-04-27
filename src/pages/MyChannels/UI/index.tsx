@@ -13,7 +13,8 @@ import {
 import { useFindLanguage } from "@entities/user";
 import { useGetViewBloggerChannelQuery } from "@entities/views";
 import { SearchFilter } from "@features/catalog";
-import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
+import { INTERSECTION_ELEMENTS } from "@shared/config";
+import { USER_LANGUAGES_LIST } from "@shared/languages";
 import { useClearCookiesOnPage } from "@shared/hooks";
 import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";
 import { SuspenseLoader } from "@shared/ui";
@@ -64,7 +65,7 @@ export const MyChannelsPage: FC = () => {
       status: startStatus,
       date_sort: dateSortingTypes.decrease,
       platform: platformTypes[0].id,
-      language: language?.id || Languages[0].id,
+      language: language?.id || USER_LANGUAGES_LIST[0].id,
       ...(startChannelId ? { search_string: startChannelId } : {}),
     },
   });

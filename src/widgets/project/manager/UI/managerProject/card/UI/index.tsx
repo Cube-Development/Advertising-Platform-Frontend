@@ -18,9 +18,9 @@ import {
   SeePost,
 } from "@features/order";
 import {
-  SendReport,
   EditProject,
   LaunchProject,
+  SendReport,
   SendToBot,
   TechnicalSpecification,
 } from "@features/project";
@@ -33,7 +33,9 @@ import {
   SearchIcon,
   WaitIcon,
 } from "@shared/assets";
-import { BREAKPOINT, Languages, accordionTypes } from "@shared/config";
+import { BREAKPOINT, ENUM_ACCORDION_TYPES } from "@shared/config";
+import { useWindowWidth } from "@shared/hooks";
+import { USER_LANGUAGES_LIST } from "@shared/languages";
 import {
   AccordionContent,
   AccordionItem,
@@ -51,7 +53,6 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./styles.module.scss";
-import { useWindowWidth } from "@shared/hooks";
 
 interface ManagerProjectCardProps {
   card: IManagerProjectCard;
@@ -222,7 +223,7 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
 
   const getParams: getProjectSubcardReq = {
     project_id: card?.project_id,
-    language: language?.id || Languages[0].id,
+    language: language?.id || USER_LANGUAGES_LIST[0].id,
     page: 1,
   };
 
@@ -241,7 +242,7 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
     const state = (accordionRef.current! as HTMLElement).getAttribute(
       "data-state",
     );
-    state === accordionTypes.open
+    state === ENUM_ACCORDION_TYPES.OPEN
       ? setSubcardOpen(true)
       : setSubcardOpen(false);
   };

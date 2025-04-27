@@ -12,10 +12,10 @@ import { SadSmileIcon } from "@shared/assets";
 import {
   BREAKPOINT,
   INTERSECTION_ELEMENTS,
-  Languages,
   PAGE_ANIMATION,
 } from "@shared/config";
 import { useClearCookiesOnPage, useWindowWidth } from "@shared/hooks";
+import { USER_LANGUAGES_LIST } from "@shared/languages";
 import { ShowMoreBtn, SpinnerLoaderSmall } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
@@ -30,7 +30,7 @@ export const History: FC = () => {
   const [currentPage, setCurrentPage] = useState(1);
 
   const getParams: HistoryReq = {
-    language: language?.id || Languages[0].id,
+    language: language?.id || USER_LANGUAGES_LIST[0].id,
     page: currentPage,
     elements_on_page: INTERSECTION_ELEMENTS.HISTORY,
     date_sort: dateSortingTypes.decrease,

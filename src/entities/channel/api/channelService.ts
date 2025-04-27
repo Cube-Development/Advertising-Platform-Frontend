@@ -16,10 +16,11 @@ import {
   MANAGER_ORDERS,
   authApi,
 } from "@shared/api";
-import { INTERSECTION_ELEMENTS, languagesNum } from "@shared/config";
+import { INTERSECTION_ELEMENTS } from "@shared/config";
+import { ENUM_LANGUAGES_NUM } from "@shared/languages";
 
 export interface getChannelsByStatusReq {
-  language: languagesNum;
+  language: ENUM_LANGUAGES_NUM;
   page: number;
   date_sort: dateSortingTypes;
   elements_on_page?: number;
@@ -100,7 +101,7 @@ export const channelAPI = authApi.injectEndpoints({
       IReadChannelData,
       {
         channel_id: string;
-        language: languagesNum;
+        language: ENUM_LANGUAGES_NUM;
         user_id?: string;
         guest_id?: string;
         project_id?: string;

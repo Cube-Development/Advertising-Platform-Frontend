@@ -3,7 +3,7 @@ import { platformTypesNum } from "@entities/platform";
 import { platformToIcon } from "@entities/project";
 import { useFindLanguage } from "@entities/user";
 import { BoyIcon, CancelIcon2, GirlIcon } from "@shared/assets";
-import { Languages } from "@shared/config";
+import { USER_LANGUAGES_LIST } from "@shared/languages";
 import { ENUM_PATHS } from "@shared/routing";
 import {
   AlertDialog,
@@ -30,7 +30,10 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
   const { t } = useTranslation();
   const language = useFindLanguage();
   const { data: card } = useGetChannelByIdQuery(
-    { channel_id: channel_id, language: language?.id || Languages[0].id },
+    {
+      channel_id: channel_id,
+      language: language?.id || USER_LANGUAGES_LIST[0].id,
+    },
     { skip: !channel_id },
   );
 

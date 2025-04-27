@@ -8,8 +8,9 @@ import { dateSortingTypes } from "@entities/platform";
 import { useFindLanguage } from "@entities/user";
 import { useGetViewBloggerOrderQuery } from "@entities/views";
 import { SearchFilter } from "@features/catalog";
-import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
+import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { useClearCookiesOnPage } from "@shared/hooks";
+import { USER_LANGUAGES_LIST } from "@shared/languages";
 import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";
 import { SuspenseLoader } from "@shared/ui";
 import { buildPathWithQuery, queryParamKeys, QueryParams } from "@shared/utils";
@@ -46,7 +47,7 @@ export const OffersPage: FC = () => {
     defaultValues: {
       status: startStatus,
       page: 1,
-      language: language?.id || Languages[0].id,
+      language: language?.id || USER_LANGUAGES_LIST[0].id,
       elements_on_page: INTERSECTION_ELEMENTS.BLOGGER_OFFERS,
       date_sort: dateSortingTypes.decrease,
       ...(startOrderId ? { search_string: startOrderId } : {}),

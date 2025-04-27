@@ -29,8 +29,9 @@ import {
   CancelIcon2,
   ParametersIcon,
 } from "@shared/assets";
-import { accordionTypes, BREAKPOINT, Languages } from "@shared/config";
+import { BREAKPOINT, ENUM_ACCORDION_TYPES } from "@shared/config";
 import { useWindowWidth } from "@shared/hooks";
+import { USER_LANGUAGES_LIST } from "@shared/languages";
 import {
   Accordion,
   AccordionContent,
@@ -79,7 +80,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
   const accordionRefs = useRef<Array<HTMLDivElement | null>>([]);
 
   const contentRes = {
-    language: language?.id || Languages[0].id,
+    language: language?.id || USER_LANGUAGES_LIST[0].id,
     page: 1,
   };
 
@@ -228,7 +229,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
         const observer = new MutationObserver(() => {
           const state = ref.getAttribute("data-state");
           const icon = ref.querySelector(`.${styles.arrow} svg`);
-          if (state === accordionTypes.open) {
+          if (state === ENUM_ACCORDION_TYPES.OPEN) {
             ref.classList.add(styles.active);
             if (icon) icon.classList.add("icon__white");
             if (icon) icon.classList.add("rotate__down");

@@ -14,8 +14,8 @@ import {
 } from "@entities/project";
 import { ENUM_ROLES, useFindLanguage } from "@entities/user";
 import { usePaymentProjectMutation } from "@entities/wallet";
-import { BREAKPOINT, cookiesTypes } from "@shared/config";
-import { Languages } from "@shared/config";
+import { BREAKPOINT, ENUM_COOKIES_TYPES } from "@shared/config";
+import { USER_LANGUAGES_LIST } from "@shared/languages";
 import { useAppSelector, useWindowWidth } from "@shared/hooks";
 import { ENUM_PATHS } from "@shared/routing";
 import { SpinnerLoader, useToast } from "@shared/ui";
@@ -38,8 +38,10 @@ import { ICreateOrderBlur } from "../config";
 interface CreateOrderBlockProps {}
 
 export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
-  const projectId = Cookies.get(cookiesTypes.projectId);
-  const isChannelReplace = Boolean(Cookies.get(cookiesTypes.isChannelReplaced));
+  const projectId = Cookies.get(ENUM_COOKIES_TYPES.PROJECT_ID);
+  const isChannelReplace = Boolean(
+    Cookies.get(ENUM_COOKIES_TYPES.IS_CHANNEL_REPLACED),
+  );
   const { toast } = useToast();
   const { t } = useTranslation();
   const { isAuth, role } = useAppSelector((state) => state.user);
@@ -71,7 +73,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
 
   const projectChannelsReq = {
     project_id: projectId!,
-    language: language?.id || Languages[0].id,
+    language: language?.id || USER_LANGUAGES_LIST[0].id,
     page: 1,
   };
   const projectPostsReq = {

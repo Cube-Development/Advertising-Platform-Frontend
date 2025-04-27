@@ -8,10 +8,11 @@ import {
   BLOGGER_OFFERS,
   VIEWS_BLOGGER_OFFERS,
 } from "@shared/api";
-import { INTERSECTION_ELEMENTS, languagesNum } from "@shared/config";
+import { INTERSECTION_ELEMENTS } from "@shared/config";
+import { ENUM_LANGUAGES_NUM } from "@shared/languages";
 
 export interface getOrdersByStatusReq {
-  language: languagesNum;
+  language: ENUM_LANGUAGES_NUM;
   page: number;
   date_sort: dateSortingTypes;
   elements_on_page?: number;

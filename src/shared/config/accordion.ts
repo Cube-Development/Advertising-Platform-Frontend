@@ -1,4 +1,4 @@
-export enum accordionTypes {
-  open = "open",
-  closed = "closed",
+export enum ENUM_ACCORDION_TYPES {
+  OPEN = "open",
+  CLOSED = "closed",
 }

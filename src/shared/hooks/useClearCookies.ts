@@ -1,8 +1,8 @@
-import { cookiesTypes } from "@shared/config";
+import { ENUM_COOKIES_TYPES } from "@shared/config";
 import Cookies from "js-cookie";
 
 export const useClearCookiesOnPage = () => {
-  Cookies.remove(cookiesTypes.projectId);
-  Cookies.remove(cookiesTypes.isChannelReplaced);
-  Cookies.remove(cookiesTypes.isReview);
+  Cookies.remove(ENUM_COOKIES_TYPES.PROJECT_ID);
+  Cookies.remove(ENUM_COOKIES_TYPES.IS_CHANNEL_REPLACED);
+  Cookies.remove(ENUM_COOKIES_TYPES.IS_REVIEW);
 };

@@ -6,7 +6,7 @@ import {
   CART_PUB,
   RECOMMEND_CARDS,
 } from "@shared/api";
-import { languagesNum } from "@shared/config";
+import { ENUM_LANGUAGES_NUM } from "@shared/languages";
 import { cartStatusFilter } from "../config";
 import { ICart } from "../types";
 
@@ -16,18 +16,18 @@ interface AddChannelReq {
   channel_id: string;
   format: number;
   match?: number;
-  language: languagesNum;
+  language: ENUM_LANGUAGES_NUM;
 }
 
 interface RemoveChannelReq {
   guest_id?: string;
   project_id?: string;
   channel_id: string;
-  language: languagesNum;
+  language: ENUM_LANGUAGES_NUM;
 }
 
 interface ReadCartReq {
-  language: languagesNum;
+  language: ENUM_LANGUAGES_NUM;
   guest_id?: string;
   project_id?: string;
 }

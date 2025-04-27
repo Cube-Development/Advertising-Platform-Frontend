@@ -1,5 +1,5 @@
 import { PROFILE_TYPE, PROFILE_STATUS } from "@entities/wallet";
-import { accordionTypes } from "@shared/config";
+import { ENUM_ACCORDION_TYPES } from "@shared/config";
 import {
   Accordion,
   AccordionContent,
@@ -29,7 +29,7 @@ export const Guide: FC<GuideProps> = ({ profileFilter }) => {
         const observer = new MutationObserver(() => {
           const state = ref.getAttribute("data-state");
           const icon = ref.querySelector(`.${styles.arrow} svg`);
-          if (state === accordionTypes.open) {
+          if (state === ENUM_ACCORDION_TYPES.OPEN) {
             ref.classList.add(styles.active);
             if (icon) icon.classList.add("icon__white");
             if (icon) icon.classList.add("rotate__down");
