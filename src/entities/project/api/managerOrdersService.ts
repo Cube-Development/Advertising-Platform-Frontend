@@ -6,7 +6,8 @@ import {
   IPostChannel,
 } from "@entities/project";
 import { MANAGER_PROJECTS, VIEWS_MANAGER, authApi } from "@shared/api";
-import { INTERSECTION_ELEMENTS, languagesNum } from "@shared/config";
+import { INTERSECTION_ELEMENTS } from "@shared/config";
+import { ENUM_LANGUAGES_NUM } from "@shared/languages";
 import { IManagerProjectPosts } from "../types/managerProject";
 
 export interface getManagerProjectsCardReq {
@@ -19,7 +20,7 @@ export interface getManagerProjectsCardReq {
 
 export interface getManagerProjectOrdersReq {
   project_id: string;
-  language: languagesNum;
+  language: ENUM_LANGUAGES_NUM;
   page: number;
   elements_on_page?: number;
 }
@@ -40,7 +41,7 @@ export const managerProjectsAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
     createProjectCart: build.mutation<
       { succsess: boolean },
-      { project_id: string; language: languagesNum }
+      { project_id: string; language: ENUM_LANGUAGES_NUM }
     >({
       query: (params) => ({
         url: `/cart/project/attach/`,

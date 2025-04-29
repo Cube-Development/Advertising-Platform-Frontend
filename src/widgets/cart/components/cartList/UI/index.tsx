@@ -7,7 +7,7 @@ import {
 } from "@features/catalog";
 import { CartIcon, SadSmileIcon } from "@shared/assets";
 import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
-import { pageFilter } from "@shared/routing";
+import { ENUM_PAGE_FILTER } from "@shared/routing";
 import { motion } from "framer-motion";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -49,7 +49,7 @@ export const CartList: FC<CartListProps> = ({
               variants={PAGE_ANIMATION.animationUp}
             >
               <CatalogCard
-                page={pageFilter.cart}
+                page={ENUM_PAGE_FILTER.CART}
                 card={card}
                 AddToBasketBtn={AddToBasket}
                 FormatList={FormatList}

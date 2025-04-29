@@ -1,8 +1,3 @@
-import { FC, useState } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import { Link } from "react-router-dom";
-import { ChannelCardDescription, ChannelCardMatch } from "../components";
 import {
   ICatalogCard,
   ICatalogChannel,
@@ -18,19 +13,25 @@ import {
   RatingIcon,
   SubsIcon,
 } from "@shared/assets";
-import { BREAKPOINT, ChannelLanguages } from "@shared/config";
-import { pageFilter, paths } from "@shared/routing";
+import { BREAKPOINT } from "@shared/config";
+import { useWindowWidth } from "@shared/hooks";
+import { CHANNEL_LANGUAGES_LIST } from "@shared/languages";
+import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@shared/ui";
-import { useWindowWidth } from "@shared/hooks";
+import { FC, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { ChannelCardDescription, ChannelCardMatch } from "../components";
+import styles from "./styles.module.scss";
 
 interface CatalogCardProps extends IChangeCards, ICatalogCard {
   card: ICatalogChannel;
-  page?: pageFilter.cart;
+  page?: ENUM_PAGE_FILTER.CART;
 }
 
 export const CatalogCard: FC<CatalogCardProps> = ({
@@ -81,7 +82,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
           <div className={styles.column__logo}>
             <div className={styles.logo}>
               <Link
-                to={`${paths.channel.replace(":id", card?.id)}`}
+                to={`${ENUM_PATHS.CHANNEL.replace(":id", card?.id)}`}
                 className={styles.logo__img_wrapper}
               >
                 <img src={card?.avatar} alt="logo" />
@@ -94,7 +95,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
           <div className={styles.column__info}>
             <div className={styles.info}>
               <Link
-                to={`${paths.channel.replace(":id", card?.id)}`}
+                to={`${ENUM_PATHS.CHANNEL.replace(":id", card?.id)}`}
                 className={`${styles.title} truncate`}
               >
                 {card?.name}
@@ -104,7 +105,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
                     {[...card.channel_languages]
                       .sort((a, b) => a - b)
                       .map((lang) => {
-                        const languageInfo = ChannelLanguages.find(
+                        const languageInfo = CHANNEL_LANGUAGES_LIST.find(
                           (l) => l.id === lang,
                         );
 

@@ -1,32 +1,32 @@
-export enum roles {
-  advertiser = "advertiser",
-  blogger = "blogger",
-  manager = "manager",
-  moderator = "moderator",
+export enum ENUM_ROLES {
+  ADVERTISER = "advertiser",
+  BLOGGER = "blogger",
+  MANAGER = "manager",
+  MODERATOR = "moderator",
 }
 
-export const userRoles = [roles.blogger, roles.advertiser];
-export const managementRoles = [roles.moderator, roles.manager];
+export const USER_ROLES = [ENUM_ROLES.BLOGGER, ENUM_ROLES.ADVERTISER];
+export const MANAGEMENT_ROLES = [ENUM_ROLES.MODERATOR, ENUM_ROLES.MANAGER];
 
-export enum chatRoles {
+export enum ENUM_CHAT_ROLES {
   recipient = "recipient",
   sender = "sender",
 }
-export const rolesTypes = [
+export const ROLES_TYPES_LIST = [
   {
-    type: roles.advertiser,
+    type: ENUM_ROLES.ADVERTISER,
     name: "roles.advertiser",
   },
   {
-    type: roles.blogger,
+    type: ENUM_ROLES.BLOGGER,
     name: "roles.blogger",
   },
   {
-    type: roles.manager,
+    type: ENUM_ROLES.MANAGER,
     name: "roles.manager",
   },
   {
-    type: roles.moderator,
+    type: ENUM_ROLES.MODERATOR,
     name: "roles.administrator",
   },
 ];

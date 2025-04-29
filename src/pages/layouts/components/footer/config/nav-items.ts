@@ -1,4 +1,4 @@
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 
 export const contactInfo = {
   tech_contact: "+99899-111-11-11",
@@ -12,19 +12,19 @@ export const navItems = [
     items: [
       {
         name: "footer.nav.services.links.catalog",
-        path: paths.catalog,
+        path: ENUM_PATHS.CATALOG,
       },
       {
         name: "footer.nav.services.links.add_channel",
-        path: paths.addChannel,
+        path: ENUM_PATHS.ADD_CHANNEL,
       },
       {
         name: "footer.nav.services.links.turnkey",
-        path: paths.turnkey,
+        path: ENUM_PATHS.TURNKEY,
       },
       {
         name: "footer.nav.services.links.calculate",
-        path: `${paths.mainBlogger}#calculateIncome`,
+        path: `${ENUM_PATHS.MAIN_BLOGGER}#calculateIncome`,
       },
       {
         name: "footer.nav.services.links.tg_bot",
@@ -37,15 +37,15 @@ export const navItems = [
     items: [
       {
         name: "footer.nav.about.links.reviews",
-        path: paths.main,
+        path: ENUM_PATHS.MAIN,
       },
       {
         name: "footer.nav.about.links.public_offer",
-        path: paths.publicOffer,
+        path: ENUM_PATHS.PUBLIC_OFFER,
       },
       {
         name: "footer.nav.about.links.service_rules",
-        path: paths.serviceRules,
+        path: ENUM_PATHS.SERVICE_RULES,
       },
     ],
   },
@@ -54,11 +54,11 @@ export const navItems = [
     items: [
       {
         name: "footer.nav.cooperation.links.vacancies",
-        path: paths.main,
+        path: ENUM_PATHS.MAIN,
       },
       {
         name: "footer.nav.cooperation.links.partner_programm",
-        path: paths.main,
+        path: ENUM_PATHS.MAIN,
       },
     ],
   },
@@ -67,15 +67,15 @@ export const navItems = [
     items: [
       {
         name: "footer.nav.community.links.faq",
-        path: paths.faq,
+        path: ENUM_PATHS.FAQ,
       },
       {
         name: "footer.nav.community.links.news",
-        path: paths.faq,
+        path: ENUM_PATHS.FAQ,
       },
       {
         name: "footer.nav.community.links.blog",
-        path: paths.faq,
+        path: ENUM_PATHS.FAQ,
       },
     ],
   },

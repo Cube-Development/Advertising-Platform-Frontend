@@ -2,7 +2,7 @@ import {
   adminRejectComplaintReq,
   useAdminRejectComplaintMutation,
 } from "@entities/admin";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import { AccountsLoader, MyButton, ToastAction, useToast } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -28,7 +28,7 @@ export const RejectComplaint: FC<RejectComplaintProps> = ({ params }) => {
             variant: "success",
             title: t("toasts.admin.complaint.reject.success"),
           });
-          navigate(paths.adminComplaints);
+          navigate(ENUM_PATHS.ADMIN_COMPLAINTS);
         })
         .catch((error) => {
           toast({

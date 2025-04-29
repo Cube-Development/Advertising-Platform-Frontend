@@ -9,12 +9,12 @@ import {
   platformToIcon,
 } from "@entities/project";
 import { EyeIcon, RatingIcon, SubsIcon } from "@shared/assets";
-import { ChannelLanguages } from "@shared/config";
-import { pageFilter, paths } from "@shared/routing";
+import { CHANNEL_LANGUAGES_LIST } from "@shared/languages";
+import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";
 
 interface SmallCatalogCardProps extends IChangeCards, ICatalogCard {
   card: ICatalogChannel;
-  page?: pageFilter.cart;
+  page?: ENUM_PAGE_FILTER.CART;
 }
 
 export const SmallCatalogCard: FC<SmallCatalogCardProps> = ({
@@ -57,13 +57,13 @@ export const SmallCatalogCard: FC<SmallCatalogCardProps> = ({
         {/* Лого + Рейтинг */}
         <div className="flex flex-col items-center gap-1">
           <Link
-            to={`${paths.channel.replace(":id", card?.id)}`}
+            to={`${ENUM_PATHS.CHANNEL.replace(":id", card?.id)}`}
             className="mobile-xl:size-[40px] mobile:size-[34px] mobile-xs:size-[30px] size-[28px] rounded-full overflow-hidden border border-[--Personal-colors-main]"
           >
             <img
               src={card?.avatar}
               alt="logo"
-              className="w-full h-full object-cover"
+              className="object-cover w-full h-full"
             />
           </Link>
           <div>
@@ -76,7 +76,7 @@ export const SmallCatalogCard: FC<SmallCatalogCardProps> = ({
         {/* Название и категория */}
         <div className="flex flex-col justify-around h-full mobile-xl:gap-1 gap-0.5 min-w-0">
           <Link
-            to={`${paths.channel.replace(":id", card?.id)}`}
+            to={`${ENUM_PATHS.CHANNEL.replace(":id", card?.id)}`}
             className="text-[--Personal-colors-main] font-semibold xl:text-sm mobile-xl:text-xs text-[10px] truncate leading-none"
           >
             {card?.name}
@@ -86,7 +86,7 @@ export const SmallCatalogCard: FC<SmallCatalogCardProps> = ({
               {[...card.channel_languages]
                 .sort((a, b) => a - b)
                 .map((lang) => {
-                  const languageInfo = ChannelLanguages.find(
+                  const languageInfo = CHANNEL_LANGUAGES_LIST.find(
                     (l) => l.id === lang,
                   );
                   if (!languageInfo) return "...";
@@ -107,8 +107,8 @@ export const SmallCatalogCard: FC<SmallCatalogCardProps> = ({
         </div>
 
         {/* Подписчики и просмотры */}
-        <div className="grid grid-flow-row justify-center gap-1 h-full">
-          <div className="flex items-center mobile-xl:gap-2 gap-1">
+        <div className="grid justify-center h-full grid-flow-row gap-1">
+          <div className="flex items-center gap-1 mobile-xl:gap-2">
             <div className="w-[14px]">
               <SubsIcon />
             </div>
@@ -122,7 +122,7 @@ export const SmallCatalogCard: FC<SmallCatalogCardProps> = ({
             data-male={`${card?.male}%`}
             data-female={`${card?.female}%`}
           />
-          <div className="flex items-center mobile-xl:gap-2 gap-1">
+          <div className="flex items-center gap-1 mobile-xl:gap-2">
             <div className="w-[14px]">
               <EyeIcon />
             </div>
@@ -150,7 +150,7 @@ export const SmallCatalogCard: FC<SmallCatalogCardProps> = ({
         />
 
         {/* Иконка платформы */}
-        <div className="mobile-xl:block hidden absolute top-1 left-1 size-3">
+        <div className="absolute hidden mobile-xl:block top-1 left-1 size-3">
           {card?.platform && card?.platform in platformToIcon
             ? platformToIcon[card.platform!]()
             : "..."}

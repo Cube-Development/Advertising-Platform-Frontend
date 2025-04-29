@@ -6,7 +6,7 @@ import {
   projectStatus,
   useGetManagerSubprojectsQuery,
 } from "@entities/project";
-import { roles, useFindLanguage } from "@entities/user";
+import { ENUM_ROLES, useFindLanguage } from "@entities/user";
 import {
   AcceptPost,
   ChangeChannel,
@@ -18,9 +18,9 @@ import {
   SeePost,
 } from "@features/order";
 import {
-  SendReport,
   EditProject,
   LaunchProject,
+  SendReport,
   SendToBot,
   TechnicalSpecification,
 } from "@features/project";
@@ -33,7 +33,9 @@ import {
   SearchIcon,
   WaitIcon,
 } from "@shared/assets";
-import { BREAKPOINT, Languages, accordionTypes } from "@shared/config";
+import { BREAKPOINT, ENUM_ACCORDION_TYPES } from "@shared/config";
+import { useWindowWidth } from "@shared/hooks";
+import { USER_LANGUAGES_LIST } from "@shared/languages";
 import {
   AccordionContent,
   AccordionItem,
@@ -51,7 +53,6 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./styles.module.scss";
-import { useWindowWidth } from "@shared/hooks";
 
 interface ManagerProjectCardProps {
   card: IManagerProjectCard;
@@ -87,7 +88,7 @@ const Card: FC<ManagerProjectCardProps> = ({ card, statusFilter }) => {
       </div>
       <div className={`${styles.buttons__md} display__hide__min__md`}>
         <div className={styles.chat__btn}>
-          <Chat projectId={card?.project_id} toRole={roles.advertiser} />
+          <Chat projectId={card?.project_id} toRole={ENUM_ROLES.ADVERTISER} />
         </div>
         <div className={styles.ts__btn}>
           <TechnicalSpecification card={card} SendToBotBtn={SendToBot} />
@@ -201,7 +202,7 @@ const Card: FC<ManagerProjectCardProps> = ({ card, statusFilter }) => {
         >
           <Chat
             projectId={card?.project_id}
-            toRole={roles.advertiser}
+            toRole={ENUM_ROLES.ADVERTISER}
             isProject={true}
           />
         </div>
@@ -222,7 +223,7 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
 
   const getParams: getProjectSubcardReq = {
     project_id: card?.project_id,
-    language: language?.id || Languages[0].id,
+    language: language?.id || USER_LANGUAGES_LIST[0].id,
     page: 1,
   };
 
@@ -241,7 +242,7 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
     const state = (accordionRef.current! as HTMLElement).getAttribute(
       "data-state",
     );
-    state === accordionTypes.open
+    state === ENUM_ACCORDION_TYPES.OPEN
       ? setSubcardOpen(true)
       : setSubcardOpen(false);
   };

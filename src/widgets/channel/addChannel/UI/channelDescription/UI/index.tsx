@@ -13,7 +13,7 @@ import { FormatPrice, SelectPrice, SelectSymbol } from "@features/channel";
 import { SelectDescription, SelectOptions, SelectSex } from "@features/other";
 import { ArrowLongHorizontalIcon } from "@shared/assets";
 import { BREAKPOINT, PAGE_ANIMATION } from "@shared/config";
-import { Languages } from "@shared/config/languages";
+import { USER_LANGUAGES_LIST } from "@shared/languages/config";
 import { useWindowWidth } from "@shared/hooks";
 import { MyButton, useToast } from "@shared/ui";
 import { motion } from "framer-motion";
@@ -50,7 +50,7 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
 
   const screen = useWindowWidth();
   const contentRes = {
-    language: language?.id || Languages[0].id,
+    language: language?.id || USER_LANGUAGES_LIST[0].id,
     page: 1,
   };
   const formatsRes = { ...contentRes, platform: currentPlatform.id };

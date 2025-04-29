@@ -1,5 +1,5 @@
 import { useClearCookiesOnPage } from "@shared/hooks";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import {
   CodeForm,
   EmailForm,
@@ -57,7 +57,7 @@ export const RegistrationPage: FC = () => {
             <p className={styles.account}>
               {t("auth.have_account")}
               <span>
-                <Link to={`${paths.login}${location.search}`}>
+                <Link to={`${ENUM_PATHS.LOGIN}${location.search}`}>
                   {t("auth.sign_in")}
                 </Link>
               </span>

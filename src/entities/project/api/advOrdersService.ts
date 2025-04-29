@@ -20,7 +20,8 @@ import {
   VIEWS_ADVERTISER,
   VIEWS_MANAGER,
 } from "@shared/api";
-import { INTERSECTION_ELEMENTS, languagesNum } from "@shared/config";
+import { INTERSECTION_ELEMENTS } from "@shared/config";
+import { ENUM_LANGUAGES_NUM } from "@shared/languages";
 
 export interface ICreatePostReq {
   project_id: string;
@@ -37,7 +38,7 @@ export interface ICreateUniquePostReq {
 }
 
 export interface getProjectsCardReq {
-  language?: languagesNum;
+  language?: ENUM_LANGUAGES_NUM;
   page: number;
   status:
     | advManagerProjectStatusFilter
@@ -52,7 +53,7 @@ export interface getProjectsCardReq {
 
 export interface getProjectSubcardReq {
   project_id: string;
-  language: languagesNum;
+  language: ENUM_LANGUAGES_NUM;
   page: number;
   elements_on_page?: number;
 }

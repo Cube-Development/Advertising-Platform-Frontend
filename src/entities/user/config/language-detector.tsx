@@ -2,7 +2,7 @@ import { useAppSelector } from "@shared/hooks";
 import { useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { useGetProfileQuery } from "../api";
-import { Languages } from "@shared/config";
+import { USER_LANGUAGES_LIST } from "@shared/languages";
 
 export const LanguageDetector = () => {
   const { i18n } = useTranslation();
@@ -12,7 +12,7 @@ export const LanguageDetector = () => {
   });
   useEffect(() => {
     if (isAuth && data) {
-      const selectedLanguage = Languages.find(
+      const selectedLanguage = USER_LANGUAGES_LIST.find(
         (lang) => lang.id === data?.user_additional?.language,
       );
       i18n.changeLanguage(selectedLanguage?.name?.toLocaleLowerCase());

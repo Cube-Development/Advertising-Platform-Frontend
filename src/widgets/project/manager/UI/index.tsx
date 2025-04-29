@@ -8,8 +8,9 @@ import {
 import { useFindLanguage } from "@entities/user";
 import { useGetViewManagerProjectQuery } from "@entities/views";
 import { SearchFilter } from "@features/catalog";
-import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
-import { pageFilter, paths } from "@shared/routing";
+import { INTERSECTION_ELEMENTS } from "@shared/config";
+import { USER_LANGUAGES_LIST } from "@shared/languages";
+import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";
 import { buildPathWithQuery, queryParamKeys, QueryParams } from "@shared/utils";
 import { BarFilter } from "@widgets/barFilter";
 import { FC, useEffect } from "react";
@@ -23,7 +24,7 @@ import styles from "./styles.module.scss";
 export const ManagerOrders: FC = () => {
   const language = useFindLanguage();
   const navigate = useNavigate();
-  const page = pageFilter.order;
+  const page = ENUM_PAGE_FILTER.ORDER;
   const { project_status, project_id } = QueryParams();
 
   const startStatus =
@@ -39,7 +40,7 @@ export const ManagerOrders: FC = () => {
   const { setValue, watch } = useForm<getProjectsCardReq>({
     defaultValues: {
       page: 1,
-      language: language?.id || Languages[0].id,
+      language: language?.id || USER_LANGUAGES_LIST[0].id,
       status: startStatus,
       elements_on_page: INTERSECTION_ELEMENTS.MANAGER_ORDERS,
       date_sort: dateSortingTypes.decrease,
@@ -85,7 +86,7 @@ export const ManagerOrders: FC = () => {
   };
 
   useEffect(() => {
-    const newPath = buildPathWithQuery(paths.orders, {
+    const newPath = buildPathWithQuery(ENUM_PATHS.ORDERS, {
       [queryParamKeys.projectStatus]: formState.status,
       ...(startProjectId ? { [queryParamKeys.projectId]: startProjectId } : {}),
     });

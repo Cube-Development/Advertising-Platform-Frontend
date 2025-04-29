@@ -1,6 +1,6 @@
 import { platformTypesNum } from "@entities/platform";
-import { languagesNum } from "@shared/config";
-import { pageFilter } from "@shared/routing";
+import { ENUM_LANGUAGES_NUM } from "@shared/languages";
+import { ENUM_PAGE_FILTER } from "@shared/routing";
 import { FC } from "react";
 
 export interface ITargetAudienceCard {
@@ -47,7 +47,7 @@ export interface ICatalogChannel {
   format: IFormat[];
   selected_format?: IFormat;
   platform?: platformTypesNum;
-  channel_languages: languagesNum[];
+  channel_languages: ENUM_LANGUAGES_NUM[];
 }
 
 export interface IFormat {
@@ -79,7 +79,7 @@ export interface IFormatListProps {
 interface Components {
   FormatList: FC<IFormatListProps>;
   changeCard?: () => void;
-  page?: pageFilter.cart;
+  page?: ENUM_PAGE_FILTER.CART;
   card: ICatalogChannel;
 }
 

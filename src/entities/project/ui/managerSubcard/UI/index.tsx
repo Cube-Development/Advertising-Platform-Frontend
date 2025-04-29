@@ -12,7 +12,7 @@ import {
   projectStatus,
   useGetPostQuery,
 } from "@entities/project";
-import { roles } from "@entities/user";
+import { ENUM_ROLES } from "@entities/user";
 import { ChangeChannelProps, ChangePostProps } from "@features/order";
 import {
   ArrowSmallVerticalIcon,
@@ -319,7 +319,10 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
               // className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : "deactive"}`}
               className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : ""}`}
             >
-              <ChannelChatBtn orderId={subcard?.id} toRole={roles.blogger} />
+              <ChannelChatBtn
+                orderId={subcard?.id}
+                toRole={ENUM_ROLES.BLOGGER}
+              />
             </div>
           )}
       </div>
@@ -418,7 +421,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
             >
               <ChannelChatBtn
                 orderId={subcard?.id}
-                toRole={roles.blogger}
+                toRole={ENUM_ROLES.BLOGGER}
                 isFull={true}
               />
             </div>

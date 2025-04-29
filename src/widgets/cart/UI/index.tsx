@@ -13,9 +13,10 @@ import {
   useRemoveFromManagerCartMutation,
   useRemoveFromPublicCartMutation,
 } from "@entities/project";
-import { GenerateGuestId, roles, useFindLanguage } from "@entities/user";
-import { cookiesTypes, Languages } from "@shared/config";
-import { useAppSelector, useClearCookiesOnPage } from "@shared/hooks";
+import { ENUM_ROLES, GenerateGuestId, useFindLanguage } from "@entities/user";
+import { ENUM_COOKIES_TYPES } from "@shared/config";
+import { useAppSelector } from "@shared/hooks";
+import { USER_LANGUAGES_LIST } from "@shared/languages";
 import { ToastAction, useToast } from "@shared/ui";
 import Cookies from "js-cookie";
 import { FC, useEffect, useState } from "react";
@@ -30,33 +31,36 @@ export const Cart: FC = () => {
   const language = useFindLanguage();
   const { isAuth } = useAppSelector((state) => state.user);
 
-  const userId = Cookies.get(cookiesTypes.userId);
-  const guestId = Cookies.get(cookiesTypes.guestId);
-  const role = Cookies.get(cookiesTypes.role);
-  const projectId = Cookies.get(cookiesTypes.projectId);
+  const userId = Cookies.get(ENUM_COOKIES_TYPES.USER_ID);
+  const guestId = Cookies.get(ENUM_COOKIES_TYPES.GUEST_ID);
+  const role = Cookies.get(ENUM_COOKIES_TYPES.ROLE);
+  const projectId = Cookies.get(ENUM_COOKIES_TYPES.PROJECT_ID);
 
   if (!guestId) {
     GenerateGuestId();
   }
 
   const { data: cart, isLoading: isLoadingCommon } = useReadCommonCartQuery(
-    { language: language?.id || Languages[0].id },
-    { skip: !isAuth || role !== roles.advertiser },
+    { language: language?.id || USER_LANGUAGES_LIST[0].id },
+    { skip: !isAuth || role !== ENUM_ROLES.ADVERTISER },
   );
 
   const { data: cartManager, isLoading: isLoadingManager } =
     useReadManagerCartQuery(
-      { project_id: projectId, language: language?.id || Languages[0].id },
-      { skip: !isAuth || role !== roles.manager || !projectId },
+      {
+        project_id: projectId,
+        language: language?.id || USER_LANGUAGES_LIST[0].id,
+      },
+      { skip: !isAuth || role !== ENUM_ROLES.MANAGER || !projectId },
     );
 
   const { data: cartPub, isLoading: isLoadingPublic } = useReadPublicCartQuery(
-    { guest_id: guestId, language: language?.id || Languages[0].id },
+    { guest_id: guestId, language: language?.id || USER_LANGUAGES_LIST[0].id },
     { skip: isAuth || !guestId },
   );
 
   useEffect(() => {
-    if (isAuth && role === roles.advertiser && cart) {
+    if (isAuth && role === ENUM_ROLES.ADVERTISER && cart) {
       setCurrentCart(cart);
     }
   }, [cart]);
@@ -68,7 +72,7 @@ export const Cart: FC = () => {
   }, [cartPub]);
 
   useEffect(() => {
-    if (isAuth && role === roles.manager && cartManager) {
+    if (isAuth && role === ENUM_ROLES.MANAGER && cartManager) {
       setCurrentCart(cartManager);
     }
   }, [cartManager]);
@@ -79,7 +83,7 @@ export const Cart: FC = () => {
 
   const { watch, reset } = useForm<getRecommendChannels>({
     defaultValues: {
-      language: language?.id || Languages[0].id,
+      language: language?.id || USER_LANGUAGES_LIST[0].id,
       channels: currentCart?.channels?.map((item) => item.id) || [],
     },
   });
@@ -87,7 +91,7 @@ export const Cart: FC = () => {
   useEffect(() => {
     if (currentCart) {
       reset({
-        language: language?.id || Languages[0].id,
+        language: language?.id || USER_LANGUAGES_LIST[0].id,
         channels: currentCart?.channels?.map((item) => item.id),
       });
     }
@@ -136,12 +140,12 @@ export const Cart: FC = () => {
       const addReq = {
         channel_id: cartChannel?.id,
         format: cartChannel?.selected_format.format,
-        language: language?.id || Languages[0].id,
+        language: language?.id || USER_LANGUAGES_LIST[0].id,
         ...(cartChannel?.match && { match: cartChannel.match }),
       };
       const removeReq = {
         channel_id: cartChannel?.id,
-        language: language?.id || Languages[0].id,
+        language: language?.id || USER_LANGUAGES_LIST[0].id,
       };
       if (
         currentCard?.selected_format?.format ===
@@ -161,7 +165,7 @@ export const Cart: FC = () => {
               });
               console.error("Ошибка при удалении с корзины", error);
             });
-        } else if (isAuth && role === roles.advertiser) {
+        } else if (isAuth && role === ENUM_ROLES.ADVERTISER) {
           removeFromCommonCart(removeReq)
             .unwrap()
             .then((data) => {
@@ -175,7 +179,7 @@ export const Cart: FC = () => {
               });
               console.error("Ошибка при удалении с корзины", error);
             });
-        } else if (isAuth && role === roles.manager && projectId) {
+        } else if (isAuth && role === ENUM_ROLES.MANAGER && projectId) {
           removeFromManagerCart({ ...removeReq, project_id: projectId })
             .unwrap()
             .then((data) => {
@@ -208,7 +212,7 @@ export const Cart: FC = () => {
               });
               console.error("Ошибка при добавлении в корзину", error);
             });
-        } else if (isAuth && role === roles.advertiser) {
+        } else if (isAuth && role === ENUM_ROLES.ADVERTISER) {
           addToCommonCart(addReq)
             .unwrap()
             .then((data) => {
@@ -222,7 +226,7 @@ export const Cart: FC = () => {
               });
               console.error("Ошибка при добавлении в корзину", error);
             });
-        } else if (isAuth && role === roles.manager && projectId) {
+        } else if (isAuth && role === ENUM_ROLES.MANAGER && projectId) {
           addToManagerCart({ ...addReq, project_id: projectId })
             .unwrap()
             .then((data) => {

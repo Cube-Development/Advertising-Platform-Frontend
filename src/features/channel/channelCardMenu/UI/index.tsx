@@ -1,7 +1,7 @@
 import { channelStatusFilter } from "@entities/channel";
 import { offerStatusFilter } from "@entities/offer";
 import { CancelIcon2, MoreIcon } from "@shared/assets";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import { buildPathWithQuery, queryParamKeys } from "@shared/utils";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -84,7 +84,7 @@ export const ChannelCardMenu: FC<ChannelCardMenuProps> = ({
           <ul>
             {statusFilter === channelStatusFilter.active && (
               <Link
-                to={buildPathWithQuery(paths.addChannel, {
+                to={buildPathWithQuery(ENUM_PATHS.ADD_CHANNEL, {
                   [queryParamKeys.channelId]: channel_id,
                 })}
               >

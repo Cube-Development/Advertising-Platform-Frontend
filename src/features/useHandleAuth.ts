@@ -1,7 +1,7 @@
 import { useTransferPublicMutation } from "@entities/project";
-import { login, roles, toggleRole } from "@entities/user";
+import { login, ENUM_ROLES, toggleRole } from "@entities/user";
 import { authApi, baseApi } from "@shared/api";
-import { cookiesTypes } from "@shared/config";
+import { ENUM_COOKIES_TYPES } from "@shared/config";
 import { useAppDispatch } from "@shared/hooks";
 import { useToast } from "@shared/ui";
 import Cookies from "js-cookie";
@@ -16,7 +16,7 @@ export const useHandleAuth = () => {
   const transferCart = async (id: string): Promise<void> => {
     try {
       await transferPublic({ guest_id: id }).unwrap();
-      Cookies.remove(cookiesTypes.guestId);
+      Cookies.remove(ENUM_COOKIES_TYPES.GUEST_ID);
     } catch (error) {
       toast({
         variant: "error",
@@ -26,15 +26,18 @@ export const useHandleAuth = () => {
     }
   };
 
-  const handleAuth = async (role: roles, user_id: string): Promise<void> => {
+  const handleAuth = async (
+    role: ENUM_ROLES,
+    user_id: string,
+  ): Promise<void> => {
     try {
       dispatch(baseApi.util.resetApiState());
       dispatch(authApi.util.resetApiState());
       dispatch(login());
       dispatch(toggleRole(role));
-      Cookies.set(cookiesTypes.userId, user_id);
+      Cookies.set(ENUM_COOKIES_TYPES.USER_ID, user_id);
 
-      const guestId = Cookies.get(cookiesTypes.guestId);
+      const guestId = Cookies.get(ENUM_COOKIES_TYPES.GUEST_ID);
       if (guestId) {
         await transferCart(guestId);
       }

@@ -28,7 +28,7 @@ import {
 import { FormatPrice, SelectPrice } from "@features/channel";
 import { SelectDescription, SelectOptions, SelectSex } from "@features/other";
 import { ArrowSmallVerticalIcon } from "@shared/assets";
-import { Languages } from "@shared/config";
+import { USER_LANGUAGES_LIST } from "@shared/languages";
 import {
   AccordionContent,
   AccordionItem,
@@ -70,7 +70,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({
   };
 
   const contentRes = {
-    language: language?.id || Languages[0].id,
+    language: language?.id || USER_LANGUAGES_LIST[0].id,
     page: 1,
   };
 

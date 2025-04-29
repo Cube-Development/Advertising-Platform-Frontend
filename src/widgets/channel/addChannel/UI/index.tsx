@@ -8,8 +8,9 @@ import {
 import { platformTypes } from "@entities/platform";
 import { IFormat } from "@entities/project";
 import { useFindLanguage } from "@entities/user";
-import { Languages, PAGE_ANIMATION } from "@shared/config";
+import { PAGE_ANIMATION } from "@shared/config";
 import { useClearCookiesOnPage } from "@shared/hooks";
+import { USER_LANGUAGES_LIST } from "@shared/languages";
 import { QueryParams } from "@shared/utils";
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -43,7 +44,10 @@ export const AddChannelBlock: FC<AddChannelBlockProps> = () => {
     useState<IIdentificationParams>(identification);
 
   const { data: channel, isLoading } = useGetChannelByIdQuery(
-    { channel_id: channel_id!, language: language?.id || Languages[0].id },
+    {
+      channel_id: channel_id!,
+      language: language?.id || USER_LANGUAGES_LIST[0].id,
+    },
     { skip: !channel_id || currentStep.step !== 2 },
   );
 

@@ -1,8 +1,8 @@
 import {
   logout,
-  roles,
+  ENUM_ROLES,
   toggleRole as toggleRoleAction,
-  userRoles,
+  USER_ROLES,
   useUpdateRoleMutation,
 } from "@entities/user";
 import { authApi, baseApi } from "@shared/api";
@@ -34,7 +34,7 @@ export const Header: FC = () => {
 
   const [updateRole] = useUpdateRoleMutation();
 
-  const toggleRole = (currentRole: roles) => {
+  const toggleRole = (currentRole: ENUM_ROLES) => {
     if (currentRole !== role) {
       dispatch(toggleRoleAction(currentRole));
       if (isAuth) {
@@ -99,7 +99,7 @@ export const Header: FC = () => {
 
         <div className={styles.profile}>
           <Lang isAuth={isAuth} />
-          {isAuth && userRoles.includes(role) && screen > BREAKPOINT.MD && (
+          {isAuth && USER_ROLES.includes(role) && screen > BREAKPOINT.MD && (
             <Wallet />
           )}
           {isAuth ? (

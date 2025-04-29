@@ -11,7 +11,7 @@ import {
   withdrawal,
 } from "@entities/wallet";
 import { LegalForm, PaymentDidox } from "@features/wallet";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import { CustomCheckbox } from "@shared/ui";
 import { FC, useState } from "react";
 import {
@@ -181,12 +181,12 @@ export const PaymentData: FC<PaymentDataProps> = ({
         /> */}
         <p>
           {t("wallet.accept.text1")}
-          <Link to={paths.serviceRules} target="_blank">
+          <Link to={ENUM_PATHS.SERVICE_RULES} target="_blank">
             {" "}
             {t("wallet.accept.span1")}{" "}
           </Link>
           {`${t("wallet.accept.and")} `}
-          <Link to={paths.publicOffer} target="_blank">
+          <Link to={ENUM_PATHS.PUBLIC_OFFER} target="_blank">
             {t("wallet.accept.span2")}{" "}
           </Link>
           {t("wallet.accept.text2")}

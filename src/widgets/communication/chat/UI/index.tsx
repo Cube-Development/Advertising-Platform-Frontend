@@ -14,7 +14,7 @@ import {
   useGetProjectChatByIdQuery,
   useGetProjectChatsQuery,
 } from "@entities/communication";
-import { roles } from "@entities/user";
+import { ENUM_ROLES } from "@entities/user";
 import { ChatCard, ChatMessages } from "@features/communication";
 import { BarSubFilter } from "@features/other";
 import { useCentrifuge } from "@shared/api";
@@ -83,7 +83,7 @@ export const Chat: FC<IChatProps> = ({
 
   const { data: chatsProject } = useGetProjectChatsQuery(
     { role: role },
-    { skip: role === roles.blogger },
+    { skip: role === ENUM_ROLES.BLOGGER },
   );
 
   // Checking existing current chat in all chats
@@ -122,7 +122,7 @@ export const Chat: FC<IChatProps> = ({
     );
 
   const selectedChats =
-    chatFilter === CHAT_FILTER.BLOGGER || role === roles.blogger
+    chatFilter === CHAT_FILTER.BLOGGER || role === ENUM_ROLES.BLOGGER
       ? chatsOrder
       : chatsProject;
 
@@ -340,7 +340,7 @@ export const Chat: FC<IChatProps> = ({
       }
     } else if (projectId && isOpen) {
       setChatFilter(
-        role === roles.advertiser
+        role === ENUM_ROLES.ADVERTISER
           ? CHAT_FILTER.MANAGER
           : CHAT_FILTER.ADVERTISER,
       );
@@ -426,12 +426,12 @@ export const Chat: FC<IChatProps> = ({
   };
 
   const badge =
-    role === roles.advertiser
+    role === ENUM_ROLES.ADVERTISER
       ? [
           { status: CHAT_FILTER.BLOGGER, count: countOrderMessage },
           { status: CHAT_FILTER.MANAGER, count: countProjectMessage },
         ]
-      : role === roles.manager
+      : role === ENUM_ROLES.MANAGER
         ? [
             { status: CHAT_FILTER.BLOGGER, count: countOrderMessage },
             { status: CHAT_FILTER.ADVERTISER, count: countProjectMessage },
@@ -439,9 +439,9 @@ export const Chat: FC<IChatProps> = ({
         : [];
 
   const tab_list =
-    role === roles.advertiser
+    role === ENUM_ROLES.ADVERTISER
       ? CHAT_ADVERTISER_FILTER_TABS_LIST
-      : role === roles.manager
+      : role === ENUM_ROLES.MANAGER
         ? CHAT_MANAGER_FILTER_TABS_LIST
         : [];
 
@@ -460,22 +460,22 @@ export const Chat: FC<IChatProps> = ({
             ) : (
               <ChatIcon className="icon__white" />
             )}
-            {isFull && toRole === roles.blogger && (
+            {isFull && toRole === ENUM_ROLES.BLOGGER && (
               <p>{t("chat.role.blogger")}</p>
             )}
-            {isFull && toRole === roles.manager && (
+            {isFull && toRole === ENUM_ROLES.MANAGER && (
               <p>{t("chat.role.manager")}</p>
             )}
           </AlertDialogTrigger>
           <AlertDialogContent className={`${styles.content} ${styles.dialog}`}>
             <div
-              className={`${styles.content__left} ${role !== roles.blogger ? styles.gridA : styles.gridB}`}
+              className={`${styles.content__left} ${role !== ENUM_ROLES.BLOGGER ? styles.gridA : styles.gridB}`}
             >
               <AlertDialogTitle className={styles.title}>
                 <p className="gradient_color">{t("chat.my_messages")}</p>
               </AlertDialogTitle>
               <AlertDialogDescription className="sr-only"></AlertDialogDescription>
-              {role !== roles.blogger && (
+              {role !== ENUM_ROLES.BLOGGER && (
                 <div className={styles.filter}>
                   <BarSubFilter
                     tab={chatFilter}
@@ -568,20 +568,20 @@ export const Chat: FC<IChatProps> = ({
             ) : (
               <ChatIcon className="icon__white" />
             )}
-            {isFull && toRole === roles.blogger && (
+            {isFull && toRole === ENUM_ROLES.BLOGGER && (
               <p>{t("chat.role.blogger")}</p>
             )}
-            {isFull && toRole === roles.manager && (
+            {isFull && toRole === ENUM_ROLES.MANAGER && (
               <p>{t("chat.role.manager")}</p>
             )}
-            {isFull && toRole === roles.advertiser && (
+            {isFull && toRole === ENUM_ROLES.ADVERTISER && (
               <p>{t("chat.role.advertiser")}</p>
             )}
           </DrawerTrigger>
           <DrawerContent>
             <div className={`${styles.content} ${styles.drawer}`}>
               <div
-                className={`${styles.content__left} ${role !== roles.blogger ? styles.gridA : styles.gridB}`}
+                className={`${styles.content__left} ${role !== ENUM_ROLES.BLOGGER ? styles.gridA : styles.gridB}`}
               >
                 <DrawerTitle className={styles.title}>
                   <DrawerDescription
@@ -595,7 +595,7 @@ export const Chat: FC<IChatProps> = ({
                     </div>
                   </DrawerClose>
                 </DrawerTitle>
-                {role !== roles.blogger && (
+                {role !== ENUM_ROLES.BLOGGER && (
                   <div className={styles.filter}>
                     <BarSubFilter
                       tab={chatFilter}

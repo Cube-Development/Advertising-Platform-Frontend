@@ -1,5 +1,5 @@
 import { IMenuItem } from "@entities/admin";
-import { roles, userRoles } from "@entities/user";
+import { ENUM_ROLES, USER_ROLES } from "@entities/user";
 import {
   useGetViewAdvertiserProjectQuery,
   useGetViewBloggerChannelQuery,
@@ -8,10 +8,10 @@ import {
   useGetViewTransactionsQuery,
   viewsTypes,
 } from "@entities/views";
-import { setDropDownMenu } from "@pages/layouts";
+import { setDropDownMenu } from "@shared/slice";
 import { BREAKPOINT } from "@shared/config";
 import { useAppDispatch, useAppSelector, useWindowWidth } from "@shared/hooks";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import { Accordion, ScrollArea } from "@shared/ui";
 import { AnimatePresence, motion } from "framer-motion";
 import { FC, useEffect } from "react";
@@ -33,8 +33,8 @@ import styles from "./styles.module.scss";
 
 interface DropdownMenuProps {
   isAuth: boolean;
-  currentRole: roles;
-  toggleRole: (role: roles) => void;
+  currentRole: ENUM_ROLES;
+  toggleRole: (role: ENUM_ROLES) => void;
 }
 
 export const DropdownMenu: FC<DropdownMenuProps> = ({
@@ -50,10 +50,10 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
     const newMenu = { isOpen: !dropdownMenu.isOpen, title: "" };
     console.log(newMenu);
     dispatch(setDropDownMenu(newMenu));
-    if (path === paths.main) {
-      toggleRole(roles.advertiser);
-    } else if (path === paths.mainBlogger) {
-      toggleRole(roles.blogger);
+    if (path === ENUM_PATHS.MAIN) {
+      toggleRole(ENUM_ROLES.ADVERTISER);
+    } else if (path === ENUM_PATHS.MAIN_BLOGGER) {
+      toggleRole(ENUM_ROLES.BLOGGER);
     }
   };
 
@@ -62,29 +62,29 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
   const { data: viewsAdvProjects } = useGetViewAdvertiserProjectQuery(
     undefined,
     {
-      skip: !isAuth || currentRole !== roles.advertiser,
+      skip: !isAuth || currentRole !== ENUM_ROLES.ADVERTISER,
     },
   );
 
   const { data: viewsBloggerOffers } = useGetViewBloggerOrderQuery(undefined, {
-    skip: !isAuth || currentRole !== roles.blogger,
+    skip: !isAuth || currentRole !== ENUM_ROLES.BLOGGER,
   });
 
   const { data: viewsBloggerChannels } = useGetViewBloggerChannelQuery(
     undefined,
     {
-      skip: !isAuth || currentRole !== roles.blogger,
+      skip: !isAuth || currentRole !== ENUM_ROLES.BLOGGER,
     },
   );
 
   const { data: viewsManProjects } = useGetViewManagerProjectQuery(undefined, {
-    skip: !isAuth || currentRole !== roles.manager,
+    skip: !isAuth || currentRole !== ENUM_ROLES.MANAGER,
   });
 
   const { data: viewsWalletTransactions } = useGetViewTransactionsQuery(
     undefined,
     {
-      skip: !isAuth || currentRole === roles.manager,
+      skip: !isAuth || currentRole === ENUM_ROLES.MANAGER,
     },
   );
 
@@ -100,21 +100,21 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
   }, [dropdownMenu.isOpen, currentRole]);
 
   let serviceMenu: IMenuItem[] =
-    currentRole === roles.advertiser
+    currentRole === ENUM_ROLES.ADVERTISER
       ? advertiserServiceMenu
       : bloggerServiceMenu;
 
   serviceMenu = isAuth ? serviceMenu : [...serviceMenu, ...faqServiceMenu];
 
   const combinedMenu: IMenuItem[] = isAuth
-    ? currentRole === roles.advertiser
+    ? currentRole === ENUM_ROLES.ADVERTISER
       ? [...advertiserMenu, ...commonMenu, ...faqServiceMenu]
-      : currentRole === roles.blogger
+      : currentRole === ENUM_ROLES.BLOGGER
         ? [...bloggerMenu, ...commonMenu, ...faqServiceMenu]
-        : currentRole === roles.manager
+        : currentRole === ENUM_ROLES.MANAGER
           ? [...managerMenu, ...faqServiceMenu]
           : []
-    : currentRole === roles.advertiser
+    : currentRole === ENUM_ROLES.ADVERTISER
       ? advertiserMenuNotAuth
       : bloggerMenuNotAuth;
 
@@ -153,37 +153,41 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
               </div>
               <ScrollArea className="h-[calc(100dvh_-_80px)]">
                 <div className={styles.menu__switcher}>
-                  {[roles.advertiser, roles.blogger].includes(currentRole) && (
+                  {[ENUM_ROLES.ADVERTISER, ENUM_ROLES.BLOGGER].includes(
+                    currentRole,
+                  ) && (
                     <div
                       style={
                         {
-                          "--translateRole": `${currentRole === roles.advertiser ? `0%` : `100%`}`,
+                          "--translateRole": `${currentRole === ENUM_ROLES.ADVERTISER ? `0%` : `100%`}`,
                           "--widthRole": `50%`,
                         } as React.CSSProperties
                       }
                       className={styles.menu__switcher__row}
                     >
-                      <Link to={paths.main}>
+                      <Link to={ENUM_PATHS.MAIN}>
                         <p
                           className={`${
-                            currentRole === roles.advertiser
+                            currentRole === ENUM_ROLES.ADVERTISER
                               ? styles.active
                               : ""
                           }`}
                           onClick={() => {
-                            toggleRole(roles.advertiser);
+                            toggleRole(ENUM_ROLES.ADVERTISER);
                           }}
                         >
                           {t("roles.advertiser")}
                         </p>
                       </Link>
-                      <Link to={paths.mainBlogger}>
+                      <Link to={ENUM_PATHS.MAIN_BLOGGER}>
                         <p
                           className={`${
-                            currentRole === roles.blogger ? styles.active : ""
+                            currentRole === ENUM_ROLES.BLOGGER
+                              ? styles.active
+                              : ""
                           }`}
                           onClick={() => {
-                            toggleRole(roles.blogger);
+                            toggleRole(ENUM_ROLES.BLOGGER);
                           }}
                         >
                           {t("roles.blogger")}
@@ -192,7 +196,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
                     </div>
                   )}
                   {isAuth &&
-                    userRoles.includes(currentRole) &&
+                    USER_ROLES.includes(currentRole) &&
                     screen < BREAKPOINT.MD && (
                       <div className={styles.accordion__block}>
                         <p className={styles.accordion__title}>
@@ -208,7 +212,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = ({
                         </div>
                       </div>
                     )}
-                  {userRoles.includes(currentRole) &&
+                  {USER_ROLES.includes(currentRole) &&
                     screen < BREAKPOINT.HEADER_NAVBAR_VISIBLE && (
                       <div className={styles.accordion__block}>
                         <p className={styles.accordion__title}>

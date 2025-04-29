@@ -1,10 +1,10 @@
 import { IChannelFormat } from "@entities/channel";
 import { platformTypesNum } from "@entities/platform";
 import { baseApi } from "@shared/api";
-import { languagesNum } from "@shared/config";
+import { ENUM_LANGUAGES_NUM } from "@shared/languages";
 
 type GetContentReq = {
-  language: languagesNum;
+  language: ENUM_LANGUAGES_NUM;
   page: number;
   elements_on_page?: number;
   platform?: platformTypesNum;

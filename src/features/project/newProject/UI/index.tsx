@@ -1,5 +1,5 @@
 import { PlusIcon2 } from "@shared/assets";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import { IStartProjectProps } from "@shared/types";
 import { MyButton } from "@shared/ui";
 import { FC } from "react";
@@ -11,7 +11,7 @@ export const NewProject: FC<IStartProjectProps> = ({ listLength }) => {
   const { t } = useTranslation();
 
   return (
-    <Link to={paths.catalog}>
+    <Link to={ENUM_PATHS.CATALOG}>
       <MyButton buttons_type="button__blue" className={styles.button}>
         <p>
           {listLength

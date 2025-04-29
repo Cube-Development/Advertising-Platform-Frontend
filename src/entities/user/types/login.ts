@@ -1,5 +1,5 @@
-import { languagesNum } from "@shared/config";
-import { roles } from "../config";
+import { ENUM_LANGUAGES_NUM } from "@shared/languages";
+import { ENUM_ROLES } from "../config";
 
 export interface IRegister {
   email: string;
@@ -7,8 +7,8 @@ export interface IRegister {
   is_active: boolean;
   is_superuser: boolean;
   is_verified: boolean;
-  role: roles;
-  language: languagesNum;
+  role: ENUM_ROLES;
+  language: ENUM_LANGUAGES_NUM;
   code: number;
   promo: boolean;
 }

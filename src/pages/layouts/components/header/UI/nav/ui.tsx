@@ -1,5 +1,5 @@
-import { roles } from "@entities/user";
-import { paths } from "@shared/routing";
+import { ENUM_ROLES } from "@entities/user";
+import { ENUM_PATHS } from "@shared/routing";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -14,8 +14,8 @@ import styles from "./styles.module.scss";
 
 interface NavProps {
   isAuth: boolean;
-  currentRole: roles;
-  toggleRole: (role: roles) => void;
+  currentRole: ENUM_ROLES;
+  toggleRole: (role: ENUM_ROLES) => void;
 }
 
 export const Nav: FC<NavProps> = ({ isAuth, currentRole, toggleRole }) => {
@@ -34,23 +34,23 @@ export const Nav: FC<NavProps> = ({ isAuth, currentRole, toggleRole }) => {
       }
     }
 
-    if (href === paths.main) {
-      toggleRole(roles.advertiser);
-    } else if (href === paths.mainBlogger) {
-      toggleRole(roles.blogger);
+    if (href === ENUM_PATHS.MAIN) {
+      toggleRole(ENUM_ROLES.ADVERTISER);
+    } else if (href === ENUM_PATHS.MAIN_BLOGGER) {
+      toggleRole(ENUM_ROLES.BLOGGER);
     }
   };
 
   const { t } = useTranslation();
 
   const currentNavbar =
-    isAuth && currentRole === roles.advertiser
+    isAuth && currentRole === ENUM_ROLES.ADVERTISER
       ? advertiserNavbar
-      : isAuth && currentRole === roles.blogger
+      : isAuth && currentRole === ENUM_ROLES.BLOGGER
         ? bloggerNavbar
-        : isAuth && currentRole === roles.manager
+        : isAuth && currentRole === ENUM_ROLES.MANAGER
           ? managerNavbar
-          : !isAuth && currentRole === roles.advertiser
+          : !isAuth && currentRole === ENUM_ROLES.ADVERTISER
             ? notAuthAdvertiserNavbar
             : notAuthBloggerNavbar;
 

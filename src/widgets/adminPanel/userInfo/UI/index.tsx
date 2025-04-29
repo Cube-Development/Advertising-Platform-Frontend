@@ -1,6 +1,6 @@
 import { useGetAdminUserInfoQuery } from "@entities/admin";
 import { useClearCookiesOnPage } from "@shared/hooks";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useParams } from "react-router-dom";
@@ -35,10 +35,10 @@ export const UserInfo: FC = () => {
     <div className="container">
       <div className={styles.wrapper}>
         <div className={styles.top}>
-          <Link to={paths.adminUsers}>
+          <Link to={ENUM_PATHS.ADMIN_USERS}>
             <h1>{t("admin_panel.pages.users")}</h1>
           </Link>
-          <Link to={paths.adminUsers}>
+          <Link to={ENUM_PATHS.ADMIN_USERS}>
             <p>
               {t("admin_panel.pages.home")}
               <span>

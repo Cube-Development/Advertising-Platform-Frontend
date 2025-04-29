@@ -2,7 +2,7 @@ import { addChannelQueries } from "@entities/channel";
 import { AddChannel } from "@features/channel";
 import { AccommList, StartAdv } from "@features/mainPages";
 import { PAGE_ANIMATION } from "@shared/config/animation";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import { IAccomm } from "@shared/types/translate";
 import { buildPathWithQuery, queryParamKeys } from "@shared/utils";
 import { motion } from "framer-motion";
@@ -42,7 +42,7 @@ export const WhyChooseUs: FC<WhyChooseUsProps> = ({ page }) => {
           ) : (
             <AddChannel
               // path={`${paths.addChannel}?add_channel=${addChannelQueries.main}`}
-              path={buildPathWithQuery(paths.addChannel, {
+              path={buildPathWithQuery(ENUM_PATHS.ADD_CHANNEL, {
                 [queryParamKeys.addChannel]: addChannelQueries.main,
               })}
               orange

@@ -1,16 +1,16 @@
 import {
   IRegister,
-  roles,
+  ENUM_ROLES,
   useFindLanguage,
   useGetUserMutation,
   useLoginMutation,
   useRegisterMutation,
-  userRoles,
+  USER_ROLES,
 } from "@entities/user";
 import { useHandleAuth } from "@features/useHandleAuth";
-import { Languages } from "@shared/config";
+import { USER_LANGUAGES_LIST } from "@shared/languages";
 import { useAppSelector } from "@shared/hooks";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import { CustomCheckbox, ToastAction, useToast } from "@shared/ui";
 import { Loader } from "lucide-react";
 import { FC, useState } from "react";
@@ -73,8 +73,10 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({
         is_active: true,
         is_superuser: false,
         is_verified: false,
-        role: userRoles.includes(user.role) ? user.role : roles.advertiser,
-        language: language?.id || Languages[0].id,
+        role: USER_ROLES.includes(user.role)
+          ? user.role
+          : ENUM_ROLES.ADVERTISER,
+        language: language?.id || USER_LANGUAGES_LIST[0].id,
         code: Number(code),
         promo: promo,
       };
@@ -197,11 +199,11 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({
 
         <p className={styles.agreement}>
           {t("auth.by_clicking_sign_up")}{" "}
-          <Link target="_blank" to={paths.serviceRules}>
+          <Link target="_blank" to={ENUM_PATHS.SERVICE_RULES}>
             {t("auth.terms")}
           </Link>{" "}
           {t("auth.and")}{" "}
-          <Link target="_blank" to={paths.publicOffer}>
+          <Link target="_blank" to={ENUM_PATHS.PUBLIC_OFFER}>
             {t("auth.privacy_policy")}
           </Link>
         </p>

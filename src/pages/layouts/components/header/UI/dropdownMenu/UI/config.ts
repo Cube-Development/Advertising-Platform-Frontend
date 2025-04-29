@@ -19,21 +19,21 @@ import {
   TemplateIcon,
   WalletIcon,
 } from "@shared/assets";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import { buildPathWithQuery, queryParamKeys } from "@shared/utils";
 
 export const advertiserServiceMenu: IMenuItem[] = [
   {
     item: {
       title: "burger_menu.catalog",
-      path: paths.catalog,
+      path: ENUM_PATHS.CATALOG,
       img: CatalogIcon,
     },
   },
   {
     item: {
       title: "burger_menu.turnkey",
-      path: paths.turnkey,
+      path: ENUM_PATHS.TURNKEY,
       img: KeyIcon,
     },
   },
@@ -43,14 +43,14 @@ export const bloggerServiceMenu: IMenuItem[] = [
   {
     item: {
       title: "burger_menu.calculateIncome",
-      path: `${paths.mainBlogger}#calculateIncome`,
+      path: `${ENUM_PATHS.MAIN_BLOGGER}#calculateIncome`,
       img: CalculatorIcon,
     },
   },
   {
     item: {
       title: "burger_menu.addPlatform",
-      path: paths.addChannel,
+      path: ENUM_PATHS.ADD_CHANNEL,
       img: AddChannelIcon,
       isDialog: true,
     },
@@ -58,21 +58,21 @@ export const bloggerServiceMenu: IMenuItem[] = [
 ];
 
 export const faqServiceMenu = [
-  { item: { title: "burger_menu.base", path: paths.faq, img: BookIcon } },
+  { item: { title: "burger_menu.base", path: ENUM_PATHS.FAQ, img: BookIcon } },
 ];
 
 export const advertiserMenu: IMenuItem[] = [
   {
     item: {
       title: "burger_menu.orders",
-      path: paths.orders,
+      path: ENUM_PATHS.ORDERS,
       img: CampaignIcon,
       type: viewsTypes.advertiserProjects,
     },
     subItems: [
       {
         title: "orders_advertiser.type_filter.my_project",
-        path: buildPathWithQuery(paths.orders, {
+        path: buildPathWithQuery(ENUM_PATHS.ORDERS, {
           [queryParamKeys.projectType]: projectTypesFilter.myProject,
           [queryParamKeys.projectStatus]: myProjectStatusFilter.active,
         }),
@@ -81,7 +81,7 @@ export const advertiserMenu: IMenuItem[] = [
       },
       {
         title: "orders_advertiser.type_filter.manager_project",
-        path: buildPathWithQuery(paths.orders, {
+        path: buildPathWithQuery(ENUM_PATHS.ORDERS, {
           [queryParamKeys.projectType]: projectTypesFilter.managerProject,
           [queryParamKeys.projectStatus]: advManagerProjectStatusFilter.active,
         }),
@@ -90,7 +90,7 @@ export const advertiserMenu: IMenuItem[] = [
       },
       {
         title: "orders_advertiser.type_filter.saved_project",
-        path: buildPathWithQuery(paths.orders, {
+        path: buildPathWithQuery(ENUM_PATHS.ORDERS, {
           [queryParamKeys.projectType]: projectTypesFilter.savedProject,
         }),
         // path: `${paths.orders}?${queryParamKeys.projectType}=${projectTypesFilter.savedProject}`,
@@ -101,7 +101,7 @@ export const advertiserMenu: IMenuItem[] = [
   {
     item: {
       title: "burger_menu.template",
-      path: paths.main,
+      path: ENUM_PATHS.MAIN,
       img: TemplateIcon,
     },
   },
@@ -111,7 +111,7 @@ export const managerMenu: IMenuItem[] = [
   {
     item: {
       title: "burger_menu.manager_orders",
-      path: paths.orders,
+      path: ENUM_PATHS.ORDERS,
       img: CampaignIcon,
       type: viewsTypes.managerProjects,
     },
@@ -122,7 +122,7 @@ export const bloggerMenu: IMenuItem[] = [
   {
     item: {
       title: "burger_menu.platforms",
-      path: paths.myChannels,
+      path: ENUM_PATHS.MY_CHANNELS,
       img: PlatformIcon,
       type: viewsTypes.bloggerChannels,
     },
@@ -130,7 +130,7 @@ export const bloggerMenu: IMenuItem[] = [
   {
     item: {
       title: "burger_menu.offers",
-      path: paths.offers,
+      path: ENUM_PATHS.OFFERS,
       img: OfferIcon,
       type: viewsTypes.bloggerOffers,
     },
@@ -145,14 +145,14 @@ export const commonMenu: IMenuItem[] = [
       type: viewsTypes.wallet,
     },
     subItems: [
-      { title: "burger_menu.top_up", path: paths.walletTopUp },
-      { title: "burger_menu.withdraw", path: paths.walletWithdraw },
+      { title: "burger_menu.top_up", path: ENUM_PATHS.WALLET_TOP_UP },
+      { title: "burger_menu.withdraw", path: ENUM_PATHS.WALLET_WITHDRAW },
       {
         title: "burger_menu.history",
-        path: paths.walletHistory,
+        path: ENUM_PATHS.WALLET_HISTORY,
         type: walletTypesFilter.transactions,
       },
-      { title: "burger_menu.invoice", path: paths.main },
+      { title: "burger_menu.invoice", path: ENUM_PATHS.MAIN },
     ],
   },
 ];
@@ -161,20 +161,20 @@ export const advertiserMenuNotAuth: IMenuItem[] = [
   {
     item: {
       title: "pages.turnkey",
-      path: paths.turnkey,
+      path: ENUM_PATHS.TURNKEY,
       img: KeyIcon,
     },
   },
   {
     item: {
       title: "pages.catalog",
-      path: paths.catalog,
+      path: ENUM_PATHS.CATALOG,
     },
   },
   {
     item: {
       title: "pages.platformOwner",
-      path: paths.mainBlogger,
+      path: ENUM_PATHS.MAIN_BLOGGER,
     },
   },
 ];
@@ -183,7 +183,7 @@ export const bloggerMenuNotAuth: IMenuItem[] = [
   {
     item: {
       title: "pages.calculateIncome",
-      path: `${paths.mainBlogger}#calculateIncome`,
+      path: `${ENUM_PATHS.MAIN_BLOGGER}#calculateIncome`,
       img: CalculatorIcon,
     },
   },
@@ -191,7 +191,7 @@ export const bloggerMenuNotAuth: IMenuItem[] = [
     item: {
       title: "pages.addPlatform",
       // path: `${paths.addChannel}?add_channel=${addChannelQueries.main}`,
-      path: buildPathWithQuery(paths.addChannel, {
+      path: buildPathWithQuery(ENUM_PATHS.ADD_CHANNEL, {
         [queryParamKeys.addChannel]: addChannelQueries.main,
       }),
     },
@@ -199,7 +199,7 @@ export const bloggerMenuNotAuth: IMenuItem[] = [
   {
     item: {
       title: "pages.advertiser",
-      path: paths.main,
+      path: ENUM_PATHS.MAIN,
     },
   },
 ];

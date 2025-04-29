@@ -1,5 +1,5 @@
 import { KeyIcon } from "@shared/assets";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import { IStartProjectProps } from "@shared/types/common";
 import { MyButton } from "@shared/ui";
 import { FC } from "react";
@@ -11,7 +11,7 @@ export const TurnkeyProject: FC<IStartProjectProps> = ({ listLength }) => {
   const { t } = useTranslation();
 
   return (
-    <Link to={paths.turnkey}>
+    <Link to={ENUM_PATHS.TURNKEY}>
       <MyButton
         // buttons_type={listLength ? "button__white" : "button__orange"}
         buttons_type={"button__orange"}

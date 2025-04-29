@@ -13,9 +13,10 @@ import {
 import { useFindLanguage } from "@entities/user";
 import { useGetViewBloggerChannelQuery } from "@entities/views";
 import { SearchFilter } from "@features/catalog";
-import { INTERSECTION_ELEMENTS, Languages } from "@shared/config";
+import { INTERSECTION_ELEMENTS } from "@shared/config";
+import { USER_LANGUAGES_LIST } from "@shared/languages";
 import { useClearCookiesOnPage } from "@shared/hooks";
-import { pageFilter, paths } from "@shared/routing";
+import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";
 import { SuspenseLoader } from "@shared/ui";
 import { buildPathWithQuery, queryParamKeys, QueryParams } from "@shared/utils";
 import { BarFilter } from "@widgets/barFilter";
@@ -64,7 +65,7 @@ export const MyChannelsPage: FC = () => {
       status: startStatus,
       date_sort: dateSortingTypes.decrease,
       platform: platformTypes[0].id,
-      language: language?.id || Languages[0].id,
+      language: language?.id || USER_LANGUAGES_LIST[0].id,
       ...(startChannelId ? { search_string: startChannelId } : {}),
     },
   });
@@ -102,7 +103,7 @@ export const MyChannelsPage: FC = () => {
   }, [formState.platform, formState.status, formState.search_string]);
 
   useEffect(() => {
-    const newPath = buildPathWithQuery(paths.myChannels, {
+    const newPath = buildPathWithQuery(ENUM_PATHS.MY_CHANNELS, {
       [queryParamKeys.channelStatus]: formState.status,
       ...(startChannelId ? { [queryParamKeys.channelId]: startChannelId } : {}),
     });
@@ -114,7 +115,7 @@ export const MyChannelsPage: FC = () => {
       <div className="container">
         <div className={styles.wrapper}>
           <BarFilter
-            page={pageFilter.platform}
+            page={ENUM_PAGE_FILTER.PLATFORM}
             setValue={setValue}
             listLength={!data?.channels?.length}
             changeStatus={(status) => setValue("status", status)}

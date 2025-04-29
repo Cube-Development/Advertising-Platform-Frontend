@@ -13,7 +13,7 @@ import {
   projectTypesFilter,
   useGetPostQuery,
 } from "@entities/project";
-import { roles } from "@entities/user";
+import { ENUM_ROLES } from "@entities/user";
 import {
   ArrowSmallVerticalIcon,
   BoyIcon,
@@ -335,7 +335,10 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
             <div
               className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : "deactive1"}`}
             >
-              <ChannelChatBtn orderId={subcard?.id} toRole={roles.blogger} />
+              <ChannelChatBtn
+                orderId={subcard?.id}
+                toRole={ENUM_ROLES.BLOGGER}
+              />
             </div>
           )}
       </div>
@@ -433,7 +436,10 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
               <div
                 className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : "deactive"}`}
               >
-                <ChannelChatBtn orderId={subcard?.id} toRole={roles.blogger} />
+                <ChannelChatBtn
+                  orderId={subcard?.id}
+                  toRole={ENUM_ROLES.BLOGGER}
+                />
               </div>
             )}
           {subcard?.api_status === orderStatus.canceled ||

@@ -4,11 +4,12 @@ import {
   useCreateCartMutation,
   useCreateProjectCartMutation,
 } from "@entities/project";
-import { roles, useFindLanguage } from "@entities/user";
+import { ENUM_ROLES, useFindLanguage } from "@entities/user";
 import { ArrowLongHorizontalIcon, LoginIcon } from "@shared/assets";
-import { cookiesTypes, Languages } from "@shared/config";
+import { ENUM_COOKIES_TYPES } from "@shared/config";
 import { useAppSelector, useCurrentPathEnum } from "@shared/hooks";
-import { paths } from "@shared/routing";
+import { USER_LANGUAGES_LIST } from "@shared/languages";
+import { ENUM_PATHS } from "@shared/routing";
 import {
   AccountsLoader,
   Dialog,
@@ -43,13 +44,13 @@ export const CreatePost: FC<CreatePostProps> = ({}) => {
   const navigate = useNavigate();
 
   const handleCreateCart = () => {
-    if (isAuth && role === roles.advertiser) {
+    if (isAuth && role === ENUM_ROLES.ADVERTISER) {
       !isLoadingCart &&
         createCart()
           .unwrap()
           .then((data) => {
-            Cookies.set(cookiesTypes.projectId, data.project_id);
-            navigate(paths.createOrder);
+            Cookies.set(ENUM_COOKIES_TYPES.PROJECT_ID, data.project_id);
+            navigate(ENUM_PATHS.CREATE_ORDER);
           })
           .catch((error) => {
             console.error("Ошибка во время создания корзины", error);
@@ -59,13 +60,13 @@ export const CreatePost: FC<CreatePostProps> = ({}) => {
               action: <ToastAction altText="Ok">Ok</ToastAction>,
             });
           });
-    } else if (isAuth && role === roles.manager) {
+    } else if (isAuth && role === ENUM_ROLES.MANAGER) {
       // должен быть запрос на проверку общей суммы в корзине манагера проекта и бюджета этого проекта
-      const projectId = Cookies.get(cookiesTypes.projectId) || "";
+      const projectId = Cookies.get(ENUM_COOKIES_TYPES.PROJECT_ID) || "";
       !isLoadingProjectCart &&
         createProjectCart({
           project_id: projectId,
-          language: language?.id || Languages[0].id,
+          language: language?.id || USER_LANGUAGES_LIST[0].id,
         })
           .unwrap()
           .then(() => {
@@ -75,12 +76,12 @@ export const CreatePost: FC<CreatePostProps> = ({}) => {
               .unwrap()
               .then((data) => {
                 if (data.state === cartStatusFilter.success) {
-                  navigate(paths.createOrder);
+                  navigate(ENUM_PATHS.CREATE_ORDER);
                 } else if (
                   data.state === cartStatusFilter.channel_to_be_replaced
                 ) {
-                  Cookies.set(cookiesTypes.isChannelReplaced, "true");
-                  navigate(paths.createOrder);
+                  Cookies.set(ENUM_COOKIES_TYPES.IS_CHANNEL_REPLACED, "true");
+                  navigate(ENUM_PATHS.CREATE_ORDER);
                 } else if (data.state === cartStatusFilter.amount) {
                   toast({
                     variant: "error",
@@ -179,14 +180,14 @@ export const CreatePost: FC<CreatePostProps> = ({}) => {
             </div>
             <DialogFooter className="pt-[20px]">
               <Link
-                to={`${paths.login}${currentPath}`}
+                to={`${ENUM_PATHS.LOGIN}${currentPath}`}
                 className={`${styles.btns__login} truncate`}
               >
                 {t("login")}
                 <LoginIcon />
               </Link>
               <Link
-                to={`${paths.registration}${currentPath}`}
+                to={`${ENUM_PATHS.REGISTRATION}${currentPath}`}
                 className={`${styles.btns__register} truncate`}
               >
                 {t("registration")}

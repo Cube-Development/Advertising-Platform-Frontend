@@ -1,8 +1,3 @@
-import { FC, useEffect, useState } from "react";
-import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import { motion } from "framer-motion";
-import { EditEmail, EditPassword, EditUser } from "@features/profile";
 import {
   eventForm,
   IEventsData,
@@ -14,10 +9,16 @@ import {
   useGetProfileQuery,
   userForm,
 } from "@entities/user";
+import { EditEmail, EditPassword, EditUser } from "@features/profile";
 import { EditPencilIcon, EmailIcon, TelegramJetlIcon } from "@shared/assets";
-import { languages, languagesNum, PAGE_ANIMATION } from "@shared/config";
+import { PAGE_ANIMATION } from "@shared/config";
 import { useClearCookiesOnPage } from "@shared/hooks";
+import { ENUM_LANGUAGES, ENUM_LANGUAGES_NUM } from "@shared/languages";
 import { CustomCheckbox, MyButton, ToastAction, useToast } from "@shared/ui";
+import { motion } from "framer-motion";
+import { FC, useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
 export const SettingsProfile: FC = () => {
@@ -35,7 +36,7 @@ export const SettingsProfile: FC = () => {
     defaultValues: {
       user_additional: {
         email: "",
-        language: languagesNum.ru,
+        language: ENUM_LANGUAGES_NUM.RU,
         location: "",
         first_name: "",
         surname: "",
@@ -79,7 +80,7 @@ export const SettingsProfile: FC = () => {
       reset({
         user_additional: {
           email: profile?.user_additional?.email || "",
-          language: profile?.user_additional?.language || languagesNum.ru,
+          language: profile?.user_additional?.language || ENUM_LANGUAGES_NUM.RU,
           location: profile?.user_additional?.location || "Ташкент",
           first_name: profile?.user_additional?.first_name || "",
           surname: profile?.user_additional?.surname || "",
@@ -224,12 +225,13 @@ export const SettingsProfile: FC = () => {
                       "profile.account_block.language.default_value",
                     )}
                     value={
-                      formState?.user_additional?.language === languagesNum.en
-                        ? languages.en
+                      formState?.user_additional?.language ===
+                      ENUM_LANGUAGES_NUM.EN
+                        ? ENUM_LANGUAGES.EN
                         : formState?.user_additional?.language ===
-                            languagesNum.ru
-                          ? languages.ru
-                          : languages.uz
+                            ENUM_LANGUAGES_NUM.RU
+                          ? ENUM_LANGUAGES.RU
+                          : ENUM_LANGUAGES.UZ
                     }
                     readOnly
                   />

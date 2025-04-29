@@ -1,6 +1,6 @@
 import { IAdminTransactions } from "@entities/admin";
 import {
-  accordionTypes,
+  ENUM_ACCORDION_TYPES,
   INTERSECTION_ELEMENTS,
   PAGE_ANIMATION,
 } from "@shared/config";
@@ -33,7 +33,7 @@ export const TransactionsList: FC<TransactionsListProps> = ({
         const observer = new MutationObserver(() => {
           const state = ref.getAttribute("data-state");
           const icon = ref.querySelector(`.arrow svg`);
-          if (state === accordionTypes.open) {
+          if (state === ENUM_ACCORDION_TYPES.OPEN) {
             ref.classList.add(styles.active);
             if (icon) icon.classList.add("rotate");
             if (icon) icon.classList.remove("rotate__down");

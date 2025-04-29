@@ -3,7 +3,7 @@ import styles from "./styles.module.scss";
 import { AddIcon, SendIcon } from "@shared/assets";
 import { useTranslation } from "react-i18next";
 import { IMessage } from "@entities/communication";
-import { chatRoles } from "@entities/user";
+import { ENUM_CHAT_ROLES } from "@entities/user";
 
 interface SendMessageProps {
   onChange: (message: IMessage) => void;
@@ -34,7 +34,7 @@ export const SendMessage: FC<SendMessageProps> = ({ onChange }) => {
       const formattedTime: string = `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}`;
 
       onChange({
-        type: chatRoles.sender,
+        type: ENUM_CHAT_ROLES.sender,
         message: newMessage,
         date: formattedDate,
         time: formattedTime,

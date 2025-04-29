@@ -8,12 +8,13 @@ import {
   LineTelegramIcon,
   LocationIcon,
 } from "@shared/assets";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 
 export const Footer: FC = () => {
   const { t } = useTranslation();
   const pathname = useLocation();
-  const isCreateOrderPage = pathname.pathname === paths.createOrder || false;
+  const isCreateOrderPage =
+    pathname.pathname === ENUM_PATHS.CREATE_ORDER || false;
   console.log(isCreateOrderPage);
   return (
     <footer

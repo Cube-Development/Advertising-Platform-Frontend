@@ -2,7 +2,7 @@ import { AllChannelTypes, channelStatusFilter } from "@entities/channel";
 import { offerStatusFilter } from "@entities/offer";
 import { AddChannel, ZeroChannel } from "@features/channel";
 import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
-import { pageFilter } from "@shared/routing";
+import { ENUM_PAGE_FILTER } from "@shared/routing";
 import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC } from "react";
@@ -30,7 +30,7 @@ export const ActiveChannels: FC<ActiveChannelsProps> = ({
         <ZeroChannel
           statusFilter={statusFilter}
           AddChannelBtn={AddChannel}
-          page={pageFilter.platform}
+          page={ENUM_PAGE_FILTER.PLATFORM}
         />
       ) : (
         <div className={styles.cards}>

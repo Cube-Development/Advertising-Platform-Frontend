@@ -6,7 +6,7 @@ import {
 } from "@entities/admin";
 import { ChooseComplaint, SeeComplaint } from "@features/adminPanel";
 import { ArrowLongHorizontalIcon } from "@shared/assets";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import { useToast } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -142,7 +142,7 @@ export const ComplaintCard: FC<ComplaintCardProps> = ({ card, status }) => {
               </div>
             </div>
             <Link
-              to={`${paths.adminComplaintInfo.replace(":id", card?.id)}`}
+              to={`${ENUM_PATHS.ADMIN_COMPLAINT_INFO.replace(":id", card?.id)}`}
               className={styles.arrow}
             >
               <ArrowLongHorizontalIcon className="icon__grey" />

@@ -1,7 +1,7 @@
 import { userSlice } from "@entities/user";
 import { catalogFilterSlice } from "@entities/project";
 import { walletSlice } from "@entities/wallet";
-import { dropdownMenuSlice } from "@pages/layouts";
+import { dropdownMenuSlice } from "@shared/slice";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { authApi, baseApi } from "@shared/api";
 

@@ -1,7 +1,7 @@
 import { IAddChannelQuery } from "@entities/channel";
 import { LoginIcon } from "@shared/assets";
 import { useAppSelector, useCurrentPathEnum } from "@shared/hooks";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import {
   Dialog,
   DialogClose,
@@ -72,14 +72,14 @@ export const AddChannel: FC<IAddChannelQuery> = ({ props, path, orange }) => {
             </div>
             <DialogFooter className="pt-[20px]">
               <Link
-                to={`${paths.login}${currentPath}`}
+                to={`${ENUM_PATHS.LOGIN}${currentPath}`}
                 className={`${styles.btns__login} truncate`}
               >
                 {t("login")}
                 <LoginIcon />
               </Link>
               <Link
-                to={`${paths.registration}${currentPath}`}
+                to={`${ENUM_PATHS.REGISTRATION}${currentPath}`}
                 className={`${styles.btns__register} truncate`}
               >
                 {t("registration")}

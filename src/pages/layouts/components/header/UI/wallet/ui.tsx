@@ -1,6 +1,6 @@
 import { CloseIcon, PlusIcon } from "@shared/assets";
 import { useAppSelector } from "@shared/hooks";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -57,16 +57,16 @@ export const Wallet: FC = () => {
       {isMenuOpen && (
         <div className={styles.menu}>
           <ul>
-            <Link to={paths.walletTopUp} onClick={closeMenu}>
+            <Link to={ENUM_PATHS.WALLET_TOP_UP} onClick={closeMenu}>
               <li>{t("wallet_menu.top_up")}</li>
             </Link>
-            <Link to={paths.walletWithdraw} onClick={closeMenu}>
+            <Link to={ENUM_PATHS.WALLET_WITHDRAW} onClick={closeMenu}>
               <li>{t("wallet_menu.withdraw")}</li>
             </Link>
-            <Link to={paths.walletHistory} onClick={closeMenu}>
+            <Link to={ENUM_PATHS.WALLET_HISTORY} onClick={closeMenu}>
               <li>{t("wallet_menu.history")}</li>
             </Link>
-            <Link to={paths.main} onClick={closeMenu}>
+            <Link to={ENUM_PATHS.MAIN} onClick={closeMenu}>
               <li>{t("wallet_menu.invoice")}</li>
             </Link>
           </ul>

@@ -1,7 +1,7 @@
 import { IMenuItems } from "@entities/admin";
 import { ArrowSmallVerticalIcon, LoginIcon } from "@shared/assets";
-import { accordionTypes } from "@shared/config";
-import { paths } from "@shared/routing";
+import { ENUM_ACCORDION_TYPES } from "@shared/config";
+import { ENUM_PATHS } from "@shared/routing";
 import {
   AccordionContent,
   AccordionItem,
@@ -39,7 +39,9 @@ export const MenuItem: React.FC<IMenuItems> = ({
     const state = (accordionRef.current! as HTMLElement).getAttribute(
       "data-state",
     );
-    state === accordionTypes.open ? setIsActive(true) : setIsActive(false);
+    state === ENUM_ACCORDION_TYPES.OPEN
+      ? setIsActive(true)
+      : setIsActive(false);
   };
 
   useEffect(() => {
@@ -121,7 +123,7 @@ export const MenuItem: React.FC<IMenuItems> = ({
               </div>
               <DialogFooter className="pt-[20px]">
                 <Link
-                  to={`${paths.login}${currentPath}`}
+                  to={`${ENUM_PATHS.LOGIN}${currentPath}`}
                   className={`${styles.btns__login} truncate`}
                   onClick={() => onChange("")}
                 >
@@ -129,7 +131,7 @@ export const MenuItem: React.FC<IMenuItems> = ({
                   <LoginIcon />
                 </Link>
                 <Link
-                  to={`${paths.registration}${currentPath}`}
+                  to={`${ENUM_PATHS.REGISTRATION}${currentPath}`}
                   className={`${styles.btns__register} truncate`}
                   onClick={() => onChange("")}
                 >

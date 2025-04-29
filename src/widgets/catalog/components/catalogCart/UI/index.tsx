@@ -1,5 +1,5 @@
 import { ICart } from "@entities/project";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import { MyButton } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -30,7 +30,7 @@ export const CatalogCart: FC<CatalogCartProps> = ({ cart }) => {
         </div>
       </div>
       <div className={styles.cart}>
-        <Link to={paths.cart}>
+        <Link to={ENUM_PATHS.CART}>
           <MyButton buttons_type="button__green" className={styles.button}>
             <p>{t("catalog.current_cart.cart")}</p>
           </MyButton>

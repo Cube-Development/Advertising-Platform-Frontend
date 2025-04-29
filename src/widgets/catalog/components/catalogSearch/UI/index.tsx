@@ -25,7 +25,8 @@ import {
   SelectSex,
 } from "@features/other";
 import { ArrowSmallVerticalIcon } from "@shared/assets";
-import { accordionTypes, Languages } from "@shared/config";
+import { ENUM_ACCORDION_TYPES } from "@shared/config";
+import { USER_LANGUAGES_LIST } from "@shared/languages";
 import {
   Accordion,
   AccordionContent,
@@ -57,7 +58,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
   const { t } = useTranslation();
   const language = useFindLanguage();
   const contentRes = {
-    language: language?.id || Languages[0].id,
+    language: language?.id || USER_LANGUAGES_LIST[0].id,
     page: 1,
   };
   const accordionRefs = useRef<Array<HTMLDivElement | null>>([]);
@@ -242,7 +243,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
         const observer = new MutationObserver(() => {
           const state = ref.getAttribute("data-state");
           const icon = ref.querySelector(`.${styles.arrow} svg`);
-          if (state === accordionTypes.open) {
+          if (state === ENUM_ACCORDION_TYPES.OPEN) {
             ref.classList.add(styles.active);
             if (icon) icon.classList.add("icon__white");
             if (icon) icon.classList.add("rotate__down");

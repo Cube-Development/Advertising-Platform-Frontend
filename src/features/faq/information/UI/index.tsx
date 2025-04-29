@@ -1,6 +1,6 @@
 import { IFAQInformation } from "@entities/faq";
 import { ArrowSmallVerticalIcon } from "@shared/assets";
-import { accordionTypes } from "@shared/config";
+import { ENUM_ACCORDION_TYPES } from "@shared/config";
 import { PAGE_ANIMATION } from "@shared/config/animation";
 import { AccordionContent, AccordionItem, AccordionTrigger } from "@shared/ui";
 import { motion } from "framer-motion";
@@ -26,7 +26,7 @@ export const FAQInformation: FC<FAQInformationProps> = ({
         const observer = new MutationObserver(() => {
           const state = ref.getAttribute("data-state");
           const icon = ref.querySelector(`.${styles.arrow} svg`);
-          if (state === accordionTypes.open) {
+          if (state === ENUM_ACCORDION_TYPES.OPEN) {
             ref.classList.add(styles.active);
             if (icon) icon.classList.add("icon__white");
             if (icon) icon.classList.add("rotate__down");

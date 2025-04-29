@@ -14,7 +14,7 @@ import {
 import { bloggerOffersAPI } from "@entities/offer";
 import { advProjectsAPI, managerProjectsAPI } from "@entities/project";
 import { walletAPI } from "@entities/wallet";
-import { cookiesTypes, INTERSECTION_ELEMENTS } from "@shared/config";
+import { ENUM_COOKIES_TYPES, INTERSECTION_ELEMENTS } from "@shared/config";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { useToast } from "@shared/ui";
 import { convertUTCToLocalDateTime } from "@shared/utils";
@@ -80,7 +80,7 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
   const { isAuth, role } = useAppSelector((state) => state.user);
   const [getWebsocketToken] = useGetWebsocketTokenMutation();
   const [getAuthToken] = useGetAuthTokenMutation();
-  const userId = Cookies.get(cookiesTypes.userId)!;
+  const userId = Cookies.get(ENUM_COOKIES_TYPES.USER_ID)!;
   const channelName = "common";
   const personalChannel = "common:user#" + userId;
 

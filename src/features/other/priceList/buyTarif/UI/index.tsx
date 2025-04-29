@@ -20,7 +20,7 @@ import {
   YesIcon,
 } from "@shared/assets";
 import { useAppSelector, useCurrentPathEnum } from "@shared/hooks";
-import { paths } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import { ITarifInfo } from "@shared/types";
 import {
   Dialog,
@@ -503,7 +503,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
                     </p>
                   </div>
                   <Link
-                    to={buildPathWithQuery(paths.orders, {
+                    to={buildPathWithQuery(ENUM_PATHS.ORDERS, {
                       [queryParamKeys.projectType]:
                         projectTypesFilter.managerProject,
                       [queryParamKeys.projectStatus]:
@@ -552,7 +552,7 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
                               {t("symbol")}
                             </span>
                           </div>
-                          <Link to={paths.walletTopUp}>
+                          <Link to={ENUM_PATHS.WALLET_TOP_UP}>
                             <button>
                               <p>{t("turnkey.chain.no_balance.button")}</p>
                             </button>
@@ -603,14 +603,14 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
             </div>
             <DialogFooter className="pt-[20px]">
               <Link
-                to={`${paths.login}${currentPath}`}
+                to={`${ENUM_PATHS.LOGIN}${currentPath}`}
                 className={`${styles.btns__login} truncate`}
               >
                 {t("login")}
                 <LoginIcon />
               </Link>
               <Link
-                to={`${paths.registration}${currentPath}`}
+                to={`${ENUM_PATHS.REGISTRATION}${currentPath}`}
                 className={`${styles.btns__register} truncate`}
               >
                 {t("registration")}

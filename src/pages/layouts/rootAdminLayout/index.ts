@@ -1,1 +1,0 @@
-export { RootAdminLayout } from "./ui";

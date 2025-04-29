@@ -1,6 +1,7 @@
 import { platformTypesNum } from "@entities/platform";
 import { CATALOG, baseApi } from "@shared/api";
-import { INTERSECTION_ELEMENTS, languagesNum } from "@shared/config";
+import { INTERSECTION_ELEMENTS } from "@shared/config";
+import { ENUM_LANGUAGES_NUM } from "@shared/languages";
 import { sortingFilter } from "../config";
 import {
   ICatalogCards,
@@ -13,7 +14,7 @@ export interface getCatalogReq {
   user_id?: string;
   guest_id?: string;
   project_id?: string;
-  language: languagesNum;
+  language: ENUM_LANGUAGES_NUM;
   page: number;
   elements_on_page?: number;
   filter: {
@@ -41,7 +42,7 @@ export interface getTAParametersReq {
 }
 
 export interface getRecommendChannels {
-  language: languagesNum;
+  language: ENUM_LANGUAGES_NUM;
   channels: string[];
 }
 
