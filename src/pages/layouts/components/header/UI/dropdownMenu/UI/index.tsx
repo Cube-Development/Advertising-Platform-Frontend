@@ -8,7 +8,7 @@ import {
   useGetViewTransactionsQuery,
   viewsTypes,
 } from "@entities/views";
-import { setDropDownMenu } from "@pages/layouts";
+import { setDropDownMenu } from "@shared/slice";
 import { BREAKPOINT } from "@shared/config";
 import { useAppDispatch, useAppSelector, useWindowWidth } from "@shared/hooks";
 import { ENUM_PATHS } from "@shared/routing";

@@ -1,6 +1,6 @@
 import { Outlet, ScrollRestoration } from "react-router-dom";
 import { Toaster } from "@shared/ui";
-import { MainAdminLayout } from "./mainAminLayout";
+import { MainAdminLayout } from "./main-admin-layout";
 
 export const RootAdminLayout = () => {
   return (

@@ -6,7 +6,6 @@ import {
   toggleRole as toggleroleAction,
   useUpdateRoleMutation,
 } from "@entities/user";
-import { setDropDownMenu } from "@pages/layouts";
 import { AccordionItem } from "@radix-ui/react-accordion";
 import { useAppDispatch, useAppSelector, useDebounce } from "@shared/hooks";
 import { ENUM_PATHS } from "@shared/routing";
@@ -17,6 +16,7 @@ import { Link, useLocation } from "react-router-dom";
 import { advertiserMenu, bloggerMenu, commonMenu, managerMenu } from "./config";
 import { HoverItem } from "./hoverItem";
 import styles from "./styles.module.scss";
+import { setDropDownMenu } from "@shared/slice";
 
 export const Sidebar: FC = () => {
   const { t } = useTranslation();

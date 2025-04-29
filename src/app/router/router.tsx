@@ -1,8 +1,8 @@
 import { RootAdminLayout, RootLayout } from "@pages/layouts";
 import { ENUM_LAYOUT_TYPES, ENUM_PATHS } from "@shared/routing";
-import { ALL_APP_ROUTES_LIST } from "@shared/routing/config";
 import { createBrowserRouter } from "react-router-dom";
 import { ProtectedRoute } from "./protected-route";
+import { ALL_APP_ROUTES_LIST } from "./config";
 
 const ROOT_ROUTES_LIST = ALL_APP_ROUTES_LIST.filter(
   (route) => route.layout === ENUM_LAYOUT_TYPES.ROOT,
