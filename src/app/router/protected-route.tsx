@@ -1,7 +1,7 @@
 import { ENUM_ROLES } from "@entities/user";
-import { SideBarAdminLayout, SideBarLayout } from "@pages/layouts";
 import { useAppSelector } from "@shared/hooks";
 import { ENUM_AUTH_TYPES, ENUM_PATHS, IRouting } from "@shared/routing";
+import { SideBarAdminLayout, SideBarLayout } from "@widgets/layouts";
 import { Navigate } from "react-router-dom";
 
 // Компонент защиты маршрутов
