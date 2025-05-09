@@ -62,6 +62,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
         posts: [],
         datetime: { project_id: projectId, orders: [] },
         isMultiPost: false,
+        isDownloadPosts: false,
       },
     });
   const formState = watch();
@@ -141,7 +142,10 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
     if (
       projectId &&
       formData?.posts?.length &&
-      formData?.datetime?.orders?.length
+      formData?.datetime?.orders?.length &&
+      !isOrdersLoading &&
+      !isPostsLoading &&
+      !formState?.isDownloadPosts
     ) {
       try {
         setIsLoading(true);
@@ -367,7 +371,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
       }
     }
   };
-
+  console.log(333, formState?.isDownloadPosts, isPostsLoading, isOrdersLoading);
   return (
     <>
       {isLoading && <CreateOrderLoading />}
@@ -376,6 +380,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
         register={register}
         getValues={getValues}
       />
+
       <form onSubmit={handleSubmit(onSubmit)}>
         {isOrdersLoading ? (
           <div className="h-[80svh] w-full backdrop-blur-3xl flex justify-center items-center">
@@ -392,6 +397,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
               getValues={getValues}
               formState={formState}
             />
+
             <CreateOrderDatetime
               cards={projectChannels?.orders || []}
               isBlur={blur.datetime}
@@ -400,10 +406,16 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
               getValues={getValues}
               formState={formState}
             />
+
             <CreateOrderPayment
               isBlur={blur.payment}
               total_price={totalPrice?.amount || 0}
               role={role}
+              isAllowed={
+                !formState?.isDownloadPosts &&
+                !isOrdersLoading &&
+                !isPostsLoading
+              }
             />
           </>
         )}

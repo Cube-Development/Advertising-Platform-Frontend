@@ -1,10 +1,6 @@
-import {
-  INotificationCard,
-  notificationsStatus,
-} from "@entities/communication";
+import { INotificationCard } from "@entities/communication";
 import { BagIcon } from "@shared/assets";
 import { FC } from "react";
-import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
 interface NotificationCardProps {
@@ -12,10 +8,9 @@ interface NotificationCardProps {
 }
 
 export const NotificationCard: FC<NotificationCardProps> = ({ card }) => {
-  const { t } = useTranslation();
-  const title =
-    notificationsStatus.find((item) => item.type === card?.method)?.name ||
-    "...";
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(card?.text, "text/html");
+  const h2Text = doc.querySelector("h2.title")?.textContent?.trim();
 
   const stripHtml = (html: string) => html.replace(/<\/?[^>]+(>|$)/g, " ");
   return (
@@ -28,11 +23,7 @@ export const NotificationCard: FC<NotificationCardProps> = ({ card }) => {
         />
       </div>
       <div className={styles.text__wrapper}>
-        <p className={`${styles.title} truncate`}>{t(title)}</p>
-        {/* <span
-          className={styles.text}
-          dangerouslySetInnerHTML={{ __html: card?.data?.text || "" }}
-        /> */}
+        <p className={`${styles.title} truncate`}>{h2Text}</p>
         <span className={styles.text}>{stripHtml(card?.text || "")}</span>
       </div>
       <div className={styles.info}>
