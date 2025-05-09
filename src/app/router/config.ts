@@ -95,7 +95,7 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
   {
     path: ENUM_PATHS.CHANNEL,
     component: ChannelPage,
-    roles: USER_ROLES,
+    roles: [...USER_ROLES, ENUM_ROLES.MANAGER],
     auth: ENUM_AUTH_TYPES.PUBLIC,
     layout: ENUM_LAYOUT_TYPES.ROOT,
   },
