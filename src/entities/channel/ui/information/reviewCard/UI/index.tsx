@@ -21,7 +21,7 @@ export const ReviewCard: FC<ReviewProps> = ({ card }) => {
           </div>
           <span>{card?.date}</span>
         </div>
-        <RatingIcon />
+        <RatingIcon rate={card?.rate || 0} />
         <ScrollArea className={styles.description}>
           <p>{card?.text}</p>
         </ScrollArea>

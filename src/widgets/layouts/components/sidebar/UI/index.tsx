@@ -3,7 +3,8 @@ import { DEBOUNCE } from "@entities/project";
 import {
   ENUM_ROLES,
   ROLES_TYPES_LIST,
-  toggleRole as toggleroleAction,
+  toggleRole,
+  USER_ROLES,
   useUpdateRoleMutation,
 } from "@entities/user";
 import { AccordionItem } from "@radix-ui/react-accordion";
@@ -24,18 +25,43 @@ import { HoverItem } from "./hoverItem";
 import styles from "./styles.module.scss";
 
 export const Sidebar: FC = () => {
-  const { t } = useTranslation();
-  const { isAuth, role } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const location = useLocation();
-
+  const { t } = useTranslation();
+  const { isAuth, role } = useAppSelector((state) => state.user);
   const [updateRole] = useUpdateRoleMutation();
 
-  const toggleRole = (currentRole: ENUM_ROLES) => {
-    if (currentRole !== role) {
-      dispatch(toggleroleAction(currentRole));
+  let toRole: ENUM_ROLES;
+  let toPage: ENUM_PATHS;
+  let SIDEBAR_MENU: IMenuItem[];
+
+  switch (role) {
+    case ENUM_ROLES.ADVERTISER:
+      toRole = ENUM_ROLES.BLOGGER;
+      toPage = ENUM_PATHS.MAIN_BLOGGER;
+      SIDEBAR_MENU = [...SIDEBAR_ADVERTISER_MENU, ...SIDEBAR_COMMON_MENU];
+      break;
+    case ENUM_ROLES.BLOGGER:
+      toRole = ENUM_ROLES.ADVERTISER;
+      toPage = ENUM_PATHS.MAIN;
+      SIDEBAR_MENU = [...SIDEBAR_BLOGGER_MENU, ...SIDEBAR_COMMON_MENU];
+      break;
+    case ENUM_ROLES.MANAGER:
+      toRole = role;
+      toPage = ENUM_PATHS.ORDERS;
+      SIDEBAR_MENU = SIDEBAR_MANAGER_MENU;
+      break;
+    default:
+      toRole = role;
+      toPage = ENUM_PATHS.MAIN;
+      SIDEBAR_MENU = [];
+  }
+
+  const changeRole = () => {
+    if (USER_ROLES.includes(role)) {
+      dispatch(toggleRole(toRole));
       if (isAuth) {
-        updateRole({ role: currentRole });
+        updateRole({ role: toRole });
       }
     }
   };
@@ -56,15 +82,6 @@ export const Sidebar: FC = () => {
     const segments = cleanPathname.split("/").filter(Boolean);
     return segments.length > 0 ? `/${segments[0]}` : "/";
   };
-
-  const SIDEBAR_MENU: IMenuItem[] =
-    role === ENUM_ROLES.ADVERTISER
-      ? [...SIDEBAR_ADVERTISER_MENU, ...SIDEBAR_COMMON_MENU]
-      : role === ENUM_ROLES.BLOGGER
-        ? [...SIDEBAR_BLOGGER_MENU, ...SIDEBAR_COMMON_MENU]
-        : role === ENUM_ROLES.MANAGER
-          ? SIDEBAR_MANAGER_MENU
-          : [];
 
   const [isScrollingUp, setIsScrollingUp] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -111,32 +128,17 @@ export const Sidebar: FC = () => {
         className={`${styles.menu} ${isScrollingUp || lastScrollY === 0 ? styles.visible : styles.hidden}`}
       >
         <div className={styles.switcher}>
-          <div className={styles.switcher__row}>
-            <Link
-              to={
-                role === ENUM_ROLES.ADVERTISER
-                  ? ENUM_PATHS.MAIN_BLOGGER
-                  : ENUM_PATHS.MAIN
-              }
-            >
-              <p
-                className={styles.role}
-                onClick={() => {
-                  toggleRole(
-                    role === ENUM_ROLES.ADVERTISER
-                      ? ENUM_ROLES.BLOGGER
-                      : ENUM_ROLES.ADVERTISER,
-                  );
-                }}
-              >
+          <Link to={toPage} onClick={changeRole} className={styles.link}>
+            <div className={styles.switcher__row}>
+              <p className={styles.role}>
                 {
                   t(
                     ROLES_TYPES_LIST.find((el) => el.type === role)?.name || "",
                   )[0]
                 }
               </p>
-            </Link>
-          </div>
+            </div>
+          </Link>
         </div>
         <Accordion type="single" className={styles.menu__accordion}>
           {SIDEBAR_MENU.map((item, index) => {

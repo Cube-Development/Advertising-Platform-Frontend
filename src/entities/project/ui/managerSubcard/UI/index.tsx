@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { IChatProps } from "@entities/communication";
 import {
   GetPostRes,
@@ -34,6 +35,7 @@ import {
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { ENUM_PATHS } from "@shared/routing";
 
 interface ManagerProjectSubcardProps {
   card: IManagerProjectCard;
@@ -96,11 +98,15 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
         </div>
         <div className={styles.subcard__left}>
           <div className={styles.subcard__left__description}>
-            <div className={styles.subcard__left__description__logo}>
+            <Link
+              to={`${ENUM_PATHS.CHANNEL.replace(":id", subcard?.channel_id || subcard?.id)}`}
+              target="_blank"
+              className={styles.subcard__left__description__logo}
+            >
               <img src={subcard?.avatar} alt="" />
-            </div>
+            </Link>
             <div className={styles.subcard__left__description__rate}>
-              <RatingIcon />
+              <RatingIcon rate={subcard?.grade || 0} />
             </div>
             <div className={styles.subcard__left__description__title}>
               <p className="truncate">{subcard?.name}</p>
@@ -260,7 +266,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
                     <AcceptBtn order_id={subcard.id} />
                     <RejectBtn order_id={subcard.id} />
                   </div>
-                  <CheckBtn />
+                  <CheckBtn url={subcard?.post_url} />
                 </div>
               </div>
             ) : subcard?.api_status === orderStatus.in_progress ? (

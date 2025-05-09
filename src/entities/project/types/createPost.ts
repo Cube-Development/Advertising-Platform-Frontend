@@ -37,6 +37,9 @@ export interface ICreatePostForm {
   isMultiPost: boolean;
   selectedPostType: PostTypesNum;
   platformFilter: IChannelLink;
+
+  isDownloadPosts: boolean;
+  isLoading: boolean;
 }
 
 export interface ICreatePost {

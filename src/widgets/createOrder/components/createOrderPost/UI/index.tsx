@@ -1,9 +1,4 @@
 import {
-  DisplayFeed,
-  DisplayShorts,
-  DisplayStories,
-  DisplayTelegram,
-  DisplayVideos,
   MatchTypesNum,
   PostTypesNum,
   platformTypes,
@@ -29,6 +24,7 @@ import {
   PostFiles,
 } from "@features/createOrder";
 import { PostIcon } from "@shared/assets";
+import { useWindowWidth } from "@shared/hooks";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -46,9 +42,9 @@ import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { checkPosts, renderEditor } from "../functions";
 import { MultiPostsList } from "../multiPostsList";
+import { RenderDisplay } from "../renderDisplay";
 import { PlatformFilter, PostTypesTabs, TypeTabs } from "../tabs";
 import styles from "./styles.module.scss";
-import { useWindowWidth } from "@shared/hooks";
 
 interface CreateOrderPostProps {
   cards: IPostChannel[];
@@ -120,7 +116,6 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
     );
     return await Promise.all(promises);
   };
-  // console.log("posts", posts);
 
   // если есть посты на стороне бека то они заполнятся внутрь формы
   useEffect(() => {
@@ -139,6 +134,8 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
 
       if (universalOrders?.length) {
         const processUniversalPosts = async () => {
+          setValue("isDownloadPosts", true);
+
           // Этап 1: Обработка текстовых данных
           const textDataUpdatedPosts = (formState?.posts || []).map(
             (formPost) => {
@@ -196,6 +193,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
           );
 
           setValue("posts", postsWithFiles); // Устанавливаем данные с файлами
+          setValue("isDownloadPosts", false);
         };
 
         processUniversalPosts();
@@ -203,6 +201,8 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
 
       if (uniqueOrders?.length) {
         const processUniquePosts = async () => {
+          setValue("isDownloadPosts", true);
+
           // Этап 1: Обработка текстовых данных
           const textDataUpdatedMultiposts = (formState?.multiposts || []).map(
             (formPost) => {
@@ -268,14 +268,13 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
           );
 
           setValue("multiposts", multipostsWithFiles); // Устанавливаем данные с файлами
+          setValue("isDownloadPosts", false);
         };
 
         processUniquePosts();
       }
     }
   }, [posts?.length, formState?.posts?.length, formState?.multiposts?.length]);
-
-  console.log("formState.multiposts", formState?.multiposts);
 
   const cardsIds: number[] = [...new Set(cards?.map((card) => card?.platform))];
   const platformTypesIds: number[] = platformTypes.map(
@@ -322,6 +321,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
     }
   };
   console.log("formState", formState);
+
   return (
     <div id="post" className={`container ${isBlur ? "blur" : ""}`}>
       <div className={styles.wrapper}>
@@ -430,50 +430,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                 </div>
               </div>
               <div className={styles.display}>
-                {formState.platformFilter?.type ===
-                  platformTypesStr.telegram && (
-                  <DisplayTelegram
-                    formState={formState}
-                    platformId={formState.platformFilter?.id}
-                  />
-                )}
-                {formState.platformFilter?.type ===
-                  platformTypesStr.instagram &&
-                  formState.selectedPostType === PostTypesNum.feed && (
-                    <DisplayFeed
-                      formState={formState}
-                      platformId={formState.platformFilter?.id}
-                      postType={PostTypesNum.feed}
-                    />
-                  )}
-                {formState.platformFilter?.type ===
-                  platformTypesStr.instagram &&
-                  formState.selectedPostType ===
-                    PostTypesNum.FullHd_vertical && (
-                    <DisplayStories
-                      formState={formState}
-                      platformId={formState.platformFilter.id}
-                      postType={PostTypesNum.FullHd_vertical}
-                    />
-                  )}
-                {formState.platformFilter?.type === platformTypesStr.youtube &&
-                  formState.selectedPostType ===
-                    PostTypesNum.FullHd_vertical && (
-                    <DisplayShorts
-                      formState={formState}
-                      platformId={formState.platformFilter?.id}
-                      postType={PostTypesNum.FullHd_vertical}
-                    />
-                  )}
-                {formState.platformFilter?.type === platformTypesStr.youtube &&
-                  formState.selectedPostType ===
-                    PostTypesNum.FullHd_horizontal && (
-                    <DisplayVideos
-                      formState={formState}
-                      platformId={formState.platformFilter?.id}
-                      postType={PostTypesNum.FullHd_horizontal}
-                    />
-                  )}
+                <RenderDisplay formState={formState} />
                 <div className={styles.continue}>
                   <ContinueOrder onClick={handleCheckPosts} />
                 </div>
@@ -497,52 +454,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                       <AlertDialogAction>
                         <X className="absolute -right-8 -top-4 w-[30px] rounded-full p-1 bg-white cursor-pointer" />
                       </AlertDialogAction>
-                      {formState.platformFilter?.type ===
-                        platformTypesStr.telegram && (
-                        <DisplayTelegram
-                          formState={formState}
-                          platformId={formState.platformFilter?.id}
-                        />
-                      )}
-                      {formState.platformFilter?.type ===
-                        platformTypesStr.instagram &&
-                        formState.selectedPostType === PostTypesNum.feed && (
-                          <DisplayFeed
-                            formState={formState}
-                            platformId={formState.platformFilter?.id}
-                            postType={PostTypesNum.feed}
-                          />
-                        )}
-                      {formState.platformFilter?.type ===
-                        platformTypesStr.instagram &&
-                        formState.selectedPostType ===
-                          PostTypesNum.FullHd_vertical && (
-                          <DisplayStories
-                            formState={formState}
-                            platformId={formState.platformFilter.id}
-                            postType={PostTypesNum.FullHd_vertical}
-                          />
-                        )}
-                      {formState.platformFilter?.type ===
-                        platformTypesStr.youtube &&
-                        formState.selectedPostType ===
-                          PostTypesNum.FullHd_vertical && (
-                          <DisplayShorts
-                            formState={formState}
-                            platformId={formState.platformFilter?.id}
-                            postType={PostTypesNum.FullHd_vertical}
-                          />
-                        )}
-                      {formState.platformFilter?.type ===
-                        platformTypesStr.youtube &&
-                        formState.selectedPostType ===
-                          PostTypesNum.FullHd_horizontal && (
-                          <DisplayVideos
-                            formState={formState}
-                            platformId={formState.platformFilter?.id}
-                            postType={PostTypesNum.FullHd_horizontal}
-                          />
-                        )}
+                      <RenderDisplay formState={formState} />
                     </div>
                   </AlertDialogContent>
                 </AlertDialog>

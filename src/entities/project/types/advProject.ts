@@ -38,6 +38,7 @@ export interface IAdvProjectCard {
 export interface IAdvProjectSubcard {
   id: string;
   identifier: number;
+  channel_id?: string;
   date_coming: string;
   name: string;
   category: string;
@@ -69,6 +70,7 @@ export interface IAdvProjectSubcard {
   desire: IDesire[];
   platform: platformTypesNum;
   is_review: boolean;
+  grade?: number;
 }
 
 interface IDesire {

@@ -68,7 +68,7 @@ export const SmallCatalogCard: FC<SmallCatalogCardProps> = ({
           </Link>
           <div>
             <span className="mobile-xl:[&>svg]:w-[50px] mobile:[&>svg]:w-[40px] [&>svg]:w-[34px]">
-              <RatingIcon />
+              <RatingIcon rate={card?.rate || 0} />
             </span>
           </div>
         </div>
