@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { HappySmileIcon, MoreIcon } from "@shared/assets";
 import { CountdownTimer, useToast } from "@shared/ui";
 import { FC } from "react";
@@ -15,6 +16,7 @@ import {
 import { platformToIcon, useGetPostQuery } from "@entities/project";
 import { CheckDate } from "@entities/communication";
 import { ENUM_ROLES } from "@entities/user";
+import { ENUM_PATHS } from "@shared/routing";
 
 interface OfferCardProps {
   card: IBloggerOfferCard;
@@ -63,13 +65,17 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter }) => {
       </div>
       <div className={styles.card__description}>
         <div className={styles.card__description__data}>
-          <div className={styles.description}>
+          <Link
+            to={`${ENUM_PATHS.CHANNEL.replace(":id", card?.channel_id || card?.id)}`}
+            target="_blank"
+            className={styles.description}
+          >
             <img src={card.avatar} alt="" />
             <div>
               <p className="truncate">{card.name}</p>
               <span className="truncate">{card.category}</span>
             </div>
-          </div>
+          </Link>
           <div className={styles.date}>
             <span>№{card.identifier}</span>
             <span>{card.date_accept}</span>

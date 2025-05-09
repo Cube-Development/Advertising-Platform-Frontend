@@ -26,7 +26,7 @@ import {
   useToast,
 } from "@shared/ui";
 import { Loader } from "lucide-react";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -41,6 +41,7 @@ export const ReplacePost: FC<ReplacePostProps> = ({ order, status }) => {
   const screen = useWindowWidth();
   const { toast } = useToast();
   const [replace, { isLoading }] = useChangeOrderMutation();
+  const [isOpen, setIsOpen] = useState(false);
   const haveDesire = !!order?.desire.find(
     (el) => el.desire_type === desireStatus.replace_post_request,
   );
@@ -68,6 +69,7 @@ export const ReplacePost: FC<ReplacePostProps> = ({ order, status }) => {
             variant: "success",
             title: t("toasts.orders_advertiser.replace.post.success"),
           });
+          setIsOpen(false);
         })
         .catch((error) => {
           toast({
@@ -81,7 +83,7 @@ export const ReplacePost: FC<ReplacePostProps> = ({ order, status }) => {
   return (
     <>
       {screen >= BREAKPOINT.MD ? (
-        <Dialog>
+        <Dialog open={isOpen} onOpenChange={setIsOpen}>
           <DialogTrigger asChild>
             <MyButton
               buttons_type={
@@ -118,29 +120,27 @@ export const ReplacePost: FC<ReplacePostProps> = ({ order, status }) => {
               )}
               disabled={haveDesire}
             />
-            <DialogClose asChild>
-              {haveDesire ? (
-                <MyButton>
-                  <p>{t("orders_advertiser.subcard.replace.button.ok")}</p>
-                </MyButton>
-              ) : (
-                <MyButton onClick={handleOnClick}>
-                  <p>{t("orders_advertiser.subcard.replace.button.send")}</p>
-                  {isLoading && (
-                    <Loader
-                      className="animate-spin"
-                      stroke="#fff"
-                      width={20}
-                      height={20}
-                    />
-                  )}
-                </MyButton>
-              )}
-            </DialogClose>
+            {haveDesire ? (
+              <MyButton onClick={() => setIsOpen(false)}>
+                <p>{t("orders_advertiser.subcard.replace.button.ok")}</p>
+              </MyButton>
+            ) : (
+              <MyButton onClick={handleOnClick}>
+                <p>{t("orders_advertiser.subcard.replace.button.send")}</p>
+                {isLoading && (
+                  <Loader
+                    className="animate-spin"
+                    stroke="#fff"
+                    width={20}
+                    height={20}
+                  />
+                )}
+              </MyButton>
+            )}
           </DialogContent>
         </Dialog>
       ) : (
-        <Drawer>
+        <Drawer open={isOpen} onOpenChange={setIsOpen}>
           <DrawerTrigger asChild>
             <MyButton
               buttons_type={
@@ -177,25 +177,23 @@ export const ReplacePost: FC<ReplacePostProps> = ({ order, status }) => {
               )}
               disabled={haveDesire}
             />
-            <DrawerClose asChild>
-              {haveDesire ? (
-                <MyButton>
-                  <p>{t("orders_advertiser.subcard.replace.button.ok")}</p>
-                </MyButton>
-              ) : (
-                <MyButton onClick={handleOnClick}>
-                  <p>{t("orders_advertiser.subcard.replace.button.send")}</p>
-                  {isLoading && (
-                    <Loader
-                      className="animate-spin"
-                      stroke="#fff"
-                      width={20}
-                      height={20}
-                    />
-                  )}
-                </MyButton>
-              )}
-            </DrawerClose>
+            {haveDesire ? (
+              <MyButton onClick={() => setIsOpen(false)}>
+                <p>{t("orders_advertiser.subcard.replace.button.ok")}</p>
+              </MyButton>
+            ) : (
+              <MyButton onClick={handleOnClick}>
+                <p>{t("orders_advertiser.subcard.replace.button.send")}</p>
+                {isLoading && (
+                  <Loader
+                    className="animate-spin"
+                    stroke="#fff"
+                    width={20}
+                    height={20}
+                  />
+                )}
+              </MyButton>
+            )}
           </DrawerContent>
         </Drawer>
       )}

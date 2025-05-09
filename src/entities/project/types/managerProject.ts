@@ -77,6 +77,7 @@ export interface IManagerSubprojects {
 
 export interface IManagerProjectSubcard {
   id: string;
+  channel_id?: string;
   date_coming: string;
   name: string;
   category: string;
@@ -108,6 +109,7 @@ export interface IManagerProjectSubcard {
   desire?: IDesire[];
   platform: platformTypesNum;
   is_review: boolean;
+  grade?: number;
 }
 
 export interface IDesire {

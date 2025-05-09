@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import { IChatProps } from "@entities/communication";
 import {
   GetPostRes,
@@ -39,6 +40,7 @@ import {
   ReplaceChannelProps,
   ReplacePostProps,
 } from "@features/order";
+import { ENUM_PATHS } from "@shared/routing";
 
 interface AdvSubcardProps {
   card: IAdvProjectCard;
@@ -105,11 +107,15 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
         </div>
         <div className={styles.subcard__left}>
           <div className={styles.subcard__left__description}>
-            <div className={styles.subcard__left__description__logo}>
+            <Link
+              to={`${ENUM_PATHS.CHANNEL.replace(":id", subcard?.channel_id || subcard?.id)}`}
+              target="_blank"
+              className={styles.subcard__left__description__logo}
+            >
               <img src={subcard?.avatar} alt="" />
-            </div>
+            </Link>
             <div className={styles.subcard__left__description__rate}>
-              <RatingIcon />
+              <RatingIcon rate={subcard?.grade || 0} />
             </div>
             <div className={styles.subcard__left__description__title}>
               <p>{subcard?.name}</p>

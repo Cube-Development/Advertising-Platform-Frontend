@@ -3,6 +3,7 @@ import { offerStatus } from "../config";
 
 export interface IBloggerOfferCard {
   id: string;
+  channel_id?: string;
   platform: platformTypesNum;
   identifier: number;
   created: string;

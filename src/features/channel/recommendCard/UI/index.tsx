@@ -84,7 +84,7 @@ export const RecommendCard: FC<RecommendCardProps> = ({
                 <img src={card?.avatar} alt="logo" />
               </div>
               <div className={styles.rate}>
-                <RatingIcon />
+                <RatingIcon rate={card?.rate || 0} />
               </div>
             </div>
           </div>

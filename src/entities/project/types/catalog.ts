@@ -38,7 +38,7 @@ export interface ICatalogChannel {
   match?: number;
   name: string;
   description: string;
-  rate: number;
+  rate?: number;
   category: string;
   avatar: string;
   subscribers: number;

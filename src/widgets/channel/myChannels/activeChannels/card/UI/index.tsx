@@ -97,7 +97,9 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
               </div>
               {statusFilter === channelStatusFilter.active ||
               statusFilter === channelStatusFilter.inactive ? (
-                <RatingIcon />
+                <RatingIcon
+                  rate={(card as IActiveChannel | IInactiveChannel)?.grade || 0}
+                />
               ) : (
                 <></>
               )}

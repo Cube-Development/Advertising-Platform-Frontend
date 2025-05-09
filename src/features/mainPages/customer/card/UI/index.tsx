@@ -20,7 +20,7 @@ export const CustomerCard: FC<CustomerCardProps> = ({ customer }) => {
         <div className={styles.customer__column}>
           <p className={styles.title}>{customer.name}</p>
           <p className={styles.workplace}>{customer.workplace}</p>
-          <RatingIcon />
+          <RatingIcon rate={customer.rate || 0} />
         </div>
       </div>
       <ScrollArea className={styles.text__wrapper}>
