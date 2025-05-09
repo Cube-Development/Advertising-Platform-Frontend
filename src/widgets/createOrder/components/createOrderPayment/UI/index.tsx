@@ -9,12 +9,14 @@ interface CreateOrderPaymentProps {
   isBlur?: boolean;
   total_price: number;
   role: ENUM_ROLES;
+  isAllowed: boolean;
 }
 
 export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
   isBlur,
   total_price,
   role,
+  isAllowed,
 }) => {
   const { t } = useTranslation();
 
@@ -40,9 +42,9 @@ export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
             </div>
             <div className={styles.pay_btn}>
               {role === ENUM_ROLES.ADVERTISER ? (
-                <CreateOrder />
+                <CreateOrder disabled={!isAllowed} isAllowed={isAllowed} />
               ) : (
-                <ApproveCampaign />
+                <ApproveCampaign disabled={!isAllowed} isAllowed={isAllowed} />
               )}
             </div>
           </div>
