@@ -7,9 +7,9 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { UseFormGetValues, UseFormRegister } from "react-hook-form";
-import { ICreateOrderBlur } from "@widgets/createOrder/config";
 import { CreatePostData, ICreatePostForm } from "@entities/project";
 import { useToast } from "@shared/ui";
+import { ICreateOrderBlur } from "@widgets/createOrder/model";
 
 interface CreateOrderTopProps {
   onChangeBlur: (key: keyof ICreateOrderBlur) => void;

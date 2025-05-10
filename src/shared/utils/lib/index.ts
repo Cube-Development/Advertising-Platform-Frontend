@@ -5,3 +5,4 @@ export * from "./queryParams";
 export * from "./getFileExtension";
 export * from "./generateDownloadLinkWithProgress";
 export * from "./formatTime";
+export * from "./dowloadFiles";

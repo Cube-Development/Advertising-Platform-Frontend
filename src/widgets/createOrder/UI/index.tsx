@@ -33,7 +33,8 @@ import {
   CreateOrderPost,
   CreateOrderTop,
 } from "../components";
-import { ICreateOrderBlur } from "../config";
+import { ICreateOrderBlur } from "../model/config/types";
+import { useChangeBlur } from "../model";
 
 interface CreateOrderBlockProps {}
 
@@ -45,7 +46,8 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
   const { toast } = useToast();
   const { t } = useTranslation();
   const { isAuth, role } = useAppSelector((state) => state.user);
-  const screen = useWindowWidth();
+  // const screen = useWindowWidth();
+  const { blur, handleOnChangeBlur } = useChangeBlur();
   const navigate = useNavigate();
   const language = useFindLanguage();
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -66,11 +68,11 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
       },
     });
   const formState = watch();
-  const [blur, setBlur] = useState<ICreateOrderBlur>({
-    post: true,
-    datetime: true,
-    payment: true,
-  });
+  // const [blur, setBlur] = useState<ICreateOrderBlur>({
+  //   post: false,
+  //   datetime: false,
+  //   payment: false,
+  // });
 
   const projectChannelsReq = {
     project_id: projectId!,
@@ -110,33 +112,33 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
     },
   );
 
-  const handleOnChangeBlur = (key: keyof ICreateOrderBlur) => {
-    const newBlur = { ...blur };
-    newBlur[key] = false;
-    setBlur(newBlur);
-    switch (key) {
-      case "post":
-        scroller.scrollTo("post", {
-          smooth: true,
-          offset: screen > BREAKPOINT.MD ? 0 : -60,
-        });
-        break;
-      case "datetime":
-        scroller.scrollTo("datetime", {
-          smooth: true,
-          offset: screen > BREAKPOINT.MD ? -30 : -80,
-        });
-        break;
-      case "payment":
-        scroller.scrollTo("payment", {
-          smooth: true,
-          offset: screen > BREAKPOINT.MD ? 0 : -60,
-        });
-        break;
-      default:
-        break;
-    }
-  };
+  // const handleOnChangeBlur = (key: keyof ICreateOrderBlur) => {
+  //   const newBlur = { ...blur };
+  //   newBlur[key] = false;
+  //   setBlur(newBlur);
+  //   switch (key) {
+  //     case "post":
+  //       scroller.scrollTo("post", {
+  //         smooth: true,
+  //         offset: screen > BREAKPOINT.MD ? 0 : -60,
+  //       });
+  //       break;
+  //     case "datetime":
+  //       scroller.scrollTo("datetime", {
+  //         smooth: true,
+  //         offset: screen > BREAKPOINT.MD ? -30 : -80,
+  //       });
+  //       break;
+  //     case "payment":
+  //       scroller.scrollTo("payment", {
+  //         smooth: true,
+  //         offset: screen > BREAKPOINT.MD ? 0 : -60,
+  //       });
+  //       break;
+  //     default:
+  //       break;
+  //   }
+  // };
 
   const onSubmit: SubmitHandler<ICreatePostForm> = async (formData) => {
     if (
@@ -371,7 +373,6 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
       }
     }
   };
-  console.log(333, formState?.isDownloadPosts, isPostsLoading, isOrdersLoading);
   return (
     <>
       {isLoading && <CreateOrderLoading />}
