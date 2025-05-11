@@ -98,9 +98,29 @@ export const walletAPI = authApi.injectEndpoints({
         return endpointName;
       },
       merge: (currentCache, newItems, arg) => {
+        const existing = currentCache.transactions ?? [];
+        const incoming = newItems.transactions ?? [];
+
+        // Если это первая страница — добавляем новые в начало
         if (arg.arg.page === 1) {
+          const existingIds = new Set(existing.map((tx) => tx.id));
+
+          // Только те, которых ещё не было
+          const uniqueNew = incoming.filter((tx) => !existingIds.has(tx.id));
+
+          const mergedTransactions = [...uniqueNew, ...existing];
+
+          // Удалим дубликаты на всякий случай
+          const seen = new Set<string>();
+          const deduped = mergedTransactions.filter((tx) => {
+            if (seen.has(tx.id)) return false;
+            seen.add(tx.id);
+            return true;
+          });
+
           return {
             ...newItems,
+            transactions: deduped,
           };
         }
 
