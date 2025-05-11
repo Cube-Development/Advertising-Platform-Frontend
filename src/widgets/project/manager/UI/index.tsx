@@ -119,7 +119,8 @@ export const ManagerOrders: FC = () => {
             projects={data?.projects}
             handleOnChangePage={handleOnChangePage}
             isLoading={isFetching}
-            isLast={data?.isLast || false}
+            isLast={!!data?.isLast}
+            currentPage={formState.page}
           />
         ) : (
           <ManagerProjectsList

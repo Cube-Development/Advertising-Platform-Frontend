@@ -17,11 +17,11 @@ import {
 import { useClearCookiesOnPage, useWindowWidth } from "@shared/hooks";
 import { USER_LANGUAGES_LIST } from "@shared/languages";
 import { ShowMoreBtn, SpinnerLoaderSmall } from "@shared/ui";
+import { getAnimationDelay } from "@shared/utils";
 import { motion } from "framer-motion";
-import { FC, useEffect, useState, useMemo } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { getAnimationDelay } from "@shared/utils";
 
 export const History: FC = () => {
   useClearCookiesOnPage();

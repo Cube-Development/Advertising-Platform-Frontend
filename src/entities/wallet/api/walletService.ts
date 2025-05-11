@@ -90,8 +90,9 @@ export const walletAPI = authApi.injectEndpoints({
           ...response,
           isLast:
             response?.elements ===
-            response?.transactions?.length +
-              (response?.page - 1) * INTERSECTION_ELEMENTS.HISTORY,
+              response?.transactions?.length +
+                (response?.page - 1) * INTERSECTION_ELEMENTS.HISTORY ||
+            response?.transactions?.length === 0,
         };
       },
       serializeQueryArgs: ({ endpointName }) => {
@@ -103,23 +104,24 @@ export const walletAPI = authApi.injectEndpoints({
 
         // Если это первая страница — добавляем новые в начало
         if (arg.arg.page === 1) {
-          const existingIds = new Set(existing.map((tx) => tx.id));
+          const existingIds = new Set(existing.map((el) => el.id));
 
           // Только те, которых ещё не было
-          const uniqueNew = incoming.filter((tx) => !existingIds.has(tx.id));
+          const uniqueNew = incoming.filter((el) => !existingIds.has(el.id));
 
-          const mergedTransactions = [...uniqueNew, ...existing];
+          const merged = [...uniqueNew, ...existing];
 
           // Удалим дубликаты на всякий случай
           const seen = new Set<string>();
-          const deduped = mergedTransactions.filter((tx) => {
-            if (seen.has(tx.id)) return false;
-            seen.add(tx.id);
+          const deduped = merged.filter((el) => {
+            if (seen.has(el.id)) return false;
+            seen.add(el.id);
             return true;
           });
 
           return {
             ...newItems,
+            isLast: currentCache?.isLast,
             transactions: deduped,
           };
         }

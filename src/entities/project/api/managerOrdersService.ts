@@ -103,19 +103,45 @@ export const managerProjectsAPI = authApi.injectEndpoints({
           ...response,
           status: arg?.status,
           isLast:
-            response?.elements ===
-            response?.projects?.length +
-              (response?.page - 1) * INTERSECTION_ELEMENTS.MANAGER_ORDERS,
+            response?.elements <=
+              response?.projects?.length +
+                (response?.page - 1) * INTERSECTION_ELEMENTS.MANAGER_ORDERS ||
+            response?.projects?.length === 0,
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
         const { language, date_sort, status } = queryArgs;
         return `${endpointName}/${status}/${date_sort}/${language}`;
       },
-      merge: (currentCache, newItems, arg) => {
+      merge: (
+        currentCache: IManagerProjects | IManagerNewProjects,
+        newItems: IManagerProjects | IManagerNewProjects,
+        arg,
+      ) => {
+        const existing = currentCache.projects ?? [];
+        const incoming = newItems.projects ?? [];
+
+        // Если это первая страница — добавляем новые в начало
         if (arg.arg.page === 1) {
+          const existingIds = new Set(existing.map((el) => el.id));
+
+          // Только те, которых ещё не было
+          const uniqueNew = incoming.filter((el) => !existingIds.has(el.id));
+
+          const merged = [...uniqueNew, ...existing];
+
+          // Удалим дубликаты на всякий случай
+          const seen = new Set<string>();
+          const deduped = merged.filter((el) => {
+            if (seen.has(el.id)) return false;
+            seen.add(el.id);
+            return true;
+          });
+
           return {
             ...newItems,
+            isLast: currentCache?.isLast,
+            projects: deduped,
           };
         }
 

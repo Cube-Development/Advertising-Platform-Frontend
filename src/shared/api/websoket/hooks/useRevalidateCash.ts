@@ -1,7 +1,11 @@
 import { channelAPI } from "@entities/channel";
 import { notificationsTypes } from "@entities/communication";
 import { bloggerOffersAPI } from "@entities/offer";
-import { advProjectsAPI, managerProjectsAPI } from "@entities/project";
+import {
+  advProjectsAPI,
+  invalidateNewManagerProject,
+  managerProjectsAPI,
+} from "@entities/project";
 import { useFindLanguage } from "@entities/user";
 import { invalidateHistory, walletAPI } from "@entities/wallet";
 import { useAppDispatch } from "@shared/hooks";
@@ -10,32 +14,32 @@ import {
   ADV_TARIFF_PROJECTS,
   BLOGGER_CHANNELS,
   BLOGGER_OFFERS,
-  MANAGER_PROJECTS,
   TRANSACTION_HISTORY,
   VIEWS_ADVERTISER,
   VIEWS_BLOGGER_CHANNELS,
   VIEWS_BLOGGER_OFFERS,
-  VIEWS_MANAGER,
   VIEWS_TRANSACTIONS,
 } from "./../../tags";
 
 export const useRevalidateCash = () => {
   const language = useFindLanguage();
   const [triggerHistory] = walletAPI.useLazyGetHistoryQuery();
+  const [triggerNewManagerProject] =
+    managerProjectsAPI.useLazyGetManagerProjectsQuery();
   const dispatch = useAppDispatch();
 
   const revalidateCash = async (method: notificationsTypes) => {
     if (method === notificationsTypes.notification_create_deposit) {
       // Создан депозит
-      await invalidateHistory({ dispatch, triggerHistory, language });
+      await invalidateHistory({ dispatch, trigger: triggerHistory, language });
     } else if (method === notificationsTypes.new_manager_project) {
       console.log(notificationsTypes.new_manager_project);
-      dispatch(
-        managerProjectsAPI.util.invalidateTags([
-          MANAGER_PROJECTS,
-          VIEWS_MANAGER,
-        ]),
-      );
+      // Рекламодатель купил новый проект с менеджером (размещение под ключ)
+      await invalidateNewManagerProject({
+        dispatch,
+        trigger: triggerNewManagerProject,
+        language,
+      });
     } else if (method === notificationsTypes.notification_request_approve) {
       console.log(notificationsTypes.notification_request_approve);
       dispatch(

@@ -1,18 +1,19 @@
+import { AppDispatch } from "@app/providers/store";
 import { dateSortingTypes } from "@entities/platform";
+import { VIEWS_TRANSACTIONS } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ILanguage, USER_LANGUAGES_LIST } from "@shared/languages";
 import { HistoryReq, walletAPI } from "../api";
-import { AppDispatch } from "@app/providers/store";
 
 interface Props {
   dispatch: AppDispatch;
-  triggerHistory: ReturnType<typeof walletAPI.useLazyGetHistoryQuery>[0];
+  trigger: ReturnType<typeof walletAPI.useLazyGetHistoryQuery>[0];
   language: ILanguage;
 }
 
 export const invalidateHistory = async ({
   dispatch,
-  triggerHistory,
+  trigger,
   language,
 }: Props) => {
   try {
@@ -24,7 +25,7 @@ export const invalidateHistory = async ({
       language: language?.id || USER_LANGUAGES_LIST[0].id,
       date_sort: dateSortingTypes.decrease,
     };
-    const result = await triggerHistory(params).unwrap();
+    const result = await trigger(params).unwrap();
 
     // 2. Обновляем общий кэш, сравнивая первые N элементов
     dispatch(
@@ -33,7 +34,7 @@ export const invalidateHistory = async ({
         {} as HistoryReq, // ключ кэша, т.к. serializeQueryArgs без page
         (draft) => {
           console.log("draft", draft.transactions);
-          const existingIds = new Set(draft.transactions.map((tx) => tx.id));
+          const existingIds = new Set(draft.transactions.map((el) => el.id));
           const toAdd = result.transactions.filter(
             (tx) => !existingIds.has(tx.id),
           );
@@ -44,14 +45,17 @@ export const invalidateHistory = async ({
 
           // очистка дубликатов
           const seen = new Set<string>();
-          draft.transactions = draft.transactions.filter((tx) => {
-            if (seen.has(tx.id)) return false;
-            seen.add(tx.id);
+          draft.transactions = draft.transactions.filter((el) => {
+            if (seen.has(el.id)) return false;
+            seen.add(el.id);
             return true;
           });
         },
       ),
     );
+
+    // 3. Обновляем кэш кружочков
+    dispatch(walletAPI.util.invalidateTags([VIEWS_TRANSACTIONS]));
   } catch (err) {
     console.error("ERROR: INVALIDATE TRANSACTION HISTORY - ", err);
   }
