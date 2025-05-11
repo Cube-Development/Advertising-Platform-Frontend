@@ -18,9 +18,10 @@ import { useClearCookiesOnPage, useWindowWidth } from "@shared/hooks";
 import { USER_LANGUAGES_LIST } from "@shared/languages";
 import { ShowMoreBtn, SpinnerLoaderSmall } from "@shared/ui";
 import { motion } from "framer-motion";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useState, useMemo } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { getAnimationDelay } from "@shared/utils";
 
 export const History: FC = () => {
   useClearCookiesOnPage();
@@ -29,12 +30,15 @@ export const History: FC = () => {
   const screen = useWindowWidth();
   const [currentPage, setCurrentPage] = useState(1);
 
-  const getParams: HistoryReq = {
-    language: language?.id || USER_LANGUAGES_LIST[0].id,
-    page: currentPage,
-    elements_on_page: INTERSECTION_ELEMENTS.HISTORY,
-    date_sort: dateSortingTypes.decrease,
-  };
+  const getParams = useMemo<HistoryReq>(
+    () => ({
+      language: language?.id || USER_LANGUAGES_LIST[0].id,
+      page: currentPage,
+      elements_on_page: INTERSECTION_ELEMENTS.HISTORY,
+      date_sort: dateSortingTypes.decrease,
+    }),
+    [language?.id, currentPage],
+  );
 
   const { data, isLoading, isFetching } = useGetHistoryQuery(getParams);
   const { refetch: views } = useGetViewTransactionsQuery();
@@ -85,7 +89,12 @@ export const History: FC = () => {
                   key={card.id}
                   initial="hidden"
                   animate="visible"
-                  custom={index % INTERSECTION_ELEMENTS.HISTORY}
+                  custom={getAnimationDelay({
+                    index,
+                    currentPage,
+                    total: data.transactions.length,
+                    elements: INTERSECTION_ELEMENTS.HISTORY,
+                  })}
                   variants={PAGE_ANIMATION.animationUp}
                 >
                   <HistoryCard card={card} />
