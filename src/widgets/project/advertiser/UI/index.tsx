@@ -176,12 +176,6 @@ export const AdvOrders: FC = () => {
       <div className={styles.wrapper}>
         <BarFilter
           page={page}
-          listLength={
-            !!(
-              projectsSelf?.projects?.length ||
-              projectsManager?.projects?.length
-            )
-          }
           typeFilter={formState.type}
           changeStatus={(status) => handleChangeStatus(status)}
           changeType={(type) => handleChangeType(type)}
@@ -221,6 +215,7 @@ export const AdvOrders: FC = () => {
             handleOnChangePage={handleOnChangePage}
             isLoading={isFetchingManager}
             isLast={projectsManager?.isLast || false}
+            currentPage={formState?.page}
           />
         ) : (
           formState.type === projectTypesFilter.myProject && (
@@ -235,6 +230,7 @@ export const AdvOrders: FC = () => {
               handleOnChangePage={handleOnChangePage}
               isLoading={isFetchingSelf}
               isLast={projectsSelf?.isLast || false}
+              currentPage={formState?.page}
             />
           )
         )}

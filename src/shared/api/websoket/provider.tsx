@@ -69,9 +69,9 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
           getToken: () => Promise.resolve(token),
         });
         sub.on("publication", (ctx: PublicationContext) => {
-          const newPush = ctx.data;
-          const method = newPush?.method;
-          revalidateCash(method);
+          const newData = ctx.data;
+          const method = newData?.method;
+          revalidateCash(newData);
 
           if (websocketMessages.includes(method)) {
             const newMessage = ctx.data as IMessageNewSocket;

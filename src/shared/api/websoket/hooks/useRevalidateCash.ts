@@ -3,6 +3,7 @@ import { notificationsTypes } from "@entities/communication";
 import { bloggerOffersAPI } from "@entities/offer";
 import {
   advProjectsAPI,
+  invalidateManagerRequestApprove,
   invalidateNewManagerProject,
   managerProjectsAPI,
 } from "@entities/project";
@@ -26,14 +27,17 @@ export const useRevalidateCash = () => {
   const [triggerHistory] = walletAPI.useLazyGetHistoryQuery();
   const [triggerNewManagerProject] =
     managerProjectsAPI.useLazyGetManagerProjectsQuery();
+  const [triggerRequestApprove] =
+    advProjectsAPI.useLazyGetAdvManagerProjectsQuery();
   const dispatch = useAppDispatch();
 
-  const revalidateCash = async (method: notificationsTypes) => {
+  const revalidateCash = async (data: any) => {
+    const { method, project_id } = data;
+
     if (method === notificationsTypes.notification_create_deposit) {
       // Создан депозит
       await invalidateHistory({ dispatch, trigger: triggerHistory, language });
     } else if (method === notificationsTypes.new_manager_project) {
-      console.log(notificationsTypes.new_manager_project);
       // Рекламодатель купил новый проект с менеджером (размещение под ключ)
       await invalidateNewManagerProject({
         dispatch,
@@ -41,13 +45,13 @@ export const useRevalidateCash = () => {
         language,
       });
     } else if (method === notificationsTypes.notification_request_approve) {
-      console.log(notificationsTypes.notification_request_approve);
-      dispatch(
-        advProjectsAPI.util.invalidateTags([
-          ADV_TARIFF_PROJECTS,
-          VIEWS_ADVERTISER,
-        ]),
-      );
+      // Менеджер отправил проект на согласование рекламодателю
+      await invalidateManagerRequestApprove({
+        dispatch,
+        trigger: triggerRequestApprove,
+        language,
+        project_id,
+      });
     } else if (method === notificationsTypes.notification_create_desire) {
       console.log(notificationsTypes.notification_create_desire);
       dispatch(managerProjectsAPI.util.resetApiState());

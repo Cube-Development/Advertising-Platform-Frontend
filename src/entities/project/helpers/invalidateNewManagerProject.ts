@@ -60,11 +60,7 @@ export const invalidateNewManagerProject = async ({
     );
 
     // 3. Обновляем кэш кружочков
-    // dispatch(
-    //         managerProjectsAPI.util.invalidateTags([
-    //           VIEWS_MANAGER,
-    //         ]),
-    //       );
+    dispatch(managerProjectsAPI.util.invalidateTags([VIEWS_MANAGER]));
   } catch (err) {
     console.error("ERROR: INVALIDATE NEW MANAGER PROJECT - ", err);
   }

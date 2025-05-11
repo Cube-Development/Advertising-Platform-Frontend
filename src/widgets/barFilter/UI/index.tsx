@@ -31,7 +31,7 @@ import styles from "./styles.module.scss";
 
 interface BarFilterProps {
   page: ENUM_PAGE_FILTER;
-  listLength: boolean;
+  listLength?: boolean;
   setValue?: UseFormSetValue<any>;
   typeFilter?: projectTypesFilter | string;
   statusFilter:
