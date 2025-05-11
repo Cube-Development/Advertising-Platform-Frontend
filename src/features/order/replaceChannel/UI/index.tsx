@@ -2,12 +2,13 @@ import {
   desireStatus,
   IAdvProjectSubcard,
   IChangeOrder,
+  invalidateAdvProjectByDesire,
   projectStatus,
   useChangeOrderMutation,
 } from "@entities/project";
 import { CancelIcon2 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
-import { useWindowWidth } from "@shared/hooks";
+import { useAppDispatch, useWindowWidth } from "@shared/hooks";
 import {
   Dialog,
   DialogClose,
@@ -30,16 +31,24 @@ import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { useFindLanguage } from "@entities/user";
 
 export interface ReplaceChannelProps {
   order: IAdvProjectSubcard;
   status: projectStatus;
+  project_id: string;
 }
 
-export const ReplaceChannel: FC<ReplaceChannelProps> = ({ order, status }) => {
+export const ReplaceChannel: FC<ReplaceChannelProps> = ({
+  order,
+  status,
+  project_id,
+}) => {
   const { t } = useTranslation();
   const screen = useWindowWidth();
   const { toast } = useToast();
+  const dispatch = useAppDispatch();
+  const language = useFindLanguage();
   const [replace, { isLoading }] = useChangeOrderMutation();
   const [isOpen, setIsOpen] = useState(false);
   const haveDesire = !!order?.desire.find(
@@ -71,6 +80,7 @@ export const ReplaceChannel: FC<ReplaceChannelProps> = ({ order, status }) => {
             title: t("toasts.orders_advertiser.replace.channel.success"),
           });
           setIsOpen(false);
+          invalidateAdvProjectByDesire({ project_id, dispatch, language });
         })
         .catch((error) => {
           toast({

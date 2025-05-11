@@ -129,6 +129,7 @@ export const ManagerOrders: FC = () => {
             handleOnChangePage={handleOnChangePage}
             isLoading={isFetching}
             isLast={data?.isLast || false}
+            currentPage={formState.page}
           />
         )}
       </div>

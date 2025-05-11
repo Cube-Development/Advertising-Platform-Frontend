@@ -3,6 +3,7 @@ import { notificationsTypes } from "@entities/communication";
 import { bloggerOffersAPI } from "@entities/offer";
 import {
   advProjectsAPI,
+  invalidateCreateDesire,
   invalidateManagerRequestApprove,
   invalidateNewManagerProject,
   managerProjectsAPI,
@@ -25,7 +26,7 @@ import {
 export const useRevalidateCash = () => {
   const language = useFindLanguage();
   const [triggerHistory] = walletAPI.useLazyGetHistoryQuery();
-  const [triggerNewManagerProject] =
+  const [triggerManagerProjects] =
     managerProjectsAPI.useLazyGetManagerProjectsQuery();
   const [triggerRequestApprove] =
     advProjectsAPI.useLazyGetAdvManagerProjectsQuery();
@@ -41,7 +42,7 @@ export const useRevalidateCash = () => {
       // Рекламодатель купил новый проект с менеджером (размещение под ключ)
       await invalidateNewManagerProject({
         dispatch,
-        trigger: triggerNewManagerProject,
+        trigger: triggerManagerProjects,
         language,
       });
     } else if (method === notificationsTypes.notification_request_approve) {
@@ -53,8 +54,13 @@ export const useRevalidateCash = () => {
         project_id,
       });
     } else if (method === notificationsTypes.notification_create_desire) {
-      console.log(notificationsTypes.notification_create_desire);
-      dispatch(managerProjectsAPI.util.resetApiState());
+      // Рекламодатель отправил проект на ре согласование (заменить канал, заменить пост)
+      await invalidateCreateDesire({
+        dispatch,
+        trigger: triggerManagerProjects,
+        language,
+        project_id,
+      });
     } else if (
       method === notificationsTypes.notification_launch_manager_project
     ) {

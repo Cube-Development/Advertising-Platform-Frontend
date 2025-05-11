@@ -111,7 +111,7 @@ export const managerProjectsAPI = authApi.injectEndpoints({
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
         const { language, date_sort, status } = queryArgs;
-        return `${endpointName}/${status}/${date_sort}/${language}`;
+        return `${endpointName}/${language}/${date_sort}/${status}`;
       },
       merge: (
         currentCache: IManagerProjects | IManagerNewProjects,

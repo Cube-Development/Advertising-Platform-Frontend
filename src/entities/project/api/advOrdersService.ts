@@ -185,8 +185,9 @@ export const advProjectsAPI = authApi.injectEndpoints({
           status: arg?.status,
           isLast:
             response?.elements ===
-            response?.projects?.length +
-              (response?.page - 1) * INTERSECTION_ELEMENTS.ADV_ORDERS,
+              response?.projects?.length +
+                (response?.page - 1) * INTERSECTION_ELEMENTS.ADV_ORDERS ||
+            response?.projects?.length === 0,
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
@@ -194,9 +195,35 @@ export const advProjectsAPI = authApi.injectEndpoints({
         return `${endpointName}/${language}/${date_sort}/${status}`;
       },
       merge: (currentCache, newItems, arg) => {
+        // if (arg.arg.page === 1) {
+        //   return {
+        //     ...newItems,
+        //   };
+        // }
+        const existing = currentCache.projects ?? [];
+        const incoming = newItems.projects ?? [];
+
+        // Если это первая страница — добавляем новые в начало
         if (arg.arg.page === 1) {
+          const existingIds = new Set(existing.map((el) => el.id));
+
+          // Только те, которых ещё не было
+          const uniqueNew = incoming.filter((el) => !existingIds.has(el.id));
+
+          const merged = [...uniqueNew, ...existing];
+
+          // Удалим дубликаты на всякий случай
+          const seen = new Set<string>();
+          const deduped = merged.filter((el) => {
+            if (seen.has(el.id)) return false;
+            seen.add(el.id);
+            return true;
+          });
+
           return {
             ...newItems,
+            isLast: currentCache?.isLast,
+            projects: deduped,
           };
         }
         return {

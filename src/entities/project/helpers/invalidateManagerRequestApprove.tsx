@@ -1,16 +1,16 @@
 import { AppDispatch } from "@app/providers/store";
-import { VIEWS_ADVERTISER } from "@shared/api";
+import { dateSortingTypes } from "@entities/platform";
+import { ADV_ORDERS, VIEWS_ADVERTISER } from "@shared/api";
+import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ILanguage } from "@shared/languages";
-import { advProjectsAPI, getProjectsCardReq, managerProjectsAPI } from "../api";
+import { advProjectsAPI, getProjectsCardReq } from "../api";
 import { advManagerProjectStatusFilter } from "../config";
 import { IAdvProjects } from "../types";
-import { INTERSECTION_ELEMENTS } from "@shared/config";
-import { dateSortingTypes } from "@entities/platform";
 
 interface Props {
   dispatch: AppDispatch;
   trigger: ReturnType<
-    typeof managerProjectsAPI.useLazyGetManagerProjectsQuery
+    typeof advProjectsAPI.useLazyGetAdvManagerProjectsQuery
   >[0];
   language: ILanguage;
   project_id: string;
@@ -55,6 +55,7 @@ export const invalidateManagerRequestApprove = async ({
     // 2. Получаем актуальные данные по этой странице
     const response: IAdvProjects = await trigger({
       ...baseParams,
+      elements_on_page: INTERSECTION_ELEMENTS.ADV_ORDERS,
       page,
     }).unwrap();
 
@@ -89,6 +90,8 @@ export const invalidateManagerRequestApprove = async ({
     console.error("ERROR: INVALIDATE MANAGER REQUEST APPROVE - ", err);
   } finally {
     // 4. Обновляем кэш кружочков
-    dispatch(advProjectsAPI.util.invalidateTags([VIEWS_ADVERTISER]));
+    dispatch(
+      advProjectsAPI.util.invalidateTags([ADV_ORDERS, VIEWS_ADVERTISER]),
+    );
   }
 };
