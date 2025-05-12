@@ -2,13 +2,15 @@ import { channelAPI } from "@entities/channel";
 import { notificationsTypes } from "@entities/communication";
 import { bloggerOffersAPI } from "@entities/offer";
 import {
+  advManagerProjectStatusFilter,
   advProjectsAPI,
-  invalidateAdvProjectByBuyTariff,
+  invalidateAdvProjectUpdate,
   invalidateAdvProjectByLaunchManagerProject,
   invalidateCreateDesire,
   invalidateManagerRequestApprove,
   invalidateNewManagerProject,
   managerProjectsAPI,
+  myProjectStatusFilter,
 } from "@entities/project";
 import { useFindLanguage } from "@entities/user";
 import { invalidateHistory, walletAPI } from "@entities/wallet";
@@ -31,8 +33,9 @@ export const useRevalidateCash = () => {
   const [triggerHistory] = walletAPI.useLazyGetHistoryQuery();
   const [triggerManagerProjects] =
     managerProjectsAPI.useLazyGetManagerProjectsQuery();
-  const [triggerAdvProjects] =
+  const [triggerAdvManagerProjects] =
     advProjectsAPI.useLazyGetAdvManagerProjectsQuery();
+  const [triggerAdvMyProjects] = advProjectsAPI.useLazyGetAdvProjectsQuery();
   const dispatch = useAppDispatch();
 
   const revalidateCash = async (data: any) => {
@@ -43,11 +46,12 @@ export const useRevalidateCash = () => {
       await invalidateHistory({ dispatch, trigger: triggerHistory, language });
       // Рекламодатель купил новый проект с менеджером (размещение под ключ) - уведомление рекламодателю
     } else if (method === notificationsTypes.buy_manager_project) {
-      await invalidateAdvProjectByBuyTariff({
+      await invalidateAdvProjectUpdate({
         dispatch,
-        trigger: triggerAdvProjects,
+        trigger: triggerAdvManagerProjects,
         language,
         role,
+        status: advManagerProjectStatusFilter.develop,
       });
     } else if (method === notificationsTypes.new_manager_project) {
       // Рекламодатель купил новый проект с менеджером (размещение под ключ) - уведомление менеджеру
@@ -61,7 +65,7 @@ export const useRevalidateCash = () => {
       // Менеджер отправил проект на согласование рекламодателю
       await invalidateManagerRequestApprove({
         dispatch,
-        trigger: triggerAdvProjects,
+        trigger: triggerAdvManagerProjects,
         language,
         project_id,
         role,
@@ -91,10 +95,19 @@ export const useRevalidateCash = () => {
       // Менеджер запустил проект рекламодателя
       await invalidateAdvProjectByLaunchManagerProject({
         dispatch,
-        trigger: triggerAdvProjects,
+        trigger: triggerAdvManagerProjects,
         language,
         project_id,
         role,
+      });
+    } else if (method === notificationsTypes.new_my_project) {
+      // Рекламодатель создал новый проект
+      await invalidateAdvProjectUpdate({
+        dispatch,
+        trigger: triggerAdvMyProjects,
+        language,
+        role,
+        status: myProjectStatusFilter.active,
       });
     } else if (method === notificationsTypes.notification_unban_channel) {
       console.log(notificationsTypes.notification_unban_channel);

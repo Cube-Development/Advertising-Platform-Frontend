@@ -3,4 +3,4 @@ export * from "./invalidateManagerRequestApprove";
 export * from "./invalidateCreateDesire";
 export * from "./invalidateAdvProjectByDesire";
 export * from "./invalidateAdvProjectByLaunchManagerProject";
-export * from "./invalidateAdvProjectByBuyTariff";
+export * from "./invalidateAdvProjectUpdate";

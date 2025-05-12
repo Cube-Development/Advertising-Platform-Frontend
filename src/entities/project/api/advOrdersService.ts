@@ -173,7 +173,10 @@ export const advProjectsAPI = authApi.injectEndpoints({
         ADV_ORDERS,
       ],
     }),
-    getAdvProjects: build.query<IAdvProjects, getProjectsCardReq>({
+    getAdvProjects: build.query<
+      IAdvProjects,
+      getProjectsCardReq & { __isWebsocket?: boolean }
+    >({
       query: (BodyParams) => ({
         url: `/order/project/get/advertiser`,
         method: `POST`,
@@ -195,14 +198,24 @@ export const advProjectsAPI = authApi.injectEndpoints({
         return `${endpointName}/${language}/${date_sort}/${status}`;
       },
       merge: (currentCache, newItems, arg) => {
-        if (arg.arg.page === 1) {
+        const newIds = new Set(newItems.projects.map((p) => p?.id));
+        const filteredOldProjects = currentCache?.projects?.filter(
+          (p) => !newIds.has(p?.id),
+        );
+
+        if (arg.arg.__isWebsocket) {
+          return {
+            ...currentCache,
+            projects: [...newItems.projects, ...filteredOldProjects],
+          };
+        } else if (arg.arg.page === 1) {
           return {
             ...newItems,
           };
         }
         return {
           ...newItems,
-          projects: [...currentCache.projects, ...newItems.projects],
+          projects: [...filteredOldProjects, ...newItems.projects],
         };
       },
       forceRefetch({ currentArg, previousArg }) {
@@ -275,12 +288,12 @@ export const advProjectsAPI = authApi.injectEndpoints({
         newItems: IAdvManagerProjectsDev | IAdvProjects,
         arg,
       ) => {
-        if (arg.arg.__isWebsocket) {
-          const newIds = new Set(newItems.projects.map((p) => p.id));
-          const filteredOldProjects = currentCache.projects.filter(
-            (p) => !newIds.has(p.id),
-          );
+        const newIds = new Set(newItems.projects.map((p) => p?.id));
+        const filteredOldProjects = currentCache?.projects?.filter(
+          (p) => !newIds.has(p?.id),
+        );
 
+        if (arg.arg.__isWebsocket) {
           return {
             ...currentCache,
             projects: [...newItems.projects, ...filteredOldProjects],
@@ -289,11 +302,12 @@ export const advProjectsAPI = authApi.injectEndpoints({
           return {
             ...newItems,
           };
+        } else {
+          return {
+            ...newItems,
+            projects: [...filteredOldProjects, ...newItems.projects],
+          };
         }
-        return {
-          ...newItems,
-          projects: [...currentCache.projects, ...newItems.projects],
-        };
       },
       forceRefetch({ currentArg, previousArg }) {
         return currentArg !== previousArg;

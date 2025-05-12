@@ -123,15 +123,15 @@ export const managerProjectsAPI = authApi.injectEndpoints({
         newItems: IManagerProjects | IManagerNewProjects,
         arg,
       ) => {
-        if (arg.arg.__isWebsocket) {
-          const newIds = new Set(newItems.projects.map((p) => p.id));
-          const filteredOldProjects = currentCache.projects.filter(
-            (p) => !newIds.has(p.id),
-          );
+        const newIds = new Set(newItems.projects.map((p) => p?.id));
+        const filteredOldProjects = currentCache?.projects?.filter(
+          (p) => !newIds.has(p?.id),
+        );
 
+        if (arg.arg.__isWebsocket) {
           return {
             ...currentCache,
-            projects: [...newItems.projects, ...filteredOldProjects],
+            projects: [...filteredOldProjects, ...filteredOldProjects],
           };
         }
 
@@ -140,9 +140,10 @@ export const managerProjectsAPI = authApi.injectEndpoints({
             ...newItems,
           };
         }
+
         return {
           ...newItems,
-          projects: [...currentCache.projects, ...newItems.projects],
+          projects: [...filteredOldProjects, ...newItems.projects],
         };
       },
 
