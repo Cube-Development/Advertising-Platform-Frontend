@@ -131,7 +131,7 @@ export const managerProjectsAPI = authApi.injectEndpoints({
         if (arg.arg.__isWebsocket) {
           return {
             ...currentCache,
-            projects: [...filteredOldProjects, ...filteredOldProjects],
+            projects: [...newItems.projects, ...filteredOldProjects],
           };
         }
 

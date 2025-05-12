@@ -79,8 +79,11 @@ export const walletAPI = authApi.injectEndpoints({
       }),
       providesTags: [BALANCE],
     }),
-    getHistory: build.query<HistoryResponse, HistoryReq>({
-      query: (params) => ({
+    getHistory: build.query<
+      HistoryResponse,
+      HistoryReq & { __isWebsocket?: boolean }
+    >({
+      query: ({ __isWebsocket, ...params }) => ({
         url: "wallet/transaction/user/history",
         method: "POST",
         params,
@@ -99,39 +102,26 @@ export const walletAPI = authApi.injectEndpoints({
         return endpointName;
       },
       merge: (currentCache, newItems, arg) => {
-        const existing = currentCache.transactions ?? [];
-        const incoming = newItems.transactions ?? [];
+        const newIds = new Set(newItems.transactions.map((p) => p?.id));
+        const filteredOld = currentCache?.transactions?.filter(
+          (p) => !newIds.has(p?.id),
+        );
 
-        // Если это первая страница — добавляем новые в начало
-        if (arg.arg.page === 1) {
-          const existingIds = new Set(existing.map((el) => el.id));
-
-          // Только те, которых ещё не было
-          const uniqueNew = incoming.filter((el) => !existingIds.has(el.id));
-
-          const merged = [...uniqueNew, ...existing];
-
-          // Удалим дубликаты на всякий случай
-          const seen = new Set<string>();
-          const deduped = merged.filter((el) => {
-            if (seen.has(el.id)) return false;
-            seen.add(el.id);
-            return true;
-          });
-
+        if (arg.arg.__isWebsocket) {
           return {
-            ...newItems,
-            isLast: currentCache?.isLast,
-            transactions: deduped,
+            ...currentCache,
+            transactions: [...newItems.transactions, ...filteredOld],
           };
         }
 
+        if (arg.arg.page === 1 && !arg.arg.__isWebsocket) {
+          return {
+            ...newItems,
+          };
+        }
         return {
           ...newItems,
-          transactions: [
-            ...currentCache.transactions,
-            ...newItems.transactions,
-          ],
+          transactions: [...filteredOld, ...newItems.transactions],
         };
       },
       forceRefetch({ currentArg, previousArg }) {
