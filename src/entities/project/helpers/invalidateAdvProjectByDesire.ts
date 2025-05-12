@@ -1,6 +1,6 @@
 import { AppDispatch } from "@app/providers/store";
 import { dateSortingTypes } from "@entities/platform";
-import { ILanguage } from "@shared/languages";
+import { ILanguage, USER_LANGUAGES_LIST } from "@shared/languages";
 import { advProjectsAPI, getProjectsCardReq } from "../api";
 import { advManagerProjectStatusFilter, projectStatus } from "../config";
 import { IAdvProjects } from "../types";
@@ -14,7 +14,7 @@ interface Props {
 export const invalidateAdvProjectByDesire = ({
   project_id,
   dispatch,
-  language,
+  language = USER_LANGUAGES_LIST[0],
 }: Props) => {
   const baseParams = {
     status: advManagerProjectStatusFilter.request_approve,

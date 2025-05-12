@@ -5,7 +5,12 @@ import {
   IManagerSubprojects,
   IPostChannel,
 } from "@entities/project";
-import { MANAGER_PROJECTS, VIEWS_MANAGER, authApi } from "@shared/api";
+import {
+  MANAGER_ORDERS,
+  MANAGER_PROJECTS,
+  VIEWS_MANAGER,
+  authApi,
+} from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ENUM_LANGUAGES_NUM } from "@shared/languages";
 import { IManagerProjectPosts } from "../types/managerProject";
@@ -82,7 +87,7 @@ export const managerProjectsAPI = authApi.injectEndpoints({
         method: `GET`,
         params: params,
       }),
-      // providesTags: [ADV_PROJECTS],
+      providesTags: [MANAGER_ORDERS],
     }),
 
     getManagerProjects: build.query<
@@ -118,33 +123,11 @@ export const managerProjectsAPI = authApi.injectEndpoints({
         newItems: IManagerProjects | IManagerNewProjects,
         arg,
       ) => {
-        const existing = currentCache.projects ?? [];
-        const incoming = newItems.projects ?? [];
-
-        // Если это первая страница — добавляем новые в начало
         if (arg.arg.page === 1) {
-          const existingIds = new Set(existing.map((el) => el.id));
-
-          // Только те, которых ещё не было
-          const uniqueNew = incoming.filter((el) => !existingIds.has(el.id));
-
-          const merged = [...uniqueNew, ...existing];
-
-          // Удалим дубликаты на всякий случай
-          const seen = new Set<string>();
-          const deduped = merged.filter((el) => {
-            if (seen.has(el.id)) return false;
-            seen.add(el.id);
-            return true;
-          });
-
           return {
             ...newItems,
-            isLast: currentCache?.isLast,
-            projects: deduped,
           };
         }
-
         return {
           ...newItems,
           projects: [...currentCache.projects, ...newItems.projects],

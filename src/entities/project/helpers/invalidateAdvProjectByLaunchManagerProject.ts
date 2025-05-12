@@ -1,8 +1,9 @@
 import { AppDispatch } from "@app/providers/store";
 import { dateSortingTypes } from "@entities/platform";
-import { ADV_ORDERS, VIEWS_ADVERTISER } from "@shared/api";
+import { ENUM_ROLES } from "@entities/user";
+import { VIEWS_ADVERTISER } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
-import { ILanguage } from "@shared/languages";
+import { ILanguage, USER_LANGUAGES_LIST } from "@shared/languages";
 import { advProjectsAPI, getProjectsCardReq } from "../api";
 import { advManagerProjectStatusFilter } from "../config";
 import { IAdvProjects } from "../types";
@@ -14,58 +15,52 @@ interface Props {
   >[0];
   language: ILanguage;
   project_id: string;
+  role: ENUM_ROLES;
 }
 
-export const invalidateManagerRequestApprove = async ({
+export const invalidateAdvProjectByLaunchManagerProject = async ({
   dispatch,
   trigger,
-  language,
+  language = USER_LANGUAGES_LIST[0],
   project_id,
+  role,
 }: Props) => {
-  try {
-    let page: number | null = null;
+  if (role !== ENUM_ROLES.ADVERTISER) return;
 
+  try {
+    // 1. Удалим проект из кеша проектов на согласовании
     const baseParams = {
       status: advManagerProjectStatusFilter.request_approve,
       language: language?.id,
       date_sort: dateSortingTypes.decrease,
     };
-
-    // 1. Найдём страницу в кеше, где лежит project_id
     dispatch(
       advProjectsAPI.util.updateQueryData(
         "getAdvManagerProjects",
         baseParams as getProjectsCardReq,
         (draft: IAdvProjects) => {
-          if (!draft?.projects?.length) return;
-
-          const index = draft.projects.findIndex((el) => el.id === project_id);
-
-          if (index !== -1) {
-            page = Math.floor(index / INTERSECTION_ELEMENTS.ADV_ORDERS) + 1;
-          }
+          draft.projects = draft.projects.filter((el) => el.id !== project_id);
         },
       ),
     );
 
-    if (!page) {
-      page = 1;
-    }
-
-    // 2. Получаем актуальные данные по этой странице
-    const response: IAdvProjects = await trigger({
-      ...baseParams,
+    // 2. Обновляем кэш проектов активные
+    const params: getProjectsCardReq = {
+      status: advManagerProjectStatusFilter.active,
+      language: language?.id,
+      date_sort: dateSortingTypes.decrease,
+      page: 1,
       elements_on_page: INTERSECTION_ELEMENTS.ADV_ORDERS,
-      page,
-    }).unwrap();
+    };
 
+    const response: IAdvProjects = await trigger(params).unwrap();
     const updatedProject = response.projects?.find(
       (el) => el.id === project_id,
     );
 
     if (!updatedProject) {
       console.warn(
-        "WARNING: INVALIDATE MANAGER REQUEST APPROVE - project not found in response",
+        "WARNING: INVALIDATE ADVERTISER PROJECT BY LAUNCH MANAGER PROJECT  - project not found in response",
       );
       return;
     }
@@ -74,7 +69,7 @@ export const invalidateManagerRequestApprove = async ({
     dispatch(
       advProjectsAPI.util.updateQueryData(
         "getAdvManagerProjects",
-        baseParams as getProjectsCardReq,
+        params as getProjectsCardReq,
         (draft: IAdvProjects) => {
           if (!draft?.projects) return;
 
@@ -87,11 +82,12 @@ export const invalidateManagerRequestApprove = async ({
       ),
     );
   } catch (err) {
-    console.error("ERROR: INVALIDATE MANAGER REQUEST APPROVE - ", err);
-  } finally {
-    // 4. Обновляем кэш кружочков
-    dispatch(
-      advProjectsAPI.util.invalidateTags([ADV_ORDERS, VIEWS_ADVERTISER]),
+    console.error(
+      "ERROR: INVALIDATE ADVERTISER PROJECT BY LAUNCH MANAGER PROJECT - ",
+      err,
     );
+  } finally {
+    // 3. Обновляем кэш кружочков
+    dispatch(advProjectsAPI.util.invalidateTags([VIEWS_ADVERTISER]));
   }
 };
