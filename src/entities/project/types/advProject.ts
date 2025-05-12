@@ -89,7 +89,7 @@ export interface IAdvManagerProjectsDev {
 export interface IAdvManagerProjectsDevCard {
   id: string;
   identifier: number;
-  project_id: string;
+  tariff_id: string;
   project_name: string;
   tariff_name: string;
   created: string;

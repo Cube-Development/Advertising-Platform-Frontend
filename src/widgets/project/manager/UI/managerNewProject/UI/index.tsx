@@ -32,7 +32,7 @@ export const ManagerNewProjectsList: FC<ManagerNewProjectsListProps> = ({
           <div className={styles.cards}>
             {projects?.map((card, index) => (
               <motion.div
-                key={card.id}
+                key={card.project_id}
                 initial="hidden"
                 animate="visible"
                 custom={getAnimationDelay({

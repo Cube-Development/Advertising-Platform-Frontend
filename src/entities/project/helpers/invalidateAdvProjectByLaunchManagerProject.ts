@@ -45,15 +45,17 @@ export const invalidateAdvProjectByLaunchManagerProject = async ({
     );
 
     // 2. Обновляем кэш проектов активные
-    const params: getProjectsCardReq = {
+    const params = {
       status: advManagerProjectStatusFilter.active,
       language: language?.id,
       date_sort: dateSortingTypes.decrease,
-      page: 1,
-      elements_on_page: INTERSECTION_ELEMENTS.ADV_ORDERS,
     };
 
-    const response: IAdvProjects = await trigger(params).unwrap();
+    const response: IAdvProjects = await trigger({
+      ...params,
+      page: 1,
+      elements_on_page: INTERSECTION_ELEMENTS.ADV_ORDERS,
+    }).unwrap();
     const updatedProject = response.projects?.find(
       (el) => el.id === project_id,
     );

@@ -92,9 +92,9 @@ export const managerProjectsAPI = authApi.injectEndpoints({
 
     getManagerProjects: build.query<
       IManagerProjects | IManagerNewProjects | any,
-      getManagerProjectsCardReq
+      getManagerProjectsCardReq & { __isWebsocket?: boolean }
     >({
-      query: (params) => ({
+      query: ({ __isWebsocket, ...params }) => ({
         url: `/tariff/`,
         method: `GET`,
         params: params,
@@ -123,7 +123,19 @@ export const managerProjectsAPI = authApi.injectEndpoints({
         newItems: IManagerProjects | IManagerNewProjects,
         arg,
       ) => {
-        if (arg.arg.page === 1) {
+        if (arg.arg.__isWebsocket) {
+          const newIds = new Set(newItems.projects.map((p) => p.id));
+          const filteredOldProjects = currentCache.projects.filter(
+            (p) => !newIds.has(p.id),
+          );
+
+          return {
+            ...currentCache,
+            projects: [...newItems.projects, ...filteredOldProjects],
+          };
+        }
+
+        if (arg.arg.page === 1 && !arg.arg.__isWebsocket) {
           return {
             ...newItems,
           };

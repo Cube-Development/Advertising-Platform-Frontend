@@ -244,15 +244,15 @@ export const advProjectsAPI = authApi.injectEndpoints({
 
     getAdvManagerProjects: build.query<
       IAdvManagerProjectsDev | IAdvProjects | any,
-      getProjectsCardReq
+      getProjectsCardReq & { __isWebsocket?: boolean }
     >({
-      query: (params) => ({
+      query: ({ __isWebsocket, ...params }) => ({
         url: `/tariff/advertiser`,
         method: "GET",
         params: params,
       }),
       transformResponse: (
-        response: IAdvManagerProjectsDev | IAdvProjects | any,
+        response: IAdvManagerProjectsDev | IAdvProjects,
         meta,
         arg,
       ) => {
@@ -270,8 +270,22 @@ export const advProjectsAPI = authApi.injectEndpoints({
         const { language, date_sort, status } = queryArgs;
         return `${endpointName}/${language}/${date_sort}/${status}`;
       },
-      merge: (currentCache, newItems, arg) => {
-        if (arg.arg.page === 1) {
+      merge: (
+        currentCache: IAdvManagerProjectsDev | IAdvProjects,
+        newItems: IAdvManagerProjectsDev | IAdvProjects,
+        arg,
+      ) => {
+        if (arg.arg.__isWebsocket) {
+          const newIds = new Set(newItems.projects.map((p) => p.id));
+          const filteredOldProjects = currentCache.projects.filter(
+            (p) => !newIds.has(p.id),
+          );
+
+          return {
+            ...currentCache,
+            projects: [...newItems.projects, ...filteredOldProjects],
+          };
+        } else if (arg.arg.page === 1) {
           return {
             ...newItems,
           };

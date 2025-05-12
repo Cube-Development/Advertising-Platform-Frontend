@@ -3,6 +3,7 @@ import { notificationsTypes } from "@entities/communication";
 import { bloggerOffersAPI } from "@entities/offer";
 import {
   advProjectsAPI,
+  invalidateAdvProjectByBuyTariff,
   invalidateAdvProjectByLaunchManagerProject,
   invalidateCreateDesire,
   invalidateManagerRequestApprove,
@@ -35,13 +36,21 @@ export const useRevalidateCash = () => {
   const dispatch = useAppDispatch();
 
   const revalidateCash = async (data: any) => {
-    const { method, project_id } = data;
+    const { method, project_id, tariff_id } = data;
 
     if (method === notificationsTypes.notification_create_deposit) {
       // Создан депозит
       await invalidateHistory({ dispatch, trigger: triggerHistory, language });
+      // Рекламодатель купил новый проект с менеджером (размещение под ключ) - уведомление рекламодателю
+    } else if (method === notificationsTypes.buy_manager_project) {
+      await invalidateAdvProjectByBuyTariff({
+        dispatch,
+        trigger: triggerAdvProjects,
+        language,
+        role,
+      });
     } else if (method === notificationsTypes.new_manager_project) {
-      // Рекламодатель купил новый проект с менеджером (размещение под ключ)
+      // Рекламодатель купил новый проект с менеджером (размещение под ключ) - уведомление менеджеру
       await invalidateNewManagerProject({
         dispatch,
         trigger: triggerManagerProjects,
