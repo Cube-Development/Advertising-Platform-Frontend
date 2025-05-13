@@ -112,9 +112,7 @@ export const walletAPI = authApi.injectEndpoints({
             ...currentCache,
             transactions: [...newItems.transactions, ...filteredOld],
           };
-        }
-
-        if (arg.arg.page === 1 && !arg.arg.__isWebsocket) {
+        } else if (arg.arg.page === 1 && !arg.arg.__isWebsocket) {
           return {
             ...newItems,
           };

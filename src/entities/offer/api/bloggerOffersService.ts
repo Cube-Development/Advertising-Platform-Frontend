@@ -57,7 +57,10 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
         ADV_ORDERS,
       ],
     }),
-    getBloggerOrders: build.query<IBloggerOffers, getOrdersByStatusReq>({
+    getBloggerOrders: build.query<
+      IBloggerOffers,
+      getOrdersByStatusReq & { __isWebsocket?: boolean }
+    >({
       query: (BodyParams) => ({
         url: `/order/get/blogger`,
         method: `POST`,
@@ -78,7 +81,20 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
         return `${endpointName}/${status}/`;
       },
       merge: (currentCache, newItems, arg) => {
-        if (arg.arg.page === 1) {
+        // const newIds = new Set(newItems.orders.map((p) => p?.id));
+        // const filteredOld = currentCache?.orders?.filter(
+        //   (p) => !newIds.has(p?.id),
+        // );
+
+        if (arg.arg.__isWebsocket) {
+          return {
+            ...newItems,
+          };
+          // return {
+          //   ...currentCache,
+          //   orders: [...newItems.orders, ...filteredOld],
+          // };
+        } else if (arg.arg.page === 1) {
           return {
             ...newItems,
           };

@@ -22,22 +22,18 @@ export const invalidateBloggerChannelsOnModeration = async ({
 }: Props) => {
   if (role !== ENUM_ROLES.BLOGGER) return;
 
-  try {
-    // 1. Обновляем кэш каналов на модерации
-    const params = {
-      status: channelStatusFilter.moderation,
-      language: language?.id,
-      date_sort: dateSortingTypes.decrease,
-      page: 1,
-      elements_on_page: INTERSECTION_ELEMENTS.BLOGGER_CHANNELS,
-      __isWebsocket: true,
-    };
+  // 1. Обновляем кэш каналов на модерации
+  const params = {
+    status: channelStatusFilter.moderation,
+    language: language?.id,
+    date_sort: dateSortingTypes.decrease,
+    page: 1,
+    elements_on_page: INTERSECTION_ELEMENTS.BLOGGER_CHANNELS,
+    __isWebsocket: true,
+  };
 
-    await trigger(params).unwrap();
+  await trigger(params).unwrap();
 
-    // 2. Обновляем кэш кружочков
-    dispatch(channelAPI.util.invalidateTags([VIEWS_BLOGGER_CHANNELS]));
-  } catch (err) {
-    console.error("ERROR: INVALIDATE BLOGGER CHANNELS ON MODERATION - ", err);
-  }
+  // 2. Обновляем кэш кружочков
+  dispatch(channelAPI.util.invalidateTags([VIEWS_BLOGGER_CHANNELS]));
 };

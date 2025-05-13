@@ -1,6 +1,7 @@
 import {
   channelAPI,
   invalidateBloggerChannelsOnModeration,
+  invalidateBloggerOffers,
 } from "@entities/channel";
 import { notificationsTypes } from "@entities/communication";
 import { bloggerOffersAPI } from "@entities/offer";
@@ -41,6 +42,7 @@ export const useRevalidateCash = () => {
     advProjectsAPI.useLazyGetAdvManagerProjectsQuery();
   const [triggerAdvMyProjects] = advProjectsAPI.useLazyGetAdvProjectsQuery();
   const [triggerChannels] = channelAPI.useLazyGetChannelsByStatusQuery();
+  const [triggerOffers] = bloggerOffersAPI.useLazyGetBloggerOrdersQuery();
   const dispatch = useAppDispatch();
 
   const revalidateCash = async (data: any) => {
@@ -127,7 +129,7 @@ export const useRevalidateCash = () => {
         status: myProjectStatusFilter.active,
       });
     } else if (method === notificationsTypes.notification_request_add_channel) {
-      // Блоггер  создал новый канал и отправил админу на модерацию
+      // Блогер  создал новый канал и отправил админу на модерацию
       await invalidateBloggerChannelsOnModeration({
         dispatch,
         trigger: triggerChannels,
@@ -161,13 +163,13 @@ export const useRevalidateCash = () => {
         ]),
       );
     } else if (method === notificationsTypes.notification_new_order_blogger) {
-      console.log(notificationsTypes.notification_new_order_blogger);
-      dispatch(
-        bloggerOffersAPI.util.invalidateTags([
-          BLOGGER_OFFERS,
-          VIEWS_BLOGGER_OFFERS,
-        ]),
-      );
+      // Блогеру пришел новый заказ размещение рекламы (в ожидании)
+      await invalidateBloggerOffers({
+        dispatch,
+        trigger: triggerOffers,
+        language,
+        role,
+      });
     } else if (
       method === notificationsTypes.notification_accept_order_blogger
     ) {

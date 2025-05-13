@@ -95,9 +95,7 @@ export const channelAPI = authApi.injectEndpoints({
             ...currentCache,
             channels: [...newItems.channels, ...filteredOld],
           };
-        }
-
-        if (arg.arg.page === 1) {
+        } else if (arg.arg.page === 1) {
           return {
             ...newItems,
           };
