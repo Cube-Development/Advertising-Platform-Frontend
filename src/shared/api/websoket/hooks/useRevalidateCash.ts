@@ -49,8 +49,8 @@ export const useRevalidateCash = () => {
     if (method === notificationsTypes.notification_create_deposit) {
       // Создан депозит
       await invalidateHistory({ dispatch, trigger: triggerHistory, language });
-      // Рекламодатель купил новый проект с менеджером (размещение под ключ) - уведомление рекламодателю
     } else if (method === notificationsTypes.buy_manager_project) {
+      // Рекламодатель купил новый проект с менеджером (размещение под ключ) - уведомление рекламодателю
       await invalidateAdvProjectUpdate({
         dispatch,
         trigger: triggerAdvManagerProjects,
@@ -58,6 +58,7 @@ export const useRevalidateCash = () => {
         role,
         status: advManagerProjectStatusFilter.develop,
       });
+      await invalidateHistory({ dispatch, trigger: triggerHistory, language });
     } else if (method === notificationsTypes.new_manager_project) {
       // Рекламодатель купил новый проект с менеджером (размещение под ключ) - уведомление менеджеру
       await invalidateNewManagerProject({
