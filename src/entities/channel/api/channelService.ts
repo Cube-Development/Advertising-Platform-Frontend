@@ -61,7 +61,10 @@ export const channelAPI = authApi.injectEndpoints({
         body: BodyParams,
       }),
     }),
-    getChannelsByStatus: build.query<IChannelBlogger, getChannelsByStatusReq>({
+    getChannelsByStatus: build.query<
+      IChannelBlogger,
+      getChannelsByStatusReq & { __isWebsocket?: boolean }
+    >({
       query: (params) => ({
         url: "/channel/blogger",
         method: "GET",
@@ -82,6 +85,18 @@ export const channelAPI = authApi.injectEndpoints({
         return `${endpointName}/${language}/${date_sort}/${status}`;
       },
       merge: (currentCache: any, newItems, arg) => {
+        const newIds = new Set(newItems.channels.map((p) => p?.id));
+        const filteredOld = currentCache?.channels?.filter(
+          ({ p }: any) => !newIds.has(p?.id),
+        );
+
+        if (arg.arg.__isWebsocket) {
+          return {
+            ...currentCache,
+            channels: [...newItems.channels, ...filteredOld],
+          };
+        }
+
         if (arg.arg.page === 1) {
           return {
             ...newItems,

@@ -60,7 +60,7 @@ export const invalidateAdvManagerProjectByCompleteProject = async ({
     dispatch(advProjectsAPI.util.invalidateTags([VIEWS_ADVERTISER]));
   } catch (err) {
     console.error(
-      "ERROR: INVALIDATE ADVERTISER PROJECT BY LAUNCH MANAGER PROJECT - ",
+      "ERROR: INVALIDATE ADVERTISER PROJECT BY COMPLETE MANAGER PROJECT - ",
       err,
     );
   }

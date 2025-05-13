@@ -1,4 +1,7 @@
-import { channelAPI } from "@entities/channel";
+import {
+  channelAPI,
+  invalidateBloggerChannelsOnModeration,
+} from "@entities/channel";
 import { notificationsTypes } from "@entities/communication";
 import { bloggerOffersAPI } from "@entities/offer";
 import {
@@ -37,6 +40,7 @@ export const useRevalidateCash = () => {
   const [triggerAdvManagerProjects] =
     advProjectsAPI.useLazyGetAdvManagerProjectsQuery();
   const [triggerAdvMyProjects] = advProjectsAPI.useLazyGetAdvProjectsQuery();
+  const [triggerChannels] = channelAPI.useLazyGetChannelsByStatusQuery();
   const dispatch = useAppDispatch();
 
   const revalidateCash = async (data: any) => {
@@ -120,6 +124,14 @@ export const useRevalidateCash = () => {
         language,
         role,
         status: myProjectStatusFilter.active,
+      });
+    } else if (method === notificationsTypes.notification_request_add_channel) {
+      // Блоггер  создал новый канал и отправил админу на модерацию
+      await invalidateBloggerChannelsOnModeration({
+        dispatch,
+        trigger: triggerChannels,
+        language,
+        role,
       });
     } else if (method === notificationsTypes.notification_unban_channel) {
       console.log(notificationsTypes.notification_unban_channel);
