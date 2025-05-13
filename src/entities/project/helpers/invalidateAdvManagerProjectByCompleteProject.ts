@@ -18,7 +18,7 @@ interface Props {
   role: ENUM_ROLES;
 }
 
-export const invalidateAdvProjectByLaunchManagerProject = async ({
+export const invalidateAdvManagerProjectByCompleteProject = async ({
   dispatch,
   trigger,
   language = USER_LANGUAGES_LIST[0],
@@ -28,9 +28,9 @@ export const invalidateAdvProjectByLaunchManagerProject = async ({
   if (role !== ENUM_ROLES.ADVERTISER) return;
 
   try {
-    // 1. Удалим проект из кеша проектов на согласовании
+    // 1. Удалим проект из кеша проектов на активных
     const baseParams = {
-      status: advManagerProjectStatusFilter.request_approve,
+      status: advManagerProjectStatusFilter.active,
       language: language?.id,
       date_sort: dateSortingTypes.decrease,
     };
@@ -44,52 +44,24 @@ export const invalidateAdvProjectByLaunchManagerProject = async ({
       ),
     );
 
-    // 2. Обновляем кэш проектов активные
+    // 2. Обновляем кэш проектов выполненные
     const params = {
-      status: advManagerProjectStatusFilter.active,
+      status: advManagerProjectStatusFilter.completed,
       language: language?.id,
       date_sort: dateSortingTypes.decrease,
-    };
-
-    const response: IAdvProjects = await trigger({
-      ...params,
       page: 1,
       elements_on_page: INTERSECTION_ELEMENTS.ADV_ORDERS,
-    }).unwrap();
-    const updatedProject = response.projects?.find(
-      (el) => el.id === project_id,
-    );
+      __isWebsocket: true,
+    };
 
-    if (!updatedProject) {
-      console.warn(
-        "WARNING: INVALIDATE ADVERTISER PROJECT BY LAUNCH MANAGER PROJECT  - project not found in response",
-      );
-      return;
-    }
+    await trigger(params).unwrap();
 
-    // 3. Обновляем кэш с новыми данными на этой странице
-    dispatch(
-      advProjectsAPI.util.updateQueryData(
-        "getAdvManagerProjects",
-        params as getProjectsCardReq,
-        (draft: IAdvProjects) => {
-          if (!draft?.projects) return;
-
-          // Удаляем старую версию
-          draft.projects = draft.projects.filter((el) => el.id !== project_id);
-
-          // Вставляем новую версию в начало
-          draft.projects.unshift(updatedProject);
-        },
-      ),
-    );
+    // 3. Обновляем кэш кружочков
+    dispatch(advProjectsAPI.util.invalidateTags([VIEWS_ADVERTISER]));
   } catch (err) {
     console.error(
       "ERROR: INVALIDATE ADVERTISER PROJECT BY LAUNCH MANAGER PROJECT - ",
       err,
     );
-  } finally {
-    // 3. Обновляем кэш кружочков
-    dispatch(advProjectsAPI.util.invalidateTags([VIEWS_ADVERTISER]));
   }
 };

@@ -4,8 +4,9 @@ import { bloggerOffersAPI } from "@entities/offer";
 import {
   advManagerProjectStatusFilter,
   advProjectsAPI,
+  invalidateAdvManagerProjectByCompleteProject,
+  invalidateAdvManagerProjectByLaunchProject,
   invalidateAdvProjectUpdate,
-  invalidateAdvProjectByLaunchManagerProject,
   invalidateCreateDesire,
   invalidateManagerRequestApprove,
   invalidateNewManagerProject,
@@ -93,7 +94,18 @@ export const useRevalidateCash = () => {
       method === notificationsTypes.notification_launch_manager_project
     ) {
       // Менеджер запустил проект рекламодателя
-      await invalidateAdvProjectByLaunchManagerProject({
+      await invalidateAdvManagerProjectByLaunchProject({
+        dispatch,
+        trigger: triggerAdvManagerProjects,
+        language,
+        project_id,
+        role,
+      });
+    } else if (
+      method === notificationsTypes.notification_complete_manager_project
+    ) {
+      // Менеджер завершил проект рекламодателя
+      await invalidateAdvManagerProjectByCompleteProject({
         dispatch,
         trigger: triggerAdvManagerProjects,
         language,
@@ -101,7 +113,7 @@ export const useRevalidateCash = () => {
         role,
       });
     } else if (method === notificationsTypes.new_my_project) {
-      // Рекламодатель создал новый проект
+      // Рекламодатель создал сам новый проект
       await invalidateAdvProjectUpdate({
         dispatch,
         trigger: triggerAdvMyProjects,
