@@ -29,6 +29,7 @@ export const History: FC = () => {
   const language = useFindLanguage();
   const screen = useWindowWidth();
   const [currentPage, setCurrentPage] = useState(1);
+  const [isClicked, setIsClicked] = useState<boolean>(false);
 
   const getParams = useMemo<HistoryReq>(
     () => ({
@@ -44,14 +45,30 @@ export const History: FC = () => {
   const { refetch: views } = useGetViewTransactionsQuery();
 
   const handleOnChangePage = () => {
-    setCurrentPage((prevPage) => prevPage + 1);
+    // устанавливаем состояние как true чтобы явно отслеживать валидацию от юзера и от вебсокета
+    setIsClicked(true);
+    // считаем на какую актуальную страницу надо сделать запрос, так как из-за добавления данных с вебсокета происходит лишний пустой запрос
+    const newPage = Math.floor(
+      (data?.transactions?.length || 0) / INTERSECTION_ELEMENTS.HISTORY,
+    );
+    setCurrentPage(newPage + 1);
   };
+
+  useEffect(() => {
+    // нужен чтобы точно управлять состоянием клика для правильной отрисовки скелетонов
+    // чтобы вебсокет не вызывал их отрисовку
+
+    if (isClicked && !isFetching) {
+      setIsClicked(false);
+    }
+  }, [isFetching, isLoading]);
 
   useEffect(() => {
     views();
   }, [currentPage]);
 
   let custom = 0;
+  const isLoadingMore = (isFetching || isLoading) && isClicked;
 
   return (
     <div className={`container ${screen > BREAKPOINT.LG ? "sidebar" : ""}`}>
@@ -100,7 +117,7 @@ export const History: FC = () => {
                   <HistoryCard card={card} />
                 </motion.div>
               ))}
-              {(isFetching || isLoading) &&
+              {isLoadingMore &&
                 Array.from({ length: INTERSECTION_ELEMENTS.HISTORY }).map(
                   (_, index) => <SkeletonHistoryCard key={index} />,
                 )}
@@ -109,20 +126,17 @@ export const History: FC = () => {
                   className={`${styles.show_more}`}
                   onClick={handleOnChangePage}
                 >
-                  {isFetching || isLoading ? (
-                    <SpinnerLoaderSmall />
-                  ) : (
-                    <ShowMoreBtn />
-                  )}
+                  {isLoadingMore ? <SpinnerLoaderSmall /> : <ShowMoreBtn />}
                 </div>
               )}
             </div>
-          ) : isLoading || isFetching ? (
+          ) : isLoadingMore ? (
             <div className={styles.cards__list}>
-              {(isFetching || isLoading) &&
-                Array.from({ length: INTERSECTION_ELEMENTS.HISTORY }).map(
-                  (_, index) => <SkeletonHistoryCard key={index} />,
-                )}
+              {Array.from({ length: INTERSECTION_ELEMENTS.HISTORY }).map(
+                (_, index) => (
+                  <SkeletonHistoryCard key={index} />
+                ),
+              )}
             </div>
           ) : (
             <div className={styles.empty__block}>
