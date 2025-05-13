@@ -5,3 +5,4 @@ export * from "./invalidateAdvProjectByDesire";
 export * from "./invalidateAdvManagerProjectByLaunchProject";
 export * from "./invalidateAdvManagerProjectByCompleteProject";
 export * from "./invalidateAdvProjectUpdate";
+export * from "./invalidateAdvProjectByBloggerAction";

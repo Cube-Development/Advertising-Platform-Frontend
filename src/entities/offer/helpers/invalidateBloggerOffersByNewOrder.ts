@@ -1,13 +1,8 @@
 import { AppDispatch } from "@app/providers/store";
-import {
-  bloggerOffersAPI,
-  getOrdersByStatusReq,
-  IBloggerOffers,
-  offerStatusFilter,
-} from "@entities/offer";
+import { bloggerOffersAPI, offerStatusFilter } from "@entities/offer";
 import { dateSortingTypes } from "@entities/platform";
 import { ENUM_ROLES } from "@entities/user";
-import { BLOGGER_OFFERS, VIEWS_BLOGGER_OFFERS } from "@shared/api";
+import { VIEWS_BLOGGER_OFFERS } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ILanguage, USER_LANGUAGES_LIST } from "@shared/languages";
 
@@ -18,7 +13,7 @@ interface Props {
   role: ENUM_ROLES;
 }
 
-export const invalidateBloggerOffers = async ({
+export const invalidateBloggerOffersByNewOrder = async ({
   dispatch,
   trigger,
   language = USER_LANGUAGES_LIST[0],

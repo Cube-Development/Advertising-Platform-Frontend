@@ -1,15 +1,19 @@
 import {
   channelAPI,
   invalidateBloggerChannelsOnModeration,
-  invalidateBloggerOffers,
 } from "@entities/channel";
 import { notificationsTypes } from "@entities/communication";
-import { bloggerOffersAPI } from "@entities/offer";
+import {
+  bloggerOffersAPI,
+  invalidateBloggerOffersByNewOrder,
+  invalidateBloggerOffersByWaitAction,
+} from "@entities/offer";
 import {
   advManagerProjectStatusFilter,
   advProjectsAPI,
   invalidateAdvManagerProjectByCompleteProject,
   invalidateAdvManagerProjectByLaunchProject,
+  invalidateAdvProjectByBloggerAction,
   invalidateAdvProjectUpdate,
   invalidateCreateDesire,
   invalidateManagerRequestApprove,
@@ -46,7 +50,7 @@ export const useRevalidateCash = () => {
   const dispatch = useAppDispatch();
 
   const revalidateCash = async (data: any) => {
-    const { method, project_id, tariff_id } = data;
+    const { method, project_id, order_id } = data;
 
     if (method === notificationsTypes.notification_create_deposit) {
       // Создан депозит
@@ -136,7 +140,46 @@ export const useRevalidateCash = () => {
         language,
         role,
       });
-    } else if (method === notificationsTypes.notification_unban_channel) {
+    } else if (
+      method === notificationsTypes.notification_accept_order_blogger
+    ) {
+      // Блогер принял новый заказ из ожидающих
+      // кеш Блогера
+      await invalidateBloggerOffersByWaitAction({
+        dispatch,
+        role,
+        order_id,
+      });
+      // кеш Рекламодателя
+      await invalidateAdvProjectByBloggerAction({
+        dispatch,
+        trigger: triggerAdvMyProjects,
+        language,
+        project_id,
+        role,
+      });
+    } else if (
+      method === notificationsTypes.notification_cancel_order_blogger
+    ) {
+      // Блогер отклонил новый заказ из ожидающих
+      // кеш Блогера
+      await invalidateBloggerOffersByWaitAction({
+        dispatch,
+        role,
+        order_id,
+      });
+      // кеш Рекламодателя
+      await invalidateAdvProjectByBloggerAction({
+        dispatch,
+        trigger: triggerAdvMyProjects,
+        language,
+        project_id,
+        role,
+      });
+    }
+
+    // ffff
+    else if (method === notificationsTypes.notification_unban_channel) {
       console.log(notificationsTypes.notification_unban_channel);
       dispatch(
         channelAPI.util.invalidateTags([
@@ -164,19 +207,12 @@ export const useRevalidateCash = () => {
       );
     } else if (method === notificationsTypes.notification_new_order_blogger) {
       // Блогеру пришел новый заказ размещение рекламы (в ожидании)
-      await invalidateBloggerOffers({
+      await invalidateBloggerOffersByNewOrder({
         dispatch,
         trigger: triggerOffers,
         language,
         role,
       });
-    } else if (
-      method === notificationsTypes.notification_accept_order_blogger
-    ) {
-      console.log(notificationsTypes.notification_accept_order_blogger);
-      dispatch(
-        advProjectsAPI.util.invalidateTags([ADV_PROJECTS, VIEWS_ADVERTISER]),
-      );
     }
     //
     else if (method === notificationsTypes.notification_publish_post) {

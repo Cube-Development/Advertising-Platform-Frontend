@@ -7,6 +7,7 @@ import { motion } from "framer-motion";
 import { FC } from "react";
 import { OfferCard, OfferCardSkeleton } from "../card";
 import styles from "./styles.module.scss";
+import { getAnimationDelay } from "@shared/utils";
 
 interface MyOffersProps {
   offers: IBloggerOfferCard[];
@@ -14,6 +15,7 @@ interface MyOffersProps {
   isLoading: boolean;
   isLast: boolean;
   statusFilter: offerStatusFilter;
+  currentPage: number;
 }
 
 export const MyOffers: FC<MyOffersProps> = ({
@@ -22,10 +24,11 @@ export const MyOffers: FC<MyOffersProps> = ({
   isLoading,
   isLast,
   statusFilter,
+  currentPage,
 }) => {
   return (
     <div className={styles.wrapper}>
-      {!isLoading && offers?.length === 0 ? (
+      {!isLoading && offers?.length === 0 && isLast ? (
         <ZeroChannel
           AddChannelBtn={AddChannel}
           page={ENUM_PAGE_FILTER.OFFER}
@@ -37,10 +40,15 @@ export const MyOffers: FC<MyOffersProps> = ({
           <div className={styles.cards}>
             {offers?.map((card, index) => (
               <motion.div
-                key={card.id + index}
+                key={card.id}
                 initial="hidden"
                 animate="visible"
-                custom={index % INTERSECTION_ELEMENTS.BLOGGER_OFFERS}
+                custom={getAnimationDelay({
+                  index,
+                  currentPage,
+                  total: offers.length,
+                  elements: INTERSECTION_ELEMENTS.BLOGGER_OFFERS,
+                })}
                 variants={PAGE_ANIMATION.animationUp}
               >
                 <OfferCard statusFilter={statusFilter} card={card} />
