@@ -110,3 +110,11 @@ export interface IAdvTemplateProjectsCard {
   name: string;
   budget: number;
 }
+
+export interface IOrderReportInfo {
+  id: string;
+  project_id: string;
+  file_name: string;
+  url: string;
+  created: string;
+}

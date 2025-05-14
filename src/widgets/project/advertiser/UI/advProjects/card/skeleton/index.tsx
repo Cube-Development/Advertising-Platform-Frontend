@@ -44,12 +44,12 @@ export const ProjectCardSkeleton: FC<ProjectCardSkeletonProps> = ({
           <div className={styles.card__description}>
             <div className={styles.card__description__data}>
               <div className={styles.card__description__data__title}>
-                <Skeleton className="h-3 w-[80px]" />
-                <Skeleton className="h-2 w-[100px]" />
+                <Skeleton className="h-4 w-[80px]" />
+                <Skeleton className="h-3 w-[100px]" />
               </div>
               <div className={styles.card__description__data__date}>
-                <Skeleton className="h-2 w-[100px]" />
-                <Skeleton className="h-2 w-[100px]" />
+                <Skeleton className="h-3 w-[100px]" />
+                <Skeleton className="h-3 w-[100px]" />
               </div>
             </div>
             <Skeleton className="w-full h-full rounded-[10px]" />
@@ -104,7 +104,10 @@ export const ProjectCardSkeleton: FC<ProjectCardSkeletonProps> = ({
             ) : typeFilter === projectTypesFilter.myProject &&
               statusFilter === myProjectStatusFilter.completed ? (
               <div className={styles.card__info__icons_completed}>
-                <Skeleton className="w-full h-full rounded-[8px]" />
+                <div className={styles.icons}>
+                  <Skeleton className="w-full h-full rounded-[8px]" />
+                  <Skeleton className="w-full h-full rounded-[8px]" />
+                </div>
                 <Skeleton className="w-full h-full rounded-[8px]" />
               </div>
             ) : (

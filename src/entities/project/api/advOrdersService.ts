@@ -6,6 +6,7 @@ import {
   IAdvSubprojects,
   ICreateDate,
   IFile,
+  IOrderReportInfo,
   IPostChannel,
   managerProjectStatusFilter,
   myProjectStatusFilter,
@@ -172,6 +173,13 @@ export const advProjectsAPI = authApi.injectEndpoints({
         VIEWS_MANAGER,
         ADV_ORDERS,
       ],
+    }),
+    orderReportInfo: build.mutation<IOrderReportInfo, { project_id: string }>({
+      query: (params) => ({
+        url: `/order/advertiser/report`,
+        method: "GET",
+        params: params,
+      }),
     }),
     getAdvProjects: build.query<
       IAdvProjects,
@@ -354,4 +362,5 @@ export const {
   useGetAdvSubprojectsQuery,
   useGetAdvManagerProjectsQuery,
   useGetAdvManagerSubprojectsQuery,
+  useOrderReportInfoMutation,
 } = advProjectsAPI;

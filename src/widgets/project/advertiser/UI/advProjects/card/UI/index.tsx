@@ -167,7 +167,7 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
               </div>
               <div className={styles.bottom}>
                 <Feedback />
-                <DownloadReport />
+                <DownloadReport project_id={card?.id} />
               </div>
             </div>
           ) : typeFilter === projectTypesFilter.managerProject &&
@@ -193,14 +193,17 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
           ) : typeFilter === projectTypesFilter.myProject &&
             statusFilter === myProjectStatusFilter.completed ? (
             <div className={styles.card__info__icons_completed}>
-              <div>
-                <CompleteIcon />
-                <p>{card?.completed?.toLocaleString()}</p>
+              <div className={styles.icons}>
+                <div className={styles.icon}>
+                  <CompleteIcon />
+                  <p>{card?.completed?.toLocaleString()}</p>
+                </div>
+                <div className={styles.icon}>
+                  <CancelIcon />
+                  <p>{card?.canceled_rejected?.toLocaleString()}</p>
+                </div>
               </div>
-              <div>
-                <CancelIcon />
-                <p>{card?.canceled_rejected?.toLocaleString()}</p>
-              </div>
+              <DownloadReport project_id={card?.id} />
             </div>
           ) : (
             <div className={styles.card__info__icons}>
