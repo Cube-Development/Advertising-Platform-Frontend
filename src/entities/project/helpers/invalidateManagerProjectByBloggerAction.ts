@@ -1,52 +1,54 @@
+
+
 import { AppDispatch } from "@app/providers/store";
 import { dateSortingTypes } from "@entities/platform";
 import { ENUM_ROLES } from "@entities/user";
-import { ADV_ORDERS, VIEWS_ADVERTISER } from "@shared/api";
+import { MANAGER_ORDERS, VIEWS_MANAGER } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ILanguage, USER_LANGUAGES_LIST } from "@shared/languages";
-import { advProjectsAPI, getProjectsCardReq } from "../api";
-import { myProjectStatusFilter } from "../config";
-import { IAdvProjects } from "../types";
+import { getManagerProjectsCardReq, managerProjectsAPI } from "../api";
+import { managerProjectStatusFilter } from "../config";
+import { IManagerProjects } from "../types";
 
 interface Props {
   dispatch: AppDispatch;
   trigger: ReturnType<
-    typeof advProjectsAPI.useLazyGetAdvManagerProjectsQuery
+    typeof managerProjectsAPI.useLazyGetManagerProjectsQuery
   >[0];
   language: ILanguage;
   project_id: string;
   role: ENUM_ROLES;
 }
 
-export const invalidateAdvProjectByBloggerAction = async ({
+export const invalidateManagerProjectByBloggerAction = async ({
   dispatch,
   trigger,
   language = USER_LANGUAGES_LIST[0],
   project_id,
   role,
 }: Props) => {
-  if (role !== ENUM_ROLES.ADVERTISER) return;
+  if (role !== ENUM_ROLES.MANAGER) return;
 
   let page: number | null = null;
 
   const baseParams = {
-    status: myProjectStatusFilter.active,
+    status: managerProjectStatusFilter.active,
     language: language?.id,
     date_sort: dateSortingTypes.decrease,
   };
 
   // 1. Найдём страницу в кеше моих проектов активные, где лежит project_id
   dispatch(
-    advProjectsAPI.util.updateQueryData(
-      "getAdvManagerProjects",
-      baseParams as getProjectsCardReq,
-      (draft: IAdvProjects) => {
+    managerProjectsAPI.util.updateQueryData(
+      "getManagerProjects",
+      baseParams as getManagerProjectsCardReq,
+      (draft: IManagerProjects) => {
         if (!draft?.projects?.length) return;
 
-        const index = draft.projects.findIndex((el) => el.id === project_id);
+        const index = draft.projects.findIndex((el) => el.project_id === project_id);
 
         if (index !== -1) {
-          page = Math.floor(index / INTERSECTION_ELEMENTS.ADV_ORDERS) + 1;
+          page = Math.floor(index / INTERSECTION_ELEMENTS.MANAGER_ORDERS) + 1;
         }
       },
     ),
@@ -57,14 +59,14 @@ export const invalidateAdvProjectByBloggerAction = async ({
   }
 
   // 2. Получаем актуальные данные по этой странице
-  const response: IAdvProjects = await trigger({
+  const response: IManagerProjects = await trigger({
     ...baseParams,
-    elements_on_page: INTERSECTION_ELEMENTS.ADV_ORDERS,
+    elements_on_page: INTERSECTION_ELEMENTS.MANAGER_ORDERS,
     page,
     __isWebsocket: true,
   }).unwrap();
 
-  const updatedProject = response.projects?.find((el) => el.id === project_id);
+  const updatedProject = response.projects?.find((el) => el.project_id === project_id);
 
   if (!updatedProject) {
     console.warn(
@@ -75,15 +77,15 @@ export const invalidateAdvProjectByBloggerAction = async ({
 
   // 3. Обновляем кэш с новыми данными на этой странице
   dispatch(
-    advProjectsAPI.util.updateQueryData(
-      "getAdvManagerProjects",
-      baseParams as getProjectsCardReq,
-      (draft: IAdvProjects) => {
+    managerProjectsAPI.util.updateQueryData(
+      "getManagerProjects",
+      baseParams as getManagerProjectsCardReq,
+      (draft: IManagerProjects) => {
         if (!draft?.projects) return;
 
         // Обновляем старую версию
         draft.projects = draft.projects.map((el) => {
-          if (el.id === project_id) {
+          if (el.project_id === project_id) {
             return updatedProject;
           }
           return el;
@@ -93,5 +95,5 @@ export const invalidateAdvProjectByBloggerAction = async ({
   );
 
   // 4. Обновляем кэш кружочков и ордеров
-  dispatch(advProjectsAPI.util.invalidateTags([ADV_ORDERS, VIEWS_ADVERTISER]));
+  dispatch(managerProjectsAPI.util.invalidateTags([MANAGER_ORDERS, VIEWS_MANAGER]));
 };

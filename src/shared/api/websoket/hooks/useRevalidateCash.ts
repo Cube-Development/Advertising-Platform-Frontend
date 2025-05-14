@@ -16,6 +16,7 @@ import {
   invalidateAdvProjectByBloggerAction,
   invalidateAdvProjectUpdate,
   invalidateCreateDesire,
+  invalidateManagerProjectByBloggerAction,
   invalidateManagerRequestApprove,
   invalidateNewManagerProject,
   managerProjectsAPI,
@@ -158,6 +159,14 @@ export const useRevalidateCash = () => {
         project_id,
         role,
       });
+      // кеш менеджера
+      await invalidateManagerProjectByBloggerAction({
+        dispatch,
+        trigger: triggerManagerProjects,
+        language,
+        project_id,
+        role,
+      });
     } else if (
       method === notificationsTypes.notification_cancel_order_blogger
     ) {
@@ -172,6 +181,14 @@ export const useRevalidateCash = () => {
       await invalidateAdvProjectByBloggerAction({
         dispatch,
         trigger: triggerAdvMyProjects,
+        language,
+        project_id,
+        role,
+      });
+      // кеш менеджера
+      await invalidateManagerProjectByBloggerAction({
+        dispatch,
+        trigger: triggerManagerProjects,
         language,
         project_id,
         role,
