@@ -26,9 +26,16 @@ export const MyOffers: FC<MyOffersProps> = ({
   statusFilter,
   currentPage,
 }) => {
+  console.log(
+    "offers",
+    !isLoading && offers?.length === 0 && isLast,
+    isLoading,
+    isLast,
+    offers?.length,
+  );
   return (
     <div className={styles.wrapper}>
-      {!isLoading && offers?.length === 0 && isLast ? (
+      {!isLoading && offers?.length === 0 ? (
         <ZeroChannel
           AddChannelBtn={AddChannel}
           page={ENUM_PAGE_FILTER.OFFER}

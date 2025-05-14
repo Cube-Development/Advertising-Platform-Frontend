@@ -15,7 +15,7 @@ import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";
 import { SuspenseLoader } from "@shared/ui";
 import { buildPathWithQuery, queryParamKeys, QueryParams } from "@shared/utils";
 import { BarFilter } from "@widgets/barFilter";
-import React, { FC, Suspense, useEffect, useState } from "react";
+import React, { FC, Suspense, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { validate as isValidUUID } from "uuid";
@@ -68,12 +68,15 @@ export const OffersPage: FC = () => {
         : { search_string }
       : {}),
   };
-  const { data, isFetching, refetch } = useGetBloggerOrdersQuery(getParams, {
-    selectFromResult: ({ data, ...rest }) => ({
-      ...rest,
-      data: (data?.status === formState?.status && data) || undefined,
-    }),
-  });
+  const { data, isFetching, refetch, originalArgs } = useGetBloggerOrdersQuery(
+    getParams,
+    {
+      selectFromResult: ({ data, ...rest }) => ({
+        ...rest,
+        data: (data?.status === formState?.status && data) || undefined,
+      }),
+    },
+  );
   const { refetch: views } = useGetViewBloggerOrderQuery();
 
   const handleOnChangePage = () => {
@@ -87,6 +90,12 @@ export const OffersPage: FC = () => {
       refetch();
     }
   };
+
+  useEffect(() => {
+    if (data && data?.orders?.length === 0 && !data?.isLast) {
+      refetch();
+    }
+  }, [data?.orders?.length]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -105,6 +114,8 @@ export const OffersPage: FC = () => {
     });
     navigate(newPath, { replace: true });
   }, [formState.status]);
+
+  const isLoadingMore = isFetching && !originalArgs?.__isWebsocket;
 
   return (
     <Suspense fallback={<SuspenseLoader />}>
@@ -126,7 +137,7 @@ export const OffersPage: FC = () => {
             statusFilter={formState.status as offerStatusFilter}
             offers={data?.orders || []}
             handleOnChangePage={handleOnChangePage}
-            isLoading={isFetching}
+            isLoading={isLoadingMore}
             isLast={data?.isLast || false}
             currentPage={formState?.page}
           />

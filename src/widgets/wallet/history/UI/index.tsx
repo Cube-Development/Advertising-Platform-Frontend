@@ -29,7 +29,6 @@ export const History: FC = () => {
   const language = useFindLanguage();
   const screen = useWindowWidth();
   const [currentPage, setCurrentPage] = useState(1);
-  const [isClicked, setIsClicked] = useState<boolean>(false);
 
   const getParams = useMemo<HistoryReq>(
     () => ({
@@ -41,34 +40,32 @@ export const History: FC = () => {
     [language?.id, currentPage],
   );
 
-  const { data, isLoading, isFetching } = useGetHistoryQuery(getParams);
+  const { data, isFetching, refetch, originalArgs } =
+    useGetHistoryQuery(getParams);
   const { refetch: views } = useGetViewTransactionsQuery();
 
   const handleOnChangePage = () => {
-    // устанавливаем состояние как true чтобы явно отслеживать валидацию от юзера и от вебсокета
-    setIsClicked(true);
-    // считаем на какую актуальную страницу надо сделать запрос, так как из-за добавления данных с вебсокета происходит лишний пустой запрос
     const newPage = Math.floor(
       (data?.transactions?.length || 0) / INTERSECTION_ELEMENTS.HISTORY,
     );
     setCurrentPage(newPage + 1);
+    if (data?.transactions?.length === 0) {
+      refetch();
+    }
   };
 
   useEffect(() => {
-    // нужен чтобы точно управлять состоянием клика для правильной отрисовки скелетонов
-    // чтобы вебсокет не вызывал их отрисовку
-
-    if (isClicked && !isFetching) {
-      setIsClicked(false);
+    if (data && data?.transactions?.length === 0 && !data?.isLast) {
+      refetch();
     }
-  }, [isFetching, isLoading]);
+  }, [data?.transactions?.length]);
 
   useEffect(() => {
     views();
   }, [currentPage]);
 
   let custom = 0;
-  const isLoadingMore = (isFetching || isLoading) && isClicked;
+  const isLoadingMore = isFetching && !originalArgs?.__isWebsocket;
 
   return (
     <div className={`container ${screen > BREAKPOINT.LG ? "sidebar" : ""}`}>
