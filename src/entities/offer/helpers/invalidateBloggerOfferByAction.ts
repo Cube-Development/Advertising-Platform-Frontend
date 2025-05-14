@@ -12,12 +12,14 @@ interface Props {
   dispatch: AppDispatch;
   role: ENUM_ROLES;
   order_id: string;
+  status: offerStatusFilter;
 }
 
-export const invalidateBloggerOffersByWaitAction = async ({
+export const invalidateBloggerOfferByAction = async ({
   dispatch,
   role,
   order_id,
+  status,
 }: Props) => {
   if (role !== ENUM_ROLES.BLOGGER) return;
 
@@ -26,7 +28,7 @@ export const invalidateBloggerOffersByWaitAction = async ({
     bloggerOffersAPI.util.updateQueryData(
       "getBloggerOrders",
       {
-        status: offerStatusFilter.wait,
+        status: status,
       } as getOrdersByStatusReq, // ключ кэша, т.к. serializeQueryArgs без page,
       (draft: IBloggerOffers) => {
         if (!draft?.orders?.length) return;

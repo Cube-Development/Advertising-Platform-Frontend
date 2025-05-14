@@ -1,2 +1,2 @@
-export * from "./invalidateBloggerOffersByNewOrder";
-export * from "./invalidateBloggerOfferWaitByAction";
+export * from "./invalidateBloggerOfferByNewOrder";
+export * from "./invalidateBloggerOfferByAction";

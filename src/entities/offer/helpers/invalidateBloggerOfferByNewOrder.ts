@@ -13,7 +13,7 @@ interface Props {
   role: ENUM_ROLES;
 }
 
-export const invalidateBloggerOffersByNewOrder = async ({
+export const invalidateBloggerOfferByNewOrder = async ({
   dispatch,
   trigger,
   language = USER_LANGUAGES_LIST[0],

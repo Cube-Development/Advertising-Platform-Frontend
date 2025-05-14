@@ -5,8 +5,9 @@ import {
 import { notificationsTypes } from "@entities/communication";
 import {
   bloggerOffersAPI,
-  invalidateBloggerOffersByNewOrder,
-  invalidateBloggerOffersByWaitAction,
+  invalidateBloggerOfferByNewOrder,
+  invalidateBloggerOfferByAction,
+  offerStatusFilter,
 } from "@entities/offer";
 import {
   advManagerProjectStatusFilter,
@@ -146,10 +147,11 @@ export const useRevalidateCash = () => {
     ) {
       // Блогер принял новый заказ из ожидающих
       // кеш Блогера
-      await invalidateBloggerOffersByWaitAction({
+      await invalidateBloggerOfferByAction({
         dispatch,
         role,
         order_id,
+        status: offerStatusFilter.wait,
       });
       // кеш Рекламодателя
       await invalidateAdvProjectByBloggerAction({
@@ -172,10 +174,11 @@ export const useRevalidateCash = () => {
     ) {
       // Блогер отклонил новый заказ из ожидающих
       // кеш Блогера
-      await invalidateBloggerOffersByWaitAction({
+      await invalidateBloggerOfferByAction({
         dispatch,
         role,
         order_id,
+        status: offerStatusFilter.wait,
       });
       // кеш Рекламодателя
       await invalidateAdvProjectByBloggerAction({
@@ -232,6 +235,17 @@ export const useRevalidateCash = () => {
         project_id,
         role,
       });
+    } else if (
+      method === notificationsTypes.notification_advertiser_reject_order
+    ) {
+      // Рекламодатель отклонил заказ
+      // кеш Блогера
+      await invalidateBloggerOfferByAction({
+        dispatch,
+        role,
+        order_id,
+        status: offerStatusFilter.active,
+      });
     }
 
     // ffff
@@ -263,7 +277,7 @@ export const useRevalidateCash = () => {
       );
     } else if (method === notificationsTypes.notification_new_order_blogger) {
       // Блогеру пришел новый заказ размещение рекламы (в ожидании)
-      await invalidateBloggerOffersByNewOrder({
+      await invalidateBloggerOfferByNewOrder({
         dispatch,
         trigger: triggerOffers,
         language,
@@ -280,16 +294,6 @@ export const useRevalidateCash = () => {
       method === notificationsTypes.notification_advertiser_accept_order
     ) {
       console.log(notificationsTypes.notification_advertiser_accept_order);
-      dispatch(
-        bloggerOffersAPI.util.invalidateTags([
-          BLOGGER_OFFERS,
-          VIEWS_BLOGGER_OFFERS,
-        ]),
-      );
-    } else if (
-      method === notificationsTypes.notification_advertiser_reject_order
-    ) {
-      console.log(notificationsTypes.notification_advertiser_reject_order);
       dispatch(
         bloggerOffersAPI.util.invalidateTags([
           BLOGGER_OFFERS,
