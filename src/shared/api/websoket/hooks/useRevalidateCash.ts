@@ -13,12 +13,12 @@ import {
   advProjectsAPI,
   invalidateAdvManagerProjectByCompleteProject,
   invalidateAdvManagerProjectByLaunchProject,
+  invalidateAdvManagerProjectByRequestApprove,
   invalidateAdvProjectByBloggerAction,
   invalidateAdvProjectUpdate,
-  invalidateCreateDesire,
+  invalidateManagerNewProject,
   invalidateManagerProjectByBloggerAction,
-  invalidateManagerRequestApprove,
-  invalidateNewManagerProject,
+  invalidateManagerProjectByDesire,
   managerProjectsAPI,
   myProjectStatusFilter,
 } from "@entities/project";
@@ -68,7 +68,7 @@ export const useRevalidateCash = () => {
       await invalidateHistory({ dispatch, trigger: triggerHistory, language });
     } else if (method === notificationsTypes.new_manager_project) {
       // Рекламодатель купил новый проект с менеджером (размещение под ключ) - уведомление менеджеру
-      await invalidateNewManagerProject({
+      await invalidateManagerNewProject({
         dispatch,
         trigger: triggerManagerProjects,
         language,
@@ -76,7 +76,7 @@ export const useRevalidateCash = () => {
       });
     } else if (method === notificationsTypes.notification_request_approve) {
       // Менеджер отправил проект на согласование рекламодателю
-      await invalidateManagerRequestApprove({
+      await invalidateAdvManagerProjectByRequestApprove({
         dispatch,
         trigger: triggerAdvManagerProjects,
         language,
@@ -85,7 +85,7 @@ export const useRevalidateCash = () => {
       });
     } else if (method === notificationsTypes.notification_create_desire) {
       // Рекламодатель отправил проект на ре согласование (заменить канал, заменить пост)
-      await invalidateCreateDesire({
+      await invalidateManagerProjectByDesire({
         dispatch,
         trigger: triggerManagerProjects,
         language,
@@ -95,7 +95,7 @@ export const useRevalidateCash = () => {
     } else if (method === notificationsTypes.notification_approve_project) {
       // Рекламодатель подтвердил проект с менеджером
       // invalidateCreateDesire - подходит по смыслу обновления данных в кеше у менеджера
-      await invalidateCreateDesire({
+      await invalidateManagerProjectByDesire({
         dispatch,
         trigger: triggerManagerProjects,
         language,
@@ -177,6 +177,45 @@ export const useRevalidateCash = () => {
         role,
         order_id,
       });
+      // кеш Рекламодателя
+      await invalidateAdvProjectByBloggerAction({
+        dispatch,
+        trigger: triggerAdvMyProjects,
+        language,
+        project_id,
+        role,
+      });
+      // кеш менеджера
+      await invalidateManagerProjectByBloggerAction({
+        dispatch,
+        trigger: triggerManagerProjects,
+        language,
+        project_id,
+        role,
+      });
+    } else if (method === notificationsTypes.notification_must_publish_post) {
+      // Блогер должен разместить пост в назначенное время (просто ревалидация кружочков)
+      dispatch(bloggerOffersAPI.util.invalidateTags([VIEWS_BLOGGER_OFFERS]));
+    } else if (method === notificationsTypes.notification_post_not_published) {
+      // Блогер не разместил пост вовремя
+      // кеш Рекламодателя
+      await invalidateAdvProjectByBloggerAction({
+        dispatch,
+        trigger: triggerAdvMyProjects,
+        language,
+        project_id,
+        role,
+      });
+      // кеш менеджера
+      await invalidateManagerProjectByBloggerAction({
+        dispatch,
+        trigger: triggerManagerProjects,
+        language,
+        project_id,
+        role,
+      });
+    } else if (method === notificationsTypes.notification_publish_post) {
+      // Блогер разместил пост
       // кеш Рекламодателя
       await invalidateAdvProjectByBloggerAction({
         dispatch,

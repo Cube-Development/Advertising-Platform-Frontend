@@ -198,24 +198,34 @@ export const advProjectsAPI = authApi.injectEndpoints({
         return `${endpointName}/${language}/${date_sort}/${status}`;
       },
       merge: (currentCache, newItems, arg) => {
-        const newIds = new Set(newItems.projects.map((p) => p?.id));
-        const filteredOldProjects = currentCache?.projects?.filter(
-          (p) => !newIds.has(p?.id),
+        const newProjectsMap = new Map(newItems.projects.map((p) => [p.id, p]));
+
+        // Обновляем старые элементы, если есть новые с тем же id
+        const updatedOldProjects =
+          currentCache?.projects?.map((old) =>
+            newProjectsMap.has(old.id) ? newProjectsMap.get(old.id)! : old,
+          ) || [];
+
+        // Убираем уже обновленные ID из новых, чтобы они не дублировались
+        const newIds = new Set(updatedOldProjects.map((p) => p.id));
+        const onlyNewProjects = newItems.projects.filter(
+          (p) => !newIds.has(p.id),
         );
 
         if (arg.arg.__isWebsocket) {
           return {
             ...currentCache,
-            projects: [...newItems.projects, ...filteredOldProjects],
+            projects: [...onlyNewProjects, ...updatedOldProjects],
           };
         } else if (arg.arg.page === 1) {
           return {
             ...newItems,
           };
         }
+
         return {
           ...newItems,
-          projects: [...filteredOldProjects, ...newItems.projects],
+          projects: [...updatedOldProjects, ...onlyNewProjects],
         };
       },
       forceRefetch({ currentArg, previousArg }) {
@@ -288,26 +298,37 @@ export const advProjectsAPI = authApi.injectEndpoints({
         newItems: IAdvManagerProjectsDev | IAdvProjects,
         arg,
       ) => {
-        const newIds = new Set(newItems.projects.map((p) => p?.id));
-        const filteredOldProjects = currentCache?.projects?.filter(
+        const newProjectsMap = new Map(
+          newItems?.projects?.map((p) => [p?.id, p]),
+        );
+
+        // Обновляем старые элементы, если есть новые с тем же id
+        const updatedOldProjects =
+          currentCache?.projects?.map((old) =>
+            newProjectsMap?.has(old?.id) ? newProjectsMap?.get(old?.id)! : old,
+          ) || [];
+
+        // Убираем уже обновленные ID из новых, чтобы они не дублировались
+        const newIds = new Set(updatedOldProjects?.map((p) => p.id));
+        const onlyNewProjects = newItems?.projects?.filter(
           (p) => !newIds.has(p?.id),
         );
 
         if (arg.arg.__isWebsocket) {
           return {
             ...currentCache,
-            projects: [...newItems.projects, ...filteredOldProjects],
+            projects: [...onlyNewProjects, ...updatedOldProjects],
           };
         } else if (arg.arg.page === 1) {
           return {
             ...newItems,
           };
-        } else {
-          return {
-            ...newItems,
-            projects: [...filteredOldProjects, ...newItems.projects],
-          };
         }
+
+        return {
+          ...newItems,
+          projects: [...updatedOldProjects, ...onlyNewProjects],
+        };
       },
       forceRefetch({ currentArg, previousArg }) {
         return currentArg !== previousArg;

@@ -1,9 +1,9 @@
 import { AppDispatch } from "@app/providers/store";
 import { dateSortingTypes } from "@entities/platform";
 import { ILanguage, USER_LANGUAGES_LIST } from "@shared/languages";
-import { advProjectsAPI, getProjectsCardReq } from "../api";
-import { advManagerProjectStatusFilter, projectStatus } from "../config";
-import { IAdvProjects } from "../types";
+import { advProjectsAPI, getProjectsCardReq } from "../../api";
+import { advManagerProjectStatusFilter, projectStatus } from "../../config";
+import { IAdvProjects } from "../../types";
 
 interface Props {
   project_id: string;

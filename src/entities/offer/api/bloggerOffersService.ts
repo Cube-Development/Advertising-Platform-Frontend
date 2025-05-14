@@ -81,14 +81,22 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
         return `${endpointName}/${status}/`;
       },
       merge: (currentCache, newItems, arg) => {
-        // const newIds = new Set(newItems.orders.map((p) => p?.id));
-        // const filteredOld = currentCache?.orders?.filter(
-        //   (p) => !newIds.has(p?.id),
-        // );
+        const newMap = new Map(newItems?.orders?.map((p) => [p?.id, p]));
+
+        // Обновляем старые элементы, если есть новые с тем же id
+        const updatedOld =
+          currentCache?.orders?.map((old) =>
+            newMap?.has(old?.id) ? newMap?.get(old?.id)! : old,
+          ) || [];
+
+        // Убираем уже обновленные ID из новых, чтобы они не дублировались
+        const newIds = new Set(updatedOld?.map((p) => p.id));
+        const onlyNew = newItems?.orders?.filter((p) => !newIds.has(p?.id));
 
         if (arg.arg.__isWebsocket) {
           return {
-            ...newItems,
+            ...currentCache,
+            orders: [...onlyNew, ...updatedOld],
           };
           // return {
           //   ...currentCache,
@@ -101,7 +109,7 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
         }
         return {
           ...newItems,
-          orders: [...currentCache.orders, ...newItems.orders],
+          orders: [...updatedOld, ...onlyNew],
         };
       },
 

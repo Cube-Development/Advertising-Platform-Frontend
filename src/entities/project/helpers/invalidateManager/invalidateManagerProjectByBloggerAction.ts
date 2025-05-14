@@ -1,14 +1,12 @@
-
-
 import { AppDispatch } from "@app/providers/store";
 import { dateSortingTypes } from "@entities/platform";
 import { ENUM_ROLES } from "@entities/user";
 import { MANAGER_ORDERS, VIEWS_MANAGER } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ILanguage, USER_LANGUAGES_LIST } from "@shared/languages";
-import { getManagerProjectsCardReq, managerProjectsAPI } from "../api";
-import { managerProjectStatusFilter } from "../config";
-import { IManagerProjects } from "../types";
+import { getManagerProjectsCardReq, managerProjectsAPI } from "../../api";
+import { managerProjectStatusFilter } from "../../config";
+import { IManagerProjects } from "../../types";
 
 interface Props {
   dispatch: AppDispatch;
@@ -37,7 +35,7 @@ export const invalidateManagerProjectByBloggerAction = async ({
     date_sort: dateSortingTypes.decrease,
   };
 
-  // 1. Найдём страницу в кеше моих проектов активные, где лежит project_id
+  // 1. Найдём страницу в кеше проектов активные, где лежит project_id
   dispatch(
     managerProjectsAPI.util.updateQueryData(
       "getManagerProjects",
@@ -45,7 +43,9 @@ export const invalidateManagerProjectByBloggerAction = async ({
       (draft: IManagerProjects) => {
         if (!draft?.projects?.length) return;
 
-        const index = draft.projects.findIndex((el) => el.project_id === project_id);
+        const index = draft.projects.findIndex(
+          (el) => el.project_id === project_id,
+        );
 
         if (index !== -1) {
           page = Math.floor(index / INTERSECTION_ELEMENTS.MANAGER_ORDERS) + 1;
@@ -59,41 +59,15 @@ export const invalidateManagerProjectByBloggerAction = async ({
   }
 
   // 2. Получаем актуальные данные по этой странице
-  const response: IManagerProjects = await trigger({
+  await trigger({
     ...baseParams,
     elements_on_page: INTERSECTION_ELEMENTS.MANAGER_ORDERS,
     page,
     __isWebsocket: true,
   }).unwrap();
 
-  const updatedProject = response.projects?.find((el) => el.project_id === project_id);
-
-  if (!updatedProject) {
-    console.warn(
-      "WARNING: INVALIDATE MANAGER REQUEST APPROVE - project not found in response",
-    );
-    return;
-  }
-
-  // 3. Обновляем кэш с новыми данными на этой странице
+  // 3. Обновляем кэш кружочков и ордеров
   dispatch(
-    managerProjectsAPI.util.updateQueryData(
-      "getManagerProjects",
-      baseParams as getManagerProjectsCardReq,
-      (draft: IManagerProjects) => {
-        if (!draft?.projects) return;
-
-        // Обновляем старую версию
-        draft.projects = draft.projects.map((el) => {
-          if (el.project_id === project_id) {
-            return updatedProject;
-          }
-          return el;
-        });
-      },
-    ),
+    managerProjectsAPI.util.invalidateTags([MANAGER_ORDERS, VIEWS_MANAGER]),
   );
-
-  // 4. Обновляем кэш кружочков и ордеров
-  dispatch(managerProjectsAPI.util.invalidateTags([MANAGER_ORDERS, VIEWS_MANAGER]));
 };

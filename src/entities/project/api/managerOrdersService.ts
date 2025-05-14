@@ -74,7 +74,7 @@ export const managerProjectsAPI = authApi.injectEndpoints({
           method: "PUT",
           params: params,
         }),
-        invalidatesTags: [MANAGER_PROJECTS, VIEWS_MANAGER],
+        // invalidatesTags: [MANAGER_PROJECTS, VIEWS_MANAGER],
       },
     ),
 
@@ -123,17 +123,26 @@ export const managerProjectsAPI = authApi.injectEndpoints({
         newItems: IManagerProjects | IManagerNewProjects,
         arg,
       ) => {
-        const newIds = new Set(newItems.projects.map((p) => p?.id));
-        const filteredOldProjects = currentCache?.projects?.filter(
-          (p) => !newIds.has(p?.id),
+        const newProjectsMap = new Map(newItems.projects.map((p) => [p.id, p]));
+
+        // Обновляем старые элементы, если есть новые с тем же id
+        const updatedOldProjects =
+          currentCache?.projects?.map((old) =>
+            newProjectsMap.has(old.id) ? newProjectsMap.get(old.id)! : old,
+          ) || [];
+
+        // Убираем уже обновленные ID из новых, чтобы они не дублировались
+        const newIds = new Set(updatedOldProjects.map((p) => p.id));
+        const onlyNewProjects = newItems.projects.filter(
+          (p) => !newIds.has(p.id),
         );
 
         if (arg.arg.__isWebsocket) {
           return {
             ...currentCache,
-            projects: [...newItems.projects, ...filteredOldProjects],
+            projects: [...onlyNewProjects, ...updatedOldProjects],
           };
-        } else if (arg.arg.page === 1 && !arg.arg.__isWebsocket) {
+        } else if (arg.arg.page === 1) {
           return {
             ...newItems,
           };
@@ -141,7 +150,7 @@ export const managerProjectsAPI = authApi.injectEndpoints({
 
         return {
           ...newItems,
-          projects: [...filteredOldProjects, ...newItems.projects],
+          projects: [...updatedOldProjects, ...onlyNewProjects],
         };
       },
 

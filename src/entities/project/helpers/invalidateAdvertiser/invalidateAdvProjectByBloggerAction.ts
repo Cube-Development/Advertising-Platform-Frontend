@@ -4,9 +4,9 @@ import { ENUM_ROLES } from "@entities/user";
 import { ADV_ORDERS, VIEWS_ADVERTISER } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ILanguage, USER_LANGUAGES_LIST } from "@shared/languages";
-import { advProjectsAPI, getProjectsCardReq } from "../api";
-import { myProjectStatusFilter } from "../config";
-import { IAdvProjects } from "../types";
+import { advProjectsAPI, getProjectsCardReq } from "../../api";
+import { myProjectStatusFilter } from "../../config";
+import { IAdvProjects } from "../../types";
 
 interface Props {
   dispatch: AppDispatch;
@@ -57,41 +57,13 @@ export const invalidateAdvProjectByBloggerAction = async ({
   }
 
   // 2. Получаем актуальные данные по этой странице
-  const response: IAdvProjects = await trigger({
+  await trigger({
     ...baseParams,
     elements_on_page: INTERSECTION_ELEMENTS.ADV_ORDERS,
     page,
     __isWebsocket: true,
   }).unwrap();
 
-  const updatedProject = response.projects?.find((el) => el.id === project_id);
-
-  if (!updatedProject) {
-    console.warn(
-      "WARNING: INVALIDATE MANAGER REQUEST APPROVE - project not found in response",
-    );
-    return;
-  }
-
-  // 3. Обновляем кэш с новыми данными на этой странице
-  dispatch(
-    advProjectsAPI.util.updateQueryData(
-      "getAdvManagerProjects",
-      baseParams as getProjectsCardReq,
-      (draft: IAdvProjects) => {
-        if (!draft?.projects) return;
-
-        // Обновляем старую версию
-        draft.projects = draft.projects.map((el) => {
-          if (el.id === project_id) {
-            return updatedProject;
-          }
-          return el;
-        });
-      },
-    ),
-  );
-
-  // 4. Обновляем кэш кружочков и ордеров
+  // 3. Обновляем кэш кружочков и ордеров
   dispatch(advProjectsAPI.util.invalidateTags([ADV_ORDERS, VIEWS_ADVERTISER]));
 };
