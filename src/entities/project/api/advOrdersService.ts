@@ -18,6 +18,7 @@ import {
   ADV_TARIFF_PROJECTS,
   authApi,
   BLOGGER_OFFERS,
+  MANAGER_ORDERS,
   VIEWS_ADVERTISER,
   VIEWS_MANAGER,
 } from "@shared/api";
@@ -150,11 +151,10 @@ export const advProjectsAPI = authApi.injectEndpoints({
         params: params,
       }),
       invalidatesTags: [
-        BLOGGER_OFFERS,
-        ADV_PROJECTS,
         VIEWS_ADVERTISER,
         VIEWS_MANAGER,
         ADV_ORDERS,
+        MANAGER_ORDERS,
       ],
     }),
     rejectOrder: build.mutation<
@@ -167,11 +167,10 @@ export const advProjectsAPI = authApi.injectEndpoints({
         params: params,
       }),
       invalidatesTags: [
-        BLOGGER_OFFERS,
-        ADV_PROJECTS,
         VIEWS_ADVERTISER,
         VIEWS_MANAGER,
         ADV_ORDERS,
+        MANAGER_ORDERS,
       ],
     }),
     orderReportInfo: build.mutation<IOrderReportInfo, { project_id: string }>({

@@ -11,6 +11,8 @@ interface Props {
   trigger: ReturnType<typeof bloggerOffersAPI.useLazyGetBloggerOrdersQuery>[0];
   language: ILanguage;
   role: ENUM_ROLES;
+  status: offerStatusFilter;
+  skip_views?: boolean;
 }
 
 export const invalidateBloggerOfferByNewOrder = async ({
@@ -18,6 +20,8 @@ export const invalidateBloggerOfferByNewOrder = async ({
   trigger,
   language = USER_LANGUAGES_LIST[0],
   role,
+  status,
+  skip_views = false,
 }: Props) => {
   if (role !== ENUM_ROLES.BLOGGER) return;
 
@@ -25,16 +29,17 @@ export const invalidateBloggerOfferByNewOrder = async ({
 
   // 1. Обновляем кэш заказов в ожидании
   const params = {
-    status: offerStatusFilter.wait,
-    language: language?.id,
-    date_sort: dateSortingTypes.decrease,
     page: 1,
     elements_on_page: INTERSECTION_ELEMENTS.BLOGGER_OFFERS,
+    language: language?.id,
+    status: status,
+    date_sort: dateSortingTypes.decrease,
     __isWebsocket: true,
   };
 
   await trigger(params).unwrap();
 
+  if (skip_views) return;
   // 2. Обновляем кэш кружочков
   dispatch(bloggerOffersAPI.util.invalidateTags([VIEWS_BLOGGER_OFFERS]));
 };

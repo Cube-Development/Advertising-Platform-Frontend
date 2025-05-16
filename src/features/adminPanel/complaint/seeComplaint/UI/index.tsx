@@ -39,7 +39,9 @@ export const SeeComplaint: FC<ChooseComplaintProps> = ({ id, ChooseBtn }) => {
             <p>{t("admin_panel.complaints.choose.title")}</p>
             <span>{t("admin_panel.complaints.choose.text")}</span>
           </div>
-          <ChooseBtn id={id} />
+          <AlertDialogCancel asChild>
+            <ChooseBtn id={id} />
+          </AlertDialogCancel>
         </div>
       </AlertDialogContent>
     </AlertDialog>

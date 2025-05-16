@@ -57,6 +57,11 @@ export const useRevalidateCash = () => {
     if (method === notificationsTypes.notification_create_deposit) {
       // Создан депозит
       await invalidateHistory({ dispatch, trigger: triggerHistory, language });
+    } else if (
+      method === notificationsTypes.notification_refund_manager_project
+    ) {
+      // Возврат средств рекламодателю по проекту с менеджером
+      await invalidateHistory({ dispatch, trigger: triggerHistory, language });
     } else if (method === notificationsTypes.buy_manager_project) {
       // Рекламодатель купил новый проект с менеджером (размещение под ключ) - уведомление рекламодателю
       await invalidateAdvProjectUpdate({
@@ -235,6 +240,15 @@ export const useRevalidateCash = () => {
         project_id,
         role,
       });
+    } else if (method === notificationsTypes.notification_new_order_blogger) {
+      // Блогеру пришел новый заказ размещение рекламы (в ожидании)
+      await invalidateBloggerOfferByNewOrder({
+        dispatch,
+        trigger: triggerOffers,
+        language,
+        role,
+        status: offerStatusFilter.wait,
+      });
     } else if (
       method === notificationsTypes.notification_advertiser_reject_order
     ) {
@@ -246,8 +260,119 @@ export const useRevalidateCash = () => {
         order_id,
         status: offerStatusFilter.active,
       });
+      await invalidateBloggerOfferByNewOrder({
+        dispatch,
+        trigger: triggerOffers,
+        language,
+        role,
+        status: offerStatusFilter.moderation,
+        skip_views: true,
+      });
+    } else if (
+      method === notificationsTypes.notification_advertiser_accept_order
+    ) {
+      // Рекламодатель принял заказ
+      // кеш Блогера
+      await invalidateBloggerOfferByAction({
+        dispatch,
+        role,
+        order_id,
+        status: offerStatusFilter.active,
+      });
+      await invalidateBloggerOfferByNewOrder({
+        dispatch,
+        trigger: triggerOffers,
+        language,
+        role,
+        status: offerStatusFilter.completed,
+        skip_views: true,
+      });
+    } else if (
+      method ===
+      notificationsTypes.notification_moderation_order_blogger_positive
+    ) {
+      // Уведомление блогеру о модерации заказа в пользу блогера
+      // кеш Блогера
+      await invalidateBloggerOfferByAction({
+        dispatch,
+        role,
+        order_id,
+        status: offerStatusFilter.moderation,
+      });
+      await invalidateBloggerOfferByNewOrder({
+        dispatch,
+        trigger: triggerOffers,
+        language,
+        role,
+        status: offerStatusFilter.completed,
+        skip_views: true,
+      });
+    } else if (
+      method ===
+      notificationsTypes.notification_moderation_order_blogger_negative
+    ) {
+      // Уведомление блогеру о модерации заказа в пользу блогера
+      // кеш Блогера
+      await invalidateBloggerOfferByAction({
+        dispatch,
+        role,
+        order_id,
+        status: offerStatusFilter.moderation,
+      });
+      await invalidateBloggerOfferByNewOrder({
+        dispatch,
+        trigger: triggerOffers,
+        language,
+        role,
+        status: offerStatusFilter.canceled,
+        skip_views: true,
+      });
+    } else if (
+      method ===
+      notificationsTypes.notification_moderation_order_advertiser_negative
+    ) {
+      // Уведомление рекламодателю о модерации заказа в пользу блогера
+      // кеш Рекламодателя - подходит для ревалидации
+      await invalidateAdvProjectByBloggerAction({
+        dispatch,
+        trigger: triggerAdvMyProjects,
+        language,
+        project_id,
+        role,
+      });
+      // кеш менеджера - подходит для ревалидации
+      await invalidateManagerProjectByBloggerAction({
+        dispatch,
+        trigger: triggerManagerProjects,
+        language,
+        project_id,
+        role,
+      });
+    } else if (
+      method ===
+      notificationsTypes.notification_moderation_order_advertiser_positive
+    ) {
+      // Уведомление рекламодателю о модерации заказа в пользу рекламодателя
+      // кеш Рекламодателя - подходит для ревалидации
+      await invalidateAdvProjectByBloggerAction({
+        dispatch,
+        trigger: triggerAdvMyProjects,
+        language,
+        project_id,
+        role,
+      });
+      // кеш менеджера - подходит для ревалидации
+      await invalidateManagerProjectByBloggerAction({
+        dispatch,
+        trigger: triggerManagerProjects,
+        language,
+        project_id,
+        role,
+      });
     }
 
+    // ffff
+    // ffff
     // ffff
     else if (method === notificationsTypes.notification_unban_channel) {
       console.log(notificationsTypes.notification_unban_channel);
@@ -275,100 +400,12 @@ export const useRevalidateCash = () => {
           VIEWS_BLOGGER_CHANNELS,
         ]),
       );
-    } else if (method === notificationsTypes.notification_new_order_blogger) {
-      // Блогеру пришел новый заказ размещение рекламы (в ожидании)
-      await invalidateBloggerOfferByNewOrder({
-        dispatch,
-        trigger: triggerOffers,
-        language,
-        role,
-      });
     }
     //
     else if (method === notificationsTypes.notification_publish_post) {
       console.log(notificationsTypes.notification_publish_post);
       dispatch(
         advProjectsAPI.util.invalidateTags([ADV_PROJECTS, VIEWS_ADVERTISER]),
-      );
-    } else if (
-      method === notificationsTypes.notification_advertiser_accept_order
-    ) {
-      console.log(notificationsTypes.notification_advertiser_accept_order);
-      dispatch(
-        bloggerOffersAPI.util.invalidateTags([
-          BLOGGER_OFFERS,
-          VIEWS_BLOGGER_OFFERS,
-        ]),
-      );
-    }
-    // else if (
-    //   method ===
-    //   notificationsTypes.notification_advertiser_reject_order_moderator
-    // ) {
-    //   dispatch(bloggerOffersAPI.util.resetApiState());
-    // }
-    //
-    else if (
-      method ===
-      notificationsTypes.notification_moderation_order_blogger_positive
-    ) {
-      console.log(
-        notificationsTypes.notification_moderation_order_blogger_positive,
-      );
-      dispatch(
-        bloggerOffersAPI.util.invalidateTags([
-          BLOGGER_OFFERS,
-          VIEWS_BLOGGER_OFFERS,
-        ]),
-      );
-    } else if (
-      method ===
-      notificationsTypes.notification_moderation_order_blogger_negative
-    ) {
-      console.log(
-        notificationsTypes.notification_moderation_order_blogger_negative,
-      );
-      dispatch(
-        bloggerOffersAPI.util.invalidateTags([
-          BLOGGER_OFFERS,
-          VIEWS_BLOGGER_OFFERS,
-        ]),
-      );
-    } else if (
-      method ===
-      notificationsTypes.notification_moderation_order_advertiser_negative
-    ) {
-      console.log(
-        notificationsTypes.notification_moderation_order_advertiser_negative,
-      );
-      dispatch(
-        advProjectsAPI.util.invalidateTags([
-          ADV_TARIFF_PROJECTS,
-          VIEWS_ADVERTISER,
-        ]),
-      );
-    } else if (
-      method ===
-      notificationsTypes.notification_moderation_order_advertiser_positive
-    ) {
-      console.log(
-        notificationsTypes.notification_moderation_order_advertiser_positive,
-      );
-      dispatch(
-        advProjectsAPI.util.invalidateTags([
-          ADV_TARIFF_PROJECTS,
-          VIEWS_ADVERTISER,
-        ]),
-      );
-    } else if (
-      method === notificationsTypes.notification_refund_manager_project
-    ) {
-      console.log(notificationsTypes.notification_refund_manager_project);
-      dispatch(
-        walletAPI.util.invalidateTags([
-          TRANSACTION_HISTORY,
-          VIEWS_TRANSACTIONS,
-        ]),
       );
     }
   };

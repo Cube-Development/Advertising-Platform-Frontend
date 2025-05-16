@@ -16,20 +16,16 @@ export const invalidateHistory = async ({
   trigger,
   language,
 }: Props) => {
-  try {
-    // 1. Получаем page=1
-    const params = {
-      page: 1,
-      elements_on_page: INTERSECTION_ELEMENTS.HISTORY,
-      language: language?.id || USER_LANGUAGES_LIST[0].id,
-      date_sort: dateSortingTypes.decrease,
-      __isWebsocket: true,
-    };
-    await trigger(params).unwrap();
+  // 1. Получаем page=1
+  const params = {
+    page: 1,
+    elements_on_page: INTERSECTION_ELEMENTS.HISTORY,
+    language: language?.id || USER_LANGUAGES_LIST[0].id,
+    date_sort: dateSortingTypes.decrease,
+    __isWebsocket: true,
+  };
+  await trigger(params).unwrap();
 
-    // 3. Обновляем кэш кружочков
-    dispatch(walletAPI.util.invalidateTags([BALANCE, VIEWS_TRANSACTIONS]));
-  } catch (err) {
-    console.error("ERROR: INVALIDATE TRANSACTION HISTORY - ", err);
-  }
+  // 3. Обновляем кэш кружочков
+  dispatch(walletAPI.util.invalidateTags([BALANCE, VIEWS_TRANSACTIONS]));
 };
