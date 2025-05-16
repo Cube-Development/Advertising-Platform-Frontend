@@ -5,6 +5,10 @@ import {
   BALANCE,
   LEGALS,
   TRANSACTION_HISTORY,
+  CREATE_PROJECT_NAME,
+  CREATE_PROJECT_POSTS,
+  CREATE_PROJECT_DATES,
+  CREATE_PROJECT_AMOUNT,
   authApi,
 } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
@@ -51,7 +55,17 @@ export const walletAPI = authApi.injectEndpoints({
         url: `/wallet/payment/project?project_id=${params}`,
         method: `POST`,
       }),
-      invalidatesTags: [BALANCE, LEGALS, ADV_PROJECTS, TRANSACTION_HISTORY],
+      invalidatesTags: [
+        BALANCE,
+        LEGALS,
+        ADV_PROJECTS,
+        TRANSACTION_HISTORY,
+
+        CREATE_PROJECT_NAME,
+        CREATE_PROJECT_POSTS,
+        CREATE_PROJECT_DATES,
+        CREATE_PROJECT_AMOUNT,
+      ],
     }),
     paymentDeposit: build.mutation<PaymentWithdrawResponse, PaymentDepositReq>({
       query: (params) => ({

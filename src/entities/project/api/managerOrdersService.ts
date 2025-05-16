@@ -9,6 +9,10 @@ import {
   MANAGER_ORDERS,
   MANAGER_PROJECTS,
   VIEWS_MANAGER,
+  CREATE_PROJECT_NAME,
+  CREATE_PROJECT_POSTS,
+  CREATE_PROJECT_DATES,
+  CREATE_PROJECT_AMOUNT,
   authApi,
 } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
@@ -64,7 +68,14 @@ export const managerProjectsAPI = authApi.injectEndpoints({
         method: "PUT",
         params: params,
       }),
-      invalidatesTags: [MANAGER_PROJECTS, VIEWS_MANAGER],
+      invalidatesTags: [
+        MANAGER_PROJECTS,
+        VIEWS_MANAGER,
+        CREATE_PROJECT_NAME,
+        CREATE_PROJECT_POSTS,
+        CREATE_PROJECT_DATES,
+        CREATE_PROJECT_AMOUNT,
+      ],
     }),
 
     launchProject: build.mutation<{ success: boolean }, { project_id: string }>(
@@ -188,6 +199,7 @@ export const managerProjectsAPI = authApi.injectEndpoints({
         method: "GET",
         params: params,
       }),
+      providesTags: [CREATE_PROJECT_POSTS],
     }),
   }),
 });

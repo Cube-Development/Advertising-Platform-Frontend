@@ -8,24 +8,24 @@ import {
   useCreateUniquePostMutation,
   useGetPostsRereviewQuery,
   useGetProjectAmountQuery,
+  useGetProjectNameQuery,
   useGetUploadLinkMutation,
   useProjectNameMutation,
   useProjectOrdersQuery,
 } from "@entities/project";
 import { ENUM_ROLES, useFindLanguage } from "@entities/user";
 import { usePaymentProjectMutation } from "@entities/wallet";
-import { BREAKPOINT, ENUM_COOKIES_TYPES } from "@shared/config";
+import { ENUM_COOKIES_TYPES } from "@shared/config";
+import { useAppSelector } from "@shared/hooks";
 import { USER_LANGUAGES_LIST } from "@shared/languages";
-import { useAppSelector, useWindowWidth } from "@shared/hooks";
 import { ENUM_PATHS } from "@shared/routing";
 import { SpinnerLoader, useToast } from "@shared/ui";
 import { getFileExtension } from "@shared/utils";
 import Cookies from "js-cookie";
-import { FC, useState, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { scroller } from "react-scroll";
 import {
   CreateOrderDatetime,
   CreateOrderLoading,
@@ -33,7 +33,6 @@ import {
   CreateOrderPost,
   CreateOrderTop,
 } from "../components";
-import { ICreateOrderBlur } from "../model/config/types";
 import { useChangeBlur } from "../model";
 
 interface CreateOrderBlockProps {}
@@ -58,6 +57,15 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
   const [createOrderDates] = useCreateOrderDatesMutation();
   const [paymentProject] = usePaymentProjectMutation();
   const [approveProject] = useApproveProjectMutation();
+
+  const { data: projectNameData, isLoading: isProjectNameLoading } =
+    useGetProjectNameQuery(
+      {
+        project_id: projectId!,
+      },
+      { skip: !projectId || !isAuth },
+    );
+
   const { register, getValues, handleSubmit, setValue, watch } =
     useForm<ICreatePostForm>({
       defaultValues: {
@@ -65,14 +73,16 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
         datetime: { project_id: projectId, orders: [] },
         isMultiPost: false,
         isDownloadPosts: false,
+        name: projectNameData?.name || "",
       },
     });
   const formState = watch();
-  // const [blur, setBlur] = useState<ICreateOrderBlur>({
-  //   post: false,
-  //   datetime: false,
-  //   payment: false,
-  // });
+
+  useEffect(() => {
+    if (!isProjectNameLoading && projectNameData?.name) {
+      setValue("name", projectNameData?.name);
+    }
+  }, [projectNameData, isProjectNameLoading]);
 
   const projectChannelsReq = {
     project_id: projectId!,
@@ -380,6 +390,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
         onChangeBlur={handleOnChangeBlur}
         register={register}
         getValues={getValues}
+        formState={formState}
       />
 
       <form onSubmit={handleSubmit(onSubmit)}>

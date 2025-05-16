@@ -1,26 +1,28 @@
+import { CreatePostData, ICreatePostForm } from "@entities/project";
 import {
   ArrowLongHorizontalIcon,
   CreateIcon,
   PencilIcon,
 } from "@shared/assets";
-import { FC } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import { UseFormGetValues, UseFormRegister } from "react-hook-form";
-import { CreatePostData, ICreatePostForm } from "@entities/project";
 import { useToast } from "@shared/ui";
 import { ICreateOrderBlur } from "@widgets/createOrder/model";
+import { FC } from "react";
+import { UseFormGetValues, UseFormRegister } from "react-hook-form";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 interface CreateOrderTopProps {
   onChangeBlur: (key: keyof ICreateOrderBlur) => void;
   register: UseFormRegister<ICreatePostForm>;
   getValues: UseFormGetValues<ICreatePostForm>;
+  formState: ICreatePostForm;
 }
 
 export const CreateOrderTop: FC<CreateOrderTopProps> = ({
   onChangeBlur,
   register,
   getValues,
+  formState,
 }) => {
   const { t } = useTranslation();
   const { toast } = useToast();
@@ -59,6 +61,7 @@ export const CreateOrderTop: FC<CreateOrderTopProps> = ({
                     autoFocus
                     type="text"
                     placeholder={t("create_order.name.default_value")}
+                    value={formState?.name}
                     onKeyDown={(event) => {
                       event.key === "Enter" && handleOnChangeBlur();
                     }}

@@ -18,6 +18,9 @@ import {
   ADV_TARIFF_PROJECTS,
   authApi,
   BLOGGER_OFFERS,
+  CREATE_PROJECT_AMOUNT,
+  CREATE_PROJECT_DATES,
+  CREATE_PROJECT_NAME,
   MANAGER_ORDERS,
   VIEWS_ADVERTISER,
   VIEWS_MANAGER,
@@ -94,6 +97,14 @@ export const advProjectsAPI = authApi.injectEndpoints({
         params: params,
       }),
     }),
+    getProjectName: build.query<{ name: string }, { project_id: string }>({
+      query: (params) => ({
+        url: `/order/project-name`,
+        method: "GET",
+        params: params,
+      }),
+      providesTags: [CREATE_PROJECT_NAME],
+    }),
     createPost: build.mutation<{ success: boolean }, ICreatePostReq>({
       query: (body) => ({
         url: `/order/post`,
@@ -129,6 +140,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
           orders: sortOrders,
         };
       },
+      providesTags: [CREATE_PROJECT_DATES],
     }),
     createOrderDates: build.mutation<{ success: boolean }, ICreateDate>({
       query: (body) => ({
@@ -143,6 +155,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
         method: "GET",
         params,
       }),
+      providesTags: [CREATE_PROJECT_AMOUNT],
     }),
     acceptOrder: build.mutation<{ success: boolean }, { order_id: string }>({
       query: (params) => ({
@@ -362,4 +375,5 @@ export const {
   useGetAdvManagerProjectsQuery,
   useGetAdvManagerSubprojectsQuery,
   useOrderReportInfoMutation,
+  useGetProjectNameQuery,
 } = advProjectsAPI;
