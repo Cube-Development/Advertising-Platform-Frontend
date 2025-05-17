@@ -9,6 +9,7 @@ import { NewProject, ZeroProject } from "@features/project";
 import { PAGE_ANIMATION } from "@shared/config";
 import { INTERSECTION_ELEMENTS } from "@shared/config/common";
 import { Accordion, ShowMoreBtn, SpinnerLoader } from "@shared/ui";
+import { getAnimationDelay } from "@shared/utils";
 import { motion } from "framer-motion";
 import { FC } from "react";
 import { AdvProjectCard, ProjectCardSkeleton } from "../card";
@@ -21,6 +22,7 @@ interface AdvProjectsListProps {
   isLast: boolean;
   typeFilter: projectTypesFilter;
   statusFilter: advManagerProjectStatusFilter | myProjectStatusFilter;
+  currentPage: number;
 }
 
 export const AdvProjectsList: FC<AdvProjectsListProps> = ({
@@ -30,6 +32,7 @@ export const AdvProjectsList: FC<AdvProjectsListProps> = ({
   isLast,
   typeFilter,
   statusFilter,
+  currentPage,
 }) => {
   return (
     <Accordion type="single" collapsible className={styles.wrapper}>
@@ -45,10 +48,15 @@ export const AdvProjectsList: FC<AdvProjectsListProps> = ({
           <div className={styles.cards}>
             {projects?.map((card, index) => (
               <motion.div
-                key={card.id + index}
+                key={card.id}
                 initial="hidden"
                 animate="visible"
-                custom={index % INTERSECTION_ELEMENTS.ADV_ORDERS}
+                custom={getAnimationDelay({
+                  index,
+                  currentPage,
+                  total: projects.length,
+                  elements: INTERSECTION_ELEMENTS.ADV_ORDERS,
+                })}
                 variants={PAGE_ANIMATION.animationUp}
                 className={styles.motion}
               >

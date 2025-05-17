@@ -21,11 +21,11 @@ import { BarFilter } from "@widgets/barFilter";
 import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { validate as isValidUUID } from "uuid";
 import { AdvProjectsList } from "./advProjects";
 import { DevProjectsList } from "./devProjects";
 import styles from "./styles.module.scss";
 import { TemplateProjectsList } from "./templateProjects";
-import { validate as isValidUUID } from "uuid";
 
 interface IForm extends getProjectsCardReq {
   type: projectTypesFilter | string;
@@ -74,10 +74,6 @@ export const AdvOrders: FC = () => {
   });
 
   const formState = watch();
-
-  const handleOnChangePage = () => {
-    setValue("page", formState.page + 1);
-  };
 
   const handleChangeStatus = (
     status: advManagerProjectStatusFilter | myProjectStatusFilter | string,
@@ -139,25 +135,74 @@ export const AdvOrders: FC = () => {
       : {}),
   };
 
-  const { data: projectsSelf, isFetching: isFetchingSelf } =
-    useGetAdvProjectsQuery(getParams, {
-      skip: formState.type !== projectTypesFilter.myProject,
-      selectFromResult: ({ data, ...rest }) => ({
-        ...rest,
-        data: (data?.status === formState?.status && data) || undefined,
-      }),
-    });
+  const {
+    data: projectsSelf,
+    isFetching: isFetchingSelf,
+    refetch: refetchSelf,
+    originalArgs: originalArgsSelf,
+  } = useGetAdvProjectsQuery(getParams, {
+    skip: formState.type !== projectTypesFilter.myProject,
+    selectFromResult: ({ data, ...rest }) => ({
+      ...rest,
+      data: (data?.status === formState?.status && data) || undefined,
+    }),
+  });
 
-  const { data: projectsManager, isFetching: isFetchingManager } =
-    useGetAdvManagerProjectsQuery(getParams, {
-      skip: formState.type !== projectTypesFilter.managerProject,
-      selectFromResult: ({ data, ...rest }) => ({
-        ...rest,
-        data: (data?.status === formState?.status && data) || undefined,
-      }),
-    });
+  const {
+    data: projectsManager,
+    isFetching: isFetchingManager,
+    refetch: refetchManager,
+    originalArgs: originalArgsManager,
+  } = useGetAdvManagerProjectsQuery(getParams, {
+    skip: formState.type !== projectTypesFilter.managerProject,
+    selectFromResult: ({ data, ...rest }) => ({
+      ...rest,
+      data: (data?.status === formState?.status && data) || undefined,
+    }),
+  });
 
   const { refetch: views } = useGetViewAdvertiserProjectQuery();
+
+  let checkData;
+  // const isLoadingMore = (isFetchingSelf || isFetchingManager) && isClicked;
+
+  switch (formState.type) {
+    case projectTypesFilter.managerProject:
+      checkData = projectsManager;
+      // isLoadingMore = isFetchingManager;
+      break;
+    case projectTypesFilter.savedProject:
+    case projectTypesFilter.myProject:
+      checkData = projectsSelf;
+      // isLoadingMore = isFetchingSelf;
+      break;
+    default:
+      checkData = undefined;
+    // isLoadingMore = false;
+  }
+
+  const handleOnChangePage = () => {
+    const newPage = Math.floor(
+      (checkData?.projects?.length || 0) / INTERSECTION_ELEMENTS.ADV_ORDERS,
+    );
+    setValue("page", newPage + 1);
+
+    if (checkData?.projects?.length === 0) {
+      if (formState.type === projectTypesFilter.myProject) {
+        refetchSelf();
+      } else if (formState.type === projectTypesFilter.managerProject) {
+        refetchManager();
+      }
+    }
+  };
+
+  const isLoadingMore =
+    (formState.type === projectTypesFilter.myProject &&
+      isFetchingSelf &&
+      !originalArgsSelf?.__isWebsocket) ||
+    (formState.type === projectTypesFilter.managerProject &&
+      isFetchingManager &&
+      !originalArgsManager?.__isWebsocket);
 
   useEffect(() => {
     if (formState.status !== advManagerProjectStatusFilter.request_approve) {
@@ -176,12 +221,6 @@ export const AdvOrders: FC = () => {
       <div className={styles.wrapper}>
         <BarFilter
           page={page}
-          listLength={
-            !!(
-              projectsSelf?.projects?.length ||
-              projectsManager?.projects?.length
-            )
-          }
           typeFilter={formState.type}
           changeStatus={(status) => handleChangeStatus(status)}
           changeType={(type) => handleChangeType(type)}
@@ -197,7 +236,7 @@ export const AdvOrders: FC = () => {
           <DevProjectsList
             projects={projectsManager?.projects || []}
             handleOnChangePage={handleOnChangePage}
-            isLoading={isFetchingManager}
+            isLoading={isLoadingMore}
             isLast={projectsManager?.isLast || false}
             typeFilter={formState.type}
           />
@@ -205,7 +244,7 @@ export const AdvOrders: FC = () => {
           <TemplateProjectsList
             projects={[]}
             handleOnChangePage={handleOnChangePage}
-            isLoading={isFetchingSelf}
+            isLoading={isLoadingMore}
             isLast={projectsSelf?.isLast || false}
             typeFilter={formState.type}
           />
@@ -219,8 +258,9 @@ export const AdvOrders: FC = () => {
             typeFilter={formState.type as projectTypesFilter}
             projects={projectsManager?.projects || []}
             handleOnChangePage={handleOnChangePage}
-            isLoading={isFetchingManager}
+            isLoading={isLoadingMore}
             isLast={projectsManager?.isLast || false}
+            currentPage={formState?.page}
           />
         ) : (
           formState.type === projectTypesFilter.myProject && (
@@ -233,8 +273,9 @@ export const AdvOrders: FC = () => {
               typeFilter={formState.type as projectTypesFilter}
               projects={projectsSelf?.projects || []}
               handleOnChangePage={handleOnChangePage}
-              isLoading={isFetchingSelf}
+              isLoading={isLoadingMore}
               isLast={projectsSelf?.isLast || false}
+              currentPage={formState?.page}
             />
           )
         )}

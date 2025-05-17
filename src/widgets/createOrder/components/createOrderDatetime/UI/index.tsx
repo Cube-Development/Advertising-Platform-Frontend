@@ -6,11 +6,11 @@ import {
   TimeList,
 } from "@features/createOrder";
 import { useToast } from "@shared/ui";
-import { ICreateOrderBlur } from "@widgets/createOrder/config";
 import { FC } from "react";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { ICreateOrderBlur } from "@widgets/createOrder/model";
 
 interface CreateOrderDatetimeProps {
   cards: IPostChannel[];

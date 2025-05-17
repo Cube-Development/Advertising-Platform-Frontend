@@ -1,24 +1,14 @@
+import { IOrderFeature, useAcceptOrderMutation } from "@entities/project";
 import { MyButton, ToastAction, useToast } from "@shared/ui";
-import { FC } from "react";
 import { Loader } from "lucide-react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import {
-  advProjectsAPI,
-  IOrderFeature,
-  managerProjectsAPI,
-  useAcceptOrderMutation,
-} from "@entities/project";
-import { useAppDispatch } from "@shared/hooks";
 
 export const AcceptPost: FC<IOrderFeature> = ({ order_id }) => {
   const { toast } = useToast();
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
-  const handleInvalidateCache = () => {
-    dispatch(advProjectsAPI.util.resetApiState());
-    dispatch(managerProjectsAPI.util.resetApiState());
-  };
+
   const [acceptOrder, { isLoading }] = useAcceptOrderMutation();
   const handleOnClick = () => {
     order_id &&
@@ -30,7 +20,6 @@ export const AcceptPost: FC<IOrderFeature> = ({ order_id }) => {
             variant: "success",
             title: t("toasts.orders_advertiser.accept_post.success"),
           });
-          handleInvalidateCache();
         })
         .catch((error) => {
           toast({

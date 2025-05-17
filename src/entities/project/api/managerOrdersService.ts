@@ -5,7 +5,16 @@ import {
   IManagerSubprojects,
   IPostChannel,
 } from "@entities/project";
-import { MANAGER_PROJECTS, VIEWS_MANAGER, authApi } from "@shared/api";
+import {
+  MANAGER_ORDERS,
+  MANAGER_PROJECTS,
+  VIEWS_MANAGER,
+  CREATE_PROJECT_NAME,
+  CREATE_PROJECT_POSTS,
+  CREATE_PROJECT_DATES,
+  CREATE_PROJECT_AMOUNT,
+  authApi,
+} from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ENUM_LANGUAGES_NUM } from "@shared/languages";
 import { IManagerProjectPosts } from "../types/managerProject";
@@ -59,7 +68,14 @@ export const managerProjectsAPI = authApi.injectEndpoints({
         method: "PUT",
         params: params,
       }),
-      invalidatesTags: [MANAGER_PROJECTS, VIEWS_MANAGER],
+      invalidatesTags: [
+        MANAGER_PROJECTS,
+        VIEWS_MANAGER,
+        CREATE_PROJECT_NAME,
+        CREATE_PROJECT_POSTS,
+        CREATE_PROJECT_DATES,
+        CREATE_PROJECT_AMOUNT,
+      ],
     }),
 
     launchProject: build.mutation<{ success: boolean }, { project_id: string }>(
@@ -69,7 +85,7 @@ export const managerProjectsAPI = authApi.injectEndpoints({
           method: "PUT",
           params: params,
         }),
-        invalidatesTags: [MANAGER_PROJECTS, VIEWS_MANAGER],
+        // invalidatesTags: [MANAGER_PROJECTS, VIEWS_MANAGER],
       },
     ),
 
@@ -82,14 +98,14 @@ export const managerProjectsAPI = authApi.injectEndpoints({
         method: `GET`,
         params: params,
       }),
-      // providesTags: [ADV_PROJECTS],
+      providesTags: [MANAGER_ORDERS],
     }),
 
     getManagerProjects: build.query<
       IManagerProjects | IManagerNewProjects | any,
-      getManagerProjectsCardReq
+      getManagerProjectsCardReq & { __isWebsocket?: boolean }
     >({
-      query: (params) => ({
+      query: ({ __isWebsocket, ...params }) => ({
         url: `/tariff/`,
         method: `GET`,
         params: params,
@@ -103,17 +119,41 @@ export const managerProjectsAPI = authApi.injectEndpoints({
           ...response,
           status: arg?.status,
           isLast:
-            response?.elements ===
-            response?.projects?.length +
-              (response?.page - 1) * INTERSECTION_ELEMENTS.MANAGER_ORDERS,
+            response?.elements <=
+              response?.projects?.length +
+                (response?.page - 1) * INTERSECTION_ELEMENTS.MANAGER_ORDERS ||
+            response?.projects?.length === 0,
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
         const { language, date_sort, status } = queryArgs;
-        return `${endpointName}/${status}/${date_sort}/${language}`;
+        return `${endpointName}/${language}/${date_sort}/${status}`;
       },
-      merge: (currentCache, newItems, arg) => {
-        if (arg.arg.page === 1) {
+      merge: (
+        currentCache: IManagerProjects | IManagerNewProjects,
+        newItems: IManagerProjects | IManagerNewProjects,
+        arg,
+      ) => {
+        const newProjectsMap = new Map(newItems.projects.map((p) => [p.id, p]));
+
+        // Обновляем старые элементы, если есть новые с тем же id
+        const updatedOldProjects =
+          currentCache?.projects?.map((old) =>
+            newProjectsMap.has(old.id) ? newProjectsMap.get(old.id)! : old,
+          ) || [];
+
+        // Убираем уже обновленные ID из новых, чтобы они не дублировались
+        const newIds = new Set(updatedOldProjects.map((p) => p.id));
+        const onlyNewProjects = newItems.projects.filter(
+          (p) => !newIds.has(p.id),
+        );
+
+        if (arg.arg.__isWebsocket) {
+          return {
+            ...currentCache,
+            projects: [...onlyNewProjects, ...updatedOldProjects],
+          };
+        } else if (arg.arg.page === 1) {
           return {
             ...newItems,
           };
@@ -121,7 +161,7 @@ export const managerProjectsAPI = authApi.injectEndpoints({
 
         return {
           ...newItems,
-          projects: [...currentCache.projects, ...newItems.projects],
+          projects: [...updatedOldProjects, ...onlyNewProjects],
         };
       },
 
@@ -159,6 +199,7 @@ export const managerProjectsAPI = authApi.injectEndpoints({
         method: "GET",
         params: params,
       }),
+      providesTags: [CREATE_PROJECT_POSTS],
     }),
   }),
 });

@@ -37,12 +37,12 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
         method: "PUT",
         body: body,
       }),
-      invalidatesTags: [
-        BLOGGER_OFFERS,
-        ADV_PROJECTS,
-        VIEWS_BLOGGER_OFFERS,
-        ADV_ORDERS,
-      ],
+      // invalidatesTags: [
+      //   // BLOGGER_OFFERS,
+      //   ADV_PROJECTS,
+      //   // VIEWS_BLOGGER_OFFERS,
+      //   ADV_ORDERS,
+      // ],
     }),
     cancelOffer: build.mutation<{ success: boolean }, { order_id: string }>({
       query: (params) => ({
@@ -50,18 +50,21 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
         method: "PUT",
         params: params,
       }),
-      invalidatesTags: [
-        BLOGGER_OFFERS,
-        ADV_PROJECTS,
-        VIEWS_BLOGGER_OFFERS,
-        ADV_ORDERS,
-      ],
+      // invalidatesTags: [
+      //   // BLOGGER_OFFERS,
+      //   ADV_PROJECTS,
+      //   // VIEWS_BLOGGER_OFFERS,
+      //   ADV_ORDERS,
+      // ],
     }),
-    getBloggerOrders: build.query<IBloggerOffers, getOrdersByStatusReq>({
-      query: (BodyParams) => ({
+    getBloggerOrders: build.query<
+      IBloggerOffers,
+      getOrdersByStatusReq & { __isWebsocket?: boolean }
+    >({
+      query: ({ __isWebsocket, ...params }) => ({
         url: `/order/get/blogger`,
         method: `POST`,
-        body: BodyParams,
+        body: params,
       }),
       transformResponse: (response: IBloggerOffers, meta, arg) => {
         return {
@@ -78,14 +81,35 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
         return `${endpointName}/${status}/`;
       },
       merge: (currentCache, newItems, arg) => {
-        if (arg.arg.page === 1) {
+        const newMap = new Map(newItems?.orders?.map((p) => [p?.id, p]));
+
+        // Обновляем старые элементы, если есть новые с тем же id
+        const updatedOld =
+          currentCache?.orders?.map((old) =>
+            newMap?.has(old?.id) ? newMap?.get(old?.id)! : old,
+          ) || [];
+
+        // Убираем уже обновленные ID из новых, чтобы они не дублировались
+        const newIds = new Set(updatedOld?.map((p) => p.id));
+        const onlyNew = newItems?.orders?.filter((p) => !newIds.has(p?.id));
+
+        if (arg.arg.__isWebsocket) {
+          return {
+            ...currentCache,
+            orders: [...onlyNew, ...updatedOld],
+          };
+          // return {
+          //   ...currentCache,
+          //   orders: [...newItems.orders, ...filteredOld],
+          // };
+        } else if (arg.arg.page === 1) {
           return {
             ...newItems,
           };
         }
         return {
           ...newItems,
-          orders: [...currentCache.orders, ...newItems.orders],
+          orders: [...updatedOld, ...onlyNew],
         };
       },
 

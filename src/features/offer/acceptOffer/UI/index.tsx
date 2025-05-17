@@ -1,4 +1,13 @@
 import {
+  invalidateBloggerOfferByAction,
+  offerStatusFilter,
+  useAcceptOfferMutation,
+} from "@entities/offer";
+import { IOrderFeature } from "@entities/project";
+import { ENUM_ROLES } from "@entities/user";
+import { BREAKPOINT } from "@shared/config";
+import { useAppDispatch, useWindowWidth } from "@shared/hooks";
+import {
   Dialog,
   DialogClose,
   DialogContent,
@@ -12,14 +21,10 @@ import {
   ToastAction,
   useToast,
 } from "@shared/ui";
+import { Loader, SendHorizonal, X } from "lucide-react";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { Loader, SendHorizonal, X } from "lucide-react";
-import { IOrderFeature } from "@entities/project";
-import { bloggerOffersAPI, useAcceptOfferMutation } from "@entities/offer";
-import { BREAKPOINT } from "@shared/config";
-import { useAppDispatch, useWindowWidth } from "@shared/hooks";
 
 // создаю массив дат из date_from до date_to
 function getDatesInRange(dates?: {
@@ -60,9 +65,6 @@ export const AcceptOffer: FC<IOrderFeature> = ({ order_id, dates }) => {
   const { toast } = useToast();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-  const handleInvalidateCache = () => {
-    dispatch(bloggerOffersAPI.util.resetApiState());
-  };
   const currentDates = getDatesInRange(dates);
   const [selectedDate, setSelectedDate] = useState<string>(currentDates[0]);
   const [acceptOffer, { isLoading }] = useAcceptOfferMutation();
@@ -76,7 +78,12 @@ export const AcceptOffer: FC<IOrderFeature> = ({ order_id, dates }) => {
             variant: "success",
             title: t("toasts.offers_blogger.accept_offer.success"),
           });
-          handleInvalidateCache();
+          invalidateBloggerOfferByAction({
+            dispatch,
+            role: ENUM_ROLES.BLOGGER,
+            order_id,
+            status: offerStatusFilter.wait,
+          });
         })
         .catch((error) => {
           toast({

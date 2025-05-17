@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { IChatProps } from "@entities/communication";
 import {
   GetPostRes,
@@ -15,6 +14,7 @@ import {
   useGetPostQuery,
 } from "@entities/project";
 import { ENUM_ROLES } from "@entities/user";
+import { ReplaceChannelProps, ReplacePostProps } from "@features/order";
 import {
   ArrowSmallVerticalIcon,
   BoyIcon,
@@ -24,6 +24,8 @@ import {
   SubsIcon,
 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
+import { useWindowWidth } from "@shared/hooks";
+import { ENUM_PATHS } from "@shared/routing";
 import {
   Accordion,
   AccordionContent,
@@ -33,14 +35,8 @@ import {
 } from "@shared/ui";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
-import { useAppSelector, useWindowWidth } from "@shared/hooks";
-import {
-  ChangeChannelProps,
-  ReplaceChannelProps,
-  ReplacePostProps,
-} from "@features/order";
-import { ENUM_PATHS } from "@shared/routing";
 
 interface AdvSubcardProps {
   card: IAdvProjectCard;
@@ -74,7 +70,6 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
   statusFilter,
 }) => {
   const { t } = useTranslation();
-  const { role } = useAppSelector((state) => state.user);
   const { toast } = useToast();
   const screen = useWindowWidth();
   const [isSubcardOpen, setSubcardOpen] = useState(false);
@@ -320,6 +315,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                       <ReplaceChannelBtn
                         order={subcard}
                         status={card?.is_request_approve!}
+                        project_id={card?.id!}
                       />
                       <ReplacePostBtn
                         order={subcard}
@@ -546,6 +542,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                     <ReplaceChannelBtn
                       order={subcard}
                       status={card?.is_request_approve!}
+                      project_id={card?.id!}
                     />
                     <ReplacePostBtn
                       order={subcard}

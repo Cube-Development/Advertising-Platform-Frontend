@@ -6,6 +6,7 @@ import {
   IAdvSubprojects,
   ICreateDate,
   IFile,
+  IOrderReportInfo,
   IPostChannel,
   managerProjectStatusFilter,
   myProjectStatusFilter,
@@ -17,6 +18,10 @@ import {
   ADV_TARIFF_PROJECTS,
   authApi,
   BLOGGER_OFFERS,
+  CREATE_PROJECT_AMOUNT,
+  CREATE_PROJECT_DATES,
+  CREATE_PROJECT_NAME,
+  MANAGER_ORDERS,
   VIEWS_ADVERTISER,
   VIEWS_MANAGER,
 } from "@shared/api";
@@ -92,6 +97,14 @@ export const advProjectsAPI = authApi.injectEndpoints({
         params: params,
       }),
     }),
+    getProjectName: build.query<{ name: string }, { project_id: string }>({
+      query: (params) => ({
+        url: `/order/project-name`,
+        method: "GET",
+        params: params,
+      }),
+      providesTags: [CREATE_PROJECT_NAME],
+    }),
     createPost: build.mutation<{ success: boolean }, ICreatePostReq>({
       query: (body) => ({
         url: `/order/post`,
@@ -127,6 +140,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
           orders: sortOrders,
         };
       },
+      providesTags: [CREATE_PROJECT_DATES],
     }),
     createOrderDates: build.mutation<{ success: boolean }, ICreateDate>({
       query: (body) => ({
@@ -141,6 +155,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
         method: "GET",
         params,
       }),
+      providesTags: [CREATE_PROJECT_AMOUNT],
     }),
     acceptOrder: build.mutation<{ success: boolean }, { order_id: string }>({
       query: (params) => ({
@@ -149,11 +164,10 @@ export const advProjectsAPI = authApi.injectEndpoints({
         params: params,
       }),
       invalidatesTags: [
-        BLOGGER_OFFERS,
-        ADV_PROJECTS,
         VIEWS_ADVERTISER,
         VIEWS_MANAGER,
         ADV_ORDERS,
+        MANAGER_ORDERS,
       ],
     }),
     rejectOrder: build.mutation<
@@ -166,14 +180,23 @@ export const advProjectsAPI = authApi.injectEndpoints({
         params: params,
       }),
       invalidatesTags: [
-        BLOGGER_OFFERS,
-        ADV_PROJECTS,
         VIEWS_ADVERTISER,
         VIEWS_MANAGER,
         ADV_ORDERS,
+        MANAGER_ORDERS,
       ],
     }),
-    getAdvProjects: build.query<IAdvProjects, getProjectsCardReq>({
+    orderReportInfo: build.mutation<IOrderReportInfo, { project_id: string }>({
+      query: (params) => ({
+        url: `/order/advertiser/report`,
+        method: "GET",
+        params: params,
+      }),
+    }),
+    getAdvProjects: build.query<
+      IAdvProjects,
+      getProjectsCardReq & { __isWebsocket?: boolean }
+    >({
       query: (BodyParams) => ({
         url: `/order/project/get/advertiser`,
         method: `POST`,
@@ -185,8 +208,9 @@ export const advProjectsAPI = authApi.injectEndpoints({
           status: arg?.status,
           isLast:
             response?.elements ===
-            response?.projects?.length +
-              (response?.page - 1) * INTERSECTION_ELEMENTS.ADV_ORDERS,
+              response?.projects?.length +
+                (response?.page - 1) * INTERSECTION_ELEMENTS.ADV_ORDERS ||
+            response?.projects?.length === 0,
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
@@ -194,14 +218,34 @@ export const advProjectsAPI = authApi.injectEndpoints({
         return `${endpointName}/${language}/${date_sort}/${status}`;
       },
       merge: (currentCache, newItems, arg) => {
-        if (arg.arg.page === 1) {
+        const newProjectsMap = new Map(newItems.projects.map((p) => [p.id, p]));
+
+        // Обновляем старые элементы, если есть новые с тем же id
+        const updatedOldProjects =
+          currentCache?.projects?.map((old) =>
+            newProjectsMap.has(old.id) ? newProjectsMap.get(old.id)! : old,
+          ) || [];
+
+        // Убираем уже обновленные ID из новых, чтобы они не дублировались
+        const newIds = new Set(updatedOldProjects.map((p) => p.id));
+        const onlyNewProjects = newItems.projects.filter(
+          (p) => !newIds.has(p.id),
+        );
+
+        if (arg.arg.__isWebsocket) {
+          return {
+            ...currentCache,
+            projects: [...onlyNewProjects, ...updatedOldProjects],
+          };
+        } else if (arg.arg.page === 1) {
           return {
             ...newItems,
           };
         }
+
         return {
           ...newItems,
-          projects: [...currentCache.projects, ...newItems.projects],
+          projects: [...updatedOldProjects, ...onlyNewProjects],
         };
       },
       forceRefetch({ currentArg, previousArg }) {
@@ -243,15 +287,15 @@ export const advProjectsAPI = authApi.injectEndpoints({
 
     getAdvManagerProjects: build.query<
       IAdvManagerProjectsDev | IAdvProjects | any,
-      getProjectsCardReq
+      getProjectsCardReq & { __isWebsocket?: boolean }
     >({
-      query: (params) => ({
+      query: ({ __isWebsocket, ...params }) => ({
         url: `/tariff/advertiser`,
         method: "GET",
         params: params,
       }),
       transformResponse: (
-        response: IAdvManagerProjectsDev | IAdvProjects | any,
+        response: IAdvManagerProjectsDev | IAdvProjects,
         meta,
         arg,
       ) => {
@@ -260,23 +304,50 @@ export const advProjectsAPI = authApi.injectEndpoints({
           status: arg?.status,
           isLast:
             response?.elements ===
-            response?.projects?.length +
-              (response?.page - 1) * INTERSECTION_ELEMENTS.ADV_ORDERS,
+              response?.projects?.length +
+                (response?.page - 1) * INTERSECTION_ELEMENTS.ADV_ORDERS ||
+            response?.projects?.length === 0,
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
         const { language, date_sort, status } = queryArgs;
         return `${endpointName}/${language}/${date_sort}/${status}`;
       },
-      merge: (currentCache, newItems, arg) => {
-        if (arg.arg.page === 1) {
+      merge: (
+        currentCache: IAdvManagerProjectsDev | IAdvProjects,
+        newItems: IAdvManagerProjectsDev | IAdvProjects,
+        arg,
+      ) => {
+        const newProjectsMap = new Map(
+          newItems?.projects?.map((p) => [p?.id, p]),
+        );
+
+        // Обновляем старые элементы, если есть новые с тем же id
+        const updatedOldProjects =
+          currentCache?.projects?.map((old) =>
+            newProjectsMap?.has(old?.id) ? newProjectsMap?.get(old?.id)! : old,
+          ) || [];
+
+        // Убираем уже обновленные ID из новых, чтобы они не дублировались
+        const newIds = new Set(updatedOldProjects?.map((p) => p.id));
+        const onlyNewProjects = newItems?.projects?.filter(
+          (p) => !newIds.has(p?.id),
+        );
+
+        if (arg.arg.__isWebsocket) {
+          return {
+            ...currentCache,
+            projects: [...onlyNewProjects, ...updatedOldProjects],
+          };
+        } else if (arg.arg.page === 1) {
           return {
             ...newItems,
           };
         }
+
         return {
           ...newItems,
-          projects: [...currentCache.projects, ...newItems.projects],
+          projects: [...updatedOldProjects, ...onlyNewProjects],
         };
       },
       forceRefetch({ currentArg, previousArg }) {
@@ -303,4 +374,6 @@ export const {
   useGetAdvSubprojectsQuery,
   useGetAdvManagerProjectsQuery,
   useGetAdvManagerSubprojectsQuery,
+  useOrderReportInfoMutation,
+  useGetProjectNameQuery,
 } = advProjectsAPI;

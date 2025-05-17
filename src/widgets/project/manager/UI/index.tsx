@@ -61,12 +61,13 @@ export const ManagerOrders: FC = () => {
       : {}),
   };
 
-  const { data, isFetching } = useGetManagerProjectsQuery(getParams, {
-    selectFromResult: ({ data, ...rest }) => ({
-      ...rest,
-      data: (data?.status === formState?.status && data) || undefined,
-    }),
-  });
+  const { data, isFetching, refetch, originalArgs } =
+    useGetManagerProjectsQuery(getParams, {
+      selectFromResult: ({ data, ...rest }) => ({
+        ...rest,
+        data: (data?.status === formState?.status && data) || undefined,
+      }),
+    });
 
   const { refetch: views } = useGetViewManagerProjectQuery();
 
@@ -100,6 +101,14 @@ export const ManagerOrders: FC = () => {
     }, 500);
   }, [formState.status, formState.search_string]);
 
+  useEffect(() => {
+    if (data && data?.projects?.length === 0 && !data?.isLast) {
+      refetch();
+    }
+  }, [data?.projects?.length]);
+
+  const isLoadingMore = isFetching && !originalArgs?.__isWebsocket;
+
   return (
     <div className="container">
       <div className={styles.wrapper}>
@@ -118,16 +127,18 @@ export const ManagerOrders: FC = () => {
           <ManagerNewProjectsList
             projects={data?.projects}
             handleOnChangePage={handleOnChangePage}
-            isLoading={isFetching}
-            isLast={data?.isLast || false}
+            isLoading={isLoadingMore}
+            isLast={!!data?.isLast}
+            currentPage={formState.page}
           />
         ) : (
           <ManagerProjectsList
             statusFilter={formState.status as managerProjectStatusFilter}
             projects={data?.projects}
             handleOnChangePage={handleOnChangePage}
-            isLoading={isFetching}
+            isLoading={isLoadingMore}
             isLast={data?.isLast || false}
+            currentPage={formState.page}
           />
         )}
       </div>

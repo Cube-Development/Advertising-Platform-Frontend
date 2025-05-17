@@ -17,8 +17,9 @@ import {
 import { useClearCookiesOnPage, useWindowWidth } from "@shared/hooks";
 import { USER_LANGUAGES_LIST } from "@shared/languages";
 import { ShowMoreBtn, SpinnerLoaderSmall } from "@shared/ui";
+import { getAnimationDelay } from "@shared/utils";
 import { motion } from "framer-motion";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
@@ -29,25 +30,42 @@ export const History: FC = () => {
   const screen = useWindowWidth();
   const [currentPage, setCurrentPage] = useState(1);
 
-  const getParams: HistoryReq = {
-    language: language?.id || USER_LANGUAGES_LIST[0].id,
-    page: currentPage,
-    elements_on_page: INTERSECTION_ELEMENTS.HISTORY,
-    date_sort: dateSortingTypes.decrease,
-  };
+  const getParams = useMemo<HistoryReq>(
+    () => ({
+      language: language?.id || USER_LANGUAGES_LIST[0].id,
+      page: currentPage,
+      elements_on_page: INTERSECTION_ELEMENTS.HISTORY,
+      date_sort: dateSortingTypes.decrease,
+    }),
+    [language?.id, currentPage],
+  );
 
-  const { data, isLoading, isFetching } = useGetHistoryQuery(getParams);
+  const { data, isFetching, refetch, originalArgs } =
+    useGetHistoryQuery(getParams);
   const { refetch: views } = useGetViewTransactionsQuery();
 
   const handleOnChangePage = () => {
-    setCurrentPage((prevPage) => prevPage + 1);
+    const newPage = Math.floor(
+      (data?.transactions?.length || 0) / INTERSECTION_ELEMENTS.HISTORY,
+    );
+    setCurrentPage(newPage + 1);
+    if (data?.transactions?.length === 0) {
+      refetch();
+    }
   };
+
+  useEffect(() => {
+    if (data && data?.transactions?.length === 0 && !data?.isLast) {
+      refetch();
+    }
+  }, [data?.transactions?.length]);
 
   useEffect(() => {
     views();
   }, [currentPage]);
 
   let custom = 0;
+  const isLoadingMore = isFetching && !originalArgs?.__isWebsocket;
 
   return (
     <div className={`container ${screen > BREAKPOINT.LG ? "sidebar" : ""}`}>
@@ -85,13 +103,18 @@ export const History: FC = () => {
                   key={card.id}
                   initial="hidden"
                   animate="visible"
-                  custom={index % INTERSECTION_ELEMENTS.HISTORY}
+                  custom={getAnimationDelay({
+                    index,
+                    currentPage,
+                    total: data.transactions.length,
+                    elements: INTERSECTION_ELEMENTS.HISTORY,
+                  })}
                   variants={PAGE_ANIMATION.animationUp}
                 >
                   <HistoryCard card={card} />
                 </motion.div>
               ))}
-              {(isFetching || isLoading) &&
+              {isLoadingMore &&
                 Array.from({ length: INTERSECTION_ELEMENTS.HISTORY }).map(
                   (_, index) => <SkeletonHistoryCard key={index} />,
                 )}
@@ -100,20 +123,17 @@ export const History: FC = () => {
                   className={`${styles.show_more}`}
                   onClick={handleOnChangePage}
                 >
-                  {isFetching || isLoading ? (
-                    <SpinnerLoaderSmall />
-                  ) : (
-                    <ShowMoreBtn />
-                  )}
+                  {isLoadingMore ? <SpinnerLoaderSmall /> : <ShowMoreBtn />}
                 </div>
               )}
             </div>
-          ) : isLoading || isFetching ? (
+          ) : isLoadingMore ? (
             <div className={styles.cards__list}>
-              {(isFetching || isLoading) &&
-                Array.from({ length: INTERSECTION_ELEMENTS.HISTORY }).map(
-                  (_, index) => <SkeletonHistoryCard key={index} />,
-                )}
+              {Array.from({ length: INTERSECTION_ELEMENTS.HISTORY }).map(
+                (_, index) => (
+                  <SkeletonHistoryCard key={index} />
+                ),
+              )}
             </div>
           ) : (
             <div className={styles.empty__block}>

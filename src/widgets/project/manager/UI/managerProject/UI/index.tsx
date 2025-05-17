@@ -5,6 +5,7 @@ import {
 import { ZeroManagerProject } from "@features/project";
 import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
 import { Accordion, ShowMoreBtn, SpinnerLoader } from "@shared/ui";
+import { getAnimationDelay } from "@shared/utils";
 import { motion } from "framer-motion";
 import { FC } from "react";
 import { ManagerProjectCard, SkeletonManagerProjectCard } from "../card";
@@ -16,6 +17,7 @@ interface ManagerProjectsListProps {
   isLoading: boolean;
   isLast: boolean;
   statusFilter: managerProjectStatusFilter;
+  currentPage: number;
 }
 
 export const ManagerProjectsList: FC<ManagerProjectsListProps> = ({
@@ -24,6 +26,7 @@ export const ManagerProjectsList: FC<ManagerProjectsListProps> = ({
   isLoading,
   isLast,
   statusFilter,
+  currentPage,
 }) => {
   return (
     <Accordion type="single" collapsible className={styles.wrapper}>
@@ -34,10 +37,15 @@ export const ManagerProjectsList: FC<ManagerProjectsListProps> = ({
           <div className={styles.cards}>
             {projects?.map((card, index) => (
               <motion.div
-                key={card.id + index}
+                key={card.project_id}
                 initial="hidden"
                 animate="visible"
-                custom={index % INTERSECTION_ELEMENTS.MANAGER_ORDERS}
+                custom={getAnimationDelay({
+                  index,
+                  currentPage,
+                  total: projects.length,
+                  elements: INTERSECTION_ELEMENTS.MANAGER_ORDERS,
+                })}
                 variants={PAGE_ANIMATION.animationUp}
                 className={styles.motion}
               >

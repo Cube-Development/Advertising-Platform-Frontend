@@ -5,7 +5,7 @@ import {
   platformTypesNum,
 } from "@entities/platform";
 import { ICreatePostForm, IPostChannel } from "@entities/project";
-import { ICreateOrderBlur } from "@widgets/createOrder/config";
+import { ICreateOrderBlur } from "@widgets/createOrder/model";
 import { UseFormSetValue } from "react-hook-form";
 
 export const checkPosts = (

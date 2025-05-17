@@ -1,4 +1,6 @@
 import { IOrderFeature, useRejectOrderMutation } from "@entities/project";
+import { BREAKPOINT } from "@shared/config";
+import { useWindowWidth } from "@shared/hooks";
 import {
   Dialog,
   DialogClose,
@@ -17,17 +19,11 @@ import { Loader, SendHorizonal, X } from "lucide-react";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { BREAKPOINT } from "@shared/config";
-import { useAppDispatch, useWindowWidth } from "@shared/hooks";
-import { bloggerOffersAPI } from "@entities/offer";
 
 export const RejectPost: FC<IOrderFeature> = ({ order_id }) => {
   const [comment, setComment] = useState("");
   const { toast } = useToast();
-  const dispatch = useAppDispatch();
-  const handleInvalidateCache = () => {
-    dispatch(bloggerOffersAPI.util.resetApiState());
-  };
+
   const [rejectOrder, { isLoading }] = useRejectOrderMutation();
   const { t } = useTranslation();
   const handleOnClick = () => {
@@ -41,7 +37,6 @@ export const RejectPost: FC<IOrderFeature> = ({ order_id }) => {
             variant: "success",
             title: t("toasts.orders_advertiser.reject_post.success"),
           });
-          handleInvalidateCache();
         })
         .catch((error) => {
           toast({

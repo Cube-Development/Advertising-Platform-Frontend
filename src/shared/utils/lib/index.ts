@@ -5,3 +5,6 @@ export * from "./queryParams";
 export * from "./getFileExtension";
 export * from "./generateDownloadLinkWithProgress";
 export * from "./formatTime";
+export * from "./downloadFiles";
+export * from "./getAnimationDelay";
+export * from "./downloadFilesOnDevice";

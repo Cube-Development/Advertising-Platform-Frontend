@@ -1,4 +1,10 @@
-import { projectStatus, useLaunchProjectMutation } from "@entities/project";
+import {
+  invalidateManagerProjectByLaunchProject,
+  projectStatus,
+  useLaunchProjectMutation,
+} from "@entities/project";
+import { ENUM_ROLES, useFindLanguage } from "@entities/user";
+import { useAppDispatch } from "@shared/hooks";
 import { MyButton, ToastAction, useToast } from "@shared/ui";
 import { Loader } from "lucide-react";
 import { FC } from "react";
@@ -17,12 +23,21 @@ export const LaunchProject: FC<LaunchProjectProps> = ({
   const { toast } = useToast();
   const { t } = useTranslation();
   const [launchProject, { isLoading }] = useLaunchProjectMutation();
+  const dispatch = useAppDispatch();
+  const language = useFindLanguage();
+
   const handleOnClick = () => {
     project_id &&
       !isLoading &&
       launchProject({ project_id })
         .unwrap()
         .then(() => {
+          invalidateManagerProjectByLaunchProject({
+            dispatch,
+            project_id,
+            language,
+            role: ENUM_ROLES.MANAGER,
+          });
           toast({
             variant: "success",
             title: t("toasts.orders_manager.launch_project.success"),

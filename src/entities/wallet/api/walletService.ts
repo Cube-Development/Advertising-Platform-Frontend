@@ -5,6 +5,10 @@ import {
   BALANCE,
   LEGALS,
   TRANSACTION_HISTORY,
+  CREATE_PROJECT_NAME,
+  CREATE_PROJECT_POSTS,
+  CREATE_PROJECT_DATES,
+  CREATE_PROJECT_AMOUNT,
   authApi,
 } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
@@ -51,7 +55,17 @@ export const walletAPI = authApi.injectEndpoints({
         url: `/wallet/payment/project?project_id=${params}`,
         method: `POST`,
       }),
-      invalidatesTags: [BALANCE, LEGALS, ADV_PROJECTS, TRANSACTION_HISTORY],
+      invalidatesTags: [
+        BALANCE,
+        LEGALS,
+        ADV_PROJECTS,
+        TRANSACTION_HISTORY,
+
+        CREATE_PROJECT_NAME,
+        CREATE_PROJECT_POSTS,
+        CREATE_PROJECT_DATES,
+        CREATE_PROJECT_AMOUNT,
+      ],
     }),
     paymentDeposit: build.mutation<PaymentWithdrawResponse, PaymentDepositReq>({
       query: (params) => ({
@@ -79,8 +93,11 @@ export const walletAPI = authApi.injectEndpoints({
       }),
       providesTags: [BALANCE],
     }),
-    getHistory: build.query<HistoryResponse, HistoryReq>({
-      query: (params) => ({
+    getHistory: build.query<
+      HistoryResponse,
+      HistoryReq & { __isWebsocket?: boolean }
+    >({
+      query: ({ __isWebsocket, ...params }) => ({
         url: "wallet/transaction/user/history",
         method: "POST",
         params,
@@ -90,26 +107,33 @@ export const walletAPI = authApi.injectEndpoints({
           ...response,
           isLast:
             response?.elements ===
-            response?.transactions?.length +
-              (response?.page - 1) * INTERSECTION_ELEMENTS.HISTORY,
+              response?.transactions?.length +
+                (response?.page - 1) * INTERSECTION_ELEMENTS.HISTORY ||
+            response?.transactions?.length === 0,
         };
       },
       serializeQueryArgs: ({ endpointName }) => {
         return endpointName;
       },
       merge: (currentCache, newItems, arg) => {
-        if (arg.arg.page === 1) {
+        const newIds = new Set(newItems.transactions.map((p) => p?.id));
+        const filteredOld = currentCache?.transactions?.filter(
+          (p) => !newIds.has(p?.id),
+        );
+
+        if (arg.arg.__isWebsocket) {
+          return {
+            ...currentCache,
+            transactions: [...newItems.transactions, ...filteredOld],
+          };
+        } else if (arg.arg.page === 1 && !arg.arg.__isWebsocket) {
           return {
             ...newItems,
           };
         }
-
         return {
           ...newItems,
-          transactions: [
-            ...currentCache.transactions,
-            ...newItems.transactions,
-          ],
+          transactions: [...filteredOld, ...newItems.transactions],
         };
       },
       forceRefetch({ currentArg, previousArg }) {

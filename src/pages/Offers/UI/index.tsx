@@ -68,17 +68,34 @@ export const OffersPage: FC = () => {
         : { search_string }
       : {}),
   };
-  const { data, isFetching } = useGetBloggerOrdersQuery(getParams, {
-    selectFromResult: ({ data, ...rest }) => ({
-      ...rest,
-      data: (data?.status === formState?.status && data) || undefined,
-    }),
-  });
+  const { data, isFetching, refetch, originalArgs } = useGetBloggerOrdersQuery(
+    getParams,
+    {
+      selectFromResult: ({ data, ...rest }) => ({
+        ...rest,
+        data: (data?.status === formState?.status && data) || undefined,
+      }),
+    },
+  );
   const { refetch: views } = useGetViewBloggerOrderQuery();
 
   const handleOnChangePage = () => {
-    setValue("page", formState.page + 1);
+    const newPage = Math.floor(
+      (data?.orders?.length || 0) / INTERSECTION_ELEMENTS.BLOGGER_OFFERS,
+    );
+    console.log("newPage", newPage);
+    setValue("page", newPage + 1);
+
+    if (data?.orders?.length === 0) {
+      refetch();
+    }
   };
+
+  useEffect(() => {
+    if (data && data?.orders?.length === 0 && !data?.isLast) {
+      refetch();
+    }
+  }, [data?.orders?.length]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -97,6 +114,8 @@ export const OffersPage: FC = () => {
     });
     navigate(newPath, { replace: true });
   }, [formState.status]);
+
+  const isLoadingMore = isFetching && !originalArgs?.__isWebsocket;
 
   return (
     <Suspense fallback={<SuspenseLoader />}>
@@ -118,8 +137,9 @@ export const OffersPage: FC = () => {
             statusFilter={formState.status as offerStatusFilter}
             offers={data?.orders || []}
             handleOnChangePage={handleOnChangePage}
-            isLoading={isFetching}
+            isLoading={isLoadingMore}
             isLast={data?.isLast || false}
+            currentPage={formState?.page}
           />
         </div>
       </div>

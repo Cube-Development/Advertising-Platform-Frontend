@@ -521,7 +521,13 @@
       column-gap: 20px;
       padding-top: 20px;
 
-      div {
+      .icons {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+      }
+
+      .icon {
         display: grid;
         grid-auto-flow: column;
         align-items: center;
@@ -542,15 +548,15 @@
         }
 
         @media (max-width: 768px) {
-          padding: 75px 5px;
+          padding: 50px 5px;
         }
       }
 
       @media (max-width: 992px) {
         padding-top: 0;
         padding-left: 15px;
-        grid-template: repeat(2, 1fr) / 1fr;
-        grid-gap: 5px;
+        grid-template: 2fr 1fr / 1fr;
+        row-gap: 10px;
 
         svg {
           width: 26px;
@@ -560,7 +566,7 @@
 
       @media (max-width: 768px) {
         padding-left: 0;
-        grid-template: 1fr / repeat(2, 1fr);
+        grid-template: 3fr 1fr / 1fr;
       }
     }
   }

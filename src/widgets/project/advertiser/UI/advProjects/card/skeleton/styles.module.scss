@@ -1,8 +1,8 @@
 .wrapper {
   display: grid;
   grid-template: 4fr 1fr / 1fr;
-  row-gap: 20px;
-  min-height: 220px;
+  row-gap: 15px;
+  min-height: 230px;
 
   @media (max-width: 992px) {
     row-gap: 15px;
@@ -256,14 +256,25 @@
 
         @media (max-width: 992px) {
           padding-top: 0;
-          grid-template: repeat(2, 1fr) / 1fr;
-          grid-gap: 5px;
+          grid-template: 2fr 1fr / 1fr;
+          row-gap: 10px;
         }
 
+        // @media (max-width: 768px) {
+        //   padding-top: 0;
+        //   grid-template: 1fr / repeat(2, 1fr);
+        //   grid-gap: 5px;
+        // }
+
         @media (max-width: 768px) {
-          padding-top: 0;
-          grid-template: 1fr / repeat(2, 1fr);
-          grid-gap: 5px;
+          padding-left: 0;
+          grid-template: 3fr 1fr / 1fr;
+        }
+
+        .icons {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 20px;
         }
       }
     }
