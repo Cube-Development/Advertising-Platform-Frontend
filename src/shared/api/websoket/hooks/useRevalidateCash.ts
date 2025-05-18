@@ -5,8 +5,8 @@ import {
 import { notificationsTypes } from "@entities/communication";
 import {
   bloggerOffersAPI,
-  invalidateBloggerOfferByNewOrder,
   invalidateBloggerOfferByAction,
+  invalidateBloggerOfferByNewOrder,
   offerStatusFilter,
 } from "@entities/offer";
 import {
@@ -28,14 +28,10 @@ import { invalidateHistory, walletAPI } from "@entities/wallet";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import {
   ADV_PROJECTS,
-  ADV_TARIFF_PROJECTS,
   BLOGGER_CHANNELS,
-  BLOGGER_OFFERS,
-  TRANSACTION_HISTORY,
   VIEWS_ADVERTISER,
   VIEWS_BLOGGER_CHANNELS,
   VIEWS_BLOGGER_OFFERS,
-  VIEWS_TRANSACTIONS,
 } from "./../../tags";
 
 export const useRevalidateCash = () => {
