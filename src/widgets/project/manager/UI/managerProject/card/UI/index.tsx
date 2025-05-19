@@ -158,7 +158,7 @@ const Card: FC<ManagerProjectCardProps> = ({ card, statusFilter }) => {
                 </div>
               </div>
               <div className={styles.bottom}>
-                <SendReport />
+                <SendReport project_id={card?.project_id} />
               </div>
             </div>
           ) : (
