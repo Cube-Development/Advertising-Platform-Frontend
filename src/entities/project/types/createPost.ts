@@ -48,8 +48,8 @@ export interface ICreatePost {
   comment?: string;
   media?: File[];
   files?: File[];
-  buttons?: ITgButton[];
-  text?: IPostText[];
+  buttons?: IFile[];
+  text?: IFile[];
   content?: IFile[];
   order_id?: string;
 }
@@ -58,17 +58,7 @@ export interface IFile {
   content_type: ContentType;
   content: string;
   url?: string;
-}
-
-export interface IPostText {
-  content_type: ContentType;
-  content: string;
-}
-
-export interface ITgButton {
-  content_type: ContentType;
-  content: string;
-  url: string;
+  name?: string;
 }
 
 export interface ICreateDate extends IProjectId {

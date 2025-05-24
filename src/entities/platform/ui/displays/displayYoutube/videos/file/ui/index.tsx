@@ -18,7 +18,7 @@ export const YoutubeFile: FC<YoutubeFileProps> = ({ file, fontSize }) => {
       onClick={() =>
         GenerateDownloadLink(
           file instanceof File ? file : file.content,
-          file instanceof File ? file.name : "File_1",
+          file instanceof File ? file.name : file?.name || `File_1`,
         )
       }
     >
@@ -33,7 +33,7 @@ export const YoutubeFile: FC<YoutubeFileProps> = ({ file, fontSize }) => {
           className={`${styles.content__name} truncate`}
           style={{ fontSize: `${fontSize}px` }}
         >
-          {file instanceof File ? file?.name : `File_1`}
+          {file instanceof File ? file.name : file?.name || `File_1`}
         </p>
       </div>
     </div>

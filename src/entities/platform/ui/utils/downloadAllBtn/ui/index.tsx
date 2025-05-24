@@ -5,6 +5,7 @@ import { useFileDownloader } from "@shared/hooks/useDownloadFiles";
 import styles from "./styles.module.scss";
 import downloadLottie from "/animated/download_files_lottie.gif";
 import { useTranslation } from "react-i18next";
+import { preparePostsData } from "../../helpers";
 
 interface DownloadAllBtnProps {
   formState?: ICreatePostForm;
@@ -18,15 +19,13 @@ export const DownloadAllBtn: FC<DownloadAllBtnProps> = ({
   currentPost,
 }) => {
   const { t } = useTranslation();
+  const { videosRes, mediaRes, fileRes } = preparePostsData(post);
+  const postData = [...videosRes, ...mediaRes, ...(fileRes ? [fileRes] : [])];
 
   const { downloadAllFiles, isAllDownloading, progress } = useFileDownloader(
     formState
       ? [...(currentPost?.media || []), ...(currentPost?.files || [])]
-      : [
-          ...(post?.video || []),
-          ...(post?.photo || []),
-          ...(post?.files || []),
-        ],
+      : postData,
   );
 
   return (
