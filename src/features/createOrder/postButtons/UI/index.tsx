@@ -2,7 +2,7 @@ import {
   ContentType,
   CreatePostFormData,
   ICreatePostForm,
-  ITgButton,
+  IFile,
 } from "@entities/project";
 import { AddIcon, CancelIcon2 } from "@shared/assets";
 import {
@@ -57,10 +57,8 @@ export const PostButtons: FC<PostButtonsProps> = ({
         platform: platformId,
       };
 
-  const [buttons, setButtons] = useState<ITgButton[]>(
-    currentPost?.buttons || [],
-  );
-  const [button, setButton] = useState<ITgButton>({
+  const [buttons, setButtons] = useState<IFile[]>(currentPost?.buttons || []);
+  const [button, setButton] = useState<IFile>({
     content_type: ContentType.button,
     content: "",
     url: "",
@@ -75,7 +73,7 @@ export const PostButtons: FC<PostButtonsProps> = ({
     formState?.multiposts,
   ]);
 
-  const handleOnChange = (type: keyof ITgButton, value: string) => {
+  const handleOnChange = (type: keyof IFile, value: string) => {
     setButton((prevState) => ({
       ...prevState,
       [type]: value,
@@ -94,7 +92,7 @@ export const PostButtons: FC<PostButtonsProps> = ({
     }
   };
 
-  const handleRemoveButton = (button: ITgButton) => {
+  const handleRemoveButton = (button: IFile) => {
     setButtons(buttons.filter((item) => item !== button));
 
     if (currentPost) {

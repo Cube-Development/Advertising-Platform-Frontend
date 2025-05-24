@@ -10,7 +10,7 @@ interface UseFileDownloaderResult {
   progress: number;
 }
 
-type FileInput = string | File | IFile;
+type FileInput = File | IFile;
 
 export const useFileDownloader = (
   files: FileInput[],
@@ -32,7 +32,7 @@ export const useFileDownloader = (
         typeof file === "string" || file instanceof File
           ? file
           : (file as IFile)?.content;
-      let fileName = `file_${index}_${Math.random()}`;
+      let fileName = file?.name || `file_${index}_${Math.random()}`;
 
       if (!fileContent) {
         console.warn(`Файл ${fileName} не может быть загружен.`);

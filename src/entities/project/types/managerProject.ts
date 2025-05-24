@@ -138,7 +138,7 @@ export interface IManagerOrderPost {
   // photo: string[];
   // video: string[];
   files: IPostData[];
-  // buttons: ITgButton[];
+  // buttons: IFile[];
   // text: string[];
   orders: IPostOrders[];
   post_type: PostTypesNum;

@@ -73,7 +73,10 @@ export const YoutubeMedia: FC<YoutubeMediaProps> = ({
           )}
           <div
             onClick={() =>
-              GenerateDownloadLink(mediasRes[0]?.content, `File_${1}`)
+              GenerateDownloadLink(
+                mediasRes[0]?.content,
+                mediasRes[0]?.name || `File_${1}`,
+              )
             }
             className="absolute bottom-3 right-3 rounded-full bg-[#ababab] opacity-75 hover:opacity-100 flex items-center content-center p-1 cursor-pointer"
           >

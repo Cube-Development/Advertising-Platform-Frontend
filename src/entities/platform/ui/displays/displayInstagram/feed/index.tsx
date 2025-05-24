@@ -21,6 +21,7 @@ import Link from "@tiptap/extension-link";
 import Underline from "@tiptap/extension-underline";
 import { DownloadAllBtn } from "../../../utils/downloadAllBtn";
 import { CopyTextBtn } from "../../../utils/copyTextBtn";
+import { preparePostsData } from "@entities/platform/ui/utils";
 
 interface DisplayFeedProps {
   formState?: ICreatePostForm;
@@ -38,30 +39,32 @@ export const DisplayFeed: FC<DisplayFeedProps> = ({
   orderId,
 }) => {
   // post response
-  const photosRes = post
-    ? [
-        ...post.photo.map((photo) => ({
-          content_type: ContentType.photo,
-          content: photo,
-        })),
-      ]
-    : [];
-  const videosRes = post
-    ? [
-        ...post.video.map((video) => ({
-          content_type: ContentType.video,
-          content: video,
-        })),
-      ]
-    : [];
-  const mediaRes = [...photosRes, ...videosRes];
-  const textRes = post && post.text;
-  const fileRes = post &&
-    post?.files.length > 0 && {
-      content_type: ContentType.file,
-      content: post.files[0],
-    };
-  const commentRes = post && post.comment;
+  // const photosRes = post
+  //   ? [
+  //       ...post.photo.map((photo) => ({
+  //         content_type: ContentType.photo,
+  //         content: photo,
+  //       })),
+  //     ]
+  //   : [];
+  // const videosRes = post
+  //   ? [
+  //       ...post.video.map((video) => ({
+  //         content_type: ContentType.video,
+  //         content: video,
+  //       })),
+  //     ]
+  //   : [];
+  // const mediaRes = [...photosRes, ...videosRes];
+  // const textRes = post && post.text;
+  // const fileRes = post &&
+  //   post?.files.length > 0 && {
+  //     content_type: ContentType.file,
+  //     content: post.files[0],
+  //   };
+  // const commentRes = post && post.comment;
+
+  const { mediaRes, textRes, fileRes, commentRes } = preparePostsData(post);
 
   // postFromData
   const currentPost = formState?.selectedMultiPostId
@@ -137,7 +140,7 @@ export const DisplayFeed: FC<DisplayFeedProps> = ({
 
   const editorRes = useEditor({
     extensions: [StarterKit, Link, Underline],
-    content: (textRes && textRes[0]) || "",
+    content: textRes || "",
     editable: false,
   });
 
@@ -146,7 +149,7 @@ export const DisplayFeed: FC<DisplayFeedProps> = ({
       postEditor.commands.setContent(postText[0]?.content || "");
     }
     if (editorRes && textRes) {
-      editorRes.commands.setContent(textRes[0] || "");
+      editorRes.commands.setContent(textRes || "");
     }
   }, [postText, postEditor, editorRes]);
 
@@ -352,7 +355,7 @@ export const DisplayFeed: FC<DisplayFeedProps> = ({
               paddingBottom: `${resizes?.displayBottomSize}px`,
             }}
           >
-            {(textRes && textRes[0] !== "<p></p>") ||
+            {(textRes && textRes !== "<p></p>") ||
             mediaRes?.length ||
             commentRes ||
             fileRes ? (
@@ -472,21 +475,14 @@ export const DisplayFeed: FC<DisplayFeedProps> = ({
         )}
       </div>
       <section className="grid grid-cols-[1fr_auto] mt-2 ml-2.5 gap-1.5">
-        {((post?.files && post?.files?.length > 0) ||
-          (post?.photo && post?.photo?.length > 0) ||
-          (post?.video && post?.video?.length > 0)) && (
+        {(!!fileRes || !!mediaRes?.length) && (
           <DownloadAllBtn
             post={post}
             formState={formState}
             currentPost={currentPost}
           />
         )}
-        {post?.text && post?.text.length > 0 && (
-          <CopyTextBtn
-            // text={formState ? postEditor?.getText() : editorRes?.getText()}
-            text={textRes ? textRes[0] : ""}
-          />
-        )}
+        {!!textRes && <CopyTextBtn text={textRes} />}
       </section>
     </div>
   );

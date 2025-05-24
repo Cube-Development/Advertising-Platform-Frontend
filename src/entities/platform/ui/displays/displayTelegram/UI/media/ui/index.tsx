@@ -59,7 +59,10 @@ export const TelegramMedia: FC<TelegramMediaProps> = ({
             )}
             <div
               onClick={() =>
-                GenerateDownloadLink(media?.content, `File_${index + 1}`)
+                GenerateDownloadLink(
+                  media?.content,
+                  media?.name || `File_${index + 1}`,
+                )
               }
               className="absolute bottom-3 right-3 rounded-full bg-[#ababab] opacity-75 hover:opacity-100 flex items-center content-center p-1 cursor-pointer"
             >

@@ -38,6 +38,7 @@ export const useUploadFilesAndMedia = () => {
         post.content!.push({
           content_type: ContentType.file,
           content: data.file_name,
+          name: file.name,
         });
       }) || [];
 
@@ -63,6 +64,7 @@ export const useUploadFilesAndMedia = () => {
         post.content!.push({
           content_type: getContentType(media),
           content: data.file_name,
+          name: media.name,
         });
       }) || [];
 
