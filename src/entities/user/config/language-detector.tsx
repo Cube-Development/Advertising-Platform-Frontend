@@ -20,6 +20,6 @@ export const LanguageDetector = () => {
       const currentLang = i18n.language.split("-");
       i18n.changeLanguage(currentLang[0]);
     }
-  }, []);
+  }, [isAuth, data]);
   return <></>;
 };
