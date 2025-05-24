@@ -13,10 +13,13 @@ export const Lang: FC<LangProps> = ({ isAuth }) => {
   const { i18n } = useTranslation();
   const navigate = useNavigate();
   const currentLang = useFindLanguage();
-
   const [isMenuOpen, setMenuOpen] = useState(false);
   const [language, setLanguage] = useState(currentLang);
   const menuRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    setLanguage(currentLang);
+  }, [currentLang]);
 
   const closeMenu = () => {
     setMenuOpen(false);
@@ -47,11 +50,6 @@ export const Lang: FC<LangProps> = ({ isAuth }) => {
     setLanguage(lang);
     isAuth && changeLanguage({ language: lang.id });
     navigate(0);
-    // if (isAuth) {
-    //   dispatch(authApi.util.resetApiState());
-    // } else {
-    //   dispatch(baseApi.util.resetApiState());
-    // }
   };
 
   return (
