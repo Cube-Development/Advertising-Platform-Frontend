@@ -1,4 +1,4 @@
-import { ENUM_ROLES, toggleRole } from "@entities/user";
+import { ENUM_ROLES, toggleRole, USER_ROLES } from "@entities/user";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { ENUM_AUTH_TYPES, ENUM_PATHS, IRouting } from "@shared/routing";
 import { SideBarAdminLayout, SideBarLayout } from "@widgets/layouts";
@@ -9,6 +9,7 @@ import { Navigate, useLocation } from "react-router-dom";
 export const ProtectedRoute = ({ route }: { route: IRouting }) => {
   const { isAuth, role: sliceRole } = useAppSelector((state) => state.user);
   let role: ENUM_ROLES = sliceRole;
+  let condition = false;
   const location = useLocation();
   const dispatch = useAppDispatch();
 
@@ -23,16 +24,29 @@ export const ProtectedRoute = ({ route }: { route: IRouting }) => {
   const query = new URLSearchParams(location.search);
   const isAccess = query.get("access") === "true";
 
+  // Если есть доступ, то устанавливаем условие для роли:
+  // - Если роль маршрута может быть клиентской (блогер, рекламодатель)
+  // - Если текущая роль клиента тоже клиентская
+  if (
+    !!route?.roles?.length &&
+    !!USER_ROLES.filter((value) => route?.roles?.includes(value))?.length &&
+    USER_ROLES.includes(role) &&
+    isAccess
+  ) {
+    condition = true;
+    const route_user_roles: ENUM_ROLES[] = USER_ROLES.filter((value) =>
+      route?.roles?.includes(value)
+    );
+    // Меняем роль на ту клиентскую, которая есть в маршруте, если она одна возможная клиентская роль
+    if (route_user_roles.length === 1) role = route_user_roles[0] as ENUM_ROLES;
+  }
+
   // Если есть доступ, то устанавливаем роль в куки
   useEffect(() => {
-    if (isAccess) {
-      dispatch(toggleRole(route?.roles?.[0] as ENUM_ROLES));
+    if (condition) {
+      dispatch(toggleRole(role));
     }
   }, [isAccess]);
-
-  if (isAccess) {
-    role = route?.roles?.[0] as ENUM_ROLES;
-  }
 
   // Проверка на доступность публичного маршрута в зависимости от роли
   if (route.auth === ENUM_AUTH_TYPES.PUBLIC) {
@@ -54,7 +68,6 @@ export const ProtectedRoute = ({ route }: { route: IRouting }) => {
     if (role === ENUM_ROLES.MANAGER) {
       return <Navigate to={ENUM_PATHS.ORDERS} replace />;
     }
-    console.log("Access denied for role", role);
     return <Navigate to={ENUM_PATHS.MAIN} replace />;
   }
 
