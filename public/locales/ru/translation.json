@@ -1384,6 +1384,8 @@
       "offer": "Заявка на пополнение баланса",
       "amount": "Сумма пополнения",
       "required": "Введите сумму",
+      "min": "Минимальная сумма",
+      "max": "Максимальная сумма",
       "placeholder": "Введите сумму",
       "payment_method": "Выберите способ оплаты",
       "fetch_error": "Ошибка запроса"
@@ -1411,6 +1413,12 @@
       "min": "Минимальная сумма",
       "max": "Максимальная сумма"
     },
+    "commission": {
+      "title": "Комиссия",
+      "enrollment": "Сумма к зачислению",
+      "include": "Включить комиссию",
+      "withdraw_all": "Вывести все средства"
+    },
     "guide": {
       "title": "Поэтапный гайд",
       "entity": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc.",
@@ -1421,7 +1429,7 @@
     "pay": {
       "title": "К списанию",
       "sub_title": "С кошелька",
-      "text": "С учетом комиссии",
+      "text": "Комиссия",
       "will_be_charged": "К зачислению"
     },
     "accept": {

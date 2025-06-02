@@ -23,3 +23,4 @@ export * from "./suspenseLoader";
 export * from "./infoTooltip";
 export * from "./multiSelect";
 export * from "./customCheckbox";
+export * from "./customInput";

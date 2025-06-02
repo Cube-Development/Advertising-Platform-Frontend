@@ -1,4 +1,5 @@
 import { projectTypesFilter } from "@entities/project";
+import { ENUM_ROLES } from "@entities/user";
 import {
   IViewAdvertiserProject,
   IViewBloggerChannel,
@@ -34,4 +35,10 @@ interface IMenuItemParams {
   openMenu?: boolean;
   isDialog?: boolean;
   type?: viewsTypes | projectTypesFilter | walletTypesFilter;
+}
+
+export interface IDropdownSwitcher {
+  role: ENUM_ROLES;
+  path: string;
+  title: string;
 }

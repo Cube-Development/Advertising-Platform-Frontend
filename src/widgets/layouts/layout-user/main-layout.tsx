@@ -47,7 +47,13 @@ export const MainLayout = ({ children }: PropsWithChildren) => {
 
   useEffect(() => {
     if (balance) {
-      dispatch(walletSlice.actions.setBalance(balance?.balance));
+      const wallet = {
+        balance: balance.balance,
+        deposit_wallet: balance.balance * 0.7,
+        profit_wallet: balance.balance * 0.3,
+      };
+      console.log("balance", wallet);
+      dispatch(walletSlice.actions.setBalance(wallet));
     }
   }, [balance, isLoading]);
 

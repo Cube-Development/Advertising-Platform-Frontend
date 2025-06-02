@@ -1,4 +1,4 @@
-import { IMenuItem } from "@entities/admin/types/sidebar";
+import { IMenuItem } from "../../header/model/config/types";
 import {
   advManagerProjectStatusFilter,
   myProjectStatusFilter,

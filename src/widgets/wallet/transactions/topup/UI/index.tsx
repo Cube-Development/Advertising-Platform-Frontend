@@ -18,14 +18,13 @@ import { BarSubFilter } from "@features/other";
 import { ArrowIcon4 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
 import { useClearCookiesOnPage, useWindowWidth } from "@shared/hooks";
-import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";
+import { ENUM_PATHS } from "@shared/routing";
 import { ToastAction, useToast } from "@shared/ui";
 import { FC, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { Guide, LegalsList, PaymentData } from "../../components";
-import { CreditCard } from "./creditCard";
+import { CreditCard, Guide, LegalsList, PaymentData } from "../../components";
 import styles from "./styles.module.scss";
 
 export const Topup: FC = () => {
@@ -43,7 +42,7 @@ export const Topup: FC = () => {
     register,
     handleSubmit,
     clearErrors,
-    formState: { errors },
+    formState: { errors, isSubmitted },
   } = useForm<IExtendedProfileData>({
     defaultValues: {
       profileFilter: {
@@ -213,6 +212,7 @@ export const Topup: FC = () => {
             amount: Number(formState.amount.replace(/\s/g, "")),
             legal_id: createRes.legal_id,
             way_type: paymentTypes.didox,
+            is_fee_included: formState.is_fee_included,
           };
           paymentDeposit(paymentReq)
             .unwrap()
@@ -247,6 +247,7 @@ export const Topup: FC = () => {
                   amount: Number(formState.amount.replace(/\s/g, "")),
                   legal_id: editRes.legal_id,
                   way_type: paymentTypes.didox,
+                  is_fee_included: formState.is_fee_included,
                 };
                 paymentDeposit(paymentReq)
                   .unwrap()
@@ -317,15 +318,18 @@ export const Topup: FC = () => {
               <PaymentData
                 amountTitle={t("wallet.topup.amount")}
                 register={register}
+                setValue={setValue}
                 errors={errors}
                 handleSubmit={handleSubmit}
                 onSubmit={onSubmit}
-                watch={watch}
+                formState={formState}
                 profileFilter={formState.profileFilter}
                 subprofileFilter={formState.subprofileFilter}
+                isSubmitted={isSubmitted}
                 isPaymentLoading={
                   isCreateLoading || isEditLoading || isPaymentLoading
                 }
+                isTopUp={true}
               />
               <div>
                 <div className={styles.content__right}>

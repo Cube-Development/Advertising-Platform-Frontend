@@ -1,4 +1,3 @@
-import { IMenuItem } from "@entities/admin";
 import { addChannelQueries } from "@entities/channel";
 import {
   advManagerProjectStatusFilter,
@@ -21,6 +20,7 @@ import {
 } from "@shared/assets";
 import { ENUM_PATHS } from "@shared/routing";
 import { buildPathWithQuery, queryParamKeys } from "@shared/utils";
+import { IMenuItem } from "./types";
 
 export const SERVICE_MENU_ADVERTISER: IMenuItem[] = [
   {

@@ -18,15 +18,22 @@ const ADMIN_ROUTES_LIST = ALL_APP_ROUTES_LIST.filter(
   element: <ProtectedRoute route={route} />,
 }));
 
-export const router = createBrowserRouter([
+export const router = createBrowserRouter(
+  [
+    {
+      path: ENUM_PATHS.MAIN,
+      element: <RootLayout />,
+      children: ROOT_ROUTES_LIST,
+    },
+    {
+      path: ENUM_PATHS.MAIN,
+      element: <RootAdminLayout />,
+      children: ADMIN_ROUTES_LIST,
+    },
+  ],
   {
-    path: ENUM_PATHS.MAIN,
-    element: <RootLayout />,
-    children: ROOT_ROUTES_LIST,
+    future: {
+      v7_relativeSplatPath: true,
+    },
   },
-  {
-    path: ENUM_PATHS.MAIN,
-    element: <RootAdminLayout />,
-    children: ADMIN_ROUTES_LIST,
-  },
-]);
+);

@@ -2,6 +2,7 @@ import { PROFILE_TYPE, PROFILE_STATUS, SUBPROFILE_TYPE } from "../config";
 
 export interface IExtendedProfileData extends ILegalData {
   amount: string;
+  is_fee_included?: boolean;
 }
 
 export interface ILegalData {

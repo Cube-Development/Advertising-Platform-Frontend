@@ -29,47 +29,47 @@ body {
     display: none;
   }
 
-  &.sidebar-open {
-    overflow: hidden;
+  // &.sidebar-open {
+  //   overflow: hidden;
 
-    &::after {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      transition: opacity 1s ease-in;
-      backdrop-filter: blur(20px);
-      z-index: 5;
-    }
+  //   &::after {
+  //     content: "";
+  //     position: fixed;
+  //     top: 0;
+  //     left: 0;
+  //     width: 100%;
+  //     height: 100%;
+  //     transition: opacity 1s ease-in;
+  //     backdrop-filter: blur(20px);
+  //     z-index: 5;
+  //   }
 
-    main {
-      transform: translateY(30px) scale(0.98);
-      transition: all 600ms ease;
-    }
-  }
+  //   main {
+  //     transform: translateY(30px) scale(0.98);
+  //     transition: all 600ms ease;
+  //   }
+  // }
 
-  &.sidebar-open-2 {
-    overflow: hidden;
+  // &.sidebar-open-2 {
+  //   overflow: hidden;
 
-    &::after {
-      content: "";
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      transition: opacity 1s ease-in;
-      backdrop-filter: blur(20px);
-      z-index: 5;
-    }
+  //   &::after {
+  //     content: "";
+  //     position: fixed;
+  //     top: 0;
+  //     left: 0;
+  //     width: 100%;
+  //     height: 100%;
+  //     transition: opacity 1s ease-in;
+  //     backdrop-filter: blur(20px);
+  //     z-index: 5;
+  //   }
 
-    main {
-      transform: translateY(30px) scale(0.98);
-      transition: all 600ms ease;
-    }
-  }
+  //   main {
+  //     transform: translateY(30px) scale(0.98);
+  //     transition: all 600ms ease;
+  //   }
+  // }
 }
 
 main {

@@ -1,4 +1,3 @@
-import { IMenuItem } from "@entities/admin";
 import {
   AdminComplaintIcon,
   AdminReviewIcon,
@@ -8,6 +7,7 @@ import {
   UserIcon,
 } from "@shared/assets";
 import { ENUM_PATHS } from "@shared/routing";
+import { IMenuItem } from "../../header/model";
 
 export const SIDEBAR_ADMIN_MENU: IMenuItem[] = [
   {

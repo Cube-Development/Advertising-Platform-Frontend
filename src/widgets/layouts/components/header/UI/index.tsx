@@ -1,13 +1,6 @@
-import {
-  logout,
-  ENUM_ROLES,
-  toggleRole as toggleRoleAction,
-  USER_ROLES,
-  useUpdateRoleMutation,
-} from "@entities/user";
-import { authApi, baseApi } from "@shared/api";
+import { USER_ROLES } from "@entities/user";
 import { BREAKPOINT } from "@shared/config";
-import { useAppDispatch, useAppSelector, useWindowWidth } from "@shared/hooks";
+import { useAppSelector, useWindowWidth } from "@shared/hooks";
 import { Chat, Notifications } from "@widgets/communication";
 import { FC, useEffect, useState } from "react";
 import { DropdownMenu } from "./dropdownMenu";
@@ -24,24 +17,6 @@ export const Header: FC = () => {
   const [isScrollingUp, setIsScrollingUp] = useState(true); // Отслеживание направления скролла
   const [lastScrollY, setLastScrollY] = useState(0); // Последняя позиция скролла
   const { isAuth, role } = useAppSelector((state) => state.user);
-  const dispatch = useAppDispatch();
-
-  const toggleLogout = () => {
-    dispatch(logout());
-    dispatch(baseApi.util.resetApiState());
-    dispatch(authApi.util.resetApiState());
-  };
-
-  const [updateRole] = useUpdateRoleMutation();
-
-  const toggleRole = (currentRole: ENUM_ROLES) => {
-    if (currentRole !== role) {
-      dispatch(toggleRoleAction(currentRole));
-      if (isAuth) {
-        updateRole({ role: currentRole });
-      }
-    }
-  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -63,38 +38,20 @@ export const Header: FC = () => {
     };
   }, [lastScrollY]);
 
-  const { dropdownMenu } = useAppSelector((state) => state.dropdownMenu);
-
   return (
     <header
       className={`${styles.wrapper} ${!isAuth && styles.not_auth} ${isScrollingUp || lastScrollY === 0 ? styles.visible : styles.hidden}`}
     >
-      {(isAuth || screen <= BREAKPOINT.HEADER_NAVBAR_VISIBLE) && (
-        <div
-          className={`${styles.dropdown} ${dropdownMenu.isOpen && screen > BREAKPOINT.MD && styles.circle_hidden}`}
-        >
-          <DropdownMenu
-            isAuth={isAuth}
-            currentRole={role}
-            toggleRole={toggleRole}
-          />
+      {isAuth && screen > BREAKPOINT.MD && (
+        <div className={styles.dropdown}>
+          <DropdownMenu />
         </div>
       )}
-      <section
-        className={`${styles.header} ${dropdownMenu.isOpen && screen > BREAKPOINT.MD && styles.is_open}`}
-      >
+      <section className={styles.header}>
         <div className={styles.navigation}>
-          <div className={styles.dropdown_mobile}>
-            {(isAuth || screen <= BREAKPOINT.HEADER_NAVBAR_VISIBLE) && (
-              <DropdownMenu
-                isAuth={isAuth}
-                currentRole={role}
-                toggleRole={toggleRole}
-              />
-            )}
-          </div>
+          {screen <= BREAKPOINT.MD && <DropdownMenu />}
           <Logo currentRole={role} />
-          <Nav isAuth={isAuth} currentRole={role} toggleRole={toggleRole} />
+          <Nav />
         </div>
 
         <div className={styles.profile}>
@@ -107,7 +64,7 @@ export const Header: FC = () => {
               <div className={styles.separator}></div>
               <Notifications />
               <Chat isMain={true} />
-              <Profile toggleLogout={toggleLogout} />
+              <Profile />
             </>
           ) : (
             <LoginBtn />

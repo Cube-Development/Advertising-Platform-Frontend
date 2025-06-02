@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 5px;
-  border: 1px solid var(--Containers);
+  border: 2px solid var(--Personal-colors-main);
   width: 20px;
   height: 20px;
 
@@ -22,7 +22,7 @@
   }
 
   &:not(.selected) {
-    opacity: 0.5;
+    // opacity: 0.5;
 
     svg {
       visibility: hidden;
