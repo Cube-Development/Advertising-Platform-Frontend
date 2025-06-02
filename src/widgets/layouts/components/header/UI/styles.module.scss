@@ -74,16 +74,6 @@
     @media (max-width: 992px) {
       height: var(--header-height-lg);
     }
-
-    @media (max-width: 768px) {
-      display: none;
-    }
-
-    &.circle_hidden {
-      background: rgba(142, 84, 233, 0);
-      box-shadow: none;
-      border: none;
-    }
   }
 
   .header {
@@ -115,14 +105,6 @@
       @media (max-width: 768px) {
         column-gap: 16px;
       }
-
-      .dropdown_mobile {
-        display: none;
-
-        @media (max-width: 768px) {
-          display: block;
-        }
-      }
     }
 
     .profile {
@@ -137,8 +119,4 @@
       }
     }
   }
-}
-
-.is_open {
-  display: none !important;
 }

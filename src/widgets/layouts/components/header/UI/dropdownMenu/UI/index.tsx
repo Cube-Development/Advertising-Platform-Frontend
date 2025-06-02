@@ -1,284 +1,197 @@
-import { IMenuItem } from "@entities/admin";
 import { ENUM_ROLES, USER_ROLES } from "@entities/user";
-import {
-  useGetViewAdvertiserProjectQuery,
-  useGetViewBloggerChannelQuery,
-  useGetViewBloggerOrderQuery,
-  useGetViewManagerProjectQuery,
-  useGetViewTransactionsQuery,
-  viewsTypes,
-} from "@entities/views";
+import { viewsTypes } from "@entities/views";
+import { BarSubFilter } from "@features/other";
 import { BREAKPOINT } from "@shared/config";
 import { useAppDispatch, useAppSelector, useWindowWidth } from "@shared/hooks";
-import { ENUM_PATHS } from "@shared/routing";
 import { setDropDownMenu } from "@shared/slice";
-import { Accordion, ScrollArea } from "@shared/ui";
-import { AnimatePresence, motion } from "framer-motion";
-import { FC, useEffect } from "react";
-import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
 import {
-  MENU_ADVERTISER,
-  MENU_ADVERTISER_NOT_AUTH,
-  MENU_BLOGGER,
-  MENU_BLOGGER_NOT_AUTH,
-  MENU_COMMON,
-  MENU_MANAGER,
-  SERVICE_MENU_ADVERTISER,
-  SERVICE_MENU_BLOGGER,
-  SERVICE_MENU_FAQ,
-} from "./config";
+  Accordion,
+  ScrollArea,
+  Sheet,
+  SheetContent,
+  SheetDescription,
+  SheetTitle,
+  SheetTrigger,
+} from "@shared/ui";
+import { Menu } from "lucide-react";
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
+import {
+  DROPDOWN_SWITCHER,
+  getMenu,
+  useChangeRole,
+  useGetViews,
+} from "../../../model";
 import { MenuItem } from "./menuItem";
 import styles from "./styles.module.scss";
 
-interface DropdownMenuProps {
-  isAuth: boolean;
-  currentRole: ENUM_ROLES;
-  toggleRole: (role: ENUM_ROLES) => void;
-}
+interface DropdownMenuProps {}
 
-export const DropdownMenu: FC<DropdownMenuProps> = ({
-  isAuth,
-  currentRole,
-  toggleRole,
-}) => {
+export const DropdownMenu: FC<DropdownMenuProps> = () => {
+  const { isAuth, role } = useAppSelector((state) => state.user);
   const { t } = useTranslation();
   const { dropdownMenu } = useAppSelector((state) => state.dropdownMenu);
   const screen = useWindowWidth();
   const dispatch = useAppDispatch();
+
   const toggleMenu = (path?: string) => {
     const newMenu = { isOpen: !dropdownMenu.isOpen, title: "" };
     console.log(newMenu);
     dispatch(setDropDownMenu(newMenu));
-    if (path === ENUM_PATHS.MAIN) {
-      toggleRole(ENUM_ROLES.ADVERTISER);
-    } else if (path === ENUM_PATHS.MAIN_BLOGGER) {
-      toggleRole(ENUM_ROLES.BLOGGER);
-    }
+    changeRole(path);
   };
 
-  const { balance } = useAppSelector((state) => state.wallet);
-
-  const { data: viewsAdvProjects } = useGetViewAdvertiserProjectQuery(
-    undefined,
-    {
-      skip: !isAuth || currentRole !== ENUM_ROLES.ADVERTISER,
-    },
+  const { balance, deposit_wallet, profit_wallet } = useAppSelector(
+    (state) => state.wallet,
   );
 
-  const { data: viewsBloggerOffers } = useGetViewBloggerOrderQuery(undefined, {
-    skip: !isAuth || currentRole !== ENUM_ROLES.BLOGGER,
+  const { changeRole, updateRole } = useChangeRole({
+    isAuth,
+    role,
   });
 
-  const { data: viewsBloggerChannels } = useGetViewBloggerChannelQuery(
-    undefined,
-    {
-      skip: !isAuth || currentRole !== ENUM_ROLES.BLOGGER,
-    },
-  );
-
-  const { data: viewsManProjects } = useGetViewManagerProjectQuery(undefined, {
-    skip: !isAuth || currentRole !== ENUM_ROLES.MANAGER,
+  const {
+    viewsAdvProjects,
+    viewsBloggerOffers,
+    viewsBloggerChannels,
+    viewsManProjects,
+    viewsWalletTransactions,
+  } = useGetViews({
+    isAuth,
+    role,
   });
 
-  const { data: viewsWalletTransactions } = useGetViewTransactionsQuery(
-    undefined,
-    {
-      skip: !isAuth || currentRole === ENUM_ROLES.MANAGER,
-    },
-  );
-
-  useEffect(() => {
-    if (dropdownMenu.isOpen) {
-      document.body.classList.add("sidebar-open-2");
-    } else {
-      document.body.classList.remove("sidebar-open", "sidebar-open-2");
-    }
-    return () => {
-      document.body.classList.remove("sidebar-open-2");
-    };
-  }, [dropdownMenu.isOpen, currentRole]);
-
-  let SERVICE_MENU: IMenuItem[] =
-    currentRole === ENUM_ROLES.ADVERTISER
-      ? SERVICE_MENU_ADVERTISER
-      : SERVICE_MENU_BLOGGER;
-
-  SERVICE_MENU = isAuth ? SERVICE_MENU : [...SERVICE_MENU, ...SERVICE_MENU_FAQ];
-
-  const MENU_COMBINED: IMenuItem[] = isAuth
-    ? currentRole === ENUM_ROLES.ADVERTISER
-      ? [...MENU_ADVERTISER, ...MENU_COMMON, ...SERVICE_MENU_FAQ]
-      : currentRole === ENUM_ROLES.BLOGGER
-        ? [...MENU_BLOGGER, ...MENU_COMMON, ...SERVICE_MENU_FAQ]
-        : currentRole === ENUM_ROLES.MANAGER
-          ? [...MENU_MANAGER, ...SERVICE_MENU_FAQ]
-          : []
-    : currentRole === ENUM_ROLES.ADVERTISER
-      ? MENU_ADVERTISER_NOT_AUTH
-      : MENU_BLOGGER_NOT_AUTH;
-
-  const divVariants = {
-    close: { opacity: 0, y: "-100%", x: "0%" },
-    open: { opacity: 1, y: "0%", x: "0%" },
-    transition: { transition: { duration: 0.2 } },
-  };
+  const { SERVICE_MENU, MENU_COMBINED } = getMenu({
+    isAuth,
+    role,
+  });
 
   const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
 
-  return (
-    <div className={styles.dropdown}>
-      <button onClick={() => toggleMenu()} className={styles.burger__icon_btn}>
-        <div className={styles.burger__icon} />
-      </button>
+  const setRoleFilter = (role: ENUM_ROLES) => {
+    updateRole(role);
+  };
 
-      <AnimatePresence>
-        {dropdownMenu.isOpen && (
-          <motion.div
-            initial="close"
-            animate="open"
-            exit="close"
-            transition={divVariants.transition.transition}
-            className={`${styles.menu}`}
-            variants={divVariants}
-          >
-            <div
-              className={`${styles.menu__content} ${isSafari && styles.safari}`}
-            >
-              <div className={`${styles.menu__top}`}>
-                <p className={styles.logo}>Blogix</p>
-                <button onClick={() => toggleMenu()}>
-                  <div className={styles.close__icon} />
-                </button>
-              </div>
-              <ScrollArea className="h-[calc(100dvh_-_80px)]">
-                <div className={styles.menu__switcher}>
-                  {[ENUM_ROLES.ADVERTISER, ENUM_ROLES.BLOGGER].includes(
-                    currentRole,
-                  ) && (
-                    <div
-                      style={
-                        {
-                          "--translateRole": `${currentRole === ENUM_ROLES.ADVERTISER ? `0%` : `100%`}`,
-                          "--widthRole": `50%`,
-                        } as React.CSSProperties
-                      }
-                      className={styles.menu__switcher__row}
-                    >
-                      <Link to={ENUM_PATHS.MAIN}>
-                        <p
-                          className={`${
-                            currentRole === ENUM_ROLES.ADVERTISER
-                              ? styles.active
-                              : ""
-                          }`}
-                          onClick={() => {
-                            toggleRole(ENUM_ROLES.ADVERTISER);
-                          }}
-                        >
-                          {t("roles.advertiser")}
-                        </p>
-                      </Link>
-                      <Link to={ENUM_PATHS.MAIN_BLOGGER}>
-                        <p
-                          className={`${
-                            currentRole === ENUM_ROLES.BLOGGER
-                              ? styles.active
-                              : ""
-                          }`}
-                          onClick={() => {
-                            toggleRole(ENUM_ROLES.BLOGGER);
-                          }}
-                        >
-                          {t("roles.blogger")}
-                        </p>
-                      </Link>
-                    </div>
-                  )}
-                  {isAuth &&
-                    USER_ROLES.includes(currentRole) &&
-                    screen < BREAKPOINT.MD && (
-                      <div className={styles.accordion__block}>
-                        <p className={styles.accordion__title}>
-                          {t("burger_menu.balance")}
-                        </p>
-                        <div className={styles.balance}>
-                          <p>
-                            {balance
-                              ? Math.floor(balance).toLocaleString()
-                              : "0"}{" "}
-                            <span>{t("symbol")}</span>
-                          </p>
-                        </div>
-                      </div>
-                    )}
-                  {USER_ROLES.includes(currentRole) &&
-                    screen < BREAKPOINT.HEADER_NAVBAR_VISIBLE && (
-                      <div className={styles.accordion__block}>
-                        <p className={styles.accordion__title}>
-                          {t("burger_menu.services")}
-                        </p>
-                        <Accordion
-                          type="single"
-                          collapsible
-                          defaultValue={`item-${dropdownMenu.title}`}
-                          className={styles.menu__accordion}
-                        >
-                          {SERVICE_MENU.map((item) => (
-                            <MenuItem
-                              key={item.item.title}
-                              item={item}
-                              onChange={toggleMenu}
-                              openTitle={dropdownMenu.title}
-                              isAuth={item.item.isDialog && isAuth}
-                            />
-                          ))}
-                        </Accordion>
-                      </div>
-                    )}
-                  {isAuth && (
-                    <div className={styles.accordion__block}>
-                      <p className={styles.accordion__title}>
-                        {t("burger_menu.navigation")}
-                      </p>
-                      <Accordion
-                        type="single"
-                        collapsible
-                        defaultValue={`item-${dropdownMenu.title}`}
-                        className={styles.menu__accordion}
-                      >
-                        {MENU_COMBINED.map((item) => (
-                          <MenuItem
-                            key={item.item.title}
-                            item={item}
-                            onChange={toggleMenu}
-                            openTitle={dropdownMenu.title}
-                            viewsInfo={
-                              item.item.type === viewsTypes.advertiserProjects
-                                ? viewsAdvProjects
-                                : item.item.type === viewsTypes.wallet
-                                  ? viewsWalletTransactions
-                                  : item.item.type === viewsTypes.bloggerOffers
-                                    ? viewsBloggerOffers
-                                    : item.item.type ===
-                                        viewsTypes.bloggerChannels
-                                      ? viewsBloggerChannels
-                                      : item.item.type ===
-                                          viewsTypes.managerProjects
-                                        ? viewsManProjects
-                                        : undefined
-                            }
-                          />
-                        ))}
-                      </Accordion>
-                    </div>
-                  )}
+  return (
+    <Sheet open={dropdownMenu.isOpen} onOpenChange={() => toggleMenu()}>
+      <SheetTrigger>
+        <Menu
+          color="var(--Personal-colors-main)"
+          className="w-5 h-5 md:w-8 md:h-8"
+        />
+      </SheetTrigger>
+
+      <SheetContent side={"left"} className={styles.menu}>
+        <div className={`${styles.menu__content} ${isSafari && styles.safari}`}>
+          <SheetTitle className={`${styles.menu__top}`}>
+            <p className={styles.logo}>Blogix</p>
+          </SheetTitle>
+          <SheetDescription className="sr-only" />
+          <ScrollArea className="h-[calc(100dvh_-_80px)]">
+            <div className={styles.menu__bottom}>
+              {[ENUM_ROLES.ADVERTISER, ENUM_ROLES.BLOGGER].includes(role) && (
+                <div className={styles.switcher}>
+                  <BarSubFilter
+                    tab={role}
+                    changeTab={setRoleFilter}
+                    tab_list={DROPDOWN_SWITCHER}
+                    isFixedColumns={true}
+                  />
                 </div>
-              </ScrollArea>
+              )}
+              {isAuth && USER_ROLES.includes(role) && (
+                <div className={styles.accordion__block}>
+                  <p className={styles.accordion__title}>
+                    {t("burger_menu.balance")}
+                  </p>
+                  <div className={styles.balance__wrapper}>
+                    <p className={styles.total_balance}>
+                      {Math.floor(balance).toLocaleString()}{" "}
+                      <span>{t("symbol")}</span>
+                    </p>
+                    <div className={styles.sub_balance__wrapper}>
+                      <div className={styles.sub_balance__item}>
+                        <p className={styles.accordion__title}>Депозит: </p>
+                        <p className={styles.sub_balance__item__value}>
+                          {Math.floor(deposit_wallet).toLocaleString()}{" "}
+                          <span>{t("symbol")}</span>
+                        </p>
+                      </div>
+                      <div className={styles.sub_balance__item}>
+                        <p className={styles.accordion__title}>Прибыль: </p>
+                        <p className={styles.sub_balance__item__value}>
+                          {Math.floor(profit_wallet).toLocaleString()}{" "}
+                          <span>{t("symbol")}</span>
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+              {USER_ROLES.includes(role) &&
+                screen < BREAKPOINT.HEADER_NAVBAR_VISIBLE && (
+                  <div className={styles.accordion__block}>
+                    <p className={styles.accordion__title}>
+                      {t("burger_menu.services")}
+                    </p>
+                    <Accordion
+                      type="single"
+                      collapsible
+                      defaultValue={`item-${dropdownMenu.title}`}
+                      className={styles.menu__accordion}
+                    >
+                      {SERVICE_MENU.map((item) => (
+                        <MenuItem
+                          key={item.item.title}
+                          item={item}
+                          onChange={toggleMenu}
+                          openTitle={dropdownMenu.title}
+                          isAuth={item.item.isDialog && isAuth}
+                        />
+                      ))}
+                    </Accordion>
+                  </div>
+                )}
+              {isAuth && (
+                <div className={styles.accordion__block}>
+                  <p className={styles.accordion__title}>
+                    {t("burger_menu.navigation")}
+                  </p>
+                  <Accordion
+                    type="single"
+                    collapsible
+                    defaultValue={`item-${dropdownMenu.title}`}
+                    className={styles.menu__accordion}
+                  >
+                    {MENU_COMBINED.map((item) => (
+                      <MenuItem
+                        key={item.item.title}
+                        item={item}
+                        onChange={toggleMenu}
+                        openTitle={dropdownMenu.title}
+                        viewsInfo={
+                          item.item.type === viewsTypes.advertiserProjects
+                            ? viewsAdvProjects
+                            : item.item.type === viewsTypes.wallet
+                              ? viewsWalletTransactions
+                              : item.item.type === viewsTypes.bloggerOffers
+                                ? viewsBloggerOffers
+                                : item.item.type === viewsTypes.bloggerChannels
+                                  ? viewsBloggerChannels
+                                  : item.item.type ===
+                                      viewsTypes.managerProjects
+                                    ? viewsManProjects
+                                    : undefined
+                        }
+                      />
+                    ))}
+                  </Accordion>
+                </div>
+              )}
             </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+          </ScrollArea>
+        </div>
+      </SheetContent>
+    </Sheet>
   );
 };

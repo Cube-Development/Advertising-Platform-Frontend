@@ -41,17 +41,9 @@ export const Wallet: FC = () => {
       ref={menuRef}
     >
       <button className={styles.roww} onClick={(e) => toggleMenu(e)}>
-        {balance ? (
-          <p>
-            {balance ? Math.floor(balance).toLocaleString() : "0"}{" "}
-            <span>{t("symbol")}</span>
-          </p>
-        ) : (
-          <p>
-            {"0 "}
-            <span>{t("symbol")}</span>
-          </p>
-        )}
+        <p>
+          {Math.floor(balance).toLocaleString()} <span>{t("symbol")}</span>
+        </p>
         {isMenuOpen ? <CloseIcon /> : <PlusIcon />}
       </button>
       {isMenuOpen && (

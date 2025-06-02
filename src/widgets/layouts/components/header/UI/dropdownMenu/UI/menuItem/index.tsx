@@ -1,4 +1,3 @@
-import { IMenuItems } from "@entities/admin";
 import { ArrowSmallVerticalIcon, LoginIcon } from "@shared/assets";
 import { ENUM_ACCORDION_TYPES } from "@shared/config";
 import { ENUM_PATHS } from "@shared/routing";
@@ -20,6 +19,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
 import { useCurrentPathEnum } from "@shared/hooks";
+import { IMenuItems } from "../../../../model";
 
 export const MenuItem: React.FC<IMenuItems> = ({
   item,
@@ -125,7 +125,7 @@ export const MenuItem: React.FC<IMenuItems> = ({
                 <Link
                   to={`${ENUM_PATHS.LOGIN}${currentPath}`}
                   className={`${styles.btns__login} truncate`}
-                  onClick={() => onChange("")}
+                  onClick={() => onChange()}
                 >
                   {t("login")}
                   <LoginIcon />
@@ -133,7 +133,7 @@ export const MenuItem: React.FC<IMenuItems> = ({
                 <Link
                   to={`${ENUM_PATHS.REGISTRATION}${currentPath}`}
                   className={`${styles.btns__register} truncate`}
-                  onClick={() => onChange("")}
+                  onClick={() => onChange()}
                 >
                   {t("registration")}
                 </Link>

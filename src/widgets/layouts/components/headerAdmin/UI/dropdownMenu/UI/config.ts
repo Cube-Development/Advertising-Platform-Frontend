@@ -1,4 +1,3 @@
-import { IMenuItem } from "@entities/admin";
 import {
   AdminComplaintIcon,
   AdminReviewIcon,
@@ -8,6 +7,7 @@ import {
   UserIcon,
 } from "@shared/assets";
 import { ENUM_PATHS } from "@shared/routing";
+import { IMenuItem } from "@widgets/layouts/components/header/model";
 
 export const DROPDOWN_ADMIN_MENU: IMenuItem[] = [
   {

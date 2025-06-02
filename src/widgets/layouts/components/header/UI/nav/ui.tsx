@@ -1,5 +1,5 @@
 import { ENUM_ROLES } from "@entities/user";
-import { ENUM_PATHS } from "@shared/routing";
+import { useAppSelector } from "@shared/hooks";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
@@ -9,18 +9,21 @@ import {
   NAVBAR_BLOGGER_MENU,
   NAVBAR_BLOGGER_NOT_AUTH_MENU,
   NAVBAR_MANAGER_MENU,
-} from "./config";
+  useChangeRole,
+} from "../../model";
 import styles from "./styles.module.scss";
 
-interface NavProps {
-  isAuth: boolean;
-  currentRole: ENUM_ROLES;
-  toggleRole: (role: ENUM_ROLES) => void;
-}
+interface NavProps {}
 
-export const Nav: FC<NavProps> = ({ isAuth, currentRole, toggleRole }) => {
+export const Nav: FC<NavProps> = () => {
+  const { isAuth, role } = useAppSelector((state) => state.user);
   const router = useNavigate();
   const location = useLocation();
+
+  const { changeRole } = useChangeRole({
+    isAuth,
+    role,
+  });
 
   const handleNavigation = (href: string) => {
     router(href);
@@ -33,24 +36,19 @@ export const Nav: FC<NavProps> = ({ isAuth, currentRole, toggleRole }) => {
         });
       }
     }
-
-    if (href === ENUM_PATHS.MAIN) {
-      toggleRole(ENUM_ROLES.ADVERTISER);
-    } else if (href === ENUM_PATHS.MAIN_BLOGGER) {
-      toggleRole(ENUM_ROLES.BLOGGER);
-    }
+    changeRole(href);
   };
 
   const { t } = useTranslation();
 
   const NAVBAR_MENU =
-    isAuth && currentRole === ENUM_ROLES.ADVERTISER
+    isAuth && role === ENUM_ROLES.ADVERTISER
       ? NAVBAR_ADVERTISER_MENU
-      : isAuth && currentRole === ENUM_ROLES.BLOGGER
+      : isAuth && role === ENUM_ROLES.BLOGGER
         ? NAVBAR_BLOGGER_MENU
-        : isAuth && currentRole === ENUM_ROLES.MANAGER
+        : isAuth && role === ENUM_ROLES.MANAGER
           ? NAVBAR_MANAGER_MENU
-          : !isAuth && currentRole === ENUM_ROLES.ADVERTISER
+          : !isAuth && role === ENUM_ROLES.ADVERTISER
             ? NAVBAR_ADVERTISER_NOT_AUTH_MENU
             : NAVBAR_BLOGGER_NOT_AUTH_MENU;
 

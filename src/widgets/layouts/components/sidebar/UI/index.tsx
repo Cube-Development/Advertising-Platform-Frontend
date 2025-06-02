@@ -1,4 +1,3 @@
-import { IMenuItem } from "@entities/admin";
 import { DEBOUNCE } from "@entities/project";
 import {
   ENUM_ROLES,
@@ -23,6 +22,7 @@ import {
 } from "./config";
 import { HoverItem } from "./hoverItem";
 import styles from "./styles.module.scss";
+import { IMenuItem } from "../../header/model";
 
 export const Sidebar: FC = () => {
   const dispatch = useAppDispatch();

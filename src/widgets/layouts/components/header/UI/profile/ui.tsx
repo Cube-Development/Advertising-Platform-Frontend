@@ -2,9 +2,10 @@ import {
   ENUM_ROLES,
   useGetUserQueryQuery,
   useLogoutMutation,
+  logout as logoutAction,
 } from "@entities/user";
 import { ProfileIcon } from "@shared/assets";
-import { useAppSelector } from "@shared/hooks";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { ENUM_PATHS } from "@shared/routing";
 import {
   Dialog,
@@ -20,12 +21,11 @@ import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./styles.module.scss";
+import { authApi, baseApi } from "@shared/api";
 
-interface ProfileProps {
-  toggleLogout: () => void;
-}
+interface ProfileProps {}
 
-export const Profile: FC<ProfileProps> = ({ toggleLogout }) => {
+export const Profile: FC<ProfileProps> = ({}) => {
   const { t } = useTranslation();
   const [isMenuOpen, setMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
@@ -33,6 +33,14 @@ export const Profile: FC<ProfileProps> = ({ toggleLogout }) => {
   const navigate = useNavigate();
   const { isAuth, role } = useAppSelector((state) => state.user);
   const { data: user } = useGetUserQueryQuery(undefined, { skip: !isAuth });
+
+  const dispatch = useAppDispatch();
+
+  const toggleLogout = () => {
+    dispatch(logoutAction());
+    dispatch(baseApi.util.resetApiState());
+    dispatch(authApi.util.resetApiState());
+  };
 
   const handleClickOutside = (event: MouseEvent) => {
     if (menuRef.current && !menuRef.current.contains(event.target as Node)) {
