@@ -85,12 +85,7 @@
   width: 100%;
   position: relative;
 
-  .input {
-    width: 100%;
-    padding: 10px 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    transition: border-color 0.5s;
+  input {
     font-size: 14px;
     font-style: normal;
     font-weight: 500;
@@ -99,10 +94,6 @@
     @media (max-width: 992px) {
       font-size: 16px;
     }
-
-    // @media (max-width: 576px) {
-    //   font-size: 12px;
-    // }
 
     &::placeholder {
       color: rgba(0, 0, 0, 0.3);

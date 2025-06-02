@@ -8,12 +8,14 @@ import {
   Accordion,
   ScrollArea,
   Sheet,
+  SheetClose,
   SheetContent,
   SheetDescription,
+  SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@shared/ui";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -81,24 +83,27 @@ export const DropdownMenu: FC<DropdownMenuProps> = () => {
         />
       </SheetTrigger>
 
-      <SheetContent side={"left"} className={styles.menu}>
+      <SheetContent side={"left"} className={styles.menu} useClose={false}>
         <div className={`${styles.menu__content} ${isSafari && styles.safari}`}>
           <SheetTitle className={`${styles.menu__top}`}>
             <p className={styles.logo}>Blogix</p>
+            <SheetClose className="absolute transition-opacity -translate-y-1/2 right-4 top-1/2 opacity-70 hover:opacity-100 focus:outline-none focus:ring-0 focus:ring-offset-0 disabled:pointer-events-none">
+              <X size={32} color="var(--Personal-colors-main" />
+            </SheetClose>
           </SheetTitle>
           <SheetDescription className="sr-only" />
+          {[ENUM_ROLES.ADVERTISER, ENUM_ROLES.BLOGGER].includes(role) && (
+            <div className={styles.switcher}>
+              <BarSubFilter
+                tab={role}
+                changeTab={setRoleFilter}
+                tab_list={DROPDOWN_SWITCHER}
+                isFixedColumns={true}
+              />
+            </div>
+          )}
           <ScrollArea className="h-[calc(100dvh_-_80px)]">
             <div className={styles.menu__bottom}>
-              {[ENUM_ROLES.ADVERTISER, ENUM_ROLES.BLOGGER].includes(role) && (
-                <div className={styles.switcher}>
-                  <BarSubFilter
-                    tab={role}
-                    changeTab={setRoleFilter}
-                    tab_list={DROPDOWN_SWITCHER}
-                    isFixedColumns={true}
-                  />
-                </div>
-              )}
               {isAuth && USER_ROLES.includes(role) && (
                 <div className={styles.accordion__block}>
                   <p className={styles.accordion__title}>
@@ -111,14 +116,18 @@ export const DropdownMenu: FC<DropdownMenuProps> = () => {
                     </p>
                     <div className={styles.sub_balance__wrapper}>
                       <div className={styles.sub_balance__item}>
-                        <p className={styles.accordion__title}>Депозит: </p>
+                        <p className={styles.sub_balance__item__title}>
+                          Депозит:{" "}
+                        </p>
                         <p className={styles.sub_balance__item__value}>
                           {Math.floor(deposit_wallet).toLocaleString()}{" "}
                           <span>{t("symbol")}</span>
                         </p>
                       </div>
                       <div className={styles.sub_balance__item}>
-                        <p className={styles.accordion__title}>Прибыль: </p>
+                        <p className={styles.sub_balance__item__title}>
+                          Прибыль:{" "}
+                        </p>
                         <p className={styles.sub_balance__item__value}>
                           {Math.floor(profit_wallet).toLocaleString()}{" "}
                           <span>{t("symbol")}</span>
