@@ -42,7 +42,7 @@ export const Withdrawal: FC = () => {
     register,
     handleSubmit,
     clearErrors,
-    formState: { errors },
+    formState: { errors, isSubmitted },
   } = useForm<IExtendedProfileData>({
     defaultValues: {
       profileFilter: {
@@ -325,7 +325,9 @@ export const Withdrawal: FC = () => {
               profileFilter={formState.profileFilter}
               subprofileFilter={formState.subprofileFilter}
               errors={errors}
-              watch={watch}
+              setValue={setValue}
+              formState={formState}
+              isSubmitted={isSubmitted}
               onSubmit={onSubmit}
               register={register}
               handleSubmit={handleSubmit}

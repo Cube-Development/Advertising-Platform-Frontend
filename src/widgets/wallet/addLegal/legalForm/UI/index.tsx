@@ -113,7 +113,7 @@ export const AddLegalForm: FC = () => {
                 data={block}
                 register={register}
                 key={index}
-                isCreateProfile={true}
+                isRow={true}
               />
             ))}
           </div>

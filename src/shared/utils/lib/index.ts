@@ -8,3 +8,5 @@ export * from "./formatTime";
 export * from "./downloadFiles";
 export * from "./getAnimationDelay";
 export * from "./downloadFilesOnDevice";
+export * from "./getCommissionAmount";
+export * from "./formatNumber";

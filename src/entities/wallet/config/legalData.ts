@@ -3,6 +3,7 @@ import {
   formatFullDate,
   formatToNumber,
   formatToPhoneNumber,
+  formatWithOutSpaces,
   isValidAccount,
   isValidCardDate,
   isValidEmail,
@@ -12,7 +13,9 @@ import {
   isValidPhoneNumber,
   isValidPNFL,
 } from "@shared/utils";
-import { IBlockData } from "../types";
+import { IBlockData, IRowData } from "../types";
+import { topup } from "./config";
+import { TFunction } from "i18next";
 
 export enum legalData {
   type_legal = "type_legal",
@@ -30,6 +33,7 @@ export enum legalData {
   transit_account = "transit_account",
   card_number = "card_number",
   card_date = "card_date",
+  amount = "amount",
 }
 
 export const selfEmployed: IBlockData = {
@@ -258,6 +262,19 @@ export const contact: IBlockData = {
     },
   ],
 };
+
+export const TOP_UP_AMOUNT = (t: TFunction) => ({
+  required: t("wallet.topup.required"),
+  validate: {
+    min: (value: string) =>
+      Number(formatWithOutSpaces(value)) >= topup.min ||
+      `${t("wallet.topup.min")} - ${topup.min.toLocaleString()} ${t("symbol")}`,
+
+    max: (value: string) =>
+      Number(formatWithOutSpaces(value)) <= topup.max ||
+      `${t("wallet.topup.max")} - ${topup.max.toLocaleString()} ${t("symbol")}`,
+  },
+});
 
 export const SelfEmployedData = [selfEmployed, bank, contact];
 

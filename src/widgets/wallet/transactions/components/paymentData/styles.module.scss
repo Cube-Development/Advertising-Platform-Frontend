@@ -37,7 +37,7 @@
   font-size: 12px;
 }
 
-.ammount {
+.amount {
   display: grid;
   grid-auto-flow: row;
   row-gap: 10px;
@@ -56,41 +56,6 @@
 
     @media (max-width: 576px) {
       font-size: 16px;
-    }
-  }
-
-  .amount__wrapper {
-    width: 100%;
-    position: relative;
-
-    padding: 10px 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    transition: border-color 0.5s;
-    display: grid;
-    align-items: center;
-    grid-template: 1fr / 1fr min-content;
-    gap: 10px;
-
-    .input {
-      width: 100%;
-      font-size: 14px;
-      font-style: normal;
-      font-weight: 500;
-      line-height: normal;
-
-      @media (max-width: 992px) {
-        font-size: 16px;
-      }
-
-      &::placeholder {
-        color: rgba(0, 0, 0, 0.3);
-      }
-    }
-
-    &.error {
-      border: 1px solid red;
-      animation: shake 0.3s ease-in-out;
     }
   }
 
@@ -195,4 +160,30 @@
 
 .button {
   display: grid;
+}
+
+.fee_include,
+.max_include {
+  display: grid;
+  grid-auto-flow: column;
+  column-gap: 10px;
+  justify-content: center;
+  align-items: center;
+  justify-self: start;
+
+  p {
+    color: var(--Personal-colors-black);
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1;
+
+    @media (max-width: 576px) {
+      text-align: center;
+    }
+  }
+}
+
+.max_include {
+  padding-top: 10px;
 }

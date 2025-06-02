@@ -35,7 +35,7 @@ export const ProtectedRoute = ({ route }: { route: IRouting }) => {
   ) {
     condition = true;
     const route_user_roles: ENUM_ROLES[] = USER_ROLES.filter((value) =>
-      route?.roles?.includes(value)
+      route?.roles?.includes(value),
     );
     // Меняем роль на ту клиентскую, которая есть в маршруте, если она одна возможная клиентская роль
     if (route_user_roles.length === 1) role = route_user_roles[0] as ENUM_ROLES;
