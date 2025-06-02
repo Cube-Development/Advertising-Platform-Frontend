@@ -8,12 +8,14 @@ import {
   Accordion,
   ScrollArea,
   Sheet,
+  SheetClose,
   SheetContent,
   SheetDescription,
+  SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@shared/ui";
-import { Menu } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -81,10 +83,13 @@ export const DropdownMenu: FC<DropdownMenuProps> = () => {
         />
       </SheetTrigger>
 
-      <SheetContent side={"left"} className={styles.menu}>
+      <SheetContent side={"left"} className={styles.menu} useClose={false}>
         <div className={`${styles.menu__content} ${isSafari && styles.safari}`}>
           <SheetTitle className={`${styles.menu__top}`}>
             <p className={styles.logo}>Blogix</p>
+            <SheetClose className="absolute transition-opacity -translate-y-1/2 right-4 top-1/2 opacity-70 hover:opacity-100 focus:outline-none focus:ring-0 focus:ring-offset-0 disabled:pointer-events-none">
+              <X size={32} color="var(--Personal-colors-main" />
+            </SheetClose>
           </SheetTitle>
           <SheetDescription className="sr-only" />
           {[ENUM_ROLES.ADVERTISER, ENUM_ROLES.BLOGGER].includes(role) && (
