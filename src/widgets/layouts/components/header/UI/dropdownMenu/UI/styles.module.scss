@@ -1,5 +1,5 @@
 .menu {
-  max-width: 800px !important;
+  max-width: 596px !important;
   padding: 0 !important;
 
   @media (max-width: 596px) {
@@ -18,11 +18,22 @@
     }
   }
 
+  .switcher {
+    margin: 15px 10px;
+
+    li {
+      padding: 12px 10px;
+
+      p {
+        font-size: 16px;
+      }
+    }
+  }
+
   &__accordion {
     display: grid;
     grid-auto-flow: row;
     row-gap: 8px;
-    // padding: 10px;
     padding: 0 10px;
   }
 
@@ -30,14 +41,6 @@
     display: grid;
     grid-auto-flow: row;
     margin-bottom: 120px;
-
-    .switcher {
-      margin: 15px 10px;
-
-      li {
-        padding: 12px 10px;
-      }
-    }
 
     .accordion__block {
       display: grid;
@@ -59,7 +62,7 @@
         padding: 5px 25px 15px 25px;
         display: grid;
         grid-auto-flow: row;
-        row-gap: 5px;
+        row-gap: 15px;
 
         .total_balance {
           font-size: 24px;
@@ -86,10 +89,18 @@
             align-content: center;
             align-items: center;
             column-gap: 10px;
-            justify-content: space-between;
+            justify-content: start;
+
+            &__title {
+              font-size: 14px;
+              font-style: normal;
+              font-weight: 500;
+              line-height: 1;
+              color: rgba(0, 0, 0, 0.4);
+            }
 
             &__value {
-              font-size: 20px;
+              font-size: 16px;
               font-style: normal;
               font-weight: 600;
               line-height: 1;

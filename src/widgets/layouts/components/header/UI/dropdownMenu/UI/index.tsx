@@ -87,18 +87,18 @@ export const DropdownMenu: FC<DropdownMenuProps> = () => {
             <p className={styles.logo}>Blogix</p>
           </SheetTitle>
           <SheetDescription className="sr-only" />
+          {[ENUM_ROLES.ADVERTISER, ENUM_ROLES.BLOGGER].includes(role) && (
+            <div className={styles.switcher}>
+              <BarSubFilter
+                tab={role}
+                changeTab={setRoleFilter}
+                tab_list={DROPDOWN_SWITCHER}
+                isFixedColumns={true}
+              />
+            </div>
+          )}
           <ScrollArea className="h-[calc(100dvh_-_80px)]">
             <div className={styles.menu__bottom}>
-              {[ENUM_ROLES.ADVERTISER, ENUM_ROLES.BLOGGER].includes(role) && (
-                <div className={styles.switcher}>
-                  <BarSubFilter
-                    tab={role}
-                    changeTab={setRoleFilter}
-                    tab_list={DROPDOWN_SWITCHER}
-                    isFixedColumns={true}
-                  />
-                </div>
-              )}
               {isAuth && USER_ROLES.includes(role) && (
                 <div className={styles.accordion__block}>
                   <p className={styles.accordion__title}>
@@ -111,14 +111,18 @@ export const DropdownMenu: FC<DropdownMenuProps> = () => {
                     </p>
                     <div className={styles.sub_balance__wrapper}>
                       <div className={styles.sub_balance__item}>
-                        <p className={styles.accordion__title}>Депозит: </p>
+                        <p className={styles.sub_balance__item__title}>
+                          Депозит:{" "}
+                        </p>
                         <p className={styles.sub_balance__item__value}>
                           {Math.floor(deposit_wallet).toLocaleString()}{" "}
                           <span>{t("symbol")}</span>
                         </p>
                       </div>
                       <div className={styles.sub_balance__item}>
-                        <p className={styles.accordion__title}>Прибыль: </p>
+                        <p className={styles.sub_balance__item__title}>
+                          Прибыль:{" "}
+                        </p>
                         <p className={styles.sub_balance__item__value}>
                           {Math.floor(profit_wallet).toLocaleString()}{" "}
                           <span>{t("symbol")}</span>
