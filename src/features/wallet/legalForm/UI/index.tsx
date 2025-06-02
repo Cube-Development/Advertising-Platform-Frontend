@@ -47,7 +47,7 @@ export const LegalForm: FC<LegalFormProps> = ({
               placeholder={row_dict.default_value}
               {...register(row.type, newValidate)}
               type={getInputLegalType(row.type)}
-              disabled
+              // disabled
               onInput={(e) => {
                 if (
                   e.currentTarget.value.length > getInputLegalLength(row.type)

@@ -37,7 +37,7 @@ export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
         <div className={styles.right}>
           <Input
             ref={ref}
-            className={`px-[30px] py-[15px] rounded-[12px] border border-[var(--Inside-container)] bg-[var(--Personal-colors-White)] focus-visible:ring-[var(--Personal-colors-main)]  ${className} ${!!error ? styles.error : ""}`}
+            className={`px-[16px] py-[10px] md:px-[30px] md:py-[15px] rounded-[12px] border border-[var(--Inside-container)] bg-[var(--Personal-colors-White)] focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0 ${className} ${!!error ? styles.error : ""}`}
             {...rest}
           />
           {!!error && <p className={styles.error_text}>{error_message}</p>}
