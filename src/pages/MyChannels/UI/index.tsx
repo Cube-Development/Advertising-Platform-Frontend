@@ -91,10 +91,10 @@ export const MyChannelsPage: FC = () => {
   const { refetch: views } = useGetViewBloggerChannelQuery();
 
   useEffect(() => {
-    if (status !== channelStatusFilter.inactive) {
+    if (formState.status !== channelStatusFilter.inactive) {
       views();
     }
-  }, [status, formState.page]);
+  }, [formState.status, formState.page]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -103,6 +103,7 @@ export const MyChannelsPage: FC = () => {
   }, [formState.platform, formState.status, formState.search_string]);
 
   useEffect(() => {
+    setValue("search_string", "");
     const newPath = buildPathWithQuery(ENUM_PATHS.MY_CHANNELS, {
       [queryParamKeys.channelStatus]: formState.status,
       ...(startChannelId ? { [queryParamKeys.channelId]: startChannelId } : {}),

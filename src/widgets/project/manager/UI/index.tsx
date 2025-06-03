@@ -87,6 +87,7 @@ export const ManagerOrders: FC = () => {
   };
 
   useEffect(() => {
+    setValue("search_string", "");
     const newPath = buildPathWithQuery(ENUM_PATHS.ORDERS, {
       [queryParamKeys.projectStatus]: formState.status,
       ...(startProjectId ? { [queryParamKeys.projectId]: startProjectId } : {}),
