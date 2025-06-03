@@ -1,7 +1,6 @@
 import { ENUM_ROLES, USER_ROLES } from "@entities/user";
 import { viewsTypes } from "@entities/views";
 import { BarSubFilter } from "@features/other";
-import { BREAKPOINT } from "@shared/config";
 import { useAppDispatch, useAppSelector, useWindowWidth } from "@shared/hooks";
 import { setDropDownMenu } from "@shared/slice";
 import {
@@ -11,7 +10,6 @@ import {
   SheetClose,
   SheetContent,
   SheetDescription,
-  SheetHeader,
   SheetTitle,
   SheetTrigger,
 } from "@shared/ui";
@@ -26,14 +24,14 @@ import {
 } from "../../../model";
 import { MenuItem } from "./menuItem";
 import styles from "./styles.module.scss";
+import { WalletCard } from "./wallet-card";
 
 interface DropdownMenuProps {}
 
 export const DropdownMenu: FC<DropdownMenuProps> = () => {
-  const { isAuth, role } = useAppSelector((state) => state.user);
   const { t } = useTranslation();
+  const { isAuth, role } = useAppSelector((state) => state.user);
   const { dropdownMenu } = useAppSelector((state) => state.dropdownMenu);
-  const screen = useWindowWidth();
   const dispatch = useAppDispatch();
 
   const toggleMenu = (path?: string) => {
@@ -42,10 +40,6 @@ export const DropdownMenu: FC<DropdownMenuProps> = () => {
     dispatch(setDropDownMenu(newMenu));
     changeRole(path);
   };
-
-  const { balance, deposit_wallet, profit_wallet } = useAppSelector(
-    (state) => state.wallet,
-  );
 
   const { changeRole, updateRole } = useChangeRole({
     isAuth,
@@ -105,36 +99,8 @@ export const DropdownMenu: FC<DropdownMenuProps> = () => {
           <ScrollArea className="h-[calc(100dvh_-_80px)]">
             <div className={styles.menu__bottom}>
               {isAuth && USER_ROLES.includes(role) && (
-                <div className={styles.accordion__block}>
-                  <p className={styles.accordion__title}>
-                    {t("burger_menu.balance")}
-                  </p>
-                  <div className={styles.balance__wrapper}>
-                    <p className={styles.total_balance}>
-                      {Math.floor(balance).toLocaleString()}{" "}
-                      <span>{t("symbol")}</span>
-                    </p>
-                    <div className={styles.sub_balance__wrapper}>
-                      <div className={styles.sub_balance__item}>
-                        <p className={styles.sub_balance__item__title}>
-                          Депозит:{" "}
-                        </p>
-                        <p className={styles.sub_balance__item__value}>
-                          {Math.floor(deposit_wallet).toLocaleString()}{" "}
-                          <span>{t("symbol")}</span>
-                        </p>
-                      </div>
-                      <div className={styles.sub_balance__item}>
-                        <p className={styles.sub_balance__item__title}>
-                          Прибыль:{" "}
-                        </p>
-                        <p className={styles.sub_balance__item__value}>
-                          {Math.floor(profit_wallet).toLocaleString()}{" "}
-                          <span>{t("symbol")}</span>
-                        </p>
-                      </div>
-                    </div>
-                  </div>
+                <div className={styles.wallet__block}>
+                  <WalletCard />
                 </div>
               )}
               {USER_ROLES.includes(role) && (

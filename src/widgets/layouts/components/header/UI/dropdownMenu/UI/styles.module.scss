@@ -42,6 +42,10 @@
     grid-auto-flow: row;
     margin-bottom: 120px;
 
+    .wallet__block {
+      padding: 20px;
+    }
+
     .accordion__block {
       display: grid;
       grid-auto-flow: row;
@@ -54,60 +58,7 @@
         font-style: normal;
         font-weight: 600;
         line-height: 1;
-        // padding: 5px 25px;
         padding: 0 25px;
-      }
-
-      .balance__wrapper {
-        padding: 5px 25px 15px 25px;
-        display: grid;
-        grid-auto-flow: row;
-        row-gap: 15px;
-
-        .total_balance {
-          font-size: 24px;
-          font-style: normal;
-          font-weight: 600;
-          line-height: 1;
-        }
-
-        span {
-          font-size: 12px;
-          font-style: normal;
-          font-weight: 500;
-          line-height: 1;
-        }
-
-        .sub_balance__wrapper {
-          display: grid;
-          grid-auto-flow: row;
-          row-gap: 5px;
-
-          .sub_balance__item {
-            display: grid;
-            grid-auto-flow: column;
-            align-content: center;
-            align-items: center;
-            column-gap: 10px;
-            justify-content: start;
-
-            &__title {
-              font-size: 14px;
-              font-style: normal;
-              font-weight: 500;
-              line-height: 1;
-              color: rgba(0, 0, 0, 0.4);
-            }
-
-            &__value {
-              font-size: 16px;
-              font-style: normal;
-              font-weight: 600;
-              line-height: 1;
-              color: rgba(0, 0, 0, 0.6);
-            }
-          }
-        }
       }
     }
   }
