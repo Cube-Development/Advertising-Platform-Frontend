@@ -137,30 +137,29 @@ export const DropdownMenu: FC<DropdownMenuProps> = () => {
                   </div>
                 </div>
               )}
-              {USER_ROLES.includes(role) &&
-                screen < BREAKPOINT.HEADER_NAVBAR_VISIBLE && (
-                  <div className={styles.accordion__block}>
-                    <p className={styles.accordion__title}>
-                      {t("burger_menu.services")}
-                    </p>
-                    <Accordion
-                      type="single"
-                      collapsible
-                      defaultValue={`item-${dropdownMenu.title}`}
-                      className={styles.menu__accordion}
-                    >
-                      {SERVICE_MENU.map((item) => (
-                        <MenuItem
-                          key={item.item.title}
-                          item={item}
-                          onChange={toggleMenu}
-                          openTitle={dropdownMenu.title}
-                          isAuth={item.item.isDialog && isAuth}
-                        />
-                      ))}
-                    </Accordion>
-                  </div>
-                )}
+              {USER_ROLES.includes(role) && (
+                <div className={styles.accordion__block}>
+                  <p className={styles.accordion__title}>
+                    {t("burger_menu.services")}
+                  </p>
+                  <Accordion
+                    type="single"
+                    collapsible
+                    defaultValue={`item-${dropdownMenu.title}`}
+                    className={styles.menu__accordion}
+                  >
+                    {SERVICE_MENU.map((item) => (
+                      <MenuItem
+                        key={item.item.title}
+                        item={item}
+                        onChange={toggleMenu}
+                        openTitle={dropdownMenu.title}
+                        isAuth={item.item.isDialog && isAuth}
+                      />
+                    ))}
+                  </Accordion>
+                </div>
+              )}
               {isAuth && (
                 <div className={styles.accordion__block}>
                   <p className={styles.accordion__title}>

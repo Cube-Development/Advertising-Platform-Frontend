@@ -27,9 +27,7 @@
   }
 
   &.not_auth {
-    @media (min-width: 1401px) {
-      grid-template: 1fr / 1fr;
-    }
+    grid-template: unset;
 
     .header {
       @media (min-width: 1401px) {
