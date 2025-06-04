@@ -115,6 +115,7 @@ export const AdvOrders: FC = () => {
   }, [project_type, project_status]);
 
   useEffect(() => {
+    setValue("search_string", "");
     const newPath = buildPathWithQuery(ENUM_PATHS.ORDERS, {
       [queryParamKeys.projectType]: formState.type,
       [queryParamKeys.projectStatus]: formState.status,

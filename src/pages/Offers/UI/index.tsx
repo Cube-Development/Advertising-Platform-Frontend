@@ -108,6 +108,7 @@ export const OffersPage: FC = () => {
   }, [formState.page, formState.status]);
 
   useEffect(() => {
+    setValue("search_string", "");
     const newPath = buildPathWithQuery(ENUM_PATHS.OFFERS, {
       [queryParamKeys.offerStatus]: formState.status,
       ...(startOrderId ? { [queryParamKeys.orderId]: startOrderId } : {}),
