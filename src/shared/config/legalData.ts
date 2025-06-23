@@ -1,9 +1,45 @@
-import { formDataLength, ILegalData, legalData } from "@entities/wallet";
 import { HTMLInputTypeAttribute } from "react";
 
-export function getInputLegalType(
-  inputType: keyof ILegalData,
-): HTMLInputTypeAttribute {
+export enum formDataLength {
+  type_legal = 20,
+  name = 255,
+  address = 255,
+  INN = 9,
+  account = 20,
+  bank_name = 255,
+  bank_mfo = 5,
+  phone = 12,
+  email = 50,
+  email_code = 6,
+  PNFL = 14,
+  registration_number = 20,
+  registration_date = 20,
+  card_number = 20,
+  card_date = 20,
+  default = 20,
+  amount = 10,
+}
+
+export enum legalData {
+  type_legal = "type_legal",
+  name = "name",
+  address = "address",
+  INN = "INN",
+  checking_account = "checking_account",
+  bank_name = "bank_name",
+  bank_mfo = "bank_mfo",
+  phone = "phone",
+  email = "email",
+  PNFL = "PNFL",
+  registration_number = "registration_number",
+  registration_date = "registration_date",
+  transit_account = "transit_account",
+  card_number = "card_number",
+  card_date = "card_date",
+  amount = "amount",
+}
+
+export function getInputLegalType(inputType: string): HTMLInputTypeAttribute {
   switch (inputType) {
     case legalData.type_legal:
     case legalData.INN:
@@ -30,7 +66,7 @@ export function getInputLegalType(
   }
 }
 
-export function getInputLegalLength(inputType: keyof ILegalData): number {
+export function getInputLegalLength(inputType: string): number {
   switch (inputType) {
     case legalData.type_legal:
       return formDataLength.type_legal;

@@ -1,0 +1,39 @@
+.wrapper {
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 30px;
+  padding: 24px 32px;
+  justify-content: center;
+  align-items: center;
+  max-width: 700px;
+  justify-self: center;
+
+  border-radius: 24px;
+  border: 0.2px solid #e9eaeb;
+  background: #fff;
+  box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.1);
+
+  .title {
+    color: var(--Personal-colors-black, #000);
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1;
+    text-align: center;
+  }
+
+  .data {
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 20px;
+  }
+
+  .didox {
+    color: var(--Personal-colors-black, #6c757d);
+    font-size: 9px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-align: center;
+  }
+}

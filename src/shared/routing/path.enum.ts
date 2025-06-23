@@ -13,6 +13,7 @@ export enum ENUM_PATHS {
   CREATE_ORDER = "/createorder",
   ADD_CHANNEL = "/addchannel",
   ADD_LEGAL = "/addLegal",
+  ADD_ORGANIZATION = "/add-organization",
   FULL_SERVICE = "/fullService",
   ORDERS = "/orders",
   OFFERS = "/offers",

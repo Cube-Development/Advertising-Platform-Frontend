@@ -11,9 +11,9 @@ import {
   topup,
   withdrawal,
 } from "@entities/wallet";
-import { LegalForm, PaymentDidox } from "@features/wallet";
+import { PaymentDidox } from "@features/wallet";
 import { ENUM_PATHS } from "@shared/routing";
-import { CustomCheckbox, CustomInput } from "@shared/ui";
+import { CustomBlockData, CustomCheckbox, CustomInput } from "@shared/ui";
 import {
   formatWithOutSpaces,
   formatWithSpaces,
@@ -135,7 +135,7 @@ export const PaymentData: FC<PaymentDataProps> = ({
           )}
         </div>
         {typeLegal.map((block, index) => (
-          <LegalForm
+          <CustomBlockData
             data={block}
             inputError={errors}
             register={register}

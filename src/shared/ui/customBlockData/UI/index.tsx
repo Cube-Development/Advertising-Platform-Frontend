@@ -1,32 +1,29 @@
-import {
-  IBlockData,
-  IParameterData,
-  getInputLegalLength,
-  getInputLegalType,
-} from "@entities/wallet";
-import { CustomInput } from "@shared/ui";
+import { CustomInput, IBlockData, IParameterData } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { getInputLegalLength, getInputLegalType } from "@entities/wallet";
 
 interface LegalFormProps {
   data: IBlockData;
   register?: any;
   inputError?: any;
   isRow?: boolean;
+  disabled?: boolean;
 }
 
-export const LegalForm: FC<LegalFormProps> = ({
+export const CustomBlockData: FC<LegalFormProps> = ({
   data,
   register,
   inputError,
   isRow,
+  disabled = false,
 }) => {
   const { t } = useTranslation();
 
   return (
     <div className={styles.wrapper}>
-      <p className={styles.title}>{t(data.title)}</p>
+      {data?.title && <p className={styles.title}>{t(data?.title)}</p>}
       <div className={styles.parameters}>
         {data.parameters.map((row, index) => {
           const newValidate = {
@@ -47,7 +44,7 @@ export const LegalForm: FC<LegalFormProps> = ({
               placeholder={row_dict.default_value}
               {...register(row.type, newValidate)}
               type={getInputLegalType(row.type)}
-              // disabled
+              disabled={disabled}
               onInput={(e) => {
                 if (
                   e.currentTarget.value.length > getInputLegalLength(row.type)

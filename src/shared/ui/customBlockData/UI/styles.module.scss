@@ -1,0 +1,23 @@
+.wrapper {
+  display: grid;
+  grid-auto-flow: row;
+  align-items: center;
+  row-gap: 20px;
+
+  .title {
+    color: var(--Personal-colors-black);
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-align: center;
+  }
+}
+
+.parameters {
+  display: grid;
+  grid-auto-flow: row;
+  align-items: center;
+  text-align: center;
+  row-gap: 15px;
+}

@@ -1,9 +1,10 @@
+import { legalData } from "@shared/config";
+import { IBlockData } from "@shared/ui";
 import {
   formatCardDate,
   formatFullDate,
   formatToNumber,
   formatToPhoneNumber,
-  formatWithOutSpaces,
   isValidAccount,
   isValidCardDate,
   isValidEmail,
@@ -13,10 +14,42 @@ import {
   isValidPhoneNumber,
   isValidPNFL,
 } from "@shared/utils";
-import { IBlockData, IRowData } from "../types";
-import { topup } from "./config";
-import { TFunction } from "i18next";
-import { legalData } from "@shared/config";
+
+export const ADD_SELF_EMPLOYED_DATA: IBlockData = {
+  parameters: [
+    {
+      label: "add_organization.basic_info.PNFL",
+      type: legalData.PNFL,
+      validate: {
+        required: "add_organization.basic_info.PNFL.error.required",
+        validate: {
+          valid: (value: string) =>
+            isValidPNFL(value) ||
+            "add_organization.basic_info.PNFL.error.required",
+        },
+        onChange: formatToNumber,
+      },
+    },
+  ],
+};
+
+export const ADD_LEGAL_DATA: IBlockData = {
+  parameters: [
+    {
+      label: "add_organization.basic_info.INN",
+      type: legalData.INN,
+      validate: {
+        required: "add_organization.basic_info.INN.error.required",
+        validate: {
+          valid: (value: string) =>
+            isValidINN(value) ||
+            "add_organization.basic_info.INN.error.required",
+        },
+        onChange: formatToNumber,
+      },
+    },
+  ],
+};
 
 export const selfEmployed: IBlockData = {
   title: "add_profile.basic_info.basic_info",
@@ -44,18 +77,6 @@ export const selfEmployed: IBlockData = {
             "add_profile.basic_info.registration_date.error.required",
         },
         onChange: formatFullDate,
-      },
-    },
-    {
-      label: "add_profile.basic_info.PNFL",
-      type: legalData.PNFL,
-      validate: {
-        required: "add_profile.basic_info.PNFL.error.required",
-        validate: {
-          valid: (value: string) =>
-            isValidPNFL(value) || "add_profile.basic_info.PNFL.error.required",
-        },
-        onChange: formatToNumber,
       },
     },
   ],
@@ -245,23 +266,6 @@ export const contact: IBlockData = {
   ],
 };
 
-export const TOP_UP_AMOUNT = (t: TFunction) => ({
-  required: t("wallet.topup.required"),
-  validate: {
-    min: (value: string) =>
-      Number(formatWithOutSpaces(value)) >= topup.min ||
-      `${t("wallet.topup.min")} - ${topup.min.toLocaleString()} ${t("symbol")}`,
+export const SELF_EMPLOYED_DATA = [selfEmployed, bank, contact];
 
-    max: (value: string) =>
-      Number(formatWithOutSpaces(value)) <= topup.max ||
-      `${t("wallet.topup.max")} - ${topup.max.toLocaleString()} ${t("symbol")}`,
-  },
-});
-
-export const SelfEmployedData = [selfEmployed, bank, contact];
-
-export const SelfEmployedCardData = [selfEmployed, bankCard, contact];
-
-export const EntityData = [entity, bank, contact];
-
-export const IndividualData = [individual, bank, contact];
+export const LEGAL_DATA = [entity, bank, contact];

@@ -81,6 +81,7 @@ export { RocketIcon } from "./rocket";
 export { RoundIcon } from "./roundIcon";
 export { SearchIcon } from "./search";
 export { SendIcon } from "./send";
+export { SirenIcon } from "./siren";
 export { SadSmileIcon } from "./sadSmile";
 export { Spline } from "./spline";
 export { Spline2 } from "./spline2";
