@@ -170,6 +170,21 @@
     "base": "Knowledge base"
   },
 
+  "wallets": {
+    "title": "Total Balance",
+
+    "deposit": {
+      "title": "Deposit",
+      "description": "Current balance"
+    },
+
+    "profit": {
+      "title": "Profit",
+      "description": "Current balance"
+    }
+  },
+
+
   "more_less": {
     "more": "More",
     "less": "Less"

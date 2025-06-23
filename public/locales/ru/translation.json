@@ -171,6 +171,20 @@
     "base": "База знаний"
   },
 
+  "wallets": {
+    "title": "Общий баланс",
+
+    "deposit": {
+      "title": "Депозит",
+      "description": "Текущий баланс"
+    },
+
+    "profit": {
+      "title": "Прибыль",
+      "description": "Текущий баланс"
+    }
+  },
+
   "more_less": {
     "more": "Больше",
     "less": "Меньше"

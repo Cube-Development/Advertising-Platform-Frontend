@@ -170,6 +170,20 @@
     "base": "Bilimlar bazasi"
   },
 
+  "wallets": {
+    "title": "Umumiy balans",
+
+    "deposit": {
+      "title": "Depozit",
+      "description": "Joriy balans"
+    },
+
+    "profit": {
+      "title": "Foyda",
+      "description": "Joriy balans"
+    }
+  },
+
   "more_less": {
     "more": "Ko'proq",
     "less": "Kamroq"

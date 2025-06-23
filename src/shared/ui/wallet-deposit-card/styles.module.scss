@@ -1,0 +1,70 @@
+.wrapper {
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 15px;
+  padding: 20px 10px;
+
+  border-radius: 24px;
+  background: radial-gradient(
+    138.68% 1238.17% at 0.76% 3.12%,
+    rgba(142, 84, 233, 0.41) 0%,
+    #4772e6 87.75%
+  );
+  backdrop-filter: blur(21px);
+
+  .header {
+    display: grid;
+    padding: 8px 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    background: radial-gradient(
+      100% 100% at 0% 50%,
+      rgba(255, 255, 255, 0.8) 0%,
+      rgba(255, 255, 255, 0.6) 100%
+    );
+    box-shadow:
+      0px 4px 4px 0px rgba(255, 255, 255, 0.21) inset,
+      0px 0px 68px 0px rgba(255, 255, 255, 0.14) inset;
+    backdrop-filter: blur(20px);
+    justify-self: start;
+
+    .title {
+      font-size: 8px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 1;
+
+      background: var(
+        --Gradients-Gradient-1,
+        linear-gradient(45deg, #4772e6 23.91%, #8e54e9 75.06%)
+      );
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+  }
+
+  .amount {
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 8px;
+
+    .description {
+      font-size: 8px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      color: var(--Personal-colors-White, #fff);
+    }
+
+    .value {
+      color: var(--Personal-colors-White, #fff);
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
+    }
+  }
+}

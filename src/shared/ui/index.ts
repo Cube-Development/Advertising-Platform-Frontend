@@ -24,3 +24,5 @@ export * from "./infoTooltip";
 export * from "./multiSelect";
 export * from "./customCheckbox";
 export * from "./customInput";
+export * from "./wallet-deposit-card";
+export * from "./wallet-profit-card";
