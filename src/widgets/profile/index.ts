@@ -1,1 +1,1 @@
-export * from "./settingsProfile";
+export * from "./settings-profile";

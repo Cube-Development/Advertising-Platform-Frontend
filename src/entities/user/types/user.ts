@@ -1,5 +1,6 @@
 import { ENUM_LANGUAGES_NUM } from "@shared/languages";
 import { ENUM_ROLES } from "../config";
+import { IPasswordData } from "./password";
 
 export interface IUser {
   id: string;
@@ -36,12 +37,6 @@ export interface IEmailData {
   password: string;
 }
 
-export interface IPasswordData {
-  current_password: string;
-  new_password: string;
-  accept_password?: string;
-}
-
 export interface IEventsData {
   user_events: IEventsInfo;
 }
@@ -56,4 +51,28 @@ export interface IProfileData extends IUserData, IPasswordData, IEventsData {
   id?: string;
   created: string;
   telegram?: string;
+}
+
+export enum ENUM_ORGANIZATION_TYPE {
+  SELF_EMPLOYED = "SelfEmployed",
+  INDIVIDUAL_ENTITY = "IndividualEntity",
+  LEGAL_ENTITY = "LegalEntity",
+}
+
+export enum ENUM_ORGANIZATION_STATUS {
+  NOT_APPROVED = 0,
+  APPROVED = 1,
+}
+
+export interface IUserDataNew {
+  email: string;
+  phone: string;
+  name: string;
+  registrationDate: string;
+  organization: {
+    type: ENUM_ORGANIZATION_TYPE;
+    inn?: string;
+    pinfl?: string;
+    status: ENUM_ORGANIZATION_STATUS;
+  };
 }

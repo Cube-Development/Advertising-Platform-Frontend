@@ -90,7 +90,7 @@ export { StarIcon4 } from "./star4";
 export { StarIcon5 } from "./star5";
 export { SubsIcon } from "./subs";
 export { TelegramIcon } from "./telegram";
-export { TelegramJetlIcon } from "./telegramJet";
+export { TelegramJetIcon } from "./telegramJet";
 export { TechnicalSpecificationIcon } from "./technicalSpecification";
 export { TemplateIcon } from "./template";
 export { TemplateIcon2 } from "./template2";

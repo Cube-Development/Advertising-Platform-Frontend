@@ -2,16 +2,10 @@
   display: grid;
   grid-auto-flow: row;
   row-gap: 30px;
-  padding: 24px 32px;
   justify-content: center;
   align-items: center;
   max-width: 700px;
   justify-self: center;
-
-  border-radius: 24px;
-  border: 0.2px solid #e9eaeb;
-  background: #fff;
-  box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.1);
 
   .title {
     color: var(--Personal-colors-black, #000);

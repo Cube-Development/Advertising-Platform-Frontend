@@ -1,0 +1,106 @@
+.wrapper {
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 50px;
+
+  @media (max-width: 576px) {
+    row-gap: 20px;
+  }
+
+  .block {
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 30px;
+
+    @media (max-width: 576px) {
+      row-gap: 20px;
+    }
+
+    .top {
+      display: grid;
+      grid-auto-flow: column;
+      justify-content: space-between;
+      column-gap: 10px;
+      align-items: center;
+      align-content: center;
+
+      p {
+        color: var(--Personal-colors-black, #000);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: 1;
+
+        @media (max-width: 576px) {
+          font-size: 12px;
+        }
+      }
+
+      button {
+        color: rgba(0, 0, 0, 0.7);
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        text-decoration-line: underline;
+        text-decoration-style: solid;
+        text-decoration-skip-ink: auto;
+        text-decoration-thickness: auto;
+        text-underline-offset: auto;
+        text-underline-position: from-font;
+      }
+    }
+
+    .data {
+      display: grid;
+      grid-template: repeat(2, 1fr) / repeat(2, 1fr);
+      column-gap: 10px;
+      row-gap: 25px;
+
+      .row {
+        display: grid;
+        grid-auto-flow: row;
+        row-gap: 15px;
+
+        .label {
+          color: #757575;
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 1;
+        }
+
+        .value {
+          color: var(--Personal-colors-black, #000);
+          font-size: 12px;
+          font-style: normal;
+          font-weight: 500;
+          line-height: 1;
+
+          &.approved {
+            color: #48d23c;
+          }
+
+          &.not_approved {
+            color: #ff0000;
+          }
+        }
+
+        @media (max-width: 576px) {
+          row-gap: 10px;
+
+          .label,
+          .value {
+            font-size: 10px;
+          }
+        }
+      }
+
+      @media (max-width: 576px) {
+        grid-template: unset;
+        grid-auto-flow: row;
+        row-gap: 20px;
+      }
+    }
+  }
+}

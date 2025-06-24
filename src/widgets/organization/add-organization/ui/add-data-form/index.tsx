@@ -6,7 +6,7 @@ import {
   SELF_EMPLOYED_DATA,
 } from "@entities/organization";
 import { PROFILE_TYPE } from "@entities/wallet";
-import { AccountsLoader, CustomBlockData, MyButton } from "@shared/ui";
+import { AccountsLoader, cn, CustomBlockData, MyButton } from "@shared/ui";
 import { ArrowRight } from "lucide-react";
 import { FC, useMemo } from "react";
 import { useTranslation } from "react-i18next";
@@ -45,7 +45,7 @@ export const AddDataForm: FC<IAddDataFormProps> = ({
   }, [profileFilter?.type, step]);
 
   return (
-    <form className={styles.wrapper} onSubmit={onSubmit}>
+    <form className={cn("frame", styles.wrapper)} onSubmit={onSubmit}>
       <p className={styles.title}>{t("add_organization.add_form.title")}</p>
       <CustomBlockData
         key={"add_data_form"}

@@ -28,6 +28,7 @@ import {
   IManagerNewProjects,
   IManagerProjects,
 } from "@entities/project";
+import { IUserDataNew } from "@entities/user";
 
 export const viewsAdvProjects = {
   count: 29,
@@ -173,4 +174,16 @@ export const MOCK_ADD_LEGAL = {
   bank_mfo: 55555,
   phone: "998936285130",
   email: "iswift977@gmail.com",
+};
+
+export const MOCK_PROFILE = {
+  email: "sample@gmail.com",
+  phone: "+998901234567",
+  name: "Иван Петров",
+  registrationDate: "22.02.2024",
+  organization: {
+    type: "SelfEmployed",
+    pinfl: "12345678901234",
+    status: 1,
+  },
 };

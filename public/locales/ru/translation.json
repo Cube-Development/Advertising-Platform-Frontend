@@ -1039,6 +1039,14 @@
   
   "profile": {
     "title": "Настройка профиля",
+    "navigation": {
+      "user_data": "Данные пользователя",
+      "change_password": "Изменить пароль",
+      "change_notifications": "Настройки уведомлений"
+    },
+
+    "back": "Назад",
+
     "account_block": {
       "title": "Аккаунт",
       "date": "Дата регистрации",
@@ -1068,6 +1076,39 @@
       },
       "save_btn": "Сохранить изменения"
     },
+
+    "user_block": {
+      "user_data": {
+        "title": "Персональные данные",
+        "fields": {
+          "email": "Почта",
+          "phone": "Номер телефона",
+          "date": "Дата регистрации",
+          "name": "Имя"
+        },
+        "edit": "Редактировать"
+      },
+      "organization_data": {
+        "title": "Данные организации",
+        "fields": {
+          "type": "Тип организации",
+          "inn": "ИНН",
+          "pinfl": "ПИНФЛ",
+          "status": "Статус"
+        },
+        "organization_types": {
+          "self_employed": "Самозанятый",
+          "entity": "Юридическое лицо",
+          "individual": "ИП"
+        },
+        "status_types": {
+          "approved": "Подтвержден",
+          "not_approved": "Не подтвержден"
+        },
+        "edit": "Редактировать"
+      }
+},
+
 
     "email_block": {
       "title": "Изменение E-mail",
@@ -1103,16 +1144,29 @@
       "title": "Изменение пароля",
       "current_password": {
         "title": "Текущий пароль",
-        "default_value": "Sample@gmail.com"
+        "default_value": "Sample@gmail.com",
+        "description": "Введите текущий пароль для подтверждения изменений",
+        "error": {
+          "required": "поле не может быть пустым"
+        }
       },
       "new_password": {
         "title": "Новый пароль",
-        "default_value": "Sample@gmail.com"
+        "default_value": "Sample@gmail.com",
+        "description": "Введите новый пароль, который будет использоваться для входа в аккаунт. Пароль должен быть надежным и содержать не менее 8 символов, включая буквы и цифры.",
+        "error": {
+          "required": "поле не может быть пустым"
+        }
       },
       "accept_password": {
         "title": "Подтверждение нового пароля",
-        "default_value": "Sample@gmail.com"
+        "default_value": "Sample@gmail.com",
+        "description": "Введите новый пароль еще раз для подтверждения. Убедитесь, что оба введенных пароля совпадают.",
+        "error": {
+          "required": "поле не может быть пустым"
+        }
       },
+
       "change_btn": "Изменить пароль"
     },
     "notification_block": {
