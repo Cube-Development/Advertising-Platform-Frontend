@@ -5,13 +5,17 @@ import { cn } from "../shadcn-ui/lib/utils";
 
 interface Props extends React.HTMLAttributes<HTMLDivElement> {
   amount: number;
+  isActive?: boolean;
 }
 
-export const WalletProfitCard: FC<Props> = ({ amount, ...props }) => {
+export const WalletProfitCard: FC<Props> = ({ amount, isActive, ...props }) => {
   const { t } = useTranslation();
   const { className, ...rest } = props;
   return (
-    <div className={cn(className, styles.wrapper)} {...rest}>
+    <div
+      className={cn(className, styles.wrapper, isActive && styles.active)}
+      {...rest}
+    >
       <div className={styles.header}>
         <p className={styles.title}>{t("wallets.profit.title")}</p>
       </div>

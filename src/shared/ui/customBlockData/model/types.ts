@@ -17,4 +17,5 @@ export interface IParameterData {
   title: string;
   default_value?: string;
   description: string;
+  placeholder?: string;
 }

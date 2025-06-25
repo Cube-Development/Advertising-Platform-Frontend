@@ -246,15 +246,15 @@ export const contact: IBlockData = {
 };
 
 export const TOP_UP_AMOUNT = (t: TFunction) => ({
-  required: t("wallet.topup.required"),
+  required: t("wallet.amount.required"),
   validate: {
     min: (value: string) =>
       Number(formatWithOutSpaces(value)) >= topup.min ||
-      `${t("wallet.topup.min")} - ${topup.min.toLocaleString()} ${t("symbol")}`,
+      `${t("wallet.amount.min")} - ${topup.min.toLocaleString()} ${t("symbol")}`,
 
     max: (value: string) =>
       Number(formatWithOutSpaces(value)) <= topup.max ||
-      `${t("wallet.topup.max")} - ${topup.max.toLocaleString()} ${t("symbol")}`,
+      `${t("wallet.amount.max")} - ${topup.max.toLocaleString()} ${t("symbol")}`,
   },
 });
 

@@ -47,6 +47,7 @@ export { EmailIcon } from "./email";
 export { EyeIcon } from "./eye";
 export { InstagramIcon } from "./instagram";
 export { FileIcon } from "./file";
+export { FileSmileBoldIcon } from "./fileSmileBold";
 export { GirlIcon } from "./girl";
 export { GraphCheckmarkIcon } from "./graphCheckmark";
 export { HandshakeIcon } from "./handshake";
