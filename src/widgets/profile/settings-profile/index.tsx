@@ -72,7 +72,11 @@ export const SettingsProfile: FC = () => {
     <div className="container">
       <div className={styles.wrapper}>
         <div
-          className={cn(styles.title, "gradient_color", isOpen && "opacity-0")}
+          className={cn(
+            styles.title,
+            "gradient_color",
+            isOpen && "opacity-0 md:opacity-100",
+          )}
         >
           <p className="truncate">{t("profile.title")}</p>
         </div>

@@ -1,0 +1,82 @@
+.wrapper {
+  filter: drop-shadow(0px 2px 5px rgba(55, 65, 81, 0.2));
+}
+
+.round {
+  filter: url(#round);
+}
+
+.flag {
+  display: grid;
+  grid-auto-flow: row;
+  align-content: center;
+  row-gap: 10px;
+  padding: 0 25px;
+  height: 60px;
+  cursor: pointer;
+
+  background: rgb(255, 255, 255);
+  clip-path: polygon(95% 0%, 100% 50%, 95% 100%, 0% 100%, 5% 50%, 0% 0%);
+  z-index: 10;
+
+  p {
+    // color: #FFF;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  span {
+    // color: #FFF;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 1;
+  }
+
+  &.active {
+    // background: var(--Gradients-Gradient-1);
+
+    p,
+    span {
+      background: var(--Gradients-Gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: normal;
+    }
+  }
+
+  &.default {
+    p,
+    span {
+      color: var(--Personal-colors-black);
+    }
+  }
+
+  &.completed {
+    background: var(--Gradients-Gradient-1);
+
+    p,
+    span {
+      color: var(--Personal-colors-White);
+    }
+  }
+
+  &.disabled {
+    cursor: no-drop;
+    p,
+    span {
+      color: var(--black-20);
+    }
+  }
+
+  &.start {
+    clip-path: polygon(95% 0%, 100% 50%, 95% 100%, 0% 100%, 0% 50%, 0% 0%);
+  }
+
+  &.end {
+    clip-path: polygon(100% 0%, 100% 50%, 100% 100%, 0% 100%, 5% 50%, 0% 0%);
+  }
+}

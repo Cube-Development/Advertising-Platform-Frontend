@@ -1,18 +1,12 @@
-import {
-  IAddChannelData,
-  IAddChannelDataPreview,
-  useCreateChannelMutation,
-  useEditChannelMutation,
-} from "@entities/channel";
+import { IAddChannelData, IAddChannelDataPreview } from "@entities/channel";
 import { ArrowLongHorizontalIcon } from "@shared/assets";
 import { PAGE_ANIMATION } from "@shared/config";
-import { ENUM_PATHS } from "@shared/routing";
-import { MyButton, ToastAction, useToast } from "@shared/ui";
+import { MyButton } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC } from "react";
 import { SubmitHandler, UseFormHandleSubmit } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useChannelAccept } from "../../../model";
 import styles from "./styles.module.scss";
 
 interface ChannelAcceptProps {
@@ -38,51 +32,13 @@ export const ChannelAccept: FC<ChannelAcceptProps> = ({
   const handleBack = () => {
     onChangeStep(2);
   };
-  const navigate = useNavigate();
-  const { toast } = useToast();
 
-  const [createChannel, { isLoading: isLoadingCreate }] =
-    useCreateChannelMutation();
-  const [editChannel, { isLoading: isLoadingEdit }] = useEditChannelMutation();
+  const { channelAccept } = useChannelAccept({ channel_id, isEdit });
 
   const onSubmit: SubmitHandler<IAddChannelData> = (data) => {
-    if (isEdit) {
-      const { ...editData } = data;
-      !isLoadingEdit &&
-        editChannel({ ...editData, channel_id: channel_id })
-          .unwrap()
-          .then(() => {
-            toast({
-              variant: "success",
-              title: t("toasts.add_platform.edit.success"),
-            });
-          })
-          .catch(() => {
-            toast({
-              variant: "error",
-              title: t("toasts.add_platform.edit.error"),
-              action: <ToastAction altText="Ok">Ok</ToastAction>,
-            });
-          });
-    } else {
-      !isLoadingCreate &&
-        createChannel(data)
-          .unwrap()
-          .then(() => {
-            toast({
-              variant: "success",
-              title: t("toasts.add_platform.create.success"),
-            });
-          })
-          .catch(() => {
-            toast({
-              variant: "error",
-              title: t("toasts.add_platform.create.error"),
-              action: <ToastAction altText="Ok">Ok</ToastAction>,
-            });
-          });
-    }
-    navigate(ENUM_PATHS.MY_CHANNELS);
+    channelAccept(data);
+    onChangeStep(4);
+    // navigate(ENUM_PATHS.MY_CHANNELS);
   };
 
   return (
@@ -118,6 +74,7 @@ export const ChannelAccept: FC<ChannelAcceptProps> = ({
                   target="_blank"
                   rel="noopener noreferrer"
                   href={dataPreview?.link}
+                  className="truncate max-w-[100%]"
                 >
                   {dataPreview?.link}
                 </a>

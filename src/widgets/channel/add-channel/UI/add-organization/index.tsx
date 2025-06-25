@@ -6,18 +6,32 @@ import {
   PROFILE_TYPE,
 } from "@entities/wallet";
 import { BarSubFilter } from "@features/other";
-import { MOCK_ADD_LEGAL, MOCK_ADD_SELF_EMPLOYED } from "@shared/config";
+import {
+  MOCK_ADD_LEGAL,
+  MOCK_ADD_SELF_EMPLOYED,
+  PAGE_ANIMATION,
+} from "@shared/config";
 import { ENUM_PATHS } from "@shared/routing";
 import { useToast } from "@shared/ui";
-import { ScanLine } from "lucide-react";
+import { AddDataForm, NotFoundModal } from "@widgets/organization";
+import { motion } from "framer-motion";
 import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.scss";
-import { AddDataForm, NotFoundModal } from "./ui";
 
-export const AddOrganization: FC = ({}) => {
+interface IAddOrganizationProps {
+  step: number;
+  variant: typeof PAGE_ANIMATION.animationLeft;
+  onChangeStep: (newStep: number) => void;
+}
+
+export const AddOrganization: FC<IAddOrganizationProps> = ({
+  step,
+  variant,
+  onChangeStep,
+}) => {
   const { toast } = useToast();
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -27,7 +41,6 @@ export const AddOrganization: FC = ({}) => {
     reset,
     handleSubmit,
     watch,
-    setValue,
     formState: { errors, isSubmitting },
   } = useForm<ILegalData>({
     defaultValues: {
@@ -82,30 +95,33 @@ export const AddOrganization: FC = ({}) => {
   };
 
   return (
-    <div className="container">
-      <div className={styles.wrapper}>
-        <div className={styles.title}>
-          <p className="truncate">{t("add_organization.title")}</p>
-          <ScanLine />
-        </div>
-        <BarSubFilter
-          tab={formState.profileFilter.type}
-          tab_list={ADD_ORGANIZATION_FILTER_TABS_LIST}
-          changeTab={changeTab}
-        />
-        <AddDataForm
-          formState={formState}
-          register={register}
-          errors={errors}
-          onSubmit={handleSubmit(onSubmit)}
-          isLoading={isSubmitting}
-          step={formStep}
-        />
-        <NotFoundModal
-          type={formState.profileFilter.type}
-          isOpen={isNotFoundModalOpen}
-        />
-      </div>
-    </div>
+    <>
+      {step === 4 && (
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={variant}
+          className={styles.wrapper}
+        >
+          <BarSubFilter
+            tab={formState.profileFilter.type}
+            tab_list={ADD_ORGANIZATION_FILTER_TABS_LIST}
+            changeTab={changeTab}
+          />
+          <AddDataForm
+            formState={formState}
+            register={register}
+            errors={errors}
+            onSubmit={handleSubmit(onSubmit)}
+            isLoading={isSubmitting}
+            step={formStep}
+          />
+          <NotFoundModal
+            type={formState.profileFilter.type}
+            isOpen={isNotFoundModalOpen}
+          />
+        </motion.div>
+      )}
+    </>
   );
 };

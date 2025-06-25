@@ -36,7 +36,14 @@ export const NavigationCard: FC<INavigationCardProps> = ({
             >
               <div>
                 <item.icon size={18} className={styles.icon} />
-                <p className={styles.label}>{t(item.label)}</p>
+                <p
+                  className={cn(
+                    styles.label,
+                    currentTab === item.type && "gradient_color",
+                  )}
+                >
+                  {t(item.label)}
+                </p>
               </div>
             </button>
           ))}

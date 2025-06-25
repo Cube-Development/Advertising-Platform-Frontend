@@ -932,7 +932,8 @@
       "step": "этап",
       "identification": "Идентификация площадки",
       "description": "Описание площадки",
-      "accept": "Подтверждение"
+      "accept": "Подтверждение данных",
+      "organization": "Добавление организации"
     },
     "identification": {
       "info": {

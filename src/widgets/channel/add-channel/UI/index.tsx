@@ -15,10 +15,11 @@ import { QueryParams } from "@shared/utils";
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { scroller } from "react-scroll";
-import { ChannelAccept } from "./channelAccept";
-import { ChannelDescription } from "./channelDescription";
-import { ChannelIdentification } from "./channelIdentification";
-import { ChannelTop } from "./channelTop";
+import { AddOrganization } from "./add-organization";
+import { ChannelAccept } from "./channel-accept";
+import { ChannelDescription } from "./channel-description";
+import { ChannelIdentification } from "./channel-identification";
+import { ChannelStepTabs } from "./channel-steps-bar";
 import styles from "./styles.module.scss";
 
 interface AddChannelBlockProps {}
@@ -145,7 +146,7 @@ export const AddChannelBlock: FC<AddChannelBlockProps> = () => {
   return (
     <div className="container" style={{ minHeight: "100vh" }}>
       <div className={styles.wrapper} id="add_channel_top">
-        <ChannelTop
+        <ChannelStepTabs
           channel_id={channel_id!}
           step={currentStep}
           onChangeStep={handleOnChangeStep}
@@ -178,6 +179,11 @@ export const AddChannelBlock: FC<AddChannelBlockProps> = () => {
           handleSubmit={handleSubmit}
           channel_id={channel_id || ""}
           isEdit={!!channel}
+        />
+        <AddOrganization
+          onChangeStep={handleOnChangeStep}
+          step={currentStep.step}
+          variant={currentVariant}
         />
       </div>
     </div>
