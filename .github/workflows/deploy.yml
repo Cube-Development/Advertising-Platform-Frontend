@@ -27,11 +27,6 @@ jobs:
       - name: Install Dependencies
         run: npm install --force
 
-      - name: Debug secrets
-        run: |
-          echo "User: ${{ secrets.DOCKERHUB_USERNAME }}"
-          echo "Pass length:  ${{ secrets.DOCKERHUB_PASSWORD }}"
-
       - name: Log in to Docker Hub
         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
