@@ -61,7 +61,7 @@
   .flags__wrapper {
     display: grid;
     grid-auto-flow: column;
-    grid-template: 1fr / 1fr 1fr 1fr;
+    grid-template: 1fr / repeat(4, 1fr);
   }
 }
 
