@@ -26,17 +26,6 @@
     transform: translateY(0);
   }
 
-  &.not_auth {
-    grid-template: unset;
-
-    .header {
-      @media (min-width: 1401px) {
-        max-width: 1400px;
-        margin: 0 auto;
-      }
-    }
-  }
-
   @media (max-width: 992px) {
     height: var(--header-height-lg);
     grid-template: 1fr / var(--header-height-lg) auto;
