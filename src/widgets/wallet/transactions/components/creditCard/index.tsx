@@ -7,7 +7,14 @@ import {
 import { PaymentCard } from "@features/wallet";
 import { CardIcon } from "@shared/assets";
 import { ENUM_PATHS } from "@shared/routing";
-import { CustomCheckbox, CustomInput, ToastAction, useToast } from "@shared/ui";
+import {
+  cn,
+  CustomCheckbox,
+  CustomInput,
+  IParameterData,
+  ToastAction,
+  useToast,
+} from "@shared/ui";
 import {
   formatWithOutSpaces,
   formatWithSpaces,
@@ -87,9 +94,16 @@ export const CreditCard: FC = () => {
         });
   };
 
+  const amountText = t("wallet.topup.amount", {
+    returnObjects: true,
+  }) as IParameterData;
+
   return (
     <div className={styles.card}>
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className={cn(styles.form, "frame")}
+      >
         <div className={styles.icon}>
           <CardIcon />
         </div>
@@ -114,13 +128,13 @@ export const CreditCard: FC = () => {
             </div>
           </div>
           <div className={styles.amount}>
-            <p className={styles.label}>{t("wallet.topup.amount")}</p>
             <CustomInput
               {...register("amount", { ...TOP_UP_AMOUNT(t) })}
               maxLength={12}
-              placeholder={t("wallet.topup.placeholder")}
+              label={amountText?.title}
+              information={amountText?.description}
+              placeholder={amountText?.placeholder}
               value={formatWithSpaces(formState?.amount)}
-              // onChange={handleOnAmountChange}
               error={errors?.amount}
               error_message={errors?.amount?.message}
             />

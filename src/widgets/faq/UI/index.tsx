@@ -1,4 +1,4 @@
-import { Accordion } from "@shared/ui";
+import { Accordion, CustomTitle } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -32,9 +32,8 @@ export const FAQ: FC = () => {
           whileInView="visible"
           viewport={PAGE_ANIMATION.viewport}
           variants={PAGE_ANIMATION.animationVision}
-          className={styles.title}
         >
-          {t("faq.page_title")}
+          <CustomTitle title={t("faq.page_title")} variant="primary" />
         </motion.h1>
         <div className={styles.information__wrapper}>
           {data.map((item, index) => {

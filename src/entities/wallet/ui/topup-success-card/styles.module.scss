@@ -1,0 +1,44 @@
+.wrapper {
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 20px;
+  color: var(--Personal-colors-black, #000);
+  text-align: center;
+
+  p {
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+  }
+
+  span {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+  }
+
+  @media (min-width: 993px) {
+    padding: 50px !important;
+  }
+  @media (max-width: 768px) {
+    p {
+      font-size: 16px;
+    }
+
+    span {
+      font-size: 14px;
+    }
+  }
+  @media (max-width: 576px) {
+    row-gap: 15px;
+    p {
+      font-size: 12px;
+    }
+
+    span {
+      font-size: 10px;
+    }
+  }
+}

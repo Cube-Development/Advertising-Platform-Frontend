@@ -1,0 +1,29 @@
+.wrapper {
+  display: flex;
+  padding: 20px 24px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 12px;
+  border: 1px solid #fec84b;
+  background: #fef0c7;
+
+  p {
+    color: #000;
+    font-family: "TT Runs Trial";
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-align: justify;
+
+    a {
+      color: #4498ff;
+      text-decoration-line: underline;
+      text-decoration-style: solid;
+      text-decoration-skip-ink: none;
+      text-decoration-thickness: auto;
+      text-underline-offset: auto;
+      text-underline-position: from-font;
+    }
+  }
+}

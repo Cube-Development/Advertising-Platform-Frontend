@@ -170,6 +170,21 @@
     "base": "Knowledge base"
   },
 
+  "wallets": {
+    "title": "Total Balance",
+
+    "deposit": {
+      "title": "Deposit",
+      "description": "Current balance"
+    },
+
+    "profit": {
+      "title": "Profit",
+      "description": "Current balance"
+    }
+  },
+
+
   "more_less": {
     "more": "More",
     "less": "Less"
@@ -468,35 +483,25 @@
         "type": "self",
         "title": "Self-placement",
         "stages": [
-          { "stage": "Labor-intensive constant search for advertisers" },
-          {
-            "stage": "Unpredictable income, as advertiser traffic is limited by your capabilities"
-          },
-          { "stage": "Low payment guarantee" },
-          {
-            "stage": "No automation of processes at all stages of the transaction"
-          },
-          {
-            "stage": "Time wasted on advertisers who ultimately won't buy"
-          }
+          { "stage": "Find suitable platforms manually" },
+          { "stage": "Check each platform for fake audience and quality" },
+          { "stage": "Find out the price, terms, and available times from admins" },
+          { "stage": "Pay each admin separately for placement without any guarantees" },
+          { "stage": "Send the advertising post to each admin" },
+          { "stage": "Track the placement of the post on each platform separately" }
         ]
       },
       {
         "type": "vencom",
         "title": "Placement with Blogix",
         "stages": [
-          { "stage": "A constant flow of major advertisers" },
-          { "stage": "Guaranteed payment" },
-          {
-            "stage": "Effective advertiser filtering—only those who have already paid will reach you"
-          },
-          {
-            "stage": "Eliminating the need to communicate with scammers pretending to be advertisers"
-          },
-          { "stage": "Automation of all transaction processes" },
-          {
-            "stage": "Significant increase in the profitability of your channel"
-          }
+          { "stage": "Register an account on the platform" },
+          { "stage": "Select suitable platforms in a few clicks or choose turnkey launch" },
+          { "stage": "Top up your balance conveniently" },
+          { "stage": "Upload a post or generate everything using AI" },
+          { "stage": "Launch advertising in all selected platforms in one click" },
+          { "stage": "Receive notifications about each placement" },
+          { "stage": "The platform guarantees the safety of your funds until all placement conditions are met" }
         ],
         "save": "Save time and money"
       }
@@ -917,7 +922,8 @@
       "step": "Step",
       "identification": "Channel Identification",
       "description": "Channel Description",
-      "accept": "Confirmation"
+      "accept": "Confirmation",
+      "organization": "Add organization"
     },
     "identification": {
       "info": {
@@ -1123,6 +1129,28 @@
         "cancel_btn": "Cancel"
       },
       "continue_btn": "Continue"
+    },
+    "navigation": {
+      "user_data": "User data",
+      "change_password": "Change password",
+      "change_notifications": "Notification settings"
+    },
+    "back": "Back",
+    "user_block": {
+      "user_data": {
+        "title": "Personal data",
+        "fields": {
+          "email": "Email",
+          "phone": "Phone number",
+          "date": "Registration date"
+        }
+      },
+      "change_password": {
+        "title": "Change password"
+      },
+      "change_notifications": {
+        "title": "Notification settings"
+      }
     }
   },
 
@@ -1771,7 +1799,7 @@
         "title": "Purchase completed",
         "info": "Purchase completed!",
         "text": "Your order has already been accepted for processing. You can track the status of your project in your personal account under the tab ",
-        "project": "“Projects with managers”",
+        "project": "Projects with managers",
         "help": {
           "text1": "If you need help, contact",
           "text2": " technical support"
@@ -2534,6 +2562,10 @@
           "ok": "Ok"
         }
       }
+    },
+    "home": {
+      "title": "Welcome to the admin panel!",
+      "description": "Here you can manage users, channels, and platform content."
     }
   },
 
@@ -2562,5 +2594,20 @@
   "not_found": {
     "description": "Page not found",
     "home_link": "Go back to home"
+  },
+  "add_organization": {
+    "title": "Add organization",
+    "fields": {
+      "name": "Organization name",
+      "inn": "Taxpayer Identification Number (INN)",
+      "address": "Legal address",
+      "director": "Director's full name",
+      "phone": "Phone number",
+      "email": "Email"
+    },
+    "actions": {
+      "save": "Save",
+      "cancel": "Cancel"
+    }
   }
 }

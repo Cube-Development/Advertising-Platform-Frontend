@@ -11,8 +11,8 @@ import {
   useCreateLegalMutation,
 } from "@entities/wallet";
 import { BarSubFilter } from "@features/other";
-import { BarSubrofileFilter, CreateLegal, LegalForm } from "@features/wallet";
-import { CustomCheckbox, useToast } from "@shared/ui";
+import { BarSubrofileFilter, CreateLegal } from "@features/wallet";
+import { CustomBlockData, CustomCheckbox, useToast } from "@shared/ui";
 import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -108,7 +108,7 @@ export const AddLegalForm: FC = () => {
               />
             )}
             {typeLegal.map((block, index) => (
-              <LegalForm
+              <CustomBlockData
                 inputError={errors}
                 data={block}
                 register={register}

@@ -40,9 +40,9 @@ export const Header: FC = () => {
 
   return (
     <header
-      className={`${styles.wrapper} ${!isAuth && styles.not_auth} ${isScrollingUp || lastScrollY === 0 ? styles.visible : styles.hidden}`}
+      className={`${styles.wrapper} ${isScrollingUp || lastScrollY === 0 ? styles.visible : styles.hidden}`}
     >
-      {isAuth && screen > BREAKPOINT.MD && (
+      {screen > BREAKPOINT.MD && (
         <div className={styles.dropdown}>
           <DropdownMenu />
         </div>

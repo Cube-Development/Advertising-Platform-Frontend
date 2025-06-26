@@ -1,4 +1,5 @@
 import {
+  ENUM_WALLETS_TYPE,
   IExtendedProfileData,
   ILegalCard,
   ILegalCardShort,
@@ -12,19 +13,23 @@ import {
   usePaymentWithdrawalMutation,
   useReadLegalsByTypeQuery,
   useReadOneLegalMutation,
+  WithdrawSuccessCard,
 } from "@entities/wallet";
-import { BarSubFilter } from "@features/other";
-import { BarSubrofileFilter } from "@features/wallet";
 import { ArrowIcon5 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
-import { useClearCookiesOnPage, useWindowWidth } from "@shared/hooks";
+import {
+  useAppSelector,
+  useClearCookiesOnPage,
+  useWindowWidth,
+} from "@shared/hooks";
 import { ENUM_PATHS } from "@shared/routing";
-import { ToastAction, useToast } from "@shared/ui";
-import { FC, useState } from "react";
+import { CustomTitle, ToastAction, useToast } from "@shared/ui";
+import { WalletsBar } from "@widgets/wallet";
+import { FC, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { Guide, LegalsList, PaymentData } from "../../components";
+import { Guide, PaymentData } from "../../components";
 import styles from "./styles.module.scss";
 
 export const Withdrawal: FC = () => {
@@ -46,13 +51,13 @@ export const Withdrawal: FC = () => {
   } = useForm<IExtendedProfileData>({
     defaultValues: {
       profileFilter: {
-        type: PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT,
-        id: PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT,
+        type: PROFILE_TYPE.ENTITIES,
+        id: PROFILE_STATUS.ENTITIES,
       },
-      subprofileFilter: {
-        type: SUBPROFILE_TYPE.ACCOUNT,
-        id: PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT,
-      },
+      // subprofileFilter: {
+      //   type: SUBPROFILE_TYPE.ACCOUNT,
+      //   id: PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT,
+      // },
     },
   });
   const formState = watch();
@@ -79,7 +84,7 @@ export const Withdrawal: FC = () => {
 
   const [readOneLegal, { isLoading: isOneLegalLoading, error: oneLegalError }] =
     useReadOneLegalMutation();
-  const [paymentWithdrawal, { isLoading: isPaymentLoading }] =
+  const [paymentWithdrawal, { isLoading: isPaymentLoading, isSuccess }] =
     usePaymentWithdrawalMutation();
   const [createLegal, { isLoading: isCreateLoading }] =
     useCreateLegalMutation();
@@ -112,6 +117,11 @@ export const Withdrawal: FC = () => {
           });
     }
   };
+
+  useEffect(() => {
+    if (!legalsByType?.length) return;
+    changeActiveAccount(legalsByType?.[0]);
+  }, [legalsByType]);
 
   const onSubmit: SubmitHandler<IExtendedProfileData> = async (formData) => {
     const dataWithLegalType = {
@@ -276,27 +286,38 @@ export const Withdrawal: FC = () => {
         });
   };
 
+  const [walletType, setWalletType] = useState<ENUM_WALLETS_TYPE>(
+    ENUM_WALLETS_TYPE.DEPOSIT,
+  );
   return (
     <div className="container">
       <div className={styles.wrapper}>
-        <div className={styles.title}>
-          <p>{t("wallet.withdraw.title")}</p>
-          <ArrowIcon5 />
-        </div>
-        <BarSubFilter
+        {isSuccess ? (
+          <WithdrawSuccessCard />
+        ) : (
+          <>
+            <CustomTitle
+              title={t("wallet.withdraw.title")}
+              icon={<ArrowIcon5 />}
+            />
+            {/* <BarSubFilter
           tab={formState.profileFilter.type}
           tab_list={PROFILE_FILTER_TABS_LIST}
           changeTab={changeTab}
           resetValues={resetValues}
-        />
-        <div className={styles.form__wrapper}>
-          {screen < BREAKPOINT.MD && (
-            <Guide profileFilter={formState.profileFilter} />
-          )}
-          <div className={styles.top}>
+        /> */}
+            <div className={styles.form__wrapper}>
+              {screen < BREAKPOINT.MD && (
+                <Guide profileFilter={formState.profileFilter} />
+              )}
+              {/* <div className={styles.top}>
             <p>{t("wallet.withdraw.offer")}</p>
-          </div>
-          {formState.profileFilter.type ===
+          </div> */}
+              <WalletsBar
+                walletType={walletType}
+                setWalletType={setWalletType}
+              />
+              {/* {formState.profileFilter.type ===
             PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT && (
             <BarSubrofileFilter
               resetActiveAccount={setActiveAccount}
@@ -307,8 +328,8 @@ export const Withdrawal: FC = () => {
                 id: PROFILE_STATUS;
               }) => setValue("subprofileFilter", subprofile)}
             />
-          )}
-          {screen < BREAKPOINT.LG && (
+          )} */}
+              {/* {screen < BREAKPOINT.LG && (
             <LegalsList
               accounts={legalsByType}
               changeActiveAccount={changeActiveAccount}
@@ -318,26 +339,26 @@ export const Withdrawal: FC = () => {
               readLegalsError={readLegalsError}
               oneLegalError={oneLegalError}
             />
-          )}
-          <div className={styles.content}>
-            <PaymentData
-              amountTitle={t("wallet.withdraw.amount")}
-              profileFilter={formState.profileFilter}
-              subprofileFilter={formState.subprofileFilter}
-              errors={errors}
-              setValue={setValue}
-              formState={formState}
-              isSubmitted={isSubmitted}
-              onSubmit={onSubmit}
-              register={register}
-              handleSubmit={handleSubmit}
-              isPaymentLoading={
-                isCreateLoading || isEditLoading || isPaymentLoading
-              }
-            />
-            <div>
-              <div className={styles.content__right}>
-                {screen >= BREAKPOINT.LG && (
+          )} */}
+              <div className={styles.content}>
+                <PaymentData
+                  amountTitle={"wallet.withdraw.amount"}
+                  profileFilter={formState.profileFilter}
+                  subprofileFilter={formState.subprofileFilter}
+                  errors={errors}
+                  setValue={setValue}
+                  formState={formState}
+                  onSubmit={onSubmit}
+                  register={register}
+                  handleSubmit={handleSubmit}
+                  isPaymentLoading={
+                    isCreateLoading || isEditLoading || isPaymentLoading
+                  }
+                  walletType={walletType}
+                />
+                <div>
+                  <div className={styles.content__right}>
+                    {/* {screen >= BREAKPOINT.LG && (
                   <LegalsList
                     accounts={legalsByType}
                     changeActiveAccount={changeActiveAccount}
@@ -346,15 +367,17 @@ export const Withdrawal: FC = () => {
                     isOneLegalLoading={isOneLegalLoading}
                     readLegalsError={readLegalsError}
                     oneLegalError={oneLegalError}
-                  />
-                )}
-                {screen >= BREAKPOINT.MD && (
-                  <Guide profileFilter={formState.profileFilter} />
-                )}
+                    />
+                )} */}
+                    {screen >= BREAKPOINT.MD && (
+                      <Guide profileFilter={formState.profileFilter} />
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-        </div>
+          </>
+        )}
       </div>
     </div>
   );

@@ -1,84 +1,42 @@
 .wrapper {
   display: grid;
   grid-auto-flow: row;
-  row-gap: 20px;
-  padding: 20px 20px 30px 20px;
-  border-radius: 30px;
-  box-shadow: 0px 2px 10px 1px rgba(142, 84, 233, 0.3);
+  row-gap: 10px;
+  padding: 12px;
 
-  .wallet_main {
+  border-radius: 36px;
+  border: 0.2px solid rgba(0, 0, 0, 0.1);
+  background: #fff;
+  box-shadow: 0px 6px 10px 0px rgba(0, 0, 0, 0.1);
+
+  .header {
     display: grid;
-    grid-auto-flow: row;
-    row-gap: 10px;
-    background: var(--Gradients-Gradient-1);
+    grid-auto-flow: column;
+    column-gap: 10px;
+    align-items: center;
+    justify-content: space-between;
     padding: 20px;
-    border-radius: 20px;
 
     .title {
-      display: grid;
-      grid-template-columns: max-content 1fr;
-      align-content: center;
-      align-items: center;
-      column-gap: 10px;
-    }
-
-    .label {
-      color: var(--Personal-colors-White);
-      font-size: 16px;
-      font-weight: 500;
-      line-height: 1;
+      color: var(--Personal-colors-black, #000);
+      font-size: 12px;
       font-style: normal;
-    }
-    .value {
-      font-size: 20px;
       font-weight: 600;
-      line-height: 1;
-      font-style: normal;
-      color: var(--Personal-colors-White);
+      line-height: normal;
+    }
 
-      span {
-        font-size: 16px;
-        font-weight: 500;
-        line-height: 1;
-        font-style: normal;
-      }
+    .amount {
+      color: var(--Personal-colors-black, #000);
+      font-size: 16px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: normal;
     }
   }
 
-  .wallet_sub {
+  .cards {
     display: grid;
-    grid-auto-flow: row;
-    row-gap: 10px;
-
-    .wallet_sub__item {
-      display: grid;
-      grid-auto-flow: column;
-      column-gap: 10px;
-      justify-content: space-between;
-      align-content: center;
-      align-items: center;
-
-      .label {
-        color: var(--Personal-colors-Black);
-        font-size: 16px;
-        font-weight: 500;
-        line-height: 1;
-        font-style: normal;
-      }
-      .value {
-        color: var(--Personal-colors-Black);
-        font-size: 16px;
-        font-weight: 600;
-        line-height: 1;
-        font-style: normal;
-
-        span {
-          font-size: 12px;
-          font-weight: 500;
-          line-height: 1;
-          font-style: normal;
-        }
-      }
-    }
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
   }
 }

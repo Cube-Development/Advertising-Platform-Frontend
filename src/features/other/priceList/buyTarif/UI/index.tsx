@@ -9,6 +9,7 @@ import {
   useGetUploadLinkMutation,
   usePostBuyTarifMutation,
 } from "@entities/project";
+import { ENUM_WALLETS_TYPE } from "@entities/wallet";
 import {
   AddFileIcon,
   ArrowLongHorizontalIcon,
@@ -48,13 +49,14 @@ import {
   getFileExtension,
   queryParamKeys,
 } from "@shared/utils";
+import { WalletsBar } from "@widgets/wallet";
+import axios from "axios";
 import { CircleX, FileIcon, InfoIcon, Loader } from "lucide-react";
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
-import axios from "axios";
 
 interface BuyTarifProps {
   tarif: number;
@@ -75,7 +77,9 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
   const { t } = useTranslation();
   const { toast } = useToast();
   const { isAuth } = useAppSelector((state) => state.user);
-  const { balance } = useAppSelector((state) => state.wallet);
+  const { balance, deposit_wallet, profit_wallet } = useAppSelector(
+    (state) => state.wallet,
+  );
   const [buyTarif, { isLoading }] = usePostBuyTarifMutation();
   const [getUploadLink] = useGetUploadLinkMutation();
 
@@ -92,7 +96,8 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
       files: [],
       dragActive: false,
       isTarifBought: false,
-      isHaveBalance: tarifPrice <= balance,
+      isHaveBalance:
+        tarifPrice <= deposit_wallet || tarifPrice <= profit_wallet,
       isDropFile: false,
       uploadProgress: {},
     },
@@ -265,6 +270,9 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
   };
 
   const currentPath = useCurrentPathEnum();
+
+  const [walletType, setWalletType] = useState<ENUM_WALLETS_TYPE | null>(null);
+
   return (
     <>
       {isAuth ? (
@@ -289,6 +297,16 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
                       <p className={styles.tarif__name}>{tarifInfo.name}</p>
                       <p className={styles.tarif__views}>{tarifInfo.views}</p>
                       <p className={styles.tarif__price}>{tarifInfo.price}</p>
+                    </div>
+                    <div className={styles.wallets_choose}>
+                      <p className={styles.subtitle}>
+                        {t("create_order.payment.choose_wallet")}
+                      </p>
+                      <WalletsBar
+                        walletType={walletType}
+                        setWalletType={setWalletType}
+                        totalAmount={tarifPrice}
+                      />
                     </div>
                     <div className={styles.menu__block}>
                       <div className={styles.text}>

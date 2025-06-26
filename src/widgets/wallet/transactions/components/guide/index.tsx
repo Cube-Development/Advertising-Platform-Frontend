@@ -54,7 +54,7 @@ export const Guide: FC<GuideProps> = ({ profileFilter }) => {
 
   return (
     <>
-      <div className={`${styles.guide} display__hide__max__md`}>
+      <div className={`${styles.guide} display__hide__max__md frame`}>
         <span className={styles.text}>
           {profileFilter.type === PROFILE_TYPE.ENTITIES
             ? t("wallet.guide.entity")

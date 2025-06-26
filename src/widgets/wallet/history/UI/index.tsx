@@ -16,7 +16,7 @@ import {
 } from "@shared/config";
 import { useClearCookiesOnPage, useWindowWidth } from "@shared/hooks";
 import { USER_LANGUAGES_LIST } from "@shared/languages";
-import { ShowMoreBtn, SpinnerLoaderSmall } from "@shared/ui";
+import { CustomTitle, ShowMoreBtn, SpinnerLoaderSmall } from "@shared/ui";
 import { getAnimationDelay } from "@shared/utils";
 import { motion } from "framer-motion";
 import { FC, useEffect, useMemo, useState } from "react";
@@ -71,13 +71,15 @@ export const History: FC = () => {
     <div className={`container ${screen > BREAKPOINT.LG ? "sidebar" : ""}`}>
       <div className={styles.wrapper}>
         <motion.div
-          className={styles.top}
           initial="hidden"
           animate="visible"
           custom={custom++}
           variants={PAGE_ANIMATION.animationRight}
         >
-          <p className="gradient_color">{t("wallet_history.wallet_history")}</p>
+          <CustomTitle
+            title={t("wallet_history.wallet_history")}
+            variant={"primary"}
+          />
         </motion.div>
         {screen > BREAKPOINT.MD && (
           <motion.div

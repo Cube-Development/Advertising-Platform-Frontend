@@ -1,5 +1,5 @@
 import { SVGProps, useId } from "react";
-export const TelegramJetlIcon = (props: SVGProps<SVGSVGElement>) => {
+export const TelegramJetIcon = (props: SVGProps<SVGSVGElement>) => {
   const generateId = useId();
   return (
     <svg

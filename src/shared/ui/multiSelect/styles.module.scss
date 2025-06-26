@@ -1,11 +1,7 @@
 .wrapper {
   display: grid;
-  padding: 15px 25px;
   width: 100%;
   align-content: center;
-  border-radius: 10px;
-  background: var(--Personal-colors-White);
-  border: 1px solid var(--Inside-container);
 
   &.open {
     border: 1px solid var(--Personal-colors-main);

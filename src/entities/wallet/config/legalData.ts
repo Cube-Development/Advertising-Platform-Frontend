@@ -16,25 +16,7 @@ import {
 import { IBlockData, IRowData } from "../types";
 import { topup } from "./config";
 import { TFunction } from "i18next";
-
-export enum legalData {
-  type_legal = "type_legal",
-  name = "name",
-  address = "address",
-  INN = "INN",
-  checking_account = "checking_account",
-  bank_name = "bank_name",
-  bank_mfo = "bank_mfo",
-  phone = "phone",
-  email = "email",
-  PNFL = "PNFL",
-  registration_number = "registration_number",
-  registration_date = "registration_date",
-  transit_account = "transit_account",
-  card_number = "card_number",
-  card_date = "card_date",
-  amount = "amount",
-}
+import { legalData } from "@shared/config";
 
 export const selfEmployed: IBlockData = {
   title: "add_profile.basic_info.basic_info",
@@ -264,15 +246,15 @@ export const contact: IBlockData = {
 };
 
 export const TOP_UP_AMOUNT = (t: TFunction) => ({
-  required: t("wallet.topup.required"),
+  required: t("wallet.amount.required"),
   validate: {
     min: (value: string) =>
       Number(formatWithOutSpaces(value)) >= topup.min ||
-      `${t("wallet.topup.min")} - ${topup.min.toLocaleString()} ${t("symbol")}`,
+      `${t("wallet.amount.min")} - ${topup.min.toLocaleString()} ${t("symbol")}`,
 
     max: (value: string) =>
       Number(formatWithOutSpaces(value)) <= topup.max ||
-      `${t("wallet.topup.max")} - ${topup.max.toLocaleString()} ${t("symbol")}`,
+      `${t("wallet.amount.max")} - ${topup.max.toLocaleString()} ${t("symbol")}`,
   },
 });
 

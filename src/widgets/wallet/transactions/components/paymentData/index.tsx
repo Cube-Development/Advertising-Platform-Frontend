@@ -1,5 +1,6 @@
 import {
   EntityData,
+  ENUM_WALLETS_TYPE,
   IExtendedProfileData,
   IndividualData,
   PROFILE_STATUS,
@@ -11,9 +12,15 @@ import {
   topup,
   withdrawal,
 } from "@entities/wallet";
-import { LegalForm, PaymentDidox } from "@features/wallet";
+import { PaymentDidox } from "@features/wallet";
 import { ENUM_PATHS } from "@shared/routing";
-import { CustomCheckbox, CustomInput } from "@shared/ui";
+import {
+  cn,
+  CustomBlockData,
+  CustomCheckbox,
+  CustomInput,
+  IParameterData,
+} from "@shared/ui";
 import {
   formatWithOutSpaces,
   formatWithSpaces,
@@ -49,8 +56,8 @@ interface PaymentDataProps {
   onSubmit: SubmitHandler<IExtendedProfileData>;
   handleSubmit: UseFormHandleSubmit<IExtendedProfileData, IExtendedProfileData>;
   isPaymentLoading: boolean;
-  isSubmitted?: boolean;
   isTopUp?: boolean;
+  walletType?: ENUM_WALLETS_TYPE;
 }
 
 export const PaymentData: FC<PaymentDataProps> = ({
@@ -64,8 +71,8 @@ export const PaymentData: FC<PaymentDataProps> = ({
   onSubmit,
   handleSubmit,
   isPaymentLoading,
-  isSubmitted = false,
   isTopUp = false,
+  walletType = ENUM_WALLETS_TYPE.DEPOSIT,
 }) => {
   const { t } = useTranslation();
   const accept = {
@@ -101,6 +108,7 @@ export const PaymentData: FC<PaymentDataProps> = ({
 
   const { isMaxAmount, setIsMaxAmount, maxWithdraw } = useMaxWithdraw(
     formatWithOutSpaces(formState?.amount),
+    walletType,
   );
 
   const handleMaxAmount = () => {
@@ -111,15 +119,24 @@ export const PaymentData: FC<PaymentDataProps> = ({
     }
     setIsMaxAmount(!isMaxAmount);
   };
+
+  const amountText = t(amountTitle, {
+    returnObjects: true,
+  }) as IParameterData;
+
   return (
-    <form className={styles.payment__data} onSubmit={handleSubmit(onSubmit)}>
+    <form
+      className={cn(styles.payment__data, "frame")}
+      onSubmit={handleSubmit(onSubmit)}
+    >
       <div className={styles.block}>
         <div className={styles.amount}>
-          <p className={styles.title}>{amountTitle}</p>
           <CustomInput
             {...register!("amount", { ...TOP_UP_AMOUNT(t) })}
             maxLength={12}
-            placeholder={t("wallet.topup.placeholder")}
+            label={amountText?.title}
+            information={amountText?.description}
+            placeholder={amountText?.placeholder}
             value={formatWithSpaces(formState?.amount)}
             error={errors?.amount}
             error_message={errors?.amount?.message}
@@ -135,11 +152,12 @@ export const PaymentData: FC<PaymentDataProps> = ({
           )}
         </div>
         {typeLegal.map((block, index) => (
-          <LegalForm
+          <CustomBlockData
             data={block}
             inputError={errors}
             register={register}
             key={index}
+            disabled
           />
         ))}
       </div>

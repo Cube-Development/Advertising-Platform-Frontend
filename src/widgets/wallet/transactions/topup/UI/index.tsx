@@ -7,6 +7,7 @@ import {
   PROFILE_STATUS,
   PROFILE_TYPE,
   SUBPROFILE_TYPE,
+  TopupSuccessCard,
   useCreateLegalMutation,
   useEditLegalMutation,
   usePaymentDepositMutation,
@@ -19,8 +20,8 @@ import { ArrowIcon4 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
 import { useClearCookiesOnPage, useWindowWidth } from "@shared/hooks";
 import { ENUM_PATHS } from "@shared/routing";
-import { ToastAction, useToast } from "@shared/ui";
-import { FC, useState } from "react";
+import { CustomTitle, ToastAction, useToast } from "@shared/ui";
+import { FC, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -32,7 +33,7 @@ export const Topup: FC = () => {
   const { toast } = useToast();
   const { t } = useTranslation();
   const [activeAccount, setActiveAccount] = useState<ILegalCard | null>(null);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const screen = useWindowWidth();
 
   const {
@@ -46,13 +47,13 @@ export const Topup: FC = () => {
   } = useForm<IExtendedProfileData>({
     defaultValues: {
       profileFilter: {
-        type: PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT,
-        id: PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT,
+        type: PROFILE_TYPE.ENTITIES,
+        id: PROFILE_STATUS.ENTITIES,
       },
-      subprofileFilter: {
-        type: SUBPROFILE_TYPE.ACCOUNT,
-        id: PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT,
-      },
+      // subprofileFilter: {
+      //   type: SUBPROFILE_TYPE.ACCOUNT,
+      //   id: PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT,
+      // },
     },
   });
   const formState = watch();
@@ -75,6 +76,11 @@ export const Topup: FC = () => {
     error: readLegalsError,
   } = useReadLegalsByTypeQuery(formState.profileFilter.id);
 
+  useEffect(() => {
+    if (!legalsByType?.length) return;
+    changeActiveAccount(legalsByType?.[0]);
+  }, [legalsByType]);
+
   const [readOneLegal, { isLoading: isOneLegalLoading, error: oneLegalError }] =
     useReadOneLegalMutation();
 
@@ -83,7 +89,7 @@ export const Topup: FC = () => {
 
   const [editLegal, { isLoading: isEditLoading }] = useEditLegalMutation();
 
-  const [paymentDeposit, { isLoading: isPaymentLoading }] =
+  const [paymentDeposit, { isLoading: isPaymentLoading, isSuccess }] =
     usePaymentDepositMutation();
 
   const changeActiveAccount = async (account: ILegalCardShort) => {
@@ -218,7 +224,7 @@ export const Topup: FC = () => {
             .unwrap()
             .then(() => {
               reset();
-              navigate(ENUM_PATHS.MAIN);
+              // navigate(ENUM_PATHS.MAIN);
               toast({
                 variant: "success",
                 title: `${t("toasts.wallet.topup.success")}: ${paymentReq.amount.toLocaleString()} ${t("symbol")}`,
@@ -253,7 +259,7 @@ export const Topup: FC = () => {
                   .unwrap()
                   .then(() => {
                     reset();
-                    navigate(ENUM_PATHS.MAIN);
+                    // navigate(ENUM_PATHS.MAIN);
                     toast({
                       variant: "success",
                       title: `${t("toasts.wallet.topup.success")}: ${paymentReq.amount.toLocaleString()} ${t("symbol")}`,
@@ -283,27 +289,32 @@ export const Topup: FC = () => {
   return (
     <div className="container">
       <div className={styles.wrapper}>
-        <div className={styles.title}>
-          <p>{t("wallet.topup.title")}</p>
-          <ArrowIcon4 />
-        </div>
-        <BarSubFilter
+        {isSuccess ? (
+          <TopupSuccessCard />
+        ) : (
+          <>
+            <CustomTitle
+              title={t("wallet.topup.title")}
+              icon={<ArrowIcon4 />}
+            />
+            {/* <BarSubFilter
           tab={formState.profileFilter.type}
           tab_list={WALLET_TOP_UP_FILTER_TABS_LIST}
           changeTab={changeTab}
           resetValues={resetValues}
-        />
-        {formState.profileFilter.type === PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT ? (
-          <CreditCard />
-        ) : (
-          <div className={styles.form__wrapper}>
-            {screen < BREAKPOINT.MD && (
-              <Guide profileFilter={formState.profileFilter} />
-            )}
-            <div className={styles.top}>
+        /> */}
+            {formState.profileFilter.type ===
+            PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT ? (
+              <CreditCard />
+            ) : (
+              <div className={styles.form__wrapper}>
+                {screen < BREAKPOINT.MD && (
+                  <Guide profileFilter={formState.profileFilter} />
+                )}
+                {/* <div className={styles.top}>
               <p>{t("wallet.topup.offer")}</p>
-            </div>
-            {screen < BREAKPOINT.LG && (
+            </div> */}
+                {/* {screen < BREAKPOINT.LG && (
               <LegalsList
                 accounts={legalsByType}
                 changeActiveAccount={changeActiveAccount}
@@ -313,27 +324,26 @@ export const Topup: FC = () => {
                 readLegalsError={readLegalsError}
                 oneLegalError={oneLegalError}
               />
-            )}
-            <div className={styles.content}>
-              <PaymentData
-                amountTitle={t("wallet.topup.amount")}
-                register={register}
-                setValue={setValue}
-                errors={errors}
-                handleSubmit={handleSubmit}
-                onSubmit={onSubmit}
-                formState={formState}
-                profileFilter={formState.profileFilter}
-                subprofileFilter={formState.subprofileFilter}
-                isSubmitted={isSubmitted}
-                isPaymentLoading={
-                  isCreateLoading || isEditLoading || isPaymentLoading
-                }
-                isTopUp={true}
-              />
-              <div>
-                <div className={styles.content__right}>
-                  {screen >= BREAKPOINT.LG && (
+            )} */}
+                <div className={styles.content}>
+                  <PaymentData
+                    amountTitle={"wallet.topup.amount"}
+                    register={register}
+                    setValue={setValue}
+                    errors={errors}
+                    handleSubmit={handleSubmit}
+                    onSubmit={onSubmit}
+                    formState={formState}
+                    profileFilter={formState.profileFilter}
+                    subprofileFilter={formState.subprofileFilter}
+                    isPaymentLoading={
+                      isCreateLoading || isEditLoading || isPaymentLoading
+                    }
+                    isTopUp={true}
+                  />
+                  <div>
+                    <div className={styles.content__right}>
+                      {/* {screen >= BREAKPOINT.LG && (
                     <LegalsList
                       accounts={legalsByType}
                       changeActiveAccount={changeActiveAccount}
@@ -343,14 +353,16 @@ export const Topup: FC = () => {
                       readLegalsError={readLegalsError}
                       oneLegalError={oneLegalError}
                     />
-                  )}
-                  {screen >= BREAKPOINT.MD && (
-                    <Guide profileFilter={formState.profileFilter} />
-                  )}
+                  )} */}
+                      {screen >= BREAKPOINT.MD && (
+                        <Guide profileFilter={formState.profileFilter} />
+                      )}
+                    </div>
+                  </div>
                 </div>
               </div>
-            </div>
-          </div>
+            )}
+          </>
         )}
       </div>
     </div>

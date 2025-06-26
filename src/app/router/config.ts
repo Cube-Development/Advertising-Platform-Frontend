@@ -1,5 +1,6 @@
 import { ENUM_ROLES, USER_ROLES } from "@entities/user";
 import { AddChannelPage } from "@pages/AddChannel";
+import { AddOrganizationPage } from "@pages/addOrganization";
 import { AdminChannelsPage } from "@pages/AdminChannels";
 import { AdminComplaintInfoPage } from "@pages/AdminComplaintInfo";
 import { AdminComplaintsPage } from "@pages/AdminComplaints";
@@ -201,6 +202,14 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
   {
     path: ENUM_PATHS.PROFILE,
     component: ProfilePage,
+    roles: USER_ROLES,
+    auth: ENUM_AUTH_TYPES.PRIVATE,
+    authSidebar: true,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
+  },
+  {
+    path: ENUM_PATHS.ADD_ORGANIZATION,
+    component: AddOrganizationPage,
     roles: USER_ROLES,
     auth: ENUM_AUTH_TYPES.PRIVATE,
     authSidebar: true,
