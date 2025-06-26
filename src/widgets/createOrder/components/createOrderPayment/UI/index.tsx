@@ -10,6 +10,7 @@ interface CreateOrderPaymentProps {
   total_price: number;
   role: ENUM_ROLES;
   isAllowed: boolean;
+  onAction?: () => void;
 }
 
 export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
@@ -17,6 +18,7 @@ export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
   total_price,
   role,
   isAllowed,
+  onAction,
 }) => {
   const { t } = useTranslation();
 
@@ -42,7 +44,11 @@ export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
             </div>
             <div className={styles.pay_btn}>
               {role === ENUM_ROLES.ADVERTISER ? (
-                <CreateOrder disabled={!isAllowed} isAllowed={isAllowed} />
+                <CreateOrder
+                  disabled={!isAllowed}
+                  isAllowed={isAllowed}
+                  onAction={onAction}
+                />
               ) : (
                 <ApproveCampaign disabled={!isAllowed} isAllowed={isAllowed} />
               )}
