@@ -94,7 +94,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
 
             <CreateOrderPayment
               isBlur={blur.payment}
-              total_price={totalPrice?.amount || 0}
+              totalAmount={totalPrice?.amount || 0}
               role={role}
               onAction={handleSubmit(onSubmit)}
               isAllowed={

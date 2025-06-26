@@ -3,7 +3,7 @@ import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
 import { cn } from "../shadcn-ui/lib/utils";
 
-interface Props extends React.HTMLAttributes<HTMLDivElement> {
+interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   amount: number;
   isActive?: boolean;
 }
@@ -12,7 +12,7 @@ export const WalletProfitCard: FC<Props> = ({ amount, isActive, ...props }) => {
   const { t } = useTranslation();
   const { className, ...rest } = props;
   return (
-    <div
+    <button
       className={cn(className, styles.wrapper, isActive && styles.active)}
       {...rest}
     >
@@ -25,6 +25,6 @@ export const WalletProfitCard: FC<Props> = ({ amount, isActive, ...props }) => {
           {Math.floor(amount).toLocaleString()} {t("symbol")}
         </p>
       </div>
-    </div>
+    </button>
   );
 };

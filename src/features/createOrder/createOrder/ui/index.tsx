@@ -1,5 +1,4 @@
 import { ENUM_WALLETS_TYPE } from "@entities/wallet";
-import { useAppSelector } from "@shared/hooks";
 import {
   MyButton,
   Sheet,
@@ -9,9 +8,8 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-  WalletDepositCard,
-  WalletProfitCard,
 } from "@shared/ui";
+import { WalletsBar } from "@widgets/wallet";
 import { Loader, X } from "lucide-react";
 import { ButtonHTMLAttributes, FC, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -19,24 +17,19 @@ import styles from "./styles.module.scss";
 
 interface CreateOrderProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isAllowed: boolean;
+  totalAmount: number;
   onAction?: () => void;
 }
 
 export const CreateOrder: FC<CreateOrderProps> = ({
   isAllowed,
+  totalAmount,
   onAction,
   ...props
 }) => {
   const [open, setOpen] = useState(false);
   const { t } = useTranslation();
-  const [walletType, setWalletType] = useState<ENUM_WALLETS_TYPE>(
-    ENUM_WALLETS_TYPE.DEPOSIT,
-  );
-
-  const { deposit_wallet, profit_wallet } = useAppSelector(
-    (state) => state.wallet,
-  );
-
+  const [walletType, setWalletType] = useState<ENUM_WALLETS_TYPE | null>(null);
   const handleClose = () => {
     setOpen(false);
     onAction && onAction();
@@ -78,22 +71,15 @@ export const CreateOrder: FC<CreateOrderProps> = ({
           </SheetClose>
         </SheetHeader>
         <SheetDescription className={styles.description}>
-          <div className={styles.top}>
+          <div className={styles.wallets_choose}>
             <p className={styles.subtitle}>
               {t("create_order.payment.choose_wallet")}
             </p>
-            <div className={styles.wallets}>
-              <WalletDepositCard
-                amount={deposit_wallet}
-                isActive={walletType === ENUM_WALLETS_TYPE.DEPOSIT}
-                onClick={() => setWalletType(ENUM_WALLETS_TYPE.DEPOSIT)}
-              />
-              <WalletProfitCard
-                amount={profit_wallet}
-                isActive={walletType === ENUM_WALLETS_TYPE.PROFIT}
-                onClick={() => setWalletType(ENUM_WALLETS_TYPE.PROFIT)}
-              />
-            </div>
+            <WalletsBar
+              walletType={walletType}
+              setWalletType={setWalletType}
+              totalAmount={totalAmount}
+            />
           </div>
           <div className={styles.bottom}>
             <SheetClose asChild>

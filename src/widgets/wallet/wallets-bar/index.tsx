@@ -3,21 +3,23 @@ import { BREAKPOINT } from "@shared/config";
 import { useAppSelector, useWindowWidth } from "@shared/hooks";
 import { WalletDepositCard, WalletProfitCard } from "@shared/ui";
 import { FC, useRef } from "react";
+import SwiperCore from "swiper";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import { EffectCoverflow, Navigation } from "swiper/modules";
-import styles from "./styles.module.scss";
 import { Swiper, SwiperSlide } from "swiper/react";
-import SwiperCore from "swiper";
+import styles from "./styles.module.scss";
 
 interface IWalletsBarProps {
-  walletType: ENUM_WALLETS_TYPE;
+  walletType: ENUM_WALLETS_TYPE | null;
+  totalAmount?: number;
   setWalletType: (type: ENUM_WALLETS_TYPE) => void;
 }
 
 export const WalletsBar: FC<IWalletsBarProps> = ({
   walletType,
+  totalAmount,
   setWalletType,
 }) => {
   const screen = useWindowWidth();
@@ -30,7 +32,6 @@ export const WalletsBar: FC<IWalletsBarProps> = ({
     swiperRef.current?.slideTo(index);
     setWalletType(type);
   };
-
   return (
     <>
       {screen > BREAKPOINT.MD ? (
@@ -39,11 +40,13 @@ export const WalletsBar: FC<IWalletsBarProps> = ({
             amount={deposit_wallet}
             isActive={walletType === ENUM_WALLETS_TYPE.DEPOSIT}
             onClick={() => setWalletType(ENUM_WALLETS_TYPE.DEPOSIT)}
+            disabled={(totalAmount || 0) > deposit_wallet}
           />
           <WalletProfitCard
             amount={profit_wallet}
             isActive={walletType === ENUM_WALLETS_TYPE.PROFIT}
             onClick={() => setWalletType(ENUM_WALLETS_TYPE.PROFIT)}
+            disabled={(totalAmount || 0) > profit_wallet}
           />
         </div>
       ) : (
@@ -55,24 +58,24 @@ export const WalletsBar: FC<IWalletsBarProps> = ({
             spaceBetween={10}
             slidesPerView={1.2}
           >
-            <SwiperSlide
-              onClick={() =>
-                handleChangeStepSwiper(ENUM_WALLETS_TYPE.DEPOSIT, 0)
-              }
-            >
+            <SwiperSlide>
               <WalletDepositCard
                 amount={deposit_wallet}
                 isActive={walletType === ENUM_WALLETS_TYPE.DEPOSIT}
+                onClick={() =>
+                  handleChangeStepSwiper(ENUM_WALLETS_TYPE.DEPOSIT, 0)
+                }
+                disabled={(totalAmount || 0) > deposit_wallet}
               />
             </SwiperSlide>
-            <SwiperSlide
-              onClick={() =>
-                handleChangeStepSwiper(ENUM_WALLETS_TYPE.PROFIT, 1)
-              }
-            >
+            <SwiperSlide>
               <WalletProfitCard
                 amount={profit_wallet}
                 isActive={walletType === ENUM_WALLETS_TYPE.PROFIT}
+                onClick={() =>
+                  handleChangeStepSwiper(ENUM_WALLETS_TYPE.PROFIT, 1)
+                }
+                disabled={(totalAmount || 0) > profit_wallet}
               />
             </SwiperSlide>
           </Swiper>

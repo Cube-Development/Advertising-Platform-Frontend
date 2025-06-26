@@ -7,7 +7,7 @@ import heartAnimation from "/animated/heart_white_lottie.gif";
 
 interface CreateOrderPaymentProps {
   isBlur?: boolean;
-  total_price: number;
+  totalAmount: number;
   role: ENUM_ROLES;
   isAllowed: boolean;
   onAction?: () => void;
@@ -15,7 +15,7 @@ interface CreateOrderPaymentProps {
 
 export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
   isBlur,
-  total_price,
+  totalAmount,
   role,
   isAllowed,
   onAction,
@@ -36,7 +36,7 @@ export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
                 <img src={heartAnimation} alt="heart_lottie_gif" />
               </div>
               <p className={styles.price}>
-                {total_price.toLocaleString()} <span>{t("symbol")}</span>
+                {totalAmount.toLocaleString()} <span>{t("symbol")}</span>
               </p>
               <p className={styles.description}>
                 {t("create_order.payment.description")}
@@ -48,6 +48,7 @@ export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
                   disabled={!isAllowed}
                   isAllowed={isAllowed}
                   onAction={onAction}
+                  totalAmount={totalAmount}
                 />
               ) : (
                 <ApproveCampaign disabled={!isAllowed} isAllowed={isAllowed} />

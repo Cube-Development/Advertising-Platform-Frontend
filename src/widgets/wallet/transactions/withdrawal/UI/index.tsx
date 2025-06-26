@@ -23,17 +23,13 @@ import {
   useWindowWidth,
 } from "@shared/hooks";
 import { ENUM_PATHS } from "@shared/routing";
-import {
-  ToastAction,
-  useToast,
-  WalletDepositCard,
-  WalletProfitCard,
-} from "@shared/ui";
+import { ToastAction, useToast } from "@shared/ui";
+import { WalletsBar } from "@widgets/wallet";
 import { FC, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { Guide, PaymentData, WalletsBar } from "../../components";
+import { Guide, PaymentData } from "../../components";
 import styles from "./styles.module.scss";
 
 export const Withdrawal: FC = () => {
@@ -289,10 +285,6 @@ export const Withdrawal: FC = () => {
           }
         });
   };
-
-  const { deposit_wallet, profit_wallet } = useAppSelector(
-    (state) => state.wallet,
-  );
 
   const [walletType, setWalletType] = useState<ENUM_WALLETS_TYPE>(
     ENUM_WALLETS_TYPE.DEPOSIT,
