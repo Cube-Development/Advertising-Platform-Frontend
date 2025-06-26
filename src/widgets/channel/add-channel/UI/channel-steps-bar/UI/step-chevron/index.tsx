@@ -51,7 +51,7 @@ export const StepChevron: FC<IStepProps> = ({
           <p>
             {step} {t("add_platform.chevron.step")}
           </p>
-          <span> {t(title)}</span>
+          <span className="truncate"> {t(title)}</span>
         </div>
       </div>
     </div>

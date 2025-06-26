@@ -1,8 +1,6 @@
 import { BREAKPOINT, PAGE_ANIMATION } from "@shared/config";
 import { useClearCookiesOnPage, useWindowWidth } from "@shared/hooks";
-import {
-  CustomTitle
-} from "@shared/ui";
+import { CustomTitle } from "@shared/ui";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
 import { FC, useRef, useState } from "react";

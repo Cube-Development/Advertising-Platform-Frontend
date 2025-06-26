@@ -33,6 +33,14 @@
     justify-content: center;
     column-gap: 10px;
 
+    p {
+      color: var(--Personal-colors-black);
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+
     &.is_catalog {
       text-align: center;
 

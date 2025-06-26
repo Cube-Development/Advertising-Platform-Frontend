@@ -1,14 +1,7 @@
-import { ADD_ORGANIZATION_FILTER_TABS_LIST } from "@entities/organization";
-import {
-  ILegalData,
-  PROFILE_FILTER_TABS_LIST,
-  PROFILE_STATUS,
-  PROFILE_TYPE,
-} from "@entities/wallet";
-import { BarSubFilter } from "@features/other";
+import { ILegalData, PROFILE_STATUS, PROFILE_TYPE } from "@entities/wallet";
 import { MOCK_ADD_LEGAL, MOCK_ADD_SELF_EMPLOYED } from "@shared/config";
 import { ENUM_PATHS } from "@shared/routing";
-import { useToast } from "@shared/ui";
+import { CustomTitle, useToast } from "@shared/ui";
 import { ScanLine } from "lucide-react";
 import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -27,7 +20,6 @@ export const AddOrganization: FC = ({}) => {
     reset,
     handleSubmit,
     watch,
-    setValue,
     formState: { errors, isSubmitting },
   } = useForm<ILegalData>({
     defaultValues: {
@@ -42,15 +34,6 @@ export const AddOrganization: FC = ({}) => {
   const [formStep, setFormStep] = useState<number>(0);
   const [isNotFoundModalOpen, setIsNotFoundModalOpen] =
     useState<boolean>(false);
-
-  const changeTab = (filter: PROFILE_TYPE) => {
-    const item = PROFILE_FILTER_TABS_LIST.find((item) => item.type === filter)!;
-    const newFilter = { type: item?.type, id: item?.id };
-    reset({
-      profileFilter: newFilter,
-    });
-    setFormStep(0);
-  };
 
   const onSubmit = async (data: ILegalData) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
@@ -84,22 +67,16 @@ export const AddOrganization: FC = ({}) => {
   return (
     <div className="container">
       <div className={styles.wrapper}>
-        <div className={styles.title}>
-          <p className="truncate">{t("add_organization.title")}</p>
-          <ScanLine />
-        </div>
-        <BarSubFilter
-          tab={formState.profileFilter.type}
-          tab_list={ADD_ORGANIZATION_FILTER_TABS_LIST}
-          changeTab={changeTab}
-        />
+        <CustomTitle title={t("add_organization.title")} icon={<ScanLine />} />
         <AddDataForm
           formState={formState}
+          reset={reset}
           register={register}
           errors={errors}
           onSubmit={handleSubmit(onSubmit)}
           isLoading={isSubmitting}
-          step={formStep}
+          formStep={formStep}
+          setFormStep={setFormStep}
         />
         <NotFoundModal
           type={formState.profileFilter.type}

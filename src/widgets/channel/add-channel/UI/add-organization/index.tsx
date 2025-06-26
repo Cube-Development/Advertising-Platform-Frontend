@@ -1,11 +1,4 @@
-import { ADD_ORGANIZATION_FILTER_TABS_LIST } from "@entities/organization";
-import {
-  ILegalData,
-  PROFILE_FILTER_TABS_LIST,
-  PROFILE_STATUS,
-  PROFILE_TYPE,
-} from "@entities/wallet";
-import { BarSubFilter } from "@features/other";
+import { ILegalData, PROFILE_STATUS, PROFILE_TYPE } from "@entities/wallet";
 import {
   MOCK_ADD_LEGAL,
   MOCK_ADD_SELF_EMPLOYED,
@@ -56,15 +49,6 @@ export const AddOrganization: FC<IAddOrganizationProps> = ({
   const [isNotFoundModalOpen, setIsNotFoundModalOpen] =
     useState<boolean>(false);
 
-  const changeTab = (filter: PROFILE_TYPE) => {
-    const item = PROFILE_FILTER_TABS_LIST.find((item) => item.type === filter)!;
-    const newFilter = { type: item?.type, id: item?.id };
-    reset({
-      profileFilter: newFilter,
-    });
-    setFormStep(0);
-  };
-
   const onSubmit = async (data: ILegalData) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
@@ -103,18 +87,15 @@ export const AddOrganization: FC<IAddOrganizationProps> = ({
           variants={variant}
           className={styles.wrapper}
         >
-          <BarSubFilter
-            tab={formState.profileFilter.type}
-            tab_list={ADD_ORGANIZATION_FILTER_TABS_LIST}
-            changeTab={changeTab}
-          />
           <AddDataForm
             formState={formState}
             register={register}
             errors={errors}
+            reset={reset}
             onSubmit={handleSubmit(onSubmit)}
             isLoading={isSubmitting}
-            step={formStep}
+            formStep={formStep}
+            setFormStep={setFormStep}
           />
           <NotFoundModal
             type={formState.profileFilter.type}

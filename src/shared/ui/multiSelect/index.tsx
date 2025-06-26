@@ -4,6 +4,7 @@ import * as React from "react";
 import { useTranslation } from "react-i18next";
 import { CustomCheckbox } from "../customCheckbox";
 import {
+  cn,
   Command,
   CommandEmpty,
   CommandGroup,
@@ -128,7 +129,12 @@ export const MultiSelect = React.forwardRef<
             {...props}
             type="button"
             onClick={handleTogglePopover}
-            className={`${styles.wrapper} ${className} ${isPopoverOpen ? styles.open : ""}`}
+            className={cn(
+              "px-[16px] py-[10px] md:px-[30px] md:py-[10px] rounded-[12px] border border-[var(--Inside-container)] bg-[var(--Personal-colors-White)]  disabled:bg-gray-100 disabled:text-gray-400 disabled:border-gray-400 disabled:cursor-not-allowed disabled:opacity-50",
+              styles.wrapper,
+              className,
+              isPopoverOpen ? styles.open : "",
+            )}
           >
             {selectedValues?.length > 0 ? (
               <div className={styles.filter}>
@@ -142,7 +148,7 @@ export const MultiSelect = React.forwardRef<
                       return (
                         <div className={styles.filter}>
                           {singleOption?.img && (
-                            <singleOption.img className="h-4 w-4" />
+                            <singleOption.img className="w-4 h-4" />
                           )}
                           {!hideText && (
                             <span className="truncate">
@@ -163,7 +169,10 @@ export const MultiSelect = React.forwardRef<
                   {showButtonClear && (
                     <>
                       <XIcon
-                        className={`h-4 cursor-pointer text-muted-foreground  ${isPopoverOpen ? "rotate" : "rotate__down"}`}
+                        className={cn(
+                          "h-4 cursor-pointer text-muted-foreground",
+                          isPopoverOpen ? "rotate" : "rotate__down",
+                        )}
                         onClick={(event) => {
                           event.stopPropagation();
                           handleClear();
@@ -171,12 +180,15 @@ export const MultiSelect = React.forwardRef<
                       />
                       <Separator
                         orientation="vertical"
-                        className="flex min-h-4 h-full"
+                        className="flex h-full min-h-4"
                       />
                     </>
                   )}
                   <ChevronDown
-                    className={`h-4 cursor-pointer text-muted-foreground  ${isPopoverOpen ? "rotate" : "rotate__down"}`}
+                    className={cn(
+                      `h-4 cursor-pointer text-muted-foreground`,
+                      isPopoverOpen ? "rotate" : "rotate__down",
+                    )}
                   />
                 </div>
               </div>
@@ -184,7 +196,10 @@ export const MultiSelect = React.forwardRef<
               <div className={styles.filter}>
                 <span className={styles.text}>{placeholder}</span>
                 <ChevronDown
-                  className={`h-4 cursor-pointer text-muted-foreground ${isPopoverOpen ? "rotate" : "rotate__down"}`}
+                  className={cn(
+                    `h-4 cursor-pointer text-muted-foreground`,
+                    isPopoverOpen ? "rotate" : "rotate__down",
+                  )}
                 />
               </div>
             )}
@@ -204,7 +219,7 @@ export const MultiSelect = React.forwardRef<
             )}
             <CommandList className="max-h-[none] overflow-visible">
               <ScrollArea
-                className={`${options?.length > 5 ? "h-[30svh] max-h-[200px]" : ""}`}
+                className={cn(options?.length > 5 && "h-[30svh] max-h-[200px]")}
               >
                 <CommandEmpty>{t("components.select.not_found")}</CommandEmpty>
                 <CommandGroup className="w-[var(--radix-popper-anchor-width)] gap-1">
@@ -234,7 +249,7 @@ export const MultiSelect = React.forwardRef<
                           {showCheckBox && (
                             <CustomCheckbox isSelected={isSelected} />
                           )}
-                          {option?.img && <option.img className="h-4 w-4" />}
+                          {option?.img && <option.img className="w-4 h-4" />}
                           {!hideText && (
                             <span className="truncate">{option?.name}</span>
                           )}
@@ -253,19 +268,19 @@ export const MultiSelect = React.forwardRef<
                         <>
                           <CommandItem
                             onSelect={handleClear}
-                            className="flex-1 justify-center cursor-pointer"
+                            className="justify-center flex-1 cursor-pointer"
                           >
                             {t("components.select.clear")}
                           </CommandItem>
                           <Separator
                             orientation="vertical"
-                            className="flex min-h-6 h-full"
+                            className="flex h-full min-h-6"
                           />
                         </>
                       )}
                       <CommandItem
                         onSelect={() => setIsPopoverOpen(false)}
-                        className="flex-1 justify-center cursor-pointer max-w-full"
+                        className="justify-center flex-1 max-w-full cursor-pointer"
                       >
                         {t("components.select.close")}
                       </CommandItem>

@@ -5,7 +5,8 @@ import {
   LEGAL_DATA,
   SELF_EMPLOYED_DATA,
 } from "@entities/organization";
-import { PROFILE_TYPE } from "@entities/wallet";
+import { PROFILE_FILTER_TABS_LIST, PROFILE_TYPE } from "@entities/wallet";
+import { SelectOptions } from "@features/other";
 import { AccountsLoader, cn, CustomBlockData, MyButton } from "@shared/ui";
 import { ArrowRight } from "lucide-react";
 import { FC, useMemo } from "react";
@@ -17,18 +18,22 @@ interface IAddDataFormProps {
   formState: ILegalData;
   errors: Record<string, any>;
   register: any;
-  onSubmit?: () => void;
+  reset: any;
+  onSubmit: () => void;
   isLoading?: boolean;
-  step?: number;
+  formStep: number;
+  setFormStep: (step: number) => void;
 }
 
 export const AddDataForm: FC<IAddDataFormProps> = ({
   formState,
   register,
   errors,
+  reset,
   onSubmit = () => {},
   isLoading = false,
-  step = 0,
+  formStep = 0,
+  setFormStep,
 }) => {
   const { t } = useTranslation();
 
@@ -37,25 +42,51 @@ export const AddDataForm: FC<IAddDataFormProps> = ({
     switch (profileFilter?.type) {
       case PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT:
         return [ADD_SELF_EMPLOYED_DATA, SELF_EMPLOYED_DATA];
+      case PROFILE_TYPE.INDIVIDUALS:
+        return [ADD_SELF_EMPLOYED_DATA, SELF_EMPLOYED_DATA];
       case PROFILE_TYPE.ENTITIES:
         return [ADD_LEGAL_DATA, LEGAL_DATA];
       default:
         return [ADD_SELF_EMPLOYED_DATA, SELF_EMPLOYED_DATA];
     }
-  }, [profileFilter?.type, step]);
+  }, [profileFilter?.type, formStep]);
+  const TRANSLATE_LIST = PROFILE_FILTER_TABS_LIST.map((el) => {
+    return { ...el, name: t(el.name) };
+  });
+
+  const onChangeOption = (type: string, value: number) => {
+    const newLegal = PROFILE_FILTER_TABS_LIST.find((item) => item.id === value);
+    const { name, ...rest } = newLegal!;
+    reset({ profileFilter: rest });
+    setFormStep(0);
+  };
 
   return (
     <form className={cn("frame", styles.wrapper)} onSubmit={onSubmit}>
       <p className={styles.title}>{t("add_organization.add_form.title")}</p>
-      <CustomBlockData
-        key={"add_data_form"}
-        data={ADD_DATA}
-        register={register}
-        inputError={errors}
-        isRow
-        disabled={step === 1}
+      <SelectOptions
+        typeParameter={"profileFilter"}
+        defaultValue={[formState?.profileFilter?.id]}
+        onChangeOption={onChangeOption}
+        options={TRANSLATE_LIST}
+        textData="add_organization.add_form.legal"
+        single={true}
+        showButtonClear={false}
+        showListClear={false}
+        showCheckBox={false}
+        isRow={true}
       />
-      {step === 1 && (
+      {!!formState?.profileFilter?.id && (
+        <CustomBlockData
+          key={"add_data_form"}
+          data={ADD_DATA}
+          register={register}
+          inputError={errors}
+          isRow
+          disabled={formStep === 1}
+        />
+      )}
+      {formStep === 1 && (
         <div className={styles.data}>
           {DATA.map((item, index) => (
             <CustomBlockData
@@ -70,7 +101,7 @@ export const AddDataForm: FC<IAddDataFormProps> = ({
         </div>
       )}
       <InfoCard />
-      {step === 1 && (
+      {formStep === 1 && (
         <p className={styles.didox}>
           {t("add_organization.add_form.didox.text")}
         </p>
@@ -79,7 +110,7 @@ export const AddDataForm: FC<IAddDataFormProps> = ({
         className="md:max-w-[250px] md:justify-self-center"
         type="submit"
       >
-        {step === 0
+        {formStep === 0
           ? t("add_organization.add_form.buttons.next")
           : t("add_organization.add_form.buttons.accept")}
         {isLoading ? (
