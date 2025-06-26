@@ -931,7 +931,8 @@
       "step": "bosqich",
       "identification": "Kanalni identifikatsiya qilish",
       "description": "Kanalni tavsifi",
-      "accept": "Tasdiqlash"
+      "accept": "Tasdiqlash",
+      "organization": "Ташкилот қўшиш"
     },
     "identification": {
       "info": {
@@ -1137,6 +1138,43 @@
         "cancel_btn": "Bekor qilish"
       },
       "continue_btn": "Davom etish"
+    },
+    "navigation": {
+      "user_data": "Foydalanuvchi ma'lumotlari",
+      "change_password": "Parolni o'zgartirish",
+      "change_notifications": "Bildirishnoma sozlamalari"
+    },
+    "back": "Orqaga",
+    "user_block": {
+      "user_data": {
+        "title": "Shaxsiy ma'lumotlar",
+        "fields": {
+          "email": "Pochta",
+          "phone": "Telefon raqami",
+          "date": "Ro'yxatdan o'tgan sana",
+          "name": "Ism"
+        },
+        "edit": "Tahrirlash"
+      },
+      "organization_data": {
+        "title": "Tashkilot ma'lumotlari",
+        "fields": {
+          "type": "Tashkilot turi",
+          "inn": "STIR",
+          "pinfl": "JSHSHIR",
+          "status": "Holat"
+        },
+        "organization_types": {
+          "self_employed": "O'zini o'zi band qilgan",
+          "entity": "Yuridik shaxs",
+          "individual": "Yakka tartibdagi tadbirkor"
+        },
+        "status_types": {
+          "approved": "Tasdiqlangan",
+          "not_approved": "Tasdiqlanmagan"
+        },
+        "edit": "Tahrirlash"
+      }
     }
   },
 
@@ -2109,17 +2147,17 @@
           "equal": "Yangi parol eski paroldan farq qilishi kerak"
         },
         "email": {
-          "success": "Email muvaffaqiyatli o'zgartirildi",
-          "error": "Email o'zgartirishda xatolik yuz berdi",
-          "exist": "Почта уже используется"
+          "success": "Email muvaffaqiyatli yangilandi",
+          "error": "Kod yuborishda xatolik yuz berdi",
+          "exist": "Email allaqachon ishlatilmoqda"
         },
         "email_code": {
-          "success": "Почта успешно обновлена",
-          "error": "Во время отправки кода произошла ошибка"
+          "success": "Email muvaffaqiyatli yangilandi",
+          "error": "Kod yuborishda xatolik yuz berdi"
         },
         "event": {
-          "success": "Флаг успешно обновлен",
-          "error": "При изменении флага произошла ошибка"
+          "success": "Flag muvaffaqiyatli yangilandi",
+          "error": "Flagni yangilashda xatolik yuz berdi"
         }
       }
     },
@@ -2320,6 +2358,24 @@
           "inactive": "Faol emas",
           "banned": "Bloklangan",
           "deleted": "O'chirilgan"
+        },
+        "ban": {
+          "title": "Kanalni bloklash",
+          "reason": {
+            "title": "Bloklash sababi",
+            "default_value": "Sababni yozing ...",
+            "error": {
+              "required": "maydon bo'sh bo'lishi mumkin emas"
+            }
+          },
+          "date": {
+            "title": "Blok tugash sanasi",
+            "default_value": "22.09.2023",
+            "description": "Blok tugash sanasini quyidagi formatda kiriting: KK.OY.YYYY.",
+            "error": {
+              "required": "noto'g'ri format, quyidagi formatda kiriting: kk.oy.yyyy, masalan: 22.09.2023"
+            }
+          }
         }
       }
     },
@@ -2576,5 +2632,84 @@
   "not_found": {
     "description": "Sahifa topilmadi",
     "home_link": "Bosh sahifaga qaytish"
+  },
+  "home": {
+    "title": "Admin paneli",
+    "text": "Xush kelibsiz! Bu yerda siz platformaning asosiy jihatlarini boshqarishingiz mumkin.",
+    "channels": {
+      "title": "Kanallar",
+      "text": "Kanallarni yarating, tahrirlang va o'chiring. To'liq nazorat sizda!"
+    },
+    "users": {
+      "title": "Foydalanuvchilar",
+      "text": "Foydalanuvchilar faolligini kuzating, akkauntlarni moderatsiya qiling va huquqlarni boshqaring."
+    },
+    "transactions": {
+      "title": "Tranzaksiyalar",
+      "text": "Moliyaviy operatsiyalarni kuzating, to'lovlarni tekshiring va mablag' harakatini nazorat qiling."
+    },
+    "reviews": {
+      "title": "Sharhlar",
+      "text": "Foydalanuvchi sharhlarini tahlil qiling, izohlarni boshqaring va xizmatni yaxshilang."
+    },
+    "complaints": {
+      "title": "Shikoyatlar",
+      "text": "Foydalanuvchi shikoyatlarini ko'rib chiqing, muammolarga javob bering va adolatli platformani ta'minlang."
+    }
+  },
+  "add_organization": {
+    "title": "Tashkilot qo'shish",
+    "types": {
+      "self_employed": "O'zini o'zi band qilgan",
+      "legal": "Yuridik shaxs va YTT"
+    },
+    "add_form": {
+      "title": "Tashkilot qo'shish uchun ariza",
+      "legal": {
+        "title": "Tashkilot turi",
+        "text": "Tashkilot turini tanlang - Yuridik shaxs, YTT yoki O'zini o'zi band qilgan.",
+        "default_value": "Tanlanmagan"
+      },
+      "PNFL": {
+        "title": "JSHSHIR",
+        "default_value": "12345678901234",
+        "description": "Jismoniy shaxsning shaxsiy identifikatsiya raqami. To'g'ri JSHSHIRni kiriting, bu ma'lumotlaringizni tekshirish uchun kerak.",
+        "error": {
+          "required": "noto'g'ri format, belgilarning umumiy soni - 14 bo'lishi kerak"
+        }
+      },
+      "INN": {
+        "title": "STIR",
+        "default_value": "123456789",
+        "description": "Tashkilot yoki yakka tartibdagi tadbirkorning soliq to'lovchi identifikatsiya raqamini (STIR) kiriting. Ushbu raqam soliq hisoboti va tashkilot identifikatsiyasi uchun ishlatiladi.",
+        "error": {
+          "required": "noto'g'ri format, belgilarning umumiy soni - 9 bo'lishi kerak"
+        }
+      },
+      "info_card": {
+        "text": "Tashkilot qo'shish hujjatlarni rasmiylashtirish, hisob raqamiga (kartaga) to'lov olish va yuridik shaxs, YTT yoki o'zini o'zi band qilgan nomidan reklama kampaniyalarida ishtirok etish uchun kerak. Bu shaffoflik, ishonch va to'g'ri hujjat aylanishi uchun muhim. Qiyinchilik bo'lsa, havola orqali batafsil qo'llanmani o'qing",
+        "link": "Qanday qilib tashkilot qo'shish va bu nima uchun kerak?"
+      },
+      "buttons": {
+        "next": "Keyingi",
+        "accept": "Tasdiqlash"
+      },
+      "didox": {
+        "text": "\"Tasdiqlash\" tugmasini bosganingizdan so'ng siz Didox saytiga yo'naltirilasiz va ommaviy ofertani imzolaysiz. Muvaffaqiyatli tasdiqlangandan so'ng, tashkilotingiz platformaga qo'shiladi va saqlanadi."
+      }
+    },
+    "not_found": {
+      "types": {
+        "self_employed": "JSHSHIR",
+        "legal": "STIR"
+      },
+      "title": "Didox tizimida topilmadi",
+      "text": "Ishni davom ettirish uchun o'zini o'zi band qilgan shaxsni Didox'da ro'yxatdan o'tkazish kerak. \"Ro'yxatdan o'tkazish\" tugmasini bosing va ro'yxatdan o'tish jarayonidan o'ting. Agar savollaringiz bo'lsa, quyidagi havola orqali batafsil qo'llanmani o'qing:",
+      "link": "Agar men o'zini o'zi band qilgan bo'lsam, Didox'da qanday ro'yxatdan o'taman?",
+      "buttons": {
+        "register": "Ro'yxatdan o'tkazish",
+        "cancel": "Bekor qilish"
+      }
+    }
   }
 }
