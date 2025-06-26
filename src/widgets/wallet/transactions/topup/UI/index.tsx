@@ -20,7 +20,7 @@ import { ArrowIcon4 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
 import { useClearCookiesOnPage, useWindowWidth } from "@shared/hooks";
 import { ENUM_PATHS } from "@shared/routing";
-import { ToastAction, useToast } from "@shared/ui";
+import { CustomTitle, ToastAction, useToast } from "@shared/ui";
 import { FC, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -293,10 +293,10 @@ export const Topup: FC = () => {
           <TopupSuccessCard />
         ) : (
           <>
-            <div className={styles.title}>
-              <p>{t("wallet.topup.title")}</p>
-              <ArrowIcon4 />
-            </div>
+            <CustomTitle
+              title={t("wallet.topup.title")}
+              icon={<ArrowIcon4 />}
+            />
             {/* <BarSubFilter
           tab={formState.profileFilter.type}
           tab_list={WALLET_TOP_UP_FILTER_TABS_LIST}

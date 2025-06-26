@@ -29,50 +29,6 @@
     margin-bottom: var(--margin-section-xs);
   }
 
-  .title {
-    display: grid;
-    grid-auto-flow: column;
-    column-gap: 10px;
-    align-items: center;
-    justify-content: center;
-
-    svg {
-      width: 40px;
-      height: 40px;
-    }
-
-    text-align: center;
-    font-style: normal;
-    font-weight: 600;
-    color: var(--Personal-colors-black);
-    font-size: var(--font-size-title-main-xl);
-    line-height: 1;
-
-    @media (max-width: 992px) {
-      font-size: var(--font-size-title-main-lg);
-      svg {
-        width: 30px;
-        height: 30px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      font-size: var(--font-size-title-main-md);
-    }
-
-    @media (max-width: 576px) {
-      font-size: var(--font-size-title-main-xs);
-      svg {
-        width: 20px;
-        height: 20px;
-      }
-    }
-
-    @media (max-width: 375px) {
-      font-size: var(--font-size-title-main-xs);
-    }
-  }
-
   .top {
     display: grid;
     grid-auto-flow: row;

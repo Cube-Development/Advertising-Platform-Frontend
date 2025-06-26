@@ -1,39 +1,20 @@
-import {
-  eventForm,
-  IEventsData,
-  IPasswordData,
-  IProfileData,
-  IUserData,
-  profileForm,
-  useEditProfileMutation,
-  useGetProfileQuery,
-  userForm,
-} from "@entities/user";
-import { EditEmail, EditPassword, EditUser } from "@features/profile";
-import { EditPencilIcon, EmailIcon, TelegramJetIcon } from "@shared/assets";
 import { BREAKPOINT, PAGE_ANIMATION } from "@shared/config";
 import { useClearCookiesOnPage, useWindowWidth } from "@shared/hooks";
-import { ENUM_LANGUAGES, ENUM_LANGUAGES_NUM } from "@shared/languages";
 import {
-  cn,
-  CustomCheckbox,
-  MyButton,
-  ToastAction,
-  useToast,
+  CustomTitle
 } from "@shared/ui";
 import { AnimatePresence, motion } from "framer-motion";
-import { FC, useEffect, useRef, useState } from "react";
-import { set, useForm } from "react-hook-form";
+import { ArrowLeft } from "lucide-react";
+import { FC, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
 import { ENUM_NAVIGATION_CARD_ITEM_TYPE } from "./model";
+import styles from "./styles.module.scss";
 import {
   ChangeNotificationsForm,
   ChangePasswordForm,
   NavigationCard,
   UserDataForm,
 } from "./UI";
-import { ArrowLeft } from "lucide-react";
 
 export const SettingsProfile: FC = () => {
   useClearCookiesOnPage();
@@ -71,15 +52,11 @@ export const SettingsProfile: FC = () => {
   return (
     <div className="container">
       <div className={styles.wrapper}>
-        <div
-          className={cn(
-            styles.title,
-            "gradient_color",
-            isOpen && "opacity-0 md:opacity-100",
-          )}
-        >
-          <p className="truncate">{t("profile.title")}</p>
-        </div>
+        <CustomTitle
+          title={t("profile.title")}
+          variant="primary"
+          className={isOpen ? "opacity-0 md:opacity-100" : ""}
+        />
         <div className={styles.content}>
           <div>
             <NavigationCard currentTab={currentTab} onClick={handleChangeTab} />

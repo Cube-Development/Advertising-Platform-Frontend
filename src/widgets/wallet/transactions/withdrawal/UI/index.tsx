@@ -23,7 +23,7 @@ import {
   useWindowWidth,
 } from "@shared/hooks";
 import { ENUM_PATHS } from "@shared/routing";
-import { ToastAction, useToast } from "@shared/ui";
+import { CustomTitle, ToastAction, useToast } from "@shared/ui";
 import { WalletsBar } from "@widgets/wallet";
 import { FC, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
@@ -296,10 +296,10 @@ export const Withdrawal: FC = () => {
           <WithdrawSuccessCard />
         ) : (
           <>
-            <div className={styles.title}>
-              <p>{t("wallet.withdraw.title")}</p>
-              <ArrowIcon5 />
-            </div>
+            <CustomTitle
+              title={t("wallet.withdraw.title")}
+              icon={<ArrowIcon5 />}
+            />
             {/* <BarSubFilter
           tab={formState.profileFilter.type}
           tab_list={PROFILE_FILTER_TABS_LIST}
