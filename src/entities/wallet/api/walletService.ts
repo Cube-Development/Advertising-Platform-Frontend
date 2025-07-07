@@ -38,6 +38,12 @@ type PaymentDepositReq = {
   way_type: paymentTypes;
 };
 
+type GetBalance = {
+  balance: any;
+  deposit: PaymentWithdrawResponse;
+  profit: PaymentWithdrawResponse;
+};
+
 type PaymentWithdrawResponse = {
   account_id: string;
   balance: number;
@@ -86,7 +92,7 @@ export const walletAPI = authApi.injectEndpoints({
       }),
       invalidatesTags: [BALANCE, LEGALS, TRANSACTION_HISTORY],
     }),
-    getBalance: build.query<PaymentWithdrawResponse, void>({
+    getBalance: build.query<GetBalance, void>({
       query: () => ({
         url: `/wallet/balance`,
         method: "GET",
