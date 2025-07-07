@@ -21,6 +21,20 @@ export const FAQData = {
           title: "Как с вами связаться?",
           text: "Чтобы всегда быть в курсе обновлений, подписывайтесь на наш Telegram-канал или следите за новостями на сайте. Если у вас есть вопросы о работе сервиса, вы можете написать в наш Telegram-бот службы поддержки или воспользоваться онлайн-чатом прямо на сайте.",
         },
+        {
+          title: "Как работает механизм «Безопасной сделки»?",
+          text: "Средства Заказчика резервируются платформой до момента завершения рекламной кампании и подтверждения размещения. Только после этого оплата поступает Владельцу. Это исключает риск недобросовестного исполнения с обеих сторон."
+        },
+        {
+          title: "Что означает акцепт оферты?",
+          text:
+            "Акцепт — это полное и безоговорочное принятие условий оферты. Он происходит при регистрации на платформе, подписании оферты через ЭДО или фактическом использовании сервиса."
+        },
+        {
+          title: "Какой документ подтверждает сотрудничество с Blogix?",
+          text:
+            "Публичная оферта, подписанная через ЭДО, заменяет бумажный договор и имеет юридическую силу. Также подписываются счета, инвойсы и акты через didox.uz."
+        }
       ],
     },
     {
@@ -59,6 +73,26 @@ export const FAQData = {
           title: "Что будет если канал откажет в размещении моей интеграции?",
           text: "Если владелец канала откажется от размещения, средства будут возвращены на ваш баланс в течение 24 часов.",
         },
+        {
+          title: "Чем отличается «Запуск под ключ» от обычной покупки через каталог?",
+          text:
+            "При покупке через каталог вы сами выбираете каналы и управляете размещением. В «Запуске под ключ» менеджер Blogix подбирает каналы, составляет медиаплан и запускает РК за вас."
+        },
+        {
+          title: "Могу ли я изменить состав медиаплана при запуске под ключ?",
+          text:
+            "Да, если вы выбрали тариф Стандартный или Комплексный. Вы можете вносить правки до момента утверждения медиаплана."
+        },
+        {
+          title: "Когда я получу отчет и документы?",
+          text:
+            "По завершении кампании вы получите: финальный отчет по размещениям, счет-фактуру и акт выполненных работ через систему didox.uz."
+        },
+        {
+          title: "Можно ли вернуть средства за запуск под ключ?",
+          text:
+            "Нет, если вы уже утвердили медиаплан. Возврат возможен только в случае невозможности запуска РК по вине Blogix или при форс-мажоре."
+        }
       ],
     },
     {
@@ -104,6 +138,21 @@ export const FAQData = {
           title: "Зачем мне подключать вашего бота?",
           text: "Это Telegram-бот, который мгновенно уведомляет вас о всех обновлениях на платформе. Бот сообщает о новых заказах (с возможностью принять или отклонить), изменениях статуса заказа, пополнении баланса и других важных событиях. Подключив бот уведомлений Telega.in, вы будете получать новые рекламные запросы в реальном времени, что позволит быстро реагировать на запросы рекламодателей. Подробнее о подключении бота к вашему аккаунту можно узнать здесь.",
         },
+        {
+          title: "Когда я получу оплату за заказ?",
+          text:
+            "После подтверждения размещения Заказчиком или по истечении 72 часов с момента публикации, если не поступила жалоба."
+        },
+        {
+          title: "Какие документы мне нужно подписывать?",
+          text:
+            "Вам отправляется: бессрочный договор и правила сервиса; счета, акты и инвойсы после завершения заказа — через ЭДО didox.uz."
+        },
+        {
+          title: "Почему мой канал могут не принять в каталог?",
+          text:
+            "Причины отклонения: менее 1000 подписчиков; заблокированность, неактивность; неестественная активность или накрутка; запрещённый или политический контент; отсутствие данных в аналитике."
+        }
       ],
     },
   ] as IFAQInformation[],
@@ -127,6 +176,20 @@ export const FAQData = {
           title: "How can I contact you?",
           text: "To stay updated, subscribe to our Telegram channel or follow the news on our website. If you have any questions about our service, you can message our Telegram support bot or use the online chat directly on the website.",
         },
+        {
+          title: "How does the 'Safe Transaction' mechanism work?",
+          text: "The funds of the Customer are reserved by the platform until the completion of the advertising campaign and the confirmation of the placement. Only after this, the payment is transferred to the Owner. This excludes the risk of non-fulfillment from both sides."
+        },
+        {
+          title: "What does 'Acceptance of the offer' mean?",
+          text:
+            "Acceptance is the full and unconditional acceptance of the terms of the offer. It occurs when registering on the platform, signing the offer through EDM or actual use of the service."
+        },
+        {
+          title: "What document confirms the cooperation with Blogix?",
+          text:
+            "The public offer, signed through EDM, replaces the paper contract and has legal force. Also, invoices and acts are signed through didox.uz."
+        }
       ],
     },
     {
@@ -167,6 +230,26 @@ export const FAQData = {
             "What happens if the channel refuses to publish my integration?",
           text: "If the channel owner declines the placement, the funds will be returned to your balance within 24 hours.",
         },
+        {
+          title: "How does 'Turnkey Solutions' differ from a regular purchase through the catalog?",
+          text:
+            "When purchasing through the catalog, you choose the channels and manage the placement yourself. In 'Turnkey Solutions', a Blogix manager selects channels, creates a media plan, and launches the campaign on your behalf."
+        },
+        {
+          title: "Can I change the media plan composition during 'Turnkey Solutions'?",
+          text:
+            "Yes, if you have selected the Standard or Complex tariff. You can make changes until the media plan is approved."
+        },
+        {
+          title: "When will I receive the report and documents?",
+          text:
+            "After the campaign is completed, you will receive: a final report on placements, an invoice, and an act of completed work through the didox.uz system."
+        },
+        {
+          title: "Can I get a refund for 'Turnkey Solutions'?",
+          text:
+            "No, if you have already approved the media plan. Refund is only possible if the campaign cannot be launched due to Blogix's fault or a force majeure."
+        }
       ],
     },
     {
@@ -212,6 +295,21 @@ export const FAQData = {
           title: "Why should I connect your bot?",
           text: "This is a Telegram bot that instantly notifies you of all updates on the platform. The bot informs you about new orders (with the ability to accept or decline), order status changes, balance updates, and other important events. By connecting the Telega.in notification bot, you will receive new advertising requests in real-time, allowing you to respond quickly to advertisers. Learn more about connecting the bot to your account here.",
         },
+        {
+          title: "When will I receive payment for an order?",
+          text:
+            "After the placement is confirmed by the Customer or after 72 hours from the publication, if there is no complaint."
+        },
+        {
+          title: "What documents do I need to sign?",
+          text:
+            "You will receive: a perpetual contract and service rules; invoices, acts, and invoices after the completion of the order — through EDM didox.uz."
+        },
+        {
+          title: "Why might my channel be rejected from the catalog?",
+          text:
+            "Reasons for rejection: less than 1000 subscribers; blocked, inactive; unnatural activity or spam; prohibited or political content; absence of data in analytics."
+        }
       ],
     },
   ] as IFAQInformation[],
@@ -235,6 +333,20 @@ export const FAQData = {
           title: "Siz bilan qanday bog‘lanish mumkin?",
           text: "Yangiliklardan doimo xabardor bo‘lish uchun bizning Telegram kanalimizga obuna bo‘ling yoki yangiliklarni veb-saytimizda kuzatib boring. Agar xizmatimiz bo‘yicha savollaringiz bo‘lsa, bizning Telegram qo‘llab-quvvatlash botimizga yozishingiz yoki saytdagi onlayn chatdan foydalanishingiz mumkin.",
         },
+        {
+          title: "Xavfsiz bitim mexanizmi qanday ishlaydi?",
+          text: "Buyurtmachining mablag'lari reklama kampaniyasi tugaguniga va joylashtirish tasdiqlanguniga qadar platforma tomonidan rezerv qilinadi. Faqat shundan keyin to'lov Egasi hisobiga o'tkaziladi. Bu ikkala tomondan ham noto'g'ri bajarilish xavfini bartaraf etadi."
+        },
+        {
+          title: "Oferta aksepti nimani anglatadi?",
+          text:
+            "Aksept - bu oferta shartlarining to'liq va shartsiz qabul qilinishi. U platformada ro'yxatdan o'tishda, EXA orqali ofertani imzolashda yoki xizmatdan amalda foydalanishda yuzaga keladi."
+        },
+        {
+          title: "Blogix bilan hamkorlikni qaysi hujjat tasdiqlaydi?",
+          text:
+            "EXA orqali imzolangan ommaviy oferta qog'oz shartnomani almashtiradi va huquqiy kuchga ega. Shuningdek, hisob-fakturalar va aktlar didox.uz orqali imzolanadi."
+        }
       ],
     },
     {
@@ -274,6 +386,26 @@ export const FAQData = {
             "Agar kanal mening reklama integratsiyamni rad etsa nima bo‘ladi?",
           text: "Agar kanal egasi reklama joylashtirishni rad etsa, mablag‘ingiz 24 soat ichida balansingizga qaytariladi.",
         },
+        {
+          title: "«Tayyor loyiha» oddiy buyurtmadan qanday farq qiladi?",
+          text:
+            "Katalog orqali xarid qilganda siz o'zingiz kanallarni tanlaysiz va joylashtirishni boshqarasiz. «Tayyor loyiha»da Blogix menejeri kanallarni tanlaydi, media rejani tuzadi va reklama kampaniyasini sizning o'rniga ishga tushiradi."
+        },
+        {
+          title: "Tayyor loyiha davomida media rejani tarkibini o'zgartira olamanmi?",
+          text:
+            "Ha, agar siz Standart yoki Kompleks tarifini tanlagan bo'lsangiz. Media reja tasdiqlangunga qadar o'zgartirishlar kiritishingiz mumkin."
+        },
+        {
+          title: "Hisobot va hujjatlarni qachon olaman?",
+          text:
+            "Kampaniya tugagandan so'ng sizga beriladi: joylashtirishlar bo'yicha yakuniy hisobot, hisob-faktura va bajarilgan ishlar akti didox.uz tizimi orqali."
+        },
+        {
+          title: "Tayyor loyiha uchun mablag'larni qaytara olamanmi?",
+          text:
+            "Yo'q, agar siz allaqachon media rejani tasdiqlagan bo'lsangiz. Qaytarish faqat Blogixning aybi yoki force majeure tufayli reklama kampaniyasini ishga tushirish imkoni bo'lmasa mumkin."
+        }
       ],
     },
     {
@@ -319,6 +451,21 @@ export const FAQData = {
           title: "Nega sizning botingizni ulashim kerak?",
           text: "Bu Telegram-bot bo‘lib, platformadagi barcha yangilanishlar haqida sizni tezkor xabardor qiladi. Bot sizga yangi buyurtmalar (ularni qabul qilish yoki rad etish imkoniyati bilan), buyurtma holati o‘zgarishlari, balans to‘ldirilishi va boshqa muhim hodisalar haqida xabar beradi. Telega.in bildirishnoma botini ulagan holda, siz yangi reklama so‘rovlarini real vaqt rejimida qabul qilasiz va reklama beruvchilarning talablariga tezkor javob bera olasiz. Botni hisobingizga qanday ulash haqida batafsil ma’lumotni bu yerda topishingiz mumkin.",
         },
+        {
+          title: "Buyurtma uchun to'lovni qachon olaman?",
+          text:
+            "Buyurtmachi tomonidan joylashtirish tasdiqlangandan so'ng yoki nashr vaqtidan 72 soat o'tgandan so'ng, agar shikoyat bo'lmasa."
+        },
+        {
+          title: "Qanday hujjatlarni imzolashim kerak?",
+          text:
+            "Sizga yuboriladi: muddatsiz shartnoma va xizmat qoidalari; buyurtma tugagandan so'ng hisob-fakturalar, aktlar va invoyslar — EDM didox.uz orqali."
+        },
+        {
+          title: "Nega mening kanal katalogga qabul qilinmasligi mumkin?",
+          text:
+            "Rad etish sabablari: 1000 dan kam obunachi; bloklangan, faol emas; tabiiy bo'lmagan faollik yoki soxta obunachilar; taqiqlangan yoki siyosiy kontent; analitikada ma'lumot yo'qligi."
+        }
       ],
     },
   ] as IFAQInformation[],
