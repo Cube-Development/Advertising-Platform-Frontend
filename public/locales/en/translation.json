@@ -2619,7 +2619,7 @@
     "title": "Service Rules"
   },
 
-    "pdf_previewer": {
+  "pdf_previewer": {
     "page": "Page",
     "load": {
       "load": "Loading PDF...",
