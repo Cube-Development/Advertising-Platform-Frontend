@@ -19,6 +19,7 @@ interface ICustomTitleProps extends VariantProps<typeof backgroundVariants> {
   title: string;
   icon?: React.ReactNode;
   className?: string;
+  truncate?: boolean;
 }
 
 export const CustomTitle: FC<ICustomTitleProps> = ({
@@ -26,11 +27,11 @@ export const CustomTitle: FC<ICustomTitleProps> = ({
   icon,
   className,
   variant,
+  truncate = true,
 }) => {
-  console.log("variant", variant);
   return (
     <div className={cn(backgroundVariants({ variant }), className)}>
-      <p className="truncate">{title}</p>
+      <p className={cn(truncate && "truncate")}>{title}</p>
       {!!icon && icon}
     </div>
   );

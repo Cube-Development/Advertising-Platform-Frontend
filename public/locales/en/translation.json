@@ -2609,5 +2609,21 @@
       "save": "Save",
       "cancel": "Cancel"
     }
+  },
+
+  "public_offer_page": {
+    "title": "Public offer"
+  },
+
+  "service_rules_page": {
+    "title": "Service Rules"
+  },
+
+    "pdf_previewer": {
+    "page": "Page",
+    "load": {
+      "load": "Loading PDF...",
+      "fail": "Failed to load PDF"
+    }
   }
 }
