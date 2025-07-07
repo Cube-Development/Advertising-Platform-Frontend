@@ -80,6 +80,9 @@ export default defineConfig({
   build: {
     sourcemap: true,
   },
+  optimizeDeps: {
+    include: ['pdfjs-dist/build/pdf.worker.min.mjs']
+  },
   plugins: [
     react(),
     VitePWA({

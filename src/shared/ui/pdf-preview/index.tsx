@@ -95,7 +95,7 @@ export const PdfPreview: FC<IPdfPreviewProps> = ({ pdfUrl, filename }) => {
           }
           error={
             <div className="flex h-[70vh] w-full items-center justify-center text-destructive text-lg font-bold">
-              {t("pdf_previewer.load.error")}
+              {t("pdf_previewer.load.fail")}
             </div>
           }
           className="flex flex-col gap-4"
