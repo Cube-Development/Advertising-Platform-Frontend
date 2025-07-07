@@ -2710,6 +2710,24 @@
         "register": "Ro'yxatdan o'tkazish",
         "cancel": "Bekor qilish"
       }
+    },
+
+    "public_offer_page": {
+    "title": "Tashkilot qo'shish uchun ariza"
+    },
+
+  "service_rules_page": {
+    "title": "Правила пользования"
+  },
+
+
+
+    "pdf_previewer": {
+    "page": "Sahifa",
+    "load": {
+      "load": "Shartnomani yuklab oling",
+      "fail": "Kelishuvni yuklab bo‘lmadi"
     }
+  }
   }
 }

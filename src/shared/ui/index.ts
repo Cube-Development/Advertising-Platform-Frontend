@@ -28,3 +28,4 @@ export * from "./customTitle";
 export * from "./customBlockData";
 export * from "./wallet-deposit-card";
 export * from "./wallet-profit-card";
+export * from "./pdf-preview";

@@ -4,6 +4,7 @@ import * as ReactDOM from "react-dom/client";
 import { registerSW } from "virtual:pwa-register";
 import App from "./app";
 import "./shared/styles/global.scss";
+import "./shared/config/pdf";
 
 registerSW({
   immediate: true,
