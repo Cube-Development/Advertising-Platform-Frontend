@@ -181,6 +181,10 @@
     "profit": {
       "title": "Profit",
       "description": "Current balance"
+    },
+    "spending": {
+      "title": "Spending",
+      "description": "Current balance"
     }
   },
 
@@ -1308,7 +1312,7 @@
       "span1": "service terms",
       "and": "and",
       "span2": "offer rules",
-      "text2": "and agree with them."
+      "text2": "and accept them."
     }
   },
 
@@ -1454,10 +1458,10 @@
       "selfEmployedAccounts": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc."
     },
     "pay": {
-      "title": "To Charge",
+      "title": "To be charged",
       "sub_title": "From wallet",
       "text": "Commission",
-      "will_be_charged": "To be Charged"
+      "will_be_charged": "To be credited"
     },
     "accept": {
       "text1": "I confirm the accuracy of the data, I have read and accept the",
@@ -1871,7 +1875,8 @@
     "title": "Platform",
     "telegram": "Telegram",
     "instagram": "Instagram",
-    "youtube": "YouTube"
+    "youtube": "YouTube",
+    "site": "Site"
   },
 
   "sorting": {
@@ -1897,6 +1902,10 @@
     "youtube": {
       "name": "YouTube",
       "default_value": "https//youtube.com/channel_name..."
+    },
+    "site": {
+      "name": "Site",
+      "default_value": "https//domain.com..."
     }
   },
 
@@ -2597,33 +2606,215 @@
   },
   "add_organization": {
     "title": "Add organization",
-    "fields": {
-      "name": "Organization name",
-      "inn": "Taxpayer Identification Number (INN)",
-      "address": "Legal address",
-      "director": "Director's full name",
-      "phone": "Phone number",
-      "email": "Email"
+    "types": {
+      "self_employed": "Self-employed",
+      "legal": "Legal entity and IE"
     },
-    "actions": {
-      "save": "Save",
-      "cancel": "Cancel"
+    "add_form": {
+      "title": "Organization addition request",
+      "legal": {
+        "title": "Organization type",
+        "text": "Select the type of organization - Legal entity, IE or Self-employed.",
+        "default_value": "Not selected"
+      },
+      "PNFL": {
+        "title": "PNFL",
+        "default_value": "12345678901234",
+        "description": "Personal identification number of an individual. Enter a valid PNFL as it is required for data verification.",
+        "error": {
+          "required": "invalid format, must be 14 characters"
+        }
+      },
+      "INN": {
+        "title": "INN",
+        "default_value": "123456789",
+        "description": "Enter the taxpayer identification number (INN) of your company or individual entrepreneur. This number is used for tax accounting and organization identification.",
+        "error": {
+          "required": "invalid format, must be 9 characters"
+        }
+      },
+      "info_card": {
+        "text": "Adding an organization is necessary for document processing, receiving payments to a settlement account (card), and participating in advertising campaigns on behalf of a legal entity, IE, or self-employed. This is important for transparency, trust, and proper document flow through our partner Didox. If you have difficulties, we recommend reading the detailed guide at the link",
+        "link": "How to add an organization and why is it needed?"
+      },
+      "buttons": {
+        "next": "Next",
+        "accept": "Confirm"
+      },
+      "didox": {
+        "text": "After clicking the 'Confirm' button, you will be redirected to the Didox website to sign the public offer. After successful confirmation, your organization will be added and saved on the platform."
+      }
+    },
+    "not_found": {
+      "types": {
+        "self_employed": "PNFL",
+        "legal": "INN"
+      },
+      "title": "not found in the Didox system",
+      "text": "To continue, you need to register the self-employed in Didox. Click 'Register' and go through the registration process. If you have questions, we recommend reading the detailed guide:",
+      "link": "How to register in Didox if I am self-employed?",
+      "buttons": {
+        "register": "Register",
+        "cancel": "Cancel"
+      }
+    },
+    "basic_info": {
+      "basic_info": "General data",
+      "name": {
+        "title": "Full name",
+        "default_value": "Gomer German",
+        "description": "Enter your full name as indicated in your passport or other official document. Please note that the data must match the information in your bank.",
+        "error": {
+          "required": "field cannot be empty"
+        }
+      },
+      "registration_number": {
+        "title": "Registration number",
+        "default_value": "12345678",
+        "description": "Enter your registration number assigned to you during registration. This number is used for identification and verification.",
+        "error": {
+          "required": "enter without extra characters"
+        }
+      },
+      "registration_date": {
+        "title": "Registration date",
+        "default_value": "22.09.2023",
+        "description": "Enter your registration date in the format DD.MM.YYYY. Make sure the data matches official documents.",
+        "error": {
+          "required": "invalid format, enter in the format dd.mm.yyyy: 22.09.2023"
+        }
+      },
+      "PNFL": {
+        "title": "PNFL",
+        "default_value": "12345678901234",
+        "description": "Personal identification number of an individual. Enter a valid PNFL as it is required for data verification.",
+        "error": {
+          "required": "invalid format, must be 14 characters"
+        }
+      },
+      "entity": {
+        "title": "Company name",
+        "default_value": "Legal entity name",
+        "description": "Enter the full official name of your company according to registration documents. This is necessary for correct payment and document processing.",
+        "error": {
+          "required": "field cannot be empty"
+        }
+      },
+      "address": {
+        "title": "Legal address",
+        "default_value": "Legal address",
+        "description": "Enter the address where your company is registered. It may differ from the actual place of business, but must match the registration documents.",
+        "error": {
+          "required": "field cannot be empty"
+        }
+      },
+      "INN": {
+        "title": "INN",
+        "default_value": "123456789",
+        "description": "Enter the taxpayer identification number (INN) of your company or individual entrepreneur. This number is used for tax accounting and organization identification.",
+        "error": {
+          "required": "invalid format, must be 9 characters"
+        }
+      },
+      "individual": {
+        "title": "IE name",
+        "default_value": "IE name",
+        "description": "Enter the full name of the individual entrepreneur as indicated in the registration documents. This name is used for identification in legal and financial documents.",
+        "error": {
+          "required": "field cannot be empty"
+        }
+      }
+    },
+    "bank_data": {
+      "bank_data": "Bank details",
+      "bank_mfo": {
+        "title": "Bank MFO",
+        "default_value": "12345",
+        "description": "Enter the bank's interbranch turnover code (MFO) where your account is opened. This code is used for payment processing.",
+        "error": {
+          "required": "invalid format, must be 5 characters"
+        }
+      },
+      "bank_name": {
+        "title": "Bank name",
+        "default_value": "Bank name",
+        "description": "Enter the official name of the bank where your account is opened. This is important for correct crediting of funds to your account.",
+        "error": {
+          "required": "field cannot be empty"
+        }
+      },
+      "checking_account": {
+        "title": "Checking account",
+        "default_value": "12345678901234567890",
+        "description": "Enter the checking account number opened in your name or your organization's name at the bank. This account is used for transferring funds and other financial operations related to your activity.",
+        "error": {
+          "required": "invalid format, must be 20 characters"
+        }
+      },
+      "transit_account": {
+        "title": "Transit account",
+        "default_value": "12345678901234567890",
+        "description": "Enter your transit account number if required for transferring funds. This account is used for payment processing and may differ from your checking account.",
+        "error": {
+          "required": "invalid format, must be 20 characters"
+        }
+      },
+      "card_number": {
+        "title": "Card details",
+        "default_value": "9860123412341234",
+        "description": "Enter your bank card number without spaces. Be careful when entering, as an error in the number may result in payment rejection.",
+        "error": {
+          "required": "invalid format, must be 16 characters"
+        }
+      },
+      "card_date": {
+        "title": "Card expiry date",
+        "default_value": "mm/yy",
+        "description": "Enter your card's expiry date in the format MM/YY (month/year). This information is required for transaction processing and card validation.",
+        "error": {
+          "required": "enter date in format - mm/yy: 09/23"
+        }
+      }
+    },
+    "contact": {
+      "contact": "Contact details",
+      "phone": {
+        "title": "Phone number",
+        "default_value": "+998909000123",
+        "description": "Enter your valid phone number in international format. This number may be used for communication and payment confirmation.",
+        "error": {
+          "required": "enter phone number in the correct format"
+        }
+      },
+      "email": {
+        "title": "E-mail",
+        "default_value": "sample@gmail.com",
+        "description": "Enter your current email address. Important notifications about payment status and other messages may be sent to this email.",
+        "error": {
+          "required": "invalid email address"
+        }
+      }
+    },
+    "accept": {
+      "text1": "I confirm the accuracy of the data, I have read and accept the",
+      "span1": "service terms",
+      "and": "and",
+      "span2": "offer rules",
+      "text2": "and accept them."
     }
-  },
-
-  "public_offer_page": {
-    "title": "Public offer"
   },
 
   "service_rules_page": {
     "title": "Service Rules"
   },
-
+  "public_offer_page": {
+    "title": "Public offer"
+  },
   "pdf_previewer": {
     "page": "Page",
     "load": {
-      "load": "Loading PDF...",
-      "fail": "Failed to load PDF"
+      "load": "Loading agreement",
+      "fail": "Failed to load agreement"
     }
   }
 }

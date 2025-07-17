@@ -181,6 +181,10 @@
     "profit": {
       "title": "Foyda",
       "description": "Joriy balans"
+    },
+    "spending": {
+      "title": "Xarajat",
+      "description": "Joriy balans"
     }
   },
 
@@ -1895,7 +1899,8 @@
     "title": "Platforma",
     "telegram": "Telegram",
     "instagram": "Instagram",
-    "youtube": "Youtube"
+    "youtube": "Youtube",
+    "site": "Sayt"
   },
 
   "sorting": {
@@ -1921,6 +1926,10 @@
     "youtube": {
       "name": "Youtube",
       "default_value": "https//youtube.com/channel_name..."
+    },
+    "site": {
+      "name": "Sayt",
+      "default_value": "https//domain.com..."
     }
   },
 
@@ -2717,7 +2726,7 @@
     },
 
   "service_rules_page": {
-    "title": "Правила пользования"
+    "title": "Xizmatdan foydalanish qoidalari"
   },
 
 
@@ -2725,8 +2734,8 @@
     "pdf_previewer": {
     "page": "Sahifa",
     "load": {
-      "load": "Shartnomani yuklab oling",
-      "fail": "Kelishuvni yuklab bo‘lmadi"
+      "load": "Shartnoma yuklanmoqda",
+      "fail": "Shartnomani yuklab bo'lmadi"
     }
   }
   }

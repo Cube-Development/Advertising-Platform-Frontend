@@ -187,3 +187,57 @@ export const MOCK_PROFILE = {
     status: 1,
   },
 };
+
+export const MOCK_SITE_CATALOG = [
+  {
+    id: "c10a29ee-347e-4b56-aee5-3eccd9ada745",
+    platform: 4,
+    name: "im.merem",
+    description: "Блогер, снимает lifestyle контент ",
+    rate: 1.0,
+    category: "Блоги",
+    avatar:
+      "https://iswift2bucket.s3.amazonaws.com/avatar/17841439861600917.jpg?response-cache-control=no-cache%2C%20no-store%2C%20must-revalidate&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAYTCOAI7V3EBLTQ4S%2F20250717%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Date=20250717T094653Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=74a85d20d4db735cbdbfb175ed3e38370bb80f26c460cb97b4b8a27f8a9bfce8",
+    subscribers: 261490,
+    male: 25,
+    female: 75,
+    format: [
+      {
+        format: 8,
+        format_name: {
+          small: "Сторис: видео(до 30 сек)+текст",
+          big: "Сторис: видео(до 30 сек)+текст",
+        },
+        price: 1900000.0,
+        views: 0,
+        er: 0.0,
+        cpv: 0.0,
+      },
+      {
+        format: 6,
+        format_name: {
+          small: "Лента: фото/видео+текст",
+          big: "Лента: фото/видео+текст",
+        },
+        price: 7100000.0,
+        views: 0,
+        er: 0.0,
+        cpv: 0.0,
+      },
+    ],
+    selected_format: [
+      {
+        format: 8,
+        format_name: {
+          small: "Сторис: видео(до 30 сек)+текст",
+          big: "Сторис: видео(до 30 сек)+текст",
+        },
+        price: 1900000.0,
+        views: 0,
+        er: 0.0,
+        cpv: 0.0,
+      },
+    ],
+    channel_languages: [1],
+  },
+];

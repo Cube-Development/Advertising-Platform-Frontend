@@ -1802,7 +1802,8 @@
       "filter": {
         "telegram": "Telegram",
         "instagram": "Instagram",
-        "youtube": "Youtube"
+        "youtube": "Youtube",
+        "site": "Сайт"
       },
       "add_button": {
         "title": "Добавить кнопку",
@@ -2150,7 +2151,8 @@
     "title": "Соцсеть",
     "telegram": "Telegram",
     "instagram": "Instagram",
-    "youtube": "Youtube"
+    "youtube": "Youtube",
+    "site": "Сайт"
   },
 
   "sorting": {
@@ -2176,6 +2178,10 @@
     "youtube": {
       "name": "Youtube",
       "default_value": "https//youtube.com/channel_name..."
+    },
+    "site": {
+      "name": "Сайт",
+      "default_value": "https//domain.com..."
     }
   },
 

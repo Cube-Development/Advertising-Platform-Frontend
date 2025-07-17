@@ -1,4 +1,9 @@
-import { InstagramIcon, TelegramIcon, YouTubeIcon } from "@shared/assets";
+import {
+  ChromeIcon,
+  InstagramIcon,
+  TelegramIcon,
+  YouTubeIcon,
+} from "@shared/assets";
 
 export enum dateSortingTypes {
   increase = "increase",
@@ -9,12 +14,14 @@ export enum platformTypesStr {
   telegram = "telegram",
   instagram = "instagram",
   youtube = "youtube",
+  site = "site",
 }
 
 export enum platformTypesNum {
   telegram = 1,
   instagram = 3,
   youtube = 2,
+  site = 4,
 }
 
 export enum PostTypesNum {
@@ -74,6 +81,23 @@ export const platformTypes = [
       {
         id: PostTypesNum.FullHd_vertical,
         name: "create_order.create.post_types.youtube.shorts",
+      },
+    ],
+  },
+  {
+    name: "filter.site",
+    id: platformTypesNum.site,
+    type: platformTypesStr.site,
+    img: ChromeIcon,
+    default_value: "platform_types.site.default_value",
+    post_types: [
+      {
+        id: PostTypesNum.FullHd_horizontal,
+        name: "create_order.create.post_types.site.videos",
+      },
+      {
+        id: PostTypesNum.FullHd_vertical,
+        name: "create_order.create.post_types.site.shorts",
       },
     ],
   },

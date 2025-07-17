@@ -71,7 +71,7 @@ export const SelectFilter: FC<SelectFilterProps> = ({
         showListClear={showListClear}
         showCheckBox={showCheckBox}
         hideText={hideText}
-        className="p-2"
+        className="!p-2"
       />
     </div>
   );
