@@ -175,12 +175,17 @@
     "title": "Общий баланс",
 
     "deposit": {
-      "title": "Депозит",
+      "title": "Депозитный",
       "description": "Текущий баланс"
     },
 
     "profit": {
-      "title": "Прибыль",
+      "title": "Прибыльный",
+      "description": "Текущий баланс"
+    },
+
+    "spending": {
+      "title": "Расходный",
       "description": "Текущий баланс"
     }
   },

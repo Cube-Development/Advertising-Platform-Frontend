@@ -57,7 +57,7 @@ interface PaymentDataProps {
   handleSubmit: UseFormHandleSubmit<IExtendedProfileData, IExtendedProfileData>;
   isPaymentLoading: boolean;
   isTopUp?: boolean;
-  walletType?: ENUM_WALLETS_TYPE;
+  walletType?: ENUM_WALLETS_TYPE | null;
 }
 
 export const PaymentData: FC<PaymentDataProps> = ({

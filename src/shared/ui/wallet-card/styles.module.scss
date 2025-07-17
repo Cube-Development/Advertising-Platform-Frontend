@@ -1,0 +1,164 @@
+@mixin gradient-text($gradient) {
+  background: $gradient;
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.wrapper {
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 16px;
+  padding: 12px;
+  width: 100%;
+
+  border-radius: 16px;
+  backdrop-filter: blur(21px);
+  cursor: pointer;
+
+  &.deposit {
+    background: radial-gradient(
+      138.68% 1238.17% at 0.76% 3.12%,
+      rgba(142, 84, 233, 0.41) 0%,
+      #4772e6 87.75%
+    );
+
+    .header {
+      .title {
+        @include gradient-text(
+          var(
+            --Gradients-Gradient-1,
+            linear-gradient(45deg, #4772e6 23.91%, #8e54e9 75.06%)
+          )
+        );
+      }
+    }
+  }
+
+  &.profit {
+    background: radial-gradient(
+      138.68% 1238.17% at 0.76% 3.12%,
+      rgba(254, 110, 48, 0.41) 0%,
+      #ffca28 87.75%
+    );
+    .header {
+      .title {
+        @include gradient-text(
+          var(
+            --Gradients-Gradient-2,
+            linear-gradient(90deg, #ff2f66 0%, rgba(254, 110, 48, 0.99) 100%)
+          )
+        );
+      }
+    }
+  }
+
+  &.spending {
+    background: var(
+      --RADAL-2,
+      radial-gradient(
+        1238.17% 138.68% at 99.24% 3.12%,
+        rgba(47, 83, 181, 0.41) 12.25%,
+        #4fdfe4 100%
+      )
+    );
+
+    .header {
+      .title {
+        @include gradient-text(
+          var(
+            --Gradietn-1123,
+            linear-gradient(269deg, #4bd1d6 -3.02%, rgba(47, 83, 181, 0.4) 100%)
+          )
+        );
+      }
+    }
+  }
+
+  &.active {
+    // backdrop-filter: blur(28px) saturate(130%);
+
+    &.deposit,
+    &.profit,
+    &.spending {
+      position: relative;
+
+      &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.15); // затемнение
+        border-radius: inherit;
+        z-index: 0; // ниже контента
+      }
+
+      // Поднимаем всё содержимое выше затемнённого фона
+      .header,
+      .amount {
+        position: relative;
+        z-index: 1;
+      }
+    }
+
+    transform: scale(1.05);
+    transition: all 0.3s ease;
+
+    // box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.2) inset;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    background: #c3c3c3; // светло-серый фон
+  }
+
+  .header {
+    display: grid;
+    padding: 8px 10px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 10px;
+    background: radial-gradient(
+      100% 100% at 0% 50%,
+      rgba(255, 255, 255, 0.8) 0%,
+      rgba(255, 255, 255, 0.6) 100%
+    );
+    box-shadow:
+      0px 4px 4px 0px rgba(255, 255, 255, 0.21) inset,
+      0px 0px 68px 0px rgba(255, 255, 255, 0.14) inset;
+    backdrop-filter: blur(20px);
+    justify-self: start;
+
+    .title {
+      font-size: 8px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 1;
+    }
+  }
+
+  .amount {
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 8px;
+    justify-items: start;
+
+    .description {
+      font-size: 8px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 1;
+      color: var(--Personal-colors-White, #fff);
+    }
+
+    .value {
+      color: var(--Personal-colors-White, #fff);
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 1;
+    }
+  }
+}

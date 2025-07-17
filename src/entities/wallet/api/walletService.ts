@@ -42,6 +42,7 @@ type GetBalance = {
   balance: any;
   deposit: PaymentWithdrawResponse;
   profit: PaymentWithdrawResponse;
+  spending: PaymentWithdrawResponse;
 };
 
 type PaymentWithdrawResponse = {

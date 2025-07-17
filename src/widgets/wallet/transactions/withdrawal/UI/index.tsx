@@ -286,7 +286,7 @@ export const Withdrawal: FC = () => {
         });
   };
 
-  const [walletType, setWalletType] = useState<ENUM_WALLETS_TYPE>(
+  const [walletType, setWalletType] = useState<ENUM_WALLETS_TYPE | null>(
     ENUM_WALLETS_TYPE.DEPOSIT,
   );
   return (
