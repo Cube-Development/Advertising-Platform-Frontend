@@ -85,12 +85,17 @@
 
       &::before {
         content: "";
+        right: 16px;
+        top: 16px;
         position: absolute;
-        inset: 0;
-        background: rgba(0, 0, 0, 0.15); // затемнение
-        border-radius: inherit;
+        border-radius: 999px;
         z-index: 0; // ниже контента
+        width: 14px;
+        height: 14px;
+        background: greenyellow;
       }
+
+      box-shadow: 0 0 6px 0.5px rgba(48, 0, 107, 0.45) inset;
 
       // Поднимаем всё содержимое выше затемнённого фона
       .header,
