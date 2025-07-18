@@ -17,14 +17,10 @@ import {
 } from "@entities/wallet";
 import { ArrowIcon5 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
-import {
-  useAppSelector,
-  useClearCookiesOnPage,
-  useWindowWidth,
-} from "@shared/hooks";
+import { useClearCookiesOnPage, useWindowWidth } from "@shared/hooks";
 import { ENUM_PATHS } from "@shared/routing";
 import { CustomTitle, ToastAction, useToast } from "@shared/ui";
-import { WalletsBar } from "@widgets/wallet";
+import { WalletsBar } from "@features/wallet";
 import { FC, useEffect, useState } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -316,6 +312,8 @@ export const Withdrawal: FC = () => {
               <WalletsBar
                 walletType={walletType}
                 setWalletType={setWalletType}
+                direction="column"
+                wallets={[ENUM_WALLETS_TYPE.DEPOSIT, ENUM_WALLETS_TYPE.PROFIT]}
               />
               {/* {formState.profileFilter.type ===
             PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT && (

@@ -32,7 +32,7 @@ export const Topup: FC = () => {
   useClearCookiesOnPage();
   const { toast } = useToast();
   const { t } = useTranslation();
-  const [activeAccount, setActiveAccount] = useState<ILegalCard | null>(null);
+  // const [activeAccount, setActiveAccount] = useState<ILegalCard | null>(null);
   // const navigate = useNavigate();
   const screen = useWindowWidth();
 
@@ -47,8 +47,8 @@ export const Topup: FC = () => {
   } = useForm<IExtendedProfileData>({
     defaultValues: {
       profileFilter: {
-        type: PROFILE_TYPE.ENTITIES,
-        id: PROFILE_STATUS.ENTITIES,
+        type: PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT,
+        id: PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT,
       },
       // subprofileFilter: {
       //   type: SUBPROFILE_TYPE.ACCOUNT,
@@ -58,9 +58,9 @@ export const Topup: FC = () => {
   });
   const formState = watch();
 
-  const resetValues = () => {
-    setActiveAccount(null);
-  };
+  // const resetValues = () => {
+  //   setActiveAccount(null);
+  // };
 
   const changeTab = (filter: PROFILE_TYPE) => {
     const item = WALLET_TOP_UP_FILTER_TABS_LIST.find(
@@ -70,19 +70,19 @@ export const Topup: FC = () => {
     setValue("profileFilter", newFilter);
   };
 
-  const {
-    data: legalsByType,
-    isLoading: isReadLegalsLoading,
-    error: readLegalsError,
-  } = useReadLegalsByTypeQuery(formState.profileFilter.id);
+  // const {
+  //   data: legalsByType,
+  //   isLoading: isReadLegalsLoading,
+  //   error: readLegalsError,
+  // } = useReadLegalsByTypeQuery(formState.profileFilter.id);
 
-  useEffect(() => {
-    if (!legalsByType?.length) return;
-    changeActiveAccount(legalsByType?.[0]);
-  }, [legalsByType]);
+  // useEffect(() => {
+  //   if (!legalsByType?.length) return;
+  //   changeActiveAccount(legalsByType?.[0]);
+  // }, [legalsByType]);
 
-  const [readOneLegal, { isLoading: isOneLegalLoading, error: oneLegalError }] =
-    useReadOneLegalMutation();
+  // const [readOneLegal, { isLoading: isOneLegalLoading, error: oneLegalError }] =
+  //   useReadOneLegalMutation();
 
   const [createLegal, { isLoading: isCreateLoading }] =
     useCreateLegalMutation();
@@ -92,33 +92,33 @@ export const Topup: FC = () => {
   const [paymentDeposit, { isLoading: isPaymentLoading, isSuccess }] =
     usePaymentDepositMutation();
 
-  const changeActiveAccount = async (account: ILegalCardShort) => {
-    if (activeAccount && account.legal_id === activeAccount.legal_id) {
-      setActiveAccount(null);
-      reset();
-    } else {
-      !isOneLegalLoading &&
-        readOneLegal(account.legal_id)
-          .unwrap()
-          .then((data) => {
-            setActiveAccount(data);
-            (Object.keys(data) as Array<keyof ILegalData>).forEach(
-              (value: keyof ILegalData) => {
-                setValue(value, data[value]);
-              },
-            );
-            clearErrors();
-          })
-          .catch((error) => {
-            toast({
-              variant: "error",
-              title: t("toasts.wallet.profile.error"),
-              action: <ToastAction altText="Ok">Ok</ToastAction>,
-            });
-            console.error("Ошибка при заполнении данных", error);
-          });
-    }
-  };
+  // const changeActiveAccount = async (account: ILegalCardShort) => {
+  //   if (activeAccount && account.legal_id === activeAccount.legal_id) {
+  //     setActiveAccount(null);
+  //     reset();
+  //   } else {
+  //     !isOneLegalLoading &&
+  //       readOneLegal(account.legal_id)
+  //         .unwrap()
+  //         .then((data) => {
+  //           setActiveAccount(data);
+  //           (Object.keys(data) as Array<keyof ILegalData>).forEach(
+  //             (value: keyof ILegalData) => {
+  //               setValue(value, data[value]);
+  //             }
+  //           );
+  //           clearErrors();
+  //         })
+  //         .catch((error) => {
+  //           toast({
+  //             variant: "error",
+  //             title: t("toasts.wallet.profile.error"),
+  //             action: <ToastAction altText="Ok">Ok</ToastAction>,
+  //           });
+  //           console.error("Ошибка при заполнении данных", error);
+  //         });
+  //   }
+  // };
 
   const onSubmit: SubmitHandler<IExtendedProfileData> = async (formData) => {
     const dataWithLegalType = {
@@ -297,12 +297,12 @@ export const Topup: FC = () => {
               title={t("wallet.topup.title")}
               icon={<ArrowIcon4 />}
             />
-            {/* <BarSubFilter
-          tab={formState.profileFilter.type}
-          tab_list={WALLET_TOP_UP_FILTER_TABS_LIST}
-          changeTab={changeTab}
-          resetValues={resetValues}
-        /> */}
+            <BarSubFilter
+              tab={formState.profileFilter.type}
+              tab_list={WALLET_TOP_UP_FILTER_TABS_LIST}
+              changeTab={changeTab}
+              // resetValues={resetValues}
+            />
             {formState.profileFilter.type ===
             PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT ? (
               <CreditCard />
@@ -311,20 +311,6 @@ export const Topup: FC = () => {
                 {screen < BREAKPOINT.MD && (
                   <Guide profileFilter={formState.profileFilter} />
                 )}
-                {/* <div className={styles.top}>
-              <p>{t("wallet.topup.offer")}</p>
-            </div> */}
-                {/* {screen < BREAKPOINT.LG && (
-              <LegalsList
-                accounts={legalsByType}
-                changeActiveAccount={changeActiveAccount}
-                activeAccount={activeAccount}
-                isReadLegalsLoading={isReadLegalsLoading}
-                isOneLegalLoading={isOneLegalLoading}
-                readLegalsError={readLegalsError}
-                oneLegalError={oneLegalError}
-              />
-            )} */}
                 <div className={styles.content}>
                   <PaymentData
                     amountTitle={"wallet.topup.amount"}
@@ -343,17 +329,6 @@ export const Topup: FC = () => {
                   />
                   <div>
                     <div className={styles.content__right}>
-                      {/* {screen >= BREAKPOINT.LG && (
-                    <LegalsList
-                      accounts={legalsByType}
-                      changeActiveAccount={changeActiveAccount}
-                      activeAccount={activeAccount}
-                      isReadLegalsLoading={isReadLegalsLoading}
-                      isOneLegalLoading={isOneLegalLoading}
-                      readLegalsError={readLegalsError}
-                      oneLegalError={oneLegalError}
-                    />
-                  )} */}
                       {screen >= BREAKPOINT.MD && (
                         <Guide profileFilter={formState.profileFilter} />
                       )}

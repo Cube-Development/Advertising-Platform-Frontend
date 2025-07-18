@@ -1706,6 +1706,7 @@
       "selfemployed": "Физ. лицо",
       "entity": "Юр. лицо",
       "individual": "ИП",
+      "organization": "Организация",
       "selfemployedaccount": "Самозанятый"
     },
     "subtypes": {

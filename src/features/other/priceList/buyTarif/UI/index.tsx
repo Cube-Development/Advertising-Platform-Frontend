@@ -49,7 +49,7 @@ import {
   getFileExtension,
   queryParamKeys,
 } from "@shared/utils";
-import { WalletsBar } from "@widgets/wallet";
+import { WalletsBar } from "@features/wallet";
 import axios from "axios";
 import { CircleX, FileIcon, InfoIcon, Loader } from "lucide-react";
 import { FC, useEffect, useState } from "react";

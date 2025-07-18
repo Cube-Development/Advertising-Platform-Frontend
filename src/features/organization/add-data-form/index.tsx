@@ -2,6 +2,7 @@ import {
   ADD_LEGAL_DATA,
   ADD_SELF_EMPLOYED_DATA,
   ILegalData,
+  InfoCard,
   LEGAL_DATA,
   SELF_EMPLOYED_DATA,
 } from "@entities/organization";
@@ -11,7 +12,6 @@ import { AccountsLoader, cn, CustomBlockData, MyButton } from "@shared/ui";
 import { ArrowRight } from "lucide-react";
 import { FC, useMemo } from "react";
 import { useTranslation } from "react-i18next";
-import { InfoCard } from "../info-card";
 import styles from "./styles.module.scss";
 
 interface IAddDataFormProps {

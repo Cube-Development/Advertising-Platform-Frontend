@@ -1,7 +1,7 @@
 import { ENUM_WALLETS_TYPE } from "@entities/wallet";
 import { BREAKPOINT } from "@shared/config";
 import { useAppSelector, useWindowWidth } from "@shared/hooks";
-import { WalletCard } from "@shared/ui";
+import { cn, WalletCard } from "@shared/ui";
 import { FC, useRef } from "react";
 import SwiperCore from "swiper";
 import "swiper/css";
@@ -9,18 +9,25 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import { EffectCoverflow, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import styles from "./styles.module.scss";
 
 interface IWalletsBarProps {
   walletType: ENUM_WALLETS_TYPE | null;
   totalAmount?: number;
   setWalletType: (type: ENUM_WALLETS_TYPE | null) => void;
+  direction?: "row" | "column";
+  wallets?: ENUM_WALLETS_TYPE[];
 }
 
 export const WalletsBar: FC<IWalletsBarProps> = ({
   walletType,
   totalAmount,
   setWalletType,
+  direction = "row",
+  wallets = [
+    ENUM_WALLETS_TYPE.DEPOSIT,
+    ENUM_WALLETS_TYPE.PROFIT,
+    ENUM_WALLETS_TYPE.SPENDING,
+  ],
 }) => {
   const screen = useWindowWidth();
   const { deposit_wallet, profit_wallet, spending_wallet } = useAppSelector(
@@ -32,7 +39,7 @@ export const WalletsBar: FC<IWalletsBarProps> = ({
     swiperRef.current?.slideTo(index);
     setWalletType(type);
   };
-  const WALLETS: {
+  const ALL_WALLETS: {
     amount: number;
     variant: "deposit" | "profit" | "spending";
     type: ENUM_WALLETS_TYPE;
@@ -54,10 +61,22 @@ export const WalletsBar: FC<IWalletsBarProps> = ({
     },
   ];
 
+  const WALLETS =
+    wallets?.map(
+      (type) => ALL_WALLETS?.find((wallet) => wallet.type === type)!,
+    ) || [];
+
   return (
     <>
       {screen > BREAKPOINT.MD ? (
-        <div className={styles.wallets}>
+        <div
+          className={cn(
+            "grid gap-2.5",
+            direction === "row"
+              ? `grid-rows-${WALLETS.length}`
+              : `grid-cols-${WALLETS.length}`,
+          )}
+        >
           {WALLETS.map(({ amount, variant, type }) => (
             <WalletCard
               key={variant}

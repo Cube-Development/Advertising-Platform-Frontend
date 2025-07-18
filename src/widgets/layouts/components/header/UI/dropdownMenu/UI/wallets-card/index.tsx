@@ -66,7 +66,7 @@ export const WalletsCard: FC = ({}) => {
             slidesPerView: 2.5,
           },
         }}
-        className="!py-3 !px-3"
+        className="!p-0"
         // className="!p-0 rounded-[16px] overflow-hidden"
       >
         {WALLETS.map(({ amount, variant, type }, index) => (

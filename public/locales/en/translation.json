@@ -1451,6 +1451,7 @@
       "selfemployed": "Individual",
       "entity": "Legal Entity",
       "individual": "Sole Proprietor",
+      "organization": "Organization",
       "selfemployedaccount": "Self-Employed"
     },
     "subtypes": {
