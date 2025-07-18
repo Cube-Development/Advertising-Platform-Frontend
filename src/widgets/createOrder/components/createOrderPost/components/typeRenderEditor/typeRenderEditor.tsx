@@ -35,6 +35,15 @@ export const TypeRenderEditor: FC<TypeRenderEditorProps> = ({
         setValue,
       });
 
+    // case platformTypesNum.site:
+    //   return renderEditor({
+    //     platformId: platformTypesNum.site,
+    //     formState,
+    //     setValue,
+    //     disabled: true,
+    //     placeholder: "Ссылка на сайт",
+    //   });
+
     default:
       return null;
   }

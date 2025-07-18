@@ -29,6 +29,9 @@ export enum PostTypesNum {
   FullHd_vertical = 2,
   feed = 3,
   default = 4,
+  site = 5,
+  siteAndTelegram = 6,
+  siteAndInstagram = 7,
 }
 
 export enum MatchTypesNum {
@@ -92,12 +95,16 @@ export const platformTypes = [
     default_value: "platform_types.site.default_value",
     post_types: [
       {
-        id: PostTypesNum.FullHd_horizontal,
-        name: "create_order.create.post_types.site.videos",
+        id: PostTypesNum.site,
+        name: "create_order.create.post_types.site.default",
       },
       {
-        id: PostTypesNum.FullHd_vertical,
-        name: "create_order.create.post_types.site.shorts",
+        id: PostTypesNum.siteAndTelegram,
+        name: "create_order.create.post_types.site.telegram",
+      },
+      {
+        id: PostTypesNum.siteAndInstagram,
+        name: "create_order.create.post_types.site.instagram",
       },
     ],
   },

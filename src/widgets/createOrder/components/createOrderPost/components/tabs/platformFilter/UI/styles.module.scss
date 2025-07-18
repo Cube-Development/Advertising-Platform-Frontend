@@ -1,20 +1,11 @@
 .types {
   display: grid;
-  grid-template: 1fr / 1fr auto;
-  column-gap: 10px;
+  grid-auto-flow: row;
+  row-gap: 10px;
   align-items: center;
 
-  @media (max-width: 992px) {
-    grid-template: 1fr / 1fr;
-    justify-content: center;
-    align-items: center;
-  }
-
-  @media (max-width: 576px) {
-    column-gap: 5px;
-  }
-
   > p {
+    text-align: center;
     white-space: nowrap;
     font-size: var(--font-size-subtitle-main-lg);
     font-weight: 500;
@@ -26,7 +17,7 @@
 
   ul {
     display: grid;
-    grid-template: 1fr / repeat(3, 1fr);
+    grid-template: 1fr / repeat(4, 1fr);
     column-gap: 10px;
     align-items: center;
     justify-content: end;

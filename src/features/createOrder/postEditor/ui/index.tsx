@@ -18,6 +18,8 @@ interface EditorProps {
   type: CreatePostFormData;
   platformId: number;
   formState: ICreatePostForm;
+  disabled?: boolean;
+  placeholder?: string;
 }
 
 export const Editor: FC<EditorProps> = ({
@@ -25,6 +27,8 @@ export const Editor: FC<EditorProps> = ({
   type,
   platformId,
   formState,
+  placeholder,
+  disabled = false,
 }) => {
   const postsWithoutCurrent = formState?.selectedMultiPostId
     ? formState?.multiposts?.filter(
@@ -50,7 +54,7 @@ export const Editor: FC<EditorProps> = ({
         post_type: formState.selectedPostType,
       };
 
-  const startContent = currentPost?.text?.[0]?.content || "";
+  const startContent = placeholder || currentPost?.text?.[0]?.content || "";
   const [content, setContent] = useState(startContent);
   const limit = 1000;
 
@@ -60,6 +64,7 @@ export const Editor: FC<EditorProps> = ({
 
   // Конфигурация редактора с изменением поведения параграфов
   const editor = useEditor({
+    editable: !disabled,
     extensions: [
       StarterKit.configure({
         // paragraph: {
@@ -128,7 +133,7 @@ export const Editor: FC<EditorProps> = ({
     <div className={styles.editor}>
       <EditorContent
         editor={editor}
-        className="pb-12 pt-3 h-full relative"
+        className="relative h-full pt-3 pb-12"
         maxLength={limit}
       >
         <Toolbar editor={editor} />

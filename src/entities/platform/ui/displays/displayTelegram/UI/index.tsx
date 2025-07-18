@@ -32,26 +32,9 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
   post,
   orderId,
 }) => {
-  // post response
-  // const photosRes: IFile[] =
-  //   post?.files?.filter((el) => el.content_type === ContentType.photo) || [];
-  // const videosRes =
-  //   post?.files?.filter((el) => el.content_type === ContentType.video) || [];
-  // const mediaRes: IFile[] = [...photosRes, ...videosRes];
-  // const textRes: string =
-  //   post?.files?.filter((el) => el.content_type === ContentType.text)[0]
-  //     .content || "";
-  // const fileRes: IFile | undefined = post?.files?.find(
-  //   (el) => el.content_type === ContentType.file
-  // );
-  // const buttonsRes: IFile[] =
-  //   post?.files?.filter((el) => el.content_type === ContentType.button) || [];
-  // const commentRes = post?.comment || "";
-
   const { mediaRes, textRes, fileRes, buttonsRes, commentRes } =
     preparePostsData(post);
 
-  // postFromData
   const currentPost = formState?.selectedMultiPostId
     ? formState?.multiposts?.find((item) =>
         orderId
@@ -126,7 +109,6 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
     editable: false,
   });
 
-  // Обновляем контент редактора, когда изменяется postText
   useEffect(() => {
     if (postEditor && postText) {
       postEditor.commands.setContent(postText[0]?.content || "");

@@ -7,12 +7,16 @@ interface RenderEditorProps {
   platformId: platformTypesNum;
   formState: ICreatePostForm;
   setValue: UseFormSetValue<ICreatePostForm>;
+  disabled?: boolean;
+  placeholder?: string;
 }
 
 export const renderEditor = ({
   platformId,
   formState,
   setValue,
+  disabled = false,
+  placeholder,
 }: RenderEditorProps) => {
   if (formState?.selectedMultiPostId) {
     return formState?.multiposts?.map((post) =>
@@ -24,6 +28,8 @@ export const renderEditor = ({
           type={CreatePostFormData.multiposts}
           platformId={platformId}
           formState={formState}
+          disabled={disabled}
+          placeholder={placeholder}
         />
       ) : null,
     );
@@ -36,6 +42,8 @@ export const renderEditor = ({
           type={CreatePostFormData.posts}
           platformId={platformId}
           formState={formState}
+          disabled={disabled}
+          placeholder={placeholder}
         />
       ) : null,
     );

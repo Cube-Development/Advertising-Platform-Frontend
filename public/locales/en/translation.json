@@ -1154,6 +1154,25 @@
       },
       "change_notifications": {
         "title": "Notification settings"
+      },
+      "organization_data": {
+        "title": "Organization data",
+        "fields": {
+          "type": "Organization type",
+          "inn": "TIN",
+          "pinfl": "PINFL",
+          "status": "Status"
+        },
+        "organization_types": {
+          "self_employed": "Self-employed",
+          "entity": "Legal entity",
+          "individual": "IE"
+        },
+        "status_types": {
+          "approved": "Approved",
+          "not_approved": "Not approved"
+        },
+        "edit": "Edit"
       }
     }
   },
@@ -1196,7 +1215,7 @@
         }
       },
       "PNFL": {
-        "title": "Personal Identification Number (PNFL)",
+        "title": "PNFL",
         "default_value": "12345678901234",
         "description": "Personal Identification Number for individuals. Enter a valid PNFL as it is required for data verification.",
         "error": {
@@ -1508,6 +1527,7 @@
       "comment": "Comment for the Blogger...",
       "result": "Result",
       "post": "Start filling out the advertising post to see the result",
+       "site": "Describe your technical assignment in detail in the comment and attach the necessary files",
       "template": "Upload Template",
       "comment_to_post": "Comment on the Technical Assignment: ",
       "see_post_mobile_btn": "View Post",

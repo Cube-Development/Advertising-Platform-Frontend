@@ -170,8 +170,12 @@
 
         .post_data {
           display: grid;
-          grid-template: minmax(100px, 240px) auto / 1fr;
+          grid-template: 0.6fr 1fr / 1fr;
           row-gap: 30px;
+
+          &:has(:only-child) {
+            grid-template: unset;
+          }
 
           @media (max-width: 768px) {
             row-gap: 15px;
@@ -181,15 +185,9 @@
             height: fit-content;
           }
 
-          .block {
-            display: grid;
-            grid-auto-flow: row;
-            row-gap: 15px;
-          }
-
           .block__bottom {
             display: grid;
-            grid-template: 54px 54px 2fr / 1fr;
+            grid-template: max-content max-content 1fr / 1fr;
             row-gap: 25px;
 
             @media (max-width: 768px) {
@@ -197,7 +195,7 @@
             }
 
             &.filter {
-              grid-template: 0.8fr 3.2fr / 1fr;
+              grid-template: max-content 1fr / 1fr;
             }
           }
         }

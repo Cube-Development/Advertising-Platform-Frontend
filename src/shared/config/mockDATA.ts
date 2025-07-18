@@ -205,8 +205,8 @@ export const MOCK_SITE_CATALOG = [
       {
         format: 8,
         format_name: {
-          small: "Сторис: видео(до 30 сек)+текст",
-          big: "Сторис: видео(до 30 сек)+текст",
+          small: "Сайт",
+          big: "Сайт",
         },
         price: 1900000.0,
         views: 0,
@@ -216,8 +216,19 @@ export const MOCK_SITE_CATALOG = [
       {
         format: 6,
         format_name: {
-          small: "Лента: фото/видео+текст",
-          big: "Лента: фото/видео+текст",
+          small: "Telegram",
+          big: "Telegram",
+        },
+        price: 7100000.0,
+        views: 0,
+        er: 0.0,
+        cpv: 0.0,
+      },
+      {
+        format: 6,
+        format_name: {
+          small: "Instagram",
+          big: "Instagram",
         },
         price: 7100000.0,
         views: 0,
@@ -229,8 +240,8 @@ export const MOCK_SITE_CATALOG = [
       {
         format: 8,
         format_name: {
-          small: "Сторис: видео(до 30 сек)+текст",
-          big: "Сторис: видео(до 30 сек)+текст",
+          small: "Сайт",
+          big: "Сайт",
         },
         price: 1900000.0,
         views: 0,
@@ -239,5 +250,48 @@ export const MOCK_SITE_CATALOG = [
       },
     ],
     channel_languages: [1],
+  },
+];
+
+export const MOCK_CREATE_ORDERS = [
+  {
+    id: "caa0943f-4593-47d8-907a-33372710a711",
+    channel_url: "https://www.instagram.com/im.merem/",
+    name: "im.merem",
+    category: "Блоги",
+    avatar:
+      "https://iswift2bucket.s3.amazonaws.com/avatar/17841439861600917.jpg?response-cache-control=no-cache%2C%20no-store%2C%20must-revalidate&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAYTCOAI7V3EBLTQ4S%2F20250717%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Date=20250717T141926Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=fed84f21a39cd92787d9c422fa0a37f2bc88a3925803daae729ec104bf5e95fd",
+    platform: 1,
+    post_type: 4,
+  },
+  {
+    id: "caa0943f-4593-47d8-907a-33372710a711",
+    channel_url: "https://www.instagram.com/im.merem/",
+    name: "im.merem",
+    category: "Блоги",
+    avatar:
+      "https://iswift2bucket.s3.amazonaws.com/avatar/17841439861600917.jpg?response-cache-control=no-cache%2C%20no-store%2C%20must-revalidate&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAYTCOAI7V3EBLTQ4S%2F20250717%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Date=20250717T141926Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=fed84f21a39cd92787d9c422fa0a37f2bc88a3925803daae729ec104bf5e95fd",
+    platform: 4,
+    post_type: 5,
+  },
+  {
+    id: "44b4554a-ead8-4c72-bd88-40721cb6ed0d",
+    channel_url: "https://t.me/muhrim",
+    name: "Muhrim / Муҳрим",
+    category: "Блоги",
+    avatar:
+      "https://iswift2bucket.s3.amazonaws.com/avatar/-1001102452995.jpg?response-cache-control=no-cache%2C%20no-store%2C%20must-revalidate&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAYTCOAI7V3EBLTQ4S%2F20250717%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Date=20250717T141927Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=8e23ee86b554f7eb8febf8494b965889d4c4afcfb5678a2929102ece7239d76f",
+    platform: 4,
+    post_type: 6,
+  },
+  {
+    id: "44b4554a-ead8-4c72-bd88-50721cb6ed0d",
+    channel_url: "https://t.me/muhrim",
+    name: "Muhrim / Муҳрим",
+    category: "Блоги",
+    avatar:
+      "https://iswift2bucket.s3.amazonaws.com/avatar/-1001102452995.jpg?response-cache-control=no-cache%2C%20no-store%2C%20must-revalidate&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAYTCOAI7V3EBLTQ4S%2F20250717%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Date=20250717T141927Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=8e23ee86b554f7eb8febf8494b965889d4c4afcfb5678a2929102ece7239d76f",
+    platform: 4,
+    post_type: 7,
   },
 ];
