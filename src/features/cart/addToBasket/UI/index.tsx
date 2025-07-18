@@ -16,12 +16,25 @@ export const AddToBasket: FC<IAddToBasketProps> = ({
   isSmallCatalogCard,
 }) => {
   const { t } = useTranslation();
-  console.log("card", !card.selected_format, !page, card);
+
+  let isSelected: boolean = false;
+
+  switch (Array.isArray(card?.selected_format)) {
+    case true:
+      isSelected = (!!card?.selected_format as any)?.length;
+      break;
+    case false:
+      isSelected = !!card?.selected_format;
+      break;
+  }
+
+  // console.log("card", !card.selected_format, !page, card);
+
   if (isSmallCatalogCard) {
     return (
       <MyButton
         buttons_type={
-          !card.selected_format && !page
+          !isSelected && !page
             ? "button__blue"
             : page
               ? "button__yellow"
@@ -36,11 +49,7 @@ export const AddToBasket: FC<IAddToBasketProps> = ({
               {selectedFormat?.price?.toLocaleString()}
             </span>
             <span className="mobile-xl:size-5 size-3.5">
-              {page || card.selected_format ? (
-                <CartMinusIcon />
-              ) : (
-                <CartPlusIcon />
-              )}
+              {page || isSelected ? <CartMinusIcon /> : <CartPlusIcon />}
             </span>
           </div>
           <FormatList
@@ -58,7 +67,7 @@ export const AddToBasket: FC<IAddToBasketProps> = ({
   return (
     <MyButton
       buttons_type={
-        !card.selected_format && !page
+        !isSelected && !page
           ? "button__blue"
           : page
             ? "button__yellow"
@@ -75,7 +84,7 @@ export const AddToBasket: FC<IAddToBasketProps> = ({
       />
       <div className={styles.price}>
         {selectedFormat?.price?.toLocaleString()} {t("symbol")}
-        {page || card.selected_format ? <CartMinusIcon /> : <CartPlusIcon />}
+        {page || isSelected ? <CartMinusIcon /> : <CartPlusIcon />}
       </div>
     </MyButton>
   );

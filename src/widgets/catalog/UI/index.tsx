@@ -230,14 +230,14 @@ export const CatalogBlock: FC = () => {
     console.log("handleChangeCartCards", cartChannel);
 
     if (formState?.filter?.platform === platformTypesNum.site) {
-      setMockData(
-        // [cartChannel]
-        mockData.map((item) =>
-          item.id === cartChannel.id
-            ? { ...item, selected_format: cartChannel.selected_format }
-            : item,
-        ),
-      );
+      // setMockData(
+      //   // [cartChannel]
+      //   mockData.map((item) =>
+      //     item.id === cartChannel.id
+      //       ? { ...item, selected_format: cartChannel.selected_format }
+      //       : item,
+      //   ),
+      // );
       return;
     }
 

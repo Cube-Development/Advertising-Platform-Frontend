@@ -156,6 +156,8 @@ export const FormatList: FC<IFormatListProps> = ({
   };
   console.log(
     "555555555555555",
+    isMultiple,
+    defaultValue,
     isMultiple && defaultValue?.length ? options?.[0]?.name : "",
   );
   return (
@@ -203,9 +205,7 @@ export const FormatList: FC<IFormatListProps> = ({
         onValueChange={handleMultiOptionsChange}
         defaultValue={defaultValue}
         single={!isMultiple}
-        placeholder={
-          isMultiple && defaultValue?.length ? options?.[0]?.name : ""
-        }
+        placeholder={isMultiple ? options?.[0]?.name : ""}
         // placeholder={allText?.default_value}
         // disabled={disabled}
         // single={single}
