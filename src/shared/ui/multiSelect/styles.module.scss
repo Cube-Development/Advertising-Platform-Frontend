@@ -12,10 +12,13 @@
   }
 
   .filter {
-    display: flex;
+    display: grid;
+    grid-template-columns: 1fr max-content;
     justify-content: space-between;
     align-items: center;
+    gap: 10px;
     width: 100%;
+    overflow: hidden;
 
     .text {
       display: flex;
@@ -26,6 +29,7 @@
       font-style: normal;
       font-weight: 400;
       line-height: normal;
+      overflow: hidden;
 
       .filter {
         display: flex;

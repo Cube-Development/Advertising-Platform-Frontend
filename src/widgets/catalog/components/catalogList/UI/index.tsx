@@ -85,7 +85,7 @@ export const CatalogList: FC<CatalogListProps> = ({
   const translateSortingTypes = sortingTypes.map((el) => {
     return { ...el, name: t(el.name), id: el.type };
   });
-  console.log(channels.length, channels);
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.filters__row}>

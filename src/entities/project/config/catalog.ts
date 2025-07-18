@@ -1,4 +1,5 @@
 import {
+  ChromeIcon,
   InstagramIcon,
   SortDownIcon,
   SortUpIcon,
@@ -50,6 +51,7 @@ export const platformToIcon: any = {
   1: TelegramIcon,
   2: YouTubeIcon,
   3: InstagramIcon,
+  4: ChromeIcon,
 };
 
 export const sortingTypes = [

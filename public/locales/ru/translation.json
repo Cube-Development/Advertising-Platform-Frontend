@@ -175,12 +175,17 @@
     "title": "Общий баланс",
 
     "deposit": {
-      "title": "Депозит",
+      "title": "Депозитный",
       "description": "Текущий баланс"
     },
 
     "profit": {
-      "title": "Прибыль",
+      "title": "Прибыльный",
+      "description": "Текущий баланс"
+    },
+
+    "spending": {
+      "title": "Расходный",
       "description": "Текущий баланс"
     }
   },
@@ -1701,6 +1706,7 @@
       "selfemployed": "Физ. лицо",
       "entity": "Юр. лицо",
       "individual": "ИП",
+      "organization": "Организация",
       "selfemployedaccount": "Самозанятый"
     },
     "subtypes": {
@@ -1777,6 +1783,7 @@
       "comment": "Комментарий блогеру...",
       "result": "Результат",
       "post": "Начните заполнять рекламный пост чтобы увидеть результат",
+      "site": "Опишите свое Техническое задание подробно в комментраии и приложите необходимые файлы",
       "template": "Загрузить шаблон",
       "comment_to_post": "Комментарий к техническому заданию: ",
       "see_post_mobile_btn": "Посмотреть пост",
@@ -1791,13 +1798,19 @@
         "youtube": {
           "shorts": "Youtube Shorts",
           "videos": "Youtube Videos"
+        },
+        "site": {
+          "default": "Сайт",
+          "telegram": "Telegram",
+          "instagram": "Instagram"
         }
       },
 
       "filter": {
         "telegram": "Telegram",
         "instagram": "Instagram",
-        "youtube": "Youtube"
+        "youtube": "Youtube",
+        "site": "Сайт"
       },
       "add_button": {
         "title": "Добавить кнопку",
@@ -2145,7 +2158,8 @@
     "title": "Соцсеть",
     "telegram": "Telegram",
     "instagram": "Instagram",
-    "youtube": "Youtube"
+    "youtube": "Youtube",
+    "site": "Сайт"
   },
 
   "sorting": {
@@ -2171,6 +2185,10 @@
     "youtube": {
       "name": "Youtube",
       "default_value": "https//youtube.com/channel_name..."
+    },
+    "site": {
+      "name": "Сайт",
+      "default_value": "https//domain.com..."
     }
   },
 

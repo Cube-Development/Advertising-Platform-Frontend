@@ -9,7 +9,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@shared/ui";
-import { WalletsBar } from "@widgets/wallet";
+import { WalletsBar } from "@features/wallet";
 import { Loader, X } from "lucide-react";
 import { ButtonHTMLAttributes, FC, useState } from "react";
 import { useTranslation } from "react-i18next";

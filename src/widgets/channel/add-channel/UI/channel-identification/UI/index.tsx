@@ -8,7 +8,7 @@ import {
   useChannelVerifyMutation,
   useCreateCodeQuery,
 } from "@entities/channel";
-import { platformTypes } from "@entities/platform";
+import { platformTypes, platformTypesNum } from "@entities/platform";
 import { ArrowLongHorizontalIcon } from "@shared/assets";
 import { PAGE_ANIMATION } from "@shared/config";
 import {
@@ -168,7 +168,11 @@ export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
                       type="button"
                       className={`${styles.platform__btn} ${identificationParams.platform.type === platform.type ? styles.active : ""}`}
                       onClick={() => changePlatform(platform)}
-                      disabled={identificationParams.checked || isEdit}
+                      disabled={
+                        identificationParams.checked ||
+                        isEdit ||
+                        platformTypesNum.site === platform?.id
+                      }
                     >
                       {t(platform.name)}
                     </MyButton>
@@ -176,7 +180,7 @@ export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
                 </div>
               </div>
 
-              <div className="flex justify-center items-center">
+              <div className="flex items-center justify-center">
                 <p className="lg:text-[56px] md:text-[48px] mobile-xl:text-[32px] text-[24px] font-semibold mobile-xl:leading-normal leading-none">
                   {code?.verification_code}
                 </p>

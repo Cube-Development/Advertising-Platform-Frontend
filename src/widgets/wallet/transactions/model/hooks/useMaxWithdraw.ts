@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 export const useMaxWithdraw = (
   amount: number,
-  walletType: ENUM_WALLETS_TYPE,
+  walletType: ENUM_WALLETS_TYPE | null,
 ) => {
   const { deposit_wallet, profit_wallet } = useAppSelector(
     (state) => state.wallet,

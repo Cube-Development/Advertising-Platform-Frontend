@@ -8,7 +8,7 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.scss";
-import { AddDataForm, NotFoundModal } from "./ui";
+import { AddDataForm, NotFoundModal } from "@features/organization";
 
 export const AddOrganization: FC = ({}) => {
   const { toast } = useToast();

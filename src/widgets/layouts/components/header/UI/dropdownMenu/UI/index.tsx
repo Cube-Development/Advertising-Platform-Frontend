@@ -24,7 +24,7 @@ import {
 } from "../../../model";
 import { MenuItem } from "./menuItem";
 import styles from "./styles.module.scss";
-import { WalletCard } from "./wallet-card";
+import { WalletsCard } from "./wallets-card";
 
 interface DropdownMenuProps {}
 
@@ -100,7 +100,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = () => {
             <div className={styles.menu__bottom}>
               {isAuth && USER_ROLES.includes(role) && (
                 <div className={styles.wallet__block}>
-                  <WalletCard />
+                  <WalletsCard />
                 </div>
               )}
               {USER_ROLES.includes(role) && (

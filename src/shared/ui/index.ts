@@ -26,6 +26,5 @@ export * from "./customCheckbox";
 export * from "./customInput";
 export * from "./customTitle";
 export * from "./customBlockData";
-export * from "./wallet-deposit-card";
-export * from "./wallet-profit-card";
+export * from "./wallet-card";
 export * from "./pdf-preview";

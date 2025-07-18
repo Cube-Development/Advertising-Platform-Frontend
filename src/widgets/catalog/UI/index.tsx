@@ -24,6 +24,7 @@ import {
   BREAKPOINT,
   ENUM_COOKIES_TYPES,
   INTERSECTION_ELEMENTS,
+  MOCK_SITE_CATALOG,
 } from "@shared/config";
 import { useAppDispatch, useAppSelector, useWindowWidth } from "@shared/hooks";
 import { USER_LANGUAGES_LIST } from "@shared/languages";
@@ -226,6 +227,20 @@ export const CatalogBlock: FC = () => {
   const [removeFromManagerCart] = useRemoveFromManagerCartMutation();
 
   const handleChangeCards = (cartChannel: ICatalogChannel) => {
+    console.log("handleChangeCartCards", cartChannel);
+
+    if (formState?.filter?.platform === platformTypesNum.site) {
+      // setMockData(
+      //   // [cartChannel]
+      //   mockData.map((item) =>
+      //     item.id === cartChannel.id
+      //       ? { ...item, selected_format: cartChannel.selected_format }
+      //       : item,
+      //   ),
+      // );
+      return;
+    }
+
     let newCards: ICatalogChannel[] = [];
     const currentCard = (
       (isAuth && role == ENUM_ROLES.ADVERTISER
@@ -471,6 +486,10 @@ export const CatalogBlock: FC = () => {
     }
   }, [formState?.filter]);
 
+  const [mockData, setMockData] = useState(
+    MOCK_SITE_CATALOG as unknown as ICatalogChannel[],
+  );
+
   return (
     <div className="container">
       <div className={`${styles.wrapper}`}>
@@ -498,11 +517,13 @@ export const CatalogBlock: FC = () => {
                 resetField={resetField}
                 page={formState.page}
                 channels={
-                  (isAuth && role == ENUM_ROLES.ADVERTISER
-                    ? catalogAuth?.channels
-                    : isAuth && role == ENUM_ROLES.MANAGER
-                      ? catalogManager?.channels
-                      : catalogPublic?.channels) || []
+                  formState?.filter?.platform === platformTypesNum.site
+                    ? mockData
+                    : (isAuth && role == ENUM_ROLES.ADVERTISER
+                        ? catalogAuth?.channels
+                        : isAuth && role == ENUM_ROLES.MANAGER
+                          ? catalogManager?.channels
+                          : catalogPublic?.channels) || []
                 }
                 onChangeCard={handleChangeCards}
                 isLast={

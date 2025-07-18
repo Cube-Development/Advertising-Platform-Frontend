@@ -47,7 +47,7 @@ export const MultiSelect = React.forwardRef<
       options,
       onValueChange = () => {},
       defaultValue = [],
-      placeholder = "components.select.placeholder",
+      placeholder: pl,
       modalPopover = false,
       asChild = false,
       className = "",
@@ -63,6 +63,8 @@ export const MultiSelect = React.forwardRef<
     ref,
   ) => {
     const { t } = useTranslation();
+    const placeholder = pl ? pl : t("components.select.placeholder");
+    console.log("placeholder", placeholder, pl);
     const [selectedValues, setSelectedValues] =
       React.useState<number[]>(defaultValue);
     const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
@@ -74,6 +76,7 @@ export const MultiSelect = React.forwardRef<
     const handleInputKeyDown = (
       event: React.KeyboardEvent<HTMLInputElement>,
     ) => {
+      event.stopPropagation();
       if (event.key === "Enter") {
         setIsPopoverOpen(true);
       } else if (event.key === "Backspace" && !event.currentTarget.value) {
@@ -90,7 +93,7 @@ export const MultiSelect = React.forwardRef<
         onValueChange([option]);
         setIsPopoverOpen(false);
       } else {
-        const newSelectedValues = selectedValues.includes(option)
+        const newSelectedValues = selectedValues?.includes(option)
           ? selectedValues.filter((value) => value !== option)
           : [...selectedValues, option];
         setSelectedValues(newSelectedValues);
@@ -103,7 +106,8 @@ export const MultiSelect = React.forwardRef<
       onValueChange([]);
     };
 
-    const handleTogglePopover = () => {
+    const handleTogglePopover = (event: React.MouseEvent) => {
+      event.stopPropagation();
       setIsPopoverOpen((prev) => !prev);
     };
 
@@ -144,7 +148,6 @@ export const MultiSelect = React.forwardRef<
                       const singleOption = options?.find(
                         (option) => option?.id === selectedValues[0],
                       );
-
                       return (
                         <div className={styles.filter}>
                           {singleOption?.img && (
@@ -169,8 +172,9 @@ export const MultiSelect = React.forwardRef<
                   {showButtonClear && (
                     <>
                       <XIcon
+                        size={16}
                         className={cn(
-                          "h-4 cursor-pointer text-muted-foreground",
+                          "cursor-pointer text-muted-foreground",
                           isPopoverOpen ? "rotate" : "rotate__down",
                         )}
                         onClick={(event) => {
@@ -185,8 +189,9 @@ export const MultiSelect = React.forwardRef<
                     </>
                   )}
                   <ChevronDown
+                    size={16}
                     className={cn(
-                      `h-4 cursor-pointer text-muted-foreground`,
+                      `cursor-pointer text-muted-foreground`,
                       isPopoverOpen ? "rotate" : "rotate__down",
                     )}
                   />
@@ -196,8 +201,9 @@ export const MultiSelect = React.forwardRef<
               <div className={styles.filter}>
                 <span className={styles.text}>{placeholder}</span>
                 <ChevronDown
+                  size={16}
                   className={cn(
-                    `h-4 cursor-pointer text-muted-foreground`,
+                    `cursor-pointer text-muted-foreground`,
                     isPopoverOpen ? "rotate" : "rotate__down",
                   )}
                 />
@@ -206,7 +212,7 @@ export const MultiSelect = React.forwardRef<
           </button>
         </PopoverTrigger>
         <PopoverContent
-          className="w-[var(--radix-popper-anchor-width)] p-0"
+          className="w-[var(--radix-popper-anchor-width)] p-0 "
           align="start"
           onEscapeKeyDown={() => setIsPopoverOpen(false)}
         >
@@ -238,7 +244,7 @@ export const MultiSelect = React.forwardRef<
                     </CommandItem>
                   )}
                   {options.map((option) => {
-                    const isSelected = selectedValues.includes(option?.id);
+                    const isSelected = selectedValues?.includes(option?.id);
                     return (
                       <CommandItem
                         key={option?.id}

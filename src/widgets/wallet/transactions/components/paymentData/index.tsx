@@ -57,7 +57,7 @@ interface PaymentDataProps {
   handleSubmit: UseFormHandleSubmit<IExtendedProfileData, IExtendedProfileData>;
   isPaymentLoading: boolean;
   isTopUp?: boolean;
-  walletType?: ENUM_WALLETS_TYPE;
+  walletType?: ENUM_WALLETS_TYPE | null;
 }
 
 export const PaymentData: FC<PaymentDataProps> = ({
@@ -197,7 +197,7 @@ export const PaymentData: FC<PaymentDataProps> = ({
           <p>{t("wallet.commission.include")}</p>
         </div>
       )}
-      <div className={styles.accept}>
+      {/* <div className={styles.accept}>
         <CustomCheckbox handleChange={() => handleChangeAccept(true, false)} />
         <p>
           {t("wallet.accept.text1")}
@@ -215,7 +215,7 @@ export const PaymentData: FC<PaymentDataProps> = ({
       <div className={styles.accept}>
         <CustomCheckbox handleChange={() => handleChangeAccept(false, true)} />
         <p>{t("wallet.save_data")}</p>
-      </div>
+      </div> */}
       <div className={styles.button}>
         <PaymentDidox isLoading={isPaymentLoading} />
       </div>

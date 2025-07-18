@@ -42,21 +42,53 @@ export const CatalogCard: FC<CatalogCardProps> = ({
   page,
 }) => {
   const { t } = useTranslation();
-  const startFormat: IFormat = card?.selected_format
-    ? card.format.find(
-        (format) => format?.format === card.selected_format?.format,
-      )!
-    : card.format[0];
+
+  let startFormat: IFormat;
+  // !!!
+  switch (Array.isArray(card?.selected_format)) {
+    case true: {
+      startFormat = card?.selected_format
+        ? card.format.find(
+            (format) =>
+              format?.format === (card.selected_format as any)?.[0]?.format,
+          )!
+        : card.format[0];
+
+      break;
+    }
+    case false: {
+      startFormat = card?.selected_format
+        ? card.format.find(
+            (format) => format?.format === card.selected_format?.format,
+          )!
+        : card.format[0];
+      break;
+    }
+  }
+  // const startFormat: IFormat = card?.selected_format
+  //   ? card.format.find(
+  //       (format) => format?.format === card.selected_format?.format,
+  //     )!
+  //   : card.format[0];
+
+  // !!!
+
   const [selectedFormat, setSelectedFormat] = useState<IFormat>(startFormat);
   const screen = useWindowWidth();
   const [isSubcardOpen, setSubcardOpen] = useState(false);
-
   const handleChangeOpenSubcard = (): void => {
     setSubcardOpen(!isSubcardOpen);
   };
 
   const handleChangeFormat = (selectedValue: IFormat) => {
-    setSelectedFormat(selectedValue);
+    // !!!!
+    if (Array.isArray(selectedValue)) {
+      setSelectedFormat(selectedValue[0]);
+    } else {
+      setSelectedFormat(selectedValue);
+    }
+    // !!!!
+
     if (
       card?.selected_format &&
       card?.selected_format?.format !== selectedValue?.format

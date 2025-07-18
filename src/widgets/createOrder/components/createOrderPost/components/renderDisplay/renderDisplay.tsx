@@ -1,6 +1,7 @@
 import {
   DisplayFeed,
   DisplayShorts,
+  DisplaySite,
   DisplayStories,
   DisplayTelegram,
   DisplayVideos,
@@ -70,6 +71,9 @@ export const RenderDisplay: FC<IRenderDisplayProps> = ({ formState }) => {
         );
       }
       break;
+
+    case platformTypesStr.site:
+      return <DisplaySite />;
 
     default:
       return null;

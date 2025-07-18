@@ -55,13 +55,8 @@ export const WALLET_TOP_UP_FILTER_TABS_LIST = [
     id: PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT,
   },
   {
-    name: "wallet.types.entity",
+    name: "wallet.types.organization",
     type: PROFILE_TYPE.ENTITIES,
     id: PROFILE_STATUS.ENTITIES,
-  },
-  {
-    name: "wallet.types.individual",
-    type: PROFILE_TYPE.INDIVIDUALS,
-    id: PROFILE_STATUS.INDIVIDUALS,
   },
 ];

@@ -1,5 +1,5 @@
 import { ICreatePostForm } from "@entities/project";
-import { ENUM_COOKIES_TYPES } from "@shared/config";
+import { ENUM_COOKIES_TYPES, MOCK_CREATE_ORDERS } from "@shared/config";
 import { useAppSelector } from "@shared/hooks";
 import { SpinnerLoader } from "@shared/ui";
 import Cookies from "js-cookie";
@@ -56,6 +56,11 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
       await payment(formData, projectId, role);
     }
   };
+
+  // console.log("cards", projectChannels?.orders);
+
+  // const CARDS = MOCK_CREATE_ORDERS;
+  const CARDS = null;
   return (
     <>
       {isLoading && <CreateOrderLoading />}
@@ -74,7 +79,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
         ) : (
           <>
             <CreateOrderPost
-              cards={projectChannels?.orders || []}
+              cards={CARDS || projectChannels?.orders || []}
               posts={projectPosts?.posts || []}
               isBlur={blur.post}
               onChangeBlur={handleOnChangeBlur}
@@ -84,7 +89,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
             />
 
             <CreateOrderDatetime
-              cards={projectChannels?.orders || []}
+              cards={CARDS || projectChannels?.orders || []}
               isBlur={blur.datetime}
               onChangeBlur={handleOnChangeBlur}
               setValue={setValue}
