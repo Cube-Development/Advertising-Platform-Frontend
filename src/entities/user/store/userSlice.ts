@@ -1,10 +1,12 @@
 import { ENUM_ROLES, USER_ROLES } from "@entities/user";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { ENUM_COOKIES_TYPES } from "@shared/config";
+import { log } from "console";
 import Cookies from "js-cookie";
 
 interface UserState {
   isAuth: boolean;
+  isAuthEcp?: boolean;
   role: ENUM_ROLES;
 }
 
@@ -17,6 +19,8 @@ const getRole: ENUM_ROLES =
 
 const initialState: UserState = {
   isAuth: Cookies.get(ENUM_COOKIES_TYPES.IS_AUTH) === "true" ? true : false,
+  isAuthEcp:
+    Cookies.get(ENUM_COOKIES_TYPES.IS_AUTH_ECP) === "true" ? true : false,
   role: getRole,
 };
 
@@ -27,6 +31,10 @@ export const userSlice = createSlice({
     login: (state) => {
       Cookies.set(ENUM_COOKIES_TYPES.IS_AUTH, "true");
       state.isAuth = true;
+    },
+    loginEcp: (state) => {
+      Cookies.set(ENUM_COOKIES_TYPES.IS_AUTH_ECP, "true");
+      state.isAuthEcp = true;
     },
     logout: (state) => {
       Cookies.remove(ENUM_COOKIES_TYPES.PROJECT_ID);
@@ -42,6 +50,11 @@ export const userSlice = createSlice({
       state.isAuth = false;
       state.role = logoutRole;
     },
+    logoutEcp: (state) => {
+      Cookies.remove(ENUM_COOKIES_TYPES.CERTIFICATE_USER_KEY);
+      Cookies.set(ENUM_COOKIES_TYPES.IS_AUTH_ECP, "false");
+      state.isAuthEcp = false;
+    },
     setAuth: (state, action: PayloadAction<boolean>) => {
       state.isAuth = action.payload;
     },
@@ -53,4 +66,5 @@ export const userSlice = createSlice({
 });
 
 export default userSlice.reducer;
-export const { login, logout, setAuth, toggleRole } = userSlice.actions;
+export const { login, logout, setAuth, toggleRole, loginEcp, logoutEcp } =
+  userSlice.actions;

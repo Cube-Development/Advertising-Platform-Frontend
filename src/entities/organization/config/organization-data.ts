@@ -18,14 +18,13 @@ import {
 export const ADD_SELF_EMPLOYED_DATA: IBlockData = {
   parameters: [
     {
-      label: "add_organization.basic_info.PNFL",
+      label: "organization.basic_info.PNFL",
       type: legalData.PNFL,
       validate: {
-        required: "add_organization.basic_info.PNFL.error.required",
+        required: "organization.basic_info.PNFL.error.required",
         validate: {
           valid: (value: string) =>
-            isValidPNFL(value) ||
-            "add_organization.basic_info.PNFL.error.required",
+            isValidPNFL(value) || "organization.basic_info.PNFL.error.required",
         },
         onChange: formatToNumber,
       },
@@ -36,16 +35,74 @@ export const ADD_SELF_EMPLOYED_DATA: IBlockData = {
 export const ADD_LEGAL_DATA: IBlockData = {
   parameters: [
     {
-      label: "add_organization.basic_info.INN",
+      label: "organization.basic_info.INN",
       type: legalData.INN,
       validate: {
-        required: "add_organization.basic_info.INN.error.required",
+        required: "organization.basic_info.INN.error.required",
         validate: {
           valid: (value: string) =>
-            isValidINN(value) ||
-            "add_organization.basic_info.INN.error.required",
+            isValidINN(value) || "organization.basic_info.INN.error.required",
         },
         onChange: formatToNumber,
+      },
+    },
+
+    {
+      label: "add_profile.contact.email",
+      type: legalData.email,
+      validate: {
+        required: "add_profile.contact.email.error.required",
+        validate: {
+          valid: (value: string) =>
+            isValidEmail(value) || "add_profile.contact.email.error.required",
+        },
+      },
+    },
+
+    {
+      label: "add_profile.contact.phone",
+      type: legalData.phone,
+      validate: {
+        required: "add_profile.contact.phone.error.required",
+        validate: {
+          valid: (value: string) =>
+            isValidPhoneNumber(value) ||
+            "add_profile.contact.phone.error.required",
+        },
+        onChange: formatToPhoneNumber,
+      },
+    },
+
+    {
+      label: "add_profile.contact.password",
+      type: legalData.password,
+      validate: {
+        required: "add_profile.contact.password.error.required",
+      },
+    },
+  ],
+};
+
+export const LOGIN_BY_PASSWORD_DATA: IBlockData = {
+  parameters: [
+    {
+      label: "organization.basic_info.PNFL",
+      type: legalData.PNFL,
+      validate: {
+        required: "organization.basic_info.PNFL.error.required",
+        validate: {
+          valid: (value: string) =>
+            isValidPNFL(value) || "organization.basic_info.PNFL.error.required",
+        },
+        onChange: formatToNumber,
+      },
+    },
+
+    {
+      label: "add_profile.contact.password",
+      type: legalData.password,
+      validate: {
+        required: "add_profile.contact.password.error.required",
       },
     },
   ],

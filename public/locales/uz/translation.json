@@ -152,6 +152,7 @@
     "calculateIncome": "Daromad hisoblash",
 
     "orders": "Mening reklama kampaniyalarim",
+    "manager_orders": "Reklama buyurtmalari",
 
     "saved": "Saqlanganlar",
     "manager": "Menejerlar bilan",
@@ -252,7 +253,9 @@
       {
         "stage": "Joylashtirishni mustaqil yarating yoki sun'iy intellekt yordamida post generatsiya qiling"
       },
-      { "stage": "Kanal egasi postni joylashtirib, tekshirish uchun sizga yuboradi" }
+      {
+        "stage": "Kanal egasi postni joylashtirib, tekshirish uchun sizga yuboradi"
+      }
     ],
     "why_title": "Nega biz bilan samaraliroq?",
     "accomms_list": [
@@ -270,8 +273,8 @@
           {
             "stage": "Har bir admin bilan alohida to'lov qilish (hech qanday kafolatsiz)"
           },
-          { 
-            "stage": "Reklama postini har bir adminga yuborish" 
+          {
+            "stage": "Reklama postini har bir adminga yuborish"
           },
           {
             "stage": "Post joylashtirilishini har bir kanalda alohida kuzatish"
@@ -315,12 +318,12 @@
         "options": [
           { "option": "Kanallarni qo'lda tanlash", "available": true },
           { "option": "Individual targ'ibot rejasi", "available": true },
-          { 
-            "option": "Samarali reklama postini yaratish", "available": true 
+          {
+            "option": "Samarali reklama postini yaratish",
+            "available": true
           },
           { "option": "Nashrlar haqida bildirishnomalar", "available": true },
-          { "option": "Tanlangan kanallarni kelishish",
-            "available": false },
+          { "option": "Tanlangan kanallarni kelishish", "available": false },
           { "option": "Targ'ibot bo'yicha maslahatlar", "available": false },
           {
             "option": "Bajarilgan ish bo'yicha batafsil hisobot",
@@ -339,9 +342,9 @@
         "options": [
           { "option": "Kanallarni qo'lda tanlash", "available": true },
           { "option": "Individual targ'ibot rejasi", "available": true },
-          { 
+          {
             "option": "Samarali reklama postini yaratish",
-            "available": true 
+            "available": true
           },
           { "option": "Nashrlar haqida bildirishnomalar", "available": true },
           { "option": "Tanlangan kanallarni kelishish", "available": true },
@@ -363,9 +366,9 @@
         "options": [
           { "option": "Kanallarni qo'lda tanlash", "available": true },
           { "option": "Individual targ'ibot rejasi", "available": true },
-          { 
-            "option": "Samarali reklama postini yaratish", 
-            "available": true 
+          {
+            "option": "Samarali reklama postini yaratish",
+            "available": true
           },
           { "option": "Nashrlar haqida bildirishnomalar", "available": true },
           { "option": "Tanlangan kanallarni kelishish", "available": true },
@@ -385,7 +388,7 @@
         "name": "Kadamov Roman",
         "workplace": "CocaCola Uzbekistan",
         "img": "customer1.jpg",
-        "text": "Ushbu marketplace-da reklama sotish - haqiqiy topilma! Brendni targ'ib qilish uchun ajoyib platforma. Bitimlarning shaffof shartlari, mijozlar bilan samarali muloqot va yuqori sifatli tahlillar. Biznesingiz ko'rinishini oshirishni istaganlar uchun tavsiya qilaman."
+        "text": "Ushbu marketplace-da reklama sotish - haqiqatan ham topilma! Brendni targ'ib qilish uchun ajoyib platforma. Bitimlarning shaffof shartlari, mijozlar bilan samarali muloqot va yuqori sifatli tahlillar. Biznesingiz ko'rinishini oshirishni istaganlar uchun tavsiya qilaman."
       },
       {
         "name": "Karimov Damir",
@@ -403,7 +406,7 @@
         "name": "customer 1",
         "workplace": "CocaCola Uzbekistan",
         "img": "customer1.jpg",
-        "text": "Ushbu marketplace-da reklama sotish - haqiqiy topilma! Brendni targ'ib qilish uchun ajoyib platforma. Bitimlarning shaffof shartlari, mijozlar bilan samarali muloqot va yuqori sifatli tahlillar. Biznesingiz ko'rinishini oshirishni istaganlar uchun tavsiya qilaman."
+        "text": "Ushbu marketplace-da reklama sotish - haqiqatan ham topilma! Brendni targ'ib qilish uchun ajoyib platforma. Bitimlarning shaffof shartlari, mijozlar bilan samarali muloqot va yuqori sifatli tahlillar. Biznesingiz ko'rinishini oshirishni istaganlar uchun tavsiya qilaman."
       },
       {
         "name": "customer 2",
@@ -487,12 +490,16 @@
         "type": "self",
         "title": "Mustaqil joylashtirish",
         "stages": [
-          { "stage": "Reklama beruvchilarni doimiy qidirishga vaqt va kuch sarflash" },
+          {
+            "stage": "Reklama beruvchilarni doimiy qidirishga vaqt va kuch sarflash"
+          },
           {
             "stage": "Daromadning noaniqligi, chunki reklama beruvchilar oqimi faqat sizning imkoniyatlaringiz bilan cheklangan"
           },
           { "stage": "To'lov kafolati past" },
-          { "stage": "Kelishuv jarayonining barcha bosqichlarida avtomatlashtirish yo'q" },
+          {
+            "stage": "Kelishuv jarayonining barcha bosqichlarida avtomatlashtirish yo'q"
+          },
           {
             "stage": "Oxir-oqibat sotib olmaydigan reklama beruvchilarga vaqt sarflash"
           }
@@ -1261,84 +1268,84 @@
       }
     },
     "bank_data": {
-    "bank_data": "Bank ma'lumotlari",
-    "bank_mfo": {
-      "title": "Bank MFOsi",
-      "default_value": "12345",
-      "description": "Hisobingiz ochilgan bankning filiallararo pul o'tkazmalari kodini (MFO) kiriting. Ushbu kod to'lovlarni qayta ishlash uchun ishlatiladi.",
-      "error": {
-        "required": "noto'g'ri format, belgi soni - 5"
+      "bank_data": "Bank ma'lumotlari",
+      "bank_mfo": {
+        "title": "Bank MFOsi",
+        "default_value": "12345",
+        "description": "Hisobingiz ochilgan bankning filiallararo pul o'tkazmalari kodini (MFO) kiriting. Ushbu kod to'lovlarni qayta ishlash uchun ishlatiladi.",
+        "error": {
+          "required": "noto'g'ri format, belgi soni - 5"
+        }
+      },
+      "bank_name": {
+        "title": "Bank nomi",
+        "default_value": "Bank nomi",
+        "description": "Hisobingiz ochilgan bankning rasmiy nomini kiriting. Bu mablag'laringiz to'g'ri o'tkazilishi uchun muhim.",
+        "error": {
+          "required": "maydon bo'sh bo'lishi mumkin emas"
+        }
+      },
+      "checking_account": {
+        "title": "Hisob raqami",
+        "default_value": "12345678901234567890",
+        "description": "Bankda o'zingiz yoki tashkilotingiz nomiga ochilgan hisob raqamini kiriting. Ushbu hisob mablag' o'tkazmalari va boshqa moliyaviy operatsiyalar uchun ishlatiladi.",
+        "error": {
+          "required": "noto'g'ri format, belgi soni - 20"
+        }
+      },
+      "transit_account": {
+        "title": "Tranzit hisobi",
+        "default_value": "12345678901234567890",
+        "description": "Agar kerak bo'lsa, mablag' o'tkazmalari uchun ishlatiladigan tranzit hisob raqamingizni kiriting. Ushbu hisob sizning asosiy hisobingizdan farq qilishi mumkin.",
+        "error": {
+          "required": "noto'g'ri format, belgi soni - 20"
+        }
+      },
+      "card_number": {
+        "title": "Karta ma'lumotlari",
+        "default_value": "9860123412341234",
+        "description": "Bo'shliqlarsiz bank kartangizning raqamini kiriting. Raqamni noto'g'ri kiritish to'lov rad etilishiga olib kelishi mumkin, shuning uchun diqqat bilan kiriting.",
+        "error": {
+          "required": "noto'g'ri format, belgi soni - 16"
+        }
+      },
+      "card_date": {
+        "title": "Kartaning amal qilish muddati",
+        "default_value": "mm/yy",
+        "description": "Kartangiz amal qilish muddatini MM/YY (oy/yil) formatida kiriting. Ushbu ma'lumotlar tranzaksiyalarni qayta ishlash va kartaning dolzarbligini tasdiqlash uchun zarur.",
+        "error": {
+          "required": "sanani mm/yy formatida kiriting: 09/23"
+        }
       }
     },
-    "bank_name": {
-      "title": "Bank nomi",
-      "default_value": "Bank nomi",
-      "description": "Hisobingiz ochilgan bankning rasmiy nomini kiriting. Bu mablag'laringiz to'g'ri o'tkazilishi uchun muhim.",
-      "error": {
-        "required": "maydon bo'sh bo'lishi mumkin emas"
+    "contact": {
+      "contact": "Kontakt ma'lumotlari",
+      "phone": {
+        "title": "Telefon raqami",
+        "default_value": "+998909000123",
+        "description": "Xalqaro formatda amaldagi telefon raqamingizni kiriting. Ushbu raqam aloqa va to'lovni tasdiqlash uchun ishlatilishi mumkin.",
+        "error": {
+          "required": "telefon raqamini kerakli formatda kiriting"
+        }
+      },
+      "email": {
+        "title": "E-mail",
+        "default_value": "sample@gmail.com",
+        "description": "Amaldagi elektron pochta manzilingizni kiriting. Ushbu e-mailga to'lov holati va boshqa muhim xabarlar yuborilishi mumkin.",
+        "error": {
+          "required": "mavjud bo'lmagan pochta"
+        }
       }
     },
-    "checking_account": {
-      "title": "Hisob raqami",
-      "default_value": "12345678901234567890",
-      "description": "Bankda o'zingiz yoki tashkilotingiz nomiga ochilgan hisob raqamini kiriting. Ushbu hisob mablag' o'tkazmalari va boshqa moliyaviy operatsiyalar uchun ishlatiladi.",
-      "error": {
-        "required": "noto'g'ri format, belgi soni - 20"
-      }
-    },
-    "transit_account": {
-      "title": "Tranzit hisobi",
-      "default_value": "12345678901234567890",
-      "description": "Agar kerak bo'lsa, mablag' o'tkazmalari uchun ishlatiladigan tranzit hisob raqamingizni kiriting. Ushbu hisob sizning asosiy hisobingizdan farq qilishi mumkin.",
-      "error": {
-        "required": "noto'g'ri format, belgi soni - 20"
-      }
-    },
-    "card_number": {
-      "title": "Karta ma'lumotlari",
-      "default_value": "9860123412341234",
-      "description": "Bo'shliqlarsiz bank kartangizning raqamini kiriting. Raqamni noto'g'ri kiritish to'lov rad etilishiga olib kelishi mumkin, shuning uchun diqqat bilan kiriting.",
-      "error": {
-        "required": "noto'g'ri format, belgi soni - 16"
-      }
-    },
-    "card_date": {
-      "title": "Kartaning amal qilish muddati",
-      "default_value": "mm/yy",
-      "description": "Kartangiz amal qilish muddatini MM/YY (oy/yil) formatida kiriting. Ushbu ma'lumotlar tranzaksiyalarni qayta ishlash va kartaning dolzarbligini tasdiqlash uchun zarur.",
-      "error": {
-        "required": "sanani mm/yy formatida kiriting: 09/23"
-      }
-    }
-    },
-  "contact": {
-    "contact": "Kontakt ma'lumotlari",
-    "phone": {
-      "title": "Telefon raqami",
-      "default_value": "+998909000123",
-      "description": "Xalqaro formatda amaldagi telefon raqamingizni kiriting. Ushbu raqam aloqa va to'lovni tasdiqlash uchun ishlatilishi mumkin.",
-      "error": {
-        "required": "telefon raqamini kerakli formatda kiriting"
-      }
-    },
-    "email": {
-      "title": "E-mail",
-      "default_value": "sample@gmail.com",
-      "description": "Amaldagi elektron pochta manzilingizni kiriting. Ushbu e-mailga to'lov holati va boshqa muhim xabarlar yuborilishi mumkin.",
-      "error": {
-        "required": "mavjud bo'lmagan pochta"
-      }
+
+    "accept": {
+      "text1": "Ma'lumotlarning to'g'riligini tasdiqlayman,",
+      "span1": "xizmat shartlari",
+      "and": "va",
+      "span2": "oferta qoidalari",
+      "text2": "bilan tanishdim va qabul qilaman."
     }
   },
-
-  "accept": {
-    "text1": "Ma'lumotlarning to'g'riligini tasdiqlayman,",
-    "span1": "xizmat shartlari",
-    "and": "va",
-    "span2": "oferta qoidalari",
-    "text2": "bilan tanishdim va qabul qilaman."
-  }
-},
 
   "platform": {
     "cross": "Moslik",
@@ -1533,7 +1540,7 @@
       "comment": "Bloger uchun izoh...",
       "result": "Natija",
       "post": "Natijani ko'rish uchun reklama postini to'ldirishni boshlang",
-      "site": "Izohlarda texnik vazifangizni batafsil tavsiflang va kerakli fayllarni ilova qiling",  
+      "site": "Izohlarda texnik vazifangizni batafsil tavsiflang va kerakli fayllarni ilova qiling",
       "template": "Shablonni yuklash",
       "comment_to_post": "Texnik topshiriq uchun izoh: ",
       "see_post_mobile_btn": "Postni ko'rish",
@@ -1754,7 +1761,9 @@
         "title": "Sizdan talab qilinadi:",
         "text": [
           { "text": "qulay tarifni tanlash va to'lovni amalga oshirish" },
-          { "text": "loyihangiz va reklama kampaniyasi bo'yicha istaklaringizni tasvirlash"}
+          {
+            "text": "loyihangiz va reklama kampaniyasi bo'yicha istaklaringizni tasvirlash"
+          }
         ]
       },
       "step_2": {
@@ -2172,27 +2181,27 @@
         }
       }
     },
-"wallet": {
-    "profile": {
-      "error": "Ma'lumotlarni to'ldirishda xatolik yuz berdi"
+    "wallet": {
+      "profile": {
+        "error": "Ma'lumotlarni to'ldirishda xatolik yuz berdi"
+      },
+      "withdraw": {
+        "success": "Mablag'larni yechib olish muvaffaqiyatli amalga oshirildi",
+        "error": "Mablag'larni yechib olishda xatolik yuz berdi"
+      },
+      "topup": {
+        "success": "Balans to'ldirildi, summa",
+        "error": "Mablag'larni kiritishda xatolik yuz berdi"
+      }
     },
-    "withdraw": {
-      "success": "Mablag'larni yechib olish muvaffaqiyatli amalga oshirildi",
-      "error": "Mablag'larni yechib olishda xatolik yuz berdi"
+    "catalog": {
+      "add": {
+        "error": "Savatga qo'shishda xatolik yuz berdi"
+      },
+      "remove": {
+        "error": "Savatdan o'chirishda xatolik yuz berdi"
+      }
     },
-    "topup": {
-      "success": "Balans to'ldirildi, summa",
-      "error": "Mablag'larni kiritishda xatolik yuz berdi"
-    }
-  },
-  "catalog": {
-    "add": {
-      "error": "Savatga qo'shishda xatolik yuz berdi"
-    },
-    "remove": {
-      "error": "Savatdan o'chirishda xatolik yuz berdi"
-    }
-  },
     "cart": {
       "error": "Hisobingizda mablag' yetarli emas, balansni to'ldirish kerak"
     },
@@ -2233,7 +2242,7 @@
         "error": "Reklama kampaniyasini ishga tushirishda xatolik yuz berdi"
       }
     },
-"orders_advertiser": {
+    "orders_advertiser": {
       "manager_project": {
         "success": "Reklama kampaniyasi tasdiqlandi, biz menejerga xabar beramiz",
         "error": "Reklama kampaniyasini tasdiqlash vaqtida xatolik yuz berdi"
@@ -2592,7 +2601,7 @@
         }
       }
     },
-    
+
     "reviews": {
       "types": {
         "wait": "Kutish holatida",
@@ -2668,14 +2677,27 @@
       "text": "Foydalanuvchi shikoyatlarini ko'rib chiqing, muammolarga javob bering va adolatli platformani ta'minlang."
     }
   },
-  "add_organization": {
-    "title": "Tashkilot qo'shish",
-    "types": {
-      "self_employed": "O'zini o'zi band qilgan",
-      "legal": "Yuridik shaxs va YTT"
+  "organization": {
+    "title": "Mening tashkilotim",
+
+    "logout": {
+      "title": "Profildan chiqish",
+      "description": "Siz haqiqatan ham profilingizdan chiqmoqchimisiz? Ma'lumotlarga qayta kirish uchun qayta kirishingiz kerak bo'ladi.",
+      "buttons": {
+        "cancel": "Bekor qilish",
+        "logout": "Chiqish"
+      }
     },
-    "add_form": {
-      "title": "Tashkilot qo'shish uchun ariza",
+
+    "login": {
+      "password": "Parol orqali",
+      "certificate": "E-imzo orqali"
+    },
+    "form": {
+      "title": {
+        "add": "Tashkilot qo'shish uchun ariza",
+        "data": "Tashkilot ma'lumotlari"
+      },
       "legal": {
         "title": "Tashkilot turi",
         "text": "Tashkilot turini tanlang - Yuridik shaxs, YTT yoki O'zini o'zi band qilgan.",
@@ -2724,21 +2746,19 @@
     },
 
     "public_offer_page": {
-    "title": "Tashkilot qo'shish uchun ariza"
+      "title": "Tashkilot qo'shish uchun ariza"
     },
 
-  "service_rules_page": {
-    "title": "Xizmatdan foydalanish qoidalari"
-  },
-
-
+    "service_rules_page": {
+      "title": "Xizmatdan foydalanish qoidalari"
+    },
 
     "pdf_previewer": {
-    "page": "Sahifa",
-    "load": {
-      "load": "Shartnoma yuklanmoqda",
-      "fail": "Shartnomani yuklab bo'lmadi"
+      "page": "Sahifa",
+      "load": {
+        "load": "Shartnoma yuklanmoqda",
+        "fail": "Shartnomani yuklab bo'lmadi"
+      }
     }
-  }
   }
 }

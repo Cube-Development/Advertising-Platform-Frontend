@@ -1,3 +1,7 @@
+import {
+  useGetAccountEDOQuery,
+  useGetProfileEDOQuery,
+} from "@entities/organization";
 import { ENUM_ROLES } from "@entities/user";
 import {
   useGetViewAdvertiserProjectQuery,
@@ -19,7 +23,7 @@ import { Footer, Header } from "../components";
 // );
 
 export const MainLayout = ({ children }: PropsWithChildren) => {
-  const { isAuth, role } = useAppSelector((state) => state.user);
+  const { isAuth, role, isAuthEcp } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const { data: balance, isLoading } = useGetBalanceQuery(undefined, {
     skip: !isAuth,
@@ -43,6 +47,14 @@ export const MainLayout = ({ children }: PropsWithChildren) => {
 
   const {} = useGetViewManagerProjectQuery(undefined, {
     skip: !isAuth || role !== ENUM_ROLES.MANAGER,
+  });
+
+  const {} = useGetAccountEDOQuery(undefined, {
+    skip: !isAuth || !isAuthEcp,
+  });
+
+  const {} = useGetProfileEDOQuery(undefined, {
+    skip: !isAuth || !isAuthEcp,
   });
 
   useEffect(() => {

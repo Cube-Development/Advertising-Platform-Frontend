@@ -188,7 +188,6 @@
     }
   },
 
-
   "more_less": {
     "more": "More",
     "less": "Less"
@@ -250,10 +249,12 @@
       { "stage": "Register on the platform" },
       { "stage": "Choose suitable channels from the catalog" },
       { "stage": "Top up your balance with a convenient method" },
-      { 
-        "stage": "Create an ad placement manually or generate a post using AI" 
+      {
+        "stage": "Create an ad placement manually or generate a post using AI"
       },
-      { "stage": "The channel owner will publish the post and send it for your approval" }
+      {
+        "stage": "The channel owner will publish the post and send it for your approval"
+      }
     ],
     "why_title": "Why is it more effective with us?",
     "accomms_list": [
@@ -323,9 +324,9 @@
           { "option": "Publication notifications", "available": true },
           { "option": "Approval of selected channels", "available": false },
           { "option": "Promotion consultations", "available": false },
-          { 
-            "option": "Detailed report on completed work", 
-            "available": false 
+          {
+            "option": "Detailed report on completed work",
+            "available": false
           },
           { "option": "Advertising campaign forecasts", "available": false }
         ]
@@ -347,9 +348,9 @@
           { "option": "Publication notifications", "available": true },
           { "option": "Approval of selected channels", "available": true },
           { "option": "Promotion consultations", "available": true },
-          { 
-            "option": "Detailed report on completed work", 
-            "available": false 
+          {
+            "option": "Detailed report on completed work",
+            "available": false
           },
           { "option": "Advertising campaign forecasts", "available": false }
         ]
@@ -489,10 +490,16 @@
         "stages": [
           { "stage": "Find suitable platforms manually" },
           { "stage": "Check each platform for fake audience and quality" },
-          { "stage": "Find out the price, terms, and available times from admins" },
-          { "stage": "Pay each admin separately for placement without any guarantees" },
+          {
+            "stage": "Find out the price, terms, and available times from admins"
+          },
+          {
+            "stage": "Pay each admin separately for placement without any guarantees"
+          },
           { "stage": "Send the advertising post to each admin" },
-          { "stage": "Track the placement of the post on each platform separately" }
+          {
+            "stage": "Track the placement of the post on each platform separately"
+          }
         ]
       },
       {
@@ -500,12 +507,18 @@
         "title": "Placement with Blogix",
         "stages": [
           { "stage": "Register an account on the platform" },
-          { "stage": "Select suitable platforms in a few clicks or choose turnkey launch" },
+          {
+            "stage": "Select suitable platforms in a few clicks or choose turnkey launch"
+          },
           { "stage": "Top up your balance conveniently" },
           { "stage": "Upload a post or generate everything using AI" },
-          { "stage": "Launch advertising in all selected platforms in one click" },
+          {
+            "stage": "Launch advertising in all selected platforms in one click"
+          },
           { "stage": "Receive notifications about each placement" },
-          { "stage": "The platform guarantees the safety of your funds until all placement conditions are met" }
+          {
+            "stage": "The platform guarantees the safety of your funds until all placement conditions are met"
+          }
         ],
         "save": "Save time and money"
       }
@@ -1268,7 +1281,7 @@
       "bank_name": {
         "title": "Bank Name",
         "default_value": "Bank Name",
-        "description": "Enter the official name of the bank where your account is opened. This is important for proper fund transfers to your account.",
+        "description": "Enter the official name of the bank where your account is opened. This is important for proper crediting of funds to your account.",
         "error": {
           "required": "field cannot be empty"
         }
@@ -1284,7 +1297,7 @@
       "transit_account": {
         "title": "Transit Account",
         "default_value": "12345678901234567890",
-        "description": "Enter your transit account number if required for fund transfers. This account is used for payment processing and may differ from your checking account.",
+        "description": "Enter your transit account number if required for transferring funds. This account is used for payment processing and may differ from your checking account.",
         "error": {
           "required": "invalid format, must be 20 characters"
         }
@@ -1465,10 +1478,10 @@
       "max": "Maximum Amount"
     },
     "commission": {
-    "title": "Commission",
-    "enrollment": "Amount to be credited",
-    "include": "Include commission",
-    "withdraw_all": "Withdraw all funds"
+      "title": "Commission",
+      "enrollment": "Amount to be credited",
+      "include": "Include commission",
+      "withdraw_all": "Withdraw all funds"
     },
     "guide": {
       "title": "Step-by-Step Guide",
@@ -1528,7 +1541,7 @@
       "comment": "Comment for the Blogger...",
       "result": "Result",
       "post": "Start filling out the advertising post to see the result",
-       "site": "Describe your technical assignment in detail in the comment and attach the necessary files",
+      "site": "Describe your technical assignment in detail in the comment and attach the necessary files",
       "template": "Upload Template",
       "comment_to_post": "Comment on the Technical Assignment: ",
       "see_post_mobile_btn": "View Post",
@@ -1749,7 +1762,9 @@
         "title": "From you:",
         "text": [
           { "text": "Choose and pay for a plan that suits you" },
-          { "text": "Describe your project and advertising campaign preferences" }
+          {
+            "text": "Describe your project and advertising campaign preferences"
+          }
         ]
       },
       "step_2": {
@@ -2569,7 +2584,7 @@
         }
       }
     },
-    
+
     "reviews": {
       "types": {
         "wait": "Waiting",
@@ -2625,14 +2640,27 @@
     "description": "Page not found",
     "home_link": "Go back to home"
   },
-  "add_organization": {
-    "title": "Add organization",
-    "types": {
-      "self_employed": "Self-employed",
-      "legal": "Legal entity and IE"
+  "organization": {
+    "title": "My organization",
+
+    "logout": {
+      "title": "Logout from account",
+      "description": "Are you sure you want to log out of your account? You will need to log in again to access your data.",
+      "buttons": {
+        "cancel": "Cancel",
+        "logout": "Logout"
+      }
     },
-    "add_form": {
-      "title": "Organization addition request",
+    "login": {
+      "password": "By password",
+      "certificate": "By EDS"
+    },
+
+    "form": {
+      "title": {
+        "add": "Organization addition request",
+        "data": "Organization data"
+      },
       "legal": {
         "title": "Organization type",
         "text": "Select the type of organization - Legal entity, IE or Self-employed.",

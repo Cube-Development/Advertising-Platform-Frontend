@@ -3,7 +3,7 @@ import { catalogFilterSlice } from "@entities/project";
 import { walletSlice } from "@entities/wallet";
 import { dropdownMenuSlice } from "@shared/slice";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { authApi, baseApi } from "@shared/api";
+import { authApi, authEcpApi, baseApi, baseEpcApi } from "@shared/api";
 
 const rootReducer = combineReducers({
   [baseApi.reducerPath]: baseApi.reducer,
@@ -12,13 +12,20 @@ const rootReducer = combineReducers({
   [catalogFilterSlice.reducerPath]: catalogFilterSlice.reducer,
   [walletSlice.reducerPath]: walletSlice.reducer,
   [dropdownMenuSlice.reducerPath]: dropdownMenuSlice.reducer,
+  [authEcpApi.reducerPath]: authEcpApi.reducer,
+  [baseEpcApi.reducerPath]: baseEpcApi.reducer,
 });
 
 export const setupStore = () => {
   return configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(authApi.middleware, baseApi.middleware),
+      getDefaultMiddleware().concat(
+        authApi.middleware,
+        baseApi.middleware,
+        authEcpApi.middleware,
+        baseEpcApi.middleware,
+      ),
   });
 };
 

@@ -32,7 +32,7 @@ import {
   VIEWS_ADVERTISER,
   VIEWS_BLOGGER_CHANNELS,
   VIEWS_BLOGGER_OFFERS,
-} from "./../../tags";
+} from "../../tags";
 
 export const useRevalidateCash = () => {
   const language = useFindLanguage();

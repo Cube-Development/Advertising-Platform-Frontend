@@ -1,13 +1,15 @@
 import {
+  ENUM_ROLES,
   IEmailData,
   IEventsData,
   IPasswordData,
   IProfileData,
   IUser,
   IUserData,
-  ENUM_ROLES,
 } from "@entities/user";
-import { authApi, baseApi, USER_DATA } from "@shared/api";
+import { authApi } from "@shared/api/blogix/authApi";
+import { baseApi } from "@shared/api/blogix/baseApi";
+import { USER_DATA } from "@shared/api/tags";
 import { ENUM_LANGUAGES_NUM } from "@shared/languages";
 
 type RegisterReq = {

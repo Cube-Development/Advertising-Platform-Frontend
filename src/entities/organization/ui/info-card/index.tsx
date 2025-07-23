@@ -8,9 +8,9 @@ export const InfoCard: FC = ({}) => {
   return (
     <div className={styles.wrapper}>
       <p>
-        {t("add_organization.add_form.info_card.text")}:{" "}
+        {t("organization.form.info_card.text")}:{" "}
         <a href="#" className={styles.link} target="_blank">
-          {t("add_organization.add_form.info_card.link")}
+          {t("organization.form.info_card.link")}
         </a>
       </p>
     </div>

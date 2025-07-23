@@ -32,4 +32,7 @@ export enum ENUM_PATHS {
   ADMIN_REVIEWS = "/admin/reviews",
   ADMIN_COMPLAINTS = "/admin/complaints",
   ADMIN_COMPLAINT_INFO = "/admin/complaints/:id",
+  DIDOX = "/didox",
+  DIDOX_LOGIN = "/didox/login",
+  DIDOX_DEMO = "/didox/demo",
 }

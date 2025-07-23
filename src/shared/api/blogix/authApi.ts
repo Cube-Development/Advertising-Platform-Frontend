@@ -31,7 +31,7 @@ import {
   CREATE_PROJECT_POSTS,
   CREATE_PROJECT_DATES,
   CREATE_PROJECT_AMOUNT,
-} from "@shared/api";
+} from "@shared/api/tags";
 
 export const authApi = createApi({
   baseQuery: authBaseQuery,

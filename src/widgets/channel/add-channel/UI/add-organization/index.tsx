@@ -87,7 +87,7 @@ export const AddOrganization: FC<IAddOrganizationProps> = ({
           variants={variant}
           className={styles.wrapper}
         >
-          <AddDataForm
+          {/* <AddDataForm
             formState={formState}
             register={register}
             errors={errors}
@@ -96,7 +96,7 @@ export const AddOrganization: FC<IAddOrganizationProps> = ({
             isLoading={isSubmitting}
             formStep={formStep}
             setFormStep={setFormStep}
-          />
+          /> */}
           <NotFoundModal
             type={formState.profileFilter.type}
             isOpen={isNotFoundModalOpen}

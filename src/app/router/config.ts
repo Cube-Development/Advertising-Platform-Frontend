@@ -13,6 +13,9 @@ import { CartPage } from "@pages/Cart";
 import { CatalogPage } from "@pages/Catalog";
 import { ChannelPage } from "@pages/Channel";
 import { CreateOrderPage } from "@pages/CreateOrder";
+import { CryptoWebSocketDemo } from "@pages/DIDOX/demo";
+import { ECPLoginPage } from "@pages/DIDOX/login";
+import { ECPRegistration } from "@pages/DIDOX/page";
 import { FAQPage } from "@pages/FAQ";
 import { LoginPage } from "@pages/Login";
 import { MainPage } from "@pages/Main";
@@ -81,6 +84,30 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
   {
     path: ENUM_PATHS.FAQ,
     component: FAQPage,
+    roles: [...USER_ROLES, ENUM_ROLES.MANAGER],
+    auth: ENUM_AUTH_TYPES.PUBLIC,
+    authSidebar: true,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
+  },
+  {
+    path: ENUM_PATHS.DIDOX_DEMO,
+    component: CryptoWebSocketDemo,
+    roles: [...USER_ROLES, ENUM_ROLES.MANAGER],
+    auth: ENUM_AUTH_TYPES.PUBLIC,
+    authSidebar: true,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
+  },
+  {
+    path: ENUM_PATHS.DIDOX_LOGIN,
+    component: ECPLoginPage,
+    roles: [...USER_ROLES, ENUM_ROLES.MANAGER],
+    auth: ENUM_AUTH_TYPES.PUBLIC,
+    authSidebar: true,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
+  },
+  {
+    path: ENUM_PATHS.DIDOX,
+    component: ECPRegistration,
     roles: [...USER_ROLES, ENUM_ROLES.MANAGER],
     auth: ENUM_AUTH_TYPES.PUBLIC,
     authSidebar: true,

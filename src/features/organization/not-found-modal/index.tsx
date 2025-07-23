@@ -37,8 +37,8 @@ export const NotFoundModal: FC<INotFoundModalProps> = ({
 
   const type_text =
     type === PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT
-      ? t("add_organization.not_found.types.self_employed")
-      : t("add_organization.not_found.types.legal");
+      ? t("organization.not_found.types.self_employed")
+      : t("organization.not_found.types.legal");
 
   const screen = useWindowWidth();
 
@@ -52,12 +52,12 @@ export const NotFoundModal: FC<INotFoundModalProps> = ({
                 <SirenIcon />
               </div>
               <div className={styles.title}>
-                {type_text} {t("add_organization.not_found.title")}
+                {type_text} {t("organization.not_found.title")}
               </div>
             </AlertDialogTitle>
             <AlertDialogDescription className={styles.description}>
-              {t("add_organization.not_found.text")}
-              <a href="">{t("add_organization.not_found.link")}</a>
+              {t("organization.not_found.text")}
+              <a href="">{t("organization.not_found.link")}</a>
             </AlertDialogDescription>
             <div className={styles.buttons}>
               <AlertDialogCancel asChild>
@@ -65,11 +65,11 @@ export const NotFoundModal: FC<INotFoundModalProps> = ({
                   buttons_type="button__white"
                   onClick={() => setIsOpen(false)}
                 >
-                  {t("add_organization.not_found.buttons.cancel")}
+                  {t("organization.not_found.buttons.cancel")}
                 </MyButton>
               </AlertDialogCancel>
               <MyButton>
-                {t("add_organization.not_found.buttons.register")}
+                {t("organization.not_found.buttons.register")}
               </MyButton>
             </div>
           </AlertDialogContent>
@@ -82,12 +82,12 @@ export const NotFoundModal: FC<INotFoundModalProps> = ({
                 <SirenIcon />
               </div>
               <div className={styles.title}>
-                {type_text} {t("add_organization.not_found.title")}
+                {type_text} {t("organization.not_found.title")}
               </div>
             </DrawerTitle>
             <DrawerDescription className={styles.description}>
-              {t("add_organization.not_found.text")}
-              <a href="">{t("add_organization.not_found.link")}</a>
+              {t("organization.not_found.text")}
+              <a href="">{t("organization.not_found.link")}</a>
             </DrawerDescription>
             <div className={styles.buttons}>
               <DrawerClose asChild>
@@ -95,11 +95,11 @@ export const NotFoundModal: FC<INotFoundModalProps> = ({
                   buttons_type="button__white"
                   onClick={() => setIsOpen(false)}
                 >
-                  {t("add_organization.not_found.buttons.cancel")}
+                  {t("organization.not_found.buttons.cancel")}
                 </MyButton>
               </DrawerClose>
               <MyButton>
-                {t("add_organization.not_found.buttons.register")}
+                {t("organization.not_found.buttons.register")}
               </MyButton>
             </div>
           </DrawerContent>
