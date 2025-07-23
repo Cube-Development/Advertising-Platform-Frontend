@@ -14,3 +14,7 @@ FROM nginx:alpine
 COPY nginx.conf /etc/nginx/sites-enabled/default
 
 COPY --from=build /app/dist /usr/share/nginx/html
+
+
+# docker build -t abddssh/advblog-frontend .
+# docker push abddssh/advblog-frontend:latest
