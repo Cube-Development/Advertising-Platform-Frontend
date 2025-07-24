@@ -7,6 +7,7 @@ export enum ENUM_PATHS {
   CART = "/cart",
   TURNKEY = "/turnkey",
   WALLET = "/wallet",
+  DOCUMENTS = "/documents",
   WALLET_TOP_UP = "/wallet/topup",
   WALLET_WITHDRAW = "/wallet/withdraw",
   WALLET_HISTORY = "/wallet/history",

@@ -16,6 +16,7 @@ import { CreateOrderPage } from "@pages/CreateOrder";
 import { CryptoWebSocketDemo } from "@pages/DIDOX/demo";
 import { ECPLoginPage } from "@pages/DIDOX/login";
 import { ECPRegistration } from "@pages/DIDOX/page";
+import { DocumentsPage } from "@pages/Documents";
 import { FAQPage } from "@pages/FAQ";
 import { LoginPage } from "@pages/Login";
 import { MainPage } from "@pages/Main";
@@ -202,6 +203,14 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
   },
 
   // private common
+  {
+    path: ENUM_PATHS.DOCUMENTS,
+    component: DocumentsPage,
+    roles: USER_ROLES,
+    auth: ENUM_AUTH_TYPES.PRIVATE,
+    authSidebar: true,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
+  },
   {
     path: ENUM_PATHS.WALLET_TOP_UP,
     component: TopupPage,

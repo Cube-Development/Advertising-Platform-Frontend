@@ -19,6 +19,14 @@
 
   box-shadow: 0px 3px 5px 0px rgba(71, 114, 230, 0.6);
 
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    box-shadow: none;
+    filter: grayscale(30%);
+    transform: none;
+  }
+
   &__blue {
     color: var(--Personal-colors-White);
     background: var(--Gradients-Gradient-1);
