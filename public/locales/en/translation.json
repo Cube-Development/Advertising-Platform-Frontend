@@ -2641,6 +2641,13 @@
     "home_link": "Go back to home"
   },
   "organization": {
+    "not_login": {
+      "title": "You need to add an organization",
+      "description": "To continue working with the platform, you need to add an organization. This is necessary for processing documents, receiving payments on the current account and participating in advertising campaigns.",
+      "buttons": {
+        "add": "Add"
+      }
+    },
     "title": "My organization",
 
     "logout": {
@@ -2652,8 +2659,30 @@
       }
     },
     "login": {
-      "password": "By password",
-      "certificate": "By EDS"
+      "didox": {
+        "title": "Sign in to the system",
+        "description": "Choose the type of authentication and fill in the details to access your account",
+        "choose_type": "How would you like to sign in?",
+        "no_account": "Don't have an account?",
+        "register": "Register",
+
+        "type": {
+          "password": "By password",
+          "certificate": "By key"
+        },
+
+        "certificate": {
+          "until": "until",
+          "placeholder": "Select a key",
+          "loading": "Loading keys...",
+          "not_found": "No keys found",
+          "error": "The E-IMZO application is not enabled or not found on your device"
+        },
+
+        "buttons": {
+          "login": "Sign in to account"
+        }
+      }
     },
 
     "form": {
@@ -2667,11 +2696,10 @@
         "default_value": "Not selected"
       },
       "PNFL": {
-        "title": "PNFL",
-        "default_value": "12345678901234",
-        "description": "Personal identification number of an individual. Enter a valid PNFL as it is required for data verification.",
+        "title": "TIN/PNFL",
+        "default_value": "TIN/PNFL",
         "error": {
-          "required": "invalid format, must be 14 characters"
+          "required": "Invalid number of characters: TIN must be 9, PNFL must be 14"
         }
       },
       "INN": {
@@ -2680,6 +2708,14 @@
         "description": "Enter the taxpayer identification number (INN) of your company or individual entrepreneur. This number is used for tax accounting and organization identification.",
         "error": {
           "required": "invalid format, must be 9 characters"
+        }
+      },
+
+      "password": {
+        "title": "Password",
+        "default_value": "12345678",
+        "error": {
+          "required": "enter password"
         }
       },
       "info_card": {

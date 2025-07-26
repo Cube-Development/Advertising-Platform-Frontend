@@ -16,10 +16,13 @@ interface CertificateSelectProps {
   onSelect: (certificate: Certificate) => void;
   loading?: boolean;
   error?: string;
+  errorText?: string;
   placeholder?: string;
+  loadingText?: string;
+  notFoundText?: string;
   className?: string;
   disabled?: boolean;
-  showDetails?: boolean;
+  classNameTrigger?: string;
 }
 
 export const CertificateSelect: React.FC<CertificateSelectProps> = ({
@@ -29,12 +32,14 @@ export const CertificateSelect: React.FC<CertificateSelectProps> = ({
   loading = false,
   error,
   placeholder = "Выберите сертификат...",
+  loadingText = "Загрузка сертификатов...",
+  notFoundText = "Сертификаты не найдены",
+  errorText = "Ошибка при загрузке сертификатов",
   className = "",
   disabled = false,
-  showDetails = true,
+  classNameTrigger = "",
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-
   const handleCertificateSelect = (cert: Certificate) => {
     onSelect(cert);
     setIsOpen(false);
@@ -43,7 +48,16 @@ export const CertificateSelect: React.FC<CertificateSelectProps> = ({
   const getDisplayText = () => {
     if (!selectedCertificate) return placeholder;
     const info = parseCertificateAlias(selectedCertificate.alias);
-    return `${info.cn.toUpperCase()} - ${info.pnfl}`;
+    const fio = info.cn.toUpperCase();
+    const pnfl = info.pnfl;
+    return (
+      <p className="grid items-center grid-flow-col gap-3">
+        <span className="font-semibold text-[#4d37b3] truncate">{fio}</span>
+        <span className="px-2 bg-white border rounded-xl border-2-gray-200">
+          {pnfl}
+        </span>
+      </p>
+    );
   };
 
   return (
@@ -52,21 +66,21 @@ export const CertificateSelect: React.FC<CertificateSelectProps> = ({
         <DropdownMenuTrigger asChild>
           <div
             className={`
-              w-full px-4 py-2 bg-[var(--Personal-colors-White)] border border-[var(--Inside-container)] rounded-xl 
-              focus:ring-2 focus:ring-blue-500 focus:border-transparent 
+              w-full p-4 bg-[var(--Personal-colors-White)] 
+              focus:ring-2 focus:ring-[#4d37b3] focus:border-transparent 
               transition-all duration-200 outline-none backdrop-blur-sm 
-              flex items-center justify-between
+              flex items-center justify-between rounded-lg border-2 border-gray-200
               ${disabled || loading ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}
               ${error ? "border-red-300 bg-red-50/50" : ""}
-              ${isOpen ? "ring-2 ring-blue-500 border-transparent" : ""}
+              ${isOpen ? "ring-2 ring-[#4d37b3] border-transparent" : ""}
+              ${classNameTrigger}
             `}
           >
             <div className="flex items-center flex-1">
-              <Key className="flex-shrink-0 w-5 h-5 mr-3 text-gray-400" />
               <span
-                className={`truncate ${selectedCertificate ? "text-[var(--Personal-colors-black)]" : "text-gray-500"}`}
+                className={`truncate text-sm ${selectedCertificate ? "text-[var(--Personal-colors-black)]" : "text-gray-500"}`}
               >
-                {loading ? "Загрузка сертификатов..." : getDisplayText()}
+                {loading ? loadingText : getDisplayText()}
               </span>
             </div>
             <ChevronDown
@@ -78,22 +92,22 @@ export const CertificateSelect: React.FC<CertificateSelectProps> = ({
         </DropdownMenuTrigger>
 
         <DropdownMenuContent
-          className="w-[var(--radix-dropdown-menu-trigger-width)] max-h-80 p-0 bg-white border border-gray-200 rounded-xl shadow-md overflow-hidden"
+          className="w-[var(--radix-dropdown-menu-trigger-width)] max-h-80 p-2 bg-white border border-gray-200 rounded-xl shadow-md overflow-hidden"
           align="start"
           sideOffset={8}
         >
           {loading ? (
             <div className="p-6 text-center text-gray-500">
               <div className="w-6 h-6 mx-auto mb-2 border-2 border-blue-500 rounded-full animate-spin border-t-transparent" />
-              <p>Загрузка сертификатов...</p>
+              <p>{loadingText}</p>
             </div>
           ) : certificates.length === 0 ? (
             <div className="p-6 text-center text-gray-500">
               <Key className="w-8 h-8 mx-auto mb-2 text-gray-300" />
-              <p>Сертификаты не найдены</p>
+              <p>{notFoundText}</p>
             </div>
           ) : (
-            <div className="overflow-y-auto max-h-80">
+            <div className="overflow-y-auto max-h-40 scroll">
               {certificates.map((cert, index) => {
                 const info = parseCertificateAlias(cert.alias);
                 const isSelected = selectedCertificate?.name === cert.name;
@@ -103,16 +117,12 @@ export const CertificateSelect: React.FC<CertificateSelectProps> = ({
                     key={index}
                     onClick={() => handleCertificateSelect(cert)}
                     className={`
-                      p-4 cursor-pointer focus:bg-blue-50 hover:bg-blue-50
+                      p-4 cursor-pointer focus:bg-blue-50 hover:bg-blue-50 hover:rounded-lg
                       ${isSelected ? "bg-blue-50 border-l-4 border-l-blue-500" : ""}
                       ${index !== certificates.length - 1 ? "border-b border-gray-100" : ""}
                     `}
                   >
-                    <CertificateItem
-                      info={info}
-                      isSelected={isSelected}
-                      showDetails={showDetails}
-                    />
+                    <CertificateItem info={info} isSelected={isSelected} />
                   </DropdownMenuItem>
                 );
               })}
@@ -127,7 +137,7 @@ export const CertificateSelect: React.FC<CertificateSelectProps> = ({
           <span className="flex items-center justify-center w-4 h-4 mr-2 text-xs bg-red-100 rounded-full">
             !
           </span>
-          {error}
+          {errorText || error}
         </p>
       )}
     </div>

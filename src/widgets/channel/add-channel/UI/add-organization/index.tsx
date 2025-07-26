@@ -6,7 +6,6 @@ import {
 } from "@shared/config";
 import { ENUM_PATHS } from "@shared/routing";
 import { useToast } from "@shared/ui";
-import { AddDataForm, NotFoundModal } from "@widgets/organization";
 import { motion } from "framer-motion";
 import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -97,10 +96,10 @@ export const AddOrganization: FC<IAddOrganizationProps> = ({
             formStep={formStep}
             setFormStep={setFormStep}
           /> */}
-          <NotFoundModal
+          {/* <NotFoundModal
             type={formState.profileFilter.type}
             isOpen={isNotFoundModalOpen}
-          />
+          /> */}
         </motion.div>
       )}
     </>

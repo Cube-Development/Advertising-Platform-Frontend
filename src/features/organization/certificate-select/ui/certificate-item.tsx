@@ -1,54 +1,39 @@
 import { ParsedCertificateInfo } from "@entities/organization";
 import { Building, Calendar, CheckCircle, MapPin } from "lucide-react";
 import { FC } from "react";
+import { useTranslation } from "react-i18next";
 
 interface ICertificateItemProps {
   info: ParsedCertificateInfo;
   isSelected?: boolean;
-  showDetails?: boolean;
 }
 
 export const CertificateItem: FC<ICertificateItemProps> = ({
   info,
   isSelected = false,
-  showDetails = true,
 }) => {
+  const { t } = useTranslation();
   return (
     <div className="w-full space-y-3">
       {/* Основная информация */}
       <div className="flex items-start justify-between">
-        <div className="flex-1 min-w-0">
+        <div className="flex-1 min-w-0 space-y-3">
           <h4 className="text-lg font-bold leading-tight text-gray-900 truncate">
             {info.cn.toUpperCase()}
           </h4>
-          <p className="mt-1 font-mono text-lg font-semibold text-blue-600">
-            {info.pnfl}
-          </p>
+          <div className="grid items-center justify-between grid-flow-col gap-2">
+            <p className="px-2 font-mono text-lg font-semibold text-[#4d37b3] bg-white rounded-xl">
+              {info.pnfl}
+            </p>
+            <span className="px-2 truncate bg-white border rounded-xl border-2-gray-200">
+              {t("organization.login.didox.certificate.until")} {info.validTo}
+            </span>
+          </div>
         </div>
         {isSelected && (
-          <CheckCircle className="flex-shrink-0 w-6 h-6 ml-2 text-blue-600" />
+          <CheckCircle className="flex-shrink-0 w-6 h-6 ml-2 text-[#4d37b3]" />
         )}
       </div>
-
-      {/* Дополнительные детали */}
-      {showDetails && (
-        <div className="grid grid-cols-2 gap-2 text-sm">
-          <div className="flex items-center text-gray-600">
-            <Calendar className="flex-shrink-0 w-4 h-4 mr-2 text-gray-400" />
-            <span className="truncate">до {info.validTo}</span>
-          </div>
-          <div className="flex items-center text-gray-600">
-            <MapPin className="flex-shrink-0 w-4 h-4 mr-2 text-gray-400" />
-            <span className="truncate">{info.location}</span>
-          </div>
-          {info.organization !== "Не указано" && (
-            <div className="flex items-center col-span-2 text-gray-600">
-              <Building className="flex-shrink-0 w-4 h-4 mr-2 text-gray-400" />
-              <span className="truncate">{info.organization}</span>
-            </div>
-          )}
-        </div>
-      )}
     </div>
   );
 };

@@ -10,6 +10,7 @@ interface LegalFormProps {
   inputError?: any;
   isRow?: boolean;
   disabled?: boolean;
+  classNameInput?: string;
 }
 
 export const CustomBlockData: FC<LegalFormProps> = ({
@@ -18,6 +19,7 @@ export const CustomBlockData: FC<LegalFormProps> = ({
   inputError,
   isRow,
   disabled = false,
+  classNameInput = "",
 }) => {
   const { t } = useTranslation();
 
@@ -45,6 +47,7 @@ export const CustomBlockData: FC<LegalFormProps> = ({
               {...register(row.type, newValidate)}
               type={getInputLegalType(row.type)}
               disabled={disabled}
+              className={classNameInput}
               onInput={(e) => {
                 if (
                   e.currentTarget.value.length > getInputLegalLength(row.type)

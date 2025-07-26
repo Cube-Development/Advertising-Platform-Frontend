@@ -211,7 +211,6 @@ export const AddDataForm: FC<IAddDataFormProps> = ({
           loading={certificatesLoading}
           error={error!}
           placeholder="Выберите сертификат для подписи..."
-          showDetails={true}
         />
       )}
       {isAuthEcp && (

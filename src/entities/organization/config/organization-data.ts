@@ -86,23 +86,25 @@ export const ADD_LEGAL_DATA: IBlockData = {
 export const LOGIN_BY_PASSWORD_DATA: IBlockData = {
   parameters: [
     {
-      label: "organization.basic_info.PNFL",
+      label: "organization.form.PNFL",
       type: legalData.PNFL,
       validate: {
-        required: "organization.basic_info.PNFL.error.required",
+        required: "organization.form.PNFL.error.required",
         validate: {
           valid: (value: string) =>
-            isValidPNFL(value) || "organization.basic_info.PNFL.error.required",
+            isValidPNFL(value) ||
+            isValidINN(value) ||
+            "organization.form.PNFL.error.required",
         },
         onChange: formatToNumber,
       },
     },
 
     {
-      label: "add_profile.contact.password",
+      label: "organization.form.password",
       type: legalData.password,
       validate: {
-        required: "add_profile.contact.password.error.required",
+        required: "organization.form.password.error.required",
       },
     },
   ],

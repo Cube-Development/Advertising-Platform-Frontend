@@ -2678,6 +2678,13 @@
     }
   },
   "organization": {
+    "not_login": {
+      "title": "Siz tashkilotni qo‘shishingiz kerak",
+      "description": "Platformada ishlashni davom ettirish uchun tashkilotni qo‘shishingiz kerak. Bu hujjatlarni rasmiylashtirish, hisob raqamiga to‘lovlarni olish va reklama kampaniyalarida qatnashish uchun zarur.",
+      "buttons": {
+        "add": "Qo‘shish"
+      }
+    },
     "title": "Mening tashkilotim",
 
     "logout": {
@@ -2690,8 +2697,30 @@
     },
 
     "login": {
-      "password": "Parol orqali",
-      "certificate": "E-imzo orqali"
+      "didox": {
+        "title": "Tizimga kirish",
+        "description": "Avtorizatsiya turini tanlang va akkauntga kirish uchun ma’lumotlarni to‘ldiring",
+        "choose_type": "Qanday usulda tizimga kirmoqchisiz?",
+        "no_account": "Hisobingiz yo‘qmi?",
+        "register": "Ro‘yxatdan o‘tish",
+
+        "type": {
+          "password": "Parol orqali",
+          "certificate": "Kalit orqali"
+        },
+
+        "certificate": {
+          "until": "gacha",
+          "placeholder": "Kalitni tanlang",
+          "loading": "Kalitlar yuklanmoqda...",
+          "not_found": "Kalitlar topilmadi",
+          "error": "E-IMZO ilovasi yoqilmagan yoki qurilmangizda topilmadi"
+        },
+
+        "buttons": {
+          "login": "Akkauntga kirish"
+        }
+      }
     },
     "form": {
       "title": {
@@ -2704,11 +2733,10 @@
         "default_value": "Tanlanmagan"
       },
       "PNFL": {
-        "title": "JSHSHIR",
-        "default_value": "12345678901234",
-        "description": "Jismoniy shaxsning shaxsiy identifikatsiya raqami. To'g'ri JSHSHIRni kiriting, bu ma'lumotlaringizni tekshirish uchun kerak.",
+        "title": "STIR/ JShShIR",
+        "default_value": "STIR/JShShIR",
         "error": {
-          "required": "noto'g'ri format, belgilarning umumiy soni - 14 bo'lishi kerak"
+          "required": "Belgilar soni noto‘g‘ri: STIR 9 ta, JShShIR 14 ta bo‘lishi kerak"
         }
       },
       "INN": {
@@ -2717,6 +2745,13 @@
         "description": "Tashkilot yoki yakka tartibdagi tadbirkorning soliq to'lovchi identifikatsiya raqamini (STIR) kiriting. Ushbu raqam soliq hisoboti va tashkilot identifikatsiyasi uchun ishlatiladi.",
         "error": {
           "required": "noto'g'ri format, belgilarning umumiy soni - 9 bo'lishi kerak"
+        }
+      },
+      "password": {
+        "title": "Parol",
+        "default_value": "12345678",
+        "error": {
+          "required": "Parolni kiriting"
         }
       },
       "info_card": {

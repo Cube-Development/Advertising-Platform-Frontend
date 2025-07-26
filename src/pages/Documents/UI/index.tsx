@@ -9,7 +9,9 @@ import {
   FILE_LINK,
   MockDocumentData,
 } from "@features/documents/sign-document/mock";
+import { useAppSelector } from "@shared/hooks";
 import { fileUrlToBase64 } from "@shared/utils";
+import { NotLogin } from "@widgets/organization";
 import { FileText } from "lucide-react";
 import { FC } from "react";
 
@@ -21,6 +23,8 @@ export const DocumentsPage: FC = () => {
     status: "0",
   });
   const { data: documents } = data || { data: [] };
+
+  const { isAuthEcp } = useAppSelector((state) => state.user);
 
   const [create, { isLoading: isCreating }] = useCreateDocumentEDOMutation();
 
@@ -34,6 +38,10 @@ export const DocumentsPage: FC = () => {
       lang: "ru",
     }).unwrap();
   };
+
+  if (!isAuthEcp) {
+    return <NotLogin />;
+  }
 
   return (
     <div className="min-h-screen py-8">
