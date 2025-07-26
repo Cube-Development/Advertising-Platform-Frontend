@@ -55,12 +55,12 @@ export const DOCUMENT_STATUS_META: Record<
   [ENUM_DOCUMENT_STATUS.DELETED]: {
     label: "Удален",
     icon: <Trash2 />,
-    color: "text-gray-500 bg-gray-100",
+    color: "text-red-500 bg-red-100",
   },
   [ENUM_DOCUMENT_STATUS.DRAFT_DELETED]: {
     label: "Черновик удален",
     icon: <Trash2 />,
-    color: "text-gray-500 bg-gray-100",
+    color: "text-red-500 bg-red-100",
   },
   [ENUM_DOCUMENT_STATUS.WAIT_FOR_AGENT_SIGN]: {
     label: "Ожидает подписи агента",
@@ -134,3 +134,10 @@ export const DOCUMENT_TYPE_META: Record<ENUM_DOCUMENT_TYPE, string> = {
     "Многосторонний произвольный документ",
   [ENUM_DOCUMENT_TYPE.FOUNDERS_PROTOCOL]: "Протокол собрания учредителей",
 };
+
+export const NO_SIGN_DOCUMENT_LIST: ENUM_DOCUMENT_STATUS[] = [
+  ENUM_DOCUMENT_STATUS.SIGNED,
+  ENUM_DOCUMENT_STATUS.SIGNAED_SELF,
+  ENUM_DOCUMENT_STATUS.DELETED,
+  ENUM_DOCUMENT_STATUS.DRAFT_DELETED,
+];

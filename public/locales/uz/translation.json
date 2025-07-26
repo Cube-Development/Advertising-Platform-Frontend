@@ -2796,5 +2796,33 @@
         "fail": "Shartnomani yuklab bo'lmadi"
       }
     }
+  },
+
+  "documents_page": {
+    "title": "Hujjatlar",
+    "description": "Didox tizimida ko‘rish va imzolash uchun hujjatlar ro‘yxati.",
+
+    "tabs": {
+      "inbox": "Kiruvchi",
+      "outbox": "Chiquvchi",
+      "draft": "Qoralamalar"
+    },
+
+    "card": {
+      "contract": {
+        "label": "Shartnoma raqami va sanasi"
+      },
+      "updated": "Yangilangan sana",
+      "counterparty": {
+        "title": "Kontragent",
+        "inn": "STIR"
+      },
+      "price": {
+        "title": "Narxi",
+        "delivery": "Yetkazib berish narxi",
+        "vat": "QQS summasi",
+        "withVat": "Umumiy narx (QQS bilan)"
+      }
+    }
   }
 }

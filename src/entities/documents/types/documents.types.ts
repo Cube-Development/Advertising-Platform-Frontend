@@ -1,4 +1,8 @@
-import { ENUM_DOCUMENT_STATUS, ENUM_DOCUMENT_TYPE } from "./documents.enum";
+import {
+  ENUM_DOCUMENT_STATUS,
+  ENUM_DOCUMENT_STATUS_TAB,
+  ENUM_DOCUMENT_TYPE,
+} from "./documents.enum";
 
 export interface IGetDocumentEDORequest {
   owner?: 0 | 1; // 1 - исходящие, 0 - входящие
@@ -31,11 +35,17 @@ export interface IGetDocumentEDORequest {
   status?: string; // Статус документа
 }
 
+export interface IDocumentsForm extends IGetDocumentEDORequest {
+  tabStatus: ENUM_DOCUMENT_STATUS_TAB;
+  allStatus: ENUM_DOCUMENT_STATUS[];
+}
+
 export interface IGetDocumentEDOResponse {
   data: IDocumentEDO[];
   total: number;
-  next_page_url: any;
+  next_page_url: string | null;
   source: string;
+  isLast?: boolean; // Опционально, для указания последней страницы
 }
 
 export interface IDocumentEDO {

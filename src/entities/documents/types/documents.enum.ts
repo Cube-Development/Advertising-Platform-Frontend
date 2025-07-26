@@ -33,3 +33,9 @@ export enum ENUM_DOCUMENT_TYPE {
   MULTILATERAL_CUSTOM_DOCUMENT = "010", // Многосторонний произвольный документ
   FOUNDERS_PROTOCOL = "075", // Протокол собрания учредителей
 }
+
+export enum ENUM_DOCUMENT_STATUS_TAB {
+  INBOX = "inbox",
+  OUTBOX = "outbox",
+  DRAFTS = "drafts",
+}

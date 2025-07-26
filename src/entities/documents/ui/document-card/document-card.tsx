@@ -1,11 +1,13 @@
 import {
   DOCUMENT_STATUS_META,
   DOCUMENT_TYPE_META,
+  NO_SIGN_DOCUMENT_LIST,
 } from "@entities/documents/config";
-import { ENUM_DOCUMENT_STATUS, IDocumentEDO } from "@entities/documents/types";
+import { IDocumentEDO } from "@entities/documents/types";
 import { formatDate, formatMoney } from "@shared/utils";
 import { Calendar, Tag } from "lucide-react";
 import { FC } from "react";
+import { useTranslation } from "react-i18next";
 
 interface DocumentCardProps {
   document: IDocumentEDO;
@@ -19,7 +21,8 @@ export const DocumentCard: FC<DocumentCardProps> = ({
   document,
   signDocument: SignDocument,
 }) => {
-  const isDisabled = document.doc_status === ENUM_DOCUMENT_STATUS.SIGNED;
+  const { t } = useTranslation();
+  const isDisabled = NO_SIGN_DOCUMENT_LIST.includes(document.doc_status);
   const statusInfo = DOCUMENT_STATUS_META[document.doc_status];
   return (
     <div className="mb-4 transition-shadow duration-200 bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg">
@@ -38,7 +41,6 @@ export const DocumentCard: FC<DocumentCardProps> = ({
             {statusInfo.icon}
             <span className="ml-1">{statusInfo?.label}</span>
           </div>
-          {/* <StatusBadge status={document.doc_status} /> */}
         </div>
 
         {/* Основной контент */}
@@ -48,29 +50,34 @@ export const DocumentCard: FC<DocumentCardProps> = ({
             {/* Номер и дата договора */}
             <div>
               <p className="text-sm text-gray-600">
-                <span className="font-medium">Номер и дата договора:</span>{" "}
-                {document.contract_number} от{" "}
-                {formatDate(document.contract_date)}
+                <span className="font-medium">
+                  {t("documents_page.card.contract.label")}:
+                </span>{" "}
+                №{document.contract_number} / {formatDate(document.created)}
               </p>
             </div>
 
             {/* Дата обновления */}
             <div className="flex items-center text-sm text-gray-600">
               <Calendar className="flex-shrink-0 w-4 h-4 mr-2" />
-              <span>Дата обновления: {formatDate(document.doc_date)}</span>
+              <span>
+                {t("documents_page.card.updated")}:{" "}
+                {formatDate(document.updated_date)}
+              </span>
             </div>
 
             {/* Информация о контрагенте */}
             <div className="p-4 space-y-3 rounded-lg bg-gray-50">
               <h4 className="text-sm font-semibold text-gray-900">
-                Контрагент
+                {t("documents_page.card.counterparty.title")}
               </h4>
               <div className="space-y-1">
                 <p className="text-sm font-medium text-gray-800">
                   {document.partnerCompany}
                 </p>
                 <p className="text-xs text-gray-500">
-                  ИНН: {document.partnerTin}
+                  {t("documents_page.card.counterparty.inn")}:{" "}
+                  {document.partnerTin}
                 </p>
               </div>
             </div>
@@ -81,19 +88,21 @@ export const DocumentCard: FC<DocumentCardProps> = ({
             {/* Финансовая информация */}
             <div className="p-4 rounded-lg bg-blue-50">
               <h4 className="mb-3 text-sm font-semibold text-gray-900">
-                Стоимость
+                {t("documents_page.card.price.title")}
               </h4>
               <div className="space-y-2">
                 <div className="flex items-center justify-between">
                   <span className="text-sm text-gray-600">
-                    Стоимость поставки:
+                    {t("documents_page.card.price.delivery")}:
                   </span>
                   <span className="text-sm font-medium text-gray-900">
                     {formatMoney(document.total_delivery_sum)}
                   </span>
                 </div>
                 <div className="flex items-center justify-between">
-                  <span className="text-sm text-gray-600">Сумма НДС:</span>
+                  <span className="text-sm text-gray-600">
+                    {t("documents_page.card.price.vat")}:
+                  </span>
                   <span className="text-sm font-medium text-gray-900">
                     {formatMoney(document.total_vat_sum)}
                   </span>
@@ -101,7 +110,7 @@ export const DocumentCard: FC<DocumentCardProps> = ({
                 <div className="pt-2 mt-2 border-t border-blue-200">
                   <div className="flex items-center justify-between">
                     <span className="text-sm font-semibold text-gray-900">
-                      Стоимость с НДС:
+                      {t("documents_page.card.price.withVat")}:
                     </span>
                     <span className="text-base font-bold text-blue-600">
                       {formatMoney(document.total_sum)}
@@ -111,7 +120,6 @@ export const DocumentCard: FC<DocumentCardProps> = ({
               </div>
             </div>
 
-            {/* Кнопка подписания */}
             <SignDocument documentId={document.doc_id} disabled={isDisabled} />
           </div>
         </div>

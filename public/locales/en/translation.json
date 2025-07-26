@@ -2902,5 +2902,33 @@
       "load": "Loading agreement",
       "fail": "Failed to load agreement"
     }
+  },
+
+  "documents_page": {
+    "title": "Documents",
+    "description": "List of documents for viewing and signing in the Didox system.",
+
+    "tabs": {
+      "inbox": "Inbox",
+      "outbox": "Outbox",
+      "draft": "Drafts"
+    },
+
+    "card": {
+      "contract": {
+        "label": "Contract number and date"
+      },
+      "updated": "Last updated",
+      "counterparty": {
+        "title": "Counterparty",
+        "inn": "TIN"
+      },
+      "price": {
+        "title": "Cost",
+        "delivery": "Delivery cost",
+        "vat": "VAT amount",
+        "withVat": "Total cost (including VAT)"
+      }
+    }
   }
 }

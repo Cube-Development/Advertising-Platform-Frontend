@@ -1,3 +1,4 @@
+import { DIGITAL_DOCUMENTS } from "@shared/api/epc";
 import { authEcpApi } from "@shared/api/epc/authApi";
 import {
   ENUM_DOCUMENT_TYPE,
@@ -6,7 +7,6 @@ import {
   IGetDocumentEDOResponse,
   IGetDocumentEDOToSignResponse,
 } from "../types";
-import { DIGITAL_DOCUMENTS } from "@shared/api/epc";
 
 export const documentAPI = authEcpApi.injectEndpoints({
   endpoints: (build) => ({
@@ -19,6 +19,36 @@ export const documentAPI = authEcpApi.injectEndpoints({
         method: `GET`,
         params: params,
       }),
+      transformResponse: (response: IGetDocumentEDOResponse, meta, arg) => {
+        return {
+          ...response,
+          status: arg?.status,
+          isLast: !response?.next_page_url,
+        };
+      },
+      serializeQueryArgs: ({ endpointName, queryArgs }) => {
+        const { status } = queryArgs;
+        return `${endpointName}/${status}`;
+      },
+      merge: (
+        currentCache: IGetDocumentEDOResponse,
+        newItems: IGetDocumentEDOResponse,
+        arg,
+      ) => {
+        if (arg.arg.page === 1) {
+          return {
+            ...newItems,
+          };
+        }
+
+        return {
+          ...newItems,
+          data: [...currentCache.data, ...newItems.data],
+        };
+      },
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg !== previousArg;
+      },
       providesTags: [DIGITAL_DOCUMENTS],
     }),
     getSignInfoEDO: build.mutation<
