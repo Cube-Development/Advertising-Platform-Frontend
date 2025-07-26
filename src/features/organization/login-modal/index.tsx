@@ -1,30 +1,21 @@
-import { logoutEcp } from "@entities/user";
-import { useAppDispatch } from "@shared/hooks";
-import {
-  Dialog,
-  DialogContent,
-  DialogTrigger,
-  Button,
-  MyButton,
-} from "@shared/ui";
-import { LogIn, LogOut, UserPlus } from "lucide-react";
-import { useState } from "react";
+import { Dialog, DialogContent, DialogTrigger, MyButton } from "@shared/ui";
+import { UserPlus } from "lucide-react";
+import { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ModalContent } from "./ui";
+import { FC, ButtonHTMLAttributes, memo } from "react";
 
-interface LoginModalProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface LoginModalProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   open?: boolean;
   haveTrigger?: boolean;
 }
 
-export const LoginModal: React.FC<LoginModalProps> = ({
+export const LoginModalComponent: FC<LoginModalProps> = ({
   open = false,
   haveTrigger = true,
   ...props
 }) => {
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
   const [isOpen, setIsOpen] = useState(open);
 
   return (
@@ -32,6 +23,7 @@ export const LoginModal: React.FC<LoginModalProps> = ({
       {haveTrigger && (
         <DialogTrigger asChild>
           <MyButton
+            {...props}
             type="button"
             className="flex items-center justify-center gap-2 w-none"
           >
@@ -47,3 +39,5 @@ export const LoginModal: React.FC<LoginModalProps> = ({
     </Dialog>
   );
 };
+
+export const LoginModal = memo(LoginModalComponent);

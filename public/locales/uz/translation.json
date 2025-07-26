@@ -1153,7 +1153,8 @@
     "navigation": {
       "user_data": "Foydalanuvchi ma'lumotlari",
       "change_password": "Parolni o'zgartirish",
-      "change_notifications": "Bildirishnoma sozlamalari"
+      "change_notifications": "Bildirishnoma sozlamalari",
+      "organization_data": "Tashkilot ma'lumotlari"
     },
     "back": "Orqaga",
     "user_block": {

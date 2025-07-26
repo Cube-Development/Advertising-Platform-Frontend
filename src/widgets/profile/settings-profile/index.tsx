@@ -3,7 +3,7 @@ import { useClearCookiesOnPage, useWindowWidth } from "@shared/hooks";
 import { CustomTitle } from "@shared/ui";
 import { AnimatePresence, motion } from "framer-motion";
 import { ArrowLeft } from "lucide-react";
-import { FC, useRef, useState } from "react";
+import { FC, useCallback, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ENUM_NAVIGATION_CARD_ITEM_TYPE } from "./model";
 import styles from "./styles.module.scss";
@@ -11,6 +11,7 @@ import {
   ChangeNotificationsForm,
   ChangePasswordForm,
   NavigationCard,
+  OrganizationDataForm,
   UserDataForm,
 } from "./UI";
 
@@ -47,6 +48,22 @@ export const SettingsProfile: FC = () => {
       }
     }
   };
+
+  const renderForm = useCallback(() => {
+    switch (currentTab) {
+      case ENUM_NAVIGATION_CARD_ITEM_TYPE.USER_DATA:
+        return <UserDataForm />;
+      case ENUM_NAVIGATION_CARD_ITEM_TYPE.CHANGE_PASSWORD:
+        return <ChangePasswordForm />;
+      case ENUM_NAVIGATION_CARD_ITEM_TYPE.CHANGE_NOTIFICATIONS:
+        return <ChangeNotificationsForm />;
+      case ENUM_NAVIGATION_CARD_ITEM_TYPE.ORGANIZATION_DATA:
+        return <OrganizationDataForm />;
+      default:
+        return null;
+    }
+  }, [currentTab]);
+
   return (
     <div className="container">
       <div className={styles.wrapper}>
@@ -60,16 +77,7 @@ export const SettingsProfile: FC = () => {
             <NavigationCard currentTab={currentTab} onClick={handleChangeTab} />
           </div>
           {screen > BREAKPOINT.MD ? (
-            <>
-              {currentTab === ENUM_NAVIGATION_CARD_ITEM_TYPE.USER_DATA ? (
-                <UserDataForm />
-              ) : currentTab ===
-                ENUM_NAVIGATION_CARD_ITEM_TYPE.CHANGE_PASSWORD ? (
-                <ChangePasswordForm />
-              ) : (
-                <ChangeNotificationsForm />
-              )}
-            </>
+            <>{renderForm()}</>
           ) : (
             <>
               <AnimatePresence>
@@ -96,14 +104,7 @@ export const SettingsProfile: FC = () => {
                       <ArrowLeft className={styles.icon} size={18} />
                       <p>{t("profile.back")}</p>
                     </button>
-                    {currentTab === ENUM_NAVIGATION_CARD_ITEM_TYPE.USER_DATA ? (
-                      <UserDataForm />
-                    ) : currentTab ===
-                      ENUM_NAVIGATION_CARD_ITEM_TYPE.CHANGE_PASSWORD ? (
-                      <ChangePasswordForm />
-                    ) : (
-                      <ChangeNotificationsForm />
-                    )}
+                    {renderForm()}
                   </motion.div>
                 )}
               </AnimatePresence>

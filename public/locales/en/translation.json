@@ -1150,7 +1150,8 @@
     "navigation": {
       "user_data": "User data",
       "change_password": "Change password",
-      "change_notifications": "Notification settings"
+      "change_notifications": "Notification settings",
+      "organization_data": "Organization data"
     },
     "back": "Back",
     "user_block": {

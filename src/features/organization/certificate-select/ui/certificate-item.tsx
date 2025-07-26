@@ -21,8 +21,8 @@ export const CertificateItem: FC<ICertificateItemProps> = ({
           <h4 className="text-lg font-bold leading-tight text-gray-900 truncate">
             {info.cn.toUpperCase()}
           </h4>
-          <div className="grid items-center justify-between grid-flow-col gap-2">
-            <p className="px-2 font-mono text-lg font-semibold text-[#4d37b3] bg-white rounded-xl">
+          <div className="grid items-center justify-start grid-flow-col gap-2 font-mono text-lg">
+            <p className="px-2 font-mono  font-semibold text-[#4d37b3] bg-white rounded-xl">
               {info.pnfl}
             </p>
             <span className="px-2 truncate bg-white border rounded-xl border-2-gray-200">

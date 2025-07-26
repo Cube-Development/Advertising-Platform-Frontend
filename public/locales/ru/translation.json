@@ -1048,7 +1048,8 @@
     "navigation": {
       "user_data": "Данные пользователя",
       "change_password": "Изменить пароль",
-      "change_notifications": "Настройки уведомлений"
+      "change_notifications": "Настройки уведомлений",
+      "organization_data": "Данные организации"
     },
 
     "back": "Назад",
