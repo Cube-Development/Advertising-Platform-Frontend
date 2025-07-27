@@ -1,8 +1,5 @@
 import {
   IExtendedProfileData,
-  ILegalCard,
-  ILegalCardShort,
-  ILegalData,
   paymentTypes,
   PROFILE_STATUS,
   PROFILE_TYPE,
@@ -11,29 +8,29 @@ import {
   useCreateLegalMutation,
   useEditLegalMutation,
   usePaymentDepositMutation,
-  useReadLegalsByTypeQuery,
-  useReadOneLegalMutation,
   WALLET_TOP_UP_FILTER_TABS_LIST,
 } from "@entities/wallet";
 import { BarSubFilter } from "@features/other";
 import { ArrowIcon4 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
-import { useClearCookiesOnPage, useWindowWidth } from "@shared/hooks";
-import { ENUM_PATHS } from "@shared/routing";
+import {
+  useAppSelector,
+  useClearCookiesOnPage,
+  useWindowWidth,
+} from "@shared/hooks";
 import { CustomTitle, ToastAction, useToast } from "@shared/ui";
-import { FC, useEffect, useState } from "react";
+import { NotLogin } from "@widgets/organization";
+import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import { CreditCard, Guide, LegalsList, PaymentData } from "../../components";
+import { CreditCard, Guide, PaymentData } from "../../components";
 import styles from "./styles.module.scss";
 
 export const Topup: FC = () => {
   useClearCookiesOnPage();
   const { toast } = useToast();
   const { t } = useTranslation();
-  // const [activeAccount, setActiveAccount] = useState<ILegalCard | null>(null);
-  // const navigate = useNavigate();
+  const { isAuthEcp } = useAppSelector((state) => state.user);
   const screen = useWindowWidth();
 
   const {
@@ -50,17 +47,9 @@ export const Topup: FC = () => {
         type: PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT,
         id: PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT,
       },
-      // subprofileFilter: {
-      //   type: SUBPROFILE_TYPE.ACCOUNT,
-      //   id: PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT,
-      // },
     },
   });
   const formState = watch();
-
-  // const resetValues = () => {
-  //   setActiveAccount(null);
-  // };
 
   const changeTab = (filter: PROFILE_TYPE) => {
     const item = WALLET_TOP_UP_FILTER_TABS_LIST.find(
@@ -70,20 +59,6 @@ export const Topup: FC = () => {
     setValue("profileFilter", newFilter);
   };
 
-  // const {
-  //   data: legalsByType,
-  //   isLoading: isReadLegalsLoading,
-  //   error: readLegalsError,
-  // } = useReadLegalsByTypeQuery(formState.profileFilter.id);
-
-  // useEffect(() => {
-  //   if (!legalsByType?.length) return;
-  //   changeActiveAccount(legalsByType?.[0]);
-  // }, [legalsByType]);
-
-  // const [readOneLegal, { isLoading: isOneLegalLoading, error: oneLegalError }] =
-  //   useReadOneLegalMutation();
-
   const [createLegal, { isLoading: isCreateLoading }] =
     useCreateLegalMutation();
 
@@ -91,34 +66,6 @@ export const Topup: FC = () => {
 
   const [paymentDeposit, { isLoading: isPaymentLoading, isSuccess }] =
     usePaymentDepositMutation();
-
-  // const changeActiveAccount = async (account: ILegalCardShort) => {
-  //   if (activeAccount && account.legal_id === activeAccount.legal_id) {
-  //     setActiveAccount(null);
-  //     reset();
-  //   } else {
-  //     !isOneLegalLoading &&
-  //       readOneLegal(account.legal_id)
-  //         .unwrap()
-  //         .then((data) => {
-  //           setActiveAccount(data);
-  //           (Object.keys(data) as Array<keyof ILegalData>).forEach(
-  //             (value: keyof ILegalData) => {
-  //               setValue(value, data[value]);
-  //             }
-  //           );
-  //           clearErrors();
-  //         })
-  //         .catch((error) => {
-  //           toast({
-  //             variant: "error",
-  //             title: t("toasts.wallet.profile.error"),
-  //             action: <ToastAction altText="Ok">Ok</ToastAction>,
-  //           });
-  //           console.error("Ошибка при заполнении данных", error);
-  //         });
-  //   }
-  // };
 
   const onSubmit: SubmitHandler<IExtendedProfileData> = async (formData) => {
     const dataWithLegalType = {
@@ -301,11 +248,12 @@ export const Topup: FC = () => {
               tab={formState.profileFilter.type}
               tab_list={WALLET_TOP_UP_FILTER_TABS_LIST}
               changeTab={changeTab}
-              // resetValues={resetValues}
             />
             {formState.profileFilter.type ===
             PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT ? (
               <CreditCard />
+            ) : !isAuthEcp ? (
+              <NotLogin />
             ) : (
               <div className={styles.form__wrapper}>
                 {screen < BREAKPOINT.MD && (
