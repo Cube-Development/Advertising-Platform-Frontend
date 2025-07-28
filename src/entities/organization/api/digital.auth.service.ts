@@ -12,11 +12,21 @@ export const digitalAuthAPI = authEcpApi.injectEndpoints({
 
     getProfileEDO: build.query<IGetProfileEDO, void>({
       query: () => ({
-        url: `/v1/profile?shouldUpdate=false`,
+        url: `/v1/profile`,
+        method: `GET`,
+      }),
+    }),
+    getProfileEDOMutation: build.mutation<IGetProfileEDO, void>({
+      query: () => ({
+        url: `/v1/profile`,
         method: `GET`,
       }),
     }),
   }),
 });
 
-export const { useGetAccountEDOQuery, useGetProfileEDOQuery } = digitalAuthAPI;
+export const {
+  useGetAccountEDOQuery,
+  useGetProfileEDOQuery,
+  useGetProfileEDOMutationMutation,
+} = digitalAuthAPI;

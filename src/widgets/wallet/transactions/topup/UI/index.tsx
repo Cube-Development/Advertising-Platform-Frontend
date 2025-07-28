@@ -25,6 +25,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { CreditCard, Guide, PaymentData } from "../../components";
 import styles from "./styles.module.scss";
+import { OfferSignModal } from "@features/organization";
 
 export const Topup: FC = () => {
   useClearCookiesOnPage();
@@ -255,35 +256,38 @@ export const Topup: FC = () => {
             ) : !isAuthEcp ? (
               <NotLogin />
             ) : (
-              <div className={styles.form__wrapper}>
-                {screen < BREAKPOINT.MD && (
-                  <Guide profileFilter={formState.profileFilter} />
-                )}
-                <div className={styles.content}>
-                  <PaymentData
-                    amountTitle={"wallet.topup.amount"}
-                    register={register}
-                    setValue={setValue}
-                    errors={errors}
-                    handleSubmit={handleSubmit}
-                    onSubmit={onSubmit}
-                    formState={formState}
-                    profileFilter={formState.profileFilter}
-                    subprofileFilter={formState.subprofileFilter}
-                    isPaymentLoading={
-                      isCreateLoading || isEditLoading || isPaymentLoading
-                    }
-                    isTopUp={true}
-                  />
-                  <div>
-                    <div className={styles.content__right}>
-                      {screen >= BREAKPOINT.MD && (
-                        <Guide profileFilter={formState.profileFilter} />
-                      )}
+              <>
+                <OfferSignModal open haveTrigger={false} />
+                <div className={styles.form__wrapper}>
+                  {screen < BREAKPOINT.MD && (
+                    <Guide profileFilter={formState.profileFilter} />
+                  )}
+                  <div className={styles.content}>
+                    <PaymentData
+                      amountTitle={"wallet.topup.amount"}
+                      register={register}
+                      setValue={setValue}
+                      errors={errors}
+                      handleSubmit={handleSubmit}
+                      onSubmit={onSubmit}
+                      formState={formState}
+                      profileFilter={formState.profileFilter}
+                      subprofileFilter={formState.subprofileFilter}
+                      isPaymentLoading={
+                        isCreateLoading || isEditLoading || isPaymentLoading
+                      }
+                      isTopUp={true}
+                    />
+                    <div>
+                      <div className={styles.content__right}>
+                        {screen >= BREAKPOINT.MD && (
+                          <Guide profileFilter={formState.profileFilter} />
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </>
             )}
           </>
         )}

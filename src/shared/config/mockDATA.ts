@@ -184,7 +184,7 @@ export const MOCK_PROFILE = {
   organization: {
     type: "SelfEmployed",
     pinfl: "12345678901234",
-    status: 1,
+    status: "active",
   },
 };
 

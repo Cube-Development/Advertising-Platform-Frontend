@@ -109,8 +109,8 @@ export const CertificateSelect: React.FC<CertificateSelectProps> = ({
           ) : (
             <div className="overflow-y-auto max-h-40 scroll">
               {certificates.map((cert, index) => {
-                const info = parseCertificateAlias(cert.alias);
-                const isSelected = selectedCertificate?.name === cert.name;
+                const info = parseCertificateAlias(cert?.alias);
+                const isSelected = selectedCertificate?.name === cert?.name;
 
                 return (
                   <DropdownMenuItem

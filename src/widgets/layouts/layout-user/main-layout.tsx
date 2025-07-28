@@ -1,8 +1,9 @@
 import {
   useGetAccountEDOQuery,
+  useGetOrganizationQuery,
   useGetProfileEDOQuery,
 } from "@entities/organization";
-import { ENUM_ROLES } from "@entities/user";
+import { ENUM_ROLES, USER_ROLES } from "@entities/user";
 import {
   useGetViewAdvertiserProjectQuery,
   useGetViewBloggerChannelQuery,
@@ -29,32 +30,36 @@ export const MainLayout = ({ children }: PropsWithChildren) => {
     skip: !isAuth,
   });
 
-  const {} = useGetViewAdvertiserProjectQuery(undefined, {
+  useGetViewAdvertiserProjectQuery(undefined, {
     skip: !isAuth || role !== ENUM_ROLES.ADVERTISER,
   });
 
-  const {} = useGetViewBloggerOrderQuery(undefined, {
+  useGetViewBloggerOrderQuery(undefined, {
     skip: !isAuth || role !== ENUM_ROLES.BLOGGER,
   });
 
-  const {} = useGetViewBloggerChannelQuery(undefined, {
+  useGetViewBloggerChannelQuery(undefined, {
     skip: !isAuth || role !== ENUM_ROLES.BLOGGER,
   });
 
-  const {} = useGetViewTransactionsQuery(undefined, {
+  useGetViewTransactionsQuery(undefined, {
     skip: !isAuth || role === ENUM_ROLES.MANAGER,
   });
 
-  const {} = useGetViewManagerProjectQuery(undefined, {
+  useGetViewManagerProjectQuery(undefined, {
     skip: !isAuth || role !== ENUM_ROLES.MANAGER,
   });
 
-  const {} = useGetAccountEDOQuery(undefined, {
-    skip: !isAuth || !isAuthEcp,
+  useGetAccountEDOQuery(undefined, {
+    skip: !isAuth || !isAuthEcp || !USER_ROLES.includes(role),
   });
 
-  const {} = useGetProfileEDOQuery(undefined, {
-    skip: !isAuth || !isAuthEcp,
+  useGetProfileEDOQuery(undefined, {
+    skip: !isAuth || !isAuthEcp || !USER_ROLES.includes(role),
+  });
+
+  useGetOrganizationQuery(undefined, {
+    skip: !isAuth || !USER_ROLES.includes(role),
   });
 
   useEffect(() => {

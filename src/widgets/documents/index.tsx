@@ -3,16 +3,11 @@ import {
   EmptyState,
   ENUM_DOCUMENT_STATUS,
   ENUM_DOCUMENT_STATUS_TAB,
-  ENUM_DOCUMENT_TYPE,
   IDocumentsForm,
-  useCreateDocumentEDOMutation,
   useGetDocumentsEDOQuery,
 } from "@entities/documents";
 import { SignDocument } from "@features/documents";
-import {
-  FILE_LINK,
-  MockDocumentData,
-} from "@features/documents/sign-document/mock";
+import { OfferSignModal } from "@features/organization";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { useAppSelector } from "@shared/hooks";
 import {
@@ -22,9 +17,7 @@ import {
   ShowMoreBtn,
   SpinnerLoader,
 } from "@shared/ui";
-import { fileUrlToBase64 } from "@shared/utils";
 import { NotLogin } from "@widgets/organization";
-import { FileText } from "lucide-react";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -33,6 +26,7 @@ import DidoxLogo from "/images/organization/didox-logo.svg";
 
 export const Documents: FC = () => {
   const { t } = useTranslation();
+  const { isAuthEcp } = useAppSelector((state) => state.user);
 
   const { watch, setValue } = useForm<IDocumentsForm>({
     defaultValues: {
@@ -55,23 +49,11 @@ export const Documents: FC = () => {
       : {}),
   };
 
-  const { data, isLoading } = useGetDocumentsEDOQuery({ ...getParams });
+  const { data, isLoading } = useGetDocumentsEDOQuery(
+    { ...getParams },
+    { skip: !isAuthEcp },
+  );
   const { data: documents } = data || { data: [] };
-
-  const { isAuthEcp } = useAppSelector((state) => state.user);
-
-  const [create, { isLoading: isCreating }] = useCreateDocumentEDOMutation();
-
-  const handleNewDocument = async () => {
-    const response = await fileUrlToBase64(FILE_LINK);
-    console.log("Base64 of the document:", response);
-
-    const document = await create({
-      data: { data: MockDocumentData.data, document: response },
-      type: ENUM_DOCUMENT_TYPE.CUSTOM_DOCUMENT,
-      lang: "ru",
-    }).unwrap();
-  };
 
   if (!isAuthEcp) {
     return <NotLogin />;
@@ -94,6 +76,7 @@ export const Documents: FC = () => {
 
   return (
     <div className="container">
+      <OfferSignModal open haveTrigger={false} />
       <div className="page_wrapper">
         {/* Заголовок страницы */}
         <div className="!bg-[#341F47] p-5 grid grid-flow-row gap-4">
@@ -105,15 +88,6 @@ export const Documents: FC = () => {
           </div>
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
             <p className="text-white">{t("documents_page.description")}</p>
-            <div className="mt-4 sm:mt-0">
-              <button
-                onClick={handleNewDocument}
-                className="inline-flex items-center px-4 py-2 text-sm font-medium text-white transition-colors duration-200 bg-blue-600 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-              >
-                <FileText className="w-4 h-4 mr-2" />
-                Создать демо документ
-              </button>
-            </div>
           </div>
         </div>
 

@@ -3,7 +3,7 @@ import {
   LEGAL_DATA,
   useGetProfileEDOQuery,
 } from "@entities/organization";
-import { LogoutEcp } from "@features/organization";
+import { LogoutEcp, OfferSignModal } from "@features/organization";
 import { useAppSelector } from "@shared/hooks";
 import { CustomBlockData } from "@shared/ui";
 import { NotLogin } from "@widgets/organization";
@@ -57,6 +57,7 @@ export const OrganizationDataForm: FC = ({}) => {
     <div className="relative frame">
       {isAuthEcp ? (
         <>
+          <OfferSignModal open haveTrigger={false} />
           <div className="absolute top-4 right-4 ">
             <LogoutEcp />
           </div>

@@ -26,6 +26,7 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { Guide, PaymentData } from "../../components";
 import styles from "./styles.module.scss";
+import { OfferSignModal } from "@features/organization";
 
 export const Withdrawal: FC = () => {
   useClearCookiesOnPage();
@@ -239,46 +240,49 @@ export const Withdrawal: FC = () => {
             {!isAuthEcp ? (
               <NotLogin />
             ) : (
-              <div className={styles.form__wrapper}>
-                {screen < BREAKPOINT.MD && (
-                  <Guide profileFilter={formState.profileFilter} />
-                )}
+              <>
+                <OfferSignModal open haveTrigger={false} />
+                <div className={styles.form__wrapper}>
+                  {screen < BREAKPOINT.MD && (
+                    <Guide profileFilter={formState.profileFilter} />
+                  )}
 
-                <WalletsBar
-                  walletType={walletType}
-                  setWalletType={setWalletType}
-                  direction="column"
-                  wallets={[
-                    ENUM_WALLETS_TYPE.DEPOSIT,
-                    ENUM_WALLETS_TYPE.PROFIT,
-                  ]}
-                />
-
-                <div className={styles.content}>
-                  <PaymentData
-                    amountTitle={"wallet.withdraw.amount"}
-                    profileFilter={formState.profileFilter}
-                    subprofileFilter={formState.subprofileFilter}
-                    errors={errors}
-                    setValue={setValue}
-                    formState={formState}
-                    onSubmit={onSubmit}
-                    register={register}
-                    handleSubmit={handleSubmit}
-                    isPaymentLoading={
-                      isCreateLoading || isEditLoading || isPaymentLoading
-                    }
+                  <WalletsBar
                     walletType={walletType}
+                    setWalletType={setWalletType}
+                    direction="column"
+                    wallets={[
+                      ENUM_WALLETS_TYPE.DEPOSIT,
+                      ENUM_WALLETS_TYPE.PROFIT,
+                    ]}
                   />
-                  <div>
-                    <div className={styles.content__right}>
-                      {screen >= BREAKPOINT.MD && (
-                        <Guide profileFilter={formState.profileFilter} />
-                      )}
+
+                  <div className={styles.content}>
+                    <PaymentData
+                      amountTitle={"wallet.withdraw.amount"}
+                      profileFilter={formState.profileFilter}
+                      subprofileFilter={formState.subprofileFilter}
+                      errors={errors}
+                      setValue={setValue}
+                      formState={formState}
+                      onSubmit={onSubmit}
+                      register={register}
+                      handleSubmit={handleSubmit}
+                      isPaymentLoading={
+                        isCreateLoading || isEditLoading || isPaymentLoading
+                      }
+                      walletType={walletType}
+                    />
+                    <div>
+                      <div className={styles.content__right}>
+                        {screen >= BREAKPOINT.MD && (
+                          <Guide profileFilter={formState.profileFilter} />
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
+              </>
             )}
           </>
         )}

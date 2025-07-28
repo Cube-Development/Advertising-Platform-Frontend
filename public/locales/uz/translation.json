@@ -2686,6 +2686,28 @@
         "add": "Qo‘shish"
       }
     },
+
+    "offer_sign": {
+      "title": "Taklifni imzolash",
+      "description": "Xizmatdan foydalanishni boshlash uchun ommaviy taklif shartlarini ko‘rib chiqib, qabul qilishingiz kerak",
+      "requirements": [
+        { "item": "Foydalanish shartlarini ko‘rib chiqish" },
+        { "item": "Maxfiylik siyosatiga rozilik" },
+        { "item": "Tashkilot vakolatini tasdiqlash" }
+      ],
+      "warning": "Xizmat funksiyalariga faqat taklifni imzolagandan so‘ng ruxsat beriladi",
+      "authorization_required": {
+        "title": "Avtorizatsiya talab qilinadi",
+        "subtitle": "EDS kaliti bilan tizimga kirish kerak",
+        "description": "Taklifni imzolash uchun avval EDS orqali tizimda avtorizatsiyadan o‘tish zarur",
+        "section": "Bo‘limga o‘ting",
+        "organization_data": "Tashkilot ma’lumotlari"
+      },
+      "legal_notice": "Huquqiy kuchga ega hujjat",
+      "buttons": {
+        "sign": "Imzolash"
+      }
+    },
     "title": "Mening tashkilotim",
 
     "logout": {

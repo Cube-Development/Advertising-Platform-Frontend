@@ -39,7 +39,7 @@ export const authBaseQuery: BaseQueryFn<
 
   const result = await rawBaseQuery(modifiedArgs, api, extraOptions);
 
-  if (result.error && result.error.status === 401) {
+  if (result.error && result.error?.status === "PARSING_ERROR") {
     // Вызов логаута
     api.dispatch(logoutEcp());
   }

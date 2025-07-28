@@ -2649,6 +2649,28 @@
         "add": "Add"
       }
     },
+
+    "offer_sign": {
+      "title": "Sign the offer",
+      "description": "To start using the service, you need to review and accept the terms of the public offer",
+      "requirements": [
+        { "item": "Review the terms of use" },
+        { "item": "Agree to the privacy policy" },
+        { "item": "Confirm the organization's authority" }
+      ],
+      "warning": "Access to the service features will only be granted after signing the offer",
+      "authorization_required": {
+        "title": "Authorization required",
+        "subtitle": "You need to log in with an EDS key",
+        "description": "To sign the offer, prior authorization in the system using an EDS is required",
+        "section": "Go to the section",
+        "organization_data": "Organization data"
+      },
+      "legal_notice": "Legally binding document",
+      "buttons": {
+        "sign": "Sign"
+      }
+    },
     "title": "My organization",
 
     "logout": {

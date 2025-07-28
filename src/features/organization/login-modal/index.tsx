@@ -1,16 +1,15 @@
 import { Dialog, DialogContent, DialogTrigger, MyButton } from "@shared/ui";
 import { UserPlus } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { ButtonHTMLAttributes, FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ModalContent } from "./ui";
-import { FC, ButtonHTMLAttributes, memo } from "react";
 
 interface LoginModalProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   open?: boolean;
   haveTrigger?: boolean;
 }
 
-export const LoginModalComponent: FC<LoginModalProps> = ({
+export const LoginModal: FC<LoginModalProps> = ({
   open = false,
   haveTrigger = true,
   ...props
@@ -33,11 +32,9 @@ export const LoginModalComponent: FC<LoginModalProps> = ({
         </DialogTrigger>
       )}
 
-      <DialogContent className="frame !p-0 min-h-[620px] overflow-hidden !max-w-none !w-auto">
+      <DialogContent className="frame !p-0 min-h-[650px] overflow-hidden !max-w-none !w-auto">
         <ModalContent />
       </DialogContent>
     </Dialog>
   );
 };
-
-export const LoginModal = memo(LoginModalComponent);

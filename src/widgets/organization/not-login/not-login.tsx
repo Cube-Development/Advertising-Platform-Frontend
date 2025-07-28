@@ -1,9 +1,9 @@
 import { LoginModal } from "@features/organization";
 import { Building2 } from "lucide-react";
-import React, { FC } from "react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
-export const NotLogin: FC = React.memo(() => {
+export const NotLogin: FC = () => {
   const { t } = useTranslation();
 
   return (
@@ -33,4 +33,4 @@ export const NotLogin: FC = React.memo(() => {
       </div>
     </div>
   );
-});
+};

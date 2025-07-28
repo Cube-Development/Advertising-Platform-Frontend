@@ -3,11 +3,13 @@ import {
   IDidoxFormData,
   LOGIN_BY_PASSWORD_DATA,
   useDigitalAuth,
+  useGetOrganizationQuery,
 } from "@entities/organization";
 import { CertificateSelect } from "@features/organization/certificate-select";
 import { Certificate, useCryptoCertificates } from "@shared/api";
-import { CustomBlockData } from "@shared/ui";
-import { FC } from "react";
+import { CustomBlockData, DialogDescription, DialogTitle } from "@shared/ui";
+import { Loader2 } from "lucide-react";
+import { FC, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { DIGITAL_LOGIN_TABS_LIST } from "./model";
@@ -18,6 +20,7 @@ export const DidoxLogin: FC = () => {
   const { certificates, certificatesLoading, error } = useCryptoCertificates();
   const { t } = useTranslation();
   const { loginPassword, loginCertificate } = useDigitalAuth();
+  const { data: organization } = useGetOrganizationQuery();
 
   const {
     register,
@@ -44,8 +47,11 @@ export const DidoxLogin: FC = () => {
 
   const onSubmit = async (data: IDidoxFormData) => {
     try {
-      if (formState?.digitalLoginType === ENUM_DIGITAL_LOGIN_TYPE.CERTIFICATE) {
-        await loginCertificate(formState?.certificate!);
+      if (
+        formState?.digitalLoginType === ENUM_DIGITAL_LOGIN_TYPE.CERTIFICATE &&
+        formState?.certificate
+      ) {
+        await loginCertificate(formState?.certificate!, organization!);
       } else if (
         formState?.digitalLoginType === ENUM_DIGITAL_LOGIN_TYPE.PASSWORD
       ) {
@@ -60,6 +66,11 @@ export const DidoxLogin: FC = () => {
     }
   };
 
+  const userCertificates = useMemo(() => {
+    // return filterCertificates(certificates, organization?.PINFL);
+    return certificates;
+  }, [certificates, organization?.PINFL]);
+
   return (
     <div className="grid items-center justify-center grid-rows-[max-content,1fr] h-full">
       <div className="bg-[#341F47] p-6">
@@ -70,12 +81,12 @@ export const DidoxLogin: FC = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="space-y-4 text-center ">
-          <h1 className="text-2xl font-semibold text-gray-900 ">
+          <DialogTitle className="text-2xl font-semibold text-gray-900 ">
             {t("organization.login.didox.title")}
-          </h1>
-          <p className="text-gray-600">
+          </DialogTitle>
+          <DialogDescription className="text-gray-600">
             {t("organization.login.didox.description")}
-          </p>
+          </DialogDescription>
         </div>
 
         {/* Auth Method Selection */}
@@ -106,7 +117,7 @@ export const DidoxLogin: FC = () => {
           />
         ) : (
           <CertificateSelect
-            certificates={certificates}
+            certificates={userCertificates}
             selectedCertificate={formState?.certificate}
             onSelect={(value: Certificate) => setValue("certificate", value)}
             loading={certificatesLoading}
@@ -120,8 +131,12 @@ export const DidoxLogin: FC = () => {
         )}
 
         <div className="absolute left-0 grid w-full space-y-2 bottom-4">
-          <button className="bg-[#FFEA00] rounded-lg p-4 font-semibold m-4">
+          <button
+            disabled={isSubmitting}
+            className="bg-[#FFEA00] rounded-lg p-4 font-semibold m-4 disabled:opacity-50 grid grid-flow-col gap-2 items-center justify-center"
+          >
             {t("organization.login.didox.buttons.login")}
+            {isSubmitting && <Loader2 className="text-gray-500 animate-spin" />}
           </button>
           <div className="text-center">
             <span className="text-gray-600">

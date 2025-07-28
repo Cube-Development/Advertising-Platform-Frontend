@@ -6,6 +6,7 @@ import { useToast } from "@shared/ui";
 import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
 import {
+  useCheckOfferSignedMutation,
   useGetTimestampMutation,
   useGetTokenByCertificateMutation,
 } from "../api";
@@ -14,6 +15,8 @@ import {
   CreateMessageSignature,
   parseCertificateAlias,
 } from "../helpers";
+import { ENUM_ORGANIZATION_STATUS, IGetMyOrganizationResponse } from "../types";
+import { useCreateOrganization } from "./useCreateOrganization";
 
 export const useDigitalLoginByCertificate = () => {
   const { toast } = useToast();
@@ -26,7 +29,15 @@ export const useDigitalLoginByCertificate = () => {
   const [getToken, { isLoading: isLoadingGetToken }] =
     useGetTokenByCertificateMutation();
 
-  const loginCertificate = async (certificate: Certificate) => {
+  const [checkSign, { isLoading: isLoadingSign }] =
+    useCheckOfferSignedMutation();
+
+  const { create, isLoading } = useCreateOrganization();
+
+  const loginCertificate = async (
+    certificate: Certificate,
+    organization: IGetMyOrganizationResponse,
+  ) => {
     try {
       // Получаем ПИНФЛ из выбранного сертификата
       const certInfo = parseCertificateAlias(certificate!.alias);
@@ -62,6 +73,13 @@ export const useDigitalLoginByCertificate = () => {
       );
       // Шаг 5: Получение логин по токену
       dispatch(loginEcp());
+
+      await create(organization);
+
+      // Шаг 6: Проверка подписи
+      if (organization?.status === ENUM_ORGANIZATION_STATUS.ACTIVE) return;
+
+      await checkSign().unwrap();
     } catch (err) {
       const errorMessage =
         err instanceof Error ? err.message : "Ошибка входа по ЭЦП";
@@ -75,6 +93,7 @@ export const useDigitalLoginByCertificate = () => {
 
   return {
     loginCertificate,
-    isLoading: isLoadingLogin || isLoadingGetToken,
+    isLoading:
+      isLoadingLogin || isLoadingGetToken || isLoadingSign || isLoading,
   };
 };
