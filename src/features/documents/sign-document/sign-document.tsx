@@ -1,28 +1,34 @@
-import {
-  useGetSignInfoEDOMutation,
-  useSignDocument,
-} from "@entities/documents";
+import { useSignDocument } from "@entities/documents";
 import { MyButton } from "@shared/ui";
-import { FC } from "react";
+import { PenTool } from "lucide-react";
+import { FC, MouseEvent } from "react";
 
-interface ISignDocumentProps {
-  documentId: string; // ID документа для подписи
-  disabled: boolean; // Флаг, указывающий, подписан ли документ
+interface ISignDocumentProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  documentId: string;
 }
 
 export const SignDocument: FC<ISignDocumentProps> = ({
   documentId,
-  disabled = false,
+  ...props
 }) => {
-  const [toSign] = useGetSignInfoEDOMutation();
   const { sign } = useSignDocument();
+
+  const { onClick, ...rest } = props;
   const handleSign = async () => {
     await sign(documentId);
     // console.log("responce", response);
   };
   return (
-    <MyButton disabled={disabled} onClick={handleSign}>
-      {disabled ? "Подписан" : "Подписать"}
+    <MyButton
+      {...rest}
+      onClick={(e: MouseEvent<HTMLButtonElement>) => {
+        handleSign();
+        // onClick?.(e);
+      }}
+    >
+      <PenTool size={18} />
+      {props?.disabled ? "Подписан" : "Подписать"}
     </MyButton>
   );
 };

@@ -6,15 +6,16 @@ import {
 import { IDocumentEDO } from "@entities/documents/types";
 import { formatDate, formatMoney } from "@shared/utils";
 import { Calendar, Tag } from "lucide-react";
-import { FC } from "react";
+import { ButtonHTMLAttributes, FC } from "react";
 import { useTranslation } from "react-i18next";
 
 interface DocumentCardProps {
   document: IDocumentEDO;
-  signDocument: FC<{
-    documentId: string;
-    disabled: boolean;
-  }>;
+  signDocument: FC<
+    {
+      documentId: string;
+    } & ButtonHTMLAttributes<HTMLButtonElement>
+  >;
 }
 
 export const DocumentCard: FC<DocumentCardProps> = ({

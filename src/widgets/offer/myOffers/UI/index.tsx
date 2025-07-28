@@ -4,10 +4,17 @@ import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
 import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";
 import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
 import { motion } from "framer-motion";
-import { FC } from "react";
+import { FC, useMemo } from "react";
 import { OfferCard, OfferCardSkeleton } from "../card";
 import styles from "./styles.module.scss";
 import { getAnimationDelay } from "@shared/utils";
+import { SignDocument } from "@features/documents";
+import { OfferSign } from "@features/offer";
+import { useAppSelector } from "@shared/hooks";
+import {
+  ENUM_ORGANIZATION_STATUS,
+  useGetOrganizationQuery,
+} from "@entities/organization";
 
 interface MyOffersProps {
   offers: IBloggerOfferCard[];
@@ -26,13 +33,13 @@ export const MyOffers: FC<MyOffersProps> = ({
   statusFilter,
   currentPage,
 }) => {
-  console.log(
-    "offers",
-    !isLoading && offers?.length === 0 && isLast,
-    isLoading,
-    isLast,
-    offers?.length,
-  );
+  const { isAuthEcp } = useAppSelector((state) => state.user);
+  const { data: organization } = useGetOrganizationQuery();
+
+  const isModalOpen = useMemo(() => {
+    return organization?.status !== ENUM_ORGANIZATION_STATUS.ACTIVE;
+  }, [organization?.status]);
+
   return (
     <div className={styles.wrapper}>
       {!isLoading && offers?.length === 0 ? (
@@ -58,7 +65,17 @@ export const MyOffers: FC<MyOffersProps> = ({
                 })}
                 variants={PAGE_ANIMATION.animationUp}
               >
-                <OfferCard statusFilter={statusFilter} card={card} />
+                <OfferCard
+                  statusFilter={statusFilter}
+                  card={card}
+                  sign={
+                    <OfferSign
+                      documentId={card?.id || ""}
+                      isAuthEcp={isAuthEcp}
+                      isModalOpen={isModalOpen}
+                    />
+                  }
+                />
               </motion.div>
             ))}
             {isLoading &&

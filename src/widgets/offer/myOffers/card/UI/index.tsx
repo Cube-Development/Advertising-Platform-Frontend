@@ -1,12 +1,4 @@
-import { Link } from "react-router-dom";
-import { HappySmileIcon, MoreIcon } from "@shared/assets";
-import { CountdownTimer, useToast } from "@shared/ui";
-import { FC } from "react";
-import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
-import { Chat } from "@widgets/communication";
-import { AcceptOffer, RejectOffer, SeePost, SendLink } from "@features/offer";
-import { SeeReason } from "@features/other";
+import { CheckDate } from "@entities/communication";
 import {
   IBloggerOfferCard,
   offerStatus,
@@ -14,38 +6,30 @@ import {
   offerStatusFilter,
 } from "@entities/offer";
 import { platformToIcon, useGetPostQuery } from "@entities/project";
-import { CheckDate } from "@entities/communication";
 import { ENUM_ROLES } from "@entities/user";
+import { AcceptOffer, RejectOffer, SeePost, SendLink } from "@features/offer";
+import { SeeReason } from "@features/other";
+import { HappySmileIcon, MoreIcon } from "@shared/assets";
 import { ENUM_PATHS } from "@shared/routing";
+import { CountdownTimer, useToast } from "@shared/ui";
+import { Chat } from "@widgets/communication";
+import { FC, ReactNode } from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import styles from "./styles.module.scss";
+import { FileText } from "lucide-react";
 
 interface OfferCardProps {
   card: IBloggerOfferCard;
   statusFilter: offerStatusFilter | string;
+  sign: ReactNode;
 }
 
-export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter }) => {
+export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
   const { t } = useTranslation();
   const { toast } = useToast();
 
   const { data: post, error } = useGetPostQuery({ order_id: card?.id });
-
-  // const post = {
-  //   id: "string",
-  //   platform: 1,
-  //   comment: "string",
-  //   photo: ["ff"],
-  //   video: ["ff"],
-  //   files: ["ff"],
-  //   buttons: [
-  //     {
-  //       id: "string",
-  //       content: "string",
-  //       url: "string",
-  //     },
-  //   ],
-  //   text: ["dd"],
-  //   post_type: 1,
-  // };
 
   if (error) {
     toast({
@@ -171,8 +155,13 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter }) => {
           </div>
         ) : statusFilter === offerStatusFilter.completed ? (
           <div className={styles.card__complete}>
-            <HappySmileIcon className="active__icon" />
-            <p>{t("offers_blogger.offer_status.complete.title")}</p>
+            <div className="flex items-center gap-2 text-gray-600">
+              <FileText className="w-5 h-5" />
+              <span className="text-sm font-medium">
+                <p>{t("offers_blogger.offer_status.complete.title")}</p>
+              </span>
+            </div>
+            {sign}
           </div>
         ) : statusFilter === offerStatusFilter.canceled ? (
           <div className={styles.card__cancel}>

@@ -100,7 +100,7 @@ export const OfferSignModal: FC<OfferSignModalProps> = ({
 
         {/* Кнопка подписания */}
         {isAuthEcp ? (
-          <SignDocument documentId={organization?.id || ""} disabled={false} />
+          <SignDocument documentId={organization?.id || ""} />
         ) : (
           <div>
             {/* Декоративная рамка */}
