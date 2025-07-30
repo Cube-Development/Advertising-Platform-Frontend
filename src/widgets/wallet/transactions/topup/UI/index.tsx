@@ -10,6 +10,7 @@ import {
   usePaymentDepositMutation,
   WALLET_TOP_UP_FILTER_TABS_LIST,
 } from "@entities/wallet";
+import { OfferSignModal, useRenderOfferModal } from "@features/organization";
 import { BarSubFilter } from "@features/other";
 import { ArrowIcon4 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
@@ -25,13 +26,13 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { CreditCard, Guide, PaymentData } from "../../components";
 import styles from "./styles.module.scss";
-import { OfferSignModal } from "@features/organization";
 
 export const Topup: FC = () => {
   useClearCookiesOnPage();
   const { toast } = useToast();
   const { t } = useTranslation();
   const { isAuthEcp } = useAppSelector((state) => state.user);
+  const { isShowModal, setIsShowModal } = useRenderOfferModal();
   const screen = useWindowWidth();
 
   const {
@@ -257,7 +258,11 @@ export const Topup: FC = () => {
               <NotLogin />
             ) : (
               <>
-                <OfferSignModal open haveTrigger={false} />
+                <OfferSignModal
+                  open={isShowModal}
+                  haveTrigger={false}
+                  setOpen={setIsShowModal}
+                />
                 <div className={styles.form__wrapper}>
                   {screen < BREAKPOINT.MD && (
                     <Guide profileFilter={formState.profileFilter} />

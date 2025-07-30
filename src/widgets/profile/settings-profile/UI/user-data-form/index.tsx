@@ -8,7 +8,7 @@ import {
   ENUM_ORGANIZATION_STATUS,
   useGetOrganizationQuery,
 } from "@entities/organization";
-import { OfferSignModal } from "@features/organization";
+import { OfferSignModal, useRenderOfferModal } from "@features/organization";
 
 interface IUserDataFormProps {
   // add your props here
@@ -17,10 +17,8 @@ interface IUserDataFormProps {
 export const UserDataForm: FC<IUserDataFormProps> = ({}) => {
   const { t } = useTranslation();
   const data = MOCK_PROFILE as IUserDataNew;
-
+  const { isShowModal, setIsShowModal } = useRenderOfferModal();
   const { data: organization } = useGetOrganizationQuery();
-
-  const isNeedSign = organization?.status !== ENUM_ORGANIZATION_STATUS.ACTIVE;
 
   return (
     <div className={cn(styles.wrapper, "frame")}>
@@ -124,7 +122,7 @@ export const UserDataForm: FC<IUserDataFormProps> = ({}) => {
                   )}
             </span>
           </div>
-          {isNeedSign && <OfferSignModal open />}
+          <OfferSignModal open={isShowModal} setOpen={setIsShowModal} />
         </div>
       </div>
     </div>

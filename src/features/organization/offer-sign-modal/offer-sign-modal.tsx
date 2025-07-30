@@ -26,12 +26,14 @@ import { useTranslation } from "react-i18next";
 
 interface OfferSignModalProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   open?: boolean;
+  setOpen?: (open: boolean) => void;
   haveTrigger?: boolean;
 }
 
 export const OfferSignModal: FC<OfferSignModalProps> = ({
   open = false,
   haveTrigger = true,
+  setOpen = () => {},
   ...props
 }) => {
   const { t } = useTranslation();
@@ -45,8 +47,17 @@ export const OfferSignModal: FC<OfferSignModalProps> = ({
 
   if (organization?.status === ENUM_ORGANIZATION_STATUS.ACTIVE) return null;
 
+  useEffect(() => {
+    setIsOpen(open);
+  }, [open]);
+
+  const handleClose = () => {
+    setIsOpen(false);
+    setOpen(false);
+  };
+
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
+    <Dialog open={isOpen} onOpenChange={handleClose}>
       {haveTrigger && (
         <DialogTrigger asChild>
           <MyButton
