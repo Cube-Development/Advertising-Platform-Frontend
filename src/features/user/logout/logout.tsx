@@ -4,26 +4,29 @@ import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { ENUM_PATHS } from "@shared/routing";
 import {
   Button,
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
+  AlertDialog,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+  AlertDialogCancel,
   Separator,
+  cn,
 } from "@shared/ui";
 import { CircleX, Loader, LogOut } from "lucide-react";
-import { FC, useState } from "react";
+import { ButtonHTMLAttributes, FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-export const Logout: FC = () => {
+interface ILogoutProps extends ButtonHTMLAttributes<HTMLButtonElement> {}
+
+export const Logout: FC<ILogoutProps> = ({ ...props }) => {
   const { t } = useTranslation();
   const [logoutMutation, { isLoading }] = useLogoutMutation();
   const navigate = useNavigate();
   const { role } = useAppSelector((state) => state.user);
-  const [isOpen, setIsOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
   const toggleLogout = () => {
     dispatch(logout());
@@ -44,33 +47,36 @@ export const Logout: FC = () => {
     }
   };
 
+  const { className, ...rest } = props;
+
   return (
-    <Dialog open={isOpen} onOpenChange={setIsOpen}>
-      <DialogTrigger asChild>
-        <button className="text-sm font-semibold text-red-600">
-          {t("logout")}
-        </button>
-      </DialogTrigger>
+    <AlertDialog>
+      <AlertDialogTrigger
+        className={cn(
+          "text-sm font-semibold text-red-600 hover:bg-red-200/50",
+          className,
+        )}
+        {...rest}
+      >
+        {t("logout")}
+      </AlertDialogTrigger>
 
-      <DialogContent className="sm:max-w-lg frame">
-        <DialogHeader className="!text-center">
-          <DialogTitle className="text-xl font-semibold text-gray-900">
+      <AlertDialogContent className="gap-4 sm:max-w-lg frame w-[90vw]">
+        <AlertDialogHeader className="!text-center mt-4">
+          <AlertDialogTitle className="font-semibold text-gray-900 text-md md:text-xl">
             {t("logout_title")}
-          </DialogTitle>
-          <DialogDescription className="mt-2 text-lg text-gray-600">
+          </AlertDialogTitle>
+          <AlertDialogDescription className="mt-2 text-sm text-gray-600 sm:text-lg">
             {t("logout_description")}
-          </DialogDescription>
-        </DialogHeader>
+          </AlertDialogDescription>
+        </AlertDialogHeader>
 
-        <button
-          onClick={() => setIsOpen(false)}
-          className="absolute top-0 right-0 p-4 cursor-pointer"
-        >
+        <AlertDialogCancel className="absolute top-0 right-0 p-4 cursor-pointer">
           <CircleX size={20} />
-        </button>
+        </AlertDialogCancel>
         <Separator />
 
-        <DialogFooter className="flex flex-col-reverse gap-2 sm:flex-row">
+        <AlertDialogFooter className="flex flex-col-reverse gap-2 sm:flex-row">
           <Button
             onClick={handleLogout}
             disabled={isLoading}
@@ -83,8 +89,8 @@ export const Logout: FC = () => {
             )}
             {t("logout")}
           </Button>
-        </DialogFooter>
-      </DialogContent>
-    </Dialog>
+        </AlertDialogFooter>
+      </AlertDialogContent>
+    </AlertDialog>
   );
 };

@@ -49,9 +49,7 @@ export const Profile: FC = () => {
           ))}
         </DropdownMenuGroup>
         <DropdownMenuSeparator />
-        <DropdownMenuItem className="px-3 py-2">
-          <Logout />
-        </DropdownMenuItem>
+        <Logout className="w-full px-3 py-2" />
       </DropdownMenuContent>
     </DropdownMenu>
   );
