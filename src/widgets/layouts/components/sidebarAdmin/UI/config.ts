@@ -8,6 +8,7 @@ import {
 } from "@shared/assets";
 import { ENUM_PATHS } from "@shared/routing";
 import { IMenuItem } from "../../header/model";
+import { FileText } from "lucide-react";
 
 export const SIDEBAR_ADMIN_MENU: IMenuItem[] = [
   {
@@ -44,6 +45,15 @@ export const SIDEBAR_ADMIN_MENU: IMenuItem[] = [
     item: {
       path: ENUM_PATHS.ADMIN_COMPLAINTS,
       img: AdminComplaintIcon,
+    },
+  },
+];
+
+export const SIDEBAR_ADMIN_MENU_ORGANIZATION: IMenuItem[] = [
+  {
+    item: {
+      path: ENUM_PATHS.ADMIN_DOCUMENTS,
+      img: FileText,
     },
   },
 ];

@@ -3,7 +3,9 @@ import { AddChannelPage } from "@pages/AddChannel";
 import { AdminChannelsPage } from "@pages/AdminChannels";
 import { AdminComplaintInfoPage } from "@pages/AdminComplaintInfo";
 import { AdminComplaintsPage } from "@pages/AdminComplaints";
+import { AdminDocumentsPage } from "@pages/AdminDocuments/UI";
 import { AdminHomePage } from "@pages/AdminHome";
+import { AdminOrganizationPage } from "@pages/AdminOrganization";
 import { AdminReviewsPage } from "@pages/AdminReviews";
 import { AdminTransactionsPage } from "@pages/AdminTransactions";
 import { AdminUserInfoPage } from "@pages/AdminUserInfo";
@@ -276,6 +278,22 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
   {
     path: ENUM_PATHS.ADMIN_USER_INFO,
     component: AdminUserInfoPage,
+    roles: [ENUM_ROLES.MODERATOR],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
+    layout: ENUM_LAYOUT_TYPES.ADMIN,
+    adminSidebar: true,
+  },
+  {
+    path: ENUM_PATHS.ADMIN_ORGANIZATION,
+    component: AdminOrganizationPage,
+    roles: [ENUM_ROLES.MODERATOR],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
+    layout: ENUM_LAYOUT_TYPES.ADMIN,
+    adminSidebar: true,
+  },
+  {
+    path: ENUM_PATHS.ADMIN_DOCUMENTS,
+    component: AdminDocumentsPage,
     roles: [ENUM_ROLES.MODERATOR],
     auth: ENUM_AUTH_TYPES.PRIVATE,
     layout: ENUM_LAYOUT_TYPES.ADMIN,

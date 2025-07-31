@@ -8,6 +8,7 @@ import {
 } from "@shared/assets";
 import { ENUM_PATHS } from "@shared/routing";
 import { IMenuItem } from "@widgets/layouts/components/header/model";
+import { FileText } from "lucide-react";
 
 export const DROPDOWN_ADMIN_MENU: IMenuItem[] = [
   {
@@ -50,6 +51,16 @@ export const DROPDOWN_ADMIN_MENU: IMenuItem[] = [
       title: "admin_panel.burger_menu.complaints",
       path: ENUM_PATHS.ADMIN_COMPLAINTS,
       img: AdminComplaintIcon,
+    },
+  },
+];
+
+export const DROPDOWN_ADMIN_MENU_ORGANIZATION: IMenuItem[] = [
+  {
+    item: {
+      title: "admin_panel.burger_menu.complaints",
+      path: ENUM_PATHS.DOCUMENTS,
+      img: FileText,
     },
   },
 ];

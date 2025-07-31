@@ -14,12 +14,19 @@ import {
   DialogFooter,
   DialogTitle,
   DialogTrigger,
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
 } from "@shared/ui";
 import { CircleX, LogOut } from "lucide-react";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.scss";
+import { Logout } from "./UI/logout";
 
 interface ProfileProps {
   toggleLogout: () => void;
@@ -64,54 +71,20 @@ export const Profile: FC<ProfileProps> = ({ toggleLogout }) => {
   }, []);
 
   return (
-    <div className={styles.profile} ref={menuRef}>
-      <button onClick={handleButtonClick}>
+    <DropdownMenu>
+      <DropdownMenuTrigger onClick={handleButtonClick} className="h-9 w-9">
         <ProfileIcon />
-      </button>
+      </DropdownMenuTrigger>
 
-      {isMenuOpen && (
-        <div className={styles.menu}>
-          <ul>
-            <li className="font-bold text-[10px] truncate max-w-[70vw]">
-              {user?.email}
-            </li>
-            <Dialog>
-              <DialogTrigger asChild>
-                <li className={styles.logout}>{t("logout")}</li>
-              </DialogTrigger>
-              <DialogContent className={`${styles.content} gap-[0px]`}>
-                <DialogTitle className="sr-only"></DialogTitle>
-                <DialogDescription className="sr-only"></DialogDescription>
-                <DialogClose>
-                  <p className={styles.close}>
-                    <CircleX
-                      width={30}
-                      height={30}
-                      stroke="rgba(0,0,0,0.5)"
-                      strokeWidth={1.5}
-                    />
-                  </p>
-                </DialogClose>
-                <div className={styles.text}>
-                  <p className={styles.text__title}>{t("logout_title")}</p>
-                  <p className={styles.text__description}>
-                    {t("logout_description")}
-                  </p>
-                </div>
-                <DialogFooter className="pt-[20px]">
-                  <li
-                    className={`${styles.btns__login} truncate`}
-                    onClick={handleLogout}
-                  >
-                    {t("logout")}
-                    <LogOut width={20} height={20} stroke="#8e54e9" />
-                  </li>
-                </DialogFooter>
-              </DialogContent>
-            </Dialog>
-          </ul>
-        </div>
-      )}
-    </div>
+      <DropdownMenuContent className="!p-0 !rounded-[12px] frame" align="end">
+        <DropdownMenuLabel className="font-bold text-[10px] truncate max-w-[70vw] px-3 py-2">
+          {user?.email}
+        </DropdownMenuLabel>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem className="px-3 py-2">
+          <Logout />
+        </DropdownMenuItem>
+      </DropdownMenuContent>
+    </DropdownMenu>
   );
 };

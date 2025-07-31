@@ -25,6 +25,7 @@ export enum ENUM_PATHS {
   SERVICE_RULES = "/service_rules",
   PUBLIC_OFFER = "/public_offer",
   ADMIN_HOME = "/admin/home",
+  ADMIN_ORGANIZATION = "/admin/organization",
   ADMIN_CHANNELS = "/admin/channels",
   ADMIN_USERS = "/admin/users",
   ADMIN_USER_INFO = "/admin/users/:id",
@@ -32,4 +33,5 @@ export enum ENUM_PATHS {
   ADMIN_REVIEWS = "/admin/reviews",
   ADMIN_COMPLAINTS = "/admin/complaints",
   ADMIN_COMPLAINT_INFO = "/admin/complaints/:id",
+  ADMIN_DOCUMENTS = "/admin/documents",
 }

@@ -6,3 +6,5 @@ export * from "./transactions";
 export * from "./users";
 export * from "./userInfo";
 export * from "./home";
+export * from "./organization";
+export * from "./documents";

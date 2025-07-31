@@ -4,13 +4,19 @@ import { AnimatePresence, motion } from "framer-motion";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
-import { DROPDOWN_ADMIN_MENU } from "./config";
+import {
+  DROPDOWN_ADMIN_MENU,
+  DROPDOWN_ADMIN_MENU_ORGANIZATION,
+} from "./config";
 import styles from "./styles.module.scss";
+import { IMenuItem } from "@widgets/layouts/components/header/model";
+import { useAppSelector } from "@shared/hooks";
 
 export const DropdownMenu: FC = () => {
   const menuRef = useRef<HTMLDivElement>(null);
   const location = useLocation();
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { isAuthEcp } = useAppSelector((state) => state.user);
   const { t } = useTranslation();
 
   const handleOnClick = () => {
@@ -29,6 +35,17 @@ export const DropdownMenu: FC = () => {
       document.removeEventListener("click", handleClickOutside);
     };
   }, []);
+
+  let MENU: IMenuItem[] = [];
+
+  switch (isAuthEcp) {
+    case true:
+      MENU = [...DROPDOWN_ADMIN_MENU, ...DROPDOWN_ADMIN_MENU_ORGANIZATION];
+      break;
+    case false:
+      MENU = DROPDOWN_ADMIN_MENU;
+      break;
+  }
 
   return (
     <div className={styles.dropdown} ref={menuRef}>
@@ -51,12 +68,12 @@ export const DropdownMenu: FC = () => {
               <p>Cube</p>
             </div>
             <ul>
-              {DROPDOWN_ADMIN_MENU.map((item, index) => (
+              {MENU.map((item, index) => (
                 <Link to={item.item.path!} onClick={handleOnClick} key={index}>
                   <li
                     className={`${location.pathname === item.item.path ? styles.active : ""}`}
                   >
-                    {item.item.img && <item.item.img />}
+                    {item.item.img && <item.item.img className="text-white" />}
                     <p>{t(item.item.title || "")}</p>
                   </li>
                 </Link>

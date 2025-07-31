@@ -2677,7 +2677,8 @@
       "transactions": "Tранзакции",
       "moderation": "Модерация",
       "complaints": "Жалобы",
-      "reviews": "Отзывы"
+      "reviews": "Отзывы",
+      "invoice": "Счета и договора"
     },
 
     "pages": {
