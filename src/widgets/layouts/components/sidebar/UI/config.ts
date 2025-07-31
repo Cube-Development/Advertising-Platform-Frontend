@@ -94,12 +94,12 @@ export const SIDEBAR_COMMON_MENU: IMenuItem[] = [
       { title: "burger_menu.top_up", path: ENUM_PATHS.WALLET_TOP_UP },
       { title: "burger_menu.withdraw", path: ENUM_PATHS.WALLET_WITHDRAW },
       { title: "burger_menu.history", path: ENUM_PATHS.WALLET_HISTORY },
-      { title: "burger_menu.invoice", path: ENUM_PATHS.MAIN },
+      // { title: "burger_menu.invoice", path: ENUM_PATHS.MAIN },
     ],
   },
   {
     item: {
-      title: "burger_menu.documents",
+      title: "burger_menu.invoice",
       path: ENUM_PATHS.DOCUMENTS,
       img: FileText,
     },

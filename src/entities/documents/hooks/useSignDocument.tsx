@@ -19,7 +19,8 @@ export const useSignDocument = () => {
   const [createSign, { isLoading: isLoadingCreateSign }] =
     useCreateSignEDOMutation();
 
-  const { certificates, certificatesLoading, error } = useCryptoCertificates();
+  const { certificates, certificatesLoading, isSignatureLoading } =
+    useCryptoCertificates();
 
   const sign = async (documentId: string) => {
     try {
@@ -70,6 +71,11 @@ export const useSignDocument = () => {
 
   return {
     sign,
-    isLoading: isLoadingLogin || isLoadingToSign || isLoadingCreateSign,
+    isLoading:
+      isLoadingLogin ||
+      isLoadingToSign ||
+      isLoadingCreateSign ||
+      certificatesLoading ||
+      isSignatureLoading,
   };
 };

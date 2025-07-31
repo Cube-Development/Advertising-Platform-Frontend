@@ -150,12 +150,12 @@ export const MENU_COMMON: IMenuItem[] = [
         path: ENUM_PATHS.WALLET_HISTORY,
         type: walletTypesFilter.transactions,
       },
-      { title: "burger_menu.invoice", path: ENUM_PATHS.MAIN },
+      // { title: "burger_menu.invoice", path: ENUM_PATHS.MAIN },
     ],
   },
   {
     item: {
-      title: "burger_menu.documents",
+      title: "burger_menu.invoice",
       img: FileText,
       path: ENUM_PATHS.DOCUMENTS,
     },

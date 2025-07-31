@@ -21,7 +21,7 @@ import {
   Key,
   Lock,
 } from "lucide-react";
-import { ButtonHTMLAttributes, FC, useEffect, useState } from "react";
+import { ButtonHTMLAttributes, FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 interface OfferSignModalProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -47,17 +47,8 @@ export const OfferSignModal: FC<OfferSignModalProps> = ({
 
   if (organization?.status === ENUM_ORGANIZATION_STATUS.ACTIVE) return null;
 
-  useEffect(() => {
-    setIsOpen(open);
-  }, [open]);
-
-  const handleClose = () => {
-    setIsOpen(false);
-    setOpen(false);
-  };
-
   return (
-    <Dialog open={isOpen} onOpenChange={handleClose}>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       {haveTrigger && (
         <DialogTrigger asChild>
           <MyButton
@@ -65,8 +56,8 @@ export const OfferSignModal: FC<OfferSignModalProps> = ({
             type="button"
             className="flex items-center justify-center gap-2 w-none"
           >
-            {t("organization.offer_sign.buttons.sign")}
             <FilePen size={18} />
+            {t("organization.offer_sign.buttons.sign")}
           </MyButton>
         </DialogTrigger>
       )}

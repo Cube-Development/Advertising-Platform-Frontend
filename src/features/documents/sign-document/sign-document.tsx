@@ -1,6 +1,6 @@
 import { useSignDocument } from "@entities/documents";
 import { MyButton } from "@shared/ui";
-import { PenTool } from "lucide-react";
+import { Loader, Loader2, PenTool } from "lucide-react";
 import { FC, MouseEvent } from "react";
 
 interface ISignDocumentProps
@@ -12,16 +12,17 @@ export const SignDocument: FC<ISignDocumentProps> = ({
   documentId,
   ...props
 }) => {
-  const { sign } = useSignDocument();
-
-  const { onClick, ...rest } = props;
+  const { sign, isLoading } = useSignDocument();
+  const { onClick, disabled, ...rest } = props;
   const handleSign = async () => {
     await sign(documentId);
     // console.log("responce", response);
   };
+
   return (
     <MyButton
       {...rest}
+      disabled={disabled || isLoading}
       onClick={(e: MouseEvent<HTMLButtonElement>) => {
         handleSign();
         // onClick?.(e);
@@ -29,6 +30,7 @@ export const SignDocument: FC<ISignDocumentProps> = ({
     >
       <PenTool size={18} />
       {props?.disabled ? "Подписан" : "Подписать"}
+      {isLoading && <Loader2 className="animate-spin" size={20} />}
     </MyButton>
   );
 };

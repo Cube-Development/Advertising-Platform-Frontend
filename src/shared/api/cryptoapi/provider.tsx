@@ -1,19 +1,17 @@
 import React, {
-  createContext,
-  useContext,
-  useState,
+  ReactNode,
+  useCallback,
   useEffect,
   useRef,
-  useCallback,
-  ReactNode,
+  useState,
 } from "react";
+import { CryptoWebSocketContext } from "./context";
 import {
   Certificate,
   CryptoWebSocketContextType,
   CryptoWebSocketState,
   WebSocketResponse,
 } from "./model";
-import { CryptoWebSocketContext } from "./context";
 
 // Интерфейс для провайдера
 interface CryptoWebSocketProviderProps {
@@ -39,6 +37,8 @@ export const CryptoWebSocketProvider: React.FC<
     certificates: [],
     certificatesLoading: false,
     error: null,
+    isSignatureLoading: false,
+    pendingOperationType: null,
   });
 
   const wsRef = useRef<WebSocket | null>(null);
@@ -49,6 +49,7 @@ export const CryptoWebSocketProvider: React.FC<
         resolve: (value: any) => void;
         reject: (error: Error) => void;
         timeout: NodeJS.Timeout;
+        operationType: string;
       }
     >
   >(new Map());
@@ -57,7 +58,12 @@ export const CryptoWebSocketProvider: React.FC<
   const isManualDisconnectRef = useRef(false);
 
   const clearError = useCallback(() => {
-    setState((prev) => ({ ...prev, error: null }));
+    setState((prev) => ({
+      ...prev,
+      error: null,
+      isSignatureLoading: false,
+      pendingOperationType: null,
+    }));
   }, []);
 
   const generateMessageId = useCallback((message: any): string => {
@@ -73,7 +79,13 @@ export const CryptoWebSocketProvider: React.FC<
       return;
     }
 
-    setState((prev) => ({ ...prev, isConnecting: true, error: null }));
+    setState((prev) => ({
+      ...prev,
+      isConnecting: true,
+      error: null,
+      isSignatureLoading: false,
+      pendingOperationType: null,
+    }));
     isManualDisconnectRef.current = false;
 
     try {
@@ -86,6 +98,8 @@ export const CryptoWebSocketProvider: React.FC<
           isConnected: true,
           isConnecting: false,
           error: null,
+          isSignatureLoading: false,
+          pendingOperationType: null,
         }));
         reconnectAttemptsRef.current = 0;
         console.log("✅ CryptoAPI WebSocket подключен");
@@ -119,6 +133,11 @@ export const CryptoWebSocketProvider: React.FC<
             const [messageId] = handlers.find(([_, h]) => h === handler) || [];
             if (messageId) {
               clearTimeout(handler.timeout);
+
+              // if (handler.operationType === "create_pkcs7") {
+              // }
+              setSignatureLoading(false, handler.operationType);
+
               messageHandlersRef.current.delete(messageId);
 
               if (
@@ -145,6 +164,7 @@ export const CryptoWebSocketProvider: React.FC<
           setState((prev) => ({
             ...prev,
             error: "Ошибка обработки ответа сервера",
+            isSignatureLoading: false,
           }));
         }
       };
@@ -156,6 +176,7 @@ export const CryptoWebSocketProvider: React.FC<
           isConnected: false,
           isConnecting: false,
           error: "Ошибка подключения к криптографическому сервису",
+          isSignatureLoading: false,
         }));
       };
 
@@ -164,6 +185,7 @@ export const CryptoWebSocketProvider: React.FC<
           ...prev,
           isConnected: false,
           isConnecting: false,
+          isSignatureLoading: false,
         }));
 
         console.log("🔌 CryptoAPI WebSocket отключен", {
@@ -196,6 +218,8 @@ export const CryptoWebSocketProvider: React.FC<
           setState((prev) => ({
             ...prev,
             error: `Не удалось подключиться после ${reconnectAttempts} попыток`,
+            isSignatureLoading: false,
+            pendingOperationType: null,
           }));
         }
       };
@@ -204,6 +228,8 @@ export const CryptoWebSocketProvider: React.FC<
         ...prev,
         isConnecting: false,
         error: "Не удалось создать WebSocket соединение",
+        isSignatureLoading: false,
+        pendingOperationType: null,
       }));
     }
   }, [url, reconnectAttempts, reconnectDelay]);
@@ -231,8 +257,29 @@ export const CryptoWebSocketProvider: React.FC<
     }, 100);
   }, [connect, disconnect]);
 
+  const setSignatureLoading = useCallback(
+    (loading: boolean, operationType: string | null = null) => {
+      setState((prev) => ({
+        ...prev,
+        isSignatureLoading: loading,
+        pendingOperationType: operationType,
+      }));
+
+      if (loading) {
+        console.log(`🔄 E-IMZO UI открыто для операции: ${operationType}`);
+      } else {
+        console.log(`✅ E-IMZO UI закрыто`);
+      }
+    },
+    [],
+  );
+
   const sendMessage = useCallback(
-    (message: any, timeout: number = 30000): Promise<any> => {
+    (
+      message: any,
+      timeout: number = 30000,
+      operationType: string = "unknown",
+    ): Promise<any> => {
       return new Promise((resolve, reject) => {
         if (!wsRef.current || wsRef.current.readyState !== WebSocket.OPEN) {
           reject(new Error("WebSocket не подключен"));
@@ -250,7 +297,11 @@ export const CryptoWebSocketProvider: React.FC<
           resolve,
           reject,
           timeout: timeoutId,
+          operationType,
         });
+        // if (operationType === "create_pkcs7") {
+        // }
+        setSignatureLoading(true, operationType);
 
         try {
           wsRef.current.send(JSON.stringify(message));
@@ -262,7 +313,7 @@ export const CryptoWebSocketProvider: React.FC<
         }
       });
     },
-    [generateMessageId],
+    [generateMessageId, setSignatureLoading],
   );
 
   const loadCertificates = useCallback(() => {
@@ -271,7 +322,13 @@ export const CryptoWebSocketProvider: React.FC<
       return;
     }
 
-    setState((prev) => ({ ...prev, certificatesLoading: true, error: null }));
+    setState((prev) => ({
+      ...prev,
+      certificatesLoading: true,
+      error: null,
+      isSignatureLoading: false,
+      pendingOperationType: null,
+    }));
 
     const message = {
       plugin: "pfx",
@@ -291,7 +348,7 @@ export const CryptoWebSocketProvider: React.FC<
       };
 
       console.log("🔑 Загрузка ключа для сертификата:", cert.name);
-      const response = await sendMessage(message);
+      const response = await sendMessage(message, 6000, "load_key");
       console.log("✅ Ключ загружен:", response.keyId);
       return response.keyId;
     },
@@ -314,7 +371,7 @@ export const CryptoWebSocketProvider: React.FC<
         "✍️ Создание подписи для данных:",
         data.substring(0, 20) + "...",
       );
-      const response = await sendMessage(message);
+      const response = await sendMessage(message, 6000, "create_pkcs7");
       console.log("✅ Подпись создана");
       return {
         pkcs7: response.pkcs7_64,
@@ -346,6 +403,8 @@ export const CryptoWebSocketProvider: React.FC<
     certificates: state.certificates,
     certificatesLoading: state.certificatesLoading,
     error: state.error,
+    isSignatureLoading: state.isSignatureLoading,
+    pendingOperationType: state.pendingOperationType,
 
     // Actions
     sendMessage,

@@ -22,6 +22,8 @@ export interface CryptoWebSocketState {
   certificates: Certificate[];
   certificatesLoading: boolean;
   error: string | null;
+  isSignatureLoading: boolean;
+  pendingOperationType: string | null;
 }
 
 export interface CryptoWebSocketActions {
