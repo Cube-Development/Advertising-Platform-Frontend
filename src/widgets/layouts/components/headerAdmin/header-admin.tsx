@@ -1,7 +1,7 @@
 import { Separator, SidebarTrigger } from "@shared/ui";
 import { Chat, Notifications } from "@widgets/communication";
 import { FC } from "react";
-import { Profile } from "./UI";
+import { LanguageToggle, Profile } from "./UI";
 
 export const HeaderAdmin: FC = () => {
   return (
@@ -27,10 +27,17 @@ export const HeaderAdmin: FC = () => {
               </BreadcrumbList>
             </Breadcrumb> */}
       </div>
-      <div className="grid items-center justify-center grid-cols-3 gap-2 px-5">
-        <Notifications />
-        <Chat isMain={true} />
-        <Profile />
+      <div className="flex items-center gap-2">
+        <LanguageToggle />
+        <Separator
+          orientation="vertical"
+          className="data-[orientation=vertical]:h-4 ml-4"
+        />
+        <div className="grid items-center justify-center grid-cols-3 gap-2 px-5">
+          <Notifications />
+          <Chat isMain={true} />
+          <Profile />
+        </div>
       </div>
     </header>
   );
