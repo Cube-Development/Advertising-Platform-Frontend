@@ -5,7 +5,6 @@ import { ENUM_PATHS } from "@shared/routing";
 import {
   Button,
   Dialog,
-  DialogClose,
   DialogContent,
   DialogDescription,
   DialogFooter,
@@ -18,7 +17,6 @@ import { CircleX, Loader, LogOut } from "lucide-react";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import styles from "./styles.module.scss";
 
 export const Logout: FC = () => {
   const { t } = useTranslation();

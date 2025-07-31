@@ -2329,7 +2329,8 @@
       "moderation": "Moderation",
       "complaints": "Complaints",
       "reviews": "Reviews",
-      "invoice": "Invoices and contracts"
+      "invoice": "Invoices and contracts",
+      "organization": "Organization"
     },
 
     "pages": {

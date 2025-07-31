@@ -2678,7 +2678,8 @@
       "moderation": "Модерация",
       "complaints": "Жалобы",
       "reviews": "Отзывы",
-      "invoice": "Счета и договора"
+      "invoice": "Счета и договора",
+      "organization": "Организация"
     },
 
     "pages": {

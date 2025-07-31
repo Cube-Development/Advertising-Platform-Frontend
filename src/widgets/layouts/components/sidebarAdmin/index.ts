@@ -1,1 +1,1 @@
-export * from "./UI";
+export * from "./sidebar-admin";

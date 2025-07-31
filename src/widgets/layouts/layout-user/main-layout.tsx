@@ -102,7 +102,7 @@ export const MainLayout = ({ children }: PropsWithChildren) => {
           <Header />
         </Suspense> */}
         <Header />
-        <main className="main">{children}</main>
+        <main className="user_main">{children}</main>
         <Footer />
       </section>
     </>
