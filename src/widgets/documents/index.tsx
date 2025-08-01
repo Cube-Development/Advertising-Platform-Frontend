@@ -35,7 +35,7 @@ export const Documents: FC = () => {
       page: 1,
       limit: INTERSECTION_ELEMENTS.DOCUMENTS,
       tabStatus: ENUM_DOCUMENT_STATUS_TAB.INBOX,
-      allStatus: [],
+      categoryStatus: [],
     },
   });
 
@@ -45,8 +45,8 @@ export const Documents: FC = () => {
     owner: formState?.owner,
     page: formState?.page,
     limit: formState?.limit,
-    ...(formState?.allStatus?.length
-      ? { status: formState.allStatus.join(",") }
+    ...(formState?.categoryStatus?.length
+      ? { status: formState.categoryStatus.join(",") }
       : {}),
   };
 
@@ -62,11 +62,11 @@ export const Documents: FC = () => {
 
   const handleChangeTab = (
     tab: ENUM_DOCUMENT_STATUS_TAB,
-    allTabs: ENUM_DOCUMENT_STATUS[],
+    categoryStatus: ENUM_DOCUMENT_STATUS[],
     owner?: 0 | 1,
   ) => {
     setValue("tabStatus", tab);
-    setValue("allStatus", allTabs);
+    setValue("categoryStatus", categoryStatus);
     setValue("owner", owner);
     setValue("page", 1);
   };

@@ -1,41 +1,38 @@
 import {
   DocumentCard,
   EmptyState,
-  ENUM_DOCUMENT_STATUS,
-  ENUM_DOCUMENT_STATUS_TAB,
   IDocumentsForm,
   useGetDocumentsEDOQuery,
 } from "@entities/documents";
 import { SignDocument } from "@features/documents";
-import { OfferSignModal, useRenderOfferModal } from "@features/organization";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { useAppSelector } from "@shared/hooks";
-import {
-  cn,
-  CustomMiniTabItem,
-  CustomMiniTabs,
-  ShowMoreBtn,
-  SpinnerLoader,
-} from "@shared/ui";
+import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
 import { NotLogin } from "@widgets/organization";
+import { ArrowUpDown, FileWarning, PenTool } from "lucide-react";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { DOCUMENT_STATUS_LIST } from "./model";
+import {
+  DOCUMENT_SIGNATURE_LIST,
+  DOCUMENT_STATUS_LIST,
+  DOCUMENT_TYPE_LIST,
+  IDocumentTab,
+} from "./model";
+import { DocumentFilter } from "./UI";
 import DidoxLogo from "/images/organization/didox-logo.svg";
 
 export const Documents: FC = () => {
   const { t } = useTranslation();
   const { isAuthEcp } = useAppSelector((state) => state.user);
-  const { isShowModal, setIsShowModal } = useRenderOfferModal();
 
   const { watch, setValue } = useForm<IDocumentsForm>({
     defaultValues: {
       owner: 1 as 0 | 1,
       page: 1,
       limit: INTERSECTION_ELEMENTS.DOCUMENTS,
-      tabStatus: ENUM_DOCUMENT_STATUS_TAB.INBOX,
-      allStatus: [],
+      categoryStatus: [],
+      signStatus: [],
     },
   });
 
@@ -45,9 +42,14 @@ export const Documents: FC = () => {
     owner: formState?.owner,
     page: formState?.page,
     limit: formState?.limit,
-    ...(formState?.allStatus?.length
-      ? { status: formState.allStatus.join(",") }
+    ...(formState?.categoryStatus?.length || formState?.signStatus?.length
+      ? {
+          status: [...formState?.categoryStatus, ...formState?.signStatus].join(
+            ",",
+          ),
+        }
       : {}),
+    ...(formState?.doctype ? { doctype: formState.doctype } : {}),
   };
 
   const { data, isLoading } = useGetDocumentsEDOQuery(
@@ -60,14 +62,9 @@ export const Documents: FC = () => {
     return <NotLogin />;
   }
 
-  const handleChangeTab = (
-    tab: ENUM_DOCUMENT_STATUS_TAB,
-    allTabs: ENUM_DOCUMENT_STATUS[],
-    owner?: 0 | 1,
-  ) => {
-    setValue("tabStatus", tab);
-    setValue("allStatus", allTabs);
-    setValue("owner", owner);
+  const handleChangeTab = (item: IDocumentTab) => {
+    setValue("categoryStatus", item?.status || []);
+    setValue("owner", item?.owner);
     setValue("page", 1);
   };
 
@@ -75,51 +72,64 @@ export const Documents: FC = () => {
     setValue("page", (formState?.page || 1) + 1);
   };
 
+  const handleChangeDocType = (item: IDocumentTab) => {
+    setValue("doctype", item?.docType!);
+    setValue("page", 1);
+  };
+  const handleChangeSingStatus = (item: IDocumentTab) => {
+    setValue("signStatus", item?.status || []);
+    setValue("page", 1);
+  };
+
   return (
     <div className="container">
-      <OfferSignModal
-        open={isShowModal}
-        haveTrigger={false}
-        setOpen={setIsShowModal}
-      />
       <div className="grid grid-flow-row gap-4">
         {/* Заголовок страницы */}
         <div className="!bg-[#341F47] p-5 grid grid-flow-row gap-4">
           <div className="grid items-end justify-start grid-flow-col gap-4">
             <img src={DidoxLogo} alt="didox-log" className="h-12" />
             <h1 className="text-3xl font-bold text-white">
-              {t("documents_page.title")}
+              {t("admin_panel.documents.title")}
             </h1>
           </div>
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
-            <p className="text-white">{t("documents_page.description")}</p>
+            <p className="text-white">
+              {t("admin_panel.documents.description")}
+            </p>
           </div>
         </div>
 
-        <CustomMiniTabs>
-          {DOCUMENT_STATUS_LIST.map((item) => (
-            <CustomMiniTabItem
-              key={item.tabStatus}
-              onClick={() => {
-                handleChangeTab(item.tabStatus, item.status, item?.owner);
-              }}
-              active={formState.tabStatus === item.tabStatus}
-              className="flex items-center gap-2"
-            >
-              <div
-                className={cn(
-                  "p-1 rounded-lg transition-colors duration-200 ",
-                  formState.tabStatus === item.tabStatus
-                    ? "text-white bg-[#4d37b3]"
-                    : "text-gray-600",
-                )}
-              >
-                <item.icon size={20} />
-              </div>
-              {t(item.label)}
-            </CustomMiniTabItem>
-          ))}
-        </CustomMiniTabs>
+        <div className="grid grid-cols-3 gap-4 py-5">
+          <DocumentFilter
+            title={t("admin_panel.documents.tabs.category.title")}
+            icon={ArrowUpDown}
+            baseList={DOCUMENT_STATUS_LIST}
+            onChange={handleChangeTab}
+            defaultValue={DOCUMENT_STATUS_LIST?.findIndex(
+              (item) =>
+                item?.status === formState?.categoryStatus &&
+                item?.owner === formState?.owner,
+            )}
+          />
+          <DocumentFilter
+            title={t("admin_panel.documents.tabs.type.title")}
+            icon={FileWarning}
+            baseList={DOCUMENT_TYPE_LIST}
+            onChange={handleChangeDocType}
+            defaultValue={DOCUMENT_TYPE_LIST?.findIndex(
+              (item) => item?.docType === formState?.doctype,
+            )}
+          />
+          <DocumentFilter
+            title={t("admin_panel.documents.tabs.signature.title")}
+            icon={PenTool}
+            baseList={DOCUMENT_SIGNATURE_LIST}
+            onChange={handleChangeSingStatus}
+            defaultValue={DOCUMENT_SIGNATURE_LIST?.findIndex(
+              (item) => item?.status === formState?.signStatus,
+            )}
+          />
+        </div>
 
         {/* Сетка карточек документов */}
 

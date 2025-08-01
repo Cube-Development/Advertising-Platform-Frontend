@@ -17,7 +17,7 @@ export interface IGetDocumentEDORequest {
   signDateFrom?: string;
   signDateTo?: string;
 
-  doctype?: string; // Тип документа (например, "001", "005" и т.п.)
+  doctype?: ENUM_DOCUMENT_TYPE; // Тип документа (например, "001", "005" и т.п.)
   name?: string; // Номер документа
   sum?: number; // Сумма документа
 
@@ -37,7 +37,8 @@ export interface IGetDocumentEDORequest {
 
 export interface IDocumentsForm extends IGetDocumentEDORequest {
   tabStatus: ENUM_DOCUMENT_STATUS_TAB;
-  allStatus: ENUM_DOCUMENT_STATUS[];
+  categoryStatus: ENUM_DOCUMENT_STATUS[];
+  signStatus: ENUM_DOCUMENT_STATUS[];
 }
 
 export interface IGetDocumentEDOResponse {

@@ -2615,6 +2615,58 @@
     "home": {
       "title": "Welcome to the admin panel!",
       "description": "Here you can manage users, channels, and platform content."
+    },
+
+    "documents": {
+      "title": "Documents",
+      "description": "List of documents for viewing and signing in the Didox system.",
+
+      "tabs": {
+        "category": {
+          "title": "Direction",
+          "type": {
+            "inbox": "Incoming",
+            "outbox": "Outgoing",
+            "draft": "Drafts"
+          }
+        },
+
+        "type": {
+          "title": "Document Type",
+          "type": {
+            "all": "All",
+            "custom_document": "Custom Document",
+            "invoice_pharm": "Invoice (PHARM)"
+          }
+        },
+
+        "signature": {
+          "title": "Signature Status",
+          "type": {
+            "all": "All",
+            "signed": "Signed",
+            "signed_party": "Awaiting Your Signature",
+            "signed_self": "Awaiting Partner's Signature"
+          }
+        }
+      },
+
+      "card": {
+        "contract": {
+          "label": "Contract Number and Date"
+        },
+        "updated": "Last Updated",
+        "counterparty": {
+          "title": "Counterparty",
+          "inn": "TIN"
+        },
+        "price": {
+          "title": "Price",
+          "delivery": "Delivery Cost",
+          "vat": "VAT Amount",
+          "withVat": "Total with VAT"
+        }
+      }
     }
   },
 

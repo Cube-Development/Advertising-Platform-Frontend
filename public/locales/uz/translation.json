@@ -2628,6 +2628,58 @@
           "ok": "Yaxshi"
         }
       }
+    },
+
+    "documents": {
+      "title": "Hujjatlar",
+      "description": "Didox tizimida ko‘rish va imzolash uchun hujjatlar ro‘yxati.",
+
+      "tabs": {
+        "category": {
+          "title": "Yo‘nalish",
+          "type": {
+            "inbox": "Kirish",
+            "outbox": "Chiqish",
+            "draft": "Qoralama"
+          }
+        },
+
+        "type": {
+          "title": "Hujjat turi",
+          "type": {
+            "all": "Barchasi",
+            "custom_document": "Ixtiyoriy hujjat",
+            "invoice_pharm": "Hisob-faktura (FARM)"
+          }
+        },
+
+        "signature": {
+          "title": "Imzo holati",
+          "type": {
+            "all": "Barchasi",
+            "signed": "Imzolangan",
+            "signed_party": "Sizning imzongiz kutilmoqda",
+            "signed_self": "Hamkorning imzosi kutilmoqda"
+          }
+        }
+      },
+
+      "card": {
+        "contract": {
+          "label": "Shartnoma raqami va sanasi"
+        },
+        "updated": "Yangilangan sana",
+        "counterparty": {
+          "title": "Hamkor",
+          "inn": "STIR"
+        },
+        "price": {
+          "title": "Narx",
+          "delivery": "Yetkazib berish qiymati",
+          "vat": "QQS summasi",
+          "withVat": "QQS bilan umumiy qiymat"
+        }
+      }
     }
   },
 
