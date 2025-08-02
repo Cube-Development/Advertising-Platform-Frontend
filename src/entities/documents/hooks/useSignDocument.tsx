@@ -22,10 +22,10 @@ export const useSignDocument = () => {
   const { certificates, certificatesLoading, isSignatureLoading } =
     useCryptoCertificates();
 
-  const sign = async (documentId: string) => {
+  const sign = async (documentId: string, owner: 0 | 1 = 0) => {
     try {
       // Получаем JSON документа для подписи
-      const response = await toSign({ documentId }).unwrap();
+      const response = await toSign({ documentId, owner }).unwrap();
       const documentJson = response?.data?.json || {};
       // Шаг 1: Загрузка ключа
       const keyResponse = await sendMessage(

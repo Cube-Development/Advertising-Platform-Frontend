@@ -50,15 +50,16 @@ export const Guide: FC<GuideProps> = ({}) => {
   return (
     <>
       <div className={`${styles.guide} display__hide__max__md frame`}>
-        {/* <span className={styles.text}>
-          {profileFilter.type === PROFILE_TYPE.ENTITIES
+        <span className={styles.text}>
+          {t("wallet.guide.entity")}
+          {/* {profileFilter.type === PROFILE_TYPE.ENTITIES
             ? t("wallet.guide.entity")
             : profileFilter.type === PROFILE_TYPE.INDIVIDUALS
               ? t("wallet.guide.individual")
               : profileFilter.type === PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT
                 ? t("wallet.guide.selfEmployedAccounts")
-                : t("wallet.guide.selfEmployedTransits")}
-        </span> */}
+                : t("wallet.guide.selfEmployedTransits")} */}
+        </span>
       </div>
       <div className="display__hide__min__md">
         <Accordion type="single" collapsible className={styles.accordion}>
@@ -75,6 +76,8 @@ export const Guide: FC<GuideProps> = ({}) => {
               </div>
             </AccordionTrigger>
             <AccordionContent className={`${styles.content} ${styles.guidee}`}>
+              {t("wallet.guide.entity")}
+
               {/* <span className={styles.text}>
                 {profileFilter.type === PROFILE_TYPE.ENTITIES
                   ? t("wallet.guide.entity")

@@ -21,7 +21,7 @@ import {
   Key,
   Lock,
 } from "lucide-react";
-import { ButtonHTMLAttributes, FC, useState } from "react";
+import { ButtonHTMLAttributes, FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 
 interface OfferSignModalProps extends ButtonHTMLAttributes<HTMLButtonElement> {
@@ -44,6 +44,10 @@ export const OfferSignModal: FC<OfferSignModalProps> = ({
   const requirements = t("organization.offer_sign.requirements", {
     returnObjects: true,
   }) as { item: string }[];
+
+  useEffect(() => {
+    setIsOpen(open);
+  }, [open]);
 
   if (organization?.status === ENUM_ORGANIZATION_STATUS.ACTIVE) return null;
 
@@ -102,7 +106,7 @@ export const OfferSignModal: FC<OfferSignModalProps> = ({
 
         {/* Кнопка подписания */}
         {isAuthEcp ? (
-          <SignDocument documentId={organization?.id || ""} />
+          <SignDocument documentId={organization?.offer_id || ""} owner={0} />
         ) : (
           <div>
             {/* Декоративная рамка */}

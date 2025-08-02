@@ -122,7 +122,7 @@ export const UserDataForm: FC<IUserDataFormProps> = ({}) => {
                   )}
             </span>
           </div>
-          <OfferSignModal />
+          <OfferSignModal open={isShowModal} setOpen={setIsShowModal} />
         </div>
       </div>
     </div>

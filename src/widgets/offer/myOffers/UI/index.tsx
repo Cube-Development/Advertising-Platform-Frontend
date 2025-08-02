@@ -36,10 +36,6 @@ export const MyOffers: FC<MyOffersProps> = ({
   const { isAuthEcp } = useAppSelector((state) => state.user);
   const { data: organization } = useGetOrganizationQuery();
 
-  const isModalOpen = useMemo(() => {
-    return organization?.status !== ENUM_ORGANIZATION_STATUS.ACTIVE;
-  }, [organization?.status]);
-
   return (
     <div className={styles.wrapper}>
       {!isLoading && offers?.length === 0 ? (
@@ -72,7 +68,6 @@ export const MyOffers: FC<MyOffersProps> = ({
                     <OfferSign
                       documentId={card?.id || ""}
                       isAuthEcp={isAuthEcp}
-                      isModalOpen={isModalOpen}
                     />
                   }
                 />

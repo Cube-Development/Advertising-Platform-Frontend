@@ -49,6 +49,8 @@ export const OrganizationDataForm: FC = ({}) => {
     });
   }, [profile, isLoading, isAuthEcp]);
 
+  console.log("isShowModal: ", isShowModal);
+
   return (
     <div>
       <OfferSignModal

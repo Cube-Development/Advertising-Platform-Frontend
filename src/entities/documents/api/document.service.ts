@@ -53,10 +53,10 @@ export const documentAPI = authEcpApi.injectEndpoints({
     }),
     getSignInfoEDO: build.mutation<
       IGetDocumentEDOToSignResponse,
-      { documentId: string }
+      { documentId: string; owner: 0 | 1 }
     >({
-      query: ({ documentId }) => ({
-        url: `/v1/documents/${documentId}?owner=1`,
+      query: ({ documentId, owner }) => ({
+        url: `/v1/documents/${documentId}?owner=${owner}`,
         method: `GET`,
       }),
     }),

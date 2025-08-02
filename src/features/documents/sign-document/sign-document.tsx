@@ -6,17 +6,18 @@ import { FC, MouseEvent } from "react";
 interface ISignDocumentProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   documentId: string;
+  owner: 0 | 1;
 }
 
 export const SignDocument: FC<ISignDocumentProps> = ({
   documentId,
+  owner,
   ...props
 }) => {
   const { sign, isLoading } = useSignDocument();
   const { onClick, disabled, ...rest } = props;
   const handleSign = async () => {
-    await sign(documentId);
-    // console.log("responce", response);
+    await sign(documentId, owner);
   };
 
   return (

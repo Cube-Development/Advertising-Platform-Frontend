@@ -14,6 +14,7 @@ interface DocumentCardProps {
   signDocument: FC<
     {
       documentId: string;
+      owner: 0 | 1;
     } & ButtonHTMLAttributes<HTMLButtonElement>
   >;
 }
@@ -121,7 +122,11 @@ export const DocumentCard: FC<DocumentCardProps> = ({
               </div>
             </div>
 
-            <SignDocument documentId={document.doc_id} disabled={isDisabled} />
+            <SignDocument
+              documentId={document.doc_id}
+              owner={1}
+              disabled={isDisabled}
+            />
           </div>
         </div>
       </div>

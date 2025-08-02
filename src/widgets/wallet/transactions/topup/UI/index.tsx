@@ -38,8 +38,8 @@ export const Topup: FC = () => {
   } = useForm<IWalletOperations>({
     defaultValues: {
       profileFilter: {
-        type: PROFILE_TYPE.ENTITIES,
-        id: PROFILE_STATUS.ENTITIES,
+        type: PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT,
+        id: PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT,
       },
     },
   });
