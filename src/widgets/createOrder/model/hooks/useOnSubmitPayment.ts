@@ -5,7 +5,6 @@ import {
   useProjectNameMutation,
 } from "@entities/project";
 import { ENUM_ROLES } from "@entities/user";
-import { usePaymentProjectMutation } from "@entities/wallet";
 import { ENUM_PATHS } from "@shared/routing";
 import { useToast } from "@shared/ui";
 import { useState } from "react";
@@ -18,7 +17,7 @@ export const useOnSubmitPayment = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [projectName] = useProjectNameMutation();
   const [createOrderDates] = useCreateOrderDatesMutation();
-  const [paymentProject] = usePaymentProjectMutation();
+  // const [paymentProject] = usePaymentProjectMutation();
   const [approveProject] = useApproveProjectMutation();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -91,26 +90,26 @@ export const useOnSubmitPayment = () => {
   };
 
   const handleProjectPayment = async (projectId: string, role: ENUM_ROLES) => {
-    await (
-      role === ENUM_ROLES.ADVERTISER
-        ? paymentProject(projectId)
-        : approveProject({ project_id: projectId })
-    )
-      .unwrap()
-      .then(() => {
-        toast({
-          variant: "success",
-          title: t("toasts.create_order.payment.success"),
-        });
-        navigate(ENUM_PATHS.ORDERS);
-      })
-      .catch(() => {
-        toast({
-          variant: "error",
-          title: t("toasts.create_order.payment.error"),
-        });
-        throw new Error("Error: Create order payment | approve project");
-      });
+    // await (
+    //   role === ENUM_ROLES.ADVERTISER
+    //     ? paymentProject(projectId)
+    //     : approveProject({ project_id: projectId })
+    // )
+    //   .unwrap()
+    //   .then(() => {
+    //     toast({
+    //       variant: "success",
+    //       title: t("toasts.create_order.payment.success"),
+    //     });
+    //     navigate(ENUM_PATHS.ORDERS);
+    //   })
+    //   .catch(() => {
+    //     toast({
+    //       variant: "error",
+    //       title: t("toasts.create_order.payment.error"),
+    //     });
+    //     throw new Error("Error: Create order payment | approve project");
+    //   });
   };
 
   return {

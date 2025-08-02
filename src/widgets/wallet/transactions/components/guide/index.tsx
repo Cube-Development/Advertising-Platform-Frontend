@@ -12,14 +12,9 @@ import styles from "./styles.module.scss";
 import { ArrowSmallVerticalIcon } from "@shared/assets";
 import guideAnimation from "/animated/guide_lottie.gif";
 
-interface GuideProps {
-  profileFilter: {
-    type: PROFILE_TYPE;
-    id?: PROFILE_STATUS;
-  };
-}
+interface GuideProps {}
 
-export const Guide: FC<GuideProps> = ({ profileFilter }) => {
+export const Guide: FC<GuideProps> = ({}) => {
   const { t } = useTranslation();
   const accordionRefs = useRef<Array<HTMLDivElement | null>>([]);
 
@@ -55,7 +50,7 @@ export const Guide: FC<GuideProps> = ({ profileFilter }) => {
   return (
     <>
       <div className={`${styles.guide} display__hide__max__md frame`}>
-        <span className={styles.text}>
+        {/* <span className={styles.text}>
           {profileFilter.type === PROFILE_TYPE.ENTITIES
             ? t("wallet.guide.entity")
             : profileFilter.type === PROFILE_TYPE.INDIVIDUALS
@@ -63,7 +58,7 @@ export const Guide: FC<GuideProps> = ({ profileFilter }) => {
               : profileFilter.type === PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT
                 ? t("wallet.guide.selfEmployedAccounts")
                 : t("wallet.guide.selfEmployedTransits")}
-        </span>
+        </span> */}
       </div>
       <div className="display__hide__min__md">
         <Accordion type="single" collapsible className={styles.accordion}>
@@ -80,7 +75,7 @@ export const Guide: FC<GuideProps> = ({ profileFilter }) => {
               </div>
             </AccordionTrigger>
             <AccordionContent className={`${styles.content} ${styles.guidee}`}>
-              <span className={styles.text}>
+              {/* <span className={styles.text}>
                 {profileFilter.type === PROFILE_TYPE.ENTITIES
                   ? t("wallet.guide.entity")
                   : profileFilter.type === PROFILE_TYPE.INDIVIDUALS
@@ -88,7 +83,7 @@ export const Guide: FC<GuideProps> = ({ profileFilter }) => {
                     : profileFilter.type === PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT
                       ? t("wallet.guide.selfEmployedAccounts")
                       : t("wallet.guide.selfEmployedTransits")}
-              </span>
+              </span> */}
             </AccordionContent>
           </AccordionItem>
         </Accordion>

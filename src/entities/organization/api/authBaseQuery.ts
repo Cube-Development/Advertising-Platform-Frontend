@@ -9,6 +9,7 @@ import { ENUM_COOKIES_TYPES } from "@shared/config";
 import Cookies from "js-cookie";
 
 const baseUrl = "https://api2.didox.uz";
+// const baseUrl = "https://stage.goodsign.biz";
 
 // Инициализируем один раз базовый запрос без headers
 const rawBaseQuery = fetchBaseQuery({ baseUrl });

@@ -1,8 +1,8 @@
+import { getInputLegalLength, getInputLegalType } from "@shared/config";
 import { CustomInput, IBlockData, IParameterData } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { getInputLegalLength, getInputLegalType } from "@entities/wallet";
 
 interface LegalFormProps {
   data: IBlockData;

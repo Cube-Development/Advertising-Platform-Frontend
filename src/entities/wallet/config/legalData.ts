@@ -1,3 +1,5 @@
+import { legalData } from "@shared/config";
+import { IBlockData } from "@shared/ui";
 import {
   formatCardDate,
   formatFullDate,
@@ -13,10 +15,8 @@ import {
   isValidPhoneNumber,
   isValidPNFL,
 } from "@shared/utils";
-import { IBlockData, IRowData } from "../types";
-import { topup } from "./config";
 import { TFunction } from "i18next";
-import { legalData } from "@shared/config";
+import { topup } from "./config";
 
 export const selfEmployed: IBlockData = {
   title: "add_profile.basic_info.basic_info",
@@ -248,12 +248,12 @@ export const contact: IBlockData = {
 export const TOP_UP_AMOUNT = (t: TFunction) => ({
   required: t("wallet.amount.required"),
   validate: {
-    min: (value: string) =>
-      Number(formatWithOutSpaces(value)) >= topup.min ||
+    min: (value: string | number) =>
+      Number(formatWithOutSpaces(value.toString())) >= topup.min ||
       `${t("wallet.amount.min")} - ${topup.min.toLocaleString()} ${t("symbol")}`,
 
-    max: (value: string) =>
-      Number(formatWithOutSpaces(value)) <= topup.max ||
+    max: (value: string | number) =>
+      Number(formatWithOutSpaces(value.toString())) <= topup.max ||
       `${t("wallet.amount.max")} - ${topup.max.toLocaleString()} ${t("symbol")}`,
   },
 });

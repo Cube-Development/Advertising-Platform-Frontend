@@ -1,0 +1,48 @@
+import { PROFILE_STATUS, PROFILE_TYPE } from "../config";
+import { ENUM_WALLETS_TYPE } from "./wallets.enum";
+
+export interface ICreatePaymentRequest {
+  project_id: string;
+  wallet_type: ENUM_WALLETS_TYPE;
+}
+
+export interface ICreatePaymentResponse {
+  success: boolean;
+}
+
+export interface ICreateDepositRequest {
+  amount: number;
+}
+
+export interface ICreateDepositResponse {
+  doc_id: string;
+}
+
+export interface ICreateDeposit {
+  doc_id: string;
+}
+
+export interface ICreateWithdrawRequest {
+  amount: number;
+  wallet_type: ENUM_WALLETS_TYPE;
+}
+
+export interface IWalletResponse {
+  account_id: string;
+  balance: number;
+}
+
+export interface IGetBalance {
+  deposit: IWalletResponse;
+  profit: IWalletResponse;
+  spending: IWalletResponse;
+}
+
+export interface IWalletOperations {
+  amount: number;
+  wallet_type?: ENUM_WALLETS_TYPE;
+  profileFilter?: {
+    type: PROFILE_TYPE;
+    id?: PROFILE_STATUS;
+  };
+}

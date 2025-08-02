@@ -1,9 +1,4 @@
-import {
-  paymentTypes,
-  TOP_UP_AMOUNT,
-  topup,
-  usePaymentDepositMutation,
-} from "@entities/wallet";
+import { paymentTypes, TOP_UP_AMOUNT, topup } from "@entities/wallet";
 import { PaymentCard } from "@features/wallet";
 import { CardIcon } from "@shared/assets";
 import { ENUM_PATHS } from "@shared/routing";
@@ -66,32 +61,30 @@ export const CreditCard: FC = () => {
       !!formState?.is_fee_included,
     );
 
-  const [paymentDeposit, { isLoading, error }] = usePaymentDepositMutation();
-
   const onSubmit: SubmitHandler<IOnlineBankingData> = async (data) => {
-    const formData = {
-      ...data,
-      amount: formatWithOutSpaces(data?.amount),
-    };
-    !isLoading &&
-      paymentDeposit(formData)
-        .unwrap()
-        .then(() => {
-          reset();
-          toast({
-            variant: "success",
-            title: `${t("toasts.wallet.topup.success")}: ${formData.amount.toLocaleString()} ${t("symbol")}`,
-          });
-          navigate(ENUM_PATHS.MAIN);
-        })
-        .catch((error) => {
-          toast({
-            variant: "error",
-            title: t("toasts.wallet.topup.error"),
-            action: <ToastAction altText="Ok">Ok</ToastAction>,
-          });
-          console.error("Ошибка payment/deposit: ", error);
-        });
+    // const formData = {
+    //   ...data,
+    //   amount: formatWithOutSpaces(data?.amount),
+    // };
+    // !isLoading &&
+    //   paymentDeposit(formData)
+    //     .unwrap()
+    //     .then(() => {
+    //       reset();
+    //       toast({
+    //         variant: "success",
+    //         title: `${t("toasts.wallet.topup.success")}: ${formData.amount.toLocaleString()} ${t("symbol")}`,
+    //       });
+    //       navigate(ENUM_PATHS.MAIN);
+    //     })
+    //     .catch((error) => {
+    //       toast({
+    //         variant: "error",
+    //         title: t("toasts.wallet.topup.error"),
+    //         action: <ToastAction altText="Ok">Ok</ToastAction>,
+    //       });
+    //       console.error("Ошибка payment/deposit: ", error);
+    //     });
   };
 
   const amountText = t("wallet.topup.amount", {
@@ -190,7 +183,7 @@ export const CreditCard: FC = () => {
             </span>
           </div>
         </div>
-        <PaymentCard error={error && true} isLoading={isLoading} />
+        {/* <PaymentCard error={error && true} isLoading={isLoading} /> */}
       </form>
     </div>
   );

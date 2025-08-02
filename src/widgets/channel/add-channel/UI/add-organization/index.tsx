@@ -1,4 +1,4 @@
-import { ILegalData, PROFILE_STATUS, PROFILE_TYPE } from "@entities/wallet";
+import { PROFILE_STATUS, PROFILE_TYPE } from "@entities/wallet";
 import {
   MOCK_ADD_LEGAL,
   MOCK_ADD_SELF_EMPLOYED,
@@ -34,7 +34,7 @@ export const AddOrganization: FC<IAddOrganizationProps> = ({
     handleSubmit,
     watch,
     formState: { errors, isSubmitting },
-  } = useForm<ILegalData>({
+  } = useForm<any>({
     defaultValues: {
       profileFilter: {
         type: PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT,
@@ -48,7 +48,7 @@ export const AddOrganization: FC<IAddOrganizationProps> = ({
   const [isNotFoundModalOpen, setIsNotFoundModalOpen] =
     useState<boolean>(false);
 
-  const onSubmit = async (data: ILegalData) => {
+  const onSubmit = async (data: any) => {
     await new Promise((resolve) => setTimeout(resolve, 1000));
 
     if (data.INN == 111999333) {
