@@ -13,3 +13,8 @@ export interface ICreateOrganizationRequest {
   TIN: string;
   PINFL: string;
 }
+
+export interface IOrganizationStatus {
+  label: string;
+  status: ENUM_ORGANIZATION_STATUS;
+}
