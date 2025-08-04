@@ -2744,7 +2744,7 @@
 
     "offer_sign": {
       "title": "Taklifni imzolash",
-      "description": "Xizmatdan foydalanishni boshlash uchun ommaviy taklif shartlarini ko‘rib chiqib, qabul qilishingiz kerak",
+      "description": "Xizmatdan foydalanishni boshlash uchun ommaviy <1>taklif shartlarini</1> ko‘rib chiqib, qabul qilishingiz kerak",
       "requirements": [
         { "item": "Foydalanish shartlarini ko‘rib chiqish" },
         { "item": "Maxfiylik siyosatiga rozilik" },

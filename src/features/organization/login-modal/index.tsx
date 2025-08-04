@@ -28,12 +28,12 @@ interface LoginModalProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export const LoginModal: FC<LoginModalProps> = ({
   open = false,
   haveTrigger = true,
+  onClick,
   ...props
 }) => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(open);
   const screen = useWindowWidth();
-  const { onClick, ...rest } = props;
   return (
     <>
       {screen > BREAKPOINT.MD ? (
@@ -41,7 +41,7 @@ export const LoginModal: FC<LoginModalProps> = ({
           {haveTrigger && (
             <DialogTrigger asChild>
               <MyButton
-                {...rest}
+                {...props}
                 type="button"
                 className="flex items-center justify-center gap-2 w-none"
                 onClick={(e) => {
@@ -72,7 +72,7 @@ export const LoginModal: FC<LoginModalProps> = ({
           {haveTrigger && (
             <DrawerTrigger asChild>
               <MyButton
-                {...rest}
+                {...props}
                 type="button"
                 className="flex items-center justify-center gap-2 w-none"
                 onClick={(e) => {
@@ -89,13 +89,15 @@ export const LoginModal: FC<LoginModalProps> = ({
           <DrawerContent className="h-[100vh]">
             <DrawerTitle className="sr-only" />
             <DrawerDescription className="sr-only" />
-            <DrawerClose
-              className="absolute p-4 top-3 right-3"
-              onClick={() => setIsOpen(false)}
-            >
-              <XCircle size={24} className="text-white" />
-            </DrawerClose>
-            <ModalContent />
+            <div className="relative h-full overflow-y-scroll">
+              <DrawerClose
+                className="absolute p-4 top-3 right-3"
+                onClick={() => setIsOpen(false)}
+              >
+                <XCircle size={24} className="text-white" />
+              </DrawerClose>
+              <ModalContent />
+            </div>
           </DrawerContent>
         </Drawer>
       )}

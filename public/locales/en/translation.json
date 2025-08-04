@@ -2707,7 +2707,7 @@
 
     "offer_sign": {
       "title": "Sign the offer",
-      "description": "To start using the service, you need to review and accept the terms of the public offer",
+      "description": "To start using the service, you need to review and accept the terms of the <1>public offer</1>",
       "requirements": [
         { "item": "Review the terms of use" },
         { "item": "Agree to the privacy policy" },
