@@ -3,7 +3,6 @@ import {
   LEGAL_DATA,
   useGetProfileEDOQuery,
 } from "@entities/organization";
-import { OfferSignModal, useRenderOfferModal } from "@features/organization";
 import { useAppSelector } from "@shared/hooks";
 import { CustomBlockData } from "@shared/ui";
 import { FC, useEffect } from "react";
@@ -11,7 +10,7 @@ import { useForm } from "react-hook-form";
 
 export const OrganizationDataForm: FC = ({}) => {
   const { isAuthEcp } = useAppSelector((state) => state.user);
-  const { isShowModal, setIsShowModal } = useRenderOfferModal();
+
   const { data: profile, isLoading } = useGetProfileEDOQuery(undefined, {
     skip: !isAuthEcp,
   });
@@ -49,15 +48,8 @@ export const OrganizationDataForm: FC = ({}) => {
     });
   }, [profile, isLoading, isAuthEcp]);
 
-  console.log("isShowModal: ", isShowModal);
-
   return (
     <div>
-      <OfferSignModal
-        open={isShowModal}
-        haveTrigger={false}
-        setOpen={setIsShowModal}
-      />
       <div className="grid grid-flow-row gap-5">
         {LEGAL_DATA.map((item, index) => (
           <CustomBlockData

@@ -17,8 +17,8 @@ export const OrganizationDataForm: FC = ({}) => {
             <div className="absolute top-4 right-4 ">
               <LogoutEcp />
             </div>
+            <OrganizationForm />
           </div>
-          <OrganizationForm />
         </>
       ) : (
         <NotLogin className="frame" />

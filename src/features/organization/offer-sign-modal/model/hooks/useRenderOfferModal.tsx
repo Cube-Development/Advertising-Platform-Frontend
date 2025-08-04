@@ -6,55 +6,37 @@ import { useAppSelector } from "@shared/hooks";
 import { useEffect, useRef, useState } from "react";
 
 export const useRenderOfferModal = () => {
-  // const { isAuthEcp } = useAppSelector((state) => state.user);
-  // const hasTriggeredModal = useRef(false);
-  // const prevAuthRef = useRef(isAuthEcp);
-  // const { data: organization, isLoading } = useGetOrganizationQuery();
-  // const [isShowModal, setIsShowModal] = useState(false);
-
-  // useEffect(() => {
-  //   const becameAuthorized = !prevAuthRef.current;
-  //   prevAuthRef.current = isAuthEcp; // обновляем
-
-  //   const shouldShow =
-  //     becameAuthorized &&
-  //     // isAuthEcp &&
-  //     organization?.status !== ENUM_ORGANIZATION_STATUS.ACTIVE &&
-  //     !hasTriggeredModal.current;
-
-  //   if (shouldShow) {
-  //     hasTriggeredModal.current = true;
-  //     setIsShowModal(true);
-  //   }
-  // }, [isAuthEcp, organization?.status, isLoading]);
-
   const { isAuthEcp } = useAppSelector((state) => state.user);
-  const hasTriggeredModal = useRef(false);
+  const [open, setOpen] = useState(false);
   const prevAuthRef = useRef(isAuthEcp);
+  const hasShownRef = useRef(false);
   const { data: organization, isLoading } = useGetOrganizationQuery();
-  const [isShowModal, setIsShowModal] = useState(false);
 
   useEffect(() => {
-    if (!isAuthEcp) return;
     if (isLoading) return;
-    if (!organization) return;
 
-    const becameAuthorized = !prevAuthRef.current;
-    prevAuthRef.current = isAuthEcp; // обновляем
-
-    const shouldShow =
-      becameAuthorized &&
-      organization?.status !== ENUM_ORGANIZATION_STATUS.ACTIVE &&
-      !hasTriggeredModal.current;
-
-    if (shouldShow) {
-      hasTriggeredModal.current = true;
-      setIsShowModal(true);
+    // Если пользователь вышел (true -> false), сбрасываем флаг
+    if (prevAuthRef.current === true && isAuthEcp === false) {
+      hasShownRef.current = false;
+      console.log("User logged out, resetting hasShown flag");
     }
-  }, [isAuthEcp, organization?.status, isLoading]);
 
-  return {
-    isShowModal,
-    setIsShowModal,
-  };
+    // Проверяем переход с false на true
+    const wasUnauthorized = prevAuthRef.current === false;
+    const nowAuthorized = isAuthEcp === true;
+
+    if (
+      wasUnauthorized &&
+      nowAuthorized &&
+      !hasShownRef.current &&
+      organization?.status !== ENUM_ORGANIZATION_STATUS.ACTIVE
+    ) {
+      setOpen(true);
+      hasShownRef.current = true;
+    }
+
+    prevAuthRef.current = isAuthEcp;
+  }, [isAuthEcp, organization, isLoading]);
+
+  return { open, setOpen };
 };

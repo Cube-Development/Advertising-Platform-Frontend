@@ -8,7 +8,6 @@ import {
   useGetDocumentsEDOQuery,
 } from "@entities/documents";
 import { SignDocument } from "@features/documents";
-import { OfferSignModal, useRenderOfferModal } from "@features/organization";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { useAppSelector } from "@shared/hooks";
 import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
@@ -22,7 +21,6 @@ import DidoxLogo from "/images/organization/didox-logo.svg";
 export const Documents: FC = () => {
   const { t } = useTranslation();
   const { isAuthEcp } = useAppSelector((state) => state.user);
-  const { isShowModal, setIsShowModal } = useRenderOfferModal();
 
   const { watch, setValue } = useForm<IDocumentsForm>({
     defaultValues: {
@@ -68,11 +66,6 @@ export const Documents: FC = () => {
 
   return (
     <div className="container">
-      <OfferSignModal
-        open={isShowModal}
-        haveTrigger={false}
-        setOpen={setIsShowModal}
-      />
       <div className="page_wrapper">
         {/* Заголовок страницы */}
         <div className="!bg-[#341F47] p-5 grid grid-flow-row gap-4">

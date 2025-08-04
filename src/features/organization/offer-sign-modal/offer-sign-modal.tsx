@@ -46,12 +46,17 @@ export const OfferSignModal: FC<OfferSignModalProps> = ({
     setIsOpen(open);
   }, [open]);
 
+  const handleOpen = (open: boolean) => {
+    setIsOpen(open);
+    setOpen(open);
+  };
+
   if (organization?.status === ENUM_ORGANIZATION_STATUS.ACTIVE) return null;
 
   return (
     <>
       {screen > BREAKPOINT.MD ? (
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <Dialog open={isOpen} onOpenChange={handleOpen}>
           {haveTrigger && (
             <DialogTrigger asChild>
               <MyButton
@@ -69,12 +74,12 @@ export const OfferSignModal: FC<OfferSignModalProps> = ({
             </DialogTrigger>
           )}
 
-          <DialogContent className="frame !p-0 min-h-[650px] overflow-hidden max-w-[700px] w-[90vw]">
+          <DialogContent className="frame !p-0  overflow-hidden max-w-[700px] w-[90vw]">
             <DialogTitle className="sr-only" />
             <DialogDescription className="sr-only" />
             <DialogClose
               className="absolute p-4 top-3 right-3"
-              onClick={() => setIsOpen(false)}
+              onClick={() => handleOpen(false)}
             >
               <XCircle size={24} className="text-black" />
             </DialogClose>
@@ -82,7 +87,7 @@ export const OfferSignModal: FC<OfferSignModalProps> = ({
           </DialogContent>
         </Dialog>
       ) : (
-        <Drawer open={isOpen} onOpenChange={setIsOpen}>
+        <Drawer open={isOpen} onOpenChange={handleOpen}>
           {haveTrigger && (
             <DrawerTrigger asChild>
               <MyButton
@@ -90,7 +95,7 @@ export const OfferSignModal: FC<OfferSignModalProps> = ({
                 type="button"
                 className="flex items-center justify-center gap-2 w-none"
                 onClick={(e) => {
-                  setIsOpen(true);
+                  handleOpen(true);
                   onClick?.(e);
                 }}
               >

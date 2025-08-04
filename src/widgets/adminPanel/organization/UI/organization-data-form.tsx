@@ -3,11 +3,7 @@ import {
   LEGAL_DATA,
   useGetProfileEDOQuery,
 } from "@entities/organization";
-import {
-  LogoutEcp,
-  OfferSignModal,
-  useRenderOfferModal,
-} from "@features/organization";
+import { LogoutEcp } from "@features/organization";
 import { useAppSelector } from "@shared/hooks";
 import { CustomBlockData } from "@shared/ui";
 import { NotLogin } from "@widgets/organization";
@@ -16,7 +12,6 @@ import { useForm } from "react-hook-form";
 
 export const OrganizationDataForm: FC = ({}) => {
   const { isAuthEcp } = useAppSelector((state) => state.user);
-  const { isShowModal, setIsShowModal } = useRenderOfferModal();
   const { data: profile, isLoading } = useGetProfileEDOQuery(undefined, {
     skip: !isAuthEcp,
   });
@@ -62,11 +57,6 @@ export const OrganizationDataForm: FC = ({}) => {
     <div className="relative frame">
       {isAuthEcp ? (
         <>
-          <OfferSignModal
-            open={isShowModal}
-            haveTrigger={false}
-            setOpen={setIsShowModal}
-          />
           <div className="absolute top-4 right-4 ">
             <LogoutEcp />
           </div>

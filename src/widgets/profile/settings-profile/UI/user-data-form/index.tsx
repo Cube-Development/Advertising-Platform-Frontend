@@ -18,7 +18,6 @@ interface IUserDataFormProps {
 export const UserDataForm: FC<IUserDataFormProps> = ({}) => {
   const { t } = useTranslation();
   const data = MOCK_PROFILE as IUserDataNew;
-  const { isShowModal, setIsShowModal } = useRenderOfferModal();
   const { data: organization } = useGetOrganizationQuery();
   const status =
     ORGANIZATION_STATUS_LIST.find(
@@ -123,7 +122,7 @@ export const UserDataForm: FC<IUserDataFormProps> = ({}) => {
                 {t(status)}
               </span>
             </div>
-            <OfferSignModal open={isShowModal} setOpen={setIsShowModal} />
+            <OfferSignModal />
           </div>
         </div>
       )}

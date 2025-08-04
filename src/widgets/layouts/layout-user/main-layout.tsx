@@ -16,6 +16,7 @@ import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import type { PropsWithChildren } from "react";
 import { useEffect } from "react";
 import { Footer, Header } from "../components";
+import { OfferSignModal, useRenderOfferModal } from "@features/organization";
 
 // const Header = lazy(() =>
 //   import("@pages/layouts/components").then((module) => ({
@@ -29,6 +30,8 @@ export const MainLayout = ({ children }: PropsWithChildren) => {
   const { data: balance, isLoading } = useGetBalanceQuery(undefined, {
     skip: !isAuth,
   });
+
+  const { open, setOpen } = useRenderOfferModal();
 
   useGetViewAdvertiserProjectQuery(undefined, {
     skip: !isAuth || role !== ENUM_ROLES.ADVERTISER,
@@ -93,7 +96,10 @@ export const MainLayout = ({ children }: PropsWithChildren) => {
           <Header />
         </Suspense> */}
         <Header />
-        <main className="user_main">{children}</main>
+        <main className="user_main">
+          <OfferSignModal open={open} setOpen={setOpen} haveTrigger={false} />
+          {children}
+        </main>
         <Footer />
       </section>
     </>
