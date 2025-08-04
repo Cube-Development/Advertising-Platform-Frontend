@@ -11,6 +11,9 @@ export const useWalletWithdraw = () => {
   const [createWithdraw, { isLoading, isSuccess }] =
     useCreateWithdrawMutation();
 
+  let uploadUrl =
+    "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCZJIbbXmWQb1RphaovDjL4z82dBVnPXg59sEG";
+
   const withdraw = async (data: ICreateWithdrawRequest) => {
     try {
       await createWithdraw({
@@ -22,6 +25,9 @@ export const useWalletWithdraw = () => {
         variant: "success",
         title: `${t("toasts.wallet.withdraw.success")}`,
       });
+
+      uploadUrl =
+        "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCZJIbbXmWQb1RphaovDjL4z82dBVnPXg59sEG";
     } catch (error) {
       console.error("[WITHDRAW] error:", error);
       toast({
@@ -35,5 +41,6 @@ export const useWalletWithdraw = () => {
     withdraw,
     isLoading,
     isSuccess,
+    uploadUrl,
   };
 };

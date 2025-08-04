@@ -1444,22 +1444,41 @@
 
   "wallet": {
     "topup": {
-      "title": "Balansni to'ldirish",
-      "offer": "Balansni to'ldirish uchun ariza",
-      "amount": "To'ldirish summasi",
-      "required": "Summani kiriting",
-      "min": "Eng kam miqdor",
-      "max": "Maksimal miqdor",
-      "placeholder": "Summani kiriting",
-      "payment_method": "To'lov usulini tanlang",
-      "fetch_error": "So'rov xatosi"
+      "title": "Balansni to‘ldirish",
+      "offer": "Balansni to‘ldirish so‘rovi",
+      "payment_method": "To‘lov usulini tanlang",
+      "fetch_error": "So‘rovda xatolik yuz berdi",
+
+      "amount": {
+        "title": "To‘ldirish summasi",
+        "default_value": "50 000",
+        "placeholder": "To‘ldirish summasini kiriting",
+        "description": "Balansni to‘ldirish summasini kiriting. Minimal summa 50 000 so‘m. Maksimal summa 1 000 000 000 so‘m."
+      },
+
+      "success": {
+        "title": "So‘rovingiz muvaffaqiyatli qabul qilindi!",
+        "text": "To‘lov maqsadi va rekvizitlarini hisob-fakturadagi ma'lumotlarga aniq mos tarzda ko‘rsatishingizni so‘raymiz. Bu mablag‘larni to‘g‘ri va tez o‘tkazish uchun zarur. Ko‘rsatilgan hisob raqamiga mablag‘ tushgach, balansingiz to‘ldiriladi.",
+
+        "buttons": {
+          "download": "Yuklab olish"
+        }
+      }
     },
     "withdraw": {
-      "title": "Pul mablag'larini yechib olish",
-      "offer": "Pul mablag'larini yechib olish uchun ariza",
-      "amount": "Yechib olish summasi",
-      "required": "Summani kiriting",
-      "placeholder": "Summani kiriting"
+      "title": "Mablag‘larni yechib olish",
+      "offer": "Pul yechish so‘rovi",
+      "amount": {
+        "title": "Yechib olinadigan summa",
+        "default_value": "50 000",
+        "placeholder": "Yechib olinadigan summani kiriting",
+        "description": "Balansdan yechib olinadigan summani kiriting. Minimal summa 50 000 so‘m. Maksimal summa 1 000 000 000 so‘m."
+      },
+
+      "success": {
+        "title": "So‘rovingiz muvaffaqiyatli qabul qilindi!",
+        "text": "Avans yechish so‘rovingiz muvaffaqiyatli yuborildi. Tasdiqlanishi va mablag‘lar tushishini kuting."
+      }
     },
     "types": {
       "selfemployed": "Jismoniy shaxs",

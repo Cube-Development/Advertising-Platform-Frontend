@@ -1445,22 +1445,41 @@
 
   "wallet": {
     "topup": {
-      "title": "Balance Top-Up",
-      "offer": "Balance Top-Up Request",
-      "amount": "Top-Up Amount",
-      "required": "Enter the amount",
-      "min": "Minimum amount",
-      "max": "Maximum amount",
-      "placeholder": "Enter the amount",
+      "title": "Balance Top-up",
+      "offer": "Balance Top-up Request",
       "payment_method": "Select a payment method",
-      "fetch_error": "Request error"
+      "fetch_error": "Request error",
+
+      "amount": {
+        "title": "Top-up Amount",
+        "default_value": "50 000",
+        "placeholder": "Enter top-up amount",
+        "description": "Enter the amount to top up your balance. Minimum amount is 50,000 UZS. Maximum amount is 1,000,000,000 UZS."
+      },
+
+      "success": {
+        "title": "Your request has been successfully processed!",
+        "text": "Please carefully specify the payment details and purpose exactly as indicated in the invoice. This is necessary for the correct and quick crediting of funds. Once the funds are received in the specified account, your balance will be updated.",
+
+        "buttons": {
+          "download": "Download"
+        }
+      }
     },
     "withdraw": {
-      "title": "Withdrawal of Funds",
+      "title": "Withdraw Funds",
       "offer": "Withdrawal Request",
-      "amount": "Withdrawal Amount",
-      "required": "Enter the amount",
-      "placeholder": "Enter the amount"
+      "amount": {
+        "title": "Withdrawal Amount",
+        "default_value": "50 000",
+        "placeholder": "Enter withdrawal amount",
+        "description": "Enter the amount to withdraw from your balance. Minimum amount is 50,000 UZS. Maximum amount is 1,000,000,000 UZS."
+      },
+
+      "success": {
+        "title": "Your request has been successfully processed!",
+        "text": "Your advance withdrawal request has been successfully submitted. Please wait for confirmation and the receipt of funds shortly."
+      }
     },
     "types": {
       "selfemployed": "Individual",

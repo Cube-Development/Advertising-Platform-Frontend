@@ -9,6 +9,9 @@ import { useTranslation } from "react-i18next";
 export const useWalletDeposit = () => {
   const { toast } = useToast();
   const { t } = useTranslation();
+  let uploadUrl =
+    "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTC9NXMqnFJ8l6py5hWn7FMdSU1IZNOarxcLKEz";
+
   const [
     createDepositReq,
     {
@@ -35,6 +38,9 @@ export const useWalletDeposit = () => {
         variant: "success",
         title: `${t("toasts.wallet.topup.success")}`,
       });
+
+      uploadUrl =
+        "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTC9NXMqnFJ8l6py5hWn7FMdSU1IZNOarxcLKEz";
     } catch (error) {
       console.error("[DEPOSIT] error:", error);
       toast({
@@ -48,5 +54,6 @@ export const useWalletDeposit = () => {
     deposit,
     isLoading: isCreateDepositReqLoading || isCreateDepositLoading,
     isSuccess: isCreateDepositReqSuccess || isCreateDepositSuccess,
+    uploadUrl,
   };
 };

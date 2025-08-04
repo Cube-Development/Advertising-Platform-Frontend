@@ -3,7 +3,7 @@ import {
   IWalletOperations,
   WithdrawSuccessCard,
 } from "@entities/wallet";
-import { WalletsBar } from "@features/wallet";
+import { DownloadInvoice, WalletsBar } from "@features/wallet";
 import { ArrowIcon5 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
 import {
@@ -26,7 +26,7 @@ export const Withdrawal: FC = () => {
   const { t } = useTranslation();
   const { isAuthEcp } = useAppSelector((state) => state.user);
   const screen = useWindowWidth();
-  const { withdraw, isLoading, isSuccess } = useWalletWithdraw();
+  const { withdraw, isLoading, isSuccess, uploadUrl } = useWalletWithdraw();
   const {
     setValue,
     watch,
@@ -56,7 +56,9 @@ export const Withdrawal: FC = () => {
     <div className="container">
       <div className={styles.wrapper}>
         {isSuccess ? (
-          <WithdrawSuccessCard />
+          <WithdrawSuccessCard
+            downloadBtn={<DownloadInvoice url={uploadUrl} />}
+          />
         ) : (
           <>
             <CustomTitle

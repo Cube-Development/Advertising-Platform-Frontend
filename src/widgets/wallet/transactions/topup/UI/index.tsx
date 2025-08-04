@@ -22,6 +22,7 @@ import { CreditCard, Guide, OrganizationData } from "../../components";
 import { useWalletDeposit } from "../../model";
 import styles from "./styles.module.scss";
 import { formatWithOutSpaces } from "@shared/utils";
+import { DownloadInvoice } from "@features/wallet";
 
 export const Topup: FC = () => {
   useClearCookiesOnPage();
@@ -44,7 +45,7 @@ export const Topup: FC = () => {
     },
   });
   const formState = watch();
-  const { deposit, isLoading, isSuccess } = useWalletDeposit();
+  const { deposit, isLoading, isSuccess, uploadUrl } = useWalletDeposit();
 
   const changeTab = (filter: PROFILE_TYPE) => {
     const item = WALLET_TOP_UP_FILTER_TABS_LIST.find(
@@ -62,7 +63,7 @@ export const Topup: FC = () => {
     <div className="container">
       <div className={styles.wrapper}>
         {isSuccess ? (
-          <TopupSuccessCard />
+          <TopupSuccessCard downloadBtn={<DownloadInvoice url={uploadUrl} />} />
         ) : (
           <>
             <CustomTitle
