@@ -2636,7 +2636,9 @@
           "type": {
             "all": "All",
             "custom_document": "Custom Document",
-            "invoice_pharm": "Invoice (PHARM)"
+            "invoice_pharm": "Invoice (PHARM)",
+            "invoice": "Invoice",
+            "work_act": "Work Act"
           }
         },
 

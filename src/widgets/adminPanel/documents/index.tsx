@@ -21,6 +21,7 @@ import {
 } from "./model";
 import { DocumentFilter } from "./UI";
 import DidoxLogo from "/images/organization/didox-logo.svg";
+import isEqual from "lodash/isEqual";
 
 export const Documents: FC = () => {
   const { t } = useTranslation();
@@ -31,8 +32,8 @@ export const Documents: FC = () => {
       owner: 1 as 0 | 1,
       page: 1,
       limit: INTERSECTION_ELEMENTS.DOCUMENTS,
-      categoryStatus: [],
-      signStatus: [],
+      categoryStatus: DOCUMENT_STATUS_LIST[0]?.status || [],
+      signStatus: DOCUMENT_SIGNATURE_LIST[0]?.status || [],
     },
   });
 
@@ -86,20 +87,20 @@ export const Documents: FC = () => {
       <div className="grid grid-flow-row gap-4">
         {/* Заголовок страницы */}
         <div className="!bg-[#341F47] p-5 grid grid-flow-row gap-4">
-          <div className="grid items-end justify-start grid-flow-col gap-4">
-            <img src={DidoxLogo} alt="didox-log" className="h-12" />
-            <h1 className="text-3xl font-bold text-white">
+          <div className="grid items-end justify-start grid-flow-col gap-2 md:gap-4">
+            <img src={DidoxLogo} alt="didox-log" className="h-8 md:h-12" />
+            <h1 className="text-2xl font-bold text-white md:text-3xl leading-[0.75]">
               {t("admin_panel.documents.title")}
             </h1>
           </div>
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col text-sm sm:flex-row sm:items-center sm:justify-between md:text-lg">
             <p className="text-white">
               {t("admin_panel.documents.description")}
             </p>
           </div>
         </div>
 
-        <div className="grid grid-cols-3 gap-4 py-5">
+        <div className="grid grid-rows-3 gap-4 py-5 md:grid-cols-3 md:grid-rows-1">
           <DocumentFilter
             title={t("admin_panel.documents.tabs.category.title")}
             icon={ArrowUpDown}
@@ -107,7 +108,7 @@ export const Documents: FC = () => {
             onChange={handleChangeTab}
             defaultValue={DOCUMENT_STATUS_LIST?.findIndex(
               (item) =>
-                item?.status === formState?.categoryStatus &&
+                isEqual(item?.status, formState?.categoryStatus) &&
                 item?.owner === formState?.owner,
             )}
           />
@@ -125,8 +126,8 @@ export const Documents: FC = () => {
             icon={PenTool}
             baseList={DOCUMENT_SIGNATURE_LIST}
             onChange={handleChangeSingStatus}
-            defaultValue={DOCUMENT_SIGNATURE_LIST?.findIndex(
-              (item) => item?.status === formState?.signStatus,
+            defaultValue={DOCUMENT_SIGNATURE_LIST?.findIndex((item) =>
+              isEqual(item?.status, formState?.signStatus),
             )}
           />
         </div>

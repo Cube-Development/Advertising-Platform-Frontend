@@ -4,6 +4,7 @@ import {
   ArrowUpFromLine,
   FileClock,
   FilePen,
+  FilePlus2,
   Files,
   FileSignature,
   FileStack,
@@ -15,6 +16,12 @@ import { IDocumentTab } from "./types";
 
 export const DOCUMENT_STATUS_LIST: IDocumentTab[] = [
   {
+    label: "admin_panel.documents.tabs.category.type.draft",
+    owner: 1,
+    icon: PencilLine,
+    status: [ENUM_DOCUMENT_STATUS.CREATED, ENUM_DOCUMENT_STATUS.DRAFT_DELETED],
+  },
+  {
     label: "admin_panel.documents.tabs.category.type.inbox",
     owner: 1,
     icon: ArrowUpFromLine,
@@ -25,12 +32,6 @@ export const DOCUMENT_STATUS_LIST: IDocumentTab[] = [
     owner: 0,
     icon: ArrowDownToLine,
     status: [],
-  },
-  {
-    label: "admin_panel.documents.tabs.category.type.draft",
-    owner: 1,
-    icon: PencilLine,
-    status: [ENUM_DOCUMENT_STATUS.CREATED, ENUM_DOCUMENT_STATUS.DRAFT_DELETED],
   },
 ];
 
@@ -57,9 +58,14 @@ export const DOCUMENT_TYPE_LIST: IDocumentTab[] = [
     icon: ScrollText,
   },
   {
-    label: "admin_panel.documents.tabs.type.type.invoice_pharm",
-    docType: ENUM_DOCUMENT_TYPE.INVOICE_PHARM,
+    label: "admin_panel.documents.tabs.type.type.invoice",
+    docType: ENUM_DOCUMENT_TYPE.INVOICE_NO_ACT,
     icon: Files,
+  },
+  {
+    label: "admin_panel.documents.tabs.type.type.work_act",
+    docType: ENUM_DOCUMENT_TYPE.WORK_ACT,
+    icon: FilePlus2,
   },
 ];
 

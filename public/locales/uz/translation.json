@@ -2649,7 +2649,9 @@
           "type": {
             "all": "Barchasi",
             "custom_document": "Ixtiyoriy hujjat",
-            "invoice_pharm": "Hisob-faktura (FARM)"
+            "invoice_pharm": "Hisob-faktura (FARM)",
+            "invoice": "Hisob-faktura",
+            "work_act": "Ishlab chiqarish ishlari"
           }
         },
 

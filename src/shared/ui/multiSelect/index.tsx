@@ -64,7 +64,6 @@ export const MultiSelect = React.forwardRef<
   ) => {
     const { t } = useTranslation();
     const placeholder = pl ? pl : t("components.select.placeholder");
-    console.log("placeholder", placeholder, pl);
     const [selectedValues, setSelectedValues] =
       React.useState<number[]>(defaultValue);
     const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);

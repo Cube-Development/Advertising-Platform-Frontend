@@ -27,9 +27,9 @@ export const DocumentFilter: FC<IDocumentFilterProps> = ({
 
   return (
     <div className="grid grid-flow-row gap-2">
-      <div className="flex items-center justify-center gap-2">
+      <div className="flex items-center gap-2 md:justify-center ">
         <Icon size={20} className="text-[var(--Personal-colors-main)]" />
-        <span className="font-semibold gradient_color">{title}</span>
+        <span className="font-semibold truncate gradient_color">{title}</span>
       </div>
       <MultiSelect
         options={options}
