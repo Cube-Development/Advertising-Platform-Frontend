@@ -5,9 +5,9 @@ import {
   useDigitalAuth,
   useGetOrganizationQuery,
 } from "@entities/organization";
-import { CertificateSelect } from "@features/organization/certificate-select";
+import { CertificateSelect } from "@features/organization";
 import { Certificate, useCryptoCertificates } from "@shared/api";
-import { CustomBlockData, DialogDescription, DialogTitle } from "@shared/ui";
+import { CustomBlockData, useResponsiveOverlay } from "@shared/ui";
 import { Loader2 } from "lucide-react";
 import { FC, useMemo } from "react";
 import { useForm } from "react-hook-form";
@@ -21,7 +21,6 @@ export const DidoxLogin: FC = () => {
   const { t } = useTranslation();
   const { loginPassword, loginCertificate } = useDigitalAuth();
   const { data: organization } = useGetOrganizationQuery();
-
   const {
     register,
     reset,
@@ -72,7 +71,7 @@ export const DidoxLogin: FC = () => {
   }, [certificates, organization?.PINFL]);
 
   return (
-    <div className="grid items-center justify-center grid-rows-[max-content,1fr] h-full">
+    <div className="grid items-center  grid-rows-[max-content,1fr] h-full w-full">
       <div className="bg-[#341F47] p-6">
         <img src={DidoxLogo} alt="didox-logo" className="h-8" />
       </div>
@@ -81,12 +80,12 @@ export const DidoxLogin: FC = () => {
         onSubmit={handleSubmit(onSubmit)}
       >
         <div className="space-y-4 text-center ">
-          <DialogTitle className="text-2xl font-semibold text-gray-900 ">
+          <p className="text-2xl font-semibold text-gray-900 ">
             {t("organization.login.didox.title")}
-          </DialogTitle>
-          <DialogDescription className="text-gray-600">
+          </p>
+          <span className="text-gray-600">
             {t("organization.login.didox.description")}
-          </DialogDescription>
+          </span>
         </div>
 
         {/* Auth Method Selection */}

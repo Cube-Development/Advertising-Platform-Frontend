@@ -10,17 +10,19 @@ export const OrganizationDataForm: FC = ({}) => {
   const { isAuthEcp } = useAppSelector((state) => state.user);
 
   return (
-    <div className="relative frame">
+    <>
       {isAuthEcp ? (
         <>
-          <div className="absolute top-4 right-4 ">
-            <LogoutEcp />
+          <div className="relative frame">
+            <div className="absolute top-4 right-4 ">
+              <LogoutEcp />
+            </div>
           </div>
           <OrganizationForm />
         </>
       ) : (
-        <NotLogin />
+        <NotLogin className="frame" />
       )}
-    </div>
+    </>
   );
 };

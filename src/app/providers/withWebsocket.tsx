@@ -6,7 +6,7 @@ export const withWebsocket = (Component: React.FC) => {
     <CentrifugeProvider>
       <CryptoWebSocketProvider
         autoConnect={true}
-        reconnectAttempts={5}
+        reconnectAttempts={1}
         reconnectDelay={3000}
       >
         <Component />

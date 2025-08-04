@@ -21,15 +21,15 @@ export const TabItem: FC<ITabItemProps> = ({
     <button
       type="button"
       onClick={onClick}
-      className={`p-4 rounded-lg border-2 transition-all duration-200 cursor-pointer ${
+      className={`px-2 py-4 md:px-4 rounded-lg border-2 transition-all duration-200 cursor-pointer ${
         isActive
           ? "border-[#4d37b3] text-[#4d37b3]"
           : "border-gray-200 bg-white text-gray-600 hover:border-gray-300"
       }`}
     >
-      <div className="grid items-center grid-cols-[max-content,1fr] gap-3">
+      <div className="grid items-center grid-cols-[max-content,1fr] gap-2 md:gap-3">
         <RoundCheckbox checked={isActive} />
-        <div className="grid grid-cols-[1fr,max-content] gap-2">
+        <div className="grid grid-cols-[1fr,max-content] gap-1 md:gap-2">
           <span className="text-sm font-medium text-start">{t(label)}</span>
           <Icon size={20} />
         </div>

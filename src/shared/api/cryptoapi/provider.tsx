@@ -217,7 +217,8 @@ export const CryptoWebSocketProvider: React.FC<
         } else if (reconnectAttemptsRef.current >= reconnectAttempts) {
           setState((prev) => ({
             ...prev,
-            error: `Не удалось подключиться после ${reconnectAttempts} попыток`,
+            // error: `Не удалось подключиться после ${reconnectAttempts} попыток`,
+            error: `organization.login.didox.certificate.error`,
             isSignatureLoading: false,
             pendingOperationType: null,
           }));

@@ -1,16 +1,21 @@
-import { LoginModal, OfferSignModal } from "@features/organization";
+import { LoginModal } from "@features/organization";
 import { Building2 } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
-export const NotLogin: FC = () => {
+interface INotLoginProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+export const NotLogin: FC<INotLoginProps> = ({
+  className = "container",
+  ...props
+}) => {
   const { t } = useTranslation();
 
   return (
-    <div className="container">
+    <div className={className} {...props}>
       <div className="justify-center page_wrapper h-[50vh] items-center">
-        <div className="flex flex-col items-center justify-center space-y-10 text-center">
-          <div className="space-y-4">
+        <div className="flex flex-col items-center justify-center space-y-5 text-center md:space-y-10">
+          <div className="space-y-2 md:space-y-4">
             <div>
               <Building2
                 size={64}
@@ -18,11 +23,11 @@ export const NotLogin: FC = () => {
               />
             </div>
 
-            <h1 className="text-2xl font-semibold text-[var(--Personal-colors-black)]">
+            <h1 className="text-lg md:text-xl  lg:text-2xl font-semibold text-[var(--Personal-colors-black)]">
               {t("organization.not_login.title")}
             </h1>
 
-            <p className="text-gray-600 ">
+            <p className="text-sm text-gray-600 md:text-md lg:text-lg">
               {t("organization.not_login.description")}
             </p>
           </div>

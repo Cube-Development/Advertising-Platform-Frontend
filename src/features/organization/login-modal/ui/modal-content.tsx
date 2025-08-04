@@ -7,8 +7,8 @@ interface IModalContentProps {
 
 export const ModalContent: FC<IModalContentProps> = ({}) => {
   return (
-    <div>
-      <DidoxLogin />
-    </div>
+    // <div className="h-full">
+    <DidoxLogin />
+    // </div>
   );
 };
