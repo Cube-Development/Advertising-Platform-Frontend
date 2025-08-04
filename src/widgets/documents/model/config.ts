@@ -1,9 +1,9 @@
 import {
   ENUM_DOCUMENT_STATUS,
   ENUM_DOCUMENT_STATUS_TAB,
+  IDocumentTab,
 } from "@entities/documents";
 import { ArrowDownToLine, ArrowUpFromLine, PencilLine } from "lucide-react";
-import { IDocumentTab } from "./types";
 
 export const DOCUMENT_STATUS_LIST: IDocumentTab[] = [
   {

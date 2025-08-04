@@ -1,22 +1,17 @@
 import {
   DocumentCard,
+  DocumentSelect,
   EmptyState,
-  ENUM_DOCUMENT_STATUS,
   ENUM_DOCUMENT_STATUS_TAB,
   IDocumentsForm,
+  IDocumentTab,
   useGetDocumentsEDOQuery,
 } from "@entities/documents";
 import { SignDocument } from "@features/documents";
 import { OfferSignModal, useRenderOfferModal } from "@features/organization";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { useAppSelector } from "@shared/hooks";
-import {
-  cn,
-  CustomMiniTabItem,
-  CustomMiniTabs,
-  ShowMoreBtn,
-  SpinnerLoader,
-} from "@shared/ui";
+import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
 import { NotLogin } from "@widgets/organization";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
@@ -60,14 +55,10 @@ export const Documents: FC = () => {
     return <NotLogin />;
   }
 
-  const handleChangeTab = (
-    tab: ENUM_DOCUMENT_STATUS_TAB,
-    categoryStatus: ENUM_DOCUMENT_STATUS[],
-    owner?: 0 | 1,
-  ) => {
-    setValue("tabStatus", tab);
-    setValue("categoryStatus", categoryStatus);
-    setValue("owner", owner);
+  const handleChangeTab = (item: IDocumentTab) => {
+    setValue("tabStatus", item?.tabStatus!);
+    setValue("categoryStatus", item?.status!);
+    setValue("owner", item?.owner);
     setValue("page", 1);
   };
 
@@ -85,41 +76,22 @@ export const Documents: FC = () => {
       <div className="page_wrapper">
         {/* Заголовок страницы */}
         <div className="!bg-[#341F47] p-5 grid grid-flow-row gap-4">
-          <div className="grid items-end justify-start grid-flow-col gap-4">
-            <img src={DidoxLogo} alt="didox-log" className="h-12" />
-            <h1 className="text-3xl font-bold text-white">
+          <div className="grid items-end justify-start grid-flow-col gap-2 md:gap-4">
+            <img src={DidoxLogo} alt="didox-log" className="h-8 md:h-12" />
+            <h1 className="text-2xl font-bold text-white md:text-3xl leading-[0.75]">
               {t("documents_page.title")}
             </h1>
           </div>
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col text-sm sm:flex-row sm:items-center sm:justify-between md:text-lg">
             <p className="text-white">{t("documents_page.description")}</p>
           </div>
         </div>
 
-        <CustomMiniTabs>
-          {DOCUMENT_STATUS_LIST.map((item) => (
-            <CustomMiniTabItem
-              key={item.tabStatus}
-              onClick={() => {
-                handleChangeTab(item.tabStatus, item.status, item?.owner);
-              }}
-              active={formState.tabStatus === item.tabStatus}
-              className="flex items-center gap-2"
-            >
-              <div
-                className={cn(
-                  "p-1 rounded-lg transition-colors duration-200 ",
-                  formState.tabStatus === item.tabStatus
-                    ? "text-white bg-[#4d37b3]"
-                    : "text-gray-600",
-                )}
-              >
-                <item.icon size={20} />
-              </div>
-              {t(item.label)}
-            </CustomMiniTabItem>
-          ))}
-        </CustomMiniTabs>
+        <DocumentSelect
+          tabs={DOCUMENT_STATUS_LIST}
+          activeTab={formState?.tabStatus}
+          onClick={handleChangeTab}
+        />
 
         {/* Сетка карточек документов */}
 

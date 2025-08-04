@@ -27,21 +27,21 @@ export const DocumentCard: FC<DocumentCardProps> = ({
   const isDisabled = NO_SIGN_DOCUMENT_LIST.includes(document.doc_status);
   const statusInfo = DOCUMENT_STATUS_META[document.doc_status];
   return (
-    <div className="mb-4 transition-shadow duration-200 bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg">
+    <div className="relative mb-4 transition-shadow duration-200 bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg">
+      <div
+        className={`grid grid-cols-[max-content,1fr] items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusInfo.color} absolute top-4 left-4 right-auto sm:left-auto sm:right-4`}
+      >
+        {statusInfo.icon}
+        <span className="ml-1 truncate">{statusInfo?.label}</span>
+      </div>
       <div className="p-6">
         {/* Заголовок с типом документа и статусом */}
-        <div className="flex items-center justify-between mb-4">
+        <div className="flex items-center justify-between mt-8 mb-4 sm:mt-0">
           <div className="flex items-center space-x-2">
             <Tag className="flex-shrink-0 w-5 h-5 text-blue-600" />
-            <span className="text-sm font-medium tracking-wide text-blue-600 uppercase">
+            <span className="text-xs font-medium tracking-wide text-blue-600 uppercase truncate md:text-sm">
               {DOCUMENT_TYPE_META[document?.doctype]}
             </span>
-          </div>
-          <div
-            className={`inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusInfo.color}`}
-          >
-            {statusInfo.icon}
-            <span className="ml-1">{statusInfo?.label}</span>
           </div>
         </div>
 
