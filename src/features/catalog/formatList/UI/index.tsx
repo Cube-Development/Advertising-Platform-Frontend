@@ -215,6 +215,8 @@ export const FormatList: FC<IFormatListProps> = ({
         // showListClear={showListClear}
         showCheckBox={isMultiple}
         className={styles.multiselect}
+        matchAnchorWidth={false}
+        alignContent={isSmallCatalogCard ? "end" : "start"}
       />
     </>
   );
