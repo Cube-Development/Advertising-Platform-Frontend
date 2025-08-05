@@ -74,10 +74,10 @@ export const walletAPI = authApi.injectEndpoints({
       ICreatePaymentResponse,
       ICreatePaymentRequest
     >({
-      query: (body) => ({
+      query: (params) => ({
         url: `/wallet/payment/project`,
         method: "POST",
-        body: body,
+        params: params,
       }),
     }),
     createDepositRequest: build.mutation<

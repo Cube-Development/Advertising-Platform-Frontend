@@ -1,6 +1,7 @@
 import { PostTypesNum, platformTypesNum } from "@entities/platform";
 import { ContentType } from "../config";
 import { IChannelLink } from "@entities/channel";
+import { ENUM_WALLETS_TYPE } from "@entities/wallet";
 
 export interface PostFormats {
   platform: platformTypesNum;
@@ -40,6 +41,8 @@ export interface ICreatePostForm {
 
   isDownloadPosts: boolean;
   isLoading: boolean;
+
+  wallet_type?: ENUM_WALLETS_TYPE;
 }
 
 export interface ICreatePost {

@@ -4,6 +4,8 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import heartAnimation from "/animated/heart_white_lottie.gif";
+import { ICreatePostForm } from "@entities/project";
+import { UseFormSetValue } from "react-hook-form";
 
 interface CreateOrderPaymentProps {
   isBlur?: boolean;
@@ -11,6 +13,8 @@ interface CreateOrderPaymentProps {
   role: ENUM_ROLES;
   isAllowed: boolean;
   onAction?: () => void;
+  setValue: UseFormSetValue<ICreatePostForm>;
+  formState: ICreatePostForm;
 }
 
 export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
@@ -19,6 +23,8 @@ export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
   role,
   isAllowed,
   onAction,
+  setValue,
+  formState,
 }) => {
   const { t } = useTranslation();
 
@@ -49,6 +55,8 @@ export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
                   isAllowed={isAllowed}
                   onAction={onAction}
                   totalAmount={totalAmount}
+                  setValue={setValue}
+                  formState={formState}
                 />
               ) : (
                 <ApproveCampaign disabled={!isAllowed} isAllowed={isAllowed} />
