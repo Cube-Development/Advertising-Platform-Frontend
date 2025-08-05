@@ -1,4 +1,4 @@
-import { loginEcp } from "@entities/user";
+import { loginEcp, offerSign } from "@entities/user";
 import { Certificate, useCryptoMessage } from "@shared/api";
 import { ENUM_COOKIES_TYPES } from "@shared/config";
 import { useAppDispatch } from "@shared/hooks";
@@ -19,8 +19,8 @@ import { ENUM_ORGANIZATION_STATUS, IGetMyOrganizationResponse } from "../types";
 import { useCreateOrganization } from "./useCreateOrganization";
 
 export const useDigitalLoginByCertificate = () => {
-  const { toast } = useToast();
   const { t } = useTranslation();
+  const { toast } = useToast();
   const dispatch = useAppDispatch();
 
   const { sendMessage } = useCryptoMessage();
@@ -71,15 +71,27 @@ export const useDigitalLoginByCertificate = () => {
         ENUM_COOKIES_TYPES.CERTIFICATE_USER_KEY,
         tokenResponse?.token,
       );
-      // Шаг 5: Получение логин по токену
-      dispatch(loginEcp());
 
+      // Шаг 5: Создание организации
       await create(organization);
 
       // Шаг 6: Проверка подписи
-      if (organization?.status === ENUM_ORGANIZATION_STATUS.ACTIVE) return;
-
-      await checkSign().unwrap();
+      if (organization?.status !== ENUM_ORGANIZATION_STATUS.ACTIVE) {
+        await checkSign()
+          .unwrap()
+          .then(() => {
+            // Шаг 6.1: Указываем что оферта подписана
+            dispatch(offerSign());
+          })
+          .catch(() => {
+            toast({
+              variant: "warning",
+              title: t("toasts.organization.offer_sign.need"),
+            });
+          });
+      }
+      // Шаг 7: Осуществляем логин
+      dispatch(loginEcp());
     } catch (err) {
       const errorMessage =
         err instanceof Error ? err.message : "Ошибка входа по ЭЦП";

@@ -4,8 +4,10 @@ import {
   useGetProfileEDOMutationMutation,
 } from "../api";
 import { IGetMyOrganizationResponse } from "../types";
+import { useTranslation } from "react-i18next";
 
 export const useCreateOrganization = () => {
+  const { t } = useTranslation();
   const { toast } = useToast();
 
   const [getProfile, { isLoading: isLoadingProfile }] =
@@ -28,13 +30,13 @@ export const useCreateOrganization = () => {
       }).unwrap();
 
       toast({
-        title: "Организация успешно отправлена на модерацию",
+        title: t("toasts.organization.create.success"),
         variant: "success",
       });
     } catch (error) {
       console.error("Error creating organization:", error);
       toast({
-        title: "Ошибка при создании организации",
+        title: t("toasts.organization.create.error"),
         variant: "error",
       });
     }

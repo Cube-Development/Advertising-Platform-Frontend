@@ -6,7 +6,7 @@ import { useAppSelector } from "@shared/hooks";
 import { useEffect, useRef, useState } from "react";
 
 export const useRenderOfferModal = () => {
-  const { isAuthEcp } = useAppSelector((state) => state.user);
+  const { isAuthEcp, isOfferSign } = useAppSelector((state) => state.user);
   const [open, setOpen] = useState(false);
   const prevAuthRef = useRef(isAuthEcp);
   const hasShownRef = useRef(false);
@@ -18,7 +18,6 @@ export const useRenderOfferModal = () => {
     // Если пользователь вышел (true -> false), сбрасываем флаг
     if (prevAuthRef.current === true && isAuthEcp === false) {
       hasShownRef.current = false;
-      console.log("User logged out, resetting hasShown flag");
     }
 
     // Проверяем переход с false на true
@@ -29,7 +28,7 @@ export const useRenderOfferModal = () => {
       wasUnauthorized &&
       nowAuthorized &&
       !hasShownRef.current &&
-      organization?.status !== ENUM_ORGANIZATION_STATUS.ACTIVE
+      (organization?.status !== ENUM_ORGANIZATION_STATUS.ACTIVE || !isOfferSign)
     ) {
       setOpen(true);
       hasShownRef.current = true;

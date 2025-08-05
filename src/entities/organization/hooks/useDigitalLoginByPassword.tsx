@@ -1,21 +1,35 @@
-import { loginEcp } from "@entities/user";
+import { loginEcp, offerSign } from "@entities/user";
 import { ENUM_COOKIES_TYPES } from "@shared/config";
 import { useAppDispatch } from "@shared/hooks";
 import { useToast } from "@shared/ui";
 import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
-import { useGetTokenByPasswordMutation } from "../api";
-import { ILegalData } from "../types";
+import {
+  useCheckOfferSignedMutation,
+  useGetTokenByPasswordMutation,
+} from "../api";
+import {
+  ENUM_ORGANIZATION_STATUS,
+  IGetMyOrganizationResponse,
+  ILegalData,
+} from "../types";
+import { useCreateOrganization } from "./useCreateOrganization";
 
 export const useDigitalLoginByPassword = () => {
   const { toast } = useToast();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
-  const [getToken, { isLoading }] = useGetTokenByPasswordMutation();
+  const [getToken, { isLoading: isLoadingGetToken }] =
+    useGetTokenByPasswordMutation();
+  const [checkSign, { isLoading: isLoadingSign }] =
+    useCheckOfferSignedMutation();
+
+  const { create, isLoading } = useCreateOrganization();
 
   const loginPassword = async (
     userData: Pick<ILegalData, "PNFL" | "password">,
+    organization: IGetMyOrganizationResponse,
   ) => {
     try {
       // Шаг 4: Логин по Паролю
@@ -29,7 +43,25 @@ export const useDigitalLoginByPassword = () => {
         ENUM_COOKIES_TYPES.CERTIFICATE_USER_KEY,
         tokenResponse?.token,
       );
-      // Шаг 5: Получение логин по токену
+      // Шаг 5: Создание организации
+      await create(organization);
+
+      // Шаг 6: Проверка подписи
+      if (organization?.status !== ENUM_ORGANIZATION_STATUS.ACTIVE) {
+        await checkSign()
+          .unwrap()
+          .then(() => {
+            // Шаг 6.1: Указываем что оферта подписана
+            dispatch(offerSign());
+          })
+          .catch(() => {
+            toast({
+              variant: "warning",
+              title: t("toasts.organization.offer_sign.need"),
+            });
+          });
+      }
+      // Шаг 7: Осуществляем логин
       dispatch(loginEcp());
     } catch (err) {
       const errorMessage =
@@ -44,6 +76,6 @@ export const useDigitalLoginByPassword = () => {
 
   return {
     loginPassword,
-    isLoading,
+    isLoading: isLoadingGetToken || isLoadingSign || isLoading,
   };
 };

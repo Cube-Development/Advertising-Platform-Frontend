@@ -2147,6 +2147,18 @@
         "error": "Savatchani o'tkazishda xatolik yuz berdi"
       }
     },
+
+    "organization": {
+      "create": {
+        "success": "Tashkilot muvaffaqiyatli moderatsiyaga yuborildi",
+        "error": "Tashkilotni qo‘shishda xatolik yuz berdi"
+      },
+      "offer_sign": {
+        "success": "Ommaviy oferta muvaffaqiyatli imzolandi",
+        "need": "Tashkilotni tasdiqlash uchun ommaviy ofertani imzolashingiz kerak",
+        "error": "Ommaviy ofertani imzolashda xatolik yuz berdi"
+      }
+    },
     "add_platform": {
       "link": {
         "success": "Kanal identifikatsiyasi muvaffaqiyatli o'tdi",
@@ -2764,7 +2776,7 @@
     },
 
     "offer_sign": {
-      "title": "Taklifni imzolash",
+      "title": "Tashkilotni tasdiqlash",
       "description": "Xizmatdan foydalanishni boshlash uchun ommaviy <1>taklif shartlarini</1> ko‘rib chiqib, qabul qilishingiz kerak",
       "requirements": [
         { "item": "Foydalanish shartlarini ko‘rib chiqish" },

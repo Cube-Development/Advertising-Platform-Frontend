@@ -7,7 +7,7 @@ import {
 } from "@entities/organization";
 import { CertificateSelect } from "@features/organization";
 import { Certificate, useCryptoCertificates } from "@shared/api";
-import { CustomBlockData, useResponsiveOverlay } from "@shared/ui";
+import { CustomBlockData } from "@shared/ui";
 import { Loader2 } from "lucide-react";
 import { FC, useMemo } from "react";
 import { useForm } from "react-hook-form";
@@ -17,9 +17,15 @@ import { TabItem } from "./ui";
 import DidoxLogo from "/images/organization/didox-logo.svg";
 
 export const DidoxLogin: FC = () => {
-  const { certificates, certificatesLoading, error } = useCryptoCertificates();
+  const { certificates, certificatesLoading, error, isSignatureLoading } =
+    useCryptoCertificates();
   const { t } = useTranslation();
-  const { loginPassword, loginCertificate } = useDigitalAuth();
+  const {
+    loginPassword,
+    loginCertificate,
+    isLoadingCertificate,
+    isLoadingPassword,
+  } = useDigitalAuth();
   const { data: organization } = useGetOrganizationQuery();
   const {
     register,
@@ -58,7 +64,7 @@ export const DidoxLogin: FC = () => {
           password: data?.password,
           PNFL: data?.PNFL,
         };
-        await loginPassword(userData);
+        await loginPassword(userData, organization!);
       }
     } catch (error) {
       console.log("[On Submit] error: ", error);
@@ -131,11 +137,17 @@ export const DidoxLogin: FC = () => {
 
         <div className="absolute left-0 grid w-full space-y-2 bottom-4">
           <button
-            disabled={isSubmitting}
+            disabled={
+              isSignatureLoading || isLoadingCertificate || isLoadingPassword
+            }
             className="bg-[#FFEA00] rounded-lg p-4 font-semibold m-4 disabled:opacity-50 grid grid-flow-col gap-2 items-center justify-center"
           >
             {t("organization.login.didox.buttons.login")}
-            {isSubmitting && <Loader2 className="text-gray-500 animate-spin" />}
+            {(isSignatureLoading ||
+              isLoadingCertificate ||
+              isLoadingPassword) && (
+              <Loader2 className="text-gray-500 animate-spin" />
+            )}
           </button>
           <div className="text-center">
             <span className="text-gray-600">

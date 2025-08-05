@@ -2148,6 +2148,18 @@
         "error": "Error transferring cart"
       }
     },
+
+    "organization": {
+      "create": {
+        "success": "Organization has been successfully submitted for moderation",
+        "error": "An error occurred while adding the organization"
+      },
+      "offer_sign": {
+        "success": "Public offer successfully signed",
+        "need": "You need to confirm the organization by signing the public offer",
+        "error": "An error occurred while signing the public offer"
+      }
+    },
     "add_platform": {
       "link": {
         "success": "Channel identification successful",
@@ -2727,7 +2739,7 @@
     },
 
     "offer_sign": {
-      "title": "Sign the offer",
+      "title": "Сonfirmation of organization",
       "description": "To start using the service, you need to review and accept the terms of the <1>public offer</1>",
       "requirements": [
         { "item": "Review the terms of use" },
