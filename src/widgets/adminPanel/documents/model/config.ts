@@ -22,13 +22,13 @@ export const DOCUMENT_STATUS_LIST: IDocumentTab[] = [
     status: [ENUM_DOCUMENT_STATUS.CREATED, ENUM_DOCUMENT_STATUS.DRAFT_DELETED],
   },
   {
-    label: "admin_panel.documents.tabs.category.type.inbox",
+    label: "admin_panel.documents.tabs.category.type.outbox",
     owner: 1,
     icon: ArrowUpFromLine,
     status: [],
   },
   {
-    label: "admin_panel.documents.tabs.category.type.outbox",
+    label: "admin_panel.documents.tabs.category.type.inbox",
     owner: 0,
     icon: ArrowDownToLine,
     status: [],

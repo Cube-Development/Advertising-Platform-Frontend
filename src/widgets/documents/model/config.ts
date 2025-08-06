@@ -7,17 +7,17 @@ import { ArrowDownToLine, ArrowUpFromLine, PencilLine } from "lucide-react";
 
 export const DOCUMENT_STATUS_LIST: IDocumentTab[] = [
   {
-    label: "documents_page.tabs.inbox",
+    label: "documents_page.tabs.outbox",
     owner: 1,
     icon: ArrowUpFromLine,
-    tabStatus: ENUM_DOCUMENT_STATUS_TAB.INBOX,
+    tabStatus: ENUM_DOCUMENT_STATUS_TAB.OUTBOX,
     status: [],
   },
   {
-    label: "documents_page.tabs.outbox",
+    label: "documents_page.tabs.inbox",
     owner: 0,
     icon: ArrowDownToLine,
-    tabStatus: ENUM_DOCUMENT_STATUS_TAB.OUTBOX,
+    tabStatus: ENUM_DOCUMENT_STATUS_TAB.INBOX,
     status: [],
   },
   {

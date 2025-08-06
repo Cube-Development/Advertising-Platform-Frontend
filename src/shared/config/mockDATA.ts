@@ -178,8 +178,8 @@ export const MOCK_ADD_LEGAL = {
 
 export const MOCK_PROFILE = {
   email: "sample@gmail.com",
-  phone: "+998901234567",
-  name: "Иван Петров",
+  phone: "_______________",
+  name: "_______________",
   registrationDate: "22.02.2024",
   organization: {
     type: "SelfEmployed",

@@ -18,6 +18,7 @@ export interface IUser {
   password: string;
   new_password: string;
   accept_password: string;
+  created?: string;
 }
 
 export interface IUserData {

@@ -1115,15 +1115,24 @@
       "title": "Parolni o'zgartirish",
       "current_password": {
         "title": "Joriy parol",
-        "default_value": "Sample@gmail.com"
+        "description": "O'zgarishlarni tasdiqlash uchun joriy parolni kiriting.",
+        "error": {
+          "required": "maydon bo‘sh bo‘lmasligi kerak"
+        }
       },
       "new_password": {
         "title": "Yangi parol",
-        "default_value": "Sample@gmail.com"
+        "description": "Hisobingizga kirish uchun foydalaniladigan yangi parolni kiriting. Parol ishonchli bo‘lishi va kamida 8 ta belgidan iborat bo‘lishi kerak, shu jumladan harflar va raqamlar.",
+        "error": {
+          "required": "maydon bo‘sh bo‘lmasligi kerak"
+        }
       },
       "accept_password": {
         "title": "Yangi parolni tasdiqlash",
-        "default_value": "Sample@gmail.com"
+        "description": "Tasdiqlash uchun yangi parolni yana bir bor kiriting. Ikkala parol bir xil ekanligiga ishonch hosil qiling.",
+        "error": {
+          "required": "maydon bo‘sh bo‘lmasligi kerak"
+        }
       },
       "change_btn": "Parolni o'zgartirish"
     },

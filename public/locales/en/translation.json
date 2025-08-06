@@ -1112,15 +1112,24 @@
       "title": "Change Password",
       "current_password": {
         "title": "Current Password",
-        "default_value": "Sample@gmail.com"
+        "description": "Enter your current password to confirm the changes.",
+        "error": {
+          "required": "This field cannot be empty"
+        }
       },
       "new_password": {
         "title": "New Password",
-        "default_value": "Sample@gmail.com"
+        "description": "Enter a new password that will be used to sign in to your account. The password must be strong and contain at least 8 characters, including letters and numbers.",
+        "error": {
+          "required": "This field cannot be empty"
+        }
       },
       "accept_password": {
         "title": "Confirm New Password",
-        "default_value": "Sample@gmail.com"
+        "description": "Re-enter the new password to confirm it. Make sure both entered passwords match.",
+        "error": {
+          "required": "This field cannot be empty"
+        }
       },
       "change_btn": "Change Password"
     },
