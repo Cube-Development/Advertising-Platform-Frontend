@@ -103,14 +103,14 @@ export const OfferModalContent: FC<IOfferModalContentProps> = ({
       </div>
 
       {/* Кнопка подписания */}
-      {isAuthEcp && isOfferSign ? (
+      {isAuthEcp && !isOfferSign ? (
         <SignDocument
           documentId={offer_id}
           owner={0}
           onClick={handleSign}
           isLoading={isLoading}
         />
-      ) : isAuthEcp && !isOfferSign ? (
+      ) : isAuthEcp && isOfferSign ? (
         <div>
           {/* Разметка для авторизованного пользователя */}
           <div className="p-6 overflow-hidden border-2 border-green-200 border-dashed rounded-xl bg-gradient-to-br from-green-50 to-emerald-50">
