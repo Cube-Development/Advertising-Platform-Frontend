@@ -2,14 +2,18 @@ import {
   ENUM_ORGANIZATION_STATUS,
   useGetOrganizationQuery,
 } from "@entities/organization";
-import { useAppSelector } from "@shared/hooks";
+import { offerOpen } from "@entities/user";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { useEffect, useRef, useState } from "react";
 
 export const useRenderOfferModal = () => {
-  const { isAuthEcp, isOfferSign } = useAppSelector((state) => state.user);
+  const { isAuthEcp, isOfferSign, isOfferOpen } = useAppSelector(
+    (state) => state.user,
+  );
   const [open, setOpen] = useState(false);
   const prevAuthRef = useRef(isAuthEcp);
   const hasShownRef = useRef(false);
+  const dispatch = useAppDispatch();
   const { data: organization, isLoading } = useGetOrganizationQuery();
 
   useEffect(() => {
@@ -25,17 +29,25 @@ export const useRenderOfferModal = () => {
     const nowAuthorized = isAuthEcp === true;
 
     if (
-      wasUnauthorized &&
-      nowAuthorized &&
-      !hasShownRef.current &&
-      (organization?.status !== ENUM_ORGANIZATION_STATUS.ACTIVE || !isOfferSign)
+      (wasUnauthorized &&
+        nowAuthorized &&
+        !hasShownRef.current &&
+        (organization?.status !== ENUM_ORGANIZATION_STATUS.ACTIVE ||
+          !isOfferSign)) ||
+      isOfferOpen
     ) {
       setOpen(true);
       hasShownRef.current = true;
     }
 
     prevAuthRef.current = isAuthEcp;
-  }, [isAuthEcp, organization, isLoading]);
+  }, [isAuthEcp, organization, isLoading, isOfferOpen]);
+
+  useEffect(() => {
+    if (!open) {
+      dispatch(offerOpen(false));
+    }
+  }, [open]);
 
   return { open, setOpen };
 };

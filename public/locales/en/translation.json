@@ -1514,12 +1514,85 @@
       "withdraw_all": "Withdraw all funds"
     },
     "guide": {
-      "title": "Step-by-Step Guide",
-      "entity": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc.",
-      "individual": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc.",
-      "selfEmployedTransits": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc.",
-      "selfEmployedAccounts": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc."
+      "title": "Step by Step Guide",
+      "topup": {
+        "title": "How to Top Up the Organization's Balance",
+        "description": "Follow these simple steps to top up your organization's balance through the Blogix system",
+        "steps": [
+          {
+            "title": "Authorization in didox.uz",
+            "description": "Log in using your digital signature. After successful authorization, all your organization's details will be filled in automatically."
+          },
+          {
+            "title": "Enter Top-Up Amount",
+            "description": "Specify the amount you want to top up your wallet with."
+          },
+          {
+            "title": "Invoice Creation",
+            "description": "After entering the amount and submitting the request, an invoice will be automatically generated."
+          },
+          {
+            "title": "Pay the Invoice via Your Bank",
+            "description": "Transfer the specified amount using the invoice details from your organization's bank account to the Blogix platform account."
+          },
+          {
+            "title": "Funds Crediting",
+            "description": "As soon as the bank confirms the transfer, the funds will be automatically credited to your wallet."
+          },
+          {
+            "title": "Top-Up Notification",
+            "description": "You will receive a notification via email and within the platform that the balance has been successfully topped up."
+          }
+        ],
+        "note": {
+          "title": "Important Information",
+          "description": "Payment processing may take from several minutes to several hours depending on your bank. If the funds do not arrive within 24 hours, please contact support."
+        }
+      },
+      "withdraw": {
+        "title": "How to Withdraw Money from the Platform",
+        "description": "Follow these simple steps to withdraw funds from the platform via the Blogix system",
+        "steps": [
+          {
+            "title": "Select Wallet for Withdrawal",
+            "description": "Specify which wallet you want to withdraw funds from:",
+            "substeps": [
+              {
+                "title": "Deposit Wallet",
+                "description": "Used for returning previously deposited funds.",
+                "info": "The return is processed as an official letter through Didox"
+              },
+              {
+                "title": "Profit Wallet",
+                "description": "Used for withdrawing earned funds.",
+                "info": "No document processing required, funds are withdrawn automatically."
+              }
+            ]
+          },
+          {
+            "title": "Authorization in didox.uz",
+            "description": "Log in using your digital signature. After successful authorization, all your organization's details will be filled in automatically."
+          },
+          {
+            "title": "Specify Withdrawal Amount",
+            "description": "Enter the amount you want to withdraw to your organization's bank account."
+          },
+          {
+            "title": "Funds Transfer",
+            "description": "The funds will be transferred to your organization's bank account."
+          },
+          {
+            "title": "Withdrawal Notification",
+            "description": "You will receive a notification via email and within the platform that the funds have been successfully withdrawn."
+          }
+        ],
+        "note": {
+          "title": "Important Information",
+          "description": "Payment processing may take from several minutes to several hours depending on your bank. If the funds do not arrive within 24 hours, please contact support."
+        }
+      }
     },
+
     "pay": {
       "title": "To be charged",
       "sub_title": "From wallet",

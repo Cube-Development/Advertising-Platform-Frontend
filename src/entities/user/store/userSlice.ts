@@ -7,6 +7,7 @@ interface UserState {
   isAuth: boolean;
   isAuthEcp?: boolean;
   isOfferSign?: boolean;
+  isOfferOpen?: boolean;
   role: ENUM_ROLES;
 }
 
@@ -23,6 +24,7 @@ const initialState: UserState = {
     Cookies.get(ENUM_COOKIES_TYPES.IS_AUTH_ECP) === "true" ? true : false,
   role: getRole,
   isOfferSign: false,
+  isOfferOpen: false,
 };
 
 export const userSlice = createSlice({
@@ -39,6 +41,9 @@ export const userSlice = createSlice({
     },
     offerSign: (state) => {
       state.isOfferSign = true;
+    },
+    offerOpen: (state, action: PayloadAction<boolean>) => {
+      state.isOfferOpen = action.payload;
     },
     logout: (state) => {
       Cookies.remove(ENUM_COOKIES_TYPES.PROJECT_ID);
@@ -78,4 +83,5 @@ export const {
   loginEcp,
   logoutEcp,
   offerSign,
+  offerOpen,
 } = userSlice.actions;

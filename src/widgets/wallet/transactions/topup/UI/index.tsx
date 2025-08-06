@@ -1,4 +1,6 @@
+import { offerOpen } from "@entities/user";
 import {
+  GuideTopup,
   IWalletOperations,
   PROFILE_STATUS,
   PROFILE_TYPE,
@@ -6,29 +8,31 @@ import {
   WALLET_TOP_UP_FILTER_TABS_LIST,
 } from "@entities/wallet";
 import { BarSubFilter } from "@features/other";
+import { DownloadInvoice } from "@features/wallet";
 import { ArrowIcon4 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
 import {
+  useAppDispatch,
   useAppSelector,
   useClearCookiesOnPage,
   useWindowWidth,
 } from "@shared/hooks";
 import { CustomTitle } from "@shared/ui";
+import { formatWithOutSpaces } from "@shared/utils";
 import { NotLogin } from "@widgets/organization";
 import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { CreditCard, Guide, OrganizationData } from "../../components";
+import { CreditCard, OrganizationData } from "../../components";
 import { useWalletDeposit } from "../../model";
 import styles from "./styles.module.scss";
-import { formatWithOutSpaces } from "@shared/utils";
-import { DownloadInvoice } from "@features/wallet";
 
 export const Topup: FC = () => {
   useClearCookiesOnPage();
   const { t } = useTranslation();
-  const { isAuthEcp } = useAppSelector((state) => state.user);
+  const { isAuthEcp, isOfferSign } = useAppSelector((state) => state.user);
   const screen = useWindowWidth();
+  const dispatch = useAppDispatch();
 
   const {
     setValue,
@@ -54,9 +58,13 @@ export const Topup: FC = () => {
     const newFilter = { type: item?.type, id: item?.id };
     setValue("profileFilter", newFilter);
   };
-
+  console.log("isOfferSign", isOfferSign);
   const onSubmit: SubmitHandler<IWalletOperations> = async (data) => {
-    await deposit({ amount: formatWithOutSpaces(data?.amount?.toString()) });
+    if (isOfferSign) {
+      await deposit({ amount: formatWithOutSpaces(data?.amount?.toString()) });
+    } else {
+      dispatch(offerOpen(true));
+    }
   };
 
   return (
@@ -83,19 +91,21 @@ export const Topup: FC = () => {
             ) : (
               <>
                 <div className={styles.form__wrapper}>
-                  {screen < BREAKPOINT.MD && <Guide />}
+                  {screen < BREAKPOINT.MD && <GuideTopup />}
                   <div className={styles.content}>
-                    <OrganizationData
-                      amountTitle={"wallet.topup.amount"}
-                      formState={formState}
-                      register={register}
-                      errors={errors}
-                      onSubmit={handleSubmit(onSubmit)}
-                      isLoading={isSubmitting}
-                    />
+                    <div>
+                      <OrganizationData
+                        amountTitle={"wallet.topup.amount"}
+                        formState={formState}
+                        register={register}
+                        errors={errors}
+                        onSubmit={handleSubmit(onSubmit)}
+                        isLoading={isSubmitting}
+                      />
+                    </div>
                     <div>
                       <div className={styles.content__right}>
-                        {screen >= BREAKPOINT.MD && <Guide />}
+                        {screen >= BREAKPOINT.MD && <GuideTopup />}
                       </div>
                     </div>
                   </div>

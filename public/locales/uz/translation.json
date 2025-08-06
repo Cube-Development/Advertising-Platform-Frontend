@@ -1512,13 +1512,87 @@
       "include": "Komissiya kiritish",
       "withdraw_all": "Barcha mablag'larni yechib olish"
     },
+
     "guide": {
       "title": "Bosqichma-bosqich qo'llanma",
-      "entity": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc.",
-      "individual": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc.",
-      "selfEmployedTransits": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc.",
-      "selfEmployedAccounts": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc."
+      "topup": {
+        "title": "Tashkilot balansini qanday to'ldirish kerak",
+        "description": "Blogix tizimi orqali tashkilotingiz balansini to'ldirish uchun ushbu oddiy bosqichlarni bajaring",
+        "steps": [
+          {
+            "title": "didox.uz tizimida avtorizatsiya",
+            "description": "Elektron raqamli imzo (ERI) yordamida tizimga kiring. Muvaffaqiyatli avtorizatsiyadan so'ng tashkilotingiz ma'lumotlari avtomatik tarzda to'ldiriladi."
+          },
+          {
+            "title": "To‘ldirish summasini kiriting",
+            "description": "Hamyoningiz balansini to‘ldirmoqchi bo‘lgan summani kiriting."
+          },
+          {
+            "title": "Hisob-faktura yaratish",
+            "description": "Summani kiritib, so‘rov yuborilgandan so‘ng hisob-faktura avtomatik ravishda yaratiladi."
+          },
+          {
+            "title": "Bank orqali hisob-fakturani to‘lash",
+            "description": "Hisob-fakturadagi rekvizitlar asosida tashkilotingiz hisob raqamidan Blogix platformasi hisobiga ko‘rsatilgan summani o‘tkazing."
+          },
+          {
+            "title": "Mablag‘lar tushirilishi",
+            "description": "Bank o‘tkazmani tasdiqlagach, mablag‘lar avtomatik ravishda hamyoningizga tushiriladi."
+          },
+          {
+            "title": "To‘ldirish haqida bildirishnoma",
+            "description": "Balans muvaffaqiyatli to‘ldirilganligi haqida sizga elektron pochta va platforma ichida bildirishnoma yuboriladi."
+          }
+        ],
+        "note": {
+          "title": "Muhim ma’lumot",
+          "description": "To‘lovni qayta ishlash sizning bankingizga qarab bir necha daqiqadan bir necha soatgacha vaqt olishi mumkin. Agar 24 soat ichida mablag‘lar yetib kelmasa, qo‘llab-quvvatlash xizmatiga murojaat qiling."
+        }
+      },
+      "withdraw": {
+        "title": "Platformadan pulni qanday yechib olish mumkin",
+        "description": "Blogix tizimi orqali platformadan pul yechib olish uchun ushbu oddiy bosqichlarni bajaring",
+        "steps": [
+          {
+            "title": "Pul yechib olish uchun hamyonni tanlang",
+            "description": "Qaysi hamyondan mablag‘ yechib olinishini ko‘rsating:",
+            "substeps": [
+              {
+                "title": "Depozit hamyon",
+                "description": "Oldin kiritilgan mablag‘larni qaytarish uchun ishlatiladi.",
+                "info": "Qaytarish Didox orqali rasmiy xat sifatida rasmiylashtiriladi"
+              },
+              {
+                "title": "Foyda hamyoni",
+                "description": "Topilgan daromadni yechib olish uchun ishlatiladi.",
+                "info": "Hujjatlarni rasmiylashtirish talab qilinmaydi, mablag‘lar avtomatik tarzda yechiladi."
+              }
+            ]
+          },
+          {
+            "title": "didox.uz tizimida avtorizatsiya",
+            "description": "Elektron raqamli imzo (ERI) yordamida tizimga kiring. Muvaffaqiyatli avtorizatsiyadan so‘ng tashkilotingiz ma'lumotlari avtomatik tarzda to‘ldiriladi."
+          },
+          {
+            "title": "Yechib olinadigan summani kiriting",
+            "description": "Tashkilotingiz hisob raqamiga yechib olmoqchi bo‘lgan summani kiriting."
+          },
+          {
+            "title": "Mablag‘larni o‘tkazish",
+            "description": "Mablag‘lar tashkilotingiz hisob raqamiga o‘tkaziladi."
+          },
+          {
+            "title": "Pul yechish haqida bildirishnoma",
+            "description": "Mablag‘lar muvaffaqiyatli yechib olinganligi haqida sizga elektron pochta va platforma ichida bildirishnoma yuboriladi."
+          }
+        ],
+        "note": {
+          "title": "Muhim ma’lumot",
+          "description": "To‘lovni qayta ishlash sizning bankingizga qarab bir necha daqiqadan bir necha soatgacha vaqt olishi mumkin. Agar 24 soat ichida mablag‘lar yetib kelmasa, qo‘llab-quvvatlash xizmatiga murojaat qiling."
+        }
+      }
     },
+
     "pay": {
       "title": "To'lov uchun",
       "text": "Komissiya",
