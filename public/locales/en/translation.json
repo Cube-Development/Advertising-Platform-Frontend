@@ -2763,6 +2763,13 @@
         "section": "Go to the section",
         "organization_data": "Organization data"
       },
+      "authorization_success": {
+        "title": "Authorization Successful",
+        "subtitle": "The digital signature is active and ready to use",
+        "description": "You can sign the document using your digital signature",
+        "status": "Status:",
+        "active": "Organization verified"
+      },
       "legal_notice": "Legally binding document",
       "buttons": {
         "sign": "Sign"

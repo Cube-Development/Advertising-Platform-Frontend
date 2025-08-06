@@ -1,7 +1,9 @@
+import { useCheckOfferSignedMutation } from "@entities/organization";
+import { offerSign } from "@entities/user";
 import { SignDocument } from "@features/documents";
-import { useAppSelector } from "@shared/hooks";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { ENUM_PATHS } from "@shared/routing";
-import { DialogDescription, DialogTitle } from "@shared/ui";
+import { useToast } from "@shared/ui";
 import {
   AlertCircle,
   Building2,
@@ -9,6 +11,7 @@ import {
   FileText,
   Key,
   Lock,
+  Shield,
 } from "lucide-react";
 import { FC } from "react";
 import { Trans, useTranslation } from "react-i18next";
@@ -21,10 +24,32 @@ export const OfferModalContent: FC<IOfferModalContentProps> = ({
   offer_id,
 }) => {
   const { t } = useTranslation();
-  const { isAuthEcp } = useAppSelector((state) => state.user);
+  const { toast } = useToast();
+  const { isAuthEcp, isOfferSign } = useAppSelector((state) => state.user);
   const requirements = t("organization.offer_sign.requirements", {
     returnObjects: true,
   }) as { item: string }[];
+  const [checkSign, { isLoading }] = useCheckOfferSignedMutation();
+  const dispatch = useAppDispatch();
+
+  const handleSign = async () => {
+    await checkSign()
+      .unwrap()
+      .then(() => {
+        // Шаг 6.1: Указываем что оферта подписана
+        dispatch(offerSign());
+        toast({
+          variant: "warning",
+          title: t("toasts.organization.offer_sign.success"),
+        });
+      })
+      .catch(() => {
+        toast({
+          variant: "warning",
+          title: t("toasts.organization.offer_sign.need"),
+        });
+      });
+  };
 
   return (
     <div className="grid grid-flow-row gap-1 p-5 md:gap-3">
@@ -70,16 +95,73 @@ export const OfferModalContent: FC<IOfferModalContentProps> = ({
       </div>
 
       {/* Важное уведомление */}
-      <div className="flex items-start gap-2 p-3 my-2 border rounded-lg bg-amber-50 border-amber-200">
-        <AlertCircle className="w-4 h-4 text-amber-600 mt-0.5 flex-shrink-0" />
+      <div className="flex items-center gap-2 p-3 my-2 border rounded-lg bg-amber-50 border-amber-200">
+        <AlertCircle className="flex-shrink-0 w-4 h-4 text-amber-600" />
         <p className="text-xs text-amber-800">
           {t("organization.offer_sign.warning")}
         </p>
       </div>
 
       {/* Кнопка подписания */}
-      {isAuthEcp ? (
-        <SignDocument documentId={offer_id} owner={0} />
+      {isAuthEcp && isOfferSign ? (
+        <SignDocument
+          documentId={offer_id}
+          owner={0}
+          onClick={handleSign}
+          isLoading={isLoading}
+        />
+      ) : isAuthEcp && !isOfferSign ? (
+        <div>
+          {/* Разметка для авторизованного пользователя */}
+          <div className="p-6 overflow-hidden border-2 border-green-200 border-dashed rounded-xl bg-gradient-to-br from-green-50 to-emerald-50">
+            <div className="text-center">
+              {/* Главная иконка */}
+              <div className="inline-flex p-3 mb-3 bg-green-100 rounded-full">
+                <CheckCircle className="w-6 h-6 text-green-600" />
+              </div>
+
+              {/* Заголовок */}
+              <h3 className="mb-2 text-base font-semibold text-green-900">
+                {t("organization.offer_sign.authorization_success.title")}
+              </h3>
+
+              {/* Основное сообщение */}
+              <div className="mb-4 space-y-2">
+                <div className="flex items-center justify-center gap-2">
+                  <Shield className="w-4 h-4 text-green-600" />
+                  <span className="text-sm font-medium text-green-800">
+                    {t(
+                      "organization.offer_sign.authorization_success.subtitle",
+                    )}
+                  </span>
+                </div>
+                <p className="text-xs leading-relaxed text-green-700">
+                  {t(
+                    "organization.offer_sign.authorization_success.description",
+                  )}
+                </p>
+              </div>
+
+              {/* Информация о статусе */}
+              <div className="grid grid-cols-[max-content,1fr] items-center gap-1.5 px-3 py-1.5 bg-green-100/50 rounded-full border border-green-200 w-full">
+                <CheckCircle className="w-3.5 h-3.5 text-green-600" />
+                <div className="flex flex-col items-center gap-1">
+                  <span className="text-xs font-medium text-green-700">
+                    {t("organization.offer_sign.authorization_success.status")}
+                  </span>
+                  <div className="flex items-center gap-1">
+                    <Building2 className="w-4 h-4 text-green-700" />
+                    <span className="text-xs font-semibold text-green-700">
+                      {t(
+                        "organization.offer_sign.authorization_success.active",
+                      )}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       ) : (
         <div>
           {/* Декоративная рамка */}

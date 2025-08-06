@@ -2800,6 +2800,13 @@
         "section": "Bo‘limga o‘ting",
         "organization_data": "Tashkilot ma’lumotlari"
       },
+      "authorization_success": {
+        "title": "Avtorizatsiya muvaffaqiyatli yakunlandi",
+        "subtitle": "Raqamli imzo faol va foydalanishga tayyor",
+        "description": "Hujjatni raqamli imzo orqali imzolashingiz mumkin",
+        "status": "Holat:",
+        "active": "Tashkilot tasdiqlandi"
+      },
       "legal_notice": "Huquqiy kuchga ega hujjat",
       "buttons": {
         "sign": "Imzolash"

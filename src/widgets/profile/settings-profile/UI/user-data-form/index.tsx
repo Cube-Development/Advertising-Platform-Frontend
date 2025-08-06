@@ -50,14 +50,16 @@ export const UserDataForm: FC<IUserDataFormProps> = ({}) => {
             <span className={styles.label}>
               {t("profile.user_block.user_data.fields.email")}
             </span>
-            <span className={styles.value}>{user?.email || "-"}</span>
+            <span className={styles.value}>
+              {user?.email || "_______________"}
+            </span>
           </div>
           <div className={styles.row}>
             <span className={styles.label}>
               {t("profile.user_block.user_data.fields.date")}
             </span>
             <span className={styles.value}>
-              {formatDate(user?.created || "")}
+              {user?.created ? formatDate(user?.created) : "_______________"}
             </span>
           </div>
           <div className={styles.row}>

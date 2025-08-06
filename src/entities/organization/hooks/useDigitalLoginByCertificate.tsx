@@ -89,6 +89,9 @@ export const useDigitalLoginByCertificate = () => {
               title: t("toasts.organization.offer_sign.need"),
             });
           });
+      } else {
+        // Шаг 6.2: Указываем что оферта подписана
+        dispatch(offerSign());
       }
       // Шаг 7: Осуществляем логин
       dispatch(loginEcp());
