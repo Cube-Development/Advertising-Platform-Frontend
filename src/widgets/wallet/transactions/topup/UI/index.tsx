@@ -102,7 +102,6 @@ export const Topup: FC = () => {
                 </div>
               </>
             )}
-            x
           </>
         )}
       </div>

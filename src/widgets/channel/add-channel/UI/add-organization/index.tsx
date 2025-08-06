@@ -3,7 +3,6 @@ import { useAppSelector } from "@shared/hooks";
 import { NotLogin, OrganizationDataForm } from "@widgets/organization";
 import { motion } from "framer-motion";
 import { FC } from "react";
-import styles from "./styles.module.scss";
 
 interface IAddOrganizationProps {
   step: number;
@@ -21,13 +20,16 @@ export const AddOrganization: FC<IAddOrganizationProps> = ({
   return (
     <>
       {step === 4 && (
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={variant}
-          className={styles.wrapper}
-        >
-          {!isAuthEcp ? <NotLogin /> : <OrganizationDataForm />}
+        <motion.div initial="hidden" animate="visible" variants={variant}>
+          {!isAuthEcp ? (
+            <NotLogin />
+          ) : (
+            <div className="container">
+              <div className="frame">
+                <OrganizationDataForm />
+              </div>
+            </div>
+          )}
         </motion.div>
       )}
     </>
