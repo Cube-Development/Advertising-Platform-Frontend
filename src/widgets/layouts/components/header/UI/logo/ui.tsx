@@ -2,7 +2,7 @@ import { ENUM_ROLES } from "@entities/user";
 import { ENUM_PATHS } from "@shared/routing";
 import { FC } from "react";
 import { Link } from "react-router-dom";
-import styles from "./styles.module.scss";
+import logo from "/images/logo.png";
 
 interface LogoProps {
   currentRole: ENUM_ROLES;
@@ -26,7 +26,11 @@ export const Logo: FC<LogoProps> = ({ currentRole }) => {
             : ENUM_PATHS.MAIN
         }
       >
-        <p className={styles.logo}>Blogix</p>
+        <img
+          src={logo}
+          alt="Blogix logo"
+          className="h-[25px] sm:h-[35px] md:h-[50px] cursor-pointer"
+        />
       </Link>
     </div>
   );
