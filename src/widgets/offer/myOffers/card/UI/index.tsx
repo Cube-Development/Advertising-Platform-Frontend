@@ -17,7 +17,7 @@ import { FC, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
-import { FileText } from "lucide-react";
+import { CircleCheckBig, FileText } from "lucide-react";
 
 interface OfferCardProps {
   card: IBloggerOfferCard;
@@ -155,13 +155,24 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
           </div>
         ) : statusFilter === offerStatusFilter.completed ? (
           <div className={styles.card__complete}>
-            <div className="flex items-center gap-2 text-gray-600">
-              <FileText className="w-5 h-5" />
-              <span className="text-sm font-medium">
-                <p>{t("offers_blogger.offer_status.complete.title")}</p>
-              </span>
-            </div>
-            {sign}
+            {card?.api_status === offerStatus?.toSign ? (
+              <>
+                <div className="flex items-center gap-2 text-gray-600">
+                  <FileText className="w-5 h-5" />
+                  <span className="text-sm font-medium">
+                    <p>{t("offers_blogger.offer_status.complete.title")}</p>
+                  </span>
+                </div>
+                {sign}
+              </>
+            ) : (
+              <div className="flex flex-col items-center gap-2 text-gray-600">
+                <CircleCheckBig className="w-8 h-8 text-green-500" />
+                <span className="text-sm font-medium text-center">
+                  <p>{t("offers_blogger.offer_status.complete.signed")}</p>
+                </span>
+              </div>
+            )}
           </div>
         ) : statusFilter === offerStatusFilter.canceled ? (
           <div className={styles.card__cancel}>

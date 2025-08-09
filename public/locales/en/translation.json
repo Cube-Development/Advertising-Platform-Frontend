@@ -919,7 +919,8 @@
         "text": "Please note that frequent order cancellations may lower your rating"
       },
       "complete": {
-        "title": "Order Completed"
+        "title": "Order Completed",
+        "signed": "Documents signed"
       },
       "moderation": {
         "text": "The order does not meet the requirements of the Blogix platform. Please wait for the administrator's decision"

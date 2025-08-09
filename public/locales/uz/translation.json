@@ -922,7 +922,8 @@
         "text": "Tez-tez buyurtmalarni bekor qilish sizning reytingingizni pasaytirishi mumkinligini eslatib o'tamiz"
       },
       "complete": {
-        "title": "Buyurtma bajarildi"
+        "title": "Buyurtma bajarildi",
+        "signed": "Qabul qilindi"
       },
       "moderation": {
         "text": "Buyurtma Blogix platformasi talablariga mos kelmadi. Administrator qarorini kuting"
