@@ -178,10 +178,10 @@ export const CustomCalendar: FC<DateListProps> = ({ onChange, startDate }) => {
           >
             <p>{isSelectRange ? t("calendar.date") : t("calendar.range")}</p>
           </MyButton>
-          <AlertDialogAction type="button" onClick={continueAction}>
-            <div className={`${styles.confirm} button button__blue`}>
+          <AlertDialogAction asChild>
+            <MyButton type="button" onClick={continueAction}>
               <p>{t("calendar.confirm")}</p>
-            </div>
+            </MyButton>
           </AlertDialogAction>
         </div>
       </AlertDialogContent>

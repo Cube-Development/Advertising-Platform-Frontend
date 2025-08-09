@@ -183,7 +183,7 @@ export const CreditCard: FC = () => {
             </span>
           </div>
         </div>
-        {/* <PaymentCard error={error && true} isLoading={isLoading} /> */}
+        <PaymentCard />
       </form>
     </div>
   );
