@@ -314,7 +314,7 @@
         "type": "base",
         "name": "Boshlang'ich",
         "views": "60 000 dan ortiq ko'rish",
-        "price": "1 250 000 so'm",
+        "price": "2 550 000 so'm",
         "info": "Xizmatni sinab ko'rish yoki kichik reklama kampaniyalari uchun asosiy variant",
         "options": [
           { "option": "Kanallarni qo'lda tanlash", "available": true },
@@ -338,7 +338,7 @@
         "type": "standard",
         "name": "Standart",
         "views": "300 000 dan ortiq ko'rish",
-        "price": "5 500 000 so'm",
+        "price": "7 500 000 so'm",
         "info": "Kichik biznesni targ'ib qilish uchun optimal tarif",
         "options": [
           { "option": "Kanallarni qo'lda tanlash", "available": true },
