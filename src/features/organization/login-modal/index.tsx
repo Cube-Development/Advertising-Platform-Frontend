@@ -16,17 +16,19 @@ import {
   MyButton,
 } from "@shared/ui";
 import { UserPlus, XCircle } from "lucide-react";
-import { ButtonHTMLAttributes, FC, useState } from "react";
+import { ButtonHTMLAttributes, FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { ModalContent } from "./ui";
 
 interface LoginModalProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   open?: boolean;
+  setOpen?: (open: boolean) => void;
   haveTrigger?: boolean;
 }
 
 export const LoginModal: FC<LoginModalProps> = ({
   open = false,
+  setOpen = () => {},
   haveTrigger = true,
   onClick,
   ...props
@@ -34,10 +36,20 @@ export const LoginModal: FC<LoginModalProps> = ({
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(open);
   const screen = useWindowWidth();
+
+  useEffect(() => {
+    setIsOpen(open);
+  }, [open]);
+
+  const handleOpen = (open: boolean) => {
+    setIsOpen(open);
+    setOpen(open);
+  };
+
   return (
     <>
       {screen > BREAKPOINT.MD ? (
-        <Dialog open={isOpen} onOpenChange={setIsOpen}>
+        <Dialog open={isOpen} onOpenChange={handleOpen}>
           {haveTrigger && (
             <DialogTrigger asChild>
               <MyButton
@@ -45,7 +57,7 @@ export const LoginModal: FC<LoginModalProps> = ({
                 type="button"
                 className="flex items-center justify-center gap-2 w-none"
                 onClick={(e) => {
-                  setIsOpen(true);
+                  handleOpen(true);
                   onClick?.(e);
                 }}
               >
@@ -60,7 +72,7 @@ export const LoginModal: FC<LoginModalProps> = ({
             <DialogDescription className="sr-only" />
             <DialogClose
               className="absolute p-4 top-3 right-3"
-              onClick={() => setIsOpen(false)}
+              onClick={() => handleOpen(false)}
             >
               <XCircle size={24} className="text-white" />
             </DialogClose>
@@ -68,7 +80,7 @@ export const LoginModal: FC<LoginModalProps> = ({
           </DialogContent>
         </Dialog>
       ) : (
-        <Drawer open={isOpen} onOpenChange={setIsOpen}>
+        <Drawer open={isOpen} onOpenChange={handleOpen}>
           {haveTrigger && (
             <DrawerTrigger asChild>
               <MyButton
@@ -76,7 +88,7 @@ export const LoginModal: FC<LoginModalProps> = ({
                 type="button"
                 className="flex items-center justify-center gap-2 w-none"
                 onClick={(e) => {
-                  setIsOpen(true);
+                  handleOpen(true);
                   onClick?.(e);
                 }}
               >
@@ -92,7 +104,7 @@ export const LoginModal: FC<LoginModalProps> = ({
             <div className="relative h-full overflow-y-scroll">
               <DrawerClose
                 className="absolute p-4 top-3 right-3"
-                onClick={() => setIsOpen(false)}
+                onClick={() => handleOpen(false)}
               >
                 <XCircle size={24} className="text-white" />
               </DrawerClose>

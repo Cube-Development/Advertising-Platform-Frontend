@@ -6,7 +6,12 @@ import {
 import { useCryptoCertificates, useCryptoMessage } from "@shared/api";
 import { useToast } from "@shared/ui";
 import { useTranslation } from "react-i18next";
-import { useCreateSignEDOMutation, useGetSignInfoEDOMutation } from "../api";
+import {
+  useCreateDocumentEDOMutation,
+  useCreateSignEDOMutation,
+  useGetSignInfoEDOMutation,
+} from "../api";
+import { ENUM_DOCUMENT_TYPE, ICreateDocumentEDORequest } from "../types";
 
 export const useSignDocument = () => {
   const { toast } = useToast();
@@ -18,20 +23,68 @@ export const useSignDocument = () => {
   const [toSign, { isLoading: isLoadingToSign }] = useGetSignInfoEDOMutation();
   const [createSign, { isLoading: isLoadingCreateSign }] =
     useCreateSignEDOMutation();
+  const [createDocument, { isLoading: isLoadingCreateDocument }] =
+    useCreateDocumentEDOMutation();
 
   const { certificates, certificatesLoading, isSignatureLoading } =
     useCryptoCertificates();
 
-  const sign = async (documentId: string, owner: 0 | 1 = 0) => {
+  const signExist = async (documentId: string, owner: 0 | 1 = 0) => {
     try {
       // Получаем JSON документа для подписи
       const response = await toSign({ documentId, owner }).unwrap();
       const documentJson = response?.data?.json || {};
-      // Шаг 1: Загрузка ключа
-      const keyResponse = await sendMessage(
-        CreateMessageKeyId(certificates[0]),
+      await sign(documentJson, documentId);
+    } catch (err) {
+      const errorMessage =
+        err instanceof Error ? err.message : t("toasts.documents.sign.error");
+
+      toast({
+        variant: "error",
+        title: errorMessage,
+      });
+    }
+  };
+
+  const create = async (
+    data: ICreateDocumentEDORequest,
+    type: ENUM_DOCUMENT_TYPE,
+    oldKeyId?: string,
+  ): Promise<{ id: string; keyId?: string } | undefined> => {
+    try {
+      const response = await createDocument({ data, type }).unwrap();
+      const keyId = await sign(
+        response?.pending_document?.document_json,
+        response?._id?.toUpperCase(),
+        oldKeyId,
       );
-      const keyId = keyResponse.keyId;
+      return { id: response?._id?.toUpperCase(), keyId };
+    } catch (err) {
+      const errorMessage =
+        err instanceof Error ? err.message : t("toasts.documents.create.error");
+
+      toast({
+        variant: "error",
+        title: errorMessage,
+      });
+    }
+  };
+
+  const sign = async (
+    documentJson: object,
+    documentId: string,
+    oldKeyId?: string,
+  ): Promise<string | undefined> => {
+    try {
+      let keyId = oldKeyId;
+
+      if (!keyId) {
+        // Шаг 1: Загрузка ключа
+        const keyResponse = await sendMessage(
+          CreateMessageKeyId(certificates[0]),
+        );
+        keyId = keyResponse?.keyId as string;
+      }
 
       // Преобразуем в JSON-строку
       const jsonString = JSON.stringify(documentJson);
@@ -58,9 +111,10 @@ export const useSignDocument = () => {
         documentId,
         signature,
       }).unwrap();
+      return keyId;
     } catch (err) {
       const errorMessage =
-        err instanceof Error ? err.message : "Ошибка входа по ЭЦП";
+        err instanceof Error ? err.message : t("toasts.documents.sign.error");
 
       toast({
         variant: "error",
@@ -70,12 +124,15 @@ export const useSignDocument = () => {
   };
 
   return {
-    sign,
+    signExist,
+    create,
     isLoading:
       isLoadingLogin ||
       isLoadingToSign ||
       isLoadingCreateSign ||
       certificatesLoading ||
-      isSignatureLoading,
+      isLoadingCreateDocument,
+
+    isSignatureLoading,
   };
 };

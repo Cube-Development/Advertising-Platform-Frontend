@@ -95,7 +95,15 @@ export interface IDocumentEDO {
 
 export interface ICreateDocumentEDORequest {
   data: object;
-  document: string; // base64 строка документа
+  document?: string; // base64 строка документа
+}
+
+export interface ICreateDocumentEDOResponse {
+  pending_document: {
+    document_json: object;
+  };
+  _id: string;
+  created_date: string;
 }
 
 export interface IGetDocumentEDOToSignResponse {

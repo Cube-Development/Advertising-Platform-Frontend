@@ -8,6 +8,7 @@ import {
   AlertDialogDescription,
   AlertDialogTitle,
   AlertDialogTrigger,
+  MyButton,
 } from "@shared/ui";
 import { FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -164,10 +165,10 @@ export const TimeList: FC<TimeListProps> = ({ onChange, startTime }) => {
             ))}
           </div>
           <div className={styles.bottom}>
-            <AlertDialogAction type="button" onClick={continueAction}>
-              <div className={`${styles.confirm} button button__blue`}>
+            <AlertDialogAction asChild>
+              <MyButton type="button" onClick={continueAction}>
                 <p>{t("calendar.confirm")}</p>
-              </div>
+              </MyButton>
             </AlertDialogAction>
           </div>
         </div>
