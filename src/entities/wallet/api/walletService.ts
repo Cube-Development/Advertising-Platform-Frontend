@@ -1,99 +1,21 @@
-import { dateSortingTypes } from "@entities/platform";
-import { IWalletHistory, paymentTypes } from "@entities/wallet";
 import {
-  ADV_PROJECTS,
-  BALANCE,
-  LEGALS,
-  TRANSACTION_HISTORY,
-  CREATE_PROJECT_NAME,
-  CREATE_PROJECT_POSTS,
-  CREATE_PROJECT_DATES,
-  CREATE_PROJECT_AMOUNT,
-  authApi,
-} from "@shared/api";
+  ICreateDeposit,
+  ICreateDepositRequest,
+  ICreateDepositResponse,
+  ICreatePaymentRequest,
+  ICreatePaymentResponse,
+  ICreateWithdrawRequest,
+  IGetBalance,
+  IHistoryRequest,
+  IHistoryResponse,
+  IWalletResponse,
+} from "@entities/wallet";
+import { BALANCE, TRANSACTION_HISTORY, authApi } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
-import { ENUM_LANGUAGES_NUM } from "@shared/languages";
-
-type PaymentOrderResponse = {
-  success: boolean;
-};
-
-export type HistoryReq = {
-  language: ENUM_LANGUAGES_NUM;
-  page: number;
-  date_sort: dateSortingTypes;
-  elements_on_page?: number;
-};
-
-type HistoryResponse = {
-  page: number;
-  elements: number;
-  transactions: IWalletHistory[];
-  isLast?: boolean;
-};
-
-type PaymentDepositReq = {
-  amount: number;
-  legal_id: string;
-  way_type: paymentTypes;
-};
-
-type GetBalance = {
-  balance: any;
-  deposit: PaymentWithdrawResponse;
-  profit: PaymentWithdrawResponse;
-  spending: PaymentWithdrawResponse;
-};
-
-type PaymentWithdrawResponse = {
-  account_id: string;
-  balance: number;
-};
-
-type PaymentWithdrawReq = {
-  amount: number;
-  legal_id: string;
-};
 
 export const walletAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
-    paymentProject: build.mutation<PaymentOrderResponse, string>({
-      query: (params) => ({
-        url: `/wallet/payment/project?project_id=${params}`,
-        method: `POST`,
-      }),
-      invalidatesTags: [
-        BALANCE,
-        LEGALS,
-        ADV_PROJECTS,
-        TRANSACTION_HISTORY,
-
-        CREATE_PROJECT_NAME,
-        CREATE_PROJECT_POSTS,
-        CREATE_PROJECT_DATES,
-        CREATE_PROJECT_AMOUNT,
-      ],
-    }),
-    paymentDeposit: build.mutation<PaymentWithdrawResponse, PaymentDepositReq>({
-      query: (params) => ({
-        url: `/wallet/payment/deposit`,
-        method: `POST`,
-        params: params,
-      }),
-      invalidatesTags: [BALANCE, LEGALS, TRANSACTION_HISTORY],
-    }),
-    paymentWithdrawal: build.mutation<
-      PaymentWithdrawResponse,
-      PaymentWithdrawReq
-    >({
-      query: (params) => ({
-        url: `/wallet/payment/withdrawal`,
-        method: `POST`,
-        params,
-      }),
-      invalidatesTags: [BALANCE, LEGALS, TRANSACTION_HISTORY],
-    }),
-    getBalance: build.query<GetBalance, void>({
+    getBalance: build.query<IGetBalance, void>({
       query: () => ({
         url: `/wallet/balance`,
         method: "GET",
@@ -101,15 +23,15 @@ export const walletAPI = authApi.injectEndpoints({
       providesTags: [BALANCE],
     }),
     getHistory: build.query<
-      HistoryResponse,
-      HistoryReq & { __isWebsocket?: boolean }
+      IHistoryResponse,
+      IHistoryRequest & { __isWebsocket?: boolean }
     >({
       query: ({ __isWebsocket, ...params }) => ({
         url: "wallet/transaction/user/history",
         method: "POST",
         params,
       }),
-      transformResponse: (response: HistoryResponse) => {
+      transformResponse: (response: IHistoryResponse) => {
         return {
           ...response,
           isLast:
@@ -148,13 +70,49 @@ export const walletAPI = authApi.injectEndpoints({
       },
       providesTags: [TRANSACTION_HISTORY],
     }),
+    createPaymentProject: build.mutation<
+      ICreatePaymentResponse,
+      ICreatePaymentRequest
+    >({
+      query: (params) => ({
+        url: `/wallet/payment/project`,
+        method: "POST",
+        params: params,
+      }),
+    }),
+    createDepositRequest: build.mutation<
+      ICreateDepositResponse,
+      ICreateDepositRequest
+    >({
+      query: (params) => ({
+        url: `/wallet/payment/deposit/request`,
+        method: "POST",
+        params: params,
+      }),
+    }),
+    createDeposit: build.mutation<IWalletResponse, ICreateDeposit>({
+      query: (params) => ({
+        url: `/wallet/payment/deposit`,
+        method: "POST",
+        params: params,
+      }),
+      invalidatesTags: [BALANCE],
+    }),
+    createWithdraw: build.mutation<IWalletResponse, ICreateWithdrawRequest>({
+      query: (params) => ({
+        url: `/wallet/payment/withdrawal`,
+        method: "POST",
+        params: params,
+      }),
+    }),
   }),
 });
 
 export const {
   useGetBalanceQuery,
-  usePaymentDepositMutation,
-  usePaymentProjectMutation,
-  usePaymentWithdrawalMutation,
   useGetHistoryQuery,
+  useCreatePaymentProjectMutation,
+  useCreateDepositRequestMutation,
+  useCreateDepositMutation,
+  useCreateWithdrawMutation,
 } = walletAPI;

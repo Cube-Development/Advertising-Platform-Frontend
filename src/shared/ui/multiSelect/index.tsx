@@ -36,6 +36,8 @@ export interface MultiSelectProps
   searchable?: boolean;
   hideText?: boolean;
   hideButtons?: boolean;
+  alignContent?: "start" | "center" | "end";
+  matchAnchorWidth?: boolean;
 }
 
 export const MultiSelect = React.forwardRef<
@@ -58,13 +60,14 @@ export const MultiSelect = React.forwardRef<
       searchable = false,
       hideText = false,
       hideButtons = true,
+      alignContent = "start",
+      matchAnchorWidth = true,
       ...props
     },
     ref,
   ) => {
     const { t } = useTranslation();
     const placeholder = pl ? pl : t("components.select.placeholder");
-    console.log("placeholder", placeholder, pl);
     const [selectedValues, setSelectedValues] =
       React.useState<number[]>(defaultValue);
     const [isPopoverOpen, setIsPopoverOpen] = React.useState(false);
@@ -212,8 +215,11 @@ export const MultiSelect = React.forwardRef<
           </button>
         </PopoverTrigger>
         <PopoverContent
-          className="w-[var(--radix-popper-anchor-width)] p-0 "
-          align="start"
+          className={cn(
+            matchAnchorWidth && "w-[var(--radix-popper-anchor-width)]",
+            " p-0 ",
+          )}
+          align={alignContent}
           onEscapeKeyDown={() => setIsPopoverOpen(false)}
         >
           <Command>
@@ -228,7 +234,12 @@ export const MultiSelect = React.forwardRef<
                 className={cn(options?.length > 5 && "h-[30svh] max-h-[200px]")}
               >
                 <CommandEmpty>{t("components.select.not_found")}</CommandEmpty>
-                <CommandGroup className="w-[var(--radix-popper-anchor-width)] gap-1">
+                <CommandGroup
+                  className={cn(
+                    matchAnchorWidth && "w-[var(--radix-popper-anchor-width)]",
+                    "gap-1 ",
+                  )}
+                >
                   {!single && (
                     <CommandItem
                       key="all"

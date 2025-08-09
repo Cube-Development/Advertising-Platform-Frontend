@@ -3,7 +3,7 @@ import { useFindLanguage } from "@entities/user";
 import { useGetViewTransactionsQuery } from "@entities/views";
 import {
   HistoryCard,
-  HistoryReq,
+  IHistoryRequest,
   SkeletonHistoryCard,
   useGetHistoryQuery,
 } from "@entities/wallet";
@@ -30,7 +30,7 @@ export const History: FC = () => {
   const screen = useWindowWidth();
   const [currentPage, setCurrentPage] = useState(1);
 
-  const getParams = useMemo<HistoryReq>(
+  const getParams = useMemo<IHistoryRequest>(
     () => ({
       language: language?.id || USER_LANGUAGES_LIST[0].id,
       page: currentPage,

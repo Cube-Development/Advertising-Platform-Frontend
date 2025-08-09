@@ -1,18 +1,8 @@
-import { ILegalData, PROFILE_STATUS, PROFILE_TYPE } from "@entities/wallet";
-import {
-  MOCK_ADD_LEGAL,
-  MOCK_ADD_SELF_EMPLOYED,
-  PAGE_ANIMATION,
-} from "@shared/config";
-import { ENUM_PATHS } from "@shared/routing";
-import { useToast } from "@shared/ui";
-import { AddDataForm, NotFoundModal } from "@widgets/organization";
+import { PAGE_ANIMATION } from "@shared/config";
+import { useAppSelector } from "@shared/hooks";
+import { NotLogin, OrganizationDataForm } from "@widgets/organization";
 import { motion } from "framer-motion";
-import { FC, useState } from "react";
-import { useForm } from "react-hook-form";
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import styles from "./styles.module.scss";
+import { FC } from "react";
 
 interface IAddOrganizationProps {
   step: number;
@@ -25,82 +15,21 @@ export const AddOrganization: FC<IAddOrganizationProps> = ({
   variant,
   onChangeStep,
 }) => {
-  const { toast } = useToast();
-  const { t } = useTranslation();
-  const navigate = useNavigate();
-
-  const {
-    register,
-    reset,
-    handleSubmit,
-    watch,
-    formState: { errors, isSubmitting },
-  } = useForm<ILegalData>({
-    defaultValues: {
-      profileFilter: {
-        type: PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT,
-        id: PROFILE_STATUS.SELF_EMPLOYED_ACCOUNT,
-      },
-    },
-  });
-  const formState = watch();
-
-  const [formStep, setFormStep] = useState<number>(0);
-  const [isNotFoundModalOpen, setIsNotFoundModalOpen] =
-    useState<boolean>(false);
-
-  const onSubmit = async (data: ILegalData) => {
-    await new Promise((resolve) => setTimeout(resolve, 1000));
-
-    if (data.INN == 111999333) {
-      setIsNotFoundModalOpen(true);
-      return;
-    }
-
-    if (formStep === 0) {
-      if (data.profileFilter.type === PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT) {
-        reset({ ...data, ...MOCK_ADD_SELF_EMPLOYED });
-      } else {
-        reset({ ...data, ...MOCK_ADD_LEGAL });
-      }
-      setFormStep(1);
-      return;
-    }
-
-    if (formStep === 1) {
-      toast({
-        variant: "success",
-        title: t("toasts.add_organization.accept.success"),
-      });
-
-      navigate(ENUM_PATHS.PROFILE);
-      return;
-    }
-  };
+  const { isAuthEcp } = useAppSelector((state) => state.user);
 
   return (
     <>
       {step === 4 && (
-        <motion.div
-          initial="hidden"
-          animate="visible"
-          variants={variant}
-          className={styles.wrapper}
-        >
-          <AddDataForm
-            formState={formState}
-            register={register}
-            errors={errors}
-            reset={reset}
-            onSubmit={handleSubmit(onSubmit)}
-            isLoading={isSubmitting}
-            formStep={formStep}
-            setFormStep={setFormStep}
-          />
-          <NotFoundModal
-            type={formState.profileFilter.type}
-            isOpen={isNotFoundModalOpen}
-          />
+        <motion.div initial="hidden" animate="visible" variants={variant}>
+          {!isAuthEcp ? (
+            <NotLogin />
+          ) : (
+            <div className="container">
+              <div className="frame">
+                <OrganizationDataForm />
+              </div>
+            </div>
+          )}
         </motion.div>
       )}
     </>

@@ -1,6 +1,7 @@
 import { ENUM_LANGUAGES_NUM } from "@shared/languages";
 import { ENUM_ROLES } from "../config";
 import { IPasswordData } from "./password";
+import { ENUM_ORGANIZATION_STATUS } from "@entities/organization";
 
 export interface IUser {
   id: string;
@@ -17,6 +18,7 @@ export interface IUser {
   password: string;
   new_password: string;
   accept_password: string;
+  created?: string;
 }
 
 export interface IUserData {
@@ -57,11 +59,6 @@ export enum ENUM_ORGANIZATION_TYPE {
   SELF_EMPLOYED = "SelfEmployed",
   INDIVIDUAL_ENTITY = "IndividualEntity",
   LEGAL_ENTITY = "LegalEntity",
-}
-
-export enum ENUM_ORGANIZATION_STATUS {
-  NOT_APPROVED = 0,
-  APPROVED = 1,
 }
 
 export interface IUserDataNew {

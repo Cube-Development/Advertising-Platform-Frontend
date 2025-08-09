@@ -1,13 +1,20 @@
-import { FC } from "react";
-import styles from "./styles.module.scss";
-import { cn } from "@shared/ui";
-import { useTranslation } from "react-i18next";
-import { MOCK_PROFILE } from "@shared/config";
 import {
   ENUM_ORGANIZATION_STATUS,
+  ORGANIZATION_STATUS_LIST,
+  useGetOrganizationQuery,
+} from "@entities/organization";
+import {
   ENUM_ORGANIZATION_TYPE,
   IUserDataNew,
+  useGetUserQueryQuery,
 } from "@entities/user";
+import { OfferSignModal } from "@features/organization";
+import { MOCK_PROFILE } from "@shared/config";
+import { cn } from "@shared/ui";
+import { formatDate } from "@shared/utils";
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
+import styles from "./styles.module.scss";
 
 interface IUserDataFormProps {
   // add your props here
@@ -16,6 +23,13 @@ interface IUserDataFormProps {
 export const UserDataForm: FC<IUserDataFormProps> = ({}) => {
   const { t } = useTranslation();
   const data = MOCK_PROFILE as IUserDataNew;
+  const { data: organization } = useGetOrganizationQuery();
+  const { data: user } = useGetUserQueryQuery();
+  const status =
+    ORGANIZATION_STATUS_LIST.find(
+      (item) => item.status === organization?.status,
+    )?.label || "";
+
   return (
     <div className={cn(styles.wrapper, "frame")}>
       <div className={styles.block}>
@@ -36,14 +50,16 @@ export const UserDataForm: FC<IUserDataFormProps> = ({}) => {
             <span className={styles.label}>
               {t("profile.user_block.user_data.fields.email")}
             </span>
-            <span className={styles.value}>{data?.email || "-"}</span>
+            <span className={styles.value}>
+              {user?.email || "_______________"}
+            </span>
           </div>
           <div className={styles.row}>
             <span className={styles.label}>
               {t("profile.user_block.user_data.fields.date")}
             </span>
             <span className={styles.value}>
-              {data?.registrationDate || "-"}
+              {user?.created ? formatDate(user?.created) : "_______________"}
             </span>
           </div>
           <div className={styles.row}>
@@ -54,72 +70,70 @@ export const UserDataForm: FC<IUserDataFormProps> = ({}) => {
           </div>
         </div>
       </div>
-      <div className={styles.block}>
-        <div className={styles.top}>
-          <p>{t("profile.user_block.organization_data.title")}</p>
-          <button className={styles.button}>
-            {t("profile.user_block.organization_data.edit")}
-          </button>
-        </div>
-        <div className={styles.data}>
-          <div className={styles.row}>
-            <span className={styles.label}>
-              {t("profile.user_block.organization_data.fields.type")}
-            </span>
-            <span className={styles.value}>
-              {data?.organization?.type === ENUM_ORGANIZATION_TYPE.SELF_EMPLOYED
-                ? t(
-                    "profile.user_block.organization_data.organization_types.self_employed",
-                  )
-                : data?.organization?.type ===
-                    ENUM_ORGANIZATION_TYPE.LEGAL_ENTITY
+      {!!organization && (
+        <div className={styles.block}>
+          <div className={styles.top}>
+            <p>{t("profile.user_block.organization_data.title")}</p>
+            <button className={styles.button}>
+              {t("profile.user_block.organization_data.edit")}
+            </button>
+          </div>
+          <div className={styles.data}>
+            <div className={styles.row}>
+              <span className={styles.label}>
+                {t("profile.user_block.organization_data.fields.type")}
+              </span>
+              <span className={styles.value}>
+                {data?.organization?.type ===
+                ENUM_ORGANIZATION_TYPE.SELF_EMPLOYED
                   ? t(
-                      "profile.user_block.organization_data.organization_types.entity",
+                      "profile.user_block.organization_data.organization_types.self_employed",
                     )
-                  : t(
-                      "profile.user_block.organization_data.organization_types.individual",
-                    )}
-            </span>
-          </div>
+                  : data?.organization?.type ===
+                      ENUM_ORGANIZATION_TYPE.LEGAL_ENTITY
+                    ? t(
+                        "profile.user_block.organization_data.organization_types.entity",
+                      )
+                    : t(
+                        "profile.user_block.organization_data.organization_types.individual",
+                      )}
+              </span>
+            </div>
 
-          {data?.organization?.pinfl ? (
+            {organization?.PINFL ? (
+              <div className={styles.row}>
+                <span className={styles.label}>
+                  {t("profile.user_block.organization_data.fields.pinfl")}
+                </span>
+                <span className={styles.value}>{organization?.PINFL}</span>
+              </div>
+            ) : (
+              <div className={styles.row}>
+                <span className={styles.label}>
+                  {t("profile.user_block.organization_data.fields.inn")}
+                </span>
+                <span className={styles.value}>{organization?.TIN}</span>
+              </div>
+            )}
             <div className={styles.row}>
               <span className={styles.label}>
-                {t("profile.user_block.organization_data.fields.pinfl")}
+                {t("profile.user_block.organization_data.fields.status")}
               </span>
-              <span className={styles.value}>{data?.organization?.pinfl}</span>
-            </div>
-          ) : (
-            <div className={styles.row}>
-              <span className={styles.label}>
-                {t("profile.user_block.organization_data.fields.inn")}
+              <span
+                className={cn(
+                  styles.value,
+                  organization?.status === ENUM_ORGANIZATION_STATUS.ACTIVE
+                    ? styles.approved
+                    : styles.not_approved,
+                )}
+              >
+                {t(status)}
               </span>
-              <span className={styles.value}>{data?.organization?.inn}</span>
             </div>
-          )}
-          <div className={styles.row}>
-            <span className={styles.label}>
-              {t("profile.user_block.organization_data.fields.status")}
-            </span>
-            <span
-              className={cn(
-                styles.value,
-                data?.organization?.status === ENUM_ORGANIZATION_STATUS.APPROVED
-                  ? styles.approved
-                  : styles.not_approved,
-              )}
-            >
-              {data?.organization?.status === ENUM_ORGANIZATION_STATUS.APPROVED
-                ? t(
-                    "profile.user_block.organization_data.status_types.approved",
-                  )
-                : t(
-                    "profile.user_block.organization_data.status_types.not_approved",
-                  )}
-            </span>
+            <OfferSignModal />
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

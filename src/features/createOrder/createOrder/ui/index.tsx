@@ -14,37 +14,33 @@ import { Loader, X } from "lucide-react";
 import { ButtonHTMLAttributes, FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { UseFormSetValue } from "react-hook-form";
+import { ICreatePostForm } from "@entities/project";
 
 interface CreateOrderProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isAllowed: boolean;
   totalAmount: number;
   onAction?: () => void;
+  setValue: UseFormSetValue<ICreatePostForm>;
+  formState: ICreatePostForm;
 }
 
 export const CreateOrder: FC<CreateOrderProps> = ({
   isAllowed,
   totalAmount,
   onAction,
+  setValue,
+  formState,
   ...props
 }) => {
   const [open, setOpen] = useState(false);
   const { t } = useTranslation();
-  const [walletType, setWalletType] = useState<ENUM_WALLETS_TYPE | null>(null);
   const handleClose = () => {
     setOpen(false);
     onAction && onAction();
-    setWalletType(ENUM_WALLETS_TYPE.DEPOSIT);
   };
 
   return (
-    // <MyButton buttons_type="button__green" type="submit" {...props}>
-    //   {!isAllowed ? (
-    //     <Loader className="animate-spin" stroke="#fff" width={20} height={20} />
-    //   ) : (
-    //     <p>{t(`create_order.payment.pay`)}</p>
-    //   )}
-    // </MyButton>
-    // <Sheet open={dropdownMenu.isOpen} onOpenChange={() => toggleMenu()}>
     <Sheet open={open} onOpenChange={setOpen}>
       <SheetTrigger asChild>
         <MyButton buttons_type="button__green" type="button" {...props}>
@@ -76,8 +72,8 @@ export const CreateOrder: FC<CreateOrderProps> = ({
               {t("create_order.payment.choose_wallet")}
             </p>
             <WalletsBar
-              walletType={walletType}
-              setWalletType={setWalletType}
+              walletType={formState?.wallet_type!}
+              setWalletType={(type) => setValue("wallet_type", type!)}
               totalAmount={totalAmount}
             />
           </div>

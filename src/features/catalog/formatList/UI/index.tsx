@@ -77,7 +77,7 @@ export const FormatList: FC<IFormatListProps> = ({
   //       {isMenuOpen && (
   //         <div className={`${styles.menu} show !mt-0 w-fit`}>
   //           <ul>
-  //             {card.format.map((format) => (
+  //             {card?.format?.map((format) => (
   //               <li
   //                 key={format?.format}
   //                 onClick={handleOptionChange}
@@ -111,17 +111,17 @@ export const FormatList: FC<IFormatListProps> = ({
 
   const options = useMemo(() => {
     if ((screen > BREAKPOINT.SM && !isSmall) || isBig) {
-      return card.format.map((format) => ({
+      return card?.format?.map((format) => ({
         name: format?.format_name?.big,
         id: format?.format,
       }));
     } else {
-      return card.format.map((format) => ({
+      return card?.format?.map((format) => ({
         name: format?.format_name?.small,
         id: format?.format,
       }));
     }
-  }, [screen, card.format]);
+  }, [screen, card?.format]);
 
   const defaultValue = useMemo(() => {
     if (isMultiple) {
@@ -131,12 +131,14 @@ export const FormatList: FC<IFormatListProps> = ({
         : [card?.selected_format?.format];
 
       return options
-        .filter((option) => selectedIds.includes(option.id))
-        .map((option) => option.id); // возвращаем массив id
+        ?.filter((option) => selectedIds.includes(option.id))
+        ?.map((option) => option.id); // возвращаем массив id
     }
 
     // isMultiple === false → одиночный выбор
-    return [options.find((option) => option.id === selectedFormat?.format)?.id];
+    return [
+      options?.find((option) => option.id === selectedFormat?.format)?.id,
+    ];
   }, [options, selectedFormat?.format, isMultiple]);
 
   const handleMultiOptionsChange = (values: number[]) => {
@@ -179,7 +181,7 @@ export const FormatList: FC<IFormatListProps> = ({
         {isMenuOpen && (
           <div className={`${styles.menu} show`}>
             <ul>
-              {card.format.map((format) => (
+              {card?.format?.map((format) => (
                 <li
                   key={format?.format}
                   onClick={handleOptionChange}
@@ -201,7 +203,7 @@ export const FormatList: FC<IFormatListProps> = ({
       </div> */}
 
       <MultiSelect
-        options={options}
+        options={options || []}
         onValueChange={handleMultiOptionsChange}
         defaultValue={defaultValue}
         single={!isMultiple}
@@ -213,6 +215,8 @@ export const FormatList: FC<IFormatListProps> = ({
         // showListClear={showListClear}
         showCheckBox={isMultiple}
         className={styles.multiselect}
+        matchAnchorWidth={false}
+        alignContent={isSmallCatalogCard ? "end" : "start"}
       />
     </>
   );

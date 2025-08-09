@@ -1,17 +1,20 @@
 import { ArrowLongHorizontalIcon } from "@shared/assets";
 import { MyButton } from "@shared/ui";
+import { Loader } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { Loader } from "lucide-react";
 
-interface PaymentDidoxProps {
+interface PaymentDidoxProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading: boolean;
 }
 
-export const PaymentDidox: FC<PaymentDidoxProps> = ({ ...props }) => {
+export const PaymentDidox: FC<PaymentDidoxProps> = ({
+  isLoading,
+  ...props
+}) => {
   const { t } = useTranslation();
-  const { isLoading } = props;
   return (
     <MyButton {...props} className={styles.button} type="submit">
       {isLoading ? (

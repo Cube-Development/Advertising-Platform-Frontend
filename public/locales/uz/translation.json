@@ -152,6 +152,7 @@
     "calculateIncome": "Daromad hisoblash",
 
     "orders": "Mening reklama kampaniyalarim",
+    "manager_orders": "Reklama buyurtmalari",
 
     "saved": "Saqlanganlar",
     "manager": "Menejerlar bilan",
@@ -161,6 +162,7 @@
     "offers": "Mening buyurtmalarim",
 
     "wallet": "Hamyon",
+    "documents": "Dokumentlar",
 
     "top_up": "Hamyonni to'ldirish",
     "withdraw": "Pul yechib olish",
@@ -252,7 +254,9 @@
       {
         "stage": "Joylashtirishni mustaqil yarating yoki sun'iy intellekt yordamida post generatsiya qiling"
       },
-      { "stage": "Kanal egasi postni joylashtirib, tekshirish uchun sizga yuboradi" }
+      {
+        "stage": "Kanal egasi postni joylashtirib, tekshirish uchun sizga yuboradi"
+      }
     ],
     "why_title": "Nega biz bilan samaraliroq?",
     "accomms_list": [
@@ -270,8 +274,8 @@
           {
             "stage": "Har bir admin bilan alohida to'lov qilish (hech qanday kafolatsiz)"
           },
-          { 
-            "stage": "Reklama postini har bir adminga yuborish" 
+          {
+            "stage": "Reklama postini har bir adminga yuborish"
           },
           {
             "stage": "Post joylashtirilishini har bir kanalda alohida kuzatish"
@@ -315,12 +319,12 @@
         "options": [
           { "option": "Kanallarni qo'lda tanlash", "available": true },
           { "option": "Individual targ'ibot rejasi", "available": true },
-          { 
-            "option": "Samarali reklama postini yaratish", "available": true 
+          {
+            "option": "Samarali reklama postini yaratish",
+            "available": true
           },
           { "option": "Nashrlar haqida bildirishnomalar", "available": true },
-          { "option": "Tanlangan kanallarni kelishish",
-            "available": false },
+          { "option": "Tanlangan kanallarni kelishish", "available": false },
           { "option": "Targ'ibot bo'yicha maslahatlar", "available": false },
           {
             "option": "Bajarilgan ish bo'yicha batafsil hisobot",
@@ -339,9 +343,9 @@
         "options": [
           { "option": "Kanallarni qo'lda tanlash", "available": true },
           { "option": "Individual targ'ibot rejasi", "available": true },
-          { 
+          {
             "option": "Samarali reklama postini yaratish",
-            "available": true 
+            "available": true
           },
           { "option": "Nashrlar haqida bildirishnomalar", "available": true },
           { "option": "Tanlangan kanallarni kelishish", "available": true },
@@ -363,9 +367,9 @@
         "options": [
           { "option": "Kanallarni qo'lda tanlash", "available": true },
           { "option": "Individual targ'ibot rejasi", "available": true },
-          { 
-            "option": "Samarali reklama postini yaratish", 
-            "available": true 
+          {
+            "option": "Samarali reklama postini yaratish",
+            "available": true
           },
           { "option": "Nashrlar haqida bildirishnomalar", "available": true },
           { "option": "Tanlangan kanallarni kelishish", "available": true },
@@ -385,7 +389,7 @@
         "name": "Kadamov Roman",
         "workplace": "CocaCola Uzbekistan",
         "img": "customer1.jpg",
-        "text": "Ushbu marketplace-da reklama sotish - haqiqiy topilma! Brendni targ'ib qilish uchun ajoyib platforma. Bitimlarning shaffof shartlari, mijozlar bilan samarali muloqot va yuqori sifatli tahlillar. Biznesingiz ko'rinishini oshirishni istaganlar uchun tavsiya qilaman."
+        "text": "Ushbu marketplace-da reklama sotish - haqiqatan ham topilma! Brendni targ'ib qilish uchun ajoyib platforma. Bitimlarning shaffof shartlari, mijozlar bilan samarali muloqot va yuqori sifatli tahlillar. Biznesingiz ko'rinishini oshirishni istaganlar uchun tavsiya qilaman."
       },
       {
         "name": "Karimov Damir",
@@ -403,7 +407,7 @@
         "name": "customer 1",
         "workplace": "CocaCola Uzbekistan",
         "img": "customer1.jpg",
-        "text": "Ushbu marketplace-da reklama sotish - haqiqiy topilma! Brendni targ'ib qilish uchun ajoyib platforma. Bitimlarning shaffof shartlari, mijozlar bilan samarali muloqot va yuqori sifatli tahlillar. Biznesingiz ko'rinishini oshirishni istaganlar uchun tavsiya qilaman."
+        "text": "Ushbu marketplace-da reklama sotish - haqiqatan ham topilma! Brendni targ'ib qilish uchun ajoyib platforma. Bitimlarning shaffof shartlari, mijozlar bilan samarali muloqot va yuqori sifatli tahlillar. Biznesingiz ko'rinishini oshirishni istaganlar uchun tavsiya qilaman."
       },
       {
         "name": "customer 2",
@@ -487,12 +491,16 @@
         "type": "self",
         "title": "Mustaqil joylashtirish",
         "stages": [
-          { "stage": "Reklama beruvchilarni doimiy qidirishga vaqt va kuch sarflash" },
+          {
+            "stage": "Reklama beruvchilarni doimiy qidirishga vaqt va kuch sarflash"
+          },
           {
             "stage": "Daromadning noaniqligi, chunki reklama beruvchilar oqimi faqat sizning imkoniyatlaringiz bilan cheklangan"
           },
           { "stage": "To'lov kafolati past" },
-          { "stage": "Kelishuv jarayonining barcha bosqichlarida avtomatlashtirish yo'q" },
+          {
+            "stage": "Kelishuv jarayonining barcha bosqichlarida avtomatlashtirish yo'q"
+          },
           {
             "stage": "Oxir-oqibat sotib olmaydigan reklama beruvchilarga vaqt sarflash"
           }
@@ -1107,15 +1115,24 @@
       "title": "Parolni o'zgartirish",
       "current_password": {
         "title": "Joriy parol",
-        "default_value": "Sample@gmail.com"
+        "description": "O'zgarishlarni tasdiqlash uchun joriy parolni kiriting.",
+        "error": {
+          "required": "maydon bo‘sh bo‘lmasligi kerak"
+        }
       },
       "new_password": {
         "title": "Yangi parol",
-        "default_value": "Sample@gmail.com"
+        "description": "Hisobingizga kirish uchun foydalaniladigan yangi parolni kiriting. Parol ishonchli bo‘lishi va kamida 8 ta belgidan iborat bo‘lishi kerak, shu jumladan harflar va raqamlar.",
+        "error": {
+          "required": "maydon bo‘sh bo‘lmasligi kerak"
+        }
       },
       "accept_password": {
         "title": "Yangi parolni tasdiqlash",
-        "default_value": "Sample@gmail.com"
+        "description": "Tasdiqlash uchun yangi parolni yana bir bor kiriting. Ikkala parol bir xil ekanligiga ishonch hosil qiling.",
+        "error": {
+          "required": "maydon bo‘sh bo‘lmasligi kerak"
+        }
       },
       "change_btn": "Parolni o'zgartirish"
     },
@@ -1146,7 +1163,8 @@
     "navigation": {
       "user_data": "Foydalanuvchi ma'lumotlari",
       "change_password": "Parolni o'zgartirish",
-      "change_notifications": "Bildirishnoma sozlamalari"
+      "change_notifications": "Bildirishnoma sozlamalari",
+      "organization_data": "Tashkilot ma'lumotlari"
     },
     "back": "Orqaga",
     "user_block": {
@@ -1261,84 +1279,84 @@
       }
     },
     "bank_data": {
-    "bank_data": "Bank ma'lumotlari",
-    "bank_mfo": {
-      "title": "Bank MFOsi",
-      "default_value": "12345",
-      "description": "Hisobingiz ochilgan bankning filiallararo pul o'tkazmalari kodini (MFO) kiriting. Ushbu kod to'lovlarni qayta ishlash uchun ishlatiladi.",
-      "error": {
-        "required": "noto'g'ri format, belgi soni - 5"
+      "bank_data": "Bank ma'lumotlari",
+      "bank_mfo": {
+        "title": "Bank MFOsi",
+        "default_value": "12345",
+        "description": "Hisobingiz ochilgan bankning filiallararo pul o'tkazmalari kodini (MFO) kiriting. Ushbu kod to'lovlarni qayta ishlash uchun ishlatiladi.",
+        "error": {
+          "required": "noto'g'ri format, belgi soni - 5"
+        }
+      },
+      "bank_name": {
+        "title": "Bank nomi",
+        "default_value": "Bank nomi",
+        "description": "Hisobingiz ochilgan bankning rasmiy nomini kiriting. Bu mablag'laringiz to'g'ri o'tkazilishi uchun muhim.",
+        "error": {
+          "required": "maydon bo'sh bo'lishi mumkin emas"
+        }
+      },
+      "checking_account": {
+        "title": "Hisob raqami",
+        "default_value": "12345678901234567890",
+        "description": "Bankda o'zingiz yoki tashkilotingiz nomiga ochilgan hisob raqamini kiriting. Ushbu hisob mablag' o'tkazmalari va boshqa moliyaviy operatsiyalar uchun ishlatiladi.",
+        "error": {
+          "required": "noto'g'ri format, belgi soni - 20"
+        }
+      },
+      "transit_account": {
+        "title": "Tranzit hisobi",
+        "default_value": "12345678901234567890",
+        "description": "Agar kerak bo'lsa, mablag' o'tkazmalari uchun ishlatiladigan tranzit hisob raqamingizni kiriting. Ushbu hisob sizning asosiy hisobingizdan farq qilishi mumkin.",
+        "error": {
+          "required": "noto'g'ri format, belgi soni - 20"
+        }
+      },
+      "card_number": {
+        "title": "Karta ma'lumotlari",
+        "default_value": "9860123412341234",
+        "description": "Bo'shliqlarsiz bank kartangizning raqamini kiriting. Raqamni noto'g'ri kiritish to'lov rad etilishiga olib kelishi mumkin, shuning uchun diqqat bilan kiriting.",
+        "error": {
+          "required": "noto'g'ri format, belgi soni - 16"
+        }
+      },
+      "card_date": {
+        "title": "Kartaning amal qilish muddati",
+        "default_value": "mm/yy",
+        "description": "Kartangiz amal qilish muddatini MM/YY (oy/yil) formatida kiriting. Ushbu ma'lumotlar tranzaksiyalarni qayta ishlash va kartaning dolzarbligini tasdiqlash uchun zarur.",
+        "error": {
+          "required": "sanani mm/yy formatida kiriting: 09/23"
+        }
       }
     },
-    "bank_name": {
-      "title": "Bank nomi",
-      "default_value": "Bank nomi",
-      "description": "Hisobingiz ochilgan bankning rasmiy nomini kiriting. Bu mablag'laringiz to'g'ri o'tkazilishi uchun muhim.",
-      "error": {
-        "required": "maydon bo'sh bo'lishi mumkin emas"
+    "contact": {
+      "contact": "Kontakt ma'lumotlari",
+      "phone": {
+        "title": "Telefon raqami",
+        "default_value": "+998909000123",
+        "description": "Xalqaro formatda amaldagi telefon raqamingizni kiriting. Ushbu raqam aloqa va to'lovni tasdiqlash uchun ishlatilishi mumkin.",
+        "error": {
+          "required": "telefon raqamini kerakli formatda kiriting"
+        }
+      },
+      "email": {
+        "title": "E-mail",
+        "default_value": "sample@gmail.com",
+        "description": "Amaldagi elektron pochta manzilingizni kiriting. Ushbu e-mailga to'lov holati va boshqa muhim xabarlar yuborilishi mumkin.",
+        "error": {
+          "required": "mavjud bo'lmagan pochta"
+        }
       }
     },
-    "checking_account": {
-      "title": "Hisob raqami",
-      "default_value": "12345678901234567890",
-      "description": "Bankda o'zingiz yoki tashkilotingiz nomiga ochilgan hisob raqamini kiriting. Ushbu hisob mablag' o'tkazmalari va boshqa moliyaviy operatsiyalar uchun ishlatiladi.",
-      "error": {
-        "required": "noto'g'ri format, belgi soni - 20"
-      }
-    },
-    "transit_account": {
-      "title": "Tranzit hisobi",
-      "default_value": "12345678901234567890",
-      "description": "Agar kerak bo'lsa, mablag' o'tkazmalari uchun ishlatiladigan tranzit hisob raqamingizni kiriting. Ushbu hisob sizning asosiy hisobingizdan farq qilishi mumkin.",
-      "error": {
-        "required": "noto'g'ri format, belgi soni - 20"
-      }
-    },
-    "card_number": {
-      "title": "Karta ma'lumotlari",
-      "default_value": "9860123412341234",
-      "description": "Bo'shliqlarsiz bank kartangizning raqamini kiriting. Raqamni noto'g'ri kiritish to'lov rad etilishiga olib kelishi mumkin, shuning uchun diqqat bilan kiriting.",
-      "error": {
-        "required": "noto'g'ri format, belgi soni - 16"
-      }
-    },
-    "card_date": {
-      "title": "Kartaning amal qilish muddati",
-      "default_value": "mm/yy",
-      "description": "Kartangiz amal qilish muddatini MM/YY (oy/yil) formatida kiriting. Ushbu ma'lumotlar tranzaksiyalarni qayta ishlash va kartaning dolzarbligini tasdiqlash uchun zarur.",
-      "error": {
-        "required": "sanani mm/yy formatida kiriting: 09/23"
-      }
-    }
-    },
-  "contact": {
-    "contact": "Kontakt ma'lumotlari",
-    "phone": {
-      "title": "Telefon raqami",
-      "default_value": "+998909000123",
-      "description": "Xalqaro formatda amaldagi telefon raqamingizni kiriting. Ushbu raqam aloqa va to'lovni tasdiqlash uchun ishlatilishi mumkin.",
-      "error": {
-        "required": "telefon raqamini kerakli formatda kiriting"
-      }
-    },
-    "email": {
-      "title": "E-mail",
-      "default_value": "sample@gmail.com",
-      "description": "Amaldagi elektron pochta manzilingizni kiriting. Ushbu e-mailga to'lov holati va boshqa muhim xabarlar yuborilishi mumkin.",
-      "error": {
-        "required": "mavjud bo'lmagan pochta"
-      }
+
+    "accept": {
+      "text1": "Ma'lumotlarning to'g'riligini tasdiqlayman,",
+      "span1": "xizmat shartlari",
+      "and": "va",
+      "span2": "oferta qoidalari",
+      "text2": "bilan tanishdim va qabul qilaman."
     }
   },
-
-  "accept": {
-    "text1": "Ma'lumotlarning to'g'riligini tasdiqlayman,",
-    "span1": "xizmat shartlari",
-    "and": "va",
-    "span2": "oferta qoidalari",
-    "text2": "bilan tanishdim va qabul qilaman."
-  }
-},
 
   "platform": {
     "cross": "Moslik",
@@ -1435,22 +1453,41 @@
 
   "wallet": {
     "topup": {
-      "title": "Balansni to'ldirish",
-      "offer": "Balansni to'ldirish uchun ariza",
-      "amount": "To'ldirish summasi",
-      "required": "Summani kiriting",
-      "min": "Eng kam miqdor",
-      "max": "Maksimal miqdor",
-      "placeholder": "Summani kiriting",
-      "payment_method": "To'lov usulini tanlang",
-      "fetch_error": "So'rov xatosi"
+      "title": "Balansni to‘ldirish",
+      "offer": "Balansni to‘ldirish so‘rovi",
+      "payment_method": "To‘lov usulini tanlang",
+      "fetch_error": "So‘rovda xatolik yuz berdi",
+
+      "amount": {
+        "title": "To‘ldirish summasi",
+        "default_value": "50 000",
+        "placeholder": "To‘ldirish summasini kiriting",
+        "description": "Balansni to‘ldirish summasini kiriting. Minimal summa 50 000 so‘m. Maksimal summa 1 000 000 000 so‘m."
+      },
+
+      "success": {
+        "title": "So‘rovingiz muvaffaqiyatli qabul qilindi!",
+        "text": "To‘lov maqsadi va rekvizitlarini hisob-fakturadagi ma'lumotlarga aniq mos tarzda ko‘rsatishingizni so‘raymiz. Bu mablag‘larni to‘g‘ri va tez o‘tkazish uchun zarur. Ko‘rsatilgan hisob raqamiga mablag‘ tushgach, balansingiz to‘ldiriladi.",
+
+        "buttons": {
+          "download": "Yuklab olish"
+        }
+      }
     },
     "withdraw": {
-      "title": "Pul mablag'larini yechib olish",
-      "offer": "Pul mablag'larini yechib olish uchun ariza",
-      "amount": "Yechib olish summasi",
-      "required": "Summani kiriting",
-      "placeholder": "Summani kiriting"
+      "title": "Mablag‘larni yechib olish",
+      "offer": "Pul yechish so‘rovi",
+      "amount": {
+        "title": "Yechib olinadigan summa",
+        "default_value": "50 000",
+        "placeholder": "Yechib olinadigan summani kiriting",
+        "description": "Balansdan yechib olinadigan summani kiriting. Minimal summa 50 000 so‘m. Maksimal summa 1 000 000 000 so‘m."
+      },
+
+      "success": {
+        "title": "So‘rovingiz muvaffaqiyatli qabul qilindi!",
+        "text": "Avans yechish so‘rovingiz muvaffaqiyatli yuborildi. Tasdiqlanishi va mablag‘lar tushishini kuting."
+      }
     },
     "types": {
       "selfemployed": "Jismoniy shaxs",
@@ -1475,13 +1512,87 @@
       "include": "Komissiya kiritish",
       "withdraw_all": "Barcha mablag'larni yechib olish"
     },
+
     "guide": {
       "title": "Bosqichma-bosqich qo'llanma",
-      "entity": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc.",
-      "individual": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc.",
-      "selfEmployedTransits": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc.",
-      "selfEmployedAccounts": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc."
+      "topup": {
+        "title": "Tashkilot balansini qanday to'ldirish kerak",
+        "description": "Blogix tizimi orqali tashkilotingiz balansini to'ldirish uchun ushbu oddiy bosqichlarni bajaring",
+        "steps": [
+          {
+            "title": "didox.uz tizimida avtorizatsiya",
+            "description": "Elektron raqamli imzo (ERI) yordamida tizimga kiring. Muvaffaqiyatli avtorizatsiyadan so'ng tashkilotingiz ma'lumotlari avtomatik tarzda to'ldiriladi."
+          },
+          {
+            "title": "To‘ldirish summasini kiriting",
+            "description": "Hamyoningiz balansini to‘ldirmoqchi bo‘lgan summani kiriting."
+          },
+          {
+            "title": "Hisob-faktura yaratish",
+            "description": "Summani kiritib, so‘rov yuborilgandan so‘ng hisob-faktura avtomatik ravishda yaratiladi."
+          },
+          {
+            "title": "Bank orqali hisob-fakturani to‘lash",
+            "description": "Hisob-fakturadagi rekvizitlar asosida tashkilotingiz hisob raqamidan Blogix platformasi hisobiga ko‘rsatilgan summani o‘tkazing."
+          },
+          {
+            "title": "Mablag‘lar tushirilishi",
+            "description": "Bank o‘tkazmani tasdiqlagach, mablag‘lar avtomatik ravishda hamyoningizga tushiriladi."
+          },
+          {
+            "title": "To‘ldirish haqida bildirishnoma",
+            "description": "Balans muvaffaqiyatli to‘ldirilganligi haqida sizga elektron pochta va platforma ichida bildirishnoma yuboriladi."
+          }
+        ],
+        "note": {
+          "title": "Muhim ma’lumot",
+          "description": "To‘lovni qayta ishlash sizning bankingizga qarab bir necha daqiqadan bir necha soatgacha vaqt olishi mumkin. Agar 24 soat ichida mablag‘lar yetib kelmasa, qo‘llab-quvvatlash xizmatiga murojaat qiling."
+        }
+      },
+      "withdraw": {
+        "title": "Platformadan pulni qanday yechib olish mumkin",
+        "description": "Blogix tizimi orqali platformadan pul yechib olish uchun ushbu oddiy bosqichlarni bajaring",
+        "steps": [
+          {
+            "title": "Pul yechib olish uchun hamyonni tanlang",
+            "description": "Qaysi hamyondan mablag‘ yechib olinishini ko‘rsating:",
+            "substeps": [
+              {
+                "title": "Depozit hamyon",
+                "description": "Oldin kiritilgan mablag‘larni qaytarish uchun ishlatiladi.",
+                "info": "Qaytarish Didox orqali rasmiy xat sifatida rasmiylashtiriladi"
+              },
+              {
+                "title": "Foyda hamyoni",
+                "description": "Topilgan daromadni yechib olish uchun ishlatiladi.",
+                "info": "Hujjatlarni rasmiylashtirish talab qilinmaydi, mablag‘lar avtomatik tarzda yechiladi."
+              }
+            ]
+          },
+          {
+            "title": "didox.uz tizimida avtorizatsiya",
+            "description": "Elektron raqamli imzo (ERI) yordamida tizimga kiring. Muvaffaqiyatli avtorizatsiyadan so‘ng tashkilotingiz ma'lumotlari avtomatik tarzda to‘ldiriladi."
+          },
+          {
+            "title": "Yechib olinadigan summani kiriting",
+            "description": "Tashkilotingiz hisob raqamiga yechib olmoqchi bo‘lgan summani kiriting."
+          },
+          {
+            "title": "Mablag‘larni o‘tkazish",
+            "description": "Mablag‘lar tashkilotingiz hisob raqamiga o‘tkaziladi."
+          },
+          {
+            "title": "Pul yechish haqida bildirishnoma",
+            "description": "Mablag‘lar muvaffaqiyatli yechib olinganligi haqida sizga elektron pochta va platforma ichida bildirishnoma yuboriladi."
+          }
+        ],
+        "note": {
+          "title": "Muhim ma’lumot",
+          "description": "To‘lovni qayta ishlash sizning bankingizga qarab bir necha daqiqadan bir necha soatgacha vaqt olishi mumkin. Agar 24 soat ichida mablag‘lar yetib kelmasa, qo‘llab-quvvatlash xizmatiga murojaat qiling."
+        }
+      }
     },
+
     "pay": {
       "title": "To'lov uchun",
       "text": "Komissiya",
@@ -1533,7 +1644,7 @@
       "comment": "Bloger uchun izoh...",
       "result": "Natija",
       "post": "Natijani ko'rish uchun reklama postini to'ldirishni boshlang",
-      "site": "Izohlarda texnik vazifangizni batafsil tavsiflang va kerakli fayllarni ilova qiling",  
+      "site": "Izohlarda texnik vazifangizni batafsil tavsiflang va kerakli fayllarni ilova qiling",
       "template": "Shablonni yuklash",
       "comment_to_post": "Texnik topshiriq uchun izoh: ",
       "see_post_mobile_btn": "Postni ko'rish",
@@ -1754,7 +1865,9 @@
         "title": "Sizdan talab qilinadi:",
         "text": [
           { "text": "qulay tarifni tanlash va to'lovni amalga oshirish" },
-          { "text": "loyihangiz va reklama kampaniyasi bo'yicha istaklaringizni tasvirlash"}
+          {
+            "text": "loyihangiz va reklama kampaniyasi bo'yicha istaklaringizni tasvirlash"
+          }
         ]
       },
       "step_2": {
@@ -2117,6 +2230,18 @@
         "error": "Savatchani o'tkazishda xatolik yuz berdi"
       }
     },
+
+    "organization": {
+      "create": {
+        "success": "Tashkilot muvaffaqiyatli moderatsiyaga yuborildi",
+        "error": "Tashkilotni qo‘shishda xatolik yuz berdi"
+      },
+      "offer_sign": {
+        "success": "Ommaviy oferta muvaffaqiyatli imzolandi",
+        "need": "Tashkilotni tasdiqlash uchun ommaviy ofertani imzolashingiz kerak",
+        "error": "Ommaviy ofertani imzolashda xatolik yuz berdi"
+      }
+    },
     "add_platform": {
       "link": {
         "success": "Kanal identifikatsiyasi muvaffaqiyatli o'tdi",
@@ -2172,27 +2297,27 @@
         }
       }
     },
-"wallet": {
-    "profile": {
-      "error": "Ma'lumotlarni to'ldirishda xatolik yuz berdi"
+    "wallet": {
+      "profile": {
+        "error": "Ma'lumotlarni to'ldirishda xatolik yuz berdi"
+      },
+      "withdraw": {
+        "success": "Mablag'larni yechib olish muvaffaqiyatli amalga oshirildi",
+        "error": "Mablag'larni yechib olishda xatolik yuz berdi"
+      },
+      "topup": {
+        "success": "Balans to'ldirildi, summa",
+        "error": "Mablag'larni kiritishda xatolik yuz berdi"
+      }
     },
-    "withdraw": {
-      "success": "Mablag'larni yechib olish muvaffaqiyatli amalga oshirildi",
-      "error": "Mablag'larni yechib olishda xatolik yuz berdi"
+    "catalog": {
+      "add": {
+        "error": "Savatga qo'shishda xatolik yuz berdi"
+      },
+      "remove": {
+        "error": "Savatdan o'chirishda xatolik yuz berdi"
+      }
     },
-    "topup": {
-      "success": "Balans to'ldirildi, summa",
-      "error": "Mablag'larni kiritishda xatolik yuz berdi"
-    }
-  },
-  "catalog": {
-    "add": {
-      "error": "Savatga qo'shishda xatolik yuz berdi"
-    },
-    "remove": {
-      "error": "Savatdan o'chirishda xatolik yuz berdi"
-    }
-  },
     "cart": {
       "error": "Hisobingizda mablag' yetarli emas, balansni to'ldirish kerak"
     },
@@ -2233,7 +2358,7 @@
         "error": "Reklama kampaniyasini ishga tushirishda xatolik yuz berdi"
       }
     },
-"orders_advertiser": {
+    "orders_advertiser": {
       "manager_project": {
         "success": "Reklama kampaniyasi tasdiqlandi, biz menejerga xabar beramiz",
         "error": "Reklama kampaniyasini tasdiqlash vaqtida xatolik yuz berdi"
@@ -2316,7 +2441,9 @@
       "transactions": "Tranzaksiyalar",
       "moderation": "Moderatsiya",
       "complaints": "Shikoyatlar",
-      "reviews": "Sharhlar"
+      "reviews": "Sharhlar",
+      "invoice": "Hisob-fakturalar va shartnomalar",
+      "organization": "Organizatsiya"
     },
 
     "pages": {
@@ -2592,7 +2719,7 @@
         }
       }
     },
-    
+
     "reviews": {
       "types": {
         "wait": "Kutish holatida",
@@ -2613,6 +2740,60 @@
           "accept": "Qabul qilish",
           "reject": "Rad etish",
           "ok": "Yaxshi"
+        }
+      }
+    },
+
+    "documents": {
+      "title": "Hujjatlar",
+      "description": "Didox tizimida ko‘rish va imzolash uchun hujjatlar ro‘yxati.",
+
+      "tabs": {
+        "category": {
+          "title": "Yo‘nalish",
+          "type": {
+            "inbox": "Kirish",
+            "outbox": "Chiqish",
+            "draft": "Qoralama"
+          }
+        },
+
+        "type": {
+          "title": "Hujjat turi",
+          "type": {
+            "all": "Barchasi",
+            "custom_document": "Ixtiyoriy hujjat",
+            "invoice_pharm": "Hisob-faktura (FARM)",
+            "invoice": "Hisob-faktura",
+            "work_act": "Ishlab chiqarish ishlari"
+          }
+        },
+
+        "signature": {
+          "title": "Imzo holati",
+          "type": {
+            "all": "Barchasi",
+            "signed": "Imzolangan",
+            "signed_party": "Sizning imzongiz kutilmoqda",
+            "signed_self": "Hamkorning imzosi kutilmoqda"
+          }
+        }
+      },
+
+      "card": {
+        "contract": {
+          "label": "Shartnoma raqami va sanasi"
+        },
+        "updated": "Yangilangan sana",
+        "counterparty": {
+          "title": "Hamkor",
+          "inn": "STIR"
+        },
+        "price": {
+          "title": "Narx",
+          "delivery": "Yetkazib berish qiymati",
+          "vat": "QQS summasi",
+          "withVat": "QQS bilan umumiy qiymat"
         }
       }
     }
@@ -2668,25 +2849,95 @@
       "text": "Foydalanuvchi shikoyatlarini ko'rib chiqing, muammolarga javob bering va adolatli platformani ta'minlang."
     }
   },
-  "add_organization": {
-    "title": "Tashkilot qo'shish",
-    "types": {
-      "self_employed": "O'zini o'zi band qilgan",
-      "legal": "Yuridik shaxs va YTT"
+  "organization": {
+    "not_login": {
+      "title": "Siz tashkilotni qo‘shishingiz kerak",
+      "description": "Platformada ishlashni davom ettirish uchun tashkilotni qo‘shishingiz kerak. Bu hujjatlarni rasmiylashtirish, hisob raqamiga to‘lovlarni olish va reklama kampaniyalarida qatnashish uchun zarur.",
+      "buttons": {
+        "add": "Qo‘shish"
+      }
     },
-    "add_form": {
-      "title": "Tashkilot qo'shish uchun ariza",
+
+    "offer_sign": {
+      "title": "Tashkilotni tasdiqlash",
+      "description": "Xizmatdan foydalanishni boshlash uchun ommaviy <1>taklif shartlarini</1> ko‘rib chiqib, qabul qilishingiz kerak",
+      "requirements": [
+        { "item": "Foydalanish shartlarini ko‘rib chiqish" },
+        { "item": "Maxfiylik siyosatiga rozilik" },
+        { "item": "Tashkilot vakolatini tasdiqlash" }
+      ],
+      "warning": "Xizmat funksiyalariga faqat taklifni imzolagandan so‘ng ruxsat beriladi",
+      "authorization_required": {
+        "title": "Avtorizatsiya talab qilinadi",
+        "subtitle": "EDS kaliti bilan tizimga kirish kerak",
+        "description": "Taklifni imzolash uchun avval EDS orqali tizimda avtorizatsiyadan o‘tish zarur",
+        "section": "Bo‘limga o‘ting",
+        "organization_data": "Tashkilot ma’lumotlari"
+      },
+      "authorization_success": {
+        "title": "Avtorizatsiya muvaffaqiyatli yakunlandi",
+        "subtitle": "Raqamli imzo faol va foydalanishga tayyor",
+        "description": "Hujjatni raqamli imzo orqali imzolashingiz mumkin",
+        "status": "Holat:",
+        "active": "Tashkilot tasdiqlandi"
+      },
+      "legal_notice": "Huquqiy kuchga ega hujjat",
+      "buttons": {
+        "sign": "Imzolash"
+      }
+    },
+    "title": "Mening tashkilotim",
+
+    "logout": {
+      "title": "Profildan chiqish",
+      "description": "Siz haqiqatan ham profilingizdan chiqmoqchimisiz? Ma'lumotlarga qayta kirish uchun qayta kirishingiz kerak bo'ladi.",
+      "buttons": {
+        "cancel": "Bekor qilish",
+        "logout": "Chiqish"
+      }
+    },
+
+    "login": {
+      "didox": {
+        "title": "Tizimga kirish",
+        "description": "Avtorizatsiya turini tanlang va akkauntga kirish uchun ma’lumotlarni to‘ldiring",
+        "choose_type": "Qanday usulda tizimga kirmoqchisiz?",
+        "no_account": "Hisobingiz yo‘qmi?",
+        "register": "Ro‘yxatdan o‘tish",
+
+        "type": {
+          "password": "Parol orqali",
+          "certificate": "Kalit orqali"
+        },
+
+        "certificate": {
+          "until": "gacha",
+          "placeholder": "Kalitni tanlang",
+          "loading": "Kalitlar yuklanmoqda...",
+          "not_found": "Kalitlar topilmadi",
+          "error": "E-IMZO ilovasi yoqilmagan yoki qurilmangizda topilmadi"
+        },
+
+        "buttons": {
+          "login": "Akkauntga kirish"
+        }
+      }
+    },
+    "form": {
+      "title": {
+        "add": "Tashkilot qo'shish uchun ariza",
+        "data": "Tashkilot ma'lumotlari"
+      },
       "legal": {
         "title": "Tashkilot turi",
         "text": "Tashkilot turini tanlang - Yuridik shaxs, YTT yoki O'zini o'zi band qilgan.",
         "default_value": "Tanlanmagan"
       },
       "PNFL": {
-        "title": "JSHSHIR",
-        "default_value": "12345678901234",
-        "description": "Jismoniy shaxsning shaxsiy identifikatsiya raqami. To'g'ri JSHSHIRni kiriting, bu ma'lumotlaringizni tekshirish uchun kerak.",
+        "title": "STIR/ JShShIR",
+        "default_value": "STIR/JShShIR",
         "error": {
-          "required": "noto'g'ri format, belgilarning umumiy soni - 14 bo'lishi kerak"
+          "required": "Belgilar soni noto‘g‘ri: STIR 9 ta, JShShIR 14 ta bo‘lishi kerak"
         }
       },
       "INN": {
@@ -2695,6 +2946,13 @@
         "description": "Tashkilot yoki yakka tartibdagi tadbirkorning soliq to'lovchi identifikatsiya raqamini (STIR) kiriting. Ushbu raqam soliq hisoboti va tashkilot identifikatsiyasi uchun ishlatiladi.",
         "error": {
           "required": "noto'g'ri format, belgilarning umumiy soni - 9 bo'lishi kerak"
+        }
+      },
+      "password": {
+        "title": "Parol",
+        "default_value": "12345678",
+        "error": {
+          "required": "Parolni kiriting"
         }
       },
       "info_card": {
@@ -2724,21 +2982,47 @@
     },
 
     "public_offer_page": {
-    "title": "Tashkilot qo'shish uchun ariza"
+      "title": "Tashkilot qo'shish uchun ariza"
     },
 
-  "service_rules_page": {
-    "title": "Xizmatdan foydalanish qoidalari"
-  },
-
-
+    "service_rules_page": {
+      "title": "Xizmatdan foydalanish qoidalari"
+    },
 
     "pdf_previewer": {
-    "page": "Sahifa",
-    "load": {
-      "load": "Shartnoma yuklanmoqda",
-      "fail": "Shartnomani yuklab bo'lmadi"
+      "page": "Sahifa",
+      "load": {
+        "load": "Shartnoma yuklanmoqda",
+        "fail": "Shartnomani yuklab bo'lmadi"
+      }
     }
-  }
+  },
+
+  "documents_page": {
+    "title": "Hujjatlar",
+    "description": "Didox tizimida ko‘rish va imzolash uchun hujjatlar ro‘yxati.",
+
+    "tabs": {
+      "inbox": "Kiruvchi",
+      "outbox": "Chiquvchi",
+      "draft": "Qoralamalar"
+    },
+
+    "card": {
+      "contract": {
+        "label": "Shartnoma raqami va sanasi"
+      },
+      "updated": "Yangilangan sana",
+      "counterparty": {
+        "title": "Kontragent",
+        "inn": "STIR"
+      },
+      "price": {
+        "title": "Narxi",
+        "delivery": "Yetkazib berish narxi",
+        "vat": "QQS summasi",
+        "withVat": "Umumiy narx (QQS bilan)"
+      }
+    }
   }
 }

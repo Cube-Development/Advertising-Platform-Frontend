@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { BREAKPOINT } from "@shared/config";
+import { useState, useEffect, useMemo } from "react";
 
 export const useWindowWidth = (): number => {
   const [screen, setScreen] = useState<number>(window.innerWidth);

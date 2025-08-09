@@ -1,9 +1,16 @@
 import { CentrifugeProvider } from "@shared/api";
+import { CryptoWebSocketProvider } from "@shared/api/cryptoapi/provider";
 
 export const withWebsocket = (Component: React.FC) => {
   return () => (
     <CentrifugeProvider>
-      <Component />
+      <CryptoWebSocketProvider
+        autoConnect={true}
+        reconnectAttempts={1}
+        reconnectDelay={3000}
+      >
+        <Component />
+      </CryptoWebSocketProvider>
     </CentrifugeProvider>
   );
 };

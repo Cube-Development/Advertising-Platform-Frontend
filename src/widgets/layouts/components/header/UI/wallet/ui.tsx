@@ -58,7 +58,7 @@ export const Wallet: FC = () => {
             <Link to={ENUM_PATHS.WALLET_HISTORY} onClick={closeMenu}>
               <li>{t("wallet_menu.history")}</li>
             </Link>
-            <Link to={ENUM_PATHS.MAIN} onClick={closeMenu}>
+            <Link to={ENUM_PATHS.DOCUMENTS} onClick={closeMenu}>
               <li>{t("wallet_menu.invoice")}</li>
             </Link>
           </ul>

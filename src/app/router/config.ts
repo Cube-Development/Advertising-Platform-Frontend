@@ -1,10 +1,11 @@
 import { ENUM_ROLES, USER_ROLES } from "@entities/user";
 import { AddChannelPage } from "@pages/AddChannel";
-import { AddOrganizationPage } from "@pages/addOrganization";
 import { AdminChannelsPage } from "@pages/AdminChannels";
 import { AdminComplaintInfoPage } from "@pages/AdminComplaintInfo";
 import { AdminComplaintsPage } from "@pages/AdminComplaints";
+import { AdminDocumentsPage } from "@pages/AdminDocuments/UI";
 import { AdminHomePage } from "@pages/AdminHome";
+import { AdminOrganizationPage } from "@pages/AdminOrganization";
 import { AdminReviewsPage } from "@pages/AdminReviews";
 import { AdminTransactionsPage } from "@pages/AdminTransactions";
 import { AdminUserInfoPage } from "@pages/AdminUserInfo";
@@ -13,6 +14,7 @@ import { CartPage } from "@pages/Cart";
 import { CatalogPage } from "@pages/Catalog";
 import { ChannelPage } from "@pages/Channel";
 import { CreateOrderPage } from "@pages/CreateOrder";
+import { DocumentsPage } from "@pages/Documents";
 import { FAQPage } from "@pages/FAQ";
 import { LoginPage } from "@pages/Login";
 import { MainPage } from "@pages/Main";
@@ -176,6 +178,14 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
 
   // private common
   {
+    path: ENUM_PATHS.DOCUMENTS,
+    component: DocumentsPage,
+    roles: USER_ROLES,
+    auth: ENUM_AUTH_TYPES.PRIVATE,
+    authSidebar: true,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
+  },
+  {
     path: ENUM_PATHS.WALLET_TOP_UP,
     component: TopupPage,
     roles: USER_ROLES,
@@ -202,14 +212,6 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
   {
     path: ENUM_PATHS.PROFILE,
     component: ProfilePage,
-    roles: USER_ROLES,
-    auth: ENUM_AUTH_TYPES.PRIVATE,
-    authSidebar: true,
-    layout: ENUM_LAYOUT_TYPES.ROOT,
-  },
-  {
-    path: ENUM_PATHS.ADD_ORGANIZATION,
-    component: AddOrganizationPage,
     roles: USER_ROLES,
     auth: ENUM_AUTH_TYPES.PRIVATE,
     authSidebar: true,
@@ -276,6 +278,22 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
   {
     path: ENUM_PATHS.ADMIN_USER_INFO,
     component: AdminUserInfoPage,
+    roles: [ENUM_ROLES.MODERATOR],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
+    layout: ENUM_LAYOUT_TYPES.ADMIN,
+    adminSidebar: true,
+  },
+  {
+    path: ENUM_PATHS.ADMIN_ORGANIZATION,
+    component: AdminOrganizationPage,
+    roles: [ENUM_ROLES.MODERATOR],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
+    layout: ENUM_LAYOUT_TYPES.ADMIN,
+    adminSidebar: true,
+  },
+  {
+    path: ENUM_PATHS.ADMIN_DOCUMENTS,
+    component: AdminDocumentsPage,
     roles: [ENUM_ROLES.MODERATOR],
     auth: ENUM_AUTH_TYPES.PRIVATE,
     layout: ENUM_LAYOUT_TYPES.ADMIN,
