@@ -1,20 +1,22 @@
-import { IBloggerOfferCard, offerStatusFilter } from "@entities/offer";
+import {
+  ENUM_INVOICE_TYPE,
+  IBloggerOfferCard,
+  offerStatusFilter,
+  useCreateOrderInvoice,
+} from "@entities/offer";
+import { offerOpen } from "@entities/user";
 import { AddChannel, ZeroChannel } from "@features/channel";
+import { SignOrder } from "@features/documents";
 import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";
 import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
+import { getAnimationDelay } from "@shared/utils";
 import { motion } from "framer-motion";
-import { FC, useMemo } from "react";
+import { FC, useEffect, useState } from "react";
 import { OfferCard, OfferCardSkeleton } from "../card";
 import styles from "./styles.module.scss";
-import { getAnimationDelay } from "@shared/utils";
-import { SignDocument } from "@features/documents";
-import { OfferSign } from "@features/offer";
-import { useAppSelector } from "@shared/hooks";
-import {
-  ENUM_ORGANIZATION_STATUS,
-  useGetOrganizationQuery,
-} from "@entities/organization";
+import { LoginModal } from "@features/organization";
 
 interface MyOffersProps {
   offers: IBloggerOfferCard[];
@@ -33,11 +35,34 @@ export const MyOffers: FC<MyOffersProps> = ({
   statusFilter,
   currentPage,
 }) => {
-  const { isAuthEcp } = useAppSelector((state) => state.user);
-  const { data: organization } = useGetOrganizationQuery();
+  const { isAuthEcp, isOfferSign } = useAppSelector((state) => state.user);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(!isAuthEcp);
+  const dispatch = useAppDispatch();
+
+  const handleSign = async () => {
+    console.log("orderId");
+    if (!isAuthEcp) {
+      console.log("isAuthEcp", isAuthEcp, isModalOpen);
+      setIsModalOpen(true);
+      return;
+    } else if (!isOfferSign) {
+      console.log("isOfferSign", isOfferSign);
+      dispatch(offerOpen(true));
+      return;
+    }
+  };
+
+  useEffect(() => {
+    setIsModalOpen(!isAuthEcp);
+  }, [isAuthEcp]);
 
   return (
     <div className={styles.wrapper}>
+      <LoginModal
+        open={isModalOpen}
+        setOpen={setIsModalOpen}
+        haveTrigger={false}
+      />
       {!isLoading && offers?.length === 0 ? (
         <ZeroChannel
           AddChannelBtn={AddChannel}
@@ -65,9 +90,10 @@ export const MyOffers: FC<MyOffersProps> = ({
                   statusFilter={statusFilter}
                   card={card}
                   sign={
-                    <OfferSign
-                      documentId={card?.id || ""}
-                      isAuthEcp={isAuthEcp}
+                    <SignOrder
+                      docType={ENUM_INVOICE_TYPE.ACT}
+                      orderId={card.id}
+                      onClick={handleSign}
                     />
                   }
                 />

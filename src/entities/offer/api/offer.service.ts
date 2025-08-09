@@ -1,4 +1,9 @@
-import { IBloggerOffers, offerStatusFilter } from "@entities/offer";
+import {
+  IBloggerOffers,
+  IGetInvoiceRequest,
+  IOrderAcceptFinallyRequest,
+  offerStatusFilter,
+} from "@entities/offer";
 import { dateSortingTypes } from "@entities/platform";
 import { IOrderFeature } from "@entities/project";
 import {
@@ -118,6 +123,25 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
       },
       providesTags: [BLOGGER_OFFERS],
     }),
+    getInvoiceInfo: build.mutation<object, IGetInvoiceRequest>({
+      query: ({ order_id, doc_type }) => ({
+        url: `/order/invoice-info/${order_id}`,
+        method: "GET",
+        params: { doc_type },
+      }),
+    }),
+
+    orderAcceptFinally: build.mutation<
+      { success: boolean },
+      IOrderAcceptFinallyRequest
+    >({
+      query: (body) => ({
+        url: `/order/blogger/accept-finally`,
+        method: "POST",
+        body: body,
+      }),
+      invalidatesTags: [BLOGGER_OFFERS],
+    }),
   }),
 });
 
@@ -126,4 +150,6 @@ export const {
   useCancelOfferMutation,
   usePublishPostBloggerMutation,
   useGetBloggerOrdersQuery,
+  useGetInvoiceInfoMutation,
+  useOrderAcceptFinallyMutation,
 } = bloggerOffersAPI;

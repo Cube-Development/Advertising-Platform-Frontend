@@ -2119,7 +2119,9 @@
     "accept": "Accept",
     "accept_title": "Choose placement date",
     "accept_date": "Accept order",
-    "reason": "Reason"
+    "reason": "Reason",
+    "sign": "Sign",
+    "signed": "Signed"
   },
 
   "platform_btn": {
@@ -2347,6 +2349,16 @@
       "send_link": {
         "success": "Link successfully sent for verification",
         "error": "Error sending link for verification"
+      }
+    },
+    "documents": {
+      "sign": {
+        "success": "Document signed successfully",
+        "error": "Error while signing the document"
+      },
+      "create": {
+        "success": "Document created successfully",
+        "error": "An error occurred while creating the document"
       }
     },
     "orders_manager": {
