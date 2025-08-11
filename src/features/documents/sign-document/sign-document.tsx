@@ -8,12 +8,14 @@ interface ISignDocumentProps
   documentId: string;
   owner: 0 | 1;
   isLoading?: boolean;
+  onSigned?: () => void | Promise<void>;
 }
 
 export const SignDocument: FC<ISignDocumentProps> = ({
   documentId,
   owner,
   isLoading,
+  onSigned,
   ...props
 }) => {
   const {
@@ -24,6 +26,7 @@ export const SignDocument: FC<ISignDocumentProps> = ({
   const { onClick, disabled, ...rest } = props;
   const handleSign = async () => {
     await signExist(documentId, owner);
+    onSigned && (await onSigned());
   };
 
   return (

@@ -58,7 +58,7 @@ export const Topup: FC = () => {
     const newFilter = { type: item?.type, id: item?.id };
     setValue("profileFilter", newFilter);
   };
-  console.log("isOfferSign", isOfferSign);
+
   const onSubmit: SubmitHandler<IWalletOperations> = async (data) => {
     if (isOfferSign) {
       await deposit({ amount: formatWithOutSpaces(data?.amount?.toString()) });

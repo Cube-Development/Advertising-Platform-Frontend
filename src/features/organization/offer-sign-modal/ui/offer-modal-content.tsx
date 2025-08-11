@@ -107,7 +107,7 @@ export const OfferModalContent: FC<IOfferModalContentProps> = ({
         <SignDocument
           documentId={offer_id}
           owner={0}
-          onClick={handleSign}
+          onSigned={handleSign}
           isLoading={isLoading}
         />
       ) : isAuthEcp && isOfferSign ? (
