@@ -21,6 +21,7 @@ import {
 import { ENUM_PATHS } from "@shared/routing";
 import { buildPathWithQuery, queryParamKeys } from "@shared/utils";
 import { IMenuItem } from "./types";
+import { FileText } from "lucide-react";
 
 export const SERVICE_MENU_ADVERTISER: IMenuItem[] = [
   {
@@ -149,8 +150,15 @@ export const MENU_COMMON: IMenuItem[] = [
         path: ENUM_PATHS.WALLET_HISTORY,
         type: walletTypesFilter.transactions,
       },
-      { title: "burger_menu.invoice", path: ENUM_PATHS.MAIN },
+      // { title: "burger_menu.invoice", path: ENUM_PATHS.MAIN },
     ],
+  },
+  {
+    item: {
+      title: "burger_menu.invoice",
+      img: FileText,
+      path: ENUM_PATHS.DOCUMENTS,
+    },
   },
 ];
 

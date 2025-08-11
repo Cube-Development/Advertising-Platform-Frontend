@@ -1,11 +1,15 @@
+import { SidebarInset, SidebarProvider } from "@shared/ui";
 import type { PropsWithChildren } from "react";
-import { SidebarAdmin } from "../components";
+import { HeaderAdmin, SidebarAdmin } from "../components";
 
 export const SideBarAdminLayout = ({ children }: PropsWithChildren) => {
   return (
-    <>
+    <SidebarProvider>
       <SidebarAdmin />
-      <div>{children}</div>
-    </>
+      <SidebarInset>
+        <HeaderAdmin />
+        <div className="user_main">{children}</div>
+      </SidebarInset>
+    </SidebarProvider>
   );
 };

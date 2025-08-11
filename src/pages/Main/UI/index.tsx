@@ -71,7 +71,7 @@ export const MainPage = () => {
         <HowItWorks page={page} />
         <WhyChooseUs page={page} />
         <Turnkey page={page} />
-        <Customers page={page} />
+        {/* <Customers page={page} /> */}
       </Suspense>
     </>
   );

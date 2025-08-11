@@ -37,6 +37,7 @@ export enum legalData {
   card_number = "card_number",
   card_date = "card_date",
   amount = "amount",
+  password = "password",
 }
 
 export function getInputLegalType(inputType: string): HTMLInputTypeAttribute {

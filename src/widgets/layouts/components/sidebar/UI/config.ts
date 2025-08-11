@@ -13,6 +13,7 @@ import {
 } from "@shared/assets";
 import { ENUM_PATHS } from "@shared/routing";
 import { buildPathWithQuery, queryParamKeys } from "@shared/utils";
+import { FileText } from "lucide-react";
 
 export const SIDEBAR_ADVERTISER_MENU: IMenuItem[] = [
   {
@@ -93,8 +94,15 @@ export const SIDEBAR_COMMON_MENU: IMenuItem[] = [
       { title: "burger_menu.top_up", path: ENUM_PATHS.WALLET_TOP_UP },
       { title: "burger_menu.withdraw", path: ENUM_PATHS.WALLET_WITHDRAW },
       { title: "burger_menu.history", path: ENUM_PATHS.WALLET_HISTORY },
-      { title: "burger_menu.invoice", path: ENUM_PATHS.MAIN },
+      // { title: "burger_menu.invoice", path: ENUM_PATHS.MAIN },
     ],
+  },
+  {
+    item: {
+      title: "burger_menu.invoice",
+      path: ENUM_PATHS.DOCUMENTS,
+      img: FileText,
+    },
   },
   { item: { title: "burger_menu.base", path: ENUM_PATHS.FAQ, img: BookIcon } },
 ];

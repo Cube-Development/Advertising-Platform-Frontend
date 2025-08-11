@@ -6,6 +6,7 @@
   "tailwind": {
     "config": "tailwind.config.js",
     "css": "src/shared/styles/global.scss",
+    "scss": "src/shared/styles/global.scss",
     "baseColor": "slate",
     "cssVariables": true,
     "prefix": ""

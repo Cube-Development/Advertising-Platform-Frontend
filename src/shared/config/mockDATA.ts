@@ -178,13 +178,13 @@ export const MOCK_ADD_LEGAL = {
 
 export const MOCK_PROFILE = {
   email: "sample@gmail.com",
-  phone: "+998901234567",
-  name: "Иван Петров",
+  phone: "_______________",
+  name: "_______________",
   registrationDate: "22.02.2024",
   organization: {
     type: "SelfEmployed",
     pinfl: "12345678901234",
-    status: 1,
+    status: "active",
   },
 };
 
@@ -447,3 +447,55 @@ export const MOCK_CREATE_ORDERS = [
     post_type: 7,
   },
 ];
+
+export const ACT_DATA = {
+  isValid: true,
+  fromweb: true,
+  ActDoc: {
+    ActNo: "1",
+    ActDate: "2025-08-08",
+    ActText:
+      'Мы, нижеподписавшиеся, "KARIMOV DAMIR FARIDOVICH" именуемое в дальнейшем Исполнитель, с одной стороны и "ABDURAIMOV SHOHZOD OZODBOY O‘G‘LI" именуемое в дальнейшем Заказчик, с другой стороны составили настоящий Акт о том, что работы выполнены в соответствии с условиями Заказчика в полном объеме.',
+  },
+  ContractDoc: {
+    ContractNo: "1",
+    ContractDate: "2025-08-08",
+  },
+  SellerTin: "32507976860016",
+  ProductList: {
+    Tin: "32507976860016",
+    HasExcise: false,
+    HasVat: false,
+    Products: [
+      {
+        OrdNo: 1,
+        CatalogCode: "10305001001000000",
+        CatalogName:
+          "Услуги по проектированию программного обеспечения для информационных и управленческих систем и любых платформ, реализация их отдельных этапов, разработке, внедрению и/или реализации (продаже)",
+        Name: "eckeif",
+        MeasureId: null,
+        PackageCode: "1540947",
+        PackageName: "час",
+        Count: "1",
+        Summa: "1000",
+        TotalSumWithoutVat: "1000.00",
+        VatRate: 0,
+        VatSum: 0,
+        TotalSum: "1000.00",
+        WithoutVat: true,
+        LgotaName: "",
+        LgotaType: "",
+      },
+    ],
+  },
+  SellerName: "KARIMOV DAMIR FARIDOVICH",
+  SellerBranchCode: "",
+  SellerBranchName: "",
+  BuyerTin: "31103976600037",
+  BuyerName: "ABDURAIMOV SHOHZOD OZODBOY O‘G‘LI",
+  BuyerBranchCode: "",
+  BuyerBranchName: "",
+  Expansion: {
+    OrderNumber: "",
+  },
+};

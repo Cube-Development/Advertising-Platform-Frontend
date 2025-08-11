@@ -1,4 +1,10 @@
-import { ENUM_ROLES } from "@entities/user";
+import {
+  ENUM_ORGANIZATION_STATUS,
+  useGetAccountEDOQuery,
+  useGetOrganizationQuery,
+  useGetProfileEDOQuery,
+} from "@entities/organization";
+import { ENUM_ROLES, offerSign, USER_ROLES } from "@entities/user";
 import {
   useGetViewAdvertiserProjectQuery,
   useGetViewBloggerChannelQuery,
@@ -11,6 +17,7 @@ import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import type { PropsWithChildren } from "react";
 import { useEffect } from "react";
 import { Footer, Header } from "../components";
+import { OfferSignModal, useRenderOfferModal } from "@features/organization";
 
 // const Header = lazy(() =>
 //   import("@pages/layouts/components").then((module) => ({
@@ -19,31 +26,46 @@ import { Footer, Header } from "../components";
 // );
 
 export const MainLayout = ({ children }: PropsWithChildren) => {
-  const { isAuth, role } = useAppSelector((state) => state.user);
+  const { isAuth, role, isAuthEcp } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const { data: balance, isLoading } = useGetBalanceQuery(undefined, {
     skip: !isAuth,
   });
 
-  const {} = useGetViewAdvertiserProjectQuery(undefined, {
+  const { open, setOpen } = useRenderOfferModal();
+
+  useGetViewAdvertiserProjectQuery(undefined, {
     skip: !isAuth || role !== ENUM_ROLES.ADVERTISER,
   });
 
-  const {} = useGetViewBloggerOrderQuery(undefined, {
+  useGetViewBloggerOrderQuery(undefined, {
     skip: !isAuth || role !== ENUM_ROLES.BLOGGER,
   });
 
-  const {} = useGetViewBloggerChannelQuery(undefined, {
+  useGetViewBloggerChannelQuery(undefined, {
     skip: !isAuth || role !== ENUM_ROLES.BLOGGER,
   });
 
-  const {} = useGetViewTransactionsQuery(undefined, {
+  useGetViewTransactionsQuery(undefined, {
     skip: !isAuth || role === ENUM_ROLES.MANAGER,
   });
 
-  const {} = useGetViewManagerProjectQuery(undefined, {
+  useGetViewManagerProjectQuery(undefined, {
     skip: !isAuth || role !== ENUM_ROLES.MANAGER,
   });
+
+  useGetAccountEDOQuery(undefined, {
+    skip: !isAuth || !isAuthEcp || !USER_ROLES.includes(role),
+  });
+
+  useGetProfileEDOQuery(undefined, {
+    skip: !isAuth || !isAuthEcp || !USER_ROLES.includes(role),
+  });
+
+  const { data: organization, isLoading: isLoadingOrganization } =
+    useGetOrganizationQuery(undefined, {
+      skip: !isAuth || !USER_ROLES.includes(role),
+    });
 
   useEffect(() => {
     if (balance) {
@@ -53,30 +75,27 @@ export const MainLayout = ({ children }: PropsWithChildren) => {
         profit_wallet: 0,
         spending_wallet: 0,
       };
-      if (!!balance?.balance) {
-        wallet = {
-          balance: balance.balance,
-          deposit_wallet: balance.balance * 0.5,
-          profit_wallet: balance.balance * 0.3,
-          spending_wallet: balance.balance * 0.2,
-        };
-      } else {
-        const deposit = balance?.deposit?.balance || 0;
-        const profit = balance?.profit?.balance || 0;
-        const spending = balance?.spending?.balance || 0;
-        const total = deposit + profit;
 
-        wallet = {
-          balance: total,
-          deposit_wallet: deposit,
-          profit_wallet: profit,
-          spending_wallet: spending,
-        };
-      }
-      console.log("balance", wallet);
+      const deposit = balance?.deposit?.balance || 0;
+      const profit = balance?.profit?.balance || 0;
+      const spending = balance?.spending?.balance || 0;
+      const total = deposit + profit;
+
+      wallet = {
+        balance: total,
+        deposit_wallet: deposit,
+        profit_wallet: profit,
+        spending_wallet: spending,
+      };
       dispatch(walletSlice.actions.setBalance(wallet));
     }
   }, [balance, isLoading]);
+
+  useEffect(() => {
+    if (organization?.status === ENUM_ORGANIZATION_STATUS.ACTIVE) {
+      dispatch(offerSign());
+    }
+  }, [organization, isLoadingOrganization]);
 
   return (
     <>
@@ -85,7 +104,10 @@ export const MainLayout = ({ children }: PropsWithChildren) => {
           <Header />
         </Suspense> */}
         <Header />
-        <main className="main">{children}</main>
+        <main className="user_main">
+          <OfferSignModal open={open} setOpen={setOpen} haveTrigger={false} />
+          {children}
+        </main>
         <Footer />
       </section>
     </>

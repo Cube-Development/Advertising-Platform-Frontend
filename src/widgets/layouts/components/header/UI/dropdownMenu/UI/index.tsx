@@ -25,6 +25,7 @@ import {
 import { MenuItem } from "./menuItem";
 import styles from "./styles.module.scss";
 import { WalletsCard } from "./wallets-card";
+import logo from "/images/logo.png";
 
 interface DropdownMenuProps {}
 
@@ -80,7 +81,11 @@ export const DropdownMenu: FC<DropdownMenuProps> = () => {
       <SheetContent side={"left"} className={styles.menu} useClose={false}>
         <div className={`${styles.menu__content} ${isSafari && styles.safari}`}>
           <SheetTitle className={`${styles.menu__top}`}>
-            <p className={styles.logo}>Blogix</p>
+            <img
+              src={logo}
+              alt="Blogix logo"
+              className="h-[25px] sm:h-[35px] md:h-[50px] cursor-pointer"
+            />
             <SheetClose className="absolute transition-opacity -translate-y-1/2 right-4 top-1/2 opacity-70 hover:opacity-100 focus:outline-none focus:ring-0 focus:ring-offset-0 disabled:pointer-events-none">
               <X size={32} color="var(--Personal-colors-main" />
             </SheetClose>

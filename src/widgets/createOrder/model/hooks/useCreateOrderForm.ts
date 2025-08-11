@@ -1,4 +1,5 @@
 import { ICreatePostForm } from "@entities/project";
+import { ENUM_WALLETS_TYPE } from "@entities/wallet";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 
@@ -21,6 +22,7 @@ export const useCreateOrderForm = ({
         isMultiPost: false,
         isDownloadPosts: false,
         name: name || "",
+        wallet_type: ENUM_WALLETS_TYPE.DEPOSIT,
       },
     });
   const formState = watch();

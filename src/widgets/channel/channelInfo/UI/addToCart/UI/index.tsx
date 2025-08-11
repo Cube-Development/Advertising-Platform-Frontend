@@ -30,7 +30,7 @@ export const AddToCart: FC<AddToCartProps> = ({
       <div className={styles.format}>
         <p>{t("channel.add_to_cart.format")}</p>
         <div
-          className={`${styles.formatList__wrapper} !p-2 !border-[--Personal-colors-main] !rounded-[10px] !border-[1.5px]`}
+        // className={`${styles.formatList__wrapper} !p-2 !border-[--Personal-colors-main] !rounded-[10px] !border-[1.5px]`}
         >
           <FormatList
             selectedFormat={selectedFormat}

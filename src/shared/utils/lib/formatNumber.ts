@@ -35,3 +35,11 @@ export function formatWithOutSpaces(value: string): number {
 
   return Number(cleaned || 0);
 }
+
+export const formatMoney = (amount: number) => {
+  return new Intl.NumberFormat("ru-RU", {
+    style: "decimal",
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2,
+  }).format(amount);
+};

@@ -162,6 +162,7 @@
     "offers": "Мои заказы",
 
     "wallet": "Кошелёк",
+    "documents": "Документы",
 
     "top_up": "Пополнение кошелька",
     "withdraw": "Вывести деньги",
@@ -312,7 +313,7 @@
         "type": "base",
         "name": "Начальный",
         "views": "от 60 000 просмотров",
-        "price": "1 250 000 сум",
+        "price": "2 550 000 сум",
         "info": "Базовый вариант для оценки работы сервиса или небольших рекламных кампаний",
         "options": [
           { "option": "Ручной подбор площадок", "available": true },
@@ -336,7 +337,7 @@
         "type": "standard",
         "name": "Стандартный",
         "views": "от 300 000 просмотров",
-        "price": "5 500 000 сум",
+        "price": "7 500 000 сум",
         "info": "Оптимальный тариф для продвижения малого бизнеса",
         "options": [
           { "option": "Ручной подбор площадок", "available": true },
@@ -916,7 +917,8 @@
         "text": "Напоминаем, что слишком частая отмена заказов может понизить ваш рейтинг"
       },
       "complete": {
-        "title": "Заказ выполнен"
+        "title": "Заказ выполнен",
+        "signed": "Документы подписаны"
       },
       "moderation": {
         "text": "Заказ не соответствует требованиям площадки Blogix. Ожидайте решение администратора"
@@ -1042,13 +1044,14 @@
       }
     }
   },
-  
+
   "profile": {
     "title": "Настройка профиля",
     "navigation": {
       "user_data": "Данные пользователя",
       "change_password": "Изменить пароль",
-      "change_notifications": "Настройки уведомлений"
+      "change_notifications": "Настройки уведомлений",
+      "organization_data": "Данные организации"
     },
 
     "back": "Назад",
@@ -1113,8 +1116,7 @@
         },
         "edit": "Редактировать"
       }
-},
-
+    },
 
     "email_block": {
       "title": "Изменение E-mail",
@@ -1150,7 +1152,6 @@
       "title": "Изменение пароля",
       "current_password": {
         "title": "Текущий пароль",
-        "default_value": "Sample@gmail.com",
         "description": "Введите текущий пароль для подтверждения изменений",
         "error": {
           "required": "поле не может быть пустым"
@@ -1158,7 +1159,6 @@
       },
       "new_password": {
         "title": "Новый пароль",
-        "default_value": "Sample@gmail.com",
         "description": "Введите новый пароль, который будет использоваться для входа в аккаунт. Пароль должен быть надежным и содержать не менее 8 символов, включая буквы и цифры.",
         "error": {
           "required": "поле не может быть пустым"
@@ -1166,7 +1166,6 @@
       },
       "accept_password": {
         "title": "Подтверждение нового пароля",
-        "default_value": "Sample@gmail.com",
         "description": "Введите новый пароль еще раз для подтверждения. Убедитесь, что оба введенных пароля совпадают.",
         "error": {
           "required": "поле не может быть пустым"
@@ -1201,33 +1200,115 @@
     }
   },
 
-    "add_organization": {
-    "title": "Добавление организации",
-    "types": {
-      "self_employed": "Самозанятый",
-      "legal": "Юр. лицо и ИП"
+  "organization": {
+    "not_login": {
+      "title": "Вам необходимо добавить организацию",
+      "description": "Чтобы продолжить работу с платформой, вам необходимо добавить организацию. Это нужно для оформления документов, получения выплат на расчётный счёт и участия в рекламных кампаниях.",
+      "buttons": {
+        "add": "Добавить"
+      }
     },
-    "add_form": {
-      "title": "Заявка на добавление организации",
+
+    "offer_sign": {
+      "title": "Подтверждение организации",
+      "description": "Для начала работы с сервисом необходимо ознакомиться и принять условия <1>публичной оферты</1>",
+      "requirements": [
+        { "item": "Ознакомление с условиями использования" },
+        { "item": "Согласие с политикой конфиденциальности" },
+        { "item": "Подтверждение правомочности организации" }
+      ],
+      "warning": "Доступ к функциям сервиса будет предоставлен только после подписания оферты",
+      "authorization_required": {
+        "title": "Требуется авторизация",
+        "subtitle": "Необходимо войти с ЭЦП ключом",
+        "description": "Для подписания оферты требуется предварительная авторизация в системе через ЭЦП",
+        "section": "Перейдите в раздел",
+        "organization_data": "Данные организации"
+      },
+
+      "authorization_success": {
+        "title": "Авторизация успешна",
+        "subtitle": "ЭЦП активна и готова к использованию",
+        "description": "Вы можете подписать документ используя вашу электронную цифровую подпись",
+        "status": "Статус:",
+        "active": "Организация подтверждена"
+      },
+
+      "legal_notice": "Юридически обязывающий документ",
+      "buttons": {
+        "sign": "Подписать"
+      }
+    },
+
+    "title": "Моя организация",
+
+    "logout": {
+      "title": "Выход из аккаунта",
+      "description": "Вы уверены, что хотите выйти из своего аккаунта? Вам потребуется войти заново, чтобы получить доступ к своим данным.",
+      "buttons": {
+        "cancel": "Отменить",
+        "logout": "Выход"
+      }
+    },
+
+    "login": {
+      "didox": {
+        "title": "Вход в систему",
+        "description": "Выберите тип авторизации и заполните данные для входа в аккаунт",
+        "choose_type": "Как вы хотите войти в систему?",
+        "no_account": "Нет аккаунта?",
+        "register": "Зарегистрироваться",
+
+        "type": {
+          "password": "По паролю",
+          "certificate": "По ключу"
+        },
+
+        "certificate": {
+          "until": "до",
+          "placeholder": "Выберите ключ",
+          "loading": "Загрузка ключей...",
+          "not_found": "Ключи не найдены",
+          "error": "Приложение E-IMZO не включено или не найдено на вашем устройстве"
+        },
+
+        "buttons": {
+          "login": "Войти в аккаунт"
+        }
+      }
+    },
+
+    "form": {
+      "title": {
+        "add": "Заявка на добавление организации",
+        "data": "Данные организации"
+      },
+
       "legal": {
         "title": "Тип организации",
         "text": "Выберите тип организации - Юридическое лицо, ИП или Самозанятый.",
         "default_value": "Не выбрано"
       },
       "PNFL": {
-        "title": "ПИНФЛ",
-        "default_value": "12345678901234",
-        "description": "Персональный идентификационный номер физического лица. Введите корректный ПИНФЛ, так как он необходим для проверки ваших данных.",
+        "title": "ИНН/ПИНФЛ",
+        "default_value": "ИНН/ПИНФЛ",
         "error": {
-          "required": "неверный формат, количество символов - 14"
+          "required": "неверное количество символов, для ИНН - 9, для ПИНФЛ - 14"
         }
       },
       "INN": {
         "title": "ИНН",
         "default_value": "123456789",
-        "description": "Укажите идентификационный номер налогоплательщика (ИНН) вашей компании или индивидуального предпринимателя. Этот номер используется для налогового учета и идентификации организации.",
         "error": {
           "required": "неверный формат, количество символов - 9"
+        }
+      },
+
+      "password": {
+        "title": "Пароль",
+        "default_value": "12345678",
+        "error": {
+          "required": "введите пароль"
         }
       },
 
@@ -1244,19 +1325,17 @@
       "didox": {
         "text": "После нажатия кнопки «Подтвердить» вы будете перенаправлены на сайт Didox для подписания публичной оферты. После успешного подтверждения ваша организация будет добавлена и сохранена на платформе."
       }
-
-
     },
 
     "not_found": {
-    "types": {
-      "self_employed": "ПИНФЛ",
-      "legal": "ИНН"
-    },
+      "types": {
+        "self_employed": "ПИНФЛ",
+        "legal": "ИНН"
+      },
       "title": "не найден в системе Didox",
       "text": "Для продолжения работы необходимо зарегистрировать самозанятого в Didox. Нажмите «Зарегистрировать» и пройдите процесс регистрации. Если у вас остались вопросы, рекомендуем ознакомиться с подробным гайдом: ",
       "link": "Как зарегистрироваться в Didox, если у меня Самозанятый?",
-      
+
       "buttons": {
         "register": "Зарегистрировать",
         "cancel": "Отменить"
@@ -1398,6 +1477,14 @@
         "error": {
           "required": "несуществующая почта"
         }
+      },
+      "password": {
+        "title": "Пароль",
+        "default_value": "12345678",
+        "description": "Введите пароль, который будет использоваться для доступа к вашей учетной записи.",
+        "error": {
+          "required": "введите пароль"
+        }
       }
     },
 
@@ -1409,7 +1496,6 @@
       "text2": "ознакомлен и принимаю их."
     }
   },
-
 
   "add_profile": {
     "add_profile": "Добавление данных",
@@ -1557,6 +1643,14 @@
         "error": {
           "required": "несуществующая почта"
         }
+      },
+      "password": {
+        "title": "Пароль",
+        "default_value": "12345678",
+        "description": "Введите пароль, который будет использоваться для доступа к вашей учетной записи.",
+        "error": {
+          "required": "введите пароль"
+        }
       }
     },
 
@@ -1684,7 +1778,11 @@
 
       "success": {
         "title": "Ваш заявка успешна обработана!",
-        "text": "Пожалуйста, внимательно указывайте назначение платежа и реквизиты в точном соответствии с данными в счёте на оплату. Это необходимо для корректного и быстрого зачисления средств. После поступления средств на указанный расчетный счет, ваш баланс будет пополнен."
+        "text": "Пожалуйста, внимательно указывайте назначение платежа и реквизиты в точном соответствии с данными в счёте на оплату. Это необходимо для корректного и быстрого зачисления средств. После поступления средств на указанный расчетный счет, ваш баланс будет пополнен.",
+
+        "buttons": {
+          "download": "Скачать"
+        }
       }
     },
     "withdraw": {
@@ -1726,11 +1824,83 @@
       "withdraw_all": "Вывести все средства"
     },
     "guide": {
-      "title": "Поэтапный гайд",
-      "entity": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc.",
-      "individual": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc.",
-      "selfEmployedTransits": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc.",
-      "selfEmployedAccounts": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc."
+      "title": "Пошаговый гайд",
+      "topup": {
+        "title": "Как пополнить баланс организации",
+        "description": "Следуйте этим простым шагам для пополнения баланса вашей организации через систему Blogix",
+        "steps": [
+          {
+            "title": "Авторизация в системе didox.uz",
+            "description": "Войдите в систему с помощью ЭЦП. После успешной авторизации все реквизиты вашей организации заполняются автоматически."
+          },
+          {
+            "title": "Введите сумму пополнения",
+            "description": "Укажите сумму, на которую хотите пополнить баланс вашего кошелька."
+          },
+          {
+            "title": "Создание инвойса",
+            "description": "После ввода суммы и отправки заявки автоматически формируется инвойс."
+          },
+          {
+            "title": "Оплата инвойса через ваш банк",
+            "description": "Перечислите указанную сумму по реквизитам, указанным в инвойсе, со счета вашей организации на счет платформы Blogix."
+          },
+          {
+            "title": "Зачисление средств",
+            "description": "Как только банк подтвердит перевод по инвойсу, средства будут автоматически зачислены на ваш кошелек."
+          },
+          {
+            "title": "Уведомление о пополнении",
+            "description": "Вы получите уведомление по почте и внутри платформы о том, что баланс успешно пополнен."
+          }
+        ],
+        "note": {
+          "title": "Важная информация",
+          "description": "Обработка платежа может занять от нескольких минут до нескольких часов в зависимости от вашего банка. Если средства не поступили в течение 24 часов, обратитесь в службу поддержки."
+        }
+      },
+      "withdraw": {
+        "title": "Как вывести деньги из платформы",
+        "description": "Следуйте этим простым шагам для вывода денег из платформы через систему Blogix",
+        "steps": [
+          {
+            "title": "Выбор кошелька для вывода",
+            "description": "Укажите, с какого кошелька хотите вывести средства:",
+            "substeps": [
+              {
+                "title": "Депозитный кошелек",
+                "description": "используется для возврата ранее внесенных средств.",
+                "info": "Возврат оформляется как официальное письмо через Didox"
+              },
+              {
+                "title": "Прибыльный кошелек",
+                "description": "используется для вывода заработанных средств.",
+                "info": "Оформление документов не требуется, средства выводятся автоматически."
+              }
+            ]
+          },
+          {
+            "title": "Авторизация в системе didox.uz",
+            "description": "Войдите в систему с помощью ЭЦП. После успешной авторизации все реквизиты вашей организации заполняются автоматически."
+          },
+          {
+            "title": "Укажите сумму вывода",
+            "description": "Введите сумму, которую хотите вывести на расчетный счет вашей организации."
+          },
+          {
+            "title": "Перевод средств",
+            "description": "Средства перечисляются на расчетный счет вашей организации."
+          },
+          {
+            "title": "Уведомление о выводе",
+            "description": "Вы получите уведомление на почту и внутри платформы о том, что средства были успешно выведены."
+          }
+        ],
+        "note": {
+          "title": "Важная информация",
+          "description": "Обработка платежа может занять от нескольких минут до нескольких часов в зависимости от вашего банка. Если средства не поступили в течение 24 часов, обратитесь в службу поддержки."
+        }
+      }
     },
     "pay": {
       "title": "К списанию",
@@ -2263,7 +2433,9 @@
     "accept": "Принять",
     "accept_title": "Выберите дату размещения",
     "accept_date": "Принять заказ",
-    "reason": "Причина"
+    "reason": "Причина",
+    "sign": "Подписать",
+    "signed": "Подписан"
   },
 
   "platform_btn": {
@@ -2402,10 +2574,15 @@
         "alert": "Заполните все поля..."
       }
     },
-    "add_organization": {
-      "accept": {
+    "organization": {
+      "create": {
         "success": "Организация успешно отправлена на модерацию",
         "error": "При добавлении организации произошла ошибка"
+      },
+      "offer_sign": {
+        "success": "Публичная оферта успешно подписана",
+        "need": "Необходимо подтвердить организацию подписав публичную оферту",
+        "error": "При подписании публичной оферты произошла ошибка"
       }
     },
 
@@ -2498,6 +2675,17 @@
         "error": "При отправке ссылки на проверку произошла ошибка"
       }
     },
+    "documents": {
+      "sign": {
+        "success": "Документ успешно подписан",
+        "error": "Ошибка при подписании документа"
+      },
+      "create": {
+        "success": "Документ успешно создан",
+        "error": "При создании документа произошла ошибка"
+      }
+    },
+
     "orders_manager": {
       "edit_project": {
         "success": "Приступаем к редактированию рекламной кампании"
@@ -2590,7 +2778,9 @@
       "transactions": "Tранзакции",
       "moderation": "Модерация",
       "complaints": "Жалобы",
-      "reviews": "Отзывы"
+      "reviews": "Отзывы",
+      "invoice": "Счета и договора",
+      "organization": "Организация"
     },
 
     "pages": {
@@ -2668,7 +2858,6 @@
           "banned": "Заблокированный",
           "deleted": "Удаленный"
         },
-
 
         "ban": {
           "title": "Блокировка канала",
@@ -2915,6 +3104,60 @@
           "ok": "Хорошо"
         }
       }
+    },
+
+    "documents": {
+      "title": "Документы",
+      "description": "Список документов для просмотра и подписания в системе Didox.",
+
+      "tabs": {
+        "category": {
+          "title": "Направление",
+          "type": {
+            "inbox": "Входящие",
+            "outbox": "Исходящие",
+            "draft": "Черновики"
+          }
+        },
+
+        "type": {
+          "title": "Тип документа",
+          "type": {
+            "all": "Все",
+            "custom_document": "Произовльный документ",
+            "invoice_pharm": "Счет-фактура (ФАРМ)",
+            "invoice": "Счет-фактура",
+            "work_act": "Акт выполненых работ"
+          }
+        },
+
+        "signature": {
+          "title": "Статус подписи",
+          "type": {
+            "all": "Все",
+            "signed": "Подписан",
+            "signed_party": "Ожидает вашей подписи",
+            "signed_self": "Ожидает подписи партера"
+          }
+        }
+      },
+
+      "card": {
+        "contract": {
+          "label": "Номер и дата договора"
+        },
+        "updated": "Дата обновления",
+        "counterparty": {
+          "title": "Контрагент",
+          "inn": "ИНН"
+        },
+        "price": {
+          "title": "Стоимость",
+          "delivery": "Стоимость поставки",
+          "vat": "Сумма НДС",
+          "withVat": "Стоимость с НДС"
+        }
+      }
     }
   },
 
@@ -2948,7 +3191,7 @@
   "public_offer_page": {
     "title": "Пользовательское соглашение"
   },
-  
+
   "service_rules_page": {
     "title": "Правила пользования"
   },
@@ -2958,6 +3201,34 @@
     "load": {
       "load": "Загружаем соглашение",
       "fail": "Не удалось загрузить соглашение"
+    }
+  },
+
+  "documents_page": {
+    "title": "Документы",
+    "description": "Список документов для просмотра и подписания в системе Didox.",
+
+    "tabs": {
+      "inbox": "Входящие",
+      "outbox": "Исходящие",
+      "draft": "Черновики"
+    },
+
+    "card": {
+      "contract": {
+        "label": "Номер и дата договора"
+      },
+      "updated": "Дата обновления",
+      "counterparty": {
+        "title": "Контрагент",
+        "inn": "ИНН"
+      },
+      "price": {
+        "title": "Стоимость",
+        "delivery": "Стоимость поставки",
+        "vat": "Сумма НДС",
+        "withVat": "Стоимость с НДС"
+      }
     }
   }
 }

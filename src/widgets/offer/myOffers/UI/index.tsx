@@ -1,13 +1,22 @@
-import { IBloggerOfferCard, offerStatusFilter } from "@entities/offer";
+import {
+  ENUM_INVOICE_TYPE,
+  IBloggerOfferCard,
+  offerStatusFilter,
+  useCreateOrderInvoice,
+} from "@entities/offer";
+import { offerOpen } from "@entities/user";
 import { AddChannel, ZeroChannel } from "@features/channel";
+import { SignOrder } from "@features/documents";
 import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";
 import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
+import { getAnimationDelay } from "@shared/utils";
 import { motion } from "framer-motion";
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import { OfferCard, OfferCardSkeleton } from "../card";
 import styles from "./styles.module.scss";
-import { getAnimationDelay } from "@shared/utils";
+import { LoginModal } from "@features/organization";
 
 interface MyOffersProps {
   offers: IBloggerOfferCard[];
@@ -26,15 +35,34 @@ export const MyOffers: FC<MyOffersProps> = ({
   statusFilter,
   currentPage,
 }) => {
-  console.log(
-    "offers",
-    !isLoading && offers?.length === 0 && isLast,
-    isLoading,
-    isLast,
-    offers?.length,
-  );
+  const { isAuthEcp, isOfferSign } = useAppSelector((state) => state.user);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(!isAuthEcp);
+  const dispatch = useAppDispatch();
+
+  const handleSign = async () => {
+    console.log("orderId");
+    if (!isAuthEcp) {
+      console.log("isAuthEcp", isAuthEcp, isModalOpen);
+      setIsModalOpen(true);
+      return;
+    } else if (!isOfferSign) {
+      console.log("isOfferSign", isOfferSign);
+      dispatch(offerOpen(true));
+      return;
+    }
+  };
+
+  useEffect(() => {
+    setIsModalOpen(!isAuthEcp);
+  }, [isAuthEcp]);
+
   return (
     <div className={styles.wrapper}>
+      <LoginModal
+        open={isModalOpen}
+        setOpen={setIsModalOpen}
+        haveTrigger={false}
+      />
       {!isLoading && offers?.length === 0 ? (
         <ZeroChannel
           AddChannelBtn={AddChannel}
@@ -58,7 +86,17 @@ export const MyOffers: FC<MyOffersProps> = ({
                 })}
                 variants={PAGE_ANIMATION.animationUp}
               >
-                <OfferCard statusFilter={statusFilter} card={card} />
+                <OfferCard
+                  statusFilter={statusFilter}
+                  card={card}
+                  sign={
+                    <SignOrder
+                      docType={ENUM_INVOICE_TYPE.ACT}
+                      orderId={card.id}
+                      onClick={handleSign}
+                    />
+                  }
+                />
               </motion.div>
             ))}
             {isLoading &&

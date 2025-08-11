@@ -11,8 +11,8 @@ export enum TarifIndex {
 }
 
 export enum TarifPrice {
-  base = 1250000,
-  standard = 5500000,
+  base = 2250000,
+  standard = 7500000,
   complex = 15300000,
 }
 

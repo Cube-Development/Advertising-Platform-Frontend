@@ -1,69 +1,69 @@
-name: Deploy Frontend to Droplet
+# name: Deploy Frontend to Droplet
 
-on:
-  push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+# on:
+#   push:
+#     branches: [main]
+#   pull_request:
+#     branches: [main]
 
-jobs:
-  build:
-    runs-on: ubuntu-latest
+# jobs:
+#   build:
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout Code
-        uses: actions/checkout@v3
+#     steps:
+#       - name: Checkout Code
+#         uses: actions/checkout@v3
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: 18
+#       - name: Set up Node.js
+#         uses: actions/setup-node@v3
+#         with:
+#           node-version: 18
 
-      - name: setup git config
-        run: |
-          git config user.name "Github Actions Bot"
-          git config user.email "<>"
+#       - name: setup git config
+#         run: |
+#           git config user.name "Github Actions Bot"
+#           git config user.email "<>"
 
-      - name: Install Dependencies
-        run: npm install --force
+#       - name: Install Dependencies
+#         run: npm install --force
 
-      - name: Log in to Docker Hub
-        run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
+#       - name: Log in to Docker Hub
+#         run: echo ${{ secrets.DOCKERHUB_PASSWORD }} | docker login -u ${{ secrets.DOCKERHUB_USERNAME }} --password-stdin
 
-      - name: Log Secrets
-        run: |
-          echo "VITE_BASE_URL=${{ secrets.VITE_BASE_URL }}"
-          echo "VITE_BASE_WS_URL=${{ secrets.VITE_BASE_WS_URL }}"
-          echo "VITE_APP_ENV=${{ secrets.VITE_APP_ENV }}"
+#       - name: Log Secrets
+#         run: |
+#           echo "VITE_BASE_URL=${{ secrets.VITE_BASE_URL }}"
+#           echo "VITE_BASE_WS_URL=${{ secrets.VITE_BASE_WS_URL }}"
+#           echo "VITE_APP_ENV=${{ secrets.VITE_APP_ENV }}"
 
-      - name: Create .env File
-        run: |
-          echo "VITE_BASE_URL=${{ secrets.VITE_BASE_URL }}" > .env
-          echo "VITE_BASE_WS_URL=${{ secrets.VITE_BASE_WS_URL }}" >> .env
-          echo "VITE_APP_ENV=${{ secrets.VITE_APP_ENV }}" >> .env
+#       - name: Create .env File
+#         run: |
+#           echo "VITE_BASE_URL=${{ secrets.VITE_BASE_URL }}" > .env
+#           echo "VITE_BASE_WS_URL=${{ secrets.VITE_BASE_WS_URL }}" >> .env
+#           echo "VITE_APP_ENV=${{ secrets.VITE_APP_ENV }}" >> .env
 
-      - name: Build Docker Image
-        run: |
-          docker build --build-arg VITE_BASE_URL=${{ secrets.VITE_BASE_URL }} \
-                       --build-arg VITE_BASE_WS_URL=${{ secrets.VITE_BASE_WS_URL }} \
-                       --build-arg VITE_APP_ENV=${{ secrets.VITE_APP_ENV }} \
-                       --tag test-app .
+#       - name: Build Docker Image
+#         run: |
+#           docker build --build-arg VITE_BASE_URL=${{ secrets.VITE_BASE_URL }} \
+#                        --build-arg VITE_BASE_WS_URL=${{ secrets.VITE_BASE_WS_URL }} \
+#                        --build-arg VITE_APP_ENV=${{ secrets.VITE_APP_ENV }} \
+#                        --tag test-app .
 
-      - name: Tag image
-        run: docker tag test-app ${{ secrets.DOCKERHUB_USERNAME }}/test-app:latest
+#       - name: Tag image
+#         run: docker tag test-app ${{ secrets.DOCKERHUB_USERNAME }}/test-app:latest
 
-      - name: Push Docker Image
-        run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/test-app:latest
+#       - name: Push Docker Image
+#         run: docker push ${{ secrets.DOCKERHUB_USERNAME }}/test-app:latest
 
-      - name: SSH to Droplet and Update Container
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.DROPLET_IP }}
-          username: cube
-          key: ${{ secrets.SSH_PRIVATE_KEY }}
-          port: 22
-          script: |
-            docker stop test-app || true
-            docker rm test-app || true
-            docker pull ${{ secrets.DOCKERHUB_USERNAME }}/test-app:latest
-            docker run --rm -d --name test-app -p 3000:80 ${{ secrets.DOCKERHUB_USERNAME }}/test-app:latest
+#       - name: SSH to Droplet and Update Container
+#         uses: appleboy/ssh-action@master
+#         with:
+#           host: ${{ secrets.DROPLET_IP }}
+#           username: cube
+#           key: ${{ secrets.SSH_PRIVATE_KEY }}
+#           port: 22
+#           script: |
+#             docker stop test-app || true
+#             docker rm test-app || true
+#             docker pull ${{ secrets.DOCKERHUB_USERNAME }}/test-app:latest
+#             docker run --rm -d --name test-app -p 3000:80 ${{ secrets.DOCKERHUB_USERNAME }}/test-app:latest

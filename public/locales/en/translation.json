@@ -161,6 +161,7 @@
     "offers": "My offers",
 
     "wallet": "Wallet",
+    "documents": "Documents",
 
     "top_up": "Top up wallet",
     "withdraw": "Withdraw money",
@@ -187,7 +188,6 @@
       "description": "Current balance"
     }
   },
-
 
   "more_less": {
     "more": "More",
@@ -250,10 +250,12 @@
       { "stage": "Register on the platform" },
       { "stage": "Choose suitable channels from the catalog" },
       { "stage": "Top up your balance with a convenient method" },
-      { 
-        "stage": "Create an ad placement manually or generate a post using AI" 
+      {
+        "stage": "Create an ad placement manually or generate a post using AI"
       },
-      { "stage": "The channel owner will publish the post and send it for your approval" }
+      {
+        "stage": "The channel owner will publish the post and send it for your approval"
+      }
     ],
     "why_title": "Why is it more effective with us?",
     "accomms_list": [
@@ -311,7 +313,7 @@
         "type": "base",
         "name": "Starter",
         "views": "from 60,000 views",
-        "price": "1,250,000 UZS",
+        "price": "2,550,000 UZS",
         "info": "A basic option for evaluating the service or small advertising campaigns",
         "options": [
           { "option": "Manual selection of channels", "available": true },
@@ -323,9 +325,9 @@
           { "option": "Publication notifications", "available": true },
           { "option": "Approval of selected channels", "available": false },
           { "option": "Promotion consultations", "available": false },
-          { 
-            "option": "Detailed report on completed work", 
-            "available": false 
+          {
+            "option": "Detailed report on completed work",
+            "available": false
           },
           { "option": "Advertising campaign forecasts", "available": false }
         ]
@@ -335,7 +337,7 @@
         "type": "standard",
         "name": "Standard",
         "views": "from 300,000 views",
-        "price": "5,500,000 UZS",
+        "price": "7,500,000 UZS",
         "info": "An optimal plan for small business promotion",
         "options": [
           { "option": "Manual selection of channels", "available": true },
@@ -347,9 +349,9 @@
           { "option": "Publication notifications", "available": true },
           { "option": "Approval of selected channels", "available": true },
           { "option": "Promotion consultations", "available": true },
-          { 
-            "option": "Detailed report on completed work", 
-            "available": false 
+          {
+            "option": "Detailed report on completed work",
+            "available": false
           },
           { "option": "Advertising campaign forecasts", "available": false }
         ]
@@ -489,10 +491,16 @@
         "stages": [
           { "stage": "Find suitable platforms manually" },
           { "stage": "Check each platform for fake audience and quality" },
-          { "stage": "Find out the price, terms, and available times from admins" },
-          { "stage": "Pay each admin separately for placement without any guarantees" },
+          {
+            "stage": "Find out the price, terms, and available times from admins"
+          },
+          {
+            "stage": "Pay each admin separately for placement without any guarantees"
+          },
           { "stage": "Send the advertising post to each admin" },
-          { "stage": "Track the placement of the post on each platform separately" }
+          {
+            "stage": "Track the placement of the post on each platform separately"
+          }
         ]
       },
       {
@@ -500,12 +508,18 @@
         "title": "Placement with Blogix",
         "stages": [
           { "stage": "Register an account on the platform" },
-          { "stage": "Select suitable platforms in a few clicks or choose turnkey launch" },
+          {
+            "stage": "Select suitable platforms in a few clicks or choose turnkey launch"
+          },
           { "stage": "Top up your balance conveniently" },
           { "stage": "Upload a post or generate everything using AI" },
-          { "stage": "Launch advertising in all selected platforms in one click" },
+          {
+            "stage": "Launch advertising in all selected platforms in one click"
+          },
           { "stage": "Receive notifications about each placement" },
-          { "stage": "The platform guarantees the safety of your funds until all placement conditions are met" }
+          {
+            "stage": "The platform guarantees the safety of your funds until all placement conditions are met"
+          }
         ],
         "save": "Save time and money"
       }
@@ -905,7 +919,8 @@
         "text": "Please note that frequent order cancellations may lower your rating"
       },
       "complete": {
-        "title": "Order Completed"
+        "title": "Order Completed",
+        "signed": "Documents signed"
       },
       "moderation": {
         "text": "The order does not meet the requirements of the Blogix platform. Please wait for the administrator's decision"
@@ -1098,15 +1113,24 @@
       "title": "Change Password",
       "current_password": {
         "title": "Current Password",
-        "default_value": "Sample@gmail.com"
+        "description": "Enter your current password to confirm the changes.",
+        "error": {
+          "required": "This field cannot be empty"
+        }
       },
       "new_password": {
         "title": "New Password",
-        "default_value": "Sample@gmail.com"
+        "description": "Enter a new password that will be used to sign in to your account. The password must be strong and contain at least 8 characters, including letters and numbers.",
+        "error": {
+          "required": "This field cannot be empty"
+        }
       },
       "accept_password": {
         "title": "Confirm New Password",
-        "default_value": "Sample@gmail.com"
+        "description": "Re-enter the new password to confirm it. Make sure both entered passwords match.",
+        "error": {
+          "required": "This field cannot be empty"
+        }
       },
       "change_btn": "Change Password"
     },
@@ -1137,7 +1161,8 @@
     "navigation": {
       "user_data": "User data",
       "change_password": "Change password",
-      "change_notifications": "Notification settings"
+      "change_notifications": "Notification settings",
+      "organization_data": "Organization data"
     },
     "back": "Back",
     "user_block": {
@@ -1268,7 +1293,7 @@
       "bank_name": {
         "title": "Bank Name",
         "default_value": "Bank Name",
-        "description": "Enter the official name of the bank where your account is opened. This is important for proper fund transfers to your account.",
+        "description": "Enter the official name of the bank where your account is opened. This is important for proper crediting of funds to your account.",
         "error": {
           "required": "field cannot be empty"
         }
@@ -1284,7 +1309,7 @@
       "transit_account": {
         "title": "Transit Account",
         "default_value": "12345678901234567890",
-        "description": "Enter your transit account number if required for fund transfers. This account is used for payment processing and may differ from your checking account.",
+        "description": "Enter your transit account number if required for transferring funds. This account is used for payment processing and may differ from your checking account.",
         "error": {
           "required": "invalid format, must be 20 characters"
         }
@@ -1430,22 +1455,41 @@
 
   "wallet": {
     "topup": {
-      "title": "Balance Top-Up",
-      "offer": "Balance Top-Up Request",
-      "amount": "Top-Up Amount",
-      "required": "Enter the amount",
-      "min": "Minimum amount",
-      "max": "Maximum amount",
-      "placeholder": "Enter the amount",
+      "title": "Balance Top-up",
+      "offer": "Balance Top-up Request",
       "payment_method": "Select a payment method",
-      "fetch_error": "Request error"
+      "fetch_error": "Request error",
+
+      "amount": {
+        "title": "Top-up Amount",
+        "default_value": "50 000",
+        "placeholder": "Enter top-up amount",
+        "description": "Enter the amount to top up your balance. Minimum amount is 50,000 UZS. Maximum amount is 1,000,000,000 UZS."
+      },
+
+      "success": {
+        "title": "Your request has been successfully processed!",
+        "text": "Please carefully specify the payment details and purpose exactly as indicated in the invoice. This is necessary for the correct and quick crediting of funds. Once the funds are received in the specified account, your balance will be updated.",
+
+        "buttons": {
+          "download": "Download"
+        }
+      }
     },
     "withdraw": {
-      "title": "Withdrawal of Funds",
+      "title": "Withdraw Funds",
       "offer": "Withdrawal Request",
-      "amount": "Withdrawal Amount",
-      "required": "Enter the amount",
-      "placeholder": "Enter the amount"
+      "amount": {
+        "title": "Withdrawal Amount",
+        "default_value": "50 000",
+        "placeholder": "Enter withdrawal amount",
+        "description": "Enter the amount to withdraw from your balance. Minimum amount is 50,000 UZS. Maximum amount is 1,000,000,000 UZS."
+      },
+
+      "success": {
+        "title": "Your request has been successfully processed!",
+        "text": "Your advance withdrawal request has been successfully submitted. Please wait for confirmation and the receipt of funds shortly."
+      }
     },
     "types": {
       "selfemployed": "Individual",
@@ -1465,18 +1509,91 @@
       "max": "Maximum Amount"
     },
     "commission": {
-    "title": "Commission",
-    "enrollment": "Amount to be credited",
-    "include": "Include commission",
-    "withdraw_all": "Withdraw all funds"
+      "title": "Commission",
+      "enrollment": "Amount to be credited",
+      "include": "Include commission",
+      "withdraw_all": "Withdraw all funds"
     },
     "guide": {
-      "title": "Step-by-Step Guide",
-      "entity": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc.",
-      "individual": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc.",
-      "selfEmployedTransits": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc.",
-      "selfEmployedAccounts": "Lorem ipsum dolor sit amet consectetur. Tincidunt sed ut in massa pulvinar id. Volutpat aliquam in lectus fringilla mauris praesent convallis. Volutpat neque arcu condimentum cursus sit. Id auctor neque elementum ut turpis sed. Faucibus a posuere gravida vel amet vulputate fringilla. Pulvinar orci consectetur viverra nisi mauris ornare lobortis.\n\nNunc quis libero proin etiam quis lorem nisl. Et purus massa cras suscipit aliquet diam justo ac. In in vel tempor eget nisl ultricies vitae. Pretium netus dignissim ante feugiat quis nunc id lorem. Urna adipiscing urna nisi posuere vitae augue. Bibendum et est vehicula ac lacus praesent. Quam dapibus sem laoreet tristique non in. Sem a mattis massa eget justo felis id.\n\nAugue vitae diam blandit dictum proin tristique morbi suspendisse. In sed dictum pulvinar scelerisque viverra a. Donec ut cursus sit sed. Duis odio vestibulum justo nisi facilisi potenti. At quis luctus laoreet diam ac metus tortor cursus et. Massa consectetur diam enim viverra dapibus. Feugiat et proin purus fermentum sociis dolor. Vel porttitor quam ornare non interdum nunc."
+      "title": "Step by Step Guide",
+      "topup": {
+        "title": "How to Top Up the Organization's Balance",
+        "description": "Follow these simple steps to top up your organization's balance through the Blogix system",
+        "steps": [
+          {
+            "title": "Authorization in didox.uz",
+            "description": "Log in using your digital signature. After successful authorization, all your organization's details will be filled in automatically."
+          },
+          {
+            "title": "Enter Top-Up Amount",
+            "description": "Specify the amount you want to top up your wallet with."
+          },
+          {
+            "title": "Invoice Creation",
+            "description": "After entering the amount and submitting the request, an invoice will be automatically generated."
+          },
+          {
+            "title": "Pay the Invoice via Your Bank",
+            "description": "Transfer the specified amount using the invoice details from your organization's bank account to the Blogix platform account."
+          },
+          {
+            "title": "Funds Crediting",
+            "description": "As soon as the bank confirms the transfer, the funds will be automatically credited to your wallet."
+          },
+          {
+            "title": "Top-Up Notification",
+            "description": "You will receive a notification via email and within the platform that the balance has been successfully topped up."
+          }
+        ],
+        "note": {
+          "title": "Important Information",
+          "description": "Payment processing may take from several minutes to several hours depending on your bank. If the funds do not arrive within 24 hours, please contact support."
+        }
+      },
+      "withdraw": {
+        "title": "How to Withdraw Money from the Platform",
+        "description": "Follow these simple steps to withdraw funds from the platform via the Blogix system",
+        "steps": [
+          {
+            "title": "Select Wallet for Withdrawal",
+            "description": "Specify which wallet you want to withdraw funds from:",
+            "substeps": [
+              {
+                "title": "Deposit Wallet",
+                "description": "Used for returning previously deposited funds.",
+                "info": "The return is processed as an official letter through Didox"
+              },
+              {
+                "title": "Profit Wallet",
+                "description": "Used for withdrawing earned funds.",
+                "info": "No document processing required, funds are withdrawn automatically."
+              }
+            ]
+          },
+          {
+            "title": "Authorization in didox.uz",
+            "description": "Log in using your digital signature. After successful authorization, all your organization's details will be filled in automatically."
+          },
+          {
+            "title": "Specify Withdrawal Amount",
+            "description": "Enter the amount you want to withdraw to your organization's bank account."
+          },
+          {
+            "title": "Funds Transfer",
+            "description": "The funds will be transferred to your organization's bank account."
+          },
+          {
+            "title": "Withdrawal Notification",
+            "description": "You will receive a notification via email and within the platform that the funds have been successfully withdrawn."
+          }
+        ],
+        "note": {
+          "title": "Important Information",
+          "description": "Payment processing may take from several minutes to several hours depending on your bank. If the funds do not arrive within 24 hours, please contact support."
+        }
+      }
     },
+
     "pay": {
       "title": "To be charged",
       "sub_title": "From wallet",
@@ -1528,7 +1645,7 @@
       "comment": "Comment for the Blogger...",
       "result": "Result",
       "post": "Start filling out the advertising post to see the result",
-       "site": "Describe your technical assignment in detail in the comment and attach the necessary files",
+      "site": "Describe your technical assignment in detail in the comment and attach the necessary files",
       "template": "Upload Template",
       "comment_to_post": "Comment on the Technical Assignment: ",
       "see_post_mobile_btn": "View Post",
@@ -1749,7 +1866,9 @@
         "title": "From you:",
         "text": [
           { "text": "Choose and pay for a plan that suits you" },
-          { "text": "Describe your project and advertising campaign preferences" }
+          {
+            "text": "Describe your project and advertising campaign preferences"
+          }
         ]
       },
       "step_2": {
@@ -2001,7 +2120,9 @@
     "accept": "Accept",
     "accept_title": "Choose placement date",
     "accept_date": "Accept order",
-    "reason": "Reason"
+    "reason": "Reason",
+    "sign": "Sign",
+    "signed": "Signed"
   },
 
   "platform_btn": {
@@ -2112,6 +2233,18 @@
         "error": "Error transferring cart"
       }
     },
+
+    "organization": {
+      "create": {
+        "success": "Organization has been successfully submitted for moderation",
+        "error": "An error occurred while adding the organization"
+      },
+      "offer_sign": {
+        "success": "Public offer successfully signed",
+        "need": "You need to confirm the organization by signing the public offer",
+        "error": "An error occurred while signing the public offer"
+      }
+    },
     "add_platform": {
       "link": {
         "success": "Channel identification successful",
@@ -2219,6 +2352,16 @@
         "error": "Error sending link for verification"
       }
     },
+    "documents": {
+      "sign": {
+        "success": "Document signed successfully",
+        "error": "Error while signing the document"
+      },
+      "create": {
+        "success": "Document created successfully",
+        "error": "An error occurred while creating the document"
+      }
+    },
     "orders_manager": {
       "edit_project": {
         "success": "Starting to edit the advertising campaign"
@@ -2311,7 +2454,9 @@
       "transactions": "Transactions",
       "moderation": "Moderation",
       "complaints": "Complaints",
-      "reviews": "Reviews"
+      "reviews": "Reviews",
+      "invoice": "Invoices and contracts",
+      "organization": "Organization"
     },
 
     "pages": {
@@ -2569,7 +2714,7 @@
         }
       }
     },
-    
+
     "reviews": {
       "types": {
         "wait": "Waiting",
@@ -2596,6 +2741,60 @@
     "home": {
       "title": "Welcome to the admin panel!",
       "description": "Here you can manage users, channels, and platform content."
+    },
+
+    "documents": {
+      "title": "Documents",
+      "description": "List of documents for viewing and signing in the Didox system.",
+
+      "tabs": {
+        "category": {
+          "title": "Direction",
+          "type": {
+            "inbox": "Incoming",
+            "outbox": "Outgoing",
+            "draft": "Drafts"
+          }
+        },
+
+        "type": {
+          "title": "Document Type",
+          "type": {
+            "all": "All",
+            "custom_document": "Custom Document",
+            "invoice_pharm": "Invoice (PHARM)",
+            "invoice": "Invoice",
+            "work_act": "Work Act"
+          }
+        },
+
+        "signature": {
+          "title": "Signature Status",
+          "type": {
+            "all": "All",
+            "signed": "Signed",
+            "signed_party": "Awaiting Your Signature",
+            "signed_self": "Awaiting Partner's Signature"
+          }
+        }
+      },
+
+      "card": {
+        "contract": {
+          "label": "Contract Number and Date"
+        },
+        "updated": "Last Updated",
+        "counterparty": {
+          "title": "Counterparty",
+          "inn": "TIN"
+        },
+        "price": {
+          "title": "Price",
+          "delivery": "Delivery Cost",
+          "vat": "VAT Amount",
+          "withVat": "Total with VAT"
+        }
+      }
     }
   },
 
@@ -2625,25 +2824,95 @@
     "description": "Page not found",
     "home_link": "Go back to home"
   },
-  "add_organization": {
-    "title": "Add organization",
-    "types": {
-      "self_employed": "Self-employed",
-      "legal": "Legal entity and IE"
+  "organization": {
+    "not_login": {
+      "title": "You need to add an organization",
+      "description": "To continue working with the platform, you need to add an organization. This is necessary for processing documents, receiving payments on the current account and participating in advertising campaigns.",
+      "buttons": {
+        "add": "Add"
+      }
     },
-    "add_form": {
-      "title": "Organization addition request",
+
+    "offer_sign": {
+      "title": "Сonfirmation of organization",
+      "description": "To start using the service, you need to review and accept the terms of the <1>public offer</1>",
+      "requirements": [
+        { "item": "Review the terms of use" },
+        { "item": "Agree to the privacy policy" },
+        { "item": "Confirm the organization's authority" }
+      ],
+      "warning": "Access to the service features will only be granted after signing the offer",
+      "authorization_required": {
+        "title": "Authorization required",
+        "subtitle": "You need to log in with an EDS key",
+        "description": "To sign the offer, prior authorization in the system using an EDS is required",
+        "section": "Go to the section",
+        "organization_data": "Organization data"
+      },
+      "authorization_success": {
+        "title": "Authorization Successful",
+        "subtitle": "The digital signature is active and ready to use",
+        "description": "You can sign the document using your digital signature",
+        "status": "Status:",
+        "active": "Organization verified"
+      },
+      "legal_notice": "Legally binding document",
+      "buttons": {
+        "sign": "Sign"
+      }
+    },
+    "title": "My organization",
+
+    "logout": {
+      "title": "Logout from account",
+      "description": "Are you sure you want to log out of your account? You will need to log in again to access your data.",
+      "buttons": {
+        "cancel": "Cancel",
+        "logout": "Logout"
+      }
+    },
+    "login": {
+      "didox": {
+        "title": "Sign in to the system",
+        "description": "Choose the type of authentication and fill in the details to access your account",
+        "choose_type": "How would you like to sign in?",
+        "no_account": "Don't have an account?",
+        "register": "Register",
+
+        "type": {
+          "password": "By password",
+          "certificate": "By key"
+        },
+
+        "certificate": {
+          "until": "until",
+          "placeholder": "Select a key",
+          "loading": "Loading keys...",
+          "not_found": "No keys found",
+          "error": "The E-IMZO application is not enabled or not found on your device"
+        },
+
+        "buttons": {
+          "login": "Sign in to account"
+        }
+      }
+    },
+
+    "form": {
+      "title": {
+        "add": "Organization addition request",
+        "data": "Organization data"
+      },
       "legal": {
         "title": "Organization type",
         "text": "Select the type of organization - Legal entity, IE or Self-employed.",
         "default_value": "Not selected"
       },
       "PNFL": {
-        "title": "PNFL",
-        "default_value": "12345678901234",
-        "description": "Personal identification number of an individual. Enter a valid PNFL as it is required for data verification.",
+        "title": "TIN/PNFL",
+        "default_value": "TIN/PNFL",
         "error": {
-          "required": "invalid format, must be 14 characters"
+          "required": "Invalid number of characters: TIN must be 9, PNFL must be 14"
         }
       },
       "INN": {
@@ -2652,6 +2921,14 @@
         "description": "Enter the taxpayer identification number (INN) of your company or individual entrepreneur. This number is used for tax accounting and organization identification.",
         "error": {
           "required": "invalid format, must be 9 characters"
+        }
+      },
+
+      "password": {
+        "title": "Password",
+        "default_value": "12345678",
+        "error": {
+          "required": "enter password"
         }
       },
       "info_card": {
@@ -2836,6 +3113,34 @@
     "load": {
       "load": "Loading agreement",
       "fail": "Failed to load agreement"
+    }
+  },
+
+  "documents_page": {
+    "title": "Documents",
+    "description": "List of documents for viewing and signing in the Didox system.",
+
+    "tabs": {
+      "inbox": "Inbox",
+      "outbox": "Outbox",
+      "draft": "Drafts"
+    },
+
+    "card": {
+      "contract": {
+        "label": "Contract number and date"
+      },
+      "updated": "Last updated",
+      "counterparty": {
+        "title": "Counterparty",
+        "inn": "TIN"
+      },
+      "price": {
+        "title": "Cost",
+        "delivery": "Delivery cost",
+        "vat": "VAT amount",
+        "withVat": "Total cost (including VAT)"
+      }
     }
   }
 }

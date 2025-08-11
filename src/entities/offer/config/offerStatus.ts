@@ -11,6 +11,7 @@ export enum offerStatus {
   moderation = 10,
   unknown1 = 11,
   unknown2 = 12,
+  toSign = 13,
 }
 
 export enum offerStatusFilter {

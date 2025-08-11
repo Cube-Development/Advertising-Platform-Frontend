@@ -101,6 +101,8 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
               isBlur={blur.payment}
               totalAmount={totalPrice?.amount || 0}
               role={role}
+              setValue={setValue}
+              formState={formState}
               onAction={handleSubmit(onSubmit)}
               isAllowed={
                 !formState?.isDownloadPosts &&

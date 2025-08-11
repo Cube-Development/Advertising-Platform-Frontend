@@ -1,18 +1,36 @@
 import { FC } from "react";
-import styles from "./styles.module.scss";
 import { cn } from "@shared/ui";
 import { useTranslation } from "react-i18next";
-import { FileSmileBoldIcon } from "@shared/assets";
+import { ArrowDownToLine } from "lucide-react";
 
-export const WithdrawSuccessCard: FC = ({}) => {
+interface IWithdrawSuccessCardProps {
+  downloadBtn: React.ReactNode;
+}
+
+export const WithdrawSuccessCard: FC<IWithdrawSuccessCardProps> = ({
+  downloadBtn: DownloadBtn,
+}) => {
   const { t } = useTranslation();
   return (
-    <div className={cn(styles.wrapper, "frame")}>
-      <div className={styles.icon}>
-        <FileSmileBoldIcon />
+    <div
+      className={cn(
+        "relative space-y-6 overflow-hidden frame sm:space-y-8 md:space-y-10",
+      )}
+    >
+      <div className="relative space-y-4 text-center sm:space-y-5 md:space-y-6">
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full shadow-lg bg-gradient-to-r from-blue-500 to-indigo-500 sm:w-18 sm:h-18 md:w-20 md:h-20">
+          <ArrowDownToLine className="w-8 h-8 text-white sm:w-9 sm:h-9 md:w-10 md:h-10" />
+        </div>
+        <div className="space-y-3 sm:space-y-4">
+          <p className="text-lg font-semibold text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text sm:text-xl">
+            {t("wallet.withdraw.success.title")}
+          </p>
+          <span className="text-sm text-muted-foreground sm:text-base">
+            {t("wallet.withdraw.success.text")}
+          </span>
+        </div>
       </div>
-      <p>{t("wallet.withdraw.success.title")}</p>
-      <span>{t("wallet.withdraw.success.text")}</span>
+      <div className="grid items-center justify-center">{DownloadBtn}</div>
     </div>
   );
 };

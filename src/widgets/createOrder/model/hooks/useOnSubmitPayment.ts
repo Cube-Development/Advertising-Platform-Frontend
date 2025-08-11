@@ -5,7 +5,6 @@ import {
   useProjectNameMutation,
 } from "@entities/project";
 import { ENUM_ROLES } from "@entities/user";
-import { usePaymentProjectMutation } from "@entities/wallet";
 import { ENUM_PATHS } from "@shared/routing";
 import { useToast } from "@shared/ui";
 import { useState } from "react";
@@ -13,12 +12,16 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useUploadFilesAndMedia } from "./useUploadFilesAndMedia";
 import { useUploadPosts } from "./useUploadPosts";
+import {
+  ENUM_WALLETS_TYPE,
+  useCreatePaymentProjectMutation,
+} from "@entities/wallet";
 
 export const useOnSubmitPayment = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [projectName] = useProjectNameMutation();
   const [createOrderDates] = useCreateOrderDatesMutation();
-  const [paymentProject] = usePaymentProjectMutation();
+  const [createPayment] = useCreatePaymentProjectMutation();
   const [approveProject] = useApproveProjectMutation();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -48,7 +51,7 @@ export const useOnSubmitPayment = () => {
       await handleProjectDates(formData);
 
       // Оплата или подтверждение
-      await handleProjectPayment(projectId, role);
+      await handleProjectPayment(projectId, role, formData?.wallet_type);
     } catch (error) {
       toast({
         variant: "error",
@@ -90,10 +93,14 @@ export const useOnSubmitPayment = () => {
       });
   };
 
-  const handleProjectPayment = async (projectId: string, role: ENUM_ROLES) => {
+  const handleProjectPayment = async (
+    projectId: string,
+    role: ENUM_ROLES,
+    wallet_type?: ENUM_WALLETS_TYPE,
+  ) => {
     await (
       role === ENUM_ROLES.ADVERTISER
-        ? paymentProject(projectId)
+        ? createPayment({ project_id: projectId, wallet_type: wallet_type! })
         : approveProject({ project_id: projectId })
     )
       .unwrap()

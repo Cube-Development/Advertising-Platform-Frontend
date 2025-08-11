@@ -4,7 +4,6 @@ import {
   useEditEmailAcceptMutation,
   useEditEmailRequestMutation,
 } from "@entities/user";
-import { formDataLength } from "@entities/wallet";
 import { CancelIcon2 } from "@shared/assets";
 import {
   AlertDialog,
@@ -23,6 +22,7 @@ import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { formDataLength } from "@shared/config";
 
 interface EditEmailFormProps extends IEmailData {
   isEmailChanged: boolean;
