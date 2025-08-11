@@ -6,6 +6,7 @@ export interface ParsedCertificateInfo {
   region: string;
   organization: string;
   pnfl: string;
+  uid: string | null;
   validFrom: string;
   validTo: string;
 }

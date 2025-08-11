@@ -10,6 +10,7 @@ interface IDownloadInvoiceProps {
 
 export const DownloadInvoice: FC<IDownloadInvoiceProps> = ({ url }) => {
   const { t } = useTranslation();
+  console.log("url", url);
   const handleDownload = async () => {
     await downloadFileOnDevice(url, "Invoice" + ".pdf");
   };

@@ -15,7 +15,8 @@ export interface ICreateDepositRequest {
 }
 
 export interface ICreateDepositResponse {
-  doc_id: string;
+  payment_invoice_id: string;
+  payment_invoice_url: string;
 }
 
 export interface ICreateDeposit {
@@ -27,6 +28,11 @@ export interface ICreateWithdrawRequest {
   wallet_type: ENUM_WALLETS_TYPE;
 }
 
+export interface IWithdrawResponse {
+  account_id: string;
+  balance: number;
+  refund_letter_url: string;
+}
 export interface IWalletResponse {
   account_id: string;
   balance: number;

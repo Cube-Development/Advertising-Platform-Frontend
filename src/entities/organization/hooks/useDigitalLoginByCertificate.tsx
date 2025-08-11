@@ -41,7 +41,7 @@ export const useDigitalLoginByCertificate = () => {
     try {
       // Получаем ПИНФЛ из выбранного сертификата
       const certInfo = parseCertificateAlias(certificate!.alias);
-      const pnflFromCert = certInfo.pnfl;
+      const pnflFromCert = certInfo?.uid || certInfo.pnfl;
 
       // Шаг 1: Загрузка ключа
       const keyResponse = await sendMessage(CreateMessageKeyId(certificate));

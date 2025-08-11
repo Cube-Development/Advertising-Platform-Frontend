@@ -9,6 +9,7 @@ import {
   IHistoryRequest,
   IHistoryResponse,
   IWalletResponse,
+  IWithdrawResponse,
 } from "@entities/wallet";
 import { BALANCE, TRANSACTION_HISTORY, authApi } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
@@ -98,7 +99,7 @@ export const walletAPI = authApi.injectEndpoints({
       }),
       invalidatesTags: [BALANCE],
     }),
-    createWithdraw: build.mutation<IWalletResponse, ICreateWithdrawRequest>({
+    createWithdraw: build.mutation<IWithdrawResponse, ICreateWithdrawRequest>({
       query: (params) => ({
         url: `/wallet/payment/withdrawal`,
         method: "POST",
