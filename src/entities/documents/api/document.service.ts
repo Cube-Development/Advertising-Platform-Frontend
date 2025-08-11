@@ -3,6 +3,7 @@ import { authEcpApi } from "@shared/api/epc/authApi";
 import {
   ENUM_DOCUMENT_TYPE,
   ICreateDocumentEDORequest,
+  ICreateDocumentEDOResponse,
   IGetDocumentEDORequest,
   IGetDocumentEDOResponse,
   IGetDocumentEDOToSignResponse,
@@ -61,17 +62,17 @@ export const documentAPI = authEcpApi.injectEndpoints({
       }),
     }),
     createDocumentEDO: build.mutation<
-      any,
+      ICreateDocumentEDOResponse,
       {
         data: ICreateDocumentEDORequest;
         type: ENUM_DOCUMENT_TYPE;
-        lang: string;
+        lang?: string;
       }
     >({
-      query: ({ data, type, lang }) => ({
+      query: ({ data, type, lang = "ru" }) => ({
         url: `/v1/documents/${type}/create/${lang}`,
         method: "POST",
-        body: data,
+        body: data?.data,
       }),
       invalidatesTags: [DIGITAL_DOCUMENTS],
     }),

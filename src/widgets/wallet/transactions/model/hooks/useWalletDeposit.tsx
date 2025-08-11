@@ -4,13 +4,13 @@ import {
   useCreateDepositRequestMutation,
 } from "@entities/wallet";
 import { useToast } from "@shared/ui";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export const useWalletDeposit = () => {
   const { toast } = useToast();
   const { t } = useTranslation();
-  let uploadUrl =
-    "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTC9NXMqnFJ8l6py5hWn7FMdSU1IZNOarxcLKEz";
+  const [uploadUrl, setUploadUrl] = useState("");
 
   const [
     createDepositReq,
@@ -31,7 +31,7 @@ export const useWalletDeposit = () => {
       }).unwrap();
 
       await createDeposit({
-        doc_id: response.doc_id,
+        doc_id: response.payment_invoice_id,
       }).unwrap();
 
       toast({
@@ -39,8 +39,7 @@ export const useWalletDeposit = () => {
         title: `${t("toasts.wallet.topup.success")}`,
       });
 
-      uploadUrl =
-        "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTC9NXMqnFJ8l6py5hWn7FMdSU1IZNOarxcLKEz";
+      setUploadUrl(response?.payment_invoice_url);
     } catch (error) {
       console.error("[DEPOSIT] error:", error);
       toast({

@@ -1,5 +1,6 @@
 import { platformTypesNum } from "@entities/platform";
 import { offerStatus } from "../config";
+import { ENUM_INVOICE_TYPE } from "./invoice.enum";
 
 export interface IBloggerOfferCard {
   id: string;
@@ -36,4 +37,15 @@ export interface IBloggerOffers {
   orders: IBloggerOfferCard[];
   status?: string;
   isLast?: boolean;
+}
+
+export interface IGetInvoiceRequest {
+  order_id: string;
+  doc_type: ENUM_INVOICE_TYPE;
+}
+
+export interface IOrderAcceptFinallyRequest {
+  order_id: string;
+  invoice_doc_id: string;
+  act_doc_id?: string;
 }

@@ -3,6 +3,7 @@ import {
   useCreateWithdrawMutation,
 } from "@entities/wallet";
 import { useToast } from "@shared/ui";
+import { useState } from "react";
 import { useTranslation } from "react-i18next";
 
 export const useWalletWithdraw = () => {
@@ -11,12 +12,11 @@ export const useWalletWithdraw = () => {
   const [createWithdraw, { isLoading, isSuccess }] =
     useCreateWithdrawMutation();
 
-  let uploadUrl =
-    "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCZJIbbXmWQb1RphaovDjL4z82dBVnPXg59sEG";
+  const [uploadUrl, setUploadUrl] = useState("");
 
   const withdraw = async (data: ICreateWithdrawRequest) => {
     try {
-      await createWithdraw({
+      const response = await createWithdraw({
         amount: data?.amount,
         wallet_type: data?.wallet_type,
       }).unwrap();
@@ -26,8 +26,7 @@ export const useWalletWithdraw = () => {
         title: `${t("toasts.wallet.withdraw.success")}`,
       });
 
-      uploadUrl =
-        "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCZJIbbXmWQb1RphaovDjL4z82dBVnPXg59sEG";
+      setUploadUrl(response?.refund_letter_url);
     } catch (error) {
       console.error("[WITHDRAW] error:", error);
       toast({

@@ -922,7 +922,8 @@
         "text": "Tez-tez buyurtmalarni bekor qilish sizning reytingingizni pasaytirishi mumkinligini eslatib o'tamiz"
       },
       "complete": {
-        "title": "Buyurtma bajarildi"
+        "title": "Buyurtma bajarildi",
+        "signed": "Qabul qilindi"
       },
       "moderation": {
         "text": "Buyurtma Blogix platformasi talablariga mos kelmadi. Administrator qarorini kuting"
@@ -2119,7 +2120,9 @@
     "accept": "Qabul qilish",
     "accept_title": "Joylashtirish sanasini tanlang",
     "accept_date": "Buyurtmani qabul qilish",
-    "reason": "Sabab"
+    "reason": "Sabab",
+    "sign": "Qabul qilish",
+    "signed": "Qabul qilindi"
   },
 
   "platform_btn": {
@@ -2347,6 +2350,16 @@
       "send_link": {
         "success": "Havola tekshirish uchun muvaffaqiyatli yuborildi",
         "error": "Havolani tekshirish uchun yuborishda xatolik yuz berdi"
+      }
+    },
+    "documents": {
+      "sign": {
+        "success": "Hujjat muvaffaqiyatli imzolandi",
+        "error": "Hujjatni imzolashda xatolik yuz berdi"
+      },
+      "create": {
+        "success": "Hujjat muvaffaqiyatli yaratildi",
+        "error": "Hujjatni yaratishda xatolik yuz berdi"
       }
     },
     "orders_manager": {

@@ -1,9 +1,10 @@
 import {
+  ENUM_ORGANIZATION_STATUS,
   useGetAccountEDOQuery,
   useGetOrganizationQuery,
   useGetProfileEDOQuery,
 } from "@entities/organization";
-import { ENUM_ROLES, USER_ROLES } from "@entities/user";
+import { ENUM_ROLES, offerSign, USER_ROLES } from "@entities/user";
 import {
   useGetViewAdvertiserProjectQuery,
   useGetViewBloggerChannelQuery,
@@ -61,9 +62,10 @@ export const MainLayout = ({ children }: PropsWithChildren) => {
     skip: !isAuth || !isAuthEcp || !USER_ROLES.includes(role),
   });
 
-  useGetOrganizationQuery(undefined, {
-    skip: !isAuth || !USER_ROLES.includes(role),
-  });
+  const { data: organization, isLoading: isLoadingOrganization } =
+    useGetOrganizationQuery(undefined, {
+      skip: !isAuth || !USER_ROLES.includes(role),
+    });
 
   useEffect(() => {
     if (balance) {
@@ -88,6 +90,12 @@ export const MainLayout = ({ children }: PropsWithChildren) => {
       dispatch(walletSlice.actions.setBalance(wallet));
     }
   }, [balance, isLoading]);
+
+  useEffect(() => {
+    if (organization?.status === ENUM_ORGANIZATION_STATUS.ACTIVE) {
+      dispatch(offerSign());
+    }
+  }, [organization, isLoadingOrganization]);
 
   return (
     <>

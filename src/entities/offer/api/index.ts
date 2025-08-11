@@ -1,1 +1,1 @@
-export * from "./bloggerOffersService";
+export * from "./offer.service";
