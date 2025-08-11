@@ -68,10 +68,11 @@ export const MainBloggerPage = () => {
       <Cta page={page} />
       <Services page={page} />
       <Partners page={page} />
+      <div></div>
       <HowItWorks page={page} />
       <WhyChooseUs page={page} />
       <CalculateIncome page={page} />
-      <Customers page={page} />
+      {/* <Customers page={page} /> */}
     </Suspense>
   );
 };

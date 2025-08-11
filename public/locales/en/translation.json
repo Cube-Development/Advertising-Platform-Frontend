@@ -313,7 +313,7 @@
         "type": "base",
         "name": "Starter",
         "views": "from 60,000 views",
-        "price": "1,250,000 UZS",
+        "price": "2,550,000 UZS",
         "info": "A basic option for evaluating the service or small advertising campaigns",
         "options": [
           { "option": "Manual selection of channels", "available": true },
@@ -337,7 +337,7 @@
         "type": "standard",
         "name": "Standard",
         "views": "from 300,000 views",
-        "price": "5,500,000 UZS",
+        "price": "7,500,000 UZS",
         "info": "An optimal plan for small business promotion",
         "options": [
           { "option": "Manual selection of channels", "available": true },

@@ -2,19 +2,21 @@ import {
   ENUM_ORGANIZATION_STATUS,
   useGetOrganizationQuery,
 } from "@entities/organization";
-import { offerOpen } from "@entities/user";
+import { offerOpen, USER_ROLES } from "@entities/user";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { useEffect, useRef, useState } from "react";
 
 export const useRenderOfferModal = () => {
-  const { isAuthEcp, isOfferSign, isOfferOpen } = useAppSelector(
+  const { isAuthEcp, isOfferSign, isOfferOpen, role, isAuth } = useAppSelector(
     (state) => state.user,
   );
   const [open, setOpen] = useState(false);
   const prevAuthRef = useRef(isAuthEcp);
   const hasShownRef = useRef(false);
   const dispatch = useAppDispatch();
-  const { data: organization, isLoading } = useGetOrganizationQuery();
+  const { data: organization, isLoading } = useGetOrganizationQuery(undefined, {
+    skip: !isAuth || !USER_ROLES.includes(role),
+  });
 
   useEffect(() => {
     if (isLoading) return;

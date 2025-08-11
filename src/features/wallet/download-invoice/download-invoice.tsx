@@ -14,6 +14,9 @@ export const DownloadInvoice: FC<IDownloadInvoiceProps> = ({ url }) => {
   const handleDownload = async () => {
     await downloadFileOnDevice(url, "Invoice" + ".pdf");
   };
+
+  if (!url) return;
+
   return (
     <MyButton onClick={handleDownload} className="gap-2 text-sm md:text-lg">
       <FileDown size={18} />

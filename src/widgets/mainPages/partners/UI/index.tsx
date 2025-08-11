@@ -20,7 +20,7 @@ export const Partners: FC<PartnersProps> = ({ page }) => {
       viewport={PAGE_ANIMATION.viewport}
       className={styles.partners}
     >
-      <motion.h1
+      {/* <motion.h1
         custom={custom++}
         variants={PAGE_ANIMATION.animationUp}
         className={styles.partners__title}
@@ -51,7 +51,7 @@ export const Partners: FC<PartnersProps> = ({ page }) => {
             isLeft={true}
           />
         </motion.div>
-      </div>
+      </div> */}
     </motion.section>
   );
 };
