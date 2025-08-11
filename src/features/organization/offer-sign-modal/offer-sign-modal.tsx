@@ -3,7 +3,7 @@ import {
   useGetOrganizationQuery,
 } from "@entities/organization";
 import { BREAKPOINT } from "@shared/config";
-import { useWindowWidth } from "@shared/hooks";
+import { useAppSelector, useWindowWidth } from "@shared/hooks";
 import {
   Dialog,
   DialogClose,
@@ -23,6 +23,7 @@ import { FilePen, XCircle } from "lucide-react";
 import { ButtonHTMLAttributes, FC, useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { OfferModalContent } from "./ui";
+import { USER_ROLES } from "@entities/user";
 
 interface OfferSignModalProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   open?: boolean;
@@ -39,7 +40,10 @@ export const OfferSignModal: FC<OfferSignModalProps> = ({
 }) => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState(open);
-  const { data: organization } = useGetOrganizationQuery();
+  const { isAuth, role } = useAppSelector((state) => state.user);
+  const { data: organization } = useGetOrganizationQuery(undefined, {
+    skip: !isAuth || !USER_ROLES.includes(role),
+  });
   const screen = useWindowWidth();
 
   useEffect(() => {
