@@ -1,16 +1,11 @@
-import { addChannelQueries } from "@entities/channel";
-import { AddChannel } from "@features/channel";
 import { WorkWithUs } from "@features/mainPages";
 import { CalculatorIcon } from "@shared/assets";
 import { PAGE_ANIMATION } from "@shared/config/animation";
-import { ENUM_PATHS } from "@shared/routing";
-import { SliderSubs, ThemeChanger } from "@shared/ui";
-import { IncomeCalculator } from "@shared/ui/incomeCalculator";
-import { buildPathWithQuery, queryParamKeys } from "@shared/utils";
 import { motion } from "framer-motion";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
+import styles from "./calculate-income.module.scss";
+import { ProfitCalculator } from "./UI/profit-calculator";
 
 interface CalculateIncomeProps {
   page: string;
@@ -18,14 +13,6 @@ interface CalculateIncomeProps {
 
 export const CalculateIncome: FC<CalculateIncomeProps> = ({ page }) => {
   const { t } = useTranslation();
-
-  const [userCount, setUserCount] = useState<number>(1000);
-  const [themeCoefficient, setThemeCoefficient] = useState<number>(1);
-  const calculatedIncome = userCount * themeCoefficient;
-  const handleThemeChange = (coefficient: number) => {
-    setThemeCoefficient(coefficient);
-  };
-
   const calculateIncomeRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -78,18 +65,7 @@ export const CalculateIncome: FC<CalculateIncomeProps> = ({ page }) => {
               {t(`${page}.calculate.text`)}
             </p>
           </div>
-          <div className={styles.card__content}>
-            <ThemeChanger page={page} onThemeChange={handleThemeChange} />
-            <IncomeCalculator page={page} calculatedIncome={calculatedIncome} />
-            <SliderSubs onUserCountChange={setUserCount} />
-            <AddChannel
-              // path={`${paths.addChannel}?add_channel=${addChannelQueries.main}`}
-              path={buildPathWithQuery(ENUM_PATHS.ADD_CHANNEL, {
-                [queryParamKeys.addChannel]: addChannelQueries.main,
-              })}
-              props={{ className: styles.button }}
-            />
-          </div>
+          <ProfitCalculator />
         </div>
       </motion.div>
       <WorkWithUs page={page} />

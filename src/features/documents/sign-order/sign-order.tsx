@@ -33,7 +33,7 @@ export const SignOrder: FC<ISignOrderProps> = ({
   return (
     <MyButton
       {...rest}
-      disabled={disabled}
+      disabled={disabled || isLoading || isSignatureLoading}
       onClick={(e: MouseEvent<HTMLButtonElement>) => {
         handleSign();
         onClick && onClick?.(e);

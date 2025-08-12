@@ -137,7 +137,7 @@ export const MultiSelect = React.forwardRef<
             type="button"
             onClick={handleTogglePopover}
             className={cn(
-              "px-[16px] py-[10px] md:px-[30px] md:py-[10px] rounded-[12px] border border-[var(--Inside-container)] bg-[var(--Personal-colors-White)]  disabled:bg-gray-100 disabled:text-gray-400 disabled:border-gray-400 disabled:cursor-not-allowed disabled:opacity-50",
+              "min-h-11 px-[16px] py-[10px] md:px-[30px] md:py-[10px] rounded-[12px] border border-[var(--Inside-container)] bg-[var(--Personal-colors-White)]  disabled:bg-gray-100 disabled:text-gray-400 disabled:border-gray-400 disabled:cursor-not-allowed disabled:opacity-50",
               styles.wrapper,
               className,
               isPopoverOpen ? styles.open : "",

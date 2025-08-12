@@ -35,9 +35,9 @@ export const TurnkeyPage = () => {
   return (
     <Suspense fallback={<SuspenseLoader />}>
       <Top />
-      <Partners />
+      {/* <Partners /> */}
       <Steps />
-      <Customers />
+      {/* <Customers /> */}
     </Suspense>
   );
 };
