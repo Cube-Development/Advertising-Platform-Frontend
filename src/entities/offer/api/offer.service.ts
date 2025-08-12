@@ -10,6 +10,7 @@ import {
   ADV_ORDERS,
   ADV_PROJECTS,
   authApi,
+  BALANCE,
   BLOGGER_OFFERS,
   VIEWS_BLOGGER_OFFERS,
 } from "@shared/api";
@@ -140,7 +141,7 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
         method: "POST",
         body: body,
       }),
-      invalidatesTags: [BLOGGER_OFFERS],
+      invalidatesTags: [BLOGGER_OFFERS, BALANCE],
     }),
   }),
 });

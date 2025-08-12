@@ -31,6 +31,8 @@ export const useCreateOrderInvoice = () => {
         INVOICE_STATUS[ENUM_INVOICE_TYPE.INVOICE],
       );
 
+      if (!invoiceData) return;
+
       const actInfo = await docInfo({
         order_id,
         doc_type: ENUM_INVOICE_TYPE.ACT,
@@ -40,6 +42,8 @@ export const useCreateOrderInvoice = () => {
         INVOICE_STATUS[ENUM_INVOICE_TYPE.ACT],
         invoiceData?.keyId,
       );
+
+      if (!actData) return;
 
       await accept({
         order_id,

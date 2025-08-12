@@ -22,10 +22,12 @@ export const SignDocument: FC<ISignDocumentProps> = ({
     signExist,
     isLoading: isLoadingSign,
     isSignatureLoading,
+    isSuccessSigned,
   } = useSignDocument();
   const { onClick, disabled, ...rest } = props;
   const handleSign = async () => {
     await signExist(documentId, owner);
+    if (!isSuccessSigned) return;
     onSigned && (await onSigned());
   };
 
