@@ -183,7 +183,8 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
       (formState?.attached_files.length ||
         formState?.comment ||
         formState?.links.length) &&
-      !formState?.isDropFile
+      !formState?.isDropFile &&
+      walletType !== null
     ) {
       !isLoading &&
         buyTarif({
@@ -219,6 +220,11 @@ export const BuyTarif: FC<BuyTarifProps> = ({ tarif, tarifInfo }) => {
             });
             console.error("error: ", error);
           });
+    } else if (walletType === null) {
+      toast({
+        variant: "error",
+        title: t("toasts.turnkey.error_wallet"),
+      });
     }
   };
 
