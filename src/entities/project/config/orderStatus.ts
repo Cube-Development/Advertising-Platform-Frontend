@@ -11,7 +11,7 @@ export enum orderStatus {
   moderation = 10,
   order_review = 11,
   channel_agreed = 12,
-  adv_comment = 13,
+  adv_accept = 13,
 }
 
 export const orderStatusChat = [

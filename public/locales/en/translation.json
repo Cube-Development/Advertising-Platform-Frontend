@@ -2218,7 +2218,8 @@
     },
     "turnkey": {
       "success": "Tariff purchased",
-      "error": "Error purchasing tariff"
+      "error": "Error purchasing tariff",
+      "error_wallet": "Select a wallet for purchase"
     },
     "websocket": {
       "new_message": "You have a new message",

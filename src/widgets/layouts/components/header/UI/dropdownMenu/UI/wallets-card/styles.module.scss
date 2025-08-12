@@ -17,6 +17,12 @@
     justify-content: space-between;
     padding: 20px;
 
+    @media (max-width: 576px) {
+      grid-auto-flow: row;
+      row-gap: 5px;
+      padding: 5px;
+    }
+
     .title {
       color: var(--Personal-colors-black, #000);
       font-size: 16px;
