@@ -21,12 +21,14 @@ export const useSignDocument = () => {
   const [getTimestamp, { isLoading: isLoadingLogin }] =
     useGetTimestampMutation();
   const [toSign, { isLoading: isLoadingToSign }] = useGetSignInfoEDOMutation();
-  const [createSign, { isLoading: isLoadingCreateSign }] =
-    useCreateSignEDOMutation();
+  const [
+    createSign,
+    { isLoading: isLoadingCreateSign, isSuccess: isSuccessSigned },
+  ] = useCreateSignEDOMutation();
   const [createDocument, { isLoading: isLoadingCreateDocument }] =
     useCreateDocumentEDOMutation();
 
-  const { certificates, certificatesLoading, isSignatureLoading } =
+  const { certificates, certificatesLoading, isSignatureLoading, error } =
     useCryptoCertificates();
 
   const signExist = async (documentId: string, owner: 0 | 1 = 0) => {
@@ -58,6 +60,9 @@ export const useSignDocument = () => {
         response?._id?.toUpperCase(),
         oldKeyId,
       );
+
+      if (!keyId) return;
+
       return { id: response?._id?.toUpperCase(), keyId };
     } catch (err) {
       const errorMessage =
@@ -85,6 +90,8 @@ export const useSignDocument = () => {
         );
         keyId = keyResponse?.keyId as string;
       }
+
+      if (!keyId) return;
 
       // Преобразуем в JSON-строку
       const jsonString = JSON.stringify(documentJson);
@@ -134,5 +141,6 @@ export const useSignDocument = () => {
       isLoadingCreateDocument,
 
     isSignatureLoading,
+    isSuccessSigned,
   };
 };

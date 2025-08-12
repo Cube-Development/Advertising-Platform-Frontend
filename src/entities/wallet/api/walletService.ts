@@ -80,6 +80,7 @@ export const walletAPI = authApi.injectEndpoints({
         method: "POST",
         params: params,
       }),
+      invalidatesTags: [BALANCE],
     }),
     createDepositRequest: build.mutation<
       ICreateDepositResponse,
