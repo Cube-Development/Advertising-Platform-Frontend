@@ -142,7 +142,7 @@ export const AddChannelBlock: FC<AddChannelBlockProps> = () => {
     });
     handleScroll();
   };
-  console.log(!!channel, channel);
+
   return (
     <div className="container" style={{ minHeight: "100vh" }}>
       <div className={styles.wrapper} id="add_channel_top">
@@ -176,14 +176,14 @@ export const AddChannelBlock: FC<AddChannelBlockProps> = () => {
           step={currentStep.step}
           variant={currentVariant}
           dataPreview={dataPreview}
-          handleSubmit={handleSubmit}
-          channel_id={channel_id || ""}
-          isEdit={!!channel}
         />
         <AddOrganization
           onChangeStep={handleOnChangeStep}
           step={currentStep.step}
           variant={currentVariant}
+          channel_id={channel_id || ""}
+          isEdit={!!channel}
+          data={formState}
         />
       </div>
     </div>

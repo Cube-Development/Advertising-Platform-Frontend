@@ -1044,6 +1044,11 @@
         "span": "within 24 hours",
         "text2": "from the time of submission"
       }
+    },
+
+    "success": {
+      "title": "Ready to add",
+      "text": "Great! Everything is ready to add your channel. After submission, it will go through moderation and appear in the catalog for all users."
     }
   },
 

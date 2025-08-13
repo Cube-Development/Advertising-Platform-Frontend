@@ -57,29 +57,6 @@
       }
     }
   }
-
-  .btns__wrapper {
-    display: grid;
-    justify-content: center;
-
-    @media (max-width: 576px) {
-      justify-content: unset;
-    }
-
-    .btns {
-      display: grid;
-      grid-template: 1fr / 1fr 1fr;
-      column-gap: 15px;
-      justify-content: center;
-      align-items: center;
-
-      .prev {
-        svg {
-          transform: rotate(180deg);
-        }
-      }
-    }
-  }
 }
 
 .send {
