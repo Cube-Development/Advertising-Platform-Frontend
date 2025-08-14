@@ -101,7 +101,7 @@ export const MyOffers: FC<MyOffersProps> = ({
               Array.from({ length: INTERSECTION_ELEMENTS.BLOGGER_OFFERS }).map(
                 (_, index) => (
                   <OfferCardSkeleton key={index} statusFilter={statusFilter} />
-                )
+                ),
               )}
             {!isLast && (
               <div className={styles.show_more} onClick={handleOnChangePage}>

@@ -3,6 +3,7 @@ import {
   useGetUserQueryQuery,
   useLogoutMutation,
   logout as logoutAction,
+  logoutEcp,
 } from "@entities/user";
 import { ProfileIcon } from "@shared/assets";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
@@ -38,6 +39,7 @@ export const Profile: FC<ProfileProps> = ({}) => {
 
   const toggleLogout = () => {
     dispatch(logoutAction());
+    dispatch(logoutEcp());
     dispatch(baseApi.util.resetApiState());
     dispatch(authApi.util.resetApiState());
   };
