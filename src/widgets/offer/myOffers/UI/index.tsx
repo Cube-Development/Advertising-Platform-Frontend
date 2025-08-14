@@ -40,13 +40,10 @@ export const MyOffers: FC<MyOffersProps> = ({
   const dispatch = useAppDispatch();
 
   const handleSign = async () => {
-    console.log("orderId");
     if (!isAuthEcp) {
-      console.log("isAuthEcp", isAuthEcp, isModalOpen);
       setIsModalOpen(true);
       return;
     } else if (!isOfferSign) {
-      console.log("isOfferSign", isOfferSign);
       dispatch(offerOpen(true));
       return;
     }
@@ -93,7 +90,7 @@ export const MyOffers: FC<MyOffersProps> = ({
                     <SignOrder
                       docType={ENUM_INVOICE_TYPE.ACT}
                       orderId={card.id}
-                      onClick={handleSign}
+                      onSigned={handleSign}
                     />
                   }
                 />

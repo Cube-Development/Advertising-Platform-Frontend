@@ -2218,7 +2218,8 @@
     },
     "turnkey": {
       "success": "Tarif sotib olindi",
-      "error": "Tarif sotib olishda xatolik yuz berdi"
+      "error": "Tarif sotib olishda xatolik yuz berdi",
+      "error_wallet": "Sotib olish uchun pul hamyonni tanlang"
     },
     "websocket": {
       "new_message": "Sizda yangi xabar bor",

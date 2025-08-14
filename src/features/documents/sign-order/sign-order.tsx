@@ -9,11 +9,13 @@ interface ISignOrderProps
   extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   orderId: string;
   docType: ENUM_INVOICE_TYPE;
+  onSigned: () => void;
 }
 
 export const SignOrder: FC<ISignOrderProps> = ({
   orderId,
   docType,
+  onSigned,
   ...props
 }) => {
   const { t } = useTranslation();
@@ -33,7 +35,7 @@ export const SignOrder: FC<ISignOrderProps> = ({
   return (
     <MyButton
       {...rest}
-      disabled={disabled}
+      disabled={disabled || isLoading || isSignatureLoading}
       onClick={(e: MouseEvent<HTMLButtonElement>) => {
         handleSign();
         onClick && onClick?.(e);

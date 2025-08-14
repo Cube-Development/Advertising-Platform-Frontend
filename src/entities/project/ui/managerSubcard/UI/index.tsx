@@ -242,7 +242,8 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
                   </>
                 )}
               </div>
-            ) : subcard?.api_status === orderStatus.completed ? (
+            ) : subcard?.api_status === orderStatus.completed ||
+              subcard?.api_status === orderStatus.adv_accept ? (
               <div className={styles.subcard__completed}>
                 {statusFilter === managerProjectStatusFilter.completed ? (
                   <p>{t(`orders_manager.order_status.completed.title2`)}</p>
@@ -467,7 +468,8 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
                 </>
               )}
             </div>
-          ) : subcard?.api_status === orderStatus.completed ? (
+          ) : subcard?.api_status === orderStatus.completed ||
+            subcard?.api_status === orderStatus.adv_accept ? (
             <div className={styles.subcard__completed}>
               {statusFilter === managerProjectStatusFilter.completed ? (
                 <p>{t(`orders_advertiser.order_status.completed.title2`)}</p>
