@@ -9,19 +9,19 @@ import {
   useGetChannelLanguagesQuery,
   useGetChannelRegionsQuery,
 } from "@entities/channel";
+import { useFindLanguage } from "@entities/user";
 import { FormatPrice, SelectPrice, SelectSymbol } from "@features/channel";
 import { SelectDescription, SelectOptions, SelectSex } from "@features/other";
-import { ArrowLongHorizontalIcon } from "@shared/assets";
 import { BREAKPOINT, PAGE_ANIMATION } from "@shared/config";
-import { USER_LANGUAGES_LIST } from "@shared/languages/config";
 import { useWindowWidth } from "@shared/hooks";
+import { USER_LANGUAGES_LIST } from "@shared/languages/config";
 import { MyButton, useToast } from "@shared/ui";
 import { motion } from "framer-motion";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import { FC } from "react";
 import { UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { useFindLanguage } from "@entities/user";
 
 interface ChannelDescriptionProps {
   step: number;
@@ -59,10 +59,6 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
   const { data: channelCategories } = useGetChannelCategoriesQuery(contentRes);
   const { data: languages } = useGetChannelLanguagesQuery(contentRes);
   const { data: regions } = useGetChannelRegionsQuery(contentRes);
-
-  const handleBack = () => {
-    onChangeStep(1);
-  };
 
   const onSubmit = () => {
     if (
@@ -196,20 +192,24 @@ export const ChannelDescription: FC<ChannelDescriptionProps> = ({
                 />
               </div>
             </div>
-            <div className={styles.btns__wrapper}>
-              <div className={styles.btns}>
+            <div className="flex justify-center">
+              <div className="grid grid-cols-2 gap-2">
                 <MyButton
                   type="button"
                   buttons_type="button__white"
-                  className={styles.prev}
-                  onClick={() => handleBack()}
+                  onClick={() => onChangeStep(step - 1)}
+                  className="grid grid-cols-[max-content,1fr] "
                 >
-                  <ArrowLongHorizontalIcon className="active__icon" />
+                  <ArrowLeft className="text-[var(--Personal-colors-main)]" />
                   <p>{t("add_platform_btn.prev")}</p>
                 </MyButton>
-                <MyButton type="button" onClick={() => onSubmit()}>
+                <MyButton
+                  type="button"
+                  onClick={() => onSubmit()}
+                  className="grid grid-cols-[1fr,max-content]"
+                >
                   <p>{t("add_platform_btn.next")}</p>
-                  <ArrowLongHorizontalIcon className="icon__white" />
+                  <ArrowRight className="text-white" />
                 </MyButton>
               </div>
             </div>
