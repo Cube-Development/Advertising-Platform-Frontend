@@ -4,7 +4,7 @@ import {
   fetchBaseQuery,
   FetchBaseQueryError,
 } from "@reduxjs/toolkit/query/react";
-import { logout } from "@entities/user";
+import { logout, logoutEcp } from "@entities/user";
 
 const baseUrl = `${import.meta.env.VITE_BASE_URL}`;
 
@@ -25,6 +25,7 @@ export const authBaseQuery: BaseQueryFn<
   if (result.error && result.error.status === 401) {
     // Вызов логаута
     api.dispatch(logout());
+    api.dispatch(logoutEcp());
   }
 
   return result;

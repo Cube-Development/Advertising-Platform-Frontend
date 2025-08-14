@@ -1,2 +1,1 @@
-export * from "./information";
 export * from "./channel-ready";

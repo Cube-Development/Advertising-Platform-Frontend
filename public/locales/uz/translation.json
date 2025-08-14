@@ -1047,6 +1047,11 @@
         "span": "24 soat ichida",
         "text2": "yuborilgan vaqtdan boshlab"
       }
+    },
+
+    "success": {
+      "title": "Qo‘shishga tayyor",
+      "text": "Ajoyib! Kanalingizni qo‘shishga hammasi tayyor. Jo‘natilgandan so‘ng u moderatsiyadan o‘tadi va barcha foydalanuvchilar uchun katalogda paydo bo‘ladi."
     }
   },
 

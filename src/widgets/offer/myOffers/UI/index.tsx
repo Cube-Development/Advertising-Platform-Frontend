@@ -2,11 +2,11 @@ import {
   ENUM_INVOICE_TYPE,
   IBloggerOfferCard,
   offerStatusFilter,
-  useCreateOrderInvoice,
 } from "@entities/offer";
 import { offerOpen } from "@entities/user";
 import { AddChannel, ZeroChannel } from "@features/channel";
 import { SignOrder } from "@features/documents";
+import { LoginModal } from "@features/organization";
 import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";
@@ -16,7 +16,6 @@ import { motion } from "framer-motion";
 import { FC, useEffect, useState } from "react";
 import { OfferCard, OfferCardSkeleton } from "../card";
 import styles from "./styles.module.scss";
-import { LoginModal } from "@features/organization";
 
 interface MyOffersProps {
   offers: IBloggerOfferCard[];
@@ -36,7 +35,7 @@ export const MyOffers: FC<MyOffersProps> = ({
   currentPage,
 }) => {
   const { isAuthEcp, isOfferSign } = useAppSelector((state) => state.user);
-  const [isModalOpen, setIsModalOpen] = useState<boolean>(!isAuthEcp);
+  const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
   const dispatch = useAppDispatch();
 
   const handleSign = async () => {
@@ -50,7 +49,9 @@ export const MyOffers: FC<MyOffersProps> = ({
   };
 
   useEffect(() => {
-    setIsModalOpen(!isAuthEcp);
+    if (isAuthEcp) {
+      setIsModalOpen(false);
+    }
   }, [isAuthEcp]);
 
   return (

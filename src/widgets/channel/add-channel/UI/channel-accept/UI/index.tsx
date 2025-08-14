@@ -1,45 +1,27 @@
-import { IAddChannelData, IAddChannelDataPreview } from "@entities/channel";
+import { IAddChannelDataPreview } from "@entities/channel";
 import { ArrowLongHorizontalIcon } from "@shared/assets";
 import { PAGE_ANIMATION } from "@shared/config";
 import { MyButton } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC } from "react";
-import { SubmitHandler, UseFormHandleSubmit } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { useChannelAccept } from "../../../model";
 import styles from "./styles.module.scss";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 
 interface ChannelAcceptProps {
   step: number;
-  isEdit: boolean;
   variant: typeof PAGE_ANIMATION.animationLeft;
-  channel_id: string;
   dataPreview: IAddChannelDataPreview;
   onChangeStep: (newStep: number) => void;
-  handleSubmit: UseFormHandleSubmit<IAddChannelData, IAddChannelData>;
 }
 
 export const ChannelAccept: FC<ChannelAcceptProps> = ({
   step,
-  isEdit,
   variant,
-  channel_id,
   dataPreview,
   onChangeStep,
-  handleSubmit,
 }) => {
   const { t } = useTranslation();
-  const handleBack = () => {
-    onChangeStep(2);
-  };
-
-  const { channelAccept } = useChannelAccept({ channel_id, isEdit });
-
-  const onSubmit: SubmitHandler<IAddChannelData> = (data) => {
-    channelAccept(data);
-    onChangeStep(4);
-    // navigate(ENUM_PATHS.MY_CHANNELS);
-  };
 
   return (
     <>
@@ -56,11 +38,7 @@ export const ChannelAccept: FC<ChannelAcceptProps> = ({
               __html: t("add_platform.accept.title"),
             }}
           />
-          <form
-            action=""
-            className={styles.form__wrapper}
-            onSubmit={handleSubmit(onSubmit)}
-          >
+          <form action="" className={styles.form__wrapper}>
             <div className={styles.form}>
               <div className={styles.form__row}>
                 <span>
@@ -143,20 +121,23 @@ export const ChannelAccept: FC<ChannelAcceptProps> = ({
                 <p>{dataPreview?.text_limit}</p>
               </div>
             </div>
-            <div className={styles.btns__wrapper}>
-              <div className={styles.btns}>
+            <div className="flex justify-center">
+              <div className="grid grid-cols-2 gap-2">
                 <MyButton
                   type="button"
                   buttons_type="button__white"
-                  className={styles.prev}
-                  onClick={() => handleBack()}
+                  onClick={() => onChangeStep(step - 1)}
+                  className="grid grid-cols-[max-content,1fr] "
                 >
-                  <ArrowLongHorizontalIcon className="active__icon" />
-                  <p>{t("add_platform_btn.back")}</p>
+                  <ArrowLeft className="text-[var(--Personal-colors-main)]" />
+                  <p>{t("add_platform_btn.prev")}</p>
                 </MyButton>
-                <MyButton type="submit">
-                  <p>{t("add_platform_btn.send")}</p>
-                  <ArrowLongHorizontalIcon className="icon__white" />
+                <MyButton
+                  onClick={() => onChangeStep(step + 1)}
+                  className="grid grid-cols-[1fr,max-content]"
+                >
+                  <p>{t("add_platform_btn.next")}</p>
+                  <ArrowRight className="text-white" />
                 </MyButton>
               </div>
             </div>
