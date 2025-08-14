@@ -48,6 +48,12 @@ export const MyOffers: FC<MyOffersProps> = ({
     }
   };
 
+  useEffect(() => {
+    if (isAuthEcp) {
+      setIsModalOpen(false);
+    }
+  }, [isAuthEcp]);
+
   return (
     <div className={styles.wrapper}>
       <LoginModal
@@ -95,7 +101,7 @@ export const MyOffers: FC<MyOffersProps> = ({
               Array.from({ length: INTERSECTION_ELEMENTS.BLOGGER_OFFERS }).map(
                 (_, index) => (
                   <OfferCardSkeleton key={index} statusFilter={statusFilter} />
-                ),
+                )
               )}
             {!isLast && (
               <div className={styles.show_more} onClick={handleOnChangePage}>
