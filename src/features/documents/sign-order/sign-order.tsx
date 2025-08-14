@@ -28,6 +28,7 @@ export const SignOrder: FC<ISignOrderProps> = ({
   } = useCreateOrderInvoice();
 
   const handleSign = async () => {
+    onSigned && onSigned();
     if (!isAuthEcp || !isOfferSign) return;
     await create(orderId);
   };
