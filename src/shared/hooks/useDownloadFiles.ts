@@ -76,7 +76,7 @@ export const useFileDownloader = (
               setProgress(Math.round(cumulativeProgress + fileProgress));
             }
           }
-          fileBlob = new Blob(chunks);
+          fileBlob = new Blob(chunks as BlobPart[]);
         } else if (fileContent instanceof File) {
           fileBlob = fileContent;
           fileExtension = fileContent.name.split(".").pop() || "";
