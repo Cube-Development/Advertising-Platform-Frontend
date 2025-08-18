@@ -31,9 +31,19 @@ jobs:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
 
+      - name: Debug build args
+        run: |
+          echo "VITE_BASE_URL: ${{ secrets.VITE_BASE_URL }}"
+          echo "VITE_BASE_WS_URL: ${{ secrets.VITE_BASE_WS_URL }}"
+          echo "VITE_BASE_DIDOX_URL: ${{ secrets.VITE_BASE_DIDOX_URL }}"
+
       - name: Build and push Docker image
         run: |
-          docker build -t $DOCKER_IMAGE:${TAG} .
+          docker build \
+            --build-arg VITE_BASE_URL="${{ secrets.VITE_BASE_URL }}" \
+            --build-arg VITE_BASE_WS_URL="${{ secrets.VITE_BASE_WS_URL }}" \
+            --build-arg VITE_BASE_DIDOX_URL="${{ secrets.VITE_BASE_DIDOX_URL }}" \
+            -t $DOCKER_IMAGE:${TAG} .
           docker push $DOCKER_IMAGE:${TAG}
 
       - name: Configure AWS credentials
