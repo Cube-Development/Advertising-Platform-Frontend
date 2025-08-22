@@ -2416,7 +2416,7 @@
       },
       "payment": {
         "success": "Reklama kampaniyasi muvaffaqiyatli to'landi va ishga tushirildi!",
-        "error": "Hisobingizda mablag' yetarli emas, hisobni to'ldirish kerak"
+        "error": "Joriy hamyonda mablagʻ yetarli emas, iltimos balansingizni toʻldiring"
       },
       "date": {
         "error": "Kanallar uchun sana yaratishda xatolik",
@@ -2425,6 +2425,9 @@
       },
       "create_order": {
         "error": "Xatolik yuz berdi"
+      },
+      "channels": {
+        "error": "Avval savatga kanallarni qoʻshish kerak"
       }
     },
     "post": {

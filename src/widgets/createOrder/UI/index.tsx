@@ -1,5 +1,5 @@
 import { ICreatePostForm } from "@entities/project";
-import { ENUM_COOKIES_TYPES, MOCK_CREATE_ORDERS } from "@shared/config";
+import { ENUM_COOKIES_TYPES } from "@shared/config";
 import { useAppSelector } from "@shared/hooks";
 import { SpinnerLoader } from "@shared/ui";
 import Cookies from "js-cookie";
@@ -14,6 +14,7 @@ import {
 } from "../components";
 import {
   useChangeBlur,
+  useCheckBalance,
   useCreateOrderForm,
   useCreateOrderLoad,
   useOnSubmitPayment,
@@ -44,6 +45,11 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
       projectId,
     });
 
+  const { checkBalance } = useCheckBalance(
+    formState?.wallet_type,
+    totalPrice?.amount,
+  );
+
   const onSubmit: SubmitHandler<ICreatePostForm> = async (formData) => {
     if (
       projectId &&
@@ -53,14 +59,12 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
       !isPostsLoading &&
       !formState?.isDownloadPosts
     ) {
-      await payment(formData, projectId, role);
+      if (checkBalance()) {
+        await payment(formData, projectId, role);
+      }
     }
   };
 
-  // console.log("cards", projectChannels?.orders);
-
-  // const CARDS = MOCK_CREATE_ORDERS;
-  const CARDS = null;
   return (
     <>
       {isLoading && <CreateOrderLoading />}
@@ -79,7 +83,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
         ) : (
           <>
             <CreateOrderPost
-              cards={CARDS || projectChannels?.orders || []}
+              cards={projectChannels?.orders || []}
               posts={projectPosts?.posts || []}
               isBlur={blur.post}
               onChangeBlur={handleOnChangeBlur}
@@ -89,7 +93,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
             />
 
             <CreateOrderDatetime
-              cards={CARDS || projectChannels?.orders || []}
+              cards={projectChannels?.orders || []}
               isBlur={blur.datetime}
               onChangeBlur={handleOnChangeBlur}
               setValue={setValue}

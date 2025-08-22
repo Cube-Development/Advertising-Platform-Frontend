@@ -5,13 +5,12 @@ import {
   useProjectOrdersQuery,
 } from "@entities/project";
 import { useFindLanguage } from "@entities/user";
-import { ENUM_COOKIES_TYPES } from "@shared/config";
 import { useAppSelector } from "@shared/hooks";
 import { USER_LANGUAGES_LIST } from "@shared/languages";
 import { ENUM_PATHS } from "@shared/routing";
 import { useToast } from "@shared/ui";
-import Cookies from "js-cookie";
 import { useEffect } from "react";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 interface Props {
@@ -23,7 +22,7 @@ export const useCreateOrderLoad = ({ projectId }: Props) => {
   const language = useFindLanguage();
   const { toast } = useToast();
   const navigate = useNavigate();
-
+  const { t } = useTranslation();
   // project name
   const projectNameReq = {
     project_id: projectId,
@@ -65,7 +64,7 @@ export const useCreateOrderLoad = ({ projectId }: Props) => {
     if (!isOrdersLoading && projectChannels?.orders?.length === 0) {
       toast({
         variant: "error",
-        title: "Сначала нужно добавить каналы в корзину",
+        title: t("toasts.create_order.channels.error"),
       });
       navigate(ENUM_PATHS.CATALOG);
     }

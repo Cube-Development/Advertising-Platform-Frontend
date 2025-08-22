@@ -2416,7 +2416,7 @@
       },
       "payment": {
         "success": "Advertising campaign successfully paid and launched!",
-        "error": "You have insufficient funds, please top up your balance"
+        "error": "You have insufficient funds on current wallet, please top up your balance"
       },
       "date": {
         "error": "Error creating dates for channels",
@@ -2425,6 +2425,9 @@
       },
       "create_order": {
         "error": "Error occurred"
+      },
+      "channels": {
+        "error": "You need to add channels to the cart first"
       }
     },
     "post": {
