@@ -104,6 +104,8 @@ export const CryptoWebSocketProvider: React.FC<
         reconnectAttemptsRef.current = 0;
         console.log("✅ CryptoAPI WebSocket подключен");
 
+        // Добавляем API-ключ
+        addApiKey();
         // Автоматически загружаем сертификаты при подключении
         loadCertificates();
       };
@@ -338,6 +340,28 @@ export const CryptoWebSocketProvider: React.FC<
 
     wsRef.current.send(JSON.stringify(message));
     console.log("📋 Запрос списка сертификатов отправлен");
+  }, []);
+
+  const addApiKey = useCallback(() => {
+    if (!wsRef.current || wsRef.current.readyState !== WebSocket.OPEN) {
+      console.warn("⚠️ WebSocket не подключен для загрузки сертификатов");
+      return;
+    }
+
+    const message = {
+      name: "apikey",
+      arguments: [
+        "localhost",
+        "96D0C1491615C82B9A54D9989779DF825B690748224C2B04F500F370D51827CE2644D8D4A82C18184D73AB8530BB8ED537269603F61DB0D03D2104ABF789970B",
+        "127.0.0.1",
+        "A7BCFA5D490B351BE0754130DF03A068F855DB4333D43921125B9CF2670EF6A40370C646B90401955E1F7BC9CDBF59CE0B2C5467D820BE189C845D0B79CFC96F",
+        "blogix.uz",
+        "CB1B8AE5ED0253C1E0683E88A69098946230F142038B6F7E644D303ACC54D63537DC5D8CDE0D9D76E4C02ADB362EA2817E0CF62B41D3B7CFA4427E4A7460526D",
+      ],
+    };
+
+    wsRef.current.send(JSON.stringify(message));
+    console.log("📋 Отправка апи ключей");
   }, []);
 
   const loadKey = useCallback(

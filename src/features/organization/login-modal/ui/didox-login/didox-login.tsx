@@ -1,5 +1,6 @@
 import {
   ENUM_DIGITAL_LOGIN_TYPE,
+  filterCertificates,
   IDidoxFormData,
   LOGIN_BY_PASSWORD_DATA,
   useDigitalAuth,
@@ -72,8 +73,8 @@ export const DidoxLogin: FC = () => {
   };
 
   const userCertificates = useMemo(() => {
-    // return filterCertificates(certificates, organization?.PINFL);
-    return certificates;
+    return filterCertificates(certificates, organization?.PINFL);
+    // return certificates;
   }, [certificates, organization?.PINFL]);
 
   return (
