@@ -3,14 +3,12 @@ import { BREAKPOINT } from "@shared/config";
 import { useAppSelector, useWindowWidth } from "@shared/hooks";
 import { Chat, Notifications } from "@widgets/communication";
 import { FC, useEffect, useState } from "react";
-import { DropdownMenu } from "./dropdownMenu";
-import { Lang } from "./lang";
-import { LoginBtn } from "./loginBtn";
-import { Logo } from "./logo";
-import { Nav } from "./nav";
-import { Profile } from "./profile";
-import styles from "./styles.module.scss";
-import { Wallet } from "./wallet";
+import styles from "./header.module.scss";
+import { LanguageToggle, Profile, Wallet } from "./UI";
+import { DropdownMenu } from "./UI/dropdownMenu";
+import { LoginBtn } from "./UI/loginBtn";
+import { Logo } from "./UI/logo";
+import { Nav } from "./UI/nav";
 
 export const Header: FC = () => {
   const screen = useWindowWidth();
@@ -55,7 +53,7 @@ export const Header: FC = () => {
         </div>
 
         <div className={styles.profile}>
-          <Lang isAuth={isAuth} />
+          <LanguageToggle />
           {isAuth && USER_ROLES.includes(role) && screen > BREAKPOINT.MD && (
             <Wallet />
           )}

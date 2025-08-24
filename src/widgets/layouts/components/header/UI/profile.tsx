@@ -12,9 +12,9 @@ import {
   DropdownMenuTrigger,
 } from "@shared/ui";
 import { FC } from "react";
-import { PROFILE_ADMIN_MENU } from "../model";
-import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
+import { PROFILE_USER_MENU } from "../model";
 
 export const Profile: FC = () => {
   const { isAuth } = useAppSelector((state) => state.user);
@@ -32,7 +32,7 @@ export const Profile: FC = () => {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          {PROFILE_ADMIN_MENU.map((item) => (
+          {PROFILE_USER_MENU.map((item) => (
             <DropdownMenuItem
               key={item.item.title}
               className="px-3 py-2 cursor-pointer"
