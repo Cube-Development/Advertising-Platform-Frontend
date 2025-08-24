@@ -15,14 +15,16 @@ import { useNavigate } from "react-router-dom";
 export const useCreatePostManager = () => {
   const { t } = useTranslation();
   const language = useFindLanguage();
-  const [createProjectCart, { isLoading }] = useCreateProjectCartMutation();
-  const [checkProjectCart] = useCheckCartMutation();
+  const [createProjectCart, { isLoading: isLoadingCreate }] =
+    useCreateProjectCartMutation();
+  const [checkProjectCart, { isLoading: isLoadingCheck }] =
+    useCheckCartMutation();
   const { toast } = useToast();
   const navigate = useNavigate();
   const projectId = Cookies.get(ENUM_COOKIES_TYPES.PROJECT_ID) || "";
 
   const createPostManager = async () => {
-    if (isLoading) return;
+    if (isLoadingCreate || isLoadingCheck) return;
 
     try {
       await createProjectCart({
@@ -71,6 +73,6 @@ export const useCreatePostManager = () => {
   };
   return {
     createPostManager,
-    isLoading,
+    isLoading: isLoadingCreate || isLoadingCheck,
   };
 };

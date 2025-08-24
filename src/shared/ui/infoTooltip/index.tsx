@@ -3,7 +3,6 @@ import { useWindowWidth } from "@shared/hooks";
 import { InfoIcon } from "lucide-react";
 import { FC, useState } from "react";
 import { Tooltip, TooltipContent, TooltipTrigger } from "../shadcn-ui";
-import styles from "./styles.module.scss";
 
 export interface InfoTooltipProps {
   text: string;
@@ -16,18 +15,22 @@ export const InfoTooltip: FC<InfoTooltipProps> = ({ text }) => {
     <Tooltip open={open}>
       <TooltipTrigger
         type="button"
-        className={styles.trigger}
         onClick={() => setOpen(!open)}
         onMouseEnter={() => setOpen(true)}
         onMouseLeave={() => setOpen(false)}
       >
-        <InfoIcon color="#BDBDBD" />
+        <InfoIcon
+          size={16}
+          className="text-gray-200 transition-transform duration-300 ease-in hover:scale-110"
+        />
       </TooltipTrigger>
       <TooltipContent
         side={`${screen > BREAKPOINT.MD ? "right" : "top"}`}
-        className={styles.content}
+        className="max-w-[300px]"
       >
-        <p className={styles.text}>{text}</p>
+        <p className="text-[12px] font-normal leading-none text-justify indent-5 md:text-[10px] hyphens-auto">
+          {text}
+        </p>
       </TooltipContent>
     </Tooltip>
   );
