@@ -3,7 +3,7 @@ import { AddChannel } from "@features/channel";
 import { AccommList, StartAdv } from "@features/mainPages";
 import { PAGE_ANIMATION } from "@shared/config/animation";
 import { ENUM_PATHS } from "@shared/routing";
-import { IAccomm } from "@shared/types/translate";
+import { IAcom } from "@shared/types/translate";
 import { buildPathWithQuery, queryParamKeys } from "@shared/utils";
 import { motion } from "framer-motion";
 import { FC } from "react";
@@ -32,9 +32,7 @@ export const WhyChooseUs: FC<WhyChooseUsProps> = ({ page }) => {
         {t(`${page}.why_title`)}
       </motion.h1>
       <AccommList
-        accomms={
-          t(`${page}.accomms_list`, { returnObjects: true }) as IAccomm[]
-        }
+        accomms={t(`${page}.accomms_list`, { returnObjects: true }) as IAcom[]}
         custom={custom}
         toDoBtn={
           page === "main_page_advertiser" ? (

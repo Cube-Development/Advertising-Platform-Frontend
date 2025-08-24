@@ -1,25 +1,13 @@
-import { ArrowSmallVerticalIcon, LoginIcon } from "@shared/assets";
+import { LoginModal } from "@features/user";
+import { ArrowSmallVerticalIcon } from "@shared/assets";
 import { ENUM_ACCORDION_TYPES } from "@shared/config";
-import { ENUM_PATHS } from "@shared/routing";
-import {
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-  Dialog,
-  DialogClose,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogTitle,
-  DialogTrigger,
-} from "@shared/ui";
-import { CircleX, GripVertical } from "lucide-react";
+import { AccordionContent, AccordionItem, AccordionTrigger } from "@shared/ui";
+import { GripVertical } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import styles from "./styles.module.scss";
-import { useCurrentPathEnum } from "@shared/hooks";
 import { IMenuItems } from "../../../../model";
+import styles from "./styles.module.scss";
 
 export const MenuItem: React.FC<IMenuItems> = ({
   item,
@@ -51,8 +39,6 @@ export const MenuItem: React.FC<IMenuItems> = ({
     };
   }, []);
 
-  const currentPath = useCurrentPathEnum();
-
   return (
     <AccordionItem
       value={`item-${item.item.title}`}
@@ -82,8 +68,8 @@ export const MenuItem: React.FC<IMenuItems> = ({
             </div>
           </AccordionTrigger>
         ) : item.item.isDialog && !isAuth ? (
-          <Dialog>
-            <DialogTrigger asChild>
+          <LoginModal
+            trigger={
               <span>
                 <AccordionTrigger>
                   <div
@@ -96,50 +82,8 @@ export const MenuItem: React.FC<IMenuItems> = ({
                   </div>
                 </AccordionTrigger>
               </span>
-            </DialogTrigger>
-            <DialogContent className={`${styles.content} gap-[0px]`}>
-              <DialogTitle className="sr-only"></DialogTitle>
-              <DialogDescription className="sr-only"></DialogDescription>
-              <DialogClose>
-                <p className={styles.close}>
-                  <CircleX
-                    width={30}
-                    height={30}
-                    stroke="rgba(0,0,0,0.5)"
-                    strokeWidth={1.5}
-                  />
-                </p>
-              </DialogClose>
-              <div className={styles.text}>
-                <p className={styles.text__title}>
-                  {t("registration_alert.title")}
-                </p>
-                <p className={styles.text__description}>
-                  {t("registration_alert.description")}
-                </p>
-                <p className={styles.text__call_to_action}>
-                  {t("registration_alert.call_to_action")}
-                </p>
-              </div>
-              <DialogFooter className="pt-[20px]">
-                <Link
-                  to={`${ENUM_PATHS.LOGIN}${currentPath}`}
-                  className={`${styles.btns__login} truncate`}
-                  onClick={() => onChange()}
-                >
-                  {t("login")}
-                  <LoginIcon />
-                </Link>
-                <Link
-                  to={`${ENUM_PATHS.REGISTRATION}${currentPath}`}
-                  className={`${styles.btns__register} truncate`}
-                  onClick={() => onChange()}
-                >
-                  {t("registration")}
-                </Link>
-              </DialogFooter>
-            </DialogContent>
-          </Dialog>
+            }
+          />
         ) : (
           <Link to={item.item.path!} onClick={() => onChange(item.item.path!)}>
             <AccordionTrigger>

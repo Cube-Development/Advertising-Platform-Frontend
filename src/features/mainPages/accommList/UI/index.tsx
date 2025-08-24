@@ -1,12 +1,12 @@
 import { FC, ReactElement } from "react";
 import styles from "./styles.module.scss";
-import { IAccomm } from "@shared/types/translate";
+import { IAcom } from "@shared/types/translate";
 import { motion } from "framer-motion";
 import { PAGE_ANIMATION } from "@shared/config/animation";
 import { AccommCard } from "../accommCard";
 
 interface AccommProps {
-  accomms: IAccomm[];
+  accomms: IAcom[];
   toDoBtn: ReactElement;
   custom: number;
 }

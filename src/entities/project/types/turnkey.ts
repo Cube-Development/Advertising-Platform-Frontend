@@ -1,10 +1,12 @@
-import { TarifIndex } from "../config";
+import { ENUM_WALLETS_TYPE } from "@entities/wallet";
+import { TariffIndex } from "../config";
 
-export interface IBuyTarif {
-  tariff_ident: TarifIndex;
+export interface IBuyTariff {
+  tariff_ident: TariffIndex;
   comment: string;
   links: string[];
   attached_files: IAttachedFiles[];
+  wallet_type: ENUM_WALLETS_TYPE | null;
 }
 
 interface IAttachedFiles {
