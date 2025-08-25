@@ -1,9 +1,12 @@
 import { AppDispatch } from "@app/providers/store";
 import { dateSortingTypes } from "@entities/platform";
 import { ILanguage, USER_LANGUAGES_LIST } from "@shared/languages";
-import { advProjectsAPI, getProjectsCardReq } from "../../api";
-import { advManagerProjectStatusFilter, projectStatus } from "../../config";
-import { IAdvProjects } from "../../types";
+import { advProjectsAPI, getProjectsCardReq } from "../../../api";
+import {
+  ENUM_ADV_MANAGER_PROJECT_STATUS,
+  projectStatus,
+} from "../../../config";
+import { IAdvProjects } from "../../../types";
 
 interface Props {
   project_id: string;
@@ -17,7 +20,7 @@ export const invalidateAdvProjectByDesire = ({
   language = USER_LANGUAGES_LIST[0],
 }: Props) => {
   const baseParams = {
-    status: advManagerProjectStatusFilter.request_approve,
+    status: ENUM_ADV_MANAGER_PROJECT_STATUS.REQUEST_APPROVE,
     language: language?.id,
     date_sort: dateSortingTypes.decrease,
   };

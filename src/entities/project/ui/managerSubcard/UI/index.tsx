@@ -6,7 +6,7 @@ import {
   IManagerProjectSubcard,
   IOrderFeature,
   desireStatus,
-  managerProjectStatusFilter,
+  ENUM_MANAGER_PROJECT_STATUS,
   orderStatus,
   orderStatusChat,
   platformToIcon,
@@ -49,7 +49,7 @@ interface ManagerProjectSubcardProps {
   ChangePostBtn: FC<ChangePostProps>;
   SeeCommentBtn: FC;
   ChannelChatBtn: FC<IChatProps>;
-  statusFilter: managerProjectStatusFilter;
+  statusFilter: ENUM_MANAGER_PROJECT_STATUS;
 }
 
 export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
@@ -86,10 +86,10 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
 
   return (
     <div
-      className={`${styles.wrapper} ${statusFilter === managerProjectStatusFilter.active ? "" : styles.no__chat}`}
+      className={`${styles.wrapper} ${statusFilter === ENUM_MANAGER_PROJECT_STATUS.ACTIVE ? "" : styles.no__chat}`}
     >
       <div
-        className={`${styles.subcard} ${statusFilter === managerProjectStatusFilter.active ? styles.grid__active : styles.grid}`}
+        className={`${styles.subcard} ${statusFilter === ENUM_MANAGER_PROJECT_STATUS.ACTIVE ? styles.grid__active : styles.grid}`}
       >
         <div className={styles.platform__icon}>
           {subcard?.platform && subcard?.platform in platformToIcon
@@ -206,7 +206,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
         {screen > BREAKPOINT.MD && (
           <>
             {subcard?.desire?.length &&
-            statusFilter !== managerProjectStatusFilter.active ? (
+            statusFilter !== ENUM_MANAGER_PROJECT_STATUS.ACTIVE ? (
               <div className={styles.subcard__posted}>
                 <div className={styles.subcard__posted__title}>
                   <p>{t(`orders_manager.order_status.comment.title`)}</p>
@@ -231,7 +231,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
             ) : subcard?.api_status === orderStatus.canceled ||
               subcard?.api_status === orderStatus.rejected ? (
               <div className={styles.subcard__cancel}>
-                {statusFilter === managerProjectStatusFilter.completed ? (
+                {statusFilter === ENUM_MANAGER_PROJECT_STATUS.COMPLETED ? (
                   <p>{t(`orders_manager.order_status.rejected.title2`)}</p>
                 ) : (
                   <>
@@ -245,7 +245,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
             ) : subcard?.api_status === orderStatus.completed ||
               subcard?.api_status === orderStatus.adv_accept ? (
               <div className={styles.subcard__completed}>
-                {statusFilter === managerProjectStatusFilter.completed ? (
+                {statusFilter === ENUM_MANAGER_PROJECT_STATUS.COMPLETED ? (
                   <p>{t(`orders_manager.order_status.completed.title2`)}</p>
                 ) : (
                   <>
@@ -321,7 +321,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
           </>
         )}
         {screen > BREAKPOINT.MD &&
-          statusFilter === managerProjectStatusFilter.active && (
+          statusFilter === ENUM_MANAGER_PROJECT_STATUS.ACTIVE && (
             <div
               // className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : "deactive"}`}
               className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : ""}`}
@@ -422,7 +422,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
       )}
       {screen <= BREAKPOINT.MD && (
         <>
-          {statusFilter === managerProjectStatusFilter.active && (
+          {statusFilter === ENUM_MANAGER_PROJECT_STATUS.ACTIVE && (
             <div
               className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : "deactive"}`}
             >
@@ -459,7 +459,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
           ) : subcard?.api_status === orderStatus.canceled ||
             subcard?.api_status === orderStatus.rejected ? (
             <div className={styles.subcard__cancel}>
-              {statusFilter === managerProjectStatusFilter.completed ? (
+              {statusFilter === ENUM_MANAGER_PROJECT_STATUS.COMPLETED ? (
                 <p>{t(`orders_manager.order_status.rejected.title2`)}</p>
               ) : (
                 <>
@@ -471,7 +471,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
           ) : subcard?.api_status === orderStatus.completed ||
             subcard?.api_status === orderStatus.adv_accept ? (
             <div className={styles.subcard__completed}>
-              {statusFilter === managerProjectStatusFilter.completed ? (
+              {statusFilter === ENUM_MANAGER_PROJECT_STATUS.COMPLETED ? (
                 <p>{t(`orders_advertiser.order_status.completed.title2`)}</p>
               ) : (
                 <>

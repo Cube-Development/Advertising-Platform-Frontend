@@ -3,7 +3,7 @@ import { IStartProjectProps } from "@shared/types/common";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { projectTypesFilter } from "@entities/project";
+import { ENUM_PROJECT_TYPES } from "@entities/project";
 
 interface ZeroProjectProps {
   listLength: boolean;
@@ -24,7 +24,7 @@ export const ZeroProject: FC<ZeroProjectProps> = ({
     <div className={styles.wrapper}>
       <div className={styles.no__project}>
         <div className={styles.smile}>
-          {typeFilter === projectTypesFilter.savedProject ? (
+          {typeFilter === ENUM_PROJECT_TYPES.SAVED_PROJECT ? (
             <>
               <div>
                 <StarIcon5 />

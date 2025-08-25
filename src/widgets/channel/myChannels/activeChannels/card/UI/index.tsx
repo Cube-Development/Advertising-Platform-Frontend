@@ -4,7 +4,7 @@ import {
   IInactiveChannel,
   IModerationChannel,
   IModerationRejectChannel,
-  channelStatusFilter,
+  ENUM_CHANNEL_STATUS,
   useActivateChannelMutation,
 } from "@entities/channel";
 import { platformToIcon } from "@entities/project";
@@ -43,7 +43,7 @@ interface ChannelCardProps {
     | IModerationRejectChannel
     | IBlockedChannel
     | IModerationChannel;
-  statusFilter: channelStatusFilter;
+  statusFilter: ENUM_CHANNEL_STATUS;
 }
 
 export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
@@ -95,8 +95,8 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
               <div className={styles.logo__img_wrapper}>
                 <img src={card.avatar} alt="" />
               </div>
-              {statusFilter === channelStatusFilter.active ||
-              statusFilter === channelStatusFilter.inactive ? (
+              {statusFilter === ENUM_CHANNEL_STATUS.ACTIVE ||
+              statusFilter === ENUM_CHANNEL_STATUS.INACTIVE ? (
                 <RatingIcon
                   rate={(card as IActiveChannel | IInactiveChannel)?.grade || 0}
                 />
@@ -112,7 +112,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
                 <span className="truncate">{card?.category}</span>
               </div>
               <div className={styles.card__description__top__icons}>
-                {statusFilter === channelStatusFilter.banned ? (
+                {statusFilter === ENUM_CHANNEL_STATUS.BANNED ? (
                   <p>{(card as IBlockedChannel)?.blocked_date}</p>
                 ) : (
                   <div>
@@ -125,13 +125,13 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
             </div>
             <div className={styles.status}>
               <p>
-                {statusFilter === channelStatusFilter.active ? (
+                {statusFilter === ENUM_CHANNEL_STATUS.ACTIVE ? (
                   t(`platforms_blogger.card.status.active`)
-                ) : statusFilter === channelStatusFilter.moderationReject ? (
+                ) : statusFilter === ENUM_CHANNEL_STATUS.REJECTED ? (
                   t(`platforms_blogger.card.status.reject`)
-                ) : statusFilter === channelStatusFilter.inactive ? (
+                ) : statusFilter === ENUM_CHANNEL_STATUS.INACTIVE ? (
                   t(`platforms_blogger.card.status.deactivate`)
-                ) : statusFilter === channelStatusFilter.banned ? (
+                ) : statusFilter === ENUM_CHANNEL_STATUS.BANNED ? (
                   t(`platforms_blogger.card.status.ban`)
                 ) : (
                   <></>
@@ -141,13 +141,13 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
           </div>
           <div className={styles.status_lg}>
             <p>
-              {statusFilter === channelStatusFilter.active ? (
+              {statusFilter === ENUM_CHANNEL_STATUS.ACTIVE ? (
                 t(`platforms_blogger.card.status.active`)
-              ) : statusFilter === channelStatusFilter.moderationReject ? (
+              ) : statusFilter === ENUM_CHANNEL_STATUS.REJECTED ? (
                 t(`platforms_blogger.card.status.reject`)
-              ) : statusFilter === channelStatusFilter.inactive ? (
+              ) : statusFilter === ENUM_CHANNEL_STATUS.INACTIVE ? (
                 t(`platforms_blogger.card.status.deactivate`)
-              ) : statusFilter === channelStatusFilter.banned ? (
+              ) : statusFilter === ENUM_CHANNEL_STATUS.BANNED ? (
                 t(`platforms_blogger.card.status.ban`)
               ) : (
                 <></>
@@ -157,7 +157,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
         </div>
         <div className={styles.card__info}>
           <>
-            {statusFilter === channelStatusFilter.active ? (
+            {statusFilter === ENUM_CHANNEL_STATUS.ACTIVE ? (
               <div className={styles.card__info__offers}>
                 <div className={styles.wait_block}>
                   {t(`platforms_blogger.card.new`)}:{" "}
@@ -165,7 +165,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
                 </div>
                 <SeeOffers />
               </div>
-            ) : statusFilter === channelStatusFilter.moderationReject &&
+            ) : statusFilter === ENUM_CHANNEL_STATUS.REJECTED &&
               new Date((card as IModerationRejectChannel)?.reapplication_date) <
                 new Date() ? (
               <div className={styles.card__info__top}>
@@ -174,18 +174,18 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
                   {(card as IModerationRejectChannel)?.reapplication_date}
                 </span>
               </div>
-            ) : statusFilter === channelStatusFilter.moderationReject ? (
+            ) : statusFilter === ENUM_CHANNEL_STATUS.REJECTED ? (
               <div className={styles.card__info__top}>
                 <span>{t(`platforms_blogger.repeat`)}</span>
               </div>
-            ) : statusFilter === channelStatusFilter.inactive ? (
+            ) : statusFilter === ENUM_CHANNEL_STATUS.INACTIVE ? (
               <div
                 className={styles.card__info__top}
                 onClick={handleActiveChannel}
               >
                 <ActivateChannel />
               </div>
-            ) : statusFilter === channelStatusFilter.banned ? (
+            ) : statusFilter === ENUM_CHANNEL_STATUS.BANNED ? (
               <div className={styles.card__info__top}>
                 <span>{t(`platforms_blogger.ban`)}</span>
               </div>
@@ -194,19 +194,19 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
             )}
           </>
 
-          {statusFilter === channelStatusFilter.moderationReject ? (
+          {statusFilter === ENUM_CHANNEL_STATUS.REJECTED ? (
             <div className={styles.card__info__bottom2}>
               <SeeReason reason={(card as IModerationRejectChannel)?.reason} />
               <RepeatModeration />
             </div>
-          ) : statusFilter === channelStatusFilter.banned ? (
+          ) : statusFilter === ENUM_CHANNEL_STATUS.BANNED ? (
             <div className={styles.card__info__bottom2}>
               <SeeReason reason={(card as IBlockedChannel)?.reason} />
               <Support />
             </div>
           ) : (
             <div className={styles.card__info__bottom}>
-              {statusFilter === channelStatusFilter.active && (
+              {statusFilter === ENUM_CHANNEL_STATUS.ACTIVE && (
                 <div>
                   <figure>
                     <RocketIcon />
@@ -250,7 +250,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
           />
         </div>
       </div>
-      {statusFilter === channelStatusFilter.active ? (
+      {statusFilter === ENUM_CHANNEL_STATUS.ACTIVE ? (
         <div className={styles.platform__events}>
           <Link
             // to={`${paths.addChannel}?channel_id=${card?.id}`}
@@ -275,7 +275,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
           </Link>
         </div>
       ) : (
-        statusFilter === channelStatusFilter.inactive && (
+        statusFilter === ENUM_CHANNEL_STATUS.INACTIVE && (
           <div className={`${styles.platform__events} ${styles.inactive}`}>
             <Link
               // to={`${paths.addChannel}?channel_id=${card?.id}`}

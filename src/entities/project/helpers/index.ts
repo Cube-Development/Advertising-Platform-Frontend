@@ -1,2 +1,2 @@
-export * from "./invalidateAdvertiser";
-export * from "./invalidateManager";
+export * from "./invalidate-advertiser";
+export * from "./invalidate-manager";

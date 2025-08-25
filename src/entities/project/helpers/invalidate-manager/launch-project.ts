@@ -4,7 +4,7 @@ import { ENUM_ROLES } from "@entities/user";
 import { MANAGER_ORDERS, VIEWS_MANAGER } from "@shared/api";
 import { ILanguage, USER_LANGUAGES_LIST } from "@shared/languages";
 import { getManagerProjectsCardReq, managerProjectsAPI } from "../../api";
-import { managerProjectStatusFilter } from "../../config";
+import { ENUM_MANAGER_PROJECT_STATUS } from "../../config";
 import { IManagerProjects } from "../../types";
 
 interface Props {
@@ -23,7 +23,7 @@ export const invalidateManagerProjectByLaunchProject = async ({
   if (role !== ENUM_ROLES.MANAGER) return;
 
   const baseParams = {
-    status: managerProjectStatusFilter.request_approve,
+    status: ENUM_MANAGER_PROJECT_STATUS.REQUEST_APPROVE,
     language: language?.id,
     date_sort: dateSortingTypes.decrease,
   };
@@ -43,6 +43,6 @@ export const invalidateManagerProjectByLaunchProject = async ({
 
   // 2. Обновляем кэш кружочков
   dispatch(
-    managerProjectsAPI.util.invalidateTags([VIEWS_MANAGER, MANAGER_ORDERS]),
+    managerProjectsAPI.util.invalidateTags([MANAGER_ORDERS, VIEWS_MANAGER]),
   );
 };

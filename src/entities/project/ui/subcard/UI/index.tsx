@@ -4,13 +4,13 @@ import {
   IAdvProjectCard,
   IAdvProjectSubcard,
   IOrderFeature,
-  advManagerProjectStatusFilter,
-  myProjectStatusFilter,
+  ENUM_ADV_MANAGER_PROJECT_STATUS,
+  ENUM_ADV_MY_PROJECT_STATUS,
   orderStatus,
   orderStatusChat,
   platformToIcon,
   projectStatus,
-  projectTypesFilter,
+  ENUM_PROJECT_TYPES,
   useGetPostQuery,
 } from "@entities/project";
 import { ENUM_ROLES } from "@entities/user";
@@ -50,8 +50,8 @@ interface AdvSubcardProps {
   ReplaceChannelBtn: FC<ReplaceChannelProps>;
   ReplacePostBtn: FC<ReplacePostProps>;
   ChannelChatBtn: FC<IChatProps>;
-  typeFilter: projectTypesFilter;
-  statusFilter: advManagerProjectStatusFilter | myProjectStatusFilter;
+  typeFilter: ENUM_PROJECT_TYPES;
+  statusFilter: ENUM_ADV_MANAGER_PROJECT_STATUS | ENUM_ADV_MY_PROJECT_STATUS;
 }
 
 export const AdvSubcard: FC<AdvSubcardProps> = ({
@@ -90,10 +90,10 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
 
   return (
     <div
-      className={`${styles.wrapper} ${(typeFilter === projectTypesFilter.myProject && statusFilter === advManagerProjectStatusFilter.completed) || typeFilter === projectTypesFilter.managerProject ? styles.no__chat : ""}`}
+      className={`${styles.wrapper} ${(typeFilter === ENUM_PROJECT_TYPES.MY_PROJECT && statusFilter === ENUM_ADV_MANAGER_PROJECT_STATUS.COMPLETED) || typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT ? styles.no__chat : ""}`}
     >
       <div
-        className={`${styles.subcard} ${typeFilter === projectTypesFilter.myProject && statusFilter === advManagerProjectStatusFilter.active ? styles.grid__active : styles.grid}`}
+        className={`${styles.subcard} ${typeFilter === ENUM_PROJECT_TYPES.MY_PROJECT && statusFilter === ENUM_ADV_MANAGER_PROJECT_STATUS.ACTIVE ? styles.grid__active : styles.grid}`}
       >
         <div className={styles.platform__icon}>
           {subcard?.platform && subcard?.platform in platformToIcon
@@ -212,8 +212,8 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
             {subcard?.api_status === orderStatus.canceled ||
             subcard?.api_status === orderStatus.rejected ? (
               <div className={styles.subcard__cancel}>
-                {typeFilter === projectTypesFilter.managerProject &&
-                statusFilter === advManagerProjectStatusFilter.completed ? (
+                {typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT &&
+                statusFilter === ENUM_ADV_MANAGER_PROJECT_STATUS.COMPLETED ? (
                   <>
                     <p>{t(`orders_advertiser.order_status.rejected.title2`)}</p>
                     <span>
@@ -224,9 +224,9 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                   <>
                     <p>{t(`orders_advertiser.order_status.rejected.title`)}</p>
                     <span>
-                      {typeFilter === projectTypesFilter.managerProject
+                      {typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT
                         ? t(`orders_advertiser.order_status.rejected.text2`)
-                        : typeFilter === projectTypesFilter.myProject &&
+                        : typeFilter === ENUM_PROJECT_TYPES.MY_PROJECT &&
                           t(`orders_advertiser.order_status.rejected.text`)}
                     </span>
                   </>
@@ -235,7 +235,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
             ) : subcard?.api_status === orderStatus.completed ||
               subcard?.api_status === orderStatus.adv_accept ? (
               <div className={styles.subcard__completed}>
-                {typeFilter === projectTypesFilter.managerProject ? (
+                {typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT ? (
                   <p>{t(`orders_advertiser.order_status.completed.title2`)}</p>
                 ) : (
                   <>
@@ -250,7 +250,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
               <div className={styles.subcard__posted}>
                 <div className={styles.subcard__posted__title}>
                   <p>{t(`orders_advertiser.order_status.posted.title`)}</p>
-                  {typeFilter === projectTypesFilter.managerProject || (
+                  {typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT || (
                     <span>
                       {t(`orders_advertiser.order_status.posted.text`)}
                     </span>
@@ -258,7 +258,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                 </div>
                 <div className={styles.subcard__posted__buttons}>
                   <CheckBtn url={subcard?.post_url} />
-                  {typeFilter === projectTypesFilter.managerProject || (
+                  {typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT || (
                     <div className={styles.subcard__posted__buttons__top}>
                       <AcceptBtn order_id={subcard?.id} />
                       <RejectBtn order_id={subcard?.id} />
@@ -269,7 +269,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
             ) : subcard?.api_status === orderStatus.in_progress ? (
               <div className={styles.subcard__accepted}>
                 <p>{t(`orders_advertiser.order_status.accepted.title`)}</p>
-                {typeFilter === projectTypesFilter.managerProject || (
+                {typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT || (
                   <span>
                     {t(`orders_advertiser.order_status.accepted.text`)}
                   </span>
@@ -333,8 +333,8 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
           </>
         )}
         {screen > BREAKPOINT.MD &&
-          typeFilter === projectTypesFilter.myProject &&
-          statusFilter === advManagerProjectStatusFilter.active && (
+          typeFilter === ENUM_PROJECT_TYPES.MY_PROJECT &&
+          statusFilter === ENUM_ADV_MANAGER_PROJECT_STATUS.ACTIVE && (
             <div
               className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : "deactive1"}`}
             >
@@ -434,8 +434,8 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
       )}
       {screen <= BREAKPOINT.MD && (
         <>
-          {typeFilter === projectTypesFilter.myProject &&
-            statusFilter === advManagerProjectStatusFilter.active && (
+          {typeFilter === ENUM_PROJECT_TYPES.MY_PROJECT &&
+            statusFilter === ENUM_ADV_MANAGER_PROJECT_STATUS.ACTIVE && (
               <div
                 className={`${styles.subcard__chat} ${orderStatusChat.includes(subcard?.api_status) ? "" : "deactive"}`}
               >
@@ -448,8 +448,8 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
           {subcard?.api_status === orderStatus.canceled ||
           subcard?.api_status === orderStatus.rejected ? (
             <div className={styles.subcard__cancel}>
-              {typeFilter === projectTypesFilter.managerProject &&
-              statusFilter === advManagerProjectStatusFilter.completed ? (
+              {typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT &&
+              statusFilter === ENUM_ADV_MANAGER_PROJECT_STATUS.COMPLETED ? (
                 <>
                   <p>{t(`orders_advertiser.order_status.rejected.title2`)}</p>
                   <span>
@@ -460,9 +460,9 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                 <>
                   <p>{t(`orders_advertiser.order_status.rejected.title`)}</p>
                   <span>
-                    {typeFilter === projectTypesFilter.managerProject
+                    {typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT
                       ? t(`orders_advertiser.order_status.rejected.text2`)
-                      : typeFilter === projectTypesFilter.myProject &&
+                      : typeFilter === ENUM_PROJECT_TYPES.MY_PROJECT &&
                         t(`orders_advertiser.order_status.rejected.text`)}
                   </span>
                 </>
@@ -471,7 +471,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
           ) : subcard?.api_status === orderStatus.completed ||
             subcard?.api_status === orderStatus.adv_accept ? (
             <div className={styles.subcard__completed}>
-              {typeFilter === projectTypesFilter.managerProject ? (
+              {typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT ? (
                 <p>{t(`orders_advertiser.order_status.completed.title2`)}</p>
               ) : (
                 <>
@@ -486,12 +486,12 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
             <div className={styles.subcard__posted}>
               <div className={styles.subcard__posted__title}>
                 <p>{t(`orders_advertiser.order_status.posted.title`)}</p>
-                {typeFilter === projectTypesFilter.managerProject || (
+                {typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT || (
                   <span>{t(`orders_advertiser.order_status.posted.text`)}</span>
                 )}
               </div>
               <div className={styles.subcard__posted__buttons}>
-                {typeFilter === projectTypesFilter.managerProject || (
+                {typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT || (
                   <div className={styles.subcard__posted__buttons__top}>
                     <AcceptBtn order_id={subcard?.id} />
                     <RejectBtn order_id={subcard?.id} />
@@ -503,7 +503,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
           ) : subcard?.api_status === orderStatus.in_progress ? (
             <div className={styles.subcard__accepted}>
               <p>{t(`orders_advertiser.order_status.accepted.title`)}</p>
-              {typeFilter === projectTypesFilter.managerProject || (
+              {typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT || (
                 <span>{t(`orders_advertiser.order_status.accepted.text`)}</span>
               )}
               <SeePostBtn post={post!} />

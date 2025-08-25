@@ -4,11 +4,11 @@ import { ENUM_ROLES } from "@entities/user";
 import { VIEWS_ADVERTISER } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ILanguage, USER_LANGUAGES_LIST } from "@shared/languages";
-import { advProjectsAPI } from "../../api";
+import { advProjectsAPI } from "../../../api";
 import {
-  advManagerProjectStatusFilter,
-  myProjectStatusFilter,
-} from "../../config";
+  ENUM_ADV_MANAGER_PROJECT_STATUS,
+  ENUM_ADV_MY_PROJECT_STATUS,
+} from "../../../config";
 
 interface Props {
   dispatch: AppDispatch;
@@ -18,7 +18,7 @@ interface Props {
   >[0];
   language: ILanguage;
   role: ENUM_ROLES;
-  status: advManagerProjectStatusFilter | myProjectStatusFilter;
+  status: ENUM_ADV_MANAGER_PROJECT_STATUS | ENUM_ADV_MY_PROJECT_STATUS;
 }
 
 export const invalidateAdvProjectUpdate = async ({
@@ -36,7 +36,7 @@ export const invalidateAdvProjectUpdate = async ({
     language: language?.id,
     date_sort: dateSortingTypes.decrease,
     page: 1,
-    elements_on_page: INTERSECTION_ELEMENTS.ADV_ORDERS,
+    elements_on_page: INTERSECTION_ELEMENTS.ADV_PROJECTS,
     __isWebsocket: true,
   };
 

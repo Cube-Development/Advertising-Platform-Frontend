@@ -5,7 +5,7 @@ import { VIEWS_MANAGER } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ILanguage, USER_LANGUAGES_LIST } from "@shared/languages";
 import { managerProjectsAPI } from "../../api";
-import { managerProjectStatusFilter } from "../../config";
+import { ENUM_MANAGER_PROJECT_STATUS } from "../../config";
 
 interface Props {
   dispatch: AppDispatch;
@@ -27,10 +27,10 @@ export const invalidateManagerNewProject = async ({
   // 1. Получаем page=1
   const params = {
     page: 1,
-    elements_on_page: INTERSECTION_ELEMENTS.MANAGER_ORDERS,
+    elements_on_page: INTERSECTION_ELEMENTS.MANAGER_PROJECTS,
     language: language?.id,
     date_sort: dateSortingTypes.decrease,
-    status: managerProjectStatusFilter.new,
+    status: ENUM_MANAGER_PROJECT_STATUS.NEW,
     __isWebsocket: true,
   };
 

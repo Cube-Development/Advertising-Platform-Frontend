@@ -2,7 +2,7 @@ import { channelData } from "@entities/channel";
 import { dateSortingTypes } from "@entities/platform";
 import {
   getProjectsCardReq,
-  managerProjectStatusFilter,
+  ENUM_MANAGER_PROJECT_STATUS,
   useGetManagerProjectsQuery,
 } from "@entities/project";
 import { useFindLanguage } from "@entities/user";
@@ -29,11 +29,11 @@ export const ManagerOrders: FC = () => {
 
   const startStatus =
     project_status &&
-    !!Object.values(managerProjectStatusFilter).includes(
-      project_status as managerProjectStatusFilter,
+    !!Object.values(ENUM_MANAGER_PROJECT_STATUS).includes(
+      project_status as ENUM_MANAGER_PROJECT_STATUS,
     )
       ? project_status
-      : managerProjectStatusFilter.active;
+      : ENUM_MANAGER_PROJECT_STATUS.ACTIVE;
 
   const startProjectId = isValidUUID(project_id || "") ? project_id : undefined;
 
@@ -42,7 +42,7 @@ export const ManagerOrders: FC = () => {
       page: 1,
       language: language?.id || USER_LANGUAGES_LIST[0].id,
       status: startStatus,
-      elements_on_page: INTERSECTION_ELEMENTS.MANAGER_ORDERS,
+      elements_on_page: INTERSECTION_ELEMENTS.MANAGER_PROJECTS,
       date_sort: dateSortingTypes.decrease,
       ...(startProjectId ? { search_string: startProjectId } : {}),
     },
@@ -72,12 +72,12 @@ export const ManagerOrders: FC = () => {
   const { refetch: views } = useGetViewManagerProjectQuery();
 
   useEffect(() => {
-    if (formState.status === managerProjectStatusFilter.completed) {
+    if (formState.status === ENUM_MANAGER_PROJECT_STATUS.COMPLETED) {
       views();
     }
   }, [formState.status, formState.page]);
 
-  const handleChangeStatus = (status: managerProjectStatusFilter | string) => {
+  const handleChangeStatus = (status: ENUM_MANAGER_PROJECT_STATUS | string) => {
     setValue("status", status);
     setValue("page", 1);
   };
@@ -124,7 +124,7 @@ export const ManagerOrders: FC = () => {
           onChange={setValue}
           value={formState.search_string}
         />
-        {formState.status === managerProjectStatusFilter.new ? (
+        {formState.status === ENUM_MANAGER_PROJECT_STATUS.NEW ? (
           <ManagerNewProjectsList
             projects={data?.projects}
             handleOnChangePage={handleOnChangePage}
@@ -134,7 +134,7 @@ export const ManagerOrders: FC = () => {
           />
         ) : (
           <ManagerProjectsList
-            statusFilter={formState.status as managerProjectStatusFilter}
+            statusFilter={formState.status as ENUM_MANAGER_PROJECT_STATUS}
             projects={data?.projects}
             handleOnChangePage={handleOnChangePage}
             isLoading={isLoadingMore}

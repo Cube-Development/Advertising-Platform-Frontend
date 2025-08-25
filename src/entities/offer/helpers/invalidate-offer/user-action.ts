@@ -3,7 +3,7 @@ import {
   bloggerOffersAPI,
   getOrdersByStatusReq,
   IBloggerOffers,
-  offerStatusFilter,
+  ENUM_OFFER_STATUS,
 } from "@entities/offer";
 import { ENUM_ROLES } from "@entities/user";
 import { VIEWS_BLOGGER_OFFERS } from "@shared/api";
@@ -12,10 +12,10 @@ interface Props {
   dispatch: AppDispatch;
   role: ENUM_ROLES;
   order_id: string;
-  status: offerStatusFilter;
+  status: ENUM_OFFER_STATUS;
 }
 
-export const invalidateBloggerOfferByAction = async ({
+export const invalidateBloggerOfferByUserAction = async ({
   dispatch,
   role,
   order_id,

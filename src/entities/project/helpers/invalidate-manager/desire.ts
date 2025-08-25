@@ -5,7 +5,7 @@ import { MANAGER_ORDERS, VIEWS_MANAGER } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ILanguage, USER_LANGUAGES_LIST } from "@shared/languages";
 import { getManagerProjectsCardReq, managerProjectsAPI } from "../../api";
-import { managerProjectStatusFilter } from "../../config";
+import { ENUM_MANAGER_PROJECT_STATUS } from "../../config";
 import { IManagerProjects } from "../../types";
 
 interface Props {
@@ -18,7 +18,7 @@ interface Props {
   role: ENUM_ROLES;
 }
 
-export const invalidateManagerProjectByBloggerAction = async ({
+export const invalidateManagerProjectByDesire = async ({
   dispatch,
   trigger,
   language = USER_LANGUAGES_LIST[0],
@@ -30,16 +30,16 @@ export const invalidateManagerProjectByBloggerAction = async ({
   let page: number | null = null;
 
   const baseParams = {
-    status: managerProjectStatusFilter.active,
+    status: ENUM_MANAGER_PROJECT_STATUS.REQUEST_APPROVE,
     language: language?.id,
     date_sort: dateSortingTypes.decrease,
   };
 
-  // 1. Найдём страницу в кеше проектов активные, где лежит project_id
+  // 1. Найдём страницу в кеше, где лежит project_id
   dispatch(
     managerProjectsAPI.util.updateQueryData(
       "getManagerProjects",
-      baseParams as getManagerProjectsCardReq,
+      baseParams as getManagerProjectsCardReq, // ключ кэша, т.к. serializeQueryArgs без page,
       (draft: IManagerProjects) => {
         if (!draft?.projects?.length) return;
 
@@ -48,7 +48,7 @@ export const invalidateManagerProjectByBloggerAction = async ({
         );
 
         if (index !== -1) {
-          page = Math.floor(index / INTERSECTION_ELEMENTS.MANAGER_ORDERS) + 1;
+          page = Math.floor(index / INTERSECTION_ELEMENTS.MANAGER_PROJECTS) + 1;
         }
       },
     ),
@@ -61,12 +61,12 @@ export const invalidateManagerProjectByBloggerAction = async ({
   // 2. Получаем актуальные данные по этой странице
   await trigger({
     ...baseParams,
-    elements_on_page: INTERSECTION_ELEMENTS.MANAGER_ORDERS,
     page,
+    elements_on_page: INTERSECTION_ELEMENTS.MANAGER_PROJECTS,
     __isWebsocket: true,
   }).unwrap();
 
-  // 3. Обновляем кэш кружочков и ордеров
+  // 3. Обновляем кэш кружочков
   dispatch(
     managerProjectsAPI.util.invalidateTags([MANAGER_ORDERS, VIEWS_MANAGER]),
   );

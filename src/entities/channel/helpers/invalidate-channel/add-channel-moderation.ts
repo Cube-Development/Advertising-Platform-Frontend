@@ -4,8 +4,8 @@ import { ENUM_ROLES } from "@entities/user";
 import { VIEWS_BLOGGER_CHANNELS } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ILanguage, USER_LANGUAGES_LIST } from "@shared/languages";
-import { channelAPI } from "../api";
-import { channelStatusFilter } from "../config";
+import { channelAPI } from "../../api";
+import { ENUM_CHANNEL_STATUS } from "../../config";
 
 interface Props {
   dispatch: AppDispatch;
@@ -14,7 +14,7 @@ interface Props {
   role: ENUM_ROLES;
 }
 
-export const invalidateBloggerChannelsOnModeration = async ({
+export const invalidateBloggerChannelsAddChannelModeration = async ({
   dispatch,
   trigger,
   language = USER_LANGUAGES_LIST[0],
@@ -24,7 +24,7 @@ export const invalidateBloggerChannelsOnModeration = async ({
 
   // 1. Обновляем кэш каналов на модерации
   const params = {
-    status: channelStatusFilter.moderation,
+    status: ENUM_CHANNEL_STATUS.MODERATION,
     language: language?.id,
     date_sort: dateSortingTypes.decrease,
     page: 1,

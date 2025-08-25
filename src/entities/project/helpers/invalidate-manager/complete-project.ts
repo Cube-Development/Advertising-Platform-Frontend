@@ -5,7 +5,7 @@ import { MANAGER_ORDERS, VIEWS_MANAGER } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ILanguage, USER_LANGUAGES_LIST } from "@shared/languages";
 import { getManagerProjectsCardReq, managerProjectsAPI } from "../../api";
-import { managerProjectStatusFilter } from "../../config";
+import { ENUM_MANAGER_PROJECT_STATUS } from "../../config";
 import { IManagerProjects } from "../../types";
 
 interface Props {
@@ -18,7 +18,7 @@ interface Props {
   role: ENUM_ROLES;
 }
 
-export const invalidateManagerProjectByDesire = async ({
+export const invalidateManagerProjectByCompleteProject = async ({
   dispatch,
   trigger,
   language = USER_LANGUAGES_LIST[0],
@@ -27,44 +27,33 @@ export const invalidateManagerProjectByDesire = async ({
 }: Props) => {
   if (role !== ENUM_ROLES.MANAGER) return;
 
-  let page: number | null = null;
-
+  // 1. Удалим проект из кеша проектов на активных
   const baseParams = {
-    status: managerProjectStatusFilter.request_approve,
+    status: ENUM_MANAGER_PROJECT_STATUS.ACTIVE,
     language: language?.id,
     date_sort: dateSortingTypes.decrease,
   };
-
-  // 1. Найдём страницу в кеше, где лежит project_id
   dispatch(
     managerProjectsAPI.util.updateQueryData(
       "getManagerProjects",
-      baseParams as getManagerProjectsCardReq, // ключ кэша, т.к. serializeQueryArgs без page,
+      baseParams as getManagerProjectsCardReq,
       (draft: IManagerProjects) => {
-        if (!draft?.projects?.length) return;
-
-        const index = draft.projects.findIndex(
-          (el) => el.project_id === project_id,
-        );
-
-        if (index !== -1) {
-          page = Math.floor(index / INTERSECTION_ELEMENTS.MANAGER_ORDERS) + 1;
-        }
+        draft.projects = draft.projects.filter((el) => el.id !== project_id);
       },
     ),
   );
 
-  if (!page) {
-    page = 1;
-  }
-
-  // 2. Получаем актуальные данные по этой странице
-  await trigger({
-    ...baseParams,
-    page,
-    elements_on_page: INTERSECTION_ELEMENTS.MANAGER_ORDERS,
+  // 2. Обновляем кэш проектов выполненные
+  const params = {
+    status: ENUM_MANAGER_PROJECT_STATUS.COMPLETED,
+    language: language?.id,
+    date_sort: dateSortingTypes.decrease,
+    page: 1,
+    elements_on_page: INTERSECTION_ELEMENTS.MANAGER_PROJECTS,
     __isWebsocket: true,
-  }).unwrap();
+  };
+
+  await trigger(params).unwrap();
 
   // 3. Обновляем кэш кружочков
   dispatch(

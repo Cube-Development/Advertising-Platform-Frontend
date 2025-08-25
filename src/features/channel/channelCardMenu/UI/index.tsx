@@ -1,5 +1,5 @@
-import { channelStatusFilter } from "@entities/channel";
-import { offerStatusFilter } from "@entities/offer";
+import { ENUM_CHANNEL_STATUS } from "@entities/channel";
+import { ENUM_OFFER_STATUS } from "@entities/offer";
 import { CancelIcon2, MoreIcon } from "@shared/assets";
 import { ENUM_PATHS } from "@shared/routing";
 import { buildPathWithQuery, queryParamKeys } from "@shared/utils";
@@ -12,7 +12,7 @@ interface ChannelCardMenuProps {
   channel_id: string;
   DeleteChannel: FC<{ channel_id: string; onChange: () => void }>;
   DeactivateChannel: FC<{ channel_id: string; onChange: () => void }>;
-  statusFilter: channelStatusFilter | offerStatusFilter | string;
+  statusFilter: ENUM_CHANNEL_STATUS | ENUM_OFFER_STATUS | string;
 }
 
 export const ChannelCardMenu: FC<ChannelCardMenuProps> = ({
@@ -82,7 +82,7 @@ export const ChannelCardMenu: FC<ChannelCardMenuProps> = ({
             </button>
           </div>
           <ul>
-            {statusFilter === channelStatusFilter.active && (
+            {statusFilter === ENUM_CHANNEL_STATUS.ACTIVE && (
               <Link
                 to={buildPathWithQuery(ENUM_PATHS.ADD_CHANNEL, {
                   [queryParamKeys.channelId]: channel_id,
@@ -91,7 +91,7 @@ export const ChannelCardMenu: FC<ChannelCardMenuProps> = ({
                 <li>{t("platforms_blogger.menu.edit")}</li>
               </Link>
             )}
-            {statusFilter === channelStatusFilter.active && (
+            {statusFilter === ENUM_CHANNEL_STATUS.ACTIVE && (
               <li onClick={(e) => handleDeactivateModalOpen(e)}>
                 {t("platforms_blogger.menu.deactivate")}
               </li>

@@ -1,9 +1,9 @@
 import {
   IAddChannelQuery,
   addChannelQueries,
-  channelStatusFilter,
+  ENUM_CHANNEL_STATUS,
 } from "@entities/channel";
-import { offerStatusFilter } from "@entities/offer";
+import { ENUM_OFFER_STATUS } from "@entities/offer";
 import { HappySmileIcon, SadSmileIcon } from "@shared/assets";
 import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";
 import { buildPathWithQuery, queryParamKeys } from "@shared/utils";
@@ -15,7 +15,7 @@ interface ZeroChannelProps {
   AddChannelBtn: FC<IAddChannelQuery>;
   path?: ENUM_PATHS;
   page: ENUM_PAGE_FILTER;
-  statusFilter: channelStatusFilter | offerStatusFilter | string;
+  statusFilter: ENUM_CHANNEL_STATUS | ENUM_OFFER_STATUS | string;
 }
 
 export const ZeroChannel: FC<ZeroChannelProps> = ({
@@ -38,7 +38,7 @@ export const ZeroChannel: FC<ZeroChannelProps> = ({
   return (
     <div className={styles.wrapper}>
       <div className={styles.smile}>
-        {statusFilter === channelStatusFilter.banned ? (
+        {statusFilter === ENUM_CHANNEL_STATUS.BANNED ? (
           <>
             <div>
               <HappySmileIcon />

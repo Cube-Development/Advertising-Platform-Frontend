@@ -1,6 +1,6 @@
 import { dateSortingTypes, PostTypesNum } from "@entities/platform";
 import {
-  advManagerProjectStatusFilter,
+  ENUM_ADV_MANAGER_PROJECT_STATUS,
   IAdvManagerProjectsDev,
   IAdvProjects,
   IAdvSubprojects,
@@ -8,8 +8,8 @@ import {
   IFile,
   IOrderReportInfo,
   IPostChannel,
-  managerProjectStatusFilter,
-  myProjectStatusFilter,
+  ENUM_MANAGER_PROJECT_STATUS,
+  ENUM_ADV_MY_PROJECT_STATUS,
 } from "@entities/project";
 import {
   ADV_ORDERS,
@@ -46,9 +46,9 @@ export interface getProjectsCardReq {
   language?: ENUM_LANGUAGES_NUM;
   page: number;
   status:
-    | advManagerProjectStatusFilter
-    | myProjectStatusFilter
-    | managerProjectStatusFilter
+    | ENUM_ADV_MANAGER_PROJECT_STATUS
+    | ENUM_ADV_MY_PROJECT_STATUS
+    | ENUM_MANAGER_PROJECT_STATUS
     | string;
   elements_on_page?: number;
   date_sort?: dateSortingTypes;
@@ -209,7 +209,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
           isLast:
             response?.elements ===
               response?.projects?.length +
-                (response?.page - 1) * INTERSECTION_ELEMENTS.ADV_ORDERS ||
+                (response?.page - 1) * INTERSECTION_ELEMENTS.ADV_PROJECTS ||
             response?.projects?.length === 0,
         };
       },
@@ -305,7 +305,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
           isLast:
             response?.elements ===
               response?.projects?.length +
-                (response?.page - 1) * INTERSECTION_ELEMENTS.ADV_ORDERS ||
+                (response?.page - 1) * INTERSECTION_ELEMENTS.ADV_PROJECTS ||
             response?.projects?.length === 0,
         };
       },

@@ -1,4 +1,4 @@
-import { managerProjectStatusFilter } from "@entities/project";
+import { ENUM_MANAGER_PROJECT_STATUS } from "@entities/project";
 
 export interface IViewManagerProject {
   count: number;
@@ -12,6 +12,6 @@ interface IProjectType {
 }
 
 interface IOrderStatus {
-  status: managerProjectStatusFilter;
+  status: ENUM_MANAGER_PROJECT_STATUS;
   count: number;
 }

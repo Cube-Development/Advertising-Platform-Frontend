@@ -1,9 +1,9 @@
 import { CheckDate } from "@entities/communication";
 import {
   IBloggerOfferCard,
-  offerStatus,
-  offerStatusChat,
-  offerStatusFilter,
+  ENUM_OFFER_STATUS_BACKEND,
+  OFFER_CHAT_LIST,
+  ENUM_OFFER_STATUS,
 } from "@entities/offer";
 import { platformToIcon, useGetPostQuery } from "@entities/project";
 import { ENUM_ROLES } from "@entities/user";
@@ -21,7 +21,7 @@ import { CircleCheckBig, FileText } from "lucide-react";
 
 interface OfferCardProps {
   card: IBloggerOfferCard;
-  statusFilter: offerStatusFilter | string;
+  statusFilter: ENUM_OFFER_STATUS | string;
   sign: ReactNode;
 }
 
@@ -40,7 +40,7 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
   }
   return (
     <div
-      className={`${styles.card} ${statusFilter === offerStatusFilter.active ? styles.active__chat : ""} border__gradient`}
+      className={`${styles.card} ${statusFilter === ENUM_OFFER_STATUS.ACTIVE ? styles.active__chat : ""} border__gradient`}
     >
       <div className={styles.platform__icon}>
         {card?.platform && card?.platform in platformToIcon
@@ -69,7 +69,7 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
           <p>{card.order_status}</p>
         </div>
       </div>
-      {statusFilter === offerStatusFilter.active && (
+      {statusFilter === ENUM_OFFER_STATUS.ACTIVE && (
         <div className={`${styles.chat__btn} display__hide__min__md`}>
           <Chat orderId={card.id} toRole={ENUM_ROLES.ADVERTISER} />
         </div>
@@ -104,8 +104,8 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
         </div>
       </div>
       <>
-        {statusFilter === offerStatusFilter.active &&
-        card?.api_status === offerStatus.in_progress ? (
+        {statusFilter === ENUM_OFFER_STATUS.ACTIVE &&
+        card?.api_status === ENUM_OFFER_STATUS_BACKEND.in_progress ? (
           <div className={styles.card__active}>
             <div className={styles.card__active__title}>
               <p>{t(`offers_blogger.offer_status.active.title`)}</p>
@@ -127,15 +127,15 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
               </div>
             </div>
           </div>
-        ) : statusFilter === offerStatusFilter.active &&
-          card?.api_status === offerStatus.post_review ? (
+        ) : statusFilter === ENUM_OFFER_STATUS.ACTIVE &&
+          card?.api_status === ENUM_OFFER_STATUS_BACKEND.post_review ? (
           <div className={styles.card__check}>
             <div>
               <p>{t(`offers_blogger.offer_status.check.title`)}</p>
               <span>{t(`offers_blogger.offer_status.check.text`)}</span>
             </div>
           </div>
-        ) : statusFilter === offerStatusFilter.wait ? (
+        ) : statusFilter === ENUM_OFFER_STATUS.WAIT ? (
           <div className={styles.card__wait}>
             <div className={styles.card__wait__title}>
               <p>{t(`offers_blogger.offer_status.wait.title`)}</p>
@@ -153,9 +153,9 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
               <SeePost post={post!} />
             </div>
           </div>
-        ) : statusFilter === offerStatusFilter.completed ? (
+        ) : statusFilter === ENUM_OFFER_STATUS.COMPLETED ? (
           <div className={styles.card__complete}>
-            {card?.api_status === offerStatus?.toSign ? (
+            {card?.api_status === ENUM_OFFER_STATUS_BACKEND?.toSign ? (
               <>
                 <div className="flex items-center gap-2 text-gray-600">
                   <FileText className="w-5 h-5" />
@@ -174,20 +174,20 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
               </div>
             )}
           </div>
-        ) : statusFilter === offerStatusFilter.canceled ? (
+        ) : statusFilter === ENUM_OFFER_STATUS.CANCELED ? (
           <div className={styles.card__cancel}>
             <div>
               <p>{t(`offers_blogger.offer_status.cancel.title`)}</p>
               <span>{t(`offers_blogger.offer_status.cancel.text`)}</span>
             </div>
           </div>
-        ) : statusFilter === offerStatusFilter.moderation ? (
+        ) : statusFilter === ENUM_OFFER_STATUS.MODERATION ? (
           <div className={styles.card__moderation}>
             <div>
               <span>{t(`offers_blogger.offer_status.moderation.text`)}</span>
             </div>
           </div>
-        ) : statusFilter === offerStatusFilter.unfulfilled ? (
+        ) : statusFilter === ENUM_OFFER_STATUS.UNFULFILLED ? (
           <div className={styles.card__uncomplete}>
             <div className={styles.card__uncomplete__title}>
               <p>{t(`offers_blogger.offer_status.reject.title`)}</p>
@@ -208,7 +208,7 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
           </button>
         </div>
 
-        {offerStatusChat.includes(statusFilter as offerStatusFilter) && (
+        {OFFER_CHAT_LIST.includes(statusFilter as ENUM_OFFER_STATUS) && (
           <div className={`${styles.chat__btn} display__hide__max__md`}>
             <Chat orderId={card?.id} toRole={ENUM_ROLES.ADVERTISER} />
           </div>

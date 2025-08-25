@@ -5,8 +5,8 @@ import {
   IEditChannelData,
   IReadChannelData,
   IReviewData,
-  channelStatus,
-  channelStatusFilter,
+  ENUM_CHANNEL_STATUS_BACKEND,
+  ENUM_CHANNEL_STATUS,
   ratingData,
 } from "@entities/channel";
 import { dateSortingTypes } from "@entities/platform";
@@ -24,7 +24,7 @@ export interface getChannelsByStatusReq {
   page: number;
   date_sort: dateSortingTypes;
   elements_on_page?: number;
-  status: channelStatusFilter | string;
+  status: ENUM_CHANNEL_STATUS | string;
   search_string?: string;
   channel_id?: string;
 }
@@ -54,7 +54,10 @@ export const channelAPI = authApi.injectEndpoints({
         body: BodyParams,
       }),
     }),
-    createChannel: build.mutation<{ status: channelStatus }, IAddChannelData>({
+    createChannel: build.mutation<
+      { status: ENUM_CHANNEL_STATUS_BACKEND },
+      IAddChannelData
+    >({
       query: (BodyParams) => ({
         url: `/channel/create`,
         method: `POST`,
@@ -163,7 +166,10 @@ export const channelAPI = authApi.injectEndpoints({
       }),
       invalidatesTags: [BLOGGER_CHANNELS],
     }),
-    editChannel: build.mutation<{ status: channelStatus }, IEditChannelData>({
+    editChannel: build.mutation<
+      { status: ENUM_CHANNEL_STATUS_BACKEND },
+      IEditChannelData
+    >({
       query: (body) => ({
         url: "/channel/edit",
         method: "PUT",

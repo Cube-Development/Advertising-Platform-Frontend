@@ -1,11 +1,11 @@
 import {
   AdvSubcard,
   IAdvProjectCard,
-  advManagerProjectStatusFilter,
+  ENUM_ADV_MANAGER_PROJECT_STATUS,
   getProjectSubcardReq,
-  myProjectStatusFilter,
+  ENUM_ADV_MY_PROJECT_STATUS,
   projectStatus,
-  projectTypesFilter,
+  ENUM_PROJECT_TYPES,
   useGetAdvManagerSubprojectsQuery,
   useGetAdvSubprojectsQuery,
 } from "@entities/project";
@@ -53,8 +53,8 @@ import { useWindowWidth } from "@shared/hooks";
 
 interface AdvProjectCardProps {
   card: IAdvProjectCard;
-  typeFilter: projectTypesFilter;
-  statusFilter: advManagerProjectStatusFilter | myProjectStatusFilter;
+  typeFilter: ENUM_PROJECT_TYPES;
+  statusFilter: ENUM_ADV_MANAGER_PROJECT_STATUS | ENUM_ADV_MY_PROJECT_STATUS;
 }
 
 const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
@@ -62,13 +62,13 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
   return (
     <div
       className={`${styles.card} ${
-        typeFilter === projectTypesFilter.managerProject
+        typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT
           ? //  && statusFilter !== advManagerProjectStatusFilter.completed
             styles.manager_chat
           : ""
       } ${
-        typeFilter === projectTypesFilter.managerProject &&
-        statusFilter === advManagerProjectStatusFilter.completed
+        typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT &&
+        statusFilter === ENUM_ADV_MANAGER_PROJECT_STATUS.COMPLETED
           ? styles.card__manager_completed
           : ""
       }`}
@@ -86,13 +86,13 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
         </div>
         <div className={styles.card__description__status}>
           <p>
-            {statusFilter === myProjectStatusFilter.completed
+            {statusFilter === ENUM_ADV_MY_PROJECT_STATUS.COMPLETED
               ? t("orders_advertiser.card.status.completed")
               : t("orders_advertiser.card.status.active")}
           </p>
         </div>
       </div>
-      {typeFilter === projectTypesFilter.managerProject && (
+      {typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT && (
         // statusFilter !== advManagerProjectStatusFilter.completed &&
         <div className={`${styles.chat__btn} display__hide__min__md`}>
           <Chat projectId={card?.id} toRole={ENUM_ROLES.MANAGER} />
@@ -116,8 +116,8 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
             </span>
           </div>
 
-          {typeFilter === projectTypesFilter.managerProject &&
-            statusFilter === advManagerProjectStatusFilter.completed && (
+          {typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT &&
+            statusFilter === ENUM_ADV_MANAGER_PROJECT_STATUS.COMPLETED && (
               <div>
                 <p>{t("orders_advertiser.card.remainder")}:</p>
                 <span>
@@ -128,8 +128,8 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
             )}
         </div>
         <>
-          {typeFilter === projectTypesFilter.managerProject &&
-          statusFilter === advManagerProjectStatusFilter.request_approve ? (
+          {typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT &&
+          statusFilter === ENUM_ADV_MANAGER_PROJECT_STATUS.REQUEST_APPROVE ? (
             <div className={styles.card__info__icons_manager_request_approve}>
               {card?.is_request_approve === projectStatus.approved ? (
                 <div>
@@ -152,8 +152,8 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
                 <></>
               )}
             </div>
-          ) : typeFilter === projectTypesFilter.managerProject &&
-            statusFilter === advManagerProjectStatusFilter.completed ? (
+          ) : typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT &&
+            statusFilter === ENUM_ADV_MANAGER_PROJECT_STATUS.COMPLETED ? (
             <div className={styles.card__info__icons_manager_completed}>
               <div className={styles.top}>
                 <div>
@@ -170,8 +170,8 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
                 <DownloadReport project_id={card?.id} />
               </div>
             </div>
-          ) : typeFilter === projectTypesFilter.managerProject &&
-            statusFilter === advManagerProjectStatusFilter.active ? (
+          ) : typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT &&
+            statusFilter === ENUM_ADV_MANAGER_PROJECT_STATUS.ACTIVE ? (
             <div className={styles.card__info__icons_manager_active}>
               <div>
                 <RocketIcon />
@@ -190,8 +190,8 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
                 <p>{card?.wait?.toLocaleString()}</p>
               </div>
             </div>
-          ) : typeFilter === projectTypesFilter.myProject &&
-            statusFilter === myProjectStatusFilter.completed ? (
+          ) : typeFilter === ENUM_PROJECT_TYPES.MY_PROJECT &&
+            statusFilter === ENUM_ADV_MY_PROJECT_STATUS.COMPLETED ? (
             <div className={styles.card__info__icons_completed}>
               <div className={styles.icons}>
                 <div className={styles.icon}>
@@ -237,7 +237,7 @@ const Card: FC<AdvProjectCardProps> = ({ card, statusFilter, typeFilter }) => {
             <MoreIcon />
           </button>
         </div>
-        {typeFilter === projectTypesFilter.managerProject && (
+        {typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT && (
           // statusFilter !== advManagerProjectStatusFilter.completed &&
           <div className={`${styles.chat__btn} display__hide__max__md`}>
             <Chat projectId={card?.id} toRole={ENUM_ROLES.MANAGER} />
@@ -266,12 +266,12 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
 
   const { data: subcardsAdv, isLoading: isLoadingAdv } =
     useGetAdvSubprojectsQuery(getParams, {
-      skip: !isSubcardOpen || typeFilter !== projectTypesFilter.myProject,
+      skip: !isSubcardOpen || typeFilter !== ENUM_PROJECT_TYPES.MY_PROJECT,
     });
 
   const { data: subcardsManager, isLoading: isLoadingManager } =
     useGetAdvManagerSubprojectsQuery(getParams, {
-      skip: !isSubcardOpen || typeFilter !== projectTypesFilter.managerProject,
+      skip: !isSubcardOpen || typeFilter !== ENUM_PROJECT_TYPES.MANAGER_PROJECT,
     });
 
   const handleChangeOpenSubcard = (): void => {
@@ -389,7 +389,7 @@ export const AdvProjectCard: FC<AdvProjectCardProps> = ({
             <div
               className={`absolute top-0 left-0 w-full transition-transform duration-500 ${
                 isSubcardOpen ? "-translate-x-full" : "translate-x-0"
-              } ${styles.wrapper} ${typeFilter === projectTypesFilter.managerProject && statusFilter === advManagerProjectStatusFilter.completed ? styles.completed : ""}`}
+              } ${styles.wrapper} ${typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT && statusFilter === ENUM_ADV_MANAGER_PROJECT_STATUS.COMPLETED ? styles.completed : ""}`}
             >
               <Card
                 card={card}

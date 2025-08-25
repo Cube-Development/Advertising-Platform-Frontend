@@ -1,7 +1,7 @@
 import {
-  advManagerProjectStatusFilter,
+  ENUM_ADV_MANAGER_PROJECT_STATUS,
   FILES,
-  projectTypesFilter,
+  ENUM_PROJECT_TYPES,
   tariffData,
 } from "@entities/project";
 import { LoginModal } from "@features/user";
@@ -397,9 +397,9 @@ export const BuyTariff: FC<BuyTariffProps> = ({ tariff, tariffInfo }) => {
               <Link
                 to={buildPathWithQuery(ENUM_PATHS.ORDERS, {
                   [queryParamKeys.projectType]:
-                    projectTypesFilter.managerProject,
+                    ENUM_PROJECT_TYPES.MANAGER_PROJECT,
                   [queryParamKeys.projectStatus]:
-                    advManagerProjectStatusFilter.develop,
+                    ENUM_ADV_MANAGER_PROJECT_STATUS.DEVELOP,
                 })}
                 className="h-full"
               >

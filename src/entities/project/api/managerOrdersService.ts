@@ -121,7 +121,7 @@ export const managerProjectsAPI = authApi.injectEndpoints({
           isLast:
             response?.elements <=
               response?.projects?.length +
-                (response?.page - 1) * INTERSECTION_ELEMENTS.MANAGER_ORDERS ||
+                (response?.page - 1) * INTERSECTION_ELEMENTS.MANAGER_PROJECTS ||
             response?.projects?.length === 0,
         };
       },

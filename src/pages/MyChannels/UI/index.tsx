@@ -1,6 +1,6 @@
 import {
   channelData,
-  channelStatusFilter,
+  ENUM_CHANNEL_STATUS,
   getChannelsByStatusReq,
   IModerationChannel,
   useGetChannelsByStatusQuery,
@@ -50,11 +50,11 @@ export const MyChannelsPage: FC = () => {
 
   const startStatus =
     channel_status &&
-    !!Object.values(channelStatusFilter).includes(
-      channel_status as channelStatusFilter,
+    !!Object.values(ENUM_CHANNEL_STATUS).includes(
+      channel_status as ENUM_CHANNEL_STATUS,
     )
       ? channel_status
-      : channelStatusFilter.active;
+      : ENUM_CHANNEL_STATUS.ACTIVE;
 
   const startChannelId = isValidUUID(channel_id || "") ? channel_id : undefined;
 
@@ -91,7 +91,7 @@ export const MyChannelsPage: FC = () => {
   const { refetch: views } = useGetViewBloggerChannelQuery();
 
   useEffect(() => {
-    if (formState.status !== channelStatusFilter.inactive) {
+    if (formState.status !== ENUM_CHANNEL_STATUS.INACTIVE) {
       views();
     }
   }, [formState.status, formState.page]);
@@ -127,13 +127,13 @@ export const MyChannelsPage: FC = () => {
             onChange={setValue}
             value={formState.search_string}
           />
-          {formState.status !== channelStatusFilter.moderation ? (
+          {formState.status !== ENUM_CHANNEL_STATUS.MODERATION ? (
             <ActiveChannels
               cards={data?.channels || []}
               handleOnChangePage={() => setValue("page", formState?.page + 1)}
               isLoading={isFetching}
               isLast={data?.isLast || false}
-              statusFilter={formState.status as channelStatusFilter}
+              statusFilter={formState.status as ENUM_CHANNEL_STATUS}
             />
           ) : (
             <ModerationChannels

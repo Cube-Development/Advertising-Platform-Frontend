@@ -1,5 +1,5 @@
 import { AppDispatch } from "@app/providers/store";
-import { bloggerOffersAPI, offerStatusFilter } from "@entities/offer";
+import { bloggerOffersAPI, ENUM_OFFER_STATUS } from "@entities/offer";
 import { dateSortingTypes } from "@entities/platform";
 import { ENUM_ROLES } from "@entities/user";
 import { VIEWS_BLOGGER_OFFERS } from "@shared/api";
@@ -11,11 +11,11 @@ interface Props {
   trigger: ReturnType<typeof bloggerOffersAPI.useLazyGetBloggerOrdersQuery>[0];
   language: ILanguage;
   role: ENUM_ROLES;
-  status: offerStatusFilter;
+  status: ENUM_OFFER_STATUS;
   skip_views?: boolean;
 }
 
-export const invalidateBloggerOfferByNewOrder = async ({
+export const invalidateBloggerOfferByWebsocketAction = async ({
   dispatch,
   trigger,
   language = USER_LANGUAGES_LIST[0],

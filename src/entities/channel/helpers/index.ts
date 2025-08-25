@@ -1,1 +1,1 @@
-export * from "./invalidateBloggerChannelsOnModeration";
+export * from "./invalidate-channel";

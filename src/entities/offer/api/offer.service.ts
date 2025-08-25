@@ -2,7 +2,7 @@ import {
   IBloggerOffers,
   IGetInvoiceRequest,
   IOrderAcceptFinallyRequest,
-  offerStatusFilter,
+  ENUM_OFFER_STATUS,
 } from "@entities/offer";
 import { dateSortingTypes } from "@entities/platform";
 import { IOrderFeature } from "@entities/project";
@@ -22,7 +22,7 @@ export interface getOrdersByStatusReq {
   page: number;
   date_sort: dateSortingTypes;
   elements_on_page?: number;
-  status: offerStatusFilter | string;
+  status: ENUM_OFFER_STATUS | string;
   search_string?: string;
   order_id?: string;
 }
