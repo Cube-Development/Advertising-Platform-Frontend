@@ -12,6 +12,7 @@ export enum ENUM_OFFER_STATUS_BACKEND {
   unknown1 = 11,
   unknown2 = 12,
   toSign = 13,
+  waitingForPayment = 14,
 }
 
 export enum ENUM_OFFER_STATUS {

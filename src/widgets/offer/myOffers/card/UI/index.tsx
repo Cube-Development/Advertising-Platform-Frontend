@@ -1,23 +1,23 @@
 import { CheckDate } from "@entities/communication";
 import {
-  IBloggerOfferCard,
-  ENUM_OFFER_STATUS_BACKEND,
-  OFFER_CHAT_LIST,
   ENUM_OFFER_STATUS,
+  ENUM_OFFER_STATUS_BACKEND,
+  IBloggerOfferCard,
+  OFFER_CHAT_LIST,
 } from "@entities/offer";
 import { platformToIcon, useGetPostQuery } from "@entities/project";
 import { ENUM_ROLES } from "@entities/user";
 import { AcceptOffer, RejectOffer, SeePost, SendLink } from "@features/offer";
 import { SeeReason } from "@features/other";
-import { HappySmileIcon, MoreIcon } from "@shared/assets";
+import { MoreIcon } from "@shared/assets";
 import { ENUM_PATHS } from "@shared/routing";
 import { CountdownTimer, useToast } from "@shared/ui";
 import { Chat } from "@widgets/communication";
+import { CalendarClock, CircleCheckBig, FileText } from "lucide-react";
 import { FC, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
-import { CircleCheckBig, FileText } from "lucide-react";
 
 interface OfferCardProps {
   card: IBloggerOfferCard;
@@ -165,6 +165,14 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
                 </div>
                 {sign}
               </>
+            ) : card?.api_status ===
+              ENUM_OFFER_STATUS_BACKEND?.waitingForPayment ? (
+              <div className="flex flex-col items-center gap-2 text-gray-600">
+                <CalendarClock className="w-8 h-8 text-green-500" />
+                <span className="text-sm font-medium text-center">
+                  <p>{t("offers_blogger.offer_status.complete.wait")}</p>
+                </span>
+              </div>
             ) : (
               <div className="flex flex-col items-center gap-2 text-gray-600">
                 <CircleCheckBig className="w-8 h-8 text-green-500" />

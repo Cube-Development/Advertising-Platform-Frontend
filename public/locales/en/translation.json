@@ -920,7 +920,8 @@
       },
       "complete": {
         "title": "Order Completed",
-        "signed": "Documents signed"
+        "signed": "Documents signed",
+        "wait": "Please wait for the funds to be credited to your account"
       },
       "moderation": {
         "text": "The order does not meet the requirements of the Blogix platform. Please wait for the administrator's decision"

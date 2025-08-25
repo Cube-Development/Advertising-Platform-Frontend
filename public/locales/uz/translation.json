@@ -923,7 +923,8 @@
       },
       "complete": {
         "title": "Buyurtma bajarildi",
-        "signed": "Qabul qilindi"
+        "signed": "Qabul qilindi",
+        "wait": "Hisobingizga mablagʻ tushishini kuting"
       },
       "moderation": {
         "text": "Buyurtma Blogix platformasi talablariga mos kelmadi. Administrator qarorini kuting"
