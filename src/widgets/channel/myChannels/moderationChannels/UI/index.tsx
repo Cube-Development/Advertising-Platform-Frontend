@@ -1,5 +1,5 @@
-import { IModerationChannel, channelStatusFilter } from "@entities/channel";
-import { offerStatusFilter } from "@entities/offer";
+import { IModerationChannel, ENUM_CHANNEL_STATUS } from "@entities/channel";
+import { ENUM_OFFER_STATUS } from "@entities/offer";
 import { AddChannel, ZeroChannel } from "@features/channel";
 import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
 import { ENUM_PAGE_FILTER } from "@shared/routing";
@@ -14,7 +14,7 @@ interface ModerationChannelsProps {
   handleOnChangePage: () => void;
   isLoading: boolean;
   isLast: boolean;
-  statusFilter: channelStatusFilter | offerStatusFilter | string;
+  statusFilter: ENUM_CHANNEL_STATUS | ENUM_OFFER_STATUS | string;
 }
 
 export const ModerationChannels: FC<ModerationChannelsProps> = ({

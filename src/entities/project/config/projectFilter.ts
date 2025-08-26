@@ -1,91 +1,91 @@
-export enum projectTypesFilter {
-  myProject = "my_project",
-  managerProject = "manager_project",
-  savedProject = "saved_project",
+export enum ENUM_PROJECT_TYPES {
+  MY_PROJECT = "my_project",
+  MANAGER_PROJECT = "manager_project",
+  SAVED_PROJECT = "saved_project",
 }
 
-export enum myProjectStatusFilter {
-  active = "active",
-  completed = "completed",
+export enum ENUM_ADV_MY_PROJECT_STATUS {
+  ACTIVE = "active",
+  COMPLETED = "completed",
 }
 
-export enum advManagerProjectStatusFilter {
-  active = "active",
-  develop = "new",
-  request_approve = "request_approve",
-  completed = "completed",
+export enum ENUM_ADV_MANAGER_PROJECT_STATUS {
+  ACTIVE = "active",
+  DEVELOP = "new",
+  REQUEST_APPROVE = "request_approve",
+  COMPLETED = "completed",
 }
 
-export enum managerProjectStatusFilter {
-  active = "active",
-  request_approve = "request_approve",
-  new = "new",
-  completed = "completed",
+export enum ENUM_MANAGER_PROJECT_STATUS {
+  ACTIVE = "active",
+  REQUEST_APPROVE = "request_approve",
+  NEW = "new",
+  COMPLETED = "completed",
 }
 
-export const advMyProjectStatus = [
+export const ADV_MY_PROJECT_TABS_LIST = [
   {
     name: "orders_advertiser.status_filter.active",
-    type: myProjectStatusFilter.active,
+    type: ENUM_ADV_MY_PROJECT_STATUS.ACTIVE,
   },
   {
     name: "orders_advertiser.status_filter.complete",
-    type: myProjectStatusFilter.completed,
+    type: ENUM_ADV_MY_PROJECT_STATUS.COMPLETED,
   },
 ];
 
-export const advManagerProjectStatus = [
+export const ADV_MANAGER_PROJECT_TABS_LIST = [
   {
     name: "orders_advertiser.status_filter.active",
-    type: advManagerProjectStatusFilter.active,
+    type: ENUM_ADV_MANAGER_PROJECT_STATUS.ACTIVE,
   },
   {
     name: "orders_advertiser.status_filter.develop",
-    type: advManagerProjectStatusFilter.develop,
+    type: ENUM_ADV_MANAGER_PROJECT_STATUS.DEVELOP,
   },
   {
     name: "orders_advertiser.status_filter.agreed",
-    type: advManagerProjectStatusFilter.request_approve,
+    type: ENUM_ADV_MANAGER_PROJECT_STATUS.REQUEST_APPROVE,
   },
   {
     name: "orders_advertiser.status_filter.complete",
-    type: advManagerProjectStatusFilter.completed,
+    type: ENUM_ADV_MANAGER_PROJECT_STATUS.COMPLETED,
   },
 ];
 
-export const managerProjectStatus = [
+export const MANAGER_PROJECT_TABS_LIST = [
   {
     name: "orders_manager.status_filter.active",
-    type: managerProjectStatusFilter.active,
+    type: ENUM_MANAGER_PROJECT_STATUS.ACTIVE,
   },
   {
     name: "orders_manager.status_filter.new",
-    type: managerProjectStatusFilter.new,
+    type: ENUM_MANAGER_PROJECT_STATUS.NEW,
   },
   {
     name: "orders_manager.status_filter.agreed",
-    type: managerProjectStatusFilter.request_approve,
+    type: ENUM_MANAGER_PROJECT_STATUS.REQUEST_APPROVE,
   },
   {
     name: "orders_manager.status_filter.complete",
-    type: managerProjectStatusFilter.completed,
+    type: ENUM_MANAGER_PROJECT_STATUS.COMPLETED,
   },
 ];
 
-export const advertiserProjectTypes = [
+export const ADVERTISER_PROJECT_TABS_LIST = [
   {
     name: "orders_advertiser.type_filter.my_project",
-    type: projectTypesFilter.myProject,
-    status: myProjectStatusFilter.active,
+    type: ENUM_PROJECT_TYPES.MY_PROJECT,
+    status: ENUM_ADV_MY_PROJECT_STATUS.ACTIVE,
   },
   {
     name: "orders_advertiser.type_filter.manager_project",
-    type: projectTypesFilter.managerProject,
-    status: advManagerProjectStatusFilter.active,
+    type: ENUM_PROJECT_TYPES.MANAGER_PROJECT,
+    status: ENUM_ADV_MANAGER_PROJECT_STATUS.ACTIVE,
   },
   {
     name: "orders_advertiser.type_filter.saved_project",
-    type: projectTypesFilter.savedProject,
+    type: ENUM_PROJECT_TYPES.SAVED_PROJECT,
     status: "",
   },
 ];

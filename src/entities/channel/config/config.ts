@@ -33,7 +33,7 @@ export enum channelParameterData {
   female = "female",
 }
 
-export enum channelStatus {
+export enum ENUM_CHANNEL_STATUS_BACKEND {
   moderation = 0,
   active = 1,
   inactive = 2,
@@ -44,39 +44,39 @@ export enum channelStatus {
   invalidUrl = 7,
 }
 
-export enum channelStatusFilter {
-  active = "active",
-  moderation = "moderation",
-  moderationReject = "rejected",
-  inactive = "inactive",
-  banned = "banned",
+export enum ENUM_CHANNEL_STATUS {
+  ACTIVE = "active",
+  MODERATION = "moderation",
+  REJECTED = "rejected",
+  INACTIVE = "inactive",
+  BANNED = "banned",
 }
 
-export const bloggerChannelStatus = [
+export const BLOGGER_CHANNEL_TABS_LIST = [
   {
     name: "platforms_blogger.status_filter.active",
-    type: channelStatusFilter.active,
-    id: channelStatus.active,
+    type: ENUM_CHANNEL_STATUS.ACTIVE,
+    id: ENUM_CHANNEL_STATUS_BACKEND.active,
   },
   {
     name: "platforms_blogger.status_filter.moderation",
-    type: channelStatusFilter.moderation,
-    id: channelStatus.moderation,
+    type: ENUM_CHANNEL_STATUS.MODERATION,
+    id: ENUM_CHANNEL_STATUS_BACKEND.moderation,
   },
   {
     name: "platforms_blogger.status_filter.moderation_reject",
-    type: channelStatusFilter.moderationReject,
-    id: channelStatus.moderationReject,
+    type: ENUM_CHANNEL_STATUS.REJECTED,
+    id: ENUM_CHANNEL_STATUS_BACKEND.moderationReject,
   },
   {
     name: "platforms_blogger.status_filter.inactive",
-    type: channelStatusFilter.inactive,
-    id: channelStatus.inactive,
+    type: ENUM_CHANNEL_STATUS.INACTIVE,
+    id: ENUM_CHANNEL_STATUS_BACKEND.inactive,
   },
   {
     name: "platforms_blogger.status_filter.banned",
-    type: channelStatusFilter.banned,
-    id: channelStatus.banned,
+    type: ENUM_CHANNEL_STATUS.BANNED,
+    id: ENUM_CHANNEL_STATUS_BACKEND.banned,
   },
 ];
 

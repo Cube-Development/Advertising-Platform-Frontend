@@ -8,7 +8,7 @@ import {
 } from "@entities/admin";
 import { IAdminProfileData } from "@entities/admin/types/profile";
 import {
-  channelStatusFilter,
+  ENUM_CHANNEL_STATUS,
   IActiveChannel,
   IBlockedChannel,
   IChannelBlogger,

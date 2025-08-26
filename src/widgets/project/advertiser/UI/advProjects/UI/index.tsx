@@ -1,8 +1,8 @@
 import {
-  advManagerProjectStatusFilter,
+  ENUM_ADV_MANAGER_PROJECT_STATUS,
   IAdvProjectCard,
-  myProjectStatusFilter,
-  projectTypesFilter,
+  ENUM_ADV_MY_PROJECT_STATUS,
+  ENUM_PROJECT_TYPES,
 } from "@entities/project";
 import { TurnkeyProject } from "@features/other";
 import { NewProject, ZeroProject } from "@features/project";
@@ -20,8 +20,8 @@ interface AdvProjectsListProps {
   handleOnChangePage: () => void;
   isLoading: boolean;
   isLast: boolean;
-  typeFilter: projectTypesFilter;
-  statusFilter: advManagerProjectStatusFilter | myProjectStatusFilter;
+  typeFilter: ENUM_PROJECT_TYPES;
+  statusFilter: ENUM_ADV_MANAGER_PROJECT_STATUS | ENUM_ADV_MY_PROJECT_STATUS;
   currentPage: number;
 }
 
@@ -55,7 +55,7 @@ export const AdvProjectsList: FC<AdvProjectsListProps> = ({
                   index,
                   currentPage,
                   total: projects.length,
-                  elements: INTERSECTION_ELEMENTS.ADV_ORDERS,
+                  elements: INTERSECTION_ELEMENTS.ADV_PROJECTS,
                 })}
                 variants={PAGE_ANIMATION.animationUp}
                 className={styles.motion}
@@ -68,7 +68,7 @@ export const AdvProjectsList: FC<AdvProjectsListProps> = ({
               </motion.div>
             ))}
             {isLoading &&
-              Array.from({ length: INTERSECTION_ELEMENTS.ADV_ORDERS }).map(
+              Array.from({ length: INTERSECTION_ELEMENTS.ADV_PROJECTS }).map(
                 (_, index) => (
                   <ProjectCardSkeleton
                     typeFilter={typeFilter}

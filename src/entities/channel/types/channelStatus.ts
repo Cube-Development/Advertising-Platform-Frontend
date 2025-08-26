@@ -3,12 +3,7 @@ import { platformTypesNum } from "@entities/platform";
 export interface IChannelBlogger {
   page: number;
   elements: number;
-  channels:
-    | IActiveChannel[]
-    | IInactiveChannel[]
-    | IModerationChannel[]
-    | IModerationRejectChannel[]
-    | IBlockedChannel[];
+  channels: AllChannelTypes[];
   status?: string;
   isLast?: boolean;
 }

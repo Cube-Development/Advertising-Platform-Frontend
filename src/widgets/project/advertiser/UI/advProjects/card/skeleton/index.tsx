@@ -1,9 +1,9 @@
-import { channelStatusFilter } from "@entities/channel";
-import { offerStatusFilter } from "@entities/offer";
+import { ENUM_CHANNEL_STATUS } from "@entities/channel";
+import { ENUM_OFFER_STATUS } from "@entities/offer";
 import {
-  advManagerProjectStatusFilter,
-  myProjectStatusFilter,
-  projectTypesFilter,
+  ENUM_ADV_MANAGER_PROJECT_STATUS,
+  ENUM_ADV_MY_PROJECT_STATUS,
+  ENUM_PROJECT_TYPES,
 } from "@entities/project";
 import { Skeleton } from "@shared/ui";
 import { FC } from "react";
@@ -11,7 +11,7 @@ import styles from "./styles.module.scss";
 
 interface ProjectCardSkeletonProps {
   typeFilter: string;
-  statusFilter: channelStatusFilter | offerStatusFilter | string;
+  statusFilter: ENUM_CHANNEL_STATUS | ENUM_OFFER_STATUS | string;
 }
 
 export const ProjectCardSkeleton: FC<ProjectCardSkeletonProps> = ({
@@ -22,21 +22,21 @@ export const ProjectCardSkeleton: FC<ProjectCardSkeletonProps> = ({
     <Skeleton className="bg-skeleton-light rounded-[20px]">
       <div
         className={`${styles.wrapper} ${
-          typeFilter === projectTypesFilter.managerProject &&
-          statusFilter === advManagerProjectStatusFilter.completed
+          typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT &&
+          statusFilter === ENUM_ADV_MANAGER_PROJECT_STATUS.COMPLETED
             ? styles.completed
             : ""
         }`}
       >
         <div
           className={`${styles.card} ${
-            typeFilter === projectTypesFilter.managerProject
+            typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT
               ? // && statusFilter !== advManagerProjectStatusFilter.completed
                 styles.manager_chat
               : ""
           } ${
-            typeFilter === projectTypesFilter.managerProject &&
-            statusFilter === advManagerProjectStatusFilter.completed
+            typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT &&
+            statusFilter === ENUM_ADV_MANAGER_PROJECT_STATUS.COMPLETED
               ? styles.card__manager_completed
               : ""
           }`}
@@ -54,7 +54,7 @@ export const ProjectCardSkeleton: FC<ProjectCardSkeletonProps> = ({
             </div>
             <Skeleton className="w-full h-full rounded-[10px]" />
           </div>
-          {typeFilter === projectTypesFilter.managerProject && (
+          {typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT && (
             // statusFilter !== advManagerProjectStatusFilter.completed &&
             <div className={`${styles.chat__btn} display__hide__min__md`}>
               <Skeleton className="h-full w-full rounded-[10px]" />
@@ -66,14 +66,14 @@ export const ProjectCardSkeleton: FC<ProjectCardSkeletonProps> = ({
               <Skeleton className="h-full w-full rounded-[10px]" />
               <Skeleton className="h-full w-full rounded-[10px]" />
               <Skeleton className="h-full w-full rounded-[10px]" />
-              {typeFilter === projectTypesFilter.managerProject &&
-                statusFilter === advManagerProjectStatusFilter.completed && (
+              {typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT &&
+                statusFilter === ENUM_ADV_MANAGER_PROJECT_STATUS.COMPLETED && (
                   <Skeleton className="h-full w-full rounded-[10px] min-w-[190px]" />
                 )}
             </div>
 
-            {typeFilter === projectTypesFilter.managerProject &&
-            statusFilter === advManagerProjectStatusFilter.request_approve ? (
+            {typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT &&
+            statusFilter === ENUM_ADV_MANAGER_PROJECT_STATUS.REQUEST_APPROVE ? (
               <div className={styles.card__info__icons_manager_request_approve}>
                 <div>
                   <Skeleton className="w-4/6 h-3" />
@@ -81,8 +81,8 @@ export const ProjectCardSkeleton: FC<ProjectCardSkeletonProps> = ({
                 </div>
                 <Skeleton className="w-full h-full rounded-[15px] min-h-11" />
               </div>
-            ) : typeFilter === projectTypesFilter.managerProject &&
-              statusFilter === advManagerProjectStatusFilter.completed ? (
+            ) : typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT &&
+              statusFilter === ENUM_ADV_MANAGER_PROJECT_STATUS.COMPLETED ? (
               <div className={styles.card__info__icons_manager_completed}>
                 <div className={styles.top}>
                   <Skeleton className={`w-full h-full rounded-[10px]`} />
@@ -93,16 +93,16 @@ export const ProjectCardSkeleton: FC<ProjectCardSkeletonProps> = ({
                   <Skeleton className={`w-full h-full rounded-[10px]`} />
                 </div>
               </div>
-            ) : typeFilter === projectTypesFilter.managerProject &&
-              statusFilter === advManagerProjectStatusFilter.active ? (
+            ) : typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT &&
+              statusFilter === ENUM_ADV_MANAGER_PROJECT_STATUS.ACTIVE ? (
               <div className={styles.card__info__icons_manager_active}>
                 <Skeleton className={`w-full h-full rounded-[10px]`} />
                 <Skeleton className={`w-full h-full rounded-[10px]`} />
                 <Skeleton className={`w-full h-full rounded-[10px]`} />
                 <Skeleton className={`w-full h-full rounded-[10px]`} />
               </div>
-            ) : typeFilter === projectTypesFilter.myProject &&
-              statusFilter === myProjectStatusFilter.completed ? (
+            ) : typeFilter === ENUM_PROJECT_TYPES.MY_PROJECT &&
+              statusFilter === ENUM_ADV_MY_PROJECT_STATUS.COMPLETED ? (
               <div className={styles.card__info__icons_completed}>
                 <div className={styles.icons}>
                   <Skeleton className="w-full h-full rounded-[8px]" />

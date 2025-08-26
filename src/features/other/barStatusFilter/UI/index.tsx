@@ -1,9 +1,9 @@
-import { channelStatusFilter } from "@entities/channel";
-import { offerStatusFilter } from "@entities/offer";
+import { ENUM_CHANNEL_STATUS } from "@entities/channel";
+import { ENUM_OFFER_STATUS } from "@entities/offer";
 import {
-  advManagerProjectStatusFilter,
-  managerProjectStatusFilter,
-  myProjectStatusFilter,
+  ENUM_ADV_MANAGER_PROJECT_STATUS,
+  ENUM_MANAGER_PROJECT_STATUS,
+  ENUM_ADV_MY_PROJECT_STATUS,
 } from "@entities/project";
 import { BREAKPOINT } from "@shared/config";
 import { FC, useRef } from "react";
@@ -18,29 +18,29 @@ interface IProjectType {
   id?: number;
   name: string;
   type:
-    | channelStatusFilter
-    | myProjectStatusFilter
-    | advManagerProjectStatusFilter
-    | managerProjectStatusFilter
-    | offerStatusFilter;
+    | ENUM_CHANNEL_STATUS
+    | ENUM_ADV_MY_PROJECT_STATUS
+    | ENUM_ADV_MANAGER_PROJECT_STATUS
+    | ENUM_MANAGER_PROJECT_STATUS
+    | ENUM_OFFER_STATUS;
 }
 
 interface BarStatusFilterProps {
   changeStatus: (
     status:
-      | channelStatusFilter
-      | offerStatusFilter
-      | myProjectStatusFilter
-      | advManagerProjectStatusFilter
-      | managerProjectStatusFilter
+      | ENUM_CHANNEL_STATUS
+      | ENUM_OFFER_STATUS
+      | ENUM_ADV_MY_PROJECT_STATUS
+      | ENUM_ADV_MANAGER_PROJECT_STATUS
+      | ENUM_MANAGER_PROJECT_STATUS
       | string,
   ) => void;
   statusFilter:
-    | channelStatusFilter
-    | offerStatusFilter
-    | myProjectStatusFilter
-    | advManagerProjectStatusFilter
-    | managerProjectStatusFilter
+    | ENUM_CHANNEL_STATUS
+    | ENUM_OFFER_STATUS
+    | ENUM_ADV_MY_PROJECT_STATUS
+    | ENUM_ADV_MANAGER_PROJECT_STATUS
+    | ENUM_MANAGER_PROJECT_STATUS
     | string;
   projectStatus: IProjectType[];
   badge?: { status: string; count: number }[];
@@ -61,11 +61,11 @@ export const BarStatusFilter: FC<BarStatusFilterProps> = ({
 
   const handleChangeStepSwiper = (
     type:
-      | channelStatusFilter
-      | offerStatusFilter
-      | myProjectStatusFilter
-      | advManagerProjectStatusFilter
-      | managerProjectStatusFilter,
+      | ENUM_CHANNEL_STATUS
+      | ENUM_OFFER_STATUS
+      | ENUM_ADV_MY_PROJECT_STATUS
+      | ENUM_ADV_MANAGER_PROJECT_STATUS
+      | ENUM_MANAGER_PROJECT_STATUS,
     index: number,
   ) => {
     toggleStatus(type);

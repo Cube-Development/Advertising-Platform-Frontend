@@ -1,22 +1,22 @@
 import { Skeleton } from "@shared/ui";
 import { FC } from "react";
 import styles from "./styles.module.scss";
-import { channelStatusFilter } from "@entities/channel";
+import { ENUM_CHANNEL_STATUS } from "@entities/channel";
 
 interface ChannelCardSkeletonProps {
-  statusFilter: channelStatusFilter;
+  statusFilter: ENUM_CHANNEL_STATUS;
 }
 
 export const ChannelCardSkeleton: FC<ChannelCardSkeletonProps> = ({
   statusFilter,
 }) => {
   const isActive =
-    statusFilter === channelStatusFilter.active ||
-    statusFilter === channelStatusFilter.inactive;
+    statusFilter === ENUM_CHANNEL_STATUS.ACTIVE ||
+    statusFilter === ENUM_CHANNEL_STATUS.INACTIVE;
   return (
     <Skeleton className="bg-skeleton-light rounded-[20px]">
       <div
-        className={`${styles.wrapper} ${statusFilter === channelStatusFilter.active || statusFilter === channelStatusFilter.inactive ? styles.isActive : styles.isNotActive}`}
+        className={`${styles.wrapper} ${statusFilter === ENUM_CHANNEL_STATUS.ACTIVE || statusFilter === ENUM_CHANNEL_STATUS.INACTIVE ? styles.isActive : styles.isNotActive}`}
       >
         <div className={styles.card}>
           <div className={styles.card__left}>
@@ -27,7 +27,7 @@ export const ChannelCardSkeleton: FC<ChannelCardSkeletonProps> = ({
               <Skeleton className="h-3 w-3/5" />
               <Skeleton className="h-2 w-2/5" />
             </div>
-            {statusFilter !== channelStatusFilter.banned && (
+            {statusFilter !== ENUM_CHANNEL_STATUS.BANNED && (
               <div className={styles.params}>
                 <Skeleton className="h-[30px] w-[30px] rounded-full" />
                 <Skeleton className="h-[30px] w-[30px] rounded-full" />
@@ -37,7 +37,7 @@ export const ChannelCardSkeleton: FC<ChannelCardSkeletonProps> = ({
               <Skeleton className="w-full h-full rounded-[12px]" />
             </div>
           </div>
-          {statusFilter === channelStatusFilter.active ? (
+          {statusFilter === ENUM_CHANNEL_STATUS.ACTIVE ? (
             <div className={styles.card__info}>
               <div className={styles.card__info__data}>
                 <Skeleton className="w-full h-full rounded-[12px]" />
@@ -49,7 +49,7 @@ export const ChannelCardSkeleton: FC<ChannelCardSkeletonProps> = ({
                 <Skeleton className="w-full h-full rounded-[8px]" />
               </div>
             </div>
-          ) : statusFilter === channelStatusFilter.inactive ? (
+          ) : statusFilter === ENUM_CHANNEL_STATUS.INACTIVE ? (
             <div className={`${styles.card__info} ${styles.inactive}`}>
               <div className={styles.card__info__activate}>
                 <Skeleton className="w-full h-full rounded-[12px]" />

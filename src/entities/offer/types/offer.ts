@@ -1,5 +1,5 @@
 import { platformTypesNum } from "@entities/platform";
-import { offerStatus } from "../config";
+import { ENUM_OFFER_STATUS_BACKEND } from "../config";
 import { ENUM_INVOICE_TYPE } from "./invoice.enum";
 
 export interface IBloggerOfferCard {
@@ -13,7 +13,7 @@ export interface IBloggerOfferCard {
   category: string;
   avatar: string;
   order_status: string;
-  api_status: offerStatus;
+  api_status: ENUM_OFFER_STATUS_BACKEND;
   publish_date:
     | {
         date_from: string;

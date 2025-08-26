@@ -1,27 +1,31 @@
 import {
   channelAPI,
-  invalidateBloggerChannelsOnModeration,
+  ENUM_CHANNEL_STATUS,
+  invalidateBloggerChannelsAddChannelModeration,
+  invalidateBloggerChannelsModerationDecision,
 } from "@entities/channel";
 import { notificationsTypes } from "@entities/communication";
 import {
+  ENUM_OFFER_STATUS,
   bloggerOffersAPI,
-  invalidateBloggerOfferByAction,
-  invalidateBloggerOfferByNewOrder,
-  offerStatusFilter,
+  invalidateBloggerOfferByUserAction,
+  invalidateBloggerOfferByWebsocketAction,
 } from "@entities/offer";
 import {
-  advManagerProjectStatusFilter,
+  ENUM_ADV_MANAGER_PROJECT_STATUS,
+  ENUM_ADV_MY_PROJECT_STATUS,
   advProjectsAPI,
   invalidateAdvManagerProjectByCompleteProject,
   invalidateAdvManagerProjectByLaunchProject,
   invalidateAdvManagerProjectByRequestApprove,
   invalidateAdvProjectByBloggerAction,
+  invalidateAdvProjectByCompleteProject,
   invalidateAdvProjectUpdate,
   invalidateManagerNewProject,
   invalidateManagerProjectByBloggerAction,
+  invalidateManagerProjectByCompleteProject,
   invalidateManagerProjectByDesire,
   managerProjectsAPI,
-  myProjectStatusFilter,
 } from "@entities/project";
 import { useFindLanguage } from "@entities/user";
 import { invalidateHistory, walletAPI } from "@entities/wallet";
@@ -48,7 +52,7 @@ export const useRevalidateCash = () => {
   const dispatch = useAppDispatch();
 
   const revalidateCash = async (data: any) => {
-    const { method, project_id, order_id } = data;
+    const { method, project_id, order_id, channel_id } = data;
 
     if (method === notificationsTypes.notification_create_deposit) {
       // Создан депозит
@@ -65,7 +69,7 @@ export const useRevalidateCash = () => {
         trigger: triggerAdvManagerProjects,
         language,
         role,
-        status: advManagerProjectStatusFilter.develop,
+        status: ENUM_ADV_MANAGER_PROJECT_STATUS.DEVELOP,
       });
       await invalidateHistory({ dispatch, trigger: triggerHistory, language });
     } else if (method === notificationsTypes.new_manager_project) {
@@ -118,10 +122,21 @@ export const useRevalidateCash = () => {
     } else if (
       method === notificationsTypes.notification_complete_manager_project
     ) {
-      // Менеджер завершил проект рекламодателя
+      // Менеджер завершил проект рекламодателя - уведомление рекламодателю
       await invalidateAdvManagerProjectByCompleteProject({
         dispatch,
         trigger: triggerAdvManagerProjects,
+        language,
+        project_id,
+        role,
+      });
+    } else if (
+      method === notificationsTypes.notification_complete_project_for_manager
+    ) {
+      // Менеджер завершил проект рекламодателя - уведомление менеджеру
+      await invalidateManagerProjectByCompleteProject({
+        dispatch,
+        trigger: triggerManagerProjects,
         language,
         project_id,
         role,
@@ -133,11 +148,22 @@ export const useRevalidateCash = () => {
         trigger: triggerAdvMyProjects,
         language,
         role,
-        status: myProjectStatusFilter.active,
+        status: ENUM_ADV_MY_PROJECT_STATUS.ACTIVE,
+      });
+    } else if (
+      method === notificationsTypes.notification_complete_advertiser_project
+    ) {
+      // Рекламодатель завершил свой проект
+      await invalidateAdvProjectByCompleteProject({
+        dispatch,
+        trigger: triggerAdvMyProjects,
+        language,
+        project_id,
+        role,
       });
     } else if (method === notificationsTypes.notification_request_add_channel) {
       // Блогер  создал новый канал и отправил админу на модерацию
-      await invalidateBloggerChannelsOnModeration({
+      await invalidateBloggerChannelsAddChannelModeration({
         dispatch,
         trigger: triggerChannels,
         language,
@@ -148,11 +174,11 @@ export const useRevalidateCash = () => {
     ) {
       // Блогер принял новый заказ из ожидающих
       // кеш Блогера
-      await invalidateBloggerOfferByAction({
+      await invalidateBloggerOfferByUserAction({
         dispatch,
         role,
         order_id,
-        status: offerStatusFilter.wait,
+        status: ENUM_OFFER_STATUS.WAIT,
       });
       // кеш Рекламодателя
       await invalidateAdvProjectByBloggerAction({
@@ -175,11 +201,11 @@ export const useRevalidateCash = () => {
     ) {
       // Блогер отклонил новый заказ из ожидающих
       // кеш Блогера
-      await invalidateBloggerOfferByAction({
+      await invalidateBloggerOfferByUserAction({
         dispatch,
         role,
         order_id,
-        status: offerStatusFilter.wait,
+        status: ENUM_OFFER_STATUS.WAIT,
       });
       // кеш Рекламодателя
       await invalidateAdvProjectByBloggerAction({
@@ -238,30 +264,30 @@ export const useRevalidateCash = () => {
       });
     } else if (method === notificationsTypes.notification_new_order_blogger) {
       // Блогеру пришел новый заказ размещение рекламы (в ожидании)
-      await invalidateBloggerOfferByNewOrder({
+      await invalidateBloggerOfferByWebsocketAction({
         dispatch,
         trigger: triggerOffers,
         language,
         role,
-        status: offerStatusFilter.wait,
+        status: ENUM_OFFER_STATUS.WAIT,
       });
     } else if (
       method === notificationsTypes.notification_advertiser_reject_order
     ) {
       // Рекламодатель отклонил заказ
       // кеш Блогера
-      await invalidateBloggerOfferByAction({
+      await invalidateBloggerOfferByUserAction({
         dispatch,
         role,
         order_id,
-        status: offerStatusFilter.active,
+        status: ENUM_OFFER_STATUS.ACTIVE,
       });
-      await invalidateBloggerOfferByNewOrder({
+      await invalidateBloggerOfferByWebsocketAction({
         dispatch,
         trigger: triggerOffers,
         language,
         role,
-        status: offerStatusFilter.moderation,
+        status: ENUM_OFFER_STATUS.MODERATION,
         skip_views: true,
       });
     } else if (
@@ -269,18 +295,18 @@ export const useRevalidateCash = () => {
     ) {
       // Рекламодатель принял заказ
       // кеш Блогера
-      await invalidateBloggerOfferByAction({
+      await invalidateBloggerOfferByUserAction({
         dispatch,
         role,
         order_id,
-        status: offerStatusFilter.active,
+        status: ENUM_OFFER_STATUS.ACTIVE,
       });
-      await invalidateBloggerOfferByNewOrder({
+      await invalidateBloggerOfferByWebsocketAction({
         dispatch,
         trigger: triggerOffers,
         language,
         role,
-        status: offerStatusFilter.completed,
+        status: ENUM_OFFER_STATUS.COMPLETED,
         skip_views: true,
       });
     } else if (
@@ -289,18 +315,18 @@ export const useRevalidateCash = () => {
     ) {
       // Уведомление блогеру о модерации заказа в пользу блогера
       // кеш Блогера
-      await invalidateBloggerOfferByAction({
+      await invalidateBloggerOfferByUserAction({
         dispatch,
         role,
         order_id,
-        status: offerStatusFilter.moderation,
+        status: ENUM_OFFER_STATUS.MODERATION,
       });
-      await invalidateBloggerOfferByNewOrder({
+      await invalidateBloggerOfferByWebsocketAction({
         dispatch,
         trigger: triggerOffers,
         language,
         role,
-        status: offerStatusFilter.completed,
+        status: ENUM_OFFER_STATUS.COMPLETED,
         skip_views: true,
       });
     } else if (
@@ -309,18 +335,18 @@ export const useRevalidateCash = () => {
     ) {
       // Уведомление блогеру о модерации заказа в пользу блогера
       // кеш Блогера
-      await invalidateBloggerOfferByAction({
+      await invalidateBloggerOfferByUserAction({
         dispatch,
         role,
         order_id,
-        status: offerStatusFilter.moderation,
+        status: ENUM_OFFER_STATUS.MODERATION,
       });
-      await invalidateBloggerOfferByNewOrder({
+      await invalidateBloggerOfferByWebsocketAction({
         dispatch,
         trigger: triggerOffers,
         language,
         role,
-        status: offerStatusFilter.canceled,
+        status: ENUM_OFFER_STATUS.CANCELED,
         skip_views: true,
       });
     } else if (
@@ -366,36 +392,106 @@ export const useRevalidateCash = () => {
         role,
       });
     }
-
-    // ffff
-    // ffff
-    // ffff
+    // Ревалидация каналов у блогера при изменении статусов канала
     else if (method === notificationsTypes.notification_unban_channel) {
+      // Уведомление блогеру о разблокировке канала
       console.log(notificationsTypes.notification_unban_channel);
-      dispatch(
-        channelAPI.util.invalidateTags([
-          BLOGGER_CHANNELS,
-          VIEWS_BLOGGER_CHANNELS,
-        ]),
-      );
-    } else if (method === notificationsTypes.notification_limited_ban_channel) {
-      console.log(notificationsTypes.notification_limited_ban_channel);
-      dispatch(
-        channelAPI.util.invalidateTags([
-          BLOGGER_CHANNELS,
-          VIEWS_BLOGGER_CHANNELS,
-        ]),
-      );
+      await invalidateBloggerChannelsModerationDecision({
+        dispatch,
+        trigger: triggerChannels,
+        language,
+        channel_id: channel_id,
+        status_from: ENUM_CHANNEL_STATUS.BANNED,
+        status_to: ENUM_CHANNEL_STATUS.ACTIVE,
+        role,
+      });
     } else if (
-      method === notificationsTypes.notification_unlimited_ban_channel
+      method === notificationsTypes.notification_moderation_unblock_channel
     ) {
-      console.log(notificationsTypes.notification_unlimited_ban_channel);
-      dispatch(
-        channelAPI.util.invalidateTags([
-          BLOGGER_CHANNELS,
-          VIEWS_BLOGGER_CHANNELS,
-        ]),
+      // Уведомление блогеру о разблокировке канала
+      console.log(notificationsTypes.notification_moderation_unblock_channel);
+      await invalidateBloggerChannelsModerationDecision({
+        dispatch,
+        trigger: triggerChannels,
+        language,
+        channel_id: channel_id,
+        status_from: ENUM_CHANNEL_STATUS.BANNED,
+        status_to: ENUM_CHANNEL_STATUS.ACTIVE,
+        role,
+      });
+    } else if (method === notificationsTypes.notification_ban_channel) {
+      // Уведомление блогеру о блокировке канала
+      console.log(notificationsTypes.notification_ban_channel);
+      await invalidateBloggerChannelsModerationDecision({
+        dispatch,
+        trigger: triggerChannels,
+        language,
+        channel_id: channel_id,
+        status_from: ENUM_CHANNEL_STATUS.ACTIVE,
+        status_to: ENUM_CHANNEL_STATUS.BANNED,
+        role,
+      });
+    } else if (
+      method === notificationsTypes.notification_moderation_accept_channel
+    ) {
+      // Уведомление блогеру о прохождении модерации канала
+      console.log(notificationsTypes.notification_moderation_accept_channel);
+      await invalidateBloggerChannelsModerationDecision({
+        dispatch,
+        trigger: triggerChannels,
+        language,
+        channel_id: channel_id,
+        status_from: ENUM_CHANNEL_STATUS.MODERATION,
+        status_to: ENUM_CHANNEL_STATUS.ACTIVE,
+        role,
+      });
+    } else if (
+      method === notificationsTypes.notification_moderation_reject_channel
+    ) {
+      // Уведомление блогеру о отклонении модерации канала
+      console.log(notificationsTypes.notification_moderation_reject_channel);
+      await invalidateBloggerChannelsModerationDecision({
+        dispatch,
+        trigger: triggerChannels,
+        language,
+        channel_id: channel_id,
+        status_from: ENUM_CHANNEL_STATUS.MODERATION,
+        status_to: ENUM_CHANNEL_STATUS.REJECTED,
+        role,
+      });
+    } else if (
+      method === notificationsTypes.notification_request_to_edit_channel_accept
+    ) {
+      // Уведомление блогеру о одобрении редактирования канала
+      console.log(
+        notificationsTypes.notification_request_to_edit_channel_accept,
       );
+      await invalidateBloggerChannelsModerationDecision({
+        dispatch,
+        trigger: triggerChannels,
+        language,
+        channel_id: channel_id,
+        status_from: ENUM_CHANNEL_STATUS.MODERATION,
+        status_to: ENUM_CHANNEL_STATUS.ACTIVE,
+        role,
+      });
+    } else if (
+      method ===
+      notificationsTypes.notification_request_to_edit_channel_rejected
+    ) {
+      // Уведомление блогеру об отклонении редактирования канала
+      console.log(
+        notificationsTypes.notification_request_to_edit_channel_rejected,
+      );
+      await invalidateBloggerChannelsModerationDecision({
+        dispatch,
+        trigger: triggerChannels,
+        language,
+        channel_id: channel_id,
+        status_from: ENUM_CHANNEL_STATUS.MODERATION,
+        status_to: ENUM_CHANNEL_STATUS.REJECTED,
+        role,
+      });
     }
     //
     else if (method === notificationsTypes.notification_publish_post) {

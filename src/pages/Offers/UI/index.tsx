@@ -1,7 +1,7 @@
 import { channelData } from "@entities/channel";
 import {
   getOrdersByStatusReq,
-  offerStatusFilter,
+  ENUM_OFFER_STATUS,
   useGetBloggerOrdersQuery,
 } from "@entities/offer";
 import { dateSortingTypes } from "@entities/platform";
@@ -35,11 +35,11 @@ export const OffersPage: FC = () => {
 
   const startStatus =
     offer_status &&
-    !!Object.values(offerStatusFilter).includes(
-      offer_status as offerStatusFilter,
+    !!Object.values(ENUM_OFFER_STATUS).includes(
+      offer_status as ENUM_OFFER_STATUS,
     )
       ? offer_status
-      : offerStatusFilter.active;
+      : ENUM_OFFER_STATUS.ACTIVE;
 
   const startOrderId = isValidUUID(order_id || "") ? order_id : undefined;
 
@@ -135,7 +135,7 @@ export const OffersPage: FC = () => {
             value={formState.search_string}
           />
           <MyOffers
-            statusFilter={formState.status as offerStatusFilter}
+            statusFilter={formState.status as ENUM_OFFER_STATUS}
             offers={data?.orders || []}
             handleOnChangePage={handleOnChangePage}
             isLoading={isLoadingMore}

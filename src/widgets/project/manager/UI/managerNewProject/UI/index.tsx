@@ -39,7 +39,7 @@ export const ManagerNewProjectsList: FC<ManagerNewProjectsListProps> = ({
                   index,
                   currentPage,
                   total: projects.length,
-                  elements: INTERSECTION_ELEMENTS.MANAGER_ORDERS,
+                  elements: INTERSECTION_ELEMENTS.MANAGER_PROJECTS,
                 })}
                 variants={PAGE_ANIMATION.animationUp}
               >
@@ -47,9 +47,11 @@ export const ManagerNewProjectsList: FC<ManagerNewProjectsListProps> = ({
               </motion.div>
             ))}
             {isLoading &&
-              Array.from({ length: INTERSECTION_ELEMENTS.MANAGER_ORDERS }).map(
-                (_, index) => <SkeletonManagerNewProjectCard key={index} />,
-              )}
+              Array.from({
+                length: INTERSECTION_ELEMENTS.MANAGER_PROJECTS,
+              }).map((_, index) => (
+                <SkeletonManagerNewProjectCard key={index} />
+              ))}
             {!isLast && (
               <div className={styles.show_more} onClick={handleOnChangePage}>
                 {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}

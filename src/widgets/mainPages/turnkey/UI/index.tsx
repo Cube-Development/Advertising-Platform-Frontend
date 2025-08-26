@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 import { PriceList } from "@features/other";
 import { KeyIcon } from "@shared/assets";
 import { PAGE_ANIMATION } from "@shared/config/animation";
-import { ITarifInfo } from "@shared/types";
+import { ITariffInfo } from "@shared/types";
 import styles from "./styles.module.scss";
 
 interface TurnkeyProps {
@@ -52,7 +52,7 @@ export const Turnkey: FC<TurnkeyProps> = ({ page }) => {
 
       <PriceList
         tarifs={
-          t(`${page}.tarifs_list`, { returnObjects: true }) as ITarifInfo[]
+          t(`${page}.tarifs_list`, { returnObjects: true }) as ITariffInfo[]
         }
       />
     </motion.section>

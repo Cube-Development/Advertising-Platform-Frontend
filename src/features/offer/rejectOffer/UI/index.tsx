@@ -1,6 +1,6 @@
 import {
-  invalidateBloggerOfferByAction,
-  offerStatusFilter,
+  invalidateBloggerOfferByUserAction,
+  ENUM_OFFER_STATUS,
   useCancelOfferMutation,
 } from "@entities/offer";
 import { IOrderFeature } from "@entities/project";
@@ -27,11 +27,11 @@ export const RejectOffer: FC<IOrderFeature> = ({ order_id }) => {
             variant: "success",
             title: t("toasts.offers_blogger.reject_offer.success"),
           });
-          invalidateBloggerOfferByAction({
+          invalidateBloggerOfferByUserAction({
             dispatch,
             role: ENUM_ROLES.BLOGGER,
             order_id,
-            status: offerStatusFilter.wait,
+            status: ENUM_OFFER_STATUS.WAIT,
           });
         })
         .catch((error) => {

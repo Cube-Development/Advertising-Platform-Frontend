@@ -923,7 +923,8 @@
       },
       "complete": {
         "title": "Buyurtma bajarildi",
-        "signed": "Qabul qilindi"
+        "signed": "Qabul qilindi",
+        "wait": "Hisobingizga mablagʻ tushishini kuting"
       },
       "moderation": {
         "text": "Buyurtma Blogix platformasi talablariga mos kelmadi. Administrator qarorini kuting"
@@ -1780,83 +1781,6 @@
     "new": "Yangi",
     "support": {
       "title": "Agar savollaringiz bo'lsa yoki yordam kerak bo'lsa, qo'llab-quvvatlash xizmati har doim sizga yordam berishga tayyor."
-    },
-    "status": {
-      "order_message_add": {
-        "title": "Buyurtma bo'yicha xabar qo'shish"
-      },
-      "order_message_read": {
-        "title": "Buyurtma bo'yicha xabarni o'qish"
-      },
-      "project_message_add": {
-        "title": "Loyiha bo'yicha xabar qo'shish"
-      },
-      "project_message_read": {
-        "title": "Loyiha bo'yicha xabarni o'qish"
-      },
-      "new_manager_project": {
-        "title": "Yangi loyiha menejeri"
-      },
-      "request_approve": {
-        "title": "So'rovni tasdiqlash"
-      },
-      "accept_approve": {
-        "title": "Tasdiqni qabul qilish"
-      },
-      "notification_create_deposit": {
-        "title": "Depozit yaratish"
-      },
-      "notification_request_approve": {
-        "title": "Tasdiqlash uchun so'rov"
-      },
-      "notification_create_desire": {
-        "title": "Tavsiyalar yaratish"
-      },
-      "notification_launch_manager_project": {
-        "title": "Menejer bilan loyiha boshlash"
-      },
-      "notification_unban_channel": {
-        "title": "Kanalga qo'yilgan taqiqni olib tashlash"
-      },
-      "notification_limited_ban_channel": {
-        "title": "Cheklangan kanal blokirovkasi"
-      },
-      "notification_unlimited_ban_channel": {
-        "title": "Cheklanmagan kanal blokirovkasi"
-      },
-      "notification_new_order_blogger": {
-        "title": "Bloggerning yangi buyurtmasi"
-      },
-      "notification_accept_order_blogger": {
-        "title": "Blogger buyurtmani qabul qildi"
-      },
-      "notification_publish_post": {
-        "title": "Postni nashr qilish"
-      },
-      "notification_advertiser_reject_order": {
-        "title": "Reklamachi buyurtmani rad etdi"
-      },
-      "notification_advertiser_reject_order_moderator": {
-        "title": "Moderator reklamachining buyurtmasini rad etdi"
-      },
-      "notification_advertiser_accept_order": {
-        "title": "Reklamachi buyurtmani qabul qildi"
-      },
-      "notification_moderation_order_blogger_positive": {
-        "title": "Blogger buyurtmasining ijobiy moderatsiya bildirishnomasi"
-      },
-      "notification_moderation_order_advertiser_negative": {
-        "title": "Reklamachi buyurtmasining salbiy moderatsiya bildirishnomasi"
-      },
-      "notification_moderation_order_blogger_negative": {
-        "title": "Blogger buyurtmasining salbiy moderatsiya bildirishnomasi"
-      },
-      "notification_moderation_order_advertiser_positive": {
-        "title": "Reklamachi buyurtmasining ijobiy moderatsiya bildirishnomasi"
-      },
-      "notification_refund_manager_project": {
-        "title": "Menejer loyihasi bo'yicha mablag'ni qaytarish"
-      }
     }
   },
 
@@ -2416,7 +2340,7 @@
       },
       "payment": {
         "success": "Reklama kampaniyasi muvaffaqiyatli to'landi va ishga tushirildi!",
-        "error": "Hisobingizda mablag' yetarli emas, hisobni to'ldirish kerak"
+        "error": "Joriy hamyonda mablagʻ yetarli emas, iltimos balansingizni toʻldiring"
       },
       "date": {
         "error": "Kanallar uchun sana yaratishda xatolik",
@@ -2425,6 +2349,9 @@
       },
       "create_order": {
         "error": "Xatolik yuz berdi"
+      },
+      "channels": {
+        "error": "Avval savatga kanallarni qoʻshish kerak"
       }
     },
     "post": {

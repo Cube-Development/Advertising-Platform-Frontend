@@ -9,7 +9,7 @@ export interface IBasicInfo {
   img: string;
 }
 
-export interface IAccomm {
+export interface IAcom {
   type: string;
   title: string;
   stages: Stage[];
@@ -21,7 +21,7 @@ export interface Stage {
   stage: string;
 }
 
-export interface ITarifInfo {
+export interface ITariffInfo {
   type: string;
   name: string;
   views: string;

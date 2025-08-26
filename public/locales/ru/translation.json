@@ -918,7 +918,8 @@
       },
       "complete": {
         "title": "Заказ выполнен",
-        "signed": "Документы подписаны"
+        "signed": "Документы подписаны",
+        "wait": "Ожидайте поступления средств на ваш счёт"
       },
       "moderation": {
         "text": "Заказ не соответствует требованиям площадки Blogix. Ожидайте решение администратора"
@@ -2095,83 +2096,6 @@
     "new": "Новых",
     "support": {
       "title": "Если у вас возникнут вопросы или потребуется помощь, наша служба поддержки всегда готова вам помочь."
-    },
-    "status": {
-      "order_message_add": {
-        "title": "Добавить сообщение о заказе"
-      },
-      "order_message_read": {
-        "title": "Прочитать сообщение о заказе"
-      },
-      "project_message_add": {
-        "title": "Добавить сообщение о проекте"
-      },
-      "project_message_read": {
-        "title": "Прочитать сообщение о проекте"
-      },
-      "new_manager_project": {
-        "title": "Новый менеджер проекта"
-      },
-      "request_approve": {
-        "title": "Одобрить запрос"
-      },
-      "accept_approve": {
-        "title": "Принять одобрение"
-      },
-      "notification_create_deposit": {
-        "title": "Создание депозита"
-      },
-      "notification_request_approve": {
-        "title": "Запрос на одобрениe"
-      },
-      "notification_create_desire": {
-        "title": "Рекламодатель внес изменения"
-      },
-      "notification_launch_manager_project": {
-        "title": "Менеджер запустил проект"
-      },
-      "notification_unban_channel": {
-        "title": "Снятие бана с канала"
-      },
-      "notification_limited_ban_channel": {
-        "title": "Лимитированный бан канала"
-      },
-      "notification_unlimited_ban_channel": {
-        "title": "Неограниченный бан канала"
-      },
-      "notification_new_order_blogger": {
-        "title": "Новый заказ"
-      },
-      "notification_accept_order_blogger": {
-        "title": "Блогер принял заказ"
-      },
-      "notification_publish_post": {
-        "title": "Публикация поста"
-      },
-      "notification_advertiser_reject_order": {
-        "title": "Рекламодатель отклонил заказ"
-      },
-      "notification_advertiser_reject_order_moderator": {
-        "title": "Решение о модерации заказа"
-      },
-      "notification_advertiser_accept_order": {
-        "title": "Рекламодатель принял заказ"
-      },
-      "notification_moderation_order_blogger_positive": {
-        "title": "Решение о модерации заказа"
-      },
-      "notification_moderation_order_advertiser_negative": {
-        "title": "Решение о модерации заказа"
-      },
-      "notification_moderation_order_blogger_negative": {
-        "title": "Решение о модерации заказа"
-      },
-      "notification_moderation_order_advertiser_positive": {
-        "title": "Решение о модерации заказа"
-      },
-      "notification_refund_manager_project": {
-        "title": "Возврат средств"
-      }
     }
   },
 
@@ -2740,7 +2664,7 @@
       },
       "payment": {
         "success": "Рекламная кампания успешно оплачена и запущена!",
-        "error": "У вас недостаточно средств, нужно пополнить баланс"
+        "error": "У вас недостаточно средств на данном кошельке, нужно пополнить баланс"
       },
       "date": {
         "error": "Ошибка в создании дат для каналов",
@@ -2749,6 +2673,9 @@
       },
       "create_order": {
         "error": "Произошла ошибка"
+      },
+      "channels": {
+        "error": "Сначала нужно добавить каналы в корзину"
       }
     },
     "post": {

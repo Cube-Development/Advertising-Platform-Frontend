@@ -1,6 +1,6 @@
 import {
   IManagerProjectCard,
-  managerProjectStatusFilter,
+  ENUM_MANAGER_PROJECT_STATUS,
 } from "@entities/project";
 import { ZeroManagerProject } from "@features/project";
 import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
@@ -16,7 +16,7 @@ interface ManagerProjectsListProps {
   handleOnChangePage: () => void;
   isLoading: boolean;
   isLast: boolean;
-  statusFilter: managerProjectStatusFilter;
+  statusFilter: ENUM_MANAGER_PROJECT_STATUS;
   currentPage: number;
 }
 
@@ -44,7 +44,7 @@ export const ManagerProjectsList: FC<ManagerProjectsListProps> = ({
                   index,
                   currentPage,
                   total: projects.length,
-                  elements: INTERSECTION_ELEMENTS.MANAGER_ORDERS,
+                  elements: INTERSECTION_ELEMENTS.MANAGER_PROJECTS,
                 })}
                 variants={PAGE_ANIMATION.animationUp}
                 className={styles.motion}
@@ -53,14 +53,14 @@ export const ManagerProjectsList: FC<ManagerProjectsListProps> = ({
               </motion.div>
             ))}
             {isLoading &&
-              Array.from({ length: INTERSECTION_ELEMENTS.MANAGER_ORDERS }).map(
-                (_, index) => (
-                  <SkeletonManagerProjectCard
-                    statusFilter={statusFilter}
-                    key={index}
-                  />
-                ),
-              )}
+              Array.from({
+                length: INTERSECTION_ELEMENTS.MANAGER_PROJECTS,
+              }).map((_, index) => (
+                <SkeletonManagerProjectCard
+                  statusFilter={statusFilter}
+                  key={index}
+                />
+              ))}
             {!isLast && (
               <div className={styles.show_more} onClick={handleOnChangePage}>
                 {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}

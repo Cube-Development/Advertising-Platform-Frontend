@@ -1,5 +1,5 @@
-import { channelStatusFilter } from "@entities/channel";
-import { offerStatusFilter } from "@entities/offer";
+import { ENUM_CHANNEL_STATUS } from "@entities/channel";
+import { ENUM_OFFER_STATUS } from "@entities/offer";
 
 export interface IViewBloggerOrder {
   count: number;
@@ -13,7 +13,7 @@ interface IOfferType {
 }
 
 interface IOfferStatus {
-  status: offerStatusFilter;
+  status: ENUM_OFFER_STATUS;
   count: number;
 }
 
@@ -29,6 +29,6 @@ interface IChannelType {
 }
 
 interface IChannelStatus {
-  status: channelStatusFilter;
+  status: ENUM_CHANNEL_STATUS;
   count: number;
 }

@@ -920,7 +920,8 @@
       },
       "complete": {
         "title": "Order Completed",
-        "signed": "Documents signed"
+        "signed": "Documents signed",
+        "wait": "Please wait for the funds to be credited to your account"
       },
       "moderation": {
         "text": "The order does not meet the requirements of the Blogix platform. Please wait for the administrator's decision"
@@ -1780,83 +1781,6 @@
     "new": "New",
     "support": {
       "title": "If you have any questions or need assistance, our support team is always ready to help."
-    },
-    "status": {
-      "order_message_add": {
-        "title": "Add Order Message"
-      },
-      "order_message_read": {
-        "title": "Read Order Message"
-      },
-      "project_message_add": {
-        "title": "Add Project Message"
-      },
-      "project_message_read": {
-        "title": "Read Project Message"
-      },
-      "new_manager_project": {
-        "title": "New Project Manager"
-      },
-      "request_approve": {
-        "title": "Approve Request"
-      },
-      "accept_approve": {
-        "title": "Accept Approval"
-      },
-      "notification_create_deposit": {
-        "title": "Deposit Creation"
-      },
-      "notification_request_approve": {
-        "title": "Approval Request"
-      },
-      "notification_create_desire": {
-        "title": "Recommendation Created"
-      },
-      "notification_launch_manager_project": {
-        "title": "Project Launch with Manager"
-      },
-      "notification_unban_channel": {
-        "title": "Channel Unbanned"
-      },
-      "notification_limited_ban_channel": {
-        "title": "Limited Channel Ban"
-      },
-      "notification_unlimited_ban_channel": {
-        "title": "Unlimited Channel Ban"
-      },
-      "notification_new_order_blogger": {
-        "title": "New Blogger Order"
-      },
-      "notification_accept_order_blogger": {
-        "title": "Blogger Order Accepted"
-      },
-      "notification_publish_post": {
-        "title": "Post Published"
-      },
-      "notification_advertiser_reject_order": {
-        "title": "Advertiser Rejected Order"
-      },
-      "notification_advertiser_reject_order_moderator": {
-        "title": "Moderator Rejected Advertiser Order"
-      },
-      "notification_advertiser_accept_order": {
-        "title": "Advertiser Accepted Order"
-      },
-      "notification_moderation_order_blogger_positive": {
-        "title": "Positive Blogger Order Moderation Notification"
-      },
-      "notification_moderation_order_advertiser_negative": {
-        "title": "Negative Advertiser Order Moderation Notification"
-      },
-      "notification_moderation_order_blogger_negative": {
-        "title": "Negative Blogger Order Moderation Notification"
-      },
-      "notification_moderation_order_advertiser_positive": {
-        "title": "Positive Advertiser Order Moderation Notification"
-      },
-      "notification_refund_manager_project": {
-        "title": "Project Manager Refund"
-      }
     }
   },
 
@@ -2416,7 +2340,7 @@
       },
       "payment": {
         "success": "Advertising campaign successfully paid and launched!",
-        "error": "You have insufficient funds, please top up your balance"
+        "error": "You have insufficient funds on current wallet, please top up your balance"
       },
       "date": {
         "error": "Error creating dates for channels",
@@ -2425,6 +2349,9 @@
       },
       "create_order": {
         "error": "Error occurred"
+      },
+      "channels": {
+        "error": "You need to add channels to the cart first"
       }
     },
     "post": {

@@ -38,7 +38,7 @@ export const CustomInput = forwardRef<HTMLInputElement, CustomInputProps>(
           <Input
             ref={ref}
             className={cn(
-              "px-[16px] py-[10px] md:px-[30px] md:py-[15px] rounded-[12px] border border-[var(--Inside-container)] bg-[var(--Personal-colors-White)] focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0  disabled:bg-gray-100 disabled:text-gray-400 disabled:border-gray-400 disabled:cursor-not-allowed",
+              "px-[16px] py-[10px] md:px-[30px] md:py-[15px] rounded-[12px] border  focus:outline-none focus:ring-0 focus:ring-offset-0 focus-visible:outline-none focus-visible:ring-0 focus-visible:ring-offset-0  disabled:bg-gray-50 disabled:text-gray-400 disabled:border-gray-200 disabled:cursor-not-allowed",
               className,
               !!error && styles.error,
             )}

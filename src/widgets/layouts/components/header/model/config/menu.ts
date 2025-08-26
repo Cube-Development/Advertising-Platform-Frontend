@@ -1,8 +1,8 @@
 import { addChannelQueries } from "@entities/channel";
 import {
-  advManagerProjectStatusFilter,
-  myProjectStatusFilter,
-  projectTypesFilter,
+  ENUM_ADV_MANAGER_PROJECT_STATUS,
+  ENUM_ADV_MY_PROJECT_STATUS,
+  ENUM_PROJECT_TYPES,
 } from "@entities/project";
 import { viewsTypes } from "@entities/views";
 import { walletTypesFilter } from "@entities/wallet";
@@ -74,25 +74,26 @@ export const MENU_ADVERTISER: IMenuItem[] = [
       {
         title: "orders_advertiser.type_filter.my_project",
         path: buildPathWithQuery(ENUM_PATHS.ORDERS, {
-          [queryParamKeys.projectType]: projectTypesFilter.myProject,
-          [queryParamKeys.projectStatus]: myProjectStatusFilter.active,
+          [queryParamKeys.projectType]: ENUM_PROJECT_TYPES.MY_PROJECT,
+          [queryParamKeys.projectStatus]: ENUM_ADV_MY_PROJECT_STATUS.ACTIVE,
         }),
-        type: projectTypesFilter.myProject,
+        type: ENUM_PROJECT_TYPES.MY_PROJECT,
       },
       {
         title: "orders_advertiser.type_filter.manager_project",
         path: buildPathWithQuery(ENUM_PATHS.ORDERS, {
-          [queryParamKeys.projectType]: projectTypesFilter.managerProject,
-          [queryParamKeys.projectStatus]: advManagerProjectStatusFilter.active,
+          [queryParamKeys.projectType]: ENUM_PROJECT_TYPES.MANAGER_PROJECT,
+          [queryParamKeys.projectStatus]:
+            ENUM_ADV_MANAGER_PROJECT_STATUS.ACTIVE,
         }),
-        type: projectTypesFilter.managerProject,
+        type: ENUM_PROJECT_TYPES.MANAGER_PROJECT,
       },
       {
         title: "orders_advertiser.type_filter.saved_project",
         path: buildPathWithQuery(ENUM_PATHS.ORDERS, {
-          [queryParamKeys.projectType]: projectTypesFilter.savedProject,
+          [queryParamKeys.projectType]: ENUM_PROJECT_TYPES.SAVED_PROJECT,
         }),
-        type: projectTypesFilter.savedProject,
+        type: ENUM_PROJECT_TYPES.SAVED_PROJECT,
       },
     ],
   },

@@ -1,8 +1,8 @@
 import { IMenuItem } from "../../header/model/config/types";
 import {
-  advManagerProjectStatusFilter,
-  myProjectStatusFilter,
-  projectTypesFilter,
+  ENUM_ADV_MANAGER_PROJECT_STATUS,
+  ENUM_ADV_MY_PROJECT_STATUS,
+  ENUM_PROJECT_TYPES,
 } from "@entities/project";
 import {
   BookIcon,
@@ -26,21 +26,22 @@ export const SIDEBAR_ADVERTISER_MENU: IMenuItem[] = [
       {
         title: "orders_advertiser.type_filter.my_project",
         path: buildPathWithQuery(ENUM_PATHS.ORDERS, {
-          [queryParamKeys.projectType]: projectTypesFilter.myProject,
-          [queryParamKeys.projectStatus]: myProjectStatusFilter.active,
+          [queryParamKeys.projectType]: ENUM_PROJECT_TYPES.MY_PROJECT,
+          [queryParamKeys.projectStatus]: ENUM_ADV_MY_PROJECT_STATUS.ACTIVE,
         }),
       },
       {
         title: "orders_advertiser.type_filter.manager_project",
         path: buildPathWithQuery(ENUM_PATHS.ORDERS, {
-          [queryParamKeys.projectType]: projectTypesFilter.managerProject,
-          [queryParamKeys.projectStatus]: advManagerProjectStatusFilter.active,
+          [queryParamKeys.projectType]: ENUM_PROJECT_TYPES.MANAGER_PROJECT,
+          [queryParamKeys.projectStatus]:
+            ENUM_ADV_MANAGER_PROJECT_STATUS.ACTIVE,
         }),
       },
       {
         title: "orders_advertiser.type_filter.saved_project",
         path: buildPathWithQuery(ENUM_PATHS.ORDERS, {
-          [queryParamKeys.projectType]: projectTypesFilter.savedProject,
+          [queryParamKeys.projectType]: ENUM_PROJECT_TYPES.SAVED_PROJECT,
         }),
       },
     ],

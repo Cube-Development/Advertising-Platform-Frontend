@@ -1,7 +1,7 @@
 import {
   ENUM_INVOICE_TYPE,
   IBloggerOfferCard,
-  offerStatusFilter,
+  ENUM_OFFER_STATUS,
 } from "@entities/offer";
 import { offerOpen } from "@entities/user";
 import { AddChannel, ZeroChannel } from "@features/channel";
@@ -22,7 +22,7 @@ interface MyOffersProps {
   handleOnChangePage: () => void;
   isLoading: boolean;
   isLast: boolean;
-  statusFilter: offerStatusFilter;
+  statusFilter: ENUM_OFFER_STATUS;
   currentPage: number;
 }
 

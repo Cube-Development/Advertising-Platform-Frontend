@@ -1,7 +1,7 @@
 import {
   AdvTemplateProjectCard,
   IAdvTemplateProjectsCard,
-  projectTypesFilter,
+  ENUM_PROJECT_TYPES,
   SkeletonTemplateProjectCard,
 } from "@entities/project";
 import { TurnkeyProject } from "@features/other";
@@ -16,7 +16,7 @@ interface TemplateProjectsListProps {
   projects: IAdvTemplateProjectsCard[];
   isLoading: boolean;
   isLast: boolean;
-  typeFilter: projectTypesFilter;
+  typeFilter: ENUM_PROJECT_TYPES;
   handleOnChangePage: () => void;
 }
 
@@ -44,7 +44,7 @@ export const TemplateProjectsList: FC<TemplateProjectsListProps> = ({
                 key={card.id + index}
                 initial="hidden"
                 animate="visible"
-                custom={index % INTERSECTION_ELEMENTS.ADV_ORDERS}
+                custom={index % INTERSECTION_ELEMENTS.ADV_PROJECTS}
                 variants={PAGE_ANIMATION.animationUp}
               >
                 <AdvTemplateProjectCard
@@ -55,7 +55,7 @@ export const TemplateProjectsList: FC<TemplateProjectsListProps> = ({
               </motion.div>
             ))}
             {isLoading &&
-              Array.from({ length: INTERSECTION_ELEMENTS.ADV_ORDERS }).map(
+              Array.from({ length: INTERSECTION_ELEMENTS.ADV_PROJECTS }).map(
                 (_, index) => <SkeletonTemplateProjectCard key={index} />,
               )}
             {!isLast && (

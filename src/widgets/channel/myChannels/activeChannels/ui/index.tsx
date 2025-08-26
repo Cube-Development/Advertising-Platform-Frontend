@@ -1,5 +1,5 @@
-import { AllChannelTypes, channelStatusFilter } from "@entities/channel";
-import { offerStatusFilter } from "@entities/offer";
+import { AllChannelTypes, ENUM_CHANNEL_STATUS } from "@entities/channel";
+import { ENUM_OFFER_STATUS } from "@entities/offer";
 import { AddChannel, ZeroChannel } from "@features/channel";
 import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
 import { ENUM_PAGE_FILTER } from "@shared/routing";
@@ -14,7 +14,7 @@ interface ActiveChannelsProps {
   handleOnChangePage: () => void;
   isLoading: boolean;
   isLast: boolean;
-  statusFilter: channelStatusFilter;
+  statusFilter: ENUM_CHANNEL_STATUS;
 }
 
 export const ActiveChannels: FC<ActiveChannelsProps> = ({

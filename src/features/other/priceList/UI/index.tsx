@@ -1,13 +1,13 @@
-import { TarifParameters } from "@entities/project";
+import { TariffParameters } from "@entities/project";
 import { BREAKPOINT } from "@shared/config";
-import { ITarifInfo } from "@shared/types";
+import { ITariffInfo } from "@shared/types";
 import { FC, useState } from "react";
 import SwiperCore from "swiper";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
 import { EffectCoverflow } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { BuyTarif } from "../buyTarif";
+import { BuyTariff } from "../buyTarif";
 import { PriceCard } from "../card";
 import styles from "./styles.module.scss";
 import { useWindowWidth } from "@shared/hooks";
@@ -16,7 +16,7 @@ import { useWindowWidth } from "@shared/hooks";
 SwiperCore.use([EffectCoverflow]);
 
 interface PriceListProps {
-  tarifs: ITarifInfo[];
+  tarifs: ITariffInfo[];
 }
 
 export const PriceList: FC<PriceListProps> = ({ tarifs }) => {
@@ -38,7 +38,7 @@ export const PriceList: FC<PriceListProps> = ({ tarifs }) => {
       {screen >= BREAKPOINT.LG ? (
         <div className={styles.tarifs}>
           {tarifs.map((tarifInfo, index) => {
-            const tarifIndex = TarifParameters.find(
+            const tarifIndex = TariffParameters.find(
               (item) => item.type === tarifInfo.type,
             )?.index!;
 
@@ -46,7 +46,9 @@ export const PriceList: FC<PriceListProps> = ({ tarifs }) => {
               <div key={index} className={styles.slide}>
                 <PriceCard
                   tarifInfo={tarifInfo}
-                  BuyBtn={<BuyTarif tarif={tarifIndex} tarifInfo={tarifInfo} />}
+                  BuyBtn={
+                    <BuyTariff tariff={tarifIndex} tariffInfo={tarifInfo} />
+                  }
                   isActive={tarifIndex === currentTarif}
                 />
               </div>
@@ -90,7 +92,7 @@ export const PriceList: FC<PriceListProps> = ({ tarifs }) => {
             className="swipper__wrapper"
           >
             {duplicateTarifs.map((tarifInfo, index) => {
-              const tarifIndex = TarifParameters.find(
+              const tarifIndex = TariffParameters.find(
                 (item) => item.type === tarifInfo.type,
               )?.index!;
 
@@ -99,7 +101,7 @@ export const PriceList: FC<PriceListProps> = ({ tarifs }) => {
                   <PriceCard
                     tarifInfo={tarifInfo}
                     BuyBtn={
-                      <BuyTarif tarif={tarifIndex} tarifInfo={tarifInfo} />
+                      <BuyTariff tariff={tarifIndex} tariffInfo={tarifInfo} />
                     }
                     isActive={tarifIndex === currentTarif}
                   />

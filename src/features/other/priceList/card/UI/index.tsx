@@ -1,10 +1,10 @@
 import { NoIcon, YesIcon } from "@shared/assets";
-import { ITarifInfo } from "@shared/types/translate";
+import { ITariffInfo } from "@shared/types/translate";
 import { FC, ReactElement } from "react";
 import styles from "./styles.module.scss";
 
 interface PriceCardProps {
-  tarifInfo: ITarifInfo;
+  tarifInfo: ITariffInfo;
   BuyBtn: ReactElement;
   isActive: boolean;
 }

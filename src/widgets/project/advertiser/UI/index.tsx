@@ -1,12 +1,12 @@
 import { channelData } from "@entities/channel";
 import { dateSortingTypes } from "@entities/platform";
 import {
-  advertiserProjectTypes,
-  advManagerProjectStatus,
-  advManagerProjectStatusFilter,
+  ADVERTISER_PROJECT_TABS_LIST,
+  ADV_MANAGER_PROJECT_TABS_LIST,
+  ENUM_ADV_MANAGER_PROJECT_STATUS,
   getProjectsCardReq,
-  myProjectStatusFilter,
-  projectTypesFilter,
+  ENUM_ADV_MY_PROJECT_STATUS,
+  ENUM_PROJECT_TYPES,
   useGetAdvManagerProjectsQuery,
   useGetAdvProjectsQuery,
 } from "@entities/project";
@@ -28,7 +28,7 @@ import styles from "./styles.module.scss";
 import { TemplateProjectsList } from "./templateProjects";
 
 interface IForm extends getProjectsCardReq {
-  type: projectTypesFilter | string;
+  type: ENUM_PROJECT_TYPES | string;
 }
 
 export const AdvOrders: FC = () => {
@@ -39,32 +39,33 @@ export const AdvOrders: FC = () => {
 
   const startType =
     project_type &&
-    !!Object.values(projectTypesFilter).includes(
-      project_type as projectTypesFilter,
+    !!Object.values(ENUM_PROJECT_TYPES).includes(
+      project_type as ENUM_PROJECT_TYPES,
     )
       ? project_type
-      : projectTypesFilter.myProject;
+      : ENUM_PROJECT_TYPES.MY_PROJECT;
 
   const startStatus =
     project_status &&
-    (startType === projectTypesFilter.myProject &&
-    !!Object.values(myProjectStatusFilter).includes(
-      project_status as myProjectStatusFilter,
+    (startType === ENUM_PROJECT_TYPES.MY_PROJECT &&
+    !!Object.values(ENUM_ADV_MY_PROJECT_STATUS).includes(
+      project_status as ENUM_ADV_MY_PROJECT_STATUS,
     )
       ? project_status
-      : startType === projectTypesFilter.managerProject &&
-        !!Object.values(advManagerProjectStatusFilter).includes(
-          project_status as advManagerProjectStatusFilter,
+      : startType === ENUM_PROJECT_TYPES.MANAGER_PROJECT &&
+        !!Object.values(ENUM_ADV_MANAGER_PROJECT_STATUS).includes(
+          project_status as ENUM_ADV_MANAGER_PROJECT_STATUS,
         ))
       ? project_status
-      : advertiserProjectTypes.find((item) => item.type === startType)?.status!;
+      : ADVERTISER_PROJECT_TABS_LIST.find((item) => item.type === startType)
+          ?.status!;
 
   const startProjectId = isValidUUID(project_id || "") ? project_id : undefined;
 
   const { setValue, watch } = useForm<IForm>({
     defaultValues: {
       page: 1,
-      elements_on_page: INTERSECTION_ELEMENTS.ADV_ORDERS,
+      elements_on_page: INTERSECTION_ELEMENTS.ADV_PROJECTS,
       type: startType,
       status: startStatus,
       date_sort: dateSortingTypes.decrease,
@@ -76,18 +77,21 @@ export const AdvOrders: FC = () => {
   const formState = watch();
 
   const handleChangeStatus = (
-    status: advManagerProjectStatusFilter | myProjectStatusFilter | string,
+    status:
+      | ENUM_ADV_MANAGER_PROJECT_STATUS
+      | ENUM_ADV_MY_PROJECT_STATUS
+      | string,
   ) => {
     setValue("status", status);
     setValue("page", 1);
   };
 
-  const handleChangeType = (type: projectTypesFilter | string) => {
+  const handleChangeType = (type: ENUM_PROJECT_TYPES | string) => {
     setValue("type", type);
     setValue(
       "status",
-      advertiserProjectTypes.find((item) => item.type === type)?.status ||
-        advertiserProjectTypes[0].status,
+      ADVERTISER_PROJECT_TABS_LIST.find((item) => item.type === type)?.status ||
+        ADVERTISER_PROJECT_TABS_LIST[0].status,
     );
     setValue("page", 1);
   };
@@ -95,22 +99,22 @@ export const AdvOrders: FC = () => {
   // check queries for project types to show current orders
   useEffect(() => {
     if (project_type) {
-      advertiserProjectTypes.map((type) => {
+      ADVERTISER_PROJECT_TABS_LIST.map((type) => {
         if (project_type === type.type) {
           setValue("type", type.type);
           setValue("status", type.status);
         }
       });
       if (project_status) {
-        advManagerProjectStatus.map((status) => {
+        ADV_MANAGER_PROJECT_TABS_LIST.map((status) => {
           if (project_status === status.type) {
             handleChangeStatus(status.type);
           }
         });
       }
     } else {
-      setValue("type", advertiserProjectTypes[0].type);
-      setValue("status", advertiserProjectTypes[0].status);
+      setValue("type", ADVERTISER_PROJECT_TABS_LIST[0].type);
+      setValue("status", ADVERTISER_PROJECT_TABS_LIST[0].status);
     }
   }, [project_type, project_status]);
 
@@ -142,7 +146,7 @@ export const AdvOrders: FC = () => {
     refetch: refetchSelf,
     originalArgs: originalArgsSelf,
   } = useGetAdvProjectsQuery(getParams, {
-    skip: formState.type !== projectTypesFilter.myProject,
+    skip: formState.type !== ENUM_PROJECT_TYPES.MY_PROJECT,
     selectFromResult: ({ data, ...rest }) => ({
       ...rest,
       data: (data?.status === formState?.status && data) || undefined,
@@ -155,7 +159,7 @@ export const AdvOrders: FC = () => {
     refetch: refetchManager,
     originalArgs: originalArgsManager,
   } = useGetAdvManagerProjectsQuery(getParams, {
-    skip: formState.type !== projectTypesFilter.managerProject,
+    skip: formState.type !== ENUM_PROJECT_TYPES.MANAGER_PROJECT,
     selectFromResult: ({ data, ...rest }) => ({
       ...rest,
       data: (data?.status === formState?.status && data) || undefined,
@@ -168,12 +172,12 @@ export const AdvOrders: FC = () => {
   // const isLoadingMore = (isFetchingSelf || isFetchingManager) && isClicked;
 
   switch (formState.type) {
-    case projectTypesFilter.managerProject:
+    case ENUM_PROJECT_TYPES.MANAGER_PROJECT:
       checkData = projectsManager;
       // isLoadingMore = isFetchingManager;
       break;
-    case projectTypesFilter.savedProject:
-    case projectTypesFilter.myProject:
+    case ENUM_PROJECT_TYPES.SAVED_PROJECT:
+    case ENUM_PROJECT_TYPES.MY_PROJECT:
       checkData = projectsSelf;
       // isLoadingMore = isFetchingSelf;
       break;
@@ -184,29 +188,29 @@ export const AdvOrders: FC = () => {
 
   const handleOnChangePage = () => {
     const newPage = Math.floor(
-      (checkData?.projects?.length || 0) / INTERSECTION_ELEMENTS.ADV_ORDERS,
+      (checkData?.projects?.length || 0) / INTERSECTION_ELEMENTS.ADV_PROJECTS,
     );
     setValue("page", newPage + 1);
 
     if (checkData?.projects?.length === 0) {
-      if (formState.type === projectTypesFilter.myProject) {
+      if (formState.type === ENUM_PROJECT_TYPES.MY_PROJECT) {
         refetchSelf();
-      } else if (formState.type === projectTypesFilter.managerProject) {
+      } else if (formState.type === ENUM_PROJECT_TYPES.MANAGER_PROJECT) {
         refetchManager();
       }
     }
   };
 
   const isLoadingMore =
-    (formState.type === projectTypesFilter.myProject &&
+    (formState.type === ENUM_PROJECT_TYPES.MY_PROJECT &&
       isFetchingSelf &&
       !originalArgsSelf?.__isWebsocket) ||
-    (formState.type === projectTypesFilter.managerProject &&
+    (formState.type === ENUM_PROJECT_TYPES.MANAGER_PROJECT &&
       isFetchingManager &&
       !originalArgsManager?.__isWebsocket);
 
   useEffect(() => {
-    if (formState.status !== advManagerProjectStatusFilter.request_approve) {
+    if (formState.status !== ENUM_ADV_MANAGER_PROJECT_STATUS.REQUEST_APPROVE) {
       views();
     }
   }, [formState.type, formState.page]);
@@ -232,8 +236,8 @@ export const AdvOrders: FC = () => {
           onChange={setValue}
           value={formState.search_string}
         />
-        {formState.type === projectTypesFilter.managerProject &&
-        formState.status === advManagerProjectStatusFilter.develop ? (
+        {formState.type === ENUM_PROJECT_TYPES.MANAGER_PROJECT &&
+        formState.status === ENUM_ADV_MANAGER_PROJECT_STATUS.DEVELOP ? (
           <DevProjectsList
             projects={projectsManager?.projects || []}
             handleOnChangePage={handleOnChangePage}
@@ -241,7 +245,7 @@ export const AdvOrders: FC = () => {
             isLast={projectsManager?.isLast || false}
             typeFilter={formState.type}
           />
-        ) : formState.type === projectTypesFilter.savedProject ? (
+        ) : formState.type === ENUM_PROJECT_TYPES.SAVED_PROJECT ? (
           <TemplateProjectsList
             projects={[]}
             handleOnChangePage={handleOnChangePage}
@@ -249,14 +253,14 @@ export const AdvOrders: FC = () => {
             isLast={projectsSelf?.isLast || false}
             typeFilter={formState.type}
           />
-        ) : formState.type === projectTypesFilter.managerProject ? (
+        ) : formState.type === ENUM_PROJECT_TYPES.MANAGER_PROJECT ? (
           <AdvProjectsList
             statusFilter={
               formState.status as
-                | advManagerProjectStatusFilter
-                | myProjectStatusFilter
+                | ENUM_ADV_MANAGER_PROJECT_STATUS
+                | ENUM_ADV_MY_PROJECT_STATUS
             }
-            typeFilter={formState.type as projectTypesFilter}
+            typeFilter={formState.type as ENUM_PROJECT_TYPES}
             projects={projectsManager?.projects || []}
             handleOnChangePage={handleOnChangePage}
             isLoading={isLoadingMore}
@@ -264,14 +268,14 @@ export const AdvOrders: FC = () => {
             currentPage={formState?.page}
           />
         ) : (
-          formState.type === projectTypesFilter.myProject && (
+          formState.type === ENUM_PROJECT_TYPES.MY_PROJECT && (
             <AdvProjectsList
               statusFilter={
                 formState.status as
-                  | advManagerProjectStatusFilter
-                  | myProjectStatusFilter
+                  | ENUM_ADV_MANAGER_PROJECT_STATUS
+                  | ENUM_ADV_MY_PROJECT_STATUS
               }
-              typeFilter={formState.type as projectTypesFilter}
+              typeFilter={formState.type as ENUM_PROJECT_TYPES}
               projects={projectsSelf?.projects || []}
               handleOnChangePage={handleOnChangePage}
               isLoading={isLoadingMore}

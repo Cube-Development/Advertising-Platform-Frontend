@@ -1,7 +1,7 @@
 import {
   AdvDevProjectCard,
   IAdvManagerProjectsDevCard,
-  projectTypesFilter,
+  ENUM_PROJECT_TYPES,
   SkeletonAdvDevProjectCard,
 } from "@entities/project";
 import { TurnkeyProject } from "@features/other";
@@ -18,7 +18,7 @@ interface DevProjectsListProps {
   handleOnChangePage: () => void;
   isLoading: boolean;
   isLast: boolean;
-  typeFilter: projectTypesFilter;
+  typeFilter: ENUM_PROJECT_TYPES;
 }
 
 export const DevProjectsList: FC<DevProjectsListProps> = ({
@@ -45,14 +45,14 @@ export const DevProjectsList: FC<DevProjectsListProps> = ({
                 key={card.id + index}
                 initial="hidden"
                 animate="visible"
-                custom={index % INTERSECTION_ELEMENTS.ADV_ORDERS}
+                custom={index % INTERSECTION_ELEMENTS.ADV_PROJECTS}
                 variants={PAGE_ANIMATION.animationUp}
               >
                 <AdvDevProjectCard key={index} card={card} ChatBtn={Chat} />
               </motion.div>
             ))}
             {isLoading &&
-              Array.from({ length: INTERSECTION_ELEMENTS.ADV_ORDERS }).map(
+              Array.from({ length: INTERSECTION_ELEMENTS.ADV_PROJECTS }).map(
                 (_, index) => <SkeletonAdvDevProjectCard key={index} />,
               )}
             {!isLast && (

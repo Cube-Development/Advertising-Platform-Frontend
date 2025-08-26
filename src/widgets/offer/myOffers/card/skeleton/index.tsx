@@ -1,10 +1,10 @@
-import { offerStatusFilter } from "@entities/offer";
+import { ENUM_OFFER_STATUS } from "@entities/offer";
 import { Skeleton } from "@shared/ui";
 import { FC } from "react";
 import styles from "./styles.module.scss";
 
 interface OfferCardSkeletonProps {
-  statusFilter: offerStatusFilter;
+  statusFilter: ENUM_OFFER_STATUS;
 }
 
 export const OfferCardSkeleton: FC<OfferCardSkeletonProps> = ({
@@ -13,7 +13,7 @@ export const OfferCardSkeleton: FC<OfferCardSkeletonProps> = ({
   return (
     <Skeleton className="bg-skeleton-light rounded-[20px]">
       <div
-        className={`${styles.card} ${statusFilter === offerStatusFilter.active ? styles.active__chat : ""} border__gradient`}
+        className={`${styles.card} ${statusFilter === ENUM_OFFER_STATUS.ACTIVE ? styles.active__chat : ""} border__gradient`}
       >
         <div className={styles.card__description}>
           <div className={styles.card__description__data}>
@@ -31,7 +31,7 @@ export const OfferCardSkeleton: FC<OfferCardSkeletonProps> = ({
           </div>
           <Skeleton className="h-full w-full rounded-[12px]" />
         </div>
-        {statusFilter === offerStatusFilter.active && (
+        {statusFilter === ENUM_OFFER_STATUS.ACTIVE && (
           <div className={`${styles.chat__btn} display__hide__min__md`}>
             <Skeleton className="h-full w-full rounded-[12px]" />
           </div>
@@ -43,7 +43,7 @@ export const OfferCardSkeleton: FC<OfferCardSkeletonProps> = ({
           <Skeleton className="h-full w-full rounded-[15px]" />
         </div>
         <>
-          {statusFilter === offerStatusFilter.active ? (
+          {statusFilter === ENUM_OFFER_STATUS.ACTIVE ? (
             <div className={styles.card__active}>
               <div className={styles.card__active__title}>
                 <Skeleton className="h-3 w-full" />
@@ -54,7 +54,7 @@ export const OfferCardSkeleton: FC<OfferCardSkeletonProps> = ({
                 <Skeleton className="min-h-[35px] w-full rounded-[12px]" />
               </div>
             </div>
-          ) : statusFilter === offerStatusFilter.wait ? (
+          ) : statusFilter === ENUM_OFFER_STATUS.WAIT ? (
             <div className={styles.card__wait}>
               <div className={styles.card__wait__title}>
                 <Skeleton className="h-3 w-full" />
@@ -65,12 +65,12 @@ export const OfferCardSkeleton: FC<OfferCardSkeletonProps> = ({
                 <Skeleton className="h-full w-full rounded-[12px]" />
               </div>
             </div>
-          ) : statusFilter === offerStatusFilter.completed ? (
+          ) : statusFilter === ENUM_OFFER_STATUS.COMPLETED ? (
             <div className={styles.card__complete}>
               <Skeleton className="h-[90px] w-[90px] rounded-[15px]" />
               <Skeleton className="h-3 w-[150px] rounded-[15px]" />
             </div>
-          ) : statusFilter === offerStatusFilter.canceled ? (
+          ) : statusFilter === ENUM_OFFER_STATUS.CANCELED ? (
             <div className={styles.card__cancel}>
               <div className={styles.card__cancel__title}>
                 <Skeleton className="h-3 w-full" />
@@ -80,7 +80,7 @@ export const OfferCardSkeleton: FC<OfferCardSkeletonProps> = ({
                 <Skeleton className="h-2 w-full" />
               </div>
             </div>
-          ) : statusFilter === offerStatusFilter.moderation ? (
+          ) : statusFilter === ENUM_OFFER_STATUS.MODERATION ? (
             <div className={styles.card__moderation}>
               <div>
                 <Skeleton className="h-2 w-full" />
@@ -88,7 +88,7 @@ export const OfferCardSkeleton: FC<OfferCardSkeletonProps> = ({
                 <Skeleton className="h-2 w-full" />
               </div>
             </div>
-          ) : statusFilter === offerStatusFilter.unfulfilled ? (
+          ) : statusFilter === ENUM_OFFER_STATUS.UNFULFILLED ? (
             <div className={styles.card__uncomplete}>
               <div className={styles.card__uncomplete__title}>
                 <Skeleton className="h-3 w-full" />

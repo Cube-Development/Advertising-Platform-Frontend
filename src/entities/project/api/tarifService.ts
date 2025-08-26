@@ -1,9 +1,9 @@
 import { ADV_TARIFF_ORDERS, authApi, BALANCE } from "@shared/api";
-import { IBuyTarif, IChangeOrder } from "../types";
+import { IBuyTariff, IChangeOrder } from "../types";
 
 export const tarifAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
-    postBuyTarif: build.mutation<{ success: boolean }, IBuyTarif>({
+    postBuyTarif: build.mutation<{ success: boolean }, IBuyTariff>({
       query: (BodyParams) => ({
         url: `/tariff/payment`,
         method: `POST`,

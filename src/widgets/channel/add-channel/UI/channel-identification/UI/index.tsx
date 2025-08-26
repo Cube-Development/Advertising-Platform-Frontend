@@ -1,6 +1,6 @@
 import verificationAnimation from "/animated/verification_lottie.gif";
 import {
-  channelStatus,
+  ENUM_CHANNEL_STATUS_BACKEND,
   IAddChannelData,
   IAddChannelIdentification,
   IChannelLink,
@@ -89,19 +89,31 @@ export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
         .catch((error) => {
           if (error.status === 400) {
             let text = "toasts.add_platform.link.alert";
-            if (error?.data?.code === channelStatus.moderation) {
+            if (error?.data?.code === ENUM_CHANNEL_STATUS_BACKEND.moderation) {
               text = "toasts.add_platform.link.channelStatus.moderation";
-            } else if (error?.data?.code === channelStatus.active) {
+            } else if (
+              error?.data?.code === ENUM_CHANNEL_STATUS_BACKEND.active
+            ) {
               text = "toasts.add_platform.link.channelStatus.active";
-            } else if (error?.data?.code === channelStatus.inactive) {
+            } else if (
+              error?.data?.code === ENUM_CHANNEL_STATUS_BACKEND.inactive
+            ) {
               text = "toasts.add_platform.link.channelStatus.inactive";
-            } else if (error?.data?.code === channelStatus.banned) {
+            } else if (
+              error?.data?.code === ENUM_CHANNEL_STATUS_BACKEND.banned
+            ) {
               text = "toasts.add_platform.link.channelStatus.banned";
-            } else if (error?.data?.code === channelStatus.moderationReject) {
+            } else if (
+              error?.data?.code === ENUM_CHANNEL_STATUS_BACKEND.moderationReject
+            ) {
               text = "toasts.add_platform.link.channelStatus.moderationReject";
-            } else if (error?.data?.code === channelStatus.remoderation) {
+            } else if (
+              error?.data?.code === ENUM_CHANNEL_STATUS_BACKEND.remoderation
+            ) {
               text = "toasts.add_platform.link.channelStatus.remoderation";
-            } else if (error?.data?.code === channelStatus.invalidUrl) {
+            } else if (
+              error?.data?.code === ENUM_CHANNEL_STATUS_BACKEND.invalidUrl
+            ) {
               text = "toasts.add_platform.link.channelStatus.invalidUrl";
             } else {
               text = "toasts.add_platform.link.alert";

@@ -1,12 +1,15 @@
-import { bloggerChannelStatus, channelStatusFilter } from "@entities/channel";
-import { bloggerOfferStatus, offerStatusFilter } from "@entities/offer";
 import {
-  advManagerProjectStatus,
-  advManagerProjectStatusFilter,
-  advMyProjectStatus,
-  managerProjectStatus,
-  myProjectStatusFilter,
-  projectTypesFilter,
+  BLOGGER_CHANNEL_TABS_LIST,
+  ENUM_CHANNEL_STATUS,
+} from "@entities/channel";
+import { BLOGGER_OFFER_TABS_LIST, ENUM_OFFER_STATUS } from "@entities/offer";
+import {
+  ADV_MANAGER_PROJECT_TABS_LIST,
+  ENUM_ADV_MANAGER_PROJECT_STATUS,
+  ADV_MY_PROJECT_TABS_LIST,
+  MANAGER_PROJECT_TABS_LIST,
+  ENUM_ADV_MY_PROJECT_STATUS,
+  ENUM_PROJECT_TYPES,
 } from "@entities/project";
 import { ENUM_ROLES } from "@entities/user";
 import {
@@ -33,19 +36,19 @@ interface BarFilterProps {
   page: ENUM_PAGE_FILTER;
   listLength?: boolean;
   setValue?: UseFormSetValue<any>;
-  typeFilter?: projectTypesFilter | string;
+  typeFilter?: ENUM_PROJECT_TYPES | string;
   statusFilter:
-    | advManagerProjectStatusFilter
-    | myProjectStatusFilter
-    | channelStatusFilter
-    | offerStatusFilter
+    | ENUM_ADV_MANAGER_PROJECT_STATUS
+    | ENUM_ADV_MY_PROJECT_STATUS
+    | ENUM_CHANNEL_STATUS
+    | ENUM_OFFER_STATUS
     | string;
   changeStatus: (
     status:
-      | advManagerProjectStatusFilter
-      | myProjectStatusFilter
-      | channelStatusFilter
-      | offerStatusFilter
+      | ENUM_ADV_MANAGER_PROJECT_STATUS
+      | ENUM_ADV_MY_PROJECT_STATUS
+      | ENUM_CHANNEL_STATUS
+      | ENUM_OFFER_STATUS
       | string,
   ) => void;
   changeType?: (status: string) => void;
@@ -114,18 +117,18 @@ export const BarFilter: FC<BarFilterProps> = ({
 
   const projectStatus =
     page === ENUM_PAGE_FILTER.ORDER &&
-    typeFilter === projectTypesFilter.myProject &&
+    typeFilter === ENUM_PROJECT_TYPES.MY_PROJECT &&
     role === ENUM_ROLES.ADVERTISER
-      ? advMyProjectStatus
+      ? ADV_MY_PROJECT_TABS_LIST
       : page === ENUM_PAGE_FILTER.ORDER &&
-          typeFilter === projectTypesFilter.managerProject &&
+          typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT &&
           role === ENUM_ROLES.ADVERTISER
-        ? advManagerProjectStatus
+        ? ADV_MANAGER_PROJECT_TABS_LIST
         : page === ENUM_PAGE_FILTER.ORDER && role === ENUM_ROLES.MANAGER
-          ? managerProjectStatus
+          ? MANAGER_PROJECT_TABS_LIST
           : page === ENUM_PAGE_FILTER.OFFER
-            ? bloggerOfferStatus
-            : bloggerChannelStatus;
+            ? BLOGGER_OFFER_TABS_LIST
+            : BLOGGER_CHANNEL_TABS_LIST;
 
   return (
     <div className={styles.wrapper}>
@@ -145,7 +148,7 @@ export const BarFilter: FC<BarFilterProps> = ({
               typeFilter={typeFilter!}
               badge={badgeType}
             />
-            {typeFilter === projectTypesFilter.savedProject || (
+            {typeFilter === ENUM_PROJECT_TYPES.SAVED_PROJECT || (
               <BarStatusFilter
                 changeStatus={changeStatus}
                 statusFilter={statusFilter}

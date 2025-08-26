@@ -2,8 +2,8 @@ import {
   IMessageNewSocket,
   INotificationData,
   notificationsTypes,
-  websocketMessages,
-  websocketNotifications,
+  WEBSOCKET_MESSAGES_LIST,
+  WEBSOCKET_NOTIFICATIONS_LIST,
 } from "@entities/communication";
 import { useCallback } from "react";
 
@@ -24,7 +24,7 @@ export function useCentrifugePublication(
       const method = data?.method;
       revalidateCash(data);
 
-      if (websocketMessages.includes(method)) {
+      if (WEBSOCKET_MESSAGES_LIST.includes(method)) {
         const message = data as IMessageNewSocket;
         if (
           message.method === notificationsTypes.order_message_read ||
@@ -35,7 +35,7 @@ export function useCentrifugePublication(
           handleNewMessageChatRef.current(message);
           handleNewMessageRef.current(message);
         }
-      } else if (websocketNotifications.includes(method)) {
+      } else if (WEBSOCKET_NOTIFICATIONS_LIST.includes(method)) {
         const notification = data as INotificationData;
         revalidateNotifications(notification);
       }

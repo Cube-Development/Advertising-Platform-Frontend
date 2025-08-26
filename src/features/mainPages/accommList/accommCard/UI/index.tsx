@@ -1,10 +1,10 @@
 import { ProtectIcon, QualityIcon } from "@shared/assets";
-import { IAccomm } from "@shared/types/translate";
+import { IAcom } from "@shared/types/translate";
 import { FC, ReactElement } from "react";
 import styles from "./styles.module.scss";
 
 interface AccommCardProps {
-  accomm: IAccomm;
+  accomm: IAcom;
   toDoBtn: ReactElement;
 }
 
