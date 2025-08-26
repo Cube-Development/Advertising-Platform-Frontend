@@ -51,7 +51,7 @@ export const WalletsCard: FC = ({}) => {
   return (
     <div className={styles.wrapper}>
       <div className={styles.header}>
-        <p className={styles.title}>{t("wallets.title")}</p>
+        <p className={styles.title}>{t("wallets.title")}:</p>
         <p className={styles.amount}>
           {Math.floor(balance).toLocaleString()} <span>{t("symbol")}</span>
         </p>
