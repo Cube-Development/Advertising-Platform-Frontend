@@ -10,7 +10,13 @@ import React, { Suspense } from "react";
 
 // Ленивый импорт компонента Users
 const Users = React.lazy(() =>
-  import("@widgets/adminPanel").then((module) => ({ default: module.Users })),
+  import("@widgets/adminPanel")
+    .then((module) => ({ default: module.Users }))
+    .catch(() => {
+      // При ошибке перезагружаем страницу
+      window.location.reload();
+      return { default: () => null };
+    }),
 );
 
 export const AdminUsersPage = () => {

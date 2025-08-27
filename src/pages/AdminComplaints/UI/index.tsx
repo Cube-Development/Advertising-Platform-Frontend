@@ -10,9 +10,15 @@ import React, { Suspense } from "react";
 
 // Ленивый импорт для Complaints
 const Complaints = React.lazy(() =>
-  import("@widgets/adminPanel").then((module) => ({
-    default: module.Complaints,
-  })),
+  import("@widgets/adminPanel")
+    .then((module) => ({
+      default: module.Complaints,
+    }))
+    .catch(() => {
+      // При ошибке перезагружаем страницу
+      window.location.reload();
+      return { default: () => null };
+    }),
 );
 
 export const AdminComplaintsPage = () => {

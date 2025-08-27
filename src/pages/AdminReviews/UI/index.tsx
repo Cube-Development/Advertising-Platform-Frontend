@@ -10,7 +10,13 @@ import React, { Suspense } from "react";
 
 // Ленивый импорт компонента Reviews
 const Reviews = React.lazy(() =>
-  import("@widgets/adminPanel").then((module) => ({ default: module.Reviews })),
+  import("@widgets/adminPanel")
+    .then((module) => ({ default: module.Reviews }))
+    .catch(() => {
+      // При ошибке перезагружаем страницу
+      window.location.reload();
+      return { default: () => null };
+    }),
 );
 
 export const AdminReviewsPage = () => {
