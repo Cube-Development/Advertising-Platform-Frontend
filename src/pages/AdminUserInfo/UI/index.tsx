@@ -10,9 +10,15 @@ import React, { Suspense } from "react";
 
 // Ленивый импорт компонента UserInfo
 const UserInfo = React.lazy(() =>
-  import("@widgets/adminPanel").then((module) => ({
-    default: module.UserInfo,
-  })),
+  import("@widgets/adminPanel")
+    .then((module) => ({
+      default: module.UserInfo,
+    }))
+    .catch(() => {
+      // При ошибке перезагружаем страницу
+      window.location.reload();
+      return { default: () => null };
+    }),
 );
 
 export const AdminUserInfoPage = () => {

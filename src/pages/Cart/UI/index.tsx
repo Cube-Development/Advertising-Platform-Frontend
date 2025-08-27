@@ -10,7 +10,13 @@ import React, { Suspense } from "react";
 
 // Ленивый импорт компонента Cart
 const Cart = React.lazy(() =>
-  import("@widgets/cart").then((module) => ({ default: module.Cart })),
+  import("@widgets/cart")
+    .then((module) => ({ default: module.Cart }))
+    .catch(() => {
+      // При ошибке перезагружаем страницу
+      window.location.reload();
+      return { default: () => null };
+    }),
 );
 
 export const CartPage = () => {

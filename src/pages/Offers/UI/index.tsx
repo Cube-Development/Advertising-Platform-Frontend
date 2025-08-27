@@ -23,7 +23,13 @@ import styles from "./styles.module.scss";
 
 // Ленивый импорт компонента MyOffers
 const MyOffers = React.lazy(() =>
-  import("@widgets/offer").then((module) => ({ default: module.MyOffers })),
+  import("@widgets/offer")
+    .then((module) => ({ default: module.MyOffers }))
+    .catch(() => {
+      // При ошибке перезагружаем страницу
+      window.location.reload();
+      return { default: () => null };
+    }),
 );
 
 export const OffersPage: FC = () => {

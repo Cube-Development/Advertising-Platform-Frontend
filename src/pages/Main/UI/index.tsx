@@ -31,31 +31,73 @@ import React, { Suspense } from "react";
 
 // Ленивый импорт всех компонентов
 const Cta = React.lazy(() =>
-  import("@widgets/mainPages").then((module) => ({ default: module.Cta })),
+  import("@widgets/mainPages")
+    .then((module) => ({ default: module.Cta }))
+    .catch(() => {
+      // При ошибке перезагружаем страницу
+      window.location.reload();
+      return { default: () => null };
+    }),
 );
 const Services = React.lazy(() =>
-  import("@widgets/mainPages").then((module) => ({ default: module.Services })),
+  import("@widgets/mainPages")
+    .then((module) => ({ default: module.Services }))
+    .catch(() => {
+      // При ошибке перезагружаем страницу
+      window.location.reload();
+      return { default: () => null };
+    }),
 );
 const Partners = React.lazy(() =>
-  import("@widgets/mainPages").then((module) => ({ default: module.Partners })),
+  import("@widgets/mainPages")
+    .then((module) => ({ default: module.Partners }))
+    .catch(() => {
+      // При ошибке перезагружаем страницу
+      window.location.reload();
+      return { default: () => null };
+    }),
 );
 const HowItWorks = React.lazy(() =>
-  import("@widgets/mainPages").then((module) => ({
-    default: module.HowItWorks,
-  })),
+  import("@widgets/mainPages")
+    .then((module) => ({
+      default: module.HowItWorks,
+    }))
+    .catch(() => {
+      // При ошибке перезагружаем страницу
+      window.location.reload();
+      return { default: () => null };
+    }),
 );
 const WhyChooseUs = React.lazy(() =>
-  import("@widgets/mainPages").then((module) => ({
-    default: module.WhyChooseUs,
-  })),
+  import("@widgets/mainPages")
+    .then((module) => ({
+      default: module.WhyChooseUs,
+    }))
+    .catch(() => {
+      // При ошибке перезагружаем страницу
+      window.location.reload();
+      return { default: () => null };
+    }),
 );
 const Turnkey = React.lazy(() =>
-  import("@widgets/mainPages").then((module) => ({ default: module.Turnkey })),
+  import("@widgets/mainPages")
+    .then((module) => ({ default: module.Turnkey }))
+    .catch(() => {
+      // При ошибке перезагружаем страницу
+      window.location.reload();
+      return { default: () => null };
+    }),
 );
 const Customers = React.lazy(() =>
-  import("@widgets/mainPages").then((module) => ({
-    default: module.Customers,
-  })),
+  import("@widgets/mainPages")
+    .then((module) => ({
+      default: module.Customers,
+    }))
+    .catch(() => {
+      // При ошибке перезагружаем страницу
+      window.location.reload();
+      return { default: () => null };
+    }),
 );
 
 export const MainPage = () => {

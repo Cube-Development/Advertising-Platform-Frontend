@@ -10,9 +10,14 @@ import React, { Suspense } from "react";
 
 // Ленивый импорт компонента AddChannelBlock
 const AddChannelBlock = React.lazy(() =>
-  import("@widgets/channel").then((module) => ({
-    default: module.AddChannelBlock,
-  })),
+  import("@widgets/channel")
+    .then((module) => ({
+      default: module.AddChannelBlock,
+    }))
+    .catch(() => {
+      window.location.reload();
+      return { default: () => null };
+    }),
 );
 
 export const AddChannelPage = () => {

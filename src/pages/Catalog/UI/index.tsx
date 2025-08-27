@@ -10,9 +10,14 @@ import React, { Suspense } from "react";
 
 // Ленивый импорт компонента CatalogBlock
 const CatalogBlock = React.lazy(() =>
-  import("@widgets/catalog").then((module) => ({
-    default: module.CatalogBlock,
-  })),
+  import("@widgets/catalog")
+    .then((module) => ({
+      default: module.CatalogBlock,
+    }))
+    .catch(() => {
+      window.location.reload();
+      return { default: () => null };
+    }),
 );
 
 export const CatalogPage = () => {
