@@ -53,7 +53,7 @@
       margin-top: 15px;
 
       .accordion__title {
-        color: rgba(0, 0, 0, 0.4);
+        color: var(--secondary-text);
         font-size: 12px;
         font-style: normal;
         font-weight: 600;
@@ -67,7 +67,7 @@
     display: grid;
     padding: 20px;
     align-content: center;
-    border-bottom: 1px solid #d9d9d9;
+    border-bottom: 1px solid var(--Inside-container);
     grid-auto-flow: column;
     justify-content: space-between;
     align-items: center;

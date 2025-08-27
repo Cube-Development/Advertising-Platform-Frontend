@@ -324,7 +324,7 @@ body {
 }
 
 .rotate {
-  stroke: var(--Personal-colors-main);
+  // stroke: var(--Personal-colors-main);
   transform: rotate(180deg);
   transition: transform 0.5s ease;
 
