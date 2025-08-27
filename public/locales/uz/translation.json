@@ -2252,7 +2252,8 @@
       }
     },
     "cart": {
-      "error": "Hisobingizda mablag' yetarli emas, balansni to'ldirish kerak"
+      "error": "Hisobingizda mablag' yetarli emas, balansni to'ldirish kerak",
+      "save_cart_temporary_error": "Ups! Funksional ishlab chiqilmoqda..."
     },
     "offers_blogger": {
       "channel": {

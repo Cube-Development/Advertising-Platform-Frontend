@@ -78,7 +78,7 @@ export const DidoxLogin: FC = () => {
   }, [certificates, organization?.PINFL]);
 
   return (
-    <div className="grid items-center  grid-rows-[max-content,1fr] h-full w-full">
+    <div className="grid items-center grid-rows-[max-content,1fr] h-full w-full">
       <div className="bg-[#341F47] p-6">
         <img src={DidoxLogo} alt="didox-logo" className="h-8" />
       </div>

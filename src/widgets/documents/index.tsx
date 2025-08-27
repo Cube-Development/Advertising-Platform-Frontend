@@ -68,12 +68,12 @@ export const Documents: FC = () => {
     <div className="container">
       <div className="page_wrapper">
         {/* Заголовок страницы */}
-        <div className="!bg-[#341F47] p-5 grid grid-flow-row gap-4">
+        <div className="!bg-[#341F47] p-5 grid grid-flow-row gap-4 rounded-[15px]">
           <div className="grid items-end justify-start grid-flow-col gap-2 md:gap-4">
             <img src={DidoxLogo} alt="didox-log" className="h-8 md:h-12" />
-            <h1 className="text-2xl font-bold text-white md:text-3xl leading-[0.75]">
+            {/* <h1 className="text-2xl font-bold text-white md:text-3xl leading-[0.75]">
               {t("documents_page.title")}
-            </h1>
+            </h1> */}
           </div>
           <div className="flex flex-col text-sm sm:flex-row sm:items-center sm:justify-between md:text-lg">
             <p className="text-white">{t("documents_page.description")}</p>

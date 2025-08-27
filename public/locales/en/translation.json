@@ -2252,7 +2252,8 @@
       }
     },
     "cart": {
-      "error": "You have insufficient funds, please top up your balance"
+      "error": "You have insufficient funds, please top up your balance",
+      "save_cart_temporary_error": "Oops! The functionality is under development..."
     },
     "offers_blogger": {
       "channel": {
