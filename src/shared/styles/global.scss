@@ -121,15 +121,31 @@ body {
   flex-direction: column;
   min-height: calc(calc(var(--vh) * 100) - 80px);
   width: 100vw;
-  background: url("/images/rootBg/desktopBG.png") repeat top center;
-  background-size: cover;
+  // background: url("/images/rootBg/desktopBG.png") repeat top center;
+  // background-size: cover;
 
-  @media (max-width: 992px) {
-    background: url("/images/rootBg/tabletBG.png") repeat top center;
-  }
+  // @media (max-width: 992px) {
+  //   background: url("/images/rootBg/tabletBG.png") repeat top center;
+  // }
 
-  @media (max-width: 576px) {
-    background: url("/images/rootBg/mobileBG.png") repeat top center;
+  // @media (max-width: 576px) {
+  //   background: url("/images/rootBg/mobileBG.png") repeat top center;
+  // }
+
+  .main_background {
+    opacity: 0.5;
+    background-image:         
+      radial-gradient(circle at 10% 80%, var(--Personal-colors-main), transparent 20%), // нижний левый
+      radial-gradient(circle at 80% 10%, var(--Personal-colors-main2), transparent 20%); // верхний правый
+    
+      //  radial-gradient(circle at (отступ слева)% (отступ сверху)%, var(--Personal-colors-main2), transparent (радиус градиента от контейнера)%);
+
+
+    @media (max-width: 992px) {
+      background-image:         
+      radial-gradient(circle at 10% 80%, var(--Personal-colors-main), transparent 40%), // нижний левый
+      radial-gradient(circle at 95% 20%, var(--Personal-colors-main2), transparent 20%); // верхний правый
+    }
   }
 
   header,
