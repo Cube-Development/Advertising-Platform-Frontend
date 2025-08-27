@@ -48,7 +48,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
 
   const { checkBalance } = useCheckBalance(
     formState?.wallet_type,
-    totalPrice?.amount
+    totalPrice?.amount,
   );
 
   const onSubmit: SubmitHandler<ICreatePostForm> = async (formData) => {

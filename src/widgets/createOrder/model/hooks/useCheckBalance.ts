@@ -12,7 +12,7 @@ export const useCheckBalance = (
   const { deposit_wallet, profit_wallet, spending_wallet } = useAppSelector(
     (state) => state.wallet,
   );
-  const {role} = useAppSelector((state) => state.user);
+  const { role } = useAppSelector((state) => state.user);
   const { toast } = useToast();
   const { t } = useTranslation();
 
