@@ -104,15 +104,10 @@ export const MainLayout = ({ children }: PropsWithChildren) => {
           <Header />
         </Suspense> */}
         <Header />
-        <div className="min-h-screen w-full bg-[#fefcff] relative">
-          {/* Dreamy Sky Pink Glow */}
-          <div className="absolute inset-0 z-0 pointer-events-none main_background" />
-          {/* Your Content/Components */}
-          <main className="user_main">
-            <OfferSignModal open={open} setOpen={setOpen} haveTrigger={false} />
-            {children}
-          </main>
-        </div>
+        <main className=" user_main main_background">
+          <OfferSignModal open={open} setOpen={setOpen} haveTrigger={false} />
+          {children}
+        </main>
         <Footer />
       </section>
     </>

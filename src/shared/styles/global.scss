@@ -133,18 +133,38 @@ body {
   // }
 
   .main_background {
-    opacity: 0.5;
-    background-image:         
-      radial-gradient(circle at 10% 80%, var(--Personal-colors-main), transparent 20%), // нижний левый
-      radial-gradient(circle at 80% 10%, var(--Personal-colors-main2), transparent 20%); // верхний правый
-    
-      //  radial-gradient(circle at (отступ слева)% (отступ сверху)%, var(--Personal-colors-main2), transparent (радиус градиента от контейнера)%);
+    position: relative;
 
+    &::before {
+      background: #fefcff;
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.5; // теперь opacity только на градиент
+      background-image: radial-gradient(
+          circle at 10% 80%,
+          var(--Personal-colors-main),
+          transparent 20%
+        ),
+        radial-gradient(
+          circle at 80% 10%,
+          var(--Personal-colors-main2),
+          transparent 20%
+        );
 
-    @media (max-width: 992px) {
-      background-image:         
-      radial-gradient(circle at 10% 80%, var(--Personal-colors-main), transparent 40%), // нижний левый
-      radial-gradient(circle at 95% 20%, var(--Personal-colors-main2), transparent 20%); // верхний правый
+      @media (max-width: 992px) {
+        background-image: radial-gradient(
+            circle at 10% 80%,
+            var(--Personal-colors-main),
+            transparent 40%
+          ),
+          radial-gradient(
+            circle at 95% 20%,
+            var(--Personal-colors-main2),
+            transparent 20%
+          );
+      }
     }
   }
 
