@@ -24,12 +24,24 @@ import React, { Suspense } from "react";
 
 // Ленивые импорты компонентов
 const AdvOrders = React.lazy(() =>
-  import("@widgets/project").then((module) => ({ default: module.AdvOrders })),
+  import("@widgets/project")
+    .then((module) => ({ default: module.AdvOrders }))
+    .catch(() => {
+      // При ошибке перезагружаем страницу
+      window.location.reload();
+      return { default: () => null };
+    }),
 );
 const ManagerOrders = React.lazy(() =>
-  import("@widgets/project").then((module) => ({
-    default: module.ManagerOrders,
-  })),
+  import("@widgets/project")
+    .then((module) => ({
+      default: module.ManagerOrders,
+    }))
+    .catch(() => {
+      // При ошибке перезагружаем страницу
+      window.location.reload();
+      return { default: () => null };
+    }),
 );
 
 export const OrdersPage = () => {

@@ -28,14 +28,26 @@ import { validate as isValidUUID } from "uuid";
 
 // Ленивый импорт компонентов
 const ActiveChannels = React.lazy(() =>
-  import("@widgets/channel").then((module) => ({
-    default: module.ActiveChannels,
-  })),
+  import("@widgets/channel")
+    .then((module) => ({
+      default: module.ActiveChannels,
+    }))
+    .catch(() => {
+      // При ошибке перезагружаем страницу
+      window.location.reload();
+      return { default: () => null };
+    }),
 );
 const ModerationChannels = React.lazy(() =>
-  import("@widgets/channel").then((module) => ({
-    default: module.ModerationChannels,
-  })),
+  import("@widgets/channel")
+    .then((module) => ({
+      default: module.ModerationChannels,
+    }))
+    .catch(() => {
+      // При ошибке перезагружаем страницу
+      window.location.reload();
+      return { default: () => null };
+    }),
 );
 
 interface IForm extends getChannelsByStatusReq {

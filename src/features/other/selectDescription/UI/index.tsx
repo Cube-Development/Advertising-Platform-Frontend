@@ -50,7 +50,7 @@ export const SelectDescription: FC<SelectDescriptionProps> = ({
         <p>{t(title)}</p>
         {text && <InfoTooltip text={t(text)} />}
       </div>
-      <div className={`${styles.field} relative`}>
+      <div className={`${styles.field} ${type === channelParameterData.prompt && "relative"}`}>
         <textarea
           id="input"
           value={description}
@@ -63,11 +63,13 @@ export const SelectDescription: FC<SelectDescriptionProps> = ({
         <p>
           {remainingCharacters}/{1000}
         </p>
+        {type === channelParameterData.prompt && (
         <div className="backdrop-blur-[10px] absolute top-0 right-0 w-full h-full bg-gray-300/10 z-50 flex items-center justify-center">
           <p className="!text-gray-500 md:!text-sm !text-xs !font-medium">
-            Doesn't work yet :(
-          </p>
-        </div>
+              Doesn't work yet :(
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );
