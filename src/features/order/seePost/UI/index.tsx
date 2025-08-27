@@ -45,8 +45,8 @@ export const SeePost: FC<SeePostProps> = ({ post, className }) => {
         <AlertDialogDescription className="sr-only"></AlertDialogDescription>
         <AlertDialogTitle className="sr-only"></AlertDialogTitle>
         <div className="relative">
-          <AlertDialogAction>
-            <X className={styles.x_button} />
+          <AlertDialogAction className="!bg-transparent absolute -right-[60px] -top-8">
+            <X className={`${styles.x_button} text-black`} />
           </AlertDialogAction>
           {post?.platform === platformTypesNum.telegram && (
             <DisplayTelegram

@@ -19,6 +19,7 @@ import {
   useCreateOrderLoad,
   useOnSubmitPayment,
 } from "../model";
+import { ENUM_ROLES } from "@entities/user";
 
 interface CreateOrderBlockProps {}
 

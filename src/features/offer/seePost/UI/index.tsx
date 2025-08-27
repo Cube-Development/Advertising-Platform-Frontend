@@ -54,9 +54,9 @@ export const SeePost: FC<SeePostProps> = ({ post }) => {
         <AlertDialogDescription className="sr-only"></AlertDialogDescription>
         <AlertDialogTitle className="sr-only"></AlertDialogTitle>
         <div className="relative">
-          <AlertDialogAction>
+          <AlertDialogAction className="!bg-transparent absolute -right-[60px] -top-8">
             <X
-              className={`absolute ${screen > 475 ? "-right-10 -top-5" : "-right-8 -top-4"} w-[30px] rounded-full p-2 bg-white cursor-pointer`}
+              className={`w-[30px] rounded-full p-2 bg-white cursor-pointer text-black`}
             />
           </AlertDialogAction>
           {post?.platform === platformTypesNum.telegram && (

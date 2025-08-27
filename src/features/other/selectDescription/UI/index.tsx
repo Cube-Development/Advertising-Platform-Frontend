@@ -50,7 +50,7 @@ export const SelectDescription: FC<SelectDescriptionProps> = ({
         <p>{t(title)}</p>
         {text && <InfoTooltip text={t(text)} />}
       </div>
-      <div className={styles.field}>
+      <div className={`${styles.field} relative`}>
         <textarea
           id="input"
           value={description}
@@ -58,10 +58,16 @@ export const SelectDescription: FC<SelectDescriptionProps> = ({
           onChange={handleChange}
           maxLength={1000}
           placeholder={t(placeholder)}
+          readOnly={true}
         />
         <p>
           {remainingCharacters}/{1000}
         </p>
+        <div className="backdrop-blur-[10px] absolute top-0 right-0 w-full h-full bg-gray-300/10 z-50 flex items-center justify-center">
+          <p className="!text-gray-500 md:!text-sm !text-xs !font-medium">
+            Doesn't work yet :(
+          </p>
+        </div>
       </div>
     </div>
   );

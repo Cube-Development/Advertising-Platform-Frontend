@@ -98,7 +98,7 @@ export const LoginModal: FC<LoginModalProps> = ({
             </DrawerTrigger>
           )}
 
-          <DrawerContent className="h-[100vh]">
+          <DrawerContent className="h-[100vh] border-none">
             <DrawerTitle className="sr-only" />
             <DrawerDescription className="sr-only" />
             <div className="relative h-full overflow-y-scroll">

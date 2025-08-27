@@ -1,3 +1,4 @@
+import { ENUM_ROLES } from "@entities/user";
 import { ENUM_WALLETS_TYPE } from "@entities/wallet";
 import { useAppSelector } from "@shared/hooks";
 import { useToast } from "@shared/ui";
@@ -11,6 +12,7 @@ export const useCheckBalance = (
   const { deposit_wallet, profit_wallet, spending_wallet } = useAppSelector(
     (state) => state.wallet,
   );
+  const { role } = useAppSelector((state) => state.user);
   const { toast } = useToast();
   const { t } = useTranslation();
 
@@ -27,14 +29,13 @@ export const useCheckBalance = (
   }, [wallet_type, deposit_wallet, profit_wallet, spending_wallet]);
 
   const checkBalance = (): boolean => {
-    if (current_wallet < amount) {
+    if (current_wallet < amount && role === ENUM_ROLES.ADVERTISER) {
       toast({
         variant: "error",
-        title: t("toasts.create_order.payment.error"),
+        title: t("toasts.create_order.payment.not_enough_balance"),
       });
       return false;
     }
-
     return true;
   };
 

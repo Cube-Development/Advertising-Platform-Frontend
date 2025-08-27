@@ -63,7 +63,7 @@ export const RegistrationPage: FC = () => {
               </span>
             </p>
 
-            <div className={styles.login__with}>
+            {/* <div className={styles.login__with}>
               <p className={`${styles.login__with__title} truncate`}>
                 {t("auth.login_with")}
               </p>
@@ -80,7 +80,7 @@ export const RegistrationPage: FC = () => {
                   <img src="/images/authorization/apple.svg" alt="" />
                 </button>
               </div>
-            </div>
+            </div> */}
           </>
         )}
       </div>

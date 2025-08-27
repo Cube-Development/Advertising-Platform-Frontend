@@ -2252,7 +2252,8 @@
       }
     },
     "cart": {
-      "error": "You have insufficient funds, please top up your balance"
+      "error": "You have insufficient funds, please top up your balance",
+      "save_cart_temporary_error": "Oops! The functionality is under development..."
     },
     "offers_blogger": {
       "channel": {
@@ -2340,7 +2341,8 @@
       },
       "payment": {
         "success": "Advertising campaign successfully paid and launched!",
-        "error": "You have insufficient funds on current wallet, please top up your balance"
+        "not_enough_balance": "You have insufficient funds on current wallet, please top up your balance",
+        "error": "Error during payment"
       },
       "date": {
         "error": "Error creating dates for channels",

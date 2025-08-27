@@ -67,30 +67,30 @@ export const useOnSubmitPayment = () => {
     formData: ICreatePostForm,
     projectId: string,
   ) => {
-    await projectName({
-      project_id: projectId,
-      name: formData?.name || "Some project name",
-    })
-      .unwrap()
-      .catch(() => {
-        toast({
-          variant: "error",
-          title: t("toasts.create_order.date.error"),
-        });
-        throw new Error("Error: Create order project name");
+    try {
+      await projectName({
+        project_id: projectId,
+        name: formData?.name || "Some project name",
+      }).unwrap();
+    } catch (error) {
+      toast({
+        variant: "error",
+        title: t("toasts.create_order.date.error"),
       });
+      throw new Error("Error: Create order project name");
+    }
   };
 
   const handleProjectDates = async (formData: ICreatePostForm) => {
-    await createOrderDates(formData.datetime)
-      .unwrap()
-      .catch(() => {
-        toast({
-          variant: "error",
-          title: t("toasts.create_order.date.error"),
-        });
-        throw new Error("Error: Create order dates");
+    try {
+      await createOrderDates(formData.datetime).unwrap();
+    } catch (error) {
+      toast({
+        variant: "error",
+        title: t("toasts.create_order.date.error"),
       });
+      throw new Error("Error: Create order dates");
+    }
   };
 
   const handleProjectPayment = async (
@@ -98,26 +98,29 @@ export const useOnSubmitPayment = () => {
     role: ENUM_ROLES,
     wallet_type?: ENUM_WALLETS_TYPE,
   ) => {
-    await (
-      role === ENUM_ROLES.ADVERTISER
-        ? createPayment({ project_id: projectId, wallet_type: wallet_type! })
-        : approveProject({ project_id: projectId })
-    )
-      .unwrap()
-      .then(() => {
-        toast({
-          variant: "success",
-          title: t("toasts.create_order.payment.success"),
-        });
-        navigate(ENUM_PATHS.ORDERS);
-      })
-      .catch(() => {
-        toast({
-          variant: "error",
-          title: t("toasts.create_order.payment.error"),
-        });
-        throw new Error("Error: Create order payment | approve project");
+    try {
+      if (role === ENUM_ROLES.ADVERTISER) {
+        await createPayment({
+          project_id: projectId,
+          wallet_type: wallet_type!,
+        }).unwrap();
+      } else if (role === ENUM_ROLES.MANAGER) {
+        await approveProject({ project_id: projectId }).unwrap();
+      } else {
+        return;
+      }
+      toast({
+        variant: "success",
+        title: t("toasts.create_order.payment.success"),
       });
+      navigate(ENUM_PATHS.ORDERS);
+    } catch (error) {
+      toast({
+        variant: "error",
+        title: t("toasts.create_order.payment.error"),
+      });
+      throw new Error("Error: Create order payment | approve project");
+    }
   };
 
   return {
