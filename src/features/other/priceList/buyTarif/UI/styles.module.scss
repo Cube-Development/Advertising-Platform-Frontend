@@ -5,7 +5,7 @@
   font-weight: 500;
   line-height: normal;
   color: var(--Personal-colors-White);
-  background: var(--Gradients-Gradient-1);
+  background: var(--primary-gradient);
   cursor: pointer;
   border-radius: 20px;
   box-shadow: 0px 3px 5px 0px rgba(71, 114, 230, 0.6);
@@ -79,7 +79,7 @@
     }
 
     p {
-      background: var(--Gradients-Gradient-1);
+      background: var(--primary-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -274,7 +274,7 @@
       font-style: normal;
       font-weight: 500;
       line-height: normal;
-      background: var(--Gradients-Gradient-1);
+      background: var(--primary-gradient);
     }
 
     input {
@@ -362,7 +362,7 @@
       padding: 15px;
       text-align: center;
       border-radius: 8px;
-      background: var(--Gradients-Gradient-1);
+      background: var(--primary-gradient);
 
       span {
         color: var(--Personal-colors-White);
@@ -606,7 +606,7 @@
       width: 100%;
       padding: 15px;
       border-radius: 8px;
-      background: var(--Gradients-Gradient-1);
+      background: var(--primary-gradient);
       color: #fff;
       font-size: 18px;
       font-style: normal;
@@ -662,7 +662,7 @@
 
     &__call_to_action {
       font-size: var(--font-size-text-accent-xl);
-      background: var(--Gradients-Gradient-1);
+      background: var(--primary-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -686,7 +686,7 @@
   }
 
   .btns__register {
-    background: var(--Gradients-Gradient-1);
+    background: var(--primary-gradient);
     color: #fff;
     border-radius: 12px;
     padding: 10px 20px;

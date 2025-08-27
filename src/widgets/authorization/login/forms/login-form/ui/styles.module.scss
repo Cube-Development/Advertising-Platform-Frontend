@@ -102,7 +102,7 @@
   font-style: normal;
   font-weight: 500;
   line-height: normal;
-  background: var(--Gradients-Gradient-1);
+  background: var(--primary-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -116,10 +116,7 @@
   cursor: pointer;
 
   border-radius: 12px;
-  background: var(
-    --Gradient-1,
-    linear-gradient(93deg, #4772e6 2.37%, #8e54e9 52.62%)
-  );
+  background: var(--primary-gradient,);
   font-size: 14px;
   font-style: normal;
   font-weight: 400;

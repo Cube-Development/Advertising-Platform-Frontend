@@ -118,7 +118,7 @@ export const SendLink: FC<IOrderFeature> = ({ order_id }) => {
                   {isLoading ? (
                     <Loader
                       className="animate-spin"
-                      stroke="#4772e6"
+                      stroke="#0BADC2"
                       width={20}
                       height={20}
                     />
@@ -173,7 +173,7 @@ export const SendLink: FC<IOrderFeature> = ({ order_id }) => {
                   {isLoading ? (
                     <Loader
                       className="animate-spin"
-                      stroke="#4772e6"
+                      stroke="#0BADC2"
                       width={20}
                       height={20}
                     />

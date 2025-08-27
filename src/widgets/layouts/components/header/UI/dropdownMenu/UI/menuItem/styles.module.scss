@@ -74,7 +74,7 @@
 
     &.active {
       border-radius: 12px;
-      background: var(--Gradients-Gradient-1);
+      background: var(--primary-gradient);
       color: var(--Personal-colors-White);
     }
   }
@@ -149,7 +149,7 @@
 
     &__call_to_action {
       font-size: var(--font-size-text-accent-xl);
-      background: var(--Gradients-Gradient-1);
+      background: var(--primary-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -173,7 +173,7 @@
   }
 
   .btns__register {
-    background: var(--Gradients-Gradient-1);
+    background: var(--primary-gradient);
     color: #fff;
     border-radius: 12px;
     padding: 10px 20px;

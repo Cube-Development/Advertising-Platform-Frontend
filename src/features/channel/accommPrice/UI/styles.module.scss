@@ -38,10 +38,7 @@
     &.active {
       box-shadow: none;
       color: var(--Personal-colors-White);
-      background: var(
-        --Gradients-Gradient-1,
-        linear-gradient(45deg, #4772e6 23.91%, #8e54e9 75.06%)
-      );
+      background: var(--Personal-colors-Main);
     }
   }
 

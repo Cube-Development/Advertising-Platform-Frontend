@@ -111,7 +111,7 @@ export const MenuItem: React.FC<IMenuItems> = ({
                   onClick={() => onChange(item.item.path!)}
                 >
                   <li>
-                    <GripVertical width={20} height={20} stroke="#4772e6" />
+                    <GripVertical width={20} height={20} stroke="#0BADC2" />
                     {t(subItem.title!)}
                     {viewsInfo &&
                       !!viewsInfo?.count &&

@@ -33,8 +33,8 @@ export const ProtectIcon3 = () => (
         y2="17.3281"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="#4772E6" />
-        <stop offset="1" stopColor="#8E54E9" />
+        <stop stopColor="#0BADC2" />
+        <stop offset="1" stopColor="#0AA5BE" />
       </linearGradient>
     </defs>
   </svg>

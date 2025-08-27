@@ -75,7 +75,7 @@ body {
 
   &__blue {
     color: var(--Personal-colors-White);
-    background: var(--Gradients-Gradient-1);
+    background: var(--primary-gradient);
 
     &:hover {
       background: #005aa5;
@@ -203,7 +203,7 @@ body {
 }
 
 .layout {
-  background: var(--Gradients-Gradient-1);
+  background: var(--primary-gradient);
 }
 
 .sidebar {
@@ -679,7 +679,7 @@ body {
 }
 
 .gradient_color {
-  background: var(--Gradients-Gradient-1);
+  background: var(--primary-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

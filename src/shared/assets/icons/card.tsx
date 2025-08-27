@@ -38,8 +38,8 @@ export const CardIcon = () => (
         y2="-19.6748"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="#4772E6" />
-        <stop offset="1" stopColor="#8E54E9" />
+        <stop stopColor="#0BADC2" />
+        <stop offset="1" stopColor="#0AA5BE" />
       </linearGradient>
       <linearGradient
         id="paint1_linear_1501_284"
@@ -49,8 +49,8 @@ export const CardIcon = () => (
         y2="61.563"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="#4772E6" />
-        <stop offset="1" stopColor="#8E54E9" />
+        <stop stopColor="#0BADC2" />
+        <stop offset="1" stopColor="#0AA5BE" />
       </linearGradient>
       <linearGradient
         id="paint2_linear_1501_284"
@@ -60,8 +60,8 @@ export const CardIcon = () => (
         y2="14.5842"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="#4772E6" />
-        <stop offset="1" stopColor="#8E54E9" />
+        <stop stopColor="#0BADC2" />
+        <stop offset="1" stopColor="#0AA5BE" />
       </linearGradient>
       <linearGradient
         id="paint3_linear_1501_284"
@@ -71,8 +71,8 @@ export const CardIcon = () => (
         y2="78.1424"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="#4772E6" />
-        <stop offset="1" stopColor="#8E54E9" />
+        <stop stopColor="#0BADC2" />
+        <stop offset="1" stopColor="#0AA5BE" />
       </linearGradient>
     </defs>
   </svg>

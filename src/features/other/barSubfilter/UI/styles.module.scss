@@ -1,8 +1,8 @@
 .types {
   --borderSize: 1px;
   --borderRadius: 25px;
-  background: rgba($color: #4772e6, $alpha: 0.1);
-  box-shadow: inset 0px 0px 5px 1px rgba($color: #4772e6, $alpha: 0.3);
+  background: rgba($color: #0badc2, $alpha: 0.1);
+  box-shadow: inset 0px 0px 5px 1px rgba($color: #0badc2, $alpha: 0.3);
   border-radius: var(--borderRadius);
 
   .badge {
@@ -60,7 +60,7 @@
       width: calc(100% / var(--lengthFilter) - var(--borderSize));
       height: calc(100% - 2 * var(--borderSize));
       border-radius: calc(var(--borderRadius) - var(--borderSize));
-      background: var(--Gradients-Gradient-1);
+      background: var(--primary-gradient);
       box-shadow: 1px 1px 15px rgba($color: #000, $alpha: 0.3);
       transition: transform 0.3s ease;
       z-index: -1;

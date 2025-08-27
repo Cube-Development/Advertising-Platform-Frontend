@@ -1,9 +1,6 @@
 .wrapper {
   height: 110dvh;
-  background: var(
-    --Gradients-Gradient-5,
-    linear-gradient(90deg, #314479 0%, #51377a 100%)
-  );
+  background: var(--Gradients-Gradient-5,);
   color: #fff;
   display: grid;
   justify-content: center;

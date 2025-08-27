@@ -23,8 +23,8 @@ export const TelegramJetIcon = (props: SVGProps<SVGSVGElement>) => {
           y2={-1.206}
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="var(--start-color, #4772E6)" />
-          <stop offset={1} stopColor="var(--end-color, #8E54E9)" />
+          <stop stopColor="var(--start-color, #0BADC2)" />
+          <stop offset={1} stopColor="var(--end-color, #0AA5BE)" />
         </linearGradient>
       </defs>
     </svg>

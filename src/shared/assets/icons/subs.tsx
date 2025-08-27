@@ -31,8 +31,8 @@ export const SubsIcon = () => (
         y2="0.867085"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="#4772E6" />
-        <stop offset="1" stopColor="#8E54E9" />
+        <stop stopColor="#0BADC2" />
+        <stop offset="1" stopColor="#0AA5BE" />
       </linearGradient>
       <linearGradient
         id="paint1_linear_720_35351"
@@ -42,8 +42,8 @@ export const SubsIcon = () => (
         y2="4.6062"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="#4772E6" />
-        <stop offset="1" stopColor="#8E54E9" />
+        <stop stopColor="#0BADC2" />
+        <stop offset="1" stopColor="#0AA5BE" />
       </linearGradient>
       <linearGradient
         id="paint2_linear_720_35351"
@@ -53,8 +53,8 @@ export const SubsIcon = () => (
         y2="4.50137"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="#4772E6" />
-        <stop offset="1" stopColor="#8E54E9" />
+        <stop stopColor="#0BADC2" />
+        <stop offset="1" stopColor="#0AA5BE" />
       </linearGradient>
       <linearGradient
         id="paint3_linear_720_35351"
@@ -64,8 +64,8 @@ export const SubsIcon = () => (
         y2="-0.0513366"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="#4772E6" />
-        <stop offset="1" stopColor="#8E54E9" />
+        <stop stopColor="#0BADC2" />
+        <stop offset="1" stopColor="#0AA5BE" />
       </linearGradient>
     </defs>
   </svg>

@@ -23,8 +23,8 @@ export const EyeIcon = () => (
         y2="3.14449"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="#4772E6" />
-        <stop offset="1" stopColor="#8E54E9" />
+        <stop stopColor="#0BADC2" />
+        <stop offset="1" stopColor="#0AA5BE" />
       </linearGradient>
       <linearGradient
         id="paint1_linear_720_35342"
@@ -34,8 +34,8 @@ export const EyeIcon = () => (
         y2="-1.64647"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="#4772E6" />
-        <stop offset="1" stopColor="#8E54E9" />
+        <stop stopColor="#0BADC2" />
+        <stop offset="1" stopColor="#0AA5BE" />
       </linearGradient>
     </defs>
   </svg>

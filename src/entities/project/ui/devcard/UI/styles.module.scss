@@ -103,7 +103,7 @@
         line-height: 1;
       }
       span {
-        color: #000;
+        color: var(--Personal-colors-black, #000);
         font-size: 12px;
         font-style: normal;
         font-weight: 500;
@@ -129,7 +129,7 @@
         }
 
         span {
-          color: #000;
+          color: var(--Personal-colors-black, #000);
           font-size: 12px;
           font-style: normal;
           font-weight: 500;
@@ -182,7 +182,7 @@
     button {
       display: grid;
       border-radius: 12px;
-      background: var(--Gradients-Gradient-1);
+      background: var(--primary-gradient);
       box-shadow: 0px 3px 6px 0px rgba(43, 90, 212, 0.42);
 
       p {

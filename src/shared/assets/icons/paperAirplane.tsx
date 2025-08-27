@@ -23,8 +23,8 @@ export const PaperAirplaneIcon = () => (
         y2="-8.64298"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="#4772E6" />
-        <stop offset="1" stopColor="#8E54E9" />
+        <stop stopColor="#0BADC2" />
+        <stop offset="1" stopColor="#0AA5BE" />
       </linearGradient>
       <linearGradient
         id="paint1_linear_1094_75002"
@@ -34,8 +34,8 @@ export const PaperAirplaneIcon = () => (
         y2="55.8006"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="#4772E6" />
-        <stop offset="1" stopColor="#8E54E9" />
+        <stop stopColor="#0BADC2" />
+        <stop offset="1" stopColor="#0AA5BE" />
       </linearGradient>
     </defs>
   </svg>

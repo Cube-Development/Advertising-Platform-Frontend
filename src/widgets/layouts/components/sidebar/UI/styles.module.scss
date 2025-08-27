@@ -32,7 +32,7 @@
     }
 
     &.active_route {
-      background: var(--Gradients-Gradient-1);
+      background: var(--primary-gradient);
       color: #fff;
       border-radius: 50%;
       --start-color: var(--Personal-colors-White);
@@ -96,7 +96,7 @@
         margin: 15px 10px;
         width: 45px;
         height: 45px;
-        background: var(--Gradients-Gradient-1);
+        background: var(--primary-gradient);
         box-shadow: inset 0px 0px 1px 1px rgba(255, 255, 255, 1);
         margin: 1px;
 

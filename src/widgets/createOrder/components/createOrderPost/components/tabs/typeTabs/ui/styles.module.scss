@@ -36,7 +36,7 @@
 
     &:first-child {
       &.active__type {
-        background: var(--Gradients-Gradient-1);
+        background: var(--primary-gradient);
         color: #fff;
         box-shadow: inset 1px 1px 5px 1px rgba(0, 0, 0, 0.3);
         border-radius: 16px 0px 0px 16px;
@@ -45,7 +45,7 @@
 
     &:last-child {
       &.active__type {
-        background: var(--Gradients-Gradient-1);
+        background: var(--primary-gradient);
         color: #fff;
         box-shadow: inset 1px 1px 5px 1px rgba(0, 0, 0, 0.3);
         border-radius: 0px 16px 16px 0px;

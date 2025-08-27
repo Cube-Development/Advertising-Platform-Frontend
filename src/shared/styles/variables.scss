@@ -9,11 +9,8 @@
   --left-padding-header: 2.5vw;
 
   // Gradients
-  --Gradients-Gradient-1: linear-gradient(
-    45deg,
-    #4772e6 23.91%,
-    #8e54e9 75.06%
-  );
+  --primary-gradient: linear-gradient(45deg, #0badc2 23.91%, #0aa5be 75.06%);
+
   --Gradients-Gradient-2: radial-gradient(
       419.34% 136.52% at 0% 100%,
       rgba(255, 255, 255, 0.2) 0%,
@@ -25,27 +22,18 @@
     #ffca28 0%,
     rgba(254, 110, 48, 0.99) 83.33%
   );
-  --Gradients-Gradient-5: linear-gradient(90deg, #314479 0%, #51377a 100%);
+  --Gradients-Gradient-5: linear-gradient(90deg, #0e7490 0%, #155e75 100%);
   --Gradients-Gradient-6: linear-gradient(37deg, #ffef28 0%, #fe3430fc 71.43%);
   --Gradients-Gradient-7: linear-gradient(
     45deg,
     rgba(71, 114, 230, 0.1) 23.91%,
     rgba(142, 84, 233, 0.1) 75.06%
   );
-  --Gradients-Gradient-8: linear-gradient(
-    45deg,
-    #8e54e9 23.91%,
-    #4772e6 75.06%
-  );
-  --Gradients-Gradient-9: linear-gradient(
-    45deg,
-    rgba(71, 114, 230, 0.8) 23.91%,
-    rgba(142, 84, 233, 0.8) 75.06%
-  );
+
   // Colors
   --Personal-colors-black: #000;
-  --Personal-colors-main: #4772e6;
-  --Personal-colors-main2: #8e54e9;
+  --Personal-colors-main: #0badc2;
+  --Personal-colors-main2: #0aa5be;
   --Personal-colors-White: #fff;
   --Personal-colors-Green: #48d23c;
   --Personal-colors-Grey: #00000033;
@@ -78,7 +66,7 @@
 
   --borderRadius: 12px;
   --borderMass: 1px;
-  --gradient: var(--Gradients-Gradient-1);
+  --gradient: var(--primary-gradient);
   --zIndexTop: -1;
   --zIndexBottom: -2;
 

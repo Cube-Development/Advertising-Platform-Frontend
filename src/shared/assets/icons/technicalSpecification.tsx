@@ -33,8 +33,8 @@ export const TechnicalSpecificationIcon = (props: SVGProps<SVGSVGElement>) => {
           y2={7.459}
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="var(--start-color, #4772E6)" />
-          <stop offset={1} stopColor="var(--end-color, #8E54E9)" />
+          <stop stopColor="var(--start-color, #0BADC2)" />
+          <stop offset={1} stopColor="var(--end-color, #0AA5BE)" />
         </linearGradient>
         <linearGradient
           id={gradientId1}
@@ -44,8 +44,8 @@ export const TechnicalSpecificationIcon = (props: SVGProps<SVGSVGElement>) => {
           y2={8.17}
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="var(--start-color, #4772E6)" />
-          <stop offset={1} stopColor="var(--end-color, #8E54E9)" />
+          <stop stopColor="var(--start-color, #0BADC2)" />
+          <stop offset={1} stopColor="var(--end-color, #0AA5BE)" />
         </linearGradient>
         <linearGradient
           id={gradientId2}
@@ -55,8 +55,8 @@ export const TechnicalSpecificationIcon = (props: SVGProps<SVGSVGElement>) => {
           y2={2.295}
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="var(--start-color, #4772E6)" />
-          <stop offset={1} stopColor="var(--end-color, #8E54E9)" />
+          <stop stopColor="var(--start-color, #0BADC2)" />
+          <stop offset={1} stopColor="var(--end-color, #0AA5BE)" />
         </linearGradient>
       </defs>
     </svg>

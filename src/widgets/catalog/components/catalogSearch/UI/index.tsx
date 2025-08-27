@@ -303,7 +303,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
                       <div className="grid items-center justify-center">
                         <Loader
                           className="animate-spin"
-                          stroke="#4772e6"
+                          stroke="#0BADC2"
                           width={20}
                           height={20}
                         />
@@ -339,7 +339,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
               <div className="grid items-center justify-center">
                 <Loader
                   className="animate-spin"
-                  stroke="#4772e6"
+                  stroke="#0BADC2"
                   width={30}
                   height={30}
                 />

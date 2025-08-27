@@ -20,9 +20,9 @@
     width: fit-content;
     font-size: 40px;
     font-weight: 700;
-    color: #0000;
+    color: var(--Personal-colors-main);
     -webkit-text-stroke: 0px rgba(0, 0, 0, 0.3);
-    background: conic-gradient(#4772e6 0 0) 0/0% 100% no-repeat text;
+    background: conic-gradient(#0badc2 0 0) 0/0% 100% no-repeat text;
     animation: l1 0.8s linear infinite;
 
     &::before {
@@ -55,7 +55,7 @@
     &::after {
       content: "";
       grid-area: 1/1;
-      --c: no-repeat radial-gradient(farthest-side, #4772e6 92%, #0000);
+      --c: no-repeat radial-gradient(farthest-side, #0badc2 92%, #0000);
       background:
         var(--c) 50% 0,
         var(--c) 50% 100%,

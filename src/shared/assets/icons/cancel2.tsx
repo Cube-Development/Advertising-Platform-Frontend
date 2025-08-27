@@ -17,9 +17,9 @@ export const CancelIcon2 = () => {
         y2={38.142}
         gradientUnits="userSpaceOnUse"
       >
-        <stop offset={0} stopColor="#4772e6" />
-        <stop offset={0.443} stopColor="#4772e6" />
-        <stop offset={1} stopColor="#8e54e9" />
+        <stop offset={0} stopColor="#0BADC2" />
+        <stop offset={0.443} stopColor="#0BADC2" />
+        <stop offset={1} stopColor="#0AA5BE" />
       </linearGradient>
       <path
         fill={`url(#${gradientIdA})`}

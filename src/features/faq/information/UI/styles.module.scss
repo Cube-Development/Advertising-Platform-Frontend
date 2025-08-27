@@ -4,7 +4,7 @@
   row-gap: 35px;
 
   .block_title {
-    color: #000;
+    color: var(--Personal-colors-black, #000);
     text-align: center;
     font-style: normal;
     font-weight: 600;
@@ -64,7 +64,7 @@
       &.active {
         // box-shadow: inset 0 0 0 1px var(--Personal-colors-main);
         .arrow {
-          background: var(--Gradients-Gradient-1) !important;
+          background: var(--primary-gradient) !important;
         }
       }
 

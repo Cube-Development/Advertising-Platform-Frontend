@@ -30,7 +30,7 @@ export const ChannelCardMatch = ({
         ? "#fe9730fc"
         : value <= 75
           ? "#ffca28"
-          : "#4772e6";
+          : "#0BADC2";
   };
 
   useEffect(() => {
@@ -132,7 +132,7 @@ export const ChannelCardMatch = ({
               alt="isLoading..."
               className="w-10 h-10"
             />
-            <p className="!text-[#8e54e9] mobile-xl:!text-[10px] !text-[9px] mobile-xl:!leading-4 !leading-2 mobile-xl:!text-center !text-start">
+            <p className="!text-[#0AA5BE] mobile-xl:!text-[10px] !text-[9px] mobile-xl:!leading-4 !leading-2 mobile-xl:!text-center !text-start">
               {t("platform.match_description")}
             </p>
           </div>
