@@ -29,7 +29,7 @@ export const MainLayout = ({ children }: PropsWithChildren) => {
   const { isAuth, role, isAuthEcp } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const { data: balance, isLoading } = useGetBalanceQuery(undefined, {
-    skip: !isAuth,
+    skip: !isAuth || !USER_ROLES.includes(role),
   });
 
   const { open, setOpen } = useRenderOfferModal();

@@ -2340,7 +2340,8 @@
       },
       "payment": {
         "success": "Reklama kampaniyasi muvaffaqiyatli to'landi va ishga tushirildi!",
-        "error": "Joriy hamyonda mablagʻ yetarli emas, iltimos balansingizni toʻldiring"
+        "not_enough_balance": "Joriy hamyonda mablagʻ yetarli emas, iltimos balansingizni toʻldiring",
+        "error": "Reklama kampaniyasini to'lashda xatolik yuz berdi"
       },
       "date": {
         "error": "Kanallar uchun sana yaratishda xatolik",
