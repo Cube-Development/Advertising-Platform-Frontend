@@ -30,7 +30,7 @@ export const useCheckBalance = (
     if (current_wallet < amount) {
       toast({
         variant: "error",
-        title: t("toasts.create_order.payment.error"),
+        title: t("toasts.create_order.payment.not_enough_balance"),
       });
       return false;
     }

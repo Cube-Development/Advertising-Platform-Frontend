@@ -19,6 +19,7 @@ import {
   useCreateOrderLoad,
   useOnSubmitPayment,
 } from "../model";
+import { ENUM_ROLES } from "@entities/user";
 
 interface CreateOrderBlockProps {}
 
@@ -59,7 +60,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
       !isPostsLoading &&
       !formState?.isDownloadPosts
     ) {
-      if (checkBalance()) {
+      if (checkBalance() || role === ENUM_ROLES.MANAGER) {
         await payment(formData, projectId, role);
       }
     }
