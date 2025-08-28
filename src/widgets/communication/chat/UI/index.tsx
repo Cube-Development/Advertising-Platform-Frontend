@@ -20,7 +20,6 @@ import { BarSubFilter } from "@features/other";
 import { useCentrifuge } from "@shared/api";
 import {
   ArrowLongHorizontalIcon,
-  CancelIcon2,
   ChatChooseIcon,
   ChatIcon,
   ChatIcon2,
@@ -40,6 +39,7 @@ import {
   AlertDialogDescription,
   AlertDialogTitle,
   AlertDialogTrigger,
+  CustomCloseButton,
   Drawer,
   DrawerClose,
   DrawerContent,
@@ -551,10 +551,8 @@ export const Chat: FC<IChatProps> = ({
                 </div>
               )}
             </div>
-            <AlertDialogCancel>
-              <div className={styles.close} onClick={handleCloseChat}>
-                <CancelIcon2 />
-              </div>
+            <AlertDialogCancel onClick={handleCloseChat} asChild>
+              <CustomCloseButton className="translate-y-0 top-1" />
             </AlertDialogCancel>
           </AlertDialogContent>
         </AlertDialog>
@@ -592,10 +590,8 @@ export const Chat: FC<IChatProps> = ({
                   >
                     {t("chat.my_messages")}
                   </DrawerDescription>
-                  <DrawerClose>
-                    <div className={styles.close} onClick={handleCloseChat}>
-                      <CancelIcon2 />
-                    </div>
+                  <DrawerClose onClick={handleCloseChat} asChild>
+                    <CustomCloseButton />
                   </DrawerClose>
                 </DrawerTitle>
                 {role !== ENUM_ROLES.BLOGGER && (

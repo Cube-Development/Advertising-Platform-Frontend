@@ -26,3 +26,4 @@ export * from "./customBlockData";
 export * from "./wallet-card";
 export * from "./pdf-preview";
 export * from "./custom-mini-tabs";
+export * from "./custom-close";

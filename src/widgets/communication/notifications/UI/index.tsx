@@ -12,11 +12,7 @@ import {
   SkeletonNotificationCard,
 } from "@features/communication";
 import { DinamicPagination } from "@features/other";
-import {
-  ArrowSmallVerticalIcon,
-  CancelIcon2,
-  NotificationMainIcon,
-} from "@shared/assets";
+import { ArrowSmallVerticalIcon, NotificationMainIcon } from "@shared/assets";
 import {
   BREAKPOINT,
   INTERSECTION_ELEMENTS,
@@ -30,6 +26,7 @@ import {
   AlertDialogDescription,
   AlertDialogTitle,
   AlertDialogTrigger,
+  CustomCloseButton,
   Drawer,
   DrawerClose,
   DrawerContent,
@@ -146,10 +143,8 @@ export const Notifications: FC = () => {
           >
             <AlertDialogTitle className={styles.title}>
               <p className="gradient_color">{t("notifications.title")}</p>
-              <AlertDialogCancel onClick={handleClose}>
-                <div className={styles.close}>
-                  <CancelIcon2 />
-                </div>
+              <AlertDialogCancel onClick={handleClose} asChild>
+                <CustomCloseButton />
               </AlertDialogCancel>
               {!!currentNotification && (
                 <div className={styles.arrow} onClick={handleClose}>
@@ -223,10 +218,8 @@ export const Notifications: FC = () => {
               <DrawerDescription className="gradient_color">
                 {t("notifications.title")}
               </DrawerDescription>
-              <DrawerClose onClick={handleClose}>
-                <div className={styles.close}>
-                  <CancelIcon2 />
-                </div>
+              <DrawerClose onClick={handleClose} asChild>
+                <CustomCloseButton />
               </DrawerClose>
               {!!currentNotification && (
                 <div className={styles.arrow} onClick={handleClose}>

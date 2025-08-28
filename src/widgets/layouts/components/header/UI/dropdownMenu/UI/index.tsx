@@ -1,10 +1,11 @@
 import { ENUM_ROLES, USER_ROLES } from "@entities/user";
 import { viewsTypes } from "@entities/views";
 import { BarSubFilter } from "@features/other";
-import { useAppDispatch, useAppSelector, useWindowWidth } from "@shared/hooks";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { setDropDownMenu } from "@shared/slice";
 import {
   Accordion,
+  CustomCloseButton,
   ScrollArea,
   Sheet,
   SheetClose,
@@ -13,7 +14,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@shared/ui";
-import { Menu, X } from "lucide-react";
+import { Menu } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import {
@@ -86,8 +87,8 @@ export const DropdownMenu: FC<DropdownMenuProps> = () => {
               alt="Blogix logo"
               className="h-[30px] sm:h-[35px] md:h-[50px] cursor-pointer"
             />
-            <SheetClose className="absolute transition-opacity -translate-y-1/2 right-4 top-1/2 opacity-70 hover:opacity-100 focus:outline-none focus:ring-0 focus:ring-offset-0 disabled:pointer-events-none">
-              <X size={32} color="var(--Personal-colors-main" />
+            <SheetClose asChild>
+              <CustomCloseButton className="md:right-3 " />
             </SheetClose>
           </SheetTitle>
           <SheetDescription className="sr-only" />

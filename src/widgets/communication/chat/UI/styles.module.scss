@@ -38,18 +38,6 @@
     }
   }
 
-  .close {
-    position: absolute;
-    top: 0;
-    right: 0;
-    padding: 15px;
-    border-radius: 50%;
-
-    &:hover {
-      background-color: rgba(0, 0, 0, 0.1);
-    }
-  }
-
   &__left {
     display: grid;
     border-right: 0.5px solid rgba(0, 0, 0, 0.3);
