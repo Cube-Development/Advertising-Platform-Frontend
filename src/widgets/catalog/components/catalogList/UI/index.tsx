@@ -127,7 +127,7 @@ export const CatalogList: FC<CatalogListProps> = ({
           <Toggle
             pressed={isTableView}
             onPressedChange={handleViewChange}
-            className="size-[40px] bg-white data-[state=on]:bg-gradient-to-r from-[#4772E6] to-[#8E54E9] rounded-lg border-[1px] border-[--black-20] data-[state=on]:border-[--Personal-colors-main]"
+            className="size-[40px] bg-white data-[state=on]:bg-gradient-to-r from-[#0BADC2] to-[#0AA5BE] rounded-lg border-[1px] border-[--black-20] data-[state=on]:border-[--Personal-colors-main]"
           >
             {isTableView ? (
               <ListIcon className="w-5 h-5" />

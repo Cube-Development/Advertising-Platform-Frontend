@@ -196,24 +196,21 @@
   },
 
   "main_page_advertiser": {
-    "main_img": "mainAdv.png",
-    "cta_title": "Ijtimoiy tarmoqlarda reklama joylashtirish hech qanday tashvishsiz",
-    "cta_subtitle": "Faqat faol, qo'lda tekshirilgan kanallar",
-    "cta_list": [
-      {
-        "option": "Reklamangiz uchun maqsadli auditoriya va mos kanallarni tanlash algoritmlari",
-        "img": "option1.svg"
-      },
-      {
-        "option": "Sun'iy intellekt asosida samarali reklama postlarini yaratish",
-        "img": "option2.svg"
-      },
-      {
-        "option": "Xavfsiz bitim orqali himoya kafolati",
-        "img": "option3.svg"
-      }
-    ],
-
+    "cta": {
+      "title": "Ijtimoiy tarmoqlarda reklama joylashtirish hech qanday tashvishsiz",
+      "subtitle": "Faqat faol, qo'lda tekshirilgan kanallar",
+      "options": [
+        {
+          "option": "Reklamangiz uchun maqsadli auditoriya va mos kanallarni tanlash algoritmlari"
+        },
+        {
+          "option": "Sun'iy intellekt asosida samarali reklama postlarini yaratish"
+        },
+        {
+          "option": "Xavfsiz bitim orqali himoya kafolati"
+        }
+      ]
+    },
     "services_title": "Yuridik shaxslar bilan ishlaymiz, hisob-fakturalar va aktlar taqdim etamiz, didox.uz orqali elektron hujjat almashinuvi olib boramiz",
     "services_list": [
       {
@@ -425,24 +422,21 @@
   },
 
   "main_page_blogger": {
-    "main_img": "mainBlogger.png",
-    "cta_title": "Kanalingizni hozir qo'shing va buyurtma oling",
-    "cta_subtitle": "Buyurtmalar uchun kanalni oching. Oson. Tez. Foydali.",
-    "cta_list": [
-      {
-        "option": "Sizning kanallaringiz uchun doimiy o'sib boruvchi reklama beruvchilar soni",
-        "img": "option4.svg"
-      },
-      {
-        "option": "Har bir kanal bo'yicha statistikalar – kontentingizni samarali tahlil qilish uchun",
-        "img": "option5.svg"
-      },
-      {
-        "option": "Tez va qonuniy mablag' yechib olish tizimi",
-        "img": "option6.svg"
-      }
-    ],
-
+    "cta": {
+      "title": "Kanalingizni hozir qo'shing va buyurtma oling",
+      "subtitle": "Buyurtmalar uchun kanalni oching. Oson. Tez. Foydali.",
+      "options": [
+        {
+          "option": "Sizning kanallaringiz uchun doimiy o'sib boruvchi reklama beruvchilar soni"
+        },
+        {
+          "option": "Har bir kanal bo'yicha statistikalar – kontentingizni samarali tahlil qilish uchun"
+        },
+        {
+          "option": "Tez va qonuniy mablag' yechib olish tizimi"
+        }
+      ]
+    },
     "services_title": "Yuridik shaxslar bilan ishlaymiz, hisob-fakturalar va aktlar taqdim etamiz, didox.uz orqali elektron hujjat almashinuvini yuritamiz",
     "services_list": [
       {
@@ -956,7 +950,7 @@
       "link": {
         "title": "Havolani kiriting",
         "text": "Kanal havolasini kerakli formatda kiriting",
-        "requerd": "Kanal havolasini kiriting",
+        "required": "Kanal havolasini kiriting",
         "invalid": "Havola yaroqsiz",
         "verification": "Muhim! Kanalingiz tavsifiga ko'rsatilgan kodni joylashtiring, bu kanalga egalikni tasdiqlash uchun kerak. Muvaffaqiyatli tekshiruvdan so'ng, siz bu kodni o'chirib tashlashingiz mumkin."
       }

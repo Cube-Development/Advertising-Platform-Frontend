@@ -25,6 +25,7 @@
 //   );
 // };
 
+import { ENUM_ROLES } from "@entities/user";
 import { useClearCookiesOnPage } from "@shared/hooks";
 import { SuspenseLoader } from "@shared/ui";
 import React, { Suspense } from "react";
@@ -107,7 +108,7 @@ export const MainPage = () => {
   return (
     <>
       <Suspense fallback={<SuspenseLoader />}>
-        <Cta page={page} />
+        <Cta role={ENUM_ROLES.ADVERTISER} />
         <Services page={page} />
         <Partners page={page} />
         <HowItWorks page={page} />

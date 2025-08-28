@@ -75,7 +75,7 @@ body {
 
   &__blue {
     color: var(--Personal-colors-White);
-    background: var(--Gradients-Gradient-1);
+    background: var(--primary-gradient);
 
     &:hover {
       background: #005aa5;
@@ -121,15 +121,52 @@ body {
   flex-direction: column;
   min-height: calc(calc(var(--vh) * 100) - 80px);
   width: 100vw;
-  background: url("/images/rootBg/desktopBG.png") repeat top center;
-  background-size: cover;
+  // background: url("/images/rootBg/desktopBG.png") repeat top center;
+  // background-size: cover;
 
-  @media (max-width: 992px) {
-    background: url("/images/rootBg/tabletBG.png") repeat top center;
-  }
+  // @media (max-width: 992px) {
+  //   background: url("/images/rootBg/tabletBG.png") repeat top center;
+  // }
 
-  @media (max-width: 576px) {
-    background: url("/images/rootBg/mobileBG.png") repeat top center;
+  // @media (max-width: 576px) {
+  //   background: url("/images/rootBg/mobileBG.png") repeat top center;
+  // }
+
+  .main_background {
+    position: relative;
+
+    &::before {
+      background: #fefcff;
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.2; // теперь opacity только на градиент
+      background-image: radial-gradient(
+          circle at 10% 80%,
+          var(--Personal-colors-main),
+          transparent 20%
+        ),
+        radial-gradient(
+          circle at 80% 10%,
+          var(--Personal-colors-main2),
+          transparent 20%
+        );
+
+      @media (max-width: 992px) {
+        opacity: 0.15;
+        background-image: radial-gradient(
+            circle at 10% 80%,
+            var(--Personal-colors-main),
+            transparent 20%
+          ),
+          radial-gradient(
+            circle at 95% 20%,
+            var(--Personal-colors-main2),
+            transparent 20%
+          );
+      }
+    }
   }
 
   header,
@@ -203,7 +240,7 @@ body {
 }
 
 .layout {
-  background: var(--Gradients-Gradient-1);
+  background: var(--primary-gradient);
 }
 
 .sidebar {
@@ -288,7 +325,7 @@ body {
 }
 
 .rotate {
-  stroke: var(--Personal-colors-main);
+  // stroke: var(--Personal-colors-main);
   transform: rotate(180deg);
   transition: transform 0.5s ease;
 
@@ -679,7 +716,7 @@ body {
 }
 
 .gradient_color {
-  background: var(--Gradients-Gradient-1);
+  background: var(--primary-gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;

@@ -17,20 +17,11 @@
   cursor: pointer;
 
   &.deposit {
-    background: radial-gradient(
-      138.68% 1238.17% at 0.76% 3.12%,
-      rgba(142, 84, 233, 0.41) 0%,
-      #4772e6 87.75%
-    );
+    background: var(--primary-gradient);
 
     .header {
       .title {
-        @include gradient-text(
-          var(
-            --Gradients-Gradient-1,
-            linear-gradient(45deg, #4772e6 23.91%, #8e54e9 75.06%)
-          )
-        );
+        @include gradient-text(var(--primary-gradient));
       }
     }
   }

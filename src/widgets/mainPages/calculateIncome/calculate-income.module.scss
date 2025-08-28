@@ -89,7 +89,7 @@
 
       p {
         border-radius: 12px;
-        background: var(--Gradients-Gradient-1);
+        background: var(--primary-gradient);
         padding: 12px 20px 15px 20px;
         color: var(--Personal-colors-White);
         font-style: normal;
@@ -111,7 +111,7 @@
           padding: 0;
           background: none;
           text-align: center;
-          background: var(--Gradients-Gradient-1);
+          background: var(--primary-gradient);
           -webkit-background-clip: text;
           -webkit-text-fill-color: transparent;
           background-clip: text;

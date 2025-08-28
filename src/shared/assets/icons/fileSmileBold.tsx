@@ -25,8 +25,8 @@ export const FileSmileBoldIcon = () => (
         y2="11.1002"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#4772E6" />
-        <stop offset="1" stop-color="#8E54E9" />
+        <stop stop-color="#0BADC2" />
+        <stop offset="1" stop-color="#0AA5BE" />
       </linearGradient>
       <linearGradient
         id="paint1_linear_7853_53372"
@@ -36,8 +36,8 @@ export const FileSmileBoldIcon = () => (
         y2="11.2166"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stop-color="#4772E6" />
-        <stop offset="1" stop-color="#8E54E9" />
+        <stop stop-color="#0BADC2" />
+        <stop offset="1" stop-color="#0AA5BE" />
       </linearGradient>
     </defs>
   </svg>

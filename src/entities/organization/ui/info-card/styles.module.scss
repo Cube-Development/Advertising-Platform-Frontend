@@ -8,7 +8,7 @@
   background: #fef0c7;
 
   p {
-    color: #000;
+    color: var(--Personal-colors-black, #000);
     font-family: "TT Runs Trial";
     font-size: 12px;
     font-style: normal;

@@ -72,8 +72,8 @@ export const ChatMainIcon = ({
           y2={6.451}
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#4772E6" />
-          <stop offset={1} stopColor="#8E54E9" />
+          <stop stopColor="#0BADC2" />
+          <stop offset={1} stopColor="#0AA5BE" />
         </linearGradient>
         <linearGradient
           id={gradientId2}
@@ -83,8 +83,8 @@ export const ChatMainIcon = ({
           y2={0.858}
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#4772E6" />
-          <stop offset={1} stopColor="#8E54E9" />
+          <stop stopColor="#0BADC2" />
+          <stop offset={1} stopColor="#0AA5BE" />
         </linearGradient>
         <linearGradient
           id={gradientId3}

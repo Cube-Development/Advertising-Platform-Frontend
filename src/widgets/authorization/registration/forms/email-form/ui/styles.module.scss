@@ -96,10 +96,7 @@ form {
   cursor: pointer;
 
   border-radius: 12px;
-  background: var(
-    --Gradient-1,
-    linear-gradient(93deg, #4772e6 2.37%, #8e54e9 52.62%)
-  );
+  background: var(--primary-gradient,);
   font-size: 14px;
   font-style: normal;
   font-weight: 400;

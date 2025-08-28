@@ -36,11 +36,11 @@
   }
 
   &.active {
-    // background: var(--Gradients-Gradient-1);
+    // background: var(--primary-gradient);
 
     p,
     span {
-      background: var(--Gradients-Gradient-1);
+      background: var(--primary-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -56,7 +56,7 @@
   }
 
   &.completed {
-    background: var(--Gradients-Gradient-1);
+    background: var(--primary-gradient);
 
     p,
     span {

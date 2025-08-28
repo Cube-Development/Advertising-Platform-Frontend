@@ -41,8 +41,8 @@ export const ProfileIcon = () => (
         y2="6.12264"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="#4772E6" />
-        <stop offset="1" stopColor="#8E54E9" />
+        <stop stopColor="#0BADC2" />
+        <stop offset="1" stopColor="#0AA5BE" />
       </linearGradient>
       <linearGradient
         id="paint1_linear_208_2400"
@@ -52,8 +52,8 @@ export const ProfileIcon = () => (
         y2="21.7731"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="#4772E6" />
-        <stop offset="1" stopColor="#8E54E9" />
+        <stop stopColor="#0BADC2" />
+        <stop offset="1" stopColor="#0AA5BE" />
       </linearGradient>
       <linearGradient
         id="paint2_linear_208_2400"
@@ -63,8 +63,8 @@ export const ProfileIcon = () => (
         y2="8.45756"
         gradientUnits="userSpaceOnUse"
       >
-        <stop stopColor="#4772E6" />
-        <stop offset="1" stopColor="#8E54E9" />
+        <stop stopColor="#0BADC2" />
+        <stop offset="1" stopColor="#0AA5BE" />
       </linearGradient>
     </defs>
   </svg>

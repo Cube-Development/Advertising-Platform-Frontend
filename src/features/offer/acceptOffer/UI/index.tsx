@@ -200,7 +200,7 @@ export const AcceptOffer: FC<IOrderFeature> = ({ order_id, dates }) => {
           {isLoading ? (
             <Loader
               className="animate-spin"
-              stroke="#4772e6"
+              stroke="#0BADC2"
               width={20}
               height={20}
             />

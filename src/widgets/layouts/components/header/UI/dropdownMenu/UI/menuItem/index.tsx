@@ -1,8 +1,7 @@
 import { LoginModal } from "@features/user";
-import { ArrowSmallVerticalIcon } from "@shared/assets";
 import { ENUM_ACCORDION_TYPES } from "@shared/config";
 import { AccordionContent, AccordionItem, AccordionTrigger } from "@shared/ui";
-import { GripVertical } from "lucide-react";
+import { ChevronDown, GripVertical } from "lucide-react";
 import React, { useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -45,10 +44,12 @@ export const MenuItem: React.FC<IMenuItems> = ({
       ref={accordionRef}
       className="border-0"
     >
-      <div className={styles.charper}>
+      <div className={styles.chapter}>
         {item.subItems ? (
           <AccordionTrigger>
-            <div className={`${styles.row} ${isActive ? styles.active : ""}`}>
+            <div
+              className={`${styles.row} ${isActive ? styles.active : ""} hover:bg-accent rounded-xl`}
+            >
               <div className={styles.row__title}>
                 {item.item.img && (
                   <item.item.img
@@ -57,9 +58,11 @@ export const MenuItem: React.FC<IMenuItems> = ({
                 )}
                 {t(item.item.title!)}
               </div>
-              <ArrowSmallVerticalIcon
-                className={isActive ? "icon__white rotate" : "rotate__down"}
+              <ChevronDown
+                size={20}
+                className={isActive ? "text-white rotate" : "rotate__down"}
               />
+
               {viewsInfo && !!viewsInfo?.count && (
                 <div className={styles.badge}>
                   <span>{viewsInfo?.count}</span>
@@ -87,7 +90,9 @@ export const MenuItem: React.FC<IMenuItems> = ({
         ) : (
           <Link to={item.item.path!} onClick={() => onChange(item.item.path!)}>
             <AccordionTrigger>
-              <div className={`${styles.row} ${isActive ? styles.active : ""}`}>
+              <div
+                className={`${styles.row} ${isActive ? styles.active : ""} hover:bg-accent rounded-xl`}
+              >
                 <div className={styles.row__title}>
                   {item.item.img && <item.item.img />}
                   {t(item.item.title!)}
@@ -110,8 +115,11 @@ export const MenuItem: React.FC<IMenuItems> = ({
                   key={subItem.title}
                   onClick={() => onChange(item.item.path!)}
                 >
-                  <li>
-                    <GripVertical width={20} height={20} stroke="#4772e6" />
+                  <li className="hover:bg-accent rounded-xl">
+                    <GripVertical
+                      size={20}
+                      className="text-[var(--Personal-colors-main)]"
+                    />
                     {t(subItem.title!)}
                     {viewsInfo &&
                       !!viewsInfo?.count &&

@@ -29,7 +29,7 @@ export const LanguageToggle: FC = () => {
 
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger className="flex items-center gap-2">
+      <DropdownMenuTrigger className="flex items-center gap-2 border rounded-full">
         <img
           src={`/images/${language.icon}.svg`}
           className="w-6 h-6"

@@ -12,6 +12,7 @@ import {
   useChangeRole,
 } from "../../model";
 import styles from "./styles.module.scss";
+import { cn } from "@shared/ui";
 
 interface NavProps {}
 
@@ -58,10 +59,17 @@ export const Nav: FC<NavProps> = () => {
         <li
           key={index}
           onClick={() => handleNavigation(item.href)}
-          className={location.pathname === item.href ? styles.active : ""}
+          className={cn(
+            location.pathname + location.search === item.href
+              ? styles.active
+              : "",
+            "hover:bg-accent rounded-lg",
+          )}
         >
           {item?.img && (
-            <item.img key={index} className="active__gradient__icon" />
+            <div className="flex items-center justify-center">
+              <item.img key={index} className="active__gradient__icon" />
+            </div>
           )}
           {t(item.text)}
         </li>

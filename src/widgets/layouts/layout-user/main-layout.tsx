@@ -104,7 +104,7 @@ export const MainLayout = ({ children }: PropsWithChildren) => {
           <Header />
         </Suspense> */}
         <Header />
-        <main className="user_main">
+        <main className=" user_main main_background">
           <OfferSignModal open={open} setOpen={setOpen} haveTrigger={false} />
           {children}
         </main>

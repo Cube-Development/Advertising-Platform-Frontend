@@ -81,7 +81,7 @@
           align-items: center;
           width: 80px;
           height: 80px;
-          border: 4px dashed #4772e6;
+          border: 4px dashed #0badc2;
           border-radius: 50%;
           font-size: 44px;
           font-weight: bold;
@@ -90,14 +90,14 @@
           @media (max-width: 768px) {
             width: 70px;
             height: 70px;
-            border: 3px dashed #4772e6;
+            border: 3px dashed #0badc2;
             font-size: 38px;
           }
 
           @media (max-width: 576px) {
             width: 80px;
             height: 80px;
-            border: 4px dashed #4772e6;
+            border: 4px dashed #0badc2;
             font-size: 44px;
           }
         }
@@ -261,7 +261,7 @@
             width: 100%;
 
             p {
-              background: var(--Gradients-Gradient-1);
+              background: var(--primary-gradient);
               -webkit-background-clip: text;
               -webkit-text-fill-color: transparent;
               background-clip: text;

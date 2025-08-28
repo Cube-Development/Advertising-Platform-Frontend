@@ -1,0 +1,36 @@
+.wrapper {
+  display: block;
+  top: 1rem;
+  position: fixed;
+  left: var(--left-padding-header);
+  height: auto;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(20px);
+  border-radius: 50px;
+  width: var(--header-height-xl);
+  border: 1px solid
+    color-mix(in srgb, var(--Personal-colors-main), transparent 50%);
+  z-index: 40;
+
+  @media (max-width: 1080px) {
+    display: none;
+  }
+
+  .menu {
+    padding-top: calc(var(--container-padding-top) + 3rem);
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 25px;
+    justify-content: center;
+
+    transition: all 0.5s ease;
+
+    &.hidden {
+      padding-top: 2rem;
+    }
+
+    &.visible {
+      padding-top: calc(var(--container-padding-top) + 3rem);
+    }
+  }
+}

@@ -22,7 +22,7 @@
       font-size: 14px !important;
       font-style: normal !important;
       font-weight: 500 !important;
-      background: var(--Gradients-Gradient-1);
+      background: var(--primary-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -53,7 +53,7 @@
       font-size: 20px;
       font-style: normal;
       font-weight: 600;
-      background: var(--Gradients-Gradient-1);
+      background: var(--primary-gradient);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -176,7 +176,7 @@
             column-gap: 20px;
 
             a {
-              background: var(--Gradients-Gradient-1);
+              background: var(--primary-gradient);
               -webkit-background-clip: text;
               -webkit-text-fill-color: transparent;
               background-clip: text;

@@ -24,6 +24,7 @@
 //   );
 // };
 
+import { ENUM_ROLES } from "@entities/user";
 import { useClearCookiesOnPage } from "@shared/hooks";
 import { SuspenseLoader } from "@shared/ui";
 import React, { Suspense } from "react";
@@ -107,7 +108,7 @@ export const MainBloggerPage = () => {
 
   return (
     <Suspense fallback={<SuspenseLoader />}>
-      <Cta page={page} />
+      <Cta role={ENUM_ROLES.BLOGGER} />
       <Services page={page} />
       <Partners page={page} />
       <div></div>

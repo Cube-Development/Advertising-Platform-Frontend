@@ -34,8 +34,8 @@ export const SaveIcon = (props: SVGProps<SVGSVGElement>) => {
           y2={1.56}
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#4772E6" />
-          <stop offset={1} stopColor="#8E54E9" />
+          <stop stopColor="#0BADC2" />
+          <stop offset={1} stopColor="#0AA5BE" />
         </linearGradient>
         <linearGradient
           id={gradientIdB}
@@ -45,8 +45,8 @@ export const SaveIcon = (props: SVGProps<SVGSVGElement>) => {
           y2={6.724}
           gradientUnits="userSpaceOnUse"
         >
-          <stop stopColor="#4772E6" />
-          <stop offset={1} stopColor="#8E54E9" />
+          <stop stopColor="#0BADC2" />
+          <stop offset={1} stopColor="#0AA5BE" />
         </linearGradient>
       </defs>
     </svg>

@@ -24,7 +24,7 @@
     gap: 20px;
     padding: 20px;
     border-radius: 25px;
-    border: 2.5px dashed #4772e6;
+    border: 2.5px dashed #0badc2;
     transition:
       border-color 0.3s,
       background-color 0.3s;
@@ -32,13 +32,13 @@
     @media (max-width: 992px) {
       padding: 16px;
       border-radius: 20px;
-      border: 2px dashed #4772e6;
+      border: 2px dashed #0badc2;
     }
 
     @media (max-width: 768px) {
       padding: 12px;
       border-radius: 15px;
-      border: 1.5px dashed #4772e6;
+      border: 1.5px dashed #0badc2;
     }
 
     @media (max-width: 576px) {
@@ -139,7 +139,7 @@
         padding: 15px;
         text-align: center;
         border-radius: 8px;
-        background: var(--Gradients-Gradient-1);
+        background: var(--primary-gradient);
 
         span {
           color: var(--Personal-colors-White);
