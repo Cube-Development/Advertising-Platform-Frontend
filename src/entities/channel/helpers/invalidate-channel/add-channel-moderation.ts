@@ -1,6 +1,5 @@
 import { AppDispatch } from "@app/providers/store";
 import { dateSortingTypes } from "@entities/platform";
-import { ENUM_ROLES } from "@entities/user";
 import { VIEWS_BLOGGER_CHANNELS } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ILanguage, USER_LANGUAGES_LIST } from "@shared/languages";
@@ -11,17 +10,13 @@ interface Props {
   dispatch: AppDispatch;
   trigger: ReturnType<typeof channelAPI.useGetChannelsByStatusQuery>[0];
   language: ILanguage;
-  role: ENUM_ROLES;
 }
 
 export const invalidateBloggerChannelsAddChannelModeration = async ({
   dispatch,
   trigger,
   language = USER_LANGUAGES_LIST[0],
-  role,
 }: Props) => {
-  if (role !== ENUM_ROLES.BLOGGER) return;
-
   // 1. Обновляем кэш каналов на модерации
   const params = {
     status: ENUM_CHANNEL_STATUS.MODERATION,

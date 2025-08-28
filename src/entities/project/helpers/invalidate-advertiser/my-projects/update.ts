@@ -1,6 +1,5 @@
 import { AppDispatch } from "@app/providers/store";
 import { dateSortingTypes } from "@entities/platform";
-import { ENUM_ROLES } from "@entities/user";
 import { VIEWS_ADVERTISER } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ILanguage, USER_LANGUAGES_LIST } from "@shared/languages";
@@ -17,7 +16,6 @@ interface Props {
     | typeof advProjectsAPI.useLazyGetAdvProjectsQuery
   >[0];
   language: ILanguage;
-  role: ENUM_ROLES;
   status: ENUM_ADV_MANAGER_PROJECT_STATUS | ENUM_ADV_MY_PROJECT_STATUS;
 }
 
@@ -25,11 +23,8 @@ export const invalidateAdvProjectUpdate = async ({
   dispatch,
   trigger,
   language = USER_LANGUAGES_LIST[0],
-  role,
   status,
 }: Props) => {
-  if (role !== ENUM_ROLES.ADVERTISER) return;
-
   // 1. Обновляем кэш проектов в разработке
   const params = {
     status: status,

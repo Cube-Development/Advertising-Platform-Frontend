@@ -1,6 +1,5 @@
 import { AppDispatch } from "@app/providers/store";
 import { dateSortingTypes } from "@entities/platform";
-import { ENUM_ROLES } from "@entities/user";
 import { VIEWS_BLOGGER_CHANNELS } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ILanguage, USER_LANGUAGES_LIST } from "@shared/languages";
@@ -15,7 +14,6 @@ interface Props {
   channel_id: string;
   status_from: ENUM_CHANNEL_STATUS;
   status_to: ENUM_CHANNEL_STATUS;
-  role: ENUM_ROLES;
 }
 
 export const invalidateBloggerChannelsModerationDecision = async ({
@@ -25,10 +23,7 @@ export const invalidateBloggerChannelsModerationDecision = async ({
   channel_id,
   status_from,
   status_to,
-  role,
 }: Props) => {
-  if (role !== ENUM_ROLES.BLOGGER) return;
-
   // 1. Удалим канал из кеша каналов на модерации/заблокированных
   const baseParams = {
     status: status_from,

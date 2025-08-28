@@ -1,6 +1,5 @@
 import { AppDispatch } from "@app/providers/store";
 import { dateSortingTypes } from "@entities/platform";
-import { ENUM_ROLES } from "@entities/user";
 import { ADV_ORDERS, VIEWS_ADVERTISER } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ILanguage, USER_LANGUAGES_LIST } from "@shared/languages";
@@ -13,7 +12,6 @@ interface Props {
   trigger: ReturnType<typeof advProjectsAPI.useLazyGetAdvProjectsQuery>[0];
   language: ILanguage;
   project_id: string;
-  role: ENUM_ROLES;
 }
 
 export const invalidateAdvProjectByCompleteProject = async ({
@@ -21,10 +19,7 @@ export const invalidateAdvProjectByCompleteProject = async ({
   trigger,
   language = USER_LANGUAGES_LIST[0],
   project_id,
-  role,
 }: Props) => {
-  if (role !== ENUM_ROLES.ADVERTISER) return;
-
   // 1. Удалим проект из кеша проектов на активных
   const baseParams = {
     status: ENUM_ADV_MY_PROJECT_STATUS.ACTIVE,

@@ -1,6 +1,5 @@
 import { AppDispatch } from "@app/providers/store";
 import { dateSortingTypes } from "@entities/platform";
-import { ENUM_ROLES } from "@entities/user";
 import { MANAGER_ORDERS, VIEWS_MANAGER } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ILanguage, USER_LANGUAGES_LIST } from "@shared/languages";
@@ -15,7 +14,6 @@ interface Props {
   >[0];
   language: ILanguage;
   project_id: string;
-  role: ENUM_ROLES;
 }
 
 export const invalidateManagerProjectByDesire = async ({
@@ -23,10 +21,7 @@ export const invalidateManagerProjectByDesire = async ({
   trigger,
   language = USER_LANGUAGES_LIST[0],
   project_id,
-  role,
 }: Props) => {
-  if (role !== ENUM_ROLES.MANAGER) return;
-
   let page: number | null = null;
 
   const baseParams = {

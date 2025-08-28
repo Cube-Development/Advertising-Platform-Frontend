@@ -1,6 +1,6 @@
 import {
-  channelAPI,
   ENUM_CHANNEL_STATUS,
+  channelAPI,
   invalidateBloggerChannelsAddChannelModeration,
   invalidateBloggerChannelsModerationDecision,
 } from "@entities/channel";
@@ -32,9 +32,7 @@ import { invalidateHistory, walletAPI } from "@entities/wallet";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import {
   ADV_PROJECTS,
-  BLOGGER_CHANNELS,
   VIEWS_ADVERTISER,
-  VIEWS_BLOGGER_CHANNELS,
   VIEWS_BLOGGER_OFFERS,
 } from "../../tags";
 
@@ -68,7 +66,7 @@ export const useRevalidateCash = () => {
         dispatch,
         trigger: triggerAdvManagerProjects,
         language,
-        role,
+
         status: ENUM_ADV_MANAGER_PROJECT_STATUS.DEVELOP,
       });
       await invalidateHistory({ dispatch, trigger: triggerHistory, language });
@@ -78,7 +76,6 @@ export const useRevalidateCash = () => {
         dispatch,
         trigger: triggerManagerProjects,
         language,
-        role,
       });
     } else if (method === notificationsTypes.notification_request_approve) {
       // Менеджер отправил проект на согласование рекламодателю
@@ -87,7 +84,6 @@ export const useRevalidateCash = () => {
         trigger: triggerAdvManagerProjects,
         language,
         project_id,
-        role,
       });
     } else if (method === notificationsTypes.notification_create_desire) {
       // Рекламодатель отправил проект на ре согласование (заменить канал, заменить пост)
@@ -96,7 +92,6 @@ export const useRevalidateCash = () => {
         trigger: triggerManagerProjects,
         language,
         project_id,
-        role,
       });
     } else if (method === notificationsTypes.notification_approve_project) {
       // Рекламодатель подтвердил проект с менеджером
@@ -106,7 +101,6 @@ export const useRevalidateCash = () => {
         trigger: triggerManagerProjects,
         language,
         project_id,
-        role,
       });
     } else if (
       method === notificationsTypes.notification_launch_manager_project
@@ -117,7 +111,6 @@ export const useRevalidateCash = () => {
         trigger: triggerAdvManagerProjects,
         language,
         project_id,
-        role,
       });
     } else if (
       method === notificationsTypes.notification_complete_manager_project
@@ -128,7 +121,6 @@ export const useRevalidateCash = () => {
         trigger: triggerAdvManagerProjects,
         language,
         project_id,
-        role,
       });
     } else if (
       method === notificationsTypes.notification_complete_project_for_manager
@@ -139,7 +131,6 @@ export const useRevalidateCash = () => {
         trigger: triggerManagerProjects,
         language,
         project_id,
-        role,
       });
     } else if (method === notificationsTypes.new_my_project) {
       // Рекламодатель создал сам новый проект
@@ -147,7 +138,7 @@ export const useRevalidateCash = () => {
         dispatch,
         trigger: triggerAdvMyProjects,
         language,
-        role,
+
         status: ENUM_ADV_MY_PROJECT_STATUS.ACTIVE,
       });
     } else if (
@@ -159,7 +150,6 @@ export const useRevalidateCash = () => {
         trigger: triggerAdvMyProjects,
         language,
         project_id,
-        role,
       });
     } else if (method === notificationsTypes.notification_request_add_channel) {
       // Блогер  создал новый канал и отправил админу на модерацию
@@ -167,7 +157,6 @@ export const useRevalidateCash = () => {
         dispatch,
         trigger: triggerChannels,
         language,
-        role,
       });
     } else if (
       method === notificationsTypes.notification_accept_order_blogger
@@ -176,7 +165,7 @@ export const useRevalidateCash = () => {
       // кеш Блогера
       await invalidateBloggerOfferByUserAction({
         dispatch,
-        role,
+
         order_id,
         status: ENUM_OFFER_STATUS.WAIT,
       });
@@ -186,7 +175,6 @@ export const useRevalidateCash = () => {
         trigger: triggerAdvMyProjects,
         language,
         project_id,
-        role,
       });
       // кеш менеджера
       await invalidateManagerProjectByBloggerAction({
@@ -194,7 +182,6 @@ export const useRevalidateCash = () => {
         trigger: triggerManagerProjects,
         language,
         project_id,
-        role,
       });
     } else if (
       method === notificationsTypes.notification_cancel_order_blogger
@@ -203,7 +190,7 @@ export const useRevalidateCash = () => {
       // кеш Блогера
       await invalidateBloggerOfferByUserAction({
         dispatch,
-        role,
+
         order_id,
         status: ENUM_OFFER_STATUS.WAIT,
       });
@@ -213,7 +200,6 @@ export const useRevalidateCash = () => {
         trigger: triggerAdvMyProjects,
         language,
         project_id,
-        role,
       });
       // кеш менеджера
       await invalidateManagerProjectByBloggerAction({
@@ -221,7 +207,6 @@ export const useRevalidateCash = () => {
         trigger: triggerManagerProjects,
         language,
         project_id,
-        role,
       });
     } else if (method === notificationsTypes.notification_must_publish_post) {
       // Блогер должен разместить пост в назначенное время (просто ревалидация кружочков)
@@ -234,7 +219,6 @@ export const useRevalidateCash = () => {
         trigger: triggerAdvMyProjects,
         language,
         project_id,
-        role,
       });
       // кеш менеджера
       await invalidateManagerProjectByBloggerAction({
@@ -242,7 +226,6 @@ export const useRevalidateCash = () => {
         trigger: triggerManagerProjects,
         language,
         project_id,
-        role,
       });
     } else if (method === notificationsTypes.notification_publish_post) {
       // Блогер разместил пост
@@ -252,7 +235,6 @@ export const useRevalidateCash = () => {
         trigger: triggerAdvMyProjects,
         language,
         project_id,
-        role,
       });
       // кеш менеджера
       await invalidateManagerProjectByBloggerAction({
@@ -260,7 +242,6 @@ export const useRevalidateCash = () => {
         trigger: triggerManagerProjects,
         language,
         project_id,
-        role,
       });
     } else if (method === notificationsTypes.notification_new_order_blogger) {
       // Блогеру пришел новый заказ размещение рекламы (в ожидании)
@@ -268,7 +249,7 @@ export const useRevalidateCash = () => {
         dispatch,
         trigger: triggerOffers,
         language,
-        role,
+
         status: ENUM_OFFER_STATUS.WAIT,
       });
     } else if (
@@ -278,7 +259,7 @@ export const useRevalidateCash = () => {
       // кеш Блогера
       await invalidateBloggerOfferByUserAction({
         dispatch,
-        role,
+
         order_id,
         status: ENUM_OFFER_STATUS.ACTIVE,
       });
@@ -286,7 +267,7 @@ export const useRevalidateCash = () => {
         dispatch,
         trigger: triggerOffers,
         language,
-        role,
+
         status: ENUM_OFFER_STATUS.MODERATION,
         skip_views: true,
       });
@@ -297,7 +278,7 @@ export const useRevalidateCash = () => {
       // кеш Блогера
       await invalidateBloggerOfferByUserAction({
         dispatch,
-        role,
+
         order_id,
         status: ENUM_OFFER_STATUS.ACTIVE,
       });
@@ -305,7 +286,7 @@ export const useRevalidateCash = () => {
         dispatch,
         trigger: triggerOffers,
         language,
-        role,
+
         status: ENUM_OFFER_STATUS.COMPLETED,
         skip_views: true,
       });
@@ -317,7 +298,7 @@ export const useRevalidateCash = () => {
       // кеш Блогера
       await invalidateBloggerOfferByUserAction({
         dispatch,
-        role,
+
         order_id,
         status: ENUM_OFFER_STATUS.MODERATION,
       });
@@ -325,7 +306,7 @@ export const useRevalidateCash = () => {
         dispatch,
         trigger: triggerOffers,
         language,
-        role,
+
         status: ENUM_OFFER_STATUS.COMPLETED,
         skip_views: true,
       });
@@ -337,7 +318,7 @@ export const useRevalidateCash = () => {
       // кеш Блогера
       await invalidateBloggerOfferByUserAction({
         dispatch,
-        role,
+
         order_id,
         status: ENUM_OFFER_STATUS.MODERATION,
       });
@@ -345,7 +326,7 @@ export const useRevalidateCash = () => {
         dispatch,
         trigger: triggerOffers,
         language,
-        role,
+
         status: ENUM_OFFER_STATUS.CANCELED,
         skip_views: true,
       });
@@ -360,7 +341,6 @@ export const useRevalidateCash = () => {
         trigger: triggerAdvMyProjects,
         language,
         project_id,
-        role,
       });
       // кеш менеджера - подходит для ревалидации
       await invalidateManagerProjectByBloggerAction({
@@ -368,7 +348,6 @@ export const useRevalidateCash = () => {
         trigger: triggerManagerProjects,
         language,
         project_id,
-        role,
       });
     } else if (
       method ===
@@ -381,7 +360,6 @@ export const useRevalidateCash = () => {
         trigger: triggerAdvMyProjects,
         language,
         project_id,
-        role,
       });
       // кеш менеджера - подходит для ревалидации
       await invalidateManagerProjectByBloggerAction({
@@ -389,7 +367,6 @@ export const useRevalidateCash = () => {
         trigger: triggerManagerProjects,
         language,
         project_id,
-        role,
       });
     }
     // Ревалидация каналов у блогера при изменении статусов канала
@@ -403,7 +380,6 @@ export const useRevalidateCash = () => {
         channel_id: channel_id,
         status_from: ENUM_CHANNEL_STATUS.BANNED,
         status_to: ENUM_CHANNEL_STATUS.ACTIVE,
-        role,
       });
     } else if (
       method === notificationsTypes.notification_moderation_unblock_channel
@@ -417,7 +393,6 @@ export const useRevalidateCash = () => {
         channel_id: channel_id,
         status_from: ENUM_CHANNEL_STATUS.BANNED,
         status_to: ENUM_CHANNEL_STATUS.ACTIVE,
-        role,
       });
     } else if (method === notificationsTypes.notification_ban_channel) {
       // Уведомление блогеру о блокировке канала
@@ -429,7 +404,6 @@ export const useRevalidateCash = () => {
         channel_id: channel_id,
         status_from: ENUM_CHANNEL_STATUS.ACTIVE,
         status_to: ENUM_CHANNEL_STATUS.BANNED,
-        role,
       });
     } else if (
       method === notificationsTypes.notification_moderation_accept_channel
@@ -443,7 +417,6 @@ export const useRevalidateCash = () => {
         channel_id: channel_id,
         status_from: ENUM_CHANNEL_STATUS.MODERATION,
         status_to: ENUM_CHANNEL_STATUS.ACTIVE,
-        role,
       });
     } else if (
       method === notificationsTypes.notification_moderation_reject_channel
@@ -457,7 +430,6 @@ export const useRevalidateCash = () => {
         channel_id: channel_id,
         status_from: ENUM_CHANNEL_STATUS.MODERATION,
         status_to: ENUM_CHANNEL_STATUS.REJECTED,
-        role,
       });
     } else if (
       method === notificationsTypes.notification_request_to_edit_channel_accept
@@ -473,7 +445,6 @@ export const useRevalidateCash = () => {
         channel_id: channel_id,
         status_from: ENUM_CHANNEL_STATUS.MODERATION,
         status_to: ENUM_CHANNEL_STATUS.ACTIVE,
-        role,
       });
     } else if (
       method ===
@@ -490,7 +461,6 @@ export const useRevalidateCash = () => {
         channel_id: channel_id,
         status_from: ENUM_CHANNEL_STATUS.MODERATION,
         status_to: ENUM_CHANNEL_STATUS.REJECTED,
-        role,
       });
     }
     //

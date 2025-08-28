@@ -18,11 +18,11 @@ export const WithdrawSuccessCard: FC<IWithdrawSuccessCardProps> = ({
       )}
     >
       <div className="relative space-y-4 text-center sm:space-y-5 md:space-y-6">
-        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full shadow-lg bg-gradient-to-r from-blue-500 to-indigo-500 sm:w-18 sm:h-18 md:w-20 md:h-20">
+        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full shadow-lg bg-gradient-to-r from-green-500 to-emerald-500 sm:w-18 sm:h-18 md:w-20 md:h-20">
           <ArrowDownToLine className="w-8 h-8 text-white sm:w-9 sm:h-9 md:w-10 md:h-10" />
         </div>
         <div className="space-y-3 sm:space-y-4">
-          <p className="text-lg font-semibold text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 bg-clip-text sm:text-xl">
+          <p className="text-lg font-semibold text-transparent bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text sm:text-xl">
             {t("wallet.withdraw.success.title")}
           </p>
           <span className="text-sm text-muted-foreground sm:text-base">

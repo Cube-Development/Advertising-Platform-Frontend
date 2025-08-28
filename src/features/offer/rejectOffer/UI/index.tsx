@@ -1,10 +1,9 @@
 import {
-  invalidateBloggerOfferByUserAction,
   ENUM_OFFER_STATUS,
+  invalidateBloggerOfferByUserAction,
   useCancelOfferMutation,
 } from "@entities/offer";
 import { IOrderFeature } from "@entities/project";
-import { ENUM_ROLES } from "@entities/user";
 import { useAppDispatch } from "@shared/hooks";
 import { MyButton, ToastAction, useToast } from "@shared/ui";
 import { Loader } from "lucide-react";
@@ -17,31 +16,28 @@ export const RejectOffer: FC<IOrderFeature> = ({ order_id }) => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const [cancelOffer, { isLoading }] = useCancelOfferMutation();
-  const handleOnClick = () => {
-    order_id &&
-      !isLoading &&
-      cancelOffer({ order_id })
-        .unwrap()
-        .then(() => {
-          toast({
-            variant: "success",
-            title: t("toasts.offers_blogger.reject_offer.success"),
-          });
-          invalidateBloggerOfferByUserAction({
-            dispatch,
-            role: ENUM_ROLES.BLOGGER,
-            order_id,
-            status: ENUM_OFFER_STATUS.WAIT,
-          });
-        })
-        .catch((error) => {
-          toast({
-            variant: "error",
-            title: t("toasts.offers_blogger.reject_offer.error"),
-            action: <ToastAction altText="Ok">Ok</ToastAction>,
-          });
-          console.error("error: ", error);
-        });
+  const handleOnClick = async () => {
+    if (!order_id || isLoading) return;
+
+    try {
+      await cancelOffer({ order_id }).unwrap();
+      toast({
+        variant: "success",
+        title: t("toasts.offers_blogger.reject_offer.success"),
+      });
+      invalidateBloggerOfferByUserAction({
+        dispatch,
+        order_id,
+        status: ENUM_OFFER_STATUS.WAIT,
+      });
+    } catch (error) {
+      toast({
+        variant: "error",
+        title: t("toasts.offers_blogger.reject_offer.error"),
+        action: <ToastAction altText="Ok">Ok</ToastAction>,
+      });
+      console.error("error: ", error);
+    }
   };
   return (
     <MyButton

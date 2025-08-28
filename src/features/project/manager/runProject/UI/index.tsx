@@ -3,7 +3,7 @@ import {
   projectStatus,
   useLaunchProjectMutation,
 } from "@entities/project";
-import { ENUM_ROLES, useFindLanguage } from "@entities/user";
+import { useFindLanguage } from "@entities/user";
 import { useAppDispatch } from "@shared/hooks";
 import { MyButton, ToastAction, useToast } from "@shared/ui";
 import { Loader } from "lucide-react";
@@ -26,31 +26,28 @@ export const LaunchProject: FC<LaunchProjectProps> = ({
   const dispatch = useAppDispatch();
   const language = useFindLanguage();
 
-  const handleOnClick = () => {
-    project_id &&
-      !isLoading &&
-      launchProject({ project_id })
-        .unwrap()
-        .then(() => {
-          invalidateManagerProjectByLaunchProject({
-            dispatch,
-            project_id,
-            language,
-            role: ENUM_ROLES.MANAGER,
-          });
-          toast({
-            variant: "success",
-            title: t("toasts.orders_manager.launch_project.success"),
-          });
-        })
-        .catch((error) => {
-          toast({
-            variant: "error",
-            title: t("toasts.orders_manager.launch_project.error"),
-            action: <ToastAction altText="Ok">Ok</ToastAction>,
-          });
-          console.error("error: ", error);
-        });
+  const handleOnClick = async () => {
+    if (!project_id || isLoading) return;
+
+    try {
+      await launchProject({ project_id }).unwrap();
+      invalidateManagerProjectByLaunchProject({
+        dispatch,
+        project_id,
+        language,
+      });
+      toast({
+        variant: "success",
+        title: t("toasts.orders_manager.launch_project.success"),
+      });
+    } catch (error) {
+      toast({
+        variant: "error",
+        title: t("toasts.orders_manager.launch_project.error"),
+        action: <ToastAction altText="Ok">Ok</ToastAction>,
+      });
+      console.error("error: ", error);
+    }
   };
   return (
     <MyButton

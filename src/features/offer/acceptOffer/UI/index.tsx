@@ -1,10 +1,9 @@
 import {
-  invalidateBloggerOfferByUserAction,
   ENUM_OFFER_STATUS,
+  invalidateBloggerOfferByUserAction,
   useAcceptOfferMutation,
 } from "@entities/offer";
 import { IOrderFeature } from "@entities/project";
-import { ENUM_ROLES } from "@entities/user";
 import { BREAKPOINT } from "@shared/config";
 import { useAppDispatch, useWindowWidth } from "@shared/hooks";
 import {
@@ -68,31 +67,28 @@ export const AcceptOffer: FC<IOrderFeature> = ({ order_id, dates }) => {
   const currentDates = getDatesInRange(dates);
   const [selectedDate, setSelectedDate] = useState<string>(currentDates[0]);
   const [acceptOffer, { isLoading }] = useAcceptOfferMutation();
-  const handleOnClick = () => {
-    order_id &&
-      !isLoading &&
-      acceptOffer({ order_id, date: selectedDate })
-        .unwrap()
-        .then(() => {
-          toast({
-            variant: "success",
-            title: t("toasts.offers_blogger.accept_offer.success"),
-          });
-          invalidateBloggerOfferByUserAction({
-            dispatch,
-            role: ENUM_ROLES.BLOGGER,
-            order_id,
-            status: ENUM_OFFER_STATUS.WAIT,
-          });
-        })
-        .catch((error) => {
-          toast({
-            variant: "error",
-            title: t("toasts.offers_blogger.accept_offer.error"),
-            action: <ToastAction altText="Ok">Ok</ToastAction>,
-          });
-          console.error("error: ", error);
-        });
+  const handleOnClick = async () => {
+    if (!order_id || isLoading) return;
+
+    try {
+      await acceptOffer({ order_id, date: selectedDate }).unwrap();
+      toast({
+        variant: "success",
+        title: t("toasts.offers_blogger.accept_offer.success"),
+      });
+      invalidateBloggerOfferByUserAction({
+        dispatch,
+        order_id,
+        status: ENUM_OFFER_STATUS.WAIT,
+      });
+    } catch (error) {
+      toast({
+        variant: "error",
+        title: t("toasts.offers_blogger.accept_offer.error"),
+        action: <ToastAction altText="Ok">Ok</ToastAction>,
+      });
+      console.error("error: ", error);
+    }
   };
 
   const screen = useWindowWidth();

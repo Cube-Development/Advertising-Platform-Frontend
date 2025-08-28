@@ -1,28 +1,23 @@
 import { AppDispatch } from "@app/providers/store";
 import {
   bloggerOffersAPI,
+  ENUM_OFFER_STATUS,
   getOrdersByStatusReq,
   IBloggerOffers,
-  ENUM_OFFER_STATUS,
 } from "@entities/offer";
-import { ENUM_ROLES } from "@entities/user";
 import { VIEWS_BLOGGER_OFFERS } from "@shared/api";
 
 interface Props {
   dispatch: AppDispatch;
-  role: ENUM_ROLES;
   order_id: string;
   status: ENUM_OFFER_STATUS;
 }
 
 export const invalidateBloggerOfferByUserAction = async ({
   dispatch,
-  role,
   order_id,
   status,
 }: Props) => {
-  if (role !== ENUM_ROLES.BLOGGER) return;
-
   // 1. Удаляем из кеша старый ордер
   dispatch(
     bloggerOffersAPI.util.updateQueryData(
