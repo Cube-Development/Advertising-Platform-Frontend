@@ -949,7 +949,7 @@
       "link": {
         "title": "Enter the Link",
         "text": "Provide a link to your channel, ensuring the correct format.",
-        "requerd": "Enter the channel link",
+        "required": "Enter the channel link",
         "invalid": "Invalid link",
         "verification": "Important! Place the specified code in the description of your channel, this is needed to confirm ownership of the channel. After successful verification, you can delete this code."
       }
