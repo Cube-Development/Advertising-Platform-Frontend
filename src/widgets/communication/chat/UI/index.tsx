@@ -446,7 +446,7 @@ export const Chat: FC<IChatProps> = ({
         : [];
 
   return (
-    <div className={styles.wrapper}>
+    <div className={`${styles.wrapper} ${styles.overlay}`}>
       {screen >= BREAKPOINT.MD ? (
         <AlertDialog>
           <AlertDialogTrigger
@@ -467,7 +467,10 @@ export const Chat: FC<IChatProps> = ({
               <p>{t("chat.role.manager")}</p>
             )}
           </AlertDialogTrigger>
-          <AlertDialogContent className={`${styles.content} ${styles.dialog}`}>
+          <AlertDialogContent
+            showOverlay={false}
+            className={`blur_content ${styles.content} ${styles.dialog}`}
+          >
             <div
               className={`${styles.content__left} ${role !== ENUM_ROLES.BLOGGER ? styles.gridA : styles.gridB}`}
             >
@@ -578,7 +581,7 @@ export const Chat: FC<IChatProps> = ({
               <p>{t("chat.role.advertiser")}</p>
             )}
           </DrawerTrigger>
-          <DrawerContent>
+          <DrawerContent showOverlay={false} className="blur_content">
             <div className={`${styles.content} ${styles.drawer}`}>
               <div
                 className={`${styles.content__left} ${role !== ENUM_ROLES.BLOGGER ? styles.gridA : styles.gridB}`}

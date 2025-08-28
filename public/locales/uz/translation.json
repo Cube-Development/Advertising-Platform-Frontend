@@ -1438,7 +1438,7 @@
       "views": "Jami ko'rishlar",
       "commission": "Xizmat komissiyasi",
       "finnaly": "Yakuniy summa",
-      "finnaly_short": "Summa"
+      "finnaly_short": "Yakuniy"
     },
 
     "recomendation": "Tavsiya etilgan kanallar",
@@ -2396,6 +2396,30 @@
       "moderation": "Moderatsiya",
       "complaints": "Shikoyatlar",
       "reviews": "Sharhlar"
+    },
+    "home": {
+      "title": "Admin-panel",
+      "text": "Xush kelibsiz! Bu yerda siz platformaning asosiy jihatlarini boshqarishingiz mumkin.",
+      "channels": {
+        "title": "Kanallar",
+        "text": "Kanallar yarating, tahrir qiling va o‘chirib tashlang. To‘liq nazorat sizning qo‘lingizda!"
+      },
+      "users": {
+        "title": "Foydalanuvchilar",
+        "text": "Foydalanuvchilar faolligini kuzating, akkauntlarni moderatsiya qiling va kirish huquqlarini boshqaring."
+      },
+      "transactions": {
+        "title": "Tranzaksiyalar",
+        "text": "Moliyaviy operatsiyalarni kuzatib boring, to‘lovlarni tekshiring va mablag‘lar harakatini nazorat qiling."
+      },
+      "reviews": {
+        "title": "Fikrlar",
+        "text": "Foydalanuvchilar fikrlarini tahlil qiling, sharhlarni boshqaring va xizmatni yaxshilang."
+      },
+      "complaints": {
+        "title": "Shikoyatlar",
+        "text": "Foydalanuvchilar shikoyatlarini ko‘rib chiqing, muammolarga javob bering va halol platformani ta’minlang."
+      }
     },
     "channels": {
       "bar": {

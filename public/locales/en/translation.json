@@ -2671,7 +2671,27 @@
     },
     "home": {
       "title": "Welcome to the admin panel!",
-      "description": "Here you can manage users, channels, and platform content."
+      "description": "Here you can manage users, channels, and platform content.",
+      "channels": {
+        "title": "Channels",
+        "text": "Create, edit, and delete channels. Full control is in your hands!"
+      },
+      "users": {
+        "title": "Users",
+        "text": "Monitor user activity, moderate accounts, and manage access rights."
+      },
+      "transactions": {
+        "title": "Transactions",
+        "text": "Track financial operations, verify payments, and monitor cash flow."
+      },
+      "reviews": {
+        "title": "Reviews",
+        "text": "Analyze user reviews, manage comments, and improve the service."
+      },
+      "complaints": {
+        "title": "Complaints",
+        "text": "Handle user complaints, respond to issues, and ensure a fair platform."
+      }
     },
 
     "documents": {

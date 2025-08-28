@@ -2,7 +2,9 @@
   display: grid;
   border-top: 0.5px solid var(--black-20, #ccc);
   border-bottom: 0.5px solid var(--black-20, #ccc);
-  background: var(--Personal-colors-White);
+  // background: var(--Personal-colors-White);
+  background: rgba(255, 255, 255, 0.3);
+  backdrop-filter: blur(12px);
   height: 100%;
   grid-template: 1fr min-content / 1fr;
   position: relative;

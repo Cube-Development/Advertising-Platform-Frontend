@@ -140,7 +140,10 @@ export const Notifications: FC = () => {
               haveNewNotification={Boolean(data?.elements)}
             />
           </AlertDialogTrigger>
-          <AlertDialogContent className={`${styles.content} ${styles.dialog}`}>
+          <AlertDialogContent
+            showOverlay={false}
+            className={`blur_content ${styles.content} ${styles.dialog}`}
+          >
             <AlertDialogTitle className={styles.title}>
               <p className="gradient_color">{t("notifications.title")}</p>
               <AlertDialogCancel onClick={handleClose}>
@@ -212,7 +215,10 @@ export const Notifications: FC = () => {
               haveNewNotification={Boolean(data?.elements)}
             />
           </DrawerTrigger>
-          <DrawerContent className={`${styles.content} ${styles.drawer}`}>
+          <DrawerContent
+            showOverlay={false}
+            className={`blur_content ${styles.content} ${styles.drawer}`}
+          >
             <DrawerTitle className={styles.title}>
               <DrawerDescription className="gradient_color">
                 {t("notifications.title")}

@@ -51,6 +51,12 @@ export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
         </>
       )}
       <div className={styles.finnaly}>
+        {screen <= BREAKPOINT.MD && (
+          <div className={styles.commission_mobile}>
+            <p>{t("cart.create_post.commission")}</p>
+            <span>{CART.commission}%</span>
+          </div>
+        )}
         <div className={styles.finnaly__text}>
           <p className={`${styles.finnaly_long}`}>
             {t("cart.create_post.finnaly")}:

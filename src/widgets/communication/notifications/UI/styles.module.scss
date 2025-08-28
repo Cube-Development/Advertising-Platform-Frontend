@@ -101,6 +101,8 @@
     margin-top: -10px;
     height: -webkit-fill-available;
     width: -webkit-fill-available;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
   }
 
   .new {
