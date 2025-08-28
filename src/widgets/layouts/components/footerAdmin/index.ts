@@ -1,1 +1,0 @@
-export { FooterAdmin } from "./UI";
