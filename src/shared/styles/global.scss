@@ -810,3 +810,8 @@ body {
     margin-bottom: var(--margin-section-xs);
   }
 }
+
+.blur_content {
+  background: rgba(255, 255, 255, 0.7) !important;
+  backdrop-filter: blur(16px) !important;
+}

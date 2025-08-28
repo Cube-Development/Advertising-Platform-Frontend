@@ -3,6 +3,8 @@
   grid-auto-flow: row;
   position: relative;
   overflow: hidden;
+  border-top: 0.5px solid var(--black-20, #ccc);
+  border-bottom: 0.5px solid var(--black-20, #ccc);
 
   .chat__choose {
     display: grid;
@@ -241,8 +243,8 @@
   position: absolute;
   bottom: 0;
   left: 0;
-  background: rgba(255, 255, 255, 0.3);
   backdrop-filter: blur(20px);
+  border-top: 0.5px solid var(--black-20, #ccc);
 
   display: grid;
   grid-template: 1fr / minmax(10px, auto) 1fr minmax(10px, auto);

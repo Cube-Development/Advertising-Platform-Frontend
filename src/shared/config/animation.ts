@@ -56,7 +56,7 @@ export const PAGE_ANIMATION = {
   viewport: { amount: 0.05, once: true },
 
   sideTransition: {
-    hidden: { opacity: 0, x: "100%" },
+    hidden: { opacity: 1, x: "100%" },
     visible: { opacity: 1, x: "0%" },
     transition: { transition: { duration: 0.5 } },
   },

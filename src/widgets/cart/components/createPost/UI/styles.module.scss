@@ -143,14 +143,33 @@
     }
 
     @media (max-width: 768px) {
-      grid-template: 1fr / 2fr 3fr;
-      column-gap: 25px;
-    }
-
-    @media (max-width: 576px) {
       grid-template: none;
       grid-auto-flow: row;
       gap: 10px;
+    }
+
+    .commission_mobile {
+      display: grid;
+      grid-auto-flow: column;
+      align-items: center;
+      justify-content: space-between;
+      color: var(--Personal-colors-main2);
+      font-weight: 500;
+      line-height: 1;
+
+      p {
+        font-size: 16px;
+        font-style: normal;
+        white-space: nowrap;
+
+        @media (max-width: 375px) {
+          font-size: 14px;
+        }
+      }
+
+      span {
+        font-size: 14px;
+      }
     }
 
     &__text {
@@ -170,7 +189,7 @@
         gap: 15px;
       }
 
-      @media (max-width: 576px) {
+      @media (max-width: 768px) {
         gap: 10px;
         grid-auto-flow: column;
         text-align: left;

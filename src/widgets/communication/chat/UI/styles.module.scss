@@ -15,7 +15,6 @@
 
 .content {
   display: grid;
-  background: var(--Personal-colors-White);
   position: relative;
   overflow: hidden;
 
@@ -133,8 +132,6 @@
       grid-auto-flow: column;
       align-items: center;
       justify-content: space-between;
-      background: var(--Personal-colors-White);
-      backdrop-filter: blur(20px);
 
       p {
         display: flex;
