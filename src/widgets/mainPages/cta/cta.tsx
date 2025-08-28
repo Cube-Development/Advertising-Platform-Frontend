@@ -1,27 +1,35 @@
 import { addChannelQueries } from "@entities/channel";
+import { ENUM_ROLES, TYPE_USER_ROLES } from "@entities/user";
 import { AddChannel } from "@features/channel";
 import { SeeCatalog } from "@features/mainPages";
 import { PAGE_ANIMATION } from "@shared/config/animation";
 import { ENUM_PATHS } from "@shared/routing";
-import { IOptionTranslate } from "@shared/types/translate";
+import { ITextBlock } from "@shared/types";
 import { buildPathWithQuery, queryParamKeys } from "@shared/utils";
 import { motion } from "framer-motion";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Element } from "react-scroll";
-import { OptionCard } from "../card";
-import styles from "./styles.module.scss";
+import { OptionCard } from "./UI";
+import styles from "./cta.module.scss";
+import { CONFIG } from "./model";
 
 interface CtaProps {
-  page: string;
+  role: TYPE_USER_ROLES;
 }
 
-export const Cta: FC<CtaProps> = ({ page }) => {
+export const Cta: FC<CtaProps> = ({ role }) => {
   const { t } = useTranslation();
-  const options = t(`${page}.cta_list`, {
-    returnObjects: true,
-  }) as IOptionTranslate[];
-  let custom = 0;
+  let custom: number = 0;
+  const {
+    text: text_block,
+    background: main_background,
+    options: getOptions,
+  } = CONFIG[role];
+
+  const text = t(text_block, { returnObjects: true }) as ITextBlock;
+
+  const OPTIONS = getOptions(text?.options);
 
   return (
     <Element name="registration" className="container">
@@ -39,18 +47,18 @@ export const Cta: FC<CtaProps> = ({ page }) => {
               variants={PAGE_ANIMATION.animationLeft}
               className={styles.cta__content__title}
             >
-              {t(`${page}.cta_title`)}
+              {text?.title}
             </motion.h1>
             <motion.h2
               custom={custom++}
               variants={PAGE_ANIMATION.animationLeft}
               className={`gradient_color ${styles.cta__content__subtitle}`}
             >
-              {t(`${page}.cta_subtitle`)}
+              {text?.subtitle}
             </motion.h2>
           </div>
           <div className={styles.cta__options}>
-            {options.map((option, index) => (
+            {OPTIONS.map((option, index) => (
               <OptionCard key={index} option={option} custom={custom++} />
             ))}
           </div>
@@ -59,11 +67,10 @@ export const Cta: FC<CtaProps> = ({ page }) => {
             variants={PAGE_ANIMATION.animationLeft}
             className={styles.cta__button}
           >
-            {page === "main_page_advertiser" ? (
+            {role === ENUM_ROLES.ADVERTISER ? (
               <SeeCatalog />
             ) : (
               <AddChannel
-                // path={`${paths.addChannel}?add_channel=${addChannelQueries.main}`}
                 path={buildPathWithQuery(ENUM_PATHS.ADD_CHANNEL, {
                   [queryParamKeys.addChannel]: addChannelQueries.main,
                 })}
@@ -72,7 +79,7 @@ export const Cta: FC<CtaProps> = ({ page }) => {
           </motion.div>
         </div>
         <div className={styles.wrapper__image}>
-          <img src={`/images/assets/${t(`${page}.main_img`)}`} alt="" />
+          <img src={main_background} alt="main background" />
         </div>
       </motion.div>
     </Element>

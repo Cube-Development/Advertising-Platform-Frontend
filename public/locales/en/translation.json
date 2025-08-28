@@ -195,23 +195,21 @@
   },
 
   "main_page_advertiser": {
-    "main_img": "mainAdv.png",
-    "cta_title": "Effortless Advertising Placements on Social Media",
-    "cta_subtitle": "Only active, manually verified channels",
-    "cta_list": [
-      {
-        "option": "Algorithms for selecting the target audience and suitable channels for your ads",
-        "img": "option1.svg"
-      },
-      {
-        "option": "AI-generated effective advertising posts",
-        "img": "option2.svg"
-      },
-      {
-        "option": "Guaranteed protection through a secure transaction",
-        "img": "option3.svg"
-      }
-    ],
+    "cta": {
+      "title": "Effortless Advertising Placements on Social Media",
+      "subtitle": "Only active, manually verified channels",
+      "options": [
+        {
+          "option": "Algorithms for selecting the target audience and suitable channels for your ads"
+        },
+        {
+          "option": "AI-generated effective advertising posts"
+        },
+        {
+          "option": "Guaranteed protection through a secure transaction"
+        }
+      ]
+    },
 
     "services_title": "We work with legal entities, provide invoices, reports, and conduct electronic document management through didox.uz",
     "services_list": [
@@ -424,23 +422,21 @@
   },
 
   "main_page_blogger": {
-    "main_img": "mainBlogger.png",
-    "cta_title": "Add your channel now and get an order",
-    "cta_subtitle": "Open your channel for orders. Simple. Fast. Profitable.",
-    "cta_list": [
-      {
-        "option": "A constantly growing number of advertisers for your channels",
-        "img": "option4.svg"
-      },
-      {
-        "option": "Statistics for each channel to effectively analyze your content",
-        "img": "option5.svg"
-      },
-      {
-        "option": "Fast and legal withdrawal system",
-        "img": "option6.svg"
-      }
-    ],
+    "cta": {
+      "title": "Add your channel now and get an order",
+      "subtitle": "Open your channel for orders. Simple. Fast. Profitable.",
+      "options": [
+        {
+          "option": "A constantly growing number of advertisers for your channels"
+        },
+        {
+          "option": "Statistics for each channel to effectively analyze your content"
+        },
+        {
+          "option": "Fast and legal withdrawal system"
+        }
+      ]
+    },
     "services_title": "We work with legal entities, provide invoices, acts, and conduct electronic document management through didox.uz",
     "services_list": [
       {

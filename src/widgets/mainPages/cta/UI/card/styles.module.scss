@@ -3,6 +3,7 @@
   grid-auto-flow: column;
   align-items: center;
   justify-content: start;
+  color: var(--Personal-colors-light-black);
 
   font-style: normal;
   font-weight: 500;
@@ -10,7 +11,7 @@
   font-size: var(--font-size-option-item-xl);
   column-gap: var(--column-gap-option-item-xl);
 
-  img {
+  svg {
     width: 25px;
     height: auto;
   }
@@ -23,7 +24,7 @@
   @media (max-width: 768px) {
     font-size: var(--font-size-option-item-md);
     column-gap: var(--column-gap-option-item-md);
-    img {
+    svg {
       width: 20px;
     }
   }
@@ -36,7 +37,7 @@
   @media (max-width: 375px) {
     font-size: var(--font-size-option-item-xs);
     column-gap: var(--column-gap-option-item-xs);
-    img {
+    svg {
       width: 18px;
     }
   }

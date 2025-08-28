@@ -3,6 +3,12 @@ export interface IOptionTranslate {
   img: string;
 }
 
+export interface ITextBlock {
+  title: string;
+  subtitle?: string;
+  options: { option: string }[];
+}
+
 export interface IBasicInfo {
   info: string;
   count: string;
