@@ -54,6 +54,15 @@
       @media (max-width: 576px) {
         font-weight: 500;
       }
+
+      svg {
+        width: 22px;
+        height: auto;
+        stroke-width: 1.5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
     }
 
     &.active {
