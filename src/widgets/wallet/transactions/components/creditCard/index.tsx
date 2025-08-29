@@ -95,7 +95,7 @@ export const CreditCard: FC = () => {
     <div className={styles.card}>
       <form
         onSubmit={handleSubmit(onSubmit)}
-        className={cn(styles.form, "frame")}
+        className={cn(styles.form, "frame relative")}
       >
         <div className={styles.icon}>
           <CardIcon />
@@ -184,6 +184,11 @@ export const CreditCard: FC = () => {
           </div>
         </div>
         <PaymentCard />
+        <div className="backdrop-blur-[10px] absolute top-0 right-0 w-full h-full bg-gray-300/10 z-10 flex items-center justify-center rounded-[24px]">
+          <p className="!text-gray-500 md:!text-sm !text-xs !font-medium">
+            Doesn't work yet :(
+          </p>
+        </div>
       </form>
     </div>
   );
