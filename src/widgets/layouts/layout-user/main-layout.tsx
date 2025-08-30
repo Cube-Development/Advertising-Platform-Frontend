@@ -12,7 +12,11 @@ import {
   useGetViewManagerProjectQuery,
   useGetViewTransactionsQuery,
 } from "@entities/views";
-import { useGetBalanceQuery, walletSlice } from "@entities/wallet";
+import {
+  ENUM_WALLETS_TYPE,
+  useGetBalanceQuery,
+  walletSlice,
+} from "@entities/wallet";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import type { PropsWithChildren } from "react";
 import { useEffect } from "react";
@@ -76,10 +80,16 @@ export const MainLayout = ({ children }: PropsWithChildren) => {
         spending_wallet: 0,
       };
 
-      const deposit = balance?.deposit?.balance || 0;
-      const profit = balance?.profit?.balance || 0;
-      const spending = balance?.spending?.balance || 0;
-      const total = deposit + profit;
+      const deposit =
+        balance?.items?.find((i) => i?.wallet === ENUM_WALLETS_TYPE.DEPOSIT)
+          ?.balance || 0;
+      const profit =
+        balance?.items?.find((i) => i?.wallet === ENUM_WALLETS_TYPE.PROFIT)
+          ?.balance || 0;
+      const spending =
+        balance?.items?.find((i) => i?.wallet === ENUM_WALLETS_TYPE.SPENDING)
+          ?.balance || 0;
+      const total = deposit + profit + spending;
 
       wallet = {
         balance: total,

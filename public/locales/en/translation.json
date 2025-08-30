@@ -2120,6 +2120,13 @@
         }
       },
 
+      "accounting": {
+        "sign": {
+          "success": "Operation completed successfully",
+          "error": "Error occurred while processing the operation"
+        }
+      },
+
       "review": {
         "accept": {
           "success": "Review accepted",
@@ -2745,6 +2752,90 @@
           "delivery": "Delivery Cost",
           "vat": "VAT Amount",
           "withVat": "Total with VAT"
+        }
+      }
+    },
+
+    "accounting": {
+      "title": "Accounting",
+      "description": "List of documents for accounting in the Blogix system.",
+
+      "tabs": {
+        "category": {
+          "title": "Category",
+          "type": {
+            "top_up": "Top-up",
+            "withdraw": "Withdrawal",
+            "refund": "Refund"
+          }
+        },
+
+        "period": {
+          "title": "Period",
+          "type": {
+            "today": "Today",
+            "week": "This week",
+            "month": "This month",
+            "all": "All time"
+          }
+        },
+
+        "sorting": {
+          "title": "Date sorting",
+          "type": {
+            "increase": "Ascending",
+            "decrease": "Descending"
+          }
+        },
+
+        "signature": {
+          "title": "Signature status",
+          "type": {
+            "pending": "Pending",
+            "rejected": "Rejected",
+            "completed": "Signed"
+          }
+        }
+      },
+
+      "card": {
+        "transaction_id": "Transaction ID",
+        "created_date": "Creation date",
+        "user": "Counterparty",
+        "tin": "TIN",
+        "pinfl": "PINFL",
+        "wallet_type": "Wallet type",
+        "transaction_type": "Transaction type",
+        "amount": "Amount",
+
+        "wallet": {
+          "deposit": "Deposit wallet",
+          "profit": "Profit wallet"
+        },
+
+        "type": {
+          "top_up": "Top-up",
+          "withdraw": "Withdrawal"
+        },
+
+        "contract": {
+          "label": "Contract number and date"
+        },
+        "updated": "Update date",
+        "counterparty": {
+          "title": "Counterparty",
+          "inn": "TIN"
+        },
+        "price": {
+          "title": "Price",
+          "delivery": "Delivery cost",
+          "vat": "VAT amount",
+          "withVat": "Price with VAT"
+        },
+
+        "buttons": {
+          "sign": "Sign",
+          "signed": "Signed"
         }
       }
     }

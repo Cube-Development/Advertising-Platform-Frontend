@@ -2118,6 +2118,13 @@
         }
       },
 
+      "accounting": {
+        "sign": {
+          "success": "Amaliyot muvaffaqiyatli bajarildi",
+          "error": "Amaliyot bajarilishida xatolik yuz berdi"
+        }
+      },
+
       "review": {
         "accept": {
           "success": "Sharh qabul qilindi",
@@ -2761,6 +2768,90 @@
           "delivery": "Yetkazib berish qiymati",
           "vat": "QQS summasi",
           "withVat": "QQS bilan umumiy qiymat"
+        }
+      }
+    },
+
+    "accounting": {
+      "title": "Buxgalteriya",
+      "description": "Blogix tizimidagi buxgalteriya hujjatlari ro‘yxati.",
+
+      "tabs": {
+        "category": {
+          "title": "Yo‘nalish",
+          "type": {
+            "top_up": "Hisob to‘ldirish",
+            "withdraw": "Pul yechib olish",
+            "refund": "Qaytarib berish"
+          }
+        },
+
+        "period": {
+          "title": "Davr",
+          "type": {
+            "today": "Bugun",
+            "week": "Shu hafta",
+            "month": "Shu oy",
+            "all": "Barcha vaqt"
+          }
+        },
+
+        "sorting": {
+          "title": "Sana bo‘yicha tartiblash",
+          "type": {
+            "increase": "O‘sish bo‘yicha",
+            "decrease": "Kamayish bo‘yicha"
+          }
+        },
+
+        "signature": {
+          "title": "Imzo holati",
+          "type": {
+            "pending": "Kutilmoqda",
+            "rejected": "Rad etildi",
+            "completed": "Imzolangan"
+          }
+        }
+      },
+
+      "card": {
+        "transaction_id": "Tranzaksiya ID",
+        "created_date": "Yaratilgan sana",
+        "user": "Kontragent",
+        "tin": "STIR",
+        "pinfl": "JSHSHIR",
+        "wallet_type": "Hamyon turi",
+        "transaction_type": "Tranzaksiya turi",
+        "amount": "Miqdor",
+
+        "wallet": {
+          "deposit": "Depozit hamyoni",
+          "profit": "Foyda hamyoni"
+        },
+
+        "type": {
+          "top_up": "Hisob to‘ldirish",
+          "withdraw": "Pul yechib olish"
+        },
+
+        "contract": {
+          "label": "Shartnoma raqami va sanasi"
+        },
+        "updated": "Yangilangan sana",
+        "counterparty": {
+          "title": "Kontragent",
+          "inn": "STIR"
+        },
+        "price": {
+          "title": "Narx",
+          "delivery": "Yetkazib berish narxi",
+          "vat": "QQS summasi",
+          "withVat": "QQS bilan narx"
+        },
+
+        "buttons": {
+          "sign": "Imzolash",
+          "signed": "Imzolangan"
         }
       }
     }

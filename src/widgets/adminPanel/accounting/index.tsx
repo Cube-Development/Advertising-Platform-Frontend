@@ -1,13 +1,20 @@
 import {
+  ACCOUNTING_DATE_SORTING_LIST,
+  ACCOUNTING_PERIOD_LIST,
+  ACCOUNTING_SIGNATURE_LIST,
+  ACCOUNTING_STATUS_LIST,
+  AccountingCard,
   ADMIN_ACCOUNTING_PERIOD_DAYS,
   ADMIN_ACCOUNTING_STATUS,
   ADMIN_ACCOUNTING_TYPE,
+  EmptyState,
   getAdminAccountingReq,
+  IAccountingTab,
   useGetAdminAccountingQuery,
 } from "@entities/admin";
-import { EmptyState } from "@entities/admin";
 import { dateSortingTypes } from "@entities/platform";
 import { ENUM_WALLETS_TYPE } from "@entities/wallet";
+import { SignAccounting } from "@features/adminPanel";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { useAppSelector } from "@shared/hooks";
 import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
@@ -16,14 +23,7 @@ import { ArrowUpDown, CalendarClock, PenTool } from "lucide-react";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import {
-  ACCOUNTING_DATE_SORTING_LIST,
-  ACCOUNTING_PERIOD_LIST,
-  ACCOUNTING_SIGNATURE_LIST,
-  ACCOUNTING_STATUS_LIST,
-  getUtcDateMinusDays,
-  IAccountingTab,
-} from "./model";
+import { getUtcDateMinusDays } from "./model";
 import { AccountingFilter } from "./UI";
 import Logo from "/images/logo.png";
 
@@ -38,7 +38,7 @@ export const Accounting: FC = () => {
   const { watch, setValue, reset } = useForm<IAdminAccountingForm>({
     defaultValues: {
       page: 1,
-      elements_on_page: INTERSECTION_ELEMENTS.DOCUMENTS,
+      elements_on_page: INTERSECTION_ELEMENTS.ADMIN_ACCOUNTING,
       wallet: ENUM_WALLETS_TYPE.DEPOSIT,
       type: ADMIN_ACCOUNTING_TYPE.TOP_UP,
       status: ADMIN_ACCOUNTING_STATUS.PENDING,
@@ -79,15 +79,6 @@ export const Accounting: FC = () => {
   const handleOnChangePage = () => {
     setValue("page", (formState?.page || 1) + 1);
   };
-
-  // const handleChangeDocType = (item: IAccountingTab) => {
-  //   setValue("doctype", item?.docType!);
-  //   setValue("page", 1);
-  // };
-  // const handleChangeSingStatus = (item: IAccountingTab) => {
-  //   setValue("signStatus", item?.status || []);
-  //   setValue("page", 1);
-  // };
 
   return (
     <div className="container">
@@ -150,16 +141,16 @@ export const Accounting: FC = () => {
 
         {/* Сетка карточек документов */}
 
-        {!!data?.transactions?.length ? (
+        {!!data?.items?.length ? (
           <div>
             <div className="grid grid-cols-1 gap-6">
-              {/* {data?.transactions?.map((doc) => (
-                <DocumentCard
-                  key={doc.doc_id}
-                  document={doc}
-                  signDocument={SignDocument}
+              {data?.items?.map((item) => (
+                <AccountingCard
+                  key={item.id}
+                  transaction={item}
+                  signAccounting={SignAccounting}
                 />
-              ))} */}
+              ))}
             </div>
             {!data?.isLast && (
               <div

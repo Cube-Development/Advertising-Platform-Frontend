@@ -32,6 +32,7 @@ import {
   CREATE_PROJECT_DATES,
   CREATE_PROJECT_AMOUNT,
   MY_ORGANIZATION,
+  ADMIN_ACCOUNTING,
 } from "@shared/api/tags";
 
 export const authApi = createApi({
@@ -59,6 +60,7 @@ export const authApi = createApi({
     ADMIN_REVIEWS,
     ADMIN_COMPLAINTS,
     ADMIN_CHANNELS,
+    ADMIN_ACCOUNTING,
     VIEWS_BLOGGER_CHANNELS,
     VIEWS_BLOGGER_OFFERS,
     VIEWS_ADVERTISER,

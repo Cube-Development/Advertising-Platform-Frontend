@@ -1,6 +1,7 @@
 import { dateSortingTypes } from "@entities/platform";
 import { ENUM_WALLETS_TYPE } from "@entities/wallet";
 import {
+  ADMIN_ACCOUNTING,
   ADMIN_CHANNELS,
   ADMIN_COMPLAINTS,
   ADMIN_REVIEWS,
@@ -16,6 +17,7 @@ import {
 } from "../config";
 import {
   IAdminAccounting,
+  IAdminAccountingDepositAccept,
   IAdminChannelInfo,
   IAdminChannels,
   IAdminComplaintInfoData,
@@ -229,37 +231,66 @@ export const adminAPI = authApi.injectEndpoints({
         return {
           ...response,
           status: arg?.status,
+          wallet: arg?.wallet,
+          type: arg?.type,
+          date_sort: arg?.date_sort,
           isLast:
-            response?.elements ===
-            response?.transactions?.length +
-              (response?.page - 1) * INTERSECTION_ELEMENTS.ADMIN_ACCOUNTING,
+            response?.items?.length < INTERSECTION_ELEMENTS.ADMIN_ACCOUNTING,
         };
       },
       merge: (currentCache, newItems, arg) => {
         if (arg.arg.page === 1) {
           return {
             ...newItems,
-            isLast: newItems?.transactions.length === newItems?.elements,
+            isLast:
+              newItems?.items?.length < INTERSECTION_ELEMENTS.ADMIN_ACCOUNTING,
           };
         }
 
-        const newTransactions = [
-          ...currentCache?.transactions,
-          ...newItems?.transactions,
-        ];
+        const newTransactions = [...currentCache?.items, ...newItems?.items];
         return {
           ...newItems,
-          isLast: newTransactions.length === newItems.elements,
-          transactions: newTransactions,
+          isLast:
+            newItems?.items?.length < INTERSECTION_ELEMENTS.ADMIN_ACCOUNTING,
+          items: newTransactions,
         };
       },
-      serializeQueryArgs: ({ endpointName }) => {
-        return endpointName;
+      serializeQueryArgs: ({
+        endpointName,
+        queryArgs: { status, wallet, type, date_sort },
+      }) => {
+        return `${endpointName}/${status}/${wallet}/${type}/${date_sort}`;
       },
       forceRefetch({ currentArg, previousArg }) {
         return currentArg !== previousArg;
       },
+      providesTags: [ADMIN_ACCOUNTING],
     }),
+
+    accountingDepositAccept: build.mutation<
+      { account_id: string; balance: number },
+      IAdminAccountingDepositAccept
+    >({
+      query: (params) => ({
+        url: `/adv-admin/accept/deposit`,
+        method: `POST`,
+        params: params,
+      }),
+      invalidatesTags: [ADMIN_ACCOUNTING],
+    }),
+
+    accountingWithdrawalAccept: build.mutation<
+      { success: boolean },
+      { batch_id: string }
+    >({
+      query: (params) => ({
+        url: `/adv-admin/accept/withdrawal`,
+        method: `POST`,
+        params: params,
+      }),
+      invalidatesTags: [ADMIN_ACCOUNTING],
+    }),
+
     getAdminTransactionInfo: build.query<IAdminTransactionInfo, { id: string }>(
       {
         query: (params) => ({
@@ -485,4 +516,6 @@ export const {
   useAdminChooseComplaintMutation,
   useAdminAcceptComplaintMutation,
   useAdminRejectComplaintMutation,
+  useAccountingDepositAcceptMutation,
+  useAccountingWithdrawalAcceptMutation,
 } = adminAPI;

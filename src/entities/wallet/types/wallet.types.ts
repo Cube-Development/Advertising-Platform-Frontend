@@ -36,12 +36,11 @@ export interface IWithdrawResponse {
 export interface IWalletResponse {
   account_id: string;
   balance: number;
+  wallet: ENUM_WALLETS_TYPE;
 }
 
 export interface IGetBalance {
-  deposit: IWalletResponse;
-  profit: IWalletResponse;
-  spending: IWalletResponse;
+  items: IWalletResponse[];
 }
 
 export interface IWalletOperations {

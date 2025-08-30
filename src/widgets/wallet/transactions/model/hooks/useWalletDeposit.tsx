@@ -1,6 +1,5 @@
 import {
   ICreateDepositRequest,
-  useCreateDepositMutation,
   useCreateDepositRequestMutation,
 } from "@entities/wallet";
 import { useToast } from "@shared/ui";
@@ -19,19 +18,11 @@ export const useWalletDeposit = () => {
       isSuccess: isCreateDepositReqSuccess,
     },
   ] = useCreateDepositRequestMutation();
-  const [
-    createDeposit,
-    { isLoading: isCreateDepositLoading, isSuccess: isCreateDepositSuccess },
-  ] = useCreateDepositMutation();
 
   const deposit = async (data: ICreateDepositRequest) => {
     try {
       const response = await createDepositReq({
         amount: data.amount,
-      }).unwrap();
-
-      await createDeposit({
-        doc_id: response.payment_invoice_id,
       }).unwrap();
 
       toast({
@@ -51,8 +42,8 @@ export const useWalletDeposit = () => {
 
   return {
     deposit,
-    isLoading: isCreateDepositReqLoading || isCreateDepositLoading,
-    isSuccess: isCreateDepositReqSuccess || isCreateDepositSuccess,
+    isLoading: isCreateDepositReqLoading,
+    isSuccess: isCreateDepositReqSuccess,
     uploadUrl,
   };
 };

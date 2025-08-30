@@ -1,7 +1,7 @@
+import { ACCOUNTING_OPTIONS, IAccountingTab } from "@entities/admin";
 import { MultiSelect } from "@shared/ui";
 import { LucideIcon } from "lucide-react";
 import { FC } from "react";
-import { ACCOUNTING_OPTIONS, IAccountingTab } from "../model";
 
 interface IAccountingFilterProps {
   title: string;
