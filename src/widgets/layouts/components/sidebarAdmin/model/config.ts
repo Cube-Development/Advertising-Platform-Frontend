@@ -1,6 +1,7 @@
 import { ENUM_PATHS } from "@shared/routing";
 import { IMenuItem } from "@shared/types";
 import {
+  Calculator,
   CircleDollarSign,
   FileText,
   LayoutDashboard,
@@ -61,6 +62,13 @@ export const ADMIN_MENU_ORGANIZATION: IMenuItem[] = [
       title: "admin_panel.burger_menu.invoice",
       path: ENUM_PATHS.ADMIN_DOCUMENTS,
       icon: FileText,
+    },
+  },
+  {
+    item: {
+      title: "admin_panel.burger_menu.accounting",
+      path: ENUM_PATHS.ADMIN_ACCOUNTING,
+      icon: Calculator,
     },
   },
 ];

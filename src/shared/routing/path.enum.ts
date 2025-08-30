@@ -26,6 +26,7 @@ export enum ENUM_PATHS {
   PUBLIC_OFFER = "/public_offer",
   ADMIN_HOME = "/admin/home",
   ADMIN_ORGANIZATION = "/admin/organization",
+  ADMIN_ACCOUNTING = "/admin/accounting",
   ADMIN_CHANNELS = "/admin/channels",
   ADMIN_USERS = "/admin/users",
   ADMIN_USER_INFO = "/admin/users/:id",

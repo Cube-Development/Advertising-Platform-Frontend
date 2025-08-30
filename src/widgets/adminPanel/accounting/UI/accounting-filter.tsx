@@ -1,24 +1,24 @@
 import { MultiSelect } from "@shared/ui";
 import { LucideIcon } from "lucide-react";
 import { FC } from "react";
-import { DOCUMENT_OPTIONS, IDocumentTab } from "../model";
+import { ACCOUNTING_OPTIONS, IAccountingTab } from "../model";
 
-interface IDocumentFilterProps {
+interface IAccountingFilterProps {
   title: string;
   icon: LucideIcon;
-  baseList: IDocumentTab[];
-  onChange?: (item: IDocumentTab) => void;
+  baseList: IAccountingTab[];
+  onChange?: (item: IAccountingTab) => void;
   defaultValue?: number;
 }
 
-export const DocumentFilter: FC<IDocumentFilterProps> = ({
+export const AccountingFilter: FC<IAccountingFilterProps> = ({
   title,
   icon: Icon,
   baseList,
   onChange = () => {},
   defaultValue = -1,
 }) => {
-  const options = DOCUMENT_OPTIONS({ LIST: baseList });
+  const options = ACCOUNTING_OPTIONS({ LIST: baseList });
 
   const handleValueChange = (value: number[]) => {
     const item = baseList[value[0]];

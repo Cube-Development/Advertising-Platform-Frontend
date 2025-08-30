@@ -1,3 +1,5 @@
+import { dateSortingTypes } from "@entities/platform";
+import { ENUM_WALLETS_TYPE } from "@entities/wallet";
 import {
   ADMIN_CHANNELS,
   ADMIN_COMPLAINTS,
@@ -6,12 +8,14 @@ import {
 } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import {
+  ADMIN_ACCOUNTING_TYPE,
   ADMIN_CHANNEL_STATUS,
   ADMIN_COMPLAINT_STATUS,
   ADMIN_REVIEW_STATUS,
   ADMIN_TRANSACTION_STATUS,
 } from "../config";
 import {
+  IAdminAccounting,
   IAdminChannelInfo,
   IAdminChannels,
   IAdminComplaintInfoData,
@@ -39,6 +43,15 @@ export interface getAdminTransactionsReq {
   page: number;
   status: ADMIN_TRANSACTION_STATUS;
   elements_on_page: number;
+}
+export interface getAdminAccountingReq {
+  page: number;
+  from_: string;
+  elements_on_page: number;
+  type: ADMIN_ACCOUNTING_TYPE;
+  wallet: ENUM_WALLETS_TYPE;
+  status: number;
+  date_sort: dateSortingTypes;
 }
 
 export interface getAdminChannelsReq {
@@ -179,6 +192,47 @@ export const adminAPI = authApi.injectEndpoints({
             response?.elements ===
             response?.transactions?.length +
               (response?.page - 1) * INTERSECTION_ELEMENTS.ADMIN_TRANSACTIONS,
+        };
+      },
+      merge: (currentCache, newItems, arg) => {
+        if (arg.arg.page === 1) {
+          return {
+            ...newItems,
+            isLast: newItems?.transactions.length === newItems?.elements,
+          };
+        }
+
+        const newTransactions = [
+          ...currentCache?.transactions,
+          ...newItems?.transactions,
+        ];
+        return {
+          ...newItems,
+          isLast: newTransactions.length === newItems.elements,
+          transactions: newTransactions,
+        };
+      },
+      serializeQueryArgs: ({ endpointName }) => {
+        return endpointName;
+      },
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg !== previousArg;
+      },
+    }),
+    getAdminAccounting: build.query<IAdminAccounting, getAdminAccountingReq>({
+      query: (body) => ({
+        url: `/adv-admin/accountant/transactions`,
+        method: `POST`,
+        body: body,
+      }),
+      transformResponse: (response: IAdminAccounting, meta, arg) => {
+        return {
+          ...response,
+          status: arg?.status,
+          isLast:
+            response?.elements ===
+            response?.transactions?.length +
+              (response?.page - 1) * INTERSECTION_ELEMENTS.ADMIN_ACCOUNTING,
         };
       },
       merge: (currentCache, newItems, arg) => {
@@ -415,6 +469,7 @@ export const {
   useGetAdminOrderComplaintsQuery,
   useGetAdminOrderComplaintInfoQuery,
   useGetAdminTransactionsQuery,
+  useGetAdminAccountingQuery,
   useGetAdminTransactionInfoQuery,
   useGetAdminChannelsQuery,
   useGetAdminChannelInfoQuery,
