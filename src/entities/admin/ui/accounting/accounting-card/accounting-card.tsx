@@ -106,7 +106,7 @@ export const AccountingCard: FC<IAccountingCardProps> = ({
                     {t("admin_panel.accounting.card.tin")}:
                   </span>
                   <span className=" text-[var(--Personal-colors-light-black)]">
-                    {transaction?.TIN}
+                    {transaction?.TIN || "--/--/--"}
                   </span>
                 </p>
                 <p className="text-sm font-semibold text-[var(--Personal-colors-black)] flex items-center gap-2 justify-between">
@@ -114,7 +114,7 @@ export const AccountingCard: FC<IAccountingCardProps> = ({
                     {t("admin_panel.accounting.card.pinfl")}:
                   </span>
                   <span className=" text-[var(--Personal-colors-light-black)]">
-                    {transaction?.PINFL}
+                    {transaction?.PINFL || "--/--/--"}
                   </span>
                 </p>
               </div>

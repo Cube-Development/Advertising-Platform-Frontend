@@ -53,7 +53,7 @@ export const Documents: FC = () => {
     ...(formState?.doctype ? { doctype: formState.doctype } : {}),
   };
 
-  const { data, isLoading } = useGetDocumentsEDOQuery(
+  const { data, isLoading, isFetching } = useGetDocumentsEDOQuery(
     { ...getParams },
     { skip: !isAuthEcp },
   );
@@ -150,7 +150,7 @@ export const Documents: FC = () => {
                 className="grid items-center justify-center"
                 onClick={handleOnChangePage}
               >
-                {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
+                {isLoading || isFetching ? <SpinnerLoader /> : <ShowMoreBtn />}
               </div>
             )}
           </div>
