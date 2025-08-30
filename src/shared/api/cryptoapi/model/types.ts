@@ -34,6 +34,10 @@ export interface CryptoWebSocketActions {
     keyId: string,
     data: string,
   ) => Promise<{ pkcs7: string; signatureHex: string }>;
+  createAttachedSignature: (
+    keyId: string,
+    base64Data: string,
+  ) => Promise<{ pkcs7: string; signatureHex: string }>;
   reconnect: () => void;
   disconnect: () => void;
   clearError: () => void;

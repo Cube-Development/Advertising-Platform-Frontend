@@ -1,6 +1,7 @@
 import {
   CreateMessageKeyId,
   CreateMessageSignature,
+  CreateMessageAttachedSignature,
   useGetTimestampMutation,
 } from "@entities/organization";
 import { useCryptoCertificates, useCryptoMessage } from "@shared/api";
@@ -36,7 +37,8 @@ export const useSignDocument = () => {
       // Получаем JSON документа для подписи
       const response = await toSign({ documentId, owner }).unwrap();
       const documentJson = response?.data?.json || {};
-      await sign(documentJson, documentId);
+      const toSignData = response?.data?.toSign || "";
+      await sign(documentJson, documentId, undefined, owner, toSignData);
     } catch (err) {
       const errorMessage =
         err instanceof Error ? err.message : t("toasts.documents.sign.error");
@@ -79,6 +81,8 @@ export const useSignDocument = () => {
     documentJson: object,
     documentId: string,
     oldKeyId?: string,
+    owner?: 0 | 1,
+    toSignData?: string,
   ): Promise<string | undefined> => {
     try {
       let keyId = oldKeyId;
@@ -101,9 +105,12 @@ export const useSignDocument = () => {
       );
 
       // Шаг 2: Создание подписи (используем JSON документа)
-      const signResponse = await sendMessage(
-        CreateMessageSignature(message, keyId),
-      );
+      const messageObject =
+        owner === 1
+          ? CreateMessageSignature(message, keyId)
+          : CreateMessageAttachedSignature(toSignData || "", keyId);
+
+      const signResponse = await sendMessage(messageObject);
 
       // Шаг 3: Прикрепление TimeStamp
       const timestampResponse = await getTimestamp({

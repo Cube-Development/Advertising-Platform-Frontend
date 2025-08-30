@@ -406,6 +406,27 @@ export const CryptoWebSocketProvider: React.FC<
     [sendMessage],
   );
 
+  const createAttachedSignature = useCallback(
+    async (
+      keyId: string,
+      base64Data: string,
+    ): Promise<{ pkcs7: string; signatureHex: string }> => {
+      const message = {
+        plugin: "pkcs7",
+        name: "append_pkcs7_attached",
+        arguments: [base64Data, keyId],
+      };
+
+      const response = await sendMessage(message, 6000, "create_pkcs7");
+      console.log("✅ Подпись создана");
+      return {
+        pkcs7: response.pkcs7_64,
+        signatureHex: response.signature_hex,
+      };
+    },
+    [sendMessage],
+  );
+
   // Автоподключение при монтировании
   useEffect(() => {
     if (autoConnect) {
@@ -436,6 +457,7 @@ export const CryptoWebSocketProvider: React.FC<
     loadCertificates,
     loadKey,
     createSignature,
+    createAttachedSignature,
     reconnect,
     disconnect,
     clearError,
