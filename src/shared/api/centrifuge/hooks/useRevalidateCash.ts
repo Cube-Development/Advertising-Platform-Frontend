@@ -50,7 +50,7 @@ export const useRevalidateCash = () => {
   const dispatch = useAppDispatch();
 
   const revalidateCash = async (data: any) => {
-    const { method, project_id, order_id, channel_id } = data;
+    const { method, project_id, order_id, channel_id, id } = data;
 
     if (method === notificationsTypes.notification_create_deposit) {
       // Создан депозит
@@ -130,7 +130,7 @@ export const useRevalidateCash = () => {
         dispatch,
         trigger: triggerManagerProjects,
         language,
-        project_id,
+        id,
       });
     } else if (method === notificationsTypes.new_my_project) {
       // Рекламодатель создал сам новый проект

@@ -54,11 +54,11 @@ export function useCentrifugeConnection(
 
     init();
 
-    return () => {
-      if (sub) sub.off("publication", onPublication).unsubscribe();
-      centrifugeRef.current?.disconnect();
-      centrifugeRef.current = null;
-    };
+    // return () => {
+    //   if (sub) sub.off("publication", onPublication).unsubscribe();
+    //   centrifugeRef.current?.disconnect();
+    //   centrifugeRef.current = null;
+    // };
   }, [isAuth, personalChannel]);
 
   return { centrifugeRef };

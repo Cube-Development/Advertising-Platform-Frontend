@@ -13,14 +13,14 @@ interface Props {
     typeof managerProjectsAPI.useLazyGetManagerProjectsQuery
   >[0];
   language: ILanguage;
-  project_id: string;
+  id: string;
 }
 
 export const invalidateManagerProjectByCompleteProject = async ({
   dispatch,
   trigger,
   language = USER_LANGUAGES_LIST[0],
-  project_id,
+  id,
 }: Props) => {
   // 1. Удалим проект из кеша проектов на активных
   const baseParams = {
@@ -33,7 +33,7 @@ export const invalidateManagerProjectByCompleteProject = async ({
       "getManagerProjects",
       baseParams as getManagerProjectsCardReq,
       (draft: IManagerProjects) => {
-        draft.projects = draft.projects.filter((el) => el.id !== project_id);
+        draft.projects = draft.projects.filter((el) => el.id !== id);
       },
     ),
   );

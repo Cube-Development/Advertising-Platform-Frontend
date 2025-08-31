@@ -1,7 +1,9 @@
 import {
+  CreateMessageAttachedSignature,
   CreateMessageKeyId,
   CreateMessageSignature,
-  CreateMessageAttachedSignature,
+  filterCertificates,
+  useGetOrganizationQuery,
   useGetTimestampMutation,
 } from "@entities/organization";
 import { useCryptoCertificates, useCryptoMessage } from "@shared/api";
@@ -17,6 +19,8 @@ import { ENUM_DOCUMENT_TYPE, ICreateDocumentEDORequest } from "../types";
 export const useSignDocument = () => {
   const { toast } = useToast();
   const { t } = useTranslation();
+
+  const { data: organization } = useGetOrganizationQuery();
 
   const { sendMessage } = useCryptoMessage();
   const [getTimestamp, { isLoading: isLoadingLogin }] =
@@ -61,6 +65,7 @@ export const useSignDocument = () => {
         response?.pending_document?.document_json,
         response?._id?.toUpperCase(),
         oldKeyId,
+        1,
       );
 
       if (!keyId) return;
@@ -87,11 +92,15 @@ export const useSignDocument = () => {
     try {
       let keyId = oldKeyId;
 
+      const currentCert = filterCertificates(
+        certificates,
+        organization?.PINFL,
+        organization?.TIN,
+      )?.[0];
+
       if (!keyId) {
         // Шаг 1: Загрузка ключа
-        const keyResponse = await sendMessage(
-          CreateMessageKeyId(certificates[0]),
-        );
+        const keyResponse = await sendMessage(CreateMessageKeyId(currentCert));
         keyId = keyResponse?.keyId as string;
       }
 
