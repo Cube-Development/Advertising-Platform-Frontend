@@ -27,7 +27,7 @@ export const Profile: FC = () => {
       </DropdownMenuTrigger>
 
       <DropdownMenuContent className="!p-0 !rounded-[12px] frame" align="end">
-        <DropdownMenuLabel className="font-bold text-[10px] truncate max-w-[70vw] px-3 py-2">
+        <DropdownMenuLabel className="font-bold text-[10px] truncate max-w-[200px] w-[200px] px-3 py-2 text-center">
           {user?.email}
         </DropdownMenuLabel>
         <DropdownMenuSeparator />

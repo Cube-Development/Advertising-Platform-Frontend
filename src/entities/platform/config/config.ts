@@ -87,25 +87,25 @@ export const platformTypes = [
       },
     ],
   },
-  {
-    name: "filter.site",
-    id: platformTypesNum.site,
-    type: platformTypesStr.site,
-    img: ChromeIcon,
-    default_value: "platform_types.site.default_value",
-    post_types: [
-      {
-        id: PostTypesNum.site,
-        name: "create_order.create.post_types.site.default",
-      },
-      {
-        id: PostTypesNum.siteAndTelegram,
-        name: "create_order.create.post_types.site.telegram",
-      },
-      {
-        id: PostTypesNum.siteAndInstagram,
-        name: "create_order.create.post_types.site.instagram",
-      },
-    ],
-  },
+  // {
+  //   name: "filter.site",
+  //   id: platformTypesNum.site,
+  //   type: platformTypesStr.site,
+  //   img: ChromeIcon,
+  //   default_value: "platform_types.site.default_value",
+  //   post_types: [
+  //     {
+  //       id: PostTypesNum.site,
+  //       name: "create_order.create.post_types.site.default",
+  //     },
+  //     {
+  //       id: PostTypesNum.siteAndTelegram,
+  //       name: "create_order.create.post_types.site.telegram",
+  //     },
+  //     {
+  //       id: PostTypesNum.siteAndInstagram,
+  //       name: "create_order.create.post_types.site.instagram",
+  //     },
+  //   ],
+  // },
 ];

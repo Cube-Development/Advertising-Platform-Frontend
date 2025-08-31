@@ -2168,9 +2168,14 @@
     },
 
     "organization": {
+      "login": {
+        "success": "You have successfully logged in",
+        "error": "An error occurred while logging in"
+      },
       "create": {
-        "success": "Organization has been successfully submitted for moderation",
-        "error": "An error occurred while adding the organization"
+        "success": "The organization has been successfully submitted for moderation",
+        "error": "An error occurred while adding the organization",
+        "unique": "This organization is already registered in the system"
       },
       "offer_sign": {
         "success": "Public offer successfully signed",

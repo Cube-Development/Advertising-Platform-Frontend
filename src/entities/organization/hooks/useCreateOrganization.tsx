@@ -39,6 +39,8 @@ export const useCreateOrganization = () => {
         title: t("toasts.organization.create.error"),
         variant: "error",
       });
+
+      throw error;
     }
   };
 

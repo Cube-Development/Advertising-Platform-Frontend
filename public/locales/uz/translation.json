@@ -2166,9 +2166,14 @@
     },
 
     "organization": {
+      "login": {
+        "success": "Tizimga muvaffaqiyatli kirdingiz",
+        "error": "Tizimga kirishda xatolik yuz berdi"
+      },
       "create": {
         "success": "Tashkilot muvaffaqiyatli moderatsiyaga yuborildi",
-        "error": "Tashkilotni qo‘shishda xatolik yuz berdi"
+        "error": "Tashkilotni qo‘shishda xatolik yuz berdi",
+        "unique": "Ushbu tashkilot tizimda allaqachon ro‘yxatdan o‘tgan"
       },
       "offer_sign": {
         "success": "Ommaviy oferta muvaffaqiyatli imzolandi",

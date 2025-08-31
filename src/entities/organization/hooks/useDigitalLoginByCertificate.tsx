@@ -95,13 +95,15 @@ export const useDigitalLoginByCertificate = () => {
       }
       // Шаг 7: Осуществляем логин
       dispatch(loginEcp());
-    } catch (err) {
+    } catch (err: any) {
       const errorMessage =
-        err instanceof Error ? err.message : "Ошибка входа по ЭЦП";
+        err?.data?.error?.message === "Unique violation error"
+          ? "toasts.organization.create.unique"
+          : "toasts.organization.login.error";
 
       toast({
         variant: "error",
-        title: errorMessage,
+        title: t(errorMessage),
       });
     }
   };
