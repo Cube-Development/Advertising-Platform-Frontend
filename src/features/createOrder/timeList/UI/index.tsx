@@ -8,6 +8,7 @@ import {
   AlertDialogDescription,
   AlertDialogTitle,
   AlertDialogTrigger,
+  CustomCloseButton,
   MyButton,
 } from "@shared/ui";
 import { FC, useEffect, useState } from "react";
@@ -137,14 +138,12 @@ export const TimeList: FC<TimeListProps> = ({ onChange, startTime }) => {
       </AlertDialogTrigger>
       <AlertDialogContent className={styles.content}>
         <AlertDialogDescription className="sr-only"></AlertDialogDescription>
-        <div className={styles.top}>
-          <AlertDialogTitle className={styles.title}>
-            {t("calendar.choose_time")}
-          </AlertDialogTitle>
-          <AlertDialogCancel type="button" onClick={handleCloseModal}>
-            <CancelIcon2 />
+        <AlertDialogTitle className={styles.title}>
+          <p className="gradient_color">{t("calendar.choose_time")}</p>
+          <AlertDialogCancel type="button" onClick={handleCloseModal} asChild>
+            <CustomCloseButton />
           </AlertDialogCancel>
-        </div>
+        </AlertDialogTitle>
         <div className={styles.timeList}>
           <div className={styles.leftGrid}>
             {timeSlots.map((timeSlot, index) => (
@@ -164,13 +163,11 @@ export const TimeList: FC<TimeListProps> = ({ onChange, startTime }) => {
               </div>
             ))}
           </div>
-          <div className={styles.bottom}>
-            <AlertDialogAction asChild>
-              <MyButton type="button" onClick={continueAction}>
-                <p>{t("calendar.confirm")}</p>
-              </MyButton>
-            </AlertDialogAction>
-          </div>
+          <AlertDialogAction asChild>
+            <MyButton type="button" onClick={continueAction}>
+              <p>{t("calendar.confirm")}</p>
+            </MyButton>
+          </AlertDialogAction>
         </div>
       </AlertDialogContent>
     </AlertDialog>

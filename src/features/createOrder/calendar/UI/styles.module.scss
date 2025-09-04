@@ -74,52 +74,71 @@
   grid-auto-flow: row;
   align-items: center;
   justify-content: center;
-  padding: 25px;
+  // padding: 25px;
   border-radius: 25px;
   background: var(--Personal-colors-White);
 
-  @media (max-width: 576px) {
-    padding: 15px;
+  // @media (max-width: 576px) {
+  //   padding: 15px;
+  // }
+
+  // .top {
+  //   display: grid;
+  //   grid-auto-flow: column;
+  //   align-items: center;
+  //   justify-content: space-between;
+  //   margin-bottom: 15px;
+
+  //   @media (max-width: 576px) {
+  //     margin: 10px 0;
+  //   }
+
+  //   p {
+  //     font-size: 24px;
+  //     font-weight: 500;
+  //     font-style: normal;
+  //     background: var(--primary-gradient);
+  //     -webkit-background-clip: text;
+  //     -webkit-text-fill-color: transparent;
+  //     background-clip: text;
+  //     line-height: normal;
+
+  //     @media (max-width: 992px) {
+  //       font-size: 20px;
+  //     }
+
+  //     @media (max-width: 768px) {
+  //       font-size: 16px;
+  //     }
+  //   }
+  //   svg {
+  //     width: 30px;
+  //     height: 30px;
+
+  //     @media (max-width: 576px) {
+  //       width: 20px;
+  //       height: 20px;
+  //     }
+  //   }
+  // }
+
+  .title {
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 500;
+    padding: 20px 50px;
+    position: relative;
+    text-align: center;
+
+    @media (max-width: 992px) {
+      font-size: 20px;
+    }
   }
 
-  .top {
+  .content {
     display: grid;
-    grid-auto-flow: column;
-    align-items: center;
-    justify-content: space-between;
-    margin-bottom: 25px;
-
-    @media (max-width: 576px) {
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-size: 24px;
-      font-weight: 500;
-      font-style: normal;
-      background: var(--primary-gradient);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: normal;
-
-      @media (max-width: 992px) {
-        font-size: 20px;
-      }
-
-      @media (max-width: 768px) {
-        font-size: 16px;
-      }
-    }
-    svg {
-      width: 30px;
-      height: 30px;
-
-      @media (max-width: 576px) {
-        width: 20px;
-        height: 20px;
-      }
-    }
+    grid-auto-flow: row;
+    padding: 0 20px 20px 20px;
   }
 
   .bottom {
