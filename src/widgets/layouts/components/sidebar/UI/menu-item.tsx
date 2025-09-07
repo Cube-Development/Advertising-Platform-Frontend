@@ -39,7 +39,7 @@ export const MenuItem: FC<IMenuItemProps> = ({
                   "[background:var(--primary-gradient)]  text-white icon__white",
               )}
             >
-              {item.item.img && <item.item.img />}
+              {item.item.img && <item.item.img className="stroke-[1.5]" />}
             </div>
           </Link>
         )}

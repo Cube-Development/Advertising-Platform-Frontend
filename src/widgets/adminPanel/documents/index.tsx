@@ -86,7 +86,7 @@ export const Documents: FC = () => {
     <div className="container">
       <div className="grid grid-flow-row gap-4">
         {/* Заголовок страницы */}
-        <div className="!bg-[#341F47] p-5 grid grid-flow-row gap-4">
+        <div className="!bg-[#341F47] p-5 grid grid-flow-row gap-4 rounded-[15px]">
           <div className="grid items-end justify-start grid-flow-col gap-2 md:gap-4">
             <img src={DidoxLogo} alt="didox-log" className="h-8 md:h-12" />
             <h1 className="text-2xl font-bold text-white md:text-3xl leading-[0.75]">

@@ -25,7 +25,6 @@ import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { getUtcDateMinusDays } from "./model";
 import { AccountingFilter } from "./UI";
-import Logo from "/images/logo.png";
 
 interface IAdminAccountingForm extends getAdminAccountingReq {
   period: ADMIN_ACCOUNTING_PERIOD_DAYS;
@@ -84,13 +83,10 @@ export const Accounting: FC = () => {
     <div className="container">
       <div className="grid grid-flow-row gap-4">
         {/* Заголовок страницы */}
-        <div className="[background:var(--Gradients-Gradient-5)] grid grid-flow-row gap-4 p-5 ">
-          <div className="grid items-end justify-start grid-flow-col gap-2 md:gap-4">
-            <img src={Logo} alt="didox-log" className="h-8 md:h-12" />
-            <h1 className="text-2xl font-bold text-white md:text-3xl leading-[0.75]">
-              {t("admin_panel.accounting.title")}
-            </h1>
-          </div>
+        <div className="[background:var(--Gradients-Gradient-5)] grid grid-flow-row gap-4 p-5 rounded-[15px]">
+          <h1 className="text-2xl font-bold text-white md:text-3xl leading-[0.75]">
+            {t("admin_panel.accounting.title")}
+          </h1>
           <div className="flex flex-col text-sm sm:flex-row sm:items-center sm:justify-between md:text-lg">
             <p className="text-white">
               {t("admin_panel.accounting.description")}
