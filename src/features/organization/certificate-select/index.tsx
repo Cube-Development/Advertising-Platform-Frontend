@@ -48,14 +48,22 @@ export const CertificateSelect: React.FC<CertificateSelectProps> = ({
   const getDisplayText = () => {
     if (!selectedCertificate) return placeholder;
     const info = parseCertificateAlias(selectedCertificate.alias);
-    const fio = info.cn.toUpperCase();
+    const fio = info.organization.toUpperCase() || info.cn.toUpperCase();
     const pnfl = info.pnfl;
+    const uid = info.uid;
     return (
       <p className="grid items-center grid-flow-col gap-3">
         <span className="font-semibold text-[#4d37b3] truncate">{fio}</span>
-        <span className="px-2 bg-white border rounded-xl border-2-gray-200">
-          {pnfl}
-        </span>
+        {pnfl && !info.organization && (
+          <span className="px-2 bg-white border rounded-xl border-2-gray-200">
+            {pnfl}
+          </span>
+        )}
+        {uid && !!info.organization && (
+          <span className="px-2 bg-white border rounded-xl border-2-gray-200">
+            {uid}
+          </span>
+        )}
       </p>
     );
   };
