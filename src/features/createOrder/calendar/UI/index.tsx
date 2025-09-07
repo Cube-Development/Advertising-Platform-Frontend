@@ -9,6 +9,7 @@ import {
   AlertDialogDescription,
   AlertDialogTitle,
   AlertDialogTrigger,
+  CustomCloseButton,
   MyButton,
 } from "@shared/ui";
 import { formatRuStringToDate } from "@shared/utils";
@@ -124,6 +125,8 @@ export const CustomCalendar: FC<DateListProps> = ({ onChange, startDate }) => {
     }
     return null;
   };
+
+  console.log("dateObject", dateObject);
   return (
     <AlertDialog>
       <AlertDialogTrigger>
@@ -148,13 +151,13 @@ export const CustomCalendar: FC<DateListProps> = ({ onChange, startDate }) => {
       </AlertDialogTrigger>
       <AlertDialogContent className={styles.calendar}>
         <AlertDialogDescription className="sr-only"></AlertDialogDescription>
-        <AlertDialogTitle className={styles.top}>
-          <p>{t("calendar.choose_date")}</p>
-          <AlertDialogCancel type="button" onClick={handleCloseModal}>
-            <CancelIcon2 />
+        <AlertDialogTitle className={styles.title}>
+          <p className="gradient_color">{t("calendar.choose_date")}</p>
+          <AlertDialogCancel type="button" onClick={handleCloseModal} asChild>
+            <CustomCloseButton />
           </AlertDialogCancel>
         </AlertDialogTitle>
-        <div>
+        <div className={styles.content}>
           <Calendar
             onChange={handleOnChange}
             value={
@@ -162,27 +165,26 @@ export const CustomCalendar: FC<DateListProps> = ({ onChange, startDate }) => {
                 ? dateObject.date?.length === 2
                   ? [dateObject.date[0], dateObject.date[1]] // Гарантируем массив из двух дат
                   : dateObject.date[0] // Берем первую дату, если это одиночная дата
-                : dateObject.date || undefined // Убедимся, что одиночная дата либо undefined
+                : dateObject.date || null // Убедимся, что одиночная дата либо undefined
             }
             tileClassName={tileClassName}
             selectRange={isSelectRange}
           />
-        </div>
-
-        <div className={styles.bottom}>
-          <MyButton
-            type="button"
-            buttons_type="button__white"
-            className={styles.confirm}
-            onClick={handleChangeRange}
-          >
-            <p>{isSelectRange ? t("calendar.date") : t("calendar.range")}</p>
-          </MyButton>
-          <AlertDialogAction asChild>
-            <MyButton type="button" onClick={continueAction}>
-              <p>{t("calendar.confirm")}</p>
+          <div className={styles.bottom}>
+            <MyButton
+              type="button"
+              buttons_type="button__white"
+              className={styles.confirm}
+              onClick={handleChangeRange}
+            >
+              <p>{isSelectRange ? t("calendar.date") : t("calendar.range")}</p>
             </MyButton>
-          </AlertDialogAction>
+            <AlertDialogAction asChild>
+              <MyButton type="button" onClick={continueAction}>
+                <p>{t("calendar.confirm")}</p>
+              </MyButton>
+            </AlertDialogAction>
+          </div>
         </div>
       </AlertDialogContent>
     </AlertDialog>
