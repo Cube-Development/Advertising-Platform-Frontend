@@ -21,10 +21,10 @@ export const useWalletWithdraw = () => {
         wallet_type: data?.wallet_type,
       }).unwrap();
 
-      toast({
-        variant: "success",
-        title: `${t("toasts.wallet.withdraw.success")}`,
-      });
+      // toast({
+      //   variant: "success",
+      //   title: `${t("toasts.wallet.withdraw.success")}`,
+      // });
 
       setUploadUrl(response?.refund_letter_url);
     } catch (error) {

@@ -26,23 +26,31 @@ export const useSignDocument = () => {
   const [getTimestamp, { isLoading: isLoadingLogin }] =
     useGetTimestampMutation();
   const [toSign, { isLoading: isLoadingToSign }] = useGetSignInfoEDOMutation();
-  const [
-    createSign,
-    { isLoading: isLoadingCreateSign, isSuccess: isSuccessSigned },
-  ] = useCreateSignEDOMutation();
+  const [createSign, { isLoading: isLoadingCreateSign }] =
+    useCreateSignEDOMutation();
   const [createDocument, { isLoading: isLoadingCreateDocument }] =
     useCreateDocumentEDOMutation();
 
   const { certificates, certificatesLoading, isSignatureLoading, error } =
     useCryptoCertificates();
 
-  const signExist = async (documentId: string, owner: 0 | 1 = 0) => {
+  const signExist = async (
+    documentId: string,
+    owner: 0 | 1 = 0,
+  ): Promise<boolean> => {
     try {
       // Получаем JSON документа для подписи
       const response = await toSign({ documentId, owner }).unwrap();
       const documentJson = response?.data?.json || {};
       const toSignData = response?.data?.toSign || "";
-      await sign(documentJson, documentId, undefined, owner, toSignData);
+      const keyId = await sign(
+        documentJson,
+        documentId,
+        undefined,
+        owner,
+        toSignData,
+      );
+      return !!keyId;
     } catch (err) {
       const errorMessage =
         err instanceof Error ? err.message : t("toasts.documents.sign.error");
@@ -51,6 +59,8 @@ export const useSignDocument = () => {
         variant: "error",
         title: errorMessage,
       });
+
+      return false;
     }
   };
 
@@ -157,6 +167,5 @@ export const useSignDocument = () => {
       isLoadingCreateDocument,
 
     isSignatureLoading,
-    isSuccessSigned,
   };
 };

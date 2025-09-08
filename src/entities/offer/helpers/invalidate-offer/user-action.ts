@@ -5,18 +5,20 @@ import {
   getOrdersByStatusReq,
   IBloggerOffers,
 } from "@entities/offer";
-import { VIEWS_BLOGGER_OFFERS } from "@shared/api";
+import { BALANCE, VIEWS_BLOGGER_OFFERS } from "@shared/api";
 
 interface Props {
   dispatch: AppDispatch;
   order_id: string;
   status: ENUM_OFFER_STATUS;
+  invalidateBalance?: boolean;
 }
 
 export const invalidateBloggerOfferByUserAction = async ({
   dispatch,
   order_id,
   status,
+  invalidateBalance = false,
 }: Props) => {
   // 1. Удаляем из кеша старый ордер
   dispatch(
@@ -35,4 +37,7 @@ export const invalidateBloggerOfferByUserAction = async ({
 
   // 2. Обновляем кэш кружочков
   dispatch(bloggerOffersAPI.util.invalidateTags([VIEWS_BLOGGER_OFFERS]));
+
+  if (invalidateBalance)
+    dispatch(bloggerOffersAPI.util.invalidateTags([BALANCE]));
 };

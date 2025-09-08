@@ -1,6 +1,6 @@
 import { AppDispatch } from "@app/providers/store";
 import { dateSortingTypes } from "@entities/platform";
-import { ADV_ORDERS, VIEWS_ADVERTISER } from "@shared/api";
+import { ADV_ORDERS, BALANCE, VIEWS_ADVERTISER } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ILanguage, USER_LANGUAGES_LIST } from "@shared/languages";
 import { advProjectsAPI, getProjectsCardReq } from "../../../api";
@@ -14,6 +14,7 @@ interface Props {
   >[0];
   language: ILanguage;
   project_id: string;
+  invalidateBalance?: boolean;
 }
 
 export const invalidateAdvProjectByBloggerAction = async ({
@@ -21,6 +22,7 @@ export const invalidateAdvProjectByBloggerAction = async ({
   trigger,
   language = USER_LANGUAGES_LIST[0],
   project_id,
+  invalidateBalance = false,
 }: Props) => {
   let page: number | null = null;
 
@@ -61,4 +63,7 @@ export const invalidateAdvProjectByBloggerAction = async ({
 
   // 3. Обновляем кэш кружочков и ордеров
   dispatch(advProjectsAPI.util.invalidateTags([ADV_ORDERS, VIEWS_ADVERTISER]));
+
+  if (invalidateBalance)
+    dispatch(advProjectsAPI.util.invalidateTags([BALANCE]));
 };

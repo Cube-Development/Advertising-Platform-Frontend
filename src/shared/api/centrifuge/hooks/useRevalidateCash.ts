@@ -138,7 +138,6 @@ export const useRevalidateCash = () => {
         dispatch,
         trigger: triggerAdvMyProjects,
         language,
-
         status: ENUM_ADV_MY_PROJECT_STATUS.ACTIVE,
       });
     } else if (
@@ -165,7 +164,6 @@ export const useRevalidateCash = () => {
       // кеш Блогера
       await invalidateBloggerOfferByUserAction({
         dispatch,
-
         order_id,
         status: ENUM_OFFER_STATUS.WAIT,
       });
@@ -190,7 +188,6 @@ export const useRevalidateCash = () => {
       // кеш Блогера
       await invalidateBloggerOfferByUserAction({
         dispatch,
-
         order_id,
         status: ENUM_OFFER_STATUS.WAIT,
       });
@@ -200,6 +197,7 @@ export const useRevalidateCash = () => {
         trigger: triggerAdvMyProjects,
         language,
         project_id,
+        invalidateBalance: true,
       });
       // кеш менеджера
       await invalidateManagerProjectByBloggerAction({
@@ -249,7 +247,6 @@ export const useRevalidateCash = () => {
         dispatch,
         trigger: triggerOffers,
         language,
-
         status: ENUM_OFFER_STATUS.WAIT,
       });
     } else if (
@@ -259,7 +256,6 @@ export const useRevalidateCash = () => {
       // кеш Блогера
       await invalidateBloggerOfferByUserAction({
         dispatch,
-
         order_id,
         status: ENUM_OFFER_STATUS.ACTIVE,
       });
@@ -278,7 +274,6 @@ export const useRevalidateCash = () => {
       // кеш Блогера
       await invalidateBloggerOfferByUserAction({
         dispatch,
-
         order_id,
         status: ENUM_OFFER_STATUS.ACTIVE,
       });
@@ -286,7 +281,6 @@ export const useRevalidateCash = () => {
         dispatch,
         trigger: triggerOffers,
         language,
-
         status: ENUM_OFFER_STATUS.COMPLETED,
         skip_views: true,
       });
@@ -298,15 +292,14 @@ export const useRevalidateCash = () => {
       // кеш Блогера
       await invalidateBloggerOfferByUserAction({
         dispatch,
-
         order_id,
         status: ENUM_OFFER_STATUS.MODERATION,
+        invalidateBalance: true,
       });
       await invalidateBloggerOfferByWebsocketAction({
         dispatch,
         trigger: triggerOffers,
         language,
-
         status: ENUM_OFFER_STATUS.COMPLETED,
         skip_views: true,
       });
@@ -314,11 +307,10 @@ export const useRevalidateCash = () => {
       method ===
       notificationsTypes.notification_moderation_order_blogger_negative
     ) {
-      // Уведомление блогеру о модерации заказа в пользу блогера
+      // Уведомление блогеру о модерации заказа в пользу рекламодателя
       // кеш Блогера
       await invalidateBloggerOfferByUserAction({
         dispatch,
-
         order_id,
         status: ENUM_OFFER_STATUS.MODERATION,
       });
@@ -326,7 +318,6 @@ export const useRevalidateCash = () => {
         dispatch,
         trigger: triggerOffers,
         language,
-
         status: ENUM_OFFER_STATUS.CANCELED,
         skip_views: true,
       });
@@ -360,6 +351,7 @@ export const useRevalidateCash = () => {
         trigger: triggerAdvMyProjects,
         language,
         project_id,
+        invalidateBalance: true,
       });
       // кеш менеджера - подходит для ревалидации
       await invalidateManagerProjectByBloggerAction({
