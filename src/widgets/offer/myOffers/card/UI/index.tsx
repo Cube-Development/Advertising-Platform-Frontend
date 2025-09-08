@@ -201,9 +201,9 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
               <p>{t(`offers_blogger.offer_status.reject.title`)}</p>
               <span>{t(`offers_blogger.offer_status.reject.text`)}</span>
             </div>
-            <div>
+            {/* <div>
               <SeeReason />
-            </div>
+            </div> */}
           </div>
         ) : (
           <></>
