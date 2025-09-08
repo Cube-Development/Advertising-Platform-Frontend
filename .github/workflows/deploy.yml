@@ -7,7 +7,7 @@ on:
 
 env:
   AWS_REGION: eu-north-1
-  EKS_CLUSTER_NAME: Blogix-prod
+  EKS_CLUSTER_NAME: Blogix2-prod
   K8S_NAMESPACE: default
   DOCKER_IMAGE: abddssh/advblog-frontend
   DEPLOYMENT_NAME: frontend-deployment
