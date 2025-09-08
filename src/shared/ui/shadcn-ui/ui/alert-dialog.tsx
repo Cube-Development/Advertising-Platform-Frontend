@@ -22,7 +22,7 @@ const AlertDialogOverlay = React.forwardRef<
       className,
       {
         "bg-black/80": showOverlay,
-        "bg-transparent": !showOverlay,
+        "bg-transparent backdrop-blur-sm": !showOverlay,
       },
     )}
     {...props}

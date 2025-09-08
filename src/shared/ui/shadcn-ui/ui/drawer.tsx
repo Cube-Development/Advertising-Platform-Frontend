@@ -29,7 +29,7 @@ const DrawerOverlay = React.forwardRef<
     ref={ref}
     className={cn("fixed inset-0 z-50", className, {
       "bg-black/80": showOverlay,
-      "bg-transparent": !showOverlay,
+      "bg-transparent backdrop-blur-sm": !showOverlay,
     })}
     {...props}
   />
