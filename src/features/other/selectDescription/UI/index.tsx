@@ -60,7 +60,7 @@ export const SelectDescription: FC<SelectDescriptionProps> = ({
           onChange={handleChange}
           maxLength={1000}
           placeholder={t(placeholder)}
-          readOnly={true}
+          // readOnly={true}
         />
         <p>
           {remainingCharacters}/{1000}
