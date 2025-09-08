@@ -13,7 +13,7 @@ export const parseCertificateAlias = (alias: string): ParsedCertificateInfo => {
 
   // Извлекаем ПИНФЛ из поля 1.2.860.3.16.1.2
   const pnfl = info["1.2.860.3.16.1.2"] || "No data";
-  const uid = info.uid || null;
+  const uid = info["1.2.860.3.16.1.1"] || info.uid || null;
 
   // Форматируем дату - берем только день.месяц.год
   const formatDate = (dateStr: string) => {
@@ -33,7 +33,7 @@ export const parseCertificateAlias = (alias: string): ParsedCertificateInfo => {
     surname: info.surname || "No data",
     location: info.l || "No data",
     region: info.st || "No data",
-    organization: info.o || "No data",
+    organization: info.o || "",
     pnfl: pnfl,
     uid: uid,
     validFrom: formatDate(info.validfrom),

@@ -26,7 +26,7 @@ export const useCreateOrganization = () => {
 
       await createOrganization({
         TIN: profile?.tin || "",
-        PINFL: profile?.pinfl || "",
+        PINFL: profile?.pinfl || profile?.itemReleasedPinfl || "",
       }).unwrap();
 
       toast({

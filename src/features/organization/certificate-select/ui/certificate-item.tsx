@@ -1,5 +1,5 @@
 import { ParsedCertificateInfo } from "@entities/organization";
-import { Building, Calendar, CheckCircle, MapPin } from "lucide-react";
+import { CheckCircle } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -19,12 +19,19 @@ export const CertificateItem: FC<ICertificateItemProps> = ({
       <div className="flex items-start justify-between">
         <div className="flex-1 min-w-0 space-y-3">
           <h4 className="text-lg font-bold leading-tight text-gray-900 truncate">
-            {info.cn.toUpperCase()}
+            {info.organization.toUpperCase() || info.cn.toUpperCase()}
           </h4>
           <div className="grid items-center justify-start grid-flow-col gap-2 font-mono text-lg">
-            <p className="px-2 font-mono  font-semibold text-[#4d37b3] bg-white rounded-xl">
-              {info.pnfl}
-            </p>
+            {info.pnfl && !info.organization && (
+              <p className="px-2 font-mono  font-semibold text-[#4d37b3] bg-white rounded-xl">
+                {info.pnfl}
+              </p>
+            )}
+            {info.uid && !!info.organization && (
+              <p className="px-2 font-mono  font-semibold text-[#4d37b3] bg-white rounded-xl">
+                {info.uid}
+              </p>
+            )}
             <span className="px-2 truncate bg-white border rounded-xl border-2-gray-200">
               {t("organization.login.didox.certificate.until")} {info.validTo}
             </span>

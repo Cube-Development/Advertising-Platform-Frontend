@@ -8,9 +8,14 @@ export const filterCertificates = (
 ): Certificate[] => {
   if (pnfl) {
     const certificate = certificates?.find((certificate) => {
-      const { pnfl: certificatePnfl, uid } = parseCertificateAlias(
-        certificate.alias,
-      );
+      const {
+        pnfl: certificatePnfl,
+        uid,
+        organization,
+      } = parseCertificateAlias(certificate.alias);
+
+      if (!!organization) return uid === inn;
+
       return certificatePnfl === pnfl || uid === inn;
     });
     if (!certificate) return [];
@@ -19,3 +24,4 @@ export const filterCertificates = (
   }
   return certificates;
 };
+3;
