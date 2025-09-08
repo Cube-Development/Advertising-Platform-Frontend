@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_Слой_2" data-name="Слой 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 31.88 32">
+  <defs>
+    <style>
+      .cls-1 {
+        font-family: TTRunsTrialVariableRoman, 'TT Runs Trial Variable Roman';
+        font-size: 6.19px;
+        font-variation-settings: 'wght' 400;
+      }
+
+      .cls-1, .cls-2 {
+        isolation: isolate;
+      }
+
+      .cls-3 {
+        fill: #fff;
+        stroke-width: 0px;
+      }
+    </style>
+  </defs>
+  <g id="_Слой_2-2" data-name=" Слой 2">
+    <g>
+      <rect class="cls-3" x="0" y="0" width="31.88" height="32" rx="15.94" ry="15.94"/>
+      <g class="cls-2">
+        <text class="cls-1" transform="translate(5.58 17.71)"><tspan x="0" y="0">Blogix</tspan></text>
+      </g>
+    </g>
+  </g>
+</svg>

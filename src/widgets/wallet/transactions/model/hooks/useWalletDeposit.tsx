@@ -25,10 +25,10 @@ export const useWalletDeposit = () => {
         amount: data.amount,
       }).unwrap();
 
-      toast({
-        variant: "success",
-        title: `${t("toasts.wallet.topup.success")}`,
-      });
+      // toast({
+      //   variant: "success",
+      //   title: `${t("toasts.wallet.topup.success")}`,
+      // });
 
       setUploadUrl(response?.payment_invoice_url);
     } catch (error) {
