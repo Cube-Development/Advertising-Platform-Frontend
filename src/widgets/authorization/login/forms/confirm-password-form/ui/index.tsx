@@ -41,7 +41,7 @@ export const ConfirmPasswordForm: FC<ConfirmPasswordFormProps> = ({
       }
     } else if (password.length < 3) {
       setPasswordError(t("auth.more_characters"));
-    } else if (password.length > 15) {
+    } else if (password.length > 50) {
       setPasswordError(t("auth.less_characters"));
     } else if (password !== confirmPassword) {
       setConfirmPasswordError(t("auth.passwords_dont_match"));
