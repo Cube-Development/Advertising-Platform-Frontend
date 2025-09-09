@@ -35,7 +35,7 @@ export const LoginForm: FC<Props> = ({ onNavigate }) => {
       setEmailError(t("auth.email_invalid"));
     } else if (password.length < 3) {
       setPasswordError(t("auth.more_characters"));
-    } else if (password.length > 15) {
+    } else if (password.length > 50) {
       setPasswordError(t("auth.less_characters"));
     } else {
       setEmailError("");
