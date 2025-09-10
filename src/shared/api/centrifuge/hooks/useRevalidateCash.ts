@@ -130,7 +130,7 @@ export const useRevalidateCash = () => {
         dispatch,
         trigger: triggerManagerProjects,
         language,
-        id,
+        project_id: id,
       });
     } else if (method === notificationsTypes.new_my_project) {
       // Рекламодатель создал сам новый проект

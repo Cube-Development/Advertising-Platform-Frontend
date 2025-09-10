@@ -229,7 +229,10 @@ export const MultiSelect = React.forwardRef<
                 onKeyDown={handleInputKeyDown}
               />
             )}
-            <CommandList className="max-h-[none] overflow-visible">
+            <CommandList
+              className="max-h-[none] overflow-visible"
+              onClick={(e) => e.stopPropagation()}
+            >
               <ScrollArea
                 className={cn(options?.length > 5 && "h-[30svh] max-h-[200px]")}
               >
