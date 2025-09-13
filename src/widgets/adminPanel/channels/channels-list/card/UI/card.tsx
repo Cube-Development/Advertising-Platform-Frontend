@@ -1,4 +1,4 @@
-import { IAdminChannelData } from "@entities/admin";
+import { IAdminChannelData } from "@entities/admin-panel";
 import { channelParameterData } from "@entities/channel";
 import { FormatPrice, SelectPrice } from "@features/channel";
 import { SelectDescription, SelectOptions, SelectSex } from "@features/other";

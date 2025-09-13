@@ -1,7 +1,7 @@
 import {
   IAdminEditChannelData,
   useAdminChannelEditMutation,
-} from "@entities/admin";
+} from "@entities/admin-panel";
 import { AccountsLoader, MyButton, ToastAction, useToast } from "@shared/ui";
 import { ButtonHTMLAttributes, forwardRef } from "react";
 import { useTranslation } from "react-i18next";

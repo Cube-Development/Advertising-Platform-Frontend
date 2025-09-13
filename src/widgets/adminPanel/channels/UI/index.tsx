@@ -2,9 +2,9 @@ import {
   ADMIN_CHANNEL_FILTER_TABS_LIST,
   ADMIN_CHANNEL_FORM,
   ADMIN_CHANNEL_STATUS,
-  getAdminChannelsReq,
+  IGetAdminChannelsReq,
   useGetAdminChannelsQuery,
-} from "@entities/admin";
+} from "@entities/admin-panel";
 import { BarSubFilter } from "@features/other";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { useClearCookiesOnPage } from "@shared/hooks";
@@ -17,7 +17,7 @@ import styles from "./styles.module.scss";
 export const Channels: FC = () => {
   useClearCookiesOnPage();
   const { t } = useTranslation();
-  const { watch, setValue } = useForm<getAdminChannelsReq>({
+  const { watch, setValue } = useForm<IGetAdminChannelsReq>({
     defaultValues: {
       page: 1,
       status: ADMIN_CHANNEL_STATUS.ACTIVE,

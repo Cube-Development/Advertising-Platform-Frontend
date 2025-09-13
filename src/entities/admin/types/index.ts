@@ -1,5 +1,4 @@
 export * from "./accounting";
-export * from "./channels";
 export * from "./complaintInfo";
 export * from "./complaints";
 export * from "./profile";

@@ -2,7 +2,6 @@ import { dateSortingTypes } from "@entities/platform";
 import { ENUM_WALLETS_TYPE } from "@entities/wallet";
 import {
   ADMIN_ACCOUNTING,
-  ADMIN_CHANNELS,
   ADMIN_COMPLAINTS,
   ADMIN_REVIEWS,
   authApi,
@@ -10,7 +9,6 @@ import {
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import {
   ADMIN_ACCOUNTING_TYPE,
-  ADMIN_CHANNEL_STATUS,
   ADMIN_COMPLAINT_STATUS,
   ADMIN_REVIEW_STATUS,
   ADMIN_TRANSACTION_STATUS,
@@ -18,11 +16,8 @@ import {
 import {
   IAdminAccounting,
   IAdminAccountingDepositAccept,
-  IAdminChannelInfo,
-  IAdminChannels,
   IAdminComplaintInfoData,
   IAdminComplaints,
-  IAdminEditChannelData,
   IAdminReviews,
   IAdminTransactionInfo,
   IAdminTransactions,
@@ -56,28 +51,10 @@ export interface getAdminAccountingReq {
   date_sort: dateSortingTypes;
 }
 
-export interface getAdminChannelsReq {
-  page: number;
-  status: ADMIN_CHANNEL_STATUS;
-  elements_on_page: number;
-}
-
 export interface getAdminReviewsReq {
   page: number;
   status: ADMIN_REVIEW_STATUS;
   elements_on_page: number;
-}
-
-export interface adminRejectChannelReq {
-  channel_id: string;
-  reason: string;
-  finish_date: string;
-}
-
-export interface adminBanChannelReq {
-  channel_id: string;
-  reason: string;
-  finish_date: string;
 }
 
 export interface adminAcceptComplaintReq {
@@ -299,109 +276,6 @@ export const adminAPI = authApi.injectEndpoints({
         }),
       },
     ),
-    getAdminChannels: build.query<IAdminChannels, getAdminChannelsReq>({
-      query: (params) => ({
-        url: `/adv-admin/channels`,
-        method: `GET`,
-        params: params,
-      }),
-      transformResponse: (response: IAdminChannels, meta, arg) => {
-        return {
-          ...response,
-          status: arg?.status,
-          isLast:
-            response?.elements ===
-            response?.channels?.length +
-              (response?.page - 1) * INTERSECTION_ELEMENTS.ADMIN_CHANNELS,
-        };
-      },
-      merge: (currentCache, newItems, arg) => {
-        if (arg.arg.page === 1) return newItems;
-
-        const map = new Map(
-          currentCache?.channels.map((c) => [c.channel.id, c]),
-        );
-
-        newItems.channels.forEach((c) => map.set(c.channel.id, c));
-
-        return {
-          ...newItems,
-          channels: Array.from(map.values()),
-        };
-      },
-      serializeQueryArgs: ({ endpointName }) => {
-        return endpointName;
-      },
-      forceRefetch({ currentArg, previousArg }) {
-        return currentArg !== previousArg;
-      },
-      providesTags: [ADMIN_CHANNELS],
-    }),
-    getAdminChannelInfo: build.query<IAdminChannelInfo, { id: string }>({
-      query: (params) => ({
-        url: `/adv-admin/channels/${params.id}`,
-        method: `GET`,
-      }),
-    }),
-    adminChannelEdit: build.mutation<
-      { success: boolean },
-      IAdminEditChannelData
-    >({
-      query: (body) => ({
-        url: "/adv-admin/channel",
-        method: "PUT",
-        body: body,
-      }),
-      invalidatesTags: [ADMIN_CHANNELS],
-    }),
-    adminChannelAccept: build.mutation<
-      { success: boolean },
-      { channel_id: string }
-    >({
-      query: (params) => ({
-        url: `/channel/moderation/accept/${params.channel_id}`,
-        method: `POST`,
-      }),
-      invalidatesTags: [ADMIN_CHANNELS],
-    }),
-    adminChannelReject: build.mutation<
-      { success: boolean },
-      adminRejectChannelReq
-    >({
-      query: (params) => ({
-        url: `/channel/moderation/accept/${params.channel_id}`,
-        method: `POST`,
-      }),
-      invalidatesTags: [ADMIN_CHANNELS],
-    }),
-    adminChannelAcceptRemoderation: build.mutation<
-      { success: boolean },
-      { channel_id: string }
-    >({
-      query: (params) => ({
-        url: `/adv-admin/channel/${params.channel_id}/edit/accept`,
-        method: `PUT`,
-      }),
-      invalidatesTags: [ADMIN_CHANNELS],
-    }),
-    adminChannelUnban: build.mutation<
-      { success: boolean },
-      { channel_id: string }
-    >({
-      query: (params) => ({
-        url: `/channel/moderation/unban/${params.channel_id}`,
-        method: `POST`,
-      }),
-      invalidatesTags: [ADMIN_CHANNELS],
-    }),
-    adminChannelBan: build.mutation<{ success: boolean }, adminBanChannelReq>({
-      query: (params) => ({
-        url: `/channel/moderation/ban`,
-        method: `POST`,
-        body: params,
-      }),
-      invalidatesTags: [ADMIN_CHANNELS],
-    }),
     getAdminReviews: build.query<IAdminReviews, getAdminReviewsReq>({
       query: (params) => ({
         url: `/adv-admin/channel/prepared-reviews`,
@@ -502,14 +376,6 @@ export const {
   useGetAdminTransactionsQuery,
   useGetAdminAccountingQuery,
   useGetAdminTransactionInfoQuery,
-  useGetAdminChannelsQuery,
-  useGetAdminChannelInfoQuery,
-  useAdminChannelAcceptMutation,
-  useAdminChannelRejectMutation,
-  useAdminChannelAcceptRemoderationMutation,
-  useAdminChannelBanMutation,
-  useAdminChannelUnbanMutation,
-  useAdminChannelEditMutation,
   useGetAdminReviewsQuery,
   useAdminAcceptReviewMutation,
   useAdminRejectReviewMutation,

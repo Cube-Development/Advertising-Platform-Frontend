@@ -1,4 +1,7 @@
-import { IAdminChannelData, IAdminEditChannelData } from "@entities/admin";
+import {
+  IAdminChannelData,
+  IAdminEditChannelData,
+} from "@entities/admin-panel";
 import {
   PLATFORM_PARAMETERS,
   useGetChannelAgesQuery,

@@ -1,7 +1,7 @@
 import {
-  adminRejectChannelReq,
+  IAdminRejectChannelReq,
   useAdminChannelRejectMutation,
-} from "@entities/admin";
+} from "@entities/admin-panel";
 import {
   AccountsLoader,
   CustomCloseButton,
@@ -37,7 +37,7 @@ export const RejectChannel: FC<RejectChannelProps> = ({ id }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<adminRejectChannelReq>({
+  } = useForm<IAdminRejectChannelReq>({
     defaultValues: {
       channel_id: id,
       reason: "",

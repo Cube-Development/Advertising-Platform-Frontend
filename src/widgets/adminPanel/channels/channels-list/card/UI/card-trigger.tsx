@@ -2,7 +2,7 @@ import {
   ADMIN_CHANNEL_STATUS,
   ADMIN_CHANNEL_STATUS_LIST,
   IAdminChannelData,
-} from "@entities/admin";
+} from "@entities/admin-panel";
 import { platformTypes } from "@entities/platform";
 import { ChannelCardMenu } from "@features/admin-panel";
 import { useCopyLink } from "@shared/hooks";

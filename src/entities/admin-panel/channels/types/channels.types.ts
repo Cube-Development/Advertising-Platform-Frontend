@@ -63,3 +63,21 @@ interface IAddFormat {
   name: number;
   price: number;
 }
+
+export interface IGetAdminChannelsReq {
+  page: number;
+  status: ADMIN_CHANNEL_STATUS;
+  elements_on_page: number;
+}
+
+export interface IAdminRejectChannelReq {
+  channel_id: string;
+  reason: string;
+  finish_date: string;
+}
+
+export interface IAdminBanChannelReq {
+  channel_id: string;
+  reason: string;
+  finish_date: string;
+}

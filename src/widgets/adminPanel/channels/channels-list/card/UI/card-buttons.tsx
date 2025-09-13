@@ -2,7 +2,7 @@ import {
   ADMIN_CHANNEL_STATUS,
   IAdminChannelData,
   IAdminEditChannelData,
-} from "@entities/admin";
+} from "@entities/admin-panel";
 import {
   BanChannel,
   RejectChannel,

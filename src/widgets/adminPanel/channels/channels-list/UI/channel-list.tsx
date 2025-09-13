@@ -1,11 +1,12 @@
-import { IAdminChannels } from "@entities/admin";
+import { IAdminChannels } from "@entities/admin-panel";
+import { SkeletonAdminChannelCard } from "@entities/admin-panel";
 import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
 import { useAccordionObserver } from "@shared/hooks";
 import { Accordion, ShowMoreBtn, SpinnerLoaderSmall } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { ChannelCard, SkeletonAdminChannelCard } from "../card";
+import { ChannelCard } from "../card";
 import styles from "./styles.module.scss";
 
 interface ChannelsListProps {

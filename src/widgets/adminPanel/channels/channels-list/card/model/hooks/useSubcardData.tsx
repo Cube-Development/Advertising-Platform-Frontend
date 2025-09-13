@@ -2,7 +2,7 @@ import {
   IAdminChannelData,
   IAdminEditChannelData,
   useGetAdminChannelInfoQuery,
-} from "@entities/admin";
+} from "@entities/admin-panel";
 import { IFormat } from "@entities/project";
 import { useEffect, useState } from "react";
 import { UseFormReset } from "react-hook-form";

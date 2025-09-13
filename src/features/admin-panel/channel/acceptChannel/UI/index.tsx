@@ -1,4 +1,4 @@
-import { useAdminChannelAcceptMutation } from "@entities/admin";
+import { useAdminChannelAcceptMutation } from "@entities/admin-panel";
 import { AccountsLoader, MyButton, ToastAction, useToast } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";

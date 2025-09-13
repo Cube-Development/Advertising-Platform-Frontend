@@ -1,4 +1,4 @@
-import { IAdminChannelInfo } from "@entities/admin";
+import { IAdminChannelInfo } from "@entities/admin-panel";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";

@@ -1,7 +1,7 @@
 import {
-  adminBanChannelReq,
+  IAdminBanChannelReq,
   useAdminChannelBanMutation,
-} from "@entities/admin";
+} from "@entities/admin-panel";
 import {
   AccountsLoader,
   CustomCloseButton,
@@ -36,7 +36,7 @@ export const BanChannel: FC<BanChannelProps> = ({ id }) => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<adminBanChannelReq>({
+  } = useForm<IAdminBanChannelReq>({
     defaultValues: {
       channel_id: id,
       reason: "",
