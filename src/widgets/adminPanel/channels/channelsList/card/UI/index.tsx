@@ -1,6 +1,6 @@
 import {
-  ADMIN_CHANNEL_STATUS_LIST,
   ADMIN_CHANNEL_STATUS,
+  ADMIN_CHANNEL_STATUS_LIST,
   IAdminChannelData,
   IAdminEditChannelData,
   useGetAdminChannelInfoQuery,
@@ -16,9 +16,8 @@ import {
 } from "@entities/channel";
 import { platformTypes, platformTypesNum } from "@entities/platform";
 import { IFormat } from "@entities/project";
+import { useFindLanguage } from "@entities/user";
 import {
-  AcceptChannel,
-  AcceptRemoderation,
   BanChannel,
   ChannelCardMenu,
   RejectChannel,
@@ -44,7 +43,6 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import styles from "./styles.module.scss";
 import noUserAvatar from "/images/notFound/noUserAvatar.jpg";
-import { useFindLanguage } from "@entities/user";
 
 interface ChannelCardProps {
   card: IAdminChannelData;
@@ -353,7 +351,8 @@ export const ChannelCard: FC<ChannelCardProps> = ({
               ) : card?.status === ADMIN_CHANNEL_STATUS.MODERATION ? (
                 <>
                   <RejectChannel id={card?.channel?.id} />
-                  <AcceptChannel id={card?.channel?.id} />
+                  <UpdateChannel channel={formState} id={card?.channel?.id} />
+                  {/* <AcceptChannel id={card?.channel?.id} /> */}
                 </>
               ) : card?.status === ADMIN_CHANNEL_STATUS.BANNED ? (
                 <>
@@ -372,12 +371,13 @@ export const ChannelCard: FC<ChannelCardProps> = ({
               ) : card?.status === ADMIN_CHANNEL_STATUS.MODERATION_REJECT ? (
                 <>
                   <RejectChannel id={card?.channel?.id} />
-                  <AcceptChannel id={card?.channel?.id} />
+                  <UpdateChannel channel={formState} id={card?.channel?.id} />
+                  {/* <AcceptChannel id={card?.channel?.id} /> */}
                 </>
               ) : card?.status === ADMIN_CHANNEL_STATUS.REMODERATION ? (
                 <>
                   <div></div>
-                  <AcceptRemoderation id={card?.channel?.id} />
+                  <UpdateChannel channel={formState} id={card?.channel?.id} />
                 </>
               ) : (
                 <></>

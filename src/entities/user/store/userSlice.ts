@@ -58,6 +58,8 @@ export const userSlice = createSlice({
       Cookies.set(ENUM_COOKIES_TYPES.ROLE, logoutRole);
       state.isAuth = false;
       state.role = logoutRole;
+
+      userSlice.caseReducers.logoutEcp(state);
     },
     logoutEcp: (state) => {
       Cookies.remove(ENUM_COOKIES_TYPES.CERTIFICATE_USER_KEY);

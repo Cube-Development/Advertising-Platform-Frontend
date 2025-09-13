@@ -81,40 +81,18 @@ export const UserDataForm: FC<IUserDataFormProps> = ({}) => {
           <div className={styles.data}>
             <div className={styles.row}>
               <span className={styles.label}>
-                {t("profile.user_block.organization_data.fields.type")}
+                {t("profile.user_block.organization_data.fields.inn")}
               </span>
-              <span className={styles.value}>
-                {data?.organization?.type ===
-                ENUM_ORGANIZATION_TYPE.SELF_EMPLOYED
-                  ? t(
-                      "profile.user_block.organization_data.organization_types.self_employed",
-                    )
-                  : data?.organization?.type ===
-                      ENUM_ORGANIZATION_TYPE.LEGAL_ENTITY
-                    ? t(
-                        "profile.user_block.organization_data.organization_types.entity",
-                      )
-                    : t(
-                        "profile.user_block.organization_data.organization_types.individual",
-                      )}
-              </span>
+              <span className={styles.value}>{organization?.TIN}</span>
             </div>
 
-            {organization?.PINFL ? (
-              <div className={styles.row}>
-                <span className={styles.label}>
-                  {t("profile.user_block.organization_data.fields.pinfl")}
-                </span>
-                <span className={styles.value}>{organization?.PINFL}</span>
-              </div>
-            ) : (
-              <div className={styles.row}>
-                <span className={styles.label}>
-                  {t("profile.user_block.organization_data.fields.inn")}
-                </span>
-                <span className={styles.value}>{organization?.TIN}</span>
-              </div>
-            )}
+            <div className={styles.row}>
+              <span className={styles.label}>
+                {t("profile.user_block.organization_data.fields.pinfl")}
+              </span>
+              <span className={styles.value}>{organization?.PINFL}</span>
+            </div>
+
             <div className={styles.row}>
               <span className={styles.label}>
                 {t("profile.user_block.organization_data.fields.status")}
