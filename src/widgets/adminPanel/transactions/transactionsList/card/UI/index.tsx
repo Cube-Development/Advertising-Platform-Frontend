@@ -7,7 +7,7 @@ import {
   ADMIN_TRANSACTION_STATUS,
   useGetAdminTransactionInfoQuery,
 } from "@entities/admin";
-import { TransactionCardMenu } from "@features/adminPanel";
+import { TransactionCardMenu } from "@features/admin-panel";
 import { ArrowSmallVerticalIcon } from "@shared/assets";
 import {
   AccordionContent,

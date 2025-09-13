@@ -2453,6 +2453,44 @@
           "inactive": "Inactive",
           "banned": "Banned",
           "deleted": "Deleted"
+        },
+
+        "ban": {
+          "title": "Channel Ban",
+          "reason": {
+            "title": "Ban Reason",
+            "default_value": "Enter a reason ...",
+            "error": {
+              "required": "field cannot be empty"
+            }
+          },
+          "date": {
+            "title": "Ban End Date",
+            "default_value": "22.09.2023",
+            "description": "Enter the ban end date in the format DD.MM.YYYY.",
+            "error": {
+              "required": "invalid format, enter in the format dd.mm.yyyy: 22.09.2023"
+            }
+          }
+        },
+
+        "reject": {
+          "title": "Channel Rejection",
+          "reason": {
+            "title": "Rejection Reason",
+            "default_value": "Enter a reason ...",
+            "error": {
+              "required": "field cannot be empty"
+            }
+          },
+          "date": {
+            "title": "Rejection End Date",
+            "default_value": "22.09.2023",
+            "description": "Enter the rejection end date in the format DD.MM.YYYY.",
+            "error": {
+              "required": "invalid format, enter in the format dd.mm.yyyy: 22.09.2023"
+            }
+          }
         }
       }
     },

@@ -11,7 +11,7 @@ import { useClearCookiesOnPage } from "@shared/hooks";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { ChannelsList } from "../channelsList";
+import { ChannelsList } from "../channels-list";
 import styles from "./styles.module.scss";
 
 export const Channels: FC = () => {
@@ -64,8 +64,7 @@ export const Channels: FC = () => {
           </div>
           <ChannelsList
             data={data}
-            isLoading={isLoading}
-            isFetching={isFetching}
+            isLoading={isLoading || isFetching}
             handleChange={handleOnChangePage}
           />
         </div>

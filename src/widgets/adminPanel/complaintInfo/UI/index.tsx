@@ -7,7 +7,7 @@ import {
   AcceptComplaint,
   ComplaintDecision,
   RejectComplaint,
-} from "@features/adminPanel";
+} from "@features/admin-panel";
 import { useClearCookiesOnPage } from "@shared/hooks";
 import { ENUM_PATHS } from "@shared/routing";
 import { FC } from "react";

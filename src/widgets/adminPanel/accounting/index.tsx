@@ -14,7 +14,7 @@ import {
 } from "@entities/admin";
 import { dateSortingTypes } from "@entities/platform";
 import { ENUM_WALLETS_TYPE } from "@entities/wallet";
-import { SignAccounting } from "@features/adminPanel";
+import { SignAccounting } from "@features/admin-panel";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { useAppSelector } from "@shared/hooks";
 import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";

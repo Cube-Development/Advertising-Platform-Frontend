@@ -4,7 +4,7 @@ import {
   ADMIN_COMPLAINT_PRIORITY,
   IAdminComplaintData,
 } from "@entities/admin";
-import { ChooseComplaint, SeeComplaint } from "@features/adminPanel";
+import { ChooseComplaint, SeeComplaint } from "@features/admin-panel";
 import { ArrowLongHorizontalIcon } from "@shared/assets";
 import { ENUM_PATHS } from "@shared/routing";
 import { useToast } from "@shared/ui";

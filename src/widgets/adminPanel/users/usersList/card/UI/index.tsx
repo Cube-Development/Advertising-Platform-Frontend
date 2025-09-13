@@ -3,7 +3,7 @@ import {
   IAdminUserData,
   ADMIN_USER_STATUS,
 } from "@entities/admin";
-import { UserCardMenu } from "@features/adminPanel";
+import { UserCardMenu } from "@features/admin-panel";
 import { useToast } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
