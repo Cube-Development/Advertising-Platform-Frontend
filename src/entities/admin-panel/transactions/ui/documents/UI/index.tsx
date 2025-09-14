@@ -1,4 +1,4 @@
-import { IAdminTransactionInfo } from "@entities/admin";
+import { IAdminTransactionInfo } from "@entities/admin-panel";
 import { AddIcon } from "@shared/assets";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";

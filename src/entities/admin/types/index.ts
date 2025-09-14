@@ -3,4 +3,3 @@ export * from "./complaintInfo";
 export * from "./complaints";
 export * from "./profile";
 export * from "./reviews";
-export * from "./transactions";

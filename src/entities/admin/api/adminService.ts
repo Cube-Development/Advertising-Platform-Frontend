@@ -11,7 +11,6 @@ import {
   ADMIN_ACCOUNTING_TYPE,
   ADMIN_COMPLAINT_STATUS,
   ADMIN_REVIEW_STATUS,
-  ADMIN_TRANSACTION_STATUS,
 } from "../config";
 import {
   IAdminAccounting,
@@ -19,8 +18,6 @@ import {
   IAdminComplaintInfoData,
   IAdminComplaints,
   IAdminReviews,
-  IAdminTransactionInfo,
-  IAdminTransactions,
 } from "../types";
 
 export interface getAdminOrderComplaintsReq {
@@ -29,11 +26,6 @@ export interface getAdminOrderComplaintsReq {
   elements_on_page: number;
 }
 
-export interface getAdminTransactionsReq {
-  page: number;
-  status: ADMIN_TRANSACTION_STATUS;
-  elements_on_page: number;
-}
 export interface getAdminAccountingReq {
   page: number;
   from_: string;
@@ -117,50 +109,6 @@ export const adminAPI = authApi.injectEndpoints({
         params: params,
       }),
     }),
-    getAdminTransactions: build.query<
-      IAdminTransactions,
-      getAdminTransactionsReq
-    >({
-      query: (params) => ({
-        url: `/adv-admin/transactions`,
-        method: `GET`,
-        params: params,
-      }),
-      transformResponse: (response: IAdminTransactions, meta, arg) => {
-        return {
-          ...response,
-          status: arg?.status,
-          isLast:
-            response?.elements ===
-            response?.transactions?.length +
-              (response?.page - 1) * INTERSECTION_ELEMENTS.ADMIN_TRANSACTIONS,
-        };
-      },
-      merge: (currentCache, newItems, arg) => {
-        if (arg.arg.page === 1) {
-          return {
-            ...newItems,
-            isLast: newItems?.transactions.length === newItems?.elements,
-          };
-        }
-
-        const newTransactions = [
-          ...currentCache?.transactions,
-          ...newItems?.transactions,
-        ];
-        return {
-          ...newItems,
-          isLast: newTransactions.length === newItems.elements,
-          transactions: newTransactions,
-        };
-      },
-      serializeQueryArgs: ({ endpointName }) => {
-        return endpointName;
-      },
-      forceRefetch({ currentArg, previousArg }) {
-        return currentArg !== previousArg;
-      },
-    }),
     getAdminAccounting: build.query<IAdminAccounting, getAdminAccountingReq>({
       query: (body) => ({
         url: `/adv-admin/accountant/transactions`,
@@ -230,15 +178,6 @@ export const adminAPI = authApi.injectEndpoints({
       }),
       invalidatesTags: [ADMIN_ACCOUNTING],
     }),
-
-    getAdminTransactionInfo: build.query<IAdminTransactionInfo, { id: string }>(
-      {
-        query: (params) => ({
-          url: `/adv-admin/transactions/${params.id}`,
-          method: `GET`,
-        }),
-      },
-    ),
     getAdminReviews: build.query<IAdminReviews, getAdminReviewsReq>({
       query: (params) => ({
         url: `/adv-admin/channel/prepared-reviews`,
@@ -334,9 +273,7 @@ export const adminAPI = authApi.injectEndpoints({
 export const {
   useGetAdminOrderComplaintsQuery,
   useGetAdminOrderComplaintInfoQuery,
-  useGetAdminTransactionsQuery,
   useGetAdminAccountingQuery,
-  useGetAdminTransactionInfoQuery,
   useGetAdminReviewsQuery,
   useAdminAcceptReviewMutation,
   useAdminRejectReviewMutation,

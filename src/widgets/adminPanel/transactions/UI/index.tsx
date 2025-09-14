@@ -2,22 +2,22 @@ import {
   ADMIN_TRANSACTION_FILTER_TABS_LIST,
   ADMIN_TRANSACTION_FORM,
   ADMIN_TRANSACTION_STATUS,
-  getAdminTransactionsReq,
+  IGetAdminTransactionsReq,
   useGetAdminTransactionsQuery,
-} from "@entities/admin";
+} from "@entities/admin-panel";
 import { BarSubFilter } from "@features/other";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { useClearCookiesOnPage } from "@shared/hooks";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { TransactionsList } from "../transactionsList";
+import { TransactionsList } from "../transactions-list";
 import styles from "./styles.module.scss";
 
 export const Transactions: FC = () => {
   useClearCookiesOnPage();
   const { t } = useTranslation();
-  const { watch, setValue } = useForm<getAdminTransactionsReq>({
+  const { watch, setValue } = useForm<IGetAdminTransactionsReq>({
     defaultValues: {
       page: 1,
       status: ADMIN_TRANSACTION_STATUS.PENDING,
@@ -64,8 +64,7 @@ export const Transactions: FC = () => {
           </div>
           <TransactionsList
             data={data}
-            isLoading={isLoading}
-            isFetching={isFetching}
+            isLoading={isLoading || isFetching}
             handleChange={handleOnChangePage}
           />
         </div>

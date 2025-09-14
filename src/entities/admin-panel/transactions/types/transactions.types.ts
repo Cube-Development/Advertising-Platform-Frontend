@@ -1,5 +1,11 @@
 import { ADMIN_TRANSACTION_STATUS, TRANSACTION_ID_STATUS } from "../config";
 
+export interface IGetAdminTransactionsReq {
+  page: number;
+  status: ADMIN_TRANSACTION_STATUS;
+  elements_on_page: number;
+}
+
 export interface IAdminTransactions {
   page: number;
   elements: number;

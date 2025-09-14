@@ -2,7 +2,7 @@ import {
   ADMIN_TRANSACTION_ID_LIST,
   ADMIN_TRANSACTION_STATUS_LIST,
   IAdminTransactionInfo,
-} from "@entities/admin";
+} from "@entities/admin-panel";
 import { useToast } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";

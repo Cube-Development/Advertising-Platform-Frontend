@@ -1,56 +1,30 @@
-import { IAdminTransactions } from "@entities/admin";
 import {
-  ENUM_ACCORDION_TYPES,
-  INTERSECTION_ELEMENTS,
-  PAGE_ANIMATION,
-} from "@shared/config";
+  IAdminTransactions,
+  SkeletonAdminTransactionCard,
+} from "@entities/admin-panel";
+import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
+import { useAccordionObserver } from "@shared/hooks";
 import { Accordion, ShowMoreBtn, SpinnerLoaderSmall } from "@shared/ui";
 import { motion } from "framer-motion";
-import { FC, useEffect, useRef } from "react";
+import { FC, useRef } from "react";
 import { useTranslation } from "react-i18next";
-import { SkeletonAdminTransactionCard, TransactionCard } from "../card";
+import { TransactionCard } from "../card";
 import styles from "./styles.module.scss";
 
 interface TransactionsListProps {
   data?: IAdminTransactions;
   isLoading: boolean;
-  isFetching: boolean;
   handleChange: () => void;
 }
 
 export const TransactionsList: FC<TransactionsListProps> = ({
   data,
   isLoading,
-  isFetching,
   handleChange,
 }) => {
   const { t } = useTranslation();
   const accordionRefs = useRef<Array<HTMLDivElement | null>>([]);
-
-  useEffect(() => {
-    accordionRefs.current.forEach((ref) => {
-      if (ref) {
-        const observer = new MutationObserver(() => {
-          const state = ref.getAttribute("data-state");
-          const icon = ref.querySelector(`.arrow svg`);
-          if (state === ENUM_ACCORDION_TYPES.OPEN) {
-            ref.classList.add(styles.active);
-            if (icon) icon.classList.add("rotate");
-            if (icon) icon.classList.remove("rotate__down");
-          } else {
-            ref.classList.remove(styles.active);
-            if (icon) icon.classList.add("rotate__down");
-            if (icon) icon.classList.remove("rotate");
-          }
-        });
-        observer.observe(ref, {
-          attributes: true,
-          attributeFilter: ["data-state"],
-        });
-        return () => observer.disconnect();
-      }
-    });
-  }, [data]);
+  useAccordionObserver(accordionRefs, [data]);
 
   return (
     <div className={styles.wrapper}>
@@ -84,7 +58,7 @@ export const TransactionsList: FC<TransactionsListProps> = ({
           <p className="truncate">{t("admin_panel.transactions.bar.status")}</p>
         </div>
       </div>
-      {data?.transactions?.length ? (
+      {!!data?.transactions?.length && (
         <Accordion type="single" collapsible>
           <div className={styles.cards}>
             {data?.transactions.map((card, index) => (
@@ -102,7 +76,7 @@ export const TransactionsList: FC<TransactionsListProps> = ({
                 />
               </motion.div>
             ))}
-            {(isFetching || isLoading) &&
+            {isLoading &&
               Array.from({
                 length: INTERSECTION_ELEMENTS.ADMIN_TRANSACTIONS,
               }).map((_, index) => (
@@ -110,17 +84,11 @@ export const TransactionsList: FC<TransactionsListProps> = ({
               ))}
             {!data.isLast && (
               <div className={`${styles.show_more}`} onClick={handleChange}>
-                {isLoading || isFetching ? (
-                  <SpinnerLoaderSmall />
-                ) : (
-                  <ShowMoreBtn />
-                )}
+                {isLoading ? <SpinnerLoaderSmall /> : <ShowMoreBtn />}
               </div>
             )}
           </div>
         </Accordion>
-      ) : (
-        <div></div>
       )}
     </div>
   );
