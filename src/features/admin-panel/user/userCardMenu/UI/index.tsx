@@ -1,16 +1,23 @@
-import { IAdminUserData } from "@entities/admin";
-import { MoreIcon } from "@shared/assets";
+import { IAdminUserData } from "@entities/admin-panel";
+import { ENUM_PATHS } from "@shared/routing";
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@shared/ui";
-import { FC, useState } from "react";
+import {
+  BookOpenCheck,
+  MessageSquareMore,
+  MoreVertical,
+  Pencil,
+  Unlock,
+} from "lucide-react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
 import { Link } from "react-router-dom";
-import { ENUM_PATHS } from "@shared/routing";
 
 interface UserCardMenuProps {
   card: IAdminUserData;
@@ -20,33 +27,38 @@ export const UserCardMenu: FC<UserCardMenuProps> = ({ card }) => {
   const { t } = useTranslation();
   return (
     <DropdownMenu>
-      <DropdownMenuTrigger asChild>
-        <button className={styles.trigger}>
-          <MoreIcon className="icon__grey" />
-        </button>
+      <DropdownMenuTrigger className="h-full p-2 rounded-xl bg-gray-50">
+        <MoreVertical className="text-gray-400" />
       </DropdownMenuTrigger>
       <DropdownMenuContent
-        align="end"
         side="bottom"
         sideOffset={4}
-        className={styles.content}
+        className="!p-0 !rounded-[12px] frame"
+        align="end"
       >
-        <DropdownMenuGroup className={styles.menu}>
-          <div className={styles.item}>
+        <DropdownMenuGroup className="grid">
+          <DropdownMenuItem className="flex items-center gap-2 px-3 py-2 text-xs cursor-pointer">
+            <BookOpenCheck size={12} />
             <span>{t("admin_panel.users.card.menu.details")}</span>
-          </div>
-          <div className={styles.item}>
+          </DropdownMenuItem>
+          <DropdownMenuItem className="flex items-center gap-2 px-3 py-2 text-xs cursor-pointer">
+            <MessageSquareMore size={12} />
             <span>{t("admin_panel.users.card.menu.send_message")}</span>
-          </div>
-          <Link
-            className={styles.item}
-            to={`${ENUM_PATHS.ADMIN_USER_INFO.replace(":id", card?.user_id)}`}
-          >
-            <span>{t("admin_panel.users.card.menu.edit")}</span>
-          </Link>
-          <div className={styles.item}>
+          </DropdownMenuItem>
+          <DropdownMenuItem asChild>
+            <Link
+              className="flex items-center gap-2 px-3 py-2 text-xs cursor-pointer"
+              to={`${ENUM_PATHS.ADMIN_USER_INFO.replace(":id", card?.user_id)}`}
+            >
+              <Pencil size={12} />
+              <span>{t("admin_panel.users.card.menu.edit")}</span>
+            </Link>
+          </DropdownMenuItem>
+          <DropdownMenuSeparator />
+          <DropdownMenuItem className="flex items-center gap-2 px-3 py-2 text-xs cursor-pointer">
+            <Unlock size={12} />
             <span>{t("admin_panel.users.card.menu.unblock")}</span>
-          </div>
+          </DropdownMenuItem>
         </DropdownMenuGroup>
       </DropdownMenuContent>
     </DropdownMenu>

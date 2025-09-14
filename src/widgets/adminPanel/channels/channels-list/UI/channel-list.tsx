@@ -44,7 +44,7 @@ export const ChannelsList: FC<ChannelsListProps> = ({
           <p className="truncate">{t("admin_panel.channels.bar.status")}</p>
         </div>
       </div>
-      {!!data?.channels?.length ? (
+      {!!data?.channels?.length && (
         <Accordion type="single" collapsible>
           <div className={styles.cards}>
             {data?.channels.map((card, index) => (
@@ -73,8 +73,6 @@ export const ChannelsList: FC<ChannelsListProps> = ({
             )}
           </div>
         </Accordion>
-      ) : (
-        <div></div>
       )}
     </div>
   );

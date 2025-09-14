@@ -1,10 +1,10 @@
 import {
+  ADMIN_USER_STATUS,
   ADMIN_USER_STATUS_LIST,
   IAdminUserData,
-  ADMIN_USER_STATUS,
-} from "@entities/admin";
+} from "@entities/admin-panel";
 import { UserCardMenu } from "@features/admin-panel";
-import { useToast } from "@shared/ui";
+import { useCopyLink } from "@shared/hooks";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -16,15 +16,7 @@ interface UserCardProps {
 
 export const UserCard: FC<UserCardProps> = ({ card }) => {
   const { t } = useTranslation();
-  const { toast } = useToast();
-
-  const handleCopyLink = (text: string = "") => {
-    navigator.clipboard.writeText(text);
-    toast({
-      variant: "default",
-      title: t("copy.default"),
-    });
-  };
+  const { copyLink } = useCopyLink();
 
   return (
     <div className={styles.wrapper}>
@@ -34,7 +26,7 @@ export const UserCard: FC<UserCardProps> = ({ card }) => {
         </div>
         <p
           className={`${styles.click} truncate`}
-          onClick={() => handleCopyLink(card?.id)}
+          onClick={() => copyLink(card?.id)}
         >
           # {card?.id}
         </p>
@@ -43,7 +35,7 @@ export const UserCard: FC<UserCardProps> = ({ card }) => {
         <p className="truncate">{card?.name}</p>
       </div>
       <div className={`${styles.column} ${styles.click}`}>
-        <p className="truncate" onClick={() => handleCopyLink(card?.email)}>
+        <p className="truncate" onClick={() => copyLink(card?.email)}>
           {card?.email}
         </p>
       </div>

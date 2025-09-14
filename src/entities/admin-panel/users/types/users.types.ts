@@ -1,5 +1,10 @@
 import { ADMIN_USER_STATUS } from "../config";
 
+export interface IGetAdminUsersReq {
+  elements_on_page: number;
+  last?: string;
+}
+
 export interface IAdminUsers {
   last: string;
   elements: number;
@@ -25,16 +30,4 @@ export interface IAdminUserInfo {
   phone: string;
   language: number;
   created: string;
-}
-
-export enum userField {
-  id = "id",
-  avatar = "avatar",
-  name = "name",
-  email = "email",
-  phone = "phone",
-  language = "language",
-  location = "location",
-  password = "password",
-  telegram = "telegram",
 }

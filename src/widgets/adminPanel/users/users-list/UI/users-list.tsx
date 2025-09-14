@@ -1,10 +1,10 @@
-import { IAdminUsers } from "@entities/admin";
+import { IAdminUsers, SkeletonAdminUserCard } from "@entities/admin-panel";
 import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
 import { ShowMoreBtn, SpinnerLoaderSmall } from "@shared/ui";
 import { motion } from "framer-motion";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import { SkeletonAdminUserCard, UserCard } from "../card";
+import { UserCard } from "../card";
 import styles from "./styles.module.scss";
 
 interface UsersListProps {
@@ -40,7 +40,7 @@ export const UsersList: FC<UsersListProps> = ({
           <p className="truncate">{t("admin_panel.users.bar.status")}</p>
         </div>
       </div>
-      {data?.users?.length ? (
+      {!!data?.users?.length && (
         <div className={styles.cards}>
           {data?.users.map((card, index) => (
             <motion.div
@@ -67,8 +67,6 @@ export const UsersList: FC<UsersListProps> = ({
             </div>
           )}
         </div>
-      ) : (
-        <div></div>
       )}
     </div>
   );

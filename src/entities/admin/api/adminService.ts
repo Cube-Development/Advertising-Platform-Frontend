@@ -21,14 +21,7 @@ import {
   IAdminReviews,
   IAdminTransactionInfo,
   IAdminTransactions,
-  IAdminUserInfo,
-  IAdminUsers,
 } from "../types";
-
-export interface getAdminUsersReq {
-  elements_on_page: number;
-  last?: string;
-}
 
 export interface getAdminOrderComplaintsReq {
   page: number;
@@ -69,36 +62,6 @@ export interface adminRejectComplaintReq {
 
 export const adminAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
-    getAdminUsers: build.query<IAdminUsers, getAdminUsersReq>({
-      query: (params) => ({
-        url: `/adv-admin/users`,
-        method: `GET`,
-        params: params,
-      }),
-      merge: (currentCache, newItems) => {
-        const newUsers = [...currentCache?.users, ...newItems?.users];
-        const uniqueUsers = Array.from(
-          new Map(newUsers.map((user) => [user?.user_id, user])).values(),
-        );
-        return {
-          ...newItems,
-          isLast: uniqueUsers.length === newItems.elements,
-          users: uniqueUsers,
-        };
-      },
-      serializeQueryArgs: ({ endpointName }) => {
-        return endpointName;
-      },
-      forceRefetch({ currentArg, previousArg }) {
-        return currentArg !== previousArg;
-      },
-    }),
-    getAdminUserInfo: build.query<IAdminUserInfo, { id: string }>({
-      query: (params) => ({
-        url: `/adv-admin/user/${params.id}`,
-        method: `GET`,
-      }),
-    }),
     getAdminOrderComplaints: build.query<
       IAdminComplaints,
       getAdminOrderComplaintsReq
@@ -369,8 +332,6 @@ export const adminAPI = authApi.injectEndpoints({
 });
 
 export const {
-  useGetAdminUsersQuery,
-  useGetAdminUserInfoQuery,
   useGetAdminOrderComplaintsQuery,
   useGetAdminOrderComplaintInfoQuery,
   useGetAdminTransactionsQuery,

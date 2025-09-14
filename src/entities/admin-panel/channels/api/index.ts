@@ -1,1 +1,1 @@
-export * from "./admin-channel.service";
+export * from "./admin-channels.service";
