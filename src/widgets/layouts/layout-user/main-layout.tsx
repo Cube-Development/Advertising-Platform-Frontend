@@ -23,12 +23,6 @@ import { useEffect } from "react";
 import { Footer, Header } from "../components";
 import { OfferSignModal, useRenderOfferModal } from "@features/organization";
 
-// const Header = lazy(() =>
-//   import("@pages/layouts/components").then((module) => ({
-//     default: module.Header,
-//   })),
-// );
-
 export const MainLayout = ({ children }: PropsWithChildren) => {
   const { isAuth, role, isAuthEcp } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();

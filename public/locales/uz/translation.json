@@ -2482,15 +2482,34 @@
             "title": "Bloklash sababi",
             "default_value": "Sababni yozing ...",
             "error": {
-              "required": "maydon bo'sh bo'lishi mumkin emas"
+              "required": "maydon bo‘sh bo‘lishi mumkin emas"
             }
           },
           "date": {
-            "title": "Blok tugash sanasi",
+            "title": "Bloklash tugash sanasi",
             "default_value": "22.09.2023",
-            "description": "Blok tugash sanasini quyidagi formatda kiriting: KK.OY.YYYY.",
+            "description": "Bloklash tugash sanasini DD.MM.YYYY formatida kiriting.",
             "error": {
-              "required": "noto'g'ri format, quyidagi formatda kiriting: kk.oy.yyyy, masalan: 22.09.2023"
+              "required": "noto‘g‘ri format, dd.mm.yyyy formatida kiriting: 22.09.2023"
+            }
+          }
+        },
+
+        "reject": {
+          "title": "Kanalni rad etish",
+          "reason": {
+            "title": "Rad etish sababi",
+            "default_value": "Sababni yozing ...",
+            "error": {
+              "required": "maydon bo‘sh bo‘lishi mumkin emas"
+            }
+          },
+          "date": {
+            "title": "Rad etish tugash sanasi",
+            "default_value": "22.09.2023",
+            "description": "Rad etish tugash sanasini DD.MM.YYYY formatida kiriting.",
+            "error": {
+              "required": "noto‘g‘ri format, dd.mm.yyyy formatida kiriting: 22.09.2023"
             }
           }
         }

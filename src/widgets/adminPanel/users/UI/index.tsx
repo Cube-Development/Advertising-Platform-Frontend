@@ -1,16 +1,19 @@
-import { getAdminUsersReq, useGetAdminUsersQuery } from "@entities/admin";
+import {
+  IGetAdminUsersReq,
+  useGetAdminUsersQuery,
+} from "@entities/admin-panel";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { useClearCookiesOnPage } from "@shared/hooks";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { UsersList } from "../usersList";
+import { UsersList } from "../users-list";
 import styles from "./styles.module.scss";
 
 export const Users: FC = () => {
   useClearCookiesOnPage();
   const { t } = useTranslation();
-  const { watch, setValue } = useForm<getAdminUsersReq>({
+  const { watch, setValue } = useForm<IGetAdminUsersReq>({
     defaultValues: { elements_on_page: INTERSECTION_ELEMENTS.ADMIN_USERS },
   });
   const formFields = watch();

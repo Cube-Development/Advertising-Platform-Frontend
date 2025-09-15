@@ -1,5 +1,5 @@
 import { IAdminReviewData } from "@entities/admin";
-import { AcceptReview, RejectReview, SeeReview } from "@features/adminPanel";
+import { AcceptReview, RejectReview, SeeReview } from "@features/admin-panel";
 import { useToast } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";

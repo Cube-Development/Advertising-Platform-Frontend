@@ -1,4 +1,4 @@
-import { useGetAdminUserInfoQuery } from "@entities/admin";
+import { useGetAdminUserInfoQuery } from "@entities/admin-panel";
 import { useClearCookiesOnPage } from "@shared/hooks";
 import { ENUM_PATHS } from "@shared/routing";
 import { FC } from "react";
@@ -30,7 +30,6 @@ export const UserInfo: FC = () => {
     id: user_id || "",
   });
 
-  // const card = AdmiinComplaintInfo;
   return (
     <div className="container">
       <div className={styles.wrapper}>

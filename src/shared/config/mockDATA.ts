@@ -1,34 +1,4 @@
-import {
-  IAdminChannelData,
-  IAdminComplaintData,
-  IAdminComplaintInfoData,
-  IAdminReviewData,
-  IAdminTransactionData,
-  IAdminUserData,
-} from "@entities/admin";
 import { IAdminProfileData } from "@entities/admin/types/profile";
-import {
-  ENUM_CHANNEL_STATUS,
-  IActiveChannel,
-  IBlockedChannel,
-  IChannelBlogger,
-  IInactiveChannel,
-  IModerationChannel,
-  IModerationRejectChannel,
-  IReviewCard,
-} from "@entities/channel";
-import { IBloggerOffers } from "@entities/offer";
-import {
-  IAdvManagerProjectsDev,
-  IAdvManagerProjectsDevCard,
-  IAdvProjects,
-  IAdvSubprojects,
-  IAdvTemplateProjects,
-  IFilterSearch,
-  IManagerNewProjects,
-  IManagerProjects,
-} from "@entities/project";
-import { IUserDataNew } from "@entities/user";
 
 export const viewsAdvProjects = {
   count: 29,
