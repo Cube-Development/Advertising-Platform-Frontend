@@ -37,6 +37,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({
     card,
     reset,
   });
+
   return (
     <AccordionItem
       value={`item-adminChannel-${card?.channel?.id}`}
@@ -129,9 +130,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({
                 />
               </div>
             </div>
-            <div className={styles.buttons}>
-              <CardButtons card={card} formState={formState} />
-            </div>
+            <CardButtons card={card} formState={formState} />
           </>
         )}
       </AccordionContent>

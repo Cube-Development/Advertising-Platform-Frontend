@@ -1,7 +1,10 @@
 import {
+  adminChannelsAPI,
   IAdminEditChannelData,
   useAdminChannelEditMutation,
 } from "@entities/admin-panel";
+import { ADMIN_CHANNELS } from "@shared/api";
+import { useAppDispatch } from "@shared/hooks";
 import { AccountsLoader, MyButton, ToastAction, useToast } from "@shared/ui";
 import { ButtonHTMLAttributes, forwardRef } from "react";
 import { useTranslation } from "react-i18next";
@@ -16,12 +19,14 @@ export const UpdateChannel = forwardRef<HTMLButtonElement, UpdateChannelProps>(
     const { t } = useTranslation();
     const { toast } = useToast();
     const [editChannel, { isLoading }] = useAdminChannelEditMutation();
+    const dispatch = useAppDispatch();
 
     const handleOnClick = async () => {
       if (isLoading || !channel || !id) return;
 
       try {
         await editChannel({ ...channel, channel_id: id }).unwrap();
+        dispatch(adminChannelsAPI.util.invalidateTags([ADMIN_CHANNELS]));
         toast({
           variant: "success",
           title: t("toasts.admin.channel.edit.success"),

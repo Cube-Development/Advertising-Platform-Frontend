@@ -29,7 +29,6 @@ export const useChannelData = ({ card }: Props) => {
   };
 
   let defaultValues = {
-    insertion_code: "",
     male: PLATFORM_PARAMETERS.defaultSexMale,
     female: 100 - PLATFORM_PARAMETERS.defaultSexMale,
     category: undefined,

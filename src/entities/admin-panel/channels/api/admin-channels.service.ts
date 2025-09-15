@@ -65,7 +65,6 @@ export const adminChannelsAPI = authApi.injectEndpoints({
         method: "PUT",
         body: body,
       }),
-      invalidatesTags: [ADMIN_CHANNELS],
     }),
     adminChannelAccept: build.mutation<
       { success: boolean },
