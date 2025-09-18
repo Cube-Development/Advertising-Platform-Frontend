@@ -4,6 +4,7 @@ import {
   ICreateDepositResponse,
   ICreatePaymentRequest,
   ICreatePaymentResponse,
+  ICreateSpending,
   ICreateWithdrawRequest,
   IGetBalance,
   IHistoryRequest,
@@ -107,6 +108,13 @@ export const walletAPI = authApi.injectEndpoints({
         params: params,
       }),
     }),
+    createDepositPayme: build.mutation<string, ICreateSpending>({
+      query: (params) => ({
+        url: `/wallet/deposit/payme`,
+        method: "POST",
+        params: params,
+      }),
+    }),
   }),
 });
 
@@ -117,4 +125,5 @@ export const {
   useCreateDepositRequestMutation,
   useCreateDepositMutation,
   useCreateWithdrawMutation,
+  useCreateDepositPaymeMutation,
 } = walletAPI;
