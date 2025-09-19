@@ -115,6 +115,13 @@ export const walletAPI = authApi.injectEndpoints({
         params: params,
       }),
     }),
+    createDepositClick: build.mutation<string, ICreateSpending>({
+      query: (params) => ({
+        url: `/wallet/deposit/click`,
+        method: "POST",
+        params: params,
+      }),
+    }),
   }),
 });
 
@@ -126,4 +133,5 @@ export const {
   useCreateDepositMutation,
   useCreateWithdrawMutation,
   useCreateDepositPaymeMutation,
+  useCreateDepositClickMutation,
 } = walletAPI;

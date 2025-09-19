@@ -2,17 +2,12 @@ import {
   paymentTypes,
   TOP_UP_AMOUNT,
   topup,
+  useCreateDepositClickMutation,
   useCreateDepositPaymeMutation,
 } from "@entities/wallet";
 import { PaymentCard } from "@features/wallet";
 import { CardIcon } from "@shared/assets";
-import {
-  cn,
-  CustomCheckbox,
-  CustomInput,
-  IParameterData,
-  useToast,
-} from "@shared/ui";
+import { cn, CustomCheckbox, CustomInput, IParameterData } from "@shared/ui";
 import {
   formatWithOutSpaces,
   formatWithSpaces,
@@ -23,7 +18,6 @@ import { InfoIcon } from "lucide-react";
 import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.scss";
 
 interface IOnlineBankingData {
@@ -34,11 +28,11 @@ interface IOnlineBankingData {
 }
 
 export const CreditCard: FC = () => {
-  const { toast } = useToast();
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const [payme, { isLoading: isLoadingPayme }] =
     useCreateDepositPaymeMutation();
+  const [click, { isLoading: isLoadingClick }] =
+    useCreateDepositClickMutation();
 
   const {
     watch,
@@ -67,19 +61,24 @@ export const CreditCard: FC = () => {
 
   const onSubmit: SubmitHandler<IOnlineBankingData> = async (data) => {
     if (isLoadingPayme) return;
+    let payment;
 
     if (data?.way_type === paymentTypes.payme) {
-      try {
-        const url = await payme({
-          amount: formatWithOutSpaces(data?.amount?.toString()),
-        }).unwrap();
-        if (url) {
-          window.open(url, "_blank"); // открытие в новой вкладке
-        }
-        reset();
-      } catch (error) {
-        console.log("[On Submit] error: ", error);
+      payment = payme;
+    } else {
+      payment = click;
+    }
+
+    try {
+      const url = await payment({
+        amount: formatWithOutSpaces(data?.amount?.toString()),
+      }).unwrap();
+      if (url) {
+        window.open(url, "_blank"); // открытие в новой вкладке
       }
+      reset();
+    } catch (error) {
+      console.log("[On Submit] error: ", error);
     }
   };
 
