@@ -14,7 +14,7 @@ interface Props {
 
 export const useSubcardData = ({ card, reset }: Props) => {
   const [isSubcardOpen, setSubcardOpen] = useState(false);
-
+  const [startData, setStartData] = useState<IAdminEditChannelData>();
   const { data: channel, isLoading } = useGetAdminChannelInfoQuery(
     { id: card?.channel?.id },
     {
@@ -24,7 +24,8 @@ export const useSubcardData = ({ card, reset }: Props) => {
 
   useEffect(() => {
     if (channel) {
-      reset({
+      const data = {
+        channel_id: card?.channel?.id,
         male: channel?.male,
         female: channel?.female,
         category: channel?.category?.id,
@@ -37,6 +38,13 @@ export const useSubcardData = ({ card, reset }: Props) => {
           name: format?.format,
           price: format?.price,
         })),
+      };
+
+      setStartData({
+        ...data,
+      });
+      reset({
+        ...data,
       });
     }
   }, [channel, reset]);
@@ -45,6 +53,7 @@ export const useSubcardData = ({ card, reset }: Props) => {
     isSubcardOpen,
     setSubcardOpen,
     channel,
+    startData,
     isLoading,
   };
 };
