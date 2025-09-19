@@ -1,15 +1,13 @@
-import { paymentTypes, TOP_UP_AMOUNT, topup } from "@entities/wallet";
+import {
+  paymentTypes,
+  TOP_UP_AMOUNT,
+  topup,
+  useCreateDepositClickMutation,
+  useCreateDepositPaymeMutation,
+} from "@entities/wallet";
 import { PaymentCard } from "@features/wallet";
 import { CardIcon } from "@shared/assets";
-import { ENUM_PATHS } from "@shared/routing";
-import {
-  cn,
-  CustomCheckbox,
-  CustomInput,
-  IParameterData,
-  ToastAction,
-  useToast,
-} from "@shared/ui";
+import { cn, CustomCheckbox, CustomInput, IParameterData } from "@shared/ui";
 import {
   formatWithOutSpaces,
   formatWithSpaces,
@@ -20,7 +18,6 @@ import { InfoIcon } from "lucide-react";
 import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.scss";
 
 interface IOnlineBankingData {
@@ -31,9 +28,11 @@ interface IOnlineBankingData {
 }
 
 export const CreditCard: FC = () => {
-  const { toast } = useToast();
   const { t } = useTranslation();
-  const navigate = useNavigate();
+  const [payme, { isLoading: isLoadingPayme }] =
+    useCreateDepositPaymeMutation();
+  const [click, { isLoading: isLoadingClick }] =
+    useCreateDepositClickMutation();
 
   const {
     watch,
@@ -45,7 +44,6 @@ export const CreditCard: FC = () => {
   } = useForm<IOnlineBankingData>({
     mode: "onChange",
     defaultValues: {
-      legal_id: "3754ba1c-132e-4c2d-b4fd-943c32de8a0c",
       way_type: paymentTypes.payme,
       amount: "",
       is_fee_included: false,
@@ -62,29 +60,26 @@ export const CreditCard: FC = () => {
     );
 
   const onSubmit: SubmitHandler<IOnlineBankingData> = async (data) => {
-    // const formData = {
-    //   ...data,
-    //   amount: formatWithOutSpaces(data?.amount),
-    // };
-    // !isLoading &&
-    //   paymentDeposit(formData)
-    //     .unwrap()
-    //     .then(() => {
-    //       reset();
-    //       toast({
-    //         variant: "success",
-    //         title: `${t("toasts.wallet.topup.success")}: ${formData.amount.toLocaleString()} ${t("symbol")}`,
-    //       });
-    //       navigate(ENUM_PATHS.MAIN);
-    //     })
-    //     .catch((error) => {
-    //       toast({
-    //         variant: "error",
-    //         title: t("toasts.wallet.topup.error"),
-    //         action: <ToastAction altText="Ok">Ok</ToastAction>,
-    //       });
-    //       console.error("Ошибка payment/deposit: ", error);
-    //     });
+    if (isLoadingPayme) return;
+    let payment;
+
+    if (data?.way_type === paymentTypes.payme) {
+      payment = payme;
+    } else {
+      payment = click;
+    }
+
+    try {
+      const url = await payment({
+        amount: formatWithOutSpaces(data?.amount?.toString()),
+      }).unwrap();
+      if (url) {
+        window.open(url, "_blank"); // открытие в новой вкладке
+      }
+      reset();
+    } catch (error) {
+      console.log("[On Submit] error: ", error);
+    }
   };
 
   const amountText = t("wallet.topup.amount", {
@@ -184,11 +179,6 @@ export const CreditCard: FC = () => {
           </div>
         </div>
         <PaymentCard />
-        <div className="backdrop-blur-[10px] absolute top-0 right-0 w-full h-full bg-gray-300/10 z-10 flex items-center justify-center rounded-[24px]">
-          <p className="!text-gray-500 md:!text-sm !text-xs !font-medium">
-            Doesn't work yet :(
-          </p>
-        </div>
       </form>
     </div>
   );

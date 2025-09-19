@@ -29,7 +29,7 @@ export const WalletsCard: FC = ({}) => {
 
   const WALLETS: {
     amount: number;
-    variant: "deposit" | "profit" | "spending";
+    variant: "deposit" | "profit" | "individual";
     type: ENUM_WALLETS_TYPE;
   }[] = [
     {
@@ -44,7 +44,7 @@ export const WalletsCard: FC = ({}) => {
     },
     {
       amount: spending_wallet,
-      variant: "spending",
+      variant: "individual",
       type: ENUM_WALLETS_TYPE.SPENDING,
     },
   ];

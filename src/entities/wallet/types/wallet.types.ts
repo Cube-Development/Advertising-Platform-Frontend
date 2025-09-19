@@ -51,3 +51,7 @@ export interface IWalletOperations {
     id?: PROFILE_STATUS;
   };
 }
+
+export interface ICreateSpending {
+  amount: number;
+}
