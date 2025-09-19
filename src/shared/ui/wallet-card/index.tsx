@@ -6,7 +6,7 @@ import { cn } from "../shadcn-ui/lib/utils";
 interface Props extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   amount: number;
   isActive?: boolean;
-  variant?: "deposit" | "spending" | "profit";
+  variant?: "deposit" | "individual" | "profit";
 }
 
 export const WalletCard: FC<Props> = ({
@@ -27,7 +27,7 @@ export const WalletCard: FC<Props> = ({
       texts.description = t("wallets.deposit.description");
       colorStyle = styles.deposit;
       break;
-    case "spending":
+    case "individual":
       texts.title = t("wallets.spending.title");
       texts.description = t("wallets.spending.description");
       colorStyle = styles.spending;

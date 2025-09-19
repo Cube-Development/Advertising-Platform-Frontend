@@ -41,7 +41,7 @@ export const WalletsBar: FC<IWalletsBarProps> = ({
   };
   const ALL_WALLETS: {
     amount: number;
-    variant: "deposit" | "profit" | "spending";
+    variant: "deposit" | "profit" | "individual";
     type: ENUM_WALLETS_TYPE;
   }[] = [
     {
@@ -56,7 +56,7 @@ export const WalletsBar: FC<IWalletsBarProps> = ({
     },
     {
       amount: spending_wallet,
-      variant: "spending",
+      variant: "individual",
       type: ENUM_WALLETS_TYPE.SPENDING,
     },
   ];
