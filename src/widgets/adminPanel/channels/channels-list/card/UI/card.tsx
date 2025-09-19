@@ -38,8 +38,9 @@ export const ChannelCard: FC<ChannelCardProps> = ({
       card,
       reset,
     });
+
   const { isUpdate } = useCheckUpdate(formState, startData);
-  console.log("card", isUpdate);
+
   return (
     <AccordionItem
       value={`item-adminChannel-${card?.channel?.id}`}
