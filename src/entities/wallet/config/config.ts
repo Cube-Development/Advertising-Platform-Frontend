@@ -1,6 +1,6 @@
 export const enum topup {
   commission = 3,
-  min = 50000,
+  min = 5,
   max = 1000000000,
 }
 
