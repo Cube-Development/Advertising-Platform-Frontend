@@ -50,7 +50,7 @@ export const useRevalidateCash = () => {
   const dispatch = useAppDispatch();
 
   const revalidateCash = async (data: any) => {
-    const { method, project_id, order_id, channel_id, id } = data;
+    const { method, project_id, order_id, channel_id } = data;
 
     if (method === notificationsTypes.notification_create_deposit) {
       // Создан депозит
@@ -66,7 +66,6 @@ export const useRevalidateCash = () => {
         dispatch,
         trigger: triggerAdvManagerProjects,
         language,
-
         status: ENUM_ADV_MANAGER_PROJECT_STATUS.DEVELOP,
       });
       await invalidateHistory({ dispatch, trigger: triggerHistory, language });
@@ -130,7 +129,7 @@ export const useRevalidateCash = () => {
         dispatch,
         trigger: triggerManagerProjects,
         language,
-        project_id: id,
+        project_id,
       });
     } else if (method === notificationsTypes.new_my_project) {
       // Рекламодатель создал сам новый проект
@@ -263,7 +262,6 @@ export const useRevalidateCash = () => {
         dispatch,
         trigger: triggerOffers,
         language,
-
         status: ENUM_OFFER_STATUS.MODERATION,
         skip_views: true,
       });
@@ -364,7 +362,6 @@ export const useRevalidateCash = () => {
     // Ревалидация каналов у блогера при изменении статусов канала
     else if (method === notificationsTypes.notification_unban_channel) {
       // Уведомление блогеру о разблокировке канала
-      console.log(notificationsTypes.notification_unban_channel);
       await invalidateBloggerChannelsModerationDecision({
         dispatch,
         trigger: triggerChannels,
@@ -377,7 +374,6 @@ export const useRevalidateCash = () => {
       method === notificationsTypes.notification_moderation_unblock_channel
     ) {
       // Уведомление блогеру о разблокировке канала
-      console.log(notificationsTypes.notification_moderation_unblock_channel);
       await invalidateBloggerChannelsModerationDecision({
         dispatch,
         trigger: triggerChannels,
@@ -388,7 +384,6 @@ export const useRevalidateCash = () => {
       });
     } else if (method === notificationsTypes.notification_ban_channel) {
       // Уведомление блогеру о блокировке канала
-      console.log(notificationsTypes.notification_ban_channel);
       await invalidateBloggerChannelsModerationDecision({
         dispatch,
         trigger: triggerChannels,
@@ -401,7 +396,6 @@ export const useRevalidateCash = () => {
       method === notificationsTypes.notification_moderation_accept_channel
     ) {
       // Уведомление блогеру о прохождении модерации канала
-      console.log(notificationsTypes.notification_moderation_accept_channel);
       await invalidateBloggerChannelsModerationDecision({
         dispatch,
         trigger: triggerChannels,
@@ -414,7 +408,6 @@ export const useRevalidateCash = () => {
       method === notificationsTypes.notification_moderation_reject_channel
     ) {
       // Уведомление блогеру о отклонении модерации канала
-      console.log(notificationsTypes.notification_moderation_reject_channel);
       await invalidateBloggerChannelsModerationDecision({
         dispatch,
         trigger: triggerChannels,
@@ -427,9 +420,6 @@ export const useRevalidateCash = () => {
       method === notificationsTypes.notification_request_to_edit_channel_accept
     ) {
       // Уведомление блогеру о одобрении редактирования канала
-      console.log(
-        notificationsTypes.notification_request_to_edit_channel_accept,
-      );
       await invalidateBloggerChannelsModerationDecision({
         dispatch,
         trigger: triggerChannels,
@@ -443,9 +433,6 @@ export const useRevalidateCash = () => {
       notificationsTypes.notification_request_to_edit_channel_rejected
     ) {
       // Уведомление блогеру об отклонении редактирования канала
-      console.log(
-        notificationsTypes.notification_request_to_edit_channel_rejected,
-      );
       await invalidateBloggerChannelsModerationDecision({
         dispatch,
         trigger: triggerChannels,
@@ -457,7 +444,6 @@ export const useRevalidateCash = () => {
     }
     //
     else if (method === notificationsTypes.notification_publish_post) {
-      console.log(notificationsTypes.notification_publish_post);
       dispatch(
         advProjectsAPI.util.invalidateTags([ADV_PROJECTS, VIEWS_ADVERTISER]),
       );

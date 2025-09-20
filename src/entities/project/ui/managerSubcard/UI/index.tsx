@@ -245,16 +245,8 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
             ) : subcard?.api_status === orderStatus.completed ||
               subcard?.api_status === orderStatus.adv_accept ? (
               <div className={styles.subcard__completed}>
-                {statusFilter === ENUM_MANAGER_PROJECT_STATUS.COMPLETED ? (
-                  <p>{t(`orders_manager.order_status.completed.title2`)}</p>
-                ) : (
-                  <>
-                    <p>{t(`orders_manager.order_status.completed.title`)}</p>
-                    {!subcard?.is_review && (
-                      <FeedbackBtn order_id={subcard?.id} />
-                    )}
-                  </>
-                )}
+                <p>{t(`orders_manager.order_status.completed.title2`)}</p>
+                {!subcard?.is_review && <FeedbackBtn order_id={subcard?.id} />}
               </div>
             ) : subcard?.api_status === orderStatus.post_review ? (
               <div className={styles.subcard__posted}>
