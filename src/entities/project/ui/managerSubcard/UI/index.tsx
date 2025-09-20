@@ -106,7 +106,7 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
               <img src={subcard?.avatar} alt="" />
             </Link>
             <div className={styles.subcard__left__description__rate}>
-              <RatingIcon rate={subcard?.grade || 0} />
+              <RatingIcon rate={subcard?.rate || 0} />
             </div>
             <div className={styles.subcard__left__description__title}>
               <p className="truncate">{subcard?.name}</p>

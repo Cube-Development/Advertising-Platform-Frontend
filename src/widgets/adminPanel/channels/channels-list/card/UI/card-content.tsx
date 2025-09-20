@@ -15,7 +15,7 @@ export const CardContent: FC<ICardContentProps> = ({ channel }) => {
         <div className={styles.info__top}>
           <div className={styles.block}>
             <p>{t("admin_panel.channels.card.rate")}:</p>
-            <span>{channel?.grade || 0}</span>
+            <span>{channel?.rate || 0}</span>
           </div>
           <div className={styles.block}>
             <p>{t("admin_panel.channels.card.complete")}:</p>

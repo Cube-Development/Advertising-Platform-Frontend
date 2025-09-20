@@ -36,7 +36,7 @@ export interface IAdminChannelInfo {
   age: IOption[];
   region: IOption[];
   format: IFormat[];
-  grade: number;
+  rate: number;
   complete: number;
   complaints: number;
   on_hold: number;

@@ -8,7 +8,6 @@ import {
 import { platformToIcon, useGetPostQuery } from "@entities/project";
 import { ENUM_ROLES } from "@entities/user";
 import { AcceptOffer, RejectOffer, SeePost, SendLink } from "@features/offer";
-import { SeeReason } from "@features/other";
 import { MoreIcon } from "@shared/assets";
 import { ENUM_PATHS } from "@shared/routing";
 import { CountdownTimer, useToast } from "@shared/ui";
@@ -121,7 +120,17 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
             <div className={styles.card__active__buttons}>
               <SeePost post={post!} />
               <div
-                className={`${CheckDate(typeof card?.publish_date === "object" ? card?.publish_date.date_to : card?.publish_date) ? "" : "deactive"}`}
+                className={`${
+                  CheckDate(
+                    typeof card?.publish_date === "object"
+                      ? card?.publish_date.date_to
+                      : card?.publish_date,
+                    card?.publish_time?.time_from,
+                    card?.publish_time?.time_to,
+                  )
+                    ? ""
+                    : "deactive"
+                }`}
               >
                 <SendLink order_id={card.id} />
               </div>
@@ -144,7 +153,8 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
               <div>
                 <RejectOffer order_id={card.id} />
                 {typeof card?.publish_date === "object" &&
-                "date_from" in card?.publish_date ? (
+                card?.publish_date &&
+                "date_from" in card.publish_date ? (
                   <AcceptOffer order_id={card.id} dates={card.publish_date} />
                 ) : (
                   <AcceptOffer order_id={card.id} />

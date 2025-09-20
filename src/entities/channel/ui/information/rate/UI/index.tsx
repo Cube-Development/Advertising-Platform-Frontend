@@ -47,9 +47,9 @@ export const Rate: FC<RateProps> = ({ card, activeType, onChange }) => {
       <div className={styles.card}>
         <div className={styles.left}>
           <div className={styles.rate__wrapper}>
-            <p>{card?.grade.toFixed(1)}</p>
+            <p>{card?.rate?.toFixed(1)}</p>
             <div className={styles.rate}>
-              <RatingIcon rate={card?.grade || 0} />
+              <RatingIcon rate={card?.rate || 0} />
               <span>
                 {card?.common_count} {t("channel.reviews.text")}
               </span>

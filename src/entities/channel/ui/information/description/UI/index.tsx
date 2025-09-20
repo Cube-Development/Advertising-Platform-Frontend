@@ -118,7 +118,7 @@ export const Description: FC<DescriptionProps> = ({ card }) => {
         <div className={styles.channel__logo}>
           <div className={styles.logo}>
             <img src={card?.avatar} alt="" />
-            <RatingIcon rate={card?.grade || 0} />
+            <RatingIcon rate={card?.rate || 0} />
           </div>
           <button className={styles.add_channel}>
             <p>{t("channel.description.button")}</p>

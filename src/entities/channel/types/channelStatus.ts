@@ -24,7 +24,7 @@ export interface IActiveChannel {
   avatar: string;
   channel_orders: IActiveChannelOrders;
   tags: number[];
-  grade?: number;
+  rate?: number;
 }
 
 export interface IActiveChannelOrders {
@@ -43,7 +43,7 @@ export interface IInactiveChannel {
   avatar: string;
   channel_orders: InactiveChannelOrders;
   tags: number[];
-  grade?: number;
+  rate?: number;
 }
 
 export interface InactiveChannelOrders {

@@ -98,7 +98,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
               {statusFilter === ENUM_CHANNEL_STATUS.ACTIVE ||
               statusFilter === ENUM_CHANNEL_STATUS.INACTIVE ? (
                 <RatingIcon
-                  rate={(card as IActiveChannel | IInactiveChannel)?.grade || 0}
+                  rate={(card as IActiveChannel | IInactiveChannel)?.rate || 0}
                 />
               ) : (
                 <></>

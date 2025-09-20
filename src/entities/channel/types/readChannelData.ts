@@ -20,7 +20,7 @@ export interface IReadChannelData {
   subscribers: number;
   order_completed_count: number;
   published_posts: number;
-  grade: number;
+  rate: number;
   common_count: number;
   rating_type: IRatingType[];
   selected_format?: IFormat;
