@@ -6,7 +6,6 @@ export const useCheckUpdate = (
   newData: IAdminEditChannelData,
   oldData: IAdminEditChannelData | undefined,
 ) => {
-  console.log("useCheckUpdate", newData, oldData);
   const isUpdate = useMemo(() => {
     return !isEqual(newData, oldData);
   }, [newData, oldData]);

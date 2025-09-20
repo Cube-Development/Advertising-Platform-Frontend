@@ -16,7 +16,9 @@ export const adminUsersAPI = authApi.injectEndpoints({
         );
         return {
           ...newItems,
-          isLast: uniqueUsers.length === newItems.elements,
+          isLast:
+            uniqueUsers.length === newItems.elements ||
+            newItems.users.length === 0,
           users: uniqueUsers,
         };
       },
