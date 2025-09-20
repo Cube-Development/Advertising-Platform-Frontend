@@ -106,7 +106,9 @@ export const RejectChannel: FC<RejectChannelProps> = ({ id }) => {
                 value={formState?.reason}
                 type="text"
                 error={errors?.reason}
-                error_message={t(errors?.reason?.message || "")}
+                error_message={
+                  errors?.reason?.message ? t(errors?.reason?.message) : ""
+                }
               />
               <CustomInput
                 {...register("finish_date", DATE_VALIDATE?.validate)}
@@ -117,7 +119,11 @@ export const RejectChannel: FC<RejectChannelProps> = ({ id }) => {
                 value={formState?.finish_date}
                 type="text"
                 error={errors?.finish_date}
-                error_message={t(errors?.finish_date?.message || "")}
+                error_message={
+                  errors?.finish_date?.message
+                    ? t(errors?.finish_date?.message)
+                    : ""
+                }
               />
             </div>
           </div>

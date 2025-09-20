@@ -17,9 +17,14 @@ import styles from "./styles.module.scss";
 interface ICardButtonsProps {
   card: IAdminChannelData;
   formState: IAdminEditChannelData;
+  isEdited?: boolean;
 }
 
-export const CardButtons: FC<ICardButtonsProps> = ({ card, formState }) => {
+export const CardButtons: FC<ICardButtonsProps> = ({
+  card,
+  formState,
+  isEdited = true,
+}) => {
   return (
     <div className={styles.buttons}>
       {card?.status === ADMIN_CHANNEL_STATUS.ACTIVE ? (
@@ -30,14 +35,22 @@ export const CardButtons: FC<ICardButtonsProps> = ({ card, formState }) => {
       ) : card?.status === ADMIN_CHANNEL_STATUS.MODERATION ? (
         <>
           <RejectChannel id={card?.channel?.id} />
-          <AcceptChannel id={card?.channel?.id} channel={formState} />
+          <AcceptChannel
+            id={card?.channel?.id}
+            channel={formState}
+            isEdited={isEdited}
+          />
         </>
       ) : card?.status === ADMIN_CHANNEL_STATUS.BANNED ? (
         <>
-          <UnbanChannel id={card?.channel?.id} />
-          <UpdateChannel
-            channel={formState}
+          <UnbanChannel
             id={card?.channel?.id}
+            channel={formState}
+            isEdited={isEdited}
+          />
+          <UpdateChannel
+            id={card?.channel?.id}
+            channel={formState}
             disabled={true}
           />
         </>
@@ -49,7 +62,11 @@ export const CardButtons: FC<ICardButtonsProps> = ({ card, formState }) => {
       ) : card?.status === ADMIN_CHANNEL_STATUS.MODERATION_REJECT ? (
         <>
           <RejectChannel id={card?.channel?.id} />
-          <AcceptChannel id={card?.channel?.id} channel={formState} />
+          <AcceptChannel
+            id={card?.channel?.id}
+            channel={formState}
+            isEdited={isEdited}
+          />
         </>
       ) : card?.status === ADMIN_CHANNEL_STATUS.REMODERATION ? (
         <>

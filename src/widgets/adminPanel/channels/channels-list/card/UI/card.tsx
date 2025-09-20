@@ -5,7 +5,7 @@ import { SelectDescription, SelectOptions, SelectSex } from "@features/other";
 import { AccordionContent, AccordionItem } from "@shared/ui";
 import { FC, MutableRefObject } from "react";
 import { useChannelData } from "../model";
-import { useSubcardData } from "../model/hooks";
+import { useCheckUpdate, useSubcardData } from "../model";
 import { CardButtons } from "./card-buttons";
 import { CardContent } from "./card-content";
 import { CardTrigger } from "./card-trigger";
@@ -33,10 +33,13 @@ export const ChannelCard: FC<ChannelCardProps> = ({
     reset,
   } = useChannelData({ card });
 
-  const { isSubcardOpen, setSubcardOpen, channel, isLoading } = useSubcardData({
-    card,
-    reset,
-  });
+  const { isSubcardOpen, setSubcardOpen, channel, isLoading, startData } =
+    useSubcardData({
+      card,
+      reset,
+    });
+
+  const { isUpdate } = useCheckUpdate(formState, startData);
 
   return (
     <AccordionItem
@@ -60,7 +63,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({
               title={"add_platform.description.description.title"}
               text={"add_platform.description.description.text"}
               placeholder={"add_platform.description.description.default_value"}
-              defaultValues={channel?.description}
+              defaultValues={formState?.description}
             />
             <div className={styles.parameters}>
               <div className={styles.block}>
@@ -130,7 +133,11 @@ export const ChannelCard: FC<ChannelCardProps> = ({
                 />
               </div>
             </div>
-            <CardButtons card={card} formState={formState} />
+            <CardButtons
+              card={card}
+              formState={formState}
+              isEdited={isUpdate}
+            />
           </>
         )}
       </AccordionContent>

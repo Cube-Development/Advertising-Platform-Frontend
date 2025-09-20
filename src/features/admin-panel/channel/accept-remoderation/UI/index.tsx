@@ -1,8 +1,10 @@
 import {
+  adminChannelsAPI,
   IAdminEditChannelData,
-  useAdminChannelAcceptRemoderationMutation,
   useAdminChannelEditMutation,
 } from "@entities/admin-panel";
+import { ADMIN_CHANNELS } from "@shared/api";
+import { useAppDispatch } from "@shared/hooks";
 import { AccountsLoader, MyButton, ToastAction, useToast } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -18,17 +20,15 @@ export const AcceptRemoderation: FC<AcceptRemoderationProps> = ({
 }) => {
   const { toast } = useToast();
   const { t } = useTranslation();
-  const [editChannel, { isLoading: isLoadingEdit }] =
-    useAdminChannelEditMutation();
-  const [acceptChannel, { isLoading }] =
-    useAdminChannelAcceptRemoderationMutation();
+  const [editChannel, { isLoading }] = useAdminChannelEditMutation();
+  const dispatch = useAppDispatch();
 
   const handleOnClick = async () => {
-    if (isLoading || isLoadingEdit || !channel || !id) return;
+    if (isLoading || !channel || !id) return;
 
     try {
       await editChannel({ ...channel, channel_id: id }).unwrap();
-      await acceptChannel({ channel_id: id }).unwrap();
+      dispatch(adminChannelsAPI.util.invalidateTags([ADMIN_CHANNELS]));
       toast({
         variant: "success",
         title: t("toasts.admin.channel.remoderation.success"),
@@ -46,12 +46,11 @@ export const AcceptRemoderation: FC<AcceptRemoderationProps> = ({
   return (
     <MyButton buttons_type="button__green_light" onClick={handleOnClick}>
       <p>{t("admin_panel.channels.card.buttons.accept")}</p>
-      {isLoading ||
-        (isLoadingEdit && (
-          <div className="loader">
-            <AccountsLoader />
-          </div>
-        ))}
+      {isLoading && (
+        <div className="loader">
+          <AccountsLoader />
+        </div>
+      )}
     </MyButton>
   );
 };

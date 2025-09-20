@@ -74,15 +74,15 @@ export const adminChannelsAPI = authApi.injectEndpoints({
         url: `/channel/moderation/accept/${params.channel_id}`,
         method: `POST`,
       }),
-      invalidatesTags: [ADMIN_CHANNELS],
     }),
     adminChannelReject: build.mutation<
       { success: boolean },
       IAdminRejectChannelReq
     >({
-      query: (params) => ({
-        url: `/channel/moderation/accept/${params.channel_id}`,
+      query: (body) => ({
+        url: `/channel/moderation/reject`,
         method: `POST`,
+        body: body,
       }),
       invalidatesTags: [ADMIN_CHANNELS],
     }),
@@ -104,7 +104,6 @@ export const adminChannelsAPI = authApi.injectEndpoints({
         url: `/channel/moderation/unban/${params.channel_id}`,
         method: `POST`,
       }),
-      invalidatesTags: [ADMIN_CHANNELS],
     }),
     adminChannelBan: build.mutation<{ success: boolean }, IAdminBanChannelReq>({
       query: (params) => ({
