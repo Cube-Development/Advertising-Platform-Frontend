@@ -109,7 +109,7 @@ export interface IManagerProjectSubcard {
   desire?: IDesire[];
   platform: platformTypesNum;
   is_review: boolean;
-  grade?: number;
+  rate?: number;
 }
 
 export interface IDesire {
