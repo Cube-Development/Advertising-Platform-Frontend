@@ -13,10 +13,12 @@ export const filterCertificates = (
         uid,
         organization,
       } = parseCertificateAlias(certificate.alias);
-
+      
+      // Если в сертификате есть организация, то сверяем только по ИНН организации
       if (!!organization) return uid === inn;
 
-      return certificatePnfl === pnfl || uid === inn;
+      // Если организации нет, то одновременно сверяем по ПНФЛ и ИНН
+      return certificatePnfl === pnfl && uid === inn;
     });
     if (!certificate) return [];
 
@@ -24,4 +26,3 @@ export const filterCertificates = (
   }
   return certificates;
 };
-3;
