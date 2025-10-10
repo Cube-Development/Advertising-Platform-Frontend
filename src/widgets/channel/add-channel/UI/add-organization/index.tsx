@@ -29,7 +29,7 @@ export const AddOrganization: FC<IAddOrganizationProps> = ({
   isEdit,
 }) => {
   const { t } = useTranslation();
-  const { isAuthEcp } = useAppSelector((state) => state.user);
+  const { isOfferSign } = useAppSelector((state) => state.user);
   const navigate = useNavigate();
   const { channelAccept } = useChannelAccept({ channel_id, isEdit });
 
@@ -42,7 +42,7 @@ export const AddOrganization: FC<IAddOrganizationProps> = ({
     <>
       {step === 4 && (
         <motion.div initial="hidden" animate="visible" variants={variant}>
-          {!isAuthEcp ? (
+          {!isOfferSign ? (
             <NotLogin />
           ) : (
             <div className="container">

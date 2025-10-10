@@ -11,9 +11,13 @@ export const parseCertificateAlias = (alias: string): ParsedCertificateInfo => {
     }
   });
 
-  // Извлекаем ПИНФЛ из поля 1.2.860.3.16.1.2
+  // Извлекаем ПИНФЛ из поля 1.2.860.3.16.1.2 (всегда есть)
   const pnfl = info["1.2.860.3.16.1.2"] || "No data";
-  const uid = info["1.2.860.3.16.1.1"] || info.uid || null;
+
+  // ИНН может быть в двух полях: 1.2.860.3.16.1.1 (юрлица) или uid (ИП/физлица/юрлица)
+  const innFromOrg = info["1.2.860.3.16.1.1"];
+  const innFromUid = info.uid;
+  const inn = innFromOrg || innFromUid || null;
 
   // Форматируем дату - берем только день.месяц.год
   const formatDate = (dateStr: string) => {
@@ -35,7 +39,7 @@ export const parseCertificateAlias = (alias: string): ParsedCertificateInfo => {
     region: info.st || "No data",
     organization: info.o || "",
     pnfl: pnfl,
-    uid: uid,
+    uid: inn, // Теперь uid содержит ИНН из любого поля
     validFrom: formatDate(info.validfrom),
     validTo: formatDate(info.validto),
   };

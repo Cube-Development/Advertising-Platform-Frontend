@@ -1,5 +1,6 @@
 import {
   ENUM_DIGITAL_LOGIN_TYPE,
+  ENUM_ORGANIZATION_STATUS,
   filterCertificates,
   IDidoxFormData,
   LOGIN_BY_PASSWORD_DATA,
