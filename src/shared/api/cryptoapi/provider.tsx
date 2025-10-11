@@ -384,7 +384,11 @@ export const CryptoWebSocketProvider: React.FC<
     async (
       keyId: string,
       data: string,
-    ): Promise<{ pkcs7: string; signatureHex: string }> => {
+    ): Promise<{
+      pkcs7: string;
+      signatureHex: string;
+      signer_serial_number: string;
+    }> => {
       const base64Data = btoa(data);
       const message = {
         plugin: "pkcs7",
@@ -401,6 +405,32 @@ export const CryptoWebSocketProvider: React.FC<
       return {
         pkcs7: response.pkcs7_64,
         signatureHex: response.signature_hex,
+        signer_serial_number: response.signer_serial_number,
+      };
+    },
+    [sendMessage],
+  );
+
+  const createAttachedTokenSignature = useCallback(
+    async (
+      pkcs7: string,
+      signer_serial_number: string,
+      tokenBase64: string,
+    ): Promise<{ pkcs7: string }> => {
+      const message = {
+        plugin: "pkcs7",
+        name: "attach_timestamp_token_pkcs7",
+        arguments: [pkcs7, signer_serial_number, tokenBase64],
+      };
+
+      const response = await sendMessage(
+        message,
+        6000,
+        "attach_timestamp_token_pkcs7",
+      );
+      console.log("✅ Подпись создана");
+      return {
+        pkcs7: response.pkcs7_64,
       };
     },
     [sendMessage],
@@ -457,6 +487,7 @@ export const CryptoWebSocketProvider: React.FC<
     loadCertificates,
     loadKey,
     createSignature,
+    createAttachedTokenSignature,
     createAttachedSignature,
     reconnect,
     disconnect,

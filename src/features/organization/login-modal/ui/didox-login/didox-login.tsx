@@ -21,6 +21,7 @@ import DidoxLogo from "/images/organization/didox-logo.svg";
 export const DidoxLogin: FC = () => {
   const { certificates, certificatesLoading, error, isSignatureLoading } =
     useCryptoCertificates();
+
   const { t } = useTranslation();
   const {
     loginPassword,
@@ -79,6 +80,7 @@ export const DidoxLogin: FC = () => {
       organization?.PINFL,
       organization?.TIN,
     );
+
     // return certificates;
   }, [certificates, organization?.PINFL]);
 
