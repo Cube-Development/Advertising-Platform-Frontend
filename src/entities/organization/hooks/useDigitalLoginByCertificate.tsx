@@ -11,6 +11,7 @@ import {
   useGetTokenByCertificateMutation,
 } from "../api";
 import {
+  CreateMessageAttachedTokenSignature,
   CreateMessageKeyId,
   CreateMessageSignature,
   parseCertificateAlias,
@@ -39,6 +40,7 @@ export const useDigitalLoginByCertificate = () => {
     organization: IGetMyOrganizationResponse,
   ) => {
     try {
+      console.log("certificate111111111", certificate);
       // Получаем ПИНФЛ из выбранного сертификата
       const certInfo = parseCertificateAlias(certificate!.alias);
       const pnflFromCert = certInfo?.uid || certInfo.pnfl;
@@ -53,17 +55,23 @@ export const useDigitalLoginByCertificate = () => {
       );
 
       // Шаг 3: Прикрепление TimeStamp
-      const timestampResponse = await getTimestamp({
+      const { timeStampTokenB64 } = await getTimestamp({
         pkcs7: signResponse.pkcs7_64,
         signatureHex: signResponse.signature_hex,
       }).unwrap();
 
-      const signature = timestampResponse?.timeStampTokenB64 || "";
+      const { pkcs7_64 } = await sendMessage(
+        CreateMessageAttachedTokenSignature(
+          signResponse.pkcs7_64,
+          signResponse.signer_serial_number,
+          timeStampTokenB64,
+        ),
+      );
 
       // Шаг 4: Получение токена
       const tokenResponse = await getToken({
         PNFL: pnflFromCert,
-        signature,
+        signature: pkcs7_64,
         lang: "ru",
       }).unwrap();
 
