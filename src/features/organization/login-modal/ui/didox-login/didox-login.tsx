@@ -74,12 +74,14 @@ export const DidoxLogin: FC = () => {
   };
 
   const userCertificates = useMemo(() => {
-    return filterCertificates(
-      certificates,
-      organization?.PINFL,
-      organization?.TIN,
-    );
-    // return certificates;
+    if (organization?.PINFL || organization?.TIN) {
+      return filterCertificates(
+        certificates,
+        organization?.PINFL,
+        organization?.TIN,
+      );
+    }
+    return certificates;
   }, [certificates, organization?.PINFL]);
 
   return (
