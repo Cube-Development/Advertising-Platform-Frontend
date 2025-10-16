@@ -48,6 +48,7 @@ export interface ICatalogChannel {
   selected_format?: IFormat;
   platform?: platformTypesNum;
   channel_languages: ENUM_LANGUAGES_NUM[];
+  url?: string;
 }
 
 export interface IFormat {

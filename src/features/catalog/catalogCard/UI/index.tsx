@@ -157,6 +157,11 @@ export const CatalogCard: FC<CatalogCardProps> = ({
                 {/* языки */}
               </Link>
               <p className={`${styles.category} truncate`}>{card?.category}</p>
+              {card?.url && (
+                <p className="text-[var(--URL)] font-medium mobile-xl:text-[12px] text-[10px] break-words break-all mobile-xl:-mt-2">
+                  {card?.url}
+                </p>
+              )}
               {screen >= BREAKPOINT.MD && (
                 <ChannelCardDescription description={card?.description} />
               )}

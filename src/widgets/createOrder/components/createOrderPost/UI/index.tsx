@@ -242,13 +242,25 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                     </button>
                   </AlertDialogTrigger>
                   <AlertDialogContent
-                    className={`max-w-[300px] gap-0 bg-transparent grid items-center justify-center shadow-none border-0 ${screen > 475 ? "w-[50vw]" : "w-[60vw]"}`}
+                    className={`max-w-[300px] gap-0 bg-transparent grid items-center justify-center shadow-none border-0 ${
+                      screen > 992
+                        ? "w-[25vw]"
+                        : screen > 768
+                          ? "w-[30vw]"
+                          : screen > 576
+                            ? "w-[35vw]"
+                            : screen > 475
+                              ? "w-[50vw]"
+                              : "w-[60vw]"
+                    }`}
                   >
                     <AlertDialogDescription className="sr-only"></AlertDialogDescription>
                     <AlertDialogTitle className="sr-only"></AlertDialogTitle>
                     <div className="relative">
-                      <AlertDialogAction>
-                        <X className="absolute -right-8 -top-4 w-[30px] rounded-full p-1 bg-white cursor-pointer" />
+                      <AlertDialogAction className="!bg-transparent absolute -right-[60px] -top-8">
+                        <X
+                          className={`w-[30px] rounded-full p-2 bg-white cursor-pointer text-black`}
+                        />
                       </AlertDialogAction>
                       <RenderDisplay formState={formState} />
                     </div>

@@ -48,7 +48,6 @@ export const PlatformFilter: FC<PlatformFilterProps> = ({
 
   return (
     <div className={styles.types}>
-      <p className="truncate">{t("create_order.create.choose_platform")}</p>
       <ul>
         {platformTypes.map((type, index) => (
           <li

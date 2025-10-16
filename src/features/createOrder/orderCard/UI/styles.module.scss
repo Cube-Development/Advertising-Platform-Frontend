@@ -63,14 +63,14 @@
     .title {
       display: grid;
       grid-auto-flow: row;
-      row-gap: 5px;
+      row-gap: 2px;
       padding-right: 10px;
 
       @media (max-width: 576px) {
         padding: 0px;
       }
 
-      > a {
+      > p {
         background: var(--primary-gradient);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
