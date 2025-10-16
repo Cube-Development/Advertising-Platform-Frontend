@@ -10,6 +10,11 @@ import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { FC, useEffect, useState } from "react";
 import { UseFormSetValue } from "react-hook-form";
+import {
+  parseMarkdownToHtml,
+  isMarkdownText,
+  cleanHtmlForTiptap,
+} from "@shared/utils/markdownParser";
 import styles from "./styles.module.scss";
 import { Toolbar } from "./toolbar";
 
@@ -55,12 +60,44 @@ export const Editor: FC<EditorProps> = ({
       };
 
   const startContent = placeholder || currentPost?.text?.[0]?.content || "";
-  const [content, setContent] = useState(startContent);
+  const [content, setContent] = useState(() => {
+    // Проверяем, является ли начальный контент Markdown
+    if (startContent && isMarkdownText(startContent)) {
+      const htmlContent = parseMarkdownToHtml(startContent);
+      return cleanHtmlForTiptap(htmlContent);
+    }
+    return startContent;
+  });
   const limit = 1000;
 
   useEffect(() => {
-    setContent(startContent);
+    // Проверяем, является ли новый контент Markdown
+    if (startContent && isMarkdownText(startContent)) {
+      const htmlContent = parseMarkdownToHtml(startContent);
+      const cleanedHtml = cleanHtmlForTiptap(htmlContent);
+      setContent(cleanedHtml);
+    } else {
+      setContent(startContent);
+    }
   }, [startContent]);
+
+  // Обработка вставки текста с поддержкой Markdown
+  const handlePaste = (_view: unknown, event: ClipboardEvent) => {
+    const pastedText = event.clipboardData?.getData("text/plain");
+
+    if (pastedText && isMarkdownText(pastedText)) {
+      // Парсим Markdown в HTML
+      const htmlContent = parseMarkdownToHtml(pastedText);
+      const cleanedHtml = cleanHtmlForTiptap(htmlContent);
+
+      // Вставляем HTML в редактор через команду
+      editor?.commands.insertContent(cleanedHtml);
+
+      return true; // Предотвращаем стандартную обработку
+    }
+
+    return false; // Позволяем стандартную обработку
+  };
 
   // Конфигурация редактора с изменением поведения параграфов
   const editor = useEditor({
@@ -106,6 +143,7 @@ export const Editor: FC<EditorProps> = ({
         class:
           "h-full px-4 overflow-auto bg-transparent text-black focus:outline-none text-base",
       },
+      handlePaste: handlePaste,
     },
     onUpdate({ editor }) {
       handleChange(editor.getHTML());

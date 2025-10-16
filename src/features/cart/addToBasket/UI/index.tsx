@@ -82,9 +82,17 @@ export const AddToBasket: FC<IAddToBasketProps> = ({
         changeFormat={changeFormat}
         card={card}
       />
+      <div className="flex items-center gap-1 justify-center mobile-xl:[&>svg]:size-4 [&>svg]:size-3">
+        <span className="font-medium mobile-xl:text-[12px] text-[8px] truncate max-w-[20vw]">
+          {page || isSelected
+            ? t("channel.add_to_cart.remove")
+            : t("channel.add_to_cart.add")}
+        </span>
+        {page || isSelected ? <CartMinusIcon /> : <CartPlusIcon />}
+      </div>
       <div className={styles.price}>
         {selectedFormat?.price?.toLocaleString()} {t("symbol")}
-        {page || isSelected ? <CartMinusIcon /> : <CartPlusIcon />}
+        {/* {page || isSelected ? <CartMinusIcon /> : <CartPlusIcon />} */}
       </div>
     </MyButton>
   );

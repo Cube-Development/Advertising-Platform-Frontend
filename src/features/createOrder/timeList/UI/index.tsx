@@ -1,8 +1,7 @@
 import { TimeListProps } from "@entities/project";
-import { CancelIcon2, ClockIcon } from "@shared/assets";
+import { ClockIcon } from "@shared/assets";
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -49,6 +48,8 @@ const timeSlots: string[] = [
 
 export const TimeList: FC<TimeListProps> = ({ onChange, startTime }) => {
   const { t } = useTranslation();
+  const [isSelectRange, setIsSelectRange] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [selectedTimesObject, setSelectedTimeObject] = useState<ITime>({
     timeIndexList: [],
     timeStringList: [],
@@ -77,39 +78,68 @@ export const TimeList: FC<TimeListProps> = ({ onChange, startTime }) => {
         timeStringList,
       });
     }
-  }, []);
+  }, [startTime]);
 
   const selectTime = (timeIndex: number) => {
     let newTimeIndexList: number[] = [];
     let newTimeList: string[] = [];
 
-    if (
-      selectedTimesObject.timeIndexList.length === 0 ||
-      selectedTimesObject.timeIndexList.includes(timeIndex)
-    ) {
-      newTimeIndexList =
-        selectedTimesObject.timeIndexList.length === 1 ? [] : [timeIndex];
-      newTimeList =
-        selectedTimesObject.timeIndexList.length === 1
-          ? []
-          : timeSlots[timeIndex].split(" - ");
-    } else if (selectedTimesObject.timeIndexList.length < 2) {
-      newTimeIndexList = [...selectedTimesObject.timeIndexList, timeIndex].sort(
-        (a, b) => a - b,
-      );
-      newTimeList = [
-        timeSlots[newTimeIndexList[0]].split(" - ")[0],
-        timeSlots[newTimeIndexList[1]].split(" - ")[1],
-      ];
+    if (!isSelectRange) {
+      // Режим выбора одного времени
+      if (selectedTimesObject.timeIndexList.includes(timeIndex)) {
+        // Если кликнули на уже выбранное время - снимаем выбор
+        newTimeIndexList = [];
+        newTimeList = [];
+      } else {
+        // Выбираем новое время
+        newTimeIndexList = [timeIndex];
+        newTimeList = timeSlots[timeIndex].split(" - ");
+      }
     } else {
-      newTimeIndexList = [timeIndex];
-      newTimeList = timeSlots[timeIndex].split(" - ");
+      // Режим выбора диапазона
+      if (
+        selectedTimesObject.timeIndexList.length === 0 ||
+        selectedTimesObject.timeIndexList.includes(timeIndex)
+      ) {
+        newTimeIndexList =
+          selectedTimesObject.timeIndexList.length === 1 ? [] : [timeIndex];
+        newTimeList =
+          selectedTimesObject.timeIndexList.length === 1
+            ? []
+            : timeSlots[timeIndex].split(" - ");
+      } else if (selectedTimesObject.timeIndexList.length < 2) {
+        newTimeIndexList = [
+          ...selectedTimesObject.timeIndexList,
+          timeIndex,
+        ].sort((a, b) => a - b);
+        newTimeList = [
+          timeSlots[newTimeIndexList[0]].split(" - ")[0],
+          timeSlots[newTimeIndexList[1]].split(" - ")[1],
+        ];
+      } else {
+        newTimeIndexList = [timeIndex];
+        newTimeList = timeSlots[timeIndex].split(" - ");
+      }
     }
 
-    setSelectedTimeObject({
+    const updatedTimeObject = {
       timeIndexList: newTimeIndexList,
       timeStringList: newTimeList,
-    });
+    };
+
+    setSelectedTimeObject(updatedTimeObject);
+
+    // Если режим выбора одной даты, автоматически подтверждаем и закрываем
+    if (!isSelectRange && newTimeIndexList.length === 1) {
+      onChange(newTimeList);
+      setIsOpen(false);
+    }
+
+    // Если режим выбора диапазона и выбрано 2 времени, автоматически подтверждаем и закрываем
+    if (isSelectRange && newTimeIndexList.length === 2) {
+      onChange(newTimeList);
+      setIsOpen(false);
+    }
   };
 
   const handleCloseModal = () => {
@@ -117,13 +147,11 @@ export const TimeList: FC<TimeListProps> = ({ onChange, startTime }) => {
       timeIndexList: [],
       timeStringList: [],
     });
-  };
-  const continueAction = () => {
-    onChange(selectedTimesObject.timeStringList);
+    setIsOpen(false);
   };
 
   return (
-    <AlertDialog>
+    <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
       <AlertDialogTrigger>
         <div className={styles.open}>
           <div className={styles.icon}>
@@ -163,11 +191,20 @@ export const TimeList: FC<TimeListProps> = ({ onChange, startTime }) => {
               </div>
             ))}
           </div>
-          <AlertDialogAction asChild>
-            <MyButton type="button" onClick={continueAction}>
-              <p>{t("calendar.confirm")}</p>
-            </MyButton>
-          </AlertDialogAction>
+          <MyButton
+            type="button"
+            buttons_type="button__white"
+            className={styles.confirm}
+            onClick={() => {
+              setIsSelectRange(!isSelectRange);
+              setSelectedTimeObject({
+                timeIndexList: [],
+                timeStringList: [],
+              });
+            }}
+          >
+            <p>{isSelectRange ? t("calendar.date") : t("calendar.range")}</p>
+          </MyButton>
         </div>
       </AlertDialogContent>
     </AlertDialog>

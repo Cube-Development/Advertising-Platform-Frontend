@@ -104,6 +104,11 @@ export const SmallCatalogCard: FC<SmallCatalogCardProps> = ({
           <p className="text-[--Subtitle-text] xl:text-xs mobile-xl:text-[10px] text-[8px] mobile-xl:font-medium font-semibold truncate leading-none">
             {card?.category}
           </p>
+          {card?.url && (
+            <p className="text-[var(--URL)] font-medium mobile-xl:text-[10px] text-[8px] break-words break-all">
+              {card?.url}
+            </p>
+          )}
         </div>
 
         {/* Подписчики и просмотры */}

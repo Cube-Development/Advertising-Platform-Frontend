@@ -111,10 +111,15 @@ export const OrderCard: FC<PostPlatformProps> = ({
           <img src={card?.avatar} alt="" />
         </div>
         <div className={styles.title}>
-          <Link to={card?.channel_url} target="_blank" className="truncate">
-            {card?.name}
-          </Link>
+          <p className="truncate">{card?.name}</p>
           <span className="truncate">{card?.category}</span>
+          <Link
+            to={card?.channel_url}
+            target="_blank"
+            className="mobile-xl:text-[12px] text-[10px] font-medium text-[var(--URL)] break-all"
+          >
+            {card?.channel_url}
+          </Link>
         </div>
         <div className={styles.icon}>
           {card.platform in platformToIcon
@@ -149,6 +154,9 @@ export const OrderCard: FC<PostPlatformProps> = ({
           <AlertDialogTrigger asChild>
             <div className={styles.data}>
               <PostIcon2 />
+              <p className="uppercase mobile-xl:block hidden text-[8px] font-bold text-[var(--Personal-colors-main)]">
+                See post
+              </p>
               <p className={styles.data__see_post}>
                 {t("create_order.create.see_post_mobile_btn")}
               </p>

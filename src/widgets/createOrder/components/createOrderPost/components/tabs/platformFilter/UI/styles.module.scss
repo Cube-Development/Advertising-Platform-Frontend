@@ -4,17 +4,6 @@
   row-gap: 10px;
   align-items: center;
 
-  > p {
-    text-align: center;
-    white-space: nowrap;
-    font-size: var(--font-size-subtitle-main-lg);
-    font-weight: 500;
-
-    @media (max-width: 992px) {
-      display: none;
-    }
-  }
-
   ul {
     display: grid;
     grid-template: 1fr / repeat(4, 1fr);

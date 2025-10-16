@@ -1,9 +1,8 @@
 import { DateListProps } from "@entities/project";
-import { CalendarIcon, CancelIcon2 } from "@shared/assets";
+import { CalendarIcon } from "@shared/assets";
 import { ENUM_CALENDAR } from "@shared/config";
 import {
   AlertDialog,
-  AlertDialogAction,
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogDescription,
@@ -34,6 +33,7 @@ const advDates = advDatesStrings.map((dateString) => new Date(dateString));
 export const CustomCalendar: FC<DateListProps> = ({ onChange, startDate }) => {
   const { t } = useTranslation();
   const [isSelectRange, setIsSelectRange] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const [dateObject, setDateObject] = useState<IDate>({
     date: null,
     dateString: null,
@@ -70,13 +70,29 @@ export const CustomCalendar: FC<DateListProps> = ({ onChange, startDate }) => {
     }
   }, [startDate]);
 
-  const handleOnChange = (newDate: any) => {
+  const handleOnChange = (newDate: Date | Date[] | null | any) => {
+    if (!newDate) return;
+
     if (Array.isArray(newDate)) {
       const newDateString = newDate.map((date: Date) => customStringDate(date));
-      setDateObject({ date: newDate, dateString: newDateString });
+      const updatedDateObject = { date: newDate, dateString: newDateString };
+      setDateObject(updatedDateObject);
+
+      // Если режим выбора диапазона и выбрано 2 даты, автоматически подтверждаем и закрываем
+      if (isSelectRange && newDate.length === 2) {
+        onChange(newDate);
+        setIsOpen(false);
+      }
     } else {
       const newDateString = customStringDate(newDate);
-      setDateObject({ date: [newDate], dateString: newDateString });
+      const updatedDateObject = { date: [newDate], dateString: newDateString };
+      setDateObject(updatedDateObject);
+
+      // Если режим выбора одной даты, автоматически подтверждаем и закрываем
+      if (!isSelectRange) {
+        onChange([newDate]);
+        setIsOpen(false);
+      }
     }
   };
 
@@ -87,12 +103,7 @@ export const CustomCalendar: FC<DateListProps> = ({ onChange, startDate }) => {
 
   const handleCloseModal = () => {
     setDateObject({ date: null, dateString: null });
-  };
-
-  const continueAction = () => {
-    if (dateObject?.date) {
-      onChange(dateObject?.date);
-    }
+    setIsOpen(false);
   };
 
   const tileClassName = ({
@@ -128,7 +139,7 @@ export const CustomCalendar: FC<DateListProps> = ({ onChange, startDate }) => {
 
   console.log("dateObject", dateObject);
   return (
-    <AlertDialog>
+    <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
       <AlertDialogTrigger>
         <div className={styles.open}>
           <div className={styles.icon}>
@@ -179,11 +190,6 @@ export const CustomCalendar: FC<DateListProps> = ({ onChange, startDate }) => {
             >
               <p>{isSelectRange ? t("calendar.date") : t("calendar.range")}</p>
             </MyButton>
-            <AlertDialogAction asChild>
-              <MyButton type="button" onClick={continueAction}>
-                <p>{t("calendar.confirm")}</p>
-              </MyButton>
-            </AlertDialogAction>
           </div>
         </div>
       </AlertDialogContent>

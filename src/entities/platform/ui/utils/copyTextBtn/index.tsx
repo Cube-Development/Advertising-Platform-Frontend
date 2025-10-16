@@ -4,6 +4,7 @@ import TurndownService from "turndown";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
 import { useToast } from "@shared/ui";
+import { isMarkdownText } from "@shared/utils";
 
 interface CopyTextBtnProps {
   text?: string;
@@ -15,14 +16,25 @@ export const CopyTextBtn: FC<CopyTextBtnProps> = ({ text }) => {
 
   const copyText = () => {
     if (text) {
-      // Создаем экземпляр TurndownService
-      const turndownService = new TurndownService();
+      let textToCopy = text;
 
-      // Конвертируем HTML в Markdown
-      const markdownText = turndownService.turndown(text);
+      // Если текст уже в Markdown формате, копируем как есть
+      if (isMarkdownText(text)) {
+        textToCopy = text;
+      } else {
+        // Если это HTML, конвертируем в Markdown
+        const turndownService = new TurndownService({
+          headingStyle: "atx", // Используем # для заголовков
+          bulletListMarker: "*", // Используем * для списков
+          codeBlockStyle: "fenced", // Используем ``` для блоков кода
+          linkStyle: "inlined", // Используем [text](url) для ссылок
+        });
 
-      // Копируем Markdown в буфер обмена
-      navigator.clipboard.writeText(markdownText).then(
+        textToCopy = turndownService.turndown(text);
+      }
+
+      // Копируем текст в буфер обмена
+      navigator.clipboard.writeText(textToCopy).then(
         () => {
           toast({
             variant: "success",
