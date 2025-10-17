@@ -80,7 +80,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = () => {
       </SheetTrigger>
 
       <SheetContent side={"left"} className={styles.menu} useClose={false}>
-        <div className={`${styles.menu__content} ${isSafari && styles.safari}`}>
+        <div className={`${styles.menu__content} ${isSafari && ""}`}>
           <SheetTitle className={`${styles.menu__top}`}>
             <img
               src={logo}
