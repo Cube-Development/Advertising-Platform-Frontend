@@ -5,7 +5,7 @@ import { useTranslation } from "react-i18next";
 import { useHandleAuth } from "@features/useHandleAuth";
 import { ToastAction, useToast } from "@shared/ui";
 import { useGetUserMutation, useLoginMutation } from "@entities/user";
-import { Loader } from "lucide-react";
+import { Loader, Eye, EyeOff } from "lucide-react";
 
 interface Props {
   onNavigate: (form: loginSteps) => void;
@@ -23,6 +23,7 @@ export const LoginForm: FC<Props> = ({ onNavigate }) => {
   const [email, setEmail] = useState("");
   const [passwordError, setPasswordError] = useState("");
   const [emailError, setEmailError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
 
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
@@ -90,11 +91,19 @@ export const LoginForm: FC<Props> = ({ onNavigate }) => {
         <label>
           <span>{t("auth.password")}</span>
         </label>
-        <input
-          type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
+        <div className={styles.password__wrapper}>
+          <input
+            type={showPassword ? "text" : "password"}
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <span
+            className={styles.password__toggle}
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
+          </span>
+        </div>
         {passwordError && <small>{passwordError}</small>}
       </div>
 

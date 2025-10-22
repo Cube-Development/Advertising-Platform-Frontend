@@ -17,8 +17,8 @@ import {
   useToast,
 } from "@shared/ui";
 import { isValidEmail, isValidEmailCode } from "@shared/utils";
-import { Loader, PenLine } from "lucide-react";
-import { FC } from "react";
+import { Eye, EyeOff, Loader, PenLine } from "lucide-react";
+import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -33,6 +33,7 @@ interface EditEmailFormProps extends IEmailData {
 export const EditEmail: FC = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
+  const [showPassword, setShowPassword] = useState(false);
   const [editEmailRequest, { isLoading: isLoadingEmail }] =
     useEditEmailRequestMutation();
   const [sendCode, { isLoading: isLoadingCode }] = useEditEmailAcceptMutation();
@@ -188,15 +189,25 @@ export const EditEmail: FC = () => {
                 className={`${errors?.password ? "form_error" : ""} ${styles.parameter_row}`}
               >
                 <span>{t("profile.email_block.password.title")}</span>
-                <input
-                  type="password"
-                  className={errors?.password ? "input_error" : ""}
-                  autoComplete="new-password"
-                  value={formState?.password || ""}
-                  {...register(emailChangeForm.password, {
-                    required: t("profile.email_block.password.error.required"),
-                  })}
-                />
+                <div className={styles.password__wrapper}>
+                  <input
+                    type={showPassword ? "text" : "password"}
+                    className={errors?.password ? "input_error" : ""}
+                    autoComplete="new-password"
+                    value={formState?.password || ""}
+                    {...register(emailChangeForm.password, {
+                      required: t(
+                        "profile.email_block.password.error.required",
+                      ),
+                    })}
+                  />
+                  <span
+                    className={styles.password__toggle}
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
+                  </span>
+                </div>
                 {errors?.password && (
                   <p className={styles.error_text}>
                     {t(errors?.password?.message || "")}

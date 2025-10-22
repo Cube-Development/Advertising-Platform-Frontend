@@ -103,4 +103,35 @@
     grid-auto-flow: row;
     row-gap: 20px;
   }
+
+  .password__wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .password__toggle {
+    position: absolute;
+    right: 12px;
+    top: 46%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #666;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #333;
+    }
+
+    &:focus {
+      outline: none;
+      color: #333;
+    }
+  }
 }

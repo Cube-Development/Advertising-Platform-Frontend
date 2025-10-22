@@ -2,6 +2,7 @@ import {
   ContentType,
   CreatePostFormData,
   ICreatePostForm,
+  POST,
 } from "@entities/project";
 import link from "@tiptap/extension-link";
 import Paragraph from "@tiptap/extension-paragraph"; // импортируем параграф для кастомизации
@@ -68,7 +69,7 @@ export const Editor: FC<EditorProps> = ({
     }
     return startContent;
   });
-  const limit = 1000;
+  const limit = POST.POST_LENGTH;
 
   useEffect(() => {
     // Проверяем, является ли новый контент Markdown
@@ -158,6 +159,18 @@ export const Editor: FC<EditorProps> = ({
 
   const handleChange = (content: string) => {
     const cleanedContent = content.replace(/(<br\s*\/?>\s*){2,}/g, "<p></p>");
+
+    // Проверяем длину текста без HTML тегов
+    const textLength = cleanedContent.replace(/<[^>]*>/g, "").length;
+
+    if (textLength > limit) {
+      // Обрезаем контент до лимита
+      const truncatedContent = cleanedContent.substring(0, limit);
+      setContent(truncatedContent);
+      editor?.commands.setContent(truncatedContent);
+      return;
+    }
+
     setContent(cleanedContent);
     if (currentPost) {
       currentPost.text = [
@@ -169,11 +182,7 @@ export const Editor: FC<EditorProps> = ({
 
   return (
     <div className={styles.editor}>
-      <EditorContent
-        editor={editor}
-        className="relative h-full pt-3 pb-12"
-        maxLength={limit}
-      >
+      <EditorContent editor={editor} className="relative pt-3 pb-12 h-full">
         <Toolbar editor={editor} />
       </EditorContent>
     </div>

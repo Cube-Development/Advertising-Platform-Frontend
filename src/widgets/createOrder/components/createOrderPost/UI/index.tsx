@@ -177,7 +177,9 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                 />
               )}
               <div className={styles.post_data}>
-                <TypeRenderEditor formState={formState} setValue={setValue} />
+                <div className="max-h-[400px]">
+                  <TypeRenderEditor formState={formState} setValue={setValue} />
+                </div>
                 <div
                   className={clsx(styles.block__bottom, {
                     [styles.filter]:
