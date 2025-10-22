@@ -83,7 +83,7 @@ export const AddToBasket: FC<IAddToBasketProps> = ({
         card={card}
       />
       <div className="flex items-center gap-1 justify-center mobile-xl:[&>svg]:size-4 [&>svg]:size-3">
-        <span className="font-medium mobile-xl:text-[12px] text-[8px] truncate max-w-[20vw]">
+        <span className="font-medium mobile-xl:text-[12px] text-[10px] truncate max-w-[20vw]">
           {page || isSelected
             ? t("channel.add_to_cart.remove")
             : t("channel.add_to_cart.add")}
