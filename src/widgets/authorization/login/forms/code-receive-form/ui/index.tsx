@@ -63,7 +63,7 @@ export const CodeReceiveForm: FC<Props> = ({
             <span>{t("auth.enter_code")}</span>
           </label>
           <input
-            type="text"
+            type="tel"
             value={code}
             onChange={(e) => setCode(e.target.value)}
             name="code"

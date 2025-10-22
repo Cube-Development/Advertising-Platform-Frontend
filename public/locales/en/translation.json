@@ -1747,8 +1747,8 @@
     "choose_date": "Choose a Date",
     "choose_time": "Choose a Time",
     "confirm": "Confirm",
-    "range": "Select Range",
-    "date": "Select Date",
+    "range": "Select Multiple",
+    "date": "Select One",
     "until": "until"
   },
 

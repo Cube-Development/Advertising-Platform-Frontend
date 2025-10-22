@@ -8,8 +8,8 @@ export const enum FILES {
 }
 
 export const enum POST {
-  POST_LENGTH = 2000,
-  COMMENT_LENGTH = 1000,
+  POST_LENGTH = 4096,
+  COMMENT_LENGTH = 4096,
 }
 
 export enum ADD_FILE_FILTER {
