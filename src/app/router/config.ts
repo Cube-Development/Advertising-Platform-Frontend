@@ -24,6 +24,7 @@ import { MyChannelsPage } from "@pages/MyChannels";
 import { NotFoundPage } from "@pages/NotFound";
 import { OffersPage } from "@pages/Offers";
 import { OrdersPage } from "@pages/Orders";
+import { PostTemplatesPage } from "@pages/PostTemplates";
 import { ProfilePage } from "@pages/Profile";
 import { PublicOfferPage } from "@pages/PublicOffer";
 import { RegistrationPage } from "@pages/Registration";
@@ -174,6 +175,14 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
     component: CreateOrderPage,
     roles: [ENUM_ROLES.ADVERTISER, ENUM_ROLES.MANAGER],
     auth: ENUM_AUTH_TYPES.PRIVATE,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
+  },
+  {
+    path: ENUM_PATHS.POST_TEMPLATES,
+    component: PostTemplatesPage,
+    roles: [ENUM_ROLES.ADVERTISER, ENUM_ROLES.MANAGER],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
+    authSidebar: true,
     layout: ENUM_LAYOUT_TYPES.ROOT,
   },
 

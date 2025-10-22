@@ -19,7 +19,6 @@ import {
   useCreateOrderLoad,
   useOnSubmitPayment,
 } from "../model";
-import { ENUM_ROLES } from "@entities/user";
 
 interface CreateOrderBlockProps {}
 
@@ -41,7 +40,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
 
   const { register, getValues, handleSubmit, setValue, formState } =
     useCreateOrderForm({
-      name: projectName?.name!,
+      name: projectName?.name || "",
       isNameLoading: isProjectNameLoading,
       projectId,
     });

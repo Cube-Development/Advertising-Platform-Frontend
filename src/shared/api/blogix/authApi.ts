@@ -33,6 +33,7 @@ import {
   CREATE_PROJECT_AMOUNT,
   MY_ORGANIZATION,
   ADMIN_ACCOUNTING,
+  POST_TEMPLATES,
 } from "@shared/api/tags";
 
 export const authApi = createApi({
@@ -72,5 +73,6 @@ export const authApi = createApi({
     CREATE_PROJECT_DATES,
     CREATE_PROJECT_AMOUNT,
     MY_ORGANIZATION,
+    POST_TEMPLATES
   ],
 });

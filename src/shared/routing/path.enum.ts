@@ -24,6 +24,7 @@ export enum ENUM_PATHS {
   REGISTRATION = "/registration",
   SERVICE_RULES = "/service_rules",
   PUBLIC_OFFER = "/public_offer",
+  POST_TEMPLATES = "/post_templates",
   ADMIN_HOME = "/admin/home",
   ADMIN_ORGANIZATION = "/admin/organization",
   ADMIN_ACCOUNTING = "/admin/accounting",

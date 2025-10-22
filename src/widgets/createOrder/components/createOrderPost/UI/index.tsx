@@ -1,4 +1,4 @@
-import { platformTypes, platformTypesStr } from "@entities/platform";
+import { platformTypesStr } from "@entities/platform";
 import {
   CreatePostFormData,
   ICreatePostForm,
@@ -38,6 +38,7 @@ import {
   RenderDisplay,
   TypeRenderEditor,
   TypeTabs,
+  TemplatePostsDialog
 } from "../components";
 import {
   checkPosts,
@@ -213,6 +214,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                 </div>
               </div>
               <div className={styles.display}>
+                <TemplatePostsDialog />
                 <RenderDisplay formState={formState} />
                 <div className={styles.continue}>
                   <ContinueOrder onClick={handleCheckPosts} />
