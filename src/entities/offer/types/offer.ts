@@ -29,6 +29,8 @@ export interface IBloggerOfferCard {
     big: string;
   };
   price: number;
+  project_name?: string;
+  post_link?: string;
 }
 
 export interface IBloggerOffers {
