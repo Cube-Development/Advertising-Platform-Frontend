@@ -30,7 +30,7 @@ import {
 } from "@shared/ui";
 import { formatDateToRuString } from "@shared/utils";
 import { X } from "lucide-react";
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -53,6 +53,7 @@ export const OrderCard: FC<PostPlatformProps> = ({
 }) => {
   const { t } = useTranslation();
   const screen = useWindowWidth();
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const getCardData = (datetime: ICreateDate) => {
     const currentCard: IDatetime = (datetime?.orders || []).find(
       (item) => item.order_id === card.id,
@@ -132,9 +133,9 @@ export const OrderCard: FC<PostPlatformProps> = ({
           <CustomCalendar
             onChange={handleChangeDate}
             startDate={
-              !!card?.date
+              card?.date
                 ? card?.date
-                : !!card?.date_from && !!card?.date_to
+                : card?.date_from && card?.date_to
                   ? [card?.date_from, card?.date_to]
                   : undefined
             }
@@ -150,7 +151,7 @@ export const OrderCard: FC<PostPlatformProps> = ({
             }
           />
         </div>
-        <AlertDialog>
+        <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
           <AlertDialogTrigger asChild>
             <div className={styles.data}>
               <PostIcon2 />
@@ -163,74 +164,86 @@ export const OrderCard: FC<PostPlatformProps> = ({
             </div>
           </AlertDialogTrigger>
           <AlertDialogContent
-            className={`max-w-[300px] gap-0 bg-transparent grid items-center justify-center shadow-none border-0 ${
-              screen > 992
-                ? "w-[25vw]"
-                : screen > 768
-                  ? "w-[30vw]"
-                  : screen > 576
-                    ? "w-[35vw]"
-                    : screen > 475
-                      ? "w-[50vw]"
-                      : "w-[60vw]"
-            }`}
+            showOverlay={false}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 !left-0 !top-0 !translate-x-0 !translate-y-0 !w-full !h-full !max-w-none !max-h-none !rounded-none !border-0 !shadow-none"
           >
-            <AlertDialogDescription className="sr-only"></AlertDialogDescription>
-            <AlertDialogTitle className="sr-only"></AlertDialogTitle>
-            {formState?.posts?.length ? (
-              <div className="relative">
-                <AlertDialogAction className="!bg-transparent absolute -right-[60px] -top-8">
-                  <X
-                    className={`w-[30px] rounded-full p-2 bg-white cursor-pointer text-black`}
-                  />
-                </AlertDialogAction>
-                {card?.platform === platformTypesNum.telegram && (
-                  <DisplayTelegram
-                    formState={formState}
-                    platformId={platformTypesNum.telegram}
-                    orderId={card?.id}
-                  />
-                )}
-                {card?.platform === platformTypesNum.instagram &&
-                  card?.post_type === PostTypesNum.feed && (
-                    <DisplayFeed
+            <div
+              className="fixed inset-0 z-40"
+              onClick={() => setIsDialogOpen(false)}
+            />
+            <div
+              className={`relative z-50 max-w-[300px] gap-0 bg-transparent grid items-center justify-center shadow-none border-0 ${
+                screen > 992
+                  ? "w-[25vw]"
+                  : screen > 768
+                    ? "w-[30vw]"
+                    : screen > 576
+                      ? "w-[35vw]"
+                      : screen > 475
+                        ? "w-[50vw]"
+                        : "w-[60vw]"
+              }`}
+            >
+              <AlertDialogDescription className="sr-only"></AlertDialogDescription>
+              <AlertDialogTitle className="sr-only"></AlertDialogTitle>
+              {formState?.posts?.length ? (
+                <div className="relative">
+                  <AlertDialogAction
+                    className="!bg-transparent absolute -right-[60px] -top-8"
+                    onClick={() => setIsDialogOpen(false)}
+                  >
+                    <X
+                      className={`w-[30px] rounded-full p-2 bg-white cursor-pointer text-black`}
+                    />
+                  </AlertDialogAction>
+                  {card?.platform === platformTypesNum.telegram && (
+                    <DisplayTelegram
                       formState={formState}
-                      platformId={platformTypesNum.instagram}
-                      postType={PostTypesNum.feed}
+                      platformId={platformTypesNum.telegram}
                       orderId={card?.id}
                     />
                   )}
-                {card?.platform === platformTypesNum.instagram &&
-                  card?.post_type === PostTypesNum.FullHd_vertical && (
-                    <DisplayStories
-                      formState={formState}
-                      platformId={platformTypesNum.instagram}
-                      postType={PostTypesNum.FullHd_vertical}
-                      orderId={card?.id}
-                    />
-                  )}
-                {card?.platform === platformTypesNum.youtube &&
-                  card?.post_type === PostTypesNum.FullHd_vertical && (
-                    <DisplayShorts
-                      formState={formState}
-                      platformId={platformTypesNum.youtube}
-                      postType={PostTypesNum.FullHd_vertical}
-                      orderId={card?.id}
-                    />
-                  )}
-                {card?.platform === platformTypesNum.youtube &&
-                  card?.post_type === PostTypesNum.FullHd_horizontal && (
-                    <DisplayVideos
-                      formState={formState}
-                      platformId={platformTypesNum.youtube}
-                      postType={PostTypesNum.FullHd_horizontal}
-                      orderId={card?.id}
-                    />
-                  )}
-              </div>
-            ) : (
-              <EmptyPost />
-            )}
+                  {card?.platform === platformTypesNum.instagram &&
+                    card?.post_type === PostTypesNum.feed && (
+                      <DisplayFeed
+                        formState={formState}
+                        platformId={platformTypesNum.instagram}
+                        postType={PostTypesNum.feed}
+                        orderId={card?.id}
+                      />
+                    )}
+                  {card?.platform === platformTypesNum.instagram &&
+                    card?.post_type === PostTypesNum.FullHd_vertical && (
+                      <DisplayStories
+                        formState={formState}
+                        platformId={platformTypesNum.instagram}
+                        postType={PostTypesNum.FullHd_vertical}
+                        orderId={card?.id}
+                      />
+                    )}
+                  {card?.platform === platformTypesNum.youtube &&
+                    card?.post_type === PostTypesNum.FullHd_vertical && (
+                      <DisplayShorts
+                        formState={formState}
+                        platformId={platformTypesNum.youtube}
+                        postType={PostTypesNum.FullHd_vertical}
+                        orderId={card?.id}
+                      />
+                    )}
+                  {card?.platform === platformTypesNum.youtube &&
+                    card?.post_type === PostTypesNum.FullHd_horizontal && (
+                      <DisplayVideos
+                        formState={formState}
+                        platformId={platformTypesNum.youtube}
+                        postType={PostTypesNum.FullHd_horizontal}
+                        orderId={card?.id}
+                      />
+                    )}
+                </div>
+              ) : (
+                <EmptyPost />
+              )}
+            </div>
           </AlertDialogContent>
         </AlertDialog>
       </div>

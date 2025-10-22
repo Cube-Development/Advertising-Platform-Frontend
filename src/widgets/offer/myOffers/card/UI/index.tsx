@@ -17,6 +17,7 @@ import { FC, ReactNode } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
+import { CheckPost } from "@features/order";
 
 interface OfferCardProps {
   card: IBloggerOfferCard;
@@ -55,8 +56,11 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
           >
             <img src={card.avatar} alt="" />
             <div>
-              <p className="truncate">{card.name}</p>
-              <span className="truncate">{card.category}</span>
+              <p className="truncate !text-[var(--Personal-colors-main)]">
+                {card.project_name || "Project name"}
+              </p>
+              <span className="truncate !text-black">{card.name}</span>
+              {/* <span className="truncate">{card.category}</span> */}
             </div>
           </Link>
           <div className={styles.date}>
@@ -118,7 +122,10 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
               </div>
             </div>
             <div className={styles.card__active__buttons}>
-              <SeePost post={post!} />
+              <div className="!grid !grid-flow-row !gap-2">
+                <SeePost post={post!} />
+                {card?.post_link && <CheckPost url={card?.post_link} />}
+              </div>
               <div
                 className={`${
                   CheckDate(
@@ -143,6 +150,10 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
               <p>{t(`offers_blogger.offer_status.check.title`)}</p>
               <span>{t(`offers_blogger.offer_status.check.text`)}</span>
             </div>
+            <div className="!grid !grid-flow-row !gap-2">
+              <SeePost post={post!} />
+              {card?.post_link && <CheckPost url={card?.post_link} />}
+            </div>
           </div>
         ) : statusFilter === ENUM_OFFER_STATUS.WAIT ? (
           <div className={styles.card__wait}>
@@ -160,7 +171,10 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
                   <AcceptOffer order_id={card.id} />
                 )}
               </div>
-              <SeePost post={post!} />
+              <div className="!grid !grid-flow-row !gap-2">
+                <SeePost post={post!} />
+                {card?.post_link && <CheckPost url={card?.post_link} />}
+              </div>
             </div>
           </div>
         ) : statusFilter === ENUM_OFFER_STATUS.COMPLETED ? (
@@ -191,6 +205,10 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
                 </span>
               </div>
             )}
+            <div className="!grid !grid-flow-row !gap-2">
+              <SeePost post={post!} />
+              {card?.post_link && <CheckPost url={card?.post_link} />}
+            </div>
           </div>
         ) : statusFilter === ENUM_OFFER_STATUS.CANCELED ? (
           <div className={styles.card__cancel}>
@@ -198,11 +216,19 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
               <p>{t(`offers_blogger.offer_status.cancel.title`)}</p>
               <span>{t(`offers_blogger.offer_status.cancel.text`)}</span>
             </div>
+            <div className="!grid !grid-flow-row !gap-2">
+              <SeePost post={post!} />
+              {card?.post_link && <CheckPost url={card?.post_link} />}
+            </div>
           </div>
         ) : statusFilter === ENUM_OFFER_STATUS.MODERATION ? (
           <div className={styles.card__moderation}>
             <div>
               <span>{t(`offers_blogger.offer_status.moderation.text`)}</span>
+            </div>
+            <div className="!grid !grid-flow-row !gap-2">
+              <SeePost post={post!} />
+              {card?.post_link && <CheckPost url={card?.post_link} />}
             </div>
           </div>
         ) : statusFilter === ENUM_OFFER_STATUS.UNFULFILLED ? (
@@ -210,6 +236,10 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
             <div className={styles.card__uncomplete__title}>
               <p>{t(`offers_blogger.offer_status.reject.title`)}</p>
               <span>{t(`offers_blogger.offer_status.reject.text`)}</span>
+            </div>
+            <div className="!grid !grid-flow-row !gap-2">
+              <SeePost post={post!} />
+              {card?.post_link && <CheckPost url={card?.post_link} />}
             </div>
             {/* <div>
               <SeeReason />

@@ -231,6 +231,8 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                     </span>
                   </>
                 )}
+                <SeePostBtn post={post!} />
+                {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
               </div>
             ) : subcard?.api_status === orderStatus.completed ||
               subcard?.api_status === orderStatus.adv_accept ? (
@@ -245,6 +247,8 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                     )}
                   </>
                 )}
+                <SeePostBtn post={post!} />
+                {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
               </div>
             ) : subcard?.api_status === orderStatus.post_review ? (
               <div className={styles.subcard__posted}>
@@ -265,6 +269,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                     </div>
                   )}
                 </div>
+                <SeePostBtn post={post!} />
               </div>
             ) : subcard?.api_status === orderStatus.in_progress ? (
               <div className={styles.subcard__accepted}>
@@ -275,6 +280,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                   </span>
                 )}
                 <SeePostBtn post={post!} />
+                {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
               </div>
             ) : subcard?.api_status === orderStatus.moderation ? (
               <div className={styles.subcard__moderation}>
@@ -287,12 +293,15 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                     </small>
                   </span>
                 </div>
+                <SeePostBtn post={post!} />
+                {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
               </div>
             ) : subcard?.api_status === orderStatus.wait ? (
               <div className={styles.subcard__waiting}>
                 <div>
                   <p>{t(`orders_advertiser.order_status.waiting.title`)}</p>
                   <SeePostBtn post={post!} />
+                  {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
                 </div>
               </div>
             ) : subcard?.api_status === orderStatus.order_review ? (
@@ -311,6 +320,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                             `orders_advertiser.order_status.agreed.title.request_approve`,
                           )}
                   </p>
+                  <SeePostBtn post={post!} />
                   <div className={styles.buttons__wrapper}>
                     <div className={styles.buttons}>
                       <ReplaceChannelBtn
@@ -324,6 +334,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                       />
                     </div>
                     <SeePostBtn post={post!} />
+                    {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
                   </div>
                 </div>
               </div>
@@ -467,6 +478,9 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                   </span>
                 </>
               )}
+
+              <SeePostBtn post={post!} />
+              {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
             </div>
           ) : subcard?.api_status === orderStatus.completed ||
             subcard?.api_status === orderStatus.adv_accept ? (
@@ -481,6 +495,8 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                   )}
                 </>
               )}
+              <SeePostBtn post={post!} />
+              {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
             </div>
           ) : subcard?.api_status === orderStatus.post_review ? (
             <div className={styles.subcard__posted}>
@@ -499,6 +515,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                 )}
                 <CheckBtn url={subcard?.post_url} />
               </div>
+              <SeePostBtn post={post!} />
             </div>
           ) : subcard?.api_status === orderStatus.in_progress ? (
             <div className={styles.subcard__accepted}>
@@ -507,6 +524,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                 <span>{t(`orders_advertiser.order_status.accepted.text`)}</span>
               )}
               <SeePostBtn post={post!} />
+              {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
             </div>
           ) : subcard?.api_status === orderStatus.moderation ? (
             <div className={styles.subcard__moderation}>
@@ -519,12 +537,15 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                   </small>
                 </span>
               </div>
+              <SeePostBtn post={post!} />
+              {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
             </div>
           ) : subcard?.api_status === orderStatus.wait ? (
             <div className={styles.subcard__waiting}>
               <div>
                 <p>{t(`orders_advertiser.order_status.waiting.title`)}</p>
                 <SeePostBtn post={post!} />
+                {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
               </div>
             </div>
           ) : subcard?.api_status === orderStatus.order_review ? (
