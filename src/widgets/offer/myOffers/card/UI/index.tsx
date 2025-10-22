@@ -122,10 +122,10 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
               </div>
             </div>
             <div className={styles.card__active__buttons}>
-              <div className="!grid !grid-flow-row !gap-2">
+              <span className="!grid !grid-flow-row !gap-2">
                 <SeePost post={post!} />
                 {card?.post_link && <CheckPost url={card?.post_link} />}
-              </div>
+              </span>
               <div
                 className={`${
                   CheckDate(
@@ -150,10 +150,10 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
               <p>{t(`offers_blogger.offer_status.check.title`)}</p>
               <span>{t(`offers_blogger.offer_status.check.text`)}</span>
             </div>
-            <div className="!grid !grid-flow-row !gap-2">
+            <span className="!grid !grid-flow-row !gap-2">
               <SeePost post={post!} />
               {card?.post_link && <CheckPost url={card?.post_link} />}
-            </div>
+            </span>
           </div>
         ) : statusFilter === ENUM_OFFER_STATUS.WAIT ? (
           <div className={styles.card__wait}>
@@ -171,10 +171,10 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
                   <AcceptOffer order_id={card.id} />
                 )}
               </div>
-              <div className="!grid !grid-flow-row !gap-2">
+              <span className="!grid !grid-flow-row !gap-2">
                 <SeePost post={post!} />
                 {card?.post_link && <CheckPost url={card?.post_link} />}
-              </div>
+              </span>
             </div>
           </div>
         ) : statusFilter === ENUM_OFFER_STATUS.COMPLETED ? (
@@ -205,10 +205,10 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
                 </span>
               </div>
             )}
-            <div className="!grid !grid-flow-row !gap-2">
+            <span className="!grid !grid-flow-row !gap-2">
               <SeePost post={post!} />
               {card?.post_link && <CheckPost url={card?.post_link} />}
-            </div>
+            </span>
           </div>
         ) : statusFilter === ENUM_OFFER_STATUS.CANCELED ? (
           <div className={styles.card__cancel}>
@@ -216,20 +216,20 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
               <p>{t(`offers_blogger.offer_status.cancel.title`)}</p>
               <span>{t(`offers_blogger.offer_status.cancel.text`)}</span>
             </div>
-            <div className="!grid !grid-flow-row !gap-2">
+            <span className="!grid !grid-flow-row !gap-2">
               <SeePost post={post!} />
               {card?.post_link && <CheckPost url={card?.post_link} />}
-            </div>
+            </span>
           </div>
         ) : statusFilter === ENUM_OFFER_STATUS.MODERATION ? (
           <div className={styles.card__moderation}>
             <div>
               <span>{t(`offers_blogger.offer_status.moderation.text`)}</span>
             </div>
-            <div className="!grid !grid-flow-row !gap-2">
+            <span className="!grid !grid-flow-row !gap-2">
               <SeePost post={post!} />
               {card?.post_link && <CheckPost url={card?.post_link} />}
-            </div>
+            </span>
           </div>
         ) : statusFilter === ENUM_OFFER_STATUS.UNFULFILLED ? (
           <div className={styles.card__uncomplete}>
@@ -237,10 +237,10 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
               <p>{t(`offers_blogger.offer_status.reject.title`)}</p>
               <span>{t(`offers_blogger.offer_status.reject.text`)}</span>
             </div>
-            <div className="!grid !grid-flow-row !gap-2">
+            <span className="!grid !grid-flow-row !gap-2">
               <SeePost post={post!} />
               {card?.post_link && <CheckPost url={card?.post_link} />}
-            </div>
+            </span>
             {/* <div>
               <SeeReason />
             </div> */}

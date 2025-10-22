@@ -12,7 +12,7 @@ import { USER_LANGUAGES_LIST } from "@shared/languages";
 import { useAppSelector } from "@shared/hooks";
 import { ENUM_PATHS } from "@shared/routing";
 import { CustomCheckbox, ToastAction, useToast } from "@shared/ui";
-import { Loader } from "lucide-react";
+import { Eye, EyeOff, Loader } from "lucide-react";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -36,6 +36,7 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({
   const language = useFindLanguage();
   const { user } = useAppSelector((state) => state);
 
+  const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
   const [promo, setPromo] = useState<boolean>(true);
   const [confirmPassword, setConfirmPassword] = useState("");
@@ -161,11 +162,19 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({
           <label>
             <span>{t("auth.password")}</span>
           </label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
+          <div className={styles.password__wrapper}>
+            <input
+              type={showPassword ? "text" : "password"}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+            />
+            <span
+              className={styles.password__toggle}
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
+            </span>
+          </div>
           {passwordError && <small>{passwordError}</small>}
         </div>
 
@@ -175,11 +184,19 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({
           <label>
             <span>{t("auth.confirm_password")}</span>
           </label>
-          <input
-            type="password"
-            value={confirmPassword}
-            onChange={(e) => setConfirmPassword(e.target.value)}
-          />
+          <div className={styles.password__wrapper}>
+            <input
+              type={showPassword ? "text" : "password"}
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
+            />
+            <span
+              className={styles.password__toggle}
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <Eye size={20} /> : <EyeOff size={20} />}
+            </span>
+          </div>
           {confirmPasswordError && <small>{confirmPasswordError}</small>}
         </div>
 
