@@ -5,4 +5,4 @@ export * from "./moderatorService";
 export * from "./managerOrdersService";
 export * from "./catalogService";
 export * from "./cartService";
-export * from "./postTemplateService"
+export * from "./postTemplateService";

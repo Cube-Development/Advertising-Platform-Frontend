@@ -38,7 +38,7 @@ import {
   RenderDisplay,
   TypeRenderEditor,
   TypeTabs,
-  TemplatePostsDialog
+  TemplatePostsDialog,
 } from "../components";
 import {
   checkPosts,
@@ -221,6 +221,9 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                 <div className={styles.continue}>
                   <ContinueOrder onClick={handleCheckPosts} />
                 </div>
+              </div>
+              <div className={styles.continue_mobile}>
+                <TemplatePostsDialog />
               </div>
               <div className={styles.display_mobile}>
                 <AlertDialog>

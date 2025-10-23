@@ -38,23 +38,26 @@ export const postTemplateAPI = authApi.injectEndpoints({
       providesTags: [POST_TEMPLATES],
     }),
     addTemplate: build.mutation<IAddTemplateRes, IAddTemplateReq>({
-        query: (body) => ({
-          url: `/post/template`,
-          method: "POST",
-          body: body,
+      query: (body) => ({
+        url: `/post/template`,
+        method: "POST",
+        body: body,
       }),
       invalidatesTags: [POST_TEMPLATES],
     }),
     deleteTemplate: build.mutation<IDeleteTemplateRes, IDeleteTemplateReq>({
-        query: (params) => ({
-          url: `/post/template`,
-          method: "DELETE",
-          params: params,
+      query: (params) => ({
+        url: `/post/template`,
+        method: "DELETE",
+        params: params,
       }),
       invalidatesTags: [POST_TEMPLATES],
     }),
   }),
 });
 
-export const { useGetTemplatesListQuery, useAddTemplateMutation, useDeleteTemplateMutation } =
-  postTemplateAPI;
+export const {
+  useGetTemplatesListQuery,
+  useAddTemplateMutation,
+  useDeleteTemplateMutation,
+} = postTemplateAPI;

@@ -1,0 +1,173 @@
+import { ContentType, POST } from "@entities/project";
+import link from "@tiptap/extension-link";
+import Paragraph from "@tiptap/extension-paragraph"; // импортируем параграф для кастомизации
+import underline from "@tiptap/extension-underline";
+import { EditorContent, useEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import { FC, useEffect, useState } from "react";
+import { UseFormSetValue } from "react-hook-form";
+import {
+  parseMarkdownToHtml,
+  isMarkdownText,
+  cleanHtmlForTiptap,
+} from "@shared/utils/markdownParser";
+import styles from "./styles.module.scss";
+import { Toolbar } from "./toolbar";
+import { CreateTemplateFormData } from "@widgets/createTemplatePost/model/createTemplateFormType";
+
+interface TemplatePostEditorProps {
+  setValue: UseFormSetValue<CreateTemplateFormData>;
+  formState: CreateTemplateFormData;
+}
+
+export const TemplatePostEditor: FC<TemplatePostEditorProps> = ({
+  setValue,
+  formState,
+}) => {
+  const currentTemplateText = formState?.files?.find(
+    (file) => file.content_type === ContentType.text,
+  ) || {
+    content_type: ContentType.text,
+    content: "",
+  };
+
+  const startContent = currentTemplateText?.content || "";
+  const [content, setContent] = useState(() => {
+    // Проверяем, является ли начальный контент Markdown
+    if (startContent && isMarkdownText(startContent)) {
+      const htmlContent = parseMarkdownToHtml(startContent);
+      return cleanHtmlForTiptap(htmlContent);
+    }
+    return startContent;
+  });
+  const limit = POST.POST_LENGTH;
+
+  useEffect(() => {
+    // Проверяем, является ли новый контент Markdown
+    if (startContent && isMarkdownText(startContent)) {
+      const htmlContent = parseMarkdownToHtml(startContent);
+      const cleanedHtml = cleanHtmlForTiptap(htmlContent);
+      setContent(cleanedHtml);
+    } else {
+      setContent(startContent);
+    }
+  }, [startContent]);
+
+  // Обработка вставки текста с поддержкой Markdown
+  const handlePaste = (_view: unknown, event: ClipboardEvent) => {
+    const pastedText = event.clipboardData?.getData("text/plain");
+
+    if (pastedText && isMarkdownText(pastedText)) {
+      // Парсим Markdown в HTML
+      const htmlContent = parseMarkdownToHtml(pastedText);
+      const cleanedHtml = cleanHtmlForTiptap(htmlContent);
+
+      // Вставляем HTML в редактор через команду
+      editor?.commands.insertContent(cleanedHtml);
+
+      return true; // Предотвращаем стандартную обработку
+    }
+
+    return false; // Позволяем стандартную обработку
+  };
+
+  // Конфигурация редактора с изменением поведения параграфов
+  const editor = useEditor({
+    extensions: [
+      StarterKit.configure({
+        paragraph: false,
+      }),
+      underline.configure({
+        HTMLAttributes: {
+          class: "underline",
+        },
+      }),
+      link.configure({
+        openOnClick: "whenNotEditable",
+        HTMLAttributes: {
+          target: "_blank",
+          rel: "noopener noreferrer",
+          class: "hyperlink",
+        },
+        autolink: false,
+      }),
+      Paragraph.extend({
+        // Переопределяем поведение нажатия на Enter для создания нового параграфа
+        addKeyboardShortcuts() {
+          return {
+            Enter: () => {
+              this.editor.commands.createParagraphNear(); // Создание нового <p> вместо <br>
+              return true;
+            },
+          };
+        },
+      }),
+    ],
+    content: content,
+    editorProps: {
+      attributes: {
+        class:
+          "h-full px-4 overflow-auto bg-transparent text-black focus:outline-none text-base",
+      },
+      handlePaste: handlePaste,
+    },
+    onUpdate({ editor }) {
+      handleChange(editor.getHTML());
+    },
+  });
+
+  useEffect(() => {
+    if (editor && startContent !== editor.getHTML()) {
+      editor.commands.setContent(startContent);
+    }
+  }, [startContent, editor]);
+
+  const handleChange = (content: string) => {
+    const cleanedContent = content.replace(/(<br\s*\/?>\s*){2,}/g, "<p></p>");
+
+    // Проверяем длину текста без HTML тегов
+    const textLength = cleanedContent.replace(/<[^>]*>/g, "").length;
+
+    if (textLength > limit) {
+      // Обрезаем контент до лимита
+      const truncatedContent = cleanedContent.substring(0, limit);
+      setContent(truncatedContent);
+      editor?.commands.setContent(truncatedContent);
+      return;
+    }
+
+    setContent(cleanedContent);
+
+    // Проверяем, есть ли уже объект с ContentType.text
+    const existingTextFile = formState.files.find(
+      (file) => file.content_type === ContentType.text,
+    );
+
+    let updatedFiles;
+    if (existingTextFile) {
+      // Если объект существует, обновляем только его content
+      updatedFiles = formState.files.map((file) =>
+        file.content_type === ContentType.text
+          ? { ...file, content: cleanedContent }
+          : file,
+      );
+    } else {
+      // Если объекта нет, создаем новый и добавляем в массив
+      const newTextFile = {
+        content_type: ContentType.text,
+        content: cleanedContent,
+      };
+      updatedFiles = [...formState.files, newTextFile];
+    }
+
+    setValue("files", updatedFiles);
+  };
+
+  return (
+    <div className={styles.editor}>
+      <EditorContent editor={editor} className="relative pt-3 pb-12 h-[200px]">
+        <Toolbar editor={editor} />
+      </EditorContent>
+    </div>
+  );
+};

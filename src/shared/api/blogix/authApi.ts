@@ -73,6 +73,6 @@ export const authApi = createApi({
     CREATE_PROJECT_DATES,
     CREATE_PROJECT_AMOUNT,
     MY_ORGANIZATION,
-    POST_TEMPLATES
+    POST_TEMPLATES,
   ],
 });

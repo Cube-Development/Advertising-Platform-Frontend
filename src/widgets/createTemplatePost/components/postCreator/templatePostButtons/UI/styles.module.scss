@@ -1,0 +1,217 @@
+.open {
+  border-radius: 12px;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.16);
+  background: #fff;
+
+  .icon {
+    width: 18px;
+
+    svg {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  p {
+    color: var(--Sub-text);
+    font-size: var(--font-size-option-item-xl);
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+
+    @media (max-width: 992px) {
+      font-size: var(--font-size-option-item-md);
+    }
+
+    @media (max-width: 768px) {
+      font-size: var(--font-size-option-item-sm);
+    }
+
+    @media (max-width: 576px) {
+      font-size: var(--font-size-option-item-sm);
+      text-align: center;
+    }
+  }
+}
+
+.modalContent {
+  display: grid;
+  max-width: 800px;
+  width: 70vw;
+  align-items: center;
+  grid-auto-flow: row;
+  row-gap: 25px;
+  padding: 35px;
+  border-radius: 25px;
+
+  @media (max-width: 992px) {
+    width: 80vw;
+    row-gap: 20px;
+    border-radius: 20px;
+    padding: 25px;
+  }
+
+  @media (max-width: 768px) {
+    width: 90vw;
+    row-gap: 15px;
+    border-radius: 15px;
+    padding: 20px;
+  }
+
+  @media (max-width: 576px) {
+    width: 95vw;
+    border-radius: 12px;
+  }
+
+  .top {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: space-between;
+
+    .title {
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: 12px;
+      background: var(--primary-gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: normal;
+
+      @media (max-width: 768px) {
+        font-size: 20px;
+      }
+
+      @media (max-width: 576px) {
+        font-size: 16px;
+      }
+    }
+
+    svg {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .inputs {
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 25px;
+
+    div {
+      display: grid;
+      grid-template: 1fr / 0.3fr 1fr;
+      column-gap: 10px;
+      align-items: center;
+      justify-content: space-between;
+
+      @media (max-width: 576px) {
+        grid-template: none;
+        grid-auto-flow: row;
+        justify-content: stretch;
+        gap: 10px;
+        width: 100%;
+      }
+
+      p {
+        color: var(--Personal-colors-black);
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+      }
+
+      input {
+        padding: 16px;
+        border-radius: 12px;
+        box-shadow: inset 0px 0px 5px 1px rgba(0, 0, 0, 0.3);
+        background: var(--Personal-colors-White);
+        color: var(--Personal-colors-black);
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 500;
+
+        &::placeholder {
+          color: var(--Containers);
+        }
+      }
+    }
+  }
+
+  .all__buttons {
+    display: grid;
+    grid-auto-flow: row;
+    border-radius: 30px;
+    border: 2.5px dashed var(--Personal-colors-main);
+    align-items: start;
+    max-height: 20dvh;
+    overflow: auto;
+
+    @media (max-width: 768px) {
+      padding: 20px;
+      border-radius: 20px;
+      border: 1.5px dashed var(--Personal-colors-main);
+    }
+
+    &.zero {
+      border: 2.5px dashed var(--Text-sample);
+    }
+
+    big {
+      text-align: center;
+      color: var(--Text-sample);
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 600;
+
+      @media (max-width: 768px) {
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+      }
+    }
+
+    .row__button {
+      display: grid;
+      grid-auto-flow: column;
+      align-items: center;
+      justify-content: space-between;
+      padding: 15px;
+
+      div {
+        display: grid;
+        grid-auto-flow: column;
+        column-gap: 10px;
+        align-items: center;
+        justify-content: start;
+
+        font-size: 14px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1;
+        p {
+          color: var(--Subtitle-tex);
+        }
+
+        span {
+          background: var(--primary-gradient);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          line-height: normal;
+        }
+      }
+
+      button {
+        display: flex;
+
+        svg {
+          width: 20px;
+          height: 20px;
+        }
+      }
+    }
+  }
+}

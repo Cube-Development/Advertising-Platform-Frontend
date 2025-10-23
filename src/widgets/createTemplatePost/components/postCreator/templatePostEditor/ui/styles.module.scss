@@ -1,0 +1,27 @@
+.editor {
+  background: #fff;
+  box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.16);
+  border-radius: 15px;
+  overflow: hidden;
+  height: 100%;
+}
+
+.toolbar {
+  border-top: 1px solid rgba(0, 0, 0, 0.3);
+  display: grid;
+  grid-auto-flow: column;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 1;
+
+  svg {
+    width: 20px;
+    height: 20px;
+
+    @media (max-width: 576px) {
+      width: 18px;
+      height: 18px;
+    }
+  }
+}
