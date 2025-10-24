@@ -2,7 +2,7 @@ import { platformTypesNum } from "@entities/platform";
 import { ICreatePostForm } from "@entities/project";
 import { FC } from "react";
 import { UseFormSetValue } from "react-hook-form";
-import { renderEditor } from "../renderEditor";
+import { renderEditor } from "./renderEditor";
 
 interface TypeRenderEditorProps {
   formState: ICreatePostForm;

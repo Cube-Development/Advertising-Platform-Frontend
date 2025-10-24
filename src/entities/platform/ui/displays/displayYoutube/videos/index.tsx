@@ -4,7 +4,7 @@ import { EmptyPost } from "./emptyPost";
 import { YoutubeMedia } from "./media";
 import { YoutubeFile } from "./file/ui";
 import { YoutubeComment } from "./comment/ui";
-import { ContentType, GetPostRes, ICreatePostForm } from "@entities/project";
+import { GetPostRes, ICreatePostForm } from "@entities/project";
 import { PostTypesNum } from "@entities/platform";
 import { EyeDisabledIcon } from "@shared/assets";
 import { EditorContent, useEditor } from "@tiptap/react";
@@ -30,32 +30,6 @@ export const DisplayVideos: FC<DisplayVideosProps> = ({
   postType,
   orderId,
 }) => {
-  // post response
-  // const photosRes = post
-  //   ? [
-  //       ...post.photo.map((photo) => ({
-  //         content_type: ContentType.photo,
-  //         content: photo,
-  //       })),
-  //     ]
-  //   : [];
-  // const videosRes = post
-  //   ? [
-  //       ...post.video.map((video) => ({
-  //         content_type: ContentType.video,
-  //         content: video,
-  //       })),
-  //     ]
-  //   : [];
-  // const mediaRes = [...photosRes, ...videosRes];
-  // const textRes = post && post.text;
-  // const fileRes = post &&
-  //   post?.files.length > 0 && {
-  //     content_type: ContentType.file,
-  //     content: post.files[0],
-  //   };
-  // const commentRes = post && post.comment;
-
   const { mediaRes, textRes, fileRes, commentRes } = preparePostsData(post);
 
   // postFromData
@@ -136,7 +110,7 @@ export const DisplayVideos: FC<DisplayVideosProps> = ({
     if (editorRes && textRes) {
       editorRes.commands.setContent(textRes || "");
     }
-  }, [postText, postEditor, editorRes]);
+  }, [postText, postEditor, editorRes, textRes]);
 
   return (
     <div className={styles.screen_wrapper}>

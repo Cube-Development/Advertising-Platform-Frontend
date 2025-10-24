@@ -16,9 +16,9 @@ export const EmptyPost = () => {
         <span>{t("create_order.create.post")}</span>
       </div>
       <div className={styles.bottom}>
-        <MyButton className={styles.button} type="button">
+        {/* <MyButton className={styles.button} type="button">
           <p className="gradient_color">{t("create_order.create.template")}</p>
-        </MyButton>
+        </MyButton> */}
         <div>
           <div className={styles.stroke} />
         </div>

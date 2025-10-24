@@ -5,12 +5,7 @@ import { EyeIcon } from "@shared/assets";
 import { TelegramMedia } from "./media";
 import { TelegramFile } from "./file";
 import { TelegramComment } from "./comment";
-import {
-  ContentType,
-  GetPostRes,
-  ICreatePostForm,
-  IFile,
-} from "@entities/project";
+import { GetPostRes, ICreatePostForm } from "@entities/project";
 import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Link from "@tiptap/extension-link";
@@ -116,7 +111,7 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
     if (editorRes && textRes) {
       editorRes.commands.setContent(textRes || "");
     }
-  }, [postText, postEditor, editorRes]);
+  }, [postText, postEditor, editorRes, textRes]);
 
   return (
     <div className={styles.screen_wrapper}>

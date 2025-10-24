@@ -60,7 +60,9 @@ export const SeePost: FC<SeePostProps> = ({ post, className }) => {
               className="!bg-transparent absolute -right-[60px] -top-8"
               onClick={() => setIsDialogOpen(false)}
             >
-              <X className={`${styles.x_button} text-black`} />
+              <X
+                className={`w-[30px] rounded-full p-2 bg-white cursor-pointer text-black`}
+              />
             </AlertDialogAction>
             {post?.platform === platformTypesNum.telegram && (
               <DisplayTelegram

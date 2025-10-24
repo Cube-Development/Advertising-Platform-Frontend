@@ -153,5 +153,6 @@ interface IPostOrders {
 export interface IPostData {
   content_type: ContentType;
   content: string;
-  url: string;
+  url?: string;
+  name?: string;
 }

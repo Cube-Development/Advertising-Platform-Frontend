@@ -49,7 +49,7 @@ export const SIDEBAR_ADVERTISER_MENU: IMenuItem[] = [
   {
     item: {
       title: "burger_menu.template",
-      path: ENUM_PATHS.MAIN,
+      path: ENUM_PATHS.POST_TEMPLATES,
       img: TemplateIcon,
     },
   },

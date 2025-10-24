@@ -100,7 +100,7 @@ export const MENU_ADVERTISER: IMenuItem[] = [
   {
     item: {
       title: "burger_menu.template",
-      path: ENUM_PATHS.MAIN,
+      path: ENUM_PATHS.POST_TEMPLATES,
       img: TemplateIcon,
     },
   },

@@ -7,3 +7,4 @@ export * from "./catalog";
 export * from "./filterSearch";
 export * from "./turnkey";
 export * from "./tarif";
+export * from "./post-template.types";

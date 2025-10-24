@@ -24,7 +24,7 @@ export const YoutubeMedia: FC<YoutubeMediaProps> = ({
             <img
               src={URL.createObjectURL(medias[0])}
               alt={`Photo ${1}`}
-              className="object-cover h-[620] w-full"
+              className="object-cover h-[620px] w-full"
               style={{ height: `${shortsHeight}px` }}
             />
           ) : (
@@ -33,7 +33,7 @@ export const YoutubeMedia: FC<YoutubeMediaProps> = ({
               loop
               muted
               controls
-              className="object-cover h-[620] w-full"
+              className="object-cover h-[620px] w-full"
               style={{ height: `${shortsHeight}px` }}
             >
               <source src={URL.createObjectURL(medias[0])} type="video/mp4" />

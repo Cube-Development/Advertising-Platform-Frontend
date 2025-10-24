@@ -6,3 +6,4 @@ export * from "./newProject";
 export * from "./technicalSpecification";
 export * from "./zeroManagerProject";
 export * from "./zeroProject";
+export * from "./post-templates";
