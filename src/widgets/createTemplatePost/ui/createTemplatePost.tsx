@@ -19,6 +19,7 @@ import { CreateTemplateFormData } from "../model/createTemplateFormType";
 export const CreateTemplatePost = () => {
   const { toast } = useToast();
   const [isCreatingTemplate, setIsCreatingTemplate] = useState(false);
+  const [isOpen, setIsOpen] = useState<string>("");
   const [addTemplate, { isLoading }] = useAddTemplateMutation();
   const { uploadFilesAndMedia } = useUploadFilesAndMedia();
 
@@ -85,11 +86,18 @@ export const CreateTemplatePost = () => {
     } finally {
       reset();
       setIsCreatingTemplate(false);
+      setIsOpen("");
     }
   };
 
   return (
-    <Accordion type="single" collapsible className="w-full">
+    <Accordion
+      type="single"
+      collapsible
+      className="w-full"
+      value={isOpen}
+      onValueChange={setIsOpen}
+    >
       <AccordionItem
         value="create-template"
         className="border rounded-[30px] mb-6 shadow-[0px_0px_5px_2px_rgba(10,165,190,0.3)]"
