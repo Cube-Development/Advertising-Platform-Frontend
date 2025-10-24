@@ -9,6 +9,7 @@ interface PostsListProps {
   selectedPlatform: platformTypesNum;
   selectedPostType: PostTypesNum;
   canDelete?: boolean;
+  handlePostSelect?: (template: IPostTemplate) => void;
 }
 
 export const PostsList: FC<PostsListProps> = ({
@@ -16,6 +17,7 @@ export const PostsList: FC<PostsListProps> = ({
   selectedPlatform,
   selectedPostType,
   canDelete = true,
+  handlePostSelect,
 }) => {
   return (
     <div className="">
@@ -27,6 +29,7 @@ export const PostsList: FC<PostsListProps> = ({
             selectedPlatform={selectedPlatform}
             selectedPostType={selectedPostType}
             canDelete={canDelete}
+            handlePostSelect={handlePostSelect}
           />
         ))}
       </div>

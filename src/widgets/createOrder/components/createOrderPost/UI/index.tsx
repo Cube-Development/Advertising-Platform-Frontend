@@ -216,14 +216,20 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                 </div>
               </div>
               <div className={styles.display}>
-                <TemplatePostsDialog />
+                <TemplatePostsDialog
+                  setValue={setValue}
+                  formState={formState}
+                />
                 <RenderDisplay formState={formState} />
                 <div className={styles.continue}>
                   <ContinueOrder onClick={handleCheckPosts} />
                 </div>
               </div>
               <div className={styles.continue_mobile}>
-                <TemplatePostsDialog />
+                <TemplatePostsDialog
+                  setValue={setValue}
+                  formState={formState}
+                />
               </div>
               <div className={styles.display_mobile}>
                 <AlertDialog>

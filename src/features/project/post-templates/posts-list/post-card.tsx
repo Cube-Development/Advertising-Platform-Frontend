@@ -1,5 +1,5 @@
 import { FC, useMemo } from "react";
-import { Trash2 } from "lucide-react";
+import { CirclePlus, Trash2 } from "lucide-react";
 import {
   GetPostRes,
   IPostTemplate,
@@ -20,6 +20,7 @@ interface PostCardProps {
   selectedPlatform: platformTypesNum;
   selectedPostType: PostTypesNum;
   canDelete?: boolean;
+  handlePostSelect?: (template: IPostTemplate) => void;
 }
 
 export const PostCard: FC<PostCardProps> = ({
@@ -27,6 +28,7 @@ export const PostCard: FC<PostCardProps> = ({
   selectedPlatform,
   selectedPostType,
   canDelete = true,
+  handlePostSelect,
 }) => {
   const [deleteTemplate, { isLoading: isDeleting }] =
     useDeleteTemplateMutation();
@@ -58,7 +60,7 @@ export const PostCard: FC<PostCardProps> = ({
   };
 
   return (
-    <div className="grid grid-flow-row gap-4 p-10">
+    <div className="grid grid-flow-row gap-4 mobile-xl:px-10 mobile-xl:py-10 px-6 py-4">
       {canDelete && (
         <div className="flex items-center gap-2 justify-center truncate">
           <h2 className="max-w-[80%] truncate text-[var(--Personal-colors-light-black)] md:text-base text-sm font-semibold text-center">
@@ -70,6 +72,15 @@ export const PostCard: FC<PostCardProps> = ({
           >
             {isDeleting ? <SpinnerLoaderSmall /> : <Trash2 />}
           </div>
+        </div>
+      )}
+      {handlePostSelect && (
+        <div
+          className="p-2 rounded-full bg-[var(--Personal-colors-main2)] hover:scale-[1.015] hover:opacity-80 transition-all duration-300 cursor-pointer grid grid-cols-[auto_1fr] items-center gap-2 text-white truncate"
+          onClick={() => handlePostSelect(post)}
+        >
+          <CirclePlus className="mobile-xl:size-6 size-5 stroke-[1.5px]" />
+          <p className=" text-sm font-normal truncate">{post?.name}</p>
         </div>
       )}
       {selectedPlatform === platformTypesNum.telegram && (
