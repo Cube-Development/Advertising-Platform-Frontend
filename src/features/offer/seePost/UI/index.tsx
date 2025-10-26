@@ -5,6 +5,7 @@ import {
   DisplayTelegram,
   DisplayVideos,
   PostTypesNum,
+  SendToTelegram,
   platformTypesNum,
 } from "@entities/platform";
 import { GetPostRes } from "@entities/project";
@@ -26,9 +27,10 @@ import { PostIcon2 } from "@shared/assets";
 
 interface SeePostProps {
   post: GetPostRes;
+  post_deeplink: string;
 }
 
-export const SeePost: FC<SeePostProps> = ({ post }) => {
+export const SeePost: FC<SeePostProps> = ({ post, post_deeplink }) => {
   const { t } = useTranslation();
   const screen = useWindowWidth();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
@@ -109,6 +111,7 @@ export const SeePost: FC<SeePostProps> = ({ post }) => {
                   platformId={platformTypesNum.youtube}
                 />
               )}
+            {post_deeplink && <SendToTelegram post_deeplink={post_deeplink} />}
           </div>
         </div>
       </AlertDialogContent>

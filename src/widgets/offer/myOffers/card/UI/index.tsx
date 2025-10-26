@@ -123,7 +123,7 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
             </div>
             <div className={styles.card__active__buttons}>
               <span className="!grid !grid-flow-row !gap-2">
-                <SeePost post={post!} />
+                <SeePost post={post!} post_deeplink={card?.post_deeplink} />
                 {card?.post_link && <CheckPost url={card?.post_link} />}
               </span>
               <div
@@ -151,7 +151,7 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
               <span>{t(`offers_blogger.offer_status.check.text`)}</span>
             </div>
             <span className="!grid !grid-flow-row !gap-2">
-              <SeePost post={post!} />
+              <SeePost post={post!} post_deeplink={card?.post_deeplink} />
               {card?.post_link && <CheckPost url={card?.post_link} />}
             </span>
           </div>
@@ -172,7 +172,7 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
                 )}
               </div>
               <span className="!grid !grid-flow-row !gap-2">
-                <SeePost post={post!} />
+                <SeePost post={post!} post_deeplink={card?.post_deeplink} />
                 {card?.post_link && <CheckPost url={card?.post_link} />}
               </span>
             </div>
@@ -206,7 +206,7 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
               </div>
             )}
             <span className="!grid !grid-flow-row !gap-2">
-              <SeePost post={post!} />
+              <SeePost post={post!} post_deeplink={card?.post_deeplink} />
               {card?.post_link && <CheckPost url={card?.post_link} />}
             </span>
           </div>
@@ -217,7 +217,7 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
               <span>{t(`offers_blogger.offer_status.cancel.text`)}</span>
             </div>
             <span className="!grid !grid-flow-row !gap-2">
-              <SeePost post={post!} />
+              <SeePost post={post!} post_deeplink={card?.post_deeplink} />
               {card?.post_link && <CheckPost url={card?.post_link} />}
             </span>
           </div>
@@ -227,7 +227,7 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
               <span>{t(`offers_blogger.offer_status.moderation.text`)}</span>
             </div>
             <span className="!grid !grid-flow-row !gap-2">
-              <SeePost post={post!} />
+              <SeePost post={post!} post_deeplink={card?.post_deeplink} />
               {card?.post_link && <CheckPost url={card?.post_link} />}
             </span>
           </div>
@@ -238,7 +238,7 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
               <span>{t(`offers_blogger.offer_status.reject.text`)}</span>
             </div>
             <span className="!grid !grid-flow-row !gap-2">
-              <SeePost post={post!} />
+              <SeePost post={post!} post_deeplink={card?.post_deeplink} />
               {card?.post_link && <CheckPost url={card?.post_link} />}
             </span>
             {/* <div>
