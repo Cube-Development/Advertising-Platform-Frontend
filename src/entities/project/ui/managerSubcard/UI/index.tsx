@@ -44,7 +44,7 @@ interface ManagerProjectSubcardProps {
   AcceptBtn: FC<IOrderFeature>;
   RejectBtn: FC<IOrderFeature>;
   CheckBtn: FC<IOrderFeature>;
-  SeePostBtn: FC<{ post: GetPostRes }>;
+  SeePostBtn: FC<{ post: GetPostRes; post_deeplink: string }>;
   ChangeChannelBtn: FC<ChangeChannelProps>;
   ChangePostBtn: FC<ChangePostProps>;
   SeeCommentBtn: FC;
@@ -225,7 +225,11 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
                       <ChangePostBtn order={subcard} />
                     )}
                   </div>
-                  <SeePostBtn post={post!} />
+                  <SeePostBtn
+                    post={post!}
+                    post_deeplink={subcard?.post_deeplink}
+                  />
+                  {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
                 </div>
               </div>
             ) : subcard?.api_status === orderStatus.canceled ||
@@ -241,12 +245,22 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
                     </span>
                   </>
                 )}
+                <SeePostBtn
+                  post={post!}
+                  post_deeplink={subcard?.post_deeplink}
+                />
+                {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
               </div>
             ) : subcard?.api_status === orderStatus.completed ||
               subcard?.api_status === orderStatus.adv_accept ? (
               <div className={styles.subcard__completed}>
                 <p>{t(`orders_manager.order_status.completed.title2`)}</p>
                 {!subcard?.is_review && <FeedbackBtn order_id={subcard?.id} />}
+                <SeePostBtn
+                  post={post!}
+                  post_deeplink={subcard?.post_deeplink}
+                />
+                {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
               </div>
             ) : subcard?.api_status === orderStatus.post_review ? (
               <div className={styles.subcard__posted}>
@@ -259,14 +273,22 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
                     <AcceptBtn order_id={subcard.id} />
                     <RejectBtn order_id={subcard.id} />
                   </div>
-                  <CheckBtn url={subcard?.post_url} />
+                  <SeePostBtn
+                    post={post!}
+                    post_deeplink={subcard?.post_deeplink}
+                  />
+                  {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
                 </div>
               </div>
             ) : subcard?.api_status === orderStatus.in_progress ? (
               <div className={styles.subcard__accepted}>
                 <p>{t(`orders_manager.order_status.accepted.title`)}</p>
                 <span>{t(`orders_manager.order_status.accepted.text`)}</span>
-                <SeePostBtn post={post!} />
+                <SeePostBtn
+                  post={post!}
+                  post_deeplink={subcard?.post_deeplink}
+                />
+                {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
               </div>
             ) : subcard?.api_status === orderStatus.moderation ? (
               <div className={styles.subcard__moderation}>
@@ -279,12 +301,21 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
                     </small>
                   </span>
                 </div>
+                <SeePostBtn
+                  post={post!}
+                  post_deeplink={subcard?.post_deeplink}
+                />
+                {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
               </div>
             ) : subcard?.api_status === orderStatus.wait ? (
               <div className={styles.subcard__waiting}>
                 <div>
                   <p>{t(`orders_manager.order_status.waiting.title`)}</p>
-                  <SeePostBtn post={post!} />
+                  <SeePostBtn
+                    post={post!}
+                    post_deeplink={subcard?.post_deeplink}
+                  />
+                  {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
                 </div>
               </div>
             ) : subcard?.api_status === orderStatus.order_review ? (
@@ -303,7 +334,11 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
                         : ""}
                   </p>
                   <div>
-                    <SeePostBtn post={post!} />
+                    <SeePostBtn
+                      post={post!}
+                      post_deeplink={subcard?.post_deeplink}
+                    />
+                    {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
                   </div>
                 </div>
               </div>
@@ -445,7 +480,11 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
                     <ChangePostBtn order={subcard} />
                   )}
                 </div>
-                <SeePostBtn post={post!} />
+                <SeePostBtn
+                  post={post!}
+                  post_deeplink={subcard?.post_deeplink}
+                />
+                {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
               </div>
             </div>
           ) : subcard?.api_status === orderStatus.canceled ||
@@ -459,6 +498,8 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
                   <span>{t(`orders_manager.order_status.rejected.text`)}</span>
                 </>
               )}
+              <SeePostBtn post={post!} post_deeplink={subcard?.post_deeplink} />
+              {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
             </div>
           ) : subcard?.api_status === orderStatus.completed ||
             subcard?.api_status === orderStatus.adv_accept ? (
@@ -473,6 +514,8 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
                   )}
                 </>
               )}
+              <SeePostBtn post={post!} post_deeplink={subcard?.post_deeplink} />
+              {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
             </div>
           ) : subcard?.api_status === orderStatus.post_review ? (
             <div className={styles.subcard__posted}>
@@ -481,7 +524,11 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
                 <span>{t(`orders_advertiser.order_status.posted.text`)}</span>
               </div>
               <div className={styles.subcard__posted__buttons}>
-                <CheckBtn url={subcard?.post_url} />
+                <SeePostBtn
+                  post={post!}
+                  post_deeplink={subcard?.post_deeplink}
+                />
+                {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
                 <div className={styles.subcard__posted__buttons__top}>
                   <AcceptBtn order_id={subcard?.id} />
                   <RejectBtn order_id={subcard?.id} />
@@ -492,7 +539,8 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
             <div className={styles.subcard__accepted}>
               <p>{t(`orders_manager.order_status.accepted.title`)}</p>
               <span>{t(`orders_manager.order_status.accepted.text`)}</span>
-              <SeePostBtn post={post!} />
+              <SeePostBtn post={post!} post_deeplink={subcard?.post_deeplink} />
+              {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
             </div>
           ) : subcard?.api_status === orderStatus.moderation ? (
             <div className={styles.subcard__moderation}>
@@ -505,12 +553,18 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
                   </small>
                 </span>
               </div>
+              <SeePostBtn post={post!} post_deeplink={subcard?.post_deeplink} />
+              {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
             </div>
           ) : subcard?.api_status === orderStatus.wait ? (
             <div className={styles.subcard__waiting}>
               <div>
                 <p>{t(`orders_manager.order_status.waiting.title`)}</p>
-                <SeePostBtn post={post!} />
+                <SeePostBtn
+                  post={post!}
+                  post_deeplink={subcard?.post_deeplink}
+                />
+                {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
               </div>
             </div>
           ) : subcard?.api_status === orderStatus.order_review ? (
@@ -528,7 +582,11 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
                       : ""}
                 </p>
                 <div>
-                  <SeePostBtn post={post!} />
+                  <SeePostBtn
+                    post={post!}
+                    post_deeplink={subcard?.post_deeplink}
+                  />
+                  {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
                 </div>
               </div>
             </div>

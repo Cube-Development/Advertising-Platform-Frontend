@@ -122,7 +122,11 @@ export const ComplaintDetails: FC<ComplaintDetailsProps> = ({ card }) => {
             <p className="truncate">
               {t("admin_panel.complaintInfo.card.details.link_advertiser")}:
             </p>
-            <SeePost post={post!} className={styles.seePost} />
+            <SeePost
+              post={post!}
+              className={styles.seePost}
+              post_deeplink={card?.post?.post_deeplink}
+            />
             {/* <MyButton buttons_type="button__white">
               <span>
                 {t("admin_panel.complaintInfo.card.details.buttons.seePost")}

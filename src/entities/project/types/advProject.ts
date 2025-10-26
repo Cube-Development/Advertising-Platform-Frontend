@@ -71,6 +71,7 @@ export interface IAdvProjectSubcard {
   platform: platformTypesNum;
   is_review: boolean;
   rate?: number;
+  post_deeplink: string;
 }
 
 interface IDesire {

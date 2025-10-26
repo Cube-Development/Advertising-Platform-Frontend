@@ -38,6 +38,7 @@ interface IPost {
   format: IFormat;
   amount: number;
   post_url: string;
+  post_deeplink: string;
 }
 
 interface IFormat {

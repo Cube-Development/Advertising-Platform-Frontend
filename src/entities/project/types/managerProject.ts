@@ -110,6 +110,7 @@ export interface IManagerProjectSubcard {
   platform: platformTypesNum;
   is_review: boolean;
   rate?: number;
+  post_deeplink: string;
 }
 
 export interface IDesire {
