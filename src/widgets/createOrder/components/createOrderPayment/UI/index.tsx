@@ -15,6 +15,7 @@ interface CreateOrderPaymentProps {
   onAction?: () => void;
   setValue: UseFormSetValue<ICreatePostForm>;
   formState: ICreatePostForm;
+  step: number;
 }
 
 export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
@@ -25,8 +26,16 @@ export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
   onAction,
   setValue,
   formState,
+  step,
 }) => {
   const { t } = useTranslation();
+  const totalAmountCurrent =
+    role === ENUM_ROLES.MANAGER
+      ? formState?.prices?.reduce(
+          (acc, item) => acc + item.selected_format.price,
+          0,
+        )
+      : totalAmount;
 
   return (
     <div id="payment" className={`layout ${isBlur ? "blur" : ""}`}>
@@ -34,18 +43,24 @@ export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
         <div className={styles.wrapper}>
           <div className={styles.content}>
             <div className={styles.title}>
-              <span>4</span>
-              <p>{t("create_order.payment.title")}</p>
+              <span>{step}</span>
+              <p>
+                {role === ENUM_ROLES.ADVERTISER
+                  ? t("create_order.payment.title")
+                  : t(`create_order.payment.approve`)}
+              </p>
             </div>
             <div className={styles.info}>
               <div className={styles.lottie}>
                 <img src={heartAnimation} alt="heart_lottie_gif" />
               </div>
               <p className={styles.price}>
-                {totalAmount.toLocaleString()} <span>{t("symbol")}</span>
+                {totalAmountCurrent?.toLocaleString()}{" "}
+                <span>{t("symbol")}</span>
               </p>
               <p className={styles.description}>
-                {t("create_order.payment.description")}
+                {role === ENUM_ROLES.ADVERTISER &&
+                  t("create_order.payment.description")}
               </p>
             </div>
             <div className={styles.pay_btn}>

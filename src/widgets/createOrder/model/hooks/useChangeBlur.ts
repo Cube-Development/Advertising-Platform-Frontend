@@ -9,6 +9,7 @@ export const useChangeBlur = () => {
   const [blur, setBlur] = useState<ICreateOrderBlur>({
     post: true,
     datetime: true,
+    prices: true,
     payment: true,
   });
   const handleOnChangeBlur = (key: keyof ICreateOrderBlur) => {
@@ -26,6 +27,12 @@ export const useChangeBlur = () => {
         scroller.scrollTo("datetime", {
           smooth: true,
           offset: screen > BREAKPOINT.MD ? -30 : -80,
+        });
+        break;
+      case "prices":
+        scroller.scrollTo("prices", {
+          smooth: true,
+          offset: screen > BREAKPOINT.MD ? 0 : -60,
         });
         break;
       case "payment":

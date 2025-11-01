@@ -22,6 +22,7 @@ export const useCreatePostManager = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const projectId = Cookies.get(ENUM_COOKIES_TYPES.PROJECT_ID) || "";
+  const isManagerProject = "true";
 
   const createPostManager = async () => {
     if (isLoadingCreate || isLoadingCheck) return;
@@ -31,6 +32,11 @@ export const useCreatePostManager = () => {
         project_id: projectId,
         language: language?.id || USER_LANGUAGES_LIST[0].id,
       }).unwrap();
+
+      if (isManagerProject === "true") {
+        navigate(ENUM_PATHS.CREATE_ORDER);
+        return;
+      }
 
       const data = await checkProjectCart({
         project_id: projectId,

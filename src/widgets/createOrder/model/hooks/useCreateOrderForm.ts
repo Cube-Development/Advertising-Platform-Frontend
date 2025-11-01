@@ -1,7 +1,7 @@
-import { ICreatePostForm } from "@entities/project";
-import { ENUM_WALLETS_TYPE } from "@entities/wallet";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
+import { ICreatePostForm } from "@entities/project";
+import { ENUM_WALLETS_TYPE } from "@entities/wallet";
 
 interface Props {
   name: string;
@@ -23,6 +23,7 @@ export const useCreateOrderForm = ({
         isDownloadPosts: false,
         name: name || "",
         wallet_type: ENUM_WALLETS_TYPE.DEPOSIT,
+        prices: [],
       },
     });
   const formState = watch();

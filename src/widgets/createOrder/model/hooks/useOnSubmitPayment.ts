@@ -1,8 +1,10 @@
 import {
   ICreatePostForm,
-  useApproveProjectMutation,
+  // useApproveProjectMutation,
   useCreateOrderDatesMutation,
+  useCreateOrderPricesMutation,
   useProjectNameMutation,
+  useRequestApproveMutation,
 } from "@entities/project";
 import { ENUM_ROLES } from "@entities/user";
 import { ENUM_PATHS } from "@shared/routing";
@@ -21,8 +23,10 @@ export const useOnSubmitPayment = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [projectName] = useProjectNameMutation();
   const [createOrderDates] = useCreateOrderDatesMutation();
+  const [createOrderPrices] = useCreateOrderPricesMutation();
   const [createPayment] = useCreatePaymentProjectMutation();
-  const [approveProject] = useApproveProjectMutation();
+  // const [approveProject] = useApproveProjectMutation();
+  const [requestApprove] = useRequestApproveMutation();
   const { toast } = useToast();
   const navigate = useNavigate();
   const { t } = useTranslation();
@@ -49,6 +53,11 @@ export const useOnSubmitPayment = () => {
 
       // Создание дат заказа и оплата
       await handleProjectDates(formData);
+
+      // Создание цен заказов
+      if (role === ENUM_ROLES.MANAGER) {
+        await handleProjectPrices(formData);
+      }
 
       // Оплата или подтверждение
       await handleProjectPayment(projectId, role, formData?.wallet_type);
@@ -93,6 +102,22 @@ export const useOnSubmitPayment = () => {
     }
   };
 
+  const handleProjectPrices = async (formData: ICreatePostForm) => {
+    try {
+      const prices = formData?.prices?.map((price) => ({
+        order_id: price.order_id,
+        price: price.selected_format.price,
+      }));
+      await createOrderPrices({ orders: prices || [] }).unwrap();
+    } catch (error) {
+      toast({
+        variant: "error",
+        title: t("toasts.create_order.prices.error"),
+      });
+      throw new Error("Error: Create order prices");
+    }
+  };
+
   const handleProjectPayment = async (
     projectId: string,
     role: ENUM_ROLES,
@@ -104,10 +129,12 @@ export const useOnSubmitPayment = () => {
           project_id: projectId,
           wallet_type: wallet_type!,
         }).unwrap();
-      } else if (role === ENUM_ROLES.MANAGER) {
-        await approveProject({ project_id: projectId }).unwrap();
-      } else {
-        return;
+      }
+      // else if (role === ENUM_ROLES.MANAGER && !isManagerOwnProject) {
+      //   await approveProject({ project_id: projectId }).unwrap();
+      // }
+      else if (role === ENUM_ROLES.MANAGER) {
+        await requestApprove({ project_id: projectId }).unwrap();
       }
       toast({
         variant: "success",

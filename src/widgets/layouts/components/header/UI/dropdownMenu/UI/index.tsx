@@ -38,7 +38,6 @@ export const DropdownMenu: FC<DropdownMenuProps> = () => {
 
   const toggleMenu = (path?: string) => {
     const newMenu = { isOpen: !dropdownMenu.isOpen, title: "" };
-    console.log(newMenu);
     dispatch(setDropDownMenu(newMenu));
     changeRole(path);
   };
@@ -64,8 +63,6 @@ export const DropdownMenu: FC<DropdownMenuProps> = () => {
     role,
   });
 
-  const isSafari = /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-
   const setRoleFilter = (role: ENUM_ROLES) => {
     updateRole(role);
   };
@@ -80,7 +77,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = () => {
       </SheetTrigger>
 
       <SheetContent side={"left"} className={styles.menu} useClose={false}>
-        <div className={`${styles.menu__content} ${isSafari && ""}`}>
+        <div className={styles.menu__content}>
           <SheetTitle className={`${styles.menu__top}`}>
             <img
               src={logo}
@@ -109,7 +106,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = () => {
                   <WalletsCard />
                 </div>
               )}
-              {USER_ROLES.includes(role) && (
+              {(USER_ROLES.includes(role) || role === ENUM_ROLES.MANAGER) && (
                 <div className={styles.accordion__block}>
                   <p className={styles.accordion__title}>
                     {t("burger_menu.services")}

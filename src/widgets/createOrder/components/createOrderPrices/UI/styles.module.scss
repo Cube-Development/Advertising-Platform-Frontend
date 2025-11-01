@@ -1,0 +1,124 @@
+.wrapper {
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 30px;
+  padding-top: 30px;
+  padding-bottom: 100px;
+
+  @media (max-width: 576px) {
+    padding-bottom: 30px;
+  }
+
+  .top {
+    display: grid;
+    grid-auto-flow: column;
+    align-items: center;
+    justify-content: start;
+
+    @media (max-width: 576px) {
+      justify-content: center;
+      gap: 20px;
+    }
+
+    .title {
+      display: grid;
+      grid-auto-flow: column;
+      align-items: center;
+      justify-content: start;
+      column-gap: 30px;
+
+      @media (max-width: 768px) {
+        column-gap: 25px;
+      }
+
+      @media (max-width: 576px) {
+        grid-auto-flow: row;
+        align-items: center;
+        justify-content: center;
+        justify-items: center;
+        row-gap: 30px;
+      }
+
+      span {
+        display: grid;
+        justify-content: center;
+        align-items: center;
+        width: 80px;
+        height: 80px;
+        border: 4px dashed #0badc2;
+        border-radius: 50%;
+        font-size: 44px;
+        font-weight: bold;
+        line-height: 1;
+
+        @media (max-width: 768px) {
+          width: 70px;
+          height: 70px;
+          border: 3px dashed #0badc2;
+          font-size: 38px;
+        }
+
+        @media (max-width: 576px) {
+          width: 80px;
+          height: 80px;
+          border: 4px dashed #0badc2;
+          font-size: 44px;
+        }
+      }
+
+      p {
+        font-style: normal;
+        font-weight: 500;
+        line-height: normal;
+        font-size: var(--font-size-title-secondary-xl);
+
+        @media (max-width: 992px) {
+          font-size: var(--font-size-title-secondary-lg);
+        }
+
+        @media (max-width: 768px) {
+          font-size: var(--font-size-title-secondary-md);
+        }
+
+        @media (max-width: 576px) {
+          font-size: var(--font-size-title-secondary-sm);
+        }
+
+        @media (max-width: 375px) {
+          font-size: var(--font-size-title-secondary-xs);
+        }
+      }
+    }
+  }
+
+  .content {
+    display: grid;
+    grid-auto-flow: row;
+    row-gap: 30px;
+    padding: 0px 110px;
+
+    @media (max-width: 992px) {
+      padding: 0;
+    }
+
+    .cards {
+      display: grid;
+      grid-auto-flow: row;
+      row-gap: 20px;
+
+      @media (max-width: 576px) {
+        row-gap: 15px;
+      }
+    }
+
+    .continue {
+      display: grid;
+      align-items: center;
+      justify-content: start;
+
+      @media (max-width: 576px) {
+        justify-content: stretch;
+      }
+    }
+  }
+}

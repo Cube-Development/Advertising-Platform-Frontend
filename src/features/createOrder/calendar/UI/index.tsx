@@ -38,7 +38,6 @@ export const CustomCalendar: FC<DateListProps> = ({ onChange, startDate }) => {
     date: null,
     dateString: null,
   });
-  console.log("dateObject", dateObject);
 
   const customStringDate = (date: Date): string => {
     const day = date.getDate();
@@ -137,7 +136,6 @@ export const CustomCalendar: FC<DateListProps> = ({ onChange, startDate }) => {
     return null;
   };
 
-  console.log("dateObject", dateObject);
   return (
     <AlertDialog open={isOpen} onOpenChange={setIsOpen}>
       <AlertDialogTrigger>

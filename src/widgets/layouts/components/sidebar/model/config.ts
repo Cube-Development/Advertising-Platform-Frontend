@@ -2,6 +2,8 @@ import { IMenuItem } from "../../header/model/config/types";
 import {
   ENUM_ADV_MANAGER_PROJECT_STATUS,
   ENUM_ADV_MY_PROJECT_STATUS,
+  ENUM_MANAGER_PROJECT_STATUS,
+  ENUM_MANAGER_PROJECT_TYPES,
   ENUM_PROJECT_TYPES,
 } from "@entities/project";
 import {
@@ -61,6 +63,50 @@ export const SIDEBAR_MANAGER_MENU: IMenuItem[] = [
       title: "burger_menu.manager_orders",
       path: ENUM_PATHS.ORDERS,
       img: CampaignIcon,
+    },
+    subItems: [
+      {
+        title: "orders_manager.type_filter.my_project",
+        path: buildPathWithQuery(ENUM_PATHS.ORDERS, {
+          [queryParamKeys.projectType]: ENUM_MANAGER_PROJECT_TYPES.MY_PROJECT,
+          [queryParamKeys.projectStatus]: ENUM_MANAGER_PROJECT_STATUS.ACTIVE,
+        }),
+      },
+      {
+        title: "orders_manager.type_filter.turnkey_project",
+        path: buildPathWithQuery(ENUM_PATHS.ORDERS, {
+          [queryParamKeys.projectType]:
+            ENUM_MANAGER_PROJECT_TYPES.TURNKEY_PROJECT,
+          [queryParamKeys.projectStatus]: ENUM_MANAGER_PROJECT_STATUS.ACTIVE,
+        }),
+      },
+    ],
+  },
+  {
+    item: {
+      title: "burger_menu.template",
+      path: ENUM_PATHS.POST_TEMPLATES,
+      img: TemplateIcon,
+    },
+  },
+  {
+    item: {
+      title: "burger_menu.wallet",
+      path: ENUM_PATHS.WALLET,
+      img: WalletIcon,
+      openMenu: true,
+    },
+    subItems: [
+      { title: "burger_menu.withdraw", path: ENUM_PATHS.WALLET_WITHDRAW },
+      { title: "burger_menu.history", path: ENUM_PATHS.WALLET_HISTORY },
+      // { title: "burger_menu.invoice", path: ENUM_PATHS.MAIN },
+    ],
+  },
+  {
+    item: {
+      title: "burger_menu.invoice",
+      path: ENUM_PATHS.DOCUMENTS,
+      img: FileText,
     },
   },
   { item: { title: "burger_menu.base", path: ENUM_PATHS.FAQ, img: BookIcon } },

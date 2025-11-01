@@ -89,7 +89,6 @@ export const OffersPage: FC = () => {
     const newPage = Math.floor(
       (data?.orders?.length || 0) / INTERSECTION_ELEMENTS.BLOGGER_OFFERS,
     );
-    console.log("newPage", newPage);
     setValue("page", newPage + 1);
 
     if (data?.orders?.length === 0) {

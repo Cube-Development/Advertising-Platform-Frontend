@@ -21,7 +21,7 @@ export const InfoTooltip: FC<InfoTooltipProps> = ({ text }) => {
       >
         <InfoIcon
           size={16}
-          className="text-gray-200 transition-transform duration-300 ease-in hover:scale-110"
+          className="text-[var(--Personal-colors-main2)] transition-transform duration-300 ease-in hover:scale-110"
         />
       </TooltipTrigger>
       <TooltipContent

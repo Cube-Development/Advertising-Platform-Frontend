@@ -1,9 +1,13 @@
 import { ENUM_CHANNEL_STATUS } from "@entities/channel";
 import { ENUM_OFFER_STATUS } from "@entities/offer";
-import { ADVERTISER_PROJECT_TABS_LIST } from "@entities/project";
+import {
+  ADVERTISER_PROJECT_TABS_LIST,
+  MANAGER_PROJECT_TYPES_TABS_LIST,
+} from "@entities/project";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { ENUM_ROLES } from "@entities/user";
 
 interface BarTypesFilterProps {
   typeFilter: string;
@@ -12,6 +16,7 @@ interface BarTypesFilterProps {
   ) => void;
   changeType: (type: string) => void;
   badge?: { type: string; count: number }[];
+  role: ENUM_ROLES;
 }
 
 export const BarTypesFilter: FC<BarTypesFilterProps> = ({
@@ -19,6 +24,7 @@ export const BarTypesFilter: FC<BarTypesFilterProps> = ({
   changeStatus,
   changeType,
   badge,
+  role,
 }) => {
   const { t } = useTranslation();
   const toggleType = (type: string, status: string) => {
@@ -26,7 +32,12 @@ export const BarTypesFilter: FC<BarTypesFilterProps> = ({
     changeType(type);
   };
 
-  const projectTypes = ADVERTISER_PROJECT_TABS_LIST;
+  const projectTypes =
+    role === ENUM_ROLES.ADVERTISER
+      ? ADVERTISER_PROJECT_TABS_LIST
+      : role === ENUM_ROLES.MANAGER
+        ? MANAGER_PROJECT_TYPES_TABS_LIST
+        : [];
 
   return (
     <div

@@ -11,6 +11,7 @@ import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { ICreateOrderBlur } from "@widgets/createOrder/model";
+import { ENUM_ROLES } from "@entities/user";
 
 interface CreateOrderDatetimeProps {
   cards: IPostChannel[];
@@ -19,6 +20,7 @@ interface CreateOrderDatetimeProps {
   setValue: UseFormSetValue<ICreatePostForm>;
   getValues: UseFormGetValues<ICreatePostForm>;
   formState: ICreatePostForm;
+  role: ENUM_ROLES;
 }
 
 export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
@@ -28,6 +30,7 @@ export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
   setValue,
   getValues,
   formState,
+  role,
 }) => {
   const { t } = useTranslation();
   const { toast } = useToast();
@@ -44,7 +47,11 @@ export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
         );
       }, true);
       if (condition) {
-        onChangeBlur("payment");
+        if (role === ENUM_ROLES.MANAGER) {
+          onChangeBlur("prices");
+        } else {
+          onChangeBlur("payment");
+        }
       } else {
         toast({
           variant: "error",

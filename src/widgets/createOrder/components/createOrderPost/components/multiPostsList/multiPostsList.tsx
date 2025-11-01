@@ -28,7 +28,6 @@ export const MultiPostsList: FC<MultiPostsListProps> = ({
   selectedPostType,
 }) => {
   const { t } = useTranslation();
-  // console.log("orders", orders, selectedPostType);
   const filteredPosts = orders?.filter(
     (order) =>
       order?.platform === platform && order?.post_type === selectedPostType,
@@ -46,11 +45,6 @@ export const MultiPostsList: FC<MultiPostsListProps> = ({
     const multiPosts = getValues("multiposts") || [];
     const currentPost = multiPosts.find((post) => post?.order_id === order_id);
     if (!currentPost) {
-      console.log("multiPosts", multiPosts, {
-        order_id,
-        platform,
-        post_type: selectedPostType,
-      });
       setValue("multiposts", [
         ...multiPosts,
         { order_id, platform, post_type: selectedPostType },

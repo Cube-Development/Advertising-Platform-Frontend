@@ -1,4 +1,7 @@
-import { ENUM_PROJECT_TYPES } from "@entities/project";
+import {
+  ENUM_MANAGER_PROJECT_TYPES,
+  ENUM_PROJECT_TYPES,
+} from "@entities/project";
 import { ENUM_ROLES } from "@entities/user";
 import {
   IViewAdvertiserProject,
@@ -34,7 +37,11 @@ interface IMenuItemParams {
   path?: string;
   openMenu?: boolean;
   isDialog?: boolean;
-  type?: viewsTypes | ENUM_PROJECT_TYPES | walletTypesFilter;
+  type?:
+    | viewsTypes
+    | ENUM_PROJECT_TYPES
+    | walletTypesFilter
+    | ENUM_MANAGER_PROJECT_TYPES;
 }
 
 export interface IDropdownSwitcher {

@@ -98,7 +98,6 @@ export const Cart: FC = () => {
   }, [currentCart]);
 
   const formFields = watch();
-  console.log("formFields", formFields);
   const { data: recomendCards } = useGetRecommedChannelsQuery(
     { ...formFields },
     {
@@ -120,7 +119,6 @@ export const Cart: FC = () => {
     const currentCard = currentCart.channels?.find(
       (card) => card?.id === cartChannel?.id,
     );
-    console.log("handleChangeCartCards", currentCard);
     handleChangeCards(cartChannel, currentCard);
   };
 
@@ -128,7 +126,6 @@ export const Cart: FC = () => {
     const currentCard = recomendCards?.channels?.find(
       (card) => card?.id === cartChannel?.id,
     );
-    console.log("handleChangeCartCards", currentCard);
     handleChangeCards(cartChannel, currentCard);
   };
 

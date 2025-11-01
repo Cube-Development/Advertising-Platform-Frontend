@@ -1,17 +1,17 @@
 export enum orderStatus {
-  wait = 1,
-  in_progress = 2,
-  completed = 3,
-  canceled = 4,
-  rejected = 5,
-  post_matched = 6,
-  date_interval = 7,
-  date_constant = 8,
-  post_review = 9,
-  moderation = 10,
-  order_review = 11,
-  channel_agreed = 12,
-  adv_accept = 13,
+  wait = 1, // ожидает принятия блогером
+  in_progress = 2, // запущен
+  completed = 3, // выполнен
+  canceled = 4, // отменен
+  rejected = 5, // отклонен
+  post_matched = 6, // пост загружен (нигде не используется)
+  date_interval = 7, // дата интервал
+  date_constant = 8, // дата постоянная
+  post_review = 9, // пост опубликован
+  moderation = 10, // на модерации
+  order_review = 11, // есть комменты заказчика (desire)
+  channel_agreed = 12, // согласованный канал
+  adv_accept = 13, // отправил сф взял деньги(блогер)
 }
 
 export const orderStatusChat = [

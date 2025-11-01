@@ -11,6 +11,7 @@ import { AdminReviewsPage } from "@pages/AdminReviews";
 import { AdminTransactionsPage } from "@pages/AdminTransactions";
 import { AdminUserInfoPage } from "@pages/AdminUserInfo";
 import { AdminUsersPage } from "@pages/AdminUsers";
+import { ProjectPage } from "@pages/Project";
 import { CartPage } from "@pages/Cart";
 import { CatalogPage } from "@pages/Catalog";
 import { ChannelPage } from "@pages/Channel";
@@ -88,6 +89,13 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
     roles: [...USER_ROLES, ENUM_ROLES.MANAGER],
     auth: ENUM_AUTH_TYPES.PUBLIC,
     authSidebar: true,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
+  },
+  {
+    path: ENUM_PATHS.PROJECT_PAGE,
+    component: ProjectPage,
+    roles: [...USER_ROLES, ENUM_ROLES.MANAGER],
+    auth: ENUM_AUTH_TYPES.PUBLIC,
     layout: ENUM_LAYOUT_TYPES.ROOT,
   },
   {
@@ -190,7 +198,7 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
   {
     path: ENUM_PATHS.DOCUMENTS,
     component: DocumentsPage,
-    roles: USER_ROLES,
+    roles: [...USER_ROLES, ENUM_ROLES.MANAGER],
     auth: ENUM_AUTH_TYPES.PRIVATE,
     authSidebar: true,
     layout: ENUM_LAYOUT_TYPES.ROOT,
@@ -206,7 +214,7 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
   {
     path: ENUM_PATHS.WALLET_WITHDRAW,
     component: WithdrawalPage,
-    roles: USER_ROLES,
+    roles: [...USER_ROLES, ENUM_ROLES.MANAGER],
     auth: ENUM_AUTH_TYPES.PRIVATE,
     authSidebar: true,
     layout: ENUM_LAYOUT_TYPES.ROOT,
@@ -214,7 +222,7 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
   {
     path: ENUM_PATHS.WALLET_HISTORY,
     component: WalletHistoryPage,
-    roles: USER_ROLES,
+    roles: [...USER_ROLES, ENUM_ROLES.MANAGER],
     auth: ENUM_AUTH_TYPES.PRIVATE,
     authSidebar: true,
     layout: ENUM_LAYOUT_TYPES.ROOT,
@@ -222,7 +230,7 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
   {
     path: ENUM_PATHS.PROFILE,
     component: ProfilePage,
-    roles: USER_ROLES,
+    roles: [...USER_ROLES, ENUM_ROLES.MANAGER],
     auth: ENUM_AUTH_TYPES.PRIVATE,
     authSidebar: true,
     layout: ENUM_LAYOUT_TYPES.ROOT,

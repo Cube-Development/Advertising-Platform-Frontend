@@ -28,8 +28,6 @@ export const AddToBasket: FC<IAddToBasketProps> = ({
       break;
   }
 
-  // console.log("card", !card.selected_format, !page, card);
-
   if (isSmallCatalogCard) {
     return (
       <MyButton

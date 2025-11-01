@@ -8,7 +8,6 @@ import { SquareArrowOutUpRight } from "lucide-react";
 
 export const CheckPost: FC<IOrderFeature> = ({ url }) => {
   const { t } = useTranslation();
-  console.log(url);
   return (
     <Link to={url!} target="_blank">
       <MyButton

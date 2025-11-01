@@ -43,7 +43,6 @@ export const Reviews: FC = () => {
     setValue(ADMIN_REVIEW_FORM.PAGE, 1);
     setValue(ADMIN_REVIEW_FORM.STATUS, filter);
   };
-  console.log(data);
   return (
     <div className="container">
       <div className={styles.wrapper}>

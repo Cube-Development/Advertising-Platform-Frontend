@@ -56,7 +56,6 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
       const updatedFiles = await Promise.all(
         allFiles.map(async (file, index) => {
           let filename = file.name;
-          console.log("contentType", file);
           const response = await fetch(file.content, {
             method: "GET",
             headers: {
@@ -64,7 +63,6 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
             },
           });
 
-          console.log("response", response);
           const contentType = response.headers.get("Content-Type");
           const size = response.headers.get("Content-Range")?.split("/")[1];
           const extension =
@@ -74,7 +72,6 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
           }
 
           // const size = response.headers.get("Content-Length");
-          // console.log("size", size, range);
           const [sizeString, sizeType] = formatFileSizeAndType(
             size ? parseInt(size) : 0,
           );
@@ -94,7 +91,6 @@ export const TechnicalSpecification: FC<TechnicalSpecificationProps> = ({
 
     fetchFileMetadata();
   }, []);
-  console.log(allFiles);
 
   const handleCopyLink = (link: string) => {
     navigator.clipboard.writeText(link);

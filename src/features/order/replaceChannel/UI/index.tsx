@@ -1,9 +1,11 @@
 import {
   desireStatus,
   IAdvProjectSubcard,
+  IAgencyOrderCard,
   IChangeOrder,
   invalidateAdvProjectByDesire,
   projectStatus,
+  useAgencyProjectChangeMutation,
   useChangeOrderMutation,
 } from "@entities/project";
 import { CancelIcon2 } from "@shared/assets";
@@ -26,23 +28,24 @@ import {
   ToastAction,
   useToast,
 } from "@shared/ui";
-import { Loader } from "lucide-react";
+import { CheckCheck, Loader } from "lucide-react";
 import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import styles from "./styles.module.scss";
 import { useFindLanguage } from "@entities/user";
 
 export interface ReplaceChannelProps {
-  order: IAdvProjectSubcard;
+  order: IAdvProjectSubcard | IAgencyOrderCard;
   status: projectStatus;
   project_id: string;
+  code?: number;
 }
 
 export const ReplaceChannel: FC<ReplaceChannelProps> = ({
   order,
   status,
   project_id,
+  code,
 }) => {
   const { t } = useTranslation();
   const screen = useWindowWidth();
@@ -50,6 +53,10 @@ export const ReplaceChannel: FC<ReplaceChannelProps> = ({
   const dispatch = useAppDispatch();
   const language = useFindLanguage();
   const [replace, { isLoading }] = useChangeOrderMutation();
+  // customer flow
+  const [agencyProjectChange, { isLoading: isAgencyProjectChangeLoading }] =
+    useAgencyProjectChangeMutation();
+
   const [isOpen, setIsOpen] = useState(false);
   const haveDesire = !!order?.desire.find(
     (el) => el.desire_type === desireStatus.replace_channel_request,
@@ -68,11 +75,11 @@ export const ReplaceChannel: FC<ReplaceChannelProps> = ({
 
   const formState = watch();
   const handleOnClick = () => {
-    !isLoading &&
+    (!isLoading || !isAgencyProjectChangeLoading) &&
       formState.comment &&
       order?.id &&
-      !isLoading &&
-      replace(formState)
+      (!isLoading || !isAgencyProjectChangeLoading) &&
+      (code ? agencyProjectChange({ ...formState, code }) : replace(formState))
         .unwrap()
         .then(() => {
           toast({
@@ -100,31 +107,36 @@ export const ReplaceChannel: FC<ReplaceChannelProps> = ({
               buttons_type={
                 haveDesire ? "button__green__outline" : "button__white"
               }
-              className={styles.trigger}
+              className="min-h-[33px] rounded-[8px] px-[10px] py-[5px] text-xs font-semibold leading-none text-center"
               disabled={!haveDesire && status === projectStatus.approved}
             >
-              {haveDesire
-                ? t(`order_btn.channel.advertiser.process`)
-                : t(`order_btn.channel.advertiser.edit`)}
+              {haveDesire ? (
+                <p className="flex items-center justify-center gap-0.5">
+                  <CheckCheck className="mobile-xl:size-5 size-4 stroke-[2px]" />
+                  {t(`order_btn.channel.advertiser.process`)}
+                </p>
+              ) : (
+                t(`order_btn.channel.advertiser.edit`)
+              )}
             </MyButton>
           </DialogTrigger>
-          <DialogContent className={styles.content}>
+          <DialogContent className="grid [grid-template-rows:max-content_1fr_max-content] gap-5 md:h-[50vh] h-full md:w-[50vw] w-[unset] md:max-w-[800px] md:max-h-[400px] md:p-5 p-4 max-h-[unset] max-w-[unset]">
             <DialogDescription className="sr-only"></DialogDescription>
-            <DialogTitle className={styles.title}>
-              <p className="gradient_color">
+            <DialogTitle className="grid grid-flow-column">
+              <p className="max-w-[80%] mx-auto text-center md:text-lg text-base font-medium text-[var(--Personal-colors-black)]">
                 {haveDesire
                   ? t("orders_advertiser.subcard.replace.channel.desire")
                   : t("orders_advertiser.subcard.replace.channel.title")}
               </p>
               <DialogClose asChild>
-                <div className={styles.close}>
+                <div className="absolute top-0 right-0 p-[15px] rounded-[50%] cursor-pointer hover:bg-[rgba(0,0,0,0.1)]">
                   <CancelIcon2 />
                 </div>
               </DialogClose>
             </DialogTitle>
             <textarea
               {...register("comment")}
-              className={styles.textarea}
+              className={`text-base font-medium text-[var(--Personal-colors-black)] resize-none outline-none rounded-[15px] p-[10px] transition-border-color duration-300 focus:border-[var(--Personal-colors-main)] ${haveDesire ? "opacity-75" : "border-[1px] border-[var(--Card-separator)]"}`}
               maxLength={300}
               disabled={haveDesire}
               placeholder={t(
@@ -138,14 +150,15 @@ export const ReplaceChannel: FC<ReplaceChannelProps> = ({
             ) : (
               <MyButton onClick={handleOnClick}>
                 <p>{t("orders_advertiser.subcard.replace.button.send")}</p>
-                {isLoading && (
-                  <Loader
-                    className="animate-spin"
-                    stroke="#fff"
-                    width={20}
-                    height={20}
-                  />
-                )}
+                {isLoading ||
+                  (isAgencyProjectChangeLoading && (
+                    <Loader
+                      className="animate-spin"
+                      stroke="#fff"
+                      width={20}
+                      height={20}
+                    />
+                  ))}
               </MyButton>
             )}
           </DialogContent>
@@ -157,31 +170,36 @@ export const ReplaceChannel: FC<ReplaceChannelProps> = ({
               buttons_type={
                 haveDesire ? "button__green__outline" : "button__white"
               }
-              className={styles.trigger}
+              className="min-h-[33px] rounded-[8px] px-[10px] py-[5px] text-xs font-semibold leading-none text-center"
               disabled={!haveDesire && status === projectStatus.approved}
             >
-              {haveDesire
-                ? t(`order_btn.channel.advertiser.process`)
-                : t(`order_btn.channel.advertiser.edit`)}
+              {haveDesire ? (
+                <p className="flex items-center justify-center gap-0.5">
+                  <CheckCheck className="mobile-xl:size-5 size-4 stroke-[2px]" />
+                  {t(`order_btn.channel.advertiser.process`)}
+                </p>
+              ) : (
+                t(`order_btn.channel.advertiser.edit`)
+              )}
             </MyButton>
           </DrawerTrigger>
-          <DrawerContent className={styles.content}>
+          <DrawerContent className="grid [grid-template-rows:max-content_1fr_max-content] gap-5 md:h-[50vh] h-full md:w-[50vw] w-[unset] md:max-w-[800px] md:max-h-[400px] md:p-10 p-7 max-h-[unset] max-w-[unset]">
             <DrawerDescription className="sr-only"></DrawerDescription>
-            <DrawerTitle className={styles.title}>
-              <p className="gradient_color">
+            <DrawerTitle className="grid grid-flow-column">
+              <p className="max-w-[80%] mx-auto text-center md:text-lg text-base font-medium text-[var(--Personal-colors-black)]">
                 {haveDesire
                   ? t("orders_advertiser.subcard.replace.channel.desire")
                   : t("orders_advertiser.subcard.replace.channel.title")}
               </p>
               <DrawerClose asChild>
-                <div className={styles.close}>
+                <div className="absolute top-0 right-0 p-[15px] rounded-[50%] cursor-pointer hover:bg-[rgba(0,0,0,0.1)]">
                   <CancelIcon2 />
                 </div>
               </DrawerClose>
             </DrawerTitle>
             <textarea
               {...register("comment")}
-              className={styles.textarea}
+              className={`text-base font-medium text-[var(--Personal-colors-black)] resize-none outline-none rounded-[15px] p-[10px] transition-border-color duration-300 focus:border-[var(--Personal-colors-main)] ${haveDesire ? "opacity-75" : "border-[1px] border-[var(--Card-separator)]"}`}
               maxLength={300}
               disabled={haveDesire}
               placeholder={t(
@@ -195,7 +213,7 @@ export const ReplaceChannel: FC<ReplaceChannelProps> = ({
             ) : (
               <MyButton onClick={handleOnClick}>
                 <p>{t("orders_advertiser.subcard.replace.button.send")}</p>
-                {isLoading && (
+                {(isLoading || isAgencyProjectChangeLoading) && (
                   <Loader
                     className="animate-spin"
                     stroke="#fff"

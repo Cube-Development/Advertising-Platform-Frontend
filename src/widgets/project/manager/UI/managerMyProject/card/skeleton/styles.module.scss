@@ -1,0 +1,221 @@
+.wrapper {
+  display: grid;
+  grid-template: 4fr 1fr / 1fr;
+  row-gap: 20px;
+  min-height: 220px;
+
+  @media (max-width: 992px) {
+    row-gap: 15px;
+
+    &.completed {
+      min-height: 245px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    min-height: 500px;
+    row-gap: 15px;
+    grid-template: 1fr 32px / 1fr;
+
+    &.completed {
+      min-height: 500px;
+    }
+  }
+
+  .card {
+    display: grid;
+    grid-template: 1fr / 7.5fr 12fr 1.4fr;
+    padding-top: 15px;
+
+    @media (max-width: 768px) {
+      padding-top: 35px;
+    }
+
+    &__manager_completed {
+      .card__info {
+        display: grid;
+        grid-template: 1fr / 1fr 1.5fr;
+
+        @media (max-width: 992px) {
+          column-gap: 30px;
+        }
+
+        @media (max-width: 768px) {
+          grid-template: 1.1fr 1fr / 1fr;
+        }
+
+        &__data {
+          display: grid;
+          grid-template: repeat(4, 1fr) / 1fr;
+          row-gap: 2px;
+          padding-bottom: 0;
+          padding-right: 20px;
+
+          @media (max-width: 992px) {
+            padding-right: 0;
+          }
+
+          div {
+            grid-auto-flow: column;
+            column-gap: 10px;
+            grid-template: unset;
+            justify-content: space-between;
+          }
+        }
+      }
+    }
+
+    @media (max-width: 768px) {
+      grid-template: 0.9fr 0.3fr 2.2fr/ 1fr;
+      row-gap: 15px;
+    }
+
+    .chat__btn {
+      margin: 0 15px;
+    }
+
+    &__description {
+      display: grid;
+      grid-template: min-content 1fr / 1fr;
+      row-gap: 20px;
+      padding: 0 20px;
+
+      @media (max-width: 992px) {
+        padding: 0 15px;
+      }
+
+      @media (max-width: 768px) {
+        row-gap: 10px;
+      }
+
+      &__data {
+        display: grid;
+        grid-auto-flow: column;
+        justify-content: space-between;
+        padding-bottom: 10px;
+
+        &__title {
+          display: grid;
+          grid-auto-flow: row;
+          row-gap: 10px;
+        }
+
+        &__date {
+          display: grid;
+          grid-auto-flow: row;
+          row-gap: 10px;
+        }
+      }
+    }
+
+    &__info {
+      display: grid;
+      grid-template: repeat(2, 1fr) / 1fr;
+      row-gap: 40px;
+      padding: 0 20px;
+
+      @media (max-width: 992px) {
+        grid-template: 1fr / repeat(2, 1fr);
+        column-gap: 40px;
+        padding: 0 15px;
+      }
+
+      @media (max-width: 768px) {
+        grid-template: 1fr 1.5fr / 1fr;
+        row-gap: 15px;
+      }
+
+      &__data {
+        display: grid;
+        grid-template: 1fr / repeat(3, 1fr);
+        column-gap: 10px;
+        align-items: center;
+
+        @media (max-width: 992px) {
+          grid-template: repeat(3, 1fr) / 1fr;
+          row-gap: 2px;
+        }
+      }
+
+      &__icons {
+        display: grid;
+        grid-template: 1fr / repeat(5, 1fr);
+        column-gap: 20px;
+
+        @media (max-width: 992px) {
+          padding-top: 0;
+          grid-template: repeat(3, 1fr) / repeat(2, 1fr);
+          grid-gap: 5px;
+
+          .item {
+            &__full {
+              grid-column: 1 / -1;
+            }
+
+            &__left {
+              grid-column: 1;
+            }
+
+            &__right {
+              grid-column: 2;
+            }
+          }
+        }
+
+        @media (max-width: 768px) {
+          padding-left: 0;
+        }
+      }
+
+      &__icons_manager_completed {
+        display: grid;
+        grid-template: 1.4fr 1fr / 1fr;
+        row-gap: 40px;
+        padding-left: 20px;
+
+        @media (max-width: 992px) {
+          row-gap: 30px;
+          padding-left: 0;
+          grid-template: 1.3fr 1fr / 1fr;
+        }
+
+        @media (max-width: 768px) {
+          row-gap: 10px;
+          // grid-template: 1fr 1.2fr / 1fr;
+        }
+
+        .top {
+          display: grid;
+          grid-template: 1fr / repeat(2, 1fr);
+          column-gap: 10px;
+        }
+
+        .bottom {
+          display: grid;
+        }
+      }
+
+      &__icons_manager_request_approve {
+        display: grid;
+        grid-template: 1fr / repeat(2, 1fr);
+        column-gap: 10px;
+
+        div {
+          display: grid;
+          grid-auto-flow: row;
+          row-gap: 2px;
+          align-content: center;
+          justify-items: center;
+        }
+
+        @media (max-width: 992px) {
+          padding-top: 0;
+          grid-auto-flow: row;
+          grid-template: unset;
+          row-gap: 20px;
+          align-content: center;
+        }
+      }
+    }
+  }
+}
