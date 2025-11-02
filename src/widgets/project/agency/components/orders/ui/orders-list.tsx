@@ -28,7 +28,7 @@ export const OrdersList: FC<OrdersListProps> = ({
   code,
 }) => {
   return (
-    <div className="shadow-lg rounded-[20px] border-[1px] border-[var(--Card-separator)] overflow-hidden">
+    <div className="shadow-lg rounded-[20px] border-[1px] border-[var(--Card-separator)] overflow-hidden bg-white/60">
       {orders?.map((order) => (
         <OrderCard
           key={order.id}
