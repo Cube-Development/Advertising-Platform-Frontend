@@ -7,6 +7,5 @@ export enum ENUM_COOKIES_TYPES {
   PROJECT_ID = "project_id",
   GUEST_ID = "guest_id",
   IS_CHANNEL_REPLACED = "is_channel_replaced",
-  IS_REVIEW = "is_review",
   CERTIFICATE_USER_KEY = "certificate_user_key",
 }

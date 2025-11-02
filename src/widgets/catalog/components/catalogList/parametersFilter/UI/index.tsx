@@ -225,7 +225,6 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
   useEffect(() => {
     accordionRefs.current.forEach((ref) => {
       if (ref) {
-        console.log("ref", ref);
         const observer = new MutationObserver(() => {
           const state = ref.getAttribute("data-state");
           const icon = ref.querySelector(`.${styles.arrow} svg`);

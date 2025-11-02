@@ -3,24 +3,36 @@ import {
   invalidateBloggerOfferByUserAction,
   useCancelOfferMutation,
 } from "@entities/offer";
-import { IOrderFeature } from "@entities/project";
+import { IOrderFeature, useCancelOrderMutation } from "@entities/project";
 import { useAppDispatch } from "@shared/hooks";
 import { MyButton, ToastAction, useToast } from "@shared/ui";
-import { Loader } from "lucide-react";
+import { Ban, Loader } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
-export const RejectOffer: FC<IOrderFeature> = ({ order_id }) => {
+export const RejectOffer: FC<IOrderFeature> = ({
+  order_id,
+  code,
+  project_id,
+}) => {
   const { toast } = useToast();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
   const [cancelOffer, { isLoading }] = useCancelOfferMutation();
+  // agency publisher flow
+  const [cancelOrder, { isLoading: isCancelOrderLoading }] =
+    useCancelOrderMutation();
+
   const handleOnClick = async () => {
-    if (!order_id || isLoading) return;
+    if (!order_id || isLoading || isCancelOrderLoading) return;
 
     try {
-      await cancelOffer({ order_id }).unwrap();
+      await (
+        code && project_id && order_id
+          ? cancelOrder({ project_id, order_id, code })
+          : cancelOffer({ order_id })
+      ).unwrap();
       toast({
         variant: "success",
         title: t("toasts.offers_blogger.reject_offer.success"),
@@ -45,10 +57,13 @@ export const RejectOffer: FC<IOrderFeature> = ({ order_id }) => {
       buttons_type="button__white"
       className={styles.button}
     >
-      {isLoading ? (
+      {isLoading || isCancelOrderLoading ? (
         <Loader className="animate-spin" stroke="#fff" width={20} height={20} />
       ) : (
-        <p>{t(`offer_btn.reject`)}</p>
+        <p className="flex items-center gap-1">
+          <Ban className="mobile-xl:size-5 size-4 stroke-[1.5px]" />
+          {t(`offer_btn.reject`)}
+        </p>
       )}
     </MyButton>
   );

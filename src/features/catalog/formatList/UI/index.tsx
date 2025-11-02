@@ -64,7 +64,6 @@ export const FormatList: FC<IFormatListProps> = ({
       const selectedFormat = card?.format?.filter((format) =>
         values.includes(format.format),
       );
-      console.log("selectedFormat", selectedFormat);
 
       changeFormat(selectedFormat as any);
       return;

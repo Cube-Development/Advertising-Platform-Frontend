@@ -29,17 +29,6 @@
     display: grid;
     grid-auto-flow: column;
 
-    p {
-      font-size: 24px;
-      font-style: normal;
-      font-weight: 600;
-      line-height: normal;
-
-      @media (max-width: 768px) {
-        font-size: 20px;
-      }
-    }
-
     .close {
       position: absolute;
       cursor: pointer;
@@ -59,6 +48,7 @@
     font-style: normal;
     font-weight: 600;
     line-height: normal;
+    opacity: 0.75;
 
     @media (max-width: 768px) {
       font-size: 12px;

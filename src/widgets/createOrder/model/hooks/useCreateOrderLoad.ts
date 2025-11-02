@@ -1,10 +1,11 @@
 import {
+  useGetOrderPricesQuery,
   useGetPostsRereviewQuery,
   useGetProjectAmountQuery,
   useGetProjectNameQuery,
   useProjectOrdersQuery,
 } from "@entities/project";
-import { useFindLanguage } from "@entities/user";
+import { ENUM_ROLES, useFindLanguage } from "@entities/user";
 import { useAppSelector } from "@shared/hooks";
 import { USER_LANGUAGES_LIST } from "@shared/languages";
 import { ENUM_PATHS } from "@shared/routing";
@@ -15,9 +16,10 @@ import { useNavigate } from "react-router-dom";
 
 interface Props {
   projectId: string;
+  role: ENUM_ROLES;
 }
 
-export const useCreateOrderLoad = ({ projectId }: Props) => {
+export const useCreateOrderLoad = ({ projectId, role }: Props) => {
   const { isAuth } = useAppSelector((state) => state.user);
   const language = useFindLanguage();
   const { toast } = useToast();
@@ -54,6 +56,12 @@ export const useCreateOrderLoad = ({ projectId }: Props) => {
       skip: !projectId || !isAuth,
     });
 
+  // project prices if manager own project
+  const { data: projectPrices, isLoading: isProjectPricesLoading } =
+    useGetOrderPricesQuery(projectNameReq, {
+      skip: !projectId || !isAuth || role !== ENUM_ROLES.MANAGER,
+    });
+
   // total price
   const { data: totalPrice, isLoading: isTotalPriceLoading } =
     useGetProjectAmountQuery(projectNameReq, {
@@ -77,6 +85,8 @@ export const useCreateOrderLoad = ({ projectId }: Props) => {
     isOrdersLoading,
     projectPosts,
     isPostsLoading,
+    projectPrices,
+    isProjectPricesLoading,
     totalPrice,
     isTotalPriceLoading,
   };

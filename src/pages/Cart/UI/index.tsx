@@ -1,10 +1,3 @@
-// import { Cart } from "@widgets/cart";
-// import { FC } from "react";
-
-// export const CartPage: FC = () => {
-//   return <Cart />;
-// };
-
 import { SuspenseLoader } from "@shared/ui";
 import React, { Suspense } from "react";
 

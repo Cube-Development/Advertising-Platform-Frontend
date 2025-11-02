@@ -47,7 +47,6 @@ export const ConfirmPasswordForm: FC<ConfirmPasswordFormProps> = ({
     } else if (password !== confirmPassword) {
       setConfirmPasswordError(t("auth.passwords_dont_match"));
     } else {
-      console.log("Passwords match! Proceed to next step.");
       !isLoading &&
         resetPassword({
           email,

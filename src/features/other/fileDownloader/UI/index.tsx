@@ -41,7 +41,6 @@ export const FileDownloader: FC<FileDownloaderProps> = ({ file, onChange }) => {
           setProgress(percentCompleted); // Обновляем прогресс
         },
       });
-      console.log("resp", response);
 
       let filename = file.fileName || defaultName;
       const contentType = response.headers["content-type"];

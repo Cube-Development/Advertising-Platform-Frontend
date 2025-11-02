@@ -2,6 +2,8 @@ import { platformTypesNum } from "@entities/platform";
 import {
   CATALOG_FILTER,
   catalogAPI,
+  ENUM_MANAGER_PROJECT_STATUS,
+  ENUM_MANAGER_PROJECT_TYPES,
   getCatalogReq,
   ICart,
   ICatalogChannel,
@@ -35,6 +37,8 @@ import { useForm, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { CatalogCart, CatalogList, CatalogSearch } from "../components";
 import styles from "./styles.module.scss";
+import { Link } from "react-router-dom";
+import { ENUM_PATHS } from "@shared/routing";
 
 export const CatalogBlock: FC = () => {
   const { t } = useTranslation();
@@ -119,6 +123,20 @@ export const CatalogBlock: FC = () => {
       { skip: isAuth || !guestId },
     );
 
+  const {
+    data: catalogManagerPublic,
+    isFetching: isCatalogManagerPublicLoading,
+  } = useGetCatalogQuery(
+    {
+      ...formState,
+      language: language?.id || USER_LANGUAGES_LIST[0].id,
+      guest_id: guestId,
+    },
+    {
+      skip: !isAuth || (role == ENUM_ROLES.MANAGER && projectId ? true : false),
+    },
+  );
+
   const [prevParams, setPrevParams] = useState({
     filter: formState.filter,
     sort: formState.sort,
@@ -141,7 +159,9 @@ export const CatalogBlock: FC = () => {
       isAuth && role === ENUM_ROLES.ADVERTISER
         ? catalogAuth
         : isAuth && role === ENUM_ROLES.MANAGER
-          ? catalogManager
+          ? projectId
+            ? catalogManager
+            : catalogManagerPublic
           : catalogPublic;
 
     const isParamsChanged =
@@ -227,7 +247,22 @@ export const CatalogBlock: FC = () => {
   const [removeFromManagerCart] = useRemoveFromManagerCartMutation();
 
   const handleChangeCards = (cartChannel: ICatalogChannel) => {
-    console.log("handleChangeCartCards", cartChannel);
+    if (role === ENUM_ROLES.MANAGER && !projectId) {
+      toast({
+        variant: "error",
+        title: t("toasts.catalog.manager.error"),
+        action: (
+          <ToastAction altText="Ok">
+            <Link
+              to={`${ENUM_PATHS.ORDERS}?project_type=${ENUM_MANAGER_PROJECT_TYPES.MY_PROJECT}&project_status=${ENUM_MANAGER_PROJECT_STATUS.ACTIVE}`}
+            >
+              {t("toasts.catalog.manager.action")}
+            </Link>
+          </ToastAction>
+        ),
+      });
+      return;
+    }
 
     if (formState?.filter?.platform === platformTypesNum.site) {
       // setMockData(
@@ -522,7 +557,9 @@ export const CatalogBlock: FC = () => {
                     : (isAuth && role == ENUM_ROLES.ADVERTISER
                         ? catalogAuth?.channels
                         : isAuth && role == ENUM_ROLES.MANAGER
-                          ? catalogManager?.channels
+                          ? projectId
+                            ? catalogManager?.channels
+                            : catalogManagerPublic?.channels
                           : catalogPublic?.channels) || []
                 }
                 onChangeCard={handleChangeCards}
@@ -530,13 +567,16 @@ export const CatalogBlock: FC = () => {
                   (isAuth && role == ENUM_ROLES.ADVERTISER
                     ? catalogAuth?.isLast
                     : isAuth && role == ENUM_ROLES.MANAGER
-                      ? catalogManager?.isLast
+                      ? projectId
+                        ? catalogManager?.isLast
+                        : catalogManagerPublic?.isLast
                       : catalogPublic?.isLast) || false
                 }
                 isLoading={
                   isCatalogAuthLoading ||
                   isCatalogLoading ||
-                  isCatalogManagerLoading
+                  isCatalogManagerLoading ||
+                  isCatalogManagerPublicLoading
                 }
               />
             </div>

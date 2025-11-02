@@ -43,6 +43,22 @@ export interface ICreatePostForm {
   isLoading: boolean;
 
   wallet_type?: ENUM_WALLETS_TYPE;
+  prices?: IOrderPrice[];
+}
+
+export interface IOrderPrice {
+  avatar: string;
+  name: string;
+  category: string;
+  url: string;
+  order_id: string;
+  selected_format: {
+    format_name: {
+      small: string;
+      big: string;
+    };
+    price: number;
+  };
 }
 
 export interface ICreatePost {

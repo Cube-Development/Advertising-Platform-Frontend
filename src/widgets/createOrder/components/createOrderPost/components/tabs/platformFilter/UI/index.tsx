@@ -29,7 +29,6 @@ export const PlatformFilter: FC<PlatformFilterProps> = ({
         .find((platform) => platform.id === platformFilter?.id)
         ?.post_types.some((type) => type?.id === post_type),
     );
-  console.log("existingFormats", existingFormats);
   const changeSelectedPlatform = (type: IChannelLink) => {
     setValue("platformFilter", type);
   };

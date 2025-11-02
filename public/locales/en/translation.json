@@ -637,14 +637,14 @@
 
       "replace": {
         "channel": {
-          "title": "Specify the reason for channel replacement",
+          "title": "Tell us what needs to be changed: what you don't like about the current channel and do you have any preferences? The agent will take all your preferences into account when replacing.",
           "placeholder": "Write the reason ... Maximum allowed length - 300 characters",
-          "desire": "Reason for channel replacement"
+          "desire": "Channel replacement"
         },
         "post": {
-          "title": "Specify the reason for post replacement",
+          "title": "Tell us what needs to be changed: what you don't like about the current post and do you have any preferences? The agent will take all your preferences into account when replacing.",
           "placeholder": "Write the reason ... Maximum allowed length - 300 characters",
-          "desire": "Reason for post replacement"
+          "desire": "Post replacement"
         },
         "button": {
           "send": "Send",
@@ -695,6 +695,27 @@
   "orders_manager": {
     "orders": "Advertising Orders",
     "no_project": "You currently have no projects",
+    "type_filter": {
+      "my_project": "My Projects",
+      "turnkey_project": "Turnkey Projects"
+    },
+    "project_page_status": {
+      "request_approve": "Advertising Campaign on Review",
+      "changed": "Comments sent to manager, wait for changes",
+      "approved": "Advertising Campaign Approved, will be launched soon",
+      "in_progress": "Advertising Campaign Successfully Launched!",
+      "completed": "Advertising Campaign Completed"
+    },
+    "project_page_btn": {
+      "download_report": "Download Report",
+      "approve_project": "Approve",
+      "download_request_approve_report": "Download excel for approval with the customer",
+      "share_project_link": {
+        "customer": "Customer Link",
+        "publisher": "Publisher Link",
+        "copied": "Copied"
+      }
+    },
     "status_filter": {
       "active": "Active",
       "complete": "Completed",
@@ -900,7 +921,14 @@
         "placeholder": "Enter the post link...",
         "invalid_url": "Invalid link",
         "send_link_title": "Submit the link to the published ad post",
-        "send_link_subtitle": "Before submitting the link, please ensure that all advertiser requirements have been fully met"
+        "send_link_subtitle": "Before submitting the link, please ensure that all advertiser requirements have been fully met",
+        "date": "Placement Date",
+        "time": "Placement Time",
+        "days": "DD",
+        "months": "MM",
+        "years": "YYYY",
+        "hours": "HH",
+        "minutes": "MM"
       },
       "check": {
         "title": "You have submitted the post",
@@ -925,6 +953,9 @@
       "reject": {
         "title": "Order Canceled",
         "text": "The decision was made in favor of the advertiser"
+      },
+      "not_activated": {
+        "text": "The project has not been activated yet"
       }
     }
   },
@@ -1727,6 +1758,13 @@
       "title": "Specify Date and Time"
     },
 
+    "prices": {
+      "title": "Specify the price for order",
+      "input_placeholder": "Enter the price",
+      "input_label": "Price",
+      "error_description": "The price cannot be lower than the price specified in the catalog"
+    },
+
     "payment": {
       "title": "Order Payment",
       "pay": "Pay",
@@ -2257,6 +2295,10 @@
       },
       "remove": {
         "error": "Error removing from cart"
+      },
+      "manager": {
+        "error": "Please create a project first to add channels to the cart",
+        "action": "Create project"
       }
     },
     "cart": {
@@ -2308,6 +2350,10 @@
       "launch_project": {
         "success": "Advertising campaign successfully launched, we will notify the advertiser and inform the bloggers",
         "error": "Error during advertising campaign launch"
+      },
+      "approve_project": {
+        "success": "Advertising campaign successfully approved and will be launched soon",
+        "error": "Error during advertising campaign approval"
       }
     },
     "orders_advertiser": {
@@ -2346,6 +2392,10 @@
         "success": "Post successfully created",
         "error": "Error creating post",
         "empty_error": "Fill in all posts"
+      },
+      "prices": {
+        "error": "Error creating prices for orders",
+        "add_prices_error": "You need to fill prices in the orders"
       },
       "payment": {
         "success": "Advertising campaign successfully paid and launched!",

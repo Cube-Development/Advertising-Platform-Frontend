@@ -14,8 +14,6 @@ export const MyPagination: FC<MyPaginationProps> = ({ cardIndex, count }) => {
     const updateProgressWidth = () => {
       if (wrapperRef.current) {
         setProgressWidth(wrapperRef.current.offsetWidth);
-        console.log(wrapperRef.current.offsetWidth);
-        console.log(count);
       }
     };
 

@@ -274,7 +274,6 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
 
   const handleChangeCartCards = () => {
     const currentCard = channel;
-    console.log("handleChangeCartCards", currentCard);
     const cartChannel = { ...channel, selected_format: selectedFormat };
     handleChangeCards(
       cartChannel as unknown as ICatalogChannel,
@@ -286,7 +285,6 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
     const currentCard = recomendCards?.channels?.find(
       (card) => card.id === cartChannel?.id,
     );
-    console.log("handleChangeCartCards", currentCard);
     handleChangeCards(cartChannel, currentCard);
   };
 

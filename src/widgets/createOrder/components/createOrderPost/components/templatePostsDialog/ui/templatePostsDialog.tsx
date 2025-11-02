@@ -92,7 +92,6 @@ export const TemplatePostsDialog = ({
 
           // Сбрасываем выбранный шаблон
           setSelectedTemplate(null);
-          console.log("formState", formState);
         } catch (error) {
           console.error("Ошибка при загрузке шаблона:", error);
           setSelectedTemplate(null);

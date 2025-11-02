@@ -12,6 +12,7 @@ import {
   platformToIcon,
   projectStatus,
   useGetPostQuery,
+  IManagerAgencyProjectCard,
 } from "@entities/project";
 import { ENUM_ROLES } from "@entities/user";
 import { ChangeChannelProps, ChangePostProps } from "@features/order";
@@ -38,7 +39,7 @@ import styles from "./styles.module.scss";
 import { ENUM_PATHS } from "@shared/routing";
 
 interface ManagerProjectSubcardProps {
-  card: IManagerProjectCard;
+  card: IManagerProjectCard | IManagerAgencyProjectCard;
   subcard: IManagerProjectSubcard;
   FeedbackBtn: FC<IOrderFeature>;
   AcceptBtn: FC<IOrderFeature>;
@@ -63,7 +64,6 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
   ChannelChatBtn,
   ChangeChannelBtn,
   ChangePostBtn,
-  SeeCommentBtn,
   statusFilter,
 }) => {
   const { t } = useTranslation();

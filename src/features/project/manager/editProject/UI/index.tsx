@@ -1,3 +1,4 @@
+import { SquarePen } from "lucide-react";
 import { ENUM_COOKIES_TYPES } from "@shared/config";
 import { ENUM_PATHS } from "@shared/routing";
 import { MyButton } from "@shared/ui";
@@ -16,12 +17,12 @@ export const EditProject: FC<EditProjectProps> = ({ project_id }) => {
 
   const handleOnClick = () => {
     Cookies.set(ENUM_COOKIES_TYPES.PROJECT_ID, project_id);
-    Cookies.set(ENUM_COOKIES_TYPES.IS_REVIEW, "true");
   };
 
   return (
     <Link to={ENUM_PATHS.CART} onClick={handleOnClick}>
       <MyButton className={styles.button} buttons_type="button__white">
+        <SquarePen className="size-5 stroke-[1.5px]" />
         <p>{t("orders_manager.card.edit_btn")}</p>
       </MyButton>
     </Link>

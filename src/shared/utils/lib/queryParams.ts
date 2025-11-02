@@ -55,6 +55,7 @@ export enum queryParamKeys {
   offerStatus = "offer_status",
   channelStatus = "channel_status",
   telegramRole = "telegram_role",
+  permission = "permission",
 }
 
 type QueryParamsType = Partial<Record<queryParamKeys, string | null>>;

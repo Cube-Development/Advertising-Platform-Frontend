@@ -14,6 +14,7 @@ import {
   CREATE_PROJECT_DATES,
   CREATE_PROJECT_AMOUNT,
   authApi,
+  AGENCY_PROJECTS_MANAGER,
 } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ENUM_LANGUAGES_NUM } from "@shared/languages";
@@ -98,7 +99,7 @@ export const managerProjectsAPI = authApi.injectEndpoints({
         method: `GET`,
         params: params,
       }),
-      providesTags: [MANAGER_ORDERS],
+      providesTags: [MANAGER_ORDERS, AGENCY_PROJECTS_MANAGER],
     }),
 
     getManagerProjects: build.query<
@@ -171,16 +172,16 @@ export const managerProjectsAPI = authApi.injectEndpoints({
       providesTags: [MANAGER_PROJECTS],
     }),
 
-    getManagerProjectOrders: build.query<
-      getManagerProjectOrdersRes,
-      getManagerProjectOrdersReq
-    >({
-      query: (params) => ({
-        url: `/order/datetime-setup`,
-        method: "GET",
-        params: params,
-      }),
-    }),
+    // getManagerProjectOrders: build.query<
+    //   getManagerProjectOrdersRes,
+    //   getManagerProjectOrdersReq
+    // >({
+    //   query: (params) => ({
+    //     url: `/order/datetime-setup`,
+    //     method: "GET",
+    //     params: params,
+    //   }),
+    // }),
 
     getManagerProjectOrdersRereview: build.query<
       getManagerProjectOrdersRes,
@@ -210,7 +211,7 @@ export const {
   useApproveProjectMutation,
   useGetManagerSubprojectsQuery,
   useCreateProjectCartMutation,
-  useGetManagerProjectOrdersQuery,
+  // useGetManagerProjectOrdersQuery,
   useGetManagerProjectOrdersRereviewQuery,
   useGetPostsRereviewQuery,
 } = managerProjectsAPI;

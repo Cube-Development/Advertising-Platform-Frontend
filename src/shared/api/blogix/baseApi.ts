@@ -11,6 +11,9 @@ import {
   CHAT,
   LEGALS,
   RECOMMEND_CARDS,
+  AGENCY_PROJECTS_CUSTOMER,
+  AGENCY_PROJECTS_PUBLISHER,
+  AGENCY_PROJECTS_MANAGER,
 } from "@shared/api/tags";
 
 export const baseApi = createApi({
@@ -32,5 +35,8 @@ export const baseApi = createApi({
     ADV_PROJECTS,
     LEGALS,
     CHAT,
+    AGENCY_PROJECTS_MANAGER,
+    AGENCY_PROJECTS_PUBLISHER,
+    AGENCY_PROJECTS_CUSTOMER,
   ],
 });

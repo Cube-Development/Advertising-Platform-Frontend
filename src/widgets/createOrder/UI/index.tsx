@@ -11,6 +11,7 @@ import {
   CreateOrderPayment,
   CreateOrderPost,
   CreateOrderTop,
+  CreateOrderPrices,
 } from "../components";
 import {
   useChangeBlur,
@@ -19,12 +20,14 @@ import {
   useCreateOrderLoad,
   useOnSubmitPayment,
 } from "../model";
+import { ENUM_ROLES } from "@entities/user";
 
 interface CreateOrderBlockProps {}
 
 export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
-  const projectId = Cookies.get(ENUM_COOKIES_TYPES.PROJECT_ID) || "";
   const { role } = useAppSelector((state) => state.user);
+  const projectId = Cookies.get(ENUM_COOKIES_TYPES.PROJECT_ID) || "";
+
   const { blur, handleOnChangeBlur } = useChangeBlur();
   const { isLoading, payment } = useOnSubmitPayment();
 
@@ -36,7 +39,8 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
     projectPosts,
     isPostsLoading,
     totalPrice,
-  } = useCreateOrderLoad({ projectId });
+    projectPrices,
+  } = useCreateOrderLoad({ projectId, role });
 
   const { register, getValues, handleSubmit, setValue, formState } =
     useCreateOrderForm({
@@ -99,7 +103,18 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
               setValue={setValue}
               getValues={getValues}
               formState={formState}
+              role={role}
             />
+
+            {role === ENUM_ROLES.MANAGER && (
+              <CreateOrderPrices
+                isBlur={blur.prices}
+                onChangeBlur={handleOnChangeBlur}
+                setValue={setValue}
+                getValues={getValues}
+                projectPrices={projectPrices?.items || []}
+              />
+            )}
 
             <CreateOrderPayment
               isBlur={blur.payment}
@@ -113,6 +128,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
                 !isOrdersLoading &&
                 !isPostsLoading
               }
+              step={role === ENUM_ROLES.MANAGER ? 5 : 4}
             />
           </>
         )}

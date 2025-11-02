@@ -10,6 +10,7 @@ import {
   SERVICE_MENU_ADVERTISER,
   SERVICE_MENU_BLOGGER,
   SERVICE_MENU_FAQ,
+  SERVICE_MENU_MANAGER,
 } from "../../model";
 
 interface Props {
@@ -21,7 +22,9 @@ export const getMenu = ({ isAuth, role }: Props) => {
   let SERVICE_MENU: IMenuItem[] =
     role === ENUM_ROLES.ADVERTISER
       ? SERVICE_MENU_ADVERTISER
-      : SERVICE_MENU_BLOGGER;
+      : role === ENUM_ROLES.MANAGER
+        ? SERVICE_MENU_MANAGER
+        : SERVICE_MENU_BLOGGER;
 
   SERVICE_MENU = isAuth ? SERVICE_MENU : [...SERVICE_MENU, ...SERVICE_MENU_FAQ];
 

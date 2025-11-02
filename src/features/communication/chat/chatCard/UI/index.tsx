@@ -14,13 +14,11 @@ export const ChatCard: FC<ChatCardProps> = ({ card, isActive }) => {
   const dateTime = getDateChat(card?.formatted_date, card?.formatted_time);
 
   const cleanMessage = (message: string) => {
-    // console.log("Before cleaning:", message);
     // let cleanedMessage = message;
     let cleanedMessage = message.replace(/<br\s*\/?>/g, " ");
     cleanedMessage = cleanedMessage.replace(/<\/?strong>/g, "");
     cleanedMessage = cleanedMessage.replace(/<\/?p>/g, "");
     cleanedMessage = cleanedMessage.replace(/<\/?em>/g, "");
-    // console.log("After cleaning:", cleanedMessage);
     // return `<p>${cleanedMessage}</p>`;
     return cleanedMessage;
   };

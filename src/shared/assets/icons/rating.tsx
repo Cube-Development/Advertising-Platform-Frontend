@@ -4,7 +4,6 @@ interface RatingIconProps {
 
 export const RatingIcon: React.FC<RatingIconProps> = ({ rate }) => {
   const stars = Math.min(Math.max(Math.ceil(rate || 0), 0), 5);
-  console.log(stars);
 
   return (
     <svg

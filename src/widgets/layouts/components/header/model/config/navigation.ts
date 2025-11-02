@@ -33,8 +33,8 @@ export const NAVBAR_ADVERTISER_MENU = [
 ];
 
 export const NAVBAR_MANAGER_MENU = [
-  // { text: "pages.platformOwner", href: paths.mainBlogger },
-  // { text: "pages.advertiser", href: paths.main },
+  { text: "pages.catalog", href: ENUM_PATHS.CATALOG, img: undefined },
+  { text: "pages.faq", href: ENUM_PATHS.FAQ, img: undefined },
 ];
 
 export const NAVBAR_BLOGGER_MENU = [

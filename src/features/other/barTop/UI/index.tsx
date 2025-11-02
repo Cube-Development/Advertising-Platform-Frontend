@@ -14,6 +14,7 @@ interface BarTopProps {
   NewProjectBtn: FC<IStartProjectProps>;
   TurnkeyProjectBtn: FC<IStartProjectProps>;
   AddChannelBtn: FC<IAddChannelQuery>;
+  AddManagerNewProjectBtn?: FC;
 }
 
 export const BarTop: FC<BarTopProps> = ({
@@ -21,6 +22,7 @@ export const BarTop: FC<BarTopProps> = ({
   NewProjectBtn,
   TurnkeyProjectBtn,
   AddChannelBtn,
+  AddManagerNewProjectBtn,
   page,
 }) => {
   const { t } = useTranslation();
@@ -45,6 +47,7 @@ export const BarTop: FC<BarTopProps> = ({
           role === ENUM_ROLES.MANAGER && (
             <>
               <p className={styles.title}>{t(`orders_manager.orders`)}</p>
+              {AddManagerNewProjectBtn && <AddManagerNewProjectBtn />}
             </>
           )
         )

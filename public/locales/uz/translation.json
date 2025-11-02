@@ -638,14 +638,14 @@
 
       "replace": {
         "channel": {
-          "title": "Kanalni almashtirish sababini kiriting",
+          "title": "Bizga qanday o'zgarish kerakligini ayting: hozirgi kanalni qanday emasligini va o'zingizga mos keladigan narsalaringiz mavjudmi? Agent sizning barcha talablaringizni hisobga olib, almashtirishni amalga oshiradi.",
           "placeholder": "Sababni yozing ... Maksimal uzunlik - 300 ta belgi",
-          "desire": "Kanalni almashtirish sababi"
+          "desire": "Kanalni almashtirish"
         },
         "post": {
-          "title": "Postni almashtirish sababini kiriting",
+          "title": "Bizga qanday o'zgarish kerakligini ayting: hozirgi postni qanday emasligini va o'zingizga mos keladigan narsalaringiz mavjudmi? Agent sizning barcha talablaringizni hisobga olib, almashtirishni amalga oshiradi.",
           "placeholder": "Sababni yozing ... Maksimal uzunlik - 300 ta belgi",
-          "desire": "Postni almashtirish sababi"
+          "desire": "Postni almashtirish"
         },
         "button": {
           "send": "Yuborish",
@@ -696,6 +696,27 @@
   "orders_manager": {
     "orders": "Reklama buyurtmalari",
     "no_project": "Hozircha sizda loyihalar yo'q",
+    "type_filter": {
+      "my_project": "Mening loyihalarim",
+      "turnkey_project": "Buyurtma loyiha"
+    },
+    "project_page_status": {
+      "request_approve": "Loyiha tasdiqlash bosqichida",
+      "changed": "Kommentariyalar menejerga yuborildi, o'zgarishlar kiritilmoqda",
+      "approved": "Loyiha tasdiqlandi, tez orada ishga tushadi",
+      "in_progress": "Loyiha muvaffaqiyatli ishga tushirildi!",
+      "completed": "Loyiha yakunlandi"
+    },
+    "project_page_btn": {
+      "download_report": "Hisobotni yuklab olish",
+      "approve_project": "Tasdiqlash",
+      "download_request_approve_report": "Buyurtma beruvchi uchun loyiha hisobotini excelda yuklab olish",
+      "share_project_link": {
+        "customer": "Buyurtma beruvchi uchun loyiha havolasi",
+        "publisher": "Reklama beruvchi uchun loyiha havolasi",
+        "copied": "Havola ko'chirildi"
+      }
+    },
     "status_filter": {
       "active": "Faol",
       "complete": "Bajarilgan",
@@ -901,7 +922,14 @@
         "placeholder": "Post havolasini kiriting...",
         "invalid_url": "Havola yaroqsiz",
         "send_link_title": "Joylashtirilgan reklama posti havolasini yuboring",
-        "send_link_subtitle": "Havolani yuborishdan oldin, barcha reklama beruvchi talablariga to'liq mos kelganingizga ishonch hosil qiling"
+        "send_link_subtitle": "Havolani yuborishdan oldin, barcha reklama beruvchi talablariga to'liq mos kelganingizga ishonch hosil qiling",
+        "date": "Joylashtirish sanasi",
+        "time": "Joylashtirish vaqti",
+        "days": "Кун",
+        "months": "Oy",
+        "years": "Yil",
+        "hours": "Soat",
+        "minutes": "Daqiqa"
       },
       "check": {
         "title": "Siz postni yubordingiz",
@@ -926,6 +954,9 @@
       "reject": {
         "title": "Buyurtma bekor qilindi",
         "text": "Qaror reklama beruvchi foydasiga qabul qilindi"
+      },
+      "not_activated": {
+        "text": "Loyiha hali aktivlashtirilmagan"
       }
     }
   },
@@ -1725,6 +1756,13 @@
       "title": "Sana va vaqtni belgilang"
     },
 
+    "prices": {
+      "title": "Buyurtma narxi belgilang",
+      "input_placeholder": "Narxni kiriting",
+      "input_label": "Narxi",
+      "error_description": "Narxi katalogdagi narxdan past bo'lmasligi kerak"
+    },
+
     "payment": {
       "title": "Buyurtma to'lovi",
       "pay": "To'lash",
@@ -2255,6 +2293,10 @@
       },
       "remove": {
         "error": "Savatdan o'chirishda xatolik yuz berdi"
+      },
+      "manager": {
+        "error": "Avval loyihani yaratish kerak, keyin kanallarni savatga qo'shishingiz mumkin",
+        "action": "Loyiha yaratish"
       }
     },
     "cart": {
@@ -2306,6 +2348,10 @@
       "launch_project": {
         "success": "Siz reklama kampaniyasini muvaffaqiyatli ishga tushirdingiz, biz reklama beruvchini xabardor qilamiz va blogerlarga ma'lum qilamiz",
         "error": "Reklama kampaniyasini ishga tushirishda xatolik yuz berdi"
+      },
+      "approve_project": {
+        "success": "Loyiha muvaffaqiyatli tasdiqlandi va tez orada ishga tushadi",
+        "error": "Loyiha tasdiqlash vaqtida xatolik yuz berdi"
       }
     },
     "orders_advertiser": {
@@ -2344,6 +2390,10 @@
         "success": "Post muvaffaqiyatli yaratildi",
         "error": "Post yaratishda xatolik",
         "empty_error": "Barcha postlarni to'ldiring"
+      },
+      "prices": {
+        "error": "Buyurtmalarga narxlarni yaratishda xatolik",
+        "add_prices_error": "Buyurtmalarga narxlarni kiritish kerak"
       },
       "payment": {
         "success": "Reklama kampaniyasi muvaffaqiyatli to'landi va ishga tushirildi!",

@@ -2,6 +2,8 @@ import { addChannelQueries } from "@entities/channel";
 import {
   ENUM_ADV_MANAGER_PROJECT_STATUS,
   ENUM_ADV_MY_PROJECT_STATUS,
+  ENUM_MANAGER_PROJECT_STATUS,
+  ENUM_MANAGER_PROJECT_TYPES,
   ENUM_PROJECT_TYPES,
 } from "@entities/project";
 import { viewsTypes } from "@entities/views";
@@ -58,6 +60,16 @@ export const SERVICE_MENU_BLOGGER: IMenuItem[] = [
   },
 ];
 
+export const SERVICE_MENU_MANAGER: IMenuItem[] = [
+  {
+    item: {
+      title: "burger_menu.catalog",
+      path: ENUM_PATHS.CATALOG,
+      img: CatalogIcon,
+    },
+  },
+];
+
 export const SERVICE_MENU_FAQ = [
   { item: { title: "burger_menu.base", path: ENUM_PATHS.FAQ, img: BookIcon } },
 ];
@@ -110,9 +122,62 @@ export const MENU_MANAGER: IMenuItem[] = [
   {
     item: {
       title: "burger_menu.manager_orders",
-      path: ENUM_PATHS.ORDERS,
+      // path: ENUM_PATHS.ORDERS,
+      path: buildPathWithQuery(ENUM_PATHS.ORDERS, {
+        [queryParamKeys.projectType]: ENUM_MANAGER_PROJECT_TYPES.MY_PROJECT,
+        [queryParamKeys.projectStatus]: ENUM_MANAGER_PROJECT_STATUS.ACTIVE,
+      }),
       img: CampaignIcon,
-      type: viewsTypes.managerProjects,
+      // type: viewsTypes.managerProjects,
+    },
+    // subItems: [
+    //   {
+    //     title: "orders_manager.type_filter.my_project",
+    //     path: buildPathWithQuery(ENUM_PATHS.ORDERS, {
+    //       [queryParamKeys.projectType]: ENUM_MANAGER_PROJECT_TYPES.MY_PROJECT,
+    //       [queryParamKeys.projectStatus]: ENUM_MANAGER_PROJECT_STATUS.ACTIVE,
+    //     }),
+    //     type: ENUM_MANAGER_PROJECT_TYPES.MY_PROJECT,
+    //   },
+    //   {
+    //     title: "orders_manager.type_filter.turnkey_project",
+    //     path: buildPathWithQuery(ENUM_PATHS.ORDERS, {
+    //       [queryParamKeys.projectType]:
+    //         ENUM_MANAGER_PROJECT_TYPES.TURNKEY_PROJECT,
+    //       [queryParamKeys.projectStatus]: ENUM_MANAGER_PROJECT_STATUS.ACTIVE,
+    //     }),
+    //     type: ENUM_MANAGER_PROJECT_TYPES.TURNKEY_PROJECT,
+    //   },
+    // ],
+  },
+  {
+    item: {
+      title: "burger_menu.template",
+      path: ENUM_PATHS.POST_TEMPLATES,
+      img: TemplateIcon,
+    },
+  },
+  {
+    item: {
+      title: "burger_menu.wallet",
+      img: WalletIcon,
+      type: viewsTypes.wallet,
+    },
+    subItems: [
+      { title: "burger_menu.withdraw", path: ENUM_PATHS.WALLET_WITHDRAW },
+      {
+        title: "burger_menu.history",
+        path: ENUM_PATHS.WALLET_HISTORY,
+        type: walletTypesFilter.transactions,
+      },
+      // { title: "burger_menu.invoice", path: ENUM_PATHS.MAIN },
+    ],
+  },
+  {
+    item: {
+      title: "burger_menu.invoice",
+      img: FileText,
+      path: ENUM_PATHS.DOCUMENTS,
     },
   },
 ];

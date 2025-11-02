@@ -143,8 +143,6 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
     }
   }, [formState.filter]);
 
-  console.log("recommendationCard", recommendationCard);
-
   useEffect(() => {
     if (TAParameters) {
       const repackCards = TAParameters.map((card) => {
@@ -239,7 +237,6 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
   useEffect(() => {
     accordionRefs.current.forEach((ref) => {
       if (ref) {
-        console.log("ref", ref);
         const observer = new MutationObserver(() => {
           const state = ref.getAttribute("data-state");
           const icon = ref.querySelector(`.${styles.arrow} svg`);

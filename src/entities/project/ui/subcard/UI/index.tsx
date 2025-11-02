@@ -354,10 +354,6 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                         status={card?.is_request_approve!}
                       />
                     </div>
-                    <SeePostBtn
-                      post={post!}
-                      post_deeplink={subcard?.post_deeplink}
-                    />
                     {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
                   </div>
                 </div>

@@ -78,7 +78,6 @@ export const ProfitCalculator: FC = () => {
     formState?.posts_count?.count || 1,
   );
 
-  console.log(formState);
   return (
     <Card className="overflow-hidden border-orange-500 frame !mobile-xl:p-6 !p-4">
       <CardContent className="!p-0">
