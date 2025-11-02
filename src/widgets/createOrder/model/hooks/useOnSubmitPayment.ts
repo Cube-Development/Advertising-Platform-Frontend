@@ -1,4 +1,6 @@
 import {
+  ENUM_MANAGER_PROJECT_STATUS,
+  ENUM_MANAGER_PROJECT_TYPES,
   ICreatePostForm,
   // useApproveProjectMutation,
   useCreateOrderDatesMutation,
@@ -140,7 +142,13 @@ export const useOnSubmitPayment = () => {
         variant: "success",
         title: t("toasts.create_order.payment.success"),
       });
-      navigate(ENUM_PATHS.ORDERS);
+      if (role === ENUM_ROLES.MANAGER) {
+        navigate(
+          `${ENUM_PATHS.ORDERS}?project_type=${ENUM_MANAGER_PROJECT_TYPES.MY_PROJECT}&project_status=${ENUM_MANAGER_PROJECT_STATUS.REQUEST_APPROVE}`,
+        );
+      } else {
+        navigate(ENUM_PATHS.ORDERS);
+      }
     } catch (error) {
       toast({
         variant: "error",

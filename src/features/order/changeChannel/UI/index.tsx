@@ -1,4 +1,8 @@
-import { desireStatus, IManagerProjectSubcard } from "@entities/project";
+import {
+  desireStatus,
+  IAgencyOrderCard,
+  IManagerProjectSubcard,
+} from "@entities/project";
 import { CancelIcon2 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
 import { useWindowWidth } from "@shared/hooks";
@@ -20,9 +24,10 @@ import {
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { MessageCircleMore } from "lucide-react";
 
 export interface ChangeChannelProps {
-  order: IManagerProjectSubcard;
+  order: IManagerProjectSubcard | IAgencyOrderCard;
 }
 
 export const ChangeChannel: FC<ChangeChannelProps> = ({ order }) => {
@@ -37,14 +42,18 @@ export const ChangeChannel: FC<ChangeChannelProps> = ({ order }) => {
       {screen >= BREAKPOINT.MD ? (
         <Dialog>
           <DialogTrigger asChild>
-            <MyButton buttons_type="button__white" className={styles.trigger}>
+            <MyButton
+              buttons_type="button__white"
+              className={`${styles.trigger} flex items-center justify-center gap-2`}
+            >
+              <MessageCircleMore className="size-5" />
               {t(`order_btn.channel.manager.edit`)}
             </MyButton>
           </DialogTrigger>
           <DialogContent className={styles.content}>
             <DialogTitle className={styles.title}>
-              <p className="gradient_color">
-                {t("orders_manager.subcard.change.channel.desire")}
+              <p className="max-w-[80%] mx-auto text-center md:text-lg text-base font-medium text-[var(--Personal-colors-black)]">
+                {t("orders_advertiser.subcard.replace.channel.desire")}
               </p>
               <DialogClose asChild>
                 <div className={styles.close}>
@@ -66,14 +75,18 @@ export const ChangeChannel: FC<ChangeChannelProps> = ({ order }) => {
       ) : (
         <Drawer>
           <DrawerTrigger asChild>
-            <MyButton buttons_type="button__white" className={styles.trigger}>
+            <MyButton
+              buttons_type="button__white"
+              className={`${styles.trigger} flex items-center justify-center gap-2`}
+            >
+              <MessageCircleMore className="size-5" />
               {t(`order_btn.channel.manager.edit`)}
             </MyButton>
           </DrawerTrigger>
           <DrawerContent className={styles.content}>
             <DrawerTitle className={styles.title}>
-              <p className="gradient_color">
-                {t("orders_manager.subcard.change.channel.desire")}
+              <p className="max-w-[80%] mx-auto text-center md:text-lg text-base font-medium text-[var(--Personal-colors-black)]">
+                {t("orders_advertiser.subcard.replace.channel.desire")}
               </p>
               <DrawerClose asChild>
                 <div className={styles.close}>

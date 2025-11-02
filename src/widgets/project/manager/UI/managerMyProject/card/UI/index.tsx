@@ -1,34 +1,26 @@
+import { CheckCheck, ClipboardCheck } from "lucide-react";
 import {
-  IManagerProjectCard,
-  ManagerProjectSubcard,
   getProjectSubcardReq,
   ENUM_MANAGER_PROJECT_STATUS,
   projectStatus,
   useGetManagerSubprojectsQuery,
+  AgencyProjectSubcard,
+  IManagerAgencyProjectCard,
+  IAgencyOrderCard,
 } from "@entities/project";
-import { ENUM_ROLES, useFindLanguage } from "@entities/user";
+import { useFindLanguage } from "@entities/user";
+import { ChangeChannel, ChangePost, CheckPost, SeePost } from "@features/order";
 import {
-  AcceptPost,
-  ChangeChannel,
-  ChangePost,
-  CheckPost,
-  Feedback,
-  RejectPost,
-  SeeComment,
-  SeePost,
-} from "@features/order";
-import {
+  DownloadApproveReport,
   EditProject,
   LaunchProject,
   SendReport,
-  SendToBot,
-  TechnicalSpecification,
+  ShareProjectLink,
 } from "@features/project";
 import {
   ArrowSmallVerticalIcon,
   CancelIcon,
   CompleteIcon,
-  MoreIcon,
   RocketIcon,
   SearchIcon,
   WaitIcon,
@@ -44,7 +36,6 @@ import {
   MyPagination,
   SpinnerLoader,
 } from "@shared/ui";
-import { Chat } from "@widgets/communication";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import SwiperCore from "swiper";
@@ -55,7 +46,7 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./styles.module.scss";
 
 interface MyManagerProjectCardProps {
-  card: IManagerProjectCard;
+  card: IManagerAgencyProjectCard;
   statusFilter: ENUM_MANAGER_PROJECT_STATUS;
 }
 
@@ -72,26 +63,28 @@ const Card: FC<MyManagerProjectCardProps> = ({ card, statusFilter }) => {
             <span>№{card?.identifier}</span>
           </div>
           <div className={styles.card__description__data__date}>
-            <span className="gradient_color">{card?.tariff_name}</span>
-            <span>{card?.tariff_date}</span>
+            <span>{card?.created}</span>
           </div>
         </div>
         <div className={styles.card__description__status}>
-          <p>
+          {/* <p>
             {statusFilter === ENUM_MANAGER_PROJECT_STATUS.ACTIVE
               ? t("orders_manager.card.status.active")
               : statusFilter === ENUM_MANAGER_PROJECT_STATUS.COMPLETED
                 ? t("orders_manager.card.status.completed")
                 : t("orders_manager.card.status.agreed")}
-          </p>
-        </div>
-      </div>
-      <div className={`${styles.buttons__md} display__hide__min__md`}>
-        <div className={styles.chat__btn}>
-          <Chat projectId={card?.project_id} toRole={ENUM_ROLES.ADVERTISER} />
-        </div>
-        <div className={styles.ts__btn}>
-          <TechnicalSpecification card={card} SendToBotBtn={SendToBot} />
+          </p> */}
+          <span className="w-full px-4 text-center text-[var(--Personal-colors-black)] mobile-xl:text-base text-sm font-semibold">
+            {card?.is_request_approve === projectStatus.approved
+              ? t("orders_manager.card.approved")
+              : card?.is_request_approve === projectStatus.changed
+                ? t("orders_manager.card.changed")
+                : card?.is_request_approve === projectStatus.request_approve
+                  ? t("orders_manager.card.request_approve")
+                  : card?.is_request_approve === projectStatus.in_progress
+                    ? t("orders_manager.card.status.active")
+                    : t("orders_manager.card.status.completed")}
+          </span>
         </div>
       </div>
       <div className={styles.card__info}>
@@ -124,8 +117,7 @@ const Card: FC<MyManagerProjectCardProps> = ({ card, statusFilter }) => {
         <>
           {statusFilter === ENUM_MANAGER_PROJECT_STATUS.REQUEST_APPROVE ? (
             <div className={styles.card__info__icons_manager_request_approve}>
-              <div>
-                <span>
+              {/* <span>
                   {card?.is_request_approve === projectStatus.approved
                     ? t("orders_manager.card.approved")
                     : card?.is_request_approve === projectStatus.changed
@@ -134,16 +126,20 @@ const Card: FC<MyManagerProjectCardProps> = ({ card, statusFilter }) => {
                           projectStatus.request_approve
                         ? t("orders_manager.card.request_approve")
                         : ""}
-                </span>
-              </div>
-              {card?.is_request_approve === projectStatus.changed ? (
-                <EditProject project_id={card?.project_id} />
+                </span> */}
+              {card?.is_request_approve !== projectStatus.approved ? (
+                <EditProject project_id={card?.id} />
               ) : (
-                <LaunchProject
-                  project_id={card?.project_id}
-                  status={card?.is_request_approve!}
-                />
+                <div className="!flex !flex-row items-center justify-center gap-4">
+                  <ClipboardCheck className="size-7 text-[var(--Personal-colors-main)]" />
+                  <CheckCheck className="size-7 text-[var(--Personal-colors-main)]" />
+                </div>
               )}
+              <LaunchProject
+                project_id={card?.id}
+                status={card?.is_request_approve ?? projectStatus.approved}
+                isAgency={true}
+              />
             </div>
           ) : statusFilter === ENUM_MANAGER_PROJECT_STATUS.COMPLETED ? (
             <div className={styles.card__info__icons_manager_completed}>
@@ -158,7 +154,7 @@ const Card: FC<MyManagerProjectCardProps> = ({ card, statusFilter }) => {
                 </div>
               </div>
               <div className={styles.bottom}>
-                <SendReport project_id={card?.project_id} />
+                <SendReport project_id={card?.id} is_agency={true} />
               </div>
             </div>
           ) : (
@@ -188,25 +184,13 @@ const Card: FC<MyManagerProjectCardProps> = ({ card, statusFilter }) => {
         </>
       </div>
 
-      <div className={styles.card__features}>
+      {/* <div className={styles.card__features}>
         <div className={styles.card__features__more}>
           <button>
             <MoreIcon />
           </button>
         </div>
-        <div className={`${styles.card__features__ts} display__hide__max__md`}>
-          <TechnicalSpecification card={card} SendToBotBtn={SendToBot} />
-        </div>
-        <div
-          className={`${styles.card__features__chat} display__hide__max__md`}
-        >
-          <Chat
-            projectId={card?.project_id}
-            toRole={ENUM_ROLES.ADVERTISER}
-            isProject={true}
-          />
-        </div>
-      </div>
+      </div> */}
     </div>
   );
 };
@@ -222,7 +206,7 @@ export const MyManagerProjectCard: FC<MyManagerProjectCardProps> = ({
   const swiperRef = useRef<SwiperCore | null>(null);
 
   const getParams: getProjectSubcardReq = {
-    project_id: card?.project_id,
+    project_id: card?.id,
     language: language?.id || USER_LANGUAGES_LIST[0].id,
     page: 1,
   };
@@ -274,6 +258,10 @@ export const MyManagerProjectCard: FC<MyManagerProjectCardProps> = ({
           className={`${styles.wrapper} border__gradient `}
         >
           <Card card={card} statusFilter={statusFilter} />
+          <div className="grid grid-flow-row gap-4 w-[90%] mx-auto">
+            <DownloadApproveReport project_id={card?.id} />
+            <ShareProjectLink project_id={card?.id} />
+          </div>
           <AccordionItem
             style={
               {
@@ -290,19 +278,14 @@ export const MyManagerProjectCard: FC<MyManagerProjectCardProps> = ({
             <AccordionContent>
               <div className={`${styles.subcard} `}>
                 {subcards?.orders?.map((subcard, index) => (
-                  <ManagerProjectSubcard
+                  <AgencyProjectSubcard
                     key={index}
                     card={card}
-                    subcard={subcard}
-                    FeedbackBtn={Feedback}
-                    AcceptBtn={AcceptPost}
-                    RejectBtn={RejectPost}
+                    subcard={subcard as IAgencyOrderCard}
                     CheckBtn={CheckPost}
                     SeePostBtn={SeePost}
-                    ChannelChatBtn={Chat}
                     ChangeChannelBtn={ChangeChannel}
                     ChangePostBtn={ChangePost}
-                    SeeCommentBtn={SeeComment}
                     statusFilter={statusFilter}
                   />
                 ))}
@@ -341,6 +324,10 @@ export const MyManagerProjectCard: FC<MyManagerProjectCardProps> = ({
                 isSubcardOpen ? "-translate-x-full" : "translate-x-0"
               } ${styles.wrapper}`}
             >
+              {/* <div className="grid grid-flow-row gap-4">
+                <DownloadApproveReport project_id={card?.id} />
+                <ShareProjectLink project_id={card?.id} />
+              </div> */}
               <Card card={card} statusFilter={statusFilter} />
             </div>
             <div
@@ -367,19 +354,14 @@ export const MyManagerProjectCard: FC<MyManagerProjectCardProps> = ({
                       className={`${styles.subcard__md}`}
                     >
                       <div className={styles.top}>
-                        <ManagerProjectSubcard
+                        <AgencyProjectSubcard
                           key={index}
                           card={card}
-                          subcard={subcard}
-                          FeedbackBtn={Feedback}
-                          AcceptBtn={AcceptPost}
-                          RejectBtn={RejectPost}
+                          subcard={subcard as IAgencyOrderCard}
                           CheckBtn={CheckPost}
                           SeePostBtn={SeePost}
-                          ChannelChatBtn={Chat}
                           ChangeChannelBtn={ChangeChannel}
                           ChangePostBtn={ChangePost}
-                          SeeCommentBtn={SeeComment}
                           statusFilter={statusFilter}
                         />
                         <MyPagination

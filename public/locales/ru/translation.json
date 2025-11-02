@@ -705,7 +705,13 @@
     },
     "project_page_btn": {
       "download_report": "Скачать отчёт",
-      "approve_project": "Подтвердить"
+      "approve_project": "Подтвердить",
+      "download_request_approve_report": "Скачать excel для согласования с заказчиком",
+      "share_project_link": {
+        "customer": "Ссылка для заказчика",
+        "publisher": "Ссылка для размещенца",
+        "copied": "Скопировано"
+      }
     },
     "status_filter": {
       "active": "Активные",
@@ -732,9 +738,9 @@
       "start_btn": "Начать",
       "run_btn": "Запустить",
       "edit_btn": "Редактировать",
-      "approved": "Кампания была подтверждена",
-      "request_approve": "Кампания отправлена на согласование",
-      "changed": "Рекламодатель внес изменения"
+      "approved": "Проект утвержден заказчиком",
+      "request_approve": "Проект отправлен на согласование заказчику",
+      "changed": "Заказчик внес изменения в проект"
     },
     "subcard": {
       "date": "Дата",

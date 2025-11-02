@@ -10,6 +10,7 @@ import {
   orderStatus,
   projectStatus,
 } from "../config";
+import { IAgencyOrderCard } from "./agencyProject";
 
 export interface IManagerProjects {
   page: number;
@@ -72,7 +73,7 @@ export interface IManagerProjectCard {
 export interface IManagerSubprojects {
   page: number;
   elements: number;
-  orders: IManagerProjectSubcard[];
+  orders: IManagerProjectSubcard[] | IAgencyOrderCard[];
 }
 
 export interface IManagerProjectSubcard {

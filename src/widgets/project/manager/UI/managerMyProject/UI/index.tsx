@@ -1,6 +1,6 @@
 import {
-  IManagerProjectCard,
   ENUM_MANAGER_PROJECT_STATUS,
+  IManagerAgencyProjectCard,
 } from "@entities/project";
 import { ZeroManagerProject } from "@features/project";
 import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
@@ -12,7 +12,7 @@ import { MyManagerProjectCard, SkeletonManagerProjectCard } from "../card";
 import styles from "./styles.module.scss";
 
 interface MyManagerProjectsListProps {
-  projects: IManagerProjectCard[];
+  projects: IManagerAgencyProjectCard[];
   handleOnChangePage: () => void;
   isLoading: boolean;
   isLast: boolean;
@@ -37,7 +37,7 @@ export const MyManagerProjectsList: FC<MyManagerProjectsListProps> = ({
           <div className={styles.cards}>
             {projects?.map((card, index) => (
               <motion.div
-                key={card.project_id}
+                key={card.id}
                 initial="hidden"
                 animate="visible"
                 custom={getAnimationDelay({

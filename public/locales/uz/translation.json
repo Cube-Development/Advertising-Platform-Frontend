@@ -709,7 +709,13 @@
     },
     "project_page_btn": {
       "download_report": "Hisobotni yuklab olish",
-      "approve_project": "Tasdiqlash"
+      "approve_project": "Tasdiqlash",
+      "download_request_approve_report": "Buyurtma beruvchi uchun loyiha hisobotini excelda yuklab olish",
+      "share_project_link": {
+        "customer": "Buyurtma beruvchi uchun loyiha havolasi",
+        "publisher": "Reklama beruvchi uchun loyiha havolasi",
+        "copied": "Havola ko'chirildi"
+      }
     },
     "status_filter": {
       "active": "Faol",

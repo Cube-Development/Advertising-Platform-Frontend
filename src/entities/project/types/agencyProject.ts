@@ -7,6 +7,23 @@ export enum ENUM_VIEWER_ROLES {
   CUSTOMER = "customer",
 }
 
+export interface IManagerAgencyProjectCard {
+  id: string;
+  project_name: string;
+  identifier: number;
+  orders: number;
+  views: number;
+  budget: number;
+  completed?: number;
+  canceled?: number;
+  wait?: number;
+  in_progress?: number;
+  moderation?: number;
+  remainder?: number;
+  created: string;
+  is_request_approve?: projectStatus;
+}
+
 export interface IAgencyProjectCard {
   id: string;
   identifier: number;

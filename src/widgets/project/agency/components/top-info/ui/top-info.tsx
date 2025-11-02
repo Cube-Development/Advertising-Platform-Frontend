@@ -78,7 +78,7 @@ export const TopInfo: FC<TopInfoProps> = ({
       await downloadCompletedReport({ project_id: project_id })
         .unwrap()
         .then((res) => {
-          downloadFileOnDevice(res, "Completed Report" + ".xlsx");
+          downloadFileOnDevice(res.url, res.file_name + ".xlsx");
         })
         .catch((error) => {
           console.error("error: ", error);
@@ -87,7 +87,7 @@ export const TopInfo: FC<TopInfoProps> = ({
       await downloadRequestApproveReport({ project_id: project_id })
         .unwrap()
         .then((res) => {
-          downloadFileOnDevice(res, "Request Approve Report" + ".xlsx");
+          downloadFileOnDevice(res.url, res.file_name + ".xlsx");
         })
         .catch((error) => {
           console.error("error: ", error);
@@ -101,28 +101,26 @@ export const TopInfo: FC<TopInfoProps> = ({
         <h1 className="xl:text-2xl md:text-lg text-base font-bold text-[var(--Personal-colors-black)]">
           {project_name}
         </h1>
-        {
-          <MyButton
-            buttons_type="button__orange"
-            className="h-[54px] flex items-center justify-center min-w-[240px]"
-            onClick={handleDownloadReport}
-          >
-            {isDownloadRequestApproveReportLoading ||
-            isDownloadCompletedReportLoading ? (
-              <Loader
-                className="animate-spin"
-                stroke="#fff"
-                width={20}
-                height={20}
-              />
-            ) : (
-              <>
-                <Download className="size-5 stroke-[2px]" />
-                {t("orders_manager.project_page_btn.download_report")}
-              </>
-            )}
-          </MyButton>
-        }
+        <MyButton
+          buttons_type="button__orange"
+          className="h-[54px] flex items-center justify-center min-w-[240px]"
+          onClick={handleDownloadReport}
+        >
+          {isDownloadRequestApproveReportLoading ||
+          isDownloadCompletedReportLoading ? (
+            <Loader
+              className="animate-spin"
+              stroke="#fff"
+              width={20}
+              height={20}
+            />
+          ) : (
+            <>
+              <Download className="size-5 stroke-[2px]" />
+              {t("orders_manager.project_page_btn.download_report")}
+            </>
+          )}
+        </MyButton>
         {viewer === ENUM_VIEWER_ROLES.CUSTOMER &&
           (is_request_approve === projectStatus.request_approve ||
             is_request_approve === projectStatus.cart_created ||

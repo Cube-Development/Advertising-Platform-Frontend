@@ -1,13 +1,33 @@
 import {
   AGENCY_PROJECTS_CUSTOMER,
+  AGENCY_PROJECTS_MANAGER,
   AGENCY_PROJECTS_PUBLISHER,
   authApi,
   baseApi,
 } from "@shared/api";
-import { ENUM_VIEWER_ROLES, IAgencyProjectCard, IOrderPrice } from "../types";
-import { desireStatus } from "../config";
+import {
+  ENUM_VIEWER_ROLES,
+  IAgencyProjectCard,
+  IManagerAgencyProjectCard,
+  IOrderPrice,
+  IOrderReportInfo,
+} from "../types";
+import { desireStatus, ENUM_MANAGER_PROJECT_STATUS } from "../config";
 import { ENUM_LANGUAGES_NUM } from "@shared/languages";
+import { INTERSECTION_ELEMENTS } from "@shared/config";
 
+export interface IGetAgencyProjectsReq {
+  page: number;
+  status: Exclude<ENUM_MANAGER_PROJECT_STATUS, ENUM_MANAGER_PROJECT_STATUS.NEW>;
+  elements_on_page?: number;
+}
+export interface IGetAgencyProjectsRes {
+  page: number;
+  elements: number;
+  projects: IManagerAgencyProjectCard[];
+  status?: string;
+  isLast?: boolean;
+}
 export interface ICreateOrderPricesReq {
   orders: {
     order_id: string;
@@ -26,11 +46,81 @@ export interface IGetProjectAccessCodesRes {
 
 export const agencyAuthAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
+    getAgencyProjects: build.query<
+      IGetAgencyProjectsRes,
+      IGetAgencyProjectsReq & { __isWebsocket?: boolean }
+    >({
+      query: ({ __isWebsocket, ...params }) => ({
+        url: `/agency/projects`,
+        method: `GET`,
+        params: params,
+      }),
+      transformResponse: (response: IGetAgencyProjectsRes, meta, arg) => {
+        return {
+          ...response,
+          status: arg?.status,
+          isLast:
+            response?.elements <=
+              response?.projects?.length +
+                (response?.page - 1) * INTERSECTION_ELEMENTS.MANAGER_PROJECTS ||
+            response?.projects?.length === 0,
+        };
+      },
+      serializeQueryArgs: ({ endpointName, queryArgs }) => {
+        const { status } = queryArgs;
+        return `${endpointName}/${status}`;
+      },
+      merge: (
+        currentCache: IGetAgencyProjectsRes,
+        newItems: IGetAgencyProjectsRes,
+        arg,
+      ) => {
+        const newProjectsMap = new Map(
+          newItems.projects.map((p: IManagerAgencyProjectCard) => [p.id, p]),
+        );
+
+        // Обновляем старые элементы, если есть новые с тем же id
+        const updatedOldProjects =
+          currentCache?.projects?.map((old: IManagerAgencyProjectCard) =>
+            newProjectsMap.has(old.id) ? newProjectsMap.get(old.id)! : old,
+          ) || [];
+
+        // Убираем уже обновленные ID из новых, чтобы они не дублировались
+        const newIds = new Set(
+          updatedOldProjects.map((p: IManagerAgencyProjectCard) => p.id),
+        );
+        const onlyNewProjects = newItems.projects.filter(
+          (p) => !newIds.has(p.id),
+        );
+
+        if (arg.arg.__isWebsocket) {
+          return {
+            ...currentCache,
+            projects: [...onlyNewProjects, ...updatedOldProjects],
+          };
+        } else if (arg.arg.page === 1) {
+          return {
+            ...newItems,
+          };
+        }
+
+        return {
+          ...newItems,
+          projects: [...updatedOldProjects, ...onlyNewProjects],
+        };
+      },
+
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg !== previousArg;
+      },
+      providesTags: [AGENCY_PROJECTS_MANAGER],
+    }),
     createAgencyProject: build.mutation<{ project_id: string }, void>({
       query: () => ({
         url: `/agency/project`,
         method: "POST",
       }),
+      invalidatesTags: [AGENCY_PROJECTS_MANAGER],
     }),
     createOrderPrices: build.mutation<void, ICreateOrderPricesReq>({
       query: (body) => ({
@@ -52,6 +142,7 @@ export const agencyAuthAPI = authApi.injectEndpoints({
         method: "POST",
         body: body,
       }),
+      invalidatesTags: [AGENCY_PROJECTS_MANAGER],
     }),
     launchAgencyProject: build.mutation<void, { project_id: string }>({
       query: (body) => ({
@@ -59,8 +150,9 @@ export const agencyAuthAPI = authApi.injectEndpoints({
         method: "POST",
         body: body,
       }),
+      invalidatesTags: [AGENCY_PROJECTS_MANAGER],
     }),
-    getProjectAccessCodes: build.mutation<
+    getProjectAccessCodes: build.query<
       IGetProjectAccessCodesRes,
       { project_id: string }
     >({
@@ -74,12 +166,13 @@ export const agencyAuthAPI = authApi.injectEndpoints({
 });
 
 export const {
+  useGetAgencyProjectsQuery,
   useCreateAgencyProjectMutation,
   useCreateOrderPricesMutation,
   useGetOrderPricesQuery,
   useRequestApproveMutation,
   useLaunchAgencyProjectMutation,
-  useGetProjectAccessCodesMutation,
+  useGetProjectAccessCodesQuery,
 } = agencyAuthAPI;
 
 export interface IAgencyProjectChangeReq {
@@ -157,7 +250,7 @@ export const agencyPublicAPI = baseApi.injectEndpoints({
       providesTags: [AGENCY_PROJECTS_CUSTOMER, AGENCY_PROJECTS_PUBLISHER],
     }),
     downloadRequestApproveReport: build.mutation<
-      string,
+      IOrderReportInfo,
       { project_id: string }
     >({
       query: (params) => ({
@@ -166,7 +259,10 @@ export const agencyPublicAPI = baseApi.injectEndpoints({
         params: params,
       }),
     }),
-    downloadCompletedReport: build.mutation<string, { project_id: string }>({
+    downloadCompletedReport: build.mutation<
+      IOrderReportInfo,
+      { project_id: string }
+    >({
       query: (params) => ({
         url: `/agency/project/completed/report`,
         method: "GET",

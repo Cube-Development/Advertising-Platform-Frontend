@@ -7,6 +7,8 @@ import {
   ENUM_MANAGER_PROJECT_TYPES,
   MANAGER_PROJECT_TYPES_TABS_LIST,
   MANAGER_MY_PROJECT_TABS_LIST,
+  useGetAgencyProjectsQuery,
+  IGetAgencyProjectsReq,
   // MANAGER_TURNKEY_PROJECT_TABS_LIST,
 } from "@entities/project";
 import { useFindLanguage } from "@entities/user";
@@ -70,23 +72,41 @@ export const ManagerOrders: FC = () => {
 
   const { search_string, ...params } = formState;
 
-  const getParams: getProjectsCardReq = {
-    ...params,
-    ...(search_string && search_string.length >= 3
-      ? isValidUUID(search_string)
-        ? { project_id: search_string }
-        : { search_string }
-      : {}),
+  // const getParams: getProjectsCardReq = {
+  //   ...params,
+  //   ...(search_string && search_string.length >= 3
+  //     ? isValidUUID(search_string)
+  //       ? { project_id: search_string }
+  //       : { search_string }
+  //     : {}),
+  // };
+
+  // const { data, isFetching, refetch, originalArgs } =
+  //   useGetManagerProjectsQuery(getParams, {
+  //     selectFromResult: ({ data, ...rest }) => ({
+  //       ...rest,
+  //       data: (data?.status === formState?.status && data) || undefined,
+  //     }),
+  //   });
+
+  const getParams: IGetAgencyProjectsReq = {
+    page: formState.page,
+    status: formState.status as Exclude<
+      ENUM_MANAGER_PROJECT_STATUS,
+      ENUM_MANAGER_PROJECT_STATUS.NEW
+    >,
+    elements_on_page: INTERSECTION_ELEMENTS.MANAGER_PROJECTS,
   };
 
-  const { data, isFetching, refetch, originalArgs } =
-    useGetManagerProjectsQuery(getParams, {
+  const { data, isFetching, refetch, originalArgs } = useGetAgencyProjectsQuery(
+    getParams,
+    {
       selectFromResult: ({ data, ...rest }) => ({
         ...rest,
         data: (data?.status === formState?.status && data) || undefined,
       }),
-    });
-
+    },
+  );
   const { refetch: views } = useGetViewManagerProjectQuery();
 
   useEffect(() => {
@@ -177,12 +197,22 @@ export const ManagerOrders: FC = () => {
           statusFilter={formState.status}
           typeFilter={formState.type}
         />
-        <SearchFilter
+        {formState.type === ENUM_MANAGER_PROJECT_TYPES.MY_PROJECT && (
+          <MyManagerProjectsList
+            statusFilter={formState.status as ENUM_MANAGER_PROJECT_STATUS}
+            projects={data?.projects || []}
+            handleOnChangePage={handleOnChangePage}
+            isLoading={isLoadingMore}
+            isLast={data?.isLast || false}
+            currentPage={formState.page}
+          />
+        )}
+        {/* <SearchFilter
           type={channelData.search}
           onChange={setValue}
           value={formState.search_string}
-        />
-        {formState.type === ENUM_MANAGER_PROJECT_TYPES.TURNKEY_PROJECT &&
+        /> */}
+        {/* {formState.type === ENUM_MANAGER_PROJECT_TYPES.TURNKEY_PROJECT &&
         formState.status === ENUM_MANAGER_PROJECT_STATUS.NEW ? (
           <ManagerNewProjectsList
             projects={data?.projects}
@@ -209,7 +239,7 @@ export const ManagerOrders: FC = () => {
             isLast={data?.isLast || false}
             currentPage={formState.page}
           />
-        )}
+        )} */}
       </div>
     </div>
   );

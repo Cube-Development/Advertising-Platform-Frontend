@@ -708,7 +708,13 @@
     },
     "project_page_btn": {
       "download_report": "Download Report",
-      "approve_project": "Approve"
+      "approve_project": "Approve",
+      "download_request_approve_report": "Download excel for approval with the customer",
+      "share_project_link": {
+        "customer": "Customer Link",
+        "publisher": "Publisher Link",
+        "copied": "Copied"
+      }
     },
     "status_filter": {
       "active": "Active",

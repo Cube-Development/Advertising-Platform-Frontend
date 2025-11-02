@@ -113,22 +113,20 @@ export const SendLink: FC<IOrderFeature> = ({
     }
   };
 
-  // Функция для конвертации DD.MM.YYYY HH:mm в ISO строку
-  const convertToISO = (dateStr: string, timeStr: string): string | null => {
+  // Функция для форматирования даты в формат DD.MM.YYYY HH:mm
+  const formatDateTime = (dateStr: string, timeStr: string): string | null => {
     if (!isValidDate(dateStr, timeStr)) {
       return null;
     }
     try {
       const [day, month, year] = dateStr.split(".");
       const [hour, minute] = timeStr.split(":");
-      const date = new Date(
-        parseInt(year),
-        parseInt(month) - 1,
-        parseInt(day),
-        parseInt(hour),
-        parseInt(minute),
-      );
-      return date.toISOString();
+      // Обеспечиваем двузначный формат для дня, месяца, часа и минуты
+      const formattedDay = day.padStart(2, "0");
+      const formattedMonth = month.padStart(2, "0");
+      const formattedHour = hour.padStart(2, "0");
+      const formattedMinute = minute.padStart(2, "0");
+      return `${formattedDay}.${formattedMonth}.${year} ${formattedHour}:${formattedMinute}`;
     } catch {
       return null;
     }
@@ -156,17 +154,24 @@ export const SendLink: FC<IOrderFeature> = ({
 
     let publishedDate: string;
     if (code && dateValue && timeValue) {
-      const convertedDate = convertToISO(dateValue, timeValue);
-      if (!convertedDate) {
+      const formattedDate = formatDateTime(dateValue, timeValue);
+      if (!formattedDate) {
         toast({
           variant: "error",
           title: "Invalid date or time",
         });
         return;
       }
-      publishedDate = convertedDate;
+      publishedDate = formattedDate;
     } else {
-      publishedDate = new Date().toISOString();
+      // Форматируем текущую дату в формат DD.MM.YYYY HH:mm
+      const now = new Date();
+      const day = String(now.getDate()).padStart(2, "0");
+      const month = String(now.getMonth() + 1).padStart(2, "0");
+      const year = now.getFullYear();
+      const hour = String(now.getHours()).padStart(2, "0");
+      const minute = String(now.getMinutes()).padStart(2, "0");
+      publishedDate = `${day}.${month}.${year} ${hour}:${minute}`;
     }
 
     (code && project_id && order_id && url

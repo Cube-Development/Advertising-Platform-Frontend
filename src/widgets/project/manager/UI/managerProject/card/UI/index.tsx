@@ -5,6 +5,7 @@ import {
   ENUM_MANAGER_PROJECT_STATUS,
   projectStatus,
   useGetManagerSubprojectsQuery,
+  IManagerProjectSubcard,
 } from "@entities/project";
 import { ENUM_ROLES, useFindLanguage } from "@entities/user";
 import {
@@ -293,7 +294,7 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
                   <ManagerProjectSubcard
                     key={index}
                     card={card}
-                    subcard={subcard}
+                    subcard={subcard as IManagerProjectSubcard}
                     FeedbackBtn={Feedback}
                     AcceptBtn={AcceptPost}
                     RejectBtn={RejectPost}
@@ -370,7 +371,7 @@ export const ManagerProjectCard: FC<ManagerProjectCardProps> = ({
                         <ManagerProjectSubcard
                           key={index}
                           card={card}
-                          subcard={subcard}
+                          subcard={subcard as IManagerProjectSubcard}
                           FeedbackBtn={Feedback}
                           AcceptBtn={AcceptPost}
                           RejectBtn={RejectPost}
