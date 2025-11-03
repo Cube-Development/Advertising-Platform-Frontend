@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { CheckCheck, Download, Flag, Loader } from "lucide-react";
 import {
   ENUM_VIEWER_ROLES,
+  IAgencyOrderCard,
   projectStatus,
   useAgencyApproveProjectMutation,
   useDownloadCompletedReportMutation,
@@ -26,6 +27,7 @@ interface TopInfoProps {
   viewer: ENUM_VIEWER_ROLES;
   project_id: string;
   code: number;
+  orders?: IAgencyOrderCard[];
 }
 
 export const TopInfo: FC<TopInfoProps> = ({
@@ -40,6 +42,8 @@ export const TopInfo: FC<TopInfoProps> = ({
   wait,
   viewer,
   project_id,
+  remainder,
+  orders,
   code,
 }) => {
   const { t } = useTranslation();
@@ -98,7 +102,7 @@ export const TopInfo: FC<TopInfoProps> = ({
   return (
     <div className="grid grid-flow-row md:gap-10 gap-6">
       <div className="grid md:grid-flow-col grid-flow-row gap-4 items-center md:justify-between justify-center md:justify-items-start justify-items-center">
-        <h1 className="xl:text-2xl md:text-lg text-base font-bold text-[var(--Personal-colors-black)]">
+        <h1 className="xl:text-2xl md:text-xl text-base font-bold text-[var(--Personal-colors-black)]">
           {project_name}
         </h1>
         <MyButton
@@ -146,44 +150,68 @@ export const TopInfo: FC<TopInfoProps> = ({
             </MyButton>
           )}
       </div>
-      <div className="grid lg:grid-cols-4 grid-cols-2 gap-4">
-        <div className="flex flex-col items-center justify-center px-2 py-4 shadow-md rounded-[10px] bg-[#0f69c91a] gap-[10px]">
-          <p className="text-[var(--Personal-colors-black)] md:text-xl text-base font-semibold">
-            {is_request_approve === projectStatus.completed
-              ? t("orders_advertiser.card.status.completed")
-              : t("orders_advertiser.card.status.active")}
-          </p>
+
+      <div className="grid lg:grid-cols-4 mobile-xl:grid-cols-2 grid-cols-1 gap-4">
+        <div className="bg-white rounded-2xl shadow-md mobile-xl:p-6 p-4 border-l-4 border-blue-500">
+          <div className="text-slate-600 md:text-sm text-xs font-medium mb-1">
+            {t("project_page.top_info.views")}
+          </div>
+          <div className="md:text-base text-sm font-bold text-slate-800">
+            {views.toLocaleString()}
+          </div>
+          <div className="text-xs text-slate-500 mt-2">
+            {count_channels} {t("project_page.top_info.channels")}
+          </div>
         </div>
-        <div className="flex flex-col items-center justify-center px-2 py-4 shadow-md rounded-[10px] bg-[#f5f5f6] gap-[10px]">
-          <p className="text-[#00000073] md:text-base text-sm font-medium">
-            {t("orders_advertiser.card.channels")}:
-          </p>
-          <span className="text-[var(--Personal-colors-black)] md:text-base text-sm font-semibold">
-            {count_channels?.toLocaleString()}
-          </span>
+
+        <div className="bg-white rounded-2xl shadow-md mobile-xl:p-6 p-4 border-l-4 border-green-500">
+          <div className="text-slate-600 md:text-sm text-xs font-medium mb-1">
+            {t("project_page.top_info.budget")}
+          </div>
+          <div className="md:text-base text-sm font-bold text-slate-800">
+            {budget.toLocaleString()} {t("symbol")}
+          </div>
+          <div className="text-xs text-green-600 mt-2">
+            {t("project_page.top_info.remainder")}:{" "}
+            {(remainder || 0).toLocaleString()} {t("symbol")}
+          </div>
         </div>
-        <div className="flex flex-col items-center justify-center px-2 py-4 shadow-md rounded-[10px] bg-[#f5f5f6] gap-[10px]">
-          <p className="text-[#00000073] md:text-base text-sm font-medium">
-            {t("orders_advertiser.card.views")}:
-          </p>
-          <span className="text-[var(--Personal-colors-black)] md:text-base text-sm font-semibold">
-            ~ {views?.toLocaleString()}
-          </span>
+
+        <div className="bg-white rounded-2xl shadow-md mobile-xl:p-6 p-4 border-l-4 border-amber-500">
+          <div className="text-slate-600 md:text-sm text-xs font-medium mb-1">
+            {t("project_page.top_info.cpv")}
+          </div>
+          <div className="md:text-base text-sm font-bold text-slate-800">
+            {orders && orders.length > 0
+              ? (
+                  orders.reduce((s, o) => s + (o.cpv || 0), 0) / orders.length
+                ).toFixed(1)
+              : "0.0"}{" "}
+            {t("symbol")}
+          </div>
+          <div className="text-xs text-slate-500 mt-2">
+            {t("project_page.top_info.per_view")}
+          </div>
         </div>
-        <div className="flex flex-col items-center justify-center px-2 py-4 shadow-md rounded-[10px] bg-[#f5f5f6] gap-[10px]">
-          <p className="text-[#00000073] md:text-base text-sm font-medium">
-            {t("orders_advertiser.card.cost")}:
-          </p>
-          <span className="flex items-start gap-1">
-            <span className="text-[var(--Personal-colors-black)] md:text-base text-sm font-semibold">
-              {budget?.toLocaleString()}
-            </span>
-            <small className="text-[var(--Personal-colors-black)] md:text-base text-sm font-semibold">
-              {t("symbol")}
-            </small>
-          </span>
+
+        <div className="bg-white rounded-2xl shadow-md mobile-xl:p-6 p-4 border-l-4 border-purple-500">
+          <div className="text-slate-600 md:text-sm text-xs font-medium mb-1">
+            {t("project_page.top_info.er")}
+          </div>
+          <div className="md:text-base text-sm font-bold text-slate-800">
+            {orders && orders.length > 0
+              ? (
+                  orders.reduce((s, o) => s + (o.er || 0), 0) / orders.length
+                ).toFixed(1)
+              : "0.0"}
+            %
+          </div>
+          <div className="text-xs text-slate-500 mt-2">
+            {t("project_page.top_info.involvement")}
+          </div>
         </div>
       </div>
+
       <div className="flex lg:flex-row flex-col items-center justify-center gap-4 md:text-lg text-base text-center text-[var(--Personal-colors-black)] font-semibold">
         <Flag className="size-8 stroke-[1.5px] text-[var(--Personal-colors-main2)]" />
         <p>
@@ -201,28 +229,29 @@ export const TopInfo: FC<TopInfoProps> = ({
                     : ""}
         </p>
       </div>
+
       {is_request_approve ===
         (projectStatus.in_progress || !projectStatus.completed) && (
         <div className="grid grid-cols-4 mobile-xl:gap-4 gap-2">
-          <div className="rounded-[10px] py-4 flex items-center justify-center gap-2 border-2 border-black/10 shadow-sm [&>svg]:mobile-xl:size-[26px] [&>svg]:size-5">
+          <div className="shadow-md rounded-[10px] bg-white/80 border-[1.5px] border-black/5 py-4 flex items-center justify-center gap-2 [&>svg]:mobile-xl:size-[26px] [&>svg]:size-5">
             <RocketIcon />
             <p className="mobile-xl:text-base text-sm font-medium">
               {in_progress?.toLocaleString()}
             </p>
           </div>
-          <div className="rounded-[10px] py-4 flex items-center justify-center gap-2 border-2 border-black/10 shadow-sm [&>svg]:mobile-xl:size-[26px] [&>svg]:size-5">
+          <div className="shadow-md rounded-[10px] bg-white/80 border-[1.5px] border-black/5 py-4 flex items-center justify-center gap-2 [&>svg]:mobile-xl:size-[26px] [&>svg]:size-5">
             <CompleteIcon />
             <p className="mobile-xl:text-base text-sm font-medium">
               {completed?.toLocaleString()}
             </p>
           </div>
-          <div className="rounded-[10px] py-4 flex items-center justify-center gap-2 border-2 border-black/10 shadow-sm [&>svg]:mobile-xl:size-[26px] [&>svg]:size-5">
+          <div className="shadow-md rounded-[10px] bg-white/80 border-[1.5px] border-black/5 py-4 flex items-center justify-center gap-2 [&>svg]:mobile-xl:size-[26px] [&>svg]:size-5">
             <CancelIcon />
             <p className="mobile-xl:text-base text-sm font-medium">
               {canceled?.toLocaleString()}
             </p>
           </div>
-          <div className="rounded-[10px] py-4 flex items-center justify-center gap-2 border-2 border-black/10 shadow-sm [&>svg]:mobile-xl:size-[26px] [&>svg]:size-5">
+          <div className="shadow-md rounded-[10px] bg-white/80 border-[1px] border-black/5 py-4 flex items-center justify-center gap-2 [&>svg]:mobile-xl:size-[26px] [&>svg]:size-5">
             <WaitIcon />
             <p className="mobile-xl:text-base text-sm font-medium">
               {wait?.toLocaleString()}

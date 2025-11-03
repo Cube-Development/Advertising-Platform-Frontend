@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { OrdersList, TopInfo } from "../components";
+import { OrdersList, TopInfo, Statistics } from "../components";
 import { IAgencyProjectCard } from "@entities/project";
 
 // const project_data_mock: IAgencyProjectCard = {
@@ -286,6 +286,7 @@ export const AgencyProject: FC<AgencyProjectProps> = ({
         viewer={project_data.viewer}
         project_id={project_data.id}
         code={code}
+        orders={project_data.orders || []}
       />
       <OrdersList
         orders={project_data.orders || []}
@@ -294,6 +295,7 @@ export const AgencyProject: FC<AgencyProjectProps> = ({
         viewer={project_data.viewer}
         code={code}
       />
+      <Statistics project={project_data} />
     </div>
   );
 };
