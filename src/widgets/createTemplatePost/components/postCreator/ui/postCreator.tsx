@@ -1,5 +1,6 @@
 import { FC } from "react";
 import { UseFormRegister, FieldErrors, UseFormSetValue } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { AddFiles, AddMediaFiles } from "@features/createOrder";
 import { PlatformFilter } from "@features/project";
 import { platformTypesNum, PostTypesNum } from "@entities/platform";
@@ -26,11 +27,12 @@ export const PostCreator: FC<PostCreatorProps> = ({
   formState,
   setFormValue,
 }) => {
+  const { t } = useTranslation();
   return (
     <div className="space-y-4 h-fit">
       <Input
         {...register("name", { required: "Name is required" })}
-        placeholder="Enter template name"
+        placeholder={t("template_post.template_name_placeholder")}
         className="w-full"
       />
       {errors.name && (

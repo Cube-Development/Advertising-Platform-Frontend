@@ -2014,6 +2014,70 @@
 
   "download_all_files": "All files",
   "copy_post_text": "Text",
+  "send_to_telegram": "Send to Telegram",
+
+  "template_post": {
+    "add_template_post": "Add template",
+    "template_name_placeholder": "Enter template name",
+    "create_template_post": "Create template",
+    "uploading_files": "Uploading files..."
+  },
+
+  "project_page": {
+    "top_info": {
+      "views": "Views",
+      "budget": "Budget",
+      "cpv": "Average CPV",
+      "per_view": "Per view",
+      "remainder": "Remainder",
+      "involvement": "Engagement",
+      "er": "Average ER",
+      "channels": "channel(s)"
+    },
+    "statistics": {
+      "title": "Project Statistics",
+      "orders_status": {
+        "title": "Orders Status",
+        "completed": "Completed",
+        "in_progress": "In Progress",
+        "wait": "Wait",
+        "canceled": "Canceled"
+      },
+      "top_channels": {
+        "title": "Top 5 channels by views",
+        "views": "Views",
+        "subscribers": "Subscribers",
+        "er": "ER"
+      },
+      "platforms_distribution": {
+        "title": "Platforms Distribution",
+        "total_orders": "orders"
+      },
+      "demography": {
+        "title": "Audience Demography",
+        "description": "Average distribution of all channels",
+        "men": "Men",
+        "women": "Women"
+      },
+      "publications_dynamics": {
+        "title": "Publications Dynamics",
+        "budget": "Budget (sum)",
+        "views": "Views"
+      },
+      "category_metrics": {
+        "title": "Category Metrics",
+        "avgER": "Average ER (%)",
+        "avgCPV": "Average CPV (sum)"
+      },
+      "efficiency": {
+        "title": "Channel Efficiency (CPV vs ER)",
+        "cpv": "CPV (sum)",
+        "er": "ER (%)",
+        "views": "Views",
+        "description": "Ideal channel: low CPV + high ER"
+      }
+    }
+  },
 
   "add_platform_btn": {
     "check": "Check",
@@ -2219,6 +2283,16 @@
         "success": "Public offer successfully signed",
         "need": "You need to confirm the organization by signing the public offer",
         "error": "An error occurred while signing the public offer"
+      }
+    },
+    "template_post": {
+      "add": {
+        "success": "Template successfully added",
+        "error": "Error during template addition"
+      },
+      "delete": {
+        "success": "Template successfully deleted",
+        "error": "Error during template deletion"
       }
     },
     "add_platform": {

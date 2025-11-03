@@ -614,7 +614,7 @@
         "active": "В работе",
         "develop": "В разработке",
         "agreed": "На согласовании",
-        "completed": "Выполненные"
+        "completed": "Завершено"
       },
       "channels": "Каналы",
       "views": "Просмотры",
@@ -2326,6 +2326,70 @@
 
   "download_all_files": "Все файлы",
   "copy_post_text": "Текст",
+  "send_to_telegram": "Отправить в Telegram",
+
+  "template_post": {
+    "add_template_post": "Добавить шаблон",
+    "template_name_placeholder": "Введите название шаблона",
+    "create_template_post": "Создать шаблон",
+    "uploading_files": "Загружаем файлы..."
+  },
+
+  "project_page": {
+    "top_info": {
+      "views": "Охват",
+      "budget": "Бюджет",
+      "cpv": "Средний CPV",
+      "per_view": "За просмотр",
+      "remainder": "Остаток",
+      "involvement": "Вовлеченность",
+      "er": "Средний ER",
+      "channels": "канал(ов)"
+    },
+    "statistics": {
+      "title": "Статистика проекта",
+      "orders_status": {
+        "title": "Статус заказов",
+        "completed": "Завершено",
+        "in_progress": "В работе",
+        "wait": "Ожидание",
+        "canceled": "Отменено"
+      },
+      "top_channels": {
+        "title": "Топ-5 каналов по охвату",
+        "views": "Просмотры",
+        "subscribers": "Подписчики",
+        "er": "ER"
+      },
+      "platforms_distribution": {
+        "title": "Распределение по платформам",
+        "total_orders": "заказов"
+      },
+      "demography": {
+        "title": "Демография аудитории",
+        "description": "Средневзвешенное распределение по всем каналам",
+        "men": "Мужчины",
+        "women": "Женщины"
+      },
+      "publications_dynamics": {
+        "title": "График публикаций",
+        "budget": "Бюджет (сум)",
+        "views": "Просмотры"
+      },
+      "category_metrics": {
+        "title": "Метрики по категориям",
+        "avgER": "Средний ER (%)",
+        "avgCPV": "Средний CPV (сум)"
+      },
+      "efficiency": {
+        "title": "Эффективность каналов (CPV vs ER)",
+        "cpv": "CPV (сум)",
+        "er": "ER (%)",
+        "views": "Просмотры",
+        "description": "Идеальный канал: низкий CPV + высокий ER"
+      }
+    }
+  },
 
   "add_platform_btn": {
     "check": "Проверить",
@@ -2560,7 +2624,16 @@
         "error": "При подписании публичной оферты произошла ошибка"
       }
     },
-
+    "template_post": {
+      "add": {
+        "success": "Шаблон успешно добавлен",
+        "error": "При добавлении шаблона произошла ошибка"
+      },
+      "delete": {
+        "success": "Шаблон успешно удален",
+        "error": "При удалении шаблона произошла ошибка"
+      }
+    },
     "add_profile": {
       "create": {
         "success": "Данные успешно добавлены",
@@ -2760,6 +2833,7 @@
       }
     }
   },
+
   "url_link": "Введите URL-адрес...",
 
   "admin_panel": {

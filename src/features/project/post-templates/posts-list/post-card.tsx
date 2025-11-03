@@ -1,5 +1,6 @@
 import { FC, useMemo } from "react";
 import { CirclePlus, Trash2 } from "lucide-react";
+import { useTranslation } from "react-i18next";
 import {
   GetPostRes,
   IPostTemplate,
@@ -41,19 +42,20 @@ export const PostCard: FC<PostCardProps> = ({
     [post, selectedPlatform, selectedPostType, post.files],
   );
   const { toast } = useToast();
+  const { t } = useTranslation();
 
   const handleDeleteTemplate = () => {
     deleteTemplate({ id: post?.id || "" })
       .unwrap()
       .then(() => {
         toast({
-          title: "Success...",
+          title: t("toasts.template_post.delete.success"),
           variant: "success",
         });
       })
       .catch(() => {
         toast({
-          title: "Failed...",
+          title: t("toasts.template_post.delete.error"),
           variant: "error",
         });
       });

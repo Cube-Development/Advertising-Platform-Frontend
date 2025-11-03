@@ -2012,6 +2012,70 @@
 
   "download_all_files": "Barcha fayllar",
   "copy_post_text": "Matnni nusxalash",
+  "send_to_telegram": "Telegramga yuborish",
+
+  "template_post": {
+    "add_template_post": "Shablon qo'shish",
+    "template_name_placeholder": "Shablon nomini kiriting",
+    "create_template_post": "Shablon yaratish",
+    "uploading_files": "Fayllarni yuklash..."
+  },
+
+  "project_page": {
+    "top_info": {
+      "views": "Post ko'rishlari",
+      "budget": "Byudjet",
+      "cpv": "O'rtacha CPV",
+      "per_view": "Bitta prosmotr",
+      "remainder": "Qolgan",
+      "involvement": "Engilik",
+      "er": "O'rtacha ER",
+      "channels": "kanal(lar)"
+    },
+    "statistics": {
+      "title": "Loyiha statistikasi",
+      "orders_status": {
+        "title": "Buyurtmalar holati",
+        "completed": "Bajarildi",
+        "in_progress": "Bajarilmoqda",
+        "wait": "Kutilmoqda",
+        "canceled": "Rad etildi"
+      },
+      "top_channels": {
+        "title": "Top 5 kanallar post ko'rishlari bo'yicha",
+        "views": "Ko'rishlari",
+        "subscribers": "Obunachilar",
+        "er": "ER"
+      },
+      "platforms_distribution": {
+        "title": "Platforma bo'yicha taqsimlash",
+        "total_orders": "buyurtmalar"
+      },
+      "demography": {
+        "title": "Auditoriya demografiyasi",
+        "description": "O'rtacha taqsimlash barcha kanallarda",
+        "men": "Erkaklar",
+        "women": "Ayollar"
+      },
+      "publications_dynamics": {
+        "title": "Postlar dinamikasi",
+        "budget": "Byudjet (sum)",
+        "views": "Ko'rishlari"
+      },
+      "category_metrics": {
+        "title": "Kategoriya metrikalari",
+        "avgER": "O'rtacha ER (%)",
+        "avgCPV": "O'rtacha CPV (sum)"
+      },
+      "efficiency": {
+        "title": "Kanallar effektivligi (CPV vs ER)",
+        "cpv": "CPV (sum)",
+        "er": "ER (%)",
+        "views": "Ko'rishlari",
+        "description": "Ideal kanallar: past CPV + yuqori ER"
+      }
+    }
+  },
 
   "add_platform_btn": {
     "check": "Tekshirish",
@@ -2217,6 +2281,16 @@
         "success": "Ommaviy oferta muvaffaqiyatli imzolandi",
         "need": "Tashkilotni tasdiqlash uchun ommaviy ofertani imzolashingiz kerak",
         "error": "Ommaviy ofertani imzolashda xatolik yuz berdi"
+      }
+    },
+    "template_post": {
+      "add": {
+        "success": "Shablon muvaffaqiyatli qo'shildi",
+        "error": "Shablon qo'shishda xatolik yuz berdi"
+      },
+      "delete": {
+        "success": "Shablon muvaffaqiyatli o'chirildi",
+        "error": "Shablon o'chirishda xatolik yuz berdi"
       }
     },
     "add_platform": {
