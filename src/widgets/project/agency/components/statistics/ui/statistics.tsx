@@ -327,7 +327,7 @@ export const Statistics: FC<StatisticsProps> = ({ project }) => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
           {/* Статусы заказов */}
           <div className="bg-white rounded-2xl md:border-none border-[1.5px] border-[rgba(0,0,0,rgba(10,165,190,0.6))] mobile-xl:p-6 p-3">
-            <h3 className="lg:text-start text-center md:text-xl mobile-xl:text-lg text-base font-semibold text-slate-800 mb-4">
+            <h3 className="lg:text-start text-center md:text-xl mobile-xl:text-lg text-sm font-semibold text-slate-800 mb-4">
               {t("project_page.statistics.orders_status.title")}
             </h3>
             <ResponsiveContainer width="100%" height={390}>
@@ -371,14 +371,14 @@ export const Statistics: FC<StatisticsProps> = ({ project }) => {
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
-                <Tooltip />
+                <Tooltip contentStyle={{ fontSize: 12, fontWeight: 500 }} />
               </PieChart>
             </ResponsiveContainer>
           </div>
 
           {/* Топ каналов */}
           <div className="bg-white rounded-2xl md:border-none border-[1.5px] border-[rgba(0,0,0,rgba(10,165,190,0.6))] mobile-xl:p-6 p-3 top-channels-chart">
-            <h3 className="lg:text-start text-center md:text-xl mobile-xl:text-lg text-base font-semibold text-slate-800 mb-4">
+            <h3 className="lg:text-start text-center md:text-xl mobile-xl:text-lg text-sm font-semibold text-slate-800 mb-4">
               {t("project_page.statistics.top_channels.title")}
             </h3>
             <ResponsiveContainer width="100%" height={390}>
@@ -443,7 +443,7 @@ export const Statistics: FC<StatisticsProps> = ({ project }) => {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Распределение по платформам */}
                 <div className="bg-white rounded-2xl md:border-none border-[1.5px] border-[rgba(0,0,0,rgba(10,165,190,0.6))] mobile-xl:p-6 p-3">
-                  <h3 className="lg:text-start text-center md:text-xl mobile-xl:text-lg text-base font-semibold text-slate-800 mb-4">
+                  <h3 className="lg:text-start text-center md:text-xl mobile-xl:text-lg text-sm font-semibold text-slate-800 mb-4">
                     {t("project_page.statistics.platforms_distribution.title")}
                   </h3>
                   <ResponsiveContainer width="100%" height={300}>
@@ -484,6 +484,7 @@ export const Statistics: FC<StatisticsProps> = ({ project }) => {
                             ];
                           return [value, name];
                         }}
+                        contentStyle={{ fontSize: 12, fontWeight: 500 }}
                       />
                     </PieChart>
                   </ResponsiveContainer>
@@ -497,7 +498,7 @@ export const Statistics: FC<StatisticsProps> = ({ project }) => {
 
                 {/* Демография */}
                 <div className="bg-white rounded-2xl md:border-none border-[1.5px] border-[rgba(0,0,0,rgba(10,165,190,0.6))] mobile-xl:p-6 p-3">
-                  <h3 className="lg:text-start text-center md:text-xl mobile-xl:text-lg text-base font-semibold text-slate-800 mb-4">
+                  <h3 className="lg:text-start text-center md:text-xl mobile-xl:text-lg text-sm font-semibold text-slate-800 mb-4">
                     {t("project_page.statistics.demography.title")}
                   </h3>
                   <ResponsiveContainer width="100%" height={300}>
@@ -531,7 +532,7 @@ export const Statistics: FC<StatisticsProps> = ({ project }) => {
               <div className="grid grid-cols-1 gap-6">
                 {/* Динамика публикаций */}
                 <div className="bg-white rounded-2xl md:border-none border-[1.5px] border-[rgba(0,0,0,rgba(10,165,190,0.6))] mobile-xl:p-6 p-3 top-channels-chart">
-                  <h3 className="lg:text-start text-center md:text-xl mobile-xl:text-lg text-base font-semibold text-slate-800 mb-4">
+                  <h3 className="lg:text-start text-center md:text-xl mobile-xl:text-lg text-sm font-semibold text-slate-800 mb-4">
                     {t("project_page.statistics.publications_dynamics.title")}
                   </h3>
                   <ResponsiveContainer
@@ -568,6 +569,7 @@ export const Statistics: FC<StatisticsProps> = ({ project }) => {
                             ? value.toLocaleString()
                             : value
                         }
+                        contentStyle={{ fontSize: 12, fontWeight: 500 }}
                       />
                       <Legend verticalAlign="bottom" />
                       <Area
@@ -600,7 +602,7 @@ export const Statistics: FC<StatisticsProps> = ({ project }) => {
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Эффективность по категориям */}
                 <div className="bg-white rounded-2xl md:border-none border-[1.5px] border-[rgba(0,0,0,rgba(10,165,190,0.6))] mobile-xl:p-6 p-3 top-channels-chart">
-                  <h3 className="lg:text-start text-center md:text-xl mobile-xl:text-lg text-base font-semibold text-slate-800 mb-4">
+                  <h3 className="lg:text-start text-center md:text-xl mobile-xl:text-lg text-sm font-semibold text-slate-800 mb-4">
                     {t("project_page.statistics.category_metrics.title")}
                   </h3>
                   <ResponsiveContainer width="100%" height={370}>
@@ -620,7 +622,9 @@ export const Statistics: FC<StatisticsProps> = ({ project }) => {
                         tickFormatter={formatAxisValue}
                         className="md:w-[80px] w-[10px] md:text-[12px] text-[10px] font-medium"
                       />
-                      <Tooltip />
+                      <Tooltip
+                        contentStyle={{ fontSize: 12, fontWeight: 500 }}
+                      />
                       <Legend verticalAlign="bottom" />
                       <Bar
                         dataKey="avgER"
@@ -644,7 +648,7 @@ export const Statistics: FC<StatisticsProps> = ({ project }) => {
 
                 {/* CPV vs ER scatter */}
                 <div className="bg-white rounded-2xl md:border-none border-[1.5px] border-[rgba(0,0,0,rgba(10,165,190,0.6))] mobile-xl:p-6 p-3 top-channels-chart">
-                  <h3 className="lg:text-start text-center md:text-xl mobile-xl:text-lg text-base font-semibold text-slate-800 mb-4">
+                  <h3 className="lg:text-start text-center md:text-xl mobile-xl:text-lg text-sm font-semibold text-slate-800 mb-4">
                     {t("project_page.statistics.efficiency.title")}
                   </h3>
                   <ResponsiveContainer width="100%" height={370}>
@@ -680,7 +684,9 @@ export const Statistics: FC<StatisticsProps> = ({ project }) => {
                         }}
                         className="md:w-[80px] w-[10px] md:text-[12px] text-[10px] font-medium"
                       />
-                      <Tooltip />
+                      <Tooltip
+                        contentStyle={{ fontSize: 12, fontWeight: 500 }}
+                      />
                       <Legend verticalAlign="bottom" />
                       <Line
                         yAxisId="left"
