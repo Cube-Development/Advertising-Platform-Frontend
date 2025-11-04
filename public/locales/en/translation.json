@@ -2076,7 +2076,9 @@
         "views": "Views",
         "description": "Ideal channel: low CPV + high ER"
       }
-    }
+    },
+    "show_all": "Show all",
+    "hide": "Hide"
   },
 
   "add_platform_btn": {

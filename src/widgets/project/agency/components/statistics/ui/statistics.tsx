@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { IAgencyOrderCard, IAgencyProjectCard } from "@entities/project";
 import {
@@ -20,6 +20,12 @@ import {
 } from "recharts";
 import { platformTypesNum } from "@entities/platform";
 import { ChartPie } from "lucide-react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@shared/ui";
 
 interface StatisticsProps {
   project: IAgencyProjectCard;
@@ -27,6 +33,7 @@ interface StatisticsProps {
 
 export const Statistics: FC<StatisticsProps> = ({ project }) => {
   const { t } = useTranslation();
+  const [accordionValue, setAccordionValue] = useState<string>("");
 
   // Форматирование больших чисел для осей
   const formatAxisValue = (value: number) => {
@@ -81,33 +88,95 @@ export const Statistics: FC<StatisticsProps> = ({ project }) => {
 
   // Динамика публикаций
   const publicationData = project?.orders
-    ? [...project.orders]
-        .filter((o) => o.publish_date)
-        .sort((a, b) => {
-          const dateA =
-            typeof a.publish_date === "object"
-              ? a.publish_date.date_from
-              : a.publish_date;
-          const dateB =
-            typeof b.publish_date === "object"
-              ? b.publish_date.date_from
-              : b.publish_date;
-          return new Date(dateA).getTime() - new Date(dateB).getTime();
-        })
-        .map((order) => {
-          const date =
-            typeof order.publish_date === "object"
-              ? order.publish_date.date_from
-              : order.publish_date;
-          return {
-            date: new Date(date).toLocaleDateString("ru-RU", {
+    ? (() => {
+        // Создаем мапу для группировки по дате+времени
+        const groupedData = new Map<
+          string,
+          {
+            dateTime: string;
+            dateTimeValue: number;
+            views: number;
+            price: number;
+          }
+        >();
+
+        project.orders
+          .filter((o) => o.publish_date && o.publish_time)
+          .forEach((order) => {
+            // Получаем дату
+            const dateStr =
+              typeof order.publish_date === "object"
+                ? order.publish_date.date_from
+                : order.publish_date;
+
+            // Получаем время
+            const timeStr = order.publish_time.time_from;
+
+            if (!dateStr || !timeStr) return;
+
+            // Парсим дату (формат DD.MM.YYYY)
+            const dateParts = dateStr.split(".");
+            if (dateParts.length !== 3) return;
+            const [day, month, year] = dateParts.map(Number);
+
+            // Парсим время (формат HH:MM или HH:MM:SS)
+            const timeParts = timeStr.split(":");
+            if (timeParts.length < 2) return;
+            const [hours, minutes] = timeParts.map(Number);
+
+            // Проверяем валидность
+            if (
+              isNaN(day) ||
+              isNaN(month) ||
+              isNaN(year) ||
+              isNaN(hours) ||
+              isNaN(minutes)
+            )
+              return;
+
+            // Создаем объект Date
+            const dateTimeObj = new Date(year, month - 1, day, hours, minutes);
+
+            // Проверяем, что дата валидна
+            if (isNaN(dateTimeObj.getTime())) return;
+
+            const dateTimeValue = dateTimeObj.getTime();
+
+            // Создаем ключ из даты и времени для группировки
+            const dateTimeKey = `${dateStr}_${timeStr}`;
+
+            // Форматируем для отображения
+            const formattedDate = dateTimeObj.toLocaleDateString("ru-RU", {
               day: "2-digit",
               month: "short",
-            }),
-            views: order.views!,
-            price: order.price!,
-          };
-        })
+            });
+            const formattedTime = timeStr.slice(0, 5); // Берем только часы:минуты
+            const displayLabel = `${formattedDate} ${formattedTime}`;
+
+            // Группируем и суммируем
+            if (groupedData.has(dateTimeKey)) {
+              const existing = groupedData.get(dateTimeKey)!;
+              existing.views += order.views || 0;
+              existing.price += order.price || 0;
+            } else {
+              groupedData.set(dateTimeKey, {
+                dateTime: displayLabel,
+                dateTimeValue,
+                views: order.views || 0,
+                price: order.price || 0,
+              });
+            }
+          });
+
+        // Преобразуем в массив и сортируем по дате+времени
+        return Array.from(groupedData.values())
+          .sort((a, b) => a.dateTimeValue - b.dateTimeValue)
+          .map((item) => ({
+            dateTime: item.dateTime,
+            views: item.views,
+            price: item.price,
+          }));
+      })()
     : undefined;
 
   // Демография
@@ -254,364 +323,398 @@ export const Statistics: FC<StatisticsProps> = ({ project }) => {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Статусы заказов */}
-        <div className="bg-white rounded-2xl shadow-lg mobile-xl:p-6 p-3">
-          <h3 className="lg:text-start text-center md:text-xl mobile-xl:text-lg text-base font-semibold text-slate-800 mb-4">
-            {t("project_page.statistics.orders_status.title")}
-          </h3>
-          <ResponsiveContainer width="100%" height={390}>
-            <PieChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
-              <Pie
-                data={
-                  statusData.length > 0
-                    ? statusData
-                    : [
-                        {
-                          name: t(
-                            "project_page.statistics.orders_status.in_progress",
-                          ),
-                          value: project?.count_channels ?? 0,
-                          color: "#3b82f6",
-                        },
-                      ]
-                }
-                cx="50%"
-                cy="50%"
-                labelLine={true}
-                label={(props: {
-                  name?: string | number;
-                  percent?: number;
-                  payload?: { value?: number };
-                }) => {
-                  const name = props.name || "";
-                  const value = props.payload?.value || 0;
-                  const percent = props.percent || 0;
-                  if (value === 0) return null;
-                  return `${value} (${(percent * 100).toFixed(0)}%)`;
-                }}
-                outerRadius={100}
-                innerRadius={60}
-                paddingAngle={3}
-                cornerRadius={8}
-                fill="#8884d8"
-                dataKey="value"
-              >
-                {statusData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} />
-                ))}
-              </Pie>
-              <Tooltip />
-            </PieChart>
-          </ResponsiveContainer>
-        </div>
-
-        {/* Топ каналов */}
-        <div className="bg-white rounded-2xl shadow-lg mobile-xl:p-6 p-3">
-          <h3 className="lg:text-start text-center md:text-xl mobile-xl:text-lg text-base font-semibold text-slate-800 mb-4">
-            {t("project_page.statistics.top_channels.title")}
-          </h3>
-          <ResponsiveContainer width="100%" height={390}>
-            <BarChart
-              data={topChannelsData}
-              margin={{ left: 10, right: 10, top: 10, bottom: 10 }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis
-                dataKey="name"
-                angle={-45}
-                textAnchor="end"
-                height={80}
-                tick={{ fontSize: 11 }}
-                tickFormatter={(value) => {
-                  const maxLength = 10;
-                  if (value && value.length > maxLength) {
-                    return value.substring(0, maxLength) + "...";
+      <div className="md:p-6 p-0 md:rounded-2xl rounded-none md:bg-[rgba(15,105,201,0.1)] bg-transparent">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+          {/* Статусы заказов */}
+          <div className="bg-white rounded-2xl md:border-none border-[1.5px] border-[rgba(0,0,0,rgba(10,165,190,0.6))] mobile-xl:p-6 p-3">
+            <h3 className="lg:text-start text-center md:text-xl mobile-xl:text-lg text-base font-semibold text-slate-800 mb-4">
+              {t("project_page.statistics.orders_status.title")}
+            </h3>
+            <ResponsiveContainer width="100%" height={390}>
+              <PieChart margin={{ top: 20, right: 20, bottom: 20, left: 20 }}>
+                <Pie
+                  data={
+                    statusData.length > 0
+                      ? statusData
+                      : [
+                          {
+                            name: t(
+                              "project_page.statistics.orders_status.in_progress",
+                            ),
+                            value: project?.count_channels ?? 0,
+                            color: "#3b82f6",
+                          },
+                        ]
                   }
-                  return value;
-                }}
-              />
-              <YAxis
-                width={80}
-                tickFormatter={(value) => {
-                  if (value >= 1000000)
-                    return `${(value / 1000000).toFixed(1)}M`;
-                  if (value >= 1000) return `${(value / 1000).toFixed(1)}K`;
-                  return value.toString();
-                }}
-              />
-              <Tooltip
-                formatter={(value) =>
-                  typeof value === "number" ? value.toLocaleString() : value
-                }
-              />
-              <Legend verticalAlign="top" />
-              <Bar
-                dataKey="subscribers"
-                name={t("project_page.statistics.top_channels.subscribers")}
-                fill="#8b5cf6"
-                radius={[8, 8, 0, 0]}
-              />
-              <Bar
-                dataKey="views"
-                name={t("project_page.statistics.top_channels.views")}
-                fill="#3b82f6"
-                radius={[8, 8, 0, 0]}
-              />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
-      </div>
+                  cx="50%"
+                  cy="50%"
+                  labelLine={true}
+                  label={(props: {
+                    name?: string | number;
+                    percent?: number;
+                    payload?: { value?: number };
+                  }) => {
+                    const value = props.payload?.value || 0;
+                    const percent = props.percent || 0;
+                    if (value === 0) return null;
+                    return `${value} (${(percent * 100).toFixed(0)}%)`;
+                  }}
+                  outerRadius={100}
+                  innerRadius={60}
+                  paddingAngle={3}
+                  cornerRadius={8}
+                  fill="#8884d8"
+                  dataKey="value"
+                  className="md:text-sm text-xs font-medium"
+                >
+                  {statusData.map((entry, index) => (
+                    <Cell key={`cell-${index}`} fill={entry.color} />
+                  ))}
+                </Pie>
+                <Tooltip />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Распределение по платформам */}
-        <div className="bg-white rounded-2xl shadow-lg mobile-xl:p-6 p-3">
-          <h3 className="lg:text-start text-center md:text-xl mobile-xl:text-lg text-base font-semibold text-slate-800 mb-4">
-            {t("project_page.statistics.platforms_distribution.title")}
-          </h3>
-          <ResponsiveContainer width="100%" height={300}>
-            <PieChart>
-              <Pie
-                data={platformData}
-                cx="50%"
-                cy="50%"
-                labelLine={false}
-                label={({ platform, orders }) => `${platform}: ${orders}`}
-                fill="#8884d8"
-                dataKey="orders"
-                outerRadius={120}
-                innerRadius={60}
-                paddingAngle={3}
-                cornerRadius={8}
-              >
-                {platformData.map((entry, index) => (
-                  <Cell
-                    key={`cell-${index}`}
-                    fill={
-                      platformColors[entry.platform] ||
-                      COLORS[index % COLORS.length]
+          {/* Топ каналов */}
+          <div className="bg-white rounded-2xl md:border-none border-[1.5px] border-[rgba(0,0,0,rgba(10,165,190,0.6))] mobile-xl:p-6 p-3 top-channels-chart">
+            <h3 className="lg:text-start text-center md:text-xl mobile-xl:text-lg text-base font-semibold text-slate-800 mb-4">
+              {t("project_page.statistics.top_channels.title")}
+            </h3>
+            <ResponsiveContainer width="100%" height={390}>
+              <BarChart data={topChannelsData} className="-ml-4">
+                <CartesianGrid strokeDasharray="3 3" />
+                <XAxis
+                  dataKey="name"
+                  angle={-45}
+                  textAnchor="end"
+                  height={80}
+                  className="md:text-[11px] text-[10px] font-medium"
+                  tickFormatter={(value) => {
+                    const maxLength = 10;
+                    if (value && value.length > maxLength) {
+                      return value.substring(0, maxLength) + "...";
                     }
-                  />
-                ))}
-              </Pie>
-              <Tooltip
-                formatter={(value, name) => {
-                  if (name === "orders")
-                    return [
-                      `${value} ${t("project_page.statistics.platforms_distribution.total_orders")}`,
-                      t(
-                        "project_page.statistics.platforms_distribution.total_orders",
-                      ),
-                    ];
-                  return [value, name];
-                }}
-              />
-            </PieChart>
-          </ResponsiveContainer>
-          <div className="mt-4 text-center text-sm text-slate-600">
-            {t("project_page.statistics.platforms_distribution.total_orders")}{" "}
-            {project?.orders?.length || 0}
+                    return value;
+                  }}
+                />
+                <YAxis
+                  className="md:w-[80px] w-[40px] md:text-[13px] text-[10px] font-medium"
+                  tickFormatter={(value) => {
+                    if (value >= 1000000)
+                      return `${(value / 1000000).toFixed(1)}M`;
+                    if (value >= 1000) return `${(value / 1000).toFixed(0)}K`;
+                    return value.toString();
+                  }}
+                />
+                <Tooltip
+                  formatter={(value) =>
+                    typeof value === "number" ? value.toLocaleString() : value
+                  }
+                  contentStyle={{ fontSize: 12, fontWeight: 500 }}
+                />
+                <Legend verticalAlign="bottom" />
+                <Bar
+                  dataKey="subscribers"
+                  name={t("project_page.statistics.top_channels.subscribers")}
+                  fill="#8b5cf6"
+                  radius={[8, 8, 0, 0]}
+                />
+                <Bar
+                  dataKey="views"
+                  name={t("project_page.statistics.top_channels.views")}
+                  fill="#3b82f6"
+                  radius={[8, 8, 0, 0]}
+                />
+              </BarChart>
+            </ResponsiveContainer>
           </div>
         </div>
 
-        {/* Демография */}
-        <div className="bg-white rounded-2xl shadow-lg mobile-xl:p-6 p-3">
-          <h3 className="lg:text-start text-center md:text-xl mobile-xl:text-lg text-base font-semibold text-slate-800 mb-4">
-            {t("project_page.statistics.demography.title")}
-          </h3>
-          <ResponsiveContainer width="100%" height={300}>
-            <PieChart>
-              <Pie
-                data={demographyData}
-                cx="50%"
-                cy="50%"
-                labelLine={false}
-                label={({ name, value }) => `${name}: ${value}%`}
-                fill="#8884d8"
-                dataKey="value"
-                outerRadius={120}
-                innerRadius={60}
-                paddingAngle={3}
-                cornerRadius={8}
-              >
-                {demographyData.map((entry, index) => (
-                  <Cell key={`cell-${index}`} fill={entry.color} />
-                ))}
-              </Pie>
-              <Tooltip />
-            </PieChart>
-          </ResponsiveContainer>
-          <div className="mt-4 text-center text-sm text-slate-600">
-            {t("project_page.statistics.demography.description")}
-          </div>
-        </div>
-      </div>
+        <Accordion
+          type="single"
+          collapsible
+          value={accordionValue}
+          onValueChange={setAccordionValue}
+          className="w-full"
+        >
+          <AccordionItem value="more-statistics" className="border-none">
+            <AccordionContent className="grid grid-flow-row gap-6 pt-6">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Распределение по платформам */}
+                <div className="bg-white rounded-2xl md:border-none border-[1.5px] border-[rgba(0,0,0,rgba(10,165,190,0.6))] mobile-xl:p-6 p-3">
+                  <h3 className="lg:text-start text-center md:text-xl mobile-xl:text-lg text-base font-semibold text-slate-800 mb-4">
+                    {t("project_page.statistics.platforms_distribution.title")}
+                  </h3>
+                  <ResponsiveContainer width="100%" height={300}>
+                    <PieChart>
+                      <Pie
+                        data={platformData}
+                        cx="50%"
+                        cy="50%"
+                        labelLine={false}
+                        label={({ platform, orders }) =>
+                          `${platform}: ${orders}`
+                        }
+                        fill="#8884d8"
+                        dataKey="orders"
+                        outerRadius={120}
+                        innerRadius={60}
+                        paddingAngle={3}
+                        cornerRadius={8}
+                      >
+                        {platformData.map((entry, index) => (
+                          <Cell
+                            key={`cell-${index}`}
+                            fill={
+                              platformColors[entry.platform] ||
+                              COLORS[index % COLORS.length]
+                            }
+                          />
+                        ))}
+                      </Pie>
+                      <Tooltip
+                        formatter={(value, name) => {
+                          if (name === "orders")
+                            return [
+                              `${value} ${t("project_page.statistics.platforms_distribution.total_orders")}`,
+                              t(
+                                "project_page.statistics.platforms_distribution.total_orders",
+                              ),
+                            ];
+                          return [value, name];
+                        }}
+                      />
+                    </PieChart>
+                  </ResponsiveContainer>
+                  <div className="mt-4 text-center text-sm text-slate-600">
+                    {t(
+                      "project_page.statistics.platforms_distribution.total_orders",
+                    )}{" "}
+                    {project?.orders?.length || 0}
+                  </div>
+                </div>
 
-      <div className="grid grid-cols-1 gap-6">
-        {/* Динамика публикаций */}
-        <div className="bg-white rounded-2xl shadow-lg mobile-xl:p-6 p-3">
-          <h3 className="lg:text-start text-center md:text-xl mobile-xl:text-lg text-base font-semibold text-slate-800 mb-4">
-            {t("project_page.statistics.publications_dynamics.title")}
-          </h3>
-          <ResponsiveContainer width="100%" height={370}>
-            <AreaChart
-              data={publicationData}
-              margin={{ left: 10, right: 10, top: 10, bottom: 10 }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis
-                dataKey="date"
-                angle={-45}
-                textAnchor="end"
-                height={60}
-                interval={0}
-                tick={{ fontSize: 12 }}
-              />
-              <YAxis
-                yAxisId="left"
-                width={80}
-                tickFormatter={formatAxisValue}
-              />
-              <YAxis
-                yAxisId="right"
-                orientation="right"
-                width={80}
-                tickFormatter={formatAxisValue}
-              />
-              <Tooltip
-                formatter={(value) =>
-                  typeof value === "number" ? value.toLocaleString() : value
-                }
-              />
-              <Legend verticalAlign="top" />
-              <Area
-                yAxisId="left"
-                type="monotone"
-                dataKey="views"
-                name={t("project_page.statistics.publications_dynamics.views")}
-                stroke="#3b82f6"
-                fill="#3b82f6"
-                fillOpacity={0.6}
-              />
-              <Area
-                yAxisId="right"
-                type="monotone"
-                dataKey="price"
-                name={t("project_page.statistics.publications_dynamics.budget")}
-                stroke="#10b981"
-                fill="#10b981"
-                fillOpacity={0.3}
-              />
-            </AreaChart>
-          </ResponsiveContainer>
-        </div>
-      </div>
+                {/* Демография */}
+                <div className="bg-white rounded-2xl md:border-none border-[1.5px] border-[rgba(0,0,0,rgba(10,165,190,0.6))] mobile-xl:p-6 p-3">
+                  <h3 className="lg:text-start text-center md:text-xl mobile-xl:text-lg text-base font-semibold text-slate-800 mb-4">
+                    {t("project_page.statistics.demography.title")}
+                  </h3>
+                  <ResponsiveContainer width="100%" height={300}>
+                    <PieChart>
+                      <Pie
+                        data={demographyData}
+                        cx="50%"
+                        cy="50%"
+                        labelLine={false}
+                        label={({ name, value }) => `${name}: ${value}%`}
+                        fill="#8884d8"
+                        dataKey="value"
+                        outerRadius={120}
+                        innerRadius={60}
+                        paddingAngle={3}
+                        cornerRadius={8}
+                      >
+                        {demographyData.map((entry, index) => (
+                          <Cell key={`cell-${index}`} fill={entry.color} />
+                        ))}
+                      </Pie>
+                      <Tooltip />
+                    </PieChart>
+                  </ResponsiveContainer>
+                  <div className="mt-4 text-center text-sm text-slate-600">
+                    {t("project_page.statistics.demography.description")}
+                  </div>
+                </div>
+              </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Эффективность по категориям */}
-        <div className="bg-white rounded-2xl shadow-lg mobile-xl:p-6 p-3">
-          <h3 className="lg:text-start text-center md:text-xl mobile-xl:text-lg text-base font-semibold text-slate-800 mb-4">
-            {t("project_page.statistics.category_metrics.title")}
-          </h3>
-          <ResponsiveContainer width="100%" height={370}>
-            <BarChart
-              data={categoryData}
-              margin={{ left: 10, right: 10, top: 10, bottom: 10 }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis
-                dataKey="category"
-                angle={-45}
-                textAnchor="end"
-                height={70}
-                interval={0}
-                tick={{ fontSize: 11 }}
-                dx={-5}
-              />
-              <YAxis width={80} tickFormatter={formatAxisValue} />
-              <Tooltip />
-              <Legend />
-              <Bar
-                dataKey="avgER"
-                name={t("project_page.statistics.category_metrics.avgER")}
-                fill="#10b981"
-                radius={[8, 8, 0, 0]}
-              />
-              <Bar
-                dataKey="avgCPV"
-                name={t("project_page.statistics.category_metrics.avgCPV")}
-                fill="#f59e0b"
-                radius={[8, 8, 0, 0]}
-              />
-            </BarChart>
-          </ResponsiveContainer>
-        </div>
+              <div className="grid grid-cols-1 gap-6">
+                {/* Динамика публикаций */}
+                <div className="bg-white rounded-2xl md:border-none border-[1.5px] border-[rgba(0,0,0,rgba(10,165,190,0.6))] mobile-xl:p-6 p-3 top-channels-chart">
+                  <h3 className="lg:text-start text-center md:text-xl mobile-xl:text-lg text-base font-semibold text-slate-800 mb-4">
+                    {t("project_page.statistics.publications_dynamics.title")}
+                  </h3>
+                  <ResponsiveContainer
+                    width="100%"
+                    height={370}
+                    className="scale-x-[1.2] md:scale-x-100"
+                  >
+                    <AreaChart data={publicationData}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis
+                        dataKey="dateTime"
+                        angle={-45}
+                        textAnchor="end"
+                        height={60}
+                        interval={0}
+                        className="md:text-[11px] text-[10px] font-medium"
+                      />
+                      <YAxis
+                        yAxisId="left"
+                        width={80}
+                        tickFormatter={formatAxisValue}
+                        className="md:w-[80px] w-[10px] md:text-[13px] text-[10px] font-medium"
+                      />
+                      <YAxis
+                        yAxisId="right"
+                        orientation="right"
+                        width={80}
+                        tickFormatter={formatAxisValue}
+                        className="md:w-[80px] w-[10px] md:text-[13px] text-[10px] font-medium"
+                      />
+                      <Tooltip
+                        formatter={(value) =>
+                          typeof value === "number"
+                            ? value.toLocaleString()
+                            : value
+                        }
+                      />
+                      <Legend verticalAlign="bottom" />
+                      <Area
+                        yAxisId="left"
+                        type="monotone"
+                        dataKey="price"
+                        name={t(
+                          "project_page.statistics.publications_dynamics.budget",
+                        )}
+                        stroke="#10b981"
+                        fill="#10b981"
+                        fillOpacity={0.6}
+                      />
+                      <Area
+                        yAxisId="right"
+                        type="monotone"
+                        dataKey="views"
+                        name={t(
+                          "project_page.statistics.publications_dynamics.views",
+                        )}
+                        stroke="#3b82f6"
+                        fill="#3b82f6"
+                        fillOpacity={0.3}
+                      />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </div>
+              </div>
 
-        {/* CPV vs ER scatter */}
-        <div className="bg-white rounded-2xl shadow-lg mobile-xl:p-6 p-3">
-          <h3 className="lg:text-start text-center md:text-xl mobile-xl:text-lg text-base font-semibold text-slate-800 mb-4">
-            {t("project_page.statistics.efficiency.title")}
-          </h3>
-          <ResponsiveContainer width="100%" height={370}>
-            <LineChart
-              data={efficiencyData}
-              margin={{ left: 10, right: 10, top: 10, bottom: 10 }}
-            >
-              <CartesianGrid strokeDasharray="3 3" />
-              <XAxis
-                dataKey="name"
-                angle={-45}
-                textAnchor="end"
-                height={70}
-                interval={0}
-                tick={{ fontSize: 11 }}
-                dx={-5}
-              />
-              <YAxis
-                yAxisId="left"
-                width={80}
-                tickFormatter={formatAxisValue}
-                label={{
-                  value: t("project_page.statistics.efficiency.cpv"),
-                  angle: -90,
-                  position: "insideLeft",
-                }}
-              />
-              <YAxis
-                yAxisId="right"
-                orientation="right"
-                width={80}
-                tickFormatter={(value) => value.toFixed(2)}
-                label={{
-                  value: t("project_page.statistics.efficiency.er"),
-                  angle: 90,
-                  position: "insideRight",
-                }}
-              />
-              <Tooltip />
-              <Legend />
-              <Line
-                yAxisId="left"
-                type="monotone"
-                dataKey="cpv"
-                stroke="#f59e0b"
-                strokeWidth={2}
-                name={t("project_page.statistics.efficiency.cpv")}
-              />
-              <Line
-                yAxisId="right"
-                type="monotone"
-                dataKey="er"
-                stroke="#10b981"
-                strokeWidth={2}
-                name={t("project_page.statistics.efficiency.er")}
-              />
-            </LineChart>
-          </ResponsiveContainer>
-          <div className="mt-4 text-center text-xs text-slate-600">
-            {t("project_page.statistics.efficiency.description")}
-          </div>
-        </div>
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Эффективность по категориям */}
+                <div className="bg-white rounded-2xl md:border-none border-[1.5px] border-[rgba(0,0,0,rgba(10,165,190,0.6))] mobile-xl:p-6 p-3 top-channels-chart">
+                  <h3 className="lg:text-start text-center md:text-xl mobile-xl:text-lg text-base font-semibold text-slate-800 mb-4">
+                    {t("project_page.statistics.category_metrics.title")}
+                  </h3>
+                  <ResponsiveContainer width="100%" height={370}>
+                    <BarChart data={categoryData} className="-ml-8">
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis
+                        dataKey="category"
+                        angle={-45}
+                        textAnchor="end"
+                        height={70}
+                        interval={0}
+                        className="md:text-[11px] text-[10px] font-medium"
+                        dx={-5}
+                      />
+                      <YAxis
+                        width={80}
+                        tickFormatter={formatAxisValue}
+                        className="md:w-[80px] w-[10px] md:text-[12px] text-[10px] font-medium"
+                      />
+                      <Tooltip />
+                      <Legend verticalAlign="bottom" />
+                      <Bar
+                        dataKey="avgER"
+                        name={t(
+                          "project_page.statistics.category_metrics.avgER",
+                        )}
+                        fill="#10b981"
+                        radius={[8, 8, 0, 0]}
+                      />
+                      <Bar
+                        dataKey="avgCPV"
+                        name={t(
+                          "project_page.statistics.category_metrics.avgCPV",
+                        )}
+                        fill="#f59e0b"
+                        radius={[8, 8, 0, 0]}
+                      />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+
+                {/* CPV vs ER scatter */}
+                <div className="bg-white rounded-2xl md:border-none border-[1.5px] border-[rgba(0,0,0,rgba(10,165,190,0.6))] mobile-xl:p-6 p-3 top-channels-chart">
+                  <h3 className="lg:text-start text-center md:text-xl mobile-xl:text-lg text-base font-semibold text-slate-800 mb-4">
+                    {t("project_page.statistics.efficiency.title")}
+                  </h3>
+                  <ResponsiveContainer width="100%" height={370}>
+                    <LineChart data={efficiencyData}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis
+                        dataKey="name"
+                        angle={-45}
+                        textAnchor="end"
+                        height={70}
+                        interval={0}
+                        className="md:text-[11px] text-[10px] font-medium"
+                        dx={-5}
+                      />
+                      <YAxis
+                        yAxisId="left"
+                        tickFormatter={formatAxisValue}
+                        label={{
+                          value: t("project_page.statistics.efficiency.cpv"),
+                          angle: -90,
+                          position: "insideLeft",
+                        }}
+                        className="md:w-[80px] w-[10px] md:text-[12px] text-[10px] font-medium"
+                      />
+                      <YAxis
+                        yAxisId="right"
+                        orientation="right"
+                        tickFormatter={(value) => value.toFixed(2)}
+                        label={{
+                          value: t("project_page.statistics.efficiency.er"),
+                          angle: 90,
+                          position: "insideRight",
+                        }}
+                        className="md:w-[80px] w-[10px] md:text-[12px] text-[10px] font-medium"
+                      />
+                      <Tooltip />
+                      <Legend verticalAlign="bottom" />
+                      <Line
+                        yAxisId="left"
+                        type="monotone"
+                        dataKey="cpv"
+                        stroke="#f59e0b"
+                        strokeWidth={2}
+                        name={t("project_page.statistics.efficiency.cpv")}
+                      />
+                      <Line
+                        yAxisId="right"
+                        type="monotone"
+                        dataKey="er"
+                        stroke="#10b981"
+                        strokeWidth={2}
+                        name={t("project_page.statistics.efficiency.er")}
+                      />
+                    </LineChart>
+                  </ResponsiveContainer>
+                  <div className="mt-4 text-center text-xs text-slate-600">
+                    {t("project_page.statistics.efficiency.description")}
+                  </div>
+                </div>
+              </div>
+            </AccordionContent>
+            <div className="flex justify-center">
+              <AccordionTrigger className="mt-6 px-4 py-3 bg-[var(--URL)] text-white rounded-lg hover:opacity-80 transition-all duration-500 font-medium mobile-xl:text-base text-sm hover:no-underline [&[data-state=open]>svg]:rotate-180">
+                {accordionValue === "more-statistics"
+                  ? t("project_page.hide")
+                  : t("project_page.show_all")}
+              </AccordionTrigger>
+            </div>
+          </AccordionItem>
+        </Accordion>
       </div>
     </div>
   );

@@ -152,7 +152,7 @@ export const TopInfo: FC<TopInfoProps> = ({
       </div>
 
       <div className="grid lg:grid-cols-4 mobile-xl:grid-cols-2 grid-cols-1 gap-4">
-        <div className="bg-white rounded-2xl shadow-md mobile-xl:p-6 p-4 border-l-4 border-blue-500">
+        <div className="bg-white rounded-2xl shadow-[0px_2px_5px_2px_rgba(10,165,190,0.4)] mobile-xl:p-6 p-4 border-l-4 border-blue-500">
           <div className="text-slate-600 md:text-sm text-xs font-medium mb-1">
             {t("project_page.top_info.views")}
           </div>
@@ -164,7 +164,7 @@ export const TopInfo: FC<TopInfoProps> = ({
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-md mobile-xl:p-6 p-4 border-l-4 border-green-500">
+        <div className="bg-white rounded-2xl shadow-[0px_2px_5px_2px_rgba(10,165,190,0.4)] mobile-xl:p-6 p-4 border-l-4 border-green-500">
           <div className="text-slate-600 md:text-sm text-xs font-medium mb-1">
             {t("project_page.top_info.budget")}
           </div>
@@ -177,7 +177,7 @@ export const TopInfo: FC<TopInfoProps> = ({
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-md mobile-xl:p-6 p-4 border-l-4 border-amber-500">
+        <div className="bg-white rounded-2xl shadow-[0px_2px_5px_2px_rgba(10,165,190,0.4)] mobile-xl:p-6 p-4 border-l-4 border-amber-500">
           <div className="text-slate-600 md:text-sm text-xs font-medium mb-1">
             {t("project_page.top_info.cpv")}
           </div>
@@ -194,7 +194,7 @@ export const TopInfo: FC<TopInfoProps> = ({
           </div>
         </div>
 
-        <div className="bg-white rounded-2xl shadow-md mobile-xl:p-6 p-4 border-l-4 border-purple-500">
+        <div className="bg-white rounded-2xl shadow-[0px_2px_5px_2px_rgba(10,165,190,0.4)] mobile-xl:p-6 p-4 border-l-4 border-purple-500">
           <div className="text-slate-600 md:text-sm text-xs font-medium mb-1">
             {t("project_page.top_info.er")}
           </div>

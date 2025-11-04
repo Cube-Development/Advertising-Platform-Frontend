@@ -84,7 +84,6 @@ export const ChangePost: FC<ChangePostProps> = ({ order }) => {
           <DrawerContent className={styles.content}>
             <DrawerTitle className={styles.title}>
               <p className="max-w-[80%] mx-auto text-center md:text-lg text-base font-medium text-[var(--Personal-colors-black)]">
-                <MessageCircleMore className="size-5" />
                 {t("orders_advertiser.subcard.replace.post.desire")}
               </p>
               <DrawerClose asChild>

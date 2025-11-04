@@ -25,7 +25,7 @@ export const getPostAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
     getPost: build.query<GetPostRes, { order_id: string }>({
       query: (params) => ({
-        url: "/order/post",
+        url: "/post/order",
         method: "GET",
         params: params,
       }),
