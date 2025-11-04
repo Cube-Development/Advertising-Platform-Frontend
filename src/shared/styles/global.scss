@@ -654,6 +654,22 @@ body {
   }
 }
 
+.top-channels-chart {
+  .recharts-legend-wrapper {
+    display: none !important;
+    bottom: -10px !important;
+
+    @media (min-width: 768px) {
+      display: block !important;
+    }
+  }
+
+  .recharts-legend-item {
+    font-size: 12px !important;
+    font-weight: 500 !important;
+  }
+}
+
 .notification__email__wrapper {
   background: none !important;
   padding: 0 !important;

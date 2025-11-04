@@ -2074,7 +2074,9 @@
         "views": "Ko'rishlari",
         "description": "Ideal kanallar: past CPV + yuqori ER"
       }
-    }
+    },
+    "show_all": "Ko'proq ko'rsatish",
+    "hide": "Yashirish"
   },
 
   "add_platform_btn": {
