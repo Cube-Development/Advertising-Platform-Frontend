@@ -107,7 +107,7 @@ export const TopInfo: FC<TopInfoProps> = ({
         </h1>
         <MyButton
           buttons_type="button__orange"
-          className="h-[54px] flex items-center justify-center min-w-[240px]"
+          className="mobile-xl:!h-[54px] !h-[40px] flex items-center justify-center min-w-[240px]"
           onClick={handleDownloadReport}
         >
           {isDownloadRequestApproveReportLoading ||
@@ -131,7 +131,7 @@ export const TopInfo: FC<TopInfoProps> = ({
             is_request_approve === projectStatus.changed) && (
             <MyButton
               buttons_type="button__blue"
-              className="h-[54px] flex items-center justify-center min-w-[240px]"
+              className="mobile-xl:!h-[54px] !h-[40px] flex items-center justify-center min-w-[240px]"
               onClick={handleApproveProject}
             >
               {isAgencyApproveProjectLoading ? (
