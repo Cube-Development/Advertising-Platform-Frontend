@@ -708,6 +708,7 @@
       "completed": "Loyiha yakunlandi"
     },
     "project_page_btn": {
+      "share_popover": "Ulashish",
       "download_report": "Hisobotni yuklab olish",
       "approve_project": "Tasdiqlash",
       "download_request_approve_report": "Buyurtma beruvchi uchun loyiha hisobotini excelda yuklab olish",

@@ -35,11 +35,11 @@ export const ShareProjectLink: FC<ShareProjectLinkProps> = ({ project_id }) => {
   };
 
   return (
-    <div className="grid md:grid-cols-2 md:grid-rows-1 grid-cols-1 grid-rows-2 gap-4">
+    <div className="grid md:grid-cols-2 md:grid-rows-1 grid-cols-1 grid-rows-2 md:gap-4 gap-2">
       {roles.map((role) => (
         <MyButton
           buttons_type={copiedRole === role ? "button__green" : "button__white"}
-          className="md:!text-sm !text-xs flex items-center justify-center w-!full p-2 !text-start !min-h-10 !h-auto [&>svg]:size-5 [&>svg]:stroke-[2px] !font-medium"
+          className="md:!text-sm !text-xs flex items-center justify-center w-!full p-2 !text-start !min-h-10 !h-auto [&>svg]:size-5 [&>svg]:stroke-[2px] !font-medium md:shadow-none shadow-xl"
           onClick={() => handleOnClick(role)}
         >
           {copiedRole === role ? (

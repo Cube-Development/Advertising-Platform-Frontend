@@ -704,6 +704,7 @@
       "completed": "Рекламная кампания завершена"
     },
     "project_page_btn": {
+      "share_popover": "Поделиться",
       "download_report": "Скачать отчёт",
       "approve_project": "Подтвердить",
       "download_request_approve_report": "Скачать excel для согласования с заказчиком",

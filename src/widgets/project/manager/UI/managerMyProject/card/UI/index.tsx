@@ -1,4 +1,4 @@
-import { CheckCheck, ClipboardCheck } from "lucide-react";
+import { CheckCheck, ClipboardCheck, Share2 } from "lucide-react";
 import {
   getProjectSubcardReq,
   ENUM_MANAGER_PROJECT_STATUS,
@@ -35,6 +35,10 @@ import {
   AccountsLoader,
   MyPagination,
   SpinnerLoader,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  MyButton,
 } from "@shared/ui";
 import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -66,14 +70,22 @@ const Card: FC<MyManagerProjectCardProps> = ({ card, statusFilter }) => {
             <span>{card?.created}</span>
           </div>
         </div>
+        <Popover>
+          <PopoverTrigger className="md:hidden block">
+            <MyButton
+              buttons_type="button__white"
+              className="md:!text-sm !text-xs flex items-center justify-center w-!full p-3 !text-start !h-auto"
+            >
+              <Share2 className="size-5 stroke-[1.5px]" />{" "}
+              {t("orders_manager.project_page_btn.share_popover")}
+            </MyButton>
+          </PopoverTrigger>
+          <PopoverContent className="grid grid-flow-row gap-2 bg-transparent p-0 shadow-none border-none">
+            <DownloadApproveReport project_id={card?.id} />
+            <ShareProjectLink project_id={card?.id} />
+          </PopoverContent>
+        </Popover>
         <div className={styles.card__description__status}>
-          {/* <p>
-            {statusFilter === ENUM_MANAGER_PROJECT_STATUS.ACTIVE
-              ? t("orders_manager.card.status.active")
-              : statusFilter === ENUM_MANAGER_PROJECT_STATUS.COMPLETED
-                ? t("orders_manager.card.status.completed")
-                : t("orders_manager.card.status.agreed")}
-          </p> */}
           <span className="w-full px-4 text-center text-[var(--Personal-colors-black)] mobile-xl:text-base text-sm font-semibold">
             {card?.is_request_approve === projectStatus.approved
               ? t("orders_manager.card.approved")
@@ -117,16 +129,6 @@ const Card: FC<MyManagerProjectCardProps> = ({ card, statusFilter }) => {
         <>
           {statusFilter === ENUM_MANAGER_PROJECT_STATUS.REQUEST_APPROVE ? (
             <div className={styles.card__info__icons_manager_request_approve}>
-              {/* <span>
-                  {card?.is_request_approve === projectStatus.approved
-                    ? t("orders_manager.card.approved")
-                    : card?.is_request_approve === projectStatus.changed
-                      ? t("orders_manager.card.changed")
-                      : card?.is_request_approve ===
-                          projectStatus.request_approve
-                        ? t("orders_manager.card.request_approve")
-                        : ""}
-                </span> */}
               {card?.is_request_approve !== projectStatus.approved ? (
                 <EditProject project_id={card?.id} />
               ) : (
@@ -183,14 +185,6 @@ const Card: FC<MyManagerProjectCardProps> = ({ card, statusFilter }) => {
           )}
         </>
       </div>
-
-      {/* <div className={styles.card__features}>
-        <div className={styles.card__features__more}>
-          <button>
-            <MoreIcon />
-          </button>
-        </div>
-      </div> */}
     </div>
   );
 };
@@ -324,10 +318,6 @@ export const MyManagerProjectCard: FC<MyManagerProjectCardProps> = ({
                 isSubcardOpen ? "-translate-x-full" : "translate-x-0"
               } ${styles.wrapper}`}
             >
-              {/* <div className="grid grid-flow-row gap-4">
-                <DownloadApproveReport project_id={card?.id} />
-                <ShareProjectLink project_id={card?.id} />
-              </div> */}
               <Card card={card} statusFilter={statusFilter} />
             </div>
             <div

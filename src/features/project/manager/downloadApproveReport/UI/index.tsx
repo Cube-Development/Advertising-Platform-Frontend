@@ -33,7 +33,7 @@ export const DownloadApproveReport: FC<DownloadApproveReportProps> = ({
   return (
     <MyButton
       buttons_type="button__white"
-      className="md:!text-sm !text-xs flex items-center justify-center w-!full p-3 !text-start !h-auto"
+      className="md:!text-sm !text-xs flex items-center justify-center w-!full p-3 !text-start !h-auto md:shadow-none shadow-xl"
       onClick={handleOnClick}
     >
       {isDownloadRequestApproveReportLoading ? (

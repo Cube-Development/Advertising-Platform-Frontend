@@ -707,6 +707,7 @@
       "completed": "Advertising Campaign Completed"
     },
     "project_page_btn": {
+      "share_popover": "Share",
       "download_report": "Download Report",
       "approve_project": "Approve",
       "download_request_approve_report": "Download excel for approval with the customer",
