@@ -1461,7 +1461,8 @@
       "channels": "Kanallar",
       "views": "Qamrov",
       "cost": "Jami summa",
-      "cart": "Savatga o'tish"
+      "cart": "Savatga o'tish",
+      "information": "Umumiy to'lov postlar yaratilgandan so'ng va joylashish sanalari belgilangandan so‘ng hisoblanadi"
     }
   },
 

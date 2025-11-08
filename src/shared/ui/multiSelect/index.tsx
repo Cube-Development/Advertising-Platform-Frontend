@@ -215,6 +215,8 @@ export const MultiSelect = React.forwardRef<
           </button>
         </PopoverTrigger>
         <PopoverContent
+          side="bottom"
+          avoidCollisions={false}
           className={cn(
             matchAnchorWidth && "w-[var(--radix-popper-anchor-width)]",
             " p-0 ",

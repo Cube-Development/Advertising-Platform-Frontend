@@ -89,7 +89,11 @@ const Card: FC<MyManagerProjectCardProps> = ({
               {t("orders_manager.project_page_btn.share_popover")}
             </MyButton>
           </PopoverTrigger>
-          <PopoverContent className="grid grid-flow-row gap-2 bg-transparent p-0 shadow-none border-none">
+          <PopoverContent
+            side="bottom"
+            avoidCollisions={false}
+            className="grid grid-flow-row gap-2 bg-transparent p-0 shadow-none border-none"
+          >
             <DownloadApproveReport project_id={card?.id} />
             <ShareProjectLink
               project_id={card?.id}
@@ -290,7 +294,11 @@ export const MyManagerProjectCard: FC<MyManagerProjectCardProps> = ({
                     {t("orders_manager.project_page_btn.notification.title")}
                   </MyButton>
                 </PopoverTrigger>
-                <PopoverContent className="w-full grid grid-flow-row gap-2 bg-transparent p-0 shadow-none border-none">
+                <PopoverContent
+                  side="bottom"
+                  avoidCollisions={false}
+                  className="w-full grid grid-flow-row gap-2 bg-transparent p-0 shadow-none border-none"
+                >
                   <TelegramLinksBlock
                     project_id={card?.id}
                     projectAccessCodes={projectAccessCodes}
