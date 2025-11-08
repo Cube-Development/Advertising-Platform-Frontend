@@ -712,6 +712,12 @@
         "customer": "Ссылка для заказчика",
         "publisher": "Ссылка для размещенца",
         "copied": "Скопировано"
+      },
+      "notification": {
+        "title": "Уведомления",
+        "notification_link_button": "Получать уведомления в telegram",
+        "notification_link_for_customer": "Скопировать ссылку на уведомления для заказчика",
+        "notification_link_for_publisher": "Скопировать ссылку на уведомления для размещенца"
       }
     },
     "status_filter": {

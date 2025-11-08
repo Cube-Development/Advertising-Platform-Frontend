@@ -1,4 +1,5 @@
 import { FC } from "react";
+import { Link } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { CheckCheck, Download, Flag, Loader } from "lucide-react";
 import {
@@ -8,8 +9,15 @@ import {
   useAgencyApproveProjectMutation,
   useDownloadCompletedReportMutation,
   useDownloadRequestApproveReportMutation,
+  useGetTelegramRoleNotificationLinkQuery,
 } from "@entities/project";
-import { CancelIcon, CompleteIcon, RocketIcon, WaitIcon } from "@shared/assets";
+import {
+  CancelIcon,
+  CompleteIcon,
+  RocketIcon,
+  TelegramIcon,
+  WaitIcon,
+} from "@shared/assets";
 import { MyButton, useToast } from "@shared/ui";
 import { downloadFileOnDevice } from "@shared/utils";
 
@@ -58,6 +66,14 @@ export const TopInfo: FC<TopInfoProps> = ({
     downloadCompletedReport,
     { isLoading: isDownloadCompletedReportLoading },
   ] = useDownloadCompletedReportMutation();
+
+  const {
+    data: telegramRoleNotificationLink,
+    isLoading: isTelegramRoleNotificationLinkLoading,
+  } = useGetTelegramRoleNotificationLinkQuery(
+    { project_id: project_id, code: code, subrole: viewer },
+    { skip: !project_id || !code || !viewer },
+  );
 
   const handleApproveProject = async () => {
     await agencyApproveProject({ project_id: project_id, code: code })
@@ -150,6 +166,24 @@ export const TopInfo: FC<TopInfoProps> = ({
             </MyButton>
           )}
       </div>
+
+      {is_request_approve !== projectStatus.completed && (
+        <Link
+          to={telegramRoleNotificationLink?.deeplink_url || ""}
+          target="_blank"
+          className="flex md:justify-end justify-center"
+        >
+          <MyButton
+            buttons_type="button__white"
+            className="w-fit mobile-xl:!text-base !text-xs flex items-center justify-center p-3 !text-start !h-full [&>svg]:size-5 [&>svg]:stroke-[1.5px] shadow-[0px_2px_5px_2px_rgba(10,165,190,0.4)]"
+          >
+            <TelegramIcon />{" "}
+            {t(
+              "orders_manager.project_page_btn.notification.notification_link_button",
+            )}
+          </MyButton>
+        </Link>
+      )}
 
       <div className="grid lg:grid-cols-4 mobile-xl:grid-cols-2 grid-cols-1 gap-4">
         <div className="bg-white rounded-2xl shadow-[0px_2px_5px_2px_rgba(10,165,190,0.4)] mobile-xl:p-6 p-4 border-l-4 border-blue-500">

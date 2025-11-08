@@ -715,6 +715,12 @@
         "customer": "Customer Link",
         "publisher": "Publisher Link",
         "copied": "Copied"
+      },
+      "notification": {
+        "title": "Notifications",
+        "notification_link_button": "Get notifications in telegram",
+        "notification_link_for_customer": "Copy notification link for customer",
+        "notification_link_for_publisher": "Copy notification link for publisher"
       }
     },
     "status_filter": {

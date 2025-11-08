@@ -716,6 +716,12 @@
         "customer": "Buyurtma beruvchi uchun loyiha havolasi",
         "publisher": "Reklama beruvchi uchun loyiha havolasi",
         "copied": "Havola ko'chirildi"
+      },
+      "notification": {
+        "title": "Xabarlar",
+        "notification_link_button": "Telegramda xabar olish",
+        "notification_link_for_customer": "Buyurtma beruvchi uchun xabar havolasini oling",
+        "notification_link_for_publisher": "Reklama beruvchi uchun xabar havolasini oling"
       }
     },
     "status_filter": {

@@ -1,14 +1,12 @@
+import { FC, useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { CheckCheck, ClipboardCheck, Share2 } from "lucide-react";
-import {
-  getProjectSubcardReq,
-  ENUM_MANAGER_PROJECT_STATUS,
-  projectStatus,
-  useGetManagerSubprojectsQuery,
-  AgencyProjectSubcard,
-  IManagerAgencyProjectCard,
-  IAgencyOrderCard,
-} from "@entities/project";
-import { useFindLanguage } from "@entities/user";
+import { Swiper, SwiperSlide } from "swiper/react";
+import SwiperCore from "swiper";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
+import { TelegramLinksBlock } from "@features/user";
 import { ChangeChannel, ChangePost, CheckPost, SeePost } from "@features/order";
 import {
   DownloadApproveReport,
@@ -18,11 +16,24 @@ import {
   ShareProjectLink,
 } from "@features/project";
 import {
+  getProjectSubcardReq,
+  ENUM_MANAGER_PROJECT_STATUS,
+  projectStatus,
+  useGetManagerSubprojectsQuery,
+  AgencyProjectSubcard,
+  IManagerAgencyProjectCard,
+  IAgencyOrderCard,
+  useGetProjectAccessCodesQuery,
+  IGetProjectAccessCodesRes,
+} from "@entities/project";
+import { useFindLanguage } from "@entities/user";
+import {
   ArrowSmallVerticalIcon,
   CancelIcon,
   CompleteIcon,
   RocketIcon,
   SearchIcon,
+  TelegramIcon,
   WaitIcon,
 } from "@shared/assets";
 import { BREAKPOINT, ENUM_ACCORDION_TYPES } from "@shared/config";
@@ -40,21 +51,19 @@ import {
   PopoverTrigger,
   MyButton,
 } from "@shared/ui";
-import { FC, useEffect, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
-import SwiperCore from "swiper";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
-import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./styles.module.scss";
 
 interface MyManagerProjectCardProps {
   card: IManagerAgencyProjectCard;
   statusFilter: ENUM_MANAGER_PROJECT_STATUS;
+  projectAccessCodes?: IGetProjectAccessCodesRes;
 }
 
-const Card: FC<MyManagerProjectCardProps> = ({ card, statusFilter }) => {
+const Card: FC<MyManagerProjectCardProps> = ({
+  card,
+  statusFilter,
+  projectAccessCodes,
+}) => {
   const { t } = useTranslation();
   return (
     <div
@@ -82,7 +91,14 @@ const Card: FC<MyManagerProjectCardProps> = ({ card, statusFilter }) => {
           </PopoverTrigger>
           <PopoverContent className="grid grid-flow-row gap-2 bg-transparent p-0 shadow-none border-none">
             <DownloadApproveReport project_id={card?.id} />
-            <ShareProjectLink project_id={card?.id} />
+            <ShareProjectLink
+              project_id={card?.id}
+              projectAccessCodes={projectAccessCodes}
+            />
+            <TelegramLinksBlock
+              project_id={card?.id}
+              projectAccessCodes={projectAccessCodes}
+            />
           </PopoverContent>
         </Popover>
         <div className={styles.card__description__status}>
@@ -210,6 +226,11 @@ export const MyManagerProjectCard: FC<MyManagerProjectCardProps> = ({
     { skip: !isSubcardOpen },
   );
 
+  const { data: projectAccessCodes } = useGetProjectAccessCodesQuery(
+    { project_id: card?.id },
+    { skip: !card?.id },
+  );
+
   const handleChangeOpenSubcard = (): void => {
     setSubcardOpen(!isSubcardOpen);
   };
@@ -251,10 +272,36 @@ export const MyManagerProjectCard: FC<MyManagerProjectCardProps> = ({
           }
           className={`${styles.wrapper} border__gradient `}
         >
-          <Card card={card} statusFilter={statusFilter} />
-          <div className="grid grid-flow-row gap-4 w-[90%] mx-auto">
-            <DownloadApproveReport project_id={card?.id} />
-            <ShareProjectLink project_id={card?.id} />
+          <Card
+            card={card}
+            statusFilter={statusFilter}
+            projectAccessCodes={projectAccessCodes}
+          />
+          <div className="grid grid-flow-row gap-4 px-5">
+            <div className="grid md:grid-cols-2 grid-cols-1 gap-4">
+              <DownloadApproveReport project_id={card?.id} />
+              <Popover>
+                <PopoverTrigger className="md:block hidden">
+                  <MyButton
+                    buttons_type="button__white"
+                    className="md:!text-sm !text-xs flex items-center justify-center w-!full p-3 !text-start !h-full [&>svg]:size-5 [&>svg]:stroke-[1.5px] !font-medium shadow-none"
+                  >
+                    <TelegramIcon />{" "}
+                    {t("orders_manager.project_page_btn.notification.title")}
+                  </MyButton>
+                </PopoverTrigger>
+                <PopoverContent className="w-full grid grid-flow-row gap-2 bg-transparent p-0 shadow-none border-none">
+                  <TelegramLinksBlock
+                    project_id={card?.id}
+                    projectAccessCodes={projectAccessCodes}
+                  />
+                </PopoverContent>
+              </Popover>
+            </div>
+            <ShareProjectLink
+              project_id={card?.id}
+              projectAccessCodes={projectAccessCodes}
+            />
           </div>
           <AccordionItem
             style={
@@ -318,7 +365,11 @@ export const MyManagerProjectCard: FC<MyManagerProjectCardProps> = ({
                 isSubcardOpen ? "-translate-x-full" : "translate-x-0"
               } ${styles.wrapper}`}
             >
-              <Card card={card} statusFilter={statusFilter} />
+              <Card
+                card={card}
+                statusFilter={statusFilter}
+                projectAccessCodes={projectAccessCodes}
+              />
             </div>
             <div
               className={`absolute top-0 left-0 w-full transition-transform duration-500 ${
