@@ -171,16 +171,16 @@ export const ReplacePost: FC<ReplacePostProps> = ({ order, status, code }) => {
               )}
             </MyButton>
           </DrawerTrigger>
-          <DrawerContent className="grid [grid-template-rows:max-content_1fr_max-content] gap-5 md:h-[50vh] h-full md:w-[50vw] w-[unset] md:max-w-[800px] md:max-h-[400px] md:p-10 p-7 max-h-[unset] max-w-[unset]">
+          <DrawerContent className="h-full min-h-full grid [grid-template-rows:max-content_1fr_max-content] content-between gap-5 w-[unset] p-7 pt-10 max-h-[unset] max-w-[unset]">
             <DrawerDescription className="sr-only"></DrawerDescription>
             <DrawerTitle className="grid grid-flow-column">
-              <p className="max-w-[80%] mx-auto text-center md:text-lg text-base font-medium text-[var(--Personal-colors-black)]">
+              <p className="mx-auto text-center text-sm font-medium text-[var(--Personal-colors-black)]">
                 {haveDesire
                   ? t("orders_advertiser.subcard.replace.post.desire")
                   : t("orders_advertiser.subcard.replace.post.title")}
               </p>
               <DrawerClose asChild>
-                <div className="absolute top-0 right-0 p-[15px] rounded-[50%] cursor-pointer hover:bg-[rgba(0,0,0,0.1)]">
+                <div className="absolute top-0 right-0 p-[15px] rounded-[50%] cursor-pointer hover:bg-[rgba(0,0,0,0.1)] [&>svg]:size-5">
                   <CancelIcon2 />
                 </div>
               </DrawerClose>

@@ -281,7 +281,7 @@ export const SendLink: FC<IOrderFeature> = ({
               <ArrowLongHorizontalIcon className="icon__white" />
             </p>
           </DrawerTrigger>
-          <DrawerContent className="bottom-0 top-auto rounded-t-xl">
+          <DrawerContent className="bottom-0 top-0 rounded-t-xl mt-[60px]">
             <DialogTitle className="sr-only"></DialogTitle>
             <DialogDescription className="sr-only"></DialogDescription>
             <div className="mx-auto mt-4 h-1.5 w-[80px] rounded-full bg-black/20" />
@@ -303,7 +303,6 @@ export const SendLink: FC<IOrderFeature> = ({
               )}
               <div className={styles.link}>
                 <input
-                  autoFocus
                   className={`${styles.link__input} ${!isUrlValid ? styles.link__input_invalid : ""}`}
                   placeholder={t(
                     "offers_blogger.offer_status.active.placeholder",
