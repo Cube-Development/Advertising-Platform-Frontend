@@ -1,16 +1,18 @@
 import { ICart } from "@entities/project";
 import { ENUM_PATHS } from "@shared/routing";
-import { MyButton } from "@shared/ui";
+import { InfoTooltip, MyButton } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
+import { ENUM_ROLES } from "@entities/user";
 
 interface CatalogCartProps {
   cart: ICart;
+  role: ENUM_ROLES;
 }
 
-export const CatalogCart: FC<CatalogCartProps> = ({ cart }) => {
+export const CatalogCart: FC<CatalogCartProps> = ({ cart, role }) => {
   const { t } = useTranslation();
 
   return (
@@ -26,7 +28,16 @@ export const CatalogCart: FC<CatalogCartProps> = ({ cart }) => {
         </div>
         <div className={`${styles.info} ${styles.coast}`}>
           <p>{t("catalog.current_cart.cost")}:</p>
-          <span>{cart?.amount?.toLocaleString()}</span>
+          <span>
+            {role === ENUM_ROLES.MANAGER ? (
+              <InfoTooltip
+                text={t("catalog.current_cart.information")}
+                className="!text-[var(--Personal-colors-white)]"
+              />
+            ) : (
+              cart?.amount?.toLocaleString()
+            )}
+          </span>
         </div>
       </div>
       <div className={styles.cart}>

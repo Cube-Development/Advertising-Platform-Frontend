@@ -29,11 +29,9 @@ export const Cart: FC = () => {
   const { toast } = useToast();
   const { t } = useTranslation();
   const language = useFindLanguage();
-  const { isAuth } = useAppSelector((state) => state.user);
+  const { isAuth, role } = useAppSelector((state) => state.user);
 
-  const userId = Cookies.get(ENUM_COOKIES_TYPES.USER_ID);
   const guestId = Cookies.get(ENUM_COOKIES_TYPES.GUEST_ID);
-  const role = Cookies.get(ENUM_COOKIES_TYPES.ROLE);
   const projectId = Cookies.get(ENUM_COOKIES_TYPES.PROJECT_ID);
 
   if (!guestId) {
@@ -252,7 +250,7 @@ export const Cart: FC = () => {
               onChangeCard={handleChangeCartCards}
               isLoading={isLoadingCommon || isLoadingPublic || isLoadingManager}
             />
-            <CreatePost cart={currentCart} />
+            <CreatePost cart={currentCart} role={role} />
           </div>
         </div>
         <div className={styles.cards}>

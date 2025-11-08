@@ -7,12 +7,14 @@ import { motion } from "framer-motion";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { ENUM_ROLES } from "@entities/user";
 
 interface CreatePostProps {
   cart: ICart;
+  role: ENUM_ROLES;
 }
 
-export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
+export const CreatePost: FC<CreatePostProps> = ({ cart, role }) => {
   const { t } = useTranslation();
   const screen = useWindowWidth();
 
@@ -42,32 +44,36 @@ export const CreatePost: FC<CreatePostProps> = ({ cart }) => {
                 <p>{t("cart.create_post.views")}</p>
                 <span>{cart?.coverage?.toLocaleString()}</span>
               </div>
-              <div className={styles.info}>
-                <p>{t("cart.create_post.commission")}</p>
-                <span>{CART.commission}%</span>
-              </div>
+              {role !== ENUM_ROLES.MANAGER && (
+                <div className={styles.info}>
+                  <p>{t("cart.create_post.commission")}</p>
+                  <span>{CART.commission}%</span>
+                </div>
+              )}
             </div>
           </div>
         </>
       )}
       <div className={styles.finnaly}>
-        {screen <= BREAKPOINT.MD && (
+        {screen <= BREAKPOINT.MD && role !== ENUM_ROLES.MANAGER && (
           <div className={styles.commission_mobile}>
             <p>{t("cart.create_post.commission")}</p>
             <span>{CART.commission}%</span>
           </div>
         )}
-        <div className={styles.finnaly__text}>
-          <p className={`${styles.finnaly_long}`}>
-            {t("cart.create_post.finnaly")}:
-          </p>
-          <p className={`${styles.finnaly_short}`}>
-            {t("cart.create_post.finnaly_short")}:
-          </p>
-          <span className="truncate">
-            {cart?.amount?.toLocaleString()} {t("symbol")}
-          </span>
-        </div>
+        {role !== ENUM_ROLES.MANAGER && (
+          <div className={styles.finnaly__text}>
+            <p className={`${styles.finnaly_long}`}>
+              {t("cart.create_post.finnaly")}:
+            </p>
+            <p className={`${styles.finnaly_short}`}>
+              {t("cart.create_post.finnaly_short")}:
+            </p>
+            <span className="truncate">
+              {cart?.amount?.toLocaleString()} {t("symbol")}
+            </span>
+          </div>
+        )}
         <div
           className={`${styles.button} ${!cart?.channels?.length && "deactive"}`}
         >

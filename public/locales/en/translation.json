@@ -1464,7 +1464,8 @@
       "channels": "Channels",
       "views": "Reach",
       "cost": "Total",
-      "cart": "Go to Cart"
+      "cart": "Go to Cart",
+      "information": "The amount will be calculated after the creation of posts and the placement date"
     }
   },
 
