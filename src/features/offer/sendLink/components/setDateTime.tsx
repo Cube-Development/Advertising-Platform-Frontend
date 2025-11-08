@@ -99,7 +99,7 @@ export const SetDateTime: FC<SetDateTimeProps> = ({ date, time, onChange }) => {
         <div className="flex items-center gap-1">
           <input
             ref={refs.day}
-            type="text"
+            type="tel"
             value={day}
             onChange={(e) => {
               const val = e.target.value.replace(/\D/g, "").slice(0, 2);
@@ -113,7 +113,7 @@ export const SetDateTime: FC<SetDateTimeProps> = ({ date, time, onChange }) => {
           <span className="text-lg">.</span>
           <input
             ref={refs.month}
-            type="text"
+            type="tel"
             value={month}
             onChange={(e) => {
               const val = e.target.value.replace(/\D/g, "").slice(0, 2);
@@ -127,7 +127,7 @@ export const SetDateTime: FC<SetDateTimeProps> = ({ date, time, onChange }) => {
           <span className="text-lg">.</span>
           <input
             ref={refs.year}
-            type="text"
+            type="tel"
             value={year}
             onChange={(e) => {
               const val = e.target.value.replace(/\D/g, "").slice(0, 4);
@@ -149,7 +149,7 @@ export const SetDateTime: FC<SetDateTimeProps> = ({ date, time, onChange }) => {
         <div className="flex items-center gap-1">
           <input
             ref={refs.hour}
-            type="text"
+            type="tel"
             value={hour}
             onChange={(e) => {
               const val = e.target.value.replace(/\D/g, "").slice(0, 2);
@@ -163,7 +163,7 @@ export const SetDateTime: FC<SetDateTimeProps> = ({ date, time, onChange }) => {
           <span className="text-lg">:</span>
           <input
             ref={refs.minute}
-            type="text"
+            type="tel"
             value={minute}
             onChange={(e) => {
               const val = e.target.value.replace(/\D/g, "").slice(0, 2);
