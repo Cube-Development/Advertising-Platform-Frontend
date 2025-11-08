@@ -162,6 +162,12 @@ export const agencyAuthAPI = authApi.injectEndpoints({
         params: params,
       }),
     }),
+    getTelegramNotificationLink: build.query<{ deeplink_url: string }, void>({
+      query: () => ({
+        url: `/agency/user/telegram`,
+        method: "POST",
+      }),
+    }),
   }),
 });
 
@@ -173,6 +179,7 @@ export const {
   useRequestApproveMutation,
   useLaunchAgencyProjectMutation,
   useGetProjectAccessCodesQuery,
+  useGetTelegramNotificationLinkQuery,
 } = agencyAuthAPI;
 
 export interface IAgencyProjectChangeReq {
@@ -269,6 +276,22 @@ export const agencyPublicAPI = baseApi.injectEndpoints({
         params: params,
       }),
     }),
+    getTelegramRoleNotificationLink: build.query<
+      {
+        deeplink_url: string;
+      },
+      {
+        project_id: string;
+        code: number;
+        subrole: ENUM_VIEWER_ROLES;
+      }
+    >({
+      query: (body) => ({
+        url: `/agency/actor/telegram`,
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
@@ -280,4 +303,6 @@ export const {
   useGetProjectQuery,
   useDownloadRequestApproveReportMutation,
   useDownloadCompletedReportMutation,
+  useGetTelegramRoleNotificationLinkQuery,
+  useLazyGetTelegramRoleNotificationLinkQuery,
 } = agencyPublicAPI;

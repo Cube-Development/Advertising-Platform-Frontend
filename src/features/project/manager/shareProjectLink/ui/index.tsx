@@ -4,28 +4,29 @@ import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import {
   ENUM_VIEWER_ROLES,
-  useGetProjectAccessCodesQuery,
+  IGetProjectAccessCodesRes,
 } from "@entities/project";
 import { ENUM_PATHS } from "@shared/routing";
 import { CheckCheck, Link } from "lucide-react";
 
 interface ShareProjectLinkProps {
   project_id: string;
+  projectAccessCodes?: IGetProjectAccessCodesRes;
 }
 
-export const ShareProjectLink: FC<ShareProjectLinkProps> = ({ project_id }) => {
+export const ShareProjectLink: FC<ShareProjectLinkProps> = ({
+  project_id,
+  projectAccessCodes,
+}) => {
   const { t } = useTranslation();
   const { copyLink } = useCopyLink();
-  const { data: projectAccessCodes } = useGetProjectAccessCodesQuery(
-    { project_id },
-    { skip: !project_id },
-  );
+
   const [copiedRole, setCopiedRole] = useState<ENUM_VIEWER_ROLES | null>(null);
-  const roles = [ENUM_VIEWER_ROLES.PUBLISHER, ENUM_VIEWER_ROLES.CUSTOMER];
+  const roles = projectAccessCodes?.access?.map((access) => access.role) || [];
 
   const handleOnClick = (role: ENUM_VIEWER_ROLES) => {
-    if (projectAccessCodes?.access.length === 0) return;
-    const permissionCode = projectAccessCodes?.access.find(
+    if (projectAccessCodes?.access?.length === 0) return;
+    const permissionCode = projectAccessCodes?.access?.find(
       (access) => access.role === role,
     )?.code;
     const projectUrl = `${window.location.origin}${ENUM_PATHS.PROJECT_PAGE.replace(":project_id", project_id)}?permission=${permissionCode}`;

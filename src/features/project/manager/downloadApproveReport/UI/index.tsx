@@ -33,7 +33,7 @@ export const DownloadApproveReport: FC<DownloadApproveReportProps> = ({
   return (
     <MyButton
       buttons_type="button__white"
-      className="md:!text-sm !text-xs flex items-center justify-center w-!full p-3 !text-start !h-auto md:shadow-none shadow-xl"
+      className="md:!text-sm !text-xs flex items-center justify-center w-!full p-3 !text-start !h-auto md:shadow-none shadow-xl !font-medium"
       onClick={handleOnClick}
     >
       {isDownloadRequestApproveReportLoading ? (
@@ -45,7 +45,7 @@ export const DownloadApproveReport: FC<DownloadApproveReportProps> = ({
         />
       ) : (
         <>
-          <Download className="size-5 stroke-[2px]" />
+          <Download className="min-w-[20px] size-5 stroke-[2px]" />
           {t("orders_manager.project_page_btn.download_request_approve_report")}
         </>
       )}
