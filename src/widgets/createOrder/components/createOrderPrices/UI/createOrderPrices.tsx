@@ -51,7 +51,9 @@ export const CreateOrderPrices: FC<CreateOrderPricesProps> = ({
           <div className={styles.top}>
             <div className={styles.title}>
               <span className="gradient_color">4</span>
-              <p className="gradient_color">{t("create_order.prices.title")}</p>
+              <p className="gradient_color mobile-xl:text-start text-center">
+                {t("create_order.prices.title")}
+              </p>
             </div>
           </div>
           <div className={styles.content}>
