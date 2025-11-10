@@ -43,7 +43,7 @@ export const OrderCard: FC<OrderCardProps> = ({
             className="w-full h-full object-cover"
           />
         </div>
-        <div>
+        <div className="truncate">
           <p className="md:text-base text-sm font-semibold text-[var(--Personal-colors-main)] truncate">
             {order?.name}
           </p>
@@ -53,9 +53,9 @@ export const OrderCard: FC<OrderCardProps> = ({
           <Link
             to={order?.url}
             target="_blank"
-            className="flex items-start gap-1 text-[var(--URL)] md:text-sm text-xs font-normal break-words break-all"
+            className="flex items-start gap-1 text-[var(--URL)] md:text-sm mobile-xl:text-xs text-[10px] font-normal break-words break-all"
           >
-            <SquareArrowOutUpRight className="size-3 md:mt-1 mt-0.5" />{" "}
+            <SquareArrowOutUpRight className="min-w-[12px] size-3 md:mt-1 mt-0.5" />{" "}
             {order?.url}
           </Link>
         </div>
