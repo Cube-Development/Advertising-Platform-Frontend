@@ -834,10 +834,12 @@ body {
 .post_pasted_link {
   p.p3 {
     color: var(--Personal-colors-White) !important;
-    text-decoration: none !important;
-    text-decoration-color: var(--Personal-colors-White) !important;
-    text-decoration-thickness: 1px !important;
-    text-decoration-style: solid !important;
+  }
+  p.p4 {
+    color: var(--Personal-colors-White) !important;
+  }
+  span.s1 {
+    color: var(--Personal-colors-White) !important;
   }
 
   a {
