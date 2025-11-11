@@ -453,9 +453,15 @@ export const Statistics: FC<StatisticsProps> = ({ project }) => {
                         cx="50%"
                         cy="50%"
                         labelLine={false}
-                        label={({ platform, orders }) =>
-                          `${platform}: ${orders}`
-                        }
+                        label={(props: {
+                          name?: string | number;
+                          percent?: number;
+                          payload?: { platform?: string; orders?: number };
+                        }) => {
+                          const platform = props.payload?.platform || "";
+                          const orders = props.payload?.orders || 0;
+                          return `${platform}: ${orders}`;
+                        }}
                         fill="#8884d8"
                         dataKey="orders"
                         outerRadius={120}
