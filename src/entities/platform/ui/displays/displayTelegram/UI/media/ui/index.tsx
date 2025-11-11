@@ -23,7 +23,7 @@ export const TelegramMedia: FC<TelegramMediaProps> = ({
             className={`${medias.length === 2 && index === 0 ? "col-span-2" : medias.length === 5 && index === 3 ? "col-span-2" : medias.length === 8 && index === 6 ? "col-span-2" : ""}`}
             key={index}
           >
-            {getContentType(media) === ContentType.photo ? (
+            {(getContentType(media) === ContentType.photo || getContentType(media) === ContentType.gif) ? (
               <img
                 src={URL.createObjectURL(media)}
                 alt={`Photo ${index + 1}`}
@@ -49,7 +49,7 @@ export const TelegramMedia: FC<TelegramMediaProps> = ({
             className={`${mediasRes.length === 2 && index === 0 ? "col-span-2" : mediasRes.length === 5 && index === 3 ? "col-span-2" : mediasRes.length === 8 && index === 6 ? "col-span-2" : ""}`}
             key={index}
           >
-            {media.content_type === ContentType.photo ? (
+            {(media.content_type === ContentType.photo || media.content_type === ContentType.gif) ? (
               <img src={media.content} alt={`Photo ${index + 1}`} />
             ) : (
               <video autoPlay loop muted controls>

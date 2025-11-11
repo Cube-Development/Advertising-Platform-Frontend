@@ -2047,7 +2047,7 @@
           "max_length": "Максимум 10 медиафайлов",
           "formats": {
             "title": "Поддерживаемые форматы:",
-            "text": "JPG/JPEG, PNG,MP4, MOV, AVI, WMV, WEBM"
+            "text": "JPG/JPEG, PNG, MP4, MOV, AVI, WMV, WEBM, GIF"
           },
           "size": {
             "title": "Максимальный размер:",
@@ -2203,7 +2203,7 @@
           "button": "Выберите файл",
           "formats": {
             "title": "Поддерживаемые форматы:",
-            "text": "JPG/JPEG, PNG,MP4, MOV, AVI, WMV, WEBM"
+            "text": "JPG/JPEG, PNG,MP4, MOV, AVI, WMV, WEBM, GIF"
           },
           "size": {
             "title": "Максимальный размер:",

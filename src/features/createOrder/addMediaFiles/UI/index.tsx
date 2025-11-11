@@ -94,7 +94,6 @@ export const AddMediaFiles: FC<FileProps> = ({ onChange, currentFiles }) => {
         toast({
           variant: "error",
           title: t("create_order.create.add_files.mediafile.max_length"),
-          action: <ToastAction altText="OK">OK</ToastAction>,
         });
       }
     }
@@ -152,7 +151,7 @@ export const AddMediaFiles: FC<FileProps> = ({ onChange, currentFiles }) => {
               type="file"
               multiple={true}
               onChange={handleChange}
-              accept=".jpg, .jpeg, .png, .mp4, .mov, .avi, .wmv, .webm"
+              accept=".jpg, .jpeg, .png, .mp4, .mov, .avi, .wmv, .webm, .gif"
             />
           </label>
         </div>

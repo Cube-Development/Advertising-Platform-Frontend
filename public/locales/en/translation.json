@@ -1734,7 +1734,7 @@
           "max_length": "Maximum of 10 media files",
           "formats": {
             "title": "Supported Formats:",
-            "text": "JPG/JPEG, PNG, MP4, MOV, AVI, WMV, WEBM"
+            "text": "JPG/JPEG, PNG, MP4, MOV, AVI, WMV, WEBM, GIF"
           },
           "size": {
             "title": "Maximum Size:",
@@ -1891,7 +1891,7 @@
           "button": "Choose file",
           "formats": {
             "title": "Supported formats:",
-            "text": "JPG/JPEG, PNG, MP4, MOV, AVI, WMV, WEBM"
+            "text": "JPG/JPEG, PNG, MP4, MOV, AVI, WMV, WEBM, GIF"
           },
           "size": {
             "title": "Maximum size:",
