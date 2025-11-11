@@ -89,9 +89,7 @@ export const AccountingCard: FC<IAccountingCardProps> = ({
               <Calendar className="flex-shrink-0 w-4 h-4 mr-2" />
               <p className="flex items-center justify-between gap-2 text-sm font-medium">
                 <span>{t("admin_panel.accounting.card.created_date")}:</span>
-                <span>
-                  {transaction?.created_time} / {transaction?.created_date}
-                </span>
+                <span>{transaction?.created}</span>
               </p>
             </div>
 

@@ -73,7 +73,8 @@ export const InstagramMedia: FC<InstagramMediaProps> = ({
           medias?.map((media, index) => (
             <CarouselItem key={index} className="pl-1">
               <div className="w-[100%] overflow-hidden relative">
-                {(getContentType(media) === ContentType.photo || getContentType(media) === ContentType.gif) ? (
+                {getContentType(media) === ContentType.photo ||
+                getContentType(media) === ContentType.gif ? (
                   <img
                     src={URL.createObjectURL(media)}
                     alt={`Photo ${index + 1}`}
@@ -107,7 +108,8 @@ export const InstagramMedia: FC<InstagramMediaProps> = ({
           mediasRes?.map((media, index) => (
             <CarouselItem key={index} className="pl-1">
               <div className="w-[100%] overflow-hidden relative">
-                {(media.content_type === ContentType.photo || media.content_type === ContentType.gif) ? (
+                {media.content_type === ContentType.photo ||
+                media.content_type === ContentType.gif ? (
                   <img
                     src={media.content}
                     alt={`Photo ${index + 1}`}

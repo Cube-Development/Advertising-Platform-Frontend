@@ -20,7 +20,7 @@ export enum ContentType {
   video = 3,
   file = 4,
   button = 5,
-  gif = 6
+  gif = 6,
 }
 
 export enum FileData {

@@ -8,10 +8,6 @@ import { Heart, Send } from "lucide-react";
 import { GetPostRes, ICreatePostForm } from "@entities/project";
 import { PostTypesNum } from "@entities/platform";
 import { EyeDisabledIcon } from "@shared/assets";
-import { EditorContent, useEditor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
-import Link from "@tiptap/extension-link";
-import Underline from "@tiptap/extension-underline";
 import { DownloadAllBtn } from "../../../utils/downloadAllBtn";
 import { CopyTextBtn } from "../../../utils/copyTextBtn";
 import { preparePostsData } from "@entities/platform/ui/utils";
@@ -94,28 +90,6 @@ export const DisplayStories: FC<DisplayStoriesProps> = ({
 
     return () => observer.disconnect();
   }, [imgRef]);
-
-  const postEditor = useEditor({
-    extensions: [StarterKit, Link, Underline],
-    content: (postText && postText[0]?.content) || "",
-    editable: false,
-  });
-
-  const editorRes = useEditor({
-    extensions: [StarterKit, Link, Underline],
-    content: textRes || "",
-    editable: false,
-  });
-
-  // Обновляем контент редактора, когда изменяется postText
-  useEffect(() => {
-    if (postEditor && postText) {
-      postEditor.commands.setContent(postText[0]?.content || "");
-    }
-    if (editorRes && textRes) {
-      editorRes.commands.setContent(textRes || "");
-    }
-  }, [postText, postEditor, editorRes, textRes]);
 
   return (
     <div className={styles.screen_wrapper}>
@@ -216,9 +190,11 @@ export const DisplayStories: FC<DisplayStoriesProps> = ({
                       <p>No content yet...</p>
                     </div>
                   )}
-                  <EditorContent
-                    className={styles.post__text}
-                    editor={postEditor}
+                  <div
+                    className={`${styles.post__text} post_pasted_link`}
+                    dangerouslySetInnerHTML={{
+                      __html: (postText && postText[0]?.content) || "",
+                    }}
                     style={{ fontSize: `${resizes?.timeSize}px` }}
                   />
                 </div>
@@ -287,9 +263,11 @@ export const DisplayStories: FC<DisplayStoriesProps> = ({
                       <p>No content yet...</p>
                     </div>
                   )}
-                  <EditorContent
-                    className={styles.post__text}
-                    editor={editorRes}
+                  <div
+                    className={`${styles.post__text} post_pasted_link`}
+                    dangerouslySetInnerHTML={{
+                      __html: textRes || "",
+                    }}
                     style={{ fontSize: `${resizes?.timeSize}px` }}
                   />
                 </div>

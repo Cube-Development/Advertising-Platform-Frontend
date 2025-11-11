@@ -830,3 +830,17 @@ body {
   background: rgba(255, 255, 255, 0.7) !important;
   backdrop-filter: blur(16px) !important;
 }
+
+.post_pasted_link {
+  p.p3 {
+    color: var(--Personal-colors-White) !important;
+    text-decoration: none !important;
+    text-decoration-color: var(--Personal-colors-White) !important;
+    text-decoration-thickness: 1px !important;
+    text-decoration-style: solid !important;
+  }
+
+  a {
+    color: var(--URL) !important;
+  }
+}

@@ -25,20 +25,22 @@ export const PostsList: FC<PostsListProps> = ({
   return (
     <div className="">
       <div className="grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-5">
-        {isLoading ? 
-        <div className="flex items-center justify-center h-[50vh] w-full">
-          <SpinnerLoader />
-        </div>
-         : posts.map((post) => (
-          <PostCard
-            key={post.id}
-            post={post}
-            selectedPlatform={selectedPlatform}
-            selectedPostType={selectedPostType}
-            canDelete={canDelete}
-            handlePostSelect={handlePostSelect}
-          />
-        ))}
+        {isLoading ? (
+          <div className="flex items-center justify-center h-[50vh] w-full">
+            <SpinnerLoader />
+          </div>
+        ) : (
+          posts.map((post) => (
+            <PostCard
+              key={post.id}
+              post={post}
+              selectedPlatform={selectedPlatform}
+              selectedPostType={selectedPostType}
+              canDelete={canDelete}
+              handlePostSelect={handlePostSelect}
+            />
+          ))
+        )}
       </div>
 
       {posts.length === 0 && !isLoading && (

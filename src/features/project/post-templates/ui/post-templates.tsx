@@ -21,10 +21,11 @@ export const PostTemplates: FC<PostTemplatesProps> = ({
   formStateSelectedPostType,
 }) => {
   const [page] = useState<number>(1);
-  const { data: templates, isLoading: isTemplatesLoading } = useGetTemplatesListQuery({
-    page: page,
-    // elements_on_page: 10,
-  });
+  const { data: templates, isLoading: isTemplatesLoading } =
+    useGetTemplatesListQuery({
+      page: page,
+      // elements_on_page: 10,
+    });
   const [internalSelectedPlatform, setInternalSelectedPlatform] =
     useState<platformTypesNum>(platformTypesNum.telegram);
   const [internalSelectedPostType, setInternalSelectedPostType] =

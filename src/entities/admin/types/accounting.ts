@@ -23,8 +23,7 @@ export interface IAdminAccountingData {
   doc_id: string;
   user_id: string;
   document_file: string;
-  created_date: string;
-  created_time: string;
+  created: string;
 }
 
 export interface IAccountingTab extends IAdminAccountingDopData {
