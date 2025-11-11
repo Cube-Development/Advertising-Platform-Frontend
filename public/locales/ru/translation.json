@@ -1990,6 +1990,7 @@
       "choose_platform": "Выберите платформу",
       "your_posts": "Ваши посты",
       "add_file": "Загрузить файл",
+      "start_typing": "Начните печатать...",
       "comment": "Комментарий блогеру...",
       "result": "Результат",
       "post": "Начните заполнять рекламный пост чтобы увидеть результат",
@@ -2047,7 +2048,7 @@
           "max_length": "Максимум 10 медиафайлов",
           "formats": {
             "title": "Поддерживаемые форматы:",
-            "text": "JPG/JPEG, PNG,MP4, MOV, AVI, WMV, WEBM"
+            "text": "JPG/JPEG, PNG, MP4, MOV, AVI, WMV, WEBM, GIF"
           },
           "size": {
             "title": "Максимальный размер:",
@@ -2203,7 +2204,7 @@
           "button": "Выберите файл",
           "formats": {
             "title": "Поддерживаемые форматы:",
-            "text": "JPG/JPEG, PNG,MP4, MOV, AVI, WMV, WEBM"
+            "text": "JPG/JPEG, PNG,MP4, MOV, AVI, WMV, WEBM, GIF"
           },
           "size": {
             "title": "Максимальный размер:",

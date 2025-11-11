@@ -20,7 +20,8 @@ export const YoutubeMedia: FC<YoutubeMediaProps> = ({
     <div>
       {medias && (
         <div className="w-[100%] overflow-hidden relative">
-          {getContentType(medias[0]) === ContentType.photo ? (
+          {getContentType(medias[0]) === ContentType.photo ||
+          getContentType(medias[0]) === ContentType.gif ? (
             <img
               src={URL.createObjectURL(medias[0])}
               alt={`Photo ${1}`}
@@ -51,7 +52,8 @@ export const YoutubeMedia: FC<YoutubeMediaProps> = ({
       )}
       {mediasRes && (
         <div className="w-[100%] overflow-hidden relative">
-          {mediasRes[0]?.content_type === ContentType.photo ? (
+          {mediasRes[0]?.content_type === ContentType.photo ||
+          mediasRes[0]?.content_type === ContentType.gif ? (
             <img
               src={mediasRes[0]?.content}
               alt={`Photo ${1}`}

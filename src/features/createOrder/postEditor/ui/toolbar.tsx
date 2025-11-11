@@ -1,5 +1,4 @@
-import { FC, useEffect, useState } from "react";
-import { type Editor } from "@tiptap/react";
+import { FC, useState } from "react";
 import { Toggle } from "@shared/ui/shadcn-ui/ui/toggle";
 import {
   Bold,
@@ -17,72 +16,86 @@ import {
 } from "@shared/ui/shadcn-ui/ui/popover";
 import { useTranslation } from "react-i18next";
 
-interface ToolbarProps {
-  editor: Editor | null;
+interface TextFormat {
+  bold?: boolean;
+  italic?: boolean;
+  underline?: boolean;
+  strikethrough?: boolean;
+  monospace?: boolean;
 }
 
-export const Toolbar: FC<ToolbarProps> = ({ editor }) => {
-  useEffect(() => {
-    const handleKeyDown = (event: any) => {
-      if (event.key === "Enter") {
-        event.preventDefault();
-        editor && editor.chain().focus().setHardBreak().run();
-      }
-    };
+interface ToolbarProps {
+  format: TextFormat;
+  onToggleFormat: (key: keyof TextFormat) => void;
+  onAddLink: (url: string) => void;
+  onLinkButtonClick: () => void;
+}
 
-    editor && editor.view.dom.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      editor && editor.view.dom.removeEventListener("keydown", handleKeyDown);
-    };
-  }, [editor]);
-
+export const Toolbar: FC<ToolbarProps> = ({
+  format,
+  onToggleFormat,
+  onAddLink,
+  onLinkButtonClick,
+}) => {
   const { t } = useTranslation();
   const [link, setLink] = useState("");
-  if (!editor) {
-    return null;
-  }
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+
+  const handleLinkSubmit = () => {
+    if (link.length > 0) {
+      onAddLink(link);
+      setLink("");
+      setIsPopoverOpen(false);
+    }
+  };
+
+  const handlePopoverOpenChange = (open: boolean) => {
+    setIsPopoverOpen(open);
+    if (open) {
+      onLinkButtonClick();
+    }
+  };
 
   return (
     <div className={styles.toolbar}>
       <Toggle
         size={"lg"}
-        pressed={editor.isActive("bold")}
-        onPressedChange={() => editor.chain().focus().toggleBold().run()}
+        pressed={format.bold || false}
+        onPressedChange={() => onToggleFormat("bold")}
       >
         <Bold className="h-8 w-8" />
       </Toggle>
       <Toggle
         size={"lg"}
-        pressed={editor.isActive("italic")}
-        onPressedChange={() => editor.chain().focus().toggleItalic().run()}
+        pressed={format.italic || false}
+        onPressedChange={() => onToggleFormat("italic")}
       >
         <Italic className="h-8 w-8" />
       </Toggle>
       <Toggle
         size={"lg"}
-        pressed={editor.isActive("strike")}
-        onPressedChange={() => editor.chain().focus().toggleStrike().run()}
+        pressed={format.strikethrough || false}
+        onPressedChange={() => onToggleFormat("strikethrough")}
       >
         <Strikethrough className="h-8 w-8" />
       </Toggle>
       <Toggle
         size={"lg"}
-        pressed={editor.isActive("underline")}
-        onPressedChange={() => editor.chain().focus().toggleUnderline().run()}
+        pressed={format.underline || false}
+        onPressedChange={() => onToggleFormat("underline")}
       >
         <Underline className="h-8 w-8" />
       </Toggle>
       <Toggle
         size={"lg"}
-        pressed={editor.isActive("code")}
-        onPressedChange={() => editor.chain().focus().toggleCode().run()}
+        pressed={format.monospace || false}
+        onPressedChange={() => onToggleFormat("monospace")}
       >
         <WholeWord className="h-8 w-8" />
       </Toggle>
-      <Popover>
+      <Popover open={isPopoverOpen} onOpenChange={handlePopoverOpenChange}>
         <PopoverTrigger asChild>
-          <Toggle size={"lg"} pressed={editor.isActive("url")}>
+          <Toggle size={"lg"} pressed={false} onClick={onLinkButtonClick}>
             <Link className="h-8 w-8" />
           </Toggle>
         </PopoverTrigger>
@@ -96,13 +109,14 @@ export const Toolbar: FC<ToolbarProps> = ({ editor }) => {
             placeholder={t("url_link")}
             onChange={(e) => setLink(e.target.value)}
             value={link}
-          />
-          <div
-            onClick={() => {
-              if (link.length > 0) {
-                editor.chain().focus().toggleLink({ href: link }).run();
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleLinkSubmit();
               }
             }}
+          />
+          <div
+            onClick={handleLinkSubmit}
             className="cursor-pointer rounded-r-[10px] bg-[#000] h-full p-2 w-16 flex center justify-center absolute top-0 right-0"
           >
             <Link className="h-5 w-10 text-white" />

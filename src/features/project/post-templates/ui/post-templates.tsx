@@ -21,10 +21,11 @@ export const PostTemplates: FC<PostTemplatesProps> = ({
   formStateSelectedPostType,
 }) => {
   const [page] = useState<number>(1);
-  const { data: templates } = useGetTemplatesListQuery({
-    page: page,
-    // elements_on_page: 10,
-  });
+  const { data: templates, isLoading: isTemplatesLoading } =
+    useGetTemplatesListQuery({
+      page: page,
+      // elements_on_page: 10,
+    });
   const [internalSelectedPlatform, setInternalSelectedPlatform] =
     useState<platformTypesNum>(platformTypesNum.telegram);
   const [internalSelectedPostType, setInternalSelectedPostType] =
@@ -85,6 +86,7 @@ export const PostTemplates: FC<PostTemplatesProps> = ({
         selectedPostType={selectedPostType}
         canDelete={canDelete}
         handlePostSelect={handlePostSelect}
+        isLoading={isTemplatesLoading}
       />
       {/* <div className="mx-auto mobile-xl:mt-8 mt-6 text-sm font-semibold cursor-pointer" onClick={handleOnChangePage}>
                 {isLoading || isFetching ? <SpinnerLoaderSmall /> : <ShowMoreBtn />}

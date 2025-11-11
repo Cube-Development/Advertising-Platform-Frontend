@@ -92,6 +92,8 @@ export const CreateTemplatePost = () => {
     }
   };
 
+  console.log(formState);
+
   return (
     <Accordion
       type="single"

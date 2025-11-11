@@ -1681,6 +1681,7 @@
       "choose_platform": "Platformani tanlang",
       "your_posts": "Sizning postlaringiz",
       "add_file": "Fayl yuklash",
+      "start_typing": "Matn kiritishni boshlang...",
       "comment": "Bloger uchun izoh...",
       "result": "Natija",
       "post": "Natijani ko'rish uchun reklama postini to'ldirishni boshlang",
@@ -1732,7 +1733,7 @@
           "max_length": "Maksimal 10 ta mediafayl",
           "formats": {
             "title": "Qo'llab-quvvatlanadigan formatlar:",
-            "text": "JPG/JPEG, PNG, MP4, MOV, AVI, WMV, WEBM"
+            "text": "JPG/JPEG, PNG, MP4, MOV, AVI, WMV, WEBM, GIF"
           },
           "size": {
             "title": "Maksimal hajm:",
@@ -1889,7 +1890,7 @@
           "button": "Faylni tanlash",
           "formats": {
             "title": "Qo'llab-quvvatlanadigan formatlar:",
-            "text": "JPG/JPEG, PNG, MP4, MOV, AVI, WMV, WEBM"
+            "text": "JPG/JPEG, PNG, MP4, MOV, AVI, WMV, WEBM, GIF"
           },
           "size": {
             "title": "Maksimal hajm:",
