@@ -30,7 +30,7 @@ export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
 }) => {
   const { t } = useTranslation();
   const totalAmountCurrent =
-    role === ENUM_ROLES.MANAGER
+    role === ENUM_ROLES.AGENCY
       ? formState?.prices?.reduce(
           (acc, item) => acc + item.selected_format.price,
           0,

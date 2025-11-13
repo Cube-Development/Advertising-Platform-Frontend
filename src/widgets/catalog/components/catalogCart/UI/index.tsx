@@ -29,7 +29,7 @@ export const CatalogCart: FC<CatalogCartProps> = ({ cart, role }) => {
         <div className={`${styles.info} ${styles.coast}`}>
           <p>{t("catalog.current_cart.cost")}:</p>
           <span>
-            {role === ENUM_ROLES.MANAGER ? (
+            {role === ENUM_ROLES.AGENCY ? (
               <InfoTooltip
                 text={t("catalog.current_cart.information")}
                 className="!text-[var(--Personal-colors-white)]"

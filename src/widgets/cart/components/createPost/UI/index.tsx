@@ -44,7 +44,7 @@ export const CreatePost: FC<CreatePostProps> = ({ cart, role }) => {
                 <p>{t("cart.create_post.views")}</p>
                 <span>{cart?.coverage?.toLocaleString()}</span>
               </div>
-              {role !== ENUM_ROLES.MANAGER && (
+              {role !== ENUM_ROLES.AGENCY && (
                 <div className={styles.info}>
                   <p>{t("cart.create_post.commission")}</p>
                   <span>{CART.commission}%</span>
@@ -55,13 +55,13 @@ export const CreatePost: FC<CreatePostProps> = ({ cart, role }) => {
         </>
       )}
       <div className={styles.finnaly}>
-        {screen <= BREAKPOINT.MD && role !== ENUM_ROLES.MANAGER && (
+        {screen <= BREAKPOINT.MD && role !== ENUM_ROLES.AGENCY && (
           <div className={styles.commission_mobile}>
             <p>{t("cart.create_post.commission")}</p>
             <span>{CART.commission}%</span>
           </div>
         )}
-        {role !== ENUM_ROLES.MANAGER && (
+        {role !== ENUM_ROLES.AGENCY && (
           <div className={styles.finnaly__text}>
             <p className={`${styles.finnaly_long}`}>
               {t("cart.create_post.finnaly")}:

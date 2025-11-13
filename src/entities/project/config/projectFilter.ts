@@ -5,8 +5,11 @@ export enum ENUM_PROJECT_TYPES {
 }
 
 export enum ENUM_MANAGER_PROJECT_TYPES {
-  MY_PROJECT = "my_project",
   TURNKEY_PROJECT = "turnkey_project",
+}
+
+export enum ENUM_AGENCY_PROJECT_TYPES {
+  MY_PROJECT = "my_project",
 }
 
 export enum ENUM_ADV_MY_PROJECT_STATUS {
@@ -25,6 +28,12 @@ export enum ENUM_MANAGER_PROJECT_STATUS {
   ACTIVE = "active",
   REQUEST_APPROVE = "request_approve",
   NEW = "new",
+  COMPLETED = "completed",
+}
+
+export enum ENUM_AGENCY_PROJECT_STATUS {
+  ACTIVE = "active",
+  REQUEST_APPROVE = "request_approve",
   COMPLETED = "completed",
 }
 
@@ -58,29 +67,14 @@ export const ADV_MANAGER_PROJECT_TABS_LIST = [
   },
 ];
 
-// export const MANAGER_TURNKEY_PROJECT_TABS_LIST = [
-//   {
-//     name: "orders_manager.status_filter.active",
-//     type: ENUM_MANAGER_PROJECT_STATUS.ACTIVE,
-//   },
-//   {
-//     name: "orders_manager.status_filter.new",
-//     type: ENUM_MANAGER_PROJECT_STATUS.NEW,
-//   },
-//   {
-//     name: "orders_manager.status_filter.agreed",
-//     type: ENUM_MANAGER_PROJECT_STATUS.REQUEST_APPROVE,
-//   },
-//   {
-//     name: "orders_manager.status_filter.complete",
-//     type: ENUM_MANAGER_PROJECT_STATUS.COMPLETED,
-//   },
-// ];
-
-export const MANAGER_MY_PROJECT_TABS_LIST = [
+export const MANAGER_TURNKEY_PROJECT_TABS_LIST = [
   {
     name: "orders_manager.status_filter.active",
     type: ENUM_MANAGER_PROJECT_STATUS.ACTIVE,
+  },
+  {
+    name: "orders_manager.status_filter.new",
+    type: ENUM_MANAGER_PROJECT_STATUS.NEW,
   },
   {
     name: "orders_manager.status_filter.agreed",
@@ -89,6 +83,21 @@ export const MANAGER_MY_PROJECT_TABS_LIST = [
   {
     name: "orders_manager.status_filter.complete",
     type: ENUM_MANAGER_PROJECT_STATUS.COMPLETED,
+  },
+];
+
+export const AGENCY_MY_PROJECT_TABS_LIST = [
+  {
+    name: "orders_manager.status_filter.active",
+    type: ENUM_AGENCY_PROJECT_STATUS.ACTIVE,
+  },
+  {
+    name: "orders_manager.status_filter.agreed",
+    type: ENUM_AGENCY_PROJECT_STATUS.REQUEST_APPROVE,
+  },
+  {
+    name: "orders_manager.status_filter.complete",
+    type: ENUM_AGENCY_PROJECT_STATUS.COMPLETED,
   },
 ];
 
@@ -112,13 +121,16 @@ export const ADVERTISER_PROJECT_TABS_LIST = [
 
 export const MANAGER_PROJECT_TYPES_TABS_LIST = [
   {
-    name: "orders_manager.type_filter.my_project",
-    type: ENUM_MANAGER_PROJECT_TYPES.MY_PROJECT,
+    name: "orders_manager.type_filter.turnkey_project",
+    type: ENUM_MANAGER_PROJECT_TYPES.TURNKEY_PROJECT,
     status: ENUM_MANAGER_PROJECT_STATUS.ACTIVE,
   },
-  // {
-  //   name: "orders_manager.type_filter.turnkey_project",
-  //   type: ENUM_MANAGER_PROJECT_TYPES.TURNKEY_PROJECT,
-  //   status: ENUM_MANAGER_PROJECT_STATUS.ACTIVE,
-  // },
+];
+
+export const AGENCY_PROJECT_TYPES_TABS_LIST = [
+  {
+    name: "orders_manager.type_filter.my_project",
+    type: ENUM_AGENCY_PROJECT_TYPES.MY_PROJECT,
+    status: ENUM_AGENCY_PROJECT_STATUS.ACTIVE,
+  },
 ];

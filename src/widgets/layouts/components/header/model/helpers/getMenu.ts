@@ -10,7 +10,8 @@ import {
   SERVICE_MENU_ADVERTISER,
   SERVICE_MENU_BLOGGER,
   SERVICE_MENU_FAQ,
-  SERVICE_MENU_MANAGER,
+  SERVICE_MENU_AGENCY,
+  MENU_AGENCY,
 } from "../../model";
 
 interface Props {
@@ -22,8 +23,8 @@ export const getMenu = ({ isAuth, role }: Props) => {
   let SERVICE_MENU: IMenuItem[] =
     role === ENUM_ROLES.ADVERTISER
       ? SERVICE_MENU_ADVERTISER
-      : role === ENUM_ROLES.MANAGER
-        ? SERVICE_MENU_MANAGER
+      : role === ENUM_ROLES.AGENCY || role === ENUM_ROLES.MANAGER
+        ? SERVICE_MENU_AGENCY
         : SERVICE_MENU_BLOGGER;
 
   SERVICE_MENU = isAuth ? SERVICE_MENU : [...SERVICE_MENU, ...SERVICE_MENU_FAQ];
@@ -33,9 +34,11 @@ export const getMenu = ({ isAuth, role }: Props) => {
       ? [...MENU_ADVERTISER, ...MENU_COMMON, ...SERVICE_MENU_FAQ]
       : role === ENUM_ROLES.BLOGGER
         ? [...MENU_BLOGGER, ...MENU_COMMON, ...SERVICE_MENU_FAQ]
-        : role === ENUM_ROLES.MANAGER
-          ? [...MENU_MANAGER, ...SERVICE_MENU_FAQ]
-          : []
+        : role === ENUM_ROLES.AGENCY
+          ? [...MENU_AGENCY, ...SERVICE_MENU_FAQ]
+          : role === ENUM_ROLES.MANAGER
+            ? [...MENU_MANAGER, ...SERVICE_MENU_FAQ]
+            : []
     : role === ENUM_ROLES.ADVERTISER
       ? MENU_ADVERTISER_NOT_AUTH
       : MENU_BLOGGER_NOT_AUTH;

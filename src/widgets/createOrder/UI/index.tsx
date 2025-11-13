@@ -106,7 +106,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
               role={role}
             />
 
-            {role === ENUM_ROLES.MANAGER && (
+            {role === ENUM_ROLES.AGENCY && (
               <CreateOrderPrices
                 isBlur={blur.prices}
                 onChangeBlur={handleOnChangeBlur}
@@ -128,7 +128,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
                 !isOrdersLoading &&
                 !isPostsLoading
               }
-              step={role === ENUM_ROLES.MANAGER ? 5 : 4}
+              step={role === ENUM_ROLES.AGENCY ? 5 : 4}
             />
           </>
         )}

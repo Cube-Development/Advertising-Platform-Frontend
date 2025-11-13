@@ -4,6 +4,7 @@ import {
   ENUM_ADV_MANAGER_PROJECT_STATUS,
   ENUM_MANAGER_PROJECT_STATUS,
   ENUM_ADV_MY_PROJECT_STATUS,
+  ENUM_AGENCY_PROJECT_STATUS,
 } from "@entities/project";
 import { BREAKPOINT } from "@shared/config";
 import { FC, useRef } from "react";
@@ -22,7 +23,8 @@ interface IProjectType {
     | ENUM_ADV_MY_PROJECT_STATUS
     | ENUM_ADV_MANAGER_PROJECT_STATUS
     | ENUM_MANAGER_PROJECT_STATUS
-    | ENUM_OFFER_STATUS;
+    | ENUM_OFFER_STATUS
+    | ENUM_AGENCY_PROJECT_STATUS;
 }
 
 interface BarStatusFilterProps {
@@ -33,6 +35,7 @@ interface BarStatusFilterProps {
       | ENUM_ADV_MY_PROJECT_STATUS
       | ENUM_ADV_MANAGER_PROJECT_STATUS
       | ENUM_MANAGER_PROJECT_STATUS
+      | ENUM_AGENCY_PROJECT_STATUS
       | string,
   ) => void;
   statusFilter:
@@ -41,6 +44,7 @@ interface BarStatusFilterProps {
     | ENUM_ADV_MY_PROJECT_STATUS
     | ENUM_ADV_MANAGER_PROJECT_STATUS
     | ENUM_MANAGER_PROJECT_STATUS
+    | ENUM_AGENCY_PROJECT_STATUS
     | string;
   projectStatus: IProjectType[];
   badge?: { status: string; count: number }[];
@@ -65,7 +69,8 @@ export const BarStatusFilter: FC<BarStatusFilterProps> = ({
       | ENUM_OFFER_STATUS
       | ENUM_ADV_MY_PROJECT_STATUS
       | ENUM_ADV_MANAGER_PROJECT_STATUS
-      | ENUM_MANAGER_PROJECT_STATUS,
+      | ENUM_MANAGER_PROJECT_STATUS
+      | ENUM_AGENCY_PROJECT_STATUS,
     index: number,
   ) => {
     toggleStatus(type);

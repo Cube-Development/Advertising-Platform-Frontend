@@ -1,22 +1,3 @@
-// import { roles } from "@entities/user";
-// import { useAppSelector } from "@shared/hooks";
-// import { AdvOrders, ManagerOrders } from "@widgets/project";
-// import { FC } from "react";
-
-// export const OrdersPage: FC = () => {
-//   const { role } = useAppSelector((state) => state.user);
-
-//   return (
-//     <>
-//       {role === roles.advertiser ? (
-//         <AdvOrders />
-//       ) : (
-//         role === roles.manager && <ManagerOrders />
-//       )}
-//     </>
-//   );
-// };
-
 import { ENUM_ROLES } from "@entities/user";
 import { useAppSelector, useClearCookiesOnPage } from "@shared/hooks";
 import { SuspenseLoader } from "@shared/ui";
@@ -44,6 +25,18 @@ const ManagerOrders = React.lazy(() =>
     }),
 );
 
+const AgencyOrders = React.lazy(() =>
+  import("@widgets/project")
+    .then((module) => ({
+      default: module.AgencyOrders,
+    }))
+    .catch(() => {
+      // При ошибке перезагружаем страницу
+      window.location.reload();
+      return { default: () => null };
+    }),
+);
+
 export const OrdersPage = () => {
   useClearCookiesOnPage();
   const { role } = useAppSelector((state) => state.user);
@@ -52,8 +45,10 @@ export const OrdersPage = () => {
     <Suspense fallback={<SuspenseLoader />}>
       {role === ENUM_ROLES.ADVERTISER ? (
         <AdvOrders />
+      ) : role === ENUM_ROLES.MANAGER ? (
+        <ManagerOrders />
       ) : (
-        role === ENUM_ROLES.MANAGER && <ManagerOrders />
+        <AgencyOrders />
       )}
     </Suspense>
   );

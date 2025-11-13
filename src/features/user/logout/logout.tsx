@@ -16,7 +16,7 @@ import {
   cn,
 } from "@shared/ui";
 import { CircleX, Loader, LogOut } from "lucide-react";
-import { ButtonHTMLAttributes, FC, useState } from "react";
+import { ButtonHTMLAttributes, FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 

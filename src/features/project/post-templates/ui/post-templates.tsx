@@ -6,6 +6,7 @@ import { useGetTemplatesListQuery, IPostTemplate } from "@entities/project";
 import { Link } from "react-router-dom";
 import { ENUM_PATHS } from "@shared/routing";
 import { CirclePlus } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 interface PostTemplatesProps {
   canDelete?: boolean;
@@ -20,6 +21,7 @@ export const PostTemplates: FC<PostTemplatesProps> = ({
   formStateSelectedPlatform,
   formStateSelectedPostType,
 }) => {
+  const { t } = useTranslation();
   const [page] = useState<number>(1);
   const { data: templates, isLoading: isTemplatesLoading } =
     useGetTemplatesListQuery({
@@ -77,7 +79,9 @@ export const PostTemplates: FC<PostTemplatesProps> = ({
             className="flex items-center justify-center gap-2 hover:scale-[1.005] transition-all duration-500 cursor-pointer rounded-full py-2 px-3 bg-[var(--Personal-colors-main2)] text-white"
           >
             <CirclePlus className="size-8 stroke-[1.5px]" />
-            <p className="text-sm font-semibold">Add new template</p>
+            <p className="text-sm font-semibold">
+              {t("template_post.add_template_post")}
+            </p>
           </Link>
         )}
       <PostsList

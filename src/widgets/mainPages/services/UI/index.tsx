@@ -31,11 +31,11 @@ export const Services: FC<ServicesProps> = ({ page }) => {
       >
         {t(`${page}.services_title`)}
       </motion.h2>
-      <div className={styles.infos}>
+      {/* <div className={styles.infos}>
         {infos.map((info, index) => (
           <ServiceCard key={index} info={info} custom={custom++} />
         ))}
-      </div>
+      </div> */}
     </motion.section>
   );
 };

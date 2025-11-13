@@ -10,6 +10,7 @@ import {
   IPostChannel,
   ENUM_MANAGER_PROJECT_STATUS,
   ENUM_ADV_MY_PROJECT_STATUS,
+  ENUM_AGENCY_PROJECT_STATUS,
 } from "@entities/project";
 import {
   ADV_ORDERS,
@@ -17,7 +18,6 @@ import {
   ADV_TARIFF_ORDERS,
   ADV_TARIFF_PROJECTS,
   authApi,
-  BLOGGER_OFFERS,
   CREATE_PROJECT_AMOUNT,
   CREATE_PROJECT_DATES,
   CREATE_PROJECT_NAME,
@@ -49,6 +49,7 @@ export interface getProjectsCardReq {
     | ENUM_ADV_MANAGER_PROJECT_STATUS
     | ENUM_ADV_MY_PROJECT_STATUS
     | ENUM_MANAGER_PROJECT_STATUS
+    | ENUM_AGENCY_PROJECT_STATUS
     | string;
   elements_on_page?: number;
   date_sort?: dateSortingTypes;

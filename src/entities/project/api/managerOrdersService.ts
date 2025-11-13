@@ -172,17 +172,6 @@ export const managerProjectsAPI = authApi.injectEndpoints({
       providesTags: [MANAGER_PROJECTS],
     }),
 
-    // getManagerProjectOrders: build.query<
-    //   getManagerProjectOrdersRes,
-    //   getManagerProjectOrdersReq
-    // >({
-    //   query: (params) => ({
-    //     url: `/order/datetime-setup`,
-    //     method: "GET",
-    //     params: params,
-    //   }),
-    // }),
-
     getManagerProjectOrdersRereview: build.query<
       getManagerProjectOrdersRes,
       getManagerProjectOrdersReq
@@ -211,7 +200,6 @@ export const {
   useApproveProjectMutation,
   useGetManagerSubprojectsQuery,
   useCreateProjectCartMutation,
-  // useGetManagerProjectOrdersQuery,
   useGetManagerProjectOrdersRereviewQuery,
   useGetPostsRereviewQuery,
 } = managerProjectsAPI;

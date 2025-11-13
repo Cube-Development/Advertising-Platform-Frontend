@@ -44,7 +44,7 @@ export const BarTop: FC<BarTopProps> = ({
             {/* )} */}
           </>
         ) : (
-          role === ENUM_ROLES.MANAGER && (
+          role === ENUM_ROLES.AGENCY && (
             <>
               <p className={styles.title}>{t(`orders_manager.orders`)}</p>
               {AddManagerNewProjectBtn && <AddManagerNewProjectBtn />}

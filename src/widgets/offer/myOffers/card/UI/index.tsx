@@ -10,7 +10,7 @@ import { ENUM_ROLES } from "@entities/user";
 import { AcceptOffer, RejectOffer, SeePost, SendLink } from "@features/offer";
 import { MoreIcon } from "@shared/assets";
 import { ENUM_PATHS } from "@shared/routing";
-import { CountdownTimer, useToast } from "@shared/ui";
+import { CountdownTimer, SeeCancelReason, useToast } from "@shared/ui";
 import { Chat } from "@widgets/communication";
 import { CalendarClock, CircleCheckBig, FileText } from "lucide-react";
 import { FC, ReactNode } from "react";
@@ -219,6 +219,9 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
             <span className="!grid !grid-flow-row !gap-2">
               <SeePost post={post!} post_deeplink={card?.post_deeplink} />
               {card?.post_link && <CheckPost url={card?.post_link} />}
+              {card?.cancel_reason && (
+                <SeeCancelReason reason={card?.cancel_reason} />
+              )}
             </span>
           </div>
         ) : statusFilter === ENUM_OFFER_STATUS.MODERATION ? (

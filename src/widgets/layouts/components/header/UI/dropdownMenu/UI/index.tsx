@@ -101,12 +101,14 @@ export const DropdownMenu: FC<DropdownMenuProps> = () => {
           )}
           <ScrollArea className="h-[calc(100dvh_-_80px)]">
             <div className={styles.menu__bottom}>
-              {isAuth && USER_ROLES.includes(role) && (
+              {isAuth && [...USER_ROLES].includes(role) && (
                 <div className={styles.wallet__block}>
                   <WalletsCard />
                 </div>
               )}
-              {(USER_ROLES.includes(role) || role === ENUM_ROLES.MANAGER) && (
+              {[...USER_ROLES, ENUM_ROLES.AGENCY, ENUM_ROLES.MANAGER].includes(
+                role,
+              ) && (
                 <div className={styles.accordion__block}>
                   <p className={styles.accordion__title}>
                     {t("burger_menu.services")}

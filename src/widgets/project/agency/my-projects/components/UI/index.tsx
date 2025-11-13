@@ -1,6 +1,6 @@
 import {
-  ENUM_MANAGER_PROJECT_STATUS,
-  IManagerAgencyProjectCard,
+  ENUM_AGENCY_PROJECT_STATUS,
+  IMyAgencyProjectCard,
 } from "@entities/project";
 import { ZeroManagerProject } from "@features/project";
 import { INTERSECTION_ELEMENTS, PAGE_ANIMATION } from "@shared/config";
@@ -8,19 +8,19 @@ import { Accordion, ShowMoreBtn, SpinnerLoader } from "@shared/ui";
 import { getAnimationDelay } from "@shared/utils";
 import { motion } from "framer-motion";
 import { FC } from "react";
-import { MyManagerProjectCard, SkeletonManagerProjectCard } from "../card";
+import { MyAgencyProjectCard, SkeletonManagerProjectCard } from "../card";
 import styles from "./styles.module.scss";
 
-interface MyManagerProjectsListProps {
-  projects: IManagerAgencyProjectCard[];
+interface MyAgencyProjectsListProps {
+  projects: IMyAgencyProjectCard[];
   handleOnChangePage: () => void;
   isLoading: boolean;
   isLast: boolean;
-  statusFilter: ENUM_MANAGER_PROJECT_STATUS;
+  statusFilter: ENUM_AGENCY_PROJECT_STATUS;
   currentPage: number;
 }
 
-export const MyManagerProjectsList: FC<MyManagerProjectsListProps> = ({
+export const MyAgencyProjectsList: FC<MyAgencyProjectsListProps> = ({
   projects,
   handleOnChangePage,
   isLoading,
@@ -49,7 +49,7 @@ export const MyManagerProjectsList: FC<MyManagerProjectsListProps> = ({
                 variants={PAGE_ANIMATION.animationUp}
                 className={styles.motion}
               >
-                <MyManagerProjectCard statusFilter={statusFilter} card={card} />
+                <MyAgencyProjectCard statusFilter={statusFilter} card={card} />
               </motion.div>
             ))}
             {isLoading &&

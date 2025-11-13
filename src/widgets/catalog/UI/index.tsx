@@ -2,6 +2,8 @@ import { platformTypesNum } from "@entities/platform";
 import {
   CATALOG_FILTER,
   catalogAPI,
+  ENUM_AGENCY_PROJECT_TYPES,
+  ENUM_AGENCY_PROJECT_STATUS,
   ENUM_MANAGER_PROJECT_STATUS,
   ENUM_MANAGER_PROJECT_TYPES,
   getCatalogReq,
@@ -110,7 +112,12 @@ export const CatalogBlock: FC = () => {
         language: language?.id || USER_LANGUAGES_LIST[0].id,
         project_id: projectId,
       },
-      { skip: !isAuth || !projectId || role !== ENUM_ROLES.MANAGER },
+      {
+        skip:
+          !isAuth ||
+          !projectId ||
+          (role !== ENUM_ROLES.MANAGER && role !== ENUM_ROLES.AGENCY),
+      },
     );
 
   const { data: catalogPublic, isFetching: isCatalogLoading } =
@@ -133,7 +140,11 @@ export const CatalogBlock: FC = () => {
       guest_id: guestId,
     },
     {
-      skip: !isAuth || (role == ENUM_ROLES.MANAGER && projectId ? true : false),
+      skip:
+        !isAuth ||
+        ((role == ENUM_ROLES.MANAGER || role == ENUM_ROLES.AGENCY) && projectId
+          ? true
+          : false),
     },
   );
 
@@ -158,7 +169,7 @@ export const CatalogBlock: FC = () => {
     const currentData =
       isAuth && role === ENUM_ROLES.ADVERTISER
         ? catalogAuth
-        : isAuth && role === ENUM_ROLES.MANAGER
+        : isAuth && (role === ENUM_ROLES.MANAGER || role === ENUM_ROLES.AGENCY)
           ? projectId
             ? catalogManager
             : catalogManagerPublic
@@ -209,7 +220,12 @@ export const CatalogBlock: FC = () => {
       project_id: projectId,
       language: language?.id || USER_LANGUAGES_LIST[0].id,
     },
-    { skip: !isAuth || role !== ENUM_ROLES.MANAGER || !projectId },
+    {
+      skip:
+        !isAuth ||
+        (role !== ENUM_ROLES.MANAGER && role !== ENUM_ROLES.AGENCY) ||
+        !projectId,
+    },
   );
 
   const { data: cartPub } = useReadPublicCartQuery(
@@ -232,7 +248,11 @@ export const CatalogBlock: FC = () => {
   }, [cartPub]);
 
   useEffect(() => {
-    if (isAuth && role === ENUM_ROLES.MANAGER && cartManager) {
+    if (
+      isAuth &&
+      (role === ENUM_ROLES.MANAGER || role === ENUM_ROLES.AGENCY) &&
+      cartManager
+    ) {
       setCurrentCart(cartManager);
     }
   }, [cartManager]);
@@ -247,14 +267,21 @@ export const CatalogBlock: FC = () => {
   const [removeFromManagerCart] = useRemoveFromManagerCartMutation();
 
   const handleChangeCards = (cartChannel: ICatalogChannel) => {
-    if (role === ENUM_ROLES.MANAGER && !projectId) {
+    if (
+      (role === ENUM_ROLES.MANAGER || role === ENUM_ROLES.AGENCY) &&
+      !projectId
+    ) {
       toast({
         variant: "error",
         title: t("toasts.catalog.manager.error"),
         action: (
           <ToastAction altText="Ok">
             <Link
-              to={`${ENUM_PATHS.ORDERS}?project_type=${ENUM_MANAGER_PROJECT_TYPES.MY_PROJECT}&project_status=${ENUM_MANAGER_PROJECT_STATUS.ACTIVE}`}
+              to={
+                role === ENUM_ROLES.AGENCY
+                  ? `${ENUM_PATHS.ORDERS}?project_type=${ENUM_AGENCY_PROJECT_TYPES.MY_PROJECT}&project_status=${ENUM_AGENCY_PROJECT_STATUS.ACTIVE}`
+                  : `${ENUM_PATHS.ORDERS}?project_type=${ENUM_MANAGER_PROJECT_TYPES.TURNKEY_PROJECT}&project_status=${ENUM_MANAGER_PROJECT_STATUS.ACTIVE}`
+              }
             >
               {t("toasts.catalog.manager.action")}
             </Link>
@@ -280,7 +307,7 @@ export const CatalogBlock: FC = () => {
     const currentCard = (
       (isAuth && role == ENUM_ROLES.ADVERTISER
         ? catalogAuth?.channels
-        : isAuth && role == ENUM_ROLES.MANAGER
+        : isAuth && (role == ENUM_ROLES.MANAGER || role == ENUM_ROLES.AGENCY)
           ? catalogManager?.channels
           : catalogPublic?.channels) || []
     )?.find((card) => card?.id === cartChannel.id);
@@ -306,7 +333,8 @@ export const CatalogBlock: FC = () => {
         newCards = (
           (isAuth && role == ENUM_ROLES.ADVERTISER
             ? catalogAuth?.channels
-            : isAuth && role == ENUM_ROLES.MANAGER
+            : isAuth &&
+                (role == ENUM_ROLES.MANAGER || role == ENUM_ROLES.AGENCY)
               ? catalogManager?.channels
               : catalogPublic?.channels) || []
         ).map((card) => {
@@ -347,7 +375,11 @@ export const CatalogBlock: FC = () => {
               });
               console.error("Ошибка при добавлении в корзину", error);
             });
-        } else if (isAuth && role === ENUM_ROLES.MANAGER && projectId) {
+        } else if (
+          isAuth &&
+          (role === ENUM_ROLES.MANAGER || role === ENUM_ROLES.AGENCY) &&
+          projectId
+        ) {
           addToManagerCart({ ...addReq, project_id: projectId })
             .unwrap()
             .then((data) => {
@@ -395,7 +427,11 @@ export const CatalogBlock: FC = () => {
               });
               console.error("Ошибка при добавлении в корзину", error);
             });
-        } else if (isAuth && role === ENUM_ROLES.MANAGER && projectId) {
+        } else if (
+          isAuth &&
+          (role === ENUM_ROLES.MANAGER || role === ENUM_ROLES.AGENCY) &&
+          projectId
+        ) {
           addToManagerCart({ ...addReq, project_id: projectId })
             .unwrap()
             .then((data) => {
@@ -413,7 +449,8 @@ export const CatalogBlock: FC = () => {
         newCards = (
           (isAuth && role == ENUM_ROLES.ADVERTISER
             ? catalogAuth?.channels
-            : isAuth && role == ENUM_ROLES.MANAGER
+            : isAuth &&
+                (role == ENUM_ROLES.MANAGER || role == ENUM_ROLES.AGENCY)
               ? catalogManager?.channels
               : catalogPublic?.channels) || []
         ).map((card) => {
@@ -458,7 +495,11 @@ export const CatalogBlock: FC = () => {
               });
               console.error("Ошибка при удалении с корзины", error);
             });
-        } else if (isAuth && role === ENUM_ROLES.MANAGER && projectId) {
+        } else if (
+          isAuth &&
+          (role === ENUM_ROLES.MANAGER || role === ENUM_ROLES.AGENCY) &&
+          projectId
+        ) {
           removeFromManagerCart({ ...removeReq, project_id: projectId })
             .unwrap()
             .then((data) => {
@@ -476,7 +517,8 @@ export const CatalogBlock: FC = () => {
         newCards = (
           (isAuth && role == ENUM_ROLES.ADVERTISER
             ? catalogAuth?.channels
-            : isAuth && role == ENUM_ROLES.MANAGER
+            : isAuth &&
+                (role == ENUM_ROLES.MANAGER || role == ENUM_ROLES.AGENCY)
               ? catalogManager?.channels
               : catalogPublic?.channels) || []
         ).map((card) => {
@@ -556,7 +598,9 @@ export const CatalogBlock: FC = () => {
                     ? mockData
                     : (isAuth && role == ENUM_ROLES.ADVERTISER
                         ? catalogAuth?.channels
-                        : isAuth && role == ENUM_ROLES.MANAGER
+                        : isAuth &&
+                            (role == ENUM_ROLES.MANAGER ||
+                              role == ENUM_ROLES.AGENCY)
                           ? projectId
                             ? catalogManager?.channels
                             : catalogManagerPublic?.channels
@@ -566,7 +610,9 @@ export const CatalogBlock: FC = () => {
                 isLast={
                   (isAuth && role == ENUM_ROLES.ADVERTISER
                     ? catalogAuth?.isLast
-                    : isAuth && role == ENUM_ROLES.MANAGER
+                    : isAuth &&
+                        (role == ENUM_ROLES.MANAGER ||
+                          role == ENUM_ROLES.AGENCY)
                       ? projectId
                         ? catalogManager?.isLast
                         : catalogManagerPublic?.isLast

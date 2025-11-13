@@ -3,13 +3,13 @@ import {
   GetPostRes,
   IOrderFeature,
   desireStatus,
-  ENUM_MANAGER_PROJECT_STATUS,
   orderStatus,
   platformToIcon,
   projectStatus,
   useGetPostQuery,
-  IManagerAgencyProjectCard,
   IAgencyOrderCard,
+  IMyAgencyProjectCard,
+  ENUM_AGENCY_PROJECT_STATUS,
 } from "@entities/project";
 import { ChangeChannelProps, ChangePostProps } from "@features/order";
 import {
@@ -27,6 +27,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
+  SeeCancelReason,
   useToast,
 } from "@shared/ui";
 import { FC, useState } from "react";
@@ -35,13 +36,13 @@ import styles from "./styles.module.scss";
 import { ENUM_PATHS } from "@shared/routing";
 
 interface AgencyProjectSubcardProps {
-  card: IManagerAgencyProjectCard;
+  card: IMyAgencyProjectCard;
   subcard: IAgencyOrderCard;
   CheckBtn: FC<IOrderFeature>;
   SeePostBtn: FC<{ post: GetPostRes; post_deeplink: string }>;
   ChangeChannelBtn: FC<ChangeChannelProps>;
   ChangePostBtn: FC<ChangePostProps>;
-  statusFilter: ENUM_MANAGER_PROJECT_STATUS;
+  statusFilter: ENUM_AGENCY_PROJECT_STATUS;
 }
 
 export const AgencyProjectSubcard: FC<AgencyProjectSubcardProps> = ({
@@ -73,10 +74,10 @@ export const AgencyProjectSubcard: FC<AgencyProjectSubcardProps> = ({
 
   return (
     <div
-      className={`${styles.wrapper} ${statusFilter === ENUM_MANAGER_PROJECT_STATUS.ACTIVE ? "" : styles.no__chat}`}
+      className={`${styles.wrapper} ${statusFilter === ENUM_AGENCY_PROJECT_STATUS.ACTIVE ? "" : styles.no__chat}`}
     >
       <div
-        className={`${styles.subcard} ${statusFilter === ENUM_MANAGER_PROJECT_STATUS.ACTIVE ? styles.grid__active : styles.grid}`}
+        className={`${styles.subcard} ${statusFilter === ENUM_AGENCY_PROJECT_STATUS.ACTIVE ? styles.grid__active : styles.grid}`}
       >
         <div className={styles.platform__icon}>
           {subcard?.platform && subcard?.platform in platformToIcon
@@ -193,7 +194,7 @@ export const AgencyProjectSubcard: FC<AgencyProjectSubcardProps> = ({
         {screen > BREAKPOINT.MD && (
           <>
             {subcard?.desire?.length &&
-            statusFilter === ENUM_MANAGER_PROJECT_STATUS.REQUEST_APPROVE ? (
+            statusFilter === ENUM_AGENCY_PROJECT_STATUS.REQUEST_APPROVE ? (
               <div className={styles.subcard__posted}>
                 <div className={styles.subcard__posted__title}>
                   <p>{t(`orders_manager.order_status.comment.title`)}</p>
@@ -220,7 +221,7 @@ export const AgencyProjectSubcard: FC<AgencyProjectSubcardProps> = ({
               </div>
             ) : subcard?.api_status === orderStatus.canceled ? (
               <div className={styles.subcard__cancel}>
-                {statusFilter === ENUM_MANAGER_PROJECT_STATUS.COMPLETED ? (
+                {statusFilter === ENUM_AGENCY_PROJECT_STATUS.COMPLETED ? (
                   <p>{t(`orders_manager.order_status.rejected.title2`)}</p>
                 ) : (
                   <>
@@ -234,6 +235,9 @@ export const AgencyProjectSubcard: FC<AgencyProjectSubcardProps> = ({
                   post={post!}
                   post_deeplink={subcard?.post_deeplink}
                 />
+                {subcard?.cancel_reason && (
+                  <SeeCancelReason reason={subcard?.cancel_reason} />
+                )}
               </div>
             ) : subcard?.api_status === orderStatus.completed ? (
               <div className={styles.subcard__completed}>
@@ -374,7 +378,7 @@ export const AgencyProjectSubcard: FC<AgencyProjectSubcardProps> = ({
       {screen <= BREAKPOINT.MD && (
         <>
           {subcard?.desire?.length &&
-          statusFilter === ENUM_MANAGER_PROJECT_STATUS.REQUEST_APPROVE ? (
+          statusFilter === ENUM_AGENCY_PROJECT_STATUS.REQUEST_APPROVE ? (
             <div className={styles.subcard__posted}>
               <div className={styles.subcard__posted__title}>
                 <p>{t(`orders_manager.order_status.comment.title`)}</p>
@@ -402,7 +406,7 @@ export const AgencyProjectSubcard: FC<AgencyProjectSubcardProps> = ({
             </div>
           ) : subcard?.api_status === orderStatus.canceled ? (
             <div className={styles.subcard__cancel}>
-              {statusFilter === ENUM_MANAGER_PROJECT_STATUS.COMPLETED ? (
+              {statusFilter === ENUM_AGENCY_PROJECT_STATUS.COMPLETED ? (
                 <p>{t(`orders_manager.order_status.rejected.title2`)}</p>
               ) : (
                 <>
@@ -412,10 +416,13 @@ export const AgencyProjectSubcard: FC<AgencyProjectSubcardProps> = ({
               )}
               <SeePostBtn post={post!} post_deeplink={subcard?.post_deeplink} />
               {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
+              {subcard?.cancel_reason && (
+                <SeeCancelReason reason={subcard?.cancel_reason} />
+              )}
             </div>
           ) : subcard?.api_status === orderStatus.completed ? (
             <div className={styles.subcard__completed}>
-              {statusFilter === ENUM_MANAGER_PROJECT_STATUS.COMPLETED ? (
+              {statusFilter === ENUM_AGENCY_PROJECT_STATUS.COMPLETED ? (
                 <p>{t(`orders_advertiser.order_status.completed.title2`)}</p>
               ) : (
                 <>

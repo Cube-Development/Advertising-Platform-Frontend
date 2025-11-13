@@ -47,7 +47,7 @@
       "cooperation_title": "Hamkorlik bo'yicha savollar",
       "email": "Info@blogix.uz",
       "email_title": "24/7 texnik qo'llab-quvvatlash",
-      "address": "Toshkent sh., 123123, Nikuyevo ko'chasi, 123-uy, 'Kongress' biznes markazi, 1-qavat"
+      "address": "Karakalpakstan, MUYNAK rayoni, Aral MFY, Ajiniyoz ko'chasi, 111-uy"
     },
     "all_rights": "Cubeinc Development © Barcha huquqlar himoyalangan"
   },
@@ -122,7 +122,8 @@
     "blogger": "Blogger",
     "advertiser": "Reklama beruvchi",
     "manager": "Menejer",
-    "moderator": "Moderator"
+    "moderator": "Moderator",
+    "agency": "Agentlik"
   },
 
   "my_profile": {
@@ -2158,7 +2159,10 @@
     "accept_date": "Buyurtmani qabul qilish",
     "reason": "Sabab",
     "sign": "Qabul qilish",
-    "signed": "Qabul qilindi"
+    "signed": "Qabul qilindi",
+    "reject_title": "Buyurtmani bekor qilish",
+    "reject_placeholder": "Buyurtmani bekor qilish sababini yozing... Maximum 300 ta belgi",
+    "see_cancel_reason": "Sabab"
   },
 
   "platform_btn": {

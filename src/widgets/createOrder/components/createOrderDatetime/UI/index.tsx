@@ -47,7 +47,7 @@ export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
         );
       }, true);
       if (condition) {
-        if (role === ENUM_ROLES.MANAGER) {
+        if (role === ENUM_ROLES.AGENCY) {
           onChangeBlur("prices");
         } else {
           onChangeBlur("payment");

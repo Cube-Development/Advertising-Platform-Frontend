@@ -21,7 +21,7 @@ import {
   SubsIcon,
 } from "@shared/assets";
 import { ENUM_PATHS } from "@shared/routing";
-import { useToast } from "@shared/ui";
+import { SeeCancelReason, useToast } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -285,6 +285,9 @@ export const OrderCard: FC<OrderCardProps> = ({
                   post_deeplink={subcard?.post_deeplink}
                 />
                 {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
+                {subcard?.cancel_reason && (
+                  <SeeCancelReason reason={subcard?.cancel_reason} />
+                )}
               </div>
             ) : subcard?.api_status === orderStatus.completed ? (
               <div
@@ -418,6 +421,9 @@ export const OrderCard: FC<OrderCardProps> = ({
                   </span>
                 </div>
                 <SeePost post={post!} post_deeplink={subcard?.post_deeplink} />
+                {subcard?.cancel_reason && (
+                  <SeeCancelReason reason={subcard?.cancel_reason} />
+                )}
               </div>
             ) : (
               <div className="grid grid-flow-row items-center justify-center content-center gap-[10px] h-full text-center">

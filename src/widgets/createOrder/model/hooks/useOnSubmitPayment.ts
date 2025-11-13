@@ -1,7 +1,10 @@
 import {
+  ENUM_AGENCY_PROJECT_STATUS,
+  ENUM_AGENCY_PROJECT_TYPES,
   ENUM_MANAGER_PROJECT_STATUS,
   ENUM_MANAGER_PROJECT_TYPES,
   ICreatePostForm,
+  useApproveProjectMutation,
   // useApproveProjectMutation,
   useCreateOrderDatesMutation,
   useCreateOrderPricesMutation,
@@ -27,7 +30,7 @@ export const useOnSubmitPayment = () => {
   const [createOrderDates] = useCreateOrderDatesMutation();
   const [createOrderPrices] = useCreateOrderPricesMutation();
   const [createPayment] = useCreatePaymentProjectMutation();
-  // const [approveProject] = useApproveProjectMutation();
+  const [approveProject] = useApproveProjectMutation();
   const [requestApprove] = useRequestApproveMutation();
   const { toast } = useToast();
   const navigate = useNavigate();
@@ -57,7 +60,7 @@ export const useOnSubmitPayment = () => {
       await handleProjectDates(formData);
 
       // Создание цен заказов
-      if (role === ENUM_ROLES.MANAGER) {
+      if (role === ENUM_ROLES.AGENCY) {
         await handleProjectPrices(formData);
       }
 
@@ -131,11 +134,9 @@ export const useOnSubmitPayment = () => {
           project_id: projectId,
           wallet_type: wallet_type!,
         }).unwrap();
-      }
-      // else if (role === ENUM_ROLES.MANAGER && !isManagerOwnProject) {
-      //   await approveProject({ project_id: projectId }).unwrap();
-      // }
-      else if (role === ENUM_ROLES.MANAGER) {
+      } else if (role === ENUM_ROLES.MANAGER) {
+        await approveProject({ project_id: projectId }).unwrap();
+      } else if (role === ENUM_ROLES.AGENCY) {
         await requestApprove({ project_id: projectId }).unwrap();
       }
       toast({
@@ -144,7 +145,11 @@ export const useOnSubmitPayment = () => {
       });
       if (role === ENUM_ROLES.MANAGER) {
         navigate(
-          `${ENUM_PATHS.ORDERS}?project_type=${ENUM_MANAGER_PROJECT_TYPES.MY_PROJECT}&project_status=${ENUM_MANAGER_PROJECT_STATUS.REQUEST_APPROVE}`,
+          `${ENUM_PATHS.ORDERS}?project_type=${ENUM_MANAGER_PROJECT_TYPES.TURNKEY_PROJECT}&project_status=${ENUM_MANAGER_PROJECT_STATUS.REQUEST_APPROVE}`,
+        );
+      } else if (role === ENUM_ROLES.AGENCY) {
+        navigate(
+          `${ENUM_PATHS.ORDERS}?project_type=${ENUM_AGENCY_PROJECT_TYPES.MY_PROJECT}&project_status=${ENUM_AGENCY_PROJECT_STATUS.REQUEST_APPROVE}`,
         );
       } else {
         navigate(ENUM_PATHS.ORDERS);
