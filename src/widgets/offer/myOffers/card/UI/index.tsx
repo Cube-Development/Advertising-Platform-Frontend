@@ -122,10 +122,6 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
               </div>
             </div>
             <div className={styles.card__active__buttons}>
-              <span className="!grid !grid-flow-row !gap-2">
-                <SeePost post={post!} post_deeplink={card?.post_deeplink} />
-                {card?.post_link && <CheckPost url={card?.post_link} />}
-              </span>
               <div
                 className={`${
                   CheckDate(
@@ -141,6 +137,10 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
               >
                 <SendLink order_id={card.id} />
               </div>
+              <span className="!grid !grid-flow-row !gap-2">
+                <SeePost post={post!} post_deeplink={card?.post_deeplink} />
+                {card?.post_link && <CheckPost url={card?.post_link} />}
+              </span>
             </div>
           </div>
         ) : statusFilter === ENUM_OFFER_STATUS.ACTIVE &&

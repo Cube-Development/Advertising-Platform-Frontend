@@ -17,7 +17,6 @@ import {
   DrawerContent,
   DrawerTrigger,
   MyButton,
-  ToastAction,
   useToast,
 } from "@shared/ui";
 import { Loader, SendHorizonal, X } from "lucide-react";
@@ -82,12 +81,20 @@ export const AcceptOffer: FC<IOrderFeature> = ({ order_id, dates }) => {
         status: ENUM_OFFER_STATUS.WAIT,
       });
     } catch (error) {
-      toast({
-        variant: "error",
-        title: t("toasts.offers_blogger.accept_offer.error"),
-        action: <ToastAction altText="Ok">Ok</ToastAction>,
-      });
-      console.error("error: ", error);
+      if (
+        (error as unknown as { data?: { code: number } })?.data?.code === -3011
+      ) {
+        toast({
+          variant: "error",
+          title: (error as unknown as { data?: { message: string } })?.data
+            ?.message as string,
+        });
+      } else {
+        toast({
+          variant: "error",
+          title: t("toasts.offers_blogger.accept_offer.error"),
+        });
+      }
     }
   };
 

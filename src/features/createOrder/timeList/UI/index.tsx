@@ -19,19 +19,30 @@ interface ITime {
   timeStringList: string[];
 }
 
+// const timeSlots: string[] = [
+//   "00:00 - 02:00",
+//   "02:00 - 04:00",
+//   "04:00 - 06:00",
+//   "06:00 - 08:00",
+//   "08:00 - 10:00",
+//   "10:00 - 12:00",
+//   "12:00 - 14:00",
+//   "14:00 - 16:00",
+//   "16:00 - 18:00",
+//   "18:00 - 20:00",
+//   "20:00 - 22:00",
+//   "22:00 - 23:59",
+// ];
+
 const timeSlots: string[] = [
-  "00:00 - 02:00",
-  "02:00 - 04:00",
-  "04:00 - 06:00",
-  "06:00 - 08:00",
-  "08:00 - 10:00",
-  "10:00 - 12:00",
-  "12:00 - 14:00",
-  "14:00 - 16:00",
-  "16:00 - 18:00",
-  "18:00 - 20:00",
-  "20:00 - 22:00",
-  "22:00 - 23:59",
+  "00:00 - 03:00",
+  "03:00 - 06:00",
+  "06:00 - 09:00",
+  "09:00 - 12:00",
+  "12:00 - 15:00",
+  "15:00 - 18:00",
+  "18:00 - 21:00",
+  "21:00 - 23:59",
 ];
 
 export const TimeList: FC<TimeListProps> = ({ onChange, startTime }) => {
@@ -42,6 +53,23 @@ export const TimeList: FC<TimeListProps> = ({ onChange, startTime }) => {
     timeIndexList: [],
     timeStringList: [],
   });
+
+  // Получаем текущее время пользователя
+  const getCurrentTime = () => {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    return hours * 60 + minutes; // возвращаем время в минутах от начала дня
+  };
+
+  // Проверяем, прошел ли слот
+  const isSlotPassed = (timeSlot: string) => {
+    const currentTimeInMinutes = getCurrentTime();
+    const [, endTime] = timeSlot.split(" - ");
+    const [endHours, endMinutes] = endTime.split(":").map(Number);
+    const endTimeInMinutes = endHours * 60 + endMinutes;
+    return currentTimeInMinutes > endTimeInMinutes;
+  };
 
   // установка начальных временных интервалов если они приходят из бека
   useEffect(() => {
@@ -162,22 +190,30 @@ export const TimeList: FC<TimeListProps> = ({ onChange, startTime }) => {
         </AlertDialogTitle>
         <div className={styles.timeList}>
           <div className={styles.leftGrid}>
-            {timeSlots.map((timeSlot, index) => (
-              <div
-                key={timeSlot}
-                className={`${styles.timeSlot} ${
-                  selectedTimesObject.timeIndexList.includes(index)
-                    ? styles.active
-                    : index > Math.min(...selectedTimesObject.timeIndexList) &&
-                        index < Math.max(...selectedTimesObject.timeIndexList)
-                      ? styles.active__in
-                      : ""
-                }`}
-                onClick={() => selectTime(index)}
-              >
-                <p>{timeSlot}</p>
-              </div>
-            ))}
+            {timeSlots.map((timeSlot, index) => {
+              const isDisabled = isSlotPassed(timeSlot);
+              return (
+                <div
+                  key={timeSlot}
+                  className={`${styles.timeSlot} ${
+                    selectedTimesObject.timeIndexList.includes(index)
+                      ? styles.active
+                      : index >
+                            Math.min(...selectedTimesObject.timeIndexList) &&
+                          index < Math.max(...selectedTimesObject.timeIndexList)
+                        ? styles.active__in
+                        : ""
+                  } ${isDisabled ? styles.disabled : ""}`}
+                  onClick={() => !isDisabled && selectTime(index)}
+                  style={{
+                    cursor: isDisabled ? "not-allowed" : "pointer",
+                    opacity: isDisabled ? 0.5 : 1,
+                  }}
+                >
+                  <p>{timeSlot}</p>
+                </div>
+              );
+            })}
           </div>
           <MyButton
             type="button"
