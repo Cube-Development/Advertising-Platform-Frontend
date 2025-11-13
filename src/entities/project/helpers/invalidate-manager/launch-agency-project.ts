@@ -5,7 +5,7 @@ import {
   IGetAgencyProjectsRes,
   agencyAuthAPI,
 } from "../../api";
-import { ENUM_MANAGER_PROJECT_STATUS } from "../../config";
+import { ENUM_AGENCY_PROJECT_STATUS } from "../../config";
 
 interface Props {
   dispatch: AppDispatch;
@@ -17,7 +17,7 @@ export const invalidateManagerAgencyProjectByLaunchProject = async ({
   project_id,
 }: Props) => {
   const baseParams = {
-    status: ENUM_MANAGER_PROJECT_STATUS.REQUEST_APPROVE,
+    status: ENUM_AGENCY_PROJECT_STATUS.REQUEST_APPROVE,
   };
 
   // 1. Удалим проект (если он там есть) из кеша проектов в разработке

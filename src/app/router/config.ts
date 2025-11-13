@@ -86,7 +86,7 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
   {
     path: ENUM_PATHS.FAQ,
     component: FAQPage,
-    roles: [...USER_ROLES, ENUM_ROLES.MANAGER],
+    roles: [...USER_ROLES, ENUM_ROLES.AGENCY],
     auth: ENUM_AUTH_TYPES.PUBLIC,
     authSidebar: true,
     layout: ENUM_LAYOUT_TYPES.ROOT,
@@ -94,21 +94,26 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
   {
     path: ENUM_PATHS.PROJECT_PAGE,
     component: ProjectPage,
-    roles: [...USER_ROLES, ENUM_ROLES.MANAGER],
+    roles: [...USER_ROLES, ENUM_ROLES.AGENCY],
     auth: ENUM_AUTH_TYPES.PUBLIC,
     layout: ENUM_LAYOUT_TYPES.ROOT,
   },
   {
     path: ENUM_PATHS.NOT_FOUND,
     component: NotFoundPage,
-    roles: USER_ROLES,
+    roles: [
+      ...USER_ROLES,
+      ENUM_ROLES.AGENCY,
+      ENUM_ROLES.MANAGER,
+      ENUM_ROLES.MODERATOR,
+    ],
     auth: ENUM_AUTH_TYPES.PUBLIC,
     layout: ENUM_LAYOUT_TYPES.ROOT,
   },
   {
     path: ENUM_PATHS.CHANNEL,
     component: ChannelPage,
-    roles: [...USER_ROLES, ENUM_ROLES.MANAGER],
+    roles: [...USER_ROLES, ENUM_ROLES.AGENCY, ENUM_ROLES.MANAGER],
     auth: ENUM_AUTH_TYPES.PUBLIC,
     layout: ENUM_LAYOUT_TYPES.ROOT,
   },
@@ -155,11 +160,11 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
     layout: ENUM_LAYOUT_TYPES.ROOT,
   },
 
-  // private advertiser & manager
+  // private advertiser & manager & agency
   {
     path: ENUM_PATHS.ORDERS,
     component: OrdersPage,
-    roles: [ENUM_ROLES.ADVERTISER, ENUM_ROLES.MANAGER],
+    roles: [ENUM_ROLES.ADVERTISER, ENUM_ROLES.MANAGER, ENUM_ROLES.AGENCY],
     auth: ENUM_AUTH_TYPES.PRIVATE,
     authSidebar: true,
     layout: ENUM_LAYOUT_TYPES.ROOT,
@@ -167,28 +172,28 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
   {
     path: ENUM_PATHS.CATALOG,
     component: CatalogPage,
-    roles: [ENUM_ROLES.ADVERTISER, ENUM_ROLES.MANAGER],
+    roles: [ENUM_ROLES.ADVERTISER, ENUM_ROLES.MANAGER, ENUM_ROLES.AGENCY],
     auth: ENUM_AUTH_TYPES.PUBLIC,
     layout: ENUM_LAYOUT_TYPES.ROOT,
   },
   {
     path: ENUM_PATHS.CART,
     component: CartPage,
-    roles: [ENUM_ROLES.ADVERTISER, ENUM_ROLES.MANAGER],
+    roles: [ENUM_ROLES.ADVERTISER, ENUM_ROLES.MANAGER, ENUM_ROLES.AGENCY],
     auth: ENUM_AUTH_TYPES.PUBLIC,
     layout: ENUM_LAYOUT_TYPES.ROOT,
   },
   {
     path: ENUM_PATHS.CREATE_ORDER,
     component: CreateOrderPage,
-    roles: [ENUM_ROLES.ADVERTISER, ENUM_ROLES.MANAGER],
+    roles: [ENUM_ROLES.ADVERTISER, ENUM_ROLES.MANAGER, ENUM_ROLES.AGENCY],
     auth: ENUM_AUTH_TYPES.PRIVATE,
     layout: ENUM_LAYOUT_TYPES.ROOT,
   },
   {
     path: ENUM_PATHS.POST_TEMPLATES,
     component: PostTemplatesPage,
-    roles: [ENUM_ROLES.ADVERTISER, ENUM_ROLES.MANAGER],
+    roles: [ENUM_ROLES.ADVERTISER, ENUM_ROLES.MANAGER, ENUM_ROLES.AGENCY],
     auth: ENUM_AUTH_TYPES.PRIVATE,
     authSidebar: true,
     layout: ENUM_LAYOUT_TYPES.ROOT,
@@ -198,7 +203,7 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
   {
     path: ENUM_PATHS.DOCUMENTS,
     component: DocumentsPage,
-    roles: [...USER_ROLES, ENUM_ROLES.MANAGER],
+    roles: [...USER_ROLES, ENUM_ROLES.AGENCY],
     auth: ENUM_AUTH_TYPES.PRIVATE,
     authSidebar: true,
     layout: ENUM_LAYOUT_TYPES.ROOT,
@@ -214,7 +219,7 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
   {
     path: ENUM_PATHS.WALLET_WITHDRAW,
     component: WithdrawalPage,
-    roles: [...USER_ROLES, ENUM_ROLES.MANAGER],
+    roles: [...USER_ROLES, ENUM_ROLES.AGENCY],
     auth: ENUM_AUTH_TYPES.PRIVATE,
     authSidebar: true,
     layout: ENUM_LAYOUT_TYPES.ROOT,
@@ -222,7 +227,7 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
   {
     path: ENUM_PATHS.WALLET_HISTORY,
     component: WalletHistoryPage,
-    roles: [...USER_ROLES, ENUM_ROLES.MANAGER],
+    roles: [...USER_ROLES, ENUM_ROLES.AGENCY],
     auth: ENUM_AUTH_TYPES.PRIVATE,
     authSidebar: true,
     layout: ENUM_LAYOUT_TYPES.ROOT,
@@ -230,7 +235,7 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
   {
     path: ENUM_PATHS.PROFILE,
     component: ProfilePage,
-    roles: [...USER_ROLES, ENUM_ROLES.MANAGER],
+    roles: [...USER_ROLES, ENUM_ROLES.AGENCY],
     auth: ENUM_AUTH_TYPES.PRIVATE,
     authSidebar: true,
     layout: ENUM_LAYOUT_TYPES.ROOT,

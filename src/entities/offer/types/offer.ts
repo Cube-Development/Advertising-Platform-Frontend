@@ -32,6 +32,7 @@ export interface IBloggerOfferCard {
   project_name?: string;
   post_link?: string;
   post_deeplink: string;
+  cancel_reason?: string;
 }
 
 export interface IBloggerOffers {

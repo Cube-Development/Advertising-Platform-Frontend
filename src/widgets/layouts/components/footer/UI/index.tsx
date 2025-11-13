@@ -32,7 +32,7 @@ export const Footer: FC = () => {
             <div className={styles.results__wrapper}>
               <div className={styles.logo}>Blogix</div>
               <div className={styles.results}>
-                <div className={styles.results__item}>
+                {/* <div className={styles.results__item}>
                   <h4>101.043</h4>
                   <p>{t("footer.results.users")}</p>
                 </div>
@@ -43,7 +43,7 @@ export const Footer: FC = () => {
                 <div className={styles.results__item}>
                   <h4>1208</h4>
                   <p>{t("footer.results.online")}</p>
-                </div>
+                </div> */}
               </div>
             </div>
             <div className={styles.content}>
@@ -63,15 +63,24 @@ export const Footer: FC = () => {
               </div>
               <div className={styles.contacts}>
                 <div className={styles.contacts__item}>
-                  <h4>{t("footer.contacts.tech_contact")}</h4>
+                  <h4>
+                    {/* {t("footer.contacts.tech_contact")} */}
+                    ...
+                  </h4>
                   <p>{t("footer.contacts.tech_title")}</p>
                 </div>
                 <div className={styles.contacts__item}>
-                  <h4>{t("footer.contacts.cooperation_contact")}</h4>
+                  <h4>
+                    {/* {t("footer.contacts.cooperation_contact")} */}
+                    ...
+                  </h4>
                   <p>{t("footer.contacts.cooperation_title")}</p>
                 </div>
                 <div className={styles.contacts__item}>
-                  <h4>{t("footer.contacts.email")}</h4>
+                  <h4>
+                    {/* {t("footer.contacts.email")} */}
+                    ...
+                  </h4>
                   <p>{t("footer.contacts.email_title")}</p>
                 </div>
                 <div className={styles.contacts__address}>

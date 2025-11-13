@@ -8,23 +8,23 @@ import {
 import {
   ENUM_VIEWER_ROLES,
   IAgencyProjectCard,
-  IManagerAgencyProjectCard,
+  IMyAgencyProjectCard,
   IOrderPrice,
   IOrderReportInfo,
 } from "../types";
-import { desireStatus, ENUM_MANAGER_PROJECT_STATUS } from "../config";
+import { desireStatus, ENUM_AGENCY_PROJECT_STATUS } from "../config";
 import { ENUM_LANGUAGES_NUM } from "@shared/languages";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 
 export interface IGetAgencyProjectsReq {
   page: number;
-  status: Exclude<ENUM_MANAGER_PROJECT_STATUS, ENUM_MANAGER_PROJECT_STATUS.NEW>;
+  status: ENUM_AGENCY_PROJECT_STATUS;
   elements_on_page?: number;
 }
 export interface IGetAgencyProjectsRes {
   page: number;
   elements: number;
-  projects: IManagerAgencyProjectCard[];
+  projects: IMyAgencyProjectCard[];
   status?: string;
   isLast?: boolean;
 }
@@ -62,7 +62,7 @@ export const agencyAuthAPI = authApi.injectEndpoints({
           isLast:
             response?.elements <=
               response?.projects?.length +
-                (response?.page - 1) * INTERSECTION_ELEMENTS.MANAGER_PROJECTS ||
+                (response?.page - 1) * INTERSECTION_ELEMENTS.AGENCY_PROJECTS ||
             response?.projects?.length === 0,
         };
       },
@@ -76,18 +76,18 @@ export const agencyAuthAPI = authApi.injectEndpoints({
         arg,
       ) => {
         const newProjectsMap = new Map(
-          newItems.projects.map((p: IManagerAgencyProjectCard) => [p.id, p]),
+          newItems.projects.map((p: IMyAgencyProjectCard) => [p.id, p]),
         );
 
         // Обновляем старые элементы, если есть новые с тем же id
         const updatedOldProjects =
-          currentCache?.projects?.map((old: IManagerAgencyProjectCard) =>
+          currentCache?.projects?.map((old: IMyAgencyProjectCard) =>
             newProjectsMap.has(old.id) ? newProjectsMap.get(old.id)! : old,
           ) || [];
 
         // Убираем уже обновленные ID из новых, чтобы они не дублировались
         const newIds = new Set(
-          updatedOldProjects.map((p: IManagerAgencyProjectCard) => p.id),
+          updatedOldProjects.map((p: IMyAgencyProjectCard) => p.id),
         );
         const onlyNewProjects = newItems.projects.filter(
           (p) => !newIds.has(p.id),
@@ -199,6 +199,7 @@ export interface ICancelOrderReq {
   project_id: string;
   order_id: string;
   code: number;
+  cancel_reason?: string;
 }
 export interface IGetProjectReq {
   project_id: string;

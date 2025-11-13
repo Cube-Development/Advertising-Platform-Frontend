@@ -72,6 +72,7 @@ export interface IAdvProjectSubcard {
   is_review: boolean;
   rate?: number;
   post_deeplink: string;
+  cancel_reason?: string;
 }
 
 interface IDesire {

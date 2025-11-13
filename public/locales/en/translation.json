@@ -47,7 +47,7 @@
       "cooperation_title": "For cooperation inquiries",
       "email": "Info@blogix.uz",
       "email_title": "24/7 technical support",
-      "address": "Tashkent, 123123, Nikuyevo St., 123, Congress Business Center, 1st floor"
+      "address": "Republic of Karakalpakstan, MUYNAK DISTRICT, Aral MFY, Ajiniyoz ko'chasi, 111-uy"
     },
     "all_rights": "Cubeinc Development © All rights reserved"
   },
@@ -122,7 +122,8 @@
     "blogger": "Blogger",
     "advertiser": "Advertiser",
     "manager": "Manager",
-    "moderator": "Moderator"
+    "moderator": "Moderator",
+    "agency": "Agency"
   },
 
   "my_profile": {
@@ -2160,7 +2161,10 @@
     "accept_date": "Accept order",
     "reason": "Reason",
     "sign": "Sign",
-    "signed": "Signed"
+    "signed": "Signed",
+    "reject_title": "Cancel order",
+    "reject_placeholder": "Describe the reason for canceling the order... Maximum 300 characters",
+    "see_cancel_reason": "Reason"
   },
 
   "platform_btn": {

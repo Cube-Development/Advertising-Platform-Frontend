@@ -47,7 +47,7 @@
       "cooperation_title": "По вопросам сотрудничества",
       "email": "Info@blogix.uz",
       "email_title": "Техническая поддержка круглосуточно",
-      "address": "г. Ташкент, 123123, ул. Никуево, д. 123, бизнес-центр “Конгресс” , 1 этаж"
+      "address": "Республика Каракалпакстан, МУЙНАКСКИЙ РАЙОН, Aral MFY, Ajiniyoz ko'chasi, 111-uy"
     },
     "all_rights": "Cubeinc Development © All rights reserved"
   },
@@ -122,7 +122,8 @@
     "blogger": "Блогер",
     "advertiser": "Рекламодатель",
     "manager": "Менеджер",
-    "moderator": "Модератор"
+    "moderator": "Модератор",
+    "agency": "Агентство"
   },
 
   "my_profile": {
@@ -2472,7 +2473,10 @@
     "accept_date": "Принять заказ",
     "reason": "Причина",
     "sign": "Подписать",
-    "signed": "Подписан"
+    "signed": "Подписан",
+    "reject_title": "Отмена заказа",
+    "reject_placeholder": "Опишите причину отмены заказа... Максимум 300 символов",
+    "see_cancel_reason": "Причина"
   },
 
   "platform_btn": {

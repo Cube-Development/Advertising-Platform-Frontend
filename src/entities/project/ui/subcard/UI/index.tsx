@@ -31,6 +31,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
+  SeeCancelReason,
   useToast,
 } from "@shared/ui";
 import { FC, useState } from "react";
@@ -236,6 +237,9 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
                   post_deeplink={subcard?.post_deeplink}
                 />
                 {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
+                {subcard?.cancel_reason && (
+                  <SeeCancelReason reason={subcard?.cancel_reason} />
+                )}
               </div>
             ) : subcard?.api_status === orderStatus.completed ||
               subcard?.api_status === orderStatus.adv_accept ? (
@@ -501,6 +505,9 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
 
               <SeePostBtn post={post!} post_deeplink={subcard?.post_deeplink} />
               {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
+              {subcard?.cancel_reason && (
+                <SeeCancelReason reason={subcard?.cancel_reason} />
+              )}
             </div>
           ) : subcard?.api_status === orderStatus.completed ||
             subcard?.api_status === orderStatus.adv_accept ? (

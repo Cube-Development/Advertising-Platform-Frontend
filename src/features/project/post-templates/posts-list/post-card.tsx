@@ -62,7 +62,7 @@ export const PostCard: FC<PostCardProps> = ({
   };
 
   return (
-    <div className="grid grid-flow-row gap-4 mobile-xl:px-10 mobile-xl:py-10 px-6 py-4">
+    <div className="grid grid-flow-row gap-4 mobile-xl:px-10 mobile-xl:py-10 px-14 py-4">
       {canDelete && (
         <div className="flex items-center gap-2 justify-center truncate">
           <h2 className="max-w-[80%] truncate text-[var(--Personal-colors-light-black)] md:text-base text-sm font-semibold text-center">

@@ -123,7 +123,7 @@ export const TemplatePostsDialog = ({
         <DialogDescription className="sr-only"></DialogDescription>
         <DialogTitle className="sr-only"></DialogTitle>
         <DialogClose className="flex items-center justify-end">
-          <X className="size-[30px] md:scale-[2] scale-[1.5] rounded-full md:p-2 p-1 bg-white cursor-pointer text-black" />
+          <X className="mobile-xl:size-[30px] size-[20px] scale-[2] rounded-full md:p-2 p-1 bg-white cursor-pointer text-black" />
         </DialogClose>
         <ScrollArea className="max-h-[70vh] relative">
           <PostTemplates

@@ -3,6 +3,7 @@ import { ENUM_PATHS } from "@shared/routing";
 import { IMenuItem } from "../../header/model";
 import {
   SIDEBAR_ADVERTISER_MENU,
+  SIDEBAR_AGENCY_MENU,
   SIDEBAR_BLOGGER_MENU,
   SIDEBAR_COMMON_MENU,
   SIDEBAR_MANAGER_MENU,
@@ -30,6 +31,11 @@ export const getData = (
       toRole = role;
       toPage = ENUM_PATHS.ORDERS;
       SIDEBAR_MENU = SIDEBAR_MANAGER_MENU;
+      break;
+    case ENUM_ROLES.AGENCY:
+      toRole = role;
+      toPage = ENUM_PATHS.ORDERS;
+      SIDEBAR_MENU = SIDEBAR_AGENCY_MENU;
       break;
     default:
       toRole = role;

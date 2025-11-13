@@ -17,14 +17,14 @@ import {
 } from "@features/project";
 import {
   getProjectSubcardReq,
-  ENUM_MANAGER_PROJECT_STATUS,
   projectStatus,
   useGetManagerSubprojectsQuery,
   AgencyProjectSubcard,
-  IManagerAgencyProjectCard,
+  IMyAgencyProjectCard,
   IAgencyOrderCard,
   useGetProjectAccessCodesQuery,
   IGetProjectAccessCodesRes,
+  ENUM_AGENCY_PROJECT_STATUS,
 } from "@entities/project";
 import { useFindLanguage } from "@entities/user";
 import {
@@ -53,13 +53,13 @@ import {
 } from "@shared/ui";
 import styles from "./styles.module.scss";
 
-interface MyManagerProjectCardProps {
-  card: IManagerAgencyProjectCard;
-  statusFilter: ENUM_MANAGER_PROJECT_STATUS;
+interface MyAgencyProjectCardProps {
+  card: IMyAgencyProjectCard;
+  statusFilter: ENUM_AGENCY_PROJECT_STATUS;
   projectAccessCodes?: IGetProjectAccessCodesRes;
 }
 
-const Card: FC<MyManagerProjectCardProps> = ({
+const Card: FC<MyAgencyProjectCardProps> = ({
   card,
   statusFilter,
   projectAccessCodes,
@@ -67,7 +67,7 @@ const Card: FC<MyManagerProjectCardProps> = ({
   const { t } = useTranslation();
   return (
     <div
-      className={`${styles.card} ${statusFilter === ENUM_MANAGER_PROJECT_STATUS.REQUEST_APPROVE ? styles.request_approve : ""} ${statusFilter === ENUM_MANAGER_PROJECT_STATUS.COMPLETED ? styles.card__manager_completed : ""}`}
+      className={`${styles.card} ${statusFilter === ENUM_AGENCY_PROJECT_STATUS.REQUEST_APPROVE ? styles.request_approve : ""} ${statusFilter === ENUM_AGENCY_PROJECT_STATUS.COMPLETED ? styles.card__manager_completed : ""}`}
     >
       <div className={styles.card__description}>
         <div className={styles.card__description__data}>
@@ -136,7 +136,7 @@ const Card: FC<MyManagerProjectCardProps> = ({
               <small>{t("symbol")}</small>
             </span>
           </div>
-          {statusFilter === ENUM_MANAGER_PROJECT_STATUS.COMPLETED && (
+          {statusFilter === ENUM_AGENCY_PROJECT_STATUS.COMPLETED && (
             <div>
               <p>{t("orders_manager.card.rest")}:</p>
               <span>
@@ -147,7 +147,7 @@ const Card: FC<MyManagerProjectCardProps> = ({
           )}
         </div>
         <>
-          {statusFilter === ENUM_MANAGER_PROJECT_STATUS.REQUEST_APPROVE ? (
+          {statusFilter === ENUM_AGENCY_PROJECT_STATUS.REQUEST_APPROVE ? (
             <div className={styles.card__info__icons_manager_request_approve}>
               {card?.is_request_approve !== projectStatus.approved ? (
                 <EditProject project_id={card?.id} />
@@ -163,7 +163,7 @@ const Card: FC<MyManagerProjectCardProps> = ({
                 isAgency={true}
               />
             </div>
-          ) : statusFilter === ENUM_MANAGER_PROJECT_STATUS.COMPLETED ? (
+          ) : statusFilter === ENUM_AGENCY_PROJECT_STATUS.COMPLETED ? (
             <div className={styles.card__info__icons_manager_completed}>
               <div className={styles.top}>
                 <div>
@@ -209,7 +209,7 @@ const Card: FC<MyManagerProjectCardProps> = ({
   );
 };
 
-export const MyManagerProjectCard: FC<MyManagerProjectCardProps> = ({
+export const MyAgencyProjectCard: FC<MyAgencyProjectCardProps> = ({
   card,
   statusFilter,
 }) => {

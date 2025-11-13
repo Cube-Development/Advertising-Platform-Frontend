@@ -7,6 +7,8 @@ import {
   useLaunchProjectMutation,
   ENUM_MANAGER_PROJECT_TYPES,
   ENUM_MANAGER_PROJECT_STATUS,
+  ENUM_AGENCY_PROJECT_TYPES,
+  ENUM_AGENCY_PROJECT_STATUS,
 } from "@entities/project";
 import { useFindLanguage } from "@entities/user";
 import { useAppDispatch } from "@shared/hooks";
@@ -60,7 +62,9 @@ export const LaunchProject: FC<LaunchProjectProps> = ({
         title: t("toasts.orders_manager.launch_project.success"),
       });
       navigate(
-        `${ENUM_PATHS.ORDERS}?project_type=${ENUM_MANAGER_PROJECT_TYPES.MY_PROJECT}&project_status=${ENUM_MANAGER_PROJECT_STATUS.ACTIVE}`,
+        isAgency
+          ? `${ENUM_PATHS.ORDERS}?project_type=${ENUM_AGENCY_PROJECT_TYPES.MY_PROJECT}&project_status=${ENUM_AGENCY_PROJECT_STATUS.ACTIVE}`
+          : `${ENUM_PATHS.ORDERS}?project_type=${ENUM_MANAGER_PROJECT_TYPES.TURNKEY_PROJECT}&project_status=${ENUM_MANAGER_PROJECT_STATUS.ACTIVE}`,
       );
     } catch (error) {
       toast({

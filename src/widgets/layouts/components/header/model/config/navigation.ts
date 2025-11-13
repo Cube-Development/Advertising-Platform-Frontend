@@ -32,6 +32,11 @@ export const NAVBAR_ADVERTISER_MENU = [
   { text: "pages.faq", href: ENUM_PATHS.FAQ },
 ];
 
+export const NAVBAR_AGENCY_MENU = [
+  { text: "pages.catalog", href: ENUM_PATHS.CATALOG, img: undefined },
+  { text: "pages.faq", href: ENUM_PATHS.FAQ, img: undefined },
+];
+
 export const NAVBAR_MANAGER_MENU = [
   { text: "pages.catalog", href: ENUM_PATHS.CATALOG, img: undefined },
   { text: "pages.faq", href: ENUM_PATHS.FAQ, img: undefined },

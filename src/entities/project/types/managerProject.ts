@@ -112,6 +112,7 @@ export interface IManagerProjectSubcard {
   is_review: boolean;
   rate?: number;
   post_deeplink: string;
+  cancel_reason?: string;
 }
 
 export interface IDesire {

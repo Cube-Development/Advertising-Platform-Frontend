@@ -10,8 +10,10 @@ import {
   ENUM_ADV_MY_PROJECT_STATUS,
   ENUM_PROJECT_TYPES,
   ENUM_MANAGER_PROJECT_TYPES,
-  MANAGER_MY_PROJECT_TABS_LIST,
-  // MANAGER_TURNKEY_PROJECT_TABS_LIST,
+  MANAGER_TURNKEY_PROJECT_TABS_LIST,
+  AGENCY_MY_PROJECT_TABS_LIST,
+  ENUM_AGENCY_PROJECT_TYPES,
+  ENUM_AGENCY_PROJECT_STATUS,
 } from "@entities/project";
 import { ENUM_ROLES } from "@entities/user";
 import {
@@ -31,19 +33,18 @@ import { AddManagerNewProject, NewProject } from "@features/project";
 import { useAppSelector } from "@shared/hooks";
 import { ENUM_PAGE_FILTER } from "@shared/routing";
 import { FC } from "react";
-import { UseFormSetValue } from "react-hook-form";
 import styles from "./styles.module.scss";
 
 interface BarFilterProps {
   page: ENUM_PAGE_FILTER;
   listLength?: boolean;
-  setValue?: UseFormSetValue<any>;
   typeFilter?: ENUM_PROJECT_TYPES | string;
   statusFilter:
     | ENUM_ADV_MANAGER_PROJECT_STATUS
     | ENUM_ADV_MY_PROJECT_STATUS
     | ENUM_CHANNEL_STATUS
     | ENUM_OFFER_STATUS
+    | ENUM_AGENCY_PROJECT_STATUS
     | string;
   changeStatus: (
     status:
@@ -51,6 +52,7 @@ interface BarFilterProps {
       | ENUM_ADV_MY_PROJECT_STATUS
       | ENUM_CHANNEL_STATUS
       | ENUM_OFFER_STATUS
+      | ENUM_AGENCY_PROJECT_STATUS
       | string,
   ) => void;
   changeType?: (status: string) => void;
@@ -58,8 +60,6 @@ interface BarFilterProps {
 
 export const BarFilter: FC<BarFilterProps> = ({
   page,
-  setValue,
-  listLength,
   typeFilter,
   statusFilter,
   changeStatus,
@@ -126,11 +126,11 @@ export const BarFilter: FC<BarFilterProps> = ({
           typeFilter === ENUM_PROJECT_TYPES.MANAGER_PROJECT &&
           role === ENUM_ROLES.ADVERTISER
         ? ADV_MANAGER_PROJECT_TABS_LIST
-        : page === ENUM_PAGE_FILTER.ORDER && role === ENUM_ROLES.MANAGER
-          ? // ? typeFilter === ENUM_MANAGER_PROJECT_TYPES.MY_PROJECT
-            //   ? MANAGER_MY_PROJECT_TABS_LIST
-            //   : MANAGER_TURNKEY_PROJECT_TABS_LIST
-            MANAGER_MY_PROJECT_TABS_LIST
+        : page === ENUM_PAGE_FILTER.ORDER &&
+            (role === ENUM_ROLES.MANAGER || role === ENUM_ROLES.AGENCY)
+          ? typeFilter === ENUM_MANAGER_PROJECT_TYPES.TURNKEY_PROJECT
+            ? MANAGER_TURNKEY_PROJECT_TABS_LIST
+            : AGENCY_MY_PROJECT_TABS_LIST
           : page === ENUM_PAGE_FILTER.OFFER
             ? BLOGGER_OFFER_TABS_LIST
             : BLOGGER_CHANNEL_TABS_LIST;
@@ -145,8 +145,8 @@ export const BarFilter: FC<BarFilterProps> = ({
         page={page}
         AddManagerNewProjectBtn={
           page === ENUM_PAGE_FILTER.ORDER &&
-          role === ENUM_ROLES.MANAGER &&
-          typeFilter === ENUM_MANAGER_PROJECT_TYPES.MY_PROJECT
+          role === ENUM_ROLES.AGENCY &&
+          typeFilter === ENUM_AGENCY_PROJECT_TYPES.MY_PROJECT
             ? AddManagerNewProject
             : undefined
         }

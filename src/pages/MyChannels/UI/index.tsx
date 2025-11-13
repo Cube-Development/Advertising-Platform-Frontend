@@ -82,7 +82,7 @@ export const MyChannelsPage: FC = () => {
     },
   });
   const formState = watch();
-  const { platform, search_string, ...params } = formState;
+  const { search_string, ...params } = formState;
 
   const getParams: getChannelsByStatusReq = {
     ...params,
@@ -129,7 +129,6 @@ export const MyChannelsPage: FC = () => {
         <div className={styles.wrapper}>
           <BarFilter
             page={ENUM_PAGE_FILTER.PLATFORM}
-            setValue={setValue}
             listLength={!data?.channels?.length}
             changeStatus={(status) => setValue("status", status)}
             statusFilter={formState.status}

@@ -12,7 +12,7 @@ import {
   platformToIcon,
   projectStatus,
   useGetPostQuery,
-  IManagerAgencyProjectCard,
+  IAgencyProjectCard,
 } from "@entities/project";
 import { ENUM_ROLES } from "@entities/user";
 import { ChangeChannelProps, ChangePostProps } from "@features/order";
@@ -31,6 +31,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
+  SeeCancelReason,
   useToast,
 } from "@shared/ui";
 import { FC, useState } from "react";
@@ -39,7 +40,7 @@ import styles from "./styles.module.scss";
 import { ENUM_PATHS } from "@shared/routing";
 
 interface ManagerProjectSubcardProps {
-  card: IManagerProjectCard | IManagerAgencyProjectCard;
+  card: IManagerProjectCard | IAgencyProjectCard;
   subcard: IManagerProjectSubcard;
   FeedbackBtn: FC<IOrderFeature>;
   AcceptBtn: FC<IOrderFeature>;
@@ -250,6 +251,9 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
                   post_deeplink={subcard?.post_deeplink}
                 />
                 {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
+                {subcard?.cancel_reason && (
+                  <SeeCancelReason reason={subcard?.cancel_reason} />
+                )}
               </div>
             ) : subcard?.api_status === orderStatus.completed ||
               subcard?.api_status === orderStatus.adv_accept ? (
@@ -500,6 +504,9 @@ export const ManagerProjectSubcard: FC<ManagerProjectSubcardProps> = ({
               )}
               <SeePostBtn post={post!} post_deeplink={subcard?.post_deeplink} />
               {subcard?.post_url && <CheckBtn url={subcard?.post_url} />}
+              {subcard?.cancel_reason && (
+                <SeeCancelReason reason={subcard?.cancel_reason} />
+              )}
             </div>
           ) : subcard?.api_status === orderStatus.completed ||
             subcard?.api_status === orderStatus.adv_accept ? (

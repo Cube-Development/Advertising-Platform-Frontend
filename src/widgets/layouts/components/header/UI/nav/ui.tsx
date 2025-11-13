@@ -6,6 +6,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import {
   NAVBAR_ADVERTISER_MENU,
   NAVBAR_ADVERTISER_NOT_AUTH_MENU,
+  NAVBAR_AGENCY_MENU,
   NAVBAR_BLOGGER_MENU,
   NAVBAR_BLOGGER_NOT_AUTH_MENU,
   NAVBAR_MANAGER_MENU,
@@ -49,9 +50,11 @@ export const Nav: FC<NavProps> = () => {
         ? NAVBAR_BLOGGER_MENU
         : isAuth && role === ENUM_ROLES.MANAGER
           ? NAVBAR_MANAGER_MENU
-          : !isAuth && role === ENUM_ROLES.ADVERTISER
-            ? NAVBAR_ADVERTISER_NOT_AUTH_MENU
-            : NAVBAR_BLOGGER_NOT_AUTH_MENU;
+          : isAuth && role === ENUM_ROLES.AGENCY
+            ? NAVBAR_AGENCY_MENU
+            : !isAuth && role === ENUM_ROLES.ADVERTISER
+              ? NAVBAR_ADVERTISER_NOT_AUTH_MENU
+              : NAVBAR_BLOGGER_NOT_AUTH_MENU;
 
   return (
     <nav className={styles.wrapper}>

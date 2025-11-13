@@ -130,7 +130,6 @@ export const OffersPage: FC = () => {
           <BarFilter
             page={page}
             listLength={!!data?.orders?.length}
-            setValue={setValue}
             changeStatus={changeStatus}
             statusFilter={formState.status}
           />

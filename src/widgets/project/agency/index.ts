@@ -1,1 +1,2 @@
-export * from "./ui/agency-project";
+export * from "./page";
+export * from "./my-projects";

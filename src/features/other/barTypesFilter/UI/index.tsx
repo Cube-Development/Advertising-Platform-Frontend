@@ -2,6 +2,7 @@ import { ENUM_CHANNEL_STATUS } from "@entities/channel";
 import { ENUM_OFFER_STATUS } from "@entities/offer";
 import {
   ADVERTISER_PROJECT_TABS_LIST,
+  AGENCY_PROJECT_TYPES_TABS_LIST,
   MANAGER_PROJECT_TYPES_TABS_LIST,
 } from "@entities/project";
 import { FC } from "react";
@@ -37,7 +38,9 @@ export const BarTypesFilter: FC<BarTypesFilterProps> = ({
       ? ADVERTISER_PROJECT_TABS_LIST
       : role === ENUM_ROLES.MANAGER
         ? MANAGER_PROJECT_TYPES_TABS_LIST
-        : [];
+        : role === ENUM_ROLES.AGENCY
+          ? AGENCY_PROJECT_TYPES_TABS_LIST
+          : [];
 
   return (
     <div

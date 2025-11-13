@@ -30,7 +30,7 @@ export const CreatePost: FC<CreatePostProps> = ({}) => {
 
     if (role === ENUM_ROLES.ADVERTISER) {
       await createPostAdvertiser();
-    } else if (role === ENUM_ROLES.MANAGER) {
+    } else if (role === ENUM_ROLES.MANAGER || role === ENUM_ROLES.AGENCY) {
       await createPostManager();
     }
   };

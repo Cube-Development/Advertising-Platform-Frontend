@@ -77,6 +77,9 @@ export const ProtectedRoute = ({ route }: { route: IRouting }) => {
     if (role === ENUM_ROLES.MANAGER) {
       return <Navigate to={ENUM_PATHS.ORDERS} replace />;
     }
+    if (role === ENUM_ROLES.AGENCY) {
+      return <Navigate to={ENUM_PATHS.ORDERS} replace />;
+    }
     return <Navigate to={ENUM_PATHS.MAIN} replace />;
   }
 

@@ -49,7 +49,12 @@ export const Cart: FC = () => {
         project_id: projectId,
         language: language?.id || USER_LANGUAGES_LIST[0].id,
       },
-      { skip: !isAuth || role !== ENUM_ROLES.MANAGER || !projectId },
+      {
+        skip:
+          !isAuth ||
+          (role !== ENUM_ROLES.MANAGER && role !== ENUM_ROLES.AGENCY) ||
+          !projectId,
+      },
     );
 
   const { data: cartPub, isLoading: isLoadingPublic } = useReadPublicCartQuery(
@@ -70,7 +75,11 @@ export const Cart: FC = () => {
   }, [cartPub]);
 
   useEffect(() => {
-    if (isAuth && role === ENUM_ROLES.MANAGER && cartManager) {
+    if (
+      isAuth &&
+      (role === ENUM_ROLES.MANAGER || role === ENUM_ROLES.AGENCY) &&
+      cartManager
+    ) {
       setCurrentCart(cartManager);
     }
   }, [cartManager]);
@@ -174,7 +183,11 @@ export const Cart: FC = () => {
               });
               console.error("Ошибка при удалении с корзины", error);
             });
-        } else if (isAuth && role === ENUM_ROLES.MANAGER && projectId) {
+        } else if (
+          isAuth &&
+          (role === ENUM_ROLES.MANAGER || role === ENUM_ROLES.AGENCY) &&
+          projectId
+        ) {
           removeFromManagerCart({ ...removeReq, project_id: projectId })
             .unwrap()
             .then((data) => {
@@ -221,7 +234,11 @@ export const Cart: FC = () => {
               });
               console.error("Ошибка при добавлении в корзину", error);
             });
-        } else if (isAuth && role === ENUM_ROLES.MANAGER && projectId) {
+        } else if (
+          isAuth &&
+          (role === ENUM_ROLES.MANAGER || role === ENUM_ROLES.AGENCY) &&
+          projectId
+        ) {
           addToManagerCart({ ...addReq, project_id: projectId })
             .unwrap()
             .then((data) => {

@@ -50,11 +50,14 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
       //   ADV_ORDERS,
       // ],
     }),
-    cancelOffer: build.mutation<{ success: boolean }, { order_id: string }>({
-      query: (params) => ({
+    cancelOffer: build.mutation<
+      { success: boolean },
+      { order_id: string; cancel_reason?: string }
+    >({
+      query: (body) => ({
         url: `/order/blogger/cancel`,
         method: "PUT",
-        params: params,
+        body,
       }),
       // invalidatesTags: [
       //   // BLOGGER_OFFERS,

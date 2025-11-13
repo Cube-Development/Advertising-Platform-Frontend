@@ -7,7 +7,7 @@ export enum ENUM_VIEWER_ROLES {
   CUSTOMER = "customer",
 }
 
-export interface IManagerAgencyProjectCard {
+export interface IMyAgencyProjectCard {
   id: string;
   project_name: string;
   identifier: number;
@@ -90,4 +90,5 @@ export interface IAgencyOrderCard {
   platform: platformTypesNum;
   rate?: number;
   post_deeplink: string;
+  cancel_reason?: string;
 }
