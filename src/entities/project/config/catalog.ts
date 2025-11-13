@@ -24,7 +24,7 @@ export const CATALOG_FILTER_TABS_LIST = [
 ];
 
 export const enum CART {
-  commission = 10,
+  commission = 5,
 }
 
 export const enum DEBOUNCE {

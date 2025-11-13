@@ -1,7 +1,7 @@
 import { sentryVitePlugin } from "@sentry/vite-plugin";
 import react from "@vitejs/plugin-react";
 import path from "path";
-import { defineConfig } from "vite";
+import { defineConfig, Plugin } from "vite";
 import { ManifestOptions, VitePWA } from "vite-plugin-pwa";
 
 const manifest: Partial<ManifestOptions> = {
@@ -68,6 +68,31 @@ const manifest: Partial<ManifestOptions> = {
   description: "Blogix — современная платформа, объединяющая рекламодателей и создателей контента. Прозрачные сделки, удобный поиск и автоматизация размещения рекламы в блогах и медиа-каналах."
 };
 
+// Плагин для правильной обработки MIME типов для .mjs файлов
+const mimeTypePlugin = (): Plugin => {
+  return {
+    name: 'mime-type-fix',
+    configureServer(server) {
+      // Добавляем middleware в начало цепочки
+      server.middlewares.use((req, res, next) => {
+        if (req.url?.endsWith('.mjs') || req.url?.includes('.mjs?')) {
+          res.setHeader('Content-Type', 'application/javascript');
+        }
+        next();
+      });
+    },
+    configurePreviewServer(server) {
+      // Также для preview сервера
+      server.middlewares.use((req, res, next) => {
+        if (req.url?.endsWith('.mjs') || req.url?.includes('.mjs?')) {
+          res.setHeader('Content-Type', 'application/javascript');
+        }
+        next();
+      });
+    },
+  };
+};
+
 // https://vitejs.dev/config/
 export default defineConfig({
   css: {
@@ -85,6 +110,7 @@ export default defineConfig({
   },
   plugins: [
     react(),
+    mimeTypePlugin(),
     // VitePWA({
     //   registerType: "autoUpdate",
     //   workbox: {
@@ -114,6 +140,6 @@ export default defineConfig({
   },
   server: {
     allowedHosts: ["blogix.ngrok.dev"],
-    host: true
-  }
+    host: true,
+  },
 });
