@@ -619,7 +619,8 @@
         "active": "Ish jarayonida",
         "develop": "Ishlab chiqilmoqda",
         "agreed": "Kelishilmoqda",
-        "completed": "Bajarilgan"
+        "completed": "Bajarilgan",
+        "saved": "Saqlangan"
       },
       "channels": "Kanallar",
       "views": "Ko'rishlar",
@@ -1775,11 +1776,13 @@
 
     "payment": {
       "title": "Buyurtma to'lovi",
-      "pay": "To'lash",
+      "pay": "To'lash va ishga tushirish",
       "approve": "Kelishishga yuborish",
       "price": "Yakuniy summa:",
       "description": "Samarali reklama kampaniyasini boshlash uchun so'nggi qadam qoldi! Buyurtmani to'laganingizdan so'ng, kanal egalari darhol xabardor qilinadi va reklamani joylashtirishni boshlaydilar."
     },
+
+    "save": "Loyihani saqlash",
 
     "loading": {
       "posts": "Reklama postlarini yuboryapmiz...",
@@ -2488,6 +2491,10 @@
         "success": "Reklama kampaniyasi muvaffaqiyatli to'landi va ishga tushirildi!",
         "not_enough_balance": "Joriy hamyonda mablagʻ yetarli emas, iltimos balansingizni toʻldiring",
         "error": "Reklama kampaniyasini to'lashda xatolik yuz berdi"
+      },
+      "save": {
+        "success": "Reklama kampaniyasi muvaffaqiyatli saqlandi",
+        "error": "Reklama kampaniyasini saqlashda xatolik yuz berdi"
       },
       "date": {
         "error": "Kanallar uchun sana yaratishda xatolik",

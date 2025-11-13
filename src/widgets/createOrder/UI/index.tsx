@@ -69,6 +69,19 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
     }
   };
 
+  const onSave: SubmitHandler<ICreatePostForm> = async (formData) => {
+    if (
+      projectId &&
+      formData?.posts?.length &&
+      formData?.datetime?.orders?.length &&
+      !isOrdersLoading &&
+      !isPostsLoading &&
+      !formState?.isDownloadPosts
+    ) {
+      await payment(formData, projectId, role, true);
+    }
+  };
+
   return (
     <>
       {isLoading && <CreateOrderLoading />}
@@ -123,6 +136,7 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
               setValue={setValue}
               formState={formState}
               onAction={handleSubmit(onSubmit)}
+              onSave={handleSubmit(onSave)}
               isAllowed={
                 !formState?.isDownloadPosts &&
                 !isOrdersLoading &&

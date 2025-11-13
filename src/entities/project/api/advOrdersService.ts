@@ -11,6 +11,7 @@ import {
   ENUM_MANAGER_PROJECT_STATUS,
   ENUM_ADV_MY_PROJECT_STATUS,
   ENUM_AGENCY_PROJECT_STATUS,
+  ISavedProjects,
 } from "@entities/project";
 import {
   ADV_ORDERS,
@@ -55,6 +56,11 @@ export interface getProjectsCardReq {
   date_sort?: dateSortingTypes;
   search_string?: string;
   project_id?: string;
+}
+
+export interface getSavedProjectsCardReq {
+  page: number;
+  elements_on_page?: number;
 }
 
 export interface getProjectSubcardReq {
@@ -254,6 +260,64 @@ export const advProjectsAPI = authApi.injectEndpoints({
       },
       providesTags: [ADV_PROJECTS],
     }),
+    getAdvSavedProjects: build.query<
+      ISavedProjects,
+      getSavedProjectsCardReq & { __isWebsocket?: boolean }
+    >({
+      query: (params) => ({
+        url: `/order/projects/saved`,
+        method: `GET`,
+        params: params,
+      }),
+      transformResponse: (response: ISavedProjects) => {
+        return {
+          ...response,
+          isLast:
+            response?.elements ===
+              response?.projects?.length +
+                (response?.page - 1) * INTERSECTION_ELEMENTS.ADV_PROJECTS ||
+            response?.projects?.length === 0,
+        };
+      },
+      serializeQueryArgs: ({ endpointName }) => {
+        return `${endpointName}`;
+      },
+      merge: (currentCache, newItems, arg) => {
+        const newProjectsMap = new Map(newItems.projects.map((p) => [p.id, p]));
+
+        // Обновляем старые элементы, если есть новые с тем же id
+        const updatedOldProjects =
+          currentCache?.projects?.map((old) =>
+            newProjectsMap.has(old.id) ? newProjectsMap.get(old.id)! : old,
+          ) || [];
+
+        // Убираем уже обновленные ID из новых, чтобы они не дублировались
+        const newIds = new Set(updatedOldProjects.map((p) => p.id));
+        const onlyNewProjects = newItems.projects.filter(
+          (p) => !newIds.has(p.id),
+        );
+
+        if (arg.arg.__isWebsocket) {
+          return {
+            ...currentCache,
+            projects: [...onlyNewProjects, ...updatedOldProjects],
+          };
+        } else if (arg.arg.page === 1) {
+          return {
+            ...newItems,
+          };
+        }
+
+        return {
+          ...newItems,
+          projects: [...updatedOldProjects, ...onlyNewProjects],
+        };
+      },
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg !== previousArg;
+      },
+      providesTags: [ADV_PROJECTS],
+    }),
     getAdvSubprojects: build.query<IAdvSubprojects, getProjectSubcardReq>({
       query: (BodyParams) => ({
         url: `/order/project/orders`,
@@ -284,6 +348,30 @@ export const advProjectsAPI = authApi.injectEndpoints({
         params: params,
       }),
       invalidatesTags: [ADV_TARIFF_PROJECTS],
+    }),
+
+    saveAdvProject: build.mutation<
+      { success: boolean },
+      { project_id: string }
+    >({
+      query: (params) => ({
+        url: `/order/project/save`,
+        method: "PUT",
+        params: params,
+      }),
+      invalidatesTags: [ADV_PROJECTS],
+    }),
+
+    deleteSavedProject: build.mutation<
+      { success: boolean },
+      { project_id: string }
+    >({
+      query: (params) => ({
+        url: `order/project/saved/delete`,
+        method: "PUT",
+        params: params,
+      }),
+      invalidatesTags: [ADV_PROJECTS],
     }),
 
     getAdvManagerProjects: build.query<
@@ -370,8 +458,11 @@ export const {
   useGetProjectAmountQuery,
   useAcceptOrderMutation,
   useApproveAdvManagerProjectMutation,
+  useSaveAdvProjectMutation,
   useRejectOrderMutation,
   useGetAdvProjectsQuery,
+  useGetAdvSavedProjectsQuery,
+  useDeleteSavedProjectMutation,
   useGetAdvSubprojectsQuery,
   useGetAdvManagerProjectsQuery,
   useGetAdvManagerSubprojectsQuery,

@@ -98,19 +98,27 @@ export interface IAdvManagerProjectsDevCard {
   budget: number;
 }
 
-export interface IAdvTemplateProjects {
+export interface ISavedProjects {
   page: number;
   elements: number;
-  projects: IAdvTemplateProjectsCard[];
+  projects: ISavedProjectCard[];
+  isLast?: boolean;
 }
 
-export interface IAdvTemplateProjectsCard {
+export interface ISavedProjectCard {
   id: string;
   identifier: number;
-  count: number;
-  created: string;
-  name: string;
+  project_name: string;
+  orders: number;
+  views: number;
   budget: number;
+  completed: number;
+  canceled: number;
+  wait: number;
+  in_progress: number;
+  moderation: number;
+  is_request_approve: projectStatus.cart_created;
+  created: string;
 }
 
 export interface IOrderReportInfo {

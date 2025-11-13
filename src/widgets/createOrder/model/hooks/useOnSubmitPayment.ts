@@ -1,15 +1,16 @@
 import {
   ENUM_AGENCY_PROJECT_STATUS,
   ENUM_AGENCY_PROJECT_TYPES,
+  ENUM_PROJECT_TYPES,
   ENUM_MANAGER_PROJECT_STATUS,
   ENUM_MANAGER_PROJECT_TYPES,
   ICreatePostForm,
   useApproveProjectMutation,
-  // useApproveProjectMutation,
   useCreateOrderDatesMutation,
   useCreateOrderPricesMutation,
   useProjectNameMutation,
   useRequestApproveMutation,
+  useSaveAdvProjectMutation,
 } from "@entities/project";
 import { ENUM_ROLES } from "@entities/user";
 import { ENUM_PATHS } from "@shared/routing";
@@ -30,6 +31,7 @@ export const useOnSubmitPayment = () => {
   const [createOrderDates] = useCreateOrderDatesMutation();
   const [createOrderPrices] = useCreateOrderPricesMutation();
   const [createPayment] = useCreatePaymentProjectMutation();
+  const [saveProject] = useSaveAdvProjectMutation();
   const [approveProject] = useApproveProjectMutation();
   const [requestApprove] = useRequestApproveMutation();
   const { toast } = useToast();
@@ -43,6 +45,7 @@ export const useOnSubmitPayment = () => {
     formData: ICreatePostForm,
     projectId: string,
     role: ENUM_ROLES,
+    saveOnly?: boolean,
   ) => {
     try {
       setIsLoading(true);
@@ -64,8 +67,13 @@ export const useOnSubmitPayment = () => {
         await handleProjectPrices(formData);
       }
 
-      // Оплата или подтверждение
-      await handleProjectPayment(projectId, role, formData?.wallet_type);
+      if (saveOnly) {
+        // Сохранение проекта
+        await handleSaveProject(projectId);
+      } else {
+        // Оплата или подтверждение
+        await handleProjectPayment(projectId, role, formData?.wallet_type);
+      }
     } catch (error) {
       toast({
         variant: "error",
@@ -160,6 +168,24 @@ export const useOnSubmitPayment = () => {
         title: t("toasts.create_order.payment.error"),
       });
       throw new Error("Error: Create order payment | approve project");
+    }
+  };
+
+  const handleSaveProject = async (projectId: string) => {
+    try {
+      await saveProject({ project_id: projectId }).unwrap();
+      toast({
+        variant: "success",
+        title: t("toasts.create_order.save.success"),
+      });
+      navigate(
+        `${ENUM_PATHS.ORDERS}?project_type=${ENUM_PROJECT_TYPES.SAVED_PROJECT}`,
+      );
+    } catch (error) {
+      toast({
+        variant: "error",
+        title: t("toasts.create_order.save.error"),
+      });
     }
   };
 

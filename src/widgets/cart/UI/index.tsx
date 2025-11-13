@@ -17,7 +17,7 @@ import { ENUM_ROLES, GenerateGuestId, useFindLanguage } from "@entities/user";
 import { ENUM_COOKIES_TYPES } from "@shared/config";
 import { useAppSelector } from "@shared/hooks";
 import { USER_LANGUAGES_LIST } from "@shared/languages";
-import { ToastAction, useToast } from "@shared/ui";
+import { useToast } from "@shared/ui";
 import Cookies from "js-cookie";
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
@@ -40,7 +40,7 @@ export const Cart: FC = () => {
 
   const { data: cart, isLoading: isLoadingCommon } = useReadCommonCartQuery(
     { language: language?.id || USER_LANGUAGES_LIST[0].id },
-    { skip: !isAuth || role !== ENUM_ROLES.ADVERTISER },
+    { skip: !isAuth || (projectId ? true : false) || role !== ENUM_ROLES.ADVERTISER },
   );
 
   const { data: cartManager, isLoading: isLoadingManager } =
@@ -50,10 +50,7 @@ export const Cart: FC = () => {
         language: language?.id || USER_LANGUAGES_LIST[0].id,
       },
       {
-        skip:
-          !isAuth ||
-          (role !== ENUM_ROLES.MANAGER && role !== ENUM_ROLES.AGENCY) ||
-          !projectId,
+        skip: !isAuth || !projectId,
       },
     );
 
@@ -75,11 +72,7 @@ export const Cart: FC = () => {
   }, [cartPub]);
 
   useEffect(() => {
-    if (
-      isAuth &&
-      (role === ENUM_ROLES.MANAGER || role === ENUM_ROLES.AGENCY) &&
-      cartManager
-    ) {
+    if (isAuth && cartManager) {
       setCurrentCart(cartManager);
     }
   }, [cartManager]);
@@ -165,11 +158,10 @@ export const Cart: FC = () => {
               toast({
                 variant: "error",
                 title: t("toasts.catalog.remove.error"),
-                action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
               console.error("Ошибка при удалении с корзины", error);
             });
-        } else if (isAuth && role === ENUM_ROLES.ADVERTISER) {
+        } else if (isAuth && !projectId) {
           removeFromCommonCart(removeReq)
             .unwrap()
             .then((data) => {
@@ -179,15 +171,10 @@ export const Cart: FC = () => {
               toast({
                 variant: "error",
                 title: t("toasts.catalog.remove.error"),
-                action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
               console.error("Ошибка при удалении с корзины", error);
             });
-        } else if (
-          isAuth &&
-          (role === ENUM_ROLES.MANAGER || role === ENUM_ROLES.AGENCY) &&
-          projectId
-        ) {
+        } else if (isAuth && projectId) {
           removeFromManagerCart({ ...removeReq, project_id: projectId })
             .unwrap()
             .then((data) => {
@@ -197,7 +184,6 @@ export const Cart: FC = () => {
               toast({
                 variant: "error",
                 title: t("toasts.catalog.remove.error"),
-                action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
               console.error("Ошибка при удалении с корзины", error);
             });
@@ -216,11 +202,10 @@ export const Cart: FC = () => {
               toast({
                 variant: "error",
                 title: t("toasts.catalog.add.error"),
-                action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
               console.error("Ошибка при добавлении в корзину", error);
             });
-        } else if (isAuth && role === ENUM_ROLES.ADVERTISER) {
+        } else if (isAuth && !projectId) {
           addToCommonCart(addReq)
             .unwrap()
             .then((data) => {
@@ -230,15 +215,10 @@ export const Cart: FC = () => {
               toast({
                 variant: "error",
                 title: t("toasts.catalog.add.error"),
-                action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
               console.error("Ошибка при добавлении в корзину", error);
             });
-        } else if (
-          isAuth &&
-          (role === ENUM_ROLES.MANAGER || role === ENUM_ROLES.AGENCY) &&
-          projectId
-        ) {
+        } else if (isAuth && projectId) {
           addToManagerCart({ ...addReq, project_id: projectId })
             .unwrap()
             .then((data) => {
@@ -248,7 +228,6 @@ export const Cart: FC = () => {
               toast({
                 variant: "error",
                 title: t("toasts.catalog.add.error"),
-                action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
               console.error("Ошибка при добавлении в корзину", error);
             });

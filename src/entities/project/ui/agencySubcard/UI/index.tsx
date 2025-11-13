@@ -34,6 +34,7 @@ import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { ENUM_PATHS } from "@shared/routing";
+import { platformTypesNum } from "@entities/platform";
 
 interface AgencyProjectSubcardProps {
   card: IMyAgencyProjectCard;
@@ -81,7 +82,7 @@ export const AgencyProjectSubcard: FC<AgencyProjectSubcardProps> = ({
       >
         <div className={styles.platform__icon}>
           {subcard?.platform && subcard?.platform in platformToIcon
-            ? platformToIcon[subcard?.platform!]()
+            ? platformToIcon[subcard?.platform as platformTypesNum]()
             : "..."}
         </div>
         <div className={styles.subcard__left}>

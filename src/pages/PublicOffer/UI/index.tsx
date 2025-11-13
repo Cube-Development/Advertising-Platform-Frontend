@@ -7,7 +7,7 @@ import { useTranslation } from "react-i18next";
 
 const url =
   import.meta.env.VITE_PUBLIC_OFFER_FILE_URL ||
-  "https://nui4ea25hw.ufs.sh/f/3yHpL8ecIjWBGAqcY0yiv8MmkAOcS96R5lIUntwWZheLzdxg";
+  "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrwPCHaRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h";
 
 export const PublicOfferPage: FC = () => {
   useClearCookiesOnPage();
