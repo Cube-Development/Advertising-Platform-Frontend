@@ -618,7 +618,8 @@
         "active": "In Progress",
         "develop": "In Development",
         "agreed": "Under Review",
-        "completed": "Completed"
+        "completed": "Completed",
+        "saved": "Saved"
       },
       "channels": "Channels",
       "views": "Views",
@@ -1777,11 +1778,13 @@
 
     "payment": {
       "title": "Order Payment",
-      "pay": "Pay",
+      "pay": "Pay and Launch",
       "approve": "For Approval",
       "price": "Total Amount:",
       "description": "Just one last step to launch an effective advertising campaign! Once you pay for the order, channel owners will immediately receive notifications and begin placing your ads."
     },
+
+    "save": "Save Project",
 
     "loading": {
       "posts": "Sending advertising posts...",
@@ -2490,6 +2493,10 @@
         "success": "Advertising campaign successfully paid and launched!",
         "not_enough_balance": "You have insufficient funds on current wallet, please top up your balance",
         "error": "Error during payment"
+      },
+      "save": {
+        "success": "Project successfully saved",
+        "error": "Error during project saving"
       },
       "date": {
         "error": "Error creating dates for channels",

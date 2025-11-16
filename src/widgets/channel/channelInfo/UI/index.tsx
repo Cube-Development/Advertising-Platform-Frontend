@@ -25,7 +25,7 @@ import { ENUM_ROLES, GenerateGuestId, useFindLanguage } from "@entities/user";
 import { BREAKPOINT, ENUM_COOKIES_TYPES, PAGE_ANIMATION } from "@shared/config";
 import { useAppDispatch, useAppSelector, useWindowWidth } from "@shared/hooks";
 import { USER_LANGUAGES_LIST } from "@shared/languages";
-import { ToastAction, useToast } from "@shared/ui";
+import { useToast } from "@shared/ui";
 import { motion } from "framer-motion";
 import Cookies from "js-cookie";
 import { FC, useEffect, useState } from "react";
@@ -155,7 +155,6 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
               toast({
                 variant: "error",
                 title: t("toasts.catalog.remove.error"),
-                action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
               console.error("Ошибка при удалении с корзины", error);
             });
@@ -169,7 +168,6 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
               toast({
                 variant: "error",
                 title: t("toasts.catalog.remove.error"),
-                action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
               console.error("Ошибка при удалении с корзины", error);
             });
@@ -187,7 +185,6 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
               toast({
                 variant: "error",
                 title: t("toasts.catalog.remove.error"),
-                action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
               console.error("Ошибка при удалении с корзины", error);
             });
@@ -207,7 +204,6 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
               toast({
                 variant: "error",
                 title: t("toasts.catalog.add.error"),
-                action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
               console.error("Ошибка при добавлении в корзину", error);
             });
@@ -221,7 +217,6 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
               toast({
                 variant: "error",
                 title: t("toasts.catalog.add.error"),
-                action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
               console.error("Ошибка при добавлении в корзину", error);
             });
@@ -239,7 +234,6 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
               toast({
                 variant: "error",
                 title: t("toasts.catalog.add.error"),
-                action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
               console.error("Ошибка при добавлении в корзину", error);
             });

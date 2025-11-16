@@ -1,5 +1,5 @@
 import { useAdminRejectReviewMutation } from "@entities/admin";
-import { AccountsLoader, MyButton, ToastAction, useToast } from "@shared/ui";
+import { AccountsLoader, MyButton, useToast } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -26,7 +26,6 @@ export const RejectReview: FC<RejectReviewProps> = ({ id }) => {
           toast({
             variant: "error",
             title: t("toasts.admin.review.reject.error"),
-            action: <ToastAction altText="Ok">Ok</ToastAction>,
           });
           console.error("error: ", error);
         });

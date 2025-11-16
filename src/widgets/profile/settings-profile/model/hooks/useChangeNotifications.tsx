@@ -1,5 +1,5 @@
 import { eventForm, IEventsData, useEditProfileMutation } from "@entities/user";
-import { ToastAction, useToast } from "@shared/ui";
+import { useToast } from "@shared/ui";
 import { useTranslation } from "react-i18next";
 
 interface IChangeNotificationsFormProps {
@@ -34,7 +34,6 @@ export const useChangeNotifications = ({
           toast({
             variant: "error",
             title: t("toasts.profile.edit.event.error"),
-            action: <ToastAction altText="Ok">Ok</ToastAction>,
           });
           console.error("error: ", error);
         });

@@ -135,6 +135,8 @@ export const agencyAuthAPI = authApi.injectEndpoints({
         method: "GET",
         params: params,
       }),
+      providesTags: [AGENCY_PROJECTS_MANAGER],
+      keepUnusedDataFor: 0,
     }),
     requestApprove: build.mutation<void, { project_id: string }>({
       query: (body) => ({

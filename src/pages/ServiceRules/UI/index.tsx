@@ -6,7 +6,7 @@ import styles from "./styles.module.scss";
 
 const url =
   import.meta.env.VITE_SERVICE_RULES_FILE_URL ||
-  "https://nui4ea25hw.ufs.sh/f/3yHpL8ecIjWBGAqcY0yiv8MmkAOcS96R5lIUntwWZheLzdxg";
+  "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrwPCHaRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h";
 
 export const ServiceRulesPage: FC = () => {
   useClearCookiesOnPage();

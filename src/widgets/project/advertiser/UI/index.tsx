@@ -9,6 +9,8 @@ import {
   ENUM_PROJECT_TYPES,
   useGetAdvManagerProjectsQuery,
   useGetAdvProjectsQuery,
+  useGetAdvSavedProjectsQuery,
+  getSavedProjectsCardReq,
 } from "@entities/project";
 import { useFindLanguage } from "@entities/user";
 import { useGetViewAdvertiserProjectQuery } from "@entities/views";
@@ -25,7 +27,7 @@ import { validate as isValidUUID } from "uuid";
 import { AdvProjectsList } from "./advProjects";
 import { DevProjectsList } from "./devProjects";
 import styles from "./styles.module.scss";
-import { TemplateProjectsList } from "./templateProjects";
+import { SavedProjectsList } from "./savedProjects";
 
 interface IForm extends getProjectsCardReq {
   type: ENUM_PROJECT_TYPES | string;
@@ -102,7 +104,9 @@ export const AdvOrders: FC = () => {
       ADVERTISER_PROJECT_TABS_LIST.map((type) => {
         if (project_type === type.type) {
           setValue("type", type.type);
-          setValue("status", type.status);
+          if (project_type !== ENUM_PROJECT_TYPES.SAVED_PROJECT) {
+            setValue("status", type.status);
+          }
         }
       });
       if (project_status) {
@@ -129,7 +133,7 @@ export const AdvOrders: FC = () => {
     navigate(newPath, { replace: true });
   }, [formState.type, formState.status]);
 
-  const { type, search_string, ...params } = formState;
+  const { search_string, ...params } = formState;
 
   const getParams: getProjectsCardReq = {
     ...params,
@@ -138,6 +142,11 @@ export const AdvOrders: FC = () => {
         ? { project_id: search_string }
         : { search_string }
       : {}),
+  };
+
+  const getSavedParams: getSavedProjectsCardReq = {
+    page: formState.page,
+    elements_on_page: INTERSECTION_ELEMENTS.ADV_PROJECTS,
   };
 
   const {
@@ -150,6 +159,19 @@ export const AdvOrders: FC = () => {
     selectFromResult: ({ data, ...rest }) => ({
       ...rest,
       data: (data?.status === formState?.status && data) || undefined,
+    }),
+  });
+
+  const {
+    data: projectsSaved,
+    isFetching: isFetchingSave,
+    refetch: refetchSaved,
+    originalArgs: originalArgsSaved,
+  } = useGetAdvSavedProjectsQuery(getSavedParams, {
+    skip: formState.type !== ENUM_PROJECT_TYPES.SAVED_PROJECT,
+    selectFromResult: ({ data, ...rest }) => ({
+      ...rest,
+      data: data || undefined,
     }),
   });
 
@@ -177,6 +199,9 @@ export const AdvOrders: FC = () => {
       // isLoadingMore = isFetchingManager;
       break;
     case ENUM_PROJECT_TYPES.SAVED_PROJECT:
+      checkData = projectsSaved;
+      // isLoadingMore = isFetchingSave;
+      break;
     case ENUM_PROJECT_TYPES.MY_PROJECT:
       checkData = projectsSelf;
       // isLoadingMore = isFetchingSelf;
@@ -197,6 +222,8 @@ export const AdvOrders: FC = () => {
         refetchSelf();
       } else if (formState.type === ENUM_PROJECT_TYPES.MANAGER_PROJECT) {
         refetchManager();
+      } else if (formState.type === ENUM_PROJECT_TYPES.SAVED_PROJECT) {
+        refetchSaved();
       }
     }
   };
@@ -207,7 +234,10 @@ export const AdvOrders: FC = () => {
       !originalArgsSelf?.__isWebsocket) ||
     (formState.type === ENUM_PROJECT_TYPES.MANAGER_PROJECT &&
       isFetchingManager &&
-      !originalArgsManager?.__isWebsocket);
+      !originalArgsManager?.__isWebsocket) ||
+    (formState.type === ENUM_PROJECT_TYPES.SAVED_PROJECT &&
+      isFetchingSave &&
+      !originalArgsSaved?.__isWebsocket);
 
   useEffect(() => {
     if (formState.status !== ENUM_ADV_MANAGER_PROJECT_STATUS.REQUEST_APPROVE) {
@@ -246,12 +276,12 @@ export const AdvOrders: FC = () => {
             typeFilter={formState.type}
           />
         ) : formState.type === ENUM_PROJECT_TYPES.SAVED_PROJECT ? (
-          <TemplateProjectsList
-            projects={[]}
+          <SavedProjectsList
+            projects={projectsSaved?.projects || []}
             handleOnChangePage={handleOnChangePage}
             isLoading={isLoadingMore}
-            isLast={projectsSelf?.isLast || false}
-            typeFilter={formState.type}
+            isLast={projectsSaved?.isLast || false}
+            currentPage={formState?.page}
           />
         ) : formState.type === ENUM_PROJECT_TYPES.MANAGER_PROJECT ? (
           <AdvProjectsList

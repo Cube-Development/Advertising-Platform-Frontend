@@ -10,7 +10,7 @@ import {
   CustomCloseButton,
   MyButton,
 } from "@shared/ui";
-import { FC, useEffect, useState } from "react";
+import { FC, useEffect, useRef, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
@@ -53,6 +53,8 @@ export const TimeList: FC<TimeListProps> = ({ onChange, startTime }) => {
     timeIndexList: [],
     timeStringList: [],
   });
+  const userHasSelected = useRef(false);
+  const prevStartTimeKey = useRef<string>("");
 
   // Получаем текущее время пользователя
   const getCurrentTime = () => {
@@ -73,6 +75,19 @@ export const TimeList: FC<TimeListProps> = ({ onChange, startTime }) => {
 
   // установка начальных временных интервалов если они приходят из бека
   useEffect(() => {
+    // Сбрасываем флаг при изменении startTime (например, при переключении карточки)
+    const startTimeKey = startTime?.join(",") || "";
+
+    if (startTimeKey !== prevStartTimeKey.current) {
+      userHasSelected.current = false;
+      prevStartTimeKey.current = startTimeKey;
+    }
+
+    // Не перезаписываем состояние, если пользователь уже выбрал время
+    if (userHasSelected.current) {
+      return;
+    }
+
     if (startTime?.length) {
       const timeIndexList: number[] = [];
       const timeStringList: string[] = [];
@@ -142,6 +157,11 @@ export const TimeList: FC<TimeListProps> = ({ onChange, startTime }) => {
       timeIndexList: newTimeIndexList,
       timeStringList: newTimeList,
     };
+
+    // Отмечаем, что пользователь выбрал время
+    if (newTimeList.length > 0) {
+      userHasSelected.current = true;
+    }
 
     setSelectedTimeObject(updatedTimeObject);
 

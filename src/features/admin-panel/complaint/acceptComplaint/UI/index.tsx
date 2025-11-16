@@ -3,7 +3,7 @@ import {
   useAdminAcceptComplaintMutation,
 } from "@entities/admin";
 import { ENUM_PATHS } from "@shared/routing";
-import { AccountsLoader, MyButton, ToastAction, useToast } from "@shared/ui";
+import { AccountsLoader, MyButton, useToast } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -34,7 +34,6 @@ export const AcceptComplaint: FC<AcceptComplaintProps> = ({ params }) => {
           toast({
             variant: "error",
             title: t("toasts.admin.complaint.accept.error"),
-            action: <ToastAction altText="Ok">Ok</ToastAction>,
           });
           console.error("error: ", error);
         });

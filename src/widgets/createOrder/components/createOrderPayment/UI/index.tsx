@@ -6,6 +6,7 @@ import styles from "./styles.module.scss";
 import heartAnimation from "/animated/heart_white_lottie.gif";
 import { ICreatePostForm } from "@entities/project";
 import { UseFormSetValue } from "react-hook-form";
+import { SaveProject } from "@features/project";
 
 interface CreateOrderPaymentProps {
   isBlur?: boolean;
@@ -13,6 +14,7 @@ interface CreateOrderPaymentProps {
   role: ENUM_ROLES;
   isAllowed: boolean;
   onAction?: () => void;
+  onSave?: () => void;
   setValue: UseFormSetValue<ICreatePostForm>;
   formState: ICreatePostForm;
   step: number;
@@ -24,6 +26,7 @@ export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
   role,
   isAllowed,
   onAction,
+  onSave,
   setValue,
   formState,
   step,
@@ -65,14 +68,17 @@ export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
             </div>
             <div className={styles.pay_btn}>
               {role === ENUM_ROLES.ADVERTISER ? (
-                <CreateOrder
-                  disabled={!isAllowed}
-                  isAllowed={isAllowed}
-                  onAction={onAction}
-                  totalAmount={totalAmount}
-                  setValue={setValue}
-                  formState={formState}
-                />
+                <div className="grid grid-flow-row gap-4">
+                  <CreateOrder
+                    disabled={!isAllowed}
+                    isAllowed={isAllowed}
+                    onAction={onAction}
+                    totalAmount={totalAmount}
+                    setValue={setValue}
+                    formState={formState}
+                  />
+                  <SaveProject onAction={onSave} />
+                </div>
               ) : (
                 <ApproveCampaign disabled={!isAllowed} isAllowed={isAllowed} />
               )}

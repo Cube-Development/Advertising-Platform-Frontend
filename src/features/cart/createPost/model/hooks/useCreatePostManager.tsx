@@ -3,11 +3,12 @@ import {
   useCheckCartMutation,
   useCreateProjectCartMutation,
 } from "@entities/project";
-import { useFindLanguage } from "@entities/user";
+import { ENUM_ROLES, useFindLanguage } from "@entities/user";
+import { useAppSelector } from "@shared/hooks";
 import { ENUM_COOKIES_TYPES } from "@shared/config";
 import { USER_LANGUAGES_LIST } from "@shared/languages";
 import { ENUM_PATHS } from "@shared/routing";
-import { ToastAction, useToast } from "@shared/ui";
+import { useToast } from "@shared/ui";
 import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
@@ -15,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 export const useCreatePostManager = () => {
   const { t } = useTranslation();
   const language = useFindLanguage();
+  const { role } = useAppSelector((state) => state.user);
   const [createProjectCart, { isLoading: isLoadingCreate }] =
     useCreateProjectCartMutation();
   const [checkProjectCart, { isLoading: isLoadingCheck }] =
@@ -22,7 +24,6 @@ export const useCreatePostManager = () => {
   const { toast } = useToast();
   const navigate = useNavigate();
   const projectId = Cookies.get(ENUM_COOKIES_TYPES.PROJECT_ID) || "";
-  const isManagerProject = "true";
 
   const createPostManager = async () => {
     if (isLoadingCreate || isLoadingCheck) return;
@@ -33,7 +34,7 @@ export const useCreatePostManager = () => {
         language: language?.id || USER_LANGUAGES_LIST[0].id,
       }).unwrap();
 
-      if (isManagerProject === "true") {
+      if (role === ENUM_ROLES.AGENCY) {
         navigate(ENUM_PATHS.CREATE_ORDER);
         return;
       }
@@ -63,7 +64,6 @@ export const useCreatePostManager = () => {
         toast({
           variant: "error",
           title: message,
-          action: <ToastAction altText="Ok">Ok</ToastAction>,
         });
       }
 
@@ -73,7 +73,6 @@ export const useCreatePostManager = () => {
       toast({
         variant: "error",
         title: t("toasts.cart.error"),
-        action: <ToastAction altText="Ok">Ok</ToastAction>,
       });
     }
   };

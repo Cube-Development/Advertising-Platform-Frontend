@@ -46,7 +46,9 @@ export const AdvDevProjectCard: FC<AdvDevProjectCardProps> = ({
           <p>{t("orders_advertiser.card.status.develop")}</p>
         </div>
       </div>
-      <div className={styles.card__chat}>
+      <div
+        className={`${styles.card__chat} cursor-not-allowed grayscale pointer-events-none`}
+      >
         <ChatBtn
           projectId={card?.id}
           toRole={ENUM_ROLES.MANAGER}

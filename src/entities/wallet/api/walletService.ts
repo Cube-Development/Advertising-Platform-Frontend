@@ -12,7 +12,13 @@ import {
   IWalletResponse,
   IWithdrawResponse,
 } from "@entities/wallet";
-import { BALANCE, TRANSACTION_HISTORY, authApi } from "@shared/api";
+import {
+  ADV_ORDERS,
+  ADV_PROJECTS,
+  BALANCE,
+  TRANSACTION_HISTORY,
+  authApi,
+} from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 
 export const walletAPI = authApi.injectEndpoints({
@@ -81,7 +87,7 @@ export const walletAPI = authApi.injectEndpoints({
         method: "POST",
         params: params,
       }),
-      invalidatesTags: [BALANCE],
+      invalidatesTags: [BALANCE, ADV_PROJECTS, ADV_ORDERS],
     }),
     createDepositRequest: build.mutation<
       ICreateDepositResponse,

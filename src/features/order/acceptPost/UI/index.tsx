@@ -1,5 +1,5 @@
 import { IOrderFeature, useAcceptOrderMutation } from "@entities/project";
-import { MyButton, ToastAction, useToast } from "@shared/ui";
+import { MyButton, useToast } from "@shared/ui";
 import { Loader } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -25,7 +25,6 @@ export const AcceptPost: FC<IOrderFeature> = ({ order_id }) => {
           toast({
             variant: "error",
             title: t("toasts.orders_advertiser.accept_post.error"),
-            action: <ToastAction altText="Ok">Ok</ToastAction>,
           });
           console.error("error: ", error);
         });

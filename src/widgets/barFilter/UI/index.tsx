@@ -29,7 +29,7 @@ import {
   BarTypesFilter,
   TurnkeyProject,
 } from "@features/other";
-import { AddManagerNewProject, NewProject } from "@features/project";
+import { AddAgencyNewProject, NewProject } from "@features/project";
 import { useAppSelector } from "@shared/hooks";
 import { ENUM_PAGE_FILTER } from "@shared/routing";
 import { FC } from "react";
@@ -143,11 +143,11 @@ export const BarFilter: FC<BarFilterProps> = ({
         TurnkeyProjectBtn={TurnkeyProject}
         AddChannelBtn={AddChannel}
         page={page}
-        AddManagerNewProjectBtn={
+        AddAgencyNewProjectBtn={
           page === ENUM_PAGE_FILTER.ORDER &&
           role === ENUM_ROLES.AGENCY &&
           typeFilter === ENUM_AGENCY_PROJECT_TYPES.MY_PROJECT
-            ? AddManagerNewProject
+            ? AddAgencyNewProject
             : undefined
         }
       />

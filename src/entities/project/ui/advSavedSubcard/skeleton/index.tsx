@@ -2,7 +2,7 @@ import { Skeleton } from "@shared/ui";
 import { FC } from "react";
 import styles from "./styles.module.scss";
 
-export const SkeletonTemplateProjectCard: FC = () => {
+export const SkeletonSavedSubcard: FC = () => {
   return (
     <Skeleton className="bg-skeleton-light rounded-[20px]">
       <div className={styles.card}>

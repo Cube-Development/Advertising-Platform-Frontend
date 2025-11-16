@@ -56,7 +56,7 @@ export const useCreateOrderLoad = ({ projectId, role }: Props) => {
       skip: !projectId || !isAuth,
     });
 
-  // project prices if manager own project
+  // project prices if agency project
   const { data: projectPrices, isLoading: isProjectPricesLoading } =
     useGetOrderPricesQuery(projectNameReq, {
       skip: !projectId || !isAuth || role !== ENUM_ROLES.AGENCY,

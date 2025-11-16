@@ -12,7 +12,6 @@ import {
   Drawer,
   DrawerContent,
   DrawerTrigger,
-  ToastAction,
   useToast,
 } from "@shared/ui";
 import { IOrderFeature, usePublishPostMutation } from "@entities/project";
@@ -196,7 +195,6 @@ export const SendLink: FC<IOrderFeature> = ({
         toast({
           variant: "error",
           title: t("toasts.offers_blogger.send_link.error"),
-          action: <ToastAction altText="Ok">Ok</ToastAction>,
         });
         console.error("error: ", error);
       });

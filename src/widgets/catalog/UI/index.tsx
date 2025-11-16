@@ -101,7 +101,7 @@ export const CatalogBlock: FC = () => {
         user_id: userId,
       },
       {
-        skip: !isAuth || !userId || role !== ENUM_ROLES.ADVERTISER,
+        skip: !isAuth || !userId || (projectId ? true : false),
       },
     );
 
@@ -113,10 +113,7 @@ export const CatalogBlock: FC = () => {
         project_id: projectId,
       },
       {
-        skip:
-          !isAuth ||
-          !projectId ||
-          (role !== ENUM_ROLES.MANAGER && role !== ENUM_ROLES.AGENCY),
+        skip: !isAuth || !projectId,
       },
     );
 
@@ -167,9 +164,9 @@ export const CatalogBlock: FC = () => {
   // Синхронизация страницы в форме с количеством загруженных данных
   useEffect(() => {
     const currentData =
-      isAuth && role === ENUM_ROLES.ADVERTISER
+      isAuth && !projectId
         ? catalogAuth
-        : isAuth && (role === ENUM_ROLES.MANAGER || role === ENUM_ROLES.AGENCY)
+        : isAuth && projectId
           ? projectId
             ? catalogManager
             : catalogManagerPublic
@@ -213,7 +210,10 @@ export const CatalogBlock: FC = () => {
 
   const { data: cart } = useReadCommonCartQuery(
     { language: language?.id || USER_LANGUAGES_LIST[0].id },
-    { skip: !isAuth || role !== ENUM_ROLES.ADVERTISER },
+    {
+      skip:
+        !isAuth || (projectId ? true : false) || role !== ENUM_ROLES.ADVERTISER,
+    },
   );
   const { data: cartManager } = useReadManagerCartQuery(
     {
@@ -221,10 +221,7 @@ export const CatalogBlock: FC = () => {
       language: language?.id || USER_LANGUAGES_LIST[0].id,
     },
     {
-      skip:
-        !isAuth ||
-        (role !== ENUM_ROLES.MANAGER && role !== ENUM_ROLES.AGENCY) ||
-        !projectId,
+      skip: !isAuth || !projectId,
     },
   );
 
@@ -237,7 +234,7 @@ export const CatalogBlock: FC = () => {
     cart || cartPub || cartManager!,
   );
   useEffect(() => {
-    if (isAuth && role === ENUM_ROLES.ADVERTISER && cart) {
+    if (isAuth && !projectId && cart) {
       setCurrentCart(cart);
     }
   }, [cart]);
@@ -248,11 +245,7 @@ export const CatalogBlock: FC = () => {
   }, [cartPub]);
 
   useEffect(() => {
-    if (
-      isAuth &&
-      (role === ENUM_ROLES.MANAGER || role === ENUM_ROLES.AGENCY) &&
-      cartManager
-    ) {
+    if (isAuth && projectId && cartManager) {
       setCurrentCart(cartManager);
     }
   }, [cartManager]);
@@ -305,9 +298,9 @@ export const CatalogBlock: FC = () => {
 
     let newCards: ICatalogChannel[] = [];
     const currentCard = (
-      (isAuth && role == ENUM_ROLES.ADVERTISER
+      (isAuth && !projectId
         ? catalogAuth?.channels
-        : isAuth && (role == ENUM_ROLES.MANAGER || role == ENUM_ROLES.AGENCY)
+        : isAuth && projectId
           ? catalogManager?.channels
           : catalogPublic?.channels) || []
     )?.find((card) => card?.id === cartChannel.id);
@@ -331,10 +324,9 @@ export const CatalogBlock: FC = () => {
         cartChannel.selected_format
       ) {
         newCards = (
-          (isAuth && role == ENUM_ROLES.ADVERTISER
+          (isAuth && !projectId
             ? catalogAuth?.channels
-            : isAuth &&
-                (role == ENUM_ROLES.MANAGER || role == ENUM_ROLES.AGENCY)
+            : isAuth && projectId
               ? catalogManager?.channels
               : catalogPublic?.channels) || []
         ).map((card) => {
@@ -357,11 +349,10 @@ export const CatalogBlock: FC = () => {
               toast({
                 variant: "error",
                 title: t("toasts.catalog.add.error"),
-                action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
               console.error("Ошибка при добавлении в корзину", error);
             });
-        } else if (isAuth && role === ENUM_ROLES.ADVERTISER) {
+        } else if (isAuth && !projectId) {
           addToCommonCart(addReq)
             .unwrap()
             .then((data) => {
@@ -371,15 +362,10 @@ export const CatalogBlock: FC = () => {
               toast({
                 variant: "error",
                 title: t("toasts.catalog.add.error"),
-                action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
               console.error("Ошибка при добавлении в корзину", error);
             });
-        } else if (
-          isAuth &&
-          (role === ENUM_ROLES.MANAGER || role === ENUM_ROLES.AGENCY) &&
-          projectId
-        ) {
+        } else if (isAuth && projectId) {
           addToManagerCart({ ...addReq, project_id: projectId })
             .unwrap()
             .then((data) => {
@@ -389,7 +375,6 @@ export const CatalogBlock: FC = () => {
               toast({
                 variant: "error",
                 title: t("toasts.catalog.add.error"),
-                action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
               console.error("Ошибка при добавлении в корзину", error);
             });
@@ -409,11 +394,10 @@ export const CatalogBlock: FC = () => {
               toast({
                 variant: "error",
                 title: t("toasts.catalog.add.error"),
-                action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
               console.error("Ошибка при добавлении в корзину", error);
             });
-        } else if (isAuth && role === ENUM_ROLES.ADVERTISER) {
+        } else if (isAuth && !projectId) {
           addToCommonCart(addReq)
             .unwrap()
             .then((data) => {
@@ -423,15 +407,10 @@ export const CatalogBlock: FC = () => {
               toast({
                 variant: "error",
                 title: t("toasts.catalog.add.error"),
-                action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
               console.error("Ошибка при добавлении в корзину", error);
             });
-        } else if (
-          isAuth &&
-          (role === ENUM_ROLES.MANAGER || role === ENUM_ROLES.AGENCY) &&
-          projectId
-        ) {
+        } else if (isAuth && projectId) {
           addToManagerCart({ ...addReq, project_id: projectId })
             .unwrap()
             .then((data) => {
@@ -441,16 +420,14 @@ export const CatalogBlock: FC = () => {
               toast({
                 variant: "error",
                 title: t("toasts.catalog.add.error"),
-                action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
               console.error("Ошибка при добавлении в корзину", error);
             });
         }
         newCards = (
-          (isAuth && role == ENUM_ROLES.ADVERTISER
+          (isAuth && !projectId
             ? catalogAuth?.channels
-            : isAuth &&
-                (role == ENUM_ROLES.MANAGER || role == ENUM_ROLES.AGENCY)
+            : isAuth && projectId
               ? catalogManager?.channels
               : catalogPublic?.channels) || []
         ).map((card) => {
@@ -477,11 +454,10 @@ export const CatalogBlock: FC = () => {
               toast({
                 variant: "error",
                 title: t("toasts.catalog.remove.error"),
-                action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
               console.error("Ошибка при удалении с корзины", error);
             });
-        } else if (isAuth && role === ENUM_ROLES.ADVERTISER) {
+        } else if (isAuth && !projectId) {
           removeFromCommonCart(removeReq)
             .unwrap()
             .then((data) => {
@@ -491,15 +467,10 @@ export const CatalogBlock: FC = () => {
               toast({
                 variant: "error",
                 title: t("toasts.catalog.remove.error"),
-                action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
               console.error("Ошибка при удалении с корзины", error);
             });
-        } else if (
-          isAuth &&
-          (role === ENUM_ROLES.MANAGER || role === ENUM_ROLES.AGENCY) &&
-          projectId
-        ) {
+        } else if (isAuth && projectId) {
           removeFromManagerCart({ ...removeReq, project_id: projectId })
             .unwrap()
             .then((data) => {
@@ -509,16 +480,14 @@ export const CatalogBlock: FC = () => {
               toast({
                 variant: "error",
                 title: t("toasts.catalog.remove.error"),
-                action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
               console.error("Ошибка при удалении с корзины", error);
             });
         }
         newCards = (
-          (isAuth && role == ENUM_ROLES.ADVERTISER
+          (isAuth && !projectId
             ? catalogAuth?.channels
-            : isAuth &&
-                (role == ENUM_ROLES.MANAGER || role == ENUM_ROLES.AGENCY)
+            : isAuth && projectId
               ? catalogManager?.channels
               : catalogPublic?.channels) || []
         ).map((card) => {
@@ -596,11 +565,9 @@ export const CatalogBlock: FC = () => {
                 channels={
                   formState?.filter?.platform === platformTypesNum.site
                     ? mockData
-                    : (isAuth && role == ENUM_ROLES.ADVERTISER
+                    : (isAuth && !projectId
                         ? catalogAuth?.channels
-                        : isAuth &&
-                            (role == ENUM_ROLES.MANAGER ||
-                              role == ENUM_ROLES.AGENCY)
+                        : isAuth && projectId
                           ? projectId
                             ? catalogManager?.channels
                             : catalogManagerPublic?.channels
@@ -608,11 +575,9 @@ export const CatalogBlock: FC = () => {
                 }
                 onChangeCard={handleChangeCards}
                 isLast={
-                  (isAuth && role == ENUM_ROLES.ADVERTISER
+                  (isAuth && !projectId
                     ? catalogAuth?.isLast
-                    : isAuth &&
-                        (role == ENUM_ROLES.MANAGER ||
-                          role == ENUM_ROLES.AGENCY)
+                    : isAuth && projectId
                       ? projectId
                         ? catalogManager?.isLast
                         : catalogManagerPublic?.isLast

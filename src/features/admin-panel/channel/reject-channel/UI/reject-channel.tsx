@@ -13,7 +13,6 @@ import {
   DialogTitle,
   DialogTrigger,
   MyButton,
-  ToastAction,
   useToast,
 } from "@shared/ui";
 import { FC, useState } from "react";
@@ -64,7 +63,6 @@ export const RejectChannel: FC<RejectChannelProps> = ({ id }) => {
       toast({
         variant: "error",
         title: t("toasts.admin.channel.reject.error"),
-        action: <ToastAction altText="Ok">Ok</ToastAction>,
       });
       console.error("error: ", error);
     }

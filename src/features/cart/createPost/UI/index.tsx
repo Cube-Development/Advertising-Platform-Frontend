@@ -8,9 +8,7 @@ import { useTranslation } from "react-i18next";
 import { useCreatePostAdvertiser, useCreatePostManager } from "../model";
 import styles from "./styles.module.scss";
 
-interface CreatePostProps {}
-
-export const CreatePost: FC<CreatePostProps> = ({}) => {
+export const CreatePost: FC = () => {
   const { t } = useTranslation();
   const { isAuth, role } = useAppSelector((state) => state.user);
   const { toast } = useToast();

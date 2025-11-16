@@ -1,0 +1,69 @@
+.button {
+  padding: 15px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 1;
+  border-radius: 15px;
+}
+
+.content {
+  display: grid;
+  grid-template-rows: min-content 1fr;
+  max-width: 596px !important;
+  padding: 0;
+  row-gap: 50px;
+
+  @media (max-width: 596px) {
+    width: 100% !important;
+  }
+
+  .header {
+    padding: 20px 25px;
+    position: relative;
+    border-bottom: solid 1px rgba(0, 0, 0, 0.2);
+
+    .title {
+      color: var(--Personal-colors-black, #000);
+      font-size: 20px;
+      font-style: normal;
+      font-weight: 600;
+      line-height: 1;
+    }
+  }
+
+  .description {
+    display: grid;
+    grid-auto-flow: row;
+    align-content: space-between;
+
+    .wallets_choose {
+      padding: 0 25px;
+      display: grid;
+      grid-auto-flow: row;
+      row-gap: 30px;
+
+      @media (max-width: 768px) {
+        padding: 0;
+      }
+
+      .subtitle {
+        color: var(--Personal-colors-black, #000);
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1;
+        margin-top: 10px;
+
+        @media (max-width: 576px) {
+          font-size: 16px;
+          text-align: center;
+        }
+      }
+    }
+
+    .bottom {
+      padding: 20px 25px;
+    }
+  }
+}

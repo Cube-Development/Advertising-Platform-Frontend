@@ -12,11 +12,13 @@ export enum orderStatus {
   order_review = 11, // есть комменты заказчика (desire)
   channel_agreed = 12, // согласованный канал
   adv_accept = 13, // отправил сф взял деньги(блогер)
+  saved = 14, // ордер в сохраненном проекте
 }
 
 export const orderStatusChat = [
   orderStatus.post_review,
   orderStatus.in_progress,
+  orderStatus.wait,
 ];
 
 export enum desireStatus {

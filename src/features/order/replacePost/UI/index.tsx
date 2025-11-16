@@ -24,7 +24,6 @@ import {
   DrawerTitle,
   DrawerTrigger,
   MyButton,
-  ToastAction,
   useToast,
 } from "@shared/ui";
 import { CheckCheck, Loader } from "lucide-react";
@@ -82,7 +81,6 @@ export const ReplacePost: FC<ReplacePostProps> = ({ order, status, code }) => {
           toast({
             variant: "error",
             title: t("toasts.orders_advertiser.replace.post.error"),
-            action: <ToastAction altText="Ok">Ok</ToastAction>,
           });
           console.error("error: ", error);
         });

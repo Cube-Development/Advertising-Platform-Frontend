@@ -1,5 +1,5 @@
 import { IBuyTariff, usePostBuyTarifMutation } from "@entities/project";
-import { ToastAction, useToast } from "@shared/ui";
+import { useToast } from "@shared/ui";
 import { useTranslation } from "react-i18next";
 
 export const useBuyTariff = () => {
@@ -34,7 +34,6 @@ export const useBuyTariff = () => {
       toast({
         variant: "error",
         title: t("toasts.turnkey.error"),
-        action: <ToastAction altText="Ok">Ok</ToastAction>,
       });
     }
   };
