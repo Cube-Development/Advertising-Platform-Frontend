@@ -101,7 +101,7 @@ export const CatalogBlock: FC = () => {
         user_id: userId,
       },
       {
-        skip: !isAuth || !userId || role !== ENUM_ROLES.ADVERTISER,
+        skip: !isAuth || !userId || (projectId ? true : false),
       },
     );
 
@@ -113,10 +113,7 @@ export const CatalogBlock: FC = () => {
         project_id: projectId,
       },
       {
-        skip:
-          !isAuth ||
-          !projectId ||
-          (role !== ENUM_ROLES.MANAGER && role !== ENUM_ROLES.AGENCY),
+        skip: !isAuth || !projectId,
       },
     );
 
@@ -167,9 +164,9 @@ export const CatalogBlock: FC = () => {
   // Синхронизация страницы в форме с количеством загруженных данных
   useEffect(() => {
     const currentData =
-      isAuth && role === ENUM_ROLES.ADVERTISER
+      isAuth && !projectId
         ? catalogAuth
-        : isAuth && (role === ENUM_ROLES.MANAGER || role === ENUM_ROLES.AGENCY)
+        : isAuth && projectId
           ? projectId
             ? catalogManager
             : catalogManagerPublic
@@ -213,7 +210,10 @@ export const CatalogBlock: FC = () => {
 
   const { data: cart } = useReadCommonCartQuery(
     { language: language?.id || USER_LANGUAGES_LIST[0].id },
-    { skip: !isAuth || (projectId ? true : false) || role !== ENUM_ROLES.ADVERTISER },
+    {
+      skip:
+        !isAuth || (projectId ? true : false) || role !== ENUM_ROLES.ADVERTISER,
+    },
   );
   const { data: cartManager } = useReadManagerCartQuery(
     {
@@ -467,7 +467,6 @@ export const CatalogBlock: FC = () => {
               toast({
                 variant: "error",
                 title: t("toasts.catalog.remove.error"),
-                action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
               console.error("Ошибка при удалении с корзины", error);
             });
@@ -566,11 +565,9 @@ export const CatalogBlock: FC = () => {
                 channels={
                   formState?.filter?.platform === platformTypesNum.site
                     ? mockData
-                    : (isAuth && role == ENUM_ROLES.ADVERTISER
+                    : (isAuth && !projectId
                         ? catalogAuth?.channels
-                        : isAuth &&
-                            (role == ENUM_ROLES.MANAGER ||
-                              role == ENUM_ROLES.AGENCY)
+                        : isAuth && projectId
                           ? projectId
                             ? catalogManager?.channels
                             : catalogManagerPublic?.channels
@@ -578,11 +575,9 @@ export const CatalogBlock: FC = () => {
                 }
                 onChangeCard={handleChangeCards}
                 isLast={
-                  (isAuth && role == ENUM_ROLES.ADVERTISER
+                  (isAuth && !projectId
                     ? catalogAuth?.isLast
-                    : isAuth &&
-                        (role == ENUM_ROLES.MANAGER ||
-                          role == ENUM_ROLES.AGENCY)
+                    : isAuth && projectId
                       ? projectId
                         ? catalogManager?.isLast
                         : catalogManagerPublic?.isLast

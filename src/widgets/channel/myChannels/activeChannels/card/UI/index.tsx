@@ -28,7 +28,7 @@ import {
   StarIcon4,
 } from "@shared/assets";
 import { ENUM_PATHS } from "@shared/routing";
-import { ToastAction, useToast } from "@shared/ui";
+import { useToast } from "@shared/ui";
 import { buildPathWithQuery, queryParamKeys } from "@shared/utils";
 import { Cog } from "lucide-react";
 import { FC } from "react";
@@ -75,7 +75,6 @@ export const ChannelCard: FC<ChannelCardProps> = ({ card, statusFilter }) => {
           toast({
             variant: "error",
             title: t("toasts.offers_blogger.channel.activate.error"),
-            action: <ToastAction altText="Ok">Ok</ToastAction>,
           });
           console.error("Ошибка при активации канала: ", error);
         });

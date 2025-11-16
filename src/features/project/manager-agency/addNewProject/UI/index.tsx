@@ -10,9 +10,9 @@ import styles from "./styles.module.scss";
 import { useCreateAgencyProjectMutation } from "@entities/project";
 import { Loader } from "lucide-react";
 
-interface AddManagerNewProjectProps {}
+interface AddAgencyNewProjectProps {}
 
-export const AddManagerNewProject: FC<AddManagerNewProjectProps> = () => {
+export const AddAgencyNewProject: FC<AddAgencyNewProjectProps> = () => {
   const { t } = useTranslation();
   const { toast } = useToast();
   const navigate = useNavigate();

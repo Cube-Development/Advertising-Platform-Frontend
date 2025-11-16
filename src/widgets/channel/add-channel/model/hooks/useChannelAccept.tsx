@@ -3,7 +3,7 @@ import {
   useCreateChannelMutation,
   useEditChannelMutation,
 } from "@entities/channel";
-import { ToastAction, useToast } from "@shared/ui";
+import { useToast } from "@shared/ui";
 import { useTranslation } from "react-i18next";
 
 interface IChannelAccept {
@@ -35,7 +35,6 @@ export const useChannelAccept = ({ channel_id, isEdit }: IChannelAccept) => {
             toast({
               variant: "error",
               title: t("toasts.add_platform.edit.error"),
-              action: <ToastAction altText="Ok">Ok</ToastAction>,
             });
           });
     } else {
@@ -52,7 +51,6 @@ export const useChannelAccept = ({ channel_id, isEdit }: IChannelAccept) => {
             toast({
               variant: "error",
               title: t("toasts.add_platform.create.error"),
-              action: <ToastAction altText="Ok">Ok</ToastAction>,
             });
           });
     }

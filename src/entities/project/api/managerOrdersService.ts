@@ -181,6 +181,8 @@ export const managerProjectsAPI = authApi.injectEndpoints({
         method: "GET",
         params: params,
       }),
+      providesTags: [CREATE_PROJECT_POSTS],
+      keepUnusedDataFor: 0,
     }),
 
     getPostsRereview: build.query<IManagerProjectPosts, getPostsReq>({
@@ -190,6 +192,7 @@ export const managerProjectsAPI = authApi.injectEndpoints({
         params: params,
       }),
       providesTags: [CREATE_PROJECT_POSTS],
+      keepUnusedDataFor: 0,
     }),
   }),
 });

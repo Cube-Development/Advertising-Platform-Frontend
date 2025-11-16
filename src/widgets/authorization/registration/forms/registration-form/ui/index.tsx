@@ -11,7 +11,7 @@ import { useHandleAuth } from "@features/useHandleAuth";
 import { USER_LANGUAGES_LIST } from "@shared/languages";
 import { useAppSelector } from "@shared/hooks";
 import { ENUM_PATHS } from "@shared/routing";
-import { CustomCheckbox, ToastAction, useToast } from "@shared/ui";
+import { CustomCheckbox, useToast } from "@shared/ui";
 import { Eye, EyeOff, Loader } from "lucide-react";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -110,7 +110,6 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({
               toast({
                 variant: "error",
                 title: t("toasts.authorization.auth_error"),
-                action: <ToastAction altText="Ok">Ok</ToastAction>,
               });
             });
         })
@@ -119,19 +118,16 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({
             toast({
               variant: "error",
               title: t("toasts.authorization.account_exist"),
-              action: <ToastAction altText="Ok">OK</ToastAction>,
             });
           } else if (error.status === 423) {
             toast({
               variant: "error",
               title: t("toasts.registration.wrong_code"),
-              action: <ToastAction altText="Ok">OK</ToastAction>,
             });
           } else {
             toast({
               variant: "error",
               title: t("toasts.authorization.registration_error"),
-              action: <ToastAction altText="Ok">OK</ToastAction>,
             });
           }
         });

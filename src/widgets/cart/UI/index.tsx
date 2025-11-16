@@ -40,7 +40,10 @@ export const Cart: FC = () => {
 
   const { data: cart, isLoading: isLoadingCommon } = useReadCommonCartQuery(
     { language: language?.id || USER_LANGUAGES_LIST[0].id },
-    { skip: !isAuth || (projectId ? true : false) || role !== ENUM_ROLES.ADVERTISER },
+    {
+      skip:
+        !isAuth || (projectId ? true : false) || role !== ENUM_ROLES.ADVERTISER,
+    },
   );
 
   const { data: cartManager, isLoading: isLoadingManager } =

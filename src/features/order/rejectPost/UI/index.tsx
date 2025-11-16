@@ -12,7 +12,6 @@ import {
   DrawerContent,
   DrawerTrigger,
   MyButton,
-  ToastAction,
   useToast,
 } from "@shared/ui";
 import { Loader, SendHorizonal, X } from "lucide-react";
@@ -42,7 +41,6 @@ export const RejectPost: FC<IOrderFeature> = ({ order_id }) => {
           toast({
             variant: "error",
             title: t("toasts.orders_advertiser.reject_post.error"),
-            action: <ToastAction altText="Ok">Ok</ToastAction>,
           });
           console.error("error: ", error);
         });

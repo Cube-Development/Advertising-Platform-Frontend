@@ -5,7 +5,7 @@ import {
 } from "@entities/admin-panel";
 import { ADMIN_CHANNELS } from "@shared/api";
 import { useAppDispatch } from "@shared/hooks";
-import { AccountsLoader, MyButton, ToastAction, useToast } from "@shared/ui";
+import { AccountsLoader, MyButton, useToast } from "@shared/ui";
 import { ButtonHTMLAttributes, forwardRef } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -35,7 +35,6 @@ export const UpdateChannel = forwardRef<HTMLButtonElement, UpdateChannelProps>(
         toast({
           variant: "error",
           title: t("toasts.admin.channel.edit.error"),
-          action: <ToastAction altText="Ok">Ok</ToastAction>,
         });
       }
     };

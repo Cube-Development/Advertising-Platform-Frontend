@@ -39,12 +39,12 @@ export const RunSavedProject: FC<RunSavedProjectProps> = ({
   const [createPayment, { isLoading }] = useCreatePaymentProjectMutation();
 
   const handleOnClick = async () => {
-    if (!project_id || isLoading) return;
+    if (!project_id || isLoading || !walletType) return;
 
     try {
       await createPayment({
         project_id,
-        wallet_type: ENUM_WALLETS_TYPE.SPENDING,
+        wallet_type: walletType,
       }).unwrap();
       toast({
         variant: "success",

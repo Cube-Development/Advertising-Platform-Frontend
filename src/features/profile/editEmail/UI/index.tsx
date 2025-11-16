@@ -13,7 +13,6 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
   MyButton,
-  ToastAction,
   useToast,
 } from "@shared/ui";
 import { isValidEmail, isValidEmailCode } from "@shared/utils";
@@ -77,7 +76,6 @@ export const EditEmail: FC = () => {
             toast({
               variant: "success",
               title: t("toasts.profile.edit.email.success"),
-              action: <ToastAction altText="Ok">Ok</ToastAction>,
             });
           })
           .catch((error) => {
@@ -88,7 +86,6 @@ export const EditEmail: FC = () => {
             toast({
               variant: "error",
               title: t(message),
-              action: <ToastAction altText="Ok">Ok</ToastAction>,
             });
             console.log(error);
           });
@@ -104,7 +101,6 @@ export const EditEmail: FC = () => {
             toast({
               variant: "success",
               title: t("toasts.profile.edit.email_code.success"),
-              action: <ToastAction altText="Ok">Ok</ToastAction>,
             });
             handleClose();
           })
@@ -112,7 +108,6 @@ export const EditEmail: FC = () => {
             toast({
               variant: "error",
               title: t("toasts.profile.edit.email_code.error"),
-              action: <ToastAction altText="Ok">Ok</ToastAction>,
             });
             console.error("error: ", error);
           });

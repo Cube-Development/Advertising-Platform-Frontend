@@ -13,7 +13,6 @@ import {
   DialogTitle,
   DialogTrigger,
   MyButton,
-  ToastAction,
   useToast,
 } from "@shared/ui";
 import { FC, useState } from "react";
@@ -61,7 +60,6 @@ export const BanChannel: FC<BanChannelProps> = ({ id }) => {
       toast({
         variant: "error",
         title: t("toasts.admin.channel.ban.error"),
-        action: <ToastAction altText="Ok">Ok</ToastAction>,
       });
       console.error("error: ", error);
     }

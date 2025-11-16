@@ -111,6 +111,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
         params: params,
       }),
       providesTags: [CREATE_PROJECT_NAME],
+      keepUnusedDataFor: 0,
     }),
     createPost: build.mutation<{ success: boolean }, ICreatePostReq>({
       query: (body) => ({
@@ -148,6 +149,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
         };
       },
       providesTags: [CREATE_PROJECT_DATES],
+      keepUnusedDataFor: 0,
     }),
     createOrderDates: build.mutation<{ success: boolean }, ICreateDate>({
       query: (body) => ({
@@ -163,6 +165,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
         params,
       }),
       providesTags: [CREATE_PROJECT_AMOUNT],
+      keepUnusedDataFor: 0,
     }),
     acceptOrder: build.mutation<{ success: boolean }, { order_id: string }>({
       query: (params) => ({
@@ -367,11 +370,39 @@ export const advProjectsAPI = authApi.injectEndpoints({
       { project_id: string }
     >({
       query: (params) => ({
-        url: `order/project/saved/delete`,
-        method: "PUT",
+        url: `/order/project/saved/delete`,
+        method: "DELETE",
         params: params,
       }),
       invalidatesTags: [ADV_PROJECTS],
+      async onQueryStarted({ project_id }, { dispatch, queryFulfilled }) {
+        // Оптимистично обновляем кеш - удаляем проект из всех кешированных запросов
+        const patchResult = dispatch(
+          advProjectsAPI.util.updateQueryData(
+            "getAdvSavedProjects",
+            { page: 1 } as getSavedProjectsCardReq,
+            (draft) => {
+              if (draft?.projects) {
+                const originalLength = draft.projects.length;
+                draft.projects = draft.projects.filter(
+                  (p) => p.id !== project_id,
+                );
+                if (draft.projects.length < originalLength) {
+                  draft.elements = Math.max(0, draft.elements - 1);
+                }
+              }
+            },
+          ),
+        );
+
+        try {
+          await queryFulfilled;
+          // Инвалидируем теги для обновления всех активных запросов
+          dispatch(advProjectsAPI.util.invalidateTags([ADV_PROJECTS]));
+        } catch {
+          patchResult.undo();
+        }
+      },
     }),
 
     getAdvManagerProjects: build.query<

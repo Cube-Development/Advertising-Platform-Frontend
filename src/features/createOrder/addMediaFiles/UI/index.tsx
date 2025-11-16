@@ -5,7 +5,7 @@ import {
   TrashBasketIcon,
   YesIcon,
 } from "@shared/assets";
-import { ScrollArea, ToastAction, formatFileSize, useToast } from "@shared/ui";
+import { ScrollArea, formatFileSize, useToast } from "@shared/ui";
 import { InfoIcon } from "lucide-react";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -29,7 +29,6 @@ export const AddMediaFiles: FC<FileProps> = ({ onChange, currentFiles }) => {
         toast({
           variant: "error",
           title: t("create_order.create.add_files.mediafile.max_length"),
-          action: <ToastAction altText="OK">OK</ToastAction>,
         });
       }
     }
@@ -64,7 +63,6 @@ export const AddMediaFiles: FC<FileProps> = ({ onChange, currentFiles }) => {
   //       toast({
   //         variant: "error",
   //         title: t("create_order.create.add_files.mediafile.max_length"),
-  //         action: <ToastAction altText="OK">OK</ToastAction>,
   //       });
   //     }
   //   }

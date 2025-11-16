@@ -1,5 +1,5 @@
 import { IPasswordData, useEditPasswordMutation } from "@entities/user";
-import { MyButton, ToastAction, useToast } from "@shared/ui";
+import { MyButton, useToast } from "@shared/ui";
 import { Loader } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
@@ -48,7 +48,6 @@ export const EditPassword: FC<EditPasswordProps> = ({ password }) => {
             toast({
               variant: "error",
               title: t("toasts.profile.edit.password.error"),
-              action: <ToastAction altText="Ok">Ok</ToastAction>,
             });
             console.error("error: ", error);
           });

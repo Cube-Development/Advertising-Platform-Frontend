@@ -18,6 +18,7 @@ export enum orderStatus {
 export const orderStatusChat = [
   orderStatus.post_review,
   orderStatus.in_progress,
+  orderStatus.wait,
 ];
 
 export enum desireStatus {

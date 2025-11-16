@@ -5,7 +5,7 @@ import {
 } from "@entities/admin-panel";
 import { ADMIN_CHANNELS } from "@shared/api";
 import { useAppDispatch } from "@shared/hooks";
-import { AccountsLoader, MyButton, ToastAction, useToast } from "@shared/ui";
+import { AccountsLoader, MyButton, useToast } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 
@@ -37,7 +37,6 @@ export const AcceptRemoderation: FC<AcceptRemoderationProps> = ({
       toast({
         variant: "error",
         title: t("toasts.admin.channel.remoderation.error"),
-        action: <ToastAction altText="Ok">Ok</ToastAction>,
       });
       console.error("error: ", error);
     }

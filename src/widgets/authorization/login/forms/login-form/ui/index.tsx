@@ -3,7 +3,7 @@ import { loginSteps } from "../../config";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
 import { useHandleAuth } from "@features/useHandleAuth";
-import { ToastAction, useToast } from "@shared/ui";
+import { useToast } from "@shared/ui";
 import { useGetUserMutation, useLoginMutation } from "@entities/user";
 import { Loader, Eye, EyeOff } from "lucide-react";
 
@@ -62,7 +62,6 @@ export const LoginForm: FC<Props> = ({ onNavigate }) => {
           toast({
             variant: "error",
             title: t("toasts.authorization.auth_error"),
-            action: <ToastAction altText="Ok">Ok</ToastAction>,
           });
         });
     }

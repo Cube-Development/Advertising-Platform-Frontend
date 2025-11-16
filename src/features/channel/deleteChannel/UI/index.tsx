@@ -2,7 +2,7 @@ import { FC, useEffect, useRef } from "react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
 import { CancelIcon2, CloseIcon, YesIcon } from "@shared/assets";
-import { MyModal, ToastAction, useToast } from "@shared/ui";
+import { MyModal, useToast } from "@shared/ui";
 import { useDeleteChannelMutation } from "@entities/channel";
 
 interface DeleteChannelProps {
@@ -34,7 +34,6 @@ export const DeleteChannel: FC<DeleteChannelProps> = ({
           toast({
             variant: "error",
             title: t("toasts.offers_blogger.channel.delete.error"),
-            action: <ToastAction altText="Ok">Ok</ToastAction>,
           });
         });
   };
