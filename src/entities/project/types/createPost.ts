@@ -101,6 +101,7 @@ export interface DateListProps {
 export interface TimeListProps {
   onChange: (timeList: string[]) => void;
   startTime?: string[] | undefined;
+  selectedDate?: string;
 }
 
 export interface FileProps {

@@ -105,6 +105,10 @@ export const OrderCard: FC<PostPlatformProps> = ({
     setValue(CreatePostFormData.datetime, datetime);
   };
 
+  const selectedDate = formState.datetime.orders.find(
+    (item) => item.order_id === card.id,
+  )?.date;
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.info}>
@@ -149,6 +153,7 @@ export const OrderCard: FC<PostPlatformProps> = ({
                 ? [card?.time_from, card?.time_to]
                 : undefined
             }
+            selectedDate={selectedDate || card?.date || undefined}
           />
         </div>
         <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
