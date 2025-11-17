@@ -28,7 +28,7 @@ export const FOOTER_NAV_ITEMS = [
       },
       {
         name: "footer.nav.services.links.tg_bot",
-        path: "https://t.me/abddssh",
+        path: "https://t.me/blogix_bot",
       },
     ],
   },

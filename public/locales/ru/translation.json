@@ -41,11 +41,11 @@
       }
     },
     "contacts": {
-      "tech_contact": "+99899-111-11-11",
+      "tech_contact": "Support",
       "tech_title": "По техническим вопросам",
-      "cooperation_contact": "+99891-999-99-99",
+      "cooperation_contact": "Contact",
       "cooperation_title": "По вопросам сотрудничества",
-      "email": "Info@blogix.uz",
+      "email": "Telegram",
       "email_title": "Техническая поддержка круглосуточно",
       "address": "Республика Каракалпакстан, МУЙНАКСКИЙ РАЙОН, Aral MFY, Ajiniyoz ko'chasi, 111-uy"
     },
