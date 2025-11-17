@@ -45,7 +45,11 @@ const timeSlots: string[] = [
   "21:00 - 23:59",
 ];
 
-export const TimeList: FC<TimeListProps> = ({ onChange, startTime }) => {
+export const TimeList: FC<TimeListProps> = ({
+  onChange,
+  startTime,
+  selectedDate,
+}) => {
   const { t } = useTranslation();
   const [isSelectRange, setIsSelectRange] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -66,6 +70,16 @@ export const TimeList: FC<TimeListProps> = ({ onChange, startTime }) => {
 
   // Проверяем, прошел ли слот
   const isSlotPassed = (timeSlot: string) => {
+    // Получаем сегодняшнюю дату в том же формате
+    const today = new Date();
+    const todayFormatted = `${today.getDate().toString().padStart(2, "0")}.${(today.getMonth() + 1).toString().padStart(2, "0")}.${today.getFullYear()}`;
+
+    // Если дата не сегодняшняя, слот не прошел
+    if (selectedDate && selectedDate !== todayFormatted) {
+      return false;
+    }
+
+    // Если дата сегодняшняя, проверяем время
     const currentTimeInMinutes = getCurrentTime();
     const [, endTime] = timeSlot.split(" - ");
     const [endHours, endMinutes] = endTime.split(":").map(Number);
