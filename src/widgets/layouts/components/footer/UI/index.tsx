@@ -63,23 +63,26 @@ export const Footer: FC = () => {
               </div>
               <div className={styles.contacts}>
                 <div className={styles.contacts__item}>
-                  <h4>
-                    {/* {t("footer.contacts.tech_contact")} */}
-                    ...
+                  <h4 className="!underline">
+                    <Link to="https://t.me/blogix_support" target="_blank">
+                      {t("footer.contacts.tech_contact")}
+                    </Link>
                   </h4>
                   <p>{t("footer.contacts.tech_title")}</p>
                 </div>
                 <div className={styles.contacts__item}>
-                  <h4>
-                    {/* {t("footer.contacts.cooperation_contact")} */}
-                    ...
+                  <h4 className="!underline">
+                    <Link to="https://t.me/blogix_support" target="_blank">
+                      {t("footer.contacts.cooperation_contact")}
+                    </Link>
                   </h4>
                   <p>{t("footer.contacts.cooperation_title")}</p>
                 </div>
                 <div className={styles.contacts__item}>
-                  <h4>
-                    {/* {t("footer.contacts.email")} */}
-                    ...
+                  <h4 className="!underline">
+                    <Link to="https://t.me/blogix_support" target="_blank">
+                      {t("footer.contacts.email")}
+                    </Link>
                   </h4>
                   <p>{t("footer.contacts.email_title")}</p>
                 </div>
