@@ -38,7 +38,10 @@ export const useGetUniversalPosts = ({ form, posts, skip }: Props) => {
             // Этап 1: Обработка текстовых данных
             const textDataUpdatedPosts = (form?.posts || []).map((formPost) => {
               const backPost = posts.find(
-                (post) => post.match_type === MatchTypesNum.universal,
+                (post) =>
+                  post.match_type === MatchTypesNum.universal &&
+                  post.platform === formPost.platform &&
+                  post.post_type === formPost.post_type,
               );
 
               const text = backPost?.files?.filter(
@@ -63,7 +66,10 @@ export const useGetUniversalPosts = ({ form, posts, skip }: Props) => {
             const postsWithFiles = await Promise.all(
               textDataUpdatedPosts.map(async (formPost) => {
                 const backPost = posts.find(
-                  (post) => post.match_type === MatchTypesNum.universal,
+                  (post) =>
+                    post.match_type === MatchTypesNum.universal &&
+                    post.platform === formPost.platform &&
+                    post.post_type === formPost.post_type,
                 );
 
                 const backFiles = backPost?.files?.filter(

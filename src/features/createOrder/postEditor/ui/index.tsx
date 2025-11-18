@@ -146,23 +146,28 @@ export const Editor: FC<EditorProps> = ({
   }, [setValue, limit, currentPost, postsWithoutCurrent, type]);
 
   useEffect(() => {
-    if (
-      editorRef.current &&
-      startContent &&
-      editorRef.current.innerHTML !== startContent
-    ) {
-      if (isMarkdownText(startContent)) {
-        const htmlContent = parseMarkdownToHtml(startContent);
-        if (editorRef.current.innerHTML !== htmlContent) {
-          editorRef.current.innerHTML = htmlContent;
-        }
-      } else {
-        if (editorRef.current.innerHTML !== startContent) {
-          editorRef.current.innerHTML = startContent;
-        }
+    if (!editorRef.current) return;
+
+    const newContent = startContent || "";
+
+    if (isMarkdownText(newContent)) {
+      const htmlContent = parseMarkdownToHtml(newContent);
+      if (editorRef.current.innerHTML !== htmlContent) {
+        editorRef.current.innerHTML = htmlContent;
+        lastContentRef.current = htmlContent;
+      }
+    } else {
+      if (editorRef.current.innerHTML !== newContent) {
+        editorRef.current.innerHTML = newContent;
+        lastContentRef.current = newContent;
       }
     }
-  }, [startContent]);
+  }, [
+    startContent,
+    platformId,
+    formState.selectedPostType,
+    formState.selectedMultiPostId,
+  ]);
 
   const toggleFormat = (key: keyof TextFormat) => {
     setFormat((prev) => {
