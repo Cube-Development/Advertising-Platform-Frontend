@@ -39,6 +39,7 @@ import { useForm, UseFormReset, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import recomAnimation from "/animated/recom_lottie.gif";
+import { AiChatFilter } from "../../catalogList/parametersFilter/UI/components";
 
 interface CatalogSearchProps {
   setValue: UseFormSetValue<getCatalogReq>;
@@ -271,6 +272,10 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
     setOpenAccordion(openAccordion === value ? undefined : value);
   };
 
+  const handleAiFind = (value: any) => {
+    setValue("filter", { ...formState?.filter, ...value.filter });
+  };
+
   return (
     <>
       <div className={styles.wrapper}>
@@ -399,8 +404,9 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
               />
             </>
           ) : (
-            <>
-              <SelectDescription
+            <div>
+              <AiChatFilter handleFind={handleAiFind} />
+              {/* <SelectDescription
                 onChange={setValueAI}
                 type={channelParameterData.prompt}
                 title={"catalog.ai.title"}
@@ -410,8 +416,8 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
               <AiFilter
                 isLoading={isLoadingAIParameters || isFetchingAIParameters}
                 onChange={handleAIClick}
-              />
-            </>
+              /> */}
+            </div>
           )}
         </div>
       </div>

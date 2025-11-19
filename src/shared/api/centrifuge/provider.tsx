@@ -10,13 +10,13 @@ import {
   useRevalidateNotification,
   useWebsocketTokens,
 } from "./hooks";
-import { PERSONAL_CHANNEL_PREFIX } from "./model";
+// import { PERSONAL_CHANNEL_PREFIX } from "./model";
 
 export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const userId = Cookies.get(ENUM_COOKIES_TYPES.USER_ID)!;
-  const PERSONAL_CHANNEL = PERSONAL_CHANNEL_PREFIX + userId;
+  // const PERSONAL_CHANNEL = PERSONAL_CHANNEL_PREFIX.COMMON + userId;
 
   const { getTokens } = useWebsocketTokens();
   const { revalidateCash } = useRevalidateCash();
@@ -32,7 +32,7 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
   } = useCentrifugeCallbacks();
 
   const { centrifugeRef } = useCentrifugeConnection(
-    PERSONAL_CHANNEL,
+    userId,
     getTokens,
     revalidateCash,
     revalidateNotifications,
@@ -41,10 +41,7 @@ export const CentrifugeProvider: React.FC<{ children: ReactNode }> = ({
     handleReadMessageRef,
   );
 
-  const { OrderMessageSend } = useCentrifugeFunctions(
-    PERSONAL_CHANNEL,
-    centrifugeRef,
-  );
+  const { OrderMessageSend } = useCentrifugeFunctions(userId, centrifugeRef);
 
   return (
     <CentrifugeContext.Provider

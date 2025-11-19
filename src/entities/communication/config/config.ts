@@ -10,6 +10,7 @@ export enum CHAT_TYPE {
 
 export enum MESSAGE_SEND_TYPE {
   ORDER_MESSAGE_CREATE = "OrderMessageCreate",
+  AI_SAMPLE_REQUEST = "AiSampleRequest",
   PROJECT_MESSAGE_CREATE = "ProjectMessageCreate",
 }
 
@@ -51,6 +52,8 @@ export const CHAT_MANAGER_FILTER_TABS_LIST = [
 ];
 
 export enum notificationsTypes {
+  ai_sample_not_ready = "AiSampleNotReady",
+  ai_sample_ready = "AiSampleReady",
   order_message_add = "OrderMessageAdd",
   order_message_read = "OrderMessageRead",
   project_message_add = "ProjectMessageAdd",
@@ -101,6 +104,8 @@ export const WEBSOCKET_MESSAGES_LIST = [
   notificationsTypes.order_message_read,
   notificationsTypes.project_message_add,
   notificationsTypes.project_message_read,
+  notificationsTypes.ai_sample_not_ready,
+  notificationsTypes.ai_sample_ready,
 ];
 
 export const WEBSOCKET_NOTIFICATIONS_LIST = [
