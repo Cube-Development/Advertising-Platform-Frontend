@@ -84,7 +84,20 @@ export const OrderCard: FC<PostPlatformProps> = ({
     const { currentCard, cardsWithoutCurrent } = getCardData(datetime);
     currentCard.time_from = timeList[0];
     currentCard.time_to = timeList[1];
-    datetime.orders = [...cardsWithoutCurrent, currentCard];
+
+    // Присваиваем время всем ордерам, у которых еще нет времени
+    const updatedOtherCards = cardsWithoutCurrent.map((order) => {
+      if (!order.time_from && !order.time_to) {
+        return {
+          ...order,
+          time_from: timeList[0],
+          time_to: timeList[1],
+        };
+      }
+      return order;
+    });
+
+    datetime.orders = [...updatedOtherCards, currentCard];
     setValue(CreatePostFormData.datetime, datetime);
   };
 
@@ -92,22 +105,55 @@ export const OrderCard: FC<PostPlatformProps> = ({
     const datetime = formState.datetime;
     const { currentCard, cardsWithoutCurrent } = getCardData(datetime);
 
+    let dateValue: string | undefined;
+    let dateFrom: string | undefined;
+    let dateTo: string | undefined;
+
     if (dateList.length === 1) {
       delete currentCard.date_from;
       delete currentCard.date_to;
       currentCard.date = formatDateToRuString(dateList[0]);
+      dateValue = formatDateToRuString(dateList[0]);
     } else {
       delete currentCard.date;
       currentCard.date_from = formatDateToRuString(dateList[0]);
       currentCard.date_to = formatDateToRuString(dateList[1]);
+      dateFrom = formatDateToRuString(dateList[0]);
+      dateTo = formatDateToRuString(dateList[1]);
     }
-    datetime.orders = [...cardsWithoutCurrent, currentCard];
+
+    // Присваиваем дату всем ордерам, у которых еще нет даты
+    const updatedOtherCards = cardsWithoutCurrent.map((order) => {
+      const hasNoDate = !order.date && !order.date_from && !order.date_to;
+      if (hasNoDate) {
+        const updatedOrder = { ...order };
+        if (dateValue) {
+          delete updatedOrder.date_from;
+          delete updatedOrder.date_to;
+          updatedOrder.date = dateValue;
+        } else {
+          delete updatedOrder.date;
+          updatedOrder.date_from = dateFrom;
+          updatedOrder.date_to = dateTo;
+        }
+        return updatedOrder;
+      }
+      return order;
+    });
+
+    datetime.orders = [...updatedOtherCards, currentCard];
     setValue(CreatePostFormData.datetime, datetime);
   };
 
-  const selectedDate = formState.datetime.orders.find(
+  const currentOrderData = formState.datetime.orders.find(
     (item) => item.order_id === card.id,
-  )?.date;
+  );
+
+  const selectedDate = currentOrderData?.date;
+  const selectedDateFrom = currentOrderData?.date_from;
+  const selectedDateTo = currentOrderData?.date_to;
+  const selectedTimeFrom = currentOrderData?.time_from;
+  const selectedTimeTo = currentOrderData?.time_to;
 
   return (
     <div className={styles.wrapper}>
@@ -137,10 +183,10 @@ export const OrderCard: FC<PostPlatformProps> = ({
           <CustomCalendar
             onChange={handleChangeDate}
             startDate={
-              card?.date
-                ? card?.date
-                : card?.date_from && card?.date_to
-                  ? [card?.date_from, card?.date_to]
+              selectedDate
+                ? selectedDate
+                : selectedDateFrom && selectedDateTo
+                  ? [selectedDateFrom, selectedDateTo]
                   : undefined
             }
           />
@@ -149,11 +195,11 @@ export const OrderCard: FC<PostPlatformProps> = ({
           <TimeList
             onChange={handleChangeTime}
             startTime={
-              !!card?.time_from && !!card?.time_to
-                ? [card?.time_from, card?.time_to]
+              !!selectedTimeFrom && !!selectedTimeTo
+                ? [selectedTimeFrom, selectedTimeTo]
                 : undefined
             }
-            selectedDate={selectedDate || card?.date || undefined}
+            selectedDate={selectedDate || undefined}
           />
         </div>
         <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
