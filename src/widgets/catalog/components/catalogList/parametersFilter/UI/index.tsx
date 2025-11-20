@@ -54,6 +54,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import styles from "./styles.module.scss";
 import recomAnimation from "/animated/recom_lottie.gif";
+import { AiChatFilter } from "./components";
 
 interface ParametersFilterProps {
   setValue: UseFormSetValue<getCatalogReq>;
@@ -260,6 +261,11 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
   };
 
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleAiFind = (value: any) => {
+    setValue("filter", { ...formState?.filter, ...value.filter });
+  };
+
   return (
     <Drawer open={isOpen} onOpenChange={setIsOpen}>
       <DrawerTrigger className="h-full">
@@ -411,7 +417,8 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
                 </>
               ) : (
                 <>
-                  <SelectDescription
+                  <AiChatFilter handleFind={handleAiFind} />
+                  {/* <SelectDescription
                     onChange={setValueAI}
                     type={channelParameterData.prompt}
                     title={"catalog.ai.title"}
@@ -421,7 +428,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
                   <AiFilter
                     isLoading={isLoadingAIParameters || isFetchingAIParameters}
                     onChange={handleAIClick}
-                  />
+                  /> */}
                 </>
               )}
             </div>

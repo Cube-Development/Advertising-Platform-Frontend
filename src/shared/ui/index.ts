@@ -28,3 +28,4 @@ export * from "./pdf-preview";
 export * from "./custom-mini-tabs";
 export * from "./custom-close";
 export * from "./seeCancelReason";
+export * from "./text-type";

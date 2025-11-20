@@ -31,7 +31,11 @@ export function useCentrifugePublication(
           message.method === notificationsTypes.project_message_read
         ) {
           handleReadMessageRef.current(message);
-        } else if (message.recipient) {
+        } else if (
+          message.recipient ||
+          message.method === notificationsTypes.ai_sample_ready ||
+          message.method === notificationsTypes.ai_sample_not_ready
+        ) {
           handleNewMessageChatRef.current(message);
           handleNewMessageRef.current(message);
         }

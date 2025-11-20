@@ -44,6 +44,7 @@ export interface IMessageNewSocket {
   message_datetime: string;
   status: number;
   message_id?: string;
+  questions?: string[];
 }
 
 export interface IChatData {

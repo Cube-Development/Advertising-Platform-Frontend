@@ -1,11 +1,11 @@
 import { useAppSelector } from "@shared/hooks";
 import { Centrifuge } from "centrifuge";
 import { useEffect, useRef } from "react";
-import { CHANNEL_NAME } from "../model";
+import { CENTRIFUGE_CHANNELS, PERSONAL_CHANNEL_PREFIX } from "../model";
 import { useCentrifugePublication } from "./useCentrifugePublication";
 
 export function useCentrifugeConnection(
-  personalChannel: string,
+  userId: string,
   getTokens: (channel: string) => Promise<{ authToken: string; token: string }>,
   revalidateCash: (data: any) => void,
   revalidateNotifications: (data: any) => void,
@@ -29,10 +29,16 @@ export function useCentrifugeConnection(
     if (!isAuth) return;
 
     let sub: ReturnType<Centrifuge["newSubscription"]>;
+    let sub2: ReturnType<Centrifuge["newSubscription"]>;
 
     async function init() {
       try {
-        const { authToken, token } = await getTokens(CHANNEL_NAME);
+        const { authToken, token } = await getTokens(
+          CENTRIFUGE_CHANNELS.COMMON,
+        );
+        const { token: aiSampleToken } = await getTokens(
+          CENTRIFUGE_CHANNELS.AI_SAMPLE,
+        );
 
         const centrifuge = new Centrifuge(import.meta.env.VITE_BASE_WS_URL, {
           getToken: () => Promise.resolve(authToken),
@@ -41,12 +47,25 @@ export function useCentrifugeConnection(
         centrifuge.connect();
         centrifugeRef.current = centrifuge;
 
-        sub = centrifuge.newSubscription(personalChannel, {
-          getToken: () => Promise.resolve(token),
-        });
+        sub = centrifuge.newSubscription(
+          PERSONAL_CHANNEL_PREFIX.COMMON + userId,
+          {
+            getToken: () => Promise.resolve(token),
+          },
+        );
 
         sub.on("publication", onPublication);
         sub.subscribe();
+
+        sub2 = centrifuge.newSubscription(
+          PERSONAL_CHANNEL_PREFIX.AI_SAMPLE + userId,
+          {
+            getToken: () => Promise.resolve(aiSampleToken),
+          },
+        );
+
+        sub2.on("publication", onPublication);
+        sub2.subscribe();
       } catch (error) {
         console.error("Error initializing centrifuge:", error);
       }
@@ -59,7 +78,7 @@ export function useCentrifugeConnection(
     //   centrifugeRef.current?.disconnect();
     //   centrifugeRef.current = null;
     // };
-  }, [isAuth, personalChannel]);
+  }, [isAuth, userId]);
 
   return { centrifugeRef };
 }
