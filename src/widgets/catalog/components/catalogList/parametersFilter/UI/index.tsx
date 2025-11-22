@@ -12,18 +12,14 @@ import {
   getAIParametersReq,
   getCatalogReq,
   getTAParametersReq,
+  ICatalogFilter,
   IFilterSearch,
   useGetAIParametersQuery,
   useGetTAParametersQuery,
 } from "@entities/project";
 import { useFindLanguage } from "@entities/user";
-import { AiFilter, RecomTargetCard } from "@features/catalog";
-import {
-  BarSubFilter,
-  SelectDescription,
-  SelectOptions,
-  SelectSex,
-} from "@features/other";
+import { RecomTargetCard } from "@features/catalog";
+import { BarSubFilter, SelectOptions, SelectSex } from "@features/other";
 import {
   ArrowSmallVerticalIcon,
   CancelIcon2,
@@ -54,7 +50,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import styles from "./styles.module.scss";
 import recomAnimation from "/animated/recom_lottie.gif";
-import { AiChatFilter } from "./components";
+import { AiChatFilter } from "@widgets/catalog/components/ai-chat-filter";
 
 interface ParametersFilterProps {
   setValue: UseFormSetValue<getCatalogReq>;
@@ -262,8 +258,8 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const handleAiFind = (value: any) => {
-    setValue("filter", { ...formState?.filter, ...value.filter });
+  const handleAiFind = (value: ICatalogFilter) => {
+    setValue("filter", { ...formState?.filter, ...value });
   };
 
   return (

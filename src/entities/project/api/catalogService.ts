@@ -17,17 +17,19 @@ export interface getCatalogReq {
   language: ENUM_LANGUAGES_NUM;
   page: number;
   elements_on_page?: number;
-  filter: {
-    platform: platformTypesNum;
-    business: number[];
-    age: number[];
-    male?: number;
-    female?: number;
-    language: number[];
-    region: number[];
-  };
+  filter: ICatalogFilter;
   sort: sortingFilter;
   search_string?: string | undefined;
+}
+
+export interface ICatalogFilter {
+  platform?: platformTypesNum;
+  business: number[];
+  age: number[];
+  male?: number;
+  female?: number;
+  language: number[];
+  region: number[];
 }
 
 export interface getAIParametersReq {

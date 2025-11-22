@@ -12,18 +12,14 @@ import {
   getAIParametersReq,
   getCatalogReq,
   getTAParametersReq,
+  ICatalogFilter,
   IFilterSearch,
   useGetAIParametersQuery,
   useGetTAParametersQuery,
 } from "@entities/project";
 import { useFindLanguage } from "@entities/user";
-import { AiFilter, RecomTargetCard } from "@features/catalog";
-import {
-  BarSubFilter,
-  SelectDescription,
-  SelectOptions,
-  SelectSex,
-} from "@features/other";
+import { RecomTargetCard } from "@features/catalog";
+import { BarSubFilter, SelectOptions, SelectSex } from "@features/other";
 import { ArrowSmallVerticalIcon } from "@shared/assets";
 import { ENUM_ACCORDION_TYPES } from "@shared/config";
 import { USER_LANGUAGES_LIST } from "@shared/languages";
@@ -39,7 +35,7 @@ import { useForm, UseFormReset, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import recomAnimation from "/animated/recom_lottie.gif";
-import { AiChatFilter } from "../../catalogList/parametersFilter/UI/components";
+import { AiChatFilter } from "../../ai-chat-filter";
 
 interface CatalogSearchProps {
   setValue: UseFormSetValue<getCatalogReq>;
@@ -272,8 +268,8 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
     setOpenAccordion(openAccordion === value ? undefined : value);
   };
 
-  const handleAiFind = (value: any) => {
-    setValue("filter", { ...formState?.filter, ...value.filter });
+  const handleAiFind = (value: ICatalogFilter) => {
+    setValue("filter", { ...formState?.filter, ...value });
   };
 
   return (
