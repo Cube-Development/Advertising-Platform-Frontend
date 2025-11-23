@@ -1,5 +1,5 @@
-import { useRef, useCallback } from "react";
 import { IMessageNewSocket } from "@entities/communication";
+import { useCallback, useRef } from "react";
 
 export function useCentrifugeCallbacks() {
   const handleNewMessageRef = useRef<(message: IMessageNewSocket) => void>(
