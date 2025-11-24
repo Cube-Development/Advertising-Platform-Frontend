@@ -30,6 +30,7 @@ interface TextTypeProps {
   onSentenceComplete?: (sentence: string, index: number) => void;
   startOnVisible?: boolean;
   reverseMode?: boolean;
+  onUpdate?: (text: string) => void;
 }
 
 export const TextType = ({
@@ -51,6 +52,7 @@ export const TextType = ({
   onSentenceComplete,
   startOnVisible = false,
   reverseMode = false,
+  onUpdate,
   ...props
 }: TextTypeProps & React.HTMLAttributes<HTMLElement>) => {
   const [displayedText, setDisplayedText] = useState("");
@@ -135,16 +137,22 @@ export const TextType = ({
           timeout = setTimeout(() => {}, pauseDuration);
         } else {
           timeout = setTimeout(() => {
-            setDisplayedText((prev) => prev.slice(0, -1));
+            setDisplayedText((prev) => {
+              const next = prev.slice(0, -1);
+              onUpdate?.(next);
+              return next;
+            });
           }, deletingSpeed);
         }
       } else {
         if (currentCharIndex < processedText.length) {
           timeout = setTimeout(
             () => {
-              setDisplayedText(
-                (prev) => prev + processedText[currentCharIndex],
-              );
+              setDisplayedText((prev) => {
+                const next = prev + processedText[currentCharIndex];
+                onUpdate?.(next);
+                return next;
+              });
               setCurrentCharIndex((prev) => prev + 1);
             },
             variableSpeed ? getRandomSpeed() : typingSpeed,
