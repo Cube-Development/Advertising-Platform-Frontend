@@ -72,7 +72,7 @@ export const useAiChatFilter = (
           text: questionText,
         },
       ];
-
+      console.log("newQuestions", newQuestions);
       setThreadId(message?.thread_id);
       if (newQuestions.length > 0) {
         setQuestionFlow((prev) => {
@@ -87,7 +87,7 @@ export const useAiChatFilter = (
             }
             return current;
           });
-
+          console.log("updated", updated);
           return updated;
         });
       }
@@ -231,6 +231,7 @@ export const useAiChatFilter = (
   const handleFindWithParams = () => {
     if (params) {
       handleFind(params);
+      setIsComplete(false);
     }
   };
 
