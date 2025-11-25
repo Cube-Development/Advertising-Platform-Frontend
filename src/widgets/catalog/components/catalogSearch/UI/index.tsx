@@ -9,12 +9,10 @@ import {
 import {
   CATALOG_FILTER,
   CATALOG_FILTER_TABS_LIST,
-  getAIParametersReq,
   getCatalogReq,
   getTAParametersReq,
   ICatalogFilter,
   IFilterSearch,
-  useGetAIParametersQuery,
   useGetTAParametersQuery,
 } from "@entities/project";
 import { useFindLanguage } from "@entities/user";
@@ -33,9 +31,9 @@ import { Loader } from "lucide-react";
 import { FC, useEffect, useRef, useState } from "react";
 import { useForm, UseFormReset, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { AiChatFilter } from "../../ai-chat-filter";
 import styles from "./styles.module.scss";
 import recomAnimation from "/animated/recom_lottie.gif";
-import { AiChatFilter } from "../../ai-chat-filter";
 
 interface CatalogSearchProps {
   setValue: UseFormSetValue<getCatalogReq>;
@@ -63,12 +61,6 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
   const { data: ages } = useGetChannelAgesQuery(contentRes);
   const { data: regions } = useGetChannelRegionsQuery(contentRes);
   const { data: languages } = useGetChannelLanguagesQuery(contentRes);
-  const [text, setText] = useState<string>("");
-  const { watch: watchAI, setValue: setValueAI } = useForm<getAIParametersReq>({
-    defaultValues: {
-      prompt: "",
-    },
-  });
 
   const { watch: watchTA, setValue: setValueTA } = useForm<getTAParametersReq>({
     defaultValues: {
@@ -80,14 +72,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
 
   const [isRecom, setIsRecom] = useState<boolean>(false);
 
-  const formFieldsAI = watchAI();
   const formFieldsTA = watchTA();
-
-  const {
-    data: AIParameters,
-    isLoading: isLoadingAIParameters,
-    isFetching: isFetchingAIParameters,
-  } = useGetAIParametersQuery({ prompt: text }, { skip: !text.length });
 
   const {
     data: TAParameters,
@@ -171,7 +156,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
   const resetRecommendationCard = () => {
     setRecCard(null);
     setRecCards(null);
-    reset();
+    // reset();
   };
 
   const handleUseRecommendationCard = (card: IFilterSearch) => {
@@ -203,33 +188,21 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
     }, 500);
   }, [isRecom, recommendationCard]);
 
-  const handleAIClick = () => {
-    setText(formFieldsAI.prompt);
-  };
-
   useEffect(() => {
     setValueTA(channelParameterData.category, formState?.filter?.business);
     setValueTA(channelParameterData.region, formState?.filter?.region);
     setValueTA(channelParameterData.language, formState?.filter?.language);
   }, [formState?.filter]);
 
-  useEffect(() => {
-    if (AIParameters) {
-      setValueTA(channelParameterData.category, AIParameters?.category);
-      setValueTA(channelParameterData.region, AIParameters?.region);
-      setValueTA(channelParameterData.language, AIParameters?.language);
-      setOpenAccordion("item-TA-Cards-BIG");
-    }
-  }, [AIParameters]);
-
-  useEffect(() => {
-    reset();
-    if (catalogFilter === CATALOG_FILTER.PARAMETERS) {
-      setValueTA(channelParameterData.category, formState?.filter?.business);
-      setValueTA(channelParameterData.region, formState?.filter?.region);
-      setValueTA(channelParameterData.language, formState?.filter?.language);
-    }
-  }, [catalogFilter]);
+  // Сбрасывает фильтры при переключении табы
+  // useEffect(() => {
+  //   reset();
+  //   if (catalogFilter === CATALOG_FILTER.PARAMETERS) {
+  //     setValueTA(channelParameterData.category, formState?.filter?.business);
+  //     setValueTA(channelParameterData.region, formState?.filter?.region);
+  //     setValueTA(channelParameterData.language, formState?.filter?.language);
+  //   }
+  // }, [catalogFilter]);
 
   useEffect(() => {
     accordionRefs.current.forEach((ref) => {
@@ -273,150 +246,135 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
   };
 
   return (
-    <>
-      <div className={styles.wrapper}>
-        <BarSubFilter
-          tab={catalogFilter}
-          changeTab={changeCatalogFilter}
-          tab_list={CATALOG_FILTER_TABS_LIST}
-          resetValues={resetRecommendationCard}
-        />
-        <div className={styles.options}>
-          {recommendationCards && (
-            <Accordion
-              type="single"
-              collapsible
-              className={`${styles.accordion} ${recommendationCard && styles.selected}`}
-              value={openAccordion}
-              onValueChange={handleAccordionChange}
+    <div className={styles.wrapper}>
+      <BarSubFilter
+        tab={catalogFilter}
+        changeTab={changeCatalogFilter}
+        tab_list={CATALOG_FILTER_TABS_LIST}
+        // resetValues={resetRecommendationCard}
+      />
+      <div className={styles.options}>
+        {recommendationCards && (
+          <Accordion
+            type="single"
+            collapsible
+            className={`${styles.accordion} ${recommendationCard && styles.selected}`}
+            value={openAccordion}
+            onValueChange={handleAccordionChange}
+          >
+            <AccordionItem
+              value={`item-TA-Cards-BIG`}
+              ref={(el) => (accordionRefs.current[0] = el)}
+              className={styles.item}
             >
-              <AccordionItem
-                value={`item-TA-Cards-BIG`}
-                ref={(el) => (accordionRefs.current[0] = el)}
-                className={styles.item}
-              >
-                <AccordionTrigger className={styles.trigger}>
-                  <div className={styles.title}>
-                    {isFetchingTAParameters || isLoadingTAParameters ? (
-                      <div className="grid items-center justify-center">
-                        <Loader
-                          className="animate-spin"
-                          stroke="#0BADC2"
-                          width={20}
-                          height={20}
-                        />
+              <AccordionTrigger className={styles.trigger}>
+                <div className={styles.title}>
+                  {isFetchingTAParameters || isLoadingTAParameters ? (
+                    <div className="grid items-center justify-center">
+                      <Loader
+                        className="animate-spin"
+                        stroke="#0BADC2"
+                        width={20}
+                        height={20}
+                      />
+                    </div>
+                  ) : (
+                    <>
+                      <div className={styles.trigger__lottie}>
+                        <img src={recomAnimation} alt="recom_lottie_gif" />
                       </div>
-                    ) : (
-                      <>
-                        <div className={styles.trigger__lottie}>
-                          <img src={recomAnimation} alt="recom_lottie_gif" />
-                        </div>
-                        <p>{t("catalog.recommendation.title")}</p>
-                      </>
-                    )}
-                  </div>
-                  <div className={styles.arrow}>
-                    <ArrowSmallVerticalIcon className="active__icon rotate" />
-                  </div>
-                </AccordionTrigger>
-                <AccordionContent className={styles.content}>
-                  {recommendationCards.map((card, index) => (
-                    <RecomTargetCard
-                      key={index}
-                      card={card}
-                      onChange={handleUseRecommendationCard}
-                      isChosen={recommendationCard === card}
-                    />
-                  ))}
-                </AccordionContent>
-              </AccordionItem>
-            </Accordion>
-          )}
-          {!recommendationCards &&
-            (isLoadingTAParameters || isFetchingTAParameters) && (
-              <div className="grid items-center justify-center">
-                <Loader
-                  className="animate-spin"
-                  stroke="#0BADC2"
-                  width={30}
-                  height={30}
-                />
-              </div>
-            )}
-          {catalogFilter === CATALOG_FILTER.PARAMETERS ? (
-            <>
-              <SelectOptions
-                data={formState?.filter}
-                typeData={channelData.filter}
-                typeParameter={channelParameterData.business}
-                onChangeOption={setValue}
-                options={categories?.contents || []}
-                textData={"catalog.category"}
-                defaultValue={formState?.filter?.business}
-                isRow={true}
-                searchable={true}
+                      <p>{t("catalog.recommendation.title")}</p>
+                    </>
+                  )}
+                </div>
+                <div className={styles.arrow}>
+                  <ArrowSmallVerticalIcon className="active__icon rotate" />
+                </div>
+              </AccordionTrigger>
+              <AccordionContent className={styles.content}>
+                {recommendationCards.map((card, index) => (
+                  <RecomTargetCard
+                    key={index}
+                    card={card}
+                    onChange={handleUseRecommendationCard}
+                    isChosen={recommendationCard === card}
+                  />
+                ))}
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
+        )}
+        {!recommendationCards &&
+          (isLoadingTAParameters || isFetchingTAParameters) && (
+            <div className="grid items-center justify-center">
+              <Loader
+                className="animate-spin"
+                stroke="#0BADC2"
+                width={30}
+                height={30}
               />
-              <SelectOptions
-                data={formState?.filter}
-                typeData={channelData.filter}
-                typeParameter={channelParameterData.region}
-                onChangeOption={setValue}
-                options={regions?.contents || []}
-                textData={"catalog.region"}
-                defaultValue={formState?.filter.region}
-                isRow={true}
-              />
-              <SelectOptions
-                data={formState?.filter}
-                typeData={channelData.filter}
-                onChangeOption={setValue}
-                options={languages?.contents || []}
-                typeParameter={channelParameterData.language}
-                textData={"catalog.languages"}
-                defaultValue={formState?.filter.language}
-                isRow={true}
-              />
-              <SelectSex
-                data={formState?.filter}
-                typeData={channelData.filter}
-                onChange={setValue}
-                typeMan={channelParameterData.male}
-                typeWoman={channelParameterData.female}
-                title={"catalog.sex.title"}
-                defaultValues={formState?.filter.male}
-                isRow={true}
-                iconsAboveSlider={true}
-                showResetCheckbox={true}
-              />
-              <SelectOptions
-                data={formState?.filter}
-                typeData={channelData.filter}
-                typeParameter={channelParameterData.age}
-                onChangeOption={setValue}
-                options={ages?.contents || []}
-                defaultValue={formState?.filter.age}
-                textData={"catalog.age"}
-                isRow={true}
-              />
-            </>
-          ) : (
-            <div>
-              <AiChatFilter handleFind={handleAiFind} />
-              {/* <SelectDescription
-                onChange={setValueAI}
-                type={channelParameterData.prompt}
-                title={"catalog.ai.title"}
-                placeholder={"catalog.ai.default_input"}
-                isCatalog
-              />
-              <AiFilter
-                isLoading={isLoadingAIParameters || isFetchingAIParameters}
-                onChange={handleAIClick}
-              /> */}
             </div>
           )}
-        </div>
+        {catalogFilter === CATALOG_FILTER.PARAMETERS ? (
+          <>
+            <SelectOptions
+              data={formState?.filter}
+              typeData={channelData.filter}
+              typeParameter={channelParameterData.business}
+              onChangeOption={setValue}
+              options={categories?.contents || []}
+              textData={"catalog.category"}
+              defaultValue={formState?.filter?.business}
+              isRow={true}
+              searchable={true}
+            />
+            <SelectOptions
+              data={formState?.filter}
+              typeData={channelData.filter}
+              typeParameter={channelParameterData.region}
+              onChangeOption={setValue}
+              options={regions?.contents || []}
+              textData={"catalog.region"}
+              defaultValue={formState?.filter.region}
+              isRow={true}
+            />
+            <SelectOptions
+              data={formState?.filter}
+              typeData={channelData.filter}
+              onChangeOption={setValue}
+              options={languages?.contents || []}
+              typeParameter={channelParameterData.language}
+              textData={"catalog.languages"}
+              defaultValue={formState?.filter.language}
+              isRow={true}
+            />
+            <SelectSex
+              data={formState?.filter}
+              typeData={channelData.filter}
+              onChange={setValue}
+              typeMan={channelParameterData.male}
+              typeWoman={channelParameterData.female}
+              title={"catalog.sex.title"}
+              defaultValues={formState?.filter.male}
+              isRow={true}
+              iconsAboveSlider={true}
+              showResetCheckbox={true}
+            />
+            <SelectOptions
+              data={formState?.filter}
+              typeData={channelData.filter}
+              typeParameter={channelParameterData.age}
+              onChangeOption={setValue}
+              options={ages?.contents || []}
+              defaultValue={formState?.filter.age}
+              textData={"catalog.age"}
+              isRow={true}
+            />
+          </>
+        ) : (
+          <AiChatFilter handleFind={handleAiFind} />
+        )}
       </div>
-    </>
+    </div>
   );
 };

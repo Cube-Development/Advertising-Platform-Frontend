@@ -58,10 +58,10 @@ export const AiChatFilter: FC<AiChatFilterProps> = ({
       {/* Messages Area */}
       <ScrollArea
         ref={scrollAreaRef}
-        className="flex flex-col w-full max-w-3xl gap-4 p-5 mx-auto mb-1 border h-72 bg-blue-50 rounded-2xl border-slate-200"
+        className="flex flex-col w-full max-w-3xl gap-4 p-5 mx-auto border h-72 bg-blue-50 rounded-2xl border-slate-200"
       >
         {messages.length === 0 && !pendingQuestion && (
-          <div className="flex flex-col items-center justify-center text-center h-60">
+          <div className="flex flex-col items-center justify-center text-center h-52">
             <div className="inline-flex items-center justify-center w-16 h-16 mb-4 bg-blue-100 rounded-full">
               <Sparkles className="text-blue-600" size={28} />
             </div>
@@ -92,9 +92,16 @@ export const AiChatFilter: FC<AiChatFilterProps> = ({
                 ) : (
                   <TextType
                     text={[message.text]}
-                    typingSpeed={75}
+                    typingSpeed={40}
                     showCursor={false}
                     loop={false}
+                    onUpdate={() => {
+                      // безопасный и надёжный автоскролл
+                      messagesEndRef?.current?.scrollIntoView({
+                        behavior: "smooth",
+                        block: "end",
+                      });
+                    }}
                   />
                 )}
               </div>
@@ -102,22 +109,23 @@ export const AiChatFilter: FC<AiChatFilterProps> = ({
           ))}
         </div>
 
-        {isTyping && (
-          <div className="flex justify-start p-1 text-xs text-slate-500">
+        <div
+          className="flex justify-start h-5 p-1 text-xs text-slate-500"
+          ref={messagesEndRef}
+        >
+          {isTyping && (
             <TextType
               text={["Ассистент печатает..."]}
               typingSpeed={75}
               showCursor={false}
               pauseDuration={1000}
             />
-          </div>
-        )}
-
-        <div ref={messagesEndRef} />
+          )}
+        </div>
       </ScrollArea>
 
       {/* Input Area */}
-      <div className="relative pt-5">
+      <div className="relative pt-6">
         {isComplete ? (
           <MyButton onClick={handleFindWithParams}>
             <Sparkles />
@@ -126,7 +134,7 @@ export const AiChatFilter: FC<AiChatFilterProps> = ({
         ) : (
           <>
             {pendingQuestion && !isComplete && (
-              <div className="absolute top-0 left-0 flex items-center gap-2 text-xs text-slate-500">
+              <div className="absolute left-0 flex items-center gap-2 text-xs top-1 text-slate-500">
                 <div className="w-2 h-2 bg-blue-600 rounded-full animate-pulse" />
                 Ожидаем ваш ответ…
               </div>

@@ -9,12 +9,10 @@ import {
 import {
   CATALOG_FILTER,
   CATALOG_FILTER_TABS_LIST,
-  getAIParametersReq,
   getCatalogReq,
   getTAParametersReq,
   ICatalogFilter,
   IFilterSearch,
-  useGetAIParametersQuery,
   useGetTAParametersQuery,
 } from "@entities/project";
 import { useFindLanguage } from "@entities/user";
@@ -41,6 +39,7 @@ import {
   DrawerTrigger,
   ScrollArea,
 } from "@shared/ui";
+import { AiChatFilter } from "@widgets/catalog/components/ai-chat-filter";
 import { Loader } from "lucide-react";
 import { FC, useEffect, useRef, useState } from "react";
 import { useForm, UseFormReset, UseFormSetValue } from "react-hook-form";
@@ -50,7 +49,6 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import styles from "./styles.module.scss";
 import recomAnimation from "/animated/recom_lottie.gif";
-import { AiChatFilter } from "@widgets/catalog/components/ai-chat-filter";
 
 interface ParametersFilterProps {
   setValue: UseFormSetValue<getCatalogReq>;
@@ -86,14 +84,6 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
   const { data: regions } = useGetChannelRegionsQuery(contentRes);
   const { data: languages } = useGetChannelLanguagesQuery(contentRes);
 
-  const [text, setText] = useState<string>("");
-
-  const { watch: watchAI, setValue: setValueAI } = useForm<getAIParametersReq>({
-    defaultValues: {
-      prompt: "",
-    },
-  });
-
   const { watch: watchTA, setValue: setValueTA } = useForm<getTAParametersReq>({
     defaultValues: {
       category: formState?.filter?.business,
@@ -104,13 +94,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
 
   const [isRecom, setIsRecom] = useState<boolean>(false);
 
-  const formFieldsAI = watchAI();
   const formFieldsTA = watchTA();
-  const {
-    data: AIParameters,
-    isLoading: isLoadingAIParameters,
-    isFetching: isFetchingAIParameters,
-  } = useGetAIParametersQuery({ prompt: text }, { skip: !text.length });
 
   const {
     data: TAParameters,
@@ -192,32 +176,21 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
     }
   }, [TAParameters]);
 
-  const handleAIClick = () => {
-    setText(formFieldsAI.prompt);
-  };
-
   useEffect(() => {
     setValueTA(channelParameterData.category, formState?.filter?.business);
     setValueTA(channelParameterData.region, formState?.filter?.region);
     setValueTA(channelParameterData.language, formState?.filter?.language);
   }, [formState?.filter]);
 
-  useEffect(() => {
-    if (AIParameters) {
-      setValueTA(channelParameterData.category, AIParameters?.category);
-      setValueTA(channelParameterData.region, AIParameters?.region);
-      setValueTA(channelParameterData.language, AIParameters?.language);
-    }
-  }, [AIParameters]);
-
-  useEffect(() => {
-    reset();
-    if (catalogFilter === CATALOG_FILTER.PARAMETERS) {
-      setValueTA(channelParameterData.category, formState?.filter?.business);
-      setValueTA(channelParameterData.region, formState?.filter?.region);
-      setValueTA(channelParameterData.language, formState?.filter?.language);
-    }
-  }, [catalogFilter]);
+  // Сбрасывает фильтры при смене табы
+  // useEffect(() => {
+  //   reset();
+  //   if (catalogFilter === CATALOG_FILTER.PARAMETERS) {
+  //     setValueTA(channelParameterData.category, formState?.filter?.business);
+  //     setValueTA(channelParameterData.region, formState?.filter?.region);
+  //     setValueTA(channelParameterData.language, formState?.filter?.language);
+  //   }
+  // }, [catalogFilter]);
 
   useEffect(() => {
     accordionRefs.current.forEach((ref) => {
@@ -288,7 +261,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
               tab={catalogFilter}
               changeTab={changeCatalogFilter}
               tab_list={CATALOG_FILTER_TABS_LIST}
-              resetValues={resetRecommendationCard}
+              // resetValues={resetRecommendationCard}
             />
             <div className={styles.options}>
               {recommendationCards && (
@@ -412,20 +385,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
                   />
                 </>
               ) : (
-                <>
-                  <AiChatFilter handleFind={handleAiFind} />
-                  {/* <SelectDescription
-                    onChange={setValueAI}
-                    type={channelParameterData.prompt}
-                    title={"catalog.ai.title"}
-                    placeholder={"catalog.ai.default_input"}
-                    isCatalog
-                  />
-                  <AiFilter
-                    isLoading={isLoadingAIParameters || isFetchingAIParameters}
-                    onChange={handleAIClick}
-                  /> */}
-                </>
+                <AiChatFilter handleFind={handleAiFind} />
               )}
             </div>
           </div>
