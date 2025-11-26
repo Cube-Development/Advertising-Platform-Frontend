@@ -22,8 +22,9 @@ export const GuidePage: FC = () => {
   };
 
   const getPageWidth = () => {
+    const horizontalPadding = window.innerWidth * 0.05; // забираем ~5vw с каждой стороны
     const containerWidth = Math.min(1200, window.innerWidth - 64);
-    return containerWidth;
+    return Math.max(containerWidth - horizontalPadding, 0);
   };
 
   return (
@@ -40,7 +41,7 @@ export const GuidePage: FC = () => {
         </h1>
       </div>
       <div className="container pb-6">
-        <div className="w-full rounded-2xl shadow-2xl overflow-hidden bg-white border border-gray-200 p-4">
+        <div className="mb-10 w-full rounded-2xl shadow-2xl overflow-hidden bg-white border border-gray-200 p-4">
           <Document
             file={
               guide.guide_source[
@@ -66,7 +67,6 @@ export const GuidePage: FC = () => {
                 pageNumber={index + 1}
                 renderTextLayer={false}
                 renderAnnotationLayer={false}
-                className="shadow-lg"
                 width={getPageWidth()}
                 loading=""
               />
