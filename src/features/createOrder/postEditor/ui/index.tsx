@@ -13,6 +13,7 @@ import {
 import styles from "./styles.module.scss";
 import { Toolbar } from "./toolbar";
 import { useTranslation } from "react-i18next";
+import { toast } from "@shared/ui";
 
 interface TextFormat {
   bold?: boolean;
@@ -345,6 +346,13 @@ export const Editor: FC<EditorProps> = ({
 
     const range = selection.getRangeAt(0);
     range.deleteContents();
+
+    // тост при вставке
+    alert(t("create_order.create.paste_text"));
+    toast({
+      variant: "warning",
+      title: t("create_order.create.paste_text"),
+    });
 
     if (isMarkdownText(pastedText)) {
       const htmlContent = parseMarkdownToHtml(pastedText);

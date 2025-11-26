@@ -1,4 +1,47 @@
 {
+  "guides": {
+    "more": "Batafsil",
+    "registration": {
+      "title": "Akkauntni qanday yaratish",
+      "description": "Platformaga akkauntni qanday yaratish bo'yicha batafsil g'oyalar"
+    },
+    "start_campaign": {
+      "title": "Reklama kampaniyasini qanday boshlash",
+      "description": "Blogix platformasida reklama kampaniyasini boshlash, saqlash va hisobot yaratish bo'yicha batafsil g'oyalar"
+    },
+    "turnkey_campaign": {
+      "title": "Tayyor loyihani qanday boshlash",
+      "description": "Blogix platformasida menejerlar orqali tayyor loyihani boshlash bo'yicha batafsil g'oyalar"
+    },
+    "connect_organization": {
+      "title": "Tashkilotni qanday ulashish",
+      "description": "Tashkilotni platformaga qanday ulashish, shartnomalar va aktlar bo'yicha batafsil g'oyalar"
+    },
+    "topup_balance": {
+      "title": "Balansni perechisleniye orqali qanday to'ldirish",
+      "description": "Balansni perechisleniye orqali qanday to'ldirish bo'yicha batafsil g'oyalar"
+    },
+    "add_platform": {
+      "title": "Kanali qanday qo'shish",
+      "description": "Kanali qanday qo'shish bo'yicha batafsil g'oyalar"
+    },
+    "topup_balance_card": {
+      "title": "Balansni karta orqali qanday to'ldirish",
+      "description": "Balansni plastik karta orqali qanday to'ldirish bo'yicha batafsil g'oyalar"
+    },
+    "refund_request": {
+      "title": "Pulni qanday qaytarish",
+      "description": "Pulni qanday qaytarish bo'yicha batafsil g'oyalar"
+    },
+    "blogger_accept_order": {
+      "title": "Blogger buyurtmani qanday qabul qilish va bajarish",
+      "description": "Blogger buyurtmani qanday qabul qilish va bajarish bo'yicha batafsil g'oyalar"
+    },
+    "withdraw_funds": {
+      "title": "Pulni qanday yechib olish",
+      "description": "Pulni qanday yechib olish bo'yicha batafsil g'oyalar"
+    }
+  },
   "footer": {
     "results": {
       "users": "Jami foydalanuvchilar",
@@ -41,12 +84,14 @@
       }
     },
     "contacts": {
-      "tech_contact": "Support",
-      "tech_title": "Texnik savollar bo'yicha",
+      "advertiser_contact": "Telegram",
+      "advertiser_title": "Reklama beruvchilar uchun qo'llab-quvvatlash 24/7",
+      "blogger_contact": "Telegram",
+      "blogger_title": "Bloggerlar uchun qo'llab-quvvatlash",
       "cooperation_contact": "Contact",
       "cooperation_title": "Hamkorlik bo'yicha savollar",
       "email": "Telegram",
-      "email_title": "24/7 texnik qo'llab-quvvatlash",
+      "email_title": "Texnik qo'llab-quvvat 24/7",
       "address": "Karakalpakstan, MUYNAK rayoni, Aral MFY, Ajiniyoz ko'chasi, 111-uy"
     },
     "all_rights": "Cubeinc Development © Barcha huquqlar himoyalangan"
@@ -1684,6 +1729,7 @@
       "your_posts": "Sizning postlaringiz",
       "add_file": "Fayl yuklash",
       "start_typing": "Matn kiritishni boshlang...",
+      "paste_text": "AVVALOZ! Matnni joylashtirishdan so'ng, shakllanish, havolalar va qo'shimcha joylarni tekshiring.",
       "comment": "Bloger uchun izoh...",
       "result": "Natija",
       "post": "Natijani ko'rish uchun reklama postini to'ldirishni boshlang",

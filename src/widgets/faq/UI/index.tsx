@@ -3,11 +3,12 @@ import { motion } from "framer-motion";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { FAQInformation } from "@features/faq";
-import { FAQData, FAQtypes } from "@entities/faq";
+import { FAQData, FAQtypes, GUIDES_LIST } from "@entities/faq";
 import { useFindLanguage } from "@entities/user";
 import { PAGE_ANIMATION } from "@shared/config/animation";
 import { useClearCookiesOnPage } from "@shared/hooks";
 import styles from "./styles.module.scss";
+import { GuideCard } from "../components";
 
 export const FAQ: FC = () => {
   useClearCookiesOnPage();
@@ -35,6 +36,11 @@ export const FAQ: FC = () => {
         >
           <CustomTitle title={t("faq.page_title")} variant="primary" />
         </motion.h1>
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(max(300px,calc((100%-1rem)/2)),1fr))] gap-4">
+          {GUIDES_LIST.map((guide) => (
+            <GuideCard key={guide.guide_id} {...guide} />
+          ))}
+        </div>
         <div className={styles.information__wrapper}>
           {data.map((item, index) => {
             const currentBlockIndex = blockIndex;
