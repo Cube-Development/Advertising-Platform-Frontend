@@ -18,7 +18,7 @@ export const GUIDES_LIST: IGuideCard[] = [
     description: "guides.registration.description",
     guide_id: "95609d5a-fde9-4185-9ad5-f6925849fc17",
     guide_source: {
-      ru: "https://blogixbucket.s3.amazonaws.com/FILE_410a5de6-2176-45b7-9e62-88e169f3fda5.pdf?response-cache-control=no-cache%2C%20no-store%2C%20must-revalidate&X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=AKIAT2PAO7ZK7WWUXDWY%2F20251126%2Feu-north-1%2Fs3%2Faws4_request&X-Amz-Date=20251126T145402Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=3bbe0ae72c766adb912ef16c1924c1c7070b6b3cabc8e70bc34bcc408572b880",
+      ru: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrwPCHaRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
       uz: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrwPCHaRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
       en: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrwPCHaRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
     },
