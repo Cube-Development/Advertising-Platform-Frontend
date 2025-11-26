@@ -104,6 +104,16 @@ export default defineConfig({
   },
   build: {
     sourcemap: true,
+    rollupOptions: {
+      output: {
+        assetFileNames: (assetInfo) => {
+          if (assetInfo.name?.endsWith(".mjs")) {
+            return "assets/[name]-[hash].js";
+          }
+          return "assets/[name]-[hash][extname]";
+        },
+      },
+    },
   },
   optimizeDeps: {
     include: ['pdfjs-dist/build/pdf.worker.min.mjs']
