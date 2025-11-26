@@ -9,6 +9,7 @@ import styles from "./styles.module.scss";
 import { Toolbar } from "./toolbar";
 import { CreateTemplateFormData } from "@widgets/createTemplatePost/model/createTemplateFormType";
 import { useTranslation } from "react-i18next";
+import { toast } from "@shared/ui";
 
 interface TextFormat {
   bold?: boolean;
@@ -340,6 +341,13 @@ export const TemplatePostEditor: FC<TemplatePostEditorProps> = ({
     const range = selection.getRangeAt(0);
     range.deleteContents();
 
+    // тост при вставке
+    alert(t("create_order.create.paste_text"));
+    toast({
+      variant: "warning",
+      title: t("create_order.create.paste_text"),
+    });
+
     // Если это Markdown, парсим его
     if (isMarkdownText(pastedText)) {
       const htmlContent = parseMarkdownToHtml(pastedText);
@@ -442,6 +450,7 @@ export const TemplatePostEditor: FC<TemplatePostEditorProps> = ({
   };
 
   // Проверяем активные форматы для тулбара
+
   const checkActiveFormats = useCallback(() => {
     const selection = window.getSelection();
     if (!selection || selection.rangeCount === 0) {

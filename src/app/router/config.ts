@@ -34,6 +34,7 @@ import { TopupPage } from "@pages/Topup";
 import { TurnkeyPage } from "@pages/Turnkey";
 import { WalletHistoryPage } from "@pages/WalletHistory";
 import { WithdrawalPage } from "@pages/Withdrawal";
+import { GuidePage } from "@pages/Guide";
 import {
   ENUM_AUTH_TYPES,
   ENUM_LAYOUT_TYPES,
@@ -86,6 +87,14 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
   {
     path: ENUM_PATHS.FAQ,
     component: FAQPage,
+    roles: [...USER_ROLES, ENUM_ROLES.AGENCY],
+    auth: ENUM_AUTH_TYPES.PUBLIC,
+    authSidebar: true,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
+  },
+  {
+    path: ENUM_PATHS.GUIDE,
+    component: GuidePage,
     roles: [...USER_ROLES, ENUM_ROLES.AGENCY],
     auth: ENUM_AUTH_TYPES.PUBLIC,
     authSidebar: true,

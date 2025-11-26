@@ -1,4 +1,47 @@
 {
+  "guides": {
+    "more": "More",
+    "registration": {
+      "title": "How to register in the platform",
+      "description": "Detailed guide on how to register in the Blogix platform. Instructions will help you quickly and safely register in the platform."
+    },
+    "start_campaign": {
+      "title": "How to start a campaign",
+      "description": "Detailed guide on how to start a campaign in the Blogix platform. Launch. Save. Generate report"
+    },
+    "turnkey_campaign": {
+      "title": "How to start a campaign with managers",
+      "description": "Detailed guide on how to start a campaign with managers in the Blogix platform with ready-made tariffs"
+    },
+    "connect_organization": {
+      "title": "How to connect an organization",
+      "description": "Detailed guide on how to connect an organization in the Blogix platform. Contracts and agreements"
+    },
+    "topup_balance": {
+      "title": "How to top up balance by transfer",
+      "description": "Detailed guide on how to top up balance by transfer in the Blogix platform. Instructions will help you quickly and safely top up your account balance."
+    },
+    "add_platform": {
+      "title": "How to add a platform",
+      "description": "This guide will help you add a platform to our catalog, so that other users can find it and start cooperating with you."
+    },
+    "topup_balance_card": {
+      "title": "How to top up balance by card",
+      "description": "Detailed guide on how to top up balance by card in the Blogix platform. Instructions will help you quickly and safely top up your account balance."
+    },
+    "refund_request": {
+      "title": "How to refund money",
+      "description": "Detailed guide on how to refund money in the Blogix platform. Instructions will help you quickly and safely refund your account balance."
+    },
+    "blogger_accept_order": {
+      "title": "How to accept and execute an advertising order",
+      "description": "Detailed guide on how to accept and execute an advertising order in the Blogix platform. Instructions will help you quickly and safely accept and execute an advertising order."
+    },
+    "withdraw_funds": {
+      "title": "How to withdraw funds",
+      "description": "Detailed guide on how to withdraw funds from the Blogix platform. Instructions will help you quickly and safely withdraw funds from your account balance."
+    }
+  },
   "footer": {
     "results": {
       "users": "Total users",
@@ -41,12 +84,14 @@
       }
     },
     "contacts": {
-      "tech_contact": "Support",
-      "tech_title": "For technical inquiries",
+      "advertiser_contact": "Telegram",
+      "advertiser_title": "For advertisers support",
+      "blogger_contact": "Telegram",
+      "blogger_title": "For bloggers support",
       "cooperation_contact": "Contact",
       "cooperation_title": "For cooperation inquiries",
       "email": "Telegram",
-      "email_title": "24/7 technical support",
+      "email_title": "Technical support 24/7",
       "address": "Republic of Karakalpakstan, MUYNAK DISTRICT, Aral MFY, Ajiniyoz ko'chasi, 111-uy"
     },
     "all_rights": "Cubeinc Development © All rights reserved"
@@ -1686,6 +1731,7 @@
       "your_posts": "Your Posts",
       "add_file": "Upload File",
       "start_typing": "Start typing...",
+      "paste_text": "IMPORTANT! After pasting the text, be sure to check the formatting, hyperlinks, and indents before continuing.",
       "comment": "Comment for the Blogger...",
       "result": "Result",
       "post": "Start filling out the advertising post to see the result",
