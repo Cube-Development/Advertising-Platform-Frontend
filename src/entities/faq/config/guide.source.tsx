@@ -55,9 +55,9 @@ export const GUIDES_LIST: IGuideCard[] = [
     description: "guides.connect_organization.description",
     guide_id: "2659caa6-bce3-4c32-9bdd-f0f2b1164afa",
     guide_source: {
-      ru: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrwPCHaRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
-      uz: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrwPCHaRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
-      en: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrwPCHaRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
+      ru: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrEGC2FRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
+      uz: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrEGC2FRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
+      en: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrEGC2FRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
     },
     icon: (
       <Building2 className="md:size-[50px] size-10 stroke-[1px] text-blue-600" />
@@ -81,9 +81,9 @@ export const GUIDES_LIST: IGuideCard[] = [
     description: "guides.add_platform.description",
     guide_id: "a7dc1012-77a1-4565-88eb-97289d4e063d",
     guide_source: {
-      ru: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrwPCHaRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
-      uz: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrwPCHaRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
-      en: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrwPCHaRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
+      ru: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCFJjtoAA0zM5oZkRQqOVYihvfTDHxeNsdL73b",
+      uz: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCFJjtoAA0zM5oZkRQqOVYihvfTDHxeNsdL73b",
+      en: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCFJjtoAA0zM5oZkRQqOVYihvfTDHxeNsdL73b",
     },
     icon: (
       <BookMarked className="md:size-[50px] size-10 stroke-[1px] text-blue-600" />
