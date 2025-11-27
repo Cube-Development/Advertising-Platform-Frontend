@@ -18,9 +18,9 @@ export const GUIDES_LIST: IGuideCard[] = [
     description: "guides.registration.description",
     guide_id: "95609d5a-fde9-4185-9ad5-f6925849fc17",
     guide_source: {
-      ru: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrwPCHaRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
-      uz: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrwPCHaRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
-      en: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrwPCHaRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
+      ru: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTChZejJeryLct5n29V8f7Fiaj0sdZxKOCPSpUG",
+      uz: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTChZejJeryLct5n29V8f7Fiaj0sdZxKOCPSpUG",
+      en: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTChZejJeryLct5n29V8f7Fiaj0sdZxKOCPSpUG",
     },
     icon: (
       <UserStar className="md:size-[50px] size-10 stroke-[1px] text-blue-600" />
@@ -31,25 +31,25 @@ export const GUIDES_LIST: IGuideCard[] = [
     description: "guides.start_campaign.description",
     guide_id: "95609d5a-fde9-4185-9ad5-f6925849fc07",
     guide_source: {
-      ru: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrwPCHaRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
-      uz: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrwPCHaRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
-      en: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrwPCHaRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
+      ru: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTC1JYsyS3NUlmyc0JAi9XjEZ8tsxhL3HFaOz6g",
+      uz: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTC1JYsyS3NUlmyc0JAi9XjEZ8tsxhL3HFaOz6g",
+      en: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTC1JYsyS3NUlmyc0JAi9XjEZ8tsxhL3HFaOz6g",
     },
     icon: (
       <Power className="md:size-[50px] size-10 stroke-[1px] text-blue-600" />
     ),
   },
-  {
-    title: "guides.turnkey_campaign.title",
-    description: "guides.turnkey_campaign.description",
-    guide_id: "95609d5a-fde9-4185-9ad5-f6925849fb07",
-    guide_source: {
-      ru: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrwPCHaRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
-      uz: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrwPCHaRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
-      en: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrwPCHaRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
-    },
-    icon: <Key className="md:size-[50px] size-10 stroke-[1px] text-blue-600" />,
-  },
+  // {
+  //   title: "guides.turnkey_campaign.title",
+  //   description: "guides.turnkey_campaign.description",
+  //   guide_id: "95609d5a-fde9-4185-9ad5-f6925849fb07",
+  //   guide_source: {
+  //     ru: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrwPCHaRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
+  //     uz: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrwPCHaRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
+  //     en: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrwPCHaRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
+  //   },
+  //   icon: <Key className="md:size-[50px] size-10 stroke-[1px] text-blue-600" />,
+  // },
   {
     title: "guides.connect_organization.title",
     description: "guides.connect_organization.description",
@@ -120,9 +120,9 @@ export const GUIDES_LIST: IGuideCard[] = [
     description: "guides.blogger_accept_order.description",
     guide_id: "9bb9a4af-3452-4cd2-92ce-0b20e2000aa0",
     guide_source: {
-      ru: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrwPCHaRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
-      uz: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrwPCHaRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
-      en: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrwPCHaRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
+      ru: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCr9OCInRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
+      uz: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCr9OCInRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
+      en: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCr9OCInRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h",
     },
     icon: (
       <SquareStar className="md:size-[50px] size-10 stroke-[1px] text-blue-600" />
