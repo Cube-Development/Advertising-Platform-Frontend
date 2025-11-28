@@ -19,13 +19,22 @@
   }
 
   .switcher {
-    margin: 15px 10px;
+    margin: 10px 20px;
+    margin-top: 20px;
+
+    @media (max-width: 768px) {
+      margin-top: 15px;
+    }
 
     li {
       padding: 12px 10px;
 
       p {
-        font-size: 16px;
+        font-size: 14px;
+
+        @media (max-width: 576px) {
+          font-size: 12px;
+        }
       }
     }
   }
@@ -33,7 +42,7 @@
   &__accordion {
     display: grid;
     grid-auto-flow: row;
-    row-gap: 8px;
+    row-gap: 4px;
     padding: 0 10px;
   }
 
@@ -43,7 +52,7 @@
     margin-bottom: 120px;
 
     .wallet__block {
-      padding: 20px;
+      padding: 10px 20px;
 
       @media (max-width: 576px) {
         padding: 0px 15px 10px 15px;

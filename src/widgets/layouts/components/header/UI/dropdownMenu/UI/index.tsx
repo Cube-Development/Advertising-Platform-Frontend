@@ -82,7 +82,7 @@ export const DropdownMenu: FC<DropdownMenuProps> = () => {
             <img
               src={logo}
               alt="Blogix logo"
-              className="h-[30px] sm:h-[35px] md:h-[50px] cursor-pointer"
+              className="h-[24px] sm:h-[28px] md:h-[36px] cursor-pointer"
             />
             <SheetClose asChild>
               <CustomCloseButton className="md:right-3 " />

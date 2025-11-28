@@ -366,14 +366,14 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
           </div>
         </div>
       </div>
-      {role !== ENUM_ROLES.BLOGGER && (
+      {/* {role !== ENUM_ROLES.BLOGGER && (
         <RecommendationList
           cards={recomendCards?.channels || []}
           isLoading={isRecommendCardsLoading}
           onChangeCard={handleChangeRecommendCards}
           changePage={handleOnChangePage}
         />
-      )}
+      )} */}
     </>
   );
 };

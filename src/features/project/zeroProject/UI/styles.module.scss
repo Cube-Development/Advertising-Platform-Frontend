@@ -19,7 +19,7 @@
   column-gap: 25px;
 
   p {
-    font-size: 20px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
@@ -31,13 +31,13 @@
     row-gap: 10px;
     text-align: center;
     p {
-      font-size: 18px;
+      font-size: 14px;
     }
   }
 
   @media (max-width: 768px) {
     p {
-      font-size: 16px;
+      font-size: 12px;
     }
   }
 }
@@ -59,36 +59,36 @@
   p {
     max-width: 550px;
     color: rgba(0, 0, 0, 0.45);
-    font-size: 24px;
+    font-size: 18px;
     font-style: normal;
     font-weight: 500;
     line-height: normal;
   }
 
   svg {
-    width: 185px;
-    height: 185px;
+    width: 140px;
+    height: 140px;
   }
 
   @media (max-width: 992px) {
-    svg {
-      width: 160px;
-      height: 160px;
-    }
-
-    p {
-      font-size: 20px;
-    }
-  }
-
-  @media (max-width: 768px) {
     svg {
       width: 120px;
       height: 120px;
     }
 
     p {
-      font-size: 14px;
+      font-size: 16px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    svg {
+      width: 100px;
+      height: 100px;
+    }
+
+    p {
+      font-size: 12px;
     }
   }
 }

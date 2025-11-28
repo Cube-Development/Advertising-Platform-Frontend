@@ -29,7 +29,7 @@ export const Logo: FC<LogoProps> = ({ currentRole }) => {
         <img
           src={logo}
           alt="Blogix logo"
-          className="h-[30px] sm:h-[35px] md:h-[50px] cursor-pointer"
+          className="h-[24px] sm:h-[28px] md:h-[36px] cursor-pointer"
         />
       </Link>
     </div>

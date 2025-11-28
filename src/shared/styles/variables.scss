@@ -61,7 +61,6 @@
 
   --color-sex-man: #61a5f5;
   --color-sex-woman: #ff95e1;
-  // etc
   --woman: 50;
   --man: 50%;
 
@@ -80,118 +79,114 @@
 
   /* Контейнерные отступы */
   /* Контейнерные отступы для Extra Large */
-  --container-padding-xl-all: 15px;
-  --container-padding-xl-side: 50px;
-  --container-padding-xl-top: 80px;
+  --container-padding-xl-all: 12px;
+  --container-padding-xl-side: 32px;
+  --container-padding-xl-top: 60px;
 
   /* Контейнерные отступы для Large */
-  --container-padding-lg-all: 12px;
-  --container-padding-lg-side: 40px;
-  --container-padding-lg-top: 70px;
+  --container-padding-lg-all: 10px;
+  --container-padding-lg-side: 28px;
+  --container-padding-lg-top: 50px;
 
   /* Контейнерные отступы для Medium */
-  --container-padding-md-all: 10px;
-  --container-padding-md-side: 25px;
-  --container-padding-md-top: 60px;
+  --container-padding-md-all: 8px;
+  --container-padding-md-side: 20px;
+  --container-padding-md-top: 40px;
 
   /* Контейнерные отступы для Small */
-  --container-padding-sm-all: 8px;
-  --container-padding-sm-side: 20px;
-  --container-padding-sm-top: 50px;
+  --container-padding-sm-all: 6px;
+  --container-padding-sm-side: 16px;
+  --container-padding-sm-top: 32px;
 
   /* Контейнерные отступы для Extra Small */
-  --container-padding-xs-all: 5px;
-  --container-padding-xs-side: 10px;
-  --container-padding-xs-top: 40px;
+  --container-padding-xs-all: 4px;
+  --container-padding-xs-side: 12px;
+  --container-padding-xs-top: 28px;
 
-  --header-height-xl: 90px;
-  --header-height-lg: 90px;
-  --header-height-md: 72px;
-  --header-height-sm: 64px;
+  --header-height-xl: 70px;
+  --header-height-lg: 70px;
+  --header-height-md: 56px;
+  --header-height-sm: 56px;
   --header-height-xs: 56px;
 
+  --sidebar-width: 80px;
+
   /* Extra Large (XL) */
-  --font-size-title-main-xl: 40px;
-  --font-size-subtitle-main-xl: 24px;
-  --row-gap-title-xl: 30px;
-  --row-gap-content-xl: 50px;
-  --font-size-option-item-xl: 16px;
-  --column-gap-option-item-xl: 20px;
-  --font-size-title-secondary-xl: 32px;
-  --font-size-subtitle-secondary-xl: 24px;
-  --font-size-text-primary-xl: 16px;
-  --font-size-text-accent-xl: 18px;
-
-  --font-size-xl-text-secondary: 14px;
-  --font-size-xl-button-text: 14px;
-
-  --margin-section-xl: 100px;
+  --font-size-title-main-xl: 28px;
+  --font-size-subtitle-main-xl: 18px;
+  --row-gap-title-xl: 20px;
+  --row-gap-content-xl: 32px;
+  --font-size-option-item-xl: 15px;
+  --column-gap-option-item-xl: 16px;
+  --font-size-title-secondary-xl: 22px;
+  --font-size-subtitle-secondary-xl: 16px;
+  --font-size-text-primary-xl: 14px;
+  --font-size-text-accent-xl: 14px;
+  --font-size-xl-text-secondary: 12px;
+  --font-size-xl-button-text: 12px;
+  --margin-section-xl: 64px;
   --cards-list-height: calc(var(--vh) * 100);
 
   /* Large (LG) */
-  --font-size-title-main-lg: 36px;
-  --font-size-subtitle-main-lg: 22px;
-  --row-gap-title-lg: 25px;
-  --row-gap-content-lg: 45px;
-  --font-size-option-item-lg: 15px;
-  --column-gap-option-item-lg: 20px;
-  --font-size-title-secondary-lg: 30px;
-  --font-size-subtitle-secondary-lg: 22px;
-  --font-size-text-secondary-lg: 13px;
-  --font-size-text-accent-lg: 17px;
-
-  --font-size-lg-text-primary: 15px;
-  --font-size-lg-button-text: 13px;
-  --margin-section-lg: 80px;
+  --font-size-title-main-lg: 24px;
+  --font-size-subtitle-main-lg: 16px;
+  --row-gap-title-lg: 18px;
+  --row-gap-content-lg: 28px;
+  --font-size-option-item-lg: 14px;
+  --column-gap-option-item-lg: 16px;
+  --font-size-title-secondary-lg: 20px;
+  --font-size-subtitle-secondary-lg: 16px;
+  --font-size-text-secondary-lg: 12px;
+  --font-size-text-accent-lg: 14px;
+  --font-size-lg-text-primary: 14px;
+  --font-size-lg-button-text: 12px;
+  --margin-section-lg: 56px;
 
   /* Medium (MD) */
-  --font-size-title-main-md: 32px;
-  --font-size-subtitle-main-md: 20px;
-  --row-gap-title-md: 20px;
-  --row-gap-content-md: 35px;
-  --font-size-option-item-md: 14px;
-  --column-gap-option-item-md: 15px;
-  --font-size-title-secondary-md: 28px;
-  --font-size-subtitle-secondary-md: 20px;
-  --font-size-text-secondary-md: 12px;
-  --font-size-text-accent-md: 16px;
-
-  --font-size-md-text-primary: 14px;
-  --font-size-md-button-text: 12px;
-  --margin-section-md: 60px;
+  --font-size-title-main-md: 22px;
+  --font-size-subtitle-main-md: 16px;
+  --row-gap-title-md: 16px;
+  --row-gap-content-md: 24px;
+  --font-size-option-item-md: 13px;
+  --column-gap-option-item-md: 12px;
+  --font-size-title-secondary-md: 20px;
+  --font-size-subtitle-secondary-md: 15px;
+  --font-size-text-secondary-md: 11px;
+  --font-size-text-accent-md: 13px;
+  --font-size-md-text-primary: 13px;
+  --font-size-md-button-text: 11px;
+  --margin-section-md: 48px;
 
   /* Small (SM) */
-  --font-size-title-main-sm: 24px;
-  --font-size-subtitle-main-sm: 16px;
-  --row-gap-title-sm: 16px;
-  --row-gap-content-sm: 30px;
+  --font-size-title-main-sm: 20px;
+  --font-size-subtitle-main-sm: 15px;
+  --row-gap-title-sm: 14px;
+  --row-gap-content-sm: 20px;
   --font-size-option-item-sm: 12px;
-  --column-gap-option-item-sm: 13px;
-  --font-size-title-secondary-sm: 24px;
-  --font-size-subtitle-secondary-sm: 18px;
+  --column-gap-option-item-sm: 10px;
+  --font-size-title-secondary-sm: 18px;
+  --font-size-subtitle-secondary-sm: 14px;
   --font-size-text-secondary-sm: 10px;
-  --font-size-text-accent-sm: 14px;
-
+  --font-size-text-accent-sm: 12px;
   --font-size-sm-text-primary: 12px;
   --font-size-sm-button-text: 10px;
-  --margin-section-sm: 50px;
+  --margin-section-sm: 40px;
 
   /* Extra Small (XS) */
-  --font-size-title-main-xs: 20px;
-  --font-size-subtitle-main-xs: 16px;
-  --row-gap-title-xs: 15px;
-  --row-gap-content-xs: 25px;
-  --font-size-option-item-xs: 12px;
-  --column-gap-option-item-xs: 10px;
-  --font-size-title-secondary-xs: 20px;
-  --font-size-subtitle-secondary-xs: 14px;
+  --font-size-title-main-xs: 18px;
+  --font-size-subtitle-main-xs: 14px;
+  --row-gap-title-xs: 12px;
+  --row-gap-content-xs: 18px;
+  --font-size-option-item-xs: 11px;
+  --column-gap-option-item-xs: 8px;
+  --font-size-title-secondary-xs: 16px;
+  --font-size-subtitle-secondary-xs: 13px;
   --font-size-text-secondary-xs: 10px;
-  --font-size-text-accent-xs: 14px;
-
-  --font-size-xs-text-primary: 12px;
+  --font-size-text-accent-xs: 12px;
+  --font-size-xs-text-primary: 11px;
   --font-size-xs-button-text: 10px;
-  --margin-section-xs: 40px;
+  --margin-section-xs: 32px;
 
   /* Admin Panel (XL) */
-  --sidebar-admin-xl: 72px;
+  --sidebar-admin-xl: 64px;
 }

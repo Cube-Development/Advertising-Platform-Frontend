@@ -31,23 +31,23 @@ body {
 }
 
 .user_main {
-  padding-top: var(--header-height-xl);
+  padding-top: calc(var(--header-height-xl) + 20px);
   min-height: 100svh;
 
   @media (max-width: 992px) {
-    padding-top: var(--header-height-lg);
+    padding-top: calc(var(--header-height-lg) + 20px);
   }
 
   @media (max-width: 768px) {
-    padding-top: var(--header-height-lg);
+    padding-top: calc(var(--header-height-lg));
   }
 
   @media (max-width: 576px) {
-    padding-top: var(--header-height-sm);
+    padding-top: calc(var(--header-height-sm));
   }
 
   @media (max-width: 375px) {
-    padding-top: var(--header-height-xs);
+    padding-top: calc(var(--header-height-xs));
   }
 }
 
@@ -63,13 +63,13 @@ body {
   align-items: center;
   align-content: center;
 
-  font-size: 16px;
+  font-size: 14px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
   line-height: normal;
   width: 100%;
 
-  padding: 15px 31px 15px 31px;
+  padding: 10px 20px 10px 20px;
   cursor: pointer;
   border-radius: 12px;
 
@@ -121,6 +121,7 @@ body {
   flex-direction: column;
   min-height: calc(calc(var(--vh) * 100) - 80px);
   width: 100vw;
+
   // background: url("/images/rootBg/desktopBG.png") repeat top center;
   // background-size: cover;
 
