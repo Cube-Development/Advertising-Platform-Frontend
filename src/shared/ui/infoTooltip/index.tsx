@@ -32,7 +32,7 @@ export const InfoTooltip: FC<InfoTooltipProps> = ({ text, className }) => {
         side={`${screen > BREAKPOINT.MD ? "right" : "top"}`}
         className="max-w-[300px]"
       >
-        <p className="text-[12px] font-normal leading-none text-justify indent-5 md:text-[10px] hyphens-auto !text-[var(--Personal-colors-black)]">
+        <p className="!text-[12px] font-normal leading-none text-justify indent-5 md:text-[10px] hyphens-auto !text-[var(--Personal-colors-black)]">
           {text}
         </p>
       </TooltipContent>
