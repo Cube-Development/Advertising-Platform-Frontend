@@ -81,7 +81,7 @@ export const HowItWorks: FC<HowItWorksProps> = ({ page }) => {
       custom={custom++}
       className={styles.wrapper}
     >
-      <div className="container">
+      <div className="container !zoom-1">
         <div className={styles.content}>
           <motion.h1
             custom={custom++}

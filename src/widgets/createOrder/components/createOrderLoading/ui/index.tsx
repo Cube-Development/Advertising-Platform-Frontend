@@ -28,6 +28,9 @@ export const CreateOrderLoading: FC<CreateOrderLoadingProps> = () => {
   } | null>(null);
 
   useEffect(() => {
+    // Блокировка скролла
+    document.body.classList.add("loading-active");
+
     // Функция для случайного выбора анимации и текста
     const randomizeAnimation = () => {
       const randomIndex = Math.floor(Math.random() * animations.length);
@@ -41,8 +44,11 @@ export const CreateOrderLoading: FC<CreateOrderLoadingProps> = () => {
       Math.floor(Math.random() * (10000 - 5000)) + 3000,
     );
 
-    // Очистка интервала при размонтировании компонента
-    return () => clearInterval(intervalId);
+    // Очистка интервала и разблокировка скролла при размонтировании компонента
+    return () => {
+      clearInterval(intervalId);
+      document.body.classList.remove("loading-active");
+    };
   }, []);
 
   if (!loadingState) return null;
