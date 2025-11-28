@@ -18,8 +18,8 @@
 
   .text {
     width: fit-content;
-    font-size: 40px;
-    font-weight: 700;
+    font-size: 30px;
+    font-weight: 600;
     color: var(--Personal-colors-main);
     -webkit-text-stroke: 0px rgba(0, 0, 0, 0.3);
     background: conic-gradient(#0badc2 0 0) 0/0% 100% no-repeat text;
@@ -36,19 +36,19 @@
     }
 
     @media (max-width: 576px) {
-      font-size: 26px;
+      font-size: 20px;
       font-weight: 600;
       -webkit-text-stroke: 0px rgba(0, 0, 0, 0.3);
     }
   }
 
   .loader {
-    width: 50px;
+    width: 32px;
     aspect-ratio: 1;
     display: grid;
 
     @media (max-width: 576px) {
-      width: 30px;
+      width: 26px;
     }
 
     &::before,
@@ -61,7 +61,7 @@
         var(--c) 50% 100%,
         var(--c) 100% 50%,
         var(--c) 0 50%;
-      background-size: 12px 12px;
+      background-size: 8px 8px;
       animation: l12 1.5s infinite;
 
       @media (max-width: 576px) {
@@ -70,13 +70,13 @@
     }
 
     &::before {
-      margin: 4px;
+      margin: 2px;
       filter: hue-rotate(45deg);
-      background-size: 8px 8px;
+      background-size: 6px 6px;
       animation-timing-function: linear;
 
       @media (max-width: 576px) {
-        background-size: 4px 4px;
+        background-size: 5px 5px;
         margin: 1.5px;
       }
     }

@@ -80,15 +80,16 @@ export const MainPage = () => {
 
   return (
     <>
-      <Suspense fallback={<SuspenseLoader />}>
-        <Cta role={ENUM_ROLES.ADVERTISER} />
-        <Services page={page} />
-        <Partners page={page} />
-        <HowItWorks page={page} />
-        <WhyChooseUs page={page} />
-        <Turnkey page={page} />
+      {/* <Suspense fallback={<SuspenseLoader />}> */}
+        {/* <Cta role={ENUM_ROLES.ADVERTISER} /> */}
+        {/* <Services page={page} /> */}
+        {/* <Partners page={page} /> */}
+        {/* <HowItWorks page={page} /> */}
+        {/* <WhyChooseUs page={page} /> */}
+        {/* <Turnkey page={page} /> */}
         {/* <Customers page={page} /> */}
-      </Suspense>
+      {/* </Suspense> */}
+      <SuspenseLoader />
     </>
   );
 };
