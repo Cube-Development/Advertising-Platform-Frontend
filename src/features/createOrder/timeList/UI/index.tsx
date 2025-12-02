@@ -69,28 +69,24 @@ export const TimeList: FC<TimeListProps> = ({
   };
 
   // Проверяем, прошел ли слот
-  // const isSlotPassed = (timeSlot: string) => {
-  //   // Получаем сегодняшнюю дату в том же формате
-  //   const today = new Date();
-  //   const todayFormatted = `${today.getDate().toString().padStart(2, "0")}.${(today.getMonth() + 1).toString().padStart(2, "0")}.${today.getFullYear()}`;
-
-  //   // Если дата не сегодняшняя, слот не прошел
-  //   if (selectedDate && selectedDate !== todayFormatted) {
-  //     return false;
-  //   }
-
-  //   // Если дата сегодняшняя, проверяем время
-  //   const currentTimeInMinutes = getCurrentTime();
-  //   const [, endTime] = timeSlot.split(" - ");
-  //   const [endHours, endMinutes] = endTime.split(":").map(Number);
-  //   const endTimeInMinutes = endHours * 60 + endMinutes;
-  //   return currentTimeInMinutes > endTimeInMinutes;
-  // };
-
-  // disable off
   const isSlotPassed = (timeSlot: string) => {
-    return false;
+    // Получаем сегодняшнюю дату в том же формате
+    const today = new Date();
+    const todayFormatted = `${today.getDate().toString().padStart(2, "0")}.${(today.getMonth() + 1).toString().padStart(2, "0")}.${today.getFullYear()}`;
+
+    // Если дата не сегодняшняя, слот не прошел
+    if (selectedDate && selectedDate !== todayFormatted) {
+      return false;
+    }
+
+    // Если дата сегодняшняя, проверяем время
+    const currentTimeInMinutes = getCurrentTime();
+    const [, endTime] = timeSlot.split(" - ");
+    const [endHours, endMinutes] = endTime.split(":").map(Number);
+    const endTimeInMinutes = endHours * 60 + endMinutes;
+    return currentTimeInMinutes > endTimeInMinutes;
   };
+
   // установка начальных временных интервалов если они приходят из бека
   useEffect(() => {
     // Сбрасываем флаг при изменении startTime (например, при переключении карточки)
