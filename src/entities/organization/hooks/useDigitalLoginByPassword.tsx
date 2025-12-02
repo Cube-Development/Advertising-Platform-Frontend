@@ -1,6 +1,6 @@
-import { loginEcp, offerSign } from "@entities/user";
+import { ENUM_ROLES, loginEcp, offerSign } from "@entities/user";
 import { ENUM_COOKIES_TYPES } from "@shared/config";
-import { useAppDispatch } from "@shared/hooks";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { useToast } from "@shared/ui";
 import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
@@ -19,7 +19,7 @@ export const useDigitalLoginByPassword = () => {
   const { toast } = useToast();
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
-
+  const { role } = useAppSelector((state) => state.user);
   const [getToken, { isLoading: isLoadingGetToken }] =
     useGetTokenByPasswordMutation();
   const [checkSign, { isLoading: isLoadingSign }] =
@@ -47,7 +47,10 @@ export const useDigitalLoginByPassword = () => {
       await create(organization);
 
       // Шаг 6: Проверка подписи
-      if (organization?.status !== ENUM_ORGANIZATION_STATUS.ACTIVE) {
+      if (
+        organization?.status !== ENUM_ORGANIZATION_STATUS.ACTIVE &&
+        role !== ENUM_ROLES.MODERATOR
+      ) {
         await checkSign()
           .unwrap()
           .then(() => {

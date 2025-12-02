@@ -22,16 +22,16 @@ export function SidebarAdmin({
   const { isAuthEcp } = useAppSelector((state) => state.user);
   const { t } = useTranslation();
 
-  let MENU: IMenuItem[] = [];
+  let MENU: IMenuItem[] = [...ADMIN_MENU, ...ADMIN_MENU_ORGANIZATION];
 
-  switch (isAuthEcp) {
-    case true:
-      MENU = [...ADMIN_MENU, ...ADMIN_MENU_ORGANIZATION];
-      break;
-    case false:
-      MENU = ADMIN_MENU;
-      break;
-  }
+  // switch (isAuthEcp) {
+  //   case true:
+  //     MENU = [...ADMIN_MENU, ...ADMIN_MENU_ORGANIZATION];
+  //     break;
+  //   case false:
+  //     MENU = ADMIN_MENU;
+  //     break;
+  // }
   return (
     <Sidebar collapsible="icon" {...props}>
       <SidebarHeader>
