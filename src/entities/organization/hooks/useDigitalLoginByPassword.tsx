@@ -1,4 +1,4 @@
-import { loginEcp, offerSign, USER_ROLES } from "@entities/user";
+import { ENUM_ROLES, loginEcp, offerSign } from "@entities/user";
 import { ENUM_COOKIES_TYPES } from "@shared/config";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { useToast } from "@shared/ui";
@@ -49,7 +49,7 @@ export const useDigitalLoginByPassword = () => {
       // Шаг 6: Проверка подписи
       if (
         organization?.status !== ENUM_ORGANIZATION_STATUS.ACTIVE &&
-        USER_ROLES.includes(role)
+        role !== ENUM_ROLES.MODERATOR
       ) {
         await checkSign()
           .unwrap()
