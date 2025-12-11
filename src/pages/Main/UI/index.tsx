@@ -1,6 +1,7 @@
 import { ENUM_ROLES } from "@entities/user";
 import { useClearCookiesOnPage } from "@shared/hooks";
 import { SuspenseLoader } from "@shared/ui";
+import { VoiceAgent } from "@widgets/voice-agent";
 import React, { Suspense } from "react";
 
 // Ленивый импорт всех компонентов
@@ -80,6 +81,7 @@ export const MainPage = () => {
 
   return (
     <>
+      <VoiceAgent />
       <Suspense fallback={<SuspenseLoader />}>
         <Cta role={ENUM_ROLES.ADVERTISER} />
         <Services page={page} />
