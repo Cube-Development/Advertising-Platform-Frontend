@@ -1,13 +1,16 @@
-import { useState } from "react";
 import {
-  useRoomContext,
-  useChat,
-  ReceivedChatMessage,
   BarVisualizer,
+  ReceivedChatMessage,
+  useChat,
+  useRoomContext,
 } from "@livekit/components-react";
-import { useVoiceTranscription, useMediaControls } from "../../model";
+import { cn } from "@shared/ui";
+import { useVoiceAgentActions } from "@widgets/voice-agent/model/hooks/use-voice-agent-action/use-voice-agent-action";
+import { motion } from "framer-motion";
+import { FC, useState } from "react";
+import { useInputControls, useVoiceTranscription } from "../../model";
 import { ChatTranscript } from "../chat-transcript";
-import { SessionControls } from "./components/session-controls";
+import { SessionControls } from "../session-controls";
 
 interface VoiceSessionProps {
   isConnected: boolean;
@@ -17,32 +20,48 @@ interface VoiceSessionProps {
 /**
  * Feature: Голосовая сессия
  * Применяет все SOLID принципы - композиция из маленьких компонентов
+ * Обновлено с использованием useInputControls
  */
-export function VoiceSession({ isConnected, onReconnect }: VoiceSessionProps) {
+export const VoiceSession: FC<VoiceSessionProps> = ({
+  isConnected,
+  onReconnect,
+}) => {
   // Безопасное получение room context
   let room = null;
   let state = undefined;
-  let track = undefined;
+  let audioTrack = undefined;
   let messages: any[] = [];
-  let microphoneEnabled = false;
-  let microphonePending = false;
-  let toggleMicrophone = () => {};
   let sendChatMessage:
     | ((message: string) => Promise<ReceivedChatMessage>)
     | undefined;
 
+  // Input controls
+  let micTrackRef = undefined;
+  let microphoneToggle = { enabled: false, pending: false, toggle: () => {} };
+  let handleAudioDeviceChange = undefined;
+  let handleMicrophoneDeviceSelectError = undefined;
+
   try {
     room = useRoomContext();
-    const { messages: msg, state: stt, audioTrack } = useVoiceTranscription();
+    const {
+      messages: msg,
+      state: stt,
+      audioTrack: track,
+    } = useVoiceTranscription();
+    useVoiceAgentActions();
     messages = msg;
     state = stt;
-    track = audioTrack;
-    const mediaControls = useMediaControls();
-    microphoneEnabled = mediaControls.microphoneEnabled;
-    microphonePending = mediaControls.microphonePending;
-    toggleMicrophone = mediaControls.toggleMicrophone;
+    audioTrack = track;
     const { send } = useChat();
     sendChatMessage = send;
+
+    // Используем новый хук для управления устройствами
+    const inputControls = useInputControls({ saveUserChoices: true });
+    micTrackRef = inputControls.micTrackRef;
+    microphoneToggle = inputControls.microphoneToggle;
+    handleAudioDeviceChange = inputControls.handleAudioDeviceChange;
+    handleMicrophoneDeviceSelectError =
+      inputControls.handleMicrophoneDeviceSelectError;
   } catch (error) {
     // Вне LiveKitRoom - используем пустые значения
   }
@@ -63,32 +82,76 @@ export function VoiceSession({ isConnected, onReconnect }: VoiceSessionProps) {
     }
   };
 
+  const ANIMATION_TRANSITION = {
+    type: "spring",
+    stiffness: 675,
+    damping: 75,
+    mass: 1,
+  };
+
   return (
-    <section className="relative z-10 w-full h-full overflow-hidden bg-background">
-      <div className="w-full h-52">
-        <BarVisualizer state={state} barCount={7} track={track} />
+    <section className="w-full h-full overflow-hidden bg-background">
+      {/* Agent Visualization */}
+      <div className="flex items-center justify-center w-full h-32">
+        <motion.div
+          key="agent"
+          layoutId="agent"
+          initial={{
+            opacity: 0,
+            scale: 0,
+          }}
+          animate={{
+            opacity: 1,
+            scale: 1,
+          }}
+          transition={{
+            ...ANIMATION_TRANSITION,
+            delay: 0.15,
+          }}
+          className={cn(
+            "bg-background aspect-square h-[50px] rounded-md border border-transparent transition-[border,drop-shadow]",
+          )}
+        >
+          {/* Визуализация аудио агента */}
+          <BarVisualizer
+            state={state}
+            barCount={7}
+            track={audioTrack}
+            options={{ minHeight: 5 }}
+            className={cn("flex h-full items-center justify-center gap-1")}
+          >
+            <span
+              className={cn([
+                "bg-muted min-h-2.5 w-2.5 rounded-full",
+                "origin-center transition-colors duration-250 ease-linear",
+                "data-[lk-highlighted=true]:bg-[var(--Personal-colors-main)] data-[lk-muted=true]:bg-muted",
+              ])}
+            />
+          </BarVisualizer>
+        </motion.div>
       </div>
+
       {/* Chat Transcript */}
       <ChatTranscript messages={messages} visible={chatVisible} />
 
       {/* Bottom Control Bar */}
-      <div className="fixed bottom-0 z-50 pb-3 inset-x-3 md:inset-x-12 md:pb-12">
+      <div className="fixed inset-x-0 bottom-0 z-50 border-t">
         {/* Bottom fade */}
-        <div className="absolute inset-x-0 top-0 h-4 -translate-y-full pointer-events-none bg-gradient-to-t from-background to-transparent" />
-
-        <div className="relative max-w-2xl mx-auto">
-          <SessionControls
-            isConnected={isConnected}
-            microphoneEnabled={microphoneEnabled}
-            microphoneDisabled={microphonePending}
-            chatVisible={chatVisible}
-            onToggleMicrophone={toggleMicrophone}
-            onToggleChat={setChatVisible}
-            onCallAction={handleCallAction}
-            onSendMessage={handleSendMessage}
-          />
-        </div>
+        <SessionControls
+          isConnected={isConnected}
+          microphoneEnabled={microphoneToggle.enabled}
+          microphoneDisabled={false}
+          microphonePending={microphoneToggle.pending}
+          chatVisible={chatVisible}
+          micTrackRef={micTrackRef}
+          onToggleMicrophone={microphoneToggle.toggle}
+          onToggleChat={setChatVisible}
+          onCallAction={handleCallAction}
+          onSendMessage={handleSendMessage}
+          onAudioDeviceChange={handleAudioDeviceChange}
+          onDeviceError={handleMicrophoneDeviceSelectError}
+        />
       </div>
     </section>
   );
-}
+};

@@ -1,4 +1,4 @@
-import { LIVEKIT_TOKEN_ENDPOINT } from "../constants";
+import { LIVEKIT_TOKEN_ENDPOINT } from "../constants/constants";
 import { getUserIdentity } from "../helpers";
 /**
  * Получение LiveKit токена для подключения

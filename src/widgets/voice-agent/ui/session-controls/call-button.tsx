@@ -1,4 +1,4 @@
-import { Button } from "@shared/ui";
+import { Button, MyButton } from "@shared/ui";
 import { Phone, PhoneOff } from "lucide-react";
 
 interface CallButtonProps {
@@ -12,10 +12,10 @@ interface CallButtonProps {
  */
 export function CallButton({ isConnected, onAction }: CallButtonProps) {
   return (
-    <Button
-      variant={isConnected ? "destructive" : "default"}
+    <MyButton
       onClick={onAction}
-      className="gap-2"
+      className="gap-2 bg-primary"
+      buttons_type={isConnected ? "button__orange" : "button__blue"}
     >
       {isConnected ? (
         <>
@@ -30,6 +30,6 @@ export function CallButton({ isConnected, onAction }: CallButtonProps) {
           <span className="inline md:hidden">Start</span>
         </>
       )}
-    </Button>
+    </MyButton>
   );
 }

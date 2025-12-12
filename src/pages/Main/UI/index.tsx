@@ -81,7 +81,6 @@ export const MainPage = () => {
 
   return (
     <>
-      <VoiceAgent />
       <Suspense fallback={<SuspenseLoader />}>
         <Cta role={ENUM_ROLES.ADVERTISER} />
         <Services page={page} />

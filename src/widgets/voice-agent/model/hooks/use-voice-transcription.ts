@@ -1,16 +1,13 @@
-import { useEffect, useState } from "react";
 import {
-  useVoiceAssistant,
-  useTrackTranscription,
   useLocalParticipant,
+  useTrackTranscription,
+  useVoiceAssistant,
 } from "@livekit/components-react";
 import { Track } from "livekit-client";
+import { useEffect } from "react";
 import type { ChatMessage } from "..";
+import { useVoiceAgentState } from "./use-voice-agent-state";
 
-/**
- * Хук для получения транскрипций голосового общения
- * Применяет DRY - вся логика транскрипций в одном месте
- */
 export function useVoiceTranscription() {
   const { agentTranscriptions, state, audioTrack } = useVoiceAssistant();
   const localParticipant = useLocalParticipant();
@@ -20,10 +17,11 @@ export function useVoiceTranscription() {
     participant: localParticipant.localParticipant,
   });
 
-  const [messages, setMessages] = useState<ChatMessage[]>([]);
+  const { messages: globalMessages, addMessages } = useVoiceAgentState();
 
+  // Синхронизация транскрипций с глобальным состоянием
   useEffect(() => {
-    const allMessages: ChatMessage[] = [
+    const newMessages: ChatMessage[] = [
       ...(agentTranscriptions?.map((t) => ({
         id: t.id || `agent-${t.firstReceivedTime}`,
         text: t.text,
@@ -38,10 +36,13 @@ export function useVoiceTranscription() {
         timestamp: Date.now(),
         firstReceivedTime: t.firstReceivedTime,
       })) ?? []),
-    ].sort((a, b) => (a.firstReceivedTime || 0) - (b.firstReceivedTime || 0));
+    ];
 
-    setMessages(allMessages);
-  }, [agentTranscriptions, userTranscriptions]);
+    if (newMessages.length > 0) {
+      addMessages(newMessages);
+    }
+  }, [agentTranscriptions, userTranscriptions, addMessages]);
 
-  return { messages, state, audioTrack };
+  // Возвращаем глобальные сообщения вместо локальных
+  return { messages: globalMessages, state, audioTrack };
 }

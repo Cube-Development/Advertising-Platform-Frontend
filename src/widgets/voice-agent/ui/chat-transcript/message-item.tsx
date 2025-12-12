@@ -1,6 +1,6 @@
 import { Bot, User } from "lucide-react";
-import type { ChatMessage } from "../../../model";
 import { cn } from "@shared/ui";
+import { ChatMessage } from "@widgets/voice-agent/model";
 
 interface MessageItemProps {
   message: ChatMessage;

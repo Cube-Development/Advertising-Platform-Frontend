@@ -22,6 +22,7 @@ import type { PropsWithChildren } from "react";
 import { useEffect } from "react";
 import { Footer, Header } from "../components";
 import { OfferSignModal, useRenderOfferModal } from "@features/organization";
+import { VoiceAgent } from "@widgets/voice-agent";
 
 export const MainLayout = ({ children }: PropsWithChildren) => {
   const { isAuth, role, isAuthEcp } = useAppSelector((state) => state.user);
@@ -108,6 +109,7 @@ export const MainLayout = ({ children }: PropsWithChildren) => {
           <Header />
         </Suspense> */}
         <Header />
+        <VoiceAgent />
         <main className=" user_main main_background">
           <OfferSignModal open={open} setOpen={setOpen} haveTrigger={false} />
           {children}
