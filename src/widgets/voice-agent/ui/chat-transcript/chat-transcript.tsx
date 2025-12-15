@@ -1,10 +1,10 @@
 import { ScrollArea, cn } from "@shared/ui";
 import { useEffect, useRef } from "react";
-import type { ChatMessage } from "../../model";
+import type { IChatMessage } from "../../model";
 import { MessageList } from "./message-list";
 
 interface ChatTranscriptProps {
-  messages: ChatMessage[];
+  messages: IChatMessage[];
   visible?: boolean;
   className?: string;
 }
@@ -37,14 +37,14 @@ export function ChatTranscript({
   return (
     <div
       className={cn(
-        "grid grid-cols-1 grid-rows-1 transition-opacity duration-300",
+        "transition-opacity duration-300 h-full w-full min-h-0 p-2",
         !visible && "opacity-0 pointer-events-none",
         className,
       )}
     >
-      {/* <ScrollArea ref={scrollAreaRef} className="h-[calc(100%-135px)]"> */}
-      <MessageList messages={messages} className="max-w-2xl mx-auto" />
-      {/* </ScrollArea> */}
+      <ScrollArea ref={scrollAreaRef} className="w-full h-full px-4">
+        <MessageList messages={messages} className="max-w-2xl mx-auto" />
+      </ScrollArea>
     </div>
   );
 }

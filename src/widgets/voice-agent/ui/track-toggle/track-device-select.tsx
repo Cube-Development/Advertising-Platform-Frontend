@@ -84,7 +84,7 @@ export function TrackDeviceSelect({
     >
       <SelectTrigger
         className={cn(
-          "w-auto rounded-full p-1 text-sm cursor-pointer border-0 shadow-none focus:ring-0 focus:ring-offset-0 text-muted-foreground",
+          "w-auto rounded-full p-1 text-sm cursor-pointer border-0 shadow-none focus:ring-0 focus:ring-offset-0 text-muted-foreground h-[unset]",
           className,
         )}
         {...props}

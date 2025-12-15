@@ -7,8 +7,13 @@ import {
 import { cn } from "@shared/ui";
 import { useVoiceAgentActions } from "@widgets/voice-agent/model/hooks/use-voice-agent-action/use-voice-agent-action";
 import { motion } from "framer-motion";
-import { FC, useState } from "react";
-import { useInputControls, useVoiceTranscription } from "../../model";
+import { Dispatch, FC, SetStateAction, useState } from "react";
+import {
+  ENUM_CHAT_MESSAGE_TYPE,
+  IChatMessage,
+  useInputControls,
+  useVoiceTranscription,
+} from "../../model";
 import { ChatTranscript } from "../chat-transcript";
 import { SessionControls } from "../session-controls";
 
@@ -30,11 +35,11 @@ export const VoiceSession: FC<VoiceSessionProps> = ({
   let room = null;
   let state = undefined;
   let audioTrack = undefined;
-  let messages: any[] = [];
+  let messages: IChatMessage[] = [];
   let sendChatMessage:
     | ((message: string) => Promise<ReceivedChatMessage>)
     | undefined;
-
+  let setMessages: Dispatch<SetStateAction<IChatMessage[]>>;
   // Input controls
   let micTrackRef = undefined;
   let microphoneToggle = { enabled: false, pending: false, toggle: () => {} };
@@ -47,6 +52,7 @@ export const VoiceSession: FC<VoiceSessionProps> = ({
       messages: msg,
       state: stt,
       audioTrack: track,
+      setInputParticipant: setMessagesTranscription,
     } = useVoiceTranscription();
     useVoiceAgentActions();
     messages = msg;
@@ -54,6 +60,7 @@ export const VoiceSession: FC<VoiceSessionProps> = ({
     audioTrack = track;
     const { send } = useChat();
     sendChatMessage = send;
+    setMessages = setMessagesTranscription;
 
     // Используем новый хук для управления устройствами
     const inputControls = useInputControls({ saveUserChoices: true });
@@ -79,6 +86,17 @@ export const VoiceSession: FC<VoiceSessionProps> = ({
   const handleSendMessage = async (message: string) => {
     if (sendChatMessage && isConnected) {
       await sendChatMessage(message);
+      const firstReceivedTime = Date.now();
+      setMessages((prev) => [
+        ...prev,
+        {
+          id: `${ENUM_CHAT_MESSAGE_TYPE.USER}-${firstReceivedTime}`,
+          text: message,
+          type: ENUM_CHAT_MESSAGE_TYPE.USER,
+          timestamp: firstReceivedTime,
+          firstReceivedTime: firstReceivedTime,
+        },
+      ]);
     }
   };
 
@@ -90,9 +108,9 @@ export const VoiceSession: FC<VoiceSessionProps> = ({
   };
 
   return (
-    <section className="w-full h-full overflow-hidden bg-background">
-      {/* Agent Visualization */}
-      <div className="flex items-center justify-center w-full h-32">
+    <section className="grid grid-rows-[min-content_1fr_min-content] w-full h-full bg-background rounded-b-xl overflow-hidden">
+      {/* Agent Visualization (Header area) */}
+      <div className="flex items-center justify-center w-full h-32 p-4 shrink-0">
         <motion.div
           key="agent"
           layoutId="agent"
@@ -131,12 +149,13 @@ export const VoiceSession: FC<VoiceSessionProps> = ({
         </motion.div>
       </div>
 
-      {/* Chat Transcript */}
-      <ChatTranscript messages={messages} visible={chatVisible} />
+      {/* Chat Transcript (Scrollable content) */}
+      <div className="w-full min-h-0">
+        <ChatTranscript messages={messages} visible={chatVisible} />
+      </div>
 
-      {/* Bottom Control Bar */}
-      <div className="fixed inset-x-0 bottom-0 z-50 border-t">
-        {/* Bottom fade */}
+      {/* Bottom Control Bar (Footer) */}
+      <div className="z-50 w-full border-t bg-background shrink-0">
         <SessionControls
           isConnected={isConnected}
           microphoneEnabled={microphoneToggle.enabled}

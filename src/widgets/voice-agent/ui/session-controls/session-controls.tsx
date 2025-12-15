@@ -1,9 +1,8 @@
-import { Track } from "livekit-client";
 import type { TrackReferenceOrPlaceholder } from "@livekit/components-react";
+import { Track } from "livekit-client";
 import { TrackSelector } from "../track-toggle";
 import { CallButton } from "./call-button";
 import { ChatInput } from "./chat-input";
-import { Card, cn } from "@shared/ui";
 
 interface SessionControlsProps {
   isConnected: boolean;
@@ -18,7 +17,6 @@ interface SessionControlsProps {
   onSendMessage: (message: string) => void;
   onAudioDeviceChange?: (deviceId: string) => void;
   onDeviceError?: (error: Error) => void;
-  className?: string;
 }
 
 /**
@@ -39,39 +37,31 @@ export function SessionControls({
   onSendMessage,
   onAudioDeviceChange,
   onDeviceError,
-  className,
 }: SessionControlsProps) {
   return (
-    <div className={cn("flex flex-col p-5", className)}>
-      {/* Chat Input с анимацией */}
-
-      {/* Controls */}
-      <div className="grid grid-rows-2 gap-2">
-        <div className="grid grid-cols-[max-content_1fr] gap-2">
-          <TrackSelector
-            kind="audioinput"
-            source={Track.Source.Microphone}
-            pressed={microphoneEnabled}
-            pending={microphonePending}
-            disabled={microphoneDisabled || !isConnected}
-            audioTrackRef={micTrackRef}
-            onPressedChange={onToggleMicrophone}
-            onMediaDeviceError={onDeviceError}
-            onActiveDeviceChange={onAudioDeviceChange}
-          />
-          <ChatInput
-            chatOpen={chatVisible}
-            onSend={onSendMessage}
-            disabled={!isConnected}
-            placeholder={
-              isConnected ? "Type a message..." : "Start call to chat"
-            }
-          />
-        </div>
-
-        {/* Call button */}
-        <CallButton isConnected={isConnected} onAction={onCallAction} />
+    <div className="grid grid-flow-row gap-2 p-5">
+      <div className="grid grid-cols-[max-content_1fr] gap-2">
+        <TrackSelector
+          kind="audioinput"
+          source={Track.Source.Microphone}
+          pressed={microphoneEnabled}
+          pending={microphonePending}
+          disabled={microphoneDisabled || !isConnected}
+          audioTrackRef={micTrackRef}
+          onPressedChange={onToggleMicrophone}
+          onMediaDeviceError={onDeviceError}
+          onActiveDeviceChange={onAudioDeviceChange}
+        />
+        <ChatInput
+          chatOpen={chatVisible}
+          onSend={onSendMessage}
+          disabled={!isConnected}
+          placeholder={isConnected ? "Type a message..." : "Start call to chat"}
+        />
       </div>
+
+      {/* Call button */}
+      <CallButton isConnected={isConnected} onAction={onCallAction} />
     </div>
   );
 }

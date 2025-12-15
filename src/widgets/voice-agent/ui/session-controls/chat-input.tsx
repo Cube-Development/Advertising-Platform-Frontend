@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState, KeyboardEvent } from "react";
-import { Input, Button } from "@shared/ui";
-import { Send, Loader2 } from "lucide-react";
+import { Button, Input } from "@shared/ui";
+import { Loader2, Send } from "lucide-react";
+import { KeyboardEvent, useEffect, useRef, useState } from "react";
 
 interface ChatInputProps {
   onSend: (message: string) => void;
@@ -8,6 +8,7 @@ interface ChatInputProps {
   placeholder?: string;
   chatOpen?: boolean;
 }
+
 export function ChatInput({
   onSend,
   disabled = false,
@@ -18,11 +19,11 @@ export function ChatInput({
   const [message, setMessage] = useState("");
   const [isSending, setIsSending] = useState(false);
 
-  const handleSend = async () => {
+  const handleSend = () => {
     if (message.trim() && !disabled && !isSending) {
       try {
         setIsSending(true);
-        await onSend(message.trim());
+        onSend(message.trim());
         setMessage("");
       } catch (error) {
         console.error("Failed to send message:", error);
@@ -52,7 +53,7 @@ export function ChatInput({
   }
 
   return (
-    <div className="flex gap-2 w-full">
+    <div className="flex w-full gap-2">
       <Input
         ref={inputRef}
         value={message}

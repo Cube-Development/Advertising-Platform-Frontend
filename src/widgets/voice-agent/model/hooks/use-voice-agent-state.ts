@@ -1,15 +1,15 @@
 import { useState, useCallback, useEffect } from "react";
-import type { ChatMessage } from "../types/types";
+import type { IChatMessage } from "../types/chat.interface";
 
 interface VoiceAgentGlobalState {
   isWindowOpen: boolean;
-  messages: ChatMessage[];
+  messages: IChatMessage[];
 }
 
 interface UseVoiceAgentStateReturn extends VoiceAgentGlobalState {
   openWindow: () => void;
   closeWindow: () => void;
-  addMessages: (newMessages: ChatMessage[]) => void;
+  addMessages: (newMessages: IChatMessage[]) => void;
   clearMessages: () => void;
 }
 
@@ -50,7 +50,7 @@ export function useVoiceAgentState(): UseVoiceAgentStateReturn {
     notifyListeners();
   }, []);
 
-  const addMessages = useCallback((newMessages: ChatMessage[]) => {
+  const addMessages = useCallback((newMessages: IChatMessage[]) => {
     // Добавляем только уникальные сообщения
     const existingIds = new Set(globalState.messages.map((m) => m.id));
     const uniqueMessages = newMessages.filter((m) => !existingIds.has(m.id));

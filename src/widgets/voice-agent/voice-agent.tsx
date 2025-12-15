@@ -9,6 +9,7 @@ export function VoiceAgent() {
   const {
     isConnected,
     token,
+    serverUrl,
     shouldConnect,
     connect,
     reconnect,
@@ -44,7 +45,7 @@ export function VoiceAgent() {
       {/* Закрепленное окно справа внизу */}
       <Card
         className={`
-          fixed bottom-6 right-6 w-[600px] h-[700px]
+          fixed bottom-6 right-6 w-[400px] max-h-[700px] h-[90vh]
           transition-all duration-300 ease-in-out
           z-50
           ${
@@ -54,7 +55,7 @@ export function VoiceAgent() {
           }
         `}
       >
-        <div className="flex flex-col h-full">
+        <div className="grid h-full grid-rows-[min-content_1fr]">
           {/* Заголовок с кнопкой закрытия */}
           <CardHeader className="grid items-center justify-between grid-flow-col p-4 border-b">
             <CardTitle className="text-lg font-semibold">
@@ -71,10 +72,10 @@ export function VoiceAgent() {
           </CardHeader>
 
           {/* Контент */}
-          <CardContent className="flex-1 overflow-hidden">
+          <CardContent className="h-full p-0 overflow-hidden">
             {token ? (
               <LiveKitRoom
-                serverUrl={import.meta.env.VITE_LIVEKIT_URL}
+                serverUrl={serverUrl || ""}
                 token={token}
                 connect={shouldConnect}
                 video={false}

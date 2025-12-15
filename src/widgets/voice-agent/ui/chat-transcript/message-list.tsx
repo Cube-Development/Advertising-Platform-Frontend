@@ -1,8 +1,8 @@
-import { ChatMessage } from "@widgets/voice-agent/model";
+import { IChatMessage } from "@widgets/voice-agent/model";
 import { MessageItem } from "./message-item";
 
 interface MessageListProps {
-  messages: ChatMessage[];
+  messages: IChatMessage[];
   className?: string;
 }
 

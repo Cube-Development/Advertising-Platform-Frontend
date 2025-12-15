@@ -1,36 +1,21 @@
 import { useRoomContext } from "@livekit/components-react";
-import { ENUM_PATHS } from "@shared/routing";
 import { useCallback, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { ENUM_VOICE_ACTIONS, IVoiceAgentAction } from "../../types";
+import { useSiteNavigate } from "./use-site-navigate";
+import { useAddToCart } from "./use-add-to-cart";
 
-/**
- * Хук для обработки действий от голосового агента
- * Слушает text stream от агента и выполняет действия (например, навигацию)
- */
-enum ENUM_VOICE_ACTIONS {
-  navigate_user = "navigate_user",
-}
-
-interface IVoiceAgentAction {
-  type: string;
-  action: ENUM_VOICE_ACTIONS;
-  path: ENUM_PATHS;
-}
-
-export function useVoiceAgentActions() {
+export function useVoiceAgentActions(): void {
   const room = useRoomContext();
-  const navigate = useNavigate();
 
-  // Мемоизируем функции, чтобы избежать пересоздания на каждом рендере
-  const handleNavigate = useCallback(async (path: ENUM_PATHS) => {
-    console.log(`Navigating to ${path}`);
-    navigate(path);
-  }, []);
+  const { handleNavigate } = useSiteNavigate();
+  const { handleAddToCart } = useAddToCart();
 
   const handleCheckType = useCallback(
     async (action: IVoiceAgentAction) => {
-      if (action.action === ENUM_VOICE_ACTIONS.navigate_user) {
+      if (action.action === ENUM_VOICE_ACTIONS.NAVIGATE_USER) {
         await handleNavigate(action.path);
+      } else if (action.action === ENUM_VOICE_ACTIONS.ADD_TO_CART) {
+        await handleAddToCart(action.ids);
       }
     },
     [handleNavigate],
@@ -72,7 +57,4 @@ export function useVoiceAgentActions() {
       room.unregisterTextStreamHandler("agent-events");
     };
   }, [room, handleCheckType]);
-
-  // Возвращаем глобальные сообщения вместо локальных
-  return {};
 }

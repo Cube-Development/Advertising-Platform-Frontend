@@ -1,9 +1,12 @@
 import { LIVEKIT_TOKEN_ENDPOINT } from "../constants/constants";
 import { getUserIdentity } from "../helpers";
-/**
- * Получение LiveKit токена для подключения
- */
-export async function getLivekitToken(): Promise<string> {
+
+interface ILiveKitTokenResponse {
+  token: string;
+  serverUrl: string;
+}
+
+export async function getLivekitToken(): Promise<ILiveKitTokenResponse> {
   const userName = getUserIdentity();
   console.log("Getting LiveKit token for:", userName);
 
@@ -15,5 +18,10 @@ export async function getLivekitToken(): Promise<string> {
     throw new Error(`Failed to get token: ${response.statusText}`);
   }
 
-  return response.text();
+  const { token, serverUrl } = await response.json();
+
+  return {
+    token,
+    serverUrl,
+  };
 }

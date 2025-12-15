@@ -53,7 +53,7 @@ export function TrackToggle({
       aria-label={`Toggle ${source}`}
       className={cn(
         className,
-        "border-0 rounded-r-full data-[state=on]:bg-transparent gap-1",
+        "border-0 rounded-r-full data-[state=on]:bg-transparent gap-1 py-0 h-[unset]",
       )}
       {...props}
     >

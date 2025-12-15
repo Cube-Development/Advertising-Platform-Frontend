@@ -1,12 +1,12 @@
 import { useState, useCallback, useEffect } from "react";
 import { getLivekitToken } from "../api";
-import type { VoiceSessionState } from "..";
+import type { IVoiceSessionState } from "..";
 
 interface UseLivekitConnectionProps {
   autoConnect?: boolean;
 }
 
-interface UseLivekitConnectionReturn extends VoiceSessionState {
+interface UseLivekitConnectionReturn extends IVoiceSessionState {
   connect: () => Promise<void>;
   disconnect: () => void;
   reconnect: () => void;
@@ -22,10 +22,11 @@ interface UseLivekitConnectionReturn extends VoiceSessionState {
 export function useLivekitConnection({
   autoConnect = false,
 }: UseLivekitConnectionProps = {}): UseLivekitConnectionReturn {
-  const [state, setState] = useState<VoiceSessionState>({
+  const [state, setState] = useState<IVoiceSessionState>({
     isConnected: false,
     isLoading: false,
     token: null,
+    serverUrl: null,
     shouldConnect: false,
   });
 
@@ -37,10 +38,11 @@ export function useLivekitConnection({
 
     try {
       setState((prev) => ({ ...prev, isLoading: true }));
-      const token = await getLivekitToken();
+      const { token, serverUrl } = await getLivekitToken();
       setState((prev) => ({
         ...prev,
         token,
+        serverUrl,
         shouldConnect: true,
         isLoading: false,
       }));
@@ -67,6 +69,7 @@ export function useLivekitConnection({
       isConnected: false,
       isLoading: false,
       token: null,
+      serverUrl: null,
       shouldConnect: false,
     });
   }, []);

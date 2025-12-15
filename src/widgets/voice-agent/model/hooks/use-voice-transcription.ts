@@ -4,9 +4,8 @@ import {
   useVoiceAssistant,
 } from "@livekit/components-react";
 import { Track } from "livekit-client";
-import { useEffect } from "react";
-import type { ChatMessage } from "..";
-import { useVoiceAgentState } from "./use-voice-agent-state";
+import { useEffect, useState } from "react";
+import { ENUM_CHAT_MESSAGE_TYPE, type IChatMessage } from "..";
 
 export function useVoiceTranscription() {
   const { agentTranscriptions, state, audioTrack } = useVoiceAssistant();
@@ -17,32 +16,32 @@ export function useVoiceTranscription() {
     participant: localParticipant.localParticipant,
   });
 
-  const { messages: globalMessages, addMessages } = useVoiceAgentState();
+  const [inputParticipant, setInputParticipant] = useState<IChatMessage[]>([]);
 
-  // Синхронизация транскрипций с глобальным состоянием
+  const [messages, setMessages] = useState<IChatMessage[]>([]);
+
   useEffect(() => {
-    const newMessages: ChatMessage[] = [
+    const allMessages: IChatMessage[] = [
       ...(agentTranscriptions?.map((t) => ({
-        id: t.id || `agent-${t.firstReceivedTime}`,
+        id: t.id || `${ENUM_CHAT_MESSAGE_TYPE.AGENT}-${t.firstReceivedTime}`,
         text: t.text,
-        type: "agent" as const,
+        type: ENUM_CHAT_MESSAGE_TYPE.AGENT,
         timestamp: Date.now(),
         firstReceivedTime: t.firstReceivedTime,
       })) ?? []),
       ...(userTranscriptions?.map((t) => ({
-        id: t.id || `user-${t.firstReceivedTime}`,
+        id: t.id || `${ENUM_CHAT_MESSAGE_TYPE.USER}-${t.firstReceivedTime}`,
         text: t.text,
-        type: "user" as const,
+        type: ENUM_CHAT_MESSAGE_TYPE.USER,
         timestamp: Date.now(),
         firstReceivedTime: t.firstReceivedTime,
       })) ?? []),
-    ];
+      ...inputParticipant,
+    ].sort((a, b) => (a.firstReceivedTime || 0) - (b.firstReceivedTime || 0));
 
-    if (newMessages.length > 0) {
-      addMessages(newMessages);
-    }
-  }, [agentTranscriptions, userTranscriptions, addMessages]);
+    setMessages(allMessages);
+  }, [agentTranscriptions, userTranscriptions, inputParticipant]);
 
   // Возвращаем глобальные сообщения вместо локальных
-  return { messages: globalMessages, state, audioTrack };
+  return { messages, state, audioTrack, setInputParticipant };
 }
