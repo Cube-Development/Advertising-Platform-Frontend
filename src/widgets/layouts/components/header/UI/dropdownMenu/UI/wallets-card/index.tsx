@@ -11,8 +11,9 @@ import { EffectCoverflow, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./styles.module.scss";
 import { Wallet } from "lucide-react";
+import { UnrealizedWallet } from "@features/wallet";
 
-export const WalletsCard: FC = ({}) => {
+export const WalletsCard: FC = () => {
   const { t } = useTranslation();
   const [walletType, setWalletType] = useState<ENUM_WALLETS_TYPE | null>(
     ENUM_WALLETS_TYPE.DEPOSIT,
@@ -84,6 +85,7 @@ export const WalletsCard: FC = ({}) => {
           </SwiperSlide>
         ))}
       </Swiper>
+      <UnrealizedWallet />
     </div>
   );
 };

@@ -7,7 +7,7 @@ import {
   SkeletonHistoryCard,
   useGetHistoryQuery,
 } from "@entities/wallet";
-import { BarHistory } from "@features/wallet";
+import { BarHistory, UnrealizedWallet } from "@features/wallet";
 import { SadSmileIcon } from "@shared/assets";
 import {
   BREAKPOINT,
@@ -81,6 +81,7 @@ export const History: FC = () => {
             variant={"primary"}
           />
         </motion.div>
+        <UnrealizedWallet />
         {screen > BREAKPOINT.MD && (
           <motion.div
             initial="hidden"

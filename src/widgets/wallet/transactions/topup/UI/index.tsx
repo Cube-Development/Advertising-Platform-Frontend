@@ -8,7 +8,7 @@ import {
   WALLET_TOP_UP_FILTER_TABS_LIST,
 } from "@entities/wallet";
 import { BarSubFilter } from "@features/other";
-import { DownloadInvoice } from "@features/wallet";
+import { DownloadInvoice, UnrealizedWallet } from "@features/wallet";
 import { ArrowIcon4 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
 import {
@@ -83,6 +83,7 @@ export const Topup: FC = () => {
               tab_list={WALLET_TOP_UP_FILTER_TABS_LIST}
               changeTab={changeTab}
             />
+            <UnrealizedWallet />
             {formState?.profileFilter?.type ===
             PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT ? (
               <CreditCard />
