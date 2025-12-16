@@ -19,11 +19,9 @@
 
   .price {
     display: grid;
-    grid-auto-flow: column;
-    align-items: center;
-    justify-content: end;
-    text-align: center;
-    column-gap: 10px;
+    grid-auto-flow: row;
+    justify-content: start;
+    justify-items: start;
     font-size: 14px;
 
     @media (max-width: 576px) {

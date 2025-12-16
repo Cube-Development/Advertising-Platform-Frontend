@@ -20,6 +20,7 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { validate as isValidUUID } from "uuid";
 import styles from "./styles.module.scss";
+import { UnrealizedWallet } from "@features/wallet";
 
 // Ленивый импорт компонента MyOffers
 const MyOffers = React.lazy(() =>
@@ -138,6 +139,7 @@ export const OffersPage: FC = () => {
             onChange={setValue}
             value={formState.search_string}
           />
+          <UnrealizedWallet />
           <MyOffers
             statusFilter={formState.status as ENUM_OFFER_STATUS}
             offers={data?.orders || []}
