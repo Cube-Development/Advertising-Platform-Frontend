@@ -149,7 +149,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
       // { skip: !!card?.project_id && !!card }
       { skip: !formFields?.order_id || !card },
     );
-
+  console.log("orderHistory", orderHistory?.history?.length, orderHistory);
   const { data: projectHistory, isFetching: isFetchingProject } =
     useGetProjectHistoryQuery(
       {
@@ -235,6 +235,11 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
   const handlePaginationHistory = () => {
     if (deserializedData?.history) {
       const topMessage = deserializedData?.history[0];
+      console.log("Pagination Triggered");
+      console.log("Top Message ID:", topMessage?.id);
+      console.log("Top Message Date:", topMessage?.created_date);
+      console.log("Top Message Time:", topMessage?.created_time);
+
       setValue("created_date", topMessage?.created_date);
       setValue("created_time", topMessage?.created_time);
 
@@ -574,7 +579,10 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
 
   useEffect(() => {
     if (isSendMessage && messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "auto" });
+      messagesEndRef.current.scrollIntoView({
+        behavior: "auto",
+        block: "end",
+      });
       setIsSendMessage(false);
     }
   }, [isSendMessage]);
@@ -583,7 +591,10 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
     if (isNewMessage && messagesEndRef.current) {
       setIsNewMessage(false);
       if (!showScrollDownButton) {
-        messagesEndRef.current.scrollIntoView({ behavior: "auto" });
+        messagesEndRef.current.scrollIntoView({
+          behavior: "auto",
+          block: "end",
+        });
       }
     }
   }, [isNewMessage]);

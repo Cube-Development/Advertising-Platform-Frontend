@@ -2,7 +2,9 @@ import { ContentType, useGetFileLinkMutation } from "@entities/project";
 import { IMess } from "@entities/communication";
 import { FC, useEffect, useState } from "react";
 import { MessageActionMenu } from "../MessageActionMenu";
-import { FileIcon } from "lucide-react";
+import { FileIcon, Image as ImageIcon, Video as VideoIcon } from "lucide-react";
+import { useInView } from "react-intersection-observer";
+import { Skeleton } from "@shared/ui";
 
 interface MessageContentProps {
   message: IMess;
@@ -11,6 +13,11 @@ interface MessageContentProps {
 export const MessageContent: FC<MessageContentProps> = ({ message }) => {
   const [getFileLink] = useGetFileLinkMutation();
   const [fileUrl, setFileUrl] = useState<string>("");
+  const [isLoaded, setIsLoaded] = useState(false);
+  const { ref, inView } = useInView({
+    triggerOnce: true,
+    rootMargin: "200px 0px", // Preload slightly before appearing
+  });
 
   const handleDownload = async () => {
     if (fileUrl) {
@@ -33,6 +40,8 @@ export const MessageContent: FC<MessageContentProps> = ({ message }) => {
   };
 
   useEffect(() => {
+    if (!inView) return; // Only fetch if visible
+
     if (
       message.content_type === ContentType.photo ||
       message.content_type === ContentType.video ||
@@ -46,7 +55,7 @@ export const MessageContent: FC<MessageContentProps> = ({ message }) => {
         })
         .catch((err) => console.error("Failed to get file link", err));
     }
-  }, [message.content, message.content_type, getFileLink]);
+  }, [message.content, message.content_type, getFileLink, inView]);
 
   switch (message.content_type) {
     case ContentType.text:
@@ -59,12 +68,20 @@ export const MessageContent: FC<MessageContentProps> = ({ message }) => {
 
     case ContentType.photo:
       return (
-        <div className="max-w-full my-2 group">
+        <div ref={ref} className="max-w-full my-2 group min-h-[100px]">
+          {(!fileUrl || !isLoaded) && (
+            <Skeleton className="w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] flex items-center justify-center rounded-lg bg-gray-200">
+              <ImageIcon className="w-10 h-10 text-gray-400" />
+            </Skeleton>
+          )}
           {fileUrl && (
             <img
               src={fileUrl}
               alt="Photo"
-              className="max-w-full max-h-[400px] rounded-lg object-contain cursor-pointer transition-opacity duration-200 hover:opacity-90"
+              onLoad={() => setIsLoaded(true)}
+              className={`max-w-[200px] sm:max-w-[300px] w-auto h-[200px] sm:h-[300px] rounded-lg object-contain cursor-pointer transition-opacity duration-200 hover:opacity-90 ${
+                !isLoaded ? "hidden" : "block"
+              }`}
             />
           )}
           <MessageActionMenu onDownload={handleDownload} />
@@ -73,12 +90,20 @@ export const MessageContent: FC<MessageContentProps> = ({ message }) => {
 
     case ContentType.video:
       return (
-        <div className="max-w-full my-2 group">
+        <div ref={ref} className="max-w-full my-2 group min-h-[100px]">
+          {(!fileUrl || !isLoaded) && (
+            <Skeleton className="w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] flex items-center justify-center rounded-lg bg-gray-200">
+              <VideoIcon className="w-10 h-10 text-gray-400" />
+            </Skeleton>
+          )}
           {fileUrl && (
             <video
               src={fileUrl}
               controls
-              className="max-w-full max-h-[400px] rounded-lg"
+              onLoadedData={() => setIsLoaded(true)}
+              className={`max-w-[200px] sm:max-w-[300px] w-auto h-[200px] sm:h-[300px] rounded-lg ${
+                !isLoaded ? "hidden" : "block"
+              }`}
             >
               <source src={fileUrl} type="video/mp4" />
               Your browser does not support the video tag.
@@ -90,12 +115,20 @@ export const MessageContent: FC<MessageContentProps> = ({ message }) => {
 
     case ContentType.gif:
       return (
-        <div className="max-w-full my-2 group">
+        <div ref={ref} className="max-w-full my-2 group min-h-[100px]">
+          {(!fileUrl || !isLoaded) && (
+            <Skeleton className="w-[200px] h-[200px] sm:w-[300px] sm:h-[300px] flex items-center justify-center rounded-lg bg-gray-200">
+              <ImageIcon className="w-10 h-10 text-gray-400" />
+            </Skeleton>
+          )}
           {fileUrl && (
             <img
               src={fileUrl}
               alt="GIF"
-              className="max-w-full max-h-[400px] rounded-lg object-contain cursor-pointer transition-opacity duration-200 hover:opacity-90"
+              onLoad={() => setIsLoaded(true)}
+              className={`max-w-[200px] sm:max-w-[300px] w-auto h-[200px] sm:h-[300px] rounded-lg object-contain cursor-pointer transition-opacity duration-200 hover:opacity-90 ${
+                !isLoaded ? "hidden" : "block"
+              }`}
             />
           )}
           <MessageActionMenu onDownload={handleDownload} />
@@ -106,7 +139,7 @@ export const MessageContent: FC<MessageContentProps> = ({ message }) => {
       const fileName =
         message.name || message.content.split("/").pop() || "file";
       return (
-        <div className="flex items-center gap-2 group">
+        <div ref={ref} className="flex items-center gap-2 group min-h-[40px]">
           <a
             href={fileUrl}
             target="_blank"
