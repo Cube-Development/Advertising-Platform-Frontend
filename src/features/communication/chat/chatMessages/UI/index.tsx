@@ -356,10 +356,6 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
       status: MESSAGE_STATUS.UNREAD,
     };
 
-    const newHistory = {
-      ...deserializedData,
-      history: [...(deserializedData?.history || []), orderMessageState],
-    };
     if (card?.type === CHAT_TYPE.ORDER) {
       dispatch(
         chatAPI.util.updateQueryData(
@@ -368,7 +364,9 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
             ...formFields,
           },
           (draft) => {
-            Object.assign(draft, newHistory);
+            if (draft?.history) {
+              draft.history.push(orderMessageState);
+            }
           },
         ),
       );
@@ -380,7 +378,9 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
             ...formFields,
           },
           (draft) => {
-            Object.assign(draft, newHistory);
+            if (draft?.history) {
+              draft.history.push(orderMessageState);
+            }
           },
         ),
       );
@@ -388,13 +388,10 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
   };
 
   const handleFilesUpload = async (files: File[]) => {
-    const messages = await uploadFiles(files);
-
-    for (const message of messages) {
+    await uploadFiles(files, (message) => {
       sendMessage(message);
-    }
-
-    setIsSendMessage(true);
+      setIsSendMessage(true);
+    });
   };
 
   const handleReadMessage = (message: IMessageNewSocket) => {

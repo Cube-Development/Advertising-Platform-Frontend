@@ -9,7 +9,10 @@ import { getFileExtension } from "@shared/utils";
 export const useUploadChatFiles = () => {
   const [getUploadLink] = useGetUploadLinkMutation();
 
-  const uploadFiles = async (files: File[]): Promise<IMess[]> => {
+  const uploadFiles = async (
+    files: File[],
+    onFileUploaded?: (message: IMess) => void,
+  ): Promise<IMess[]> => {
     const messages: IMess[] = [];
 
     for (const file of files) {
@@ -28,11 +31,14 @@ export const useUploadChatFiles = () => {
           },
         });
 
-        messages.push({
+        const message = {
           content_type: contentType,
           content: data.file_name,
           name: file.name,
-        });
+        };
+
+        messages.push(message);
+        onFileUploaded?.(message);
       } catch (error) {
         console.error(`Failed to upload file ${file.name}:`, error);
       }
