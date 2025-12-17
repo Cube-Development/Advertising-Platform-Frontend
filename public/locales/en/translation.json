@@ -1866,7 +1866,11 @@
     "channel": "Channel",
     "new_message": "Write a message...",
     "no_message": "There's nothing here yet, send a message",
-    "chat_choose": "Select a chat to start a conversation"
+    "chat_choose": "Select a chat to start a conversation",
+    "file_upload": {
+      "title": "Upload File",
+      "send": "Upload"
+    }
   },
 
   "notifications": {

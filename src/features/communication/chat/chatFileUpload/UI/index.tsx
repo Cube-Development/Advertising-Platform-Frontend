@@ -1,5 +1,7 @@
 import { AddFiles } from "@features/createOrder/addFiles";
 import { AddMediaFiles } from "@features/createOrder/addMediaFiles";
+import { ADD_FILE_FILTER, ADD_FILE_FILTER_TABS_LIST } from "@entities/project";
+import { BarSubFilter } from "@features/other";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -18,25 +20,16 @@ interface ChatFileUploadProps {
   onFilesSelected: (files: File[]) => void;
 }
 
-enum FileType {
-  NONE = "none",
-  MEDIA = "media",
-  FILES = "files",
-}
-
 export const ChatFileUpload: FC<ChatFileUploadProps> = ({
   isOpen,
   onClose,
   onFilesSelected,
 }) => {
   const { t } = useTranslation();
-  const [selectedType, setSelectedType] = useState<FileType>(FileType.NONE);
+  const [filter, setFilter] = useState<ADD_FILE_FILTER>(
+    ADD_FILE_FILTER.MEDIA_FILE,
+  );
   const [selectedFiles, setSelectedFiles] = useState<File[]>([]);
-
-  const handleTypeSelect = (type: FileType) => {
-    setSelectedType(type);
-    setSelectedFiles([]);
-  };
 
   const handleFilesChange = (files: File[]) => {
     setSelectedFiles(files);
@@ -50,7 +43,7 @@ export const ChatFileUpload: FC<ChatFileUploadProps> = ({
   };
 
   const handleClose = () => {
-    setSelectedType(FileType.NONE);
+    setFilter(ADD_FILE_FILTER.MEDIA_FILE);
     setSelectedFiles([]);
     onClose();
   };
@@ -59,66 +52,40 @@ export const ChatFileUpload: FC<ChatFileUploadProps> = ({
     <AlertDialog open={isOpen} onOpenChange={handleClose}>
       <AlertDialogContent className={styles.content}>
         <AlertDialogTitle className={styles.title}>
-          <p className="gradient_color">
-            {selectedType === FileType.NONE
-              ? t("chat.file_upload.title")
-              : selectedType === FileType.MEDIA
-                ? t("chat.file_upload.media_title")
-                : t("chat.file_upload.files_title")}
-          </p>
+          <p className="gradient_color">{t("chat.file_upload.title")}</p>
         </AlertDialogTitle>
         <AlertDialogDescription className="sr-only" />
 
         <div className={styles.body}>
-          {selectedType === FileType.NONE ? (
-            <div className={styles.type_selector}>
-              <button
-                className={styles.type_button}
-                onClick={() => handleTypeSelect(FileType.MEDIA)}
-              >
-                <div className={styles.type_icon}>📷</div>
-                <p>{t("chat.file_upload.media")}</p>
-                <span>{t("chat.file_upload.media_desc")}</span>
-              </button>
-              <button
-                className={styles.type_button}
-                onClick={() => handleTypeSelect(FileType.FILES)}
-              >
-                <div className={styles.type_icon}>📄</div>
-                <p>{t("chat.file_upload.files")}</p>
-                <span>{t("chat.file_upload.files_desc")}</span>
-              </button>
-            </div>
-          ) : selectedType === FileType.MEDIA ? (
-            <AddMediaFiles
-              onChange={handleFilesChange}
-              currentFiles={selectedFiles}
-            />
-          ) : (
-            <AddFiles
-              onChange={handleFilesChange}
-              currentFiles={selectedFiles}
-            />
-          )}
+          <BarSubFilter
+            tab={filter}
+            changeTab={setFilter}
+            tab_list={ADD_FILE_FILTER_TABS_LIST}
+          />
+          <div className="mt-4">
+            {filter === ADD_FILE_FILTER.MEDIA_FILE ? (
+              <AddMediaFiles
+                onChange={handleFilesChange}
+                currentFiles={selectedFiles}
+              />
+            ) : (
+              <AddFiles
+                onChange={handleFilesChange}
+                currentFiles={selectedFiles}
+              />
+            )}
+          </div>
         </div>
 
-        {selectedType !== FileType.NONE && (
-          <div className={styles.actions}>
-            <button
-              className={styles.back_button}
-              onClick={() => setSelectedType(FileType.NONE)}
-            >
-              {t("chat.file_upload.back")}
-            </button>
-            <button
-              className={styles.send_button}
-              onClick={handleSend}
-              disabled={selectedFiles.length === 0}
-            >
-              {t("chat.file_upload.send")}
-            </button>
-          </div>
-        )}
+        <div className={styles.actions}>
+          <button
+            className={styles.send_button}
+            onClick={handleSend}
+            disabled={selectedFiles.length === 0}
+          >
+            {t("chat.file_upload.send")}
+          </button>
+        </div>
 
         <AlertDialogCancel onClick={handleClose} asChild>
           <CustomCloseButton className="translate-y-0 top-1" />

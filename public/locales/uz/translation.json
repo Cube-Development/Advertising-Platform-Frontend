@@ -1864,7 +1864,11 @@
     "channel": "kanal",
     "new_message": "Xabar yozing...",
     "no_message": "Bu yerda hali hech narsa yo'q, xabar yozing",
-    "chat_choose": "Suhbatni boshlash uchun chatni tanlang"
+    "chat_choose": "Suhbatni boshlash uchun chatni tanlang",
+    "file_upload": {
+      "title": "Fayl yuklash",
+      "send": "Yuklash"
+    }
   },
 
   "notifications": {
