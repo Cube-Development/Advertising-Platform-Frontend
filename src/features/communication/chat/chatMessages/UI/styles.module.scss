@@ -107,6 +107,7 @@
         border-radius: 10px 20px 20px 0;
         background: var(--start-color);
         color: var(--Personal-colors-black);
+        position: relative;
       }
 
       &.less {
@@ -128,6 +129,7 @@
         border-radius: 20px 10px 0 20px;
         background: var(--start-color);
         color: var(--Personal-colors-White);
+        position: relative;
       }
 
       &.less {
