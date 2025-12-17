@@ -1,0 +1,106 @@
+.content {
+  max-width: 900px;
+  width: 90vw;
+  max-height: 80vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.title {
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+
+  p {
+    font-size: 1.25rem;
+    font-weight: 600;
+  }
+}
+
+.body {
+  flex: 1;
+  overflow: auto;
+  padding: 1.5rem;
+}
+
+.type_selector {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+  padding: 2rem;
+}
+
+.type_button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 2rem 1.5rem;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  background: transparent;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    border-color: var(--primary-color);
+    background: var(--hover-bg);
+  }
+
+  .type_icon {
+    font-size: 3rem;
+  }
+
+  p {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  span {
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+    text-align: center;
+  }
+}
+
+.actions {
+  display: flex;
+  gap: 1rem;
+  padding: 1.5rem;
+  border-top: 1px solid var(--border-color);
+}
+
+.back_button,
+.send_button {
+  flex: 1;
+  padding: 0.75rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.back_button {
+  border: 1px solid var(--border-color);
+  background: transparent;
+  color: var(--text-primary);
+
+  &:hover {
+    background: var(--hover-bg);
+  }
+}
+
+.send_button {
+  border: none;
+  background: var(--primary-gradient);
+  color: white;
+
+  &:hover:not(:disabled) {
+    opacity: 0.9;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}

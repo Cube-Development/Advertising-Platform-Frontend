@@ -6,6 +6,7 @@ import {
   RECIPIENT_TYPE,
   notificationsTypes,
 } from "../config";
+import { ContentType } from "@entities/project";
 
 export interface IChat {
   id: string;
@@ -28,13 +29,19 @@ export interface IAllMessages {
   isLast?: boolean;
 }
 
+export interface IMess {
+  content_type: ContentType;
+  content: string;
+  name?: string;
+}
+
 export interface IMessageNewSocket {
   id: string;
   method?: MESSAGE_SEND_TYPE | notificationsTypes;
   recipient: string;
   order_id?: string;
   project_id?: string;
-  message: string;
+  message: string | IMess;
   formatted_date: string;
   formatted_time: string;
   // created_date: string;
@@ -54,7 +61,7 @@ export interface IChatData {
   project_name: string;
   channel_name: string;
   avatar: string;
-  last_message: string;
+  last_message: IMess;
   unread_count: number;
   created_date: string;
   created_time: string;

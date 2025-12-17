@@ -10,6 +10,6 @@ export const getContentType = (file: File): ContentType => {
   } else if (mimeType.startsWith("video/")) {
     return ContentType.video;
   } else {
-    throw new Error("Unsupported media type");
+    return ContentType.file;
   }
 };

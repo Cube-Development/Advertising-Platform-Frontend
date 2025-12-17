@@ -32,6 +32,7 @@ import {
   PAGE_ANIMATION,
 } from "@shared/config";
 import { useAppDispatch, useAppSelector, useWindowWidth } from "@shared/hooks";
+import { deserializeMessage } from "@shared/utils";
 import {
   AlertDialog,
   AlertDialogCancel,
@@ -86,16 +87,39 @@ export const Chat: FC<IChatProps> = ({
     { skip: role === ENUM_ROLES.BLOGGER },
   );
 
+  // Десериализация last_message в списках чатов
+  const deserializedChatsOrder = useMemo(() => {
+    if (!chatsOrder) return chatsOrder;
+    return chatsOrder.map((chat) => ({
+      ...chat,
+      last_message: deserializeMessage(chat.last_message),
+    }));
+  }, [chatsOrder]);
+
+  const deserializedChatsProject = useMemo(() => {
+    if (!chatsProject) return chatsProject;
+    return chatsProject.map((chat) => ({
+      ...chat,
+      last_message: deserializeMessage(chat.last_message),
+    }));
+  }, [chatsProject]);
+
   // Checking existing current chat in all chats
   const currentChatOrder = useMemo(() => {
     if (!orderId) return null;
-    return chatsOrder?.find((item) => item?.order_id === orderId) || null;
-  }, [chatsOrder, orderId]);
+    return (
+      deserializedChatsOrder?.find((item) => item?.order_id === orderId) || null
+    );
+  }, [deserializedChatsOrder, orderId]);
 
   const currentChatProject = useMemo(() => {
     if (!projectId) return null;
-    return chatsProject?.find((item) => item?.project_id === projectId) || null;
-  }, [chatsProject, projectId]);
+    return (
+      deserializedChatsProject?.find(
+        (item) => item?.project_id === projectId,
+      ) || null
+    );
+  }, [deserializedChatsProject, projectId]);
 
   // if not found current chat in all chats then new request if chat is open
   const { data: chatOrderById, isLoading: isLoadingOrder } =
@@ -121,13 +145,10 @@ export const Chat: FC<IChatProps> = ({
       { skip: !newProjectId },
     );
 
-  const selectedChats =
-    chatFilter === CHAT_FILTER.BLOGGER || role === ENUM_ROLES.BLOGGER
-      ? chatsOrder
-      : chatsProject;
+  const chats = isProject ? deserializedChatsProject : deserializedChatsOrder;
 
   const countOrderMessage =
-    chatsOrder?.reduce(
+    deserializedChatsOrder?.reduce(
       (total, item) =>
         total +
         (item.recipient === RECIPIENT_TYPE.RECEIVER ? item.unread_count : 0),
@@ -135,7 +156,7 @@ export const Chat: FC<IChatProps> = ({
     ) || 0;
 
   const countProjectMessage =
-    chatsProject?.reduce(
+    deserializedChatsProject?.reduce(
       (total, item) =>
         total +
         (item.recipient === RECIPIENT_TYPE.RECEIVER ? item.unread_count : 0),
@@ -147,9 +168,12 @@ export const Chat: FC<IChatProps> = ({
   const handleChangeChat = (card: IChatData) => {
     setCurrentChat(
       card?.type === CHAT_TYPE.ORDER
-        ? chatsOrder?.find((item) => item?.order_id === card?.order_id) || null
-        : chatsProject?.find((item) => item?.project_id === card?.project_id) ||
-            null,
+        ? deserializedChatsOrder?.find(
+            (item) => item?.order_id === card?.order_id,
+          ) || null
+        : deserializedChatsProject?.find(
+            (item) => item?.project_id === card?.project_id,
+          ) || null,
     );
   };
 
@@ -163,7 +187,7 @@ export const Chat: FC<IChatProps> = ({
   };
 
   const checkOrderExist = (messageOrderId: string) => {
-    const condition = !chatsOrder?.find(
+    const condition = !deserializedChatsOrder?.find(
       (item) => item?.order_id === messageOrderId,
     );
     if (condition) {
@@ -171,7 +195,7 @@ export const Chat: FC<IChatProps> = ({
     }
   };
   const checkProjectExist = (messageProjectId: string) => {
-    const condition = !chatsProject?.find(
+    const condition = !deserializedChatsProject?.find(
       (item) => item?.project_id === messageProjectId,
     );
     if (condition) {
@@ -181,18 +205,20 @@ export const Chat: FC<IChatProps> = ({
 
   const handleNewMessage = (message: IMessageNewSocket) => {
     const datetime = convertUTCToLocalDateTime(
-      message?.created_date!,
-      message?.created_time!,
+      message.created_date,
+      message.created_time,
     );
+    const messageObj = deserializeMessage(message.message);
     const newMessage = {
       formatted_date: datetime.localDate,
       formatted_time: datetime.localTime,
-      last_message: message?.message,
+      unread_count: 0,
+      last_message: messageObj,
       message_datetime: message.created_date + " " + message.created_time,
     };
-    if (message?.order_id && chatsOrder) {
+    if (message?.order_id && deserializedChatsOrder) {
       checkOrderExist(message?.order_id);
-      const updatedChat = chatsOrder?.find(
+      const updatedChat = deserializedChatsOrder?.find(
         (chat) => chat?.order_id === message?.order_id,
       );
 
@@ -229,9 +255,9 @@ export const Chat: FC<IChatProps> = ({
           });
         }
       }
-    } else if (message?.project_id && chatsProject) {
+    } else if (message?.project_id && deserializedChatsProject) {
       checkProjectExist(message?.project_id);
-      const updatedChat = chatsProject?.find(
+      const updatedChat = deserializedChatsProject?.find(
         (chat) => chat?.project_id === message?.project_id,
       );
 
@@ -490,10 +516,10 @@ export const Chat: FC<IChatProps> = ({
                   />
                 </div>
               )}
-              {selectedChats?.length ? (
+              {chats?.length ? (
                 <ScrollArea>
                   <div className={styles.all_chats}>
-                    {selectedChats?.map((card, index) => (
+                    {chats?.map((card: IChatData, index: number) => (
                       <div
                         key={card?.order_id || card?.project_id || index}
                         onClick={() => handleChangeChat(card)}
@@ -501,12 +527,8 @@ export const Chat: FC<IChatProps> = ({
                         <ChatCard
                           card={card}
                           isActive={
-                            !!(
-                              currentChat &&
-                              (currentChat.type === CHAT_TYPE.ORDER
-                                ? currentChat.order_id === card?.order_id
-                                : currentChat.project_id === card?.project_id)
-                            )
+                            (!!orderId && card?.order_id === orderId) ||
+                            (!!projectId && card?.project_id === projectId)
                           }
                         />
                       </div>
@@ -606,10 +628,10 @@ export const Chat: FC<IChatProps> = ({
                     />
                   </div>
                 )}
-                {selectedChats?.length ? (
+                {chats && chats?.length > 0 ? (
                   <ScrollArea>
                     <div className={styles.all_chats}>
-                      {selectedChats?.map((card, index) => (
+                      {chats?.map((card, index) => (
                         <div
                           key={card?.order_id || card?.project_id || index}
                           onClick={() => handleChangeChat(card)}

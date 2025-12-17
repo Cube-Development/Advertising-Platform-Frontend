@@ -94,6 +94,14 @@ export const advProjectsAPI = authApi.injectEndpoints({
         params: params,
       }),
     }),
+    getFileLink: build.mutation<{ url: string }, { filename: string }>({
+      query: (params) => ({
+        url: `/file/read_link`,
+        method: "GET",
+        params: params,
+      }),
+    }),
+
     projectName: build.mutation<
       { success: boolean },
       { project_id: string; name: string }
@@ -481,6 +489,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
 export const {
   useCreateCartMutation,
   useGetUploadLinkMutation,
+  useGetFileLinkMutation,
   useProjectOrdersQuery,
   useProjectNameMutation,
   useCreatePostMutation,
