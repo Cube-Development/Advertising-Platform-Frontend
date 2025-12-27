@@ -37,10 +37,6 @@ import {
   serializeMessage,
   deserializeMessage,
 } from "@shared/utils";
-import Link from "@tiptap/extension-link";
-import Underline from "@tiptap/extension-underline";
-import { useEditor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
 import { motion } from "framer-motion";
 import Cookies from "js-cookie";
 import { FC, useEffect, useRef, useState, useMemo } from "react";
@@ -54,8 +50,9 @@ import {
 } from "@features/communication/chat/chatFileUpload";
 import { MessageContent } from "../components";
 import styles from "./styles.module.scss";
-import { Button, Textarea } from "@shared/ui";
+import { Button } from "@shared/ui";
 import { Paperclip, Send } from "lucide-react";
+import { ChatInputEditor } from "../components";
 
 interface ChatMessagesProps {
   card: IChatData;
@@ -108,38 +105,6 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
   );
 
   const limit = 4000;
-  const editor = useEditor({
-    extensions: [
-      StarterKit.configure(),
-      Underline.configure({
-        HTMLAttributes: {
-          class: "underline",
-        },
-      }),
-      Link.configure({
-        openOnClick: "whenNotEditable",
-        HTMLAttributes: {
-          target: "_blank",
-          rel: "noopener noreferrer",
-          class: "hyperlink",
-        },
-        autolink: false,
-      }),
-      // HardBreak.configure({
-      //   keepMarks: true,
-      // }),
-    ],
-    content: newMessage.content,
-    editorProps: {
-      attributes: {
-        class:
-          "main_font h-full px-1 max-h-[100px] overflow-auto bg-transparent text-black focus:outline-none text-base",
-      },
-    },
-    onUpdate({ editor }) {
-      handleChange(editor.getHTML());
-    },
-  });
 
   const { data: orderHistory, isFetching: isFetchingOrder } =
     useGetOrderHistoryQuery(
@@ -315,7 +280,6 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
     const cleanedMessage = cleanMessage(newMessage);
     if (cleanedMessage.content !== "") {
       sendMessage(cleanedMessage);
-      editor?.commands.setContent("");
       setNewMessage({ content: "", content_type: ContentType.text });
       setIsSendMessage(true);
     }
@@ -517,33 +481,6 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
         .catch(() => {
           console.log("Read messag Error");
         });
-    }
-  };
-
-  const textareaRef = useRef<HTMLTextAreaElement>(null);
-
-  const adjustTextareaHeight = (element: HTMLTextAreaElement) => {
-    element.style.height = "auto";
-    element.style.height = `${element.scrollHeight}px`;
-  };
-
-  const handleInput = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    setNewMessage({
-      content: e.target.value,
-      content_type: ContentType.text,
-    });
-    adjustTextareaHeight(e.target);
-  };
-
-  const handleKeyPress = (
-    event: React.KeyboardEvent<HTMLDivElement | HTMLTextAreaElement>,
-  ) => {
-    if (event.key === "Enter" && !event.shiftKey) {
-      event.preventDefault();
-      handleSendMessage();
-      if (textareaRef.current) {
-        textareaRef.current.style.height = "auto";
-      }
     }
   };
 
@@ -833,18 +770,13 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
         >
           <Paperclip className="w-5 h-5" />
         </Button>
-        <div className="relative flex-1 transition-all border rounded-md border-input bg-muted/50 focus-within:ring-1 focus-within:ring-ring focus-within:border-ring">
-          <Textarea
-            ref={textareaRef}
-            onChange={handleInput}
-            placeholder={t("chat.new_message")}
-            className="flex w-full rounded-md bg-transparent px-3 py-3 text-sm placeholder:text-muted-foreground focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 min-h-[44px] max-h-[144px] resize-none overflow-y-auto border-none focus-visible:ring-0 focus-visible:ring-offset-0"
-            rows={1}
-            maxLength={limit}
-            value={newMessage.content}
-            onKeyDown={handleKeyPress}
-          />
-        </div>
+        <ChatInputEditor
+          content={newMessage.content}
+          onChange={handleChange}
+          onSend={handleSendMessage}
+          placeholder={t("chat.new_message")}
+          maxLength={limit}
+        />
         <Button
           onClick={handleSendMessage}
           variant="ghost"
