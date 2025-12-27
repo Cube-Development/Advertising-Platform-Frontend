@@ -45,7 +45,7 @@ export const ChatInputEditor: FC<ChatInputEditorProps> = (props) => {
             />
           </div>
         </ContextMenuTrigger>
-        <ContextMenuContent className="w-56 blur_content">
+        <ContextMenuContent className="w-56 blur_content max-md:!-translate-y-10">
           <ContextMenuItem
             onClick={() => editor.chain().focus().toggleBold().run()}
             className="flex items-center justify-between"
