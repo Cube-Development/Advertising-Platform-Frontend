@@ -1,15 +1,15 @@
-import { FC } from "react";
-import { useTranslation } from "react-i18next";
 import {
   Dialog,
   DialogContent,
+  DialogFooter,
   DialogHeader,
   DialogTitle,
-  DialogFooter,
-  Label,
   Input,
-  Button,
+  Label,
+  MyButton,
 } from "@shared/ui";
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
 
 interface LinkModalProps {
   isOpen: boolean;
@@ -35,7 +35,7 @@ export const LinkModal: FC<LinkModalProps> = ({
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
       <DialogContent
-        className="sm:max-w-[425px] z-[100]"
+        className="sm:max-w-[425px] p-6 z-[100]"
         onOpenAutoFocus={(e) => {
           e.preventDefault();
           setTimeout(() => {
@@ -52,12 +52,10 @@ export const LinkModal: FC<LinkModalProps> = ({
         </DialogHeader>
         <div className="grid gap-4 py-4">
           <div className="grid gap-2">
-            <Label htmlFor="linkText">{t("chat.format.text") || "Текст"}</Label>
+            <Label htmlFor="linkText">{t("chat.format.text")}</Label>
             <Input
               id="linkText"
-              placeholder={
-                t("chat.format.text_placeholder") || "Введите текст..."
-              }
+              placeholder={t("chat.format.text_placeholder")}
               value={linkText}
               onChange={(e) => setLinkText(e.target.value)}
               onKeyDown={(e) => {
@@ -71,10 +69,10 @@ export const LinkModal: FC<LinkModalProps> = ({
             />
           </div>
           <div className="grid gap-2">
-            <Label htmlFor="linkUrl">{t("chat.format.link") || "Ссылка"}</Label>
+            <Label htmlFor="linkUrl">{t("chat.format.link")}</Label>
             <Input
               id="linkUrl"
-              placeholder={t("chat.format.enter_url") || "https://..."}
+              placeholder={t("chat.format.url_placeholder")}
               value={linkUrl}
               onChange={(e) => setLinkUrl(e.target.value)}
               onKeyDown={(e) => {
@@ -88,11 +86,16 @@ export const LinkModal: FC<LinkModalProps> = ({
             />
           </div>
         </div>
-        <DialogFooter>
-          <Button variant="ghost" onClick={() => onOpenChange(false)}>
-            {t("actions.cancel") || "Отмена"}
-          </Button>
-          <Button onClick={onApply}>{t("actions.apply") || "Применить"}</Button>
+        <DialogFooter className="grid grid-cols-2 gap-5">
+          <MyButton
+            buttons_type="button__white"
+            onClick={() => onOpenChange(false)}
+          >
+            {t("chat.actions.cancel")}
+          </MyButton>
+          <MyButton className="bg-primary" onClick={onApply}>
+            {t("chat.actions.apply")}
+          </MyButton>
         </DialogFooter>
       </DialogContent>
     </Dialog>

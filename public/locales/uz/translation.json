@@ -1868,6 +1868,19 @@
     "file_upload": {
       "title": "Fayl yuklash",
       "send": "Yuklash"
+    },
+    "format": {
+      "bold": "Qalin",
+      "italic": "Kursiv",
+      "monospace": "Monokenglik",
+      "link": "Havola",
+      "text": "Matn",
+      "text_placeholder": "Matnni kiritish...",
+      "url_placeholder": "URL-manzilni kiriting (https://...)"
+    },
+    "actions": {
+      "cancel": "Bekor qilish",
+      "apply": "Qo'llash"
     }
   },
 

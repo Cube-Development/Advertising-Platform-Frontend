@@ -2184,6 +2184,19 @@
     "file_upload": {
       "title": "Загрузить файл",
       "send": "Загрузить"
+    },
+    "format": {
+      "bold": "Жирный",
+      "italic": "Курсив",
+      "monospace": "Моноширинный",
+      "link": "Ссылка",
+      "text": "Текст",
+      "text_placeholder": "Введите текст...",
+      "url_placeholder": "Введите URL-адрес (https://...)"
+    },
+    "actions": {
+      "cancel": "Отмена",
+      "apply": "Применить"
     }
   },
 

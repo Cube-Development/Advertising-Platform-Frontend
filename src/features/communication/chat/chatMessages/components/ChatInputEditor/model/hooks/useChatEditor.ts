@@ -60,10 +60,10 @@ export const useChatEditor = ({
   useEffect(() => {
     if (editor) {
       if (isLinkModalOpen) {
+        editor.setOptions({ editable: false });
         editor.commands.blur();
-        editor.setEditable(false);
       } else {
-        editor.setEditable(true);
+        editor.setOptions({ editable: true });
       }
     }
   }, [isLinkModalOpen, editor]);
@@ -80,12 +80,12 @@ export const useChatEditor = ({
 
   const applyLink = useCallback(() => {
     if (!editor) return;
-    const { from, to } = editor.state.selection;
-    const currentText = editor.state.doc.textBetween(from, to, " ");
 
     if (linkUrl === "") {
       editor.chain().focus().extendMarkRange("link").unsetLink().run();
-    } else if (linkText !== currentText) {
+    } else {
+      // Replace selection with new text node with only link mark
+      // This effectively unsets any existing marks like 'code'
       editor
         .chain()
         .focus()
@@ -101,15 +101,10 @@ export const useChatEditor = ({
           ],
         })
         .run();
-    } else {
-      editor
-        .chain()
-        .focus()
-        .extendMarkRange("link")
-        .setLink({ href: linkUrl })
-        .run();
     }
     setIsLinkModalOpen(false);
+    // Explicitly focus editor after modal close
+    setTimeout(() => editor.commands.focus(), 10);
   }, [editor, linkUrl, linkText]);
 
   return {
