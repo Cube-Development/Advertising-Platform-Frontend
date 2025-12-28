@@ -1873,6 +1873,8 @@
       "bold": "Qalin",
       "italic": "Kursiv",
       "monospace": "Monokenglik",
+      "underline": "Yulqin",
+      "strike": "Chiqqin",
       "link": "Havola",
       "text": "Matn",
       "text_placeholder": "Matnni kiritish...",

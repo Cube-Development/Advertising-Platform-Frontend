@@ -1875,6 +1875,8 @@
       "bold": "Bold",
       "italic": "Italic",
       "monospace": "Monospace",
+      "underline": "Underline",
+      "strike": "Strike",
       "link": "Link",
       "text": "Text",
       "text_placeholder": "Enter text...",

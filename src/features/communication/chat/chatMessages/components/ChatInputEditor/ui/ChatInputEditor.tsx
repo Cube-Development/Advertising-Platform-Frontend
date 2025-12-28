@@ -29,6 +29,36 @@ export const ChatInputEditor: FC<ChatInputEditorProps> = (props) => {
 
   if (!editor) return null;
 
+  const contextMenuItems = [
+    {
+      label: t("chat.format.bold"),
+      shortcut: "Ctrl+B",
+      onClick: () => editor.chain().focus().toggleBold().run(),
+    },
+    {
+      label: t("chat.format.italic"),
+      shortcut: "Ctrl+I",
+      onClick: () => editor.chain().focus().toggleItalic().run(),
+    },
+    {
+      label: t("chat.format.underline"),
+      shortcut: "Ctrl+U",
+      onClick: () => editor.chain().focus().toggleUnderline().run(),
+    },
+    {
+      label: t("chat.format.strike"),
+      onClick: () => editor.chain().focus().toggleStrike().run(),
+    },
+    {
+      label: t("chat.format.monospace"),
+      onClick: () => editor.chain().focus().toggleCode().run(),
+    },
+    {
+      label: t("chat.format.link"),
+      onClick: openLinkModal,
+    },
+  ];
+
   return (
     <>
       <ContextMenu>
@@ -46,32 +76,18 @@ export const ChatInputEditor: FC<ChatInputEditorProps> = (props) => {
           </div>
         </ContextMenuTrigger>
         <ContextMenuContent className="w-56 blur_content max-md:!-translate-y-10">
-          <ContextMenuItem
-            onClick={() => editor.chain().focus().toggleBold().run()}
-            className="flex items-center justify-between"
-          >
-            <span>{t("chat.format.bold")}</span>
-            <span className="text-xs opacity-50">Ctrl+B</span>
-          </ContextMenuItem>
-          <ContextMenuItem
-            onClick={() => editor.chain().focus().toggleItalic().run()}
-            className="flex items-center justify-between"
-          >
-            <span>{t("chat.format.italic")}</span>
-            <span className="text-xs opacity-50">Ctrl+I</span>
-          </ContextMenuItem>
-          <ContextMenuItem
-            onClick={() => editor.chain().focus().toggleCode().run()}
-            className="flex items-center justify-between"
-          >
-            <span>{t("chat.format.monospace")}</span>
-          </ContextMenuItem>
-          <ContextMenuItem
-            onClick={openLinkModal}
-            className="flex items-center justify-between"
-          >
-            <span>{t("chat.format.link")}</span>
-          </ContextMenuItem>
+          {contextMenuItems.map((item, index) => (
+            <ContextMenuItem
+              key={index}
+              onClick={item.onClick}
+              className="flex items-center justify-between"
+            >
+              <span>{item.label}</span>
+              {item.shortcut && (
+                <span className="text-xs opacity-50">{item.shortcut}</span>
+              )}
+            </ContextMenuItem>
+          ))}
         </ContextMenuContent>
       </ContextMenu>
 
