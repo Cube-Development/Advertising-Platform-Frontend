@@ -12,17 +12,16 @@ import {
   useGetProjectHistoryQuery,
   useReadOrderMessageMutation,
   useReadProjectMessageMutation,
+  IMess,
 } from "@entities/communication";
-import { DEBOUNCE } from "@entities/project";
+import { ContentType, DEBOUNCE } from "@entities/project";
 import { DinamicPagination } from "@features/other";
 import { useCentrifuge } from "@shared/api";
 import {
-  AddIcon,
   ArrowReadIcon,
   ArrowSmallVerticalIcon,
   MessageAppendixIcon,
   SadSmileIcon,
-  SendIcon,
 } from "@shared/assets";
 import {
   ENUM_COOKIES_TYPES,
@@ -35,19 +34,25 @@ import {
   checkDatetimeDifference,
   convertUTCToLocalDateTime,
   getFormattedDateTime,
+  serializeMessage,
+  deserializeMessage,
 } from "@shared/utils";
-import Link from "@tiptap/extension-link";
-import Underline from "@tiptap/extension-underline";
-import { useEditor } from "@tiptap/react";
-import StarterKit from "@tiptap/starter-kit";
 import { motion } from "framer-motion";
 import Cookies from "js-cookie";
-import { FC, useEffect, useRef, useState } from "react";
+import { FC, useEffect, useRef, useState, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { animateScroll } from "react-scroll";
 import { v4 as uuidv4 } from "uuid";
+import {
+  ChatFileUpload,
+  useUploadChatFiles,
+} from "@features/communication/chat/chatFileUpload";
+import { MessageContent } from "../components";
 import styles from "./styles.module.scss";
+import { Button } from "@shared/ui";
+import { Paperclip, Send } from "lucide-react";
+import { ChatInputEditor } from "../components";
 
 interface ChatMessagesProps {
   card: IChatData;
@@ -67,14 +72,19 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
   const itemRefs = useRef<(HTMLDivElement | null)[]>([]);
   const [readOrderMessage] = useReadOrderMessageMutation();
   const [readProjectMessage] = useReadProjectMessageMutation();
-  const [newMessage, setNewMessage] = useState<string>("");
+  const [newMessage, setNewMessage] = useState<IMess>({
+    content: "",
+    content_type: ContentType.text,
+  });
   const [isNewMessage, setIsNewMessage] = useState<boolean>(false);
   const [isSendMessage, setIsSendMessage] = useState<boolean>(false);
   const [showScrollDownButton, setShowScrollDownButton] =
     useState<boolean>(false);
   const [lastMessageToRead, setLastMessageToRead] =
     useState<IMessageNewSocket | null>(null);
+  const [isFileModalOpen, setIsFileModalOpen] = useState<boolean>(false);
   const containerArrowHeight = 250;
+  const { uploadFiles } = useUploadChatFiles();
 
   const getDefaultValues = (card: IChatData) => ({
     ...(card?.type === CHAT_TYPE.ORDER
@@ -95,38 +105,6 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
   );
 
   const limit = 4000;
-  const editor = useEditor({
-    extensions: [
-      StarterKit.configure(),
-      Underline.configure({
-        HTMLAttributes: {
-          class: "underline",
-        },
-      }),
-      Link.configure({
-        openOnClick: "whenNotEditable",
-        HTMLAttributes: {
-          target: "_blank",
-          rel: "noopener noreferrer",
-          class: "hyperlink",
-        },
-        autolink: false,
-      }),
-      // HardBreak.configure({
-      //   keepMarks: true,
-      // }),
-    ],
-    content: newMessage,
-    editorProps: {
-      attributes: {
-        class:
-          "main_font h-full px-1 max-h-[100px] overflow-auto bg-transparent text-black focus:outline-none text-base",
-      },
-    },
-    onUpdate({ editor }) {
-      handleChange(editor.getHTML());
-    },
-  });
 
   const { data: orderHistory, isFetching: isFetchingOrder } =
     useGetOrderHistoryQuery(
@@ -136,7 +114,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
       // { skip: !!card?.project_id && !!card }
       { skip: !formFields?.order_id || !card },
     );
-
+  console.log("orderHistory", orderHistory?.history?.length, orderHistory);
   const { data: projectHistory, isFetching: isFetchingProject } =
     useGetProjectHistoryQuery(
       {
@@ -150,14 +128,29 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
   const isFetching =
     card?.type === CHAT_TYPE.ORDER ? isFetchingOrder : isFetchingProject;
 
+  // Десериализация истории чата
+  const deserializedData = useMemo(() => {
+    if (!data?.history) return data;
+
+    const deserializedHistory = data.history.map((item) => ({
+      ...item,
+      message: deserializeMessage(item.message),
+    }));
+
+    return {
+      ...data,
+      history: deserializedHistory,
+    };
+  }, [data]);
+
   useEffect(() => {
     reset(getDefaultValues(card));
   }, [card]);
 
   useEffect(() => {
     if (
-      data?.history &&
-      (data?.history?.length || 0) <= INTERSECTION_ELEMENTS.CHAT
+      deserializedData?.history &&
+      (deserializedData?.history?.length || 0) <= INTERSECTION_ELEMENTS.CHAT
     ) {
       if (containerRef.current && !isSendMessage) {
         const scrollTo = itemRefs.current
@@ -168,10 +161,12 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
 
         containerRef.current.scrollTop =
           scrollTo + (INTERSECTION_ELEMENTS.CHAT - 1) * 15;
-        setLastMessageToRead(data?.history[data?.history?.length - 1]);
+        setLastMessageToRead(
+          deserializedData?.history[deserializedData?.history?.length - 1],
+        );
       }
     }
-  }, [data?.history?.length]);
+  }, [deserializedData?.history?.length]);
 
   useEffect(() => {
     if (containerRef.current && !isFetching && !isNewMessage) {
@@ -203,8 +198,13 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
   }, [containerRef.current]);
 
   const handlePaginationHistory = () => {
-    if (data?.history) {
-      const topMessage = data?.history[0];
+    if (deserializedData?.history) {
+      const topMessage = deserializedData?.history[0];
+      console.log("Pagination Triggered");
+      console.log("Top Message ID:", topMessage?.id);
+      console.log("Top Message Date:", topMessage?.created_date);
+      console.log("Top Message Time:", topMessage?.created_time);
+
       setValue("created_date", topMessage?.created_date);
       setValue("created_time", topMessage?.created_time);
 
@@ -231,6 +231,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
       );
       const newMessage: IMessageNewSocket = {
         ...message,
+        message: deserializeMessage(message.message),
         formatted_date: datetime.localDate,
         formatted_time: datetime.localTime,
         message_datetime: message.created_date + " " + message.created_time,
@@ -276,76 +277,85 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
   };
 
   const handleSendMessage = () => {
-    const message = cleanMessage(newMessage);
-    // const message = newMessage;
-    if (message !== "") {
-      const messageId = uuidv4();
-      const orderMessage: IMessageSendSocket = {
-        ...(card?.type === CHAT_TYPE.ORDER
-          ? {
-              order_id: card?.order_id,
-              method: MESSAGE_SEND_TYPE.ORDER_MESSAGE_CREATE,
-            }
-          : {
-              project_id: card?.project_id,
-              method: MESSAGE_SEND_TYPE.PROJECT_MESSAGE_CREATE,
-            }),
-        user_id: userId,
-        message: message,
-        id: messageId,
-      };
-
-      OrderMessageSend(orderMessage);
-
-      const datetime = getFormattedDateTime();
-      const orderMessageState: IMessageNewSocket = {
-        id: messageId,
-        ...(card?.type === CHAT_TYPE.ORDER
-          ? { order_id: card?.order_id }
-          : { project_id: card?.project_id }),
-        message: message,
-        recipient: RECIPIENT_TYPE.SENDER,
-        formatted_date: datetime.localDate,
-        formatted_time: datetime.localTime,
-        created_date: datetime.utcDate,
-        created_time: datetime.utcTime,
-        message_datetime: datetime.utcDate + " " + datetime.utcTime,
-        status: MESSAGE_STATUS.UNREAD,
-      };
-
-      const newHistory = {
-        ...data,
-        history: [...(data?.history || []), orderMessageState],
-      };
-      if (card?.type === CHAT_TYPE.ORDER) {
-        dispatch(
-          chatAPI.util.updateQueryData(
-            "getOrderHistory",
-            {
-              ...formFields,
-            },
-            (draft) => {
-              Object.assign(draft, newHistory);
-            },
-          ),
-        );
-      } else if (card?.type === CHAT_TYPE.PROJECT) {
-        dispatch(
-          chatAPI.util.updateQueryData(
-            "getProjectHistory",
-            {
-              ...formFields,
-            },
-            (draft) => {
-              Object.assign(draft, newHistory);
-            },
-          ),
-        );
-      }
-      editor?.commands.setContent("");
-      setNewMessage("");
+    const cleanedMessage = cleanMessage(newMessage);
+    if (cleanedMessage.content !== "") {
+      sendMessage(cleanedMessage);
+      setNewMessage({ content: "", content_type: ContentType.text });
       setIsSendMessage(true);
     }
+  };
+
+  const sendMessage = (message: IMess) => {
+    const messageId = uuidv4();
+    const orderMessage: IMessageSendSocket = {
+      ...(card?.type === CHAT_TYPE.ORDER
+        ? {
+            order_id: card?.order_id,
+            method: MESSAGE_SEND_TYPE.ORDER_MESSAGE_CREATE,
+          }
+        : {
+            project_id: card?.project_id,
+            method: MESSAGE_SEND_TYPE.PROJECT_MESSAGE_CREATE,
+          }),
+      user_id: userId,
+      message: serializeMessage(message),
+      id: messageId,
+    };
+
+    OrderMessageSend(orderMessage);
+
+    const datetime = getFormattedDateTime();
+    const orderMessageState: IMessageNewSocket = {
+      id: messageId,
+      ...(card?.type === CHAT_TYPE.ORDER
+        ? { order_id: card?.order_id }
+        : { project_id: card?.project_id }),
+      message: message,
+      recipient: RECIPIENT_TYPE.SENDER,
+      formatted_date: datetime.localDate,
+      formatted_time: datetime.localTime,
+      created_date: datetime.utcDate,
+      created_time: datetime.utcTime,
+      message_datetime: datetime.utcDate + " " + datetime.utcTime,
+      status: MESSAGE_STATUS.UNREAD,
+    };
+
+    if (card?.type === CHAT_TYPE.ORDER) {
+      dispatch(
+        chatAPI.util.updateQueryData(
+          "getOrderHistory",
+          {
+            ...formFields,
+          },
+          (draft) => {
+            if (draft?.history) {
+              draft.history.push(orderMessageState);
+            }
+          },
+        ),
+      );
+    } else if (card?.type === CHAT_TYPE.PROJECT) {
+      dispatch(
+        chatAPI.util.updateQueryData(
+          "getProjectHistory",
+          {
+            ...formFields,
+          },
+          (draft) => {
+            if (draft?.history) {
+              draft.history.push(orderMessageState);
+            }
+          },
+        ),
+      );
+    }
+  };
+
+  const handleFilesUpload = async (files: File[]) => {
+    await uploadFiles(files, (message) => {
+      sendMessage(message);
+      setIsSendMessage(true);
+    });
   };
 
   const handleReadMessage = (message: IMessageNewSocket) => {
@@ -361,7 +371,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
         .unwrap()
         .then(() => {
           const newHistory: IMessageNewSocket[] =
-            data?.history.map((item) => {
+            deserializedData?.history.map((item) => {
               if (
                 checkDatetime(item?.message_datetime, message?.message_datetime)
               ) {
@@ -422,7 +432,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
         .unwrap()
         .then(() => {
           const newHistory: IMessageNewSocket[] =
-            data?.history.map((item) => {
+            deserializedData?.history.map((item) => {
               if (
                 checkDatetime(item?.message_datetime, message?.message_datetime)
               ) {
@@ -474,38 +484,39 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
     }
   };
 
-  const handleKeyPress = (
-    event: React.KeyboardEvent<HTMLDivElement | HTMLTextAreaElement>,
-  ) => {
-    if (event.key === "Enter" && event.ctrlKey) {
-      handleSendMessage();
-    }
-  };
-
   const handleChange = (content: string) => {
-    setNewMessage(content);
+    setNewMessage({
+      content,
+      content_type: ContentType.text,
+    });
   };
 
-  const cleanMessage = (message: string) => {
-    let cleanedMessage = message?.replace(
+  const cleanMessage = (message: IMess): IMess => {
+    let cleanedContent = message.content?.replace(
       /^(<p>\s*(<br\s*\/?>\s*)+|(<br\s*\/?>\s*)+)/g,
       "<p>",
     );
-    cleanedMessage = cleanedMessage.replace(
+    cleanedContent = cleanedContent.replace(
       /((<br\s*\/?>\s*)+<\/p>\s*$|(<br\s*\/?>\s*)+\s*$)/g,
       "</p>",
     );
-    cleanedMessage = cleanedMessage.replace(/(<p>\s*<\/p>)+/g, "");
-    if (/^<p>\s*<\/p>$/.test(cleanedMessage)) {
-      cleanedMessage = "";
+    cleanedContent = cleanedContent.replace(/(<p>\s*<\/p>)+/g, "");
+    if (/^<p>\s*<\/p>$/.test(cleanedContent)) {
+      cleanedContent = "";
     }
 
-    return cleanedMessage;
+    return {
+      ...message,
+      content: cleanedContent,
+    };
   };
 
   useEffect(() => {
     if (isSendMessage && messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: "auto" });
+      messagesEndRef.current.scrollIntoView({
+        behavior: "auto",
+        block: "end",
+      });
       setIsSendMessage(false);
     }
   }, [isSendMessage]);
@@ -514,7 +525,10 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
     if (isNewMessage && messagesEndRef.current) {
       setIsNewMessage(false);
       if (!showScrollDownButton) {
-        messagesEndRef.current.scrollIntoView({ behavior: "auto" });
+        messagesEndRef.current.scrollIntoView({
+          behavior: "auto",
+          block: "end",
+        });
       }
     }
   }, [isNewMessage]);
@@ -632,7 +646,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
   OrderMessageNew(handleNewMessage);
   return (
     <div className={styles.wrapper}>
-      {data?.history?.length ? (
+      {deserializedData?.history?.length ? (
         <div id="all__messages" className={styles.check} ref={containerRef}>
           <div className={styles.all__messages}>
             {!data?.isLast && !isFetching && (
@@ -644,7 +658,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
               </div>
             )} */}
             {data &&
-              data?.history?.map((message, index) => {
+              deserializedData?.history?.map((message, index) => {
                 let isTimeDifferenceSmall = false;
                 let isSameRecepient = true;
                 if (index < data.history.length) {
@@ -697,10 +711,15 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
                         })}
                         data-date={message?.formatted_date}
                       >
-                        <div
-                          dangerouslySetInnerHTML={{
-                            __html: message?.message || "",
-                          }}
+                        <MessageContent
+                          message={
+                            typeof message?.message === "string"
+                              ? {
+                                  content_type: ContentType.text,
+                                  content: message.message,
+                                }
+                              : message.message
+                          }
                         />
                         <div className={styles.time}>
                           <span>{message?.formatted_time}</span>
@@ -742,33 +761,37 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
           </div>
         </div>
       )}
-      <div className={styles.wrapper__bottom}>
-        <button>
-          <AddIcon />
-        </button>
-        {/* <div className={`main_font ${styles.input} placeholder:truncate`}>
-          {(newMessage === "" || newMessage === "<p></p>") && (
-            <span className="truncate">{t("chat.new_message")}</span>
-          )}
-          <EditorContent
-            editor={editor}
-            maxLength={limit}
-            onKeyDown={handleKeyPress}
-            className={styles.text}
-          />
-        </div> */}
-        <textarea
-          onChange={(e) => setNewMessage(e.target.value)}
+      <div className="absolute bottom-0 left-0 w-full flex items-end gap-2 p-4 border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <Button
+          onClick={() => setIsFileModalOpen(true)}
+          variant="ghost"
+          size="icon"
+          className="w-10 h-10 rounded-full shrink-0 text-muted-foreground hover:text-foreground hover:bg-muted"
+        >
+          <Paperclip className="w-5 h-5" />
+        </Button>
+        <ChatInputEditor
+          content={newMessage.content}
+          onChange={handleChange}
+          onSend={handleSendMessage}
           placeholder={t("chat.new_message")}
-          className={styles.text}
           maxLength={limit}
-          value={newMessage}
-          onKeyDown={handleKeyPress}
         />
-        <button onClick={handleSendMessage}>
-          <SendIcon />
-        </button>
+        <Button
+          onClick={handleSendMessage}
+          variant="ghost"
+          size="icon"
+          className="w-10 h-10 rounded-full shrink-0"
+        >
+          <Send className="w-5 h-5" />
+        </Button>
       </div>
+
+      <ChatFileUpload
+        isOpen={isFileModalOpen}
+        onClose={() => setIsFileModalOpen(false)}
+        onFilesSelected={handleFilesUpload}
+      />
     </div>
   );
 };

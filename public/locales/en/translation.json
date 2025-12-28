@@ -1866,7 +1866,26 @@
     "channel": "Channel",
     "new_message": "Write a message...",
     "no_message": "There's nothing here yet, send a message",
-    "chat_choose": "Select a chat to start a conversation"
+    "chat_choose": "Select a chat to start a conversation",
+    "file_upload": {
+      "title": "Upload File",
+      "send": "Upload"
+    },
+    "format": {
+      "bold": "Bold",
+      "italic": "Italic",
+      "monospace": "Monospace",
+      "underline": "Underline",
+      "strike": "Strike",
+      "link": "Link",
+      "text": "Text",
+      "text_placeholder": "Enter text...",
+      "url_placeholder": "Enter URL (https://...)"
+    },
+    "actions": {
+      "cancel": "Cancel",
+      "apply": "Apply"
+    }
   },
 
   "notifications": {
