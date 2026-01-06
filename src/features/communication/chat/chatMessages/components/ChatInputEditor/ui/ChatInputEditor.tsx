@@ -67,7 +67,7 @@ export const ChatInputEditor: FC<ChatInputEditorProps> = (props) => {
             <EditorContent
               editor={editor}
               className={cn(
-                "w-full h-full [&_.ProseMirror]:outline-none [&_code]:font-mono [&_code]:bg-black/5 [&_code]:px-1 [&_code]:py-0.5 [&_code]:rounded [&_u]:underline",
+                "w-full h-full [&_.ProseMirror]:outline-none [&_code]:font-mono [&_code]:bg-black/5 [&_code]:px-1 [&_code]:py-0.5 [&_code]:rounded [&_u]:underline text-base",
                 editor.isEmpty &&
                   "[&_.ProseMirror_p:first-child]:before:content-[attr(data-placeholder)] [&_.ProseMirror_p:first-child]:before:float-left [&_.ProseMirror_p:first-child]:before:text-gray-400 [&_.ProseMirror_p:first-child]:before:pointer-events-none [&_.ProseMirror_p:first-child]:before:h-0",
               )}
