@@ -8,7 +8,7 @@ import {
   useGetChannelCategoriesQuery,
   useGetChannelFormatsQuery,
   useGetChannelLanguagesQuery,
-  useGetChannelRegionsQuery
+  useGetChannelRegionsQuery,
 } from "@entities/channel";
 import { platformTypesNum } from "@entities/platform";
 import { useFindLanguage } from "@entities/user";
