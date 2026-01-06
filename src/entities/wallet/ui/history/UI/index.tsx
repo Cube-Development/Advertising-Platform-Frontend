@@ -10,6 +10,33 @@ interface HistoryCardProps {
   card: IWalletHistory;
 }
 
+const convertGMTToLocal = (gmtDateTime: string): string => {
+  // Парсим формат "05.01.2026 13:57"
+  const [datePart, timePart] = gmtDateTime.split(" ");
+  const [day, month, year] = datePart.split(".");
+  const [hours, minutes] = timePart.split(":");
+
+  // Создаем Date объект, интерпретируя время как UTC/GMT
+  const utcDate = new Date(
+    Date.UTC(
+      parseInt(year, 10),
+      parseInt(month, 10) - 1, // месяцы в JS начинаются с 0
+      parseInt(day, 10),
+      parseInt(hours, 10),
+      parseInt(minutes, 10)
+    )
+  );
+
+  // Получаем локальное время
+  const localDay = String(utcDate.getDate()).padStart(2, "0");
+  const localMonth = String(utcDate.getMonth() + 1).padStart(2, "0");
+  const localYear = utcDate.getFullYear();
+  const localHours = String(utcDate.getHours()).padStart(2, "0");
+  const localMinutes = String(utcDate.getMinutes()).padStart(2, "0");
+
+  return `${localDay}.${localMonth}.${localYear} ${localHours}:${localMinutes}`;
+};
+
 export const HistoryCard: FC<HistoryCardProps> = ({ card }) => {
   const { t } = useTranslation();
   const screen = useWindowWidth();
@@ -19,7 +46,9 @@ export const HistoryCard: FC<HistoryCardProps> = ({ card }) => {
       {screen > BREAKPOINT.MD ? (
         <div className={styles.wrapper}>
           <div className={`truncate ${styles.datetime}`}>
-            {card?.transaction_datetime}
+            {card?.transaction_datetime
+              ? convertGMTToLocal(card.transaction_datetime)
+              : ""}
           </div>
           <div className={`truncate ${styles.info}`}>
             {card?.transaction_type}
@@ -38,7 +67,11 @@ export const HistoryCard: FC<HistoryCardProps> = ({ card }) => {
           <div className={styles.top}>
             <div className={styles.left}>
               <p>{card?.transaction_type}</p>
-              <span>{card?.transaction_datetime}</span>
+              <span>
+                {card?.transaction_datetime
+                  ? convertGMTToLocal(card.transaction_datetime)
+                  : ""}
+              </span>
             </div>
             <div className={styles.right}>
               <MoreIcon />
