@@ -5,13 +5,15 @@ import {
   profileForm,
   useGetProfileQuery,
 } from "@entities/user";
-import { EmailIcon, TelegramJetIcon } from "@shared/assets";
-import { cn, CustomCheckbox } from "@shared/ui";
+import { EmailIcon, TelegramIcon, TelegramJetIcon } from "@shared/assets";
+import { cn, CustomCheckbox, MyButton } from "@shared/ui";
 import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { useChangeNotifications } from "../../model";
 import styles from "./styles.module.scss";
+import { useGetTelegramNotificationLinkQuery } from "@entities/project";
+import { Link } from "react-router-dom";
 
 interface IChangeNotificationsFormProps {
   // add your props here
@@ -40,6 +42,9 @@ export const ChangeNotificationsForm: FC<
       ...formState?.user_events,
     },
   };
+
+  const { data: telegramNotificationLink } =
+    useGetTelegramNotificationLinkQuery();
 
   const { handleChangeNotifications } = useChangeNotifications({
     events: events,
@@ -132,7 +137,20 @@ export const ChangeNotificationsForm: FC<
             </p>
             <TelegramJetIcon />
           </div>
-          <p className={styles.title}>{formState?.user_additional?.email}</p>
+          <div>
+            <Link
+              to={telegramNotificationLink?.deeplink_url || ""}
+              target="_blank"
+            >
+              <MyButton
+                buttons_type="button__white"
+                className="md:!text-sm !text-xs flex items-center justify-center p-3 !text-start !h-full [&>svg]:size-5 [&>svg]:stroke-[1.5px] !font-medium w-[unset]"
+              >
+                <TelegramIcon />{" "}
+                {t("profile.notification_block.bot.notification_link_button")}
+              </MyButton>
+            </Link>
+          </div>
         </div>
         <div className={styles.checkboxes}>
           {TELEGRAM_NOTIFICATION.map((item, index) => (
