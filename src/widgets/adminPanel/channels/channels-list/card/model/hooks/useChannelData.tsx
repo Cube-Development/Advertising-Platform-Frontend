@@ -5,10 +5,10 @@ import {
 import {
   PLATFORM_PARAMETERS,
   useGetChannelAgesQuery,
+  useGetChannelCategoriesQuery,
   useGetChannelFormatsQuery,
   useGetChannelLanguagesQuery,
-  useGetChannelRegionsQuery,
-  useGetCompanyCategoriesQuery,
+  useGetChannelRegionsQuery
 } from "@entities/channel";
 import { platformTypesNum } from "@entities/platform";
 import { useFindLanguage } from "@entities/user";
@@ -59,7 +59,7 @@ export const useChannelData = ({ card }: Props) => {
   const { data: formatsInsta } = useGetChannelFormatsQuery(formatsResInsta);
   const { data: formatsYouTube } = useGetChannelFormatsQuery(formatsResYouTube);
 
-  const { data: categories } = useGetCompanyCategoriesQuery(contentRes);
+  const { data: categories } = useGetChannelCategoriesQuery(contentRes);
   const { data: ages } = useGetChannelAgesQuery(contentRes);
   const { data: regions } = useGetChannelRegionsQuery(contentRes);
   const { data: languages } = useGetChannelLanguagesQuery(contentRes);
