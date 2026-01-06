@@ -3,7 +3,7 @@ import {
   IAddChannelDataPreview,
   IIdentificationParams,
   PLATFORM_PARAMETERS,
-  useGetChannelByIdQuery,
+  useGetChannelByIdForBloggerQuery,
 } from "@entities/channel";
 import { platformTypes } from "@entities/platform";
 import { IFormat } from "@entities/project";
@@ -44,7 +44,7 @@ export const AddChannelBlock: FC<AddChannelBlockProps> = () => {
   const [identificationParams, setIdentificationParams] =
     useState<IIdentificationParams>(identification);
 
-  const { data: channel, isLoading } = useGetChannelByIdQuery(
+  const { data: channel, isLoading } = useGetChannelByIdForBloggerQuery(
     {
       channel_id: channel_id!,
       language: language?.id || USER_LANGUAGES_LIST[0].id,
