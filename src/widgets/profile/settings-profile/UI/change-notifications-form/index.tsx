@@ -144,7 +144,7 @@ export const ChangeNotificationsForm: FC<
             >
               <MyButton
                 buttons_type="button__white"
-                className="md:!text-sm !text-xs flex items-center justify-center p-3 !text-start !h-full [&>svg]:size-5 [&>svg]:stroke-[1.5px] !font-medium shadow-xl w-[unset]"
+                className="md:!text-sm !text-xs flex items-center justify-center p-3 !text-start !h-full [&>svg]:size-5 [&>svg]:stroke-[1.5px] !font-medium w-[unset]"
               >
                 <TelegramIcon />{" "}
                 {t("profile.notification_block.bot.notification_link_button")}
