@@ -38,7 +38,7 @@ export const OrganizationDataForm: FC = ({}) => {
       bank_mfo: Number(profile?.mfo) || undefined,
       phone: profile?.mobile || profile?.phone || "",
       email: profile?.email || "",
-      PNFL: Number(profile?.pinfl) || undefined,
+      PNFL: Number(profile?.personalNum || "") || undefined,
       registration_number: 0,
       registration_date: "",
       transit_account: "",
