@@ -80,7 +80,6 @@ export interface IGetProfileEDO {
   additionalMfos: Array<any>;
   company: string;
   vatRegCode: any;
-  pinfl: string;
   partner: any;
   origin: any;
   incomingDraftsVisibility: any;
@@ -106,4 +105,5 @@ export interface IGetProfileEDO {
   messengers: {
     telegram: string;
   };
+  personalNum: string | null;
 }
