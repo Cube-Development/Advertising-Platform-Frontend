@@ -92,7 +92,7 @@
       "cooperation_title": "For cooperation inquiries",
       "email": "Telegram",
       "email_title": "Technical support 24/7",
-      "address": "Republic of Karakalpakstan, MUYNAK DISTRICT, Aral MFY, Ajiniyoz ko'chasi, 111-uy"
+      "address": "Republic of Karakalpakstan, MUYNAK DISTRICT, Aral MGC, Ajiniyoz street, house 111"
     },
     "all_rights": "Cubeinc Development © All rights reserved"
   },
@@ -112,7 +112,6 @@
     "close": "Hide",
     "call_to_action": "Get access to all platform features, receive exclusive offers, and much more!"
   },
-
   "auth": {
     "dont_have_account": "Don't have an account yet?",
     "have_account": "Already have an account?",
@@ -150,7 +149,6 @@
     "and": "and",
     "privacy_policy": "Public offer"
   },
-
   "pages": {
     "catalog": "Channel catalog",
     "turnkey": "Turnkey placement",
@@ -162,7 +160,6 @@
     "calculateIncome": "Calculate income",
     "faq": "FAQ"
   },
-
   "roles": {
     "blogger": "Blogger",
     "advertiser": "Advertiser",
@@ -170,16 +167,13 @@
     "moderator": "Moderator",
     "agency": "Agency"
   },
-
   "my_profile": {
     "messages": "My messages",
     "data": "My data",
     "settings": "Profile settings"
   },
-
   "symbol": "sum",
   "count": "pcs.",
-
   "wallet_menu": {
     "balance": "Balance",
     "top_up": "Top up wallet",
@@ -187,7 +181,6 @@
     "history": "Transaction history",
     "invoice": "Invoices and contracts"
   },
-
   "burger_menu": {
     "services": "Services",
     "balance": "Total balance",
@@ -196,35 +189,27 @@
     "turnkey": "Turnkey placement",
     "addPlatform": "Add channel",
     "calculateIncome": "Income calculation",
-
     "orders": "My advertising campaigns",
-
+    "manager_orders": "Advertising campaigns",
     "saved": "Saved",
     "manager": "Work with managers",
     "template": "Post templates",
-
     "platforms": "My channels",
     "offers": "My offers",
-
     "wallet": "Wallet",
     "documents": "Documents",
-
     "top_up": "Top up wallet",
     "withdraw": "Withdraw money",
     "history": "Transaction history",
     "invoice": "Invoices and contracts",
-
     "base": "Knowledge base"
   },
-
   "wallets": {
     "title": "Total Balance",
-
     "deposit": {
       "title": "Deposit",
       "description": "Current balance"
     },
-
     "profit": {
       "title": "Profit",
       "description": "Current balance"
@@ -234,12 +219,10 @@
       "description": "Current balance"
     }
   },
-
   "more_less": {
     "more": "More",
     "less": "Less"
   },
-
   "main_page_advertiser": {
     "cta": {
       "title": "Effortless Advertising Placements on Social Media",
@@ -256,7 +239,6 @@
         }
       ]
     },
-
     "services_title": "We work with legal entities, provide invoices, reports, and conduct electronic document management through didox.uz",
     "services_list": [
       {
@@ -282,18 +264,36 @@
     ],
     "partners_title": "Trusted by:",
     "partners_list": [
-      { "img": "partner1.svg" },
-      { "img": "partner2.svg" },
-      { "img": "partner3.svg" },
-      { "img": "partner4.svg" },
-      { "img": "partner5.svg" },
-      { "img": "partner6.svg" }
+      {
+        "img": "partner1.svg"
+      },
+      {
+        "img": "partner2.svg"
+      },
+      {
+        "img": "partner3.svg"
+      },
+      {
+        "img": "partner4.svg"
+      },
+      {
+        "img": "partner5.svg"
+      },
+      {
+        "img": "partner6.svg"
+      }
     ],
     "how_title": "How does it work?",
     "how_list": [
-      { "stage": "Register on the platform" },
-      { "stage": "Choose suitable channels from the catalog" },
-      { "stage": "Top up your balance with a convenient method" },
+      {
+        "stage": "Register on the platform"
+      },
+      {
+        "stage": "Choose suitable channels from the catalog"
+      },
+      {
+        "stage": "Top up your balance with a convenient method"
+      },
       {
         "stage": "Create an ad placement manually or generate a post using AI"
       },
@@ -307,7 +307,9 @@
         "type": "self",
         "title": "Самостоятельное размещение",
         "stages": [
-          { "stage": "Найти подходящие площадки вручную" },
+          {
+            "stage": "Найти подходящие площадки вручную"
+          },
           {
             "stage": "Проверить каждую площадку на накрутку и качество аудитории"
           },
@@ -329,18 +331,24 @@
         "type": "vencom",
         "title": "Размещение с Blogix",
         "stages": [
-          { "stage": "Зарегистрируйте аккаунт на платформе" },
+          {
+            "stage": "Зарегистрируйте аккаунт на платформе"
+          },
           {
             "stage": "Подберите подходящие плошадки в пару кликов или выберите запуск под ключ"
           },
-          { "stage": "Пополните баланс удобным способом" },
+          {
+            "stage": "Пополните баланс удобным способом"
+          },
           {
             "stage": "Загрузите пост либо сгенерируйте все с помощью искусственного интеллекта"
           },
           {
             "stage": "В один клик запустите рекламу сразу во всех выбранных площадках"
           },
-          { "stage": "Получайте оповещение о каждом размещении" },
+          {
+            "stage": "Получайте оповещение о каждом размещении"
+          },
           {
             "stage": "Платформа гарантирует сохранность ваших средств пока не будут выполнены все условия размещения"
           }
@@ -348,7 +356,6 @@
         "save": "Экономьте время и деньги"
       }
     ],
-
     "turnkey_title": "Turnkey Advertising Launch",
     "turnkey_subtitle": "Choose a plan, and a personal manager will handle everything for you",
     "turnkey_text": "Manager services are provided as a bonus. The entire budget goes towards purchasing integrations in the Blogix catalog",
@@ -360,23 +367,40 @@
         "price": "2,550,000 UZS",
         "info": "A basic option for evaluating the service or small advertising campaigns",
         "options": [
-          { "option": "Manual selection of channels", "available": true },
-          { "option": "Individual promotion plan", "available": true },
+          {
+            "option": "Manual selection of channels",
+            "available": true
+          },
+          {
+            "option": "Individual promotion plan",
+            "available": true
+          },
           {
             "option": "Creation of an effective advertising post",
             "available": true
           },
-          { "option": "Publication notifications", "available": true },
-          { "option": "Approval of selected channels", "available": false },
-          { "option": "Promotion consultations", "available": false },
+          {
+            "option": "Publication notifications",
+            "available": true
+          },
+          {
+            "option": "Approval of selected channels",
+            "available": false
+          },
+          {
+            "option": "Promotion consultations",
+            "available": false
+          },
           {
             "option": "Detailed report on completed work",
             "available": false
           },
-          { "option": "Advertising campaign forecasts", "available": false }
+          {
+            "option": "Advertising campaign forecasts",
+            "available": false
+          }
         ]
       },
-
       {
         "type": "standard",
         "name": "Standard",
@@ -384,23 +408,40 @@
         "price": "7,500,000 UZS",
         "info": "An optimal plan for small business promotion",
         "options": [
-          { "option": "Manual selection of channels", "available": true },
-          { "option": "Individual promotion plan", "available": true },
+          {
+            "option": "Manual selection of channels",
+            "available": true
+          },
+          {
+            "option": "Individual promotion plan",
+            "available": true
+          },
           {
             "option": "Creation of an effective advertising post",
             "available": true
           },
-          { "option": "Publication notifications", "available": true },
-          { "option": "Approval of selected channels", "available": true },
-          { "option": "Promotion consultations", "available": true },
+          {
+            "option": "Publication notifications",
+            "available": true
+          },
+          {
+            "option": "Approval of selected channels",
+            "available": true
+          },
+          {
+            "option": "Promotion consultations",
+            "available": true
+          },
           {
             "option": "Detailed report on completed work",
             "available": false
           },
-          { "option": "Advertising campaign forecasts", "available": false }
+          {
+            "option": "Advertising campaign forecasts",
+            "available": false
+          }
         ]
       },
-
       {
         "type": "complex",
         "name": "Comprehensive",
@@ -408,17 +449,38 @@
         "price": "15,300,000 UZS",
         "info": "A comprehensive plan for medium and large advertising campaigns",
         "options": [
-          { "option": "Manual selection of channels", "available": true },
-          { "option": "Individual promotion plan", "available": true },
+          {
+            "option": "Manual selection of channels",
+            "available": true
+          },
+          {
+            "option": "Individual promotion plan",
+            "available": true
+          },
           {
             "option": "Creation of an effective advertising post",
             "available": true
           },
-          { "option": "Publication notifications", "available": true },
-          { "option": "Approval of selected channels", "available": true },
-          { "option": "Promotion consultations", "available": true },
-          { "option": "Detailed report on completed work", "available": true },
-          { "option": "Advertising campaign forecasts", "available": true },
+          {
+            "option": "Publication notifications",
+            "available": true
+          },
+          {
+            "option": "Approval of selected channels",
+            "available": true
+          },
+          {
+            "option": "Promotion consultations",
+            "available": true
+          },
+          {
+            "option": "Detailed report on completed work",
+            "available": true
+          },
+          {
+            "option": "Advertising campaign forecasts",
+            "available": true
+          },
           {
             "option": "Maximum reach of your target audience",
             "available": true
@@ -466,7 +528,6 @@
       }
     ]
   },
-
   "main_page_blogger": {
     "cta": {
       "title": "Add your channel now and get an order",
@@ -508,22 +569,42 @@
     ],
     "partners_title": "Trusted by:",
     "partners_list": [
-      { "img": "partner1.svg" },
-      { "img": "partner2.svg" },
-      { "img": "partner3.svg" },
-      { "img": "partner4.svg" },
-      { "img": "partner5.svg" },
-      { "img": "partner6.svg" }
+      {
+        "img": "partner1.svg"
+      },
+      {
+        "img": "partner2.svg"
+      },
+      {
+        "img": "partner3.svg"
+      },
+      {
+        "img": "partner4.svg"
+      },
+      {
+        "img": "partner5.svg"
+      },
+      {
+        "img": "partner6.svg"
+      }
     ],
     "how_title": "How does it work?",
     "how_list": [
-      { "stage": "Register on the service" },
-      { "stage": "Add your channel to our platform" },
-      { "stage": "Accept an advertising order request" },
+      {
+        "stage": "Register on the service"
+      },
+      {
+        "stage": "Add your channel to our platform"
+      },
+      {
+        "stage": "Accept an advertising order request"
+      },
       {
         "stage": "Publish a post on your channel at the specified time and receive payment from the advertiser"
       },
-      { "stage": "Withdraw money in a way that is convenient for you" }
+      {
+        "stage": "Withdraw money in a way that is convenient for you"
+      }
     ],
     "why_title": "Why is it more effective with us?",
     "accomms_list": [
@@ -531,15 +612,21 @@
         "type": "self",
         "title": "Self-placement",
         "stages": [
-          { "stage": "Find suitable platforms manually" },
-          { "stage": "Check each platform for fake audience and quality" },
+          {
+            "stage": "Find suitable platforms manually"
+          },
+          {
+            "stage": "Check each platform for fake audience and quality"
+          },
           {
             "stage": "Find out the price, terms, and available times from admins"
           },
           {
             "stage": "Pay each admin separately for placement without any guarantees"
           },
-          { "stage": "Send the advertising post to each admin" },
+          {
+            "stage": "Send the advertising post to each admin"
+          },
           {
             "stage": "Track the placement of the post on each platform separately"
           }
@@ -549,16 +636,24 @@
         "type": "vencom",
         "title": "Placement with Blogix",
         "stages": [
-          { "stage": "Register an account on the platform" },
+          {
+            "stage": "Register an account on the platform"
+          },
           {
             "stage": "Select suitable platforms in a few clicks or choose turnkey launch"
           },
-          { "stage": "Top up your balance conveniently" },
-          { "stage": "Upload a post or generate everything using AI" },
+          {
+            "stage": "Top up your balance conveniently"
+          },
+          {
+            "stage": "Upload a post or generate everything using AI"
+          },
           {
             "stage": "Launch advertising in all selected platforms in one click"
           },
-          { "stage": "Receive notifications about each placement" },
+          {
+            "stage": "Receive notifications about each placement"
+          },
           {
             "stage": "The platform guarantees the safety of your funds until all placement conditions are met"
           }
@@ -566,7 +661,6 @@
         "save": "Save time and money"
       }
     ],
-
     "calculate": {
       "title": "Calculate channel profitability",
       "subtitle": "Specify the topic of your channel or blog and the number of subscribers",
@@ -581,20 +675,48 @@
     },
     "work_title": "Already earning with us",
     "work_list": [
-      { "img": "channel1.svg" },
-      { "img": "channel1.svg" },
-      { "img": "channel1.svg" },
-      { "img": "channel1.svg" },
-      { "img": "channel1.svg" },
-      { "img": "channel1.svg" },
-      { "img": "channel1.svg" },
-      { "img": "channel1.svg" },
-      { "img": "channel1.svg" },
-      { "img": "channel1.svg" },
-      { "img": "channel1.svg" },
-      { "img": "channel1.svg" },
-      { "img": "channel1.svg" },
-      { "img": "channel1.svg" }
+      {
+        "img": "channel1.svg"
+      },
+      {
+        "img": "channel1.svg"
+      },
+      {
+        "img": "channel1.svg"
+      },
+      {
+        "img": "channel1.svg"
+      },
+      {
+        "img": "channel1.svg"
+      },
+      {
+        "img": "channel1.svg"
+      },
+      {
+        "img": "channel1.svg"
+      },
+      {
+        "img": "channel1.svg"
+      },
+      {
+        "img": "channel1.svg"
+      },
+      {
+        "img": "channel1.svg"
+      },
+      {
+        "img": "channel1.svg"
+      },
+      {
+        "img": "channel1.svg"
+      },
+      {
+        "img": "channel1.svg"
+      },
+      {
+        "img": "channel1.svg"
+      }
     ],
     "customers_title": "What our clients say about us:",
     "customers_list": [
@@ -636,7 +758,6 @@
       }
     ]
   },
-
   "orders_advertiser": {
     "my_campaign": "My Advertising Campaigns",
     "new_project": "Create Project",
@@ -657,7 +778,6 @@
       "develop": "In Development",
       "agreed": "Under Review"
     },
-
     "card": {
       "status": {
         "active": "In Progress",
@@ -681,7 +801,6 @@
       "accommodation": "Placement Format",
       "time": "Placement Time",
       "price": "Price",
-
       "replace": {
         "channel": {
           "title": "Tell us what needs to be changed: what you don't like about the current channel and do you have any preferences? The agent will take all your preferences into account when replacing.",
@@ -738,7 +857,6 @@
       }
     }
   },
-
   "orders_manager": {
     "orders": "Advertising Orders",
     "no_project": "You currently have no projects",
@@ -776,7 +894,6 @@
       "new": "New Orders",
       "agreed": "Under Review"
     },
-
     "card": {
       "status": {
         "active": "In Progress",
@@ -826,7 +943,6 @@
         }
       }
     },
-
     "order_status": {
       "rejected": {
         "title": "The channel owner rejected your request",
@@ -871,7 +987,6 @@
       }
     }
   },
-
   "platforms_blogger": {
     "my_platform": "My Channels",
     "status_filter": {
@@ -883,16 +998,13 @@
       "deleted": "Deleted"
     },
     "created": "Date",
-
     "no_platform": "You currently have no channels",
     "no_banned": "You have no banned channels",
-
     "offers_count": "New",
     "moderation_time": "Channel moderation takes 24 hours",
     "repeat": "You can resubmit your application after addressing the rejection reason",
     "repeat_date": "Resubmission for moderation will be possible",
     "ban": "Your channel is permanently banned",
-
     "card": {
       "status": {
         "active": "Active",
@@ -903,7 +1015,6 @@
       },
       "new": "New"
     },
-
     "menu": {
       "title": "Channel Actions",
       "edit": "Edit",
@@ -911,7 +1022,6 @@
       "deactivate": "Deactivate",
       "delete": "Delete"
     },
-
     "delete_channel": {
       "title": "Are you sure you want to delete the channel?",
       "yes": "Yes",
@@ -923,7 +1033,6 @@
       "no": "No"
     }
   },
-
   "platform_description": {
     "platform_description": "Channel Description",
     "language": "Audience Language",
@@ -933,11 +1042,9 @@
     "edit_btn": "Edit",
     "okey_btn": "Got it"
   },
-
   "offers_blogger": {
     "my_offers": "My Advertising Orders",
     "no_offers": "You currently have no orders",
-
     "status_filter": {
       "active": "Active",
       "waiting": "Pending Acceptance",
@@ -946,7 +1053,6 @@
       "moderation": "Under Moderation",
       "uncomplete": "Unfulfilled"
     },
-
     "card": {
       "status": {
         "active": "In Progress",
@@ -962,13 +1068,11 @@
       "time": "Placement Time",
       "price": "Price"
     },
-
     "days": {
       "day": "day",
       "days": "days",
       "dayss": "days"
     },
-
     "offer_status": {
       "active": {
         "title": "Submit the post link",
@@ -1013,7 +1117,6 @@
       }
     }
   },
-
   "add_platform": {
     "title": {
       "add": "Add Channel",
@@ -1039,7 +1142,6 @@
         "verification": "Important! Place the specified code in the description of your channel, this is needed to confirm ownership of the channel. After successful verification, you can delete this code."
       }
     },
-
     "description": {
       "category": {
         "title": "Select a Category",
@@ -1117,7 +1219,6 @@
         "title": "Number of Characters"
       }
     },
-
     "create": {
       "send": "Your application has been submitted!",
       "moderation": "Your channel addition request has been sent for moderator review.",
@@ -1127,15 +1228,20 @@
         "text2": "from the time of submission"
       }
     },
-
     "success": {
       "title": "Ready to add",
       "text": "Great! Everything is ready to add your channel. After submission, it will go through moderation and appear in the catalog for all users."
     }
   },
-
   "profile": {
     "title": "Profile Settings",
+    "navigation": {
+      "user_data": "User data",
+      "change_password": "Change password",
+      "change_notifications": "Notification settings",
+      "organization_data": "Organization data"
+    },
+    "back": "Back",
     "account_block": {
       "title": "Account",
       "date": "Registration Date",
@@ -1165,7 +1271,43 @@
       },
       "save_btn": "Save Changes"
     },
-
+    "user_block": {
+      "user_data": {
+        "title": "Personal data",
+        "fields": {
+          "email": "Email",
+          "phone": "Phone number",
+          "date": "Registration date",
+          "name": "Name"
+        },
+        "edit": "Edit"
+      },
+      "organization_data": {
+        "title": "Organization data",
+        "fields": {
+          "type": "Organization type",
+          "inn": "TIN",
+          "pinfl": "PINFL",
+          "status": "Status"
+        },
+        "organization_types": {
+          "self_employed": "Self-employed",
+          "entity": "Legal entity",
+          "individual": "IE"
+        },
+        "status_types": {
+          "approved": "Approved",
+          "not_approved": "Not approved"
+        },
+        "edit": "Edit"
+      },
+      "change_password": {
+        "title": "Change password"
+      },
+      "change_notifications": {
+        "title": "Notification settings"
+      }
+    },
     "email_block": {
       "title": "Change E-mail",
       "new_email": {
@@ -1195,7 +1337,6 @@
       "send_btn": "Send Code",
       "back_btn": "Back"
     },
-
     "password_block": {
       "title": "Change Password",
       "current_password": {
@@ -1241,55 +1382,308 @@
         },
         "instruction": "Read more detailed instructions on setting up the Telegram bot",
         "change_btn": "Change",
-        "cancel_btn": "Cancel",
-        "notification_link_button": "Get notifications in Telegram"
+        "cancel_btn": "Cancel"
       },
       "continue_btn": "Continue"
+    }
+  },
+  "organization": {
+    "not_login": {
+      "title": "You need to add an organization",
+      "description": "To continue working with the platform, you need to add an organization. This is necessary for processing documents, receiving payments on the current account and participating in advertising campaigns.",
+      "buttons": {
+        "add": "Add"
+      }
     },
-    "navigation": {
-      "user_data": "User data",
-      "change_password": "Change password",
-      "change_notifications": "Notification settings",
-      "organization_data": "Organization data"
+    "offer_sign": {
+      "title": "Сonfirmation of organization",
+      "description": "To start using the service, you need to review and accept the terms of the <1>public offer</1>",
+      "requirements": [
+        {
+          "item": "Review the terms of use"
+        },
+        {
+          "item": "Agree to the privacy policy"
+        },
+        {
+          "item": "Confirm the organization's authority"
+        }
+      ],
+      "warning": "Access to the service features will only be granted after signing the offer",
+      "authorization_required": {
+        "title": "Authorization required",
+        "subtitle": "You need to log in with an EDS key",
+        "description": "To sign the offer, prior authorization in the system using an EDS is required",
+        "section": "Go to the section",
+        "organization_data": "Organization data"
+      },
+      "authorization_success": {
+        "title": "Authorization Successful",
+        "subtitle": "The digital signature is active and ready to use",
+        "description": "You can sign the document using your digital signature",
+        "status": "Status:",
+        "active": "Organization verified"
+      },
+      "legal_notice": "Legally binding document",
+      "buttons": {
+        "sign": "Sign"
+      }
     },
-    "back": "Back",
-    "user_block": {
-      "user_data": {
-        "title": "Personal data",
-        "fields": {
-          "email": "Email",
-          "phone": "Phone number",
-          "date": "Registration date"
+    "title": "My organization",
+    "logout": {
+      "title": "Logout from account",
+      "description": "Are you sure you want to log out of your account? You will need to log in again to access your data.",
+      "buttons": {
+        "cancel": "Cancel",
+        "logout": "Logout"
+      }
+    },
+    "login": {
+      "didox": {
+        "title": "Sign in to the system",
+        "description": "Choose the type of authentication and fill in the details to access your account",
+        "choose_type": "How would you like to sign in?",
+        "no_account": "Don't have an account?",
+        "register": "Register",
+        "type": {
+          "password": "By password",
+          "certificate": "By key"
+        },
+        "certificate": {
+          "until": "until",
+          "placeholder": "Select a key",
+          "loading": "Loading keys...",
+          "not_found": "No keys found",
+          "error": "The E-IMZO application is not enabled or not found on your device"
+        },
+        "buttons": {
+          "login": "Sign in to account"
+        }
+      }
+    },
+    "form": {
+      "title": {
+        "add": "Organization addition request",
+        "data": "Organization data"
+      },
+      "legal": {
+        "title": "Organization type",
+        "text": "Select the type of organization - Legal entity, IE or Self-employed.",
+        "default_value": "Not selected"
+      },
+      "PNFL": {
+        "title": "TIN/PNFL",
+        "default_value": "TIN/PNFL",
+        "error": {
+          "required": "Invalid number of characters: TIN must be 9, PNFL must be 14"
         }
       },
-      "change_password": {
-        "title": "Change password"
+      "INN": {
+        "title": "INN",
+        "default_value": "123456789",
+        "error": {
+          "required": "invalid format, must be 9 characters"
+        },
+        "description": "Enter the taxpayer identification number (INN) of your company or individual entrepreneur. This number is used for tax accounting and organization identification."
       },
-      "change_notifications": {
-        "title": "Notification settings"
+      "password": {
+        "title": "Password",
+        "default_value": "12345678",
+        "error": {
+          "required": "enter password"
+        }
       },
-      "organization_data": {
-        "title": "Organization data",
-        "fields": {
-          "type": "Organization type",
-          "inn": "TIN",
-          "pinfl": "PINFL",
-          "status": "Status"
-        },
-        "organization_types": {
-          "self_employed": "Self-employed",
-          "entity": "Legal entity",
-          "individual": "IE"
-        },
-        "status_types": {
-          "approved": "Approved",
-          "not_approved": "Not approved"
-        },
-        "edit": "Edit"
+      "info_card": {
+        "text": "Adding an organization is necessary for document processing, receiving payments to a settlement account (card), and participating in advertising campaigns on behalf of a legal entity, IE, or self-employed. This is important for transparency, trust, and proper document flow through our partner Didox. If you have difficulties, we recommend reading the detailed guide at the link",
+        "link": "How to add an organization and why is it needed?"
+      },
+      "buttons": {
+        "next": "Next",
+        "accept": "Confirm"
+      },
+      "didox": {
+        "text": "After clicking the 'Confirm' button, you will be redirected to the Didox website to sign the public offer. After successful confirmation, your organization will be added and saved on the platform."
+      }
+    },
+    "not_found": {
+      "types": {
+        "self_employed": "PNFL",
+        "legal": "INN"
+      },
+      "title": "not found in the Didox system",
+      "text": "To continue, you need to register the self-employed in Didox. Click 'Register' and go through the registration process. If you have questions, we recommend reading the detailed guide:",
+      "link": "How to register in Didox if I am self-employed?",
+      "buttons": {
+        "register": "Register",
+        "cancel": "Cancel"
+      }
+    },
+    "basic_info": {
+      "basic_info": "General data",
+      "name": {
+        "title": "Full name",
+        "default_value": "Gomer German",
+        "description": "Enter your full name as indicated in your passport or other official document. Please note that the data must match the information in your bank.",
+        "error": {
+          "required": "the field cannot be empty"
+        }
+      },
+      "registration_number": {
+        "title": "Registration number",
+        "default_value": "12345678",
+        "description": "Enter your registration number assigned to you during registration. This number is used for identification and verification.",
+        "error": {
+          "required": "enter without extra characters"
+        }
+      },
+      "registration_date": {
+        "title": "Registration date",
+        "default_value": "22.09.2023",
+        "description": "Enter your registration date in the format DD.MM.YYYY. Make sure the data matches official documents.",
+        "error": {
+          "required": "invalid format, enter in the format dd.mm.yyyy: 22.09.2023"
+        }
+      },
+      "PNFL": {
+        "title": "PNFL",
+        "default_value": "12345678901234",
+        "description": "Personal identification number of an individual. Enter a valid PNFL as it is required for data verification.",
+        "error": {
+          "required": "invalid format, must be 14 characters"
+        }
+      },
+      "entity": {
+        "title": "Company name",
+        "default_value": "Legal entity name",
+        "description": "Enter the full official name of your company according to registration documents. This is necessary for correct payment and document processing.",
+        "error": {
+          "required": "field cannot be empty"
+        }
+      },
+      "address": {
+        "title": "Legal address",
+        "default_value": "Legal address",
+        "description": "Enter the address where your company is registered. It may differ from the actual place of business, but must match the registration documents.",
+        "error": {
+          "required": "field cannot be empty"
+        }
+      },
+      "INN": {
+        "title": "INN",
+        "default_value": "123456789",
+        "description": "Enter the taxpayer identification number (INN) of your company or individual entrepreneur. This number is used for tax accounting and organization identification.",
+        "error": {
+          "required": "invalid format, must be 9 characters"
+        }
+      },
+      "individual": {
+        "title": "IE name",
+        "default_value": "IE name",
+        "description": "Enter the full name of the individual entrepreneur as indicated in the registration documents. This name is used for identification in legal and financial documents.",
+        "error": {
+          "required": "field cannot be empty"
+        }
+      }
+    },
+    "bank_data": {
+      "bank_data": "Bank details",
+      "bank_mfo": {
+        "title": "Bank MFO",
+        "default_value": "12345",
+        "description": "Enter the bank's interbranch turnover code (MFO) where your account is opened. This code is used for payment processing.",
+        "error": {
+          "required": "invalid format, must be 5 characters"
+        }
+      },
+      "bank_name": {
+        "title": "Bank name",
+        "default_value": "Bank name",
+        "description": "Enter the official name of the bank where your account is opened. This is important for correct crediting of funds to your account.",
+        "error": {
+          "required": "field cannot be empty"
+        }
+      },
+      "checking_account": {
+        "title": "Checking account",
+        "default_value": "12345678901234567890",
+        "description": "Enter the checking account number opened in your name or your organization's name at the bank. This account is used for transferring funds and other financial operations related to your activity.",
+        "error": {
+          "required": "invalid format, must be 20 characters"
+        }
+      },
+      "transit_account": {
+        "title": "Transit account",
+        "default_value": "12345678901234567890",
+        "description": "Enter your transit account number if required for transferring funds. This account is used for payment processing and may differ from your checking account.",
+        "error": {
+          "required": "invalid format, must be 20 characters"
+        }
+      },
+      "card_number": {
+        "title": "Card details",
+        "default_value": "9860123412341234",
+        "description": "Enter your bank card number without spaces. Be careful when entering, as an error in the number may result in payment rejection.",
+        "error": {
+          "required": "invalid format, must be 16 characters"
+        }
+      },
+      "card_date": {
+        "title": "Card expiry date",
+        "default_value": "mm/yy",
+        "description": "Enter your card's expiry date in the format MM/YY (month/year). This information is required for transaction processing and card validation.",
+        "error": {
+          "required": "enter date in format - mm/yy: 09/23"
+        }
+      }
+    },
+    "contact": {
+      "contact": "Contact details",
+      "phone": {
+        "title": "Phone number",
+        "default_value": "+998909000123",
+        "description": "Enter your valid phone number in international format. This number may be used for communication and payment confirmation.",
+        "error": {
+          "required": "enter phone number in the correct format"
+        }
+      },
+      "email": {
+        "title": "E-mail",
+        "default_value": "sample@gmail.com",
+        "description": "Enter your current email address. Important notifications about payment status and other messages may be sent to this email.",
+        "error": {
+          "required": "invalid email address"
+        }
+      },
+      "password": {
+        "title": "Password",
+        "default_value": "12345678",
+        "description": "Enter the password that will be used to access your account.",
+        "error": {
+          "required": ""
+        }
+      }
+    },
+    "accept": {
+      "text1": "I confirm the accuracy of the data, I have read and accept the",
+      "span1": "service terms",
+      "and": "and",
+      "span2": "offer rules",
+      "text2": "and accept them."
+    },
+    "public_offer_page": {
+      "title": "Application to add an organization"
+    },
+    "service_rules_page": {
+      "title": "Terms of service"
+    },
+    "pdf_previewer": {
+      "page": "Page",
+      "load": {
+        "load": "Contract is uploading",
+        "fail": "Failed to download the contract"
       }
     }
   },
-
   "add_profile": {
     "add_profile": "Adding Data",
     "types": {
@@ -1436,9 +1830,16 @@
         "error": {
           "required": "invalid email address"
         }
+      },
+      "password": {
+        "title": "Password",
+        "default_value": "12345678",
+        "description": "Enter the password that will be used to access your account.",
+        "error": {
+          "required": ""
+        }
       }
     },
-
     "accept": {
       "text1": "I confirm the accuracy of the data, I have read and accept the",
       "span1": "service terms",
@@ -1447,7 +1848,6 @@
       "text2": "and accept them."
     }
   },
-
   "platform": {
     "cross": "Match",
     "match_description": "The match percentage indicates how well this channel fits the selected search parameters"
@@ -1455,18 +1855,15 @@
   "catalog": {
     "catalog": "Channel Catalog",
     "all_platform": "Channels",
-
     "search": {
       "parameters": "Search Parameters",
       "AI": "AI Auto-Selection",
       "search": "Search..."
     },
-
     "ai": {
       "title": "Describe your advertising campaign. The more details you provide about your goals, the more effectively target audiences will be selected for you.",
       "default_input": "Tell us about your brand and the product you plan to advertise."
     },
-
     "category": {
       "title": "Business Category:",
       "text": "",
@@ -1502,12 +1899,9 @@
         "language": "Language"
       }
     },
-
     "see_more": "Expand",
     "see_less": "Collapse",
-
     "generation_btn": "Generate",
-
     "current_cart": {
       "channels": "Channels",
       "views": "Reach",
@@ -1516,11 +1910,9 @@
       "information": "The amount will be calculated after the creation of posts and the placement date"
     }
   },
-
   "cart": {
     "cart": "Cart",
     "empty": "The list is empty...",
-
     "create_post": {
       "title": "Order is protected by a secure transaction",
       "text": "The channel owner will receive payment only after your confirmation of successful placement",
@@ -1530,7 +1922,6 @@
       "finnaly": "Final Amount",
       "finnaly_short": "Amount"
     },
-
     "recomendation": "Recommended Channels",
     "hide": "Hide",
     "show": "Show",
@@ -1541,25 +1932,26 @@
       "no_data": "No information available for this project"
     }
   },
-
   "wallet": {
+    "amount": {
+      "required": "Enter the amount",
+      "min": "Minimum amount",
+      "max": "Maximum amount"
+    },
     "topup": {
       "title": "Balance Top-up",
       "offer": "Balance Top-up Request",
       "payment_method": "Select a payment method",
       "fetch_error": "Request error",
-
       "amount": {
         "title": "Top-up Amount",
         "default_value": "50 000",
         "placeholder": "Enter top-up amount",
         "description": "Enter the amount to top up your balance. Minimum amount is 50,000 UZS. Maximum amount is 1,000,000,000 UZS."
       },
-
       "success": {
         "title": "Your request has been successfully processed!",
         "text": "Please carefully specify the payment details and purpose exactly as indicated in the invoice. This is necessary for the correct and quick crediting of funds. Once the funds are received in the specified account, your balance will be updated.",
-
         "buttons": {
           "download": "Download"
         }
@@ -1574,7 +1966,6 @@
         "placeholder": "Enter withdrawal amount",
         "description": "Enter the amount to withdraw from your balance. Minimum amount is 50,000 UZS. Maximum amount is 1,000,000,000 UZS."
       },
-
       "success": {
         "title": "Your request has been successfully processed!",
         "text": "Your advance withdrawal request has been successfully submitted. Please wait for confirmation and the receipt of funds shortly."
@@ -1682,7 +2073,6 @@
         }
       }
     },
-
     "pay": {
       "title": "To be charged",
       "sub_title": "From wallet",
@@ -1696,15 +2086,19 @@
       "span2": "offer rules",
       "text2": "."
     },
-
     "use_data": "Saved Data:",
     "empty_data": "You have no saved data",
     "save_data": "Save data for future use",
     "finally": "Final Amount",
     "inn": "TIN:",
-    "pnfl": "PNFL:"
+    "pnfl": "PNFL:",
+    "komissiya": {
+      "title": " Commission",
+      "enrollment": "Amount payable",
+      "include": "Enter commission",
+      "withdraw_all": "Withdraw all funds"
+    }
   },
-
   "wallet_history": {
     "wallet_history": "Transaction History",
     "tab": {
@@ -1715,7 +2109,6 @@
       "status": "Status"
     }
   },
-
   "create_order": {
     "create_order": "Order Placement",
     "name": {
@@ -1740,9 +2133,10 @@
       "template": "Upload Template",
       "comment_to_post": "Comment on the Technical Assignment: ",
       "see_post_mobile_btn": "View Post",
-
       "post_types": {
-        "telegram": { "default": "Universal Format" },
+        "telegram": {
+          "default": "Universal Format"
+        },
         "instagram": {
           "stories": "Reels/Stories",
           "reels": "Reels/Stories",
@@ -1751,13 +2145,18 @@
         "youtube": {
           "shorts": "YouTube Shorts",
           "videos": "YouTube Videos"
+        },
+        "site": {
+          "default": "Website",
+          "telegram": "Telegram",
+          "instagram": "Instagram"
         }
       },
-
       "filter": {
         "telegram": "Telegram",
         "instagram": "Instagram",
-        "youtube": "YouTube"
+        "youtube": "YouTube",
+        "site": "Website"
       },
       "add_button": {
         "title": "Add Button",
@@ -1773,7 +2172,6 @@
         },
         "add_button": "Add Button"
       },
-
       "add_files": {
         "add_files": "File Upload",
         "types": {
@@ -1804,35 +2202,30 @@
           "post_title": "Files attached to the technical assignment:"
         }
       },
-
       "add": {
         "text": "Drag and drop a file here",
         "span": "or",
         "choose": "Choose a file"
       }
     },
-
     "datetime": {
       "title": "Specify Date and Time"
     },
-
     "prices": {
       "title": "Specify the price for order",
       "input_placeholder": "Enter the price",
       "input_label": "Price",
       "error_description": "The price cannot be lower than the price specified in the catalog"
     },
-
     "payment": {
       "title": "Order Payment",
       "pay": "Pay and Launch",
       "approve": "For Approval",
       "price": "Total Amount:",
+      "choose_wallet": "",
       "description": "Just one last step to launch an effective advertising campaign! Once you pay for the order, channel owners will immediately receive notifications and begin placing your ads."
     },
-
     "save": "Save Project",
-
     "loading": {
       "posts": "Sending advertising posts...",
       "files": "Uploading files...",
@@ -1840,7 +2233,6 @@
       "heart": "Almost there..."
     }
   },
-
   "calendar": {
     "choose_date": "Choose a Date",
     "choose_time": "Choose a Time",
@@ -1849,7 +2241,6 @@
     "date": "Select One",
     "until": "until"
   },
-
   "chat": {
     "my_messages": "My Messages",
     "role": {
@@ -1871,24 +2262,8 @@
     "file_upload": {
       "title": "Upload File",
       "send": "Upload"
-    },
-    "format": {
-      "bold": "Bold",
-      "italic": "Italic",
-      "monospace": "Monospace",
-      "underline": "Underline",
-      "strike": "Strike",
-      "link": "Link",
-      "text": "Text",
-      "text_placeholder": "Enter text...",
-      "url_placeholder": "Enter URL (https://...)"
-    },
-    "actions": {
-      "cancel": "Cancel",
-      "apply": "Apply"
     }
   },
-
   "notifications": {
     "title": "Notifications",
     "new": "New",
@@ -1896,7 +2271,6 @@
       "title": "If you have any questions or need assistance, our support team is always ready to help."
     }
   },
-
   "turnkey": {
     "turnkey": "Guaranteed success for your business with our ready-made plans and personal manager!",
     "text": "100% of the budget is allocated to placement, and the manager's services are absolutely free!",
@@ -1907,7 +2281,9 @@
       "step_1": {
         "title": "From you:",
         "text": [
-          { "text": "Choose and pay for a plan that suits you" },
+          {
+            "text": "Choose and pay for a plan that suits you"
+          },
           {
             "text": "Describe your project and advertising campaign preferences"
           }
@@ -1916,23 +2292,47 @@
       "step_2": {
         "title": "100% of the budget is allocated to placement, and the manager's services are absolutely free!",
         "text": [
-          { "text": "We develop a customized placement plan" },
-          { "text": "We manually select suitable channels" },
-          { "text": "We oversee the placement of advertising posts" },
-          { "text": "We analyze competitors and target audience" },
-          { "text": "We coordinate and launch the project" },
-          { "text": "We analyze statistics and evaluate the results" }
+          {
+            "text": "We develop a customized placement plan"
+          },
+          {
+            "text": "We manually select suitable channels"
+          },
+          {
+            "text": "We oversee the placement of advertising posts"
+          },
+          {
+            "text": "We analyze competitors and target audience"
+          },
+          {
+            "text": "We coordinate and launch the project"
+          },
+          {
+            "text": "We analyze statistics and evaluate the results"
+          }
         ]
       },
       "step_3": {
         "title": "You will get",
         "text": [
-          { "text": "Saving time and resources on your advertising campaign" },
-          { "text": "Saving time and resources on your advertising campaign" },
-          { "text": "Saving time and resources on your advertising campaign" },
-          { "text": "Saving time and resources on your advertising campaign" },
-          { "text": "Saving time and resources on your advertising campaign" },
-          { "text": "Saving time and resources on your advertising campaign" }
+          {
+            "text": "Saving time and resources on your advertising campaign"
+          },
+          {
+            "text": "Saving time and resources on your advertising campaign"
+          },
+          {
+            "text": "Saving time and resources on your advertising campaign"
+          },
+          {
+            "text": "Saving time and resources on your advertising campaign"
+          },
+          {
+            "text": "Saving time and resources on your advertising campaign"
+          },
+          {
+            "text": "Saving time and resources on your advertising campaign"
+          }
         ]
       }
     },
@@ -1994,7 +2394,6 @@
       }
     }
   },
-
   "channel": {
     "description": {
       "button": "Add"
@@ -2039,7 +2438,6 @@
       "empty": "There are no recommended channels yet..."
     }
   },
-
   "faq": {
     "page_title": "Knowledge Base",
     "common": {
@@ -2052,7 +2450,6 @@
       "title": "For Channel Owners"
     }
   },
-
   "filter": {
     "title": "Platform",
     "telegram": "Telegram",
@@ -2060,7 +2457,6 @@
     "youtube": "YouTube",
     "site": "Site"
   },
-
   "sorting": {
     "title": "Sorting",
     "price": "By Price",
@@ -2071,7 +2467,6 @@
     "match": "By Match",
     "rate": "By Rating"
   },
-
   "platform_types": {
     "telegram": {
       "name": "Telegram",
@@ -2090,18 +2485,15 @@
       "default_value": "https//domain.com..."
     }
   },
-
   "download_all_files": "All files",
   "copy_post_text": "Text",
   "send_to_telegram": "Send to Telegram",
-
   "template_post": {
     "add_template_post": "Add template",
     "template_name_placeholder": "Enter template name",
     "create_template_post": "Create template",
     "uploading_files": "Uploading files..."
   },
-
   "project_page": {
     "top_info": {
       "views": "Views",
@@ -2159,7 +2551,6 @@
     "show_all": "Show all",
     "hide": "Hide"
   },
-
   "add_platform_btn": {
     "check": "Check",
     "checked": "Checked",
@@ -2167,13 +2558,11 @@
     "save": "Save",
     "create": "Submit request",
     "accept": "Accept",
-
     "next": "Next",
     "prev": "Back",
     "back": "Go back",
     "send": "Send"
   },
-
   "order_btn": {
     "feedback": {
       "btn_title": "Leave feedback",
@@ -2219,7 +2608,6 @@
     "continue": "Continue",
     "is_upload_files": "Uploading files"
   },
-
   "offer_btn": {
     "see": "To applications",
     "see_post": "View task",
@@ -2235,7 +2623,6 @@
     "reject_placeholder": "Describe the reason for canceling the order... Maximum 300 characters",
     "see_cancel_reason": "Reason"
   },
-
   "platform_btn": {
     "description": "Channel description",
     "calendar": "Calendar",
@@ -2250,28 +2637,23 @@
     "activate": "Activate",
     "support": "Tech support"
   },
-
   "cart_btn": {
     "save": "Save",
     "add": "Add more",
     "create_post": "Create post"
   },
-
   "topup_btn": {
     "replenish": "Replenish",
     "send": "Send"
   },
-
   "amount": {
     "error": {
       "required": "Enter amount"
     }
   },
-
   "pagination": {
     "show_more": "Show more"
   },
-
   "toasts": {
     "admin": {
       "channel": {
@@ -2279,40 +2661,33 @@
           "success": "Channel moderation accepted",
           "error": "Error during channel moderation acceptance"
         },
-
         "remoderation": {
           "success": "Channel remoderation accepted",
           "error": "Error during channel remoderation acceptance"
         },
-
         "reject": {
           "success": "Channel moderation rejected",
           "error": "Error during channel moderation rejection"
         },
-
         "ban": {
           "success": "Channel banned",
           "error": "Error during channel banning"
         },
-
         "unban": {
           "success": "Channel unbanned",
           "error": "Error during channel unbanning"
         },
-
         "edit": {
           "success": "Channel data updated",
           "error": "Error during channel data update"
         }
       },
-
       "accounting": {
         "sign": {
           "success": "Operation completed successfully",
           "error": "Error occurred while processing the operation"
         }
       },
-
       "review": {
         "accept": {
           "success": "Review accepted",
@@ -2352,7 +2727,34 @@
         "error": "Error transferring cart"
       }
     },
-
+    "add_platform": {
+      "link": {
+        "success": "Channel identification successful",
+        "error": "Error during channel identification",
+        "alert": "Unfortunately, time has expired, refresh the page and try again",
+        "channelStatus": {
+          "active": "Such a channel already exists.",
+          "banned": "You are trying to add a blocked channel.",
+          "deleted": "You are trying to add a deleted channel.",
+          "inactive": "You are trying to add an inactive channel.",
+          "moderation": "The channel is under moderation",
+          "moderationReject": "The channel did not pass moderation",
+          "remoderation": "The channel has been sent for re-moderation",
+          "invalidUrl": ""
+        }
+      },
+      "create": {
+        "success": "Channel successfully added",
+        "error": "Error during channel addition"
+      },
+      "edit": {
+        "success": "Channel successfully edited",
+        "error": "Error during channel editing"
+      },
+      "parameters": {
+        "alert": "Please fill in all fields..."
+      }
+    },
     "organization": {
       "login": {
         "success": "You have successfully logged in",
@@ -2377,24 +2779,6 @@
       "delete": {
         "success": "Template successfully deleted",
         "error": "Error during template deletion"
-      }
-    },
-    "add_platform": {
-      "link": {
-        "success": "Channel identification successful",
-        "error": "Error during channel identification",
-        "alert": "Unfortunately, time has expired, refresh the page and try again"
-      },
-      "create": {
-        "success": "Channel successfully added",
-        "error": "Error during channel addition"
-      },
-      "edit": {
-        "success": "Channel successfully edited",
-        "error": "Error during channel editing"
-      },
-      "parameters": {
-        "alert": "Please fill in all fields..."
       }
     },
     "add_profile": {
@@ -2600,7 +2984,6 @@
     }
   },
   "url_link": "Enter URL...",
-
   "admin_panel": {
     "burger_menu": {
       "home": "Home",
@@ -2614,15 +2997,40 @@
       "accounting": "Accounting",
       "organization": "Organization"
     },
-
     "pages": {
       "home": "Home",
       "channels": "Channels",
       "users": "Users",
       "transactions": "Transactions",
+      "accounting": "Accounting",
       "moderation": "Moderation",
       "complaints": "Complaints",
       "reviews": "Reviews"
+    },
+    "home": {
+      "title": "Welcome to the admin panel!",
+      "text": "Welcome! Here you can manage the main features of the platform.",
+      "channels": {
+        "title": "Channels",
+        "text": "Create, edit, and delete channels. Full control is in your hands!"
+      },
+      "users": {
+        "title": "Users",
+        "text": "Monitor user activity, moderate accounts, and manage access rights."
+      },
+      "transactions": {
+        "title": "Transactions",
+        "text": "Track financial operations, verify payments, and monitor cash flow."
+      },
+      "reviews": {
+        "title": "Reviews",
+        "text": "Analyze user reviews, manage comments, and improve the service."
+      },
+      "complaints": {
+        "title": "Complaints",
+        "text": "Handle user complaints, respond to issues, and ensure a fair platform."
+      },
+      "description": "Here you can manage users, channels, and platform content."
     },
     "channels": {
       "bar": {
@@ -2632,7 +3040,6 @@
         "date": "Date",
         "status": "Status"
       },
-
       "card": {
         "rate": "Rating",
         "complete": "Completed",
@@ -2648,7 +3055,6 @@
         "sex": "Gender Ratio",
         "count": "Character Count",
         "description": "Channel Description",
-
         "buttons": {
           "ban": "Ban",
           "unban": "Unban",
@@ -2656,7 +3062,6 @@
           "reject": "Reject",
           "accept": "Approve"
         },
-
         "status": {
           "active": "Active",
           "moderation": "Under Moderation",
@@ -2666,7 +3071,6 @@
           "banned": "Banned",
           "deleted": "Deleted"
         },
-
         "ban": {
           "title": "Channel Ban",
           "reason": {
@@ -2685,7 +3089,6 @@
             }
           }
         },
-
         "reject": {
           "title": "Channel Rejection",
           "reason": {
@@ -2714,20 +3117,17 @@
         "date": "Registration Date",
         "status": "Status"
       },
-
       "card": {
         "status": {
           "active": "Active",
           "banned": "Banned"
         },
-
         "menu": {
           "title": "User Settings",
           "details": "Details",
           "send_message": "Send Message",
           "edit": "Edit",
           "unblock": "Unblock",
-
           "editing": {
             "title": "Edit Profile",
             "username": "Username",
@@ -2737,7 +3137,6 @@
             "location": "Location",
             "password": "Password",
             "telegram": "Telegram Account",
-
             "buttons": {
               "cancel": "Cancel",
               "update": "Update"
@@ -2757,7 +3156,6 @@
         "location": "Location"
       }
     },
-
     "transactions": {
       "bar": {
         "id": "Transaction ID",
@@ -2769,7 +3167,6 @@
         "amount": "Amount",
         "status": "Status"
       },
-
       "card": {
         "details": {
           "title": "System Status",
@@ -2785,13 +3182,11 @@
             "identification": "Account Identification",
             "userId": "User ID"
           },
-
           "identification": {
             "user": "User",
             "turnover": "Turnover"
           }
         },
-
         "transactions": {
           "id": "ID",
           "transactionId": "Transaction ID",
@@ -2799,11 +3194,9 @@
           "amount": "Amount",
           "date": "Creation Date"
         },
-
         "documents": {
           "title": "Supporting Documents"
         },
-
         "status": {
           "complete": "Completed",
           "reject": "Rejected",
@@ -2811,19 +3204,16 @@
         }
       }
     },
-
     "complaints": {
       "choose": {
         "title": "Taking Complaint to Work",
         "text": "By clicking the accept button, you take the complaint into work and must make a decision in favor of one of the parties"
       },
-
       "types": {
         "wait": "Waiting",
         "active": "In Progress",
         "complete": "Completed"
       },
-
       "bar": {
         "id": "Request ID",
         "sender": "Sender",
@@ -2833,30 +3223,25 @@
         "moderator": "Moderator",
         "priority": "Priority"
       },
-
       "card": {
         "id": "Request ID",
         "theme": "Subject",
         "sender": "Sender",
         "date": "Date",
         "priority": "Priority",
-
         "priority_status": {
           "low": "Low",
           "medium": "Medium",
           "high": "High"
         },
-
         "buttons": {
           "accept": "Accept"
         }
       }
     },
-
     "complaintInfo": {
       "card": {
         "title": "Complaint",
-
         "description": {
           "title": "Description",
           "sender": "Sender",
@@ -2867,7 +3252,6 @@
           "priority": "Priority",
           "comment": "Comment"
         },
-
         "details": {
           "title": "Details",
           "channel": "Advertising Channel",
@@ -2880,18 +3264,15 @@
           "amount": "Amount",
           "link_blogger": "Post Link (Channel Owner)",
           "link_advertiser": "Post Link (Advertiser)",
-
           "buttons": {
             "seePost": "View Post"
           }
         },
-
         "decision": {
           "title": "Make a Decision",
           "placeholder": "Write the reason",
           "have_decision": "Decision made in favor of"
         },
-
         "buttons": {
           "make_decision": "Make Decision",
           "see_decision": "Show Decision",
@@ -2900,7 +3281,6 @@
           "accept": "Accept",
           "ok": "Ok"
         },
-
         "status": {
           "wait": "Waiting",
           "active": "Active",
@@ -2908,13 +3288,11 @@
         }
       }
     },
-
     "reviews": {
       "types": {
         "wait": "Waiting",
         "accept": "Accepted"
       },
-
       "bar": {
         "id": "Request ID",
         "platform": "Platform",
@@ -2923,7 +3301,6 @@
         "date": "Date",
         "closed_date": "Closing Date"
       },
-
       "card": {
         "buttons": {
           "accept": "Accept",
@@ -2932,35 +3309,9 @@
         }
       }
     },
-    "home": {
-      "title": "Welcome to the admin panel!",
-      "description": "Here you can manage users, channels, and platform content.",
-      "channels": {
-        "title": "Channels",
-        "text": "Create, edit, and delete channels. Full control is in your hands!"
-      },
-      "users": {
-        "title": "Users",
-        "text": "Monitor user activity, moderate accounts, and manage access rights."
-      },
-      "transactions": {
-        "title": "Transactions",
-        "text": "Track financial operations, verify payments, and monitor cash flow."
-      },
-      "reviews": {
-        "title": "Reviews",
-        "text": "Analyze user reviews, manage comments, and improve the service."
-      },
-      "complaints": {
-        "title": "Complaints",
-        "text": "Handle user complaints, respond to issues, and ensure a fair platform."
-      }
-    },
-
     "documents": {
       "title": "Documents",
       "description": "List of documents for viewing and signing in the Didox system.",
-
       "tabs": {
         "category": {
           "title": "Direction",
@@ -2970,7 +3321,6 @@
             "draft": "Drafts"
           }
         },
-
         "type": {
           "title": "Document Type",
           "type": {
@@ -2981,7 +3331,6 @@
             "work_act": "Work Act"
           }
         },
-
         "signature": {
           "title": "Signature Status",
           "type": {
@@ -2992,7 +3341,6 @@
           }
         }
       },
-
       "card": {
         "contract": {
           "label": "Contract Number and Date"
@@ -3010,11 +3358,9 @@
         }
       }
     },
-
     "accounting": {
       "title": "Accounting",
       "description": "List of documents for accounting in the Blogix system.",
-
       "tabs": {
         "category": {
           "title": "Category",
@@ -3024,7 +3370,6 @@
             "refund": "Refund"
           }
         },
-
         "period": {
           "title": "Period",
           "type": {
@@ -3034,7 +3379,6 @@
             "all": "All time"
           }
         },
-
         "sorting": {
           "title": "Date sorting",
           "type": {
@@ -3042,7 +3386,6 @@
             "decrease": "Descending"
           }
         },
-
         "signature": {
           "title": "Signature status",
           "type": {
@@ -3052,7 +3395,6 @@
           }
         }
       },
-
       "card": {
         "transaction_id": "Transaction ID",
         "created_date": "Creation date",
@@ -3062,17 +3404,14 @@
         "wallet_type": "Wallet type",
         "transaction_type": "Transaction type",
         "amount": "Amount",
-
         "wallet": {
           "deposit": "Deposit wallet",
           "profit": "Profit wallet"
         },
-
         "type": {
           "top_up": "Top-up",
           "withdraw": "Withdrawal"
         },
-
         "contract": {
           "label": "Contract number and date"
         },
@@ -3087,7 +3426,6 @@
           "vat": "VAT amount",
           "withVat": "Price with VAT"
         },
-
         "buttons": {
           "sign": "Sign",
           "signed": "Signed"
@@ -3095,7 +3433,6 @@
       }
     }
   },
-
   "copy": {
     "default": "Copied",
     "technical_specification": {
@@ -3105,7 +3442,6 @@
       "id": "Id copied"
     }
   },
-
   "components": {
     "select": {
       "placeholder": "Not selected",
@@ -3117,294 +3453,15 @@
       "close": "Close"
     }
   },
-
   "not_found": {
     "description": "Page not found",
     "home_link": "Go back to home"
   },
-  "organization": {
-    "not_login": {
-      "title": "You need to add an organization",
-      "description": "To continue working with the platform, you need to add an organization. This is necessary for processing documents, receiving payments on the current account and participating in advertising campaigns.",
-      "buttons": {
-        "add": "Add"
-      }
-    },
-
-    "offer_sign": {
-      "title": "Сonfirmation of organization",
-      "description": "To start using the service, you need to review and accept the terms of the <1>public offer</1>",
-      "requirements": [
-        { "item": "Review the terms of use" },
-        { "item": "Agree to the privacy policy" },
-        { "item": "Confirm the organization's authority" }
-      ],
-      "warning": "Access to the service features will only be granted after signing the offer",
-      "authorization_required": {
-        "title": "Authorization required",
-        "subtitle": "You need to log in with an EDS key",
-        "description": "To sign the offer, prior authorization in the system using an EDS is required",
-        "section": "Go to the section",
-        "organization_data": "Organization data"
-      },
-      "authorization_success": {
-        "title": "Authorization Successful",
-        "subtitle": "The digital signature is active and ready to use",
-        "description": "You can sign the document using your digital signature",
-        "status": "Status:",
-        "active": "Organization verified"
-      },
-      "legal_notice": "Legally binding document",
-      "buttons": {
-        "sign": "Sign"
-      }
-    },
-    "title": "My organization",
-
-    "logout": {
-      "title": "Logout from account",
-      "description": "Are you sure you want to log out of your account? You will need to log in again to access your data.",
-      "buttons": {
-        "cancel": "Cancel",
-        "logout": "Logout"
-      }
-    },
-    "login": {
-      "didox": {
-        "title": "Sign in to the system",
-        "description": "Choose the type of authentication and fill in the details to access your account",
-        "choose_type": "How would you like to sign in?",
-        "no_account": "Don't have an account?",
-        "register": "Register",
-
-        "type": {
-          "password": "By password",
-          "certificate": "By key"
-        },
-
-        "certificate": {
-          "until": "until",
-          "placeholder": "Select a key",
-          "loading": "Loading keys...",
-          "not_found": "No keys found",
-          "error": "The E-IMZO application is not enabled or not found on your device"
-        },
-
-        "buttons": {
-          "login": "Sign in to account"
-        }
-      }
-    },
-
-    "form": {
-      "title": {
-        "add": "Organization addition request",
-        "data": "Organization data"
-      },
-      "legal": {
-        "title": "Organization type",
-        "text": "Select the type of organization - Legal entity, IE or Self-employed.",
-        "default_value": "Not selected"
-      },
-      "PNFL": {
-        "title": "TIN/PNFL",
-        "default_value": "TIN/PNFL",
-        "error": {
-          "required": "Invalid number of characters: TIN must be 9, PNFL must be 14"
-        }
-      },
-      "INN": {
-        "title": "INN",
-        "default_value": "123456789",
-        "description": "Enter the taxpayer identification number (INN) of your company or individual entrepreneur. This number is used for tax accounting and organization identification.",
-        "error": {
-          "required": "invalid format, must be 9 characters"
-        }
-      },
-
-      "password": {
-        "title": "Password",
-        "default_value": "12345678",
-        "error": {
-          "required": "enter password"
-        }
-      },
-      "info_card": {
-        "text": "Adding an organization is necessary for document processing, receiving payments to a settlement account (card), and participating in advertising campaigns on behalf of a legal entity, IE, or self-employed. This is important for transparency, trust, and proper document flow through our partner Didox. If you have difficulties, we recommend reading the detailed guide at the link",
-        "link": "How to add an organization and why is it needed?"
-      },
-      "buttons": {
-        "next": "Next",
-        "accept": "Confirm"
-      },
-      "didox": {
-        "text": "After clicking the 'Confirm' button, you will be redirected to the Didox website to sign the public offer. After successful confirmation, your organization will be added and saved on the platform."
-      }
-    },
-    "not_found": {
-      "types": {
-        "self_employed": "PNFL",
-        "legal": "INN"
-      },
-      "title": "not found in the Didox system",
-      "text": "To continue, you need to register the self-employed in Didox. Click 'Register' and go through the registration process. If you have questions, we recommend reading the detailed guide:",
-      "link": "How to register in Didox if I am self-employed?",
-      "buttons": {
-        "register": "Register",
-        "cancel": "Cancel"
-      }
-    },
-    "basic_info": {
-      "basic_info": "General data",
-      "name": {
-        "title": "Full name",
-        "default_value": "Gomer German",
-        "description": "Enter your full name as indicated in your passport or other official document. Please note that the data must match the information in your bank.",
-        "error": {
-          "required": "field cannot be empty"
-        }
-      },
-      "registration_number": {
-        "title": "Registration number",
-        "default_value": "12345678",
-        "description": "Enter your registration number assigned to you during registration. This number is used for identification and verification.",
-        "error": {
-          "required": "enter without extra characters"
-        }
-      },
-      "registration_date": {
-        "title": "Registration date",
-        "default_value": "22.09.2023",
-        "description": "Enter your registration date in the format DD.MM.YYYY. Make sure the data matches official documents.",
-        "error": {
-          "required": "invalid format, enter in the format dd.mm.yyyy: 22.09.2023"
-        }
-      },
-      "PNFL": {
-        "title": "PNFL",
-        "default_value": "12345678901234",
-        "description": "Personal identification number of an individual. Enter a valid PNFL as it is required for data verification.",
-        "error": {
-          "required": "invalid format, must be 14 characters"
-        }
-      },
-      "entity": {
-        "title": "Company name",
-        "default_value": "Legal entity name",
-        "description": "Enter the full official name of your company according to registration documents. This is necessary for correct payment and document processing.",
-        "error": {
-          "required": "field cannot be empty"
-        }
-      },
-      "address": {
-        "title": "Legal address",
-        "default_value": "Legal address",
-        "description": "Enter the address where your company is registered. It may differ from the actual place of business, but must match the registration documents.",
-        "error": {
-          "required": "field cannot be empty"
-        }
-      },
-      "INN": {
-        "title": "INN",
-        "default_value": "123456789",
-        "description": "Enter the taxpayer identification number (INN) of your company or individual entrepreneur. This number is used for tax accounting and organization identification.",
-        "error": {
-          "required": "invalid format, must be 9 characters"
-        }
-      },
-      "individual": {
-        "title": "IE name",
-        "default_value": "IE name",
-        "description": "Enter the full name of the individual entrepreneur as indicated in the registration documents. This name is used for identification in legal and financial documents.",
-        "error": {
-          "required": "field cannot be empty"
-        }
-      }
-    },
-    "bank_data": {
-      "bank_data": "Bank details",
-      "bank_mfo": {
-        "title": "Bank MFO",
-        "default_value": "12345",
-        "description": "Enter the bank's interbranch turnover code (MFO) where your account is opened. This code is used for payment processing.",
-        "error": {
-          "required": "invalid format, must be 5 characters"
-        }
-      },
-      "bank_name": {
-        "title": "Bank name",
-        "default_value": "Bank name",
-        "description": "Enter the official name of the bank where your account is opened. This is important for correct crediting of funds to your account.",
-        "error": {
-          "required": "field cannot be empty"
-        }
-      },
-      "checking_account": {
-        "title": "Checking account",
-        "default_value": "12345678901234567890",
-        "description": "Enter the checking account number opened in your name or your organization's name at the bank. This account is used for transferring funds and other financial operations related to your activity.",
-        "error": {
-          "required": "invalid format, must be 20 characters"
-        }
-      },
-      "transit_account": {
-        "title": "Transit account",
-        "default_value": "12345678901234567890",
-        "description": "Enter your transit account number if required for transferring funds. This account is used for payment processing and may differ from your checking account.",
-        "error": {
-          "required": "invalid format, must be 20 characters"
-        }
-      },
-      "card_number": {
-        "title": "Card details",
-        "default_value": "9860123412341234",
-        "description": "Enter your bank card number without spaces. Be careful when entering, as an error in the number may result in payment rejection.",
-        "error": {
-          "required": "invalid format, must be 16 characters"
-        }
-      },
-      "card_date": {
-        "title": "Card expiry date",
-        "default_value": "mm/yy",
-        "description": "Enter your card's expiry date in the format MM/YY (month/year). This information is required for transaction processing and card validation.",
-        "error": {
-          "required": "enter date in format - mm/yy: 09/23"
-        }
-      }
-    },
-    "contact": {
-      "contact": "Contact details",
-      "phone": {
-        "title": "Phone number",
-        "default_value": "+998909000123",
-        "description": "Enter your valid phone number in international format. This number may be used for communication and payment confirmation.",
-        "error": {
-          "required": "enter phone number in the correct format"
-        }
-      },
-      "email": {
-        "title": "E-mail",
-        "default_value": "sample@gmail.com",
-        "description": "Enter your current email address. Important notifications about payment status and other messages may be sent to this email.",
-        "error": {
-          "required": "invalid email address"
-        }
-      }
-    },
-    "accept": {
-      "text1": "I confirm the accuracy of the data, I have read and accept the",
-      "span1": "service terms",
-      "and": "and",
-      "span2": "offer rules",
-      "text2": "and accept them."
-    }
-  },
-
-  "service_rules_page": {
-    "title": "Service Rules"
-  },
   "public_offer_page": {
     "title": "Public offer"
+  },
+  "service_rules_page": {
+    "title": "Service Rules"
   },
   "pdf_previewer": {
     "page": "Page",
@@ -3413,17 +3470,14 @@
       "fail": "Failed to load agreement"
     }
   },
-
   "documents_page": {
     "title": "Documents",
     "description": "List of documents for viewing and signing in the Didox system.",
-
     "tabs": {
       "inbox": "Inbox",
       "outbox": "Outbox",
       "draft": "Drafts"
     },
-
     "card": {
       "contract": {
         "label": "Contract number and date"
@@ -3439,6 +3493,30 @@
         "vat": "VAT amount",
         "withVat": "Total cost (including VAT)"
       }
+    }
+  },
+  "home": {
+    "title": "Admin panel",
+    "text": "Welcome! Here you can manage the main features of the platform.",
+    "channels": {
+      "title": "",
+      "text": "Create, edit, and delete channels. Full control is yours!"
+    },
+    "users": {
+      "title": "Users",
+      "text": "Monitor user activity, moderate accounts, and manage permissions."
+    },
+    "transactions": {
+      "title": "Transactions",
+      "text": "Monitor financial operations, verify payments, and control the flow of funds."
+    },
+    "reviews": {
+      "title": "Feedback",
+      "text": "Analyze user reviews, manage comments, and improve the service."
+    },
+    "complaints": {
+      "title": "Complaints",
+      "text": "Review user complaints, respond to issues, and ensure a fair platform."
     }
   }
 }
