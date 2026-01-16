@@ -23,8 +23,8 @@ const convertGMTToLocal = (gmtDateTime: string): string => {
       parseInt(month, 10) - 1, // месяцы в JS начинаются с 0
       parseInt(day, 10),
       parseInt(hours, 10),
-      parseInt(minutes, 10)
-    )
+      parseInt(minutes, 10),
+    ),
   );
 
   // Получаем локальное время

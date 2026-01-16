@@ -4,7 +4,7 @@
 
   .bar {
     display: grid;
-    grid-template-columns: repeat(5, 1fr) 80px;
+    grid-template-columns: 1.6fr 0.5fr 0.5fr 0.8fr 1fr;
     column-gap: 20px;
     padding: 15px 20px;
     min-height: 70px;

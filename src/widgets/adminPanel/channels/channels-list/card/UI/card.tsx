@@ -10,6 +10,7 @@ import { CardButtons } from "./card-buttons";
 import { CardContent } from "./card-content";
 import { CardTrigger } from "./card-trigger";
 import styles from "./styles.module.scss";
+import { Link } from "react-router-dom";
 
 interface ChannelCardProps {
   card: IAdminChannelData;
@@ -56,6 +57,16 @@ export const ChannelCard: FC<ChannelCardProps> = ({
       <AccordionContent className={styles.content}>
         {!!channel && (
           <>
+            {channel?.url && (
+              <Link
+                to={channel.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:scale-[1.01] hover:bg-sky-100 transition-all duration-300 block bg-sky-50 rounded-lg text-start text-sm font-medium px-4 py-2 text-[var(--URL)]"
+              >
+                {channel.url}
+              </Link>
+            )}
             <CardContent channel={channel} />
             <SelectDescription
               onChange={setValue}
