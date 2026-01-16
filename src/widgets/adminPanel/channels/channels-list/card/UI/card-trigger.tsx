@@ -3,7 +3,7 @@ import {
   ADMIN_CHANNEL_STATUS_LIST,
   IAdminChannelData,
 } from "@entities/admin-panel";
-import { platformTypes } from "@entities/platform";
+import { platformToIcon } from "@entities/project";
 import { ChannelCardMenu } from "@features/admin-panel";
 import { useCopyLink } from "@shared/hooks";
 import { AccordionTrigger, AccountsLoader } from "@shared/ui";
@@ -66,12 +66,12 @@ export const CardTrigger: FC<ICardTriggerProps> = ({
         </p>
       </div>
       <div className={styles.column}>
-        <p>
-          {t(
-            platformTypes.find((item) => item.id === card?.channel?.platform)
-              ?.name || "",
-          )}
-        </p>
+        {card?.channel?.platform &&
+        card?.channel?.platform in platformToIcon ? (
+          <div className="w-[26px] h-[26px] flex items-center justify-center [&_svg]:w-[26px] [&_svg]:h-[26px]">
+            {platformToIcon[card.channel.platform]()}
+          </div>
+        ) : null}
       </div>
       <div className={styles.column}>
         <p>{card?.created}</p>
