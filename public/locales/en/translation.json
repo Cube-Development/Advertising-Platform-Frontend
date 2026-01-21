@@ -1376,6 +1376,7 @@
         "project": "Project Notifications",
         "individual": "Individual Offers and Promo Mailings",
         "enable_notifications": "Do you want to connect a Telegram bot for notifications?",
+        "notification_link_button": "Get notifications in telegram",
         "telegramm": {
           "title": "Enter Your Telegram Account",
           "default_value": "Sample@gmail.com"
