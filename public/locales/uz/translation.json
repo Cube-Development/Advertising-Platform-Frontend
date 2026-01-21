@@ -1376,6 +1376,7 @@
         "project": "Loyihalar bo'yicha bildirishnomalar",
         "individual": "Shaxsiy takliflar va promo xabarlar",
         "enable_notifications": "Telegram bot orqali bildirishnomalarni yoqishni xohlaysizmi?",
+        "notification_link_button": "Telegram orqali bildirishnomalarni olish",
         "telegramm": {
           "title": "Telegram akkauntingizni kiriting",
           "default_value": "Sample@gmail.com"
