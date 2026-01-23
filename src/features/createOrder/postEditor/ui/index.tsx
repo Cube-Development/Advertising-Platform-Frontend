@@ -348,7 +348,6 @@ export const Editor: FC<EditorProps> = ({
     range.deleteContents();
 
     // тост при вставке
-    alert(t("create_order.create.paste_text"));
     toast({
       variant: "warning",
       title: t("create_order.create.paste_text"),

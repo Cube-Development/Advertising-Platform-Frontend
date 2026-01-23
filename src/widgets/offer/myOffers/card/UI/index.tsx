@@ -28,6 +28,7 @@ interface OfferCardProps {
 export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
   const { t } = useTranslation();
   const { toast } = useToast();
+  const hasChat = OFFER_CHAT_LIST.includes(statusFilter as ENUM_OFFER_STATUS);
 
   const { data: post, error } = useGetPostQuery({ order_id: card?.id });
 
@@ -40,7 +41,7 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
   }
   return (
     <div
-      className={`${styles.card} ${statusFilter === ENUM_OFFER_STATUS.ACTIVE ? styles.active__chat : ""} border__gradient`}
+      className={`${styles.card} ${hasChat ? styles.active__chat : ""} border__gradient`}
     >
       <div className={styles.platform__icon}>
         {card?.platform && card?.platform in platformToIcon
@@ -72,7 +73,7 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
           <p>{card.order_status}</p>
         </div>
       </div>
-      {statusFilter === ENUM_OFFER_STATUS.ACTIVE && (
+      {hasChat && (
         <div className={`${styles.chat__btn} display__hide__min__md`}>
           <Chat orderId={card.id} toRole={ENUM_ROLES.ADVERTISER} />
         </div>
@@ -259,7 +260,7 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
           </button>
         </div>
 
-        {OFFER_CHAT_LIST.includes(statusFilter as ENUM_OFFER_STATUS) && (
+        {hasChat && (
           <div className={`${styles.chat__btn} display__hide__max__md`}>
             <Chat orderId={card?.id} toRole={ENUM_ROLES.ADVERTISER} />
           </div>

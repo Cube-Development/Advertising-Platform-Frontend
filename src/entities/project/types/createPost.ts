@@ -96,6 +96,7 @@ export interface IDatetime {
 export interface DateListProps {
   onChange: (dateList: Date[]) => void;
   startDate?: string[] | string | undefined;
+  platform?: platformTypesNum;
 }
 
 export interface TimeListProps {
