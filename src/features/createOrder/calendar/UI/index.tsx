@@ -123,38 +123,14 @@ export const CustomCalendar: FC<DateListProps> = ({
       const dateToCheck = new Date(date);
       dateToCheck.setHours(0, 0, 0, 0);
 
-      // Проверка для Instagram и YouTube - дизейблить ближайшие 3 дня
-      if (
-        platform === platformTypesNum.instagram ||
-        platform === platformTypesNum.youtube
-      ) {
-        const tomorrow = new Date(today);
-        tomorrow.setDate(today.getDate() + 1);
-        const dayAfterTomorrow = new Date(today);
-        dayAfterTomorrow.setDate(today.getDate() + 2);
-        const minSelectableDate = new Date(today);
-        minSelectableDate.setDate(today.getDate() + 3);
-
-        // Дизейблить сегодня, завтра и послезавтра
-        if (
-          dateToCheck.toDateString() === today.toDateString() ||
-          dateToCheck.toDateString() === tomorrow.toDateString() ||
-          dateToCheck.toDateString() === dayAfterTomorrow.toDateString() ||
-          dateToCheck < minSelectableDate
-        ) {
-          return styles.disabledDate;
-        }
-      } else {
-        // Для Telegram и других платформ - текущая логика
-        const minSelectableDate = new Date();
-        minSelectableDate.setDate(
-          new Date().getDate() + ENUM_CALENDAR.disabledDays,
-        );
-        if (dateToCheck < minSelectableDate) {
-          return styles.disabledDate;
-        }
+      const minSelectableDate = new Date();
+      minSelectableDate.setDate(
+        new Date().getDate() + ENUM_CALENDAR.disabledDays,
+      );
+      if (dateToCheck < minSelectableDate) {
+        return styles.disabledDate;
       }
-
+      
       // Проверка статических дизейбленных дат
       if (
         disabledDates.some(
