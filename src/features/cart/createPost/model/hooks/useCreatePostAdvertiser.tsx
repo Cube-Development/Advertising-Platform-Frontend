@@ -18,9 +18,9 @@ export const useCreatePostAdvertiser = () => {
     useCreateProjectCartMutation();
   const { toast } = useToast();
   const navigate = useNavigate();
-  const projectId = Cookies.get(ENUM_COOKIES_TYPES.PROJECT_ID) || "";
   const language = useFindLanguage();
   const createPostAdvertiser = async () => {
+    const projectId = Cookies.get(ENUM_COOKIES_TYPES.PROJECT_ID) || "";
     if (isLoadingCreate || isLoadingCreateProject) return;
 
     try {
@@ -32,7 +32,9 @@ export const useCreatePostAdvertiser = () => {
         }).unwrap();
       } else {
         const data = await createCart().unwrap();
-        Cookies.set(ENUM_COOKIES_TYPES.PROJECT_ID, data.project_id);
+        Cookies.set(ENUM_COOKIES_TYPES.PROJECT_ID, data.project_id, {
+          path: "/",
+        });
       }
 
       navigate(ENUM_PATHS.CREATE_ORDER);

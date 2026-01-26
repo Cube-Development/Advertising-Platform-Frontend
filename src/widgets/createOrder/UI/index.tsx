@@ -19,8 +19,10 @@ import {
   useCreateOrderForm,
   useCreateOrderLoad,
   useOnSubmitPayment,
+  useSyncExternalFields,
 } from "../model";
 import { ENUM_ROLES } from "@entities/user";
+import { useVoiceAgentOrderObserver } from "@widgets/voice-agent/model/hooks/use-voice-agent-order-observer";
 
 interface CreateOrderBlockProps {}
 
@@ -49,11 +51,20 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
       projectId,
     });
 
+  useVoiceAgentOrderObserver({
+      campaignName: formState.name,
+      totalPrice: totalPrice?.amount,
+      isCartEmpty: !projectChannels?.orders?.length,
+      blur,
+  });
+
+  useSyncExternalFields({ formState, setValue });
+
   const { checkBalance } = useCheckBalance(
     formState?.wallet_type,
     totalPrice?.amount,
   );
-
+  console.log("formState", formState);
   const onSubmit: SubmitHandler<ICreatePostForm> = async (formData) => {
     if (
       projectId &&

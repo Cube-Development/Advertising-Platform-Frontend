@@ -22,7 +22,7 @@ export const EditProject: FC<EditProjectProps> = ({ project_id }) => {
   const handleOnClick = () => {
     dispatch(managerCartAPI.util.invalidateTags([CART_MANAGER]));
     dispatch(authCartAPI.util.invalidateTags([CART]));
-    Cookies.set(ENUM_COOKIES_TYPES.PROJECT_ID, project_id);
+    Cookies.set(ENUM_COOKIES_TYPES.PROJECT_ID, project_id, { path: "/" });
   };
 
   return (

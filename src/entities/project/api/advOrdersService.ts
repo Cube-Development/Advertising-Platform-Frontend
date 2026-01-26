@@ -103,6 +103,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
         method: "POST",
         params: params,
       }),
+      invalidatesTags: [CREATE_PROJECT_NAME],
     }),
     getProjectName: build.query<{ name: string }, { project_id: string }>({
       query: (params) => ({

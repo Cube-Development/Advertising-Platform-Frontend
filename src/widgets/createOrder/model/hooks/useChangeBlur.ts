@@ -1,21 +1,17 @@
-import { useState } from "react";
 import { ICreateOrderBlur } from "../config";
 import { scroller } from "react-scroll";
 import { BREAKPOINT } from "@shared/config";
-import { useWindowWidth } from "@shared/hooks";
+import { useAppDispatch, useAppSelector, useWindowWidth } from "@shared/hooks";
+import { setBlur } from "../slice/createOrderSlice";
 
 export const useChangeBlur = () => {
   const screen = useWindowWidth();
-  const [blur, setBlur] = useState<ICreateOrderBlur>({
-    post: true,
-    datetime: true,
-    prices: true,
-    payment: true,
-  });
+  const dispatch = useAppDispatch();
+  const { blur } = useAppSelector((state) => state.createOrder);
+
   const handleOnChangeBlur = (key: keyof ICreateOrderBlur) => {
-    const newBlur = { ...blur };
-    newBlur[key] = false;
-    setBlur(newBlur);
+    dispatch(setBlur(key));
+
     switch (key) {
       case "post":
         scroller.scrollTo("post", {

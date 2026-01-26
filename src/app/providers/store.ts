@@ -4,6 +4,8 @@ import { walletSlice } from "@entities/wallet";
 import { dropdownMenuSlice } from "@shared/slice";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { authApi, authEcpApi, baseApi, baseEpcApi } from "@shared/api";
+import { createOrderSlice } from "@widgets/createOrder/model";
+import { voiceAgentSyncSlice } from "@widgets/voice-agent/model/slice/sync-slice";
 
 const rootReducer = combineReducers({
   [baseApi.reducerPath]: baseApi.reducer,
@@ -14,6 +16,8 @@ const rootReducer = combineReducers({
   [dropdownMenuSlice.reducerPath]: dropdownMenuSlice.reducer,
   [authEcpApi.reducerPath]: authEcpApi.reducer,
   [baseEpcApi.reducerPath]: baseEpcApi.reducer,
+  [createOrderSlice.name]: createOrderSlice.reducer,
+  [voiceAgentSyncSlice.name]: voiceAgentSyncSlice.reducer,
 });
 
 export const setupStore = () => {

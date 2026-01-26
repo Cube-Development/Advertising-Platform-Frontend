@@ -3,22 +3,32 @@ import { useCallback, useEffect } from "react";
 import { ENUM_VOICE_ACTIONS, IVoiceAgentAction } from "../../types";
 import { useSiteNavigate } from "./use-site-navigate";
 import { useAddToCart } from "./use-add-to-cart";
+import { usePipelineHandler } from "./use-pipeline-handler";
 
 export function useVoiceAgentActions(): void {
   const room = useRoomContext();
 
   const { handleNavigate } = useSiteNavigate();
-  const { handleAddToCart } = useAddToCart();
+  const { handleAddToCart, handleRemoveFromCart } = useAddToCart();
+  const { handlePipeline } = usePipelineHandler();
 
   const handleCheckType = useCallback(
-    async (action: IVoiceAgentAction) => {
-      if (action.action === ENUM_VOICE_ACTIONS.NAVIGATE_USER) {
+    async (action: any) => {
+      console.log("Voice Agent: Action check type:", action);
+
+      if (action.type === "PIPELINE_INTENT") {
+        await handlePipeline(action);
+      } else if (action.action === ENUM_VOICE_ACTIONS.NAVIGATE_USER) {
         await handleNavigate(action.path);
       } else if (action.action === ENUM_VOICE_ACTIONS.ADD_TO_CART) {
-        await handleAddToCart(action.ids);
+        const items = action.channels || action.ids || action.channelIds;
+        await handleAddToCart(items);
+      } else if (action.action === ENUM_VOICE_ACTIONS.REMOVE_FROM_CART) {
+        const items = action.ids || action.channelIds;
+        await handleRemoveFromCart(items);
       }
     },
-    [handleNavigate],
+    [handleNavigate, handleAddToCart, handleRemoveFromCart, handlePipeline],
   );
 
   useEffect(() => {
@@ -28,18 +38,17 @@ export function useVoiceAgentActions(): void {
       const info = (reader as any).info;
       console.log(
         `Received text stream from ${participantInfo.identity}\n` +
-          `  Topic: ${info.topic}\n` +
-          `  Timestamp: ${info.timestamp}\n` +
-          `  ID: ${info.id}\n` +
-          `  Size: ${info.size || "N/A"}`, // Optional, only available if the stream was sent with `sendText`
+        `  Topic: ${info.topic}\n` +
+        `  Timestamp: ${info.timestamp}\n` +
+        `  ID: ${info.id}\n` +
+        `  Size: ${info.size || "N/A"}`,
       );
 
-      // Process the stream incrementally
       (async () => {
         try {
           for await (const chunk of reader) {
-            const data: IVoiceAgentAction = JSON.parse(chunk);
             console.log(`Next chunk: ${chunk}`);
+            const data = JSON.parse(chunk);
             await handleCheckType(data);
           }
           console.log("Agent events stream completed");
@@ -49,10 +58,8 @@ export function useVoiceAgentActions(): void {
       })();
     };
 
-    // Register the handler for the specific topic
     room.registerTextStreamHandler("agent-events", handler);
 
-    // Cleanup function to unregister the handler
     return () => {
       room.unregisterTextStreamHandler("agent-events");
     };

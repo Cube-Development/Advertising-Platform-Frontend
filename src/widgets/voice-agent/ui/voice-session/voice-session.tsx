@@ -16,6 +16,7 @@ import {
 } from "../../model";
 import { ChatTranscript } from "../chat-transcript";
 import { SessionControls } from "../session-controls";
+import { useVoiceAgentStateEmitter } from "@widgets/voice-agent/model/hooks/use-voice-agent-state-emitter";
 
 interface VoiceSessionProps {
   isConnected: boolean;

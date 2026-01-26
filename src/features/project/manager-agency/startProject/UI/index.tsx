@@ -15,7 +15,7 @@ interface StartProjectProps {
 export const StartProject: FC<StartProjectProps> = ({ project_id }) => {
   const { t } = useTranslation();
   const handleOnClick = () => {
-    Cookies.set(ENUM_COOKIES_TYPES.PROJECT_ID, project_id);
+    Cookies.set(ENUM_COOKIES_TYPES.PROJECT_ID, project_id, { path: "/" });
   };
 
   return (

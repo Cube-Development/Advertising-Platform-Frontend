@@ -25,7 +25,9 @@ export const AddAgencyNewProject: FC<AddAgencyNewProjectProps> = () => {
       .unwrap()
       .then((data) => {
         if (data?.project_id) {
-          Cookies.set(ENUM_COOKIES_TYPES.PROJECT_ID, data.project_id);
+          Cookies.set(ENUM_COOKIES_TYPES.PROJECT_ID, data.project_id, {
+            path: "/",
+          });
         }
       })
       .then(() => {
