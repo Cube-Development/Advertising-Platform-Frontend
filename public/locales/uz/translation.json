@@ -1382,7 +1382,8 @@
         },
         "instruction": "Telegram botni sozlash bo'yicha batafsil qo'llanmani o'qish",
         "change_btn": "O'zgartirish",
-        "cancel_btn": "Bekor qilish"
+        "cancel_btn": "Bekor qilish",
+        "notification_link_button": "Telegramda xabar olish"
       },
       "continue_btn": "Davom etish"
     }

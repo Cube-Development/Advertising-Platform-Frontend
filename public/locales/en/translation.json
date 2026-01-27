@@ -1382,7 +1382,8 @@
         },
         "instruction": "Read more detailed instructions on setting up the Telegram bot",
         "change_btn": "Change",
-        "cancel_btn": "Cancel"
+        "cancel_btn": "Cancel",
+        "notification_link_button": "Get notifications in Telegram"
       },
       "continue_btn": "Continue"
     }

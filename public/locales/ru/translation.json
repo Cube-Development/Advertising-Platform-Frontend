@@ -1382,7 +1382,8 @@
         },
         "instruction": "Прочитать более подробную инструкцию по настройке телеграм бота",
         "change_btn": "Изменить",
-        "cancel_btn": "Отменить"
+        "cancel_btn": "Отменить",
+        "notification_link_button": "Получать уведомления в Telegram"
       },
       "continue_btn": "Продолжить"
     }
