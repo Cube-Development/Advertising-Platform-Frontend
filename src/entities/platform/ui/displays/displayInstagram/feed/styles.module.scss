@@ -1,3 +1,6 @@
+@use "../../../../../../shared/styles/variables.scss";
+@use "../../../../../../shared/styles/post-content.scss";
+
 .screen_wrapper {
   .screen {
     position: relative;
@@ -230,31 +233,15 @@
           }
 
           &__text {
+            @include post-content.post-content-base;
+            --post-text-color: #fff;
+            --post-code-bg: rgba(255, 255, 255, 0.1);
+            --post-code-color: #f9a8d4;
+            --post-link-color: #3b82f6;
+
             height: 100%;
             width: 100%;
-            font-size: 12px;
             padding: 0px 3%;
-            color: #fff;
-            white-space: pre-wrap;
-            word-break: break-word;
-
-            code {
-              font-family: monospace;
-              background: rgba(255, 255, 255, 0.1);
-              padding: 1px 3px;
-              border-radius: 3px;
-              color: #f9a8d4;
-            }
-
-            b,
-            strong {
-              font-weight: bold;
-            }
-
-            i,
-            em {
-              font-style: italic;
-            }
           }
 
           .info {

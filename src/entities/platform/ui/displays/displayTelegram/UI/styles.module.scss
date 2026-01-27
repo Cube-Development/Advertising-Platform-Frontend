@@ -1,193 +1,178 @@
-.screen_wrapper {
-  .screen {
-    position: relative;
-    overflow: hidden;
-    width: 100%;
-    font-size: 100%;
-    margin: 2%;
+@use "../../../../../../shared/styles/variables.scss";
+@use "../../../../../../shared/styles/post-content.scss";
 
-    .time {
-      position: absolute;
-      top: 3.5%;
-      left: 15%;
-      z-index: 1;
+.screen_wrapper {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  font-size: 100%;
+  margin: 2%;
+
+  .time {
+    position: absolute;
+    top: 3.5%;
+    left: 15%;
+    z-index: 1;
+    font-weight: 500;
+    color: #fff;
+    font-size: 14px;
+  }
+
+  .statusbar {
+    position: absolute;
+    top: 4%;
+    right: 10%;
+    z-index: 1;
+    width: 20%;
+  }
+
+  .dynamic {
+    position: absolute;
+    top: 2.5%;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 1;
+    width: 30%;
+  }
+
+  .back {
+    position: absolute;
+    top: 8%;
+    left: 5%;
+    z-index: 1;
+    width: 15%;
+  }
+
+  .channel {
+    display: grid;
+    justify-items: center;
+    position: absolute;
+    top: 7.5%;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 1;
+
+    &__name {
+      font-size: 12px;
       font-weight: 500;
       color: #fff;
-      font-size: 14px;
     }
 
-    .statusbar {
-      position: absolute;
-      top: 4%;
-      right: 10%;
-      z-index: 1;
-      width: 20%;
+    &__subs {
+      font-size: 10px;
+      font-weight: 400;
+      color: #909090;
     }
+  }
 
-    .dynamic {
-      position: absolute;
-      top: 2.5%;
-      left: 50%;
-      transform: translate(-50%);
-      z-index: 1;
-      width: 30%;
-    }
+  .avatar {
+    position: absolute;
+    top: 7.5%;
+    right: 5%;
+    z-index: 1;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    background: #fff;
+  }
 
-    .back {
-      position: absolute;
-      top: 8%;
-      left: 5%;
-      z-index: 1;
-      width: 15%;
-    }
+  .unmute {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translate(-50%);
+    z-index: 1;
+    font-size: 14px;
+    font-weight: 500;
+    color: #1269a3;
+  }
 
-    .channel {
-      display: grid;
-      justify-items: center;
-      position: absolute;
-      top: 7.5%;
-      left: 50%;
-      transform: translate(-50%);
-      z-index: 1;
+  .display {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 97.6%;
+    transform: translate(-50%, -50%);
+    width: 94%;
+    padding-top: 80px;
+    padding-bottom: 60px;
+    background: #142530;
+    border-radius: 54px;
 
-      &__name {
-        font-size: 12px;
-        font-weight: 500;
-        color: #fff;
-      }
+    .content {
+      height: 100%;
+      background: url("/images/phoneDisplay/tgbg.png") no-repeat;
+      background-size: cover;
+      padding: 8px;
+      overflow-x: hidden;
+      overflow-y: auto;
+      word-wrap: break-word;
+      overflow-wrap: break-word;
 
-      &__subs {
-        font-size: 10px;
-        font-weight: 400;
-        color: #909090;
-      }
-    }
+      .post {
+        background: #2b4f67;
+        width: 80%;
+        padding: 3px;
+        padding-bottom: 15px;
+        border-radius: 10px 10px 10px 0px;
+        position: relative;
 
-    .avatar {
-      position: absolute;
-      top: 7.5%;
-      right: 5%;
-      z-index: 1;
-      width: 30px;
-      height: 30px;
-      border-radius: 100%;
-      background: #fff;
-    }
+        &__text {
+          @include post-content.post-content-base;
+          --post-text-color: #fff;
+          --post-code-bg: rgba(255, 255, 255, 0.1);
+          --post-code-color: #f7e0fc;
+          --post-link-color: #3075ca;
 
-    .unmute {
-      position: absolute;
-      bottom: 5%;
-      left: 50%;
-      transform: translate(-50%);
-      z-index: 1;
-      font-size: 14px;
-      font-weight: 500;
-      color: #1269a3;
-    }
-
-    .display {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      height: 97.6%;
-      transform: translate(-50%, -50%);
-      width: 94%;
-      padding-top: 80px;
-      padding-bottom: 60px;
-      background: #142530;
-      border-radius: 54px;
-
-      .content {
-        height: 100%;
-        background: url("/images/phoneDisplay/tgbg.png") no-repeat;
-        background-size: cover;
-        padding: 8px;
-        overflow-x: hidden;
-        overflow-y: auto;
-        word-wrap: break-word;
-        overflow-wrap: break-word;
-
-        .post {
-          background: #2b4f67;
-          width: 80%;
-          padding: 3px;
-          padding-bottom: 15px;
-          border-radius: 10px 10px 10px 0px;
-          position: relative;
-
-          &__text {
-            height: 100%;
-            width: 100%;
-            font-size: 14px;
-            padding: 0px 5px;
-            color: #fff;
-            white-space: pre-wrap;
-            word-break: break-word;
-
-            code {
-              font-family: monospace;
-              background: rgba(255, 255, 255, 0.1);
-              padding: 1px 3px;
-              border-radius: 3px;
-              color: #f7e0fc;
-            }
-
-            b,
-            strong {
-              font-weight: bold;
-            }
-
-            i,
-            em {
-              font-style: italic;
-            }
-          }
-
-          .info {
-            position: absolute;
-            bottom: 1.5px;
-            right: 7px;
-            display: grid;
-            grid-auto-flow: column;
-            gap: 5px;
-            align-items: center;
-            justify-content: center;
-            font-size: 8px;
-            color: #bbbbbb;
-          }
+          height: 100%;
+          width: 100%;
+          padding: 0px 5px;
         }
 
-        .buttons {
-          width: 80%;
-          margin-top: 3px;
-          display: grid;
-          gap: 3px;
-
-          a {
-            padding: 7px;
-            border-radius: 10px;
-            background: rgba(87, 132, 161, 0.3);
-            color: #fff;
-            font-size: 12px;
-            font-weight: 500;
-            text-align: center;
-          }
-
-          &:last-child {
-            border-radius: 20px;
-          }
-        }
-
-        .stroke {
+        .info {
           position: absolute;
-          bottom: 10px;
-          left: 50%;
-          transform: translate(-50%);
-          width: 10vw;
-          max-width: 130px;
-          border-bottom: 4px solid #c9c9c9;
+          bottom: 1.5px;
+          right: 7px;
+          display: grid;
+          grid-auto-flow: column;
+          gap: 5px;
+          align-items: center;
+          justify-content: center;
+          font-size: 8px;
+          color: #bbbbbb;
+        }
+      }
+
+      .buttons {
+        width: 80%;
+        margin-top: 3px;
+        display: grid;
+        gap: 3px;
+
+        a {
+          padding: 7px;
+          border-radius: 10px;
+          background: rgba(87, 132, 161, 0.3);
+          color: #fff;
+          font-size: 12px;
+          font-weight: 500;
+          text-align: center;
+        }
+
+        &:last-child {
           border-radius: 20px;
         }
+      }
+
+      .stroke {
+        position: absolute;
+        bottom: 10px;
+        left: 50%;
+        transform: translate(-50%);
+        width: 10vw;
+        max-width: 130px;
+        border-bottom: 4px solid #c9c9c9;
+        border-radius: 20px;
       }
     }
   }

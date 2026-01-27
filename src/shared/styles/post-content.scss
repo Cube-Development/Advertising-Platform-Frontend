@@ -1,0 +1,71 @@
+@mixin post-content-base {
+  // CSS переменные по умолчанию (могут переопределяться родителем)
+  --post-text-color: inherit;
+  --post-link-color: #3b82f6;
+  --post-code-color: #ef4444;
+  --post-code-bg: #f3f4f6;
+
+  color: var(--post-text-color);
+  font-size: inherit;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  word-break: break-word;
+  word-wrap: break-word;
+
+  b,
+  strong {
+    font-weight: bold;
+  }
+
+  i,
+  em {
+    font-style: italic;
+  }
+
+  u {
+    text-decoration: underline;
+  }
+
+  s,
+  strike {
+    text-decoration: line-through;
+  }
+
+  code {
+    font-family: monospace;
+    background: var(--post-code-bg);
+    padding: 2px 4px;
+    border-radius: 3px;
+    color: var(--post-code-color) !important;
+  }
+
+  a {
+    color: var(--post-link-color) !important;
+    text-decoration: underline !important;
+    cursor: pointer !important;
+
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+
+  // Поддержка специфичных классов из внешних редакторов (Notes, Word и т.д.)
+  // Обычно приходят как p.p1, span.s1
+  .p1,
+  .p2,
+  .p3,
+  .p4,
+  .s1,
+  .s2,
+  .s3 {
+    color: inherit !important;
+  }
+
+  br {
+    content: "";
+  }
+}
+
+.post-content {
+  @include post-content-base;
+}

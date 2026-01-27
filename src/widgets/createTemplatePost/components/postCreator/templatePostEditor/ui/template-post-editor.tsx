@@ -5,6 +5,7 @@ import {
   parseMarkdownToHtml,
   isMarkdownText,
 } from "@shared/utils/markdownParser";
+import { sanitizePostHtml } from "@shared/utils/htmlSanitizer";
 import styles from "./styles.module.scss";
 import { Toolbar } from "./toolbar";
 import { CreateTemplateFormData } from "@widgets/createTemplatePost/model/createTemplateFormType";
@@ -53,41 +54,7 @@ export const TemplatePostEditor: FC<TemplatePostEditorProps> = ({
     if (!editorRef.current) return;
 
     const content = editorRef.current.innerHTML;
-    let cleanedContent = content.replace(/(<br\s*\/?>\s*){2,}/g, "<p></p>");
-
-    // Создаем копию контента для сохранения (не трогаем DOM редактора)
-    // ВАЖНО: В редакторе ссылки должны иметь inline стили для правильного отображения
-    // При сохранении мы удаляем inline стили цвета, чтобы компоненты отображения могли применять свои стили
-    // Но в самом редакторе (DOM) ссылки должны сохранять inline стили
-    // Поэтому мы НЕ обновляем DOM редактора, а только сохраняем очищенную версию
-
-    const tempDiv = document.createElement("div");
-    tempDiv.innerHTML = cleanedContent;
-    const allElements = tempDiv.querySelectorAll("*");
-    allElements.forEach((el) => {
-      const element = el as HTMLElement;
-      // Для ссылок сохраняем атрибуты, но удаляем inline стиль цвета (CSS правило применит синий цвет в редакторе)
-      if (element.tagName === "A") {
-        // Убеждаемся, что ссылки имеют правильные атрибуты
-        if (!element.getAttribute("target")) {
-          element.setAttribute("target", "_blank");
-        }
-        if (!element.getAttribute("rel")) {
-          element.setAttribute("rel", "noopener noreferrer");
-        }
-        // Удаляем inline стиль цвета для ссылок при сохранении, чтобы компоненты отображения могли применять свои стили
-        // Но в DOM редактора стили останутся благодаря обработке при вставке
-        element.style.removeProperty("color");
-        // Сохраняем text-decoration
-        if (!element.style.textDecoration) {
-          element.style.textDecoration = "underline";
-        }
-      } else {
-        // Для остальных элементов удаляем inline стиль цвета, чтобы компоненты отображения могли применять свои стили
-        element.style.removeProperty("color");
-      }
-    });
-    cleanedContent = tempDiv.innerHTML;
+    const cleanedContent = sanitizePostHtml(content);
 
     // Проверяем, изменился ли контент
     if (lastContentRef.current === cleanedContent) {
@@ -191,14 +158,11 @@ export const TemplatePostEditor: FC<TemplatePostEditorProps> = ({
         break;
       case "monospace": {
         const selectedText = selection.toString();
-        const span = document.createElement("span");
-        span.style.fontFamily = "monospace";
-        span.style.background = "#f3f4f6";
-        span.style.padding = "2px 4px";
-        span.style.borderRadius = "3px";
-        span.textContent = selectedText;
+        if (!selectedText) return;
+        const code = document.createElement("code");
+        code.textContent = selectedText;
         range.deleteContents();
-        range.insertNode(span);
+        range.insertNode(code);
         updateFormValue();
         return;
       }
@@ -255,8 +219,6 @@ export const TemplatePostEditor: FC<TemplatePostEditorProps> = ({
     links.forEach((link) => {
       link.setAttribute("target", "_blank");
       link.setAttribute("rel", "noopener noreferrer");
-      link.style.color = "#3b82f6";
-      link.style.textDecoration = "underline";
     });
 
     updateFormValue();
@@ -279,36 +241,41 @@ export const TemplatePostEditor: FC<TemplatePostEditorProps> = ({
   };
 
   const insertFormattedText = (text: string) => {
-    const span = document.createElement("span");
+    let el: Node;
 
-    if (format.bold) span.style.fontWeight = "bold";
-    if (format.italic) span.style.fontStyle = "italic";
-
-    const decorations = [];
-    if (format.underline) decorations.push("underline");
-    if (format.strikethrough) decorations.push("line-through");
-    if (decorations.length > 0) {
-      span.style.textDecoration = decorations.join(" ");
+    if (format.bold) {
+      const b = document.createElement("b");
+      b.textContent = text;
+      el = b;
+    } else if (format.italic) {
+      const i = document.createElement("i");
+      i.textContent = text;
+      el = i;
+    } else if (format.underline) {
+      const u = document.createElement("u");
+      u.textContent = text;
+      el = u;
+    } else if (format.strikethrough) {
+      const s = document.createElement("s");
+      s.textContent = text;
+      el = s;
+    } else if (format.monospace) {
+      const code = document.createElement("code");
+      code.textContent = text;
+      el = code;
+    } else {
+      el = document.createTextNode(text);
     }
-
-    if (format.monospace) {
-      span.style.fontFamily = "monospace";
-      span.style.background = "#f3f4f6";
-      span.style.padding = "2px 4px";
-      span.style.borderRadius = "3px";
-    }
-
-    span.textContent = text;
 
     const selection = window.getSelection();
     if (selection && selection.rangeCount > 0) {
       const range = selection.getRangeAt(0);
       range.deleteContents();
-      range.insertNode(span);
+      range.insertNode(el);
 
       // Перемещаем курсор после вставленного текста
-      range.setStartAfter(span);
-      range.setEndAfter(span);
+      range.setStartAfter(el);
+      range.setEndAfter(el);
       selection.removeAllRanges();
       selection.addRange(range);
     }
@@ -331,7 +298,6 @@ export const TemplatePostEditor: FC<TemplatePostEditorProps> = ({
 
     e.preventDefault();
     const pastedText = e.clipboardData?.getData("text/plain");
-    const pastedHtml = e.clipboardData?.getData("text/html");
 
     if (!pastedText) return;
 
@@ -341,105 +307,22 @@ export const TemplatePostEditor: FC<TemplatePostEditorProps> = ({
     const range = selection.getRangeAt(0);
     range.deleteContents();
 
-    // тост при вставке
-    alert(t("create_order.create.paste_text"));
     toast({
       variant: "warning",
       title: t("create_order.create.paste_text"),
     });
 
-    // Если это Markdown, парсим его
-    if (isMarkdownText(pastedText)) {
-      const htmlContent = parseMarkdownToHtml(pastedText);
-      const tempDiv = document.createElement("div");
-      tempDiv.innerHTML = htmlContent;
+    const htmlContent = sanitizePostHtml(
+      e.clipboardData?.getData("text/html") || pastedText,
+    );
+    const tempDiv = document.createElement("div");
+    tempDiv.innerHTML = htmlContent;
 
-      // Обрабатываем все элементы
-      const allElements = tempDiv.querySelectorAll("*");
-      allElements.forEach((el) => {
-        const element = el as HTMLElement;
-        if (element.tagName === "A") {
-          // Для ссылок устанавливаем синий цвет и стили
-          // Важно: сохраняем href если он есть
-          const href = element.getAttribute("href");
-          if (!href && element.textContent) {
-            // Если нет href, но есть текст, создаем ссылку из текста
-            element.setAttribute("href", element.textContent.trim());
-          }
-          element.style.color = "#3b82f6";
-          element.style.textDecoration = "underline";
-          element.setAttribute("target", "_blank");
-          element.setAttribute("rel", "noopener noreferrer");
-        } else {
-          // Устанавливаем черный цвет для всех остальных элементов
-          if (
-            !element.style.color ||
-            element.style.color === "rgb(255, 255, 255)" ||
-            element.style.color === "#ffffff" ||
-            element.style.color === "white"
-          ) {
-            element.style.color = "#000000";
-          }
-        }
-      });
-
-      const fragment = document.createDocumentFragment();
-      while (tempDiv.firstChild) {
-        fragment.appendChild(tempDiv.firstChild);
-      }
-      range.insertNode(fragment);
-    } else if (pastedHtml) {
-      // Если есть HTML, используем его, но очищаем стили цвета
-      const tempDiv = document.createElement("div");
-      tempDiv.innerHTML = pastedHtml;
-
-      // Обрабатываем все элементы
-      const allElements = tempDiv.querySelectorAll("*");
-      allElements.forEach((el) => {
-        const element = el as HTMLElement;
-        if (element.tagName === "A") {
-          // Для ссылок устанавливаем синий цвет и стили
-          // Важно: сохраняем href если он есть
-          const href = element.getAttribute("href");
-          if (!href && element.textContent) {
-            // Если нет href, но есть текст, создаем ссылку из текста
-            element.setAttribute("href", element.textContent.trim());
-          }
-          element.style.color = "#3b82f6";
-          element.style.textDecoration = "underline";
-          element.setAttribute("target", "_blank");
-          element.setAttribute("rel", "noopener noreferrer");
-        } else {
-          // Устанавливаем черный цвет для всех остальных элементов
-          if (
-            !element.style.color ||
-            element.style.color === "rgb(255, 255, 255)" ||
-            element.style.color === "#ffffff" ||
-            element.style.color === "white"
-          ) {
-            element.style.color = "#000000";
-          }
-          // Удаляем background-color если он белый
-          if (
-            element.style.backgroundColor === "rgb(255, 255, 255)" ||
-            element.style.backgroundColor === "#ffffff" ||
-            element.style.backgroundColor === "white"
-          ) {
-            element.style.backgroundColor = "";
-          }
-        }
-      });
-
-      const fragment = document.createDocumentFragment();
-      while (tempDiv.firstChild) {
-        fragment.appendChild(tempDiv.firstChild);
-      }
-      range.insertNode(fragment);
-    } else {
-      // Просто текст
-      const textNode = document.createTextNode(pastedText);
-      range.insertNode(textNode);
+    const fragment = document.createDocumentFragment();
+    while (tempDiv.firstChild) {
+      fragment.appendChild(tempDiv.firstChild);
     }
+    range.insertNode(fragment);
 
     // Перемещаем курсор в конец вставленного контента
     range.collapse(false);
@@ -528,33 +411,13 @@ export const TemplatePostEditor: FC<TemplatePostEditorProps> = ({
         <div
           ref={editorRef}
           contentEditable
+          className={`h-full px-4 overflow-auto bg-transparent focus:outline-none text-base template-editor-content post-content post_pasted_link ${styles.content}`}
           onInput={handleInput}
           onKeyDown={handleKeyDown}
           onPaste={handlePaste}
-          className="h-full px-4 overflow-auto bg-transparent text-black focus:outline-none text-base template-editor-content"
-          style={{ color: "#000000" }}
           suppressContentEditableWarning
           data-placeholder={t("create_order.create.start_typing")}
         />
-        <style>{`
-          .template-editor-content:empty:before {
-            content: attr(data-placeholder);
-            color: #9ca3af;
-            pointer-events: none;
-          }
-          .template-editor-content * {
-            color: #000000 !important;
-          }
-          .template-editor-content a[href],
-          .template-editor-content a {
-            color: #3b82f6 !important;
-            text-decoration: underline !important;
-            cursor: pointer !important;
-          }
-          .template-editor-content a:hover {
-            opacity: 0.8;
-          }
-        `}</style>
         <Toolbar
           format={format}
           onToggleFormat={toggleFormat}

@@ -1,5 +1,6 @@
 @use "reset.scss";
 @use "variables.scss";
+@use "post-content.scss";
 
 @tailwind base;
 @tailwind components;
@@ -833,17 +834,5 @@ body {
 }
 
 .post_pasted_link {
-  p.p3 {
-    color: var(--Personal-colors-White) !important;
-  }
-  p.p4 {
-    color: var(--Personal-colors-White) !important;
-  }
-  span.s1 {
-    color: var(--Personal-colors-White) !important;
-  }
-
-  a {
-    color: var(--URL) !important;
-  }
+  @include post-content.post-content-base;
 }

@@ -14,6 +14,7 @@ import styles from "./styles.module.scss";
 import { Toolbar } from "./toolbar";
 import { useTranslation } from "react-i18next";
 import { toast } from "@shared/ui";
+import { sanitizePostHtml } from "@shared/utils/htmlSanitizer";
 
 interface TextFormat {
   bold?: boolean;
@@ -92,114 +93,11 @@ export const Editor: FC<EditorProps> = ({
   const savedSelectionRef = useRef<Range | null>(null);
   const limit = POST.POST_LENGTH;
 
-  const sanitizeHtml = (html: string): string => {
-    if (!html) return "";
-
-    const tempDiv = document.createElement("div");
-    tempDiv.innerHTML = html.replace(/<p><\/p>/g, "<br>"); // Убираем пустые параграфы
-
-    const walk = (node: Node): string => {
-      if (node.nodeType === Node.TEXT_NODE) {
-        return node.textContent || "";
-      }
-
-      if (node.nodeType !== Node.ELEMENT_NODE) {
-        return "";
-      }
-
-      const el = node as HTMLElement;
-      let tag = el.tagName.toLowerCase();
-      const isBlock = ["div", "p", "section", "article"].includes(tag);
-
-      let content = "";
-      for (const child of Array.from(el.childNodes)) {
-        const childContent = walk(child);
-        if (!childContent) continue;
-
-        const childTag =
-          child.nodeType === Node.ELEMENT_NODE
-            ? (child as HTMLElement).tagName.toLowerCase()
-            : "";
-        const isChildBlock = ["div", "p", "section", "article"].includes(
-          childTag,
-        );
-
-        if (isChildBlock && content && !content.endsWith("<br>")) {
-          content += "<br>";
-        }
-        content += childContent;
-      }
-
-      if (isBlock) {
-        if (!content || content === "<br>") return "<br>";
-        return content.endsWith("<br>") ? content : content + "<br>";
-      }
-
-      // Разрешенные теги
-      const allowedTags = [
-        "b",
-        "strong",
-        "i",
-        "em",
-        "u",
-        "s",
-        "strike",
-        "code",
-        "a",
-        "br",
-      ];
-      if (allowedTags.includes(tag)) {
-        // Конвертируем strong/em в b/i для чистоты
-        if (tag === "strong") tag = "b";
-        if (tag === "em") tag = "i";
-        if (tag === "strike") tag = "s";
-
-        if (tag === "a") {
-          const href = el.getAttribute("href");
-          return href ? `<a href="${href}">${content}</a>` : content;
-        }
-
-        if (tag === "br") return "<br>";
-
-        return content ? `<${tag}>${content}</${tag}>` : "";
-      }
-
-      // Если тег не разрешен, но имеет стили, пробуем вытащить смысл
-      if (tag === "span") {
-        if (el.style.fontWeight === "bold" || el.style.fontWeight === "700") {
-          return content ? `<b>${content}</b>` : "";
-        }
-        if (el.style.fontStyle === "italic") {
-          return content ? `<i>${content}</i>` : "";
-        }
-        if (el.style.fontFamily?.includes("monospace")) {
-          return content ? `<code>${content}</code>` : "";
-        }
-        if (el.style.textDecoration?.includes("underline")) {
-          return content ? `<u>${content}</u>` : "";
-        }
-        if (el.style.textDecoration?.includes("line-through")) {
-          return content ? `<s>${content}</s>` : "";
-        }
-      }
-
-      // Для всех остальных тегов просто возвращаем их текстовое содержимое без тега
-      return content;
-    };
-
-    let result = walk(tempDiv);
-
-    // Финальная чистка
-    return result
-      .replace(/(<br>){3,}/g, "<br><br>") // Максимум один пустой ряд
-      .trim();
-  };
-
   const updateFormValue = useCallback(() => {
     if (!editorRef.current) return;
 
     const rawContent = editorRef.current.innerHTML;
-    const cleanedContent = sanitizeHtml(rawContent);
+    const cleanedContent = sanitizePostHtml(rawContent);
 
     if (lastContentRef.current === cleanedContent) {
       return;
@@ -211,7 +109,7 @@ export const Editor: FC<EditorProps> = ({
       // Отрезаем по тексту, но это грубо. Просто игнорируем ввод если лимит превышен?
       // Для простоты оставим как было, но с очищенным контентом
       const truncatedRaw = rawContent.substring(0, limit); // Это некорректно для HTML, но оставим логику проекта
-      lastContentRef.current = sanitizeHtml(truncatedRaw);
+      lastContentRef.current = sanitizePostHtml(truncatedRaw);
       return;
     }
 
@@ -439,11 +337,13 @@ export const Editor: FC<EditorProps> = ({
     let contentToInsert: string;
 
     if (isMarkdownText(pastedText)) {
-      contentToInsert = sanitizeHtml(parseMarkdownToHtml(pastedText));
+      contentToInsert = sanitizePostHtml(parseMarkdownToHtml(pastedText));
     } else if (pastedHtml) {
-      contentToInsert = sanitizeHtml(pastedHtml);
+      contentToInsert = sanitizePostHtml(pastedHtml);
     } else {
-      contentToInsert = pastedText.replace(/\n/g, "<br>");
+      // Для чистого текста просто меняем переносы строк на <br>
+      // и очищаем от возможных лишних пробелов, которые pre-wrap отобразит
+      contentToInsert = pastedText.trim().replace(/\r?\n/g, "<br>");
     }
 
     const tempDiv = document.createElement("div");
@@ -539,47 +439,13 @@ export const Editor: FC<EditorProps> = ({
           onInput={handleInput}
           onKeyDown={handleKeyDown}
           onPaste={handlePaste}
-          className="min-h-[200px] h-full px-4 overflow-auto bg-transparent text-black focus:outline-none text-base template-editor-content"
+          className="min-h-[200px] h-full px-4 overflow-auto bg-transparent text-black focus:outline-none text-base template-editor-content post_pasted_link"
           style={{ color: "#000000" }}
           suppressContentEditableWarning
           data-placeholder={
             placeholder || t("create_order.create.start_typing")
           }
         />
-        <style>{`
-          .template-editor-content:empty:before {
-            content: attr(data-placeholder);
-            color: #9ca3af;
-            pointer-events: none;
-          }
-          .template-editor-content code {
-            font-family: monospace;
-            background: #f3f4f6;
-            padding: 2px 4px;
-            border-radius: 3px;
-            color: #ef4444 !important; /* Выделим код красным для контраста в редакторе */
-          }
-          .template-editor-content b, .template-editor-content strong {
-            font-weight: bold;
-          }
-          .template-editor-content i, .template-editor-content em {
-            font-style: italic;
-          }
-          .template-editor-content u {
-            text-decoration: underline;
-          }
-          .template-editor-content s, .template-editor-content strike {
-            text-decoration: line-through;
-          }
-          .template-editor-content a {
-            color: #3b82f6 !important;
-            text-decoration: underline !important;
-            cursor: pointer !important;
-          }
-          .template-editor-content a:hover {
-            opacity: 0.8;
-          }
-        `}</style>
         <Toolbar
           format={format}
           onToggleFormat={toggleFormat}

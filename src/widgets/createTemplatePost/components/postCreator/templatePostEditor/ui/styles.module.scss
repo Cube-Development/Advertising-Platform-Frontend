@@ -25,3 +25,11 @@
     }
   }
 }
+
+.content {
+  color: #000;
+
+  &[contenteditable="true"] {
+    cursor: text;
+  }
+}
