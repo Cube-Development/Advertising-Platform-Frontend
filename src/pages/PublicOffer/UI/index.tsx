@@ -5,9 +5,7 @@ import styles from "./styles.module.scss";
 import { CustomTitle, PdfPreview } from "@shared/ui";
 import { useTranslation } from "react-i18next";
 
-const url =
-  import.meta.env.VITE_PUBLIC_OFFER_FILE_URL ||
-  "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrwPCHaRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h";
+const url = import.meta.env.VITE_PUBLIC_OFFER_FILE_URL;
 
 export const PublicOfferPage: FC = () => {
   useClearCookiesOnPage();
