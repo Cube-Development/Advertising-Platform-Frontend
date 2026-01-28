@@ -69,16 +69,23 @@ export const CreditCard: FC = () => {
       payment = click;
     }
 
+    // Открываем окно СИНХРОННО до await — иначе Safari блокирует
+    const newWindow = window.open("about:blank", "_blank");
+
     try {
       const url = await payment({
         amount: formatWithOutSpaces(data?.amount?.toString()),
       }).unwrap();
-      if (url) {
-        window.open(url, "_blank"); // открытие в новой вкладке
+
+      if (url && newWindow) {
+        newWindow.location.href = url;
+      } else if (newWindow) {
+        newWindow.close();
       }
       reset();
     } catch (error) {
       console.log("[On Submit] error: ", error);
+      newWindow?.close();
     }
   };
 
