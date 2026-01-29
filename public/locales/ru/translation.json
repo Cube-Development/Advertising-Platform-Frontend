@@ -1375,15 +1375,15 @@
         "system": "Системные сообщения",
         "project": "Уведомления о проектах",
         "individual": "Индивидуальные предложения и промо рассылки",
-        "enable_notifications": "Хотите подключить телеграм бота для уведомлений ?",
+        "enable_notifications": "Хотите подключить телеграм бота для уведомлений?",
+        "notification_link_button": "Получать уведомления в телеграм",
         "telegramm": {
           "title": "Введите ваш телеграм аккаунт",
           "default_value": "Sample@gmail.com"
         },
         "instruction": "Прочитать более подробную инструкцию по настройке телеграм бота",
         "change_btn": "Изменить",
-        "cancel_btn": "Отменить",
-        "notification_link_button": "Получать уведомления в Telegram"
+        "cancel_btn": "Отменить"
       },
       "continue_btn": "Продолжить"
     }

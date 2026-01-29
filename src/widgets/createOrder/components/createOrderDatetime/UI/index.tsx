@@ -80,6 +80,7 @@ export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
             {cards?.map((card, index) => (
               <OrderCard
                 card={card}
+                cards={cards}
                 key={index}
                 CustomCalendar={CustomCalendar}
                 TimeList={TimeList}
