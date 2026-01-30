@@ -8,10 +8,10 @@ import { updateVoiceSyncState } from "../slice/sync-slice";
  * Should be called in a top-level component.
  */
 export function useVoiceAgentGlobalObserver() {
-    const location = useLocation();
-    const dispatch = useAppDispatch();
+  const location = useLocation();
+  const dispatch = useAppDispatch();
 
-    useEffect(() => {
-        dispatch(updateVoiceSyncState({ activeScreen: location.pathname }));
-    }, [location.pathname, dispatch]);
+  useEffect(() => {
+    dispatch(updateVoiceSyncState({ activeScreen: location.pathname }));
+  }, [location.pathname, dispatch]);
 }

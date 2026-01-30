@@ -38,10 +38,10 @@ export function useVoiceAgentActions(): void {
       const info = (reader as any).info;
       console.log(
         `Received text stream from ${participantInfo.identity}\n` +
-        `  Topic: ${info.topic}\n` +
-        `  Timestamp: ${info.timestamp}\n` +
-        `  ID: ${info.id}\n` +
-        `  Size: ${info.size || "N/A"}`,
+          `  Topic: ${info.topic}\n` +
+          `  Timestamp: ${info.timestamp}\n` +
+          `  ID: ${info.id}\n` +
+          `  Size: ${info.size || "N/A"}`,
       );
 
       (async () => {

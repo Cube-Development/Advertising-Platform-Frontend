@@ -52,10 +52,10 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
     });
 
   useVoiceAgentOrderObserver({
-      campaignName: formState.name,
-      totalPrice: totalPrice?.amount,
-      isCartEmpty: !projectChannels?.orders?.length,
-      blur,
+    campaignName: formState.name,
+    totalPrice: totalPrice?.amount,
+    isCartEmpty: !projectChannels?.orders?.length,
+    blur,
   });
 
   useSyncExternalFields({ formState, setValue });

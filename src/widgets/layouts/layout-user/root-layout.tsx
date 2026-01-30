@@ -6,7 +6,7 @@ import { useVoiceAgentGlobalObserver } from "@widgets/voice-agent/model/hooks/us
 
 export const RootLayout = () => {
   useVoiceAgentGlobalObserver();
-  
+
   return (
     <MainLayout>
       <Outlet />

@@ -63,18 +63,26 @@ export function useAddToCart() {
 
         let resultCart;
         if (!isAuth && guestId) {
-          resultCart = await addToPublicCart({ ...params, guest_id: guestId }).unwrap();
+          resultCart = await addToPublicCart({
+            ...params,
+            guest_id: guestId,
+          }).unwrap();
         } else if (isAuth && projectId) {
-          resultCart = await addToManagerCart({ ...params, project_id: projectId }).unwrap();
+          resultCart = await addToManagerCart({
+            ...params,
+            project_id: projectId,
+          }).unwrap();
         } else if (isAuth) {
           resultCart = await addToCommonCart(params).unwrap();
         }
 
         if (resultCart) {
-          dispatch(updateVoiceSyncState({
-            isCartEmpty: resultCart.channels.length === 0,
-            totalPrice: resultCart.amount
-          }));
+          dispatch(
+            updateVoiceSyncState({
+              isCartEmpty: resultCart.channels.length === 0,
+              totalPrice: resultCart.amount,
+            }),
+          );
         }
         refetch();
       } catch (error) {
@@ -96,18 +104,26 @@ export function useAddToCart() {
 
         let resultCart;
         if (!isAuth && guestId) {
-          resultCart = await removeFromPublicCart({ ...params, guest_id: guestId }).unwrap();
+          resultCart = await removeFromPublicCart({
+            ...params,
+            guest_id: guestId,
+          }).unwrap();
         } else if (isAuth && projectId) {
-          resultCart = await removeFromManagerCart({ ...params, project_id: projectId }).unwrap();
+          resultCart = await removeFromManagerCart({
+            ...params,
+            project_id: projectId,
+          }).unwrap();
         } else if (isAuth) {
           resultCart = await removeFromCommonCart(params).unwrap();
         }
 
         if (resultCart) {
-          dispatch(updateVoiceSyncState({
-            isCartEmpty: resultCart.channels.length === 0,
-            totalPrice: resultCart.amount
-          }));
+          dispatch(
+            updateVoiceSyncState({
+              isCartEmpty: resultCart.channels.length === 0,
+              totalPrice: resultCart.amount,
+            }),
+          );
         }
         refetch();
       } catch (error) {

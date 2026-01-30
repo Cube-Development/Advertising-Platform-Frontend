@@ -18,7 +18,7 @@ export interface NavigateUserAction extends IBaseVoiceAgentAction {
 export interface AddToCartAction extends IBaseVoiceAgentAction {
   action: ENUM_VOICE_ACTIONS.ADD_TO_CART;
   channels?: any[]; // Новый формат: массив объектов
-  ids?: string[];    // Старый формат: массив строк
+  ids?: string[]; // Старый формат: массив строк
 }
 
 export interface RemoveFromCartAction extends IBaseVoiceAgentAction {
