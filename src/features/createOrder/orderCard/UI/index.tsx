@@ -38,6 +38,7 @@ import styles from "./styles.module.scss";
 
 interface PostPlatformProps {
   card: IPostChannel;
+  cards: IPostChannel[];
   CustomCalendar: FC<DateListProps>;
   TimeList: FC<TimeListProps>;
   setValue: UseFormSetValue<ICreatePostForm>;
@@ -46,6 +47,7 @@ interface PostPlatformProps {
 
 export const OrderCard: FC<PostPlatformProps> = ({
   card,
+  cards,
   CustomCalendar,
   TimeList,
   setValue,
@@ -85,9 +87,14 @@ export const OrderCard: FC<PostPlatformProps> = ({
     currentCard.time_from = timeList[0];
     currentCard.time_to = timeList[1];
 
-    // Присваиваем время всем ордерам, у которых еще нет времени
+    // Присваиваем время всем ордерам той же платформы, у которых еще нет времени
     const updatedOtherCards = cardsWithoutCurrent.map((order) => {
-      if (!order.time_from && !order.time_to) {
+      const orderCard = cards.find((c) => c.id === order.order_id);
+      if (
+        orderCard?.platform === card.platform &&
+        !order.time_from &&
+        !order.time_to
+      ) {
         return {
           ...order,
           time_from: timeList[0],
@@ -122,10 +129,11 @@ export const OrderCard: FC<PostPlatformProps> = ({
       dateTo = formatDateToRuString(dateList[1]);
     }
 
-    // Присваиваем дату всем ордерам, у которых еще нет даты
+    // Присваиваем дату всем ордерам той же платформы, у которых еще нет даты
     const updatedOtherCards = cardsWithoutCurrent.map((order) => {
+      const orderCard = cards.find((c) => c.id === order.order_id);
       const hasNoDate = !order.date && !order.date_from && !order.date_to;
-      if (hasNoDate) {
+      if (orderCard?.platform === card.platform && hasNoDate) {
         const updatedOrder = { ...order };
         if (dateValue) {
           delete updatedOrder.date_from;
@@ -189,6 +197,7 @@ export const OrderCard: FC<PostPlatformProps> = ({
                   ? [selectedDateFrom, selectedDateTo]
                   : undefined
             }
+            platform={card.platform}
           />
         </div>
         <div className={styles.type}>

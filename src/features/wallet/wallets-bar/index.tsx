@@ -9,6 +9,7 @@ import "swiper/css/effect-coverflow";
 import "swiper/css/navigation";
 import { EffectCoverflow, Navigation } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
+import { UnrealizedWallet } from "@features/wallet";
 
 interface IWalletsBarProps {
   walletType: ENUM_WALLETS_TYPE | null;
@@ -111,6 +112,7 @@ export const WalletsBar: FC<IWalletsBarProps> = ({
           </Swiper>
         </div>
       )}
+      <UnrealizedWallet />
     </>
   );
 };

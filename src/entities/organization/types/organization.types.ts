@@ -11,7 +11,7 @@ export interface IGetMyOrganizationResponse {
 
 export interface ICreateOrganizationRequest {
   TIN: string;
-  PINFL: string;
+  PINFL: string | null;
 }
 
 export interface IOrganizationStatus {

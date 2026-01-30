@@ -11,3 +11,4 @@ export * from "./getCommissionAmount";
 export * from "./getCurrentUtcDateTime";
 export * from "./getFileExtension";
 export * from "./queryParams";
+export * from "./message-serializer";

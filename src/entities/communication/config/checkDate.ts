@@ -5,38 +5,47 @@ export const CheckDate = (
   time_from?: string,
   time_to?: string,
 ): boolean => {
-  // Получаем текущую дату и время в Ташкенте (UTC+5)
   const now = new Date();
-  const tashkentTime = new Date(
-    now.toLocaleString("en-US", { timeZone: "Asia/Tashkent" }),
-  );
 
-  // Парсим дату размещения
-  const publishDate = new Date(date_to.split(".").reverse().join("-"));
+  // Получаем дату в Ташкенте в формате YYYY-MM-DD для корректного сравнения
+  const tashkentDateStr = now.toLocaleDateString("en-CA", {
+    timeZone: "Asia/Tashkent",
+  }); // "2026-01-28"
 
-  // Если дата размещения еще не наступила
-  if (publishDate > tashkentTime) {
+  // Получаем время в Ташкенте в формате HH:MM
+  const tashkentTimeStr = now.toLocaleTimeString("en-GB", {
+    timeZone: "Asia/Tashkent",
+    hour: "2-digit",
+    minute: "2-digit",
+    hour12: false,
+  }); // "15:30"
+
+  // Парсим дату размещения в формат YYYY-MM-DD
+  const publishDateStr = date_to.split(".").reverse().join("-"); // "28.01.2026" -> "2026-01-28"
+
+  // Если дата размещения еще не наступила (сравниваем строки)
+  if (publishDateStr > tashkentDateStr) {
     return false;
   }
 
   // Если дата размещения уже прошла (больше чем на день)
-  const dayAfter = new Date(publishDate);
-  dayAfter.setDate(dayAfter.getDate() + 1);
-  if (tashkentTime > dayAfter) {
+  // Вычисляем следующий день
+  const publishDate = new Date(publishDateStr + "T12:00:00"); // T12:00 чтобы избежать проблем с DST
+  publishDate.setDate(publishDate.getDate() + 1);
+  const dayAfterStr = publishDate.toISOString().slice(0, 10); // "YYYY-MM-DD"
+
+  if (tashkentDateStr > dayAfterStr) {
     return false;
   }
 
-  // Если указано время размещения, проверяем его
-  if (time_from && time_to) {
-    const currentTime = tashkentTime.toTimeString().slice(0, 5); // HH:MM формат
-
-    // Если текущее время меньше времени начала размещения
-    if (currentTime < time_from) {
+  // Если указано время размещения, проверяем его (только если сегодня день размещения)
+  if (time_from && time_to && publishDateStr === tashkentDateStr) {
+    // Сравниваем строки времени (работает для формата HH:MM)
+    if (tashkentTimeStr < time_from) {
       return false;
     }
 
-    // Если текущее время больше времени окончания размещения
-    if (currentTime > time_to) {
+    if (tashkentTimeStr > time_to) {
       return false;
     }
   }

@@ -129,6 +129,22 @@ export const channelAPI = authApi.injectEndpoints({
         params: params,
       }),
     }),
+    getChannelByIdForBlogger: build.query<
+      IReadChannelData,
+      {
+        channel_id: string;
+        language: ENUM_LANGUAGES_NUM;
+        user_id?: string;
+        guest_id?: string;
+        project_id?: string;
+      }
+    >({
+      query: (params) => ({
+        url: "/channel-page/blogger",
+        method: "GET",
+        params: params,
+      }),
+    }),
     getReviewsById: build.query<IReviewData, getReviewsByIdReq>({
       query: (params) => ({
         url: "/channel-page/reviews",
@@ -209,6 +225,7 @@ export const {
   useEditChannelMutation,
   useDeleteChannelMutation,
   useGetChannelByIdQuery,
+  useGetChannelByIdForBloggerQuery,
   useGetReviewsByIdQuery,
   useAddReviewMutation,
 } = channelAPI;

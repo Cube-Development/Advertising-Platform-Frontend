@@ -86,6 +86,26 @@
             padding: 0px 3%;
             padding-top: 1.5%;
             color: #fff;
+            white-space: pre-wrap;
+            word-break: break-word;
+
+            code {
+              font-family: monospace;
+              background: rgba(255, 255, 255, 0.1);
+              padding: 1px 3px;
+              border-radius: 3px;
+              color: #fca5a5;
+            }
+
+            b,
+            strong {
+              font-weight: bold;
+            }
+
+            i,
+            em {
+              font-style: italic;
+            }
           }
         }
 

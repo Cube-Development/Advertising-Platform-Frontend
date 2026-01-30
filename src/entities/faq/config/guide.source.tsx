@@ -18,9 +18,9 @@ export const GUIDES_LIST: IGuideCard[] = [
     description: "guides.registration.description",
     guide_id: "95609d5a-fde9-4185-9ad5-f6925849fc17",
     guide_source: {
-      ru: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTChZejJeryLct5n29V8f7Fiaj0sdZxKOCPSpUG",
-      uz: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTChZejJeryLct5n29V8f7Fiaj0sdZxKOCPSpUG",
-      en: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTChZejJeryLct5n29V8f7Fiaj0sdZxKOCPSpUG",
+      ru: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTC3HJFpTqCExk7pcKVAdNmCX1varwyRfSIFhzu",
+      uz: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTC3HJFpTqCExk7pcKVAdNmCX1varwyRfSIFhzu",
+      en: "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTC3HJFpTqCExk7pcKVAdNmCX1varwyRfSIFhzu",
     },
     icon: (
       <UserStar className="md:size-[50px] size-10 stroke-[1px] text-blue-600" />

@@ -69,8 +69,11 @@ export const CreatePost: FC<CreatePostProps> = ({ cart, role }) => {
             <p className={`${styles.finnaly_short}`}>
               {t("cart.create_post.finnaly_short")}:
             </p>
-            <span className="truncate">
+            <span className="truncate flex flex-col md:items-center items-end gap-1">
               {cart?.amount?.toLocaleString()} {t("symbol")}
+              <span className="md:!text-xs mobile-xl:!text-[10px] !text-[8px] !font-medium">
+                *С учетом НДС 12%
+              </span>
             </span>
           </div>
         )}

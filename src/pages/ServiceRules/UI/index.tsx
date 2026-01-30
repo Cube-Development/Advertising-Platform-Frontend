@@ -4,9 +4,7 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
-const url =
-  import.meta.env.VITE_SERVICE_RULES_FILE_URL ||
-  "https://bxbbjhin8f.ufs.sh/f/uMaRQPscWxTCrwPCHaRxlLKdy3GXUtWNTn0VjbiRH4Zfqv5h";
+const url = import.meta.env.VITE_SERVICE_RULES_FILE_URL;
 
 export const ServiceRulesPage: FC = () => {
   useClearCookiesOnPage();

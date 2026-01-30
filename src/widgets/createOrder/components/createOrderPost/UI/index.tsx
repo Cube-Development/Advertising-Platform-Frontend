@@ -132,7 +132,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
 
     if (!isValid) {
       toast({
-        variant: "error",
+        variant: "warning",
         title: t("toasts.create_order.post.empty_error"),
       });
     }

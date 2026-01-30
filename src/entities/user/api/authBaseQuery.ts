@@ -23,6 +23,16 @@ export const authBaseQuery: BaseQueryFn<
 
   // Проверяем на 401 ошибку
   if (result.error && result.error.status === 401) {
+    // Отправляем POST запрос на /auth/logout без авторизации
+    try {
+      await fetch(`${baseUrl}/auth/logout`, {
+        method: "POST",
+        credentials: "include",
+      });
+    } catch (error) {
+      // Игнорируем ошибки при отправке логаута
+    }
+
     // Вызов логаута
     api.dispatch(logout());
     api.dispatch(logoutEcp());

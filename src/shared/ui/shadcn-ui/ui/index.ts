@@ -26,4 +26,6 @@ export * from "./toast";
 export * from "./toaster";
 export * from "./toggle";
 export * from "./tooltip";
+export * from "./textarea";
 export * from "./use-toast";
+export * from "./context-menu";

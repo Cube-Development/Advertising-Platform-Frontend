@@ -50,6 +50,9 @@ export const AddToBasket: FC<IAddToBasketProps> = ({
               {page || isSelected ? <CartMinusIcon /> : <CartPlusIcon />}
             </span>
           </div>
+          <span className="text-[8px] font-semibold -mt-1">
+            *С учетом НДС 12%
+          </span>
           <FormatList
             isSmall={isSmall}
             selectedFormat={selectedFormat}
@@ -90,7 +93,7 @@ export const AddToBasket: FC<IAddToBasketProps> = ({
       </div>
       <div className={styles.price}>
         {selectedFormat?.price?.toLocaleString()} {t("symbol")}
-        {/* {page || isSelected ? <CartMinusIcon /> : <CartPlusIcon />} */}
+        <span className="text-[8px] font-semibold">*С учетом НДС 12%</span>
       </div>
     </MyButton>
   );
