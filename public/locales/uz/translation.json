@@ -2100,6 +2100,28 @@
       "withdraw_all": "Barcha mablag'larni yechib olish"
     }
   },
+  "unrealized_wallet": {
+    "action": {
+      "attention": "Diqqat!",
+      "you_have_money": "Sizda avans hamyoningizda pul mavjud: ",
+      "button": "Ma'lumotlar"
+    },
+    "content": {
+      "title": "Avans hamyoni",
+      "first_title": "Potensial daromad hisobga olingan pul",
+      "first_description": "Bu pul, sizga berilgan, lekin hozircha chiqarib olish mumkin emas",
+      "second_title": "Ushbu summadagi narsalar:",
+      "first_second_description": "aktiv buyurtmalarga to'langan pullar;",
+      "second_second_description": "qabul qilingan, lekin amalga oshirilmagan buyurtmalar;",
+      "third_second_description": "amalga oshirilgan buyurtmalar, lekin siz hech qachon hisob-faktura va akt yubormagan.",
+      "third_title": "Bu pulni qanday olish mumkin?",
+      "third_description": "Pulni foyda hamyoniga o'tkazish uchun sizga kerak:",
+      "third_description_option_1": "aktiv buyurtmalarni to'liq amalga oshirish;",
+      "third_description_option_2": "amalga oshirilgan buyurtmalarga hisob-faktura va akt yuborish;",
+      "third_description_option_3": "hujjatlarning tasdiqlanishini kutish.",
+      "button": "Mening buyurtmalarimga o'tish"
+    }
+  },
   "wallet_history": {
     "wallet_history": "Tranzaksiya tarixi",
     "tab": {
