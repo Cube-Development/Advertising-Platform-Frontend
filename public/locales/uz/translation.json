@@ -22,8 +22,8 @@
       "description": "Balansni pul o‘tkazish orqali qanday to‘ldirish bo'yicha batafsil g'oyalar"
     },
     "add_platform": {
-      "title": "Platformani qanday qo'shish",
-      "description": "Platformani qanday qo'shish bo'yicha batafsil g'oyalar"
+      "title": "Kanalni qanday qo'shish",
+      "description": "Kanalni qanday qo'shish bo'yicha batafsil g'oyalar"
     },
     "topup_balance_card": {
       "title": "Balansni karta orqali qanday to'ldirish",
@@ -34,8 +34,8 @@
       "description": "Pulni qanday qaytarish bo'yicha batafsil g'oyalar"
     },
     "blogger_accept_order": {
-      "title": "Bloger buyurtmani qanday qabul qilish va bajarish",
-      "description": "Bloger buyurtmani qanday qabul qilish va bajarish bo'yicha batafsil g'oyalar"
+      "title": "Reklama buyurtmasini qanday qabul qilish va bajarish kerak",
+      "description": "Reklama buyurtmasini qanday qabul qilib, bajarish kerak bo'yicha batafsil g'oyalar"
     },
     "withdraw_funds": {
       "title": "Pulni qanday yechib olish",
