@@ -2100,6 +2100,28 @@
       "withdraw_all": "Withdraw all funds"
     }
   },
+  "unrealized_wallet": {
+    "action": {
+      "attention": "Attention!",
+      "you_have_money": "You have money on the advance wallet: ",
+      "button": "More"
+    },
+    "content": {
+      "title": "Advance Wallet",
+      "first_title": "Potentially earned money",
+      "first_description": "This is money that is already assigned to you, but is currently unavailable for withdrawal",
+      "second_title": "In this amount, the following are included:",
+      "first_second_description": "payments for active orders that have not yet been completed;",
+      "second_second_description": "pending orders, accepted by us, but not completed;",
+      "third_second_description": "completed orders, for which you have not yet sent an invoice and an act.",
+      "third_title": "How to get this money?",
+      "third_description": "To transfer money to the profit wallet, you need to:",
+      "third_description_option_1": "complete all active orders;",
+      "third_description_option_2": "send an invoice and an act in completed orders;",
+      "third_description_option_3": "wait for the documents to be confirmed.",
+      "button": "Go to my orders"
+    }
+  },
   "wallet_history": {
     "wallet_history": "Transaction History",
     "tab": {
