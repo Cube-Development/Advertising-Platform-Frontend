@@ -2224,7 +2224,12 @@
       "approve": "For Approval",
       "price": "Total Amount:",
       "choose_wallet": "",
-      "description": "Just one last step to launch an effective advertising campaign! Once you pay for the order, channel owners will immediately receive notifications and begin placing your ads."
+      "description": "Just one last step to launch an effective advertising campaign! Once you pay for the order, channel owners will immediately receive notifications and begin placing your ads.",
+      "expired_orders": {
+        "title": "Attention!",
+        "description": "There are expired dates in the project, before launching you need to update the date and time of the post publication",
+        "button": "Edit"
+      }
     },
     "save": "Save Project",
     "loading": {

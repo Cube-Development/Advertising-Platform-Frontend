@@ -2224,7 +2224,12 @@
       "approve": "Kelishishga yuborish",
       "price": "Yakuniy summa:",
       "choose_wallet": "Loyiha to‘lovi uchun hamyon tanlang",
-      "description": "Samarali reklama kampaniyasini boshlash uchun so'nggi qadam qoldi! Buyurtmani to'laganingizdan so'ng, kanal egalari darhol xabardor qilinadi va reklamani joylashtirishni boshlaydilar."
+      "description": "Samarali reklama kampaniyasini boshlash uchun so'nggi qadam qoldi! Buyurtmani to'laganingizdan so'ng, kanal egalari darhol xabardor qilinadi va reklamani joylashtirishni boshlaydilar.",
+      "expired_orders": {
+        "title": "Diqqat!",
+        "description": "Loyihada eskirgan sana va vaqtlar mavjud, ishga tushirishdan oldin postlarining sana va vaqtini yangilang",
+        "button": "Tahrirlash"
+      }
     },
     "save": "Loyihani saqlash",
     "loading": {
