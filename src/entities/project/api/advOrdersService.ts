@@ -504,6 +504,7 @@ export const {
   useGetAdvSavedProjectsQuery,
   useDeleteSavedProjectMutation,
   useGetAdvSubprojectsQuery,
+  useLazyGetAdvSubprojectsQuery,
   useGetAdvManagerProjectsQuery,
   useGetAdvManagerSubprojectsQuery,
   useOrderReportInfoMutation,
