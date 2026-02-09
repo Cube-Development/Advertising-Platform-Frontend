@@ -22,8 +22,8 @@
       "description": "Balansni pul o‘tkazish orqali qanday to‘ldirish bo'yicha batafsil g'oyalar"
     },
     "add_platform": {
-      "title": "Platformani qanday qo'shish",
-      "description": "Platformani qanday qo'shish bo'yicha batafsil g'oyalar"
+      "title": "Kanalni qanday qo'shish",
+      "description": "Kanalni qanday qo'shish bo'yicha batafsil g'oyalar"
     },
     "topup_balance_card": {
       "title": "Balansni karta orqali qanday to'ldirish",
@@ -34,8 +34,8 @@
       "description": "Pulni qanday qaytarish bo'yicha batafsil g'oyalar"
     },
     "blogger_accept_order": {
-      "title": "Bloger buyurtmani qanday qabul qilish va bajarish",
-      "description": "Bloger buyurtmani qanday qabul qilish va bajarish bo'yicha batafsil g'oyalar"
+      "title": "Reklama buyurtmasini qanday qabul qilish va bajarish kerak",
+      "description": "Reklama buyurtmasini qanday qabul qilib, bajarish kerak bo'yicha batafsil g'oyalar"
     },
     "withdraw_funds": {
       "title": "Pulni qanday yechib olish",
@@ -2100,6 +2100,28 @@
       "withdraw_all": "Barcha mablag'larni yechib olish"
     }
   },
+  "unrealized_wallet": {
+    "action": {
+      "attention": "Diqqat!",
+      "you_have_money": "Sizda avans hamyoningizda pul mavjud: ",
+      "button": "Ma'lumotlar"
+    },
+    "content": {
+      "title": "Avans hamyoni",
+      "first_title": "Potensial daromad hisobga olingan pul",
+      "first_description": "Bu pul, sizga berilgan, lekin hozircha chiqarib olish mumkin emas",
+      "second_title": "Ushbu summadagi narsalar:",
+      "first_second_description": "aktiv buyurtmalarga to'langan pullar;",
+      "second_second_description": "qabul qilingan, lekin amalga oshirilmagan buyurtmalar;",
+      "third_second_description": "amalga oshirilgan buyurtmalar, lekin siz hech qachon hisob-faktura va akt yubormagan.",
+      "third_title": "Bu pulni qanday olish mumkin?",
+      "third_description": "Pulni foyda hamyoniga o'tkazish uchun sizga kerak:",
+      "third_description_option_1": "aktiv buyurtmalarni to'liq amalga oshirish;",
+      "third_description_option_2": "amalga oshirilgan buyurtmalarga hisob-faktura va akt yuborish;",
+      "third_description_option_3": "hujjatlarning tasdiqlanishini kutish.",
+      "button": "Mening buyurtmalarimga o'tish"
+    }
+  },
   "wallet_history": {
     "wallet_history": "Tranzaksiya tarixi",
     "tab": {
@@ -2224,7 +2246,12 @@
       "approve": "Kelishishga yuborish",
       "price": "Yakuniy summa:",
       "choose_wallet": "Loyiha to‘lovi uchun hamyon tanlang",
-      "description": "Samarali reklama kampaniyasini boshlash uchun so'nggi qadam qoldi! Buyurtmani to'laganingizdan so'ng, kanal egalari darhol xabardor qilinadi va reklamani joylashtirishni boshlaydilar."
+      "description": "Samarali reklama kampaniyasini boshlash uchun so'nggi qadam qoldi! Buyurtmani to'laganingizdan so'ng, kanal egalari darhol xabardor qilinadi va reklamani joylashtirishni boshlaydilar.",
+      "expired_orders": {
+        "title": "Diqqat!",
+        "description": "Loyihada eskirgan sana va vaqtlar mavjud, ishga tushirishdan oldin postlarining sana va vaqtini yangilang",
+        "button": "Tahrirlash"
+      }
     },
     "save": "Loyihani saqlash",
     "loading": {
@@ -2742,6 +2769,12 @@
           "moderationReject": "Kanal moderatsiyadan o‘tmadi",
           "remoderation": "Kanal qayta moderatsiyaga yuborildi",
           "invalidUrl": "Kanalning havolasi xato"
+        },
+        "channel_verfification_error": {
+          "code_not_found": "Verifikatsiya kodi topilmadi. Kanalingiz tavsifiga kodni qo'shishingiz kerak",
+          "code_expired": "Verifikatsiya kodi vaqtida o'tib ketdi. Sahifani yangilang va qayta urinib ko'ring",
+          "channel_exist": "Bunday kanal allaqachon mavjud. Texnik yordamga murojaat qiling",
+          "code_dont_match": "Verifikatsiya kodi mos kelmadi"
         }
       },
       "create": {

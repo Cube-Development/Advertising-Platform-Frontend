@@ -1,8 +1,9 @@
-import { FC, useState } from "react";
+import { FC, useState, useMemo, useEffect } from "react";
 import { Link, Navigate, useParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Document, Page } from "react-pdf";
 import { GUIDES_LIST } from "@entities/faq";
+import { useGetFileLinkMutation } from "@entities/project";
 import { ENUM_PATHS } from "@shared/routing";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import "@shared/config/pdf";
@@ -11,7 +12,32 @@ export const GuidePage: FC = () => {
   const { guide_id } = useParams();
   const guide = GUIDES_LIST.find((guide) => guide.guide_id === guide_id);
   const [numPages, setNumPages] = useState<number>(0);
+  const [pagesRendered, setPagesRendered] = useState<number>(0);
+  const [fileUrl, setFileUrl] = useState<string | null>(null);
+  const [fileLinkError, setFileLinkError] = useState(false);
   const { t, i18n } = useTranslation();
+  const [getFileLink, { isLoading: isFileLinkLoading }] =
+    useGetFileLinkMutation();
+
+  const filename =
+    guide?.guide_source[i18n.language as keyof typeof guide.guide_source];
+
+  useEffect(() => {
+    if (filename) {
+      setFileUrl(null);
+      setFileLinkError(false);
+      getFileLink({ filename })
+        .unwrap()
+        .then((res) => setFileUrl(res.url))
+        .catch(() => setFileLinkError(true));
+    }
+  }, [filename, getFileLink]);
+
+  const pageWidth = useMemo(() => {
+    const horizontalPadding = window.innerWidth * 0.05;
+    const containerWidth = Math.min(1200, window.innerWidth - 64);
+    return Math.max(containerWidth - horizontalPadding, 0);
+  }, []);
 
   if (!guide) {
     return <Navigate to={ENUM_PATHS.FAQ} />;
@@ -19,13 +45,14 @@ export const GuidePage: FC = () => {
 
   const onDocumentLoadSuccess = ({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
+    setPagesRendered(0);
   };
 
-  const getPageWidth = () => {
-    const horizontalPadding = window.innerWidth * 0.05; // забираем ~5vw с каждой стороны
-    const containerWidth = Math.min(1200, window.innerWidth - 64);
-    return Math.max(containerWidth - horizontalPadding, 0);
+  const onPageRenderSuccess = () => {
+    setPagesRendered((prev) => prev + 1);
   };
+
+  const isFullyRendered = pagesRendered >= numPages && numPages > 0;
 
   return (
     <div className="min-h-screen">
@@ -42,36 +69,54 @@ export const GuidePage: FC = () => {
       </div>
       <div className="container pb-6">
         <div className="mb-10 w-full rounded-2xl shadow-2xl overflow-hidden bg-white border border-gray-200 p-4">
-          <Document
-            file={
-              guide.guide_source[
-                i18n.language as keyof typeof guide.guide_source
-              ]
-            }
-            onLoadSuccess={onDocumentLoadSuccess}
-            loading={
-              <div className="flex justify-center items-center py-20">
-                <Loader2 className="size-8 animate-spin text-blue-600" />
+          {/* Индикатор прогресса рендеринга */}
+          {numPages > 0 && !isFullyRendered && (
+            <div className="mt-[10%]">
+              <div className="flex items-center justify-center gap-2">
+                <Loader2 className="size-16 animate-spin text-blue-600" />
               </div>
-            }
-            error={
-              <div className="flex justify-center items-center py-20 text-red-600">
-                Ошибка загрузки PDF
-              </div>
-            }
-            className="flex flex-col items-center gap-4"
-          >
-            {Array.from(new Array(numPages), (_, index) => (
-              <Page
-                key={`page_${index + 1}`}
-                pageNumber={index + 1}
-                renderTextLayer={false}
-                renderAnnotationLayer={false}
-                width={getPageWidth()}
-                loading=""
-              />
-            ))}
-          </Document>
+            </div>
+          )}
+
+          {(isFileLinkLoading || (!fileUrl && !fileLinkError)) && (
+            <div className="flex justify-center items-center py-20">
+              <Loader2 className="size-8 animate-spin text-blue-600" />
+            </div>
+          )}
+          {fileLinkError && (
+            <div className="flex justify-center items-center py-20 text-red-600">
+              Ошибка получения ссылки на файл
+            </div>
+          )}
+          {fileUrl && (
+            <Document
+              file={fileUrl}
+              onLoadSuccess={onDocumentLoadSuccess}
+              loading={
+                <div className="flex justify-center items-center py-20">
+                  <Loader2 className="size-8 animate-spin text-blue-600" />
+                </div>
+              }
+              error={
+                <div className="flex justify-center items-center py-20 text-red-600">
+                  Ошибка загрузки PDF
+                </div>
+              }
+              className="flex flex-col items-center gap-4"
+            >
+              {Array.from(new Array(numPages), (_, index) => (
+                <Page
+                  key={`page_${index + 1}`}
+                  pageNumber={index + 1}
+                  renderTextLayer={false}
+                  renderAnnotationLayer={false}
+                  width={pageWidth}
+                  onRenderSuccess={onPageRenderSuccess}
+                  loading=""
+                />
+              ))}
+            </Document>
+          )}
         </div>
       </div>
     </div>

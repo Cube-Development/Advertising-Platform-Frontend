@@ -2100,6 +2100,28 @@
       "withdraw_all": "Withdraw all funds"
     }
   },
+  "unrealized_wallet": {
+    "action": {
+      "attention": "Attention!",
+      "you_have_money": "You have money on the advance wallet: ",
+      "button": "More"
+    },
+    "content": {
+      "title": "Advance Wallet",
+      "first_title": "Potentially earned money",
+      "first_description": "This is money that is already assigned to you, but is currently unavailable for withdrawal",
+      "second_title": "In this amount, the following are included:",
+      "first_second_description": "payments for active orders that have not yet been completed;",
+      "second_second_description": "pending orders, accepted by us, but not completed;",
+      "third_second_description": "completed orders, for which you have not yet sent an invoice and an act.",
+      "third_title": "How to get this money?",
+      "third_description": "To transfer money to the profit wallet, you need to:",
+      "third_description_option_1": "complete all active orders;",
+      "third_description_option_2": "send an invoice and an act in completed orders;",
+      "third_description_option_3": "wait for the documents to be confirmed.",
+      "button": "Go to my orders"
+    }
+  },
   "wallet_history": {
     "wallet_history": "Transaction History",
     "tab": {
@@ -2224,7 +2246,12 @@
       "approve": "For Approval",
       "price": "Total Amount:",
       "choose_wallet": "",
-      "description": "Just one last step to launch an effective advertising campaign! Once you pay for the order, channel owners will immediately receive notifications and begin placing your ads."
+      "description": "Just one last step to launch an effective advertising campaign! Once you pay for the order, channel owners will immediately receive notifications and begin placing your ads.",
+      "expired_orders": {
+        "title": "Attention!",
+        "description": "There are expired dates in the project, before launching you need to update the date and time of the post publication",
+        "button": "Edit"
+      }
     },
     "save": "Save Project",
     "loading": {
@@ -2741,7 +2768,13 @@
           "moderation": "The channel is under moderation",
           "moderationReject": "The channel did not pass moderation",
           "remoderation": "The channel has been sent for re-moderation",
-          "invalidUrl": ""
+          "invalidUrl": "Invalid channel URL"
+        },
+        "channel_verfification_error": {
+          "code_not_found": "Verification code not found. You need to add the code to the channel description",
+          "code_expired": "Verification code has expired. Refresh the page and try again",
+          "channel_exist": "Such a channel already exists. Contact technical support for assistance",
+          "code_dont_match": "Verification code does not match"
         }
       },
       "create": {

@@ -1,6 +1,6 @@
 import verificationAnimation from "/animated/verification_lottie.gif";
 import {
-  ENUM_CHANNEL_STATUS_BACKEND,
+  ENUM_VERIFY_CHANNEL_ERROR_STATUS,
   IAddChannelData,
   IAddChannelIdentification,
   IChannelLink,
@@ -57,8 +57,7 @@ export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
     skip: isEdit || identificationParams.link ? true : undefined,
   });
 
-  const [channelVerify, { isLoading, error, isSuccess }] =
-    useChannelVerifyMutation();
+  const [channelVerify, { isLoading }] = useChannelVerifyMutation();
 
   const onSubmit: SubmitHandler<IAddChannelIdentification> = (data) => {
     if (isEdit) {
@@ -89,44 +88,41 @@ export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
         .catch((error) => {
           if (error.status === 400) {
             let text = "toasts.add_platform.link.alert";
-            if (error?.data?.code === ENUM_CHANNEL_STATUS_BACKEND.moderation) {
-              text = "toasts.add_platform.link.channelStatus.moderation";
-            } else if (
-              error?.data?.code === ENUM_CHANNEL_STATUS_BACKEND.active
+            if (
+              error?.data?.code ===
+              ENUM_VERIFY_CHANNEL_ERROR_STATUS.code_not_found
             ) {
-              text = "toasts.add_platform.link.channelStatus.active";
+              text =
+                "toasts.add_platform.link.channel_verfification_error.code_not_found";
             } else if (
-              error?.data?.code === ENUM_CHANNEL_STATUS_BACKEND.inactive
+              error?.data?.code ===
+              ENUM_VERIFY_CHANNEL_ERROR_STATUS.code_expired
             ) {
-              text = "toasts.add_platform.link.channelStatus.inactive";
+              text =
+                "toasts.add_platform.link.channel_verfification_error.code_expired";
             } else if (
-              error?.data?.code === ENUM_CHANNEL_STATUS_BACKEND.banned
+              error?.data?.code ===
+              ENUM_VERIFY_CHANNEL_ERROR_STATUS.channel_exist
             ) {
-              text = "toasts.add_platform.link.channelStatus.banned";
+              text =
+                "toasts.add_platform.link.channel_verfification_error.channel_exist";
             } else if (
-              error?.data?.code === ENUM_CHANNEL_STATUS_BACKEND.moderationReject
+              error?.data?.code ===
+              ENUM_VERIFY_CHANNEL_ERROR_STATUS.code_dont_match
             ) {
-              text = "toasts.add_platform.link.channelStatus.moderationReject";
-            } else if (
-              error?.data?.code === ENUM_CHANNEL_STATUS_BACKEND.remoderation
-            ) {
-              text = "toasts.add_platform.link.channelStatus.remoderation";
-            } else if (
-              error?.data?.code === ENUM_CHANNEL_STATUS_BACKEND.invalidUrl
-            ) {
-              text = "toasts.add_platform.link.channelStatus.invalidUrl";
+              text =
+                "toasts.add_platform.link.channel_verfification_error.code_dont_match";
             } else {
-              text = "toasts.add_platform.link.alert";
+              text = "toasts.add_platform.link.error";
             }
             toast({
               variant: "error",
               title: t(text),
             });
           } else {
-            let text = "toasts.add_platform.link.error";
             toast({
               variant: "error",
-              title: t(text),
+              title: t("toasts.add_platform.link.error"),
             });
           }
         });
