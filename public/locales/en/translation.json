@@ -2768,7 +2768,13 @@
           "moderation": "The channel is under moderation",
           "moderationReject": "The channel did not pass moderation",
           "remoderation": "The channel has been sent for re-moderation",
-          "invalidUrl": ""
+          "invalidUrl": "Invalid channel URL"
+        },
+        "channel_verfification_error": {
+          "code_not_found": "Verification code not found. You need to add the code to the channel description",
+          "code_expired": "Verification code has expired. Refresh the page and try again",
+          "channel_exist": "Such a channel already exists. Contact technical support for assistance",
+          "code_dont_match": "Verification code does not match"
         }
       },
       "create": {

@@ -16,9 +16,11 @@ export const GuidePage: FC = () => {
   const [fileUrl, setFileUrl] = useState<string | null>(null);
   const [fileLinkError, setFileLinkError] = useState(false);
   const { t, i18n } = useTranslation();
-  const [getFileLink, { isLoading: isFileLinkLoading }] = useGetFileLinkMutation();
+  const [getFileLink, { isLoading: isFileLinkLoading }] =
+    useGetFileLinkMutation();
 
-  const filename = guide?.guide_source[i18n.language as keyof typeof guide.guide_source];
+  const filename =
+    guide?.guide_source[i18n.language as keyof typeof guide.guide_source];
 
   useEffect(() => {
     if (filename) {
@@ -70,9 +72,9 @@ export const GuidePage: FC = () => {
           {/* Индикатор прогресса рендеринга */}
           {numPages > 0 && !isFullyRendered && (
             <div className="mt-[10%]">
-                <div className="flex items-center justify-center gap-2">
-                  <Loader2 className="size-16 animate-spin text-blue-600" />
-                </div>
+              <div className="flex items-center justify-center gap-2">
+                <Loader2 className="size-16 animate-spin text-blue-600" />
+              </div>
             </div>
           )}
 
@@ -87,33 +89,33 @@ export const GuidePage: FC = () => {
             </div>
           )}
           {fileUrl && (
-          <Document
-            file={fileUrl}
-            onLoadSuccess={onDocumentLoadSuccess}
-            loading={
-              <div className="flex justify-center items-center py-20">
-                <Loader2 className="size-8 animate-spin text-blue-600" />
-              </div>
-            }
-            error={
-              <div className="flex justify-center items-center py-20 text-red-600">
-                Ошибка загрузки PDF
-              </div>
-            }
-            className="flex flex-col items-center gap-4"
-          >
-            {Array.from(new Array(numPages), (_, index) => (
-              <Page
-                key={`page_${index + 1}`}
-                pageNumber={index + 1}
-                renderTextLayer={false}
-                renderAnnotationLayer={false}
-                width={pageWidth}
-                onRenderSuccess={onPageRenderSuccess}
-                loading=""
-              />
-            ))}
-          </Document>
+            <Document
+              file={fileUrl}
+              onLoadSuccess={onDocumentLoadSuccess}
+              loading={
+                <div className="flex justify-center items-center py-20">
+                  <Loader2 className="size-8 animate-spin text-blue-600" />
+                </div>
+              }
+              error={
+                <div className="flex justify-center items-center py-20 text-red-600">
+                  Ошибка загрузки PDF
+                </div>
+              }
+              className="flex flex-col items-center gap-4"
+            >
+              {Array.from(new Array(numPages), (_, index) => (
+                <Page
+                  key={`page_${index + 1}`}
+                  pageNumber={index + 1}
+                  renderTextLayer={false}
+                  renderAnnotationLayer={false}
+                  width={pageWidth}
+                  onRenderSuccess={onPageRenderSuccess}
+                  loading=""
+                />
+              ))}
+            </Document>
           )}
         </div>
       </div>
