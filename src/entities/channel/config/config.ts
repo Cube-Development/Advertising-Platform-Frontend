@@ -44,6 +44,13 @@ export enum ENUM_CHANNEL_STATUS_BACKEND {
   invalidUrl = 7,
 }
 
+export enum ENUM_VERIFY_CHANNEL_ERROR_STATUS {
+  code_not_found = 0,
+  code_expired = 1,
+  channel_exist = 2,
+  code_dont_match = 3,
+}
+
 export enum ENUM_CHANNEL_STATUS {
   ACTIVE = "active",
   MODERATION = "moderation",

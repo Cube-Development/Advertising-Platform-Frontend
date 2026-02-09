@@ -2769,6 +2769,12 @@
           "moderationReject": "Kanal moderatsiyadan o‘tmadi",
           "remoderation": "Kanal qayta moderatsiyaga yuborildi",
           "invalidUrl": "Kanalning havolasi xato"
+        },
+        "channel_verfification_error": {
+          "code_not_found": "Verifikatsiya kodi topilmadi. Kanalingiz tavsifiga kodni qo'shishingiz kerak",
+          "code_expired": "Verifikatsiya kodi vaqtida o'tib ketdi. Sahifani yangilang va qayta urinib ko'ring",
+          "channel_exist": "Bunday kanal allaqachon mavjud. Texnik yordamga murojaat qiling",
+          "code_dont_match": "Verifikatsiya kodi mos kelmadi"
         }
       },
       "create": {
