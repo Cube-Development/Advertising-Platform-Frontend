@@ -113,6 +113,7 @@ export const walletAPI = authApi.injectEndpoints({
         method: "POST",
         params: params,
       }),
+      invalidatesTags: [BALANCE],
     }),
     createDepositPayme: build.mutation<string, ICreateSpending>({
       query: (params) => ({
@@ -120,6 +121,7 @@ export const walletAPI = authApi.injectEndpoints({
         method: "POST",
         params: params,
       }),
+      invalidatesTags: [BALANCE],
     }),
     createDepositClick: build.mutation<string, ICreateSpending>({
       query: (params) => ({
@@ -127,6 +129,7 @@ export const walletAPI = authApi.injectEndpoints({
         method: "POST",
         params: params,
       }),
+      invalidatesTags: [BALANCE],
     }),
   }),
 });
