@@ -38,7 +38,6 @@ export const SignAccounting: FC<ISignAccountingProps> = ({
 
   const handleSign = async () => {
     if (
-      !documentId ||
       !userId ||
       !batchId ||
       !transaction_type ||
