@@ -18,10 +18,18 @@ export const AddMediaFiles: FC<FileProps> = ({ onChange, currentFiles }) => {
   const [files, setFiles] = useState<File[]>(currentFiles ? currentFiles : []);
   const [dragActive, setDragActive] = useState(false);
 
+  const renameMovToMp4 = (file: File): File => {
+    if (file.name.toLowerCase().endsWith(".mov")) {
+      const newName = file.name.replace(/\.mov$/i, ".mp4");
+      return new File([file], newName, { type: "video/mp4" });
+    }
+    return file;
+  };
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     e.preventDefault();
     if (e.target.files && e.target.files[0]) {
-      const newFiles: File[] = [...e.target.files];
+      const newFiles: File[] = [...e.target.files].map(renameMovToMp4);
       if (files.length + newFiles.length <= 10) {
         setFiles([...files, ...newFiles]);
         onChange([...files, ...newFiles]);
@@ -73,7 +81,7 @@ export const AddMediaFiles: FC<FileProps> = ({ onChange, currentFiles }) => {
     setDragActive(false);
 
     if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
-      const newFiles: File[] = [...e.dataTransfer.files];
+      const newFiles: File[] = [...e.dataTransfer.files].map(renameMovToMp4);
       const validFiles = newFiles.filter((file) => {
         try {
           getContentType(file); // Проверяем файл
