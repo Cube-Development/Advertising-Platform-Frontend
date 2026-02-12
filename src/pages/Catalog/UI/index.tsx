@@ -22,8 +22,8 @@ const CatalogBlock = React.lazy(() =>
 
 export const CatalogPage = () => {
   return (
-    <Suspense fallback={<SuspenseLoader />}>
-      <CatalogBlock />
-    </Suspense>
+    // <Suspense fallback={<SuspenseLoader />}>
+    <CatalogBlock />
+    // </Suspense>
   );
 };

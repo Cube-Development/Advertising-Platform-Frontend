@@ -50,7 +50,7 @@ export function useAddToCart() {
     console.log("Voice Agent: Adding/Updating cart items:", channels);
     for (const channelItem of channels) {
       try {
-        const channel_id = channelItem.channel_id || channelItem.channelId;
+        const channel_id = channelItem.channel_id;
         const format = channelItem.format || 1;
 
         if (!channel_id) continue;

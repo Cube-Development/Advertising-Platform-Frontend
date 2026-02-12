@@ -1,19 +1,20 @@
-import { useRoomContext } from "@livekit/components-react";
-import { useCallback } from "react";
-import { IPipelineIntent } from "../../types";
-import { useSiteNavigate } from "./use-site-navigate";
-import { useAddToCart } from "./use-add-to-cart";
-import { ENUM_PATHS } from "@shared/routing";
 import { useProjectNameMutation } from "@entities/project";
-import Cookies from "js-cookie";
+import { ENUM_ROLES } from "@entities/user";
+import { useRoomContext } from "@livekit/components-react";
 import { ENUM_COOKIES_TYPES } from "@shared/config";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
-import { ENUM_ROLES } from "@entities/user";
-import {
-  useCreatePostAdvertiser,
-  useCreatePostManager,
-} from "@features/cart/createPost/model/hooks";
 import { setExternalField, useChangeBlur } from "@widgets/createOrder/model";
+import Cookies from "js-cookie";
+import { useCallback } from "react";
+import {
+  ENUM_CREATE_ORDER_ACTIONS,
+  ENUM_PIPELINE,
+  ENUM_VOICE_AGENT_ACTIONS,
+} from "../../constants";
+import { sendVoiceAgentData } from "../../helpers";
+import { IPipelineIntent } from "../../types";
+import { useAddToCart } from "./use-add-to-cart";
+import { useSiteNavigate } from "./use-site-navigate";
 
 export function usePipelineHandler() {
   const room = useRoomContext();
@@ -23,8 +24,8 @@ export function usePipelineHandler() {
   const [updateProjectName] = useProjectNameMutation();
   const { role, isAuth } = useAppSelector((state) => state.user);
 
-  const { createPostAdvertiser } = useCreatePostAdvertiser();
-  const { createPostManager } = useCreatePostManager();
+  // const { createPostAdvertiser } = useCreatePostAdvertiser();
+  // const { createPostManager } = useCreatePostManager();
   const { handleOnChangeBlur } = useChangeBlur();
 
   const sendAck = useCallback(
@@ -36,7 +37,7 @@ export function usePipelineHandler() {
     ) => {
       if (!room) return;
 
-      const ackData = JSON.stringify({
+      await sendVoiceAgentData(room, {
         $ack: true,
         pipeline: intent.pipeline,
         step: intent.step,
@@ -44,16 +45,6 @@ export function usePipelineHandler() {
         payload,
         error,
       });
-
-      const encoder = new TextEncoder();
-      const data = encoder.encode(ackData);
-
-      await room.localParticipant.publishData(data, {
-        reliable: true,
-        topic: "agent-events",
-      });
-
-      console.log("Voice Agent: Sent ACK:", ackData);
     },
     [room],
   );
@@ -65,41 +56,8 @@ export function usePipelineHandler() {
       console.log("Voice Agent: All Available Cookies:", document.cookie);
 
       try {
-        if (intent.action === "NAVIGATE") {
-          const path = intent.payload.path;
-          if (path) {
-            if (path === ENUM_PATHS.CREATE_ORDER) {
-              console.log(
-                "Voice Agent: Executing ORDER_FINALIZATION flow before navigate",
-              );
-              if (!isAuth) {
-                throw new Error("User must be authenticated to create order");
-              }
-
-              if (role === ENUM_ROLES.ADVERTISER) {
-                await createPostAdvertiser();
-              } else {
-                await createPostManager();
-              }
-            } else {
-              console.log("Voice Agent: Executing NAVIGATE to", path);
-              await handleNavigate(path);
-            }
-          }
-        } else if (intent.action === "ADD_TO_CART") {
-          const items =
-            intent.payload.channels ||
-            intent.payload.channelIds ||
-            intent.payload.ids;
-          if (items && Array.isArray(items)) {
-            console.log(
-              "Voice Agent: Executing ADD_TO_CART with items:",
-              items,
-            );
-            await handleAddToCart(items);
-          }
-        } else if (intent.action === "REMOVE_FROM_CART") {
-          const items = intent.payload.channelIds || intent.payload.ids;
+        if (intent.action === ENUM_VOICE_AGENT_ACTIONS.REMOVE_FROM_CART) {
+          const items = intent.payload.ids;
           if (items && Array.isArray(items)) {
             console.log(
               "Voice Agent: Executing REMOVE_FROM_CART with items:",
@@ -107,41 +65,40 @@ export function usePipelineHandler() {
             );
             await handleRemoveFromCart(items);
           }
-        } else if (
-          intent.action === "SET_FIELD" ||
-          intent.action === "GENERATE_TEXT"
-        ) {
+        } else if (intent.pipeline === ENUM_PIPELINE.ORDER_CREATION) {
           console.log(
-            "Voice Agent: SET_FIELD/GENERATE_TEXT action received",
+            "Voice Agent: ORDER_CREATION pipeline received",
             intent.payload,
           );
 
-          const field =
-            intent.payload.field ||
-            (intent.action === "GENERATE_TEXT" ? "postText" : "");
-          const value = intent.payload.value || intent.payload.text;
-
-          if (field === "postText" && value) {
+          if (intent.step === ENUM_CREATE_ORDER_ACTIONS.POST_TEXT) {
             console.log("Voice Agent: Setting post text via Redux bridge");
-            dispatch(setExternalField({ name: "postText", value }));
+            dispatch(
+              setExternalField({
+                name: "postText",
+                value: intent.payload.post_text,
+              }),
+            );
             handleOnChangeBlur("datetime");
-          } else if (field === "schedule" && value) {
+          } else if (intent.step === ENUM_CREATE_ORDER_ACTIONS.SCHEDULE) {
             console.log(
               "Voice Agent: Setting schedule via Redux bridge",
-              value,
+              intent.payload.schedule,
             );
-            dispatch(setExternalField({ name: "schedule", value }));
+            dispatch(
+              setExternalField({
+                name: "schedule",
+                value: intent.payload.schedule,
+              }),
+            );
 
-            // Определяем, какую секцию открыть следующей
             const nextBlur = role === ENUM_ROLES.AGENCY ? "prices" : "payment";
             handleOnChangeBlur(nextBlur);
-          } else if ((field === "campaignName" || field === "name") && value) {
-            // 1. Пытаемся достать ID из URL (query params)
+          } else if (intent.step === ENUM_CREATE_ORDER_ACTIONS.CAMPAIGN_NAME) {
             const urlParams = new URLSearchParams(window.location.search);
             let projectId =
               urlParams.get("projectId") || urlParams.get("project_id");
 
-            // 2. Пытаемся достать ID из URL (path params через regex если query пусто)
             if (!projectId) {
               const match = window.location.pathname.match(
                 /\/createorder\/([^\/]+)/,
@@ -149,22 +106,15 @@ export function usePipelineHandler() {
               if (match) projectId = match[1];
             }
 
-            // 3. Смотрим в куки
             if (!projectId) {
               projectId = Cookies.get(ENUM_COOKIES_TYPES.PROJECT_ID) || "";
-              console.log("Voice Agent: ID from Cookies:", projectId);
             }
 
             if (projectId) {
-              console.log(
-                `Voice Agent: Updating project ${projectId} name to:`,
-                value,
-              );
               await updateProjectName({
                 project_id: projectId,
-                name: value,
+                name: intent.payload.campaign_name,
               }).unwrap();
-              console.log("Voice Agent: Name update successful");
             } else {
               const errorMsg =
                 "PROJECT_ID not found in URL or cookies. Action aborted.";
@@ -175,7 +125,7 @@ export function usePipelineHandler() {
 
             handleOnChangeBlur("post");
           }
-        } else if (intent.action === "CONFIRM") {
+        } else if (intent.action === ENUM_VOICE_AGENT_ACTIONS.CONFIRM) {
           console.log("Voice Agent: CONFIRM action received", intent.payload);
         } else {
           console.log(
@@ -184,9 +134,7 @@ export function usePipelineHandler() {
           );
         }
 
-        // Simulate a small delay for better UX
         await new Promise((resolve) => setTimeout(resolve, 300));
-
         await sendAck(intent, "success");
       } catch (error) {
         console.error("Voice Agent: Action execution failed", error);
@@ -199,10 +147,8 @@ export function usePipelineHandler() {
       handleAddToCart,
       handleRemoveFromCart,
       updateProjectName,
-      isAuth,
-      role,
-      createPostAdvertiser,
-      createPostManager,
+      dispatch,
+      handleOnChangeBlur,
     ],
   );
 
