@@ -573,6 +573,17 @@ export const CatalogBlock: FC = () => {
                             : catalogManagerPublic?.channels
                           : catalogPublic?.channels) || []
                 }
+                all_channels_count={
+                  formState?.filter?.platform === platformTypesNum.site
+                    ? mockData?.length
+                    : (isAuth && !projectId
+                        ? catalogAuth?.elements
+                        : isAuth && projectId
+                          ? projectId
+                            ? catalogManager?.elements
+                            : catalogManagerPublic?.elements
+                          : catalogPublic?.elements) || 0
+                }
                 onChangeCard={handleChangeCards}
                 isLast={
                   (isAuth && !projectId
