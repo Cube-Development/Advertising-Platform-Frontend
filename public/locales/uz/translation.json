@@ -239,6 +239,10 @@
         }
       ]
     },
+    "platforms": {
+      "title": "Biz eng yirik platformalar bilan ishlaymiz",
+      "subtitle": "Faqat tekshirilgan kanallar va blogerlar"
+    },
     "services_title": "Yuridik shaxslar bilan ishlaymiz, hisob-fakturalar va aktlar taqdim etamiz, didox.uz orqali elektron hujjat almashinuvi olib boramiz",
     "services_list": [
       {
@@ -543,6 +547,10 @@
           "option": "Tez va qonuniy mablag' yechib olish tizimi"
         }
       ]
+    },
+    "platforms": {
+      "title": "Biz eng yirik platformalar bilan ishlaymiz",
+      "subtitle": "Faqat tekshirilgan kanallar va blogerlar"
     },
     "services_title": "Yuridik shaxslar bilan ishlaymiz, hisob-fakturalar va aktlar taqdim etamiz, didox.uz orqali elektron hujjat almashinuvini yuritamiz",
     "services_list": [
