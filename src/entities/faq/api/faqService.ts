@@ -115,7 +115,7 @@ export const FAQData = {
         },
         {
           title: "Как формируется цена?",
-          text: " Владельцы каналов сами устанавливают стоимость рекламы в своем канале. После успешного завершения проекта на ваш баланс зачисляется сумма, равная стоимости поста, за вычетом комиссии сервиса в размере 12%. Комиссия за вывод средств зависит от выбранного вами способа вывода.",
+          text: " Владельцы каналов сами устанавливают стоимость рекламы в своем канале. После успешного завершения проекта на ваш баланс зачисляется сумма, равная стоимости поста, за вычетом комиссии сервиса в размере 5%. Комиссия за вывод средств зависит от выбранного вами способа вывода.",
         },
         {
           title: "Как сделать вывод средств?",
@@ -265,7 +265,7 @@ export const FAQData = {
         },
         {
           title: "How is the price determined?",
-          text: "Channel owners set their own advertising prices. After a successful transaction, the amount equal to the post price minus a 12% platform commission is credited to your balance. The withdrawal fee depends on the chosen withdrawal method.",
+          text: "Channel owners set their own advertising prices. After a successful transaction, the amount equal to the post price minus a 5% platform commission is credited to your balance. The withdrawal fee depends on the chosen withdrawal method.",
         },
         {
           title: "How can I withdraw funds?",
@@ -413,7 +413,7 @@ export const FAQData = {
         },
         {
           title: "Narx qanday shakllanadi?",
-          text: "Kanal egalari o‘z kanallarida reklama narxini mustaqil belgilaydilar. Loyihangiz muvaffaqiyatli yakunlangandan so‘ng, post qiymatidan 12% xizmat komissiyasi ushlab qolingan holda, qolgan mablag‘ balansingizga o‘tkaziladi. Mablag‘larni yechib olish uchun komissiya tanlangan to‘lov usuliga bog‘liq.",
+          text: "Kanal egalari o‘z kanallarida reklama narxini mustaqil belgilaydilar. Loyihangiz muvaffaqiyatli yakunlangandan so‘ng, post qiymatidan 5% xizmat komissiyasi ushlab qolingan holda, qolgan mablag‘ balansingizga o‘tkaziladi. Mablag‘larni yechib olish uchun komissiya tanlangan to‘lov usuliga bog‘liq.",
         },
         {
           title: "Mablag‘larni qanday yechib olish mumkin?",

@@ -10,8 +10,7 @@ import { Loader2, PenTool } from "lucide-react";
 import { FC, MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
 
-interface ISignAccountingProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ISignAccountingProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   documentId: string;
   userId: string;
   batchId: string;
@@ -38,7 +37,6 @@ export const SignAccounting: FC<ISignAccountingProps> = ({
 
   const handleSign = async () => {
     if (
-      !documentId ||
       !userId ||
       !batchId ||
       !transaction_type ||

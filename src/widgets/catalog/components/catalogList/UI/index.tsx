@@ -38,6 +38,7 @@ import styles from "./styles.module.scss";
 
 interface CatalogListProps {
   channels: ICatalogChannel[];
+  all_channels_count: number;
   setValue: UseFormSetValue<getCatalogReq>;
   reset: UseFormReset<getCatalogReq>;
   formState: getCatalogReq;
@@ -52,6 +53,7 @@ interface CatalogListProps {
 
 export const CatalogList: FC<CatalogListProps> = ({
   channels,
+  all_channels_count,
   setValue,
   reset,
   formState,
@@ -90,7 +92,7 @@ export const CatalogList: FC<CatalogListProps> = ({
     <div className={styles.wrapper}>
       <div className={styles.filters__row}>
         <p className={styles.text}>
-          {t("catalog.all_platform")}: {channels?.length}
+          {t("catalog.all_platform")}: {all_channels_count}
         </p>
         <div className={styles.filters}>
           <SelectFilter
