@@ -52,7 +52,9 @@ export const sanitizePostHtml = (html: string): string => {
 
     if (tag === "a") {
       const href = el.getAttribute("href");
-      return href ? `<a href="${href}">${content}</a>` : content;
+      return href
+        ? `<a href="${href}" target="_blank">${content}</a>`
+        : content;
     }
 
     if (tag === "span") {
