@@ -5,4 +5,5 @@ export * from "./howItWorks";
 export * from "./partners";
 export * from "./services";
 export * from "./turnkey";
+export * from "./platforms";
 export * from "./whyChooseUs";

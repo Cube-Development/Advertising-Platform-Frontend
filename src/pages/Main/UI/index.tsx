@@ -73,6 +73,17 @@ const Customers = React.lazy(() =>
       return { default: () => null };
     }),
 );
+const Platforms = React.lazy(() =>
+  import("@widgets/mainPages")
+    .then((module) => ({
+      default: module.Platforms,
+    }))
+    .catch(() => {
+      // При ошибке перезагружаем страницу
+      window.location.reload();
+      return { default: () => null };
+    }),
+);
 
 export const MainPage = () => {
   useClearCookiesOnPage();
@@ -82,7 +93,8 @@ export const MainPage = () => {
     <>
       <Suspense fallback={<SuspenseLoader />}>
         <Cta role={ENUM_ROLES.ADVERTISER} />
-        <Services page={page} />
+        {/* <Services page={page} /> */}
+        <Platforms page={page} />
         <Partners page={page} />
         <HowItWorks page={page} />
         <WhyChooseUs page={page} />

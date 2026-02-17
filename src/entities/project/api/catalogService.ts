@@ -65,8 +65,8 @@ export const catalogAPI = baseApi.injectEndpoints({
               (response?.page - 1) * INTERSECTION_ELEMENTS.CATALOG,
         };
       },
-      serializeQueryArgs: ({ endpointName }) => {
-        return endpointName;
+      serializeQueryArgs: ({ queryArgs, endpointName }) => {
+        return `${endpointName}(${queryArgs.filter?.platform})`;
       },
       merge: (currentCache, newItems, arg) => {
         if (arg.arg.page === 1) {
