@@ -239,6 +239,10 @@
         }
       ]
     },
+    "platforms": {
+      "title": "We work with the largest platforms",
+      "subtitle": "Only verified channels and bloggers"
+    },
     "services_title": "We work with legal entities, provide invoices, reports, and conduct electronic document management through didox.uz",
     "services_list": [
       {
@@ -543,6 +547,10 @@
           "option": "Fast and legal withdrawal system"
         }
       ]
+    },
+    "platforms": {
+      "title": "We work with the largest platforms",
+      "subtitle": "Only verified channels and bloggers"
     },
     "services_title": "We work with legal entities, provide invoices, acts, and conduct electronic document management through didox.uz",
     "services_list": [
