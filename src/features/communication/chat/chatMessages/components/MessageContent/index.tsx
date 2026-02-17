@@ -1,16 +1,20 @@
+import { IMess, RECIPIENT_TYPE } from "@entities/communication";
 import { ContentType, useGetFileLinkMutation } from "@entities/project";
-import { IMess } from "@entities/communication";
-import { FC, useEffect, useState } from "react";
-import { MessageActionMenu } from "../MessageActionMenu";
+import { cn, Skeleton } from "@shared/ui";
 import { FileIcon, Image as ImageIcon, Video as VideoIcon } from "lucide-react";
+import { FC, useEffect, useState } from "react";
 import { useInView } from "react-intersection-observer";
-import { Skeleton } from "@shared/ui";
+import { MessageActionMenu } from "../MessageActionMenu";
 
 interface MessageContentProps {
   message: IMess;
+  recipient: string;
 }
 
-export const MessageContent: FC<MessageContentProps> = ({ message }) => {
+export const MessageContent: FC<MessageContentProps> = ({
+  message,
+  recipient,
+}) => {
   const [getFileLink] = useGetFileLinkMutation();
   const [fileUrl, setFileUrl] = useState<string>("");
   const [isLoaded, setIsLoaded] = useState(false);
@@ -84,7 +88,10 @@ export const MessageContent: FC<MessageContentProps> = ({ message }) => {
               }`}
             />
           )}
-          <MessageActionMenu onDownload={handleDownload} />
+          <MessageActionMenu
+            onDownload={handleDownload}
+            recipient={recipient}
+          />
         </div>
       );
 
@@ -109,7 +116,10 @@ export const MessageContent: FC<MessageContentProps> = ({ message }) => {
               Your browser does not support the video tag.
             </video>
           )}
-          <MessageActionMenu onDownload={handleDownload} />
+          <MessageActionMenu
+            onDownload={handleDownload}
+            recipient={recipient}
+          />
         </div>
       );
 
@@ -131,7 +141,10 @@ export const MessageContent: FC<MessageContentProps> = ({ message }) => {
               }`}
             />
           )}
-          <MessageActionMenu onDownload={handleDownload} />
+          <MessageActionMenu
+            onDownload={handleDownload}
+            recipient={recipient}
+          />
         </div>
       );
 
@@ -144,14 +157,22 @@ export const MessageContent: FC<MessageContentProps> = ({ message }) => {
             href={fileUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 px-4 py-3 no-underline text-primary"
+            className={cn(
+              "inline-flex items-center gap-2 px-4 py-3 no-underline",
+              recipient === RECIPIENT_TYPE.SENDER
+                ? "text-white"
+                : "text-[var(--Personal-colors-black)]",
+            )}
           >
-            <FileIcon className="w-5 h-5 text-white shrink-0" />
-            <span className="text-sm max-w-[200px] overflow-hidden text-ellipsis whitespace-nowrap text-white">
+            <FileIcon className="w-5 h-5 shrink-0" />
+            <span className="text-sm max-w-[200px] overflow-hidden text-ellipsis whitespace-nowrap">
               {fileName}
             </span>
           </a>
-          <MessageActionMenu onDownload={handleDownload} />
+          <MessageActionMenu
+            onDownload={handleDownload}
+            recipient={recipient}
+          />
         </div>
       );
 

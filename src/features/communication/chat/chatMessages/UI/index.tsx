@@ -712,6 +712,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
                         data-date={message?.formatted_date}
                       >
                         <MessageContent
+                          recipient={message?.recipient}
                           message={
                             typeof message?.message === "string"
                               ? {
