@@ -74,7 +74,7 @@ export const CreditCard: FC = () => {
 
     try {
       const url = await payment({
-        amount: formatWithOutSpaces(data?.amount?.toString()),
+        amount: formatWithOutSpaces(finallyAmount.toString()),
       }).unwrap();
 
       if (url && newWindow) {
