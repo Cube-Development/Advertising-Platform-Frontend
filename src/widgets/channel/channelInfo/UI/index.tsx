@@ -11,12 +11,16 @@ import {
 import {
   catalogAPI,
   getRecommendChannels,
+  ICart,
   ICatalogChannel,
   IFormat,
   useAddToCommonCartMutation,
   useAddToManagerCartMutation,
   useAddToPublicCartMutation,
   useGetRecommedChannelsQuery,
+  useReadCommonCartQuery,
+  useReadManagerCartQuery,
+  useReadPublicCartQuery,
   useRemoveFromCommonCartMutation,
   useRemoveFromManagerCartMutation,
   useRemoveFromPublicCartMutation,
@@ -36,6 +40,7 @@ import { AddToCart, SkeletonChannelAddToCart } from "./addToCart";
 import { RecommendationList } from "./recommendationList";
 import { Reviews } from "./reviews";
 import styles from "./styles.module.scss";
+import { ChannelCart } from "./cart";
 
 interface ChannelInfoProps {}
 
@@ -94,6 +99,39 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
   // managerCart
   const [addToManagerCart] = useAddToManagerCartMutation();
   const [removeFromManagerCart] = useRemoveFromManagerCartMutation();
+
+  const { data: cart } = useReadCommonCartQuery(
+    { language: language?.id || USER_LANGUAGES_LIST[0].id },
+    {
+      skip:
+        !isAuth || (projectId ? true : false) || role !== ENUM_ROLES.ADVERTISER,
+    },
+  );
+  const { data: cartPub } = useReadPublicCartQuery(
+    { guest_id: guestId, language: language?.id || USER_LANGUAGES_LIST[0].id },
+    { skip: isAuth || !guestId },
+  );
+  const { data: cartManager } = useReadManagerCartQuery(
+    {
+      project_id: projectId,
+      language: language?.id || USER_LANGUAGES_LIST[0].id,
+    },
+    { skip: !isAuth || !projectId },
+  );
+
+  const [currentCart, setCurrentCart] = useState<ICart | undefined>(
+    cart || cartPub || cartManager,
+  );
+
+  useEffect(() => {
+    if (isAuth && !projectId && cart) setCurrentCart(cart);
+  }, [cart, isAuth, projectId]);
+  useEffect(() => {
+    if (!isAuth && guestId && cartPub) setCurrentCart(cartPub);
+  }, [cartPub, isAuth, guestId]);
+  useEffect(() => {
+    if (isAuth && projectId && cartManager) setCurrentCart(cartManager);
+  }, [cartManager, isAuth, projectId]);
 
   const [selectedFormat, setSelectedFormat] = useState<IFormat | undefined>(
     channel?.selected_format,
@@ -311,12 +349,17 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
                           custom={custom++}
                           variants={PAGE_ANIMATION.animationRight}
                         >
-                          <AddToCart
-                            card={channel}
-                            selectedFormat={selectedFormat!}
-                            changeFormat={handleChangeFormat}
-                            onChange={handleChangeCartCards}
-                          />
+                          <div className="space-y-6 sticky top-var(--sticky-blog-top) right-0">
+                            <AddToCart
+                              card={channel}
+                              selectedFormat={selectedFormat!}
+                              changeFormat={handleChangeFormat}
+                              onChange={handleChangeCartCards}
+                            />
+                            {currentCart?.channels?.length ? (
+                              <ChannelCart cart={currentCart} role={role} />
+                            ) : null}
+                          </div>
                         </motion.div>
                       </>
                     ) : (
@@ -350,12 +393,17 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
                       animate="visible"
                       variants={PAGE_ANIMATION.animationRight}
                     >
-                      <AddToCart
-                        card={channel}
-                        selectedFormat={selectedFormat!}
-                        changeFormat={handleChangeFormat}
-                        onChange={handleChangeCartCards}
-                      />
+                      <div className="space-y-6 sticky top-var(--sticky-blog-top) right-0">
+                        <AddToCart
+                          card={channel}
+                          selectedFormat={selectedFormat!}
+                          changeFormat={handleChangeFormat}
+                          onChange={handleChangeCartCards}
+                        />
+                        {currentCart?.channels?.length ? (
+                          <ChannelCart cart={currentCart} role={role} />
+                        ) : null}
+                      </div>
                     </motion.div>
                   </>
                 ) : (

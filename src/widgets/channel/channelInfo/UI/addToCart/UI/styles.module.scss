@@ -1,8 +1,4 @@
 .wrapper {
-  position: sticky;
-  top: var(--sticky-blog-top);
-  right: 0;
-
   display: grid;
   grid-auto-flow: row;
   row-gap: 20px;
@@ -96,11 +92,12 @@
   .button {
     padding: 12px;
     grid-area: item4;
+
     p {
       color: var(--Personal-colors-White);
-      font-size: 18px;
+      font-size: 14px;
       font-style: normal;
-      font-weight: 500;
+      font-weight: 600;
       line-height: 1;
     }
   }
