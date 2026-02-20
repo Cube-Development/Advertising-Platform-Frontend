@@ -1,9 +1,5 @@
 import { platformTypesNum } from "@entities/platform";
-import {
-  InstagramMainIcon,
-  TelegramMainIcon,
-  YouTubeMainIcon,
-} from "@shared/assets";
+import { InstagramIcon, TelegramIcon, YouTubeIcon } from "@shared/assets";
 import { PAGE_ANIMATION } from "@shared/config/animation";
 import { motion } from "framer-motion";
 import { FC, useMemo } from "react";
@@ -86,18 +82,18 @@ export const Platforms: FC<ServicesProps> = ({ page }) => {
     return [
       {
         count: telegramCahnnels?.elements || 0,
-        icon: TelegramMainIcon,
+        icon: TelegramIcon,
         platform: platformTypesNum.telegram,
       },
       {
         count: instagramCahnnels?.elements || 0,
-        icon: InstagramMainIcon,
+        icon: InstagramIcon,
         platform: platformTypesNum.instagram,
       },
 
       {
         count: youtubeCahnnels?.elements || 0,
-        icon: YouTubeMainIcon,
+        icon: YouTubeIcon,
         platform: platformTypesNum.youtube,
       },
     ];
