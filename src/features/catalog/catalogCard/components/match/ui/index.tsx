@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import matchAnimation from "/animated/match_lottie.gif";
 import { useEffect, useRef, useState } from "react";
 import { useWindowWidth } from "@shared/hooks";
-import { Tooltip, TooltipContent, TooltipTrigger } from "@shared/ui/shadcn-ui";
+import { Popover, PopoverContent, PopoverTrigger } from "@shared/ui/shadcn-ui";
 import { BREAKPOINT } from "@shared/config";
 
 interface ChannelCardMatchProps {
@@ -19,6 +19,12 @@ export const ChannelCardMatch = ({
   const { t } = useTranslation();
   const screen = useWindowWidth();
   const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    if (!open) return;
+    const id = setTimeout(() => setOpen(false), 5000);
+    return () => clearTimeout(id);
+  }, [open]);
 
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [currentProgress, setCurrentProgress] = useState(0);
@@ -98,13 +104,10 @@ export const ChannelCardMatch = ({
       className={`${styles.column__cross} ${variant === "compact" ? styles.compact : ""}`}
     >
       <p className="mobile-xl:block hidden">{t("platform.cross")}</p>
-      <Tooltip open={open}>
-        <TooltipTrigger
+      <Popover open={open} onOpenChange={setOpen}>
+        <PopoverTrigger
           type="button"
           className={`${styles.circle} ${!match && styles.no_match} ${variant === "compact" ? styles.compact : ""}`}
-          onClick={() => setOpen(!open)}
-          onMouseEnter={() => setOpen(true)}
-          onMouseLeave={() => setOpen(false)}
         >
           {match ? (
             <canvas
@@ -121,9 +124,9 @@ export const ChannelCardMatch = ({
               />
             </span>
           )}
-        </TooltipTrigger>
-        <TooltipContent
-          side={`${screen > BREAKPOINT.MD ? "right" : "top"}`}
+        </PopoverTrigger>
+        <PopoverContent
+          side={screen > BREAKPOINT.MD ? "right" : "top"}
           className={styles.match_description}
         >
           <div className="grid grid-cols-[40px,1fr] items-center justify-start gap-2">
@@ -132,12 +135,12 @@ export const ChannelCardMatch = ({
               alt="isLoading..."
               className="w-10 h-10"
             />
-            <p className="!text-[#0AA5BE] mobile-xl:!text-[10px] !text-[9px] mobile-xl:!leading-4 !leading-2 mobile-xl:!text-center !text-start">
+            <p className="!text-[#0AA5BE] font-medium mobile-xl:!text-[10px] !text-[9px] mobile-xl:!leading-4 !leading-2 mobile-xl:!text-center !text-start">
               {t("platform.match_description")}
             </p>
           </div>
-        </TooltipContent>
-      </Tooltip>
+        </PopoverContent>
+      </Popover>
     </div>
   );
 };
