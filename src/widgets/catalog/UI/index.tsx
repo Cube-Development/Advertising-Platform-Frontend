@@ -22,6 +22,7 @@ import {
   useRemoveFromCommonCartMutation,
   useRemoveFromManagerCartMutation,
   useRemoveFromPublicCartMutation,
+  useGetAuthCatalogQuery,
 } from "@entities/project";
 import { ENUM_ROLES, GenerateGuestId, useFindLanguage } from "@entities/user";
 import {
@@ -94,7 +95,7 @@ export const CatalogBlock: FC = () => {
   };
 
   const { data: catalogAuth, isFetching: isCatalogAuthLoading } =
-    useGetCatalogQuery(
+    useGetAuthCatalogQuery(
       {
         ...formState,
         language: language?.id || USER_LANGUAGES_LIST[0].id,
@@ -106,7 +107,7 @@ export const CatalogBlock: FC = () => {
     );
 
   const { data: catalogManager, isFetching: isCatalogManagerLoading } =
-    useGetCatalogQuery(
+    useGetAuthCatalogQuery(
       {
         ...formState,
         language: language?.id || USER_LANGUAGES_LIST[0].id,
@@ -130,7 +131,7 @@ export const CatalogBlock: FC = () => {
   const {
     data: catalogManagerPublic,
     isFetching: isCatalogManagerPublicLoading,
-  } = useGetCatalogQuery(
+  } = useGetAuthCatalogQuery(
     {
       ...formState,
       language: language?.id || USER_LANGUAGES_LIST[0].id,
@@ -191,7 +192,7 @@ export const CatalogBlock: FC = () => {
       const currentPage = Math.ceil(
         currentData.channels.length / INTERSECTION_ELEMENTS.CATALOG,
       );
-      if (currentPage > formState.page) {
+      if (currentPage > formState.page!) {
         setValue("page", currentPage);
       }
     }
@@ -561,7 +562,7 @@ export const CatalogBlock: FC = () => {
                 reset={reset}
                 setValue={setValueWithPage}
                 resetField={resetField}
-                page={formState.page}
+                page={formState.page!}
                 channels={
                   formState?.filter?.platform === platformTypesNum.site
                     ? mockData

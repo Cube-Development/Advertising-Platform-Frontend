@@ -2,10 +2,8 @@ import { MultiSelect, MultiSelectProps } from "@shared/ui";
 import { FC } from "react";
 import { IParameterOption } from "../model";
 
-interface IParameterBlockProps extends Pick<
-  MultiSelectProps,
-  "options" | "defaultValue"
-> {
+interface IParameterBlockProps
+  extends Pick<MultiSelectProps, "options" | "defaultValue"> {
   title: string;
   onChange: (value: IParameterOption) => void;
 }

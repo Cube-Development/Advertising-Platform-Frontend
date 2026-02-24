@@ -125,3 +125,4 @@ export * from "./wallet";
 export * from "./yes";
 export * from "./youtube";
 export * from "./youtube-main";
+export * from "./lock";

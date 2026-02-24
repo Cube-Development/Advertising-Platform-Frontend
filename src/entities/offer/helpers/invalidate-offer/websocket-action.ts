@@ -1,7 +1,7 @@
 import { AppDispatch } from "@app/providers/store";
 import { bloggerOffersAPI, ENUM_OFFER_STATUS } from "@entities/offer";
 import { dateSortingTypes } from "@entities/platform";
-import { BALANCE, VIEWS_BLOGGER_OFFERS } from "@shared/api";
+import { BALANCE, USER_ME, VIEWS_BLOGGER_OFFERS } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ILanguage, USER_LANGUAGES_LIST } from "@shared/languages";
 
@@ -33,7 +33,7 @@ export const invalidateBloggerOfferByWebsocketAction = async ({
   };
 
   await trigger(params).unwrap();
-  dispatch(bloggerOffersAPI.util.invalidateTags([BALANCE]));
+  dispatch(bloggerOffersAPI.util.invalidateTags([BALANCE, USER_ME]));
 
   if (skip_views) return;
   // 2. Обновляем кэш кружочков

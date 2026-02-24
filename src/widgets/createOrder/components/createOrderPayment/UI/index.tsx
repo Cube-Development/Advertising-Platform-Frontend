@@ -7,6 +7,11 @@ import heartAnimation from "/animated/heart_white_lottie.gif";
 import { ICreatePostForm } from "@entities/project";
 import { UseFormSetValue } from "react-hook-form";
 import { SaveProject } from "@features/project";
+import { useAppSelector } from "@shared/hooks";
+import { LoginPremiumAccess } from "@features/user";
+import { CloudCheck } from "lucide-react";
+import { MyButton } from "@shared/ui";
+import { LockIcon } from "@shared/assets";
 
 interface CreateOrderPaymentProps {
   isBlur?: boolean;
@@ -39,7 +44,7 @@ export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
           0,
         )
       : totalAmount;
-
+  const { isPremiumUser } = useAppSelector((state) => state.user);
   return (
     <div id="payment" className={`layout ${isBlur ? "blur" : ""}`}>
       <div className="container">
@@ -77,7 +82,20 @@ export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
                     setValue={setValue}
                     formState={formState}
                   />
-                  <SaveProject onAction={onSave} />
+                  {!isPremiumUser ? (
+                    <LoginPremiumAccess
+                      trigger={
+                        <MyButton buttons_type="button__orange" type="button">
+                          <div className="flex items-center justify-center gap-2">
+                            <LockIcon className="w-5 h-5" />
+                            <p>{t(`create_order.save`)}</p>
+                          </div>
+                        </MyButton>
+                      }
+                    />
+                  ) : (
+                    <SaveProject onAction={onSave} />
+                  )}
                 </div>
               ) : (
                 <ApproveCampaign disabled={!isAllowed} isAllowed={isAllowed} />

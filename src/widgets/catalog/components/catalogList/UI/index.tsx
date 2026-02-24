@@ -8,6 +8,7 @@ import {
 } from "@entities/project";
 import { AddToBasket } from "@features/cart";
 import {
+  CardPremiumAccess,
   CatalogCard,
   FormatList,
   SearchFilter,
@@ -22,7 +23,7 @@ import {
   INTERSECTION_ELEMENTS,
   PAGE_ANIMATION,
 } from "@shared/config";
-import { useWindowWidth } from "@shared/hooks";
+import { useAppSelector, useWindowWidth } from "@shared/hooks";
 import { IOption } from "@shared/types";
 import { ShowMoreBtn, SpinnerLoader, Toggle } from "@shared/ui";
 import { motion } from "framer-motion";
@@ -35,6 +36,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { ParametersFilter } from "../parametersFilter";
 import styles from "./styles.module.scss";
+import { LoginPremiumAccess, LoginToViewMore } from "@features/user";
 
 interface CatalogListProps {
   channels: ICatalogChannel[];
@@ -66,6 +68,7 @@ export const CatalogList: FC<CatalogListProps> = ({
 }) => {
   const { t } = useTranslation();
   const screen = useWindowWidth();
+  const { isAuth, isPremiumUser } = useAppSelector((state) => state.user);
 
   const [isTableView, setIsTableView] = useState(() => {
     const saved = localStorage.getItem("catalogViewMode");
@@ -148,6 +151,7 @@ export const CatalogList: FC<CatalogListProps> = ({
           />
         )}
       </div>
+      {isAuth && !isPremiumUser && <CardPremiumAccess />}
       <div className={`${styles.card__list} ${isTableView && "!gap-1.5"}`}>
         {(formState.page !== 1 || !isLoading) &&
           channels?.map((card, index) => (
@@ -191,8 +195,18 @@ export const CatalogList: FC<CatalogListProps> = ({
         )}
       </div>
       {!isLast ? (
-        <div className={styles.show_more} onClick={handleOnChangePage}>
-          {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
+        <div className={styles.show_more}>
+          {!isAuth ? (
+            <LoginToViewMore trigger={<ShowMoreBtn />} />
+          ) : !isPremiumUser ? (
+            <LoginPremiumAccess trigger={<ShowMoreBtn />} />
+          ) : isLoading ? (
+            <SpinnerLoader />
+          ) : (
+            <div onClick={handleOnChangePage}>
+              <ShowMoreBtn />
+            </div>
+          )}
         </div>
       ) : (
         <div className={styles.empty}></div>

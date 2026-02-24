@@ -17,6 +17,7 @@ import {
   ADV_PROJECTS,
   BALANCE,
   TRANSACTION_HISTORY,
+  USER_ME,
   authApi,
 } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
@@ -87,7 +88,7 @@ export const walletAPI = authApi.injectEndpoints({
         method: "POST",
         params: params,
       }),
-      invalidatesTags: [BALANCE, ADV_PROJECTS, ADV_ORDERS],
+      invalidatesTags: [BALANCE, USER_ME, ADV_PROJECTS, ADV_ORDERS],
     }),
     createDepositRequest: build.mutation<
       ICreateDepositResponse,
@@ -105,7 +106,7 @@ export const walletAPI = authApi.injectEndpoints({
         method: "POST",
         params: params,
       }),
-      invalidatesTags: [BALANCE],
+      invalidatesTags: [BALANCE, USER_ME],
     }),
     createWithdraw: build.mutation<IWithdrawResponse, ICreateWithdrawRequest>({
       query: (params) => ({
@@ -113,7 +114,7 @@ export const walletAPI = authApi.injectEndpoints({
         method: "POST",
         params: params,
       }),
-      invalidatesTags: [BALANCE],
+      invalidatesTags: [BALANCE, USER_ME],
     }),
     createDepositPayme: build.mutation<string, ICreateSpending>({
       query: (params) => ({
@@ -121,7 +122,7 @@ export const walletAPI = authApi.injectEndpoints({
         method: "POST",
         params: params,
       }),
-      invalidatesTags: [BALANCE],
+      invalidatesTags: [BALANCE, USER_ME],
     }),
     createDepositClick: build.mutation<string, ICreateSpending>({
       query: (params) => ({
@@ -129,7 +130,7 @@ export const walletAPI = authApi.injectEndpoints({
         method: "POST",
         params: params,
       }),
-      invalidatesTags: [BALANCE],
+      invalidatesTags: [BALANCE, USER_ME],
     }),
   }),
 });

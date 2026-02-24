@@ -12,6 +12,7 @@ import {
   authApi,
   BALANCE,
   BLOGGER_OFFERS,
+  USER_ME,
   VIEWS_BLOGGER_OFFERS,
 } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
@@ -144,7 +145,7 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
         method: "POST",
         body: body,
       }),
-      invalidatesTags: [BLOGGER_OFFERS, BALANCE],
+      invalidatesTags: [BLOGGER_OFFERS, BALANCE, USER_ME],
     }),
   }),
 });

@@ -1,6 +1,3 @@
-import { FC, useState } from "react";
-import { Link } from "react-router-dom";
-import { ChannelCardMatch } from "../components";
 import {
   ICatalogCard,
   ICatalogChannel,
@@ -9,8 +6,13 @@ import {
   platformToIcon,
 } from "@entities/project";
 import { EyeIcon, RatingIcon, SubsIcon } from "@shared/assets";
+import { useAppSelector } from "@shared/hooks";
 import { CHANNEL_LANGUAGES_LIST } from "@shared/languages";
 import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";
+import { FC, useState } from "react";
+import { Link } from "react-router-dom";
+import { ChannelCardMatch } from "../components";
+import { LoginPremiumAccess, LoginToViewMore } from "@features/user";
 
 interface SmallCatalogCardProps extends IChangeCards, ICatalogCard {
   card: ICatalogChannel;
@@ -30,6 +32,15 @@ export const SmallCatalogCard: FC<SmallCatalogCardProps> = ({
       )!
     : card.format[0];
   const [selectedFormat, setSelectedFormat] = useState<IFormat>(startFormat);
+  const { isPremiumUser, isAuth } = useAppSelector((state) => state.user);
+
+  const isModal = !isAuth || !isPremiumUser;
+  const Modal = () =>
+    !isAuth ? (
+      <LoginToViewMore />
+    ) : !isPremiumUser ? (
+      <LoginPremiumAccess />
+    ) : null;
 
   const handleChangeFormat = (selectedValue: IFormat) => {
     setSelectedFormat(selectedValue);
@@ -131,9 +142,15 @@ export const SmallCatalogCard: FC<SmallCatalogCardProps> = ({
             <div className="w-[14px]">
               <EyeIcon />
             </div>
-            <span className="xl:text-xs mobile-xl:text-[10px] text-[9px] mobile-xl:font-medium font-semibold text-black">
-              {selectedFormat?.views!.toLocaleString()}
-            </span>
+            {isModal ? (
+              <div className="flex item-center justify-center w-full">
+                <Modal />
+              </div>
+            ) : (
+              <span className="xl:text-xs mobile-xl:text-[10px] text-[9px] mobile-xl:font-medium font-semibold text-black">
+                <>{selectedFormat?.views!.toLocaleString()}</>
+              </span>
+            )}
           </div>
         </div>
 

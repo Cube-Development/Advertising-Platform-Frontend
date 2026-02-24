@@ -2,12 +2,13 @@ import { CART, ICart } from "@entities/project";
 import { CreatePost as CreatePostBtn } from "@features/cart";
 import { ProtectIcon3 } from "@shared/assets";
 import { BREAKPOINT, PAGE_ANIMATION } from "@shared/config";
-import { useWindowWidth } from "@shared/hooks";
+import { useAppSelector, useWindowWidth } from "@shared/hooks";
 import { motion } from "framer-motion";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { ENUM_ROLES } from "@entities/user";
+import { LoginPremiumAccess } from "@features/user";
 
 interface CreatePostProps {
   cart: ICart;
@@ -17,7 +18,7 @@ interface CreatePostProps {
 export const CreatePost: FC<CreatePostProps> = ({ cart, role }) => {
   const { t } = useTranslation();
   const screen = useWindowWidth();
-
+  const { isPremiumUser } = useAppSelector((state) => state.user);
   return (
     <motion.div
       className={styles.wrapper}
@@ -42,7 +43,13 @@ export const CreatePost: FC<CreatePostProps> = ({ cart, role }) => {
               </div>
               <div className={styles.info}>
                 <p>{t("cart.create_post.views")}</p>
-                <span>{cart?.coverage?.toLocaleString()}</span>
+                <span>
+                  {isPremiumUser ? (
+                    cart?.coverage?.toLocaleString()
+                  ) : (
+                    <LoginPremiumAccess />
+                  )}
+                </span>
               </div>
               {role !== ENUM_ROLES.AGENCY && (
                 <div className={styles.info}>

@@ -76,7 +76,7 @@ export const DocumentSelect: FC<IDocumentSelectProps> = ({
               active={activeTab === item.tabStatus}
               className="flex items-center w-full gap-2"
               onClick={() => {
-                (onClick(item), swiperRef.current?.slideTo(index));
+                onClick(item), swiperRef.current?.slideTo(index);
               }}
             >
               <div

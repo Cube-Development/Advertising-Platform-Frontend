@@ -37,6 +37,7 @@ import {
   AGENCY_PROJECTS_CUSTOMER,
   AGENCY_PROJECTS_PUBLISHER,
   AGENCY_PROJECTS_MANAGER,
+  USER_ME,
 } from "@shared/api/tags";
 
 export const authApi = createApi({
@@ -50,6 +51,7 @@ export const authApi = createApi({
     RECOMMEND_CARDS,
     BLOGGER_CHANNELS,
     USER_DATA,
+    USER_ME,
     CART_PUB,
     BALANCE,
     BLOGGER_OFFERS,

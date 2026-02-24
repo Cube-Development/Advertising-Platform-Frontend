@@ -4,7 +4,13 @@ import {
   useGetOrganizationQuery,
   useGetProfileEDOQuery,
 } from "@entities/organization";
-import { ENUM_ROLES, offerSign, USER_ROLES } from "@entities/user";
+import {
+  ENUM_ROLES,
+  offerSign,
+  setPremiumUser,
+  useGetUserQueryQuery,
+  USER_ROLES,
+} from "@entities/user";
 import {
   useGetViewAdvertiserProjectQuery,
   useGetViewBloggerChannelQuery,
@@ -65,6 +71,11 @@ export const MainLayout = ({ children }: PropsWithChildren) => {
       skip: !isAuth || !USER_ROLES.includes(role),
     });
 
+  const { data: user, isLoading: isLoadingUser } = useGetUserQueryQuery(
+    undefined,
+    { skip: !isAuth },
+  );
+
   useEffect(() => {
     if (balance) {
       let wallet = {
@@ -100,6 +111,12 @@ export const MainLayout = ({ children }: PropsWithChildren) => {
       dispatch(offerSign());
     }
   }, [organization, isLoadingOrganization]);
+
+  useEffect(() => {
+    if (user) {
+      dispatch(setPremiumUser(user?.is_premium));
+    }
+  }, [user, isLoadingUser]);
 
   return (
     <>
