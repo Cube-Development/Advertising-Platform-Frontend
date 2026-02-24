@@ -158,7 +158,7 @@
     },
     "login_premium_access": {
       "title": "Yana ham ko'proq ko'rishni xohlaysizmi?",
-      "description": "Buning uchun balansingizda kamida <0>5 000 000 so'm</0> bo'lishi kerak",
+      "description": "Buning uchun balansingizda kamida <0>{{balance}} so'm</0> bo'lishi kerak",
       "options": [
         {
           "title": "Bloggerlar bazasiga to'liq kirish"
@@ -1910,7 +1910,7 @@
       }
     },
     "card_premium_access": {
-      "description": "Bloggerlar bazasiga va platforma funksiyalariga <0>to'liq kirish</0> uchun balansingiz kamida <1>5 000 000 so'm</1> bo'lishi kerak",
+      "description": "Bloggerlar bazasiga va platforma funksiyalariga <0>to'liq kirish</0> uchun balansingiz kamida <1>{{balance}} so'm</1> bo'lishi kerak",
       "buttons": {
         "balance": "Balansni to'ldirish"
       }

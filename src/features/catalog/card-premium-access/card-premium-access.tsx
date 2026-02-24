@@ -1,4 +1,5 @@
 import { LockIcon } from "@shared/assets";
+import { useAppSelector } from "@shared/hooks";
 import { ENUM_PATHS } from "@shared/routing";
 import {
   Button,
@@ -13,6 +14,7 @@ import { Link } from "react-router-dom";
 
 export const CardPremiumAccess: FC = () => {
   const { t } = useTranslation();
+  const { premiumBalance } = useAppSelector((state) => state.user);
   return (
     <Card
       className="rounded-xl"
@@ -30,6 +32,7 @@ export const CardPremiumAccess: FC = () => {
                 <span key="0" className="font-semibold" />,
                 <span key="1" className="font-semibold" />,
               ]}
+              values={{ balance: premiumBalance?.toLocaleString() }}
             />
           </CardDescription>
         </div>

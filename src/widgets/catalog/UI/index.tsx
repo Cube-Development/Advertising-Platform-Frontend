@@ -23,6 +23,7 @@ import {
   useRemoveFromManagerCartMutation,
   useRemoveFromPublicCartMutation,
   useGetAuthCatalogQuery,
+  catalogAuthAPI,
 } from "@entities/project";
 import { ENUM_ROLES, GenerateGuestId, useFindLanguage } from "@entities/user";
 import {
@@ -502,20 +503,38 @@ export const CatalogBlock: FC = () => {
           return card;
         });
       }
-      dispatch(
-        catalogAPI.util.updateQueryData(
-          "getCatalog",
-          {
-            ...formState,
-            user_id: userId,
-            guest_id: guestId,
-            project_id: projectId,
-          },
-          (draft) => {
-            draft.channels = newCards;
-          },
-        ),
-      );
+
+      if (isAuth) {
+        dispatch(
+          catalogAuthAPI.util.updateQueryData(
+            "getAuthCatalog",
+            {
+              ...formState,
+              user_id: userId,
+              guest_id: guestId,
+              project_id: projectId,
+            },
+            (draft) => {
+              draft.channels = newCards;
+            },
+          ),
+        );
+      } else {
+        dispatch(
+          catalogAPI.util.updateQueryData(
+            "getCatalog",
+            {
+              ...formState,
+              user_id: userId,
+              guest_id: guestId,
+              project_id: projectId,
+            },
+            (draft) => {
+              draft.channels = newCards;
+            },
+          ),
+        );
+      }
     }
   };
 

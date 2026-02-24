@@ -1,4 +1,5 @@
 import { LockIcon } from "@shared/assets";
+import { useAppSelector } from "@shared/hooks";
 import { ENUM_PATHS } from "@shared/routing";
 import {
   cn,
@@ -26,6 +27,7 @@ export const LoginPremiumAccess: FC<ILoginPremiumAccessProps> = ({
   className,
 }) => {
   const { t } = useTranslation();
+  const { premiumBalance } = useAppSelector((state) => state.user);
   const options = t("auth.login_premium_access.options", {
     returnObjects: true,
   }) as { title: string }[];
@@ -58,6 +60,7 @@ export const LoginPremiumAccess: FC<ILoginPremiumAccessProps> = ({
             <Trans
               i18nKey="auth.login_premium_access.description"
               components={[<span key="0" className="font-semibold" />]}
+              values={{ balance: premiumBalance?.toLocaleString() }}
             />
           </DialogDescription>
           <ul className="grid text-[10px] sm:text-xs">

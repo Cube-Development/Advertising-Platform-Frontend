@@ -7,6 +7,7 @@ import {
 import {
   ENUM_ROLES,
   offerSign,
+  setPremiumBalance,
   setPremiumUser,
   useGetUserQueryQuery,
   USER_ROLES,
@@ -23,11 +24,11 @@ import {
   useGetBalanceQuery,
   walletSlice,
 } from "@entities/wallet";
+import { OfferSignModal, useRenderOfferModal } from "@features/organization";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import type { PropsWithChildren } from "react";
 import { useEffect } from "react";
 import { Footer, Header } from "../components";
-import { OfferSignModal, useRenderOfferModal } from "@features/organization";
 
 export const MainLayout = ({ children }: PropsWithChildren) => {
   const { isAuth, role, isAuthEcp } = useAppSelector((state) => state.user);
@@ -115,6 +116,7 @@ export const MainLayout = ({ children }: PropsWithChildren) => {
   useEffect(() => {
     if (user) {
       dispatch(setPremiumUser(user?.is_premium));
+      dispatch(setPremiumBalance(user?.amount || 0));
     }
   }, [user, isLoadingUser]);
 

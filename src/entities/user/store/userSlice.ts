@@ -10,6 +10,7 @@ interface UserState {
   isOfferOpen?: boolean;
   role: ENUM_ROLES;
   isPremiumUser?: boolean;
+  premiumBalance?: number;
 }
 
 const roleFromCookies = Cookies.get(ENUM_COOKIES_TYPES.ROLE);
@@ -27,6 +28,7 @@ const initialState: UserState = {
   isOfferSign: false,
   isOfferOpen: false,
   isPremiumUser: false,
+  premiumBalance: 0,
 };
 
 export const userSlice = createSlice({
@@ -75,6 +77,9 @@ export const userSlice = createSlice({
     setPremiumUser: (state, action: PayloadAction<boolean>) => {
       state.isPremiumUser = action.payload;
     },
+    setPremiumBalance: (state, action: PayloadAction<number>) => {
+      state.premiumBalance = action.payload;
+    },
     toggleRole: (state, action: PayloadAction<ENUM_ROLES>) => {
       state.role = action.payload;
       Cookies.set(ENUM_COOKIES_TYPES.ROLE, `${action.payload}`);
@@ -93,4 +98,5 @@ export const {
   offerSign,
   offerOpen,
   setPremiumUser,
+  setPremiumBalance,
 } = userSlice.actions;
