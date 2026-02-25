@@ -29,7 +29,7 @@ export const withHeight = (Component: React.FC) => {
     }, []);
 
     return (
-      <div style={{ height: "calc(var(--vh, 1vh) * 100)" }}>
+      <div style={{ minHeight: "calc(var(--vh, 1vh) * 100)" }}>
         <Component {...props} />
       </div>
     );

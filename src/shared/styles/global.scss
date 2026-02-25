@@ -21,14 +21,46 @@
 body {
   font-family:
     "TT Runs Trial", "Montserrat Alternates", "Montserrat", sans-serif;
+}
 
-  &::-webkit-scrollbar {
-    display: none;
-  }
+/* Дефолтный скролл под все браузеры */
+html {
+  scroll-behavior: smooth;
+}
 
-  &::-webkit-scrollbar-thumb {
-    display: none;
-  }
+/* Firefox */
+html,
+body {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(10, 165, 190, 0.5) transparent;
+}
+
+/* WebKit (Chrome, Safari, Edge) */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background-color: rgba(10, 165, 190, 0.5);
+  border-radius: 4px;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(10, 165, 190, 0.7);
+}
+
+html::-webkit-scrollbar-corner,
+body::-webkit-scrollbar-corner {
+  background: transparent;
 }
 
 .user_main {

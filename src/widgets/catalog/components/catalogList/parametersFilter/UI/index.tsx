@@ -103,10 +103,11 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
   } = useGetTAParametersQuery(
     { ...formFieldsTA },
     {
-      skip:
-        !formFieldsTA.category.length ||
-        (!!formFieldsTA.language.length && !formFieldsTA.region.length) ||
-        isRecom === true,
+      // skip:
+      //   !formFieldsTA.category.length ||
+      //   (!!formFieldsTA.language.length && !formFieldsTA.region.length) ||
+      //   isRecom === true,
+      skip: true,
     },
   );
 

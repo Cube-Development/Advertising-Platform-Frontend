@@ -162,9 +162,9 @@ export const CatalogCard: FC<CatalogCardProps> = ({
                   {card?.url}
                 </p>
               )}
-              {screen >= BREAKPOINT.MD && (
+              {/* {screen >= BREAKPOINT.MD && (
                 <ChannelCardDescription description={card?.description} />
-              )}
+              )} */}
             </div>
           </div>
 
@@ -290,7 +290,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
           </Accordion>
         ) : screen < BREAKPOINT.MD ? (
           <>
-            <ChannelCardDescription description={card?.description} />
+            {/* <ChannelCardDescription description={card?.description} /> */}
 
             <Accordion type="single" collapsible>
               <AccordionItem

@@ -12,8 +12,8 @@ import { Nav } from "./UI/nav";
 
 export const Header: FC = () => {
   const screen = useWindowWidth();
-  const [isScrollingUp, setIsScrollingUp] = useState(true); // Отслеживание направления скролла
-  const [lastScrollY, setLastScrollY] = useState(0); // Последняя позиция скролла
+  const [isScrollingUp, setIsScrollingUp] = useState(true);
+  const [lastScrollY, setLastScrollY] = useState(0);
   const { isAuth, role } = useAppSelector((state) => state.user);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export const Header: FC = () => {
       setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);

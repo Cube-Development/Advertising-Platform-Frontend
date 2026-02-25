@@ -81,10 +81,11 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
   } = useGetTAParametersQuery(
     { ...formFieldsTA },
     {
-      skip:
-        !formFieldsTA.category.length ||
-        (!!formFieldsTA.language.length && !formFieldsTA.region.length) ||
-        isRecom === true,
+      // skip:
+      //   !formFieldsTA.category.length ||
+      //   (!!formFieldsTA.language.length && !formFieldsTA.region.length) ||
+      //   isRecom === true,
+      skip: true,
     },
   );
 

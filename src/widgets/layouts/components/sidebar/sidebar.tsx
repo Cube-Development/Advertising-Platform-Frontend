@@ -15,15 +15,15 @@ export const Sidebar: FC = () => {
       const currentScrollY = window.scrollY;
 
       if (currentScrollY < lastScrollY) {
-        setIsScrollingUp(true); // Скроллим вверх
+        setIsScrollingUp(true);
       } else {
-        setIsScrollingUp(false); // Скроллим вниз
+        setIsScrollingUp(false);
       }
 
       setLastScrollY(currentScrollY);
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
 
     return () => {
       window.removeEventListener("scroll", handleScroll);
