@@ -25,6 +25,8 @@ export const Platforms: FC<ServicesProps> = ({ page }) => {
   const { data: telegramCahnnels, isLoading: isTelegramLoading } =
     useGetCatalogQuery(
       {
+        page: 1,
+        elements_on_page: 1,
         filter: {
           platform: platformTypesNum.telegram,
         },
@@ -37,6 +39,8 @@ export const Platforms: FC<ServicesProps> = ({ page }) => {
   const { data: instagramCahnnels, isLoading: isInstagramLoading } =
     useGetCatalogQuery(
       {
+        page: 1,
+        elements_on_page: 1,
         filter: {
           platform: platformTypesNum.instagram,
         },
@@ -49,6 +53,8 @@ export const Platforms: FC<ServicesProps> = ({ page }) => {
   const { data: youtubeCahnnels, isLoading: isYoutubeLoading } =
     useGetCatalogQuery(
       {
+        page: 1,
+        elements_on_page: 1,
         filter: {
           platform: platformTypesNum.youtube,
         },

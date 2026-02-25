@@ -51,6 +51,7 @@ interface CatalogListProps {
   isLoading?: boolean;
   catalogFilter: CATALOG_FILTER;
   changeCatalogFilter: (filter: CATALOG_FILTER) => void;
+  haveMore?: boolean;
 }
 
 export const CatalogList: FC<CatalogListProps> = ({
@@ -61,6 +62,7 @@ export const CatalogList: FC<CatalogListProps> = ({
   formState,
   page,
   isLast,
+  haveMore,
   onChangeCard,
   isLoading,
   catalogFilter,
@@ -194,11 +196,11 @@ export const CatalogList: FC<CatalogListProps> = ({
           </div>
         )}
       </div>
-      {!isLast ? (
+      {haveMore ? (
         <div className={styles.show_more}>
-          {!isAuth ? (
+          {!isAuth && isLast ? (
             <LoginToViewMore trigger={<ShowMoreBtn />} />
-          ) : !isPremiumUser ? (
+          ) : !isPremiumUser && isLast ? (
             <LoginPremiumAccess trigger={<ShowMoreBtn />} />
           ) : isLoading ? (
             <SpinnerLoader />
@@ -211,6 +213,22 @@ export const CatalogList: FC<CatalogListProps> = ({
       ) : (
         <div className={styles.empty}></div>
       )}
+
+      {/* {!isLast ? (
+        <div className={styles.show_more}>
+          {!isAuth ? (
+            <LoginToViewMore trigger={<ShowMoreBtn />} />
+          ) : isLoading ? (
+            <SpinnerLoader />
+          ) : (
+            <div onClick={handleOnChangePage}>
+              <ShowMoreBtn />
+            </div>
+          )}
+        </div>
+      ) : (
+        <div className={styles.empty}></div>
+      )} */}
     </div>
   );
 };

@@ -614,6 +614,15 @@ export const CatalogBlock: FC = () => {
                         : catalogManagerPublic?.isLast
                       : catalogPublic?.isLast) || false
                 }
+                haveMore={
+                  (isAuth && !projectId
+                    ? catalogAuth?.haveMore
+                    : isAuth && projectId
+                      ? projectId
+                        ? catalogManager?.haveMore
+                        : catalogManagerPublic?.haveMore
+                      : catalogPublic?.haveMore) || false
+                }
                 isLoading={
                   isCatalogAuthLoading ||
                   isCatalogLoading ||

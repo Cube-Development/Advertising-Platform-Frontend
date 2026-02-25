@@ -23,7 +23,7 @@ export const CardToViewMore: FC = () => {
             ]}
           />
         </CardDescription>
-        <Link to={ENUM_PATHS.LOGIN}>
+        <Link to={ENUM_PATHS.REGISTRATION}>
           <MyButton
             className="w-full rounded-xl text-[var(--Personal-colors-main)]"
             buttons_type="button__white"

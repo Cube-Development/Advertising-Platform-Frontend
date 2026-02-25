@@ -15,8 +15,8 @@ export interface getCatalogReq {
   guest_id?: string;
   project_id?: string;
   language: ENUM_LANGUAGES_NUM;
-  page?: number;
-  elements_on_page?: number;
+  page: number;
+  elements_on_page: number;
   filter: ICatalogFilter;
   sort?: sortingFilter;
   search_string?: string | undefined;
@@ -59,8 +59,9 @@ export const catalogAPI = baseApi.injectEndpoints({
       transformResponse: (response: ICatalogCards) => {
         return {
           ...response,
-          isLast:
-            response?.elements ===
+          isLast: response?.channels?.length < INTERSECTION_ELEMENTS.CATALOG,
+          haveMore:
+            response?.elements >
             response?.channels?.length +
               (response?.page - 1) * INTERSECTION_ELEMENTS.CATALOG,
         };
@@ -78,6 +79,9 @@ export const catalogAPI = baseApi.injectEndpoints({
           currentCache.channels.length >=
           (arg.arg.page || 1) * INTERSECTION_ELEMENTS.CATALOG
         ) {
+          return currentCache;
+        }
+        if (currentCache.page === newItems.page) {
           return currentCache;
         }
         return {
@@ -128,8 +132,9 @@ export const catalogAuthAPI = authApi.injectEndpoints({
       transformResponse: (response: ICatalogCards) => {
         return {
           ...response,
-          isLast:
-            response?.elements ===
+          isLast: response?.channels?.length < INTERSECTION_ELEMENTS.CATALOG,
+          haveMore:
+            response?.elements >
             response?.channels?.length +
               (response?.page - 1) * INTERSECTION_ELEMENTS.CATALOG,
         };
@@ -147,6 +152,9 @@ export const catalogAuthAPI = authApi.injectEndpoints({
           currentCache.channels.length >=
           (arg.arg.page || 1) * INTERSECTION_ELEMENTS.CATALOG
         ) {
+          return currentCache;
+        }
+        if (currentCache.page === newItems.page) {
           return currentCache;
         }
         return {
