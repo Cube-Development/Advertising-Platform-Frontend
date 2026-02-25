@@ -158,6 +158,14 @@
       }
     },
     "login_premium_access": {
+      "channels": {
+        "found": "Найдено по вашему запросу",
+        "channels_count_one": "{{count}} <0>канал</0>",
+        "channels_count_few": "{{count}} <0>канала</0>",
+        "channels_count_many": "{{count}} <0>каналов</0>",
+        "channels_count_other": "{{count}} <0>каналов</0>",
+        "required": "Для просмотра полного списка требуется подписка"
+      },
       "title": "Хотите увидеть еще больше ?",
       "description": "Для этого необходимо чтобы на вашем балансе было не менее <0>{{balance}} сум</0>",
       "options": [

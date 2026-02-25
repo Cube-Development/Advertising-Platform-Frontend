@@ -12,23 +12,44 @@ import {
   DialogTrigger,
   MyButton,
 } from "@shared/ui";
-import { type FC } from "react";
+import { type FC, useState, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 interface ILoginToViewMoreProps {
   trigger?: React.ReactNode;
   className?: string;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
 }
 
 export const LoginToViewMore: FC<ILoginToViewMoreProps> = ({
   trigger,
   className,
+  open: controlledOpen,
+  onOpenChange,
 }) => {
   const { t } = useTranslation();
 
+  const isControlled = controlledOpen !== undefined;
+
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
+
+  const open = isControlled ? controlledOpen : uncontrolledOpen;
+
+  const handleOpenChange = useCallback(
+    (value: boolean) => {
+      if (isControlled) {
+        onOpenChange?.(value);
+      } else {
+        setUncontrolledOpen(value);
+      }
+    },
+    [isControlled, onOpenChange],
+  );
+
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
         {trigger ? (
           trigger
@@ -40,6 +61,7 @@ export const LoginToViewMore: FC<ILoginToViewMoreProps> = ({
           </div>
         )}
       </DialogTrigger>
+
       <DialogContent className="p-4">
         <DialogHeader className="flex items-center justify-center gap-2">
           <LockIcon className="w-16 h-16 text-[var(--Personal-colors-main)]" />
@@ -47,9 +69,11 @@ export const LoginToViewMore: FC<ILoginToViewMoreProps> = ({
             {t("auth.login_to_view_more.title")}
           </DialogTitle>
         </DialogHeader>
+
         <DialogDescription className="text-none text-center text-xs sm:text-sm">
           {t("auth.login_to_view_more.description")}
         </DialogDescription>
+
         <DialogFooter className="sm:grid sm:grid-cols-2 flex-col-reverse flex gap-2">
           <DialogClose asChild>
             <MyButton
@@ -59,7 +83,8 @@ export const LoginToViewMore: FC<ILoginToViewMoreProps> = ({
               {t("auth.login_to_view_more.buttons.cancel")}
             </MyButton>
           </DialogClose>
-          <Link to={ENUM_PATHS.LOGIN}>
+
+          <Link to={ENUM_PATHS.REGISTRATION}>
             <MyButton className="text-xs sm:text-sm">
               {t("auth.login_to_view_more.buttons.register")}
             </MyButton>

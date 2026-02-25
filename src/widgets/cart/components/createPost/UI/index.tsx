@@ -8,7 +8,7 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { ENUM_ROLES } from "@entities/user";
-import { LoginPremiumAccess } from "@features/user";
+import { LoginPremiumAccess, LoginToViewMore } from "@features/user";
 
 interface CreatePostProps {
   cart: ICart;
@@ -18,7 +18,15 @@ interface CreatePostProps {
 export const CreatePost: FC<CreatePostProps> = ({ cart, role }) => {
   const { t } = useTranslation();
   const screen = useWindowWidth();
-  const { isPremiumUser } = useAppSelector((state) => state.user);
+  const { isPremiumUser, isAuth } = useAppSelector((state) => state.user);
+
+  const isModal = !isAuth || !isPremiumUser;
+  const Modal = () =>
+    !isAuth ? (
+      <LoginToViewMore />
+    ) : !isPremiumUser ? (
+      <LoginPremiumAccess />
+    ) : null;
   return (
     <motion.div
       className={styles.wrapper}
@@ -44,11 +52,7 @@ export const CreatePost: FC<CreatePostProps> = ({ cart, role }) => {
               <div className={styles.info}>
                 <p>{t("cart.create_post.views")}</p>
                 <span>
-                  {isPremiumUser ? (
-                    cart?.coverage?.toLocaleString()
-                  ) : (
-                    <LoginPremiumAccess />
-                  )}
+                  {isModal ? <Modal /> : cart?.coverage?.toLocaleString()}
                 </span>
               </div>
               {role !== ENUM_ROLES.AGENCY && (

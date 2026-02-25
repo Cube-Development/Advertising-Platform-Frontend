@@ -157,6 +157,12 @@
       }
     },
     "login_premium_access": {
+      "channels": {
+        "found": "Sizning so‘rovingiz bo‘yicha topildi",
+        "channels_count_one": "{{count}} <0>kanal</0>",
+        "channels_count_other": "{{count}} <0>kanallar</0>",
+        "required": "To‘liq ro‘yxatni ko‘rish uchun obuna talab etiladi"
+      },
       "title": "Yana ham ko'proq ko'rishni xohlaysizmi?",
       "description": "Buning uchun balansingizda kamida <0>{{balance}} so'm</0> bo'lishi kerak",
       "options": [

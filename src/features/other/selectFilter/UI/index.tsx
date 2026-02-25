@@ -15,6 +15,7 @@ interface SelectFilterProps extends MultiSelectProps {
   data?: any;
   typeData?: string;
   typeParameter: string;
+  onChangeSort?: () => void;
 }
 
 export const SelectFilter: FC<SelectFilterProps> = ({
@@ -23,6 +24,7 @@ export const SelectFilter: FC<SelectFilterProps> = ({
   typeData,
   typeParameter,
   onChangeOption,
+  onChangeSort,
   isRow,
   textData,
   defaultValue,
@@ -38,6 +40,10 @@ export const SelectFilter: FC<SelectFilterProps> = ({
   const allText = { title: t(textData) };
 
   const handleMultiOptionsChange = (newOptions: (number | string)[]) => {
+    if (onChangeSort) {
+      onChangeSort();
+      return;
+    }
     if (typeData && data) {
       const newData = {
         ...data,

@@ -157,6 +157,12 @@
       }
     },
     "login_premium_access": {
+      "channels": {
+        "found": "Found for your query",
+        "channels_count_one": "{{count}} <0>channel</0>",
+        "channels_count_other": "{{count}} <0>channels</0>",
+        "required": "A subscription is required to view the full list"
+      },
       "title": "Want to see even more?",
       "description": "To access this, you need to have at least <0>{{balance}} UZS</0> on your balance",
       "options": [

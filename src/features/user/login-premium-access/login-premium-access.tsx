@@ -13,27 +13,50 @@ import {
   DialogTrigger,
   MyButton,
 } from "@shared/ui";
-import { type FC } from "react";
+import { useCallback, useState, type FC } from "react";
 import { Trans, useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 interface ILoginPremiumAccessProps {
   trigger?: React.ReactNode;
   className?: string;
+  open?: boolean;
+  onOpenChange?: (open: boolean) => void;
+  channelCount?: number;
 }
 
 export const LoginPremiumAccess: FC<ILoginPremiumAccessProps> = ({
   trigger,
   className,
+  open: controlledOpen,
+  onOpenChange,
+  channelCount,
 }) => {
   const { t } = useTranslation();
+
+  const isControlled = controlledOpen !== undefined;
+
+  const [uncontrolledOpen, setUncontrolledOpen] = useState(false);
+
+  const open = isControlled ? controlledOpen : uncontrolledOpen;
+
+  const handleOpenChange = useCallback(
+    (value: boolean) => {
+      if (isControlled) {
+        onOpenChange?.(value);
+      } else {
+        setUncontrolledOpen(value);
+      }
+    },
+    [isControlled, onOpenChange],
+  );
   const { premiumBalance } = useAppSelector((state) => state.user);
   const options = t("auth.login_premium_access.options", {
     returnObjects: true,
   }) as { title: string }[];
 
   return (
-    <Dialog>
+    <Dialog open={open} onOpenChange={handleOpenChange}>
       <DialogTrigger asChild>
         {trigger ? (
           trigger
@@ -51,6 +74,30 @@ export const LoginPremiumAccess: FC<ILoginPremiumAccessProps> = ({
       <DialogContent className="p-4">
         <DialogHeader className="flex items-center justify-center gap-2">
           <LockIcon className="w-16 h-16 text-[var(--Personal-colors-main)]" />
+          {channelCount && channelCount > 0 && (
+            <div
+              style={{
+                backgroundColor: "rgba(12, 162, 184, 0.10)",
+              }}
+              className=" rounded-xl p-4 text-center w-full"
+            >
+              <p className="text-xs sm:text-sm mb-1">
+                {t("auth.login_premium_access.channels.found")}
+              </p>
+              <p className="text-2xl sm:text-3xl font-bold text-[var(--Personal-colors-main)]">
+                <Trans
+                  i18nKey="auth.login_premium_access.channels.channels_count"
+                  values={{ count: channelCount }}
+                  components={[
+                    <span
+                      key="0"
+                      className="text-sm sm:text-base font-medium text-foreground ml-1.5"
+                    />,
+                  ]}
+                />
+              </p>
+            </div>
+          )}
           <DialogTitle className="text-center text-sm sm:text-base">
             {t("auth.login_premium_access.title")}
           </DialogTitle>
