@@ -147,7 +147,43 @@
     "by_clicking_sign_up": "By clicking the sign-up button, you confirm that you have read the following:",
     "terms": "Service rules",
     "and": "and",
-    "privacy_policy": "Public offer"
+    "privacy_policy": "Public offer",
+    "login_to_view_more": {
+      "title": "Want to see more advertising platforms?",
+      "description": "Log in or register on the platform to see more channels",
+      "buttons": {
+        "cancel": "Cancel",
+        "register": "Register"
+      }
+    },
+    "login_premium_access": {
+      "channels": {
+        "found": "Found for your query",
+        "channels_count_one": "{{count}} <0>channel</0>",
+        "channels_count_other": "{{count}} <0>channels</0>",
+        "required": "A subscription is required to view the full list"
+      },
+      "title": "Want to see even more?",
+      "description": "To access this, you need to have at least <0>{{balance}} UZS</0> on your balance",
+      "options": [
+        {
+          "title": "Full access to the blogger database"
+        },
+        {
+          "title": "Convenient search and flexible sorting"
+        },
+        {
+          "title": "Extended statistics for each platform"
+        },
+        {
+          "title": "Save advertising campaigns for future launch"
+        }
+      ],
+      "buttons": {
+        "cancel": "Cancel",
+        "balance": "Top up balance"
+      }
+    }
   },
   "pages": {
     "catalog": "Channel catalog",
@@ -1872,6 +1908,18 @@
     "ai": {
       "title": "Describe your advertising campaign. The more details you provide about your goals, the more effectively target audiences will be selected for you.",
       "default_input": "Tell us about your brand and the product you plan to advertise."
+    },
+    "card_to_view_more": {
+      "description": "You need to <0>Log in</0> or <1>Sign up</1> to access filters and AI-powered auto-selection",
+      "buttons": {
+        "register": "Sign up"
+      }
+    },
+    "card_premium_access": {
+      "description": "To get <0>full access</0> to the blogger database and platform features, your balance must be at least <1>{{balance}} UZS</1>",
+      "buttons": {
+        "balance": "Top up balance"
+      }
     },
     "category": {
       "title": "Business Category:",

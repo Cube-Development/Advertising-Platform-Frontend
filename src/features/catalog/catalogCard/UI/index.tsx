@@ -14,7 +14,7 @@ import {
   SubsIcon,
 } from "@shared/assets";
 import { BREAKPOINT } from "@shared/config";
-import { useWindowWidth } from "@shared/hooks";
+import { useAppSelector, useWindowWidth } from "@shared/hooks";
 import { CHANNEL_LANGUAGES_LIST } from "@shared/languages";
 import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";
 import {
@@ -28,6 +28,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { ChannelCardDescription, ChannelCardMatch } from "../components";
 import styles from "./styles.module.scss";
+import { LoginPremiumAccess, LoginToViewMore } from "@features/user";
 
 interface CatalogCardProps extends IChangeCards, ICatalogCard {
   card: ICatalogChannel;
@@ -42,6 +43,15 @@ export const CatalogCard: FC<CatalogCardProps> = ({
   page,
 }) => {
   const { t } = useTranslation();
+  const { isPremiumUser, isAuth } = useAppSelector((state) => state.user);
+
+  const isModal = !isAuth || !isPremiumUser;
+  const Modal = () =>
+    !isAuth ? (
+      <LoginToViewMore />
+    ) : !isPremiumUser ? (
+      <LoginPremiumAccess />
+    ) : null;
 
   let startFormat: IFormat;
   // !!!
@@ -162,9 +172,9 @@ export const CatalogCard: FC<CatalogCardProps> = ({
                   {card?.url}
                 </p>
               )}
-              {screen >= BREAKPOINT.MD && (
+              {/* {screen >= BREAKPOINT.MD && (
                 <ChannelCardDescription description={card?.description} />
-              )}
+              )} */}
             </div>
           </div>
 
@@ -181,7 +191,13 @@ export const CatalogCard: FC<CatalogCardProps> = ({
                   <div>
                     <EyeIcon />
                   </div>
-                  <span>{selectedFormat?.views!.toLocaleString()}</span>
+                  <span>
+                    {isModal ? (
+                      <Modal />
+                    ) : (
+                      selectedFormat?.views!.toLocaleString()
+                    )}
+                  </span>
                 </div>
               </div>
               <div className={styles.channel__data_middle}>
@@ -201,12 +217,20 @@ export const CatalogCard: FC<CatalogCardProps> = ({
               <div className={styles.channel__data_row}>
                 <div className={styles.data}>
                   <p>ER:</p>
-                  <span>{selectedFormat?.er}%</span>
+                  <span>
+                    {isModal ? <Modal /> : <>{selectedFormat?.er}%</>}
+                  </span>
                 </div>
                 <div className={styles.data}>
                   <p>CPV:</p>
                   <span>
-                    {selectedFormat?.cpv!.toLocaleString()} {t(`symbol`)}
+                    {isModal ? (
+                      <Modal />
+                    ) : (
+                      <>
+                        {selectedFormat?.cpv!.toLocaleString()} {t(`symbol`)}
+                      </>
+                    )}
                   </span>
                 </div>
               </div>
@@ -241,7 +265,13 @@ export const CatalogCard: FC<CatalogCardProps> = ({
                     <div>
                       <EyeIcon />
                     </div>
-                    <span>{selectedFormat?.views!.toLocaleString()}</span>
+                    <span>
+                      {isModal ? (
+                        <Modal />
+                      ) : (
+                        selectedFormat?.views!.toLocaleString()
+                      )}
+                    </span>
                   </div>
                   <div className={styles.arrow}>
                     <ArrowSmallVerticalIcon
@@ -276,12 +306,20 @@ export const CatalogCard: FC<CatalogCardProps> = ({
                 <div className={styles.channel__data_row}>
                   <div className={styles.data}>
                     <p>ER:</p>
-                    <span>{selectedFormat?.er}%</span>
+                    <span>
+                      {isModal ? <Modal /> : <>{selectedFormat?.er}%</>}
+                    </span>
                   </div>
                   <div className={styles.data}>
                     <p>CPV:</p>
                     <span>
-                      {selectedFormat?.cpv!.toLocaleString()} {t(`symbol`)}
+                      {isModal ? (
+                        <Modal />
+                      ) : (
+                        <>
+                          {selectedFormat?.cpv!.toLocaleString()} {t(`symbol`)}
+                        </>
+                      )}
                     </span>
                   </div>
                 </div>
@@ -290,7 +328,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
           </Accordion>
         ) : screen < BREAKPOINT.MD ? (
           <>
-            <ChannelCardDescription description={card?.description} />
+            {/* <ChannelCardDescription description={card?.description} /> */}
 
             <Accordion type="single" collapsible>
               <AccordionItem
@@ -309,7 +347,13 @@ export const CatalogCard: FC<CatalogCardProps> = ({
                       <div>
                         <EyeIcon />
                       </div>
-                      <span>{selectedFormat?.views!.toLocaleString()}</span>
+                      <span>
+                        {isModal ? (
+                          <Modal />
+                        ) : (
+                          selectedFormat?.views!.toLocaleString()
+                        )}
+                      </span>
                     </div>
                   </div>
                   <AccordionContent className={styles.channel__content}>
@@ -336,12 +380,21 @@ export const CatalogCard: FC<CatalogCardProps> = ({
                     <div className={styles.channel__data_row}>
                       <div className={styles.data}>
                         <p>ER:</p>
-                        <span>{selectedFormat?.er}%</span>
+                        <span>
+                          {isModal ? <Modal /> : <>{selectedFormat?.er}%</>}
+                        </span>
                       </div>
                       <div className={styles.data}>
                         <p>CPV:</p>
                         <span>
-                          {selectedFormat?.cpv!.toLocaleString()} {t(`symbol`)}
+                          {isModal ? (
+                            <Modal />
+                          ) : (
+                            <>
+                              {selectedFormat?.cpv!.toLocaleString()}{" "}
+                              {t(`symbol`)}
+                            </>
+                          )}
                         </span>
                       </div>
                     </div>

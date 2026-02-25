@@ -5,7 +5,7 @@ import {
   getOrdersByStatusReq,
   IBloggerOffers,
 } from "@entities/offer";
-import { BALANCE, VIEWS_BLOGGER_OFFERS } from "@shared/api";
+import { BALANCE, USER_ME, VIEWS_BLOGGER_OFFERS } from "@shared/api";
 
 interface Props {
   dispatch: AppDispatch;
@@ -39,5 +39,5 @@ export const invalidateBloggerOfferByUserAction = async ({
   dispatch(bloggerOffersAPI.util.invalidateTags([VIEWS_BLOGGER_OFFERS]));
 
   if (invalidateBalance)
-    dispatch(bloggerOffersAPI.util.invalidateTags([BALANCE]));
+    dispatch(bloggerOffersAPI.util.invalidateTags([BALANCE, USER_ME]));
 };

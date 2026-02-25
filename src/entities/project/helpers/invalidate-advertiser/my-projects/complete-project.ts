@@ -1,6 +1,6 @@
 import { AppDispatch } from "@app/providers/store";
 import { dateSortingTypes } from "@entities/platform";
-import { ADV_ORDERS, BALANCE, VIEWS_ADVERTISER } from "@shared/api";
+import { ADV_ORDERS, BALANCE, USER_ME, VIEWS_ADVERTISER } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ILanguage, USER_LANGUAGES_LIST } from "@shared/languages";
 import { advProjectsAPI, getProjectsCardReq } from "../../../api";
@@ -50,6 +50,11 @@ export const invalidateAdvProjectByCompleteProject = async ({
 
   // 3. Обновляем кэш кружочков
   dispatch(
-    advProjectsAPI.util.invalidateTags([ADV_ORDERS, VIEWS_ADVERTISER, BALANCE]),
+    advProjectsAPI.util.invalidateTags([
+      ADV_ORDERS,
+      VIEWS_ADVERTISER,
+      BALANCE,
+      USER_ME,
+    ]),
   );
 };

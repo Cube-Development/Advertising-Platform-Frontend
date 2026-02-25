@@ -27,6 +27,7 @@ export interface ICatalogCards extends IChangeCards {
   elements: number;
   channels: ICatalogChannel[];
   isLast?: boolean;
+  haveMore?: boolean;
 }
 
 export interface IRecommendCards {

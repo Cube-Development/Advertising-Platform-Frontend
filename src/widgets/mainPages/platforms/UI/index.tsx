@@ -21,16 +21,11 @@ export const Platforms: FC<ServicesProps> = ({ page }) => {
   const { data: telegramCahnnels, isLoading: isTelegramLoading } =
     useGetCatalogQuery(
       {
-        elements_on_page: 1,
         page: 1,
+        elements_on_page: 1,
         filter: {
           platform: platformTypesNum.telegram,
-          business: [],
-          age: [],
-          language: [],
-          region: [],
         },
-        sort: sortingTypes[0].type,
         language: USER_LANGUAGES_LIST[0].id,
         guest_id: guestId,
       },
@@ -40,16 +35,11 @@ export const Platforms: FC<ServicesProps> = ({ page }) => {
   const { data: instagramCahnnels, isLoading: isInstagramLoading } =
     useGetCatalogQuery(
       {
-        elements_on_page: 1,
         page: 1,
+        elements_on_page: 1,
         filter: {
           platform: platformTypesNum.instagram,
-          business: [],
-          age: [],
-          language: [],
-          region: [],
         },
-        sort: sortingTypes[0].type,
         language: USER_LANGUAGES_LIST[0].id,
         guest_id: guestId,
       },
@@ -59,16 +49,11 @@ export const Platforms: FC<ServicesProps> = ({ page }) => {
   const { data: youtubeCahnnels, isLoading: isYoutubeLoading } =
     useGetCatalogQuery(
       {
-        elements_on_page: 1,
         page: 1,
+        elements_on_page: 1,
         filter: {
           platform: platformTypesNum.youtube,
-          business: [],
-          age: [],
-          language: [],
-          region: [],
         },
-        sort: sortingTypes[0].type,
         language: USER_LANGUAGES_LIST[0].id,
         guest_id: guestId,
       },

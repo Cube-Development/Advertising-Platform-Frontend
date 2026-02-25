@@ -9,6 +9,8 @@ export interface IUser {
   is_active: boolean;
   is_superuser: boolean;
   is_verified: boolean;
+  is_premium: boolean;
+  amount: number;
   role: ENUM_ROLES;
   language: ENUM_LANGUAGES_NUM;
   location: string;

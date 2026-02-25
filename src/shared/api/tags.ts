@@ -1,4 +1,5 @@
 export const USER_DATA = "USER_DATA";
+export const USER_ME = "USER_ME";
 export const CART_PUB = "CART_PUB";
 export const CART = "CART";
 export const CART_MANAGER = "CART_MANAGER";

@@ -147,7 +147,43 @@
     "by_clicking_sign_up": "Ro'yxatdan o'tish tugmasini bosish orqali siz quyidagilar bilan tanishganligingizni tasdiqlaysiz:",
     "terms": "Xizmat qoidalari",
     "and": "va",
-    "privacy_policy": "Ommaviy oferta"
+    "privacy_policy": "Ommaviy oferta",
+    "login_to_view_more": {
+      "title": "Joylashtirish uchun ko'proq maydonlarni ko'rishni xohlaysizmi?",
+      "description": "Platformaga kiring yoki ro'yxatdan o'ting va siz ko'proq kanallarni ko'rishingiz mumkin bo'ladi",
+      "buttons": {
+        "cancel": "Bekor qilish",
+        "register": "Ro'yxatdan o'tish"
+      }
+    },
+    "login_premium_access": {
+      "channels": {
+        "found": "Sizning so‘rovingiz bo‘yicha topildi",
+        "channels_count_one": "{{count}} <0>kanal</0>",
+        "channels_count_other": "{{count}} <0>kanallar</0>",
+        "required": "To‘liq ro‘yxatni ko‘rish uchun obuna talab etiladi"
+      },
+      "title": "Yana ham ko'proq ko'rishni xohlaysizmi?",
+      "description": "Buning uchun balansingizda kamida <0>{{balance}} so'm</0> bo'lishi kerak",
+      "options": [
+        {
+          "title": "Bloggerlar bazasiga to'liq kirish"
+        },
+        {
+          "title": "Qulay qidiruv va moslashuvchan saralash"
+        },
+        {
+          "title": "Har bir maydon bo'yicha kengaytirilgan statistika"
+        },
+        {
+          "title": "Kelajakda ishga tushirish uchun reklama kampaniyalarini saqlash"
+        }
+      ],
+      "buttons": {
+        "cancel": "Bekor qilish",
+        "balance": "Balansni to'ldirish"
+      }
+    }
   },
   "pages": {
     "catalog": "Kanallar katalogi",
@@ -1873,6 +1909,19 @@
       "title": "Reklama kampaniyangizni tavsiflang. Maqsadlaringizni qanchalik batafsil yozsangiz, siz uchun maqsadli auditoriyalar shunchalik samarali tanlanadi",
       "default_input": "Brendingiz va reklama qilmoqchi bo'lgan mahsulotingiz haqida gapirib bering."
     },
+    "card_to_view_more": {
+      "description": "Filtrlardan va AI yordamida avtomatik tanlashdan foydalanish uchun <0>Tizimga kirishingiz</0> yoki <1>Ro'yxatdan o'tishingiz</1> kerak",
+      "buttons": {
+        "register": "Ro'yxatdan o'tish"
+      }
+    },
+    "card_premium_access": {
+      "description": "Bloggerlar bazasiga va platforma funksiyalariga <0>to'liq kirish</0> uchun balansingiz kamida <1>{{balance}} so'm</1> bo'lishi kerak",
+      "buttons": {
+        "balance": "Balansni to'ldirish"
+      }
+    },
+
     "category": {
       "title": "Biznes kategoriyasi:",
       "text": "",

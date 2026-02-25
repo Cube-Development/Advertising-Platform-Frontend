@@ -4,7 +4,14 @@ import {
   useGetOrganizationQuery,
   useGetProfileEDOQuery,
 } from "@entities/organization";
-import { ENUM_ROLES, offerSign, USER_ROLES } from "@entities/user";
+import {
+  ENUM_ROLES,
+  offerSign,
+  setPremiumBalance,
+  setPremiumUser,
+  useGetUserQueryQuery,
+  USER_ROLES,
+} from "@entities/user";
 import {
   useGetViewAdvertiserProjectQuery,
   useGetViewBloggerChannelQuery,
@@ -17,11 +24,11 @@ import {
   useGetBalanceQuery,
   walletSlice,
 } from "@entities/wallet";
+import { OfferSignModal, useRenderOfferModal } from "@features/organization";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import type { PropsWithChildren } from "react";
 import { useEffect } from "react";
 import { Footer, Header } from "../components";
-import { OfferSignModal, useRenderOfferModal } from "@features/organization";
 
 export const MainLayout = ({ children }: PropsWithChildren) => {
   const { isAuth, role, isAuthEcp } = useAppSelector((state) => state.user);
@@ -65,6 +72,11 @@ export const MainLayout = ({ children }: PropsWithChildren) => {
       skip: !isAuth || !USER_ROLES.includes(role),
     });
 
+  const { data: user, isLoading: isLoadingUser } = useGetUserQueryQuery(
+    undefined,
+    { skip: !isAuth },
+  );
+
   useEffect(() => {
     if (balance) {
       let wallet = {
@@ -100,6 +112,13 @@ export const MainLayout = ({ children }: PropsWithChildren) => {
       dispatch(offerSign());
     }
   }, [organization, isLoadingOrganization]);
+
+  useEffect(() => {
+    if (user) {
+      dispatch(setPremiumUser(user?.is_premium));
+      dispatch(setPremiumBalance(user?.amount || 0));
+    }
+  }, [user, isLoadingUser]);
 
   return (
     <>
