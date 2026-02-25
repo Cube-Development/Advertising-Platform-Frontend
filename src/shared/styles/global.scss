@@ -188,6 +188,7 @@ body::-webkit-scrollbar-corner {
     inset: 0;
     z-index: -1;
     opacity: 0.2; // теперь opacity только на градиент
+
     background-image:
       radial-gradient(
         circle at 10% 80%,
@@ -202,6 +203,7 @@ body::-webkit-scrollbar-corner {
 
     @media (max-width: 992px) {
       opacity: 0.15;
+
       background-image:
         radial-gradient(
           circle at 10% 80%,

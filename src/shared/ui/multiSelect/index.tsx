@@ -153,7 +153,7 @@ export const MultiSelect = React.forwardRef<
                       return (
                         <div className={styles.filter}>
                           {singleOption?.img && (
-                            <singleOption.img className="w-4 h-4" />
+                            <singleOption.img className="w-4 h-4 text-gray-400" />
                           )}
                           {!hideText && (
                             <span className="truncate">
@@ -270,7 +270,9 @@ export const MultiSelect = React.forwardRef<
                           {showCheckBox && (
                             <CustomCheckbox isSelected={isSelected} />
                           )}
-                          {option?.img && <option.img className="w-4 h-4" />}
+                          {option?.img && (
+                            <option.img className="w-4 h-4 text-gray-400" />
+                          )}
                           {!hideText && (
                             <span className="truncate">{option?.name}</span>
                           )}

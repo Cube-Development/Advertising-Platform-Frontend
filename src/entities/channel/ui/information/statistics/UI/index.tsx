@@ -3,6 +3,9 @@ import { IFormat } from "@entities/project";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { useAppSelector } from "@shared/hooks";
+import { LoginPremiumAccess, LoginToViewMore } from "@features/user";
+import { CardPremiumAccess } from "@features/catalog";
 
 interface StatisticsProps {
   card: IReadChannelData;
@@ -21,14 +24,31 @@ const changeNumber = (num: number): string => {
 
 export const Statistics: FC<StatisticsProps> = ({ card, selectedFormat }) => {
   const { t } = useTranslation();
+  const { isPremiumUser, isAuth } = useAppSelector((state) => state.user);
+
+  const isModal = !isAuth || !isPremiumUser;
+  const Modal = () =>
+    !isAuth ? (
+      <LoginToViewMore />
+    ) : !isPremiumUser ? (
+      <LoginPremiumAccess />
+    ) : null;
+
   return (
     <div className={styles.wrapper}>
       <p className={styles.title}>{t("channel.statistics.title")}</p>
+      {isAuth && !isPremiumUser && <CardPremiumAccess />}
       <div className={styles.block__wrapper}>
         <div className={styles.main}>
           <div className={styles.block}>
             <p>{t("channel.statistics.orders")}</p>
-            <span>{changeNumber(card?.order_completed_count || 0)}</span>
+            <span>
+              {isModal ? (
+                <Modal />
+              ) : (
+                changeNumber(card?.order_completed_count || 0)
+              )}
+            </span>
           </div>
           <div className={styles.block}>
             <p>{t("channel.statistics.subs")}</p>
@@ -40,13 +60,19 @@ export const Statistics: FC<StatisticsProps> = ({ card, selectedFormat }) => {
             <div className={`${styles.row} ${styles.borBottom}`}>
               <div className={styles.center}>
                 <p>{t("channel.statistics.views")}:</p>
-                <span>{changeNumber(selectedFormat?.views || 0)}</span>
+                <span>
+                  {isModal ? (
+                    <Modal />
+                  ) : (
+                    changeNumber(selectedFormat?.views || 0)
+                  )}
+                </span>
               </div>
             </div>
             <div className={styles.row}>
               <div className={styles.center}>
                 <p>{t("channel.statistics.er")}:</p>
-                <span>{selectedFormat?.er} %</span>
+                <span>{isModal ? <Modal /> : <>{selectedFormat?.er} %</>}</span>
               </div>
             </div>
           </div>
@@ -54,14 +80,22 @@ export const Statistics: FC<StatisticsProps> = ({ card, selectedFormat }) => {
             <div className={`${styles.row} ${styles.borBottom}`}>
               <div className={styles.center}>
                 <p>{t("channel.statistics.posts")}:</p>
-                <span>{card?.published_posts}</span>
+                <span>
+                  {isModal ? <Modal /> : <>{card?.published_posts}</>}
+                </span>
               </div>
             </div>
             <div className={styles.row}>
               <div className={styles.center}>
                 <p>{t("channel.statistics.cpv")}:</p>
                 <span>
-                  {selectedFormat?.cpv} {t("symbol")}
+                  {isModal ? (
+                    <Modal />
+                  ) : (
+                    <>
+                      {selectedFormat?.cpv} {t("symbol")}
+                    </>
+                  )}
                 </span>
               </div>
             </div>

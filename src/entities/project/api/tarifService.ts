@@ -1,4 +1,4 @@
-import { ADV_TARIFF_ORDERS, authApi, BALANCE } from "@shared/api";
+import { ADV_TARIFF_ORDERS, authApi, BALANCE, USER_ME } from "@shared/api";
 import { IBuyTariff, IChangeOrder } from "../types";
 
 export const tarifAPI = authApi.injectEndpoints({
@@ -9,7 +9,7 @@ export const tarifAPI = authApi.injectEndpoints({
         method: `POST`,
         body: BodyParams,
       }),
-      invalidatesTags: [BALANCE],
+      invalidatesTags: [BALANCE, USER_ME],
     }),
     changeOrder: build.mutation<{ success: boolean }, IChangeOrder>({
       query: (BodyParams) => ({

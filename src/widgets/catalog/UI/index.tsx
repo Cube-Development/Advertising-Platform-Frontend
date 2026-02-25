@@ -22,6 +22,8 @@ import {
   useRemoveFromCommonCartMutation,
   useRemoveFromManagerCartMutation,
   useRemoveFromPublicCartMutation,
+  useGetAuthCatalogQuery,
+  catalogAuthAPI,
 } from "@entities/project";
 import { ENUM_ROLES, GenerateGuestId, useFindLanguage } from "@entities/user";
 import {
@@ -94,7 +96,7 @@ export const CatalogBlock: FC = () => {
   };
 
   const { data: catalogAuth, isFetching: isCatalogAuthLoading } =
-    useGetCatalogQuery(
+    useGetAuthCatalogQuery(
       {
         ...formState,
         language: language?.id || USER_LANGUAGES_LIST[0].id,
@@ -106,7 +108,7 @@ export const CatalogBlock: FC = () => {
     );
 
   const { data: catalogManager, isFetching: isCatalogManagerLoading } =
-    useGetCatalogQuery(
+    useGetAuthCatalogQuery(
       {
         ...formState,
         language: language?.id || USER_LANGUAGES_LIST[0].id,
@@ -130,7 +132,7 @@ export const CatalogBlock: FC = () => {
   const {
     data: catalogManagerPublic,
     isFetching: isCatalogManagerPublicLoading,
-  } = useGetCatalogQuery(
+  } = useGetAuthCatalogQuery(
     {
       ...formState,
       language: language?.id || USER_LANGUAGES_LIST[0].id,
@@ -191,7 +193,7 @@ export const CatalogBlock: FC = () => {
       const currentPage = Math.ceil(
         currentData.channels.length / INTERSECTION_ELEMENTS.CATALOG,
       );
-      if (currentPage > formState.page) {
+      if (currentPage > formState.page!) {
         setValue("page", currentPage);
       }
     }
@@ -501,20 +503,38 @@ export const CatalogBlock: FC = () => {
           return card;
         });
       }
-      dispatch(
-        catalogAPI.util.updateQueryData(
-          "getCatalog",
-          {
-            ...formState,
-            user_id: userId,
-            guest_id: guestId,
-            project_id: projectId,
-          },
-          (draft) => {
-            draft.channels = newCards;
-          },
-        ),
-      );
+
+      if (isAuth) {
+        dispatch(
+          catalogAuthAPI.util.updateQueryData(
+            "getAuthCatalog",
+            {
+              ...formState,
+              user_id: userId,
+              guest_id: guestId,
+              project_id: projectId,
+            },
+            (draft) => {
+              draft.channels = newCards;
+            },
+          ),
+        );
+      } else {
+        dispatch(
+          catalogAPI.util.updateQueryData(
+            "getCatalog",
+            {
+              ...formState,
+              user_id: userId,
+              guest_id: guestId,
+              project_id: projectId,
+            },
+            (draft) => {
+              draft.channels = newCards;
+            },
+          ),
+        );
+      }
     }
   };
 
@@ -561,7 +581,7 @@ export const CatalogBlock: FC = () => {
                 reset={reset}
                 setValue={setValueWithPage}
                 resetField={resetField}
-                page={formState.page}
+                page={formState.page!}
                 channels={
                   formState?.filter?.platform === platformTypesNum.site
                     ? mockData
@@ -593,6 +613,15 @@ export const CatalogBlock: FC = () => {
                         ? catalogManager?.isLast
                         : catalogManagerPublic?.isLast
                       : catalogPublic?.isLast) || false
+                }
+                haveMore={
+                  (isAuth && !projectId
+                    ? catalogAuth?.haveMore
+                    : isAuth && projectId
+                      ? projectId
+                        ? catalogManager?.haveMore
+                        : catalogManagerPublic?.haveMore
+                      : catalogPublic?.haveMore) || false
                 }
                 isLoading={
                   isCatalogAuthLoading ||

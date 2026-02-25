@@ -9,7 +9,7 @@ import {
 } from "@entities/user";
 import { authApi } from "@shared/api/blogix/authApi";
 import { baseApi } from "@shared/api/blogix/baseApi";
-import { USER_DATA } from "@shared/api/tags";
+import { USER_DATA, USER_ME } from "@shared/api/tags";
 import { ENUM_LANGUAGES_NUM } from "@shared/languages";
 
 type RegisterReq = {
@@ -123,6 +123,7 @@ export const userAPI = authApi.injectEndpoints({
         url: `/users/me`,
         method: `GET`,
       }),
+      providesTags: [USER_ME],
     }),
 
     getProfile: build.query<IProfileData, void>({
