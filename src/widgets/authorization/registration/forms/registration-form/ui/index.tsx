@@ -1,15 +1,17 @@
 import {
   IRegister,
   ENUM_ROLES,
+  toggleRole,
   useFindLanguage,
   useGetUserMutation,
   useLoginMutation,
   useRegisterMutation,
   USER_ROLES,
 } from "@entities/user";
+import { BarSubFilter } from "@features/other";
 import { useHandleAuth } from "@features/useHandleAuth";
 import { USER_LANGUAGES_LIST } from "@shared/languages";
-import { useAppSelector } from "@shared/hooks";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { ENUM_PATHS } from "@shared/routing";
 import { CustomCheckbox, useToast } from "@shared/ui";
 import { Eye, EyeOff, Loader } from "lucide-react";
@@ -18,6 +20,11 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import { registrationSteps } from "../../config";
 import styles from "./styles.module.scss";
+
+const REGISTRATION_ROLE_SWITCHER = [
+  { type: ENUM_ROLES.ADVERTISER, name: "roles.advertiser" },
+  { type: ENUM_ROLES.BLOGGER, name: "roles.blogger" },
+];
 
 interface RegistrationFormProps {
   onNavigate: (direction: registrationSteps) => void;
@@ -34,7 +41,11 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({
   const { toast } = useToast();
   const { t } = useTranslation();
   const language = useFindLanguage();
+  const dispatch = useAppDispatch();
   const { user } = useAppSelector((state) => state);
+  const currentRole = USER_ROLES.includes(user.role)
+    ? user.role
+    : ENUM_ROLES.ADVERTISER;
 
   const [showPassword, setShowPassword] = useState(false);
   const [password, setPassword] = useState("");
@@ -145,6 +156,14 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({
       </button>
 
       <form onSubmit={handleSubmit}>
+        <div className={styles.roleSwitcher}>
+          <BarSubFilter
+            tab={currentRole}
+            changeTab={(role) => dispatch(toggleRole(role))}
+            tab_list={REGISTRATION_ROLE_SWITCHER}
+            isFixedColumns={true}
+          />
+        </div>
         <div className={styles.input__container}>
           <label>
             <span>{t("auth.email")}</span>

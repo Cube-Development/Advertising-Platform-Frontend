@@ -23,12 +23,6 @@ body {
     "TT Runs Trial", "Montserrat Alternates", "Montserrat", sans-serif;
 }
 
-/* Дефолтный скролл под все браузеры */
-html {
-  scroll-behavior: smooth;
-}
-
-/* Firefox */
 html,
 body {
   scrollbar-width: thin;

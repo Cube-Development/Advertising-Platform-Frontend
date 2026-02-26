@@ -166,6 +166,22 @@
   }
 }
 
+.roleSwitcher {
+  width: 100%;
+
+  li {
+    padding: 12px 10px !important;
+
+    p {
+      font-size: 14px !important;
+
+      @media (max-width: 576px) {
+        font-size: 12px !important;
+      }
+    }
+  }
+}
+
 .agreement {
   text-align: center;
   color: var(--Personal-colors-black, #000);
