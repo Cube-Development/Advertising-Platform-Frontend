@@ -101,8 +101,16 @@ export const CatalogList: FC<CatalogListProps> = ({
     ) : null;
 
   const [isTableView, setIsTableView] = useState(() => {
-    const saved = localStorage.getItem("catalogViewMode");
-    return saved ? JSON.parse(saved) : true;
+    if (typeof window === "undefined") {
+      return true;
+    }
+
+    const saved = window.localStorage.getItem("catalogViewMode");
+    if (saved) {
+      return JSON.parse(saved);
+    }
+
+    return window.innerWidth >= BREAKPOINT.SM;
   });
 
   const handleViewChange = (value: boolean) => {
