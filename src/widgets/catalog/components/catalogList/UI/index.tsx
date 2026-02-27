@@ -11,11 +11,11 @@ import { AddToBasket } from "@features/cart";
 import {
   CardPremiumAccess,
   CatalogCard,
+  CompactCatalogCard,
   FormatList,
   SearchFilter,
   SkeletonCatalogCard,
-  SkeletonSmallCatalogCard,
-  SmallCatalogCard,
+  SkeletonCompactCatalogCard,
 } from "@features/catalog";
 import { SelectFilter, filterData } from "@features/other";
 import { GridIcon, ListIcon, LockIcon, SadSmileIcon } from "@shared/assets";
@@ -102,7 +102,7 @@ export const CatalogList: FC<CatalogListProps> = ({
 
   const [isTableView, setIsTableView] = useState(() => {
     const saved = localStorage.getItem("catalogViewMode");
-    return saved ? JSON.parse(saved) : false;
+    return saved ? JSON.parse(saved) : true;
   });
 
   const handleViewChange = (value: boolean) => {
@@ -233,7 +233,7 @@ export const CatalogList: FC<CatalogListProps> = ({
               variants={PAGE_ANIMATION.animationUp}
             >
               {isTableView ? (
-                <SmallCatalogCard
+                <CompactCatalogCard
                   card={card}
                   AddToBasketBtn={AddToBasket}
                   FormatList={FormatList}
@@ -253,7 +253,7 @@ export const CatalogList: FC<CatalogListProps> = ({
           Array.from({ length: INTERSECTION_ELEMENTS.CATALOG }).map(
             (_, index) =>
               isTableView ? (
-                <SkeletonSmallCatalogCard key={index} />
+                <SkeletonCompactCatalogCard key={index} />
               ) : (
                 <SkeletonCatalogCard key={index} />
               ),
