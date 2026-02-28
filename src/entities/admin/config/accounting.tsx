@@ -26,6 +26,7 @@ export enum ADMIN_ACCOUNTING_STATUS {
 export enum ADMIN_ACCOUNTING_TYPE {
   TOP_UP = 1,
   WITHDRAW = 2,
+  REFUND = 6,
 }
 
 export enum ADMIN_ACCOUNTING_PERIOD_DAYS {
@@ -56,7 +57,7 @@ export const ACCOUNTING_STATUS_LIST: IAccountingTab[] = [
     label: "admin_panel.accounting.tabs.category.type.refund",
     icon: Repeat,
     wallet: ENUM_WALLETS_TYPE.DEPOSIT,
-    type: ADMIN_ACCOUNTING_TYPE.WITHDRAW,
+    type: ADMIN_ACCOUNTING_TYPE.REFUND,
     wallet_label: "admin_panel.accounting.card.wallet.deposit",
     type_label: "admin_panel.accounting.card.type.withdraw",
   },

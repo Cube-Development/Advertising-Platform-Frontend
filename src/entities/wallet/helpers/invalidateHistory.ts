@@ -1,6 +1,6 @@
 import { AppDispatch } from "@app/providers/store";
 import { dateSortingTypes } from "@entities/platform";
-import { BALANCE, VIEWS_TRANSACTIONS } from "@shared/api";
+import { BALANCE, USER_ME, VIEWS_TRANSACTIONS } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ILanguage, USER_LANGUAGES_LIST } from "@shared/languages";
 import { walletAPI } from "../api";
@@ -27,5 +27,7 @@ export const invalidateHistory = async ({
   await trigger(params).unwrap();
 
   // 3. Обновляем кэш кружочков
-  dispatch(walletAPI.util.invalidateTags([BALANCE, VIEWS_TRANSACTIONS]));
+  dispatch(
+    walletAPI.util.invalidateTags([BALANCE, VIEWS_TRANSACTIONS, USER_ME]),
+  );
 };

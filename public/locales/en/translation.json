@@ -2785,6 +2785,10 @@
         "sign": {
           "success": "Operation completed successfully",
           "error": "Error occurred while processing the operation"
+        },
+        "unsign": {
+          "success": "Operation cancelled",
+          "error": "Error occurred while cancelling the operation"
         }
       },
       "review": {
@@ -3533,7 +3537,9 @@
         },
         "buttons": {
           "sign": "Sign",
-          "signed": "Signed"
+          "signed": "Signed",
+          "unsign": "Cancel",
+          "unsigned": "Cancelled"
         }
       }
     }

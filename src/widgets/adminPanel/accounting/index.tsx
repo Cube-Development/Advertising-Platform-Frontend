@@ -10,11 +10,12 @@ import {
   EmptyState,
   getAdminAccountingReq,
   IAccountingTab,
+  SkeletonAccountingCard,
   useGetAdminAccountingQuery,
 } from "@entities/admin";
 import { dateSortingTypes } from "@entities/platform";
 import { ENUM_WALLETS_TYPE } from "@entities/wallet";
-import { SignAccounting } from "@features/admin-panel";
+import { SignAccounting, UnsignAccounting } from "@features/admin-panel";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { useAppSelector } from "@shared/hooks";
 import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
@@ -58,9 +59,19 @@ export const Accounting: FC = () => {
     from_: getUtcDateMinusDays(formState?.period || 0),
   };
 
-  const { data, isLoading } = useGetAdminAccountingQuery(
+  const { data, isLoading, isFetching } = useGetAdminAccountingQuery(
     { ...getParams },
-    { skip: !isAuthEcp },
+    {
+      selectFromResult: ({ data, ...rest }) => ({
+        ...rest,
+        data:
+          (data?.status === formState?.status &&
+            data?.type === formState?.type &&
+            data) ||
+          undefined,
+      }),
+      skip: !isAuthEcp,
+    },
   );
 
   if (!isAuthEcp) {
@@ -136,30 +147,51 @@ export const Accounting: FC = () => {
         </div>
 
         {/* Сетка карточек документов */}
+        <div className="grid gap-6">
+          <SkeletonAccountingCard
+            isDisabled={formState.status !== ADMIN_ACCOUNTING_STATUS.PENDING}
+          />
+          {!!data?.items?.length && (
+            <div className="grid gap-6">
+              <div className="grid grid-cols-1 gap-6">
+                {data?.items?.map((item) => (
+                  <AccountingCard
+                    key={item.id}
+                    transaction={item}
+                    signAccounting={SignAccounting}
+                    unsignAccounting={UnsignAccounting}
+                  />
+                ))}
+              </div>
+              {!data?.isLast && !isFetching && !isLoading && (
+                <div
+                  className="grid items-center justify-center"
+                  onClick={handleOnChangePage}
+                >
+                  {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
+                </div>
+              )}
+            </div>
+          )}
 
-        {!!data?.items?.length ? (
-          <div>
+          {(isFetching || isLoading) && (
             <div className="grid grid-cols-1 gap-6">
-              {data?.items?.map((item) => (
-                <AccountingCard
-                  key={item.id}
-                  transaction={item}
-                  signAccounting={SignAccounting}
+              {Array.from({
+                length: INTERSECTION_ELEMENTS.ADMIN_ACCOUNTING,
+              }).map((_, index) => (
+                <SkeletonAccountingCard
+                  key={index}
+                  isDisabled={
+                    formState.status !== ADMIN_ACCOUNTING_STATUS.PENDING
+                  }
                 />
               ))}
             </div>
-            {!data?.isLast && (
-              <div
-                className="grid items-center justify-center"
-                onClick={handleOnChangePage}
-              >
-                {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
-              </div>
-            )}
-          </div>
-        ) : (
-          <EmptyState />
-        )}
+          )}
+          {data?.items?.length === 0 && !isLoading && !isFetching && (
+            <EmptyState />
+          )}
+        </div>
       </div>
     </div>
   );
