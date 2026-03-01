@@ -10,8 +10,7 @@ import { Loader2, PenTool } from "lucide-react";
 import { FC, MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
 
-interface ISignAccountingProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ISignAccountingProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   documentId: string;
   userId: string;
   batchId: string;
