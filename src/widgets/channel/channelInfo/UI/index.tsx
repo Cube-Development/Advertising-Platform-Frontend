@@ -18,9 +18,9 @@ import {
   useAddToManagerCartMutation,
   useAddToPublicCartMutation,
   useGetRecommedChannelsQuery,
-  useReadCommonCartQuery,
+  useReadCommonCartShortQuery,
   useReadManagerCartQuery,
-  useReadPublicCartQuery,
+  useReadPublicCartShortQuery,
   useRemoveFromCommonCartMutation,
   useRemoveFromManagerCartMutation,
   useRemoveFromPublicCartMutation,
@@ -100,15 +100,12 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
   const [addToManagerCart] = useAddToManagerCartMutation();
   const [removeFromManagerCart] = useRemoveFromManagerCartMutation();
 
-  const { data: cart } = useReadCommonCartQuery(
-    { language: language?.id || USER_LANGUAGES_LIST[0].id },
-    {
-      skip:
-        !isAuth || (projectId ? true : false) || role !== ENUM_ROLES.ADVERTISER,
-    },
-  );
-  const { data: cartPub } = useReadPublicCartQuery(
-    { guest_id: guestId, language: language?.id || USER_LANGUAGES_LIST[0].id },
+  const { data: cart } = useReadCommonCartShortQuery(undefined, {
+    skip:
+      !isAuth || (projectId ? true : false) || role !== ENUM_ROLES.ADVERTISER,
+  });
+  const { data: cartPub } = useReadPublicCartShortQuery(
+    { guest_id: guestId },
     { skip: isAuth || !guestId },
   );
   const { data: cartManager } = useReadManagerCartQuery(
@@ -356,7 +353,7 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
                               changeFormat={handleChangeFormat}
                               onChange={handleChangeCartCards}
                             />
-                            {currentCart?.channels?.length ? (
+                            {currentCart && currentCart?.count > 0 ? (
                               <ChannelCart cart={currentCart} role={role} />
                             ) : null}
                           </div>
@@ -400,7 +397,7 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
                           changeFormat={handleChangeFormat}
                           onChange={handleChangeCartCards}
                         />
-                        {currentCart?.channels?.length ? (
+                        {currentCart && currentCart?.count > 0 ? (
                           <ChannelCart cart={currentCart} role={role} />
                         ) : null}
                       </div>
