@@ -52,7 +52,29 @@ export const useRevalidateCash = () => {
   const revalidateCash = async (data: any) => {
     const { method, project_id, order_id, channel_id } = data;
 
-    if (method === notificationsTypes.notification_create_deposit) {
+    if (method === notificationsTypes.notification_refund_money_reject) {
+      // Отклонен возврат средств
+      await invalidateHistory({ dispatch, trigger: triggerHistory, language });
+    } else if (
+      method === notificationsTypes.notification_withdrawal_money_reject
+    ) {
+      // Отклонен вывод средств
+      await invalidateHistory({ dispatch, trigger: triggerHistory, language });
+    } else if (
+      method === notificationsTypes.notification_create_deposit_reject
+    ) {
+      // Отклонено создание депозита
+      await invalidateHistory({ dispatch, trigger: triggerHistory, language });
+    } else if (method === notificationsTypes.notification_create_withdrawal) {
+      // Создан вывод средств
+      await invalidateHistory({ dispatch, trigger: triggerHistory, language });
+    } else if (method === notificationsTypes.notification_create_refund) {
+      // Создан возврат средств
+      await invalidateHistory({ dispatch, trigger: triggerHistory, language });
+    } else if (method === notificationsTypes.notification_create_top_up) {
+      // Создан депозит
+      await invalidateHistory({ dispatch, trigger: triggerHistory, language });
+    } else if (method === notificationsTypes.notification_create_deposit) {
       // Создан депозит
       await invalidateHistory({ dispatch, trigger: triggerHistory, language });
     } else if (

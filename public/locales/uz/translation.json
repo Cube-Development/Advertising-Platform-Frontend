@@ -2786,6 +2786,10 @@
         "sign": {
           "success": "Amaliyot muvaffaqiyatli bajarildi",
           "error": "Amaliyot bajarilishida xatolik yuz berdi"
+        },
+        "unsign": {
+          "success": "Amaliyot bekor qilindi",
+          "error": "Amaliyotni bekor qilishda xatolik yuz berdi"
         }
       },
       "review": {
@@ -3534,7 +3538,9 @@
         },
         "buttons": {
           "sign": "Imzolash",
-          "signed": "Imzolangan"
+          "signed": "Imzolangan",
+          "unsign": "Bekor qilish",
+          "unsigne": "Bekor qilindi"
         }
       }
     }

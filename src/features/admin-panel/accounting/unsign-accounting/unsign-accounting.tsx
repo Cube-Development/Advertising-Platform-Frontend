@@ -1,25 +1,22 @@
 import {
   ADMIN_ACCOUNTING_TYPE,
   invalidateAccounting,
-  useAccountingDepositAcceptMutation,
-  useAccountingWithdrawalAcceptMutation,
+  useAccountingDepositRejectMutation,
+  useAccountingWithdrawalRejectMutation,
 } from "@entities/admin";
 import { useAppDispatch } from "@shared/hooks";
 import { MyButton, useToast } from "@shared/ui";
-import { Loader2, PenTool } from "lucide-react";
+import { Loader2, X } from "lucide-react";
 import { FC, MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
 
-interface ISignAccountingProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
-  documentId: string;
-  userId: string;
+interface IUnsignAccountingProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   batchId: string;
   transaction_type: ADMIN_ACCOUNTING_TYPE;
 }
 
-export const SignAccounting: FC<ISignAccountingProps> = ({
-  documentId,
-  userId,
+export const UnsignAccounting: FC<IUnsignAccountingProps> = ({
   batchId,
   transaction_type,
   ...props
@@ -30,14 +27,13 @@ export const SignAccounting: FC<ISignAccountingProps> = ({
   const { onClick, disabled, ...rest } = props;
 
   const [deposit, { isLoading: isLoadingDeposit }] =
-    useAccountingDepositAcceptMutation();
+    useAccountingDepositRejectMutation();
 
   const [withdrawal, { isLoading: isLoadingWithdrawal }] =
-    useAccountingWithdrawalAcceptMutation();
+    useAccountingWithdrawalRejectMutation();
 
   const handleSign = async () => {
     if (
-      !userId ||
       !batchId ||
       !transaction_type ||
       isLoadingDeposit ||
@@ -47,7 +43,7 @@ export const SignAccounting: FC<ISignAccountingProps> = ({
 
     try {
       if (transaction_type === ADMIN_ACCOUNTING_TYPE.TOP_UP) {
-        await deposit({ doc_id: documentId, user_id: userId }).unwrap();
+        await deposit({ batch_id: batchId }).unwrap();
       } else if (transaction_type === ADMIN_ACCOUNTING_TYPE.WITHDRAW) {
         await withdrawal({ batch_id: batchId }).unwrap();
       } else if (transaction_type === ADMIN_ACCOUNTING_TYPE.REFUND) {
@@ -61,13 +57,13 @@ export const SignAccounting: FC<ISignAccountingProps> = ({
 
       toast({
         variant: "success",
-        title: t("toasts.admin.accounting.sign.success"),
+        title: t("toasts.admin.accounting.unsign.success"),
       });
     } catch (error) {
-      console.error("[SIGN] error:", error);
+      console.error("[UNSIGN] error:", error);
       toast({
         variant: "error",
-        title: t("toasts.admin.accounting.sign.error"),
+        title: t("toasts.admin.accounting.unsign.error"),
       });
     }
   };
@@ -75,16 +71,17 @@ export const SignAccounting: FC<ISignAccountingProps> = ({
   return (
     <MyButton
       {...rest}
+      buttons_type="button__orange"
       disabled={disabled || isLoadingDeposit || isLoadingWithdrawal}
       onClick={(e: MouseEvent<HTMLButtonElement>) => {
         handleSign();
         onClick && onClick?.(e);
       }}
     >
-      <PenTool size={18} />
+      <X size={18} />
       {disabled
-        ? t("admin_panel.accounting.card.buttons.signed")
-        : t("admin_panel.accounting.card.buttons.sign")}
+        ? t("admin_panel.accounting.card.buttons.unsigned")
+        : t("admin_panel.accounting.card.buttons.unsign")}
       {(isLoadingDeposit || isLoadingWithdrawal) && (
         <Loader2 className="animate-spin" size={20} />
       )}

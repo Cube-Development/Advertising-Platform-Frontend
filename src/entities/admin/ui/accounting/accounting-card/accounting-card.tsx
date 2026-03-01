@@ -5,6 +5,7 @@ import {
   ADMIN_ACCOUNTING_TYPE,
 } from "@entities/admin/config";
 import { IAdminAccountingData } from "@entities/admin/types";
+import { cn } from "@shared/ui";
 import { formatMoney } from "@shared/utils";
 import { ArrowUpDown, Calendar, Tag, Wallet } from "lucide-react";
 import { ButtonHTMLAttributes, FC, useMemo } from "react";
@@ -20,14 +21,21 @@ interface IAccountingCardProps {
       transaction_type: ADMIN_ACCOUNTING_TYPE;
     } & ButtonHTMLAttributes<HTMLButtonElement>
   >;
+  unsignAccounting: FC<
+    {
+      batchId: string;
+      transaction_type: ADMIN_ACCOUNTING_TYPE;
+    } & ButtonHTMLAttributes<HTMLButtonElement>
+  >;
 }
 
 export const AccountingCard: FC<IAccountingCardProps> = ({
   transaction,
   signAccounting: SignAccounting,
+  unsignAccounting: UnsignAccounting,
 }) => {
   const { t } = useTranslation();
-  const isDisabled = transaction?.status === ADMIN_ACCOUNTING_STATUS.COMPLETED;
+  const isDisabled = transaction?.status !== ADMIN_ACCOUNTING_STATUS.PENDING;
   const statusInfo = useMemo(() => {
     return ACCOUNTING_SIGNATURE_LIST?.find(
       (item) => item.status === transaction?.status,
@@ -47,16 +55,16 @@ export const AccountingCard: FC<IAccountingCardProps> = ({
   };
 
   return (
-    <div className="relative mb-4 transition-shadow duration-200 bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg">
+    <div className="relative transition-shadow duration-200 bg-white border border-gray-200 rounded-lg shadow-md hover:shadow-lg">
       <div
         className={`grid grid-cols-[max-content,1fr] items-center px-2.5 py-0.5 rounded-full text-xs font-medium ${statusInfo?.color} absolute top-4 left-4 right-auto sm:left-auto sm:right-4`}
       >
         <statusInfo.icon size={16} />
         <span className="ml-1 truncate">{t(statusInfo?.label)}</span>
       </div>
-      <div className="p-6">
+      <div className="p-6 grid gap-4">
         {/* Заголовок с типом документа и статусом */}
-        <div className="flex items-center justify-between mt-8 mb-4 sm:mt-0">
+        <div className="flex items-center justify-between mt-8 sm:mt-0">
           <div className="flex items-center space-x-2">
             <Tag className="flex-shrink-0 w-5 h-5 text-blue-600" />
             <span className="text-xs font-medium tracking-wide text-blue-600 uppercase truncate md:text-sm">
@@ -64,109 +72,108 @@ export const AccountingCard: FC<IAccountingCardProps> = ({
             </span>
           </div>
         </div>
+        {/* Номер и дата договора */}
+        <div>
+          <div>
+            <p className="grid text-sm text-[var(--Personal-colors-black)] grid-cols-[max-content,1fr] gap-2 items-center ">
+              <span className="font-medium ">
+                {t("admin_panel.accounting.card.transaction_id")}:
+              </span>
+              <span
+                onClick={() => handleCopyLink(transaction?.id)}
+                className="text-blue-500 truncate cursor-pointer"
+              >
+                {transaction?.id}
+              </span>
+            </p>
+          </div>
+          {/* Дата обновления */}
+          <div className="flex items-center text-sm text-[var(--Personal-colors-black)]">
+            <Calendar className="flex-shrink-0 w-4 h-4 mr-2" />
+            <p className="flex items-center justify-between gap-2 text-sm font-medium">
+              <span>{t("admin_panel.accounting.card.created_date")}:</span>
+              <span>{transaction?.created}</span>
+            </p>
+          </div>
+        </div>
 
         {/* Основной контент */}
-        <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+        <div className="grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-6">
           {/* Левая колонка - Основная информация */}
-          <div className="space-y-4">
-            {/* Номер и дата договора */}
-            <div>
-              <p className="grid text-sm text-[var(--Personal-colors-black)] grid-cols-[max-content,1fr] gap-2 items-center ">
-                <span className="font-medium ">
-                  {t("admin_panel.accounting.card.transaction_id")}:
-                </span>
-                <span
-                  onClick={() => handleCopyLink(transaction?.id)}
-                  className="text-blue-500 truncate cursor-pointer"
-                >
-                  {transaction?.id}
-                </span>
-              </p>
-            </div>
-
-            {/* Дата обновления */}
-            <div className="flex items-center text-sm text-[var(--Personal-colors-black)]">
-              <Calendar className="flex-shrink-0 w-4 h-4 mr-2" />
-              <p className="flex items-center justify-between gap-2 text-sm font-medium">
-                <span>{t("admin_panel.accounting.card.created_date")}:</span>
-                <span>{transaction?.created}</span>
-              </p>
-            </div>
-
-            {/* Информация о контрагенте */}
-            <div className="p-4 space-y-3 rounded-lg bg-gray-50">
-              <h4 className="text-sm font-semibold text-[var(--Personal-colors-black)]">
-                {t("admin_panel.accounting.card.user")}
-              </h4>
-              <div className="space-y-1">
-                <p className="flex items-center justify-between gap-2 text-sm font-semibold">
-                  <span className=" text-[var(--Personal-colors-black)]">
-                    {t("admin_panel.accounting.card.tin")}:
-                  </span>
-                  <span className=" text-[var(--Personal-colors-light-black)]">
-                    {transaction?.TIN || "--/--/--"}
-                  </span>
-                </p>
-                <p className="text-sm font-semibold text-[var(--Personal-colors-black)] flex items-center gap-2 justify-between">
-                  <span className=" text-[var(--Personal-colors-black)]">
-                    {t("admin_panel.accounting.card.pinfl")}:
-                  </span>
-                  <span className=" text-[var(--Personal-colors-light-black)]">
-                    {transaction?.PINFL || "--/--/--"}
-                  </span>
-                </p>
+          {/* Информация о контрагенте */}
+          <div className="p-4 space-y-3 rounded-lg bg-gray-50">
+            <div className="space-y-2">
+              <div className="border-b border-blue-200">
+                <h4 className="text-sm font-semibold text-[var(--Personal-colors-black)]">
+                  {t("admin_panel.accounting.card.user")}
+                </h4>
+              </div>
+              <div className="flex items-center justify-between gap-2 text-sm font-semibold">
+                <span>{t("admin_panel.accounting.card.tin")}:</span>
+                <span>{transaction?.TIN || "--/--/--"}</span>
+              </div>
+              <div className="text-sm font-semibold text-[var(--Personal-colors-black)] flex items-center gap-2 justify-between">
+                <span>{t("admin_panel.accounting.card.pinfl")}:</span>
+                <span>{transaction?.PINFL || "--/--/--"}</span>
               </div>
             </div>
           </div>
 
           {/* Правая колонка - Финансы и действия */}
-          <div className="space-y-4">
-            {/* Финансовая информация */}
-            <div className="p-4 rounded-lg bg-blue-50">
-              <div className="space-y-2">
-                <div className="flex items-center justify-between gap-3">
-                  <div className="flex items-center justify-start gap-2">
-                    <Wallet size={16} />
-                    <span className="text-sm font-semibold text-[var(--Personal-colors-black)]">
-                      {t("admin_panel.accounting.card.wallet_type")}:
-                    </span>
-                  </div>
-                  <span className="text-sm text-[var(--Personal-colors-light-black)] font-semibold ">
-                    {t(walletInfo?.wallet_label || "")}
+          <div className="p-4 rounded-lg bg-blue-50">
+            <div className="space-y-2">
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center justify-start gap-2">
+                  <Wallet size={16} />
+                  <span className="text-sm font-semibold text-[var(--Personal-colors-black)]">
+                    {t("admin_panel.accounting.card.wallet_type")}:
                   </span>
                 </div>
-                <div className="flex items-center justify-between gap-3">
-                  <div className="flex items-center justify-start gap-2">
-                    <ArrowUpDown size={16} />
-                    <span className="text-sm font-semibold text-[var(--Personal-colors-black)] ">
-                      {t("admin_panel.accounting.card.transaction_type")}:
-                    </span>
-                  </div>
-                  <span className="text-sm text-[var(--Personal-colors-light-black)] font-semibold ">
-                    {t(walletInfo?.type_label || "")}
+                <span className="text-sm text-[var(--Personal-colors-light-black)] font-semibold ">
+                  {t(walletInfo?.wallet_label || "")}
+                </span>
+              </div>
+              <div className="flex items-center justify-between gap-3 text-sm font-semibold text-[var(--Personal-colors-black)] ">
+                <div className="flex items-center justify-start gap-2">
+                  <ArrowUpDown size={16} />
+                  <span>
+                    {t("admin_panel.accounting.card.transaction_type")}:
                   </span>
                 </div>
-                <div className="border-t border-blue-200">
-                  <div className="flex items-center justify-between">
-                    <span className="text-sm font-semibold text-[var(--Personal-colors-black)]">
-                      {t("admin_panel.accounting.card.amount")}:
-                    </span>
-                    <span className="text-base font-bold text-blue-600">
-                      {formatMoney(transaction?.amount)}
-                    </span>
-                  </div>
+                <span>{t(walletInfo?.type_label || "")}</span>
+              </div>
+              <div className="border-t border-blue-200">
+                <div className="flex items-center justify-between">
+                  <span className="text-sm font-semibold text-[var(--Personal-colors-black)]">
+                    {t("admin_panel.accounting.card.amount")}:
+                  </span>
+                  <span className="text-base font-bold text-blue-600">
+                    {formatMoney(transaction?.amount)}
+                  </span>
                 </div>
               </div>
             </div>
-
-            <SignAccounting
-              documentId={transaction?.doc_id}
-              userId={transaction?.user_id}
-              batchId={transaction?.id}
-              transaction_type={transaction?.type}
-              disabled={isDisabled}
-            />
           </div>
+        </div>
+
+        <div
+          className={cn(
+            "grid grid-cols-1 gap-3 lg:grid-cols-2 lg:gap-6",
+            isDisabled && "hidden",
+          )}
+        >
+          <UnsignAccounting
+            batchId={transaction?.id}
+            transaction_type={transaction?.type}
+            disabled={isDisabled}
+          />
+          <SignAccounting
+            documentId={transaction?.doc_id}
+            userId={transaction?.user_id}
+            batchId={transaction?.id}
+            transaction_type={transaction?.type}
+            disabled={isDisabled}
+          />
         </div>
       </div>
     </div>
