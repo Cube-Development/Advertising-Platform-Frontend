@@ -14,6 +14,8 @@ import {
   AGENCY_PROJECTS_CUSTOMER,
   AGENCY_PROJECTS_PUBLISHER,
   AGENCY_PROJECTS_MANAGER,
+  CART_SHORT,
+  CART_PUB_SHORT,
 } from "@shared/api/tags";
 
 export const baseApi = createApi({
@@ -25,8 +27,10 @@ export const baseApi = createApi({
   endpoints: () => ({}),
   tagTypes: [
     CART_PUB,
+    CART_PUB_SHORT,
     BLOGGER_CHANNELS,
     CART,
+    CART_SHORT,
     CART_MANAGER,
     CATALOG,
     RECOMMEND_CARDS,

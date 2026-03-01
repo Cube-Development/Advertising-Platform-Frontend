@@ -4,6 +4,8 @@ import {
   CART,
   CART_MANAGER,
   CART_PUB,
+  CART_PUB_SHORT,
+  CART_SHORT,
   RECOMMEND_CARDS,
 } from "@shared/api";
 import { ENUM_LANGUAGES_NUM } from "@shared/languages";
@@ -27,7 +29,7 @@ interface RemoveChannelReq {
 }
 
 interface ReadCartReq {
-  language: ENUM_LANGUAGES_NUM;
+  language?: ENUM_LANGUAGES_NUM;
   guest_id?: string;
   project_id?: string;
 }
@@ -44,13 +46,20 @@ export const authCartAPI = authApi.injectEndpoints({
       }),
       providesTags: [CART],
     }),
+    readCommonCartShort: build.query<ICart, void>({
+      query: () => ({
+        url: `/cart/common/short`,
+        method: `GET`,
+      }),
+      providesTags: [CART_SHORT],
+    }),
     addToCommonCart: build.mutation<ICart, AddChannelReq>({
       query: (params) => ({
         url: `/cart/common/add`,
         method: `POST`,
         params: params,
       }),
-      invalidatesTags: [CART, RECOMMEND_CARDS],
+      invalidatesTags: [CART_SHORT, RECOMMEND_CARDS],
     }),
     removeFromCommonCart: build.mutation<ICart, RemoveChannelReq>({
       query: (params) => ({
@@ -58,7 +67,7 @@ export const authCartAPI = authApi.injectEndpoints({
         method: `POST`,
         params: params,
       }),
-      invalidatesTags: [CART, RECOMMEND_CARDS],
+      invalidatesTags: [CART_SHORT, RECOMMEND_CARDS],
     }),
     saveCart: build.mutation<{ success: boolean }, void>({
       query: () => ({
@@ -93,6 +102,7 @@ export const {
   useSaveCartMutation,
   useTransferPublicMutation,
   useCheckCartMutation,
+  useReadCommonCartShortQuery,
 } = authCartAPI;
 
 // Публичные запросы
@@ -107,13 +117,21 @@ export const publicCartAPI = baseApi.injectEndpoints({
       }),
       providesTags: [CART_PUB],
     }),
+    readPublicCartShort: build.query<ICart, ReadCartReq>({
+      query: (params) => ({
+        url: `/cart/public/short`,
+        method: `GET`,
+        params: params,
+      }),
+      providesTags: [CART_PUB_SHORT],
+    }),
     addToPublicCart: build.mutation<ICart, AddChannelReq>({
       query: (params) => ({
         url: `/cart/public/add`,
         method: `POST`,
         params: params,
       }),
-      invalidatesTags: [CART_PUB, RECOMMEND_CARDS],
+      invalidatesTags: [CART_PUB_SHORT, RECOMMEND_CARDS],
     }),
     removeFromPublicCart: build.mutation<ICart, RemoveChannelReq>({
       query: (params) => ({
@@ -121,7 +139,7 @@ export const publicCartAPI = baseApi.injectEndpoints({
         method: `POST`,
         params: params,
       }),
-      invalidatesTags: [CART_PUB, RECOMMEND_CARDS],
+      invalidatesTags: [CART_PUB_SHORT, RECOMMEND_CARDS],
     }),
   }),
 });
@@ -130,6 +148,7 @@ export const {
   useReadPublicCartQuery,
   useAddToPublicCartMutation,
   useRemoveFromPublicCartMutation,
+  useReadPublicCartShortQuery,
 } = publicCartAPI;
 
 // Манагерские запросы

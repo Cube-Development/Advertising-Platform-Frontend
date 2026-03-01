@@ -24,6 +24,8 @@ import {
   useRemoveFromPublicCartMutation,
   useGetAuthCatalogQuery,
   catalogAuthAPI,
+  useReadCommonCartShortQuery,
+  useReadPublicCartShortQuery,
 } from "@entities/project";
 import { ENUM_ROLES, GenerateGuestId, useFindLanguage } from "@entities/user";
 import {
@@ -210,13 +212,10 @@ export const CatalogBlock: FC = () => {
     isFirstRender,
   ]);
 
-  const { data: cart } = useReadCommonCartQuery(
-    { language: language?.id || USER_LANGUAGES_LIST[0].id },
-    {
-      skip:
-        !isAuth || (projectId ? true : false) || role !== ENUM_ROLES.ADVERTISER,
-    },
-  );
+  const { data: cart } = useReadCommonCartShortQuery(undefined, {
+    skip:
+      !isAuth || (projectId ? true : false) || role !== ENUM_ROLES.ADVERTISER,
+  });
   const { data: cartManager } = useReadManagerCartQuery(
     {
       project_id: projectId,
@@ -227,8 +226,8 @@ export const CatalogBlock: FC = () => {
     },
   );
 
-  const { data: cartPub } = useReadPublicCartQuery(
-    { guest_id: guestId, language: language?.id || USER_LANGUAGES_LIST[0].id },
+  const { data: cartPub } = useReadPublicCartShortQuery(
+    { guest_id: guestId },
     { skip: isAuth || !guestId },
   );
 

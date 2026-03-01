@@ -14,6 +14,7 @@ import {
   CART,
   CART_MANAGER,
   CART_PUB,
+  CART_PUB_SHORT,
   CATALOG,
   CHAT,
   LEGALS,
@@ -38,6 +39,7 @@ import {
   AGENCY_PROJECTS_PUBLISHER,
   AGENCY_PROJECTS_MANAGER,
   USER_ME,
+  CART_SHORT,
 } from "@shared/api/tags";
 
 export const authApi = createApi({
@@ -46,6 +48,7 @@ export const authApi = createApi({
   endpoints: () => ({}),
   tagTypes: [
     CART,
+    CART_SHORT,
     CART_MANAGER,
     CATALOG,
     RECOMMEND_CARDS,
@@ -53,6 +56,7 @@ export const authApi = createApi({
     USER_DATA,
     USER_ME,
     CART_PUB,
+    CART_PUB_SHORT,
     BALANCE,
     BLOGGER_OFFERS,
     ADV_PROJECTS,
