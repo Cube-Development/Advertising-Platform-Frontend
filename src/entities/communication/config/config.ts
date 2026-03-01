@@ -97,6 +97,13 @@ export enum notificationsTypes {
   notification_request_to_edit_channel_rejected = "NotificationRequestToEditChannelRejected", //+
   notification_request_to_edit_channel_accept = "NotificationRequestToEditChannelAccept", //+
   notification_create_organization = "NotificationCreateOrganization", //*
+  // new
+  notification_refund_money_reject = "NotificationRefundMoneyReject",
+  notification_withdrawal_money_reject = "NotificationWithdrawalMoneyReject",
+  notification_create_deposit_reject = "NotificationCreateDepositReject",
+  notification_create_withdrawal = "NotificationCreateWithdrawal",
+  notification_create_refund = "NotificationCreateRefund",
+  notification_create_top_up = "NotificationCreateTopUp",
 }
 
 export const WEBSOCKET_MESSAGES_LIST = [
@@ -143,4 +150,10 @@ export const WEBSOCKET_NOTIFICATIONS_LIST = [
   notificationsTypes.notification_request_to_edit_channel_rejected,
   notificationsTypes.notification_request_to_edit_channel_accept,
   notificationsTypes.notification_create_organization,
+  notificationsTypes.notification_refund_money_reject,
+  notificationsTypes.notification_withdrawal_money_reject,
+  notificationsTypes.notification_create_deposit_reject,
+  notificationsTypes.notification_create_withdrawal,
+  notificationsTypes.notification_create_refund,
+  notificationsTypes.notification_create_top_up,
 ];

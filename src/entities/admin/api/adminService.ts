@@ -166,6 +166,17 @@ export const adminAPI = authApi.injectEndpoints({
       }),
       invalidatesTags: [ADMIN_ACCOUNTING],
     }),
+    accountingDepositReject: build.mutation<
+      { success: boolean },
+      { batch_id: string }
+    >({
+      query: (params) => ({
+        url: `/adv-admin/reject/deposit`,
+        method: `POST`,
+        params: params,
+      }),
+      invalidatesTags: [ADMIN_ACCOUNTING],
+    }),
 
     accountingWithdrawalAccept: build.mutation<
       { success: boolean },
@@ -178,6 +189,18 @@ export const adminAPI = authApi.injectEndpoints({
       }),
       invalidatesTags: [ADMIN_ACCOUNTING],
     }),
+    accountingWithdrawalReject: build.mutation<
+      { success: boolean },
+      { batch_id: string }
+    >({
+      query: (params) => ({
+        url: `/adv-admin/reject/withdrawal`,
+        method: `POST`,
+        params: params,
+      }),
+      invalidatesTags: [ADMIN_ACCOUNTING],
+    }),
+
     getAdminReviews: build.query<IAdminReviews, getAdminReviewsReq>({
       query: (params) => ({
         url: `/adv-admin/channel/prepared-reviews`,
@@ -281,5 +304,7 @@ export const {
   useAdminAcceptComplaintMutation,
   useAdminRejectComplaintMutation,
   useAccountingDepositAcceptMutation,
+  useAccountingDepositRejectMutation,
   useAccountingWithdrawalAcceptMutation,
+  useAccountingWithdrawalRejectMutation,
 } = adminAPI;

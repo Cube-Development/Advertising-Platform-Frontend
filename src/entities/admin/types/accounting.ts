@@ -10,6 +10,8 @@ export interface IAdminAccounting {
   items: IAdminAccountingData[];
   isLast?: boolean;
   status: ADMIN_ACCOUNTING_STATUS;
+  type: ADMIN_ACCOUNTING_TYPE;
+  wallet: ENUM_WALLETS_TYPE;
 }
 
 export interface IAdminAccountingData {
