@@ -161,9 +161,19 @@ export const BuyTariff: FC<BuyTariffProps> = ({ tariff, tariffInfo }) => {
     );
   }
 
+  const sendToastMessage = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    toast({
+      variant: "warning",
+      title: t("toasts.cart.save_cart_temporary_error"),
+    });
+  };
+
   return (
     <Drawer>
-      <DrawerTrigger className={styles.button}>{t(`buy`)}</DrawerTrigger>
+      <DrawerTrigger className={styles.button} onClick={sendToastMessage}>
+        {t(`buy`)}
+      </DrawerTrigger>
       <DrawerContent className={styles.menu}>
         <DrawerTitle className="sr-only" />
         <DrawerDescription className="sr-only" />
