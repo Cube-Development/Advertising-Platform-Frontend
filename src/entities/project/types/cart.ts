@@ -5,5 +5,5 @@ export interface ICart {
   coverage: number;
   amount: number;
   subscribers: number;
-  channels: ICatalogChannel[];
+  channels?: ICatalogChannel[];
 }
