@@ -10,8 +10,7 @@ import { Loader2, X } from "lucide-react";
 import { FC, MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
 
-interface IUnsignAccountingProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface IUnsignAccountingProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   batchId: string;
   transaction_type: ADMIN_ACCOUNTING_TYPE;
 }

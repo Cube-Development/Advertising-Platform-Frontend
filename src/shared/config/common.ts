@@ -4,7 +4,7 @@ export const enum ENUM_CALENDAR {
 }
 
 export const enum INTERSECTION_ELEMENTS {
-  CATALOG = 10,
+  CATALOG = 30,
   ADV_PROJECTS = 4,
   BLOGGER_OFFERS = 4,
   BLOGGER_CHANNELS = 4,

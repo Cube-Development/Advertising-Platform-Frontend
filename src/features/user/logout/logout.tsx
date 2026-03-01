@@ -35,7 +35,7 @@ export const Logout: FC<ILogoutProps> = ({ ...props }) => {
 
   const handleLogout = async () => {
     try {
-      logoutMutation();
+      await logoutMutation().unwrap();
       toggleLogout();
       navigate(
         role === ENUM_ROLES.ADVERTISER
@@ -44,6 +44,13 @@ export const Logout: FC<ILogoutProps> = ({ ...props }) => {
       );
     } catch (error) {
       console.error(error);
+      // Всё равно сбрасываем локальное состояние при ошибке сети/сервера
+      toggleLogout();
+      navigate(
+        role === ENUM_ROLES.ADVERTISER
+          ? ENUM_PATHS.MAIN
+          : ENUM_PATHS.MAIN_BLOGGER,
+      );
     }
   };
 
