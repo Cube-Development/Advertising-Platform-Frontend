@@ -147,7 +147,7 @@ body::-webkit-scrollbar-corner {
   display: flex;
   flex-direction: column;
   min-height: calc(calc(var(--vh) * 100) - 80px);
-  width: 100vw;
+  width: 100%;
 
   // background: url("/images/rootBg/desktopBG.png") repeat top center;
   // background-size: cover;
