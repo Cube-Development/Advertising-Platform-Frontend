@@ -148,9 +148,9 @@ export const Accounting: FC = () => {
 
         {/* Сетка карточек документов */}
         <div className="grid gap-6">
-          <SkeletonAccountingCard
+          {/* <SkeletonAccountingCard
             isDisabled={formState.status !== ADMIN_ACCOUNTING_STATUS.PENDING}
-          />
+          /> */}
           {!!data?.items?.length && (
             <div className="grid gap-6">
               <div className="grid grid-cols-1 gap-6">
