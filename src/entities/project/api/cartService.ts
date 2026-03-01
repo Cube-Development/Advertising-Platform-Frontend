@@ -59,7 +59,7 @@ export const authCartAPI = authApi.injectEndpoints({
         method: `POST`,
         params: params,
       }),
-      invalidatesTags: [CART_SHORT, RECOMMEND_CARDS],
+      invalidatesTags: [CART_SHORT, RECOMMEND_CARDS, CART],
     }),
     removeFromCommonCart: build.mutation<ICart, RemoveChannelReq>({
       query: (params) => ({
@@ -67,7 +67,7 @@ export const authCartAPI = authApi.injectEndpoints({
         method: `POST`,
         params: params,
       }),
-      invalidatesTags: [CART_SHORT, RECOMMEND_CARDS],
+      invalidatesTags: [CART_SHORT, RECOMMEND_CARDS, CART],
     }),
     saveCart: build.mutation<{ success: boolean }, void>({
       query: () => ({
@@ -131,7 +131,7 @@ export const publicCartAPI = baseApi.injectEndpoints({
         method: `POST`,
         params: params,
       }),
-      invalidatesTags: [CART_PUB_SHORT, RECOMMEND_CARDS],
+      invalidatesTags: [CART_PUB_SHORT, RECOMMEND_CARDS, CART_PUB],
     }),
     removeFromPublicCart: build.mutation<ICart, RemoveChannelReq>({
       query: (params) => ({
@@ -139,7 +139,7 @@ export const publicCartAPI = baseApi.injectEndpoints({
         method: `POST`,
         params: params,
       }),
-      invalidatesTags: [CART_PUB_SHORT, RECOMMEND_CARDS],
+      invalidatesTags: [CART_PUB_SHORT, RECOMMEND_CARDS, CART_PUB],
     }),
   }),
 });
