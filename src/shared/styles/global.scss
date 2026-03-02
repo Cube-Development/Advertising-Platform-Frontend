@@ -19,8 +19,8 @@
 }
 
 body {
-  font-family:
-    "TT Runs Trial", "Montserrat Alternates", "Montserrat", sans-serif;
+  font-family: "TT Runs Trial", "Montserrat Alternates", "Montserrat",
+    sans-serif;
 }
 
 html,
@@ -183,8 +183,7 @@ body::-webkit-scrollbar-corner {
     z-index: -1;
     opacity: 0.2; // теперь opacity только на градиент
 
-    background-image:
-      radial-gradient(
+    background-image: radial-gradient(
         circle at 10% 80%,
         var(--Personal-colors-main),
         transparent 20%
@@ -198,8 +197,7 @@ body::-webkit-scrollbar-corner {
     @media (max-width: 992px) {
       opacity: 0.15;
 
-      background-image:
-        radial-gradient(
+      background-image: radial-gradient(
           circle at 10% 80%,
           var(--Personal-colors-main),
           transparent 20%

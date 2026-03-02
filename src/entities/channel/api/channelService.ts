@@ -43,6 +43,7 @@ export const channelAPI = authApi.injectEndpoints({
         url: `/channel/create/code`,
         method: `POST`,
       }),
+      keepUnusedDataFor: 0,
     }),
     channelVerify: build.mutation<
       { insertion_code: string },

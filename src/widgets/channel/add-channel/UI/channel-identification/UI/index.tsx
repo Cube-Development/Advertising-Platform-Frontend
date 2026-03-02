@@ -14,6 +14,7 @@ import { PAGE_ANIMATION } from "@shared/config";
 import {
   InfoTooltip,
   MyButton,
+  Skeleton,
   SpinnerLoaderSmall,
   useToast,
 } from "@shared/ui";
@@ -53,7 +54,7 @@ export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
     formState: { errors },
   } = useForm<IAddChannelIdentification>();
 
-  const { data: code } = useCreateCodeQuery("", {
+  const { data: code, isLoading: isLoadingCode } = useCreateCodeQuery("", {
     skip: isEdit || identificationParams.link ? true : undefined,
   });
 
@@ -189,9 +190,13 @@ export const ChannelIdentification: FC<ChannelIdentificationProps> = ({
               </div>
 
               <div className="flex items-center justify-center">
-                <p className="lg:text-[40px] md:text-[32px] mobile-xl:text-[24px] text-[16px] font-semibold mobile-xl:leading-normal leading-none">
-                  {code?.verification_code}
-                </p>
+                {isLoadingCode ? (
+                  <Skeleton className="lg:w-[180px] md:w-[140px] mobile-xl:w-[120px] w-[100px] lg:h-[40px] md:h-[32px] mobile-xl:h-[24px] h-[16px]" />
+                ) : (
+                  <p className="lg:text-[40px] md:text-[32px] mobile-xl:text-[24px] text-[16px] font-semibold leading-none">
+                    {code?.verification_code}
+                  </p>
+                )}
               </div>
 
               <div className="mobile-xl:mt-0 -mt-4 grid mobile-xl:grid-cols-[auto,1fr] grid-flow-row items-center mobile-xl:justify-start justify-center mobile-xl:justify-items-start justify-items-center mobile-xl:gap-4 gap-2">
