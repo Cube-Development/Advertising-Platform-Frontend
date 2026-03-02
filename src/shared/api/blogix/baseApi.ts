@@ -1,4 +1,5 @@
-import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
+import { createApi } from "@reduxjs/toolkit/query/react";
+import { errorBaseQuery } from "../errorBaseQuery";
 import {
   ADV_PROJECTS,
   BALANCE,
@@ -19,10 +20,7 @@ import {
 } from "@shared/api/tags";
 
 export const baseApi = createApi({
-  baseQuery: fetchBaseQuery({
-    baseUrl: import.meta.env.VITE_BASE_URL,
-    credentials: "include",
-  }),
+  baseQuery: errorBaseQuery(import.meta.env.VITE_BASE_URL, "include"),
   reducerPath: "api",
   endpoints: () => ({}),
   tagTypes: [
