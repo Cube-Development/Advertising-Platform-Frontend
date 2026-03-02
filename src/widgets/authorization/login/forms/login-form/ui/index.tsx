@@ -58,10 +58,12 @@ export const LoginForm: FC<Props> = ({ onNavigate }) => {
               console.error("Something gone wrong: ", error);
             });
         })
-        .catch(() => {
+        .catch((error) => {
           toast({
             variant: "error",
-            title: t("toasts.authorization.auth_error"),
+            title: t(
+              "toasts.authorization.auth_error" + ` ${JSON.stringify(error)}`,
+            ),
           });
         });
     }

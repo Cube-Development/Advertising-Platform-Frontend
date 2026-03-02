@@ -117,10 +117,13 @@ export const RegistrationForm: FC<RegistrationFormProps> = ({
                   });
               }
             })
-            .catch(() => {
+            .catch((error) => {
               toast({
                 variant: "error",
-                title: t("toasts.authorization.auth_error"),
+                title: t(
+                  "toasts.authorization.auth_error" +
+                    ` ${JSON.stringify(error)}`,
+                ),
               });
             });
         })
