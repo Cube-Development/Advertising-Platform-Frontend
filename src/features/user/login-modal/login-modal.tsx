@@ -14,7 +14,8 @@ import { FC } from "react";
 import { Link } from "react-router-dom";
 import styles from "./login-modal.module.scss";
 import { useTranslation } from "react-i18next";
-import { useCurrentPathEnum } from "@shared/hooks";
+import { useAppDispatch, useCurrentPathEnum } from "@shared/hooks";
+import { setDropDownMenu } from "@shared/slice";
 
 interface ILoginModalProps {
   trigger?: React.ReactNode;
@@ -27,6 +28,12 @@ export const LoginModal: FC<ILoginModalProps> = ({
 }) => {
   const { t } = useTranslation();
   const currentPath = useCurrentPathEnum();
+  const dispatch = useAppDispatch();
+
+  const handleCloseSidebar = () => {
+    document.body.classList.remove("sidebar-open");
+    dispatch(setDropDownMenu({ isOpen: false, title: "" }));
+  };
 
   return (
     <Dialog>
@@ -54,19 +61,25 @@ export const LoginModal: FC<ILoginModalProps> = ({
           </p>
         </div>
         <DialogFooter className="pt-[20px]">
-          <Link
-            to={`${ENUM_PATHS.LOGIN}${currentPath}`}
-            className={`${styles.btns__login} truncate`}
-          >
-            {t("login")}
-            <LoginIcon />
-          </Link>
-          <Link
-            to={`${ENUM_PATHS.REGISTRATION}${currentPath}`}
-            className={`${styles.btns__register} truncate`}
-          >
-            {t("registration")}
-          </Link>
+          <DialogClose asChild>
+            <Link
+              to={`${ENUM_PATHS.LOGIN}${currentPath}`}
+              className={`${styles.btns__login} truncate`}
+              onClick={handleCloseSidebar}
+            >
+              {t("login")}
+              <LoginIcon />
+            </Link>
+          </DialogClose>
+          <DialogClose asChild>
+            <Link
+              to={`${ENUM_PATHS.REGISTRATION}${currentPath}`}
+              className={`${styles.btns__register} truncate`}
+              onClick={handleCloseSidebar}
+            >
+              {t("registration")}
+            </Link>
+          </DialogClose>
         </DialogFooter>
       </DialogContent>
     </Dialog>
