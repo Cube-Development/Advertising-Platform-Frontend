@@ -14,7 +14,7 @@ export const authBaseQuery: BaseQueryFn<
   FetchBaseQueryError
 > = async (args, api, extraOptions) => {
   const baseQuery = errorBaseQuery(baseUrl, "include");
-  
+
   const result = await baseQuery(args, api, extraOptions);
   if (result.error && result.error.status === 401) {
     // Отправляем POST запрос на /auth/logout без авторизации

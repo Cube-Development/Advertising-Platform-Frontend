@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
 import { FOOTER_NAV_ITEMS } from "./config";
@@ -24,6 +24,8 @@ export const Footer: FC = () => {
   const { toast } = useToast();
   const pathname = useLocation();
   const errors = useBackendErrors();
+  const [devClicks, setDevClicks] = useState(0);
+  const isUnlocked = devClicks >= 5;
   const isCreateOrderPage =
     pathname.pathname === ENUM_PATHS.CREATE_ORDER || false;
 
@@ -122,16 +124,22 @@ export const Footer: FC = () => {
             </div>
           </>
         )}
-        <div className={styles.all_rights}>{t("footer.all_rights")}</div>
+        <div
+          className={styles.all_rights}
+          onClick={() => setDevClicks((v) => v + 1)}
+          style={{ cursor: "default", userSelect: "none" }}
+        >
+          {t("footer.all_rights")}
+        </div>
 
-        {/* Debug Overlay - Now in flux, expanding footer height */}
-        {errors.length > 0 && (
+        {/* Debug Overlay - Hidden from bots, unlocked by 5 clicks on copyright */}
+        {isUnlocked && errors.length > 0 && (
           <div className="mt-4 pt-4 border-t border-white/10 w-full">
             <Accordion type="single" collapsible className="w-full">
-              <AccordionItem value="debug" className="border-none">
+              <AccordionItem value="internal-sys" className="border-none">
                 <AccordionTrigger className="py-2 hover:no-underline flex justify-center opacity-30 hover:opacity-100 transition-opacity">
                   <div className="flex items-center gap-2 text-[10px] uppercase tracking-widest text-white">
-                    <span>Debug Logs</span>
+                    <span>SYS-INF</span>
                     <ChevronDown className="h-3 w-3 transition-transform duration-200" />
                   </div>
                 </AccordionTrigger>
@@ -156,7 +164,7 @@ export const Footer: FC = () => {
                       {error.params && (
                         <div className="mb-2 p-1.5 bg-white/5 rounded border-l-2 border-blue-400">
                           <span className="font-bold opacity-50 block mb-1">
-                            QUERY:
+                            Q:
                           </span>
                           <div className="break-all font-mono opacity-80">
                             {JSON.stringify(error.params)}
@@ -167,7 +175,7 @@ export const Footer: FC = () => {
                       {error.body && (
                         <div className="mb-2 p-1.5 bg-white/5 rounded border-l-2 border-purple-400">
                           <span className="font-bold opacity-50 block mb-1">
-                            BODY:
+                            B:
                           </span>
                           <div className="break-all font-mono opacity-80">
                             {JSON.stringify(error.body)}
@@ -177,7 +185,7 @@ export const Footer: FC = () => {
 
                       <div className="p-1.5 bg-red-400/5 rounded border-l-2 border-red-400 mt-2">
                         <span className="font-bold opacity-50 block mb-1">
-                          RESPONSE:
+                          RES:
                         </span>
                         <div className="break-all text-white/90 whitespace-pre-wrap">
                           {error.message}

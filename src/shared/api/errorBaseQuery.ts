@@ -7,12 +7,12 @@ import {
 import { errorStore } from "./errorStore";
 
 /**
- * A wrapper for fetchBaseQuery that intercepts all errors 
+ * A wrapper for fetchBaseQuery that intercepts all errors
  * and adds them to the global errorStore for the debug overlay.
  */
 export const errorBaseQuery = (
   baseUrl: string,
-  credentials?: "include" | "omit" | "same-origin"
+  credentials?: "include" | "omit" | "same-origin",
 ): BaseQueryFn<string | FetchArgs, unknown, FetchBaseQueryError> => {
   const baseQuery = fetchBaseQuery({
     baseUrl,
