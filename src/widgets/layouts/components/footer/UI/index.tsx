@@ -94,9 +94,7 @@ export const Footer: FC = () => {
                 </div>
                 <div className={styles.contacts__item}>
                   <h4 className="!underline">
-                    <Link to="https://t.me/blogix_support" target="_blank">
-                      {t("footer.contacts.cooperation_contact")}
-                    </Link>
+                    <Link to="tel:+998930708686">+998 93 070 86 86</Link>
                   </h4>
                   <p>{t("footer.contacts.cooperation_title")}</p>
                 </div>
