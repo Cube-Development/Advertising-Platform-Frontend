@@ -1,14 +1,13 @@
-import { FC } from "react";
-import { UseFormRegister, FieldErrors, UseFormSetValue } from "react-hook-form";
-import { useTranslation } from "react-i18next";
+import { platformTypesNum, PostTypesNum } from "@entities/platform";
 import { AddFiles, AddMediaFiles } from "@features/createOrder";
 import { PlatformFilter } from "@features/project";
-import { platformTypesNum, PostTypesNum } from "@entities/platform";
-import { Input } from "@shared/ui";
+import { Input, PostEditor } from "@shared/ui";
 import { CreateTemplateFormData } from "@widgets/createTemplatePost/model/createTemplateFormType";
-import { TemplatePostEditor } from "../templatePostEditor";
-import { TemplatePostFiles } from "../templatePostFiles";
+import { FC } from "react";
+import { FieldErrors, UseFormRegister, UseFormSetValue } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 import { TemplatePostButtons } from "../templatePostButtons";
+import { TemplatePostFiles } from "../templatePostFiles";
 
 interface PostCreatorProps {
   platform: platformTypesNum;
@@ -44,7 +43,10 @@ export const PostCreator: FC<PostCreatorProps> = ({
         onPlatformChange={(platform) => setFormValue("platform", platform)}
         onPostTypeChange={(post_type) => setFormValue("post_type", post_type)}
       />
-      <TemplatePostEditor setValue={setFormValue} formState={formState} />
+      <PostEditor
+        files={formState.files || []}
+        onUpdate={(updatedFiles) => setFormValue("files", updatedFiles)}
+      />
 
       <TemplatePostFiles
         AddFiles={AddFiles}

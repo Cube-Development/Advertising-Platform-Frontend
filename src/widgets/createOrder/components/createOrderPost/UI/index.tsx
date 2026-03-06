@@ -36,9 +36,9 @@ import {
   PlatformFilter,
   PostTypesTabs,
   RenderDisplay,
+  TemplatePostsDialog,
   TypeRenderEditor,
   TypeTabs,
-  TemplatePostsDialog,
 } from "../components";
 import {
   checkPosts,
@@ -177,9 +177,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                 />
               )}
               <div className={styles.post_data}>
-                <div className="max-h-[400px]">
-                  <TypeRenderEditor formState={formState} setValue={setValue} />
-                </div>
+                <TypeRenderEditor formState={formState} setValue={setValue} />
                 <div
                   className={clsx(styles.block__bottom, {
                     [styles.filter]:
