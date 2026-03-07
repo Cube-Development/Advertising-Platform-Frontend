@@ -6,13 +6,13 @@ import {
   cn,
 } from "@shared/ui";
 import { EditorContent } from "@tiptap/react";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useTranslation } from "react-i18next";
 import { ChatInputEditorProps, useChatEditor } from "../model";
 import { LinkModal } from "./LinkModal";
 
 export const ChatInputEditor: FC<ChatInputEditorProps> = (props) => {
-  const { placeholder } = props;
+  const { placeholder, chatKey } = props;
   const { t } = useTranslation();
 
   const {
@@ -26,6 +26,12 @@ export const ChatInputEditor: FC<ChatInputEditorProps> = (props) => {
     applyLink,
     openLinkModal,
   } = useChatEditor(props);
+
+  useEffect(() => {
+    if (!editor || chatKey == null) return;
+    const id = setTimeout(() => editor.commands.focus(), 200);
+    return () => clearTimeout(id);
+  }, [editor, chatKey]);
 
   if (!editor) return null;
 

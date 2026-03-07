@@ -1,8 +1,8 @@
 export const ProtectIcon3 = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="140"
-    height="152"
+    width="70"
+    height="76"
     viewBox="0 0 140 152"
     fill="none"
   >

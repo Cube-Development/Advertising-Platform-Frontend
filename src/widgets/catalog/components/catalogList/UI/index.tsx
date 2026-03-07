@@ -237,8 +237,9 @@ export const CatalogList: FC<CatalogListProps> = ({
               key={card.id + index}
               initial="hidden"
               animate="visible"
-              custom={index % INTERSECTION_ELEMENTS.CATALOG}
+              custom={index % 12}
               variants={PAGE_ANIMATION.animationUp}
+              style={{ pointerEvents: "auto" }}
             >
               {isTableView ? (
                 <CompactCatalogCard
