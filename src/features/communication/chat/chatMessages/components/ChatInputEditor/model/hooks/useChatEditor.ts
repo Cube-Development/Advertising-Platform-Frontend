@@ -35,7 +35,7 @@ export const useChatEditor = ({
     editorProps: {
       attributes: {
         class:
-          "main_font h-full px-3 py-3 text-sm placeholder:text-muted-foreground focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 min-h-[44px] max-h-[144px] overflow-y-auto border-none focus-visible:ring-0 focus-visible:ring-offset-0 bg-transparent text-black ProseMirror-chat",
+          "main_font h-full px-1.5 py-1.5 md:px-3 md:py-3 text-base md:text-sm placeholder:text-muted-foreground focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 min-h-[44px] max-h-[144px] overflow-y-auto border-none focus-visible:ring-0 focus-visible:ring-offset-0 bg-transparent text-black ProseMirror-chat",
       },
       handleKeyDown: (view, event) => {
         if (event.key === "Enter" && !event.shiftKey) {

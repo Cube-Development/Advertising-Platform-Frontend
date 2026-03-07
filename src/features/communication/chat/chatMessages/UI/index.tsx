@@ -777,6 +777,7 @@ export const ChatMessages: FC<ChatMessagesProps> = ({ card }) => {
           onSend={handleSendMessage}
           placeholder={t("chat.new_message")}
           maxLength={limit}
+          chatKey={card?.order_id ?? card?.project_id}
         />
         <Button
           onClick={handleSendMessage}

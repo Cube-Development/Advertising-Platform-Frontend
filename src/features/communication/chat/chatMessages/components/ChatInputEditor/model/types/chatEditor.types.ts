@@ -5,6 +5,8 @@ export interface ChatInputEditorProps {
   placeholder?: string;
   maxLength?: number;
   disabled?: boolean;
+  /** При открытии/смене чата — автофокус в инпут (передай order_id или project_id) */
+  chatKey?: string | number;
 }
 
 export interface LinkModalState {

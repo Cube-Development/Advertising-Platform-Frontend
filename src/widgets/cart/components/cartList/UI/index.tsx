@@ -45,8 +45,9 @@ export const CartList: FC<CartListProps> = ({
               key={card.id}
               initial="hidden"
               animate="visible"
-              custom={index}
+              custom={Math.min(index, 10)}
               variants={PAGE_ANIMATION.animationUp}
+              style={{ pointerEvents: "auto" }}
             >
               <CatalogCard
                 page={ENUM_PAGE_FILTER.CART}

@@ -18,7 +18,7 @@ export const RecommendationList: FC<RecommendationListProps> = ({
   onChangeCard,
 }) => {
   const { t } = useTranslation();
-  const [isVisible, setVisible] = useState(true);
+  const [isVisible, setVisible] = useState(false);
   const handleChange = () => {
     setVisible(!isVisible);
   };
@@ -40,8 +40,9 @@ export const RecommendationList: FC<RecommendationListProps> = ({
               key={card.id + index}
               initial="hidden"
               animate="visible"
-              custom={index}
+              custom={Math.min(index, 10)}
               variants={PAGE_ANIMATION.animationUp}
+              style={{ pointerEvents: "auto" }}
             >
               <CatalogCard
                 card={card}

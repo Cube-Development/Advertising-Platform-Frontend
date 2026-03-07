@@ -11,7 +11,6 @@ export interface IDidoxCertificateData {
 }
 
 export interface IDidoxFormData
-  extends IDidoxPasswordData,
-    IDidoxCertificateData {
+  extends IDidoxPasswordData, IDidoxCertificateData {
   digitalLoginType: ENUM_DIGITAL_LOGIN_TYPE;
 }
