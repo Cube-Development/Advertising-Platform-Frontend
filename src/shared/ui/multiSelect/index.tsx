@@ -20,7 +20,8 @@ import {
 } from "../shadcn-ui";
 import styles from "./styles.module.scss";
 
-export interface MultiSelectProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+export interface MultiSelectProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   options: IOption[];
   onValueChange?: (value: any[]) => void;
   defaultValue?: any;

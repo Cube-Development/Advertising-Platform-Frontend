@@ -2244,11 +2244,11 @@
         "button": "Tugma",
         "name": {
           "title": "Tugma nomi",
-          "default_value": "namuna nomi"
+          "default_value": "Nomi kiriting..."
         },
         "link": {
           "title": "Tugma uchun havola",
-          "default_value": "namuna havola"
+          "default_value": "URL manzilini kiriting (https://...)"
         },
         "add_button": "Tugma qo'shish"
       },

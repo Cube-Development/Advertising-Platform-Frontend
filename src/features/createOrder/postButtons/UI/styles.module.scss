@@ -100,7 +100,7 @@
     grid-auto-flow: row;
     row-gap: 25px;
 
-    div {
+    .input__row {
       display: grid;
       grid-template: 1fr / 0.3fr 1fr;
       column-gap: 10px;

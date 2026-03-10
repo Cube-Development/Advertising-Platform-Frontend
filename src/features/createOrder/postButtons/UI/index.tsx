@@ -63,6 +63,7 @@ export const PostButtons: FC<PostButtonsProps> = ({
     content: "",
     url: "",
   });
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     setButtons(currentPost?.buttons || []);
@@ -81,10 +82,13 @@ export const PostButtons: FC<PostButtonsProps> = ({
   };
 
   const handleAddButton = () => {
+    if (!button.url || !button.url.startsWith("https://")) {
+      setError(t("chat.format.url_placeholder"));
+      return;
+    }
+    setError(null);
     setButtons([...buttons, button]);
     setButton({ content_type: ContentType.button, content: "", url: "" });
-    (document.getElementById("nameInput") as HTMLInputElement).value = "";
-    (document.getElementById("linkInput") as HTMLInputElement).value = "";
 
     if (currentPost) {
       currentPost.buttons = [...buttons, button];
@@ -102,7 +106,14 @@ export const PostButtons: FC<PostButtonsProps> = ({
   };
 
   return (
-    <AlertDialog>
+    <AlertDialog
+      onOpenChange={(open) => {
+        if (!open) {
+          setError(null);
+          setButton({ content_type: ContentType.button, content: "", url: "" });
+        }
+      }}
+    >
       <AlertDialogTrigger>
         <div className={`${styles.open} button`}>
           <div className={styles.icon}>
@@ -126,7 +137,7 @@ export const PostButtons: FC<PostButtonsProps> = ({
           </div>
 
           <div className={styles.inputs}>
-            <div>
+            <div className={styles.input__row}>
               <p>{t("create_order.create.add_button.name.title")}</p>
               <input
                 id="nameInput"
@@ -134,25 +145,35 @@ export const PostButtons: FC<PostButtonsProps> = ({
                 placeholder={t(
                   "create_order.create.add_button.name.default_value",
                 )}
+                value={button.content}
                 onChange={(e) => handleOnChange("content", e.target.value)}
               />
             </div>
-            <div>
+            <div className={styles.input__row}>
               <p>{t("create_order.create.add_button.link.title")}</p>
-              <input
-                id="linkInput"
-                type="text"
-                placeholder={t(
-                  "create_order.create.add_button.link.default_value",
+              <div className="grid gap-1">
+                <input
+                  id="linkInput"
+                  type="text"
+                  placeholder={t(
+                    "create_order.create.add_button.link.default_value",
+                  )}
+                  value={button.url}
+                  onChange={(e) => {
+                    handleOnChange("url", e.target.value);
+                    if (error) setError(null);
+                  }}
+                />
+                {error && (
+                  <span className="mt-1 text-red-500 text-xs">{error}</span>
                 )}
-                onChange={(e) => handleOnChange("url", e.target.value)}
-              />
+              </div>
             </div>
           </div>
           <MyButton
             onClick={handleAddButton}
             className={
-              buttons.length === 3 || button.content === "" || button.url === ""
+              buttons.length === 3 || button.content === "" || !button.url
                 ? "deactive"
                 : ""
             }

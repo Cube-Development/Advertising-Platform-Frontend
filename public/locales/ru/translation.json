@@ -2246,11 +2246,11 @@
         "button": "Кнопка",
         "name": {
           "title": "Название кнопки",
-          "default_value": "sample name"
+          "default_value": "Введите название ..."
         },
         "link": {
           "title": "Ссылка для кнопки",
-          "default_value": "sample link"
+          "default_value": "Введите URL-адрес (https://...)"
         },
         "add_button": "Добавить кнопку"
       },
