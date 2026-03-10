@@ -3,7 +3,8 @@ import { MyButton } from "@shared/ui";
 import { Loader2, PenTool } from "lucide-react";
 import { FC, MouseEvent } from "react";
 
-interface ISignDocumentProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ISignDocumentProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   documentId: string;
   owner: 0 | 1;
   isLoading?: boolean;

@@ -5,7 +5,8 @@ import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
-interface PaymentDidoxProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface PaymentDidoxProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading: boolean;
 }
 

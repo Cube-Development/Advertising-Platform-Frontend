@@ -2243,11 +2243,11 @@
         "button": "Button",
         "name": {
           "title": "Button Name",
-          "default_value": "sample name"
+          "default_value": "Enter a name..."
         },
         "link": {
           "title": "Button Link",
-          "default_value": "sample link"
+          "default_value": "Enter a URL (https://...)"
         },
         "add_button": "Add Button"
       },

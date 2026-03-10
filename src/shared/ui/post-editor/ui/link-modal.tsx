@@ -47,7 +47,11 @@ export const LinkModal: FC<LinkModalProps> = ({
       open={isOpen}
       onOpenChange={(open) => {
         onOpenChange(open);
-        if (!open) setError(null);
+        if (!open) {
+          setError(null);
+          setLinkText("");
+          setLinkUrl("");
+        }
       }}
     >
       <DialogContent
