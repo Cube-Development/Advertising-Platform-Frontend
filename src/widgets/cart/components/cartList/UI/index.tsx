@@ -1,5 +1,5 @@
 import { ICatalogChannel } from "@entities/project";
-import { AddMore, AddToBasket, SaveCart } from "@features/cart";
+import { AddMore, AddToBasket, SaveCart, ClearCart } from "@features/cart";
 import {
   CatalogCard,
   FormatList,
@@ -12,6 +12,7 @@ import { motion } from "framer-motion";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { EffectiveCart } from "../../effectiveCart";
 
 interface CartListProps {
   channels: ICatalogChannel[];
@@ -36,8 +37,10 @@ export const CartList: FC<CartListProps> = ({
         <div className={styles.buttons}>
           <SaveCart />
           <AddMore />
+          <ClearCart />
         </div>
       </div>
+      <EffectiveCart />
       {channels?.length ? (
         <div className={styles.cards}>
           {channels?.map((card, index) => (

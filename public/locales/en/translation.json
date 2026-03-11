@@ -1987,6 +1987,68 @@
       "channel_to_be_replaced": "Replacement Channel",
       "not_found": "Project Not Found",
       "no_data": "No information available for this project"
+    },
+    "clear": {
+      "title": "Clear Cart",
+      "description": "Are you sure you want to clear the cart?",
+      "confirm": "Clear",
+      "cancel": "Cancel"
+    },
+    "effective": {
+      "main": {
+        "title": "Effective Carts",
+        "selected_count": "{{count}} effective carts selected",
+        "proven_title": "Proven by Numbers",
+        "proven_desc": "Yandex.Advertising research confirmed: micro-bloggers are 2.5 times more effective than big stars. Your smart cart is built on this principle — maximum engagement for the same budget.",
+        "optimization_summary": "The algorithm optimized your order: reach is higher by {{reach}}%, engagement (ER) by {{er}}%."
+      },
+      "card": {
+        "title_optimal": "Optimal Cart",
+        "title_economy": "Economy Cart",
+        "budget": "Budget:",
+        "currency": "UZS",
+        "buttons": {
+          "details": "Details",
+          "replace": "Replace"
+        },
+        "metrics": {
+          "reach": "Reach",
+          "cpv": "CPV",
+          "subscribers": "Subscribers",
+          "er": "ER"
+        }
+      },
+      "modal": {
+        "compare_header": "Comparison with Current Cart",
+        "budget_total": "Cart Cost:",
+        "currency": "UZS",
+        "platforms_title": "Platform List",
+        "chart_price_axis": "Price",
+        "legend_current": "Your Cart",
+        "legend_optimal": "Optimal Cart",
+        "legend_economy": "Economy Cart",
+        "buttons": {
+          "cancel": "Cancel",
+          "replace": "Replace Your Cart"
+        },
+        "metrics": {
+          "reach": "Reach",
+          "cpv": "CPV",
+          "subscribers": "Subscribers",
+          "er": "ER"
+        },
+        "histogram": {
+          "price": "Price",
+          "reach": "Reach",
+          "subscribers": "Subscribers",
+          "cpv": "CPV",
+          "er": "ER"
+        },
+        "results": {
+          "optimal": "Result: with a slight budget increase, you get an exponential efficiency growth across all key promotion metrics.",
+          "economy": "Result: significant budget savings while maintaining key reach and engagement metrics at an acceptable level."
+        }
+      }
     }
   },
   "wallet": {

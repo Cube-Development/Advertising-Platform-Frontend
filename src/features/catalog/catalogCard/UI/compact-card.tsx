@@ -84,7 +84,7 @@ export const CompactCatalogCard: FC<CompactCatalogCardProps> = ({
       className="bg-white/70 md:rounded-xl rounded-[7px] shadow-[0px_1px_4px_0.5px_rgba(0,0,0,0.1)] relative group hover:shadow-md transition-shadow overflow-hidden cursor-pointer"
       onClick={handleChangeCard}
     >
-      <div className="grid grid-cols-[auto_1fr_auto_auto_auto] md:gap-2.5 gap-1.5 items-center md:pl-[10px] pl-[6px]">
+      <div className="grid grid-cols-[auto_1fr_auto_auto_auto] md:gap-2.5 gap-1.5 items-center md:pl-[10px] pl-[6px] h-[80px]">
         {/* Avatar */}
         <Link
           to={`${ENUM_PATHS.CHANNEL.replace(":id", card?.id)}`}

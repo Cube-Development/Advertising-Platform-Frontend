@@ -1988,6 +1988,68 @@
       "channel_to_be_replaced": "Almashtiriladigan kanal",
       "not_found": "Loyiha topilmadi",
       "no_data": "Loyiha bo'yicha ma'lumot yo'q"
+    },
+    "clear": {
+      "title": "Savatni tozalash",
+      "description": "Savatni tozalashga ishonchingiz komilmi?",
+      "confirm": "Tozalash",
+      "cancel": "Bekor qilish"
+    },
+    "effective": {
+      "main": {
+        "title": "Effektiv savatchalar",
+        "selected_count": "{{count}} ta effektiv savatcha tanlandi",
+        "proven_title": "Raqamlar bilan isbotlangan",
+        "proven_desc": "Yandex.Reklama tadqiqoti tasdiqladi: mikrobloggerlar yirik yulduzlarga qaraganda 2,5 baravar samaraliroq. Sizning aqlli savatchangiz aynan shu tamoyilga asoslangan — bir xil budjet evaziga maksimal jalb qilish.",
+        "optimization_summary": "Algoritm buyurtmangizni optimallashtirdi: qamrov {{reach}}% ga, faollik (ER) {{er}}% ga oshdi."
+      },
+      "card": {
+        "title_optimal": "Optimal savatcha",
+        "title_economy": "Tejamkor savatcha",
+        "budget": "Budjet :",
+        "currency": "so'm",
+        "buttons": {
+          "details": "Batafsil",
+          "replace": "Almashtirish"
+        },
+        "metrics": {
+          "reach": "Qamrov",
+          "cpv": "CPV",
+          "subscribers": "Obunachilar",
+          "er": "ER"
+        }
+      },
+      "modal": {
+        "compare_header": "Joriy savatcha bilan solishtirish",
+        "budget_total": "Savatcha narxi :",
+        "currency": "so'm",
+        "platforms_title": "Maydonchalar ro'yxati",
+        "chart_price_axis": "Narxi",
+        "legend_current": "Sizning savatchangiz",
+        "legend_optimal": "Optimal savatcha",
+        "legend_economy": "Tejamkor savatcha",
+        "buttons": {
+          "cancel": "Bekor qilish",
+          "replace": "Sizning savatchangizni almashtirish"
+        },
+        "metrics": {
+          "reach": "Qamrov",
+          "cpv": "CPV",
+          "subscribers": "Obunachilar",
+          "er": "ER"
+        },
+        "histogram": {
+          "price": "Narxi",
+          "reach": "Qamrov",
+          "subscribers": "Obunachilar",
+          "cpv": "CPV",
+          "er": "ER"
+        },
+        "results": {
+          "optimal": "Natija: budjetning biroz oshishi bilan siz reklama qilishning barcha asosiy ko'rsatkichlari bo'yicha karrali o'sishga erishasiz.",
+          "economy": "Natija: asosiy qamrov va jalb qilish ko'rsatkichlarini qoniqarli darajada saqlab qolgan holda budjetni sezilarli darajada tejash."
+        }
+      }
     }
   },
   "wallet": {

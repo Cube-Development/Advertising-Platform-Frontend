@@ -34,8 +34,7 @@
 
     .buttons {
       display: grid;
-      grid-template: 1fr / 1fr 1fr;
-      align-items: center;
+      grid-template: 1fr / 1fr 1fr max-content;
       column-gap: 10px;
     }
 

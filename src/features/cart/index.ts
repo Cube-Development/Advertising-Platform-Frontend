@@ -3,3 +3,4 @@ export * from "./addToBasket";
 export * from "./createPost";
 export * from "./saveCart";
 export * from "./card-premium-access";
+export * from "./clearCart";

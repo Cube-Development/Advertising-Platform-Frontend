@@ -126,3 +126,5 @@ export * from "./yes";
 export * from "./youtube";
 export * from "./youtube-main";
 export * from "./lock";
+export * from "./dollar";
+export * from "./histogram";

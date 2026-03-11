@@ -22,7 +22,11 @@ import Cookies from "js-cookie";
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { CartList, CreatePost, RecommendationList } from "../components";
+import {
+  CartList,
+  CreatePost,
+  RecommendationList
+} from "../components";
 import styles from "./styles.module.scss";
 
 export const Cart: FC = () => {
