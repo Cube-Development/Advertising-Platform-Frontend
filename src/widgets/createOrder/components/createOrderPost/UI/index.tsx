@@ -139,7 +139,7 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
   };
 
   return (
-    <div id="post" className={`container ${isBlur ? "blur" : ""}`}>
+    <div id="post" className={`container ${isBlur ? "blur" : ""}`} {...({ inert: isBlur ? "" : undefined } as any)}>
       <div className={styles.wrapper}>
         <div className={styles.content}>
           <div className={styles.top}>
