@@ -108,20 +108,35 @@ export default defineConfig({
       output: {
         manualChunks(id) {
           if (id.includes('node_modules')) {
-            if (id.includes('@sentry')) return 'vendor-sentry';
-            if (id.includes('@tiptap') || id.includes('prosemirror')) return 'vendor-tiptap';
-            if (id.includes('pdfjs-dist') || id.includes('react-pdf')) return 'vendor-pdf';
-            if (id.includes('recharts') || id.includes('d3')) return 'vendor-charts';
-            if (id.includes('swiper') || id.includes('embla-carousel')) return 'vendor-carousel';
-            if (id.includes('@radix-ui')) return 'vendor-radix';
-            if (id.includes('framer-motion')) return 'vendor-framer-motion';
-            if (id.includes('lucide-react')) return 'vendor-lucide';
-            if (id.includes('markdown-it') || id.includes('turndown')) return 'vendor-markdown';
-            if (id.includes('lodash')) return 'vendor-lodash';
-            if (id.includes('@reduxjs') || id.includes('redux')) return 'vendor-redux';
-            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) return 'vendor-react';
+            // 1. Базовые библиотеки React (ОБЯЗАТЕЛЬНО вместе для избежания конфликтов Context и хуков)
+            if (
+              id.includes('/react/') || 
+              id.includes('/react-dom/') || 
+              id.includes('/react-router') || 
+              id.includes('/react-redux/') || 
+              id.includes('/@reduxjs/')
+            ) {
+              return 'vendor-react';
+            }
+
+            // 2. UI и анимации (Radix, Framer Motion, Icons) - безопасно выносим в общий чанк дизайна
+            if (
+              id.includes('/@radix-ui/') || 
+              id.includes('/framer-motion/') || 
+              id.includes('/lucide-react/') ||
+              id.includes('/tailwind')
+            ) {
+              return 'vendor-ui';
+            }
+
+            // 3. Сторонние тяжелые и независимые утилиты (каждая в свой чанк)
+            if (id.includes('/@sentry/')) return 'vendor-sentry';
+            if (id.includes('/@tiptap/') || id.includes('/prosemirror/')) return 'vendor-editor';
+            if (id.includes('/pdfjs-dist/') || id.includes('/react-pdf/')) return 'vendor-pdf';
+            if (id.includes('/recharts/') || id.includes('/d3-')) return 'vendor-charts';
+            if (id.includes('/swiper/') || id.includes('/embla-carousel/')) return 'vendor-slider';
             
-            return 'vendor-core';
+            // Все остальные мелкие зависимости Rollup рассортирует сам
           }
         }
       }
