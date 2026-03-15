@@ -1,5 +1,5 @@
-import { PostTypesNum, platformTypesNum } from "@entities/platform";
-import { authApi } from "@shared/api";
+import { platformTypesNum, PostTypesNum } from "@entities/platform";
+import { authApi, POST_ORDER } from "@shared/api";
 import { IFile } from "../types";
 
 export interface IFileRes {
@@ -29,6 +29,7 @@ export const getPostAPI = authApi.injectEndpoints({
         method: "GET",
         params: params,
       }),
+      providesTags: [POST_ORDER],
     }),
   }),
 });

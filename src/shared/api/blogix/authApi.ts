@@ -40,6 +40,7 @@ import {
   AGENCY_PROJECTS_MANAGER,
   USER_ME,
   CART_SHORT,
+  POST_ORDER,
 } from "@shared/api/tags";
 
 export const authApi = createApi({
@@ -47,6 +48,7 @@ export const authApi = createApi({
   reducerPath: "authApi",
   endpoints: () => ({}),
   tagTypes: [
+    POST_ORDER,
     CART,
     CART_SHORT,
     CART_MANAGER,
