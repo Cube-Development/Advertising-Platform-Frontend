@@ -104,6 +104,28 @@ export default defineConfig({
   },
   build: {
     sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            if (id.includes('@sentry')) return 'vendor-sentry';
+            if (id.includes('@tiptap') || id.includes('prosemirror')) return 'vendor-tiptap';
+            if (id.includes('pdfjs-dist') || id.includes('react-pdf')) return 'vendor-pdf';
+            if (id.includes('recharts') || id.includes('d3')) return 'vendor-charts';
+            if (id.includes('swiper') || id.includes('embla-carousel')) return 'vendor-carousel';
+            if (id.includes('@radix-ui')) return 'vendor-radix';
+            if (id.includes('framer-motion')) return 'vendor-framer-motion';
+            if (id.includes('lucide-react')) return 'vendor-lucide';
+            if (id.includes('markdown-it') || id.includes('turndown')) return 'vendor-markdown';
+            if (id.includes('lodash')) return 'vendor-lodash';
+            if (id.includes('@reduxjs') || id.includes('redux')) return 'vendor-redux';
+            if (id.includes('react') || id.includes('react-dom') || id.includes('react-router')) return 'vendor-react';
+            
+            return 'vendor-core';
+          }
+        }
+      }
+    }
   },
   optimizeDeps: {
     include: ['pdfjs-dist/build/pdf.worker.min.mjs']
