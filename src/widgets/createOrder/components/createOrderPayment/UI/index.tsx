@@ -46,7 +46,7 @@ export const CreateOrderPayment: FC<CreateOrderPaymentProps> = ({
       : totalAmount;
   const { isPremiumUser } = useAppSelector((state) => state.user);
   return (
-    <div id="payment" className={`layout ${isBlur ? "blur" : ""}`}>
+    <div id="payment" className={`layout ${isBlur ? "blur" : ""}`} {...({ inert: isBlur ? "" : undefined } as any)}>
       <div className="container">
         <div className={styles.wrapper}>
           <div className={styles.content}>

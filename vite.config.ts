@@ -104,6 +104,43 @@ export default defineConfig({
   },
   build: {
     sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            // 1. Базовые библиотеки React (ОБЯЗАТЕЛЬНО вместе для избежания конфликтов Context и хуков)
+            if (
+              id.includes('/react/') || 
+              id.includes('/react-dom/') || 
+              id.includes('/react-router') || 
+              id.includes('/react-redux/') || 
+              id.includes('/@reduxjs/')
+            ) {
+              return 'vendor-react';
+            }
+
+            // 2. UI и анимации (Radix, Framer Motion, Icons) - безопасно выносим в общий чанк дизайна
+            if (
+              id.includes('/@radix-ui/') || 
+              id.includes('/framer-motion/') || 
+              id.includes('/lucide-react/') ||
+              id.includes('/tailwind')
+            ) {
+              return 'vendor-ui';
+            }
+
+            // 3. Сторонние тяжелые и независимые утилиты (каждая в свой чанк)
+            if (id.includes('/@sentry/')) return 'vendor-sentry';
+            if (id.includes('/@tiptap/') || id.includes('/prosemirror/')) return 'vendor-editor';
+            if (id.includes('/pdfjs-dist/') || id.includes('/react-pdf/')) return 'vendor-pdf';
+            if (id.includes('/recharts/') || id.includes('/d3-')) return 'vendor-charts';
+            if (id.includes('/swiper/') || id.includes('/embla-carousel/')) return 'vendor-slider';
+            
+            // Все остальные мелкие зависимости Rollup рассортирует сам
+          }
+        }
+      }
+    }
   },
   optimizeDeps: {
     include: ['pdfjs-dist/build/pdf.worker.min.mjs']

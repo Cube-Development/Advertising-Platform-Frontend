@@ -93,6 +93,15 @@ export const useTemplateEditor = <T extends IEditorFile>({
         const text = event.clipboardData?.getData("text/plain");
         const html = event.clipboardData?.getData("text/html");
 
+        console.log("Paste detected:", {
+          hasText: !!text,
+          hasHtml: !!html,
+          textLength: text?.length,
+          htmlLength: html?.length,
+          text,
+          html,
+        });
+
         // If we have plain text but no HTML (like from Notepad),
         // manually convert it to HTML with <br> to preserve exact formatting
         if (text && !html) {
@@ -101,6 +110,29 @@ export const useTemplateEditor = <T extends IEditorFile>({
           return true;
         }
         return false;
+      },
+      transformPastedHTML: (html) => {
+        // 1. Очищаем мета-теги и нормализуем неразрывные пробелы
+        let cleanHtml = html
+          .replace(/<meta[^>]*>/gi, "")
+          .replace(/&nbsp;/g, " ");
+
+        // 2. Убираем <br> внутри пустых блоков <p> и <div>.
+        // Это критично для Mac/Safari, чтобы избежать "тройных" переносов.
+        cleanHtml = cleanHtml.replace(/<(p|div)[^>]*>\s*<br\s*\/?>\s*<\/\1>/gi, "<$1></$1>");
+
+        // 3. Конвертируем блочные элементы в переносы
+        const transformed = cleanHtml
+          .replace(/<\/p>|<\/div>/gi, "<br>")
+          .replace(/<p[^>]*>|<div[^>]*>/gi, "");
+
+        // 4. Убираем лишние переносы только в самом начале и в самом конце,\n        // но сохраняем все переносы внутри текста (не схлопываем 2+ в 2),\n        // чтобы юзер мог делать большие отступы, если захочет.
+        const finalHtml = transformed
+          .replace(/^(<br\s*\/?>\s*)+/i, "")
+          .replace(/(<br\s*\/?>\s*)+$/i, "");
+
+        console.log("Processed HTML for paste (preserves gaps):", finalHtml);
+        return finalHtml;
       },
     },
   });

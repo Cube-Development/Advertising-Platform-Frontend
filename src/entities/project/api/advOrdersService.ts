@@ -23,6 +23,7 @@ import {
   CREATE_PROJECT_DATES,
   CREATE_PROJECT_NAME,
   MANAGER_ORDERS,
+  POST_ORDER,
   VIEWS_ADVERTISER,
   VIEWS_MANAGER,
 } from "@shared/api";
@@ -127,6 +128,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
         method: "POST",
         body: body,
       }),
+      invalidatesTags: [POST_ORDER],
     }),
     createUniquePost: build.mutation<
       { success: boolean },
