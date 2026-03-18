@@ -1977,7 +1977,8 @@
       "views": "Total Views",
       "commission": "Service Commission",
       "finnaly": "Final Amount",
-      "finnaly_short": "Amount"
+      "finnaly_short": "Amount",
+      "vat_info": "*Including VAT 12%"
     },
     "recomendation": "Recommended Channels",
     "hide": "Hide",

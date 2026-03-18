@@ -2,6 +2,9 @@ import {
   getRecommendChannels,
   ICart,
   ICatalogChannel,
+  publicCartAPI,
+  authCartAPI,
+  managerCartAPI,
   useAddToCommonCartMutation,
   useAddToManagerCartMutation,
   useAddToPublicCartMutation,
@@ -15,7 +18,7 @@ import {
 } from "@entities/project";
 import { ENUM_ROLES, GenerateGuestId, useFindLanguage } from "@entities/user";
 import { ENUM_COOKIES_TYPES } from "@shared/config";
-import { useAppSelector } from "@shared/hooks";
+import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { USER_LANGUAGES_LIST } from "@shared/languages";
 import { useToast } from "@shared/ui";
 import Cookies from "js-cookie";
@@ -30,7 +33,7 @@ export const Cart: FC = () => {
   const { t } = useTranslation();
   const language = useFindLanguage();
   const { isAuth, role } = useAppSelector((state) => state.user);
-
+  const dispatch = useAppDispatch();
   const guestId = Cookies.get(ENUM_COOKIES_TYPES.GUEST_ID);
   const projectId = Cookies.get(ENUM_COOKIES_TYPES.PROJECT_ID);
 
@@ -38,28 +41,41 @@ export const Cart: FC = () => {
     GenerateGuestId();
   }
 
-  const { data: cart, isLoading: isLoadingCommon } = useReadCommonCartQuery(
+  const {
+    data: cart,
+    isLoading: isLoadingCommon,
+    isFetching: isFetchingCommon,
+  } = useReadCommonCartQuery(
     { language: language?.id || USER_LANGUAGES_LIST[0].id },
     {
       skip:
         !isAuth || (projectId ? true : false) || role !== ENUM_ROLES.ADVERTISER,
+      refetchOnMountOrArgChange: true,
     },
   );
 
-  const { data: cartManager, isLoading: isLoadingManager } =
-    useReadManagerCartQuery(
-      {
-        project_id: projectId,
-        language: language?.id || USER_LANGUAGES_LIST[0].id,
-      },
-      {
-        skip: !isAuth || !projectId,
-      },
-    );
+  const {
+    data: cartManager,
+    isLoading: isLoadingManager,
+    isFetching: isFetchingManager,
+  } = useReadManagerCartQuery(
+    {
+      project_id: projectId,
+      language: language?.id || USER_LANGUAGES_LIST[0].id,
+    },
+    {
+      skip: !isAuth || !projectId,
+      refetchOnMountOrArgChange: true,
+    },
+  );
 
-  const { data: cartPub, isLoading: isLoadingPublic } = useReadPublicCartQuery(
+  const {
+    data: cartPub,
+    isLoading: isLoadingPublic,
+    isFetching: isFetchingPublic,
+  } = useReadPublicCartQuery(
     { guest_id: guestId, language: language?.id || USER_LANGUAGES_LIST[0].id },
-    { skip: isAuth || !guestId },
+    { skip: isAuth || !guestId, refetchOnMountOrArgChange: true },
   );
 
   useEffect(() => {
@@ -122,20 +138,116 @@ export const Cart: FC = () => {
     const currentCard = currentCart.channels?.find(
       (card) => card?.id === cartChannel?.id,
     );
-    handleChangeCards(cartChannel, currentCard);
+    return handleChangeCards(cartChannel, currentCard);
   };
 
   const handleChangeRecommendCards = (cartChannel: ICatalogChannel) => {
     const currentCard = recomendCards?.channels?.find(
       (card) => card?.id === cartChannel?.id,
     );
-    handleChangeCards(cartChannel, currentCard);
+    return handleChangeCards(cartChannel, currentCard);
   };
 
   const handleChangeCards = (
     cartChannel: ICatalogChannel,
     currentCard: ICatalogChannel | undefined,
   ) => {
+    const handleUpdateCache = (newFormat?: any) => {
+      const params = { language: language?.id || USER_LANGUAGES_LIST[0].id };
+      if (isAuth && !projectId) {
+        dispatch(
+          authCartAPI.util.updateQueryData(
+            "readCommonCart",
+            params,
+            (draft) => {
+              if (draft.channels) {
+                if (newFormat) {
+                  const index = draft.channels.findIndex(
+                    (c) => c.id === cartChannel.id,
+                  );
+                  if (index !== -1)
+                    draft.channels[index].selected_format = newFormat;
+                } else {
+                  draft.channels = draft.channels.filter(
+                    (c) => c.id !== cartChannel.id,
+                  );
+                  draft.count = Math.max(0, (draft.count || 0) - 1);
+                }
+              }
+            },
+          ),
+        );
+      } else if (!isAuth && guestId) {
+        dispatch(
+          publicCartAPI.util.updateQueryData(
+            "readPublicCart",
+            { ...params, guest_id: guestId },
+            (draft) => {
+              if (draft.channels) {
+                if (newFormat) {
+                  const index = draft.channels.findIndex(
+                    (c) => c.id === cartChannel.id,
+                  );
+                  if (index !== -1)
+                    draft.channels[index].selected_format = newFormat;
+                } else {
+                  draft.channels = draft.channels.filter(
+                    (c) => c.id !== cartChannel.id,
+                  );
+                  draft.count = Math.max(0, (draft.count || 0) - 1);
+                }
+              }
+            },
+          ),
+        );
+      } else if (isAuth && projectId) {
+        dispatch(
+          managerCartAPI.util.updateQueryData(
+            "readManagerCart",
+            { ...params, project_id: projectId },
+            (draft) => {
+              if (draft.channels) {
+                if (newFormat) {
+                  const index = draft.channels.findIndex(
+                    (c) => c.id === cartChannel.id,
+                  );
+                  if (index !== -1)
+                    draft.channels[index].selected_format = newFormat;
+                } else {
+                  draft.channels = draft.channels.filter(
+                    (c) => c.id !== cartChannel.id,
+                  );
+                  draft.count = Math.max(0, (draft.count || 0) - 1);
+                }
+              }
+            },
+          ),
+        );
+      }
+
+      setCurrentCart((prev) => {
+        if (prev?.channels) {
+          if (newFormat) {
+            return {
+              ...prev,
+              channels: prev.channels.map((c) =>
+                c.id === cartChannel.id
+                  ? { ...c, selected_format: newFormat }
+                  : c,
+              ),
+            };
+          } else {
+            return {
+              ...prev,
+              channels: prev.channels.filter((c) => c.id !== cartChannel.id),
+              count: Math.max(0, (prev.count || 0) - 1),
+            };
+          }
+        }
+        return prev;
+      });
+    };
+
     if (cartChannel?.selected_format && currentCard) {
       const addReq = {
         channel_id: cartChannel?.id,
@@ -147,16 +259,20 @@ export const Cart: FC = () => {
         channel_id: cartChannel?.id,
         language: language?.id || USER_LANGUAGES_LIST[0].id,
       };
+
+      let mutationPromise: Promise<any> | undefined;
+
       if (
         currentCard?.selected_format?.format ===
         cartChannel?.selected_format?.format
       ) {
         if (!isAuth && guestId) {
-          removeFromPublicCart({ ...removeReq, guest_id: guestId })
+          mutationPromise = removeFromPublicCart({
+            ...removeReq,
+            guest_id: guestId,
+          })
             .unwrap()
-            .then((data) => {
-              // setCurrentCart(data);
-            })
+            .then(() => handleUpdateCache(undefined))
             .catch((error) => {
               toast({
                 variant: "error",
@@ -165,11 +281,9 @@ export const Cart: FC = () => {
               console.error("Ошибка при удалении с корзины", error);
             });
         } else if (isAuth && !projectId) {
-          removeFromCommonCart(removeReq)
+          mutationPromise = removeFromCommonCart(removeReq)
             .unwrap()
-            .then((data) => {
-              // setCurrentCart(data);
-            })
+            .then(() => handleUpdateCache(undefined))
             .catch((error) => {
               toast({
                 variant: "error",
@@ -178,11 +292,12 @@ export const Cart: FC = () => {
               console.error("Ошибка при удалении с корзины", error);
             });
         } else if (isAuth && projectId) {
-          removeFromManagerCart({ ...removeReq, project_id: projectId })
+          mutationPromise = removeFromManagerCart({
+            ...removeReq,
+            project_id: projectId,
+          })
             .unwrap()
-            .then((data) => {
-              // setCurrentCart(data);
-            })
+            .then(() => handleUpdateCache(undefined))
             .catch((error) => {
               toast({
                 variant: "error",
@@ -196,11 +311,9 @@ export const Cart: FC = () => {
         cartChannel?.selected_format?.format
       ) {
         if (!isAuth && guestId) {
-          addToPublicCart({ ...addReq, guest_id: guestId })
+          mutationPromise = addToPublicCart({ ...addReq, guest_id: guestId })
             .unwrap()
-            .then((data) => {
-              // setCurrentCart(data);
-            })
+            .then(() => handleUpdateCache(cartChannel.selected_format))
             .catch((error) => {
               toast({
                 variant: "error",
@@ -209,11 +322,9 @@ export const Cart: FC = () => {
               console.error("Ошибка при добавлении в корзину", error);
             });
         } else if (isAuth && !projectId) {
-          addToCommonCart(addReq)
+          mutationPromise = addToCommonCart(addReq)
             .unwrap()
-            .then((data) => {
-              // setCurrentCart(data);
-            })
+            .then(() => handleUpdateCache(cartChannel.selected_format))
             .catch((error) => {
               toast({
                 variant: "error",
@@ -222,11 +333,12 @@ export const Cart: FC = () => {
               console.error("Ошибка при добавлении в корзину", error);
             });
         } else if (isAuth && projectId) {
-          addToManagerCart({ ...addReq, project_id: projectId })
+          mutationPromise = addToManagerCart({
+            ...addReq,
+            project_id: projectId,
+          })
             .unwrap()
-            .then((data) => {
-              // setCurrentCart(data);
-            })
+            .then(() => handleUpdateCache(cartChannel.selected_format))
             .catch((error) => {
               toast({
                 variant: "error",
@@ -236,9 +348,16 @@ export const Cart: FC = () => {
             });
         }
       }
+      return mutationPromise;
     }
   };
-
+  const isLoadingCart =
+    isLoadingCommon ||
+    isLoadingPublic ||
+    isLoadingManager ||
+    isFetchingCommon ||
+    isFetchingPublic ||
+    isFetchingManager;
   return (
     <div className="container">
       <div className={styles.wrapper}>
@@ -249,7 +368,11 @@ export const Cart: FC = () => {
               onChangeCard={handleChangeCartCards}
               isLoading={isLoadingCommon || isLoadingPublic || isLoadingManager}
             />
-            <CreatePost cart={currentCart} role={role} />
+            <CreatePost
+              cart={currentCart}
+              role={role}
+              isLoading={isLoadingCart}
+            />
           </div>
         </div>
         <div className={styles.cards}>

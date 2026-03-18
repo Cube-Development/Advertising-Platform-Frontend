@@ -42,7 +42,7 @@
 
   .text {
     display: grid;
-    grid-template: 1fr / auto auto auto;
+    grid-template: 1fr / repeat(3, 1fr);
 
     @media (max-width: 768px) {
       grid-template: 1fr / 1fr 1fr;

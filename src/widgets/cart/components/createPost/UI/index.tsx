@@ -9,13 +9,15 @@ import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 import { ENUM_ROLES } from "@entities/user";
 import { LoginPremiumAccess, LoginToViewMore } from "@features/user";
+import { Skeleton } from "@shared/ui";
 
 interface CreatePostProps {
   cart: ICart;
   role: ENUM_ROLES;
+  isLoading: boolean;
 }
 
-export const CreatePost: FC<CreatePostProps> = ({ cart, role }) => {
+export const CreatePost: FC<CreatePostProps> = ({ cart, role, isLoading }) => {
   const { t } = useTranslation();
   const screen = useWindowWidth();
   const { isPremiumUser, isAuth } = useAppSelector((state) => state.user);
@@ -47,13 +49,21 @@ export const CreatePost: FC<CreatePostProps> = ({ cart, role }) => {
             <div className={styles.data__info}>
               <div className={styles.info}>
                 <p>{t("cart.create_post.subscribers")}</p>
-                <span>{cart?.subscribers?.toLocaleString()}</span>
+                {isLoading ? (
+                  <Skeleton className="h-4 w-20" />
+                ) : (
+                  <span>{cart?.subscribers?.toLocaleString()}</span>
+                )}
               </div>
               <div className={styles.info}>
                 <p>{t("cart.create_post.views")}</p>
-                <span>
-                  {isModal ? <Modal /> : cart?.coverage?.toLocaleString()}
-                </span>
+                {isLoading ? (
+                  <Skeleton className="h-4 w-16" />
+                ) : (
+                  <span>
+                    {isModal ? <Modal /> : cart?.coverage?.toLocaleString()}
+                  </span>
+                )}
               </div>
               {role !== ENUM_ROLES.AGENCY && (
                 <div className={styles.info}>
@@ -81,9 +91,15 @@ export const CreatePost: FC<CreatePostProps> = ({ cart, role }) => {
               {t("cart.create_post.finnaly_short")}:
             </p>
             <span className="truncate flex flex-col md:items-center items-end gap-1">
-              {cart?.amount?.toLocaleString()} {t("symbol")}
+              {isLoading ? (
+                <Skeleton className="h-5 w-40" />
+              ) : (
+                <>
+                  {cart?.amount?.toLocaleString()} {t("symbol")}
+                </>
+              )}
               <span className="md:!text-xs mobile-xl:!text-[10px] !text-[8px] !font-medium">
-                *С учетом НДС 12%
+                {t("cart.create_post.vat_info")}
               </span>
             </span>
           </div>

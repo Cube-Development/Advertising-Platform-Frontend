@@ -41,7 +41,12 @@ import Cookies from "js-cookie";
 import { FC, useEffect, useRef, useState } from "react";
 import { useForm, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { CatalogCart, CatalogList, CatalogSearch } from "../components";
+import {
+  CatalogCart,
+  CatalogCartSkeleton,
+  CatalogList,
+  CatalogSearch,
+} from "../components";
 import styles from "./styles.module.scss";
 import { Link } from "react-router-dom";
 import { ENUM_PATHS } from "@shared/routing";
@@ -106,6 +111,7 @@ export const CatalogBlock: FC = () => {
       },
       {
         skip: !isAuth || !userId || (projectId ? true : false),
+        refetchOnMountOrArgChange: true,
       },
     );
 
@@ -118,6 +124,7 @@ export const CatalogBlock: FC = () => {
       },
       {
         skip: !isAuth || !projectId,
+        refetchOnMountOrArgChange: true,
       },
     );
 
@@ -128,7 +135,7 @@ export const CatalogBlock: FC = () => {
         language: language?.id || USER_LANGUAGES_LIST[0].id,
         guest_id: guestId,
       },
-      { skip: isAuth || !guestId },
+      { skip: isAuth || !guestId, refetchOnMountOrArgChange: true },
     );
 
   const {
@@ -146,6 +153,7 @@ export const CatalogBlock: FC = () => {
         ((role == ENUM_ROLES.MANAGER || role == ENUM_ROLES.AGENCY) && projectId
           ? true
           : false),
+      refetchOnMountOrArgChange: true,
     },
   );
 
@@ -212,11 +220,19 @@ export const CatalogBlock: FC = () => {
     isFirstRender,
   ]);
 
-  const { data: cart } = useReadCommonCartShortQuery(undefined, {
+  const {
+    data: cart,
+    isLoading: isCartLoading,
+    isFetching: isCartFetching,
+  } = useReadCommonCartShortQuery(undefined, {
     skip:
       !isAuth || (projectId ? true : false) || role !== ENUM_ROLES.ADVERTISER,
   });
-  const { data: cartManager } = useReadManagerCartQuery(
+  const {
+    data: cartManager,
+    isLoading: isCartManagerLoading,
+    isFetching: isCartManagerFetching,
+  } = useReadManagerCartQuery(
     {
       project_id: projectId,
       language: language?.id || USER_LANGUAGES_LIST[0].id,
@@ -226,7 +242,11 @@ export const CatalogBlock: FC = () => {
     },
   );
 
-  const { data: cartPub } = useReadPublicCartShortQuery(
+  const {
+    data: cartPub,
+    isLoading: isCartPubLoading,
+    isFetching: isCartPubFetching,
+  } = useReadPublicCartShortQuery(
     { guest_id: guestId },
     { skip: isAuth || !guestId },
   );
@@ -297,7 +317,7 @@ export const CatalogBlock: FC = () => {
       return;
     }
 
-    let newCards: ICatalogChannel[] = [];
+    let mutationPromise: Promise<any> | undefined;
     const currentCard = (
       (isAuth && !projectId
         ? catalogAuth?.channels
@@ -319,33 +339,65 @@ export const CatalogBlock: FC = () => {
         language: language?.id || USER_LANGUAGES_LIST[0].id,
       };
 
+      const handleUpdateCache = (newFormat?: any) => {
+        if (isAuth) {
+          dispatch(
+            catalogAuthAPI.util.updateQueryData(
+              "getAuthCatalog",
+              {
+                ...formState,
+                user_id: userId,
+                guest_id: guestId,
+                project_id: projectId,
+              },
+              (draft) => {
+                const index = draft.channels.findIndex(
+                  (c) => c.id === cartChannel.id,
+                );
+                if (index !== -1) {
+                  draft.channels[index] = {
+                    ...draft.channels[index],
+                    selected_format: newFormat,
+                  };
+                }
+              },
+            ),
+          );
+        } else {
+          dispatch(
+            catalogAPI.util.updateQueryData(
+              "getCatalog",
+              {
+                ...formState,
+                user_id: userId,
+                guest_id: guestId,
+                project_id: projectId,
+              },
+              (draft) => {
+                const index = draft.channels.findIndex(
+                  (c) => c.id === cartChannel.id,
+                );
+                if (index !== -1) {
+                  draft.channels[index] = {
+                    ...draft.channels[index],
+                    selected_format: newFormat,
+                  };
+                }
+              },
+            ),
+          );
+        }
+      };
+
       if (
         currentCard &&
         !currentCard?.selected_format &&
         cartChannel.selected_format
       ) {
-        newCards = (
-          (isAuth && !projectId
-            ? catalogAuth?.channels
-            : isAuth && projectId
-              ? catalogManager?.channels
-              : catalogPublic?.channels) || []
-        ).map((card) => {
-          if (card?.id === cartChannel.id) {
-            const newItem = {
-              ...card,
-              selected_format: cartChannel.selected_format,
-            };
-            return newItem;
-          }
-          return card;
-        });
         if (!isAuth && guestId) {
-          addToPublicCart({ ...addReq, guest_id: guestId })
+          mutationPromise = addToPublicCart({ ...addReq, guest_id: guestId })
             .unwrap()
-            .then((data) => {
-              // setCurrentCart(data);
-            })
+            .then(() => handleUpdateCache(cartChannel.selected_format))
             .catch((error) => {
               toast({
                 variant: "error",
@@ -354,11 +406,9 @@ export const CatalogBlock: FC = () => {
               console.error("Ошибка при добавлении в корзину", error);
             });
         } else if (isAuth && !projectId) {
-          addToCommonCart(addReq)
+          mutationPromise = addToCommonCart(addReq)
             .unwrap()
-            .then((data) => {
-              // setCurrentCart(data);
-            })
+            .then(() => handleUpdateCache(cartChannel.selected_format))
             .catch((error) => {
               toast({
                 variant: "error",
@@ -367,11 +417,12 @@ export const CatalogBlock: FC = () => {
               console.error("Ошибка при добавлении в корзину", error);
             });
         } else if (isAuth && projectId) {
-          addToManagerCart({ ...addReq, project_id: projectId })
+          mutationPromise = addToManagerCart({
+            ...addReq,
+            project_id: projectId,
+          })
             .unwrap()
-            .then((data) => {
-              // setCurrentCart(cartManager);
-            })
+            .then(() => handleUpdateCache(cartChannel.selected_format))
             .catch((error) => {
               toast({
                 variant: "error",
@@ -386,11 +437,9 @@ export const CatalogBlock: FC = () => {
         cartChannel.selected_format
       ) {
         if (!isAuth && guestId) {
-          addToPublicCart({ ...addReq, guest_id: guestId })
+          mutationPromise = addToPublicCart({ ...addReq, guest_id: guestId })
             .unwrap()
-            .then((data) => {
-              // setCurrentCart(data);
-            })
+            .then(() => handleUpdateCache(cartChannel.selected_format))
             .catch((error) => {
               toast({
                 variant: "error",
@@ -399,11 +448,9 @@ export const CatalogBlock: FC = () => {
               console.error("Ошибка при добавлении в корзину", error);
             });
         } else if (isAuth && !projectId) {
-          addToCommonCart(addReq)
+          mutationPromise = addToCommonCart(addReq)
             .unwrap()
-            .then((data) => {
-              // setCurrentCart(data);
-            })
+            .then(() => handleUpdateCache(cartChannel.selected_format))
             .catch((error) => {
               toast({
                 variant: "error",
@@ -412,11 +459,12 @@ export const CatalogBlock: FC = () => {
               console.error("Ошибка при добавлении в корзину", error);
             });
         } else if (isAuth && projectId) {
-          addToManagerCart({ ...addReq, project_id: projectId })
+          mutationPromise = addToManagerCart({
+            ...addReq,
+            project_id: projectId,
+          })
             .unwrap()
-            .then((data) => {
-              // setCurrentCart(data);
-            })
+            .then(() => handleUpdateCache(cartChannel.selected_format))
             .catch((error) => {
               toast({
                 variant: "error",
@@ -425,32 +473,14 @@ export const CatalogBlock: FC = () => {
               console.error("Ошибка при добавлении в корзину", error);
             });
         }
-        newCards = (
-          (isAuth && !projectId
-            ? catalogAuth?.channels
-            : isAuth && projectId
-              ? catalogManager?.channels
-              : catalogPublic?.channels) || []
-        ).map((card) => {
-          if (
-            card?.id === cartChannel.id &&
-            card?.selected_format &&
-            cartChannel.selected_format
-          ) {
-            return {
-              ...card,
-              selected_format: { ...cartChannel.selected_format },
-            };
-          }
-          return card;
-        });
       } else {
         if (!isAuth && guestId) {
-          removeFromPublicCart({ ...removeReq, guest_id: guestId })
+          mutationPromise = removeFromPublicCart({
+            ...removeReq,
+            guest_id: guestId,
+          })
             .unwrap()
-            .then((data) => {
-              // setCurrentCart(data);
-            })
+            .then(() => handleUpdateCache(undefined))
             .catch((error) => {
               toast({
                 variant: "error",
@@ -459,11 +489,9 @@ export const CatalogBlock: FC = () => {
               console.error("Ошибка при удалении с корзины", error);
             });
         } else if (isAuth && !projectId) {
-          removeFromCommonCart(removeReq)
+          mutationPromise = removeFromCommonCart(removeReq)
             .unwrap()
-            .then((data) => {
-              // setCurrentCart(data);
-            })
+            .then(() => handleUpdateCache(undefined))
             .catch((error) => {
               toast({
                 variant: "error",
@@ -472,11 +500,12 @@ export const CatalogBlock: FC = () => {
               console.error("Ошибка при удалении с корзины", error);
             });
         } else if (isAuth && projectId) {
-          removeFromManagerCart({ ...removeReq, project_id: projectId })
+          mutationPromise = removeFromManagerCart({
+            ...removeReq,
+            project_id: projectId,
+          })
             .unwrap()
-            .then((data) => {
-              // setCurrentCart(cartManager);
-            })
+            .then(() => handleUpdateCache(undefined))
             .catch((error) => {
               toast({
                 variant: "error",
@@ -485,56 +514,12 @@ export const CatalogBlock: FC = () => {
               console.error("Ошибка при удалении с корзины", error);
             });
         }
-        newCards = (
-          (isAuth && !projectId
-            ? catalogAuth?.channels
-            : isAuth && projectId
-              ? catalogManager?.channels
-              : catalogPublic?.channels) || []
-        ).map((card) => {
-          if (card?.id === cartChannel.id) {
-            const newItem = {
-              ...card,
-              selected_format: undefined,
-            };
-            return newItem;
-          }
-          return card;
-        });
       }
 
-      if (isAuth) {
-        dispatch(
-          catalogAuthAPI.util.updateQueryData(
-            "getAuthCatalog",
-            {
-              ...formState,
-              user_id: userId,
-              guest_id: guestId,
-              project_id: projectId,
-            },
-            (draft) => {
-              draft.channels = newCards;
-            },
-          ),
-        );
-      } else {
-        dispatch(
-          catalogAPI.util.updateQueryData(
-            "getCatalog",
-            {
-              ...formState,
-              user_id: userId,
-              guest_id: guestId,
-              project_id: projectId,
-            },
-            (draft) => {
-              draft.channels = newCards;
-            },
-          ),
-        );
-      }
+      return mutationPromise;
     }
+
+    return mutationPromise;
   };
 
   useEffect(() => {
@@ -631,8 +616,20 @@ export const CatalogBlock: FC = () => {
               />
             </div>
             <div className={styles.cart}>
-              {currentCart?.count > 0 && (
-                <CatalogCart cart={currentCart!} role={role} />
+              {isCartLoading || isCartManagerLoading || isCartPubLoading ? (
+                <CatalogCartSkeleton />
+              ) : (
+                currentCart?.count && (
+                  <CatalogCart
+                    cart={currentCart!}
+                    role={role}
+                    isFetching={
+                      isCartFetching ||
+                      isCartManagerFetching ||
+                      isCartPubFetching
+                    }
+                  />
+                )
               )}
             </div>
           </div>

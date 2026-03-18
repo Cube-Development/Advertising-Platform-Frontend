@@ -91,30 +91,40 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
   const [channel, setChannel] = useState<IReadChannelData>(card!);
 
   // commonCart
-  const [addToCommonCart] = useAddToCommonCartMutation();
-  const [removeFromCommonCart] = useRemoveFromCommonCartMutation();
+  const [addToCommonCart, { isLoading: isLoadingAddToCommonCart }] =
+    useAddToCommonCartMutation();
+  const [removeFromCommonCart, { isLoading: isLoadingRemoveFromCommonCart }] =
+    useRemoveFromCommonCartMutation();
   // publicCart
-  const [addToPublicCart] = useAddToPublicCartMutation();
-  const [removeFromPublicCart] = useRemoveFromPublicCartMutation();
+  const [addToPublicCart, { isLoading: isLoadingAddToPublicCart }] =
+    useAddToPublicCartMutation();
+  const [removeFromPublicCart, { isLoading: isLoadingRemoveFromPublicCart }] =
+    useRemoveFromPublicCartMutation();
   // managerCart
-  const [addToManagerCart] = useAddToManagerCartMutation();
-  const [removeFromManagerCart] = useRemoveFromManagerCartMutation();
+  const [addToManagerCart, { isLoading: isLoadingAddToManagerCart }] =
+    useAddToManagerCartMutation();
+  const [removeFromManagerCart, { isLoading: isLoadingRemoveFromManagerCart }] =
+    useRemoveFromManagerCartMutation();
 
-  const { data: cart } = useReadCommonCartShortQuery(undefined, {
-    skip:
-      !isAuth || (projectId ? true : false) || role !== ENUM_ROLES.ADVERTISER,
-  });
-  const { data: cartPub } = useReadPublicCartShortQuery(
-    { guest_id: guestId },
-    { skip: isAuth || !guestId },
-  );
-  const { data: cartManager } = useReadManagerCartQuery(
-    {
-      project_id: projectId,
-      language: language?.id || USER_LANGUAGES_LIST[0].id,
-    },
-    { skip: !isAuth || !projectId },
-  );
+  const { data: cart, isFetching: isFetchingCommon } =
+    useReadCommonCartShortQuery(undefined, {
+      skip:
+        !isAuth || (projectId ? true : false) || role !== ENUM_ROLES.ADVERTISER,
+      refetchOnMountOrArgChange: true,
+    });
+  const { data: cartPub, isFetching: isFetchingPublic } =
+    useReadPublicCartShortQuery(
+      { guest_id: guestId },
+      { skip: isAuth || !guestId, refetchOnMountOrArgChange: true },
+    );
+  const { data: cartManager, isFetching: isFetchingManager } =
+    useReadManagerCartQuery(
+      {
+        project_id: projectId,
+        language: language?.id || USER_LANGUAGES_LIST[0].id,
+      },
+      { skip: !isAuth || !projectId, refetchOnMountOrArgChange: true },
+    );
 
   const [currentCart, setCurrentCart] = useState<ICart | undefined>(
     cart || cartPub || cartManager,
@@ -291,6 +301,13 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
 
   const handleChangeFormat = (selectedValue: IFormat) => {
     setSelectedFormat(selectedValue);
+    if (channel?.selected_format) {
+      const cartChannel = { ...channel, selected_format: selectedValue };
+      return handleChangeCards(
+        cartChannel as unknown as ICatalogChannel,
+        channel as unknown as ICatalogChannel,
+      );
+    }
   };
 
   useEffect(() => {
@@ -352,9 +369,25 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
                               selectedFormat={selectedFormat!}
                               changeFormat={handleChangeFormat}
                               onChange={handleChangeCartCards}
+                              isLoading={
+                                isLoadingAddToCommonCart ||
+                                isLoadingRemoveFromCommonCart ||
+                                isLoadingAddToPublicCart ||
+                                isLoadingRemoveFromPublicCart ||
+                                isLoadingAddToManagerCart ||
+                                isLoadingRemoveFromManagerCart
+                              }
                             />
                             {currentCart && currentCart?.count > 0 ? (
-                              <ChannelCart cart={currentCart} role={role} />
+                              <ChannelCart
+                                cart={currentCart}
+                                role={role}
+                                isLoading={
+                                  isFetchingCommon ||
+                                  isFetchingPublic ||
+                                  isFetchingManager
+                                }
+                              />
                             ) : null}
                           </div>
                         </motion.div>
@@ -396,9 +429,25 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
                           selectedFormat={selectedFormat!}
                           changeFormat={handleChangeFormat}
                           onChange={handleChangeCartCards}
+                          isLoading={
+                            isLoadingAddToCommonCart ||
+                            isLoadingRemoveFromCommonCart ||
+                            isLoadingAddToPublicCart ||
+                            isLoadingRemoveFromPublicCart ||
+                            isLoadingAddToManagerCart ||
+                            isLoadingRemoveFromManagerCart
+                          }
                         />
                         {currentCart && currentCart?.count > 0 ? (
-                          <ChannelCart cart={currentCart} role={role} />
+                          <ChannelCart
+                            cart={currentCart}
+                            role={role}
+                            isLoading={
+                              isFetchingCommon ||
+                              isFetchingPublic ||
+                              isFetchingManager
+                            }
+                          />
                         ) : null}
                       </div>
                     </motion.div>

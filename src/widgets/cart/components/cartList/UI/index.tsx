@@ -38,30 +38,38 @@ export const CartList: FC<CartListProps> = ({
           <AddMore />
         </div>
       </div>
-      {channels?.length ? (
+      {channels?.length || isLoading ? (
         <div className={styles.cards}>
-          {channels?.map((card, index) => (
-            <motion.div
-              key={card.id}
-              initial="hidden"
-              animate="visible"
-              custom={Math.min(index, 10)}
-              variants={PAGE_ANIMATION.animationUp}
-              style={{ pointerEvents: "auto" }}
-            >
-              <CatalogCard
-                page={ENUM_PAGE_FILTER.CART}
-                card={card}
-                AddToBasketBtn={AddToBasket}
-                FormatList={FormatList}
-                onChangeCard={onChangeCard}
-              />
-            </motion.div>
-          ))}
-          {isLoading &&
-            Array.from({ length: INTERSECTION_ELEMENTS.CATALOG }).map(
-              (_, index) => <SkeletonCatalogCard key={index} />,
-            )}
+          {channels?.length && !isLoading ? (
+            <>
+              {channels?.map((card, index) => (
+                <motion.div
+                  key={card.id}
+                  initial="hidden"
+                  animate="visible"
+                  custom={Math.min(index, 10)}
+                  variants={PAGE_ANIMATION.animationUp}
+                  style={{ pointerEvents: "auto" }}
+                >
+                  <CatalogCard
+                    page={ENUM_PAGE_FILTER.CART}
+                    card={card}
+                    AddToBasketBtn={AddToBasket}
+                    FormatList={FormatList}
+                    onChangeCard={onChangeCard}
+                  />
+                </motion.div>
+              ))}
+            </>
+          ) : (
+            <>
+              {Array.from({ length: INTERSECTION_ELEMENTS.CART }).map(
+                (_, index) => (
+                  <SkeletonCatalogCard key={index} />
+                ),
+              )}
+            </>
+          )}
         </div>
       ) : (
         <div className={styles.empty__block}>

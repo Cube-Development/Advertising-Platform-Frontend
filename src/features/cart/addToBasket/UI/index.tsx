@@ -1,9 +1,10 @@
 import { CartMinusIcon, CartPlusIcon } from "@shared/assets";
 import { MyButton } from "@shared/ui";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
-import { IAddToBasketProps } from "@entities/project";
+import { IAddToBasketProps, IFormat } from "@entities/project";
+import { Loader } from "lucide-react";
 
 export const AddToBasket: FC<IAddToBasketProps> = ({
   FormatList,
@@ -16,6 +17,7 @@ export const AddToBasket: FC<IAddToBasketProps> = ({
   isSmallCatalogCard,
 }) => {
   const { t } = useTranslation();
+  const [isLoading, setIsLoading] = useState(false);
 
   let isSelected: boolean = false;
 
@@ -28,6 +30,29 @@ export const AddToBasket: FC<IAddToBasketProps> = ({
       break;
   }
 
+  const handleToggleCart = async (e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (changeCard) {
+      setIsLoading(true);
+      try {
+        await changeCard();
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
+
+  const handleInternalFormatChange = async (selectedValue: IFormat) => {
+    if (changeFormat) {
+      setIsLoading(true);
+      try {
+        await changeFormat(selectedValue);
+      } finally {
+        setIsLoading(false);
+      }
+    }
+  };
+
   if (isSmallCatalogCard) {
     return (
       <MyButton
@@ -39,7 +64,8 @@ export const AddToBasket: FC<IAddToBasketProps> = ({
               : "button__green"
         }
         className="mobile-xl:px-3 mobile-xl:py-2 p-1 mobile-xl:rounded-[7px] rounded-[5px] mobile-xl:w-[150px] mobile:w-[120px] w-[110px] !justify-items-end !justify-end !shadow-none"
-        onClick={changeCard}
+        onClick={handleToggleCart}
+        disabled={isLoading}
       >
         <div className="grid items-center justify-end grid-flow-row gap-1 justify-items-end">
           <div className="mobile-xl:font-medium font-semibold mobile-xl:text-xs mobile:text-[10px] text-[9px] grid grid-cols-[1fr,auto] justify-items-center items-center mobile-xl:gap-2 gap-1 w-fit">
@@ -47,7 +73,13 @@ export const AddToBasket: FC<IAddToBasketProps> = ({
               {selectedFormat?.price?.toLocaleString()}
             </span>
             <span className="mobile-xl:size-5 size-3.5">
-              {page || isSelected ? <CartMinusIcon /> : <CartPlusIcon />}
+              {isLoading ? (
+                <Loader className="animate-spin" />
+              ) : page || isSelected ? (
+                <CartMinusIcon />
+              ) : (
+                <CartPlusIcon />
+              )}
             </span>
           </div>
           <span className="text-[8px] font-semibold -mt-1">
@@ -56,7 +88,7 @@ export const AddToBasket: FC<IAddToBasketProps> = ({
           <FormatList
             isSmall={isSmall}
             selectedFormat={selectedFormat}
-            changeFormat={changeFormat}
+            changeFormat={handleInternalFormatChange}
             card={card}
             isSmallCatalogCard={isSmallCatalogCard}
           />
@@ -75,12 +107,13 @@ export const AddToBasket: FC<IAddToBasketProps> = ({
             : "button__green"
       }
       className={styles.button}
-      onClick={changeCard}
+      onClick={handleToggleCart}
+      disabled={isLoading}
     >
       <FormatList
         isSmall={isSmall}
         selectedFormat={selectedFormat}
-        changeFormat={changeFormat}
+        changeFormat={handleInternalFormatChange}
         card={card}
       />
       <div className="flex items-center gap-1 justify-center mobile-xl:[&>svg]:size-4 [&>svg]:size-3">
@@ -89,7 +122,13 @@ export const AddToBasket: FC<IAddToBasketProps> = ({
             ? t("channel.add_to_cart.remove")
             : t("channel.add_to_cart.add")}
         </span>
-        {page || isSelected ? <CartMinusIcon /> : <CartPlusIcon />}
+        {isLoading ? (
+          <Loader className="animate-spin" />
+        ) : page || isSelected ? (
+          <CartMinusIcon />
+        ) : (
+          <CartPlusIcon />
+        )}
       </div>
       <div className={styles.price}>
         {selectedFormat?.price?.toLocaleString()} {t("symbol")}

@@ -103,7 +103,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
       card?.selected_format &&
       card?.selected_format?.format !== selectedValue?.format
     ) {
-      onChangeCard({
+      return onChangeCard({
         ...card,
         selected_format: selectedValue,
       });
@@ -111,7 +111,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
   };
 
   const handleChangeCard = () => {
-    onChangeCard({
+    return onChangeCard({
       ...card,
       selected_format: selectedFormat,
     });
@@ -436,4 +436,3 @@ export const CatalogCard: FC<CatalogCardProps> = ({
     </div>
   );
 };
-8;

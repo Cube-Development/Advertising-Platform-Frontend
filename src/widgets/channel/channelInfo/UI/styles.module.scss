@@ -31,7 +31,7 @@
 
   .top {
     display: grid;
-    grid-template: 1fr / 1fr 0.5fr;
+    grid-template: 1fr / 1fr 400px;
     column-gap: 20px;
 
     @media (max-width: 992px) {

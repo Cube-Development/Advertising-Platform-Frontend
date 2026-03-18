@@ -65,12 +65,12 @@ export interface IFormat {
 }
 
 export interface IChangeCards {
-  onChangeCard: (cart: ICatalogChannel) => void;
+  onChangeCard: (cart: ICatalogChannel) => void | Promise<void>;
 }
 
 export interface IFormatListProps {
   selectedFormat: IFormat;
-  changeFormat: (selectedValue: IFormat) => void;
+  changeFormat: (selectedValue: IFormat) => void | Promise<void>;
   card: ICatalogChannel;
   isSmall?: boolean;
   isBig?: boolean;
@@ -80,7 +80,7 @@ export interface IFormatListProps {
 
 interface Components {
   FormatList: FC<IFormatListProps>;
-  changeCard?: () => void;
+  changeCard?: () => void | Promise<void>;
   page?: ENUM_PAGE_FILTER.CART;
   card: ICatalogChannel;
 }

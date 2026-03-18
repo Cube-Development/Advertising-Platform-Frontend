@@ -2,7 +2,8 @@ import { IReadChannelData } from "@entities/channel";
 import { ICatalogChannel, IFormat } from "@entities/project";
 import { FormatList } from "@features/catalog";
 import { MyButton } from "@shared/ui";
-import { FC, useEffect, useState } from "react";
+import { Loader } from "lucide-react";
+import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
 
@@ -11,6 +12,7 @@ interface AddToCartProps {
   selectedFormat: IFormat;
   changeFormat: (selectedValue: IFormat) => void;
   onChange: () => void;
+  isLoading: boolean;
 }
 
 export const AddToCart: FC<AddToCartProps> = ({
@@ -18,6 +20,7 @@ export const AddToCart: FC<AddToCartProps> = ({
   selectedFormat,
   changeFormat,
   onChange,
+  isLoading,
 }) => {
   const { t } = useTranslation();
   const inBasket = Boolean(card?.selected_format);
@@ -50,12 +53,14 @@ export const AddToCart: FC<AddToCartProps> = ({
         className={styles.button}
         buttons_type={`${inBasket ? "button__green" : "button__blue"}`}
         onClick={onChange}
+        disabled={isLoading}
       >
         {inBasket ? (
           <p>{t("channel.add_to_cart.remove")}</p>
         ) : (
           <p>{t("channel.add_to_cart.add")}</p>
         )}
+        {isLoading && <Loader className="size-4 animate-spin text-white" />}
       </MyButton>
     </div>
   );

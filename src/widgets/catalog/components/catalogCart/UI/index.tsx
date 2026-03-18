@@ -1,6 +1,6 @@
 import { ICart } from "@entities/project";
 import { ENUM_PATHS } from "@shared/routing";
-import { InfoTooltip, MyButton } from "@shared/ui";
+import { InfoTooltip, MyButton, Skeleton } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -10,9 +10,14 @@ import { ENUM_ROLES } from "@entities/user";
 interface CatalogCartProps {
   cart: ICart;
   role: ENUM_ROLES;
+  isFetching: boolean;
 }
 
-export const CatalogCart: FC<CatalogCartProps> = ({ cart, role }) => {
+export const CatalogCart: FC<CatalogCartProps> = ({
+  cart,
+  role,
+  isFetching,
+}) => {
   const { t } = useTranslation();
 
   return (
@@ -20,24 +25,36 @@ export const CatalogCart: FC<CatalogCartProps> = ({ cart, role }) => {
       <div className={styles.text}>
         <div className={styles.info}>
           <p>{t("catalog.current_cart.channels")}:</p>
-          <span>{cart?.count?.toLocaleString()}</span>
+          {isFetching ? (
+            <Skeleton className="mx-5 h-[22px]" />
+          ) : (
+            <span>{cart?.count?.toLocaleString()}</span>
+          )}
         </div>
         <div className={`${styles.info} ${styles.views}`}>
           <p>{t("catalog.current_cart.views")}:</p>
-          <span>{cart?.coverage?.toLocaleString()}</span>
+          {isFetching ? (
+            <Skeleton className="mx-5 h-[22px]" />
+          ) : (
+            <span>{cart?.coverage?.toLocaleString()}</span>
+          )}
         </div>
         <div className={`${styles.info} ${styles.coast}`}>
           <p>{t("catalog.current_cart.cost")}:</p>
-          <span>
-            {role === ENUM_ROLES.AGENCY ? (
-              <InfoTooltip
-                text={t("catalog.current_cart.information")}
-                className="!text-[var(--Personal-colors-white)]"
-              />
-            ) : (
-              cart?.amount?.toLocaleString()
-            )}
-          </span>
+          {isFetching ? (
+            <Skeleton className="mx-5 h-[22px]" />
+          ) : (
+            <span>
+              {role === ENUM_ROLES.AGENCY ? (
+                <InfoTooltip
+                  text={t("catalog.current_cart.information")}
+                  className="!text-[var(--Personal-colors-white)]"
+                />
+              ) : (
+                cart?.amount?.toLocaleString()
+              )}
+            </span>
+          )}
         </div>
       </div>
       <div className={styles.cart}>

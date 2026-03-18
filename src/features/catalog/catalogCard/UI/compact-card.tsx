@@ -69,12 +69,12 @@ export const CompactCatalogCard: FC<CompactCatalogCardProps> = ({
       card?.selected_format &&
       card?.selected_format?.format !== selectedValue?.format
     ) {
-      onChangeCard({ ...card, selected_format: selectedValue });
+      return onChangeCard({ ...card, selected_format: selectedValue });
     }
   };
 
   const handleChangeCard = () => {
-    onChangeCard({ ...card, selected_format: selectedFormat });
+    return onChangeCard({ ...card, selected_format: selectedFormat });
   };
 
   const stopPropagation = (e: React.MouseEvent) => e.stopPropagation();

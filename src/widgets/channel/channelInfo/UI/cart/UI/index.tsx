@@ -1,6 +1,6 @@
 import { ICart } from "@entities/project";
 import { ENUM_PATHS } from "@shared/routing";
-import { InfoTooltip, MyButton } from "@shared/ui";
+import { InfoTooltip, MyButton, Skeleton } from "@shared/ui";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -10,9 +10,14 @@ import { ENUM_ROLES } from "@entities/user";
 interface ChannelCartProps {
   cart: ICart;
   role: ENUM_ROLES;
+  isLoading: boolean;
 }
 
-export const ChannelCart: FC<ChannelCartProps> = ({ cart, role }) => {
+export const ChannelCart: FC<ChannelCartProps> = ({
+  cart,
+  role,
+  isLoading,
+}) => {
   const { t } = useTranslation();
 
   return (
@@ -20,11 +25,19 @@ export const ChannelCart: FC<ChannelCartProps> = ({ cart, role }) => {
       <div className={styles.text}>
         <div className={styles.info}>
           <p>{t("catalog.current_cart.channels")}:</p>
-          <span>{cart?.count?.toLocaleString()}</span>
+          {isLoading ? (
+            <Skeleton className="h-[14px] w-10" />
+          ) : (
+            <span>{cart?.count?.toLocaleString()}</span>
+          )}
         </div>
         <div className={styles.info}>
           <p>{t("catalog.current_cart.views")}:</p>
-          <span>{cart?.coverage?.toLocaleString()}</span>
+          {isLoading ? (
+            <Skeleton className="h-[14px] w-14" />
+          ) : (
+            <span>{cart?.coverage?.toLocaleString()}</span>
+          )}
         </div>
         <div className={styles.info}>
           <p>{t("catalog.current_cart.cost")}:</p>
@@ -34,6 +47,8 @@ export const ChannelCart: FC<ChannelCartProps> = ({ cart, role }) => {
                 text={t("catalog.current_cart.information")}
                 className="!text-[var(--Personal-colors-black)]"
               />
+            ) : isLoading ? (
+              <Skeleton className="h-[14px] w-20" />
             ) : (
               cart?.amount?.toLocaleString()
             )}
