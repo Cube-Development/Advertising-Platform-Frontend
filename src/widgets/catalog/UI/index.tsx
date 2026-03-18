@@ -619,7 +619,7 @@ export const CatalogBlock: FC = () => {
               {isCartLoading || isCartManagerLoading || isCartPubLoading ? (
                 <CatalogCartSkeleton />
               ) : (
-                currentCart?.count && (
+                !!currentCart?.count && (
                   <CatalogCart
                     cart={currentCart!}
                     role={role}
