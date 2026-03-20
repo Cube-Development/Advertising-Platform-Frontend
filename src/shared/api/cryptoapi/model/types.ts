@@ -3,6 +3,17 @@ export interface Certificate {
   path: string;
   name: string;
   alias: string;
+  // Парсятся из alias (X500)
+  CN?: string;
+  TIN?: string;
+  PINFL?: string;
+  UID?: string;
+  serialNumber?: string;
+  validFrom?: Date;
+  validTo?: Date;
+  O?: string;
+  T?: string;
+  expired?: boolean;
 }
 
 export interface WebSocketResponse {
@@ -14,6 +25,9 @@ export interface WebSocketResponse {
   signature_hex?: string;
   success: boolean;
   reason?: string;
+  // version response
+  major?: string;
+  minor?: string;
 }
 
 export interface CryptoWebSocketState {
