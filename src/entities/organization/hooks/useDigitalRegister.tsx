@@ -1,8 +1,6 @@
-import { Certificate } from "@shared/api";
-import { useCryptoMessage } from "@shared/api";
+import { Certificate, useCryptoCertificates } from "@shared/api";
 import { useToast } from "@shared/ui";
 import { useTranslation } from "react-i18next";
-import { CreateMessageKeyId, CreateMessageSignature } from "../helpers";
 import { useGetTimestampMutation, useSignUpMutation } from "../api";
 import Cookies from "js-cookie";
 import { ENUM_COOKIES_TYPES } from "@shared/config";
@@ -14,7 +12,7 @@ export const useDigitalRegister = () => {
   const { t } = useTranslation();
 
   const dispatch = useAppDispatch();
-  const { sendMessage } = useCryptoMessage();
+  const { loadKey, createSignature } = useCryptoCertificates();
   const [getTimestamp, { isLoading: isLoadingLogin }] =
     useGetTimestampMutation();
 
@@ -28,18 +26,15 @@ export const useDigitalRegister = () => {
     try {
       // Шаг 1: Загрузка ключа
 
-      const keyResponse = await sendMessage(CreateMessageKeyId(certificate));
-      const keyId = keyResponse.keyId;
+      const keyId = await loadKey(certificate);
 
       // Шаг 2: Создание подписи
-      const signResponse = await sendMessage(
-        CreateMessageSignature(taxId, keyId),
-      );
+      const signResponse = await createSignature(keyId, String(taxId));
 
       // Шаг 3: Прикрепление TimeStamp
       const timestampResponse = await getTimestamp({
-        pkcs7: signResponse.pkcs7_64,
-        signatureHex: signResponse.signature_hex,
+        pkcs7: signResponse.pkcs7,
+        signatureHex: signResponse.signatureHex,
       })
         .unwrap()
         .catch(() => {

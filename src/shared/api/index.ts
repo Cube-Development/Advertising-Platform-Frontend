@@ -1,5 +1,5 @@
 export { authApi, baseApi } from "./blogix";
-export { authEcpApi, baseEpcApi } from "./epc";
+export { authEcpApi, authEcpApi2, baseEpcApi, baseEpcApi2 } from "./epc";
 export * from "./tags";
 export * from "./centrifuge";
 export * from "./cryptoapi";

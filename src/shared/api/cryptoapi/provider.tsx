@@ -152,8 +152,8 @@ const callCryptoApi = (
 // Минимальная версия E-IMZO
 // ────────────────────────────────────────────
 
-const EIMZO_MIN_MAJOR = 4;
-const EIMZO_MIN_MINOR = 86;
+const EIMZO_MIN_MAJOR = 6;
+const EIMZO_MIN_MINOR = 0;
 
 // ────────────────────────────────────────────
 // Провайдер
@@ -183,6 +183,7 @@ export const CryptoWebSocketProvider: React.FC<
     error: null,
     isSignatureLoading: false,
     pendingOperationType: null,
+    isOutdatedVersion: false,
   });
 
   const mountedRef = useRef(true);
@@ -231,6 +232,9 @@ export const CryptoWebSocketProvider: React.FC<
             console.warn(
               `⚠️ E-IMZO версия ${versionResponse.major}.${versionResponse.minor} устарела. Требуется ${EIMZO_MIN_MAJOR}.${EIMZO_MIN_MINOR}+`,
             );
+            setState((prev) => ({ ...prev, isOutdatedVersion: true }));
+          } else {
+            setState((prev) => ({ ...prev, isOutdatedVersion: false }));
           }
 
           console.log(
@@ -384,19 +388,16 @@ export const CryptoWebSocketProvider: React.FC<
   const createSignature = useCallback(
     async (
       keyId: string,
-      data: string,
+      data: string | number,
+      convertToBase64: boolean = true,
     ): Promise<{ pkcs7: string; signatureHex: string }> => {
-      const base64Data = btoa(data);
+      const base64Data = convertToBase64 ? btoa(String(data)) : String(data);
       const message = {
         plugin: "pkcs7",
         name: "create_pkcs7",
         arguments: [base64Data, keyId, "no"],
       };
 
-      // console.log(
-      //   "✍️ Создание подписи:",
-      //   data.substring(0, 20) + "...",
-      // );
       const response = await sendMessage(message, 60000, "create_pkcs7");
       console.log("✅ Подпись создана");
       return {
@@ -466,6 +467,7 @@ export const CryptoWebSocketProvider: React.FC<
     error: state.error,
     isSignatureLoading: state.isSignatureLoading,
     pendingOperationType: state.pendingOperationType,
+    isOutdatedVersion: state.isOutdatedVersion,
 
     sendMessage,
     loadCertificates,

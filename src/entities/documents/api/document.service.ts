@@ -1,5 +1,5 @@
 import { DIGITAL_DOCUMENTS } from "@shared/api/epc";
-import { authEcpApi } from "@shared/api/epc/authApi";
+import { authEcpApi, authEcpApi2 } from "@shared/api/epc/authApi";
 import {
   ENUM_DOCUMENT_TYPE,
   ICreateDocumentEDORequest,
@@ -76,10 +76,29 @@ export const documentAPI = authEcpApi.injectEndpoints({
       }),
       invalidatesTags: [DIGITAL_DOCUMENTS],
     }),
-    createSignEDO: build.mutation<
-      any,
-      { documentId: string; signature: string }
-    >({
+    // createSignEDO: build.mutation<
+    //   any,
+    //   { documentId: string; signature: string }
+    // >({
+    //   query: ({ documentId, signature }) => ({
+    //     url: `/v1/documents/${documentId}/sign`,
+    //     method: "POST",
+    //     body: { signature },
+    //   }),
+    //   invalidatesTags: [DIGITAL_DOCUMENTS],
+    // }),
+  }),
+});
+
+export const documentAPI2 = authEcpApi2.injectEndpoints({
+  endpoints: (build) => ({
+    getDocumentBase64EDO: build.mutation<{ data: string }, { documentId: string }>({
+      query: ({ documentId }) => ({
+        url: `/v1/documents/${documentId}/documentBase64`,
+        method: `GET`,
+      }),
+    }),
+    createSignEDO: build.mutation<any, { documentId: string; signature: string }>({
       query: ({ documentId, signature }) => ({
         url: `/v1/documents/${documentId}/sign`,
         method: "POST",
@@ -94,5 +113,9 @@ export const {
   useGetDocumentsEDOQuery,
   useCreateDocumentEDOMutation,
   useGetSignInfoEDOMutation,
-  useCreateSignEDOMutation,
 } = documentAPI;
+
+export const {
+  useGetDocumentBase64EDOMutation,
+  useCreateSignEDOMutation,
+} = documentAPI2;

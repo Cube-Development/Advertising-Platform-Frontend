@@ -1,5 +1,5 @@
 import { ENUM_ROLES, loginEcp, offerSign } from "@entities/user";
-import { Certificate, useCryptoMessage } from "@shared/api";
+import { Certificate, useCryptoCertificates } from "@shared/api";
 import { ENUM_COOKIES_TYPES } from "@shared/config";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { useToast } from "@shared/ui";
@@ -10,11 +10,7 @@ import {
   useGetTimestampMutation,
   useGetTokenByCertificateMutation,
 } from "../api";
-import {
-  CreateMessageKeyId,
-  CreateMessageSignature,
-  parseCertificateAlias,
-} from "../helpers";
+import { parseCertificateAlias } from "../helpers";
 import { ENUM_ORGANIZATION_STATUS, IGetMyOrganizationResponse } from "../types";
 import { useCreateOrganization } from "./useCreateOrganization";
 
@@ -24,7 +20,7 @@ export const useDigitalLoginByCertificate = () => {
   const dispatch = useAppDispatch();
   const { role } = useAppSelector((state) => state.user);
 
-  const { sendMessage } = useCryptoMessage();
+  const { loadKey, createSignature } = useCryptoCertificates();
   const [getTimestamp, { isLoading: isLoadingLogin }] =
     useGetTimestampMutation();
   const [getToken, { isLoading: isLoadingGetToken }] =
@@ -45,18 +41,15 @@ export const useDigitalLoginByCertificate = () => {
       const pnflFromCert = certInfo?.uid || certInfo.pnfl;
 
       // Шаг 1: Загрузка ключа
-      const keyResponse = await sendMessage(CreateMessageKeyId(certificate));
-      const keyId = keyResponse.keyId;
+      const keyId = await loadKey(certificate);
 
       // Шаг 2: Создание подписи (используем ПИНФЛ из сертификата)
-      const signResponse = await sendMessage(
-        CreateMessageSignature(pnflFromCert, keyId),
-      );
+      const signResponse = await createSignature(keyId, pnflFromCert);
 
       // Шаг 3: Прикрепление TimeStamp
       const timestampResponse = await getTimestamp({
-        pkcs7: signResponse.pkcs7_64,
-        signatureHex: signResponse.signature_hex,
+        pkcs7: signResponse.pkcs7,
+        signatureHex: signResponse.signatureHex,
       }).unwrap();
 
       const signature = timestampResponse?.timeStampTokenB64 || "";
