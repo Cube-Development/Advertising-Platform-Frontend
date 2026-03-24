@@ -1,17 +1,16 @@
 import {
-  CreateMessageAttachedSignature,
-  CreateMessageKeyId,
-  CreateMessageSignature,
   filterCertificates,
   useGetOrganizationQuery,
   useGetTimestampMutation,
+  useJoinSignEDOMutation,
 } from "@entities/organization";
-import { useCryptoCertificates, useCryptoMessage } from "@shared/api";
+import { useCryptoCertificates } from "@shared/api";
 import { useToast } from "@shared/ui";
 import { useTranslation } from "react-i18next";
 import {
   useCreateDocumentEDOMutation,
   useCreateSignEDOMutation,
+  useGetDocumentBase64EDOMutation,
   useGetSignInfoEDOMutation,
 } from "../api";
 import { ENUM_DOCUMENT_TYPE, ICreateDocumentEDORequest } from "../types";
@@ -22,17 +21,27 @@ export const useSignDocument = () => {
 
   const { data: organization } = useGetOrganizationQuery();
 
-  const { sendMessage } = useCryptoMessage();
   const [getTimestamp, { isLoading: isLoadingLogin }] =
     useGetTimestampMutation();
   const [toSign, { isLoading: isLoadingToSign }] = useGetSignInfoEDOMutation();
   const [createSign, { isLoading: isLoadingCreateSign }] =
     useCreateSignEDOMutation();
+  const [getDocumentBase64, { isLoading: isLoadingBase64 }] =
+    useGetDocumentBase64EDOMutation();
+  const [joinSign, { isLoading: isLoadingJoin }] = useJoinSignEDOMutation();
   const [createDocument, { isLoading: isLoadingCreateDocument }] =
     useCreateDocumentEDOMutation();
 
-  const { certificates, certificatesLoading, isSignatureLoading, error } =
-    useCryptoCertificates();
+  const {
+    certificates,
+    certificatesLoading,
+    isSignatureLoading,
+    error,
+    isOutdatedVersion,
+    loadKey,
+    createSignature,
+    createAttachedSignature,
+  } = useCryptoCertificates();
 
   const signExist = async (
     documentId: string,
@@ -109,41 +118,61 @@ export const useSignDocument = () => {
       )?.[0];
 
       if (!keyId) {
-        // Шаг 1: Загрузка ключа
-        const keyResponse = await sendMessage(CreateMessageKeyId(currentCert));
-        keyId = keyResponse?.keyId as string;
+        keyId = await loadKey(currentCert);
       }
 
       if (!keyId) return;
 
-      // Преобразуем в JSON-строку
-      const jsonString = JSON.stringify(documentJson);
-      // Кодируем в base64 (в браузере)
-      const message = String.fromCharCode(
-        ...new TextEncoder().encode(jsonString),
-      );
+      if (!isOutdatedVersion) {
+        // ===== НОВЫЙ ПАЙПЛАЙН (E-IMZO >= 4.86) =====
 
-      // Шаг 2: Создание подписи (используем JSON документа)
-      const messageObject =
-        owner === 1
-          ? CreateMessageSignature(message, keyId)
-          : CreateMessageAttachedSignature(toSignData || "", keyId);
+        // 1. Получение Base64 документа
+        const base64Response = await getDocumentBase64({ documentId }).unwrap();
+        const base64Data = base64Response?.data || "";
 
-      const signResponse = await sendMessage(messageObject);
+        // 2. Создание PKCS7 подписи из Base64
+        const signResponse = await createSignature(keyId, base64Data, false);
 
-      // Шаг 3: Прикрепление TimeStamp
-      const timestampResponse = await getTimestamp({
-        pkcs7: signResponse.pkcs7_64,
-        signatureHex: signResponse.signature_hex,
-      }).unwrap();
+        // 3. Прикрепление TimeStamp
+        const timestampResponse = await getTimestamp({
+          pkcs7: signResponse.pkcs7,
+          signatureHex: signResponse.signatureHex,
+        }).unwrap();
 
-      const signature = timestampResponse?.timeStampTokenB64 || "";
+        const timeStampTokenB64 = timestampResponse?.timeStampTokenB64 || "";
 
-      // Шаг 4: Подпись документа
-      const createSignResponse = await createSign({
-        documentId,
-        signature,
-      }).unwrap();
+        // 4. DSVS-склейка (Join / Акцепт)
+        const joinResponse = await joinSign({
+          signature1: toSignData || "",
+          signature2: timeStampTokenB64,
+        }).unwrap();
+
+        const signature = joinResponse?.pkcs7B64;
+
+        // 5. Утверждение документа
+        await createSign({ documentId, signature }).unwrap();
+      } else {
+        // ===== СТАРЫЙ ПАЙПЛАЙН (E-IMZO < 4.86) =====
+
+        // 1. Создание подписи из JSON
+        const jsonString = JSON.stringify(documentJson);
+        const signResponse =
+          owner === 1
+            ? await createSignature(keyId, jsonString)
+            : await createAttachedSignature(keyId, toSignData || "");
+
+        // 2. Прикрепление TimeStamp
+        const timestampResponse = await getTimestamp({
+          pkcs7: signResponse.pkcs7,
+          signatureHex: signResponse.signatureHex,
+        }).unwrap();
+
+        const signature = timestampResponse?.timeStampTokenB64 || "";
+
+        // 3. Утверждение документа
+        await createSign({ documentId, signature }).unwrap();
+      }
+
       return keyId;
     } catch (err) {
       const errorMessage =
@@ -163,6 +192,9 @@ export const useSignDocument = () => {
       isLoadingLogin ||
       isLoadingToSign ||
       isLoadingCreateSign ||
+      // isLoadingCreateSignNew ||
+      isLoadingBase64 ||
+      isLoadingJoin ||
       certificatesLoading ||
       isLoadingCreateDocument,
 

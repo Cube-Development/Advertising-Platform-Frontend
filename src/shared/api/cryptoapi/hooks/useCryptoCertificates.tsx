@@ -19,10 +19,12 @@ export const useCryptoCertificates = () => {
     loadCertificates,
     loadKey,
     createSignature,
+    createAttachedSignature,
     isConnected,
     error,
     isSignatureLoading,
     pendingOperationType,
+    isOutdatedVersion,
   } = useCryptoWebSocket();
 
   return {
@@ -31,9 +33,11 @@ export const useCryptoCertificates = () => {
     loadCertificates,
     loadKey,
     createSignature,
+    createAttachedSignature,
     isConnected,
     error,
     isSignatureLoading,
     pendingOperationType,
+    isOutdatedVersion,
   };
 };

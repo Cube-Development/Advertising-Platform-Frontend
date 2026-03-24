@@ -38,6 +38,7 @@ export interface CryptoWebSocketState {
   error: string | null;
   isSignatureLoading: boolean;
   pendingOperationType: string | null;
+  isOutdatedVersion: boolean;
 }
 
 export interface CryptoWebSocketActions {
@@ -46,7 +47,8 @@ export interface CryptoWebSocketActions {
   loadKey: (cert: Certificate) => Promise<string>;
   createSignature: (
     keyId: string,
-    data: string,
+    data: string | number,
+    convertToBase64?: boolean,
   ) => Promise<{ pkcs7: string; signatureHex: string }>;
   createAttachedSignature: (
     keyId: string,

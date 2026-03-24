@@ -16,6 +16,16 @@ export const digitalBaseAPI = baseEpcApi.injectEndpoints({
         body: BodyParams,
       }),
     }),
+    joinSignEDO: build.mutation<
+      { pkcs7B64: string },
+      { signature1: string; signature2: string }
+    >({
+      query: (body) => ({
+        url: `/v1/dsvs/signature/join`,
+        method: "POST",
+        body,
+      }),
+    }),
     getTokenByCertificate: build.mutation<IGetTokenResponse, IGetTokenRequest>({
       query: (BodyParams) => ({
         url: `/v1/auth/${BodyParams?.PNFL}/token/${BodyParams?.lang}`,
@@ -46,6 +56,7 @@ export const digitalBaseAPI = baseEpcApi.injectEndpoints({
 
 export const {
   useGetTimestampMutation,
+  useJoinSignEDOMutation,
   useGetTokenByCertificateMutation,
   useGetTokenByPasswordMutation,
   useSignUpMutation,
