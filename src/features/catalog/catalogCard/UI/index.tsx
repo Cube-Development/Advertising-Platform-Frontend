@@ -191,13 +191,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
                   <div>
                     <EyeIcon />
                   </div>
-                  <span>
-                    {isModal ? (
-                      <Modal />
-                    ) : (
-                      selectedFormat?.views!.toLocaleString()
-                    )}
-                  </span>
+                  <span>{selectedFormat?.views!.toLocaleString()}</span>
                 </div>
               </div>
               <div className={styles.channel__data_middle}>
@@ -265,13 +259,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
                     <div>
                       <EyeIcon />
                     </div>
-                    <span>
-                      {isModal ? (
-                        <Modal />
-                      ) : (
-                        selectedFormat?.views!.toLocaleString()
-                      )}
-                    </span>
+                    <span>{selectedFormat?.views!.toLocaleString()}</span>
                   </div>
                   <div className={styles.arrow}>
                     <ArrowSmallVerticalIcon
@@ -348,11 +336,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
                         <EyeIcon />
                       </div>
                       <span>
-                        {isModal ? (
-                          <Modal />
-                        ) : (
-                          selectedFormat?.views!.toLocaleString()
-                        )}
+                        {selectedFormat?.views!.toLocaleString()}
                       </span>
                     </div>
                   </div>
