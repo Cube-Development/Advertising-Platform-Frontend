@@ -178,7 +178,7 @@ export const CompactCatalogCard: FC<CompactCatalogCardProps> = ({
                 <EyeIcon />
               </div>
               <span className="text-[8px] md:text-[11px] font-semibold md:font-medium text-black">
-                {isModal ? <Modal /> : selectedFormat?.views?.toLocaleString()}
+                {selectedFormat?.views?.toLocaleString()}
               </span>
             </div>
             <div className="hidden md:flex items-center gap-1">
