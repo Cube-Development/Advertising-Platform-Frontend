@@ -1,4 +1,5 @@
 import { TimeListProps } from "@entities/project";
+import { platformTypesNum } from "@entities/platform";
 import { ClockIcon } from "@shared/assets";
 import {
   AlertDialog,
@@ -49,6 +50,7 @@ export const TimeList: FC<TimeListProps> = ({
   onChange,
   startTime,
   selectedDate,
+  platform,
 }) => {
   const { t } = useTranslation();
   const [isSelectRange, setIsSelectRange] = useState(false);
@@ -81,10 +83,11 @@ export const TimeList: FC<TimeListProps> = ({
 
     // Если дата сегодняшняя, проверяем время
     const currentTimeInMinutes = getCurrentTime();
+    const additionalMinutes = platform === platformTypesNum.telegram ? 3 * 60 : 0;
     const [, endTime] = timeSlot.split(" - ");
     const [endHours, endMinutes] = endTime.split(":").map(Number);
     const endTimeInMinutes = endHours * 60 + endMinutes;
-    return currentTimeInMinutes > endTimeInMinutes;
+    return currentTimeInMinutes + additionalMinutes > endTimeInMinutes;
   };
 
   // установка начальных временных интервалов если они приходят из бека

@@ -144,6 +144,17 @@ export const CustomCalendar: FC<DateListProps> = ({
         ) {
           return styles.disabledDate;
         }
+      } else if (platform === platformTypesNum.telegram) {
+        const minSelectableDate = new Date(today);
+        const currentHour = new Date().getHours();
+
+        if (currentHour >= 21) {
+          minSelectableDate.setDate(today.getDate() + 1);
+        }
+
+        if (dateToCheck < minSelectableDate) {
+          return styles.disabledDate;
+        }
       } else {
         // Для Telegram и других платформ - текущая логика
         const minSelectableDate = new Date();
