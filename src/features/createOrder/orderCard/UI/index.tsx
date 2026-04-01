@@ -209,6 +209,7 @@ export const OrderCard: FC<PostPlatformProps> = ({
                 : undefined
             }
             selectedDate={selectedDate || undefined}
+            platform={card.platform}
           />
         </div>
         <AlertDialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
