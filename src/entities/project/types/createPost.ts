@@ -103,6 +103,7 @@ export interface TimeListProps {
   onChange: (timeList: string[]) => void;
   startTime?: string[] | undefined;
   selectedDate?: string;
+  platform?: platformTypesNum;
 }
 
 export interface FileProps {
