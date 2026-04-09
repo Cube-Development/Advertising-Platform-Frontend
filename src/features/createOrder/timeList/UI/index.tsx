@@ -72,12 +72,17 @@ export const TimeList: FC<TimeListProps> = ({
 
   // Проверяем, прошел ли слот
   const isSlotPassed = (timeSlot: string) => {
+    // Если дата не выбрана (режим диапазона дат) — все слоты доступны
+    if (!selectedDate) {
+      return false;
+    }
+
     // Получаем сегодняшнюю дату в том же формате
     const today = new Date();
     const todayFormatted = `${today.getDate().toString().padStart(2, "0")}.${(today.getMonth() + 1).toString().padStart(2, "0")}.${today.getFullYear()}`;
 
     // Если дата не сегодняшняя, слот не прошел
-    if (selectedDate && selectedDate !== todayFormatted) {
+    if (selectedDate !== todayFormatted) {
       return false;
     }
 
