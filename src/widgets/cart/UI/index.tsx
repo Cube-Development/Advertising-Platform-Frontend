@@ -48,8 +48,7 @@ export const Cart: FC = () => {
   } = useReadCommonCartQuery(
     { language: language?.id || USER_LANGUAGES_LIST[0].id },
     {
-      skip:
-        !isAuth || (projectId ? true : false) || role !== ENUM_ROLES.ADVERTISER,
+      skip: !isAuth || role !== ENUM_ROLES.ADVERTISER,
       refetchOnMountOrArgChange: true,
     },
   );
@@ -64,7 +63,7 @@ export const Cart: FC = () => {
       language: language?.id || USER_LANGUAGES_LIST[0].id,
     },
     {
-      skip: !isAuth || !projectId,
+      skip: !isAuth || !projectId || role !== ENUM_ROLES.MANAGER,
       refetchOnMountOrArgChange: true,
     },
   );
