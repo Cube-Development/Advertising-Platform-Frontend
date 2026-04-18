@@ -391,7 +391,16 @@ export const CryptoWebSocketProvider: React.FC<
       data: string | number,
       convertToBase64: boolean = true,
     ): Promise<{ pkcs7: string; signatureHex: string }> => {
-      const base64Data = convertToBase64 ? btoa(String(data)) : String(data);
+      let base64Data = String(data);
+
+      if (convertToBase64) {
+        const bytes = new TextEncoder().encode(base64Data);
+        const binary = Array.from(bytes, (byte) =>
+          String.fromCharCode(byte),
+        ).join("");
+        base64Data = btoa(binary);
+      }
+
       const message = {
         plugin: "pkcs7",
         name: "create_pkcs7",
