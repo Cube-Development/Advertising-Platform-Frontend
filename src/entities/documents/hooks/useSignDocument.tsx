@@ -123,8 +123,8 @@ export const useSignDocument = () => {
 
       if (!keyId) return;
 
-      if (!isOutdatedVersion) {
-        // ===== НОВЫЙ ПАЙПЛАЙН (E-IMZO >= 4.86) =====
+      if (!isOutdatedVersion && owner === 0) {
+        // ===== НОВЫЙ ПАЙПЛАЙН (E-IMZO >= 4.86 + Документ входящий) =====
 
         // 1. Получение Base64 документа
         const base64Response = await getDocumentBase64({ documentId }).unwrap();
@@ -148,7 +148,6 @@ export const useSignDocument = () => {
         }).unwrap();
 
         const signature = joinResponse?.pkcs7B64;
-
         // 5. Утверждение документа
         await createSign({ documentId, signature }).unwrap();
       } else {
@@ -168,7 +167,6 @@ export const useSignDocument = () => {
         }).unwrap();
 
         const signature = timestampResponse?.timeStampTokenB64 || "";
-
         // 3. Утверждение документа
         await createSign({ documentId, signature }).unwrap();
       }
@@ -177,7 +175,7 @@ export const useSignDocument = () => {
     } catch (err) {
       const errorMessage =
         err instanceof Error ? err.message : t("toasts.documents.sign.error");
-
+      console.log(err);
       toast({
         variant: "error",
         title: errorMessage,
