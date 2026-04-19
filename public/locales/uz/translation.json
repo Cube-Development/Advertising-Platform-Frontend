@@ -1899,6 +1899,9 @@
   },
   "catalog": {
     "catalog": "Kanallar katalogi",
+    "badge": {
+      "text": "<0>Loyih:</0> <1>{{name}}</1> — kanallar unga qo'shiladi"
+    },
     "all_platform": "Kanallar",
     "search": {
       "parameters": "Qidiruv parametrlari",
@@ -1970,6 +1973,9 @@
   },
   "cart": {
     "cart": "Savat",
+    "badge": {
+      "text": "<0>Loyihaning mazmuni:</0> <1>{{name}}</1>"
+    },
     "empty": "Ro'yxat bo'sh...",
     "create_post": {
       "title": "Buyurtma xavfsiz bitim bilan himoyalangan",
@@ -2496,6 +2502,9 @@
     }
   },
   "channel": {
+    "badge": {
+      "text": "<0>Loyih:</0> <1>{{name}}</1> — kanal unga qo'shiladi"
+    },
     "description": {
       "button": "Qo'shish"
     },

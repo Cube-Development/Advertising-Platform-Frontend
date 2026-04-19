@@ -5,13 +5,18 @@ import {
   IFormat,
   platformToIcon,
 } from "@entities/project";
+import { LoginPremiumAccess, LoginToViewMore } from "@features/user";
 import { BoyIcon, EyeIcon, GirlIcon, SubsIcon } from "@shared/assets";
 import { useAppSelector } from "@shared/hooks";
 import { CHANNEL_LANGUAGES_LIST } from "@shared/languages";
 import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";
+import {
+  buildPathWithQuery,
+  queryParamKeys,
+  QueryParamsUUID
+} from "@shared/utils";
 import { FC, useState } from "react";
 import { Link } from "react-router-dom";
-import { LoginPremiumAccess, LoginToViewMore } from "@features/user";
 import { ChannelCardMatch } from "../components";
 
 interface CompactCatalogCardProps extends IChangeCards, ICatalogCard {
@@ -27,6 +32,13 @@ export const CompactCatalogCard: FC<CompactCatalogCardProps> = ({
   page,
 }) => {
   const { isPremiumUser, isAuth } = useAppSelector((state) => state.user);
+  const saveProjectId = QueryParamsUUID(queryParamKeys.saveProject);
+
+  const channelPath = saveProjectId
+    ? buildPathWithQuery(`${ENUM_PATHS.CHANNEL.replace(":id", card?.id)}`, {
+        [queryParamKeys.saveProject]: saveProjectId,
+      })
+    : `${ENUM_PATHS.CHANNEL.replace(":id", card?.id)}`;
 
   const isModal = !isAuth || !isPremiumUser;
   const Modal = () =>
@@ -87,7 +99,7 @@ export const CompactCatalogCard: FC<CompactCatalogCardProps> = ({
       <div className="grid grid-cols-[auto_1fr_auto_auto_auto] md:gap-2.5 gap-1.5 items-center md:pl-[10px] pl-[6px]">
         {/* Avatar */}
         <Link
-          to={`${ENUM_PATHS.CHANNEL.replace(":id", card?.id)}`}
+          to={channelPath}
           className="size-8 md:size-10 rounded-full overflow-hidden border border-[--Personal-colors-main] shrink-0 block"
           onClick={stopPropagation}
         >
@@ -101,7 +113,7 @@ export const CompactCatalogCard: FC<CompactCatalogCardProps> = ({
         {/* Name / Category / Languages */}
         <div className="min-w-0 flex flex-col gap-0.5 py-2">
           <Link
-            to={`${ENUM_PATHS.CHANNEL.replace(":id", card?.id)}`}
+            to={channelPath}
             className="leading-3 block md:hidden text-[9px] font-semibold text-[--Personal-colors-main] truncate"
             onClick={stopPropagation}
           >
@@ -109,7 +121,7 @@ export const CompactCatalogCard: FC<CompactCatalogCardProps> = ({
           </Link>
           <div className="flex items-center gap-1.5 min-w-0">
             <Link
-              to={`${ENUM_PATHS.CHANNEL.replace(":id", card?.id)}`}
+              to={channelPath}
               className="hidden md:block text-[13px] font-semibold text-[--Personal-colors-main] truncate leading-tight"
               onClick={stopPropagation}
             >

@@ -27,6 +27,7 @@ import {
   useReadCommonCartShortQuery,
   useReadPublicCartShortQuery,
 } from "@entities/project";
+import { ClearActiveProject } from "@features/project";
 import { ENUM_ROLES, GenerateGuestId, useFindLanguage } from "@entities/user";
 import {
   BREAKPOINT,
@@ -48,8 +49,15 @@ import {
   CatalogSearch,
 } from "../components";
 import styles from "./styles.module.scss";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ENUM_PATHS } from "@shared/routing";
+import {
+  buildPathWithQuery,
+  QueryParams,
+  QueryParamsUUID,
+  queryParamKeys,
+} from "@shared/utils";
+import { validate as isValidUUID } from "uuid";
 
 export const CatalogBlock: FC = () => {
   const { t } = useTranslation();
@@ -62,9 +70,19 @@ export const CatalogBlock: FC = () => {
   );
   const userId = Cookies.get(ENUM_COOKIES_TYPES.USER_ID);
   const guestId = Cookies.get(ENUM_COOKIES_TYPES.GUEST_ID) || GenerateGuestId();
-  const projectId = Cookies.get(ENUM_COOKIES_TYPES.PROJECT_ID);
+  const projectId = QueryParamsUUID(queryParamKeys.saveProject);
   const catalogTopRef = useRef<HTMLDivElement>(null);
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const params = QueryParams();
+
+  useEffect(() => {
+    if (!projectId) {
+      const { save_project, ...otherParams } = params;
+      const newPath = buildPathWithQuery(ENUM_PATHS.CATALOG, otherParams);
+      navigate(newPath, { replace: true });
+    }
+  }, [projectId, navigate]);
 
   const [catalogFilter, setCatalogFilter] = useState<CATALOG_FILTER>(
     CATALOG_FILTER.PARAMETERS,
@@ -110,7 +128,7 @@ export const CatalogBlock: FC = () => {
         user_id: userId,
       },
       {
-        skip: !isAuth || !userId || (projectId ? true : false),
+        skip: !isAuth || !userId || !!projectId,
         refetchOnMountOrArgChange: true,
       },
     );
@@ -150,9 +168,7 @@ export const CatalogBlock: FC = () => {
     {
       skip:
         !isAuth ||
-        ((role == ENUM_ROLES.MANAGER || role == ENUM_ROLES.AGENCY) && projectId
-          ? true
-          : false),
+        ((role == ENUM_ROLES.MANAGER || role == ENUM_ROLES.AGENCY) && !!projectId),
       refetchOnMountOrArgChange: true,
     },
   );
@@ -226,7 +242,7 @@ export const CatalogBlock: FC = () => {
     isFetching: isCartFetching,
   } = useReadCommonCartShortQuery(undefined, {
     skip:
-      !isAuth || (projectId ? true : false) || role !== ENUM_ROLES.ADVERTISER,
+      !isAuth || !!projectId || role !== ENUM_ROLES.ADVERTISER,
   });
   const {
     data: cartManager,
@@ -544,6 +560,10 @@ export const CatalogBlock: FC = () => {
     <div className="container">
       <div className={`${styles.wrapper}`}>
         <div className={styles.title}>{t("catalog.catalog")}</div>
+        <ClearActiveProject
+          projectId={projectId}
+          i18nKey="catalog.badge.text"
+        />
         <div className={styles.content}>
           {screen >= BREAKPOINT.LG && (
             <div className={styles.left}>

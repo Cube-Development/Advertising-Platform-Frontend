@@ -9,3 +9,4 @@ export * from "./zeroProject";
 export * from "./post-templates";
 export * from "./runSavedProject";
 export * from "./saveProject";
+export * from "./clear-active-project";

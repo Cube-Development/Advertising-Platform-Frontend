@@ -12,17 +12,20 @@ import { motion } from "framer-motion";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { ClearActiveProject } from "@features/project";
 
 interface CartListProps {
   channels: ICatalogChannel[];
   onChangeCard: (cart: ICatalogChannel) => void;
   isLoading: boolean;
+  projectId?: string;
 }
 
 export const CartList: FC<CartListProps> = ({
   channels,
   onChangeCard,
   isLoading,
+  projectId,
 }) => {
   const { t } = useTranslation();
 
@@ -38,6 +41,10 @@ export const CartList: FC<CartListProps> = ({
           <AddMore />
         </div>
       </div>
+      <ClearActiveProject
+        projectId={projectId}
+        i18nKey="cart.badge.text"
+      />
       {channels?.length || isLoading ? (
         <div className={styles.cards}>
           {channels?.length && !isLoading ? (
