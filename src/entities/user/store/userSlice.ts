@@ -50,7 +50,6 @@ export const userSlice = createSlice({
       state.isOfferOpen = action.payload;
     },
     logout: (state) => {
-      Cookies.remove(ENUM_COOKIES_TYPES.PROJECT_ID);
       Cookies.remove(ENUM_COOKIES_TYPES.TOKEN);
       Cookies.remove(ENUM_COOKIES_TYPES.USER_ID);
       Cookies.set(ENUM_COOKIES_TYPES.IS_AUTH, "false");

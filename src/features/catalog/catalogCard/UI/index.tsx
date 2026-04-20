@@ -5,6 +5,7 @@ import {
   IFormat,
   platformToIcon,
 } from "@entities/project";
+import { LoginPremiumAccess, LoginToViewMore } from "@features/user";
 import {
   ArrowSmallVerticalIcon,
   BoyIcon,
@@ -23,12 +24,16 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@shared/ui";
+import {
+  buildPathWithQuery,
+  queryParamKeys,
+  QueryParamsUUID
+} from "@shared/utils";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
-import { ChannelCardDescription, ChannelCardMatch } from "../components";
+import { ChannelCardMatch } from "../components";
 import styles from "./styles.module.scss";
-import { LoginPremiumAccess, LoginToViewMore } from "@features/user";
 
 interface CatalogCardProps extends IChangeCards, ICatalogCard {
   card: ICatalogChannel;
@@ -44,6 +49,13 @@ export const CatalogCard: FC<CatalogCardProps> = ({
 }) => {
   const { t } = useTranslation();
   const { isPremiumUser, isAuth } = useAppSelector((state) => state.user);
+  const saveProjectId = QueryParamsUUID(queryParamKeys.saveProject);
+
+  const channelPath = saveProjectId
+    ? buildPathWithQuery(`${ENUM_PATHS.CHANNEL.replace(":id", card?.id)}`, {
+        [queryParamKeys.saveProject]: saveProjectId,
+      })
+    : `${ENUM_PATHS.CHANNEL.replace(":id", card?.id)}`;
 
   const isModal = !isAuth || !isPremiumUser;
   const Modal = () =>
@@ -124,7 +136,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
           <div className={styles.column__logo}>
             <div className={styles.logo}>
               <Link
-                to={`${ENUM_PATHS.CHANNEL.replace(":id", card?.id)}`}
+                to={channelPath}
                 className={styles.logo__img_wrapper}
               >
                 <img src={card?.avatar} alt="logo" />
@@ -137,7 +149,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
           <div className={styles.column__info}>
             <div className={styles.info}>
               <Link
-                to={`${ENUM_PATHS.CHANNEL.replace(":id", card?.id)}`}
+                to={channelPath}
                 className={`${styles.title} truncate`}
               >
                 {card?.name}

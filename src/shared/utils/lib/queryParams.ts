@@ -1,3 +1,5 @@
+import { validate as isValidUUID } from "uuid";
+
 // type QueryParams = {
 //   code?: string | null;
 //   sessionState?: string | null;
@@ -56,6 +58,7 @@ export enum queryParamKeys {
   channelStatus = "channel_status",
   telegramRole = "telegram_role",
   permission = "permission",
+  saveProject = "save_project",
 }
 
 type QueryParamsType = Partial<Record<queryParamKeys, string | null>>;
@@ -84,3 +87,10 @@ export const buildPathWithQuery = (
 
   return queryString ? `${basePath}?${queryString}` : basePath;
 };
+
+export const QueryParamsUUID = (key: queryParamKeys): string => {
+  const params = QueryParams();
+  const value = params[key];
+  return value && isValidUUID(value) ? value : "";
+};
+

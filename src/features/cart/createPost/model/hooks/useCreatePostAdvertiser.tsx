@@ -3,13 +3,16 @@ import {
   useCreateProjectCartMutation,
 } from "@entities/project";
 import { useFindLanguage } from "@entities/user";
-import { ENUM_COOKIES_TYPES } from "@shared/config";
 import { USER_LANGUAGES_LIST } from "@shared/languages";
 import { ENUM_PATHS } from "@shared/routing";
 import { useToast } from "@shared/ui";
-import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import {
+  buildPathWithQuery,
+  QueryParamsUUID,
+  queryParamKeys,
+} from "@shared/utils";
 
 export const useCreatePostAdvertiser = () => {
   const { t } = useTranslation();
@@ -18,12 +21,13 @@ export const useCreatePostAdvertiser = () => {
     useCreateProjectCartMutation();
   const { toast } = useToast();
   const navigate = useNavigate();
-  const projectId = Cookies.get(ENUM_COOKIES_TYPES.PROJECT_ID) || "";
+  const projectId = QueryParamsUUID(queryParamKeys.saveProject);
   const language = useFindLanguage();
   const createPostAdvertiser = async () => {
     if (isLoadingCreate || isLoadingCreateProject) return;
 
     try {
+      let finalProjectId = projectId;
       // saved project flow
       if (projectId) {
         await createProjectCart({
@@ -32,10 +36,14 @@ export const useCreatePostAdvertiser = () => {
         }).unwrap();
       } else {
         const data = await createCart().unwrap();
-        Cookies.set(ENUM_COOKIES_TYPES.PROJECT_ID, data.project_id);
+        finalProjectId = data.project_id;
       }
 
-      navigate(ENUM_PATHS.CREATE_ORDER);
+      navigate(
+        buildPathWithQuery(ENUM_PATHS.CREATE_ORDER, {
+          project_id: finalProjectId,
+        }),
+      );
     } catch (error) {
       console.error("Ошибка во время создания корзины", error);
       toast({

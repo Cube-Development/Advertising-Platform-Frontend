@@ -1899,6 +1899,9 @@
   },
   "catalog": {
     "catalog": "Channel Catalog",
+    "badge": {
+      "text": "<0>Project:</0> <1>{{name}}</1> — channels are added to it"
+    },
     "all_platform": "Channels",
     "search": {
       "parameters": "Search Parameters",
@@ -1969,6 +1972,9 @@
   },
   "cart": {
     "cart": "Cart",
+    "badge": {
+      "text": "<0>Project Content:</0> <1>{{name}}</1>"
+    },
     "empty": "The list is empty...",
     "create_post": {
       "title": "Order is protected by a secure transaction",
@@ -2495,6 +2501,9 @@
     }
   },
   "channel": {
+    "badge": {
+      "text": "<0>Project:</0> <1>{{name}}</1> — channel will be added to it"
+    },
     "description": {
       "button": "Add"
     },

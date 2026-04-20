@@ -1,14 +1,13 @@
+import { useCreateAgencyProjectMutation } from "@entities/project";
 import { PlusIcon2 } from "@shared/assets";
-import { ENUM_COOKIES_TYPES } from "@shared/config";
 import { ENUM_PATHS } from "@shared/routing";
 import { MyButton, useToast } from "@shared/ui";
-import Cookies from "js-cookie";
+import { buildPathWithQuery } from "@shared/utils";
+import { Loader } from "lucide-react";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import styles from "./styles.module.scss";
-import { useCreateAgencyProjectMutation } from "@entities/project";
-import { Loader } from "lucide-react";
 
 interface AddAgencyNewProjectProps {}
 
@@ -25,11 +24,10 @@ export const AddAgencyNewProject: FC<AddAgencyNewProjectProps> = () => {
       .unwrap()
       .then((data) => {
         if (data?.project_id) {
-          Cookies.set(ENUM_COOKIES_TYPES.PROJECT_ID, data.project_id);
+          navigate(buildPathWithQuery(ENUM_PATHS.CATALOG, { save_project: data.project_id }));
+        } else {
+          navigate(ENUM_PATHS.CATALOG);
         }
-      })
-      .then(() => {
-        navigate(ENUM_PATHS.CATALOG);
       })
       .catch(() => {
         toast({

@@ -2,7 +2,6 @@ import { FC, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { Loader, SquarePen, X } from "lucide-react";
 import { useTranslation } from "react-i18next";
-import Cookies from "js-cookie";
 import { WalletsBar } from "@features/wallet";
 import {
   ENUM_WALLETS_TYPE,
@@ -15,7 +14,6 @@ import {
 } from "@entities/project";
 import { useFindLanguage } from "@entities/user";
 import { ENUM_PATHS } from "@shared/routing";
-import { ENUM_COOKIES_TYPES } from "@shared/config";
 import { CART } from "@shared/api";
 import { USER_LANGUAGES_LIST } from "@shared/languages";
 import { useAppDispatch } from "@shared/hooks/redux";
@@ -35,6 +33,7 @@ import {
   useToast,
 } from "@shared/ui";
 import styles from "./styles.module.scss";
+import { buildPathWithQuery, queryParamKeys } from "@shared/utils";
 
 // Проверяет, просрочена ли дата/время ордера относительно текущего времени в Ташкенте
 const isOrderExpired = (order: IAdvProjectSubcard): boolean => {
@@ -130,9 +129,12 @@ export const RunSavedProject: FC<RunSavedProjectProps> = ({
   // Обработчик кнопки "Редактировать" в Dialog
   const handleEditClick = () => {
     dispatch(authCartAPI.util.invalidateTags([CART]));
-    Cookies.set(ENUM_COOKIES_TYPES.PROJECT_ID, project_id);
     setShowExpiredAlert(false);
-    navigate(ENUM_PATHS.CART);
+    navigate(
+      buildPathWithQuery(ENUM_PATHS.CART, {
+        [queryParamKeys.saveProject]: project_id,
+      }),
+    );
   };
 
   const handleOnClick = async () => {

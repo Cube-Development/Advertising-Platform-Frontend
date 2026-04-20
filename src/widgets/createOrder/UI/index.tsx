@@ -1,8 +1,7 @@
 import { ICreatePostForm } from "@entities/project";
-import { ENUM_COOKIES_TYPES } from "@shared/config";
+import { ENUM_ROLES } from "@entities/user";
 import { useAppSelector } from "@shared/hooks";
 import { SpinnerLoader } from "@shared/ui";
-import Cookies from "js-cookie";
 import { FC } from "react";
 import { SubmitHandler } from "react-hook-form";
 import {
@@ -10,8 +9,8 @@ import {
   CreateOrderLoading,
   CreateOrderPayment,
   CreateOrderPost,
-  CreateOrderTop,
   CreateOrderPrices,
+  CreateOrderTop,
 } from "../components";
 import {
   useChangeBlur,
@@ -19,14 +18,16 @@ import {
   useCreateOrderForm,
   useCreateOrderLoad,
   useOnSubmitPayment,
+  useRequireProjectId,
 } from "../model";
-import { ENUM_ROLES } from "@entities/user";
 
 interface CreateOrderBlockProps {}
 
 export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
   const { role } = useAppSelector((state) => state.user);
-  const projectId = Cookies.get(ENUM_COOKIES_TYPES.PROJECT_ID) || "";
+  const { projectId } = useRequireProjectId();
+
+  if (!projectId) return null;
 
   const { blur, handleOnChangeBlur } = useChangeBlur();
   const { isLoading, payment } = useOnSubmitPayment();

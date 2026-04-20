@@ -5,13 +5,14 @@ import {
 } from "@entities/project";
 import { ENUM_ROLES, useFindLanguage } from "@entities/user";
 import { useAppSelector } from "@shared/hooks";
-import { ENUM_COOKIES_TYPES } from "@shared/config";
 import { USER_LANGUAGES_LIST } from "@shared/languages";
 import { ENUM_PATHS } from "@shared/routing";
 import { useToast } from "@shared/ui";
-import Cookies from "js-cookie";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { buildPathWithQuery, queryParamKeys, QueryParamsUUID } from "@shared/utils";
+import Cookies from "js-cookie";
+import { ENUM_COOKIES_TYPES } from "@shared/config";
 
 export const useCreatePostManager = () => {
   const { t } = useTranslation();
@@ -23,7 +24,7 @@ export const useCreatePostManager = () => {
     useCheckCartMutation();
   const { toast } = useToast();
   const navigate = useNavigate();
-  const projectId = Cookies.get(ENUM_COOKIES_TYPES.PROJECT_ID) || "";
+  const projectId = QueryParamsUUID(queryParamKeys.saveProject);
 
   const createPostManager = async () => {
     if (isLoadingCreate || isLoadingCheck) return;
@@ -35,7 +36,7 @@ export const useCreatePostManager = () => {
       }).unwrap();
 
       if (role === ENUM_ROLES.AGENCY) {
-        navigate(ENUM_PATHS.CREATE_ORDER);
+        navigate(buildPathWithQuery(ENUM_PATHS.CREATE_ORDER, { project_id: projectId }));
         return;
       }
 
@@ -46,11 +47,11 @@ export const useCreatePostManager = () => {
       let message = "";
 
       if (data.state === cartStatusFilter.success) {
-        navigate(ENUM_PATHS.CREATE_ORDER);
+        navigate(buildPathWithQuery(ENUM_PATHS.CREATE_ORDER, { project_id: projectId }));
         return;
       } else if (data.state === cartStatusFilter.channel_to_be_replaced) {
         Cookies.set(ENUM_COOKIES_TYPES.IS_CHANNEL_REPLACED, "true");
-        navigate(ENUM_PATHS.CREATE_ORDER);
+        navigate(buildPathWithQuery(ENUM_PATHS.CREATE_ORDER, { project_id: projectId }));
         return;
       } else if (data.state === cartStatusFilter.amount) {
         message = t("cart.check.amount");

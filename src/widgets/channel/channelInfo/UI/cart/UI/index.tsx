@@ -1,11 +1,16 @@
 import { ICart } from "@entities/project";
+import { ENUM_ROLES } from "@entities/user";
 import { ENUM_PATHS } from "@shared/routing";
 import { InfoTooltip, MyButton, Skeleton } from "@shared/ui";
+import {
+  buildPathWithQuery,
+  queryParamKeys,
+  QueryParamsUUID
+} from "@shared/utils";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
-import { ENUM_ROLES } from "@entities/user";
 
 interface ChannelCartProps {
   cart: ICart;
@@ -19,6 +24,13 @@ export const ChannelCart: FC<ChannelCartProps> = ({
   isLoading,
 }) => {
   const { t } = useTranslation();
+  const saveProjectId = QueryParamsUUID(queryParamKeys.saveProject);
+
+  const cartPath = saveProjectId
+    ? buildPathWithQuery(ENUM_PATHS.CART, {
+        [queryParamKeys.saveProject]: saveProjectId,
+      })
+    : ENUM_PATHS.CART;
 
   return (
     <div className={styles.wrapper}>
@@ -55,7 +67,7 @@ export const ChannelCart: FC<ChannelCartProps> = ({
           </span>
         </div>
       </div>
-      <Link to={ENUM_PATHS.CART} className={styles.link}>
+      <Link to={cartPath} className={styles.link}>
         <MyButton buttons_type="button__green" className={styles.button}>
           <p>{t("catalog.current_cart.cart")}</p>
         </MyButton>

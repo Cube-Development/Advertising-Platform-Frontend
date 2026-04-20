@@ -1,11 +1,16 @@
 import { ICart } from "@entities/project";
+import { ENUM_ROLES } from "@entities/user";
 import { ENUM_PATHS } from "@shared/routing";
 import { InfoTooltip, MyButton, Skeleton } from "@shared/ui";
+import {
+  buildPathWithQuery,
+  queryParamKeys,
+  QueryParamsUUID
+} from "@shared/utils";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
-import { ENUM_ROLES } from "@entities/user";
 
 interface CatalogCartProps {
   cart: ICart;
@@ -19,6 +24,13 @@ export const CatalogCart: FC<CatalogCartProps> = ({
   isFetching,
 }) => {
   const { t } = useTranslation();
+  const saveProjectId = QueryParamsUUID(queryParamKeys.saveProject);
+
+  const cartPath = saveProjectId
+    ? buildPathWithQuery(ENUM_PATHS.CART, {
+        [queryParamKeys.saveProject]: saveProjectId,
+      })
+    : ENUM_PATHS.CART;
 
   return (
     <div className={styles.wrapper}>
@@ -58,7 +70,7 @@ export const CatalogCart: FC<CatalogCartProps> = ({
         </div>
       </div>
       <div className={styles.cart}>
-        <Link to={ENUM_PATHS.CART}>
+        <Link to={cartPath}>
           <MyButton buttons_type="button__green" className={styles.button}>
             <p>{t("catalog.current_cart.cart")}</p>
           </MyButton>

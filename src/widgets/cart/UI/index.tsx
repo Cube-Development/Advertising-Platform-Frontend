@@ -24,9 +24,18 @@ import { useToast } from "@shared/ui";
 import Cookies from "js-cookie";
 import { FC, useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { useNavigate } from "react-router-dom";
+import { validate as isValidUUID } from "uuid";
 import { useTranslation } from "react-i18next";
 import { CartList, CreatePost, RecommendationList } from "../components";
 import styles from "./styles.module.scss";
+import {
+  buildPathWithQuery,
+  QueryParams,
+  queryParamKeys,
+  QueryParamsUUID
+} from "@shared/utils";
+import { ENUM_PATHS } from "@shared/routing";
 
 export const Cart: FC = () => {
   const { toast } = useToast();
@@ -35,12 +44,21 @@ export const Cart: FC = () => {
   const { isAuth, role } = useAppSelector((state) => state.user);
   const dispatch = useAppDispatch();
   const guestId = Cookies.get(ENUM_COOKIES_TYPES.GUEST_ID);
-  const projectId = Cookies.get(ENUM_COOKIES_TYPES.PROJECT_ID);
+  const projectId = QueryParamsUUID(queryParamKeys.saveProject);
+  const navigate = useNavigate();
+  const params = QueryParams();
+
+  useEffect(() => {
+    if (params.save_project && !isValidUUID(params.save_project)) {
+      const { save_project, ...otherParams } = params;
+      const newPath = buildPathWithQuery(ENUM_PATHS.CART, otherParams);
+      navigate(newPath, { replace: true });
+    }
+  }, [params.save_project, navigate]);
 
   if (!guestId) {
     GenerateGuestId();
   }
-
   const {
     data: cart,
     isLoading: isLoadingCommon,
@@ -48,7 +66,7 @@ export const Cart: FC = () => {
   } = useReadCommonCartQuery(
     { language: language?.id || USER_LANGUAGES_LIST[0].id },
     {
-      skip: !isAuth || role !== ENUM_ROLES.ADVERTISER,
+      skip: !isAuth || role !== ENUM_ROLES.ADVERTISER || !!projectId,
       refetchOnMountOrArgChange: true,
     },
   );
@@ -63,7 +81,7 @@ export const Cart: FC = () => {
       language: language?.id || USER_LANGUAGES_LIST[0].id,
     },
     {
-      skip: !isAuth || !projectId || role !== ENUM_ROLES.MANAGER,
+      skip: !isAuth || !projectId,
       refetchOnMountOrArgChange: true,
     },
   );
@@ -74,7 +92,7 @@ export const Cart: FC = () => {
     isFetching: isFetchingPublic,
   } = useReadPublicCartQuery(
     { guest_id: guestId, language: language?.id || USER_LANGUAGES_LIST[0].id },
-    { skip: isAuth || !guestId, refetchOnMountOrArgChange: true },
+    { skip: isAuth || !guestId || !!projectId, refetchOnMountOrArgChange: true },
   );
 
   useEffect(() => {
@@ -366,6 +384,7 @@ export const Cart: FC = () => {
               channels={currentCart?.channels || []}
               onChangeCard={handleChangeCartCards}
               isLoading={isLoadingCommon || isLoadingPublic || isLoadingManager}
+              projectId={projectId}
             />
             <CreatePost
               cart={currentCart}
