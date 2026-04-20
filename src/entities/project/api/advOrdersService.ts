@@ -29,6 +29,7 @@ import {
 } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ENUM_LANGUAGES_NUM } from "@shared/languages";
+import { CART, CART_MANAGER, CART_PUB, CART_PUB_SHORT } from "@shared/api";
 
 export interface ICreatePostReq {
   project_id: string;
@@ -372,7 +373,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
         method: "PUT",
         params: params,
       }),
-      invalidatesTags: [ADV_PROJECTS],
+      invalidatesTags: [ADV_PROJECTS, CART, CART_PUB, CART_PUB_SHORT, CART_MANAGER],
     }),
 
     deleteSavedProject: build.mutation<
