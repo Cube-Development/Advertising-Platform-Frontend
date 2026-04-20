@@ -1,9 +1,9 @@
 import { FC } from "react";
-import { ProjectBadge } from "@shared/ui";
+import { ProjectBadge, Skeleton } from "@shared/ui";
 import { useLocation, useNavigate } from "react-router-dom";
 import { buildPathWithQuery, QueryParams } from "@shared/utils";
 import { useGetProjectNameQuery } from "@entities/project";
-import { useTranslation, Trans } from "react-i18next";
+import { Trans } from "react-i18next";
 
 export interface ClearActiveProjectProps {
   projectId?: string;
@@ -18,17 +18,16 @@ export const ClearActiveProject: FC<ClearActiveProjectProps> = ({
   className,
   i18nKey,
 }) => {
-  const { t } = useTranslation();
   const navigate = useNavigate();
   const location = useLocation();
   const params = QueryParams();
 
-  const { data: projectNameData } = useGetProjectNameQuery(
+  const { data: projectNameData, isLoading } = useGetProjectNameQuery(
     { project_id: projectId || "" },
     { skip: !projectId },
   );
 
-  const projectName = projectNameData?.name || "Project name";
+  const projectName = projectNameData?.name ?? "";
 
   const handleClose = () => {
     const currentParams = { ...params };
@@ -53,7 +52,16 @@ export const ClearActiveProject: FC<ClearActiveProjectProps> = ({
           values={{ name: projectName }}
           components={[
             <span className="font-semibold" />,
-            <span className="text-blue-600" />,
+            isLoading ? (
+              <span
+                className="animate-pulse rounded-md bg-skeleton-dark align-middle w-20 h-4"
+                style={{
+                  display: "inline-flex",
+                }}
+              />
+            ) : (
+              <span className="text-blue-600 font-semibold" />
+            ),
           ]}
         />
       }

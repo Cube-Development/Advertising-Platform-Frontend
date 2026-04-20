@@ -1,8 +1,7 @@
 import { ICreatePostForm } from "@entities/project";
-import { ENUM_COOKIES_TYPES } from "@shared/config";
+import { ENUM_ROLES } from "@entities/user";
 import { useAppSelector } from "@shared/hooks";
 import { SpinnerLoader } from "@shared/ui";
-import Cookies from "js-cookie";
 import { FC } from "react";
 import { SubmitHandler } from "react-hook-form";
 import {
@@ -10,8 +9,8 @@ import {
   CreateOrderLoading,
   CreateOrderPayment,
   CreateOrderPost,
-  CreateOrderTop,
   CreateOrderPrices,
+  CreateOrderTop,
 } from "../components";
 import {
   useChangeBlur,
@@ -19,30 +18,16 @@ import {
   useCreateOrderForm,
   useCreateOrderLoad,
   useOnSubmitPayment,
+  useRequireProjectId,
 } from "../model";
-import { ENUM_ROLES } from "@entities/user";
-import { QueryParams, buildPathWithQuery } from "@shared/utils";
-import { ENUM_PATHS } from "@shared/routing";
-import { useNavigate } from "react-router-dom";
-import { useEffect } from "react";
-import { validate as isValidUUID } from "uuid";
 
 interface CreateOrderBlockProps {}
 
 export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
   const { role } = useAppSelector((state) => state.user);
-  const navigate = useNavigate();
-  const {project_id  } = QueryParams();
-  const projectId = project_id || "";
-  
-  useEffect(() => {
-    if (projectId && !isValidUUID(projectId)) {
-      const newPath = buildPathWithQuery(ENUM_PATHS.CART, {});
-      navigate(newPath, { replace: true });
-    } else if (!projectId) {
-      navigate(ENUM_PATHS.CART, { replace: true });
-    }
-  }, [projectId, navigate]);
+  const { projectId } = useRequireProjectId();
+
+  if (!projectId) return null;
 
   const { blur, handleOnChangeBlur } = useChangeBlur();
   const { isLoading, payment } = useOnSubmitPayment();
