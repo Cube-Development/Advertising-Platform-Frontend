@@ -21,8 +21,10 @@ export const AddMore: FC = () => {
     : ENUM_PATHS.CATALOG;
 
   return (
-    <MyButton className={`${styles.button} truncate`}>
-      <Link to={catalogPath}>{t(`cart_btn.add`)}</Link>
-    </MyButton>
+    <Link to={catalogPath} className="h-full">
+      <MyButton className={`${styles.button} truncate h-full`}>
+        {t(`cart_btn.add`)}
+      </MyButton>
+    </Link>
   );
 };
