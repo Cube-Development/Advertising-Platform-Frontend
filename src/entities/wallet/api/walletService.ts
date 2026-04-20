@@ -20,6 +20,7 @@ import {
   CART_MANAGER,
   CART_PUB,
   CART_PUB_SHORT,
+  CART_SHORT,
   TRANSACTION_HISTORY,
   USER_ME,
   authApi,
@@ -92,7 +93,7 @@ export const walletAPI = authApi.injectEndpoints({
         method: "POST",
         params: params,
       }),
-      invalidatesTags: [BALANCE, USER_ME, ADV_PROJECTS, ADV_ORDERS, CART, CART_PUB, CART_PUB_SHORT, CART_MANAGER ],
+      invalidatesTags: [BALANCE, USER_ME, ADV_PROJECTS, ADV_ORDERS, CART, CART_PUB, CART_PUB_SHORT, CART_SHORT, CART_MANAGER ],
     }),
     createDepositRequest: build.mutation<
       ICreateDepositResponse,

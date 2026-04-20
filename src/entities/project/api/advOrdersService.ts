@@ -19,6 +19,7 @@ import {
   ADV_TARIFF_ORDERS,
   ADV_TARIFF_PROJECTS,
   authApi,
+  CART_SHORT,
   CREATE_PROJECT_AMOUNT,
   CREATE_PROJECT_DATES,
   CREATE_PROJECT_NAME,
@@ -373,7 +374,7 @@ export const advProjectsAPI = authApi.injectEndpoints({
         method: "PUT",
         params: params,
       }),
-      invalidatesTags: [ADV_PROJECTS, CART, CART_PUB, CART_PUB_SHORT, CART_MANAGER],
+      invalidatesTags: [ADV_PROJECTS, CART, CART_PUB, CART_PUB_SHORT, CART_SHORT, CART_MANAGER],
     }),
 
     deleteSavedProject: build.mutation<
