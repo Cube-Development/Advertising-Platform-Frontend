@@ -43,8 +43,9 @@ export const FileDownloader: FC<FileDownloaderProps> = ({ file, onChange }) => {
       });
 
       let filename = file.fileName || defaultName;
-      const contentType = response.headers["content-type"];
-      const extension = contentTypeToExtension[contentType] || ""; // Получение расширения или пустая строка
+      const raw = response.headers["content-type"];
+      const contentType = typeof raw === "string" ? raw : "";
+      const extension = contentTypeToExtension[contentType] ?? "";
       if (file.fileType && !filename.endsWith(extension)) {
         filename += extension; // Добавление расширения, если его нет в имени файла
       }
