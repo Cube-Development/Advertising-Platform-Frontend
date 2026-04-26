@@ -3,6 +3,12 @@ import { createBrowserRouter } from "react-router-dom";
 import { ProtectedRoute } from "./protected-route";
 import { ALL_APP_ROUTES_LIST } from "./config";
 import { RootAdminLayout, RootLayout } from "@widgets/layouts";
+import { Maintenance } from "@widgets/maintenance";
+
+// ⚠️ Переключатель режима техобслуживания
+// true  — показывает заглушку на всех маршрутах
+// false — нормальная работа приложения
+const IS_MAINTENANCE = true;
 
 const ROOT_ROUTES_LIST = ALL_APP_ROUTES_LIST.filter(
   (route) => route.layout === ENUM_LAYOUT_TYPES.ROOT,
@@ -19,18 +25,20 @@ const ADMIN_ROUTES_LIST = ALL_APP_ROUTES_LIST.filter(
 }));
 
 export const router = createBrowserRouter(
-  [
-    {
-      path: ENUM_PATHS.MAIN,
-      element: <RootLayout />,
-      children: ROOT_ROUTES_LIST,
-    },
-    {
-      path: ENUM_PATHS.MAIN,
-      element: <RootAdminLayout />,
-      children: ADMIN_ROUTES_LIST,
-    },
-  ],
+  IS_MAINTENANCE
+    ? [{ path: "*", element: <Maintenance /> }]
+    : [
+        {
+          path: ENUM_PATHS.MAIN,
+          element: <RootLayout />,
+          children: ROOT_ROUTES_LIST,
+        },
+        {
+          path: ENUM_PATHS.MAIN,
+          element: <RootAdminLayout />,
+          children: ADMIN_ROUTES_LIST,
+        },
+      ],
   {
     future: {
       v7_relativeSplatPath: true,
