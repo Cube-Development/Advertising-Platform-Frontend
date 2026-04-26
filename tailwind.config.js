@@ -41,11 +41,37 @@ module.exports = {
   				to: {
   					height: '0'
   				}
+  			},
+  			'spin-gear': {
+  				from: { transform: 'rotate(0deg)' },
+  				to: { transform: 'rotate(360deg)' }
+  			},
+  			'spin-gear-reverse': {
+  				from: { transform: 'rotate(0deg)' },
+  				to: { transform: 'rotate(-360deg)' }
+  			},
+  			'pulse-dot': {
+  				'0%, 100%': { opacity: '0.35' },
+  				'50%': { opacity: '1' }
+  			},
+  			'float-gear': {
+  				'0%, 100%': { transform: 'translateY(0)' },
+  				'50%': { transform: 'translateY(-7px)' }
+  			},
+  			'glow-amber': {
+  				'0%, 100%': { opacity: '0.7' },
+  				'50%': { opacity: '1' }
   			}
   		},
   		animation: {
   			'accordion-down': 'accordion-down 0.2s ease-out',
-  			'accordion-up': 'accordion-up 0.2s ease-out'
+  			'accordion-up': 'accordion-up 0.2s ease-out',
+  			'spin-gear': 'spin-gear 7s linear infinite',
+  			'spin-gear-slow': 'spin-gear 11s linear infinite',
+  			'spin-gear-reverse': 'spin-gear-reverse 4.5s linear infinite',
+  			'pulse-dot': 'pulse-dot 1.4s ease-in-out infinite',
+  			'float-gear': 'float-gear 3.5s ease-in-out infinite',
+  			'glow-amber': 'glow-amber 1.6s ease-in-out infinite'
   		},
   		colors: {
   			border: 'hsl(var(--border))',
