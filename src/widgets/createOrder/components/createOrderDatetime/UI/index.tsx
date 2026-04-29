@@ -3,7 +3,7 @@ import {
   ContinueOrder,
   CustomCalendar,
   OrderCard,
-  TimeList,
+  TimeSlider,
 } from "@features/createOrder";
 import { useToast } from "@shared/ui";
 import { FC } from "react";
@@ -83,7 +83,7 @@ export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
                 cards={cards}
                 key={index}
                 CustomCalendar={CustomCalendar}
-                TimeList={TimeList}
+                TimeList={TimeSlider}
                 setValue={setValue}
                 formState={formState}
               />

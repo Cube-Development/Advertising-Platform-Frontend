@@ -2333,6 +2333,13 @@
     "date": "Bitta tanlash",
     "until": "gacha"
   },
+  "time_slider": {
+    "from": "<1>{{time}}</1><0>dan</0>",
+    "to": "<1>{{time}}</1><0>gacha</0>",
+    "hour": "soat",
+    "min": "daq",
+    "confirm": "Vaqtni tasdiqlash"
+  },
   "chat": {
     "my_messages": "Mening xabarlarim",
     "role": {

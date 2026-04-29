@@ -11,3 +11,4 @@ export * from "./postGeneration";
 export * from "./orderCard";
 export * from "./postComment";
 export * from "./timeList";
+export * from "./timeSlider";
