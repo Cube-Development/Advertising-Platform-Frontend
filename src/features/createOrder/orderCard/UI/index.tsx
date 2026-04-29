@@ -75,11 +75,10 @@ export const OrderCard: FC<PostPlatformProps> = ({
 
   // установка начальных даты и времени если они возвращаются
   useEffect(() => {
-    const { currentCard, cardsWithoutCurrent } = getCardData(formState.datetime);
-    setValue(CreatePostFormData.datetime, {
-      ...formState.datetime,
-      orders: [...cardsWithoutCurrent, currentCard],
-    });
+    const datetime = formState.datetime;
+    const { currentCard, cardsWithoutCurrent } = getCardData(datetime);
+    datetime.orders = [...cardsWithoutCurrent, currentCard];
+    setValue(CreatePostFormData.datetime, datetime);
   }, []);
 
   const handleChangeTime = (timeList: string[]) => {
