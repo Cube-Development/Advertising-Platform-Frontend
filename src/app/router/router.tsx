@@ -5,10 +5,7 @@ import { ALL_APP_ROUTES_LIST } from "./config";
 import { RootAdminLayout, RootLayout } from "@widgets/layouts";
 import { Maintenance } from "@widgets/maintenance";
 
-// ⚠️ Переключатель режима техобслуживания
-// true  — показывает заглушку на всех маршрутах
-// false — нормальная работа приложения
-const IS_MAINTENANCE = false;
+const IS_MAINTENANCE = import.meta.env.VITE_IS_MAINTENANCE === "true";
 
 const ROOT_ROUTES_LIST = ALL_APP_ROUTES_LIST.filter(
   (route) => route.layout === ENUM_LAYOUT_TYPES.ROOT,
