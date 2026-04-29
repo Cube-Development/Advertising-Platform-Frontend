@@ -39,6 +39,7 @@ jobs:
           echo "VITE_BASE_DIDOX_URL_2: ${{ secrets.VITE_BASE_DIDOX_URL_2 }}"
           echo "VITE_PUBLIC_OFFER_FILE_URL: ${{ secrets.VITE_PUBLIC_OFFER_FILE_URL }}"
           echo "VITE_SERVICE_RULES_FILE_URL: ${{ secrets.VITE_SERVICE_RULES_FILE_URL }}"
+          echo "VITE_IS_MAINTENANCE: ${{ secrets.VITE_IS_MAINTENANCE }}"
 
       - name: Build and push Docker image
         run: |
@@ -49,6 +50,7 @@ jobs:
             --build-arg VITE_BASE_DIDOX_URL_2="${{ secrets.VITE_BASE_DIDOX_URL_2 }}" \
             --build-arg VITE_PUBLIC_OFFER_FILE_URL="${{ secrets.VITE_PUBLIC_OFFER_FILE_URL }}" \
             --build-arg VITE_SERVICE_RULES_FILE_URL="${{ secrets.VITE_SERVICE_RULES_FILE_URL }}" \
+            --build-arg VITE_IS_MAINTENANCE="${{ secrets.VITE_IS_MAINTENANCE }}" \
             -t $DOCKER_IMAGE:${TAG} .
           docker push $DOCKER_IMAGE:${TAG}
 
