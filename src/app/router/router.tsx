@@ -8,7 +8,7 @@ import { Maintenance } from "@widgets/maintenance";
 // ⚠️ Переключатель режима техобслуживания
 // true  — показывает заглушку на всех маршрутах
 // false — нормальная работа приложения
-const IS_MAINTENANCE = true;
+const IS_MAINTENANCE = false;
 
 const ROOT_ROUTES_LIST = ALL_APP_ROUTES_LIST.filter(
   (route) => route.layout === ENUM_LAYOUT_TYPES.ROOT,
