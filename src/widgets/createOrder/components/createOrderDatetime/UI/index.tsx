@@ -67,7 +67,11 @@ export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
   };
 
   return (
-    <div id="datetime" className={`container ${isBlur ? "blur" : ""}`} {...({ inert: isBlur ? "" : undefined } as any)}>
+    <div
+      id="datetime"
+      className={`container ${isBlur ? "blur" : ""}`}
+      {...({ inert: isBlur ? "" : undefined } as any)}
+    >
       <div className={styles.wrapper}>
         <div className={styles.top}>
           <div className={styles.title}>

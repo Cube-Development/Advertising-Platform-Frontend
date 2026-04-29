@@ -75,15 +75,15 @@ export const OrderCard: FC<PostPlatformProps> = ({
 
   // установка начальных даты и времени если они возвращаются
   useEffect(() => {
-    const datetime = formState.datetime;
-    const { currentCard, cardsWithoutCurrent } = getCardData(datetime);
-    datetime.orders = [...cardsWithoutCurrent, currentCard];
-    setValue(CreatePostFormData.datetime, datetime);
+    const { currentCard, cardsWithoutCurrent } = getCardData(formState.datetime);
+    setValue(CreatePostFormData.datetime, {
+      ...formState.datetime,
+      orders: [...cardsWithoutCurrent, currentCard],
+    });
   }, []);
 
   const handleChangeTime = (timeList: string[]) => {
-    const datetime = formState.datetime;
-    const { currentCard, cardsWithoutCurrent } = getCardData(datetime);
+    const { currentCard, cardsWithoutCurrent } = getCardData(formState.datetime);
     currentCard.time_from = timeList[0];
     currentCard.time_to = timeList[1];
 
@@ -104,13 +104,14 @@ export const OrderCard: FC<PostPlatformProps> = ({
       return order;
     });
 
-    datetime.orders = [...updatedOtherCards, currentCard];
-    setValue(CreatePostFormData.datetime, datetime);
+    setValue(CreatePostFormData.datetime, {
+      ...formState.datetime,
+      orders: [...updatedOtherCards, currentCard],
+    });
   };
 
   const handleChangeDate = (dateList: Date[]) => {
-    const datetime = formState.datetime;
-    const { currentCard, cardsWithoutCurrent } = getCardData(datetime);
+    const { currentCard, cardsWithoutCurrent } = getCardData(formState.datetime);
 
     let dateValue: string | undefined;
     let dateFrom: string | undefined;
@@ -149,8 +150,10 @@ export const OrderCard: FC<PostPlatformProps> = ({
       return order;
     });
 
-    datetime.orders = [...updatedOtherCards, currentCard];
-    setValue(CreatePostFormData.datetime, datetime);
+    setValue(CreatePostFormData.datetime, {
+      ...formState.datetime,
+      orders: [...updatedOtherCards, currentCard],
+    });
   };
 
   const currentOrderData = formState.datetime.orders.find(
