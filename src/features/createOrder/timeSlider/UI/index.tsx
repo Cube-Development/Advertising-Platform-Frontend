@@ -28,10 +28,6 @@ const ceilToStep = (minutes: number): number =>
 const floorToStep = (minutes: number): number =>
   Math.floor(minutes / STEP) * STEP;
 
-/** Округление вверх до ближайшего кратного MIN_GAP (для ограничений по дате) */
-const ceilToGap = (minutes: number): number =>
-  Math.ceil(minutes / MIN_GAP) * MIN_GAP;
-
 /** Минуты → "HH:MM" */
 const formatTime = (mins: number): string => {
   if (mins >= 1440) return "23:59";
@@ -73,8 +69,9 @@ const computeMinValue = (
   if (selectedDate !== todayFormatted) return 0;
 
   const nowMinutes = today.getHours() * 60 + today.getMinutes();
-  const offset = platform === platformTypesNum.telegram ? 120 : 0;
-  const min = ceilToGap(nowMinutes + offset);
+  // const offset = platform === platformTypesNum.telegram ? 120 : 0;
+  const offset = 0;
+  const min = ceilToStep(nowMinutes) + MIN_GAP + offset;
 
   return Math.min(min, MAX_MINS - MIN_GAP);
 };
