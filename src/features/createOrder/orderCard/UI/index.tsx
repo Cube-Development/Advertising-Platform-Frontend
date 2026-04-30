@@ -83,8 +83,12 @@ export const OrderCard: FC<PostPlatformProps> = ({
 
   const handleChangeTime = (timeList: string[]) => {
     const { currentCard, cardsWithoutCurrent } = getCardData(formState.datetime);
-    currentCard.time_from = timeList[0];
-    currentCard.time_to = timeList[1];
+    
+    const updatedCurrentCard = {
+      ...currentCard,
+      time_from: timeList[0],
+      time_to: timeList[1],
+    };
 
     // Присваиваем время всем ордерам той же платформы, у которых еще нет времени
     const updatedOtherCards = cardsWithoutCurrent.map((order) => {
@@ -105,26 +109,28 @@ export const OrderCard: FC<PostPlatformProps> = ({
 
     setValue(CreatePostFormData.datetime, {
       ...formState.datetime,
-      orders: [...updatedOtherCards, currentCard],
+      orders: [...updatedOtherCards, updatedCurrentCard],
     });
   };
 
   const handleChangeDate = (dateList: Date[]) => {
     const { currentCard, cardsWithoutCurrent } = getCardData(formState.datetime);
+    
+    const updatedCurrentCard = { ...currentCard };
 
     let dateValue: string | undefined;
     let dateFrom: string | undefined;
     let dateTo: string | undefined;
 
     if (dateList.length === 1) {
-      delete currentCard.date_from;
-      delete currentCard.date_to;
-      currentCard.date = formatDateToRuString(dateList[0]);
+      delete updatedCurrentCard.date_from;
+      delete updatedCurrentCard.date_to;
+      updatedCurrentCard.date = formatDateToRuString(dateList[0]);
       dateValue = formatDateToRuString(dateList[0]);
     } else {
-      delete currentCard.date;
-      currentCard.date_from = formatDateToRuString(dateList[0]);
-      currentCard.date_to = formatDateToRuString(dateList[1]);
+      delete updatedCurrentCard.date;
+      updatedCurrentCard.date_from = formatDateToRuString(dateList[0]);
+      updatedCurrentCard.date_to = formatDateToRuString(dateList[1]);
       dateFrom = formatDateToRuString(dateList[0]);
       dateTo = formatDateToRuString(dateList[1]);
     }
@@ -151,7 +157,7 @@ export const OrderCard: FC<PostPlatformProps> = ({
 
     setValue(CreatePostFormData.datetime, {
       ...formState.datetime,
-      orders: [...updatedOtherCards, currentCard],
+      orders: [...updatedOtherCards, updatedCurrentCard],
     });
   };
 
