@@ -199,12 +199,10 @@ export const TimeSlider: FC<TimeListProps> = ({
 
   // ---------- Отображаемый текст ----------
 
-  const displayText = useMemo(() => {
-    if (startTime?.length === 2 || userHasSelected.current) {
-      return `${formatTime(sliderValue[0])} - ${formatTime(sliderValue[1])}`;
-    }
-    return "--:-- - --:--";
-  }, [sliderValue, startTime]);
+  const displayText =
+    startTime?.length === 2 || userHasSelected.current
+      ? `${formatTime(sliderValue[0])} - ${formatTime(sliderValue[1])}`
+      : "--:-- - --:--";
 
   const duration = sliderValue[1] - sliderValue[0];
 

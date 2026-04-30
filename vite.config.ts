@@ -109,15 +109,15 @@ export default defineConfig({
         manualChunks(id) {
           if (id.includes('node_modules')) {
             // 1. Базовые библиотеки React (ОБЯЗАТЕЛЬНО вместе для избежания конфликтов Context и хуков)
-            if (
-              id.includes('/react/') || 
-              id.includes('/react-dom/') || 
-              id.includes('/react-router') || 
-              id.includes('/react-redux/') || 
-              id.includes('/@reduxjs/')
-            ) {
-              return 'vendor-react';
-            }
+            // if (
+            //   id.includes('/react/') || 
+            //   id.includes('/react-dom/') || 
+            //   id.includes('/react-router') || 
+            //   id.includes('/react-redux/') || 
+            //   id.includes('/@reduxjs/')
+            // ) {
+            //   return 'vendor-react';
+            // }
 
             // 2. UI и анимации (Radix, Framer Motion, Icons) - безопасно выносим в общий чанк дизайна
             if (
