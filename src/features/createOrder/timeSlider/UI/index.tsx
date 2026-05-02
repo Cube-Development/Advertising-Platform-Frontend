@@ -1,5 +1,4 @@
 import { TimeListProps } from "@entities/project";
-import { platformTypesNum } from "@entities/platform";
 import { ClockIcon } from "@shared/assets";
 import {
   AlertDialog,
@@ -13,77 +12,21 @@ import {
 } from "@shared/ui";
 import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { Trans, useTranslation } from "react-i18next";
-
-const STEP = 5; // шаг слайдера — 5 минут
-const MAX_MINS = 1440; // 24:00
-const MIN_GAP = 120; // минимальный зазор — 2 часа
+import {
+  MAX_MINS,
+  MIN_GAP,
+  STEP,
+  ceilToStep,
+  computeDefaults,
+  computeMinValue,
+  correctTimeRange,
+  floorToStep,
+  formatDuration,
+  formatTime,
+  parseTime,
+} from "../lib/timeUtils";
 
 const TICKS = ["00:00", "06:00", "12:00", "18:00", "23:59"];
-
-/** Округление вверх до ближайшего шага */
-const ceilToStep = (minutes: number): number =>
-  Math.ceil(minutes / STEP) * STEP;
-
-/** Округление вниз до ближайшего шага */
-const floorToStep = (minutes: number): number =>
-  Math.floor(minutes / STEP) * STEP;
-
-/** Минуты → "HH:MM" */
-const formatTime = (mins: number): string => {
-  if (mins >= 1440) return "23:59";
-  const h = Math.floor(mins / 60);
-  const m = mins % 60;
-  return `${String(h).padStart(2, "0")}:${String(m).padStart(2, "0")}`;
-};
-
-/** "HH:MM" → минуты */
-const parseTime = (time: string): number => {
-  if (time === "23:59" || time === "24:00") return 1440;
-  const [h, m] = time.split(":").map(Number);
-  return h * 60 + m;
-};
-
-/** Длительность в читаемом виде */
-const formatDuration = (
-  mins: number,
-  tHour: string,
-  tMin: string,
-): string => {
-  const h = Math.floor(mins / 60);
-  const m = mins % 60;
-  if (h === 0) return `${m} ${tMin}`;
-  if (m === 0) return `${h} ${tHour}`;
-  return `${h} ${tHour} ${m} ${tMin}`;
-};
-
-/** Вычислить minValue на основе даты и платформы */
-const computeMinValue = (
-  selectedDate: string | undefined,
-  platform: platformTypesNum | undefined,
-): number => {
-  if (!selectedDate) return 0;
-
-  const today = new Date();
-  const todayFormatted = `${today.getDate().toString().padStart(2, "0")}.${(today.getMonth() + 1).toString().padStart(2, "0")}.${today.getFullYear()}`;
-
-  if (selectedDate !== todayFormatted) return 0;
-
-  const nowMinutes = today.getHours() * 60 + today.getMinutes();
-  // const offset = platform === platformTypesNum.telegram ? 120 : 0;
-  const offset = 0;
-  const min = ceilToStep(nowMinutes) + MIN_GAP + offset;
-
-  return Math.min(min, MAX_MINS - MIN_GAP);
-};
-
-/** Вычислить валидные дефолтные значения */
-const computeDefaults = (
-  minVal: number,
-): [number, number] => {
-  const start = Math.max(minVal, 480); // 08:00 или minValue
-  const end = Math.min(start + 360, MAX_MINS); // желаемый диапазон 6 часов (360 минут)
-  return [start, end];
-};
 
 export const TimeSlider: FC<TimeListProps> = ({
   onChange,
@@ -102,14 +45,10 @@ export const TimeSlider: FC<TimeListProps> = ({
   const [sliderValue, setSliderValue] = useState<[number, number]>(() => {
     const min = computeMinValue(selectedDate, platform);
     if (startTime?.length === 2) {
-      let start = floorToStep(parseTime(startTime[0]));
-      let end = ceilToStep(parseTime(startTime[1]));
-      if (start < min) start = min;
-      if (end < start + MIN_GAP) end = start + MIN_GAP;
-      if (end > MAX_MINS) {
-        end = MAX_MINS;
-        start = Math.max(min, end - MIN_GAP);
-      }
+      const { start, end } = correctTimeRange(
+        [startTime[0], startTime[1]],
+        min,
+      );
       return [start, end];
     }
     return computeDefaults(min);
@@ -131,17 +70,17 @@ export const TimeSlider: FC<TimeListProps> = ({
     if (userHasSelected.current) return;
 
     if (startTime?.length === 2) {
-      let start = floorToStep(parseTime(startTime[0]));
-      let end = ceilToStep(parseTime(startTime[1]));
-
-      if (start < minValue) start = minValue;
-      if (end < start + MIN_GAP) end = start + MIN_GAP;
-      if (end > MAX_MINS) {
-        end = MAX_MINS;
-        start = Math.max(minValue, end - MIN_GAP);
-      }
+      const { start, end, wasChanged } = correctTimeRange(
+        [startTime[0], startTime[1]],
+        minValue,
+      );
 
       setSliderValue([start, end]);
+
+      // Если время было скорректировано — сохраняем в форму
+      if (wasChanged) {
+        onChange([formatTime(start), formatTime(end)]);
+      }
     } else {
       setSliderValue(computeDefaults(minValue));
     }
@@ -245,8 +184,14 @@ export const TimeSlider: FC<TimeListProps> = ({
                 i18nKey="time_slider.from"
                 values={{ time: formatTime(sliderValue[0]) }}
                 components={[
-                  <div key="0" className="text-[11px] max-sm:text-[9px] text-[var(--Personal-colors-main)] font-medium tracking-wider uppercase whitespace-nowrap" />,
-                  <div key="1" className="text-xl max-sm:text-lg font-medium gradient_color tracking-wider tabular-nums whitespace-nowrap" />
+                  <div
+                    key="0"
+                    className="text-[11px] max-sm:text-[9px] text-[var(--Personal-colors-main)] font-medium tracking-wider uppercase whitespace-nowrap"
+                  />,
+                  <div
+                    key="1"
+                    className="text-xl max-sm:text-lg font-medium gradient_color tracking-wider tabular-nums whitespace-nowrap"
+                  />,
                 ]}
               />
             </div>
@@ -264,8 +209,14 @@ export const TimeSlider: FC<TimeListProps> = ({
                 i18nKey="time_slider.to"
                 values={{ time: formatTime(sliderValue[1]) }}
                 components={[
-                  <div key="0" className="text-[11px] max-sm:text-[9px] text-[var(--Personal-colors-main)] font-medium tracking-wider uppercase whitespace-nowrap" />,
-                  <div key="1" className="text-xl max-sm:text-lg font-medium gradient_color tracking-wider tabular-nums whitespace-nowrap" />
+                  <div
+                    key="0"
+                    className="text-[11px] max-sm:text-[9px] text-[var(--Personal-colors-main)] font-medium tracking-wider uppercase whitespace-nowrap"
+                  />,
+                  <div
+                    key="1"
+                    className="text-xl max-sm:text-lg font-medium gradient_color tracking-wider tabular-nums whitespace-nowrap"
+                  />,
                 ]}
               />
             </div>
@@ -274,12 +225,13 @@ export const TimeSlider: FC<TimeListProps> = ({
           {/* Слайдер */}
           <div className="relative py-3 px-1">
             {/* Искусственный трек с градиентом (лежит под прозрачным нативным треком) */}
-            <div 
+            <div
               className="absolute top-1/2 left-1 right-1 h-1.5 -translate-y-1/2 rounded-full z-0 pointer-events-none"
               style={{
-                background: minValue > 0 
-                  ? `linear-gradient(to right, #e7e7e7ff ${disabledPercent}%, rgba(11, 173, 194, 0.5) ${disabledPercent}%)` 
-                  : "rgba(11, 173, 194, 0.5)"
+                background:
+                  minValue > 0
+                    ? `linear-gradient(to right, #e7e7e7ff ${disabledPercent}%, rgba(11, 173, 194, 0.5) ${disabledPercent}%)`
+                    : "rgba(11, 173, 194, 0.5)",
               }}
             />
             <SliderDouble

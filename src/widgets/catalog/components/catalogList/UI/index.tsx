@@ -131,7 +131,7 @@ export const CatalogList: FC<CatalogListProps> = ({
       ...el,
       name: t(el.name),
       id: el.type,
-      img: isModal && index > 0 ? LockIcon : el.img,
+      // img: isModal && index > 0 ? LockIcon : el.img,
     };
   });
 
@@ -168,9 +168,10 @@ export const CatalogList: FC<CatalogListProps> = ({
           />
           <SelectFilter
             typeParameter={filterData.sort}
-            defaultValue={[isModal ? sortingFilter.match : formState?.sort]}
+            // defaultValue={[isModal ? sortingFilter.match : formState?.sort]}
+            defaultValue={[formState?.sort]}
             onChangeOption={setValue}
-            onChangeSort={isModal ? onChangeSort : undefined}
+            // onChangeSort={isModal ? onChangeSort : undefined}
             options={translateSortingTypes as unknown as IOption[]}
             textData="sorting.title"
             single={true}
