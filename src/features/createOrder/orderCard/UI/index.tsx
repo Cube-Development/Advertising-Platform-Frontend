@@ -18,6 +18,11 @@ import {
   TimeListProps,
   platformToIcon,
 } from "@entities/project";
+import {
+  getCardData,
+  buildDatetimeAfterDateChange,
+  buildDatetimeAfterTimeChange,
+} from "../lib/formStateUtils";
 import { PostIcon2 } from "@shared/assets";
 import { useWindowWidth } from "@shared/hooks";
 import {
@@ -31,7 +36,7 @@ import {
 import { formatDateToRuString } from "@shared/utils";
 import { X } from "lucide-react";
 import { FC, useEffect, useState } from "react";
-import { UseFormSetValue } from "react-hook-form";
+import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
@@ -42,6 +47,7 @@ interface PostPlatformProps {
   CustomCalendar: FC<DateListProps>;
   TimeList: FC<TimeListProps>;
   setValue: UseFormSetValue<ICreatePostForm>;
+  getValues: UseFormGetValues<ICreatePostForm>;
   formState: ICreatePostForm;
 }
 
@@ -51,114 +57,41 @@ export const OrderCard: FC<PostPlatformProps> = ({
   CustomCalendar,
   TimeList,
   setValue,
+  getValues,
   formState,
 }) => {
   const { t } = useTranslation();
   const screen = useWindowWidth();
   const [isDialogOpen, setIsDialogOpen] = useState(false);
-  const getCardData = (datetime: ICreateDate) => {
-    const currentCard: IDatetime = (datetime?.orders || []).find(
-      (item) => item.order_id === card.id,
-    ) || {
-      order_id: card?.id,
-      time_from: card?.time_from,
-      time_to: card?.time_to,
-      date: card?.date,
-      date_from: card?.date_from,
-      date_to: card?.date_to,
-    };
-    const cardsWithoutCurrent = (datetime.orders || []).filter(
-      (item) => item.order_id !== card.id,
-    );
-    return { currentCard, cardsWithoutCurrent };
-  };
-
   // установка начальных даты и времени если они возвращаются
   useEffect(() => {
     const datetime = formState.datetime;
-    const { currentCard, cardsWithoutCurrent } = getCardData(datetime);
+    const { currentCard, cardsWithoutCurrent } = getCardData(datetime, card);
     datetime.orders = [...cardsWithoutCurrent, currentCard];
     setValue(CreatePostFormData.datetime, datetime);
   }, []);
 
   const handleChangeTime = (timeList: string[]) => {
-    const { currentCard, cardsWithoutCurrent } = getCardData(formState.datetime);
-    
-    const updatedCurrentCard = {
-      ...currentCard,
-      time_from: timeList[0],
-      time_to: timeList[1],
-    };
-
-    // Присваиваем время всем ордерам той же платформы, у которых еще нет времени
-    const updatedOtherCards = cardsWithoutCurrent.map((order) => {
-      const orderCard = cards.find((c) => c.id === order.order_id);
-      if (
-        orderCard?.platform === card.platform &&
-        !order.time_from &&
-        !order.time_to
-      ) {
-        return {
-          ...order,
-          time_from: timeList[0],
-          time_to: timeList[1],
-        };
-      }
-      return order;
-    });
-
-    setValue(CreatePostFormData.datetime, {
-      ...formState.datetime,
-      orders: [...updatedOtherCards, updatedCurrentCard],
-    });
+    const freshDatetime = getValues().datetime;
+    const newDatetime = buildDatetimeAfterTimeChange(
+      freshDatetime,
+      card,
+      cards,
+      timeList,
+    );
+    setValue(CreatePostFormData.datetime, newDatetime);
   };
 
   const handleChangeDate = (dateList: Date[]) => {
-    const { currentCard, cardsWithoutCurrent } = getCardData(formState.datetime);
-    
-    const updatedCurrentCard = { ...currentCard };
-
-    let dateValue: string | undefined;
-    let dateFrom: string | undefined;
-    let dateTo: string | undefined;
-
-    if (dateList.length === 1) {
-      delete updatedCurrentCard.date_from;
-      delete updatedCurrentCard.date_to;
-      updatedCurrentCard.date = formatDateToRuString(dateList[0]);
-      dateValue = formatDateToRuString(dateList[0]);
-    } else {
-      delete updatedCurrentCard.date;
-      updatedCurrentCard.date_from = formatDateToRuString(dateList[0]);
-      updatedCurrentCard.date_to = formatDateToRuString(dateList[1]);
-      dateFrom = formatDateToRuString(dateList[0]);
-      dateTo = formatDateToRuString(dateList[1]);
-    }
-
-    // Присваиваем дату всем ордерам той же платформы, у которых еще нет даты
-    const updatedOtherCards = cardsWithoutCurrent.map((order) => {
-      const orderCard = cards.find((c) => c.id === order.order_id);
-      const hasNoDate = !order.date && !order.date_from && !order.date_to;
-      if (orderCard?.platform === card.platform && hasNoDate) {
-        const updatedOrder = { ...order };
-        if (dateValue) {
-          delete updatedOrder.date_from;
-          delete updatedOrder.date_to;
-          updatedOrder.date = dateValue;
-        } else {
-          delete updatedOrder.date;
-          updatedOrder.date_from = dateFrom;
-          updatedOrder.date_to = dateTo;
-        }
-        return updatedOrder;
-      }
-      return order;
-    });
-
-    setValue(CreatePostFormData.datetime, {
-      ...formState.datetime,
-      orders: [...updatedOtherCards, updatedCurrentCard],
-    });
+    const freshDatetime = getValues().datetime;
+    const newDatetime = buildDatetimeAfterDateChange(
+      freshDatetime,
+      card,
+      cards,
+      dateList,
+      formatDateToRuString,
+    );
+    setValue(CreatePostFormData.datetime, newDatetime);
   };
 
   const currentOrderData = formState.datetime.orders.find(

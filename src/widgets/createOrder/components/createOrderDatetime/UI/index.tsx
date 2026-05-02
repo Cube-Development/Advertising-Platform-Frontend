@@ -1,4 +1,8 @@
-import { ICreatePostForm, IPostChannel } from "@entities/project";
+import {
+  CreatePostFormData,
+  ICreatePostForm,
+  IPostChannel,
+} from "@entities/project";
 import {
   ContinueOrder,
   CustomCalendar,
@@ -6,7 +10,9 @@ import {
   TimeSlider,
 } from "@features/createOrder";
 import { useToast } from "@shared/ui";
-import { FC } from "react";
+import { formatRuStringToDate } from "@shared/utils";
+import { cleanExpiredDates } from "@features/createOrder/orderCard/lib/formStateUtils";
+import { FC, useEffect } from "react";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
@@ -35,6 +41,28 @@ export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
   const { t } = useTranslation();
   const { toast } = useToast();
 
+  // ---------- Очистка устаревших дат при маунте ----------
+  useEffect(() => {
+    const datetime = getValues().datetime;
+    if (!datetime?.orders?.length) return;
+
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    const { cleanedOrders, hasChanges } = cleanExpiredDates(
+      datetime.orders,
+      today,
+      formatRuStringToDate,
+    );
+
+    if (hasChanges) {
+      setValue(CreatePostFormData.datetime, {
+        ...datetime,
+        orders: cleanedOrders,
+      });
+    }
+  }, []);
+  console.log("formState.datetime", formState.datetime);
   const handleCheckDatetimes = () => {
     const form: ICreatePostForm = getValues();
     if (cards?.length === form.datetime?.orders?.length) {
@@ -89,6 +117,7 @@ export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
                 CustomCalendar={CustomCalendar}
                 TimeList={TimeSlider}
                 setValue={setValue}
+                getValues={getValues}
                 formState={formState}
               />
             ))}

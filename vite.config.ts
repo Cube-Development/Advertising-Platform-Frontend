@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import { sentryVitePlugin } from "@sentry/vite-plugin";
 import react from "@vitejs/plugin-react";
 import path from "path";
@@ -178,5 +179,9 @@ export default defineConfig({
   server: {
     allowedHosts: ["blogix.ngrok.dev"],
     host: true,
+  },
+  test: {
+    globals: true,
+    environment: "jsdom",
   },
 });

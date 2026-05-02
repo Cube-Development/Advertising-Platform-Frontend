@@ -106,7 +106,7 @@ export const CustomCalendar: FC<DateListProps> = ({
   };
 
   const handleCloseModal = () => {
-    setDateObject({ date: null, dateString: null });
+    // setDateObject({ date: null, dateString: null });
     setIsOpen(false);
   };
 
