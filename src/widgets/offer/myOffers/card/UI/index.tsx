@@ -134,6 +134,7 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
                       : card?.publish_date,
                     card?.publish_time?.time_from,
                     card?.publish_time?.time_to,
+                    TIMER_OFFSET_MINUTES
                   )
                     ? ""
                     : "deactive"

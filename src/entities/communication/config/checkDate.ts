@@ -4,53 +4,39 @@ export const CheckDate = (
   date_to: string,
   time_from?: string,
   time_to?: string,
+  offsetMinutes: number = 0
 ): boolean => {
-  const now = new Date();
+  const parts = date_to.split(".");
+  if (parts.length !== 3) return false;
 
-  // Получаем дату в Ташкенте в формате YYYY-MM-DD для корректного сравнения
-  const tashkentDateStr = now.toLocaleDateString("en-CA", {
-    timeZone: "Asia/Tashkent",
-  }); // "2026-01-28"
+  const year = parseInt(parts[2], 10);
+  const month = parseInt(parts[1], 10) - 1;
+  const day = parseInt(parts[0], 10);
 
-  // Получаем время в Ташкенте в формате HH:MM
-  const tashkentTimeStr = now.toLocaleTimeString("en-GB", {
-    timeZone: "Asia/Tashkent",
-    hour: "2-digit",
-    minute: "2-digit",
-    hour12: false,
-  }); // "15:30"
+  // Получаем текущее время в Ташкенте и создаем Date с этими же локальными компонентами
+  const nowStr = new Date().toLocaleString("en-US", { timeZone: "Asia/Tashkent" });
+  const tashkentNow = new Date(nowStr);
 
-  // Парсим дату размещения в формат YYYY-MM-DD
-  const publishDateStr = date_to.split(".").reverse().join("-"); // "28.01.2026" -> "2026-01-28"
-
-  // Если дата размещения еще не наступила (сравниваем строки)
-  if (publishDateStr > tashkentDateStr) {
-    return false;
+  let startHour = 0;
+  let startMinute = 0;
+  if (time_from) {
+    const [h, m] = time_from.split(":");
+    startHour = parseInt(h, 10);
+    startMinute = parseInt(m, 10);
   }
 
-  // Если дата размещения уже прошла (больше чем на день)
-  // Вычисляем следующий день
-  const publishDate = new Date(publishDateStr + "T12:00:00"); // T12:00 чтобы избежать проблем с DST
-  publishDate.setDate(publishDate.getDate() + 1);
-  const dayAfterStr = publishDate.toISOString().slice(0, 10); // "YYYY-MM-DD"
-
-  if (tashkentDateStr > dayAfterStr) {
-    return false;
+  let endHour = 23;
+  let endMinute = 59;
+  if (time_to) {
+    const [h, m] = time_to.split(":");
+    endHour = parseInt(h, 10);
+    endMinute = parseInt(m, 10);
   }
 
-  // Если указано время размещения, проверяем его (только если сегодня день размещения)
-  if (time_from && time_to && publishDateStr === tashkentDateStr) {
-    // Сравниваем строки времени (работает для формата HH:MM)
-    if (tashkentTimeStr < time_from) {
-      return false;
-    }
+  const startDate = new Date(year, month, day, startHour, startMinute, 0);
+  const endDate = new Date(year, month, day, endHour, endMinute + offsetMinutes, 0);
 
-    if (tashkentTimeStr > time_to) {
-      return false;
-    }
-  }
-
-  return true;
+  return tashkentNow.getTime() >= startDate.getTime() && tashkentNow.getTime() <= endDate.getTime();
 };
 
 export const getDateChat = (date: string, time: string): string => {
