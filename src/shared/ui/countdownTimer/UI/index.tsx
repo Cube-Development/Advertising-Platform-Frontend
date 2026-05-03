@@ -30,43 +30,14 @@ export const CountdownTimer: FC<CountdownTimerProps> = ({ date_to, time, offsetM
   useEffect(() => {
     const updateDiff = () => {
       const now = new Date();
-      const currentYear = now.getFullYear();
-      const currentMonth = now.getMonth();
-      const currentDay = now.getDate();
-      const currentHours = now.getHours();
-      const currentMinutes = now.getMinutes();
+      
+      const diff = (finishTime.getTime() - now.getTime()) / 1000;
 
-      // Проверка даты
-      if (
-        currentYear > year ||
-        (currentYear === year && currentMonth > month) ||
-        (currentYear === year && currentMonth === month && currentDay > day)
-      ) {
-        setIsTimeout(true);
-        setDiff([0, 0, 0, 0]);
-        return;
-      } else if (
-        currentDay === day &&
-        currentMonth === month &&
-        currentYear === year &&
-        currentHours > hour
-      ) {
-        setIsTimeout(true);
-        setDiff([0, 0, 0, 0]);
-        return;
-      } else if (
-        currentDay === day &&
-        currentMonth === month &&
-        currentYear === year &&
-        currentHours === hour &&
-        currentMinutes > minute
-      ) {
+      if (diff <= 0) {
         setIsTimeout(true);
         setDiff([0, 0, 0, 0]);
         return;
       }
-
-      const diff = (finishTime.getTime() - now.getTime()) / 1000;
 
       const days = Math.floor(diff / 86400);
       const hours = Math.floor((diff / 3600) % 24);
