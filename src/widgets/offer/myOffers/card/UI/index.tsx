@@ -19,6 +19,8 @@ import { Link } from "react-router-dom";
 import styles from "./styles.module.scss";
 import { CheckPost } from "@features/order";
 
+const TIMER_OFFSET_MINUTES = 30; // minutes
+
 interface OfferCardProps {
   card: IBloggerOfferCard;
   statusFilter: ENUM_OFFER_STATUS | string;
@@ -118,6 +120,7 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
                   <CountdownTimer
                     date_to={card?.publish_date}
                     time={card?.publish_time?.time_to}
+                    offsetMinutes={TIMER_OFFSET_MINUTES}
                   />
                 )}
               </div>
