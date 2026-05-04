@@ -72,6 +72,8 @@ export const PostButtons: FC<PostButtonsProps> = ({
     formState?.selectedMultiPostId,
     formState?.posts,
     formState?.multiposts,
+    formState?.selectedPostType,
+    platformId,
   ]);
 
   const handleOnChange = (type: keyof IFile, value: string) => {
