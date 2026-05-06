@@ -130,6 +130,9 @@ export const OfferCard: FC<OfferCardProps> = ({ card, statusFilter, sign }) => {
                 className={`${
                   CheckDate(
                     typeof card?.publish_date === "object"
+                      ? card?.publish_date.date_from
+                      : card?.publish_date,
+                    typeof card?.publish_date === "object"
                       ? card?.publish_date.date_to
                       : card?.publish_date,
                     card?.publish_time?.time_from,
