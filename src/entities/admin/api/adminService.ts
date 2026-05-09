@@ -52,6 +52,13 @@ export interface adminRejectComplaintReq {
   reason: string;
 }
 
+export interface adminUpdateOrderDateReq {
+  order_ident: number;
+  order_date: string;
+  time_from: string;
+  time_to: string;
+}
+
 export const adminAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
     getAdminOrderComplaints: build.query<
@@ -290,6 +297,16 @@ export const adminAPI = authApi.injectEndpoints({
       }),
       invalidatesTags: [ADMIN_COMPLAINTS],
     }),
+    adminUpdateOrderDate: build.mutation<
+      { success: boolean },
+      adminUpdateOrderDateReq
+    >({
+      query: (body) => ({
+        url: `/adv-admin/order/date`,
+        method: "PUT",
+        body,
+      }),
+    }),
   }),
 });
 
@@ -307,4 +324,5 @@ export const {
   useAccountingDepositRejectMutation,
   useAccountingWithdrawalAcceptMutation,
   useAccountingWithdrawalRejectMutation,
+  useAdminUpdateOrderDateMutation,
 } = adminAPI;
