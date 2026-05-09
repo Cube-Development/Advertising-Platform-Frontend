@@ -13,7 +13,7 @@ export const useChannelCartFetch = (
   role: ENUM_ROLES,
   guestId: string,
   projectId: string,
-  language: number
+  language: number,
 ) => {
   const { data: cart, isFetching: isFetchingCommon } =
     useReadCommonCartShortQuery(undefined, {
@@ -24,7 +24,10 @@ export const useChannelCartFetch = (
   const { data: cartPub, isFetching: isFetchingPublic } =
     useReadPublicCartShortQuery(
       { guest_id: guestId },
-      { skip: isAuth || !guestId || !!projectId, refetchOnMountOrArgChange: true }
+      {
+        skip: isAuth || !guestId || !!projectId,
+        refetchOnMountOrArgChange: true,
+      },
     );
 
   const { data: cartManager, isFetching: isFetchingManager } =
@@ -33,11 +36,11 @@ export const useChannelCartFetch = (
         project_id: projectId,
         language: language || USER_LANGUAGES_LIST[0].id,
       },
-      { skip: !isAuth || !projectId, refetchOnMountOrArgChange: true }
+      { skip: !isAuth || !projectId, refetchOnMountOrArgChange: true },
     );
 
   const [currentCart, setCurrentCart] = useState<ICart | undefined>(
-    cart || cartPub || cartManager
+    cart || cartPub || cartManager,
   );
 
   useEffect(() => {
@@ -46,7 +49,8 @@ export const useChannelCartFetch = (
     else if (isAuth && projectId && cartManager) setCurrentCart(cartManager);
   }, [cart, cartPub, cartManager, isAuth, projectId, guestId]);
 
-  const isFetchingCart = isFetchingCommon || isFetchingPublic || isFetchingManager;
+  const isFetchingCart =
+    isFetchingCommon || isFetchingPublic || isFetchingManager;
 
   return { currentCart, isFetchingCart };
 };

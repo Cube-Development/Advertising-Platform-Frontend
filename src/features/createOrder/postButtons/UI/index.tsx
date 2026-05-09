@@ -4,6 +4,7 @@ import {
   ICreatePostForm,
   IFile,
 } from "@entities/project";
+import { applyMultipostUpdate } from "@entities/project";
 import { AddIcon, CancelIcon2 } from "@shared/assets";
 import {
   AlertDialog,
@@ -93,17 +94,47 @@ export const PostButtons: FC<PostButtonsProps> = ({
     setButton({ content_type: ContentType.button, content: "", url: "" });
 
     if (currentPost) {
-      currentPost.buttons = [...buttons, button];
-      setValue(type, [...postsWithoutCurrent, currentPost]);
+      const nextButtons = [...buttons, button];
+      if (type === CreatePostFormData.multiposts && currentPost.order_id) {
+        setValue(
+          type,
+          applyMultipostUpdate(
+            formState.multiposts || [],
+            currentPost.order_id,
+            (leader) => ({
+              ...leader,
+              buttons: nextButtons,
+            }),
+          ),
+        );
+      } else {
+        currentPost.buttons = nextButtons;
+        setValue(type, [...postsWithoutCurrent, currentPost]);
+      }
     }
   };
 
   const handleRemoveButton = (button: IFile) => {
-    setButtons(buttons.filter((item) => item !== button));
+    const nextButtons = buttons.filter((item) => item !== button);
+    setButtons(nextButtons);
 
     if (currentPost) {
-      currentPost.buttons = [...buttons.filter((item) => item !== button)];
-      setValue(type, [...postsWithoutCurrent, currentPost]);
+      if (type === CreatePostFormData.multiposts && currentPost.order_id) {
+        setValue(
+          type,
+          applyMultipostUpdate(
+            formState.multiposts || [],
+            currentPost.order_id,
+            (leader) => ({
+              ...leader,
+              buttons: nextButtons,
+            }),
+          ),
+        );
+      } else {
+        currentPost.buttons = [...nextButtons];
+        setValue(type, [...postsWithoutCurrent, currentPost]);
+      }
     }
   };
 

@@ -6,6 +6,7 @@ import {
   FileProps,
   ICreatePostForm,
 } from "@entities/project";
+import { applyMultipostUpdate } from "@entities/project";
 import { BarSubFilter } from "@features/other";
 import { CancelIcon2, ImageIcon } from "@shared/assets";
 import {
@@ -68,22 +69,56 @@ export const PostFiles: FC<PostFilesProps> = ({
       ) || [];
 
   const handleAddMediaFile = (mediafiles: File[]) => {
-    if (currentPost) {
-      platformId !== platformTypesNum.youtube
-        ? (currentPost.media = [...mediafiles])
-        : (currentPost.media = mediafiles.length > 0 ? [mediafiles[0]] : []);
-      setValue(type, [...postsWithoutCurrent, currentPost]);
+    if (!currentPost) return;
+    if (type === CreatePostFormData.multiposts && currentPost.order_id) {
+      const media =
+        platformId !== platformTypesNum.youtube
+          ? [...mediafiles]
+          : mediafiles.length > 0
+            ? [mediafiles[0]]
+            : [];
+      setValue(
+        type,
+        applyMultipostUpdate(
+          formState.multiposts || [],
+          currentPost.order_id,
+          (leader) => ({
+            ...leader,
+            media,
+          }),
+        ),
+      );
+      return;
     }
+    platformId !== platformTypesNum.youtube
+      ? (currentPost.media = [...mediafiles])
+      : (currentPost.media = mediafiles.length > 0 ? [mediafiles[0]] : []);
+    setValue(type, [...postsWithoutCurrent, currentPost]);
   };
 
   const handleAddFile = (files: File[]) => {
-    if (currentPost) {
+    if (!currentPost) return;
+    if (type === CreatePostFormData.multiposts && currentPost.order_id) {
       const currentFiles = currentPost.files || [];
-      files.length
-        ? (currentPost.files = [...currentFiles, ...files])
-        : (currentPost.files = []);
-      setValue(type, [...postsWithoutCurrent, currentPost]);
+      const nextFiles = files.length ? [...currentFiles, ...files] : [];
+      setValue(
+        type,
+        applyMultipostUpdate(
+          formState.multiposts || [],
+          currentPost.order_id,
+          (leader) => ({
+            ...leader,
+            files: nextFiles,
+          }),
+        ),
+      );
+      return;
     }
+    const currentFiles = currentPost.files || [];
+    files.length
+      ? (currentPost.files = [...currentFiles, ...files])
+      : (currentPost.files = []);
+    setValue(type, [...postsWithoutCurrent, currentPost]);
   };
 
   const currentMedia: File[] = currentPost?.media || [];

@@ -93,4 +93,3 @@ export const QueryParamsUUID = (key: queryParamKeys): string => {
   const value = params[key];
   return value && isValidUUID(value) ? value : "";
 };
-

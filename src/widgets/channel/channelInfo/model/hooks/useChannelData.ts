@@ -27,17 +27,21 @@ export const useChannelData = ({
   };
 
   const channelInfoParams =
-    !!projectId && !!userId ? {
-      ...baseParams,
-      project_id: projectId,
-    } : !!userId && role !== ENUM_ROLES.MANAGER && role !== ENUM_ROLES.AGENCY
-      ? { ...baseParams, user_id: userId }
-      : { ...baseParams, guest_id: guestId };
+    !!projectId && !!userId
+      ? {
+          ...baseParams,
+          project_id: projectId,
+        }
+      : !!userId && role !== ENUM_ROLES.MANAGER && role !== ENUM_ROLES.AGENCY
+        ? { ...baseParams, user_id: userId }
+        : { ...baseParams, guest_id: guestId };
 
   const { data: card, isLoading } = useGetChannelByIdQuery(channelInfoParams);
 
   const [channel, setChannel] = useState<IReadChannelData>(card!);
-  const [selectedFormat, setSelectedFormat] = useState<IFormat | null>(card?.selected_format || null);
+  const [selectedFormat, setSelectedFormat] = useState<IFormat | null>(
+    card?.selected_format || null,
+  );
 
   useEffect(() => {
     if (card) {
@@ -50,5 +54,12 @@ export const useChannelData = ({
     }
   }, [card]);
 
-  return { card, isLoading, channel, setChannel, selectedFormat, setSelectedFormat };
+  return {
+    card,
+    isLoading,
+    channel,
+    setChannel,
+    selectedFormat,
+    setSelectedFormat,
+  };
 };

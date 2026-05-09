@@ -5,7 +5,7 @@ import { InfoTooltip, MyButton, Skeleton } from "@shared/ui";
 import {
   buildPathWithQuery,
   queryParamKeys,
-  QueryParamsUUID
+  QueryParamsUUID,
 } from "@shared/utils";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";

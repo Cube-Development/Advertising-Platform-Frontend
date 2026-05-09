@@ -5,7 +5,7 @@ import {
   QueryParams,
   QueryParamsUUID,
   buildPathWithQuery,
-  queryParamKeys
+  queryParamKeys,
 } from "@shared/utils";
 import Cookies from "js-cookie";
 import { useEffect } from "react";
@@ -23,11 +23,10 @@ export const useChannelParams = () => {
   useEffect(() => {
     if (params.save_project && !isValidUUID(params.save_project)) {
       const { save_project, ...otherParams } = params;
-      const path = channel_id ? generatePath(ENUM_PATHS.CHANNEL, { id: channel_id }) : window.location.pathname;
-      const newPath = buildPathWithQuery(
-        path,
-        otherParams,
-      );
+      const path = channel_id
+        ? generatePath(ENUM_PATHS.CHANNEL, { id: channel_id })
+        : window.location.pathname;
+      const newPath = buildPathWithQuery(path, otherParams);
       navigate(newPath, { replace: true });
     }
   }, [params.save_project, navigate, channel_id]);

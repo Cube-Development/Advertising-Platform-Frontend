@@ -13,7 +13,7 @@ import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";
 import {
   buildPathWithQuery,
   queryParamKeys,
-  QueryParamsUUID
+  QueryParamsUUID,
 } from "@shared/utils";
 import { FC, useState } from "react";
 import { Link } from "react-router-dom";

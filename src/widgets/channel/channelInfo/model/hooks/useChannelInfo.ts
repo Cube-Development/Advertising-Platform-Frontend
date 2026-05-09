@@ -2,7 +2,7 @@ import {
   getRecommendChannels,
   ICatalogChannel,
   IFormat,
-  useGetRecommedChannelsQuery
+  useGetRecommedChannelsQuery,
 } from "@entities/project";
 import { ENUM_ROLES, useFindLanguage } from "@entities/user";
 import { useAppSelector, useWindowWidth } from "@shared/hooks";
@@ -27,26 +27,33 @@ export const useChannelInfo = () => {
 
   const formFields = watch();
 
-  const { card, isLoading, channel, setChannel, selectedFormat, setSelectedFormat } = useChannelData({
+  const {
+    card,
+    isLoading,
+    channel,
+    setChannel,
+    selectedFormat,
+    setSelectedFormat,
+  } = useChannelData({
     channel_id,
     language: language?.id,
     userId,
     guestId,
     projectId: projectId || null,
-    role
+    role,
   });
 
   const { data: recomendCards, isFetching: isRecommendCardsLoading } =
     useGetRecommedChannelsQuery(
       { ...formFields },
-      { skip: role === ENUM_ROLES.BLOGGER }
+      { skip: role === ENUM_ROLES.BLOGGER },
     );
 
   const {
     currentCart,
     handleChangeCards,
     isCartActionLoading,
-    isFetchingCart
+    isFetchingCart,
   } = useChannelCartManager({
     isAuth,
     role,
@@ -57,7 +64,7 @@ export const useChannelInfo = () => {
     setChannel,
     selectedFormat,
     recomendCards,
-    formFields
+    formFields,
   });
 
   const handleChangeCartCards = () => {
@@ -86,7 +93,6 @@ export const useChannelInfo = () => {
       );
     }
   };
-
 
   const handleOnChangePage = () => {};
 

@@ -36,31 +36,41 @@ describe("CheckDate", () => {
       // Диапазон: 06.05 – 08.05, время 08:00–21:10
       // Сейчас: 07.05 15:00 — попадает
       setTashkentNow("2026-05-07T15:00:00");
-      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10")).toBe(true);
+      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10")).toBe(
+        true,
+      );
     });
 
     it("true — текущая дата = date_from, время в пределах окна", () => {
       // Сейчас: 06.05 10:00 — первый день, внутри time_from–time_to
       setTashkentNow("2026-05-06T10:00:00");
-      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10")).toBe(true);
+      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10")).toBe(
+        true,
+      );
     });
 
     it("true — текущая дата = date_to, время в пределах окна", () => {
       // Сейчас: 08.05 20:00 — последний день, внутри time
       setTashkentNow("2026-05-08T20:00:00");
-      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10")).toBe(true);
+      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10")).toBe(
+        true,
+      );
     });
 
     it("false — текущая дата до date_from", () => {
       // Сейчас: 05.05 15:00 — до начала диапазона
       setTashkentNow("2026-05-05T15:00:00");
-      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10")).toBe(false);
+      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10")).toBe(
+        false,
+      );
     });
 
     it("false — текущая дата после date_to", () => {
       // Сейчас: 09.05 10:00 — после диапазона
       setTashkentNow("2026-05-09T10:00:00");
-      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10")).toBe(false);
+      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10")).toBe(
+        false,
+      );
     });
   });
 
@@ -70,22 +80,30 @@ describe("CheckDate", () => {
     it("false — в первый день, до time_from", () => {
       // Сейчас: 06.05 07:59 — раньше чем 08:00
       setTashkentNow("2026-05-06T07:59:00");
-      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10")).toBe(false);
+      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10")).toBe(
+        false,
+      );
     });
 
     it("true — ровно на time_from в первый день", () => {
       setTashkentNow("2026-05-06T08:00:00");
-      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10")).toBe(true);
+      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10")).toBe(
+        true,
+      );
     });
 
     it("true — ровно на time_to в последний день (без offset)", () => {
       setTashkentNow("2026-05-08T21:10:00");
-      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10")).toBe(true);
+      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10")).toBe(
+        true,
+      );
     });
 
     it("false — после time_to в последний день (без offset)", () => {
       setTashkentNow("2026-05-08T21:11:00");
-      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10")).toBe(false);
+      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10")).toBe(
+        false,
+      );
     });
   });
 
@@ -96,24 +114,34 @@ describe("CheckDate", () => {
       // time_to = 21:10, offset = 30 → граница = 21:40
       // Сейчас: 08.05 21:30 — попадает
       setTashkentNow("2026-05-08T21:30:00");
-      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10", 30)).toBe(true);
+      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10", 30)).toBe(
+        true,
+      );
     });
 
     it("true — ровно на границе offset", () => {
       setTashkentNow("2026-05-08T21:40:00");
-      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10", 30)).toBe(true);
+      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10", 30)).toBe(
+        true,
+      );
     });
 
     it("false — после offset", () => {
       setTashkentNow("2026-05-08T21:41:00");
-      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10", 30)).toBe(false);
+      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10", 30)).toBe(
+        false,
+      );
     });
 
     it("offset = 0 по умолчанию — граница ровно на time_to", () => {
       setTashkentNow("2026-05-08T21:10:00");
-      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10")).toBe(true);
+      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10")).toBe(
+        true,
+      );
       setTashkentNow("2026-05-08T21:11:00");
-      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10")).toBe(false);
+      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10")).toBe(
+        false,
+      );
     });
   });
 
@@ -122,17 +150,23 @@ describe("CheckDate", () => {
   describe("Один день (date_from === date_to)", () => {
     it("true — внутри временного окна", () => {
       setTashkentNow("2026-05-06T12:00:00");
-      expect(CheckDate("06.05.2026", "06.05.2026", "08:00", "21:10")).toBe(true);
+      expect(CheckDate("06.05.2026", "06.05.2026", "08:00", "21:10")).toBe(
+        true,
+      );
     });
 
     it("false — до time_from", () => {
       setTashkentNow("2026-05-06T07:00:00");
-      expect(CheckDate("06.05.2026", "06.05.2026", "08:00", "21:10")).toBe(false);
+      expect(CheckDate("06.05.2026", "06.05.2026", "08:00", "21:10")).toBe(
+        false,
+      );
     });
 
     it("false — после time_to", () => {
       setTashkentNow("2026-05-06T22:00:00");
-      expect(CheckDate("06.05.2026", "06.05.2026", "08:00", "21:10")).toBe(false);
+      expect(CheckDate("06.05.2026", "06.05.2026", "08:00", "21:10")).toBe(
+        false,
+      );
     });
   });
 
@@ -160,7 +194,9 @@ describe("CheckDate", () => {
   describe("Невалидный ввод", () => {
     it("false — date_from некорректный формат", () => {
       setTashkentNow("2026-05-07T12:00:00");
-      expect(CheckDate("2026-05-06", "08.05.2026", "08:00", "21:10")).toBe(false);
+      expect(CheckDate("2026-05-06", "08.05.2026", "08:00", "21:10")).toBe(
+        false,
+      );
     });
 
     it("false — date_to некорректный формат", () => {
@@ -179,7 +215,9 @@ describe("CheckDate", () => {
   describe("Кейс из бага: 06.05–08.05, время 08:00–21:10, сейчас 06.05 20:07", () => {
     it("true — кнопка SendLink должна быть активна", () => {
       setTashkentNow("2026-05-06T20:07:00");
-      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10", 30)).toBe(true);
+      expect(CheckDate("06.05.2026", "08.05.2026", "08:00", "21:10", 30)).toBe(
+        true,
+      );
     });
   });
 });

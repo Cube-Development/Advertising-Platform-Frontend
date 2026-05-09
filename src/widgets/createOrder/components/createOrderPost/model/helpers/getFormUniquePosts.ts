@@ -5,5 +5,6 @@ export function getFormUniquePosts(cards: IPostChannel[]) {
     platform: card.platform,
     post_type: card.post_type,
     order_id: card.id,
+    post_group_id: card.id,
   }));
 }

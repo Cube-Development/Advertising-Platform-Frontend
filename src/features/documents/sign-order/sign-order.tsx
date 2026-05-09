@@ -5,8 +5,7 @@ import { Loader2, PenTool } from "lucide-react";
 import { FC, MouseEvent } from "react";
 import { useTranslation } from "react-i18next";
 
-interface ISignOrderProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface ISignOrderProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   orderId: string;
   docType: ENUM_INVOICE_TYPE;
   onSigned: () => void;
