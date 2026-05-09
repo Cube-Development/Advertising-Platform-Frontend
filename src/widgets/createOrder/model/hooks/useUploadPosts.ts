@@ -1,10 +1,10 @@
 import {
+  getMultipostGroupKey,
   ICreatePost,
   ICreatePostForm,
   useCreatePostMutation,
   useCreateUniquePostMutation,
 } from "@entities/project";
-import { getMultipostGroupKey } from "@entities/project";
 import { useToast } from "@shared/ui";
 import { useTranslation } from "react-i18next";
 

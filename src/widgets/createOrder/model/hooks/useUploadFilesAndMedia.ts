@@ -1,6 +1,7 @@
 import {
   ContentType,
   getContentType,
+  getMultipostGroupKey,
   ICreatePost,
   ICreatePostForm,
   useGetUploadLinkMutation,
@@ -72,11 +73,32 @@ export const useUploadFilesAndMedia = () => {
   };
 
   const uploadFilesAndMedia = async (formData: ICreatePostForm) => {
-    const uploads = (
-      formData?.isMultiPost && formData?.multiposts
-        ? formData.multiposts
-        : formData.posts
-    )!.map(async (post) => {
+    if (formData?.isMultiPost && formData?.multiposts?.length) {
+      const byGroup = new Map<string, ICreatePost[]>();
+      for (const post of formData.multiposts) {
+        const key = getMultipostGroupKey(post);
+        if (!key) continue;
+        if (!byGroup.has(key)) byGroup.set(key, []);
+        byGroup.get(key)!.push(post);
+      }
+
+      await Promise.all(
+        [...byGroup.values()].map(async (groupPosts) => {
+          const leader = groupPosts[0];
+          leader.content = [];
+          await handlePreparePost(leader);
+          await handleUploadFiles(leader);
+          await handleUploadMedia(leader);
+          for (const p of groupPosts.slice(1)) {
+            p.content = leader.content;
+            p.comment = leader.comment;
+          }
+        }),
+      );
+      return;
+    }
+
+    const uploads = formData.posts!.map(async (post) => {
       await handlePreparePost(post);
       await handleUploadFiles(post);
       await handleUploadMedia(post);
