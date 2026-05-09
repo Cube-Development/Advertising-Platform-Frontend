@@ -1,4 +1,236 @@
 {
+  "main_advertiser": {
+    "cta": {
+      "title": "Launch ads <0>in 5 minutes</0> without overpaying",
+      "subtitle": "Save up to 50% of your budget",
+      "action": "Platform Catalog",
+      "features": [
+        "Algorithms for selecting the right target audience and advertising platforms",
+        "AI-powered generation of high-performing advertising posts",
+        "Protection guaranteed through secure transactions"
+      ],
+      "configurator": {
+        "title": "Launch ads in 30 sec",
+        "alertSuccess": "Ads launched successfully!",
+        "buttonText": "Launch Ads",
+        "trustLine": "Platform подбор ~ 30 sec · No commission"
+      },
+      "budgetSlider": {
+        "title": "Campaign Budget",
+        "currency": "UZS",
+        "axis": [
+          "100K",
+          "5M",
+          "10M",
+          "15M",
+          "20M"
+        ]
+      },
+      "forecast": {
+        "titleWithCategory": "Reach Forecast",
+        "titleDefault": "Average Reach",
+        "views": "views"
+      },
+      "search": {
+        "placeholderPrefix": "Search across ",
+        "placeholderSuffix": " categories…"
+      },
+      "categoryGrid": {
+        "channels": "channels",
+        "mln": "M",
+        "views": "views",
+        "notFound": "Nothing found for your query",
+        "title": "Business Category",
+        "found": "found"
+      },
+      "settings": {
+        "regionShorthand": "region",
+        "allRegions": "All Regions",
+        "languageShorthand": "lang",
+        "allLanguages": "All Languages",
+        "additionalParams": "Additional Parameters",
+        "collapse": "Collapse"
+      }
+    },
+    "choose_us": {
+      "title": "Why Choose Us",
+      "subtitle": "More reliable and profitable with us",
+      "switcher": {
+        "chaos": "Activate Blogix",
+        "system": "Blogix System"
+      },
+      "cards": [
+        {
+          "chaosLabel": "No guarantees",
+          "systemLabel": "Full guarantee"
+        },
+        {
+          "chaosLabel": "Risk at every step",
+          "systemLabel": "Complete security"
+        },
+        {
+          "chaosLabel": "Blind payments",
+          "systemLabel": "Transparent payments"
+        },
+        {
+          "chaosLabel": "Too many middlemen",
+          "systemLabel": "No middlemen"
+        },
+        {
+          "chaosLabel": "Slow launch",
+          "systemLabel": "Launch in 5 min"
+        },
+        {
+          "chaosLabel": "Hidden pricing",
+          "systemLabel": "Direct pricing"
+        },
+        {
+          "chaosLabel": "Fragmented tools",
+          "systemLabel": "All-in-one system"
+        }
+      ]
+    },
+    "tarif_pricing": {
+      "title": "Choose the Perfect Plan",
+      "subtitle": "Optimal solutions for businesses of any size",
+      "buttonText": "Launch Campaign",
+      "trustLine": "Pay for results · Unused budget is refunded",
+      "labels": {
+        "included": "Included",
+        "locked": "Available with a higher budget",
+        "lockedMobile": "Requires a larger budget"
+      },
+      "emptyStates": {
+        "locked": "Increase your budget to unlock features",
+        "unlocked": "All features unlocked!"
+      },
+      "budgetSlider": {
+        "title": "Campaign Budget",
+        "included": "Services included:",
+        "outOf": "of",
+        "locked": "Available with a higher budget:",
+        "axis": [
+          "1.5M",
+          "5M",
+          "10M",
+          "15M",
+          "20M"
+        ]
+      },
+      "features": [
+      {
+        "name": "Manual platform selection",
+        "sub": "Finding relevant channels for your goals"
+      },
+      {
+        "name": "Personalized promotion strategy",
+        "sub": "Custom advertising plan for your business"
+      },
+      {
+        "name": "High-converting ad post creation",
+        "sub": "Preparation of effective promotional creatives"
+      },
+      {
+        "name": "Publication notifications",
+        "sub": "Alerts about ad placements and publications"
+      },
+      {
+        "name": "Platform approval process",
+        "sub": "Confirmation of placements before launch"
+      },
+      {
+        "name": "Marketing consultations",
+        "sub": "Recommendations to improve campaign performance"
+      },
+      {
+        "name": "Detailed performance reports",
+        "sub": "Statistics and campaign results"
+      },
+      {
+        "name": "Campaign performance forecasts",
+        "sub": "Estimated reach and performance analytics"
+      },
+      {
+        "name": "Maximum audience reach",
+        "sub": "Focused targeting of your ideal audience"
+      }
+    ]
+    },
+    "work_with_us": {
+      "title": "Open for Partnership",
+      "subtitle": "Join the platform and start earning from your channel today",
+      "action": "Add Your Channel",
+      "channelList": {
+        "title": "Already working with us",
+        "buttonText": "Go to Catalog"
+      },
+      "platforms": {
+        "platform_names": {
+          "telegram": "Telegram",
+          "instagram": "Instagram",
+          "youtube": "YouTube"
+        },
+        "bloggers": "Bloggers",
+        "channels": "Channels"
+      },
+      "center": {
+        "title": "Blogix"
+      },
+      "options": [
+        {
+          "category": "Technology",
+          "name": "IT Digest",
+          "members": "125K"
+        },
+        {
+          "category": "Business",
+          "name": "Business Insider",
+          "members": "89K"
+        },
+        {
+          "category": "Marketing",
+          "name": "SMM Secrets",
+          "members": "210K"
+        },
+        {
+          "category": "Design",
+          "name": "Design & Architecture",
+          "members": "150K"
+        },
+        {
+          "category": "Education",
+          "name": "Courses & Webinars",
+          "members": "75K"
+        }
+      ]
+    },
+    "workflow": {
+      "title": "How It Works",
+      "subtitle": "5 simple steps to launch your ads",
+      "steps": [
+        {
+          "title": "Registration",
+          "description": "Create an account in 30 seconds"
+        },
+        {
+          "title": "Choose Platforms",
+          "description": "Select channels manually or with AI assistance"
+        },
+        {
+          "title": "Top Up Balance",
+          "description": "Convenient payment methods, protected funds"
+        },
+        {
+          "title": "Create a Post",
+          "description": "Upload your own or generate one with AI in seconds"
+        },
+        {
+          "title": "Launch & Monitor",
+          "description": "Receive real-time reports for every placement"
+        }
+      ]
+    }
+},
   "guides": {
     "more": "More",
     "registration": {

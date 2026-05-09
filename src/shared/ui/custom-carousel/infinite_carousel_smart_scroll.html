@@ -1,0 +1,235 @@
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+.wrap{padding:1.5rem 0}
+.controls{display:flex;flex-wrap:wrap;gap:10px;align-items:center;margin-bottom:1.25rem;padding:.75rem 1rem;background:var(--color-background-secondary);border-radius:var(--border-radius-lg);border:.5px solid var(--color-border-tertiary)}
+.controls label{font-size:13px;color:var(--color-text-secondary);display:flex;align-items:center;gap:6px}
+.controls input[type=range]{width:80px}
+.controls span{font-size:13px;font-weight:500;min-width:24px}
+.carousel-root{overflow:hidden;cursor:grab;position:relative;border-radius:var(--border-radius-lg);border:.5px solid var(--color-border-tertiary);padding:20px 0;background:var(--color-background-secondary)}
+.carousel-root.is-dragging{cursor:grabbing}
+.track{display:flex;will-change:transform}
+.c-item{flex-shrink:0;width:164px;height:110px;border-radius:var(--border-radius-md);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;border:.5px solid var(--color-border-tertiary);background:var(--color-background-primary);cursor:pointer;transition:border-color .15s,background .15s;-webkit-user-select:none;user-select:none}
+.c-item:hover{border-color:var(--color-border-secondary)}
+.c-item.active{border:2px solid var(--color-border-info);background:var(--color-background-info)}
+.c-item .ico{font-size:26px;pointer-events:none}
+.c-item .lbl{font-size:13px;font-weight:500;color:var(--color-text-primary);pointer-events:none}
+.c-item .sub{font-size:11px;color:var(--color-text-secondary);pointer-events:none}
+.c-item.active .lbl{color:var(--color-text-info)}
+.c-item.active .sub{color:var(--color-text-info)}
+.status{margin-top:.75rem;display:flex;gap:8px;align-items:center;flex-wrap:wrap}
+.badge{font-size:11px;padding:3px 8px;border-radius:var(--border-radius-md)}
+.badge.run{background:#EAF3DE;color:#3B6D11}
+.badge.paused{background:#FAEEDA;color:#854F0B}
+.badge.drag{background:#EEEDFE;color:#534AB7}
+.hint{font-size:12px;color:var(--color-text-secondary)}
+</style>
+
+<h2 class="sr-only">Бесконечная карусель — умный скролл к ближайшей копии карточки</h2>
+
+<div class="wrap">
+  <div class="controls">
+    <label>Speed <input type="range" id="spdS" min="10" max="200" value="60" step="1"> <span id="spdV">60</span> px/s</label>
+    <label>Gap <input type="range" id="gapS" min="4" max="40" value="12" step="1"> <span id="gapV">12</span> px</label>
+    <label>Copies <input type="range" id="copS" min="2" max="6" value="3" step="1"> <span id="copV">3</span></label>
+    <label><input type="checkbox" id="hovCb" checked> pause on hover</label>
+  </div>
+
+  <div class="carousel-root" id="root">
+    <div class="track" id="track"></div>
+  </div>
+
+  <div class="status">
+    <span id="badge" class="badge run">running</span>
+    <span class="hint" id="hint">click a card to select it</span>
+  </div>
+</div>
+
+<script>
+const ITEMS = [
+  {ico:'🎨',lbl:'Design',sub:'UI/UX'},
+  {ico:'⚡',lbl:'Speed',sub:'Performance'},
+  {ico:'🔒',lbl:'Secure',sub:'Auth'},
+  {ico:'📱',lbl:'Mobile',sub:'Responsive'},
+  {ico:'🌐',lbl:'Global',sub:'i18n'},
+  {ico:'🧩',lbl:'Modular',sub:'Components'},
+  {ico:'🚀',lbl:'Deploy',sub:'CI/CD'},
+  {ico:'📊',lbl:'Analytics',sub:'Metrics'},
+];
+
+const root = document.getElementById('root');
+const track = document.getElementById('track');
+const badge = document.getElementById('badge');
+const hint = document.getElementById('hint');
+
+let x = 0;
+let speed = 60;
+let gap = 12;
+let copies = 3;
+let activeIdx = null;
+let hovered = false;
+let dragging = false;
+let pauseHover = true;
+let lastT = null;
+let rafId;
+let inertiaId;
+let setW = 0;
+const ITEM_W = 164;
+let dragStart = {cx:0, xp:0};
+let lastDrag = {x:0, t:0};
+let vel = 0;
+let scrollAnimId = null;
+let didDrag = false;
+
+function buildTrack() {
+  track.innerHTML = '';
+  for (let i = 0; i < ITEMS.length * copies; i++) {
+    const ri = i % ITEMS.length;
+    const it = ITEMS[ri];
+    const el = document.createElement('div');
+    el.className = 'c-item' + (ri === activeIdx ? ' active' : '');
+    el.dataset.realIdx = ri;
+    el.style.marginRight = gap + 'px';
+    el.innerHTML = `<span class="ico">${it.ico}</span><span class="lbl">${it.lbl}</span><span class="sub">${it.sub}</span>`;
+    track.appendChild(el);
+  }
+  setW = (ITEM_W + gap) * ITEMS.length;
+}
+
+function refreshActiveClass() {
+  track.querySelectorAll('.c-item').forEach(el => {
+    el.classList.toggle('active', parseInt(el.dataset.realIdx) === activeIdx);
+  });
+}
+
+function normalizeX() {
+  if (!setW) return;
+  if (x < -setW) x += setW;
+  if (x > 0) x -= setW;
+}
+
+function applyTransform() {
+  track.style.transform = `translateX(${Math.round(x)}px)`;
+}
+
+function findNearestTargetX(realIdx) {
+  if (!setW) return 0;
+  const step = ITEM_W + gap;
+  const baseOffset = -(realIdx * step);
+  let best = baseOffset;
+  let bestDist = Math.abs(x - baseOffset);
+  for (let c = -copies; c <= copies; c++) {
+    const candidate = baseOffset - c * setW;
+    const dist = Math.abs(x - candidate);
+    if (dist < bestDist) {
+      bestDist = dist;
+      best = candidate;
+    }
+  }
+  return best;
+}
+
+function scrollToNearest(realIdx) {
+  if (scrollAnimId) { cancelAnimationFrame(scrollAnimId); scrollAnimId = null; }
+  const target = findNearestTargetX(realIdx);
+  const startX = x;
+  const startT = performance.now();
+  const dur = 420;
+  const ease = t => t < .5 ? 2*t*t : -1+(4-2*t)*t;
+  function step(now) {
+    const p = Math.min((now - startT) / dur, 1);
+    x = startX + (target - startX) * ease(p);
+    applyTransform();
+    if (p < 1) { scrollAnimId = requestAnimationFrame(step); }
+    else { scrollAnimId = null; normalizeX(); applyTransform(); }
+  }
+  scrollAnimId = requestAnimationFrame(step);
+}
+
+function updateBadge() {
+  const frozen = activeIdx !== null || (pauseHover && hovered) || dragging;
+  if (dragging) { badge.textContent = 'dragging'; badge.className = 'badge drag'; }
+  else if (frozen) { badge.textContent = 'paused'; badge.className = 'badge paused'; }
+  else { badge.textContent = 'running'; badge.className = 'badge run'; }
+}
+
+function loop(now) {
+  rafId = requestAnimationFrame(loop);
+  if (!lastT) { lastT = now; return; }
+  const dt = Math.min((now - lastT) / 1000, 0.05);
+  lastT = now;
+  const frozen = activeIdx !== null || (pauseHover && hovered) || dragging || scrollAnimId;
+  if (!frozen) { x -= speed * dt; normalizeX(); applyTransform(); }
+  updateBadge();
+}
+
+track.addEventListener('click', e => {
+  if (didDrag) return;
+  const el = e.target.closest('.c-item');
+  if (!el) return;
+  const ri = parseInt(el.dataset.realIdx);
+  if (ri === activeIdx) {
+    activeIdx = null;
+    hint.textContent = 'click a card to select it';
+  } else {
+    activeIdx = ri;
+    hint.textContent = `"${ITEMS[ri].lbl}" selected — click again to deselect`;
+    scrollToNearest(ri);
+  }
+  refreshActiveClass();
+});
+
+root.addEventListener('mouseenter', () => { if (pauseHover) hovered = true; });
+root.addEventListener('mouseleave', () => { hovered = false; });
+
+function onDragStart(cx) {
+  dragging = true; didDrag = false;
+  dragStart = {cx, xp: x};
+  lastDrag = {x: cx, t: performance.now()};
+  vel = 0;
+  if (inertiaId) cancelAnimationFrame(inertiaId);
+  if (scrollAnimId) { cancelAnimationFrame(scrollAnimId); scrollAnimId = null; }
+  root.classList.add('is-dragging');
+}
+function onDragMove(cx) {
+  if (!dragging) return;
+  const delta = cx - dragStart.cx;
+  if (Math.abs(delta) > 4) didDrag = true;
+  const now = performance.now();
+  const dt = now - lastDrag.t;
+  if (dt > 0) vel = (cx - lastDrag.x) / (dt / 1000);
+  lastDrag = {x: cx, t: now};
+  x = dragStart.xp + delta;
+}
+function onDragEnd() {
+  if (!dragging) return;
+  dragging = false;
+  root.classList.remove('is-dragging');
+  let v = vel;
+  function inertia() {
+    v *= 0.91; x += v / 60;
+    normalizeX(); applyTransform();
+    if (Math.abs(v) > 0.5) inertiaId = requestAnimationFrame(inertia);
+  }
+  inertiaId = requestAnimationFrame(inertia);
+}
+
+root.addEventListener('mousedown', e => onDragStart(e.clientX));
+window.addEventListener('mousemove', e => onDragMove(e.clientX));
+window.addEventListener('mouseup', onDragEnd);
+root.addEventListener('touchstart', e => onDragStart(e.touches[0].clientX), {passive:true});
+root.addEventListener('touchmove', e => onDragMove(e.touches[0].clientX), {passive:true});
+root.addEventListener('touchend', onDragEnd);
+root.addEventListener('wheel', e => {
+  if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
+    e.preventDefault(); x -= e.deltaX; normalizeX(); applyTransform();
+  }
+}, {passive:false});
+
+document.getElementById('spdS').addEventListener('input', function(){ speed = +this.value; document.getElementById('spdV').textContent = speed; });
+document.getElementById('gapS').addEventListener('input', function(){ gap = +this.value; document.getElementById('gapV').textContent = gap; buildTrack(); });
+document.getElementById('copS').addEventListener('input', function(){ copies = +this.value; document.getElementById('copV').textContent = copies; buildTrack(); });
+document.getElementById('hovCb').addEventListener('change', function(){ pauseHover = this.checked; if (!pauseHover) hovered = false; });
+
+buildTrack();
+rafId = requestAnimationFrame(loop);
+</script>
