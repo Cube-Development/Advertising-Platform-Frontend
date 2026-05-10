@@ -88,7 +88,8 @@ export const TimeList: FC<TimeListProps> = ({
 
     // Если дата сегодняшняя, проверяем время
     const currentTimeInMinutes = getCurrentTime();
-    const additionalMinutes = platform === platformTypesNum.telegram ? 3 * 60 : 0;
+    const additionalMinutes =
+      platform === platformTypesNum.telegram ? 3 * 60 : 0;
     const [, endTime] = timeSlot.split(" - ");
     const [endHours, endMinutes] = endTime.split(":").map(Number);
     const endTimeInMinutes = endHours * 60 + endMinutes;

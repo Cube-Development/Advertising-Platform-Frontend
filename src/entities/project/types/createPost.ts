@@ -71,6 +71,8 @@ export interface ICreatePost {
   text?: IFile[];
   content?: IFile[];
   order_id?: string;
+  /** В режиме уникальных постов: общий id группы каналов с одним и тем же контентом */
+  post_group_id?: string;
 }
 
 export interface IFile {

@@ -16,6 +16,7 @@ import {
 import { PostTemplates } from "@features/project";
 import { ICreatePostForm, IPostTemplate, ICreatePost } from "@entities/project";
 import { useGetTemplatePost } from "../../../model/hooks/useGetTemplatePost";
+import { getMultipostGroupKey } from "@entities/project";
 
 interface TemplatePostsDialogProps {
   setValue: UseFormSetValue<ICreatePostForm>;
@@ -42,27 +43,31 @@ export const TemplatePostsDialog = ({
   const updateForm = useCallback(
     (newPost: ICreatePost) => {
       if (formState.isMultiPost) {
-        // Для мультипостов
         const currentMultiposts = formState.multiposts || [];
-        const updatedMultiposts = [...currentMultiposts];
 
         if (formState.selectedMultiPostId) {
-          // Заменяем существующий пост
-          const index = updatedMultiposts.findIndex(
+          const sel = currentMultiposts.find(
             (post) => post.order_id === formState.selectedMultiPostId,
           );
-          if (index !== -1) {
-            updatedMultiposts[index] = {
-              ...newPost,
-              order_id: formState.selectedMultiPostId,
-            };
+          if (sel) {
+            const gk = getMultipostGroupKey(sel);
+            const updatedMultiposts = currentMultiposts.map((p) =>
+              getMultipostGroupKey(p) === gk
+                ? {
+                    ...p,
+                    ...newPost,
+                    order_id: p.order_id,
+                    post_group_id: p.post_group_id,
+                    platform: p.platform,
+                    post_type: p.post_type,
+                  }
+                : p,
+            );
+            setValue("multiposts", updatedMultiposts);
           }
         } else {
-          // Добавляем новый пост
-          updatedMultiposts.push(newPost);
+          setValue("multiposts", [...currentMultiposts, newPost]);
         }
-
-        setValue("multiposts", updatedMultiposts);
       } else {
         // Для обычных постов
         const currentPosts = formState.posts || [];

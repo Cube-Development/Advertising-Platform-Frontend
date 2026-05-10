@@ -119,7 +119,10 @@ export const useTemplateEditor = <T extends IEditorFile>({
 
         // 2. Убираем <br> внутри пустых блоков <p> и <div>.
         // Это критично для Mac/Safari, чтобы избежать "тройных" переносов.
-        cleanHtml = cleanHtml.replace(/<(p|div)[^>]*>\s*<br\s*\/?>\s*<\/\1>/gi, "<$1></$1>");
+        cleanHtml = cleanHtml.replace(
+          /<(p|div)[^>]*>\s*<br\s*\/?>\s*<\/\1>/gi,
+          "<$1></$1>",
+        );
 
         // 3. Конвертируем блочные элементы в переносы
         const transformed = cleanHtml

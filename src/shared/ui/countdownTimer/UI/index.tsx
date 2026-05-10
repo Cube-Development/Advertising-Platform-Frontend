@@ -8,7 +8,11 @@ interface CountdownTimerProps {
   offsetMinutes?: number;
 }
 
-export const CountdownTimer: FC<CountdownTimerProps> = ({ date_to, time, offsetMinutes = 0 }) => {
+export const CountdownTimer: FC<CountdownTimerProps> = ({
+  date_to,
+  time,
+  offsetMinutes = 0,
+}) => {
   const { t } = useTranslation();
 
   // Парсим дату и время из строк
@@ -19,7 +23,14 @@ export const CountdownTimer: FC<CountdownTimerProps> = ({ date_to, time, offsetM
   const hour: number = parseInt(time.split(":")[0]);
   const minute: number = parseInt(time.split(":")[1]);
 
-  const finishTime: Date = new Date(year, month, day, hour, minute + offsetMinutes, 0);
+  const finishTime: Date = new Date(
+    year,
+    month,
+    day,
+    hour,
+    minute + offsetMinutes,
+    0,
+  );
 
   // Состояния для отображения
   const [[diffDays, diffH, diffM, diffS], setDiff] = useState<number[]>([
@@ -30,7 +41,7 @@ export const CountdownTimer: FC<CountdownTimerProps> = ({ date_to, time, offsetM
   useEffect(() => {
     const updateDiff = () => {
       const now = new Date();
-      
+
       const diff = (finishTime.getTime() - now.getTime()) / 1000;
 
       if (diff <= 0) {

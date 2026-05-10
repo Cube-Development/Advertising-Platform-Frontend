@@ -5,7 +5,7 @@ export const CheckDate = (
   date_to: string,
   time_from?: string,
   time_to?: string,
-  offsetMinutes: number = 0
+  offsetMinutes: number = 0,
 ): boolean => {
   const parseParts = (d: string) => {
     const p = d.split(".");
@@ -22,7 +22,9 @@ export const CheckDate = (
   if (!from || !to) return false;
 
   // Получаем текущее время в Ташкенте и создаем Date с этими же локальными компонентами
-  const nowStr = new Date().toLocaleString("en-US", { timeZone: "Asia/Tashkent" });
+  const nowStr = new Date().toLocaleString("en-US", {
+    timeZone: "Asia/Tashkent",
+  });
   const tashkentNow = new Date(nowStr);
 
   let startHour = 0;
@@ -41,10 +43,27 @@ export const CheckDate = (
     endMinute = parseInt(m, 10);
   }
 
-  const startDate = new Date(from.year, from.month, from.day, startHour, startMinute, 0);
-  const endDate = new Date(to.year, to.month, to.day, endHour, endMinute + offsetMinutes, 0);
+  const startDate = new Date(
+    from.year,
+    from.month,
+    from.day,
+    startHour,
+    startMinute,
+    0,
+  );
+  const endDate = new Date(
+    to.year,
+    to.month,
+    to.day,
+    endHour,
+    endMinute + offsetMinutes,
+    0,
+  );
 
-  return tashkentNow.getTime() >= startDate.getTime() && tashkentNow.getTime() <= endDate.getTime();
+  return (
+    tashkentNow.getTime() >= startDate.getTime() &&
+    tashkentNow.getTime() <= endDate.getTime()
+  );
 };
 
 export const getDateChat = (date: string, time: string): string => {

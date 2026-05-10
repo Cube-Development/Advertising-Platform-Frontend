@@ -8,6 +8,36 @@ import {
 import { useEffect, useMemo, useState } from "react";
 import { downloadAllFiles } from "../helpers";
 
+const assignMultipostGroupsFromBackend = (
+  posts: IManagerOrderPost[],
+  multiPosts: ICreatePost[],
+): ICreatePost[] => {
+  const groupIdByBackendPost = new Map<string, string>();
+
+  return multiPosts.map((formPost) => {
+    const backPost = posts.find(
+      (post) =>
+        post.match_type === MatchTypesNum.unique &&
+        !!post.orders.find((order) => order.order_id === formPost.order_id),
+    );
+
+    if (backPost && backPost.orders.length > 1) {
+      if (!groupIdByBackendPost.has(backPost.id)) {
+        groupIdByBackendPost.set(backPost.id, crypto.randomUUID());
+      }
+      return {
+        ...formPost,
+        post_group_id: groupIdByBackendPost.get(backPost.id),
+      };
+    }
+
+    return {
+      ...formPost,
+      post_group_id: formPost.post_group_id ?? formPost.order_id,
+    };
+  });
+};
+
 interface Props {
   form: ICreatePostForm;
   posts: IManagerOrderPost[];
@@ -101,7 +131,9 @@ export const useGetUniquePosts = ({ form, posts, skip }: Props) => {
           );
 
           setIsLoading(false);
-          setProcessedPosts(multiPostsWithFiles);
+          setProcessedPosts(
+            assignMultipostGroupsFromBackend(posts, multiPostsWithFiles),
+          );
         };
 
         process();

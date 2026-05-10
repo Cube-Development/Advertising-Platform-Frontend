@@ -1,4 +1,7 @@
-import { authBaseQuery, authBaseQuery2 } from "@entities/organization/api/authBaseQuery";
+import {
+  authBaseQuery,
+  authBaseQuery2,
+} from "@entities/organization/api/authBaseQuery";
 import { createApi } from "@reduxjs/toolkit/query/react";
 import { DIGITAL_DOCUMENTS } from "./tags";
 

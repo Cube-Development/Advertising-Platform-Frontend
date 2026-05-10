@@ -56,9 +56,14 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
   );
 
   const onSubmit: SubmitHandler<ICreatePostForm> = async (formData) => {
+    const postsOk =
+      formData?.isMultiPost && formData?.multiposts?.length
+        ? true
+        : !!formData?.posts?.length;
+
     if (
       projectId &&
-      formData?.posts?.length &&
+      postsOk &&
       formData?.datetime?.orders?.length &&
       !isOrdersLoading &&
       !isPostsLoading &&
@@ -71,9 +76,14 @@ export const CreateOrderBlock: FC<CreateOrderBlockProps> = () => {
   };
 
   const onSave: SubmitHandler<ICreatePostForm> = async (formData) => {
+    const postsOk =
+      formData?.isMultiPost && formData?.multiposts?.length
+        ? true
+        : !!formData?.posts?.length;
+
     if (
       projectId &&
-      formData?.posts?.length &&
+      postsOk &&
       formData?.datetime?.orders?.length &&
       !isOrdersLoading &&
       !isPostsLoading &&

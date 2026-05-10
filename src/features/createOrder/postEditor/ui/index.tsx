@@ -7,6 +7,7 @@ import {
   IFile,
 } from "@entities/project";
 import { PostEditor } from "@shared/ui";
+import { applyMultipostUpdate } from "@entities/project";
 
 interface EditorProps {
   setValue: UseFormSetValue<ICreatePostForm>;
@@ -75,15 +76,28 @@ export const Editor: FC<EditorProps> = ({
 
   const handleUpdate = useCallback(
     (updatedFiles: IFile[]) => {
-      if (currentPost) {
-        const updatedPost = {
-          ...(currentPost as ICreatePost),
-          text: updatedFiles,
-        };
-        setValue(type, [...postsWithoutCurrent, updatedPost]);
+      if (!currentPost) return;
+      if (type === CreatePostFormData.multiposts && currentPost.order_id) {
+        setValue(
+          type,
+          applyMultipostUpdate(
+            formState.multiposts || [],
+            currentPost.order_id,
+            (leader) => ({
+              ...leader,
+              text: updatedFiles,
+            }),
+          ),
+        );
+        return;
       }
+      const updatedPost = {
+        ...(currentPost as ICreatePost),
+        text: updatedFiles,
+      };
+      setValue(type, [...postsWithoutCurrent, updatedPost]);
     },
-    [setValue, type, currentPost, postsWithoutCurrent],
+    [setValue, type, currentPost, postsWithoutCurrent, formState.multiposts],
   );
 
   return (

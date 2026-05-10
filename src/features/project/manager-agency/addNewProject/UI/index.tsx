@@ -24,7 +24,11 @@ export const AddAgencyNewProject: FC<AddAgencyNewProjectProps> = () => {
       .unwrap()
       .then((data) => {
         if (data?.project_id) {
-          navigate(buildPathWithQuery(ENUM_PATHS.CATALOG, { save_project: data.project_id }));
+          navigate(
+            buildPathWithQuery(ENUM_PATHS.CATALOG, {
+              save_project: data.project_id,
+            }),
+          );
         } else {
           navigate(ENUM_PATHS.CATALOG);
         }

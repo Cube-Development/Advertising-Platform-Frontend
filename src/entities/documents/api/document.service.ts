@@ -92,13 +92,19 @@ export const documentAPI = authEcpApi.injectEndpoints({
 
 export const documentAPI2 = authEcpApi2.injectEndpoints({
   endpoints: (build) => ({
-    getDocumentBase64EDO: build.mutation<{ data: string }, { documentId: string }>({
+    getDocumentBase64EDO: build.mutation<
+      { data: string },
+      { documentId: string }
+    >({
       query: ({ documentId }) => ({
         url: `/v1/documents/${documentId}/documentBase64`,
         method: `GET`,
       }),
     }),
-    createSignEDO: build.mutation<any, { documentId: string; signature: string }>({
+    createSignEDO: build.mutation<
+      any,
+      { documentId: string; signature: string }
+    >({
       query: ({ documentId, signature }) => ({
         url: `/v1/documents/${documentId}/sign`,
         method: "POST",
@@ -115,7 +121,5 @@ export const {
   useGetSignInfoEDOMutation,
 } = documentAPI;
 
-export const {
-  useGetDocumentBase64EDOMutation,
-  useCreateSignEDOMutation,
-} = documentAPI2;
+export const { useGetDocumentBase64EDOMutation, useCreateSignEDOMutation } =
+  documentAPI2;
