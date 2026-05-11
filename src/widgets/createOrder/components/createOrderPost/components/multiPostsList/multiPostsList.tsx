@@ -128,10 +128,14 @@ export const MultiPostsList: FC<MultiPostsListProps> = ({
               <li
                 onClick={() => handleChangePost(post?.id)}
                 key={post.id}
-                className={clsx(styles.post, {
-                  [styles.active]: selectedMultiPostId === post?.id,
-                  [styles.filled]: filled,
-                })}
+                className={clsx(
+                  styles.post,
+                  {
+                    [styles.active]: selectedMultiPostId === post?.id,
+                    [styles.filled]: filled,
+                  },
+                  "truncate",
+                )}
                 ref={selectedMultiPostId === post?.id ? activePostRef : null}
               >
                 <div className={styles.post__inner}>
