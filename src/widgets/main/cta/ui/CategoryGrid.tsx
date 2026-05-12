@@ -39,12 +39,17 @@ const Card = memo(({ cat, isActive, onSelect }: CardProps) => {
   return (
     <motion.button
       onClick={handleClick}
-      className={`rounded-2xl p-3 text-left outline-none min-w-0 relative will-change-transform transition-shadow duration-200 [box-shadow:var(--card-shadow)] hover:[box-shadow:var(--card-shadow-hover)] w-[calc((var(--cw)-12px)/1.4)] sm:w-[calc((var(--cw)-16px)/2.2)] lg:w-[calc((var(--cw)-24px)/2.5)] ${
+      className={`rounded-2xl w-full p-3 text-left outline-none min-w-0 relative will-change-transform transition-shadow duration-200 [box-shadow:var(--card-shadow)] hover:[box-shadow:var(--card-shadow-hover)] ${
         isActive
           ? "bg-gradient-to-br from-[var(--Personal-colors-main)] to-[var(--Personal-colors-main2)] border-transparent z-10"
           : "bg-[#F7FAFC] border border-[#0F2A4D]/[0.06] z-[1]"
       }`}
-      style={{ '--card-shadow': cardShadow, '--card-shadow-hover': cardShadowHover } as React.CSSProperties}
+      style={
+        {
+          "--card-shadow": cardShadow,
+          "--card-shadow-hover": cardShadowHover,
+        } as React.CSSProperties
+      }
       animate={{ scale: 1, y: 0 }}
       transition={{ type: "spring", stiffness: 400, damping: 30 }}
       whileHover={{ scale: 1.02, y: -3, zIndex: 10 }}
@@ -90,7 +95,8 @@ const Card = memo(({ cat, isActive, onSelect }: CardProps) => {
             />
           }
         >
-          <span className="tabular-nums">{cat.channels}</span> {t("main_advertiser.cta.categoryGrid.channels")}
+          <span className="tabular-nums">{cat.channels}</span>{" "}
+          {t("main_advertiser.cta.categoryGrid.channels")}
         </Stat>
 
         <Stat
@@ -99,7 +105,8 @@ const Card = memo(({ cat, isActive, onSelect }: CardProps) => {
             <Eye size={13} className={isActive ? "opacity-85" : "opacity-50"} />
           }
         >
-          <span className="tabular-nums">{cat.avgViewsMln.toFixed(1)}</span> {t("main_advertiser.cta.categoryGrid.mln")}
+          <span className="tabular-nums">{cat.avgViewsMln.toFixed(1)}</span>{" "}
+          {t("main_advertiser.cta.categoryGrid.mln")}{" "}
           {t("main_advertiser.cta.categoryGrid.views")}
         </Stat>
       </div>
@@ -180,10 +187,9 @@ export const CategoryGrid = memo(function CategoryGrid({
         items={filteredCategories}
         renderItem={renderItem}
         getKey={getKey}
-        speed={40}
+        speed={2000}
         pauseOnHover
-        exposeCssWidth
-        className="py-[20px] -my-[20px] px-[4px] -mx-[4px] pb-[28px] -mb-[28px]"
+        slidesPerView={2.3}
       />
     </div>
   );

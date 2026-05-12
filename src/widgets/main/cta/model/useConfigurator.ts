@@ -9,11 +9,11 @@ import {
 import { USER_LANGUAGES_LIST } from '@shared/languages'
 import { MIN_BUDGET, MAX_BUDGET } from './constants'
 import { CATEGORY_ICON_MAPPER, DEFAULT_CATEGORY_ICON } from './categoryIcons'
-import type { CampaignFormData, ConfiguratorFormValues, Category } from './types'
+import type { ConfiguratorFormValues, Category } from './types'
 
 const DEFAULTS: ConfiguratorFormValues = {
   categoryIdx: null,
-  budget: MIN_BUDGET,
+  budget: 5_000_000,
   region: [],
   language: [],
 }
@@ -24,7 +24,7 @@ const getCategoryTint = (id: number) => {
   return tints[id % tints.length];
 }
 
-const calculateReach = (budget: number, catViews: number) => (budget * catViews) / 5000
+const calculateReach = (budget: number, catViews: number) => (budget * catViews) / 15_0000_000
 const calculateBonus = (budgetPercent: number, catViews: number) =>
   Math.round((catViews / 3) * 50 + budgetPercent / 4)
 
@@ -33,10 +33,7 @@ export function useConfigurator() {
     defaultValues: DEFAULTS,
   })
 
-  const categoryIdx = watch('categoryIdx')
-  const budget = watch('budget')
-  const region = watch('region')
-  const language = watch('language')
+  const formState = watch()
 
   const [accordionOpen, setAccordionOpen] = useState(false)
   const [search, setSearch] = useState('')
@@ -69,7 +66,7 @@ export function useConfigurator() {
   }, [categoriesData])
 
   // ── Расчёты ───────────────────────────────────────────────────────────────
-  const budgetPercent = ((budget - MIN_BUDGET) / (MAX_BUDGET - MIN_BUDGET)) * 100
+  const budgetPercent = ((formState.budget - MIN_BUDGET) / (MAX_BUDGET - MIN_BUDGET)) * 100
 
   const filteredCategories = useMemo(
     () =>
@@ -79,16 +76,16 @@ export function useConfigurator() {
     [search, categories]
   )
 
-  const activeCategory = categoryIdx !== null ? categories[categoryIdx] : null
+  const activeCategory = formState.categoryIdx !== null ? categories[formState.categoryIdx] : null
 
   const forecastMln = useMemo(() => {
-    if (activeCategory) return calculateReach(budget, activeCategory.avgViewsMln)
+    if (activeCategory) return calculateReach(formState.budget, activeCategory.avgViewsMln)
     if (categories.length === 0) return 0
     return (
-      categories.reduce((acc, cat) => acc + calculateReach(budget, cat.avgViewsMln), 0) /
+      categories.reduce((acc, cat) => acc + calculateReach(formState.budget, cat.avgViewsMln), 0) /
       categories.length
     )
-  }, [activeCategory, budget, categories])
+  }, [activeCategory, formState.budget, categories])
 
   const forecastBonus = useMemo(() => {
     if (activeCategory) return calculateBonus(budgetPercent, activeCategory.avgViewsMln)
@@ -99,31 +96,9 @@ export function useConfigurator() {
     return Math.round(avg)
   }, [activeCategory, budgetPercent, categories])
 
-  const isFormValid = categoryIdx !== null && budget > 0
-
-  const handleSubmit = useCallback(
-    (onSubmit: (data: CampaignFormData) => void) => {
-      const values = getValues()
-      const cat = values.categoryIdx !== null ? categories[values.categoryIdx] : null
-      if (!cat) return
-
-      onSubmit({
-        categoryId: cat.id,
-        budget: values.budget,
-        targeting: accordionOpen
-          ? { region: values.region, language: values.language }
-          : undefined,
-      })
-    },
-    [getValues, accordionOpen, categories]
-  )
-
   return {
     setValue,
-    categoryIdx,
-    budget,
-    region,
-    language,
+    formState,
     regionsData: regionsData?.contents ?? [],
     languagesData: languagesData?.contents ?? [],
     accordionOpen, setAccordionOpen,
@@ -132,7 +107,5 @@ export function useConfigurator() {
     activeCategory,
     forecastMln,
     forecastBonus,
-    isFormValid,
-    handleSubmit,
   }
 }

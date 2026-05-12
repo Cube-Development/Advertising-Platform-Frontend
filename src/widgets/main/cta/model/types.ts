@@ -24,16 +24,6 @@ export interface ConfiguratorState {
 export interface ConfiguratorFormValues {
   categoryIdx: number | null
   budget: number
-  region: string[]    // массив ID регионов
-  language: string[]  // массив ID языков
-}
-
-/** Данные формы для отправки на бэкенд */
-export interface CampaignFormData {
-  categoryId: string
-  budget: number
-  targeting?: {
-    region: string[]
-    language: string[]
-  }
+  region: number[]    // массив ID регионов
+  language: number[]  // массив ID языков
 }

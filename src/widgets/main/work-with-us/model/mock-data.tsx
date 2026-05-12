@@ -87,47 +87,86 @@ export const PLATFORM_CARDS: PlatformData[] = [
 // ─── Channel Notifications (for AnimatedList) ───────────────
 
 export interface ChannelNotification {
+  id: string;
   name: string;
   description: string;
   subscribers: number;
   icon: React.ReactNode;
 }
 
+
 export const CHANNELS: ChannelNotification[] = [
   {
-    name: "Tech Insights",
-    description: "Telegram",
-    subscribers: 145000,
+    id: "680055ef-cbe2-410b-8c38-6f507f6c8470",
+    name: "Kun.uz | Расмий канал",
+    description: "Kun.uz сайтининг расмий Telegram канали",
+    subscribers: 1166121,
     icon: <TelegramIcon />,
   },
   {
-    name: "Design Daily",
-    description: "Instagram",
-    subscribers: 89000,
+    id: "69411fde-f941-4402-bd44-0741cb7e4527",
+    name: "akobir_ashurkulovich",
+    description: "Блог визажиста: макияж, трансформации, обучение",
+    subscribers: 1872949,
     icon: <InstagramIcon />,
   },
   {
-    name: "Auto Reviews",
-    description: "YouTube",
-    subscribers: 320000,
+    id: "bb17237c-31c4-4f7b-aed8-e7aa826e7098",
+    name: "ASMR Dilia",
+    description: "ASMR контент",
+    subscribers: 28700,
     icon: <YouTubeIcon />,
   },
   {
-    name: "Crypto News",
-    description: "Telegram",
-    subscribers: 56000,
+    id: "88bdf9c9-7e35-4795-a3f0-4928e5086f1d",
+    name: "Qalampir.uz I расмий канал",
+    description: "Qalampir.uz сайтининг расмий канали",
+    subscribers: 272569,
     icon: <TelegramIcon />,
   },
   {
-    name: "Travel Vlog",
-    description: "YouTube",
-    subscribers: 1200000,
+    id: "b9aab34f-78ea-4324-b912-bd938168c42e",
+    name: "mashatilly",
+    description: "Travel блог, спорт, здоровый образ жизни",
+    subscribers: 1698444,
+    icon: <InstagramIcon />,
+  },
+  {
+    id: "cc86f138-fcfe-4246-ae5e-f708e8fdaaab",
+    name: "UzNews.uz",
+    description: "Новости Узбекистана. Официальный канал",
+    subscribers: 70071,
+    icon: <TelegramIcon />,
+  },
+  {
+    id: "4ebfe9d1-070d-4a45-a58e-e65c603e9d15",
+    name: "mitti.me",
+    description: "Вайнер, развлекательный контент",
+    subscribers: 4424249,
+    icon: <InstagramIcon />,
+  },
+  {
+    id: "9f82d12d-ef40-4a6f-94d8-724f87523cb8",
+    name: "Sirdaryolik insider",
+    description: "Региональная мультиплатформа контента",
+    subscribers: 8010,
     icon: <YouTubeIcon />,
   },
   {
-    name: "Food & Recipes",
-    description: "Instagram",
-    subscribers: 210000,
+    id: "ac60d22a-25ef-4ba7-ac23-672776e376d2",
+    name: "Repost.uz",
+    description: "Новости и редакционный контент",
+    subscribers: 92794,
+    icon: <TelegramIcon />,
+  },
+
+  {
+    id: "277c6963-cb93-4a77-a04c-254bdb49b946",
+    name: "elmurodhaqnazarov",
+    description: "Юмористические видео и скетчи",
+    subscribers: 3303003,
     icon: <InstagramIcon />,
   },
+
 ];
+

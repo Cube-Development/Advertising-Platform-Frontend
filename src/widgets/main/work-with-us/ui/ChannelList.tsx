@@ -20,43 +20,52 @@ const NotificationItem = ({
   description,
   subscribers,
   icon,
+  id,
 }: ChannelNotification) => {
   return (
-    <figure
-      className={cn(
-        "relative mx-auto min-h-fit w-full cursor-pointer overflow-hidden rounded-2xl p-3",
-        // animation styles
-        "transition-all duration-200 ease-in-out hover:scale-[103%]",
-        // light styles
-        "bg-white [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)]",
-      )}
+    <Link
+      to={ENUM_PATHS.CHANNEL.replace(":id", id)}
+      className="w-full"
+      target="_blank"
     >
-      <div className="flex flex-row items-center gap-3">
-        <div className="flex items-center justify-center size-10 rounded-2xl bg-gray-50/80">
-          <span className="text-lg flex items-center justify-center [&>svg]:w-6 [&>svg]:h-6">
-            {icon}
-          </span>
-        </div>
-        <div className="flex flex-col overflow-hidden">
-          <figcaption className="flex flex-row items-center text-base font-medium text-gray-900 whitespace-pre">
-            <span className="text-sm">{name}</span>
-          </figcaption>
-          <div className="flex items-center gap-1.5 text-xs font-normal text-gray-500">
-            <span>{description}</span>
-            <span>·</span>
-            <div className="flex items-center gap-1">
-              <UsersGroupRounded weight={"Outline"} className="w-3 h-3" />
-              <span>
-                {new Intl.NumberFormat("ru-RU", {
-                  notation: "compact",
-                  maximumFractionDigits: 1,
-                }).format(subscribers)}
-              </span>
+      <figure
+        className={cn(
+          "relative mx-auto min-h-fit w-full cursor-pointer overflow-hidden rounded-2xl p-3",
+          "transition-all duration-200 ease-in-out hover:scale-[103%]",
+          "bg-white [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)]",
+        )}
+      >
+        <div className="grid grid-cols-[40px_1fr] items-center gap-3">
+          <div className="flex items-center justify-center size-10 rounded-2xl bg-gray-50/80">
+            <span className="text-lg flex items-center justify-center [&>svg]:w-6 [&>svg]:h-6">
+              {icon}
+            </span>
+          </div>
+
+          <div className="grid gap-1 overflow-hidden">
+            <div className="text-sm font-medium text-gray-900 truncate">
+              {name}
+            </div>
+
+            <div className="grid grid-cols-[1fr_auto_auto] items-center gap-1.5 text-xs font-normal text-gray-500">
+              <span>{description}</span>
+
+              <span>·</span>
+
+              <div className="flex items-center gap-1 whitespace-nowrap">
+                <UsersGroupRounded weight={"Outline"} className="w-3 h-3" />
+                <span>
+                  {new Intl.NumberFormat("ru-RU", {
+                    notation: "compact",
+                    maximumFractionDigits: 1,
+                  }).format(subscribers)}
+                </span>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </figure>
+      </figure>
+    </Link>
   );
 };
 

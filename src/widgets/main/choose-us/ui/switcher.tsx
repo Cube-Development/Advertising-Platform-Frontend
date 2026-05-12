@@ -57,7 +57,7 @@ export function Switcher({ mode, onToggle }: SwitcherProps) {
       {/* Label */}
       <span
         className={cn(
-          "text-xs font-medium tracking-wide transition-all duration-500 font-[Inter,system-ui,sans-serif]",
+          "text-xs font-medium tracking-wide transition-all duration-500",
           isSystem ? "text-[var(--Personal-colors-main)]" : "text-gray-400",
         )}
       >

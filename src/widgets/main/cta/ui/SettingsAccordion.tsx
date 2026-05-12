@@ -4,7 +4,7 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@shared/ui";
-import { Settings } from "lucide-react";
+import { ChevronDown, Settings } from "lucide-react";
 import { memo } from "react";
 import { SelectOptions } from "@features/other";
 import type { IOption } from "@shared/types";
@@ -15,8 +15,8 @@ import { useTranslation } from "react-i18next";
 interface Props {
   open: boolean;
   onToggle: () => void;
-  region: string[];
-  language: string[];
+  region: number[];
+  language: number[];
   regionsOptions: IOption[];
   languagesOptions: IOption[];
   setValue: UseFormSetValue<ConfiguratorFormValues>;
@@ -35,8 +35,12 @@ export const SettingsAccordion = memo(function SettingsAccordion({
   const value = open ? "settings" : "";
 
   const summaryParts = [
-    region.length ? `${region.length} ${t("main_advertiser.cta.settings.regionShorthand")}` : t("main_advertiser.cta.settings.allRegions"),
-    language.length ? `${language.length} ${t("main_advertiser.cta.settings.languageShorthand")}` : t("main_advertiser.cta.settings.allLanguages"),
+    region.length
+      ? `${region.length} ${t("main_advertiser.cta.settings.regionShorthand")}`
+      : t("main_advertiser.cta.settings.allRegions"),
+    language.length
+      ? `${language.length} ${t("main_advertiser.cta.settings.languageShorthand")}`
+      : t("main_advertiser.cta.settings.allLanguages"),
   ];
 
   return (
@@ -67,9 +71,18 @@ export const SettingsAccordion = memo(function SettingsAccordion({
                 {t("main_advertiser.cta.settings.additionalParams")}
               </div>
               <div className="text-[11px] sm:text-[12px] font-medium mt-0.5 truncate text-[#0F2A4D]/45">
-                {open ? t("main_advertiser.cta.settings.collapse") : summaryParts.join(" · ")}
+                {open
+                  ? t("main_advertiser.cta.settings.collapse")
+                  : summaryParts.join(" · ")}
               </div>
             </div>
+          </div>
+          <div
+            className={`w-8 h-8 sm:w-9 sm:h-9 rounded-lg flex items-center justify-center shrink-0 text-[#1AB5C5] ${
+              open ? "bg-[#1AB5C5]/[0.13]" : "bg-[#1AB5C5]/[0.06]"
+            }`}
+          >
+            <ChevronDown size={16} className={`${open ? "rotate-180" : ""}`} />
           </div>
         </AccordionTrigger>
 

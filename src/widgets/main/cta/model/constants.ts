@@ -1,8 +1,3 @@
-import {
-  ShoppingBag, Utensils, Sparkles, Home, GraduationCap,
-  Wallet, MapPin, Code2, Plane, Car, Heart, Shirt, Activity, Baby,
-} from 'lucide-react'
-
 export const TEAL = '#1AB5C5'
 export const TEAL_DEEP = '#16C7D4'
 export const NAVY = '#0F2A4D'
