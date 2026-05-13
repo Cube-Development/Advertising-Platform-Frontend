@@ -153,14 +153,6 @@ export const CategoryGrid = memo(function CategoryGrid({
 
   const getKey = useCallback((cat: Category & { _idx: number }) => cat.id, []);
 
-  if (filteredCategories.length === 0) {
-    return (
-      <div className="rounded-2xl py-8 text-center text-[12px] font-medium bg-[#F7FAFC] text-[#0F2A4D]/50">
-        {t("main_advertiser.cta.categoryGrid.notFound")} «{search}»
-      </div>
-    );
-  }
-
   return (
     <div>
       {/* Header */}
@@ -182,15 +174,22 @@ export const CategoryGrid = memo(function CategoryGrid({
         </span>
       </div>
 
-      {/* Carousel */}
-      <CustomCarousel
-        items={filteredCategories}
-        renderItem={renderItem}
-        getKey={getKey}
-        speed={2000}
-        pauseOnHover
-        slidesPerView={2.3}
-      />
+      {filteredCategories.length === 0 ? (
+        <div className="h-40 rounded-2xl py-8 text-center text-[12px] font-medium bg-[#F7FAFC] text-[#0F2A4D]/50 flex items-center justify-center">
+          <p>
+            {t("main_advertiser.cta.categoryGrid.notFound")} «{search}»
+          </p>
+        </div>
+      ) : (
+        <CustomCarousel
+          items={filteredCategories}
+          renderItem={renderItem}
+          getKey={getKey}
+          speed={2000}
+          pauseOnHover
+          slidesPerView={2.3}
+        />
+      )}
     </div>
   );
 });

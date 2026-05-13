@@ -66,7 +66,7 @@ export function CustomCarousel<T>({
         modules={[Autoplay]}
         onSwiper={(s) => (swiperRef.current = s)}
         loop={true}
-        slidesPerView={slidesPerView}
+        slidesPerView={1.3}
         spaceBetween={gap}
         speed={speed}
         autoplay={{
@@ -77,6 +77,14 @@ export function CustomCarousel<T>({
         freeMode={{
           enabled: true,
           momentum: false,
+        }}
+        breakpoints={{
+          768: {
+            slidesPerView: slidesPerView,
+          },
+          576: {
+            slidesPerView: 1.7,
+          },
         }}
       >
         {items.map((item, i) => {

@@ -50,7 +50,9 @@ export const ConfiguratorForm = memo(function ConfiguratorForm() {
     try {
       if (isLoading) return;
       await createCartLite({
-        category_ids: [Number(formState.categoryIdx)],
+        category_ids: formState.categoryIdx
+          ? [Number(formState.categoryIdx)]
+          : [],
         budget: formState.budget,
         regions: formState.region,
         language_ids: formState.language,
