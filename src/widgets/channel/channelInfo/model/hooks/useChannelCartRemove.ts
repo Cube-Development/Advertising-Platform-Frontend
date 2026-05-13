@@ -15,7 +15,7 @@ export const useChannelCartRemove = (
   guestId: string,
   projectId: string | null,
   channel: IReadChannelData,
-  setChannel: (card: IReadChannelData) => void
+  setChannel: (card: IReadChannelData) => void,
 ) => {
   const { t } = useTranslation();
   const { toast } = useToast();
@@ -35,17 +35,21 @@ export const useChannelCartRemove = (
   const handleRemoveFromCart = async (
     removeReq: { channel_id: string; language: number },
     currentCard: ICatalogChannel,
-    newCard: IReadChannelData
+    newCard: IReadChannelData,
   ) => {
     try {
       if (!isAuth && guestId) {
-        await removeFromPublicCart({ ...removeReq, guest_id: guestId }).unwrap();
+        await removeFromPublicCart({
+          ...removeReq,
+          guest_id: guestId,
+        }).unwrap();
       } else if (isAuth && role === ENUM_ROLES.ADVERTISER && !projectId) {
         await removeFromCommonCart(removeReq).unwrap();
-      } else if (
-        isAuth && !!projectId
-      ) {
-        await removeFromManagerCart({ ...removeReq, project_id: projectId }).unwrap();
+      } else if (isAuth && !!projectId) {
+        await removeFromManagerCart({
+          ...removeReq,
+          project_id: projectId,
+        }).unwrap();
       }
 
       if (currentCard.id === channel.id) {

@@ -22,7 +22,6 @@ export interface IMessageSendAISocket {
 }
 
 export interface IMessageNewAISocket
-  extends IMessageSendAISocket,
-    ICatalogFilter {
+  extends IMessageSendAISocket, ICatalogFilter {
   questions: string[];
 }

@@ -168,7 +168,8 @@ export const CatalogBlock: FC = () => {
     {
       skip:
         !isAuth ||
-        ((role == ENUM_ROLES.MANAGER || role == ENUM_ROLES.AGENCY) && !!projectId),
+        ((role == ENUM_ROLES.MANAGER || role == ENUM_ROLES.AGENCY) &&
+          !!projectId),
       refetchOnMountOrArgChange: true,
     },
   );
@@ -241,8 +242,7 @@ export const CatalogBlock: FC = () => {
     isLoading: isCartLoading,
     isFetching: isCartFetching,
   } = useReadCommonCartShortQuery(undefined, {
-    skip:
-      !isAuth || !!projectId || role !== ENUM_ROLES.ADVERTISER,
+    skip: !isAuth || !!projectId || role !== ENUM_ROLES.ADVERTISER,
   });
   const {
     data: cartManager,

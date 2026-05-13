@@ -3,6 +3,7 @@ import styles from "./styles.module.scss";
 import { useTranslation } from "react-i18next";
 import { UseFormSetValue } from "react-hook-form";
 import { CreatePostFormData, ICreatePostForm } from "@entities/project";
+import { applyMultipostUpdate } from "@entities/project";
 
 interface PostCommentProps {
   placeholder: string;
@@ -72,8 +73,22 @@ export const PostComment: FC<PostCommentProps> = ({
           post_type: formState?.selectedPostType,
         };
     if (currentPost) {
-      currentPost.comment = newText;
-      setValue(type, [...posts, currentPost]);
+      if (type === CreatePostFormData.multiposts && currentPost.order_id) {
+        setValue(
+          type,
+          applyMultipostUpdate(
+            formState.multiposts || [],
+            currentPost.order_id,
+            (leader) => ({
+              ...leader,
+              comment: newText,
+            }),
+          ),
+        );
+      } else {
+        currentPost.comment = newText;
+        setValue(type, [...posts, currentPost]);
+      }
     }
   };
 

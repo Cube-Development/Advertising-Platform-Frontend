@@ -10,7 +10,11 @@ import { ENUM_PATHS } from "@shared/routing";
 import { useToast } from "@shared/ui";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
-import { buildPathWithQuery, queryParamKeys, QueryParamsUUID } from "@shared/utils";
+import {
+  buildPathWithQuery,
+  queryParamKeys,
+  QueryParamsUUID,
+} from "@shared/utils";
 import Cookies from "js-cookie";
 import { ENUM_COOKIES_TYPES } from "@shared/config";
 
@@ -36,7 +40,11 @@ export const useCreatePostManager = () => {
       }).unwrap();
 
       if (role === ENUM_ROLES.AGENCY) {
-        navigate(buildPathWithQuery(ENUM_PATHS.CREATE_ORDER, { project_id: projectId }));
+        navigate(
+          buildPathWithQuery(ENUM_PATHS.CREATE_ORDER, {
+            project_id: projectId,
+          }),
+        );
         return;
       }
 
@@ -47,11 +55,19 @@ export const useCreatePostManager = () => {
       let message = "";
 
       if (data.state === cartStatusFilter.success) {
-        navigate(buildPathWithQuery(ENUM_PATHS.CREATE_ORDER, { project_id: projectId }));
+        navigate(
+          buildPathWithQuery(ENUM_PATHS.CREATE_ORDER, {
+            project_id: projectId,
+          }),
+        );
         return;
       } else if (data.state === cartStatusFilter.channel_to_be_replaced) {
         Cookies.set(ENUM_COOKIES_TYPES.IS_CHANNEL_REPLACED, "true");
-        navigate(buildPathWithQuery(ENUM_PATHS.CREATE_ORDER, { project_id: projectId }));
+        navigate(
+          buildPathWithQuery(ENUM_PATHS.CREATE_ORDER, {
+            project_id: projectId,
+          }),
+        );
         return;
       } else if (data.state === cartStatusFilter.amount) {
         message = t("cart.check.amount");

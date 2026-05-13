@@ -41,10 +41,7 @@ export const CartList: FC<CartListProps> = ({
           <AddMore />
         </div>
       </div>
-      <ClearActiveProject
-        projectId={projectId}
-        i18nKey="cart.badge.text"
-      />
+      <ClearActiveProject projectId={projectId} i18nKey="cart.badge.text" />
       {channels?.length || isLoading ? (
         <div className={styles.cards}>
           {channels?.length && !isLoading ? (

@@ -15,7 +15,7 @@ export const useChannelCartAdd = (
   guestId: string,
   projectId: string | null,
   channel: IReadChannelData,
-  setChannel: (card: IReadChannelData) => void
+  setChannel: (card: IReadChannelData) => void,
 ) => {
   const { t } = useTranslation();
   const { toast } = useToast();
@@ -33,9 +33,14 @@ export const useChannelCartAdd = (
     isLoadingAddToManagerCart;
 
   const handleAddToCart = async (
-    addReq: { channel_id: string; format: number; match?: number; language: number },
+    addReq: {
+      channel_id: string;
+      format: number;
+      match?: number;
+      language: number;
+    },
     currentCard: ICatalogChannel,
-    newCard: IReadChannelData
+    newCard: IReadChannelData,
   ) => {
     try {
       if (!isAuth && guestId) {

@@ -33,7 +33,7 @@ import {
   buildPathWithQuery,
   QueryParams,
   queryParamKeys,
-  QueryParamsUUID
+  QueryParamsUUID,
 } from "@shared/utils";
 import { ENUM_PATHS } from "@shared/routing";
 
@@ -92,7 +92,10 @@ export const Cart: FC = () => {
     isFetching: isFetchingPublic,
   } = useReadPublicCartQuery(
     { guest_id: guestId, language: language?.id || USER_LANGUAGES_LIST[0].id },
-    { skip: isAuth || !guestId || !!projectId, refetchOnMountOrArgChange: true },
+    {
+      skip: isAuth || !guestId || !!projectId,
+      refetchOnMountOrArgChange: true,
+    },
   );
 
   useEffect(() => {

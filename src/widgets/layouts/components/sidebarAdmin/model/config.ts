@@ -2,6 +2,7 @@ import { ENUM_PATHS } from "@shared/routing";
 import { IMenuItem } from "@shared/types";
 import {
   Calculator,
+  CalendarClock,
   CircleDollarSign,
   FileText,
   LayoutDashboard,
@@ -52,6 +53,13 @@ export const ADMIN_MENU: IMenuItem[] = [
       title: "admin_panel.burger_menu.complaints",
       path: ENUM_PATHS.ADMIN_COMPLAINTS,
       icon: OctagonAlert,
+    },
+  },
+  {
+    item: {
+      title: "Перенос ордеров",
+      path: ENUM_PATHS.ADMIN_ORDER_TRANSFER,
+      icon: CalendarClock,
     },
   },
 ];

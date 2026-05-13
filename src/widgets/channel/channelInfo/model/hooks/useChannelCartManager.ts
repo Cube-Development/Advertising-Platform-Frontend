@@ -1,4 +1,10 @@
-import { ICatalogChannel, IFormat, IRecommendCards, catalogAPI, getRecommendChannels } from "@entities/project";
+import {
+  ICatalogChannel,
+  IFormat,
+  IRecommendCards,
+  catalogAPI,
+  getRecommendChannels,
+} from "@entities/project";
 import { ENUM_ROLES } from "@entities/user";
 import { IReadChannelData } from "@entities/channel";
 import { useAppDispatch } from "@shared/hooks";
@@ -39,7 +45,7 @@ export const useChannelCartManager = ({
     role,
     guestId,
     projectId,
-    language
+    language,
   );
 
   const { handleAddToCart, isAddingToCart } = useChannelCartAdd(
@@ -48,7 +54,7 @@ export const useChannelCartManager = ({
     guestId,
     projectId,
     channel,
-    setChannel
+    setChannel,
   );
 
   const { handleRemoveFromCart, isRemovingFromCart } = useChannelCartRemove(
@@ -57,7 +63,7 @@ export const useChannelCartManager = ({
     guestId,
     projectId,
     channel,
-    setChannel
+    setChannel,
   );
 
   const handleChangeCards = async (
@@ -72,23 +78,32 @@ export const useChannelCartManager = ({
       match: cartChannel.match,
       language: language || USER_LANGUAGES_LIST[0].id,
     };
-    
+
     const removeReq = {
       channel_id: cartChannel.id,
       language: language || USER_LANGUAGES_LIST[0].id,
     };
 
-    if (currentCard.selected_format?.format === cartChannel.selected_format?.format) {
+    if (
+      currentCard.selected_format?.format ===
+      cartChannel.selected_format?.format
+    ) {
       const newCard = { ...channel, selected_format: undefined };
-      await handleRemoveFromCart(removeReq, currentCard, newCard as IReadChannelData);
+      await handleRemoveFromCart(
+        removeReq,
+        currentCard,
+        newCard as IReadChannelData,
+      );
     } else {
       const newCard = { ...channel, selected_format: selectedFormat };
       await handleAddToCart(addReq, currentCard, newCard as IReadChannelData);
     }
 
     const newCards =
-      recomendCards?.channels?.filter((item: any) => item.id !== cartChannel.id) || [];
-      
+      recomendCards?.channels?.filter(
+        (item: any) => item.id !== cartChannel.id,
+      ) || [];
+
     dispatch(
       catalogAPI.util.updateQueryData(
         "getRecommedChannels",
@@ -96,7 +111,7 @@ export const useChannelCartManager = ({
         (draft: any) => {
           draft.channels = newCards;
         },
-      )
+      ),
     );
   };
 

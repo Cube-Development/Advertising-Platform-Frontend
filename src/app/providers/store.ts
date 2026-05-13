@@ -3,7 +3,14 @@ import { catalogFilterSlice } from "@entities/project";
 import { walletSlice } from "@entities/wallet";
 import { dropdownMenuSlice } from "@shared/slice";
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import { authApi, authEcpApi, authEcpApi2, baseApi, baseEpcApi, baseEpcApi2 } from "@shared/api";
+import {
+  authApi,
+  authEcpApi,
+  authEcpApi2,
+  baseApi,
+  baseEpcApi,
+  baseEpcApi2,
+} from "@shared/api";
 
 const rootReducer = combineReducers({
   [baseApi.reducerPath]: baseApi.reducer,

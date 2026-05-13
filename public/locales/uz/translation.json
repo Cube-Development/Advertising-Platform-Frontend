@@ -2452,6 +2452,12 @@
       "template": "Shablonni yuklash",
       "comment_to_post": "Texnik topshiriq uchun izoh: ",
       "see_post_mobile_btn": "Postni ko'rish",
+      "multi_posts_list": {
+        "hint": "Chapdan kanalni tanlang. Havola ikonkasi uni hozir tanlangan kanal bilan birlashtiradi (bir nechta kanal uchun bitta post). «Ajratish» — faqat shu kanal uchun alohida post.",
+        "link_title": "Hozir tanlangan kanal bilan bir xil post",
+        "unlink_title": "Faqat shu kanal uchun alohida post",
+        "group_badge": "×{{count}}"
+      },
       "post_types": {
         "telegram": {
           "default": "Universal format"

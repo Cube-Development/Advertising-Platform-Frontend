@@ -1,0 +1,1 @@
+export { AdminOrderTransferPage } from "./UI";

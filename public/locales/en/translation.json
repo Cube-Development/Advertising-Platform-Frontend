@@ -2451,6 +2451,12 @@
       "template": "Upload Template",
       "comment_to_post": "Comment on the Technical Assignment: ",
       "see_post_mobile_btn": "View Post",
+      "multi_posts_list": {
+        "hint": "Pick a channel on the left. The link icon merges it with the currently selected one (one post for several channels). Unlink gives this channel its own post.",
+        "link_title": "Same post as the currently selected channel",
+        "unlink_title": "Separate post for this channel",
+        "group_badge": "×{{count}}"
+      },
       "post_types": {
         "telegram": {
           "default": "Universal Format"

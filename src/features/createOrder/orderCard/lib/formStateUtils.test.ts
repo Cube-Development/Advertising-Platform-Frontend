@@ -21,10 +21,7 @@ const parseDate = (s: string): Date => {
   return new Date(`${year}/${month}/${day}`);
 };
 
-const makeCard = (
-  id: string,
-  platform: number = 1,
-): IPostChannel => ({
+const makeCard = (id: string, platform: number = 1): IPostChannel => ({
   id,
   avatar: "",
   name: "",
@@ -41,9 +38,7 @@ describe("buildDatetimeAfterTimeChange", () => {
     const card = makeCard("order-1");
     const datetime: ICreateDate = {
       project_id: "p1",
-      orders: [
-        { order_id: "order-1", date: "01.05.2026" },
-      ],
+      orders: [{ order_id: "order-1", date: "01.05.2026" }],
     };
 
     const result = buildDatetimeAfterTimeChange(
@@ -66,7 +61,12 @@ describe("buildDatetimeAfterTimeChange", () => {
       project_id: "p1",
       orders: [
         { order_id: "order-1", date: "01.05.2026" },
-        { order_id: "order-2", date: "01.05.2026", time_from: "10:00", time_to: "12:00" },
+        {
+          order_id: "order-2",
+          date: "01.05.2026",
+          time_from: "10:00",
+          time_to: "12:00",
+        },
       ],
     };
 
@@ -112,7 +112,12 @@ describe("buildDatetimeAfterDateChange", () => {
     const datetime: ICreateDate = {
       project_id: "p1",
       orders: [
-        { order_id: "order-1", date: "01.05.2026", time_from: "19:00", time_to: "21:00" },
+        {
+          order_id: "order-1",
+          date: "01.05.2026",
+          time_from: "19:00",
+          time_to: "21:00",
+        },
       ],
     };
 
@@ -147,7 +152,12 @@ describe("buildDatetimeAfterDateChange", () => {
     const freshState: ICreateDate = {
       project_id: "p1",
       orders: [
-        { order_id: "order-1", date: "01.05.2026", time_from: "19:00", time_to: "21:00" },
+        {
+          order_id: "order-1",
+          date: "01.05.2026",
+          time_from: "19:00",
+          time_to: "21:00",
+        },
       ],
     };
 
@@ -181,7 +191,12 @@ describe("buildDatetimeAfterDateChange", () => {
     const datetime: ICreateDate = {
       project_id: "p1",
       orders: [
-        { order_id: "order-1", date: "01.05.2026", time_from: "10:00", time_to: "12:00" },
+        {
+          order_id: "order-1",
+          date: "01.05.2026",
+          time_from: "10:00",
+          time_to: "12:00",
+        },
       ],
     };
 
@@ -207,10 +222,19 @@ describe("cleanExpiredDates", () => {
     today.setHours(0, 0, 0, 0);
 
     const orders = [
-      { order_id: "1", date: "30.04.2026", time_from: "10:00", time_to: "14:00" },
+      {
+        order_id: "1",
+        date: "30.04.2026",
+        time_from: "10:00",
+        time_to: "14:00",
+      },
     ];
 
-    const { cleanedOrders, hasChanges } = cleanExpiredDates(orders, today, parseDate);
+    const { cleanedOrders, hasChanges } = cleanExpiredDates(
+      orders,
+      today,
+      parseDate,
+    );
 
     expect(hasChanges).toBe(true);
     expect(cleanedOrders[0].date).toBeUndefined();
@@ -223,10 +247,19 @@ describe("cleanExpiredDates", () => {
     today.setHours(0, 0, 0, 0);
 
     const orders = [
-      { order_id: "1", date: "01.05.2026", time_from: "10:00", time_to: "14:00" },
+      {
+        order_id: "1",
+        date: "01.05.2026",
+        time_from: "10:00",
+        time_to: "14:00",
+      },
     ];
 
-    const { cleanedOrders, hasChanges } = cleanExpiredDates(orders, today, parseDate);
+    const { cleanedOrders, hasChanges } = cleanExpiredDates(
+      orders,
+      today,
+      parseDate,
+    );
 
     expect(hasChanges).toBe(false);
     expect(cleanedOrders[0].date).toBe("01.05.2026");
@@ -236,11 +269,13 @@ describe("cleanExpiredDates", () => {
     const today = new Date(2026, 4, 1);
     today.setHours(0, 0, 0, 0);
 
-    const orders = [
-      { order_id: "1", date: "05.05.2026" },
-    ];
+    const orders = [{ order_id: "1", date: "05.05.2026" }];
 
-    const { cleanedOrders, hasChanges } = cleanExpiredDates(orders, today, parseDate);
+    const { cleanedOrders, hasChanges } = cleanExpiredDates(
+      orders,
+      today,
+      parseDate,
+    );
 
     expect(hasChanges).toBe(false);
     expect(cleanedOrders[0].date).toBe("05.05.2026");
@@ -260,7 +295,11 @@ describe("cleanExpiredDates", () => {
       },
     ];
 
-    const { cleanedOrders, hasChanges } = cleanExpiredDates(orders, today, parseDate);
+    const { cleanedOrders, hasChanges } = cleanExpiredDates(
+      orders,
+      today,
+      parseDate,
+    );
 
     expect(hasChanges).toBe(true);
     expect(cleanedOrders[0].date_from).toBeUndefined();
@@ -273,12 +312,26 @@ describe("cleanExpiredDates", () => {
     today.setHours(0, 0, 0, 0);
 
     const orders = [
-      { order_id: "1", date: "30.04.2026", time_from: "10:00", time_to: "12:00" },
-      { order_id: "2", date: "02.05.2026", time_from: "14:00", time_to: "16:00" },
+      {
+        order_id: "1",
+        date: "30.04.2026",
+        time_from: "10:00",
+        time_to: "12:00",
+      },
+      {
+        order_id: "2",
+        date: "02.05.2026",
+        time_from: "14:00",
+        time_to: "16:00",
+      },
       { order_id: "3", date: "29.04.2026" },
     ];
 
-    const { cleanedOrders, hasChanges } = cleanExpiredDates(orders, today, parseDate);
+    const { cleanedOrders, hasChanges } = cleanExpiredDates(
+      orders,
+      today,
+      parseDate,
+    );
 
     expect(hasChanges).toBe(true);
 

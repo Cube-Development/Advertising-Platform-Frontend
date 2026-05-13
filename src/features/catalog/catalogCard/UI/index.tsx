@@ -27,7 +27,7 @@ import {
 import {
   buildPathWithQuery,
   queryParamKeys,
-  QueryParamsUUID
+  QueryParamsUUID,
 } from "@shared/utils";
 import { FC, useState } from "react";
 import { useTranslation } from "react-i18next";
@@ -135,10 +135,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
         <div className={styles.channel__top}>
           <div className={styles.column__logo}>
             <div className={styles.logo}>
-              <Link
-                to={channelPath}
-                className={styles.logo__img_wrapper}
-              >
+              <Link to={channelPath} className={styles.logo__img_wrapper}>
                 <img src={card?.avatar} alt="logo" />
               </Link>
               <div className={styles.rate}>
@@ -148,10 +145,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
           </div>
           <div className={styles.column__info}>
             <div className={styles.info}>
-              <Link
-                to={channelPath}
-                className={`${styles.title} truncate`}
-              >
+              <Link to={channelPath} className={`${styles.title} truncate`}>
                 {card?.name}
                 {/* языки */}
                 {card?.channel_languages && (
@@ -347,9 +341,7 @@ export const CatalogCard: FC<CatalogCardProps> = ({
                       <div>
                         <EyeIcon />
                       </div>
-                      <span>
-                        {selectedFormat?.views!.toLocaleString()}
-                      </span>
+                      <span>{selectedFormat?.views!.toLocaleString()}</span>
                     </div>
                   </div>
                   <AccordionContent className={styles.channel__content}>

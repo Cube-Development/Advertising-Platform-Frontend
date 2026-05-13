@@ -14,8 +14,7 @@ import {
 import { AlertTriangle, LogOut } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
-export interface LogoutEcpProps
-  extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
+export interface LogoutEcpProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {}
 
 export const LogoutEcp: React.FC<LogoutEcpProps> = ({ ...props }) => {
   const { t } = useTranslation();

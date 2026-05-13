@@ -1,5 +1,9 @@
 import { ENUM_PATHS } from "@shared/routing";
-import { QueryParamsUUID, buildPathWithQuery, queryParamKeys } from "@shared/utils";
+import {
+  QueryParamsUUID,
+  buildPathWithQuery,
+  queryParamKeys,
+} from "@shared/utils";
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
