@@ -34,6 +34,13 @@ interface ReadCartReq {
   project_id?: string;
 }
 
+export interface CreateCartLiteReq {
+  category_ids: number[];
+  budget: number;
+  regions: number[];
+  language_ids: number[];
+}
+
 // Авторизованные запросы
 
 export const authCartAPI = authApi.injectEndpoints({
@@ -141,6 +148,15 @@ export const publicCartAPI = baseApi.injectEndpoints({
       }),
       invalidatesTags: [CART_PUB_SHORT, RECOMMEND_CARDS, CART_PUB],
     }),
+
+    createCartLite: build.mutation<ICart, CreateCartLiteReq>({
+      query: (body) => ({
+        url: `/cart/channels/simple`,
+        method: `POST`,
+        body,
+      }),
+      invalidatesTags: [CART_SHORT, RECOMMEND_CARDS, CART],
+    }),
   }),
 });
 
@@ -149,6 +165,7 @@ export const {
   useAddToPublicCartMutation,
   useRemoveFromPublicCartMutation,
   useReadPublicCartShortQuery,
+  useCreateCartLiteMutation,
 } = publicCartAPI;
 
 // Манагерские запросы

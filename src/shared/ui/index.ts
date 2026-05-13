@@ -31,3 +31,5 @@ export * from "./seeCancelReason";
 export * from "./text-type";
 export * from "./post-editor";
 export * from "./project-badge";
+export * from "./CustomHeading";
+export * from "./custom-slider";

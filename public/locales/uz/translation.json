@@ -1,4 +1,236 @@
 {
+  "main_advertiser": {
+    "cta": {
+      "title": "Reklamani <0>5 daqiqada</0> ortiqcha to‘lovsiz ishga tushiring",
+      "subtitle": "Budjetni 50% gacha tejang",
+      "action": "Platformalar katalogi",
+      "features": [
+        "Maqsadli auditoriya va reklama platformalarini tanlash algoritmlari",
+        "Sun’iy intellekt asosida samarali reklama postlarini yaratish",
+        "Xavfsiz bitim orqali himoya kafolati"
+      ],
+      "configurator": { 
+        "title": "Reklamani 30 soniyada ishga tushiring",
+        "alertSuccess": "Reklama ishga tushirildi!",
+        "buttonText": "Reklamani ishga tushirish",
+        "trustLine": "Platformalarni tanlash ~ 30 soniya · Komissiyasiz"
+      },
+      "budgetSlider": {
+        "title": "Kampaniya budjeti",
+        "currency": "so‘m",
+        "axis": [
+          "100 ming",
+          "5 mln",
+          "10 mln",
+          "15 mln",
+          "20 mln"
+        ]
+      },
+      "forecast": {
+        "titleWithCategory": "Qamrov prognozi",
+        "titleDefault": "O‘rtacha qamrov",
+        "views": "ko‘rishlar"
+      },
+      "search": {
+        "placeholderPrefix": "",
+        "placeholderSuffix": " ta kategoriya bo‘yicha qidirish…"
+      },
+      "categoryGrid": {
+        "channels": "kanal",
+        "mln": "mln",
+        "views": "ko‘rishlar",
+        "notFound": "So‘rov bo‘yicha hech narsa topilmadi",
+        "title": "Biznes kategoriyasi",
+        "found": "topildi"
+      },
+      "settings": {
+        "regionShorthand": "hudud",
+        "allRegions": "Barcha hududlar",
+        "languageShorthand": "til",
+        "allLanguages": "Barcha tillar",
+        "additionalParams": "Qo‘shimcha parametrlar",
+        "collapse": "Yig‘ish"
+      }
+    },
+    "choose_us": {
+      "title": "Nega aynan biz",
+      "subtitle": "Biz bilan ishonchliroq va foydaliroq",
+      "switcher": {
+        "chaos": "Blogix’ni faollashtirish",
+        "system": "Blogix tizimi"
+      },
+      "cards": [
+        {
+          "chaosLabel": "Kafolat yo‘q",
+          "systemLabel": "To‘liq kafolat"
+        },
+        {
+          "chaosLabel": "Har qadamda xavf",
+          "systemLabel": "To‘liq xavfsizlik"
+        },
+        {
+          "chaosLabel": "Ko‘r-ko‘rona to‘lov",
+          "systemLabel": "Shaffof to‘lov"
+        },
+        {
+          "chaosLabel": "Ko‘p vositachilar",
+          "systemLabel": "Vositachilarsiz"
+        },
+        {
+          "chaosLabel": "Uzoq ishga tushirish",
+          "systemLabel": "5 daqiqada ishga tushirish"
+        },
+        {
+          "chaosLabel": "Yashirin narxlar",
+          "systemLabel": "To‘g‘ridan-to‘g‘ri narxlar"
+        },
+        {
+          "chaosLabel": "Tarqoq vositalar",
+          "systemLabel": "Hammasi bitta tizimda"
+        }
+      ]
+    },
+    "tarif_pricing": {
+      "title": "Ideal tarifni tanlang",
+      "subtitle": "Har qanday biznes hajmi uchun optimal yechimlar",
+      "buttonText": "Kampaniyani ishga tushirish",
+      "trustLine": "Natija uchun to‘lov · Ishlatilmagan budjet qaytariladi",
+      "labels": {
+        "included": "Kiritilgan",
+        "locked": "Budjet oshirilganda mavjud",
+        "lockedMobile": "Kattaroq budjet kerak"
+      },
+      "emptyStates": {
+        "locked": "Funksiyalarni ochish uchun budjetni oshiring",
+        "unlocked": "Barcha funksiyalar ochildi!"
+      },
+      "budgetSlider": {
+        "title": "Kampaniya budjeti",
+        "included": "Kiritilgan xizmatlar:",
+        "outOf": "dan",
+        "locked": "Budjet oshirilganda mavjud:",
+        "axis": [
+          "1.5 mln",
+          "5 mln",
+          "10 mln",
+          "15 mln",
+          "20 mln"
+        ]
+      },
+      "features": [
+      {
+        "name": "Platformalarni qo‘lda tanlash",
+        "sub": "Maqsadlaringiz uchun mos kanallarni topish"
+      },
+      {
+        "name": "Shaxsiy reklama strategiyasi",
+        "sub": "Biznesingiz uchun mos reklama rejasi"
+      },
+      {
+        "name": "Samarali reklama posti yaratish",
+        "sub": "Kuchli reklama kreativlarini tayyorlash"
+      },
+      {
+        "name": "Nashr bildirishnomalari",
+        "sub": "Reklama joylashuvlari va nashrlar haqida xabarlar"
+      },
+      {
+        "name": "Platformalarni tasdiqlash jarayoni",
+        "sub": "Ishga tushirishdan oldin joylashuvlarni tasdiqlash"
+      },
+      {
+        "name": "Marketing konsultatsiyalari",
+        "sub": "Kampaniya samaradorligini oshirish bo‘yicha tavsiyalar"
+      },
+      {
+        "name": "Batafsil hisobotlar",
+        "sub": "Statistika va kampaniya natijalari"
+      },
+      {
+        "name": "Kampaniya prognozlari",
+        "sub": "Taxminiy qamrov va samaradorlik tahlili"
+      },
+      {
+        "name": "Maksimal auditoriya qamrovi",
+        "sub": "Maqsadli auditoriyani aniq nishonga olish"
+      }
+    ]
+    },
+    "work_with_us": {
+      "title": "Hamkorlik uchun ochiqmiz",
+      "subtitle": "Platformaga qo‘shiling va kanalingiz orqali bugunoq daromad olishni boshlang",
+      "action": "Kanalingizni qo‘shing",
+      "channelList": {
+        "title": "Biz bilan allaqachon hamkorlik qilmoqda",
+        "buttonText": "Katalogga o‘tish"
+      },
+      "platforms": {
+        "platform_names": {
+          "telegram": "Telegram",
+          "instagram": "Instagram",
+          "youtube": "YouTube"
+        },
+        "bloggers": "Blogerlar",
+        "channels": "Kanallar"
+      },
+      "center": {
+        "title": "Blogix"
+      },
+      "options": [
+        {
+          "category": "Technology",
+          "name": "IT Dayjest",
+          "members": "125K"
+        },
+        {
+          "category": "Business",
+          "name": "Biznes Insider",
+          "members": "89K"
+        },
+        {
+          "category": "Marketing",
+          "name": "SMM Sirlari",
+          "members": "210K"
+        },
+        {
+          "category": "Design",
+          "name": "Dizayn va Arxitektura",
+          "members": "150K"
+        },
+        {
+          "category": "Education",
+          "name": "Kurslar va Vebinarlar",
+          "members": "75K"
+        }
+      ]
+    },
+    "workflow": {
+      "title": "Bu qanday ishlaydi",
+      "subtitle": "Reklamani ishga tushirish uchun 5 oddiy qadam",
+      "steps": [
+        {
+          "title": "Ro‘yxatdan o‘tish",
+          "description": "30 soniyada akkaunt yarating"
+        },
+        {
+          "title": "Platformalarni tanlash",
+          "description": "Kanallarni katalogdan qo‘lda yoki AI yordamida tanlang"
+        },
+        {
+          "title": "Balansni to‘ldirish",
+          "description": "Qulay to‘lov usullari, mablag‘lar himoyalangan"
+        },
+        {
+          "title": "Post yaratish",
+          "description": "O‘zingiznikini yuklang yoki AI yordamida soniyalarda yarating"
+        },
+        {
+          "title": "Ishga tushirish va nazorat",
+          "description": "Har bir joylashtirish bo‘yicha real vaqt hisobotlarini oling"
+        }
+      ]
+    }
+  },
   "guides": {
     "more": "Batafsil",
     "registration": {

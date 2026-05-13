@@ -2,105 +2,60 @@ import { ENUM_ROLES } from "@entities/user";
 import { useClearCookiesOnPage } from "@shared/hooks";
 import { SuspenseLoader } from "@shared/ui";
 import React, { Suspense } from "react";
+import { useTranslation } from "react-i18next";
+import { WORKFLOW_STEPS } from "@widgets/main/workflow/model/constants";
+import { CARD_DATA } from "@widgets/main/choose-us/model/constants";
 
 // Ленивый импорт всех компонентов
 const Cta = React.lazy(() =>
-  import("@widgets/mainPages")
-    .then((module) => ({ default: module.Cta }))
-    .catch(() => {
-      // При ошибке перезагружаем страницу
-      window.location.reload();
-      return { default: () => null };
-    }),
+  import("@widgets/main").then((module) => ({ default: module.Cta })),
 );
-const Services = React.lazy(() =>
-  import("@widgets/mainPages")
-    .then((module) => ({ default: module.Services }))
-    .catch(() => {
-      // При ошибке перезагружаем страницу
-      window.location.reload();
-      return { default: () => null };
-    }),
+
+const WorkWithUs = React.lazy(() =>
+  import("@widgets/main").then((module) => ({ default: module.WorkWithUs })),
 );
-const Partners = React.lazy(() =>
-  import("@widgets/mainPages")
-    .then((module) => ({ default: module.Partners }))
-    .catch(() => {
-      // При ошибке перезагружаем страницу
-      window.location.reload();
-      return { default: () => null };
-    }),
+
+const Workflow = React.lazy(() =>
+  import("@widgets/main").then((module) => ({ default: module.Workflow })),
 );
-const HowItWorks = React.lazy(() =>
-  import("@widgets/mainPages")
-    .then((module) => ({
-      default: module.HowItWorks,
-    }))
-    .catch(() => {
-      // При ошибке перезагружаем страницу
-      window.location.reload();
-      return { default: () => null };
-    }),
+
+const ChooseUs = React.lazy(() =>
+  import("@widgets/main").then((module) => ({ default: module.ChooseUs })),
 );
-const WhyChooseUs = React.lazy(() =>
-  import("@widgets/mainPages")
-    .then((module) => ({
-      default: module.WhyChooseUs,
-    }))
-    .catch(() => {
-      // При ошибке перезагружаем страницу
-      window.location.reload();
-      return { default: () => null };
-    }),
-);
-const Turnkey = React.lazy(() =>
-  import("@widgets/mainPages")
-    .then((module) => ({ default: module.Turnkey }))
-    .catch(() => {
-      // При ошибке перезагружаем страницу
-      window.location.reload();
-      return { default: () => null };
-    }),
-);
-const Customers = React.lazy(() =>
-  import("@widgets/mainPages")
-    .then((module) => ({
-      default: module.Customers,
-    }))
-    .catch(() => {
-      // При ошибке перезагружаем страницу
-      window.location.reload();
-      return { default: () => null };
-    }),
-);
-const Platforms = React.lazy(() =>
-  import("@widgets/mainPages")
-    .then((module) => ({
-      default: module.Platforms,
-    }))
-    .catch(() => {
-      // При ошибке перезагружаем страницу
-      window.location.reload();
-      return { default: () => null };
-    }),
+
+const TarifPricing = React.lazy(() =>
+  import("@widgets/main").then((module) => ({ default: module.TarifPricing })),
 );
 
 export const MainPage = () => {
-  useClearCookiesOnPage();
-  const page = "main_page_advertiser";
+  const { t } = useTranslation();
 
   return (
-    <>
-      <Suspense fallback={<SuspenseLoader />}>
-        <Cta role={ENUM_ROLES.ADVERTISER} />
-        {/* <Services page={page} /> */}
-        <Platforms page={page} />
-        <Partners page={page} />
-        <HowItWorks page={page} />
-        <WhyChooseUs page={page} />
-        <Turnkey page={page} />
-        {/* <Customers page={page} /> */}
-      </Suspense>
-    </>
+    <Suspense fallback={<SuspenseLoader />}>
+      {/* 1. CTA */}
+      <div className="grid gap-10 sm:gap-12 lg:gap-16 my-10">
+        <Cta />
+
+        {/* 2. WORK WITH US */}
+        <WorkWithUs />
+
+        {/* 3. WORK FLOW */}
+        <Workflow
+          title={t("main_advertiser.workflow.title")}
+          subtitle={t("main_advertiser.workflow.subtitle")}
+          steps={WORKFLOW_STEPS}
+        />
+
+        {/* 4. CHOOSE US */}
+        <ChooseUs
+          title={t("main_advertiser.choose_us.title")}
+          subTitle={t("main_advertiser.choose_us.subtitle")}
+          cards={CARD_DATA}
+        />
+
+        {/* 5. TARIF */}
+        <TarifPricing />
+      </div>
+    </Suspense>
   );
 };

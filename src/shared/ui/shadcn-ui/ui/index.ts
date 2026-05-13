@@ -30,3 +30,5 @@ export * from "./tooltip";
 export * from "./textarea";
 export * from "./use-toast";
 export * from "./context-menu";
+export * from "./animated-list";
+export * from "./animated-beam";
