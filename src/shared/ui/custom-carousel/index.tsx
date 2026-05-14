@@ -157,7 +157,7 @@ function MobileScroller<T>({
   return (
     <div
       ref={scrollerRef}
-      className={`flex overflow-x-auto pb-2 [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden ${
+      className={`flex overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden ${
         stopped ? "snap-x snap-mandatory" : ""
       } ${className}`}
       style={{
@@ -244,6 +244,7 @@ export function CustomCarousel<T>({
   return (
     <div className={className}>
       <Swiper
+        className="!-my-5"
         modules={[Autoplay, Mousewheel, FreeMode]}
         onSwiper={(s) => (swiperRef.current = s)}
         loop={true}

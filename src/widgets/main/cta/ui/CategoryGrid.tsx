@@ -170,7 +170,7 @@ export const CategoryGrid = memo(function CategoryGrid({
       </div> */}
 
       {filteredCategories.length === 0 ? (
-        <div className="h-40 rounded-2xl py-8 text-center text-[12px] font-medium bg-[#F7FAFC] text-[#0F2A4D]/50 flex items-center justify-center">
+        <div className="h-24 rounded-2xl py-8 text-center text-[12px] font-medium bg-[#F7FAFC] text-[#0F2A4D]/50 flex items-center justify-center">
           <p>
             {t("main_advertiser.cta.categoryGrid.notFound")} «{search}»
           </p>
