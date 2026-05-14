@@ -9,27 +9,21 @@
         "Sun’iy intellekt asosida samarali reklama postlarini yaratish",
         "Xavfsiz bitim orqali himoya kafolati"
       ],
-      "configurator": { 
-        "title": "Reklamani 30 soniyada ishga tushiring",
+      "configurator": {
+        "title": "Biznesingiz uchun mos kanallar toping",
         "alertSuccess": "Reklama ishga tushirildi!",
-        "buttonText": "Reklamani ishga tushirish",
+        "buttonText": "Kanallarni ko'rish",
         "trustLine": "Platformalarni tanlash ~ 30 soniya · Komissiyasiz"
       },
       "budgetSlider": {
-        "title": "Kampaniya budjeti",
+        "title": "Reklama budjeti",
         "currency": "so‘m",
-        "axis": [
-          "100 ming",
-          "5 mln",
-          "10 mln",
-          "15 mln",
-          "20 mln"
-        ]
+        "axis": ["100 ming", "5 mln", "10 mln", "15 mln", "20 mln"]
       },
       "forecast": {
-        "titleWithCategory": "Qamrov prognozi",
-        "titleDefault": "O‘rtacha qamrov",
-        "views": "ko‘rishlar"
+        "titleWithCategory": "Reklamangizni tahminan",
+        "titleDefault": "Reklamangizni tahminan",
+        "views": "obunachi ko‘radi"
       },
       "search": {
         "placeholderPrefix": "",
@@ -109,52 +103,46 @@
         "included": "Kiritilgan xizmatlar:",
         "outOf": "dan",
         "locked": "Budjet oshirilganda mavjud:",
-        "axis": [
-          "1.5 mln",
-          "5 mln",
-          "10 mln",
-          "15 mln",
-          "20 mln"
-        ]
+        "axis": ["1.5 mln", "5 mln", "10 mln", "15 mln", "20 mln"]
       },
       "features": [
-      {
-        "name": "Platformalarni qo‘lda tanlash",
-        "sub": "Maqsadlaringiz uchun mos kanallarni topish"
-      },
-      {
-        "name": "Shaxsiy reklama strategiyasi",
-        "sub": "Biznesingiz uchun mos reklama rejasi"
-      },
-      {
-        "name": "Samarali reklama posti yaratish",
-        "sub": "Kuchli reklama kreativlarini tayyorlash"
-      },
-      {
-        "name": "Nashr bildirishnomalari",
-        "sub": "Reklama joylashuvlari va nashrlar haqida xabarlar"
-      },
-      {
-        "name": "Platformalarni tasdiqlash jarayoni",
-        "sub": "Ishga tushirishdan oldin joylashuvlarni tasdiqlash"
-      },
-      {
-        "name": "Marketing konsultatsiyalari",
-        "sub": "Kampaniya samaradorligini oshirish bo‘yicha tavsiyalar"
-      },
-      {
-        "name": "Batafsil hisobotlar",
-        "sub": "Statistika va kampaniya natijalari"
-      },
-      {
-        "name": "Kampaniya prognozlari",
-        "sub": "Taxminiy qamrov va samaradorlik tahlili"
-      },
-      {
-        "name": "Maksimal auditoriya qamrovi",
-        "sub": "Maqsadli auditoriyani aniq nishonga olish"
-      }
-    ]
+        {
+          "name": "Platformalarni qo‘lda tanlash",
+          "sub": "Maqsadlaringiz uchun mos kanallarni topish"
+        },
+        {
+          "name": "Shaxsiy reklama strategiyasi",
+          "sub": "Biznesingiz uchun mos reklama rejasi"
+        },
+        {
+          "name": "Samarali reklama posti yaratish",
+          "sub": "Kuchli reklama kreativlarini tayyorlash"
+        },
+        {
+          "name": "Nashr bildirishnomalari",
+          "sub": "Reklama joylashuvlari va nashrlar haqida xabarlar"
+        },
+        {
+          "name": "Platformalarni tasdiqlash jarayoni",
+          "sub": "Ishga tushirishdan oldin joylashuvlarni tasdiqlash"
+        },
+        {
+          "name": "Marketing konsultatsiyalari",
+          "sub": "Kampaniya samaradorligini oshirish bo‘yicha tavsiyalar"
+        },
+        {
+          "name": "Batafsil hisobotlar",
+          "sub": "Statistika va kampaniya natijalari"
+        },
+        {
+          "name": "Kampaniya prognozlari",
+          "sub": "Taxminiy qamrov va samaradorlik tahlili"
+        },
+        {
+          "name": "Maksimal auditoriya qamrovi",
+          "sub": "Maqsadli auditoriyani aniq nishonga olish"
+        }
+      ]
     },
     "work_with_us": {
       "title": "Hamkorlik uchun ochiqmiz",

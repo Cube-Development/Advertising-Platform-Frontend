@@ -46,11 +46,18 @@ import {
   UsersGroupRounded,
   UsersGroupTwoRounded,
   Wallet,
-  Widget
-} from "@solar-icons/react"
-import { Car, CarFront, Gem, Landmark, PawPrint, ShowerHead } from "lucide-react"
+  Widget,
+} from "@solar-icons/react";
+import {
+  Car,
+  CarFront,
+  Gem,
+  Landmark,
+  PawPrint,
+  ShowerHead,
+} from "lucide-react";
 
-type IconComponent = any
+type IconComponent = any;
 
 export const CATEGORY_ICON_MAPPER: Record<number, IconComponent> = {
   1: Car, // Авто, мото
@@ -67,7 +74,7 @@ export const CATEGORY_ICON_MAPPER: Record<number, IconComponent> = {
   11: Buildings2, // Аренда недвижимости
   12: ClapperboardOpenPlay, // Аудио и видео техника
   13: PresentationGraph, // Аудит и консалтинг
-  14: ShowerHead , // Бани и сауны
+  14: ShowerHead, // Бани и сауны
   15: Landmark, // Банковские услуги
   16: Card, // Банковское оборудование
   17: Wallet, // Бизнес
@@ -291,6 +298,6 @@ export const CATEGORY_ICON_MAPPER: Record<number, IconComponent> = {
   215: Book, // Электронные книги
   216: MagicStick, // Ювелирка
   217: DiplomaVerified, // Юр услуги
-}
+};
 
-export const DEFAULT_CATEGORY_ICON = Widget
+export const DEFAULT_CATEGORY_ICON = Widget;

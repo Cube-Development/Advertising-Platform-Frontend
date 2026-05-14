@@ -1,3 +1,3 @@
 export function formatBudget(value: number): string {
-  return value.toLocaleString('ru-RU') + ' сум'
+  return value.toLocaleString("ru-RU") + " сум";
 }

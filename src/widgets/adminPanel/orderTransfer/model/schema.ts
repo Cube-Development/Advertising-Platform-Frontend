@@ -1,4 +1,4 @@
-import * as z from 'zod';
+import * as z from "zod";
 
 export const orderTransferSchema = z.object({
   order_ident: z.string().min(1, "Введите номер ордера"),

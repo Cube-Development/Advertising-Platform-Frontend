@@ -33,7 +33,7 @@ export const MainPage = () => {
   return (
     <Suspense fallback={<SuspenseLoader />}>
       {/* 1. CTA */}
-      <div className="grid gap-10 sm:gap-12 lg:gap-16 my-10">
+      <div className="grid gap-10 sm:gap-12 lg:gap-16 xl:mt-0 my-6">
         <Cta />
 
         {/* 2. WORK WITH US */}

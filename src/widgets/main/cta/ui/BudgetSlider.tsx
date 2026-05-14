@@ -1,5 +1,10 @@
 import { memo, useMemo } from "react";
-import { MIN_BUDGET, MAX_BUDGET, BUDGET_RANGE, AXIS_LABELS } from "../model/constants";
+import {
+  MIN_BUDGET,
+  MAX_BUDGET,
+  BUDGET_RANGE,
+  AXIS_LABELS,
+} from "../model/constants";
 import { CustomSlider } from "@shared/ui";
 import { useTranslation } from "react-i18next";
 

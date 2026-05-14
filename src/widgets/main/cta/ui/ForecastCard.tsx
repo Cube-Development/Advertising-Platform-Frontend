@@ -1,6 +1,6 @@
 import { memo, useState, useEffect, useRef } from "react";
 import { Eye, TrendingUp } from "lucide-react";
-import { formatMln } from "../lib/format";
+import { formatForecastViews } from "../lib/format";
 import { useTranslation } from "react-i18next";
 
 interface Props {
@@ -14,7 +14,7 @@ export const ForecastCard = memo(function ForecastCard({
   forecastBonus,
   hasCategory,
 }: Props) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const [isPulsing, setIsPulsing] = useState(false);
   const isFirstRender = useRef(true);
 
@@ -66,7 +66,7 @@ export const ForecastCard = memo(function ForecastCard({
                   transform: isPulsing ? "scale(1.08)" : "scale(1)",
                 }}
               >
-                {formatMln(forecastMln)}
+                {formatForecastViews(forecastMln, i18n.language)}
               </span>
             </span>
 

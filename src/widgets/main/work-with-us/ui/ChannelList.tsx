@@ -84,8 +84,8 @@ export const ChannelList = forwardRef<
       )}
       {...props}
     >
-      <CardHeader className="">
-        <CardTitle className="text-sm font-bold text-center text-gray-800">
+      <CardHeader className="pb-0">
+        <CardTitle className="text-base lg:text-lg font-bold text-center text-gray-800">
           {t("main_advertiser.work_with_us.channelList.title")}
         </CardTitle>
       </CardHeader>

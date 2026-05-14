@@ -1,64 +1,68 @@
-import { useState, useRef, useCallback } from 'react'
-import { STEPS, FEATURES } from './constants'
-import type { RectMap } from './types'
+import { useState, useRef, useCallback } from "react";
+import { STEPS, FEATURES } from "./constants";
+import type { RectMap } from "./types";
 
-const THROTTLE_MS = 80
+const THROTTLE_MS = 80;
 
 export function usePricingLogic() {
-  const [stepIdx, setStepIdx] = useState(0)
-  const budget = STEPS[stepIdx]
+  const [stepIdx, setStepIdx] = useState(0);
+  const budget = STEPS[stepIdx];
 
-  const cardRefs = useRef<Record<string, HTMLDivElement | null>>({})
-  const rectsBefore = useRef<RectMap>({})
-  const pendingFlip = useRef(false)
+  const cardRefs = useRef<Record<string, HTMLDivElement | null>>({});
+  const rectsBefore = useRef<RectMap>({});
+  const pendingFlip = useRef(false);
 
   // Throttle state
-  const throttleTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
-  const pendingIdx = useRef<number | null>(null)
-  const committedIdx = useRef(0)
+  const throttleTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const pendingIdx = useRef<number | null>(null);
+  const committedIdx = useRef(0);
 
-  const leftColumn = FEATURES.filter((f) => f.min <= budget)
-  const rightColumn = FEATURES.filter((f) => f.min > budget)
+  const leftColumn = FEATURES.filter((f) => f.min <= budget);
+  const rightColumn = FEATURES.filter((f) => f.min > budget);
 
   const snapshotRects = useCallback((): RectMap => {
-    const snapshot: RectMap = {}
+    const snapshot: RectMap = {};
     for (const [id, el] of Object.entries(cardRefs.current)) {
-      if (el) snapshot[id] = el.getBoundingClientRect()
+      if (el) snapshot[id] = el.getBoundingClientRect();
     }
-    return snapshot
-  }, [])
+    return snapshot;
+  }, []);
 
   const commitIdx = useCallback(
     (idx: number) => {
-      if (idx === committedIdx.current || idx < 0 || idx >= STEPS.length) return
+      if (idx === committedIdx.current || idx < 0 || idx >= STEPS.length)
+        return;
 
-      rectsBefore.current = snapshotRects()
-      pendingFlip.current = true
-      committedIdx.current = idx
-      setStepIdx(idx)
+      rectsBefore.current = snapshotRects();
+      pendingFlip.current = true;
+      committedIdx.current = idx;
+      setStepIdx(idx);
     },
     [snapshotRects],
-  )
+  );
 
   const handleBudgetChange = useCallback(
     (newIdx: number) => {
-      pendingIdx.current = newIdx
+      pendingIdx.current = newIdx;
 
       // Если throttle не активен — коммитим сразу (leading edge)
       if (!throttleTimer.current) {
-        commitIdx(newIdx)
+        commitIdx(newIdx);
         throttleTimer.current = setTimeout(() => {
-          throttleTimer.current = null
+          throttleTimer.current = null;
           // Trailing edge: коммитим последний накопленный idx
-          if (pendingIdx.current !== null && pendingIdx.current !== committedIdx.current) {
-            commitIdx(pendingIdx.current)
+          if (
+            pendingIdx.current !== null &&
+            pendingIdx.current !== committedIdx.current
+          ) {
+            commitIdx(pendingIdx.current);
           }
-          pendingIdx.current = null
-        }, THROTTLE_MS)
+          pendingIdx.current = null;
+        }, THROTTLE_MS);
       }
     },
     [commitIdx],
-  )
+  );
 
   return {
     stepIdx,
@@ -69,5 +73,5 @@ export function usePricingLogic() {
     rectsBefore,
     pendingFlip,
     handleBudgetChange,
-  }
+  };
 }

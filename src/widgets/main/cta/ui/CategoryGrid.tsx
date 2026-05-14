@@ -1,7 +1,5 @@
 import { memo, useCallback } from "react";
-import { motion } from "framer-motion";
-import { Radio, Eye } from "lucide-react";
-import { TOTAL_CATS } from "../model/constants";
+import { Radio } from "lucide-react";
 import type { Category } from "../model/types";
 import { CustomCarousel } from "@shared/ui/custom-carousel";
 import { useTranslation } from "react-i18next";
@@ -30,16 +28,17 @@ const Card = memo(({ cat, isActive, onSelect }: CardProps) => {
   );
 
   const cardShadow = isActive
-    ? "0 8px 16px -6px #1AB5C555, inset 0 1px 0 rgba(255,255,255,0.2)"
-    : "0 2px 4px rgba(15,42,77,0.02)";
+    ? "0 4px 6px -3px #1AB5C555, inset 0 1px 0 rgba(255,255,255,0.1)"
+    : "0 2px 4px rgba(15,42,77,0.01)";
   const cardShadowHover = isActive
-    ? "0 16px 28px -6px #1AB5C577, inset 0 1px 0 rgba(255,255,255,0.2)"
-    : "0 12px 24px -4px rgba(15,42,77,0.1)";
+    ? "0 8px 10px -3px #1AB5C577, inset 0 1px 0 rgba(255,255,255,0.1)"
+    : "0 6px 8px -2px rgba(15,42,77,0.05)";
 
   return (
-    <motion.button
+    <button
+      type="button"
       onClick={handleClick}
-      className={`rounded-2xl w-full p-3 text-left outline-none min-w-0 relative will-change-transform transition-shadow duration-200 [box-shadow:var(--card-shadow)] hover:[box-shadow:var(--card-shadow-hover)] ${
+      className={`rounded-2xl w-full p-3 text-left outline-none min-w-0 relative transition-transform duration-150 ease-out active:scale-[0.98] lg:transition-[transform,box-shadow] lg:duration-200 lg:hover:-translate-y-0.5 lg:hover:scale-[1.02] lg:hover:z-10 [box-shadow:var(--card-shadow)] lg:hover:[box-shadow:var(--card-shadow-hover)] ${
         isActive
           ? "bg-gradient-to-br from-[var(--Personal-colors-main)] to-[var(--Personal-colors-main2)] border-transparent z-10"
           : "bg-[#F7FAFC] border border-[#0F2A4D]/[0.06] z-[1]"
@@ -50,10 +49,6 @@ const Card = memo(({ cat, isActive, onSelect }: CardProps) => {
           "--card-shadow-hover": cardShadowHover,
         } as React.CSSProperties
       }
-      animate={{ scale: 1, y: 0 }}
-      transition={{ type: "spring", stiffness: 400, damping: 30 }}
-      whileHover={{ scale: 1.02, y: -3, zIndex: 10 }}
-      whileTap={{ scale: 0.98, y: 0 }}
     >
       {/* Header */}
       <div className="relative z-10 flex items-center gap-2 mb-2 min-w-0">
@@ -99,7 +94,7 @@ const Card = memo(({ cat, isActive, onSelect }: CardProps) => {
           {t("main_advertiser.cta.categoryGrid.channels")}
         </Stat>
 
-        <Stat
+        {/* <Stat
           colorClass={isActive ? "text-white/95" : "text-[#0F2A4D]"}
           icon={
             <Eye size={13} className={isActive ? "opacity-85" : "opacity-50"} />
@@ -108,9 +103,9 @@ const Card = memo(({ cat, isActive, onSelect }: CardProps) => {
           <span className="tabular-nums">{cat.avgViewsMln.toFixed(1)}</span>{" "}
           {t("main_advertiser.cta.categoryGrid.mln")}{" "}
           {t("main_advertiser.cta.categoryGrid.views")}
-        </Stat>
+        </Stat> */}
       </div>
-    </motion.button>
+    </button>
   );
 });
 
@@ -156,7 +151,7 @@ export const CategoryGrid = memo(function CategoryGrid({
   return (
     <div>
       {/* Header */}
-      <div className="flex items-center justify-between mb-2">
+      {/* <div className="flex items-center justify-between mb-2">
         <span className="text-[11px] uppercase tracking-[0.12em] font-bold text-[#0F2A4D]/50">
           {t("main_advertiser.cta.categoryGrid.title")}
         </span>
@@ -172,10 +167,10 @@ export const CategoryGrid = memo(function CategoryGrid({
             </>
           )}
         </span>
-      </div>
+      </div> */}
 
       {filteredCategories.length === 0 ? (
-        <div className="h-40 rounded-2xl py-8 text-center text-[12px] font-medium bg-[#F7FAFC] text-[#0F2A4D]/50 flex items-center justify-center">
+        <div className="h-24 rounded-2xl py-8 text-center text-[12px] font-medium bg-[#F7FAFC] text-[#0F2A4D]/50 flex items-center justify-center">
           <p>
             {t("main_advertiser.cta.categoryGrid.notFound")} «{search}»
           </p>

@@ -28,7 +28,7 @@ export const PlatformCard = forwardRef<HTMLDivElement, PlatformCardProps>(
           <span className="text-base font-bold leading-none tracking-tight text-gray-900 lg:text-lg">
             {t(data.name)}
           </span>
-          <div className="col-span-2 lg:col-span-1 lg:col-start-2 text-[10px] lg:text-sm font-medium text-gray-500 truncate">
+          <div className="col-span-2 lg:col-span-1 lg:col-start-2 text-[10px] lg:text-sm font-medium text-gray-500 text-center lg:text-left">
             <span className="text-[#37a8b6] font-bold text-[14px] lg:text-base">
               {data.count}
             </span>{" "}
