@@ -24,7 +24,8 @@ export function CustomMiniTabs({
 
 CustomMiniTabs.displayName = "CustomMiniTabs";
 
-interface CustomMiniTabItemProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+interface CustomMiniTabItemProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   active?: boolean;
   asChild?: boolean;
 }

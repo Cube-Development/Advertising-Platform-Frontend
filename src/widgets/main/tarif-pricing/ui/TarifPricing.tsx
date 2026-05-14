@@ -85,8 +85,12 @@ export default function TarifPricing() {
             <div className="flex items-center gap-1.5 mb-2.5 justify-center">
               <div className="w-2.5 h-2.5 rounded-full bg-[hsl(187,20%,52%)]/40" />
               <p className="text-[10px] sm:text-xs font-semibold text-[hsl(187,20%,52%)] uppercase tracking-widest">
-                <span className="hidden sm:inline">{t("main_advertiser.tarif_pricing.labels.locked")}</span>
-                <span className="sm:hidden">{t("main_advertiser.tarif_pricing.labels.lockedMobile")}</span>
+                <span className="hidden sm:inline">
+                  {t("main_advertiser.tarif_pricing.labels.locked")}
+                </span>
+                <span className="sm:hidden">
+                  {t("main_advertiser.tarif_pricing.labels.lockedMobile")}
+                </span>
               </p>
             </div>
             <div className="space-y-2">

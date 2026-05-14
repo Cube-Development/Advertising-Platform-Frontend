@@ -1,10 +1,10 @@
 import React from "react";
-import { 
-  UserPlus, 
-  Magnifer, 
-  Wallet, 
-  Smartphone , 
-  Chart2 
+import {
+  UserPlus,
+  Magnifer,
+  Wallet,
+  Smartphone,
+  Chart2,
 } from "@solar-icons/react";
 import type { WorkflowStep } from "./types";
 
@@ -31,7 +31,7 @@ export const WORKFLOW_STEPS: WorkflowStep[] = [
     id: 4,
     title: "main_advertiser.workflow.steps.3.title",
     description: "main_advertiser.workflow.steps.3.description",
-    icon: React.createElement(Smartphone , { size: 24 }),
+    icon: React.createElement(Smartphone, { size: 24 }),
   },
   {
     id: 5,

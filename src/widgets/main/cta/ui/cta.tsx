@@ -28,7 +28,7 @@ export default function Cta() {
   );
   return (
     <section className="container relative w-full py-12 mt-14 lg:!mt-16">
-      <div className="grid items-center grid-cols-1 gap-8 mx-auto lg:grid-cols-2 lg:gap-8">
+      <div className="grid items-start grid-cols-1 gap-8 mx-auto lg:grid-cols-2 lg:gap-8">
         <CtaHero
           title={
             <Trans

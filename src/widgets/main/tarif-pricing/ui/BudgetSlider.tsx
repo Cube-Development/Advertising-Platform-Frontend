@@ -75,14 +75,15 @@ export function BudgetSlider({
       {/* Summary */}
       <div className="mt-3 sm:mt-4 pt-3 sm:pt-4 border-t border-[hsl(187,25%,88%)] flex flex-col sm:flex-row items-start sm:items-center justify-between gap-1 sm:gap-0">
         <div className="text-xs sm:text-sm text-[hsl(187,20%,52%)]">
-          {t("main_advertiser.tarif_pricing.budgetSlider.included")} {" "}
+          {t("main_advertiser.tarif_pricing.budgetSlider.included")}{" "}
           <span className="font-semibold text-[hsl(187,30%,15%)]">
             {leftCount}
           </span>{" "}
-          {t("main_advertiser.tarif_pricing.budgetSlider.outOf")} {leftCount + rightCount}
+          {t("main_advertiser.tarif_pricing.budgetSlider.outOf")}{" "}
+          {leftCount + rightCount}
         </div>
         <div className="text-xs sm:text-sm text-[hsl(187,20%,52%)]">
-          {t("main_advertiser.tarif_pricing.budgetSlider.locked")} {" "}
+          {t("main_advertiser.tarif_pricing.budgetSlider.locked")}{" "}
           <span className="font-semibold text-[hsl(187,30%,15%)]">
             {rightCount}
           </span>

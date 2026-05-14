@@ -94,7 +94,6 @@ export interface ChannelNotification {
   icon: React.ReactNode;
 }
 
-
 export const CHANNELS: ChannelNotification[] = [
   {
     id: "680055ef-cbe2-410b-8c38-6f507f6c8470",
@@ -167,6 +166,4 @@ export const CHANNELS: ChannelNotification[] = [
     subscribers: 3303003,
     icon: <InstagramIcon />,
   },
-
 ];
-

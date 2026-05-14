@@ -1,4 +1,6 @@
 import { useCreateCartLiteMutation } from "@entities/project";
+import { LoginModal } from "@features/user";
+import { useAppSelector } from "@shared/hooks";
 import { ENUM_PATHS } from "@shared/routing";
 import { Button, Card } from "@shared/ui";
 import { ArrowRight, Loader } from "lucide-react";
@@ -15,6 +17,7 @@ import { SettingsAccordion } from "./SettingsAccordion";
 export const ConfiguratorForm = memo(function ConfiguratorForm() {
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const isAuth = useAppSelector((state) => state.user.isAuth);
 
   const {
     setValue,
@@ -65,7 +68,7 @@ export const ConfiguratorForm = memo(function ConfiguratorForm() {
   };
 
   return (
-    <Card className="relative rounded-3xl bg-white p-6 p-6 md:p-10 ring-0 flex flex-col gap-4 border-[#1AB5C5]/10 shadow-[0_30px_80px_-20px_rgba(15,42,77,0.18),0_8px_24px_-8px_rgba(15,42,77,0.06)]">
+    <Card className="relative rounded-3xl bg-white p-4 md:p-7 ring-0 flex flex-col gap-3 border-[#1AB5C5]/10 shadow-[0_30px_80px_-20px_rgba(15,42,77,0.18),0_8px_24px_-8px_rgba(15,42,77,0.06)]">
       {/* glow — чистый CSS, не зависит от state */}
       <div className="absolute -top-3 -right-3 w-24 h-24 rounded-full pointer-events-none bg-[radial-gradient(circle,#1AB5C525_0%,transparent_70%)] blur-[8px]" />
 
@@ -112,25 +115,41 @@ export const ConfiguratorForm = memo(function ConfiguratorForm() {
       />
 
       {/* CTA */}
-      <Button
-        onClick={handleFormSubmit}
-        disabled={isLoading}
-        size={"xl"}
-        variant={"primary"}
-        className="flex gap-3"
-      >
-        <span className="relative z-10">
-          {t("main_advertiser.cta.configurator.buttonText")}
-        </span>
-        {isLoading ? (
-          <Loader size={18} className="relative z-10 animate-spin" />
-        ) : (
-          <ArrowRight
-            size={18}
-            className="relative z-10 transition-transform group-hover:translate-x-1"
-          />
-        )}
-      </Button>
+      {!isAuth ? (
+        <LoginModal
+          trigger={
+            <Button size={"xl"} variant={"primary"} className="flex gap-3">
+              <span className="relative z-10">
+                {t("main_advertiser.cta.configurator.buttonText")}
+              </span>
+              <ArrowRight
+                size={18}
+                className="relative z-10 transition-transform group-hover:translate-x-1"
+              />
+            </Button>
+          }
+        />
+      ) : (
+        <Button
+          onClick={handleFormSubmit}
+          disabled={isLoading}
+          size={"xl"}
+          variant={"primary"}
+          className="flex gap-3"
+        >
+          <span className="relative z-10">
+            {t("main_advertiser.cta.configurator.buttonText")}
+          </span>
+          {isLoading ? (
+            <Loader size={18} className="relative z-10 animate-spin" />
+          ) : (
+            <ArrowRight
+              size={18}
+              className="relative z-10 transition-transform group-hover:translate-x-1"
+            />
+          )}
+        </Button>
+      )}
 
       {/* trust line */}
       {/* <div className="flex items-center justify-center gap-2 text-[12px] font-medium text-[#0F2A4D]/55">

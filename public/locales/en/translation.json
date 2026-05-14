@@ -10,26 +10,20 @@
         "Protection guaranteed through secure transactions"
       ],
       "configurator": {
-        "title": "Launch ads in 30 sec",
+        "title": "Select platforms for your business",
         "alertSuccess": "Ads launched successfully!",
-        "buttonText": "Launch Ads",
+        "buttonText": "Select channels",
         "trustLine": "Platform подбор ~ 30 sec · No commission"
       },
       "budgetSlider": {
-        "title": "Campaign Budget",
+        "title": "Advertising budget",
         "currency": "UZS",
-        "axis": [
-          "100K",
-          "5M",
-          "10M",
-          "15M",
-          "20M"
-        ]
+        "axis": ["100K", "5M", "10M", "15M", "20M"]
       },
       "forecast": {
-        "titleWithCategory": "Reach Forecast",
-        "titleDefault": "Average Reach",
-        "views": "views"
+        "titleWithCategory": "Your ad will be seen by",
+        "titleDefault": "Your ad will be seen by",
+        "views": "users"
       },
       "search": {
         "placeholderPrefix": "Search across ",
@@ -109,52 +103,46 @@
         "included": "Services included:",
         "outOf": "of",
         "locked": "Available with a higher budget:",
-        "axis": [
-          "1.5M",
-          "5M",
-          "10M",
-          "15M",
-          "20M"
-        ]
+        "axis": ["1.5M", "5M", "10M", "15M", "20M"]
       },
       "features": [
-      {
-        "name": "Manual platform selection",
-        "sub": "Finding relevant channels for your goals"
-      },
-      {
-        "name": "Personalized promotion strategy",
-        "sub": "Custom advertising plan for your business"
-      },
-      {
-        "name": "High-converting ad post creation",
-        "sub": "Preparation of effective promotional creatives"
-      },
-      {
-        "name": "Publication notifications",
-        "sub": "Alerts about ad placements and publications"
-      },
-      {
-        "name": "Platform approval process",
-        "sub": "Confirmation of placements before launch"
-      },
-      {
-        "name": "Marketing consultations",
-        "sub": "Recommendations to improve campaign performance"
-      },
-      {
-        "name": "Detailed performance reports",
-        "sub": "Statistics and campaign results"
-      },
-      {
-        "name": "Campaign performance forecasts",
-        "sub": "Estimated reach and performance analytics"
-      },
-      {
-        "name": "Maximum audience reach",
-        "sub": "Focused targeting of your ideal audience"
-      }
-    ]
+        {
+          "name": "Manual platform selection",
+          "sub": "Finding relevant channels for your goals"
+        },
+        {
+          "name": "Personalized promotion strategy",
+          "sub": "Custom advertising plan for your business"
+        },
+        {
+          "name": "High-converting ad post creation",
+          "sub": "Preparation of effective promotional creatives"
+        },
+        {
+          "name": "Publication notifications",
+          "sub": "Alerts about ad placements and publications"
+        },
+        {
+          "name": "Platform approval process",
+          "sub": "Confirmation of placements before launch"
+        },
+        {
+          "name": "Marketing consultations",
+          "sub": "Recommendations to improve campaign performance"
+        },
+        {
+          "name": "Detailed performance reports",
+          "sub": "Statistics and campaign results"
+        },
+        {
+          "name": "Campaign performance forecasts",
+          "sub": "Estimated reach and performance analytics"
+        },
+        {
+          "name": "Maximum audience reach",
+          "sub": "Focused targeting of your ideal audience"
+        }
+      ]
     },
     "work_with_us": {
       "title": "Open for Partnership",
@@ -230,7 +218,7 @@
         }
       ]
     }
-},
+  },
   "guides": {
     "more": "More",
     "registration": {
