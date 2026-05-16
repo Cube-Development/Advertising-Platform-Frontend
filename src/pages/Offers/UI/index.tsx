@@ -21,6 +21,11 @@ import { useNavigate } from "react-router-dom";
 import { validate as isValidUUID } from "uuid";
 import styles from "./styles.module.scss";
 import { UnrealizedWallet } from "@features/wallet";
+// TEMPORARY — удалить импорт вместе с папкой `pages/Offers/temporary/`
+import {
+  sortOrdersByPublishDate,
+  TEMPORARY_FETCH_ALL_ORDERS,
+} from "../temporary/allOrdersWithoutPagination";
 
 // Ленивый импорт компонента MyOffers
 const MyOffers = React.lazy(() =>
@@ -55,7 +60,8 @@ export const OffersPage: FC = () => {
       status: startStatus,
       page: 1,
       language: language?.id || USER_LANGUAGES_LIST[0].id,
-      elements_on_page: INTERSECTION_ELEMENTS.BLOGGER_OFFERS,
+      // ORIGINAL pagination — раскомментировать при откате TEMPORARY
+      // elements_on_page: INTERSECTION_ELEMENTS.BLOGGER_OFFERS,
       date_sort: dateSortingTypes.decrease,
       ...(startOrderId ? { search_string: startOrderId } : {}),
     },
@@ -66,9 +72,25 @@ export const OffersPage: FC = () => {
     setValue("page", 1);
     setValue("status", status);
   };
-  const { search_string, ...params } = formState;
+  const {
+    search_string,
+    elements_on_page,
+    page: formPage,
+    ...params
+  } = formState;
   const getParams: getOrdersByStatusReq = {
     ...params,
+    // TEMPORARY — всегда page 1, без elements_on_page
+    page: TEMPORARY_FETCH_ALL_ORDERS ? 1 : formPage,
+    ...(TEMPORARY_FETCH_ALL_ORDERS
+      ? {}
+      : {
+          elements_on_page:
+            elements_on_page ?? INTERSECTION_ELEMENTS.BLOGGER_OFFERS,
+        }),
+    // ORIGINAL pagination — раскомментировать при откате TEMPORARY
+    // ...params,
+    // page,
     ...(search_string && search_string.length >= 3
       ? isValidUUID(search_string)
         ? { order_id: search_string }
@@ -78,27 +100,51 @@ export const OffersPage: FC = () => {
   const { data, isFetching, refetch, originalArgs } = useGetBloggerOrdersQuery(
     getParams,
     {
-      selectFromResult: ({ data, ...rest }) => ({
-        ...rest,
-        data: (data?.status === formState?.status && data) || undefined,
-      }),
+      selectFromResult: ({ data, ...rest }) => {
+        const matched =
+          (data?.status === formState?.status && data) || undefined;
+
+        if (!matched) {
+          return { ...rest, data: undefined };
+        }
+
+        // TEMPORARY — клиентская сортировка + скрытие «показать ещё»
+        if (TEMPORARY_FETCH_ALL_ORDERS) {
+          return {
+            ...rest,
+            data: {
+              ...matched,
+              orders: sortOrdersByPublishDate(matched.orders ?? []),
+              isLast: true,
+            },
+          };
+        }
+
+        return { ...rest, data: matched };
+      },
     },
   );
   const { refetch: views } = useGetViewBloggerOrderQuery();
 
-  const handleOnChangePage = () => {
-    setValue("page", formState.page + 1);
+ // ORIGINAL pagination — раскомментировать при откате TEMPORARY
+  // const handleOnChangePage = () => {
+  //   const newPage = Math.floor(
+  //     (data?.orders?.length || 0) / INTERSECTION_ELEMENTS.BLOGGER_OFFERS,
+  //   );
+  //   setValue("page", newPage + 1);
+  //
+  //   if (data?.orders?.length === 0) {
+  //     refetch();
+  //   }
+  // };
+  const handleOnChangePage = () => {};
 
-    if (data?.orders?.length === 0) {
-      refetch();
-    }
-  };
-
-  useEffect(() => {
-    if (data && data?.orders?.length === 0 && !data?.isLast) {
-      refetch();
-    }
-  }, [data?.orders?.length]);
+  // ORIGINAL pagination — раскомментировать при откате TEMPORARY
+  // useEffect(() => {
+  //   if (data && data?.orders?.length === 0 && !data?.isLast) {
+  //     refetch();
+  //   }
+  // }, [data?.orders?.length]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -119,7 +165,8 @@ export const OffersPage: FC = () => {
     navigate(newPath, { replace: true });
   }, [formState.status]);
 
-  const isLoadingMore = isFetching && !originalArgs?.__isWebsocket;
+  const isLoadingMore =
+    !TEMPORARY_FETCH_ALL_ORDERS && isFetching && !originalArgs?.__isWebsocket;
 
   return (
     <Suspense fallback={<SuspenseLoader />}>
@@ -142,8 +189,8 @@ export const OffersPage: FC = () => {
             offers={data?.orders || []}
             handleOnChangePage={handleOnChangePage}
             isLoading={isLoadingMore}
-            isLast={data?.isLast || false}
-            currentPage={formState?.page}
+            isLast={TEMPORARY_FETCH_ALL_ORDERS ? true : data?.isLast || false}
+            currentPage={TEMPORARY_FETCH_ALL_ORDERS ? 1 : formState?.page}
           />
         </div>
       </div>

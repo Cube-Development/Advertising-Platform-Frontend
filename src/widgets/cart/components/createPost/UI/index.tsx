@@ -83,26 +83,40 @@ export const CreatePost: FC<CreatePostProps> = ({ cart, role, isLoading }) => {
           </div>
         )}
         {role !== ENUM_ROLES.AGENCY && (
-          <div className={styles.finnaly__text}>
-            <p className={`${styles.finnaly_long}`}>
-              {t("cart.create_post.finnaly")}:
-            </p>
-            <p className={`${styles.finnaly_short}`}>
-              {t("cart.create_post.finnaly_short")}:
-            </p>
-            <span className="truncate flex flex-col md:items-center items-end gap-1">
-              {isLoading ? (
-                <Skeleton className="h-5 w-40" />
-              ) : (
-                <>
-                  {cart?.amount?.toLocaleString()} {t("symbol")}
-                </>
-              )}
-              <span className="md:!text-xs mobile-xl:!text-[10px] !text-[8px] !font-medium">
-                {t("cart.create_post.vat_info")}
+          <>
+            {screen <= BREAKPOINT.MD && (
+              <div className={styles.info}>
+                <p>{t("cart.create_post.views")}</p>
+                {isLoading ? (
+                  <Skeleton className="h-4 w-16" />
+                ) : (
+                  <span>
+                    {isModal ? <Modal /> : cart?.coverage?.toLocaleString()}
+                  </span>
+                )}
+              </div>
+            )}
+            <div className={styles.finnaly__text}>
+              <p className={`${styles.finnaly_long}`}>
+                {t("cart.create_post.finnaly")}:
+              </p>
+              <p className={`${styles.finnaly_short}`}>
+                {t("cart.create_post.finnaly_short")}:
+              </p>
+              <span className="truncate flex flex-col md:items-center items-end gap-1">
+                {isLoading ? (
+                  <Skeleton className="h-5 w-40" />
+                ) : (
+                  <>
+                    {cart?.amount?.toLocaleString()} {t("symbol")}
+                  </>
+                )}
+                <span className="md:!text-xs mobile-xl:!text-[10px] !text-[8px] !font-medium">
+                  {t("cart.create_post.vat_info")}
+                </span>
               </span>
-            </span>
-          </div>
+            </div>
+          </>
         )}
         <div
           className={`${styles.button} ${!cart?.channels?.length && "deactive"}`}
