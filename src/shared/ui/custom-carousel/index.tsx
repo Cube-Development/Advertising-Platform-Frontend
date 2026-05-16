@@ -68,12 +68,19 @@ function MobileScroller<T>({
   const stoppedRef = useRef(false);
   const [stopped, setStopped] = useState(false);
 
-  const doubled = useMemo(() => [...items, ...items], [items]);
+  const shouldLoop = items.length > 1;
+  const doubled = useMemo(
+    () => (shouldLoop ? [...items, ...items] : items),
+    [items, shouldLoop],
+  );
   const itemsLen = items.length;
 
   useEffect(() => {
     const el = scrollerRef.current;
-    if (!el || itemsLen === 0) return;
+    if (!el || itemsLen === 0 || !shouldLoop) return;
+
+    stoppedRef.current = false;
+    setStopped(false);
 
     let raf = 0;
     let lastTime = 0;
@@ -140,7 +147,7 @@ function MobileScroller<T>({
       el.removeEventListener("wheel", stop);
       el.removeEventListener("pointerdown", stop);
     };
-  }, [pxPerSec, itemsLen]);
+  }, [pxPerSec, itemsLen, shouldLoop]);
 
   const handleItemClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!stoppedRef.current) {
@@ -157,7 +164,7 @@ function MobileScroller<T>({
   return (
     <div
       ref={scrollerRef}
-      className={`flex overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden ${
+      className={`py-2 -my-2 flex overflow-x-auto [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden ${
         stopped ? "snap-x snap-mandatory" : ""
       } ${className}`}
       style={{
