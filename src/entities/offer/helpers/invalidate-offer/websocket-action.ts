@@ -4,6 +4,8 @@ import { dateSortingTypes } from "@entities/platform";
 import { BALANCE, USER_ME, VIEWS_BLOGGER_OFFERS } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ILanguage, USER_LANGUAGES_LIST } from "@shared/languages";
+// TEMPORARY — удалить вместе с `pages/Offers/temporary/`
+import { TEMPORARY_FETCH_ALL_ORDERS } from "@pages/Offers/temporary/allOrdersWithoutPagination";
 
 interface Props {
   dispatch: AppDispatch;
@@ -25,7 +27,11 @@ export const invalidateBloggerOfferByWebsocketAction = async ({
   // 1. Обновляем кэш заказов в ожидании
   const params = {
     page: 1,
-    elements_on_page: INTERSECTION_ELEMENTS.BLOGGER_OFFERS,
+    // ORIGINAL pagination — раскомментировать при откате TEMPORARY
+    // elements_on_page: INTERSECTION_ELEMENTS.BLOGGER_OFFERS,
+    ...(TEMPORARY_FETCH_ALL_ORDERS
+      ? {}
+      : { elements_on_page: INTERSECTION_ELEMENTS.BLOGGER_OFFERS }),
     language: language?.id,
     status: status,
     date_sort: dateSortingTypes.decrease,
