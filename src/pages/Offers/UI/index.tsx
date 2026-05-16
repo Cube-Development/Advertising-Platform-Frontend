@@ -126,7 +126,7 @@ export const OffersPage: FC = () => {
   );
   const { refetch: views } = useGetViewBloggerOrderQuery();
 
-  // ORIGINAL pagination — раскомментировать при откате TEMPORARY
+ // ORIGINAL pagination — раскомментировать при откате TEMPORARY
   // const handleOnChangePage = () => {
   //   const newPage = Math.floor(
   //     (data?.orders?.length || 0) / INTERSECTION_ELEMENTS.BLOGGER_OFFERS,

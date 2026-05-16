@@ -104,8 +104,12 @@ export const MyOffers: FC<MyOffersProps> = ({
                 ),
               )}
             {!isLast && (
-              <div className={styles.show_more} onClick={handleOnChangePage}>
-                {isLoading ? <SpinnerLoader /> : <ShowMoreBtn />}
+              <div className={styles.show_more}>
+                {isLoading ? (
+                  <SpinnerLoader />
+                ) : (
+                  <ShowMoreBtn type="button" onClick={handleOnChangePage} />
+                )}
               </div>
             )}
           </div>
