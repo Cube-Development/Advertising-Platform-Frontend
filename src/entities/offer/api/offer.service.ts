@@ -77,13 +77,17 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
         body: params,
       }),
       transformResponse: (response: IBloggerOffers, meta, arg) => {
+        const pageSize =
+          arg?.elements_on_page ?? INTERSECTION_ELEMENTS.BLOGGER_OFFERS;
+        const batchLength = response?.orders?.length ?? 0;
+
         return {
           ...response,
           status: arg?.status,
           isLast:
-            response?.elements ===
-            response?.orders?.length +
-              (response?.page - 1) * INTERSECTION_ELEMENTS.BLOGGER_OFFERS,
+            batchLength < pageSize ||
+            batchLength + (response?.page - 1) * pageSize >=
+              (response?.elements ?? 0),
         };
       },
       serializeQueryArgs: ({ endpointName, queryArgs }) => {
@@ -91,6 +95,8 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
         return `${endpointName}/${status}/`;
       },
       merge: (currentCache, newItems, arg) => {
+        const pageSize =
+          arg.arg.elements_on_page ?? INTERSECTION_ELEMENTS.BLOGGER_OFFERS;
         const newMap = new Map(newItems?.orders?.map((p) => [p?.id, p]));
 
         // Обновляем старые элементы, если есть новые с тем же id
@@ -103,23 +109,39 @@ export const bloggerOffersAPI = authApi.injectEndpoints({
         const newIds = new Set(updatedOld?.map((p) => p.id));
         const onlyNew = newItems?.orders?.filter((p) => !newIds.has(p?.id));
 
+        const getIsLast = (orders: IBloggerOffers["orders"]) => {
+          const batchLength = newItems?.orders?.length ?? 0;
+          const totalElements = newItems?.elements ?? 0;
+
+          return (
+            batchLength < pageSize || (orders?.length ?? 0) >= totalElements
+          );
+        };
+
         if (arg.arg.__isWebsocket) {
+          const orders = [...onlyNew, ...updatedOld];
+
           return {
             ...currentCache,
-            orders: [...onlyNew, ...updatedOld],
-          };
-          // return {
-          //   ...currentCache,
-          //   orders: [...newItems.orders, ...filteredOld],
-          // };
-        } else if (arg.arg.page === 1) {
-          return {
             ...newItems,
+            orders,
+            isLast: getIsLast(orders),
           };
         }
+
+        if (arg.arg.page === 1) {
+          return {
+            ...newItems,
+            isLast: getIsLast(newItems.orders),
+          };
+        }
+
+        const orders = [...updatedOld, ...onlyNew];
+
         return {
           ...newItems,
-          orders: [...updatedOld, ...onlyNew],
+          orders,
+          isLast: getIsLast(orders),
         };
       },
 

@@ -87,10 +87,7 @@ export const OffersPage: FC = () => {
   const { refetch: views } = useGetViewBloggerOrderQuery();
 
   const handleOnChangePage = () => {
-    const newPage = Math.floor(
-      (data?.orders?.length || 0) / INTERSECTION_ELEMENTS.BLOGGER_OFFERS,
-    );
-    setValue("page", newPage + 1);
+    setValue("page", formState.page + 1);
 
     if (data?.orders?.length === 0) {
       refetch();
