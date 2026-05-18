@@ -108,8 +108,8 @@ export const PostButtons: FC<PostButtonsProps> = ({
           ),
         );
       } else {
-        currentPost.buttons = nextButtons;
-        setValue(type, [...postsWithoutCurrent, currentPost]);
+        const updatedPost = { ...currentPost, buttons: nextButtons };
+        setValue(type, [...postsWithoutCurrent, updatedPost]);
       }
     }
   };
@@ -132,8 +132,8 @@ export const PostButtons: FC<PostButtonsProps> = ({
           ),
         );
       } else {
-        currentPost.buttons = [...nextButtons];
-        setValue(type, [...postsWithoutCurrent, currentPost]);
+        const updatedPost = { ...currentPost, buttons: [...nextButtons] };
+        setValue(type, [...postsWithoutCurrent, updatedPost]);
       }
     }
   };
