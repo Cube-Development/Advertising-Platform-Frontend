@@ -90,10 +90,14 @@ export const PostFiles: FC<PostFilesProps> = ({
       );
       return;
     }
-    platformId !== platformTypesNum.youtube
-      ? (currentPost.media = [...mediafiles])
-      : (currentPost.media = mediafiles.length > 0 ? [mediafiles[0]] : []);
-    setValue(type, [...postsWithoutCurrent, currentPost]);
+    const media =
+      platformId !== platformTypesNum.youtube
+        ? [...mediafiles]
+        : mediafiles.length > 0
+          ? [mediafiles[0]]
+          : [];
+    const updatedPost = { ...currentPost, media };
+    setValue(type, [...postsWithoutCurrent, updatedPost]);
   };
 
   const handleAddFile = (files: File[]) => {
@@ -115,10 +119,11 @@ export const PostFiles: FC<PostFilesProps> = ({
       return;
     }
     const currentFiles = currentPost.files || [];
-    files.length
-      ? (currentPost.files = [...currentFiles, ...files])
-      : (currentPost.files = []);
-    setValue(type, [...postsWithoutCurrent, currentPost]);
+    const updatedPost = {
+      ...currentPost,
+      files: files.length ? [...currentFiles, ...files] : [],
+    };
+    setValue(type, [...postsWithoutCurrent, updatedPost]);
   };
 
   const currentMedia: File[] = currentPost?.media || [];

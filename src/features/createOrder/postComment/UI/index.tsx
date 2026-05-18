@@ -44,7 +44,7 @@ export const PostComment: FC<PostCommentProps> = ({
       const startText = currentPost.comment || "";
       setDescription(startText);
     }
-  }, [formState, platformId]);
+  }, [formState?.selectedMultiPostId, formState?.selectedPostType, platformId]);
 
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const newText = e.target.value;
@@ -86,8 +86,8 @@ export const PostComment: FC<PostCommentProps> = ({
           ),
         );
       } else {
-        currentPost.comment = newText;
-        setValue(type, [...posts, currentPost]);
+        const updatedPost = { ...currentPost, comment: newText };
+        setValue(type, [...posts, updatedPost]);
       }
     }
   };
