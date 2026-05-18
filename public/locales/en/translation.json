@@ -2923,6 +2923,9 @@
       }
     },
     "checkPost": "Check post",
+    "postLink": {
+      "label": "Post link:"
+    },
     "seePost": "View post",
     "seeComment": "View comment",
     "channel": {

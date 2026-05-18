@@ -1,0 +1,66 @@
+.preview {
+  position: relative;
+  margin-top: 4px;
+  width: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.previewInner {
+  transform-origin: top left;
+  will-change: transform;
+
+  iframe {
+    display: block;
+    border: 0;
+    background: transparent;
+  }
+}
+
+.fallback {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 6px;
+  margin-top: 4px;
+  padding: 6px 8px;
+  border-left: 3px solid #5eb5f7;
+  border-radius: 4px;
+  background: rgba(94, 181, 247, 0.12);
+  color: #fff;
+  text-decoration: none;
+  min-width: 0;
+}
+
+.favicon {
+  width: 22px;
+  height: 22px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.15);
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.text {
+  display: grid;
+  min-width: 0;
+}
+
+.title {
+  font-weight: 600;
+  font-size: 0.95em;
+  line-height: 1.2;
+  color: #5eb5f7;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.url {
+  font-size: 0.85em;
+  line-height: 1.2;
+  color: rgba(255, 255, 255, 0.7);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -9,6 +9,7 @@ import { GetPostRes, ICreatePostForm } from "@entities/project";
 import { DownloadAllBtn } from "../../../utils/downloadAllBtn";
 import { CopyTextBtn } from "../../../utils/copyTextBtn";
 import { preparePostsData } from "@entities/platform/ui/utils";
+import { LinkPreview, extractSoleLink } from "./linkPreview";
 
 interface DisplayTelegramProps {
   formState?: ICreatePostForm;
@@ -49,6 +50,11 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
   const postFile = currentPost?.files;
   const postButtons = currentPost?.buttons;
   const postComment = currentPost?.comment;
+
+  const formSoleLink = !postMedia?.length
+    ? extractSoleLink(postText?.[0]?.content)
+    : null;
+  const resSoleLink = !mediaRes?.length ? extractSoleLink(textRes) : null;
 
   const imgRef = useRef<HTMLImageElement>(null);
   const [resizes, setResizes] = useState<{
@@ -167,6 +173,14 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
                     }}
                     style={{ fontSize: `${resizes?.timeSize}px` }}
                   />
+                  {formSoleLink && (
+                    <div
+                      className={styles.post__preview}
+                      style={{ fontSize: `${resizes?.timeSize}px` }}
+                    >
+                      <LinkPreview url={formSoleLink} />
+                    </div>
+                  )}
                   <div className={styles.info}>
                     <EyeIcon />
                     <span>213,7K</span>
@@ -235,6 +249,14 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
                     }}
                     style={{ fontSize: `${resizes?.timeSize}px` }}
                   />
+                  {resSoleLink && (
+                    <div
+                      className={styles.post__preview}
+                      style={{ fontSize: `${resizes?.timeSize}px` }}
+                    >
+                      <LinkPreview url={resSoleLink} />
+                    </div>
+                  )}
 
                   <div className={styles.info}>
                     <EyeIcon />

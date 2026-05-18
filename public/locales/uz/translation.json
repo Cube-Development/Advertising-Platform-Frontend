@@ -2924,6 +2924,9 @@
       }
     },
     "checkPost": "Postni tekshirish",
+    "postLink": {
+      "label": "Post havolasi:"
+    },
     "seePost": "Postni ko'rish",
     "seeComment": "Izohni ko'rish",
     "channel": {
