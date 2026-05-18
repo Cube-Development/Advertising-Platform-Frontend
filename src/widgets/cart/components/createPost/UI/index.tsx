@@ -22,7 +22,8 @@ export const CreatePost: FC<CreatePostProps> = ({ cart, role, isLoading }) => {
   const screen = useWindowWidth();
   const { isPremiumUser, isAuth } = useAppSelector((state) => state.user);
 
-  const isModal = !isAuth || !isPremiumUser;
+  // const isModal = !isAuth || !isPremiumUser;
+  const isModal = false;
   const Modal = () =>
     !isAuth ? (
       <LoginToViewMore />
