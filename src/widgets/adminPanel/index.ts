@@ -10,3 +10,4 @@ export * from "./organization";
 export * from "./documents";
 export * from "./accounting";
 export * from "./orderTransfer";
+export * from "./mailing";

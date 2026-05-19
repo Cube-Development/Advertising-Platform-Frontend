@@ -39,4 +39,5 @@ export enum ENUM_PATHS {
   ADMIN_COMPLAINT_INFO = "/admin/complaints/:id",
   ADMIN_DOCUMENTS = "/admin/documents",
   ADMIN_ORDER_TRANSFER = "/admin/order-transfer",
+  ADMIN_MAILING = "/admin/mailing",
 }

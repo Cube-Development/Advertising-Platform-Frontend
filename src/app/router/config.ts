@@ -6,6 +6,7 @@ import { AdminComplaintInfoPage } from "@pages/AdminComplaintInfo";
 import { AdminComplaintsPage } from "@pages/AdminComplaints";
 import { AdminDocumentsPage } from "@pages/AdminDocuments/UI";
 import { AdminOrderTransferPage } from "@pages/AdminOrderTransfer";
+import { AdminMailingPage } from "@pages/AdminMailing";
 import { AdminHomePage } from "@pages/AdminHome";
 import { AdminOrganizationPage } from "@pages/AdminOrganization";
 import { AdminReviewsPage } from "@pages/AdminReviews";
@@ -349,8 +350,8 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
     adminSidebar: true,
   },
   {
-    path: ENUM_PATHS.ADMIN_ORDER_TRANSFER,
-    component: AdminOrderTransferPage,
+    path: ENUM_PATHS.ADMIN_MAILING,
+    component: AdminMailingPage,
     roles: [ENUM_ROLES.MODERATOR],
     auth: ENUM_AUTH_TYPES.PRIVATE,
     layout: ENUM_LAYOUT_TYPES.ADMIN,
