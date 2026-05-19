@@ -19,13 +19,13 @@
 }
 
 .labelRow {
-  display: flex;
-  align-items: center;
+  display: flex !important;
+  align-items: center !important;
   gap: 6px;
-  justify-content: start;
+  justify-content: start !important;
 
   @media (max-width: 768px) {
-    justify-content: center;
+    justify-content: center !important;
   }
 }
 
@@ -47,15 +47,23 @@
 }
 
 .row {
-  display: flex;
-  align-items: flex-start;
+  display: flex !important;
+  align-items: flex-start !important;
   gap: 8px;
   min-width: 0;
-  justify-content: start;
+  justify-content: start !important;
+
+  a {
+    text-align: start !important;
+  }
 
   @media (max-width: 768px) {
-    justify-content: center;
-    align-items: flex-start;
+    justify-content: center !important;
+    align-items: flex-start !important;
+
+    a {
+      text-align: center !important;
+    }
   }
 }
 
