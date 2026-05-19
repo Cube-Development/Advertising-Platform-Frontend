@@ -14,11 +14,10 @@ import { useForm } from "react-hook-form";
 import { MAILING_MAIN_FIELDS, MAILING_TEXT_FIELDS } from "../model/constants";
 import { MailingFormInput, MailingFormOutput, mailingSchema } from "../model/schema";
 import { FormFieldItem } from "./FormFieldItem";
-import { ENUM_ROLES } from "@entities/user";
 
-const ROLE_OPTIONS = [
-  { id: ENUM_ROLES.BLOGGER, name: "Блогер" },
-  { id: ENUM_ROLES.ADVERTISER, name: "Рекламодатель" },
+const ROLE_OPTIONS: any[] = [
+  { id: "blogger", name: "Блогер" },
+  { id: "advertiser", name: "Рекламодатель" },
 ];
 
 export const Mailing = () => {
