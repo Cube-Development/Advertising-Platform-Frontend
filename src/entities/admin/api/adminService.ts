@@ -59,6 +59,13 @@ export interface adminUpdateOrderDateReq {
   time_to: string;
 }
 
+export interface adminMailingReq {
+  subject: string;
+  text: string;
+  role: string;
+  users: string[];
+}
+
 export const adminAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
     getAdminOrderComplaints: build.query<
@@ -307,6 +314,13 @@ export const adminAPI = authApi.injectEndpoints({
         body,
       }),
     }),
+    adminSendMailing: build.mutation<{ success: boolean }, adminMailingReq>({
+      query: (body) => ({
+        url: `/adv-admin/mailing`,
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
@@ -325,4 +339,5 @@ export const {
   useAccountingWithdrawalAcceptMutation,
   useAccountingWithdrawalRejectMutation,
   useAdminUpdateOrderDateMutation,
+  useAdminSendMailingMutation,
 } = adminAPI;

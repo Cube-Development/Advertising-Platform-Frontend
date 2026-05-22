@@ -10,6 +10,7 @@ import {
   OctagonAlert,
   Tv,
   Users,
+  Mail,
 } from "lucide-react";
 
 export const ADMIN_MENU: IMenuItem[] = [
@@ -60,6 +61,13 @@ export const ADMIN_MENU: IMenuItem[] = [
       title: "Перенос ордеров",
       path: ENUM_PATHS.ADMIN_ORDER_TRANSFER,
       icon: CalendarClock,
+    },
+  },
+  {
+    item: {
+      title: "Рассылка",
+      path: ENUM_PATHS.ADMIN_MAILING,
+      icon: Mail,
     },
   },
 ];
