@@ -331,6 +331,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
                 defaultValue={formState?.filter?.business}
                 isRow={true}
                 searchable={true}
+                showSelectedChips
               />
               <SelectOptions
                 data={formState?.filter}
@@ -341,6 +342,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
                 textData={"catalog.region"}
                 defaultValue={formState?.filter.region}
                 isRow={true}
+                showSelectedChips
               />
               <SelectOptions
                 data={formState?.filter}
@@ -351,6 +353,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
                 textData={"catalog.languages"}
                 defaultValue={formState?.filter.language}
                 isRow={true}
+                showSelectedChips
               />
               <SelectSex
                 data={formState?.filter}
@@ -373,6 +376,7 @@ export const CatalogSearch: FC<CatalogSearchProps> = ({
                 defaultValue={formState?.filter.age}
                 textData={"catalog.age"}
                 isRow={true}
+                showSelectedChips
               />
             </>
           ) : (

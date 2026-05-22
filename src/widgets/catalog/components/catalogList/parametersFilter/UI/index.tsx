@@ -343,6 +343,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
                       defaultValue={formState?.filter?.business}
                       isRow={true}
                       searchable={true}
+                      showSelectedChips
                     />
                     <SelectOptions
                       data={formState?.filter}
@@ -353,6 +354,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
                       textData={"catalog.region"}
                       isRow={true}
                       defaultValue={formState?.filter?.region}
+                      showSelectedChips
                     />
                     <SelectOptions
                       data={formState?.filter}
@@ -363,6 +365,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
                       textData={"catalog.languages"}
                       isRow={true}
                       defaultValue={formState?.filter?.language}
+                      showSelectedChips
                     />
                     <SelectSex
                       data={formState?.filter}
@@ -385,6 +388,7 @@ export const ParametersFilter: FC<ParametersFilterProps> = ({
                       textData={"catalog.age"}
                       isRow={true}
                       defaultValue={formState?.filter?.age}
+                      showSelectedChips
                     />
                   </>
                 ) : (
