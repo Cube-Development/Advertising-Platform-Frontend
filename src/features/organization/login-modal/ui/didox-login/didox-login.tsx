@@ -10,7 +10,8 @@ import {
 import { CertificateSelect } from "@features/organization";
 import { Certificate, useCryptoCertificates } from "@shared/api";
 import { CustomBlockData } from "@shared/ui";
-import { Loader2 } from "lucide-react";
+import { Button } from "@shared/ui/shadcn-ui";
+import { ArrowLeft, Loader2 } from "lucide-react";
 import { FC, useMemo } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -18,7 +19,11 @@ import { DIGITAL_LOGIN_TABS_LIST } from "./model";
 import { TabItem } from "./ui";
 import DidoxLogo from "/images/organization/didox-logo.svg";
 
-export const DidoxLogin: FC = () => {
+interface DidoxLoginProps {
+  onBack?: () => void;
+}
+
+export const DidoxLogin: FC<DidoxLoginProps> = ({ onBack }) => {
   const { certificates, certificatesLoading, error, isSignatureLoading } =
     useCryptoCertificates();
   const { t } = useTranslation();
@@ -86,8 +91,19 @@ export const DidoxLogin: FC = () => {
 
   return (
     <div className="grid items-center grid-rows-[max-content,1fr] h-full w-full">
-      <div className="bg-[#341F47] p-6">
-        <img src={DidoxLogo} alt="didox-logo" className="h-8" />
+      <div className="bg-[#341F47] p-6 space-y-4">
+        {onBack && (
+          <Button
+            type="button"
+            variant="ghost"
+            className="text-white gap-2 px-0 h-auto hover:translate-y-0 hover:bg-transparent hover:text-white focus-visible:ring-0 focus-visible:ring-offset-0 focus-visible:outline-none"
+            onClick={onBack}
+          >
+            <ArrowLeft size={18} />
+            {t("organization.login.buttons.back")}
+          </Button>
+        )}
+        <img src={DidoxLogo} alt="Didox" className="h-8" />
       </div>
       <form
         className="relative block h-full px-5 py-10 space-y-6"

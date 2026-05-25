@@ -7,11 +7,14 @@ export interface IGetMyOrganizationResponse {
   offer_id: string;
   status: ENUM_ORGANIZATION_STATUS;
   created: string;
+  invate_url?: string;
 }
 
 export interface ICreateOrganizationRequest {
-  TIN: string;
+  TIN?: string;
   PINFL: string | null;
+  phone?: string;
+  card_number?: string;
 }
 
 export interface IOrganizationStatus {

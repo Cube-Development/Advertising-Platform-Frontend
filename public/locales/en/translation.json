@@ -1563,7 +1563,8 @@
           "approved": "Approved",
           "not_approved": "Not approved"
         },
-        "edit": "Edit"
+        "edit": "Edit",
+        "invite_link": "Open Didox S"
       },
       "change_password": {
         "title": "Change password"
@@ -1704,10 +1705,81 @@
       }
     },
     "login": {
+      "buttons": {
+        "back": "Back"
+      },
+      "registration_type": {
+        "header": {
+          "title": "Add organization",
+          "subtitle": "Choose how you will work on the platform"
+        },
+        "title": "How would you like to register?",
+        "description": "The selected type determines how you verify and receive payouts",
+        "options": {
+          "legal": "Legal entity / Individual entrepreneur",
+          "legal_description": "Sign in and sign documents via Didox with EDS or password",
+          "self_employed": "Self-employed",
+          "self_employed_description": "Register in Didox S with PINFL, phone and bank card"
+        },
+        "info": {
+          "text": "An organization is required for documents, payouts to account or card, and participating in ad campaigns on your behalf."
+        },
+        "hints": {
+          "title": "What happens next",
+          "legal": {
+            "0": "Proceed to Didox authorization",
+            "1": "Sign in with EDS key or password",
+            "2": "Sign the public offer to access the service"
+          },
+          "self_employed": {
+            "0": "Registration in Didox S",
+            "1": "Fill in PINFL, phone and card",
+            "2": "Payouts to card without EDS and Didox"
+          }
+        },
+        "buttons": {
+          "continue": "Continue"
+        }
+      },
+      "self_employed": {
+        "header": {
+          "brand": "Didox S"
+        },
+        "title": "Register in Didox S",
+        "description": "Fill in the details to add a self-employed profile via Didox S",
+        "fields": {
+          "pinfl": "PINFL",
+          "phone": "Phone number",
+          "card": "Bank card number"
+        },
+        "placeholders": {
+          "pinfl": "12345678901234",
+          "phone": "+998901234567",
+          "card": "00000000000000000000"
+        },
+        "errors": {
+          "pinfl": "PINFL must contain 14 digits",
+          "phone": "Enter phone in +998XXXXXXXXX format",
+          "card": "Enter card number (at least 16 digits)",
+          "required": "Required field"
+        },
+        "buttons": {
+          "submit": "Submit"
+        },
+        "success": {
+          "banner": {
+            "badge": "Application received",
+            "text": "Confirm registration in Didox S to complete adding your organization to the platform."
+          },
+          "title": "Confirm registration in Didox S",
+          "description": "One step left — follow the link and complete self-employed registration. You can close this window and return later.",
+          "action_hint": "Click the button below to open Didox S in a new tab"
+        }
+      },
       "didox": {
-        "title": "Sign in to the system",
-        "description": "Choose the type of authentication and fill in the details to access your account",
-        "choose_type": "How would you like to sign in?",
+        "title": "Sign in to Didox",
+        "description": "Choose the type of authentication and fill in the details to access your Didox account",
+        "choose_type": "How would you like to sign in to Didox?",
         "no_account": "Don't have an account?",
         "register": "Register",
         "type": {
