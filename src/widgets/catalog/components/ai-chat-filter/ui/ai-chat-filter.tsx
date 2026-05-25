@@ -145,18 +145,14 @@ export const AiChatFilter: FC<AiChatFilterProps> = ({
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
                   onKeyDown={handleKeyDown}
-                  placeholder={
-                    pendingQuestion
-                      ? "Введите ваш ответ..."
-                      : "Опишите что вы ищете..."
-                  }
-                  className="flex-1 px-4 py-3 text-base bg-white border border-transparent resize-none rounded-xl focus:border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500/40 disabled:opacity-70"
+                  placeholder="Скоро — опишите, что ищете..."
+                  className="flex-1 px-4 py-3 text-base bg-white border border-transparent resize-none rounded-xl focus:border-blue-200 focus:outline-none focus:ring-2 focus:ring-blue-500/40 disabled:cursor-not-allowed disabled:opacity-60"
                   rows={2}
-                  disabled={isComplete || isTyping}
+                  disabled
                 />
                 <button
                   onClick={handleSubmit}
-                  disabled={!input.trim() || isComplete || isTyping}
+                  disabled
                   className="flex items-center justify-center p-3 text-white transition-colors bg-blue-600 rounded-xl hover:bg-blue-700 disabled:cursor-not-allowed disabled:bg-slate-300"
                 >
                   <Send size={20} />
@@ -164,7 +160,7 @@ export const AiChatFilter: FC<AiChatFilterProps> = ({
               </div>
 
               <div className="text-xs text-slate-500">
-                Enter для отправки, Shift+Enter для новой строки
+                Функция в разработке
               </div>
             </div>
           </>
