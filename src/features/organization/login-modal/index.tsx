@@ -67,7 +67,7 @@ export const LoginModal: FC<LoginModalProps> = ({
             </DialogTrigger>
           )}
 
-          <DialogContent className="frame !p-0 min-h-[650px] overflow-hidden max-w-[700px] w-[90vw]">
+          <DialogContent className="frame !p-0 min-h-[650px] overflow-y-auto overflow-x-hidden max-w-[700px] w-[90vw]">
             <DialogTitle className="sr-only" />
             <DialogDescription className="sr-only" />
             <DialogClose
@@ -76,7 +76,7 @@ export const LoginModal: FC<LoginModalProps> = ({
             >
               <XCircle size={24} className="text-white" />
             </DialogClose>
-            <ModalContent />
+            <ModalContent isOpen={isOpen} onClose={() => handleOpen(false)} />
           </DialogContent>
         </Dialog>
       ) : (
@@ -108,7 +108,7 @@ export const LoginModal: FC<LoginModalProps> = ({
               >
                 <XCircle size={24} className="text-white" />
               </DrawerClose>
-              <ModalContent />
+              <ModalContent isOpen={isOpen} onClose={() => handleOpen(false)} />
             </div>
           </DrawerContent>
         </Drawer>

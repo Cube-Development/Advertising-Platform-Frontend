@@ -8,7 +8,7 @@ import {
   IUserDataNew,
   useGetUserQueryQuery,
 } from "@entities/user";
-import { OfferSignModal } from "@features/organization";
+import { OfferSignModal, OrganizationInviteLink } from "@features/organization";
 import { MOCK_PROFILE } from "@shared/config";
 import { cn } from "@shared/ui";
 import { formatDate } from "@shared/utils";
@@ -108,6 +108,13 @@ export const UserDataForm: FC<IUserDataFormProps> = ({}) => {
                 {t(status)}
               </span>
             </div>
+            {!!organization?.invate_url && (
+                <div className={styles.row}>
+                  <div className={styles.inviteLink}>
+                    <OrganizationInviteLink inviteUrl={organization?.invate_url} />
+                  </div>
+                </div>
+              )}
             <OfferSignModal />
           </div>
         </div>
