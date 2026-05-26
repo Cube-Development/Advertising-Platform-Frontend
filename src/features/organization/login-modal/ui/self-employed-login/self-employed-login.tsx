@@ -33,6 +33,7 @@ export const SelfEmployedLogin: FC<SelfEmployedLoginProps> = ({ onBack }) => {
     formState: { errors, isSubmitting },
   } = useForm<SelfEmployedFormValues>({
     resolver: zodResolver(selfEmployedFormSchema),
+    mode: "onBlur",
     defaultValues: {
       PNFL: "",
       phone: "",
@@ -44,7 +45,7 @@ export const SelfEmployedLogin: FC<SelfEmployedLoginProps> = ({ onBack }) => {
     try {
       const result = await createOrganization({
         PINFL: data.PNFL,
-        phone: data.phone,
+        phone: data.phone.replace(/\D/g, ""),
         card_number: data.card_number,
       }).unwrap();
 
@@ -146,6 +147,7 @@ export const SelfEmployedLogin: FC<SelfEmployedLoginProps> = ({ onBack }) => {
               errors.phone?.message && t(errors.phone.message as string)
             }
             register={register("phone", { onChange: formatToPhoneNumber })}
+            maxLength={formDataLength.phone + 1}
           />
 
           <FormField
@@ -160,7 +162,7 @@ export const SelfEmployedLogin: FC<SelfEmployedLoginProps> = ({ onBack }) => {
               t(errors.card_number.message as string)
             }
             register={register("card_number", { onChange: formatToNumber })}
-            maxLength={formDataLength.card_number}
+            maxLength={16}
           />
         </div>
 
