@@ -1566,6 +1566,11 @@
         "edit": "Tahrirlash",
         "invite_link": "Didox S ni ochish"
       },
+      "committent_card": {
+        "title": "Komitent",
+        "subtitle": "O'zini o'zi band qilgan · Didox S",
+        "description": "To'lovlar ko'rsatilgan bank kartasiga o'tkaziladi. Ro'yxatdan o'tishni yakunlash uchun quyidagi havola orqali Didox S ga o'ting."
+      },
       "change_password": {
         "title": "Parolni o‘zgartirish"
       },
@@ -3191,7 +3196,8 @@
       "create": {
         "success": "Tashkilot muvaffaqiyatli moderatsiyaga yuborildi",
         "error": "Tashkilotni qo‘shishda xatolik yuz berdi",
-        "unique": "Ushbu tashkilot tizimda allaqachon ro‘yxatdan o‘tgan"
+        "unique": "Ushbu tashkilot tizimda allaqachon ro‘yxatdan o‘tgan",
+        "not_found": "Telefon raqami yoki JSHSHIRni tekshiring"
       },
       "offer_sign": {
         "success": "Ommaviy oferta muvaffaqiyatli imzolandi",

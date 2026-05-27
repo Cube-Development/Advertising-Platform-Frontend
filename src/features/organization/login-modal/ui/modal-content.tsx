@@ -1,7 +1,11 @@
+import { useGetOrganizationQuery } from "@entities/organization";
 import { FC, useEffect, useState } from "react";
 import { DidoxLogin } from "./didox-login/didox-login";
 import { LoginModalStep } from "./model";
-import { RegistrationType, RegistrationTypeSelect } from "./registration-type-select";
+import {
+  RegistrationType,
+  RegistrationTypeSelect,
+} from "./registration-type-select";
 import { SelfEmployedLogin } from "./self-employed-login";
 
 interface IModalContentProps {
@@ -13,6 +17,9 @@ export const ModalContent: FC<IModalContentProps> = ({
   isOpen = false,
   onClose,
 }) => {
+  const { data: organization } = useGetOrganizationQuery();
+  const isEcpOnly = organization && organization.self_employed === null;
+
   const [step, setStep] = useState<LoginModalStep>(
     LoginModalStep.RegistrationType,
   );
@@ -33,6 +40,10 @@ export const ModalContent: FC<IModalContentProps> = ({
     }
   };
 
+  if (isEcpOnly) {
+    return <DidoxLogin />;
+  }
+
   switch (step) {
     case LoginModalStep.Didox:
       return <DidoxLogin onBack={handleBack} />;
@@ -40,8 +51,6 @@ export const ModalContent: FC<IModalContentProps> = ({
       return <SelfEmployedLogin onBack={handleBack} />;
     case LoginModalStep.RegistrationType:
     default:
-      return (
-        <RegistrationTypeSelect onContinue={handleRegistrationContinue} />
-      );
+      return <RegistrationTypeSelect onContinue={handleRegistrationContinue} />;
   }
 };

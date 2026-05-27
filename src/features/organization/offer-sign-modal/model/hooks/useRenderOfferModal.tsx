@@ -20,6 +20,7 @@ export const useRenderOfferModal = () => {
 
   useEffect(() => {
     if (isLoading) return;
+    if (organization?.self_employed) return;
 
     // Если пользователь вышел (true -> false), сбрасываем флаг
     if (prevAuthRef.current === true && isAuthEcp === false) {

@@ -9,7 +9,7 @@ const ERRORS = {
   card: "organization.login.self_employed.errors.card",
 } as const;
 
-const CARD_NUMBER_LENGTH = 16;
+// const CARD_NUMBER_LENGTH = 16;
 
 export const selfEmployedFormSchema = z.object({
   PNFL: z
@@ -23,13 +23,13 @@ export const selfEmployedFormSchema = z.object({
     .min(1, ERRORS.required)
     .refine(isValidPhoneNumber, ERRORS.phone),
 
-  card_number: z
-    .string()
-    .min(1, ERRORS.required)
-    .refine(
-      (value) => value.replace(/\D/g, "").length === CARD_NUMBER_LENGTH,
-      ERRORS.card,
-    ),
+  // card_number: z
+  //   .string()
+  //   .min(1, ERRORS.required)
+  //   .refine(
+  //     (value) => value.replace(/\D/g, "").length === CARD_NUMBER_LENGTH,
+  //     ERRORS.card,
+  //   ),
 });
 
 export type SelfEmployedFormValues = z.infer<typeof selfEmployedFormSchema>;

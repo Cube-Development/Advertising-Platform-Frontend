@@ -6,6 +6,7 @@ import Cookies from "js-cookie";
 interface UserState {
   isAuth: boolean;
   isAuthEcp?: boolean;
+  isCommittent?: boolean;
   isOfferSign?: boolean;
   isOfferOpen?: boolean;
   role: ENUM_ROLES;
@@ -24,6 +25,7 @@ const initialState: UserState = {
   isAuth: Cookies.get(ENUM_COOKIES_TYPES.IS_AUTH) === "true" ? true : false,
   isAuthEcp:
     Cookies.get(ENUM_COOKIES_TYPES.IS_AUTH_ECP) === "true" ? true : false,
+  isCommittent: false,
   role: getRole,
   isOfferSign: false,
   isOfferOpen: false,
@@ -62,6 +64,9 @@ export const userSlice = createSlice({
       state.isAuth = false;
       state.role = logoutRole;
       state.isPremiumUser = false;
+      state.isCommittent = false;
+      state.isOfferSign = false;
+      state.isOfferOpen = false;
 
       userSlice.caseReducers.logoutEcp(state);
     },
@@ -69,6 +74,9 @@ export const userSlice = createSlice({
       Cookies.remove(ENUM_COOKIES_TYPES.CERTIFICATE_USER_KEY);
       Cookies.set(ENUM_COOKIES_TYPES.IS_AUTH_ECP, "false");
       state.isAuthEcp = false;
+      state.isCommittent = false;
+      state.isOfferSign = false;
+      state.isOfferOpen = false;
     },
     setAuth: (state, action: PayloadAction<boolean>) => {
       state.isAuth = action.payload;
@@ -78,6 +86,9 @@ export const userSlice = createSlice({
     },
     setPremiumBalance: (state, action: PayloadAction<number>) => {
       state.premiumBalance = action.payload;
+    },
+    setIsCommittent: (state, action: PayloadAction<boolean>) => {
+      state.isCommittent = action.payload;
     },
     toggleRole: (state, action: PayloadAction<ENUM_ROLES>) => {
       state.role = action.payload;
@@ -98,4 +109,5 @@ export const {
   offerOpen,
   setPremiumUser,
   setPremiumBalance,
+  setIsCommittent,
 } = userSlice.actions;

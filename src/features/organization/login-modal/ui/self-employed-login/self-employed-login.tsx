@@ -11,10 +11,7 @@ import { ArrowLeft, Loader2 } from "lucide-react";
 import { FC, useState } from "react";
 import { useForm, UseFormRegister } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import {
-  SelfEmployedFormValues,
-  selfEmployedFormSchema,
-} from "./model";
+import { SelfEmployedFormValues, selfEmployedFormSchema } from "./model";
 import { SelfEmployedSuccess } from "./ui";
 
 interface SelfEmployedLoginProps {
@@ -37,7 +34,7 @@ export const SelfEmployedLogin: FC<SelfEmployedLoginProps> = ({ onBack }) => {
     defaultValues: {
       PNFL: "",
       phone: "",
-      card_number: "",
+      // card_number: "",
     },
   });
 
@@ -46,7 +43,7 @@ export const SelfEmployedLogin: FC<SelfEmployedLoginProps> = ({ onBack }) => {
       const result = await createOrganization({
         PINFL: data.PNFL,
         phone: data.phone.replace(/\D/g, ""),
-        card_number: data.card_number,
+        // card_number: data.card_number,
       }).unwrap();
 
       toast({
@@ -55,10 +52,15 @@ export const SelfEmployedLogin: FC<SelfEmployedLoginProps> = ({ onBack }) => {
       });
       setCreatedOrganization(result);
     } catch (err: unknown) {
-      const error = err as { data?: { error?: { message?: string } } };
+      const error = err as {
+        data?: { message?: string; error?: { message?: string } };
+      };
+      const backendMessage = error?.data?.error?.message || error?.data?.message;
       const errorMessage =
-        error?.data?.error?.message === "Unique violation error"
+        backendMessage === "Unique violation error"
           ? "toasts.organization.create.unique"
+          : backendMessage === "Organization not found"
+            ? "toasts.organization.create.not_found"
           : "toasts.organization.create.error";
 
       toast({
@@ -69,6 +71,7 @@ export const SelfEmployedLogin: FC<SelfEmployedLoginProps> = ({ onBack }) => {
   };
 
   if (createdOrganization) {
+    console.log("createdOrganization", createdOrganization);
     return (
       <div className="grid grid-rows-[max-content,1fr] h-full min-h-0 w-full">
         <div className="grid gap-3 bg-[#341F47] px-5 py-4">
@@ -86,7 +89,7 @@ export const SelfEmployedLogin: FC<SelfEmployedLoginProps> = ({ onBack }) => {
           </p>
         </div>
 
-        <SelfEmployedSuccess inviteUrl={createdOrganization.invate_url} />
+        <SelfEmployedSuccess inviteUrl={createdOrganization.invite_url} />
       </div>
     );
   }
@@ -150,7 +153,7 @@ export const SelfEmployedLogin: FC<SelfEmployedLoginProps> = ({ onBack }) => {
             maxLength={formDataLength.phone + 1}
           />
 
-          <FormField
+          {/* <FormField
             id="card_number"
             label={t("organization.login.self_employed.fields.card")}
             placeholder={t(
@@ -163,7 +166,7 @@ export const SelfEmployedLogin: FC<SelfEmployedLoginProps> = ({ onBack }) => {
             }
             register={register("card_number", { onChange: formatToNumber })}
             maxLength={16}
-          />
+          /> */}
         </div>
 
         <Button
@@ -213,8 +216,6 @@ const FormField: FC<FormFieldProps> = ({
       maxLength={maxLength}
       {...register}
     />
-    {errorMessage && (
-      <p className="text-sm text-red-500">{errorMessage}</p>
-    )}
+    {errorMessage && <p className="text-sm text-red-500">{errorMessage}</p>}
   </div>
 );

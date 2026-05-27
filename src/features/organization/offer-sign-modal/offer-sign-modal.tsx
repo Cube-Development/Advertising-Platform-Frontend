@@ -55,7 +55,11 @@ export const OfferSignModal: FC<OfferSignModalProps> = ({
     setOpen(open);
   };
 
-  if (organization?.status === ENUM_ORGANIZATION_STATUS.ACTIVE) return null;
+  if (
+    organization?.status === ENUM_ORGANIZATION_STATUS.ACTIVE ||
+    typeof organization?.self_employed === "boolean"
+  )
+    return null;
 
   return (
     <>
