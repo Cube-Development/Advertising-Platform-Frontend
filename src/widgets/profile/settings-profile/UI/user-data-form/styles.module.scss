@@ -96,6 +96,11 @@
         }
       }
 
+      .inviteLink {
+        grid-column: 1 / -1;
+        width: 100%;
+      }
+
       @media (max-width: 576px) {
         grid-template: unset;
         grid-auto-flow: row;

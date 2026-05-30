@@ -3,3 +3,4 @@ export * from "./certificate-select";
 export * from "./logout-ecp";
 export * from "./login-modal";
 export * from "./offer-sign-modal";
+export * from "./organization-invite-link";

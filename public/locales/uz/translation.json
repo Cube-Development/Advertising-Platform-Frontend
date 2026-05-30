@@ -1563,7 +1563,8 @@
           "approved": "Tasdiqlangan",
           "not_approved": "Tasdiqlanmagan"
         },
-        "edit": "Tahrirlash"
+        "edit": "Tahrirlash",
+        "invite_link": "Didox S ni ochish"
       },
       "change_password": {
         "title": "Parolni o‘zgartirish"
@@ -1704,10 +1705,81 @@
       }
     },
     "login": {
+      "buttons": {
+        "back": "Orqaga"
+      },
+      "registration_type": {
+        "header": {
+          "title": "Tashkilot qo'shish",
+          "subtitle": "Platformada qanday ishlashingizni tanlang"
+        },
+        "title": "Qanday ro'yxatdan o'tmoqchisiz?",
+        "description": "Tanlangan tur tasdiqlash va to'lovlarni olish usuliga bog'liq",
+        "options": {
+          "legal": "Yuridik shaxs / YTT",
+          "legal_description": "Didox orqali ERI yoki parol bilan kirish va hujjatlarni imzolash",
+          "self_employed": "O'zini o'zi band qilgan",
+          "self_employed_description": "Didox S da JSHSHIR, telefon va bank kartasi orqali ro'yxatdan o'tish"
+        },
+        "info": {
+          "text": "Tashkilot hujjatlar, hisob yoki kartaga to'lovlar va reklama kampaniyalarida ishtirok etish uchun kerak."
+        },
+        "hints": {
+          "title": "Keyin nima bo'ladi",
+          "legal": {
+            "0": "Didox orqali avtorizatsiyaga o'tish",
+            "1": "ERI kaliti yoki parol bilan kirish",
+            "2": "Xizmatga kirish uchun ommaviy ofertani imzolash"
+          },
+          "self_employed": {
+            "0": "Didox S tizimida ro'yxatdan o'tish",
+            "1": "JSHSHIR, telefon va karta to'ldiriladi",
+            "2": "ERI va Didoxsiz kartaga to'lovlar"
+          }
+        },
+        "buttons": {
+          "continue": "Davom etish"
+        }
+      },
+      "self_employed": {
+        "header": {
+          "brand": "Didox S"
+        },
+        "title": "Didox S da ro'yxatdan o'tish",
+        "description": "Didox S orqali o'zini o'zi band qilgan shaxsni qo'shish uchun ma'lumotlarni to'ldiring",
+        "fields": {
+          "pinfl": "JSHSHIR",
+          "phone": "Telefon raqami",
+          "card": "Bank karta raqami"
+        },
+        "placeholders": {
+          "pinfl": "12345678901234",
+          "phone": "+998901234567",
+          "card": "00000000000000000000"
+        },
+        "errors": {
+          "pinfl": "JSHSHIR 14 ta raqamdan iborat bo'lishi kerak",
+          "phone": "Telefonni +998XXXXXXXXX formatida kiriting",
+          "card": "Karta raqamini kiriting (kamida 16 raqam)",
+          "required": "Majburiy maydon"
+        },
+        "buttons": {
+          "submit": "Yuborish"
+        },
+        "success": {
+          "banner": {
+            "badge": "Ariza qabul qilindi",
+            "text": "Platformaga tashkilot qo'shishni yakunlash uchun Didox S da ro'yxatdan o'tishni tasdiqlang."
+          },
+          "title": "Didox S da ro'yxatdan o'tishni tasdiqlang",
+          "description": "Bitta qadam qoldi — havolaga o'ting va o'zini o'zi band qilgan shaxs sifatida ro'yxatdan o'tishni yakunlang. Bu oynani yopib keyinroq qaytishingiz mumkin.",
+          "action_hint": "Didox S ni yangi tabda ochish uchun quyidagi tugmani bosing"
+        }
+      },
       "didox": {
-        "title": "Tizimga kirish",
-        "description": "Avtorizatsiya turini tanlang va akkauntga kirish uchun ma’lumotlarni to‘ldiring",
-        "choose_type": "Qanday usulda tizimga kirmoqchisiz?",
+        "title": "Didox ga kirish",
+        "description": "Avtorizatsiya turini tanlang va Didox akkauntiga kirish uchun ma'lumotlarni to'ldiring",
+        "choose_type": "Didox ga qanday usulda kirmoqchisiz?",
         "no_account": "Hisobingiz yo‘qmi?",
         "register": "Ro‘yxatdan o‘tish",
         "type": {
