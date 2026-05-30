@@ -3,6 +3,55 @@
   box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.16);
   border-radius: 15px;
   overflow: hidden;
+  position: relative;
+
+  &.streaming {
+    cursor: progress;
+  }
+}
+
+.shimmer_overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    transparent 25%,
+    rgba(255, 255, 255, 0.55) 50%,
+    transparent 75%
+  );
+  background-size: 220% 100%;
+  animation: shimmerSweep 1.6s linear infinite;
+  border-radius: inherit;
+}
+
+.shimmer_text {
+  animation: shimmerPulse 1.4s ease-in-out infinite;
+}
+
+.toolbar_locked {
+  pointer-events: none;
+  opacity: 0.5;
+  filter: grayscale(40%);
+}
+
+@keyframes shimmerSweep {
+  0% {
+    background-position: 220% 0;
+  }
+  100% {
+    background-position: -220% 0;
+  }
+}
+
+@keyframes shimmerPulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.55;
+  }
 }
 
 .toolbar {

@@ -170,12 +170,16 @@
 
         .post_data {
           display: grid;
-          grid-template: minmax(0, 400px) 1fr / 1fr;
+          // 1-я строка — PostSourceTabs (auto),
+          // 2-я — TipTap-эдитор (фикс. 400px чтобы он не схлопывался),
+          // 3-я — block__bottom (PostFiles/PostButtons/PostComment).
+          grid-template: auto minmax(0, 400px) 1fr / 1fr;
           row-gap: 30px;
 
-          // &:has(:only-child) {
-          //   grid-template: unset;
-          // }
+          // В AI-режиме нет эдитора/block__bottom — форма сама растягивается.
+          &.ai_mode {
+            grid-template: auto 1fr / 1fr;
+          }
 
           @media (max-width: 768px) {
             row-gap: 15px;

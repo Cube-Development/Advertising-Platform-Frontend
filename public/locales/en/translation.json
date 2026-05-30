@@ -2427,6 +2427,10 @@
       "generation": "AI Generation",
       "multi_post": "Unique Post",
       "universal_post": "One Post for All",
+      "post_source": {
+        "manual": "Custom post",
+        "ai": "Generate with AI"
+      },
       "choose_platform": "Choose a Platform",
       "your_posts": "Your Posts",
       "add_file": "Upload File",
@@ -2518,6 +2522,32 @@
         "text": "Drag and drop a file here",
         "span": "or",
         "choose": "Choose a file"
+      }
+    },
+    "generation": {
+      "business_name": "Business name",
+      "business_name_placeholder": "e.g. Aromat Coffee Shop",
+      "niche": "Niche / industry",
+      "niche_placeholder": "e.g. coffee and pastries",
+      "offer": "Offer / promotion / key message",
+      "offer_placeholder": "e.g. 20% off before 10:00 am",
+      "link": "Phone number/website/channel/bot/app link",
+      "link_placeholder": "+998... || https://...",
+      "link_hint": "We recommend adding a link to {{platform}}",
+      "language": "Post language",
+      "languages": {
+        "ru": "Russian",
+        "uz": "Uzbek"
+      },
+      "submit": "Generate",
+      "submitting": "Generating...",
+      "cancel": "Cancel",
+      "errors": {
+        "generic": "Failed to generate post",
+        "too_many_requests": "Too many attempts, please try again later",
+        "unavailable": "Generation is temporarily unavailable",
+        "business_name_required": "Please enter business name",
+        "niche_required": "Please enter the niche"
       }
     },
     "datetime": {

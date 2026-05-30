@@ -159,9 +159,7 @@ export const AiChatFilter: FC<AiChatFilterProps> = ({
                 </button>
               </div>
 
-              <div className="text-xs text-slate-500">
-                Функция в разработке
-              </div>
+              <div className="text-xs text-slate-500">Функция в разработке</div>
             </div>
           </>
         )}

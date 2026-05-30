@@ -10,12 +10,16 @@ interface PostEditorProps<T extends IEditorFile> {
   files: T[];
   onUpdate: (updatedFiles: T[]) => void;
   className?: string;
+  disabled?: boolean;
+  isStreaming?: boolean;
 }
 
 export const PostEditor = <T extends IEditorFile>({
   files,
   onUpdate,
   className,
+  disabled = false,
+  isStreaming = false,
 }: PostEditorProps<T>) => {
   const { t } = useTranslation();
 
@@ -31,12 +35,12 @@ export const PostEditor = <T extends IEditorFile>({
     setLinkText,
     openLinkModal,
     applyLink,
-  } = useTemplateEditor({ files, onUpdate });
+  } = useTemplateEditor({ files, onUpdate, disabled: disabled || isStreaming });
 
   if (!editor) return null;
 
   return (
-    <div className={styles.editor}>
+    <div className={cn(styles.editor, isStreaming && styles.streaming)}>
       <div
         className={cn("relative pt-3 pb-12 min-h-[200px] h-[200px]", className)}
       >
@@ -49,18 +53,22 @@ export const PostEditor = <T extends IEditorFile>({
               editor.isEmpty &&
                 "[&_.ProseMirror_p:first-child]:before:content-[attr(data-placeholder)] [&_.ProseMirror_p:first-child]:before:float-left [&_.ProseMirror_p:first-child]:before:text-gray-400 [&_.ProseMirror_p:first-child]:before:pointer-events-none [&_.ProseMirror_p:first-child]:before:h-0",
               styles.content,
+              isStreaming && styles.shimmer_text,
             )}
             data-placeholder={t("create_order.create.start_typing")}
           />
+          {isStreaming && <div className={styles.shimmer_overlay} />}
         </div>
-        <Toolbar
-          format={format}
-          onToggleFormat={toggleFormat}
-          onAddLink={(url) => {
-            editor.chain().focus().setLink({ href: url }).run();
-          }}
-          onLinkButtonClick={openLinkModal}
-        />
+        <div className={cn(isStreaming && styles.toolbar_locked)}>
+          <Toolbar
+            format={format}
+            onToggleFormat={toggleFormat}
+            onAddLink={(url) => {
+              editor.chain().focus().setLink({ href: url }).run();
+            }}
+            onLinkButtonClick={openLinkModal}
+          />
+        </div>
       </div>
 
       <LinkModal
