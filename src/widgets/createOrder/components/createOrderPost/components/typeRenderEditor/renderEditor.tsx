@@ -8,6 +8,7 @@ interface RenderEditorProps {
   formState: ICreatePostForm;
   setValue: UseFormSetValue<ICreatePostForm>;
   disabled?: boolean;
+  isStreaming?: boolean;
   placeholder?: string;
 }
 
@@ -16,6 +17,7 @@ export const renderEditor = ({
   formState,
   setValue,
   disabled = false,
+  isStreaming = false,
   placeholder,
 }: RenderEditorProps) => {
   if (formState?.selectedMultiPostId) {
@@ -29,6 +31,7 @@ export const renderEditor = ({
           platformId={platformId}
           formState={formState}
           disabled={disabled}
+          isStreaming={isStreaming}
           placeholder={placeholder}
         />
       ) : null,
@@ -43,6 +46,7 @@ export const renderEditor = ({
           platformId={platformId}
           formState={formState}
           disabled={disabled}
+          isStreaming={isStreaming}
           placeholder={placeholder}
         />
       ) : null,

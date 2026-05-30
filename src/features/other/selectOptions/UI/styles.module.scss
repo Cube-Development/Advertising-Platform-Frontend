@@ -64,7 +64,8 @@
   max-width: 100%;
   padding: 2px 5px 2px 6px;
   border-radius: 6px;
-  border: 1px solid color-mix(in srgb, var(--Personal-colors-main) 22%, transparent);
+  border: 1px solid
+    color-mix(in srgb, var(--Personal-colors-main) 22%, transparent);
   background: color-mix(in srgb, var(--Personal-colors-main) 7%, white);
   color: var(--Personal-colors-black);
   font-size: 10px;
@@ -76,7 +77,11 @@
     background 0.15s ease;
 
   &:hover {
-    border-color: color-mix(in srgb, var(--Personal-colors-main) 40%, transparent);
+    border-color: color-mix(
+      in srgb,
+      var(--Personal-colors-main) 40%,
+      transparent
+    );
     background: color-mix(in srgb, var(--Personal-colors-main) 14%, white);
   }
 

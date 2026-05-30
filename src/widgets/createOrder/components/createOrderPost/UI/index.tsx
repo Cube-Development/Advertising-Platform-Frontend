@@ -13,6 +13,7 @@ import {
   PostButtons,
   PostComment,
   PostFiles,
+  PostGenerationForm,
 } from "@features/createOrder";
 import { PostIcon } from "@shared/assets";
 import { useWindowWidth } from "@shared/hooks";
@@ -28,17 +29,19 @@ import {
 import { ICreateOrderBlur } from "@widgets/createOrder/model";
 import clsx from "clsx";
 import { Loader, X } from "lucide-react";
-import { FC, useEffect } from "react";
+import { FC, useEffect, useState } from "react";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import {
   MultiPostsList,
   PlatformFilter,
+  PostSourceTabs,
   PostTypesTabs,
   RenderDisplay,
   TemplatePostsDialog,
   TypeRenderEditor,
   TypeTabs,
+  type PostSource,
 } from "../components";
 import {
   checkPosts,
@@ -73,6 +76,9 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
   const { t } = useTranslation();
   const { toast } = useToast();
   const screen = useWindowWidth();
+
+  const [postSource, setPostSource] = useState<PostSource>("manual");
+  const [isGenerating, setIsGenerating] = useState(false);
 
   const PLATFORM_IDS = getPlatformIds(cards);
   const PLATFORM_FORMATS = getPostFormats(cards);
@@ -151,7 +157,6 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
               <span className="gradient_color">2</span>
               <p className="gradient_color">{t("create_order.create.title")}</p>
             </div>
-            {/* <PostGeneration /> */}
           </div>
           <div className={styles.creating__post}>
             <TypeTabs formState={formState} setValue={setValue} />
@@ -181,42 +186,67 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                   selectedPostType={formState?.selectedPostType}
                 />
               )}
-              <div className={styles.post_data}>
-                <TypeRenderEditor formState={formState} setValue={setValue} />
-                <div
-                  className={clsx(styles.block__bottom, {
-                    [styles.filter]:
-                      formState.platformFilter?.type !==
-                      platformTypesStr.telegram,
-                  })}
-                >
-                  <PostFiles
-                    AddFiles={AddFiles}
-                    AddMediaFiles={AddMediaFiles}
-                    setValue={setValue}
-                    platformId={formState.platformFilter?.id}
-                    formState={formState}
-                    type={POST_TYPE}
-                  />
-                  {formState.platformFilter?.type ===
-                    platformTypesStr.telegram && (
-                    <PostButtons
-                      setValue={setValue}
+              <div
+                className={clsx(styles.post_data, {
+                  [styles.ai_mode]: postSource === "ai",
+                })}
+              >
+                <PostSourceTabs
+                  value={postSource}
+                  onChange={setPostSource}
+                  disabled={isGenerating}
+                />
+                {postSource === "manual" ? (
+                  <>
+                    <TypeRenderEditor
                       formState={formState}
-                      platformId={formState?.platformFilter?.id}
-                      type={POST_TYPE}
+                      setValue={setValue}
+                      disabled={isGenerating}
+                      isStreaming={isGenerating}
                     />
-                  )}
-                  <PostComment
-                    placeholder={"create_order.create.comment"}
-                    maxLength={POST.COMMENT_LENGTH}
-                    rows={4}
-                    setValue={setValue}
-                    type={POST_TYPE}
-                    platformId={formState.platformFilter?.id}
+                    <div
+                      className={clsx(styles.block__bottom, {
+                        [styles.filter]:
+                          formState.platformFilter?.type !==
+                          platformTypesStr.telegram,
+                      })}
+                    >
+                      <PostFiles
+                        AddFiles={AddFiles}
+                        AddMediaFiles={AddMediaFiles}
+                        setValue={setValue}
+                        platformId={formState.platformFilter?.id}
+                        formState={formState}
+                        type={POST_TYPE}
+                      />
+                      {formState.platformFilter?.type ===
+                        platformTypesStr.telegram && (
+                        <PostButtons
+                          setValue={setValue}
+                          formState={formState}
+                          platformId={formState?.platformFilter?.id}
+                          type={POST_TYPE}
+                        />
+                      )}
+                      <PostComment
+                        placeholder={"create_order.create.comment"}
+                        maxLength={POST.COMMENT_LENGTH}
+                        rows={4}
+                        setValue={setValue}
+                        type={POST_TYPE}
+                        platformId={formState.platformFilter?.id}
+                        formState={formState}
+                      />
+                    </div>
+                  </>
+                ) : (
+                  <PostGenerationForm
                     formState={formState}
+                    setValue={setValue}
+                    onStreamingChange={setIsGenerating}
+                    onGenerated={() => setPostSource("manual")}
                   />
-                </div>
+                )}
               </div>
               <div className={styles.display}>
                 <TemplatePostsDialog

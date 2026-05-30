@@ -24,7 +24,11 @@ export const FormFieldItem = ({
           id={field.id as string}
           placeholder={field.placeholder}
           {...register(field.id)}
-          className={error ? "border-red-500 focus-visible:ring-red-500 min-h-[100px]" : "min-h-[100px]"}
+          className={
+            error
+              ? "border-red-500 focus-visible:ring-red-500 min-h-[100px]"
+              : "min-h-[100px]"
+          }
         />
       ) : (
         <Input

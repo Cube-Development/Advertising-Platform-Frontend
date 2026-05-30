@@ -3,9 +3,9 @@
     "cta": {
       "title": "Reklamani <0>5 daqiqada</0> ortiqcha to‘lovsiz ishga tushiring",
       "subtitle": "Budjetni 50% gacha tejang",
-      "action": "Platformalar katalogi",
+      "action": "Kanallar katalogi",
       "features": [
-        "Maqsadli auditoriya va reklama platformalarini tanlash algoritmlari",
+        "Maqsadli auditoriya va reklama kanallarini tanlash algoritmlari",
         "Sun’iy intellekt asosida samarali reklama postlarini yaratish",
         "Xavfsiz bitim orqali himoya kafolati"
       ],
@@ -13,7 +13,7 @@
         "title": "Biznesingiz uchun mos kanallar toping",
         "alertSuccess": "Reklama ishga tushirildi!",
         "buttonText": "Kanallarni ko'rish",
-        "trustLine": "Platformalarni tanlash ~ 30 soniya · Komissiyasiz"
+        "trustLine": "Kanallarni tanlash ~ 30 soniya · Komissiyasiz"
       },
       "budgetSlider": {
         "title": "Reklama budjeti",
@@ -107,7 +107,7 @@
       },
       "features": [
         {
-          "name": "Platformalarni qo‘lda tanlash",
+          "name": "Kanallarni qo‘lda tanlash",
           "sub": "Maqsadlaringiz uchun mos kanallarni topish"
         },
         {
@@ -123,7 +123,7 @@
           "sub": "Reklama joylashuvlari va nashrlar haqida xabarlar"
         },
         {
-          "name": "Platformalarni tasdiqlash jarayoni",
+          "name": "Kanallarni tasdiqlash jarayoni",
           "sub": "Ishga tushirishdan oldin joylashuvlarni tasdiqlash"
         },
         {
@@ -201,7 +201,7 @@
           "description": "30 soniyada akkaunt yarating"
         },
         {
-          "title": "Platformalarni tanlash",
+          "title": "Kanallarni tanlash",
           "description": "Kanallarni katalogdan qo‘lda yoki AI yordamida tanlang"
         },
         {
@@ -496,7 +496,7 @@
       ]
     },
     "platforms": {
-      "title": "Biz eng yirik platformalar bilan ishlaymiz",
+      "title": "Biz eng yirik kanallar bilan ishlaymiz",
       "subtitle": "Faqat tekshirilgan kanallar va blogerlar"
     },
     "services_title": "Yuridik shaxslar bilan ishlaymiz, hisob-fakturalar va aktlar taqdim etamiz, didox.uz orqali elektron hujjat almashinuvi olib boramiz",
@@ -805,7 +805,7 @@
       ]
     },
     "platforms": {
-      "title": "Biz eng yirik platformalar bilan ishlaymiz",
+      "title": "Biz eng yirik kanallar bilan ishlaymiz",
       "subtitle": "Faqat tekshirilgan kanallar va blogerlar"
     },
     "services_title": "Yuridik shaxslar bilan ishlaymiz, hisob-fakturalar va aktlar taqdim etamiz, didox.uz orqali elektron hujjat almashinuvini yuritamiz",
@@ -2500,6 +2500,10 @@
       "generation": "AI yaratish",
       "multi_post": "Noyob post",
       "universal_post": "Hamma uchun bitta post",
+      "post_source": {
+        "manual": "O'z postim",
+        "ai": "AI bilan yaratish"
+      },
       "choose_platform": "Platformani tanlang",
       "your_posts": "Sizning postlaringiz",
       "add_file": "Fayl yuklash",
@@ -2591,6 +2595,32 @@
         "text": "Faylni shu yerga sudrab olib keling",
         "span": "yoki",
         "choose": "Faylni tanlang"
+      }
+    },
+    "generation": {
+      "business_name": "Biznes nomi",
+      "business_name_placeholder": "Masalan: Aromat Kafesi",
+      "niche": "Yo'nalish / soha",
+      "niche_placeholder": "Masalan: qahva va shirinliklar",
+      "offer": "Taklif / aksiya / asosiy xabar",
+      "offer_placeholder": "Masalan: 10:00 gacha 20% chegirma",
+      "link": "Telefon raqami/Sayt/kanal/bot/ilova havolasi",
+      "link_placeholder": "+998... || https://...",
+      "link_hint": "{{platform}} havolasini qo'shishni tavsiya qilamiz",
+      "language": "Post tili",
+      "languages": {
+        "ru": "Ruscha",
+        "uz": "O'zbekcha"
+      },
+      "submit": "Yaratish",
+      "submitting": "Yaratilmoqda...",
+      "cancel": "Bekor qilish",
+      "errors": {
+        "generic": "Postni yaratib bo'lmadi",
+        "too_many_requests": "Juda ko'p urinish, keyinroq qayta urinib ko'ring",
+        "unavailable": "Generatsiya vaqtincha mavjud emas",
+        "business_name_required": "Biznes nomini kiriting",
+        "niche_required": "Yo'nalishni kiriting"
       }
     },
     "datetime": {

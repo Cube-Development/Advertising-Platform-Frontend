@@ -7,11 +7,15 @@ import { renderEditor } from "./renderEditor";
 interface TypeRenderEditorProps {
   formState: ICreatePostForm;
   setValue: UseFormSetValue<ICreatePostForm>;
+  disabled?: boolean;
+  isStreaming?: boolean;
 }
 
 export const TypeRenderEditor: FC<TypeRenderEditorProps> = ({
   formState,
   setValue,
+  disabled = false,
+  isStreaming = false,
 }) => {
   switch (formState.platformFilter?.id) {
     case platformTypesNum.telegram:
@@ -19,6 +23,8 @@ export const TypeRenderEditor: FC<TypeRenderEditorProps> = ({
         platformId: platformTypesNum.telegram,
         formState,
         setValue,
+        disabled,
+        isStreaming,
       });
 
     case platformTypesNum.instagram:
@@ -26,6 +32,8 @@ export const TypeRenderEditor: FC<TypeRenderEditorProps> = ({
         platformId: platformTypesNum.instagram,
         formState,
         setValue,
+        disabled,
+        isStreaming,
       });
 
     case platformTypesNum.youtube:
@@ -33,6 +41,8 @@ export const TypeRenderEditor: FC<TypeRenderEditorProps> = ({
         platformId: platformTypesNum.youtube,
         formState,
         setValue,
+        disabled,
+        isStreaming,
       });
 
     // case platformTypesNum.site:

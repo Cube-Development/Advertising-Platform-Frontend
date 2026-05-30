@@ -33,3 +33,4 @@ export * from "./post-editor";
 export * from "./project-badge";
 export * from "./CustomHeading";
 export * from "./custom-slider";
+export * from "./segment-switcher";
