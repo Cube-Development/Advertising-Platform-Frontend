@@ -13,7 +13,10 @@ export const selfEmployedFormSchema = z.object({
   phone: z
     .string()
     .min(1, requiredKey)
-    .refine(isValidPhoneNumber, "organization.login.self_employed.errors.phone"),
+    .refine(
+      isValidPhoneNumber,
+      "organization.login.self_employed.errors.phone",
+    ),
   card_number: z
     .string()
     .min(1, requiredKey)

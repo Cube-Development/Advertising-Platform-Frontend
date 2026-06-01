@@ -1,7 +1,10 @@
 import { FC, useEffect, useState } from "react";
 import { DidoxLogin } from "./didox-login/didox-login";
 import { LoginModalStep } from "./model";
-import { RegistrationType, RegistrationTypeSelect } from "./registration-type-select";
+import {
+  RegistrationType,
+  RegistrationTypeSelect,
+} from "./registration-type-select";
 import { SelfEmployedLogin } from "./self-employed-login";
 
 interface IModalContentProps {
@@ -40,8 +43,6 @@ export const ModalContent: FC<IModalContentProps> = ({
       return <SelfEmployedLogin onBack={handleBack} />;
     case LoginModalStep.RegistrationType:
     default:
-      return (
-        <RegistrationTypeSelect onContinue={handleRegistrationContinue} />
-      );
+      return <RegistrationTypeSelect onContinue={handleRegistrationContinue} />;
   }
 };

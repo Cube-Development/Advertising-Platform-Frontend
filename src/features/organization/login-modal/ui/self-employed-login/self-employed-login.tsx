@@ -11,10 +11,7 @@ import { ArrowLeft, Loader2 } from "lucide-react";
 import { FC, useState } from "react";
 import { useForm, UseFormRegister } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import {
-  SelfEmployedFormValues,
-  selfEmployedFormSchema,
-} from "./model";
+import { SelfEmployedFormValues, selfEmployedFormSchema } from "./model";
 import { SelfEmployedSuccess } from "./ui";
 
 interface SelfEmployedLoginProps {
@@ -211,8 +208,6 @@ const FormField: FC<FormFieldProps> = ({
       maxLength={maxLength}
       {...register}
     />
-    {errorMessage && (
-      <p className="text-sm text-red-500">{errorMessage}</p>
-    )}
+    {errorMessage && <p className="text-sm text-red-500">{errorMessage}</p>}
   </div>
 );

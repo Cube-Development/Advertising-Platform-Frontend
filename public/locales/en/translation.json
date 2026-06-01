@@ -473,7 +473,9 @@
     "spending": {
       "title": "Spending",
       "description": "Current balance"
-    }
+    },
+    "insufficient_balance": "You need to top up your balance",
+    "top_up_action": "Top up"
   },
   "more_less": {
     "more": "More",
@@ -2857,6 +2859,9 @@
       "posts": "Posts per Day",
       "er": "ER",
       "cpv": "CPV"
+    },
+    "faq": {
+      "title": "F.A.Q."
     },
     "reviews": {
       "title": "Reviews",

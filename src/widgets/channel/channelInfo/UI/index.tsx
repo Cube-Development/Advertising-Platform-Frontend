@@ -1,4 +1,5 @@
 import {
+  ChannelFaq,
   Description,
   Parameters,
   SkeletonChannelDescription,
@@ -125,6 +126,13 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
                   <SkeletonChannelStatistics />
                 )}
               </div>
+
+              <motion.div
+                custom={custom++}
+                variants={PAGE_ANIMATION.animationLeft}
+              >
+                <ChannelFaq />
+              </motion.div>
 
               <Reviews isLoadingReviews={isLoading} card={card!} />
             </motion.div>
