@@ -1,7 +1,7 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Controller, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { FC, useMemo } from "react";
+import { FC, useEffect, useMemo } from "react";
 import { Info, Loader } from "lucide-react";
 
 import { StarIcon } from "@shared/assets";
@@ -28,6 +28,8 @@ interface PostGenerationFormProps {
   setValue: UseFormSetValue<ICreatePostForm>;
   onStreamingChange?: (isStreaming: boolean) => void;
   onGenerated?: () => void;
+  draft?: Partial<PostGenerationFormInput>;
+  onDraftChange?: (values: PostGenerationFormInput) => void;
 }
 
 export const PostGenerationForm: FC<PostGenerationFormProps> = ({
@@ -35,6 +37,8 @@ export const PostGenerationForm: FC<PostGenerationFormProps> = ({
   setValue,
   onStreamingChange,
   onGenerated,
+  draft,
+  onDraftChange,
 }) => {
   const { t } = useTranslation();
 
@@ -42,17 +46,37 @@ export const PostGenerationForm: FC<PostGenerationFormProps> = ({
     register,
     handleSubmit,
     control,
+    getValues,
+    watch,
     formState: { errors },
   } = useForm<PostGenerationFormInput, any, PostGenerationFormOutput>({
     resolver: zodResolver(postGenerationSchema),
     defaultValues: {
-      business_name: "",
-      niche: "",
-      offer: "",
-      link: "",
-      language: DEFAULT_GENERATION_LANGUAGE,
+      business_name: draft?.business_name ?? "",
+      niche: draft?.niche ?? "",
+      offer: draft?.offer ?? "",
+      link: draft?.link ?? "",
+      language: draft?.language ?? DEFAULT_GENERATION_LANGUAGE,
     },
   });
+
+  // Сохраняем черновик в родителя на каждое изменение, чтобы данные не
+  // терялись при unmount формы (переключение на manual после генерации).
+  useEffect(() => {
+    if (!onDraftChange) return;
+    const sub = watch((values) =>
+      onDraftChange(values as PostGenerationFormInput),
+    );
+    return () => sub.unsubscribe();
+  }, [watch, onDraftChange]);
+
+  // Финальный снапшот на размонтирование (на случай отписки до последнего апдейта).
+  useEffect(
+    () => () => {
+      onDraftChange?.(getValues());
+    },
+    [getValues, onDraftChange],
+  );
 
   const linkHintPlatform = useMemo(() => {
     const type = formState.platformFilter?.type;

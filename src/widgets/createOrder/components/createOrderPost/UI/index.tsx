@@ -14,6 +14,7 @@ import {
   PostComment,
   PostFiles,
   PostGenerationForm,
+  PostGenerationFormInput,
 } from "@features/createOrder";
 import { PostIcon } from "@shared/assets";
 import { useWindowWidth } from "@shared/hooks";
@@ -79,6 +80,8 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
 
   const [postSource, setPostSource] = useState<PostSource>("manual");
   const [isGenerating, setIsGenerating] = useState(false);
+  const [generationDraft, setGenerationDraft] =
+    useState<Partial<PostGenerationFormInput>>();
 
   const PLATFORM_IDS = getPlatformIds(cards);
   const PLATFORM_FORMATS = getPostFormats(cards);
@@ -245,6 +248,8 @@ export const CreateOrderPost: FC<CreateOrderPostProps> = ({
                     setValue={setValue}
                     onStreamingChange={setIsGenerating}
                     onGenerated={() => setPostSource("manual")}
+                    draft={generationDraft}
+                    onDraftChange={setGenerationDraft}
                   />
                 )}
               </div>
