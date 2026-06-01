@@ -9,9 +9,11 @@ import { ContentType, IEditorFile, TextFormat } from "./types";
 export const useTemplateEditor = <T extends IEditorFile>({
   files,
   onUpdate,
+  disabled = false,
 }: {
   files: T[];
   onUpdate: (updatedFiles: T[]) => void;
+  disabled?: boolean;
 }) => {
   const [isLinkModalOpen, setIsLinkModalOpen] = useState(false);
   const [linkUrl, setLinkUrl] = useState("");
@@ -151,17 +153,17 @@ export const useTemplateEditor = <T extends IEditorFile>({
     }
   }, [currentTemplateContent, editor]);
 
-  // Disable editor when modal is open
+  // Disable editor when modal is open OR when external `disabled` flag is true
   useEffect(() => {
-    if (editor) {
-      if (isLinkModalOpen) {
-        editor.setOptions({ editable: false });
-        editor.commands.blur();
-      } else {
-        editor.setOptions({ editable: true });
-      }
+    if (!editor) return;
+    const shouldDisable = isLinkModalOpen || disabled;
+    if (shouldDisable) {
+      editor.setOptions({ editable: false });
+      editor.commands.blur();
+    } else {
+      editor.setOptions({ editable: true });
     }
-  }, [isLinkModalOpen, editor]);
+  }, [isLinkModalOpen, disabled, editor]);
 
   const format: TextFormat = {
     bold: editor?.isActive("bold"),

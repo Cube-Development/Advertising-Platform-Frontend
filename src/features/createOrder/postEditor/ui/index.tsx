@@ -15,6 +15,7 @@ interface EditorProps {
   platformId: number;
   formState: ICreatePostForm;
   disabled?: boolean;
+  isStreaming?: boolean;
   placeholder?: string;
 }
 
@@ -24,6 +25,7 @@ export const Editor: FC<EditorProps> = ({
   platformId,
   formState,
   disabled = false,
+  isStreaming = false,
   placeholder,
 }) => {
   const postsWithoutCurrent = useMemo(
@@ -105,6 +107,8 @@ export const Editor: FC<EditorProps> = ({
       files={editorFiles}
       onUpdate={handleUpdate}
       className="h-full"
+      disabled={disabled}
+      isStreaming={isStreaming}
     />
   );
 };

@@ -12,7 +12,11 @@ import {
 import { Label } from "@shared/ui/shadcn-ui/ui/label";
 import { useForm } from "react-hook-form";
 import { MAILING_MAIN_FIELDS, MAILING_TEXT_FIELDS } from "../model/constants";
-import { MailingFormInput, MailingFormOutput, mailingSchema } from "../model/schema";
+import {
+  MailingFormInput,
+  MailingFormOutput,
+  mailingSchema,
+} from "../model/schema";
 import { FormFieldItem } from "./FormFieldItem";
 
 const ROLE_OPTIONS: any[] = [
@@ -62,8 +66,11 @@ export const Mailing = () => {
           <CardTitle>Рассылка</CardTitle>
         </CardHeader>
         <CardContent>
-          <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-6">
-            {MAILING_MAIN_FIELDS.map((field) => (
+          <form
+            onSubmit={handleSubmit(onSubmit)}
+            className="flex flex-col gap-6"
+          >
+            {MAILING_MAIN_FIELDS.map((field) =>
               field.id === "role" ? (
                 <div key={field.id} className="flex flex-col gap-2">
                   <Label>Роль</Label>
@@ -75,7 +82,11 @@ export const Mailing = () => {
                     defaultValue={[selectedRole]}
                     placeholder="Выберите роль"
                   />
-                  {errors.role && <p className="text-sm text-red-500">{errors.role.message}</p>}
+                  {errors.role && (
+                    <p className="text-sm text-red-500">
+                      {errors.role.message}
+                    </p>
+                  )}
                 </div>
               ) : (
                 <FormFieldItem
@@ -84,8 +95,8 @@ export const Mailing = () => {
                   register={register}
                   error={errors[field.id as keyof MailingFormInput]}
                 />
-              )
-            ))}
+              ),
+            )}
 
             <div className="flex flex-col gap-4">
               {MAILING_TEXT_FIELDS.map((field) => (

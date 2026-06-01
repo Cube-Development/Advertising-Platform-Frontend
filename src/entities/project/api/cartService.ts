@@ -155,7 +155,14 @@ export const publicCartAPI = baseApi.injectEndpoints({
         method: `POST`,
         body,
       }),
-      invalidatesTags: [CART_PUB_SHORT, CART_PUB, CART, CART_SHORT, CART_MANAGER, RECOMMEND_CARDS],
+      invalidatesTags: [
+        CART_PUB_SHORT,
+        CART_PUB,
+        CART,
+        CART_SHORT,
+        CART_MANAGER,
+        RECOMMEND_CARDS,
+      ],
     }),
   }),
 });
