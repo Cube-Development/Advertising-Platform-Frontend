@@ -109,12 +109,14 @@ export const UserDataForm: FC<IUserDataFormProps> = ({}) => {
               </span>
             </div>
             {!!organization?.invate_url && (
-                <div className={styles.row}>
-                  <div className={styles.inviteLink}>
-                    <OrganizationInviteLink inviteUrl={organization?.invate_url} />
-                  </div>
+              <div className={styles.row}>
+                <div className={styles.inviteLink}>
+                  <OrganizationInviteLink
+                    inviteUrl={organization?.invate_url}
+                  />
                 </div>
-              )}
+              </div>
+            )}
             <OfferSignModal />
           </div>
         </div>

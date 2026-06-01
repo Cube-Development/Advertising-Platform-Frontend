@@ -473,7 +473,9 @@
     "spending": {
       "title": "Xarajat",
       "description": "Joriy balans"
-    }
+    },
+    "insufficient_balance": "Balansni to'ldirish kerak",
+    "top_up_action": "To'ldirish"
   },
   "more_less": {
     "more": "Ko'proq",
@@ -2858,6 +2860,9 @@
       "posts": "Kunlik postlar",
       "er": "ER",
       "cpv": "CPV"
+    },
+    "faq": {
+      "title": "F.A.Q."
     },
     "reviews": {
       "title": "Sharhlar",

@@ -476,7 +476,9 @@
     "spending": {
       "title": "Расходный",
       "description": "Текущий баланс"
-    }
+    },
+    "insufficient_balance": "Нужно пополнить баланс",
+    "top_up_action": "Пополнить"
   },
   "more_less": {
     "more": "Больше",
@@ -2860,6 +2862,9 @@
       "posts": "Публикации в день",
       "er": "ER",
       "cpv": "CPV"
+    },
+    "faq": {
+      "title": "F.A.Q."
     },
     "reviews": {
       "title": "Отзывы",

@@ -1,8 +1,12 @@
 import { ENUM_WALLETS_TYPE } from "@entities/wallet";
 import { BREAKPOINT } from "@shared/config";
 import { useAppSelector, useWindowWidth } from "@shared/hooks";
-import { cn, WalletCard } from "@shared/ui";
+import { ENUM_PATHS } from "@shared/routing";
+import { cn, MyButton, WalletCard } from "@shared/ui";
+import { AlertCircle, ArrowRight } from "lucide-react";
 import { FC, useRef } from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 import SwiperCore from "swiper";
 import "swiper/css";
 import "swiper/css/effect-coverflow";
@@ -30,6 +34,7 @@ export const WalletsBar: FC<IWalletsBarProps> = ({
     ENUM_WALLETS_TYPE.SPENDING,
   ],
 }) => {
+  const { t } = useTranslation();
   const screen = useWindowWidth();
   const { deposit_wallet, profit_wallet, spending_wallet } = useAppSelector(
     (state) => state.wallet,
@@ -67,6 +72,32 @@ export const WalletsBar: FC<IWalletsBarProps> = ({
       (type) => ALL_WALLETS?.find((wallet) => wallet.type === type)!,
     ) || [];
 
+  const requiredAmount = totalAmount ?? 0;
+  const hasNoSufficientWallet =
+    requiredAmount > 0 &&
+    WALLETS.length > 0 &&
+    WALLETS.every(({ amount }) => amount < requiredAmount);
+
+  const insufficientBalanceAlert = hasNoSufficientWallet ? (
+    <div className="mt-2.5 flex flex-col gap-3 rounded-xl bg-[rgba(12,162,184,0.1)] p-3">
+      <div className="flex items-start gap-2">
+        <AlertCircle className="mt-0.5 h-4 w-4 shrink-0 text-[var(--Personal-colors-main)]" />
+        <p className="text-sm font-medium leading-snug text-[var(--Personal-colors-black)]">
+          {t("wallets.insufficient_balance")}
+        </p>
+      </div>
+      <Link to={ENUM_PATHS.WALLET_TOP_UP} className="w-full">
+        <MyButton
+          buttons_type="button__white"
+          className="flex w-full items-center justify-center gap-2 rounded-xl text-xs text-[var(--Personal-colors-main)]"
+        >
+          {t("wallets.top_up_action")}
+          <ArrowRight className="h-4 w-4" />
+        </MyButton>
+      </Link>
+    </div>
+  ) : null;
+
   return (
     <>
       {screen > BREAKPOINT.MD ? (
@@ -88,6 +119,7 @@ export const WalletsBar: FC<IWalletsBarProps> = ({
               disabled={(totalAmount || 0) > amount}
             />
           ))}
+          {insufficientBalanceAlert}
         </div>
       ) : (
         <div className="swipper__carousel">
@@ -110,6 +142,7 @@ export const WalletsBar: FC<IWalletsBarProps> = ({
               </SwiperSlide>
             ))}
           </Swiper>
+          {insufficientBalanceAlert}
         </div>
       )}
       <UnrealizedWallet />
