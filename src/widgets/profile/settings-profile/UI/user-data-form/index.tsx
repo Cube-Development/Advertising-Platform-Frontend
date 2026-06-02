@@ -30,7 +30,7 @@ export const UserDataForm: FC<IUserDataFormProps> = ({}) => {
       (item) => item.status === organization?.status,
     )?.label || "";
 
-  return (
+    return (
     <div className={cn(styles.wrapper, "frame")}>
       <div className={styles.block}>
         <div className={styles.top}>
@@ -108,11 +108,11 @@ export const UserDataForm: FC<IUserDataFormProps> = ({}) => {
                 {t(status)}
               </span>
             </div>
-            {!!organization?.invate_url && (
+            {!!organization?.invite_url && (
               <div className={styles.row}>
                 <div className={styles.inviteLink}>
                   <OrganizationInviteLink
-                    inviteUrl={organization?.invate_url}
+                    inviteUrl={organization?.invite_url}
                   />
                 </div>
               </div>

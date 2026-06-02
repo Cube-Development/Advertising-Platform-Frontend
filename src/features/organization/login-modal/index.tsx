@@ -1,5 +1,5 @@
 import { BREAKPOINT } from "@shared/config";
-import { useWindowWidth } from "@shared/hooks";
+import { useAppSelector, useWindowWidth } from "@shared/hooks";
 import {
   Dialog,
   DialogClose,
@@ -34,6 +34,7 @@ export const LoginModal: FC<LoginModalProps> = ({
   ...props
 }) => {
   const { t } = useTranslation();
+  const { isCommittent } = useAppSelector((state) => state.user);
   const [isOpen, setIsOpen] = useState(open);
   const screen = useWindowWidth();
 
@@ -41,10 +42,19 @@ export const LoginModal: FC<LoginModalProps> = ({
     setIsOpen(open);
   }, [open]);
 
+  useEffect(() => {
+    if (!isCommittent) return;
+    setIsOpen(false);
+    setOpen(false);
+  }, [isCommittent, setOpen]);
+
   const handleOpen = (open: boolean) => {
+    if (isCommittent) return;
     setIsOpen(open);
     setOpen(open);
   };
+
+  if (isCommittent) return null;
 
   return (
     <>

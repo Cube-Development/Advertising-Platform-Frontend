@@ -26,7 +26,7 @@ export const OrganizationData: FC<IOrganizationDataProps> = ({
   isLoading = false,
 }) => {
   const { t } = useTranslation();
-  const { isAuthEcp } = useAppSelector((state) => state.user);
+  const { isAuthEcp, isCommittent } = useAppSelector((state) => state.user);
 
   const amountText = t(amountTitle, {
     returnObjects: true,
@@ -34,7 +34,7 @@ export const OrganizationData: FC<IOrganizationDataProps> = ({
 
   return (
     <div className="relative frame">
-      {isAuthEcp ? (
+      {isAuthEcp || isCommittent ? (
         <form className="grid grid-flow-row gap-5" onSubmit={onSubmit}>
           <CustomInput
             {...register!("amount", { ...TOP_UP_AMOUNT(t) })}

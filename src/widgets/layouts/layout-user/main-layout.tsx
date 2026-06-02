@@ -7,6 +7,7 @@ import {
 import {
   ENUM_ROLES,
   offerSign,
+  setIsCommittent,
   setPremiumBalance,
   setPremiumUser,
   useGetUserQueryQuery,
@@ -108,10 +109,18 @@ export const MainLayout = ({ children }: PropsWithChildren) => {
   }, [balance, isLoading]);
 
   useEffect(() => {
-    if (organization?.status === ENUM_ORGANIZATION_STATUS.ACTIVE) {
+    if (
+      organization?.status === ENUM_ORGANIZATION_STATUS.ACTIVE ||
+      typeof organization?.self_employed === "boolean"
+    ) {
+      console.log("offerSign");
       dispatch(offerSign());
     }
   }, [organization, isLoadingOrganization]);
+
+  useEffect(() => {
+    dispatch(setIsCommittent(typeof organization?.self_employed === "boolean"));
+  }, [organization, dispatch]);
 
   useEffect(() => {
     if (user) {

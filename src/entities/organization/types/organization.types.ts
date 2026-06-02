@@ -7,7 +7,8 @@ export interface IGetMyOrganizationResponse {
   offer_id: string;
   status: ENUM_ORGANIZATION_STATUS;
   created: string;
-  invate_url?: string;
+  self_employed?: boolean;
+  invite_url?: string;
 }
 
 export interface ICreateOrganizationRequest {

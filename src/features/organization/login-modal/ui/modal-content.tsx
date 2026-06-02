@@ -1,3 +1,4 @@
+import { useGetOrganizationQuery } from "@entities/organization";
 import { FC, useEffect, useState } from "react";
 import { DidoxLogin } from "./didox-login/didox-login";
 import { LoginModalStep } from "./model";
@@ -16,6 +17,9 @@ export const ModalContent: FC<IModalContentProps> = ({
   isOpen = false,
   onClose,
 }) => {
+  const { data: organization } = useGetOrganizationQuery();
+  const isEcpOnly = organization && organization.self_employed === null;
+
   const [step, setStep] = useState<LoginModalStep>(
     LoginModalStep.RegistrationType,
   );
@@ -35,6 +39,10 @@ export const ModalContent: FC<IModalContentProps> = ({
       setStep(LoginModalStep.SelfEmployed);
     }
   };
+
+  if (isEcpOnly) {
+    return <DidoxLogin />;
+  }
 
   switch (step) {
     case LoginModalStep.Didox:

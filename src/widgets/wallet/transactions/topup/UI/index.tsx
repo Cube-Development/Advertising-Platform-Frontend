@@ -30,7 +30,9 @@ import styles from "./styles.module.scss";
 export const Topup: FC = () => {
   useClearCookiesOnPage();
   const { t } = useTranslation();
-  const { isAuthEcp, isOfferSign } = useAppSelector((state) => state.user);
+  const { isAuthEcp, isOfferSign, isCommittent } = useAppSelector(
+    (state) => state.user,
+  );
   const screen = useWindowWidth();
   const dispatch = useAppDispatch();
 
@@ -78,11 +80,13 @@ export const Topup: FC = () => {
               title={t("wallet.topup.title")}
               icon={<ArrowIcon4 />}
             />
-            <BarSubFilter
-              tab={formState?.profileFilter?.type!}
-              tab_list={WALLET_TOP_UP_FILTER_TABS_LIST}
-              changeTab={changeTab}
-            />
+            {!isCommittent && (
+              <BarSubFilter
+                tab={formState?.profileFilter?.type!}
+                tab_list={WALLET_TOP_UP_FILTER_TABS_LIST}
+                changeTab={changeTab}
+              />
+            )}
             <UnrealizedWallet />
             {formState?.profileFilter?.type ===
             PROFILE_TYPE.SELF_EMPLOYED_ACCOUNT ? (

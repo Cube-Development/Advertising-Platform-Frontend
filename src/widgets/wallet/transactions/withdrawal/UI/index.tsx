@@ -27,7 +27,9 @@ import styles from "./styles.module.scss";
 export const Withdrawal: FC = () => {
   useClearCookiesOnPage();
   const { t } = useTranslation();
-  const { isAuthEcp, isOfferSign } = useAppSelector((state) => state.user);
+  const { isAuthEcp, isOfferSign, isCommittent } = useAppSelector(
+    (state) => state.user,
+  );
   const screen = useWindowWidth();
   const dispatch = useAppDispatch();
   const { withdraw, isLoading, isSuccess, uploadUrl } = useWalletWithdraw();
@@ -59,7 +61,6 @@ export const Withdrawal: FC = () => {
   const setWalletType = (type: ENUM_WALLETS_TYPE | null) => {
     setValue("wallet_type", type || ENUM_WALLETS_TYPE.DEPOSIT);
   };
-
   return (
     <div className="container">
       <div className={styles.wrapper}>
@@ -73,7 +74,7 @@ export const Withdrawal: FC = () => {
               title={t("wallet.withdraw.title")}
               icon={<ArrowIcon5 />}
             />
-            {!isAuthEcp ? (
+            {!isAuthEcp && !isCommittent ? (
               <NotLogin />
             ) : (
               <>

@@ -1568,6 +1568,11 @@
         "edit": "Edit",
         "invite_link": "Open Didox S"
       },
+      "committent_card": {
+        "title": "Committent",
+        "subtitle": "Self-employed · Didox S",
+        "description": "Payouts are sent to the specified bank card. Complete registration in Didox S using the link below."
+      },
       "change_password": {
         "title": "Change password"
       },
@@ -3225,7 +3230,8 @@
       "create": {
         "success": "The organization has been successfully submitted for moderation",
         "error": "An error occurred while adding the organization",
-        "unique": "This organization is already registered in the system"
+        "unique": "This organization is already registered in the system",
+        "not_found": "Please check your phone number or PINFL"
       },
       "offer_sign": {
         "success": "Public offer successfully signed",
