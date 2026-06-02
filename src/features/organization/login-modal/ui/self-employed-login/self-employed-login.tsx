@@ -34,7 +34,6 @@ export const SelfEmployedLogin: FC<SelfEmployedLoginProps> = ({ onBack }) => {
     defaultValues: {
       PNFL: "",
       phone: "",
-      // card_number: "",
     },
   });
 
@@ -43,7 +42,6 @@ export const SelfEmployedLogin: FC<SelfEmployedLoginProps> = ({ onBack }) => {
       const result = await createOrganization({
         PINFL: data.PNFL,
         phone: data.phone.replace(/\D/g, ""),
-        // card_number: data.card_number,
       }).unwrap();
 
       toast({
@@ -51,17 +49,19 @@ export const SelfEmployedLogin: FC<SelfEmployedLoginProps> = ({ onBack }) => {
         variant: "success",
       });
       setCreatedOrganization(result);
+      if (result.invite_url) window.open(result.invite_url, "_blank");
     } catch (err: unknown) {
       const error = err as {
         data?: { message?: string; error?: { message?: string } };
       };
-      const backendMessage = error?.data?.error?.message || error?.data?.message;
+      const backendMessage =
+        error?.data?.error?.message || error?.data?.message;
       const errorMessage =
         backendMessage === "Unique violation error"
           ? "toasts.organization.create.unique"
           : backendMessage === "Organization not found"
             ? "toasts.organization.create.not_found"
-          : "toasts.organization.create.error";
+            : "toasts.organization.create.error";
 
       toast({
         title: t(errorMessage),

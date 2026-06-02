@@ -87,7 +87,7 @@ export const CommittentCard: FC<ICommittentCardProps> = ({ organization }) => {
         </div>
 
         {!organization.self_employed && !!organization.invite_url && (
-          <div className="grid gap-[15px] max-sm:gap-2.5 col-span-full w-full">
+          <div className="grid gap-[15px] max-sm:gap-2.5 w-full">
             <OrganizationInviteLink inviteUrl={organization.invite_url} />
           </div>
         )}
