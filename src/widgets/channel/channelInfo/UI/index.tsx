@@ -11,6 +11,8 @@ import { ENUM_ROLES } from "@entities/user";
 import { BREAKPOINT, PAGE_ANIMATION } from "@shared/config";
 import { motion } from "framer-motion";
 import { FC } from "react";
+import { Workflow } from "@widgets/main";
+import { WORKFLOW_STEPS } from "@widgets/main/workflow/model/constants";
 import { AddToCart, SkeletonChannelAddToCart } from "./addToCart";
 import { RecommendationList } from "./recommendationList";
 import { Reviews } from "./reviews";
@@ -126,6 +128,17 @@ export const ChannelInfo: FC<ChannelInfoProps> = () => {
                   <SkeletonChannelStatistics />
                 )}
               </div>
+
+              <motion.div
+                custom={custom++}
+                variants={PAGE_ANIMATION.animationLeft}
+              >
+                <Workflow
+                  title={t("main_advertiser.workflow.title")}
+                  subtitle={t("main_advertiser.workflow.subtitle")}
+                  steps={WORKFLOW_STEPS}
+                />
+              </motion.div>
 
               <motion.div
                 custom={custom++}
