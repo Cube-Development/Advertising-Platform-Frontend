@@ -8,7 +8,7 @@ import { useToast } from "@shared/ui";
 import { Button, cn, Input, Label } from "@shared/ui/shadcn-ui";
 import { formatToNumber, formatToPhoneNumber } from "@shared/utils";
 import { ArrowLeft, Loader2 } from "lucide-react";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { useForm, UseFormRegister } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { SelfEmployedFormValues, selfEmployedFormSchema } from "./model";
@@ -24,6 +24,15 @@ export const SelfEmployedLogin: FC<SelfEmployedLoginProps> = ({ onBack }) => {
   const [createOrganization, { isLoading }] = useCreateOrganizationMutation();
   const [createdOrganization, setCreatedOrganization] =
     useState<IGetMyOrganizationResponse | null>(null);
+  const [inviteUrlToOpen, setInviteUrlToOpen] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (!inviteUrlToOpen) return;
+
+    window.open(inviteUrlToOpen, "_blank", "noopener,noreferrer");
+    setInviteUrlToOpen(null);
+  }, [inviteUrlToOpen]);
+
   const {
     register,
     handleSubmit,
@@ -43,13 +52,16 @@ export const SelfEmployedLogin: FC<SelfEmployedLoginProps> = ({ onBack }) => {
         PINFL: data.PNFL,
         phone: data.phone.replace(/\D/g, ""),
       }).unwrap();
-
+      
       toast({
         title: t("toasts.organization.create.success"),
         variant: "success",
       });
+
+      if (result.invite_url) {
+        setInviteUrlToOpen(result.invite_url);
+      }
       setCreatedOrganization(result);
-      if (result.invite_url) window.open(result.invite_url, "_blank");
     } catch (err: unknown) {
       const error = err as {
         data?: { message?: string; error?: { message?: string } };
@@ -71,7 +83,6 @@ export const SelfEmployedLogin: FC<SelfEmployedLoginProps> = ({ onBack }) => {
   };
 
   if (createdOrganization) {
-    console.log("createdOrganization", createdOrganization);
     return (
       <div className="grid grid-rows-[max-content,1fr] h-full min-h-0 w-full">
         <div className="grid gap-3 bg-[#341F47] px-5 py-4">
