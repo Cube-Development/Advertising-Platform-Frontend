@@ -40,10 +40,10 @@ export const RegistrationTypeSelect: FC<RegistrationTypeSelectProps> = ({
         </p>
       </div>
 
-      <div className="grid gap-5 px-5 py-8 pb-10">
+      <div className="grid gap-5 px-5 py-6">
         <div className="grid gap-5 content-start">
           <div className="grid gap-2 text-center">
-            <p className="text-2xl font-semibold text-gray-900">
+            <p className="text-xl md:text-2xl font-semibold text-gray-900">
               {t("organization.login.registration_type.title")}
             </p>
             <span className="text-sm text-gray-600">
@@ -64,7 +64,7 @@ export const RegistrationTypeSelect: FC<RegistrationTypeSelectProps> = ({
             ))}
           </div>
 
-          <div className="rounded-xl bg-[#F4F5F7] p-4">
+          <div className="rounded-xl bg-[#F4F5F7] md:p-4 p-3">
             <div className="grid grid-cols-[max-content,1fr] gap-2 items-start">
               <Info size={18} className="text-[#4d37b3] shrink-0" />
               <p className="text-sm text-gray-700">
@@ -95,17 +95,18 @@ export const RegistrationTypeSelect: FC<RegistrationTypeSelectProps> = ({
             </div>
           )}
         </div>
-
-        <Button
-          type="button"
-          variant="primary"
-          size="xl"
-          className="w-full"
-          disabled={!selected}
-          onClick={handleContinue}
-        >
-          {t("organization.login.registration_type.buttons.continue")}
-        </Button>
+        <div className="grid items-end mb-5">
+          <Button
+            type="button"
+            variant="primary"
+            size="xl"
+            className="w-full"
+            disabled={!selected}
+            onClick={handleContinue}
+          >
+            {t("organization.login.registration_type.buttons.continue")}
+          </Button>
+        </div>
       </div>
     </div>
   );
@@ -130,7 +131,7 @@ const TypeOption: FC<TypeOptionProps> = ({
     type="button"
     onClick={onClick}
     className={cn(
-      "w-full px-4 py-4 rounded-xl border-2 transition-all duration-200 cursor-pointer text-left",
+      "w-full p-3 md:p-4 rounded-xl border-2 transition-all duration-200 cursor-pointer text-left",
       isActive
         ? "border-[#4d37b3] bg-[#4d37b3]/5"
         : "border-gray-200 bg-white hover:border-gray-300",

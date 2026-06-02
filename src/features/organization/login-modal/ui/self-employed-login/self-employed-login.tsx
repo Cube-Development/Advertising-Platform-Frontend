@@ -5,7 +5,7 @@ import {
 import { zodResolver } from "@hookform/resolvers/zod";
 import { formDataLength } from "@shared/config";
 import { useToast } from "@shared/ui";
-import { Button, Input, Label } from "@shared/ui/shadcn-ui";
+import { Button, cn, Input, Label } from "@shared/ui/shadcn-ui";
 import { formatToNumber, formatToPhoneNumber } from "@shared/utils";
 import { ArrowLeft, Loader2 } from "lucide-react";
 import { FC, useState } from "react";
@@ -112,48 +112,50 @@ export const SelfEmployedLogin: FC<SelfEmployedLoginProps> = ({ onBack }) => {
       </div>
 
       <form
-        className="grid gap-5 px-5 py-8 pb-10"
+        className="grid grid-rows-[1fr,min-content] gap-5 py-6 px-5"
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div className="grid gap-2 text-center">
-          <p className="text-2xl font-semibold text-gray-900">
-            {t("organization.login.self_employed.title")}
-          </p>
-          <span className="text-gray-600">
-            {t("organization.login.self_employed.description")}
-          </span>
-        </div>
+        <div>
+          <div className="grid gap-6">
+            <div className="grid gap-4 text-center">
+              <p className="text-2xl font-semibold text-gray-900">
+                {t("organization.login.self_employed.title")}
+              </p>
+              <span className="text-gray-600">
+                {t("organization.login.self_employed.description")}
+              </span>
+            </div>
 
-        <div className="grid gap-5">
-          <FormField
-            id="PNFL"
-            label={t("organization.login.self_employed.fields.pinfl")}
-            placeholder={t(
-              "organization.login.self_employed.placeholders.pinfl",
-            )}
-            error={errors.PNFL}
-            errorMessage={
-              errors.PNFL?.message && t(errors.PNFL.message as string)
-            }
-            register={register("PNFL", { onChange: formatToNumber })}
-            maxLength={formDataLength.PNFL}
-          />
+            <div className="grid gap-6">
+              <FormField
+                id="PNFL"
+                label={t("organization.login.self_employed.fields.pinfl")}
+                placeholder={t(
+                  "organization.login.self_employed.placeholders.pinfl",
+                )}
+                error={errors.PNFL}
+                errorMessage={
+                  errors.PNFL?.message && t(errors.PNFL.message as string)
+                }
+                register={register("PNFL", { onChange: formatToNumber })}
+                maxLength={formDataLength.PNFL}
+              />
 
-          <FormField
-            id="phone"
-            label={t("organization.login.self_employed.fields.phone")}
-            placeholder={t(
-              "organization.login.self_employed.placeholders.phone",
-            )}
-            error={errors.phone}
-            errorMessage={
-              errors.phone?.message && t(errors.phone.message as string)
-            }
-            register={register("phone", { onChange: formatToPhoneNumber })}
-            maxLength={formDataLength.phone + 1}
-          />
+              <FormField
+                id="phone"
+                label={t("organization.login.self_employed.fields.phone")}
+                placeholder={t(
+                  "organization.login.self_employed.placeholders.phone",
+                )}
+                error={errors.phone}
+                errorMessage={
+                  errors.phone?.message && t(errors.phone.message as string)
+                }
+                register={register("phone", { onChange: formatToPhoneNumber })}
+                maxLength={formDataLength.phone + 1}
+              />
 
-          {/* <FormField
+              {/* <FormField
             id="card_number"
             label={t("organization.login.self_employed.fields.card")}
             placeholder={t(
@@ -167,18 +169,21 @@ export const SelfEmployedLogin: FC<SelfEmployedLoginProps> = ({ onBack }) => {
             register={register("card_number", { onChange: formatToNumber })}
             maxLength={16}
           /> */}
+            </div>
+          </div>
         </div>
-
-        <Button
-          type="submit"
-          disabled={isSubmitting || isLoading}
-          className="w-full bg-[#FFEA00] text-gray-900 hover:bg-[#FFEA00]/90 rounded-lg h-12 font-semibold"
-        >
-          {t("organization.login.self_employed.buttons.submit")}
-          {(isSubmitting || isLoading) && (
-            <Loader2 className="ml-2 animate-spin" size={18} />
-          )}
-        </Button>
+        <div className="mb-5">
+          <Button
+            type="submit"
+            disabled={isSubmitting || isLoading}
+            className="w-full bg-[#FFEA00] text-gray-900 hover:bg-[#FFEA00]/90 rounded-lg h-12 font-semibold"
+          >
+            {t("organization.login.self_employed.buttons.submit")}
+            {(isSubmitting || isLoading) && (
+              <Loader2 className="ml-2 animate-spin" size={18} />
+            )}
+          </Button>
+        </div>
       </form>
     </div>
   );
@@ -208,11 +213,12 @@ const FormField: FC<FormFieldProps> = ({
     <Input
       id={id}
       placeholder={placeholder}
-      className={
+      className={cn(
+        "text-base",
         error
           ? "rounded-lg bg-[#F4F5F7] border-red-500 h-12 focus-visible:ring-inset focus-visible:ring-offset-0"
-          : "rounded-lg bg-[#F4F5F7] border-[#F4F5F7] h-12 focus-visible:ring-inset focus-visible:ring-offset-0"
-      }
+          : "rounded-lg bg-[#F4F5F7] border-[#F4F5F7] h-12 focus-visible:ring-inset focus-visible:ring-offset-0",
+      )}
       maxLength={maxLength}
       {...register}
     />
