@@ -54,33 +54,32 @@ export const AddOrganization: FC<IAddOrganizationProps> = ({
               <CommittentCard organization={organization!} />
             </div>
           ) : !isOfferSign ? (
-              <NotLogin />
-            ) : (
-              <div className="container">
-                <div className="flex flex-col gap-6">
-                  <ChannelReady />
+            <NotLogin />
+          ) : (
+            <div className="container">
+              <div className="flex flex-col gap-6">
+                <ChannelReady />
 
-                  <div className="flex justify-center">
-                    <div className="grid grid-cols-2 gap-2">
-                      <MyButton
-                        type="button"
-                        buttons_type="button__white"
-                        onClick={() => onChangeStep(step - 1)}
-                        className="grid grid-cols-[max-content,1fr]"
-                      >
-                        <ArrowLeft className="text-[var(--Personal-colors-main)]" />
-                        <p>{t("add_platform_btn.prev")}</p>
-                      </MyButton>
+                <div className="flex justify-center">
+                  <div className="grid grid-cols-2 gap-2">
+                    <MyButton
+                      type="button"
+                      buttons_type="button__white"
+                      onClick={() => onChangeStep(step - 1)}
+                      className="grid grid-cols-[max-content,1fr]"
+                    >
+                      <ArrowLeft className="text-[var(--Personal-colors-main)]" />
+                      <p>{t("add_platform_btn.prev")}</p>
+                    </MyButton>
 
-                      <MyButton onClick={handleOnClick}>
-                        <p>{t("add_platform_btn.send")}</p>
-                      </MyButton>
-                    </div>
+                    <MyButton onClick={handleOnClick}>
+                      <p>{t("add_platform_btn.send")}</p>
+                    </MyButton>
                   </div>
                 </div>
               </div>
-            )
-          }
+            </div>
+          )}
         </motion.div>
       )}
     </>

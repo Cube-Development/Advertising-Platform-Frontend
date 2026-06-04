@@ -30,7 +30,7 @@ export const UserDataForm: FC<IUserDataFormProps> = ({}) => {
       (item) => item.status === organization?.status,
     )?.label || "";
 
-    return (
+  return (
     <div className={cn(styles.wrapper, "frame")}>
       <div className={styles.block}>
         <div className={styles.top}>
