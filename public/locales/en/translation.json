@@ -3313,7 +3313,11 @@
     },
     "cart": {
       "error": "You have insufficient funds, please top up your balance",
-      "save_cart_temporary_error": "Oops! The functionality is under development..."
+      "save_cart_temporary_error": "Oops! The functionality is under development...",
+      "clear": {
+        "success": "Cart cleared",
+        "error": "Error clearing cart"
+      }
     },
     "offers_blogger": {
       "channel": {
