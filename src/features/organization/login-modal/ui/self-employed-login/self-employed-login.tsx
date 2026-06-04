@@ -8,7 +8,7 @@ import { useToast } from "@shared/ui";
 import { Button, cn, Input, Label } from "@shared/ui/shadcn-ui";
 import { formatToNumber, formatToPhoneNumber } from "@shared/utils";
 import { ArrowLeft, Loader2 } from "lucide-react";
-import { FC, useRef, useState } from "react";
+import { FC, useState } from "react";
 import { useForm, UseFormRegister } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { SelfEmployedFormValues, selfEmployedFormSchema } from "./model";
@@ -24,7 +24,6 @@ export const SelfEmployedLogin: FC<SelfEmployedLoginProps> = ({ onBack }) => {
   const [createOrganization, { isLoading }] = useCreateOrganizationMutation();
   const [createdOrganization, setCreatedOrganization] =
     useState<IGetMyOrganizationResponse | null>(null);
-  const invitePopupRef = useRef<Window | null>(null);
 
   const {
     register,
@@ -40,34 +39,22 @@ export const SelfEmployedLogin: FC<SelfEmployedLoginProps> = ({ onBack }) => {
   });
 
   const onSubmit = async (data: SelfEmployedFormValues) => {
-    invitePopupRef.current = window.open("about:blank", "_blank");
-
     try {
       const result = await createOrganization({
         PINFL: data.PNFL,
         phone: data.phone.replace(/\D/g, ""),
       }).unwrap();
 
-      if (result.invite_url) {
-        const popup = invitePopupRef.current;
-        if (popup && !popup.closed) {
-          popup.location.href = result.invite_url;
-        }
-        invitePopupRef.current = null;
-      } else {
-        invitePopupRef.current?.close();
-        invitePopupRef.current = null;
-      }
-
       toast({
         title: t("toasts.organization.create.success"),
         variant: "success",
       });
       setCreatedOrganization(result);
-    } catch (err: unknown) {
-      invitePopupRef.current?.close();
-      invitePopupRef.current = null;
 
+      if (result.invite_url) {
+        window.location.href = result.invite_url;
+      }
+    } catch (err: unknown) {
       const error = err as {
         data?: { message?: string; error?: { message?: string } };
       };
