@@ -34,6 +34,14 @@ interface ReadCartReq {
   project_id?: string;
 }
 
+interface ClearPublicCartReq {
+  guest_id: string;
+}
+
+interface ClearProjectCartReq {
+  project_id: string;
+}
+
 export interface CreateCartLiteReq {
   category_ids: number[];
   budget: number;
@@ -76,6 +84,13 @@ export const authCartAPI = authApi.injectEndpoints({
       }),
       invalidatesTags: [CART_SHORT, RECOMMEND_CARDS, CART],
     }),
+    clearCommonCart: build.mutation<ICart, void>({
+      query: () => ({
+        url: `/cart/common/clear`,
+        method: `DELETE`,
+      }),
+      invalidatesTags: [CART_SHORT, RECOMMEND_CARDS, CART],
+    }),
     saveCart: build.mutation<{ success: boolean }, void>({
       query: () => ({
         url: `/cart/save`,
@@ -106,6 +121,7 @@ export const {
   useReadCommonCartQuery,
   useAddToCommonCartMutation,
   useRemoveFromCommonCartMutation,
+  useClearCommonCartMutation,
   useSaveCartMutation,
   useTransferPublicMutation,
   useCheckCartMutation,
@@ -148,6 +164,14 @@ export const publicCartAPI = baseApi.injectEndpoints({
       }),
       invalidatesTags: [CART_PUB_SHORT, RECOMMEND_CARDS, CART_PUB],
     }),
+    clearPublicCart: build.mutation<ICart, ClearPublicCartReq>({
+      query: (params) => ({
+        url: `/cart/public/clear`,
+        method: `DELETE`,
+        params: params,
+      }),
+      invalidatesTags: [CART_PUB_SHORT, RECOMMEND_CARDS, CART_PUB],
+    }),
 
     createCartLite: build.mutation<ICart, CreateCartLiteReq>({
       query: (body) => ({
@@ -171,6 +195,7 @@ export const {
   useReadPublicCartQuery,
   useAddToPublicCartMutation,
   useRemoveFromPublicCartMutation,
+  useClearPublicCartMutation,
   useReadPublicCartShortQuery,
   useCreateCartLiteMutation,
 } = publicCartAPI;
@@ -203,6 +228,14 @@ export const managerCartAPI = authApi.injectEndpoints({
       }),
       invalidatesTags: [CART_MANAGER, RECOMMEND_CARDS],
     }),
+    clearProjectCart: build.mutation<ICart, ClearProjectCartReq>({
+      query: (params) => ({
+        url: `/cart/project/clear`,
+        method: `DELETE`,
+        params: params,
+      }),
+      invalidatesTags: [CART_MANAGER, RECOMMEND_CARDS],
+    }),
     // saveCart: build.mutation<{ success: boolean }, void>({
     //   query: () => ({
     //     url: `/cart/save`,
@@ -216,4 +249,5 @@ export const {
   useReadManagerCartQuery,
   useAddToManagerCartMutation,
   useRemoveFromManagerCartMutation,
+  useClearProjectCartMutation,
 } = managerCartAPI;

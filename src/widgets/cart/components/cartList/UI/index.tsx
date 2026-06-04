@@ -1,5 +1,5 @@
 import { ICatalogChannel } from "@entities/project";
-import { AddMore, AddToBasket, SaveCart } from "@features/cart";
+import { AddMore, AddToBasket, ClearCart, SaveCart } from "@features/cart";
 import {
   CatalogCard,
   FormatList,
@@ -36,9 +36,12 @@ export const CartList: FC<CartListProps> = ({
           <CartIcon />
           <p>{t("cart.cart")}</p>
         </div>
-        <div className={styles.buttons}>
+        <div
+          className={`${styles.buttons} !grid !grid-cols-[1fr_1fr_auto] !gap-2.5`}
+        >
           <SaveCart />
           <AddMore />
+          <ClearCart disabled={!channels?.length || isLoading} />
         </div>
       </div>
       <ClearActiveProject projectId={projectId} i18nKey="cart.badge.text" />

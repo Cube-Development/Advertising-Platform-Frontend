@@ -3314,7 +3314,11 @@
     },
     "cart": {
       "error": "Hisobingizda mablag' yetarli emas, balansni to'ldirish kerak",
-      "save_cart_temporary_error": "Ups! Funksional ishlab chiqilmoqda..."
+      "save_cart_temporary_error": "Ups! Funksional ishlab chiqilmoqda...",
+      "clear": {
+        "success": "Savatcha tozalandi",
+        "error": "Savatchani tozalashda xatolik"
+      }
     },
     "offers_blogger": {
       "channel": {
