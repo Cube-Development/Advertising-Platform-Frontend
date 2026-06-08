@@ -2,7 +2,7 @@ import { ENUM_ROLES, toggleRole, USER_ROLES } from "@entities/user";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { ENUM_AUTH_TYPES, ENUM_PATHS, IRouting } from "@shared/routing";
 import { SideBarAdminLayout, SideBarLayout } from "@widgets/layouts";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 
 // Компонент защиты маршрутов
@@ -16,6 +16,16 @@ export const ProtectedRoute = ({ route }: { route: IRouting }) => {
     [location.search],
   );
   const isAccess = query.get("access") === "true";
+
+  // Один раз при заходе на /blogger неавторизованным пользователем
+  // принудительно делаем его блогером (вместо редиректа на "/"), но не мешаем
+  // дальнейшему ручному переключению роли через свитчер
+  const didAutoAssignBlogger = useRef(false);
+  const shouldAutoAssignBlogger =
+    !isAuth &&
+    route.path === ENUM_PATHS.MAIN_BLOGGER &&
+    !didAutoAssignBlogger.current &&
+    sliceRole !== ENUM_ROLES.BLOGGER;
 
   const { role, condition } = useMemo(() => {
     let role: ENUM_ROLES = sliceRole;
@@ -39,8 +49,21 @@ export const ProtectedRoute = ({ route }: { route: IRouting }) => {
         role = route_user_roles[0] as ENUM_ROLES;
     }
 
+    // Первый заход на главную блогера по ссылке — становимся блогером
+    if (shouldAutoAssignBlogger) {
+      role = ENUM_ROLES.BLOGGER;
+      condition = true;
+    }
+
     return { role, condition };
-  }, [route?.roles, sliceRole, isAccess]);
+  }, [route?.roles, sliceRole, isAccess, shouldAutoAssignBlogger]);
+
+  // Помечаем, что авто-назначение блогера уже выполнено
+  useEffect(() => {
+    if (shouldAutoAssignBlogger) {
+      didAutoAssignBlogger.current = true;
+    }
+  }, [shouldAutoAssignBlogger]);
 
   // Если есть доступ, то устанавливаем роль в куки
   useEffect(() => {
