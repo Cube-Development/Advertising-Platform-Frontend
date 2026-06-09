@@ -9,6 +9,7 @@ import { LoginPremiumAccess, LoginToViewMore } from "@features/user";
 import {
   ArrowSmallVerticalIcon,
   BoyIcon,
+  DiamondIcon,
   EyeIcon,
   GirlIcon,
   RatingIcon,
@@ -135,9 +136,23 @@ export const CatalogCard: FC<CatalogCardProps> = ({
         <div className={styles.channel__top}>
           <div className={styles.column__logo}>
             <div className={styles.logo}>
-              <Link to={channelPath} className={styles.logo__img_wrapper}>
-                <img src={card?.avatar} alt="logo" />
-              </Link>
+              <div className={styles.logo__avatar}>
+                <Link
+                  to={channelPath}
+                  className={`${styles.logo__img_wrapper}${
+                    card.is_self_connect
+                      ? ` ${styles.logo__img_wrapper_self_connect}`
+                      : ""
+                  }`}
+                >
+                  <img src={card?.avatar} alt={card?.name} />
+                </Link>
+                {card.is_self_connect && (
+                  <div className={styles.logo__self_connect_badge}>
+                    <DiamondIcon />
+                  </div>
+                )}
+              </div>
               <div className={styles.rate}>
                 <RatingIcon rate={card?.rate || 0} />
               </div>

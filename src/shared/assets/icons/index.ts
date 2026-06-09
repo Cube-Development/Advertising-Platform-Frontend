@@ -42,6 +42,7 @@ export * from "./complete";
 export * from "./copy";
 export * from "./create";
 export * from "./cubeDevelopment";
+export * from "./diamond";
 export * from "./documentCheckmark";
 export * from "./download";
 export * from "./downloadComplete";

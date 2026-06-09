@@ -50,6 +50,7 @@ export interface ICatalogChannel {
   platform?: platformTypesNum;
   channel_languages: ENUM_LANGUAGES_NUM[];
   url?: string;
+  is_self_connect?: boolean;
 }
 
 export interface IFormat {
