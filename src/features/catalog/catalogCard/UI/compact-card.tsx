@@ -6,7 +6,7 @@ import {
   platformToIcon,
 } from "@entities/project";
 import { LoginPremiumAccess, LoginToViewMore } from "@features/user";
-import { BoyIcon, EyeIcon, GirlIcon, SubsIcon } from "@shared/assets";
+import { BoyIcon, DiamondIcon, EyeIcon, GirlIcon, SubsIcon } from "@shared/assets";
 import { useAppSelector } from "@shared/hooks";
 import { CHANNEL_LANGUAGES_LIST } from "@shared/languages";
 import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";
@@ -97,18 +97,28 @@ export const CompactCatalogCard: FC<CompactCatalogCardProps> = ({
       onClick={handleChangeCard}
     >
       <div className="grid grid-cols-[auto_1fr_auto_auto_auto] md:gap-2.5 gap-1.5 items-center md:pl-[10px] pl-[6px]">
-        {/* Avatar */}
-        <Link
-          to={channelPath}
-          className="size-8 md:size-10 rounded-full overflow-hidden border border-[--Personal-colors-main] shrink-0 block"
-          onClick={stopPropagation}
-        >
-          <img
-            src={card?.avatar}
-            alt={card?.name}
-            className="object-cover w-full h-full"
-          />
-        </Link>
+        <div className="relative shrink-0">
+          <Link
+            to={channelPath}
+            className={`size-8 md:size-10 rounded-full overflow-hidden shrink-0 block ${
+              card.is_self_connect
+                ? "border-2 border-[#37BBFE]"
+                : "border border-[--Personal-colors-main]"
+            }`}
+            onClick={stopPropagation}
+          >
+            <img
+              src={card?.avatar}
+              alt={card?.name}
+              className="object-cover w-full h-full"
+            />
+          </Link>
+          {card.is_self_connect && (
+            <div className="absolute -top-1 -right-1 size-3.5 md:size-4 rounded-full bg-white border-2 border-[#37BBFE] shadow-[0_2px_6px_rgba(55,187,254,0.5)] flex items-center justify-center pointer-events-none [&_svg]:size-3.5 md:[&_svg]:size-4">
+              <DiamondIcon />
+            </div>
+          )}
+        </div>
 
         {/* Name / Category / Languages */}
         <div className="min-w-0 flex flex-col gap-0.5 py-2">
