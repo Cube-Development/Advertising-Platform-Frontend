@@ -204,7 +204,8 @@ export const CatalogBlock: FC = () => {
     const isParamsChanged =
       JSON.stringify(prevParams.filter) !== JSON.stringify(formState.filter) ||
       prevParams.sort !== formState.sort ||
-      prevParams.search_string !== formState.search_string;
+      JSON.stringify(prevParams.search_string) !==
+        JSON.stringify(formState.search_string);
 
     // Обновляем предыдущие параметры
     if (isParamsChanged) {

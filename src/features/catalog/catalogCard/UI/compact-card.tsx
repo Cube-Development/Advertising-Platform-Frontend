@@ -6,7 +6,13 @@ import {
   platformToIcon,
 } from "@entities/project";
 import { LoginPremiumAccess, LoginToViewMore } from "@features/user";
-import { BoyIcon, DiamondIcon, EyeIcon, GirlIcon, SubsIcon } from "@shared/assets";
+import {
+  BoyIcon,
+  DiamondIcon,
+  EyeIcon,
+  GirlIcon,
+  SubsIcon,
+} from "@shared/assets";
 import { useAppSelector } from "@shared/hooks";
 import { CHANNEL_LANGUAGES_LIST } from "@shared/languages";
 import { ENUM_PAGE_FILTER, ENUM_PATHS } from "@shared/routing";

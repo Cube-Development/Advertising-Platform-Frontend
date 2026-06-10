@@ -206,7 +206,12 @@ export const CatalogList: FC<CatalogListProps> = ({
               }
             />
           ) : (
-            <SearchFilter type={channelData.search} onChange={setValue} />
+            <SearchFilter
+              type={channelData.search}
+              onChange={setValue}
+              value={formState.search_string}
+              enableMultiSearch
+            />
           )}
           <Toggle
             pressed={isTableView}
