@@ -6,28 +6,41 @@ import { Search, X } from "lucide-react";
 import { FC, useEffect, useState } from "react";
 import { UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import {
+  formatSearchDisplay,
+  parseCatalogSearchInput,
+} from "../lib/parseCatalogSearchInput";
 
 interface SearchFilterProps {
   type: channelData;
   onChange: UseFormSetValue<getCatalogReq | any>;
-  value?: string;
+  value?: string | string[];
+  enableMultiSearch?: boolean;
 }
 
 export const SearchFilter: FC<SearchFilterProps> = ({
   type,
   onChange,
   value,
+  enableMultiSearch = false,
 }) => {
   const { t } = useTranslation();
-  const [searchText, setSearchText] = useState<string>(value || "");
+  const [searchText, setSearchText] = useState<string>(
+    formatSearchDisplay(value),
+  );
 
   const debouncedPosition = useDebounce(searchText, DEBOUNCE.search);
 
   const handleChange = () => {
-    if (searchText) {
-      onChange(type, searchText);
-    } else {
+    if (!searchText) {
       onChange(type, null);
+      return;
+    }
+
+    if (enableMultiSearch) {
+      onChange(type, parseCatalogSearchInput(searchText));
+    } else {
+      onChange(type, searchText);
     }
   };
 
@@ -36,7 +49,7 @@ export const SearchFilter: FC<SearchFilterProps> = ({
   }, [debouncedPosition]);
 
   useEffect(() => {
-    setSearchText(value || "");
+    setSearchText(formatSearchDisplay(value));
   }, [value]);
 
   const handleClear = () => {

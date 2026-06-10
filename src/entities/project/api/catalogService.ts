@@ -19,7 +19,7 @@ export interface getCatalogReq {
   elements_on_page: number;
   filter: ICatalogFilter;
   sort?: sortingFilter;
-  search_string?: string | undefined;
+  search_string?: string | string[];
 }
 
 export interface ICatalogFilter {
