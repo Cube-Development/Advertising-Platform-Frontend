@@ -66,6 +66,12 @@ export interface adminMailingReq {
   users: string[];
 }
 
+export interface adminSwapChannelOwnerReq {
+  channel_id: string;
+  owner_email: string;
+  new_owner_email: string;
+}
+
 export const adminAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
     getAdminOrderComplaints: build.query<
@@ -321,6 +327,26 @@ export const adminAPI = authApi.injectEndpoints({
         body,
       }),
     }),
+    adminSwapChannelOwner: build.mutation<
+      { success: boolean },
+      adminSwapChannelOwnerReq
+    >({
+      query: (params) => ({
+        url: `/adv-admin/swap/channel-owner`,
+        method: "POST",
+        params,
+      }),
+    }),
+    adminDeleteOrganization: build.mutation<
+      { success: boolean },
+      { email: string }
+    >({
+      query: (params) => ({
+        url: `/adv-admin/delete-organization`,
+        method: "POST",
+        params,
+      }),
+    }),
   }),
 });
 
@@ -340,4 +366,6 @@ export const {
   useAccountingWithdrawalRejectMutation,
   useAdminUpdateOrderDateMutation,
   useAdminSendMailingMutation,
+  useAdminSwapChannelOwnerMutation,
+  useAdminDeleteOrganizationMutation,
 } = adminAPI;
