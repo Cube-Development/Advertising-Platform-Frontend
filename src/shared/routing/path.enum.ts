@@ -40,4 +40,6 @@ export enum ENUM_PATHS {
   ADMIN_DOCUMENTS = "/admin/documents",
   ADMIN_ORDER_TRANSFER = "/admin/order-transfer",
   ADMIN_MAILING = "/admin/mailing",
+  ADMIN_CHANNEL_OWNER_SWAP = "/admin/channel-owner-swap",
+  ADMIN_DELETE_ORGANIZATION = "/admin/delete-organization",
 }

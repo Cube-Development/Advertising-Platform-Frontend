@@ -1,6 +1,8 @@
 import { ENUM_PATHS } from "@shared/routing";
 import { IMenuItem } from "@shared/types";
 import {
+  ArrowRightLeft,
+  Building2,
   Calculator,
   CalendarClock,
   CircleDollarSign,
@@ -68,6 +70,20 @@ export const ADMIN_MENU: IMenuItem[] = [
       title: "Рассылка",
       path: ENUM_PATHS.ADMIN_MAILING,
       icon: Mail,
+    },
+  },
+  {
+    item: {
+      title: "Передача канала",
+      path: ENUM_PATHS.ADMIN_CHANNEL_OWNER_SWAP,
+      icon: ArrowRightLeft,
+    },
+  },
+  {
+    item: {
+      title: "Удаление организации",
+      path: ENUM_PATHS.ADMIN_DELETE_ORGANIZATION,
+      icon: Building2,
     },
   },
 ];

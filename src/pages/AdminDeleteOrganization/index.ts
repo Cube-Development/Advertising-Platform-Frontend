@@ -1,0 +1,1 @@
+export { AdminDeleteOrganizationPage } from "./UI";

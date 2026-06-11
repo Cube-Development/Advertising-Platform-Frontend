@@ -1,0 +1,1 @@
+export { AdminChannelOwnerSwapPage } from "./UI";
