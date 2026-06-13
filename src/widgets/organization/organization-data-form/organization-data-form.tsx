@@ -1,6 +1,7 @@
 import {
   IDigitalFormData,
   LEGAL_DATA,
+  useGetOrganizationQuery,
   useGetProfileEDOQuery,
 } from "@entities/organization";
 import { useAppSelector } from "@shared/hooks";
@@ -11,6 +12,7 @@ import { useForm } from "react-hook-form";
 export const OrganizationDataForm: FC = ({}) => {
   const { isAuthEcp } = useAppSelector((state) => state.user);
 
+  const { data: organization } = useGetOrganizationQuery();
   const { data: profile, isLoading } = useGetProfileEDOQuery(undefined, {
     skip: !isAuthEcp,
   });
@@ -47,6 +49,10 @@ export const OrganizationDataForm: FC = ({}) => {
       password: "",
     });
   }, [profile, isLoading, isAuthEcp]);
+
+  if (organization?.self_employed) {
+    return null;
+  }
 
   return (
     <div>

@@ -42,7 +42,7 @@ export const Withdrawal: FC = () => {
     formState: { errors, isSubmitting },
   } = useForm<IWalletOperations>({
     defaultValues: {
-      wallet_type: ENUM_WALLETS_TYPE.DEPOSIT,
+      wallet_type: ENUM_WALLETS_TYPE.PROFIT,
     },
   });
   const formState = watch();
@@ -59,7 +59,7 @@ export const Withdrawal: FC = () => {
   };
 
   const setWalletType = (type: ENUM_WALLETS_TYPE | null) => {
-    setValue("wallet_type", type || ENUM_WALLETS_TYPE.DEPOSIT);
+    setValue("wallet_type", type || ENUM_WALLETS_TYPE.PROFIT);
   };
   return (
     <div className="container">
