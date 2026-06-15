@@ -108,10 +108,10 @@ export const LoginModal: FC<LoginModalProps> = ({
             </DrawerTrigger>
           )}
 
-          <DrawerContent className="h-[100vh] border-none">
+          <DrawerContent className="flex h-[100dvh] flex-col border-none">
             <DrawerTitle className="sr-only" />
             <DrawerDescription className="sr-only" />
-            <div className="relative h-full overflow-y-scroll">
+            <div className="relative min-h-0 flex-1 overflow-y-auto overscroll-contain">
               <DrawerClose
                 className="absolute p-4 top-3 right-3"
                 onClick={() => handleOpen(false)}
