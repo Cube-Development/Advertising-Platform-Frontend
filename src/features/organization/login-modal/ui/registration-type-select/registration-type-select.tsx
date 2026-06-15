@@ -30,8 +30,8 @@ export const RegistrationTypeSelect: FC<RegistrationTypeSelectProps> = ({
   };
 
   return (
-    <div className="grid grid-rows-[max-content,1fr] h-full w-full">
-      <div className="grid gap-1 bg-[#341F47] px-5 py-6">
+    <div className="grid w-full md:h-full md:grid-rows-[max-content,1fr]">
+      <div className="grid shrink-0 gap-1 bg-[#341F47] px-5 py-6">
         <p className="text-lg font-semibold text-white">
           {t("organization.login.registration_type.header.title")}
         </p>
@@ -40,8 +40,8 @@ export const RegistrationTypeSelect: FC<RegistrationTypeSelectProps> = ({
         </p>
       </div>
 
-      <div className="grid gap-5 px-5 py-6">
-        <div className="grid gap-5 content-start">
+      <div className="grid gap-5 px-5 py-6 md:min-h-0 md:grid-rows-[1fr_max-content]">
+        <div className="grid gap-5 content-start md:min-h-0 md:overflow-y-auto">
           <div className="grid gap-2 text-center">
             <p className="text-xl md:text-2xl font-semibold text-gray-900">
               {t("organization.login.registration_type.title")}
@@ -95,7 +95,7 @@ export const RegistrationTypeSelect: FC<RegistrationTypeSelectProps> = ({
             </div>
           )}
         </div>
-        <div className="grid items-end mb-5">
+        <div className="grid shrink-0 mb-5 md:items-end md:mb-5">
           <Button
             type="button"
             variant="primary"
