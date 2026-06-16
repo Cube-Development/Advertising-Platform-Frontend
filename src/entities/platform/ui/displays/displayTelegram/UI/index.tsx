@@ -57,6 +57,7 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
   const resSoleLink = !mediaRes?.length ? extractSoleLink(textRes) : null;
 
   const imgRef = useRef<HTMLImageElement>(null);
+  const lastImgWidthRef = useRef<number | null>(null);
   const [resizes, setResizes] = useState<{
     borderRadius: number;
     timeSize: number;
@@ -74,7 +75,10 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
     if (!imgElement) return;
 
     const updateSizes = () => {
-      const imgWidth = imgElement.offsetWidth;
+      const imgWidth = Math.round(imgElement.offsetWidth);
+      if (lastImgWidthRef.current === imgWidth) return;
+      lastImgWidthRef.current = imgWidth;
+
       setResizes({
         borderRadius: (imgWidth / 364) * 54,
         timeSize: (imgWidth / 364) * 14,
@@ -90,9 +94,10 @@ export const DisplayTelegram: FC<DisplayTelegramProps> = ({
 
     const observer = new ResizeObserver(updateSizes);
     observer.observe(imgElement);
+    updateSizes();
 
     return () => observer.disconnect();
-  }, [imgRef]);
+  }, []);
 
   return (
     <div className={styles.screen_wrapper}>
