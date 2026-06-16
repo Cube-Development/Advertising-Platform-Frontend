@@ -107,12 +107,13 @@
         padding: 8px;
         overflow-x: hidden;
         overflow-y: auto;
+        scrollbar-gutter: stable;
         word-wrap: break-word;
         overflow-wrap: break-word;
 
         .post {
           background: #2b4f67;
-          width: 80%;
+          width: 85%;
           padding: 3px;
           padding-bottom: 15px;
           border-radius: 10px 10px 10px 0px;
@@ -152,7 +153,7 @@
         }
 
         .buttons {
-          width: 80%;
+          width: 85%;
           margin-top: 3px;
           display: grid;
           gap: 3px;

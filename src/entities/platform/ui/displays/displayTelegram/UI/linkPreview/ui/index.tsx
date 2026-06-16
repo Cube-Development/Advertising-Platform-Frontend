@@ -45,30 +45,48 @@ const TelegramEmbed: FC<{ post: string }> = ({ post }) => {
 
     let rafId = 0;
     let retries = 0;
+    const applied = { scale: 0, height: 0 };
 
-    const apply = () => {
+    const applyNow = () => {
       const containerWidth = wrapper.offsetWidth;
       if (containerWidth <= 0) {
         // Modal portals can mount us before they have any width.
-        if (retries++ < 30) rafId = requestAnimationFrame(apply);
+        if (retries++ < 30) rafId = requestAnimationFrame(scheduleApply);
         return;
       }
       retries = 0;
       const scale = Math.min(1, containerWidth / TG_NATURAL_WIDTH);
       const naturalHeight = inner.offsetHeight;
+      const height = naturalHeight ? Math.ceil(naturalHeight * scale) : 0;
+
+      if (
+        Math.abs(applied.scale - scale) < 0.001 &&
+        Math.abs(applied.height - height) < 1
+      ) {
+        return;
+      }
+
+      applied.scale = scale;
+      applied.height = height;
       inner.style.transform = `scale(${scale})`;
       inner.style.transformOrigin = "top left";
-      wrapper.style.height = naturalHeight
-        ? `${Math.ceil(naturalHeight * scale)}px`
-        : "0px";
+      wrapper.style.height = height ? `${height}px` : "0px";
     };
 
-    apply();
+    const scheduleApply = () => {
+      rafId = 0;
+      applyNow();
+    };
 
-    const ro = new ResizeObserver(() => apply());
+    const onResize = () => {
+      if (!rafId) rafId = requestAnimationFrame(scheduleApply);
+    };
+
+    applyNow();
+
+    const ro = new ResizeObserver(onResize);
+    ro.observe(wrapper);
     ro.observe(inner);
-    const parent = wrapper.parentElement;
-    if (parent) ro.observe(parent);
 
     return () => {
       if (rafId) cancelAnimationFrame(rafId);
