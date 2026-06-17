@@ -10,6 +10,7 @@ export const enum FILES {
 export const enum POST {
   POST_LENGTH = 4096,
   COMMENT_LENGTH = 4096,
+  TELEGRAM_TEXT_LENGTH = 1024,
 }
 
 export enum ADD_FILE_FILTER {

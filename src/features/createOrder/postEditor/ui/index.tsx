@@ -17,6 +17,7 @@ interface EditorProps {
   disabled?: boolean;
   isStreaming?: boolean;
   placeholder?: string;
+  maxTextLength?: number;
 }
 
 export const Editor: FC<EditorProps> = ({
@@ -27,6 +28,7 @@ export const Editor: FC<EditorProps> = ({
   disabled = false,
   isStreaming = false,
   placeholder,
+  maxTextLength,
 }) => {
   const postsWithoutCurrent = useMemo(
     () =>
@@ -109,6 +111,7 @@ export const Editor: FC<EditorProps> = ({
       className="h-full"
       disabled={disabled}
       isStreaming={isStreaming}
+      maxTextLength={maxTextLength}
     />
   );
 };

@@ -10,6 +10,7 @@ interface RenderEditorProps {
   disabled?: boolean;
   isStreaming?: boolean;
   placeholder?: string;
+  maxTextLength?: number;
 }
 
 export const renderEditor = ({
@@ -19,6 +20,7 @@ export const renderEditor = ({
   disabled = false,
   isStreaming = false,
   placeholder,
+  maxTextLength,
 }: RenderEditorProps) => {
   if (formState?.selectedMultiPostId) {
     return formState?.multiposts?.map((post) =>
@@ -33,6 +35,7 @@ export const renderEditor = ({
           disabled={disabled}
           isStreaming={isStreaming}
           placeholder={placeholder}
+          maxTextLength={maxTextLength}
         />
       ) : null,
     );
@@ -48,6 +51,7 @@ export const renderEditor = ({
           disabled={disabled}
           isStreaming={isStreaming}
           placeholder={placeholder}
+          maxTextLength={maxTextLength}
         />
       ) : null,
     );
