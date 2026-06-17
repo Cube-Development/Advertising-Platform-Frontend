@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useGetChannelByIdQuery, IReadChannelData } from "@entities/channel";
-import { IFormat } from "@entities/project";
+import { getCheapestFormat, IFormat } from "@entities/project";
 import { ENUM_ROLES } from "@entities/user";
 import { USER_LANGUAGES_LIST } from "@shared/languages";
 
@@ -49,7 +49,7 @@ export const useChannelData = ({
       if (card.selected_format) {
         setSelectedFormat(card.selected_format);
       } else {
-        setSelectedFormat(card.format?.[0]);
+        setSelectedFormat(getCheapestFormat(card.format) ?? null);
       }
     }
   }, [card]);

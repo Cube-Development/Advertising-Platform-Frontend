@@ -1,4 +1,5 @@
 import {
+  getCheapestFormat,
   ICatalogCard,
   ICatalogChannel,
   IChangeCards,
@@ -62,7 +63,7 @@ export const CompactCatalogCard: FC<CompactCatalogCardProps> = ({
             (format) =>
               format?.format === (card.selected_format as any)?.[0]?.format,
           )!
-        : card.format[0];
+        : getCheapestFormat(card.format)!;
       break;
     }
     case false: {
@@ -70,7 +71,7 @@ export const CompactCatalogCard: FC<CompactCatalogCardProps> = ({
         ? card.format.find(
             (format) => format?.format === card.selected_format?.format,
           )!
-        : card.format[0];
+        : getCheapestFormat(card.format)!;
       break;
     }
   }
