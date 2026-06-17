@@ -1,23 +1,38 @@
 import Link from "@tiptap/extension-link";
 import Underline from "@tiptap/extension-underline";
 import TextStyle from "@tiptap/extension-text-style";
-import { useEditor } from "@tiptap/react";
+import { Editor, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import { useCallback, useEffect, useState, useMemo } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import {
+  getPlainTextLength,
+  getPlainTextLengthFromDoc,
+  truncateEditorToMaxLength,
+} from "./getPlainTextLength";
 import { ContentType, IEditorFile, TextFormat } from "./types";
 
 export const useTemplateEditor = <T extends IEditorFile>({
   files,
   onUpdate,
   disabled = false,
+  maxTextLength,
 }: {
   files: T[];
   onUpdate: (updatedFiles: T[]) => void;
   disabled?: boolean;
+  maxTextLength?: number;
 }) => {
   const [isLinkModalOpen, setIsLinkModalOpen] = useState(false);
   const [linkUrl, setLinkUrl] = useState("");
   const [linkText, setLinkText] = useState("");
+  const [textLength, setTextLength] = useState(0);
+  const lastValidHtmlRef = useRef("");
+  const isRevertingRef = useRef(false);
+  const filesRef = useRef(files);
+
+  useEffect(() => {
+    filesRef.current = files;
+  }, [files]);
 
   const currentTemplateContent = useMemo(() => {
     const rawContent =
@@ -33,6 +48,26 @@ export const useTemplateEditor = <T extends IEditorFile>({
     }
     return rawContent;
   }, [files]);
+
+  const syncFilesFromEditor = useCallback(
+    (editor: Editor) => {
+      const html = editor.getHTML();
+      const currentFiles = filesRef.current || [];
+      const updatedFiles = currentFiles.some(
+        (f) => f.content_type === ContentType.text,
+      )
+        ? currentFiles.map((f) =>
+            f.content_type === ContentType.text ? { ...f, content: html } : f,
+          )
+        : [
+            ...currentFiles,
+            { content_type: ContentType.text, content: html } as T,
+          ];
+
+      onUpdate(updatedFiles);
+    },
+    [onUpdate],
+  );
 
   const editor = useEditor({
     extensions: [
@@ -60,31 +95,49 @@ export const useTemplateEditor = <T extends IEditorFile>({
       TextStyle,
     ],
     content: currentTemplateContent,
-    onUpdate: ({ editor }) => {
-      const html = editor.getHTML();
+    onUpdate: ({ editor: currentEditor }) => {
+      if (isRevertingRef.current) return;
 
-      const currentFiles = files || [];
-      const updatedFiles = currentFiles.some(
-        (f) => f.content_type === ContentType.text,
-      )
-        ? currentFiles.map((f) =>
-            f.content_type === ContentType.text ? { ...f, content: html } : f,
-          )
-        : [
-            ...currentFiles,
-            { content_type: ContentType.text, content: html } as T,
-          ];
+      const len = getPlainTextLength(currentEditor);
+      setTextLength(len);
 
-      onUpdate(updatedFiles);
+      if (maxTextLength && len > maxTextLength) {
+        isRevertingRef.current = true;
+        currentEditor.commands.setContent(lastValidHtmlRef.current, false);
+        isRevertingRef.current = false;
+        setTextLength(getPlainTextLength(currentEditor));
+        return;
+      }
+
+      const html = currentEditor.getHTML();
+      lastValidHtmlRef.current = html;
+      syncFilesFromEditor(currentEditor);
     },
     editorProps: {
       attributes: {
         class:
           "h-full px-4 overflow-auto bg-transparent focus:outline-none text-base template-editor-content post-content post_pasted_link",
       },
+      handleTextInput: (view, from, to, text) => {
+        if (!maxTextLength) return false;
+
+        const doc = view.state.doc;
+        const currentLen = getPlainTextLengthFromDoc(doc);
+        const selectedLen = doc.textBetween(from, to, "\n", "\n").length;
+        const newLen = currentLen - selectedLen + text.length;
+
+        if (newLen > maxTextLength) return true;
+        return false;
+      },
       // Map Enter to HardBreak to ensure <br> is used instead of new <p>
       handleKeyDown: (view, event) => {
         if (event.key === "Enter" && !event.shiftKey) {
+          if (
+            maxTextLength &&
+            getPlainTextLengthFromDoc(view.state.doc) >= maxTextLength
+          ) {
+            return true;
+          }
           editor?.commands.setHardBreak();
           return true;
         }
@@ -95,18 +148,23 @@ export const useTemplateEditor = <T extends IEditorFile>({
         const text = event.clipboardData?.getData("text/plain");
         const html = event.clipboardData?.getData("text/html");
 
-        console.log("Paste detected:", {
-          hasText: !!text,
-          hasHtml: !!html,
-          textLength: text?.length,
-          htmlLength: html?.length,
-          text,
-          html,
-        });
-
         // If we have plain text but no HTML (like from Notepad),
         // manually convert it to HTML with <br> to preserve exact formatting
         if (text && !html) {
+          if (maxTextLength) {
+            const { from, to } = view.state.selection;
+            const doc = view.state.doc;
+            const currentLen = getPlainTextLengthFromDoc(doc);
+            const selectedLen = doc.textBetween(from, to, "\n", "\n").length;
+            const remaining = maxTextLength - (currentLen - selectedLen);
+            if (remaining <= 0) return true;
+
+            const truncated = text.slice(0, remaining);
+            const formattedHtml = truncated.replace(/\r?\n/g, "<br>");
+            editor?.commands.insertContent(formattedHtml);
+            return true;
+          }
+
           const formattedHtml = text.replace(/\r?\n/g, "<br>");
           editor?.commands.insertContent(formattedHtml);
           return true;
@@ -131,27 +189,54 @@ export const useTemplateEditor = <T extends IEditorFile>({
           .replace(/<\/p>|<\/div>/gi, "<br>")
           .replace(/<p[^>]*>|<div[^>]*>/gi, "");
 
-        // 4. Убираем лишние переносы только в самом начале и в самом конце,\n        // но сохраняем все переносы внутри текста (не схлопываем 2+ в 2),\n        // чтобы юзер мог делать большие отступы, если захочет.
+        // 4. Убираем лишние переносы только в самом начале и в самом конце,
+        // но сохраняем все переносы внутри текста (не схлопываем 2+ в 2),
+        // чтобы юзер мог делать большие отступы, если захочет.
         const finalHtml = transformed
           .replace(/^(<br\s*\/?>\s*)+/i, "")
           .replace(/(<br\s*\/?>\s*)+$/i, "");
 
-        console.log("Processed HTML for paste (preserves gaps):", finalHtml);
         return finalHtml;
       },
     },
   });
 
+  useEffect(() => {
+    lastValidHtmlRef.current = currentTemplateContent;
+    if (editor) {
+      setTextLength(getPlainTextLength(editor));
+    }
+  }, [currentTemplateContent, editor]);
+
   // Re-sync if files change from outside
   useEffect(() => {
     if (
-      editor &&
-      currentTemplateContent !== editor.getHTML() &&
-      !editor.isFocused
+      !editor ||
+      currentTemplateContent === editor.getHTML() ||
+      editor.isFocused
     ) {
-      editor.commands.setContent(currentTemplateContent);
+      return;
     }
-  }, [currentTemplateContent, editor]);
+
+    editor.commands.setContent(currentTemplateContent, false);
+
+    if (maxTextLength && getPlainTextLength(editor) > maxTextLength) {
+      truncateEditorToMaxLength(editor, maxTextLength);
+      const html = editor.getHTML();
+      lastValidHtmlRef.current = html;
+      setTextLength(getPlainTextLength(editor));
+      syncFilesFromEditor(editor);
+      return;
+    }
+
+    lastValidHtmlRef.current = editor.getHTML();
+    setTextLength(getPlainTextLength(editor));
+  }, [
+    currentTemplateContent,
+    editor,
+    maxTextLength,
+    syncFilesFromEditor,
+  ]);
 
   // Disable editor when modal is open OR when external `disabled` flag is true
   useEffect(() => {
@@ -257,5 +342,6 @@ export const useTemplateEditor = <T extends IEditorFile>({
     setLinkText,
     openLinkModal,
     applyLink,
+    textLength,
   };
 };

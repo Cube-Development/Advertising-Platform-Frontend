@@ -12,6 +12,7 @@ interface PostEditorProps<T extends IEditorFile> {
   className?: string;
   disabled?: boolean;
   isStreaming?: boolean;
+  maxTextLength?: number;
 }
 
 export const PostEditor = <T extends IEditorFile>({
@@ -20,6 +21,7 @@ export const PostEditor = <T extends IEditorFile>({
   className,
   disabled = false,
   isStreaming = false,
+  maxTextLength,
 }: PostEditorProps<T>) => {
   const { t } = useTranslation();
 
@@ -35,7 +37,13 @@ export const PostEditor = <T extends IEditorFile>({
     setLinkText,
     openLinkModal,
     applyLink,
-  } = useTemplateEditor({ files, onUpdate, disabled: disabled || isStreaming });
+    textLength,
+  } = useTemplateEditor({
+    files,
+    onUpdate,
+    disabled: disabled || isStreaming,
+    maxTextLength,
+  });
 
   if (!editor) return null;
 
@@ -59,6 +67,16 @@ export const PostEditor = <T extends IEditorFile>({
           />
           {isStreaming && <div className={styles.shimmer_overlay} />}
         </div>
+        {maxTextLength !== undefined && (
+          <p
+            className={cn(
+              styles.char_counter,
+              textLength >= maxTextLength && styles.char_counter_limit,
+            )}
+          >
+            {textLength}/{maxTextLength}
+          </p>
+        )}
         <div className={cn(isStreaming && styles.toolbar_locked)}>
           <Toolbar
             format={format}
