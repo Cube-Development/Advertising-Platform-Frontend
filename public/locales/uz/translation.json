@@ -3406,7 +3406,8 @@
       "post": {
         "success": "Post muvaffaqiyatli yaratildi",
         "error": "Post yaratishda xatolik",
-        "empty_error": "Barcha postlarni to'ldiring"
+        "empty_error": "Barcha postlarni to'ldiring",
+        "text_max_length": "Matnning maksimal uzunligi — {{max}} belgi"
       },
       "prices": {
         "error": "Buyurtmalarga narxlarni yaratishda xatolik",

@@ -3405,7 +3405,8 @@
       "post": {
         "success": "Post successfully created",
         "error": "Error creating post",
-        "empty_error": "Fill in all posts"
+        "empty_error": "Fill in all posts",
+        "text_max_length": "Maximum text length is {{max}} characters"
       },
       "prices": {
         "error": "Error creating prices for orders",

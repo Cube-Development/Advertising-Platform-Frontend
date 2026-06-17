@@ -1,13 +1,18 @@
 import Link from "@tiptap/extension-link";
 import Underline from "@tiptap/extension-underline";
 import TextStyle from "@tiptap/extension-text-style";
+import { useToast } from "@shared/ui";
 import { Editor, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
 import {
   getPlainTextLength,
   getPlainTextLengthFromDoc,
+  getPlainTextLengthFromString,
+  plainTextToEditorHtml,
   truncateEditorToMaxLength,
+  truncatePlainText,
 } from "./getPlainTextLength";
 import { ContentType, IEditorFile, TextFormat } from "./types";
 
@@ -22,17 +27,36 @@ export const useTemplateEditor = <T extends IEditorFile>({
   disabled?: boolean;
   maxTextLength?: number;
 }) => {
+  const { toast } = useToast();
+  const { t } = useTranslation();
   const [isLinkModalOpen, setIsLinkModalOpen] = useState(false);
   const [linkUrl, setLinkUrl] = useState("");
   const [linkText, setLinkText] = useState("");
   const [textLength, setTextLength] = useState(0);
   const lastValidHtmlRef = useRef("");
-  const isRevertingRef = useRef(false);
+  const isPasteRef = useRef(false);
   const filesRef = useRef(files);
+  const maxTextLengthRef = useRef(maxTextLength);
+  const showPasteLimitToastRef = useRef<() => void>(() => {});
 
   useEffect(() => {
     filesRef.current = files;
   }, [files]);
+
+  useEffect(() => {
+    maxTextLengthRef.current = maxTextLength;
+  }, [maxTextLength]);
+
+  useEffect(() => {
+    showPasteLimitToastRef.current = () => {
+      const max = maxTextLengthRef.current;
+      if (!max) return;
+      toast({
+        variant: "error",
+        title: t("toasts.create_order.post.text_max_length", { max }),
+      });
+    };
+  }, [toast, t]);
 
   const currentTemplateContent = useMemo(() => {
     const rawContent =
@@ -96,18 +120,26 @@ export const useTemplateEditor = <T extends IEditorFile>({
     ],
     content: currentTemplateContent,
     onUpdate: ({ editor: currentEditor }) => {
-      if (isRevertingRef.current) return;
-
       const len = getPlainTextLength(currentEditor);
       setTextLength(len);
 
       if (maxTextLength && len > maxTextLength) {
-        isRevertingRef.current = true;
-        currentEditor.commands.setContent(lastValidHtmlRef.current, false);
-        isRevertingRef.current = false;
+        const wasPaste = isPasteRef.current;
+        isPasteRef.current = false;
+
+        if (wasPaste) {
+          showPasteLimitToastRef.current();
+        }
+
+        truncateEditorToMaxLength(currentEditor, maxTextLength);
+        const html = currentEditor.getHTML();
+        lastValidHtmlRef.current = html;
         setTextLength(getPlainTextLength(currentEditor));
+        syncFilesFromEditor(currentEditor);
         return;
       }
+
+      isPasteRef.current = false;
 
       const html = currentEditor.getHTML();
       lastValidHtmlRef.current = html;
@@ -148,6 +180,10 @@ export const useTemplateEditor = <T extends IEditorFile>({
         const text = event.clipboardData?.getData("text/plain");
         const html = event.clipboardData?.getData("text/html");
 
+        if (maxTextLength && (text || html)) {
+          isPasteRef.current = true;
+        }
+
         // If we have plain text but no HTML (like from Notepad),
         // manually convert it to HTML with <br> to preserve exact formatting
         if (text && !html) {
@@ -157,16 +193,23 @@ export const useTemplateEditor = <T extends IEditorFile>({
             const currentLen = getPlainTextLengthFromDoc(doc);
             const selectedLen = doc.textBetween(from, to, "\n", "\n").length;
             const remaining = maxTextLength - (currentLen - selectedLen);
-            if (remaining <= 0) return true;
+            if (remaining <= 0) {
+              isPasteRef.current = false;
+              showPasteLimitToastRef.current();
+              return true;
+            }
 
-            const truncated = text.slice(0, remaining);
-            const formattedHtml = truncated.replace(/\r?\n/g, "<br>");
-            editor?.commands.insertContent(formattedHtml);
+            const normalizedLength = getPlainTextLengthFromString(text);
+            if (normalizedLength > remaining) {
+              showPasteLimitToastRef.current();
+            }
+
+            const truncated = truncatePlainText(text, remaining);
+            editor?.commands.insertContent(plainTextToEditorHtml(truncated));
             return true;
           }
 
-          const formattedHtml = text.replace(/\r?\n/g, "<br>");
-          editor?.commands.insertContent(formattedHtml);
+          editor?.commands.insertContent(plainTextToEditorHtml(text));
           return true;
         }
         return false;

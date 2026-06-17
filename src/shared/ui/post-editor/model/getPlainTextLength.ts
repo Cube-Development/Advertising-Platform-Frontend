@@ -3,6 +3,21 @@ import { Node as ProseMirrorNode } from "@tiptap/pm/model";
 
 const LEAF_SEPARATOR = "\n";
 
+export const normalizePlainText = (text: string): string =>
+  text.replace(/\r\n/g, "\n").replace(/\r/g, "\n");
+
+export const getPlainTextLengthFromString = (text: string): number =>
+  normalizePlainText(text).length;
+
+export const truncatePlainText = (text: string, maxLength: number): string => {
+  const normalized = normalizePlainText(text);
+  if (normalized.length <= maxLength) return normalized;
+  return normalized.slice(0, maxLength);
+};
+
+export const plainTextToEditorHtml = (text: string): string =>
+  normalizePlainText(text).replace(/\n/g, "<br>");
+
 export const getPlainTextLengthFromDoc = (doc: ProseMirrorNode): number =>
   doc.textBetween(0, doc.content.size, LEAF_SEPARATOR, LEAF_SEPARATOR).length;
 
