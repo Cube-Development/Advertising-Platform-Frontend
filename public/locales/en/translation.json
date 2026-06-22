@@ -3441,6 +3441,8 @@
     "authorization": {
       "auth_error": "Authorization error",
       "google_error": "Google sign-in error",
+      "oauth_user_already_exists": "This account was already registered with email and password. Please sign in that way.",
+      "oauth_user_already_exists": "This account was already registered with email and password. Please sign in that way.",
       "auth_success": "Successfully authorized",
       "account_exist": "An account with this email already exists",
       "registration_error": "Registration error"
