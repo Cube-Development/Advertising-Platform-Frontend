@@ -3444,6 +3444,8 @@
     "authorization": {
       "auth_error": "Ошибка авторизации",
       "google_error": "Ошибка входа через Google",
+      "oauth_user_already_exists": "Этот аккаунт уже зарегистрирован через email и пароль. Войдите обычным способом.",
+      "oauth_user_already_exists": "Этот аккаунт уже зарегистрирован через email и пароль. Войдите обычным способом.",
       "auth_success": "Успешная авторизация",
       "account_exist": "Такой аккаунт уже существует",
       "registration_error": "Ошибка регистрации"

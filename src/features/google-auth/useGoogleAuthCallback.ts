@@ -3,6 +3,7 @@ import {
   useLazyGoogleCallbackQuery,
 } from "@entities/user";
 import { useHandleAuth } from "@features/useHandleAuth";
+import { getGoogleAuthErrorKey } from "@features/google-auth/getGoogleAuthErrorKey";
 import { useAppSelector } from "@shared/hooks";
 import { ENUM_PATHS } from "@shared/routing";
 import { queryParamKeys } from "@shared/utils";
@@ -41,10 +42,15 @@ export const useGoogleAuthCallback = () => {
 
     isProcessing.current = true;
 
-    const handleError = () => {
+    const handleError = (err?: unknown) => {
+      const errorKey =
+        error === "OAUTH_USER_ALREADY_EXISTS"
+          ? "toasts.authorization.oauth_user_already_exists"
+          : getGoogleAuthErrorKey(err);
+
       toast({
         variant: "error",
-        title: t("toasts.authorization.google_error"),
+        title: t(errorKey),
       });
       navigate(ENUM_PATHS.LOGIN, { replace: true });
       isProcessing.current = false;
@@ -54,8 +60,8 @@ export const useGoogleAuthCallback = () => {
       try {
         const data = await getUser().unwrap();
         await handleAuth(data.role, data.id);
-      } catch {
-        handleError();
+      } catch (err) {
+        handleError(err);
       } finally {
         isProcessing.current = false;
       }
@@ -70,7 +76,7 @@ export const useGoogleAuthCallback = () => {
       googleCallback({ code, state })
         .unwrap()
         .then(() => completeAuth())
-        .catch(handleError);
+        .catch((err) => handleError(err));
       return;
     }
 

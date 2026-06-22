@@ -3442,6 +3442,7 @@
     "authorization": {
       "auth_error": "Avtorizatsiya xatoligi",
       "google_error": "Google orqali kirishda xatolik",
+      "oauth_user_already_exists": "Bu akkaunt email va parol orqali ro'yxatdan o'tgan. Oddiy kirish usulidan foydalaning.",
       "auth_success": "Muvaffaqiyatli avtorizatsiya",
       "account_exist": "Bunday akkount allaqachon mavjud",
       "registration_error": "Ro'yxatdan o'tishda xatolik"
