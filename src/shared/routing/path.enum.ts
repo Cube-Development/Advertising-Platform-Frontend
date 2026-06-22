@@ -23,6 +23,7 @@ export enum ENUM_PATHS {
   CHANNEL = "/channel/:id",
   FAQ = "/faq",
   LOGIN = "/login",
+  OAUTH_CALLBACK = "/oauth-callback",
   REGISTRATION = "/registration",
   SERVICE_RULES = "/service_rules",
   PUBLIC_OFFER = "/public_offer",

@@ -338,6 +338,8 @@
     "sign_up": "Ro'yxatdan o'ting",
     "sign_in": "Kirish",
     "login_with": "Yoki quyidagilar orqali kiring:",
+    "login_with_google": "Google orqali kirish",
+    "oauth_callback_loading": "Google orqali kirish yakunlanmoqda...",
     "sign_up_registration": "Ro'yxatdan o'tish",
     "email_required": "Email majburiy maydon",
     "email_invalid": "Noto'g'ri email",
@@ -3439,6 +3441,7 @@
     },
     "authorization": {
       "auth_error": "Avtorizatsiya xatoligi",
+      "google_error": "Google orqali kirishda xatolik",
       "auth_success": "Muvaffaqiyatli avtorizatsiya",
       "account_exist": "Bunday akkount allaqachon mavjud",
       "registration_error": "Ro'yxatdan o'tishda xatolik"
