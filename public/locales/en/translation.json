@@ -338,6 +338,8 @@
     "sign_up": "Sign up",
     "sign_in": "Sign in",
     "login_with": "Or log in with:",
+    "login_with_google": "Sign in with Google",
+    "oauth_callback_loading": "Completing Google sign-in...",
     "sign_up_registration": "Registration",
     "email_required": "Email is a required field",
     "email_invalid": "Invalid email",
@@ -3438,6 +3440,7 @@
     },
     "authorization": {
       "auth_error": "Authorization error",
+      "google_error": "Google sign-in error",
       "auth_success": "Successfully authorized",
       "account_exist": "An account with this email already exists",
       "registration_error": "Registration error"

@@ -5,6 +5,7 @@ import {
   LoginForm,
   loginSteps,
 } from "@widgets/authorization";
+import { useGoogleLogin } from "@features/google-auth";
 import { FC } from "react";
 import { useState } from "react";
 import styles from "./styles.module.scss";
@@ -12,9 +13,11 @@ import { Link, useLocation } from "react-router-dom";
 import { ENUM_PATHS } from "@shared/routing";
 import { useTranslation } from "react-i18next";
 import { useClearCookiesOnPage } from "@shared/hooks";
+import { Loader } from "lucide-react";
 
 export const LoginPage: FC = () => {
   useClearCookiesOnPage();
+  const { startGoogleLogin, isLoading: isGoogleLoading } = useGoogleLogin();
   const { t } = useTranslation();
   const [currentForm, setCurrentForm] = useState<loginSteps>(loginSteps.login);
 
@@ -64,24 +67,35 @@ export const LoginPage: FC = () => {
                 </Link>
               </span>
             </p>
-            {/* <div className={styles.login__with}>
-              <p className={`${styles.login__with__title} truncate`}>
-                {t("auth.login_with")}
-              </p>
-            </div>
-            <div className={styles.signin}>
-              <div className={styles.signin__container}>
-                <button type="button" className={styles.button__login}>
-                  <img src="/images/authorization/facebook.svg" alt="" />
-                </button>
-                <button type="button" className={styles.button__login}>
-                  <img src="/images/authorization/google.svg" alt="" />
-                </button>
-                <button type="button" className={styles.button__login}>
-                  <img src="/images/authorization/apple.svg" alt="" />
-                </button>
-              </div>
-            </div> */}
+            {currentForm === loginSteps.login && (
+              <>
+                <div className={styles.login__with}>
+                  <p className={`${styles.login__with__title} truncate`}>
+                    {t("auth.login_with")}
+                  </p>
+                </div>
+                <div className={styles.signin}>
+                  <div className={styles.signin__container}>
+                    <button
+                      type="button"
+                      className={styles.button__login}
+                      onClick={startGoogleLogin}
+                      disabled={isGoogleLoading}
+                      aria-label={t("auth.login_with_google")}
+                    >
+                      {isGoogleLoading ? (
+                        <Loader className="animate-spin" width={20} height={20} />
+                      ) : (
+                        <img
+                          src="/images/authorization/google.svg"
+                          alt="Google"
+                        />
+                      )}
+                    </button>
+                  </div>
+                </div>
+              </>
+            )}
           </>
         )}
       </div>

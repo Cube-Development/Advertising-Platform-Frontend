@@ -23,6 +23,7 @@ import { CreateOrderPage } from "@pages/CreateOrder";
 import { DocumentsPage } from "@pages/Documents";
 import { FAQPage } from "@pages/FAQ";
 import { LoginPage } from "@pages/Login";
+import { OAuthCallbackPage } from "@pages/OAuthCallback";
 import { MainPage } from "@pages/Main";
 import { MainBloggerPage } from "@pages/MainBlogger";
 import { MyChannelsPage } from "@pages/MyChannels";
@@ -57,6 +58,12 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
   {
     path: ENUM_PATHS.REGISTRATION,
     component: RegistrationPage,
+    auth: ENUM_AUTH_TYPES.ONLY_PUBLIC,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
+  },
+  {
+    path: ENUM_PATHS.OAUTH_CALLBACK,
+    component: OAuthCallbackPage,
     auth: ENUM_AUTH_TYPES.ONLY_PUBLIC,
     layout: ENUM_LAYOUT_TYPES.ROOT,
   },

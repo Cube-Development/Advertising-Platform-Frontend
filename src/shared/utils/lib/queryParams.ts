@@ -59,6 +59,7 @@ export enum queryParamKeys {
   telegramRole = "telegram_role",
   permission = "permission",
   saveProject = "save_project",
+  googleAuth = "google_auth",
 }
 
 type QueryParamsType = Partial<Record<queryParamKeys, string | null>>;

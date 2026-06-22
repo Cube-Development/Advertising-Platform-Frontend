@@ -338,6 +338,8 @@
     "sign_up": "Зарегистрируйтесь",
     "sign_in": "Войти",
     "login_with": "Или войдите через:",
+    "login_with_google": "Войти через Google",
+    "oauth_callback_loading": "Завершаем вход через Google...",
     "sign_up_registration": "Регистрация",
     "email_required": "Email обязательное поле",
     "email_invalid": "Недействительная почта",
@@ -3441,6 +3443,7 @@
     },
     "authorization": {
       "auth_error": "Ошибка авторизации",
+      "google_error": "Ошибка входа через Google",
       "auth_success": "Успешная авторизация",
       "account_exist": "Такой аккаунт уже существует",
       "registration_error": "Ошибка регистрации"
