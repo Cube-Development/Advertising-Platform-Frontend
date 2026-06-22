@@ -19,28 +19,36 @@ export const useGoogleAuthCallback = () => {
   const navigate = useNavigate();
   const { handleAuth } = useHandleAuth();
   const { isAuth } = useAppSelector((state) => state.user);
+
   const [getUser] = useGetUserMutation();
   const [googleCallback] = useLazyGoogleCallbackQuery();
-  const isProcessing = useRef(false);
+
+  const startedForSearch = useRef<string | null>(null);
 
   useEffect(() => {
-    if (isAuth || isProcessing.current) return;
+    if (isAuth) return;
+
+    // Один запуск на один callback URL
+    if (startedForSearch.current === location.search) {
+      return;
+    }
+
+    startedForSearch.current = location.search;
 
     const params = new URLSearchParams(location.search);
+
     const error = params.get("error");
     const code = params.get(queryParamKeys.code);
     const state = params.get(queryParamKeys.state);
     const googleAuth = params.get(queryParamKeys.googleAuth);
 
     const hasOAuthParams =
-      error || (code && state) || googleAuth === "1";
+      !!error || (!!code && !!state) || googleAuth === "1";
 
     if (!hasOAuthParams) {
       navigate(ENUM_PATHS.LOGIN, { replace: true });
       return;
     }
-
-    isProcessing.current = true;
 
     const handleError = (err?: unknown) => {
       const errorKey =
@@ -52,8 +60,8 @@ export const useGoogleAuthCallback = () => {
         variant: "error",
         title: t(errorKey),
       });
+
       navigate(ENUM_PATHS.LOGIN, { replace: true });
-      isProcessing.current = false;
     };
 
     const completeAuth = async () => {
@@ -62,8 +70,6 @@ export const useGoogleAuthCallback = () => {
         await handleAuth(data.role, data.id);
       } catch (err) {
         handleError(err);
-      } finally {
-        isProcessing.current = false;
       }
     };
 
@@ -73,24 +79,16 @@ export const useGoogleAuthCallback = () => {
     }
 
     if (code && state) {
-      googleCallback({ code, state })
+      void googleCallback({ code, state })
         .unwrap()
-        .then(() => completeAuth())
-        .catch((err) => handleError(err));
+        .then(completeAuth)
+        .catch(handleError);
+
       return;
     }
 
     if (googleAuth === "1") {
-      completeAuth();
+      void completeAuth();
     }
-  }, [
-    location.search,
-    isAuth,
-    getUser,
-    googleCallback,
-    handleAuth,
-    navigate,
-    toast,
-    t,
-  ]);
+  }, [location.search]);
 };
