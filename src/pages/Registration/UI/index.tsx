@@ -5,6 +5,7 @@ import {
   CodeForm,
   EmailForm,
   RegistrationForm,
+  RegistrationRoleSwitcher,
   registrationSteps,
 } from "@widgets/authorization";
 import { Loader } from "lucide-react";
@@ -33,6 +34,11 @@ export const RegistrationPage: FC = () => {
   return (
     <section className={styles.wrapper}>
       <div className={styles.container}>
+        {currentForm === registrationSteps.email && (
+          <div className={styles.roleSwitcher}>
+            <RegistrationRoleSwitcher />
+          </div>
+        )}
         {currentForm === registrationSteps.email && (
           <EmailForm
             onNavigate={navigateForms}
