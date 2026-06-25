@@ -1385,6 +1385,28 @@
       }
     }
   },
+  "track_orders": {
+    "title": "Order Tracking",
+    "empty": "No orders at the moment",
+    "open_post": "Open post",
+    "status_filter": {
+      "wait": "Awaiting acceptance",
+      "in_progress": "In progress",
+      "post_review": "Under review"
+    },
+    "card": {
+      "order_ident": "Order number",
+      "date": "Date",
+      "time": "Time",
+      "with_vat": "Price with VAT",
+      "without_vat": "Price without VAT",
+      "blogger_commission": "Blogger commission",
+      "catalog_commission": "Catalog commission",
+      "executor": "Executor",
+      "customer": "Customer",
+      "owner": "Owner"
+    }
+  },
   "add_platform": {
     "title": {
       "add": "Add Channel",

@@ -1385,6 +1385,28 @@
       }
     }
   },
+  "track_orders": {
+    "title": "Buyurtmalarni kuzatish",
+    "empty": "Hozircha buyurtmalar yo'q",
+    "open_post": "Postni ochish",
+    "status_filter": {
+      "wait": "Qabul kutilmoqda",
+      "in_progress": "Jarayonda",
+      "post_review": "Tekshiruvda"
+    },
+    "card": {
+      "order_ident": "Buyurtma raqami",
+      "date": "Sana",
+      "time": "Vaqt",
+      "with_vat": "QQS bilan narx",
+      "without_vat": "QQSsiz narx",
+      "blogger_commission": "Bloger komissiyasi",
+      "catalog_commission": "Katalog komissiyasi",
+      "executor": "Ijrochi",
+      "customer": "Buyurtmachi",
+      "owner": "Egasi"
+    }
+  },
   "add_platform": {
     "title": {
       "add": "Kanal qo'shish",

@@ -29,6 +29,7 @@ import { MainBloggerPage } from "@pages/MainBlogger";
 import { MyChannelsPage } from "@pages/MyChannels";
 import { NotFoundPage } from "@pages/NotFound";
 import { OffersPage } from "@pages/Offers";
+import { TrackOrdersPage } from "@pages/TrackOrders";
 import { OrdersPage } from "@pages/Orders";
 import { PostTemplatesPage } from "@pages/PostTemplates";
 import { ProfilePage } from "@pages/Profile";
@@ -174,6 +175,14 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
   {
     path: ENUM_PATHS.OFFERS,
     component: OffersPage,
+    roles: [ENUM_ROLES.BLOGGER],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
+    authSidebar: true,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
+  },
+  {
+    path: ENUM_PATHS.TRACK_ORDERS,
+    component: TrackOrdersPage,
     roles: [ENUM_ROLES.BLOGGER],
     auth: ENUM_AUTH_TYPES.PRIVATE,
     authSidebar: true,

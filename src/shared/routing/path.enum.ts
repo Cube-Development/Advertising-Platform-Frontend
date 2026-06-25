@@ -19,6 +19,7 @@ export enum ENUM_PATHS {
   PROJECT_PAGE = "/project/:project_id",
   GUIDE = "/guide/:guide_id",
   OFFERS = "/offers",
+  TRACK_ORDERS = "/track-orders",
   MY_CHANNELS = "/channels",
   CHANNEL = "/channel/:id",
   FAQ = "/faq",
