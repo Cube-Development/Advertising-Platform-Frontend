@@ -1,4 +1,5 @@
 import { ENUM_ROLES, USER_ROLES } from "@entities/user";
+import { TRACK_ORDERS_ALLOWED_EMAILS } from "@entities/self-connect-order";
 import { AddChannelPage } from "@pages/AddChannel";
 import { AdminAccountingPage } from "@pages/AdminAccounting";
 import { AdminChannelsPage } from "@pages/AdminChannels";
@@ -185,8 +186,8 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
     component: TrackOrdersPage,
     roles: [ENUM_ROLES.BLOGGER],
     auth: ENUM_AUTH_TYPES.PRIVATE,
-    authSidebar: true,
     layout: ENUM_LAYOUT_TYPES.ROOT,
+    allowedEmails: TRACK_ORDERS_ALLOWED_EMAILS,
   },
 
   // private advertiser & manager & agency

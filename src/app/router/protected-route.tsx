@@ -1,7 +1,10 @@
-import { ENUM_ROLES, toggleRole, USER_ROLES } from "@entities/user";
+import { isEmailInAllowlist } from "@entities/self-connect-order";
+import { ENUM_ROLES, toggleRole, USER_ROLES, useGetUserQueryQuery } from "@entities/user";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { ENUM_AUTH_TYPES, ENUM_PATHS, IRouting } from "@shared/routing";
+import { SuspenseLoader } from "@shared/ui";
 import { SideBarAdminLayout, SideBarLayout } from "@widgets/layouts";
+import { NotFoundPage } from "@pages/NotFound";
 import { useEffect, useMemo, useRef } from "react";
 import { Navigate, useLocation } from "react-router-dom";
 
@@ -10,6 +13,14 @@ export const ProtectedRoute = ({ route }: { route: IRouting }) => {
   const { isAuth, role: sliceRole } = useAppSelector((state) => state.user);
   const location = useLocation();
   const dispatch = useAppDispatch();
+  const hasEmailAllowlist = route.allowedEmails !== undefined;
+
+  const { data: user, isFetching: isUserFetching } = useGetUserQueryQuery(
+    undefined,
+    {
+      skip: !isAuth || !hasEmailAllowlist,
+    },
+  );
 
   const query = useMemo(
     () => new URLSearchParams(location.search),
@@ -104,6 +115,16 @@ export const ProtectedRoute = ({ route }: { route: IRouting }) => {
       return <Navigate to={ENUM_PATHS.ORDERS} replace />;
     }
     return <Navigate to={ENUM_PATHS.MAIN} replace />;
+  }
+
+  if (hasEmailAllowlist && isAuth) {
+    if (isUserFetching) {
+      return <SuspenseLoader />;
+    }
+
+    if (!isEmailInAllowlist(user?.email, route.allowedEmails!)) {
+      return <NotFoundPage />;
+    }
   }
 
   // Оборачиваем в нужный layout
