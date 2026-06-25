@@ -1396,6 +1396,8 @@
     },
     "card": {
       "order_ident": "Buyurtma raqami",
+      "order_id": "Buyurtma ID",
+      "project_id": "Loyiha ID",
       "date": "Sana",
       "time": "Vaqt",
       "with_vat": "QQS bilan narx",
@@ -3495,7 +3497,8 @@
       "reviews": "Sharhlar",
       "invoice": "Hisob-fakturalar va shartnomalar",
       "accounting": "Buxgalteriya",
-      "organization": "Organizatsiya"
+      "organization": "Organizatsiya",
+      "track_orders": "Buyurtmalarni kuzatish"
     },
     "pages": {
       "home": "Bosh sahifa",

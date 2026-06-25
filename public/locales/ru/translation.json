@@ -1399,6 +1399,8 @@
     },
     "card": {
       "order_ident": "Номер заказа",
+      "order_id": "ID заказа",
+      "project_id": "ID проекта",
       "date": "Дата",
       "time": "Время",
       "with_vat": "Цена с НДС",
@@ -3498,7 +3500,8 @@
       "reviews": "Отзывы",
       "invoice": "Счета и договора",
       "accounting": "Бухгалтерия",
-      "organization": "Организация"
+      "organization": "Организация",
+      "track_orders": "Отслеживание заказов"
     },
     "pages": {
       "home": "Главная",

@@ -1396,6 +1396,8 @@
     },
     "card": {
       "order_ident": "Order number",
+      "order_id": "Order ID",
+      "project_id": "Project ID",
       "date": "Date",
       "time": "Time",
       "with_vat": "Price with VAT",
@@ -3495,7 +3497,8 @@
       "reviews": "Reviews",
       "invoice": "Invoices and contracts",
       "accounting": "Accounting",
-      "organization": "Organization"
+      "organization": "Organization",
+      "track_orders": "Order tracking"
     },
     "pages": {
       "home": "Home",
