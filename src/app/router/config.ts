@@ -369,6 +369,14 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
     adminSidebar: true,
   },
   {
+    path: ENUM_PATHS.ADMIN_TRACK_ORDERS,
+    component: TrackOrdersPage,
+    roles: [ENUM_ROLES.MODERATOR],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
+    layout: ENUM_LAYOUT_TYPES.ADMIN,
+    adminSidebar: true,
+  },
+  {
     path: ENUM_PATHS.ADMIN_MAILING,
     component: AdminMailingPage,
     roles: [ENUM_ROLES.MODERATOR],

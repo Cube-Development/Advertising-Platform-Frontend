@@ -41,6 +41,7 @@ export enum ENUM_PATHS {
   ADMIN_COMPLAINT_INFO = "/admin/complaints/:id",
   ADMIN_DOCUMENTS = "/admin/documents",
   ADMIN_ORDER_TRANSFER = "/admin/order-transfer",
+  ADMIN_TRACK_ORDERS = "/admin/track-orders",
   ADMIN_MAILING = "/admin/mailing",
   ADMIN_CHANNEL_OWNER_SWAP = "/admin/channel-owner-swap",
   ADMIN_DELETE_ORGANIZATION = "/admin/delete-organization",
