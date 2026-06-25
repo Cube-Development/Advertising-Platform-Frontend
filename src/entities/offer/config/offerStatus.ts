@@ -55,3 +55,26 @@ export const OFFER_CHAT_LIST = [
   ENUM_OFFER_STATUS.ACTIVE,
   ENUM_OFFER_STATUS.WAIT,
 ];
+
+export const SELF_CONNECT_ORDER_TABS_LIST = [
+  {
+    name: "track_orders.status_filter.wait",
+    type: ENUM_OFFER_STATUS.WAIT,
+  },
+  {
+    name: "track_orders.status_filter.in_progress",
+    type: ENUM_OFFER_STATUS.ACTIVE,
+  },
+  {
+    name: "track_orders.status_filter.post_review",
+    type: ENUM_OFFER_STATUS.UNFULFILLED,
+  },
+];
+
+export const SELF_CONNECT_DEFAULT_STATUS = ENUM_OFFER_STATUS.ACTIVE;
+
+export const SELF_CONNECT_ORDER_STATUS_API = {
+  [ENUM_OFFER_STATUS.WAIT]: ENUM_OFFER_STATUS_BACKEND.wait,
+  [ENUM_OFFER_STATUS.ACTIVE]: ENUM_OFFER_STATUS_BACKEND.in_progress,
+  [ENUM_OFFER_STATUS.UNFULFILLED]: ENUM_OFFER_STATUS_BACKEND.post_review,
+};

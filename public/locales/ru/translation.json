@@ -1388,6 +1388,28 @@
       }
     }
   },
+  "track_orders": {
+    "title": "Отслеживание заказов",
+    "empty": "На данный момент заказов нет",
+    "open_post": "Открыть пост",
+    "status_filter": {
+      "wait": "Ожидают принятия",
+      "in_progress": "В работе",
+      "post_review": "На проверке"
+    },
+    "card": {
+      "order_ident": "Номер заказа",
+      "date": "Дата",
+      "time": "Время",
+      "with_vat": "Цена с НДС",
+      "without_vat": "Цена без НДС",
+      "blogger_commission": "Комиссия блогера",
+      "catalog_commission": "Комиссия каталога",
+      "executor": "Исполнитель",
+      "customer": "Заказчик",
+      "owner": "Владелец"
+    }
+  },
   "add_platform": {
     "title": {
       "add": "Добавление канала",
