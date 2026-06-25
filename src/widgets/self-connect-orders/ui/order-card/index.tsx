@@ -245,7 +245,7 @@ export const SelfConnectOrderCard: FC<SelfConnectOrderCardProps> = ({
         </div>
 
         {order.post_deeplink && (
-          <Button asChild variant="outline" className="w-full sm:w-auto">
+          <Button asChild variant="primary" className="w-full sm:w-auto">
             <a
               href={order.post_deeplink}
               target="_blank"
