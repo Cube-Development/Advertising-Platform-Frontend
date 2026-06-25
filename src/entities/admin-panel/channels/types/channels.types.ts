@@ -68,6 +68,7 @@ export interface IGetAdminChannelsReq {
   page: number;
   status: ADMIN_CHANNEL_STATUS;
   elements_on_page: number;
+  search_string?: string | null;
 }
 
 export interface IAdminRejectChannelReq {

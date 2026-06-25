@@ -5,10 +5,12 @@ import {
   IGetAdminChannelsReq,
   useGetAdminChannelsQuery,
 } from "@entities/admin-panel";
+import { channelData } from "@entities/channel";
+import { SearchFilter } from "@features/catalog";
 import { BarSubFilter } from "@features/other";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { useClearCookiesOnPage } from "@shared/hooks";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { ChannelsList } from "../channels-list";
@@ -22,27 +24,38 @@ export const Channels: FC = () => {
       page: 1,
       status: ADMIN_CHANNEL_STATUS.ACTIVE,
       elements_on_page: INTERSECTION_ELEMENTS.ADMIN_CHANNELS,
+      search_string: "",
     },
   });
   const formFields = watch();
-  const { data, isLoading, isFetching } = useGetAdminChannelsQuery(
-    { ...formFields },
-    {
-      selectFromResult: ({ data, ...rest }) => ({
-        ...rest,
-        data: (data?.status === formFields?.status && data) || undefined,
-      }),
-    },
-  );
+  const { search_string, ...params } = formFields;
+  const getParams: IGetAdminChannelsReq = {
+    ...params,
+    ...(search_string && search_string.length >= 3 ? { search_string } : {}),
+  };
+
+  const { data, isLoading, isFetching } = useGetAdminChannelsQuery(getParams, {
+    selectFromResult: ({ data, ...rest }) => ({
+      ...rest,
+      data: (data?.status === formFields?.status && data) || undefined,
+    }),
+  });
 
   const handleOnChangePage = () => {
     setValue(ADMIN_CHANNEL_FORM.PAGE, formFields?.page + 1);
   };
 
-  const changeTab = (filter: any) => {
+  const changeTab = (filter: ADMIN_CHANNEL_STATUS) => {
     setValue(ADMIN_CHANNEL_FORM.PAGE, 1);
     setValue(ADMIN_CHANNEL_FORM.STATUS, filter);
+    setValue(channelData.search, null);
   };
+
+  useEffect(() => {
+    setTimeout(() => {
+      setValue(ADMIN_CHANNEL_FORM.PAGE, 1);
+    }, 500);
+  }, [formFields.search_string]);
 
   return (
     <div className="container">
@@ -56,6 +69,13 @@ export const Channels: FC = () => {
         </div>
         <div className={styles.table}>
           <div className={styles.filter}>
+            <div className={styles.search}>
+              <SearchFilter
+                type={channelData.search}
+                onChange={setValue}
+                value={formFields.search_string || ""}
+              />
+            </div>
             <BarSubFilter
               tab={formFields?.status}
               changeTab={changeTab}
