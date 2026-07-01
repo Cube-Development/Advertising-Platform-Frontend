@@ -69,6 +69,10 @@ export const SELF_CONNECT_ORDER_TABS_LIST = [
     name: "track_orders.status_filter.post_review",
     type: ENUM_OFFER_STATUS.UNFULFILLED,
   },
+  {
+    name: "track_orders.status_filter.complete",
+    type: ENUM_OFFER_STATUS.COMPLETED,
+  },
 ];
 
 export const SELF_CONNECT_DEFAULT_STATUS = ENUM_OFFER_STATUS.ACTIVE;
@@ -77,4 +81,5 @@ export const SELF_CONNECT_ORDER_STATUS_API = {
   [ENUM_OFFER_STATUS.WAIT]: ENUM_OFFER_STATUS_BACKEND.wait,
   [ENUM_OFFER_STATUS.ACTIVE]: ENUM_OFFER_STATUS_BACKEND.in_progress,
   [ENUM_OFFER_STATUS.UNFULFILLED]: ENUM_OFFER_STATUS_BACKEND.post_review,
+  [ENUM_OFFER_STATUS.COMPLETED]: ENUM_OFFER_STATUS_BACKEND.completed,
 };

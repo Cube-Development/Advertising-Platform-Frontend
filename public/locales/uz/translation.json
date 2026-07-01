@@ -1392,7 +1392,8 @@
     "status_filter": {
       "wait": "Qabul kutilmoqda",
       "in_progress": "Jarayonda",
-      "post_review": "Tekshiruvda"
+      "post_review": "Tekshiruvda",
+      "complete": "Bajarilgan"
     },
     "card": {
       "order_ident": "Buyurtma raqami",
@@ -3498,7 +3499,8 @@
       "invoice": "Hisob-fakturalar va shartnomalar",
       "accounting": "Buxgalteriya",
       "organization": "Organizatsiya",
-      "track_orders": "Buyurtmalarni kuzatish"
+      "track_orders": "Buyurtmalarni kuzatish",
+      "common_observe": "Umumiy statistika"
     },
     "pages": {
       "home": "Bosh sahifa",
@@ -3508,7 +3510,31 @@
       "accounting": "Buxgalteriya",
       "moderation": "Moderatsiya",
       "complaints": "Shikoyatlar",
-      "reviews": "Sharhlar"
+      "reviews": "Sharhlar",
+      "common_observe": "Umumiy statistika"
+    },
+    "common_observe": {
+      "period": {
+        "all_time": "Barcha vaqt",
+        "three_months": "3 oy",
+        "one_month": "1 oy",
+        "one_week": "1 hafta"
+      },
+      "date_from": "Sanadan",
+      "date_to": "Sanagacha",
+      "show": "Ko'rsatish",
+      "totals_title": "Davr bo'yicha jami",
+      "chart_title": "Dinamika",
+      "empty": "Tanlangan davr uchun ma'lumot yo'q",
+      "total_row": "Jami",
+      "columns": {
+        "date": "Sana",
+        "projects": "Loyihalar",
+        "common_orders": "Buyurtmalar",
+        "publisher_orders": "Nashriyotchi buyurtmalari",
+        "self_connect_orders": "Self-connect",
+        "turnover": "Aylanma"
+      }
     },
     "home": {
       "title": "Admin-panel",

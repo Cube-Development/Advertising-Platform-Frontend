@@ -38,7 +38,12 @@ export const TrackOrdersPage: FC = () => {
 
   const formState = watch();
 
-  const { data, isFetching } = useGetSelfConnectOrdersQuery(formState);
+  const { data, isFetching } = useGetSelfConnectOrdersQuery(formState, {
+    selectFromResult: ({ data, ...rest }) => ({
+      ...rest,
+      data: (data?.status === formState?.status && data) || undefined,
+    }),
+  });
 
   const changeStatus = (status: string) => {
     setValue("page", 1);

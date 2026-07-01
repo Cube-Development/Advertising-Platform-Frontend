@@ -50,6 +50,7 @@ export const selfConnectOrderAPI = authApi.injectEndpoints({
 
         return {
           ...response,
+          status: arg?.status,
           isLast:
             batchLength < pageSize || accumulated >= (response?.elements ?? 0),
         };

@@ -10,6 +10,7 @@ import { AdminOrderTransferPage } from "@pages/AdminOrderTransfer";
 import { AdminMailingPage } from "@pages/AdminMailing";
 import { AdminChannelOwnerSwapPage } from "@pages/AdminChannelOwnerSwap";
 import { AdminDeleteOrganizationPage } from "@pages/AdminDeleteOrganization";
+import { AdminCommonObservePage } from "@pages/AdminCommonObserve";
 import { AdminHomePage } from "@pages/AdminHome";
 import { AdminOrganizationPage } from "@pages/AdminOrganization";
 import { AdminReviewsPage } from "@pages/AdminReviews";
@@ -371,6 +372,14 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
   {
     path: ENUM_PATHS.ADMIN_TRACK_ORDERS,
     component: TrackOrdersPage,
+    roles: [ENUM_ROLES.MODERATOR],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
+    layout: ENUM_LAYOUT_TYPES.ADMIN,
+    adminSidebar: true,
+  },
+  {
+    path: ENUM_PATHS.ADMIN_COMMON_OBSERVE,
+    component: AdminCommonObservePage,
     roles: [ENUM_ROLES.MODERATOR],
     auth: ENUM_AUTH_TYPES.PRIVATE,
     layout: ENUM_LAYOUT_TYPES.ADMIN,
