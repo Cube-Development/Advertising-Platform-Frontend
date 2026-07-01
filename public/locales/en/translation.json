@@ -3527,6 +3527,12 @@
       "chart_title": "Dynamics",
       "empty": "No data for the selected period",
       "total_row": "Total",
+      "export_excel": "Export to Excel",
+      "export_excel_error": "Failed to export file",
+      "export_sheet_name": "Data",
+      "export_report_title": "General statistics",
+      "export_chart_metrics": "Metrics dynamics",
+      "export_chart_turnover": "Turnover dynamics",
       "columns": {
         "date": "Date",
         "projects": "Projects",

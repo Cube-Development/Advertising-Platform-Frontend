@@ -3530,6 +3530,12 @@
       "chart_title": "Динамика",
       "empty": "Нет данных за выбранный период",
       "total_row": "Итого",
+      "export_excel": "Выгрузить в Excel",
+      "export_excel_error": "Не удалось выгрузить файл",
+      "export_sheet_name": "Данные",
+      "export_report_title": "Общая статистика",
+      "export_chart_metrics": "Динамика метрик",
+      "export_chart_turnover": "Динамика оборота",
       "columns": {
         "date": "Дата",
         "projects": "Проекты",

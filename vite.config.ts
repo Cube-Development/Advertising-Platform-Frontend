@@ -144,7 +144,10 @@ export default defineConfig({
     }
   },
   optimizeDeps: {
-    include: ['pdfjs-dist/build/pdf.worker.min.mjs']
+    include: [
+      "pdfjs-dist/build/pdf.worker.min.mjs",
+      "@node-projects/excelforge",
+    ],
   },
   plugins: [
     react(),
@@ -168,6 +171,7 @@ export default defineConfig({
   ],
   resolve: {
     alias: {
+      "fs/promises": path.resolve(__dirname, "src/shared/utils/stubs/fs-promises.ts"),
       "@app": path.resolve(__dirname, "src/app"),
       "@entities": path.resolve(__dirname, "src/entities"),
       "@widgets": path.resolve(__dirname, "src/widgets"),

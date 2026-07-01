@@ -1,7 +1,4 @@
-import {
-  COMMON_OBSERVE_PERIOD,
-  COMMON_OBSERVE_PERIOD_DAYS,
-} from "./constants";
+import { COMMON_OBSERVE_PERIOD, COMMON_OBSERVE_PERIOD_DAYS } from "./constants";
 
 export const toInputDate = (date: Date): string => {
   const year = date.getFullYear();

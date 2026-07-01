@@ -1,5 +1,10 @@
 import { isEmailInAllowlist } from "@entities/self-connect-order";
-import { ENUM_ROLES, toggleRole, USER_ROLES, useGetUserQueryQuery } from "@entities/user";
+import {
+  ENUM_ROLES,
+  toggleRole,
+  USER_ROLES,
+  useGetUserQueryQuery,
+} from "@entities/user";
 import { useAppDispatch, useAppSelector } from "@shared/hooks";
 import { ENUM_AUTH_TYPES, ENUM_PATHS, IRouting } from "@shared/routing";
 import { SuspenseLoader } from "@shared/ui";

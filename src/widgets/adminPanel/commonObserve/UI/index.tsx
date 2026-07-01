@@ -11,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
   SpinnerLoader,
+  useToast,
 } from "@shared/ui";
 import { Input } from "@shared/ui/shadcn-ui/ui/input";
 import { Label } from "@shared/ui/shadcn-ui/ui/label";
@@ -24,6 +25,7 @@ import {
   TableRow,
 } from "@shared/ui/shadcn-ui/ui/table";
 import { formatMoney } from "@shared/utils";
+import { Download, Loader2 } from "lucide-react";
 import { FC, useState } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -35,6 +37,7 @@ import {
   getCommonObserveColumnLabelKey,
 } from "../model/constants";
 import { getDateRangeByPeriod, toApiDate } from "../model/helpers";
+import { exportCommonObserveToExcel } from "../model/exportToExcel";
 import { CommonObserveChart } from "./CommonObserveChart";
 import { CommonObserveTotalsCards } from "./CommonObserveTotalsCards";
 import styles from "./styles.module.scss";
@@ -47,6 +50,8 @@ interface ICommonObserveForm {
 
 export const CommonObserve: FC = () => {
   const { t } = useTranslation();
+  const { toast } = useToast();
+  const [isExporting, setIsExporting] = useState(false);
   const defaultRange = getDateRangeByPeriod(COMMON_OBSERVE_PERIOD.ONE_MONTH);
 
   const [queryParams, setQueryParams] = useState<ICommonObserveReq>(() => ({
@@ -64,10 +69,16 @@ export const CommonObserve: FC = () => {
 
   const formFields = watch();
 
-  const { data: observeData, isLoading, isFetching } =
-    useGetCommonObserveQuery(queryParams);
+  const {
+    data: observeData,
+    isLoading,
+    isFetching,
+  } = useGetCommonObserveQuery(queryParams);
 
-  const formatCellValue = (key: CommonObserveColumnKey, value: number | string) => {
+  const formatCellValue = (
+    key: CommonObserveColumnKey,
+    value: number | string,
+  ) => {
     if (key === "turnover" && typeof value === "number") {
       return formatMoney(value);
     }
@@ -106,7 +117,52 @@ export const CommonObserve: FC = () => {
     });
   };
 
+  const handleExport = async () => {
+    if (!observeData?.data?.length || !observeData.totals) {
+      return;
+    }
+
+    setIsExporting(true);
+    try {
+      await exportCommonObserveToExcel({
+        data: observeData.data,
+        totals: observeData.totals,
+        dateFrom: formFields.date_from,
+        dateTo: formFields.date_to,
+        labels: {
+          reportTitle: t("admin_panel.common_observe.export_report_title"),
+          sheetName: t("admin_panel.common_observe.export_sheet_name"),
+          totalsTitle: t("admin_panel.common_observe.totals_title"),
+          totalRow: t("admin_panel.common_observe.total_row"),
+          dateFrom: t("admin_panel.common_observe.date_from"),
+          dateTo: t("admin_panel.common_observe.date_to"),
+          chartMetricsTitle: t(
+            "admin_panel.common_observe.export_chart_metrics",
+          ),
+          chartTurnoverTitle: t(
+            "admin_panel.common_observe.export_chart_turnover",
+          ),
+          columns: Object.fromEntries(
+            COMMON_OBSERVE_COLUMN_KEYS.map((key) => [
+              key,
+              t(getCommonObserveColumnLabelKey(key)),
+            ]),
+          ) as Record<CommonObserveColumnKey, string>,
+        },
+      });
+    } catch (error) {
+      console.error("Common observe export error:", error);
+      toast({
+        variant: "error",
+        title: t("admin_panel.common_observe.export_excel_error"),
+      });
+    } finally {
+      setIsExporting(false);
+    }
+  };
+
   const isPending = isLoading || isFetching;
+  const canExport = Boolean(observeData?.data?.length) && !isPending;
 
   return (
     <div className="container">
@@ -162,6 +218,20 @@ export const CommonObserve: FC = () => {
                 >
                   {t("admin_panel.common_observe.show")}
                 </Button>
+                <Button
+                  type="button"
+                  variant="primary"
+                  className={styles.exportButton}
+                  onClick={handleExport}
+                  disabled={!canExport || isExporting}
+                >
+                  {isExporting ? (
+                    <Loader2 className="size-4 animate-spin" />
+                  ) : (
+                    <Download className="size-4" />
+                  )}
+                  {t("admin_panel.common_observe.export_excel")}
+                </Button>
               </div>
             </div>
           </div>
@@ -174,7 +244,9 @@ export const CommonObserve: FC = () => {
 
           <Card className={styles.panel}>
             <CardHeader>
-              <CardTitle>{t("admin_panel.common_observe.chart_title")}</CardTitle>
+              <CardTitle>
+                {t("admin_panel.common_observe.chart_title")}
+              </CardTitle>
             </CardHeader>
             <CardContent>
               {isPending ? (

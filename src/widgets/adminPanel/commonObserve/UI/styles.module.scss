@@ -64,6 +64,12 @@
     min-width: 180px;
   }
 
+  .exportButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
   .totals {
     display: grid;
     row-gap: 16px;

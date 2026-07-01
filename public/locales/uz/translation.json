@@ -3527,6 +3527,12 @@
       "chart_title": "Dinamika",
       "empty": "Tanlangan davr uchun ma'lumot yo'q",
       "total_row": "Jami",
+      "export_excel": "Excelga yuklab olish",
+      "export_excel_error": "Faylni yuklab bo'lmadi",
+      "export_sheet_name": "Ma'lumotlar",
+      "export_report_title": "Umumiy statistika",
+      "export_chart_metrics": "Ko'rsatkichlar dinamikasi",
+      "export_chart_turnover": "Aylanma dinamikasi",
       "columns": {
         "date": "Sana",
         "projects": "Loyihalar",

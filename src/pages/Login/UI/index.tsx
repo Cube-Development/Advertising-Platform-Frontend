@@ -84,7 +84,11 @@ export const LoginPage: FC = () => {
                       aria-label={t("auth.login_with_google")}
                     >
                       {isGoogleLoading ? (
-                        <Loader className="animate-spin" width={20} height={20} />
+                        <Loader
+                          className="animate-spin"
+                          width={20}
+                          height={20}
+                        />
                       ) : (
                         <img
                           src="/images/authorization/google.svg"

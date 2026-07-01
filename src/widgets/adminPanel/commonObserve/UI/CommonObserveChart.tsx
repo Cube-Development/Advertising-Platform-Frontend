@@ -48,7 +48,10 @@ export const CommonObserveChart: FC<CommonObserveChartProps> = ({ data }) => {
 
   return (
     <ResponsiveContainer width="100%" height={360}>
-      <AreaChart data={data} margin={{ top: 10, right: 10, left: 0, bottom: 0 }}>
+      <AreaChart
+        data={data}
+        margin={{ top: 10, right: 10, left: 0, bottom: 0 }}
+      >
         <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.08)" />
         <XAxis dataKey="date" tick={{ fontSize: 12 }} />
         <YAxis
