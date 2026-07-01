@@ -47,5 +47,6 @@ export interface ISelfConnectOrdersResponse {
   page: number;
   elements: number;
   orders: ISelfConnectOrder[];
+  status?: string;
   isLast?: boolean;
 }

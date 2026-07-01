@@ -15,11 +15,10 @@ import {
 } from "@entities/admin";
 import { dateSortingTypes } from "@entities/platform";
 import { ENUM_WALLETS_TYPE } from "@entities/wallet";
-import { SignAccounting, UnsignAccounting } from "@features/admin-panel";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
-import { useAppSelector } from "@shared/hooks";
 import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
-import { NotLogin } from "@widgets/organization";
+import { AdminSignAccounting } from "./UI/AdminSignAccounting";
+import { AdminUnsignAccounting } from "./UI/AdminUnsignAccounting";
 import { ArrowUpDown, CalendarClock, PenTool } from "lucide-react";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
@@ -33,7 +32,6 @@ interface IAdminAccountingForm extends getAdminAccountingReq {
 
 export const Accounting: FC = () => {
   const { t } = useTranslation();
-  const { isAuthEcp } = useAppSelector((state) => state.user);
 
   const { watch, setValue, reset } = useForm<IAdminAccountingForm>({
     defaultValues: {
@@ -70,13 +68,8 @@ export const Accounting: FC = () => {
             data) ||
           undefined,
       }),
-      skip: !isAuthEcp,
     },
   );
-
-  if (!isAuthEcp) {
-    return <NotLogin />;
-  }
 
   const handleChangeTab = (item: IAccountingTab) => {
     reset({
@@ -158,8 +151,8 @@ export const Accounting: FC = () => {
                   <AccountingCard
                     key={item.id}
                     transaction={item}
-                    signAccounting={SignAccounting}
-                    unsignAccounting={UnsignAccounting}
+                    signAccounting={AdminSignAccounting}
+                    unsignAccounting={AdminUnsignAccounting}
                   />
                 ))}
               </div>

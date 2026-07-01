@@ -4,11 +4,9 @@ import {
   IDocumentsForm,
   useGetDocumentsEDOQuery,
 } from "@entities/documents";
-import { SignDocument } from "@features/documents";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
-import { useAppSelector } from "@shared/hooks";
 import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
-import { NotLogin } from "@widgets/organization";
+import { AdminSignDocument } from "./UI/AdminSignDocument";
 import { ArrowUpDown, FileWarning, PenTool } from "lucide-react";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
@@ -25,7 +23,6 @@ import isEqual from "lodash/isEqual";
 
 export const Documents: FC = () => {
   const { t } = useTranslation();
-  const { isAuthEcp } = useAppSelector((state) => state.user);
 
   const { watch, setValue } = useForm<IDocumentsForm>({
     defaultValues: {
@@ -53,15 +50,10 @@ export const Documents: FC = () => {
     ...(formState?.doctype ? { doctype: formState.doctype } : {}),
   };
 
-  const { data, isLoading, isFetching } = useGetDocumentsEDOQuery(
-    { ...getParams },
-    { skip: !isAuthEcp },
-  );
+  const { data, isLoading, isFetching } = useGetDocumentsEDOQuery({
+    ...getParams,
+  });
   const { data: documents } = data || { data: [] };
-
-  if (!isAuthEcp) {
-    return <NotLogin />;
-  }
 
   const handleChangeTab = (item: IDocumentTab) => {
     setValue("categoryStatus", item?.status || []);
@@ -141,7 +133,7 @@ export const Documents: FC = () => {
                 <DocumentCard
                   key={doc.doc_id}
                   document={doc}
-                  signDocument={SignDocument}
+                  signDocument={AdminSignDocument}
                 />
               ))}
             </div>

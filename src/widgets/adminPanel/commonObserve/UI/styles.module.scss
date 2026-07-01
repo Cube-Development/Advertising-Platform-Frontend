@@ -1,0 +1,124 @@
+.wrapper {
+  display: grid;
+  grid-auto-flow: row;
+  row-gap: 30px;
+
+  .top {
+    display: grid;
+    grid-auto-flow: column;
+    column-gap: 20px;
+    align-items: center;
+    align-content: center;
+    justify-content: space-between;
+
+    h1 {
+      color: rgba(0, 0, 0, 0.7);
+      font-size: 24px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+    }
+
+    p {
+      color: rgba(0, 0, 0, 0.7);
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+
+      span {
+        color: var(--color-blacks-b-40, rgba(0, 0, 0, 0.4));
+      }
+    }
+  }
+
+  .content {
+    display: grid;
+    row-gap: 20px;
+  }
+
+  .panel {
+    overflow: hidden;
+    border-radius: 16px;
+    background: var(--color-whites-White, #fff);
+    box-shadow: 0px 2px 5px 0px rgba(0, 0, 0, 0.16);
+    padding: 20px;
+  }
+
+  .filter {
+    display: grid;
+    row-gap: 16px;
+  }
+
+  .dates {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    align-items: flex-end;
+  }
+
+  .dateField {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 180px;
+  }
+
+  .exportButton {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .totals {
+    display: grid;
+    row-gap: 16px;
+  }
+
+  .totalsTitle {
+    color: rgba(0, 0, 0, 0.7);
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  .totalsGrid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    gap: 16px;
+
+    .totalsCard:nth-child(-n + 3) {
+      grid-column: span 2;
+    }
+
+    .totalsCard:nth-child(4) {
+      grid-column: 1 / span 3;
+    }
+
+    .totalsCard:nth-child(5) {
+      grid-column: 4 / span 3;
+    }
+  }
+
+  .totalsCard {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+    border-radius: 12px;
+    background: rgba(10, 179, 156, 0.06);
+    border: 1px solid rgba(10, 179, 156, 0.15);
+  }
+
+  .totalsLabel {
+    color: rgba(0, 0, 0, 0.5);
+    font-size: 12px;
+    font-weight: 500;
+  }
+
+  .totalsValue {
+    color: rgba(0, 0, 0, 0.8);
+    font-size: 22px;
+    font-weight: 600;
+    line-height: 1.2;
+  }
+}

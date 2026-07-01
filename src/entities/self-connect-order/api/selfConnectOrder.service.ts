@@ -26,11 +26,12 @@ export const selfConnectOrderAPI = authApi.injectEndpoints({
       ISelfConnectOrdersResponse,
       getSelfConnectOrdersReq
     >({
-      query: ({ status, ...params }) => ({
+      query: ({ status, page, elements_on_page }) => ({
         url: "/manage/self-connect-orders",
-        method: "GET",
-        params: {
-          ...params,
+        method: "POST",
+        body: {
+          page,
+          elements_on_page,
           status:
             SELF_CONNECT_ORDER_STATUS_API[
               status as keyof typeof SELF_CONNECT_ORDER_STATUS_API
@@ -50,6 +51,7 @@ export const selfConnectOrderAPI = authApi.injectEndpoints({
 
         return {
           ...response,
+          status: arg?.status,
           isLast:
             batchLength < pageSize || accumulated >= (response?.elements ?? 0),
         };

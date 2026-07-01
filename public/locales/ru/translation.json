@@ -1395,7 +1395,8 @@
     "status_filter": {
       "wait": "Ожидают принятия",
       "in_progress": "В работе",
-      "post_review": "На проверке"
+      "post_review": "На проверке",
+      "complete": "Выполненные"
     },
     "card": {
       "order_ident": "Номер заказа",
@@ -3501,7 +3502,8 @@
       "invoice": "Счета и договора",
       "accounting": "Бухгалтерия",
       "organization": "Организация",
-      "track_orders": "Отслеживание заказов"
+      "track_orders": "Отслеживание заказов",
+      "common_observe": "Общая статистика"
     },
     "pages": {
       "home": "Главная",
@@ -3511,7 +3513,37 @@
       "accounting": "Бухгалтерия",
       "moderation": "Модерация",
       "complaints": "Жалобы",
-      "reviews": "Отзывы"
+      "reviews": "Отзывы",
+      "common_observe": "Общая статистика"
+    },
+    "common_observe": {
+      "period": {
+        "all_time": "Все время",
+        "three_months": "3 месяца",
+        "one_month": "1 месяц",
+        "one_week": "1 неделя"
+      },
+      "date_from": "Дата от",
+      "date_to": "Дата до",
+      "show": "Показать",
+      "totals_title": "Итого за период",
+      "chart_title": "Динамика",
+      "empty": "Нет данных за выбранный период",
+      "total_row": "Итого",
+      "export_excel": "Выгрузить в Excel",
+      "export_excel_error": "Не удалось выгрузить файл",
+      "export_sheet_name": "Данные",
+      "export_report_title": "Общая статистика",
+      "export_chart_metrics": "Динамика метрик",
+      "export_chart_turnover": "Динамика оборота",
+      "columns": {
+        "date": "Дата",
+        "projects": "Проекты",
+        "common_orders": "Заказы",
+        "publisher_orders": "Заказы издателя",
+        "self_connect_orders": "Self-connect",
+        "turnover": "Оборот"
+      }
     },
     "home": {
       "title": "Админ-панель",

@@ -18,6 +18,8 @@ import {
   IAdminComplaintInfoData,
   IAdminComplaints,
   IAdminReviews,
+  ICommonObserveReq,
+  ICommonObserveResponse,
 } from "../types";
 
 export interface getAdminOrderComplaintsReq {
@@ -347,6 +349,23 @@ export const adminAPI = authApi.injectEndpoints({
         params,
       }),
     }),
+    getCommonObserve: build.query<ICommonObserveResponse, ICommonObserveReq>({
+      query: (body) => ({
+        url: `/adv-admin/common/observe`,
+        method: "POST",
+        body,
+      }),
+      transformResponse: (response: ICommonObserveResponse) => ({
+        data: response?.data ?? [],
+        totals: response?.totals ?? {
+          projects: 0,
+          common_orders: 0,
+          publisher_orders: 0,
+          self_connect_orders: 0,
+          turnover: 0,
+        },
+      }),
+    }),
   }),
 });
 
@@ -368,4 +387,5 @@ export const {
   useAdminSendMailingMutation,
   useAdminSwapChannelOwnerMutation,
   useAdminDeleteOrganizationMutation,
+  useGetCommonObserveQuery,
 } = adminAPI;
