@@ -15,10 +15,9 @@ import {
 } from "@entities/admin";
 import { dateSortingTypes } from "@entities/platform";
 import { ENUM_WALLETS_TYPE } from "@entities/wallet";
+import { SignAccounting, UnsignAccounting } from "@features/admin-panel";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ShowMoreBtn, SpinnerLoader } from "@shared/ui";
-import { AdminSignAccounting } from "./UI/AdminSignAccounting";
-import { AdminUnsignAccounting } from "./UI/AdminUnsignAccounting";
 import { ArrowUpDown, CalendarClock, PenTool } from "lucide-react";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
@@ -151,8 +150,8 @@ export const Accounting: FC = () => {
                   <AccountingCard
                     key={item.id}
                     transaction={item}
-                    signAccounting={AdminSignAccounting}
-                    unsignAccounting={AdminUnsignAccounting}
+                    signAccounting={SignAccounting}
+                    unsignAccounting={UnsignAccounting}
                   />
                 ))}
               </div>
