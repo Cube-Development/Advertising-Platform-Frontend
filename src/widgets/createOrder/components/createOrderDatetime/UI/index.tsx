@@ -10,19 +10,19 @@ import {
   ResetConfirmButton,
   TimeSlider,
 } from "@features/createOrder";
+import { useToast } from "@shared/ui";
+import { formatRuStringToDate } from "@shared/utils";
 import {
   cleanExpiredDates,
   resetAllDates,
   resetAllTimes,
 } from "@features/createOrder/orderCard/lib/formStateUtils";
-import { useToast } from "@shared/ui";
-import { formatRuStringToDate } from "@shared/utils";
-import { ICreateOrderBlur } from "@widgets/createOrder/model";
-import { ENUM_ROLES } from "@entities/user";
 import { FC, useEffect } from "react";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import styles from "./styles.module.scss";
+import { ICreateOrderBlur } from "@widgets/createOrder/model";
+import { ENUM_ROLES } from "@entities/user";
 
 interface CreateOrderDatetimeProps {
   cards: IPostChannel[];
@@ -46,6 +46,7 @@ export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
   const { t } = useTranslation();
   const { toast } = useToast();
 
+  // ---------- Очистка устаревших дат при маунте ----------
   useEffect(() => {
     const datetime = getValues().datetime;
     if (!datetime?.orders?.length) return;
@@ -67,16 +68,16 @@ export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
     }
   }, []);
 
-  const handleResetTimes = () => {
-    const datetime = getValues().datetime;
-    if (!datetime) return;
-    setValue(CreatePostFormData.datetime, resetAllTimes(datetime));
-  };
-
   const handleResetDates = () => {
     const datetime = getValues().datetime;
     if (!datetime) return;
     setValue(CreatePostFormData.datetime, resetAllDates(datetime));
+  };
+
+  const handleResetTimes = () => {
+    const datetime = getValues().datetime;
+    if (!datetime) return;
+    setValue(CreatePostFormData.datetime, resetAllTimes(datetime));
   };
 
   const handleCheckDatetimes = () => {

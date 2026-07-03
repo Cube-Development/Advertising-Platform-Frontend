@@ -97,20 +97,12 @@ export interface IDatetime {
 
 export interface DateListProps {
   onChange: (dateList: Date[]) => void;
-  onApplyToPlatform?: (dateList: Date[]) => void;
-  onApplyToAll?: (dateList: Date[]) => void;
-  showApplyToPlatform?: boolean;
-  showApplyToAll?: boolean;
   startDate?: string[] | string | undefined;
   platform?: platformTypesNum;
 }
 
 export interface TimeListProps {
   onChange: (timeList: string[]) => void;
-  onApplyToPlatform?: (timeList: string[]) => void;
-  onApplyToAll?: (timeList: string[]) => void;
-  showApplyToPlatform?: boolean;
-  showApplyToAll?: boolean;
   startTime?: string[] | undefined;
   selectedDate?: string;
   platform?: platformTypesNum;
