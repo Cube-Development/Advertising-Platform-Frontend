@@ -2699,7 +2699,7 @@
     "range": "Select Multiple",
     "date": "Select One",
     "until": "until",
-    "apply": "Apply",
+    "apply": "Apply to channel",
     "apply_to_platform": "Apply to platform",
     "apply_to_all": "Apply to all"
   },
@@ -2709,7 +2709,7 @@
     "hour": "h",
     "min": "min",
     "confirm": "Confirm time",
-    "apply": "Apply",
+    "apply": "Apply to channel",
     "apply_to_platform": "Apply to platform",
     "apply_to_all": "Apply to all"
   },

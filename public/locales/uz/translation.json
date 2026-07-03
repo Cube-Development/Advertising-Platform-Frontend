@@ -2700,7 +2700,7 @@
     "range": "Bir nechta tanlash",
     "date": "Bitta tanlash",
     "until": "gacha",
-    "apply": "Qo'llash",
+    "apply": "Kanalga qo'llash",
     "apply_to_platform": "Platformaga qo'llash",
     "apply_to_all": "Hammasiga qo'llash"
   },
@@ -2710,7 +2710,7 @@
     "hour": "soat",
     "min": "daq",
     "confirm": "Vaqtni tasdiqlash",
-    "apply": "Qo'llash",
+    "apply": "Kanalga qo'llash",
     "apply_to_platform": "Platformaga qo'llash",
     "apply_to_all": "Hammasiga qo'llash"
   },
