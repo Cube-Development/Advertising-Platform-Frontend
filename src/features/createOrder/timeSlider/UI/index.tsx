@@ -8,6 +8,7 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
   CustomCloseButton,
+  MyButton,
   SliderDouble,
 } from "@shared/ui";
 import { FC, useCallback, useEffect, useMemo, useRef, useState } from "react";
@@ -30,6 +31,10 @@ const TICKS = ["00:00", "06:00", "12:00", "18:00", "23:59"];
 
 export const TimeSlider: FC<TimeListProps> = ({
   onChange,
+  onApplyToPlatform,
+  onApplyToAll,
+  showApplyToPlatform,
+  showApplyToAll,
   startTime,
   selectedDate,
   platform,
@@ -133,6 +138,20 @@ export const TimeSlider: FC<TimeListProps> = ({
     userHasSelected.current = true;
     const timeList = [formatTime(sliderValue[0]), formatTime(sliderValue[1])];
     onChange(timeList);
+    setIsOpen(false);
+  };
+
+  const handleApplyToPlatform = () => {
+    userHasSelected.current = true;
+    const timeList = [formatTime(sliderValue[0]), formatTime(sliderValue[1])];
+    onApplyToPlatform?.(timeList);
+    setIsOpen(false);
+  };
+
+  const handleApplyToAll = () => {
+    userHasSelected.current = true;
+    const timeList = [formatTime(sliderValue[0]), formatTime(sliderValue[1])];
+    onApplyToAll?.(timeList);
     setIsOpen(false);
   };
 
@@ -256,14 +275,44 @@ export const TimeSlider: FC<TimeListProps> = ({
             ))}
           </div>
 
-          {/* Кнопка подтверждения */}
-          <button
+          {/* Кнопки применения */}
+          <MyButton
             type="button"
+            buttons_type="button__blue"
+            className="mt-2"
             onClick={handleConfirm}
-            className="w-full mt-2 py-3 bg-transparent border border-[var(--Personal-colors-main)] rounded-xl text-[var(--Personal-colors-main)] text-sm font-medium cursor-pointer transition-colors duration-150 hover:bg-[var(--Personal-colors-main)] hover:text-white active:scale-[0.98]"
           >
-            {t("time_slider.confirm")}
-          </button>
+            {t("time_slider.apply")}
+          </MyButton>
+
+          {(showApplyToPlatform || showApplyToAll) && (
+            <div
+              className={`grid gap-2 ${
+                showApplyToPlatform && showApplyToAll
+                  ? "grid-cols-2"
+                  : "grid-cols-1"
+              }`}
+            >
+              {showApplyToPlatform && onApplyToPlatform && (
+                <MyButton
+                  type="button"
+                  buttons_type="button__white"
+                  onClick={handleApplyToPlatform}
+                >
+                  {t("time_slider.apply_to_platform")}
+                </MyButton>
+              )}
+              {showApplyToAll && onApplyToAll && (
+                <MyButton
+                  type="button"
+                  buttons_type="button__white"
+                  onClick={handleApplyToAll}
+                >
+                  {t("time_slider.apply_to_all")}
+                </MyButton>
+              )}
+            </div>
+          )}
         </div>
       </AlertDialogContent>
     </AlertDialog>

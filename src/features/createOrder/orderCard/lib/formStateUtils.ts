@@ -25,6 +25,30 @@ export const getCardData = (
   return { currentCard, cardsWithoutCurrent };
 };
 
+export type ApplyScope = "single" | "platform" | "all";
+
+/** @deprecated Use ApplyScope */
+export type TimeApplyScope = ApplyScope;
+
+const applyDateFields = (
+  order: IDatetime,
+  dateValue?: string,
+  dateFrom?: string,
+  dateTo?: string,
+): IDatetime => {
+  const updated = { ...order };
+  if (dateValue) {
+    delete updated.date_from;
+    delete updated.date_to;
+    updated.date = dateValue;
+  } else {
+    delete updated.date;
+    updated.date_from = dateFrom;
+    updated.date_to = dateTo;
+  }
+  return updated;
+};
+
 /**
  * Вычислить новый datetime-стейт после смены времени.
  */
@@ -33,7 +57,9 @@ export const buildDatetimeAfterTimeChange = (
   card: IPostChannel,
   cards: IPostChannel[],
   timeList: string[],
+  options?: { scope?: ApplyScope },
 ): ICreateDate => {
+  const scope = options?.scope ?? "single";
   const { currentCard, cardsWithoutCurrent } = getCardData(datetime, card);
 
   const updatedCurrentCard = {
@@ -43,18 +69,25 @@ export const buildDatetimeAfterTimeChange = (
   };
 
   const updatedOtherCards = cardsWithoutCurrent.map((order) => {
-    const orderCard = cards.find((c) => c.id === order.order_id);
-    if (
-      orderCard?.platform === card.platform &&
-      !order.time_from &&
-      !order.time_to
-    ) {
+    if (scope === "all") {
       return {
         ...order,
         time_from: timeList[0],
         time_to: timeList[1],
       };
     }
+
+    if (scope === "platform") {
+      const orderCard = cards.find((c) => c.id === order.order_id);
+      if (orderCard?.platform === card.platform) {
+        return {
+          ...order,
+          time_from: timeList[0],
+          time_to: timeList[1],
+        };
+      }
+    }
+
     return order;
   });
 
@@ -62,6 +95,35 @@ export const buildDatetimeAfterTimeChange = (
     ...datetime,
     orders: [...updatedOtherCards, updatedCurrentCard],
   };
+};
+
+/**
+ * Сбросить время у всех ордеров, даты не трогать.
+ */
+export const resetAllTimes = (datetime: ICreateDate): ICreateDate => {
+  const orders = (datetime.orders || []).map((order) => {
+    const updated = { ...order };
+    delete updated.time_from;
+    delete updated.time_to;
+    return updated;
+  });
+
+  return { ...datetime, orders };
+};
+
+/**
+ * Сбросить даты у всех ордеров, время не трогать.
+ */
+export const resetAllDates = (datetime: ICreateDate): ICreateDate => {
+  const orders = (datetime.orders || []).map((order) => {
+    const updated = { ...order };
+    delete updated.date;
+    delete updated.date_from;
+    delete updated.date_to;
+    return updated;
+  });
+
+  return { ...datetime, orders };
 };
 
 /**
@@ -74,7 +136,9 @@ export const buildDatetimeAfterDateChange = (
   cards: IPostChannel[],
   dateList: Date[],
   formatDate: (d: Date) => string,
+  options?: { scope?: ApplyScope },
 ): ICreateDate => {
+  const scope = options?.scope ?? "single";
   const { currentCard, cardsWithoutCurrent } = getCardData(datetime, card);
 
   const updatedCurrentCard = { ...currentCard };
@@ -97,21 +161,17 @@ export const buildDatetimeAfterDateChange = (
   }
 
   const updatedOtherCards = cardsWithoutCurrent.map((order) => {
-    const orderCard = cards.find((c) => c.id === order.order_id);
-    const hasNoDate = !order.date && !order.date_from && !order.date_to;
-    if (orderCard?.platform === card.platform && hasNoDate) {
-      const updatedOrder = { ...order };
-      if (dateValue) {
-        delete updatedOrder.date_from;
-        delete updatedOrder.date_to;
-        updatedOrder.date = dateValue;
-      } else {
-        delete updatedOrder.date;
-        updatedOrder.date_from = dateFrom;
-        updatedOrder.date_to = dateTo;
-      }
-      return updatedOrder;
+    if (scope === "all") {
+      return applyDateFields(order, dateValue, dateFrom, dateTo);
     }
+
+    if (scope === "platform") {
+      const orderCard = cards.find((c) => c.id === order.order_id);
+      if (orderCard?.platform === card.platform) {
+        return applyDateFields(order, dateValue, dateFrom, dateTo);
+      }
+    }
+
     return order;
   });
 
