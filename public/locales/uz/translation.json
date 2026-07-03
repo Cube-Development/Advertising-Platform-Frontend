@@ -2658,7 +2658,13 @@
       }
     },
     "datetime": {
-      "title": "Sana va vaqtni belgilang"
+      "title": "Sana va vaqtni belgilang",
+      "reset_time": "Vaqtni tozalash",
+      "reset_date": "Sanani tozalash",
+      "reset_time_confirm": "Barcha kanallar uchun vaqtni tozalash?",
+      "reset_date_confirm": "Barcha kanallar uchun sanani tozalash?",
+      "cancel": "Bekor qilish",
+      "confirm_reset": "Tozalash"
     },
     "prices": {
       "title": "Buyurtma narxi belgilang",
@@ -2693,14 +2699,20 @@
     "confirm": "Tasdiqlash",
     "range": "Bir nechta tanlash",
     "date": "Bitta tanlash",
-    "until": "gacha"
+    "until": "gacha",
+    "apply": "Qo'llash",
+    "apply_to_platform": "Platformaga qo'llash",
+    "apply_to_all": "Hammasiga qo'llash"
   },
   "time_slider": {
     "from": "<1>{{time}}</1><0>dan</0>",
     "to": "<1>{{time}}</1><0>gacha</0>",
     "hour": "soat",
     "min": "daq",
-    "confirm": "Vaqtni tasdiqlash"
+    "confirm": "Vaqtni tasdiqlash",
+    "apply": "Qo'llash",
+    "apply_to_platform": "Platformaga qo'llash",
+    "apply_to_all": "Hammasiga qo'llash"
   },
   "chat": {
     "my_messages": "Mening xabarlarim",

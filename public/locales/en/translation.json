@@ -2657,7 +2657,13 @@
       }
     },
     "datetime": {
-      "title": "Specify Date and Time"
+      "title": "Specify Date and Time",
+      "reset_time": "Reset time",
+      "reset_date": "Reset date",
+      "reset_time_confirm": "Reset time for all channels?",
+      "reset_date_confirm": "Reset date for all channels?",
+      "cancel": "Cancel",
+      "confirm_reset": "Reset"
     },
     "prices": {
       "title": "Specify the price for order",
@@ -2692,14 +2698,20 @@
     "confirm": "Confirm",
     "range": "Select Multiple",
     "date": "Select One",
-    "until": "until"
+    "until": "until",
+    "apply": "Apply",
+    "apply_to_platform": "Apply to platform",
+    "apply_to_all": "Apply to all"
   },
   "time_slider": {
     "from": "<0>From</0><1>{{time}}</1>",
     "to": "<0>To</0><1>{{time}}</1>",
     "hour": "h",
     "min": "min",
-    "confirm": "Confirm time"
+    "confirm": "Confirm time",
+    "apply": "Apply",
+    "apply_to_platform": "Apply to platform",
+    "apply_to_all": "Apply to all"
   },
   "chat": {
     "my_messages": "My Messages",

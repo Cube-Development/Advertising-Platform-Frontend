@@ -74,7 +74,8 @@
   grid-auto-flow: row;
   align-items: center;
   justify-content: center;
-  // padding: 25px;
+  width: 420px;
+  max-width: 95vw;
   border-radius: 25px;
   background: var(--Personal-colors-White);
 
@@ -144,7 +145,7 @@
   .bottom {
     display: grid;
     grid-auto-flow: row;
-    row-gap: 20px;
+    row-gap: 10px;
     align-items: center;
     justify-content: stretch;
 
