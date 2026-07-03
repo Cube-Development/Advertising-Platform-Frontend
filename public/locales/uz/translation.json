@@ -2699,20 +2699,14 @@
     "confirm": "Tasdiqlash",
     "range": "Bir nechta tanlash",
     "date": "Bitta tanlash",
-    "until": "gacha",
-    "apply": "Kanalga qo'llash",
-    "apply_to_platform": "Platformaga qo'llash",
-    "apply_to_all": "Hammasiga qo'llash"
+    "until": "gacha"
   },
   "time_slider": {
     "from": "<1>{{time}}</1><0>dan</0>",
     "to": "<1>{{time}}</1><0>gacha</0>",
     "hour": "soat",
     "min": "daq",
-    "confirm": "Vaqtni tasdiqlash",
-    "apply": "Kanalga qo'llash",
-    "apply_to_platform": "Platformaga qo'llash",
-    "apply_to_all": "Hammasiga qo'llash"
+    "confirm": "Vaqtni tasdiqlash"
   },
   "chat": {
     "my_messages": "Mening xabarlarim",

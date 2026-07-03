@@ -33,10 +33,6 @@ const advDates = advDatesStrings.map((dateString) => new Date(dateString));
 
 export const CustomCalendar: FC<DateListProps> = ({
   onChange,
-  onApplyToPlatform,
-  onApplyToAll,
-  showApplyToPlatform,
-  showApplyToAll,
   startDate,
   platform,
 }) => {
@@ -86,39 +82,25 @@ export const CustomCalendar: FC<DateListProps> = ({
 
     if (Array.isArray(newDate)) {
       const newDateString = newDate.map((date: Date) => customStringDate(date));
-      setDateObject({ date: newDate, dateString: newDateString });
+      const updatedDateObject = { date: newDate, dateString: newDateString };
+      setDateObject(updatedDateObject);
+
+      // Если режим выбора диапазона и выбрано 2 даты, автоматически подтверждаем и закрываем
+      if (isSelectRange && newDate.length === 2) {
+        onChange(newDate);
+        setIsOpen(false);
+      }
     } else {
       const newDateString = customStringDate(newDate);
-      setDateObject({ date: [newDate], dateString: [newDateString] });
+      const updatedDateObject = { date: [newDate], dateString: newDateString };
+      setDateObject(updatedDateObject);
+
+      // Если режим выбора одной даты, автоматически подтверждаем и закрываем
+      if (!isSelectRange) {
+        onChange([newDate]);
+        setIsOpen(false);
+      }
     }
-  };
-
-  const getSelectedDates = (): Date[] | null => {
-    const dates = dateObject.date;
-    if (!dates || dates.length === 0) return null;
-    if (isSelectRange && dates.length !== 2) return null;
-    return isSelectRange ? [dates[0], dates[1]] : [dates[0]];
-  };
-
-  const handleApply = () => {
-    const dates = getSelectedDates();
-    if (!dates) return;
-    onChange(dates);
-    setIsOpen(false);
-  };
-
-  const handleApplyToPlatform = () => {
-    const dates = getSelectedDates();
-    if (!dates) return;
-    onApplyToPlatform?.(dates);
-    setIsOpen(false);
-  };
-
-  const handleApplyToAll = () => {
-    const dates = getSelectedDates();
-    if (!dates) return;
-    onApplyToAll?.(dates);
-    setIsOpen(false);
   };
 
   const handleChangeRange = () => {
@@ -261,47 +243,6 @@ export const CustomCalendar: FC<DateListProps> = ({
             >
               <p>{isSelectRange ? t("calendar.date") : t("calendar.range")}</p>
             </MyButton>
-
-            <MyButton
-              type="button"
-              buttons_type="button__blue"
-              className="mt-1.5"
-              onClick={handleApply}
-              disabled={!getSelectedDates()}
-            >
-              {t("calendar.apply")}
-            </MyButton>
-
-            {(showApplyToPlatform || showApplyToAll) && (
-              <div
-                className={`grid gap-1 mt-1 ${
-                  showApplyToPlatform && showApplyToAll
-                    ? "grid-cols-2"
-                    : "grid-cols-1"
-                }`}
-              >
-                {showApplyToPlatform && onApplyToPlatform && (
-                  <MyButton
-                    type="button"
-                    buttons_type="button__white"
-                    onClick={handleApplyToPlatform}
-                    disabled={!getSelectedDates()}
-                  >
-                    {t("calendar.apply_to_platform")}
-                  </MyButton>
-                )}
-                {showApplyToAll && onApplyToAll && (
-                  <MyButton
-                    type="button"
-                    buttons_type="button__white"
-                    onClick={handleApplyToAll}
-                    disabled={!getSelectedDates()}
-                  >
-                    {t("calendar.apply_to_all")}
-                  </MyButton>
-                )}
-              </div>
-            )}
           </div>
         </div>
       </AlertDialogContent>

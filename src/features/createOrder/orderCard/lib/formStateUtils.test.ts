@@ -84,7 +84,7 @@ describe("buildDatetimeAfterTimeChange", () => {
     expect(order2?.time_to).toBe("12:00");
   });
 
-  it("single не присваивает время другим ордерам той же платформы без времени", () => {
+  it("присваивает время ордерам той же платформы без времени", () => {
     const card1 = makeCard("order-1");
     const card2 = makeCard("order-2");
     const datetime: ICreateDate = {
@@ -100,171 +100,11 @@ describe("buildDatetimeAfterTimeChange", () => {
       card1,
       [card1, card2],
       ["19:00", "21:00"],
-      { scope: "single" },
     );
 
     const order2 = result.orders.find((o) => o.order_id === "order-2");
-    expect(order2?.time_from).toBeUndefined();
-    expect(order2?.time_to).toBeUndefined();
-  });
-
-  it("platform перезаписывает время у всех каналов той же платформы", () => {
-    const card1 = makeCard("order-1", 1);
-    const card2 = makeCard("order-2", 1);
-    const card3 = makeCard("order-3", 2);
-    const datetime: ICreateDate = {
-      project_id: "p1",
-      orders: [
-        { order_id: "order-1", date: "01.05.2026" },
-        {
-          order_id: "order-2",
-          date: "01.05.2026",
-          time_from: "08:00",
-          time_to: "10:00",
-        },
-        {
-          order_id: "order-3",
-          date: "01.05.2026",
-          time_from: "12:00",
-          time_to: "14:00",
-        },
-      ],
-    };
-
-    const result = buildDatetimeAfterTimeChange(
-      datetime,
-      card1,
-      [card1, card2, card3],
-      ["19:00", "21:00"],
-      { scope: "platform" },
-    );
-
-    const order2 = result.orders.find((o) => o.order_id === "order-2");
-    const order3 = result.orders.find((o) => o.order_id === "order-3");
-    expect(order2?.time_from).toBe("19:00");
+    expect(order2?.time_from).toBe("19:00"); // подтянулось
     expect(order2?.time_to).toBe("21:00");
-    expect(order3?.time_from).toBe("12:00"); // другая платформа не тронута
-    expect(order3?.time_to).toBe("14:00");
-  });
-
-  it("scope all перезаписывает время у ордеров с уже установленным временем", () => {
-    const card1 = makeCard("order-1");
-    const card2 = makeCard("order-2");
-    const datetime: ICreateDate = {
-      project_id: "p1",
-      orders: [
-        { order_id: "order-1", date: "01.05.2026" },
-        {
-          order_id: "order-2",
-          date: "01.05.2026",
-          time_from: "08:00",
-          time_to: "10:00",
-        },
-      ],
-    };
-
-    const result = buildDatetimeAfterTimeChange(
-      datetime,
-      card1,
-      [card1, card2],
-      ["19:00", "21:00"],
-      { scope: "all" },
-    );
-
-    const order2 = result.orders.find((o) => o.order_id === "order-2");
-    expect(order2?.time_from).toBe("19:00");
-    expect(order2?.time_to).toBe("21:00");
-  });
-
-  it("scope all обновляет каналы разных платформ", () => {
-    const card1 = makeCard("order-1", 1);
-    const card2 = makeCard("order-2", 2);
-    const datetime: ICreateDate = {
-      project_id: "p1",
-      orders: [
-        { order_id: "order-1", date: "01.05.2026" },
-        {
-          order_id: "order-2",
-          date: "01.05.2026",
-          time_from: "08:00",
-          time_to: "10:00",
-        },
-      ],
-    };
-
-    const result = buildDatetimeAfterTimeChange(
-      datetime,
-      card1,
-      [card1, card2],
-      ["14:00", "16:00"],
-      { scope: "all" },
-    );
-
-    const order2 = result.orders.find((o) => o.order_id === "order-2");
-    expect(order2?.time_from).toBe("14:00");
-    expect(order2?.time_to).toBe("16:00");
-  });
-});
-
-describe("resetAllTimes", () => {
-  it("удаляет время, даты остаются", () => {
-    const datetime: ICreateDate = {
-      project_id: "p1",
-      orders: [
-        {
-          order_id: "order-1",
-          date: "01.05.2026",
-          time_from: "10:00",
-          time_to: "12:00",
-        },
-        {
-          order_id: "order-2",
-          date_from: "01.05.2026",
-          date_to: "05.05.2026",
-          time_from: "14:00",
-          time_to: "16:00",
-        },
-      ],
-    };
-
-    const result = resetAllTimes(datetime);
-
-    expect(result.orders[0].date).toBe("01.05.2026");
-    expect(result.orders[0].time_from).toBeUndefined();
-    expect(result.orders[0].time_to).toBeUndefined();
-    expect(result.orders[1].date_from).toBe("01.05.2026");
-    expect(result.orders[1].time_from).toBeUndefined();
-  });
-});
-
-describe("resetAllDates", () => {
-  it("удаляет даты, время остаётся", () => {
-    const datetime: ICreateDate = {
-      project_id: "p1",
-      orders: [
-        {
-          order_id: "order-1",
-          date: "01.05.2026",
-          time_from: "10:00",
-          time_to: "12:00",
-        },
-        {
-          order_id: "order-2",
-          date_from: "01.05.2026",
-          date_to: "05.05.2026",
-          time_from: "14:00",
-          time_to: "16:00",
-        },
-      ],
-    };
-
-    const result = resetAllDates(datetime);
-
-    expect(result.orders[0].date).toBeUndefined();
-    expect(result.orders[0].time_from).toBe("10:00");
-    expect(result.orders[1].date_from).toBeUndefined();
-    expect(result.orders[1].date_to).toBeUndefined();
-    expect(result.orders[1].time_from).toBe("14:00");
   });
 });
 
@@ -375,82 +215,6 @@ describe("buildDatetimeAfterDateChange", () => {
     expect(order?.date_from).toBe("01.05.2026");
     expect(order?.date_to).toBe("05.05.2026");
     expect(order?.time_from).toBe("10:00"); // время не потеряно
-  });
-
-  it("single не присваивает дату другим ордерам той же платформы без даты", () => {
-    const card1 = makeCard("order-1");
-    const card2 = makeCard("order-2");
-    const datetime: ICreateDate = {
-      project_id: "p1",
-      orders: [
-        { order_id: "order-1" },
-        { order_id: "order-2" },
-      ],
-    };
-
-    const result = buildDatetimeAfterDateChange(
-      datetime,
-      card1,
-      [card1, card2],
-      [new Date(2026, 4, 2)],
-      formatDate,
-      { scope: "single" },
-    );
-
-    const order2 = result.orders.find((o) => o.order_id === "order-2");
-    expect(order2?.date).toBeUndefined();
-  });
-
-  it("platform перезаписывает дату у всех каналов той же платформы", () => {
-    const card1 = makeCard("order-1", 1);
-    const card2 = makeCard("order-2", 1);
-    const card3 = makeCard("order-3", 2);
-    const datetime: ICreateDate = {
-      project_id: "p1",
-      orders: [
-        { order_id: "order-1" },
-        { order_id: "order-2", date: "01.05.2026" },
-        { order_id: "order-3", date: "01.05.2026" },
-      ],
-    };
-
-    const result = buildDatetimeAfterDateChange(
-      datetime,
-      card1,
-      [card1, card2, card3],
-      [new Date(2026, 4, 2)],
-      formatDate,
-      { scope: "platform" },
-    );
-
-    const order2 = result.orders.find((o) => o.order_id === "order-2");
-    const order3 = result.orders.find((o) => o.order_id === "order-3");
-    expect(order2?.date).toBe("02.05.2026");
-    expect(order3?.date).toBe("01.05.2026");
-  });
-
-  it("scope all обновляет дату у каналов разных платформ", () => {
-    const card1 = makeCard("order-1", 1);
-    const card2 = makeCard("order-2", 2);
-    const datetime: ICreateDate = {
-      project_id: "p1",
-      orders: [
-        { order_id: "order-1" },
-        { order_id: "order-2", date: "01.05.2026" },
-      ],
-    };
-
-    const result = buildDatetimeAfterDateChange(
-      datetime,
-      card1,
-      [card1, card2],
-      [new Date(2026, 4, 5)],
-      formatDate,
-      { scope: "all" },
-    );
-
-    const order2 = result.orders.find((o) => o.order_id === "order-2");
-    expect(order2?.date).toBe("05.05.2026");
   });
 });
 
@@ -583,5 +347,72 @@ describe("cleanExpiredDates", () => {
 
     // Ордер 3: дата удалена, времени и не было
     expect(cleanedOrders[2].date).toBeUndefined();
+  });
+});
+
+describe("resetAllTimes", () => {
+  it("удаляет время у всех ордеров, даты не трогает", () => {
+    const datetime: ICreateDate = {
+      project_id: "p1",
+      orders: [
+        {
+          order_id: "order-1",
+          date: "01.05.2026",
+          time_from: "10:00",
+          time_to: "12:00",
+        },
+        {
+          order_id: "order-2",
+          date_from: "01.05.2026",
+          date_to: "05.05.2026",
+          time_from: "14:00",
+          time_to: "16:00",
+        },
+      ],
+    };
+
+    const result = resetAllTimes(datetime);
+
+    expect(result.orders[0].time_from).toBeUndefined();
+    expect(result.orders[0].time_to).toBeUndefined();
+    expect(result.orders[0].date).toBe("01.05.2026"); // дата на месте
+
+    expect(result.orders[1].time_from).toBeUndefined();
+    expect(result.orders[1].time_to).toBeUndefined();
+    expect(result.orders[1].date_from).toBe("01.05.2026");
+    expect(result.orders[1].date_to).toBe("05.05.2026");
+  });
+});
+
+describe("resetAllDates", () => {
+  it("удаляет даты у всех ордеров, время не трогает", () => {
+    const datetime: ICreateDate = {
+      project_id: "p1",
+      orders: [
+        {
+          order_id: "order-1",
+          date: "01.05.2026",
+          time_from: "10:00",
+          time_to: "12:00",
+        },
+        {
+          order_id: "order-2",
+          date_from: "01.05.2026",
+          date_to: "05.05.2026",
+          time_from: "14:00",
+          time_to: "16:00",
+        },
+      ],
+    };
+
+    const result = resetAllDates(datetime);
+
+    expect(result.orders[0].date).toBeUndefined();
+    expect(result.orders[0].time_from).toBe("10:00"); // время на месте
+
+    expect(result.orders[1].date_from).toBeUndefined();
+    expect(result.orders[1].date_to).toBeUndefined();
+    expect(result.orders[1].time_from).toBe("14:00");
+    expect(result.orders[1].time_to).toBe("16:00");
   });
 });

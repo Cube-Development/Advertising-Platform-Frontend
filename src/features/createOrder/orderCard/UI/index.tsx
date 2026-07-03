@@ -78,31 +78,6 @@ export const OrderCard: FC<PostPlatformProps> = ({
       card,
       cards,
       timeList,
-      { scope: "single" },
-    );
-    setValue(CreatePostFormData.datetime, newDatetime);
-  };
-
-  const handleApplyToPlatform = (timeList: string[]) => {
-    const freshDatetime = getValues().datetime;
-    const newDatetime = buildDatetimeAfterTimeChange(
-      freshDatetime,
-      card,
-      cards,
-      timeList,
-      { scope: "platform" },
-    );
-    setValue(CreatePostFormData.datetime, newDatetime);
-  };
-
-  const handleApplyToAll = (timeList: string[]) => {
-    const freshDatetime = getValues().datetime;
-    const newDatetime = buildDatetimeAfterTimeChange(
-      freshDatetime,
-      card,
-      cards,
-      timeList,
-      { scope: "all" },
     );
     setValue(CreatePostFormData.datetime, newDatetime);
   };
@@ -115,33 +90,6 @@ export const OrderCard: FC<PostPlatformProps> = ({
       cards,
       dateList,
       formatDateToRuString,
-      { scope: "single" },
-    );
-    setValue(CreatePostFormData.datetime, newDatetime);
-  };
-
-  const handleApplyDateToPlatform = (dateList: Date[]) => {
-    const freshDatetime = getValues().datetime;
-    const newDatetime = buildDatetimeAfterDateChange(
-      freshDatetime,
-      card,
-      cards,
-      dateList,
-      formatDateToRuString,
-      { scope: "platform" },
-    );
-    setValue(CreatePostFormData.datetime, newDatetime);
-  };
-
-  const handleApplyDateToAll = (dateList: Date[]) => {
-    const freshDatetime = getValues().datetime;
-    const newDatetime = buildDatetimeAfterDateChange(
-      freshDatetime,
-      card,
-      cards,
-      dateList,
-      formatDateToRuString,
-      { scope: "all" },
     );
     setValue(CreatePostFormData.datetime, newDatetime);
   };
@@ -155,10 +103,6 @@ export const OrderCard: FC<PostPlatformProps> = ({
   const selectedDateTo = currentOrderData?.date_to;
   const selectedTimeFrom = currentOrderData?.time_from;
   const selectedTimeTo = currentOrderData?.time_to;
-
-  const samePlatformCount = cards.filter(
-    (c) => c.platform === card.platform,
-  ).length;
 
   return (
     <div className={styles.wrapper}>
@@ -187,10 +131,6 @@ export const OrderCard: FC<PostPlatformProps> = ({
         <div className={styles.type}>
           <CustomCalendar
             onChange={handleChangeDate}
-            onApplyToPlatform={handleApplyDateToPlatform}
-            onApplyToAll={handleApplyDateToAll}
-            showApplyToPlatform={samePlatformCount > 1}
-            showApplyToAll={cards.length > samePlatformCount}
             startDate={
               selectedDate
                 ? selectedDate
@@ -204,10 +144,6 @@ export const OrderCard: FC<PostPlatformProps> = ({
         <div className={styles.type}>
           <TimeList
             onChange={handleChangeTime}
-            onApplyToPlatform={handleApplyToPlatform}
-            onApplyToAll={handleApplyToAll}
-            showApplyToPlatform={samePlatformCount > 1}
-            showApplyToAll={cards.length > samePlatformCount}
             startTime={
               !!selectedTimeFrom && !!selectedTimeTo
                 ? [selectedTimeFrom, selectedTimeTo]
