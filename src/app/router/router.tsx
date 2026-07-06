@@ -4,6 +4,7 @@ import { ProtectedRoute } from "./protected-route";
 import { ALL_APP_ROUTES_LIST } from "./config";
 import { RootAdminLayout, RootLayout } from "@widgets/layouts";
 import { Maintenance } from "@widgets/maintenance";
+import { ChatActions } from "../chat-actions";
 
 const IS_MAINTENANCE = import.meta.env.VITE_IS_MAINTENANCE === "true";
 
@@ -27,7 +28,12 @@ export const router = createBrowserRouter(
     : [
         {
           path: ENUM_PATHS.MAIN,
-          element: <RootLayout />,
+          element: (
+            <>
+              <RootLayout />
+              <ChatActions />
+            </>
+          ),
           children: ROOT_ROUTES_LIST,
         },
         {

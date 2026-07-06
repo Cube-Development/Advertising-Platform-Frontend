@@ -1,4 +1,5 @@
 export * from "./MyBtn";
+export * from "./chat-plugin";
 export * from "./MyInput";
 export * from "./MyModal";
 export * from "./MyPagination";

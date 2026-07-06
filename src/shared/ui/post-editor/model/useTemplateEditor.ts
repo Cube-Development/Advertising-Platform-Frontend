@@ -274,12 +274,7 @@ export const useTemplateEditor = <T extends IEditorFile>({
 
     lastValidHtmlRef.current = editor.getHTML();
     setTextLength(getPlainTextLength(editor));
-  }, [
-    currentTemplateContent,
-    editor,
-    maxTextLength,
-    syncFilesFromEditor,
-  ]);
+  }, [currentTemplateContent, editor, maxTextLength, syncFilesFromEditor]);
 
   // Disable editor when modal is open OR when external `disabled` flag is true
   useEffect(() => {
