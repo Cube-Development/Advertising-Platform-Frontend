@@ -1,3 +1,4 @@
+export * from "./resetConfirm";
 export * from "./addFiles";
 export * from "./addMediaFiles";
 export * from "./approveCampaign";

@@ -12,4 +12,5 @@ export interface IRouting {
   nonAuthSidebar?: boolean;
   adminSidebar?: boolean;
   layout: ENUM_LAYOUT_TYPES;
+  allowedEmails?: readonly string[];
 }

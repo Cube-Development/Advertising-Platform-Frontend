@@ -92,6 +92,28 @@ export const authorizationAPI = baseApi.injectEndpoints({
         body,
       }),
     }),
+    googleAuthorize: build.query<
+      { authorization_url: string },
+      { role: ENUM_ROLES }
+    >({
+      query: ({ role }) => ({
+        url: `/auth/google/authorize`,
+        method: "GET",
+        params: { role },
+        credentials: "include",
+      }),
+    }),
+    googleCallback: build.query<
+      string,
+      { code?: string; state?: string; error?: string }
+    >({
+      query: (params) => ({
+        url: `/auth/google/callback`,
+        method: "GET",
+        params,
+        credentials: "include",
+      }),
+    }),
   }),
 });
 export const {
@@ -101,6 +123,8 @@ export const {
   useRegisterMutation,
   useGetCodeForForgotPasswordMutation,
   useResetPasswordMutation,
+  useLazyGoogleAuthorizeQuery,
+  useLazyGoogleCallbackQuery,
 } = authorizationAPI;
 
 export const userAPI = authApi.injectEndpoints({

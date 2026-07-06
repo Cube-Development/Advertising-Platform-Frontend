@@ -2,10 +2,12 @@ import { ENUM_PATHS } from "@shared/routing";
 import { IMenuItem } from "@shared/types";
 import {
   ArrowRightLeft,
+  BarChart2,
   Building2,
   Calculator,
   CalendarClock,
   CircleDollarSign,
+  ClipboardList,
   FileText,
   LayoutDashboard,
   MessageSquareText,
@@ -63,6 +65,20 @@ export const ADMIN_MENU: IMenuItem[] = [
       title: "Перенос ордеров",
       path: ENUM_PATHS.ADMIN_ORDER_TRANSFER,
       icon: CalendarClock,
+    },
+  },
+  {
+    item: {
+      title: "admin_panel.burger_menu.track_orders",
+      path: ENUM_PATHS.ADMIN_TRACK_ORDERS,
+      icon: ClipboardList,
+    },
+  },
+  {
+    item: {
+      title: "admin_panel.burger_menu.common_observe",
+      path: ENUM_PATHS.ADMIN_COMMON_OBSERVE,
+      icon: BarChart2,
     },
   },
   {

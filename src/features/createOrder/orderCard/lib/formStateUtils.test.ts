@@ -5,6 +5,8 @@ import {
   buildDatetimeAfterTimeChange,
   buildDatetimeAfterDateChange,
   cleanExpiredDates,
+  resetAllTimes,
+  resetAllDates,
 } from "./formStateUtils";
 
 // ─── Хелперы ───────────────────────────────────────────
@@ -345,5 +347,72 @@ describe("cleanExpiredDates", () => {
 
     // Ордер 3: дата удалена, времени и не было
     expect(cleanedOrders[2].date).toBeUndefined();
+  });
+});
+
+describe("resetAllTimes", () => {
+  it("удаляет время у всех ордеров, даты не трогает", () => {
+    const datetime: ICreateDate = {
+      project_id: "p1",
+      orders: [
+        {
+          order_id: "order-1",
+          date: "01.05.2026",
+          time_from: "10:00",
+          time_to: "12:00",
+        },
+        {
+          order_id: "order-2",
+          date_from: "01.05.2026",
+          date_to: "05.05.2026",
+          time_from: "14:00",
+          time_to: "16:00",
+        },
+      ],
+    };
+
+    const result = resetAllTimes(datetime);
+
+    expect(result.orders[0].time_from).toBeUndefined();
+    expect(result.orders[0].time_to).toBeUndefined();
+    expect(result.orders[0].date).toBe("01.05.2026"); // дата на месте
+
+    expect(result.orders[1].time_from).toBeUndefined();
+    expect(result.orders[1].time_to).toBeUndefined();
+    expect(result.orders[1].date_from).toBe("01.05.2026");
+    expect(result.orders[1].date_to).toBe("05.05.2026");
+  });
+});
+
+describe("resetAllDates", () => {
+  it("удаляет даты у всех ордеров, время не трогает", () => {
+    const datetime: ICreateDate = {
+      project_id: "p1",
+      orders: [
+        {
+          order_id: "order-1",
+          date: "01.05.2026",
+          time_from: "10:00",
+          time_to: "12:00",
+        },
+        {
+          order_id: "order-2",
+          date_from: "01.05.2026",
+          date_to: "05.05.2026",
+          time_from: "14:00",
+          time_to: "16:00",
+        },
+      ],
+    };
+
+    const result = resetAllDates(datetime);
+
+    expect(result.orders[0].date).toBeUndefined();
+    expect(result.orders[0].time_from).toBe("10:00"); // время на месте
+
+    expect(result.orders[1].date_from).toBeUndefined();
+    expect(result.orders[1].date_to).toBeUndefined();
+    expect(result.orders[1].time_from).toBe("14:00");
+    expect(result.orders[1].time_to).toBe("16:00");
   });
 });

@@ -1,4 +1,5 @@
 import { ENUM_ROLES, USER_ROLES } from "@entities/user";
+import { TRACK_ORDERS_ALLOWED_EMAILS } from "@entities/self-connect-order";
 import { AddChannelPage } from "@pages/AddChannel";
 import { AdminAccountingPage } from "@pages/AdminAccounting";
 import { AdminChannelsPage } from "@pages/AdminChannels";
@@ -9,6 +10,7 @@ import { AdminOrderTransferPage } from "@pages/AdminOrderTransfer";
 import { AdminMailingPage } from "@pages/AdminMailing";
 import { AdminChannelOwnerSwapPage } from "@pages/AdminChannelOwnerSwap";
 import { AdminDeleteOrganizationPage } from "@pages/AdminDeleteOrganization";
+import { AdminCommonObservePage } from "@pages/AdminCommonObserve";
 import { AdminHomePage } from "@pages/AdminHome";
 import { AdminOrganizationPage } from "@pages/AdminOrganization";
 import { AdminReviewsPage } from "@pages/AdminReviews";
@@ -23,11 +25,13 @@ import { CreateOrderPage } from "@pages/CreateOrder";
 import { DocumentsPage } from "@pages/Documents";
 import { FAQPage } from "@pages/FAQ";
 import { LoginPage } from "@pages/Login";
+import { OAuthCallbackPage } from "@pages/OAuthCallback";
 import { MainPage } from "@pages/Main";
 import { MainBloggerPage } from "@pages/MainBlogger";
 import { MyChannelsPage } from "@pages/MyChannels";
 import { NotFoundPage } from "@pages/NotFound";
 import { OffersPage } from "@pages/Offers";
+import { TrackOrdersPage } from "@pages/TrackOrders";
 import { OrdersPage } from "@pages/Orders";
 import { PostTemplatesPage } from "@pages/PostTemplates";
 import { ProfilePage } from "@pages/Profile";
@@ -57,6 +61,12 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
   {
     path: ENUM_PATHS.REGISTRATION,
     component: RegistrationPage,
+    auth: ENUM_AUTH_TYPES.ONLY_PUBLIC,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
+  },
+  {
+    path: ENUM_PATHS.OAUTH_CALLBACK,
+    component: OAuthCallbackPage,
     auth: ENUM_AUTH_TYPES.ONLY_PUBLIC,
     layout: ENUM_LAYOUT_TYPES.ROOT,
   },
@@ -171,6 +181,14 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
     auth: ENUM_AUTH_TYPES.PRIVATE,
     authSidebar: true,
     layout: ENUM_LAYOUT_TYPES.ROOT,
+  },
+  {
+    path: ENUM_PATHS.TRACK_ORDERS,
+    component: TrackOrdersPage,
+    roles: [ENUM_ROLES.BLOGGER],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
+    layout: ENUM_LAYOUT_TYPES.ROOT,
+    allowedEmails: TRACK_ORDERS_ALLOWED_EMAILS,
   },
 
   // private advertiser & manager & agency
@@ -346,6 +364,22 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
   {
     path: ENUM_PATHS.ADMIN_ORDER_TRANSFER,
     component: AdminOrderTransferPage,
+    roles: [ENUM_ROLES.MODERATOR],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
+    layout: ENUM_LAYOUT_TYPES.ADMIN,
+    adminSidebar: true,
+  },
+  {
+    path: ENUM_PATHS.ADMIN_TRACK_ORDERS,
+    component: TrackOrdersPage,
+    roles: [ENUM_ROLES.MODERATOR],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
+    layout: ENUM_LAYOUT_TYPES.ADMIN,
+    adminSidebar: true,
+  },
+  {
+    path: ENUM_PATHS.ADMIN_COMMON_OBSERVE,
+    component: AdminCommonObservePage,
     roles: [ENUM_ROLES.MODERATOR],
     auth: ENUM_AUTH_TYPES.PRIVATE,
     layout: ENUM_LAYOUT_TYPES.ADMIN,

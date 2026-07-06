@@ -4,7 +4,7 @@ import {
   useGetOrganizationQuery,
 } from "@entities/organization";
 import {
-  ENUM_ORGANIZATION_TYPE,
+  // ENUM_ORGANIZATION_TYPE,
   IUserDataNew,
   useGetUserQueryQuery,
 } from "@entities/user";
@@ -35,9 +35,9 @@ export const UserDataForm: FC<IUserDataFormProps> = ({}) => {
       <div className={styles.block}>
         <div className={styles.top}>
           <p>{t("profile.user_block.user_data.title")}</p>
-          <button className={styles.button}>
+          {/* <button className={styles.button}>
             {t("profile.user_block.user_data.edit")}
-          </button>
+          </button> */}
         </div>
         <div className={styles.data}>
           <div className={styles.row}>
@@ -74,9 +74,9 @@ export const UserDataForm: FC<IUserDataFormProps> = ({}) => {
         <div className={styles.block}>
           <div className={styles.top}>
             <p>{t("profile.user_block.organization_data.title")}</p>
-            <button className={styles.button}>
+            {/* <button className={styles.button}>
               {t("profile.user_block.organization_data.edit")}
-            </button>
+            </button> */}
           </div>
           <div className={styles.data}>
             <div className={styles.row}>

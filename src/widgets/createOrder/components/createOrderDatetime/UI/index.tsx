@@ -7,11 +7,16 @@ import {
   ContinueOrder,
   CustomCalendar,
   OrderCard,
+  ResetConfirmButton,
   TimeSlider,
 } from "@features/createOrder";
 import { useToast } from "@shared/ui";
 import { formatRuStringToDate } from "@shared/utils";
-import { cleanExpiredDates } from "@features/createOrder/orderCard/lib/formStateUtils";
+import {
+  cleanExpiredDates,
+  resetAllDates,
+  resetAllTimes,
+} from "@features/createOrder/orderCard/lib/formStateUtils";
 import { FC, useEffect } from "react";
 import { UseFormGetValues, UseFormSetValue } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -62,7 +67,19 @@ export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
       });
     }
   }, []);
-  console.log("formState.datetime", formState.datetime);
+
+  const handleResetDates = () => {
+    const datetime = getValues().datetime;
+    if (!datetime) return;
+    setValue(CreatePostFormData.datetime, resetAllDates(datetime));
+  };
+
+  const handleResetTimes = () => {
+    const datetime = getValues().datetime;
+    if (!datetime) return;
+    setValue(CreatePostFormData.datetime, resetAllTimes(datetime));
+  };
+
   const handleCheckDatetimes = () => {
     const form: ICreatePostForm = getValues();
     if (cards?.length === form.datetime?.orders?.length) {
@@ -105,6 +122,18 @@ export const CreateOrderDatetime: FC<CreateOrderDatetimeProps> = ({
           <div className={styles.title}>
             <span className="gradient_color">3</span>
             <p className="gradient_color">{t("create_order.datetime.title")}</p>
+          </div>
+          <div className={styles.actions}>
+            <ResetConfirmButton
+              label={t("create_order.datetime.reset_date")}
+              confirmMessage={t("create_order.datetime.reset_date_confirm")}
+              onConfirm={handleResetDates}
+            />
+            <ResetConfirmButton
+              label={t("create_order.datetime.reset_time")}
+              confirmMessage={t("create_order.datetime.reset_time_confirm")}
+              onConfirm={handleResetTimes}
+            />
           </div>
         </div>
         <div className={styles.content}>

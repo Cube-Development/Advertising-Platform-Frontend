@@ -338,6 +338,8 @@
     "sign_up": "Ro'yxatdan o'ting",
     "sign_in": "Kirish",
     "login_with": "Yoki quyidagilar orqali kiring:",
+    "login_with_google": "Google orqali kirish",
+    "oauth_callback_loading": "Google orqali kirish yakunlanmoqda...",
     "sign_up_registration": "Ro'yxatdan o'tish",
     "email_required": "Email majburiy maydon",
     "email_invalid": "Noto'g'ri email",
@@ -1381,6 +1383,31 @@
       "not_activated": {
         "text": "Loyiha hali aktivlashtirilmagan"
       }
+    }
+  },
+  "track_orders": {
+    "title": "Buyurtmalarni kuzatish",
+    "empty": "Hozircha buyurtmalar yo'q",
+    "open_post": "Postni ochish",
+    "status_filter": {
+      "wait": "Qabul kutilmoqda",
+      "in_progress": "Jarayonda",
+      "post_review": "Tekshiruvda",
+      "complete": "Bajarilgan"
+    },
+    "card": {
+      "order_ident": "Buyurtma raqami",
+      "order_id": "Buyurtma ID",
+      "project_id": "Loyiha ID",
+      "date": "Sana",
+      "time": "Vaqt",
+      "with_vat": "QQS bilan narx",
+      "without_vat": "QQSsiz narx",
+      "blogger_commission": "Bloger komissiyasi",
+      "catalog_commission": "Katalog komissiyasi",
+      "executor": "Ijrochi",
+      "customer": "Buyurtmachi",
+      "owner": "Egasi"
     }
   },
   "add_platform": {
@@ -2631,7 +2658,13 @@
       }
     },
     "datetime": {
-      "title": "Sana va vaqtni belgilang"
+      "title": "Sana va vaqtni belgilang",
+      "reset_time": "Vaqtni tozalash",
+      "reset_date": "Sanani tozalash",
+      "reset_time_confirm": "Barcha kanallar uchun vaqtni tozalash?",
+      "reset_date_confirm": "Barcha kanallar uchun sanani tozalash?",
+      "cancel": "Bekor qilish",
+      "confirm_reset": "Tozalash"
     },
     "prices": {
       "title": "Buyurtma narxi belgilang",
@@ -3439,6 +3472,8 @@
     },
     "authorization": {
       "auth_error": "Avtorizatsiya xatoligi",
+      "google_error": "Google orqali kirishda xatolik",
+      "oauth_user_already_exists": "Bu akkaunt email va parol orqali ro'yxatdan o'tgan. Oddiy kirish usulidan foydalaning.",
       "auth_success": "Muvaffaqiyatli avtorizatsiya",
       "account_exist": "Bunday akkount allaqachon mavjud",
       "registration_error": "Ro'yxatdan o'tishda xatolik"
@@ -3469,7 +3504,9 @@
       "reviews": "Sharhlar",
       "invoice": "Hisob-fakturalar va shartnomalar",
       "accounting": "Buxgalteriya",
-      "organization": "Organizatsiya"
+      "organization": "Organizatsiya",
+      "track_orders": "Buyurtmalarni kuzatish",
+      "common_observe": "Umumiy statistika"
     },
     "pages": {
       "home": "Bosh sahifa",
@@ -3479,7 +3516,37 @@
       "accounting": "Buxgalteriya",
       "moderation": "Moderatsiya",
       "complaints": "Shikoyatlar",
-      "reviews": "Sharhlar"
+      "reviews": "Sharhlar",
+      "common_observe": "Umumiy statistika"
+    },
+    "common_observe": {
+      "period": {
+        "all_time": "Barcha vaqt",
+        "three_months": "3 oy",
+        "one_month": "1 oy",
+        "one_week": "1 hafta"
+      },
+      "date_from": "Sanadan",
+      "date_to": "Sanagacha",
+      "show": "Ko'rsatish",
+      "totals_title": "Davr bo'yicha jami",
+      "chart_title": "Dinamika",
+      "empty": "Tanlangan davr uchun ma'lumot yo'q",
+      "total_row": "Jami",
+      "export_excel": "Excelga yuklab olish",
+      "export_excel_error": "Faylni yuklab bo'lmadi",
+      "export_sheet_name": "Ma'lumotlar",
+      "export_report_title": "Umumiy statistika",
+      "export_chart_metrics": "Ko'rsatkichlar dinamikasi",
+      "export_chart_turnover": "Aylanma dinamikasi",
+      "columns": {
+        "date": "Sana",
+        "projects": "Loyihalar",
+        "common_orders": "Buyurtmalar",
+        "publisher_orders": "Nashriyotchi buyurtmalari",
+        "self_connect_orders": "Self-connect",
+        "turnover": "Aylanma"
+      }
     },
     "home": {
       "title": "Admin-panel",

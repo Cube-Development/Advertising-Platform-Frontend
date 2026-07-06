@@ -65,6 +65,35 @@ export const buildDatetimeAfterTimeChange = (
 };
 
 /**
+ * Сбросить время у всех ордеров, даты не трогать.
+ */
+export const resetAllTimes = (datetime: ICreateDate): ICreateDate => {
+  const orders = (datetime.orders || []).map((order) => {
+    const updated = { ...order };
+    delete updated.time_from;
+    delete updated.time_to;
+    return updated;
+  });
+
+  return { ...datetime, orders };
+};
+
+/**
+ * Сбросить даты у всех ордеров, время не трогать.
+ */
+export const resetAllDates = (datetime: ICreateDate): ICreateDate => {
+  const orders = (datetime.orders || []).map((order) => {
+    const updated = { ...order };
+    delete updated.date;
+    delete updated.date_from;
+    delete updated.date_to;
+    return updated;
+  });
+
+  return { ...datetime, orders };
+};
+
+/**
  * Вычислить новый datetime-стейт после смены даты.
  * formatDate — функция форматирования Date → string (DD.MM.YYYY).
  */

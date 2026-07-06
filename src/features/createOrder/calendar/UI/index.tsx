@@ -71,6 +71,9 @@ export const CustomCalendar: FC<DateListProps> = ({
           dateString: [formattedDate],
         });
       }
+    } else {
+      setDateObject({ date: null, dateString: null });
+      setIsSelectRange(false);
     }
   }, [startDate]);
 
