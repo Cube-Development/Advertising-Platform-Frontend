@@ -1,5 +1,5 @@
 export const TRACK_ORDERS_ALLOWED_EMAILS = [
-  "eleonorakulimova@gmail.com"
+  "eleonorakulimova@gmail.com",
 ] as const;
 
 export const isEmailInAllowlist = (

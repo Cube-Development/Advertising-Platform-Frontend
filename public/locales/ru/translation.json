@@ -1392,6 +1392,10 @@
     "title": "Отслеживание заказов",
     "empty": "На данный момент заказов нет",
     "open_post": "Открыть пост",
+    "date_from": "Дата с",
+    "date_to": "Дата по",
+    "download_payout_report": "Скачать отчёт",
+    "download_error": "Не удалось скачать файл",
     "status_filter": {
       "wait": "Ожидают принятия",
       "in_progress": "В работе",

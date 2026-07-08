@@ -18,6 +18,7 @@ import {
   IAdminComplaintInfoData,
   IAdminComplaints,
   IAdminReviews,
+  IAdminOrdersPayoutReq,
   ICommonObserveReq,
   ICommonObserveResponse,
 } from "../types";
@@ -366,6 +367,15 @@ export const adminAPI = authApi.injectEndpoints({
         },
       }),
     }),
+    getAdminOrdersPayout: build.query<Blob, IAdminOrdersPayoutReq>({
+      query: ({ date_from, date_to }) => ({
+        url: `/adv-admin/orders/admin-payout`,
+        method: "GET",
+        params: { date_from, date_to },
+        responseHandler: (response) => response.blob(),
+        cache: "no-cache",
+      }),
+    }),
   }),
 });
 
@@ -388,4 +398,5 @@ export const {
   useAdminSwapChannelOwnerMutation,
   useAdminDeleteOrganizationMutation,
   useGetCommonObserveQuery,
+  useLazyGetAdminOrdersPayoutQuery,
 } = adminAPI;

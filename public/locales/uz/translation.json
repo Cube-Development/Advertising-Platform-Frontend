@@ -1389,6 +1389,10 @@
     "title": "Buyurtmalarni kuzatish",
     "empty": "Hozircha buyurtmalar yo'q",
     "open_post": "Postni ochish",
+    "date_from": "Sanadan",
+    "date_to": "Sanagacha",
+    "download_payout_report": "Hisobotni yuklab olish",
+    "download_error": "Faylni yuklab olish muvaffaqiyatsiz tugadi",
     "status_filter": {
       "wait": "Qabul kutilmoqda",
       "in_progress": "Jarayonda",

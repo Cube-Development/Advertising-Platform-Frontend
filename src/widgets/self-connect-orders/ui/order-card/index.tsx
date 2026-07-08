@@ -1,7 +1,4 @@
-import {
-  ISelfConnectOrder,
-  IDatePeriod,
-} from "@entities/self-connect-order";
+import { ISelfConnectOrder, IDatePeriod } from "@entities/self-connect-order";
 import { ENUM_OFFER_STATUS_BACKEND } from "@entities/offer";
 import { toast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import {
@@ -134,7 +131,10 @@ export const SelfConnectOrderCard: FC<SelfConnectOrderCardProps> = ({
           </div>
         </div>
         <div>
-          <Badge variant={getStatusVariant(order.api_status)} className="shrink-0">
+          <Badge
+            variant={getStatusVariant(order.api_status)}
+            className="shrink-0"
+          >
             {order.status}
           </Badge>
         </div>
@@ -210,8 +210,14 @@ export const SelfConnectOrderCard: FC<SelfConnectOrderCardProps> = ({
         <Separator />
 
         <div className="grid gap-4 sm:grid-cols-3">
-          <UserBlock label={t("track_orders.card.executor")} user={order.executor} />
-          <UserBlock label={t("track_orders.card.customer")} user={order.customer} />
+          <UserBlock
+            label={t("track_orders.card.executor")}
+            user={order.executor}
+          />
+          <UserBlock
+            label={t("track_orders.card.customer")}
+            user={order.customer}
+          />
           <UserBlock label={t("track_orders.card.owner")} user={order.owner} />
         </div>
 

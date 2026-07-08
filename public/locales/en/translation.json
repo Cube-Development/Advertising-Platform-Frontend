@@ -1389,6 +1389,10 @@
     "title": "Order Tracking",
     "empty": "No orders at the moment",
     "open_post": "Open post",
+    "date_from": "Date from",
+    "date_to": "Date to",
+    "download_payout_report": "Download report",
+    "download_error": "Failed to download file",
     "status_filter": {
       "wait": "Awaiting acceptance",
       "in_progress": "In progress",

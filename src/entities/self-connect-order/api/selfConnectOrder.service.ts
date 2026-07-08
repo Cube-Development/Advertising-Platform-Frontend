@@ -17,8 +17,7 @@ const getIsLast = (
   batchLength: number,
   pageSize: number,
   totalElements: number,
-) =>
-  batchLength < pageSize || ordersLength >= totalElements;
+) => batchLength < pageSize || ordersLength >= totalElements;
 
 export const selfConnectOrderAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
@@ -38,16 +37,11 @@ export const selfConnectOrderAPI = authApi.injectEndpoints({
             ],
         },
       }),
-      transformResponse: (
-        response: ISelfConnectOrdersResponse,
-        _meta,
-        arg,
-      ) => {
+      transformResponse: (response: ISelfConnectOrdersResponse, _meta, arg) => {
         const pageSize =
           arg?.elements_on_page ?? INTERSECTION_ELEMENTS.SELF_CONNECT_ORDERS;
         const batchLength = response?.orders?.length ?? 0;
-        const accumulated =
-          batchLength + (response?.page - 1) * pageSize;
+        const accumulated = batchLength + (response?.page - 1) * pageSize;
 
         return {
           ...response,

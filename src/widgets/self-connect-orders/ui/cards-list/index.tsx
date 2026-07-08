@@ -49,9 +49,9 @@ export const SelfConnectOrdersCards: FC<SelfConnectOrdersCardsProps> = ({
             <SelfConnectOrderCard key={order.order_id} order={order} />
           ))}
           {isLoading &&
-            Array.from({ length: INTERSECTION_ELEMENTS.SELF_CONNECT_ORDERS }).map(
-              (_, index) => <SelfConnectOrderCardSkeleton key={index} />,
-            )}
+            Array.from({
+              length: INTERSECTION_ELEMENTS.SELF_CONNECT_ORDERS,
+            }).map((_, index) => <SelfConnectOrderCardSkeleton key={index} />)}
           {!isLast && !isLoading && orders.length > 0 && (
             <DinamicPagination onChange={handleOnChangePage} />
           )}
