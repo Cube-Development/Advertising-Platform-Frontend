@@ -6,13 +6,16 @@ import {
   getSelfConnectOrdersReq,
   useGetSelfConnectOrdersQuery,
 } from "@entities/self-connect-order";
+import { DownloadAdminPayoutReport } from "@features/admin/downloadAdminPayoutReport";
 import { BarStatusFilter } from "@features/other";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { useClearCookiesOnPage } from "@shared/hooks";
+import { ENUM_PATHS } from "@shared/routing";
 import { SuspenseLoader } from "@shared/ui";
 import React, { FC, Suspense, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { useLocation } from "react-router";
 import styles from "./styles.module.scss";
 
 const SelfConnectOrdersCards = React.lazy(() =>
@@ -27,6 +30,8 @@ const SelfConnectOrdersCards = React.lazy(() =>
 export const TrackOrdersPage: FC = () => {
   useClearCookiesOnPage();
   const { t } = useTranslation();
+  const { pathname } = useLocation();
+  const isAdminTrackOrders = pathname === ENUM_PATHS.ADMIN_TRACK_ORDERS;
 
   const { setValue, watch } = useForm<getSelfConnectOrdersReq>({
     defaultValues: {
@@ -64,6 +69,7 @@ export const TrackOrdersPage: FC = () => {
     <div className="container">
       <div className={styles.wrapper}>
         <h1 className={styles.title}>{t("track_orders.title")}</h1>
+        {isAdminTrackOrders && <DownloadAdminPayoutReport />}
         <BarStatusFilter
           changeStatus={changeStatus}
           statusFilter={formState.status}
