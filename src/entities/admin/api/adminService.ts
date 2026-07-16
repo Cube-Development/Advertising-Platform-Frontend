@@ -75,6 +75,12 @@ export interface adminSwapChannelOwnerReq {
   new_owner_email: string;
 }
 
+export interface adminUpdateOrderReq {
+  order_ident: string;
+  amount?: number;
+  executor?: string;
+}
+
 export const adminAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
     getAdminOrderComplaints: build.query<
@@ -340,6 +346,16 @@ export const adminAPI = authApi.injectEndpoints({
         params,
       }),
     }),
+    adminUpdateOrder: build.mutation<
+      { success: boolean },
+      adminUpdateOrderReq
+    >({
+      query: (body) => ({
+        url: `/adv-admin/order/update`,
+        method: "POST",
+        body,
+      }),
+    }),
     adminDeleteOrganization: build.mutation<
       { success: boolean },
       { email: string }
@@ -396,6 +412,7 @@ export const {
   useAdminUpdateOrderDateMutation,
   useAdminSendMailingMutation,
   useAdminSwapChannelOwnerMutation,
+  useAdminUpdateOrderMutation,
   useAdminDeleteOrganizationMutation,
   useGetCommonObserveQuery,
   useLazyGetAdminOrdersPayoutQuery,
