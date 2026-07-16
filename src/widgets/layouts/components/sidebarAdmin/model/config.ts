@@ -12,6 +12,7 @@ import {
   LayoutDashboard,
   MessageSquareText,
   OctagonAlert,
+  Pencil,
   Tv,
   Users,
   Mail,
@@ -93,6 +94,13 @@ export const ADMIN_MENU: IMenuItem[] = [
       title: "Передача канала",
       path: ENUM_PATHS.ADMIN_CHANNEL_OWNER_SWAP,
       icon: ArrowRightLeft,
+    },
+  },
+  {
+    item: {
+      title: "Изменение ордера",
+      path: ENUM_PATHS.ADMIN_ORDER_UPDATE,
+      icon: Pencil,
     },
   },
   {

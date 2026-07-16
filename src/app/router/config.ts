@@ -9,6 +9,7 @@ import { AdminDocumentsPage } from "@pages/AdminDocuments/UI";
 import { AdminOrderTransferPage } from "@pages/AdminOrderTransfer";
 import { AdminMailingPage } from "@pages/AdminMailing";
 import { AdminChannelOwnerSwapPage } from "@pages/AdminChannelOwnerSwap";
+import { AdminOrderUpdatePage } from "@pages/AdminOrderUpdate";
 import { AdminDeleteOrganizationPage } from "@pages/AdminDeleteOrganization";
 import { AdminCommonObservePage } from "@pages/AdminCommonObserve";
 import { AdminHomePage } from "@pages/AdminHome";
@@ -396,6 +397,14 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
   {
     path: ENUM_PATHS.ADMIN_CHANNEL_OWNER_SWAP,
     component: AdminChannelOwnerSwapPage,
+    roles: [ENUM_ROLES.MODERATOR],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
+    layout: ENUM_LAYOUT_TYPES.ADMIN,
+    adminSidebar: true,
+  },
+  {
+    path: ENUM_PATHS.ADMIN_ORDER_UPDATE,
+    component: AdminOrderUpdatePage,
     roles: [ENUM_ROLES.MODERATOR],
     auth: ENUM_AUTH_TYPES.PRIVATE,
     layout: ENUM_LAYOUT_TYPES.ADMIN,
