@@ -13,6 +13,7 @@ import {
   MessageSquareText,
   OctagonAlert,
   Pencil,
+  Send,
   Tv,
   Users,
   Mail,
@@ -101,6 +102,13 @@ export const ADMIN_MENU: IMenuItem[] = [
       title: "Изменение ордера",
       path: ENUM_PATHS.ADMIN_ORDER_UPDATE,
       icon: Pencil,
+    },
+  },
+  {
+    item: {
+      title: "Публикация поста",
+      path: ENUM_PATHS.ADMIN_ORDER_PUBLISH,
+      icon: Send,
     },
   },
   {
