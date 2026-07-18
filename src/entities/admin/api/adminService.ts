@@ -81,6 +81,11 @@ export interface adminUpdateOrderReq {
   executor?: string;
 }
 
+export interface adminPublishOrderReq {
+  order_id: string;
+  url: string;
+}
+
 export const adminAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
     getAdminOrderComplaints: build.query<
@@ -346,12 +351,21 @@ export const adminAPI = authApi.injectEndpoints({
         params,
       }),
     }),
-    adminUpdateOrder: build.mutation<
+    adminUpdateOrder: build.mutation<{ success: boolean }, adminUpdateOrderReq>(
+      {
+        query: (body) => ({
+          url: `/adv-admin/order/update`,
+          method: "POST",
+          body,
+        }),
+      },
+    ),
+    adminPublishOrder: build.mutation<
       { success: boolean },
-      adminUpdateOrderReq
+      adminPublishOrderReq
     >({
       query: (body) => ({
-        url: `/adv-admin/order/update`,
+        url: `/adv-admin/order/publish`,
         method: "POST",
         body,
       }),
@@ -413,6 +427,7 @@ export const {
   useAdminSendMailingMutation,
   useAdminSwapChannelOwnerMutation,
   useAdminUpdateOrderMutation,
+  useAdminPublishOrderMutation,
   useAdminDeleteOrganizationMutation,
   useGetCommonObserveQuery,
   useLazyGetAdminOrdersPayoutQuery,

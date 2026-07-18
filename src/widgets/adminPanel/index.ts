@@ -13,5 +13,6 @@ export * from "./orderTransfer";
 export * from "./mailing";
 export * from "./channelOwnerSwap";
 export * from "./orderUpdate";
+export * from "./orderPublish";
 export * from "./deleteOrganization";
 export * from "./commonObserve";
