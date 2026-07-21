@@ -26,4 +26,10 @@ export const ORDER_UPDATE_FIELDS: FieldConfig[] = [
     type: "email",
     placeholder: "executor@example.com",
   },
+  {
+    id: "channel_id",
+    label: "ID канала",
+    type: "text",
+    placeholder: "00000000-0000-0000-0000-000000000000",
+  },
 ];

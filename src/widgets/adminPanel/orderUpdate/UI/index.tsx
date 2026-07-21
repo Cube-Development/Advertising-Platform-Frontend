@@ -31,6 +31,7 @@ export const OrderUpdate = () => {
         order_ident: data.order_ident,
         ...(data.amount ? { amount: Number(data.amount) } : {}),
         ...(data.executor ? { executor: data.executor } : {}),
+        ...(data.channel_id ? { channel_id: data.channel_id } : {}),
       }).unwrap();
       toast({
         title: "Успех",
