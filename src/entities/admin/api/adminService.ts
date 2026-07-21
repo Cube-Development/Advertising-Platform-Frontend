@@ -79,6 +79,7 @@ export interface adminUpdateOrderReq {
   order_ident: string;
   amount?: number;
   executor?: string;
+  channel_id?: string;
 }
 
 export interface adminPublishOrderReq {
