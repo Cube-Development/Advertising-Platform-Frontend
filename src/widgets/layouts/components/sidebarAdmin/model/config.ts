@@ -6,6 +6,7 @@ import {
   Building2,
   Calculator,
   CalendarClock,
+  CircleCheck,
   CircleDollarSign,
   ClipboardList,
   FileText,
@@ -109,6 +110,13 @@ export const ADMIN_MENU: IMenuItem[] = [
       title: "Публикация поста",
       path: ENUM_PATHS.ADMIN_ORDER_PUBLISH,
       icon: Send,
+    },
+  },
+  {
+    item: {
+      title: "Завершение проекта",
+      path: ENUM_PATHS.ADMIN_PROJECT_COMPLETE,
+      icon: CircleCheck,
     },
   },
   {
