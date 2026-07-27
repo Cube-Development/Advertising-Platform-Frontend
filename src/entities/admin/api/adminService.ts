@@ -87,6 +87,10 @@ export interface adminPublishOrderReq {
   url: string;
 }
 
+export interface adminCompleteProjectReq {
+  project_id: string;
+}
+
 export const adminAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
     getAdminOrderComplaints: build.query<
@@ -371,6 +375,16 @@ export const adminAPI = authApi.injectEndpoints({
         body,
       }),
     }),
+    adminCompleteProject: build.mutation<
+      { success: boolean },
+      adminCompleteProjectReq
+    >({
+      query: (params) => ({
+        url: `/adv-admin/project/complete`,
+        method: "POST",
+        params,
+      }),
+    }),
     adminDeleteOrganization: build.mutation<
       { success: boolean },
       { email: string }
@@ -429,6 +443,7 @@ export const {
   useAdminSwapChannelOwnerMutation,
   useAdminUpdateOrderMutation,
   useAdminPublishOrderMutation,
+  useAdminCompleteProjectMutation,
   useAdminDeleteOrganizationMutation,
   useGetCommonObserveQuery,
   useLazyGetAdminOrdersPayoutQuery,
