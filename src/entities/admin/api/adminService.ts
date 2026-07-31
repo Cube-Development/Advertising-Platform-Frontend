@@ -91,6 +91,38 @@ export interface adminCompleteProjectReq {
   project_id: string;
 }
 
+export interface IAdminManageProjectOrder {
+  url: string;
+  order_date: string;
+  order_time: {
+    time_from: string;
+    time_to: string;
+  };
+  order_completed_count: number;
+  price: {
+    without_vat: number;
+    with_vat: number;
+    blogger_commission: number;
+    catalog_commission: number;
+  };
+  status: number;
+}
+
+export interface IAdminManageProjectsReq {
+  page: number;
+  elements_on_page: number;
+  status: number[];
+  project_id?: string;
+  url?: string;
+}
+
+export interface IAdminManageProjects {
+  page: number;
+  elements: number;
+  orders: IAdminManageProjectOrder[];
+  isLast?: boolean;
+}
+
 export const adminAPI = authApi.injectEndpoints({
   endpoints: (build) => ({
     getAdminOrderComplaints: build.query<
@@ -385,6 +417,55 @@ export const adminAPI = authApi.injectEndpoints({
         params,
       }),
     }),
+    getAdminManageProjects: build.query<
+      IAdminManageProjects,
+      IAdminManageProjectsReq
+    >({
+      query: (body) => ({
+        url: `/manage/projects`,
+        method: "POST",
+        body,
+      }),
+      transformResponse: (
+        response: IAdminManageProjects,
+        _meta,
+        arg,
+      ) => {
+        const pageSize =
+          arg?.elements_on_page ?? INTERSECTION_ELEMENTS.ADMIN_MANAGE_PROJECTS;
+        const batchLength = response?.orders?.length ?? 0;
+        const accumulated = batchLength + (response?.page - 1) * pageSize;
+
+        return {
+          ...response,
+          isLast:
+            batchLength < pageSize || accumulated >= (response?.elements ?? 0),
+        };
+      },
+      serializeQueryArgs: ({ endpointName, queryArgs }) => {
+        const { page: _page, ...filters } = queryArgs;
+        return `${endpointName}-${JSON.stringify(filters)}`;
+      },
+      merge: (currentCache, newItems, arg) => {
+        if (arg.arg.page === 1) return newItems;
+
+        const getKey = (order: IAdminManageProjectOrder) =>
+          `${order.url}|${order.order_date}|${order.order_time.time_from}|${order.order_time.time_to}|${order.status}`;
+
+        const map = new Map(
+          currentCache?.orders?.map((order) => [getKey(order), order]),
+        );
+        newItems.orders?.forEach((order) => map.set(getKey(order), order));
+
+        return {
+          ...newItems,
+          orders: Array.from(map.values()),
+        };
+      },
+      forceRefetch({ currentArg, previousArg }) {
+        return currentArg !== previousArg;
+      },
+    }),
     adminDeleteOrganization: build.mutation<
       { success: boolean },
       { email: string }
@@ -444,6 +525,7 @@ export const {
   useAdminUpdateOrderMutation,
   useAdminPublishOrderMutation,
   useAdminCompleteProjectMutation,
+  useGetAdminManageProjectsQuery,
   useAdminDeleteOrganizationMutation,
   useGetCommonObserveQuery,
   useLazyGetAdminOrdersPayoutQuery,

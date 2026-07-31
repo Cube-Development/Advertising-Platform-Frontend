@@ -12,6 +12,7 @@ import { AdminChannelOwnerSwapPage } from "@pages/AdminChannelOwnerSwap";
 import { AdminOrderUpdatePage } from "@pages/AdminOrderUpdate";
 import { AdminOrderPublishPage } from "@pages/AdminOrderPublish";
 import { AdminProjectCompletePage } from "@pages/AdminProjectComplete";
+import { AdminManageProjectsPage } from "@pages/AdminManageProjects";
 import { AdminDeleteOrganizationPage } from "@pages/AdminDeleteOrganization";
 import { AdminCommonObservePage } from "@pages/AdminCommonObserve";
 import { AdminHomePage } from "@pages/AdminHome";
@@ -423,6 +424,14 @@ export const ALL_APP_ROUTES_LIST: IRouting[] = [
   {
     path: ENUM_PATHS.ADMIN_PROJECT_COMPLETE,
     component: AdminProjectCompletePage,
+    roles: [ENUM_ROLES.MODERATOR],
+    auth: ENUM_AUTH_TYPES.PRIVATE,
+    layout: ENUM_LAYOUT_TYPES.ADMIN,
+    adminSidebar: true,
+  },
+  {
+    path: ENUM_PATHS.ADMIN_MANAGE_PROJECTS,
+    component: AdminManageProjectsPage,
     roles: [ENUM_ROLES.MODERATOR],
     auth: ENUM_AUTH_TYPES.PRIVATE,
     layout: ENUM_LAYOUT_TYPES.ADMIN,

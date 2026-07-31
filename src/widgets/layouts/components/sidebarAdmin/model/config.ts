@@ -10,6 +10,7 @@ import {
   CircleDollarSign,
   ClipboardList,
   FileText,
+  FolderKanban,
   LayoutDashboard,
   MessageSquareText,
   OctagonAlert,
@@ -117,6 +118,13 @@ export const ADMIN_MENU: IMenuItem[] = [
       title: "Завершение проекта",
       path: ENUM_PATHS.ADMIN_PROJECT_COMPLETE,
       icon: CircleCheck,
+    },
+  },
+  {
+    item: {
+      title: "Проекты",
+      path: ENUM_PATHS.ADMIN_MANAGE_PROJECTS,
+      icon: FolderKanban,
     },
   },
   {
