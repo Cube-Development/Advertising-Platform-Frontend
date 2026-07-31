@@ -48,5 +48,6 @@ export enum ENUM_PATHS {
   ADMIN_ORDER_UPDATE = "/admin/order-update",
   ADMIN_ORDER_PUBLISH = "/admin/order-publish",
   ADMIN_PROJECT_COMPLETE = "/admin/project-complete",
+  ADMIN_MANAGE_PROJECTS = "/admin/manage-projects",
   ADMIN_DELETE_ORGANIZATION = "/admin/delete-organization",
 }
