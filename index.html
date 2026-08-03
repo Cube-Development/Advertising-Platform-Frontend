@@ -2,10 +2,11 @@
 <html>
 
 <head>
-  <!-- Aidirekt Chat Plugin -->
+  <!-- Aidirekt Chat Plugin (old: blocked SPA bootstrap when CDN was slow)
   <script defer src="https://plugin.aidirekt.uz/chat-plugin.js" data-org="Blogix" data-auto-init="true"
     data-bg-color="#0ed8d4" data-text-color="#ffffff" data-greeting="Assalomu aleykum! Men sizga yordam bera olaman!
 Здравствуйте! Я здесь чтобы помочь вам!" data-name="Blogix"></script>
+  -->
   <script>(function (w, d, s, l, i) {
       w[l] = w[l] || []; w[l].push({
         'gtm.start':
@@ -66,6 +67,21 @@
   <div id="root"></div>
   <script type="module" src="/src/main.tsx"></script>
   <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <!-- Aidirekt Chat Plugin: load after page so it does not block React -->
+  <!-- <script>
+    window.addEventListener('load', function () {
+      var s = document.createElement('script');
+      s.src = 'https://plugin.aidirekt.uz/chat-plugin.js';
+      s.defer = true;
+      s.dataset.org = 'Blogix';
+      s.dataset.autoInit = 'true';
+      s.dataset.bgColor = '#0ed8d4';
+      s.dataset.textColor = '#ffffff';
+      s.dataset.greeting = 'Assalomu aleykum! Men sizga yordam bera olaman!\nЗдравствуйте! Я здесь чтобы помочь вам!';
+      s.dataset.name = 'Blogix';
+      document.body.appendChild(s);
+    });
+  </script> -->
 </body>
 
 </html>
