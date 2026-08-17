@@ -4,6 +4,7 @@ export * from "./feedback";
 export * from "./acceptPost";
 export * from "./rejectPost";
 export * from "./seePost";
+export * from "./seeOfdQr";
 export * from "./changePost";
 export * from "./seeComment";
 export * from "./replaceChannel";

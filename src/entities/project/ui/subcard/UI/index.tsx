@@ -14,7 +14,11 @@ import {
   useGetPostQuery,
 } from "@entities/project";
 import { ENUM_ROLES } from "@entities/user";
-import { ReplaceChannelProps, ReplacePostProps } from "@features/order";
+import {
+  ReplaceChannelProps,
+  ReplacePostProps,
+  SeeOfdQr,
+} from "@features/order";
 import {
   ArrowSmallVerticalIcon,
   BoyIcon,
@@ -209,7 +213,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
           )}
         </div>
         {screen > BREAKPOINT.MD && (
-          <>
+          <div className={styles.subcard__right}>
             {subcard?.api_status === orderStatus.canceled ||
             subcard?.api_status === orderStatus.rejected ? (
               <div className={styles.subcard__cancel}>
@@ -365,7 +369,8 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
             ) : (
               <></>
             )}
-          </>
+            <SeeOfdQr qrCodeUrl={subcard?.qr_code_url} />
+          </div>
         )}
         {screen > BREAKPOINT.MD &&
           typeFilter === ENUM_PROJECT_TYPES.MY_PROJECT &&
@@ -613,6 +618,9 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
             <></>
           )}
         </>
+      )}
+      {screen <= BREAKPOINT.MD && (
+        <SeeOfdQr qrCodeUrl={subcard?.qr_code_url} />
       )}
     </div>
   );

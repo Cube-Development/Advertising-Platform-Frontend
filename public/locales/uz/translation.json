@@ -3076,6 +3076,12 @@
     "postLink": {
       "label": "Post havolasi:"
     },
+    "ofd": {
+      "title": "OFD cheklari",
+      "sale_check": "Sotuv cheki",
+      "refund_sale_check": "Qaytarish cheki",
+      "open": "Ochish"
+    },
     "seePost": "Postni ko'rish",
     "seeComment": "Izohni ko'rish",
     "channel": {
