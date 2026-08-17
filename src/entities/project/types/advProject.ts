@@ -73,6 +73,12 @@ export interface IAdvProjectSubcard {
   rate?: number;
   post_deeplink: string;
   cancel_reason?: string;
+  qr_code_url?: IQrCodeUrl | null;
+}
+
+export interface IQrCodeUrl {
+  sale_check?: string;
+  refund_sale_check?: string;
 }
 
 interface IDesire {

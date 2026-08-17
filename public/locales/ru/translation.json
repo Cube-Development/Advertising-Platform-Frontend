@@ -3078,6 +3078,12 @@
     "postLink": {
       "label": "Ссылка на пост:"
     },
+    "ofd": {
+      "title": "Чеки OFD",
+      "sale_check": "Чек продажи",
+      "refund_sale_check": "Чек возврата",
+      "open": "Открыть"
+    },
     "seePost": "Посмотреть пост",
     "seeComment": "Посмотреть комментарий",
     "channel": {

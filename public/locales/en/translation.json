@@ -3075,6 +3075,12 @@
     "postLink": {
       "label": "Post link:"
     },
+    "ofd": {
+      "title": "OFD receipts",
+      "sale_check": "Sale receipt",
+      "refund_sale_check": "Refund receipt",
+      "open": "Open"
+    },
     "seePost": "View post",
     "seeComment": "View comment",
     "channel": {

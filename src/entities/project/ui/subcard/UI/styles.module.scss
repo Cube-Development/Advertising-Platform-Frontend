@@ -8,11 +8,11 @@
   @media (max-width: 768px) {
     padding: 0;
     border-bottom: 0;
-    grid-template: repeat(3, min-content) 1fr / 1fr;
+    grid-template: repeat(3, min-content) 1fr min-content / 1fr;
     height: 100%;
 
     &.no__chat {
-      grid-template: repeat(2, min-content) 1fr / 1fr;
+      grid-template: repeat(2, min-content) 1fr min-content / 1fr;
     }
   }
 
@@ -298,6 +298,14 @@
           }
         }
       }
+    }
+
+    &__right {
+      display: grid;
+      grid-template-rows: 1fr auto;
+      align-self: stretch;
+      height: 100%;
+      min-width: 0;
     }
 
     &__cancel,
