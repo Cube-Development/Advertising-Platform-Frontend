@@ -619,9 +619,7 @@ export const AdvSubcard: FC<AdvSubcardProps> = ({
           )}
         </>
       )}
-      {screen <= BREAKPOINT.MD && (
-        <SeeOfdQr qrCodeUrl={subcard?.qr_code_url} />
-      )}
+      {screen <= BREAKPOINT.MD && <SeeOfdQr qrCodeUrl={subcard?.qr_code_url} />}
     </div>
   );
 };

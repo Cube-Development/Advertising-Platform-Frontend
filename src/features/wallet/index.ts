@@ -5,3 +5,4 @@ export * from "./paymentCard";
 export * from "./paymentDidox";
 export * from "./wallets-bar";
 export * from "./unrealized-wallet";
+export * from "./ofdCheckLink";
