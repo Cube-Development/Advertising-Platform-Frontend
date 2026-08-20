@@ -5,4 +5,5 @@ export interface IWalletHistory {
   way_type: string;
   amount: number;
   status: string;
+  qr_code_url?: string;
 }

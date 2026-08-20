@@ -2523,7 +2523,8 @@
       "purpose": "Maqsad",
       "method": "Usul",
       "ammount": "Summa",
-      "status": "Holat"
+      "status": "Holat",
+      "ofd_check": "OFD cheki"
     }
   },
   "create_order": {

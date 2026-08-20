@@ -2522,7 +2522,8 @@
       "purpose": "Purpose",
       "method": "Method",
       "ammount": "Amount",
-      "status": "Status"
+      "status": "Status",
+      "ofd_check": "OFD receipt"
     }
   },
   "create_order": {

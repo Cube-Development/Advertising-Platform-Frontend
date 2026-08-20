@@ -426,11 +426,7 @@ export const adminAPI = authApi.injectEndpoints({
         method: "POST",
         body,
       }),
-      transformResponse: (
-        response: IAdminManageProjects,
-        _meta,
-        arg,
-      ) => {
+      transformResponse: (response: IAdminManageProjects, _meta, arg) => {
         const pageSize =
           arg?.elements_on_page ?? INTERSECTION_ELEMENTS.ADMIN_MANAGE_PROJECTS;
         const batchLength = response?.orders?.length ?? 0;
