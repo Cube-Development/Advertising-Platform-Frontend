@@ -6,6 +6,7 @@ export const manageProjectOrderFixture: IAdminManageProjectOrder = {
   order_date: { date_from: "10.03.2026", date_to: "12.03.2026" },
   order_time: { time_from: "09:00", time_to: "21:00" },
   order_completed_count: 3,
+  order_total_count: 10,
   price: {
     without_vat: 50000,
     with_vat: 56000,
