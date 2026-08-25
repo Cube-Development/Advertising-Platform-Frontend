@@ -4,13 +4,12 @@ import { FormatPrice, SelectPrice } from "@features/channel";
 import { SelectDescription, SelectOptions, SelectSex } from "@features/other";
 import { AccordionContent, AccordionItem } from "@shared/ui";
 import { FC, MutableRefObject } from "react";
+import { Link } from "react-router-dom";
 import { useChannelData } from "../model";
 import { useCheckUpdate, useSubcardData } from "../model";
 import { CardButtons } from "./card-buttons";
 import { CardContent } from "./card-content";
 import { CardTrigger } from "./card-trigger";
-import styles from "./styles.module.scss";
-import { Link } from "react-router-dom";
 
 interface ChannelCardProps {
   card: IAdminChannelData;
@@ -45,7 +44,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({
   return (
     <AccordionItem
       value={`item-adminChannel-${card?.channel?.id}`}
-      className={styles.wrapper}
+      className="overflow-hidden rounded-lg border bg-card shadow-sm"
       ref={(el) => (accordionRefs.current[index] = el)}
     >
       <CardTrigger
@@ -54,7 +53,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({
         isOpen={isSubcardOpen}
         onClick={() => setSubcardOpen(!isSubcardOpen)}
       />
-      <AccordionContent className={styles.content}>
+      <AccordionContent className="grid grid-flow-row gap-4 px-4 pb-4 sm:px-6">
         {!!channel && (
           <>
             {channel?.url && (
@@ -62,7 +61,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({
                 to={channel.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:scale-[1.01] hover:bg-sky-100 transition-all duration-300 block bg-sky-50 rounded-lg text-start text-sm font-medium px-4 py-2 text-[var(--URL)]"
+                className="block rounded-lg bg-sky-50 px-4 py-2 text-start text-sm font-medium text-[var(--URL)] transition-all duration-300 hover:scale-[1.01] hover:bg-sky-100"
               >
                 {channel.url}
               </Link>
@@ -76,51 +75,42 @@ export const ChannelCard: FC<ChannelCardProps> = ({
               placeholder={"add_platform.description.description.default_value"}
               defaultValues={formState?.description}
             />
-            <div className={styles.parameters}>
-              <div className={styles.block}>
-                <SelectOptions
-                  onChangeOption={setValue}
-                  options={categories?.contents || []}
-                  typeParameter={channelParameterData.category}
-                  textData={"add_platform.description.category"}
-                  isRow={true}
-                  defaultValue={[formState.category]}
-                  single={true}
-                  searchable={true}
-                />
-              </div>
-              <div className={styles.block}>
-                <SelectOptions
-                  onChangeOption={setValue}
-                  options={ages?.contents || []}
-                  typeParameter={channelParameterData.age}
-                  textData={"add_platform.description.age"}
-                  defaultValue={formState.age}
-                  isRow={true}
-                />
-              </div>
-
-              <div className={styles.block}>
-                <SelectOptions
-                  onChangeOption={setValue}
-                  options={languages?.contents || []}
-                  typeParameter={channelParameterData.language}
-                  textData={"add_platform.description.languages"}
-                  defaultValue={formState.language}
-                  isRow={true}
-                />
-              </div>
-              <div className={styles.block}>
-                <SelectOptions
-                  onChangeOption={setValue}
-                  options={regions?.contents || []}
-                  typeParameter={channelParameterData.region}
-                  textData={"add_platform.description.region"}
-                  defaultValue={formState.region}
-                  isRow={true}
-                />
-              </div>
-              <div className={styles.block}>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              <SelectOptions
+                onChangeOption={setValue}
+                options={categories?.contents || []}
+                typeParameter={channelParameterData.category}
+                textData={"add_platform.description.category"}
+                isRow={true}
+                defaultValue={[formState.category]}
+                single={true}
+                searchable={true}
+              />
+              <SelectOptions
+                onChangeOption={setValue}
+                options={ages?.contents || []}
+                typeParameter={channelParameterData.age}
+                textData={"add_platform.description.age"}
+                defaultValue={formState.age}
+                isRow={true}
+              />
+              <SelectOptions
+                onChangeOption={setValue}
+                options={languages?.contents || []}
+                typeParameter={channelParameterData.language}
+                textData={"add_platform.description.languages"}
+                defaultValue={formState.language}
+                isRow={true}
+              />
+              <SelectOptions
+                onChangeOption={setValue}
+                options={regions?.contents || []}
+                typeParameter={channelParameterData.region}
+                textData={"add_platform.description.region"}
+                defaultValue={formState.region}
+                isRow={true}
+              />
+              <div className="md:col-span-2">
                 <SelectSex
                   onChange={setValue}
                   typeMan={channelParameterData.male}
@@ -130,7 +120,7 @@ export const ChannelCard: FC<ChannelCardProps> = ({
                   isRow={true}
                 />
               </div>
-              <div className={styles.block}>
+              <div className="md:col-span-2">
                 <SelectPrice
                   onChange={setValue}
                   formState={formState}

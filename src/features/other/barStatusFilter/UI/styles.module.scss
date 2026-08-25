@@ -1,10 +1,10 @@
 .subtypes {
   ul {
-    display: grid;
-    grid-auto-flow: column;
-    column-gap: 25px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px 16px;
     align-items: center;
-    justify-content: start;
+    justify-content: flex-start;
   }
 
   li {

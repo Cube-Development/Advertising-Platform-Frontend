@@ -1,36 +1,48 @@
 import {
+  EXECUTOR_TYPE_TABS,
+  ExecutorType,
   IAdminManageProjectsReq,
+  MANAGE_EXECUTOR_TYPE_DEFAULT,
   useGetAdminManageProjectsQuery,
 } from "@entities/admin";
 import { projectStatus } from "@entities/project";
+import { BarStatusFilter } from "@features/other";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { Button, Input, MultiSelect } from "@shared/ui";
 import { Label } from "@shared/ui/shadcn-ui/ui/label";
-import { useMemo, useState } from "react";
+import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { PROJECT_STATUS_OPTIONS } from "../model/constants";
 import { OrdersList } from "./OrdersList";
 
+const EXECUTOR_STATUS_TABS = EXECUTOR_TYPE_TABS.map((tab) => ({
+  name: tab.name,
+  type: tab.type,
+}));
+
 export const ManageProjects = () => {
+  const { t } = useTranslation();
   const [page, setPage] = useState(1);
   const [projectId, setProjectId] = useState("");
   const [url, setUrl] = useState("");
   const [status, setStatus] = useState<number[]>([projectStatus.in_progress]);
+  const [executorType, setExecutorType] = useState<ExecutorType>(
+    MANAGE_EXECUTOR_TYPE_DEFAULT,
+  );
   const [applied, setApplied] = useState({
     project_id: "",
     url: "",
     status: [projectStatus.in_progress] as number[],
   });
 
-  const queryParams: IAdminManageProjectsReq = useMemo(
-    () => ({
-      page,
-      elements_on_page: INTERSECTION_ELEMENTS.ADMIN_MANAGE_PROJECTS,
-      status: applied.status,
-      ...(applied.project_id ? { project_id: applied.project_id } : {}),
-      ...(applied.url ? { url: applied.url } : {}),
-    }),
-    [page, applied],
-  );
+  const queryParams: IAdminManageProjectsReq = {
+    page,
+    elements_on_page: INTERSECTION_ELEMENTS.ADMIN_MANAGE_PROJECTS,
+    status: applied.status,
+    executor_type: executorType,
+    ...(applied.project_id ? { project_id: applied.project_id } : {}),
+    ...(applied.url ? { url: applied.url } : {}),
+  };
 
   const { data, isLoading, isFetching } =
     useGetAdminManageProjectsQuery(queryParams);
@@ -44,27 +56,28 @@ export const ManageProjects = () => {
     });
   };
 
+  const changeExecutorType = (type: ExecutorType) => {
+    setPage(1);
+    setExecutorType(type);
+  };
+
   const handleShowMore = () => {
     setPage((prev) => prev + 1);
   };
 
   return (
     <div className="container">
-      <div className="grid gap-8">
-        <div className="flex items-center justify-between gap-5">
-          <div>
-            <h1 className="text-2xl font-medium text-black/70">Проекты</h1>
-            <p className="text-xs font-medium text-black/70">
-              Админ панель
-              <span className="text-black/40"> / Проекты</span>
-            </p>
-          </div>
-        </div>
+      <div className="my-6 grid grid-flow-row gap-4 sm:my-8 sm:gap-6 lg:my-10">
+        <h1 className="text-xl font-semibold leading-tight sm:text-2xl">
+          {t("admin_panel.pages.manage_projects")}
+        </h1>
 
-        <div className="overflow-hidden rounded-2xl bg-white shadow-[0px_2px_5px_0px_rgba(0,0,0,0.16)]">
-          <div className="grid gap-4 border-b border-black/10 p-5 md:grid-cols-[1fr_1fr_1.2fr_auto] md:items-end">
-            <div className="space-y-2">
-              <Label htmlFor="project_id">ID проекта</Label>
+        <div className="grid grid-flow-row gap-4">
+          <div className="flex flex-col gap-3 lg:flex-row lg:items-end">
+            <div className="w-full max-w-[420px] shrink-0 space-y-2">
+              <Label htmlFor="project_id">
+                {t("admin_panel.manage_projects.project_id")}
+              </Label>
               <Input
                 id="project_id"
                 value={projectId}
@@ -72,8 +85,20 @@ export const ManageProjects = () => {
                 placeholder="00000000-0000-0000-0000-000000000000"
               />
             </div>
+            <div className="min-w-0 flex-1">
+              <BarStatusFilter
+                changeStatus={(v) => changeExecutorType(v as ExecutorType)}
+                statusFilter={executorType}
+                projectStatus={EXECUTOR_STATUS_TABS}
+              />
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 items-end gap-3 md:grid-cols-[1fr_1.2fr_auto]">
             <div className="space-y-2">
-              <Label htmlFor="url">URL канала</Label>
+              <Label htmlFor="url">
+                {t("admin_panel.manage_projects.url")}
+              </Label>
               <Input
                 id="url"
                 value={url}
@@ -82,12 +107,14 @@ export const ManageProjects = () => {
               />
             </div>
             <div className="space-y-2">
-              <Label>Статусы</Label>
+              <Label>{t("admin_panel.manage_projects.statuses")}</Label>
               <MultiSelect
                 options={PROJECT_STATUS_OPTIONS}
                 onValueChange={(value) => setStatus(value as number[])}
                 defaultValue={status}
-                placeholder="Выберите статусы"
+                placeholder={t(
+                  "admin_panel.manage_projects.statuses_placeholder",
+                )}
                 showCheckBox
                 showButtonClear
                 className="!p-2"
@@ -99,16 +126,16 @@ export const ManageProjects = () => {
               onClick={handleApplyFilters}
               className="h-10"
             >
-              Применить
+              {t("admin_panel.manage_projects.apply")}
             </Button>
           </div>
-
-          <OrdersList
-            data={data}
-            isLoading={isLoading || isFetching}
-            onShowMore={handleShowMore}
-          />
         </div>
+
+        <OrdersList
+          data={data}
+          isLoading={isLoading || isFetching}
+          onShowMore={handleShowMore}
+        />
       </div>
     </div>
   );

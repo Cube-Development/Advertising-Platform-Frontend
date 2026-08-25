@@ -1,6 +1,7 @@
-import { ISelfConnectOrder, IDatePeriod } from "@entities/self-connect-order";
+import { ORGANIZATION_TYPE_LABEL } from "@entities/admin/config/organizationType";
 import { ENUM_OFFER_STATUS_BACKEND } from "@entities/offer";
-import { toast } from "@shared/ui/shadcn-ui/ui/use-toast";
+import { IDatePeriod, ISelfConnectOrder } from "@entities/self-connect-order";
+import i18n from "@shared/config/i18n";
 import {
   Badge,
   Button,
@@ -9,9 +10,10 @@ import {
   CardHeader,
   Separator,
 } from "@shared/ui/shadcn-ui";
+import { toast } from "@shared/ui/shadcn-ui/ui/use-toast";
 import { FC } from "react";
 import { useTranslation } from "react-i18next";
-import i18n from "@shared/config/i18n";
+import noUserAvatar from "/images/notFound/noUserAvatar.jpg";
 
 interface SelfConnectOrderCardProps {
   order: ISelfConnectOrder;
@@ -49,60 +51,78 @@ const handleCopyLink = (text: string) => {
 interface UserBlockProps {
   label: string;
   user: ISelfConnectOrder["executor"];
+  showOrgType?: boolean;
 }
 
-const UserBlock: FC<UserBlockProps> = ({ label, user }) => (
-  <div className="flex flex-col gap-1 min-w-0">
-    <p className="text-xs font-medium text-muted-foreground">{label}</p>
-    <p
-      className="text-sm font-medium truncate text-blue-500 cursor-pointer"
-      onClick={() => handleCopyLink(user.email)}
-    >
-      {user.email}
-    </p>
-    {user.phone && (
-      <p
-        className="text-xs text-muted-foreground truncate text-blue-500 cursor-pointer"
-        onClick={() => handleCopyLink(user.phone!)}
-      >
-        {user.phone}
-      </p>
-    )}
-    <p
-      className="text-xs text-muted-foreground truncate text-blue-500 cursor-pointer"
-      onClick={() => handleCopyLink(user.id)}
-    >
-      ID: {user.id}
-    </p>
-    {(user.tin || user.pinfl) && (
-      <p className="text-xs text-muted-foreground truncate">
-        {user.tin && (
-          <>
-            TIN:{" "}
-            <span
-              className="text-blue-500 cursor-pointer"
-              onClick={() => handleCopyLink(user.tin!)}
-            >
-              {user.tin}
-            </span>
-          </>
+const UserBlock: FC<UserBlockProps> = ({ label, user, showOrgType }) => {
+  const { t } = useTranslation();
+
+  return (
+    <div className="flex flex-col gap-1 min-w-0">
+      <p className="text-xs font-medium text-muted-foreground">{label}</p>
+      {showOrgType &&
+        user.org_type != null &&
+        ORGANIZATION_TYPE_LABEL[user.org_type] && (
+          <Badge variant="outline" className="w-fit">
+            {t(ORGANIZATION_TYPE_LABEL[user.org_type])}
+          </Badge>
         )}
-        {user.tin && user.pinfl && " · "}
-        {user.pinfl && (
-          <>
-            PINFL:{" "}
-            <span
-              className="text-blue-500 cursor-pointer"
-              onClick={() => handleCopyLink(user.pinfl!)}
-            >
-              {user.pinfl}
-            </span>
-          </>
-        )}
-      </p>
-    )}
-  </div>
-);
+      {user.email ? (
+        <p
+          className="text-sm font-medium truncate text-blue-500 cursor-pointer"
+          onClick={() => handleCopyLink(user.email!)}
+        >
+          {user.email}
+        </p>
+      ) : (
+        <p className="text-sm text-muted-foreground">—</p>
+      )}
+      {user.phone && (
+        <p
+          className="text-xs text-muted-foreground truncate text-blue-500 cursor-pointer"
+          onClick={() => handleCopyLink(user.phone!)}
+        >
+          {user.phone}
+        </p>
+      )}
+      {user.id && (
+        <p
+          className="text-xs text-muted-foreground truncate text-blue-500 cursor-pointer"
+          onClick={() => handleCopyLink(user.id!)}
+        >
+          ID: {user.id}
+        </p>
+      )}
+      {(user.tin || user.pinfl) && (
+        <p className="text-xs text-muted-foreground truncate">
+          {user.tin && (
+            <>
+              TIN:{" "}
+              <span
+                className="text-blue-500 cursor-pointer"
+                onClick={() => handleCopyLink(user.tin!)}
+              >
+                {user.tin}
+              </span>
+            </>
+          )}
+          {user.tin && user.pinfl && " · "}
+          {user.pinfl && (
+            <>
+              PINFL:{" "}
+              <span
+                className="text-blue-500 cursor-pointer"
+                onClick={() => handleCopyLink(user.pinfl!)}
+              >
+                {user.pinfl}
+              </span>
+            </>
+          )}
+        </p>
+      )}
+    </div>
+  );
+};
 
 export const SelfConnectOrderCard: FC<SelfConnectOrderCardProps> = ({
   order,
@@ -114,7 +134,7 @@ export const SelfConnectOrderCard: FC<SelfConnectOrderCardProps> = ({
       <CardHeader className="flex flex-col gap-4 p-4 sm:p-6 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex gap-3 min-w-0 flex-1">
           <img
-            src={order.avatar}
+            src={order.avatar || noUserAvatar}
             alt={order.name}
             className="h-12 w-12 shrink-0 rounded-full object-cover"
           />
@@ -205,6 +225,23 @@ export const SelfConnectOrderCard: FC<SelfConnectOrderCardProps> = ({
               </p>
             </div>
           </div>
+
+          {order.format && (
+            <div className="grid grid-cols-2 gap-3">
+              <div>
+                <p className="text-xs text-muted-foreground">
+                  {t("track_orders.card.format_small")}
+                </p>
+                <p className="text-sm font-medium">{order.format.small}</p>
+              </div>
+              <div>
+                <p className="text-xs text-muted-foreground">
+                  {t("track_orders.card.format_big")}
+                </p>
+                <p className="text-sm font-medium">{order.format.big}</p>
+              </div>
+            </div>
+          )}
         </div>
 
         <Separator />
@@ -218,7 +255,11 @@ export const SelfConnectOrderCard: FC<SelfConnectOrderCardProps> = ({
             label={t("track_orders.card.customer")}
             user={order.customer}
           />
-          <UserBlock label={t("track_orders.card.owner")} user={order.owner} />
+          <UserBlock
+            label={t("track_orders.card.owner")}
+            user={order.owner}
+            showOrgType
+          />
         </div>
 
         <Separator />
@@ -250,16 +291,35 @@ export const SelfConnectOrderCard: FC<SelfConnectOrderCardProps> = ({
           </div>
         </div>
 
-        {order.post_deeplink && (
-          <Button asChild variant="primary" className="w-full sm:w-auto">
-            <a
-              href={order.post_deeplink}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              {t("track_orders.open_post")}
-            </a>
-          </Button>
+        {(order.post_url || order.post_deeplink) && (
+          <div className="flex flex-wrap gap-2">
+            {order.post_url && (
+              <Button asChild variant="primary" className="w-full sm:w-auto">
+                <a
+                  href={order.post_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {t("track_orders.open_post")}
+                </a>
+              </Button>
+            )}
+            {order.post_deeplink && (
+              <Button
+                asChild
+                variant={order.post_url ? "outline" : "primary"}
+                className="w-full sm:w-auto"
+              >
+                <a
+                  href={order.post_deeplink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {t("track_orders.open_bot")}
+                </a>
+              </Button>
+            )}
+          </div>
         )}
       </CardContent>
     </Card>

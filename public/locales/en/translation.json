@@ -1389,10 +1389,21 @@
     "title": "Order Tracking",
     "empty": "No orders at the moment",
     "open_post": "Open post",
+    "open_bot": "Open in bot",
     "date_from": "Date from",
     "date_to": "Date to",
     "download_payout_report": "Download report",
     "download_error": "Failed to download file",
+    "executor_type": {
+      "label": "Executor type",
+      "self_connect": "Self-connect",
+      "agency": "Agency",
+      "all": "All"
+    },
+    "org_type": {
+      "legal": "Legal entity",
+      "individual": "Individual"
+    },
     "status_filter": {
       "wait": "Awaiting acceptance",
       "in_progress": "In progress",
@@ -1411,7 +1422,9 @@
       "catalog_commission": "Catalog commission",
       "executor": "Executor",
       "customer": "Customer",
-      "owner": "Owner"
+      "owner": "Owner",
+      "format_small": "Format (small)",
+      "format_big": "Format (big)"
     }
   },
   "add_platform": {
@@ -3528,7 +3541,17 @@
       "moderation": "Moderation",
       "complaints": "Complaints",
       "reviews": "Reviews",
-      "common_observe": "General statistics"
+      "common_observe": "General statistics",
+      "manage_projects": "Projects"
+    },
+    "manage_projects": {
+      "project_id": "Project ID",
+      "url": "Channel URL",
+      "statuses": "Statuses",
+      "statuses_placeholder": "Select statuses",
+      "apply": "Apply",
+      "empty": "No orders found",
+      "completed": "Completed"
     },
     "common_observe": {
       "period": {
@@ -3585,6 +3608,7 @@
       "description": "Here you can manage users, channels, and platform content."
     },
     "channels": {
+      "empty": "No channels found",
       "bar": {
         "id": "Name & ID",
         "owner": "Owner",
@@ -3662,12 +3686,16 @@
       }
     },
     "users": {
+      "empty": "No users",
       "bar": {
         "id": "User ID",
         "name": "Username",
         "email": "Email",
         "date": "Registration Date",
         "status": "Status"
+      },
+      "filter": {
+        "all": "All"
       },
       "card": {
         "status": {
@@ -3705,7 +3733,23 @@
         "email": "Email",
         "phone": "Phone",
         "language": "Language",
-        "location": "Location"
+        "location": "Location",
+        "created": "Registration date"
+      },
+      "org": {
+        "title": "Organization",
+        "tin": "TIN",
+        "pinfl": "PINFL",
+        "type": "Type",
+        "status": "Status",
+        "empty": "No organization"
+      },
+      "channels": {
+        "title": "Channels",
+        "completed": "Completed",
+        "empty": "No channels",
+        "search": "Search by name, URL or UUID",
+        "search_empty": "Nothing found"
       }
     },
     "transactions": {
