@@ -102,6 +102,7 @@ export interface IAdminManageProjectOrder {
     time_to: string;
   };
   order_completed_count: number;
+  order_total_count: number;
   price: {
     without_vat: number;
     with_vat: number;
