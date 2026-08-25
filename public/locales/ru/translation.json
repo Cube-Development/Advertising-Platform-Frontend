@@ -1392,10 +1392,21 @@
     "title": "Отслеживание заказов",
     "empty": "На данный момент заказов нет",
     "open_post": "Открыть пост",
+    "open_bot": "Открыть в боте",
     "date_from": "Дата с",
     "date_to": "Дата по",
     "download_payout_report": "Скачать отчёт",
     "download_error": "Не удалось скачать файл",
+    "executor_type": {
+      "label": "Тип исполнителя",
+      "self_connect": "Self-connect",
+      "agency": "Agency",
+      "all": "Все"
+    },
+    "org_type": {
+      "legal": "Юрлицо",
+      "individual": "Физлицо"
+    },
     "status_filter": {
       "wait": "Ожидают принятия",
       "in_progress": "В работе",
@@ -1414,7 +1425,9 @@
       "catalog_commission": "Комиссия каталога",
       "executor": "Исполнитель",
       "customer": "Заказчик",
-      "owner": "Владелец"
+      "owner": "Владелец",
+      "format_small": "Формат (малый)",
+      "format_big": "Формат (большой)"
     }
   },
   "add_platform": {
@@ -3531,7 +3544,17 @@
       "moderation": "Модерация",
       "complaints": "Жалобы",
       "reviews": "Отзывы",
-      "common_observe": "Общая статистика"
+      "common_observe": "Общая статистика",
+      "manage_projects": "Проекты"
+    },
+    "manage_projects": {
+      "project_id": "ID проекта",
+      "url": "URL канала",
+      "statuses": "Статусы",
+      "statuses_placeholder": "Выберите статусы",
+      "apply": "Применить",
+      "empty": "Ордеры не найдены",
+      "completed": "Выполнено"
     },
     "common_observe": {
       "period": {
@@ -3588,6 +3611,7 @@
       "description": "Здесь вы можете управлять пользователями, каналами и контентом платформы."
     },
     "channels": {
+      "empty": "Каналы не найдены",
       "bar": {
         "id": "Название&ID",
         "owner": "Владелец",
@@ -3665,12 +3689,16 @@
       }
     },
     "users": {
+      "empty": "Нет пользователей",
       "bar": {
         "id": "ID пользователя",
         "name": "Имя пользователя",
         "email": "Почта",
         "date": "Дата регистрации",
         "status": "Статус"
+      },
+      "filter": {
+        "all": "Все"
       },
       "card": {
         "status": {
@@ -3708,7 +3736,23 @@
         "email": "Почта",
         "phone": "Телефон",
         "language": "Язык",
-        "location": "Локация"
+        "location": "Локация",
+        "created": "Дата регистрации"
+      },
+      "org": {
+        "title": "Организация",
+        "tin": "TIN",
+        "pinfl": "PINFL",
+        "type": "Тип",
+        "status": "Статус",
+        "empty": "Организация не указана"
+      },
+      "channels": {
+        "title": "Каналы",
+        "completed": "Выполнено",
+        "empty": "Нет каналов",
+        "search": "Поиск по названию, URL или UUID",
+        "search_empty": "Ничего не найдено"
       }
     },
     "transactions": {

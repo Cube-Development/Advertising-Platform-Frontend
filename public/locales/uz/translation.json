@@ -1389,10 +1389,21 @@
     "title": "Buyurtmalarni kuzatish",
     "empty": "Hozircha buyurtmalar yo'q",
     "open_post": "Postni ochish",
+    "open_bot": "Botda ochish",
     "date_from": "Sanadan",
     "date_to": "Sanagacha",
     "download_payout_report": "Hisobotni yuklab olish",
     "download_error": "Faylni yuklab olish muvaffaqiyatsiz tugadi",
+    "executor_type": {
+      "label": "Ijrochi turi",
+      "self_connect": "Self-connect",
+      "agency": "Agency",
+      "all": "Barchasi"
+    },
+    "org_type": {
+      "legal": "Yuridik shaxs",
+      "individual": "Jismoniy shaxs"
+    },
     "status_filter": {
       "wait": "Qabul kutilmoqda",
       "in_progress": "Jarayonda",
@@ -1411,7 +1422,9 @@
       "catalog_commission": "Katalog komissiyasi",
       "executor": "Ijrochi",
       "customer": "Buyurtmachi",
-      "owner": "Egasi"
+      "owner": "Egasi",
+      "format_small": "Format (kichik)",
+      "format_big": "Format (katta)"
     }
   },
   "add_platform": {
@@ -3528,7 +3541,17 @@
       "moderation": "Moderatsiya",
       "complaints": "Shikoyatlar",
       "reviews": "Sharhlar",
-      "common_observe": "Umumiy statistika"
+      "common_observe": "Umumiy statistika",
+      "manage_projects": "Loyihalar"
+    },
+    "manage_projects": {
+      "project_id": "Loyiha ID",
+      "url": "Kanal URL",
+      "statuses": "Holatlar",
+      "statuses_placeholder": "Holatlarni tanlang",
+      "apply": "Qo'llash",
+      "empty": "Buyurtmalar topilmadi",
+      "completed": "Bajarilgan"
     },
     "common_observe": {
       "period": {
@@ -3585,6 +3608,7 @@
       "description": "Bu yerda foydalanuvchilar, kanallar va platforma kontentini boshqarishingiz mumkin."
     },
     "channels": {
+      "empty": "Kanallar topilmadi",
       "bar": {
         "id": "Nomi&ID",
         "owner": "Egalik qiluvchi",
@@ -3662,12 +3686,16 @@
       }
     },
     "users": {
+      "empty": "Foydalanuvchilar yo'q",
       "bar": {
         "id": "Foydalanuvchi ID",
         "name": "Foydalanuvchi nomi",
         "email": "Pochta",
         "date": "Ro'yxatdan o'tgan sana",
         "status": "Holat"
+      },
+      "filter": {
+        "all": "Barchasi"
       },
       "card": {
         "status": {
@@ -3705,7 +3733,23 @@
         "email": "Pochta",
         "phone": "Telefon",
         "language": "Til",
-        "location": "Manzil"
+        "location": "Manzil",
+        "created": "Ro'yxatdan o'tgan sana"
+      },
+      "org": {
+        "title": "Tashkilot",
+        "tin": "TIN",
+        "pinfl": "PINFL",
+        "type": "Tur",
+        "status": "Status",
+        "empty": "Tashkilot ko'rsatilmagan"
+      },
+      "channels": {
+        "title": "Kanallar",
+        "completed": "Bajarilgan",
+        "empty": "Kanallar yo'q",
+        "search": "Nom, URL yoki UUID bo'yicha qidirish",
+        "search_empty": "Hech narsa topilmadi"
       }
     },
     "transactions": {

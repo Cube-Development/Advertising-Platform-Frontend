@@ -1,6 +1,7 @@
 import { ADMIN_CHANNELS, authApi } from "@shared/api";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 
+import { buildAdminChannelsParams } from "../lib";
 import {
   IAdminBanChannelReq,
   IAdminRejectChannelReq,
@@ -16,12 +17,14 @@ export const adminChannelsAPI = authApi.injectEndpoints({
       query: (params) => ({
         url: `/adv-admin/channels`,
         method: `GET`,
-        params: params,
+        params: buildAdminChannelsParams(params),
       }),
       transformResponse: (response: IAdminChannels, meta, arg) => {
         return {
           ...response,
           status: arg?.status,
+          executor_type: arg?.executor_type,
+          search_string: arg?.search_string ?? null,
           isLast:
             response?.elements ===
             response?.channels?.length +
@@ -42,8 +45,8 @@ export const adminChannelsAPI = authApi.injectEndpoints({
           channels: Array.from(map.values()),
         };
       },
-      serializeQueryArgs: ({ endpointName }) => {
-        return endpointName;
+      serializeQueryArgs: ({ endpointName, queryArgs }) => {
+        return `${endpointName}/${queryArgs.status}/${queryArgs.executor_type ?? "all"}/${queryArgs.search_string?.trim() ?? ""}`;
       },
       forceRefetch({ currentArg, previousArg }) {
         return currentArg !== previousArg;

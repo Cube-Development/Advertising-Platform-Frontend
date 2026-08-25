@@ -1,7 +1,21 @@
 import { IAdminManageProjects } from "@entities/admin";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { ShowMoreBtn, SpinnerLoaderSmall } from "@shared/ui";
+import { Skeleton } from "@shared/ui/shadcn-ui";
+import { FC } from "react";
+import { useTranslation } from "react-i18next";
 import { OrderCard } from "./OrderCard";
+
+const OrderCardSkeleton: FC = () => (
+  <div className="rounded-lg border p-4 sm:p-6 space-y-4">
+    <div className="space-y-2">
+      <Skeleton className="h-4 w-2/3" />
+      <Skeleton className="h-3 w-1/3" />
+    </div>
+    <Skeleton className="h-12 w-full" />
+    <Skeleton className="h-16 w-full" />
+  </div>
+);
 
 type OrdersListProps = {
   data?: IAdminManageProjects;
@@ -9,61 +23,51 @@ type OrdersListProps = {
   onShowMore: () => void;
 };
 
-export const OrdersList = ({
+export const OrdersList: FC<OrdersListProps> = ({
   data,
   isLoading,
   onShowMore,
-}: OrdersListProps) => {
-  if (!isLoading && !data?.orders?.length) {
-    return (
-      <p className="px-4 py-8 text-center text-sm text-black/50">
-        Ордеры не найдены
-      </p>
-    );
-  }
+}) => {
+  const { t } = useTranslation();
+  const orders = data?.orders ?? [];
+  const showEmpty = !isLoading && orders.length === 0;
 
   return (
-    <div>
-      <div className="hidden grid-cols-6 gap-3 border-b border-black/10 px-4 py-3 text-xs font-medium text-black/50 md:grid">
-        <p className="col-span-2">Ссылка</p>
-        <p>Дата / время</p>
-        <p>Статус</p>
-        <p>Выполнено</p>
-        <p>Цена</p>
-      </div>
+    <div className="min-h-[var(--cards-list-height)]">
+      {showEmpty ? (
+        <p className="py-8 text-center text-sm text-muted-foreground">
+          {t("admin_panel.manage_projects.empty")}
+        </p>
+      ) : (
+        <div className="grid grid-flow-row gap-2.5">
+          {orders.map((order, index) => (
+            <OrderCard
+              key={order.order_id || `${order.url}-${index}`}
+              order={order}
+            />
+          ))}
 
-      {data?.orders?.map((order, index) => (
-        <OrderCard
-          key={`${order.url}-${order.order_date}-${order.order_time.time_from}-${index}`}
-          order={order}
-        />
-      ))}
+          {isLoading &&
+            Array.from({
+              length: INTERSECTION_ELEMENTS.ADMIN_MANAGE_PROJECTS,
+            }).map((_, index) => <OrderCardSkeleton key={index} />)}
 
-      {isLoading && (
-        <div className="flex justify-center py-6">
-          <SpinnerLoaderSmall />
+          {data && !data.isLast && !isLoading && orders.length > 0 && (
+            <div
+              className="flex cursor-pointer justify-center py-4"
+              onClick={onShowMore}
+            >
+              <ShowMoreBtn />
+            </div>
+          )}
+
+          {data && !data.isLast && isLoading && (
+            <div className="flex justify-center py-4">
+              <SpinnerLoaderSmall />
+            </div>
+          )}
         </div>
       )}
-
-      {data && !data.isLast && (
-        <div
-          className="flex cursor-pointer justify-center py-4"
-          onClick={onShowMore}
-        >
-          {isLoading ? <SpinnerLoaderSmall /> : <ShowMoreBtn />}
-        </div>
-      )}
-
-      {!data &&
-        isLoading &&
-        Array.from({
-          length: INTERSECTION_ELEMENTS.ADMIN_MANAGE_PROJECTS,
-        }).map((_, index) => (
-          <div
-            key={index}
-            className="h-14 animate-pulse border-b border-black/5 bg-black/[0.03]"
-          />
-        ))}
     </div>
   );
 };

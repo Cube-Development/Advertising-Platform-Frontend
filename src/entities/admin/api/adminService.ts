@@ -11,7 +11,9 @@ import {
   ADMIN_ACCOUNTING_TYPE,
   ADMIN_COMPLAINT_STATUS,
   ADMIN_REVIEW_STATUS,
+  ExecutorType,
 } from "../config";
+import { buildManageProjectsBody } from "../lib";
 import {
   IAdminAccounting,
   IAdminAccountingDepositAccept,
@@ -92,8 +94,9 @@ export interface adminCompleteProjectReq {
 }
 
 export interface IAdminManageProjectOrder {
+  order_id: string;
   url: string;
-  order_date: string;
+  order_date: string | { date_from: string; date_to: string };
   order_time: {
     time_from: string;
     time_to: string;
@@ -114,6 +117,7 @@ export interface IAdminManageProjectsReq {
   status: number[];
   project_id?: string;
   url?: string;
+  executor_type?: ExecutorType;
 }
 
 export interface IAdminManageProjects {
@@ -424,7 +428,7 @@ export const adminAPI = authApi.injectEndpoints({
       query: (body) => ({
         url: `/manage/projects`,
         method: "POST",
-        body,
+        body: buildManageProjectsBody(body),
       }),
       transformResponse: (response: IAdminManageProjects, _meta, arg) => {
         const pageSize =
@@ -446,7 +450,8 @@ export const adminAPI = authApi.injectEndpoints({
         if (arg.arg.page === 1) return newItems;
 
         const getKey = (order: IAdminManageProjectOrder) =>
-          `${order.url}|${order.order_date}|${order.order_time.time_from}|${order.order_time.time_to}|${order.status}`;
+          order.order_id ||
+          `${order.url}|${JSON.stringify(order.order_date)}|${order.order_time.time_from}|${order.order_time.time_to}|${order.status}`;
 
         const map = new Map(
           currentCache?.orders?.map((order) => [getKey(order), order]),

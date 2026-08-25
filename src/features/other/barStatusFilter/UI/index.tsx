@@ -7,47 +7,35 @@ import {
   ENUM_AGENCY_PROJECT_STATUS,
 } from "@entities/project";
 import { BREAKPOINT } from "@shared/config";
+import { useWindowWidth } from "@shared/hooks";
 import { FC, useRef } from "react";
 import { useTranslation } from "react-i18next";
 import SwiperCore from "swiper";
 import "swiper/css";
 import { Swiper, SwiperSlide } from "swiper/react";
 import styles from "./styles.module.scss";
-import { useWindowWidth } from "@shared/hooks";
+
+type BarStatusValue =
+  | ENUM_CHANNEL_STATUS
+  | ENUM_ADV_MY_PROJECT_STATUS
+  | ENUM_ADV_MANAGER_PROJECT_STATUS
+  | ENUM_MANAGER_PROJECT_STATUS
+  | ENUM_OFFER_STATUS
+  | ENUM_AGENCY_PROJECT_STATUS
+  | string
+  | number;
 
 interface IProjectType {
   id?: number;
   name: string;
-  type:
-    | ENUM_CHANNEL_STATUS
-    | ENUM_ADV_MY_PROJECT_STATUS
-    | ENUM_ADV_MANAGER_PROJECT_STATUS
-    | ENUM_MANAGER_PROJECT_STATUS
-    | ENUM_OFFER_STATUS
-    | ENUM_AGENCY_PROJECT_STATUS;
+  type: BarStatusValue;
 }
 
 interface BarStatusFilterProps {
-  changeStatus: (
-    status:
-      | ENUM_CHANNEL_STATUS
-      | ENUM_OFFER_STATUS
-      | ENUM_ADV_MY_PROJECT_STATUS
-      | ENUM_ADV_MANAGER_PROJECT_STATUS
-      | ENUM_MANAGER_PROJECT_STATUS
-      | ENUM_AGENCY_PROJECT_STATUS
-      | string,
-  ) => void;
-  statusFilter:
-    | ENUM_CHANNEL_STATUS
-    | ENUM_OFFER_STATUS
-    | ENUM_ADV_MY_PROJECT_STATUS
-    | ENUM_ADV_MANAGER_PROJECT_STATUS
-    | ENUM_MANAGER_PROJECT_STATUS
-    | ENUM_AGENCY_PROJECT_STATUS
-    | string;
+  changeStatus: (status: BarStatusValue) => void;
+  statusFilter: BarStatusValue;
   projectStatus: IProjectType[];
-  badge?: { status: string; count: number }[];
+  badge?: { status: string | number; count: number }[];
 }
 
 export const BarStatusFilter: FC<BarStatusFilterProps> = ({
@@ -57,22 +45,13 @@ export const BarStatusFilter: FC<BarStatusFilterProps> = ({
   badge,
 }) => {
   const { t } = useTranslation();
-  const toggleStatus = (status: string) => {
+  const toggleStatus = (status: BarStatusValue) => {
     changeStatus(status);
   };
   const swiperRef = useRef<SwiperCore | null>(null);
   const screen = useWindowWidth();
 
-  const handleChangeStepSwiper = (
-    type:
-      | ENUM_CHANNEL_STATUS
-      | ENUM_OFFER_STATUS
-      | ENUM_ADV_MY_PROJECT_STATUS
-      | ENUM_ADV_MANAGER_PROJECT_STATUS
-      | ENUM_MANAGER_PROJECT_STATUS
-      | ENUM_AGENCY_PROJECT_STATUS,
-    index: number,
-  ) => {
+  const handleChangeStepSwiper = (type: BarStatusValue, index: number) => {
     toggleStatus(type);
     swiperRef.current?.slideTo(index);
   };

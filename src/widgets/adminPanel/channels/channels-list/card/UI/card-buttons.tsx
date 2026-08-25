@@ -12,7 +12,6 @@ import {
   UpdateChannel,
 } from "@features/admin-panel";
 import { FC } from "react";
-import styles from "./styles.module.scss";
 
 interface ICardButtonsProps {
   card: IAdminChannelData;
@@ -26,7 +25,7 @@ export const CardButtons: FC<ICardButtonsProps> = ({
   isEdited = true,
 }) => {
   return (
-    <div className={styles.buttons}>
+    <div className="grid grid-cols-1 gap-2.5 sm:grid-cols-2">
       {card?.status === ADMIN_CHANNEL_STATUS.ACTIVE ? (
         <>
           <BanChannel id={card?.channel?.id} />
@@ -69,13 +68,8 @@ export const CardButtons: FC<ICardButtonsProps> = ({
           />
         </>
       ) : card?.status === ADMIN_CHANNEL_STATUS.REMODERATION ? (
-        <>
-          <div></div>
-          <AcceptRemoderation id={card?.channel?.id} channel={formState} />
-        </>
-      ) : (
-        <></>
-      )}
+        <AcceptRemoderation id={card?.channel?.id} channel={formState} />
+      ) : null}
     </div>
   );
 };

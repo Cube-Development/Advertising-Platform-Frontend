@@ -1,47 +1,113 @@
 import {
+  ADMIN_USER_FILTER_ALL,
+  ADMIN_USER_FILTER_TABS,
+  ADMIN_USER_STATUS,
+  AdminUserStatusFilter,
   IGetAdminUsersReq,
   useGetAdminUsersQuery,
 } from "@entities/admin-panel";
+import { channelData } from "@entities/channel";
+import { SearchFilter } from "@features/catalog";
+import { BarStatusFilter } from "@features/other";
 import { INTERSECTION_ELEMENTS } from "@shared/config";
 import { useClearCookiesOnPage } from "@shared/hooks";
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { UsersList } from "../users-list";
 import styles from "./styles.module.scss";
 
+type UsersForm = Omit<IGetAdminUsersReq, "status"> & {
+  statusFilter: AdminUserStatusFilter;
+  search?: string | null;
+};
+
+const SEARCH_FIELD = "search" as channelData;
+
+const USER_STATUS_TABS = ADMIN_USER_FILTER_TABS.map((tab) => ({
+  name: tab.name,
+  type: tab.type,
+}));
+
 export const Users: FC = () => {
   useClearCookiesOnPage();
   const { t } = useTranslation();
-  const { watch, setValue } = useForm<IGetAdminUsersReq>({
-    defaultValues: { elements_on_page: INTERSECTION_ELEMENTS.ADMIN_USERS },
+  const { watch, setValue } = useForm<UsersForm>({
+    defaultValues: {
+      elements_on_page: INTERSECTION_ELEMENTS.ADMIN_USERS,
+      search: "",
+      statusFilter: ADMIN_USER_FILTER_ALL,
+    },
   });
   const formFields = watch();
-  const { data, isLoading, isFetching } = useGetAdminUsersQuery({
-    ...formFields,
-  });
-  const handleOnChangePage = () => {
-    setValue("last", data?.last);
+  const { search, statusFilter, last, elements_on_page } = formFields;
+
+  const queryArgs: IGetAdminUsersReq = {
+    elements_on_page,
+    ...(last ? { last } : {}),
+    ...(search?.trim() ? { search: search.trim() } : {}),
+    ...(statusFilter !== ADMIN_USER_FILTER_ALL
+      ? { status: statusFilter as ADMIN_USER_STATUS }
+      : {}),
   };
+
+  const { data, isLoading, isFetching } = useGetAdminUsersQuery(queryArgs, {
+    selectFromResult: ({ data, ...rest }) => ({
+      ...rest,
+      data:
+        ((data?.search ?? null) === (search?.trim() || null) &&
+          data?.status ===
+            (statusFilter !== ADMIN_USER_FILTER_ALL
+              ? statusFilter
+              : undefined) &&
+          data) ||
+        undefined,
+    }),
+  });
+
+  const handleOnChangePage = () => {
+    if (data?.last) {
+      setValue("last", data.last);
+    }
+  };
+
+  const changeTab = (filter: AdminUserStatusFilter) => {
+    setValue("last", undefined);
+    setValue("statusFilter", filter);
+  };
+
+  useEffect(() => {
+    setValue("last", undefined);
+  }, [formFields.search, formFields.statusFilter, setValue]);
 
   return (
     <div className="container">
       <div className={styles.wrapper}>
-        <div className={styles.top}>
-          <h1>{t("admin_panel.pages.users")}</h1>
-          <p>
-            {t("admin_panel.pages.home")}
-            <span> / {t("admin_panel.pages.users")}</span>
-          </p>
+        <h1 className={styles.title}>{t("admin_panel.pages.users")}</h1>
+        <div className={styles.filters}>
+          <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
+            <div className="w-full max-w-[420px] shrink-0">
+              <SearchFilter
+                type={SEARCH_FIELD}
+                onChange={setValue}
+                value={formFields.search || ""}
+              />
+            </div>
+            <div className="min-w-0 flex-1">
+              <BarStatusFilter
+                changeStatus={(v) => changeTab(v as AdminUserStatusFilter)}
+                statusFilter={formFields.statusFilter}
+                projectStatus={USER_STATUS_TABS}
+              />
+            </div>
+          </div>
         </div>
-        <div className={styles.table}>
-          <UsersList
-            data={data}
-            isLoading={isLoading}
-            isFetching={isFetching}
-            handleChange={handleOnChangePage}
-          />
-        </div>
+        <UsersList
+          data={data}
+          isLoading={isLoading}
+          isFetching={isFetching}
+          handleChange={handleOnChangePage}
+        />
       </div>
     </div>
   );
