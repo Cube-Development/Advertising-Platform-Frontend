@@ -73,8 +73,8 @@ export const ManageProjects = () => {
         </h1>
 
         <div className="grid grid-flow-row gap-4">
-          <div className="flex flex-col gap-3 lg:flex-row lg:items-end">
-            <div className="w-full max-w-[420px] shrink-0 space-y-2">
+          <div className="grid grid-flow-row gap-3">
+            <div className="w-full max-w-[420px] space-y-2">
               <Label htmlFor="project_id">
                 {t("admin_panel.manage_projects.project_id")}
               </Label>
@@ -85,13 +85,11 @@ export const ManageProjects = () => {
                 placeholder="00000000-0000-0000-0000-000000000000"
               />
             </div>
-            <div className="min-w-0 flex-1">
-              <BarStatusFilter
-                changeStatus={(v) => changeExecutorType(v as ExecutorType)}
-                statusFilter={executorType}
-                projectStatus={EXECUTOR_STATUS_TABS}
-              />
-            </div>
+            <BarStatusFilter
+              changeStatus={(v) => changeExecutorType(v as ExecutorType)}
+              statusFilter={executorType}
+              projectStatus={EXECUTOR_STATUS_TABS}
+            />
           </div>
 
           <div className="grid grid-cols-1 items-end gap-3 md:grid-cols-[1fr_1.2fr_auto]">

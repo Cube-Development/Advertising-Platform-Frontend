@@ -37,9 +37,7 @@ const OrderProgress: FC<{ completed: number; total: number }> = ({
     <div className="flex min-w-[120px] flex-col gap-1.5">
       <div
         className={`inline-flex w-full items-center justify-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold tabular-nums ${
-          complete
-            ? "bg-green-100 text-green-700"
-            : "bg-cyan-100 text-cyan-700"
+          complete ? "bg-green-100 text-green-700" : "bg-cyan-100 text-cyan-700"
         }`}
       >
         <CircleCheckBig className="size-3.5 shrink-0" />

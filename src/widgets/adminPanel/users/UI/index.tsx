@@ -85,21 +85,19 @@ export const Users: FC = () => {
       <div className={styles.wrapper}>
         <h1 className={styles.title}>{t("admin_panel.pages.users")}</h1>
         <div className={styles.filters}>
-          <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
-            <div className="w-full max-w-[420px] shrink-0">
+          <div className="grid grid-flow-row gap-3">
+            <div className="w-full max-w-[420px]">
               <SearchFilter
                 type={SEARCH_FIELD}
                 onChange={setValue}
                 value={formFields.search || ""}
               />
             </div>
-            <div className="min-w-0 flex-1">
-              <BarStatusFilter
-                changeStatus={(v) => changeTab(v as AdminUserStatusFilter)}
-                statusFilter={formFields.statusFilter}
-                projectStatus={USER_STATUS_TABS}
-              />
-            </div>
+            <BarStatusFilter
+              changeStatus={(v) => changeTab(v as AdminUserStatusFilter)}
+              statusFilter={formFields.statusFilter}
+              projectStatus={USER_STATUS_TABS}
+            />
           </div>
         </div>
         <UsersList
