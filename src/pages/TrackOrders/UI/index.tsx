@@ -103,23 +103,21 @@ export const TrackOrdersPage: FC = () => {
         <h1 className={styles.title}>{t("track_orders.title")}</h1>
         {isAdminTrackOrders && <DownloadAdminPayoutReport />}
         <div className={styles.filters}>
-          <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
-            <div className="w-full max-w-[420px] shrink-0">
+          <div className="grid grid-flow-row gap-3">
+            <div className="w-full max-w-[420px]">
               <SearchFilter
                 type={SEARCH_FIELD}
                 onChange={setValue}
                 value={formState.search || ""}
               />
             </div>
-            <div className="min-w-0 flex-1">
-              <BarStatusFilter
-                changeStatus={(v) => changeExecutorType(v as ExecutorType)}
-                statusFilter={
-                  formState.executor_type ?? MANAGE_EXECUTOR_TYPE_DEFAULT
-                }
-                projectStatus={EXECUTOR_STATUS_TABS}
-              />
-            </div>
+            <BarStatusFilter
+              changeStatus={(v) => changeExecutorType(v as ExecutorType)}
+              statusFilter={
+                formState.executor_type ?? MANAGE_EXECUTOR_TYPE_DEFAULT
+              }
+              projectStatus={EXECUTOR_STATUS_TABS}
+            />
           </div>
           <BarStatusFilter
             changeStatus={(v) => changeStatus(String(v))}

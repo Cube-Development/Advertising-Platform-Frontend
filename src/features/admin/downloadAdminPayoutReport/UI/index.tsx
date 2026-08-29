@@ -55,7 +55,7 @@ export const DownloadAdminPayoutReport: FC = () => {
   };
 
   return (
-    <div className="flex items-end gap-4">
+    <div className="flex flex-col items-stretch gap-4 md:flex-row md:items-end">
       <div className="flex min-w-[180px] flex-col gap-2">
         <Label htmlFor="admin_payout_date_from">
           {t("track_orders.date_from")}
@@ -81,7 +81,7 @@ export const DownloadAdminPayoutReport: FC = () => {
 
       <MyButton
         buttons_type="button__blue"
-        className="md:!text-sm !text-xs inline-flex items-center justify-center gap-2 p-3 !h-auto !font-medium"
+        className="md:!text-sm !text-xs inline-flex w-full items-center justify-center gap-2 p-3 !h-auto !font-medium md:w-auto"
         onClick={handleDownload}
         disabled={!canDownload}
       >
