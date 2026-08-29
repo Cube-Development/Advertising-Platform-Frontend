@@ -17,12 +17,16 @@ import {
 import { CustomTitle } from "@shared/ui";
 import { formatWithOutSpaces } from "@shared/utils";
 import { NotLogin } from "@widgets/organization";
+import { TriangleAlert } from "lucide-react";
 import { FC } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { OrganizationData } from "../../components";
 import { useWalletWithdraw } from "../../model";
 import styles from "./styles.module.scss";
+
+// 2 сентября 2026, 00:00 по Ташкенту — первый банковский день после выходных
+const HOLIDAY_NOTICE_UNTIL = new Date("2026-09-02T00:00:00+05:00").getTime();
 
 export const Withdrawal: FC = () => {
   useClearCookiesOnPage();
@@ -46,6 +50,7 @@ export const Withdrawal: FC = () => {
     },
   });
   const formState = watch();
+  const showHolidayNotice = Date.now() < HOLIDAY_NOTICE_UNTIL;
 
   const onSubmit: SubmitHandler<IWalletOperations> = async (data) => {
     if (isOfferSign) {
@@ -91,6 +96,22 @@ export const Withdrawal: FC = () => {
                   />
                   <div className={styles.content}>
                     <div>
+                      {showHolidayNotice && (
+                        <div className="flex items-start gap-3 p-4 mb-5 border-2 border-amber-400 shadow-sm bg-amber-50 rounded-xl">
+                          <TriangleAlert
+                            size={22}
+                            className="text-amber-600 shrink-0 mt-0.5"
+                          />
+                          <div className="grid gap-1">
+                            <h4 className="text-sm font-bold text-amber-900">
+                              {t("wallet.withdraw.holiday_notice.title")}
+                            </h4>
+                            <p className="text-xs leading-relaxed text-amber-800">
+                              {t("wallet.withdraw.holiday_notice.description")}
+                            </p>
+                          </div>
+                        </div>
+                      )}
                       <OrganizationData
                         amountTitle={"wallet.withdraw.amount"}
                         formState={formState}

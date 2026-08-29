@@ -2368,6 +2368,10 @@
     "withdraw": {
       "title": "Mablag‘larni yechib olish",
       "offer": "Pul yechish so‘rovi",
+      "holiday_notice": {
+        "title": "Bayram kunlarida so‘rovlarni ko‘rib chiqish",
+        "description": "29-avgustdan 1-sentabrgacha O‘zbekiston Respublikasida Mustaqillik kuni munosabati bilan dam olish kunlari e’lon qilingan. Bu kunlarda banklar ishlamaydi, shuning uchun shu davrda yuborilgan barcha pul yechish so‘rovlari 2-sentabrda — bankning birinchi ish kunida ko‘rib chiqiladi."
+      },
       "amount": {
         "title": "Yechib olinadigan summa",
         "default_value": "50 000",

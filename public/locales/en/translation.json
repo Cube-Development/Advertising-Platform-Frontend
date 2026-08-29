@@ -2367,6 +2367,10 @@
     "withdraw": {
       "title": "Withdraw Funds",
       "offer": "Withdrawal Request",
+      "holiday_notice": {
+        "title": "Request processing during the holidays",
+        "description": "From August 29 to September 1, Uzbekistan observes public holidays for Independence Day. Banks are closed on these days, so all withdrawal requests submitted during this period will be processed on September 2 — the first banking business day."
+      },
       "amount": {
         "title": "Withdrawal Amount",
         "default_value": "50 000",
